@@ -70,6 +70,7 @@
       <svg class="brand-glyph" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#0b2447"/><text x="32" y="44" font-size="34" text-anchor="middle" fill="#7cc4ff" font-family="serif" font-weight="bold">七</text></svg>
       <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
     </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
     <nav class="global-nav" aria-label="グローバルナビゲーション">
       <a href="/aio/">AIO・LLMO</a>
       <a href="/seo/">SEO運用</a>
@@ -188,13 +189,13 @@
 
 <!-- なぜ今か（グラフ） -->
 <section class="section-full bg-deep">
-  <div class="section" style="padding-top:0;padding-bottom:0;">
-    <div class="section-head reveal">
+  <div class="section" style="padding-top:0;padding-bottom:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:center;">
+    <div class="section-head reveal" style="margin-bottom:0;">
       <span class="en">Why Now</span>
       <h2>検索は「探す」から「AIに聞く」へ</h2>
       <p class="sub">検索結果の最上部をAIの回答が占め、クリックせずに答えを得る行動が広がっています。これからの集客は「検索順位」に加えて「<strong>AIの回答に引用されるか</strong>」で決まります。</p>
     </div>
-    <div class="chart-card reveal" style="max-width:760px;">
+    <div class="chart-card reveal" style="margin:0;">
       <div class="chart-title">「AIが答える検索」の広がりと、集客の分岐（概念図）</div>
       <div class="chart-sub">従来のクリック流入が緩やかに減る一方、AI引用経由の認知・指名流入という新しい入口が立ち上がる</div>
       <svg viewBox="0 0 640 260" role="img" aria-label="概念図。従来のクリック流入が緩やかに減少する一方、AI引用経由の流入が新たに立ち上がることを示す2本の折れ線。" class="line-draw">
@@ -274,13 +275,7 @@
       <a class="btn btn-ghost" href="/about/">運営者情報を見る <span class="arw">→</span></a>
     </div>
     <div class="reveal reveal-d1">
-      <!-- TODO: オフィス・チームの実写真に差し替え（差し替え時は .media-slot を <img> に） -->
-      <div class="media-slot" style="margin:0;">
-        <div>
-          <span class="slot-type">PHOTO</span><br>
-          チーム・オフィス写真（準備中）
-        </div>
-      </div>
+      <img src="/images/company/sec01_img01.png" alt="セブンセンシズ株式会社の事業紹介コラージュ（MEO集客支援・造園・草刈り・害虫害獣駆除・不用品回収）" width="790" height="860" loading="lazy" style="border-radius:var(--radius);box-shadow:var(--shadow-md);max-width:min(540px,100%);display:block;margin:0 auto;">
     </div>
   </div>
 </section>

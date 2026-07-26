@@ -22,9 +22,9 @@
   --cat-ai: #0284c7;
   --chart-base: #0d9488;   /* グラフ基本色（CVD/コントラスト検証PASS・直接ラベル併用） */
   --chart-accent: #2563eb; /* グラフ強調色 */
-  --max-article: 780px;
-  --max-wide: 1440px;
-  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --max-article: 820px;
+  --max-wide: 1760px;
+  --gutter: clamp(1.25rem, 5vw, 6.5rem);
   --head: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
   --sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   --en: "Outfit", "Segoe UI", sans-serif;
@@ -89,7 +89,27 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .global-nav a:not(.nav-cta):hover::after { transform: scaleX(1); transform-origin: left; }
 .global-nav .nav-cta { color: #fff; background: var(--blue); padding: .65em 1.5em; border-radius: 10px; font-weight: 700; box-shadow: var(--shadow-sm); transition: background .2s, transform .2s var(--ease-out); }
 .global-nav .nav-cta:hover { background: var(--blue-deep); transform: translateY(-1px); }
-@media (max-width: 760px) { .global-nav a:not(.nav-cta) { display: none; } }
+
+/* モバイルメニュー */
+.nav-toggle { display: none; margin-left: auto; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 10px; background: #fff; cursor: pointer; position: relative; }
+.nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+  content: ""; position: absolute; left: 50%; width: 20px; height: 2px; border-radius: 2px;
+  background: var(--navy); transform: translateX(-50%); transition: transform .3s var(--ease-out), opacity .2s;
+}
+.nav-toggle span { top: 21px; }
+.nav-toggle span::before { top: -6px; }
+.nav-toggle span::after { top: 6px; }
+.nav-open .nav-toggle span { background: transparent; }
+.nav-open .nav-toggle span::before { transform: translateX(-50%) translateY(6px) rotate(45deg); }
+.nav-open .nav-toggle span::after { transform: translateX(-50%) translateY(-6px) rotate(-45deg); }
+@media (max-width: 760px) {
+  .nav-toggle { display: block; }
+  .global-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: #fff; border-bottom: 1px solid var(--line); box-shadow: var(--shadow-md); padding: .6rem 1.25rem 1.1rem; }
+  .nav-open .global-nav { display: flex; }
+  .global-nav a:not(.nav-cta) { display: block; padding: .8em .2em; border-bottom: 1px solid var(--line); font-size: .95rem; }
+  .global-nav a:not(.nav-cta)::after { display: none; }
+  .global-nav .nav-cta { margin-top: .9rem; text-align: center; padding: .9em; }
+}
 
 .progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--blue), #60a5fa); z-index: 60; }
 
@@ -180,8 +200,8 @@ html.js .reveal-d3 { transition-delay: .3s; }
 @media (max-width: 720px) { .stat-band { transform: none; margin-top: 1rem; } .after-stats { padding-top: 3rem !important; } }
 
 /* ---------- セクション ---------- */
-.section { max-width: var(--max-wide); margin: 0 auto; padding: 5rem var(--gutter); }
-.section-full { padding: 5rem 0; }
+.section { max-width: var(--max-wide); margin: 0 auto; padding: clamp(3rem, 6.5vw, 6rem) var(--gutter); }
+.section-full { padding: clamp(3rem, 6.5vw, 6rem) 0; }
 .section-head { margin-bottom: 2.8rem; }
 .section-head .en { font-family: var(--en); font-size: .8rem; letter-spacing: .34em; color: var(--blue); font-weight: 600; text-transform: uppercase; }
 .section-head h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; margin: .3em 0 0; }
@@ -374,7 +394,7 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 .site-footer .inner { position: relative; max-width: var(--max-wide); margin: 0 auto; padding: 3.4rem var(--gutter) 2rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; }
 .site-footer .brand-f { font-family: var(--head); font-weight: 900; font-size: 1.2rem; color: #fff; }
 .site-footer .addr { font-size: .78rem; margin-top: .8em; line-height: 1.9; }
-.site-footer nav { display: grid; gap: .5em; font-size: .85rem; align-content: start; }
+.site-footer nav { display: grid; grid-template-columns: repeat(2, auto); gap: .55em 2.4em; font-size: .85rem; align-content: start; }
 .site-footer a { color: rgba(255,255,255,.78); text-decoration: none; }
 .site-footer a:hover { color: #8fc0ff; }
 .site-footer .copyright { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: 1.2rem; font-size: .74rem; color: rgba(255,255,255,.45); }

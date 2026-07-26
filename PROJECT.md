@@ -21,10 +21,12 @@
 
 | 項目 | 値 |
 |:--|:--|
-| 著者名 | セブンセンシズ編集部（仮 — 個人著者を立てる場合は変更。`scripts/build.py` の AUTHOR_* も更新） |
+| 著者名 | セブンセンシズ編集部 |
+| 監修者 | 代表取締役 原口 優（写真: `site/images/company/company_img2.jpg`） |
 | 肩書き | AI集客・MEO/SEO運用の実務チーム |
-| 実績・専門性 | TODO:（G-ran支援社数・運用年数など実数値を確認して記入 — E-E-A-T強化に必須） |
-| プロフィールURL | `https://example.com/about/`（作成済み） |
+| 会社実績 | 2020年3月10日設立 / 資本金500万円 / MEO対策「G-ran」運営 / グループ事業「お庭番衆」年間600件以上 |
+| 実績・専門性 | TODO:（G-ran支援社数・継続率など実数値を確認して記入 — LP強化に必須） |
+| プロフィールURL | `https://example.com/about/`（会社概要・代表メッセージ掲載済み） |
 
 ## ターゲットペルソナ（Phase 5 ペルソナエージェント用）
 
@@ -91,7 +93,8 @@
 - [x] 記事テンプレート（templates/article.html）+ ビルドスクリプト（scripts/build.py）— サンプル記事でビルド検証済み
 - [ ] ドメイン取得 → 全ファイルの `example.com` を一括置換 + `scripts/build.py` の SITE_URL 更新
 - [ ] Cloudflare Pages プロジェクト作成+Gitリポジトリ連携（ビルド出力: `site/`）
-- [ ] フォーム送信先の実装（Cloudflare Pages Functions推奨 — `/lp/` `/contact/` `/download/` の3箇所）
+- [x] フォーム送信の実装（`functions/api/lead.js` — 3フォーム共通、ハニーポット+バリデーション付き）
+- [ ] メール送信の有効化: [Resend](https://resend.com) でアカウント作成+送信ドメイン認証 → Cloudflare Pages の環境変数に `RESEND_API_KEY` / `LEAD_TO_EMAIL`（通知先） / `LEAD_FROM_EMAIL`（認証済み送信元）を設定
 - [ ] LPの実績数値（支援社数・継続率等）を実データで差し替え
 - [ ] サービス紹介動画・写真素材の制作 → LPのプレースホルダー差し替え
 - [ ] spreadsheet_template.xlsx をGoogle Sheetsにインポート → IDを本ファイルに記入
