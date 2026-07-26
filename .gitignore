@@ -1,0 +1,17 @@
+# 認証情報（絶対にコミットしない）
+.env
+credentials.json
+sheets-token.json
+indexing-service-account.json
+*.pem
+*.key
+
+# 収集データ・ログ（容量大・再生成可能）
+data/x_trends/
+data/youtube_transcripts/
+automation/logs/
+automation/images/
+
+# OS/エディタ
+.DS_Store
+Thumbs.db
