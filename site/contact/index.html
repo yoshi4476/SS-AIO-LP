@@ -55,13 +55,15 @@
 </section>
 
 <section class="section">
-  <!--
-    TODO: フォーム送信先の設定（いずれかを選択）
-    1. Cloudflare Pages Functions (functions/api/contact.js) + メール通知 ← 推奨
-    2. formrun / HubSpot フォームの埋め込み
-    3. Googleフォームへのリンク
-    設定まで action="#" のままにしない（送信できません）
-  -->
+  <aside class="author-box" style="max-width:660px;margin:0 auto 2.5rem;">
+    <div class="avatar" style="width:64px;height:64px;">
+      <img src="/images/company/company_img2.jpg" alt="セブンセンシズ株式会社 代表取締役 原口優" width="64" height="64" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+    </div>
+    <div>
+      <div class="name">代表・担当者が直接ご対応します</div>
+      <p style="margin-top:.3em;">外注の営業担当ではなく、集客支援の実務者がヒアリングから対応します。「まだ相談レベル」でもお気軽にどうぞ。</p>
+    </div>
+  </aside>
   <form class="form-panel" action="/api/lead" method="post">
     <input type="hidden" name="form_type" value="お問い合わせ">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
