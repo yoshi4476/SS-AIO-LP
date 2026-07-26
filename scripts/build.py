@@ -50,7 +50,7 @@ CATEGORIES = {
     "ai-marketing": ("AI集客・活用全般", "cat-ai"),
 }
 
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/"]
 
 
 def jp_date(iso: str) -> str:
