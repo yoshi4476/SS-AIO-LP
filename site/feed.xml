@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>AI集客ラボ</title>
+  <link href="https://example.com/"/>
+  <link rel="self" href="https://example.com/feed.xml"/>
+  <id>https://example.com/</id>
+  <updated>2026-07-27T00:00:00+09:00</updated>
+  <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>AIO対策とは？AI検索に引用される5つの手順</title>
+    <link href="https://example.com/aio/aio-taisaku-guide/"/>
+    <id>https://example.com/aio/aio-taisaku-guide/</id>
+    <updated>2026-07-27T00:00:00+09:00</updated>
+    <summary>AIO対策とは、Google AI OverviewやChatGPTなどのAI検索に自社情報が引用されるよう最適化する施策です。中小企業が今日から実践できる5つの手順を解説します。</summary>
+  </entry>
+</feed>

@@ -169,6 +169,30 @@ def build_article(path: Path, template: str):
     return meta, url
 
 
+def build_feed(article_entries):
+    from xml.sax.saxutils import escape
+    items = sorted(article_entries, key=lambda e: str(e[0]["modified"]), reverse=True)[:20]
+    today = date.today().isoformat()
+    parts = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<feed xmlns="http://www.w3.org/2005/Atom">',
+             f"  <title>{escape(SITE_NAME)}</title>",
+             f'  <link href="{SITE_URL}/"/>',
+             f'  <link rel="self" href="{SITE_URL}/feed.xml"/>',
+             f"  <id>{SITE_URL}/</id>",
+             f"  <updated>{today}T00:00:00+09:00</updated>",
+             f"  <author><name>{escape(ORG_NAME)}</name></author>"]
+    for meta, url in items:
+        parts += ["  <entry>",
+                  f"    <title>{escape(meta['title'])}</title>",
+                  f'    <link href="{url}"/>',
+                  f"    <id>{url}</id>",
+                  f"    <updated>{meta['modified']}T00:00:00+09:00</updated>",
+                  f"    <summary>{escape(meta['description'])}</summary>",
+                  "  </entry>"]
+    parts.append("</feed>")
+    (SITE / "feed.xml").write_text("\n".join(parts) + "\n", encoding="utf-8")
+
+
 def build_sitemap(article_entries):
     today = date.today().isoformat()
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
@@ -199,7 +223,8 @@ def main():
             print(f"built: {url}")
 
     build_sitemap(entries)
-    print(f"OK: {len(entries)}記事 / sitemap.xml 更新")
+    build_feed(entries)
+    print(f"OK: {len(entries)}記事 / sitemap.xml + feed.xml 更新")
     for w in warns:
         print(f"WARN: {w}")
 
