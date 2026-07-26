@@ -45,6 +45,17 @@
     "addressLocality": "大阪市東成区",
     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
    }
+  },
+  {
+   "@type": "DefinedTermSet",
+   "@id": "https://example.com/#glossary",
+   "name": "AI検索集客の基本用語",
+   "hasDefinedTerm": [
+    {"@type": "DefinedTerm", "name": "AIO", "alternateName": "AI Overview Optimization", "description": "Google検索のAIによる回答（AI Overview）に自社情報が引用されるよう最適化する施策です。"},
+    {"@type": "DefinedTerm", "name": "LLMO", "alternateName": "Large Language Model Optimization", "description": "ChatGPTやPerplexity等のAIチャットの回答で自社が引用・言及されるための最適化施策です。"},
+    {"@type": "DefinedTerm", "name": "SEO", "alternateName": "Search Engine Optimization", "description": "検索結果で上位表示されるための最適化施策。AI引用の前提条件となる土台です。"},
+    {"@type": "DefinedTerm", "name": "MEO", "alternateName": "Map Engine Optimization", "description": "Googleマップの検索結果で上位表示され、店舗が選ばれるための最適化施策です。"}
+   ]
   }
  ]
 }
@@ -205,8 +216,40 @@
   </div>
 </section>
 
-<!-- 新着記事 -->
+<!-- 用語ミニ辞典（AIO対応: DefinedTermSet Schemaと対応） -->
 <section class="section">
+  <div class="section-head reveal">
+    <span class="en">Glossary</span>
+    <h2>30秒でわかる、AI検索集客の基本用語</h2>
+    <p class="sub">このメディアで頻出する4つの用語です。まずはここだけ押さえれば記事が読めます。</p>
+  </div>
+  <div class="term-grid">
+    <div class="term-tile cat-aio reveal">
+      <div class="abbr">AIO</div>
+      <span class="full">AI Overview Optimization</span>
+      <p><strong>AIOとは</strong>、Google検索のAIによる回答（AI Overview）に自社情報が引用されるよう最適化する施策です。</p>
+    </div>
+    <div class="term-tile cat-ai reveal reveal-d1">
+      <div class="abbr">LLMO</div>
+      <span class="full">Large Language Model Optimization</span>
+      <p><strong>LLMOとは</strong>、ChatGPTやPerplexity等のAIチャットの回答で自社が引用・言及されるための最適化施策です。</p>
+    </div>
+    <div class="term-tile cat-seo reveal reveal-d2">
+      <div class="abbr">SEO</div>
+      <span class="full">Search Engine Optimization</span>
+      <p><strong>SEOとは</strong>、検索結果で上位表示されるための最適化施策です。AI引用の前提条件となる土台です。</p>
+    </div>
+    <div class="term-tile cat-meo reveal reveal-d3">
+      <div class="abbr">MEO</div>
+      <span class="full">Map Engine Optimization</span>
+      <p><strong>MEOとは</strong>、Googleマップの検索結果で上位表示され、店舗が選ばれるための最適化施策です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 新着記事 -->
+<section class="section-full bg-deep">
+<section class="section" style="padding-top:0;padding-bottom:0;">
   <div class="section-head reveal">
     <span class="en">Latest</span>
     <h2>新着記事</h2>
@@ -215,6 +258,7 @@
   <ul class="post-list">
     <li class="cat-aio"><a href="/aio/aio-taisaku-guide/"><time datetime="2026-07-27">2026.07.27</time><h3>AIO対策とは？AI検索に引用される5つの手順<span class="tag">AIO・LLMO</span></h3></a></li>
   </ul>
+</section>
 </section>
 
 <!-- このメディアについて -->
@@ -240,8 +284,22 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- 活用3ステップ（CV導線: 記事→資料DL→無料相談） -->
 <section class="section">
+  <div class="section-head reveal">
+    <span class="en">How to Use</span>
+    <h2>このメディアの活用ステップ</h2>
+    <p class="sub">読んで終わりにせず、自社の集客改善につなげるための3ステップです。</p>
+  </div>
+  <ol class="flow-list" style="grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));">
+    <li class="reveal"><span class="step-title">記事で基本を押さえる</span><p>まずは<a href="/aio/">AIO・LLMO運用</a>のカテゴリから。用語と全体像がわかります。</p></li>
+    <li class="reveal reveal-d1"><span class="step-title">無料資料で自社をチェック</span><p><a href="/download/">チェックリスト資料</a>で、自社サイトの現状を診断できます。</p></li>
+    <li class="reveal reveal-d2"><span class="step-title">無料相談で優先順位を知る</span><p><a href="/lp/">無料相談</a>では現状分析レポートを添えて、着手順をご提案します。</p></li>
+  </ol>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:0;">
   <div class="cta reveal">
     <p class="cta-copy">「AIに聞いたら、競合が出てきた」——そうなる前に。</p>
     <a class="btn btn-primary" href="/lp/">AIO・LLMO・SEO・MEO集客支援の無料相談へ <span class="arw">→</span></a>
