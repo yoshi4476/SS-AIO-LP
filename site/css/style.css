@@ -37,6 +37,11 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+::selection { background: var(--sky-2); color: var(--navy); }
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--bg-alt); }
+::-webkit-scrollbar-thumb { background: #c3d2e8; border-radius: 6px; border: 3px solid var(--bg-alt); }
+::-webkit-scrollbar-thumb:hover { background: var(--blue); }
 
 body {
   margin: 0;
@@ -254,9 +259,23 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .empty-note { color: var(--muted); font-size: .88rem; border: 1.5px dashed var(--line); border-radius: var(--radius); padding: 1.4rem; background: var(--bg-alt); }
 
 /* ============================================================
-   記事ページ
+   記事ページ（ワイド2カラム: 本文 + 追従サイドバー）
    ============================================================ */
-main.article { max-width: var(--max-article); margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+main.article { max-width: 1360px; margin: 0 auto; padding: 3rem var(--gutter) 4rem; font-size: 1.02rem; }
+.article-header { max-width: 980px; }
+.article-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1.5rem; }
+.article-body { min-width: 0; max-width: 900px; }
+.article-side .side-sticky { position: sticky; top: 92px; display: grid; gap: 1.2rem; }
+.side-cta { background: linear-gradient(150deg, var(--navy-deep), var(--navy) 60%, #10387a); color: #fff; border-radius: var(--radius); padding: 1.5rem 1.4rem; text-align: center; }
+.side-cta .t { font-family: var(--head); font-weight: 900; font-size: 1rem; margin-bottom: .9rem; }
+.side-cta .btn { width: 100%; padding: .85em 1em; font-size: .9rem; }
+.side-cta .s { font-size: .72rem; color: rgba(255,255,255,.7); margin-top: .7rem; }
+@media (min-width: 1100px) {
+  .article-layout { grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(2.5rem, 4vw, 4.5rem); }
+  .article-side { grid-column: 2; grid-row: 1; }
+  .article-body { grid-column: 1; grid-row: 1; }
+  .article-side .toc { margin: 0; }
+}
 .article-header .cat-badge { display: inline-block; font-size: .7rem; font-weight: 700; color: var(--cat-color, var(--blue)); background: color-mix(in srgb, var(--cat-color, var(--blue)) 10%, #fff); border: 1px solid color-mix(in srgb, var(--cat-color, var(--blue)) 30%, #fff); padding: .3em 1em; border-radius: 999px; }
 .article-header h1 { font-size: clamp(1.6rem, 3.8vw, 2.25rem); font-weight: 900; margin: .6em 0 .4em; }
 .article-meta { font-size: .78rem; color: var(--muted); display: flex; gap: 1.2em; flex-wrap: wrap; }
@@ -303,6 +322,7 @@ pre { background: var(--navy); color: #e9f1ff; border-radius: var(--radius); pad
 code { font-family: Consolas, "Courier New", monospace; }
 
 /* FAQ */
+.faq-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 0 1.5rem; align-items: start; }
 .faq details { background: #fff; border: 1px solid var(--line); border-radius: 14px; margin: .8em 0; overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow .3s; }
 .faq details[open] { box-shadow: var(--shadow-md); border-color: var(--sky-2); }
 .faq summary { cursor: pointer; font-weight: 700; padding: 1.05em 3em 1.05em 1.4em; list-style: none; position: relative; }
@@ -332,7 +352,7 @@ code { font-family: Consolas, "Courier New", monospace; }
    LP
    ============================================================ */
 /* 課題タイル */
-.check-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 1rem; }
+.check-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 1rem; }
 .check-list li { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3em 1.4em 1.3em 3.5em; position: relative; font-weight: 600; box-shadow: var(--shadow-sm); line-height: 1.8; }
 .check-list li::before { content: "✓"; position: absolute; left: 1.15em; top: 1.25em; width: 1.55em; height: 1.55em; border-radius: 8px; background: var(--sky); color: var(--blue); font-size: .85em; font-weight: 800; display: grid; place-items: center; }
 
