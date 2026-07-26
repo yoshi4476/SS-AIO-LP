@@ -3,17 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI集客ラボ｜AIO・SEO・MEOで「AIに選ばれる」集客をつくる</title>
-<meta name="description" content="AI集客ラボは、セブンセンシズ株式会社が運営するAIO（AI検索最適化）・SEO・MEOの実践メディアです。AI Overview時代に選ばれる集客ノウハウを実務目線で解説します。">
+<title>AI集客ラボ｜AIO・LLMO・SEO・MEOで「AIに選ばれる」集客をつくる</title>
+<meta name="description" content="AI集客ラボは、セブンセンシズ株式会社が運営するAIO（AI検索最適化）・LLMO（大規模言語モデル最適化）・SEO・MEOの実践メディアです。AI Overview・ChatGPT時代に選ばれる集客ノウハウを実務目線で解説します。">
 <link rel="canonical" href="https://example.com/">
+<meta name="theme-color" content="#0e1430">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI集客ラボ｜AIO・SEO・MEOで「AIに選ばれる」集客をつくる">
-<meta property="og:description" content="AI Overview時代に選ばれる集客ノウハウを実務目線で解説するメディア。運営: セブンセンシズ株式会社">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AI集客ラボ｜AIO・LLMO・SEO・MEOで「AIに選ばれる」集客をつくる">
+<meta property="og:description" content="AI Overview・ChatGPT時代に選ばれる集客ノウハウを実務目線で解説するメディア。運営: セブンセンシズ株式会社">
 <meta property="og:url" content="https://example.com/">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230e1430'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23e0451a' font-family='serif' font-weight='bold'%3E七%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho+B1:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@700;800&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js"></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -23,6 +30,7 @@
    "name": "AI集客ラボ",
    "url": "https://example.com/",
    "inLanguage": "ja",
+   "description": "AIO・LLMO・SEO・MEOの実践メディア",
    "publisher": {"@id": "https://example.com/#org"}
   },
   {
@@ -47,11 +55,11 @@
 <header class="site-header">
   <div class="inner">
     <a class="brand" href="/">
-      <span class="mark">AI集客ラボ</span>
-      <span class="by">by セブンセンシズ株式会社</span>
+      <svg class="brand-glyph" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#0e1430"/><text x="32" y="44" font-size="34" text-anchor="middle" fill="#e0451a" font-family="serif" font-weight="bold">七</text></svg>
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
     </a>
     <nav class="global-nav" aria-label="グローバルナビゲーション">
-      <a href="/aio/">AIO運用</a>
+      <a href="/aio/">AIO・LLMO</a>
       <a href="/seo/">SEO運用</a>
       <a href="/meo/">MEO運用</a>
       <a href="/ai-marketing/">AI集客</a>
@@ -60,70 +68,182 @@
   </div>
 </header>
 
-<section class="hero">
-  <span class="tate">AIに選ばれる集客を、実務から。</span>
-  <span class="kicker">AIO / SEO / MEO PRACTICE MEDIA</span>
-  <h1>検索の主役が<em>AIに変わる時代</em>の、<br>集客の教科書。</h1>
-  <p class="lead">Google AI Overview・ChatGPT・Perplexity——「AIが答える検索」で自社が引用され、選ばれるための実践ノウハウを、店舗集客支援の現場から発信します。</p>
-  <div class="btn-row">
-    <a class="btn btn-primary" href="/lp/">集客支援サービスを見る</a>
-    <a class="btn btn-ghost" href="/aio/">まずは記事を読む</a>
+<!-- ヒーロー -->
+<div class="hero-dark">
+  <div class="inner">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker kicker-en">AIO / LLMO / SEO / MEO — PRACTICE MEDIA</span>
+        <h1><span style="display:inline-block;">検索の主役が</span><em style="display:inline-block;">AIに変わる時代</em><span style="display:inline-block;">の、</span><br>集客の教科書。</h1>
+        <p class="lead">Google AI Overview・ChatGPT・Perplexity・Gemini——「AIが答える検索」で自社が引用され、選ばれるための実践ノウハウを、店舗集客支援の現場から発信します。</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/lp/">集客支援サービスを見る <span class="arw">→</span></a>
+          <a class="btn btn-ghost-light" href="/aio/">まずは記事を読む</a>
+        </div>
+      </div>
+      <div class="hero-art float-slow" aria-hidden="true">
+        <!-- AI回答に引用されるサイト: ブランドアートワーク -->
+        <svg viewBox="0 0 440 400">
+          <defs>
+            <linearGradient id="gAI" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff9d77"/><stop offset="1" stop-color="#e0451a"/>
+            </linearGradient>
+            <radialGradient id="gGlow" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="rgba(255,195,107,.5)"/><stop offset="1" stop-color="rgba(255,195,107,0)"/>
+            </radialGradient>
+          </defs>
+          <!-- 七光の放射 -->
+          <g stroke="rgba(255,255,255,.22)" stroke-width="1">
+            <line x1="220" y1="180" x2="220" y2="16"/><line x1="220" y1="180" x2="368" y2="60"/>
+            <line x1="220" y1="180" x2="420" y2="170"/><line x1="220" y1="180" x2="380" y2="320"/>
+            <line x1="220" y1="180" x2="220" y2="368"/><line x1="220" y1="180" x2="62" y2="320"/>
+            <line x1="220" y1="180" x2="22" y2="170"/>
+          </g>
+          <circle cx="220" cy="180" r="120" fill="url(#gGlow)"/>
+          <!-- AI回答パネル -->
+          <rect x="120" y="96" width="200" height="150" rx="16" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.35)"/>
+          <circle cx="146" cy="122" r="9" fill="url(#gAI)"/>
+          <text x="162" y="127" font-size="13" fill="#fff" font-weight="700" font-family="sans-serif">AIの回答</text>
+          <rect x="138" y="142" width="160" height="7" rx="3.5" fill="rgba(255,255,255,.4)"/>
+          <rect x="138" y="158" width="132" height="7" rx="3.5" fill="rgba(255,255,255,.28)"/>
+          <rect x="138" y="174" width="148" height="7" rx="3.5" fill="rgba(255,255,255,.28)"/>
+          <!-- 引用チップ = 自社 -->
+          <rect x="138" y="196" width="120" height="26" rx="13" fill="url(#gAI)"/>
+          <circle cx="154" cy="209" r="7" fill="#fff"/>
+          <text x="167" y="213" font-size="11.5" fill="#fff" font-weight="700" font-family="sans-serif">引用: 貴社サイト</text>
+          <!-- 惑星ノード -->
+          <g font-family="sans-serif" font-size="10.5" font-weight="700">
+            <circle cx="220" cy="16" r="17" fill="#2b4c8c"/><text x="220" y="20" text-anchor="middle" fill="#fff">SEO</text>
+            <circle cx="382" cy="62" r="17" fill="#d9481c"/><text x="382" y="66" text-anchor="middle" fill="#fff">AIO</text>
+            <circle cx="420" cy="170" r="20" fill="#a67a2d"/><text x="420" y="174" text-anchor="middle" fill="#fff">LLMO</text>
+            <circle cx="380" cy="320" r="17" fill="#2e6e4e"/><text x="380" y="324" text-anchor="middle" fill="#fff">MEO</text>
+            <circle cx="220" cy="368" r="14" fill="rgba(255,255,255,.16)"/><text x="220" y="372" text-anchor="middle" fill="#fff">GA4</text>
+            <circle cx="62" cy="320" r="14" fill="rgba(255,255,255,.16)"/><text x="62" y="324" text-anchor="middle" fill="#fff">GSC</text>
+            <circle cx="22" cy="170" r="14" fill="rgba(255,255,255,.16)"/><text x="22" y="174" text-anchor="middle" fill="#fff">CV</text>
+          </g>
+        </svg>
+      </div>
+    </div>
   </div>
-</section>
+  <!-- 実績バンド -->
+  <div class="stat-band">
+    <div><div class="num"><span data-count="4">0</span><small>領域</small></div><div class="label">AIO・LLMO・SEO・MEOを一気通貫</div></div>
+    <div><div class="num">現場発</div><div class="label">店舗集客支援「G-ran」運営の実務知見</div></div>
+    <div><div class="num">無料</div><div class="label">現状分析レポートをお渡し</div></div>
+    <div><div class="num"><span data-count="2026">0</span><small>年基準</small></div><div class="label">AI Overview時代の最新手法で更新</div></div>
+  </div>
+</div>
 
+<!-- カテゴリ -->
 <section class="section">
-  <div class="section-head">
-    <span class="en">CATEGORY</span>
+  <div class="section-head reveal">
+    <span class="en">Category</span>
     <h2>カテゴリから探す</h2>
+    <p class="sub">「AIに引用される」ためのAIO・LLMOから、土台のSEO、店舗のMEOまで。4つの視点で集客を網羅します。</p>
   </div>
   <div class="card-grid">
-    <a class="cat-card cat-aio" href="/aio/">
-      <span class="cat-label">AIO運用</span>
+    <a class="cat-card cat-aio reveal" href="/aio/">
+      <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="24" cy="20" r="11"/><path d="M24 9v-5M35 20h5M24 31v5M13 20H8"/><path d="M18 40h12M20 44h8"/></svg>
+      <span class="cat-label">AIO / LLMO</span>
       <h3>AI検索最適化</h3>
-      <p>AI Overview・AIモード・AIチャットに「引用される」ためのコンテンツ設計と計測。</p>
+      <p>AI Overview・ChatGPT・Perplexityに「引用される」ためのコンテンツ設計・構造化・計測。LLMO対策もここで扱います。</p>
+      <span class="more">記事を見る →</span>
     </a>
-    <a class="cat-card cat-seo" href="/seo/">
-      <span class="cat-label">SEO運用</span>
+    <a class="cat-card cat-seo reveal reveal-d1" href="/seo/">
+      <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="21" cy="21" r="13"/><path d="M31 31l11 11"/><path d="M15 21h12M21 15v12"/></svg>
+      <span class="cat-label">SEO</span>
       <h3>検索エンジン最適化</h3>
-      <p>AI時代でも土台はSEO。上位表示のためのKW戦略・記事設計・テクニカル対応。</p>
+      <p>AI時代でも土台はSEO。AI引用の前提となる上位表示のためのKW戦略・記事設計・テクニカル対応。</p>
+      <span class="more">記事を見る →</span>
     </a>
-    <a class="cat-card cat-meo" href="/meo/">
-      <span class="cat-label">MEO運用</span>
+    <a class="cat-card cat-meo reveal reveal-d2" href="/meo/">
+      <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M24 44s-15-13-15-25a15 15 0 1 1 30 0c0 12-15 25-15 25z"/><circle cx="24" cy="19" r="6"/></svg>
+      <span class="cat-label">MEO</span>
       <h3>マップ検索最適化</h3>
-      <p>Googleマップで「近くの◯◯」に選ばれる。店舗集客の実務ノウハウ。</p>
+      <p>Googleマップで「近くの◯◯」に選ばれる。店舗集客支援「G-ran」の現場ノウハウを公開します。</p>
+      <span class="more">記事を見る →</span>
     </a>
-    <a class="cat-card cat-ai" href="/ai-marketing/">
-      <span class="cat-label">AI集客・活用全般</span>
+    <a class="cat-card cat-ai reveal reveal-d3" href="/ai-marketing/">
+      <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="6"/><path d="M20 24h8M24 20v8M4 20v8M44 20v8M20 4h8M20 44h8"/></svg>
+      <span class="cat-label">AI Marketing</span>
       <h3>AI×マーケティング</h3>
-      <p>生成AIを集客・業務に活かす実践テクニックとツール活用。</p>
+      <p>生成AIを集客・業務に活かす実践テクニックとツール活用。中小企業のAI導入の入口に。</p>
+      <span class="more">記事を見る →</span>
     </a>
   </div>
 </section>
 
+<!-- なぜ今か（グラフ） -->
+<section class="section-full bg-deep">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-head reveal">
+      <span class="en">Why Now</span>
+      <h2>検索は「探す」から「AIに聞く」へ</h2>
+      <p class="sub">検索結果の最上部をAIの回答が占め、クリックせずに答えを得る行動が広がっています。これからの集客は「検索順位」に加えて「<strong>AIの回答に引用されるか</strong>」で決まります。</p>
+    </div>
+    <div class="chart-card reveal" style="max-width:760px;">
+      <div class="chart-title">「AIが答える検索」の広がりと、集客の分岐（概念図）</div>
+      <div class="chart-sub">従来のクリック流入が緩やかに減る一方、AI引用経由の認知・指名流入という新しい入口が立ち上がる</div>
+      <svg viewBox="0 0 640 260" role="img" aria-label="概念図。従来のクリック流入が緩やかに減少する一方、AI引用経由の流入が新たに立ち上がることを示す2本の折れ線。" class="line-draw">
+        <line x1="52" y1="210" x2="612" y2="210" stroke="#ddd3c2" stroke-width="1.5"/>
+        <line x1="52" y1="210" x2="52" y2="28" stroke="#ddd3c2" stroke-width="1.5"/>
+        <text x="46" y="46" text-anchor="end" class="chart-label">多</text>
+        <text x="46" y="206" text-anchor="end" class="chart-label">少</text>
+        <text x="60" y="232" class="chart-label">2023</text>
+        <text x="320" y="232" text-anchor="middle" class="chart-label">2025</text>
+        <text x="600" y="232" text-anchor="end" class="chart-label">2027（見通し）</text>
+        <path class="line" d="M52 70 C 200 76, 380 108, 612 150" fill="none" stroke="#3f6ab5" stroke-width="3" stroke-linecap="round"/>
+        <path class="line" d="M52 206 C 240 202, 400 168, 612 84" fill="none" stroke="#d9481c" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="612" cy="150" r="5" fill="#3f6ab5"/>
+        <circle cx="612" cy="84" r="5" fill="#d9481c"/>
+        <text x="470" y="120" class="chart-value" fill="#3f6ab5">従来の検索クリック流入</text>
+        <text x="430" y="70" class="chart-value" fill="#b23a14">AI引用 → 認知・指名流入</text>
+      </svg>
+      <div class="chart-source">※ 検索行動の変化を示す概念図（イメージ）。自社サイトの実測はGSC生成AIレポート/GA4で計測できます</div>
+    </div>
+  </div>
+</section>
+
+<!-- 新着記事 -->
 <section class="section">
-  <div class="section-head">
-    <span class="en">LATEST</span>
+  <div class="section-head reveal">
+    <span class="en">Latest</span>
     <h2>新着記事</h2>
   </div>
   <!-- 新着記事リスト: Phase 6（公開エージェント）が記事公開時にここへ <li> を追記する -->
   <ul class="post-list">
+    <li class="cat-aio"><a href="/aio/aio-taisaku-guide/"><time datetime="2026-07-27">2026.07.27</time><h3>AIO対策とは？AI検索に引用される5つの手順<span class="tag">AIO・LLMO</span></h3></a></li>
   </ul>
-  <p class="empty-note">記事は準備中です。パイプライン稼働後、ここに新着記事が自動追加されます。</p>
 </section>
 
-<section class="section">
-  <div class="section-head">
-    <span class="en">ABOUT</span>
-    <h2>このメディアについて</h2>
+<!-- このメディアについて -->
+<section class="section-full bg-white">
+  <div class="section" style="padding-top:0;padding-bottom:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;align-items:center;">
+    <div class="reveal">
+      <div class="section-head" style="margin-bottom:1.4rem;">
+        <span class="en">About</span>
+        <h2>このメディアについて</h2>
+      </div>
+      <p>AI集客ラボは、<strong>セブンセンシズ株式会社</strong>（大阪市）が運営する実践メディアです。MEO/ローカルSEOによる店舗集客支援サービス「G-ran」などの現場で得た知見をもとに、机上論ではない「成果につながる集客」の情報を発信します。</p>
+      <a class="btn btn-ghost" href="/about/">運営者情報を見る <span class="arw">→</span></a>
+    </div>
+    <div class="reveal reveal-d1">
+      <!-- TODO: オフィス・チームの実写真に差し替え（差し替え時は .media-slot を <img> に） -->
+      <div class="media-slot" style="margin:0;">
+        <div>
+          <span class="slot-type">PHOTO</span><br>
+          チーム・オフィス写真（準備中）
+        </div>
+      </div>
+    </div>
   </div>
-  <p style="max-width:38em;">AI集客ラボは、<strong>セブンセンシズ株式会社</strong>（大阪市）が運営する実践メディアです。MEO/ローカルSEOによる店舗集客支援サービス「G-ran」などの現場で得た知見をもとに、机上論ではない「成果につながる集客」の情報を発信します。</p>
-  <a class="btn btn-ghost" href="/about/">運営者情報を見る</a>
 </section>
 
+<!-- CTA -->
 <section class="section">
-  <div class="cta">
+  <div class="cta reveal">
     <p class="cta-copy">「AIに聞いたら、競合が出てきた」——そうなる前に。</p>
-    <a class="btn btn-primary" href="/lp/">AIO・SEO・MEO集客支援の無料相談へ</a>
+    <a class="btn btn-primary" href="/lp/">AIO・LLMO・SEO・MEO集客支援の無料相談へ <span class="arw">→</span></a>
     <p class="cta-sub">現状分析レポートを無料でお渡ししています</p>
   </div>
 </section>
@@ -135,7 +255,7 @@
       <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
     </div>
     <nav aria-label="フッターナビゲーション">
-      <a href="/aio/">AIO運用</a>
+      <a href="/aio/">AIO・LLMO運用</a>
       <a href="/seo/">SEO運用</a>
       <a href="/meo/">MEO運用</a>
       <a href="/ai-marketing/">AI集客・活用</a>

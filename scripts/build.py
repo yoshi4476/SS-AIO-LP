@@ -44,7 +44,7 @@ AUTHOR_BIO = "G-ranをはじめとする店舗集客支援の実務経験をも�
 AUTHOR_URL = f"{SITE_URL}/about/"
 
 CATEGORIES = {
-    "aio": ("AIO運用", "cat-aio"),
+    "aio": ("AIO・LLMO運用", "cat-aio"),
     "seo": ("SEO運用", "cat-seo"),
     "meo": ("MEO運用", "cat-meo"),
     "ai-marketing": ("AI集客・活用全般", "cat-ai"),

@@ -34,12 +34,14 @@
 
 ## 記事カテゴリ（静的サイトのディレクトリ構成に対応）
 
-| カテゴリ名 | スラッグ | カテゴリカラー（画像用） |
+| カテゴリ名 | スラッグ | カテゴリカラー |
 |:--|:--|:--|
-| AIO運用（AI検索最適化） | `aio` | TODO: |
-| SEO運用 | `seo` | TODO: |
-| MEO運用（マップ検索最適化） | `meo` | TODO: |
-| AI集客・活用全般 | `ai-marketing` | TODO: |
+| AIO・LLMO運用（AI検索・AIチャット最適化） | `aio` | 朱 `#d9481c` |
+| SEO運用 | `seo` | 藍 `#2b4c8c` |
+| MEO運用（マップ検索最適化） | `meo` | 深緑 `#2e6e4e` |
+| AI集客・活用全般 | `ai-marketing` | 金茶 `#a67a2d` |
+
+※ LLMO（ChatGPT/Perplexity/Gemini等のAIチャット対策）は `aio` カテゴリで扱う。記事テーマとしても積極的に採用する（CLAUDE.md 第0章の用語定義参照）。
 
 記事URL形式: `https://example.com/{カテゴリスラッグ}/{記事スラッグ}/`
 
