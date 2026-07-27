@@ -264,3 +264,104 @@ body.lp-doc .check-list li {
   border: 1px solid var(--line-warm);
   box-shadow: none;
 }
+
+/* ============================================================
+   v3: 紺色の全廃。「白×金×墨」の明るい提案書へ
+   （以降の宣言が前段を上書きする）
+   ============================================================ */
+body.lp-doc {
+  --ink: #23201a;      /* 青みのない墨色 */
+  --navy: #2a261e;     /* 旧navy変数は墨に差し替え */
+  --navy-deep: #1b1813;/* 濃い墨（料金中扉・CTA用） */
+  color: var(--ink);
+}
+
+/* ---------- ヒーロー: 白い表紙へ ---------- */
+body.lp-doc .hero-dark {
+  background: linear-gradient(180deg, #fffdf7 0%, #f7f3e9 100%);
+  color: var(--ink);
+}
+body.lp-doc .hero-dark::before {
+  background:
+    radial-gradient(46% 60% at 88% 0%, rgba(183,146,46,.14), transparent 70%),
+    radial-gradient(34% 46% at 4% 100%, rgba(183,146,46,.08), transparent 70%);
+}
+body.lp-doc .hero-dark::after {
+  background:
+    linear-gradient(rgba(35,32,26,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35,32,26,.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 100%);
+}
+body.lp-doc .hero-dark h1 { color: var(--ink); }
+body.lp-doc .hero-dark h1 em {
+  color: #96751a;
+  border-bottom-color: rgba(183,146,46,.55);
+}
+body.lp-doc .hero-dark .lead { color: #5a5546; }
+body.lp-doc .hero-dark .lead strong { color: var(--ink) !important; }
+body.lp-doc .kicker {
+  color: #8a6d1d;
+  border-color: rgba(183,146,46,.55);
+  background: rgba(183,146,46,.08);
+}
+body.lp-doc .kicker::before { background: var(--gold); }
+body.lp-doc .trust-row { color: #5a5546; }
+body.lp-doc .trust-row span::before { background: var(--gold); color: #fff; }
+body.lp-doc .btn-ghost-light { border-color: rgba(35,32,26,.35); color: var(--ink); }
+body.lp-doc .hero-form {
+  border: 1px solid var(--line-warm);
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 26px 60px -30px rgba(35,32,26,.35) !important;
+}
+body.lp-doc .hero-wave { display: none; }
+body.lp-doc .hero-dark .inner { padding-bottom: 4.5rem; }
+
+/* ---------- 実績バンド: 表紙直下の帯として整える ---------- */
+body.lp-doc .stat-band {
+  border-top: 1px solid var(--line-warm);
+  border-bottom: 1px solid var(--line-warm);
+  background: #fff;
+}
+body.lp-doc .stat-band > div { background: #fff; box-shadow: none; border-radius: 0; }
+body.lp-doc .stat-band .num { color: var(--ink); }
+
+/* ---------- 中扉・CTA・表ヘッダー: 紺→墨 ---------- */
+body.lp-doc .bg-deep { background: var(--navy-deep); }
+body.lp-doc .cta { background: var(--navy-deep); }
+body.lp-doc .sticky-cta { background: rgba(27,24,19,.96); }
+body.lp-doc .table-wrap table thead th,
+body.lp-doc table thead th { background: var(--navy); border-color: var(--navy); }
+
+/* ---------- リンク・その他の青み除去 ---------- */
+body.lp-doc a { color: var(--ink); }
+body.lp-doc a:hover { color: #96751a; }
+body.lp-doc a.btn-primary, body.lp-doc a.btn-primary:hover { color: #fff; }
+body.lp-doc .section-head .sub { color: #5a5546; }
+body.lp-doc [data-area-id="problem"] .section-head .sub { color: #5a5546; }
+body.lp-doc .stat-band .label { color: #6b6553; }
+body.lp-doc .lead-band .tel { color: #6b6553; }
+body.lp-doc .pillar .icon { color: var(--ink); }
+
+/* ---------- v3追補: 上書き順の整理 ---------- */
+body.lp-doc .trust-row strong { color: var(--ink) !important; background: none; }
+body.lp-doc [data-area-id="problem"] { background: var(--paper); color: var(--ink); }
+body.lp-doc [data-area-id="problem"] .section-head h2 { color: var(--ink); }
+body.lp-doc [data-area-id="problem"] .section-head .sub { color: #5a5546; }
+body.lp-doc [data-area-id="problem"] .section-head .en::before { color: var(--ink); }
+
+/* ---------- 暗色は料金の中扉のみに限定（他のbg-deepは紙白へ） ---------- */
+body.lp-doc .bg-deep { background: var(--paper); }
+body.lp-doc .bg-deep .section-head h2 { color: var(--ink); }
+body.lp-doc .bg-deep .section-head .sub { color: #5a5546; }
+body.lp-doc .bg-deep .section-head .sub strong {
+  color: var(--ink);
+  background: linear-gradient(transparent 58%, rgba(212,175,55,.32) 58%);
+}
+body.lp-doc .bg-deep .section-head .en::before { color: var(--ink); }
+
+body.lp-doc [data-area-id="price"] { background: var(--navy-deep); }
+body.lp-doc [data-area-id="price"] .section-head h2,
+body.lp-doc [data-area-id="price"] .section-head .sub { color: #f6f4ee; }
+body.lp-doc [data-area-id="price"] .section-head .sub strong { color: var(--gold-soft); background: none; }
+body.lp-doc [data-area-id="price"] .section-head .en::before { color: #fff; }
