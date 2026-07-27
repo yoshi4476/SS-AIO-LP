@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>30秒でわかる集客タイプ診断（無料）｜AI集客ラボ</title>
+<meta name="description" content="8つの質問に答えるだけで、あなたの会社に最適な集客の型（MEO先行・SEO×AIO先行・LLMO強化・土台整備）と整備度スコアを無料診断。結果に合わせた優先アクションもご提案します。">
+<link rel="canonical" href="https://example.com/diagnosis/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="30秒でわかる集客タイプ診断（無料）">
+<meta property="og:description" content="8問で最適な集客の型と整備度スコアを無料診断。">
+<meta property="og:url" content="https://example.com/diagnosis/">
+<meta property="og:image" content="https://example.com/images/ogp-default.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<!-- GA4: 計測開始時にコメントを外し G-XXXXXXXXXX を実IDに差し替える
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js"></script>
+<style>
+.quiz-panel { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.5rem, 3vw, 2.6rem); max-width: 760px; margin: 0 auto; box-shadow: var(--shadow-lg); }
+.q-progress { height: 8px; background: var(--bg-alt); border-radius: 4px; margin-bottom: 1.6rem; overflow: hidden; }
+.q-progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--blue), #60a5fa); border-radius: 4px; transition: width .3s var(--ease-out); }
+.q-num { font-family: var(--en); color: var(--blue); font-weight: 700; font-size: .85rem; letter-spacing: .12em; }
+.q-title { font-family: var(--head); font-weight: 900; font-size: clamp(1.1rem, 2.4vw, 1.4rem); margin: .4em 0 1.2em; }
+.q-opts { display: grid; gap: .7rem; }
+.q-opt { text-align: left; background: var(--bg-alt); border: 2px solid var(--line); border-radius: 12px; padding: .95em 1.2em; font-family: inherit; font-size: .98rem; font-weight: 600; cursor: pointer; transition: border-color .15s, background .15s, transform .15s var(--ease-out); }
+.q-opt:hover { border-color: var(--blue); background: var(--sky); transform: translateX(4px); }
+.result-type { text-align: center; padding: 1.2rem 0 .4rem; }
+.result-type .rt-label { font-family: var(--en); font-size: .78rem; letter-spacing: .3em; color: var(--blue); font-weight: 600; }
+.result-type h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 900; margin: .3em 0; }
+.score-ring { width: 150px; height: 150px; margin: 1rem auto; position: relative; }
+.score-ring svg { transform: rotate(-90deg); }
+.score-ring .sv { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--en); font-size: 2rem; font-weight: 700; color: var(--navy); }
+.score-ring .sv small { font-size: .8rem; color: var(--muted); }
+.action-list { counter-reset: n; list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .7rem; text-align: left; }
+.action-list li { counter-increment: n; background: var(--bg-alt); border-radius: 10px; padding: .85em 1.1em .85em 3em; position: relative; font-weight: 500; }
+.action-list li::before { content: counter(n); position: absolute; left: 1em; top: 50%; transform: translateY(-50%); width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--blue); color: #fff; font-family: var(--en); font-weight: 700; font-size: .85em; display: grid; place-items: center; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li aria-current="page">集客タイプ診断</li>
+  </ol>
+</nav>
+
+<section class="hero" style="text-align:center;padding-bottom:1.5rem;">
+  <span class="kicker">FREE DIAGNOSIS</span>
+  <h1>30秒でわかる、集客タイプ診断</h1>
+  <p class="lead" style="margin-left:auto;margin-right:auto;">8つの質問に答えるだけで、あなたの会社が<strong>まず何から始めるべきか</strong>（集客の型）と、現在の整備度スコアを無料で診断します。登録不要・その場で結果表示。</p>
+</section>
+
+<section class="section" style="padding-top:1rem;">
+  <div class="quiz-panel" id="quiz">
+    <div class="q-progress"><span id="qbar" style="width:0%"></span></div>
+    <div id="qbody"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/">集客タイプ診断</a>
+      <a href="/site-audit/">サイト診断</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // 集客タイプ診断: 回答→型スコア(meo/seo/aio/base) + 整備度(0-100)
+  var Q = [
+    { t: "あなたのビジネスの形態は？", o: [
+      ["店舗ビジネス（飲食・美容・小売など）", { meo: 3 }],
+      ["クリニック・士業など地域の専門サービス", { meo: 2, seo: 1 }],
+      ["BtoB・SaaS/IT（商圏は全国）", { seo: 3, aio: 1 }],
+      ["不動産・住宅・リフォーム", { meo: 1, seo: 2 }]] },
+    { t: "お客様の商圏は？", o: [
+      ["店舗や事務所の周辺地域が中心", { meo: 2 }],
+      ["都道府県〜広域", { seo: 1, meo: 1 }],
+      ["全国・オンライン完結", { seo: 2, aio: 1 }]] },
+    { t: "現在の集客の主力は？", o: [
+      ["広告（リスティング・SNS広告など）", { seo: 2, aio: 1 }],
+      ["紹介・リピート・既存客", { seo: 1, meo: 1 }],
+      ["検索・地図・SNSからの自然流入", { aio: 2 }],
+      ["決まった集客手段がない", { base: 3 }]] },
+    { t: "ホームページの状態は？", o: [
+      ["ない、または5年以上更新していない", { base: 3 }, 0],
+      ["あるが、ほとんど更新していない", { base: 1, seo: 1 }, 8],
+      ["定期的に更新している", { seo: 1, aio: 1 }, 15]] },
+    { t: "お役立ち記事（ブログ）の本数は？", o: [
+      ["0本", { base: 2 }, 0],
+      ["1〜9本", { seo: 2 }, 8],
+      ["10本以上", { aio: 2 }, 15]] },
+    { t: "Googleビジネスプロフィール（マップ）は？", o: [
+      ["未登録／わからない", { meo: 2, base: 1 }, 0],
+      ["登録したが放置している", { meo: 3 }, 5],
+      ["投稿や口コミ返信を運用中", { aio: 1 }, 15],
+      ["店舗がないので対象外", { seo: 1 }, 10]] },
+    { t: "ChatGPTなどのAIに、自社や自社の業種を質問したことは？", o: [
+      ["自社が回答に出てきた", { aio: 1 }, 20],
+      ["調べたが、自社は出てこなかった", { aio: 3 }, 10],
+      ["試したことがない", { aio: 1, base: 1 }, 0]] },
+    { t: "集客に使える月予算の目安は？", o: [
+      ["〜5万円", { base: 1 }, 5],
+      ["5〜15万円", { seo: 1 }, 10],
+      ["15万円以上", { aio: 1, seo: 1 }, 15]] }
+  ];
+  var TYPES = {
+    meo: { name: "MEO先行型", desc: "まずGoogleマップで「地域名×業種」の検索に勝つのが最短ルートです。土台を固めてからAI検索対応へ進みましょう。",
+      acts: ["Googleビジネスプロフィールを整備（カテゴリ・写真20枚・営業情報）", "口コミの依頼導線（QRコード）を今週つくる", "週1回の投稿を3ヶ月続ける"],
+      links: [["MEO対策のやり方7ステップ", "/meo/meo-taisaku-yarikata/"], ["口コミを増やす方法5選", "/meo/kuchikomi-fuyasu-hoho/"]] },
+    seo: { name: "SEO×AIO先行型", desc: "見込み客は商談・来店の前に検索とAIで比較しています。記事で「比較段階の接点」をつくることが最優先です。",
+      acts: ["運営者情報・著者情報を整備（E-E-A-T）", "顧客の質問から「勝てるキーワード」を10個選ぶ", "1記事1質問の記事を月2本から開始"],
+      links: [["AI時代のSEO対策の基本", "/seo/ai-jidai-seo-taisaku/"], ["AIO対策の5つの手順", "/aio/aio-taisaku-guide/"]] },
+    aio: { name: "LLMO強化型", desc: "土台はできています。次は「AIの回答に引用され、指名で選ばれる」領域へ。競合より先に着手できる位置にいます。",
+      acts: ["robots.txtのAIクローラー許可とllms.txtを設置", "主要記事をH2直下1文結論・FAQ付きの構造へリライト", "GA4でAI経由流入の計測を開始"],
+      links: [["LLMO対策の7つの方法", "/aio/llmo-taisaku-hoho/"], ["AIO対策の5つの手順", "/aio/aio-taisaku-guide/"]] },
+    base: { name: "土台整備型", desc: "施策の前に、見つけてもらうための土台（サイト・プロフィール・発信の器）づくりから始めるのが結果的に最短です。",
+      acts: ["会社情報が正しく載ったサイト/ページを用意", "Googleビジネスプロフィールに登録", "全体像を把握して90日計画を立てる"],
+      links: [["AI集客の完全ガイド", "/ai-marketing/ai-shukyaku-guide/"], ["AI集客用語集", "/glossary/"]] }
+  };
+  var i = 0, score = { meo: 0, seo: 0, aio: 0, base: 0 }, ready = 0;
+  var body = document.getElementById("qbody"), bar = document.getElementById("qbar");
+
+  function show() {
+    var q = Q[i];
+    bar.style.width = (i / Q.length * 100) + "%";
+    var html = '<div class="q-num">Q' + (i + 1) + " / " + Q.length + '</div><div class="q-title">' + q.t + '</div><div class="q-opts">';
+    q.o.forEach(function (o, j) { html += '<button class="q-opt" data-j="' + j + '">' + o[0] + "</button>"; });
+    body.innerHTML = html + "</div>";
+    body.querySelectorAll(".q-opt").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var o = q.o[+b.dataset.j];
+        for (var k in o[1]) score[k] += o[1][k];
+        if (o.length > 2) ready += o[2];
+        i++;
+        i < Q.length ? show() : result();
+      });
+    });
+  }
+
+  function result() {
+    bar.style.width = "100%";
+    var type = Object.keys(score).sort(function (a, b) { return score[b] - score[a]; })[0];
+    var T = TYPES[type];
+    var sc = Math.min(100, Math.round(ready / 88 * 100));
+    if (window.trackLead) {
+      window.trackLead("diagnosis_complete", { diagnosis_type: type, readiness_score: sc });
+      window.trackLead("lead_capture", { lead_route: "diagnosis", diagnosis_type: type });
+      window.trackLead("lead_diagnosis", { diagnosis_type: type });
+    }
+    var C = 2 * Math.PI * 62, off = C * (1 - sc / 100);
+    body.innerHTML =
+      '<div class="result-type"><div class="rt-label">YOUR TYPE</div>' +
+      "<h2>あなたは「" + T.name + "」</h2><p style='color:var(--muted);max-width:34em;margin:0 auto;'>" + T.desc + "</p>" +
+      '<div class="score-ring"><svg width="150" height="150"><circle cx="75" cy="75" r="62" fill="none" stroke="#eef2f8" stroke-width="12"/>' +
+      '<circle cx="75" cy="75" r="62" fill="none" stroke="#2563eb" stroke-width="12" stroke-linecap="round" stroke-dasharray="' + C + '" stroke-dashoffset="' + off + '"/></svg>' +
+      '<div class="sv">' + sc + '<small>/100<br>整備度</small></div></div>' +
+      '<h3 style="font-family:var(--head);margin:.5em 0 .4em;">最初にやるべき3つ</h3><ol class="action-list">' +
+      T.acts.map(function (a) { return "<li>" + a + "</li>"; }).join("") + "</ol>" +
+      '<p style="margin:1.2rem 0 .6rem;font-size:.9rem;">おすすめ記事: ' +
+      T.links.map(function (l) { return '<a href="' + l[1] + '">' + l[0] + "</a>"; }).join(" ／ ") + "</p>" +
+      '<div class="btn-row" style="justify-content:center;">' +
+      '<a class="btn btn-primary" href="/lp/#form" data-cta="diagnosis_result_lp">この診断結果をもとに無料相談する <span class="arw">→</span></a>' +
+      '<a class="btn btn-ghost" href="/site-audit/" data-cta="diagnosis_to_audit">サイトの点数も診断する</a></div>' +
+      '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本診断は回答にもとづく簡易判定です。無料相談では実データで詳細分析します。</p></div>';
+  }
+  show();
+})();
+</script>
+</body>
+</html>

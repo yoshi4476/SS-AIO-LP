@@ -50,7 +50,7 @@ CATEGORIES = {
     "ai-marketing": ("AI集客・活用全般", "cat-ai"),
 }
 
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/", "tokushoho/", "blog/", "glossary/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/", "tokushoho/", "blog/", "glossary/", "diagnosis/", "site-audit/"]
 
 
 def jp_date(iso: str) -> str:
@@ -356,6 +356,8 @@ BLOG_PAGE = """<!DOCTYPE html>
     <nav aria-label="フッターナビゲーション">
       <a href="/blog/">記事一覧</a>
       <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/">集客タイプ診断</a>
+      <a href="/site-audit/">サイト診断</a>
       <a href="/aio/">AIO・LLMO運用</a>
       <a href="/seo/">SEO運用</a>
       <a href="/meo/">MEO運用</a>

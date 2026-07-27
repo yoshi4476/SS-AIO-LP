@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>無料サイト診断｜AIO/SEO対応を100点満点で採点</title>
+<meta name="description" content="URLを入力するだけで、あなたのサイトのAI検索(AIO)・SEO対応度を12項目・100点満点で無料診断。タイトル・構造化データ・AIクローラー許可・llms.txtまで自動チェックし、改善アドバイスを表示します。">
+<link rel="canonical" href="https://example.com/site-audit/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="無料サイト診断｜AIO/SEO対応を100点満点で採点">
+<meta property="og:description" content="URL入力だけでAI検索対応度を12項目で自動診断。">
+<meta property="og:url" content="https://example.com/site-audit/">
+<meta property="og:image" content="https://example.com/images/ogp-default.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<!-- GA4: 計測開始時にコメントを外し G-XXXXXXXXXX を実IDに差し替える
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js"></script>
+<style>
+.audit-panel { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.5rem, 3vw, 2.6rem); max-width: 820px; margin: 0 auto; box-shadow: var(--shadow-lg); }
+.audit-form { display: flex; gap: .8rem; flex-wrap: wrap; }
+.audit-form input { flex: 1 1 300px; padding: .95em 1.2em; border: 2px solid var(--line); border-radius: 12px; font-size: 1rem; font-family: inherit; background: var(--bg-alt); }
+.audit-form input:focus { outline: none; border-color: var(--blue); background: #fff; }
+.audit-form button { border: none; cursor: pointer; font-family: inherit; font-size: 1rem; }
+.audit-score { display: flex; align-items: center; gap: 1.6rem; margin: 1.6rem 0 1rem; flex-wrap: wrap; }
+.audit-score .num { font-family: var(--en); font-size: 3.4rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.audit-score .num small { font-size: 1.1rem; color: var(--muted); }
+.audit-score .grade { font-family: var(--head); font-weight: 900; font-size: 1.1rem; }
+.check-row { display: flex; gap: .8rem; align-items: flex-start; border-bottom: 1px solid var(--line); padding: .7rem .2rem; font-size: .92rem; }
+.check-row .st { flex-shrink: 0; width: 3.4em; text-align: center; font-weight: 700; border-radius: 8px; padding: .15em 0; font-size: .8rem; }
+.st-ok { background: #dcfce7; color: #15803d; }
+.st-ng { background: #fee2e2; color: #b91c1c; }
+.check-row .nm { font-weight: 700; }
+.check-row .dt { color: var(--muted); font-size: .82rem; }
+.check-row .ad { color: #b45309; font-size: .84rem; margin-top: .15em; }
+.loading { text-align: center; color: var(--muted); padding: 2rem 0; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li aria-current="page">無料サイト診断</li>
+  </ol>
+</nav>
+
+<section class="hero" style="text-align:center;padding-bottom:1.5rem;">
+  <span class="kicker">FREE SITE AUDIT</span>
+  <h1>無料サイト診断</h1>
+  <p class="lead" style="margin-left:auto;margin-right:auto;">URLを入力するだけで、<strong>AI検索（AIO/LLMO）とSEOへの対応度を12項目・100点満点</strong>で自動採点。AIクローラー許可・構造化データ・llms.txtまで、専門会社が見るポイントをその場でチェックします。</p>
+</section>
+
+<section class="section" style="padding-top:1rem;">
+  <div class="audit-panel">
+    <form class="audit-form" id="auditForm">
+      <input type="url" id="auditUrl" placeholder="https://example.co.jp/" required>
+      <button type="submit" class="btn btn-primary" data-cta="site_audit_run">無料で診断する</button>
+    </form>
+    <p style="font-size:.78rem;color:var(--muted);margin:.7rem 0 0;">※ 登録不要。診断対象はご自身が管理するサイト、または公開されているページに限ります。</p>
+    <div id="auditResult"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/">集客タイプ診断</a>
+      <a href="/site-audit/">サイト診断</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById("auditForm");
+  var out = document.getElementById("auditResult");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var url = document.getElementById("auditUrl").value.trim();
+    out.innerHTML = '<div class="loading">診断中です…（5〜10秒ほどかかります）</div>';
+    fetch("/api/audit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: url })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d.error) {
+        out.innerHTML = '<p style="color:#b91c1c;font-weight:700;margin-top:1.2rem;">' + d.error + "</p>";
+        return;
+      }
+      if (window.trackLead) {
+        window.trackLead("site_audit_complete", { audit_score: d.score, audit_url: d.url });
+        window.trackLead("lead_capture", { lead_route: "site_audit", audit_score: d.score });
+        window.trackLead("lead_site_audit", { audit_score: d.score });
+      }
+      var rows = d.checks.map(function (c) {
+        return '<div class="check-row"><span class="st ' + (c.ok ? "st-ok\">OK" : "st-ng\">NG") + "</span>" +
+          '<div><div class="nm">' + c.name + " <span style='font-family:var(--en);color:var(--muted);font-weight:600;'>(" + c.pts + "点)</span></div>" +
+          (c.detail ? '<div class="dt">' + c.detail + "</div>" : "") +
+          (!c.ok ? '<div class="ad">改善: ' + c.advice + "</div>" : "") + "</div></div>";
+      }).join("");
+      out.innerHTML =
+        '<div class="audit-score"><div class="num">' + d.score + "<small>/100</small></div>" +
+        '<div><div class="grade">判定: ' + d.grade + '</div><div style="font-size:.82rem;color:var(--muted);">診断URL: ' + d.url + "</div></div></div>" +
+        rows +
+        '<div class="btn-row" style="justify-content:center;margin-top:1.6rem;">' +
+        '<a class="btn btn-primary" href="/lp/#form" data-cta="site_audit_result_lp">この結果をもとに無料相談する <span class="arw">→</span></a>' +
+        '<a class="btn btn-ghost" href="/diagnosis/" data-cta="audit_to_diagnosis">集客タイプ診断もやってみる</a></div>' +
+        '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本診断は公開ページの自動チェックによる簡易採点です。検索順位・AI引用状況を含む詳細分析は無料相談で承ります。</p>';
+    }).catch(function () {
+      out.innerHTML = '<p style="color:#b91c1c;font-weight:700;margin-top:1.2rem;">診断サーバーに接続できませんでした。本機能はサイト公開後（Cloudflare Pages上）で利用できます。</p>';
+    });
+  });
+})();
+</script>
+</body>
+</html>
