@@ -1,4 +1,4 @@
-# AI検索・AIチャットからの引用を獲得するため許可
+# Allow AI crawlers (AIO/LLMO: get cited by AI search and chatbots)
 User-agent: GPTBot
 Allow: /
 
