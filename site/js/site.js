@@ -174,6 +174,31 @@
     toTop.classList.toggle('show', document.documentElement.scrollTop > 600);
   }, { passive: true });
 
+  // URLコピー（記事シェア）
+  document.querySelectorAll('.copy-url').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-url') || location.href;
+      function done() {
+        var orig = btn.textContent;
+        btn.textContent = '✓ コピーしました';
+        btn.classList.add('copied');
+        ga('cta_click', { cta_id: 'share_copy', page_path: location.pathname });
+        setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = url; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (err) { /* noop */ }
+        document.body.removeChild(ta); done();
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+
   // 記事一覧のライブ検索（/blog/ の #blogSearch）
   var search = document.getElementById('blogSearch');
   if (search) {

@@ -9,7 +9,9 @@
 - 関連サービス（同社運営）: AI導入補助金（IT導入補助金）申請サポート https://lp.7senses.co.jp/ （最大350万円の補助金申請から導入・集客まで支援）
 
 ## 主要ページ
-- [AI集客用語集](https://example.com/glossary/): AIO・LLMO等の基本用語12個を60字以内で定義
+- [はじめての方へ](https://example.com/start/): サイトの歩き方3ステップ（全体像→無料診断→カテゴリ深掘り）
+- [AI集客用語集](https://example.com/glossary/): AIO・LLMO等の基本用語30個を60字以内で定義
+- [編集・訂正ポリシー](https://example.com/editorial-policy/): 出典基準・更新ルール・訂正手続きの公開ページ
 - [記事一覧](https://example.com/blog/): 全記事の新着順一覧
 - [AIO・SEO・MEO集客支援サービス](https://example.com/lp/): AI検索時代の集客を一気通貫で支援。無料現状分析レポート付き
 - [運営者情報](https://example.com/about/): 運営会社の概要と編集方針

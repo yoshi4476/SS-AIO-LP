@@ -45,7 +45,25 @@
     {"@type": "DefinedTerm", "name": "E-E-A-T", "description": "経験・専門性・権威性・信頼性の頭文字で、Googleがコンテンツ品質を評価する基準です。"},
     {"@type": "DefinedTerm", "name": "構造化データ", "description": "ページ内容の意味を検索エンジンやAIに伝えるための機械可読なマークアップ（Schema.org）です。"},
     {"@type": "DefinedTerm", "name": "llms.txt", "description": "サイト概要と主要ページをAIクローラー向けにまとめた、サイトルートに置くテキストファイルです。"},
-    {"@type": "DefinedTerm", "name": "Googleビジネスプロフィール", "description": "Googleマップと検索に店舗情報を表示する無料ツールで、MEO対策の基盤です。"}
+    {"@type": "DefinedTerm", "name": "Googleビジネスプロフィール", "description": "Googleマップと検索に店舗情報を表示する無料ツールで、MEO対策の基盤です。"},
+    {"@type": "DefinedTerm", "name": "強調スニペット", "alternateName": "Featured Snippet", "description": "強調スニペットとは、検索結果の上部に回答を抜粋表示する枠のことです。獲得するとAI引用にも近づきます。"},
+    {"@type": "DefinedTerm", "name": "ローカルパック", "alternateName": "Local Pack", "description": "ローカルパックとは、地域系の検索で最上部に出るマップ+上位3店舗の表示枠のことです。MEOの主戦場です。"},
+    {"@type": "DefinedTerm", "name": "NAP", "alternateName": "Name, Address, Phone", "description": "NAPとは、店名・住所・電話番号のことです。全媒体で表記を統一することがMEOと信頼性評価の基本になります。"},
+    {"@type": "DefinedTerm", "name": "サイテーション", "alternateName": "Citation", "description": "サイテーションとは、他サイトやSNSで自社の名前・住所等が言及されることです。リンクがなくても評価に働きます。"},
+    {"@type": "DefinedTerm", "name": "被リンク", "alternateName": "Backlink", "description": "被リンクとは、外部サイトから自社サイトへ張られたリンクのことです。質の高い被リンクは権威性の中心的な評価要素です。"},
+    {"@type": "DefinedTerm", "name": "ドメインパワー", "alternateName": "Domain Authority", "description": "ドメインパワーとは、サイト全体の権威性を表す通称です。被リンク・運用歴・言及の蓄積で高まります。"},
+    {"@type": "DefinedTerm", "name": "インデックス", "alternateName": "Index", "description": "インデックスとは、検索エンジンのデータベースにページが登録されることです。未登録のページは検索に出ません。"},
+    {"@type": "DefinedTerm", "name": "クローラー", "alternateName": "Crawler", "description": "クローラーとは、Web上のページを自動巡回して情報を収集するプログラムです。Googlebotが代表例です。"},
+    {"@type": "DefinedTerm", "name": "AIクローラー", "alternateName": "AI Crawler", "description": "AIクローラーとは、AIサービスが情報収集に使う巡回プログラムです。GPTBotやPerplexityBotなどがあります。"},
+    {"@type": "DefinedTerm", "name": "robots.txt", "alternateName": "Robots Text File", "description": "robots.txtとは、クローラーの巡回可否をサイト側から指示するファイルです。AIクローラーの許可設定にも使います。"},
+    {"@type": "DefinedTerm", "name": "検索意図", "alternateName": "Search Intent", "description": "検索意図とは、検索した人が本当に知りたい・したいことです。記事は検索意図への回答として設計します。"},
+    {"@type": "DefinedTerm", "name": "ロングテールキーワード", "alternateName": "Long-tail Keyword", "description": "ロングテールキーワードとは、検索数は少ないが意図が明確な複合語です。中小企業が最初に狙うべき戦場です。"},
+    {"@type": "DefinedTerm", "name": "トピッククラスター", "alternateName": "Topic Cluster", "description": "トピッククラスターとは、全体ガイド（ピラー）と各論記事を内部リンクで結ぶ構造です。専門性の評価を高めます。"},
+    {"@type": "DefinedTerm", "name": "エンティティ", "alternateName": "Entity", "description": "エンティティとは、検索エンジンやAIが認識する「固有の存在」です。社名の表記統一がAIの正しい認識につながります。"},
+    {"@type": "DefinedTerm", "name": "リッチリザルト", "alternateName": "Rich Result", "description": "リッチリザルトとは、FAQや星評価つきなどの拡張された検索結果表示です。構造化データの設定で表示されます。"},
+    {"@type": "DefinedTerm", "name": "指名検索", "alternateName": "Branded Search", "description": "指名検索とは、社名・サービス名で直接検索されることです。AI引用で認知が増えるほど指名検索も増えます。"},
+    {"@type": "DefinedTerm", "name": "CTR", "alternateName": "Click Through Rate", "description": "CTRとは、表示回数のうちクリックされた割合です。タイトルとメタディスクリプションの改善で高められます。"},
+    {"@type": "DefinedTerm", "name": "CVR", "alternateName": "Conversion Rate", "description": "CVRとは、訪問者のうち問い合わせ等の成果に至った割合です。集客の質とサイトの導線設計を映す指標です。"}
    ]
   },
   {
@@ -89,7 +107,7 @@
 <section class="hero">
   <span class="kicker">Glossary</span>
   <h1>AI集客用語集</h1>
-  <p class="lead">AI検索時代の集客でよく使う12の用語を、1語60字以内で定義しました。各用語の詳しい実践方法は関連記事で解説しています。<span class="freshness">（2026年7月時点）</span></p>
+  <p class="lead">AI検索時代の集客でよく使う30の用語を、1語60字以内で定義しました。各用語の詳しい実践方法は関連記事で解説しています。<span class="freshness">（2026年7月時点）</span></p>
 </section>
 
 <section class="section" style="padding-top:1rem;">
@@ -123,6 +141,42 @@
     <div class="term-tile cat-meo"><div class="abbr" style="font-size:.95rem;">Googleビジネスプロフィール</div><span class="full">Google Business Profile</span>
       <p><strong>Googleビジネスプロフィールとは</strong>、Googleマップと検索に店舗情報を表示する無料ツールで、MEO対策の基盤です。</p>
       <p style="margin-top:.6em;"><a href="/meo/kuchikomi-fuyasu-hoho/">→ 口コミを増やす方法</a></p></div>
+    <div class="term-tile cat-seo"><div class="abbr" style="font-size:1.05rem;">強調スニペット</div><span class="full">Featured Snippet</span>
+      <p><strong>強調スニペットとは</strong>、検索結果の上部に回答を抜粋表示する枠のことです。獲得するとAI引用にも近づきます。</p></div>
+    <div class="term-tile cat-meo"><div class="abbr" style="font-size:1.05rem;">ローカルパック</div><span class="full">Local Pack</span>
+      <p><strong>ローカルパックとは</strong>、地域系の検索で最上部に出るマップ+上位3店舗の表示枠のことです。MEOの主戦場です。</p></div>
+    <div class="term-tile cat-meo"><div class="abbr">NAP</div><span class="full">Name, Address, Phone</span>
+      <p><strong>NAPとは</strong>、店名・住所・電話番号のことです。全媒体で表記を統一することがMEOと信頼性評価の基本になります。</p></div>
+    <div class="term-tile cat-meo"><div class="abbr" style="font-size:1.05rem;">サイテーション</div><span class="full">Citation</span>
+      <p><strong>サイテーションとは</strong>、他サイトやSNSで自社の名前・住所等が言及されることです。リンクがなくても評価に働きます。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr">被リンク</div><span class="full">Backlink</span>
+      <p><strong>被リンクとは</strong>、外部サイトから自社サイトへ張られたリンクのことです。質の高い被リンクは権威性の中心的な評価要素です。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr" style="font-size:1.05rem;">ドメインパワー</div><span class="full">Domain Authority</span>
+      <p><strong>ドメインパワーとは</strong>、サイト全体の権威性を表す通称です。被リンク・運用歴・言及の蓄積で高まります。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr" style="font-size:1.05rem;">インデックス</div><span class="full">Index</span>
+      <p><strong>インデックスとは</strong>、検索エンジンのデータベースにページが登録されることです。未登録のページは検索に出ません。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr">クローラー</div><span class="full">Crawler</span>
+      <p><strong>クローラーとは</strong>、Web上のページを自動巡回して情報を収集するプログラムです。Googlebotが代表例です。</p></div>
+    <div class="term-tile cat-ai"><div class="abbr" style="font-size:1.05rem;">AIクローラー</div><span class="full">AI Crawler</span>
+      <p><strong>AIクローラーとは</strong>、AIサービスが情報収集に使う巡回プログラムです。GPTBotやPerplexityBotなどがあります。</p></div>
+    <div class="term-tile cat-ai"><div class="abbr" style="font-size:1.05rem;">robots.txt</div><span class="full">Robots Text File</span>
+      <p><strong>robots.txtとは</strong>、クローラーの巡回可否をサイト側から指示するファイルです。AIクローラーの許可設定にも使います。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr">検索意図</div><span class="full">Search Intent</span>
+      <p><strong>検索意図とは</strong>、検索した人が本当に知りたい・したいことです。記事は検索意図への回答として設計します。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr" style="font-size:1.05rem;">ロングテールキーワード</div><span class="full">Long-tail Keyword</span>
+      <p><strong>ロングテールキーワードとは</strong>、検索数は少ないが意図が明確な複合語です。中小企業が最初に狙うべき戦場です。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr" style="font-size:1.05rem;">トピッククラスター</div><span class="full">Topic Cluster</span>
+      <p><strong>トピッククラスターとは</strong>、全体ガイド（ピラー）と各論記事を内部リンクで結ぶ構造です。専門性の評価を高めます。</p></div>
+    <div class="term-tile cat-ai"><div class="abbr" style="font-size:1.05rem;">エンティティ</div><span class="full">Entity</span>
+      <p><strong>エンティティとは</strong>、検索エンジンやAIが認識する「固有の存在」です。社名の表記統一がAIの正しい認識につながります。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr" style="font-size:1.05rem;">リッチリザルト</div><span class="full">Rich Result</span>
+      <p><strong>リッチリザルトとは</strong>、FAQや星評価つきなどの拡張された検索結果表示です。構造化データの設定で表示されます。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr">指名検索</div><span class="full">Branded Search</span>
+      <p><strong>指名検索とは</strong>、社名・サービス名で直接検索されることです。AI引用で認知が増えるほど指名検索も増えます。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr">CTR</div><span class="full">Click Through Rate</span>
+      <p><strong>CTRとは</strong>、表示回数のうちクリックされた割合です。タイトルとメタディスクリプションの改善で高められます。</p></div>
+    <div class="term-tile cat-seo"><div class="abbr">CVR</div><span class="full">Conversion Rate</span>
+      <p><strong>CVRとは</strong>、訪問者のうち問い合わせ等の成果に至った割合です。集客の質とサイトの導線設計を映す指標です。</p></div>
   </div>
 </section>
 
@@ -142,6 +196,7 @@
       <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
     </div>
     <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
       <a href="/blog/">記事一覧</a>
       <a href="/glossary/">用語集</a>
       <a href="/diagnosis/meo/">MEO診断</a>
@@ -156,6 +211,7 @@
       <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
       <a href="/lp/">集客支援サービス</a>
       <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
       <a href="/privacy/">プライバシーポリシー</a>
       <a href="/tokushoho/">特定商取引法に基づく表記</a>
     </nav>

@@ -26,6 +26,7 @@ import re
 import sys
 from datetime import date
 from pathlib import Path
+from urllib.parse import quote as urlquote
 
 import markdown
 import yaml
@@ -51,7 +52,7 @@ CATEGORIES = {
     "ai-marketing": ("AI集客・活用全般", "cat-ai"),
 }
 
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/", "tokushoho/", "blog/", "glossary/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/", "author/haraguchi/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/", "tokushoho/", "blog/", "glossary/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/"]
 
 
 def jp_date(iso: str) -> str:
@@ -146,7 +147,44 @@ def related_html(meta, all_metas):
             f'<ul class="post-list">\n{tiles}\n  </ul></section>')
 
 
-def build_article(path: Path, template: str, related: str = "", unpublished_urls=None):
+# カテゴリ連動の記事末診断バナー（読者→診断→85点以下は無料相談へ、のリード導線）
+DIAG_BANNERS = {
+    "meo": ("/diagnosis/meo/", "MEO診断（無料・30秒）", "8つの質問で、Googleマップ集客の整備度を100点満点で採点します。"),
+    "aio": ("/diagnosis/aio/", "AIO診断（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
+    "seo": ("/site-audit/", "サイト無料採点（URL入力だけ）", "SEO・AI対応の技術12項目を100点満点で自動チェックします。"),
+    "ai-marketing": ("/diagnosis/aio/", "AIO診断（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
+}
+
+
+def diag_banner_html(meta):
+    href, title, desc = DIAG_BANNERS[meta["category"]]
+    return (f'<aside class="diag-banner"><div class="db-text">'
+            f'<span class="db-kicker">この記事のテーマで、自社の現在地を測る</span>'
+            f'<span class="db-title">{title}</span>'
+            f'<span class="db-desc">{desc}</span></div>'
+            f'<a class="btn btn-primary" href="{href}" data-cta="article_diag_{meta["category"]}">'
+            f'無料で診断する <span class="arw">→</span></a></aside>')
+
+
+def prev_next_html(prev_meta, next_meta):
+    if not prev_meta and not next_meta:
+        return ""
+    parts = ['<nav class="prev-next" aria-label="前後の記事">']
+    if prev_meta:
+        parts.append(f'<a class="pn" href="/{prev_meta["category"]}/{prev_meta["slug"]}/">'
+                     f'<span>← 前の記事</span><strong>{prev_meta["title"]}</strong></a>')
+    else:
+        parts.append('<span class="pn pn-empty" aria-hidden="true"></span>')
+    if next_meta:
+        parts.append(f'<a class="pn pn-next" href="/{next_meta["category"]}/{next_meta["slug"]}/">'
+                     f'<span>次の記事 →</span><strong>{next_meta["title"]}</strong></a>')
+    else:
+        parts.append('<span class="pn pn-empty" aria-hidden="true"></span>')
+    parts.append('</nav>')
+    return "".join(parts)
+
+
+def build_article(path: Path, template: str, related: str = "", unpublished_urls=None, prevnext: str = ""):
     meta, body = parse_article(path)
     cat_name, cat_class = CATEGORIES[meta["category"]]
     url = f"{SITE_URL}/{meta['category']}/{meta['slug']}/"
@@ -211,6 +249,10 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{EYECATCH}}": eyecatch,
         "{{CONTENT}}": content,
         "{{RELATED}}": related,
+        "{{DIAG_BANNER}}": diag_banner_html(meta),
+        "{{PREVNEXT}}": prevnext,
+        "{{TITLE_ENC}}": urlquote(meta["title"]),
+        "{{URL_ENC}}": urlquote(url, safe=""),
     }
     for k, v in replacements.items():
         html = html.replace(k, v)
@@ -378,6 +420,7 @@ BLOG_PAGE = """<!DOCTYPE html>
       <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
     </div>
     <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
       <a href="/blog/">記事一覧</a>
       <a href="/glossary/">用語集</a>
       <a href="/diagnosis/meo/">MEO診断</a>
@@ -392,6 +435,7 @@ BLOG_PAGE = """<!DOCTYPE html>
       <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
       <a href="/lp/">集客支援サービス</a>
       <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
       <a href="/privacy/">プライバシーポリシー</a>
       <a href="/tokushoho/">特定商取引法に基づく表記</a>
     </nav>
@@ -449,10 +493,18 @@ def main():
             shutil.rmtree(stale)
             print(f"REMOVED: 隔離記事の生成HTMLを削除: {stale.relative_to(SITE)}/")
 
+    # 前後ナビ用の時系列順（公開日→slugで安定ソート）
+    ordered = sorted(all_metas, key=lambda m: (str(m["date"]), m["slug"]))
+    pos = {m["slug"]: i for i, m in enumerate(ordered)}
+
     for path in paths:
         meta = next(m for m in all_metas if m["slug"] == parse_article(path)[0]["slug"])
+        i = pos[meta["slug"]]
+        prev_meta = ordered[i - 1] if i > 0 else None
+        next_meta = ordered[i + 1] if i < len(ordered) - 1 else None
         meta, url = build_article(path, template, related_html(meta, all_metas),
-                                  unpublished_urls=unpublished_urls)
+                                  unpublished_urls=unpublished_urls,
+                                  prevnext=prev_next_html(prev_meta, next_meta))
         entries.append((meta, url))
         if url not in llms:
             warns.append(f"llms.txt 未追記: {meta['title']} -> {url}")

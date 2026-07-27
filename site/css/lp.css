@@ -558,3 +558,16 @@ body.lp-doc .stat-band > div:hover { transform: translateY(-4px); box-shadow: 0 
   body.lp-doc .section-head.reveal.in .en::after { animation: none !important; }
   body.lp-doc .hero-dark h1 em { background-size: 100% 2px; }
 }
+
+/* ---------- フッター: 黒廃止 → 生成りの明るいフッター ---------- */
+body.lp-doc .site-footer {
+  background: #f3efe3;
+  color: var(--ink);
+  border-top: 1px solid var(--line-warm);
+}
+body.lp-doc .site-footer .brand-f { color: var(--ink); }
+body.lp-doc .site-footer p { color: #6b6553 !important; }
+body.lp-doc .site-footer .addr { color: #6b6553; }
+body.lp-doc .site-footer nav a { color: #55503f; }
+body.lp-doc .site-footer nav a:hover { color: #96751a; }
+body.lp-doc .site-footer .copyright { color: #8a8471; border-color: #e0dac8; }

@@ -587,3 +587,48 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 }
 .blog-search:focus { outline: none; border-color: var(--blue); }
 .blog-search-empty { color: var(--muted); padding: 1rem 0; display: none; }
+
+/* ---------- シェアボタン ---------- */
+.share-row { display: inline-flex; gap: .5em; flex-wrap: wrap; align-items: center; }
+.share-btn {
+  display: inline-flex; align-items: center; gap: .35em;
+  font: inherit; font-size: .74rem; font-weight: 700;
+  color: var(--muted); background: #fff;
+  border: 1.5px solid var(--line); border-radius: 999px;
+  padding: .35em 1em; cursor: pointer; text-decoration: none;
+  transition: color .2s, border-color .2s, transform .2s var(--ease-out);
+}
+.share-btn:hover { color: var(--blue); border-color: var(--blue); transform: translateY(-2px); }
+.share-btn.copied { color: #0e7a46; border-color: #0e7a46; }
+
+/* ---------- カテゴリ連動 診断バナー（記事末） ---------- */
+.diag-banner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1.2rem; margin: 3rem 0 0;
+  background: linear-gradient(135deg, var(--sky), #fff 70%);
+  border: 2px solid var(--blue); border-radius: var(--radius);
+  padding: 1.5rem clamp(1.2rem, 2.5vw, 2rem);
+}
+.diag-banner .db-text { flex: 1 1 26em; min-width: min(24em, 100%); }
+.diag-banner .db-kicker { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; color: var(--blue); margin-bottom: .4em; }
+.diag-banner .db-title { display: block; font-family: var(--head); font-weight: 900; font-size: 1.25rem; line-height: 1.4; }
+.diag-banner .db-desc { display: block; font-size: .84rem; color: var(--muted); margin-top: .35em; }
+.diag-banner .btn { flex-shrink: 0; }
+
+/* ---------- 前後記事ナビ ---------- */
+.prev-next {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .8rem;
+  margin: 2.5rem 0 0;
+}
+@media (max-width: 640px) { .prev-next { grid-template-columns: 1fr; } }
+.prev-next .pn {
+  display: block; padding: 1rem 1.2rem;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: #fff; text-decoration: none; color: var(--text);
+  transition: border-color .2s, transform .2s var(--ease-out), box-shadow .2s;
+}
+.prev-next a.pn:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.prev-next .pn span { display: block; font-size: .7rem; font-weight: 700; color: var(--blue); letter-spacing: .1em; margin-bottom: .35em; }
+.prev-next .pn strong { font-size: .88rem; font-weight: 700; line-height: 1.5; background: none; }
+.prev-next .pn-next { text-align: right; }
+.prev-next .pn-empty { border: none; background: none; }
