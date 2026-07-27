@@ -67,12 +67,20 @@ def main():
     for i, line in enumerate(lines):
         d.text((80, y0 + i * 90), line, font=tf, fill=(255, 255, 255), anchor="lm")
 
-    # フッター帯
+    # フッター帯（公式ロゴ白版）
     d.rectangle([0, H - 92, W, H], fill=(11, 36, 71))
-    d.ellipse([80, H - 74, 136, H - 18], fill=(37, 99, 235))
-    d.text((108, H - 44), "七", font=font(34), fill=(255, 255, 255), anchor="mm")
-    d.text((156, H - 46), "AI集客ラボ", font=font(30), fill=(255, 255, 255), anchor="lm")
-    d.text((W - 80, H - 46), "by セブンセンシズ株式会社", font=font(22), fill=(163, 196, 243), anchor="rm")
+    logo_path = ROOT / "site" / "images" / "company" / "logo-white.png"
+    if logo_path.exists():
+        logo = Image.open(logo_path).convert("RGBA")
+        lh = 52
+        lw = int(logo.width * lh / logo.height)
+        logo = logo.resize((lw, lh), Image.LANCZOS)
+        img.paste(logo, (80, H - 46 - lh // 2), logo)
+        tx = 80 + lw + 28
+    else:
+        tx = 80
+    d.text((tx, H - 46), "AI集客ラボ", font=font(30), fill=(255, 255, 255), anchor="lm")
+    d.text((W - 80, H - 46), "セブンセンシズ株式会社", font=font(22), fill=(163, 196, 243), anchor="rm")
 
     out = ROOT / "site" / "images" / slug / "eyecatch.png"
     out.parent.mkdir(parents=True, exist_ok=True)

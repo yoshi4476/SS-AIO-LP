@@ -68,6 +68,8 @@ LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先�
 
 7つの方法は「読める状態にする→答えやすい形にする→選ばれる理由を作る」の3段階に分かれます。
 
+<figure><img src="/images/llmo-taisaku-hoho/steps.png" alt="LLMO対策の3段階: AIが読める状態にする、答えやすい形にする、選ばれる理由をつくる" width="1200" height="400" loading="lazy"><figcaption>LLMO対策の3段階（当メディア作成）</figcaption></figure>
+
 ### 方法1: AIクローラーを許可する
 
 robots.txtでGPTBot・OAI-SearchBot・PerplexityBot・ClaudeBotを許可します。これが全ての前提です。

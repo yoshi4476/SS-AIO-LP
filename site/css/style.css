@@ -83,8 +83,10 @@ html.js .reveal-d3 { transition-delay: .3s; }
   max-width: var(--max-wide); margin: 0 auto; padding: .8rem var(--gutter);
   display: flex; align-items: center; gap: 1.5rem;
 }
-.brand { text-decoration: none; display: flex; align-items: center; gap: .7rem; }
+.brand { text-decoration: none; display: flex; align-items: center; gap: .8rem; }
 .brand-glyph { width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px; }
+.brand-logo { height: 34px; width: auto; flex-shrink: 0; }
+.footer-logo { height: 38px; width: auto; margin-bottom: .7rem; display: block; }
 .brand .mark { font-family: var(--head); font-weight: 900; font-size: 1.2rem; color: var(--navy); line-height: 1.15; }
 .brand .by { display: block; font-family: var(--sans); font-weight: 500; font-size: .6rem; color: var(--muted); letter-spacing: .14em; }
 .global-nav { margin-left: auto; display: flex; gap: 1.5rem; align-items: center; }
@@ -261,6 +263,10 @@ html.js .reveal-d3 { transition-delay: .3s; }
     radial-gradient(60% 90% at 80% 10%, color-mix(in srgb, var(--cat-color, var(--blue)) 55%, transparent), transparent 70%),
     linear-gradient(150deg, var(--navy) 0%, color-mix(in srgb, var(--cat-color, var(--blue)) 60%, var(--navy)) 100%);
 }
+.post-list a:has(.thumb)::before { display: none; }
+.post-list .thumb { display: block; aspect-ratio: 16 / 9; overflow: hidden; }
+.post-list .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease-out); }
+.post-list li:hover .thumb img { transform: scale(1.04); }
 .post-list time { font-family: var(--en); font-size: .74rem; color: var(--muted); padding: 1rem 1.3rem 0; }
 .post-list h3 { font-size: .98rem; font-weight: 700; margin: .3em 0 0; padding: 0 1.3rem 1.2rem; line-height: 1.7; transition: color .2s; }
 .post-list a:hover h3 { color: var(--blue); }

@@ -68,6 +68,8 @@ AI Overviewの表示拡大により、ユーザーがリンクをクリックせ
 
 引用獲得の手順は「土台のSEO→抽出しやすい構造→独自情報→構造化データ→計測」の5段階です。
 
+<figure><img src="/images/aio-taisaku-guide/steps.png" alt="AIO対策の5つの手順: 検索10位以内に入る、冒頭で質問に断言で答える、独自の一次情報を入れる、構造化データを設定する、AI経由の流入を計測する" width="1200" height="400" loading="lazy"><figcaption>AIO対策の5つの手順（当メディア作成）</figcaption></figure>
+
 ### 手順1: まず検索10位以内に入る
 
 AI Overviewの引用元は、大半が検索上位ページから選ばれます。圏外の記事をいくら構造化しても引用されません。

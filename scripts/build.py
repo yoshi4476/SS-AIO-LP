@@ -123,7 +123,11 @@ def build_json_ld(meta, url):
 
 def post_tile(meta):
     cat_name, cat_class = CATEGORIES[meta["category"]]
-    return (f'    <li class="{cat_class}"><a href="/{meta["category"]}/{meta["slug"]}/">'
+    thumb = ""
+    if meta.get("eyecatch"):
+        thumb = (f'<span class="thumb"><img src="{meta["eyecatch"]}" '
+                 f'alt="{meta["title"]}のアイキャッチ画像" width="1200" height="675" loading="lazy"></span>')
+    return (f'    <li class="{cat_class}"><a href="/{meta["category"]}/{meta["slug"]}/">{thumb}'
             f'<time datetime="{meta["date"]}">{str(meta["date"]).replace("-", ".")}</time>'
             f'<h3>{meta["title"]}<span class="tag">{cat_name.replace("・活用全般", "").replace("運用", "")}</span></h3></a></li>')
 
@@ -240,7 +244,7 @@ BLOG_PAGE = """<!DOCTYPE html>
 <meta property="og:title" content="記事一覧｜{site}">
 <meta property="og:url" content="{url}/blog/">
 <meta property="og:site_name" content="{site}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230b2447'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%237cc4ff' font-family='serif' font-weight='bold'%3E七%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="{site} 新着記事" href="/feed.xml">
@@ -256,7 +260,7 @@ BLOG_PAGE = """<!DOCTYPE html>
 <header class="site-header">
   <div class="inner">
     <a class="brand" href="/">
-      <svg class="brand-glyph" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#0b2447"/><text x="32" y="44" font-size="34" text-anchor="middle" fill="#7cc4ff" font-family="serif" font-weight="bold">七</text></svg>
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
       <span class="mark">{site}<span class="by">by セブンセンシズ株式会社</span></span>
     </a>
     <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
@@ -300,6 +304,7 @@ BLOG_PAGE = """<!DOCTYPE html>
 <footer class="site-footer">
   <div class="inner">
     <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
       <div class="brand-f">{site}</div>
       <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
       <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>

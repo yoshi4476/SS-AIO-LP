@@ -31,6 +31,8 @@ MEO対策とは、Googleマップの検索結果で自店舗を上位に表示�
 
 <div class="definition-box"><span class="term">MEO（Map Engine Optimization）とは</span>、「地域名×業種」などで検索されたとき、Googleマップの上位（特に目立つ上位3枠）に自店舗を表示させるための最適化のことです。ローカルSEOとも呼ばれます。</div>
 
+<figure><img src="/images/company/g-ran-img-05.png" alt="MEO対策のイメージ図: 「地名×キーワード」で検索したとき、Googleマップの上位3位以内に自店舗を表示させる" width="1204" height="342" loading="lazy"><figcaption>MEO対策のゴールは「地名×キーワード」検索でマップ上位3位以内に入ること（当社MEO対策サービス「G-ran」資料より）</figcaption></figure>
+
 「近くのラーメン屋」「梅田 美容院」のような検索では、通常の検索結果より上にマップの3枠が表示されます。来店型ビジネスにとって、ここに入れるかどうかは集客数を直接左右します。私たち自身、大阪の店舗を探すときにまずマップを開くのが当たり前になりました。お客様の行動も同じです。
 
 ## マップ上位表示を決める3つの要素

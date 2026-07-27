@@ -33,6 +33,8 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 4つの施策は対立するものではなく、役割分担です。
 
+<figure><img src="/images/ai-shukyaku-guide/steps.png" alt="AI集客の二階建て構造: 土台はSEO（検索で見つかる）とMEO（マップで選ばれる）、その上にAIO（AI回答に引用される）とLLMO（AIチャットで言及される）を重ねる" width="1200" height="400" loading="lazy"><figcaption>AI集客の二階建て構造（当メディア作成）</figcaption></figure>
+
 | 施策 | 役割 | 主な対象 | 詳細記事 |
 |:--|:--|:--|:--|
 | SEO | 土台。検索で見つかる | Google検索 | [AI時代のSEO対策の基本](/seo/ai-jidai-seo-taisaku/) |

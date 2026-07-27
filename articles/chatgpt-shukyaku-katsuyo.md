@@ -33,6 +33,8 @@ faq:
 
 AIは自社の強みやお客様の声を知りません。だからこそ、材料（事実）を人間が渡し、加工（文章化）をAIに任せる分担が、速くて間違いのない使い方になります。
 
+<figure><img src="/images/chatgpt-shukyaku-katsuyo/steps.png" alt="ChatGPT活用の分担: 人間が材料（事実）を渡す、AIが文章に整える、人間が確認して仕上げる" width="1200" height="400" loading="lazy"><figcaption>成果が出るChatGPT活用の分担（当メディア作成）</figcaption></figure>
+
 ## データで見る生成AI活用の現状
 
 日本の生成AI利用率はまだ3割未満で、「使いこなすだけで競合と差がつく」段階にあります。
