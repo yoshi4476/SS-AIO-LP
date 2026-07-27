@@ -46,6 +46,21 @@
     document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
   }
 
+  // ヒーローカードの3Dチルト（マウス追従。タッチ/reduced-motionでは無効）
+  var art = document.querySelector('.hero-art');
+  var heroWrap = document.querySelector('.hero-dark');
+  if (art && heroWrap && !reduce && window.matchMedia('(pointer: fine)').matches) {
+    heroWrap.addEventListener('pointermove', function (e) {
+      var r = art.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+      var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+      dx = Math.max(-0.6, Math.min(0.6, dx));
+      dy = Math.max(-0.6, Math.min(0.6, dy));
+      art.style.transform = 'perspective(900px) rotateY(' + (dx * 12).toFixed(2) + 'deg) rotateX(' + (-dy * 12).toFixed(2) + 'deg)';
+    });
+    heroWrap.addEventListener('pointerleave', function () { art.style.transform = ''; });
+  }
+
   var bar = document.querySelector('.progress-bar');
   if (bar) {
     var onScroll = function () {
