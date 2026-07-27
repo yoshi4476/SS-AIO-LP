@@ -227,7 +227,7 @@ body.lp-doc .lead-band {
   border-left: 4px solid var(--gold);
   border-radius: 8px;
   padding: 1.4rem clamp(1.2rem, 2.5vw, 2.2rem);
-  margin: 2.8rem auto 0;
+  margin: 0 auto;
   max-width: var(--max-wide);
 }
 body.lp-doc .lead-band p {
