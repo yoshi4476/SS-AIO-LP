@@ -106,41 +106,58 @@
           <a class="btn btn-primary" href="#form">無料で現状分析を受ける <span class="arw">→</span></a>
           <a class="btn btn-ghost-light" href="/download/">資料をダウンロード</a>
         </div>
+        <div class="trust-row">
+          <span>現状分析レポート無料</span>
+          <span>2営業日以内にご連絡</span>
+          <span>しつこい営業なし</span>
+        </div>
       </div>
-      <div class="hero-art float-slow" aria-hidden="true">
-        <svg viewBox="0 0 440 360">
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 480 420">
           <defs>
-            <linearGradient id="gAI2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#2563eb"/>
+            <linearGradient id="gCard2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,.2)"/><stop offset="1" stop-color="rgba(255,255,255,.08)"/>
             </linearGradient>
+            <filter id="soft2" x="-40%" y="-40%" width="180%" height="180%">
+              <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#04102c" flood-opacity="0.45"/>
+            </filter>
           </defs>
-          <!-- スマホでAIに聞く人 → AI回答 → 店舗 -->
-          <rect x="30" y="60" width="150" height="240" rx="22" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.35)"/>
-          <rect x="48" y="86" width="114" height="34" rx="17" fill="rgba(255,255,255,.14)"/>
-          <text x="105" y="107" text-anchor="middle" font-size="12" fill="#fff" font-family="sans-serif">近くの◯◯は？</text>
-          <rect x="48" y="132" width="114" height="98" rx="12" fill="rgba(255,255,255,.09)" stroke="rgba(255,255,255,.25)"/>
-          <circle cx="62" cy="148" r="6" fill="url(#gAI2)"/>
-          <text x="74" y="152" font-size="10.5" fill="#fff" font-weight="700" font-family="sans-serif">AIの回答</text>
-          <rect x="60" y="162" width="90" height="6" rx="3" fill="rgba(255,255,255,.4)"/>
-          <rect x="60" y="176" width="72" height="6" rx="3" fill="rgba(255,255,255,.26)"/>
-          <rect x="60" y="196" width="90" height="22" rx="11" fill="url(#gAI2)"/>
-          <text x="105" y="211" text-anchor="middle" font-size="10.5" fill="#fff" font-weight="700" font-family="sans-serif">引用: 貴社</text>
-          <!-- 矢印 -->
-          <path d="M196 180 C 240 180, 240 180, 272 180" stroke="#8fc0ff" stroke-width="2.5" fill="none" marker-end="url(#arw2)"/>
-          <defs><marker id="arw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#8fc0ff"/></marker></defs>
-          <!-- 店舗 -->
-          <g>
-            <rect x="284" y="140" width="130" height="110" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.35)"/>
-            <path d="M284 168 h130" stroke="rgba(255,255,255,.35)"/>
-            <path d="M292 140 l10 -22 h106 l10 22" fill="rgba(37,99,235,.55)" stroke="rgba(255,255,255,.4)"/>
-            <rect x="306" y="188" width="30" height="62" rx="4" fill="rgba(255,255,255,.2)"/>
-            <rect x="352" y="188" width="44" height="34" rx="4" fill="rgba(255,255,255,.14)"/>
-            <text x="349" y="285" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="700" font-family="sans-serif">来店・問い合わせ</text>
+          <g class="float-slow">
+            <rect x="70" y="60" width="340" height="270" rx="24" fill="url(#gCard2)" stroke="rgba(255,255,255,.45)" stroke-width="1.2" filter="url(#soft2)"/>
+            <circle cx="104" cy="98" r="12" fill="#fff" opacity=".95"/>
+            <path d="M100 98l3 3 6-6" stroke="#2563eb" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="126" y="103" font-size="15" fill="#fff" font-weight="700" font-family="sans-serif">AIの回答</text>
+            <text x="386" y="103" font-size="11" fill="rgba(255,255,255,.6)" font-family="sans-serif" text-anchor="end">「大阪 ◯◯ おすすめ」</text>
+            <rect x="96" y="126" width="288" height="9" rx="4.5" fill="rgba(255,255,255,.55)"/>
+            <rect x="96" y="148" width="236" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
+            <rect x="96" y="170" width="262" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
+            <rect x="96" y="192" width="180" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
+            <rect x="96" y="226" width="188" height="42" rx="21" fill="#fff"/>
+            <circle cx="120" cy="247" r="11" fill="#2563eb"/>
+            <text x="120" y="252" font-size="12" fill="#fff" font-weight="800" font-family="serif" text-anchor="middle">七</text>
+            <text x="140" y="252" font-size="13.5" fill="#0b2447" font-weight="700" font-family="sans-serif">引用元: 貴社</text>
+            <rect x="96" y="284" width="130" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
+            <rect x="238" y="284" width="90" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
           </g>
+          <g class="float-slow float-d1">
+            <rect x="18" y="150" width="152" height="46" rx="23" fill="rgba(255,255,255,.96)" filter="url(#soft2)"/>
+            <circle cx="43" cy="173" r="11" fill="#eef4ff"/>
+            <path d="M39 173l3 3 6-6" stroke="#0d9488" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="178" font-size="13" fill="#0b2447" font-weight="700" font-family="sans-serif">現状分析 無料</text>
+          </g>
+          <g class="float-slow float-d2">
+            <rect x="300" y="330" width="160" height="46" rx="23" fill="rgba(255,255,255,.96)" filter="url(#soft2)"/>
+            <circle cx="325" cy="353" r="11" fill="#eef4ff"/>
+            <path d="M325 346a6 6 0 0 1 6 6c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 6-6z" fill="#2563eb"/>
+            <text x="344" y="358" font-size="13" fill="#0b2447" font-weight="700" font-family="sans-serif">マップ 3位以内</text>
+          </g>
+          <circle cx="415" cy="60" r="34" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+          <circle cx="40" cy="360" r="20" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
         </svg>
       </div>
     </div>
   </div>
+  <svg class="hero-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 C 360 10, 1080 10, 1440 70 L1440 70 L0 70 Z" fill="#ffffff"/></svg>
 </div>
 
 <div class="stat-band">

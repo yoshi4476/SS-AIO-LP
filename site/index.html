@@ -100,51 +100,67 @@
           <a class="btn btn-primary" href="/lp/">集客支援サービスを見る <span class="arw">→</span></a>
           <a class="btn btn-ghost-light" href="/aio/">まずは記事を読む</a>
         </div>
+        <div class="trust-row">
+          <span>相談・現状分析は無料</span>
+          <span>AIO・LLMO・SEO・MEOを一社で</span>
+          <span>しつこい営業なし</span>
+        </div>
       </div>
-      <div class="hero-art float-slow" aria-hidden="true">
-        <!-- AI回答に引用されるサイト: ブランドアートワーク -->
-        <svg viewBox="0 0 440 400">
+      <div class="hero-art" aria-hidden="true">
+        <!-- AI回答カード: クリーンなガラス表現 -->
+        <svg viewBox="0 0 480 420">
           <defs>
-            <linearGradient id="gAI" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#7cc4ff"/><stop offset="1" stop-color="#2563eb"/>
+            <linearGradient id="gCard" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,.2)"/><stop offset="1" stop-color="rgba(255,255,255,.08)"/>
             </linearGradient>
-            <radialGradient id="gGlow" cx=".5" cy=".5" r=".5">
-              <stop offset="0" stop-color="rgba(143,192,255,.5)"/><stop offset="1" stop-color="rgba(143,192,255,0)"/>
-            </radialGradient>
+            <linearGradient id="gChip" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#9be8c8"/><stop offset="1" stop-color="#5ad0f0"/>
+            </linearGradient>
+            <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+              <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#04102c" flood-opacity="0.45"/>
+            </filter>
           </defs>
-          <!-- 七光の放射 -->
-          <g stroke="rgba(255,255,255,.22)" stroke-width="1">
-            <line x1="220" y1="180" x2="220" y2="16"/><line x1="220" y1="180" x2="368" y2="60"/>
-            <line x1="220" y1="180" x2="420" y2="170"/><line x1="220" y1="180" x2="380" y2="320"/>
-            <line x1="220" y1="180" x2="220" y2="368"/><line x1="220" y1="180" x2="62" y2="320"/>
-            <line x1="220" y1="180" x2="22" y2="170"/>
+          <!-- メインカード: AIの回答 -->
+          <g class="float-slow">
+            <rect x="70" y="60" width="340" height="270" rx="24" fill="url(#gCard)" stroke="rgba(255,255,255,.45)" stroke-width="1.2" filter="url(#soft)"/>
+            <circle cx="104" cy="98" r="12" fill="#fff" opacity=".95"/>
+            <path d="M100 98l3 3 6-6" stroke="#2563eb" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="126" y="103" font-size="15" fill="#fff" font-weight="700" font-family="sans-serif">AIの回答</text>
+            <text x="386" y="103" font-size="11" fill="rgba(255,255,255,.6)" font-family="sans-serif" text-anchor="end">0.8秒で生成</text>
+            <rect x="96" y="126" width="288" height="9" rx="4.5" fill="rgba(255,255,255,.55)"/>
+            <rect x="96" y="148" width="236" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
+            <rect x="96" y="170" width="262" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
+            <rect x="96" y="192" width="180" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
+            <!-- 引用チップ（主役） -->
+            <rect x="96" y="226" width="204" height="42" rx="21" fill="#fff"/>
+            <circle cx="120" cy="247" r="11" fill="#2563eb"/>
+            <text x="120" y="252" font-size="12" fill="#fff" font-weight="800" font-family="serif" text-anchor="middle">七</text>
+            <text x="140" y="252" font-size="13.5" fill="#0b2447" font-weight="700" font-family="sans-serif">引用元: 貴社サイト</text>
+            <rect x="96" y="284" width="130" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
+            <rect x="238" y="284" width="90" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
           </g>
-          <circle cx="220" cy="180" r="120" fill="url(#gGlow)"/>
-          <!-- AI回答パネル -->
-          <rect x="120" y="96" width="200" height="150" rx="16" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.35)"/>
-          <circle cx="146" cy="122" r="9" fill="url(#gAI)"/>
-          <text x="162" y="127" font-size="13" fill="#fff" font-weight="700" font-family="sans-serif">AIの回答</text>
-          <rect x="138" y="142" width="160" height="7" rx="3.5" fill="rgba(255,255,255,.4)"/>
-          <rect x="138" y="158" width="132" height="7" rx="3.5" fill="rgba(255,255,255,.28)"/>
-          <rect x="138" y="174" width="148" height="7" rx="3.5" fill="rgba(255,255,255,.28)"/>
-          <!-- 引用チップ = 自社 -->
-          <rect x="138" y="196" width="120" height="26" rx="13" fill="url(#gAI)"/>
-          <circle cx="154" cy="209" r="7" fill="#fff"/>
-          <text x="167" y="213" font-size="11.5" fill="#fff" font-weight="700" font-family="sans-serif">引用: 貴社サイト</text>
-          <!-- 惑星ノード -->
-          <g font-family="sans-serif" font-size="10.5" font-weight="700">
-            <circle cx="220" cy="16" r="17" fill="#4f46e5"/><text x="220" y="20" text-anchor="middle" fill="#fff">SEO</text>
-            <circle cx="382" cy="62" r="17" fill="#2563eb"/><text x="382" y="66" text-anchor="middle" fill="#fff">AIO</text>
-            <circle cx="420" cy="170" r="20" fill="#0284c7"/><text x="420" y="174" text-anchor="middle" fill="#fff">LLMO</text>
-            <circle cx="380" cy="320" r="17" fill="#0d9488"/><text x="380" y="324" text-anchor="middle" fill="#fff">MEO</text>
-            <circle cx="220" cy="368" r="14" fill="rgba(255,255,255,.16)"/><text x="220" y="372" text-anchor="middle" fill="#fff">GA4</text>
-            <circle cx="62" cy="320" r="14" fill="rgba(255,255,255,.16)"/><text x="62" y="324" text-anchor="middle" fill="#fff">GSC</text>
-            <circle cx="22" cy="170" r="14" fill="rgba(255,255,255,.16)"/><text x="22" y="174" text-anchor="middle" fill="#fff">CV</text>
+          <!-- 浮遊チップ: 検索1位 -->
+          <g class="float-slow float-d1">
+            <rect x="18" y="150" width="130" height="46" rx="23" fill="rgba(255,255,255,.96)" filter="url(#soft)"/>
+            <circle cx="43" cy="173" r="11" fill="#eef4ff"/>
+            <path d="M39 173l3 3 6-6" stroke="#0d9488" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="178" font-size="13" fill="#0b2447" font-weight="700" font-family="sans-serif">検索 上位表示</text>
           </g>
+          <!-- 浮遊チップ: マップ3位以内 -->
+          <g class="float-slow float-d2">
+            <rect x="300" y="330" width="160" height="46" rx="23" fill="rgba(255,255,255,.96)" filter="url(#soft)"/>
+            <circle cx="325" cy="353" r="11" fill="#eef4ff"/>
+            <path d="M325 346a6 6 0 0 1 6 6c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 6-6z" fill="#2563eb"/>
+            <text x="344" y="358" font-size="13" fill="#0b2447" font-weight="700" font-family="sans-serif">マップ 3位以内</text>
+          </g>
+          <!-- 背景リング -->
+          <circle cx="415" cy="60" r="34" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+          <circle cx="40" cy="360" r="20" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
         </svg>
       </div>
     </div>
   </div>
+  <svg class="hero-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 C 360 10, 1080 10, 1440 70 L1440 70 L0 70 Z" fill="#ffffff"/></svg>
 </div>
 
 <div class="stat-band">
