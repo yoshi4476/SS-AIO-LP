@@ -15,3 +15,4 @@ automation/images/
 # OS/エディタ
 .DS_Store
 Thumbs.db
+__pycache__/
