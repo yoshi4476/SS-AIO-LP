@@ -442,6 +442,18 @@ code { font-family: Consolas, "Courier New", monospace; }
 .form-panel button { width: 100%; margin-top: 1.8rem; border: none; cursor: pointer; font-size: 1.05rem; font-family: inherit; }
 .form-note { font-size: .78rem; color: var(--muted); margin-top: 1rem; text-align: center; }
 
+/* LPヒーロー内フォーム */
+.hero-form { background: #fff; border-radius: 20px; padding: 1.7rem 1.6rem 1.4rem; box-shadow: 0 30px 70px -20px rgba(2,10,30,.55); color: var(--text); max-width: 460px; margin: 0 auto; width: 100%; }
+.hero-form .hf-title { font-family: var(--head); font-weight: 900; font-size: 1.15rem; text-align: center; }
+.hero-form .hf-sub { font-size: .78rem; color: var(--muted); text-align: center; margin: .3em 0 1rem; }
+.hero-form label { display: block; font-weight: 700; font-size: .8rem; margin: .8em 0 .3em; }
+.hero-form input { width: 100%; padding: .7em .9em; border: 1.5px solid var(--line); border-radius: 9px; font-family: inherit; font-size: .95rem; background: var(--bg-alt); }
+.hero-form input:focus { outline: none; border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,.14); }
+.hero-form .consent { display: flex; gap: .5em; align-items: flex-start; font-size: .76rem; font-weight: 500; margin-top: .9em; cursor: pointer; }
+.hero-form .consent input { width: auto; margin-top: .3em; accent-color: var(--blue); }
+.hero-form button { width: 100%; margin-top: 1rem; border: none; cursor: pointer; font-family: inherit; font-size: .98rem; }
+.hero-form .hf-note { font-size: .72rem; color: var(--muted); text-align: center; margin: .7rem 0 0; }
+
 .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: none; background: rgba(11,36,71,.96); backdrop-filter: blur(8px); padding: .7rem 1rem; gap: .7rem; }
 .sticky-cta .btn { flex: 1; padding: .85em .5em; font-size: .9rem; }
 @media (max-width: 720px) { .sticky-cta { display: flex; } body.has-sticky { padding-bottom: 72px; } }

@@ -94,67 +94,45 @@
   </div>
 </header>
 
-<!-- ヒーロー -->
-<div class="hero-dark" data-area="ヒーロー" data-area-id="hero">
-  <div class="hero-watermark" aria-hidden="true">CITED<br>BY AI</div>
-  <div class="inner">
-    <div class="hero-grid">
+<!-- ヒーロー（LP専用構成: 左=訴求 / 右=30秒申込みフォーム） -->
+<div class="hero-dark" data-area="ヒーロー" data-area-id="hero" style="min-height:auto;">
+  <div class="inner" style="padding-bottom:4rem;">
+    <div class="hero-grid" style="grid-template-columns:minmax(0,1.15fr) minmax(300px,460px);">
       <div>
         <span class="kicker kicker-en rise rise-1">AIO × LLMO × SEO × MEO — ONE TEAM</span>
-        <h1 class="rise rise-2">検索の答えをAIが出す時代、<br><em>あなたの会社は引用されていますか？</em></h1>
+        <h1 class="rise rise-2" style="font-size:clamp(2rem,4.4vw,3.4rem);">検索の答えをAIが出す時代、<br><em>あなたの会社は引用されていますか？</em></h1>
         <p class="lead rise rise-3">米国では検索の<strong style="color:#fff;font-size:1.25em;">58.5%</strong>がクリックされずに終わっています（SparkToro調査）。お客様が「AIに聞いて決める」時代、セブンセンシズは<strong style="color:#fff;">AIに引用され、指名で選ばれる</strong>ところまでを設計・運用します。</p>
-        <div class="btn-row rise rise-4">
-          <a class="btn btn-primary" href="#form" data-cta="lp_hero_form">無料で現状分析を受ける <span class="arw">→</span></a>
-          <a class="btn btn-ghost-light" href="/download/" data-cta="lp_hero_dl">資料をダウンロード</a>
-        </div>
-        <div class="trust-row rise rise-5">
+        <div class="trust-row rise rise-4" style="margin-top:1.4rem;">
+          <span><strong style="color:#fff;">3,000店舗</strong>のMEO運営実績</span>
           <span>現状分析レポート無料</span>
-          <span>2営業日以内にご連絡</span>
           <span>しつこい営業なし</span>
         </div>
+        <div class="btn-row rise rise-5" style="margin-top:1.6rem;">
+          <a class="btn btn-ghost-light" href="/download/" data-cta="lp_hero_dl">まずは資料をダウンロード</a>
+        </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 480 420">
-          <defs>
-            <linearGradient id="gCard2" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="rgba(255,255,255,.2)"/><stop offset="1" stop-color="rgba(255,255,255,.08)"/>
-            </linearGradient>
-            <filter id="soft2" x="-40%" y="-40%" width="180%" height="180%">
-              <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#04102c" flood-opacity="0.45"/>
-            </filter>
-          </defs>
-          <g class="float-slow">
-            <rect x="70" y="60" width="340" height="270" rx="24" fill="url(#gCard2)" stroke="rgba(255,255,255,.45)" stroke-width="1.2" filter="url(#soft2)"/>
-            <circle cx="104" cy="98" r="12" fill="#fff" opacity=".95"/>
-            <path d="M100 98l3 3 6-6" stroke="#2563eb" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="126" y="103" font-size="15" fill="#fff" font-weight="700" font-family="sans-serif">AIの回答</text>
-            <text x="386" y="103" font-size="11" fill="rgba(255,255,255,.6)" font-family="sans-serif" text-anchor="end">「大阪 ◯◯ おすすめ」</text>
-            <rect x="96" y="126" width="288" height="9" rx="4.5" fill="rgba(255,255,255,.55)"/>
-            <rect x="96" y="148" width="236" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
-            <rect x="96" y="170" width="262" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
-            <rect x="96" y="192" width="180" height="9" rx="4.5" fill="rgba(255,255,255,.35)"/>
-            <rect x="96" y="226" width="188" height="42" rx="21" fill="#fff"/>
-            <circle cx="120" cy="247" r="11" fill="#2563eb"/>
-            <path d="M114 247l4 4 9-9" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="140" y="252" font-size="13.5" fill="#0b2447" font-weight="700" font-family="sans-serif">引用元: 貴社</text>
-            <rect x="96" y="284" width="130" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
-            <rect x="238" y="284" width="90" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
-          </g>
-          <g class="float-slow float-d1">
-            <rect x="18" y="150" width="152" height="46" rx="23" fill="rgba(255,255,255,.96)" filter="url(#soft2)"/>
-            <circle cx="43" cy="173" r="11" fill="#eef4ff"/>
-            <path d="M39 173l3 3 6-6" stroke="#0d9488" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="62" y="178" font-size="13" fill="#0b2447" font-weight="700" font-family="sans-serif">現状分析 無料</text>
-          </g>
-          <g class="float-slow float-d2">
-            <rect x="300" y="330" width="160" height="46" rx="23" fill="rgba(255,255,255,.96)" filter="url(#soft2)"/>
-            <circle cx="325" cy="353" r="11" fill="#eef4ff"/>
-            <path d="M325 346a6 6 0 0 1 6 6c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 6-6z" fill="#2563eb"/>
-            <text x="344" y="358" font-size="13" fill="#0b2447" font-weight="700" font-family="sans-serif">マップ 3位以内</text>
-          </g>
-          <circle cx="415" cy="60" r="34" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
-          <circle cx="40" cy="360" r="20" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
-        </svg>
+      <div class="rise rise-3">
+        <form class="form-panel hero-form" action="/api/lead" method="post" style="margin:0;box-shadow:0 30px 70px -20px rgba(2,10,30,.55);padding:1.7rem 1.6rem 1.4rem;border-radius:20px;">
+          <input type="hidden" name="form_type" value="無料相談（LPヒーロー）">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <div class="hf-title">無料の現状分析を申し込む</div>
+          <div class="hf-sub">入力30秒｜検索・マップ・AI検索での見え方を分析してご報告します</div>
+          <label>会社名・店舗名 <span class="req">必須</span>
+            <input type="text" name="company" required autocomplete="organization">
+          </label>
+          <label>お名前 <span class="req">必須</span>
+            <input type="text" name="name" required autocomplete="name">
+          </label>
+          <label>メールアドレス <span class="req">必須</span>
+            <input type="email" name="email" required autocomplete="email">
+          </label>
+          <label class="consent">
+            <input type="checkbox" required>
+            <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する</span>
+          </label>
+          <button type="submit" class="btn btn-primary" data-cta="lp_hero_form_submit">無料で現状分析を受ける <span class="arw">→</span></button>
+          <p class="hf-note">2営業日以内にご連絡します。詳しいご相談内容は後ほどお伺いします。</p>
+        </form>
       </div>
     </div>
   </div>
