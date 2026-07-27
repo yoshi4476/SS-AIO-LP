@@ -14,3 +14,13 @@ $prompt = Get-Content -Raw -Encoding UTF8 (Join-Path $proj "automation\pipeline_
 "[$(Get-Date -Format s)] pipeline start" | Out-File $log -Encoding utf8
 & "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $prompt --dangerously-skip-permissions --max-turns 400 *>> $log
 "[$(Get-Date -Format s)] pipeline end (exit=$LASTEXITCODE)" | Out-File $log -Append -Encoding utf8
+
+# Immediate retry (max 2): if the run left BLOCKED articles (score < 90), fix and publish them now
+$retryPrompt = Get-Content -Raw -Encoding UTF8 (Join-Path $proj "automation\retry_prompt.txt")
+for ($i = 1; $i -le 2; $i++) {
+    $buildOut = & python "scripts\build.py" 2>&1 | Out-String
+    if ($buildOut -notmatch "BLOCKED") { break }
+    "[$(Get-Date -Format s)] BLOCKED articles found -> retry $i/2" | Out-File $log -Append -Encoding utf8
+    & "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $retryPrompt --dangerously-skip-permissions --max-turns 400 *>> $log
+    "[$(Get-Date -Format s)] retry $i end (exit=$LASTEXITCODE)" | Out-File $log -Append -Encoding utf8
+}
