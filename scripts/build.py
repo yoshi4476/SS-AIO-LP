@@ -165,6 +165,13 @@ def build_article(path: Path, template: str, related: str = ""):
         print(f"WARN: マーカー不足: {meta['slug']} は強調が{marker_count}箇所"
               f"（基準8箇所以上・推奨12-18箇所。**太字** か ==マーカー== を追加すること）")
 
+    # 文字数チェック（Phase 5基準: 本文5,000字以上。タグ・空白を除いた実文字数で判定）
+    plain = re.sub(r"<[^>]+>", "", content)
+    plain = re.sub(r"\s", "", plain)
+    if len(plain) < 5000:
+        print(f"WARN: 文字数不足: {meta['slug']} は本文{len(plain):,}字"
+              f"（基準5,000字以上。セクション追加・実務情報の深掘りで増強すること）")
+
     eyecatch = ""
     if meta.get("eyecatch"):
         eyecatch = (f'<figure class="article-eyecatch"><img src="{meta["eyecatch"]}" '

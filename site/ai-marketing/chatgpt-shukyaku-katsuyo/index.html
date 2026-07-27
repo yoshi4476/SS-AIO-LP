@@ -175,7 +175,7 @@
   <div class="article-layout">
     <aside class="article-side">
       <div class="side-sticky">
-        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#chatgpt">ChatGPT活用の基本方針</a></li><li><a href="#ai">データで見る生成AI活用の現状</a></li><li><a href="#7">集客に効く7つの活用法</a></li><li><a href="#2_1">そのまま使えるプロンプト例（追加2本）</a></li><li><a href="#_1">業種別の使いどころ早見表</a></li><li><a href="#5_1">社内で運用するための5つのルール</a></li><li><a href="#aiai">「AIを使う」から「AIに選ばれる」へ</a></li><li><a href="#_2">よくある質問</a></li><li><a href="#_3">無料版と有料版、どちらを使うべきか</a></li><li><a href="#1">導入1ヶ月のモデルスケジュール</a></li><li><a href="#_4">まとめ: まず「今週の販促文」から任せてみる</a></li></ol></nav>
+        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#chatgpt">ChatGPT活用の基本方針</a></li><li><a href="#ai">データで見る生成AI活用の現状</a></li><li><a href="#7">集客に効く7つの活用法</a></li><li><a href="#2_1">そのまま使えるプロンプト例（追加2本）</a></li><li><a href="#_1">業種別の使いどころ早見表</a></li><li><a href="#5_1">社内で運用するための5つのルール</a></li><li><a href="#aiai">「AIを使う」から「AIに選ばれる」へ</a></li><li><a href="#_2">うまくいかないときの直し方（プロンプト改善の実例）</a></li><li><a href="#chatgptai">ChatGPT以外のAIとの使い分け</a></li><li><a href="#_3">よくある質問</a></li><li><a href="#_4">無料版と有料版、どちらを使うべきか</a></li><li><a href="#1">導入1ヶ月のモデルスケジュール</a></li><li><a href="#_5">まとめ: まず「今週の販促文」から任せてみる</a></li></ol></nav>
         <div class="side-cta">
           <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
           <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
@@ -359,10 +359,59 @@
 <li>うまくいったプロンプトは共有メモに蓄積する</li>
 <li>迷ったら「お客様に見せて恥ずかしくないか」で判断する</li>
 </ol>
+<p>ルールは作って終わりではなく、朝礼や共有チャットで一度説明し、A4一枚で見える場所に置いてください。私たちがクライアント先で見てきた限り、AI活用が定着する会社とそうでない会社の差は、ツールの選定ではなく「ルールが全員に共有されているか」でした。特にルール2の事実確認は、担当者任せにせず確認者を決めておくと事故を防げます。</p>
 <h2 id="aiai">「AIを使う」から「AIに選ばれる」へ</h2>
 <p>ChatGPTを使いこなす次の段階は、ChatGPTの回答に自社が登場する状態、つまりLLMO対策です。</p>
 <p>私たちが支援現場で感じるのは、AIを業務に使う会社は増えた一方、「AIに自社を推薦させる」発想を持つ会社はまだ少ないという非対称です。だからこそ今は先行者が有利な時期です。具体的な進め方は<a href="/aio/llmo-taisaku-hoho/">LLMO対策の7つの方法</a>で解説しています。</p>
-<h2 id="_2">よくある質問</h2>
+<h2 id="_2">うまくいかないときの直し方（プロンプト改善の実例）</h2>
+<p>生成結果が期待外れのときは、AIのせいにする前に「指示の具体度」を1段上げると大半が解決します。</p>
+<p>私たちがクライアントのAI活用を支援していて最も多い相談は「ありきたりな文章しか出てこない」というものです。原因はほぼ共通していて、<strong>プロンプトに自社の固有情報が入っていない</strong>ことにあります。悪い例と直した例を比べてください。</p>
+<p><strong>改善前（ありきたりな結果になる指示）</strong></p>
+<pre><code>美容室のInstagram投稿を作ってください。
+</code></pre>
+<p><strong>改善後（自社の固有情報を渡した指示）</strong></p>
+<pre><code>あなたは美容室のSNS担当です。以下の情報でInstagram投稿を1本作成してください。
+店の特徴: 完全マンツーマン施術 / 京橋駅徒歩3分 / 白髪ぼかしが得意
+今週のネタ: 梅雨の湿気で広がる髪への対処法を紹介したい
+条件: 120字以内 / 宣伝は最後の1行だけ / 絵文字2個まで
+</code></pre>
+<p>違いは「役割・固有情報・ネタ・条件」の4点が入っているかどうかだけです。<mark>文章力ではなく、材料の渡し方が結果を決めます</mark>。改善後の型は、そのまま他業種にも流用できます。</p>
+<p>このほか、出力が長すぎる場合は「◯字以内」、口調が硬い場合は「話し言葉で」、内容が浅い場合は「初心者がつまずく点を3つ含めて」と、<strong>不満をそのまま条件として追記する</strong>のが改善の近道です。</p>
+<h2 id="chatgptai">ChatGPT以外のAIとの使い分け</h2>
+<p>集客業務では、ChatGPTを軸にしつつ、目的に応じて他の生成AIを併用すると効率がさらに上がります。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">AI</th>
+<th style="text-align: left;">得意なこと</th>
+<th style="text-align: left;">集客での使いどころ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ChatGPT</td>
+<td style="text-align: left;">文章作成全般・アイデア出し</td>
+<td style="text-align: left;">本記事の7つの活用法すべて</td>
+</tr>
+<tr>
+<td style="text-align: left;">Gemini</td>
+<td style="text-align: left;">Google検索・スプレッドシート等との連携</td>
+<td style="text-align: left;">検索トレンドを踏まえたネタ探し</td>
+</tr>
+<tr>
+<td style="text-align: left;">Claude</td>
+<td style="text-align: left;">長文の読解・自然な日本語の文章</td>
+<td style="text-align: left;">長いインタビューの要約・記事整形</td>
+</tr>
+<tr>
+<td style="text-align: left;">Perplexity</td>
+<td style="text-align: left;">出典つきの情報検索</td>
+<td style="text-align: left;">競合調査・データの出典確認</td>
+</tr>
+</tbody>
+</table></div>
+<p>ただし、最初から全部を使い分ける必要はありません。<strong>まず1つを使い切ってから広げる</strong>ほうが定着します。なお、これらのAIに「自社を答えさせる」対策は<a href="/aio/llmo-taisaku-hoho/">LLMO対策</a>で解説しています。</p>
+<h2 id="_3">よくある質問</h2>
 <div class="faq">
 <details><summary>無料版のChatGPTでも集客に使えますか？</summary><p class="faq-a">使えます。本記事の7つの活用法はすべて無料版でも実行できます。頻度が増えたら有料版を検討してください。</p></details>
 <details><summary>ChatGPTの文章をそのまま公開してもいいですか？</summary><p class="faq-a">おすすめしません。事実確認と自社らしさの追記を必ず行ってください。誤情報の公開は信頼を損ないます。</p></details>
@@ -371,7 +420,7 @@
 <details><summary>ChatGPTに自社が出てくるようにするには？</summary><p class="faq-a">それはLLMO対策の領域です。自社サイトの情報をAIが引用しやすい形に整える施策が必要です。</p></details>
 </div>
 
-<h2 id="_3">無料版と有料版、どちらを使うべきか</h2>
+<h2 id="_4">無料版と有料版、どちらを使うべきか</h2>
 <p>結論として、まず無料版で1ヶ月使い、毎日使うようになったら有料版に切り替えるのが最も無駄のない順序です。</p>
 <div class="table-wrap"><table>
 <thead>
@@ -440,7 +489,7 @@
 </tbody>
 </table></div>
 <p>最初の1週間は<strong>「品質」より「時間短縮の体感」を優先</strong>してください。効果を体で理解した人は、その後のルール整備にも前向きになります。逆に初週から完璧な文章を求めると、「AIは使えない」という結論で止まりがちです。</p>
-<h2 id="_4">まとめ: まず「今週の販促文」から任せてみる</h2>
+<h2 id="_5">まとめ: まず「今週の販促文」から任せてみる</h2>
 <p>ChatGPT活用の第一歩は、大がかりな導入プロジェクトではなく、今週書く予定のSNS投稿や口コミ返信を1本任せてみることです。私たちの事務所でも、最初に定着したのは高度な自動化ではなく、この「1本だけ任せる」使い方でした。材料を渡して整えさせ、人間が仕上げる。この分担に慣れることが、AI時代の集客体制づくりの最短ルートになります。</p>
 
       <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
