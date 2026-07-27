@@ -521,38 +521,3 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 .site-footer a:hover { color: #8fc0ff; }
 .site-footer .copyright { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: 1.2rem; font-size: .74rem; color: rgba(255,255,255,.45); }
 @media (max-width: 640px) { .site-footer .inner { grid-template-columns: 1fr; } }
-
-/* ---------- Anima風バリアント（トップ試作: .hero-dark に .hero-anima を併記） ---------- */
-.hero-anima { background: #07070e; }
-.hero-anima::before { /* 紫→青→シアンのオーロラグロー */
-  background:
-    radial-gradient(38% 46% at 15% 12%, rgba(139,92,246,.5), transparent 70%),
-    radial-gradient(34% 42% at 85% 20%, rgba(37,99,235,.52), transparent 70%),
-    radial-gradient(30% 40% at 55% 95%, rgba(34,211,238,.26), transparent 70%);
-}
-.hero-anima::after { /* ドットグリッドのみ（斜光ビームなし） */
-  background: radial-gradient(rgba(255,255,255,.13) 1px, transparent 1px);
-  background-size: 34px 34px;
-  mask-image: radial-gradient(110% 90% at 50% 0%, #000 20%, transparent 92%);
-}
-.hero-anima .hero-watermark { -webkit-text-stroke-color: rgba(255,255,255,.06); }
-.hero-anima h1 { font-size: clamp(2.5rem, 6vw, 5.2rem); line-height: 1.14; letter-spacing: -.01em; text-shadow: none; }
-.hero-anima h1 em {
-  background: linear-gradient(90deg, #a78bfa, #60a5fa 30%, #22d3ee 55%, #f0abfc 80%, #a78bfa);
-  background-size: 300% 100%; -webkit-background-clip: text; background-clip: text;
-}
-.hero-anima .kicker { border-color: rgba(167,139,250,.5); background: rgba(139,92,246,.16); }
-.hero-anima .kicker::before { background: #a78bfa; box-shadow: 0 0 10px #a78bfa; }
-.hero-anima .lead { color: rgba(233,236,250,.84); }
-.hero-anima .lead strong { color: #fff; }
-.hero-anima .btn-primary {
-  background: #fff; color: #0a0a16; border-radius: 999px;
-  box-shadow: 0 14px 36px -10px rgba(139,92,246,.55);
-}
-.hero-anima .btn-primary:hover { background: #edeaff; color: #0a0a16; }
-.hero-anima .btn-ghost-light { border-radius: 999px; border-color: rgba(255,255,255,.4); }
-.hero-anima .trust-row { color: rgba(255,255,255,.78); }
-.hero-anima .trust-row span::before { background: linear-gradient(135deg, #8b5cf6, #3b82f6); }
-.hero-anima .hero-art::before { border-color: rgba(167,139,250,.28); }
-.hero-anima .hero-art svg { filter: drop-shadow(0 30px 70px rgba(109,40,217,.45)); }
-.hero-anima .ticker-track { color: rgba(255,255,255,.28); }
