@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEO診断（無料・30秒）｜Googleマップ対策の整備度を採点</title>
+<meta name="description" content="8つの質問でGoogleビジネスプロフィールの整備度を100点満点で無料診断。判定ランクと「最初にやるべき3つ」をその場で表示します。登録不要。">
+<link rel="canonical" href="https://example.com/diagnosis/meo/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="MEO診断（無料・30秒）｜Googleマップ対策の整備度を採点">
+<meta property="og:description" content="8つの質問でGoogleビジネスプロフィールの整備度を100点満点で無料診断。判定ランクと「最初にやるべき3つ」をその場で表示します。登録不要。">
+<meta property="og:url" content="https://example.com/diagnosis/meo/">
+<meta property="og:image" content="https://example.com/images/ogp-default.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<!-- GA4: 計測開始時にコメントを外し G-XXXXXXXXXX を実IDに差し替える
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/diagnosis/">無料診断</a></li>
+    <li aria-current="page">MEO診断（マップ対策）</li>
+  </ol>
+</nav>
+
+<section class="hero" style="text-align:center;padding-bottom:1.5rem;">
+  <span class="kicker">FREE DIAGNOSIS</span>
+  <h1>MEO診断（マップ対策）</h1>
+  <p class="lead" style="margin-left:auto;margin-right:auto;">8つの質問で、Googleマップ集客の整備度を<strong>100点満点で採点</strong>します。判定ランクと最初にやるべき3つが、その場でわかります。登録不要・30秒。</p>
+</section>
+
+<section class="section" style="padding-top:1rem;">
+  <div class="quiz-panel">
+    <div class="q-progress"><span id="qbar" style="width:0%"></span></div>
+    <div id="qbody"></div>
+  </div>
+</section>
+
+<script>window.QUIZ = {"type": "meo", "max": 100, "crossUrl": "/diagnosis/aio/", "crossLabel": "AIO診断（AI検索対応）もやってみる", "questions": [{"t": "Googleビジネスプロフィールの状態は？", "o": [["未登録／わからない", 0], ["登録したが放置している", 4], ["オーナー確認済みで基本情報は入力", 8], ["定期的に情報を見直している", 12]]}, {"t": "店名・住所・電話は、サイトや他媒体と完全に一致していますか？", "o": [["不一致がある／確認していない", 0], ["だいたい一致している", 5], ["完全に一致している", 10]]}, {"t": "カテゴリ・属性・サービス欄の設定は？", "o": [["未設定／わからない", 0], ["メインカテゴリのみ", 4], ["追加カテゴリまで設定", 8], ["属性・サービスまで埋めている", 12]]}, {"t": "写真の登録枚数は？", "o": [["0枚〜数枚", 0], ["10枚未満", 4], ["10〜19枚", 8], ["20枚以上+定期追加", 12]]}, {"t": "口コミの状況は？", "o": [["ほとんどない", 0], ["あるが返信していない", 4], ["一部に返信している", 8], ["全件返信+依頼の仕組みがある", 14]]}, {"t": "投稿（最新情報）の頻度は？", "o": [["投稿していない", 0], ["思い出したときだけ", 4], ["月に数回", 8], ["週1回以上", 12]]}, {"t": "インサイト（表示回数・検索語）の確認は？", "o": [["見たことがない", 0], ["たまに見る", 4], ["月1回は確認", 8], ["検索語まで分析している", 12]]}, {"t": "「地域名×業種」で検索したとき、自店の順位は？", "o": [["圏外／確認していない", 0], ["4〜10位あたり", 8], ["3位以内（マップ枠）", 16]]}], "bands": [[80, {"name": "判定A: MEO上級運用", "desc": "土台は高水準です。次はAI検索（AIO）対応と口コミのAI要約対策で、さらに一歩先へ。", "acts": ["AIO診断で次の伸びしろを確認する", "口コミ返信に事実情報（駐車場・営業時間等）を織り込む", "インサイトの検索語から投稿・サービス欄を毎月更新"]}], [60, {"name": "判定B: あと一歩で上位圏", "desc": "基本はできています。「継続の仕組み化」で差がつく段階です。", "acts": ["口コミ依頼のQRコード導線を今週つくる", "週1投稿を仕組み化（年間ネタカレンダー）", "写真を20枚以上に増やし、季節ごとに追加"]}], [40, {"name": "判定C: 土台の整備が必要", "desc": "機会損失が発生している可能性が高い状態です。基本整備から始めましょう。", "acts": ["カテゴリ・属性・サービス欄を埋め切る", "店名・住所・電話の表記をすべての媒体で統一", "全口コミに返信する（過去分から）"]}], [0, {"name": "判定D: 今すぐ着手を", "desc": "競合より先にマップで見つけてもらう大きな伸びしろがあります。登録・整備から始めれば数週間で変化が見えます。", "acts": ["Googleビジネスプロフィールのオーナー確認を完了する", "基本情報（営業時間・電話・写真10枚）を登録", "MEO対策のやり方7ステップの記事を読みながら整備"]}]], "links": [["MEO対策のやり方7ステップ", "/meo/meo-taisaku-yarikata/"], ["口コミを増やす方法5選", "/meo/kuchikomi-fuyasu-hoho/"]]};</script>
+<script src="/js/quiz.js"></script>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/meo/">MEO診断</a>
+      <a href="/diagnosis/aio/">AIO診断</a>
+      <a href="/site-audit/">サイト診断</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
