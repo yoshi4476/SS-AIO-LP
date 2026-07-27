@@ -51,7 +51,7 @@ CATEGORIES = {
     "ai-marketing": ("AI集客・活用全般", "cat-ai"),
 }
 
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/", "tokushoho/", "blog/", "glossary/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/", "tokushoho/", "blog/", "glossary/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/", "author/haraguchi/"]
 
 
 def jp_date(iso: str) -> str:
@@ -96,6 +96,8 @@ def build_json_ld(meta, url):
             "datePublished": str(meta["date"]),
             "dateModified": str(meta["modified"]),
             "author": {"@type": "Person", "name": AUTHOR_NAME, "url": AUTHOR_URL},
+            "editor": {"@type": "Person", "name": "原口 優", "jobTitle": "代表取締役",
+                       "url": f"{SITE_URL}/author/haraguchi/"},
             "publisher": {"@type": "Organization", "name": ORG_NAME, "url": SITE_URL},
             "inLanguage": "ja",
         },
