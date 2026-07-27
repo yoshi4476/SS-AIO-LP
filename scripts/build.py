@@ -146,7 +146,7 @@ def related_html(meta, all_metas):
             f'<ul class="post-list">\n{tiles}\n  </ul></section>')
 
 
-def build_article(path: Path, template: str, related: str = ""):
+def build_article(path: Path, template: str, related: str = "", unpublished_urls=None):
     meta, body = parse_article(path)
     cat_name, cat_class = CATEGORIES[meta["category"]]
     url = f"{SITE_URL}/{meta['category']}/{meta['slug']}/"
@@ -158,6 +158,17 @@ def build_article(path: Path, template: str, related: str = ""):
         "</table>", "</table></div>")
     # 装飾記法: ==テキスト== → <mark>（黄マーカー）。CSSでstrong=黄マーカー等も自動適用
     content = re.sub(r"==([^=<>\n]+?)==", r"<mark>\1</mark>", content)
+
+    # 連鎖隔離の防止: 未公開（BLOCKED）記事への内部リンクはテキスト化して404を出さない。
+    # 元のMarkdownは変更しないため、リンク先が公開されれば次回ビルドで自動的にリンクへ戻る。
+    if unpublished_urls:
+        def _unwrap(m):
+            if m.group(1).rstrip("/") + "/" in unpublished_urls:
+                print(f"INFO: 未公開記事へのリンクをテキスト化: {meta['slug']} → {m.group(1)}"
+                      "（リンク先の公開後、再ビルドで自動復活）")
+                return m.group(2)
+            return m.group(0)
+        content = re.sub(r'<a href="(/[^":]+?)"[^>]*>(.*?)</a>', _unwrap, content)
 
     # マーカー数チェック（自動生成記事の装飾漏れ検出。基準: 8箇所以上、推奨12-18）
     marker_count = content.count("<strong>") + content.count("<mark>")
@@ -405,7 +416,7 @@ def main():
 
     # 品質審査ゲート: score(100点満点) 90点未満・未審査はアップロードしない
     QUALITY_GATE = 90
-    paths, all_metas, blocked = [], [], []
+    paths, all_metas, blocked, blocked_metas = [], [], [], []
     for p in sorted(ARTICLES.glob("*.md")):
         if p.name.startswith("_"):
             continue
@@ -413,18 +424,31 @@ def main():
         sc = meta.get("score")
         if sc is None:
             blocked.append(f"{meta['slug']}: 未審査（フロントマターに score がない）")
+            blocked_metas.append(meta)
             continue
         if sc < QUALITY_GATE:
             blocked.append(f"{meta['slug']}: {sc}点 < 基準{QUALITY_GATE}点")
+            blocked_metas.append(meta)
             continue
         paths.append(p)
         all_metas.append(meta)
     for b in blocked:
         print(f"BLOCKED(公開不可): {b} → 修正・再審査後に score を更新してください")
 
+    # 隔離記事の生成済みHTMLを物理削除（過去ビルドの残骸が配信されるのを防ぐ）
+    unpublished_urls = set()
+    for meta in blocked_metas:
+        unpublished_urls.add(f"/{meta['category']}/{meta['slug']}/")
+        stale = SITE / meta["category"] / meta["slug"]
+        if stale.exists():
+            import shutil
+            shutil.rmtree(stale)
+            print(f"REMOVED: 隔離記事の生成HTMLを削除: {stale.relative_to(SITE)}/")
+
     for path in paths:
         meta = next(m for m in all_metas if m["slug"] == parse_article(path)[0]["slug"])
-        meta, url = build_article(path, template, related_html(meta, all_metas))
+        meta, url = build_article(path, template, related_html(meta, all_metas),
+                                  unpublished_urls=unpublished_urls)
         entries.append((meta, url))
         if url not in llms:
             warns.append(f"llms.txt 未追記: {meta['title']} -> {url}")
