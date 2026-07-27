@@ -365,3 +365,87 @@ body.lp-doc [data-area-id="price"] .section-head h2,
 body.lp-doc [data-area-id="price"] .section-head .sub { color: #f6f4ee; }
 body.lp-doc [data-area-id="price"] .section-head .sub strong { color: var(--gold-soft); background: none; }
 body.lp-doc [data-area-id="price"] .section-head .en::before { color: #fff; }
+
+/* ============================================================
+   v4: 黒背景の全廃。ヒーローはオウンドメディアと同じブルーに統一
+   ============================================================ */
+
+/* ---------- ヒーロー: メディアトップと同じ明るいブルー ---------- */
+body.lp-doc .hero-dark {
+  background: linear-gradient(160deg, #0d3585 0%, #1d4ed8 52%, #3b82f6 100%);
+  color: #fff;
+}
+body.lp-doc .hero-dark::before {
+  background:
+    radial-gradient(36% 42% at 80% 18%, rgba(147,197,253,.7), transparent 70%),
+    radial-gradient(30% 36% at 10% 88%, rgba(96,165,250,.55), transparent 70%),
+    radial-gradient(22% 28% at 55% 45%, rgba(219,234,254,.3), transparent 70%);
+  filter: blur(44px);
+}
+body.lp-doc .hero-dark::after {
+  background:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 100%);
+}
+body.lp-doc .hero-dark h1 { color: #fff; }
+body.lp-doc .hero-dark h1 em {
+  color: var(--gold-soft);
+  border-bottom-color: rgba(232,199,102,.6);
+}
+body.lp-doc .hero-dark .lead { color: rgba(240,244,250,.92); }
+body.lp-doc .hero-dark .lead strong { color: #fff !important; background: none; }
+body.lp-doc .trust-row { color: rgba(255,255,255,.88); }
+body.lp-doc .trust-row strong { color: #fff !important; background: none; }
+body.lp-doc .trust-row span::before { background: rgba(255,255,255,.22); color: #fff; }
+body.lp-doc .kicker {
+  color: #fff;
+  border-color: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.12);
+}
+body.lp-doc .kicker::before { background: #fff; }
+body.lp-doc .btn-ghost-light { color: #fff; border-color: rgba(255,255,255,.5); }
+
+/* ---------- 料金: 黒廃止 → 紙白 ---------- */
+body.lp-doc [data-area-id="price"] { background: var(--paper); }
+body.lp-doc [data-area-id="price"] .section-head h2 { color: var(--ink); }
+body.lp-doc [data-area-id="price"] .section-head .sub { color: #5a5546; }
+body.lp-doc [data-area-id="price"] .section-head .sub strong {
+  color: var(--ink);
+  background: linear-gradient(transparent 58%, rgba(212,175,55,.32) 58%);
+}
+body.lp-doc [data-area-id="price"] .section-head .en::before { color: var(--ink); }
+
+/* ---------- 表ヘッダー: 黒系廃止 → 生成り ---------- */
+body.lp-doc .table-wrap table thead th,
+body.lp-doc table thead th {
+  background: #f0ead7;
+  color: var(--ink);
+  border-color: #e2dbc4;
+}
+
+/* ---------- CTAブロック: 黒廃止 → 金縁の生成り ---------- */
+body.lp-doc .cta {
+  background: #fdf8ea;
+  border: 1px solid rgba(183,146,46,.5);
+}
+body.lp-doc .cta .cta-copy { color: var(--ink); }
+body.lp-doc .cta .cta-sub { color: #6b6553; }
+
+/* ---------- sticky CTA: 黒廃止 → 白 ---------- */
+body.lp-doc .sticky-cta {
+  background: rgba(255,255,255,.97);
+  border-top: 1px solid var(--line-warm);
+  box-shadow: 0 -10px 30px rgba(35,32,26,.1);
+  color: var(--ink);
+}
+body.lp-doc .sticky-cta a:not(.btn) { color: var(--ink); }
+
+/* ---------- CV帯の均整: 本文+補足の2段構成 ---------- */
+body.lp-doc .lead-band { align-items: center; }
+body.lp-doc .lead-band .lb-text { flex: 1 1 32em; min-width: min(30em, 100%); }
+body.lp-doc .lead-band .lb-main { margin: 0; font-size: 1.02rem; font-weight: 700; line-height: 1.7; }
+body.lp-doc .lead-band .lb-sub { margin: .35em 0 0; font-size: .78rem; color: #6b6553; font-weight: 500; }
+body.lp-doc .lead-band .lb-sub a { color: #6b6553; }
+body.lp-doc .lead-band .btn { flex-shrink: 0; }
