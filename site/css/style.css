@@ -290,10 +290,28 @@ main.article { max-width: 1360px; margin: 0 auto; padding: 3rem var(--gutter) 4r
 .article-meta { font-size: .78rem; color: var(--muted); display: flex; gap: 1.2em; flex-wrap: wrap; }
 .article-eyecatch { margin: 1.8rem 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
 
-main.article h2 { font-size: 1.42rem; margin: 2.8em 0 1em; padding: .6em 1.1em; background: var(--sky); border-left: 5px solid var(--blue); border-radius: 0 12px 12px 0; }
-main.article h3 { font-size: 1.16rem; margin: 2.2em 0 .8em; padding-bottom: .35em; border-bottom: 2px solid var(--line); }
-main.article h4 { font-size: 1rem; margin: 1.8em 0 .6em; }
-main.article strong { background: linear-gradient(transparent 66%, var(--sky-2) 66%); }
+main.article h2 { font-size: 1.45rem; margin: 2.8em 0 1em; padding: .6em 1.1em; background: var(--sky); border-left: 5px solid var(--blue); border-radius: 0 12px 12px 0; }
+main.article h3 { font-size: 1.18rem; margin: 2.2em 0 .8em; padding: 0 0 .35em .8em; border-left: 4px solid var(--sky-2); border-bottom: 2px solid var(--line); }
+main.article h4 { font-size: 1.02rem; margin: 1.8em 0 .6em; color: var(--blue-deep); }
+main.article h4::before { content: "▶ "; font-size: .8em; color: var(--blue); }
+
+/* ---------- 記事本文の強調・装飾（自動生成記事にも全適用） ---------- */
+main.article .article-body { font-size: 1.05rem; }
+main.article strong { background: linear-gradient(transparent 58%, #ffe873 58%); padding: 0 .12em; font-weight: 700; }
+main.article mark { background: linear-gradient(transparent 45%, #ffef9e 45%); padding: 0 .12em; color: inherit; }
+main.article mark.blue, main.article .marker-blue { background: linear-gradient(transparent 45%, var(--sky-2) 45%); padding: 0 .12em; }
+main.article .txt-red { color: #d92d20; font-weight: 700; }
+main.article .txt-blue { color: var(--blue-deep); font-weight: 700; }
+main.article .big { font-size: 1.3em; font-weight: 700; line-height: 1.7; }
+main.article em { font-style: normal; font-weight: 700; color: var(--blue-deep); border-bottom: 2px dotted var(--blue); }
+/* H2直下の1文結論を自動で目立たせる（パイプラインの「H2直下1文結論」ルールと連動） */
+main.article .article-body h2 + p { font-size: 1.1em; font-weight: 600; color: var(--navy); }
+/* リストの視認性 */
+main.article .article-body ul > li::marker { color: var(--blue); }
+main.article .article-body ol > li::marker { color: var(--blue); font-weight: 700; }
+main.article .article-body li { margin: .35em 0; }
+/* 冒頭の断言段落をリード扱いで一回り大きく */
+main.article .article-body > p:first-child { font-size: 1.13em; line-height: 2; }
 
 .toc { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-alt); padding: 1.4em 1.8em; margin: 2em 0; }
 .toc .toc-title { font-weight: 700; font-size: .88rem; letter-spacing: .14em; display: flex; align-items: center; gap: .6em; }

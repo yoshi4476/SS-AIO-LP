@@ -149,6 +149,8 @@ def build_article(path: Path, template: str, related: str = ""):
     content = md.convert(body)
     content = content.replace("<table>", '<div class="table-wrap"><table>').replace(
         "</table>", "</table></div>")
+    # 装飾記法: ==テキスト== → <mark>（黄マーカー）。CSSでstrong=黄マーカー等も自動適用
+    content = re.sub(r"==([^=<>\n]+?)==", r"<mark>\1</mark>", content)
 
     eyecatch = ""
     if meta.get("eyecatch"):
