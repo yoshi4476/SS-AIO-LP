@@ -98,4 +98,4 @@ GA4の参照元レポートで `chatgpt.com` `perplexity.ai` `gemini.google.com`
 
 ## まとめ: LLMOは「AIに読ませて、答えさせる」設計
 
-LLMO対策は、AIがサイトを読める状態にし、切り出して使える形で独自情報を提供する施策です。まずはrobots.txtの確認とllms.txtの設置という「読める状態づくり」から始めてください。土台となるSEOの進め方は[AI時代のSEO対策の基本](/seo/ai-jidai-seo-taisaku/)をあわせてご覧ください。
+LLMO対策は、AIがサイトを読める状態にし、切り出して使える形で独自情報を提供する施策です。まずはrobots.txtの確認とllms.txtの設置という「読める状態づくり」から始めてください。私たちも当メディアの構築では、この2つを公開前の必須作業として最初に組み込みました。土台となるSEOの進め方は[AI時代のSEO対策の基本](/seo/ai-jidai-seo-taisaku/)をあわせてご覧ください。
