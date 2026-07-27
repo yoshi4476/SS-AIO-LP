@@ -8,10 +8,13 @@
 - コーポレートサイト: https://www.7senses.co.jp/
 
 ## 主要ページ
+- [AI集客用語集](https://example.com/glossary/): AIO・LLMO等の基本用語12個を60字以内で定義
+- [記事一覧](https://example.com/blog/): 全記事の新着順一覧
 - [AIO・SEO・MEO集客支援サービス](https://example.com/lp/): AI検索時代の集客を一気通貫で支援。無料現状分析レポート付き
 - [運営者情報](https://example.com/about/): 運営会社の概要と編集方針
 
 ## 主要コンテンツ
+- [AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像](https://example.com/ai-marketing/ai-shukyaku-guide/): 4施策の関係と着手順をまとめたピラー記事
 - [AIO対策とは？AI検索に引用される5つの手順](https://example.com/aio/aio-taisaku-guide/): AI検索に引用されるための5つの実践手順を解説
 - [LLMO対策とは？ChatGPTに引用される7つの方法](https://example.com/aio/llmo-taisaku-hoho/): AIチャットに引用されるための7つの実践方法と計測のやり方
 - [AI時代のSEO対策とは？中小企業がやるべき5つの基本](https://example.com/seo/ai-jidai-seo-taisaku/): 検索上位とAI引用の両方を狙うSEOの基本を優先順位つきで解説
