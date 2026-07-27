@@ -41,7 +41,7 @@ SITE_NAME = "AI集客ラボ"  # TODO: メディア名確定後に変更（PROJEC
 ORG_NAME = "セブンセンシズ株式会社"
 AUTHOR_NAME = "セブンセンシズ編集部"  # TODO: 著者確定後に変更
 AUTHOR_ROLE = "AI集客・MEO/SEO運用の実務チーム"  # TODO
-AUTHOR_BIO = "3,000店舗の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
+AUTHOR_BIO = "通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
 AUTHOR_URL = f"{SITE_URL}/about/"
 
 CATEGORIES = {
