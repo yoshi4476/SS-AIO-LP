@@ -25,13 +25,24 @@ CAT_COLORS = {
 }
 
 
+FONT_PATHS = [
+    # Windows（ローカル実行）
+    r"C:\Windows\Fonts\YuGothB.ttc", r"C:\Windows\Fonts\meiryob.ttc",
+    # Linux/GitHub Actions（fonts-noto-cjk。ディストリによって配置が異なる）
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJKjp-Bold.otf",
+    "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
+]
+
+
 def font(size):
-    for p in [r"C:\Windows\Fonts\YuGothB.ttc", r"C:\Windows\Fonts\meiryob.ttc"]:
+    for p in FONT_PATHS:
         try:
             return ImageFont.truetype(p, size)
         except OSError:
             continue
-    return ImageFont.load_default()
+    raise SystemExit("日本語フォントが見つかりません（Linuxは fonts-noto-cjk を、"
+                     "Windowsは游ゴシック/メイリオを確認）。文字化け画像の生成を防ぐため中断します")
 
 
 def main():

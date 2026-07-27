@@ -26,8 +26,18 @@ LINE = (211, 224, 240)
 BG = (245, 248, 252)
 
 
+FONT_PATHS = [
+    # Windows（ローカル実行）
+    r"C:\Windows\Fonts\YuGothB.ttc", r"C:\Windows\Fonts\meiryob.ttc",
+    # Linux/GitHub Actions（fonts-noto-cjk）
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJKjp-Bold.otf",
+    "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
+]
+
+
 def font(size):
-    for p in [r"C:\Windows\Fonts\YuGothB.ttc", r"C:\Windows\Fonts\meiryob.ttc"]:
+    for p in FONT_PATHS:
         try:
             return ImageFont.truetype(p, size)
         except OSError:

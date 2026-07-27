@@ -1,0 +1,111 @@
+name: Article Pipeline
+
+# JST = UTC+9。cronはUTC表記（Actionsの仕様）
+on:
+  schedule:
+    - cron: "0 23 * * *"   # JST 08:00 — 朝の記事作成
+    - cron: "0 10 * * *"   # JST 19:00 — 夜の記事作成
+    - cron: "30 12 * * *"  # JST 21:30 — 同日救済（未公開があれば再挑戦）
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "main=記事作成 / rescue=救済チェックのみ"
+        type: choice
+        options: [main, rescue]
+        default: main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: article-pipeline
+  cancel-in-progress: false
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 実行モード判定（21:30の枠だけ救済モード）
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "30 12 * * *" ]; then
+            echo "mode=rescue" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=main" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 依存インストール（Python・日本語フォント・Claude Code）
+        run: |
+          pip install markdown pyyaml pillow
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
+          npm install -g @anthropic-ai/claude-code
+
+      - name: Git識別情報の設定
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+
+      - name: 記事パイプライン実行（Phase 1〜7）
+        if: steps.mode.outputs.mode == 'main'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          claude -p "$(cat automation/pipeline_prompt.txt)" \
+            --dangerously-skip-permissions --max-turns 400
+
+      - name: 公開失敗の即時リトライ（最大2回）
+        if: steps.mode.outputs.mode == 'main'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          for i in 1 2; do
+            out=$(python scripts/build.py); echo "$out"
+            echo "$out" | grep -q "BLOCKED" || break
+            echo "::warning::BLOCKED記事あり — リトライ $i/2"
+            claude -p "$(cat automation/retry_prompt.txt)" \
+              --dangerously-skip-permissions --max-turns 400
+          done
+
+      - name: 同日救済チェック（BLOCKED or 本日分ゼロなら再挑戦）
+        if: steps.mode.outputs.mode == 'rescue'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          out=$(python scripts/build.py); echo "$out"
+          today=$(date +%F)
+          if ! echo "$out" | grep -q "BLOCKED" && grep -lq "date: $today" articles/*.md; then
+            echo "リトライ不要（BLOCKEDなし・本日分の記事あり）"
+            exit 0
+          fi
+          claude -p "$(cat automation/retry_prompt.txt)" \
+            --dangerously-skip-permissions --max-turns 400
+
+      - name: 最終ビルドとコミット
+        run: |
+          python scripts/build.py
+          git add -A
+          if git diff --cached --quiet; then
+            echo "変更なし — コミットをスキップ"
+          else
+            git commit -m "publish: auto pipeline $(date '+%Y-%m-%d %H:%M JST')"
+            git push
+          fi
