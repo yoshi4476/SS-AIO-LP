@@ -334,6 +334,7 @@ BLOG_PAGE = """<!DOCTYPE html>
       <a href="/seo/">SEO運用</a>
       <a href="/meo/">MEO運用</a>
       <a href="/ai-marketing/">AI集客</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金</a>
       <a href="/lp/" class="nav-cta">無料相談</a>
     </nav>
   </div>
@@ -353,6 +354,8 @@ BLOG_PAGE = """<!DOCTYPE html>
 </section>
 
 <section class="section" style="padding-top:1rem;">
+  <input type="search" id="blogSearch" class="blog-search" placeholder="記事をキーワードで検索（例: 口コミ / AIO / ChatGPT）" aria-label="記事を検索">
+  <p id="blogSearchEmpty" class="blog-search-empty">該当する記事が見つかりませんでした。別のキーワードをお試しください。</p>
   <ul class="post-list">
 {items}
   </ul>

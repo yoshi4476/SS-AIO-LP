@@ -556,3 +556,34 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
   color: rgba(255,255,255,.85);
   margin-top: .6em;
 }
+
+/* ---------- 目次スクロールスパイ ---------- */
+.toc a.toc-active { color: var(--blue); font-weight: 700; }
+.toc a.toc-active::before { background: var(--blue); }
+
+/* ---------- トップへ戻るボタン ---------- */
+.to-top {
+  position: fixed; right: 1.2rem; bottom: 5.2rem; z-index: 60;
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--line); background: #fff; color: var(--navy);
+  font-size: 1.2rem; font-weight: 700; cursor: pointer;
+  box-shadow: var(--shadow-md);
+  opacity: 0; pointer-events: none; transform: translateY(8px);
+  transition: opacity .25s, transform .25s var(--ease-out), background .2s;
+}
+.to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+.to-top:hover { background: var(--sky); }
+@media (max-width: 720px) { .to-top { bottom: 6.2rem; right: .9rem; } }
+
+/* ---------- 記事一覧検索ボックス ---------- */
+.blog-search {
+  display: block; width: min(480px, 100%);
+  margin: 0 0 2rem;
+  padding: .85em 1.2em;
+  font: inherit; font-size: .95rem;
+  border: 2px solid var(--line); border-radius: 12px;
+  background: #fff;
+  transition: border-color .2s;
+}
+.blog-search:focus { outline: none; border-color: var(--blue); }
+.blog-search-empty { color: var(--muted); padding: 1rem 0; display: none; }

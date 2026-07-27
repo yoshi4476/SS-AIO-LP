@@ -116,7 +116,7 @@
     }
   });
 
-  // form_submit（種別付き）+ lead_capture + lead_〈経路〉
+  // form_submit（種別付き）+ lead_capture + lead_〈経路〉 + 送信中フィードバック
   document.querySelectorAll('form.form-panel').forEach(function (f) {
     f.addEventListener('submit', function () {
       var typeEl = f.querySelector('[name="form_type"]');
@@ -125,8 +125,71 @@
       ga('form_submit', { form_type: type, page_path: location.pathname });
       ga('lead_capture', { lead_route: route, form_type: type });
       ga('lead_' + route, { form_type: type });
+      // 二重送信防止 + 送信中表示（ネイティブPOSTのため遷移までの間のみ）
+      var btn = f.querySelector('button[type="submit"]');
+      if (btn && !btn.disabled) {
+        btn.disabled = true;
+        btn.dataset.orig = btn.textContent;
+        btn.textContent = '送信中…';
+        setTimeout(function () { // 万一遷移しない場合の復帰
+          btn.disabled = false;
+          if (btn.dataset.orig) btn.textContent = btn.dataset.orig;
+        }, 8000);
+      }
     });
   });
+
+  // 記事目次のスクロールスパイ（現在読んでいる見出しをハイライト）
+  var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+  if (tocLinks.length && 'IntersectionObserver' in window) {
+    var map = {};
+    tocLinks.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href')).slice(1)] = a; });
+    var headings = [];
+    Object.keys(map).forEach(function (id) {
+      var h = document.getElementById(id);
+      if (h) headings.push(h);
+    });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          tocLinks.forEach(function (a) { a.classList.remove('toc-active'); });
+          var a = map[e.target.id];
+          if (a) a.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    headings.forEach(function (h) { spy.observe(h); });
+  }
+
+  // トップへ戻るボタン（全ページ・JSで生成）
+  var toTop = document.createElement('button');
+  toTop.className = 'to-top';
+  toTop.setAttribute('aria-label', 'ページの先頭へ戻る');
+  toTop.innerHTML = '↑';
+  document.body.appendChild(toTop);
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+  document.addEventListener('scroll', function () {
+    toTop.classList.toggle('show', document.documentElement.scrollTop > 600);
+  }, { passive: true });
+
+  // 記事一覧のライブ検索（/blog/ の #blogSearch）
+  var search = document.getElementById('blogSearch');
+  if (search) {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.post-list li'));
+    var empty = document.getElementById('blogSearchEmpty');
+    search.addEventListener('input', function () {
+      var q = search.value.trim().toLowerCase();
+      var hit = 0;
+      items.forEach(function (li) {
+        var show = !q || li.textContent.toLowerCase().indexOf(q) >= 0;
+        li.style.display = show ? '' : 'none';
+        if (show) hit++;
+      });
+      if (empty) empty.style.display = hit ? 'none' : 'block';
+    });
+  }
 
   // 将来の診断ツール用フック（diagnosis_complete / site_audit_complete 等をここから送信）
   window.trackLead = function (eventName, params) { ga(eventName, params || {}); };

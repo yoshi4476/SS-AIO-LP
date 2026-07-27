@@ -449,3 +449,112 @@ body.lp-doc .lead-band .lb-main { margin: 0; font-size: 1.02rem; font-weight: 70
 body.lp-doc .lead-band .lb-sub { margin: .35em 0 0; font-size: .78rem; color: #6b6553; font-weight: 500; }
 body.lp-doc .lead-band .lb-sub a { color: #6b6553; }
 body.lp-doc .lead-band .btn { flex-shrink: 0; }
+
+/* ============================================================
+   v5: モーション強化（すべてCSSのみ・prefers-reduced-motion対応）
+   ============================================================ */
+
+/* ---------- ヒーロー: キーワードマーキー復活 ---------- */
+body.lp-doc .ticker { display: block; }
+body.lp-doc .ticker-track { color: rgba(255,255,255,.35); }
+
+/* ---------- 見出しの金下線が伸びる ---------- */
+body.lp-doc .hero-dark h1 em {
+  border-bottom: none;
+  background-image: linear-gradient(rgba(232,199,102,.75), rgba(232,199,102,.75));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  animation: goldLine 1s .9s var(--ease-out) forwards;
+  padding-bottom: .1em;
+}
+@keyframes goldLine { to { background-size: 100% 2px; } }
+
+/* ---------- 章ラベル: スライドイン + 罫線が伸びる ---------- */
+body.lp-doc .reveal.in .en::before,
+body.lp-doc .section-head.reveal.in .en::before { animation: chipIn .6s var(--ease-out) both; }
+@keyframes chipIn { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+body.lp-doc .section-head.reveal.in .en::after { animation: ruleGrow .8s .3s var(--ease-out) both; }
+@keyframes ruleGrow { from { width: 0; opacity: 0; } to { width: 4em; opacity: 1; } }
+
+/* ---------- ヒーローフォーム: 浮遊 + 金の天面シマー ---------- */
+body.lp-doc .hero-form { position: relative; overflow: hidden; animation: formFloat 7s 2s ease-in-out infinite; }
+@keyframes formFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+body.lp-doc .hero-form::before {
+  content: ""; position: absolute; top: 0; left: -40%; width: 40%; height: 3px;
+  background: linear-gradient(90deg, transparent, #fff8dd, transparent);
+  animation: shimmer 3.2s 1.6s ease-in-out infinite;
+}
+@keyframes shimmer { 0% { left: -40%; } 60%, 100% { left: 110%; } }
+
+/* ---------- ボタン: ホバーで矢印スライド + 光沢スイープ ---------- */
+body.lp-doc .btn-primary { position: relative; overflow: hidden; }
+body.lp-doc .btn-primary::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: skewX(-20deg);
+  transition: left .55s var(--ease-out);
+}
+body.lp-doc .btn-primary:hover::after { left: 120%; }
+body.lp-doc .btn .arw { display: inline-block; transition: transform .25s var(--ease-out); }
+body.lp-doc .btn:hover .arw { transform: translateX(5px); }
+
+/* ---------- カード: ホバーで金線が浮かぶ + アイコンが跳ねる ---------- */
+body.lp-doc .pillar { position: relative; }
+body.lp-doc .pillar::after {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 3px;
+  background: linear-gradient(180deg, var(--gold), var(--gold-soft));
+  opacity: 0; transition: opacity .3s;
+  border-radius: 8px 0 0 8px;
+}
+body.lp-doc .pillar:hover::after { opacity: 1; }
+body.lp-doc .pillar:hover { transform: translateY(-6px) !important; }
+body.lp-doc .pillar .icon { transition: transform .35s var(--ease-out); }
+body.lp-doc .pillar:hover .icon { transform: translateY(-4px) rotate(-4deg); }
+
+/* ---------- 課題チェック: 出現後にチェックが跳ねる・ホバーで滑る ---------- */
+body.lp-doc .check-list li { transition: transform .25s var(--ease-out), border-color .25s, box-shadow .25s; }
+body.lp-doc .check-list li:hover {
+  transform: translateX(6px);
+  border-color: rgba(183,146,46,.55);
+  box-shadow: 0 10px 26px -16px rgba(35,32,26,.3);
+}
+
+/* ---------- CV帯: 表示時に金の縦線が伸び、ボタンが波動 ---------- */
+body.lp-doc .lead-band.reveal { border-left-color: transparent; transition: border-left-color .6s .3s; }
+body.lp-doc .lead-band.reveal.in { border-left-color: var(--gold); }
+body.lp-doc .lead-band .btn-primary { animation: softPulse 3.4s 1.2s ease-in-out infinite; }
+@keyframes softPulse {
+  0%, 100% { box-shadow: 0 10px 24px -10px rgba(37,99,235,.5); }
+  50% { box-shadow: 0 10px 30px -6px rgba(37,99,235,.75); }
+}
+
+/* ---------- 比較表: 行ホバーで生成りハイライト ---------- */
+body.lp-doc table tbody tr { transition: background .2s; }
+body.lp-doc table tbody tr:hover { background: #fbf7ec; }
+
+/* ---------- FAQ: 開閉マーカー回転 + 中身フェード ---------- */
+body.lp-doc .faq details summary { transition: color .2s; }
+body.lp-doc .faq details summary:hover { color: #96751a; }
+body.lp-doc .faq details[open] .faq-a { animation: faqIn .35s var(--ease-out) both; }
+@keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 特典コード3010: やわらかな金の呼吸 ---------- */
+body.lp-doc [class*="tokuten"], body.lp-doc .code-banner { animation: none; }
+body.lp-doc .gold-pulse, body.lp-doc .sticky-cta .btn-primary { animation: softPulse 3.8s ease-in-out infinite; }
+
+/* ---------- 実績バンド: 数字が浮かび上がる（count-upと併用） ---------- */
+body.lp-doc .stat-band > div { transition: transform .3s var(--ease-out), box-shadow .3s; }
+body.lp-doc .stat-band > div:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -18px rgba(35,32,26,.35); }
+
+/* ---------- reduced-motion: 全アニメーション停止 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  body.lp-doc .hero-form,
+  body.lp-doc .hero-form::before,
+  body.lp-doc .hero-dark h1 em,
+  body.lp-doc .lead-band .btn-primary,
+  body.lp-doc .sticky-cta .btn-primary,
+  body.lp-doc .section-head.reveal.in .en::before,
+  body.lp-doc .section-head.reveal.in .en::after { animation: none !important; }
+  body.lp-doc .hero-dark h1 em { background-size: 100% 2px; }
+}
