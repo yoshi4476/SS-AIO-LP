@@ -203,6 +203,46 @@ body.lp-doc .sticky-cta { background: rgba(13,31,56,.96); border-top: 1px solid 
 body.lp-doc a { color: var(--navy); }
 body.lp-doc a.btn-primary { color: #fff; }
 
+/* ---------- カテゴリ色の全廃: LPは紺×金×青の3色システムに統一（緑・水色を排除） ---------- */
+body.lp-doc .cat-aio,
+body.lp-doc .cat-seo,
+body.lp-doc .cat-meo,
+body.lp-doc .cat-ai { --cat-color: var(--navy); }
+body.lp-doc .pillar .num { color: var(--gold); }
+body.lp-doc .pillar .icon {
+  color: var(--navy);
+  background: #f2efe6;
+}
+body.lp-doc .kicker::before { background: var(--gold-soft); }
+
+/* ---------- 章間CV帯: どの章で読み止めても申込みへ ---------- */
+body.lp-doc .lead-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  background: #fff;
+  border: 1px solid var(--line-warm);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 1.4rem clamp(1.2rem, 2.5vw, 2.2rem);
+  margin: 2.8rem auto 0;
+  max-width: var(--max-wide);
+}
+body.lp-doc .lead-band p {
+  margin: 0;
+  font-size: .95rem;
+  font-weight: 500;
+}
+body.lp-doc .lead-band p strong { font-weight: 800; }
+body.lp-doc .lead-band .btn { white-space: nowrap; }
+body.lp-doc .lead-band .tel {
+  font-size: .78rem;
+  color: #5a6374;
+  margin-top: .3em;
+}
+
 /* ---------- 3Dチルトは提案書トーンに合わないため無効化 ---------- */
 body.lp-doc [data-tilt], body.lp-doc .pillar { transform: none !important; }
 body.lp-doc .pillar:hover { transform: translateY(-4px) !important; }
