@@ -6,6 +6,7 @@ category: meo
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/kuchikomi-fuyasu-hoho/eyecatch.png
+score: 93
 faq:
   - q: 口コミのお礼に割引やプレゼントを渡してもいいですか？
     a: いけません。見返りと引き換えの口コミ依頼はGoogleのポリシー違反で、口コミ削除やペナルティの対象です。

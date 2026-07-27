@@ -506,8 +506,33 @@
     <h2>無料相談・現状分析のお申し込み</h2>
     <p class="sub" style="margin-left:auto;margin-right:auto;">2営業日以内に担当者からご連絡します。しつこい営業は行いません。</p>
   </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:start;max-width:1240px;margin:0 auto;">
+  <!-- 左: おまかせパックの特典・提供内容 -->
+  <div class="reveal">
+    <h3 style="font-family:var(--head);font-weight:900;font-size:1.3rem;margin-bottom:.8rem;">いちばん人気は「おまかせパック」</h3>
+    <p style="font-size:.95rem;">記事制作からレポート・改善まで、<strong>集客の仕組みを丸ごとお任せ</strong>。社内の作業はほぼゼロで、資産型の集客が積み上がります。</p>
+    <div style="background:linear-gradient(120deg,#fff7e0,#ffefc2);border:2px solid #eab308;border-radius:14px;padding:1.1em 1.3em;position:relative;margin:1.3rem 0 1rem;">
+      <span style="position:absolute;top:-12px;left:14px;background:#eab308;color:#fff;font-weight:900;font-size:.7rem;padding:.22em 1em;border-radius:999px;letter-spacing:.1em;">🎁 特典</span>
+      <strong style="background:none;">MEOスタンダード（月額3万円相当）が無料で付帯</strong><br>
+      <span style="font-size:.82rem;color:#92400e;">口コミ返信・NAP統一・月10〜14回投稿・月次レポートまで込み</span>
+    </div>
+    <ul style="font-size:.92rem;margin:0 0 1.2rem;padding:0;list-style:none;display:grid;gap:.6em;">
+      <li style="background:var(--sky);border-radius:10px;padding:.7em 1em;">✓ オウンドメディア+LPの構築・運用一式</li>
+      <li style="background:var(--sky);border-radius:10px;padding:.7em 1em;">✓ 記事を月60本投稿（毎日2本・品質審査つき）</li>
+      <li style="background:var(--sky);border-radius:10px;padding:.7em 1em;">✓ 月次コンサルレポート（毎月1日・PDF）</li>
+      <li style="background:var(--sky);border-radius:10px;padding:.7em 1em;">✓ レポートにもとづくサイト改善の実装まで</li>
+    </ul>
+    <div class="trust-row" style="color:var(--muted);margin-top:0;">
+      <span style="color:var(--text);"><strong>3,000店舗</strong>のMEO運営実績</span>
+      <span style="color:var(--text);">規約違反行為は一切なし</span>
+      <span style="color:var(--text);">現状分析レポート無料</span>
+    </div>
+    <p style="margin-top:1.4rem;font-size:.88rem;color:var(--muted);">もちろん、MEO単体（月額3万円）やSEO+AIO運用だけのご相談も歓迎です。現状分析のうえ、最適な組み合わせをご提案します。</p>
+  </div>
+  <!-- 右: 申込みフォーム -->
+  <div class="reveal reveal-d1">
   <!-- TODO: フォーム送信先の設定（Cloudflare Pages Functions推奨。contact/downloadと方式統一） -->
-  <form class="form-panel reveal" action="/api/lead" method="post">
+  <form class="form-panel" action="/api/lead" method="post" style="margin:0;max-width:none;">
     <input type="hidden" name="form_type" value="無料相談（LP）">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
     <label>お名前 <span class="req">必須</span>
@@ -542,7 +567,9 @@
     <button type="submit" class="btn btn-primary">無料相談を申し込む（現状分析レポート付き）</button>
     <p class="form-note">いただいた情報は相談対応の目的以外には使用しません。｜<a href="/download/">先に資料だけ見たい方はこちら</a></p>
   </form>
-  <p style="text-align:center;margin-top:2rem;color:var(--muted);font-size:.92rem;">お電話でのご相談も承ります: <strong style="font-family:var(--en);font-size:1.15em;"><a href="tel:0643057547" style="text-decoration:none;">06-4305-7547</a></strong>（9:00〜20:00 / 土日祝休）</p></section>
+  <p style="text-align:center;margin-top:1.2rem;color:var(--muted);font-size:.92rem;">お電話でのご相談も承ります: <strong style="font-family:var(--en);font-size:1.15em;"><a href="tel:0643057547" style="text-decoration:none;">06-4305-7547</a></strong>（9:00〜20:00 / 土日祝休）</p>
+  </div>
+  </div></section>
 
 <footer class="site-footer">
   <div class="inner">

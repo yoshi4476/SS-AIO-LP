@@ -14,6 +14,7 @@ category: aio | seo | meo | ai-marketing
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/url-slug/eyecatch.png   # 省略可
+score: 93        # 品質審査スコア(100点満点)。90点未満・未記載はビルド対象外(公開不可)
 faq:
   - q: 質問文
     a: 回答文（40-60字・本文FAQと完全一致させる）
@@ -59,7 +60,7 @@ def jp_date(iso: str) -> str:
 
 
 def parse_article(path: Path):
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8-sig")  # BOM付き保存にも耐性
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", text, re.S)
     if not m:
         raise ValueError(f"{path.name}: フロントマターがありません")
@@ -392,8 +393,24 @@ def main():
 
     llms = (SITE / "llms.txt").read_text(encoding="utf-8")
 
-    paths = [p for p in sorted(ARTICLES.glob("*.md")) if not p.name.startswith("_")]
-    all_metas = [parse_article(p)[0] for p in paths]
+    # 品質審査ゲート: score(100点満点) 90点未満・未審査はアップロードしない
+    QUALITY_GATE = 90
+    paths, all_metas, blocked = [], [], []
+    for p in sorted(ARTICLES.glob("*.md")):
+        if p.name.startswith("_"):
+            continue
+        meta = parse_article(p)[0]
+        sc = meta.get("score")
+        if sc is None:
+            blocked.append(f"{meta['slug']}: 未審査（フロントマターに score がない）")
+            continue
+        if sc < QUALITY_GATE:
+            blocked.append(f"{meta['slug']}: {sc}点 < 基準{QUALITY_GATE}点")
+            continue
+        paths.append(p)
+        all_metas.append(meta)
+    for b in blocked:
+        print(f"BLOCKED(公開不可): {b} → 修正・再審査後に score を更新してください")
 
     for path in paths:
         meta = next(m for m in all_metas if m["slug"] == parse_article(path)[0]["slug"])

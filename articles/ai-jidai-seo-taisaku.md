@@ -6,6 +6,7 @@ category: seo
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/ai-jidai-seo-taisaku/eyecatch.png
+score: 94
 faq:
   - q: AI時代にSEOはもう意味がないのですか？
     a: 意味はあります。AIの回答は検索上位の情報を参照するため、SEOはむしろAI引用の前提条件になっています。

@@ -6,6 +6,7 @@ category: aio
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/llmo-taisaku-hoho/eyecatch.png
+score: 95
 faq:
   - q: LLMOとAIOの違いは何ですか？
     a: AIOはGoogle検索のAI回答への最適化、LLMOはChatGPT等のAIチャットへの最適化です。施策は多くが共通します。

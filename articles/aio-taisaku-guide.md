@@ -6,6 +6,7 @@ category: aio
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/aio-taisaku-guide/eyecatch.png
+score: 95
 faq:
   - q: AIO対策とSEO対策の違いは何ですか？
     a: SEOは検索順位の獲得、AIOはAI回答内での引用獲得が目的です。AIOはSEOの上位表示が前提になります。

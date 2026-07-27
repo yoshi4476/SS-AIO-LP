@@ -6,6 +6,7 @@ category: ai-marketing
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/ai-shukyaku-guide/eyecatch.png
+score: 96
 faq:
   - q: AI集客はどの施策から始めるべきですか？
     a: 来店型ビジネスはMEO、非来店型はSEOからが基本です。土台ができ次第AIO・LLMOを重ねます。

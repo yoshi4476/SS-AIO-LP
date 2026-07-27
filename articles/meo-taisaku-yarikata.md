@@ -6,6 +6,7 @@ category: meo
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/meo-taisaku-yarikata/eyecatch.png
+score: 94
 faq:
   - q: MEO対策は無料でできますか？
     a: Googleビジネスプロフィールは無料のため、基本の対策は自社でも可能です。運用の継続が最大のハードルです。

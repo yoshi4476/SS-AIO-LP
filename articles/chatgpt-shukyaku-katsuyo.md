@@ -6,6 +6,7 @@ category: ai-marketing
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/chatgpt-shukyaku-katsuyo/eyecatch.png
+score: 92
 faq:
   - q: 無料版のChatGPTでも集客に使えますか？
     a: 使えます。本記事の7つの活用法はすべて無料版でも実行できます。頻度が増えたら有料版を検討してください。
