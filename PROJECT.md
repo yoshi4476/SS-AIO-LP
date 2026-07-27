@@ -102,6 +102,18 @@
 - スタイル: フラットイラスト（CLAUDE.md 第6章 画像ルール準拠）
 - 人物イラスト: 日本人素材をデフォルト使用
 
+## 月次コンサルティングレポート（毎月1日自動発行）
+
+- 生成: `python scripts/monthly_report.py`（実データ） / `--demo`（サンプル） / `--email`（Resendで送付）
+- 出力: `reports/YYYY-MM/report.pdf`（GA4+GSC+スプレッドシート → 6ヶ月トレンド・前月比・クエリ別・LPヒートマップ・改善対比表・翌月プラン）
+- ヒートマップのデータ源: LP/トップに実装済みの `section_view_*` / `area_reach` GA4イベント
+- **毎月1日 9:00 の自動実行**（Windowsタスクスケジューラ登録コマンド — 管理者PowerShellで1回実行）:
+  ```
+  schtasks /Create /TN "AI集客ラボ月次レポート" /SC MONTHLY /D 1 /ST 09:00 ^
+    /TR "python \"C:\Users\user\Desktop\システム開発\SSオウンドメディア（AIO）\scripts\monthly_report.py\" --email"
+  ```
+- 実データ化の前提: GA4/GSC/Sheetsにサービスアカウント閲覧権限 + `.env` の GA4_PROPERTY_ID / GSC_SITE_URL / SPREADSHEET_ID + `pip install google-analytics-data google-api-python-client google-auth`
+
 ## セットアップ進捗チェックリスト
 
 - [x] プロジェクト初期構築（ディレクトリ・CLAUDE.md・PROJECT.md）

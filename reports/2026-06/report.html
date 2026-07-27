@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<style>
+@page { size: A4; margin: 14mm 12mm; }
+* { box-sizing: border-box; }
+body { font-family: "Yu Gothic", "Meiryo", sans-serif; color: #10203a; font-size: 10.5pt; line-height: 1.75; margin: 0; }
+.demo-banner { background: #fff3cd; border: 2px dashed #d97706; color: #92400e; font-weight: bold; text-align: center; padding: 6px; margin-bottom: 12px; border-radius: 6px; }
+.cover { background: linear-gradient(135deg, #0b2447, #1d4ed8); color: #fff; border-radius: 12px; padding: 26px 28px; margin-bottom: 18px; }
+.cover h1 { margin: 0 0 4px; font-size: 20pt; }
+.cover .sub { color: #bfdbfe; font-size: 10pt; }
+h2 { font-size: 13pt; border-left: 5px solid #2563eb; padding-left: 10px; margin: 22px 0 10px; page-break-after: avoid; }
+.tiles { display: flex; gap: 8px; flex-wrap: wrap; }
+.tile { flex: 1 1 15%; min-width: 100px; border: 1px solid #e3eaf3; border-radius: 8px; padding: 8px 10px; }
+.t-label { font-size: 8pt; color: #5b6b84; }
+.t-val { font-size: 15pt; font-weight: bold; color: #0b2447; }
+.t-mom { font-size: 8pt; color: #0d9488; }
+.charts { display: flex; gap: 12px; flex-wrap: wrap; }
+.chart { flex: 1 1 46%; border: 1px solid #e3eaf3; border-radius: 8px; padding: 8px; }
+.chart-t { font-size: 9pt; font-weight: bold; margin-bottom: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 9pt; }
+th, td { border: 1px solid #dbe3ee; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #0b2447; color: #fff; font-weight: 600; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr:nth-child(even) td { background: #f7fafd; }
+.heatmap { border: 1px solid #e3eaf3; border-radius: 8px; padding: 10px 12px; }
+.hm-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.hm-label { width: 110px; font-size: 8.5pt; }
+.hm-track { flex: 1; background: #eef2f8; border-radius: 4px; height: 14px; }
+.hm-bar { height: 14px; border-radius: 4px; }
+.hm-val { width: 38px; text-align: right; font-size: 8.5pt; font-weight: bold; }
+.hm-note { font-size: 8pt; color: #5b6b84; margin-top: 6px; }
+.pri { font-weight: bold; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; white-space: nowrap; }
+.pri-高 { background: #fee2e2; color: #b91c1c; }
+.pri-中 { background: #fef3c7; color: #b45309; }
+.pri-低 { background: #e0f2fe; color: #0369a1; }
+ol.actions li { margin: 4px 0; }
+ul.grown li { margin: 5px 0; }
+.src { font-size: 8pt; color: #5b6b84; margin-top: 16px; border-top: 1px solid #e3eaf3; padding-top: 6px; }
+.pagebreak { page-break-before: always; }
+</style></head><body>
+<div class="demo-banner">SAMPLE ― 本レポートはサンプルデータです。GA4/GSC接続後、実データで自動発行されます。</div>
+<div class="cover">
+  <h1>月次コンサルティングレポート ― 2026-06</h1>
+  <div class="sub">対象: AI集客ラボ（オウンドメディア + 集客支援LP）｜発行: セブンセンシズ株式会社｜発行日: 2026-07-27</div>
+</div>
+
+<h2>1. 当月サマリー（前月比つき）</h2>
+<div class="tiles">
+<div class="tile"><div class="t-label">セッション</div><div class="t-val">1,720</div><div class="t-mom">前月比 +31%</div></div><div class="tile"><div class="t-label">CV（相談+資料DL）</div><div class="t-val">13件</div><div class="t-mom">前月比 +44%</div></div><div class="tile"><div class="t-label">検索表示回数</div><div class="t-val">44,500</div><div class="t-mom">前月比 +32%</div></div><div class="tile"><div class="t-label">検索クリック</div><div class="t-val">960</div><div class="t-mom">前月比 +37%</div></div><div class="tile"><div class="t-label">平均CTR</div><div class="t-val">2.16%</div><div class="t-mom">前月比 +4%</div></div><div class="tile"><div class="t-label">平均掲載順位</div><div class="t-val">9.8位</div><div class="t-mom">前月比 -16%</div></div>
+</div>
+<p style="font-size:9pt;color:#5b6b84;margin-top:6px;">AI経由参照（ChatGPT/Perplexity/Gemini等）: <b>86セッション</b></p>
+
+<h2>2. 6ヶ月トレンド</h2>
+<div class="charts">
+<div class="chart"><div class="chart-t">セッション数（GA4）</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 154 L146 141 L247 124 L347 104 L448 74 L548 41" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="154" r="4" fill="#2563eb"/><circle cx="146" cy="141" r="4" fill="#2563eb"/><circle cx="247" cy="124" r="4" fill="#2563eb"/><circle cx="347" cy="104" r="4" fill="#2563eb"/><circle cx="448" cy="74" r="4" fill="#2563eb"/><circle cx="548" cy="41" r="4" fill="#2563eb"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">1,720</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div>
+<div class="chart"><div class="chart-t">検索クリック数（Search Console）</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 164 L146 152 L247 135 L347 112 L448 79 L548 41" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="164" r="4" fill="#0d9488"/><circle cx="146" cy="152" r="4" fill="#0d9488"/><circle cx="247" cy="135" r="4" fill="#0d9488"/><circle cx="347" cy="112" r="4" fill="#0d9488"/><circle cx="448" cy="79" r="4" fill="#0d9488"/><circle cx="548" cy="41" r="4" fill="#0d9488"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">960</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div>
+<div class="chart"><div class="chart-t">検索表示回数（Search Console）</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 164 L146 149 L247 129 L347 105 L448 74 L548 41" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="164" r="4" fill="#2563eb"/><circle cx="146" cy="149" r="4" fill="#2563eb"/><circle cx="247" cy="129" r="4" fill="#2563eb"/><circle cx="347" cy="105" r="4" fill="#2563eb"/><circle cx="448" cy="74" r="4" fill="#2563eb"/><circle cx="548" cy="41" r="4" fill="#2563eb"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">44,500</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div>
+<div class="chart"><div class="chart-t">平均掲載順位（小さいほど良い）</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 41 L146 72 L247 93 L347 110 L448 123 L548 132" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="41" r="4" fill="#0d9488"/><circle cx="146" cy="72" r="4" fill="#0d9488"/><circle cx="247" cy="93" r="4" fill="#0d9488"/><circle cx="347" cy="110" r="4" fill="#0d9488"/><circle cx="448" cy="123" r="4" fill="#0d9488"/><circle cx="548" cy="132" r="4" fill="#0d9488"/><text x="548" y="122" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">9.8位</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div>
+</div>
+
+<h2>3. Search Console クエリ別実績（上位10）</h2>
+<table><tr><th>クエリ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr><tr><td>aio 対策</td><td class="num">6,200</td><td class="num">292</td><td class="num">4.7%</td><td class="num">6.2位</td></tr><tr><td>llmo とは</td><td class="num">4,900</td><td class="num">260</td><td class="num">5.3%</td><td class="num">4.8位</td></tr><tr><td>meo 対策 やり方</td><td class="num">5,400</td><td class="num">194</td><td class="num">3.6%</td><td class="num">8.1位</td></tr><tr><td>google 口コミ 増やす</td><td class="num">4,100</td><td class="num">152</td><td class="num">3.7%</td><td class="num">7.4位</td></tr><tr><td>ai 集客</td><td class="num">3,800</td><td class="num">129</td><td class="num">3.4%</td><td class="num">9.9位</td></tr><tr><td>chatgpt 集客 活用</td><td class="num">2,900</td><td class="num">119</td><td class="num">4.1%</td><td class="num">6.8位</td></tr><tr><td>クリニック meo</td><td class="num">2,400</td><td class="num">65</td><td class="num">2.7%</td><td class="num">12.3位</td></tr><tr><td>工務店 集客</td><td class="num">2,100</td><td class="num">44</td><td class="num">2.1%</td><td class="num">14.6位</td></tr><tr><td>saas リード獲得</td><td class="num">1,800</td><td class="num">32</td><td class="num">1.8%</td><td class="num">16.9位</td></tr><tr><td>ゼロクリック検索 対策</td><td class="num">1,500</td><td class="num">51</td><td class="num">3.4%</td><td class="num">7.7位</td></tr></table>
+
+<div class="pagebreak"></div>
+<h2>4. LPエリア到達ヒートマップ</h2>
+<p style="font-size:9pt;">LP各セクションまで読者が到達した割合です（GA4 area_reachイベント）。<b>色が赤いほど到達が少ない=改善対象</b>です。</p>
+<div class="heatmap"><div class="hm-row"><div class="hm-label">ヒーロー</div><div class="hm-track"><div class="hm-bar" style="width:100%;background:#2563eb"></div></div><div class="hm-val">100%</div></div><div class="hm-row"><div class="hm-label">課題共感</div><div class="hm-track"><div class="hm-bar" style="width:82%;background:#2563eb"></div></div><div class="hm-val">82%</div></div><div class="hm-row"><div class="hm-label">市場の変化</div><div class="hm-track"><div class="hm-bar" style="width:71%;background:#2563eb"></div></div><div class="hm-val">71%</div></div><div class="hm-row"><div class="hm-label">サービス4本柱</div><div class="hm-track"><div class="hm-bar" style="width:63%;background:#2563eb"></div></div><div class="hm-val">63%</div></div><div class="hm-row"><div class="hm-label">料金</div><div class="hm-track"><div class="hm-bar" style="width:47%;background:#60a5fa"></div></div><div class="hm-val">47%</div></div><div class="hm-row"><div class="hm-label">注力業種</div><div class="hm-track"><div class="hm-bar" style="width:41%;background:#60a5fa"></div></div><div class="hm-val">41%</div></div><div class="hm-row"><div class="hm-label">他社比較</div><div class="hm-track"><div class="hm-bar" style="width:36%;background:#f59e0b"></div></div><div class="hm-val">36%</div></div><div class="hm-row"><div class="hm-label">動画</div><div class="hm-track"><div class="hm-bar" style="width:29%;background:#f59e0b"></div></div><div class="hm-val">29%</div></div><div class="hm-row"><div class="hm-label">支援の流れ</div><div class="hm-track"><div class="hm-bar" style="width:24%;background:#f59e0b"></div></div><div class="hm-val">24%</div></div><div class="hm-row"><div class="hm-label">代表メッセージ</div><div class="hm-track"><div class="hm-bar" style="width:21%;background:#f59e0b"></div></div><div class="hm-val">21%</div></div><div class="hm-row"><div class="hm-label">FAQ</div><div class="hm-track"><div class="hm-bar" style="width:17%;background:#dc2626"></div></div><div class="hm-val">17%</div></div><div class="hm-row"><div class="hm-label">申込フォーム</div><div class="hm-track"><div class="hm-bar" style="width:12%;background:#dc2626"></div></div><div class="hm-val">12%</div></div></div>
+<p class="hm-note">■青=到達60%以上 ■水色=40-59% ■橙=20-39% ■赤=20%未満</p>
+
+<h2>5. 伸びたポイント（数字の根拠つき）</h2>
+<ul class="grown"><li>検索クリックが <b>700→960（+37%）</b>。平均順位が 11.6位→9.8位 に改善したことが主因で、記事の内部リンク網とE-E-A-T整備が順位を押し上げています。</li><li>CV（相談・資料DL）が <b>9→13件</b>。記事下CTAと追従サイドバー経由のLP到達が増えています。</li><li>AI経由の参照流入が <b>86セッション</b>。llms.txt・構造化・H2直下結論などのAIO/LLMO施策が引用に結びつき始めています。</li></ul>
+
+<h2>6. 直すべきポイント（優先度つき・対比表）</h2>
+<table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr><tr><td><span class="pri pri-高">高</span></td><td>LP「ヒーロー」→「課題共感」</td><td>到達率が 18pt 低下（最大の離脱ポイント）</td><td>「ヒーロー」の末尾に次セクションへの橋渡し文とミニCTAを追加。「課題共感」の見出しを利益訴求型に変更</td></tr><tr><td><span class="pri pri-高">高</span></td><td>LP「サービス4本柱」→「料金」</td><td>到達率が 16pt 低下（最大の離脱ポイント）</td><td>「サービス4本柱」の末尾に次セクションへの橋渡し文とミニCTAを追加。「料金」の見出しを利益訴求型に変更</td></tr><tr><td><span class="pri pri-高">高</span></td><td>LP「申込フォーム」</td><td>フォーム到達率 12%（低水準）</td><td>ページ中腹（サービス直後・比較表直後）にアンカーCTAボタンを追加し、到達経路を短縮</td></tr><tr><td><span class="pri pri-中">中</span></td><td>記事「クリニック meo」</td><td>表示2,400に対しCTR 2.7%（順位12.3位の期待値未満）</td><td>タイトルに数字と年号を追加（例:「◯◯の方法【2026年版・◯選】」）し、メタディスクを結論先出しに書き換え</td></tr><tr><td><span class="pri pri-中">中</span></td><td>記事「工務店 集客」</td><td>表示2,100に対しCTR 2.1%（順位14.6位の期待値未満）</td><td>タイトルに数字と年号を追加（例:「◯◯の方法【2026年版・◯選】」）し、メタディスクを結論先出しに書き換え</td></tr><tr><td><span class="pri pri-中">中</span></td><td>記事「クリニック meo」</td><td>順位 12.3位（2ページ目）</td><td>H2を1本追加して検索意図の抜けを補い、関連記事から内部リンク2本を追加して1ページ目へ</td></tr><tr><td><span class="pri pri-中">中</span></td><td>記事「工務店 集客」</td><td>順位 14.6位（2ページ目）</td><td>H2を1本追加して検索意図の抜けを補い、関連記事から内部リンク2本を追加して1ページ目へ</td></tr></table>
+
+<h2>7. コンテンツ実績</h2>
+<p style="font-size:9.5pt;">当月公開: <b>8本</b>（公開基準: 6エージェント品質採点 114/120点以上）</p>
+<table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr><tr><td>2026/07/05</td><td>AIO対策とは？AI検索に引用される5つの手順</td><td class="num">116/120</td><td>公開済み</td></tr><tr><td>2026/07/09</td><td>LLMO対策とは？ChatGPTに引用される7つの方法</td><td class="num">118/120</td><td>公開済み</td></tr><tr><td>2026/07/14</td><td>MEO対策のやり方7ステップ</td><td class="num">115/120</td><td>公開済み</td></tr><tr><td>2026/07/19</td><td>Googleマップの口コミを増やす方法5選</td><td class="num">117/120</td><td>公開済み</td></tr><tr><td>2026/07/27</td><td>AI集客の完全ガイド</td><td class="num">119/120</td><td>公開済み</td></tr></table>
+
+<h2>8. 来月のプラン（実行順）</h2>
+<ol class="actions"><li>改善優先度「高」の項目（上表）を第1週で実施する</li><li>順位11〜30位のクエリ上位2本をリライトする（H2追加+内部リンク）</li><li>新規記事を計画本数どおり公開する（各記事: 品質114点以上・図解1枚以上）</li><li>月末にAIスポットチェック（主要クエリをChatGPT/Perplexityに質問し自社言及を記録）</li><li>本レポートの数値をスプレッドシート「KPIレポート」「AIO計測」タブに転記・突合する</li></ol>
+
+<div class="src">データソース: Google Analytics 4（セッション・CV・AI参照元・エリア到達）/ Google Search Console（表示・クリック・CTR・順位・クエリ）/ 運用スプレッドシート（記事作成ログ）。エリア到達はLP各セクションのarea_reachイベント（画面内40%表示で発火）にもとづく。</div>
+</body></html>

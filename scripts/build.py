@@ -200,6 +200,44 @@ def build_article(path: Path, template: str, related: str = ""):
     return meta, url
 
 
+def quality_checks(all_metas):
+    """第6章 SEO実装詳細の機械検査: メタ品質 + カニバリ(タイトル類似80%)ゲート"""
+    import difflib
+    warns = []
+    for m in all_metas:
+        tl = len(m["title"])
+        if not 15 <= tl <= 45:
+            warns.append(f"タイトル字数NG: {m['slug']} = {tl}字（基準15〜45字）")
+        dl = len(m["description"])
+        if not 60 <= dl <= 160:
+            warns.append(f"メタ記述字数NG: {m['slug']} = {dl}字（基準60〜160字）")
+    for i in range(len(all_metas)):
+        for j in range(i + 1, len(all_metas)):
+            r = difflib.SequenceMatcher(None, all_metas[i]["title"], all_metas[j]["title"]).ratio()
+            if r >= 0.8:
+                warns.append(f"カニバリ疑い: タイトル類似{r:.0%} {all_metas[i]['slug']} ↔ {all_metas[j]['slug']}"
+                             "（80%ゲート。タイトル/切り口を差別化するか統合を検討）")
+    return warns
+
+
+LINK_WHITELIST = {"/api/lead"}
+
+
+def link_check():
+    """内部リンクの存在検証（404ゼロ保証）"""
+    warns = []
+    for p in SITE.rglob("*.html"):
+        t = p.read_text(encoding="utf-8")
+        for href in sorted(set(re.findall(r'href="(/[^"#?]*)"', t))):
+            if href in LINK_WHITELIST or href == "/":
+                continue
+            name = href.rstrip("/").rsplit("/", 1)[-1]
+            target = SITE / href.lstrip("/") if "." in name else SITE / href.strip("/") / "index.html"
+            if not target.exists():
+                warns.append(f"リンク切れ: {p.relative_to(SITE)} → {href}")
+    return warns
+
+
 def build_feed(article_entries):
     from xml.sax.saxutils import escape
     items = sorted(article_entries, key=lambda e: str(e[0]["modified"]), reverse=True)[:20]
@@ -366,9 +404,13 @@ def main():
     build_blog_index(all_metas)
     build_sitemap(entries)
     build_feed(entries)
+    warns += quality_checks(all_metas)
+    warns += link_check()
     print(f"OK: {len(entries)}記事 / blog一覧 + sitemap.xml + feed.xml 更新")
     for w in warns:
         print(f"WARN: {w}")
+    if not warns:
+        print("品質検査: メタ字数・カニバリ・内部リンク404 すべてクリア")
 
 
 if __name__ == "__main__":
