@@ -12,6 +12,7 @@
 - [記事一覧](https://example.com/blog/): 全記事の新着順一覧
 - [AIO・SEO・MEO集客支援サービス](https://example.com/lp/): AI検索時代の集客を一気通貫で支援。無料現状分析レポート付き
 - [運営者情報](https://example.com/about/): 運営会社の概要と編集方針
+- [監修者プロフィール](https://example.com/author/haraguchi/): 監修者・原口優（通算3,200店舗以上のMEO運営実績を持つG-ran創業者）の経歴・専門分野・監修方針
 
 ## 主要コンテンツ
 - [AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像](https://example.com/ai-marketing/ai-shukyaku-guide/): 4施策の関係と着手順をまとめたピラー記事
