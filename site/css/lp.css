@@ -1,0 +1,212 @@
+/* ============================================================
+   LP専用デザイン「経営提案書」 (body.lp-doc スコープ)
+   紙白×墨紺×金 / 明朝見出し / 章立て構成。CTAのみブルーで機能色を分離
+   ============================================================ */
+
+body.lp-doc {
+  --paper: #faf9f5;
+  --ink: #101d2e;
+  --navy: #12294a;
+  --navy-deep: #0d1f38;
+  --gold: #b7922e;
+  --gold-soft: #e8c766;
+  --line-warm: #e5e1d6;
+  background: var(--paper);
+  color: var(--ink);
+  counter-reset: chapter;
+}
+
+/* ---------- 見出し書体: しっぽり明朝 ---------- */
+body.lp-doc h1,
+body.lp-doc h2,
+body.lp-doc h3,
+body.lp-doc .cta-copy {
+  font-family: "Shippori Mincho B1", "Noto Serif JP", serif;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+body.lp-doc .section-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); line-height: 1.4; }
+body.lp-doc .section-head .sub { color: #4c5668; }
+
+/* ---------- 章番号（提案書の目次構造） ---------- */
+body.lp-doc .section-head .en {
+  color: var(--gold);
+  letter-spacing: .3em;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 1em;
+}
+body.lp-doc .section-head .en::before {
+  counter-increment: chapter;
+  content: "第" counter(chapter, decimal-leading-zero) "章";
+  font-family: "Shippori Mincho B1", serif;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: var(--ink);
+  border: 1px solid var(--gold);
+  padding: .3em .9em;
+  font-size: .82rem;
+}
+body.lp-doc .section-head .en::after {
+  content: "";
+  width: 4em;
+  height: 1px;
+  background: var(--line-warm);
+}
+
+/* ---------- ヒーロー: 提案書の表紙 ---------- */
+body.lp-doc .hero-dark {
+  background: var(--navy-deep);
+  min-height: auto;
+}
+body.lp-doc .hero-dark::before {
+  /* オーロラ廃止 → 静かな金の斜光のみ */
+  background:
+    radial-gradient(50% 60% at 88% 0%, rgba(183,146,46,.18), transparent 70%),
+    radial-gradient(40% 55% at 0% 100%, rgba(37,99,235,.14), transparent 70%);
+  filter: none;
+  animation: none;
+  inset: 0;
+}
+body.lp-doc .hero-dark::after {
+  /* ビーム・ドット廃止 → 細い罫線（紙の表紙の意匠） */
+  background:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 100%);
+}
+body.lp-doc .hero-dark .inner { padding-top: 4.5rem; }
+body.lp-doc .kicker {
+  border: 1px solid rgba(232,199,102,.55);
+  background: rgba(183,146,46,.12);
+  color: var(--gold-soft);
+  border-radius: 0;
+  letter-spacing: .22em;
+}
+body.lp-doc .kicker::before { background: var(--gold-soft); box-shadow: none; width: 5px; height: 5px; border-radius: 0; }
+body.lp-doc .hero-dark h1 {
+  font-size: clamp(2rem, 4.2vw, 3.3rem);
+  line-height: 1.5;
+  text-shadow: none;
+  font-weight: 700;
+}
+body.lp-doc .hero-dark h1 em {
+  font-style: normal;
+  color: var(--gold-soft);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  animation: none;
+  border-bottom: 1px solid rgba(232,199,102,.6);
+  padding-bottom: .06em;
+}
+body.lp-doc .hero-dark .lead { color: rgba(240,243,248,.86); font-size: clamp(.98rem, 1.2vw, 1.08rem); }
+body.lp-doc .hero-dark .lead strong { color: #fff !important; }
+body.lp-doc .trust-row { color: rgba(255,255,255,.82); }
+body.lp-doc .trust-row span::before { background: var(--gold); color: #fff; }
+body.lp-doc .ticker { display: none; }
+
+/* ---------- ヒーローフォーム: 申込書カード ---------- */
+body.lp-doc .hero-form {
+  border-radius: 6px !important;
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 30px 60px -24px rgba(0,0,0,.55) !important;
+  background: #fff;
+}
+body.lp-doc .hero-form .hf-title { font-family: "Shippori Mincho B1", serif; font-weight: 700; }
+body.lp-doc .form-panel input[type="text"],
+body.lp-doc .form-panel input[type="email"],
+body.lp-doc .form-panel input[type="tel"],
+body.lp-doc .form-panel select,
+body.lp-doc .form-panel textarea {
+  border-radius: 4px;
+  border-color: var(--line-warm);
+  background: #fdfdfb;
+}
+
+/* ---------- ボタン: 機能色はブルーのみ・形は矩形寄り ---------- */
+body.lp-doc .btn { border-radius: 6px; }
+body.lp-doc .btn-primary { box-shadow: 0 10px 24px -10px rgba(37,99,235,.5); }
+body.lp-doc .btn-ghost-light { border-radius: 6px; }
+
+/* ---------- 実績バンド: 紙にヘアライン ---------- */
+body.lp-doc .stat-band {
+  background: transparent;
+  border-top: 1px solid var(--line-warm);
+  border-bottom: 1px solid var(--line-warm);
+  box-shadow: none;
+}
+body.lp-doc .stat-band > div { border-color: var(--line-warm); }
+body.lp-doc .stat-band .num {
+  font-family: "Shippori Mincho B1", serif;
+  color: var(--navy);
+}
+body.lp-doc .stat-band .num small { color: var(--gold); }
+body.lp-doc .stat-band .label { color: #5a6374; }
+
+/* ---------- カード類: 白×温ヘアライン・影は最小 ---------- */
+body.lp-doc .pillar {
+  background: #fff;
+  border: 1px solid var(--line-warm);
+  border-radius: 8px;
+  box-shadow: none;
+  transition: transform .25s var(--ease-out), box-shadow .25s;
+}
+body.lp-doc .pillar:hover { box-shadow: 0 16px 40px -20px rgba(16,29,46,.25); }
+body.lp-doc .pillar .num { color: var(--gold); letter-spacing: .26em; }
+body.lp-doc .pillar h3 { font-size: 1.22rem; }
+
+/* ---------- 料金セクション（bg-deep）: 紺の提案書中扉 ---------- */
+body.lp-doc .bg-deep { background: var(--navy-deep); }
+body.lp-doc .bg-deep .section-head h2,
+body.lp-doc .bg-deep .section-head .sub { color: #f4f6fa; }
+body.lp-doc .bg-deep .section-head .sub strong { color: var(--gold-soft); background: none; }
+body.lp-doc .bg-deep .section-head .en::before { color: #fff; }
+
+/* ---------- テーブル: 罫線の効いた比較表 ---------- */
+body.lp-doc .table-wrap table thead th,
+body.lp-doc table thead th {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+body.lp-doc table th, body.lp-doc table td { border-color: var(--line-warm); }
+body.lp-doc .td-hl { background: #fbf6e7; }
+
+/* ---------- CTAブロック: 金縁の紺 ---------- */
+body.lp-doc .cta {
+  background: var(--navy-deep);
+  border: 1px solid rgba(183,146,46,.45);
+  border-radius: 8px;
+}
+body.lp-doc .cta::before, body.lp-doc .cta::after { display: none; }
+
+/* ---------- FAQ ---------- */
+body.lp-doc .faq details {
+  background: #fff;
+  border: 1px solid var(--line-warm);
+  border-radius: 6px;
+}
+body.lp-doc .faq summary { font-weight: 700; }
+
+/* ---------- マーカー: 黄→淡金 ---------- */
+body.lp-doc .section strong,
+body.lp-doc .section-head strong {
+  background: linear-gradient(transparent 58%, rgba(212,175,55,.32) 58%);
+}
+
+/* ---------- sticky CTA ---------- */
+body.lp-doc .sticky-cta { background: rgba(13,31,56,.96); border-top: 1px solid rgba(183,146,46,.4); }
+
+/* ---------- リンク色 ---------- */
+body.lp-doc a { color: var(--navy); }
+body.lp-doc a.btn-primary { color: #fff; }
+
+/* ---------- 3Dチルトは提案書トーンに合わないため無効化 ---------- */
+body.lp-doc [data-tilt], body.lp-doc .pillar { transform: none !important; }
+body.lp-doc .pillar:hover { transform: translateY(-4px) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  body.lp-doc .pillar, body.lp-doc .pillar:hover { transform: none !important; transition: none; }
+}
