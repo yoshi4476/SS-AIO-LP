@@ -1,0 +1,40 @@
+name: Weekly Newsletter Digest
+
+# 毎週月曜 9:00 JST（= UTC 0:00 月曜）に週刊ダイジェストを配信
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      demo:
+        description: "demo=送信せずプレビュー生成のみ"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: ダイジェスト配信
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+        run: |
+          if [ "${{ inputs.demo }}" = "true" ]; then
+            python scripts/send_digest.py --demo
+          else
+            python scripts/send_digest.py
+          fi

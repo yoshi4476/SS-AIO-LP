@@ -111,9 +111,73 @@
     }
     if (a.classList && (a.classList.contains('btn') || a.classList.contains('nav-cta'))) {
       var id = a.getAttribute('data-cta') || slugId((a.textContent || '').trim());
-      ga('cta_click', { cta_id: id, page_path: location.pathname });
-      ga('cta_' + slugId(id), { page_path: location.pathname });
+      var params = { cta_id: id, page_path: location.pathname };
+      if (a.getAttribute('data-ab-variant')) params.ab_variant = a.getAttribute('data-ab-variant');
+      ga('cta_click', params);
+      ga('cta_' + slugId(id), params);
     }
+  });
+
+  // 軽量A/Bテスト: [data-ab] の文言を50%でB案（data-ab-b）に差し替え。
+  // localStorageで同一訪問者のバリアントを固定し、GA4に ab_impression を送る。
+  document.querySelectorAll('[data-ab]').forEach(function (el) {
+    var key = el.getAttribute('data-ab');
+    var stKey = 'ab_' + key;
+    var v;
+    try {
+      v = localStorage.getItem(stKey);
+      if (!v) { v = Math.random() < 0.5 ? 'a' : 'b'; localStorage.setItem(stKey, v); }
+    } catch (err) { v = 'a'; }
+    if (v === 'b') {
+      var alt = el.getAttribute('data-ab-b');
+      if (alt) el.textContent = alt;
+    }
+    el.setAttribute('data-ab-variant', v);
+    ga('ab_impression', { ab_key: key, ab_variant: v, page_path: location.pathname });
+  });
+
+  // 記事の音声読み上げ（Web Speech API。非対応ブラウザではボタンを隠す）
+  var listenBtn = document.querySelector('.listen-btn');
+  if (listenBtn && 'speechSynthesis' in window) {
+    var speaking = false;
+    listenBtn.addEventListener('click', function () {
+      if (speaking) {
+        speechSynthesis.cancel();
+        speaking = false;
+        listenBtn.textContent = '🎧 聴く';
+        return;
+      }
+      var h1 = document.querySelector('h1');
+      var body = document.querySelector('.article-body');
+      var text = ((h1 ? h1.textContent : '') + '。' + (body ? body.innerText : '')).slice(0, 9000);
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ja-JP';
+      u.rate = 1.05;
+      u.onend = function () { speaking = false; listenBtn.textContent = '🎧 聴く'; };
+      speechSynthesis.cancel();
+      speechSynthesis.speak(u);
+      speaking = true;
+      listenBtn.textContent = '⏹ 停止';
+      ga('cta_click', { cta_id: 'listen_article', page_path: location.pathname });
+    });
+    window.addEventListener('beforeunload', function () { speechSynthesis.cancel(); });
+  } else if (listenBtn) {
+    listenBtn.style.display = 'none';
+  }
+
+  // ニュースレター購読フォームの計測+送信中表示
+  document.querySelectorAll('form.nl-form').forEach(function (f) {
+    f.addEventListener('submit', function () {
+      ga('form_submit', { form_type: 'ニュースレター購読', page_path: location.pathname });
+      ga('lead_capture', { lead_route: 'newsletter', form_type: 'ニュースレター購読' });
+      ga('lead_newsletter', {});
+      var btn = f.querySelector('button[type="submit"]');
+      if (btn && !btn.disabled) {
+        btn.disabled = true;
+        btn.textContent = '登録中…';
+        setTimeout(function () { btn.disabled = false; btn.textContent = '購読する'; }, 8000);
+      }
+    });
   });
 
   // form_submit（種別付き）+ lead_capture + lead_〈経路〉 + 送信中フィードバック
