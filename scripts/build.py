@@ -156,6 +156,12 @@ def build_article(path: Path, template: str, related: str = ""):
     # 装飾記法: ==テキスト== → <mark>（黄マーカー）。CSSでstrong=黄マーカー等も自動適用
     content = re.sub(r"==([^=<>\n]+?)==", r"<mark>\1</mark>", content)
 
+    # マーカー数チェック（自動生成記事の装飾漏れ検出。基準: 8箇所以上、推奨12-18）
+    marker_count = content.count("<strong>") + content.count("<mark>")
+    if marker_count < 8:
+        print(f"WARN: マーカー不足: {meta['slug']} は強調が{marker_count}箇所"
+              f"（基準8箇所以上・推奨12-18箇所。**太字** か ==マーカー== を追加すること）")
+
     eyecatch = ""
     if meta.get("eyecatch"):
         eyecatch = (f'<figure class="article-eyecatch"><img src="{meta["eyecatch"]}" '
