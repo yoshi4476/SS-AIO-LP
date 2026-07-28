@@ -62,8 +62,16 @@ img { max-width: 100%; height: auto; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
 /* ---------- スクロール演出 ---------- */
-html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
-html.js .reveal.in { opacity: 1; transform: none; }
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(34px) scale(.985);
+  filter: blur(7px);
+  transition:
+    opacity .9s cubic-bezier(.16, 1, .3, 1) var(--d, 0ms),
+    transform .9s cubic-bezier(.16, 1, .3, 1) var(--d, 0ms),
+    filter .9s cubic-bezier(.16, 1, .3, 1) var(--d, 0ms);
+}
+html.js .reveal.in { opacity: 1; transform: none; filter: none; }
 html.js .reveal-d1 { transition-delay: .1s; }
 html.js .reveal-d2 { transition-delay: .2s; }
 html.js .reveal-d3 { transition-delay: .3s; }
@@ -656,4 +664,121 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 /* reduced-motion: スムーススクロールも停止（アニメーションと整合） */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   MOTION SYSTEM v2 — 清潔感×高揚感（Awwwardsグレードの動き）
+   すべて prefers-reduced-motion で完全停止する
+   ============================================================ */
+
+/* ---------- ページ遷移: View Transitions（対応ブラウザのみ・自動強化） ---------- */
+@view-transition { navigation: auto; }
+@keyframes vtOut { to { opacity: 0; transform: translateY(-14px); filter: blur(6px); } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(18px); filter: blur(8px); } }
+::view-transition-old(root) { animation: vtOut .28s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vtIn .5s .12s cubic-bezier(.16, 1, .3, 1) both; }
+
+/* ---------- キネティックタイプ: 見出しが1文字ずつ立ち上がる ---------- */
+html.js .kinetic .k-ch {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(1.1em) rotate(4deg);
+  filter: blur(6px);
+  animation: kChIn .7s cubic-bezier(.16, 1, .3, 1) forwards;
+  animation-delay: calc(180ms + var(--i) * 26ms);
+}
+@keyframes kChIn { to { opacity: 1; transform: none; filter: none; } }
+
+/* ---------- 見出し下線: 到達時にグラデーションが走る ---------- */
+html.js .section-head.reveal h2 { position: relative; display: inline-block; }
+html.js .section-head.reveal h2::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -.22em;
+  width: 100%; height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue), #7cc4ff, var(--blue));
+  background-size: 200% 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .9s .25s cubic-bezier(.16, 1, .3, 1);
+}
+html.js .section-head.reveal.in h2::after {
+  transform: scaleX(1);
+  animation: gradSlide 3s 1.2s linear infinite;
+}
+@keyframes gradSlide { to { background-position: -200% 0; } }
+body.lp-doc .section-head.reveal h2::after { background: linear-gradient(90deg, var(--gold), #e8c766, var(--gold)); background-size: 200% 100%; }
+
+/* ---------- 回転コニック枠: ホバーで光が一周する ---------- */
+body:not(.lp-doc) .cat-card, .term-tile, body:not(.lp-doc) .pillar { position: relative; }
+body:not(.lp-doc) .cat-card::before,
+.term-tile::before,
+body:not(.lp-doc) .pillar::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--ang, 0deg), transparent 8%, var(--blue) 18%, #8ec8ff 24%, transparent 34%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+@property --ang { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+body:not(.lp-doc) .cat-card:hover::before,
+.term-tile:hover::before,
+body:not(.lp-doc) .pillar:hover::before {
+  opacity: 1;
+  animation: angSpin 2.4s linear infinite;
+}
+@keyframes angSpin { to { --ang: 360deg; } }
+
+/* ---------- ボタン: 光沢スイープ+押下フィードバック（全サイト共通化） ---------- */
+.btn { will-change: transform; }
+.btn:active { transform: scale(.965) !important; transition-duration: .08s; }
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: "";
+  position: absolute; top: 0; left: -70%;
+  width: 45%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.4), transparent);
+  transform: skewX(-20deg);
+  transition: left .55s cubic-bezier(.16, 1, .3, 1);
+  pointer-events: none;
+}
+.btn-primary:hover::after { left: 125%; }
+
+/* ---------- カーソルグロー（pointer:fineのみ・控えめな青の残光） ---------- */
+.cursor-glow {
+  position: fixed;
+  left: 0; top: 0;
+  width: 340px; height: 340px;
+  margin: -170px 0 0 -170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,.10), transparent 65%);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity .4s;
+}
+body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.09), transparent 65%); }
+
+/* ---------- 数値のポップ（count-up完了時） ---------- */
+@keyframes numPop { 30% { transform: scale(1.12); } }
+.num-pop { animation: numPop .45s cubic-bezier(.16, 1, .3, 1); display: inline-block; }
+
+/* ---------- reduced-motion: v2モーション全停止 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  html.js .kinetic .k-ch { opacity: 1; transform: none; filter: none; animation: none; }
+  html.js .section-head.reveal h2::after { transition: none; animation: none; transform: scaleX(1); }
+  body:not(.lp-doc) .cat-card:hover::before, .term-tile:hover::before,
+  body:not(.lp-doc) .pillar:hover::before { animation: none; }
+  .btn-primary::after { display: none; }
+  .cursor-glow { display: none; }
+  .num-pop { animation: none; }
 }

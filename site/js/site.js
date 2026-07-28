@@ -15,6 +15,79 @@
     });
   }
 
+  // ===== MOTION v2: 自動エンハンス（IO登録より先に実行） =====
+
+  // グリッド系の子要素へ reveal + スタガー遅延を自動付与（マークアップ変更なしで全ページに波及）
+  if (!reduce) {
+    ['.pillar-grid', '.card-grid', '.term-grid', '.post-list', '.stat-band', '.check-list', '.faq-grid'].forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (grid) {
+        Array.prototype.forEach.call(grid.children, function (child, idx) {
+          child.classList.add('reveal');
+          child.style.setProperty('--d', Math.min(idx, 7) * 80 + 'ms');
+        });
+      });
+    });
+  }
+
+  // キネティックタイプ: .kinetic 内のテキストを1文字ずつ<span>化（em/br等の構造は保持）
+  document.querySelectorAll('.kinetic').forEach(function (root) {
+    if (reduce) return;
+    var count = 0;
+    (function split(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split('').forEach(function (ch) {
+            if (ch.trim() === '') { frag.appendChild(document.createTextNode(ch)); return; }
+            var s = document.createElement('span');
+            s.className = 'k-ch';
+            s.style.setProperty('--i', count++);
+            s.textContent = ch;
+            frag.appendChild(s);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1 && n.tagName === 'EM') {
+          // グラデーション文字はclip崩れ防止のため1チャンクで動かす
+          n.classList.add('k-ch');
+          n.style.setProperty('--i', count);
+          count += 3;
+        } else if (n.nodeType === 1 && n.tagName !== 'BR') {
+          split(n);
+        }
+      });
+    })(root);
+  });
+
+  // マグネティックボタン: カーソルに吸い付く主要CTA（pointer:fineのみ）
+  if (!reduce && window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('.btn-primary, .nav-cta').forEach(function (btn) {
+      btn.addEventListener('pointermove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width / 2) / r.width;
+        var dy = (e.clientY - r.top - r.height / 2) / r.height;
+        btn.style.transform = 'translate(' + (dx * 7).toFixed(1) + 'px,' + (dy * 5).toFixed(1) + 'px)';
+      });
+      btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+    });
+
+    // カーソルグロー（青の残光がゆっくり追従）
+    var glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(glow);
+    var gx = 0, gy = 0, tx = 0, ty = 0, glowOn = false;
+    document.addEventListener('pointermove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+      if (!glowOn) { glow.style.opacity = '1'; glowOn = true; }
+    }, { passive: true });
+    (function loop() {
+      gx += (tx - gx) * 0.09;
+      gy += (ty - gy) * 0.09;
+      glow.style.transform = 'translate(' + gx.toFixed(1) + 'px,' + gy.toFixed(1) + 'px)';
+      requestAnimationFrame(loop);
+    })();
+  }
+
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -38,7 +111,7 @@
           var p = Math.min((ts - start) / dur, 1);
           p = 1 - Math.pow(1 - p, 3);
           el.textContent = Math.round(target * p);
-          if (p < 1) requestAnimationFrame(tick);
+          if (p < 1) { requestAnimationFrame(tick); } else { el.classList.add('num-pop'); }
         }
         requestAnimationFrame(tick);
       });
