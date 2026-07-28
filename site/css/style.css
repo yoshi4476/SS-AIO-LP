@@ -652,3 +652,8 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 .nl-form input[type="email"]:focus { outline: 3px solid rgba(96,165,250,.6); }
 .nl-form .btn { white-space: nowrap; }
 @media (max-width: 560px) { .nl-form { flex-direction: column; max-width: none; } }
+
+/* reduced-motion: スムーススクロールも停止（アニメーションと整合） */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

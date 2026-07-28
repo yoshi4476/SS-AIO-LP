@@ -52,7 +52,8 @@ CATEGORIES = {
     "ai-marketing": ("AI集客・活用全般", "cat-ai"),
 }
 
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "privacy/", "tokushoho/", "blog/", "glossary/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/"]
+# privacy/tokushoho は noindex のため sitemap から除外（noindex×sitemap掲載の矛盾を防ぐ）
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "glossary/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/"]
 
 
 def jp_date(iso: str) -> str:
@@ -499,10 +500,16 @@ def main():
     for p in sorted(ARTICLES.glob("*.md")):
         if p.name.startswith("_"):
             continue
-        meta = parse_article(p)[0]
+        # 1記事の不正フロントマターで全ビルドを止めない（不正記事はBLOCKED扱いで続行）
+        try:
+            meta = parse_article(p)[0]
+        except Exception as e:
+            blocked.append(f"{p.stem}: フロントマター不正（{e}）")
+            print(f"BLOCKED(公開不可): {p.stem}: フロントマター不正 → {e}")
+            continue
         sc = meta.get("score")
-        if sc is None:
-            blocked.append(f"{meta['slug']}: 未審査（フロントマターに score がない）")
+        if not isinstance(sc, (int, float)):
+            blocked.append(f"{meta['slug']}: 未審査（score が数値で記載されていない: {sc!r}）")
             blocked_metas.append(meta)
             continue
         if sc < QUALITY_GATE:

@@ -29,7 +29,7 @@ def load_metas():
         meta = yaml.safe_load(m.group(1))
         body = re.sub(r"\s|<[^>]+>", "", re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", m.group(2)))
         meta["_chars"] = len(body)
-        (pub if meta.get("score", 0) >= 90 else blocked).append(meta)
+        (pub if (meta.get("score") or 0) >= 90 else blocked).append(meta)
     return pub, blocked
 
 
@@ -71,8 +71,12 @@ def main():
     fb = ROOT / "kpi_feedback.md"
     text = fb.read_text(encoding="utf-8-sig")
     text = re.sub(r"^# KPIフィードバック（自動更新: .*?）",
-                  f"# KPIフィードバック（自動更新: {today.isoformat()} ローカル集計）", text, count=1)
-    text = re.sub(r"## サイト概況.*?(?=## 成功パターン)", overview + "\n", text, flags=re.S)
+                  lambda _: f"# KPIフィードバック（自動更新: {today.isoformat()} ローカル集計）",
+                  text, count=1)
+    text, n = re.subn(r"## サイト概況.*?(?=## 成功パターン)",
+                      lambda _: overview + "\n", text, flags=re.S)
+    if n == 0:
+        print("WARN: kpi_feedback.md の「## サイト概況」〜「## 成功パターン」区間が見つからず更新できませんでした")
     fb.write_text(text, encoding="utf-8")
     print(f"kpi_feedback.md 更新: 公開{len(pub)}本 / 直近7日{len(recent)}本 / 平均{avg_score}点・{avg_chars:,}字")
 

@@ -45,7 +45,7 @@ def recent_articles():
         if not m:
             continue
         meta = yaml.safe_load(m.group(1))
-        if meta.get("score", 0) < 90:
+        if (meta.get("score") or 0) < 90:
             continue
         pub = date.fromisoformat(str(meta["date"]))
         if pub >= date.today() - timedelta(days=DAYS):

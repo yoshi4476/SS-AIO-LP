@@ -32,6 +32,8 @@ def main():
     if not p.exists():
         raise SystemExit(f"articles/{slug}.md が見つかりません")
     m = re.match(r"^---\s*\n(.*?)\n---", p.read_text(encoding="utf-8-sig"), re.S)
+    if not m:
+        raise SystemExit(f"articles/{slug}.md にフロントマターがありません")
     meta = yaml.safe_load(m.group(1))
 
     # 1) アイキャッチ（フロントマターのtitle/categoryから自動）

@@ -405,7 +405,7 @@ body.lp-doc .kicker {
   background: rgba(255,255,255,.12);
 }
 body.lp-doc .kicker::before { background: #fff; }
-body.lp-doc .btn-ghost-light { color: #fff; border-color: rgba(255,255,255,.5); }
+body.lp-doc .hero-dark .btn-ghost-light { color: #fff; border-color: rgba(255,255,255,.5); }
 
 /* ---------- 料金: 黒廃止 → 紙白 ---------- */
 body.lp-doc [data-area-id="price"] { background: var(--paper); }
@@ -576,4 +576,22 @@ body.lp-doc .site-footer .copyright { color: #8a8471; border-color: #e0dac8; }
 @media (max-width: 940px) {
   body.lp-doc .hero-grid { grid-template-columns: 1fr !important; }
   body.lp-doc .hero-dark h1 { font-size: clamp(1.7rem, 7.5vw, 2.4rem); }
+}
+
+/* ============================================================
+   v6: 監査で検出したカスケード事故の修正（最終勝者をここで確定）
+   ============================================================ */
+/* sticky-cta（白背景）上のゴーストボタンは墨色で可視化 */
+body.lp-doc .sticky-cta .btn-ghost-light {
+  color: var(--ink);
+  border-color: rgba(35,32,26,.4);
+}
+/* 比較表の自社列ヘッダー: 青×墨の低コントラストを金×白に */
+body.lp-doc thead th.th-hl { background: var(--gold) !important; color: #fff; }
+/* おすすめ列セル: style.cssの!important(水色)に勝って生成りへ */
+body.lp-doc td.td-hl { background: #fbf6e7 !important; }
+/* reduced-motion: v5のホバー移動より後着で確実に停止させる */
+@media (prefers-reduced-motion: reduce) {
+  body.lp-doc .pillar,
+  body.lp-doc .pillar:hover { transform: none !important; transition: none; }
 }

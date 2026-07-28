@@ -8,9 +8,10 @@
   var cfg = window.QUIZ;
   var body = document.getElementById("qbody");
   var bar = document.getElementById("qbar");
-  if (!cfg || !body) return;
+  if (!cfg || !body || !bar) return;
+  body.setAttribute("aria-live", "polite");
 
-  var i = 0, score = 0;
+  var i = 0, score = 0, started = false;
 
   function show() {
     var q = cfg.questions[i];
@@ -19,6 +20,12 @@
       '</div><div class="q-title">' + q.t + '</div><div class="q-opts">';
     q.o.forEach(function (o, j) { html += '<button class="q-opt" data-j="' + j + '">' + o[0] + "</button>"; });
     body.innerHTML = html + "</div>";
+    // キーボード操作: 画面差し替えでフォーカスが失われないよう先頭の選択肢へ移す
+    if (started) {
+      var first = body.querySelector(".q-opt");
+      if (first) first.focus();
+    }
+    started = true;
     body.querySelectorAll(".q-opt").forEach(function (b) {
       b.addEventListener("click", function () {
         score += q.o[+b.dataset.j][1];
@@ -72,6 +79,8 @@
       cfg.links.map(function (l) { return '<a href="' + l[1] + '">' + l[0] + "</a>"; }).join(" ／ ") + "</p>" +
       btns +
       '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本診断は回答にもとづく簡易判定です。無料相談では実データで詳細分析します。</p></div>';
+    var h2 = body.querySelector("h2");
+    if (h2) { h2.setAttribute("tabindex", "-1"); h2.focus(); }
   }
   show();
 })();

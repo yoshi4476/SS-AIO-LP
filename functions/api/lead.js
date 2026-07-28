@@ -26,7 +26,9 @@ export async function onRequestPost({ request, env }) {
     return new Response("送信設定が未完了です。恐れ入りますが 06-4305-7547 までお電話ください。", { status: 500 });
   }
 
-  const label = data.form_type || "お問い合わせ";
+  // 件名用サニタイズ（改行・長大入力による件名破壊/インジェクション防止）
+  const subj = (s) => String(s || "").replace(/[\r\n]+/g, " ").slice(0, 80);
+  const label = subj(data.form_type) || "お問い合わせ";
   const lines = Object.entries(data)
     .filter(([k]) => !k.startsWith("_"))
     .map(([k, v]) => `${k}: ${v}`)
@@ -39,7 +41,7 @@ export async function onRequestPost({ request, env }) {
       from: env.LEAD_FROM_EMAIL,
       to: [env.LEAD_TO_EMAIL],
       reply_to: data.email,
-      subject: `【AI集客ラボ】${label}: ${data.company} ${data.name}様`,
+      subject: `【AI集客ラボ】${label}: ${subj(data.company)} ${subj(data.name)}様`,
       text: `AI集客ラボのフォームから${label}が届きました。\n\n${lines}\n\n---\n送信元ページ: ${request.headers.get("referer") || "不明"}`,
     }),
   });

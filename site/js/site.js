@@ -44,6 +44,12 @@
       });
     }, { threshold: 0.6 });
     document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+  } else {
+    // IntersectionObserver非対応ブラウザ: reveal要素が非表示のままにならないよう即表示
+    document.querySelectorAll('.reveal, .bar-grow, .line-draw').forEach(function (el) { el.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(function (el) {
+      el.textContent = el.getAttribute('data-count');
+    });
   }
 
   // ヒーローカードの3Dチルト（マウス追従。タッチ/reduced-motionでは無効）
@@ -130,7 +136,17 @@
     } catch (err) { v = 'a'; }
     if (v === 'b') {
       var alt = el.getAttribute('data-ab-b');
-      if (alt) el.textContent = alt;
+      if (alt) {
+        // 矢印スパン等の子要素を保持したまま文言だけ差し替える
+        var arw = el.querySelector('.arw');
+        if (arw) {
+          el.textContent = '';
+          el.appendChild(document.createTextNode(alt.replace(/\s*→\s*$/, ' ')));
+          el.appendChild(arw);
+        } else {
+          el.textContent = alt;
+        }
+      }
     }
     el.setAttribute('data-ab-variant', v);
     ga('ab_impression', { ab_key: key, ab_variant: v, page_path: location.pathname });

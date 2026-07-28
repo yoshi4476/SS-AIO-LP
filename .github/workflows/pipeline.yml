@@ -92,7 +92,7 @@ jobs:
         run: |
           out=$(python scripts/build.py); echo "$out"
           today=$(date +%F)
-          if ! echo "$out" | grep -q "BLOCKED" && grep -lq "date: $today" articles/*.md; then
+          if ! echo "$out" | grep -q "BLOCKED" && grep -lq "^date: $today" articles/*.md; then
             echo "リトライ不要（BLOCKEDなし・本日分の記事あり）"
             exit 0
           fi
@@ -107,5 +107,7 @@ jobs:
             echo "変更なし — コミットをスキップ"
           else
             git commit -m "publish: auto pipeline $(date '+%Y-%m-%d %H:%M JST')"
+            # 他の実行（ローカル/手動）が先にpushしていても生成記事を失わない
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi

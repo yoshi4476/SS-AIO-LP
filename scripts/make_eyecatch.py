@@ -77,6 +77,8 @@ def parse_frontmatter(slug):
         raise SystemExit(f"articles/{slug}.md が見つかりません（手動指定モードを使うか、slugを確認）")
     import yaml
     m = re.match(r"^---\s*\n(.*?)\n---", p.read_text(encoding="utf-8-sig"), re.S)
+    if not m:
+        raise SystemExit(f"articles/{slug}.md にフロントマターがありません")
     meta = yaml.safe_load(m.group(1))
     return meta["title"], CAT_NAMES.get(meta["category"], "AI集客・活用全般")
 

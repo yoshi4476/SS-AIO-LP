@@ -20,27 +20,32 @@ Get-ChildItem $logDir -Filter *.log | Where-Object { $_.LastWriteTime -lt (Get-D
     Remove-Item -Force -ErrorAction SilentlyContinue
 
 "[$(Get-Date -Format s)] pipeline start" | Out-File $log -Encoding utf8
-& "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $prompt --dangerously-skip-permissions --max-turns 400 *>> $log
+& "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $prompt --dangerously-skip-permissions --max-turns 400 2>&1 |
+    Out-File $log -Append -Encoding utf8
 "[$(Get-Date -Format s)] pipeline end (exit=$LASTEXITCODE)" | Out-File $log -Append -Encoding utf8
 
-# Immediate retry (max 2): if the run left BLOCKED articles (score < 90), fix and publish them now
+# Immediate retry (max 2): if the run left BLOCKED articles (score < 90) or build crashed, fix now
 $retryPrompt = Get-Content -Raw -Encoding UTF8 (Join-Path $proj "automation\retry_prompt.txt")
 for ($i = 1; $i -le 2; $i++) {
     $buildOut = & python "scripts\build.py" 2>&1 | Out-String
-    if ($buildOut -notmatch "BLOCKED") { break }
-    "[$(Get-Date -Format s)] BLOCKED articles found -> retry $i/2" | Out-File $log -Append -Encoding utf8
-    & "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $retryPrompt --dangerously-skip-permissions --max-turns 400 *>> $log
+    $buildExit = $LASTEXITCODE
+    if ($buildExit -eq 0 -and $buildOut -notmatch "BLOCKED") { break }
+    "[$(Get-Date -Format s)] BLOCKED/build failure (exit=$buildExit) -> retry $i/2" | Out-File $log -Append -Encoding utf8
+    & "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $retryPrompt --dangerously-skip-permissions --max-turns 400 2>&1 |
+        Out-File $log -Append -Encoding utf8
     "[$(Get-Date -Format s)] retry $i end (exit=$LASTEXITCODE)" | Out-File $log -Append -Encoding utf8
 }
 
 # ローカルKPI集計（公開前でも学習ループを回す。GA4/GSC稼働後はDaily KPIが上書き）
-& python "scripts\local_kpi.py" *>> $log
+& python "scripts\local_kpi.py" 2>&1 | Out-File $log -Append -Encoding utf8
 
 # 1行サマリを summary.log に追記（後から一覧で健康状態を確認できる）
 $finalBuild = & python "scripts\build.py" 2>&1 | Out-String
+$finalExit = $LASTEXITCODE
 $todayStr = Get-Date -Format "yyyy-MM-dd"
-$newToday = Select-String -Path "articles\*.md" -Pattern ("date: " + $todayStr) -List
-$status = if ($finalBuild -match "BLOCKED") { "NG(BLOCKED残り)" }
+$newToday = Select-String -Path "articles\*.md" -Pattern ("^date: " + $todayStr) -List
+$status = if ($finalExit -ne 0) { "NG(build失敗 exit=$finalExit)" }
+          elseif ($finalBuild -match "BLOCKED") { "NG(BLOCKED残り)" }
           elseif ($newToday) { "OK(本日分あり)" }
           else { "WARN(本日分なし)" }
 "$(Get-Date -Format 'yyyy-MM-dd HH:mm') | $status | log=$([System.IO.Path]::GetFileName($log))" |

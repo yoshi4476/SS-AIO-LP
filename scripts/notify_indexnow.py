@@ -12,7 +12,10 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-env = dict(l.split("=", 1) for l in (ROOT / ".env").read_text(encoding="utf-8").splitlines()
+env_path = ROOT / ".env"
+if not env_path.exists():
+    raise SystemExit(".env がありません（.env.example をコピーして作成してください）")
+env = dict(l.split("=", 1) for l in env_path.read_text(encoding="utf-8-sig").splitlines()
            if "=" in l and not l.strip().startswith("#"))
 KEY = env.get("INDEXNOW_KEY", "").strip()
 SITE_URL = env.get("SITE_URL", "https://example.com").strip()

@@ -3,7 +3,7 @@
  * POST { url } → 対象ページ+robots.txt+llms.txt を取得し、
  * AIO/SEO対応12項目を100点満点で採点して返す。
  */
-const PRIVATE = /^(localhost|127\.|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|0\.|\[::1\])/i;
+const PRIVATE = /^(localhost|127\.|10\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|0\.|\[::1\])/i;
 
 async function get(url, limit = 400000) {
   try {
@@ -11,6 +11,10 @@ async function get(url, limit = 400000) {
       redirect: "follow",
       headers: { "User-Agent": "SevenSenses-SiteAudit/1.0 (+https://example.com/site-audit/)" },
     });
+    // リダイレクト先が内部アドレスに向いた場合も拒否（SSRF対策）
+    if (PRIVATE.test(new URL(res.url).hostname)) {
+      return { ok: false, status: 0, text: "", finalUrl: url };
+    }
     const text = (await res.text()).slice(0, limit);
     return { ok: res.ok, status: res.status, text, finalUrl: res.url };
   } catch {
@@ -25,6 +29,7 @@ export async function onRequestPost({ request }) {
   } catch {
     return json({ error: "リクエスト形式が不正です" }, 400);
   }
+  if (!body || typeof body !== "object") body = {};
   let target = String(body.url || "").trim();
   if (!/^https?:\/\//i.test(target)) target = "https://" + target;
   let host;
@@ -52,9 +57,14 @@ export async function onRequestPost({ request }) {
 
   // robots.txt: AIボットが明示的にDisallowされていないか
   const rt = robots.ok ? robots.text : "";
-  const botBlocked = (bot) => {
+  const uaGroup = (bot) => {
     const m = rt.match(new RegExp(`User-agent:\\s*${bot}[\\s\\S]*?(?=User-agent:|$)`, "i"));
-    return m ? /Disallow:\s*\/\s*$/im.test(m[0]) : false;
+    return m ? m[0] : null;
+  };
+  const botBlocked = (bot) => {
+    // 個別UAの指定がなければ「User-agent: *」のルールが適用される（robots.txt仕様）
+    const g = uaGroup(bot) ?? uaGroup("\\*");
+    return g ? /Disallow:\s*\/\s*$/im.test(g) : false;
   };
   const aiBlocked = ["GPTBot", "PerplexityBot", "ClaudeBot", "OAI-SearchBot"].filter(botBlocked);
 

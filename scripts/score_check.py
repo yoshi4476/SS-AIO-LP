@@ -23,6 +23,8 @@ def main():
         raise SystemExit(f"articles/{slug}.md が見つかりません")
     text = p.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", text, re.S)
+    if not m:
+        raise SystemExit(f"articles/{slug}.md にフロントマターがありません")
     meta, body = yaml.safe_load(m.group(1)), m.group(2)
     # コードブロック内はH2・文言カウントの対象外（プロンプト例の ## 等を誤検出しない）
     body_nc = re.sub(r"```.*?```", "", body, flags=re.S)
@@ -57,7 +59,8 @@ def main():
     for i, ln in enumerate(lines):
         if ln.startswith("## ") and "よくある質問" not in ln:
             nxt = next((x.strip() for x in lines[i + 1:] if x.strip()), "")
-            if nxt.startswith(("|", "-", "*", "<figure", "<div", "```", "#", "1.")):
+            # 記号+空白のリスト/表のみを検出（**太字**始まりの1文結論を誤検出しない）
+            if nxt.startswith(("| ", "|-", "- ", "* ", "<figure", "<div", "```", "#", "1. ")):
                 bad_lead.append(ln[3:])
     add("全H2直下がリード文（表・リスト直置きなし）", not bad_lead, "、".join(bad_lead[:3]))
 
