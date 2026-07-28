@@ -156,6 +156,44 @@ def fetch_real():
                         "ctr": round(r["ctr"] * 100, 1), "pos": round(r["position"], 1)}
                        for r in res.get("rows", [])]
 
+    # ページ別実績（当月・上位12）
+    try:
+        res = sc.searchanalytics().query(siteUrl=site, body={
+            "startDate": f"{labels[-1]}-01", "endDate": date.today().isoformat(),
+            "dimensions": ["page"], "rowLimit": 12}).execute()
+        data["pages"] = [{"path": r["keys"][0].replace(site.rstrip("/"), "") or "/",
+                          "imp": int(r["impressions"]), "clicks": int(r["clicks"]),
+                          "ctr": round(r["ctr"] * 100, 1), "pos": round(r["position"], 1)}
+                         for r in res.get("rows", [])]
+    except Exception:
+        data["pages"] = []
+
+    # 日別クリック推移（当月）
+    try:
+        res = sc.searchanalytics().query(siteUrl=site, body={
+            "startDate": f"{labels[-1]}-01", "endDate": date.today().isoformat(),
+            "dimensions": ["date"], "rowLimit": 31}).execute()
+        rows = sorted(res.get("rows", []), key=lambda r: r["keys"][0])
+        data["daily"] = {"labels": [r["keys"][0][8:] for r in rows],
+                         "clicks": [int(r["clicks"]) for r in rows],
+                         "imps": [int(r["impressions"]) for r in rows]}
+    except Exception:
+        data["daily"] = {"labels": [], "clicks": [], "imps": []}
+
+    # チャネル別・デバイス別セッション（GA4・当月）
+    def ga_dist(dim):
+        try:
+            rep = ga.run_report(RunReportRequest(
+                property=prop,
+                date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date="today")],
+                dimensions=[Dimension(name=dim)], metrics=[Metric(name="sessions")]))
+            pairs = [(r.dimension_values[0].value, int(r.metric_values[0].value)) for r in rep.rows]
+            return sorted(pairs, key=lambda x: -x[1])
+        except Exception:
+            return []
+    data["channels"] = ga_dist("sessionDefaultChannelGroup")
+    data["devices"] = ga_dist("deviceCategory")
+
     # --- スプレッドシート: 記事作成ログ ---
     try:
         sh = build("sheets", "v4", credentials=creds)
@@ -215,6 +253,22 @@ def fetch_demo():
             {"date": "2026/07/19", "title": "Googleマップの口コミを増やす方法5選", "score": "117/120", "status": "公開済み"},
             {"date": "2026/07/27", "title": "AI集客の完全ガイド", "score": "119/120", "status": "公開済み"},
         ]},
+        "pages": [
+            {"path": "/aio/aio-taisaku-guide/", "imp": 8900, "clicks": 410, "ctr": 4.6, "pos": 5.8},
+            {"path": "/aio/llmo-taisaku-hoho/", "imp": 7200, "clicks": 360, "ctr": 5.0, "pos": 4.9},
+            {"path": "/meo/meo-taisaku-yarikata/", "imp": 6800, "clicks": 250, "ctr": 3.7, "pos": 7.8},
+            {"path": "/meo/kuchikomi-fuyasu-hoho/", "imp": 5100, "clicks": 190, "ctr": 3.7, "pos": 7.2},
+            {"path": "/", "imp": 4300, "clicks": 170, "ctr": 4.0, "pos": 8.5},
+            {"path": "/ai-marketing/ai-shukyaku-guide/", "imp": 3900, "clicks": 140, "ctr": 3.6, "pos": 9.1},
+            {"path": "/lp/", "imp": 2100, "clicks": 90, "ctr": 4.3, "pos": 10.4},
+        ],
+        "daily": {"labels": [f"{i:02d}" for i in range(1, 31)],
+                  "clicks": [18, 22, 25, 21, 28, 33, 30, 27, 35, 38, 34, 41, 39, 44, 40,
+                             46, 43, 49, 52, 47, 55, 51, 58, 54, 60, 57, 63, 59, 66, 62],
+                  "imps": []},
+        "channels": [("Organic Search", 980), ("Direct", 340), ("Referral", 210),
+                     ("Organic Social", 120), ("Email", 70)],
+        "devices": [("mobile", 1030), ("desktop", 620), ("tablet", 70)],
     }
 
 
@@ -299,8 +353,50 @@ def analyze(d):
         "検索とAIの両輪で「見つかる→選ばれる」導線が機能し始めています。"
         "来月は本レポート8章の実行順プランに沿って、LPの離脱改善とリライトを最優先で進めます。")
 
+    # サイト資産サマリー（リポジトリの記事から実測 — デモ/実データ共通）
+    import re as _re
+    scores, lens, cats = [], [], {}
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        m = _re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, _re.S)
+        if not m:
+            continue
+        fm, body = m.groups()
+        sc = _re.search(r"^score:\s*(\d+)", fm, _re.M)
+        if sc:
+            scores.append(int(sc.group(1)))
+        lens.append(len(_re.sub(r"\s", "", body)))
+        cm = _re.search(r"^category:\s*(\S+)", fm, _re.M)
+        if cm:
+            cats[cm.group(1)] = cats.get(cm.group(1), 0) + 1
+    assets = {
+        "count": len(lens),
+        "avg_score": round(sum(scores) / len(scores), 1) if scores else 0,
+        "avg_len": round(sum(lens) / len(lens)) if lens else 0,
+        "cats": sorted(cats.items(), key=lambda x: -x[1]),
+    }
+
+    # 来月のKPI目標（当月実績から自動設定。立ち上げ期は最低増加量でフロアを敷く）
+    def tgt(v, rate, floor):
+        return max(round(v * rate), v + floor)
+    targets = [
+        ("セッション", f'{cur.get("sessions", 0):,}', f'{tgt(cur.get("sessions", 0), 1.3, 100):,}',
+         "記事数増加+順位上昇の複利。前月比+30%または+100の大きい方"),
+        ("検索クリック", f'{cur.get("clicks", 0):,}', f'{tgt(cur.get("clicks", 0), 1.4, 60):,}',
+         "新規記事のインデックス進行とリライトによるCTR改善"),
+        ("検索表示回数", f'{cur.get("impressions", 0):,}', f'{tgt(cur.get("impressions", 0), 1.4, 2000):,}',
+         "露出の総量。テーマの面を広げるほど伸びる先行指標"),
+        ("CV（相談+資料DL）", str(cur.get("cv", 0)), str(tgt(cur.get("cv", 0), 1.5, 2)),
+         "記事→LP導線の改善プラン実施による転換率向上"),
+        ("AI経由参照", str(d.get("ai_sessions", 0)), str(tgt(d.get("ai_sessions", 0), 1.5, 5)),
+         "記事蓄積とllms.txt更新によるAI引用の積み上がり"),
+        ("新規公開記事", f'{d["content"]["published"]}本', "60本",
+         "毎日2本の自動生成体制の定常値（品質90点以上のみ）"),
+    ]
+
     return {"grown": grown, "fixes": fixes, "actions": actions, "mom": mom,
-            "winners": winners, "challengers": challengers, "summary": summary}
+            "winners": winners, "challengers": challengers, "summary": summary,
+            "assets": assets, "targets": targets}
 
 
 # ============================================================
@@ -384,6 +480,43 @@ def svg_heatbars(areas):
     return f'<div class="heatmap">{rows}</div>'
 
 
+def dist_bars(pairs, color="#2563eb", jp=None):
+    """チャネル別・デバイス別などの分布バー"""
+    if not pairs:
+        return f'<p style="color:{MUTED}">データなし（GA4接続後に表示されます）</p>'
+    total = sum(v for _, v in pairs) or 1
+    rows = ""
+    for name, v in pairs:
+        label = (jp or {}).get(name, name)
+        pct = round(v / total * 100)
+        rows += (f'<div class="hm-row"><div class="hm-label">{label}</div>'
+                 f'<div class="hm-track"><div class="hm-bar" style="width:{max(pct,2)}%;background:{color}"></div></div>'
+                 f'<div class="hm-val">{v:,}<span style="color:{MUTED};font-weight:normal"> ({pct}%)</span></div></div>')
+    return f'<div class="heatmap">{rows}</div>'
+
+
+def svg_series(vals, labels, color, title, height=170):
+    """日別推移などの汎用折れ線（月次svg_lineの生値版）"""
+    if not vals or not any(vals):
+        return f'<p style="color:{MUTED}">データなし</p>'
+    W, H, PL, PB = 560, height, 40, 26
+    mx = max(vals) * 1.15
+    n = max(len(vals) - 1, 1)
+    pts = [(PL + i * (W - PL - 12) / n, H - PB - (v / mx) * (H - PB - 18))
+           for i, v in enumerate(vals)]
+    path = "M" + " L".join(f"{x:.0f} {y:.0f}" for x, y in pts)
+    step = max(1, len(labels) // 10)
+    ticks = "".join(f'<text x="{pts[i][0]:.0f}" y="{H-6}" font-size="9" fill="{MUTED}" text-anchor="middle">{labels[i]}</text>'
+                    for i in range(0, len(labels), step))
+    last = f'<text x="{pts[-1][0]:.0f}" y="{pts[-1][1]-9:.0f}" font-size="11" font-weight="bold" fill="{NAVY}" text-anchor="middle">{vals[-1]:,}</text>'
+    grid = "".join(f'<line x1="{PL}" y1="{H-PB-(H-PB-18)*g/4:.0f}" x2="{W-12}" y2="{H-PB-(H-PB-18)*g/4:.0f}" stroke="#e3eaf3"/>' for g in range(5))
+    area = f'<path d="{path} L{pts[-1][0]:.0f} {H-PB} L{PL} {H-PB} Z" fill="{color}" opacity="0.08"/>'
+    return (f'<div class="chart"><div class="chart-t">{title}</div>'
+            f'<svg viewBox="0 0 {W} {H}">{grid}{area}'
+            f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2" stroke-linejoin="round"/>'
+            f'{last}{ticks}</svg></div>')
+
+
 def render(d, a):
     labels = d["months"]
     cur, prev = labels[-1], labels[-2]
@@ -411,6 +544,14 @@ def render(d, a):
     qrows = "".join(f'<tr><td>{q["q"]}</td><td class="num">{q["imp"]:,}</td><td class="num">{q["clicks"]:,}</td>'
                     f'<td class="num">{q["ctr"]}%</td><td class="num">{q["pos"]}位</td></tr>'
                     for q in d.get("queries", []))
+    prows = "".join(f'<tr><td style="word-break:break-all">{p["path"]}</td><td class="num">{p["imp"]:,}</td>'
+                    f'<td class="num">{p["clicks"]:,}</td><td class="num">{p["ctr"]}%</td><td class="num">{p["pos"]}位</td></tr>'
+                    for p in d.get("pages", [])) or '<tr><td colspan="5">当月のページ別データはまだありません</td></tr>'
+    trows = "".join(f'<tr><td>{k}</td><td class="num">{now}</td><td class="num" style="color:#067647;font-weight:bold">{tv}</td><td>{why}</td></tr>'
+                    for k, now, tv, why in a["targets"])
+    assets = a["assets"]
+    cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
+    cat_pairs = [(cat_jp.get(c, c), n) for c, n in assets["cats"]]
     frows = "".join(f'<tr><td><span class="pri pri-{f["pri"]}">{f["pri"]}</span></td><td>{f["area"]}</td>'
                     f'<td>{f["now"]}</td><td>{f["fix"]}</td></tr>' for f in a["fixes"])
     crows = "".join(f'<tr><td>{r["date"]}</td><td>{r["title"]}</td><td class="num">{r["score"]}</td>'
@@ -448,9 +589,11 @@ def render(d, a):
     best = max(d["content"]["rows"], key=lambda r: str(r.get("score", "")), default=None)
     toc_items = [
         "エグゼクティブサマリー", "KPIダッシュボード（前月比・6ヶ月推移）",
-        "検索パフォーマンス詳細（クエリ分析）", "AI検索（AIO/LLMO）分析",
+        "検索パフォーマンス詳細（クエリ分析）", "記事別パフォーマンス+サイト資産",
+        "流入構造分析（チャネル・デバイス・日別）", "AI検索（AIO/LLMO）分析",
         "LPコンバージョン分析（ファネル+ヒートマップ）", "成果の要因分析",
-        "改善プラン（優先度つき対比表）", "コンテンツ実績", "来月の実行スケジュール", "付録: 指標の定義"]
+        "改善プラン（優先度つき対比表）", "コンテンツ実績",
+        "目標対比と来月のKPI目標", "来月の実行スケジュール", "付録: 指標の定義"]
     toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc_items, 1))
 
     best_html = ""
@@ -616,9 +759,40 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 </div>
 </div>
 
-<!-- ページ5: AI検索分析 -->
+<!-- ページ: 記事別パフォーマンス+サイト資産 -->
 <div class="sheet">
-<div class="sec"><span class="no">04</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">04</span><h2>記事別パフォーマンス</h2><div class="gold"></div></div>
+<h3>ページ別実績（当月・表示回数順）</h3>
+<table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{prows}</table>
+<p class="note">読み方: 表示回数が多く順位が11位以下のページはリライトの最有力候補。CTRが同順位帯の平均より低いページはタイトル改善候補です。</p>
+<h3 style="margin-top:14px">サイト資産サマリー（累計ストック）</h3>
+<div class="hl-cards">
+  <div class="hl"><div class="k">公開記事ストック</div><div class="v">{assets["count"]}本</div><div class="s">品質90点以上のみ</div></div>
+  <div class="hl"><div class="k">平均品質スコア</div><div class="v">{assets["avg_score"]}点</div><div class="s">6観点採点/100点</div></div>
+  <div class="hl"><div class="k">平均文字数</div><div class="v">{assets["avg_len"]:,}字</div><div class="s">基準5,000字以上</div></div>
+</div>
+<h3 style="margin-top:14px">カテゴリ別の記事構成</h3>
+{dist_bars(cat_pairs, "#0d9488")}
+<div class="callout"><b>資産の考え方:</b> 記事は広告と違い、公開後も検索とAI回答の両方から流入を生み続けるストック資産です。
+1記事あたりの平均{assets["avg_len"]:,}字・平均{assets["avg_score"]}点の品質を保ったまま蓄積することが、ドメイン全体の評価とAI引用確率を押し上げます。</div>
+</div>
+
+<!-- ページ: 流入構造分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">05</span><h2>流入構造分析</h2><div class="gold"></div></div>
+<h3>チャネル別セッション（当月）</h3>
+{dist_bars(d.get("channels", []), "#2563eb", {"Organic Search": "自然検索", "Direct": "直接流入", "Referral": "参照サイト", "Organic Social": "SNS", "Email": "メール", "Unassigned": "未分類", "Paid Search": "有料検索", "Cross-network": "クロスネットワーク"})}
+<h3 style="margin-top:12px">デバイス別セッション（当月）</h3>
+{dist_bars(d.get("devices", []), "#7b83eb", {"mobile": "スマートフォン", "desktop": "PC", "tablet": "タブレット"})}
+<h3 style="margin-top:12px">日別クリック推移（当月・Search Console）</h3>
+{svg_series(d.get("daily", {}).get("clicks", []), d.get("daily", {}).get("labels", []), "#0d9488", "検索クリック数の日次推移")}
+<p class="note">読み方: 自然検索比率が高いほど広告費に依存しない集客構造。日別推移の右肩上がりは新規記事のインデックス進行を示します。
+スマートフォン比率が高い場合、記事の冒頭結論・図解・表の見やすさがCVを左右します。</p>
+</div>
+
+<!-- ページ: AI検索分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">06</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。ゼロクリック時代の新しい流入経路であり、当メディアの中核戦略です。</p>
 <div class="hl-cards" style="margin:10px 0 14px">
   <div class="hl"><div class="k">AI経由セッション（当月）</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
@@ -634,9 +808,9 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 <p class="note">実装済みAIO施策: 冒頭断言回答 / H2直下1文結論 / FAQ構造化 / 出典付き数値 / llms.txt / robots.txt AI許可 / 構造化データ4種 / 監修者情報 / 鮮度表記 / 定義ブロック / 比較表 / 対象読者明記</p>
 </div>
 
-<!-- ページ6: LPコンバージョン分析 -->
+<!-- ページ: LPコンバージョン分析 -->
 <div class="sheet">
-<div class="sec"><span class="no">05</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">07</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
 <h3>主要区画のファネル（どこまで読まれ、どこで離脱したか）</h3>
 {funnel_html(d.get("areas", []))}
 <h3 style="margin-top:14px">全12区画の到達ヒートマップ</h3>
@@ -646,25 +820,33 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 
 <!-- ページ7: 要因分析+改善プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">06</span><h2>成果の要因分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">08</span><h2>成果の要因分析</h2><div class="gold"></div></div>
 <ul class="grown">{grown}</ul>
-<div class="sec" style="margin-top:18px"><span class="no">07</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">09</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
 <table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr>{frows}</table>
 </div>
 
 <!-- ページ8: コンテンツ実績+来月プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">08</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">10</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr>{crows}</table>
 {best_html}
-<div class="sec" style="margin-top:18px"><span class="no">09</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+</div>
+
+<!-- ページ: 目標対比+来月スケジュール -->
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>目標対比と来月のKPI目標</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
+<table><tr><th>指標</th><th style="width:14%">当月実績</th><th style="width:14%">来月目標</th><th>目標の根拠</th></tr>{trows}</table>
+<div class="callout"><b>目標の使い方:</b> 来月号のレポートで本表の目標と実績を突合します。2ヶ月連続で未達の指標は、施策の前提（KW選定・導線設計）から見直します。</div>
+<div class="sec" style="margin-top:18px"><span class="no">12</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
 <table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr>{action_rows}</table>
 </div>
 
 <!-- ページ9: 付録 -->
 <div class="sheet">
-<div class="sec"><span class="no">10</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">13</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">本レポートで使用している指標・用語の定義です。社内共有の際にご活用ください。</p>
 <table>{gloss_rows}</table>
 <h3 style="margin-top:14px">データソースと計測方法</h3>
