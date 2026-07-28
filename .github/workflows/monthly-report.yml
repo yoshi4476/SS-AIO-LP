@@ -68,10 +68,13 @@ jobs:
         if: steps.gate.outputs.ready == 'true'
         run: python scripts/monthly_report.py --email
 
-      - name: Slack通知
+      - name: 運用通知（Slack→メール自動フォールバック）
         if: always()
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="📊"; else icon="🚨"; fi
           python scripts/notify_slack.py "$icon 月次レポート: ${{ job.status }}（info.ai@7senses.co.jp へ送付）" || true

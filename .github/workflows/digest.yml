@@ -40,10 +40,13 @@ jobs:
             python scripts/send_digest.py
           fi
 
-      - name: Slack通知
+      - name: 運用通知（Slack→メール自動フォールバック）
         if: always()
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="📮"; else icon="🚨"; fi
           python scripts/notify_slack.py "$icon 週刊ニュースレター配信: ${{ job.status }}" || true
