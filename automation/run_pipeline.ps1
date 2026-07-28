@@ -11,6 +11,14 @@ $log = Join-Path $logDir "pipeline_$stamp.log"
 
 $prompt = Get-Content -Raw -Encoding UTF8 (Join-Path $proj "automation\pipeline_prompt.txt")
 
+# リモート設定済みなら実行前に最新化（GitHub Actions併用時の二重管理防止）
+$hasRemote = (git remote) -ne $null
+if ($hasRemote) { git pull --rebase --autostash 2>&1 | Out-Null }
+
+# 30日より古いログを自動削除
+Get-ChildItem $logDir -Filter *.log | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
 "[$(Get-Date -Format s)] pipeline start" | Out-File $log -Encoding utf8
 & "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $prompt --dangerously-skip-permissions --max-turns 400 *>> $log
 "[$(Get-Date -Format s)] pipeline end (exit=$LASTEXITCODE)" | Out-File $log -Append -Encoding utf8
@@ -24,3 +32,13 @@ for ($i = 1; $i -le 2; $i++) {
     & "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $retryPrompt --dangerously-skip-permissions --max-turns 400 *>> $log
     "[$(Get-Date -Format s)] retry $i end (exit=$LASTEXITCODE)" | Out-File $log -Append -Encoding utf8
 }
+
+# 1行サマリを summary.log に追記（後から一覧で健康状態を確認できる）
+$finalBuild = & python "scripts\build.py" 2>&1 | Out-String
+$todayStr = Get-Date -Format "yyyy-MM-dd"
+$newToday = Select-String -Path "articles\*.md" -Pattern ("date: " + $todayStr) -List
+$status = if ($finalBuild -match "BLOCKED") { "NG(BLOCKED残り)" }
+          elseif ($newToday) { "OK(本日分あり)" }
+          else { "WARN(本日分なし)" }
+"$(Get-Date -Format 'yyyy-MM-dd HH:mm') | $status | log=$([System.IO.Path]::GetFileName($log))" |
+    Out-File (Join-Path $logDir "summary.log") -Append -Encoding utf8
