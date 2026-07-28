@@ -270,6 +270,30 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     return meta, url
 
 
+LISTING_RE = re.compile(
+    r'(<!-- (?:新着)?記事リスト:.*?-->\s*<ul class="post-list[^"]*">).*?(</ul>)', re.S)
+
+
+def sync_listings(all_metas):
+    """トップの新着とカテゴリ一覧の記事リストを自動同期（手動追記を廃止し書き忘れをゼロに）"""
+    newest = sorted(all_metas, key=lambda m: (str(m["date"]), m["slug"]), reverse=True)
+
+    def replace(page: Path, metas, label):
+        if not page.exists():
+            return
+        html = page.read_text(encoding="utf-8-sig")
+        tiles = "\n".join(post_tile(m) for m in metas)
+        new_html, n = LISTING_RE.subn(lambda mt: f"{mt.group(1)}\n{tiles}\n  {mt.group(2)}", html)
+        if n and new_html != html:
+            page.write_text(new_html, encoding="utf-8")
+            print(f"SYNC: {label} の記事リストを自動更新（{len(metas)}件）")
+
+    replace(SITE / "index.html", newest[:6], "トップ新着")
+    for cat in CATEGORIES:
+        cat_metas = [m for m in newest if m["category"] == cat]
+        replace(SITE / cat / "index.html", cat_metas, f"カテゴリ {cat}")
+
+
 def quality_checks(all_metas):
     """第6章 SEO実装詳細の機械検査: メタ品質 + カニバリ(タイトル類似80%)ゲート"""
     import difflib
@@ -521,6 +545,7 @@ def main():
     build_blog_index(all_metas)
     build_sitemap(entries)
     build_feed(entries)
+    sync_listings(all_metas)
     warns += quality_checks(all_metas)
     warns += link_check()
     print(f"OK: {len(entries)}記事 / blog一覧 + sitemap.xml + feed.xml 更新")

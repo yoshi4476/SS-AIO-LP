@@ -1,4 +1,4 @@
-# システム全体図: 全フローと使用コンポーネント（2026-07-28時点）
+# システム全体図: 全フローと使用コンポーネント（2026-07-28時点・v2）
 
 > このドキュメントは自動投稿システムの「地図」。フロー・使うもの・現在の状態をすべて記載する。
 
@@ -16,7 +16,7 @@
 | ⑥ 週刊ニュースレター | 毎週月曜 9:00（GitHub Actions） | 直近1週間の合格記事をメール配信 | 🟡 Actions接続後 |
 | ⑦ 月次コンサルレポート | 毎月1日 9:00 | GA4+GSC実データからPDFレポート生成 | 🟡 GA4稼働後に登録 |
 | ⑧ 週次最適化 | 月曜 10:23（CLAUDE.md定義） | カニバリ検出・リライト・内部リンク・AIO監査 | 🟡 GSC稼働後に登録 |
-| ⑨ 日次KPIレポート | 毎日 22:13（CLAUDE.md定義） | KPI計測→kpi_feedback.md更新（翌朝の学習源） | 🟡 GA4/GSC稼働後に登録 |
+| ⑨ 日次KPIレポート | 毎日 22:13（CLAUDE.md定義） | KPI計測→kpi_feedback.md更新（翌朝の学習源） | 🟢 **ローカル版が稼働中**（local_kpi.pyが毎実行後に記事数・スコア・文字数を自動集計）。GA4/GSC版は稼働後に登録 |
 | ⑩ 月次AI引用チェック | 毎月1日 11:00（CLAUDE.md定義） | 主要KWのAI検索引用状況をスポットチェック | 🟡 公開後に登録 |
 | ⑪ クラウド版①〜④ | GitHub Actions（cron） | ①〜④と同一内容をPC不要で実行 | 🟡 リポジトリ接続後 |
 
@@ -33,10 +33,12 @@ run_pipeline.ps1 起動
  │   Phase 5  品質審査    … 6エージェント120点→100点換算。90点未満は公開不可
  │   Phase 6  画像+公開   … make_images.py（アイキャッチ+図解flow/list/vs・自動軽量化）
  │                         → build.py（HTML/Schema/目次/前後ナビ/診断バナー/購読フォーム自動挿入、
- │                            sitemap・llms.txt・一覧・feed同期、機械検査8種、連鎖隔離防止）
+ │                            sitemap・llms.txt・feed同期、トップ新着+カテゴリ一覧の自動同期、
+ │                            機械検査8種、連鎖隔離防止）
  │                         → git commit（リモート設定後はpush→Cloudflare自動デプロイ）
  │   Phase 7  分析        … Indexing API/IndexNow送信・シート更新（各API設定後）
  ├ BLOCKED検知→即時リトライ（retry_prompt.txt・最大2回）
+ ├ local_kpi.py … kpi_feedback.md のサイト概況を自動更新（学習ループの公開前版）
  └ summary.log に1行記録（OK/WARN/NG）
 ```
 
@@ -72,7 +74,7 @@ run_pipeline.ps1 起動
 | 実行スクリプト | automation/run_pipeline.ps1 / run_retry.ps1 / register_tasks.ps1 |
 | ビルド | scripts/build.py（変換+自動挿入+機械検査8種+90点ゲート） |
 | 画像生成 | scripts/make_images.py（一括）/ make_eyecatch.py / make_diagram.py（flow・list・vs） |
-| 配信・分析 | scripts/send_digest.py / monthly_report.py / notify_indexnow.py |
+| 配信・分析 | scripts/send_digest.py / monthly_report.py / notify_indexnow.py / local_kpi.py（公開前KPI集計） |
 | テンプレート | templates/article.html（Schema・シェア・前後ナビ・購読・診断バナーの雛形） |
 | サーバレスAPI | functions/api/lead.js（フォーム）/ subscribe.js（購読）/ audit.js（サイト採点） |
 | フロント | site/css/style.css・lp.css / site/js/site.js（GA4計測・A/B・読み上げ・検索等）/ quiz.js（診断） |

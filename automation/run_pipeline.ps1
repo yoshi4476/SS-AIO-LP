@@ -12,7 +12,7 @@ $log = Join-Path $logDir "pipeline_$stamp.log"
 $prompt = Get-Content -Raw -Encoding UTF8 (Join-Path $proj "automation\pipeline_prompt.txt")
 
 # リモート設定済みなら実行前に最新化（GitHub Actions併用時の二重管理防止）
-$hasRemote = (git remote) -ne $null
+$hasRemote = $null -ne (git remote)
 if ($hasRemote) { git pull --rebase --autostash 2>&1 | Out-Null }
 
 # 30日より古いログを自動削除
@@ -32,6 +32,9 @@ for ($i = 1; $i -le 2; $i++) {
     & "C:\Users\user\AppData\Roaming\npm\claude.ps1" -p $retryPrompt --dangerously-skip-permissions --max-turns 400 *>> $log
     "[$(Get-Date -Format s)] retry $i end (exit=$LASTEXITCODE)" | Out-File $log -Append -Encoding utf8
 }
+
+# ローカルKPI集計（公開前でも学習ループを回す。GA4/GSC稼働後はDaily KPIが上書き）
+& python "scripts\local_kpi.py" *>> $log
 
 # 1行サマリを summary.log に追記（後から一覧で健康状態を確認できる）
 $finalBuild = & python "scripts\build.py" 2>&1 | Out-String
