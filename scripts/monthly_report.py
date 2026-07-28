@@ -111,6 +111,17 @@ def fetch_real():
                   "copilot.microsoft.com", "claude.ai")
     data["ai_sessions"] = sum(int(r.metric_values[0].value) for r in rep.rows
                               if any(d in r.dimension_values[0].value for d in ai_domains))
+    # プラットフォーム別内訳（AI検索分析ページ用）
+    bk = {}
+    for r in rep.rows:
+        src = r.dimension_values[0].value
+        for dom in ai_domains:
+            if dom in src:
+                key = {"chat.openai.com": "ChatGPT", "chatgpt.com": "ChatGPT",
+                       "perplexity.ai": "Perplexity", "gemini.google.com": "Gemini",
+                       "copilot.microsoft.com": "Copilot", "claude.ai": "Claude"}[dom]
+                bk[key] = bk.get(key, 0) + int(r.metric_values[0].value)
+    data["ai_breakdown"] = sorted(bk.items(), key=lambda x: -x[1])
 
     # エリア到達（area_reachイベント）
     try:
@@ -175,6 +186,8 @@ def fetch_demo():
               for l, s, c, i, p, v in zip(labels, sessions, clicks, imps, pos, cvs)]
     return {
         "demo": True, "months": months, "ai_sessions": 86,
+        "ai_breakdown": [("ChatGPT", 41), ("Perplexity", 23), ("Gemini", 15), ("Copilot", 5), ("Claude", 2)],
+        "ai_prev": 52,
         "queries": [
             {"q": "aio 対策", "imp": 6200, "clicks": 292, "ctr": 4.7, "pos": 6.2},
             {"q": "llmo とは", "imp": 4900, "clicks": 260, "ctr": 5.3, "pos": 4.8},
@@ -262,13 +275,32 @@ def analyze(d):
                       "fix": "GA4イベント（area_reach/scroll_depth）とGSCの接続を確認"})
 
     actions = [
-        "改善優先度「高」の項目（上表）を第1週で実施する",
-        "順位11〜30位のクエリ上位2本をリライトする（H2追加+内部リンク）",
-        "新規記事を計画本数どおり公開する（各記事: 品質114点以上・図解1枚以上）",
-        "月末にAIスポットチェック（主要クエリをChatGPT/Perplexityに質問し自社言及を記録）",
-        "本レポートの数値をスプレッドシート「KPIレポート」「AIO計測」タブに転記・突合する",
+        ("改善優先度「高」の項目（本編6章の対比表）をすべて実施する", "第1週", "LP離脱の止血が最優先。CVR改善に直結"),
+        ("順位11〜30位のクエリ上位2本をリライトする（H2追加+内部リンク2本）", "第2週", "2ページ目→1ページ目でクリックが数倍化"),
+        ("新規記事を計画本数どおり公開する（品質90点以上・図解付き）", "毎日", "トピックの面を拡大しAI引用の入口を増やす"),
+        ("CTR未達クエリのタイトル・メタディスクリプションを改善する", "第3週", "順位を変えずにクリックを増やす最速の一手"),
+        ("AIスポットチェック（主要クエリをChatGPT/Perplexityに質問し自社言及を記録）", "第4週", "LLMOの定点観測。言及の増減が次月の方針を決める"),
+        ("本レポートの数値をスプレッドシート「KPIレポート」「AIO計測」タブに転記・突合する", "月末", "学習ループ（kpi_feedback.md）の精度を維持"),
     ]
-    return {"grown": grown, "fixes": fixes, "actions": actions, "mom": mom}
+
+    # 勝ちクエリ / テコ入れクエリの分類（クエリ分析ページ用）
+    qs = d.get("queries", [])
+    winners = sorted([q for q in qs if q["pos"] <= 10 and q["ctr"] >= 3.5], key=lambda q: -q["clicks"])[:3]
+    challengers = sorted([q for q in qs if 11 <= q["pos"] <= 30], key=lambda q: -q["imp"])[:3]
+
+    # エグゼクティブサマリー（総評文）
+    cur_, prev_ = d["months"][-1], d["months"][-2]
+    summary = (
+        f"当月はセッション{cur_.get('sessions', 0):,}（前月比{mom('sessions')}）、"
+        f"検索クリック{cur_.get('clicks', 0):,}（{mom('clicks')}）、CV{cur_.get('cv', 0)}件（{mom('cv')}）と、"
+        f"主要指標が{'揃って伸長しました' if cur_.get('sessions', 0) > prev_.get('sessions', 0) else '伸び悩みました'}。"
+        f"平均掲載順位は{prev_.get('pos', '-')}位→{cur_.get('pos', '-')}位。"
+        f"AI経由の参照流入は{d.get('ai_sessions', 0)}セッションを記録し、"
+        "検索とAIの両輪で「見つかる→選ばれる」導線が機能し始めています。"
+        "来月は本レポート8章の実行順プランに沿って、LPの離脱改善とリライトを最優先で進めます。")
+
+    return {"grown": grown, "fixes": fixes, "actions": actions, "mom": mom,
+            "winners": winners, "challengers": challengers, "summary": summary}
 
 
 # ============================================================
@@ -292,6 +324,50 @@ def svg_line(months, key, color, title, unit=""):
             f'<svg viewBox="0 0 {W} {H}">{grid}'
             f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2.5" stroke-linejoin="round"/>'
             f'{dots}{last}{labels}</svg></div>')
+
+
+def svg_spark(vals, color, w=130, h=34):
+    """タイル内ミニスパークライン"""
+    if not vals or not any(vals):
+        return ""
+    mx, mn = max(vals), min(vals)
+    rng = (mx - mn) or 1
+    pts = [(4 + i * (w - 8) / (len(vals) - 1), h - 5 - (v - mn) / rng * (h - 10))
+           for i, v in enumerate(vals)]
+    path = "M" + " L".join(f"{x:.0f} {y:.0f}" for x, y in pts)
+    return (f'<svg viewBox="0 0 {w} {h}" style="width:{w}px;height:{h}px">'
+            f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2"/>'
+            f'<circle cx="{pts[-1][0]:.0f}" cy="{pts[-1][1]:.0f}" r="3" fill="{color}"/></svg>')
+
+
+def funnel_html(areas):
+    """LP主要区画のCVファネル（到達率の漏斗）"""
+    keys = ["ヒーロー", "課題共感", "料金", "申込フォーム"]
+    steps = [a for k in keys for a in areas if a["name"] == k]
+    if len(steps) < 3:
+        return ""
+    rows = ""
+    for i, s in enumerate(steps):
+        w = max(s["reach"], 8)
+        drop = "" if i == 0 else f'<div class="fn-drop">▼ −{steps[i-1]["reach"] - s["reach"]}pt</div>'
+        rows += (f'{drop}<div class="fn-row"><div class="fn-bar" style="width:{w}%">'
+                 f'<span>{s["name"]}</span><b>{s["reach"]}%</b></div></div>')
+    return f'<div class="funnel">{rows}</div>'
+
+
+def ai_bars(breakdown, total):
+    if not breakdown:
+        return f'<p style="color:{MUTED}">プラットフォーム別データはGA4接続後に表示されます</p>'
+    colors = {"ChatGPT": "#10a37f", "Perplexity": "#1f7a8c", "Gemini": "#4285f4",
+              "Copilot": "#7b83eb", "Claude": "#b45309"}
+    rows = ""
+    for name, v in breakdown:
+        pct = round(v / max(total, 1) * 100)
+        rows += (f'<div class="hm-row"><div class="hm-label">{name}</div>'
+                 f'<div class="hm-track"><div class="hm-bar" style="width:{pct}%;'
+                 f'background:{colors.get(name, "#64748b")}"></div></div>'
+                 f'<div class="hm-val">{v}</div></div>')
+    return f'<div class="heatmap">{rows}</div>'
 
 
 def svg_heatbars(areas):

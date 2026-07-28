@@ -24,4 +24,5 @@
 - [AI時代のSEO対策とは？中小企業がやるべき5つの基本](https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/): 検索上位とAI引用の両方を狙うSEOの基本を優先順位つきで解説
 - [MEO対策のやり方7ステップ｜マップ上位表示の手順](https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/): Googleマップ上位表示までの手順を無料でできる範囲中心に解説
 - [Googleマップの口コミを増やす方法5選と返信のコツ](https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/): ポリシー違反にならない口コミの増やし方と返信の型を解説
+- [クリニックのMEO対策とは？集患につながる5つの手順](https://ai.7senses.co.jp/meo/clinic-meo-taisaku/): 医療広告ガイドラインに配慮したクリニック向けMEOの実践手順
 - [ChatGPTを集客に活用する方法7選【中小企業向け】](https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/): プロンプト例つきで今日から使える集客向けChatGPT活用法
