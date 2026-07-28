@@ -8,11 +8,16 @@ docs/industry-pillar-plan.md のクラスターKWリストと articles/*.md を�
 LLMの目視判断に頼らず、残数を決定的な数値として得るためのスクリプト。
 """
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cannibal_check import dice, load_articles  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAN = ROOT / "docs" / "industry-pillar-plan.md"
 REPLENISH_THRESHOLD = 5  # 残りがこの数以下になったらKWリストの補充を促す
+DUP_THRESHOLD = 0.50     # 既存記事タイトルとの類似度がこれ以上のKWは重複疑いとして除外
 
 
 def plan_keywords():
@@ -60,10 +65,24 @@ def main():
 
     corpus = written_corpus()
     remaining = [(g, k) for g, k in kws if not is_written(k, corpus)]
-    print(f"KW_TOTAL={len(kws)}  KW_WRITTEN={len(kws) - len(remaining)}  KW_REMAINING={len(remaining)}")
+
+    # 既存記事と検索意図が近すぎるKWは、書く前にカニバリ候補として除外する
+    arts = load_articles()
+    safe, dup = [], []
+    for g, k in remaining:
+        hit = max(((dice(k, a["title"]), a["slug"]) for a in arts), default=(0.0, ""))
+        (dup if hit[0] >= DUP_THRESHOLD else safe).append((g, k, hit))
+
+    print(f"KW_TOTAL={len(kws)}  KW_WRITTEN={len(kws) - len(remaining)}  "
+          f"KW_REMAINING={len(safe)}  KW_DUP_SKIPPED={len(dup)}")
     print("次のKW候補（上から順に採用する）:")
-    for g, k in remaining[:5]:
+    for g, k, _ in safe[:5]:
         print(f"  - {k}  ［{g}］")
+    if dup:
+        print("重複疑いのため除外したKW（採用禁止。書くとカニバリになる）:")
+        for g, k, (s, slug) in dup:
+            print(f"  x {k}  ［{g}］ ← {slug} と類似度{s:.2f}")
+    remaining = safe
     if len(remaining) <= REPLENISH_THRESHOLD:
         print(f"NEED_REPLENISH=yes  （残り{len(remaining)}本 ≤ 閾値{REPLENISH_THRESHOLD}本）")
         print("→ 記事作成の前に docs/industry-pillar-plan.md へ次の30KWを設計・追記すること")

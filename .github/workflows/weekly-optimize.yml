@@ -39,6 +39,24 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
 
+      # KWキューを実データ（GSC実績+Googleサジェスト）で補充する。
+      # 推定KWではなく「実際に検索されている語」を供給し続けるための工程。
+      - name: KWキューの実データ補充
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            pip install --quiet google-api-python-client google-auth
+          fi
+          python scripts/kw_discover.py --append || true
+          rm -f indexing-service-account.json
+          python scripts/kw_status.py
+
+      # 既存記事どうしの検索意図の重複を検出（LLMが対処判断に使う）
+      - name: カニバリゼーション検査
+        run: python scripts/cannibal_check.py
+
       - name: 週次最適化の実行
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
