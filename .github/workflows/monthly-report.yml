@@ -1,0 +1,69 @@
+name: Monthly Consulting Report
+
+# 毎月1日 9:00 JST（= UTC 0:00）に月次レポートPDFを生成し info.ai@7senses.co.jp へメール送付
+# 実データ取得には GCP_SERVICE_ACCOUNT_JSON / GA4_PROPERTY_ID シークレットが必要。
+# 未設定の間は静かにスキップする（デモデータの誤送信を防ぐため）。
+on:
+  schedule:
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 実データ設定の有無を確認
+        id: gate
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          GA4_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: |
+          if [ -z "$SA_JSON" ] || [ -z "$GA4_ID" ]; then
+            echo "GCP_SERVICE_ACCOUNT_JSON / GA4_PROPERTY_ID が未設定のためスキップ（実データなしのレポートは送らない）"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.ready == 'true'
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール（Playwright含む）
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          pip install -r requirements.txt
+          pip install playwright google-analytics-data google-api-python-client google-auth
+          python -m playwright install --with-deps chromium
+
+      - name: 認証情報の配置
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          GA4_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+        run: |
+          printf '%s' "$SA_JSON" > indexing-service-account.json
+          {
+            echo "GA4_PROPERTY_ID=$GA4_ID"
+            echo "GSC_SITE_URL=https://ai.7senses.co.jp/"
+            echo "RESEND_API_KEY=$RESEND_API_KEY"
+            echo "LEAD_FROM_EMAIL=$LEAD_FROM_EMAIL"
+            echo "LEAD_TO_EMAIL=info.ai@7senses.co.jp"
+          } > .env
+
+      - name: 月次レポート生成・メール送付
+        if: steps.gate.outputs.ready == 'true'
+        run: python scripts/monthly_report.py --email
