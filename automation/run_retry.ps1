@@ -1,4 +1,4 @@
-# Same-day retry runner: publishes articles that failed earlier today.
+﻿# Same-day retry runner: publishes articles that failed earlier today.
 # Invoked by Task Scheduler (AIO-Pipeline-Retry, daily 21:30) and skips itself when nothing to do.
 $ErrorActionPreference = "Continue"
 $proj = Split-Path -Parent $PSScriptRoot

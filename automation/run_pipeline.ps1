@@ -1,4 +1,4 @@
-# AIO article pipeline runner (registered in Windows Task Scheduler)
+﻿# AIO article pipeline runner (registered in Windows Task Scheduler)
 # ASCII-only on purpose: PS 5.1 misreads UTF-8 (no BOM) scripts. Japanese prompt lives in pipeline_prompt.txt.
 $ErrorActionPreference = "Continue"
 $proj = Split-Path -Parent $PSScriptRoot
