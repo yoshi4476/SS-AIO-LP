@@ -33,13 +33,21 @@
   <div style="width:76px;height:76px;margin:0 auto 1.2rem;border-radius:50%;background:var(--sky);display:grid;place-items:center;">
     <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
   </div>
-  <h1>送信が完了しました</h1>
-  <p class="lead" style="margin-left:auto;margin-right:auto;">お問い合わせありがとうございます。<strong>2営業日以内</strong>に担当者よりご連絡いたします。<br>お急ぎの場合は 06-4305-7547（9:00〜20:00 / 土日祝休）までお電話ください。</p>
+  <h1 id="thanksTitle">送信が完了しました</h1>
+  <p class="lead" id="thanksLead" style="margin-left:auto;margin-right:auto;">お問い合わせありがとうございます。<strong>2営業日以内</strong>に担当者よりご連絡いたします。<br>お急ぎの場合は 06-4305-7547（9:00〜20:00 / 土日祝休）までお電話ください。</p>
   <div class="btn-row" style="justify-content:center;">
     <a class="btn btn-primary" href="/">トップページへ戻る <span class="arw">→</span></a>
     <a class="btn btn-ghost" href="/aio/">記事を読んで待つ</a>
   </div>
 </section>
+<script>
+// ニュースレター購読完了（/api/subscribe → /thanks/?type=newsletter）は文言を切り替える
+if (new URLSearchParams(location.search).get('type') === 'newsletter') {
+  document.getElementById('thanksTitle').textContent = 'ご購読ありがとうございます';
+  document.getElementById('thanksLead').innerHTML =
+    'ニュースレターの登録が完了しました。<strong>毎週、新着記事とAI検索の動き</strong>をまとめてお届けします。<br>配信メール内のリンクから、いつでも解除できます。';
+}
+</script>
 
 <footer class="site-footer">
   <div class="inner">
