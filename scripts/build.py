@@ -509,6 +509,13 @@ def main():
             blocked.append(f"{meta['slug']}: {sc}点 < 基準{QUALITY_GATE}点")
             blocked_metas.append(meta)
             continue
+        # 足切り: score_breakdown がある場合、1観点でも16/20未満なら不合格（合計点で壊滅観点を隠さない）
+        bd = meta.get("score_breakdown") or {}
+        weak = {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < 16}
+        if weak:
+            blocked.append(f"{meta['slug']}: 観点足切り {weak}（各16/20以上が必要）")
+            blocked_metas.append(meta)
+            continue
         paths.append(p)
         all_metas.append(meta)
     for b in blocked:
