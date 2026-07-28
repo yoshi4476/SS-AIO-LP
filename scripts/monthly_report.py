@@ -391,10 +391,22 @@ def render(d, a):
     demo_banner = ('<div class="demo-banner">SAMPLE ― 本レポートはサンプルデータです。'
                    'GA4/GSC接続後、実データで自動発行されます。</div>') if d["demo"] else ""
 
+    # 表紙ロゴ（白版）をbase64で埋め込み
+    logo_b64 = ""
+    lp = ROOT / "site" / "images" / "company" / "logo-white.png"
+    if lp.exists():
+        logo_b64 = f'<img class="cv-logo" src="data:image/png;base64,{base64.b64encode(lp.read_bytes()).decode()}">'
+
     def tile(label, key, unit=""):
         v = cur.get(key, 0)
+        series = [m.get(key, 0) or 0 for m in labels]
+        mom = a["mom"](key)
+        up = not mom.startswith("-")
+        good = (not up) if key == "pos" else up  # 順位は下がる=良い
         return (f'<div class="tile"><div class="t-label">{label}</div>'
-                f'<div class="t-val">{v:,}{unit}</div><div class="t-mom">前月比 {a["mom"](key)}</div></div>')
+                f'<div class="t-val">{v:,}{unit}</div>'
+                f'<div class="t-mom {"good" if good else "bad"}">前月比 {mom}</div>'
+                f'<div class="t-spark">{svg_spark(series, BLUE if key != "pos" else TEAL)}</div></div>')
 
     qrows = "".join(f'<tr><td>{q["q"]}</td><td class="num">{q["imp"]:,}</td><td class="num">{q["clicks"]:,}</td>'
                     f'<td class="num">{q["ctr"]}%</td><td class="num">{q["pos"]}位</td></tr>'
@@ -404,90 +416,273 @@ def render(d, a):
     crows = "".join(f'<tr><td>{r["date"]}</td><td>{r["title"]}</td><td class="num">{r["score"]}</td>'
                     f'<td>{r["status"]}</td></tr>' for r in d["content"]["rows"])
     grown = "".join(f"<li>{g}</li>" for g in a["grown"])
-    actions = "".join(f"<li>{x}</li>" for x in a["actions"])
+    action_rows = "".join(
+        f'<tr><td class="num">{i}</td><td>{t}</td><td style="white-space:nowrap">{w}</td><td>{why}</td></tr>'
+        for i, (t, w, why) in enumerate(a["actions"], 1))
+    winner_rows = "".join(
+        f'<li><b>「{q["q"]}」</b> — {q["pos"]}位・CTR {q["ctr"]}%・クリック{q["clicks"]:,}。この構造（結論先出し+FAQ）を新規記事に横展開</li>'
+        for q in a["winners"]) or "<li>該当なし（来月の分析で抽出します）</li>"
+    challenger_rows = "".join(
+        f'<li><b>「{q["q"]}」</b> — 現在{q["pos"]}位（表示{q["imp"]:,}）。1ページ目に入ればクリック数倍のポテンシャル。H2追加+内部リンクでリライト</li>'
+        for q in a["challengers"]) or "<li>該当なし</li>"
+
+    glossary = [
+        ("セッション", "サイトへの訪問回数。1人が朝と夜に見れば2セッション"),
+        ("CV（コンバージョン）", "無料相談・資料DLなど、成果地点への到達件数"),
+        ("表示回数（インプレッション）", "Google検索結果に自社ページが表示された回数"),
+        ("CTR", "表示回数のうちクリックされた割合。タイトル改善で伸ばせる"),
+        ("平均掲載順位", "検索結果での平均的な表示位置。小さいほど上位"),
+        ("AI経由参照", "ChatGPT・Perplexity等のAIサービスからの流入。LLMO施策の成果指標"),
+        ("エリア到達率", "LPの各セクションまで読者がスクロール到達した割合（独自計測）"),
+        ("AIO", "Google検索のAI回答（AI Overview）に引用されるための最適化"),
+        ("LLMO", "ChatGPT等のAIチャットの回答で言及されるための最適化"),
+        ("E-E-A-T", "経験・専門性・権威性・信頼性。Googleの品質評価基準"),
+        ("リライト", "既存記事の加筆・修正。順位11〜30位の記事が最も効果的"),
+        ("品質スコア", "当社の6観点採点（100点満点）。90点未満は公開されない"),
+    ]
+    gloss_rows = "".join(f'<tr><td style="white-space:nowrap"><b>{k}</b></td><td>{v}</td></tr>'
+                         for k, v in glossary)
+    ai_total = d.get("ai_sessions", 0)
+    ai_prev = d.get("ai_prev", 0)
+    ai_mom = f"+{round((ai_total - ai_prev) / ai_prev * 100)}%" if ai_prev else "―"
+    best = max(d["content"]["rows"], key=lambda r: str(r.get("score", "")), default=None)
+    toc_items = [
+        "エグゼクティブサマリー", "KPIダッシュボード（前月比・6ヶ月推移）",
+        "検索パフォーマンス詳細（クエリ分析）", "AI検索（AIO/LLMO）分析",
+        "LPコンバージョン分析（ファネル+ヒートマップ）", "成果の要因分析",
+        "改善プラン（優先度つき対比表）", "コンテンツ実績", "来月の実行スケジュール", "付録: 指標の定義"]
+    toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc_items, 1))
+
+    best_html = ""
+    if best:
+        best_html = (f'<div class="best-card"><div class="bc-k">🏆 今月のベスト記事</div>'
+                     f'<div class="bc-t">{best["title"]}</div>'
+                     f'<div class="bc-s">品質スコア {best["score"]}。この記事の構成（冒頭断言・FAQ・出典付きデータ）を来月の新規記事の手本とします。</div></div>')
 
     return f"""<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
 <style>
-@page {{ size: A4; margin: 14mm 12mm; }}
-* {{ box-sizing: border-box; }}
-body {{ font-family: "Yu Gothic", "Meiryo", sans-serif; color: #10203a; font-size: 10.5pt; line-height: 1.75; margin: 0; }}
-.demo-banner {{ background: #fff3cd; border: 2px dashed #d97706; color: #92400e; font-weight: bold; text-align: center; padding: 6px; margin-bottom: 12px; border-radius: 6px; }}
-.cover {{ background: linear-gradient(135deg, #0b2447, #1d4ed8); color: #fff; border-radius: 12px; padding: 26px 28px; margin-bottom: 18px; }}
-.cover h1 {{ margin: 0 0 4px; font-size: 20pt; }}
-.cover .sub {{ color: #bfdbfe; font-size: 10pt; }}
-h2 {{ font-size: 13pt; border-left: 5px solid {BLUE}; padding-left: 10px; margin: 22px 0 10px; page-break-after: avoid; }}
-.tiles {{ display: flex; gap: 8px; flex-wrap: wrap; }}
-.tile {{ flex: 1 1 15%; min-width: 100px; border: 1px solid #e3eaf3; border-radius: 8px; padding: 8px 10px; }}
-.t-label {{ font-size: 8pt; color: {MUTED}; }}
-.t-val {{ font-size: 15pt; font-weight: bold; color: {NAVY}; }}
-.t-mom {{ font-size: 8pt; color: {TEAL}; }}
-.charts {{ display: flex; gap: 12px; flex-wrap: wrap; }}
-.chart {{ flex: 1 1 46%; border: 1px solid #e3eaf3; border-radius: 8px; padding: 8px; }}
+@page {{ size: A4; margin: 0; }}
+* {{ box-sizing: border-box; margin: 0; }}
+:root {{ --navy: {NAVY}; --blue: {BLUE}; --teal: {TEAL}; --gold: #b7922e; --muted: {MUTED}; --line: #e3eaf3; }}
+body {{ font-family: "Yu Gothic", "Meiryo", sans-serif; color: #10203a; font-size: 10pt; line-height: 1.8; }}
+.sheet {{ width: 210mm; min-height: 296mm; padding: 16mm 15mm 18mm; page-break-after: always; position: relative; }}
+.sheet:last-child {{ page-break-after: auto; }}
+
+/* ---- 表紙 ---- */
+.cover-page {{ background: linear-gradient(150deg, #071a38 0%, #0b2447 45%, #14345c 100%); color: #fff;
+  display: flex; flex-direction: column; padding: 22mm 20mm; }}
+.cv-gold {{ width: 64px; height: 4px; background: var(--gold); margin: 10mm 0 6mm; }}
+.cv-kicker {{ letter-spacing: .35em; font-size: 9pt; color: #93b4e8; }}
+.cv-title {{ font-size: 27pt; font-weight: bold; line-height: 1.4; margin-top: 4mm; }}
+.cv-month {{ font-size: 15pt; color: var(--gold); font-weight: bold; margin-top: 3mm; letter-spacing: .1em; }}
+.cv-logo {{ height: 34px; width: auto; }}
+.cv-meta {{ margin-top: auto; font-size: 9.5pt; color: #bcd0ee; line-height: 2.1; border-top: 1px solid rgba(255,255,255,.25); padding-top: 6mm; }}
+.cv-meta b {{ color: #fff; }}
+.cv-badges {{ display: flex; gap: 8px; margin-top: 8mm; flex-wrap: wrap; }}
+.cv-badge {{ border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 3px 14px; font-size: 8.5pt; color: #dbe7fa; }}
+
+/* ---- 共通 ---- */
+.demo-banner {{ background: #fff3cd; border: 2px dashed #d97706; color: #92400e; font-weight: bold; text-align: center; padding: 5px; margin-bottom: 10px; border-radius: 6px; font-size: 9pt; }}
+.sec {{ display: flex; align-items: center; gap: 10px; margin: 0 0 12px; page-break-after: avoid; }}
+.sec .no {{ background: var(--navy); color: #fff; font-weight: bold; font-size: 10pt; padding: 3px 12px; border-radius: 4px; letter-spacing: .08em; }}
+.sec h2 {{ font-size: 14.5pt; }}
+.sec .gold {{ flex: 1; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); }}
+h3 {{ font-size: 11pt; margin: 14px 0 6px; color: var(--navy); }}
+.note {{ font-size: 8.5pt; color: var(--muted); }}
+.callout {{ border-left: 4px solid var(--gold); background: #fbf8ef; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 10px 0; font-size: 9.5pt; }}
+
+/* ---- 目次・サマリー ---- */
+.toc {{ columns: 2; column-gap: 24px; margin: 8px 0 16px; }}
+.toc li {{ list-style: none; padding: 5px 0; border-bottom: 1px dotted var(--line); font-size: 9.5pt; break-inside: avoid; }}
+.toc li span {{ color: var(--gold); font-weight: bold; margin-right: 10px; }}
+.exec {{ font-size: 10.5pt; line-height: 2; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }}
+.hl-cards {{ display: flex; gap: 10px; margin-top: 12px; }}
+.hl {{ flex: 1; border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: 8px; padding: 10px 12px; }}
+.hl .k {{ font-size: 8.5pt; color: var(--muted); }}
+.hl .v {{ font-size: 16pt; font-weight: bold; color: var(--navy); }}
+.hl .s {{ font-size: 8.5pt; color: var(--teal); font-weight: bold; }}
+
+/* ---- KPI ---- */
+.tiles {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }}
+.tile {{ border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px 6px; }}
+.t-label {{ font-size: 8.5pt; color: var(--muted); }}
+.t-val {{ font-size: 17pt; font-weight: bold; color: var(--navy); }}
+.t-mom {{ font-size: 8.5pt; font-weight: bold; }}
+.t-mom.good {{ color: #067647; }} .t-mom.bad {{ color: #b91c1c; }}
+.t-spark {{ margin-top: 2px; }}
+.charts {{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }}
+.chart {{ border: 1px solid var(--line); border-radius: 8px; padding: 8px; }}
 .chart-t {{ font-size: 9pt; font-weight: bold; margin-bottom: 4px; }}
+
+/* ---- テーブル ---- */
 table {{ border-collapse: collapse; width: 100%; font-size: 9pt; }}
 th, td {{ border: 1px solid #dbe3ee; padding: 5px 8px; text-align: left; vertical-align: top; }}
-th {{ background: {NAVY}; color: #fff; font-weight: 600; }}
+th {{ background: var(--navy); color: #fff; font-weight: 600; }}
 td.num {{ text-align: right; font-variant-numeric: tabular-nums; }}
 tr:nth-child(even) td {{ background: #f7fafd; }}
-.heatmap {{ border: 1px solid #e3eaf3; border-radius: 8px; padding: 10px 12px; }}
+.two-col {{ display: flex; gap: 12px; }}
+.two-col > div {{ flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }}
+.two-col h3 {{ margin-top: 0; }}
+.two-col ul {{ padding-left: 18px; font-size: 9pt; }}
+.two-col li {{ margin: 6px 0; }}
+
+/* ---- ヒートマップ・ファネル ---- */
+.heatmap {{ border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }}
 .hm-row {{ display: flex; align-items: center; gap: 8px; margin: 4px 0; }}
 .hm-label {{ width: 110px; font-size: 8.5pt; }}
-.hm-track {{ flex: 1; background: #eef2f8; border-radius: 4px; height: 14px; }}
-.hm-bar {{ height: 14px; border-radius: 4px; }}
-.hm-val {{ width: 38px; text-align: right; font-size: 8.5pt; font-weight: bold; }}
-.hm-note {{ font-size: 8pt; color: {MUTED}; margin-top: 6px; }}
+.hm-track {{ flex: 1; background: #eef2f8; border-radius: 4px; height: 13px; }}
+.hm-bar {{ height: 13px; border-radius: 4px; }}
+.hm-val {{ width: 40px; text-align: right; font-size: 8.5pt; font-weight: bold; }}
+.funnel {{ border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }}
+.fn-row {{ margin: 2px 0; }}
+.fn-bar {{ background: linear-gradient(90deg, var(--navy), var(--blue)); color: #fff; border-radius: 6px;
+  padding: 7px 12px; display: flex; justify-content: space-between; font-size: 9.5pt; min-width: 130px; }}
+.fn-drop {{ font-size: 8pt; color: #b91c1c; font-weight: bold; padding: 1px 0 1px 8px; }}
+
+/* ---- その他 ---- */
 .pri {{ font-weight: bold; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; white-space: nowrap; }}
 .pri-高 {{ background: #fee2e2; color: #b91c1c; }}
 .pri-中 {{ background: #fef3c7; color: #b45309; }}
 .pri-低 {{ background: #e0f2fe; color: #0369a1; }}
-ol.actions li {{ margin: 4px 0; }}
-ul.grown li {{ margin: 5px 0; }}
-.src {{ font-size: 8pt; color: {MUTED}; margin-top: 16px; border-top: 1px solid #e3eaf3; padding-top: 6px; }}
-.pagebreak {{ page-break-before: always; }}
+ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
+.best-card {{ border: 2px solid var(--gold); border-radius: 10px; padding: 10px 14px; margin-top: 10px; background: #fdfaf1; }}
+.bc-k {{ font-size: 8.5pt; color: var(--gold); font-weight: bold; letter-spacing: .1em; }}
+.bc-t {{ font-weight: bold; font-size: 10.5pt; }}
+.bc-s {{ font-size: 8.5pt; color: var(--muted); }}
+.back-cover {{ background: #0b2447; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 4mm; }}
+.back-cover .l {{ font-size: 13pt; font-weight: bold; }}
+.back-cover .s {{ font-size: 9.5pt; color: #9db8e0; line-height: 2.2; }}
 </style></head><body>
+
+<!-- ページ1: 表紙 -->
+<div class="sheet cover-page">
+  {logo_b64}
+  <div class="cv-gold"></div>
+  <div class="cv-kicker">MONTHLY CONSULTING REPORT</div>
+  <div class="cv-title">月次コンサルティング<br>レポート</div>
+  <div class="cv-month">{ym} 月次報告</div>
+  <div class="cv-badges">
+    <span class="cv-badge">検索パフォーマンス</span><span class="cv-badge">AI検索（AIO/LLMO）</span>
+    <span class="cv-badge">LPコンバージョン分析</span><span class="cv-badge">改善プラン</span>
+  </div>
+  <div class="cv-meta">
+    対象メディア: <b>AI集客ラボ</b>（https://ai.7senses.co.jp）+ 集客支援LP<br>
+    発行: <b>セブンセンシズ株式会社</b>｜発行日: {date.today().isoformat()}｜作成: 自動集計+分析エンジン<br>
+    本レポートの数値は Google Analytics 4 / Google Search Console / 運用ログの実測にもとづきます
+  </div>
+</div>
+
+<!-- ページ2: 目次+エグゼクティブサマリー -->
+<div class="sheet">
 {demo_banner}
-<div class="cover">
-  <h1>月次コンサルティングレポート ― {ym}</h1>
-  <div class="sub">対象: AI集客ラボ（オウンドメディア + 集客支援LP）｜発行: セブンセンシズ株式会社｜発行日: {date.today().isoformat()}</div>
+<div class="sec"><span class="no">01</span><h2>エグゼクティブサマリー</h2><div class="gold"></div></div>
+<p class="exec">{a["summary"]}</p>
+<div class="hl-cards">
+  <div class="hl"><div class="k">セッション</div><div class="v">{cur.get("sessions",0):,}</div><div class="s">前月比 {a["mom"]("sessions")}</div></div>
+  <div class="hl"><div class="k">CV（相談+資料DL）</div><div class="v">{cur.get("cv",0)}件</div><div class="s">前月比 {a["mom"]("cv")}</div></div>
+  <div class="hl"><div class="k">AI経由参照</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
+  <div class="hl"><div class="k">当月公開記事</div><div class="v">{d["content"]["published"]}本</div><div class="s">品質90点以上のみ</div></div>
+</div>
+<h3 style="margin-top:18px">本レポートの構成</h3>
+<ul class="toc">{toc_html}</ul>
+<div class="callout"><b>今月の結論:</b> {a["grown"][0].replace("<b>","").replace("</b>","") if a["grown"] else "-"}</div>
 </div>
 
-<h2>1. 当月サマリー（前月比つき）</h2>
+<!-- ページ3: KPIダッシュボード -->
+<div class="sheet">
+<div class="sec"><span class="no">02</span><h2>KPIダッシュボード</h2><div class="gold"></div></div>
 <div class="tiles">
-{tile("セッション", "sessions")}{tile("CV（相談+資料DL）", "cv", "件")}{tile("検索表示回数", "impressions")}{tile("検索クリック", "clicks")}{tile("平均CTR", "ctr", "%")}{tile("平均掲載順位", "pos", "位")}
+{tile("セッション", "sessions")}{tile("CV（相談+資料DL）", "cv", "件")}{tile("検索表示回数", "impressions")}
+{tile("検索クリック", "clicks")}{tile("平均CTR", "ctr", "%")}{tile("平均掲載順位", "pos", "位")}
 </div>
-<p style="font-size:9pt;color:{MUTED};margin-top:6px;">AI経由参照（ChatGPT/Perplexity/Gemini等）: <b>{d.get("ai_sessions", 0)}セッション</b></p>
-
-<h2>2. 6ヶ月トレンド</h2>
+<h3>6ヶ月トレンド</h3>
 <div class="charts">
 {svg_line(labels, "sessions", BLUE, "セッション数（GA4）")}
 {svg_line(labels, "clicks", TEAL, "検索クリック数（Search Console）")}
 {svg_line(labels, "impressions", BLUE, "検索表示回数（Search Console）")}
 {svg_line(labels, "pos", TEAL, "平均掲載順位（小さいほど良い）", "位")}
 </div>
+<p class="note" style="margin-top:8px">読み方: 表示回数はサイトの「露出の総量」、クリックは「選ばれた回数」、順位はその効率を表します。各タイル下の折れ線は6ヶ月の推移（スパークライン）です。</p>
+</div>
 
-<h2>3. Search Console クエリ別実績（上位10）</h2>
+<!-- ページ4: クエリ分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">03</span><h2>検索パフォーマンス詳細</h2><div class="gold"></div></div>
+<h3>クエリ別実績（上位10）</h3>
 <table><tr><th>クエリ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{qrows}</table>
+<div class="two-col" style="margin-top:14px">
+  <div><h3>🏅 勝ちクエリ（横展開する）</h3><ul>{winner_rows}</ul></div>
+  <div><h3>🎯 テコ入れクエリ（リライト対象）</h3><ul>{challenger_rows}</ul></div>
+</div>
+</div>
 
-<div class="pagebreak"></div>
-<h2>4. LPエリア到達ヒートマップ</h2>
-<p style="font-size:9pt;">LP各セクションまで読者が到達した割合です（GA4 area_reachイベント）。<b>色が赤いほど到達が少ない=改善対象</b>です。</p>
+<!-- ページ5: AI検索分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">04</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。ゼロクリック時代の新しい流入経路であり、当メディアの中核戦略です。</p>
+<div class="hl-cards" style="margin:10px 0 14px">
+  <div class="hl"><div class="k">AI経由セッション（当月）</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
+  <div class="hl"><div class="k">AI経由の全体比</div><div class="v">{round(ai_total / max(cur.get("sessions",1),1) * 100, 1)}%</div><div class="s">対セッション</div></div>
+  <div class="hl"><div class="k">実装済みAIO施策</div><div class="v">12項目</div><div class="s">全記事に標準適用</div></div>
+</div>
+<h3>プラットフォーム別内訳</h3>
+{ai_bars(d.get("ai_breakdown", []), ai_total)}
+<h3 style="margin-top:14px">この数字の意味と次の一手</h3>
+<div class="callout">AI経由の訪問者は「AIの回答で自社を知り、確かめに来た」<b>非常に確度の高い見込み客</b>です。
+ChatGPT比率が高い場合はサイト外の言及（プレスリリース・寄稿）を、Perplexity比率が高い場合は記事の鮮度更新を強化するのが定石です。
+月末のAIスポットチェック（主要クエリをAIに質問し自社言及を記録）と併せて評価します。</div>
+<p class="note">実装済みAIO施策: 冒頭断言回答 / H2直下1文結論 / FAQ構造化 / 出典付き数値 / llms.txt / robots.txt AI許可 / 構造化データ4種 / 監修者情報 / 鮮度表記 / 定義ブロック / 比較表 / 対象読者明記</p>
+</div>
+
+<!-- ページ6: LPコンバージョン分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">05</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
+<h3>主要区画のファネル（どこまで読まれ、どこで離脱したか）</h3>
+{funnel_html(d.get("areas", []))}
+<h3 style="margin-top:14px">全12区画の到達ヒートマップ</h3>
 {svg_heatbars(d.get("areas", []))}
-<p class="hm-note">■青=到達60%以上 ■水色=40-59% ■橙=20-39% ■赤=20%未満</p>
+<p class="note">■青=到達60%以上 ■水色=40-59% ■橙=20-39% ■赤=20%未満。GA4のarea_reachイベント（画面内40%表示で発火）による独自計測で、有料ヒートマップツールなしで取得しています。</p>
+</div>
 
-<h2>5. 伸びたポイント（数字の根拠つき）</h2>
+<!-- ページ7: 要因分析+改善プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">06</span><h2>成果の要因分析</h2><div class="gold"></div></div>
 <ul class="grown">{grown}</ul>
-
-<h2>6. 直すべきポイント（優先度つき・対比表）</h2>
+<div class="sec" style="margin-top:18px"><span class="no">07</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
 <table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr>{frows}</table>
+</div>
 
-<h2>7. コンテンツ実績</h2>
-<p style="font-size:9.5pt;">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 6エージェント品質採点 114/120点以上）</p>
+<!-- ページ8: コンテンツ実績+来月プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr>{crows}</table>
+{best_html}
+<div class="sec" style="margin-top:18px"><span class="no">09</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+<table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr>{action_rows}</table>
+</div>
 
-<h2>8. 来月のプラン（実行順）</h2>
-<ol class="actions">{actions}</ol>
+<!-- ページ9: 付録 -->
+<div class="sheet">
+<div class="sec"><span class="no">10</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">本レポートで使用している指標・用語の定義です。社内共有の際にご活用ください。</p>
+<table>{gloss_rows}</table>
+<h3 style="margin-top:14px">データソースと計測方法</h3>
+<p class="note">Google Analytics 4（セッション・CV・AI参照元・エリア到達）/ Google Search Console（表示・クリック・CTR・順位・クエリ）/ 運用ログ（記事作成・品質審査）。
+AI経由参照は chatgpt.com・chat.openai.com・perplexity.ai・gemini.google.com・copilot.microsoft.com・claude.ai からの参照流入の合計。
+エリア到達はLP各セクションが画面内に40%表示された時点で発火する独自イベントにもとづきます。数値は月初〜月末の集計です。</p>
+</div>
 
-<div class="src">データソース: Google Analytics 4（セッション・CV・AI参照元・エリア到達）/ Google Search Console（表示・クリック・CTR・順位・クエリ）/ 運用スプレッドシート（記事作成ログ）。エリア到達はLP各セクションのarea_reachイベント（画面内40%表示で発火）にもとづく。</div>
+<!-- ページ10: 裏表紙 -->
+<div class="sheet back-cover">
+  {logo_b64}
+  <div class="l">AI集客ラボ｜セブンセンシズ株式会社</div>
+  <div class="s">〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>
+  TEL 06-4305-7547（9:00〜20:00 / 土日祝休）<br>
+  https://ai.7senses.co.jp ｜ https://www.7senses.co.jp<br><br>
+  本レポートに関するご質問・追加分析のご要望はお気軽にお申し付けください。<br>
+  次号は翌月1日に自動発行されます。</div>
+</div>
 </body></html>"""
 
 
@@ -513,7 +708,14 @@ def main():
         pg.goto(html_path.as_uri())
         pg.wait_for_timeout(400)
         pg.pdf(path=str(pdf_path), format="A4", print_background=True,
-               margin={"top": "14mm", "bottom": "14mm", "left": "12mm", "right": "12mm"})
+               display_header_footer=True,
+               header_template="<span></span>",
+               footer_template=(
+                   '<div style="width:100%;font-size:7px;color:#8ba0bd;'
+                   'padding:0 12mm;display:flex;justify-content:space-between;">'
+                   '<span>AI集客ラボ 月次コンサルティングレポート ｜ セブンセンシズ株式会社</span>'
+                   '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>'),
+               margin={"top": "0", "bottom": "10mm", "left": "0", "right": "0"})
         b.close()
     print("PDF:", pdf_path)
 
