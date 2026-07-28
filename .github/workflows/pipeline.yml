@@ -102,6 +102,8 @@ jobs:
       - name: 最終ビルドとコミット
         run: |
           python scripts/build.py
+          # ローカルKPI集計（kpi_feedback.md を更新し翌回の学習に使う）
+          python scripts/local_kpi.py
           git add -A
           if git diff --cached --quiet; then
             echo "変更なし — コミットをスキップ"
