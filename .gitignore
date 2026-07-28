@@ -17,3 +17,4 @@ automation/images/
 Thumbs.db
 __pycache__/
 automation/logs/
+.wrangler/
