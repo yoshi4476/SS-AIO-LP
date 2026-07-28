@@ -734,7 +734,9 @@ def main():
         }).encode()
         req = urllib.request.Request("https://api.resend.com/emails", data=payload,
                                      headers={"Authorization": f"Bearer {key}",
-                                              "Content-Type": "application/json"})
+                                              "Content-Type": "application/json",
+                                              # CloudflareがデフォルトUAを遮断する（error 1010）ためUA必須
+                                              "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"})
         with urllib.request.urlopen(req) as res:
             print("メール送信:", res.status)
 

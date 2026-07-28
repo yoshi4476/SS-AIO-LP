@@ -96,7 +96,9 @@ def main():
         req = urllib.request.Request(
             f"https://api.resend.com{path}", method="POST",
             data=json.dumps(body).encode(),
-            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json",
+                     # CloudflareがデフォルトUAを遮断する（error 1010）ためUA必須
+                     "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"})
         with urllib.request.urlopen(req) as r:
             return json.load(r)
 
