@@ -150,7 +150,7 @@ def fetch_real():
             "clicks": int(r.get("clicks", 0)), "impressions": int(r.get("impressions", 0)),
             "ctr": round(r.get("ctr", 0) * 100, 2), "pos": round(r.get("position", 0), 1)})
     res = sc.searchanalytics().query(siteUrl=site, body={
-        "startDate": f"{labels[-1]}-01", "endDate": "today",
+        "startDate": f"{labels[-1]}-01", "endDate": date.today().isoformat(),
         "dimensions": ["query"], "rowLimit": 10}).execute()
     data["queries"] = [{"q": r["keys"][0], "imp": int(r["impressions"]), "clicks": int(r["clicks"]),
                         "ctr": round(r["ctr"] * 100, 1), "pos": round(r["position"], 1)}

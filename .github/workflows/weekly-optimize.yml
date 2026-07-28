@@ -67,3 +67,15 @@ jobs:
 
       - name: 更新URLをIndexNow通知
         run: python scripts/notify_indexnow.py || true
+
+      - name: Google Indexing API即時登録（本日更新分）
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            python scripts/notify_indexing.py || true
+            rm -f indexing-service-account.json
+          else
+            echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
+          fi
