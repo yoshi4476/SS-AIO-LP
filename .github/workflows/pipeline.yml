@@ -27,7 +27,7 @@ env:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
 
@@ -45,10 +45,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
       - name: 依存インストール（Python・日本語フォント・Claude Code）
         run: |
-          pip install markdown pyyaml pillow
+          pip install -r requirements.txt
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
           npm install -g @anthropic-ai/claude-code
 
@@ -66,7 +67,7 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
           claude -p "$(cat automation/pipeline_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 400
+            --dangerously-skip-permissions --max-turns 160
 
       - name: 公開失敗の即時リトライ（最大2回）
         if: steps.mode.outputs.mode == 'main'
@@ -79,7 +80,7 @@ jobs:
             echo "$out" | grep -q "BLOCKED" || break
             echo "::warning::BLOCKED記事あり — リトライ $i/2"
             claude -p "$(cat automation/retry_prompt.txt)" \
-              --dangerously-skip-permissions --max-turns 400
+              --dangerously-skip-permissions --max-turns 160
           done
 
       - name: 同日救済チェック（BLOCKED or 本日分ゼロなら再挑戦）
@@ -97,7 +98,7 @@ jobs:
             exit 0
           fi
           claude -p "$(cat automation/retry_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 400
+            --dangerously-skip-permissions --max-turns 160
 
       - name: 最終ビルドとコミット
         run: |
