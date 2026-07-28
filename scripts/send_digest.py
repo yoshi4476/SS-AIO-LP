@@ -20,7 +20,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE_URL = "https://example.com"  # ドメイン取得後に差し替え（build.pyと合わせる）
+SITE_URL = "https://ai.7senses.co.jp"  # ドメイン取得後に差し替え（build.pyと合わせる）
 SITE_NAME = "AI集客ラボ"
 DAYS = 8  # 直近何日分の記事を載せるか
 

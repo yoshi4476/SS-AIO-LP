@@ -39,7 +39,7 @@ python -m http.server 8800 --directory site
 ## 公開前チェックリスト
 
 [PROJECT.md](PROJECT.md) の「セットアップ進捗チェックリスト」を参照。
-主要残タスク: ドメイン取得（`example.com` を一括置換+`scripts/build.py` の `SITE_URL`）/ Resend設定 / GA4・GSC設置。
+主要残タスク: ドメイン取得（`ai.7senses.co.jp` を一括置換+`scripts/build.py` の `SITE_URL`）/ Resend設定 / GA4・GSC設置。
 
 ## 記事の追加（手動の場合）
 

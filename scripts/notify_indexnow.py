@@ -18,7 +18,7 @@ if not env_path.exists():
 env = dict(l.split("=", 1) for l in env_path.read_text(encoding="utf-8-sig").splitlines()
            if "=" in l and not l.strip().startswith("#"))
 KEY = env.get("INDEXNOW_KEY", "").strip()
-SITE_URL = env.get("SITE_URL", "https://example.com").strip()
+SITE_URL = env.get("SITE_URL", "https://ai.7senses.co.jp").strip()
 
 if not KEY or "YOUR_" in KEY:
     raise SystemExit("INDEXNOW_KEY が未設定です（.env）。site/{KEY}.txt の設置も必要です")

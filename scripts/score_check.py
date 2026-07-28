@@ -76,7 +76,7 @@ def main():
     internal = set(re.findall(r"\]\((/(?:aio|seo|meo|ai-marketing)/[^)]+)\)", body))
     add("内部リンク3本以上", len(internal) >= 3, f"{len(internal)}本")
     external = set(re.findall(r'href="(https?://[^"]+)"', body))
-    external = {u for u in external if "example.com" not in u and "7senses" not in u and "x.com" not in u}
+    external = {u for u in external if "ai.7senses.co.jp" not in u and "7senses" not in u and "x.com" not in u}
     add("外部権威リンク（出典）2本以上", len(external) >= 2, f"{len(external)}本")
 
     # --- 人間味 ---

@@ -9,7 +9,7 @@ async function get(url, limit = 400000) {
   try {
     const res = await fetch(url, {
       redirect: "follow",
-      headers: { "User-Agent": "SevenSenses-SiteAudit/1.0 (+https://example.com/site-audit/)" },
+      headers: { "User-Agent": "SevenSenses-SiteAudit/1.0 (+https://ai.7senses.co.jp/site-audit/)" },
     });
     // リダイレクト先が内部アドレスに向いた場合も拒否（SSRF対策）
     if (PRIVATE.test(new URL(res.url).hostname)) {

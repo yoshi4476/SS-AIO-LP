@@ -8,7 +8,7 @@
 | 項目 | 値 |
 |:--|:--|
 | メディア名 | AI集客ラボ（仮称 — 変更する場合は全ファイル一括置換） |
-| ドメイン | **未取得**（仮値: `https://example.com` — 取得後に全ファイル一括置換） |
+| ドメイン | **未取得**（仮値: `https://ai.7senses.co.jp` — 取得後に全ファイル一括置換） |
 | サイト形式 | **静的HTML**（WordPress不使用） |
 | ホスティング | **Cloudflare Pages**（Gitリポジトリ連携で自動デプロイ） |
 | メディアの目的 | 自社のAIO・SEO・MEO集客支援サービスへのリード獲得（記事→LP→CV導線） |
@@ -27,7 +27,7 @@
 | 会社実績 | 2020年3月10日設立 / 資本金500万円 / MEO対策「G-ran」＝**通算3,200店舗以上の運営実績**（2026-07 ご本人提供・サイト反映済み） |
 | MEOスタンダード | 月額3万円: 口コミ返信代行 / NAP統一 / 最新情報投稿 月10〜14回 / 月次レポート / 基本おまかせ（税込・税別と初期費用はTODO確認） |
 | おまかせパック特典 | MEOスタンダード（月額3万円相当）が無料付帯 |
-| プロフィールURL | `https://example.com/about/`（会社概要・代表メッセージ掲載済み） |
+| プロフィールURL | `https://ai.7senses.co.jp/about/`（会社概要・代表メッセージ掲載済み） |
 
 ## ターゲット業種（優先順）
 
@@ -64,14 +64,14 @@
 
 ※ LLMO（ChatGPT/Perplexity/Gemini等のAIチャット対策）は `aio` カテゴリで扱う。記事テーマとしても積極的に採用する（CLAUDE.md 第0章の用語定義参照）。
 
-記事URL形式: `https://example.com/{カテゴリスラッグ}/{記事スラッグ}/`
+記事URL形式: `https://ai.7senses.co.jp/{カテゴリスラッグ}/{記事スラッグ}/`
 
 ## CTA設定
 
 | CTA | 文言 | リンク先 |
 |:--|:--|:--|
-| CTA 1（無料相談） | TODO:（例: AI集客の無料相談を予約する） | `https://example.com/contact/` |
-| CTA 2（資料DL） | TODO:（例: AIO対策チェックリストを無料ダウンロード） | `https://example.com/download/` |
+| CTA 1（無料相談） | TODO:（例: AI集客の無料相談を予約する） | `https://ai.7senses.co.jp/contact/` |
+| CTA 2（資料DL） | TODO:（例: AIO対策チェックリストを無料ダウンロード） | `https://ai.7senses.co.jp/download/` |
 
 ## 競合サイト（3C分析用・Phase 1で自動発見後に確定）
 
@@ -122,7 +122,7 @@
 - [x] スプレッドシート雛形（spreadsheet_template.xlsx）
 - [x] 静的サイト本体（トップ・カテゴリ4・about・contact・download・リード獲得LP）
 - [x] 記事テンプレート（templates/article.html）+ ビルドスクリプト（scripts/build.py）— サンプル記事でビルド検証済み
-- [ ] ドメイン取得 → 全ファイルの `example.com` を一括置換 + `scripts/build.py` の SITE_URL 更新
+- [ ] ドメイン取得 → 全ファイルの `ai.7senses.co.jp` を一括置換 + `scripts/build.py` の SITE_URL 更新
 - [ ] Cloudflare Pages プロジェクト作成+Gitリポジトリ連携（ビルド出力: `site/`）
 - [x] フォーム送信の実装（`functions/api/lead.js` — 3フォーム共通、ハニーポット+バリデーション付き）
 - [ ] メール送信の有効化: [Resend](https://resend.com) でアカウント作成+送信ドメイン認証 → Cloudflare Pages の環境変数に `RESEND_API_KEY` / `LEAD_TO_EMAIL`（通知先） / `LEAD_FROM_EMAIL`（認証済み送信元）を設定

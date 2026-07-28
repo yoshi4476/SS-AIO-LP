@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>AI集客ラボ</title>
-  <link href="https://example.com/"/>
-  <link rel="self" href="https://example.com/feed.xml"/>
-  <id>https://example.com/</id>
+  <link href="https://ai.7senses.co.jp/"/>
+  <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
+  <id>https://ai.7senses.co.jp/</id>
   <updated>2026-07-28T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
     <title>AI時代のSEO対策とは？中小企業がやるべき5つの基本</title>
-    <link href="https://example.com/seo/ai-jidai-seo-taisaku/"/>
-    <id>https://example.com/seo/ai-jidai-seo-taisaku/</id>
+    <link href="https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/"/>
+    <id>https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>AI時代のSEO対策とは、検索上位表示に加えて「AIの回答に引用される」ことまで見据えた最適化です。中小企業が限られたリソースでやるべき5つの基本を優先順位つきで解説します。</summary>
   </entry>
   <entry>
     <title>AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像</title>
-    <link href="https://example.com/ai-marketing/ai-shukyaku-guide/"/>
-    <id>https://example.com/ai-marketing/ai-shukyaku-guide/</id>
+    <link href="https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>AI集客とは、AI検索・AIチャット・検索・マップのすべてから見込み客を集める考え方です。AIO・LLMO・SEO・MEOの関係と着手の順番を、1枚の地図としてまとめた完全ガイドです。</summary>
   </entry>
   <entry>
     <title>AIO対策とは？AI検索に引用される5つの手順</title>
-    <link href="https://example.com/aio/aio-taisaku-guide/"/>
-    <id>https://example.com/aio/aio-taisaku-guide/</id>
+    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-guide/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-taisaku-guide/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>AIO対策とは、Google AI OverviewやChatGPTなどのAI検索に自社情報が引用されるよう最適化する施策です。中小企業が今日から実践できる5つの手順を解説します。</summary>
   </entry>
   <entry>
     <title>ChatGPTを集客に活用する方法7選【中小企業向け】</title>
-    <link href="https://example.com/ai-marketing/chatgpt-shukyaku-katsuyo/"/>
-    <id>https://example.com/ai-marketing/chatgpt-shukyaku-katsuyo/</id>
+    <link href="https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>ChatGPTを集客に活用する方法は、キャッチコピー作成・口コミ返信・SNS投稿・記事の下書きなど「時間を奪う作業」の代行が基本です。中小企業がすぐ使える7つの活用法をプロンプト例つきで解説します。</summary>
   </entry>
   <entry>
     <title>Googleマップの口コミを増やす方法5選と返信のコツ</title>
-    <link href="https://example.com/meo/kuchikomi-fuyasu-hoho/"/>
-    <id>https://example.com/meo/kuchikomi-fuyasu-hoho/</id>
+    <link href="https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/"/>
+    <id>https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>Googleマップの口コミを増やす方法は、来店直後の自然な依頼とQRコードの導線づくりが基本です。ポリシー違反にならない増やし方5つと、低評価にも使える返信のコツを解説します。</summary>
   </entry>
   <entry>
     <title>LLMO対策とは？ChatGPTに引用される7つの方法</title>
-    <link href="https://example.com/aio/llmo-taisaku-hoho/"/>
-    <id>https://example.com/aio/llmo-taisaku-hoho/</id>
+    <link href="https://ai.7senses.co.jp/aio/llmo-taisaku-hoho/"/>
+    <id>https://ai.7senses.co.jp/aio/llmo-taisaku-hoho/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>LLMO対策とは、ChatGPTやPerplexityなどのAIチャットの回答で自社が引用・言及されるための最適化です。中小企業が実践できる7つの方法を、計測のやり方まで含めて解説します。</summary>
   </entry>
   <entry>
     <title>MEO対策のやり方7ステップ｜マップ上位表示の手順</title>
-    <link href="https://example.com/meo/meo-taisaku-yarikata/"/>
-    <id>https://example.com/meo/meo-taisaku-yarikata/</id>
+    <link href="https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/"/>
+    <id>https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>MEO対策のやり方は、Googleビジネスプロフィールの整備から口コミ運用・投稿継続までの7ステップで進めます。店舗集客支援の実務で使っている手順を、無料でできる範囲を中心に解説します。</summary>
   </entry>

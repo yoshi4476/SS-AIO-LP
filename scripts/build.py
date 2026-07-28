@@ -37,7 +37,7 @@ SITE = ROOT / "site"
 TEMPLATE = ROOT / "templates" / "article.html"
 
 # ---- サイト設定（ドメイン取得後に SITE_URL を差し替え） ----
-SITE_URL = "https://example.com"
+SITE_URL = "https://ai.7senses.co.jp"
 SITE_NAME = "AI集客ラボ"  # TODO: メディア名確定後に変更（PROJECT.md参照）
 ORG_NAME = "セブンセンシズ株式会社"
 AUTHOR_NAME = "セブンセンシズ編集部"  # TODO: 著者確定後に変更
