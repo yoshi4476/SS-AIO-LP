@@ -110,9 +110,22 @@ jobs:
             echo "変更なし — コミットをスキップ"
           else
             git commit -m "publish: auto pipeline $(date '+%Y-%m-%d %H:%M JST')"
-            # 他の実行（ローカル/手動）が先にpushしていても生成記事を失わない
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
-            git push
+            # 他の実行（ローカル/手動）が先にpushしていても生成記事を失わない。
+            # rebase衝突時は自動解決: リモート削除は尊重 / 共有ファイルはリモート優先 / 新規生成物は保全
+            for i in 1 2 3; do
+              git push && break
+              echo "push拒否 → リモートと統合して再試行 ($i/3)"
+              if ! git pull --rebase -X ours origin "${GITHUB_REF_NAME}"; then
+                git diff --name-only --diff-filter=U | while IFS= read -r f; do
+                  if git cat-file -e "origin/${GITHUB_REF_NAME}:$f" 2>/dev/null; then
+                    git checkout --ours -- "$f" 2>/dev/null && git add -- "$f" || git rm -f --ignore-unmatch -- "$f"
+                  else
+                    git rm -f --ignore-unmatch -- "$f"
+                  fi
+                done
+                GIT_EDITOR=true git rebase --continue || git rebase --skip || git rebase --abort
+              fi
+            done
           fi
 
       # GITHUB_TOKENによるpushはdeploy.ymlを起動しない（GitHubの再帰防止仕様）ため、ここで直接デプロイする
