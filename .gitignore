@@ -16,3 +16,4 @@ automation/images/
 .DS_Store
 Thumbs.db
 __pycache__/
+automation/logs/

@@ -126,6 +126,7 @@
 - [ ] Cloudflare Pages プロジェクト作成+Gitリポジトリ連携（ビルド出力: `site/`）
 - [x] フォーム送信の実装（`functions/api/lead.js` — 3フォーム共通、ハニーポット+バリデーション付き）
 - [ ] メール送信の有効化: [Resend](https://resend.com) でアカウント作成+送信ドメイン認証 → Cloudflare Pages の環境変数に `RESEND_API_KEY` / `LEAD_TO_EMAIL`（通知先） / `LEAD_FROM_EMAIL`（認証済み送信元）を設定
+- [ ] ニュースレターの有効化: Resendで Audience（購読者リスト）を作成 → `RESEND_AUDIENCE_ID` を Cloudflare Pages（購読API用）と GitHub Secrets（週刊配信用）の両方に設定。ローカルから配信する場合は .env にも追記
 - [ ] LPの実績数値（支援社数・継続率等）を実データで差し替え
 - [ ] サービス紹介動画・写真素材の制作 → LPのプレースホルダー差し替え
 - [ ] spreadsheet_template.xlsx をGoogle Sheetsにインポート → IDを本ファイルに記入
