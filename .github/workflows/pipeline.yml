@@ -137,3 +137,14 @@ jobs:
           else
             echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
           fi
+
+      - name: Slack通知
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then icon="✅"; else icon="🚨"; fi
+          latest=$(git log -1 --pretty=%s)
+          python scripts/notify_slack.py "$icon 記事パイプライン（${{ steps.mode.outputs.mode }}モード）: ${{ job.status }}
+          最新コミット: $latest
+          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

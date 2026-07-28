@@ -273,6 +273,121 @@ def fetch_demo():
 
 
 # ============================================================
+# サイト全体監査（記事別・ページ別の具体的な修正指示を自動生成）
+# ============================================================
+def audit_site(d):
+    import re as _re
+    today = date.today()
+    arts = []
+    for p in sorted((ROOT / "articles").glob("*.md")):
+        t = p.read_text(encoding="utf-8-sig")
+        m = _re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, _re.S)
+        if not m:
+            continue
+        fm, body = m.groups()
+
+        def fv(key):
+            mm = _re.search(rf"^{key}:\s*(.+?)\s*$", fm, _re.M)
+            return mm.group(1).strip('"') if mm else ""
+
+        arts.append({
+            "slug": p.stem, "title": fv("title"), "cat": fv("category"),
+            "date": fv("dateModified") or fv("date"),
+            "links": len(_re.findall(r"\]\(/(?:aio|seo|meo|ai-marketing)/[a-z0-9-]+/\)", body)),
+            "faq": len(_re.findall(r"<details><summary>", body)),
+            "len": len(_re.sub(r"\s", "", body)),
+        })
+
+    by_cat = {}
+    for x in arts:
+        by_cat.setdefault(x["cat"], []).append(x)
+    pages = {p["path"]: p for p in d.get("pages", [])}
+
+    art_rows, keep = [], []
+    for x in arts:
+        path = f'/{x["cat"]}/{x["slug"]}/'
+        g = pages.get(path)
+        issues = []
+        # 検索データにもとづく指示
+        if g and g["pos"] > 10 and g["imp"] >= 50:
+            issues.append(("本文構成",
+                           f'順位{g["pos"]}位・表示{g["imp"]:,}（2ページ目に滞留）',
+                           "検索上位3記事にあって自記事にないH2を1本追加し、冒頭の1文結論を検索意図に合わせて書き直す。同カテゴリ記事から内部リンク2本を追加"))
+        elif g and g["pos"] <= 10 and g["ctr"] < 2.5 and g["imp"] >= 100:
+            issues.append(("タイトル・メタ",
+                           f'順位{g["pos"]}位なのにCTR {g["ctr"]}%（同順位帯の期待値4〜6%を下回る）',
+                           f'タイトルを「数字+年号」型に変更（例:「{x["title"][:14]}…【2026年版・◯選】」）。メタディスクリプションの先頭60字を結論先出しに書き換え'))
+        # 鮮度
+        try:
+            age = (today - date.fromisoformat(x["date"])).days
+        except Exception:
+            age = 0
+        if age > 60:
+            issues.append(("鮮度表記・冒頭",
+                           f'最終更新から{age}日経過',
+                           "冒頭の「◯年◯月時点」を当月に更新し、数値・事例・ツール情報を点検。dateModifiedを更新して再ビルド"))
+        # 内部リンク
+        if x["links"] < 3:
+            cands = [y["title"][:18] for y in by_cat.get(x["cat"], []) if y["slug"] != x["slug"]][:2]
+            hint = f'（候補: {" / ".join(cands)}）' if cands else "（新規記事の公開後に追加）"
+            issues.append(("本文中の関連箇所",
+                           f'内部リンクが{x["links"]}本（基準3本以上）',
+                           f'同カテゴリ記事への文中リンクを{3 - x["links"]}本追加{hint}。アンカーは具体表現にする'))
+        # FAQ
+        if x["faq"] < 5:
+            issues.append(("FAQセクション",
+                           f'FAQが{x["faq"]}問（基準5問以上）',
+                           "読者の検索意図から質問を追加し、回答は40〜60字で本文・Schemaと完全一致させる"))
+
+        if issues:
+            for where, now, change in issues[:2]:  # 1記事あたり最重要2件まで掲載
+                art_rows.append({"art": x["title"][:24] or x["slug"], "where": where,
+                                 "now": now, "change": change})
+        else:
+            keep.append(f'{x["title"][:26]}（{("順位" + str(g["pos"]) + "位・CTR" + str(g["ctr"]) + "%") if g else "構造基準を全て満たしています"}）')
+
+    # --- サイト全体（構造・導線・カテゴリ） ---
+    site_rows = []
+    thin = [(c, len(v)) for c, v in by_cat.items() if len(v) <= 2]
+    cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
+    for c, n in sorted(thin, key=lambda x: x[1]):
+        site_rows.append({"target": f'カテゴリ「{cat_jp.get(c, c)}」', "where": "記事クラスター",
+                          "now": f"記事{n}本のみ（クラスターが薄くトピック権威が立たない）",
+                          "change": "このカテゴリのKWを次の記事作成で優先し、5本以上のクラスターにしてピラー記事から相互リンク"})
+    areas = d.get("areas") or []
+    if areas:
+        drops = [(areas[i], areas[i + 1], areas[i]["reach"] - areas[i + 1]["reach"])
+                 for i in range(len(areas) - 1)]
+        drops.sort(key=lambda x: -x[2])
+        for a1, a2, gap in drops[:2]:
+            site_rows.append({"target": "LP（集客支援サービス）", "where": f'「{a1["name"]}」セクション末尾',
+                              "now": f'「{a1["name"]}」→「{a2["name"]}」で到達率が{gap}pt低下（最大の離脱点）',
+                              "change": f'「{a1["name"]}」の最後に次セクションへの橋渡し文+ミニCTAボタンを追加。「{a2["name"]}」の見出しを読者利益型に変更'})
+    if d.get("devices"):
+        mb = next((v for k, v in d["devices"] if k == "mobile"), 0)
+        tot = sum(v for _, v in d["devices"]) or 1
+        if mb / tot >= 0.55:
+            site_rows.append({"target": "全記事テンプレート", "where": "冒頭ファーストビュー",
+                              "now": f"スマートフォン比率{round(mb/tot*100)}%",
+                              "change": "スマホ表示での冒頭を点検: 結論ボックス→この記事でわかること→目次が2スクロール以内に収まるか確認し、超える場合は冒頭画像を軽量化"})
+    if d.get("ai_sessions", 0) < 10:
+        site_rows.append({"target": "サイト外の露出", "where": "プレスリリース・外部寄稿",
+                          "now": f'AI経由参照が{d.get("ai_sessions", 0)}セッション（立ち上がり前）',
+                          "change": "記事15本到達を目安に準備済みのプレスリリース草稿（docs/press-release-draft.md）を配信。ChatGPT系はサイト外の言及量が引用を左右する"})
+    ch = d.get("channels") or []
+    if ch:
+        org = next((v for k, v in ch if "Organic Search" in k), 0)
+        tot = sum(v for _, v in ch) or 1
+        if org / tot < 0.4:
+            site_rows.append({"target": "流入構造", "where": "検索チャネル",
+                              "now": f"自然検索比率{round(org/tot*100)}%（4割未満）",
+                              "change": "新規記事の公開ペース維持とインデックス確認を最優先。直接流入が多い場合は指名検索の受け皿（サイト名での1位表示）を確認"})
+
+    return {"articles": art_rows[:14], "site": site_rows[:6], "keep": keep[:6],
+            "audited": len(arts)}
+
+
+# ============================================================
 # 分析（何が効いたか / 直すべきか / 来月プラン）
 # ============================================================
 def analyze(d):
@@ -396,7 +511,7 @@ def analyze(d):
 
     return {"grown": grown, "fixes": fixes, "actions": actions, "mom": mom,
             "winners": winners, "challengers": challengers, "summary": summary,
-            "assets": assets, "targets": targets}
+            "assets": assets, "targets": targets, "audit": audit_site(d)}
 
 
 # ============================================================
@@ -549,6 +664,14 @@ def render(d, a):
                     for p in d.get("pages", [])) or '<tr><td colspan="5">当月のページ別データはまだありません</td></tr>'
     trows = "".join(f'<tr><td>{k}</td><td class="num">{now}</td><td class="num" style="color:#067647;font-weight:bold">{tv}</td><td>{why}</td></tr>'
                     for k, now, tv, why in a["targets"])
+    audit = a["audit"]
+    audit_art_rows = "".join(
+        f'<tr><td>{r["art"]}</td><td style="white-space:nowrap">{r["where"]}</td><td>{r["now"]}</td><td>{r["change"]}</td></tr>'
+        for r in audit["articles"]) or '<tr><td colspan="4">全記事が基準を満たしています（修正指示なし）</td></tr>'
+    audit_site_rows = "".join(
+        f'<tr><td>{r["target"]}</td><td style="white-space:nowrap">{r["where"]}</td><td>{r["now"]}</td><td>{r["change"]}</td></tr>'
+        for r in audit["site"]) or '<tr><td colspan="4">構造上の修正指示はありません</td></tr>'
+    audit_keep = "".join(f'<li>{k}</li>' for k in audit["keep"]) or "<li>（来月の計測データで抽出します）</li>"
     assets = a["assets"]
     cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
     cat_pairs = [(cat_jp.get(c, c), n) for c, n in assets["cats"]]
@@ -592,7 +715,7 @@ def render(d, a):
         "検索パフォーマンス詳細（クエリ分析）", "記事別パフォーマンス+サイト資産",
         "流入構造分析（チャネル・デバイス・日別）", "AI検索（AIO/LLMO）分析",
         "LPコンバージョン分析（ファネル+ヒートマップ）", "成果の要因分析",
-        "改善プラン（優先度つき対比表）", "コンテンツ実績",
+        "改善プラン（優先度つき対比表）", "サイト全体監査（記事別の修正指示）", "コンテンツ実績",
         "目標対比と来月のKPI目標", "来月の実行スケジュール", "付録: 指標の定義"]
     toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc_items, 1))
 
@@ -826,9 +949,21 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 <table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr>{frows}</table>
 </div>
 
+<!-- ページ: サイト全体監査 -->
+<div class="sheet">
+<div class="sec"><span class="no">10</span><h2>サイト全体監査（どこを・どう変えるか）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">全{audit["audited"]}記事とサイト構造を機械監査し、検索データ（順位・CTR）と品質基準（鮮度・内部リンク・FAQ）を突合した<b>具体的な修正指示</b>です。修正は週次最適化（毎週月曜）が自動で実施し、翌月号で効果を検証します。</p>
+<h3>ブログ記事の修正指示（優先度順）</h3>
+<table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_art_rows}</table>
+<h3 style="margin-top:14px">サイト構造・導線の変更指示</h3>
+<table><tr><th style="width:18%">対象</th><th style="width:16%">場所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_site_rows}</table>
+<h3 style="margin-top:14px">✅ 変更せず維持するもの（好調・基準充足）</h3>
+<ul style="padding-left:18px;font-size:9pt">{audit_keep}</ul>
+</div>
+
 <!-- ページ8: コンテンツ実績+来月プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">10</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">11</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr>{crows}</table>
 {best_html}
@@ -836,17 +971,17 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 
 <!-- ページ: 目標対比+来月スケジュール -->
 <div class="sheet">
-<div class="sec"><span class="no">11</span><h2>目標対比と来月のKPI目標</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">12</span><h2>目標対比と来月のKPI目標</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
 <table><tr><th>指標</th><th style="width:14%">当月実績</th><th style="width:14%">来月目標</th><th>目標の根拠</th></tr>{trows}</table>
 <div class="callout"><b>目標の使い方:</b> 来月号のレポートで本表の目標と実績を突合します。2ヶ月連続で未達の指標は、施策の前提（KW選定・導線設計）から見直します。</div>
-<div class="sec" style="margin-top:18px"><span class="no">12</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">13</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
 <table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr>{action_rows}</table>
 </div>
 
 <!-- ページ9: 付録 -->
 <div class="sheet">
-<div class="sec"><span class="no">13</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">14</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">本レポートで使用している指標・用語の定義です。社内共有の際にご活用ください。</p>
 <table>{gloss_rows}</table>
 <h3 style="margin-top:14px">データソースと計測方法</h3>

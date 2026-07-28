@@ -39,3 +39,11 @@ jobs:
           else
             python scripts/send_digest.py
           fi
+
+      - name: Slack通知
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then icon="📮"; else icon="🚨"; fi
+          python scripts/notify_slack.py "$icon 週刊ニュースレター配信: ${{ job.status }}" || true
