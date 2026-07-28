@@ -221,6 +221,13 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         print(f"WARN: 文字数不足: {meta['slug']} は本文{len(plain):,}字"
               f"（基準5,000字以上。セクション追加・実務情報の深掘りで増強すること）")
 
+    # 画像実在チェック（生成漏れ・パスtypoの検出。生成: python scripts/make_images.py <slug>）
+    if meta.get("eyecatch") and not (SITE / meta["eyecatch"].lstrip("/")).exists():
+        print(f"WARN: アイキャッチ未生成: {meta['slug']} → {meta['eyecatch']}")
+    for src in sorted(set(re.findall(r'<img src="(/images/[^"]+)"', content))):
+        if not (SITE / src.lstrip("/")).exists():
+            print(f"WARN: 本文画像が存在しない: {meta['slug']} → {src}")
+
     eyecatch = ""
     if meta.get("eyecatch"):
         eyecatch = (f'<figure class="article-eyecatch"><img src="{meta["eyecatch"]}" '

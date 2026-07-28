@@ -2,13 +2,14 @@
 """記事アイキャッチ生成（画像生成API未設定時のフォールバック / Phase 6用）
 
 使い方:
-    python scripts/make_eyecatch.py <slug> <カテゴリ名> <タイトル1行目> [タイトル2行目]
-例:
-    python scripts/make_eyecatch.py aio-taisaku-guide "AIO・LLMO運用" "AIO対策とは？" "AI検索に引用される5つの手順"
+    python scripts/make_eyecatch.py <slug>                      # 記事フロントマターから自動生成（推奨）
+    python scripts/make_eyecatch.py <slug> <カテゴリ名> <1行目> [2行目]   # 手動指定（従来互換）
 
 出力: site/images/<slug>/eyecatch.png (1200x675)
-記事フロントマターに eyecatch: /images/<slug>/eyecatch.png を追記して使用する。
+- タイトルは自動で折り返し・自動縮小するため、はみ出しは構造的に発生しない
+- PNGはパレット化で自動軽量化（フラットデザインのため画質劣化なし）
 """
+import re
 import sys
 from pathlib import Path
 
@@ -23,12 +24,11 @@ CAT_COLORS = {
     "MEO運用": (13, 148, 136),
     "AI集客・活用全般": (2, 132, 199),
 }
-
+CAT_NAMES = {"aio": "AIO・LLMO運用", "seo": "SEO運用", "meo": "MEO運用",
+             "ai-marketing": "AI集客・活用全般"}
 
 FONT_PATHS = [
-    # Windows（ローカル実行）
     r"C:\Windows\Fonts\YuGothB.ttc", r"C:\Windows\Fonts\meiryob.ttc",
-    # Linux/GitHub Actions（fonts-noto-cjk。ディストリによって配置が異なる）
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
     "/usr/share/fonts/opentype/noto/NotoSansCJKjp-Bold.otf",
     "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
@@ -45,9 +45,43 @@ def font(size):
                      "Windowsは游ゴシック/メイリオを確認）。文字化け画像の生成を防ぐため中断します")
 
 
-def main():
-    slug, cat = sys.argv[1], sys.argv[2]
-    lines = [x for x in sys.argv[3:5] if x]
+def save_png(img, out: Path):
+    """フラットイラスト向けのパレット化保存（サイズ約1/3〜1/5・画質劣化なし）"""
+    out.parent.mkdir(parents=True, exist_ok=True)
+    img.convert("RGB").quantize(colors=256, method=Image.MEDIANCUT).save(out, "PNG", optimize=True)
+    print(f"saved: {out} ({out.stat().st_size // 1024}KB)")
+
+
+def wrap_title(d, title, max_width, base_size=64, min_size=40):
+    """タイトルを最大2行に折り返し、収まるまでフォントを自動縮小する"""
+    # 区切り優先: ｜/｜?、読点・中黒・スペースの位置で自然に分割
+    for size in range(base_size, min_size - 1, -4):
+        f = font(size)
+        if d.textlength(title, font=f) <= max_width:
+            return [title], f
+        # 2行分割: 中央に最も近い区切り文字で割る
+        seps = [m.start() for m in re.finditer(r"[、。・｜|？! ？!／/」』）)]", title)]
+        cut = min(seps, key=lambda i: abs(i - len(title) // 2)) + 1 if seps else len(title) // 2
+        lines = [title[:cut].strip(), title[cut:].strip()]
+        if all(d.textlength(x, font=f) <= max_width for x in lines if x):
+            return [x for x in lines if x], f
+    # 最終手段: 最小サイズで強制2分割
+    f = font(min_size)
+    cut = len(title) // 2
+    return [title[:cut], title[cut:]], f
+
+
+def parse_frontmatter(slug):
+    p = ROOT / "articles" / f"{slug}.md"
+    if not p.exists():
+        raise SystemExit(f"articles/{slug}.md が見つかりません（手動指定モードを使うか、slugを確認）")
+    import yaml
+    m = re.match(r"^---\s*\n(.*?)\n---", p.read_text(encoding="utf-8-sig"), re.S)
+    meta = yaml.safe_load(m.group(1))
+    return meta["title"], CAT_NAMES.get(meta["category"], "AI集客・活用全般")
+
+
+def render(slug, cat, lines_or_title):
     accent = CAT_COLORS.get(cat, (37, 99, 235))
 
     img = Image.new("RGB", (W, H))
@@ -72,11 +106,18 @@ def main():
     d.rounded_rectangle([80, 88, 80 + tw + 56, 140], radius=26, fill=accent)
     d.text((80 + 28 + tw / 2, 114), cat, font=bf, fill=(255, 255, 255), anchor="mm")
 
-    # タイトル（1〜2行）
-    tf = font(64)
-    y0 = 260 if len(lines) > 1 else 300
+    # タイトル（自動折り返し+自動縮小）
+    if isinstance(lines_or_title, str):
+        lines, tf = wrap_title(d, lines_or_title, W - 160)
+    else:
+        lines, tf = lines_or_title, font(64)
+        # 手動指定でもはみ出しは縮小で防ぐ
+        while any(d.textlength(x, font=tf) > W - 160 for x in lines) and tf.size > 40:
+            tf = font(tf.size - 4)
+    line_h = int(tf.size * 1.42)
+    y0 = 300 - (len(lines) - 1) * line_h // 2
     for i, line in enumerate(lines):
-        d.text((80, y0 + i * 90), line, font=tf, fill=(255, 255, 255), anchor="lm")
+        d.text((80, y0 + i * line_h), line, font=tf, fill=(255, 255, 255), anchor="lm")
 
     # フッター帯（公式ロゴ白版）
     d.rectangle([0, H - 92, W, H], fill=(11, 36, 71))
@@ -93,10 +134,18 @@ def main():
     d.text((tx, H - 46), "AI集客ラボ", font=font(30), fill=(255, 255, 255), anchor="lm")
     d.text((W - 80, H - 46), "セブンセンシズ株式会社", font=font(22), fill=(163, 196, 243), anchor="rm")
 
-    out = ROOT / "site" / "images" / slug / "eyecatch.png"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    img.save(out, "PNG")
-    print("saved:", out)
+    save_png(img, ROOT / "site" / "images" / slug / "eyecatch.png")
+
+
+def main():
+    if len(sys.argv) == 2:  # slugのみ → フロントマターから自動
+        slug = sys.argv[1]
+        title, cat = parse_frontmatter(slug)
+        render(slug, cat, title)
+    else:  # 従来互換
+        slug, cat = sys.argv[1], sys.argv[2]
+        lines = [x for x in sys.argv[3:5] if x]
+        render(slug, cat, lines)
 
 
 if __name__ == "__main__":
