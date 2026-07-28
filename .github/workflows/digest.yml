@@ -1,6 +1,7 @@
 name: Weekly Newsletter Digest
 
 # 毎週月曜 9:00 JST（= UTC 0:00 月曜）に週刊ダイジェストを配信
+# 注: GitHub側にワークフロー未登録だったため再push（2026-07-28）
 on:
   schedule:
     - cron: "0 0 * * 1"
