@@ -12,16 +12,23 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+env = {}
 env_path = ROOT / ".env"
-if not env_path.exists():
-    raise SystemExit(".env がありません（.env.example をコピーして作成してください）")
-env = dict(l.split("=", 1) for l in env_path.read_text(encoding="utf-8-sig").splitlines()
-           if "=" in l and not l.strip().startswith("#"))
+if env_path.exists():
+    env = dict(l.split("=", 1) for l in env_path.read_text(encoding="utf-8-sig").splitlines()
+               if "=" in l and not l.strip().startswith("#"))
 KEY = env.get("INDEXNOW_KEY", "").strip()
 SITE_URL = env.get("SITE_URL", "https://ai.7senses.co.jp").strip()
 
 if not KEY or "YOUR_" in KEY:
-    raise SystemExit("INDEXNOW_KEY が未設定です（.env）。site/{KEY}.txt の設置も必要です")
+    # .envがない環境（GitHub Actions等）ではsite/直下のキーファイル名から自動検出
+    # （IndexNowキーは公開URLに置く仕様のため秘匿不要）
+    for f in (ROOT / "site").glob("*.txt"):
+        if re.fullmatch(r"[0-9a-f]{16,64}", f.stem) and f.read_text().strip() == f.stem:
+            KEY = f.stem
+            break
+if not KEY:
+    raise SystemExit("INDEXNOW_KEY が未設定です（.env または site/{KEY}.txt を設置してください）")
 
 urls = sys.argv[1:]
 if not urls:
