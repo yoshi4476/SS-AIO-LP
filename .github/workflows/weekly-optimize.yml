@@ -57,6 +57,15 @@ jobs:
       - name: カニバリゼーション検査
         run: python scripts/cannibal_check.py
 
+      # 実行時間の無料枠を使い切ると全自動運転が無言で止まるため事前に警告する
+      - name: Actions実行時間の残枠チェック
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: python scripts/actions_budget.py || true
+
       - name: 週次最適化の実行
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
