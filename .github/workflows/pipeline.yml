@@ -58,6 +58,10 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
 
+      # KWキューの残数をログに残す（枯渇の予兆を実行ログから追えるようにする）
+      - name: KWキュー残数の確認
+        run: python scripts/kw_status.py
+
       - name: 記事パイプライン実行（Phase 1〜7）
         if: steps.mode.outputs.mode == 'main'
         env:
