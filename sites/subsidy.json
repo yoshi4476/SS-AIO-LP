@@ -1,0 +1,21 @@
+{
+  "id": "subsidy",
+  "name": "AI導入補助金サポート",
+  "domain": "lp.7senses.co.jp",
+  "repo": "yoshi4476/seven-HPunyou",
+  "branch": "master",
+  "type": "external-md",
+  "content_dir": "blog-system/content/posted",
+  "url_prefix": "/blog",
+  "kw_plan": "docs/kw-subsidy.md",
+  "theme": "AI導入補助金・IT導入補助金の活用",
+  "audience": "補助金を使ってAI・ITツールを導入したい中小企業の経営者",
+  "avoid": [
+    "AIO・LLMO・SEO・MEOの手法解説（ai.7senses.co.jp の担当領域）",
+    "人材採用・オペレーション（www.7senses.co.jp の担当領域）"
+  ],
+  "note": "既存の自動化（blog-system）が稼働中。エンジン側の動作確認が済むまで併走させ、旧ワークフローは停止しない。",
+  "categories": {
+    "hojokin": "補助金・助成金"
+  }
+}

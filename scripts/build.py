@@ -28,8 +28,10 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import quote as urlquote
 
-import markdown
 import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import md2html  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
@@ -190,13 +192,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     cat_name, cat_class = CATEGORIES[meta["category"]]
     url = f"{SITE_URL}/{meta['category']}/{meta['slug']}/"
 
-    md = markdown.Markdown(extensions=["tables", "extra", "toc", "sane_lists"],
-                           extension_configs={"toc": {"toc_depth": "2-2"}})
-    content = md.convert(body)
-    content = content.replace("<table>", '<div class="table-wrap"><table>').replace(
-        "</table>", "</table></div>")
-    # 装飾記法: ==テキスト== → <mark>（黄マーカー）。CSSでstrong=黄マーカー等も自動適用
-    content = re.sub(r"==([^=<>\n]+?)==", r"<mark>\1</mark>", content)
+    # 変換ルールは md2html に集約（publish.py と共通化し、サイト間で装飾がずれないようにする）
+    content, toc_tokens = md2html.convert(body)
 
     # 連鎖隔離の防止: 未公開（BLOCKED）記事への内部リンクはテキスト化して404を出さない。
     # 元のMarkdownは変更しないため、リンク先が公開されれば次回ビルドで自動的にリンクへ戻る。
@@ -253,7 +250,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{AUTHOR_ROLE}}": AUTHOR_ROLE,
         "{{AUTHOR_BIO}}": AUTHOR_BIO,
         "{{JSON_LD}}": build_json_ld(meta, url),
-        "{{TOC}}": render_toc(md.toc_tokens),
+        "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
         "{{CONTENT}}": content,
         "{{RELATED}}": related,
