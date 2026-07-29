@@ -84,7 +84,7 @@ def cross_site_check():
     if not hub_client.enabled():
         print("CROSS_CANNIBAL=skip （HUB_URL未設定のため横断検査を行いません）")
         return []
-    kws = hub_client.all_kw()
+    kws = [k for k in hub_client.all_kw() if k.get("status") != "対象外"]
     if not kws:
         print("CROSS_CANNIBAL=no （台帳にKWがありません）")
         return []
@@ -145,8 +145,8 @@ def territory_check():
     bad = []
     for k in hub_client.all_kw():
         site, kw = k.get("site"), k.get("keyword", "")
-        if site not in owns:
-            continue
+        if site not in owns or k.get("status") == "対象外":
+            continue  # 取り下げ済みのKWは書かれないため検査対象から外す
         low = kw.lower()
         # 自サイトの所有語を含むなら、他サイトの語が混ざっていても自サイトのテーマとみなす
         if any(t.lower() in low for t in owns[site]):
