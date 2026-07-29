@@ -28,3 +28,4 @@
 - [ChatGPTを集客に活用する方法7選【中小企業向け】](https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/): プロンプト例つきで今日から使える集客向けChatGPT活用法
 - [歯科医院の集客方法とは？新患を増やす5つの基本施策](https://ai.7senses.co.jp/ai-marketing/shika-iin-shukyaku/): 医療広告ガイドラインに配慮した歯科医院向け集客の実践施策を解説
 - [税理士のホームページ集客とは？失敗しない5つの施策](https://ai.7senses.co.jp/seo/zeirishi-homepage-shukyaku/): 8万人超が競合する市場で選ばれるための失敗原因と5つの施策を解説
+- [士業のSEO対策とは？集客につながる5つの施策](https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/): 弁護士・税理士・司法書士等の士業がSEOで失敗しやすい原因と成功させる5つの施策を解説
