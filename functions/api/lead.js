@@ -2,10 +2,14 @@
  * リード受付API（Cloudflare Pages Functions）
  * 全フォーム（LP無料相談 / お問い合わせ / 資料DL）の action="/api/lead" を受ける。
  *
- * 必要な環境変数（Cloudflare Pages > Settings > Environment variables）:
- *   RESEND_API_KEY   … Resend (https://resend.com) のAPIキー
- *   LEAD_TO_EMAIL    … 通知の宛先（例: info@7senses.co.jp）
- *   LEAD_FROM_EMAIL  … 送信元（Resendでドメイン認証したアドレス）
+ * 送信経路は2系統。GASを設定していればそちらを優先し、失敗時はResendへ自動フォールバックする。
+ *
+ * A) Google Apps Script（推奨・無料 / スプレッドシート台帳に自動蓄積）
+ *   GAS_WEBHOOK_URL    … ウェブアプリのURL（/exec で終わる）
+ *   GAS_SHARED_SECRET  … contact.gs の SHARED_SECRET と同じ文字列
+ *
+ * B) Resend（フォールバック）
+ *   RESEND_API_KEY / LEAD_TO_EMAIL / LEAD_FROM_EMAIL
  */
 export async function onRequestPost({ request, env }) {
   const data = {};
@@ -22,10 +26,34 @@ export async function onRequestPost({ request, env }) {
     return new Response("メールアドレスの形式が正しくありません。", { status: 400 });
   }
 
-  if (!env.RESEND_API_KEY || !env.LEAD_TO_EMAIL || !env.LEAD_FROM_EMAIL) {
+  const hasGas = Boolean(env.GAS_WEBHOOK_URL);
+  const hasResend = Boolean(env.RESEND_API_KEY && env.LEAD_TO_EMAIL && env.LEAD_FROM_EMAIL);
+  if (!hasGas && !hasResend) {
     return new Response("送信設定が未完了です。恐れ入りますが 06-4305-7547 までお電話ください。", { status: 500 });
   }
 
+  const referer = request.headers.get("referer") || "不明";
+
+  // A) Google Apps Script（スプレッドシート台帳＋Gmail通知）
+  if (hasGas) {
+    try {
+      const gas = await fetch(env.GAS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", data, referer }),
+      });
+      // GASは失敗時も200で {ok:false} を返すため、本文まで確認する
+      const out = await gas.json().catch(() => ({}));
+      if (gas.ok && out.ok) return Response.redirect(new URL("/thanks/", request.url), 303);
+    } catch (_) {
+      // 通信失敗時は下のResendへフォールバックする
+    }
+    if (!hasResend) {
+      return new Response("送信に失敗しました。時間をおいて再度お試しいただくか、06-4305-7547 までお電話ください。", { status: 502 });
+    }
+  }
+
+  // B) Resend（フォールバック）
   // 件名用サニタイズ（改行・長大入力による件名破壊/インジェクション防止）
   const subj = (s) => String(s || "").replace(/[\r\n]+/g, " ").slice(0, 80);
   const label = subj(data.form_type) || "お問い合わせ";
@@ -42,7 +70,7 @@ export async function onRequestPost({ request, env }) {
       to: [env.LEAD_TO_EMAIL],
       reply_to: data.email,
       subject: `【AI集客ラボ】${label}: ${subj(data.company)} ${subj(data.name)}様`,
-      text: `AI集客ラボのフォームから${label}が届きました。\n\n${lines}\n\n---\n送信元ページ: ${request.headers.get("referer") || "不明"}`,
+      text: `AI集客ラボのフォームから${label}が届きました。\n\n${lines}\n\n---\n送信元ページ: ${referer}`,
     }),
   });
 
