@@ -33,9 +33,14 @@ def _env():
     return env
 
 
+def _clean(v):
+    """環境変数にBOM（﻿）が混入していても安全に読めるようにする"""
+    return (v or "").replace("﻿", "").strip()
+
+
 ENV = _env()
-HUB_URL = ENV.get("HUB_URL", "").strip()
-HUB_SECRET = ENV.get("HUB_SECRET", "").strip()
+HUB_URL = _clean(ENV.get("HUB_URL", ""))
+HUB_SECRET = _clean(ENV.get("HUB_SECRET", ""))
 
 
 def enabled():

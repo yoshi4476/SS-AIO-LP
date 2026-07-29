@@ -13,7 +13,27 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import sites as sites_mod  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
+
+
+def _link_patterns():
+    """全サイト（sites/*.json）のカテゴリ・ドメインから内部リンク判定パターンを組み立てる。
+
+    新しいサイト（例: corporate）の1本目の記事は自サイトに公開済み記事がまだ無いため、
+    姉妹サイト（同じ会社の別サイト）への絶対URLリンクも内部リンクとして扱う。
+    """
+    cats, domains = set(), set()
+    for cfg in sites_mod.load_all().values():
+        cats.update(cfg.get("categories", {}).keys())
+        domains.add(cfg["domain"])
+    cat_pat = "|".join(re.escape(c) for c in sorted(cats))
+    domain_pat = "|".join(re.escape(d) for d in sorted(domains))
+    internal_re = re.compile(
+        rf"\]\((?:https?://(?:{domain_pat}))?(/(?:blog/)?(?:{cat_pat})/[^)]+)\)")
+    return internal_re, domains
 
 
 def main():
@@ -73,10 +93,11 @@ def main():
     add("本文FAQとfrontmatter数が一致", body_faq == len(faq), f"本文{body_faq} / meta{len(faq)}")
 
     # --- リンク ---
-    internal = set(re.findall(r"\]\((/(?:aio|seo|meo|ai-marketing)/[^)]+)\)", body))
+    internal_re, own_domains = _link_patterns()
+    internal = set(internal_re.findall(body))
     add("内部リンク3本以上", len(internal) >= 3, f"{len(internal)}本")
     external = set(re.findall(r'href="(https?://[^"]+)"', body))
-    external = {u for u in external if "ai.7senses.co.jp" not in u and "7senses" not in u and "x.com" not in u}
+    external = {u for u in external if not any(d in u for d in own_domains) and "x.com" not in u}
     add("外部権威リンク（出典）2本以上", len(external) >= 2, f"{len(external)}本")
 
     # --- 人間味 ---

@@ -15,12 +15,33 @@
 
 出力: site/images/<slug>/<ファイル名>.png
 """
+import re
 import sys
 from pathlib import Path
 
+import yaml
 from PIL import Image, ImageDraw, ImageFont
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import sites as sites_mod  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
+
+
+def brand_for_slug(slug):
+    """記事のカテゴリからサイトを判定し、画像フッターに出す運営名を返す"""
+    p = ROOT / "articles" / f"{slug}.md"
+    category = None
+    if p.exists():
+        m = re.match(r"^---\s*\n(.*?)\n---", p.read_text(encoding="utf-8-sig"), re.S)
+        if m:
+            category = (yaml.safe_load(m.group(1)) or {}).get("category")
+    for cfg in sites_mod.load_all().values():
+        if category in cfg.get("categories", {}):
+            return cfg["name"]
+    return "AI集客ラボ"
+
+
 W = 1200
 NAVY = (11, 36, 71)
 BLUE = (37, 99, 235)
@@ -73,11 +94,12 @@ def canvas(h, title):
     return img, d
 
 
-def credit(d, h):
-    d.text((W - 40, h - 28), "AI集客ラボ（セブンセンシズ株式会社）", font=font(16), fill=(122, 140, 165), anchor="rm")
+def credit(d, h, brand="AI集客ラボ"):
+    d.text((W - 40, h - 28), f"{brand}（セブンセンシズ株式会社）", font=font(16), fill=(122, 140, 165), anchor="rm")
 
 
 def draw_flow(slug, name, title, steps):
+    brand = brand_for_slug(slug)
     n = len(steps)
     if not 2 <= n <= 5:
         raise SystemExit("フロー型のステップは2〜5個で指定してください")
@@ -101,11 +123,12 @@ def draw_flow(slug, name, title, steps):
         if i < n - 1:
             ax = x + bw + gap / 2
             d.polygon([(ax - 9, top + bh / 2 - 12), (ax + 9, top + bh / 2), (ax - 9, top + bh / 2 + 12)], fill=BLUE)
-    credit(d, H)
+    credit(d, H, brand)
     save_png(img, slug, name)
 
 
 def draw_list(slug, name, title, items):
+    brand = brand_for_slug(slug)
     n = len(items)
     if not 3 <= n <= 6:
         raise SystemExit("チェックリスト型の項目は3〜6個で指定してください")
@@ -121,11 +144,12 @@ def draw_list(slug, name, title, items):
         d.line([99, y + 38, 111, y + 22], fill=(255, 255, 255), width=4)
         d.text((140, y + (row_h - 14) / 2), item,
                font=fit_font(d, item, W - 220, base=26), fill=NAVY, anchor="lm")
-    credit(d, H)
+    credit(d, H, brand)
     save_png(img, slug, name)
 
 
 def draw_vs(slug, name, title, left, right):
+    brand = brand_for_slug(slug)
     lparts, rparts = left.split("|"), right.split("|")
     lhead, litems = lparts[0], lparts[1:]
     rhead, ritems = rparts[0], rparts[1:]
@@ -152,7 +176,7 @@ def draw_vs(slug, name, title, left, right):
             d.text((x + 30, y + row_h / 2 + 4), mark, font=font(22), fill=accent, anchor="lm")
             d.text((x + 64, y + row_h / 2 + 4), item,
                    font=fit_font(d, item, cw - 92, base=22), fill=NAVY, anchor="lm")
-    credit(d, H)
+    credit(d, H, brand)
     save_png(img, slug, name)
 
 

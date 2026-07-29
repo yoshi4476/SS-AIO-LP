@@ -15,6 +15,9 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import sites as sites_mod  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 W, H = 1200, 675
 
@@ -23,9 +26,21 @@ CAT_COLORS = {
     "SEO運用": (79, 70, 229),
     "MEO運用": (13, 148, 136),
     "AI集客・活用全般": (2, 132, 199),
+    "店舗経営": (8, 145, 178),
+    "採用・人材育成": (194, 65, 12),
+    "オペレーション改善": (21, 128, 61),
+    "店舗DX・AI活用": (67, 56, 202),
+    "導入事例": (161, 98, 7),
+    "補助金・助成金": (190, 24, 93),
 }
-CAT_NAMES = {"aio": "AIO・LLMO運用", "seo": "SEO運用", "meo": "MEO運用",
-             "ai-marketing": "AI集客・活用全般"}
+
+
+def site_for_category(category):
+    """カテゴリを所有するサイト設定を返す（記事がどのサイト向けかを判定する）"""
+    for cfg in sites_mod.load_all().values():
+        if category in cfg.get("categories", {}):
+            return cfg
+    return None
 
 FONT_PATHS = [
     r"C:\Windows\Fonts\YuGothB.ttc", r"C:\Windows\Fonts\meiryob.ttc",
@@ -80,10 +95,13 @@ def parse_frontmatter(slug):
     if not m:
         raise SystemExit(f"articles/{slug}.md にフロントマターがありません")
     meta = yaml.safe_load(m.group(1))
-    return meta["title"], CAT_NAMES.get(meta["category"], "AI集客・活用全般")
+    cfg = site_for_category(meta["category"])
+    cat_name = cfg["categories"][meta["category"]] if cfg else meta["category"]
+    brand = cfg["name"] if cfg else "AI集客ラボ"
+    return meta["title"], cat_name, brand
 
 
-def render(slug, cat, lines_or_title):
+def render(slug, cat, lines_or_title, brand="AI集客ラボ"):
     accent = CAT_COLORS.get(cat, (37, 99, 235))
 
     img = Image.new("RGB", (W, H))
@@ -133,7 +151,7 @@ def render(slug, cat, lines_or_title):
         tx = 80 + lw + 28
     else:
         tx = 80
-    d.text((tx, H - 46), "AI集客ラボ", font=font(30), fill=(255, 255, 255), anchor="lm")
+    d.text((tx, H - 46), brand, font=font(30), fill=(255, 255, 255), anchor="lm")
     d.text((W - 80, H - 46), "セブンセンシズ株式会社", font=font(22), fill=(163, 196, 243), anchor="rm")
 
     save_png(img, ROOT / "site" / "images" / slug / "eyecatch.png")
@@ -142,8 +160,8 @@ def render(slug, cat, lines_or_title):
 def main():
     if len(sys.argv) == 2:  # slugのみ → フロントマターから自動
         slug = sys.argv[1]
-        title, cat = parse_frontmatter(slug)
-        render(slug, cat, title)
+        title, cat, brand = parse_frontmatter(slug)
+        render(slug, cat, title, brand)
     else:  # 従来互換
         slug, cat = sys.argv[1], sys.argv[2]
         lines = [x for x in sys.argv[3:5] if x]

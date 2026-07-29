@@ -132,7 +132,7 @@ def main():
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")
         return
 
-    token = os.environ.get("SITE_PUSH_TOKEN", "").strip()
+    token = os.environ.get("SITE_PUSH_TOKEN", "").replace("﻿", "").strip()
     dest = ensure_clone(cfg, token)
 
     if cfg["type"] == "nextjs-json":
