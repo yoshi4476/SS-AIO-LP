@@ -13,6 +13,9 @@
     "補助金の申請手続き（lp.7senses.co.jp の担当領域）",
     "人材採用・労務・オペレーション（www.7senses.co.jp の担当領域）"
   ],
+  "owns": ["AIO", "LLMO", "SEO", "MEO", "AI Overview", "AI検索", "サジェスト",
+           "Googleビジネスプロフィール", "ビジネスプロフィール", "口コミ", "集客",
+           "検索順位", "上位表示", "被リンク", "強調スニペット"],
   "categories": {
     "aio": "AIO・LLMO運用",
     "seo": "SEO運用",

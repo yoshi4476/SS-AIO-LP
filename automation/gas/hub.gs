@@ -125,6 +125,7 @@ function doPost(e) {
   try {
     switch (body.action) {
       case 'claim_kw':    return json_(claimKw_(body.site, body.keyword));
+      case 'retire_kw':   return json_(retireKw_(body.site, body.keywords, body.reason));
       case 'publish_log': return json_(publishLog_(body));
       case 'add_kw':      return json_(addKw_(body.site, body.keywords || []));
       case 'error_log':   return json_(errorLog_(body));
@@ -211,11 +212,29 @@ function nextKw_(site) {
            site: top.site, remaining: remaining, need_replenish: remaining <= 5 };
 }
 
-/** 全サイトのKWを返す（サイト横断の重複チェック用） */
+/** 全サイトのKWを返す（サイト横断の重複チェック・領域侵食チェック用） */
 function allKw_() {
   return kwRows_().map(function (r) {
-    return { site: r[0], keyword: r[1], status: r[2], url: r[9] || '' };
+    return { site: r[0], keyword: r[1], status: r[2], priority: r[3] || 'B',
+             category: r[4] || '', aim: r[5] || '', url: r[9] || '' };
   });
+}
+
+/** 担当領域の違うKWを取り下げる（状態を「対象外」にして書かせない） */
+function retireKw_(site, keywords, reason) {
+  const sh = sheet_('KW台帳');
+  const rows = kwRows_();
+  const set = {};
+  (keywords || []).forEach(function (k) { set[k] = true; });
+  let n = 0;
+  for (let i = 0; i < rows.length; i++) {
+    if (String(rows[i][0]) !== site || !set[String(rows[i][1])]) continue;
+    if (String(rows[i][2]).trim() === '公開済み') continue; // 公開済みは触らない
+    sh.getRange(i + 2, 3).setValue('対象外');
+    sh.getRange(i + 2, 11).setValue(reason || '担当領域が異なるため取り下げ');
+    n++;
+  }
+  return { ok: true, retired: n };
 }
 
 function kwStatus_(site) {
