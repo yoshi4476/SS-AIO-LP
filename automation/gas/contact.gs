@@ -20,7 +20,7 @@
  */
 
 // ▼ 設定 ---------------------------------------------------------------
-const SHARED_SECRET = 'CHANGE_ME';              // Cloudflare の GAS_SHARED_SECRET と一致させる
+const SHARED_SECRET = 'vPwJAYWcenPoAUBx7TQFEufmjF5qpplc';  // Cloudflare の GAS_SHARED_SECRET と一致させる
 const NOTIFY_TO = 'info.ai@7senses.co.jp';      // 通知の宛先
 const SHEET_NAME = '問い合わせ';
 const AUTO_REPLY = false;                       // true にすると送信者へ自動返信を送る
