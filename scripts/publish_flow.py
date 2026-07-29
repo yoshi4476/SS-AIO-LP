@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+"""記事1本を公開まで通す（画像生成 → 品質ゲート → 配信 → 管制塔へ記録）
+
+使い方: python scripts/publish_flow.py <site_id> <slug> [--no-push]
+
+サイトごとの違い（静的HTML / Next.js / 別リポジトリ）は publish.py が吸収するため、
+パイプラインからは常にこのスクリプトを呼べばよい。
+"""
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import hub_client  # noqa: E402
+import md2html  # noqa: E402
+import sites as sites_mod  # noqa: E402
+
+ROOT = Path(__file__).resolve().parent.parent
+PY = sys.executable
+
+
+def run(args, check=True):
+    print(f"$ {' '.join(str(a) for a in args)}")
+    r = subprocess.run(args, cwd=ROOT, text=True, encoding="utf-8", errors="ignore")
+    if check and r.returncode != 0:
+        raise SystemExit(f"失敗: {' '.join(str(a) for a in args)}")
+    return r.returncode
+
+
+def main():
+    if len(sys.argv) < 3:
+        raise SystemExit("使い方: python scripts/publish_flow.py <site_id> <slug> [--no-push]")
+    site_id, slug = sys.argv[1], sys.argv[2]
+    push = "--no-push" not in sys.argv
+    cfg = sites_mod.load(site_id)
+
+    src = ROOT / "articles" / f"{slug}.md"
+    if not src.exists():
+        raise SystemExit(f"記事が見つかりません: {src}")
+    m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", src.read_text(encoding="utf-8-sig"), re.S)
+    if not m:
+        raise SystemExit("フロントマターがありません")
+    meta, body = yaml.safe_load(m.group(1)), m.group(2)
+
+    # 1. 画像（アイキャッチ・図解）
+    run([PY, "scripts/make_images.py", slug], check=False)
+
+    # 2. 機械採点18項目（全PASSが公開条件）
+    if run([PY, "scripts/score_check.py", slug], check=False) != 0:
+        raise SystemExit("機械採点で不合格。指摘を直してから再実行すること")
+
+    score = meta.get("score") or 0
+    if score < 90:
+        raise SystemExit(f"score={score} のため公開しません（90点以上が必要）")
+
+    # 3. 配信（サイト種別ごとの出口）
+    if cfg["type"] == "self-static":
+        run([PY, "scripts/build.py"])
+        run([PY, "scripts/notify_indexnow.py"], check=False)
+        run([PY, "scripts/notify_indexing.py"], check=False)
+    else:
+        args = [PY, "scripts/publish.py", "--site", site_id, "--slug", slug]
+        if push:
+            args.append("--push")
+        run(args)
+
+    # 4. 管制塔へ記録（KW台帳を公開済みに更新し、記事作成ログへ1行追加）
+    html, _ = md2html.convert(body)
+    hub_client.publish_log(
+        site=site_id, title=meta["title"], keyword=meta.get("keyword", ""),
+        category=meta["category"], score=score, chars=len(md2html.plain_text(html)),
+        url=sites_mod.article_url(cfg, meta))
+
+    print(f"\n公開完了: {sites_mod.article_url(cfg, meta)}（score {score}）")
+
+
+if __name__ == "__main__":
+    main()

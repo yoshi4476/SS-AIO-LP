@@ -1,0 +1,139 @@
+name: Multi-Site Article Pipeline
+
+# 3サイトの記事生成を1本のワークフローに統合したもの。
+# cronの時刻でどのサイトを書くかを決める（JST = UTC+9）。
+#   8:00  ai-lab     / 13:00 corporate / 16:00 subsidy / 19:00 ai-lab
+# 時間をずらすことで、同時実行によるpush競合と実行時間の集中を避ける。
+on:
+  schedule:
+    - cron: "0 23 * * *"  # JST 08:00 — AI集客ラボ
+    - cron: "0 4 * * *"   # JST 13:00 — コーポレート
+    - cron: "0 7 * * *"   # JST 16:00 — 補助金
+    - cron: "0 10 * * *"  # JST 19:00 — AI集客ラボ
+  workflow_dispatch:
+    inputs:
+      site:
+        description: "対象サイト"
+        type: choice
+        options: [ai-lab, corporate, subsidy]
+        default: ai-lab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: article-pipeline
+  cancel-in-progress: false
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 対象サイトの判定
+        id: site
+        run: |
+          case "${{ github.event.schedule }}" in
+            "0 4 * * *")  s=corporate ;;
+            "0 7 * * *")  s=subsidy ;;
+            *)            s=ai-lab ;;
+          esac
+          [ "${{ github.event_name }}" = "workflow_dispatch" ] && s="${{ inputs.site }}"
+          echo "id=$s" >> "$GITHUB_OUTPUT"
+          echo "対象サイト: $s"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
+          npm install -g @anthropic-ai/claude-code
+
+      - name: Git識別情報の設定
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+
+      - name: 執筆ブリーフの表示（KW残数と担当領域をログに残す）
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: python scripts/site_brief.py "${{ steps.site.outputs.id }}"
+
+      - name: 全サイト横断のカニバリ・領域チェック
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: python scripts/cannibal_check.py --cross || true
+
+      - name: 記事生成（Phase 1〜7）
+        env:
+          SITE_ID: ${{ steps.site.outputs.id }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          claude -p "$(cat automation/multi_site_prompt.txt)" \
+            --dangerously-skip-permissions --max-turns 160
+          rm -f indexing-service-account.json
+
+      - name: 自リポジトリの記事をコミット
+        run: |
+          python scripts/build.py
+          python scripts/local_kpi.py || true
+          git add -A
+          if git diff --cached --quiet; then
+            echo "変更なし — コミットをスキップ"
+          else
+            git commit -m "publish(${{ steps.site.outputs.id }}): $(date '+%Y-%m-%d %H:%M JST')"
+            for i in 1 2 3; do
+              git push && break
+              echo "push拒否 → リモートと統合して再試行 ($i/3)"
+              if ! git pull --rebase -X ours origin "${GITHUB_REF_NAME}"; then
+                git diff --name-only --diff-filter=U | while IFS= read -r f; do
+                  if git cat-file -e "origin/${GITHUB_REF_NAME}:$f" 2>/dev/null; then
+                    git checkout --ours -- "$f" 2>/dev/null && git add -- "$f" || git rm -f --ignore-unmatch -- "$f"
+                  else
+                    git rm -f --ignore-unmatch -- "$f"
+                  fi
+                done
+                GIT_EDITOR=true git rebase --continue || git rebase --skip || git rebase --abort
+              fi
+            done
+          fi
+
+      # AI集客ラボは自リポジトリのサイトなので、ここでデプロイまで行う
+      # （他サイトは publish.py が対象リポジトリへpushし、各サイトのビルドが動く）
+      - name: Cloudflare Pagesへデプロイ（ai-labのみ）
+        if: steps.site.outputs.id == 'ai-lab'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true
+
+      - name: 運用通知
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then icon="✅"; else icon="🚨"; fi
+          python scripts/notify_slack.py "$icon 記事パイプライン [${{ steps.site.outputs.id }}]: ${{ job.status }}
+          $(git log -1 --pretty=%s)
+          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
