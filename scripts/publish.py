@@ -13,7 +13,7 @@
   nextjs-json  … Next.jsサイト。src/content/blog/<slug>.json を書き出す
   external-md  … 別リポジトリの静的サイト。Markdownをそのまま置く
 
-対象リポジトリへの書き込みには GITHUB_PUSH_TOKEN（repo権限のPAT）が必要。
+対象リポジトリへの書き込みには SITE_PUSH_TOKEN（repo権限のPAT）が必要。
 未設定ならローカルのクローンに書き込むだけで止まる（--push は失敗する）。
 """
 import argparse
@@ -132,7 +132,7 @@ def main():
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")
         return
 
-    token = os.environ.get("GITHUB_PUSH_TOKEN", "").strip()
+    token = os.environ.get("SITE_PUSH_TOKEN", "").strip()
     dest = ensure_clone(cfg, token)
 
     if cfg["type"] == "nextjs-json":
@@ -152,7 +152,7 @@ def main():
         print("\n※ --push を付けると対象リポジトリへcommit+pushします（Cloudflareが自動デプロイ）")
         return
     if not token:
-        raise SystemExit("GITHUB_PUSH_TOKEN が未設定のためpushできません")
+        raise SystemExit("SITE_PUSH_TOKEN が未設定のためpushできません")
 
     run(["git", "config", "user.name", "AIO Pipeline Bot"], cwd=dest)
     run(["git", "config", "user.email", "noreply@7senses.co.jp"], cwd=dest)
