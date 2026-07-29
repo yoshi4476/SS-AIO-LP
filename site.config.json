@@ -1,0 +1,24 @@
+{
+  "_comment": "このサイトの識別情報。scripts/init_site.py が別サイトへ移行する際の『置換元』として参照する。値を変更しただけではサイトに反映されないので注意（init_site.py で一括置換すること）。",
+  "domain": "ai.7senses.co.jp",
+  "site_name": "AI集客ラボ",
+  "site_tagline": "AIに選ばれる集客を、実務からつくる。",
+  "org_name": "セブンセンシズ株式会社",
+  "brand_en": "Seven Senses",
+  "author_name": "セブンセンシズ編集部",
+  "author_role": "AI集客・MEO/SEO運用の実務チーム",
+  "tel": "06-4305-7547",
+  "address": "〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902",
+  "cf_project": "ss-aio-lp",
+  "github_repo": "yoshi4476/SS-AIO-LP",
+  "ga4_measurement_id": "G-X6KNN36L9J",
+  "notify_email": "info.ai@7senses.co.jp",
+  "from_email": "AI集客ラボ <info@ai.7senses.co.jp>",
+  "corporate_url": "https://www.7senses.co.jp/",
+  "categories": {
+    "aio": "AIO・LLMO運用",
+    "seo": "SEO運用",
+    "meo": "MEO運用",
+    "ai-marketing": "AI集客・活用全般"
+  }
+}
