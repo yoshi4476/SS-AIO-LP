@@ -129,6 +129,7 @@ function doPost(e) {
       case 'publish_log': return json_(publishLog_(body));
       case 'add_kw':      return json_(addKw_(body.site, body.keywords || []));
       case 'error_log':   return json_(errorLog_(body));
+      case 'kpi_log':     return json_(kpiLog_(body));
       default:            return json_(contact_(body)); // 既定は問い合わせ受付
     }
   } catch (err) {
@@ -302,6 +303,63 @@ function errorLog_(b) {
     new Date(), SITES[b.site] || b.site || '', b.phase || '', b.message || '', '', '未対応',
   ]);
   return { ok: true };
+}
+
+/**
+ * KPIの受け取り（集計はGitHub Actions側のPythonが行う）
+ *
+ * Search Console API は Apps Script の追加サービスに存在しないため、
+ * GA4/GSCからの取得はサービスアカウントを持つPython側に任せ、
+ * ここは受け取って台帳に書くだけにしている。
+ * body.rows = [{site, date, sessions, pv, cv, impressions, clicks, ctr, position, ai, breakdown}]
+ */
+function kpiLog_(b) {
+  const rows = b.rows || [];
+  const kpi = sheet_('KPIレポート');
+  const aio = sheet_('AIO計測');
+  const total = { sessions: 0, pv: 0, cv: 0, impressions: 0, clicks: 0, ai: 0 };
+
+  rows.forEach(function (r) {
+    kpi.appendRow([r.date || '', SITES[r.site] || r.site, r.sessions || 0, r.pv || 0,
+                   r.impressions || 0, r.clicks || 0, (r.ctr || 0) + '%', r.position || 0,
+                   r.cv || 0, r.note || '']);
+    const bd = r.breakdown || {};
+    aio.appendRow([r.date || '', SITES[r.site] || r.site, '', r.ai || 0,
+                   bd.chatgpt || 0, bd.perplexity || 0, bd.gemini || 0, bd.copilot || 0, '']);
+    Object.keys(total).forEach(function (k) { total[k] += Number(r[k] || 0); });
+  });
+
+  writeDashboard_(total, (rows[0] && rows[0].date) || '');
+  return { ok: true, rows: rows.length };
+}
+
+/** ダッシュボードを3サイト合計で書き換える（前日比つき） */
+function writeDashboard_(t, dateStr) {
+  const sh = sheet_('ダッシュボード');
+  const prev = {};
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues().forEach(function (r) {
+      prev[r[0]] = Number(r[1]) || 0;
+    });
+  }
+  const published = kwRows_().filter(function (r) {
+    return String(r[2]).trim() === '公開済み';
+  }).length;
+  const rows = [
+    ['セッション（3サイト合計）', t.sessions],
+    ['PV（3サイト合計）', t.pv],
+    ['CV（3サイト合計）', t.cv],
+    ['検索表示回数（3サイト合計）', t.impressions],
+    ['検索クリック（3サイト合計）', t.clicks],
+    ['AI経由セッション（3サイト合計）', t.ai],
+    ['公開記事数（台帳の公開済み）', published],
+  ];
+  if (sh.getLastRow() > 1) sh.deleteRows(2, sh.getLastRow() - 1);
+  rows.forEach(function (r) {
+    const before = prev[r[0]];
+    const diff = (before === undefined) ? '' : (r[1] - before >= 0 ? '+' : '') + (r[1] - before);
+    sh.appendRow([r[0], r[1], diff, new Date(), dateStr + ' 時点']);
+  });
 }
 
 // ============================================================
