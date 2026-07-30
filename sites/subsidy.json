@@ -15,7 +15,7 @@
     "人材採用・オペレーション（www.7senses.co.jp の担当領域）"
   ],
   "owns": ["補助金", "助成金", "IT導入", "採択", "申請", "交付", "実績報告", "ベンダー"],
-  "note": "既存の自動化（blog-system）が稼働中。エンジン側の動作確認が済むまで併走させ、旧ワークフローは停止しない。",
+  "note": "2026-07-30 に移管完了。seven-HPunyou 側の記事生成(auto-publish.yml)と月次レポートは停止済みで、向こうは納品Markdownの受け入れ・HTML化・公開のみを担当する。納品先は blog-system/content/posted/。frontmatter は title/description/slug/category/date が必須(category は hojokin のみ)。本文に画像は埋めない(サムネは受け入れ側が在庫画像で補完する)。",
   "categories": {
     "hojokin": "補助金・助成金"
   }
