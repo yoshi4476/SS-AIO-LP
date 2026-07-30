@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # 目標値（reports/targets.json）を保存するため
 
 env:
   TZ: Asia/Tokyo
@@ -64,9 +64,32 @@ jobs:
             echo "LEAD_TO_EMAIL=info.ai@7senses.co.jp"
           } > .env
 
-      - name: 月次レポート生成・メール送付
+      - name: 月次レポート生成・メール送付（サイト単体の詳細版・17ページ）
         if: steps.gate.outputs.ready == 'true'
         run: python scripts/monthly_report.py --email
+
+      # 3サイトを1枚で見渡す経営向けのレポート。単体版とは役割が違うため別送する
+      - name: グループ月次レポート生成・メール送付
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: python scripts/group_report.py --email
+
+      # 目標値は翌月号の達成率突合に使うためリポジトリへ残す
+      - name: 目標値の保存をコミット
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          git add reports/targets.json || true
+          if git diff --cached --quiet; then
+            echo "保存すべき目標値の変更なし"
+          else
+            git commit -m "chore(report): 来月のKPI目標を保存"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
 
       - name: 運用通知（Slack→メール自動フォールバック）
         if: always()

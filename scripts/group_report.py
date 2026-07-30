@@ -357,6 +357,37 @@ def main():
         print(f"PDF : {pdf}")
     except Exception as e:
         print(f"PDF生成をスキップ: {e}")
+        return
+
+    if "--email" in sys.argv:
+        send_mail(pdf, ym)
+
+
+def send_mail(pdf_path, ym):
+    import json
+    import urllib.request
+    key = ENV.get("RESEND_API_KEY", "")
+    to = ENV.get("LEAD_TO_EMAIL", "") or "info.ai@7senses.co.jp"
+    frm = ENV.get("LEAD_FROM_EMAIL", "")
+    if not key or "YOUR_" in key or not frm:
+        print("メール未送信: RESEND_API_KEY / LEAD_FROM_EMAIL を設定してください")
+        return
+    payload = json.dumps({
+        "from": frm, "to": [to],
+        "subject": f"【セブンセンシズ】3サイト統合 月次レポート {ym}",
+        "text": f"{ym} のグループ月次レポートをお送りします。\n"
+                "3サイト（AI集客ラボ / AI導入補助金 / コーポレート）の実績を1枚でまとめています。\n"
+                "サイト単体の詳細レポートは別便でお送りしています。",
+        "attachments": [{"filename": f"group-report-{ym}.pdf",
+                         "content": base64.b64encode(pdf_path.read_bytes()).decode()}],
+    }).encode()
+    req = urllib.request.Request(
+        "https://api.resend.com/emails", data=payload,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json",
+                 # CloudflareがデフォルトUAを遮断する（error 1010）ためUA必須
+                 "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"})
+    with urllib.request.urlopen(req) as r:
+        print("メール送信:", r.status, "→", to)
 
 
 if __name__ == "__main__":

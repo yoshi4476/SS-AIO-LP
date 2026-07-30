@@ -509,9 +509,104 @@ def analyze(d):
          "毎日2本の自動生成体制の定常値（品質90点以上のみ）"),
     ]
 
+    # 機械が読める目標値（翌月号で達成率を突合するために保存する）
+    target_nums = {
+        "sessions": tgt(cur.get("sessions", 0), 1.3, 100),
+        "clicks": tgt(cur.get("clicks", 0), 1.4, 60),
+        "impressions": tgt(cur.get("impressions", 0), 1.4, 2000),
+        "cv": tgt(cur.get("cv", 0), 1.5, 2),
+        "ai": tgt(d.get("ai_sessions", 0), 1.5, 5),
+    }
+
+    # 前月号で設定した「当月の目標」との突合（初月は前月号が無いため空になる）
+    import json as _json
+    prev_targets, achievement = {}, []
+    tf = ROOT / "reports" / "targets.json"
+    if tf.exists():
+        try:
+            prev_targets = _json.loads(tf.read_text(encoding="utf-8")).get(cur["label"], {})
+        except Exception:
+            prev_targets = {}
+    if prev_targets:
+        actual = {"sessions": cur.get("sessions", 0), "clicks": cur.get("clicks", 0),
+                  "impressions": cur.get("impressions", 0), "cv": cur.get("cv", 0),
+                  "ai": d.get("ai_sessions", 0)}
+        jp = {"sessions": "セッション", "clicks": "検索クリック", "impressions": "検索表示回数",
+              "cv": "CV（相談+資料DL）", "ai": "AI経由参照"}
+        for k, label in jp.items():
+            t, a = prev_targets.get(k), actual.get(k, 0)
+            if not t:
+                continue
+            rate = round(a / t * 100)
+            achievement.append({"label": label, "target": t, "actual": a, "rate": rate,
+                                "judge": "達成" if rate >= 100 else ("あと一歩" if rate >= 80 else "未達")})
+
+    # 指標の良し悪しを基準つきで判定する（数字だけでは判断できないため）
+    sess = cur.get("sessions", 0) or 0
+    ctr = cur.get("ctr", 0) or 0
+    pos = cur.get("pos", 0) or 0
+    cvr = (cur.get("cv", 0) / sess * 100) if sess else 0
+    ai_ratio = (d.get("ai_sessions", 0) / sess * 100) if sess else 0
+
+    def band(v, good, ok, reverse=False):
+        if reverse:
+            return "良好" if v and v <= good else ("標準" if v and v <= ok else "要改善")
+        return "良好" if v >= good else ("標準" if v >= ok else "要改善")
+
+    assess = [
+        {"k": "平均CTR", "v": f"{ctr}%", "j": band(ctr, 3.0, 1.5),
+         "base": "3%以上=良好 / 1.5〜3%=標準 / 1.5%未満=要改善",
+         "why": "同じ順位でもタイトルとメタ次第で倍以上変わる。低いならタイトル改善が最短の打ち手"},
+        {"k": "平均掲載順位", "v": f"{pos}位", "j": band(pos, 10, 20, reverse=True),
+         "base": "10位以内=良好 / 10〜20位=標準 / 20位超=要改善",
+         "why": "10位以内が1ページ目。11〜30位はリライトで最も伸びしろが大きい層"},
+        {"k": "CV率", "v": f"{cvr:.2f}%", "j": band(cvr, 1.0, 0.3),
+         "base": "1%以上=良好 / 0.3〜1%=標準 / 0.3%未満=要改善",
+         "why": "BtoBの問い合わせ型は0.5〜1%が一般的な水準。低いならLP導線を疑う"},
+        {"k": "AI経由の比率", "v": f"{ai_ratio:.1f}%", "j": band(ai_ratio, 3.0, 1.0),
+         "base": "3%以上=良好 / 1〜3%=標準 / 1%未満=立ち上げ中",
+         "why": "AI検索からの流入比率。まだ市場全体で数%の段階なので、あること自体が先行指標"},
+    ]
+
+    # 広告で同じ流入を買った場合の金額（経営判断のための換算値）
+    CPC = 300  # この領域（AIO/SEO/MEO関連KW）の控えめな想定単価（円）
+    ad_value = (cur.get("clicks", 0) or 0) * CPC
+    n_art = max(assets["count"], 1)
+    efficiency = {
+        "ad_value": ad_value, "cpc": CPC,
+        "per_article_sessions": round(sess / n_art, 1),
+        "per_article_clicks": round((cur.get("clicks", 0) or 0) / n_art, 1),
+        "per_article_value": round(ad_value / n_art),
+    }
+
+    # 3行サマリー（詳細を読む前に結論だけ掴めるようにする）
+    headline = [
+        f'流入は{"増えました" if cur.get("sessions", 0) >= prev.get("sessions", 0) else "伸び悩みました"}。'
+        f'セッション{cur.get("sessions", 0):,}（前月比{mom("sessions")}）、'
+        f'検索クリック{cur.get("clicks", 0):,}（{mom("clicks")}）。',
+        f'成果は{"前進しました" if cur.get("cv", 0) >= prev.get("cv", 0) else "横ばいでした"}。'
+        f'CV{cur.get("cv", 0)}件（{mom("cv")}）、'
+        f'広告で同じクリックを買うと約{ad_value:,}円相当の流入を、記事の資産で獲得しています。',
+        f'来月は「{actions[0][0]}」を最優先に進めます。'
+        f'記事は{d["content"]["published"]}本公開し、累計{assets["count"]}本（平均{assets["avg_score"]}点）まで積み上がりました。',
+    ]
+
+    # リスクと前提（数字を過信しないための注記）
+    risks = [
+        ("単月の増減だけで判断しない", "検索は季節性とGoogleのアルゴリズム更新で単月±20%程度動きます。"
+                                "3ヶ月の傾向線で見るのが実務的です。"),
+        ("Search Consoleのデータは3日遅れ", "月末付近の数値は確定前のため、翌月号で微増することがあります。"),
+        ("AI経由の流入は過小評価になりがち", "ChatGPT等はリファラーを送らない場合があり、"
+                                     "実際のAI経由の影響は計測値より大きい可能性があります。"),
+        ("記事数が少ない段階は順位が不安定", f"現在{assets['count']}本。"
+                                    "30本を超えたあたりからドメイン全体の評価が安定してきます。"),
+    ]
+
     return {"grown": grown, "fixes": fixes, "actions": actions, "mom": mom,
             "winners": winners, "challengers": challengers, "summary": summary,
-            "assets": assets, "targets": targets, "audit": audit_site(d)}
+            "assets": assets, "targets": targets, "audit": audit_site(d),
+            "target_nums": target_nums, "achievement": achievement, "assess": assess,
+            "efficiency": efficiency, "headline": headline, "risks": risks}
 
 
 # ============================================================
@@ -671,7 +766,25 @@ def render(d, a):
     audit_site_rows = "".join(
         f'<tr><td>{r["target"]}</td><td style="white-space:nowrap">{r["where"]}</td><td>{r["now"]}</td><td>{r["change"]}</td></tr>'
         for r in audit["site"]) or '<tr><td colspan="4">構造上の修正指示はありません</td></tr>'
-    audit_keep = "".join(f'<li>{k}</li>' for k in audit["keep"]) or "<li>（来月の計測データで抽出します）</li>"
+    # ページ溢れを防ぐため件数を絞り、2カラムで表示する
+    audit_keep = "".join(f'<li>{k}</li>' for k in audit["keep"][:6]) \
+        or "<li>（来月の計測データで抽出します）</li>"
+
+    head_html = "".join(f'<li>{h}</li>' for h in a["headline"])
+    assess_rows = "".join(
+        f'<tr><td><b>{x["k"]}</b></td><td class="num">{x["v"]}</td>'
+        f'<td><span class="jd jd-{x["j"]}">{x["j"]}</span></td>'
+        f'<td>{x["base"]}</td><td>{x["why"]}</td></tr>' for x in a["assess"])
+    ach = a["achievement"]
+    ach_rows = "".join(
+        f'<tr><td>{x["label"]}</td><td class="num">{x["target"]:,}</td>'
+        f'<td class="num">{x["actual"]:,}</td>'
+        f'<td class="num"><b>{x["rate"]}%</b></td>'
+        f'<td><span class="jd jd-{x["judge"]}">{x["judge"]}</span></td></tr>' for x in ach) \
+        or '<tr><td colspan="5">前号がないため今回は突合できません。次号から達成率を表示します。</td></tr>'
+    eff = a["efficiency"]
+    risk_rows = "".join(f'<tr><td style="white-space:nowrap"><b>{t}</b></td><td>{b}</td></tr>'
+                        for t, b in a["risks"])
     assets = a["assets"]
     cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
     cat_pairs = [(cat_jp.get(c, c), n) for c, n in assets["cats"]]
@@ -711,12 +824,15 @@ def render(d, a):
     ai_mom = f"+{round((ai_total - ai_prev) / ai_prev * 100)}%" if ai_prev else "―"
     best = max(d["content"]["rows"], key=lambda r: str(r.get("score", "")), default=None)
     toc_items = [
-        "エグゼクティブサマリー", "KPIダッシュボード（前月比・6ヶ月推移）",
+        "エグゼクティブサマリー（3行まとめ）", "指標の評価（良し悪しの判定）",
+        "KPIダッシュボード（前月比・6ヶ月推移）",
         "検索パフォーマンス詳細（クエリ分析）", "記事別パフォーマンス+サイト資産",
         "流入構造分析（チャネル・デバイス・日別）", "AI検索（AIO/LLMO）分析",
+        "投資対効果（広告換算・記事あたり効率）",
         "LPコンバージョン分析（ファネル+ヒートマップ）", "成果の要因分析",
         "改善プラン（優先度つき対比表）", "サイト全体監査（記事別の修正指示）", "コンテンツ実績",
-        "目標対比と来月のKPI目標", "来月の実行スケジュール", "付録: 指標の定義"]
+        "前月目標の達成率と来月のKPI目標", "来月の実行スケジュール",
+        "リスクと前提条件", "付録: 指標の定義"]
     toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc_items, 1))
 
     best_html = ""
@@ -815,6 +931,27 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 .bc-k {{ font-size: 8.5pt; color: var(--gold); font-weight: bold; letter-spacing: .1em; }}
 .bc-t {{ font-weight: bold; font-size: 10.5pt; }}
 .bc-s {{ font-size: 8.5pt; color: var(--muted); }}
+
+/* ---- 判定バッジ・3行まとめ ---- */
+.jd {{ font-weight: bold; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; white-space: nowrap; }}
+.jd-良好, .jd-達成 {{ background: #dcfce7; color: #047857; }}
+.jd-標準, .jd-あと一歩 {{ background: #e0f2fe; color: #0369a1; }}
+.jd-要改善, .jd-未達 {{ background: #fee2e2; color: #b91c1c; }}
+.jd-立ち上げ中 {{ background: #fef3c7; color: #b45309; }}
+ol.head3 {{ counter-reset: h; list-style: none; padding: 0; margin: 0; }}
+ol.head3 li {{ counter-increment: h; position: relative; padding: 9px 0 9px 34px; font-size: 10.5pt;
+  line-height: 1.95; border-bottom: 1px dotted var(--line); }}
+ol.head3 li:last-child {{ border-bottom: 0; }}
+ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10px;
+  width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: #fff;
+  font-size: 8.5pt; font-weight: bold; text-align: center; line-height: 22px; }}
+.keep2 {{ columns: 2; column-gap: 18px; padding-left: 18px; font-size: 9pt; }}
+.keep2 li {{ break-inside: avoid; margin: 4px 0; }}
+.roi {{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }}
+.roi-box {{ border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }}
+.roi-box .k {{ font-size: 8.6pt; color: var(--muted); }}
+.roi-box .v {{ font-size: 19pt; font-weight: 900; color: var(--navy); }}
+.roi-box .s {{ font-size: 8.5pt; color: var(--muted); }}
 .back-cover {{ background: #0b2447; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 4mm; }}
 .back-cover .l {{ font-size: 13pt; font-weight: bold; }}
 .back-cover .s {{ font-size: 9.5pt; color: #9db8e0; line-height: 2.2; }}
@@ -842,6 +979,9 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 <div class="sheet">
 {demo_banner}
 <div class="sec"><span class="no">01</span><h2>エグゼクティブサマリー</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">今月を3行で</h3>
+<ol class="head3">{head_html}</ol>
+<h3>詳しい総評</h3>
 <p class="exec">{a["summary"]}</p>
 <div class="hl-cards">
   <div class="hl"><div class="k">セッション</div><div class="v">{cur.get("sessions",0):,}</div><div class="s">前月比 {a["mom"]("sessions")}</div></div>
@@ -854,9 +994,25 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 <div class="callout"><b>今月の結論:</b> {a["grown"][0].replace("<b>","").replace("</b>","") if a["grown"] else "-"}</div>
 </div>
 
-<!-- ページ3: KPIダッシュボード -->
+<!-- 指標の評価 -->
 <div class="sheet">
-<div class="sec"><span class="no">02</span><h2>KPIダッシュボード</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">02</span><h2>指標の評価（良し悪しの判定）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">数字だけでは「良いのか悪いのか」が分かりません。主要な4指標について、
+一般的な水準と比べた判定と、その指標が何を意味するかを併記します。</p>
+<table><tr><th style="width:16%">指標</th><th style="width:10%">当月</th><th style="width:9%">判定</th>
+<th style="width:28%">判定の基準</th><th>この指標の意味と打ち手</th></tr>{assess_rows}</table>
+<div class="callout"><b>判定の使い方:</b> 「要改善」があれば、その指標の打ち手を来月の実行スケジュール
+（第13章）で最優先に組み込みます。「良好」は維持し、他の記事へ横展開します。
+立ち上げ期は「標準」でも順調な場合が多いため、前月比の伸びと併せて判断してください。</div>
+<h3>この4指標を選んでいる理由</h3>
+<p style="font-size:9.5pt">セッションやPVは「結果」であり、動かすには原因側の指標を見る必要があります。
+<b>順位</b>は露出量を決め、<b>CTR</b>は露出をクリックに変える効率、<b>CV率</b>はクリックを成果に変える効率、
+<b>AI経由比率</b>は次の時代への適応度を表します。この4つが改善すれば、セッションとCVは後から付いてきます。</p>
+</div>
+
+<!-- KPIダッシュボード -->
+<div class="sheet">
+<div class="sec"><span class="no">03</span><h2>KPIダッシュボード</h2><div class="gold"></div></div>
 <div class="tiles">
 {tile("セッション", "sessions")}{tile("CV（相談+資料DL）", "cv", "件")}{tile("検索表示回数", "impressions")}
 {tile("検索クリック", "clicks")}{tile("平均CTR", "ctr", "%")}{tile("平均掲載順位", "pos", "位")}
@@ -873,7 +1029,7 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 
 <!-- ページ4: クエリ分析 -->
 <div class="sheet">
-<div class="sec"><span class="no">03</span><h2>検索パフォーマンス詳細</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">04</span><h2>検索パフォーマンス詳細</h2><div class="gold"></div></div>
 <h3>クエリ別実績（上位10）</h3>
 <table><tr><th>クエリ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{qrows}</table>
 <div class="two-col" style="margin-top:14px">
@@ -884,7 +1040,7 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 
 <!-- ページ: 記事別パフォーマンス+サイト資産 -->
 <div class="sheet">
-<div class="sec"><span class="no">04</span><h2>記事別パフォーマンス</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">05</span><h2>記事別パフォーマンス</h2><div class="gold"></div></div>
 <h3>ページ別実績（当月・表示回数順）</h3>
 <table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{prows}</table>
 <p class="note">読み方: 表示回数が多く順位が11位以下のページはリライトの最有力候補。CTRが同順位帯の平均より低いページはタイトル改善候補です。</p>
@@ -902,7 +1058,7 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 
 <!-- ページ: 流入構造分析 -->
 <div class="sheet">
-<div class="sec"><span class="no">05</span><h2>流入構造分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">06</span><h2>流入構造分析</h2><div class="gold"></div></div>
 <h3>チャネル別セッション（当月）</h3>
 {dist_bars(d.get("channels", []), "#2563eb", {"Organic Search": "自然検索", "Direct": "直接流入", "Referral": "参照サイト", "Organic Social": "SNS", "Email": "メール", "Unassigned": "未分類", "Paid Search": "有料検索", "Cross-network": "クロスネットワーク"})}
 <h3 style="margin-top:12px">デバイス別セッション（当月）</h3>
@@ -915,7 +1071,7 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 
 <!-- ページ: AI検索分析 -->
 <div class="sheet">
-<div class="sec"><span class="no">06</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">07</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。ゼロクリック時代の新しい流入経路であり、当メディアの中核戦略です。</p>
 <div class="hl-cards" style="margin:10px 0 14px">
   <div class="hl"><div class="k">AI経由セッション（当月）</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
@@ -931,9 +1087,47 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 <p class="note">実装済みAIO施策: 冒頭断言回答 / H2直下1文結論 / FAQ構造化 / 出典付き数値 / llms.txt / robots.txt AI許可 / 構造化データ4種 / 監修者情報 / 鮮度表記 / 定義ブロック / 比較表 / 対象読者明記</p>
 </div>
 
+<!-- 投資対効果 -->
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>投資対効果</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">記事は一度書けば資産として残り続けます。この章では
+「同じ流入を広告で買ったらいくらか」と「記事1本がどれだけ働いているか」を金額と数字で示します。</p>
+<div class="roi">
+  <div class="roi-box">
+    <div class="k">当月の流入を広告で買った場合の金額</div>
+    <div class="v">約{eff["ad_value"]:,}円</div>
+    <div class="s">検索クリック{cur.get("clicks", 0):,}回 × 想定クリック単価{eff["cpc"]}円で換算</div>
+  </div>
+  <div class="roi-box">
+    <div class="k">記事1本あたりの月間価値</div>
+    <div class="v">約{eff["per_article_value"]:,}円</div>
+    <div class="s">累計{a["assets"]["count"]}本で割った1本あたりの広告換算値</div>
+  </div>
+  <div class="roi-box">
+    <div class="k">記事1本あたりの月間セッション</div>
+    <div class="v">{eff["per_article_sessions"]}</div>
+    <div class="s">記事が増えるほど合計は積み上がる</div>
+  </div>
+  <div class="roi-box">
+    <div class="k">記事1本あたりの月間クリック</div>
+    <div class="v">{eff["per_article_clicks"]}</div>
+    <div class="s">順位が上がると同じ本数でも増える</div>
+  </div>
+</div>
+<h3>広告との決定的な違い</h3>
+<p style="font-size:9.5pt">広告は出稿を止めた瞬間に流入がゼロになりますが、
+記事は<b>公開後も検索とAI回答の両方から流入を生み続けます</b>。
+上の金額は「今月分」であり、来月も同じ記事が同じように働きます。
+記事が積み上がるほど、この金額は複利のように増えていきます。</p>
+<div class="callout"><b>換算の前提:</b> クリック単価は{eff["cpc"]}円で計算しています。
+AIO・SEO・MEO関連のキーワードは競合が多く、実際のリスティング広告では
+1クリック500〜1,000円以上になることも珍しくありません。
+そのため上の金額は<b>控えめな見積もり</b>です。</p>
+</div>
+
 <!-- ページ: LPコンバージョン分析 -->
 <div class="sheet">
-<div class="sec"><span class="no">07</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">09</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
 <h3>主要区画のファネル（どこまで読まれ、どこで離脱したか）</h3>
 {funnel_html(d.get("areas", []))}
 <h3 style="margin-top:14px">全12区画の到達ヒートマップ</h3>
@@ -943,27 +1137,27 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 
 <!-- ページ7: 要因分析+改善プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">08</span><h2>成果の要因分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">10</span><h2>成果の要因分析</h2><div class="gold"></div></div>
 <ul class="grown">{grown}</ul>
-<div class="sec" style="margin-top:18px"><span class="no">09</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">11</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
 <table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr>{frows}</table>
 </div>
 
 <!-- ページ: サイト全体監査 -->
 <div class="sheet">
-<div class="sec"><span class="no">10</span><h2>サイト全体監査（どこを・どう変えるか）</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">12</span><h2>サイト全体監査（どこを・どう変えるか）</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">全{audit["audited"]}記事とサイト構造を機械監査し、検索データ（順位・CTR）と品質基準（鮮度・内部リンク・FAQ）を突合した<b>具体的な修正指示</b>です。修正は週次最適化（毎週月曜）が自動で実施し、翌月号で効果を検証します。</p>
 <h3>ブログ記事の修正指示（優先度順）</h3>
 <table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_art_rows}</table>
 <h3 style="margin-top:14px">サイト構造・導線の変更指示</h3>
 <table><tr><th style="width:18%">対象</th><th style="width:16%">場所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_site_rows}</table>
 <h3 style="margin-top:14px">✅ 変更せず維持するもの（好調・基準充足）</h3>
-<ul style="padding-left:18px;font-size:9pt">{audit_keep}</ul>
+<ul class="keep2">{audit_keep}</ul>
 </div>
 
 <!-- ページ8: コンテンツ実績+来月プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">11</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">13</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr>{crows}</table>
 {best_html}
@@ -971,17 +1165,32 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 
 <!-- ページ: 目標対比+来月スケジュール -->
 <div class="sheet">
-<div class="sec"><span class="no">12</span><h2>目標対比と来月のKPI目標</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">14</span><h2>前月目標の達成率と来月のKPI目標</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">前号で立てた「当月の目標」に対する結果</h3>
+<table><tr><th>指標</th><th style="width:14%">前号の目標</th><th style="width:14%">当月の実績</th>
+<th style="width:12%">達成率</th><th style="width:12%">判定</th></tr>{ach_rows}</table>
+<h3>来月の目標</h3>
 <p style="font-size:9.5pt">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
 <table><tr><th>指標</th><th style="width:14%">当月実績</th><th style="width:14%">来月目標</th><th>目標の根拠</th></tr>{trows}</table>
 <div class="callout"><b>目標の使い方:</b> 来月号のレポートで本表の目標と実績を突合します。2ヶ月連続で未達の指標は、施策の前提（KW選定・導線設計）から見直します。</div>
-<div class="sec" style="margin-top:18px"><span class="no">13</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">15</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
 <table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr>{action_rows}</table>
 </div>
 
 <!-- ページ9: 付録 -->
 <div class="sheet">
-<div class="sec"><span class="no">14</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">16</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">数字を正しく受け取っていただくために、
+このレポートを読むうえで知っておいていただきたい前提をまとめます。</p>
+<table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr>{risk_rows}</table>
+<div class="callout"><b>判断のしかた:</b> 単月の数字が下がっても、施策が間違っているとは限りません。
+逆に単月で上がっても、それが施策の成果とは限りません。
+<b>3ヶ月の傾向線</b>と<b>順位・CTRという原因側の指標</b>で判断するのが、この事業の正しい見方です。
+本レポートの第2章（指標の評価）と第3章の6ヶ月トレンドを、その判断材料としてご覧ください。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">17</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">本レポートで使用している指標・用語の定義です。社内共有の際にご活用ください。</p>
 <table>{gloss_rows}</table>
 <h3 style="margin-top:14px">データソースと計測方法</h3>
@@ -1017,6 +1226,21 @@ def main():
     html_path = out_dir / "report.html"
     pdf_path = out_dir / "report.pdf"
     html_path.write_text(html, encoding="utf-8")
+
+    # 来月号で達成率を突合するため、設定した目標を翌月のキーで保存する
+    if not DEMO:
+        y, mo = map(int, ym.split("-"))
+        next_ym = f"{y + (mo == 12)}-{(mo % 12) + 1:02d}"
+        tf = ROOT / "reports" / "targets.json"
+        store = {}
+        if tf.exists():
+            try:
+                store = json.loads(tf.read_text(encoding="utf-8"))
+            except Exception:
+                store = {}
+        store[next_ym] = a["target_nums"]
+        tf.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"来月({next_ym})の目標を保存しました: {tf.name}")
 
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
