@@ -31,3 +31,4 @@
 - [士業のSEO対策とは？集客につながる5つの施策](https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/): 弁護士・税理士・司法書士等の士業がSEOで失敗しやすい原因と成功させる5つの施策を解説
 - [クリニックのホームページに必須の項目とは？外せない6要素](https://ai.7senses.co.jp/seo/clinic-hp-hissu-koumoku/): 医療広告ガイドラインに配慮したクリニックホームページの必須項目6つと整備手順を解説
 - [整骨院の集客が伸びない原因とは？新規患者を増やす5つの打ち手](https://ai.7senses.co.jp/meo/seikotsuin-shukyaku/): 柔整広告ガイドラインに配慮した整骨院向けMEO集客の実践施策を解説
+- [予約につながる導線設計とは？離脱を防ぐ5つの視点](https://ai.7senses.co.jp/seo/yoyaku-tsunagaru-dosen-sekkei/): クリニック・士業事務所の予約フォーム離脱を防ぐ導線設計の5つの視点と整備手順を解説
