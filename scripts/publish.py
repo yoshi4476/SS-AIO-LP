@@ -67,10 +67,35 @@ def ensure_clone(cfg, token):
     return dest
 
 
+def image_prefix(cfg):
+    """配信先での画像の公開パス。images_dir から公開URLを導く。
+
+    例: images_dir="public/images/blog" → 公開パスは "/images/blog"
+    Next.jsは public/ 配下をルートとして配信するため、public/ を取り除く。
+    """
+    d = (cfg.get("images_dir") or "").strip("/")
+    for head in ("public/", "static/", "site/"):
+        if d.startswith(head):
+            d = d[len(head):]
+            break
+    return "/" + d if d else "/images"
+
+
 def write_nextjs_json(cfg, dest: Path, meta, body):
     """Next.jsサイト用: 本文HTML込みのJSONを書き出す"""
     html, _ = md2html.convert(body)
     faq = md2html.extract_faq(body)
+
+    # 記事Markdownは自リポジトリの慣習（/images/<slug>/…）で書かれているため、
+    # 配信先の実際の画像置き場に合わせてパスを書き換える。
+    # これをしないと配信先で画像が全て404になる。
+    prefix = image_prefix(cfg)
+    src_path, dst_path = f"/images/{meta['slug']}/", f"{prefix}/{meta['slug']}/"
+    if src_path != dst_path:
+        html = html.replace(src_path, dst_path)
+        if meta.get("eyecatch"):
+            meta = {**meta, "eyecatch": str(meta["eyecatch"]).replace(src_path, dst_path)}
+
     out = {
         "slug": meta["slug"],
         "title": meta["title"],
