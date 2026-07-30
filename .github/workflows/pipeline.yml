@@ -1,10 +1,11 @@
-name: Article Pipeline
+name: Article Pipeline (Rescue)
 
+# 通常の記事作成は pipeline-multi.yml（3サイト統合版）が担当する。
+# こちらは「その日の記事が公開できていない場合の救済」専用として残している。
+# 二重に記事を作らないよう、朝夜の枠は統合版へ移設済み。
 # JST = UTC+9。cronはUTC表記（Actionsの仕様）
 on:
   schedule:
-    - cron: "0 23 * * *"   # JST 08:00 — 朝の記事作成
-    - cron: "0 10 * * *"   # JST 19:00 — 夜の記事作成
     - cron: "30 12 * * *"  # JST 21:30 — 同日救済（未公開があれば再挑戦）
   workflow_dispatch:
     inputs:
