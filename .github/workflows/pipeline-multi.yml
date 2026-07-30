@@ -2,13 +2,17 @@ name: Multi-Site Article Pipeline
 
 # 3サイトの記事生成を1本のワークフローに統合したもの。
 # cronの時刻でどのサイトを書くかを決める（JST = UTC+9）。
-#   8:00  ai-lab     / 13:00 corporate / 16:00 subsidy / 19:00 ai-lab
+#   8:00 ai-lab / 13:00 corporate / 19:00 ai-lab
 # 時間をずらすことで、同時実行によるpush競合と実行時間の集中を避ける。
+#
+# 補助金（subsidy）は seven-HPunyou 側の既存自動化が稼働中のため、まだ定期実行に入れていない。
+# 二重に記事が作られるのを防ぐための措置。こちらでの動作を確認し、
+# 向こうのワークフローを停止してから cron "0 7 * * *"（JST 16:00）を追加する。
+# それまでは workflow_dispatch で site=subsidy を選べばテスト実行できる。
 on:
   schedule:
     - cron: "0 23 * * *"  # JST 08:00 — AI集客ラボ
     - cron: "0 4 * * *"   # JST 13:00 — コーポレート
-    - cron: "0 7 * * *"   # JST 16:00 — 補助金
     - cron: "0 10 * * *"  # JST 19:00 — AI集客ラボ
   workflow_dispatch:
     inputs:
@@ -124,6 +128,21 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true
+
+      # KPIは1日1回だけでよいので、朝の枠（ai-lab）のときにまとめて3サイト分を集計する
+      - name: KPI集計 → 管制塔ダッシュボード
+        if: steps.site.outputs.id == 'ai-lab' && github.event.schedule == '0 23 * * *'
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+            pip install --quiet google-analytics-data google-api-python-client google-auth
+            python scripts/daily_kpi.py --send || true
+            rm -f indexing-service-account.json
+          fi
 
       - name: 運用通知
         if: always()

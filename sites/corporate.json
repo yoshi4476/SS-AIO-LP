@@ -8,6 +8,7 @@
   "content_dir": "src/content/blog",
   "images_dir": "public/images/blog",
   "url_prefix": "/blog",
+  "ga4_property_id": "547741583",
   "kw_plan": "docs/kw-corporate.md",
   "theme": "店舗経営の実務（人材・オペレーション・店舗DX）と業種別の導入事例",
   "audience": "店舗・中小企業の経営者と店長（集客以外の経営課題を抱えている層）",
