@@ -760,14 +760,21 @@ def render(d, a):
     trows = "".join(f'<tr><td>{k}</td><td class="num">{now}</td><td class="num" style="color:#067647;font-weight:bold">{tv}</td><td>{why}</td></tr>'
                     for k, now, tv, why in a["targets"])
     audit = a["audit"]
+    # 1ページに収まる件数に絞る（溢れると読みにくくなるため、優先度の高い順に上位のみ掲載）
+    ART_MAX, SITE_MAX = 5, 3
     audit_art_rows = "".join(
         f'<tr><td>{r["art"]}</td><td style="white-space:nowrap">{r["where"]}</td><td>{r["now"]}</td><td>{r["change"]}</td></tr>'
-        for r in audit["articles"]) or '<tr><td colspan="4">全記事が基準を満たしています（修正指示なし）</td></tr>'
+        for r in audit["articles"][:ART_MAX]) or '<tr><td colspan="4">全記事が基準を満たしています（修正指示なし）</td></tr>'
     audit_site_rows = "".join(
         f'<tr><td>{r["target"]}</td><td style="white-space:nowrap">{r["where"]}</td><td>{r["now"]}</td><td>{r["change"]}</td></tr>'
-        for r in audit["site"]) or '<tr><td colspan="4">構造上の修正指示はありません</td></tr>'
+        for r in audit["site"][:SITE_MAX]) or '<tr><td colspan="4">構造上の修正指示はありません</td></tr>'
+    audit_more = ""
+    rest = max(len(audit["articles"]) - ART_MAX, 0) + max(len(audit["site"]) - SITE_MAX, 0)
+    if rest:
+        audit_more = (f'<p class="note">※ 優先度の高い{ART_MAX + SITE_MAX}件を掲載しています。'
+                      f'他{rest}件の指示も週次最適化で順次実施します。</p>')
     # ページ溢れを防ぐため件数を絞り、2カラムで表示する
-    audit_keep = "".join(f'<li>{k}</li>' for k in audit["keep"][:6]) \
+    audit_keep = "".join(f'<li>{k}</li>' for k in audit["keep"][:4]) \
         or "<li>（来月の計測データで抽出します）</li>"
 
     head_html = "".join(f'<li>{h}</li>' for h in a["headline"])
@@ -874,10 +881,10 @@ h3 {{ font-size: 11pt; margin: 14px 0 6px; color: var(--navy); }}
 .callout {{ border-left: 4px solid var(--gold); background: #fbf8ef; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 10px 0; font-size: 9.5pt; }}
 
 /* ---- 目次・サマリー ---- */
-.toc {{ columns: 2; column-gap: 24px; margin: 8px 0 16px; }}
-.toc li {{ list-style: none; padding: 5px 0; border-bottom: 1px dotted var(--line); font-size: 9.5pt; break-inside: avoid; }}
-.toc li span {{ color: var(--gold); font-weight: bold; margin-right: 10px; }}
-.exec {{ font-size: 10.5pt; line-height: 2; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }}
+.toc {{ columns: 2; column-gap: 22px; margin: 6px 0 0; }}
+.toc li {{ list-style: none; padding: 2.5px 0; border-bottom: 1px dotted var(--line); font-size: 8.8pt; break-inside: avoid; }}
+.toc li span {{ color: var(--gold); font-weight: bold; margin-right: 8px; }}
+.exec {{ font-size: 10pt; line-height: 1.9; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 11px 15px; }}
 .hl-cards {{ display: flex; gap: 10px; margin-top: 12px; }}
 .hl {{ flex: 1; border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: 8px; padding: 10px 12px; }}
 .hl .k {{ font-size: 8.5pt; color: var(--muted); }}
@@ -989,9 +996,9 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
   <div class="hl"><div class="k">AI経由参照</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
   <div class="hl"><div class="k">当月公開記事</div><div class="v">{d["content"]["published"]}本</div><div class="s">品質90点以上のみ</div></div>
 </div>
-<h3 style="margin-top:18px">本レポートの構成</h3>
-<ul class="toc">{toc_html}</ul>
 <div class="callout"><b>今月の結論:</b> {a["grown"][0].replace("<b>","").replace("</b>","") if a["grown"] else "-"}</div>
+<h3>本レポートの構成</h3>
+<ul class="toc">{toc_html}</ul>
 </div>
 
 <!-- 指標の評価 -->
@@ -1122,7 +1129,7 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 <div class="callout"><b>換算の前提:</b> クリック単価は{eff["cpc"]}円で計算しています。
 AIO・SEO・MEO関連のキーワードは競合が多く、実際のリスティング広告では
 1クリック500〜1,000円以上になることも珍しくありません。
-そのため上の金額は<b>控えめな見積もり</b>です。</p>
+そのため上の金額は<b>控えめな見積もり</b>です。</div>
 </div>
 
 <!-- ページ: LPコンバージョン分析 -->
@@ -1151,6 +1158,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 <table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_art_rows}</table>
 <h3 style="margin-top:14px">サイト構造・導線の変更指示</h3>
 <table><tr><th style="width:18%">対象</th><th style="width:16%">場所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_site_rows}</table>
+{audit_more}
 <h3 style="margin-top:14px">✅ 変更せず維持するもの（好調・基準充足）</h3>
 <ul class="keep2">{audit_keep}</ul>
 </div>
@@ -1243,11 +1251,14 @@ def main():
         print(f"来月({next_ym})の目標を保存しました: {tf.name}")
 
     from playwright.sync_api import sync_playwright
+
+    import pdf_util
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page()
         pg.goto(html_path.as_uri())
         pg.wait_for_timeout(400)
+        pdf_util.check_overflow(pg, "月次レポート")
         pg.pdf(path=str(pdf_path), format="A4", print_background=True,
                display_header_footer=True,
                header_template="<span></span>",
