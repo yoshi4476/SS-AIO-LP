@@ -58,7 +58,8 @@ def fetch_site(cfg, labels):
     """1サイト分の月次データ。取得できない項目はNoneのままにして理由を残す"""
     out = {"id": cfg["id"], "name": cfg["name"], "domain": cfg["domain"], "theme": cfg["theme"],
            "audience": cfg.get("audience", ""), "months": [{"label": m} for m in labels],
-           "ga_error": None, "sc_error": None, "ai": 0, "breakdown": {}, "queries": [], "pages": []}
+           "ga_error": None, "sc_error": None, "ai": 0, "breakdown": {}, "queries": [], "pages": [],
+           "quality": {}, "landing": [], "rank_buckets": [], "rewrite": []}
 
     prop = cfg.get("ga4_property_id", "")
     if not prop:
@@ -88,6 +89,31 @@ def fetch_site(cfg, labels):
                     if any(dm in src for dm in doms):
                         out["ai"] += n
                         out["breakdown"][k] = out["breakdown"].get(k, 0) + n
+            # 読まれ方の質（記事改修の判断材料）
+            rng = [DateRange(start_date=f"{cur}-01", end_date=month_end(cur))]
+            rep = c.run_report(RunReportRequest(property=p, date_ranges=rng, metrics=[
+                Metric(name="engagementRate"), Metric(name="averageSessionDuration"),
+                Metric(name="screenPageViewsPerSession"), Metric(name="newUsers"),
+                Metric(name="totalUsers")]))
+            r = rep.rows[0].metric_values if rep.rows else None
+            if r:
+                users = float(r[4].value) or 1
+                out["quality"] = {
+                    "engagement": round(float(r[0].value) * 100, 1),
+                    "duration": round(float(r[1].value)),
+                    "pv_per_session": round(float(r[2].value), 2),
+                    "new_ratio": round(float(r[3].value) / users * 100)}
+            # 入口ページ別（どの記事が集客の入口か）
+            rep = c.run_report(RunReportRequest(
+                property=p, date_ranges=rng, dimensions=[Dimension(name="landingPage")],
+                metrics=[Metric(name="sessions"), Metric(name="engagementRate"),
+                         Metric(name="conversions")], limit=6))
+            out["landing"] = [{
+                "path": r.dimension_values[0].value or "/",
+                "sessions": int(r.metric_values[0].value),
+                "engagement": round(float(r.metric_values[1].value) * 100, 1),
+                "cv": int(float(r.metric_values[2].value))} for r in rep.rows]
+            out["landing"].sort(key=lambda x: -x["sessions"])
         except Exception as e:
             out["ga_error"] = f"取得失敗: {str(e)[:50]}"
     else:
@@ -114,6 +140,22 @@ def fetch_site(cfg, labels):
                 out[key] = [{"k": r["keys"][0], "imp": int(r["impressions"]),
                              "clicks": int(r["clicks"]), "ctr": round(r["ctr"] * 100, 1),
                              "pos": round(r["position"], 1)} for r in res.get("rows", [])]
+            # 順位帯の分布とリライト候補（伸びしろの在り処）
+            res = sc.searchanalytics().query(siteUrl=site_url, body={
+                "startDate": f"{cur}-01", "endDate": month_end(cur),
+                "dimensions": ["query"], "rowLimit": 1000}).execute()
+            bk = {"1〜3位": 0, "4〜10位": 0, "11〜20位": 0, "21〜50位": 0, "51位以下": 0}
+            for r in res.get("rows", []):
+                pz = r["position"]
+                k = ("1〜3位" if pz <= 3 else "4〜10位" if pz <= 10 else
+                     "11〜20位" if pz <= 20 else "21〜50位" if pz <= 50 else "51位以下")
+                bk[k] += 1
+            out["rank_buckets"] = list(bk.items())
+            out["rewrite"] = sorted(
+                [{"q": r["keys"][0], "imp": int(r["impressions"]),
+                  "clicks": int(r["clicks"]), "pos": round(r["position"], 1)}
+                 for r in res.get("rows", []) if 10 < r["position"] <= 20],
+                key=lambda x: -x["imp"])[:5]
         except Exception as e:
             out["sc_error"] = ("Search Consoleの権限未付与"
                                if "sufficient permission" in str(e) else f"取得失敗: {str(e)[:40]}")
@@ -126,7 +168,7 @@ def fetch_demo(labels):
     seeds = [(320, 480, 690, 940, 1310, 1720), (120, 180, 260, 330, 420, 560),
              (60, 90, 140, 210, 300, 410)]
     out = []
-    for (sid, cfg), s in zip(sites_mod.load_all().items(), seeds):
+    for idx, ((sid, cfg), s) in enumerate(zip(sites_mod.load_all().items(), seeds)):
         out.append({
             "id": sid, "name": cfg["name"], "domain": cfg["domain"], "theme": cfg["theme"],
             "audience": cfg.get("audience", ""), "ga_error": None, "sc_error": None,
@@ -138,6 +180,15 @@ def fetch_demo(labels):
             "pages": [{"k": f"https://{cfg['domain']}/sample-{i}/", "imp": 800 - i * 140,
                        "clicks": 36 - i * 6, "ctr": 4.2 - i * 0.4, "pos": 6.1 + i * 1.3}
                       for i in range(1, 4)],
+            "quality": {"engagement": 58.4 - idx * 6, "duration": 142 - idx * 22,
+                        "pv_per_session": round(1.86 - idx * 0.22, 2), "new_ratio": 74 + idx * 5},
+            "landing": [{"path": f"/sample-{j}/", "sessions": (s[-1] // 3) - j * 40,
+                         "engagement": 62.0 - j * 9, "cv": max(0, 3 - j)} for j in range(1, 5)],
+            "rank_buckets": [("1〜3位", 4 - idx), ("4〜10位", 18 - idx * 4),
+                             ("11〜20位", 31 - idx * 7), ("21〜50位", 46 - idx * 10),
+                             ("51位以下", 62 - idx * 14)],
+            "rewrite": [{"q": f"{cfg['theme'][:5]} 改善候補{j}", "imp": 2400 - j * 400,
+                         "clicks": 65 - j * 12, "pos": 12.3 + j * 1.6} for j in range(1, 4)],
             "months": [{"label": m, "sessions": v, "cv": max(1, v // 130), "clicks": v // 2,
                         "impressions": v * 26, "ctr": round(v / 2 / (v * 26) * 100, 2),
                         "pos": round(22 - i * 2.1, 1)}
@@ -254,6 +305,29 @@ def analyze(sites, labels, arts, pipeline):
                         "articles": arts["counts"].get(s["id"], 0),
                         "todo": pipeline.get(s["id"], {}).get("todo", 0)})
 
+    # サイト別の改修プラン（記事の中身とLPの導線に踏み込んだ指示）
+    fix_plan = []
+    for s in sites:
+        nm = s["name"][:14]
+        for lp_ in [x for x in s.get("landing", []) if x["sessions"] >= 40 and x["engagement"] < 45][:2]:
+            fix_plan.append((nm, lp_["path"], "記事の冒頭と構成",
+                             f'流入{lp_["sessions"]}・エンゲージメント{lp_["engagement"]}%',
+                             "冒頭200字の結論を検索意図に近い言い切りへ書き換え、"
+                             "『この記事でわかること』を最初の画面に収める"))
+        for lp_ in [x for x in s.get("landing", []) if x["sessions"] >= 80 and x["cv"] == 0][:1]:
+            fix_plan.append((nm, lp_["path"], "記事内の導線",
+                             f'流入{lp_["sessions"]}に対しCV 0件',
+                             "本文中盤のCTAをその記事の悩みに合わせた文言へ変更し、"
+                             "記事末尾のCTAを問い合わせページへ直接送る"))
+        for t in s.get("rewrite", [])[:2]:
+            fix_plan.append((nm, f'「{t["q"]}」の記事', "本文の加筆（リライト）",
+                             f'{t["pos"]}位・表示{t["imp"]:,}回',
+                             "上位3記事にあって自記事にない見出しを1〜2本追加し、"
+                             "出典付きの数値を1つ足して内部リンクを2本増やす"))
+    if not fix_plan:
+        fix_plan.append(("3サイト共通", "—", "—", "改修が必要な水準の指標は検出されていません",
+                         "現在の構成を維持し、上位記事の型を新規記事へ横展開する"))
+
     # 改善プラン（データから機械的に導く）
     plan = []
     for s in sites:
@@ -316,7 +390,8 @@ def analyze(sites, labels, arts, pipeline):
 
     return {"cur": cur, "prev": prev, "mom": mom, "ai": ai, "ctr": ctr, "cvr": cvr, "pos": pos,
             "ai_ratio": ai_ratio, "ad_value": ad_value, "assess": assess, "contrib": contrib,
-            "plan": plan, "targets": targets, "headline": headline, "risks": risks}
+            "plan": plan, "targets": targets, "headline": headline, "risks": risks,
+            "fix_plan": fix_plan}
 
 
 # ============================================================
@@ -356,13 +431,17 @@ def render(sites, labels, arts, cross, links, pipeline, a):
     if lp.exists():
         logo = f'<img class="lg" src="data:image/png;base64,{base64.b64encode(lp.read_bytes()).decode()}">'
 
+    site_toc = []
+    for s in sites:
+        site_toc.append(f"{s['name'][:14]} の詳細")
+        site_toc.append(f"{s['name'][:14]} の改善余地")
     toc = ["エグゼクティブサマリー（3行まとめ）", "グループ全体のKPIダッシュボード",
            "サイト別の貢献度と成長率", "指標の評価（良し悪しの判定）",
            "投資対効果（広告換算）", "サイト間の重複と役割分担の健全性",
-           "コンテンツ資産の状況", "記事の供給状況（KW台帳）"] + \
-          [f"{s['name'][:16]} の詳細" for s in sites] + \
-          ["AI検索（AIO/LLMO）分析", "サイト間の相互送客", "グループ全体の改善プラン",
-           "来月のKPI目標", "実行スケジュール", "リスクと前提条件", "付録: 指標の定義"]
+           "コンテンツ資産の状況", "記事の供給状況（KW台帳）"] + site_toc + \
+          ["AI検索（AIO/LLMO）分析", "サイト間の相互送客", "サイト別の改修プラン（記事・導線）",
+           "グループ全体の改善プラン", "来月のKPI目標", "実行スケジュール",
+           "リスクと前提条件", "付録: 指標の定義"]
     toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc, 1))
     head_html = "".join(f"<li>{h}</li>" for h in a["headline"])
 
@@ -390,6 +469,10 @@ def render(sites, labels, arts, cross, links, pipeline, a):
         for k, n, t, w in a["targets"])
     risk_rows = "".join(f'<tr><td style="white-space:nowrap"><b>{t}</b></td><td>{b}</td></tr>'
                         for t, b in a["risks"])
+    fix_rows = "".join(
+        f'<tr><td>{s}</td><td style="word-break:break-all">{t}</td>'
+        f'<td style="white-space:nowrap">{k}</td><td>{n}</td><td>{h}</td></tr>'
+        for s, t, k, n, h in a["fix_plan"][:8])
     pipe_rows = "".join(
         f'<tr><td>{sites_mod.load(sid)["name"][:20] if sid in sites_mod.load_all() else sid}</td>'
         f'<td class="num">{v["todo"]}</td><td class="num">{v["doing"]}</td>'
@@ -449,7 +532,8 @@ def render(sites, labels, arts, cross, links, pipeline, a):
 <div class="callout"><b>このサイトの役割:</b> {s["theme"]}を担当します。
 他サイトの領域（{"、".join(x.split("（")[0] for x in sites_mod.load(s["id"]).get("avoid", []))[:60]}）は
 主題にせず、必要な場合は該当サイトへリンクで送客します。</div>
-</div>"""
+</div>
+{site_detail2(s, 9 + i)}"""
 
     return f"""<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><style>
 @page {{ size: A4; margin: 0; }}
@@ -577,8 +661,20 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 {svg_line(group_months(sites, labels), "impressions", BLUE, "検索表示回数合計")}
 {svg_line(group_months(sites, labels), "cv", TEAL, "CV合計")}
 </div>
-<p class="note">読み方: 表示回数はグループ全体の「露出の総量」、クリックは「選ばれた回数」です。
-サイトごとに需要の山が異なるため、合計値の凸凹は特定サイトの季節要因である場合があります。</p>
+<h3>指標の意味</h3>
+<table>
+<tr><th style="width:22%">指標</th><th style="width:26%">何を表すか</th><th>これが動くと何が起きるか</th></tr>
+<tr><td><b>検索表示回数</b></td><td>露出の総量</td>
+<td>テーマの面が広がると増えます。最も早く動く先行指標で、記事を増やした翌月から反応します</td></tr>
+<tr><td><b>検索クリック</b></td><td>選ばれた回数</td>
+<td>表示回数×CTRで決まります。順位が上がるか、タイトルが良くなると増えます</td></tr>
+<tr><td><b>セッション</b></td><td>実際の訪問数</td>
+<td>検索クリックに加え、直接流入やSNSも含みます。事業への影響が最も分かりやすい数字です</td></tr>
+<tr><td><b>CV</b></td><td>問い合わせ・資料請求</td>
+<td>セッション×CV率。流入が増えても導線が悪ければ増えないため、両方を見ます</td></tr>
+</table>
+<p class="note">読み方: サイトごとに需要の山が異なるため、合計値の凸凹は特定サイトの季節要因である場合があります。
+補助金サイトは公募時期、コーポレートは採用時期に山が来る傾向があります。</p>
 </div>
 
 <div class="sheet">
@@ -589,9 +685,15 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 {contrib_rows}</table>
 <h3>セッションの構成比</h3>
 {bars([(c["s"]["name"][:16], c["s"]["months"][-1].get("sessions") or 0) for c in a["contrib"]], BLUE)}
+<h3>記事本数の比較</h3>
+{bars([(c["s"]["name"][:16], c["articles"]) for c in a["contrib"]], TEAL)}
+<h3>未着手キーワードの在庫</h3>
+{bars([(c["s"]["name"][:16], c["todo"]) for c in a["contrib"]], GOLD)}
 <div class="callout"><b>読み方:</b> 構成比が偏っていること自体は問題ではありません。
 立ち上げ時期が異なるため、後から始めたサイトの比率が低いのは自然です。
-見るべきは<b>前月比</b>で、伸びが止まっているサイトがあれば改善プラン（第14章）で対処します。</div>
+見るべきは<b>前月比の伸び</b>で、止まっているサイトがあれば改修プランで対処します。
+また<span class="mark">記事本数とセッションの比率が揃っているか</span>も重要で、
+記事は多いのにセッションが少ないサイトは、キーワード選定か記事の質に課題があります。</div>
 </div>
 
 <div class="sheet">
@@ -605,6 +707,19 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 <p style="font-size:9.4pt">セッションやPVは「結果」であり、動かすには原因側の指標を見る必要があります。
 <b>順位</b>は露出量を決め、<b>CTR</b>は露出をクリックに変える効率、<b>CV率</b>はクリックを成果に変える効率、
 <b>AI経由比率</b>は次の時代への適応度を表します。この4つが改善すれば、セッションとCVは後から付いてきます。</p>
+<h3>指標どうしの関係</h3>
+<table>
+<tr><th style="width:24%">上げたい結果</th><th style="width:24%">直接効く指標</th><th>動かす方法</th></tr>
+<tr><td><b>クリック数を増やす</b></td><td>順位 と CTR</td>
+<td>順位は本文の加筆と内部リンク、CTRはタイトルと説明文。CTRのほうが早く効きます</td></tr>
+<tr><td><b>CVを増やす</b></td><td>CV率 と クリック数</td>
+<td>CV率は記事内CTAとLPの導線。CV率が倍になれば成果も倍になります</td></tr>
+<tr><td><b>AI検索で引用される</b></td><td>順位 と 記事の構造</td>
+<td>Googleで上位に入るのが前提。そのうえで結論の書き方とFAQ整備が効きます</td></tr>
+</table>
+<div class="callout"><b>「結果」ではなく「原因」を見る:</b> セッション数が下がったとき、
+セッション数そのものを見ても打ち手は出てきません。順位が下がったのか、CTRが落ちたのか、
+季節要因かを切り分けて初めて次の行動が決まります。本レポートが原因側の指標を先に置いているのはそのためです。</div>
 </div>
 
 <div class="sheet">
@@ -629,6 +744,22 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 記事は<b>公開後も検索とAI回答の両方から流入を生み続けます</b>。
 上の金額は今月分であり、来月も同じ記事が同じように働きます。
 記事が積み上がるほど、この金額は複利のように増えていきます。</p>
+<h3>記事が積み上がるとどうなるか</h3>
+<table>
+<tr><th style="width:16%">時点</th><th style="width:20%">累計記事数</th>
+<th style="width:24%">月間の広告換算額</th><th>状態</th></tr>
+<tr><td>現在</td><td class="num">{arts["total"]}本</td>
+<td class="num">約{a["ad_value"]:,}円</td><td>立ち上げ期。順位が安定し始める段階</td></tr>
+<tr><td>6ヶ月後</td><td class="num">約{arts["total"] + 360}本</td>
+<td class="num">約{round(a["ad_value"] / max(arts["total"], 1)) * (arts["total"] + 360):,}円</td>
+<td>面が広がり、複数キーワードで上位が取れ始める</td></tr>
+<tr><td>12ヶ月後</td><td class="num">約{arts["total"] + 720}本</td>
+<td class="num">約{round(a["ad_value"] / max(arts["total"], 1)) * (arts["total"] + 720):,}円</td>
+<td>ドメイン全体の評価が上がり、新記事の立ち上がりも速くなる</td></tr>
+</table>
+<p class="note">※ 月60本のペースで、1記事あたりの価値が現在の水準を保った場合の試算です。
+実際には記事が増えるほど内部リンクが増えドメイン評価も上がるため、1本あたりの価値は上昇する傾向があります。
+一方で古い記事は情報が古くなると価値が落ちるため、週次のリライトで維持します。</p>
 <div class="callout"><b>換算の前提:</b> クリック単価は{CPC}円で計算しています。
 実際のリスティング広告では1クリック500〜1,000円以上になることも珍しくないため、
 上の金額は<b>控えめな見積もり</b>です。</div>
@@ -647,6 +778,26 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
          for c in sites_mod.load_all().values())}</table>
 <p class="note">判断基準: 「この記事の読者は何に困っているか」で振り分けます。
 集客ならAI集客ラボ、資金調達なら補助金サイト、それ以外の経営課題ならコーポレートです。</p>
+<h3>なぜ重複を避ける必要があるのか</h3>
+<ul style="font-size:9.4pt">
+  <li><b>検索評価が分散する</b> — 同じ検索意図の記事が2本あると、Googleはどちらを上位にすべきか判断できません。
+  結果として両方とも中途半端な順位に留まります。1本にまとめれば、その1本が上位を取れます。</li>
+  <li><b>AI検索でも不利になる</b> — AIは引用元を選ぶ際、情報が集約されたページを好みます。
+  同じ内容が分散していると、どちらも引用されないことがあります。</li>
+  <li><b>読者が迷う</b> — 検索結果に自社の似た記事が並ぶと、どちらを読むべきか分からず離脱されます。</li>
+</ul>
+<h3>どうやって防いでいるか</h3>
+<table>
+<tr><th style="width:26%">仕組み</th><th>内容</th></tr>
+<tr><td><b>1つの台帳で一元管理</b></td>
+<td>3サイト分のキーワードを1枚の表で管理します。追加時点で既存キーワードとの重複を検査します</td></tr>
+<tr><td><b>文章の近さを測定</b></td>
+<td>記事のタイトルと本文の類似度を機械的に計算し、同じ検索意図を狙っている組を検出します</td></tr>
+<tr><td><b>担当領域のチェック</b></td>
+<td>各サイトが「所有する語」を定義し、他サイトの語を含むキーワードを侵食として検出します</td></tr>
+<tr><td><b>書く前に止める</b></td>
+<td>記事の作成前に検査するため、書いてしまってから統合する手戻りが起きません</td></tr>
+</table>
 </div>
 
 <div class="sheet">
@@ -678,12 +829,26 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
   <li><b>Googleサジェストから</b> — 実際の検索行動から生成される候補を収集します。サジェストに出る＝一定の検索需要がある証拠です。</li>
   <li><b>重複の自動除外</b> — 既存記事や他サイトのキーワードと近いものは、追加時点で除外されます。</li>
 </ul>
+<h3>キーワードの状態</h3>
+<table>
+<tr><th style="width:18%">状態</th><th style="width:26%">意味</th><th>次に何が起きるか</th></tr>
+<tr><td><b>未着手</b></td><td>まだ記事を書いていない</td>
+<td>優先度の高い順に選ばれ、記事の生成に入ります</td></tr>
+<tr><td><b>執筆中</b></td><td>記事の生成が始まっている</td>
+<td>同じキーワードを二重に書かないための印です。公開されると自動で切り替わります</td></tr>
+<tr><td><b>公開済み</b></td><td>記事が公開されている</td>
+<td>記事URLが記録され、以降は週次のリライト対象として管理されます</td></tr>
+<tr><td><b>対象外</b></td><td>他サイトの担当領域だった</td>
+<td>重複を避けるため取り下げたキーワードです。書かれることはありません</td></tr>
+</table>
 <div class="callout"><b>「未着手」が10件を切ると補充が走ります。</b>
-ネタ切れで記事の生成が止まらないよう、在庫を常に監視しています。</div>
+ネタ切れで記事の生成が止まらないよう在庫を常に監視しており、
+補充は推測ではなく<span class="mark">実際の検索データ</span>から行います。
+台帳はスプレッドシートで共有しているため、ご要望のキーワードをいつでも追加いただけます。</div>
 </div>
 {details}
 <div class="sheet">
-<div class="sec"><span class="no">{9 + len(sites):02d}</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{9 + len(sites) * 2:02d}</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
 <p class="lead">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。
 ゼロクリック時代の新しい流入経路であり、3サイト共通の中核戦略です。</p>
 <div class="tiles">
@@ -699,13 +864,26 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 <div class="callout"><b>この数字の意味:</b> AI経由の訪問者は「AIの回答で自社を知り、確かめに来た」
 <b>確度の高い見込み客</b>です。ChatGPT比率が高い場合はサイト外の言及（プレスリリース・寄稿）を、
 Perplexity比率が高い場合は記事の鮮度更新を強化するのが定石です。</div>
-<p class="note">実装済みAIO施策: 冒頭断言回答 / 見出し直下の1文結論 / FAQ構造化 / 出典付き数値 /
-llms.txt / robots.txtでのAI許可 / 構造化データ4種 / 監修者情報 / 鮮度表記 / 定義ブロック /
-比較表 / 対象読者の明記</p>
+<h3>AI検索対応の実装状況（3サイト共通・全記事に適用）</h3>
+<table>
+<tr><th style="width:28%">実装項目</th><th style="width:10%">状態</th><th>内容と狙い</th></tr>
+<tr><td>冒頭200字の断言型回答</td><td><span class="jd jd-良好">実装済</span></td>
+<td>「◯◯は◯◯です」で書き始める。AIが最も抜き出しやすい形で結論を置く</td></tr>
+<tr><td>見出し直下の1文結論</td><td><span class="jd jd-良好">実装済</span></td>
+<td>40〜60字。切り出しても意味が通るため、AIの回答にそのまま採用されやすい</td></tr>
+<tr><td>FAQ構造化（5問以上）</td><td><span class="jd jd-良好">実装済</span></td>
+<td>本文と構造化データを完全一致。不一致はスパム判定のリスクがある</td></tr>
+<tr><td>出典付きの数値ファクト</td><td><span class="jd jd-良好">実装済</span></td>
+<td>1記事3箇所以上。AIは数値付きの断定文を優先的に引用する</td></tr>
+<tr><td>llms.txt / AIクローラー許可</td><td><span class="jd jd-良好">6種</span></td>
+<td>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended・Bingbot を許可</td></tr>
+<tr><td>構造化データ / 鮮度表記</td><td><span class="jd jd-良好">4種</span></td>
+<td>記事情報・FAQ・パンくず・手順。「◯年◯月時点」を明記し鮮度評価に対応</td></tr>
+</table>
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{10 + len(sites):02d}</span><h2>サイト間の相互送客</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{10 + len(sites) * 2:02d}</span><h2>サイト間の相互送客</h2><div class="gold"></div></div>
 <p class="lead">3サイトは競合させない一方で、<b>互いに送客し合う</b>ことで全体の成果を高めます。
 記事本文から他サイトへのリンクがどれだけ張られているかを実測しました。</p>
 <table><tr><th style="width:32%">リンク先ドメイン</th><th style="width:16%">本文中のリンク数</th><th>状態</th></tr>{link_rows}</table>
@@ -718,27 +896,60 @@ llms.txt / robots.txtでのAI許可 / 構造化データ4種 / 監修者情報 /
   <li><b>ドメイン間の関連性が伝わる</b> — 同一企業の関連サイトであることが検索エンジンに伝わり、
   それぞれの専門性がより明確に評価されます。</li>
 </ul>
+<h3>送客の設計方針</h3>
+<table>
+<tr><th style="width:26%">読者の状態</th><th style="width:26%">送る先</th><th>設置する場所</th></tr>
+<tr><td>集客の手法を知りたい</td><td>AI集客ラボ</td>
+<td>コーポレートの記事で集客に触れた箇所。1〜2文の言及に留めてリンクで送ります</td></tr>
+<tr><td>導入費用を抑えたい</td><td>AI導入補助金サポート</td>
+<td>ツール導入やシステム開発の話が出た箇所。補助金の詳細は書かずリンクで送ります</td></tr>
+<tr><td>人材や運営で困っている</td><td>コーポレートサイト</td>
+<td>AI集客ラボの記事で人材・オペレーションに触れた箇所</td></tr>
+<tr><td>会社を詳しく知りたい</td><td>コーポレートサイト</td>
+<td>全サイトのヘッダーとフッター。実績や体制を確認できるようにします</td></tr>
+</table>
 <div class="callout"><b>運用方針:</b> リンクは記事の文脈に沿った場所にのみ設置します。
-関係のない場所への機械的なリンクは、読者にとって邪魔になるうえ検索評価にも逆効果です。</div>
+関係のない場所への機械的なリンクは、読者にとって邪魔になるうえ検索評価にも逆効果です。
+<span class="mark">「その話が出たから、詳しくはこちら」</span>という自然な流れを守ります。</div>
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{11 + len(sites):02d}</span><h2>グループ全体の改善プラン</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{11 + len(sites) * 2:02d}</span><h2>サイト別の改修プラン（記事・導線）</h2><div class="gold"></div></div>
+<p class="lead">各サイトの入口ページと検索順位の実測から導いた、<b>どのページを・どう直すか</b>の指示です。
+すべて翌月の運用の中で当社が実施します。</p>
+<table><tr><th style="width:14%">サイト</th><th style="width:18%">対象</th>
+<th style="width:14%">改修の種類</th><th style="width:20%">現状（実測）</th><th>変更内容</th></tr>
+{fix_rows}</table>
+<p class="note">改修の優先順位: ①順位11〜20位のリライト → ②エンゲージメントが低い記事の冒頭改善
+→ ③CVが出ていない記事の導線改善。新しい記事を書くより、既にある記事を直すほうが早く成果が出るためです。</p>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">{12 + len(sites) * 2:02d}</span><h2>グループ全体の改善プラン</h2><div class="gold"></div></div>
 <p class="lead">データから機械的に抽出した、今月取り組むべき項目です。優先度の高い順に並んでいます。</p>
 <table><tr><th style="width:8%">優先度</th><th style="width:24%">対象</th>
 <th style="width:30%">現状（データ根拠）</th><th>改善アクション</th></tr>{plan_rows}</table>
+<h3>実施の流れ</h3>
+<table>
+<tr><th style="width:14%">時期</th><th style="width:30%">実施内容</th><th>担当</th></tr>
+<tr><td>第1週</td><td>優先度「高」の項目を実施（記事の修正・導線の変更）</td><td>当社</td></tr>
+<tr><td>第2週</td><td>順位11〜20位の記事をリライト</td><td>当社</td></tr>
+<tr><td>第3週</td><td>タイトルとメタ情報の改善（CTR未達のページ）</td><td>当社</td></tr>
+<tr><td>第4週</td><td>実施結果の確認と、翌月レポートの下準備</td><td>当社</td></tr>
+<tr><td>随時</td><td>記事の生成・公開（毎日）</td><td>当社</td></tr>
+</table>
 <div class="callout"><b>実施について:</b> ここに挙げた改善は、翌月の運用の中で当社が実施します。
 記事の修正・内部リンクの追加・導線の変更は月額費用に含まれており、追加料金はかかりません。
-実施結果は翌月号で効果を検証します。</div>
+実施結果は翌月号で効果を検証し、<span class="mark">改善が効いたか効かなかったかを数字で報告</span>します。</div>
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{12 + len(sites):02d}</span><h2>来月のKPI目標</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{13 + len(sites) * 2:02d}</span><h2>来月のKPI目標</h2><div class="gold"></div></div>
 <p class="lead">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と
 「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
 <table><tr><th>指標</th><th style="width:15%">当月実績</th><th style="width:15%">来月目標</th>
 <th>目標の根拠</th></tr>{tgt_rows}</table>
-<div class="sec" style="margin-top:16px"><span class="no">{13 + len(sites):02d}</span>
+<div class="sec" style="margin-top:16px"><span class="no">{14 + len(sites) * 2:02d}</span>
 <h2>実行スケジュール</h2><div class="gold"></div></div>
 <table><tr><th style="width:14%">時期</th><th style="width:30%">実施内容</th><th>狙い</th></tr>
 <tr><td>毎日</td><td>3サイト合計で記事を生成・公開</td><td>テーマの面を広げ、AI引用の入口を増やす</td></tr>
@@ -751,16 +962,28 @@ llms.txt / robots.txtでのAI許可 / 構造化データ4種 / 監修者情報 /
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{14 + len(sites):02d}</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{15 + len(sites) * 2:02d}</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
 <p class="lead">数字を正しく受け取っていただくために、知っておいていただきたい前提をまとめます。</p>
 <table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr>{risk_rows}</table>
+<h3>成果が出るまでの一般的な流れ</h3>
+<table>
+<tr><th style="width:16%">時期</th><th style="width:32%">この時期に起きること</th><th>見るべき指標</th></tr>
+<tr><td><b>1〜2ヶ月目</b></td><td>記事のインデックス登録が進み、表示回数が増え始める</td>
+<td>表示回数。クリックはまだ少なくて正常です</td></tr>
+<tr><td><b>3〜4ヶ月目</b></td><td>順位が動き始め、一部のキーワードで1ページ目に入る</td>
+<td>順位帯の分布。11〜20位が増えていれば順調です</td></tr>
+<tr><td><b>5〜6ヶ月目</b></td><td>クリックとセッションが伸び始め、CVが出始める</td>
+<td>クリック数とCV。ここで初めて成果が数字に表れます</td></tr>
+<tr><td><b>7ヶ月目以降</b></td><td>記事数の増加と順位上昇が重なり、伸びが加速する</td>
+<td>全指標。新記事の立ち上がりも速くなります</td></tr>
+</table>
 <div class="callout"><b>判断のしかた:</b> 単月の数字が下がっても、施策が間違っているとは限りません。
 逆に単月で上がっても、それが施策の成果とは限りません。
 <b>3ヶ月の傾向線</b>と<b>順位・CTRという原因側の指標</b>で判断するのが、この事業の正しい見方です。</div>
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{15 + len(sites):02d}</span><h2>付録: 指標の定義</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{16 + len(sites) * 2:02d}</span><h2>付録: 指標の定義</h2><div class="gold"></div></div>
 <table>
 <tr><td style="width:26%"><b>セッション</b></td><td>サイトへの訪問回数。1人が朝と夜に見れば2セッション</td></tr>
 <tr><td><b>CV（コンバージョン）</b></td><td>無料相談・資料ダウンロードなど、成果地点への到達件数</td></tr>
@@ -772,6 +995,13 @@ llms.txt / robots.txtでのAI許可 / 構造化データ4種 / 監修者情報 /
 <tr><td><b>領域侵食</b></td><td>あるサイトが他サイトの担当テーマを扱ってしまうこと。検索評価の奪い合いにつながる</td></tr>
 <tr><td><b>品質スコア</b></td><td>6観点の採点（100点満点）。90点未満は公開されない</td></tr>
 <tr><td><b>KW台帳</b></td><td>3サイト分のキーワードを一元管理する表。重複防止の要</td></tr>
+<tr><td><b>エンゲージメント率</b></td><td>10秒以上の滞在・2ページ以上の閲覧・CVのいずれかが起きた訪問の割合</td></tr>
+<tr><td><b>1訪問あたりPV</b></td><td>1回の訪問で何ページ見たか。関連記事への導線が効いているかを表す</td></tr>
+<tr><td><b>新規ユーザー比率</b></td><td>初めて訪れた人の割合。下がるほどリピーターが育っている</td></tr>
+<tr><td><b>順位帯</b></td><td>検索順位を1〜3位・4〜10位などに区切った分類。11〜20位が最も改善効果が大きい</td></tr>
+<tr><td><b>入口ページ</b></td><td>訪問者が最初に開いたページ。どの記事が集客の入口かが分かる</td></tr>
+<tr><td><b>広告換算額</b></td><td>同じ流入を広告で購入した場合の金額。記事の資産価値を示す目安</td></tr>
+<tr><td><b>リライト</b></td><td>既存記事の加筆・修正。順位11〜30位の記事が最も効果的</td></tr>
 </table>
 <h3>データソース</h3>
 <p class="note">Google Analytics 4（セッション・CV・AI参照元）／Google Search Console（表示・クリック・CTR・順位・クエリ）／
@@ -789,6 +1019,56 @@ gemini.google.com・copilot.microsoft.com・claude.ai からの参照流入の�
   ご質問・追加分析のご要望はお気軽にお申し付けください。<br>次号は翌月1日に自動発行されます。</div>
 </div>
 </body></html>"""
+
+
+def site_detail2(s, no):
+    """サイト別の2ページ目: 読まれ方の質・入口ページ・順位帯の分布"""
+    q = s.get("quality") or {}
+    if not q and not s.get("landing") and not s.get("rank_buckets"):
+        return ""
+    qt = "".join(
+        f'<div class="tile"><div class="t-l">{lb}</div><div class="t-v">{v}</div>'
+        f'<div class="t-s" style="color:{MUTED};font-weight:normal">{sb}</div></div>'
+        for lb, v, sb in [
+            ("エンゲージメント率", f'{q.get("engagement", "—")}%', "10秒以上滞在・2PV以上・CVのいずれか"),
+            ("平均滞在時間", f'{q.get("duration", "—")}秒', "1セッションあたり"),
+            ("1訪問あたりPV", f'{q.get("pv_per_session", "—")}', "回遊のしやすさ"),
+            ("新規ユーザー比率", f'{q.get("new_ratio", "—")}%', "低いほどリピートが多い")])
+    land = "".join(
+        f'<tr><td style="word-break:break-all">{x["path"]}</td>'
+        f'<td class="num">{x["sessions"]:,}</td><td class="num">{x["engagement"]}%</td>'
+        f'<td class="num">{x["cv"]}</td>'
+        f'<td><span class="jd jd-{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}">'
+        f'{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}</span></td></tr>'
+        for x in s.get("landing", [])[:6]) or '<tr><td colspan="5">GA4接続後に表示されます</td></tr>'
+    rk = "".join(
+        f'<tr><td><b>{k}</b></td><td class="num">{v}</td><td>{note}</td></tr>'
+        for (k, v), note in zip(s.get("rank_buckets", []), [
+            "維持する。この型を新規記事へ横展開", "1ページ目。CTR改善で伸ばす",
+            "最優先のリライト対象。伸びしろが最大", "内容の追加が必要。中期の改善対象",
+            "検索意図とのズレを疑う。統合も検討"])) \
+        or '<tr><td colspan="3">Search Console接続後に表示されます</td></tr>'
+    rw = "".join(
+        f'<tr><td>{t["q"]}</td><td class="num">{t["pos"]}位</td>'
+        f'<td class="num">{t["imp"]:,}</td><td class="num">{t["clicks"]}</td>'
+        f'<td class="num">+{max(0, round(t["imp"] * 0.04 - t["clicks"]))}</td></tr>'
+        for t in s.get("rewrite", [])) or '<tr><td colspan="5">該当なし</td></tr>'
+    return f"""
+<div class="sheet">
+<div class="sec"><span class="no">{no:02d}</span><h2>{s["name"][:18]} の改善余地</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">読まれ方の質</h3>
+<div class="tiles">{qt}</div>
+<h3>入口ページ別の成績</h3>
+<table><tr><th>入口ページ</th><th style="width:12%">流入</th><th style="width:14%">エンゲージ率</th>
+<th style="width:9%">CV</th><th style="width:12%">判定</th></tr>{land}</table>
+<h3>検索順位の分布</h3>
+<table><tr><th style="width:18%">順位帯</th><th style="width:14%">キーワード数</th><th>この層への打ち手</th></tr>{rk}</table>
+<h3>リライトの最優先候補（11〜20位）</h3>
+<table><tr><th>キーワード</th><th style="width:12%">現順位</th><th style="width:13%">表示</th>
+<th style="width:12%">現クリック</th><th style="width:19%">1ページ目到達時</th></tr>{rw}</table>
+<p class="note">増加見込みは「1ページ目のCTRを4%と仮定した場合の追加クリック数」です。
+記事を新しく書かずにクリックを増やせる余地を示しています。</p>
+</div>"""
 
 
 def mom_site(cur, prev, key):
