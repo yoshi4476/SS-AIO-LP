@@ -16,6 +16,7 @@
 ## 今日の主な動き
 
 - 2026-07-31 公開: 医療広告ガイドラインとは？クリニックHPの禁止6表現
+- 2026-07-31 公開(corporate): 飲食店のアルバイト採用のコツとは？応募を増やす7つの実践法（score 95）https://www.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/
 
 ## 成功パターン（これを踏襲せよ）
 
@@ -33,7 +34,8 @@
 - Phase 3で本文合計文字数を5,500字ちょうどで設計すると、執筆後にPhase 5の機械採点（5,000字基準）でギリギリ不足することがある（2026-07-28、税理士記事で4,338字→複数回の追記で解消）。次回はPhase 3設計時点で5,800〜6,000字程度のバッファを取ると、Phase 5での追記往復を減らせる
 - X/YouTube一次情報が皆無の記事は、編集者エージェント採点で「X・YouTube引用インライン」項目が0点になり編集スコアの上限が18/20程度に頭打ちになる。API未認証時は他エージェント（特にAIO/LLMOの数値ファクト）でバッファを積み増して合計114点を確保すること
 - 2026-07-30、整骨院記事はAPI未接続＋一次統計の一部を検索エンジン要約経由でしか確認できなかった影響で合計112/120（93点）にとどまり、推奨閾値114点に未達だった（90点以上のため公開はした）。次回同条件のテーマでは、Phase3の構成審査で「一次情報の直接確認手段（公式HTML/一次資料）が2つ以上あるか」を事前にチェックすると未達を防ぎやすい
-- 【訂正】articles/inshokuten-arubaito-saiyou-kotsu.md の `category: hr` は設定ミスではない。本リポジトリは `sites/*.json`（ai-lab / corporate / subsidy）3サイト共通のコンテンツハブで、`hr` は corporate サイト（sites/corporate.json）の正規カテゴリ。この記事はテーマ的にも corporate の owns（採用・人材）に一致し、ai-lab の avoid（人材採用・労務）に明確に抵触するため、**category を aio/seo/meo/ai-marketing に強制変更してはいけない**（強制変更するとcorporateサイトへの誤配信・ai-lab側のテーマ逸脱の二重の問題を生む）。build.py が articles/*.md を site非依存でglobして4カテゴリ以外を無条件にBLOCKED扱いする実装になっているのが根本原因（多サイト対応がbuild.pyに未反映）。正しい解消方法は `python scripts/publish.py --site corporate --slug inshokuten-arubaito-saiyou-kotsu --push` でcorporateリポジトリへ配信すること（要 SITE_PUSH_TOKEN 環境変数。2026-07-30時点で未設定のため実行不可、BLOCKED表示は無害なまま残る想定）
+- 【訂正・解消済み 2026-07-31】articles/inshokuten-arubaito-saiyou-kotsu.md は前回 `category: meo`（ai-lab専用カテゴリ）に誤って書き換えられており、corporateの正規カテゴリ（management/hr/operation/dx/case）から外れていたため publish.py に拒否される状態だった。`category: hr` に修正し `python scripts/publish_flow.py corporate inshokuten-arubaito-saiyou-kotsu` で正常に配信・公開完了（SITE_PUSH_TOKENは設定済みで実行可能だった）。site非依存の articles/ を複数サイトで共有する構成のため、記事のcategoryは必ず対象サイトの `sites/<id>.json` の `categories` キー一覧と一致させること。build.py（ai-lab/self-static用）の4カテゴリ固定チェックは corporate/subsidy の記事には適用されない（publish.py側で各サイト独自にバリデーションする）。
+- 【重要・要修正】記事frontmatterに `keyword:` フィールドを設定する運用が徹底されていなかった（過去の全17記事で未設定）。`publish_flow.py` は `meta.get("keyword", "")` を管制塔(hub)の `publish_log` に渡してKW台帳の該当行を「公開済み」にマークする仕組みだが、keywordが空だとマッチせず台帳が更新されない。この結果、既に公開済みの記事のKWが台帳上は「未着手」のまま残り、次回パイプラインが同じKWを二重に提示する不具合が発生した（2026-07-31、「飲食店 アルバイト 採用 コツ」で発覚。既に完成・スコア95で書かれていた記事が未公開のまま放置されていた）。**今後は記事作成時に必ずフロントマターへ `keyword: <KW>` を設定すること。** 既存の公開済み記事（他16本）もKW台帳が未更新の可能性が高く、要棚卸し。
 
 ## リライト優先度リスト
 
