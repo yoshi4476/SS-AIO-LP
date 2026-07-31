@@ -760,21 +760,33 @@ def render(d, a):
     trows = "".join(f'<tr><td>{k}</td><td class="num">{now}</td><td class="num" style="color:#067647;font-weight:bold">{tv}</td><td>{why}</td></tr>'
                     for k, now, tv, why in a["targets"])
     audit = a["audit"]
-    # 1ページに収まる件数に絞る（溢れると読みにくくなるため、優先度の高い順に上位のみ掲載）
-    ART_MAX, SITE_MAX = 5, 3
-    audit_art_rows = "".join(
-        f'<tr><td>{r["art"]}</td><td style="white-space:nowrap">{r["where"]}</td><td>{r["now"]}</td><td>{r["change"]}</td></tr>'
-        for r in audit["articles"][:ART_MAX]) or '<tr><td colspan="4">全記事が基準を満たしています（修正指示なし）</td></tr>'
+    # 監査結果は情報量が命なので、削らずにページを分けて全件掲載する
+    ART_PER_PAGE = 8
+
+    def _art_row(r):
+        return (f'<tr><td>{r["art"]}</td><td style="white-space:nowrap">{r["where"]}</td>'
+                f'<td>{r["now"]}</td><td>{r["change"]}</td></tr>')
+
+    art_pages = [audit["articles"][i:i + ART_PER_PAGE]
+                 for i in range(0, len(audit["articles"]), ART_PER_PAGE)] or [[]]
+    audit_art_rows = "".join(_art_row(r) for r in art_pages[0]) \
+        or '<tr><td colspan="4">全記事が基準を満たしています（修正指示なし）</td></tr>'
+    # 2ページ目以降（記事が多い月だけ増える）
+    audit_art_extra = ""
+    for n, chunk in enumerate(art_pages[1:], 2):
+        audit_art_extra += f"""
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>サイト全体監査（続き {n}/{len(art_pages)}）</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">ブログ記事の修正指示（続き）</h3>
+<table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th>
+<th style="width:28%">現状（実測）</th><th>変更内容</th></tr>
+{"".join(_art_row(r) for r in chunk)}</table>
+</div>"""
     audit_site_rows = "".join(
         f'<tr><td>{r["target"]}</td><td style="white-space:nowrap">{r["where"]}</td><td>{r["now"]}</td><td>{r["change"]}</td></tr>'
-        for r in audit["site"][:SITE_MAX]) or '<tr><td colspan="4">構造上の修正指示はありません</td></tr>'
-    audit_more = ""
-    rest = max(len(audit["articles"]) - ART_MAX, 0) + max(len(audit["site"]) - SITE_MAX, 0)
-    if rest:
-        audit_more = (f'<p class="note">※ 優先度の高い{ART_MAX + SITE_MAX}件を掲載しています。'
-                      f'他{rest}件の指示も週次最適化で順次実施します。</p>')
+        for r in audit["site"]) or '<tr><td colspan="4">構造上の修正指示はありません</td></tr>'
     # ページ溢れを防ぐため件数を絞り、2カラムで表示する
-    audit_keep = "".join(f'<li>{k}</li>' for k in audit["keep"][:4]) \
+    audit_keep = "".join(f'<li>{k}</li>' for k in audit["keep"][:8]) \
         or "<li>（来月の計測データで抽出します）</li>"
 
     head_html = "".join(f'<li>{h}</li>' for h in a["headline"])
@@ -940,6 +952,7 @@ ul.grown li {{ margin: 7px 0; font-size: 9.5pt; }}
 .bc-s {{ font-size: 8.5pt; color: var(--muted); }}
 
 /* ---- 判定バッジ・3行まとめ ---- */
+.mark {{ background: linear-gradient(transparent 58%, #ffe873 58%); font-weight: bold; }}
 .jd {{ font-weight: bold; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; white-space: nowrap; }}
 .jd-良好, .jd-達成 {{ background: #dcfce7; color: #047857; }}
 .jd-標準, .jd-あと一歩 {{ background: #e0f2fe; color: #0369a1; }}
@@ -1156,11 +1169,35 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 <p style="font-size:9.5pt">全{audit["audited"]}記事とサイト構造を機械監査し、検索データ（順位・CTR）と品質基準（鮮度・内部リンク・FAQ）を突合した<b>具体的な修正指示</b>です。修正は週次最適化（毎週月曜）が自動で実施し、翌月号で効果を検証します。</p>
 <h3>ブログ記事の修正指示（優先度順）</h3>
 <table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_art_rows}</table>
-<h3 style="margin-top:14px">サイト構造・導線の変更指示</h3>
+<p class="note">読み方: 「修正箇所」はその記事のどこを触るかを示します。
+順位が11位以下のものは本文構成、CTRが低いものはタイトルとメタ情報、
+更新から日が経ったものは鮮度表記が対象になります。</p>
+<h3 style="margin-top:16px">この監査はどう行っているか</h3>
+<ul style="font-size:9.4pt">
+  <li><b>検索データとの突合</b> — Search Consoleの順位・CTR・表示回数と、記事の構造を照らし合わせます。
+  「露出はあるのに選ばれていない」「順位は惜しいが2ページ目」といった状態を機械的に検出します。</li>
+  <li><b>品質基準との突合</b> — 内部リンクの本数、FAQの数、最終更新からの日数、
+  出典付き数値の有無を全記事について数えます。基準を割ったものが修正指示に上がります。</li>
+  <li><b>重複の検出</b> — 記事どうしの文章の近さを測定し、同じ検索意図を狙っている組を洗い出します。
+  複数サイトを運用している場合は、サイトをまたいだ重複も同時に検査します。</li>
+  <li><b>実施は翌月の運用の中で</b> — ここに挙げた修正は当社が実施します。追加料金はかかりません。
+  実施した結果は翌月号で効果を検証します。</li>
+</ul>
+</div>
+{audit_art_extra}
+<!-- ページ: 監査（サイト構造編） -->
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>サイト全体監査（サイト構造・導線）</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">サイト構造・導線の変更指示</h3>
 <table><tr><th style="width:18%">対象</th><th style="width:16%">場所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_site_rows}</table>
-{audit_more}
 <h3 style="margin-top:14px">✅ 変更せず維持するもの（好調・基準充足）</h3>
+<p class="note">以下の記事は検索データと品質基準の両方を満たしています。
+無理に手を入れると順位が下がることがあるため、今月は触りません。</p>
 <ul class="keep2">{audit_keep}</ul>
+<div class="callout"><b>優先順位の考え方:</b> 同じ工数をかけるなら、
+<span class="mark">順位11〜30位の記事のリライト</span>が最も成果につながります。
+1ページ目に入るとクリック数が数倍になるためです。
+新規記事の追加より先に、この層の改善に取り組みます。</div>
 </div>
 
 <!-- ページ8: コンテンツ実績+来月プラン -->

@@ -1,43 +1,74 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><style>
 @page { size: A4; margin: 0; }
 * { box-sizing: border-box; margin: 0; }
-body { font-family: "Yu Gothic","Meiryo",sans-serif; color:#10203a; font-size:10pt; line-height:1.8; }
-.sheet { width:210mm; min-height:296mm; padding:16mm 15mm 18mm; page-break-after:always; }
+body { font-family:"Yu Gothic","Meiryo",sans-serif; color:#10203a; font-size:10pt; line-height:1.85; }
+.sheet { width:210mm; min-height:296mm; padding:15mm 15mm 17mm; page-break-after:always; }
 .sheet:last-child { page-break-after:auto; }
 .cover { background:linear-gradient(150deg,#071a38,#0b2447 45%,#14345c); color:#fff;
   display:flex; flex-direction:column; padding:22mm 20mm; }
 .lg { height:34px; } .cv-g { width:64px;height:4px;background:#b7922e;margin:10mm 0 6mm; }
 .kick { letter-spacing:.35em;font-size:9pt;color:#93b4e8; }
-.ttl { font-size:26pt;font-weight:900;line-height:1.4;margin-top:4mm; }
+.ttl { font-size:26pt;font-weight:900;line-height:1.42;margin-top:4mm; }
 .mon { font-size:15pt;color:#b7922e;font-weight:bold;margin-top:3mm;letter-spacing:.1em; }
-.meta { margin-top:auto;font-size:9.5pt;color:#bcd0ee;line-height:2.1;
+.badges { display:flex;gap:7px;margin-top:8mm;flex-wrap:wrap; }
+.badge { border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 13px;
+  font-size:8.4pt;color:#dbe7fa; }
+.meta { margin-top:auto;font-size:9.4pt;color:#bcd0ee;line-height:2.05;
   border-top:1px solid rgba(255,255,255,.25);padding-top:6mm; }
-.sec { display:flex;align-items:center;gap:10px;margin:0 0 12px; }
+.sec { display:flex;align-items:center;gap:10px;margin:0 0 11px; }
 .sec .no { background:#0b2447;color:#fff;font-weight:bold;font-size:10pt;padding:3px 12px;border-radius:4px; }
-.sec h2 { font-size:14.5pt; } .sec .gold { flex:1;height:2px;background:linear-gradient(90deg,#b7922e,transparent); }
-h3 { font-size:11pt;margin:16px 0 6px;color:#0b2447; }
-.lead { font-size:10pt;color:#5b6b84;margin-bottom:10px; }
+.sec h2 { font-size:14.5pt; }
+.sec .gold { flex:1;height:2px;background:linear-gradient(90deg,#b7922e,transparent); }
+h3 { font-size:11pt;margin:14px 0 6px;color:#0b2447; }
+.lead { font-size:9.8pt;color:#5b6b84;margin-bottom:8px; }
 .dim { color:#5b6b84;font-size:8.5pt; }
 .na { color:#b45309;font-size:8pt; }
-.warn { background:#fffbeb;border-left:4px solid #f59e0b;padding:9px 12px;border-radius:0 8px 8px 0;
-  font-size:8.6pt;margin:8px 0 12px; }
+.note { font-size:8.5pt;color:#5b6b84; }
+.warn { background:#fffbeb;border-left:4px solid #f59e0b;padding:9px 12px;
+  border-radius:0 8px 8px 0;font-size:8.6pt;margin:8px 0 10px; }
+.callout { border-left:4px solid #b7922e;background:#fbf8ef;padding:10px 14px;
+  border-radius:0 8px 8px 0;margin:10px 0;font-size:9.4pt; }
 .tiles { display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:10px 0; }
 .tile { border:1px solid #e3eaf3;border-radius:10px;padding:9px 11px; }
-.t-l { font-size:8.3pt;color:#5b6b84; } .t-v { font-size:15pt;font-weight:900;color:#0b2447; }
-.t-s { font-size:8.3pt;font-weight:bold; } .good { color:#067647; } .bad { color:#b91c1c; }
-.charts { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px; }
-.chart { border:1px solid #e3eaf3;border-radius:8px;padding:8px; }
-.chart-t { font-size:9pt;font-weight:bold;margin-bottom:4px; }
-table { border-collapse:collapse;width:100%;font-size:9pt;margin-top:6px; }
+.t-l { font-size:8.2pt;color:#5b6b84; } .t-v { font-size:15pt;font-weight:900;color:#0b2447; }
+.t-s { font-size:8.2pt;font-weight:bold; } .good { color:#067647; } .bad { color:#b91c1c; }
+.charts { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px; }
+.chart { border:1px solid #e3eaf3;border-radius:8px;padding:7px; }
+.chart-t { font-size:8.8pt;font-weight:bold;margin-bottom:3px; }
+table { border-collapse:collapse;width:100%;font-size:8.9pt;margin-top:6px; }
 th,td { border:1px solid #dbe3ee;padding:5px 8px;text-align:left;vertical-align:top; }
 th { background:#0b2447;color:#fff;font-weight:600; }
 td.num { text-align:right;font-variant-numeric:tabular-nums; }
 tr:nth-child(even) td { background:#f7fafd; }
-.callout { border-left:4px solid #b7922e;background:#fbf8ef;padding:10px 14px;
-  border-radius:0 8px 8px 0;margin:10px 0;font-size:9.5pt; }
+.heat { border:1px solid #e3eaf3;border-radius:8px;padding:9px 11px;margin-top:6px; }
+.hm-row { display:flex;align-items:center;gap:8px;margin:3px 0; }
+.hm-l { width:120px;font-size:8.4pt; }
+.hm-t { flex:1;background:#eef2f8;border-radius:4px;height:12px; }
+.hm-b { height:12px;border-radius:4px; }
+.hm-v { width:74px;text-align:right;font-size:8.4pt;font-weight:bold; }
+.jd { font-weight:bold;padding:1px 8px;border-radius:10px;font-size:8.4pt;white-space:nowrap; }
+.jd-良好 { background:#dcfce7;color:#047857; } .jd-標準 { background:#e0f2fe;color:#0369a1; }
+.jd-要改善 { background:#fee2e2;color:#b91c1c; } .jd-立ち上げ中 { background:#fef3c7;color:#b45309; }
+.pri { font-weight:bold;padding:1px 8px;border-radius:10px;font-size:8.4pt; }
+.pri-高 { background:#fee2e2;color:#b91c1c; } .pri-中 { background:#fef3c7;color:#b45309; }
+ol.head3 { counter-reset:h;list-style:none;padding:0;margin:0; }
+ol.head3 li { counter-increment:h;position:relative;padding:8px 0 8px 32px;font-size:10.2pt;
+  line-height:1.9;border-bottom:1px dotted #e3eaf3; }
+ol.head3 li:last-child { border-bottom:0; }
+ol.head3 li::before { content:counter(h);position:absolute;left:0;top:9px;width:21px;height:21px;
+  border-radius:50%;background:#0b2447;color:#fff;font-size:8.2pt;font-weight:bold;
+  text-align:center;line-height:21px; }
+.toc { columns:2;column-gap:20px;margin:6px 0 0; }
+.toc li { list-style:none;padding:2.2px 0;border-bottom:1px dotted #e3eaf3;font-size:8.5pt;break-inside:avoid; }
+.toc li span { color:#b7922e;font-weight:bold;margin-right:7px; }
+.roi { display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px; }
+.roi-box { border:1px solid #e3eaf3;border-radius:10px;padding:11px 13px; }
+.roi-box .k { font-size:8.5pt;color:#5b6b84; }
+.roi-box .v { font-size:18pt;font-weight:900;color:#0b2447; }
+.roi-box .s { font-size:8.4pt;color:#5b6b84; }
 .back { background:#0b2447;color:#fff;display:flex;flex-direction:column;justify-content:center;
   align-items:center;text-align:center;gap:4mm; }
-.back .s { font-size:9.5pt;color:#9db8e0;line-height:2.2; }
+.back .s { font-size:9.4pt;color:#9db8e0;line-height:2.2; }
 </style></head><body>
 
 <div class="sheet cover">
@@ -45,88 +76,312 @@ tr:nth-child(even) td { background:#f7fafd; }
   <div class="kick">GROUP MONTHLY REPORT</div>
   <div class="ttl">3サイト統合<br>月次レポート</div>
   <div class="mon">2026-06 月次報告</div>
+  <div class="badges">
+    <span class="badge">グループ全体KPI</span><span class="badge">サイト別の貢献度</span>
+    <span class="badge">重複と役割分担</span><span class="badge">投資対効果</span>
+    <span class="badge">改善プラン</span>
+  </div>
   <div class="meta">
-    対象: AI集客ラボ / AI導入補助金サポート / コーポレートサイト<br>
-    発行: <b>セブンセンシズ株式会社</b>｜発行日: 2026-07-31<br>
-    数値は Google Analytics 4 / Search Console / 運用台帳の実測にもとづきます
+    対象: AI集客ラボ（ai.7senses.co.jp）／AI導入補助金サポート（lp.7senses.co.jp）／
+    コーポレートサイト（www.7senses.co.jp）<br>
+    発行: <b>セブンセンシズ株式会社</b>｜発行日: 2026-07-31｜作成: 自動集計+分析エンジン<br>
+    数値は Google Analytics 4 / Google Search Console / 運用台帳の実測にもとづきます
   </div>
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">01</span><h2>グループ全体サマリー</h2><div class="gold"></div></div>
-<div class="tiles">
-<div class="tile"><div class="t-l">セッション合計</div><div class="t-v">2,690</div><div class="t-s good">前月比 +33%</div></div>
-<div class="tile"><div class="t-l">検索クリック合計</div><div class="t-v">1,345</div><div class="t-s good">前月比 +33%</div></div>
-<div class="tile"><div class="t-l">CV合計</div><div class="t-v">20件</div><div class="t-s good">前月比 +33%</div></div>
-<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">134</div><div class="t-s good">3サイト合計</div></div>
+<div class="sec"><span class="no">01</span><h2>エグゼクティブサマリー</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">今月を3行で</h3>
+<ol class="head3"><li>3サイト合計のセッションは0（前月比―）、検索クリックは94（-2%）でした。</li><li>CVは0件（―）。同じ流入を広告で買った場合は約28,200円相当にあたり、これを記事の資産で獲得しています。</li><li>記事は3サイト合計19本まで積み上がりました。サイト間の役割は分かれており、検索評価の奪い合いは発生していません。</li></ol>
+<div class="tiles" style="margin-top:12px">
+<div class="tile"><div class="t-l">セッション（3サイト）</div><div class="t-v">0</div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">検索クリック</div><div class="t-v">94</div><div class="t-s good">前月比 -2%</div></div>
+<div class="tile"><div class="t-l">CV</div><div class="t-v">0件</div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">0</div><div class="t-s good">3サイト合計</div></div>
 </div>
-<h3>サイト別の比較</h3>
-<table><tr><th style="width:24%">サイト</th><th>担当テーマ</th><th>記事</th>
-<th>セッション</th><th>クリック</th><th>AI参照</th></tr><tr><td><b>AI集客ラボ</b><br><span class="dim">ai.7senses.co.jp</span></td><td>AI検索時代の集客（AIO・LLMO・SEO</td><td class="num">12本</td><td class="num">1,720</td><td class="num">860</td><td class="num">86</td></tr><tr><td><b>セブンセンシズ コーポレートサイト</b><br><span class="dim">www.7senses.co.jp</span></td><td>店舗経営の実務（人材・オペレーション・店舗D</td><td class="num">9本</td><td class="num">560</td><td class="num">280</td><td class="num">28</td></tr><tr><td><b>AI導入補助金サポート</b><br><span class="dim">lp.7senses.co.jp</span></td><td>AI導入補助金・IT導入補助金の活用</td><td class="num">6本</td><td class="num">410</td><td class="num">205</td><td class="num">20</td></tr></table>
 <div class="callout"><b>3サイト体制の狙い:</b> 集客手法はAI集客ラボ、資金調達は補助金サイト、
 店舗経営の実務はコーポレートサイトと役割を分けています。同じ会社のサイトどうしで検索評価を
-奪い合わないよう、キーワードは1つの台帳で一元管理し、毎回の記事作成前に重複を機械検査しています。</div>
-<h3>記事の総ストック</h3>
-<p>3サイト合計 <b>27本</b>（品質90点以上のみ公開）。
-記事は公開後も検索とAI回答の両方から流入を生み続けるストック資産です。</p>
+奪い合わないよう、キーワードは1つの台帳で一元管理し、記事作成のたびに重複を機械検査しています。</div>
+<h3>本レポートの構成</h3>
+<ul class="toc"><li><span>01</span>エグゼクティブサマリー（3行まとめ）</li><li><span>02</span>グループ全体のKPIダッシュボード</li><li><span>03</span>サイト別の貢献度と成長率</li><li><span>04</span>指標の評価（良し悪しの判定）</li><li><span>05</span>投資対効果（広告換算）</li><li><span>06</span>サイト間の重複と役割分担の健全性</li><li><span>07</span>コンテンツ資産の状況</li><li><span>08</span>記事の供給状況（KW台帳）</li><li><span>09</span>AI集客ラボ の詳細</li><li><span>10</span>セブンセンシズ コーポレートサイ の詳細</li><li><span>11</span>AI導入補助金サポート の詳細</li><li><span>12</span>AI検索（AIO/LLMO）分析</li><li><span>13</span>サイト間の相互送客</li><li><span>14</span>グループ全体の改善プラン</li><li><span>15</span>来月のKPI目標</li><li><span>16</span>実行スケジュール</li><li><span>17</span>リスクと前提条件</li><li><span>18</span>付録: 指標の定義</li></ul>
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">02</span><h2>サイト間の重複チェック</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">02</span><h2>グループ全体のKPIダッシュボード</h2><div class="gold"></div></div>
+<div class="tiles">
+<div class="tile"><div class="t-l">セッション</div><div class="t-v">0</div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">検索表示回数</div><div class="t-v">1,154</div><div class="t-s good">前月比 -8%</div></div>
+<div class="tile"><div class="t-l">検索クリック</div><div class="t-v">94</div><div class="t-s good">前月比 -2%</div></div>
+<div class="tile"><div class="t-l">平均CTR</div><div class="t-v">8.15%</div><div class="t-s good">3サイト合算</div></div>
+</div>
+<h3>6ヶ月トレンド（3サイト合計）</h3>
+<div class="charts">
+<p style="color:#5b6b84">データなし</p>
+<div class="chart"><div class="chart-t">検索クリック合計</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 56 L146 94 L247 77 L347 41 L448 55 L548 58" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="56" r="4" fill="#0d9488"/><circle cx="146" cy="94" r="4" fill="#0d9488"/><circle cx="247" cy="77" r="4" fill="#0d9488"/><circle cx="347" cy="41" r="4" fill="#0d9488"/><circle cx="448" cy="55" r="4" fill="#0d9488"/><circle cx="548" cy="58" r="4" fill="#0d9488"/><text x="548" y="48" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">94</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div>
+<div class="chart"><div class="chart-t">検索表示回数合計</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 41 L146 71 L247 86 L347 88 L448 120 L548 125" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="41" r="4" fill="#2563eb"/><circle cx="146" cy="71" r="4" fill="#2563eb"/><circle cx="247" cy="86" r="4" fill="#2563eb"/><circle cx="347" cy="88" r="4" fill="#2563eb"/><circle cx="448" cy="120" r="4" fill="#2563eb"/><circle cx="548" cy="125" r="4" fill="#2563eb"/><text x="548" y="115" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">1,154</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div>
+<p style="color:#5b6b84">データなし</p>
+</div>
+<p class="note">読み方: 表示回数はグループ全体の「露出の総量」、クリックは「選ばれた回数」です。
+サイトごとに需要の山が異なるため、合計値の凸凹は特定サイトの季節要因である場合があります。</p>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">03</span><h2>サイト別の貢献度と成長率</h2><div class="gold"></div></div>
+<p class="lead">どのサイトがグループ全体のどれだけを担っているか、どこが伸びているかを比較します。</p>
+<table><tr><th style="width:24%">サイト</th><th>担当テーマ</th><th style="width:9%">記事</th>
+<th style="width:13%">セッション</th><th style="width:9%">構成比</th><th style="width:10%">前月比</th></tr>
+<tr><td><b>AI集客ラボ</b><br><span class="dim">ai.7senses.co.jp</span></td><td>AI検索時代の集客（AIO・LLMO・S</td><td class="num">17本</td><td class="num">0</td><td class="num">0%</td><td class="num">―</td></tr><tr><td><b>セブンセンシズ コーポレートサイト</b><br><span class="dim">www.7senses.co.jp</span></td><td>店舗経営の実務（人材・オペレーション・店</td><td class="num">2本</td><td class="num">0</td><td class="num">0%</td><td class="num">―</td></tr><tr><td><b>AI導入補助金サポート</b><br><span class="dim">lp.7senses.co.jp</span></td><td>AI導入補助金・IT導入補助金の活用</td><td class="num">0本</td><td class="num"><span class="na">権限付与待ち</span></td><td class="num">0%</td><td class="num">―</td></tr></table>
+<h3>セッションの構成比</h3>
+<div class="heat"><div class="hm-row"><div class="hm-l">AI集客ラボ</div><div class="hm-t"><div class="hm-b" style="width:2%;background:#2563eb"></div></div><div class="hm-v">0<span class="dim"> (0%)</span></div></div><div class="hm-row"><div class="hm-l">セブンセンシズ コーポレートサイ</div><div class="hm-t"><div class="hm-b" style="width:2%;background:#2563eb"></div></div><div class="hm-v">0<span class="dim"> (0%)</span></div></div><div class="hm-row"><div class="hm-l">AI導入補助金サポート</div><div class="hm-t"><div class="hm-b" style="width:2%;background:#2563eb"></div></div><div class="hm-v">0<span class="dim"> (0%)</span></div></div></div>
+<div class="callout"><b>読み方:</b> 構成比が偏っていること自体は問題ではありません。
+立ち上げ時期が異なるため、後から始めたサイトの比率が低いのは自然です。
+見るべきは<b>前月比</b>で、伸びが止まっているサイトがあれば改善プラン（第14章）で対処します。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">04</span><h2>指標の評価（良し悪しの判定）</h2><div class="gold"></div></div>
+<p class="lead">数字だけでは良いのか悪いのかが分かりません。一般的な水準と比べた判定を併記します。</p>
+<table><tr><th style="width:17%">指標</th><th style="width:9%">当月</th><th style="width:9%">判定</th>
+<th style="width:27%">判定の基準</th><th>この指標の意味と打ち手</th></tr><tr><td><b>平均CTR（3サイト）</b></td><td class="num">8.15%</td><td><span class="jd jd-良好">良好</span></td><td>3%以上=良好 / 1.5〜3%=標準 / 1.5%未満=要改善</td><td>同じ順位でもタイトル次第で倍以上変わる。低ければタイトル改善が最短の打ち手</td></tr><tr><td><b>平均掲載順位</b></td><td class="num">11.3位</td><td><span class="jd jd-標準">標準</span></td><td>10位以内=良好 / 10〜20位=標準 / 20位超=要改善</td><td>10位以内が1ページ目。11〜30位はリライトで最も伸びしろが大きい</td></tr><tr><td><b>CV率</b></td><td class="num">0%</td><td><span class="jd jd-要改善">要改善</span></td><td>1%以上=良好 / 0.3〜1%=標準 / 0.3%未満=要改善</td><td>問い合わせ型は0.5〜1%が一般的。低ければ導線設計を疑う</td></tr><tr><td><b>AI経由の比率</b></td><td class="num">0%</td><td><span class="jd jd-要改善">要改善</span></td><td>3%以上=良好 / 1〜3%=標準 / 1%未満=立ち上げ中</td><td>AI検索からの流入比率。市場全体でまだ数%の段階で、あること自体が先行指標</td></tr></table>
+<div class="callout"><b>判定の使い方:</b> 「要改善」があれば、その打ち手を第15章の実行スケジュールに
+最優先で組み込みます。立ち上げ期は「標準」でも順調な場合が多いため、前月比の伸びと併せて判断してください。</div>
+<h3>この4指標を選んでいる理由</h3>
+<p style="font-size:9.4pt">セッションやPVは「結果」であり、動かすには原因側の指標を見る必要があります。
+<b>順位</b>は露出量を決め、<b>CTR</b>は露出をクリックに変える効率、<b>CV率</b>はクリックを成果に変える効率、
+<b>AI経由比率</b>は次の時代への適応度を表します。この4つが改善すれば、セッションとCVは後から付いてきます。</p>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">05</span><h2>投資対効果</h2><div class="gold"></div></div>
+<p class="lead">記事は一度書けば資産として残ります。「同じ流入を広告で買ったらいくらか」を金額で示します。</p>
+<div class="roi">
+  <div class="roi-box"><div class="k">当月の流入を広告で買った場合</div>
+  <div class="v">約28,200円</div>
+  <div class="s">検索クリック94回 × 想定単価300円で換算</div></div>
+  <div class="roi-box"><div class="k">記事1本あたりの月間価値</div>
+  <div class="v">約1,484円</div>
+  <div class="s">3サイト合計19本で割った1本あたり</div></div>
+  <div class="roi-box"><div class="k">記事1本あたりの月間セッション</div>
+  <div class="v">0.0</div>
+  <div class="s">本数が増えるほど合計は積み上がる</div></div>
+  <div class="roi-box"><div class="k">年間換算の広告相当額</div>
+  <div class="v">約338,400円</div>
+  <div class="s">今の水準が1年続いた場合の目安</div></div>
+</div>
+<h3>広告との決定的な違い</h3>
+<p style="font-size:9.4pt">広告は出稿を止めた瞬間に流入がゼロになりますが、
+記事は<b>公開後も検索とAI回答の両方から流入を生み続けます</b>。
+上の金額は今月分であり、来月も同じ記事が同じように働きます。
+記事が積み上がるほど、この金額は複利のように増えていきます。</p>
+<div class="callout"><b>換算の前提:</b> クリック単価は300円で計算しています。
+実際のリスティング広告では1クリック500〜1,000円以上になることも珍しくないため、
+上の金額は<b>控えめな見積もり</b>です。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">06</span><h2>サイト間の重複と役割分担の健全性</h2><div class="gold"></div></div>
 <p class="lead">同一企業が複数サイトで同じ検索意図を狙うと、Googleがどちらも評価しにくくなります。
-毎回の記事作成前に、全サイトのキーワードを突き合わせて検査しています。</p>
+記事作成のたびに、全サイトのキーワードを突き合わせて検査しています。</p>
 <table><tr><th style="width:22%">サイト</th><th>キーワード</th><th style="width:22%">本来の担当</th></tr><tr><td colspan="3">サイト間の重複・領域侵食はありません（良好）</td></tr></table>
 <div class="callout"><b>今月の判定:</b> 領域侵食は検出されていません。3サイトが競合しない状態を維持できています。</div>
+<h3>担当領域の定義</h3>
+<table><tr><th style="width:26%">サイト</th><th>担当する領域</th><th style="width:30%">扱わない領域</th></tr>
+<tr><td><b>AI集客ラボ</b></td><td>AI検索時代の集客（AIO・LLMO・SEO・MEO）</td><td>補助金の申請手続き／人材採用・労務・オペレーション</td></tr><tr><td><b>セブンセンシズ コーポレートサイト</b></td><td>店舗経営の実務（人材・オペレーション・店舗DX）と業種別の導入事例</td><td>AIO・LLMO・SEO・MEOの手法解説／補助金の申請手続き</td></tr><tr><td><b>AI導入補助金サポート</b></td><td>AI導入補助金・IT導入補助金の活用</td><td>AIO・LLMO・SEO・MEOの手法解説／人材採用・オペレーション</td></tr></table>
+<p class="note">判断基準: 「この記事の読者は何に困っているか」で振り分けます。
+集客ならAI集客ラボ、資金調達なら補助金サイト、それ以外の経営課題ならコーポレートです。</p>
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">03</span><h2>AI集客ラボ</h2><div class="gold"></div></div>
-<p class="lead">AI検索時代の集客（AIO・LLMO・SEO・MEO）<br><span class="dim">ai.7senses.co.jp</span></p>
+<div class="sec"><span class="no">07</span><h2>コンテンツ資産の状況</h2><div class="gold"></div></div>
+<div class="tiles">
+<div class="tile"><div class="t-l">公開記事（3サイト合計）</div><div class="t-v">19本</div><div class="t-s good">品質90点以上のみ</div></div>
+<div class="tile"><div class="t-l">平均品質スコア</div><div class="t-v">94.2点</div><div class="t-s good">6観点採点/100点</div></div>
+<div class="tile"><div class="t-l">平均文字数</div><div class="t-v">6,864字</div><div class="t-s good">基準5,000字以上</div></div>
+<div class="tile"><div class="t-l">年間の想定増加</div><div class="t-v">720本</div><div class="t-s good">月60本ペースの場合</div></div>
+</div>
+<h3>サイト別の記事本数</h3>
+<div class="heat"><div class="hm-row"><div class="hm-l">AI集客ラボ</div><div class="hm-t"><div class="hm-b" style="width:89%;background:#0d9488"></div></div><div class="hm-v">17<span class="dim"> (89%)</span></div></div><div class="hm-row"><div class="hm-l">セブンセンシズ コーポレートサイ</div><div class="hm-t"><div class="hm-b" style="width:11%;background:#0d9488"></div></div><div class="hm-v">2<span class="dim"> (11%)</span></div></div><div class="hm-row"><div class="hm-l">AI導入補助金サポート</div><div class="hm-t"><div class="hm-b" style="width:2%;background:#0d9488"></div></div><div class="hm-v">0<span class="dim"> (0%)</span></div></div></div>
+<h3>カテゴリ別の記事構成</h3>
+<div class="heat"><div class="hm-row"><div class="hm-l">SEO</div><div class="hm-t"><div class="hm-b" style="width:35%;background:#2563eb"></div></div><div class="hm-v">6<span class="dim"> (35%)</span></div></div><div class="hm-row"><div class="hm-l">MEO</div><div class="hm-t"><div class="hm-b" style="width:29%;background:#2563eb"></div></div><div class="hm-v">5<span class="dim"> (29%)</span></div></div><div class="hm-row"><div class="hm-l">AI集客・活用</div><div class="hm-t"><div class="hm-b" style="width:18%;background:#2563eb"></div></div><div class="hm-v">3<span class="dim"> (18%)</span></div></div><div class="hm-row"><div class="hm-l">AIO・LLMO</div><div class="hm-t"><div class="hm-b" style="width:12%;background:#2563eb"></div></div><div class="hm-v">2<span class="dim"> (12%)</span></div></div><div class="hm-row"><div class="hm-l">採用・人材</div><div class="hm-t"><div class="hm-b" style="width:6%;background:#2563eb"></div></div><div class="hm-v">1<span class="dim"> (6%)</span></div></div></div>
+<div class="callout"><b>資産の考え方:</b> 記事は広告と違い、公開後も検索とAI回答の両方から
+流入を生み続けるストック資産です。1記事あたり平均6,864字・平均94.2点の
+品質を保ったまま蓄積することが、ドメイン全体の評価とAI引用の確率を押し上げます。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>記事の供給状況（KW台帳）</h2><div class="gold"></div></div>
+<p class="lead">記事を作り続けられるかは、書くテーマの在庫で決まります。
+3サイト分のキーワードを1つの台帳で管理し、残りが少なくなると実データから自動補充します。</p>
+<table><tr><th style="width:30%">サイト</th><th style="width:12%">未着手</th><th style="width:12%">執筆中</th>
+<th style="width:12%">公開済み</th><th style="width:12%">対象外</th><th>在庫の判定</th></tr><tr><td>AI集客ラボ</td><td class="num">25</td><td class="num">1</td><td class="num">4</td><td class="num">0</td><td>十分</td></tr><tr><td>セブンセンシズ コーポレートサイト</td><td class="num">28</td><td class="num">0</td><td class="num">2</td><td class="num">0</td><td>十分</td></tr><tr><td>AI導入補助金サポート</td><td class="num">33</td><td class="num">0</td><td class="num">0</td><td class="num">16</td><td>十分</td></tr></table>
+<h3>キーワードはどう補充されるか</h3>
+<ul style="font-size:9.4pt">
+  <li><b>Search Consoleの実績から</b> — 自社サイトが実際に表示されているのに専用記事がないクエリを抽出します。需要が実証済みの最優先キーワードです。</li>
+  <li><b>Googleサジェストから</b> — 実際の検索行動から生成される候補を収集します。サジェストに出る＝一定の検索需要がある証拠です。</li>
+  <li><b>重複の自動除外</b> — 既存記事や他サイトのキーワードと近いものは、追加時点で除外されます。</li>
+</ul>
+<div class="callout"><b>「未着手」が10件を切ると補充が走ります。</b>
+ネタ切れで記事の生成が止まらないよう、在庫を常に監視しています。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">09</span><h2>AI集客ラボ</h2><div class="gold"></div></div>
+<p class="lead">AI検索時代の集客（AIO・LLMO・SEO・MEO）<br><span class="dim">ai.7senses.co.jp｜想定読者: 店舗・中小企業の集客担当者と経営者</span></p>
 
 <div class="tiles">
-<div class="tile"><div class="t-l">セッション</div><div class="t-v">1,720</div><div class="t-s good">前月比 +31%</div></div>
-<div class="tile"><div class="t-l">検索クリック</div><div class="t-v">860</div><div class="t-s good">前月比 +31%</div></div>
-<div class="tile"><div class="t-l">記事ストック</div><div class="t-v">12本</div><div class="t-s good">品質90点以上のみ</div></div>
-<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">86</div><div class="t-s good">ChatGPT・Perplexity等</div></div>
+<div class="tile"><div class="t-l">セッション</div><div class="t-v">0</div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">検索クリック</div><div class="t-v">0</div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">記事ストック</div><div class="t-v">17本</div><div class="t-s good">品質90点以上のみ</div></div>
+<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">0</div><div class="t-s good">ChatGPT・Perplexity等</div></div>
 </div>
-<div class="charts"><div class="chart"><div class="chart-t">セッション推移</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 154 L146 141 L247 124 L347 104 L448 74 L548 41" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="154" r="4" fill="#2563eb"/><circle cx="146" cy="141" r="4" fill="#2563eb"/><circle cx="247" cy="124" r="4" fill="#2563eb"/><circle cx="347" cy="104" r="4" fill="#2563eb"/><circle cx="448" cy="74" r="4" fill="#2563eb"/><circle cx="548" cy="41" r="4" fill="#2563eb"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">1,720</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div><div class="chart"><div class="chart-t">検索クリック推移</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 154 L146 141 L247 124 L347 104 L448 74 L548 41" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="154" r="4" fill="#0d9488"/><circle cx="146" cy="141" r="4" fill="#0d9488"/><circle cx="247" cy="124" r="4" fill="#0d9488"/><circle cx="347" cy="104" r="4" fill="#0d9488"/><circle cx="448" cy="74" r="4" fill="#0d9488"/><circle cx="548" cy="41" r="4" fill="#0d9488"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">860</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div></div>
-<h3>主要クエリ</h3>
-<table><tr><th>クエリ</th><th>表示</th><th>クリック</th><th>平均順位</th></tr><tr><td>ai-lab サンプルKW1</td><td class="num">780</td><td class="num">34</td><td class="num">6.2位</td></tr><tr><td>ai-lab サンプルKW2</td><td class="num">660</td><td class="num">28</td><td class="num">7.2位</td></tr><tr><td>ai-lab サンプルKW3</td><td class="num">540</td><td class="num">22</td><td class="num">8.2位</td></tr></table>
+<div class="charts"><p style="color:#5b6b84">データなし</p><p style="color:#5b6b84">データなし</p></div>
+<h3>主要クエリ（上位3）</h3>
+<table><tr><th>クエリ</th><th style="width:13%">表示</th><th style="width:13%">クリック</th>
+<th style="width:11%">CTR</th><th style="width:13%">平均順位</th></tr><tr><td colspan="5">検索データは権限付与後に表示されます</td></tr></table>
+<div class="callout"><b>このサイトの役割:</b> AI検索時代の集客（AIO・LLMO・SEO・MEO）を担当します。
+他サイトの領域（補助金の申請手続き、人材採用・労務・オペレーション）は
+主題にせず、必要な場合は該当サイトへリンクで送客します。</div>
 </div>
 <div class="sheet">
-<div class="sec"><span class="no">04</span><h2>セブンセンシズ コーポレートサイト</h2><div class="gold"></div></div>
-<p class="lead">店舗経営の実務（人材・オペレーション・店舗DX）と業種別の導入事例<br><span class="dim">www.7senses.co.jp</span></p>
+<div class="sec"><span class="no">10</span><h2>セブンセンシズ コーポレートサイト</h2><div class="gold"></div></div>
+<p class="lead">店舗経営の実務（人材・オペレーション・店舗DX）と業種別の導入事例<br><span class="dim">www.7senses.co.jp｜想定読者: 店舗・中小企業の経営者と店長（集客以外の経営課題を抱えている層）</span></p>
 
 <div class="tiles">
-<div class="tile"><div class="t-l">セッション</div><div class="t-v">560</div><div class="t-s good">前月比 +33%</div></div>
-<div class="tile"><div class="t-l">検索クリック</div><div class="t-v">280</div><div class="t-s good">前月比 +33%</div></div>
-<div class="tile"><div class="t-l">記事ストック</div><div class="t-v">9本</div><div class="t-s good">品質90点以上のみ</div></div>
-<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">28</div><div class="t-s good">ChatGPT・Perplexity等</div></div>
+<div class="tile"><div class="t-l">セッション</div><div class="t-v">0</div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">検索クリック</div><div class="t-v">94</div><div class="t-s good">前月比 -2%</div></div>
+<div class="tile"><div class="t-l">記事ストック</div><div class="t-v">2本</div><div class="t-s good">品質90点以上のみ</div></div>
+<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">0</div><div class="t-s good">ChatGPT・Perplexity等</div></div>
 </div>
-<div class="charts"><div class="chart"><div class="chart-t">セッション推移</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 150 L146 135 L247 115 L347 98 L448 76 L548 41" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="150" r="4" fill="#2563eb"/><circle cx="146" cy="135" r="4" fill="#2563eb"/><circle cx="247" cy="115" r="4" fill="#2563eb"/><circle cx="347" cy="98" r="4" fill="#2563eb"/><circle cx="448" cy="76" r="4" fill="#2563eb"/><circle cx="548" cy="41" r="4" fill="#2563eb"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">560</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div><div class="chart"><div class="chart-t">検索クリック推移</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 150 L146 135 L247 115 L347 98 L448 76 L548 41" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="150" r="4" fill="#0d9488"/><circle cx="146" cy="135" r="4" fill="#0d9488"/><circle cx="247" cy="115" r="4" fill="#0d9488"/><circle cx="347" cy="98" r="4" fill="#0d9488"/><circle cx="448" cy="76" r="4" fill="#0d9488"/><circle cx="548" cy="41" r="4" fill="#0d9488"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">280</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div></div>
-<h3>主要クエリ</h3>
-<table><tr><th>クエリ</th><th>表示</th><th>クリック</th><th>平均順位</th></tr><tr><td>corporate サンプルKW1</td><td class="num">780</td><td class="num">34</td><td class="num">6.2位</td></tr><tr><td>corporate サンプルKW2</td><td class="num">660</td><td class="num">28</td><td class="num">7.2位</td></tr><tr><td>corporate サンプルKW3</td><td class="num">540</td><td class="num">22</td><td class="num">8.2位</td></tr></table>
+<div class="charts"><p style="color:#5b6b84">データなし</p><div class="chart"><div class="chart-t">検索クリック推移</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 56 L146 94 L247 77 L347 41 L448 55 L548 58" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="56" r="4" fill="#0d9488"/><circle cx="146" cy="94" r="4" fill="#0d9488"/><circle cx="247" cy="77" r="4" fill="#0d9488"/><circle cx="347" cy="41" r="4" fill="#0d9488"/><circle cx="448" cy="55" r="4" fill="#0d9488"/><circle cx="548" cy="58" r="4" fill="#0d9488"/><text x="548" y="48" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">94</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div></div>
+<h3>主要クエリ（上位3）</h3>
+<table><tr><th>クエリ</th><th style="width:13%">表示</th><th style="width:13%">クリック</th>
+<th style="width:11%">CTR</th><th style="width:13%">平均順位</th></tr><tr><td>セブンセンシズ株式会社</td><td class="num">117</td><td class="num">55</td><td class="num">47.0%</td><td class="num">1.1位</td></tr><tr><td>セブンセンシズ</td><td class="num">490</td><td class="num">7</td><td class="num">1.4%</td><td class="num">8.3位</td></tr><tr><td>原口優</td><td class="num">22</td><td class="num">1</td><td class="num">4.5%</td><td class="num">1.5位</td></tr><tr><td>株式会社セブンセンシズ</td><td class="num">21</td><td class="num">1</td><td class="num">4.8%</td><td class="num">7.0位</td></tr><tr><td>7センス</td><td class="num">1</td><td class="num">0</td><td class="num">0%</td><td class="num">4位</td></tr></table>
+<div class="callout"><b>このサイトの役割:</b> 店舗経営の実務（人材・オペレーション・店舗DX）と業種別の導入事例を担当します。
+他サイトの領域（AIO・LLMO・SEO・MEOの手法解説、補助金の申請手続き）は
+主題にせず、必要な場合は該当サイトへリンクで送客します。</div>
 </div>
 <div class="sheet">
-<div class="sec"><span class="no">05</span><h2>AI導入補助金サポート</h2><div class="gold"></div></div>
-<p class="lead">AI導入補助金・IT導入補助金の活用<br><span class="dim">lp.7senses.co.jp</span></p>
-
+<div class="sec"><span class="no">11</span><h2>AI導入補助金サポート</h2><div class="gold"></div></div>
+<p class="lead">AI導入補助金・IT導入補助金の活用<br><span class="dim">lp.7senses.co.jp｜想定読者: 補助金を使ってAI・ITツールを導入したい中小企業の経営者</span></p>
+<div class="warn">データ未取得: GA4プロパティID未設定 / Search Consoleの権限未付与<br>サービスアカウント <b>aio-report@ss-aio-media.iam.gserviceaccount.com</b> にGA4「閲覧者」・Search Console「フル」を付与すると次号から反映されます。</div>
 <div class="tiles">
-<div class="tile"><div class="t-l">セッション</div><div class="t-v">410</div><div class="t-s good">前月比 +37%</div></div>
-<div class="tile"><div class="t-l">検索クリック</div><div class="t-v">205</div><div class="t-s good">前月比 +37%</div></div>
-<div class="tile"><div class="t-l">記事ストック</div><div class="t-v">6本</div><div class="t-s good">品質90点以上のみ</div></div>
-<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">20</div><div class="t-s good">ChatGPT・Perplexity等</div></div>
+<div class="tile"><div class="t-l">セッション</div><div class="t-v"><span class="na">権限付与待ち</span></div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">検索クリック</div><div class="t-v"><span class="na">権限付与待ち</span></div><div class="t-s good">前月比 ―</div></div>
+<div class="tile"><div class="t-l">記事ストック</div><div class="t-v">0本</div><div class="t-s good">品質90点以上のみ</div></div>
+<div class="tile"><div class="t-l">AI経由参照</div><div class="t-v">—</div><div class="t-s good">ChatGPT・Perplexity等</div></div>
 </div>
-<div class="charts"><div class="chart"><div class="chart-t">セッション推移</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 160 L146 149 L247 132 L347 109 L448 78 L548 41" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="160" r="4" fill="#2563eb"/><circle cx="146" cy="149" r="4" fill="#2563eb"/><circle cx="247" cy="132" r="4" fill="#2563eb"/><circle cx="347" cy="109" r="4" fill="#2563eb"/><circle cx="448" cy="78" r="4" fill="#2563eb"/><circle cx="548" cy="41" r="4" fill="#2563eb"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">410</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div><div class="chart"><div class="chart-t">検索クリック推移</div><svg viewBox="0 0 560 210"><line x1="46" y1="180" x2="548" y2="180" stroke="#e3eaf3"/><line x1="46" y1="140" x2="548" y2="140" stroke="#e3eaf3"/><line x1="46" y1="100" x2="548" y2="100" stroke="#e3eaf3"/><line x1="46" y1="60" x2="548" y2="60" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 160 L146 149 L247 132 L347 109 L448 78 L548 41" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="160" r="4" fill="#0d9488"/><circle cx="146" cy="149" r="4" fill="#0d9488"/><circle cx="247" cy="132" r="4" fill="#0d9488"/><circle cx="347" cy="109" r="4" fill="#0d9488"/><circle cx="448" cy="78" r="4" fill="#0d9488"/><circle cx="548" cy="41" r="4" fill="#0d9488"/><text x="548" y="31" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">205</text><text x="46" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-01</text><text x="146" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="247" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="347" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="448" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="548" y="202" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text></svg></div></div>
-<h3>主要クエリ</h3>
-<table><tr><th>クエリ</th><th>表示</th><th>クリック</th><th>平均順位</th></tr><tr><td>subsidy サンプルKW1</td><td class="num">780</td><td class="num">34</td><td class="num">6.2位</td></tr><tr><td>subsidy サンプルKW2</td><td class="num">660</td><td class="num">28</td><td class="num">7.2位</td></tr><tr><td>subsidy サンプルKW3</td><td class="num">540</td><td class="num">22</td><td class="num">8.2位</td></tr></table>
+
+<h3>主要クエリ（上位3）</h3>
+<table><tr><th>クエリ</th><th style="width:13%">表示</th><th style="width:13%">クリック</th>
+<th style="width:11%">CTR</th><th style="width:13%">平均順位</th></tr><tr><td colspan="5">検索データは権限付与後に表示されます</td></tr></table>
+<div class="callout"><b>このサイトの役割:</b> AI導入補助金・IT導入補助金の活用を担当します。
+他サイトの領域（AIO・LLMO・SEO・MEOの手法解説、人材採用・オペレーション）は
+主題にせず、必要な場合は該当サイトへリンクで送客します。</div>
 </div>
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
+<p class="lead">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。
+ゼロクリック時代の新しい流入経路であり、3サイト共通の中核戦略です。</p>
+<div class="tiles">
+<div class="tile"><div class="t-l">AI経由セッション</div><div class="t-v">0</div><div class="t-s good">3サイト合計</div></div>
+<div class="tile"><div class="t-l">全体に占める比率</div><div class="t-v">0%</div><div class="t-s good">対セッション</div></div>
+<div class="tile"><div class="t-l">実装済みAIO施策</div><div class="t-v">12項目</div><div class="t-s good">全記事に標準適用</div></div>
+<div class="tile"><div class="t-l">AIクローラー許可</div><div class="t-v">6種</div><div class="t-s good">GPTBot・ClaudeBot等</div></div>
+</div>
+<h3>プラットフォーム別の内訳（3サイト合計）</h3>
+<p class="dim" style="font-size:9pt">データなし</p>
+<h3>サイト別のAI経由参照</h3>
+<div class="heat"><div class="hm-row"><div class="hm-l">AI集客ラボ</div><div class="hm-t"><div class="hm-b" style="width:2%;background:#2563eb"></div></div><div class="hm-v">0<span class="dim"> (0%)</span></div></div><div class="hm-row"><div class="hm-l">セブンセンシズ コーポレートサイ</div><div class="hm-t"><div class="hm-b" style="width:2%;background:#2563eb"></div></div><div class="hm-v">0<span class="dim"> (0%)</span></div></div><div class="hm-row"><div class="hm-l">AI導入補助金サポート</div><div class="hm-t"><div class="hm-b" style="width:2%;background:#2563eb"></div></div><div class="hm-v">0<span class="dim"> (0%)</span></div></div></div>
+<div class="callout"><b>この数字の意味:</b> AI経由の訪問者は「AIの回答で自社を知り、確かめに来た」
+<b>確度の高い見込み客</b>です。ChatGPT比率が高い場合はサイト外の言及（プレスリリース・寄稿）を、
+Perplexity比率が高い場合は記事の鮮度更新を強化するのが定石です。</div>
+<p class="note">実装済みAIO施策: 冒頭断言回答 / 見出し直下の1文結論 / FAQ構造化 / 出典付き数値 /
+llms.txt / robots.txtでのAI許可 / 構造化データ4種 / 監修者情報 / 鮮度表記 / 定義ブロック /
+比較表 / 対象読者の明記</p>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">13</span><h2>サイト間の相互送客</h2><div class="gold"></div></div>
+<p class="lead">3サイトは競合させない一方で、<b>互いに送客し合う</b>ことで全体の成果を高めます。
+記事本文から他サイトへのリンクがどれだけ張られているかを実測しました。</p>
+<table><tr><th style="width:32%">リンク先ドメイン</th><th style="width:16%">本文中のリンク数</th><th>状態</th></tr><tr><td>ai.7senses.co.jp</td><td class="num">7</td><td>相互送客できています</td></tr><tr><td>www.7senses.co.jp</td><td class="num">0</td><td>リンクがありません。関連記事から送客導線を追加します</td></tr><tr><td>lp.7senses.co.jp</td><td class="num">0</td><td>リンクがありません。関連記事から送客導線を追加します</td></tr></table>
+<h3>なぜ相互送客が重要か</h3>
+<ul style="font-size:9.4pt">
+  <li><b>読者の課題は1つではない</b> — 集客に悩む経営者は、人材にも資金にも悩んでいます。
+  適切なサイトへ案内できれば、グループ全体での接点が増えます。</li>
+  <li><b>指名検索が増える</b> — 複数の入口で社名に触れることで、後日「セブンセンシズ」で
+  直接検索される確率が上がります。これはAI検索でも評価される信号です。</li>
+  <li><b>ドメイン間の関連性が伝わる</b> — 同一企業の関連サイトであることが検索エンジンに伝わり、
+  それぞれの専門性がより明確に評価されます。</li>
+</ul>
+<div class="callout"><b>運用方針:</b> リンクは記事の文脈に沿った場所にのみ設置します。
+関係のない場所への機械的なリンクは、読者にとって邪魔になるうえ検索評価にも逆効果です。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">14</span><h2>グループ全体の改善プラン</h2><div class="gold"></div></div>
+<p class="lead">データから機械的に抽出した、今月取り組むべき項目です。優先度の高い順に並んでいます。</p>
+<table><tr><th style="width:8%">優先度</th><th style="width:24%">対象</th>
+<th style="width:30%">現状（データ根拠）</th><th>改善アクション</th></tr><tr><td><span class="pri pri-中">中</span></td><td>セブンセンシズ コーポレートサイト</td><td>記事2本（面が狭い）</td><td>このサイトの担当テーマで記事本数を優先配分し、10本以上の面を作る</td></tr><tr><td><span class="pri pri-高">高</span></td><td>AI導入補助金サポート</td><td>計測データが取得できていない</td><td>サービスアカウントにGA4「閲覧者」・Search Console「フル」を付与する。計測できない期間は改善の判断ができない</td></tr></table>
+<div class="callout"><b>実施について:</b> ここに挙げた改善は、翌月の運用の中で当社が実施します。
+記事の修正・内部リンクの追加・導線の変更は月額費用に含まれており、追加料金はかかりません。
+実施結果は翌月号で効果を検証します。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">15</span><h2>来月のKPI目標</h2><div class="gold"></div></div>
+<p class="lead">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と
+「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
+<table><tr><th>指標</th><th style="width:15%">当月実績</th><th style="width:15%">来月目標</th>
+<th>目標の根拠</th></tr><tr><td>セッション</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">100</td><td>記事数の増加と順位上昇の複利。前月比+30%または+100の大きい方</td></tr><tr><td>検索クリック</td><td class="num">94</td><td class="num" style="color:#067647;font-weight:bold">154</td><td>新規記事のインデックス進行とリライトによるCTR改善</td></tr><tr><td>CV</td><td class="num">0件</td><td class="num" style="color:#067647;font-weight:bold">2件</td><td>記事からLPへの導線改善による転換率向上</td></tr><tr><td>AI経由参照</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">5</td><td>記事の蓄積とllms.txt更新によるAI引用の積み上がり</td></tr><tr><td>公開記事（3サイト合計）</td><td class="num">19本</td><td class="num" style="color:#067647;font-weight:bold">79本</td><td>月60本の生成体制の定常値（品質90点以上のみ）</td></tr></table>
+<div class="sec" style="margin-top:16px"><span class="no">16</span>
+<h2>実行スケジュール</h2><div class="gold"></div></div>
+<table><tr><th style="width:14%">時期</th><th style="width:30%">実施内容</th><th>狙い</th></tr>
+<tr><td>毎日</td><td>3サイト合計で記事を生成・公開</td><td>テーマの面を広げ、AI引用の入口を増やす</td></tr>
+<tr><td>毎日</td><td>Google・Bingへの即時通知とKPI集計</td><td>インデックスを早め、変化を毎日把握する</td></tr>
+<tr><td>毎週</td><td>順位11〜30位の記事をリライト</td><td>2ページ目から1ページ目へ。最も費用対効果が高い作業</td></tr>
+<tr><td>毎週</td><td>サイト内・サイト横断の重複検査</td><td>自社サイト同士の評価の奪い合いを未然に防ぐ</td></tr>
+<tr><td>毎週</td><td>内部リンクの最適化と鮮度更新</td><td>サイト全体の評価を底上げし、AI検索の鮮度評価に対応</td></tr>
+<tr><td>毎月</td><td>本レポートの発行と改善の実施</td><td>数字の報告で終わらせず、翌月の行動に落とす</td></tr>
+</table>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">17</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
+<p class="lead">数字を正しく受け取っていただくために、知っておいていただきたい前提をまとめます。</p>
+<table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr><tr><td style="white-space:nowrap"><b>単月の増減だけで判断しない</b></td><td>検索は季節性とアルゴリズム更新で単月±20%程度動きます。3ヶ月の傾向線で見るのが実務的です。</td></tr><tr><td style="white-space:nowrap"><b>Search Consoleは3日遅れ</b></td><td>月末付近の数値は確定前のため、翌月号で微増することがあります。</td></tr><tr><td style="white-space:nowrap"><b>AI経由は過小評価になりやすい</b></td><td>ChatGPT等はリファラーを送らない場合があり、実際の影響は計測値より大きい可能性があります。</td></tr><tr><td style="white-space:nowrap"><b>3サイトは役割が異なる</b></td><td>補助金サイトは申請時期、コーポレートは採用時期など、サイトごとに需要の山が異なります。合計値だけでなくサイト別の推移も併せてご覧ください。</td></tr></table>
+<div class="callout"><b>判断のしかた:</b> 単月の数字が下がっても、施策が間違っているとは限りません。
+逆に単月で上がっても、それが施策の成果とは限りません。
+<b>3ヶ月の傾向線</b>と<b>順位・CTRという原因側の指標</b>で判断するのが、この事業の正しい見方です。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">18</span><h2>付録: 指標の定義</h2><div class="gold"></div></div>
+<table>
+<tr><td style="width:26%"><b>セッション</b></td><td>サイトへの訪問回数。1人が朝と夜に見れば2セッション</td></tr>
+<tr><td><b>CV（コンバージョン）</b></td><td>無料相談・資料ダウンロードなど、成果地点への到達件数</td></tr>
+<tr><td><b>表示回数</b></td><td>Google検索結果に自社ページが表示された回数</td></tr>
+<tr><td><b>CTR</b></td><td>表示回数のうちクリックされた割合。タイトル改善で伸ばせる</td></tr>
+<tr><td><b>平均掲載順位</b></td><td>検索結果での平均的な表示位置。小さいほど上位</td></tr>
+<tr><td><b>AI経由参照</b></td><td>ChatGPT・Perplexity等のAIサービスからの流入</td></tr>
+<tr><td><b>AIO / LLMO</b></td><td>AI検索の回答に引用されるための最適化</td></tr>
+<tr><td><b>領域侵食</b></td><td>あるサイトが他サイトの担当テーマを扱ってしまうこと。検索評価の奪い合いにつながる</td></tr>
+<tr><td><b>品質スコア</b></td><td>6観点の採点（100点満点）。90点未満は公開されない</td></tr>
+<tr><td><b>KW台帳</b></td><td>3サイト分のキーワードを一元管理する表。重複防止の要</td></tr>
+</table>
+<h3>データソース</h3>
+<p class="note">Google Analytics 4（セッション・CV・AI参照元）／Google Search Console（表示・クリック・CTR・順位・クエリ）／
+運用台帳（記事作成・品質審査・キーワード管理）。AI経由参照は chatgpt.com・chat.openai.com・perplexity.ai・
+gemini.google.com・copilot.microsoft.com・claude.ai からの参照流入の合計です。数値は月初〜月末の集計です。</p>
+</div>
+
 <div class="sheet back">
   <img class="lg" src="data:image/png;base64,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">
   <div style="font-size:13pt;font-weight:bold;">セブンセンシズ株式会社</div>
   <div class="s">〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>
   TEL 06-4305-7547（9:00〜20:00 / 土日祝休）<br>
   ai.7senses.co.jp ｜ lp.7senses.co.jp ｜ www.7senses.co.jp<br><br>
-  本レポートは自動集計・自動作成されています。<br>次号は翌月1日に自動発行されます。</div>
+  本レポートは自動集計・自動作成されています。<br>
+  ご質問・追加分析のご要望はお気軽にお申し付けください。<br>次号は翌月1日に自動発行されます。</div>
 </div>
 </body></html>
