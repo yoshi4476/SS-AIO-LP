@@ -34,3 +34,4 @@
 - [予約につながる導線設計とは？離脱を防ぐ5つの視点](https://ai.7senses.co.jp/seo/yoyaku-tsunagaru-dosen-sekkei/): クリニック・士業事務所の予約フォーム離脱を防ぐ導線設計の5つの視点と整備手順を解説
 - [美容室スタッフの定着率を上げる5つの施策とは](https://ai.7senses.co.jp/meo/biyoushitsu-staff-teichakuritsu/): 3,200店舗以上の支援実績をもとに美容室のスタッフ定着率を上げる採用・教育・評価の実践施策を解説
 - [飲食店のアルバイト採用のコツとは？応募を増やす7つの実践法](https://ai.7senses.co.jp/meo/inshokuten-arubaito-saiyou-kotsu/): 応募を増やす求人票の書き方から早期離職を防ぐ定着施策まで飲食店のアルバイト採用の実務を解説
+- [医療広告ガイドラインとは？クリニックHPの禁止6表現](https://ai.7senses.co.jp/seo/iryou-koukoku-guideline-web/): 厚労省の医療広告ガイドラインで禁止される6類型と自由診療の限定解除4要件を実務目線で解説
