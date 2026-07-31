@@ -36,3 +36,4 @@
 - [飲食店のアルバイト採用のコツとは？応募を増やす7つの実践法](https://ai.7senses.co.jp/meo/inshokuten-arubaito-saiyou-kotsu/): 応募を増やす求人票の書き方から早期離職を防ぐ定着施策まで飲食店のアルバイト採用の実務を解説
 - [医療広告ガイドラインとは？クリニックHPの禁止6表現](https://ai.7senses.co.jp/seo/iryou-koukoku-guideline-web/): 厚労省の医療広告ガイドラインで禁止される6類型と自由診療の限定解除4要件を実務目線で解説
 - [病院の口コミ返信例文8選｜低評価・クレームの型](https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/): 守秘義務と医療広告ガイドラインに配慮した病院・クリニック向け口コミ返信例文8パターンを解説
+- [AI導入補助金のAI活用事例5選【2026年最新】](https://ai.7senses.co.jp/ai-marketing/ai-donyu-hojokin-jirei/): AI導入補助金2026の補助額・5つの申請枠とAI活用の採択事例5選、対象経費、申請の流れを解説

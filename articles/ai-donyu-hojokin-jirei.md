@@ -3,7 +3,7 @@ title: AI導入補助金のAI活用事例5選【2026年最新】
 description: AI導入補助金（デジタル化・AI導入補助金2026）でAI活用に成功した中小企業の実例と、対象になりやすいAI活用のパターンを5つ紹介します。補助額450万円・採択率のデータ、対象経費、申請の流れまで2026年度の最新情報で解説します。
 slug: ai-donyu-hojokin-jirei
 keyword: AI導入補助金 AI 活用 事例
-category: hojokin
+category: ai-marketing
 date: 2026-07-31
 modified: 2026-07-31
 eyecatch: /images/ai-donyu-hojokin-jirei/eyecatch.png
