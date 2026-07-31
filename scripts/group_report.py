@@ -459,7 +459,10 @@ body {{ font-family:"Yu Gothic","Meiryo",sans-serif; color:#10203a; font-size:10
 .sheet:last-child {{ page-break-after:auto; }}
 .cover {{ background:linear-gradient(150deg,#071a38,{NAVY} 45%,#14345c); color:#fff;
   display:flex; flex-direction:column; padding:22mm 20mm; }}
-.lg {{ height:34px; }} .cv-g {{ width:64px;height:4px;background:{GOLD};margin:10mm 0 6mm; }}
+/* 縦並びのflex内では既定で横に引き伸ばされるため、align-selfで実寸比率を保つ */
+.lg {{ height:34px;width:auto;align-self:flex-start;flex:0 0 auto; }}
+.back .lg {{ align-self:center; }}
+.cv-g {{ width:64px;height:4px;background:{GOLD};margin:10mm 0 6mm; }}
 .kick {{ letter-spacing:.35em;font-size:9pt;color:#93b4e8; }}
 .ttl {{ font-size:26pt;font-weight:900;line-height:1.42;margin-top:4mm; }}
 .mon {{ font-size:15pt;color:{GOLD};font-weight:bold;margin-top:3mm;letter-spacing:.1em; }}

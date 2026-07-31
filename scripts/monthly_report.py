@@ -852,7 +852,7 @@ def svg_line(months, key, color, title, unit=""):
     vals = [m.get(key, 0) or 0 for m in months]
     if not any(vals):
         return f'<p style="color:{MUTED}">データなし</p>'
-    W, H, PL, PB = 560, 210, 46, 30
+    W, H, PL, PB = 560, 270, 46, 32
     mx = max(vals) * 1.15
     pts = [(PL + i * (W - PL - 12) / (len(vals) - 1), H - PB - (v / mx) * (H - PB - 20))
            for i, v in enumerate(vals)]
@@ -995,7 +995,7 @@ def render(d, a):
 
     qrows = "".join(f'<tr><td>{q["q"]}</td><td class="num">{q["imp"]:,}</td><td class="num">{q["clicks"]:,}</td>'
                     f'<td class="num">{q["ctr"]}%</td><td class="num">{q["pos"]}位</td></tr>'
-                    for q in d.get("queries", []))
+                    for q in d.get("queries", [])[:8])
     prows = "".join(f'<tr><td style="word-break:break-all">{p["path"]}</td><td class="num">{p["imp"]:,}</td>'
                     f'<td class="num">{p["clicks"]:,}</td><td class="num">{p["ctr"]}%</td><td class="num">{p["pos"]}位</td></tr>'
                     for p in d.get("pages", [])) or '<tr><td colspan="5">当月のページ別データはまだありません</td></tr>'
@@ -1107,12 +1107,21 @@ def render(d, a):
                 f'<td style="white-space:nowrap">{x["kind"]}</td>'
                 f'<td>{x["now"]}</td><td>{x["fix"]}</td></tr>')
 
-    MEDIA_PER_PAGE = 5
+    # 1ページ7件まで。あふれが3件以下なら次章の冒頭へ回し、薄いページを作らない
+    MEDIA_PER_PAGE = 7
     mp = a["media_plan"]
     media_rows = "".join(_media_row(x) for x in mp[:MEDIA_PER_PAGE])
-    media_extra = ""
-    for n_, i in enumerate(range(MEDIA_PER_PAGE, len(mp), MEDIA_PER_PAGE), 2):
-        media_extra += f"""
+    rest_mp = mp[MEDIA_PER_PAGE:]
+    media_extra, media_carry = "", ""
+    if 0 < len(rest_mp) <= 2:
+        media_carry = f"""<h3 style="margin-top:0">オウンドメディア改修プラン（続き）</h3>
+<table><tr><th style="width:20%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:28%">現状（実測）</th><th>変更内容</th></tr>
+{"".join(_media_row(x) for x in rest_mp)}</table>
+<h3>LPの改修プラン</h3>"""
+    elif rest_mp:
+        for n_, i in enumerate(range(MEDIA_PER_PAGE, len(mp), MEDIA_PER_PAGE), 2):
+            media_extra += f"""
 <div class="sheet">
 <div class="sec"><span class="no">11</span><h2>オウンドメディアの改修プラン（続き {n_}）</h2><div class="gold"></div></div>
 <table><tr><th style="width:20%">対象</th><th style="width:14%">改修の種類</th>
@@ -1153,6 +1162,15 @@ def render(d, a):
         ("E-E-A-T", "経験・専門性・権威性・信頼性。Googleの品質評価基準"),
         ("リライト", "既存記事の加筆・修正。順位11〜30位の記事が最も効果的"),
         ("品質スコア", "当社の6観点採点（100点満点）。90点未満は公開されない"),
+        ("エンゲージメント率", "10秒以上の滞在・2ページ以上の閲覧・CVのいずれかが起きた訪問の割合"),
+        ("1訪問あたりPV", "1回の訪問で何ページ見たか。関連記事への導線が効いているかを表す"),
+        ("新規ユーザー比率", "初めて訪れた人の割合。下がるほどリピーターが育っている"),
+        ("順位帯", "検索順位を1〜3位・4〜10位・11〜20位などに区切った分類。11〜20位が最も改善効果が大きい"),
+        ("入口ページ", "訪問者が最初に開いたページ。どの記事が集客の入口になっているかが分かる"),
+        ("到達率", "LPの各セクションが画面に表示された訪問の割合。どこで離脱したかが分かる"),
+        ("広告換算額", "同じ流入を広告で購入した場合の金額。記事の資産価値を示す目安"),
+        ("インデックス", "検索エンジンがページを認識し、検索結果に出せる状態にすること"),
+        ("カニバリゼーション", "自社の記事同士が同じキーワードで競合し、互いの順位を下げ合う状態"),
     ]
     gloss_rows = "".join(f'<tr><td style="white-space:nowrap"><b>{k}</b></td><td>{v}</td></tr>'
                          for k, v in glossary)
@@ -1199,7 +1217,8 @@ body {{ font-family: "Yu Gothic", "Meiryo", sans-serif; color: #10203a; font-siz
 .cv-kicker {{ letter-spacing: .35em; font-size: 9pt; color: #93b4e8; }}
 .cv-title {{ font-size: 27pt; font-weight: bold; line-height: 1.4; margin-top: 4mm; }}
 .cv-month {{ font-size: 15pt; color: var(--gold); font-weight: bold; margin-top: 3mm; letter-spacing: .1em; }}
-.cv-logo {{ height: 34px; width: auto; }}
+/* 縦並びのflex内では既定で横に引き伸ばされるため、align-selfで実寸比率を保つ */
+.cv-logo {{ height: 34px; width: auto; align-self: flex-start; flex: 0 0 auto; }}
 .cv-meta {{ margin-top: auto; font-size: 9.5pt; color: #bcd0ee; line-height: 2.1; border-top: 1px solid rgba(255,255,255,.25); padding-top: 6mm; }}
 .cv-meta b {{ color: #fff; }}
 .cv-badges {{ display: flex; gap: 8px; margin-top: 8mm; flex-wrap: wrap; }}
@@ -1252,15 +1271,15 @@ tr:nth-child(even) td {{ background: #f7fafd; }}
 
 /* ---- ヒートマップ・ファネル ---- */
 .heatmap {{ border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }}
-.hm-row {{ display: flex; align-items: center; gap: 8px; margin: 4px 0; }}
+.hm-row {{ display: flex; align-items: center; gap: 8px; margin: 2px 0; }}
 .hm-label {{ width: 110px; font-size: 8.5pt; }}
 .hm-track {{ flex: 1; background: #eef2f8; border-radius: 4px; height: 13px; }}
 .hm-bar {{ height: 13px; border-radius: 4px; }}
 .hm-val {{ width: 40px; text-align: right; font-size: 8.5pt; font-weight: bold; }}
-.funnel {{ border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }}
+.funnel {{ border: 1px solid var(--line); border-radius: 8px; padding: 9px 16px; }}
 .fn-row {{ margin: 2px 0; }}
 .fn-bar {{ background: linear-gradient(90deg, var(--navy), var(--blue)); color: #fff; border-radius: 6px;
-  padding: 7px 12px; display: flex; justify-content: space-between; font-size: 9.5pt; min-width: 130px; }}
+  padding: 5px 12px; display: flex; justify-content: space-between; font-size: 9.5pt; min-width: 130px; }}
 .fn-drop {{ font-size: 8pt; color: #b91c1c; font-weight: bold; padding: 1px 0 1px 8px; }}
 
 /* ---- その他 ---- */
@@ -1351,6 +1370,20 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <p style="font-size:9.5pt">セッションやPVは「結果」であり、動かすには原因側の指標を見る必要があります。
 <b>順位</b>は露出量を決め、<b>CTR</b>は露出をクリックに変える効率、<b>CV率</b>はクリックを成果に変える効率、
 <b>AI経由比率</b>は次の時代への適応度を表します。この4つが改善すれば、セッションとCVは後から付いてきます。</p>
+<h3>指標どうしの関係</h3>
+<table>
+<tr><th style="width:26%">上げたい結果</th><th style="width:26%">直接効く指標</th><th>動かす方法</th></tr>
+<tr><td><b>クリック数を増やす</b></td><td>順位 と CTR</td>
+<td>順位は本文の加筆と内部リンク、CTRはタイトルと説明文。CTRのほうが早く効きます</td></tr>
+<tr><td><b>CVを増やす</b></td><td>CV率 と クリック数</td>
+<td>CV率は記事内CTAとLPの導線。CV率が倍になれば成果も倍になります</td></tr>
+<tr><td><b>AI検索で引用される</b></td><td>順位 と 構造</td>
+<td>Googleで上位に入るのが前提。そのうえで結論の書き方とFAQ整備が効きます</td></tr>
+</table>
+<div class="callout"><b>「結果」ではなく「原因」を見る:</b> セッション数が下がったとき、
+セッション数そのものを見ても打ち手は出てきません。順位が下がったのか、CTRが落ちたのか、
+それとも季節要因かを切り分けて初めて、次の行動が決まります。
+本レポートが原因側の指標を先に置いているのはそのためです。</div>
 </div>
 
 <!-- KPIダッシュボード -->
@@ -1379,6 +1412,20 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
   <div><h3>🏅 勝ちクエリ（横展開する）</h3><ul>{winner_rows}</ul></div>
   <div><h3>🎯 テコ入れクエリ（リライト対象）</h3><ul>{challenger_rows}</ul></div>
 </div>
+<h3 style="margin-top:14px">クエリの読み解き方</h3>
+<table>
+<tr><th style="width:24%">状態</th><th style="width:26%">見分け方</th><th>打ち手</th></tr>
+<tr><td><b>勝っている</b></td><td>10位以内かつCTR3.5%以上</td>
+<td>この記事の構成（冒頭の結論・FAQ・出典付きデータ）を新規記事の型として横展開します</td></tr>
+<tr><td><b>惜しい</b></td><td>11〜20位で表示回数が多い</td>
+<td>最も伸びしろが大きい層。見出しを追加し内部リンクを増やして1ページ目を狙います</td></tr>
+<tr><td><b>選ばれていない</b></td><td>順位は良いがCTRが低い</td>
+<td>順位を上げる必要はありません。タイトルと説明文だけを直せばクリックが増えます</td></tr>
+<tr><td><b>意図がズレている</b></td><td>表示は多いがクリックがほぼ無い</td>
+<td>検索している人が求めるものと記事の中身が違います。記事の主題を見直すか、別記事に分けます</td></tr>
+</table>
+<p class="note">優先順位: 同じ工数なら「選ばれていない」→「惜しい」→「意図がズレている」の順で着手します。
+タイトル修正は効果が早く、順位を動かすリライトは数週間かかるためです。</p>
 </div>
 
 <!-- ページ: 記事別パフォーマンス+サイト資産 -->
@@ -1423,6 +1470,23 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 </div>
 <h3>プラットフォーム別内訳</h3>
 {ai_bars(d.get("ai_breakdown", []), ai_total)}
+<h3 style="margin-top:14px">AI検索対応の実装状況（全記事に適用）</h3>
+<table>
+<tr><th style="width:30%">実装項目</th><th style="width:10%">状態</th><th>内容と狙い</th></tr>
+<tr><td>冒頭200字の断言型回答</td><td><span class="jd jd-良好">実装済</span></td>
+<td>「◯◯は◯◯です」で書き始める。AIが最も抜き出しやすい形で結論を置く</td></tr>
+<tr><td>見出し直下の1文結論</td><td><span class="jd jd-良好">実装済</span></td>
+<td>40〜60字。その1文だけ切り出しても意味が通るため、AIの回答にそのまま採用されやすい</td></tr>
+<tr><td>FAQ構造化（5問以上）</td><td><span class="jd jd-良好">実装済</span></td>
+<td>本文と構造化データを完全一致させる。不一致はスパム判定のリスクがある</td></tr>
+<tr><td>出典付きの数値ファクト</td><td><span class="jd jd-良好">実装済</span></td>
+<td>1記事3箇所以上。AIは数値付きの断定文を優先的に引用する</td></tr>
+<tr><td>llms.txt / AIクローラー許可</td><td><span class="jd jd-良好">6種</span></td>
+<td>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended・Bingbot を明示的に許可。
+ここをブロックしていると順位が高くてもAIに引用されない</td></tr>
+<tr><td>構造化データ / 鮮度表記</td><td><span class="jd jd-良好">4種</span></td>
+<td>記事情報・FAQ・パンくず・手順。あわせて「◯年◯月時点」を明記し、AI検索の鮮度評価に対応</td></tr>
+</table>
 <h3 style="margin-top:14px">この数字の意味と次の一手</h3>
 <div class="callout">AI経由の訪問者は「AIの回答で自社を知り、確かめに来た」<b>非常に確度の高い見込み客</b>です。
 ChatGPT比率が高い場合はサイト外の言及（プレスリリース・寄稿）を、Perplexity比率が高い場合は記事の鮮度更新を強化するのが定石です。
@@ -1462,6 +1526,22 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 記事は<b>公開後も検索とAI回答の両方から流入を生み続けます</b>。
 上の金額は「今月分」であり、来月も同じ記事が同じように働きます。
 記事が積み上がるほど、この金額は複利のように増えていきます。</p>
+<h3>記事が積み上がるとどうなるか</h3>
+<table>
+<tr><th style="width:16%">時点</th><th style="width:18%">累計記事数</th>
+<th style="width:22%">月間の広告換算額</th><th>状態</th></tr>
+<tr><td>現在</td><td class="num">{a["assets"]["count"]}本</td>
+<td class="num">約{eff["ad_value"]:,}円</td><td>立ち上げ期。順位が安定し始める段階</td></tr>
+<tr><td>6ヶ月後</td><td class="num">約{a["assets"]["count"] + 360}本</td>
+<td class="num">約{eff["per_article_value"] * (a["assets"]["count"] + 360):,}円</td>
+<td>面が広がり、複数キーワードで上位が取れ始める</td></tr>
+<tr><td>12ヶ月後</td><td class="num">約{a["assets"]["count"] + 720}本</td>
+<td class="num">約{eff["per_article_value"] * (a["assets"]["count"] + 720):,}円</td>
+<td>ドメイン全体の評価が上がり、新記事の立ち上がりも速くなる</td></tr>
+</table>
+<p class="note">※ 月60本のペースで、1記事あたりの価値が現在の水準を保った場合の試算です。
+実際には記事が増えるほど内部リンクが増え、ドメイン評価が上がるため、1本あたりの価値も上昇する傾向があります。
+一方で、古い記事の情報が古くなると価値が落ちるため、週次のリライトで維持します。</p>
 <div class="callout"><b>換算の前提:</b> クリック単価は{eff["cpc"]}円で計算しています。
 AIO・SEO・MEO関連のキーワードは競合が多く、実際のリスティング広告では
 1クリック500〜1,000円以上になることも珍しくありません。
@@ -1540,23 +1620,23 @@ generate_lead は送信完了を表します。押されているのに送信ま
 すべて当社が翌月の運用の中で実施します。</p>
 <table><tr><th style="width:20%">対象</th><th style="width:14%">改修の種類</th>
 <th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{media_rows}</table>
-<div class="callout"><b>改修の優先順位:</b> ①順位11〜20位の記事のリライト → ②エンゲージメントが低い記事の冒頭改善
-→ ③CVが出ていない記事の導線改善 → ④薄いカテゴリの補強、の順で進めます。
-<span class="mark">新しい記事を書くより、既にある記事を直すほうが早く成果が出る</span>ためです。</div>
+<p class="note">改修の優先順位: ①順位11〜20位のリライト → ②エンゲージメントが低い記事の冒頭改善
+→ ③CVが出ていない記事の導線改善 → ④薄いカテゴリの補強。
+新しい記事を書くより、既にある記事を直すほうが早く成果が出るためです。</p>
 </div>
 {media_extra}
 
 <!-- LP改修プラン -->
 <div class="sheet">
 <div class="sec"><span class="no">12</span><h2>LPの改修プラン</h2><div class="gold"></div></div>
-<p style="font-size:9.5pt">記事で集めた読者を、問い合わせまで運ぶのがLPの役割です。
-どこで離脱しているかを実測し、直す場所を特定します。</p>
+{media_carry}
+<p class="note">記事で集めた読者を問い合わせまで運ぶのがLPの役割です。どこで離脱しているかを実測し、直す場所を特定します。</p>
 <table><tr><th style="width:22%">対象</th><th style="width:14%">改修の種類</th>
 <th style="width:26%">現状（実測）</th><th>変更内容</th></tr>{lpplan_rows}</table>
-<div class="callout"><b>LP改修の考え方:</b> LPは「上から順に読まれる」ものではありません。
-実際には<span class="mark">各セクションで読者が離脱するかどうかを判断</span>しています。
-到達率が大きく落ちる場所が、その判断で「読む価値なし」と思われた箇所です。
-そこを直すのが、デザイン全体を作り替えるより確実で安価な改善になります。</div>
+<p class="note">LP改修の考え方: LPは上から順に読まれるものではなく、
+各セクションで読者が「読み進めるか離脱するか」を判断しています。
+到達率が大きく落ちる場所が「読む価値なし」と判断された箇所です。
+そこを直すほうが、デザイン全体を作り替えるより確実で安価です。</p>
 </div>
 
 <!-- ページ: LPコンバージョン分析 -->
@@ -1566,7 +1646,20 @@ generate_lead は送信完了を表します。押されているのに送信ま
 {funnel_html(d.get("areas", []))}
 <h3 style="margin-top:14px">全12区画の到達ヒートマップ</h3>
 {svg_heatbars(d.get("areas", []))}
-<p class="note">■青=到達60%以上 ■水色=40-59% ■橙=20-39% ■赤=20%未満。GA4のarea_reachイベント（画面内40%表示で発火）による独自計測で、有料ヒートマップツールなしで取得しています。</p>
+<p class="note">■青=60%以上 ■水色=40-59% ■橙=20-39% ■赤=20%未満。
+GA4の独自イベント（画面内40%表示で発火）による計測で、有料ツールなしで取得しています。</p>
+<h3>この数字をどう読むか</h3>
+<table>
+<tr><th style="width:18%">到達率</th><th style="width:20%">意味</th><th>取るべき対応</th></tr>
+<tr><td><b>60%以上</b></td><td>読まれている</td><td>機能しています。文言も順序も変えません</td></tr>
+<tr><td><b>40〜59%</b></td><td>半数が離脱</td><td>見出しを利益訴求型に変え、冒頭1文で結論を出します</td></tr>
+<tr><td><b>39%以下</b></td><td>大半が未到達</td><td>順序を見直すか削ります。ここにCTAを置いても効果はありません</td></tr>
+</table>
+<h3>CVまでの導線</h3>
+<p style="font-size:9.4pt">読者がCVに至るまでには
+<b>記事を読む → LPへ移動 → LPを読み進める → フォーム到達 → 送信</b>の5段階があります。
+記事からLPへの移動が少なければ記事内のCTA文言、LP内の離脱が大きければセクション構成、
+フォーム到達後の離脱が大きければ入力項目の数が原因です。第9章で記事側、この章でLP側を分けて計測しています。</p>
 </div>
 
 <!-- ページ7: 要因分析+改善プラン -->
@@ -1620,6 +1713,34 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <p style="font-size:9.5pt">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr>{crows}</table>
 {best_html}
+<h3>公開までに通過する検査</h3>
+<table>
+<tr><th style="width:24%">検査</th><th style="width:14%">項目数</th><th>内容</th></tr>
+<tr><td><b>構成の事前審査</b></td><td>14項目</td>
+<td>書き始める前に構成を審査。見出し設計・結論の草案・出典候補・内部リンク先まで確認し、
+全項目を満たすまで執筆に入りません</td></tr>
+<tr><td><b>機械採点</b></td><td>18項目</td>
+<td>文字数・強調の数・FAQ数・リンク数・見出し構造・AI感のNGワードなど、
+数えられるものを機械が判定します</td></tr>
+<tr><td><b>6観点の採点</b></td><td>120点満点</td>
+<td>デザイン／SEO／編集／技術正確性／読者目線／AI検索対応。各20点で、
+1観点でも16点未満なら合計に関わらず不合格です</td></tr>
+<tr><td><b>公開時の物理ガード</b></td><td>90点未満は公開不可</td>
+<td>基準に届かない記事は、システム上サイトに載せられません。
+「本数が足りないから品質を落として出す」が構造的に起きない設計です</td></tr>
+</table>
+<h3>1記事に含まれるもの</h3>
+<table>
+<tr><td style="width:20%"><b>本文</b></td><td>5,000字以上</td>
+<td style="width:20%"><b>画像</b></td><td>アイキャッチ1枚＋図解3〜5枚</td></tr>
+<tr><td><b>FAQ</b></td><td>5問以上・構造化データと完全一致</td>
+<td><b>リンク</b></td><td>内部3本以上＋出典の外部リンク</td></tr>
+<tr><td><b>根拠</b></td><td>出典付きの数値ファクト3箇所以上</td>
+<td><b>導線</b></td><td>目次・CTA2箇所以上・関連記事</td></tr>
+</table>
+<div class="callout"><b>品質を数値で管理する理由:</b> 記事を大量に作るとき、最大のリスクは品質のばらつきです。
+採点を人の感覚ではなく<span class="mark">数値と項目で定義</span>しているため、
+何本作っても基準が下がりません。当月の平均は{a["assets"]["avg_score"]}点でした。</div>
 </div>
 
 <!-- ページ: 目標対比+来月スケジュール -->
@@ -1642,6 +1763,28 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <p style="font-size:9.5pt">数字を正しく受け取っていただくために、
 このレポートを読むうえで知っておいていただきたい前提をまとめます。</p>
 <table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr>{risk_rows}</table>
+<h3>成果が出るまでの一般的な流れ</h3>
+<table>
+<tr><th style="width:16%">時期</th><th style="width:30%">この時期に起きること</th><th>見るべき指標</th></tr>
+<tr><td><b>1〜2ヶ月目</b></td><td>記事のインデックス登録が進み、表示回数が増え始める</td>
+<td>表示回数とインデックス済み記事数。クリックはまだ少なくて正常です</td></tr>
+<tr><td><b>3〜4ヶ月目</b></td><td>順位が動き始め、一部のキーワードで1ページ目に入る</td>
+<td>順位帯の分布。11〜20位の本数が増えていれば順調です</td></tr>
+<tr><td><b>5〜6ヶ月目</b></td><td>クリックとセッションが伸び始める。CVが出始める</td>
+<td>クリック数とCV。ここで初めて成果が数字に表れます</td></tr>
+<tr><td><b>7ヶ月目以降</b></td><td>記事数の増加と順位上昇が重なり、伸びが加速する</td>
+<td>全指標。ドメイン評価が上がり新記事の立ち上がりも速くなります</td></tr>
+</table>
+<h3>このレポートで扱っていないこと</h3>
+<ul style="font-size:9.4pt">
+  <li><b>競合サイトの数値</b> — 他社のアクセス数や順位は正確に取得できないため、
+  推測値は載せていません。競合との比較が必要な場合は個別調査でご対応します。</li>
+  <li><b>SNSからの流入の詳細</b> — 現在の施策は検索とAI検索が中心です。
+  SNS運用を併用される場合は、計測項目を追加できます。</li>
+  <li><b>問い合わせの中身と受注率</b> — CVの件数までは計測していますが、
+  その後の商談化・受注は御社の管理範囲です。共有いただければ、
+  「どのキーワードから受注につながったか」まで分析できます。</li>
+</ul>
 <div class="callout"><b>判断のしかた:</b> 単月の数字が下がっても、施策が間違っているとは限りません。
 逆に単月で上がっても、それが施策の成果とは限りません。
 <b>3ヶ月の傾向線</b>と<b>順位・CTRという原因側の指標</b>で判断するのが、この事業の正しい見方です。

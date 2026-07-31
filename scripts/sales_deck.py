@@ -188,7 +188,9 @@ body {{ font-family: "Yu Gothic","Meiryo",sans-serif; color:#10203a; font-size:1
 .sheet:last-child {{ page-break-after:auto; }}
 .cover {{ background:linear-gradient(150deg,#071a38,{NAVY} 45%,#14345c); color:#fff;
   display:flex; flex-direction:column; padding:24mm 20mm; }}
-.lg {{ height:36px; }}
+/* 縦並びのflex内では既定で横に引き伸ばされるため、align-selfで実寸比率を保つ */
+.lg {{ height:36px;width:auto;align-self:flex-start;flex:0 0 auto; }}
+.back .lg {{ align-self:center; }}
 .cv-g {{ width:64px;height:4px;background:{GOLD};margin:12mm 0 7mm; }}
 .kick {{ letter-spacing:.32em;font-size:9pt;color:#93b4e8; }}
 .ttl {{ font-size:27pt;font-weight:900;line-height:1.45;margin-top:5mm; }}
