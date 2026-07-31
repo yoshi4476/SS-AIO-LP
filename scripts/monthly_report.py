@@ -194,6 +194,110 @@ def fetch_real():
     data["channels"] = ga_dist("sessionDefaultChannelGroup")
     data["devices"] = ga_dist("deviceCategory")
 
+    cur_m = labels[-1]
+    cur_range = [DateRange(start_date=f"{cur_m}-01", end_date="today")]
+    prev_m = labels[-2]
+    prev_end = (date(int(prev_m[:4]) + (int(prev_m[5:]) == 12),
+                     (int(prev_m[5:]) % 12) + 1, 1) - timedelta(days=1)).isoformat()
+
+    # --- ユーザーの質（滞在・回遊・新規率）。記事改修の判断材料になる ---
+    def quality(rng):
+        try:
+            rep = ga.run_report(RunReportRequest(property=prop, date_ranges=rng, metrics=[
+                Metric(name="engagementRate"), Metric(name="averageSessionDuration"),
+                Metric(name="screenPageViewsPerSession"), Metric(name="newUsers"),
+                Metric(name="totalUsers"), Metric(name="bounceRate")]))
+            r = rep.rows[0].metric_values if rep.rows else None
+            if not r:
+                return {}
+            users = float(r[4].value) or 1
+            return {"engagement": round(float(r[0].value) * 100, 1),
+                    "duration": round(float(r[1].value)),
+                    "pv_per_session": round(float(r[2].value), 2),
+                    "new_ratio": round(float(r[3].value) / users * 100),
+                    "bounce": round(float(r[5].value) * 100, 1)}
+        except Exception:
+            return {}
+    data["quality"] = quality(cur_range)
+    data["quality_prev"] = quality([DateRange(start_date=f"{prev_m}-01", end_date=prev_end)])
+
+    # --- ランディングページ別（どの記事が入口になり、質はどうか）---
+    try:
+        rep = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=cur_range,
+            dimensions=[Dimension(name="landingPage")],
+            metrics=[Metric(name="sessions"), Metric(name="engagementRate"),
+                     Metric(name="conversions"), Metric(name="averageSessionDuration")],
+            limit=12))
+        data["landing"] = [{
+            "path": r.dimension_values[0].value or "/",
+            "sessions": int(r.metric_values[0].value),
+            "engagement": round(float(r.metric_values[1].value) * 100, 1),
+            "cv": int(float(r.metric_values[2].value)),
+            "duration": round(float(r.metric_values[3].value)),
+        } for r in rep.rows]
+        data["landing"].sort(key=lambda x: -x["sessions"])
+    except Exception:
+        data["landing"] = []
+
+    # --- 地域別（商圏の把握。MEO施策の裏づけになる）---
+    try:
+        rep = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=cur_range, dimensions=[Dimension(name="city")],
+            metrics=[Metric(name="sessions")], limit=8))
+        data["cities"] = [(r.dimension_values[0].value or "(不明)",
+                           int(r.metric_values[0].value)) for r in rep.rows]
+    except Exception:
+        data["cities"] = []
+
+    # --- イベント別（CTAクリック等の行動量）---
+    try:
+        rep = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=cur_range, dimensions=[Dimension(name="eventName")],
+            metrics=[Metric(name="eventCount")], limit=10))
+        skip = {"page_view", "session_start", "first_visit", "user_engagement", "scroll"}
+        data["events"] = [(r.dimension_values[0].value, int(r.metric_values[0].value))
+                          for r in rep.rows if r.dimension_values[0].value not in skip][:6]
+    except Exception:
+        data["events"] = []
+
+    # --- GSC: 順位帯の分布（リライト対象がどれだけ眠っているかの可視化）---
+    try:
+        res = sc.searchanalytics().query(siteUrl=site, body={
+            "startDate": f"{cur_m}-01", "endDate": date.today().isoformat(),
+            "dimensions": ["query"], "rowLimit": 1000}).execute()
+        buckets = {"1〜3位": 0, "4〜10位": 0, "11〜20位": 0, "21〜50位": 0, "51位以下": 0}
+        bucket_imp = dict.fromkeys(buckets, 0)
+        for r in res.get("rows", []):
+            p, imp = r["position"], int(r["impressions"])
+            k = ("1〜3位" if p <= 3 else "4〜10位" if p <= 10 else
+                 "11〜20位" if p <= 20 else "21〜50位" if p <= 50 else "51位以下")
+            buckets[k] += 1
+            bucket_imp[k] += imp
+        data["rank_buckets"] = [(k, v) for k, v in buckets.items()]
+        data["rank_imp"] = bucket_imp
+        # 11〜20位で表示回数の多いもの＝リライトの最優先候補
+        data["rewrite_targets"] = sorted(
+            [{"q": r["keys"][0], "imp": int(r["impressions"]), "clicks": int(r["clicks"]),
+              "pos": round(r["position"], 1)}
+             for r in res.get("rows", []) if 10 < r["position"] <= 20],
+            key=lambda x: -x["imp"])[:8]
+    except Exception:
+        data["rank_buckets"], data["rank_imp"], data["rewrite_targets"] = [], {}, []
+
+    # --- GSC: デバイス別（スマホとPCで順位・CTRが違うことがある）---
+    try:
+        res = sc.searchanalytics().query(siteUrl=site, body={
+            "startDate": f"{cur_m}-01", "endDate": date.today().isoformat(),
+            "dimensions": ["device"]}).execute()
+        jp = {"MOBILE": "スマートフォン", "DESKTOP": "PC", "TABLET": "タブレット"}
+        data["gsc_devices"] = [{
+            "d": jp.get(r["keys"][0], r["keys"][0]), "imp": int(r["impressions"]),
+            "clicks": int(r["clicks"]), "ctr": round(r["ctr"] * 100, 2),
+            "pos": round(r["position"], 1)} for r in res.get("rows", [])]
+    except Exception:
+        data["gsc_devices"] = []
+
     # --- スプレッドシート: 記事作成ログ ---
     try:
         sh = build("sheets", "v4", credentials=creds)
@@ -269,6 +373,39 @@ def fetch_demo():
         "channels": [("Organic Search", 980), ("Direct", 340), ("Referral", 210),
                      ("Organic Social", 120), ("Email", 70)],
         "devices": [("mobile", 1030), ("desktop", 620), ("tablet", 70)],
+        "quality": {"engagement": 58.4, "duration": 142, "pv_per_session": 1.86,
+                    "new_ratio": 74, "bounce": 41.6},
+        "quality_prev": {"engagement": 54.1, "duration": 128, "pv_per_session": 1.71,
+                         "new_ratio": 78, "bounce": 45.9},
+        "landing": [
+            {"path": "/aio/aio-taisaku-guide/", "sessions": 410, "engagement": 64.2, "cv": 5, "duration": 188},
+            {"path": "/aio/llmo-taisaku-hoho/", "sessions": 360, "engagement": 61.8, "cv": 4, "duration": 175},
+            {"path": "/meo/meo-taisaku-yarikata/", "sessions": 250, "engagement": 48.3, "cv": 2, "duration": 121},
+            {"path": "/meo/kuchikomi-fuyasu-hoho/", "sessions": 190, "engagement": 39.5, "cv": 1, "duration": 96},
+            {"path": "/", "sessions": 170, "engagement": 71.4, "cv": 1, "duration": 204},
+            {"path": "/ai-marketing/ai-shukyaku-guide/", "sessions": 140, "engagement": 35.1, "cv": 0, "duration": 84},
+            {"path": "/lp/", "sessions": 90, "engagement": 66.7, "cv": 0, "duration": 158},
+        ],
+        "cities": [("Osaka", 620), ("Tokyo", 410), ("Nagoya", 150), ("Fukuoka", 120),
+                   ("Sapporo", 90), ("(not set)", 330)],
+        "events": [("cta_click", 214), ("form_start", 42), ("generate_lead", 13),
+                   ("area_reach", 1860), ("file_download", 28)],
+        "rank_buckets": [("1〜3位", 4), ("4〜10位", 18), ("11〜20位", 31),
+                         ("21〜50位", 46), ("51位以下", 62)],
+        "rank_imp": {"1〜3位": 3200, "4〜10位": 16800, "11〜20位": 14200,
+                     "21〜50位": 8100, "51位以下": 2200},
+        "rewrite_targets": [
+            {"q": "クリニック meo", "imp": 2400, "clicks": 65, "pos": 12.3},
+            {"q": "工務店 集客", "imp": 2100, "clicks": 44, "pos": 14.6},
+            {"q": "meo 対策 費用", "imp": 1700, "clicks": 31, "pos": 13.1},
+            {"q": "aio 対策 会社", "imp": 1500, "clicks": 26, "pos": 16.2},
+            {"q": "llmo 事例", "imp": 1200, "clicks": 19, "pos": 18.4},
+        ],
+        "gsc_devices": [
+            {"d": "スマートフォン", "imp": 27600, "clicks": 540, "ctr": 1.96, "pos": 10.8},
+            {"d": "PC", "imp": 15100, "clicks": 385, "ctr": 2.55, "pos": 8.2},
+            {"d": "タブレット", "imp": 1800, "clicks": 35, "ctr": 1.94, "pos": 11.4},
+        ],
     }
 
 
@@ -602,11 +739,110 @@ def analyze(d):
                                     "30本を超えたあたりからドメイン全体の評価が安定してきます。"),
     ]
 
+    # ── オウンドメディアの改修プラン（ランディングページの質から導く）──
+    media_plan = []
+    land = d.get("landing", [])
+    for lp_ in [x for x in land if x["sessions"] >= 50 and x["engagement"] < 45][:4]:
+        media_plan.append({
+            "target": lp_["path"], "kind": "記事の冒頭と構成",
+            "now": f'流入{lp_["sessions"]}・エンゲージメント{lp_["engagement"]}%'
+                   f'・滞在{lp_["duration"]}秒（読まれずに離脱している）',
+            "fix": "冒頭200字の結論を、検索意図により近い言い切りに書き換える。"
+                   "『この記事でわかること』を最初の画面に収め、目次を上部へ移動する。"
+                   "見出し直下の1文結論が抜けている箇所を補う",
+        })
+    for lp_ in [x for x in land if x["sessions"] >= 100 and x["cv"] == 0][:3]:
+        media_plan.append({
+            "target": lp_["path"], "kind": "記事内の導線",
+            "now": f'流入{lp_["sessions"]}に対しCV 0件（読まれても次に進んでいない）',
+            "fix": "本文中盤のCTAを、その記事の悩みに合わせた文言へ変更する。"
+                   "関連記事のリンクを本文の文脈内へ移し、記事末尾のCTAをLPの該当セクションへ直接送る",
+        })
+    for t in d.get("rewrite_targets", [])[:4]:
+        media_plan.append({
+            "target": f'「{t["q"]}」の記事', "kind": "本文の加筆（リライト）",
+            "now": f'{t["pos"]}位・表示{t["imp"]:,}回（1ページ目まであと少し）',
+            "fix": "上位3記事にあって自記事にない見出しを1〜2本追加する。"
+                   "出典付きの数値を1つ足し、同カテゴリの記事から内部リンクを2本追加する",
+        })
+    thin_cat = [c for c, n in assets["cats"] if n <= 2]
+    if thin_cat:
+        media_plan.append({
+            "target": f'カテゴリ「{"、".join(thin_cat[:2])}」', "kind": "カテゴリ構成",
+            "now": f'記事{2}本以下でクラスターが薄い（テーマの専門性が伝わらない）',
+            "fix": "このカテゴリのキーワードを次月の記事配分で優先し、5本以上にする。"
+                   "揃った時点でまとめ記事（ピラー）を作り、各記事から相互リンクする",
+        })
+    if not media_plan:
+        media_plan.append({"target": "サイト全体", "kind": "—",
+                           "now": "改修が必要な水準の指標は検出されていません",
+                           "fix": "現在の構成を維持し、上位記事の型を新規記事へ横展開する"})
+
+    # ── LPの改修プラン（到達率・デバイス・流入元から導く）──
+    lp_plan = []
+    areas = d.get("areas") or []
+    if areas:
+        drops = sorted([(areas[i], areas[i + 1], areas[i]["reach"] - areas[i + 1]["reach"])
+                        for i in range(len(areas) - 1)], key=lambda x: -x[2])
+        for a1, a2, gap in drops[:3]:
+            lp_plan.append({
+                "target": f'「{a1["name"]}」→「{a2["name"]}」', "kind": "離脱の止血",
+                "now": f'到達率が{a1["reach"]}%→{a2["reach"]}%（{gap}pt低下）',
+                "fix": f'「{a1["name"]}」の末尾に次を読ませる橋渡し文を追加し、'
+                       f'「{a2["name"]}」の見出しを「何が得られるか」を書いた利益訴求型に変更する',
+            })
+        form = next((x for x in areas if "フォーム" in x["name"]), None)
+        if form and form["reach"] < 25:
+            lp_plan.append({
+                "target": "申込フォーム", "kind": "到達経路の短縮",
+                "now": f'フォーム到達率{form["reach"]}%（最後まで読まれていない）',
+                "fix": "ページ中腹（サービス紹介の直後と比較表の直後）にフォームへ飛ぶボタンを追加する。"
+                       "入力項目を必須3つに絞り、送信ボタンの文言を『無料で相談する』へ変更する",
+            })
+    dv = d.get("devices", [])
+    if dv:
+        tot = sum(v for _, v in dv) or 1
+        mob = next((v for k, v in dv if k == "mobile"), 0)
+        if mob / tot >= 0.55:
+            lp_plan.append({
+                "target": "スマートフォン表示", "kind": "ファーストビュー",
+                "now": f"スマホ比率{round(mob / tot * 100)}%（主戦場はスマホ）",
+                "fix": "スマホでの最初の画面に『何の会社か・誰向けか・次に何をするか』を収める。"
+                       "見出しの文字数を1行に収まる長さへ調整し、CTAボタンを親指が届く位置に固定する",
+            })
+    gd = d.get("gsc_devices", [])
+    if len(gd) >= 2:
+        m = next((x for x in gd if "スマート" in x["d"]), None)
+        p_ = next((x for x in gd if x["d"] == "PC"), None)
+        if m and p_ and m["ctr"] < p_["ctr"] * 0.85:
+            lp_plan.append({
+                "target": "検索結果での見え方（スマホ）", "kind": "タイトル・説明文",
+                "now": f'スマホCTR {m["ctr"]}% に対しPC {p_["ctr"]}%（スマホで選ばれにくい）',
+                "fix": "タイトルを前半28文字で意味が通るよう組み直す。"
+                       "スマホの検索結果は表示幅が狭く、後半が切れて訴求が届いていない",
+            })
+    ch = d.get("channels", [])
+    if ch:
+        tot = sum(v for _, v in ch) or 1
+        org = next((v for k, v in ch if "Organic Search" in k), 0)
+        if org / tot < 0.5:
+            lp_plan.append({
+                "target": "流入構造", "kind": "チャネル",
+                "now": f"自然検索が{round(org / tot * 100)}%（検索以外への依存が大きい）",
+                "fix": "記事の公開ペースを維持しつつ、インデックス登録状況を確認する。"
+                       "直接流入が多い場合は、社名検索の受け皿ページを整備する",
+            })
+    if not lp_plan:
+        lp_plan.append({"target": "LP全体", "kind": "—",
+                        "now": "計測データが不足しているか、改修が必要な水準の指標がありません",
+                        "fix": "GA4のセクション到達イベントの接続を確認する"})
+
     return {"grown": grown, "fixes": fixes, "actions": actions, "mom": mom,
             "winners": winners, "challengers": challengers, "summary": summary,
             "assets": assets, "targets": targets, "audit": audit_site(d),
             "target_nums": target_nums, "achievement": achievement, "assess": assess,
-            "efficiency": efficiency, "headline": headline, "risks": risks}
+            "efficiency": efficiency, "headline": headline, "risks": risks,
+            "media_plan": media_plan, "lp_plan": lp_plan}
 
 
 # ============================================================
@@ -740,6 +976,12 @@ def render(d, a):
     if lp.exists():
         logo_b64 = f'<img class="cv-logo" src="data:image/png;base64,{base64.b64encode(lp.read_bytes()).decode()}">'
 
+    def tile_q(label, value, sub):
+        """値を直接渡すタイル（前月差つきの文字列をそのまま表示する）"""
+        return (f'<div class="tile"><div class="t-label">{label}</div>'
+                f'<div class="t-val" style="font-size:14pt">{value}</div>'
+                f'<div class="t-mom" style="color:{MUTED};font-weight:normal">{sub}</div></div>')
+
     def tile(label, key, unit=""):
         v = cur.get(key, 0)
         series = [m.get(key, 0) or 0 for m in labels]
@@ -776,7 +1018,7 @@ def render(d, a):
     for n, chunk in enumerate(art_pages[1:], 2):
         audit_art_extra += f"""
 <div class="sheet">
-<div class="sec"><span class="no">12</span><h2>サイト全体監査（続き {n}/{len(art_pages)}）</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">16</span><h2>サイト全体監査（続き {n}/{len(art_pages)}）</h2><div class="gold"></div></div>
 <h3 style="margin-top:0">ブログ記事の修正指示（続き）</h3>
 <table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th>
 <th style="width:28%">現状（実測）</th><th>変更内容</th></tr>
@@ -804,6 +1046,82 @@ def render(d, a):
     eff = a["efficiency"]
     risk_rows = "".join(f'<tr><td style="white-space:nowrap"><b>{t}</b></td><td>{b}</td></tr>'
                         for t, b in a["risks"])
+
+    # ── 追加分析の描画データ ──
+    q, qp = d.get("quality", {}), d.get("quality_prev", {})
+
+    def qd(key, unit="", better_high=True):
+        """当月値と前月差を「58.4%（+4.3pt）」の形にする"""
+        v, p = q.get(key), qp.get(key)
+        if v is None:
+            return "—"
+        if p is None:
+            return f"{v}{unit}"
+        diff = round(v - p, 1)
+        sign = "+" if diff >= 0 else ""
+        good = (diff >= 0) if better_high else (diff <= 0)
+        cls = "good" if good else "bad"
+        return f'{v}{unit} <span class="{cls}" style="font-size:8.4pt">（{sign}{diff}）</span>'
+
+    land_rows = "".join(
+        f'<tr><td style="word-break:break-all">{x["path"]}</td>'
+        f'<td class="num">{x["sessions"]:,}</td>'
+        f'<td class="num">{x["engagement"]}%</td>'
+        f'<td class="num">{x["duration"]}秒</td>'
+        f'<td class="num">{x["cv"]}</td>'
+        f'<td><span class="jd jd-{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}">'
+        f'{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}</span></td></tr>'
+        for x in d.get("landing", [])[:10]) or '<tr><td colspan="6">GA4接続後に表示されます</td></tr>'
+
+    rank_rows = ""
+    rimp = d.get("rank_imp", {})
+    for k, n in d.get("rank_buckets", []):
+        imp = rimp.get(k, 0)
+        note = {"1〜3位": "維持する。この型を新規記事へ横展開",
+                "4〜10位": "1ページ目。CTR改善で伸ばす",
+                "11〜20位": "最優先のリライト対象。伸びしろが最大",
+                "21〜50位": "内容の追加が必要。中期の改善対象",
+                "51位以下": "検索意図とのズレを疑う。統合も検討"}.get(k, "")
+        rank_rows += (f'<tr><td><b>{k}</b></td><td class="num">{n}</td>'
+                      f'<td class="num">{imp:,}</td><td>{note}</td></tr>')
+    rank_rows = rank_rows or '<tr><td colspan="4">Search Console接続後に表示されます</td></tr>'
+
+    rewrite_rows = "".join(
+        f'<tr><td>{t["q"]}</td><td class="num">{t["pos"]}位</td>'
+        f'<td class="num">{t["imp"]:,}</td><td class="num">{t["clicks"]}</td>'
+        f'<td class="num">{round(t["imp"] * 0.04 - t["clicks"])}</td></tr>'
+        for t in d.get("rewrite_targets", [])[:6]) \
+        or '<tr><td colspan="5">該当なし</td></tr>'
+
+    gdev_rows = "".join(
+        f'<tr><td>{x["d"]}</td><td class="num">{x["imp"]:,}</td><td class="num">{x["clicks"]:,}</td>'
+        f'<td class="num">{x["ctr"]}%</td><td class="num">{x["pos"]}位</td></tr>'
+        for x in d.get("gsc_devices", [])) or '<tr><td colspan="5">Search Console接続後に表示されます</td></tr>'
+
+    ev_rows = "".join(f'<tr><td>{n}</td><td class="num">{v:,}</td></tr>'
+                      for n, v in d.get("events", [])) \
+        or '<tr><td colspan="2">GA4接続後に表示されます</td></tr>'
+
+    def _media_row(x):
+        return (f'<tr><td style="word-break:break-all">{x["target"]}</td>'
+                f'<td style="white-space:nowrap">{x["kind"]}</td>'
+                f'<td>{x["now"]}</td><td>{x["fix"]}</td></tr>')
+
+    MEDIA_PER_PAGE = 5
+    mp = a["media_plan"]
+    media_rows = "".join(_media_row(x) for x in mp[:MEDIA_PER_PAGE])
+    media_extra = ""
+    for n_, i in enumerate(range(MEDIA_PER_PAGE, len(mp), MEDIA_PER_PAGE), 2):
+        media_extra += f"""
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>オウンドメディアの改修プラン（続き {n_}）</h2><div class="gold"></div></div>
+<table><tr><th style="width:20%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:28%">現状（実測）</th><th>変更内容</th></tr>
+{"".join(_media_row(x) for x in mp[i:i + MEDIA_PER_PAGE])}</table>
+</div>"""
+    lpplan_rows = "".join(
+        f'<tr><td>{x["target"]}</td><td style="white-space:nowrap">{x["kind"]}</td>'
+        f'<td>{x["now"]}</td><td>{x["fix"]}</td></tr>' for x in a["lp_plan"])
     assets = a["assets"]
     cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
     cat_pairs = [(cat_jp.get(c, c), n) for c, n in assets["cats"]]
@@ -847,10 +1165,15 @@ def render(d, a):
         "KPIダッシュボード（前月比・6ヶ月推移）",
         "検索パフォーマンス詳細（クエリ分析）", "記事別パフォーマンス+サイト資産",
         "流入構造分析（チャネル・デバイス・日別）", "AI検索（AIO/LLMO）分析",
-        "投資対効果（広告換算・記事あたり効率）",
+        "読まれ方の質（エンゲージメント・滞在・回遊）",
+        "入口ページ別の成績（改修の根拠）",
+        "検索順位の分布（伸びしろの在り処）",
+        "オウンドメディアの改修プラン",
+        "LPの改修プラン",
         "LPコンバージョン分析（ファネル+ヒートマップ）", "成果の要因分析",
-        "改善プラン（優先度つき対比表）", "サイト全体監査（記事別の修正指示）", "コンテンツ実績",
-        "前月目標の達成率と来月のKPI目標", "来月の実行スケジュール",
+        "改善プラン（優先度つき対比表）",
+        "サイト全体監査（記事別の修正指示）", "サイト全体監査（サイト構造・導線）",
+        "コンテンツ実績", "前月目標の達成率と来月のKPI目標", "来月の実行スケジュール",
         "リスクと前提条件", "付録: 指標の定義"]
     toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc_items, 1))
 
@@ -894,7 +1217,7 @@ h3 {{ font-size: 11pt; margin: 14px 0 6px; color: var(--navy); }}
 
 /* ---- 目次・サマリー ---- */
 .toc {{ columns: 2; column-gap: 22px; margin: 6px 0 0; }}
-.toc li {{ list-style: none; padding: 2.5px 0; border-bottom: 1px dotted var(--line); font-size: 8.8pt; break-inside: avoid; }}
+.toc li {{ list-style: none; padding: 1.4px 0; border-bottom: 1px dotted var(--line); font-size: 8.2pt; break-inside: avoid; }}
 .toc li span {{ color: var(--gold); font-weight: bold; margin-right: 8px; }}
 .exec {{ font-size: 10pt; line-height: 1.9; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 11px 15px; }}
 .hl-cards {{ display: flex; gap: 10px; margin-top: 12px; }}
@@ -1145,9 +1468,100 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 そのため上の金額は<b>控えめな見積もり</b>です。</div>
 </div>
 
+<!-- ユーザーの質 -->
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>読まれ方の質（GA4）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">アクセス数が増えても、読まれずに離脱されていては成果につながりません。
+「来た人がどれだけ中身を読んだか」を示す指標です。括弧内は前月からの変化です。</p>
+<div class="tiles">
+{tile_q("エンゲージメント率", qd("engagement", "%"), "10秒以上滞在・2PV以上・CVのいずれか")}
+{tile_q("平均滞在時間", qd("duration", "秒"), "1セッションあたり")}
+{tile_q("1訪問あたりPV", qd("pv_per_session"), "回遊のしやすさ")}
+{tile_q("新規ユーザー比率", qd("new_ratio", "%", better_high=False), "低いほどリピートが多い")}
+</div>
+<h3>この指標の読み方</h3>
+<table>
+<tr><th style="width:22%">指標</th><th style="width:26%">目安</th><th>意味と打ち手</th></tr>
+<tr><td><b>エンゲージメント率</b></td><td>55%以上=良好 / 45〜55%=標準 / 45%未満=要改善</td>
+<td>低い記事は冒頭で期待とズレています。検索意図に合わせて冒頭200字を書き換えるのが最短の打ち手です</td></tr>
+<tr><td><b>平均滞在時間</b></td><td>5,000字の記事なら120秒以上が目安</td>
+<td>短い場合は読みにくさが原因のことが多く、図解の追加と段落の分割が効きます</td></tr>
+<tr><td><b>1訪問あたりPV</b></td><td>1.5以上=回遊できている</td>
+<td>1.0付近なら関連記事への導線が機能していません。本文中の内部リンクを増やします</td></tr>
+<tr><td><b>新規ユーザー比率</b></td><td>立ち上げ期は70〜90%が普通</td>
+<td>下がってくるのは良い兆候で、リピーターが育っている証拠です</td></tr>
+</table>
+<h3>行動イベントの発生数</h3>
+<table><tr><th style="width:60%">イベント</th><th>回数</th></tr>{ev_rows}</table>
+<p class="note">cta_click はCTAボタンの押下、form_start はフォーム入力の開始、
+generate_lead は送信完了を表します。押されているのに送信まで至っていない場合、
+フォームの項目数が多すぎる可能性があります。</p>
+</div>
+
+<!-- ランディングページ分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">09</span><h2>入口ページ別の成績（オウンドメディア改修の根拠）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">どの記事から入ってきて、どれだけ読まれ、成果につながったかの一覧です。
+<b>流入は多いのにエンゲージメントが低いページ</b>が、改修すると最も効果が出る場所になります。</p>
+<table><tr><th>入口ページ</th><th style="width:11%">流入</th><th style="width:13%">エンゲージ率</th>
+<th style="width:11%">滞在</th><th style="width:8%">CV</th><th style="width:11%">判定</th></tr>{land_rows}</table>
+<div class="callout"><b>ここから改修対象を決めています:</b> 流入50以上でエンゲージメント率45%未満のページは、
+「検索では選ばれているが、開いた瞬間に期待と違うと判断されている」状態です。
+記事を増やすより、このページを直すほうが費用対効果が高くなります。
+具体的な指示は第11章に記載しています。</div>
+<h3>地域別のアクセス</h3>
+{dist_bars(d.get("cities", []), "#0d9488")}
+<p class="note">商圏の実態を確認できます。想定している地域と違う場合は、
+記事内の地域名の使い方やGoogleビジネスプロフィールの設定を見直す材料になります。</p>
+</div>
+
+<!-- 順位帯の分布 -->
+<div class="sheet">
+<div class="sec"><span class="no">10</span><h2>検索順位の分布（伸びしろの在り処）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">検索されているキーワードを順位帯ごとに数えたものです。
+<b>11〜20位にどれだけ眠っているか</b>が、来月伸ばせる量を決めます。</p>
+<table><tr><th style="width:16%">順位帯</th><th style="width:14%">キーワード数</th>
+<th style="width:16%">表示回数</th><th>この層への打ち手</th></tr>{rank_rows}</table>
+<h3>リライトの最優先候補（11〜20位・表示回数順）</h3>
+<table><tr><th>キーワード</th><th style="width:12%">現在順位</th><th style="width:14%">表示回数</th>
+<th style="width:12%">現クリック</th><th style="width:16%">1ページ目到達時の増加見込み</th></tr>{rewrite_rows}</table>
+<p class="note">増加見込みは「1ページ目のCTRを4%と仮定した場合の追加クリック数」です。
+順位を10位以内に上げるだけで、記事を新しく書かずにクリックが増えることを示しています。</p>
+<h3>デバイス別の検索実績</h3>
+<table><tr><th style="width:22%">デバイス</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{gdev_rows}</table>
+<p class="note">スマホとPCでCTRが大きく違う場合、タイトルの後半が切れて訴求が届いていない可能性があります。
+スマホの検索結果では前半28文字程度しか表示されません。</p>
+</div>
+
+<!-- オウンドメディア改修プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>オウンドメディアの改修プラン</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">ここまでの分析から導いた、<b>サイトのどこを・どう変えるか</b>の具体的な指示です。
+すべて当社が翌月の運用の中で実施します。</p>
+<table><tr><th style="width:20%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{media_rows}</table>
+<div class="callout"><b>改修の優先順位:</b> ①順位11〜20位の記事のリライト → ②エンゲージメントが低い記事の冒頭改善
+→ ③CVが出ていない記事の導線改善 → ④薄いカテゴリの補強、の順で進めます。
+<span class="mark">新しい記事を書くより、既にある記事を直すほうが早く成果が出る</span>ためです。</div>
+</div>
+{media_extra}
+
+<!-- LP改修プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>LPの改修プラン</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">記事で集めた読者を、問い合わせまで運ぶのがLPの役割です。
+どこで離脱しているかを実測し、直す場所を特定します。</p>
+<table><tr><th style="width:22%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:26%">現状（実測）</th><th>変更内容</th></tr>{lpplan_rows}</table>
+<div class="callout"><b>LP改修の考え方:</b> LPは「上から順に読まれる」ものではありません。
+実際には<span class="mark">各セクションで読者が離脱するかどうかを判断</span>しています。
+到達率が大きく落ちる場所が、その判断で「読む価値なし」と思われた箇所です。
+そこを直すのが、デザイン全体を作り替えるより確実で安価な改善になります。</div>
+</div>
+
 <!-- ページ: LPコンバージョン分析 -->
 <div class="sheet">
-<div class="sec"><span class="no">09</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">13</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
 <h3>主要区画のファネル（どこまで読まれ、どこで離脱したか）</h3>
 {funnel_html(d.get("areas", []))}
 <h3 style="margin-top:14px">全12区画の到達ヒートマップ</h3>
@@ -1157,15 +1571,15 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 
 <!-- ページ7: 要因分析+改善プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">10</span><h2>成果の要因分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">14</span><h2>成果の要因分析</h2><div class="gold"></div></div>
 <ul class="grown">{grown}</ul>
-<div class="sec" style="margin-top:18px"><span class="no">11</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">15</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
 <table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr>{frows}</table>
 </div>
 
 <!-- ページ: サイト全体監査 -->
 <div class="sheet">
-<div class="sec"><span class="no">12</span><h2>サイト全体監査（どこを・どう変えるか）</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">16</span><h2>サイト全体監査（記事別の修正指示）</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">全{audit["audited"]}記事とサイト構造を機械監査し、検索データ（順位・CTR）と品質基準（鮮度・内部リンク・FAQ）を突合した<b>具体的な修正指示</b>です。修正は週次最適化（毎週月曜）が自動で実施し、翌月号で効果を検証します。</p>
 <h3>ブログ記事の修正指示（優先度順）</h3>
 <table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_art_rows}</table>
@@ -1187,7 +1601,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 {audit_art_extra}
 <!-- ページ: 監査（サイト構造編） -->
 <div class="sheet">
-<div class="sec"><span class="no">12</span><h2>サイト全体監査（サイト構造・導線）</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">17</span><h2>サイト全体監査（サイト構造・導線）</h2><div class="gold"></div></div>
 <h3 style="margin-top:0">サイト構造・導線の変更指示</h3>
 <table><tr><th style="width:18%">対象</th><th style="width:16%">場所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr>{audit_site_rows}</table>
 <h3 style="margin-top:14px">✅ 変更せず維持するもの（好調・基準充足）</h3>
@@ -1202,7 +1616,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 
 <!-- ページ8: コンテンツ実績+来月プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">13</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">18</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr>{crows}</table>
 {best_html}
@@ -1210,7 +1624,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 
 <!-- ページ: 目標対比+来月スケジュール -->
 <div class="sheet">
-<div class="sec"><span class="no">14</span><h2>前月目標の達成率と来月のKPI目標</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">19</span><h2>前月目標の達成率と来月のKPI目標</h2><div class="gold"></div></div>
 <h3 style="margin-top:0">前号で立てた「当月の目標」に対する結果</h3>
 <table><tr><th>指標</th><th style="width:14%">前号の目標</th><th style="width:14%">当月の実績</th>
 <th style="width:12%">達成率</th><th style="width:12%">判定</th></tr>{ach_rows}</table>
@@ -1218,13 +1632,13 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 <p style="font-size:9.5pt">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
 <table><tr><th>指標</th><th style="width:14%">当月実績</th><th style="width:14%">来月目標</th><th>目標の根拠</th></tr>{trows}</table>
 <div class="callout"><b>目標の使い方:</b> 来月号のレポートで本表の目標と実績を突合します。2ヶ月連続で未達の指標は、施策の前提（KW選定・導線設計）から見直します。</div>
-<div class="sec" style="margin-top:18px"><span class="no">15</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">20</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
 <table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr>{action_rows}</table>
 </div>
 
 <!-- ページ9: 付録 -->
 <div class="sheet">
-<div class="sec"><span class="no">16</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">21</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">数字を正しく受け取っていただくために、
 このレポートを読むうえで知っておいていただきたい前提をまとめます。</p>
 <table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr>{risk_rows}</table>
@@ -1235,7 +1649,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">17</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">22</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">本レポートで使用している指標・用語の定義です。社内共有の際にご活用ください。</p>
 <table>{gloss_rows}</table>
 <h3 style="margin-top:14px">データソースと計測方法</h3>

@@ -32,7 +32,7 @@ h3 { font-size: 11pt; margin: 14px 0 6px; color: var(--navy); }
 
 /* ---- 目次・サマリー ---- */
 .toc { columns: 2; column-gap: 22px; margin: 6px 0 0; }
-.toc li { list-style: none; padding: 2.5px 0; border-bottom: 1px dotted var(--line); font-size: 8.8pt; break-inside: avoid; }
+.toc li { list-style: none; padding: 1.4px 0; border-bottom: 1px dotted var(--line); font-size: 8.2pt; break-inside: avoid; }
 .toc li span { color: var(--gold); font-weight: bold; margin-right: 8px; }
 .exec { font-size: 10pt; line-height: 1.9; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 11px 15px; }
 .hl-cards { display: flex; gap: 10px; margin-top: 12px; }
@@ -149,7 +149,7 @@ ol.head3 li::before { content: counter(h); position: absolute; left: 0; top: 10p
 </div>
 <div class="callout"><b>今月の結論:</b> 当月は主要指標の伸びが確認できませんでした。来月プランの優先度1〜3に集中してください。</div>
 <h3>本レポートの構成</h3>
-<ul class="toc"><li><span>01</span>エグゼクティブサマリー（3行まとめ）</li><li><span>02</span>指標の評価（良し悪しの判定）</li><li><span>03</span>KPIダッシュボード（前月比・6ヶ月推移）</li><li><span>04</span>検索パフォーマンス詳細（クエリ分析）</li><li><span>05</span>記事別パフォーマンス+サイト資産</li><li><span>06</span>流入構造分析（チャネル・デバイス・日別）</li><li><span>07</span>AI検索（AIO/LLMO）分析</li><li><span>08</span>投資対効果（広告換算・記事あたり効率）</li><li><span>09</span>LPコンバージョン分析（ファネル+ヒートマップ）</li><li><span>10</span>成果の要因分析</li><li><span>11</span>改善プラン（優先度つき対比表）</li><li><span>12</span>サイト全体監査（記事別の修正指示）</li><li><span>13</span>コンテンツ実績</li><li><span>14</span>前月目標の達成率と来月のKPI目標</li><li><span>15</span>来月の実行スケジュール</li><li><span>16</span>リスクと前提条件</li><li><span>17</span>付録: 指標の定義</li></ul>
+<ul class="toc"><li><span>01</span>エグゼクティブサマリー（3行まとめ）</li><li><span>02</span>指標の評価（良し悪しの判定）</li><li><span>03</span>KPIダッシュボード（前月比・6ヶ月推移）</li><li><span>04</span>検索パフォーマンス詳細（クエリ分析）</li><li><span>05</span>記事別パフォーマンス+サイト資産</li><li><span>06</span>流入構造分析（チャネル・デバイス・日別）</li><li><span>07</span>AI検索（AIO/LLMO）分析</li><li><span>08</span>読まれ方の質（エンゲージメント・滞在・回遊）</li><li><span>09</span>入口ページ別の成績（改修の根拠）</li><li><span>10</span>検索順位の分布（伸びしろの在り処）</li><li><span>11</span>オウンドメディアの改修プラン</li><li><span>12</span>LPの改修プラン</li><li><span>13</span>LPコンバージョン分析（ファネル+ヒートマップ）</li><li><span>14</span>成果の要因分析</li><li><span>15</span>改善プラン（優先度つき対比表）</li><li><span>16</span>サイト全体監査（記事別の修正指示）</li><li><span>17</span>サイト全体監査（サイト構造・導線）</li><li><span>18</span>コンテンツ実績</li><li><span>19</span>前月目標の達成率と来月のKPI目標</li><li><span>20</span>来月の実行スケジュール</li><li><span>21</span>リスクと前提条件</li><li><span>22</span>付録: 指標の定義</li></ul>
 </div>
 
 <!-- 指標の評価 -->
@@ -283,9 +283,100 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 そのため上の金額は<b>控えめな見積もり</b>です。</div>
 </div>
 
+<!-- ユーザーの質 -->
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>読まれ方の質（GA4）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">アクセス数が増えても、読まれずに離脱されていては成果につながりません。
+「来た人がどれだけ中身を読んだか」を示す指標です。括弧内は前月からの変化です。</p>
+<div class="tiles">
+<div class="tile"><div class="t-label">エンゲージメント率</div><div class="t-val" style="font-size:14pt">33.3%</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">10秒以上滞在・2PV以上・CVのいずれか</div></div>
+<div class="tile"><div class="t-label">平均滞在時間</div><div class="t-val" style="font-size:14pt">151秒</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">1セッションあたり</div></div>
+<div class="tile"><div class="t-label">1訪問あたりPV</div><div class="t-val" style="font-size:14pt">1.81</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">回遊のしやすさ</div></div>
+<div class="tile"><div class="t-label">新規ユーザー比率</div><div class="t-val" style="font-size:14pt">100%</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">低いほどリピートが多い</div></div>
+</div>
+<h3>この指標の読み方</h3>
+<table>
+<tr><th style="width:22%">指標</th><th style="width:26%">目安</th><th>意味と打ち手</th></tr>
+<tr><td><b>エンゲージメント率</b></td><td>55%以上=良好 / 45〜55%=標準 / 45%未満=要改善</td>
+<td>低い記事は冒頭で期待とズレています。検索意図に合わせて冒頭200字を書き換えるのが最短の打ち手です</td></tr>
+<tr><td><b>平均滞在時間</b></td><td>5,000字の記事なら120秒以上が目安</td>
+<td>短い場合は読みにくさが原因のことが多く、図解の追加と段落の分割が効きます</td></tr>
+<tr><td><b>1訪問あたりPV</b></td><td>1.5以上=回遊できている</td>
+<td>1.0付近なら関連記事への導線が機能していません。本文中の内部リンクを増やします</td></tr>
+<tr><td><b>新規ユーザー比率</b></td><td>立ち上げ期は70〜90%が普通</td>
+<td>下がってくるのは良い兆候で、リピーターが育っている証拠です</td></tr>
+</table>
+<h3>行動イベントの発生数</h3>
+<table><tr><th style="width:60%">イベント</th><th>回数</th></tr><tr><td>area_reach</td><td class="num">91</td></tr><tr><td>scroll_depth</td><td class="num">46</td></tr><tr><td>section_view_hero</td><td class="num">33</td></tr><tr><td>section_view_whynow</td><td class="num">14</td></tr><tr><td>section_view_category</td><td class="num">11</td></tr></table>
+<p class="note">cta_click はCTAボタンの押下、form_start はフォーム入力の開始、
+generate_lead は送信完了を表します。押されているのに送信まで至っていない場合、
+フォームの項目数が多すぎる可能性があります。</p>
+</div>
+
+<!-- ランディングページ分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">09</span><h2>入口ページ別の成績（オウンドメディア改修の根拠）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">どの記事から入ってきて、どれだけ読まれ、成果につながったかの一覧です。
+<b>流入は多いのにエンゲージメントが低いページ</b>が、改修すると最も効果が出る場所になります。</p>
+<table><tr><th>入口ページ</th><th style="width:11%">流入</th><th style="width:13%">エンゲージ率</th>
+<th style="width:11%">滞在</th><th style="width:8%">CV</th><th style="width:11%">判定</th></tr><tr><td style="word-break:break-all">/</td><td class="num">24</td><td class="num">33.3%</td><td class="num">130秒</td><td class="num">0</td><td><span class="jd jd-要改善">要改善</span></td></tr><tr><td style="word-break:break-all">(not set)</td><td class="num">1</td><td class="num">0.0%</td><td class="num">0秒</td><td class="num">0</td><td><span class="jd jd-要改善">要改善</span></td></tr><tr><td style="word-break:break-all">/about</td><td class="num">1</td><td class="num">100.0%</td><td class="num">949秒</td><td class="num">0</td><td><span class="jd jd-良好">良好</span></td></tr><tr><td style="word-break:break-all">/diagnosis/meo</td><td class="num">1</td><td class="num">0.0%</td><td class="num">7秒</td><td class="num">0</td><td><span class="jd jd-要改善">要改善</span></td></tr></table>
+<div class="callout"><b>ここから改修対象を決めています:</b> 流入50以上でエンゲージメント率45%未満のページは、
+「検索では選ばれているが、開いた瞬間に期待と違うと判断されている」状態です。
+記事を増やすより、このページを直すほうが費用対効果が高くなります。
+具体的な指示は第11章に記載しています。</div>
+<h3>地域別のアクセス</h3>
+<div class="heatmap"><div class="hm-row"><div class="hm-label">Kobe</div><div class="hm-track"><div class="hm-bar" style="width:22%;background:#0d9488"></div></div><div class="hm-val">5<span style="color:#5b6b84;font-weight:normal"> (22%)</span></div></div><div class="hm-row"><div class="hm-label">Osaka</div><div class="hm-track"><div class="hm-bar" style="width:22%;background:#0d9488"></div></div><div class="hm-val">5<span style="color:#5b6b84;font-weight:normal"> (22%)</span></div></div><div class="hm-row"><div class="hm-label">Boardman</div><div class="hm-track"><div class="hm-bar" style="width:17%;background:#0d9488"></div></div><div class="hm-val">4<span style="color:#5b6b84;font-weight:normal"> (17%)</span></div></div><div class="hm-row"><div class="hm-label">Nagoya</div><div class="hm-track"><div class="hm-bar" style="width:13%;background:#0d9488"></div></div><div class="hm-val">3<span style="color:#5b6b84;font-weight:normal"> (13%)</span></div></div><div class="hm-row"><div class="hm-label">(not set)</div><div class="hm-track"><div class="hm-bar" style="width:9%;background:#0d9488"></div></div><div class="hm-val">2<span style="color:#5b6b84;font-weight:normal"> (9%)</span></div></div><div class="hm-row"><div class="hm-label">San Jose</div><div class="hm-track"><div class="hm-bar" style="width:9%;background:#0d9488"></div></div><div class="hm-val">2<span style="color:#5b6b84;font-weight:normal"> (9%)</span></div></div><div class="hm-row"><div class="hm-label">Amsterdam</div><div class="hm-track"><div class="hm-bar" style="width:4%;background:#0d9488"></div></div><div class="hm-val">1<span style="color:#5b6b84;font-weight:normal"> (4%)</span></div></div><div class="hm-row"><div class="hm-label">Jackson Township</div><div class="hm-track"><div class="hm-bar" style="width:4%;background:#0d9488"></div></div><div class="hm-val">1<span style="color:#5b6b84;font-weight:normal"> (4%)</span></div></div></div>
+<p class="note">商圏の実態を確認できます。想定している地域と違う場合は、
+記事内の地域名の使い方やGoogleビジネスプロフィールの設定を見直す材料になります。</p>
+</div>
+
+<!-- 順位帯の分布 -->
+<div class="sheet">
+<div class="sec"><span class="no">10</span><h2>検索順位の分布（伸びしろの在り処）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">検索されているキーワードを順位帯ごとに数えたものです。
+<b>11〜20位にどれだけ眠っているか</b>が、来月伸ばせる量を決めます。</p>
+<table><tr><th style="width:16%">順位帯</th><th style="width:14%">キーワード数</th>
+<th style="width:16%">表示回数</th><th>この層への打ち手</th></tr><tr><td><b>1〜3位</b></td><td class="num">0</td><td class="num">0</td><td>維持する。この型を新規記事へ横展開</td></tr><tr><td><b>4〜10位</b></td><td class="num">0</td><td class="num">0</td><td>1ページ目。CTR改善で伸ばす</td></tr><tr><td><b>11〜20位</b></td><td class="num">0</td><td class="num">0</td><td>最優先のリライト対象。伸びしろが最大</td></tr><tr><td><b>21〜50位</b></td><td class="num">1</td><td class="num">3</td><td>内容の追加が必要。中期の改善対象</td></tr><tr><td><b>51位以下</b></td><td class="num">1</td><td class="num">1</td><td>検索意図とのズレを疑う。統合も検討</td></tr></table>
+<h3>リライトの最優先候補（11〜20位・表示回数順）</h3>
+<table><tr><th>キーワード</th><th style="width:12%">現在順位</th><th style="width:14%">表示回数</th>
+<th style="width:12%">現クリック</th><th style="width:16%">1ページ目到達時の増加見込み</th></tr><tr><td colspan="5">該当なし</td></tr></table>
+<p class="note">増加見込みは「1ページ目のCTRを4%と仮定した場合の追加クリック数」です。
+順位を10位以内に上げるだけで、記事を新しく書かずにクリックが増えることを示しています。</p>
+<h3>デバイス別の検索実績</h3>
+<table><tr><th style="width:22%">デバイス</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr><tr><td>PC</td><td class="num">4</td><td class="num">0</td><td class="num">0%</td><td class="num">39位</td></tr><tr><td>スマートフォン</td><td class="num">3</td><td class="num">0</td><td class="num">0%</td><td class="num">30.3位</td></tr></table>
+<p class="note">スマホとPCでCTRが大きく違う場合、タイトルの後半が切れて訴求が届いていない可能性があります。
+スマホの検索結果では前半28文字程度しか表示されません。</p>
+</div>
+
+<!-- オウンドメディア改修プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>オウンドメディアの改修プラン</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">ここまでの分析から導いた、<b>サイトのどこを・どう変えるか</b>の具体的な指示です。
+すべて当社が翌月の運用の中で実施します。</p>
+<table><tr><th style="width:20%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:28%">現状（実測）</th><th>変更内容</th></tr><tr><td style="word-break:break-all">カテゴリ「aio、hr」</td><td style="white-space:nowrap">カテゴリ構成</td><td>記事2本以下でクラスターが薄い（テーマの専門性が伝わらない）</td><td>このカテゴリのキーワードを次月の記事配分で優先し、5本以上にする。揃った時点でまとめ記事（ピラー）を作り、各記事から相互リンクする</td></tr></table>
+<div class="callout"><b>改修の優先順位:</b> ①順位11〜20位の記事のリライト → ②エンゲージメントが低い記事の冒頭改善
+→ ③CVが出ていない記事の導線改善 → ④薄いカテゴリの補強、の順で進めます。
+<span class="mark">新しい記事を書くより、既にある記事を直すほうが早く成果が出る</span>ためです。</div>
+</div>
+
+
+<!-- LP改修プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>LPの改修プラン</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">記事で集めた読者を、問い合わせまで運ぶのがLPの役割です。
+どこで離脱しているかを実測し、直す場所を特定します。</p>
+<table><tr><th style="width:22%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:26%">現状（実測）</th><th>変更内容</th></tr><tr><td>流入構造</td><td style="white-space:nowrap">チャネル</td><td>自然検索が0%（検索以外への依存が大きい）</td><td>記事の公開ペースを維持しつつ、インデックス登録状況を確認する。直接流入が多い場合は、社名検索の受け皿ページを整備する</td></tr></table>
+<div class="callout"><b>LP改修の考え方:</b> LPは「上から順に読まれる」ものではありません。
+実際には<span class="mark">各セクションで読者が離脱するかどうかを判断</span>しています。
+到達率が大きく落ちる場所が、その判断で「読む価値なし」と思われた箇所です。
+そこを直すのが、デザイン全体を作り替えるより確実で安価な改善になります。</div>
+</div>
+
 <!-- ページ: LPコンバージョン分析 -->
 <div class="sheet">
-<div class="sec"><span class="no">09</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">13</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
 <h3>主要区画のファネル（どこまで読まれ、どこで離脱したか）</h3>
 
 <h3 style="margin-top:14px">全12区画の到達ヒートマップ</h3>
@@ -295,15 +386,15 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 
 <!-- ページ7: 要因分析+改善プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">10</span><h2>成果の要因分析</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">14</span><h2>成果の要因分析</h2><div class="gold"></div></div>
 <ul class="grown"><li>当月は主要指標の伸びが確認できませんでした。来月プランの優先度1〜3に集中してください。</li></ul>
-<div class="sec" style="margin-top:18px"><span class="no">11</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">15</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
 <table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr><tr><td><span class="pri pri-高">高</span></td><td>計測</td><td>改善対象を特定できるデータが不足</td><td>GA4イベント（area_reach/scroll_depth）とGSCの接続を確認</td></tr></table>
 </div>
 
 <!-- ページ: サイト全体監査 -->
 <div class="sheet">
-<div class="sec"><span class="no">12</span><h2>サイト全体監査（どこを・どう変えるか）</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">16</span><h2>サイト全体監査（記事別の修正指示）</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">全17記事とサイト構造を機械監査し、検索データ（順位・CTR）と品質基準（鮮度・内部リンク・FAQ）を突合した<b>具体的な修正指示</b>です。修正は週次最適化（毎週月曜）が自動で実施し、翌月号で効果を検証します。</p>
 <h3>ブログ記事の修正指示（優先度順）</h3>
 <table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr><tr><td>美容室スタッフの定着率を上げる5つの施策とは</td><td style="white-space:nowrap">本文中の関連箇所</td><td>内部リンクが0本（基準3本以上）</td><td>同カテゴリ記事への文中リンクを3本追加（候補: クリニックのMEO対策とは？集患につ / Googleマップの口コミを増やす方）。アンカーは具体表現にする</td></tr><tr><td>飲食店のアルバイト採用のコツとは？応募を増やす7</td><td style="white-space:nowrap">本文中の関連箇所</td><td>内部リンクが0本（基準3本以上）</td><td>同カテゴリ記事への文中リンクを3本追加（新規記事の公開後に追加）。アンカーは具体表現にする</td></tr></table>
@@ -325,7 +416,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 
 <!-- ページ: 監査（サイト構造編） -->
 <div class="sheet">
-<div class="sec"><span class="no">12</span><h2>サイト全体監査（サイト構造・導線）</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">17</span><h2>サイト全体監査（サイト構造・導線）</h2><div class="gold"></div></div>
 <h3 style="margin-top:0">サイト構造・導線の変更指示</h3>
 <table><tr><th style="width:18%">対象</th><th style="width:16%">場所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr><tr><td>カテゴリ「hr」</td><td style="white-space:nowrap">記事クラスター</td><td>記事1本のみ（クラスターが薄くトピック権威が立たない）</td><td>このカテゴリのKWを次の記事作成で優先し、5本以上のクラスターにしてピラー記事から相互リンク</td></tr><tr><td>カテゴリ「AIO・LLMO」</td><td style="white-space:nowrap">記事クラスター</td><td>記事2本のみ（クラスターが薄くトピック権威が立たない）</td><td>このカテゴリのKWを次の記事作成で優先し、5本以上のクラスターにしてピラー記事から相互リンク</td></tr><tr><td>サイト外の露出</td><td style="white-space:nowrap">プレスリリース・外部寄稿</td><td>AI経由参照が0セッション（立ち上がり前）</td><td>記事15本到達を目安に準備済みのプレスリリース草稿（docs/press-release-draft.md）を配信。ChatGPT系はサイト外の言及量が引用を左右する</td></tr><tr><td>流入構造</td><td style="white-space:nowrap">検索チャネル</td><td>自然検索比率0%（4割未満）</td><td>新規記事の公開ペース維持とインデックス確認を最優先。直接流入が多い場合は指名検索の受け皿（サイト名での1位表示）を確認</td></tr></table>
 <h3 style="margin-top:14px">✅ 変更せず維持するもの（好調・基準充足）</h3>
@@ -340,7 +431,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 
 <!-- ページ8: コンテンツ実績+来月プラン -->
 <div class="sheet">
-<div class="sec"><span class="no">13</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">18</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">当月公開: <b>0本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr></table>
 
@@ -348,7 +439,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 
 <!-- ページ: 目標対比+来月スケジュール -->
 <div class="sheet">
-<div class="sec"><span class="no">14</span><h2>前月目標の達成率と来月のKPI目標</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">19</span><h2>前月目標の達成率と来月のKPI目標</h2><div class="gold"></div></div>
 <h3 style="margin-top:0">前号で立てた「当月の目標」に対する結果</h3>
 <table><tr><th>指標</th><th style="width:14%">前号の目標</th><th style="width:14%">当月の実績</th>
 <th style="width:12%">達成率</th><th style="width:12%">判定</th></tr><tr><td colspan="5">前号がないため今回は突合できません。次号から達成率を表示します。</td></tr></table>
@@ -356,13 +447,13 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 <p style="font-size:9.5pt">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
 <table><tr><th>指標</th><th style="width:14%">当月実績</th><th style="width:14%">来月目標</th><th>目標の根拠</th></tr><tr><td>セッション</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">100</td><td>記事数増加+順位上昇の複利。前月比+30%または+100の大きい方</td></tr><tr><td>検索クリック</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">60</td><td>新規記事のインデックス進行とリライトによるCTR改善</td></tr><tr><td>検索表示回数</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">2,000</td><td>露出の総量。テーマの面を広げるほど伸びる先行指標</td></tr><tr><td>CV（相談+資料DL）</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">2</td><td>記事→LP導線の改善プラン実施による転換率向上</td></tr><tr><td>AI経由参照</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">5</td><td>記事蓄積とllms.txt更新によるAI引用の積み上がり</td></tr><tr><td>新規公開記事</td><td class="num">0本</td><td class="num" style="color:#067647;font-weight:bold">60本</td><td>毎日2本の自動生成体制の定常値（品質90点以上のみ）</td></tr></table>
 <div class="callout"><b>目標の使い方:</b> 来月号のレポートで本表の目標と実績を突合します。2ヶ月連続で未達の指標は、施策の前提（KW選定・導線設計）から見直します。</div>
-<div class="sec" style="margin-top:18px"><span class="no">15</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+<div class="sec" style="margin-top:18px"><span class="no">20</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
 <table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr><tr><td class="num">1</td><td>改善優先度「高」の項目（本編6章の対比表）をすべて実施する</td><td style="white-space:nowrap">第1週</td><td>LP離脱の止血が最優先。CVR改善に直結</td></tr><tr><td class="num">2</td><td>順位11〜30位のクエリ上位2本をリライトする（H2追加+内部リンク2本）</td><td style="white-space:nowrap">第2週</td><td>2ページ目→1ページ目でクリックが数倍化</td></tr><tr><td class="num">3</td><td>新規記事を計画本数どおり公開する（品質90点以上・図解付き）</td><td style="white-space:nowrap">毎日</td><td>トピックの面を拡大しAI引用の入口を増やす</td></tr><tr><td class="num">4</td><td>CTR未達クエリのタイトル・メタディスクリプションを改善する</td><td style="white-space:nowrap">第3週</td><td>順位を変えずにクリックを増やす最速の一手</td></tr><tr><td class="num">5</td><td>AIスポットチェック（主要クエリをChatGPT/Perplexityに質問し自社言及を記録）</td><td style="white-space:nowrap">第4週</td><td>LLMOの定点観測。言及の増減が次月の方針を決める</td></tr><tr><td class="num">6</td><td>本レポートの数値をスプレッドシート「KPIレポート」「AIO計測」タブに転記・突合する</td><td style="white-space:nowrap">月末</td><td>学習ループ（kpi_feedback.md）の精度を維持</td></tr></table>
 </div>
 
 <!-- ページ9: 付録 -->
 <div class="sheet">
-<div class="sec"><span class="no">16</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">21</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">数字を正しく受け取っていただくために、
 このレポートを読むうえで知っておいていただきたい前提をまとめます。</p>
 <table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr><tr><td style="white-space:nowrap"><b>単月の増減だけで判断しない</b></td><td>検索は季節性とGoogleのアルゴリズム更新で単月±20%程度動きます。3ヶ月の傾向線で見るのが実務的です。</td></tr><tr><td style="white-space:nowrap"><b>Search Consoleのデータは3日遅れ</b></td><td>月末付近の数値は確定前のため、翌月号で微増することがあります。</td></tr><tr><td style="white-space:nowrap"><b>AI経由の流入は過小評価になりがち</b></td><td>ChatGPT等はリファラーを送らない場合があり、実際のAI経由の影響は計測値より大きい可能性があります。</td></tr><tr><td style="white-space:nowrap"><b>記事数が少ない段階は順位が不安定</b></td><td>現在17本。30本を超えたあたりからドメイン全体の評価が安定してきます。</td></tr></table>
@@ -373,7 +464,7 @@ AIO・SEO・MEO関連のキーワードは競合が多く、実際のリステ�
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">17</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">22</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">本レポートで使用している指標・用語の定義です。社内共有の際にご活用ください。</p>
 <table><tr><td style="white-space:nowrap"><b>セッション</b></td><td>サイトへの訪問回数。1人が朝と夜に見れば2セッション</td></tr><tr><td style="white-space:nowrap"><b>CV（コンバージョン）</b></td><td>無料相談・資料DLなど、成果地点への到達件数</td></tr><tr><td style="white-space:nowrap"><b>表示回数（インプレッション）</b></td><td>Google検索結果に自社ページが表示された回数</td></tr><tr><td style="white-space:nowrap"><b>CTR</b></td><td>表示回数のうちクリックされた割合。タイトル改善で伸ばせる</td></tr><tr><td style="white-space:nowrap"><b>平均掲載順位</b></td><td>検索結果での平均的な表示位置。小さいほど上位</td></tr><tr><td style="white-space:nowrap"><b>AI経由参照</b></td><td>ChatGPT・Perplexity等のAIサービスからの流入。LLMO施策の成果指標</td></tr><tr><td style="white-space:nowrap"><b>エリア到達率</b></td><td>LPの各セクションまで読者がスクロール到達した割合（独自計測）</td></tr><tr><td style="white-space:nowrap"><b>AIO</b></td><td>Google検索のAI回答（AI Overview）に引用されるための最適化</td></tr><tr><td style="white-space:nowrap"><b>LLMO</b></td><td>ChatGPT等のAIチャットの回答で言及されるための最適化</td></tr><tr><td style="white-space:nowrap"><b>E-E-A-T</b></td><td>経験・専門性・権威性・信頼性。Googleの品質評価基準</td></tr><tr><td style="white-space:nowrap"><b>リライト</b></td><td>既存記事の加筆・修正。順位11〜30位の記事が最も効果的</td></tr><tr><td style="white-space:nowrap"><b>品質スコア</b></td><td>当社の6観点採点（100点満点）。90点未満は公開されない</td></tr></table>
 <h3 style="margin-top:14px">データソースと計測方法</h3>
