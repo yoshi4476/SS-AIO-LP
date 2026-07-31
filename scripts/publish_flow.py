@@ -45,6 +45,18 @@ def main():
         raise SystemExit("フロントマターがありません")
     meta, body = yaml.safe_load(m.group(1)), m.group(2)
 
+    # 0. カテゴリ検証（他サイトのカテゴリが混入するとbuild.pyが黙って除外し、
+    #    記事が公開されないまま放置される。ここで即座に落として書き直させる）
+    cat = (meta.get("category") or "").strip()
+    valid = sites_mod.valid_categories(cfg)
+    if cat not in valid:
+        owner = sites_mod.find_category_owner(cat)
+        hint = f"「{cat}」は {owner} のカテゴリです。" if owner else f"「{cat}」はどのサイトにもありません。"
+        raise SystemExit(
+            f"categoryが不正です。{hint}\n"
+            f"{src} のフロントマター category: を次のどれかに直して再実行すること\n"
+            + "\n".join(f"  - {s}  （{sites_mod.category_name(cfg, s)}）" for s in valid))
+
     # 1. 画像（アイキャッチ・図解）
     run([PY, "scripts/make_images.py", slug], check=False)
 

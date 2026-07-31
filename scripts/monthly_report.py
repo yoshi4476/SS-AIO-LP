@@ -1457,6 +1457,26 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 {svg_series(d.get("daily", {}).get("clicks", []), d.get("daily", {}).get("labels", []), "#0d9488", "検索クリック数の日次推移")}
 <p class="note">読み方: 自然検索比率が高いほど広告費に依存しない集客構造。日別推移の右肩上がりは新規記事のインデックス進行を示します。
 スマートフォン比率が高い場合、記事の冒頭結論・図解・表の見やすさがCVを左右します。</p>
+<h3 style="margin-top:14px">チャネルごとの意味と、増やすための打ち手</h3>
+<p style="font-size:9.5pt">流入経路は「どこから来たか」ではなく<span class="mark">「何をすれば増えるか」</span>で見ます。
+チャネルごとに効く施策がまったく違うため、内訳の変化はそのまま来月の施策の優先順位になります。</p>
+<table>
+<tr><th style="width:20%">チャネル</th><th style="width:34%">この数字が意味すること</th><th>増やすための打ち手</th></tr>
+<tr><td><b>自然検索</b></td><td>検索結果から直接来た数。記事の順位とタイトルの魅力で決まります</td>
+<td>順位11〜20位の記事のリライト。CTRが低い記事のタイトル・説明文の書き直し</td></tr>
+<tr><td><b>直接流入</b></td><td>URL直接入力・ブックマーク・アプリ経由。<b>指名検索の受け皿</b>でもあります</td>
+<td>社名・サービス名を記事内で数値とセットで書き、AI回答に社名ごと引用されることを狙います</td></tr>
+<tr><td><b>参照サイト</b></td><td>他サイトのリンクから来た数。被リンクの獲得状況を映します</td>
+<td>グループ3サイトの相互リンク、プレスリリース配信、業界メディアへの寄稿</td></tr>
+<tr><td><b>AI検索</b></td><td>ChatGPT・Perplexity等の回答経由。まだ小さくても<b>伸び率</b>が重要です</td>
+<td>冒頭断言・見出し直下の1文結論・FAQの整備（全記事に標準実装済み）</td></tr>
+<tr><td><b>SNS</b></td><td>現在は施策対象外のため小さい数字が正常です</td>
+<td>SNS運用を併用される場合は計測項目を追加します（本サービスの範囲外）</td></tr>
+</table>
+<div class="callout"><b>今の段階で見るべきなのは自然検索の「表示回数」です:</b>
+立ち上げ期はセッションよりも先に表示回数が動きます。
+表示回数が伸びていれば記事が検索結果に載り始めた証拠で、クリックとセッションは<b>その2〜3ヶ月後</b>に付いてきます。
+現時点でセッションが小さくても、表示回数と順位が上向いていれば計画どおりです。</div>
 </div>
 
 <!-- ページ: AI検索分析 -->
@@ -1753,8 +1773,28 @@ GA4の独自イベント（画面内40%表示で発火）による計測で、�
 <p style="font-size:9.5pt">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
 <table><tr><th>指標</th><th style="width:14%">当月実績</th><th style="width:14%">来月目標</th><th>目標の根拠</th></tr>{trows}</table>
 <div class="callout"><b>目標の使い方:</b> 来月号のレポートで本表の目標と実績を突合します。2ヶ月連続で未達の指標は、施策の前提（KW選定・導線設計）から見直します。</div>
-<div class="sec" style="margin-top:18px"><span class="no">20</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+</div>
+
+<!-- ページ: 来月の実行スケジュール -->
+<div class="sheet">
+<div class="sec"><span class="no">20</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">前章の目標を達成するために、来月に実施する施策を優先度順に並べたものです。
+<span class="mark">上から順に着手</span>し、実施状況は来月号の本レポートで報告します。</p>
 <table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr>{action_rows}</table>
+<h3>月内の進め方</h3>
+<p style="font-size:9.5pt">記事の公開は毎日自動で進みます。人の判断が要る工程だけを、月内で以下のように配置しています。</p>
+<table>
+<tr><th style="width:14%">時期</th><th style="width:34%">実施すること</th><th>御社にお願いすること</th></tr>
+<tr><td><b>第1週</b></td><td>本レポートの共有と、改修プランの着手判断</td>
+<td>LPの文言・掲載事例など、御社にしか出せない情報のご提供</td></tr>
+<tr><td><b>第2〜3週</b></td><td>既存記事のリライトと内部リンク強化、新規記事の継続公開</td>
+<td>特にありません（進捗はいつでもご確認いただけます）</td></tr>
+<tr><td><b>第4週</b></td><td>順位・AI検索の反応を確認し、翌月のキーワードを確定</td>
+<td>問い合わせの中身に変化があればご共有ください</td></tr>
+</table>
+<div class="callout"><b>優先順位の決め方:</b> 施策は「効果が出るまでの速さ」ד影響する記事の本数”で並べています。
+既存記事のリライトは<b>1〜2週間で順位に反映される</b>ため常に上位に置き、
+新規記事の追加は効果まで3ヶ月かかる前提で、本数を落とさず継続することを重視します。</div>
 </div>
 
 <!-- ページ9: 付録 -->
@@ -1852,6 +1892,7 @@ def main():
         pg = b.new_page()
         pg.goto(html_path.as_uri())
         pg.wait_for_timeout(400)
+        pdf_util.compact_pages(pg)
         pdf_util.check_overflow(pg, "月次レポート")
         pg.pdf(path=str(pdf_path), format="A4", print_background=True,
                display_header_footer=True,

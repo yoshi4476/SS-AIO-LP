@@ -580,6 +580,7 @@ def main():
             b = p.chromium.launch()
             pg = b.new_page()
             pg.goto(html_path.resolve().as_uri(), wait_until="networkidle")
+            pdf_util.compact_pages(pg)
             pdf_util.check_overflow(pg, "提案書")
             pg.pdf(path=str(pdf_path), format="A4", print_background=True,
                    display_header_footer=True, header_template="<div></div>",

@@ -39,6 +39,18 @@ def category_name(cfg, slug):
     return cfg.get("categories", {}).get(slug, slug)
 
 
+def valid_categories(cfg):
+    return list(cfg.get("categories", {}).keys())
+
+
+def find_category_owner(slug):
+    """そのカテゴリを持つサイトを返す（他サイトのカテゴリ混入を指摘するため）"""
+    for cid, cfg in load_all().items():
+        if slug in cfg.get("categories", {}):
+            return cid
+    return None
+
+
 def summary():
     lines = []
     for cid, c in load_all().items():

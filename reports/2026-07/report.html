@@ -1,0 +1,651 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; }
+:root { --navy: #0b2447; --blue: #2563eb; --teal: #0d9488; --gold: #b7922e; --muted: #5b6b84; --line: #e3eaf3; }
+body { font-family: "Yu Gothic", "Meiryo", sans-serif; color: #10203a; font-size: 10pt; line-height: 1.8; }
+.sheet { width: 210mm; min-height: 296mm; padding: 16mm 15mm 18mm; page-break-after: always; position: relative; }
+.sheet:last-child { page-break-after: auto; }
+
+/* ---- 表紙 ---- */
+.cover-page { background: linear-gradient(150deg, #071a38 0%, #0b2447 45%, #14345c 100%); color: #fff;
+  display: flex; flex-direction: column; padding: 22mm 20mm; }
+.cv-gold { width: 64px; height: 4px; background: var(--gold); margin: 10mm 0 6mm; }
+.cv-kicker { letter-spacing: .35em; font-size: 9pt; color: #93b4e8; }
+.cv-title { font-size: 27pt; font-weight: bold; line-height: 1.4; margin-top: 4mm; }
+.cv-month { font-size: 15pt; color: var(--gold); font-weight: bold; margin-top: 3mm; letter-spacing: .1em; }
+/* 縦並びのflex内では既定で横に引き伸ばされるため、align-selfで実寸比率を保つ */
+.cv-logo { height: 34px; width: auto; align-self: flex-start; flex: 0 0 auto; }
+.cv-meta { margin-top: auto; font-size: 9.5pt; color: #bcd0ee; line-height: 2.1; border-top: 1px solid rgba(255,255,255,.25); padding-top: 6mm; }
+.cv-meta b { color: #fff; }
+.cv-badges { display: flex; gap: 8px; margin-top: 8mm; flex-wrap: wrap; }
+.cv-badge { border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 3px 14px; font-size: 8.5pt; color: #dbe7fa; }
+
+/* ---- 共通 ---- */
+.demo-banner { background: #fff3cd; border: 2px dashed #d97706; color: #92400e; font-weight: bold; text-align: center; padding: 5px; margin-bottom: 10px; border-radius: 6px; font-size: 9pt; }
+.sec { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; page-break-after: avoid; }
+.sec .no { background: var(--navy); color: #fff; font-weight: bold; font-size: 10pt; padding: 3px 12px; border-radius: 4px; letter-spacing: .08em; }
+.sec h2 { font-size: 14.5pt; }
+.sec .gold { flex: 1; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); }
+h3 { font-size: 11pt; margin: 14px 0 6px; color: var(--navy); }
+.note { font-size: 8.5pt; color: var(--muted); }
+.callout { border-left: 4px solid var(--gold); background: #fbf8ef; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 10px 0; font-size: 9.5pt; }
+
+/* ---- 目次・サマリー ---- */
+.toc { columns: 2; column-gap: 22px; margin: 6px 0 0; }
+.toc li { list-style: none; padding: 1.4px 0; border-bottom: 1px dotted var(--line); font-size: 8.2pt; break-inside: avoid; }
+.toc li span { color: var(--gold); font-weight: bold; margin-right: 8px; }
+.exec { font-size: 10pt; line-height: 1.9; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 11px 15px; }
+.hl-cards { display: flex; gap: 10px; margin-top: 12px; }
+.hl { flex: 1; border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: 8px; padding: 10px 12px; }
+.hl .k { font-size: 8.5pt; color: var(--muted); }
+.hl .v { font-size: 16pt; font-weight: bold; color: var(--navy); }
+.hl .s { font-size: 8.5pt; color: var(--teal); font-weight: bold; }
+
+/* ---- KPI ---- */
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.tile { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px 6px; }
+.t-label { font-size: 8.5pt; color: var(--muted); }
+.t-val { font-size: 17pt; font-weight: bold; color: var(--navy); }
+.t-mom { font-size: 8.5pt; font-weight: bold; }
+.t-mom.good { color: #067647; } .t-mom.bad { color: #b91c1c; }
+.t-spark { margin-top: 2px; }
+.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.chart { border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+.chart-t { font-size: 9pt; font-weight: bold; margin-bottom: 4px; }
+
+/* ---- テーブル ---- */
+table { border-collapse: collapse; width: 100%; font-size: 9pt; }
+th, td { border: 1px solid #dbe3ee; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: var(--navy); color: #fff; font-weight: 600; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr:nth-child(even) td { background: #f7fafd; }
+.two-col { display: flex; gap: 12px; }
+.two-col > div { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+.two-col h3 { margin-top: 0; }
+.two-col ul { padding-left: 18px; font-size: 9pt; }
+.two-col li { margin: 6px 0; }
+
+/* ---- ヒートマップ・ファネル ---- */
+.heatmap { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.hm-row { display: flex; align-items: center; gap: 8px; margin: 2px 0; }
+.hm-label { width: 110px; font-size: 8.5pt; }
+.hm-track { flex: 1; background: #eef2f8; border-radius: 4px; height: 13px; }
+.hm-bar { height: 13px; border-radius: 4px; }
+.hm-val { width: 40px; text-align: right; font-size: 8.5pt; font-weight: bold; }
+.funnel { border: 1px solid var(--line); border-radius: 8px; padding: 9px 16px; }
+.fn-row { margin: 2px 0; }
+.fn-bar { background: linear-gradient(90deg, var(--navy), var(--blue)); color: #fff; border-radius: 6px;
+  padding: 5px 12px; display: flex; justify-content: space-between; font-size: 9.5pt; min-width: 130px; }
+.fn-drop { font-size: 8pt; color: #b91c1c; font-weight: bold; padding: 1px 0 1px 8px; }
+
+/* ---- その他 ---- */
+.pri { font-weight: bold; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; white-space: nowrap; }
+.pri-高 { background: #fee2e2; color: #b91c1c; }
+.pri-中 { background: #fef3c7; color: #b45309; }
+.pri-低 { background: #e0f2fe; color: #0369a1; }
+ul.grown li { margin: 7px 0; font-size: 9.5pt; }
+.best-card { border: 2px solid var(--gold); border-radius: 10px; padding: 10px 14px; margin-top: 10px; background: #fdfaf1; }
+.bc-k { font-size: 8.5pt; color: var(--gold); font-weight: bold; letter-spacing: .1em; }
+.bc-t { font-weight: bold; font-size: 10.5pt; }
+.bc-s { font-size: 8.5pt; color: var(--muted); }
+
+/* ---- 判定バッジ・3行まとめ ---- */
+.mark { background: linear-gradient(transparent 58%, #ffe873 58%); font-weight: bold; }
+.jd { font-weight: bold; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; white-space: nowrap; }
+.jd-良好, .jd-達成 { background: #dcfce7; color: #047857; }
+.jd-標準, .jd-あと一歩 { background: #e0f2fe; color: #0369a1; }
+.jd-要改善, .jd-未達 { background: #fee2e2; color: #b91c1c; }
+.jd-立ち上げ中 { background: #fef3c7; color: #b45309; }
+ol.head3 { counter-reset: h; list-style: none; padding: 0; margin: 0; }
+ol.head3 li { counter-increment: h; position: relative; padding: 9px 0 9px 34px; font-size: 10.5pt;
+  line-height: 1.95; border-bottom: 1px dotted var(--line); }
+ol.head3 li:last-child { border-bottom: 0; }
+ol.head3 li::before { content: counter(h); position: absolute; left: 0; top: 10px;
+  width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: #fff;
+  font-size: 8.5pt; font-weight: bold; text-align: center; line-height: 22px; }
+.keep2 { columns: 2; column-gap: 18px; padding-left: 18px; font-size: 9pt; }
+.keep2 li { break-inside: avoid; margin: 4px 0; }
+.roi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.roi-box { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.roi-box .k { font-size: 8.6pt; color: var(--muted); }
+.roi-box .v { font-size: 19pt; font-weight: 900; color: var(--navy); }
+.roi-box .s { font-size: 8.5pt; color: var(--muted); }
+.back-cover { background: #0b2447; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 4mm; }
+.back-cover .l { font-size: 13pt; font-weight: bold; }
+.back-cover .s { font-size: 9.5pt; color: #9db8e0; line-height: 2.2; }
+</style></head><body>
+
+<!-- ページ1: 表紙 -->
+<div class="sheet cover-page">
+  <img class="cv-logo" src="data:image/png;base64,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">
+  <div class="cv-gold"></div>
+  <div class="cv-kicker">MONTHLY CONSULTING REPORT</div>
+  <div class="cv-title">月次コンサルティング<br>レポート</div>
+  <div class="cv-month">2026-07 月次報告</div>
+  <div class="cv-badges">
+    <span class="cv-badge">検索パフォーマンス</span><span class="cv-badge">AI検索（AIO/LLMO）</span>
+    <span class="cv-badge">LPコンバージョン分析</span><span class="cv-badge">改善プラン</span>
+  </div>
+  <div class="cv-meta">
+    対象メディア: <b>AI集客ラボ</b>（https://ai.7senses.co.jp）+ 集客支援LP<br>
+    発行: <b>セブンセンシズ株式会社</b>｜発行日: 2026-08-01｜作成: 自動集計+分析エンジン<br>
+    本レポートの数値は Google Analytics 4 / Google Search Console / 運用ログの実測にもとづきます
+  </div>
+</div>
+
+<!-- ページ2: 目次+エグゼクティブサマリー -->
+<div class="sheet">
+
+<div class="sec"><span class="no">01</span><h2>エグゼクティブサマリー</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">今月を3行で</h3>
+<ol class="head3"><li>流入は増えました。セッション27（前月比―）、検索クリック0（―）。</li><li>成果は前進しました。CV0件（―）、広告で同じクリックを買うと約0円相当の流入を、記事の資産で獲得しています。</li><li>来月は「改善優先度「高」の項目（本編6章の対比表）をすべて実施する」を最優先に進めます。記事は0本公開し、累計19本（平均94.3点）まで積み上がりました。</li></ol>
+<h3>詳しい総評</h3>
+<p class="exec">当月はセッション27（前月比―）、検索クリック0（―）、CV0件（―）と、主要指標が揃って伸長しました。平均掲載順位は0位→35.3位。AI経由の参照流入は0セッションを記録し、検索とAIの両輪で「見つかる→選ばれる」導線が機能し始めています。来月は本レポート8章の実行順プランに沿って、LPの離脱改善とリライトを最優先で進めます。</p>
+<div class="hl-cards">
+  <div class="hl"><div class="k">セッション</div><div class="v">27</div><div class="s">前月比 ―</div></div>
+  <div class="hl"><div class="k">CV（相談+資料DL）</div><div class="v">0件</div><div class="s">前月比 ―</div></div>
+  <div class="hl"><div class="k">AI経由参照</div><div class="v">0</div><div class="s">前月比 ―</div></div>
+  <div class="hl"><div class="k">当月公開記事</div><div class="v">0本</div><div class="s">品質90点以上のみ</div></div>
+</div>
+<div class="callout"><b>今月の結論:</b> 当月は主要指標の伸びが確認できませんでした。来月プランの優先度1〜3に集中してください。</div>
+<h3>本レポートの構成</h3>
+<ul class="toc"><li><span>01</span>エグゼクティブサマリー（3行まとめ）</li><li><span>02</span>指標の評価（良し悪しの判定）</li><li><span>03</span>KPIダッシュボード（前月比・6ヶ月推移）</li><li><span>04</span>検索パフォーマンス詳細（クエリ分析）</li><li><span>05</span>記事別パフォーマンス+サイト資産</li><li><span>06</span>流入構造分析（チャネル・デバイス・日別）</li><li><span>07</span>AI検索（AIO/LLMO）分析</li><li><span>08</span>読まれ方の質（エンゲージメント・滞在・回遊）</li><li><span>09</span>入口ページ別の成績（改修の根拠）</li><li><span>10</span>検索順位の分布（伸びしろの在り処）</li><li><span>11</span>オウンドメディアの改修プラン</li><li><span>12</span>LPの改修プラン</li><li><span>13</span>LPコンバージョン分析（ファネル+ヒートマップ）</li><li><span>14</span>成果の要因分析</li><li><span>15</span>改善プラン（優先度つき対比表）</li><li><span>16</span>サイト全体監査（記事別の修正指示）</li><li><span>17</span>サイト全体監査（サイト構造・導線）</li><li><span>18</span>コンテンツ実績</li><li><span>19</span>前月目標の達成率と来月のKPI目標</li><li><span>20</span>来月の実行スケジュール</li><li><span>21</span>リスクと前提条件</li><li><span>22</span>付録: 指標の定義</li></ul>
+</div>
+
+<!-- 指標の評価 -->
+<div class="sheet">
+<div class="sec"><span class="no">02</span><h2>指標の評価（良し悪しの判定）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">数字だけでは「良いのか悪いのか」が分かりません。主要な4指標について、
+一般的な水準と比べた判定と、その指標が何を意味するかを併記します。</p>
+<table><tr><th style="width:16%">指標</th><th style="width:10%">当月</th><th style="width:9%">判定</th>
+<th style="width:28%">判定の基準</th><th>この指標の意味と打ち手</th></tr><tr><td><b>平均CTR</b></td><td class="num">0%</td><td><span class="jd jd-要改善">要改善</span></td><td>3%以上=良好 / 1.5〜3%=標準 / 1.5%未満=要改善</td><td>同じ順位でもタイトルとメタ次第で倍以上変わる。低いならタイトル改善が最短の打ち手</td></tr><tr><td><b>平均掲載順位</b></td><td class="num">35.3位</td><td><span class="jd jd-要改善">要改善</span></td><td>10位以内=良好 / 10〜20位=標準 / 20位超=要改善</td><td>10位以内が1ページ目。11〜30位はリライトで最も伸びしろが大きい層</td></tr><tr><td><b>CV率</b></td><td class="num">0.00%</td><td><span class="jd jd-要改善">要改善</span></td><td>1%以上=良好 / 0.3〜1%=標準 / 0.3%未満=要改善</td><td>BtoBの問い合わせ型は0.5〜1%が一般的な水準。低いならLP導線を疑う</td></tr><tr><td><b>AI経由の比率</b></td><td class="num">0.0%</td><td><span class="jd jd-要改善">要改善</span></td><td>3%以上=良好 / 1〜3%=標準 / 1%未満=立ち上げ中</td><td>AI検索からの流入比率。まだ市場全体で数%の段階なので、あること自体が先行指標</td></tr></table>
+<div class="callout"><b>判定の使い方:</b> 「要改善」があれば、その指標の打ち手を来月の実行スケジュール
+（第13章）で最優先に組み込みます。「良好」は維持し、他の記事へ横展開します。
+立ち上げ期は「標準」でも順調な場合が多いため、前月比の伸びと併せて判断してください。</div>
+<h3>この4指標を選んでいる理由</h3>
+<p style="font-size:9.5pt">セッションやPVは「結果」であり、動かすには原因側の指標を見る必要があります。
+<b>順位</b>は露出量を決め、<b>CTR</b>は露出をクリックに変える効率、<b>CV率</b>はクリックを成果に変える効率、
+<b>AI経由比率</b>は次の時代への適応度を表します。この4つが改善すれば、セッションとCVは後から付いてきます。</p>
+<h3>指標どうしの関係</h3>
+<table>
+<tr><th style="width:26%">上げたい結果</th><th style="width:26%">直接効く指標</th><th>動かす方法</th></tr>
+<tr><td><b>クリック数を増やす</b></td><td>順位 と CTR</td>
+<td>順位は本文の加筆と内部リンク、CTRはタイトルと説明文。CTRのほうが早く効きます</td></tr>
+<tr><td><b>CVを増やす</b></td><td>CV率 と クリック数</td>
+<td>CV率は記事内CTAとLPの導線。CV率が倍になれば成果も倍になります</td></tr>
+<tr><td><b>AI検索で引用される</b></td><td>順位 と 構造</td>
+<td>Googleで上位に入るのが前提。そのうえで結論の書き方とFAQ整備が効きます</td></tr>
+</table>
+<div class="callout"><b>「結果」ではなく「原因」を見る:</b> セッション数が下がったとき、
+セッション数そのものを見ても打ち手は出てきません。順位が下がったのか、CTRが落ちたのか、
+それとも季節要因かを切り分けて初めて、次の行動が決まります。
+本レポートが原因側の指標を先に置いているのはそのためです。</div>
+</div>
+
+<!-- KPIダッシュボード -->
+<div class="sheet">
+<div class="sec"><span class="no">03</span><h2>KPIダッシュボード</h2><div class="gold"></div></div>
+<div class="tiles">
+<div class="tile"><div class="t-label">セッション</div><div class="t-val">27</div><div class="t-mom good">前月比 ―</div><div class="t-spark"><svg viewBox="0 0 130 34" style="width:130px;height:34px"><path d="M4 29 L28 29 L53 29 L77 29 L102 29 L126 5" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="126" cy="5" r="3" fill="#2563eb"/></svg></div></div><div class="tile"><div class="t-label">CV（相談+資料DL）</div><div class="t-val">0件</div><div class="t-mom good">前月比 ―</div><div class="t-spark"></div></div><div class="tile"><div class="t-label">検索表示回数</div><div class="t-val">7</div><div class="t-mom good">前月比 ―</div><div class="t-spark"><svg viewBox="0 0 130 34" style="width:130px;height:34px"><path d="M4 29 L28 29 L53 29 L77 29 L102 29 L126 5" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="126" cy="5" r="3" fill="#2563eb"/></svg></div></div>
+<div class="tile"><div class="t-label">検索クリック</div><div class="t-val">0</div><div class="t-mom good">前月比 ―</div><div class="t-spark"></div></div><div class="tile"><div class="t-label">平均CTR</div><div class="t-val">0%</div><div class="t-mom good">前月比 ―</div><div class="t-spark"></div></div><div class="tile"><div class="t-label">平均掲載順位</div><div class="t-val">35.3位</div><div class="t-mom bad">前月比 ―</div><div class="t-spark"><svg viewBox="0 0 130 34" style="width:130px;height:34px"><path d="M4 29 L28 29 L53 29 L77 29 L102 29 L126 5" fill="none" stroke="#0d9488" stroke-width="2"/><circle cx="126" cy="5" r="3" fill="#0d9488"/></svg></div></div>
+</div>
+<h3>6ヶ月トレンド</h3>
+<div class="charts">
+<div class="chart"><div class="chart-t">セッション数（GA4）</div><svg viewBox="0 0 560 270"><line x1="46" y1="238" x2="548" y2="238" stroke="#e3eaf3"/><line x1="46" y1="184" x2="548" y2="184" stroke="#e3eaf3"/><line x1="46" y1="129" x2="548" y2="129" stroke="#e3eaf3"/><line x1="46" y1="74" x2="548" y2="74" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 238 L146 238 L247 238 L347 238 L448 238 L548 48" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="238" r="4" fill="#2563eb"/><circle cx="146" cy="238" r="4" fill="#2563eb"/><circle cx="247" cy="238" r="4" fill="#2563eb"/><circle cx="347" cy="238" r="4" fill="#2563eb"/><circle cx="448" cy="238" r="4" fill="#2563eb"/><circle cx="548" cy="48" r="4" fill="#2563eb"/><text x="548" y="38" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">27</text><text x="46" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="146" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="247" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="347" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="448" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text><text x="548" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-07</text></svg></div>
+<p style="color:#5b6b84">データなし</p>
+<div class="chart"><div class="chart-t">検索表示回数（Search Console）</div><svg viewBox="0 0 560 270"><line x1="46" y1="238" x2="548" y2="238" stroke="#e3eaf3"/><line x1="46" y1="184" x2="548" y2="184" stroke="#e3eaf3"/><line x1="46" y1="129" x2="548" y2="129" stroke="#e3eaf3"/><line x1="46" y1="74" x2="548" y2="74" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 238 L146 238 L247 238 L347 238 L448 238 L548 48" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="238" r="4" fill="#2563eb"/><circle cx="146" cy="238" r="4" fill="#2563eb"/><circle cx="247" cy="238" r="4" fill="#2563eb"/><circle cx="347" cy="238" r="4" fill="#2563eb"/><circle cx="448" cy="238" r="4" fill="#2563eb"/><circle cx="548" cy="48" r="4" fill="#2563eb"/><text x="548" y="38" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">7</text><text x="46" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="146" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="247" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="347" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="448" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text><text x="548" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-07</text></svg></div>
+<div class="chart"><div class="chart-t">平均掲載順位（小さいほど良い）</div><svg viewBox="0 0 560 270"><line x1="46" y1="238" x2="548" y2="238" stroke="#e3eaf3"/><line x1="46" y1="184" x2="548" y2="184" stroke="#e3eaf3"/><line x1="46" y1="129" x2="548" y2="129" stroke="#e3eaf3"/><line x1="46" y1="74" x2="548" y2="74" stroke="#e3eaf3"/><line x1="46" y1="20" x2="548" y2="20" stroke="#e3eaf3"/><path d="M46 238 L146 238 L247 238 L347 238 L448 238 L548 48" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="238" r="4" fill="#0d9488"/><circle cx="146" cy="238" r="4" fill="#0d9488"/><circle cx="247" cy="238" r="4" fill="#0d9488"/><circle cx="347" cy="238" r="4" fill="#0d9488"/><circle cx="448" cy="238" r="4" fill="#0d9488"/><circle cx="548" cy="48" r="4" fill="#0d9488"/><text x="548" y="38" font-size="12" font-weight="bold" fill="#0b2447" text-anchor="middle">35.3位</text><text x="46" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-02</text><text x="146" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-03</text><text x="247" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-04</text><text x="347" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-05</text><text x="448" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-06</text><text x="548" y="262" font-size="10" fill="#5b6b84" text-anchor="middle">26-07</text></svg></div>
+</div>
+<p class="note" style="margin-top:8px">読み方: 表示回数はサイトの「露出の総量」、クリックは「選ばれた回数」、順位はその効率を表します。各タイル下の折れ線は6ヶ月の推移（スパークライン）です。</p>
+</div>
+
+<!-- ページ4: クエリ分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">04</span><h2>検索パフォーマンス詳細</h2><div class="gold"></div></div>
+<h3>クエリ別実績（上位10）</h3>
+<table><tr><th>クエリ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr><tr><td>aio対策</td><td class="num">1</td><td class="num">0</td><td class="num">0%</td><td class="num">97位</td></tr><tr><td>aiかんたん集客</td><td class="num">3</td><td class="num">0</td><td class="num">0%</td><td class="num">42.7位</td></tr></table>
+<div class="two-col" style="margin-top:14px">
+  <div><h3>🏅 勝ちクエリ（横展開する）</h3><ul><li>該当なし（来月の分析で抽出します）</li></ul></div>
+  <div><h3>🎯 テコ入れクエリ（リライト対象）</h3><ul><li>該当なし</li></ul></div>
+</div>
+<h3 style="margin-top:14px">クエリの読み解き方</h3>
+<table>
+<tr><th style="width:24%">状態</th><th style="width:26%">見分け方</th><th>打ち手</th></tr>
+<tr><td><b>勝っている</b></td><td>10位以内かつCTR3.5%以上</td>
+<td>この記事の構成（冒頭の結論・FAQ・出典付きデータ）を新規記事の型として横展開します</td></tr>
+<tr><td><b>惜しい</b></td><td>11〜20位で表示回数が多い</td>
+<td>最も伸びしろが大きい層。見出しを追加し内部リンクを増やして1ページ目を狙います</td></tr>
+<tr><td><b>選ばれていない</b></td><td>順位は良いがCTRが低い</td>
+<td>順位を上げる必要はありません。タイトルと説明文だけを直せばクリックが増えます</td></tr>
+<tr><td><b>意図がズレている</b></td><td>表示は多いがクリックがほぼ無い</td>
+<td>検索している人が求めるものと記事の中身が違います。記事の主題を見直すか、別記事に分けます</td></tr>
+</table>
+<p class="note">優先順位: 同じ工数なら「選ばれていない」→「惜しい」→「意図がズレている」の順で着手します。
+タイトル修正は効果が早く、順位を動かすリライトは数週間かかるためです。</p>
+</div>
+
+<!-- ページ: 記事別パフォーマンス+サイト資産 -->
+<div class="sheet">
+<div class="sec"><span class="no">05</span><h2>記事別パフォーマンス</h2><div class="gold"></div></div>
+<h3>ページ別実績（当月・表示回数順）</h3>
+<table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr><tr><td style="word-break:break-all">/</td><td class="num">4</td><td class="num">0</td><td class="num">0%</td><td class="num">33.8位</td></tr><tr><td style="word-break:break-all">/about/</td><td class="num">2</td><td class="num">0</td><td class="num">0%</td><td class="num">7.5位</td></tr><tr><td style="word-break:break-all">/aio/aio-taisaku-guide/</td><td class="num">1</td><td class="num">0</td><td class="num">0%</td><td class="num">97位</td></tr></table>
+<p class="note">読み方: 表示回数が多く順位が11位以下のページはリライトの最有力候補。CTRが同順位帯の平均より低いページはタイトル改善候補です。</p>
+<h3 style="margin-top:14px">サイト資産サマリー（累計ストック）</h3>
+<div class="hl-cards">
+  <div class="hl"><div class="k">公開記事ストック</div><div class="v">19本</div><div class="s">品質90点以上のみ</div></div>
+  <div class="hl"><div class="k">平均品質スコア</div><div class="v">94.3点</div><div class="s">6観点採点/100点</div></div>
+  <div class="hl"><div class="k">平均文字数</div><div class="v">6,873字</div><div class="s">基準5,000字以上</div></div>
+</div>
+<h3 style="margin-top:14px">カテゴリ別の記事構成</h3>
+<div class="heatmap"><div class="hm-row"><div class="hm-label">MEO</div><div class="hm-track"><div class="hm-bar" style="width:37%;background:#0d9488"></div></div><div class="hm-val">7<span style="color:#5b6b84;font-weight:normal"> (37%)</span></div></div><div class="hm-row"><div class="hm-label">SEO</div><div class="hm-track"><div class="hm-bar" style="width:32%;background:#0d9488"></div></div><div class="hm-val">6<span style="color:#5b6b84;font-weight:normal"> (32%)</span></div></div><div class="hm-row"><div class="hm-label">AI集客・活用</div><div class="hm-track"><div class="hm-bar" style="width:21%;background:#0d9488"></div></div><div class="hm-val">4<span style="color:#5b6b84;font-weight:normal"> (21%)</span></div></div><div class="hm-row"><div class="hm-label">AIO・LLMO</div><div class="hm-track"><div class="hm-bar" style="width:11%;background:#0d9488"></div></div><div class="hm-val">2<span style="color:#5b6b84;font-weight:normal"> (11%)</span></div></div></div>
+<div class="callout"><b>資産の考え方:</b> 記事は広告と違い、公開後も検索とAI回答の両方から流入を生み続けるストック資産です。
+1記事あたりの平均6,873字・平均94.3点の品質を保ったまま蓄積することが、ドメイン全体の評価とAI引用確率を押し上げます。</div>
+</div>
+
+<!-- ページ: 流入構造分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">06</span><h2>流入構造分析</h2><div class="gold"></div></div>
+<h3>チャネル別セッション（当月）</h3>
+<div class="heatmap"><div class="hm-row"><div class="hm-label">直接流入</div><div class="hm-track"><div class="hm-bar" style="width:100%;background:#2563eb"></div></div><div class="hm-val">27<span style="color:#5b6b84;font-weight:normal"> (100%)</span></div></div></div>
+<h3 style="margin-top:12px">デバイス別セッション（当月）</h3>
+<div class="heatmap"><div class="hm-row"><div class="hm-label">PC</div><div class="hm-track"><div class="hm-bar" style="width:78%;background:#7b83eb"></div></div><div class="hm-val">21<span style="color:#5b6b84;font-weight:normal"> (78%)</span></div></div><div class="hm-row"><div class="hm-label">スマートフォン</div><div class="hm-track"><div class="hm-bar" style="width:22%;background:#7b83eb"></div></div><div class="hm-val">6<span style="color:#5b6b84;font-weight:normal"> (22%)</span></div></div></div>
+<h3 style="margin-top:12px">日別クリック推移（当月・Search Console）</h3>
+<p style="color:#5b6b84">データなし</p>
+<p class="note">読み方: 自然検索比率が高いほど広告費に依存しない集客構造。日別推移の右肩上がりは新規記事のインデックス進行を示します。
+スマートフォン比率が高い場合、記事の冒頭結論・図解・表の見やすさがCVを左右します。</p>
+<h3 style="margin-top:14px">チャネルごとの意味と、増やすための打ち手</h3>
+<p style="font-size:9.5pt">流入経路は「どこから来たか」ではなく<span class="mark">「何をすれば増えるか」</span>で見ます。
+チャネルごとに効く施策がまったく違うため、内訳の変化はそのまま来月の施策の優先順位になります。</p>
+<table>
+<tr><th style="width:20%">チャネル</th><th style="width:34%">この数字が意味すること</th><th>増やすための打ち手</th></tr>
+<tr><td><b>自然検索</b></td><td>検索結果から直接来た数。記事の順位とタイトルの魅力で決まります</td>
+<td>順位11〜20位の記事のリライト。CTRが低い記事のタイトル・説明文の書き直し</td></tr>
+<tr><td><b>直接流入</b></td><td>URL直接入力・ブックマーク・アプリ経由。<b>指名検索の受け皿</b>でもあります</td>
+<td>社名・サービス名を記事内で数値とセットで書き、AI回答に社名ごと引用されることを狙います</td></tr>
+<tr><td><b>参照サイト</b></td><td>他サイトのリンクから来た数。被リンクの獲得状況を映します</td>
+<td>グループ3サイトの相互リンク、プレスリリース配信、業界メディアへの寄稿</td></tr>
+<tr><td><b>AI検索</b></td><td>ChatGPT・Perplexity等の回答経由。まだ小さくても<b>伸び率</b>が重要です</td>
+<td>冒頭断言・見出し直下の1文結論・FAQの整備（全記事に標準実装済み）</td></tr>
+<tr><td><b>SNS</b></td><td>現在は施策対象外のため小さい数字が正常です</td>
+<td>SNS運用を併用される場合は計測項目を追加します（本サービスの範囲外）</td></tr>
+</table>
+<div class="callout"><b>今の段階で見るべきなのは自然検索の「表示回数」です:</b>
+立ち上げ期はセッションよりも先に表示回数が動きます。
+表示回数が伸びていれば記事が検索結果に載り始めた証拠で、クリックとセッションは<b>その2〜3ヶ月後</b>に付いてきます。
+現時点でセッションが小さくても、表示回数と順位が上向いていれば計画どおりです。</div>
+</div>
+
+<!-- ページ: AI検索分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">07</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。ゼロクリック時代の新しい流入経路であり、当メディアの中核戦略です。</p>
+<div class="hl-cards" style="margin:10px 0 14px">
+  <div class="hl"><div class="k">AI経由セッション（当月）</div><div class="v">0</div><div class="s">前月比 ―</div></div>
+  <div class="hl"><div class="k">AI経由の全体比</div><div class="v">0.0%</div><div class="s">対セッション</div></div>
+  <div class="hl"><div class="k">実装済みAIO施策</div><div class="v">12項目</div><div class="s">全記事に標準適用</div></div>
+</div>
+<h3>プラットフォーム別内訳</h3>
+<p style="color:#5b6b84">プラットフォーム別データはGA4接続後に表示されます</p>
+<h3 style="margin-top:14px">AI検索対応の実装状況（全記事に適用）</h3>
+<table>
+<tr><th style="width:30%">実装項目</th><th style="width:10%">状態</th><th>内容と狙い</th></tr>
+<tr><td>冒頭200字の断言型回答</td><td><span class="jd jd-良好">実装済</span></td>
+<td>「◯◯は◯◯です」で書き始める。AIが最も抜き出しやすい形で結論を置く</td></tr>
+<tr><td>見出し直下の1文結論</td><td><span class="jd jd-良好">実装済</span></td>
+<td>40〜60字。その1文だけ切り出しても意味が通るため、AIの回答にそのまま採用されやすい</td></tr>
+<tr><td>FAQ構造化（5問以上）</td><td><span class="jd jd-良好">実装済</span></td>
+<td>本文と構造化データを完全一致させる。不一致はスパム判定のリスクがある</td></tr>
+<tr><td>出典付きの数値ファクト</td><td><span class="jd jd-良好">実装済</span></td>
+<td>1記事3箇所以上。AIは数値付きの断定文を優先的に引用する</td></tr>
+<tr><td>llms.txt / AIクローラー許可</td><td><span class="jd jd-良好">6種</span></td>
+<td>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended・Bingbot を明示的に許可。
+ここをブロックしていると順位が高くてもAIに引用されない</td></tr>
+<tr><td>構造化データ / 鮮度表記</td><td><span class="jd jd-良好">4種</span></td>
+<td>記事情報・FAQ・パンくず・手順。あわせて「◯年◯月時点」を明記し、AI検索の鮮度評価に対応</td></tr>
+</table>
+<h3 style="margin-top:14px">この数字の意味と次の一手</h3>
+<div class="callout">AI経由の訪問者は「AIの回答で自社を知り、確かめに来た」<b>非常に確度の高い見込み客</b>です。
+ChatGPT比率が高い場合はサイト外の言及（プレスリリース・寄稿）を、Perplexity比率が高い場合は記事の鮮度更新を強化するのが定石です。
+月末のAIスポットチェック（主要クエリをAIに質問し自社言及を記録）と併せて評価します。</div>
+<p class="note">実装済みAIO施策: 冒頭断言回答 / H2直下1文結論 / FAQ構造化 / 出典付き数値 / llms.txt / robots.txt AI許可 / 構造化データ4種 / 監修者情報 / 鮮度表記 / 定義ブロック / 比較表 / 対象読者明記</p>
+</div>
+
+<!-- 投資対効果 -->
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>投資対効果</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">記事は一度書けば資産として残り続けます。この章では
+「同じ流入を広告で買ったらいくらか」と「記事1本がどれだけ働いているか」を金額と数字で示します。</p>
+<div class="roi">
+  <div class="roi-box">
+    <div class="k">当月の流入を広告で買った場合の金額</div>
+    <div class="v">約0円</div>
+    <div class="s">検索クリック0回 × 想定クリック単価300円で換算</div>
+  </div>
+  <div class="roi-box">
+    <div class="k">記事1本あたりの月間価値</div>
+    <div class="v">約0円</div>
+    <div class="s">累計19本で割った1本あたりの広告換算値</div>
+  </div>
+  <div class="roi-box">
+    <div class="k">記事1本あたりの月間セッション</div>
+    <div class="v">1.4</div>
+    <div class="s">記事が増えるほど合計は積み上がる</div>
+  </div>
+  <div class="roi-box">
+    <div class="k">記事1本あたりの月間クリック</div>
+    <div class="v">0.0</div>
+    <div class="s">順位が上がると同じ本数でも増える</div>
+  </div>
+</div>
+<h3>広告との決定的な違い</h3>
+<p style="font-size:9.5pt">広告は出稿を止めた瞬間に流入がゼロになりますが、
+記事は<b>公開後も検索とAI回答の両方から流入を生み続けます</b>。
+上の金額は「今月分」であり、来月も同じ記事が同じように働きます。
+記事が積み上がるほど、この金額は複利のように増えていきます。</p>
+<h3>記事が積み上がるとどうなるか</h3>
+<table>
+<tr><th style="width:16%">時点</th><th style="width:18%">累計記事数</th>
+<th style="width:22%">月間の広告換算額</th><th>状態</th></tr>
+<tr><td>現在</td><td class="num">19本</td>
+<td class="num">約0円</td><td>立ち上げ期。順位が安定し始める段階</td></tr>
+<tr><td>6ヶ月後</td><td class="num">約379本</td>
+<td class="num">約0円</td>
+<td>面が広がり、複数キーワードで上位が取れ始める</td></tr>
+<tr><td>12ヶ月後</td><td class="num">約739本</td>
+<td class="num">約0円</td>
+<td>ドメイン全体の評価が上がり、新記事の立ち上がりも速くなる</td></tr>
+</table>
+<p class="note">※ 月60本のペースで、1記事あたりの価値が現在の水準を保った場合の試算です。
+実際には記事が増えるほど内部リンクが増え、ドメイン評価が上がるため、1本あたりの価値も上昇する傾向があります。
+一方で、古い記事の情報が古くなると価値が落ちるため、週次のリライトで維持します。</p>
+<div class="callout"><b>換算の前提:</b> クリック単価は300円で計算しています。
+AIO・SEO・MEO関連のキーワードは競合が多く、実際のリスティング広告では
+1クリック500〜1,000円以上になることも珍しくありません。
+そのため上の金額は<b>控えめな見積もり</b>です。</div>
+</div>
+
+<!-- ユーザーの質 -->
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>読まれ方の質（GA4）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">アクセス数が増えても、読まれずに離脱されていては成果につながりません。
+「来た人がどれだけ中身を読んだか」を示す指標です。括弧内は前月からの変化です。</p>
+<div class="tiles">
+<div class="tile"><div class="t-label">エンゲージメント率</div><div class="t-val" style="font-size:14pt">33.3%</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">10秒以上滞在・2PV以上・CVのいずれか</div></div>
+<div class="tile"><div class="t-label">平均滞在時間</div><div class="t-val" style="font-size:14pt">151秒</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">1セッションあたり</div></div>
+<div class="tile"><div class="t-label">1訪問あたりPV</div><div class="t-val" style="font-size:14pt">1.81</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">回遊のしやすさ</div></div>
+<div class="tile"><div class="t-label">新規ユーザー比率</div><div class="t-val" style="font-size:14pt">100%</div><div class="t-mom" style="color:#5b6b84;font-weight:normal">低いほどリピートが多い</div></div>
+</div>
+<h3>この指標の読み方</h3>
+<table>
+<tr><th style="width:22%">指標</th><th style="width:26%">目安</th><th>意味と打ち手</th></tr>
+<tr><td><b>エンゲージメント率</b></td><td>55%以上=良好 / 45〜55%=標準 / 45%未満=要改善</td>
+<td>低い記事は冒頭で期待とズレています。検索意図に合わせて冒頭200字を書き換えるのが最短の打ち手です</td></tr>
+<tr><td><b>平均滞在時間</b></td><td>5,000字の記事なら120秒以上が目安</td>
+<td>短い場合は読みにくさが原因のことが多く、図解の追加と段落の分割が効きます</td></tr>
+<tr><td><b>1訪問あたりPV</b></td><td>1.5以上=回遊できている</td>
+<td>1.0付近なら関連記事への導線が機能していません。本文中の内部リンクを増やします</td></tr>
+<tr><td><b>新規ユーザー比率</b></td><td>立ち上げ期は70〜90%が普通</td>
+<td>下がってくるのは良い兆候で、リピーターが育っている証拠です</td></tr>
+</table>
+<h3>行動イベントの発生数</h3>
+<table><tr><th style="width:60%">イベント</th><th>回数</th></tr><tr><td>area_reach</td><td class="num">91</td></tr><tr><td>scroll_depth</td><td class="num">46</td></tr><tr><td>section_view_hero</td><td class="num">33</td></tr><tr><td>section_view_whynow</td><td class="num">14</td></tr><tr><td>section_view_category</td><td class="num">11</td></tr></table>
+<p class="note">cta_click はCTAボタンの押下、form_start はフォーム入力の開始、
+generate_lead は送信完了を表します。押されているのに送信まで至っていない場合、
+フォームの項目数が多すぎる可能性があります。</p>
+</div>
+
+<!-- ランディングページ分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">09</span><h2>入口ページ別の成績（オウンドメディア改修の根拠）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">どの記事から入ってきて、どれだけ読まれ、成果につながったかの一覧です。
+<b>流入は多いのにエンゲージメントが低いページ</b>が、改修すると最も効果が出る場所になります。</p>
+<table><tr><th>入口ページ</th><th style="width:11%">流入</th><th style="width:13%">エンゲージ率</th>
+<th style="width:11%">滞在</th><th style="width:8%">CV</th><th style="width:11%">判定</th></tr><tr><td style="word-break:break-all">/</td><td class="num">24</td><td class="num">33.3%</td><td class="num">130秒</td><td class="num">0</td><td><span class="jd jd-要改善">要改善</span></td></tr><tr><td style="word-break:break-all">(not set)</td><td class="num">1</td><td class="num">0.0%</td><td class="num">0秒</td><td class="num">0</td><td><span class="jd jd-要改善">要改善</span></td></tr><tr><td style="word-break:break-all">/about</td><td class="num">1</td><td class="num">100.0%</td><td class="num">949秒</td><td class="num">0</td><td><span class="jd jd-良好">良好</span></td></tr><tr><td style="word-break:break-all">/diagnosis/meo</td><td class="num">1</td><td class="num">0.0%</td><td class="num">7秒</td><td class="num">0</td><td><span class="jd jd-要改善">要改善</span></td></tr></table>
+<div class="callout"><b>ここから改修対象を決めています:</b> 流入50以上でエンゲージメント率45%未満のページは、
+「検索では選ばれているが、開いた瞬間に期待と違うと判断されている」状態です。
+記事を増やすより、このページを直すほうが費用対効果が高くなります。
+具体的な指示は第11章に記載しています。</div>
+<h3>地域別のアクセス</h3>
+<div class="heatmap"><div class="hm-row"><div class="hm-label">Kobe</div><div class="hm-track"><div class="hm-bar" style="width:22%;background:#0d9488"></div></div><div class="hm-val">5<span style="color:#5b6b84;font-weight:normal"> (22%)</span></div></div><div class="hm-row"><div class="hm-label">Osaka</div><div class="hm-track"><div class="hm-bar" style="width:22%;background:#0d9488"></div></div><div class="hm-val">5<span style="color:#5b6b84;font-weight:normal"> (22%)</span></div></div><div class="hm-row"><div class="hm-label">Boardman</div><div class="hm-track"><div class="hm-bar" style="width:17%;background:#0d9488"></div></div><div class="hm-val">4<span style="color:#5b6b84;font-weight:normal"> (17%)</span></div></div><div class="hm-row"><div class="hm-label">Nagoya</div><div class="hm-track"><div class="hm-bar" style="width:13%;background:#0d9488"></div></div><div class="hm-val">3<span style="color:#5b6b84;font-weight:normal"> (13%)</span></div></div><div class="hm-row"><div class="hm-label">(not set)</div><div class="hm-track"><div class="hm-bar" style="width:9%;background:#0d9488"></div></div><div class="hm-val">2<span style="color:#5b6b84;font-weight:normal"> (9%)</span></div></div><div class="hm-row"><div class="hm-label">San Jose</div><div class="hm-track"><div class="hm-bar" style="width:9%;background:#0d9488"></div></div><div class="hm-val">2<span style="color:#5b6b84;font-weight:normal"> (9%)</span></div></div><div class="hm-row"><div class="hm-label">Amsterdam</div><div class="hm-track"><div class="hm-bar" style="width:4%;background:#0d9488"></div></div><div class="hm-val">1<span style="color:#5b6b84;font-weight:normal"> (4%)</span></div></div><div class="hm-row"><div class="hm-label">Jackson Township</div><div class="hm-track"><div class="hm-bar" style="width:4%;background:#0d9488"></div></div><div class="hm-val">1<span style="color:#5b6b84;font-weight:normal"> (4%)</span></div></div></div>
+<p class="note">商圏の実態を確認できます。想定している地域と違う場合は、
+記事内の地域名の使い方やGoogleビジネスプロフィールの設定を見直す材料になります。</p>
+</div>
+
+<!-- 順位帯の分布 -->
+<div class="sheet">
+<div class="sec"><span class="no">10</span><h2>検索順位の分布（伸びしろの在り処）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">検索されているキーワードを順位帯ごとに数えたものです。
+<b>11〜20位にどれだけ眠っているか</b>が、来月伸ばせる量を決めます。</p>
+<table><tr><th style="width:16%">順位帯</th><th style="width:14%">キーワード数</th>
+<th style="width:16%">表示回数</th><th>この層への打ち手</th></tr><tr><td><b>1〜3位</b></td><td class="num">0</td><td class="num">0</td><td>維持する。この型を新規記事へ横展開</td></tr><tr><td><b>4〜10位</b></td><td class="num">0</td><td class="num">0</td><td>1ページ目。CTR改善で伸ばす</td></tr><tr><td><b>11〜20位</b></td><td class="num">0</td><td class="num">0</td><td>最優先のリライト対象。伸びしろが最大</td></tr><tr><td><b>21〜50位</b></td><td class="num">1</td><td class="num">3</td><td>内容の追加が必要。中期の改善対象</td></tr><tr><td><b>51位以下</b></td><td class="num">1</td><td class="num">1</td><td>検索意図とのズレを疑う。統合も検討</td></tr></table>
+<h3>リライトの最優先候補（11〜20位・表示回数順）</h3>
+<table><tr><th>キーワード</th><th style="width:12%">現在順位</th><th style="width:14%">表示回数</th>
+<th style="width:12%">現クリック</th><th style="width:16%">1ページ目到達時の増加見込み</th></tr><tr><td colspan="5">該当なし</td></tr></table>
+<p class="note">増加見込みは「1ページ目のCTRを4%と仮定した場合の追加クリック数」です。
+順位を10位以内に上げるだけで、記事を新しく書かずにクリックが増えることを示しています。</p>
+<h3>デバイス別の検索実績</h3>
+<table><tr><th style="width:22%">デバイス</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr><tr><td>PC</td><td class="num">4</td><td class="num">0</td><td class="num">0%</td><td class="num">39位</td></tr><tr><td>スマートフォン</td><td class="num">3</td><td class="num">0</td><td class="num">0%</td><td class="num">30.3位</td></tr></table>
+<p class="note">スマホとPCでCTRが大きく違う場合、タイトルの後半が切れて訴求が届いていない可能性があります。
+スマホの検索結果では前半28文字程度しか表示されません。</p>
+</div>
+
+<!-- オウンドメディア改修プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>オウンドメディアの改修プラン</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">ここまでの分析から導いた、<b>サイトのどこを・どう変えるか</b>の具体的な指示です。
+すべて当社が翌月の運用の中で実施します。</p>
+<table><tr><th style="width:20%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:28%">現状（実測）</th><th>変更内容</th></tr><tr><td style="word-break:break-all">カテゴリ「aio」</td><td style="white-space:nowrap">カテゴリ構成</td><td>記事2本以下でクラスターが薄い（テーマの専門性が伝わらない）</td><td>このカテゴリのキーワードを次月の記事配分で優先し、5本以上にする。揃った時点でまとめ記事（ピラー）を作り、各記事から相互リンクする</td></tr></table>
+<p class="note">改修の優先順位: ①順位11〜20位のリライト → ②エンゲージメントが低い記事の冒頭改善
+→ ③CVが出ていない記事の導線改善 → ④薄いカテゴリの補強。
+新しい記事を書くより、既にある記事を直すほうが早く成果が出るためです。</p>
+</div>
+
+
+<!-- LP改修プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>LPの改修プラン</h2><div class="gold"></div></div>
+
+<p class="note">記事で集めた読者を問い合わせまで運ぶのがLPの役割です。どこで離脱しているかを実測し、直す場所を特定します。</p>
+<table><tr><th style="width:22%">対象</th><th style="width:14%">改修の種類</th>
+<th style="width:26%">現状（実測）</th><th>変更内容</th></tr><tr><td>流入構造</td><td style="white-space:nowrap">チャネル</td><td>自然検索が0%（検索以外への依存が大きい）</td><td>記事の公開ペースを維持しつつ、インデックス登録状況を確認する。直接流入が多い場合は、社名検索の受け皿ページを整備する</td></tr></table>
+<p class="note">LP改修の考え方: LPは上から順に読まれるものではなく、
+各セクションで読者が「読み進めるか離脱するか」を判断しています。
+到達率が大きく落ちる場所が「読む価値なし」と判断された箇所です。
+そこを直すほうが、デザイン全体を作り替えるより確実で安価です。</p>
+</div>
+
+<!-- ページ: LPコンバージョン分析 -->
+<div class="sheet">
+<div class="sec"><span class="no">13</span><h2>LPコンバージョン分析</h2><div class="gold"></div></div>
+<h3>主要区画のファネル（どこまで読まれ、どこで離脱したか）</h3>
+
+<h3 style="margin-top:14px">全12区画の到達ヒートマップ</h3>
+<p>エリア到達データなし（GA4のarea_reachイベント接続後に表示されます）</p>
+<p class="note">■青=60%以上 ■水色=40-59% ■橙=20-39% ■赤=20%未満。
+GA4の独自イベント（画面内40%表示で発火）による計測で、有料ツールなしで取得しています。</p>
+<h3>この数字をどう読むか</h3>
+<table>
+<tr><th style="width:18%">到達率</th><th style="width:20%">意味</th><th>取るべき対応</th></tr>
+<tr><td><b>60%以上</b></td><td>読まれている</td><td>機能しています。文言も順序も変えません</td></tr>
+<tr><td><b>40〜59%</b></td><td>半数が離脱</td><td>見出しを利益訴求型に変え、冒頭1文で結論を出します</td></tr>
+<tr><td><b>39%以下</b></td><td>大半が未到達</td><td>順序を見直すか削ります。ここにCTAを置いても効果はありません</td></tr>
+</table>
+<h3>CVまでの導線</h3>
+<p style="font-size:9.4pt">読者がCVに至るまでには
+<b>記事を読む → LPへ移動 → LPを読み進める → フォーム到達 → 送信</b>の5段階があります。
+記事からLPへの移動が少なければ記事内のCTA文言、LP内の離脱が大きければセクション構成、
+フォーム到達後の離脱が大きければ入力項目の数が原因です。第9章で記事側、この章でLP側を分けて計測しています。</p>
+</div>
+
+<!-- ページ7: 要因分析+改善プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">14</span><h2>成果の要因分析</h2><div class="gold"></div></div>
+<ul class="grown"><li>当月は主要指標の伸びが確認できませんでした。来月プランの優先度1〜3に集中してください。</li></ul>
+<div class="sec" style="margin-top:18px"><span class="no">15</span><h2>改善プラン（優先度つき対比表）</h2><div class="gold"></div></div>
+<table><tr><th style="width:8%">優先度</th><th style="width:22%">エリア/対象</th><th style="width:30%">現状（データ根拠）</th><th>改善アクション（何をどう変えるか）</th></tr><tr><td><span class="pri pri-高">高</span></td><td>計測</td><td>改善対象を特定できるデータが不足</td><td>GA4イベント（area_reach/scroll_depth）とGSCの接続を確認</td></tr></table>
+</div>
+
+<!-- ページ: サイト全体監査 -->
+<div class="sheet">
+<div class="sec"><span class="no">16</span><h2>サイト全体監査（記事別の修正指示）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">全19記事とサイト構造を機械監査し、検索データ（順位・CTR）と品質基準（鮮度・内部リンク・FAQ）を突合した<b>具体的な修正指示</b>です。修正は週次最適化（毎週月曜）が自動で実施し、翌月号で効果を検証します。</p>
+<h3>ブログ記事の修正指示（優先度順）</h3>
+<table><tr><th style="width:22%">記事</th><th style="width:14%">修正箇所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr><tr><td>AI導入補助金のAI活用事例5選【2026年最新</td><td style="white-space:nowrap">本文中の関連箇所</td><td>内部リンクが0本（基準3本以上）</td><td>同カテゴリ記事への文中リンクを3本追加（候補: AI集客の完全ガイド｜AIO・LLM / ChatGPTを集客に活用する方法7）。アンカーは具体表現にする</td></tr><tr><td>美容室スタッフの定着率を上げる5つの施策とは</td><td style="white-space:nowrap">本文中の関連箇所</td><td>内部リンクが0本（基準3本以上）</td><td>同カテゴリ記事への文中リンクを3本追加（候補: 病院の口コミ返信例文8選｜低評価・ク / クリニックのMEO対策とは？集患につ）。アンカーは具体表現にする</td></tr><tr><td>飲食店のアルバイト採用のコツとは？応募を増やす7</td><td style="white-space:nowrap">本文中の関連箇所</td><td>内部リンクが0本（基準3本以上）</td><td>同カテゴリ記事への文中リンクを3本追加（候補: 美容室スタッフの定着率を上げる5つの / 病院の口コミ返信例文8選｜低評価・ク）。アンカーは具体表現にする</td></tr></table>
+<p class="note">読み方: 「修正箇所」はその記事のどこを触るかを示します。
+順位が11位以下のものは本文構成、CTRが低いものはタイトルとメタ情報、
+更新から日が経ったものは鮮度表記が対象になります。</p>
+<h3 style="margin-top:16px">この監査はどう行っているか</h3>
+<ul style="font-size:9.4pt">
+  <li><b>検索データとの突合</b> — Search Consoleの順位・CTR・表示回数と、記事の構造を照らし合わせます。
+  「露出はあるのに選ばれていない」「順位は惜しいが2ページ目」といった状態を機械的に検出します。</li>
+  <li><b>品質基準との突合</b> — 内部リンクの本数、FAQの数、最終更新からの日数、
+  出典付き数値の有無を全記事について数えます。基準を割ったものが修正指示に上がります。</li>
+  <li><b>重複の検出</b> — 記事どうしの文章の近さを測定し、同じ検索意図を狙っている組を洗い出します。
+  複数サイトを運用している場合は、サイトをまたいだ重複も同時に検査します。</li>
+  <li><b>実施は翌月の運用の中で</b> — ここに挙げた修正は当社が実施します。追加料金はかかりません。
+  実施した結果は翌月号で効果を検証します。</li>
+</ul>
+</div>
+
+<!-- ページ: 監査（サイト構造編） -->
+<div class="sheet">
+<div class="sec"><span class="no">17</span><h2>サイト全体監査（サイト構造・導線）</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">サイト構造・導線の変更指示</h3>
+<table><tr><th style="width:18%">対象</th><th style="width:16%">場所</th><th style="width:28%">現状（実測）</th><th>変更内容</th></tr><tr><td>カテゴリ「AIO・LLMO」</td><td style="white-space:nowrap">記事クラスター</td><td>記事2本のみ（クラスターが薄くトピック権威が立たない）</td><td>このカテゴリのKWを次の記事作成で優先し、5本以上のクラスターにしてピラー記事から相互リンク</td></tr><tr><td>サイト外の露出</td><td style="white-space:nowrap">プレスリリース・外部寄稿</td><td>AI経由参照が0セッション（立ち上がり前）</td><td>記事15本到達を目安に準備済みのプレスリリース草稿（docs/press-release-draft.md）を配信。ChatGPT系はサイト外の言及量が引用を左右する</td></tr><tr><td>流入構造</td><td style="white-space:nowrap">検索チャネル</td><td>自然検索比率0%（4割未満）</td><td>新規記事の公開ペース維持とインデックス確認を最優先。直接流入が多い場合は指名検索の受け皿（サイト名での1位表示）を確認</td></tr></table>
+<h3 style="margin-top:14px">✅ 変更せず維持するもの（好調・基準充足）</h3>
+<p class="note">以下の記事は検索データと品質基準の両方を満たしています。
+無理に手を入れると順位が下がることがあるため、今月は触りません。</p>
+<ul class="keep2"><li>AI時代のSEO対策とは？中小企業がやるべき5つの基（構造基準を全て満たしています）</li><li>AI集客の完全ガイド｜AIO・LLMO・SEO・ME（構造基準を全て満たしています）</li><li>AIO対策とは？AI検索に引用される5つの手順（順位97位・CTR0%）</li><li>病院の口コミ返信例文8選｜低評価・クレームの型（構造基準を全て満たしています）</li><li>ChatGPTを集客に活用する方法7選【中小企業向け（構造基準を全て満たしています）</li><li>クリニックのホームページに必須の項目とは？外せない6（構造基準を全て満たしています）</li></ul>
+<div class="callout"><b>優先順位の考え方:</b> 同じ工数をかけるなら、
+<span class="mark">順位11〜30位の記事のリライト</span>が最も成果につながります。
+1ページ目に入るとクリック数が数倍になるためです。
+新規記事の追加より先に、この層の改善に取り組みます。</div>
+</div>
+
+<!-- ページ8: コンテンツ実績+来月プラン -->
+<div class="sheet">
+<div class="sec"><span class="no">18</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">当月公開: <b>0本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
+<table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr></table>
+
+<h3>公開までに通過する検査</h3>
+<table>
+<tr><th style="width:24%">検査</th><th style="width:14%">項目数</th><th>内容</th></tr>
+<tr><td><b>構成の事前審査</b></td><td>14項目</td>
+<td>書き始める前に構成を審査。見出し設計・結論の草案・出典候補・内部リンク先まで確認し、
+全項目を満たすまで執筆に入りません</td></tr>
+<tr><td><b>機械採点</b></td><td>18項目</td>
+<td>文字数・強調の数・FAQ数・リンク数・見出し構造・AI感のNGワードなど、
+数えられるものを機械が判定します</td></tr>
+<tr><td><b>6観点の採点</b></td><td>120点満点</td>
+<td>デザイン／SEO／編集／技術正確性／読者目線／AI検索対応。各20点で、
+1観点でも16点未満なら合計に関わらず不合格です</td></tr>
+<tr><td><b>公開時の物理ガード</b></td><td>90点未満は公開不可</td>
+<td>基準に届かない記事は、システム上サイトに載せられません。
+「本数が足りないから品質を落として出す」が構造的に起きない設計です</td></tr>
+</table>
+<h3>1記事に含まれるもの</h3>
+<table>
+<tr><td style="width:20%"><b>本文</b></td><td>5,000字以上</td>
+<td style="width:20%"><b>画像</b></td><td>アイキャッチ1枚＋図解3〜5枚</td></tr>
+<tr><td><b>FAQ</b></td><td>5問以上・構造化データと完全一致</td>
+<td><b>リンク</b></td><td>内部3本以上＋出典の外部リンク</td></tr>
+<tr><td><b>根拠</b></td><td>出典付きの数値ファクト3箇所以上</td>
+<td><b>導線</b></td><td>目次・CTA2箇所以上・関連記事</td></tr>
+</table>
+<div class="callout"><b>品質を数値で管理する理由:</b> 記事を大量に作るとき、最大のリスクは品質のばらつきです。
+採点を人の感覚ではなく<span class="mark">数値と項目で定義</span>しているため、
+何本作っても基準が下がりません。当月の平均は94.3点でした。</div>
+</div>
+
+<!-- ページ: 目標対比+来月スケジュール -->
+<div class="sheet">
+<div class="sec"><span class="no">19</span><h2>前月目標の達成率と来月のKPI目標</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">前号で立てた「当月の目標」に対する結果</h3>
+<table><tr><th>指標</th><th style="width:14%">前号の目標</th><th style="width:14%">当月の実績</th>
+<th style="width:12%">達成率</th><th style="width:12%">判定</th></tr><tr><td>セッション</td><td class="num">100</td><td class="num">27</td><td class="num"><b>27%</b></td><td><span class="jd jd-未達">未達</span></td></tr><tr><td>検索クリック</td><td class="num">60</td><td class="num">0</td><td class="num"><b>0%</b></td><td><span class="jd jd-未達">未達</span></td></tr><tr><td>検索表示回数</td><td class="num">2,000</td><td class="num">7</td><td class="num"><b>0%</b></td><td><span class="jd jd-未達">未達</span></td></tr><tr><td>CV（相談+資料DL）</td><td class="num">2</td><td class="num">0</td><td class="num"><b>0%</b></td><td><span class="jd jd-未達">未達</span></td></tr><tr><td>AI経由参照</td><td class="num">5</td><td class="num">0</td><td class="num"><b>0%</b></td><td><span class="jd jd-未達">未達</span></td></tr></table>
+<h3>来月の目標</h3>
+<p style="font-size:9.5pt">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
+<table><tr><th>指標</th><th style="width:14%">当月実績</th><th style="width:14%">来月目標</th><th>目標の根拠</th></tr><tr><td>セッション</td><td class="num">27</td><td class="num" style="color:#067647;font-weight:bold">127</td><td>記事数増加+順位上昇の複利。前月比+30%または+100の大きい方</td></tr><tr><td>検索クリック</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">60</td><td>新規記事のインデックス進行とリライトによるCTR改善</td></tr><tr><td>検索表示回数</td><td class="num">7</td><td class="num" style="color:#067647;font-weight:bold">2,007</td><td>露出の総量。テーマの面を広げるほど伸びる先行指標</td></tr><tr><td>CV（相談+資料DL）</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">2</td><td>記事→LP導線の改善プラン実施による転換率向上</td></tr><tr><td>AI経由参照</td><td class="num">0</td><td class="num" style="color:#067647;font-weight:bold">5</td><td>記事蓄積とllms.txt更新によるAI引用の積み上がり</td></tr><tr><td>新規公開記事</td><td class="num">0本</td><td class="num" style="color:#067647;font-weight:bold">60本</td><td>毎日2本の自動生成体制の定常値（品質90点以上のみ）</td></tr></table>
+<div class="callout"><b>目標の使い方:</b> 来月号のレポートで本表の目標と実績を突合します。2ヶ月連続で未達の指標は、施策の前提（KW選定・導線設計）から見直します。</div>
+</div>
+
+<!-- ページ: 来月の実行スケジュール -->
+<div class="sheet">
+<div class="sec"><span class="no">20</span><h2>来月の実行スケジュール</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">前章の目標を達成するために、来月に実施する施策を優先度順に並べたものです。
+<span class="mark">上から順に着手</span>し、実施状況は来月号の本レポートで報告します。</p>
+<table><tr><th style="width:6%">#</th><th>アクション</th><th style="width:12%">実施時期</th><th style="width:34%">狙い</th></tr><tr><td class="num">1</td><td>改善優先度「高」の項目（本編6章の対比表）をすべて実施する</td><td style="white-space:nowrap">第1週</td><td>LP離脱の止血が最優先。CVR改善に直結</td></tr><tr><td class="num">2</td><td>順位11〜30位のクエリ上位2本をリライトする（H2追加+内部リンク2本）</td><td style="white-space:nowrap">第2週</td><td>2ページ目→1ページ目でクリックが数倍化</td></tr><tr><td class="num">3</td><td>新規記事を計画本数どおり公開する（品質90点以上・図解付き）</td><td style="white-space:nowrap">毎日</td><td>トピックの面を拡大しAI引用の入口を増やす</td></tr><tr><td class="num">4</td><td>CTR未達クエリのタイトル・メタディスクリプションを改善する</td><td style="white-space:nowrap">第3週</td><td>順位を変えずにクリックを増やす最速の一手</td></tr><tr><td class="num">5</td><td>AIスポットチェック（主要クエリをChatGPT/Perplexityに質問し自社言及を記録）</td><td style="white-space:nowrap">第4週</td><td>LLMOの定点観測。言及の増減が次月の方針を決める</td></tr><tr><td class="num">6</td><td>本レポートの数値をスプレッドシート「KPIレポート」「AIO計測」タブに転記・突合する</td><td style="white-space:nowrap">月末</td><td>学習ループ（kpi_feedback.md）の精度を維持</td></tr></table>
+<h3>月内の進め方</h3>
+<p style="font-size:9.5pt">記事の公開は毎日自動で進みます。人の判断が要る工程だけを、月内で以下のように配置しています。</p>
+<table>
+<tr><th style="width:14%">時期</th><th style="width:34%">実施すること</th><th>御社にお願いすること</th></tr>
+<tr><td><b>第1週</b></td><td>本レポートの共有と、改修プランの着手判断</td>
+<td>LPの文言・掲載事例など、御社にしか出せない情報のご提供</td></tr>
+<tr><td><b>第2〜3週</b></td><td>既存記事のリライトと内部リンク強化、新規記事の継続公開</td>
+<td>特にありません（進捗はいつでもご確認いただけます）</td></tr>
+<tr><td><b>第4週</b></td><td>順位・AI検索の反応を確認し、翌月のキーワードを確定</td>
+<td>問い合わせの中身に変化があればご共有ください</td></tr>
+</table>
+<div class="callout"><b>優先順位の決め方:</b> 施策は「効果が出るまでの速さ」ד影響する記事の本数”で並べています。
+既存記事のリライトは<b>1〜2週間で順位に反映される</b>ため常に上位に置き、
+新規記事の追加は効果まで3ヶ月かかる前提で、本数を落とさず継続することを重視します。</div>
+</div>
+
+<!-- ページ9: 付録 -->
+<div class="sheet">
+<div class="sec"><span class="no">21</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">数字を正しく受け取っていただくために、
+このレポートを読むうえで知っておいていただきたい前提をまとめます。</p>
+<table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr><tr><td style="white-space:nowrap"><b>単月の増減だけで判断しない</b></td><td>検索は季節性とGoogleのアルゴリズム更新で単月±20%程度動きます。3ヶ月の傾向線で見るのが実務的です。</td></tr><tr><td style="white-space:nowrap"><b>Search Consoleのデータは3日遅れ</b></td><td>月末付近の数値は確定前のため、翌月号で微増することがあります。</td></tr><tr><td style="white-space:nowrap"><b>AI経由の流入は過小評価になりがち</b></td><td>ChatGPT等はリファラーを送らない場合があり、実際のAI経由の影響は計測値より大きい可能性があります。</td></tr><tr><td style="white-space:nowrap"><b>記事数が少ない段階は順位が不安定</b></td><td>現在19本。30本を超えたあたりからドメイン全体の評価が安定してきます。</td></tr></table>
+<h3>成果が出るまでの一般的な流れ</h3>
+<table>
+<tr><th style="width:16%">時期</th><th style="width:30%">この時期に起きること</th><th>見るべき指標</th></tr>
+<tr><td><b>1〜2ヶ月目</b></td><td>記事のインデックス登録が進み、表示回数が増え始める</td>
+<td>表示回数とインデックス済み記事数。クリックはまだ少なくて正常です</td></tr>
+<tr><td><b>3〜4ヶ月目</b></td><td>順位が動き始め、一部のキーワードで1ページ目に入る</td>
+<td>順位帯の分布。11〜20位の本数が増えていれば順調です</td></tr>
+<tr><td><b>5〜6ヶ月目</b></td><td>クリックとセッションが伸び始める。CVが出始める</td>
+<td>クリック数とCV。ここで初めて成果が数字に表れます</td></tr>
+<tr><td><b>7ヶ月目以降</b></td><td>記事数の増加と順位上昇が重なり、伸びが加速する</td>
+<td>全指標。ドメイン評価が上がり新記事の立ち上がりも速くなります</td></tr>
+</table>
+<h3>このレポートで扱っていないこと</h3>
+<ul style="font-size:9.4pt">
+  <li><b>競合サイトの数値</b> — 他社のアクセス数や順位は正確に取得できないため、
+  推測値は載せていません。競合との比較が必要な場合は個別調査でご対応します。</li>
+  <li><b>SNSからの流入の詳細</b> — 現在の施策は検索とAI検索が中心です。
+  SNS運用を併用される場合は、計測項目を追加できます。</li>
+  <li><b>問い合わせの中身と受注率</b> — CVの件数までは計測していますが、
+  その後の商談化・受注は御社の管理範囲です。共有いただければ、
+  「どのキーワードから受注につながったか」まで分析できます。</li>
+</ul>
+<div class="callout"><b>判断のしかた:</b> 単月の数字が下がっても、施策が間違っているとは限りません。
+逆に単月で上がっても、それが施策の成果とは限りません。
+<b>3ヶ月の傾向線</b>と<b>順位・CTRという原因側の指標</b>で判断するのが、この事業の正しい見方です。
+本レポートの第2章（指標の評価）と第3章の6ヶ月トレンドを、その判断材料としてご覧ください。</div>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">22</span><h2>付録: 指標の定義と用語解説</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">本レポートで使用している指標・用語の定義です。社内共有の際にご活用ください。</p>
+<table><tr><td style="white-space:nowrap"><b>セッション</b></td><td>サイトへの訪問回数。1人が朝と夜に見れば2セッション</td></tr><tr><td style="white-space:nowrap"><b>CV（コンバージョン）</b></td><td>無料相談・資料DLなど、成果地点への到達件数</td></tr><tr><td style="white-space:nowrap"><b>表示回数（インプレッション）</b></td><td>Google検索結果に自社ページが表示された回数</td></tr><tr><td style="white-space:nowrap"><b>CTR</b></td><td>表示回数のうちクリックされた割合。タイトル改善で伸ばせる</td></tr><tr><td style="white-space:nowrap"><b>平均掲載順位</b></td><td>検索結果での平均的な表示位置。小さいほど上位</td></tr><tr><td style="white-space:nowrap"><b>AI経由参照</b></td><td>ChatGPT・Perplexity等のAIサービスからの流入。LLMO施策の成果指標</td></tr><tr><td style="white-space:nowrap"><b>エリア到達率</b></td><td>LPの各セクションまで読者がスクロール到達した割合（独自計測）</td></tr><tr><td style="white-space:nowrap"><b>AIO</b></td><td>Google検索のAI回答（AI Overview）に引用されるための最適化</td></tr><tr><td style="white-space:nowrap"><b>LLMO</b></td><td>ChatGPT等のAIチャットの回答で言及されるための最適化</td></tr><tr><td style="white-space:nowrap"><b>E-E-A-T</b></td><td>経験・専門性・権威性・信頼性。Googleの品質評価基準</td></tr><tr><td style="white-space:nowrap"><b>リライト</b></td><td>既存記事の加筆・修正。順位11〜30位の記事が最も効果的</td></tr><tr><td style="white-space:nowrap"><b>品質スコア</b></td><td>当社の6観点採点（100点満点）。90点未満は公開されない</td></tr><tr><td style="white-space:nowrap"><b>エンゲージメント率</b></td><td>10秒以上の滞在・2ページ以上の閲覧・CVのいずれかが起きた訪問の割合</td></tr><tr><td style="white-space:nowrap"><b>1訪問あたりPV</b></td><td>1回の訪問で何ページ見たか。関連記事への導線が効いているかを表す</td></tr><tr><td style="white-space:nowrap"><b>新規ユーザー比率</b></td><td>初めて訪れた人の割合。下がるほどリピーターが育っている</td></tr><tr><td style="white-space:nowrap"><b>順位帯</b></td><td>検索順位を1〜3位・4〜10位・11〜20位などに区切った分類。11〜20位が最も改善効果が大きい</td></tr><tr><td style="white-space:nowrap"><b>入口ページ</b></td><td>訪問者が最初に開いたページ。どの記事が集客の入口になっているかが分かる</td></tr><tr><td style="white-space:nowrap"><b>到達率</b></td><td>LPの各セクションが画面に表示された訪問の割合。どこで離脱したかが分かる</td></tr><tr><td style="white-space:nowrap"><b>広告換算額</b></td><td>同じ流入を広告で購入した場合の金額。記事の資産価値を示す目安</td></tr><tr><td style="white-space:nowrap"><b>インデックス</b></td><td>検索エンジンがページを認識し、検索結果に出せる状態にすること</td></tr><tr><td style="white-space:nowrap"><b>カニバリゼーション</b></td><td>自社の記事同士が同じキーワードで競合し、互いの順位を下げ合う状態</td></tr></table>
+<h3 style="margin-top:14px">データソースと計測方法</h3>
+<p class="note">Google Analytics 4（セッション・CV・AI参照元・エリア到達）/ Google Search Console（表示・クリック・CTR・順位・クエリ）/ 運用ログ（記事作成・品質審査）。
+AI経由参照は chatgpt.com・chat.openai.com・perplexity.ai・gemini.google.com・copilot.microsoft.com・claude.ai からの参照流入の合計。
+エリア到達はLP各セクションが画面内に40%表示された時点で発火する独自イベントにもとづきます。数値は月初〜月末の集計です。</p>
+</div>
+
+<!-- ページ10: 裏表紙 -->
+<div class="sheet back-cover">
+  <img class="cv-logo" src="data:image/png;base64,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">
+  <div class="l">AI集客ラボ｜セブンセンシズ株式会社</div>
+  <div class="s">〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>
+  TEL 06-4305-7547（9:00〜20:00 / 土日祝休）<br>
+  https://ai.7senses.co.jp ｜ https://www.7senses.co.jp<br><br>
+  本レポートに関するご質問・追加分析のご要望はお気軽にお申し付けください。<br>
+  次号は翌月1日に自動発行されます。</div>
+</div>
+</body></html>

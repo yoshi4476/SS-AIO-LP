@@ -27,5 +27,11 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           npx --yes wrangler@4 pages project create ss-aio-lp --production-branch=master 2>/dev/null || echo "プロジェクトは作成済み"
-          npx --yes wrangler@4 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true
+          ok=""
+          for i in 1 2 3; do
+            npx --yes wrangler@4 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && { ok=1; break; }
+            echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
+            sleep 40
+          done
+          [ -n "$ok" ] || { echo "::error::3回ともデプロイ失敗"; exit 1; }
           echo "デプロイ完了。公開URLは上のログ（https://ss-aio-lp.pages.dev または deployment URL）を確認"
