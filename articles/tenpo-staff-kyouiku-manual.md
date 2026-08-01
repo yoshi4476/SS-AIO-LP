@@ -3,7 +3,7 @@ title: 店舗スタッフの教育マニュアルの作り方｜定着に効く4
 description: 店舗スタッフの教育マニュアルの作り方は、正社員以外への計画的なOJT実施率が27.1%にとどまる現状を踏まえ、手順の分解・見て分かる形での記録・運用の仕組み化を進めることです。3,200店舗以上の支援実績から解説します。
 slug: tenpo-staff-kyouiku-manual
 keyword: 店舗 スタッフ 教育 マニュアル
-category: hr
+category: meo
 date: 2026-08-01
 modified: 2026-08-01
 eyecatch: /images/tenpo-staff-kyouiku-manual/eyecatch.png
