@@ -2,6 +2,7 @@
 title: 予約につながる導線設計とは？離脱を防ぐ5つの視点
 description: 予約につながる導線設計とは、入力項目・予約手段・予約後の案内を一体で整える情報設計です。クリニックや士業事務所が今日から見直せる5つの視点と、離脱の原因・整備の3ステップを実務目線で解説します。
 slug: yoyaku-tsunagaru-dosen-sekkei
+keyword: 予約につながる導線設計
 category: seo
 date: 2026-07-30
 modified: 2026-07-30
