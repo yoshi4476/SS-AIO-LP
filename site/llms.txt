@@ -38,3 +38,4 @@
 - [病院の口コミ返信例文8選｜低評価・クレームの型](https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/): 守秘義務と医療広告ガイドラインに配慮した病院・クリニック向け口コミ返信例文8パターンを解説
 - [AI導入補助金のAI活用事例5選【2026年最新】](https://ai.7senses.co.jp/ai-marketing/ai-donyu-hojokin-jirei/): AI導入補助金2026の補助額・5つの申請枠とAI活用の採択事例5選、対象経費、申請の流れを解説
 - [クリニックのAI検索対策とは？患者に選ばれる5つの手順](https://ai.7senses.co.jp/aio/clinic-ai-kensaku-taisaku/): 医療広告ガイドラインに配慮したクリニック向けAI検索対策の実践手順を5つで解説
+- [BtoB SEOとは？商談前に選ばれる5つの施策](https://ai.7senses.co.jp/seo/btob-seo-taisaku/): 営業と話す前に検討が固まるBtoB購買の実態と、比較段階で選ばれる5つの施策を解説
