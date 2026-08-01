@@ -35,14 +35,36 @@ def load_env():
     env = {}
     p = ROOT / ".env"
     if p.exists():
-        for line in p.read_text(encoding="utf-8").splitlines():
+        # BOM付きで保存された場合に1行目のキー名が壊れるため utf-8-sig で読む
+        for line in p.read_text(encoding="utf-8-sig").splitlines():
             if "=" in line and not line.strip().startswith("#"):
                 k, v = line.split("=", 1)
-                env[k.strip()] = v.strip()
+                env[k.strip()] = v.strip().strip("'\"")
     return env
 
 
 ENV = load_env()
+
+
+def ga4_property():
+    """GA4プロパティIDを数値だけに正規化する（GA4 APIは数値以外を受け付けない）"""
+    raw = ENV.get("GA4_PROPERTY_ID", "")
+    # BOM・ゼロ幅文字・前後の空白を落とす（Secretsへの貼り付けで混入しやすい）
+    v = "".join(c for c in raw if c.isdigit() or c.isalpha() or c in "-_/")
+    v = v.removeprefix("properties/")
+    if v.isdigit():
+        return v
+    # 値そのものはGitHub Actionsのログでマスクされるため、原因の切り分けに使える特徴だけを出す
+    shape = ("空" if not v else
+             "測定ID（G-で始まる）" if v.upper().startswith("G-") else
+             "数字以外の文字を含む" if any(c.isalpha() for c in v) else
+             "記号・空白を含む")
+    raise SystemExit(
+        f"GA4_PROPERTY_ID が数値ではありません（長さ{len(v)}文字・{shape}）\n"
+        "  必要なのは9桁前後の数値のプロパティIDです（例: 547346579）。\n"
+        "  GA4 → 左下の歯車（管理）→ プロパティ設定 → 右上の「プロパティ ID」で確認できます。\n"
+        "  「G-」で始まる測定IDや「UA-」で始まる旧IDは使えません。\n"
+        "  修正先: GitHub Secrets の GA4_PROPERTY_ID")
 
 
 # ============================================================
@@ -90,7 +112,7 @@ def fetch_real():
 
     # --- GA4: 月別セッション/CV/AI参照 ---
     ga = BetaAnalyticsDataClient(credentials=creds)
-    prop = f"properties/{ENV['GA4_PROPERTY_ID']}"
+    prop = f"properties/{ga4_property()}"
     for m in labels:
         y, mo = map(int, m.split("-"))
         end = (date(y + (mo == 12), (mo % 12) + 1, 1) - timedelta(days=1)).isoformat()
