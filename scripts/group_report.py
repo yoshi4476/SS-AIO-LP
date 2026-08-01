@@ -50,8 +50,8 @@ def month_end(label):
 
 
 def creds(scopes):
-    from google.oauth2 import service_account
-    return service_account.Credentials.from_service_account_file(str(SA), scopes=scopes)
+    import gcreds
+    return gcreds.load(SA, scopes)
 
 
 def fetch_site(cfg, labels):

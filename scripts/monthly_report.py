@@ -79,11 +79,11 @@ def fetch_real():
             "  3. .env の GA4_PROPERTY_ID / GSC_SITE_URL / SPREADSHEET_ID を設定\n"
             "  形式の確認だけなら --demo を付けて実行してください")
 
-    creds = service_account.Credentials.from_service_account_file(
-        str(sa_path),
-        scopes=["https://www.googleapis.com/auth/analytics.readonly",
-                "https://www.googleapis.com/auth/webmasters.readonly",
-                "https://www.googleapis.com/auth/spreadsheets.readonly"])
+    import gcreds
+    creds = gcreds.load(sa_path, [
+        "https://www.googleapis.com/auth/analytics.readonly",
+        "https://www.googleapis.com/auth/webmasters.readonly",
+        "https://www.googleapis.com/auth/spreadsheets.readonly"])
 
     labels = month_labels(6)
     data = {"demo": False, "months": []}

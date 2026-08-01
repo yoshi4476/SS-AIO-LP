@@ -68,10 +68,9 @@ def gsc_queries():
     if not sa.exists():
         return []
     try:
-        from google.oauth2 import service_account
+        import gcreds
         from googleapiclient.discovery import build
-        creds = service_account.Credentials.from_service_account_file(
-            str(sa), scopes=["https://www.googleapis.com/auth/webmasters.readonly"])
+        creds = gcreds.load(sa, ["https://www.googleapis.com/auth/webmasters.readonly"])
         sc = build("searchconsole", "v1", credentials=creds)
         res = sc.searchanalytics().query(siteUrl=site, body={
             "startDate": (date.today() - timedelta(days=90)).isoformat(),

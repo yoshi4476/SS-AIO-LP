@@ -53,10 +53,9 @@ def main():
     if not urls:
         print("通知対象URLなし（本日公開・更新の記事なし）")
         return
-    from google.oauth2 import service_account
+    import gcreds
     from googleapiclient.discovery import build
-    creds = service_account.Credentials.from_service_account_file(
-        str(SA_PATH), scopes=["https://www.googleapis.com/auth/indexing"])
+    creds = gcreds.load(SA_PATH, ["https://www.googleapis.com/auth/indexing"])
     svc = build("indexing", "v3", credentials=creds)
     ok = 0
     for u in urls[:190]:  # 1日200件のAPI上限に対する安全マージン

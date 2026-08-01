@@ -28,8 +28,8 @@ AI_DOMAINS = {"chatgpt": ["chatgpt.com", "chat.openai.com"], "perplexity": ["per
 
 
 def creds(scopes):
-    from google.oauth2 import service_account
-    return service_account.Credentials.from_service_account_file(str(SA), scopes=scopes)
+    import gcreds
+    return gcreds.load(SA, scopes)
 
 
 def ga4(prop, day):
