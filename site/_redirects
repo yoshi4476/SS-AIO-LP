@@ -1,0 +1,7 @@
+# Cloudflare Pages のリダイレクト設定
+# 担当領域の取り違えで当サイトにも公開してしまった記事を、本来の掲載先（コーポレートサイト）へ送る。
+# 301にすることで、重複コンテンツの解消と同時に、蓄積した評価を移送先へ引き継ぐ。
+/meo/inshokuten-arubaito-saiyou-kotsu/  https://www.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/  301
+/meo/biyoushitsu-staff-teichakuritsu/   https://www.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/   301
+/meo/tenpo-staff-kyouiku-manual/        https://www.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/        301
+/meo/arubaito-souki-rishoku-fusegu/     https://www.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/     301

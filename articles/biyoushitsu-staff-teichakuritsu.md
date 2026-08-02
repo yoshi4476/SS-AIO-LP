@@ -2,7 +2,7 @@
 title: 美容室スタッフの定着率を上げる5つの施策とは
 description: 美容室のスタッフ定着率を上げるには、新卒美容師の42.5%が3年未満で離職する現状を踏まえ、採用の見極め・教育担当固定・評価基準の明確化を仕組み化することが必要です。3,200店舗以上の支援実績から実践施策を解説します。
 slug: biyoushitsu-staff-teichakuritsu
-category: meo
+category: hr
 date: 2026-07-30
 modified: 2026-07-30
 eyecatch: /images/biyoushitsu-staff-teichakuritsu/eyecatch.png

@@ -3,7 +3,7 @@ title: 飲食店のアルバイト採用のコツとは？応募を増やす7つ
 description: 飲食店のアルバイト採用のコツは、有効求人倍率が全産業平均の2倍を超える中で、求人票の見せ方・面接の質問・入店後フォローを一貫させることです。応募を増やす方法から早期離職を防ぐ定着施策まで、3,200店舗以上の支援実績をもとに解説します。
 slug: inshokuten-arubaito-saiyou-kotsu
 keyword: 飲食店 アルバイト 採用 コツ
-category: meo
+category: hr
 date: 2026-07-30
 modified: 2026-07-30
 eyecatch: /images/inshokuten-arubaito-saiyou-kotsu/eyecatch.png

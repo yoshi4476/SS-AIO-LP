@@ -63,6 +63,27 @@ def jp_date(iso: str) -> str:
     return f"{int(y)}年{int(m)}月{int(d)}日"
 
 
+def article_site(path: Path):
+    """記事のcategoryから、どのサイト向けの記事かを判定する（不明ならNone）"""
+    try:
+        import sites as sites_mod
+        m = re.match(r"^---\s*\n(.*?)\n---", path.read_text(encoding="utf-8-sig"), re.S)
+        cat = (yaml.safe_load(m.group(1)) or {}).get("category") if m else None
+        return sites_mod.find_category_owner(cat) if cat else None
+    except Exception:
+        return None
+
+
+def drop_stale_html(slug: str):
+    """当サイトに残っている生成HTMLを消す（他サイトへ移した記事の重複公開を防ぐ）"""
+    import shutil
+    for cat in CATEGORIES:
+        stale = SITE / cat / slug
+        if stale.exists():
+            shutil.rmtree(stale)
+            print(f"REMOVED: 重複公開を解消（当サイトの生成HTMLを削除）: {cat}/{slug}/")
+
+
 def parse_article(path: Path):
     text = path.read_text(encoding="utf-8-sig")  # BOM付き保存にも耐性
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", text, re.S)
@@ -498,6 +519,13 @@ def main():
     paths, all_metas, blocked, blocked_metas = [], [], [], []
     for p in sorted(ARTICLES.glob("*.md")):
         if p.name.startswith("_"):
+            continue
+        # 他サイト向けの記事は publish.py が配信済み。ここで「不正」と扱うと
+        # 救済処理が当サイトのカテゴリへ書き換えてしまい、2ドメインに同じ記事が出る
+        owner = article_site(p)
+        if owner and owner != "ai-lab":
+            print(f"SKIP(他サイト): {p.stem} → {owner} へ配信済み")
+            drop_stale_html(p.stem)
             continue
         # 1記事の不正フロントマターで全ビルドを止めない（不正記事はBLOCKED扱いで続行）
         try:

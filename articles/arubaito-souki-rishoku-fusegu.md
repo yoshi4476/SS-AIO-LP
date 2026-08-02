@@ -3,7 +3,7 @@ title: アルバイトの早期離職を防ぐには？原因と定着施策7選
 description: アルバイトの早期離職を防ぐには、入店直後・2週間・1か月に集中する離脱の原因を特定し、シフト調整・教育担当の固定・声かけの仕組み化を進めることが有効です。3,200店舗の支援実績から定着施策7つを解説します。
 slug: arubaito-souki-rishoku-fusegu
 keyword: アルバイト 早期離職 防ぐ
-category: meo
+category: hr
 date: 2026-08-02
 modified: 2026-08-02
 eyecatch: /images/arubaito-souki-rishoku-fusegu/eyecatch.png
