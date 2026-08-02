@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-01T00:00:00+09:00</updated>
+  <updated>2026-08-02T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>SaaS比較記事対策とは？AIに引用される5つの打ち手</title>
+    <link href="https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/"/>
+    <id>https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/</id>
+    <updated>2026-08-02T00:00:00+09:00</updated>
+    <summary>SaaS比較記事対策とは、第三者比較サイトでの評価改善と自社比較コンテンツの整備を同時に進め、検索とAIの両方から選ばれる状態をつくることです。不利になる原因からAIに引用される5つの施策まで解説します。</summary>
+  </entry>
   <entry>
     <title>AI導入補助金のGビズID取得方法｜プライム発行の日数と手順</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/ai-hojokin-gbizid-shutoku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/</id>
     <updated>2026-07-27T00:00:00+09:00</updated>
     <summary>AI時代のSEO対策とは、検索上位表示に加えて「AIの回答に引用される」ことまで見据えた最適化です。中小企業が限られたリソースでやるべき5つの基本を優先順位つきで解説します。</summary>
-  </entry>
-  <entry>
-    <title>AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/</id>
-    <updated>2026-07-27T00:00:00+09:00</updated>
-    <summary>AI集客とは、AI検索・AIチャット・検索・マップのすべてから見込み客を集める考え方です。AIO・LLMO・SEO・MEOの関係と着手の順番を、1枚の地図としてまとめた完全ガイドです。</summary>
   </entry>
 </feed>
