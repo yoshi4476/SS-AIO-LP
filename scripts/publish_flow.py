@@ -57,6 +57,18 @@ def main():
             f"{src} のフロントマター category: を次のどれかに直して再実行すること\n"
             + "\n".join(f"  - {s}  （{sites_mod.category_name(cfg, s)}）" for s in valid))
 
+    # 0-2. 担当領域の検査（カテゴリが正しくても、他サイトの話題を書いていれば止める）
+    import cannibal_check
+    invader, scores = cannibal_check.article_territory(meta.get("title", ""), body, site_id)
+    if invader:
+        raise SystemExit(
+            f"担当領域を越えています。この記事の主題は {invader}"
+            f"（{sites_mod.load(invader)['domain']}）の領域です。\n"
+            f"  領域スコア: {scores}\n"
+            f"  {cfg['name']} では「{'／'.join(cfg.get('avoid', ['—'])[:2])}」を主題にできません。\n"
+            "  対処: この記事を取り下げて別のKWで書き直すか、"
+            f"python scripts/publish_flow.py {invader} {slug} で正しいサイトへ配信すること")
+
     # 1. 画像（アイキャッチ・図解）
     run([PY, "scripts/make_images.py", slug], check=False)
 

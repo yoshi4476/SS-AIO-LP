@@ -130,6 +130,28 @@ def cross_site_check():
     return hits
 
 
+def article_territory(title, body, site_id):
+    """書き上がった記事の主題が、どのサイトの担当領域かを判定する。
+
+    カテゴリ検査だけでは「自サイトの正しいカテゴリのまま、他サイトの話題を書く」
+    ケースを止められない（例: category=ai-marketing のまま補助金の記事を書く）。
+    本文中に出てくる各サイトの所有語を数え、他サイトが主題なら報告する。
+
+    戻り値: (侵食先のサイトID or None, サイト別スコア)
+    """
+    import sites as sites_mod
+    cfgs = sites_mod.load_all()
+    # タイトルは記事の主題を表すため重みを3倍にする
+    scores = {sid: sum(3 * title.count(t) + body.count(t) for t in cfg.get("owns", []))
+              for sid, cfg in cfgs.items()}
+    own = scores.get(site_id, 0)
+    best = max(scores, key=lambda k: scores[k])
+    # 比率と実数の両方で明確に上回る場合だけ侵食とみなす（語数の少ない記事の誤検出を防ぐ）
+    if best != site_id and scores[best] > max(own * 1.4, own + 20):
+        return best, scores
+    return None, scores
+
+
 def territory_check():
     """担当領域の侵食を検査する。
 
@@ -176,11 +198,50 @@ def territory_check():
     return bad
 
 
+def written_territory_check():
+    """公開済み記事の本文を検査し、他サイトの領域を主題にしているものを報告する。
+
+    KW台帳の検査（territory_check）は「これから書くKW」しか見ない。
+    書き上がった記事が結果的に他サイトの話題になっているケースは、本文で確認するしかない。
+    """
+    import sites as sites_mod
+    cat2site = {c: sid for sid, cfg in sites_mod.load_all().items()
+                for c in cfg.get("categories", {})}
+    bad = []
+    for p in sorted((ROOT / "articles").glob("*.md")):
+        t = p.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+        if not m:
+            continue
+        title = (re.search(r"^title:\s*(.+?)\s*$", m.group(1), re.M) or [None, ""])[1]
+        cat = (re.search(r"^category:\s*(.+?)\s*$", m.group(1), re.M) or [None, ""])[1]
+        site = cat2site.get(cat.strip())
+        if not site:
+            continue
+        invader, scores = article_territory(title.strip('"'), m.group(2), site)
+        if invader:
+            bad.append((p.stem, site, invader, scores))
+
+    print(f"WRITTEN_TERRITORY_CHECK: {len(list((ROOT / 'articles').glob('*.md')))}記事の本文を検査 "
+          f"/ 領域外 {len(bad)}件")
+    if not bad:
+        print("WRITTEN_TERRITORY_OK=yes")
+        return []
+    print("WRITTEN_TERRITORY_OK=no")
+    for slug, site, invader, scores in bad:
+        print(f"\n  {slug}: {site} に置かれているが、主題は {invader} の領域")
+        print(f"    領域スコア {scores}")
+        print(f"    → 対処: 記事を取り下げるか、{invader} へ配信し直して旧URLを301で転送する")
+    return bad
+
+
 def main():
     if "--cross" in sys.argv:
         cross_site_check()
         print()
         territory_check()
+        print()
+        written_territory_check()
         return
 
     arts = load_articles()
