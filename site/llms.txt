@@ -42,3 +42,4 @@
 - [AI導入補助金のGビズID取得方法｜プライム発行の日数と手順](https://ai.7senses.co.jp/ai-marketing/ai-hojokin-gbizid-shutoku/): 電子申請に必須なGビズIDプライムの取得方法・審査日数・個人事業主と法人の違いを解説
 - [店舗スタッフの教育マニュアルの作り方｜定着に効く4ステップ](https://ai.7senses.co.jp/meo/tenpo-staff-kyouiku-manual/): 3,200店舗以上の支援実績をもとにした店舗スタッフ教育マニュアルの作り方4ステップを解説
 - [SaaS比較記事対策とは？AIに引用される5つの打ち手](https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/): 第三者比較サイトでの評価改善と自社比較コンテンツでAIに引用される5つの施策を解説
+- [ホワイトペーパーの作り方｜BtoBリードを増やす5ステップ](https://ai.7senses.co.jp/ai-marketing/whitepaper-tsukurikata/): 課題起点の資料設計から公開後の改善まで、BtoB向けホワイトペーパーの作り方を5ステップで解説
