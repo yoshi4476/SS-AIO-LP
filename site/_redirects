@@ -5,3 +5,9 @@
 /meo/biyoushitsu-staff-teichakuritsu/   https://www.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/   301
 /meo/tenpo-staff-kyouiku-manual/        https://www.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/        301
 /meo/arubaito-souki-rishoku-fusegu/     https://www.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/     301
+
+# 補助金は lp.7senses.co.jp の担当領域。当サイトで書いてしまった3本を、
+# 向こうの同テーマ記事へ送る（スラッグが異なるため個別に対応づける）。
+/ai-marketing/ai-donyu-hojokin-jirei/     https://lp.7senses.co.jp/blog/ai-hojokin-katsuyou-jirei-2026/  301
+/ai-marketing/ai-hojokin-futaitaku-riyu/  https://lp.7senses.co.jp/blog/ai-hojokin-fusaitaku-riyu/       301
+/ai-marketing/ai-hojokin-gbizid-shutoku/  https://lp.7senses.co.jp/blog/gbizid-shutoku/                  301

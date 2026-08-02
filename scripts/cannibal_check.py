@@ -89,10 +89,13 @@ def cross_site_check():
         print("CROSS_CANNIBAL=no （台帳にKWがありません）")
         return []
 
-    # 自サイトの公開済み記事タイトルも突合対象に加える（台帳に載る前の記事を拾うため）
+    # 公開済み記事のタイトルも突合対象に加える（台帳に載る前の記事を拾うため）。
+    # articles/ は3サイト共通の置き場なので、所属はcategoryから判定する。
+    # ここを ai-lab 固定にすると、他サイト向け記事が自サイトの重複として誤検出される。
+    import sites as sites_mod
     for a in load_articles():
-        kws.append({"site": "ai-lab", "keyword": a["title"], "status": "公開済み",
-                    "url": "", "_from": "article"})
+        kws.append({"site": sites_mod.find_category_owner(a["cat"]) or "ai-lab",
+                    "keyword": a["title"], "status": "公開済み", "url": "", "_from": "article"})
 
     hits = []
     for i in range(len(kws)):
