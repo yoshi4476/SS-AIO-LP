@@ -38,3 +38,4 @@
 - [BtoB SEOとは？商談前に選ばれる5つの施策](https://ai.7senses.co.jp/seo/btob-seo-taisaku/): 営業と話す前に検討が固まるBtoB購買の実態と、比較段階で選ばれる5つの施策を解説
 - [SaaS比較記事対策とは？AIに引用される5つの打ち手](https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/): 第三者比較サイトでの評価改善と自社比較コンテンツでAIに引用される5つの施策を解説
 - [ホワイトペーパーの作り方｜BtoBリードを増やす5ステップ](https://ai.7senses.co.jp/ai-marketing/whitepaper-tsukurikata/): 課題起点の資料設計から公開後の改善まで、BtoB向けホワイトペーパーの作り方を5ステップで解説
+- [BtoBリード獲得の方法とは？6つの施策と選び方の基準](https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/): 展示会・広告・SEO・ホワイトペーパー・ウェビナー・紹介6施策の比較とフェーズ別の選び方を解説
