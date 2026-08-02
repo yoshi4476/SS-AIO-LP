@@ -43,3 +43,5 @@
 - [店舗スタッフの教育マニュアルの作り方｜定着に効く4ステップ](https://ai.7senses.co.jp/meo/tenpo-staff-kyouiku-manual/): 3,200店舗以上の支援実績をもとにした店舗スタッフ教育マニュアルの作り方4ステップを解説
 - [SaaS比較記事対策とは？AIに引用される5つの打ち手](https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/): 第三者比較サイトでの評価改善と自社比較コンテンツでAIに引用される5つの施策を解説
 - [ホワイトペーパーの作り方｜BtoBリードを増やす5ステップ](https://ai.7senses.co.jp/ai-marketing/whitepaper-tsukurikata/): 課題起点の資料設計から公開後の改善まで、BtoB向けホワイトペーパーの作り方を5ステップで解説
+- [AI導入補助金の不採択理由7つと再申請までにやるべき対策](https://ai.7senses.co.jp/ai-marketing/ai-hojokin-futaitaku-riyu/): 公式データにもとづく不採択の4パターンと再申請までにやるべき対策を解説
+- [アルバイトの早期離職を防ぐには？原因と定着施策7選](https://ai.7senses.co.jp/meo/arubaito-souki-rishoku-fusegu/): 3,200店舗の支援実績にもとづく早期離職の原因と節目ごとの定着施策7選を解説
