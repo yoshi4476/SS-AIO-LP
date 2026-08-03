@@ -41,3 +41,4 @@
 - [BtoBリード獲得の方法とは？6つの施策と選び方の基準](https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/): 展示会・広告・SEO・ホワイトペーパー・ウェビナー・紹介6施策の比較とフェーズ別の選び方を解説
 - [導入事例の書き方とは？成果につながる6ステップ](https://ai.7senses.co.jp/ai-marketing/donyu-jirei-kakikata/): 取材設計から一次情報を活かした執筆まで、読まれる導入事例の書き方を6ステップで解説
 - [BtoB AI検索対策（LLMO）とは？選ばれる5つの施策](https://ai.7senses.co.jp/aio/btob-llmo-taisaku/): BtoB購買担当者のAI検索活用データと、発注候補として選ばれるための5つの施策を解説
+- [ウェビナー集客の平均参加率46%と申込を増やす5つの施策](https://ai.7senses.co.jp/ai-marketing/webinar-shukyaku-hoho/): BtoB企業100社の調査データをもとに、開催2週間前から実践する集客5ステップを解説
