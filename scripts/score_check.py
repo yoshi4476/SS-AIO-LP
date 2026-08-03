@@ -25,14 +25,21 @@ def _link_patterns():
     新しいサイト（例: corporate）の1本目の記事は自サイトに公開済み記事がまだ無いため、
     姉妹サイト（同じ会社の別サイト）への絶対URLリンクも内部リンクとして扱う。
     """
-    cats, domains = set(), set()
+    cats, domains, prefixes = set(), set(), set()
     for cfg in sites_mod.load_all().values():
         cats.update(cfg.get("categories", {}).keys())
         domains.add(cfg["domain"])
+        if cfg.get("url_prefix"):
+            prefixes.add(cfg["url_prefix"].strip("/"))
     cat_pat = "|".join(re.escape(c) for c in sorted(cats))
     domain_pat = "|".join(re.escape(d) for d in sorted(domains))
+    # url_prefix型サイト（corporate/subsidy）の実URLは /blog/{slug}/ のようにカテゴリを含まないため、
+    # カテゴリパスとprefixパスの両方を内部リンクとして認識する（前者だけだと自サイトへのリンクが
+    # 一切カウントされず、姉妹サイトへのリンクしか通らないという誤検出になる）。
+    prefix_pat = "|".join(re.escape(p) for p in sorted(prefixes))
+    path_pat = "|".join(p for p in (cat_pat, prefix_pat) if p)
     internal_re = re.compile(
-        rf"\]\((?:https?://(?:{domain_pat}))?(/(?:blog/)?(?:{cat_pat})/[^)]+)\)")
+        rf"\]\((?:https?://(?:{domain_pat}))?(/(?:{path_pat})/[^)]+)\)")
     return internal_re, domains
 
 

@@ -39,3 +39,4 @@
 - [SaaS比較記事対策とは？AIに引用される5つの打ち手](https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/): 第三者比較サイトでの評価改善と自社比較コンテンツでAIに引用される5つの施策を解説
 - [ホワイトペーパーの作り方｜BtoBリードを増やす5ステップ](https://ai.7senses.co.jp/ai-marketing/whitepaper-tsukurikata/): 課題起点の資料設計から公開後の改善まで、BtoB向けホワイトペーパーの作り方を5ステップで解説
 - [BtoBリード獲得の方法とは？6つの施策と選び方の基準](https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/): 展示会・広告・SEO・ホワイトペーパー・ウェビナー・紹介6施策の比較とフェーズ別の選び方を解説
+- [導入事例の書き方とは？成果につながる6ステップ](https://ai.7senses.co.jp/ai-marketing/donyu-jirei-kakikata/): 取材設計から一次情報を活かした執筆まで、読まれる導入事例の書き方を6ステップで解説
