@@ -220,6 +220,23 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     if left:
         raise SystemExit(f"テンプレートの未置換タグが残っています: {sorted(set(left))}")
 
+    # 記事の内容に合う写真を在庫から選び、一覧カードとOGPに当てる。
+    # 配信先の一覧は在庫写真を順番に使い回しており、中身と絵が合わないため。
+    thumb_url = None
+    try:
+        import pick_photo
+        lib = dest / "assets" / "img"
+        name, src_img, sc = pick_photo.pick(meta["title"], body, lib)
+        if src_img:
+            t = dest / "images" / "blog" / meta["slug"] / "thumbnail.webp"
+            pick_photo.make_thumbnail(src_img, t)
+            thumb_url = f"https://{cfg['domain']}/images/blog/{meta['slug']}/thumbnail.webp"
+            out = re.sub(r'(<meta property="og:image" content=")[^"]*(")',
+                         rf"\g<1>{thumb_url}\g<2>", out)
+            print(f"  写真: {name}（一致度 {sc}）→ images/blog/{meta['slug']}/thumbnail.webp")
+    except Exception as e:
+        print(f"  写真の選定をスキップ: {e}")
+
     page = dest / "blog" / meta["slug"] / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(out, encoding="utf-8", newline="\n")
@@ -230,6 +247,9 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     shutil.copy2(src, md)
 
     written = [page, md] + _update_external_index(dest, cfg, meta)
+    thumb_file = dest / "images" / "blog" / meta["slug"] / "thumbnail.webp"
+    if thumb_file.is_file():
+        written.append(thumb_file)
     return written, len(plain)
 
 

@@ -24,9 +24,9 @@
     "実績報告",
     "ベンダー"
   ],
-  "note": "2026-08-03 修正: 納品先を blog/{slug}/index.html に変更した。以前の blog-system/content/posted/ は向こうの『公開済みアーカイブ』で、移管でHTML化の仕組み(auto-publish.yml)が停止していたため記事が公開されないまま捨てられていた。テンプレートは相手リポジトリの blog/_template.html を使う。frontmatter は title/description/slug/category/date/faq が必須(category は hojokin のみ)。",
+  "note": "2026-08-03 修正: 納品先を blog/{slug}/index.html に変更した。以前の blog-system/content/posted/ は向こうの『公開済みアーカイブ』で、移管でHTML化の仕組み(auto-publish.yml)が停止していたため記事が公開されないまま捨てられていた。テンプレートは相手リポジトリの blog/_template.html を使う。frontmatter は title/description/slug/category/date/faq が必須(category は hojokin のみ)。 / 2026-08-03: カテゴリ表示名を「補助金・助成金」から「補助金」へ修正。向こうの tools/gen_blog_pages.py が <span class=\"cat\"> の値を CAT_THUMBS のキーとして使うため、表記が違うとビルドが KeyError で落ちる。",
   "categories": {
-    "hojokin": "補助金・助成金"
+    "hojokin": "補助金"
   },
   "kw_seeds": {
     "industries": [
