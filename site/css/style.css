@@ -33,9 +33,10 @@
   --shadow-md: 0 2px 4px rgba(11,36,71,.05), 0 12px 32px -12px rgba(11,36,71,.14);
   --shadow-lg: 0 24px 64px -24px rgba(11,36,71,.28);
   --radius: 18px;
-  /* メインビジュアルの写真。ここに1行入れるだけでトップとLPの両方に反映される。
-     例) --mv-photo: url("/images/home/mv.jpg");
-     未設定のときはグラデーションの下地が使われる（レイアウトは崩れない） */
+  /* メインビジュアルの写真。ここの1行がトップとLPの両方に反映される。
+     差し替えるときは site/images/home/ に置いてファイル名を変えるだけでよい */
+  --mv-photo: image-set(url("/images/home/mv.webp") type("image/webp"),
+                        url("/images/home/mv.jpg") type("image/jpeg"));
 }
 
 * { box-sizing: border-box; }
@@ -995,8 +996,10 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 .mv { background: radial-gradient(120% 90% at 78% 12%, #1b4d8f 0%, #0e2f5c 44%, #0b2447 100%); }
 .mv::after {
   background:
-    linear-gradient(180deg, rgba(11,36,71,.82) 0%, rgba(11,36,71,.34) 36%, rgba(11,36,71,.9) 100%),
-    linear-gradient(90deg, rgba(11,36,71,.72) 0%, rgba(11,36,71,0) 58%);
+    /* 見出しが載る右端を暗くする（写真の空・ビルが明るく、白文字が飛ぶため） */
+    linear-gradient(270deg, rgba(6,20,42,.72) 0%, rgba(6,20,42,.12) 34%, rgba(6,20,42,0) 52%),
+    linear-gradient(180deg, rgba(11,36,71,.78) 0%, rgba(11,36,71,.3) 34%, rgba(11,36,71,.92) 100%),
+    linear-gradient(90deg, rgba(11,36,71,.8) 0%, rgba(11,36,71,0) 60%);
 }
 .hero-dark.is-photo { background: #0b2447; }
 .hero-dark.is-photo .hero-photo-layer {

@@ -21,3 +21,6 @@ automation/logs/
 
 # �z�M�惊�|�W�g���̍�ƃN���[��
 .publish-work/
+
+# 支給された写真の原本（サイトへは site/images/ へ書き出したものを載せる）
+写真素材/
