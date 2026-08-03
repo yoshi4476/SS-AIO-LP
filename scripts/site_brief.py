@@ -63,6 +63,14 @@ def main():
     for slug, name in cfg.get("categories", {}).items():
         print(f"  - {slug:14s} {name}")
 
+    # 記事のCTAは毎回ぶれると導線が散らかるため、サイト設定の1か所で決める
+    cta = cfg.get("cta")
+    if cta:
+        print("\n■ 記事のCTA（この行き先で統一する）")
+        print(f"  → {cta.get('label', '')}")
+        if cta.get("note"):
+            print(f"     {cta['note']}")
+
     print("\n■ 次に書くKW")
     nxt = hub_client.next_kw(cfg["id"])
     if nxt and nxt.get("keyword"):

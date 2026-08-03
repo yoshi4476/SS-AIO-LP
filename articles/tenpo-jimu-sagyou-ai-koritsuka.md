@@ -3,7 +3,7 @@ title: 店舗の事務作業をAIで効率化する5つの方法
 description: 店舗の事務作業をAIで効率化する方法を、シフト作成・日報・発注メールなど5つの業務別に解説します。中小企業の実態調査データと自社の支援事例をもとに、何から任せればいいかが分かります。
 slug: tenpo-jimu-sagyou-ai-koritsuka
 keyword: 店舗 事務作業 AI 効率化
-category: ai-industry
+category: backoffice
 date: 2026-08-03
 modified: 2026-08-03
 eyecatch: /images/tenpo-jimu-sagyou-ai-koritsuka/eyecatch.png
