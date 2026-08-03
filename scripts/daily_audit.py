@@ -136,8 +136,7 @@ def check_territory(todo):
 
 def check_external_dup(todo):
     """配信先サイトに元からある記事との重複（移管前の記事は台帳にないため見落としやすい）"""
-    print("
-■ 配信先サイトの既存記事との重複")
+    print("\n■ 配信先サイトの既存記事との重複")
     import cannibal_check
     for h in cannibal_check.external_dup_check():
         todo.append(f"TODO: {h['mine']['slug']} は {h['site']} の既存記事と重複"
