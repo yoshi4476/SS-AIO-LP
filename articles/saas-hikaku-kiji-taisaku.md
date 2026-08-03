@@ -1,5 +1,5 @@
 ---
-title: SaaS比較記事対策とは？AIに引用される5つの打ち手
+title: SaaS比較記事で不利にならない5つの打ち手｜AI引用対策
 description: SaaS比較記事対策とは、第三者比較サイトでの評価改善と自社比較コンテンツの整備を同時に進め、検索とAIの両方から選ばれる状態をつくることです。不利になる原因からAIに引用される5つの施策まで解説します。
 slug: saas-hikaku-kiji-taisaku
 keyword: SaaS 比較記事 対策
