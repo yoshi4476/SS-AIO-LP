@@ -133,8 +133,14 @@ def main():
     elif cmd == "all":
         for k in all_kw():
             print(f"{k['site']:10s} {k['status']:6s} {k['keyword']}")
+    elif cmd == "error_log":
+        # 使い方: hub_client.py error_log <phase> <message...>
+        error_log("", site, " ".join(sys.argv[3:]))
+        print("エラーログへ記録しました")
     else:
-        raise SystemExit("使い方: python scripts/hub_client.py [status|next|all] [site]")
+        raise SystemExit(
+            "使い方: python scripts/hub_client.py [status|next|all] [site]\n"
+            "        python scripts/hub_client.py error_log <phase> <message>")
 
 
 if __name__ == "__main__":

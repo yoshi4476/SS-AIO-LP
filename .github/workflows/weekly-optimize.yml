@@ -49,7 +49,10 @@ jobs:
             printf '%s' "$SA_JSON" > indexing-service-account.json
             pip install --quiet google-api-python-client google-auth
           fi
-          python scripts/kw_discover.py --append || true
+          for s in ai-lab corporate subsidy; do
+            echo "--- $s のKW補充 ---"
+            python scripts/kw_discover.py --site "$s" --append || true
+          done
           rm -f indexing-service-account.json
           python scripts/kw_status.py
 

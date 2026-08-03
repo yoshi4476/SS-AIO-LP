@@ -2,18 +2,20 @@ name: Multi-Site Article Pipeline
 
 # 3サイトの記事生成を1本のワークフローに統合したもの。
 # cronの時刻でどのサイトを書くかを決める（JST = UTC+9）。
-#   8:00 ai-lab / 13:00 corporate / 16:00 subsidy / 19:00 ai-lab
-# 時間をずらすことで、同時実行によるpush競合と実行時間の集中を避ける。
+# 各サイト1日2本（計6本/日）。1回の実行が10〜17分かかるため2時間ずつ空け、
+# 同時実行によるpush競合とActionsの待ち行列を避けている。
 #
 # 補助金（subsidy）は 2026-07-30 にこちらへ移管した。
 # seven-HPunyou 側の記事生成(auto-publish.yml)は停止済みで、
 # 向こうは納品Markdownの受け入れ・HTML化・公開のみを担当する。
 on:
   schedule:
-    - cron: "0 23 * * *"  # JST 08:00 — AI集客ラボ
-    - cron: "0 4 * * *"   # JST 13:00 — コーポレート
-    - cron: "0 7 * * *"   # JST 16:00 — 補助金サポート (lp.7senses.co.jp)
-    - cron: "0 10 * * *"  # JST 19:00 — AI集客ラボ
+    - cron: "0 23 * * *"  # JST 08:00 — AI集客ラボ 1本目
+    - cron: "0 1 * * *"   # JST 10:00 — コーポレート 1本目
+    - cron: "0 3 * * *"   # JST 12:00 — 補助金サポート 1本目
+    - cron: "0 6 * * *"   # JST 15:00 — AI集客ラボ 2本目
+    - cron: "0 8 * * *"   # JST 17:00 — コーポレート 2本目
+    - cron: "0 10 * * *"  # JST 19:00 — 補助金サポート 2本目
   workflow_dispatch:
     inputs:
       site:
@@ -43,9 +45,9 @@ jobs:
         id: site
         run: |
           case "${{ github.event.schedule }}" in
-            "0 4 * * *")  s=corporate ;;
-            "0 7 * * *")  s=subsidy ;;
-            *)            s=ai-lab ;;
+            "0 1 * * *"|"0 8 * * *")   s=corporate ;;
+            "0 3 * * *"|"0 10 * * *")  s=subsidy ;;
+            *)                         s=ai-lab ;;
           esac
           [ "${{ github.event_name }}" = "workflow_dispatch" ] && s="${{ inputs.site }}"
           echo "id=$s" >> "$GITHUB_OUTPUT"

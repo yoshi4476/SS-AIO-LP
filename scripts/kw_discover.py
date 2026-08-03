@@ -2,8 +2,11 @@
 """KW候補を実データから発掘する（有料ツール不要）
 
 使い方:
-    python scripts/kw_discover.py           # 候補を表示するだけ
-    python scripts/kw_discover.py --append  # docs/industry-pillar-plan.md へ追記
+    python scripts/kw_discover.py --site corporate           # 候補を表示するだけ
+    python scripts/kw_discover.py --site corporate --append  # 計画ファイルと管制塔へ追加
+
+--site を省略すると ai-lab を対象にする。採用条件は sites/*.json の owns（担当領域語）と
+kw_seeds（業種×課題の起点）から自動生成するため、補充した時点で領域外のKWは混ざらない。
 
 2つの無料の実データソースを使う:
   1. Google Search Console API — 自サイトが実際に表示されたクエリ。
@@ -28,25 +31,44 @@ from cannibal_check import dice, load_articles  # noqa: E402
 from kw_status import is_written, plan_keywords, written_corpus  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PLAN = ROOT / "docs" / "industry-pillar-plan.md"
 DUP_THRESHOLD = 0.50
 MAX_APPEND = 30
 UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"}
-
-# サジェスト展開の起点（業種 × 課題）。実サイトのテーマに直結する語だけを使う
-INDUSTRIES = ["クリニック", "歯科医院", "整骨院", "税理士", "士業", "工務店",
-              "リフォーム", "不動産", "美容室", "飲食店"]
-INTENTS = ["集客", "MEO対策", "SEO", "AI検索 対策", "口コミ 増やす", "ホームページ"]
 PER_SEED = 4  # 1つの起点から採用する上限（特定業種に偏らせない）
 
-# サジェストは表記ゆれ・ブランド名・無関係語を含むため、自社テーマの語を必ず1つ含むものだけ残す
-DOMAIN_TERMS = ("集客", "集患", "meo", "seo", "aio", "llmo", "ai", "口コミ", "レビュー",
-                "ホームページ", "hp", "ウェブ", "web", "サイト", "対策", "方法", "やり方",
-                "増やす", "費用", "相場", "事例", "マップ", "google", "グーグル", "sns",
-                "インスタ", "広告", "予約", "新規", "リピート", "患者", "顧客", "問い合わせ")
-# 検索者が自社の見込み客でないKW（求職・ブランド固有名など）は除外する
-NG_TERMS = ("求人", "転職", "バイト", "年収", "給料", "採用", "ceo", "セオリー", "湘南",
-            "とは何", "英語", "意味")
+# どのサイトでも意味を持つ汎用語。サジェストの雑音（ブランド名・無関係語）を落とすために使う
+GENERIC_TERMS = ("対策", "方法", "やり方", "手順", "費用", "相場", "事例", "選び方",
+                 "比較", "とは", "ポイント", "コツ", "注意点", "チェック", "改善")
+# 検索者が見込み客でないKW（ブランド固有名・調べ物）はどのサイトでも除外する
+BASE_NG = ("年収", "給料", "ceo", "セオリー", "湘南", "とは何", "英語", "意味", "2ch", "知恵袋")
+
+
+def site_config(site_id):
+    """サイトごとの発掘条件を組み立てる。
+
+    担当領域（owns）をそのまま採用条件に使い、他サイトのownsを除外条件に使う。
+    これにより「補充した時点で領域外のKWが混ざらない」状態を作る。
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import sites as sites_mod
+    cfgs = sites_mod.load_all()
+    cfg = cfgs[site_id]
+    seeds = cfg.get("kw_seeds", {})
+    own = tuple(t.lower() for t in cfg.get("owns", []))
+    other = tuple(t.lower() for sid, c in cfgs.items() if sid != site_id
+                  for t in c.get("owns", []))
+    # 自サイトも使う語は除外語から外す（例: ai-lab と subsidy が共に「AI」を持つ場合）
+    other = tuple(t for t in other if t not in own)
+    return {
+        "cfg": cfg,
+        "plan": ROOT / cfg.get("kw_plan", "docs/industry-pillar-plan.md"),
+        "gsc": f"https://{cfg['domain']}/",
+        "industries": seeds.get("industries", []),
+        "intents": seeds.get("intents", []),
+        "own_terms": own,
+        "domain_terms": own + GENERIC_TERMS,
+        "ng_terms": BASE_NG + other,
+    }
 
 
 def load_env():
@@ -60,11 +82,10 @@ def load_env():
     return env
 
 
-def gsc_queries():
+def gsc_queries(site=None):
     """GSCで表示実績のあるクエリ（実データ）。未設定なら空リスト"""
     sa = ROOT / "indexing-service-account.json"
-    env = load_env()
-    site = env.get("GSC_SITE_URL", "https://ai.7senses.co.jp/")
+    site = site or load_env().get("GSC_SITE_URL", "https://ai.7senses.co.jp/")
     if not sa.exists():
         return []
     try:
@@ -94,6 +115,15 @@ def suggest(q):
         return []
 
 
+BRAND_TERMS = ("セブンセンシズ", "セブンセンシス", "7senses", "sevensenses",
+               "原口優", "原口 優", "g-ran", "gran ")
+
+
+def is_brand_query(low):
+    """指名検索。既に上位表示されており、記事を書く対象ではない"""
+    return any(t in low for t in BRAND_TERMS)
+
+
 def is_dup(kw, arts, seen):
     if any(dice(kw, s) >= 0.75 for s in seen):
         return True
@@ -101,6 +131,14 @@ def is_dup(kw, arts, seen):
 
 
 def main():
+    site_id = "ai-lab"
+    if "--site" in sys.argv:
+        site_id = sys.argv[sys.argv.index("--site") + 1]
+    S = site_config(site_id)
+    if not S["industries"]:
+        print(f"{site_id}: sites/{site_id}.json に kw_seeds が未定義のため発掘できません")
+        return
+    print(f"KW_DISCOVER_SITE={site_id}（{S['cfg']['name']}）")
     arts = load_articles()
     corpus = written_corpus()
     planned = {k for _, k in plan_keywords()}
@@ -108,17 +146,24 @@ def main():
     proven, discovered = [], []
 
     # --- 1. GSC実データ（表示実績あり・記事なし = 最優先）---
-    for q in gsc_queries():
+    # 表示実績があっても、担当領域外・指名検索のクエリは記事にしない。
+    # （例: コーポレートのGSCには前身事業の「害虫駆除」系や社名検索が大量に含まれる）
+    for q in gsc_queries(S["gsc"]):
         kw = q["kw"]
+        low = kw.lower()
         if is_written(kw, corpus) or is_dup(kw, arts, seen):
+            continue
+        if not any(t in low for t in S["own_terms"]):
+            continue
+        if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
             continue
         seen.add(kw)
         proven.append(q)
     proven.sort(key=lambda q: -q["imp"])
 
     # --- 2. Googleサジェスト（検索需要の裏付けあり）---
-    for ind in INDUSTRIES:
-        for it in INTENTS:
+    for ind in S["industries"]:
+        for it in S["intents"]:
             picked = 0
             for s in suggest(f"{ind} {it}"):
                 s = s.strip()
@@ -127,9 +172,9 @@ def main():
                 if len(s) < 6 or s == f"{ind} {it}" or is_written(s, corpus):
                     continue
                 # 業種語を含み、自社テーマの語を1つ以上含み、除外語を含まないものだけ採用
-                if ind not in s or not any(t in low for t in DOMAIN_TERMS):
+                if ind not in s or not any(t in low for t in S["domain_terms"]):
                     continue
-                if any(t in low for t in NG_TERMS):
+                if any(t in low for t in S["ng_terms"]):
                     continue
                 if is_dup(s, arts, seen):
                     continue
@@ -159,9 +204,19 @@ def main():
         line = (f"\n**自動補充 {date.today().isoformat()}"
                 f"（GSC実証{len(proven[:10])}件+サジェスト{len(picks) - len(proven[:10])}件・{len(picks)}本）**: "
                 + " / ".join(picks) + "\n")
-        with PLAN.open("a", encoding="utf-8") as f:
+        with S["plan"].open("a", encoding="utf-8") as f:
             f.write(line)
-        print(f"\ndocs/industry-pillar-plan.md へ {len(picks)}件を追記しました")
+        print(f"\n{S['plan'].relative_to(ROOT).as_posix()} へ {len(picks)}件を追記しました")
+        # 実行時にKWを供給しているのは管制塔の台帳なので、そちらにも積む
+        try:
+            import hub_client
+            if hub_client.enabled():
+                hub_client.add_kw(site_id, picks)
+                print(f"管制塔の台帳へ {len(picks)}件を追加しました（site={site_id}）")
+            else:
+                print("（管制塔が未接続のため台帳への追加はスキップ）")
+        except Exception as e:
+            print(f"（管制塔への追加をスキップ: {e}）")
 
 
 if __name__ == "__main__":

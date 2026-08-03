@@ -28,7 +28,8 @@ env:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    # 救済モードは最大6本（3サイト×2本）の書き直し・追加公開まで行うため長めに取る
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
 
@@ -88,22 +89,46 @@ jobs:
               --dangerously-skip-permissions --max-turns 160
           done
 
-      - name: 同日救済チェック（BLOCKED or 本日分ゼロなら再挑戦）
+      # 3サイト分の当日ノルマ（各2本）・品質・担当領域・KW供給を機械監査し、
+      # 不足があればその日のうちに書き直し・追加公開まで行う
+      - name: 同日救済（3サイトの監査 → 不足分の作成・修正）
         if: steps.mode.outputs.mode == 'rescue'
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          out=$(python scripts/build.py); echo "$out"
-          today=$(date +%F)
-          if ! echo "$out" | grep -q "BLOCKED" && grep -lq "^date: $today" articles/*.md; then
-            echo "リトライ不要（BLOCKEDなし・本日分の記事あり）"
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          out=$(python scripts/daily_audit.py); echo "$out"
+          if echo "$out" | grep -q "AUDIT_OK=yes"; then
+            echo "救済不要（3サイトとも当日ノルマ達成・BLOCKEDなし・領域違反なし）"
+            rm -f indexing-service-account.json
             exit 0
           fi
           claude -p "$(cat automation/retry_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 160
+            --dangerously-skip-permissions --max-turns 300
+          rm -f indexing-service-account.json
+
+      - name: 救済後の再監査（残った問題をログとエラーログに残す）
+        if: steps.mode.outputs.mode == 'rescue'
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          out=$(python scripts/daily_audit.py); echo "$out"
+          if echo "$out" | grep -q "AUDIT_OK=no"; then
+            echo "$out" | grep "^TODO:" | while IFS= read -r t; do
+              echo "::warning::救済後も未解決: $t"
+              python scripts/hub_client.py error_log rescue "$t" || true
+            done
+          fi
 
       - name: 最終ビルドとコミット
         run: |

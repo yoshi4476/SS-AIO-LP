@@ -14,9 +14,38 @@
     "AIO・LLMO・SEO・MEOの手法解説（ai.7senses.co.jp の担当領域）",
     "人材採用・オペレーション（www.7senses.co.jp の担当領域）"
   ],
-  "owns": ["補助金", "助成金", "IT導入", "採択", "申請", "交付", "実績報告", "ベンダー"],
+  "owns": [
+    "補助金",
+    "助成金",
+    "IT導入",
+    "採択",
+    "申請",
+    "交付",
+    "実績報告",
+    "ベンダー"
+  ],
   "note": "2026-07-30 に移管完了。seven-HPunyou 側の記事生成(auto-publish.yml)と月次レポートは停止済みで、向こうは納品Markdownの受け入れ・HTML化・公開のみを担当する。納品先は blog-system/content/posted/。frontmatter は title/description/slug/category/date が必須(category は hojokin のみ)。本文に画像は埋めない(サムネは受け入れ側が在庫画像で補完する)。",
   "categories": {
     "hojokin": "補助金・助成金"
+  },
+  "kw_seeds": {
+    "industries": [
+      "中小企業",
+      "個人事業主",
+      "飲食店",
+      "製造業",
+      "小売業",
+      "建設業"
+    ],
+    "intents": [
+      "AI導入補助金",
+      "IT導入補助金",
+      "申請 方法",
+      "必要書類",
+      "採択率",
+      "対象経費",
+      "申請 代行",
+      "スケジュール"
+    ]
   }
 }

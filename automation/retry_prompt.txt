@@ -1,7 +1,40 @@
-公開リトライ（自動実行モード）。本日中に記事を公開状態にすることがゴールです。以下を順に実行してください。
-(1) `python scripts/build.py` を実行し、出力に「BLOCKED(公開不可)」の記事があるか確認する。
-(2) BLOCKED記事がある場合: その articles/*.md を CLAUDE.md Phase 5 の基準で修正（不足セクション追加・AIO構造・マーカー・5,000字・FAQ整合）→ 6エージェント採点をやり直し、90点以上になったらフロントマターの score を更新する。最大3サイクル繰り返し、90点以上到達後に再ビルドする。
-(3) 本日日付（frontmatter date が今日）の記事が articles/ に1本も存在しない場合: CLAUDE.md の Phase 1〜7 を実行して新規記事を1本作成・審査・公開する（API/MCP未設定の工程はスキップしてエラーログに記録）。
-(4) git はリモート設定済みの場合のみ push、未設定ならコミットまで。
-(5) BLOCKED記事がなく本日分の記事も存在する場合は、何も変更せず「リトライ不要」とだけログに残して終了する。
-(6) 結果の要約を automation/logs/ の本日のログに残す。
+同日救済（自動実行モード）。3サイトの当日ノルマを、その日のうちに満たすことがゴールです。
+
+【最初に必ず行うこと】
+`python scripts/daily_audit.py --fix-kw` を実行する。本数・品質・担当領域・KW供給の4点が機械判定され、
+最後に `AUDIT_OK=yes/no` と `TODO:` 行が出力される。以降はこの TODO: 行だけを上から順に処理すること。
+自分で問題を探し直さない（監査が見ていない項目を勝手に作業対象にしない）。
+
+`AUDIT_OK=yes` の場合は、何も変更せず「救済不要」とだけログに残して終了する。
+
+【TODO の種類と対処】
+
+1. `TODO: <site> の記事を本日あと N 本作成して公開する`
+   - `python scripts/site_brief.py <site>` を実行し、表示された次のKWで CLAUDE.md の Phase 1〜7 を実行する
+   - N本ぶん繰り返す。1本ごとに `python scripts/publish_flow.py <site> <slug>` まで完了させてから次に移る
+   - KWが枯渇していれば `python scripts/kw_discover.py --site <site> --append` を実行してから再開する
+
+2. `TODO: <slug> を品質基準まで直して score を更新し、再ビルドする`
+   - articles/<slug>.md を CLAUDE.md Phase 5 の基準で修正する（不足セクション追加・AIO構造・マーカー・
+     5,000字・FAQ整合）。全文の書き直しはせず、指摘箇所のピンポイント修正にとどめる
+   - `python scripts/score_check.py <slug>` を全PASSにしてから6観点採点をやり直し、90点以上で score を更新する
+   - 最大3サイクル。到達しない場合は articles/ に残したまま理由をログに書き、次のTODOへ進む
+
+3. `TODO: <slug> は <site> の領域。... 301転送する`
+   - その記事は担当サイトを間違えている。`python scripts/publish_flow.py <正しいsite> <slug>` で配信し直す
+   - フロントマターの category も正しいサイトのものへ直す（値は site_brief.py が表示する）
+   - 旧URLからの転送を site/_redirects に1行追加する（形式は既存行に合わせる）
+   - 記事を消すだけにしない。404を出すと蓄積した検索評価を捨てることになる
+
+4. `TODO: <site> のKWを補充する`
+   - `python scripts/kw_discover.py --site <site> --append` を実行する
+
+【守ること】
+- 担当領域を越えない。publish_flow が領域外と判定して停止した場合、カテゴリだけ書き換えて通すことは禁止。
+  その記事は正しいサイトへ配信し直すか、取り下げて別のKWで書き直す
+- 品質基準（score 90点以上・機械採点18項目全PASS）は救済時も下げない。本数のために基準を緩めない
+- 読み込むファイルは CLAUDE.md / daily_audit.py の出力 / site_brief.py の出力 / 対象記事のみに限定する
+
+【終わったら】
+`python scripts/daily_audit.py` をもう一度実行し、AUDIT_OK と残ったTODOを実行ログに残す。
+結果の要約を automation/logs/ の本日のログに書く。
