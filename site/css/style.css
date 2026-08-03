@@ -997,9 +997,9 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 .mv::after {
   /* 写真を見せたいので覆いは薄く。文字が載る帯（右端・左下）だけ濃度を残す */
   background:
-    linear-gradient(270deg, rgba(6,20,42,.5) 0%, rgba(6,20,42,.04) 28%, rgba(6,20,42,0) 44%),
-    linear-gradient(180deg, rgba(11,36,71,.34) 0%, rgba(11,36,71,0) 26%, rgba(11,36,71,.56) 100%),
-    linear-gradient(90deg, rgba(11,36,71,.48) 0%, rgba(11,36,71,0) 48%);
+    linear-gradient(270deg, rgba(6,20,42,.42) 0%, rgba(6,20,42,0) 26%),
+    linear-gradient(180deg, rgba(11,36,71,.22) 0%, rgba(11,36,71,0) 22%, rgba(11,36,71,.44) 100%),
+    linear-gradient(90deg, rgba(11,36,71,.36) 0%, rgba(11,36,71,0) 42%);
 }
 .hero-dark.is-photo { background: #0b2447; }
 .hero-dark.is-photo .hero-photo-layer {
@@ -1007,8 +1007,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 }
 .hero-photo-layer::after {
   background:
-    linear-gradient(180deg, rgba(11,36,71,.66) 0%, rgba(11,36,71,.34) 42%, rgba(11,36,71,.8) 100%),
-    linear-gradient(90deg, rgba(11,36,71,.66) 0%, rgba(11,36,71,.04) 62%);
+    linear-gradient(180deg, rgba(11,36,71,.5) 0%, rgba(11,36,71,.18) 42%, rgba(11,36,71,.64) 100%),
+    linear-gradient(90deg, rgba(11,36,71,.5) 0%, rgba(11,36,71,0) 58%);
 }
 
 /* 色面で終わるページはフッターとの間に白帯を作らない */
@@ -1031,4 +1031,30 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   display: inline-block; margin: 0 .25em; padding: .1em .55em;
   background: #d99e2b; color: #fff; border-radius: 6px;
   font-family: var(--en); font-weight: 700; font-size: 1.05em; letter-spacing: .06em;
+}
+
+/* 文字が続く区間に挟む写真の帯。読み手に息継ぎを作るためのもので、
+   新しい情報は足さず、既に書いてあることを一行で言い直すだけにする */
+.photo-band {
+  position: relative; min-height: clamp(220px, 26vw, 340px);
+  display: grid; place-items: center; overflow: hidden; isolation: isolate;
+  background: #0b2447;
+}
+.photo-band img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: -2;
+}
+.photo-band::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(11,36,71,.5), rgba(11,36,71,.68));
+}
+.photo-band p {
+  margin: 0; padding: 1.5rem var(--gutter); text-align: center; color: #fff;
+  font-family: var(--head); font-weight: 900;
+  font-size: clamp(1.1rem, 2.4vw, 1.8rem); line-height: 1.75;
+  text-shadow: 0 2px 12px rgba(4,14,30,.6);
+}
+.photo-band p small {
+  display: block; margin-top: .7rem; font-family: var(--sans); font-weight: 500;
+  font-size: .8em; color: rgba(255,255,255,.82); line-height: 1.9;
 }
