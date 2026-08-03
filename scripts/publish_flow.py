@@ -9,6 +9,7 @@
 import re
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
@@ -91,14 +92,32 @@ def main():
             args.append("--push")
         run(args)
 
-    # 4. 管制塔へ記録（KW台帳を公開済みに更新し、記事作成ログへ1行追加）
+    # 4. 本当に公開されたかを確認する。
+    #    pushが通ってもビルドが落ちれば記事は出ない。実際、配信先のビルドが停止していたのに
+    #    こちらは「push完了」を成功として扱い、記事が消えていることに気づけなかった。
+    url = sites_mod.article_url(cfg, meta)
+    if push:
+        import verify_publish
+        since = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+        ok, msgs = verify_publish.verify(site_id, slug, since)
+        for m in msgs:
+            print(f"  {m}")
+        if not ok:
+            hub_client.error_log(site_id, "publish",
+                                 f"{slug}: 配信したが公開を確認できず / " + " / ".join(msgs))
+            raise SystemExit(
+                "配信しましたが公開が確認できません。管制塔のエラーログに記録しました。\n"
+                "  台帳は『公開済み』にしていません（未公開のまま公開済みと記録しないため）。\n"
+                f"  確認: python scripts/verify_publish.py --site {site_id} --slug {slug}")
+
+    # 5. 管制塔へ記録（公開を確認できたものだけを『公開済み』として残す）
     html, _ = md2html.convert(body)
     hub_client.publish_log(
         site=site_id, title=meta["title"], keyword=meta.get("keyword", ""),
         category=meta["category"], score=score, chars=len(md2html.plain_text(html)),
-        url=sites_mod.article_url(cfg, meta))
+        url=url)
 
-    print(f"\n公開完了: {sites_mod.article_url(cfg, meta)}（score {score}）")
+    print(f"\n公開完了: {url}（score {score}）")
 
 
 if __name__ == "__main__":

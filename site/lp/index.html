@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&family=Shippori+Mincho+B1:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=13f271e2">
+<link rel="stylesheet" href="/css/style.css?v=87b3dbcb">
 <link rel="stylesheet" href="/css/lp.css">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=4c923259"></script>
@@ -121,9 +121,6 @@
           <label>会社名・店舗名 <span class="req">必須</span>
             <input type="text" name="company" required autocomplete="organization">
           </label>
-          <p class="perk-note"><span class="ic" aria-hidden="true">🎁</span>
-      <span><b>特典（MEOスタンダード無料付帯）</b>をご希望の方は、特典コード<span class="code">3010</span>を
-      下の「詳細（任意）」欄に、ご相談の詳細とあわせてご記入ください。</span></p>
     <label>お名前 <span class="req">必須</span>
             <input type="text" name="name" required autocomplete="name">
           </label>
@@ -463,23 +460,19 @@
 <section class="section" data-area="動画" data-area-id="movie" style="padding-top:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(2rem,4vw,4.5rem);align-items:center;">
   <div class="reveal">
     <div class="section-head" style="margin-bottom:1.4rem;">
-      <span class="en">Movie</span>
-      <h2>1分でわかるサービス紹介</h2>
+      <span class="en">Report</span>
+      <h2>毎月お渡しする<br>月次レポートの実物</h2>
+      <p class="sub">「何をして、どう変わったか」を毎月24ページでご報告します。数字を並べるだけでなく、<strong>次に何を直すか</strong>まで書いて渡すのが私たちのレポートです。</p>
     </div>
     <ul class="check-list" style="grid-template-columns:1fr;">
-      <li>AIO・LLMO・SEO・MEOそれぞれで何をするのか</li>
-      <li>ご契約から成果までの進め方と月次レポートの中身</li>
-      <li>無料の現状分析レポートでわかること</li>
+      <li>検索・マップ・AI検索での見え方を、前月比と6ヶ月推移で報告</li>
+      <li>記事とLPのどこをどう直すか、優先度つきの改修プラン</li>
+      <li>翌月のKPI目標と実行スケジュールまで明記</li>
     </ul>
   </div>
-  <!-- TODO: サービス紹介動画が完成したら差し替え
-       <div class="video-wrap"><iframe src="https://www.youtube.com/embed/XXXX" title="サービス紹介動画" allowfullscreen loading="lazy"></iframe></div> -->
-  <div class="media-slot reveal reveal-d1" style="margin:0;">
-    <div>
-      <div class="play"></div>
-      <span class="slot-type">VIDEO</span><br>
-      サービス紹介動画（準備中）
-    </div>
+  <div class="reveal reveal-d1">
+    <img src="/images/home/report-preview.webp" alt="月次コンサルティングレポートの実物。表紙・KPIダッシュボード・改修プランのページ" width="1200" height="800" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:var(--shadow-md);">
+    <p class="note" style="margin-top:.9rem;text-align:center;">2026年7月号の実物（全24ページ）。数値はGA4・Search Consoleの実測です</p>
   </div>
 </section>
 
@@ -579,14 +572,14 @@
   <form class="form-panel" action="/api/lead" method="post" style="margin:0;max-width:none;">
     <input type="hidden" name="form_type" value="無料相談（LP）">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+    <p class="perk-note"><span class="ic" aria-hidden="true">🎁</span>
+      <span><b>特典（MEOスタンダード無料付帯）</b>は、オウンドメディア運営をご契約いただいたお客様専用です。ご希望の方は特典コード<span class="code">3010</span>を
+      下の「詳細（任意）」欄に、ご相談の詳細とあわせてご記入ください。</span></p>
     <label>お名前 <span class="req">必須</span>
       <input type="text" name="name" required autocomplete="name">
     </label>
     <label>会社名・店舗名 <span class="req">必須</span>
       <input type="text" name="company" required autocomplete="organization">
-    </label>
-    <label>ご担当者様 <span class="req">必須</span>
-      <input type="text" name="contact_person" required autocomplete="off">
     </label>
     <label>メールアドレス <span class="req">必須</span>
       <input type="email" name="email" required autocomplete="email">

@@ -141,6 +141,44 @@ def _jp_date(iso):
     return f"{int(y)}年{int(m)}月{int(d)}日"
 
 
+def check_contract(cfg, dest: Path, meta):
+    """配信先のビルドが壊れない形かを、書き込む前に確かめる。
+
+    相手のビルドスクリプトは、こちらが送る値を辞書のキーとして使うことがある。
+    実際に補助金サイトでは、カテゴリ表示名が1文字違うだけで KeyError になり、
+    そのサイトの記事31本すべてが公開されなくなった。事前に突き合わせて止める。
+    """
+    cat_label = cfg["categories"].get(meta["category"], meta["category"])
+
+    # 相手のビルドスクリプトを読み解くのは壊れやすい（実装が変わると検査が効かなくなる）。
+    # 既に公開されている記事が実際に使っている表記と突き合わせる方が確実で、
+    # 相手の実装が変わっても追従できる。
+    blog = dest / "blog"
+    if not blog.is_dir():
+        return True
+    used = {}
+    for d in blog.iterdir():
+        idx = d / "index.html"
+        if not d.is_dir() or not idx.is_file() or d.name == meta["slug"]:
+            continue
+        m = re.search(r'<span class="cat">(.*?)</span>', idx.read_text(encoding="utf-8", errors="ignore"))
+        if m:
+            used[m.group(1).strip()] = used.get(m.group(1).strip(), 0) + 1
+    # 1本だけ違う表記の記事があっても、それを正解と認めない。
+    # 過去に取り違えた記事が1本残っているだけで検査が素通りしてしまうため、
+    # 「定着している表記」だけを許可する（全体の1割以上、かつ2本以上）。
+    total = sum(used.values())
+    established = {k: v for k, v in used.items() if v >= max(2, total * 0.1)}
+    if established and cat_label not in established:
+        top = sorted(used.items(), key=lambda x: -x[1])
+        raise SystemExit(
+            f"配信を中止します。カテゴリ表示名『{cat_label}』は配信先で使われていません。\n"
+            f"  既存記事が使っている表記: {', '.join(f'{k}({v}本)' for k, v in top)}\n"
+            "  表記が違うと相手のビルドが落ち、そのサイトの記事が全て公開されなくなった実績があります。\n"
+            f"  対処: sites/{cfg['id']}.json の categories の表示名を上のどれかに合わせること")
+    return True
+
+
 def write_external_html(cfg, dest: Path, meta, body, src: Path):
     """別リポジトリの静的サイト用: 相手のテンプレートに流し込んでHTMLを生成する。
 
@@ -148,6 +186,8 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     ここで完成したページを作る。テンプレートは相手リポジトリのものを使うので、
     デザイン・構造は向こうの既存記事と揃う。
     """
+    check_contract(cfg, dest, meta)
+
     tpl_path = dest / cfg["template"]
     if not tpl_path.exists():
         raise SystemExit(f"テンプレートが見つかりません: {cfg['template']}（{cfg['repo']}）")
