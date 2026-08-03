@@ -481,6 +481,13 @@ BLOG_PAGE = """<!DOCTYPE html>
 <section class="section" style="padding-top:1rem;">
   <input type="search" id="blogSearch" class="blog-search" placeholder="記事をキーワードで検索（例: 口コミ / AIO / ChatGPT）" aria-label="記事を検索">
   <p id="blogSearchEmpty" class="blog-search-empty">該当する記事が見つかりませんでした。別のキーワードをお試しください。</p>
+  <div class="cat-filter" id="catFilter" role="group" aria-label="カテゴリで絞り込む">
+    <button type="button" data-target="all" aria-pressed="true">すべて</button>
+    <button type="button" data-target="aio" aria-pressed="false">AIO・LLMO運用</button>
+    <button type="button" data-target="seo" aria-pressed="false">SEO運用</button>
+    <button type="button" data-target="meo" aria-pressed="false">MEO運用</button>
+    <button type="button" data-target="ai-marketing" aria-pressed="false">AI集客・活用全般</button>
+  </div>
 {items}
 </section>
 
@@ -537,7 +544,7 @@ def build_blog_index(all_metas):
     """
     newest = sorted(all_metas, key=lambda m: str(m["date"]), reverse=True)
     blocks = [
-        '<div class="latest-block">'
+        '<div class="latest-block" data-cat="new">'
         '<div class="cat-head"><h2>新着</h2>'
         f'<span class="cnt">全{len(newest)}本</span></div>'
         f'<ul class="post-list">\n{chr(10).join(post_tile(m) for m in newest[:6])}\n</ul></div>'
@@ -548,7 +555,7 @@ def build_blog_index(all_metas):
             continue
         tiles = "\n".join(post_tile(m) for m in metas)
         blocks.append(
-            f'<div class="latest-block {cls}">'
+            f'<div class="latest-block {cls}" data-cat="{cat}">'
             f'<div class="cat-head"><h2>{name}</h2>'
             f'<span class="cnt">{len(metas)}本</span>'
             f'<a class="more" href="/{cat}/">このカテゴリを見る →</a></div>'

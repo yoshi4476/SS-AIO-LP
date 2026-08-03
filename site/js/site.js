@@ -369,6 +369,27 @@
     });
   }
 
+  // 記事一覧のカテゴリ絞り込み（/blog/ の #catFilter）
+  var filter = document.getElementById('catFilter');
+  if (filter) {
+    var blocks = Array.prototype.slice.call(document.querySelectorAll('.latest-block'));
+    filter.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-target]');
+      if (!btn) return;
+      var target = btn.getAttribute('data-target');
+      filter.querySelectorAll('button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      blocks.forEach(function (bl) {
+        var cat = bl.getAttribute('data-cat');
+        // 「すべて」は新着も含めて全部、カテゴリ選択時は新着を隠して該当カテゴリだけ見せる
+        bl.style.display = (target === 'all' || cat === target) ? '' : 'none';
+      });
+      var search = document.getElementById('blogSearch');
+      if (search && search.value) { search.value = ''; search.dispatchEvent(new Event('input')); }
+    });
+  }
+
   // 将来の診断ツール用フック（diagnosis_complete / site_audit_complete 等をここから送信）
   window.trackLead = function (eventName, params) { ga(eventName, params || {}); };
 
