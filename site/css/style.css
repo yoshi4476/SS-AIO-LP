@@ -1116,7 +1116,13 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 .cat-filter button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
 
 /* ヒーローのリード文とボタンを大きく（第一画面で読ませる/押させる要素のため） */
-.mv-lead { line-height: 1.85; font-weight: 500; }
+.mv-lead {
+  line-height: 1.85; font-weight: 500;
+  /* 日本語を文節で折り返す。指定しないと「これか/らの」のように語の途中で切れる */
+  word-break: auto-phrase;
+  /* 各行の長さを揃えて、最終行だけ極端に短くなるのを避ける */
+  text-wrap: balance;
+}
 .mv-actions .btn {
   font-size: clamp(1rem, 1.25vw, 1.15rem);
   padding: 1.15em 2.6em; border-radius: 14px;
