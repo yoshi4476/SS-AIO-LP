@@ -883,7 +883,7 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   .mv-copy::before { inset: -30vh -100vw -30vh -100vw; width: auto; right: auto;
     background: linear-gradient(270deg, rgba(6,20,42,.5) 0%, rgba(6,20,42,.2) 50%, rgba(6,20,42,0) 100%); }
 }
-.mv-lead { max-width: 36rem; color: #fff; font-size: 1.02rem; text-shadow: 0 1px 3px rgba(4,14,30,.95), 0 2px 14px rgba(4,14,30,.8); font-size: .95rem; line-height: 1.95; margin: 0; }
+.mv-lead { max-width: 40rem; color: #fff; font-size: clamp(1.08rem, 1.35vw, 1.3rem); text-shadow: 0 1px 3px rgba(4,14,30,.95), 0 2px 14px rgba(4,14,30,.8); font-size: .95rem; line-height: 1.95; margin: 0; }
 .mv-lead strong { color: #fff; }
 .mv-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.4rem; }
 
@@ -1112,3 +1112,14 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 }
 .cat-filter button:hover { border-color: var(--blue); color: var(--blue); }
 .cat-filter button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+/* ヒーローのリード文とボタンを2段階大きく（第一画面で読ませる/押させる要素のため） */
+.mv-lead { line-height: 1.9; }
+.mv-actions .btn {
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  padding: 1.15em 2.6em; border-radius: 14px;
+}
+@media (max-width: 860px) {
+  .mv-actions { width: 100%; }
+  .mv-actions .btn { width: 100%; }
+}
