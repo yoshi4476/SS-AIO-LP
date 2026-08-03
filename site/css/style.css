@@ -898,8 +898,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
   border-top: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14);
 }
-.figure-band div { padding: clamp(1.6rem, 3.4vw, 2.6rem) 1.2rem; border-left: 1px solid rgba(255,255,255,.14); }
-.figure-band div:first-child { border-left: 0; }
+.figure-band > div { padding: clamp(1.6rem, 3.4vw, 2.6rem) 1.2rem; border-left: 1px solid rgba(255,255,255,.14); }
+.figure-band > div:first-child { border-left: 0; }
 .figure-band .num { font-family: var(--en); font-weight: 700; font-size: clamp(2rem, 4.4vw, 3.2rem); color: #fff; line-height: 1; letter-spacing: -.01em; }
 .figure-band .num small { font-size: .42em; margin-left: .25em; letter-spacing: 0; }
 .figure-band .cap { margin-top: .7rem; font-size: .82rem; color: rgba(255,255,255,.62); line-height: 1.7; }
@@ -956,3 +956,61 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 }
 .hero-dark.is-photo > .inner { position: relative; z-index: 1; }
 .hero-dark.is-photo .mv-grid-lines { z-index: 0; }
+
+/* ---- 本文側は明るい面にする ----
+   参考サイトは全面ダークだが、読み物が中心のメディアでは重くなるため
+   「MVだけダーク、以降は明るい」構成にする。写真に白文字を重ねるMVは
+   可読性のためダークのままにしておく。 */
+.mv-page { background: var(--bg); }
+
+.flat-sec { background: var(--bg); color: var(--text); }
+.flat-sec.alt { background: var(--bg-alt); }
+
+/* 数字の帯 */
+.flat-sec .figure-band { border-color: var(--line); }
+.flat-sec .figure-band > div { border-left-color: var(--line); }
+.flat-sec .figure-band .num { color: var(--navy); }
+.flat-sec .figure-band .cap { color: var(--muted); }
+
+/* 施策のグリッド */
+.flat-sec .work-grid { background: var(--line); border-color: var(--line); }
+.flat-sec .work-card { background: var(--bg); }
+.flat-sec .work-card:hover { background: var(--bg-alt); }
+.flat-sec .work-thumb { background: var(--bg-alt); }
+.flat-sec .work-card .no { color: var(--muted); }
+.flat-sec .work-card h3 { color: var(--navy); }
+.flat-sec .work-card p { color: var(--text); }
+.flat-sec .work-card .more { color: var(--blue); }
+
+/* 監修者 */
+.flat-sec .person-body h3 { color: var(--navy); }
+.flat-sec .person-body .role { color: var(--muted); }
+.flat-sec .person-body p { color: var(--text); }
+.flat-sec .person-photo::before { background: linear-gradient(180deg, rgba(37,99,235,.18), rgba(37,99,235,.02)); }
+/* 明るい面ではゴースト白ボタンが見えないため、通常のゴーストに寄せる */
+.flat-sec .btn-ghost-light { color: var(--navy); border-color: var(--line); background: #fff; }
+.flat-sec .btn-ghost-light:hover { border-color: var(--blue); color: var(--blue); }
+
+/* MVは写真に白文字を重ねるためダークのまま。ただし黒すぎないよう紺寄りにする */
+.mv { background: radial-gradient(120% 90% at 78% 12%, #1b4d8f 0%, #0e2f5c 44%, #0b2447 100%); }
+.mv::after {
+  background:
+    linear-gradient(180deg, rgba(11,36,71,.82) 0%, rgba(11,36,71,.34) 36%, rgba(11,36,71,.9) 100%),
+    linear-gradient(90deg, rgba(11,36,71,.72) 0%, rgba(11,36,71,0) 58%);
+}
+.hero-dark.is-photo { background: #0b2447; }
+.hero-dark.is-photo .hero-photo-layer {
+  background: radial-gradient(120% 90% at 76% 14%, #1b4d8f 0%, #0e2f5c 44%, #0b2447 100%);
+}
+.hero-photo-layer::after {
+  background:
+    linear-gradient(180deg, rgba(11,36,71,.86) 0%, rgba(11,36,71,.6) 42%, rgba(11,36,71,.94) 100%),
+    linear-gradient(90deg, rgba(11,36,71,.8) 0%, rgba(11,36,71,.06) 64%);
+}
+
+/* 色面で終わるページはフッターとの間に白帯を作らない */
+.cta-final + .site-footer { margin-top: 0; }
+/* 数字の帯は詰めて、数字と説明を1かたまりに見せる */
+.figure-band > div { padding: clamp(1.4rem, 2.6vw, 2.1rem) 1.2rem; }
+.figure-band .num { line-height: 1.05; }
+.figure-band .cap { margin-top: .55rem; }
