@@ -817,7 +817,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 .mv::before {
   content: ""; position: absolute; inset: 0; z-index: -2;
   background-image: var(--mv-photo, none);
-  background-size: cover; background-position: center 58%;
+  /* 空が広く空きすぎるため少し寄せる。机とビル街が主役になる位置 */
+  background-size: 118%; background-position: 58% 70%;
 }
 /* 可読性のための覆い。写真の有無にかかわらず文字が読める濃度を保つ */
 .mv::after {
@@ -856,9 +857,9 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 .mv-vert {
   writing-mode: vertical-rl;
   font-family: var(--head); font-weight: 900; color: #fff;
-  font-size: clamp(2rem, 4.5vw, 3.9rem); line-height: 1.54; letter-spacing: .03em;
+  font-size: clamp(1.85rem, 3.6vw, 3.05rem); line-height: 1.5; letter-spacing: .02em;
   margin: 0; text-shadow: 0 2px 8px rgba(4,14,30,.85), 0 8px 40px rgba(4,14,30,.7);
-  max-height: 46svh;
+  max-height: 54svh;
 }
 .mv-vert em { font-style: normal; color: #8ec5ff; }
 /* 縦組みの中で英字2文字を横並びにする（縦中横）。指定しないと AI が横倒しになる */
