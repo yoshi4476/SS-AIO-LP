@@ -336,6 +336,37 @@ def quality_checks(all_metas):
 LINK_WHITELIST = {"/api/lead"}
 
 
+def stamp_assets():
+    """CSS/JSのURLに内容ハッシュを付ける（キャッシュ事故の防止）
+
+    _headers で /css/* に7日のキャッシュを指定しているため、URLが同じままだと
+    「新しいHTML × 古いCSS」の組み合わせになり、レイアウトが崩れたまま表示される。
+    中身が変わったときだけURLが変わるようにして、更新を確実に届ける。
+    """
+    import hashlib
+    ver = {}
+    for rel in ("css/style.css", "js/site.js"):
+        f = SITE / rel
+        if f.exists():
+            ver[rel] = hashlib.md5(f.read_bytes()).hexdigest()[:8]
+    if not ver:
+        return 0
+    n = 0
+    for p in SITE.rglob("*.html"):
+        t = p.read_text(encoding="utf-8")
+        new = t
+        for rel, h in ver.items():
+            new = re.sub(rf'(["\'])/{re.escape(rel)}(\?v=[0-9a-f]+)?(["\'])',
+                         rf'\g<1>/{rel}?v={h}\g<3>', new)
+        if new != t:
+            p.write_text(new, encoding="utf-8", newline="")
+            n += 1
+    if n:
+        print(f"ASSET: CSS/JSのURLにハッシュを付与（{n}ファイル更新 / "
+              + " ".join(f"{k}={v}" for k, v in ver.items()) + "）")
+    return n
+
+
 def link_check():
     """内部リンクの存在検証（404ゼロ保証）"""
     warns = []
@@ -588,6 +619,7 @@ def main():
     build_feed(entries)
     sync_listings(all_metas)
     warns += quality_checks(all_metas)
+    stamp_assets()
     warns += link_check()
     print(f"OK: {len(entries)}記事 / blog一覧 + sitemap.xml + feed.xml 更新")
     for w in warns:
