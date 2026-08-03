@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&family=Shippori+Mincho+B1:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=cd584926">
+<link rel="stylesheet" href="/css/style.css?v=13f271e2">
 <link rel="stylesheet" href="/css/lp.css">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=4c923259"></script>
@@ -121,7 +121,10 @@
           <label>会社名・店舗名 <span class="req">必須</span>
             <input type="text" name="company" required autocomplete="organization">
           </label>
-          <label>お名前 <span class="req">必須</span>
+          <p class="perk-note"><span class="ic" aria-hidden="true">🎁</span>
+      <span><b>特典（MEOスタンダード無料付帯）</b>をご希望の方は、特典コード<span class="code">3010</span>を
+      下の「詳細（任意）」欄に、ご相談の詳細とあわせてご記入ください。</span></p>
+    <label>お名前 <span class="req">必須</span>
             <input type="text" name="name" required autocomplete="name">
           </label>
           <label>メールアドレス <span class="req">必須</span>
@@ -581,6 +584,9 @@
     </label>
     <label>会社名・店舗名 <span class="req">必須</span>
       <input type="text" name="company" required autocomplete="organization">
+    </label>
+    <label>ご担当者様 <span class="req">必須</span>
+      <input type="text" name="contact_person" required autocomplete="off">
     </label>
     <label>メールアドレス <span class="req">必須</span>
       <input type="email" name="email" required autocomplete="email">

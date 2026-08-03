@@ -27,8 +27,13 @@ const AUTO_REPLY = false;                       // true にすると送信者へ
 const AUTO_REPLY_FROM_NAME = 'セブンセンシズ株式会社 AI集客ラボ';
 // ----------------------------------------------------------------------
 
-const HEADERS = ['受信日時', '種別', '会社名', 'お名前', 'メールアドレス',
-                 '電話番号', 'ご相談内容', '送信元ページ', 'その他項目', '対応状況'];
+// 特典コード。詳細欄にこの番号があれば「特典希望」として記録する
+const PERK_CODE = '3010';
+const PERK_LABEL = 'MEOスタンダード無料付帯';
+
+const HEADERS = ['受信日時', '種別', '会社名', 'お名前', 'ご担当者様', 'メールアドレス',
+                 '電話番号', 'ご相談内容', '詳細', '特典', '送信元ページ',
+                 'その他項目', '対応状況'];
 
 function doPost(e) {
   try {
@@ -58,28 +63,73 @@ function sheet_() {
   if (!sh) {
     sh = ss.insertSheet(SHEET_NAME);
     sh.appendRow(HEADERS);
-    sh.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold').setBackground('#0b2447')
-      .setFontColor('#ffffff');
-    sh.setFrozenRows(1);
-    sh.setColumnWidth(7, 420); // ご相談内容を広めに
+    styleHeader_(sh);
+  } else {
+    migrate_(sh);
   }
   return sh;
 }
 
+function styleHeader_(sh) {
+  sh.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold').setBackground('#0b2447')
+    .setFontColor('#ffffff');
+  sh.setFrozenRows(1);
+  sh.setColumnWidth(9, 420); // 詳細を広めに
+}
+
+/**
+ * 項目を増やしたときに、既存の行がズレないよう列を挿入して移行する。
+ * ヘッダーを書き換えるだけだと、過去の「ご相談内容」が新しい「ご担当者様」の位置に
+ * ずれ込んで台帳が読めなくなる。列を差し込むことで過去データの意味を保つ。
+ */
+function migrate_(sh) {
+  const cur = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+  if (cur.length >= HEADERS.length && cur[4] === 'ご担当者様') return; // 移行済み
+  if (cur.indexOf('ご担当者様') >= 0) return;                          // 手作業で直した場合
+
+  // 旧: 受信日時/種別/会社名/お名前/メールアドレス/電話番号/ご相談内容/送信元ページ/その他項目/対応状況
+  sh.insertColumnBefore(5);   // お名前の後ろに「ご担当者様」
+  sh.insertColumnBefore(8);   // 電話番号の後ろに「ご相談内容(選択)」。旧ご相談内容は「詳細」へ送る
+  sh.insertColumnBefore(10);  // 詳細の後ろに「特典」
+  sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+  styleHeader_(sh);
+  SpreadsheetApp.flush();
+}
+
+/**
+ * 詳細欄に特典コードが書かれているか。
+ * 単に「3010」を含むかで判定すると電話番号（090-3010-1234 等）を拾ってしまうため、
+ * 「特典」「コード」の語とセットの場合か、コードだけが単独で書かれた場合に限る。
+ */
+function hasPerk_(text) {
+  if (!text) return false;
+  const z = String(text).replace(/[０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  });
+  const flat = z.replace(/[\s\-‐―ー_.]/g, '');
+  if (/特典|コード|code/i.test(z)) return flat.indexOf(PERK_CODE) >= 0;
+  return /(^|[^0-9])3010([^0-9]|$)/.test(z) && !/[0-9]{5,}/.test(flat);
+}
+
 function saveRow_(data, referer) {
-  const known = ['form_type', 'company', 'name', 'email', 'tel', 'phone', 'message', 'body'];
+  const known = ['form_type', 'company', 'name', 'contact_person', 'email',
+                 'tel', 'phone', 'topic', 'message', 'body', 'detail'];
   const rest = Object.keys(data)
     .filter(function (k) { return known.indexOf(k) < 0 && k.charAt(0) !== '_'; })
     .map(function (k) { return k + ': ' + data[k]; })
     .join(' / ');
+  const detail = data.detail || data.message || data.body || '';
   sheet_().appendRow([
     new Date(),
     data.form_type || 'お問い合わせ',
     data.company || '',
     data.name || '',
+    data.contact_person || '',
     data.email || '',
     data.tel || data.phone || '',
-    data.message || data.body || '',
+    data.topic || '',
+    detail,
+    hasPerk_(detail) ? PERK_LABEL : '',
     referer,
     rest,
     '未対応',

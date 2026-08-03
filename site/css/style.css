@@ -848,7 +848,7 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   writing-mode: vertical-rl;
   font-family: var(--head); font-weight: 900; color: #fff;
   font-size: clamp(1.65rem, 3.4vw, 2.9rem); line-height: 1.68; letter-spacing: .06em;
-  margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.45);
+  margin: 0; text-shadow: 0 2px 10px rgba(4,14,30,.72), 0 6px 34px rgba(4,14,30,.5);
   max-height: 60svh;
 }
 .mv-vert em { font-style: normal; color: #8ec5ff; }
@@ -863,7 +863,7 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 }
 
 .mv-foot { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 1.6rem; }
-.mv-lead { max-width: 34rem; color: rgba(255,255,255,.78); font-size: .95rem; line-height: 1.95; margin: 0; }
+.mv-lead { max-width: 34rem; color: rgba(255,255,255,.9); text-shadow: 0 1px 8px rgba(4,14,30,.7); font-size: .95rem; line-height: 1.95; margin: 0; }
 .mv-lead strong { color: #fff; }
 .mv-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.4rem; }
 
@@ -995,11 +995,11 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 /* MVは写真に白文字を重ねるためダークのまま。ただし黒すぎないよう紺寄りにする */
 .mv { background: radial-gradient(120% 90% at 78% 12%, #1b4d8f 0%, #0e2f5c 44%, #0b2447 100%); }
 .mv::after {
+  /* 写真を見せたいので覆いは薄く。文字が載る帯（右端・左下）だけ濃度を残す */
   background:
-    /* 見出しが載る右端を暗くする（写真の空・ビルが明るく、白文字が飛ぶため） */
-    linear-gradient(270deg, rgba(6,20,42,.72) 0%, rgba(6,20,42,.12) 34%, rgba(6,20,42,0) 52%),
-    linear-gradient(180deg, rgba(11,36,71,.78) 0%, rgba(11,36,71,.3) 34%, rgba(11,36,71,.92) 100%),
-    linear-gradient(90deg, rgba(11,36,71,.8) 0%, rgba(11,36,71,0) 60%);
+    linear-gradient(270deg, rgba(6,20,42,.6) 0%, rgba(6,20,42,.08) 30%, rgba(6,20,42,0) 46%),
+    linear-gradient(180deg, rgba(11,36,71,.5) 0%, rgba(11,36,71,.06) 30%, rgba(11,36,71,.7) 100%),
+    linear-gradient(90deg, rgba(11,36,71,.62) 0%, rgba(11,36,71,0) 52%);
 }
 .hero-dark.is-photo { background: #0b2447; }
 .hero-dark.is-photo .hero-photo-layer {
@@ -1007,8 +1007,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 }
 .hero-photo-layer::after {
   background:
-    linear-gradient(180deg, rgba(11,36,71,.86) 0%, rgba(11,36,71,.6) 42%, rgba(11,36,71,.94) 100%),
-    linear-gradient(90deg, rgba(11,36,71,.8) 0%, rgba(11,36,71,.06) 64%);
+    linear-gradient(180deg, rgba(11,36,71,.66) 0%, rgba(11,36,71,.34) 42%, rgba(11,36,71,.8) 100%),
+    linear-gradient(90deg, rgba(11,36,71,.66) 0%, rgba(11,36,71,.04) 62%);
 }
 
 /* 色面で終わるページはフッターとの間に白帯を作らない */
@@ -1017,3 +1017,18 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 .figure-band > div { padding: clamp(1.4rem, 2.6vw, 2.1rem) 1.2rem; }
 .figure-band .num { line-height: 1.05; }
 .figure-band .cap { margin-top: .55rem; }
+
+/* 特典コードの案内。フォームの一番上に置いて、記入前に気づいてもらう */
+.perk-note {
+  display: flex; gap: .8rem; align-items: flex-start;
+  background: #fffaf0; border: 1px solid #f0d9a8; border-left: 4px solid #d99e2b;
+  border-radius: 12px; padding: .95rem 1.05rem; margin: 0 0 1.2rem;
+  font-size: .87rem; line-height: 1.8; color: #5a4415;
+}
+.perk-note .ic { font-size: 1.15rem; line-height: 1.4; flex: 0 0 auto; }
+.perk-note b { color: #8a6414; }
+.perk-note .code {
+  display: inline-block; margin: 0 .25em; padding: .1em .55em;
+  background: #d99e2b; color: #fff; border-radius: 6px;
+  font-family: var(--en); font-weight: 700; font-size: 1.05em; letter-spacing: .06em;
+}
