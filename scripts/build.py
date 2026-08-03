@@ -475,15 +475,13 @@ BLOG_PAGE = """<!DOCTYPE html>
 <section class="hero">
   <span class="kicker">All Articles</span>
   <h1>記事一覧</h1>
-  <p class="lead">AIO・LLMO・SEO・MEOの実践ノウハウを新着順に掲載しています。カテゴリで絞り込む場合はナビゲーションからどうぞ。</p>
+  <p class="lead">AIO・LLMO・SEO・MEOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。</p>
 </section>
 
 <section class="section" style="padding-top:1rem;">
   <input type="search" id="blogSearch" class="blog-search" placeholder="記事をキーワードで検索（例: 口コミ / AIO / ChatGPT）" aria-label="記事を検索">
   <p id="blogSearchEmpty" class="blog-search-empty">該当する記事が見つかりませんでした。別のキーワードをお試しください。</p>
-  <ul class="post-list">
 {items}
-  </ul>
 </section>
 
 <section class="section">
@@ -532,10 +530,33 @@ BLOG_PAGE = """<!DOCTYPE html>
 
 
 def build_blog_index(all_metas):
-    items = "\n".join(post_tile(m) for m in sorted(all_metas, key=lambda m: str(m["date"]), reverse=True))
+    """記事一覧をカテゴリごとに区切って出す。
+
+    全記事を日付順に並べるだけだと、読者が「自分の知りたい領域」にたどり着けない。
+    カテゴリごとの塊にして、各見出しからカテゴリページへも入れるようにする。
+    """
+    newest = sorted(all_metas, key=lambda m: str(m["date"]), reverse=True)
+    blocks = [
+        '<div class="latest-block">'
+        '<div class="cat-head"><h2>新着</h2>'
+        f'<span class="cnt">全{len(newest)}本</span></div>'
+        f'<ul class="post-list">\n{chr(10).join(post_tile(m) for m in newest[:6])}\n</ul></div>'
+    ]
+    for cat, (name, cls) in CATEGORIES.items():
+        metas = [m for m in newest if m["category"] == cat]
+        if not metas:
+            continue
+        tiles = "\n".join(post_tile(m) for m in metas)
+        blocks.append(
+            f'<div class="latest-block {cls}">'
+            f'<div class="cat-head"><h2>{name}</h2>'
+            f'<span class="cnt">{len(metas)}本</span>'
+            f'<a class="more" href="/{cat}/">このカテゴリを見る →</a></div>'
+            f'<ul class="post-list">\n{tiles}\n</ul></div>')
     out = SITE / "blog" / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(BLOG_PAGE.format(site=SITE_NAME, url=SITE_URL, items=items), encoding="utf-8")
+    out.write_text(BLOG_PAGE.format(site=SITE_NAME, url=SITE_URL, items="\n".join(blocks)),
+                   encoding="utf-8")
 
 
 def main():
