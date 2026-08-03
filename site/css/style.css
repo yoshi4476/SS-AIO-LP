@@ -838,8 +838,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 
 .mv-inner {
   position: relative; width: 100%; max-width: var(--max-wide); margin: 0 auto;
-  padding: clamp(7rem, 14vh, 10rem) var(--gutter) clamp(2.4rem, 6vh, 4rem);
-  display: grid; gap: clamp(2rem, 5vh, 3.4rem);
+  padding: clamp(5.4rem, 9vh, 7.5rem) var(--gutter) clamp(1.6rem, 4vh, 2.8rem);
+  display: grid; gap: clamp(1.4rem, 3.4vh, 2.6rem);
 }
 
 /* 縦組みの見出し。縦書きは長文が読みづらいため、短い断言だけを置く */
@@ -858,7 +858,7 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   font-family: var(--head); font-weight: 900; color: #fff;
   font-size: clamp(2rem, 4.5vw, 3.9rem); line-height: 1.54; letter-spacing: .03em;
   margin: 0; text-shadow: 0 2px 8px rgba(4,14,30,.85), 0 8px 40px rgba(4,14,30,.7);
-  max-height: 62svh;
+  max-height: 46svh;
 }
 .mv-vert em { font-style: normal; color: #8ec5ff; }
 /* 縦組みの中で英字2文字を横並びにする（縦中横）。指定しないと AI が横倒しになる */
@@ -883,7 +883,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   .mv-copy::before { inset: -30vh -100vw -30vh -100vw; width: auto; right: auto;
     background: linear-gradient(270deg, rgba(6,20,42,.5) 0%, rgba(6,20,42,.2) 50%, rgba(6,20,42,0) 100%); }
 }
-.mv-lead { max-width: 40rem; color: #fff; font-size: clamp(1.08rem, 1.35vw, 1.3rem); text-shadow: 0 1px 3px rgba(4,14,30,.95), 0 2px 14px rgba(4,14,30,.8); font-size: .95rem; line-height: 1.95; margin: 0; }
+.mv-lead { max-width: min(58rem, 62vw); color: #fff; font-size: clamp(1.18rem, 1.7vw, 1.6rem);
+  text-shadow: 0 1px 3px rgba(4,14,30,.95), 0 2px 14px rgba(4,14,30,.8); margin: 0; }
 .mv-lead strong { color: #fff; }
 .mv-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.4rem; }
 
@@ -1113,8 +1114,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 .cat-filter button:hover { border-color: var(--blue); color: var(--blue); }
 .cat-filter button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
 
-/* ヒーローのリード文とボタンを2段階大きく（第一画面で読ませる/押させる要素のため） */
-.mv-lead { line-height: 1.9; }
+/* ヒーローのリード文とボタンを大きく（第一画面で読ませる/押させる要素のため） */
+.mv-lead { line-height: 1.85; font-weight: 500; }
 .mv-actions .btn {
   font-size: clamp(1rem, 1.25vw, 1.15rem);
   padding: 1.15em 2.6em; border-radius: 14px;
