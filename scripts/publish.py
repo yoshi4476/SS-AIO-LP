@@ -133,6 +133,149 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
     return [target], len(md2html.plain_text(md2html.convert(body)[0]))
 
 
+JP_ERA = "%Y年%-m月%-d日"
+
+
+def _jp_date(iso):
+    y, m, d = str(iso).split("-")
+    return f"{int(y)}年{int(m)}月{int(d)}日"
+
+
+def write_external_html(cfg, dest: Path, meta, body, src: Path):
+    """別リポジトリの静的サイト用: 相手のテンプレートに流し込んでHTMLを生成する。
+
+    Markdownを置くだけでは相手側にHTML化の仕組みがなく、記事が公開されないため
+    ここで完成したページを作る。テンプレートは相手リポジトリのものを使うので、
+    デザイン・構造は向こうの既存記事と揃う。
+    """
+    tpl_path = dest / cfg["template"]
+    if not tpl_path.exists():
+        raise SystemExit(f"テンプレートが見つかりません: {cfg['template']}（{cfg['repo']}）")
+    tpl = tpl_path.read_text(encoding="utf-8")
+
+    html, _ = md2html.convert(body)
+    # FAQはテンプレート側が専用セクションを持つので、本文からは先に取り除く
+    # （目次を作る前に消さないと、存在しない見出しへのリンクが目次に残る）
+    html = re.sub(r"<h2[^>]*>\s*よくある質問\s*</h2>.*?(?=<h2|$)", "", html, flags=re.S)
+
+    # 目次のアンカーを相手の書式（#sec1, #sec2 …）に合わせる
+    heads = [re.sub(r"<[^>]+>", "", h).strip()
+             for h in re.findall(r"<h2[^>]*>(.*?)</h2>", html, re.S)]
+
+    def _renumber(m, c=[0]):
+        c[0] += 1
+        return f'<h2 id="sec{c[0]}">'
+
+    html = re.sub(r"<h2[^>]*>", _renumber, html)
+    toc = "".join(f'<li><a href="#sec{i}">{h}</a></li>' for i, h in enumerate(heads, 1))
+
+    faqs = meta.get("faq") or []
+    faq_html = "\n".join(
+        f'    <details>\n      <summary>{f["q"]}</summary>\n'
+        f'      <div class="a">{f["a"]}</div>\n    </details>' for f in faqs)
+    faq_jsonld = ",\n".join(
+        '      { "@type": "Question", "name": %s, "acceptedAnswer": '
+        '{ "@type": "Answer", "text": %s } }'
+        % (json.dumps(f["q"], ensure_ascii=False), json.dumps(f["a"], ensure_ascii=False))
+        for f in faqs)
+
+    related = "\n".join(f'<li><a href="{u}">{t}</a></li>'
+                        for t, u in _recent_articles(dest, cfg, meta["slug"], 3))
+
+    plain = md2html.plain_text(html)
+    lead = (re.search(r"<p[^>]*>(.*?)</p>", html, re.S) or [None, ""])[1]
+    target_txt = (re.search(r'class="target-reader">(.*?)</div>', body, re.S)
+                  or [None, cfg.get("audience", "")])[1]
+    # テンプレートが「この記事は<b>◯◯</b>向けです」の形で囲むため、
+    # 原稿側の「この記事は…向けです。」から中身だけを取り出す（二重表記を避ける）
+    target_txt = re.sub(r"<[^>]+>", "", target_txt).strip()
+    target_txt = re.sub(r"^この記事は[、,]?\s*", "", target_txt)
+    target_txt = re.sub(r"(の方)?向けです[。.]?\s*$", "", target_txt)
+
+    vals = {
+        "TITLE": meta["title"],
+        "TITLE_SHORT": meta["title"][:28],
+        "DESCRIPTION": meta["description"],
+        "SLUG": meta["slug"],
+        "CATEGORY": cfg["categories"].get(meta["category"], meta["category"]),
+        "DATE_ISO": str(meta["date"]),
+        "DATE_JP": _jp_date(meta["date"]),
+        "DATE_YM": f"{str(meta['date'])[:4]}年{int(str(meta['date'])[5:7])}月",
+        "READ_MIN": str(max(3, round(len(plain) / 600))),
+        "LEAD_DANGEN": re.sub(r"<[^>]+>", "", lead).strip(),
+        "TARGET": target_txt,
+        "BODY": html,
+        "TOC_ITEMS": toc,
+        "FAQ_HTML": faq_html,
+        "FAQ_JSONLD": faq_jsonld,
+        "RELATED_LINKS": related,
+        "CTA_TITLE": cfg.get("cta_title", "補助金が使えるか、無料で確認しませんか"),
+        "CTA_DESC": cfg.get("cta_desc",
+                            "要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。"),
+    }
+    out = tpl
+    for k, v in vals.items():
+        out = out.replace("{{" + k + "}}", v)
+    left = re.findall(r"\{\{([A-Z_]+)\}\}", out)
+    if left:
+        raise SystemExit(f"テンプレートの未置換タグが残っています: {sorted(set(left))}")
+
+    page = dest / "blog" / meta["slug"] / "index.html"
+    page.parent.mkdir(parents=True, exist_ok=True)
+    page.write_text(out, encoding="utf-8", newline="\n")
+
+    # 原稿も残す（相手側の重複判定・再生成の材料になる）
+    md = dest / cfg["content_dir"] / f"{meta['slug']}.md"
+    md.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, md)
+
+    written = [page, md] + _update_external_index(dest, cfg, meta)
+    return written, len(plain)
+
+
+def _recent_articles(dest: Path, cfg, exclude_slug, n):
+    """相手サイトの既存記事から関連リンク先を選ぶ（新しい順）"""
+    out = []
+    blog = dest / "blog"
+    if not blog.exists():
+        return out
+    dirs = sorted((d for d in blog.iterdir() if d.is_dir() and d.name != exclude_slug),
+                  key=lambda d: d.stat().st_mtime, reverse=True)
+    for d in dirs:
+        idx = d / "index.html"
+        if not idx.exists():
+            continue
+        m = re.search(r"<h1[^>]*>(.*?)</h1>", idx.read_text(encoding="utf-8"), re.S)
+        if m:
+            out.append((re.sub(r"<[^>]+>", "", m.group(1)).strip(), f"/blog/{d.name}/"))
+        if len(out) >= n:
+            break
+    return out
+
+
+def _update_external_index(dest: Path, cfg, meta):
+    """相手サイトのsitemap.xmlとllms.txtに新記事を足す（検出されないと公開の意味がない）"""
+    touched = []
+    url = sites_mod.article_url(cfg, meta)
+    sm = dest / "sitemap.xml"
+    if sm.exists():
+        t = sm.read_text(encoding="utf-8")
+        if url not in t:
+            entry = (f"  <url>\n    <loc>{url}</loc>\n"
+                     f"    <lastmod>{meta['date']}</lastmod>\n  </url>\n")
+            t = t.replace("</urlset>", entry + "</urlset>")
+            sm.write_text(t, encoding="utf-8", newline="\n")
+            touched.append(sm)
+    lt = dest / "llms.txt"
+    if lt.exists():
+        t = lt.read_text(encoding="utf-8")
+        if url not in t:
+            lt.write_text(t.rstrip("\n") + f"\n- [{meta['title']}]({url}): {meta['description']}\n",
+                          encoding="utf-8", newline="\n")
+            touched.append(lt)
+    return touched
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True)
@@ -164,6 +307,8 @@ def main():
         written, chars = write_nextjs_json(cfg, dest, meta, body)
     elif cfg["type"] == "external-md":
         written, chars = write_external_md(cfg, dest, meta, body, src)
+    elif cfg["type"] == "external-html":
+        written, chars = write_external_html(cfg, dest, meta, body, src)
     else:
         raise SystemExit(f"未対応のサイト種別: {cfg['type']}")
 

@@ -97,6 +97,16 @@ def cross_site_check():
         kws.append({"site": sites_mod.find_category_owner(a["cat"]) or "ai-lab",
                     "keyword": a["title"], "status": "公開済み", "url": "", "_from": "article"})
 
+    # 別リポジトリのサイトは移管前から独自に記事を持っており、台帳に載っていない。
+    # 実際に公開されている記事のタイトルも突合対象に入れないと、同テーマを重ねて書いてしまう。
+    try:
+        import external_index
+        for sid, title, url in external_index.all_titles():
+            kws.append({"site": sid, "keyword": title, "status": "公開済み",
+                        "url": url, "_from": "external"})
+    except Exception as e:
+        print(f"（外部サイトの記事一覧を取得できずスキップ: {e}）")
+
     hits = []
     for i in range(len(kws)):
         for j in range(i + 1, len(kws)):
@@ -198,6 +208,50 @@ def territory_check():
     return bad
 
 
+def external_dup_check():
+    """自分が書いた記事と、同じサイトに元からある記事の重複を検査する。
+
+    cross_site_check は「サイトをまたいだ」重複しか見ず、find_pairs は articles/ の中しか見ない。
+    別リポジトリのサイト（コーポレート・補助金）は移管前からの記事を持つため、
+    この2つの隙間に「同じサイトの既存記事と重複した新記事」が落ちる。
+    """
+    import sites as sites_mod
+    cat2site = {c: sid for sid, cfg in sites_mod.load_all().items()
+                for c in cfg.get("categories", {})}
+    try:
+        import external_index
+        ext = external_index.load().get("sites", {})
+    except Exception as e:
+        print(f"EXTERNAL_DUP_CHECK=skip （外部サイトの記事一覧を取得できません: {e}）")
+        return []
+
+    hits = []
+    for a in load_articles():
+        site = cat2site.get(a["cat"])
+        if not site or site not in ext:
+            continue
+        for e in ext[site]:
+            if e["slug"] == a["slug"]:
+                continue
+            s = dice(a["title"], e["title"])
+            if s >= WARN:
+                hits.append({"score": round(s, 2), "site": site, "mine": a, "theirs": e})
+    hits.sort(key=lambda h: -h["score"])
+
+    print(f"EXTERNAL_DUP_CHECK: {len(load_articles())}記事 × 既存記事を突合 / 重複疑い {len(hits)}組")
+    if not hits:
+        print("EXTERNAL_DUP=no")
+        return []
+    print("EXTERNAL_DUP=yes")
+    for h in hits[:10]:
+        print(f"\n  [{h['score']}] {h['site']} の既存記事と重複")
+        print(f"    自作: {h['mine']['title']}（{h['mine']['slug']}）")
+        print(f"    既存: {h['theirs']['title']}")
+        print(f"          {h['theirs']['url']}")
+        print("    → 対処: 既存記事が先にあるため自作側を取り下げ、既存記事へ301で転送する")
+    return hits
+
+
 def written_territory_check():
     """公開済み記事の本文を検査し、他サイトの領域を主題にしているものを報告する。
 
@@ -242,6 +296,8 @@ def main():
         territory_check()
         print()
         written_territory_check()
+        print()
+        external_dup_check()
         return
 
     arts = load_articles()

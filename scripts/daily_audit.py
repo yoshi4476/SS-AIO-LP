@@ -54,7 +54,7 @@ def articles_by_site():
         site = cat2site.get(fv("category"))
         if site:
             out[site].append({"slug": p.stem, "date": fv("date"), "score": fv("score"),
-                              "title": fv("title")})
+                              "title": fv("title"), "category": fv("category")})
     return out
 
 
@@ -69,6 +69,44 @@ def check_volume(todo):
         if n < DAILY_TARGET:
             todo.append(f"TODO: {sid} の記事を本日あと {DAILY_TARGET - n} 本作成して公開する")
     return by_site
+
+
+def check_live(todo, by_site):
+    """当日の記事が実際にHTTP 200で見られるか。
+
+    articles/ にファイルがあることと、サイトで公開されていることは別。
+    実際、補助金サイトへは納品先の取り違えで記事が届かないまま
+    「公開済み」と数えていた期間があった。URLを叩いて確かめる。
+    """
+    import urllib.error
+    import urllib.request
+    print("\n■ 公開の実地確認（当日分のURLを実際に開く）")
+    cfgs = sites_mod.load_all()
+    checked = 0
+    for sid, arts in by_site.items():
+        for a in arts:
+            if a["date"] != today_iso():
+                continue
+            meta = {"slug": a["slug"], "category": a.get("category", "")}
+            url = sites_mod.article_url(cfgs[sid], meta)
+            checked += 1
+            try:
+                r = urllib.request.urlopen(
+                    urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}),
+                    timeout=25)
+                code = r.status
+            except urllib.error.HTTPError as e:
+                code = e.code
+            except Exception:
+                code = 0
+            mark = "OK " if code == 200 else "未公開"
+            print(f"  {mark} [{code or '接続不可'}] {url}")
+            if code != 200:
+                todo.append(f"TODO: {a['slug']} がサイトで見られない（{url}）。"
+                            f"python scripts/publish.py --site {sid} --slug {a['slug']} --push "
+                            "で配信し直す")
+    if not checked:
+        print("  （当日の記事がないため確認対象なし）")
 
 
 def check_blocked(todo):
@@ -94,6 +132,17 @@ def check_territory(todo):
     for slug, site, invader, _ in bad:
         todo.append(f"TODO: {slug} は {invader} の領域。{site} から取り下げて"
                     f"{invader} へ配信し直し、旧URLを site/_redirects で301転送する")
+
+
+def check_external_dup(todo):
+    """配信先サイトに元からある記事との重複（移管前の記事は台帳にないため見落としやすい）"""
+    print("
+■ 配信先サイトの既存記事との重複")
+    import cannibal_check
+    for h in cannibal_check.external_dup_check():
+        todo.append(f"TODO: {h['mine']['slug']} は {h['site']} の既存記事と重複"
+                    f"（類似度{h['score']}・{h['theirs']['url']}）。"
+                    "自作側を取り下げて既存記事へ301転送する")
 
 
 def check_supply(todo, fix=False):
@@ -127,9 +176,11 @@ def main():
     fix_kw = "--fix-kw" in sys.argv
     todo = []
     print(f"===== 日次監査 {today_iso()} =====\n")
-    check_volume(todo)
+    by_site = check_volume(todo)
+    check_live(todo, by_site)
     check_blocked(todo)
     check_territory(todo)
+    check_external_dup(todo)
     check_supply(todo, fix=fix_kw)
 
     print("\n===== 結果 =====")

@@ -4,7 +4,7 @@
   "domain": "lp.7senses.co.jp",
   "repo": "yoshi4476/seven-HPunyou",
   "branch": "master",
-  "type": "external-md",
+  "type": "external-html",
   "content_dir": "blog-system/content/posted",
   "url_prefix": "/blog",
   "kw_plan": "docs/kw-subsidy.md",
@@ -24,7 +24,7 @@
     "実績報告",
     "ベンダー"
   ],
-  "note": "2026-07-30 に移管完了。seven-HPunyou 側の記事生成(auto-publish.yml)と月次レポートは停止済みで、向こうは納品Markdownの受け入れ・HTML化・公開のみを担当する。納品先は blog-system/content/posted/。frontmatter は title/description/slug/category/date が必須(category は hojokin のみ)。本文に画像は埋めない(サムネは受け入れ側が在庫画像で補完する)。",
+  "note": "2026-08-03 修正: 納品先を blog/{slug}/index.html に変更した。以前の blog-system/content/posted/ は向こうの『公開済みアーカイブ』で、移管でHTML化の仕組み(auto-publish.yml)が停止していたため記事が公開されないまま捨てられていた。テンプレートは相手リポジトリの blog/_template.html を使う。frontmatter は title/description/slug/category/date/faq が必須(category は hojokin のみ)。",
   "categories": {
     "hojokin": "補助金・助成金"
   },
@@ -47,5 +47,8 @@
       "申請 代行",
       "スケジュール"
     ]
-  }
+  },
+  "template": "blog/_template.html",
+  "cta_title": "補助金が使えるか、無料で確認しませんか",
+  "cta_desc": "要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。"
 }

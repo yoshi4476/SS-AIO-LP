@@ -1,0 +1,194 @@
+{
+  "fetched": "2026-08-03",
+  "sites": {
+    "corporate": [
+      {
+        "url": "https://www.7senses.co.jp/blog/tencho-ikusei-houhou",
+        "slug": "tencho-ikusei-houhou",
+        "title": "店長育成の方法6ステップ｜必要なスキルと定着のコツ"
+      },
+      {
+        "url": "https://www.7senses.co.jp/blog/kyuujinhyou-kakikata-tenpo",
+        "slug": "kyuujinhyou-kakikata-tenpo",
+        "title": "求人票の書き方｜店舗の応募を増やす5ステップ"
+      },
+      {
+        "url": "https://www.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu",
+        "slug": "arubaito-souki-rishoku-fusegu",
+        "title": "アルバイトの早期離職を防ぐには？原因と定着施策7選"
+      },
+      {
+        "url": "https://www.7senses.co.jp/blog/tenpo-staff-kyouiku-manual",
+        "slug": "tenpo-staff-kyouiku-manual",
+        "title": "店舗スタッフの教育マニュアルの作り方｜定着に効く4ステップ"
+      },
+      {
+        "url": "https://www.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu",
+        "slug": "inshokuten-arubaito-saiyou-kotsu",
+        "title": "飲食店のアルバイト採用のコツとは？応募を増やす7つの実践法"
+      },
+      {
+        "url": "https://www.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu",
+        "slug": "biyoushitsu-staff-teichakuritsu",
+        "title": "美容室スタッフの定着率を上げる5つの施策とは"
+      }
+    ],
+    "subsidy": [
+      {
+        "url": "https://lp.7senses.co.jp/blog/category/hojokin/",
+        "slug": "hojokin",
+        "title": "カテゴリ: 補助金の記事一覧"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kourigyou-katsuyou/",
+        "slug": "ai-hojokin-kourigyou-katsuyou",
+        "title": "AI導入補助金を小売業で活用する方法｜2026年版・事例と申請の流れ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-seizougyou-jirei-2026/",
+        "slug": "ai-hojokin-seizougyou-jirei-2026",
+        "title": "AI導入補助金 製造業の事例2026｜採択の進め方と着金まで"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-chakkin-itsu/",
+        "slug": "ai-hojokin-chakkin-itsu",
+        "title": "AI導入補助金の着金はいつ？2026年 申請から入金までの期間と流れ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kaikei-soft-taisho/",
+        "slug": "ai-hojokin-kaikei-soft-taisho",
+        "title": "AI導入補助金の会計ソフト対象条件｜2026年版 選び方と申請手順"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-lp-seisaku-hojo/",
+        "slug": "ai-hojokin-lp-seisaku-hojo",
+        "title": "AI導入補助金でLP制作は補助対象？2026年最新の条件と流れ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-hitsuyo-shorui-kojin/",
+        "slug": "ai-hojokin-hitsuyo-shorui-kojin",
+        "title": "AI導入補助金 個人事業主の必要書類｜2026年最新の準備チェックリスト"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kobe-shinsei-support/",
+        "slug": "ai-hojokin-kobe-shinsei-support",
+        "title": "AI導入補助金 神戸の申請サポート完全ガイド【2026年最新】採択率と流れ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kyoto-shinsei-daiko/",
+        "slug": "ai-hojokin-kyoto-shinsei-daiko",
+        "title": "AI導入補助金の申請代行を京都で頼む前に｜2026年最新・費用と選び方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
+        "slug": "ai-hojokin-fukuoka-soudan",
+        "title": "AI導入補助金 福岡の相談窓口2026｜採択率を上げる無料相談の使い方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-nagoya-support/",
+        "slug": "ai-hojokin-nagoya-support",
+        "title": "AI導入補助金 名古屋のサポート先の選び方【2026年版】採択率・費用・流れを解説"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-hitsuyo-shorui-hojin/",
+        "slug": "ai-hojokin-hitsuyo-shorui-hojin",
+        "title": "AI導入補助金の必要書類【2026年 法人版】一覧と準備の順番"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-security-action-2star/",
+        "slug": "ai-hojokin-security-action-2star",
+        "title": "AI導入補助金2026｜SECURITY ACTION二つ星の宣言手順と注意点"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fusaitaku-riyu/",
+        "slug": "ai-hojokin-fusaitaku-riyu",
+        "title": "AI導入補助金 不採択の理由7選【2026年最新】再申請で採択されるコツ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-katsuyou-jirei-2026/",
+        "slug": "ai-hojokin-katsuyou-jirei-2026",
+        "title": "AI導入補助金の活用事例2026|中小企業のAI導入を採択事例で解説"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-homepage-taisho/",
+        "slug": "ai-hojokin-homepage-taisho",
+        "title": "2026年 AI導入補助金でホームページ制作は対象?対象範囲と注意点を解説"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-it-hojokin-chigai/",
+        "slug": "ai-hojokin-it-hojokin-chigai",
+        "title": "AI導入補助金とIT導入補助金の違いは?結論は同じ制度【2026年の呼び方】"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-osaka-chusho/",
+        "slug": "ai-hojokin-osaka-chusho",
+        "title": "【2026年版】中小企業のAI導入補助金｜大阪の申請サポートと採択の進め方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru-2026/",
+        "slug": "ai-hojokin-ikura-moraeru-2026",
+        "title": "AI導入補助金2026はいくらもらえる?上限350万円と対象を解説"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool-2026/",
+        "slug": "ai-hojokin-taisho-tool-2026",
+        "title": "AI導入補助金2026年最新版｜対象ツールの定義と選び方ガイド"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-saitakuritsu-up/",
+        "slug": "it-hojokin-saitakuritsu-up",
+        "title": "IT導入補助金の採択率を上げる方法｜見直すべき3つの視点"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-guide-2026/",
+        "slug": "ai-hojokin-guide-2026",
+        "title": "AI導入補助金とは?令和8年度の完全ガイド"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-saitakuritsu/",
+        "slug": "it-hojokin-saitakuritsu",
+        "title": "IT導入補助金の採択率を上げる5つの実務ポイント"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/gbizid-shutoku/",
+        "slug": "gbizid-shutoku",
+        "title": "GビズIDプライムの取得方法(最短2週間の逆算スケジュール)"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
+        "slug": "it-hojokin-daiko-hiyou",
+        "title": "IT導入補助金の申請代行・サポート費用の相場"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-vendor/",
+        "slug": "it-hojokin-vendor",
+        "title": "IT導入補助金のベンダー(支援事業者)の選び方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+        "slug": "it-hojokin-taisho-tool",
+        "title": "IT導入補助金の対象ツールと選び方(令和8年度)"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kojin/",
+        "slug": "ai-hojokin-kojin",
+        "title": "個人事業主もAI導入補助金は使える?条件と手順"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-schedule/",
+        "slug": "it-hojokin-schedule",
+        "title": "IT導入補助金 令和8年度のスケジュールと逆算準備"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/",
+        "slug": "ai-hojokin-shinsei-shippai-yokuaru",
+        "title": "AI導入補助金の申請に失敗する5つの原因と対策"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/security-action-futatsuboshi/",
+        "slug": "security-action-futatsuboshi",
+        "title": "SECURITY ACTION二つ星の宣言方法と一つ星との違い"
+      }
+    ]
+  }
+}
