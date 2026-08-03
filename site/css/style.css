@@ -33,6 +33,9 @@
   --shadow-md: 0 2px 4px rgba(11,36,71,.05), 0 12px 32px -12px rgba(11,36,71,.14);
   --shadow-lg: 0 24px 64px -24px rgba(11,36,71,.28);
   --radius: 18px;
+  /* メインビジュアルの写真。ここに1行入れるだけでトップとLPの両方に反映される。
+     例) --mv-photo: url("/images/home/mv.jpg");
+     未設定のときはグラデーションの下地が使われる（レイアウトは崩れない） */
 }
 
 * { box-sizing: border-box; }
@@ -471,8 +474,10 @@ code { font-family: Consolas, "Courier New", monospace; }
 .article-summary-box strong, .form-panel strong {
   background: linear-gradient(transparent 58%, #ffe873 58%); padding: 0 .12em; font-weight: 700;
 }
+/* 暗い面では黄マーカーが読めなくなるため解除する（色で強調する） */
 .hero-dark strong, .cta strong, .side-cta strong, .site-footer strong,
-.media-slot strong, thead strong, .stat-band strong {
+.media-slot strong, thead strong, .stat-band strong,
+.mv strong, .dark-sec strong, .cta-final strong {
   background: none; padding: 0;
 }
 
@@ -782,3 +787,172 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   .cursor-glow { display: none; }
   .num-pop { animation: none; }
 }
+
+/* ============================================================
+   全画面MV構成（トップ / LP）
+   ダーク基調・全画面ビジュアル・縦組み見出し・Scroll導線。
+   写真は .mv の --mv-photo に画像URLを入れるだけで差し替わる。
+   写真未設定でも成立するよう、下地にグラデーションと微細なグリッドを敷いている。
+   ============================================================ */
+.mv-page { background: #050f22; }
+
+/* MVに重ねるため、このページだけヘッダーを透過にする */
+.mv-page .site-header {
+  position: absolute; inset: 0 0 auto; background: transparent;
+  backdrop-filter: none; border-bottom: 0;
+}
+.mv-page .site-header .brand .mark { color: #fff; }
+.mv-page .site-header .brand .by { color: rgba(255,255,255,.6); }
+.mv-page .site-header .global-nav a { color: rgba(255,255,255,.82); }
+.mv-page .site-header .global-nav a:hover { color: #fff; }
+.mv-page .site-header .global-nav .nav-cta { color: #fff; }
+
+.mv {
+  position: relative; min-height: 100svh; display: flex; flex-direction: column;
+  justify-content: flex-end; overflow: hidden; isolation: isolate;
+  background: radial-gradient(120% 90% at 78% 12%, #123a6b 0%, #0a1f3d 42%, #050f22 100%);
+}
+/* 写真レイヤー。--mv-photo が未設定なら何も描画されない */
+.mv::before {
+  content: ""; position: absolute; inset: 0; z-index: -2;
+  background-image: var(--mv-photo, none);
+  background-size: cover; background-position: center 58%;
+}
+/* 可読性のための覆い。写真の有無にかかわらず文字が読める濃度を保つ */
+.mv::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(5,15,34,.86) 0%, rgba(5,15,34,.42) 34%, rgba(5,15,34,.92) 100%),
+    linear-gradient(90deg, rgba(5,15,34,.78) 0%, rgba(5,15,34,0) 58%);
+}
+.mv-grid-lines {
+  position: absolute; inset: 0; z-index: -1; opacity: .5; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 96px 96px;
+  -webkit-mask-image: radial-gradient(120% 80% at 70% 30%, #000 10%, transparent 78%);
+  mask-image: radial-gradient(120% 80% at 70% 30%, #000 10%, transparent 78%);
+}
+
+.mv-inner {
+  position: relative; width: 100%; max-width: var(--max-wide); margin: 0 auto;
+  padding: clamp(7rem, 14vh, 10rem) var(--gutter) clamp(2.4rem, 6vh, 4rem);
+  display: grid; gap: clamp(2rem, 5vh, 3.4rem);
+}
+
+/* 縦組みの見出し。縦書きは長文が読みづらいため、短い断言だけを置く */
+.mv-copy { display: flex; justify-content: flex-end; gap: clamp(1rem, 2.4vw, 2rem); }
+.mv-vert {
+  writing-mode: vertical-rl;
+  font-family: var(--head); font-weight: 900; color: #fff;
+  font-size: clamp(1.65rem, 3.4vw, 2.9rem); line-height: 1.68; letter-spacing: .06em;
+  margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.45);
+  max-height: 60svh;
+}
+.mv-vert em { font-style: normal; color: #8ec5ff; }
+/* 縦組みの中で英字2文字を横並びにする（縦中横）。指定しないと AI が横倒しになる */
+.mv-vert .tcy { -webkit-text-combine: horizontal; text-combine-upright: all; }
+/* 見出しの脇の細い罫。このメディアの主張を1語だけ置く */
+.mv-rule { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-top: .4rem; }
+.mv-rule i { display: block; width: 1px; flex: 1; background: linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,0)); }
+.mv-rule span {
+  writing-mode: vertical-rl; font-family: var(--en); font-size: .64rem;
+  letter-spacing: .34em; color: rgba(255,255,255,.55); text-transform: uppercase;
+}
+
+.mv-foot { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 1.6rem; }
+.mv-lead { max-width: 34rem; color: rgba(255,255,255,.78); font-size: .95rem; line-height: 1.95; margin: 0; }
+.mv-lead strong { color: #fff; }
+.mv-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.4rem; }
+
+.mv-scroll {
+  width: 108px; height: 108px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%;
+  display: grid; place-items: center; align-content: center; gap: .3rem; color: rgba(255,255,255,.8);
+  font-family: var(--en); font-size: .68rem; letter-spacing: .18em; text-decoration: none;
+  transition: background .3s var(--ease-out), border-color .3s var(--ease-out);
+}
+.mv-scroll:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.6); }
+.mv-scroll b { display: block; font-weight: 400; font-size: 1rem; line-height: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .mv-scroll b { animation: mvDrop 2.2s var(--ease-out) infinite; }
+}
+@keyframes mvDrop { 0%,100% { transform: translateY(-2px); opacity: .55; } 50% { transform: translateY(4px); opacity: 1; } }
+
+@media (max-width: 860px) {
+  .mv-copy { justify-content: flex-start; }
+  .mv-vert { max-height: 46svh; font-size: clamp(1.5rem, 6.2vw, 2.1rem); }
+  .mv-foot { grid-template-columns: 1fr; }
+  .mv-scroll { display: none; }
+}
+
+/* ---- ダーク基調のセクション ---- */
+.dark-sec { background: #050f22; color: #fff; }
+.dark-sec .section-head h2 { color: #fff; }
+.dark-sec .section-head .en { color: rgba(255,255,255,.5); }
+.dark-sec .section-head .sub { color: rgba(255,255,255,.72); }
+.dark-sec .section-head .sub strong { color: #8ec5ff; }
+
+/* 数字の帯。実績は飾らず、数字そのものを大きく置く */
+.figure-band {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+  border-top: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14);
+}
+.figure-band div { padding: clamp(1.6rem, 3.4vw, 2.6rem) 1.2rem; border-left: 1px solid rgba(255,255,255,.14); }
+.figure-band div:first-child { border-left: 0; }
+.figure-band .num { font-family: var(--en); font-weight: 700; font-size: clamp(2rem, 4.4vw, 3.2rem); color: #fff; line-height: 1; letter-spacing: -.01em; }
+.figure-band .num small { font-size: .42em; margin-left: .25em; letter-spacing: 0; }
+.figure-band .cap { margin-top: .7rem; font-size: .82rem; color: rgba(255,255,255,.62); line-height: 1.7; }
+
+/* 施策のグリッド。各カードにサムネイル画像を1枚持たせる */
+.work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); gap: 1px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.14); }
+.work-card { background: #050f22; padding: clamp(1.5rem, 2.8vw, 2.2rem); text-decoration: none; display: block; transition: background .35s var(--ease-out); }
+.work-card:hover { background: #0b1e3d; }
+.work-thumb { display: block; aspect-ratio: 16/10; overflow: hidden; border-radius: 10px; background: #0b1e3d; margin-bottom: 1.3rem; }
+.work-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease-out); }
+.work-card:hover .work-thumb img { transform: scale(1.04); }
+.work-card .no { font-family: var(--en); font-size: .7rem; letter-spacing: .24em; color: rgba(255,255,255,.45); }
+.work-card h3 { font-family: var(--head); font-weight: 900; font-size: 1.16rem; color: #fff; margin: .5rem 0 .6rem; }
+.work-card p { font-size: .87rem; line-height: 1.9; color: rgba(255,255,255,.68); margin: 0 0 1.1rem; }
+.work-card .more { font-family: var(--en); font-size: .74rem; letter-spacing: .12em; color: #8ec5ff; }
+
+/* 監修者。人物写真を主役に置く2カラム */
+.person { display: grid; grid-template-columns: minmax(190px, 280px) 1fr; gap: clamp(1.8rem, 4vw, 3.4rem); align-items: center; }
+.person-photo { position: relative; isolation: isolate; }
+.person-photo img { width: 100%; height: auto; display: block; }
+.person-photo::before { content: ""; position: absolute; inset: auto 4% 0 4%; height: 64%; border-radius: 999px 999px 0 0; background: linear-gradient(180deg, rgba(37,99,235,.38), rgba(37,99,235,.03)); z-index: -1; }
+.person-body h3 { font-family: var(--head); font-weight: 900; font-size: 1.3rem; color: #fff; margin: .4rem 0 .3rem; }
+.person-body .role { font-size: .84rem; color: rgba(255,255,255,.6); }
+.person-body p { color: rgba(255,255,255,.76); line-height: 1.95; font-size: .93rem; }
+@media (max-width: 720px) { .person { grid-template-columns: 1fr; } .person-photo { max-width: 220px; } }
+
+/* 最終CTA。ページの仕事はここで終わるので、迷い先を作らない */
+.cta-final { position: relative; overflow: hidden; background: linear-gradient(140deg, #0b2447 0%, #123a6b 55%, #0a1f3d 100%); color: #fff; text-align: center; padding: clamp(3.4rem, 8vw, 6rem) var(--gutter); }
+.cta-final h2 { font-family: var(--head); font-weight: 900; font-size: clamp(1.45rem, 3.4vw, 2.4rem); line-height: 1.62; margin: 0 0 1rem; }
+.cta-final p { max-width: 56ch; margin: 0 auto 2rem; color: rgba(255,255,255,.82); line-height: 1.95; }
+.cta-final .note { font-size: .82rem; color: rgba(255,255,255,.6); margin-top: 1.2rem; }
+
+/* ---- LPヒーローを写真下地に切り替える（トップと同じトーンに揃える） ----
+   LPは第一画面のフォームがCVを左右するため、フォームは残したまま
+   背景だけを写真＋ダークオーバーレイに差し替える。 */
+.hero-dark.is-photo { background: #050f22; }
+.hero-dark.is-photo::before,
+.hero-dark.is-photo::after { display: none; }
+.hero-photo-layer { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.hero-photo-layer::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: var(--mv-photo, none);
+  background-size: cover; background-position: center 55%;
+}
+.hero-photo-layer::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5,15,34,.9) 0%, rgba(5,15,34,.66) 42%, rgba(5,15,34,.96) 100%),
+    linear-gradient(90deg, rgba(5,15,34,.82) 0%, rgba(5,15,34,.08) 64%);
+}
+/* 写真未設定でも成立させるための下地 */
+.hero-dark.is-photo .hero-photo-layer {
+  background: radial-gradient(120% 90% at 76% 14%, #123a6b 0%, #0a1f3d 44%, #050f22 100%);
+}
+.hero-dark.is-photo > .inner { position: relative; z-index: 1; }
+.hero-dark.is-photo .mv-grid-lines { z-index: 0; }
