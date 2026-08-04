@@ -142,7 +142,19 @@ def main():
     arts = load_articles()
     corpus = written_corpus()
     planned = {k for _, k in plan_keywords()}
-    seen = set(planned)
+    # 台帳（管制塔）にすでに積まれているKWも既知として扱う。
+    # 計画ファイルだけを見ていたため、台帳にあるKWを「新規」として毎回積み直し、
+    # 補助金サイトでは補充16件がすべて重複で、実質0件しか増えていなかった。
+    ledger = set()
+    try:
+        import hub_client
+        if hub_client.enabled():
+            ledger = {(k.get("keyword") or "").strip()
+                      for k in hub_client.all_kw() if k.get("site") == site_id}
+    except Exception as e:
+        print(f"（台帳の照合をスキップ: {e}）")
+    seen = set(planned) | ledger
+    print(f"既知KW: 計画{len(planned)}件 + 台帳{len(ledger)}件")
     proven, discovered = [], []
 
     # --- 1. GSC実データ（表示実績あり・記事なし = 最優先）---

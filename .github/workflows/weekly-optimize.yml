@@ -49,9 +49,17 @@ jobs:
             printf '%s' "$SA_JSON" > indexing-service-account.json
             pip install --quiet google-api-python-client google-auth
           fi
+          # 1サイトの失敗で全体を止めたくないが、黙って0件のまま進むと在庫が枯れる。
+          # 結果を必ず表示し、追記できなかったサイトは管制塔のエラーログへ残す。
           for s in ai-lab corporate subsidy; do
             echo "--- $s のKW補充 ---"
-            python scripts/kw_discover.py --site "$s" --append || true
+            if out=$(python scripts/kw_discover.py --site "$s" --append 2>&1); then
+              echo "$out" | tail -3
+              echo "$out" | grep -q "件を追記しました"                 || python scripts/hub_client.py error_log kw "$s: 週次補充で新規KWを追記できませんでした（在庫が枯れる前に手当てが必要）" || true
+            else
+              echo "$out" | tail -5
+              python scripts/hub_client.py error_log kw "$s: 週次補充が失敗しました" || true
+            fi
           done
           rm -f indexing-service-account.json
           python scripts/kw_status.py

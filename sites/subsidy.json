@@ -24,7 +24,7 @@
     "実績報告",
     "ベンダー"
   ],
-  "note": "2026-08-03 修正: 納品先を blog/{slug}/index.html に変更した。以前の blog-system/content/posted/ は向こうの『公開済みアーカイブ』で、移管でHTML化の仕組み(auto-publish.yml)が停止していたため記事が公開されないまま捨てられていた。テンプレートは相手リポジトリの blog/_template.html を使う。frontmatter は title/description/slug/category/date/faq が必須(category は hojokin のみ)。 / 2026-08-03: カテゴリ表示名を「補助金・助成金」から「補助金」へ修正。向こうの tools/gen_blog_pages.py が <span class=\"cat\"> の値を CAT_THUMBS のキーとして使うため、表記が違うとビルドが KeyError で落ちる。",
+  "note": "2026-08-03 修正: 納品先を blog/{slug}/index.html に変更した。以前の blog-system/content/posted/ は向こうの『公開済みアーカイブ』で、移管でHTML化の仕組み(auto-publish.yml)が停止していたため記事が公開されないまま捨てられていた。テンプレートは相手リポジトリの blog/_template.html を使う。frontmatter は title/description/slug/category/date/faq が必須(category は hojokin のみ)。 / 2026-08-03: カテゴリ表示名を「補助金・助成金」から「補助金」へ修正。向こうの tools/gen_blog_pages.py が <span class=\"cat\"> の値を CAT_THUMBS のキーとして使うため、表記が違うとビルドが KeyError で落ちる。 / 2026-08-04: kw_seeds が48通りを使い切り補充の純増が0件になっていたため、業種16×意図18=288通りへ拡張した。",
   "categories": {
     "hojokin": "補助金"
   },
@@ -35,17 +35,37 @@
       "飲食店",
       "製造業",
       "小売業",
-      "建設業"
+      "建設業",
+      "運送業",
+      "介護事業所",
+      "美容室",
+      "クリニック",
+      "士業事務所",
+      "宿泊業",
+      "農業",
+      "卸売業",
+      "学習塾",
+      "整体院"
     ],
     "intents": [
       "AI導入補助金",
       "IT導入補助金",
+      "ものづくり補助金",
+      "小規模事業者持続化補助金",
+      "事業再構築補助金",
       "申請 方法",
       "必要書類",
       "採択率",
       "対象経費",
       "申請 代行",
-      "スケジュール"
+      "スケジュール",
+      "申請 要件",
+      "補助率",
+      "実績報告",
+      "不採択 理由",
+      "事業計画書 書き方",
+      "gBizID",
+      "交付決定"
     ]
   },
   "template": "blog/_template.html",

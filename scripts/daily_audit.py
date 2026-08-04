@@ -26,7 +26,8 @@ import sites as sites_mod  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
 DAILY_TARGET = 2       # 1サイトあたりの1日の公開本数
-KW_MIN_DAYS = 4        # 未着手KWがこの日数分を切ったら補充する
+KW_MIN_DAYS = 8        # 未着手KWがこの日数分を切ったら補充する
+                       # 週次補充まで最大7日空くため、4日分では次の補充を待てずに枯れる
 PY = sys.executable
 
 

@@ -106,7 +106,7 @@ jobs:
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          out=$(python scripts/daily_audit.py); echo "$out"
+          out=$(python scripts/daily_audit.py --fix-kw); echo "$out"
           if echo "$out" | grep -q "AUDIT_OK=yes"; then
             echo "救済不要（3サイトとも当日ノルマ達成・BLOCKEDなし・領域違反なし）"
             rm -f indexing-service-account.json
@@ -122,7 +122,7 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
-          out=$(python scripts/daily_audit.py); echo "$out"
+          out=$(python scripts/daily_audit.py --fix-kw); echo "$out"
           if echo "$out" | grep -q "AUDIT_OK=no"; then
             echo "$out" | grep "^TODO:" | while IFS= read -r t; do
               echo "::warning::救済後も未解決: $t"
