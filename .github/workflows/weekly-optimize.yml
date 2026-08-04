@@ -39,6 +39,18 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
 
+      # GSCが読めているかを毎週確認する。ここが黙って落ちると補充が
+      # サジェスト頼りになり、有限の候補を掘り尽くして在庫が枯れる。
+      - name: Search Consoleの疎通確認
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$SA_JSON" ]; then echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です"; exit 0; fi
+          printf '%s' "$SA_JSON" > indexing-service-account.json
+          pip install --quiet google-api-python-client google-auth
+          out=$(python scripts/gsc_check.py); echo "$out"
+          echo "$out" | grep -q "GSC_OK=yes"             || python scripts/hub_client.py error_log gsc "GSCの検索データを取得できないサイトがあります（補充がサジェスト頼りになります）" || true
+
       # KWキューを実データ（GSC実績+Googleサジェスト）で補充する。
       # 推定KWではなく「実際に検索されている語」を供給し続けるための工程。
       - name: KWキューの実データ補充

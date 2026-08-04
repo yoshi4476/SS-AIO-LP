@@ -89,7 +89,12 @@ def main():
         try:
             row.update(gsc(f"https://{cfg['domain']}/", sc_day))
         except Exception as e:
-            print(f"  {sid}: GSC取得スキップ（{e}）")
+            # 403の正体は「権限が制限付き」。長い例外をそのまま出すと原因が埋もれる
+            if "403" in str(e) or "sufficient permission" in str(e):
+                print(f"  {sid}: GSC取得スキップ（権限不足。"
+                      "python scripts/gsc_check.py で対処手順を確認してください）")
+            else:
+                print(f"  {sid}: GSC取得スキップ（{e}）")
         rows.append(row)
         print(f"{sid:10s} セッション{row.get('sessions', 0):5d}  表示{row.get('impressions', 0):6d}  "
               f"クリック{row.get('clicks', 0):4d}  AI参照{row.get('ai', 0):3d}")

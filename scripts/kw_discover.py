@@ -100,7 +100,13 @@ def gsc_queries(site=None):
         return [{"kw": r["keys"][0], "imp": int(r["impressions"]),
                  "pos": round(r["position"], 1)} for r in res.get("rows", [])]
     except Exception as e:
-        print(f"（GSC取得スキップ: {e}）")
+        # 403は「追加されていない」ではなく「権限が制限付き」であることが多い。
+        # 生の例外を出すと原因が読み取れず、実際に長く放置されていた。
+        if "403" in str(e) or "sufficient permission" in str(e):
+            print(f"（GSC取得スキップ: {site} の権限が不足しています。"
+                  "python scripts/gsc_check.py で対処手順を確認してください）")
+        else:
+            print(f"（GSC取得スキップ: {e}）")
         return []
 
 
