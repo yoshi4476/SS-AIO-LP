@@ -63,7 +63,12 @@ def main():
     for slug, name in cfg.get("categories", {}).items():
         print(f"  - {slug:14s} {name}")
 
-    # 記事のCTAは毎回ぶれると導線が散らかるため、サイト設定の1か所で決める
+    # 内部リンクの方針も設定で1か所に持つ。旧テーマの記事へリンクすると導線が逸れる
+    pol = cfg.get("link_policy")
+    if pol:
+        print("\n■ 内部リンクの方針")
+        print(f"  {pol}")
+
     cta = cfg.get("cta")
     if cta:
         print("\n■ 記事のCTA（この行き先で統一する）")
