@@ -42,4 +42,5 @@
 - [導入事例の書き方とは？成果につながる6ステップ](https://ai.7senses.co.jp/ai-marketing/donyu-jirei-kakikata/): 取材設計から一次情報を活かした執筆まで、読まれる導入事例の書き方を6ステップで解説
 - [BtoB AI検索対策（LLMO）とは？選ばれる5つの施策](https://ai.7senses.co.jp/aio/btob-llmo-taisaku/): BtoB購買担当者のAI検索活用データと、発注候補として選ばれるための5つの施策を解説
 - [ウェビナー集客の平均参加率46%と申込を増やす5つの施策](https://ai.7senses.co.jp/ai-marketing/webinar-shukyaku-hoho/): BtoB企業100社の調査データをもとに、開催2週間前から実践する集客5ステップを解説
-- [SaaS指名検索の増やし方｜AI時代に効く5つの施策](https://ai.7senses.co.jp/aio/saas-shimei-kensaku-fuyashikata/): SaaS指名検索の増やし方とは、接触回数を積み重ねて認知を蓄積し、AI引用の構造を整えてサービス名で検索される状態を作ることです。BtoB購
+- [SaaS指名検索の増やし方｜AI時代に効く5つの施策](https://ai.7senses.co.jp/aio/saas-shimei-kensaku-fuyashikata/): SaaS指名検索の増やし方とは、接触回数を積み重ねて認知を蓄積し、AI引用の構造を整えてサービス名で検索される状態を作ることです。BtoB購買データと5つの施策を解説します。
+- [展示会後フォローで商談化率を上げる5つの施策](https://ai.7senses.co.jp/ai-marketing/tenjikaigo-follow-hoho/): 展示会リードの商談化率データと、放置せず商談化につなげる5つの施策・着手の3ステップを解説
