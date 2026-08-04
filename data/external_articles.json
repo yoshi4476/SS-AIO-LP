@@ -1,11 +1,16 @@
 {
-  "fetched": "2026-08-04",
+  "fetched": "2026-08-05",
   "sites": {
     "corporate": [
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha",
         "slug": "keiri-bpo-toha",
         "title": "経理BPOとは？メリット3つと費用相場をわかりやすく解説"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/invoice-keiri-futan-keigen",
+        "slug": "invoice-keiri-futan-keigen",
+        "title": "インボイス経理の負担を軽減する6つの方法【2026年最新】"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-soukika-houhou",
@@ -28,6 +33,11 @@
         "url": "https://lp.7senses.co.jp/blog/category/hojokin/",
         "slug": "hojokin",
         "title": "カテゴリ: 補助金の記事一覧"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-ai-katsuyo-jirei/",
+        "slug": "ai-hojokin-ai-katsuyo-jirei",
+        "title": "AI導入補助金のAI活用事例5選｜対象ツールと申請のコツ"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/",
@@ -153,11 +163,6 @@
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool-2026/",
         "slug": "ai-hojokin-taisho-tool-2026",
         "title": "AI導入補助金2026年最新版｜対象ツールの定義と選び方ガイド"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/it-hojokin-saitakuritsu-up/",
-        "slug": "it-hojokin-saitakuritsu-up",
-        "title": "IT導入補助金の採択率を上げる方法｜見直すべき3つの視点"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-guide-2026/",

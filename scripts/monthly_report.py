@@ -630,12 +630,18 @@ def analyze(d):
     # サイト資産サマリー（リポジトリの記事から実測 — デモ/実データ共通）
     import re as _re
     scores, lens, cats = [], [], {}
+    # 本レポートはAI集客ラボ単体の報告。articles/ には3サイト分の原稿が入っているため、
+    # 絞らないと他サイトの記事まで「当サイトの資産」として数えてしまう（38本と誤報していた）。
+    import sites as _sites
     for p in (ROOT / "articles").glob("*.md"):
         t = p.read_text(encoding="utf-8-sig")
         m = _re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, _re.S)
         if not m:
             continue
         fm, body = m.groups()
+        _cm = _re.search(r"^category:\s*(\S+)", fm, _re.M)
+        if _cm and _sites.find_category_owner(_cm.group(1)) != "ai-lab":
+            continue
         sc = _re.search(r"^score:\s*(\d+)", fm, _re.M)
         if sc:
             scores.append(int(sc.group(1)))
@@ -733,6 +739,9 @@ def analyze(d):
     n_art = max(assets["count"], 1)
     efficiency = {
         "ad_value": ad_value, "cpc": CPC,
+        # クリックが0だと「約0円」が並び、集計が壊れているように見える。
+        # 実際は公開初月でクリックがまだ発生していないだけなのでそう書く
+        "yen": (lambda v: f"約{v:,}円") if ad_value > 0 else (lambda v: "算出前"),
         "per_article_sessions": round(sess / n_art, 1),
         "per_article_clicks": round((cur.get("clicks", 0) or 0) / n_art, 1),
         "per_article_value": round(ad_value / n_art),
@@ -744,8 +753,10 @@ def analyze(d):
         f'セッション{cur.get("sessions", 0):,}（前月比{mom("sessions")}）、'
         f'検索クリック{cur.get("clicks", 0):,}（{mom("clicks")}）。',
         f'成果は{"前進しました" if cur.get("cv", 0) >= prev.get("cv", 0) else "横ばいでした"}。'
-        f'CV{cur.get("cv", 0)}件（{mom("cv")}）、'
-        f'広告で同じクリックを買うと約{ad_value:,}円相当の流入を、記事の資産で獲得しています。',
+        f'CV{cur.get("cv", 0)}件（{mom("cv")}）。'
+        + (f'広告で同じクリックを買うと約{ad_value:,}円相当の流入を、記事の資産で獲得しています。'
+           if ad_value > 0 else
+           '広告換算は当月の検索クリックが0回のため算出前です。表示回数は出ているため、順位が上がり次第この欄に金額が入ります。'),
         f'来月は「{actions[0][0]}」を最優先に進めます。'
         f'記事は{d["content"]["published"]}本公開し、累計{assets["count"]}本（平均{assets["avg_score"]}点）まで積み上がりました。',
     ]
@@ -1018,14 +1029,32 @@ def render(d, a):
     qrows = "".join(f'<tr><td>{q["q"]}</td><td class="num">{q["imp"]:,}</td><td class="num">{q["clicks"]:,}</td>'
                     f'<td class="num">{q["ctr"]}%</td><td class="num">{q["pos"]}位</td></tr>'
                     for q in d.get("queries", [])[:8])
-    prows = "".join(f'<tr><td style="word-break:break-all">{p["path"]}</td><td class="num">{p["imp"]:,}</td>'
-                    f'<td class="num">{p["clicks"]:,}</td><td class="num">{p["ctr"]}%</td><td class="num">{p["pos"]}位</td></tr>'
-                    for p in d.get("pages", [])) or '<tr><td colspan="5">当月のページ別データはまだありません</td></tr>'
+    # ページ別実績は件数が読めない。1ページに詰めると溢れるため、
+    # 件数を削らずに続きページへ流す（削ると「上位だけの報告」になり判断を誤らせる）
+    PAGE_PER_SHEET = 6
+
+    def _prow(p):
+        return (f'<tr><td style="word-break:break-all">{p["path"]}</td><td class="num">{p["imp"]:,}</td>'
+                f'<td class="num">{p["clicks"]:,}</td><td class="num">{p["ctr"]}%</td>'
+                f'<td class="num">{p["pos"]}位</td></tr>')
+
+    _pages = d.get("pages", [])
+    _chunks = [_pages[i:i + PAGE_PER_SHEET] for i in range(0, len(_pages), PAGE_PER_SHEET)] or [[]]
+    prows = "".join(_prow(x) for x in _chunks[0])         or '<tr><td colspan="5">当月のページ別データはまだありません</td></tr>'
+    pages_extra = ""
+    for _n, _chunk in enumerate(_chunks[1:], 2):
+        pages_extra += f"""
+<div class="sheet">
+<div class="sec"><span class="no">05</span><h2>記事別パフォーマンス（続き {_n}/{len(_chunks)}）</h2><div class="gold"></div></div>
+<h3 style="margin-top:0">ページ別実績（続き・表示回数順）</h3>
+<table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>
+{"".join(_prow(x) for x in _chunk)}</table>
+</div>"""
     trows = "".join(f'<tr><td>{k}</td><td class="num">{now}</td><td class="num" style="color:#067647;font-weight:bold">{tv}</td><td>{why}</td></tr>'
                     for k, now, tv, why in a["targets"])
     audit = a["audit"]
     # 監査結果は情報量が命なので、削らずにページを分けて全件掲載する
-    ART_PER_PAGE = 8
+    ART_PER_PAGE = 4   # 1行が2〜3行に折り返すため、5行でも溢れた
 
     def _art_row(r):
         return (f'<tr><td>{r["art"]}</td><td style="white-space:nowrap">{r["where"]}</td>'
@@ -1467,6 +1496,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="callout"><b>資産の考え方:</b> 記事は広告と違い、公開後も検索とAI回答の両方から流入を生み続けるストック資産です。
 1記事あたりの平均{assets["avg_len"]:,}字・平均{assets["avg_score"]}点の品質を保ったまま蓄積することが、ドメイン全体の評価とAI引用確率を押し上げます。</div>
 </div>
+{pages_extra}
 
 <!-- ページ: 流入構造分析 -->
 <div class="sheet">
@@ -1544,12 +1574,12 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 <div class="roi">
   <div class="roi-box">
     <div class="k">当月の流入を広告で買った場合の金額</div>
-    <div class="v">約{eff["ad_value"]:,}円</div>
+    <div class="v">{eff["yen"](eff["ad_value"])}</div>
     <div class="s">検索クリック{cur.get("clicks", 0):,}回 × 想定クリック単価{eff["cpc"]}円で換算</div>
   </div>
   <div class="roi-box">
     <div class="k">記事1本あたりの月間価値</div>
-    <div class="v">約{eff["per_article_value"]:,}円</div>
+    <div class="v">{eff["yen"](eff["per_article_value"])}</div>
     <div class="s">累計{a["assets"]["count"]}本で割った1本あたりの広告換算値</div>
   </div>
   <div class="roi-box">
@@ -1573,12 +1603,12 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 <tr><th style="width:16%">時点</th><th style="width:18%">累計記事数</th>
 <th style="width:22%">月間の広告換算額</th><th>状態</th></tr>
 <tr><td>現在</td><td class="num">{a["assets"]["count"]}本</td>
-<td class="num">約{eff["ad_value"]:,}円</td><td>立ち上げ期。順位が安定し始める段階</td></tr>
+<td class="num">{eff["yen"](eff["ad_value"])}</td><td>立ち上げ期。順位が安定し始める段階</td></tr>
 <tr><td>6ヶ月後</td><td class="num">約{a["assets"]["count"] + 360}本</td>
-<td class="num">約{eff["per_article_value"] * (a["assets"]["count"] + 360):,}円</td>
+<td class="num">{eff["yen"](eff["per_article_value"] * (a["assets"]["count"] + 360))}</td>
 <td>面が広がり、複数キーワードで上位が取れ始める</td></tr>
 <tr><td>12ヶ月後</td><td class="num">約{a["assets"]["count"] + 720}本</td>
-<td class="num">約{eff["per_article_value"] * (a["assets"]["count"] + 720):,}円</td>
+<td class="num">{eff["yen"](eff["per_article_value"] * (a["assets"]["count"] + 720))}</td>
 <td>ドメイン全体の評価が上がり、新記事の立ち上がりも速くなる</td></tr>
 </table>
 <p class="note">※ 月60本のペースで、1記事あたりの価値が現在の水準を保った場合の試算です。

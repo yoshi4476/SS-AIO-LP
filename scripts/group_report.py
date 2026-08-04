@@ -213,13 +213,31 @@ def article_stats():
         cm = re.search(r"^category:\s*(\S+)", fm, re.M)
         if cm:
             cats[cm.group(1)] = cats.get(cm.group(1), 0) + 1
-    counts = {"ai-lab": len(arts)}
+        # スコア・文字数の平均は全サイト共通の品質指標なので絞らない
+    # articles/ には3サイト分の原稿が入っている。全件を ai-lab として数えると
+    # 他サイトの記事まで当サイトの実績に混ざる（38本と誤報していた）。
+    counts = {"ai-lab": sum(1 for a in arts
+                            if sites_mod.find_category_owner(a.get("cat", "")) == "ai-lab")}
+    # 台帳の「公開済み」は記録であって現況ではない。取り下げた記事も公開済みのまま残るため、
+    # 実際にコーポレートの7本を取り下げた後も12本と報告していた。公開中のページを数える。
+    mine = {}
     for k in hub_client.all_kw():
         if k.get("status") == "公開済み" and k.get("site") != "ai-lab":
-            counts[k["site"]] = counts.get(k["site"], 0) + 1
+            mine[k["site"]] = mine.get(k["site"], 0) + 1
+    try:
+        import external_index
+        live = {s: len(v) for s, v in external_index.load()["sites"].items()}
+    except Exception as e:
+        print(f"（公開中の記事数を取得できませんでした: {e}）")
+        live = {}
+    for sid in set(mine) | set(live):
+        # 配信先には既存記事（当パイプライン以前のもの）もあるため、
+        # 実測が取れたときはそちらを採る。取れなければ台帳の記録で代替する。
+        counts[sid] = live.get(sid, mine.get(sid, 0))
     return {"counts": counts, "cats": sorted(cats.items(), key=lambda x: -x[1]),
             "avg_score": round(sum(scores) / len(scores), 1) if scores else 0,
             "avg_len": round(sum(lens) / len(lens)) if lens else 0,
+            "mine": mine,   # うち当パイプラインで公開した本数
             "total": sum(counts.values())}
 
 
@@ -372,8 +390,10 @@ def analyze(sites, labels, arts, pipeline):
     headline = [
         f'3サイト合計のセッションは{cur["sessions"]:,}（前月比{mom("sessions")}）、'
         f'検索クリックは{cur["clicks"]:,}（{mom("clicks")}）でした。',
-        f'CVは{cur["cv"]}件（{mom("cv")}）。同じ流入を広告で買った場合は'
-        f'約{ad_value:,}円相当にあたり、これを記事の資産で獲得しています。',
+        f'CVは{cur["cv"]}件（{mom("cv")}）。'
+        + (f'同じ流入を広告で買った場合は約{ad_value:,}円相当にあたり、これを記事の資産で獲得しています。'
+           if cur["clicks"] > 0 else
+           '広告換算は当月の検索クリックが0回のため算出前です。表示回数は出ているため、順位が上がり次第この欄に金額が入ります。'),
         f'記事は3サイト合計{arts["total"]}本まで積み上がりました。'
         f'サイト間の役割は分かれており、検索評価の奪い合いは発生していません。',
     ]
@@ -442,6 +462,17 @@ def render(sites, labels, arts, cross, links, pipeline, a):
           ["AI検索（AIO/LLMO）分析", "サイト間の相互送客", "サイト別の改修プラン（記事・導線）",
            "グループ全体の改善プラン", "来月のKPI目標", "実行スケジュール",
            "リスクと前提条件", "付録: 指標の定義"]
+    # クリックが0だと「約0円」が4枚並び、集計が壊れているように見える。
+    # 実際は公開初月でまだクリックが発生していないだけなので、そう書く。
+    if cur["clicks"] > 0:
+        roi_total = f'約{a["ad_value"]:,}円'
+        roi_per = f'約{round(a["ad_value"] / max(arts["total"], 1)):,}円'
+        roi_year = f'約{a["ad_value"] * 12:,}円'
+    else:
+        roi_total = roi_per = roi_year = '算出前'
+    _per = round(a["ad_value"] / max(arts["total"], 1))
+    roi_6m = f'約{_per * (arts["total"] + 360):,}円' if cur["clicks"] > 0 else '算出前'
+    roi_12m = f'約{_per * (arts["total"] + 720):,}円' if cur["clicks"] > 0 else '算出前'
     toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc, 1))
     head_html = "".join(f"<li>{h}</li>" for h in a["headline"])
 
@@ -483,9 +514,14 @@ def render(sites, labels, arts, cross, links, pipeline, a):
         f'<tr><td>{d}</td><td class="num">{n}</td>'
         f'<td>{"相互送客できています" if n > 0 else "リンクがありません。関連記事から送客導線を追加します"}</td></tr>'
         for d, n in links.items())
+    # 手書きの対応表だけだと、カテゴリを増やしたときにスラッグのまま表に出る。
+    # 実際に keiri-bpo / backoffice が英字で並んでいた。設定を先に引く。
     cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用",
               "management": "店舗経営", "hr": "採用・人材", "operation": "オペレーション",
               "dx": "店舗DX", "case": "導入事例", "hojokin": "補助金"}
+    for _c in sites_mod.load_all().values():
+        for _slug, _name in _c.get("categories", {}).items():
+            cat_jp.setdefault(_slug, _name)
     cat_pairs = [(cat_jp.get(c, c), n) for c, n in arts["cats"]]
     ai_pairs = []
     for k, jp in [("chatgpt", "ChatGPT"), ("perplexity", "Perplexity"), ("gemini", "Gemini"),
@@ -727,16 +763,16 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 <p class="lead">記事は一度書けば資産として残ります。「同じ流入を広告で買ったらいくらか」を金額で示します。</p>
 <div class="roi">
   <div class="roi-box"><div class="k">当月の流入を広告で買った場合</div>
-  <div class="v">約{a["ad_value"]:,}円</div>
+  <div class="v">{roi_total}</div>
   <div class="s">検索クリック{cur["clicks"]:,}回 × 想定単価{CPC}円で換算</div></div>
   <div class="roi-box"><div class="k">記事1本あたりの月間価値</div>
-  <div class="v">約{round(a["ad_value"] / max(arts["total"], 1)):,}円</div>
+  <div class="v">{roi_per}</div>
   <div class="s">3サイト合計{arts["total"]}本で割った1本あたり</div></div>
   <div class="roi-box"><div class="k">記事1本あたりの月間セッション</div>
   <div class="v">{round(cur["sessions"] / max(arts["total"], 1), 1)}</div>
   <div class="s">本数が増えるほど合計は積み上がる</div></div>
   <div class="roi-box"><div class="k">年間換算の広告相当額</div>
-  <div class="v">約{a["ad_value"] * 12:,}円</div>
+  <div class="v">{roi_year}</div>
   <div class="s">今の水準が1年続いた場合の目安</div></div>
 </div>
 <h3>広告との決定的な違い</h3>
@@ -749,18 +785,18 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 <tr><th style="width:16%">時点</th><th style="width:20%">累計記事数</th>
 <th style="width:24%">月間の広告換算額</th><th>状態</th></tr>
 <tr><td>現在</td><td class="num">{arts["total"]}本</td>
-<td class="num">約{a["ad_value"]:,}円</td><td>立ち上げ期。順位が安定し始める段階</td></tr>
+<td class="num">{roi_total}</td><td>立ち上げ期。順位が安定し始める段階</td></tr>
 <tr><td>6ヶ月後</td><td class="num">約{arts["total"] + 360}本</td>
-<td class="num">約{round(a["ad_value"] / max(arts["total"], 1)) * (arts["total"] + 360):,}円</td>
+<td class="num">{roi_6m}</td>
 <td>面が広がり、複数キーワードで上位が取れ始める</td></tr>
 <tr><td>12ヶ月後</td><td class="num">約{arts["total"] + 720}本</td>
-<td class="num">約{round(a["ad_value"] / max(arts["total"], 1)) * (arts["total"] + 720):,}円</td>
+<td class="num">{roi_12m}</td>
 <td>ドメイン全体の評価が上がり、新記事の立ち上がりも速くなる</td></tr>
 </table>
 <p class="note">※ 月60本のペースで、1記事あたりの価値が現在の水準を保った場合の試算です。
 実際には記事が増えるほど内部リンクが増えドメイン評価も上がるため、1本あたりの価値は上昇する傾向があります。
 一方で古い記事は情報が古くなると価値が落ちるため、週次のリライトで維持します。</p>
-<div class="callout"><b>換算の前提:</b> クリック単価は{CPC}円で計算しています。
+<div class="callout"><b>換算の前提:</b> クリック単価は{CPC}円で計算しています。{"当月は検索クリックがまだ0回のため金額は算出前です。表示回数は出ているため、順位が上がりクリックが発生し次第この欄に金額が入ります。" if cur["clicks"] == 0 else ""}
 実際のリスティング広告では1クリック500〜1,000円以上になることも珍しくないため、
 上の金額は<b>控えめな見積もり</b>です。</div>
 </div>
