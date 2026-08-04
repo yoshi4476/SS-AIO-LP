@@ -18,6 +18,7 @@ push が成功しても、配信先のビルドが落ちれば記事は公開さ
 """
 import argparse
 import json
+import re
 import os
 import sys
 import time
@@ -81,22 +82,37 @@ def wait_build(repo, branch, since_iso, timeout=BUILD_TIMEOUT):
     return False, f"ビルドが{timeout}秒たっても終わりません: {seen['html_url']}"
 
 
-def wait_live(url, timeout=LIVE_TIMEOUT):
-    """公開URLが200を返すまで待つ。CDNの伝播に時間がかかるため即断しない"""
+def wait_live(url, timeout=LIVE_TIMEOUT, title=None):
+    """公開URLが記事本体を返すまで待つ。CDNの伝播に時間がかかるため即断しない。
+
+    200だけを見ていたため、配信先に残っていた301（記事を取り下げた際に一覧へ
+    送っていたもの）で全記事が一覧へ飛ばされていたのに「公開済み」と判定していた。
+    転送されていないことと、記事のタイトルが出ていることまで確かめる。
+    """
     limit = time.time() + timeout
     last = None
     while time.time() < limit:
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=25) as r:
                 if r.status == 200:
-                    return True, f"公開を確認: {url}"
-                last = r.status
+                    final = r.geturl().rstrip("/")
+                    if final != url.rstrip("/"):
+                        last = f"別ページへ転送 {final}"          # 301が記事を奪っている
+                    else:
+                        body = r.read().decode("utf-8", "ignore")
+                        m = re.search(r"<title>(.*?)</title>", body, re.S)
+                        got = (m.group(1) if m else "")
+                        if not title or title[:14] in got:
+                            return True, f"公開を確認: {url}"
+                        last = f"別の内容が表示されている（title: {got[:30]}）"
+                else:
+                    last = r.status
         except urllib.error.HTTPError as e:
             last = e.code
         except Exception as e:
             last = type(e).__name__
         time.sleep(POLL)
-    return False, f"公開が確認できません（最後の応答 {last}）: {url}"
+    return False, f"公開が確認できません（{last}）: {url}"
 
 
 def verify(site_id, slug, since_iso=None, build_timeout=BUILD_TIMEOUT, live_timeout=LIVE_TIMEOUT):
@@ -110,18 +126,22 @@ def verify(site_id, slug, since_iso=None, build_timeout=BUILD_TIMEOUT, live_time
         msgs.append(m)
         if not ok:
             return False, msgs
-    ok, m = wait_live(url, live_timeout)
+    ok, m = wait_live(url, live_timeout, _front(slug, 'title'))
     msgs.append(m)
     return ok, msgs
 
 
-def _category_of(slug):
-    import re
+def _front(slug, key):
+    """フロントマターから1項目だけ取り出す（公開後の照合に使う）"""
     p = Path(__file__).resolve().parent.parent / "articles" / f"{slug}.md"
     if not p.exists():
         return ""
-    m = re.search(r"^category:\s*(\S+)", p.read_text(encoding="utf-8-sig"), re.M)
-    return m.group(1) if m else ""
+    m = re.search(rf"^{key}:\s*(.+)$", p.read_text(encoding="utf-8-sig"), re.M)
+    return m.group(1).strip().strip('"').strip("'") if m else ""
+
+
+def _category_of(slug):
+    return _front(slug, "category")
 
 
 def main():

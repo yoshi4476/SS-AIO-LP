@@ -44,6 +44,13 @@ def run(args, cwd=None, check=True):
     return r.stdout.strip()
 
 
+def try_run(args, cwd=None):
+    """成否だけ知りたいとき用（run は標準出力を返すため成否の判定に使えない）"""
+    r = subprocess.run(args, cwd=cwd, capture_output=True, text=True,
+                       encoding="utf-8", errors="ignore")
+    return r.returncode == 0
+
+
 def parse_article(path: Path):
     t = path.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
@@ -139,6 +146,23 @@ JP_ERA = "%Y年%-m月%-d日"
 def _jp_date(iso):
     y, m, d = str(iso).split("-")
     return f"{int(y)}年{int(m)}月{int(d)}日"
+
+
+def _push_token():
+    """配信用PATを取得する。GitHub Actionsは環境変数、手元は .env に置いている。
+
+    環境変数だけを見ていたため、手元から publish.py を直接実行すると必ず
+    「未設定」で止まっていた。両方を見て、先に見つかった方を使う。
+    """
+    v = os.environ.get("SITE_PUSH_TOKEN", "")
+    if not v:
+        env = ROOT / ".env"
+        if env.is_file():
+            for line in env.read_text(encoding="utf-8-sig").splitlines():
+                if line.startswith("SITE_PUSH_TOKEN="):
+                    v = line.split("=", 1)[1]
+                    break
+    return v.replace("﻿", "").strip().strip('"').strip("'")
 
 
 def check_contract(cfg, dest: Path, meta):
@@ -360,7 +384,7 @@ def main():
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")
         return
 
-    token = os.environ.get("SITE_PUSH_TOKEN", "").replace("﻿", "").strip()
+    token = _push_token()
     dest = ensure_clone(cfg, token)
 
     if cfg["type"] == "nextjs-json":
@@ -381,8 +405,6 @@ def main():
     if not args.push:
         print("\n※ --push を付けると対象リポジトリへcommit+pushします（Cloudflareが自動デプロイ）")
         return
-    if not token:
-        raise SystemExit("SITE_PUSH_TOKEN が未設定のためpushできません")
 
     run(["git", "config", "user.name", "AIO Pipeline Bot"], cwd=dest)
     run(["git", "config", "user.email", "noreply@7senses.co.jp"], cwd=dest)
@@ -392,9 +414,20 @@ def main():
         return
     run(["git", "commit", "-m",
          f"publish: {meta['title']}（score {score} / {date.today().isoformat()}）"], cwd=dest)
-    auth_url = f"https://x-access-token:{token}@github.com/{cfg['repo']}.git"
-    run(["git", "push", auth_url, f"HEAD:{cfg['branch']}"], cwd=dest)
-    print("push完了。対象サイトのビルドが自動で走ります。")
+    # PATを最優先で使う（CIにはこれしかない）。手元では期限切れ・失効していることがあり、
+    # 実際に失効したPATで押せず記事7本が配信されないまま止まっていた。
+    # その場合はgitの資格情報にフォールバックする（手元の開発者は認証済みのため）。
+    plain_url = f"https://github.com/{cfg['repo']}.git"
+    urls = [f"https://x-access-token:{token}@github.com/{cfg['repo']}.git", plain_url] if token else [plain_url]
+    for i, u in enumerate(urls):
+        if try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest):
+            if i:
+                print("※ SITE_PUSH_TOKEN では認証できませんでした。PATの再発行が必要です")
+            print("push完了。対象サイトのビルドが自動で走ります。")
+            return
+    raise SystemExit(
+        "pushできません。SITE_PUSH_TOKEN（repo権限のPAT）を再発行して .env と\n"
+        "  GitHub Secrets の両方を更新してください。記事は未配信のままです")
 
 
 if __name__ == "__main__":
