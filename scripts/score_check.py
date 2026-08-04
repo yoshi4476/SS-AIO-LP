@@ -107,6 +107,28 @@ def main():
     external = {u for u in external if not any(d in u for d in own_domains) and "x.com" not in u}
     add("外部権威リンク（出典）2本以上", len(external) >= 2, f"{len(external)}本")
 
+    # --- 読みやすさ ---
+    # CLAUDE.md の「段落3行 or 150字以内」「1文50字以下」は規定だけあって検査がなく、
+    # 300字を超える段落がそのまま公開されていた。画面では改行のない壁のような塊に見える。
+    paras = [p.strip() for p in re.split(r"\n\s*\n", body_nc)
+             if p.strip() and not p.strip().startswith(("#", "-", "*", "|", "<", ">", "```", "1."))]
+    # HTMLタグとURLは読者が読む文字ではないので、数える前に落とす。
+    # 落とさないと <a href="…長いURL…"> が1文としてカウントされ、誤検出になる
+    def _plain(p):
+        p = re.sub(r"<[^>]+>", "", p)                       # タグを除去
+        p = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", p)      # Markdownリンクは表示文だけ残す
+        return re.sub(r"[*_=`]", "", p)
+
+    plain_paras = [_plain(p) for p in paras]
+    long_paras = [p for p in plain_paras if len(p) > 180]
+    add("段落が180字以内（規定150字＋余裕30字）", not long_paras,
+        f"{len(long_paras)}箇所が超過" + (f"（最長{max(len(p) for p in plain_paras)}字）" if plain_paras else ""))
+
+    sentences = [s for p in plain_paras for s in re.split(r"(?<=[。！？])", p) if s.strip()]
+    long_sents = [s for s in sentences if len(s.strip()) > 70]
+    add("1文が70字以内（規定50字＋余裕20字）", len(long_sents) <= 2,
+        f"{len(long_sents)}文が超過" + (f"（最長{max(len(s.strip()) for s in sentences)}字）" if sentences else ""))
+
     # --- 人間味 ---
     first_person = len(re.findall(r"私たち|私も|私は|私が|当社|弊社", body_nc))
     add("一人称の体験・観察2箇所以上", first_person >= 2, f"{first_person}箇所")

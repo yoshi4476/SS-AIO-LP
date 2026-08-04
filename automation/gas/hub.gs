@@ -143,6 +143,9 @@ function doPost(e) {
 // ============================================================
 function contact_(body) {
   const data = body.data || {};
+  // 各サイトのGASから転送されたコピーは、向こうで既に通知メールを送っている。
+  // ここでも送ると1件の問い合わせで2通届くため、台帳への記録だけにする。
+  const silent = body.silent === true || body.silent === 'true';
   const site = SITES[body.site] || body.site || '（不明）';
   const referer = body.referer || '';
 
@@ -169,10 +172,11 @@ function contact_(body) {
         + '\n台帳: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
   };
   if (isEmail_(data.email)) opts.replyTo = data.email;
-  MailApp.sendEmail(opts);
-
-  if (AUTO_REPLY && isEmail_(data.email)) autoReply_(data);
-  return { ok: true };
+  if (!silent) {
+    MailApp.sendEmail(opts);
+    if (AUTO_REPLY && isEmail_(data.email)) autoReply_(data);
+  }
+  return { ok: true, silent: silent };
 }
 
 function autoReply_(data) {

@@ -1131,3 +1131,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   .mv-actions { width: 100%; }
   .mv-actions .btn { width: 100%; }
 }
+
+/* 記事本文の段落間隔。行間1.9に対して余白が1.4em程度しかなく、段落の切れ目が
+   分かりにくかった。読点で息継ぎできるよう、段落の区切りをはっきりさせる */
+main.article p { margin-bottom: 1.9em; }
+main.article p + p { margin-top: 0; }

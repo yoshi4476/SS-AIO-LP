@@ -144,6 +144,31 @@ def check_external_dup(todo):
                     "自作側を取り下げて既存記事へ301転送する")
 
 
+def check_readability(todo, limit=3):
+    """公開済み記事の読みやすさ（段落・文の長さ）を検査する。
+
+    規定はあったが検査がなく、300字近い段落がそのまま公開されていた。
+    全件を一度に直すと夜間の実行が終わらないため、悪い方から少しずつ直す。
+    """
+    print("\n■ 読みやすさ（段落・文の長さ）")
+    bad = []
+    for p in sorted(ARTICLES.glob("*.md")):
+        if p.name.startswith("_"):
+            continue
+        r = subprocess.run([PY, "scripts/score_check.py", p.stem], cwd=ROOT,
+                           capture_output=True, text=True, encoding="utf-8", errors="ignore")
+        fails = [l for l in (r.stdout or "").splitlines()
+                 if l.startswith("FAIL") and ("段落" in l or "1文" in l)]
+        if fails:
+            bad.append((p.stem, fails))
+    print(f"  {len(bad)}本に超過あり（1晩に最大{limit}本ずつ直す）")
+    for slug, fails in bad[:limit]:
+        detail = " / ".join(f.split("|", 2)[-1].strip() for f in fails)
+        print(f"  要修正 {slug}: {detail}")
+        todo.append(f"TODO: {slug} の段落と文を短く分ける（{detail}）。"
+                    "本文の意味は変えず、区切りだけを直すこと")
+
+
 def check_supply(todo, fix=False):
     """KW台帳の残数。2本/日だと供給が律速になるため、日次で見る"""
     print("\n■ KW供給（管制塔の台帳）")
@@ -180,6 +205,7 @@ def main():
     check_blocked(todo)
     check_territory(todo)
     check_external_dup(todo)
+    check_readability(todo)
     check_supply(todo, fix=fix_kw)
 
     print("\n===== 結果 =====")
