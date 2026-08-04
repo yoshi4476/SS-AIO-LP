@@ -126,7 +126,9 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     target = dest / cfg["content_dir"] / f"{meta['slug']}.json"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    written = [target]
+    # Next.jsサイトでも sitemap.xml / llms.txt への追記が要る。呼んでいなかったため、
+    # 公開した記事がAIクローラー向けの案内に1本も載っていなかった
+    written = [target] + _update_external_index(dest, cfg, meta)
 
     # 画像も対象リポジトリへ複製（本文が /images/... を参照するため）
     img_src = ROOT / "site" / "images" / meta["slug"]
@@ -343,12 +345,26 @@ def _recent_articles(dest: Path, cfg, exclude_slug, n):
     return out
 
 
+def _public_file(dest: Path, name: str):
+    """配信先での公開ファイルの実体を探す。
+
+    リポジトリ直下に置くサイトと public/ 配下に置くサイト（Next.js等）がある。
+    直下だけを見ていたため、コーポレートでは llms.txt が一度も更新されず、
+    公開した記事がAIクローラー向けの案内に1本も載っていなかった。
+    """
+    for rel in (name, f"public/{name}", f"static/{name}", f"site/{name}"):
+        f = dest / rel
+        if f.is_file():
+            return f
+    return None
+
+
 def _update_external_index(dest: Path, cfg, meta):
     """相手サイトのsitemap.xmlとllms.txtに新記事を足す（検出されないと公開の意味がない）"""
     touched = []
     url = sites_mod.article_url(cfg, meta)
-    sm = dest / "sitemap.xml"
-    if sm.exists():
+    sm = _public_file(dest, "sitemap.xml")
+    if sm:
         t = sm.read_text(encoding="utf-8")
         if url not in t:
             entry = (f"  <url>\n    <loc>{url}</loc>\n"
@@ -356,8 +372,8 @@ def _update_external_index(dest: Path, cfg, meta):
             t = t.replace("</urlset>", entry + "</urlset>")
             sm.write_text(t, encoding="utf-8", newline="\n")
             touched.append(sm)
-    lt = dest / "llms.txt"
-    if lt.exists():
+    lt = _public_file(dest, "llms.txt")
+    if lt:
         t = lt.read_text(encoding="utf-8")
         if url not in t:
             lt.write_text(t.rstrip("\n") + f"\n- [{meta['title']}]({url}): {meta['description']}\n",
