@@ -6,7 +6,7 @@
 ## 担当領域
 
 AI導入補助金・IT導入補助金の**申請と活用**。集客手法（ai.7senses.co.jp）と
-店舗運営（www.7senses.co.jp）には踏み込まない。
+店舗運営（corp.7senses.co.jp）には踏み込まない。
 
 ## クラスターKW
 

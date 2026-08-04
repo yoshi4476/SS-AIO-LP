@@ -22,13 +22,13 @@
 const GA4_PROPERTIES = {
   'ai-lab': '547346579',   // ai.7senses.co.jp
   'subsidy': '',           // lp.7senses.co.jp （GA4プロパティIDを記入）
-  'corporate': '',         // www.7senses.co.jp （GA4プロパティIDを記入）
+  'corporate': '',         // corp.7senses.co.jp （GA4プロパティIDを記入）
 };
 
 const GSC_SITES = {
   'ai-lab': 'https://ai.7senses.co.jp/',
   'subsidy': 'https://lp.7senses.co.jp/',
-  'corporate': 'https://www.7senses.co.jp/',
+  'corporate': 'https://corp.7senses.co.jp/',
 };
 
 const AI_REFERRERS = ['chatgpt.com', 'chat.openai.com', 'perplexity.ai',

@@ -43,7 +43,7 @@
 代表者: 代表取締役 原口優
 設立: 2020年3月10日
 事業内容: Web集客コンサルティング事業（MEO/ローカルSEO「G-ran」、AIO・LLMO・SEO運用支援）、広告代理店事業ほか
-URL: https://www.7senses.co.jp/
+URL: https://corp.7senses.co.jp/
 
 ■ 本件に関するお問い合わせ
 セブンセンシズ株式会社 広報担当【要確認: 担当者名】

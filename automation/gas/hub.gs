@@ -32,7 +32,7 @@ const AUTO_REPLY = false;                                  // true にすると�
 const SITES = {
   'ai-lab': 'AI集客ラボ (ai.7senses.co.jp)',
   'subsidy': 'AI導入補助金 (lp.7senses.co.jp)',
-  'corporate': 'コーポレート (www.7senses.co.jp)',
+  'corporate': 'コーポレート (corp.7senses.co.jp)',
 };
 
 const TABS = {
@@ -77,7 +77,7 @@ function setup() {
   if (sites.getLastRow() <= 1) {
     sites.appendRow(['ai-lab', 'AI集客ラボ', 'ai.7senses.co.jp', 'AIO・LLMO・SEO・MEO', 0, '']);
     sites.appendRow(['subsidy', 'AI導入補助金サポート', 'lp.7senses.co.jp', '補助金・IT導入補助金', 0, '']);
-    sites.appendRow(['corporate', 'セブンセンシズ コーポレート', 'www.7senses.co.jp',
+    sites.appendRow(['corporate', 'セブンセンシズ コーポレート', 'corp.7senses.co.jp',
                      '店舗経営（人材・オペレーション・DX）と導入事例', 0, '']);
   }
 
@@ -187,7 +187,7 @@ function autoReply_(data) {
     body: (data.name || 'ご担当') + '様\n\n'
         + 'お問い合わせいただきありがとうございます。内容を確認のうえ、2営業日以内に担当者よりご連絡いたします。\n\n'
         + 'お急ぎの場合は 06-4305-7547（9:00〜20:00 / 土日祝休）までお電話ください。\n\n'
-        + '——\nセブンセンシズ株式会社\nhttps://www.7senses.co.jp\n',
+        + '——\nセブンセンシズ株式会社\nhttps://corp.7senses.co.jp\n',
   });
 }
 

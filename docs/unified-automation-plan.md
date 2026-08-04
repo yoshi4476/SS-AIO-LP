@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | ai.7senses.co.jp（AI集客ラボ） | SS-AIO-LP | 静的HTML + Python | ✅ 5ワークフロー（最新版） | AIO / LLMO / SEO / MEO |
 | lp.7senses.co.jp（AI導入補助金） | seven-HPunyou | 静的HTML + Node.js | ✅ 別系統の自動化 | 補助金・IT導入補助金（7本公開済み） |
-| www.7senses.co.jp（コーポレート） | SS-CorporateHP | **Next.js 16 + Cloudflare Workers** | ❌ なし | 未定 |
+| corp.7senses.co.jp（コーポレート） | SS-CorporateHP | **Next.js 16 + Cloudflare Workers** | ❌ なし | 未定 |
 
 ### 1本化すべき理由
 
@@ -39,7 +39,7 @@ SS-AIO-LP（自動化エンジン）
 ├── sites/                        ← サイトごとの設定（ここを増やせばサイトが増える）
 │   ├── ai-lab.json               ai.7senses.co.jp   / 静的HTML / 自リポジトリ
 │   ├── subsidy.json              lp.7senses.co.jp   / 静的HTML / seven-HPunyou へpush
-│   └── corporate.json            www.7senses.co.jp  / Next.js  / SS-CorporateHP へpush
+│   └── corporate.json            corp.7senses.co.jp  / Next.js  / SS-CorporateHP へpush
 ├── scripts/                      ← 全サイト共通の頭脳
 │   ├── kw_status.py              KW残数（サイト横断で重複除外）
 │   ├── kw_discover.py            実データKW発掘（GSC + サジェスト）
@@ -141,7 +141,7 @@ Next.js側は出来上がったHTMLを表示するだけにする。新しいnpm
 ## 4. 最重要の決定事項: コーポレートサイトのテーマ
 
 AIO・SEO・MEOは **ai.7senses.co.jp** が、補助金は **lp.7senses.co.jp** が既に押さえている。
-**www.7senses.co.jp が同じテーマを書くと3サイトで共食いする。**
+**corp.7senses.co.jp が同じテーマを書くと3サイトで共食いする。**
 
 重ならず、かつ会社の強みが出るテーマの候補:
 

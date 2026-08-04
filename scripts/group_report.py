@@ -623,7 +623,7 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
   </div>
   <div class="meta">
     対象: AI集客ラボ（ai.7senses.co.jp）／AI導入補助金サポート（lp.7senses.co.jp）／
-    コーポレートサイト（www.7senses.co.jp）<br>
+    コーポレートサイト（corp.7senses.co.jp）<br>
     発行: <b>セブンセンシズ株式会社</b>｜発行日: {date.today().isoformat()}｜作成: 自動集計+分析エンジン<br>
     数値は Google Analytics 4 / Google Search Console / 運用台帳の実測にもとづきます
   </div>
@@ -1014,7 +1014,7 @@ gemini.google.com・copilot.microsoft.com・claude.ai からの参照流入の�
   <div style="font-size:13pt;font-weight:bold;">セブンセンシズ株式会社</div>
   <div class="s">〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>
   TEL 06-4305-7547（9:00〜20:00 / 土日祝休）<br>
-  ai.7senses.co.jp ｜ lp.7senses.co.jp ｜ www.7senses.co.jp<br><br>
+  ai.7senses.co.jp ｜ lp.7senses.co.jp ｜ corp.7senses.co.jp<br><br>
   本レポートは自動集計・自動作成されています。<br>
   ご質問・追加分析のご要望はお気軽にお申し付けください。<br>次号は翌月1日に自動発行されます。</div>
 </div>

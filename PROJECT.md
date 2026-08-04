@@ -12,7 +12,7 @@
 | サイト形式 | **静的HTML**（WordPress不使用） |
 | ホスティング | **Cloudflare Pages**（Gitリポジトリ連携で自動デプロイ） |
 | メディアの目的 | 自社のAIO・SEO・MEO集客支援サービスへのリード獲得（記事→LP→CV導線） |
-| 運営会社 | セブンセンシズ株式会社（大阪市東成区・[7senses.co.jp](https://www.7senses.co.jp/)） |
+| 運営会社 | セブンセンシズ株式会社（大阪市東成区・[7senses.co.jp](https://corp.7senses.co.jp/)） |
 | 既存事業 | MEO/ローカルSEO店舗集客支援「G-ran」、造園・環境サービス等 |
 | CVポイント | ①無料相談・問い合わせ（`/lp/#form`・`/contact/`） ②資料ダウンロード（`/download/`） |
 | CV導線 | 記事内CTA 2箇所以上 → `/lp/`（リード獲得LP）→ フォーム |

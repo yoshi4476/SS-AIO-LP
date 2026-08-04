@@ -1869,7 +1869,7 @@ AI経由参照は chatgpt.com・chat.openai.com・perplexity.ai・gemini.google.
   <div class="l">AI集客ラボ｜セブンセンシズ株式会社</div>
   <div class="s">〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>
   TEL 06-4305-7547（9:00〜20:00 / 土日祝休）<br>
-  https://ai.7senses.co.jp ｜ https://www.7senses.co.jp<br><br>
+  https://ai.7senses.co.jp ｜ https://corp.7senses.co.jp<br><br>
   本レポートに関するご質問・追加分析のご要望はお気軽にお申し付けください。<br>
   次号は翌月1日に自動発行されます。</div>
 </div>
