@@ -190,8 +190,22 @@ def check_supply(todo, fix=False):
         if n < need:
             if fix:
                 print(f"      → {sid} のKWを自動補充します")
-                subprocess.run([PY, "scripts/kw_discover.py", "--site", sid, "--append"],
-                               cwd=ROOT, text=True, encoding="utf-8", errors="ignore")
+                r = subprocess.run([PY, "scripts/kw_discover.py", "--site", sid, "--append"],
+                                   cwd=ROOT, capture_output=True, text=True,
+                                   encoding="utf-8", errors="ignore")
+                out = (r.stdout or "") + (r.returncode and (r.stderr or "") or "")
+                m = re.search(r"管制塔の台帳へ (\d+)件を追加しました", out)
+                added = int(m.group(1)) if m else 0
+                print(f"      補充結果: {added}件を台帳へ追加")
+                # 0件のまま放置すると在庫が静かに枯れる。実際に補助金サイトで起きた。
+                # 監査を不合格にして、通知とエラーログに必ず乗せる。
+                if added == 0:
+                    todo.append(f"TODO: {sid} のKW補充が0件だった"
+                                f"（sites/{sid}.json の kw_seeds を広げるか、"
+                                "台帳・サジェストの取得を確認する）")
+                    for line in out.splitlines():
+                        if "警告" in line or "中止" in line:
+                            print(f"      {line}")
             else:
                 todo.append(f"TODO: {sid} のKWを補充する"
                             f"（python scripts/kw_discover.py --site {sid} --append）")

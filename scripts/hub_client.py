@@ -75,12 +75,23 @@ def next_kw(site):
         return None
 
 
-def all_kw():
+def all_kw(strict=False):
+    """台帳の全KWを返す。
+
+    既定では失敗を空リストで返す（表示系がこれで落ちないように）。
+    ただし「空」と「読めなかった」を区別できないため、重複判定など
+    誤ると実害が出る用途では strict=True で例外を投げさせること。
+    実際に、読めなかったのを「台帳は空」と解釈して重複を積み続けていた。
+    """
     if not enabled():
+        if strict:
+            raise RuntimeError("HUB_URL が未設定です")
         return []
     try:
         return _get({"action": "all_kw"}).get("keywords", [])
     except Exception:
+        if strict:
+            raise
         return []
 
 

@@ -124,6 +124,15 @@ def is_brand_query(low):
     return any(t in low for t in BRAND_TERMS)
 
 
+
+def hub_client_enabled_but_unreadable(ledger_ok):
+    """管制塔が設定されているのに読めなかったか（未設定なら手元実行なので許可する）"""
+    try:
+        import hub_client
+        return hub_client.enabled() and not ledger_ok
+    except Exception:
+        return False
+
 def is_dup(kw, arts, seen):
     if any(dice(kw, s) >= 0.75 for s in seen):
         return True
@@ -145,16 +154,26 @@ def main():
     # 台帳（管制塔）にすでに積まれているKWも既知として扱う。
     # 計画ファイルだけを見ていたため、台帳にあるKWを「新規」として毎回積み直し、
     # 補助金サイトでは補充16件がすべて重複で、実質0件しか増えていなかった。
-    ledger = set()
+    ledger, ledger_ok = set(), False
     try:
         import hub_client
         if hub_client.enabled():
             ledger = {(k.get("keyword") or "").strip()
-                      for k in hub_client.all_kw() if k.get("site") == site_id}
+                      for k in hub_client.all_kw(strict=True) if k.get("site") == site_id}
+            ledger_ok = True
+        else:
+            print("（管制塔が未接続のため台帳と照合しません）")
     except Exception as e:
-        print(f"（台帳の照合をスキップ: {e}）")
+        print(f"［警告］台帳を読めませんでした: {e}")
     seen = set(planned) | ledger
     print(f"既知KW: 計画{len(planned)}件 + 台帳{len(ledger)}件")
+
+    # 台帳を読めないまま追記すると、既にある語を「新規」として積み直してしまう。
+    # 実際にそれで補助金サイトの補充が実質0件になっていたため、追記は行わない。
+    if "--append" in sys.argv and hub_client_enabled_but_unreadable(ledger_ok):
+        raise SystemExit(
+            "台帳を読めないため追記を中止します（重複を積むのを防ぐため）。\n"
+            "  HUB_URL / HUB_SECRET を確認して再実行してください")
     proven, discovered = [], []
 
     # --- 1. GSC実データ（表示実績あり・記事なし = 最優先）---
