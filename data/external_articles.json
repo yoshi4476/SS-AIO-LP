@@ -1,36 +1,26 @@
 {
-  "fetched": "2026-08-03",
+  "fetched": "2026-08-04",
   "sites": {
     "corporate": [
       {
-        "url": "https://www.7senses.co.jp/blog/tencho-ikusei-houhou",
-        "slug": "tencho-ikusei-houhou",
-        "title": "店長育成の方法6ステップ｜必要なスキルと定着のコツ"
+        "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha",
+        "slug": "keiri-bpo-toha",
+        "title": "経理BPOとは？メリット3つと費用相場をわかりやすく解説"
       },
       {
-        "url": "https://www.7senses.co.jp/blog/kyuujinhyou-kakikata-tenpo",
-        "slug": "kyuujinhyou-kakikata-tenpo",
-        "title": "求人票の書き方｜店舗の応募を増やす5ステップ"
+        "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-soukika-houhou",
+        "slug": "getsuji-kessan-soukika-houhou",
+        "title": "月次決算の早期化とは？中小企業ができる5つの方法"
       },
       {
-        "url": "https://www.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu",
-        "slug": "arubaito-souki-rishoku-fusegu",
-        "title": "アルバイトの早期離職を防ぐには？原因と定着施策7選"
+        "url": "https://corp.7senses.co.jp/blog/tenpo-jimu-sagyou-ai-koritsuka",
+        "slug": "tenpo-jimu-sagyou-ai-koritsuka",
+        "title": "店舗の事務作業をAIで効率化する5つの方法"
       },
       {
-        "url": "https://www.7senses.co.jp/blog/tenpo-staff-kyouiku-manual",
-        "slug": "tenpo-staff-kyouiku-manual",
-        "title": "店舗スタッフの教育マニュアルの作り方｜定着に効く4ステップ"
-      },
-      {
-        "url": "https://www.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu",
-        "slug": "inshokuten-arubaito-saiyou-kotsu",
-        "title": "飲食店のアルバイト採用のコツとは？応募を増やす7つの実践法"
-      },
-      {
-        "url": "https://www.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu",
-        "slug": "biyoushitsu-staff-teichakuritsu",
-        "title": "美容室スタッフの定着率を上げる5つの施策とは"
+        "url": "https://corp.7senses.co.jp/blog/shiwake-jidoka-houhou",
+        "slug": "shiwake-jidoka-houhou",
+        "title": "仕訳の自動化方法とは？中小企業ができる4つのステップ"
       }
     ],
     "subsidy": [
@@ -38,6 +28,36 @@
         "url": "https://lp.7senses.co.jp/blog/category/hojokin/",
         "slug": "hojokin",
         "title": "カテゴリ: 補助金の記事一覧"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/",
+        "slug": "ai-hojokin-jissekihoukoku-kakikata",
+        "title": "AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-juhatchu-soft-toha/",
+        "slug": "ai-hojokin-juhatchu-soft-toha",
+        "title": "AI導入補助金の受発注ソフトとは？対象3枠と補助額を解説"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/",
+        "slug": "ai-donyu-hiyou-soba",
+        "title": "AI導入の費用相場｜中小企業の内訳と抑える3つのコツ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-miradigi-keieicheck/",
+        "slug": "ai-hojokin-miradigi-keieicheck",
+        "title": "AI導入補助金のみらデジ経営チェックは終了｜代わりの手順3つ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/",
+        "slug": "ai-hojokin-nozeishomeisho-dore",
+        "title": "AI導入補助金の納税証明書はどれ？その1とその2の違い"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/",
+        "slug": "ai-hojokin-shinsei-shippai-yokuaru",
+        "title": "AI導入補助金の申請に失敗する5つの原因と対策"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kourigyou-katsuyou/",
@@ -178,11 +198,6 @@
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-schedule/",
         "slug": "it-hojokin-schedule",
         "title": "IT導入補助金 令和8年度のスケジュールと逆算準備"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/",
-        "slug": "ai-hojokin-shinsei-shippai-yokuaru",
-        "title": "AI導入補助金の申請に失敗する5つの原因と対策"
       }
     ]
   }

@@ -22,7 +22,7 @@
   --cat-ai: #0284c7;
   --chart-base: #0d9488;   /* グラフ基本色（CVD/コントラスト検証PASS・直接ラベル併用） */
   --chart-accent: #2563eb; /* グラフ強調色 */
-  --max-article: 820px;
+  --max-article: 760px;
   --max-wide: 1760px;
   --gutter: clamp(1.25rem, 5vw, 6.5rem);
   --head: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
@@ -133,7 +133,7 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--blue), #60a5fa); z-index: 60; }
 
 /* ---------- パンくず ---------- */
-.breadcrumb { max-width: var(--max-wide); margin: 0 auto; padding: .9rem var(--gutter) 0; font-size: .76rem; color: var(--muted); }
+.breadcrumb { max-width: var(--max-wide); margin: 0 auto; padding: .9rem var(--gutter) 0; font-size: .83rem; color: var(--muted); }
 .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: .4em; margin: 0; padding: 0; }
 .breadcrumb li + li::before { content: "/"; margin-right: .4em; color: var(--line); }
 .breadcrumb a { color: var(--muted); text-decoration: none; }
@@ -318,7 +318,7 @@ html.js .rise-5 { animation-delay: .6s; }
 main.article { max-width: 1360px; margin: 0 auto; padding: 3rem var(--gutter) 4rem; font-size: 1.02rem; }
 .article-header { max-width: 980px; }
 .article-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1.5rem; }
-.article-body { min-width: 0; max-width: 900px; }
+.article-body { min-width: 0; max-width: 780px; }
 .article-side .side-sticky { position: sticky; top: 92px; display: grid; gap: 1.2rem; }
 .side-cta { background: linear-gradient(150deg, var(--navy-deep), var(--navy) 60%, #10387a); color: #fff; border-radius: var(--radius); padding: 1.5rem 1.4rem; text-align: center; }
 .side-cta .t { font-family: var(--head); font-weight: 900; font-size: 1rem; margin-bottom: .9rem; }
@@ -452,7 +452,7 @@ code { font-family: Consolas, "Courier New", monospace; }
 .form-panel input, .form-panel select, .form-panel textarea { width: 100%; padding: .85em 1.05em; border: 1.5px solid var(--line); border-radius: 10px; font-family: inherit; font-size: .95rem; background: var(--bg-alt); transition: border-color .2s, box-shadow .2s, background .2s; }
 .form-panel input:focus, .form-panel select:focus, .form-panel textarea:focus { outline: none; border-color: var(--blue); background: #fff; box-shadow: 0 0 0 4px rgba(37,99,235,.12); }
 .form-panel button { width: 100%; margin-top: 1.8rem; border: none; cursor: pointer; font-size: 1.05rem; font-family: inherit; }
-.form-note { font-size: .78rem; color: var(--muted); margin-top: 1rem; text-align: center; }
+.form-note { font-size: .82rem; color: var(--muted); margin-top: 1rem; text-align: center; }
 
 /* LPヒーロー内フォーム */
 .hero-form { background: #fff; border-radius: 20px; padding: 1.7rem 1.6rem 1.4rem; box-shadow: 0 30px 70px -20px rgba(2,10,30,.55); color: var(--text); max-width: 460px; margin: 0 auto; width: 100%; }
@@ -464,7 +464,7 @@ code { font-family: Consolas, "Courier New", monospace; }
 .hero-form .consent { display: flex; gap: .5em; align-items: flex-start; font-size: .76rem; font-weight: 500; margin-top: .9em; cursor: pointer; }
 .hero-form .consent input { width: auto; margin-top: .3em; accent-color: var(--blue); }
 .hero-form button { width: 100%; margin-top: 1rem; border: none; cursor: pointer; font-family: inherit; font-size: .98rem; }
-.hero-form .hf-note { font-size: .72rem; color: var(--muted); text-align: center; margin: .7rem 0 0; }
+.hero-form .hf-note { font-size: .78rem; color: var(--muted); text-align: center; margin: .7rem 0 0; }
 
 .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: none; background: rgba(11,36,71,.96); backdrop-filter: blur(8px); padding: .7rem 1rem; gap: .7rem; }
 .sticky-cta .btn { flex: 1; padding: .85em .5em; font-size: .9rem; }
@@ -802,6 +802,8 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   position: absolute; inset: 0 0 auto; background: transparent;
   backdrop-filter: none; border-bottom: 0;
 }
+.mv-page .site-header .brand, .mv-page .site-header .global-nav a
+  { text-shadow: 0 1px 3px rgba(4,14,30,.85), 0 2px 12px rgba(4,14,30,.6); }
 .mv-page .site-header .brand .mark { color: #fff; }
 .mv-page .site-header .brand .by { color: rgba(255,255,255,.6); }
 .mv-page .site-header .global-nav a { color: rgba(255,255,255,.82); }
@@ -818,6 +820,7 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
   content: ""; position: absolute; inset: 0; z-index: -2;
   background-image: var(--mv-photo, none);
   /* 空が広く空きすぎるため少し寄せる。机とビル街が主役になる位置 */
+  background-repeat: no-repeat;
   background-size: 118%; background-position: 58% 70%;
 }
 /* 可読性のための覆い。写真の有無にかかわらず文字が読める濃度を保つ */
@@ -904,6 +907,9 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
 @keyframes mvDrop { 0%,100% { transform: translateY(-2px); opacity: .55; } 50% { transform: translateY(4px); opacity: 1; } }
 
 @media (max-width: 860px) {
+  .mv::before { background-size: cover; background-position: 62% 50%; }
+  .mv-lead { max-width: 100%; font-size: 1.02rem; line-height: 1.75; }
+  .mv-inner { padding-top: clamp(4.2rem, 7vh, 5.4rem); gap: 1.2rem; }
   .mv-copy { justify-content: flex-start; }
   .mv-vert { max-height: 46svh; font-size: clamp(1.5rem, 6.2vw, 2.1rem); }
   .mv-foot { grid-template-columns: 1fr; }
@@ -1136,3 +1142,34 @@ body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.
    分かりにくかった。読点で息継ぎできるよう、段落の区切りをはっきりさせる */
 main.article p { margin-bottom: 1.9em; }
 main.article p + p { margin-top: 0; }
+
+/* 文字の下限と行長の上限をまとめて整える。
+   実測で「12.5pxで1行75字」の住所や、1行50字の本文があり、目が戻りにくかった。 */
+.site-footer .addr { font-size: .84rem; line-height: 2; max-width: 34em; }
+/* 細かい注記類が本文の7割を切ると読めなくなるため、下限を引き上げる */
+.note, .chart-source, .form-note, .hf-note, .hf-sub, figcaption { font-size: .82rem; }
+/* フォームのラベルは操作に直結するので小さくしない */
+.form-panel label { font-size: .88rem; }
+
+/* 12.5px前後の注記が読みにくかったため、下限を13.3px（.83rem）に揃える。
+   本文16.8pxに対して8割弱で、補助情報として弱すぎず強すぎない大きさ */
+.lb-sub, .hf-note, .form-note, .note, .chart-source, .hf-sub { font-size: .83rem; }
+
+/* ---- 文字サイズと行長の最終調整 ----
+   実測で残っていた箇所を、より詳細度の高いセレクタで揃える。
+   先に書いた .hf-note などは .hero-form .hf-note に負けて効いていなかった。 */
+.hero-form .hf-note,
+.lp-doc .lb-sub,
+.lp-doc .form-note { font-size: .83rem; }
+
+/* 1行が60字を超えると目が戻りにくい。文章のかたまりに上限幅を与える */
+.person-body p,
+.flat-sec .section-head .sub,
+.lp-doc .section > p,
+.lp-doc .section-head .sub { max-width: 46em; }
+
+/* 目次は一覧性が要るが、12.2pxは小さすぎた */
+.toc li, .toc a { font-size: .86rem; }
+
+/* 監修者ページなど、article-body でラップされない直下の本文にも行長の上限を効かせる */
+.article > p, .article > ul, .article > ol, .article > dl { max-width: var(--max-article); }

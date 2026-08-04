@@ -446,7 +446,7 @@ body.lp-doc .sticky-cta a:not(.btn) { color: var(--ink); }
 body.lp-doc .lead-band { align-items: center; }
 body.lp-doc .lead-band .lb-text { flex: 1 1 32em; min-width: min(30em, 100%); }
 body.lp-doc .lead-band .lb-main { margin: 0; font-size: 1.02rem; font-weight: 700; line-height: 1.7; }
-body.lp-doc .lead-band .lb-sub { margin: .35em 0 0; font-size: .78rem; color: #6b6553; font-weight: 500; }
+body.lp-doc .lead-band .lb-sub { margin: .35em 0 0; font-size: .83rem; color: #6b6553; font-weight: 500; }
 body.lp-doc .lead-band .lb-sub a { color: #6b6553; }
 body.lp-doc .lead-band .btn { flex-shrink: 0; }
 
@@ -595,3 +595,12 @@ body.lp-doc td.td-hl { background: #fbf6e7 !important; }
   body.lp-doc .pillar,
   body.lp-doc .pillar:hover { transform: none !important; transition: none; }
 }
+
+/* ---- 読みやすさの最終調整 ----
+   補助文が12.5pxで、本文16pxとの差が開きすぎていた。13.3pxまで上げる */
+body.lp-doc .lead-band .tel,
+body.lp-doc .pillar p { font-size: .83rem; }
+
+/* 1行60字を超えると視線が行頭に戻りにくい。説明文に上限幅を与える */
+body.lp-doc .pillar > div > p,
+body.lp-doc .pillar > p { max-width: 44em; }

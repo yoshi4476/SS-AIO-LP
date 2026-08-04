@@ -160,9 +160,9 @@ faq:
 
 弊社では、求人票を掲載する前に必ず現場のスタッフ数名に読んでもらう工程を挟んでいます。書いた本人には気づけない誇張や説明不足を、現場の目線で拾ってもらえるからです。
 
-求人票を整えても応募が集まらない場合は、原稿の問題だけでなく採用チャネル自体の見直しが必要になることもあります。応募者対応や面接の進め方まで含めた実践的な工夫は、[飲食店のアルバイト採用のコツとは？](https://www.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/)で詳しく解説しています。
+求人票を整えても応募が集まらない場合は、原稿の問題だけでなく採用チャネル自体の見直しが必要になることもあります。応募者対応や面接の進め方まで含めた実践的な工夫は、[飲食店のアルバイト採用のコツとは？](https://corp.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/)で詳しく解説しています。
 
-求人票を通じて採用できた後は、教育の仕組み作りが次の課題になります。手順は[店舗スタッフの教育マニュアルの作り方](https://www.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/)を参考にしてください。
+求人票を通じて採用できた後は、教育の仕組み作りが次の課題になります。手順は[店舗スタッフの教育マニュアルの作り方](https://corp.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/)を参考にしてください。
 
 ## よくある質問
 
@@ -180,4 +180,4 @@ faq:
 
 <a href="https://www.mhlw.go.jp/stf/newpage_74004.html" target="_blank" rel="noopener">厚生労働省「一般職業紹介状況」</a>でも、宿泊業・飲食サービス業の新規求人数は減少傾向が続くと報告されています。求人が出しにくい状況だからこそ、1本の求人票の完成度が採用の成否を分けます。
 
-採用後の定着に課題を感じている場合は、[アルバイトの早期離職を防ぐには？](https://www.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/)、美容室特有の定着施策は[美容室スタッフの定着率を上げる5つの施策とは](https://www.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/)、店長候補の育成は[店長育成の方法6ステップ](https://www.7senses.co.jp/blog/tencho-ikusei-houhou/)で解説しています。
+採用後の定着に課題を感じている場合は、[アルバイトの早期離職を防ぐには？](https://corp.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/)、美容室特有の定着施策は[美容室スタッフの定着率を上げる5つの施策とは](https://corp.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/)、店長候補の育成は[店長育成の方法6ステップ](https://corp.7senses.co.jp/blog/tencho-ikusei-houhou/)で解説しています。

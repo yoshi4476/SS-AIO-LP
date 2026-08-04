@@ -1,7 +1,7 @@
 {
   "id": "corporate",
   "name": "セブンセンシズ コーポレートサイト",
-  "domain": "www.7senses.co.jp",
+  "domain": "corp.7senses.co.jp",
   "repo": "yoshi4476/SS-CorporateHP",
   "branch": "main",
   "type": "nextjs-json",
@@ -67,7 +67,7 @@
       "業務フロー"
     ]
   },
-  "note": "2026-08-03: コーポレートは経理BPO専業メディアに確定。AIコンテンツは扱わない（AI関連は ai.7senses.co.jp が担当）。既存の人材系7本は hr に残す。広告は掲載しない。",
+  "note": "2026-08-03: コーポレートは経理BPO専業メディアに確定。AIコンテンツは扱わない（AI関連は ai.7senses.co.jp が担当）。既存の人材系7本は hr に残す。広告は掲載しない。 / 2026-08-04: 公開ドメインを www から corp へ変更。www は別サーバーで運用されており、Cloudflare Pages の配信先は corp。設定を変えないと記事の内部リンクが旧ドメインを指し続ける。",
   "cta": {
     "label": "経理BPOの無料相談",
     "note": "経理・バックオフィスの外部委託についてご相談いただけます"

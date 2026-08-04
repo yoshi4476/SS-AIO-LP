@@ -159,6 +159,6 @@ NG例は、失敗した実例をもとに書くと説得力が増します。**�
 
 店舗スタッフの教育マニュアルを機能させる鍵は、業務を手順ごとに分解し、写真や動画で見て分かる形にまとめ、教える順番と期限を決め、現場で使いながら更新し続けることに尽きます。まずは今週、新人が最初の1週間で必ず行う業務を1つだけ選び、写真付きの手順として書き出すところから始めてください。
 
-<a href="https://www.chusho.meti.go.jp/keiei/koyou/hitodebusoku/guideline.html" target="_blank" rel="noopener">中小企業庁「中小企業・小規模事業者人材活用ガイドライン」</a>でも、業務人材の育成は経営課題の一つとして位置づけられています。教育の土台が整ったら、次は採用の入り口です。応募を増やす求人票の書き方は[飲食店のアルバイト採用のコツ](https://www.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/)、教育後に定着へつなげる仕組みは[美容室スタッフの定着率を上げる5つの施策とは](https://www.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/)で解説しています。
+<a href="https://www.chusho.meti.go.jp/keiei/koyou/hitodebusoku/guideline.html" target="_blank" rel="noopener">中小企業庁「中小企業・小規模事業者人材活用ガイドライン」</a>でも、業務人材の育成は経営課題の一つとして位置づけられています。教育の土台が整ったら、次は採用の入り口です。応募を増やす求人票の書き方は[飲食店のアルバイト採用のコツ](https://corp.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/)、教育後に定着へつなげる仕組みは[美容室スタッフの定着率を上げる5つの施策とは](https://corp.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/)で解説しています。
 
 集客面で「教育は整ったが新規のお客様が増えない」という段階に進んだら、口コミを増やす具体策は[口コミを増やす方法5選](https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/)、マップ上位表示の手順は[MEO対策のやり方7ステップ](https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/)、AI検索時代の集客全体像は[AI集客の完全ガイド](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)で解説しています。

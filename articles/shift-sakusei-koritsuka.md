@@ -150,9 +150,9 @@ faq:
 
 効率化によって作成時間が短縮できても、そのまま人員基準を放置すると、実態とずれた基準のままシフトが組まれ続けてしまいます。**月に一度は基準の数値を実績と照らし合わせて見直す**機会を作ってください。
 
-シフト作成の型が整った後は、採用や教育の仕組みも合わせて見直すと効果が長続きします。スタッフの定着に課題を感じている場合は[アルバイトの早期離職を防ぐには？](https://www.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/)、新人教育の仕組みづくりは[店舗スタッフの教育マニュアルの作り方](https://www.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/)を参考にしてください。
+シフト作成の型が整った後は、採用や教育の仕組みも合わせて見直すと効果が長続きします。スタッフの定着に課題を感じている場合は[アルバイトの早期離職を防ぐには？](https://corp.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/)、新人教育の仕組みづくりは[店舗スタッフの教育マニュアルの作り方](https://corp.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/)を参考にしてください。
 
-シフト作成を含む店舗運営全体を任せられる店長の育成も、多店舗展開を目指す企業にとって欠かせないテーマです。詳しくは[店長育成の方法6ステップ](https://www.7senses.co.jp/blog/tencho-ikusei-houhou/)で解説しています。人員基準を見直した結果、増員が必要だと分かった場合は、[求人票の書き方](https://www.7senses.co.jp/blog/kyuujinhyou-kakikata-tenpo/)も合わせて確認してください。
+シフト作成を含む店舗運営全体を任せられる店長の育成も、多店舗展開を目指す企業にとって欠かせないテーマです。詳しくは[店長育成の方法6ステップ](https://corp.7senses.co.jp/blog/tencho-ikusei-houhou/)で解説しています。人員基準を見直した結果、増員が必要だと分かった場合は、[求人票の書き方](https://corp.7senses.co.jp/blog/kyuujinhyou-kakikata-tenpo/)も合わせて確認してください。
 
 ## よくある質問
 

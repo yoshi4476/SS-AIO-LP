@@ -170,8 +170,8 @@ OJTだけに頼ると、教える先輩によって内容や質にばらつき�
 
 <span class="big">店長育成を機能させる鍵は、役割と評価基準を先に言語化し、数字管理・権限移譲・部下育成の順で段階的に任せ、半年ごとに振り返って更新し続けることに尽きます。</span>まずは自社の店長に求める役割を1枚の紙に書き出し、今の店長候補がどこまでできているかを確認するところから始めてください。
 
-店長育成の土台ができたら、次は現場スタッフの教育です。教育マニュアルの作り方は[店舗スタッフの教育マニュアルの作り方](https://www.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/)、早期離職を防ぐ施策は[アルバイトの早期離職を防ぐには？](https://www.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/)、定着率を高める工夫は[美容室スタッフの定着率を上げる5つの施策とは](https://www.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/)で解説しています。
+店長育成の土台ができたら、次は現場スタッフの教育です。教育マニュアルの作り方は[店舗スタッフの教育マニュアルの作り方](https://corp.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/)、早期離職を防ぐ施策は[アルバイトの早期離職を防ぐには？](https://corp.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/)、定着率を高める工夫は[美容室スタッフの定着率を上げる5つの施策とは](https://corp.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/)で解説しています。
 
-採用段階から見直したい場合は、[飲食店のアルバイト採用のコツとは？](https://www.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/)もあわせてご覧ください。
+採用段階から見直したい場合は、[飲食店のアルバイト採用のコツとは？](https://corp.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/)もあわせてご覧ください。
 
 店長・スタッフの育成体制が整った後は、集客面の強化に進む段階です。AI検索時代の集客の全体像は[AI集客の完全ガイド](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)、来店客の口コミを増やす具体策は[口コミを増やす方法5選](https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/)、検索とAI回答の両方で見つけてもらう基本は[AIO対策の5つの手順](https://ai.7senses.co.jp/aio/aio-taisaku-guide/)で解説しています。
