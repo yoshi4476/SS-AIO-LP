@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
 DAILY_TARGET = 2       # 1サイトあたりの1日の公開本数
 KW_MIN_DAYS = 8        # 未着手KWがこの日数分を切ったら補充する
+KW_WARN_DAYS = 30      # この日数分を切ったら早期警戒（補充の井戸が枯れていないか見る）
                        # 週次補充まで最大7日空くため、4日分では次の補充を待てずに枯れる
 PY = sys.executable
 
@@ -187,6 +188,11 @@ def check_supply(todo, fix=False):
         days = n / DAILY_TARGET
         mark = "OK " if n >= need else "不足"
         print(f"  {mark} {sid:10s} 未着手 {n:3d}件（{days:.1f}日分）")
+        # サジェスト由来の候補は有限で、掘り尽くすと補充が0件になる。
+        # 8日分を切ってから気づいても手が打てないため、30日分の時点で知らせる。
+        if need <= n < DAILY_TARGET * KW_WARN_DAYS:
+            todo.append(f"TODO: {sid} のKW在庫が残り{days:.0f}日分"
+                        f"（kw_seeds を広げるか、GSCの実データ取得を有効にすること）")
         if n < need:
             if fix:
                 print(f"      → {sid} のKWを自動補充します")
