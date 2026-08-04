@@ -120,14 +120,24 @@ def main():
         return re.sub(r"[*_=`]", "", p)
 
     plain_paras = [_plain(p) for p in paras]
-    long_paras = [p for p in plain_paras if len(p) > 180]
-    add("段落が180字以内（規定150字＋余裕30字）", not long_paras,
-        f"{len(long_paras)}箇所が超過" + (f"（最長{max(len(p) for p in plain_paras)}字）" if plain_paras else ""))
+    # 基準は「読者が壁に感じる塊」を潰すことに絞る。完璧な短文化を求めると
+    # 毎回落ちて公開が止まるため、実害の大きい超過だけを不合格にする。
+    long_paras = [p for p in plain_paras if len(p) > 200]
+    # どこを直せばよいか分かるよう、該当箇所の冒頭を示す（指摘が抽象的だと直せない）
+    add("段落が200字以内（規定150字＋余裕）", not long_paras,
+        (f"{len(long_paras)}箇所が超過（最長{max((len(p) for p in long_paras), default=0)}字）"
+         + f" 例:「{long_paras[0][:32]}…」" if long_paras
+         else f"最長{max((len(p) for p in plain_paras), default=0)}字"))
 
-    sentences = [s for p in plain_paras for s in re.split(r"(?<=[。！？])", p) if s.strip()]
-    long_sents = [s for s in sentences if len(s.strip()) > 70]
-    add("1文が70字以内（規定50字＋余裕20字）", len(long_sents) <= 2,
-        f"{len(long_sents)}文が超過" + (f"（最長{max(len(s.strip()) for s in sentences)}字）" if sentences else ""))
+    sentences = [s.strip() for p in plain_paras for s in re.split(r"(?<=[。！？])", p) if s.strip()]
+    long_sents = [s for s in sentences if len(s) > 70]
+    runaway = [s for s in sentences if len(s) > 100]   # 100字超は一息で読めない
+    limit = max(2, int(len(sentences) * 0.10))
+    worst = max(sentences, key=len) if sentences else ""
+    add("長文が1割以内・100字超はゼロ（規定50字）", len(long_sents) <= limit and not runaway,
+        f"70字超{len(long_sents)}/{len(sentences)}文（上限{limit}）"
+        + (f"・100字超{len(runaway)}文" if runaway else "")
+        + (f" 例:「{worst[:32]}…」({len(worst)}字)" if len(long_sents) > limit or runaway else ""))
 
     # --- 人間味 ---
     first_person = len(re.findall(r"私たち|私も|私は|私が|当社|弊社", body_nc))

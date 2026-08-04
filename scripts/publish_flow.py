@@ -96,7 +96,10 @@ def main():
     #    pushが通ってもビルドが落ちれば記事は出ない。実際、配信先のビルドが停止していたのに
     #    こちらは「push完了」を成功として扱い、記事が消えていることに気づけなかった。
     url = sites_mod.article_url(cfg, meta)
-    if push:
+    # 自リポジトリのサイト（ai-lab）は、この後にワークフローがコミット＆デプロイする。
+    # ここで公開を確認しにいくと、まだ出ていないため必ず失敗する。
+    # 当日中の公開確認は daily_audit の check_live が担当する。
+    if push and cfg["type"] != "self-static":
         import verify_publish
         since = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
         ok, msgs = verify_publish.verify(site_id, slug, since)
