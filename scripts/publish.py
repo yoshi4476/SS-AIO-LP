@@ -93,6 +93,12 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     html, _ = md2html.convert(body)
     faq = md2html.extract_faq(body)
 
+    # 変換がどこかで止まると、Markdownのまま配信先に届いて段落の無い記事になる。
+    # 配信自体は止めない (欠測より読みにくい記事の方がまし) が、必ず気付けるようにする。
+    left = md2html.raw_markdown_left(html)
+    if left:
+        print(f"  [警告] {meta['slug']}: Markdownが変換されずに残っています — {' / '.join(left)}")
+
     # 記事Markdownは自リポジトリの慣習（/images/<slug>/…）で書かれているため、
     # 配信先の実際の画像置き場に合わせてパスを書き換える。
     # これをしないと配信先で画像が全て404になる。
