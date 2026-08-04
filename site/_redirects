@@ -1,11 +1,11 @@
 # Cloudflare Pages のリダイレクト設定
 # 担当領域の取り違えで当サイトにも公開してしまった人材系の記事。
-# 本来の担当は corp.7senses.co.jp（コーポレート）。7本を corp へ配信し直したので、
-# 記事本体へ送る（一時的に /meo/ へ逃がしていたが、行き先が復活したため戻す）。
-/meo/inshokuten-arubaito-saiyou-kotsu/  https://corp.7senses.co.jp/blog/inshokuten-arubaito-saiyou-kotsu/  301
-/meo/biyoushitsu-staff-teichakuritsu/   https://corp.7senses.co.jp/blog/biyoushitsu-staff-teichakuritsu/   301
-/meo/tenpo-staff-kyouiku-manual/        https://corp.7senses.co.jp/blog/tenpo-staff-kyouiku-manual/        301
-/meo/arubaito-souki-rishoku-fusegu/     https://corp.7senses.co.jp/blog/arubaito-souki-rishoku-fusegu/     301
+# コーポレートが経理BPO専業に確定した際に取り下げられ、行き先が無くなったため、
+# テーマが最も近い当サイトのMEOカテゴリへ送る（店舗集客の記事が集まっている）。
+/meo/inshokuten-arubaito-saiyou-kotsu/  /meo/  301
+/meo/biyoushitsu-staff-teichakuritsu/   /meo/  301
+/meo/tenpo-staff-kyouiku-manual/        /meo/  301
+/meo/arubaito-souki-rishoku-fusegu/     /meo/  301
 
 # 補助金は lp.7senses.co.jp の担当領域。当サイトで書いてしまった3本を、
 # 向こうの同テーマ記事へ送る（スラッグが異なるため個別に対応づける）。
