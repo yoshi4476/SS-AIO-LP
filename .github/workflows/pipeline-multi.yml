@@ -69,6 +69,20 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
 
+      # 記事を1本書いてから最後のpushで落ちるのが一番もったいない。
+      # トークンが失効していれば、着手前にここで止める。
+      - name: 配信トークンの事前確認
+        if: steps.site.outputs.id != 'ai-lab'
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+        run: |
+          out=$(python scripts/token_check.py) || true
+          echo "$out"
+          if ! echo "$out" | grep -q "TOKEN_OK=yes"; then
+            echo "::error::SITE_PUSH_TOKEN が使えません。再発行してSecretsを更新してください"
+            exit 1
+          fi
+
       - name: 執筆ブリーフの表示（KW残数と担当領域をログに残す）
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
