@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-05T00:00:00+09:00</updated>
+  <updated>2026-08-06T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>施工事例の書き方｜反響が増える7つの要素とNG例</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/</id>
+    <updated>2026-08-06T00:00:00+09:00</updated>
+    <summary>施工事例の書き方とは、間取り・予算・工期の数値と施主の要望を型に沿って書くことです。工務店・リフォーム会社・不動産仲介向けに、反響が増える7つの構成要素、書く5つのステップ、NG例とOK例、AI検索時代のポイントまで解説します。</summary>
+  </entry>
   <entry>
     <title>BtoB CVR改善とは？平均値と成果が出る5つの施策</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/btob-cvr-kaizen/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/meo/clinic-meo-taisaku/</id>
     <updated>2026-07-28T00:00:00+09:00</updated>
     <summary>クリニックのMEO対策とは、Googleマップの「地域名×診療科」検索で自院を上位表示させ、来院につなげる施策です。医療広告ガイドラインに配慮した進め方を、通算3,200店舗以上の支援実務から5つの手順で解説します。</summary>
-  </entry>
-  <entry>
-    <title>Googleマップの口コミを増やす方法5選と返信のコツ</title>
-    <link href="https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/"/>
-    <id>https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/</id>
-    <updated>2026-07-28T00:00:00+09:00</updated>
-    <summary>Googleマップの口コミを増やす方法は、来店直後の自然な依頼とQRコードの導線づくりが基本です。ポリシー違反にならない増やし方5つと、低評価にも使える返信のコツを解説します。</summary>
   </entry>
 </feed>
