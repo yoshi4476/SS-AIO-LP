@@ -44,3 +44,4 @@
 - [ウェビナー集客の平均参加率46%と申込を増やす5つの施策](https://ai.7senses.co.jp/ai-marketing/webinar-shukyaku-hoho/): BtoB企業100社の調査データをもとに、開催2週間前から実践する集客5ステップを解説
 - [SaaS指名検索の増やし方｜AI時代に効く5つの施策](https://ai.7senses.co.jp/aio/saas-shimei-kensaku-fuyashikata/): SaaS指名検索の増やし方とは、接触回数を積み重ねて認知を蓄積し、AI引用の構造を整えてサービス名で検索される状態を作ることです。BtoB購買データと5つの施策を解説します。
 - [展示会後フォローで商談化率を上げる5つの施策](https://ai.7senses.co.jp/ai-marketing/tenjikaigo-follow-hoho/): 展示会リードの商談化率データと、放置せず商談化につなげる5つの施策・着手の3ステップを解説
+- [BtoB CVR改善とは？平均値と成果が出る5つの施策](https://ai.7senses.co.jp/ai-marketing/btob-cvr-kaizen/): 業界平均CVRのデータとフォーム最適化・LP構成など、商談化を増やす5つの施策を解説
