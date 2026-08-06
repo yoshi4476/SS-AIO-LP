@@ -47,3 +47,4 @@
 - [BtoB CVR改善とは？平均値と成果が出る5つの施策](https://ai.7senses.co.jp/ai-marketing/btob-cvr-kaizen/): 業界平均CVRのデータとフォーム最適化・LP構成など、商談化を増やす5つの施策を解説
 - [工務店のSEO対策｜施工事例で選ばれる5つの施策と始め方](https://ai.7senses.co.jp/seo/koumuten-seo-taisaku/): 施主の情報収集データと建設業界の競争激化データをもとに、施工事例を武器にした工務店SEOの5つの施策を解説
 - [施工事例の書き方｜反響が増える7つの要素とNG例](https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/): 反響が増える施工事例の7つの構成要素・書く5つのステップ・NG例とOK例をAI検索時代の観点で解説
+- [リフォームの集客方法とは？反響を増やす6つの施策](https://ai.7senses.co.jp/ai-marketing/reform-shukyaku-hoho/): 市場規模・訪問販売トラブル・相見積もりデータをもとに、反響を増やすリフォーム集客6施策と始め方を解説
