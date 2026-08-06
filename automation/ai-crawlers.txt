@@ -1,0 +1,21 @@
+# 3サイト共通のAIクローラー一覧（robots.txtの整合確認に使う）
+GPTBot	ChatGPTの学習・検索
+OAI-SearchBot	ChatGPT検索の索引
+ChatGPT-User	ChatGPTがユーザー指示で開くとき
+ClaudeBot	Claudeの索引
+Claude-Web	Claudeの閲覧
+Claude-SearchBot	Claude検索
+anthropic-ai	Anthropic（旧表記）
+PerplexityBot	Perplexityの索引
+Perplexity-User	Perplexityがユーザー指示で開くとき
+Google-Extended	GeminiとAI回答の利用可否
+Bingbot	Bing・Copilotの索引
+Applebot	Appleの索引
+Applebot-Extended	Apple Intelligenceの利用可否
+meta-externalagent	Meta AI
+Amazonbot	Alexa・Rufus
+MistralAI-User	Le Chat（Mistral）
+DuckAssistBot	DuckDuckGo AI
+CCBot	Common Crawl（多くのLLMの学習元）
+cohere-ai	Cohere
+YouBot	You.com

@@ -22,9 +22,18 @@ import sites as sites_mod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SA = ROOT / "indexing-service-account.json"
-AI_DOMAINS = {"chatgpt": ["chatgpt.com", "chat.openai.com"], "perplexity": ["perplexity.ai"],
-              "gemini": ["gemini.google.com"], "copilot": ["copilot.microsoft.com"],
-              "claude": ["claude.ai"]}
+AI_DOMAINS = {
+    # AI経由の流入は参照元ドメインでしか見分けられない。ここに無いサービスは
+    # 「Referral」に埋もれてAI流入として数えられないため、主要どころを網羅する
+    "chatgpt": ["chatgpt.com", "chat.openai.com", "openai.com"],
+    "perplexity": ["perplexity.ai"],
+    "gemini": ["gemini.google.com", "bard.google.com"],
+    "copilot": ["copilot.microsoft.com", "bing.com/chat", "edgeservices.bing.com"],
+    "claude": ["claude.ai"],
+    "その他AI": ["you.com", "poe.com", "felo.ai", "genspark.ai", "grok.com", "x.ai",
+                 "chat.mistral.ai", "phind.com", "kagi.com", "duckduckgo.com/aichat",
+                 "meta.ai", "iask.ai", "andisearch.com"],
+}
 
 
 def creds(scopes):

@@ -1,20 +1,85 @@
-# Allow AI crawlers (AIO/LLMO: get cited by AI search and chatbots)
+# AIクローラーの許可（AIO/LLMO: AI検索とチャットに引用されるため）
+# User-agent: * で既に全許可だが、主要なAIは明示しておく。
+# 明示があると、相手側の判定が曖昧にならず、設定漏れにも気づきやすい。
+
+# ChatGPTの学習・検索
 User-agent: GPTBot
 Allow: /
 
+# ChatGPT検索の索引
 User-agent: OAI-SearchBot
 Allow: /
 
+# ChatGPTがユーザー指示で開くとき
+User-agent: ChatGPT-User
+Allow: /
+
+# Claudeの索引
 User-agent: ClaudeBot
 Allow: /
 
+# Claudeの閲覧
+User-agent: Claude-Web
+Allow: /
+
+# Claude検索
+User-agent: Claude-SearchBot
+Allow: /
+
+# Anthropic（旧表記）
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexityの索引
 User-agent: PerplexityBot
 Allow: /
 
+# Perplexityがユーザー指示で開くとき
+User-agent: Perplexity-User
+Allow: /
+
+# GeminiとAI回答の利用可否
 User-agent: Google-Extended
 Allow: /
 
+# Bing・Copilotの索引
 User-agent: Bingbot
+Allow: /
+
+# Appleの索引
+User-agent: Applebot
+Allow: /
+
+# Apple Intelligenceの利用可否
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Alexa・Rufus
+User-agent: Amazonbot
+Allow: /
+
+# Le Chat（Mistral）
+User-agent: MistralAI-User
+Allow: /
+
+# DuckDuckGo AI
+User-agent: DuckAssistBot
+Allow: /
+
+# Common Crawl（多くのLLMの学習元）
+User-agent: CCBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# You.com
+User-agent: YouBot
 Allow: /
 
 User-agent: *

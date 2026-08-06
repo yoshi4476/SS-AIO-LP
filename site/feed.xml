@@ -4,36 +4,8 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-06T00:00:00+09:00</updated>
+  <updated>2026-08-07T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
-  <entry>
-    <title>リフォームの集客方法とは？反響を増やす6つの施策</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/reform-shukyaku-hoho/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/reform-shukyaku-hoho/</id>
-    <updated>2026-08-06T00:00:00+09:00</updated>
-    <summary>リフォームの集客方法とは、ポータルサイト・自社サイト・紹介など複数チャネルを組み合わせて反響を生む仕組みです。訪問販売トラブルで業界不信が根強い中、信頼を築きながら反響を増やす6つの施策と始め方を実務目線で解説します。</summary>
-  </entry>
-  <entry>
-    <title>施工事例の書き方｜反響が増える7つの要素とNG例</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/</id>
-    <updated>2026-08-06T00:00:00+09:00</updated>
-    <summary>施工事例の書き方とは、間取り・予算・工期の数値と施主の要望を型に沿って書くことです。工務店・リフォーム会社・不動産仲介向けに、反響が増える7つの構成要素、書く5つのステップ、NG例とOK例、AI検索時代のポイントまで解説します。</summary>
-  </entry>
-  <entry>
-    <title>BtoB CVR改善とは？平均値と成果が出る5つの施策</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/btob-cvr-kaizen/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/btob-cvr-kaizen/</id>
-    <updated>2026-08-05T00:00:00+09:00</updated>
-    <summary>BtoB CVR改善とは、LPやフォームの離脱要因を取り除き、比較検討中の見込み客を商談につなげる施策です。業界平均CVRのデータとフォーム最適化など5つの具体策、AI検索時代のポイントまで解説します。</summary>
-  </entry>
-  <entry>
-    <title>工務店のSEO対策｜施工事例で選ばれる5つの施策と始め方</title>
-    <link href="https://ai.7senses.co.jp/seo/koumuten-seo-taisaku/"/>
-    <id>https://ai.7senses.co.jp/seo/koumuten-seo-taisaku/</id>
-    <updated>2026-08-05T00:00:00+09:00</updated>
-    <summary>工務店のSEO対策とは、施工事例と専門情報の発信で検討中の施主に見つけてもらう仕組みづくりです。倒産増加で競争が激しくなる工務店業界で、集客できない工務店が陥りやすい失敗と、施工事例を武器にした5つの施策を実務目線で解説します。</summary>
-  </entry>
   <entry>
     <title>SaaS指名検索の増やし方｜AI時代に効く5つの施策</title>
     <link href="https://ai.7senses.co.jp/aio/saas-shimei-kensaku-fuyashikata/"/>
@@ -145,5 +117,33 @@
     <id>https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/</id>
     <updated>2026-07-29T00:00:00+09:00</updated>
     <summary>士業のSEO対策とは、専門分野の情報発信で見込み客に見つかり選ばれる仕組みづくりです。弁護士・税理士・社労士など士業の集客で失敗しやすい原因と、成功させる5つの施策を実務目線で解説します。</summary>
+  </entry>
+  <entry>
+    <title>クリニックのMEO対策とは？集患につながる5つの手順</title>
+    <link href="https://ai.7senses.co.jp/meo/clinic-meo-taisaku/"/>
+    <id>https://ai.7senses.co.jp/meo/clinic-meo-taisaku/</id>
+    <updated>2026-07-28T00:00:00+09:00</updated>
+    <summary>クリニックのMEO対策とは、Googleマップの「地域名×診療科」検索で自院を上位表示させ、来院につなげる施策です。医療広告ガイドラインに配慮した進め方を、通算3,200店舗以上の支援実務から5つの手順で解説します。</summary>
+  </entry>
+  <entry>
+    <title>Googleマップの口コミを増やす方法5選と返信のコツ</title>
+    <link href="https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/"/>
+    <id>https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/</id>
+    <updated>2026-07-28T00:00:00+09:00</updated>
+    <summary>Googleマップの口コミを増やす方法は、来店直後の自然な依頼とQRコードの導線づくりが基本です。ポリシー違反にならない増やし方5つと、低評価にも使える返信のコツを解説します。</summary>
+  </entry>
+  <entry>
+    <title>MEO対策のやり方7ステップ｜マップ上位表示の手順</title>
+    <link href="https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/"/>
+    <id>https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/</id>
+    <updated>2026-07-28T00:00:00+09:00</updated>
+    <summary>MEO対策のやり方は、Googleビジネスプロフィールの整備から口コミ運用・投稿継続までの7ステップで進めます。店舗集客支援の実務で使っている手順を、無料でできる範囲を中心に解説します。</summary>
+  </entry>
+  <entry>
+    <title>歯科医院の集客方法とは？新患を増やす5つの基本施策</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/shika-iin-shukyaku/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/shika-iin-shukyaku/</id>
+    <updated>2026-07-28T00:00:00+09:00</updated>
+    <summary>歯科医院の集客は、MEO・口コミ・自由診療の専門性訴求を軸にした5つの基本施策で新患を増やせます。医療広告ガイドラインに配慮した進め方を、通算3,200店舗以上の支援実務から解説します。</summary>
   </entry>
 </feed>

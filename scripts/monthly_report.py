@@ -129,8 +129,10 @@ def fetch_real():
         property=prop,
         date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date="today")],
         dimensions=[Dimension(name="sessionSource")], metrics=[Metric(name="sessions")]))
-    ai_domains = ("chatgpt.com", "chat.openai.com", "perplexity.ai", "gemini.google.com",
-                  "copilot.microsoft.com", "claude.ai")
+    # 参照元ドメインでしか見分けられないため、主要なAIサービスを網羅する。
+    # 抜けているサービスからの流入は「Referral」に埋もれてAI流入として数えられない
+    import daily_kpi as _dk
+    ai_domains = tuple(d for v in _dk.AI_DOMAINS.values() for d in v)
     data["ai_sessions"] = sum(int(r.metric_values[0].value) for r in rep.rows
                               if any(d in r.dimension_values[0].value for d in ai_domains))
     # プラットフォーム別内訳（AI検索分析ページ用）
