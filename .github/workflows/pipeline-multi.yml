@@ -95,6 +95,16 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: python scripts/cannibal_check.py --cross || true
 
+      # 一次情報を先に集めておく。執筆側に任せると取りこぼすため、
+      # 次に書くKWで文字起こしを取得し、本文を読める状態にしておく
+      - name: 一次情報の収集（YouTube文字起こし）
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          pip install --quiet yt-dlp
+          python scripts/research_next.py "${{ steps.site.outputs.id }}" || true
+
       - name: 記事生成（Phase 1〜7）
         env:
           SITE_ID: ${{ steps.site.outputs.id }}
