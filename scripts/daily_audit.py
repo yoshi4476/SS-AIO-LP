@@ -262,6 +262,27 @@ def check_scaled_risk(todo):
         print("  ―   リライト候補なし（順位データが未取得か、該当なし）")
 
 
+def check_tokens(todo):
+    """SNSトークンの期限。切れてから気づくと、その間の配信が丸ごと落ちる"""
+    import json
+    print("\n■ SNSトークンの期限")
+    f = ROOT / "data" / "token_state.json"
+    if not f.is_file():
+        print("  ―   記録なし（期限のあるトークンは未設定）")
+        return
+    from datetime import datetime, timezone
+    for key, v in json.loads(f.read_text(encoding="utf-8")).items():
+        exp = v.get("expires_at")
+        if not exp:
+            continue
+        left = (datetime.fromisoformat(exp) - datetime.now(timezone.utc)).days
+        mark = "OK " if left > 14 else "注意"
+        print(f"  {mark} {key:22s} 残り{left}日")
+        if left <= 14:
+            todo.append(f"TODO: {key} の期限が残り{left}日"
+                        "（python scripts/refresh_tokens.py で更新する）")
+
+
 def main():
     fix_kw = "--fix-kw" in sys.argv
     todo = []
@@ -274,6 +295,7 @@ def main():
     check_readability(todo)
     check_supply(todo, fix=fix_kw)
     check_scaled_risk(todo)
+    check_tokens(todo)
 
     print("\n===== 結果 =====")
     if not todo:

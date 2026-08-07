@@ -39,6 +39,20 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
 
+      # 期限のあるトークンを、切れる前に更新する。
+      # 切れてから気づくと、その間の配信が丸ごと落ちる。
+      - name: SNSトークンの更新
+        env:
+          GH_SECRET_TOKEN: ${{ secrets.GH_SECRET_TOKEN }}
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+        run: |
+          pip install --quiet pynacl
+          python scripts/refresh_tokens.py || true
+
       # GSCが読めているかを毎週確認する。ここが黙って落ちると補充が
       # サジェスト頼りになり、有限の候補を掘り尽くして在庫が枯れる。
       - name: Search Consoleの疎通確認
