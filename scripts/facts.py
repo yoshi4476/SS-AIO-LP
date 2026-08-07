@@ -28,15 +28,30 @@ def own_data_facts(site_id):
     rows = hist[sorted(hist)[-1]]
     if not rows:
         return []
-    top = sorted(rows, key=lambda r: -r["imp"])[:3]
     total = sum(r["imp"] for r in rows)
-    return [{
-        "id": "own-gsc",
-        "claim": f"当サイトの実測では、直近28日で{len(rows)}個の検索語から"
-                 f"のべ{total:,}回表示されました（最多は「{top[0]['kw']}」）",
-        "source": "自社サイトのSearch Console実測",
-        "as_of": date.today().strftime("%Y-%m"), "verifiable": True,
-    }]
+    clicks = sum(r["clicks"] for r in rows)
+    top10 = len([r for r in rows if r["pos"] <= 10])
+    # 自社の数字は、実績として読まれるものだけ出す。
+    # 立ち上げ期に「クリック0回」を記事へ書くと、読者には実力が無いと映る。
+    # 嘘は書かないが、弱い数字をわざわざ公表する必要もない。
+    out = []
+    if clicks >= 10 or top10 >= 3:
+        out.append({
+            "id": "own-gsc",
+            "claim": f"当サイトの実測では、直近28日で{len(rows)}個の検索語から"
+                     f"のべ{total:,}回表示され、{clicks}回のクリックがありました",
+            "source": "自社サイトのSearch Console実測",
+            "as_of": date.today().strftime("%Y-%m"), "verifiable": True,
+        })
+    else:
+        out.append({
+            "id": "own-gsc-qualitative",
+            "claim": "当サイトはAIO対策の実装内容と検索での見え方を日次で計測しており、"
+                     "順位・表示回数・クリックの動き方の順序を自社データで確認しています",
+            "source": "自社サイトのSearch Console計測",
+            "as_of": date.today().strftime("%Y-%m"), "verifiable": True,
+        })
+    return out
 
 
 def main():
