@@ -96,6 +96,20 @@ def main():
                 print(f"     次点: {c['keyword']}")
         print("  ※ 管制塔が未接続のためローカルのKW計画を使用")
 
+    # 一次情報を毎回目に入れる。ブリーフに出ないと外部統計の引き写しだけになり、
+    # どのサイトでも書ける記事＝引用先に選ばれない記事になる
+    print("\n■ この記事に入れる一次情報（最低1つ）")
+    try:
+        import subprocess
+        kwtxt = (nxt or {}).get("keyword", "") if isinstance(nxt, dict) else ""
+        r = subprocess.run([sys.executable, "scripts/facts.py", cfg["id"], kwtxt],
+                           cwd=ROOT, capture_output=True, text=True,
+                           encoding="utf-8", errors="ignore")
+        for line in r.stdout.splitlines()[1:]:
+            print(line)
+    except Exception as e:
+        print(f"  （一次情報を取得できませんでした: {e}）")
+
     print("\n■ 公開の流れ")
     if cfg["type"] == "self-static":
         print("  articles/<slug>.md に保存 → python scripts/publish_flow.py "

@@ -1,0 +1,62 @@
+{
+  "_readme": "自社でしか出せない一次情報。記事はここから最低1つ引く。出典と時点を必ず持たせ、確認できない数値は載せない（載せた瞬間に信頼を失う）。",
+  "facts": [
+    {
+      "id": "meo-3200",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "MEO",
+        "店舗集客",
+        "Googleビジネスプロフィール",
+        "口コミ"
+      ],
+      "claim": "MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました",
+      "source": "自社実績",
+      "as_of": "2026-07",
+      "verifiable": true
+    },
+    {
+      "id": "founded",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "会社",
+        "実績",
+        "信頼性"
+      ],
+      "claim": "2020年3月創業、大阪市東成区を拠点に店舗集客とAI活用を支援しています",
+      "source": "自社会社概要",
+      "as_of": "2026-08",
+      "verifiable": true
+    },
+    {
+      "id": "owned-media-aio",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "AIO",
+        "LLMO",
+        "構造化データ",
+        "llms.txt"
+      ],
+      "claim": "当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装して計測しています",
+      "source": "自社サイトの実装",
+      "as_of": "2026-08",
+      "verifiable": true
+    }
+  ],
+  "pending": [
+    {
+      "note": "支援社数・継続率・採択率は未確定。実データを入れるまで記事に書かない",
+      "owner": "ユーザー"
+    }
+  ]
+}

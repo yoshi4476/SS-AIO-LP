@@ -42,10 +42,13 @@ TEMPLATE = ROOT / "templates" / "article.html"
 SITE_URL = "https://ai.7senses.co.jp"
 SITE_NAME = "AI集客ラボ"  # TODO: メディア名確定後に変更（PROJECT.md参照）
 ORG_NAME = "セブンセンシズ株式会社"
-AUTHOR_NAME = "セブンセンシズ編集部"  # TODO: 著者確定後に変更
-AUTHOR_ROLE = "AI集客・MEO/SEO運用の実務チーム"  # TODO
+# 著者は実在の個人にする。「編集部」を Person として出すと、検索エンジンにもAIにも
+# 「誰が書いたか」が伝わらず、E-E-A-T の Experience / Expertise を主張できない。
+# 経歴・実績・連絡先は /author/haraguchi/ に集約し、Schema からそこへ紐づける。
+AUTHOR_NAME = "原口 優"
+AUTHOR_ROLE = "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年"
 AUTHOR_BIO = "通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
-AUTHOR_URL = f"{SITE_URL}/about/"
+AUTHOR_URL = f"{SITE_URL}/author/haraguchi/"   # 経歴・実績の実体があるページへ
 
 CATEGORIES = {
     "aio": ("AIO・LLMO運用", "cat-aio"),
@@ -120,7 +123,10 @@ def build_json_ld(meta, url):
             "image": SITE_URL + meta.get("eyecatch", "/images/ogp-default.png"),
             "datePublished": str(meta["date"]),
             "dateModified": str(meta["modified"]),
-            "author": {"@type": "Person", "name": AUTHOR_NAME, "url": AUTHOR_URL},
+            "author": {"@type": "Person", "name": AUTHOR_NAME, "url": AUTHOR_URL,
+                       "jobTitle": AUTHOR_ROLE,
+                       "worksFor": {"@type": "Organization", "name": ORG_NAME,
+                                    "url": SITE_URL}},
             "editor": {"@type": "Person", "name": "原口 優", "jobTitle": "代表取締役",
                        "url": f"{SITE_URL}/author/haraguchi/"},
             "publisher": {"@type": "Organization", "name": ORG_NAME, "url": SITE_URL},
