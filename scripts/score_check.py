@@ -158,7 +158,13 @@ def main():
     if _fp.is_file():
         for f in _json.loads(_fp.read_text(encoding="utf-8")).get("facts", []):
             # 主張そのものの一致ではなく、固有の数値・名称が本文にあるかで見る
-            for tok in re.findall(r"[0-9][0-9,]{2,}|G-ran|セブンセンシズ|大阪市東成区", f["claim"]):
+            # 数値・社名だけを見ていたため、「登録支援事業者として支援している」のような
+            # 立場の記述を一次情報と認めていなかった。自社しか書けない表現も拾う。
+            toks = re.findall(r"[0-9][0-9,]{2,}|G-ran|セブンセンシズ|大阪市東成区", f["claim"])
+            toks += [t for t in ("登録支援事業者", "当社は自社サイト", "自社メディア",
+                                 "支援の現場", "申請の現場", "導入支援", "支援する現場",
+                                 "会計ソフト", "受発注ソフト") if t in f["claim"]]
+            for tok in toks:
                 if tok in body:
                     own_hit.append(f["id"])
                     break

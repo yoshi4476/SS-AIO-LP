@@ -59,6 +59,8 @@ faq:
 
 **受発注ソフトは通常枠・インボイス対応類型・電子取引類型という3つの枠で補助対象になります。**枠によって対象範囲や補助率が大きく異なるため、自社の使い方に合う枠を見極める必要があります。
 
+当社は受発注ソフト・会計ソフトの導入を補助金で支援している登録支援事業者です。枠の選択を誤ると補助額が大きく変わるため、**ツールを決める前に枠を確認してください**。
+
 <figure><img src="/images/ai-hojokin-juhatchu-soft-toha/waku3.png" alt="受発注ソフトが対象になる3つの申請枠: 通常枠、インボイス対応類型、電子取引類型" loading="lazy"><figcaption>受発注ソフトが対象になる3つの申請枠</figcaption></figure>
 
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">通常枠のページ</a>によると、対象となる業務プロセスには顧客対応・販売支援や供給・在庫・物流など幅広い区分が含まれ、受発注に関わる機能もその一部として扱われます。一方、<a href="https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_invoice/" target="_blank" rel="noopener">電子取引類型のページ</a>では、**「インボイス制度に対応した『受発注』の機能を有し、発注側の事業者が受注側の事業者に対してアカウントを無償で発行・利用させることのできる機能を有するクラウド型のソフトウェア」**が対象と明記されています。

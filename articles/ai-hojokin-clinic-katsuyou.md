@@ -61,6 +61,8 @@ faq:
 
 **クリニックで対象になるのは、電子カルテ・レセコン・AI問診/予約システムの3分野です。**どの業務がボトルネックかによって、優先して導入すべきツールが変わります。
 
+当社はAI導入補助金の登録支援事業者です。医療機関の申請では、**電子カルテが既存システムの更新に当たらないか**の確認が最初の関門になります。
+
 <figure><img src="/images/ai-hojokin-clinic-katsuyou/tool-categories.png" alt="クリニックで対象になるITツール3分野: 電子カルテシステム、レセプトコンピュータ、AI問診・オンライン予約システム" loading="lazy"><figcaption>クリニックで対象になるITツール3分野</figcaption></figure>
 
 <a href="https://clius.jp/mag/2026/03/06/2026-clinic-itsubsidy/" target="_blank" rel="noopener">CLIUSが紹介するクリニック向けガイド</a>では、電子カルテシステム（クラウド型・オンプレミス型）、レセプトコンピュータ、患者予約・情報管理システム、勤怠管理ソフトなどが対象ツールとして挙げられています。

@@ -59,6 +59,8 @@ faq:
 
 **対象ツールは、受発注・モバイルオーダー・AI需要予測の3分野に整理できます。**業務のどこがボトルネックかによって、優先して導入すべきツールが変わります。
 
+当社はAI導入補助金の登録支援事業者として、対象ツールの選定から申請まで支援しています。飲食店の相談で最も多いのは、**ハードウェアがどこまで対象になるか**という点です。
+
 <figure><img src="/images/ai-hojokin-inshokuten-katsuyou/tool-categories.png" alt="飲食店で対象になるITツール3分野: 受発注システム、モバイルオーダー・POSレジ、AI需要予測・自動シフト" loading="lazy"><figcaption>飲食店で対象になるITツール3分野</figcaption></figure>
 
 <a href="https://pro.gnavi.co.jp/magazine/t_res/cat_2/a_5067/?p=1" target="_blank" rel="noopener">ぐるなび通信が紹介する飲食店の導入パターン</a>では、モバイルオーダーとPOSレジの組み合わせで注文ミスと会計時間を減らす例、FAXや電話の発注をアプリに置き換え納品データを会計ソフトへ自動連携する例、AI需要予測と自動シフト作成を組み合わせて食品ロスを減らす例が紹介されています。
