@@ -42,6 +42,8 @@ def main():
             ("法人番号ページへのsameAs", "houjin-bangou.nta.go.jp" in both),
             ("旧サイト(www)への言及なし", "www.7senses.co.jp" not in both),
             ("逆順の商号なし", "株式会社セブンセンシズ" not in both),
+            # 単位がぶれると、同じ事実なのか別の事実なのか機械が判断できない
+            ("実績表記のゆれなし（3,200社）", "3,200社" not in both and "3200社" not in both),
         ]
         for name, ok in checks:
             print(f"   {'OK ' if ok else '要修正'} {name}")
