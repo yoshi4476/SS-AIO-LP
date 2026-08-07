@@ -1,0 +1,27 @@
+{
+  "_readme": "会社の正規表記（NAP）。外部への掲載・Schema・レポートはすべてここを参照する。表記がぶれると名寄せが壊れ、同名の別法人（東京都目黒区・9120001168304）に寄せる材料を自分で作ることになる。",
+  "name": "セブンセンシズ株式会社",
+  "name_en": "SEVEN SENSES Inc.",
+  "corporate_number": "3120001227825",
+  "postal": "537-0003",
+  "address": "大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902",
+  "tel": "06-4305-7547",
+  "hours": "9:00〜20:00（土・日・祝日を除く）",
+  "email": "info.ai@7senses.co.jp",
+  "founded": "2020年3月10日",
+  "capital": "500万円",
+  "ceo": "原口 優",
+  "sites": {
+    "corporate": "https://corp.7senses.co.jp/",
+    "ai-lab": "https://ai.7senses.co.jp/",
+    "subsidy": "https://lp.7senses.co.jp/"
+  },
+  "same_as": [
+    "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+    "https://alarmbox.jp/companyinfo/entities/3120001227825"
+  ],
+  "never_use": {
+    "www.7senses.co.jp": "旧サイト（造園・害虫害獣駆除）。事業内容が違うため外部掲載に使わない",
+    "株式会社セブンセンシズ": "商号の順序が逆。東京の別法人の表記"
+  }
+}

@@ -42,6 +42,37 @@ TEMPLATE = ROOT / "templates" / "article.html"
 SITE_URL = "https://ai.7senses.co.jp"
 SITE_NAME = "AI集客ラボ"  # TODO: メディア名確定後に変更（PROJECT.md参照）
 ORG_NAME = "セブンセンシズ株式会社"
+# 同名の別法人（東京都目黒区・法人番号9120001168304）が存在する。社名だけでは
+# 機械が区別できないため、法人番号と所在地を必ず添えて出す。
+# sameAs には法人番号がURLに含まれるページだけを入れる（名前しか載らないページを
+# 入れると、別法人との混同を自分から強めることになる）。
+ORG_NUMBER = "3120001227825"
+ORG_ADDRESS = {"postal": "537-0003", "region": "大阪府", "city": "大阪市東成区",
+               "street": "神路1丁目7-4 コンフォートビル901・902"}
+ORG_TEL = "06-4305-7547"
+ORG_SAME_AS = [
+    f"https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo={ORG_NUMBER}",
+    f"https://alarmbox.jp/companyinfo/entities/{ORG_NUMBER}",
+    "https://corp.7senses.co.jp/",
+    "https://lp.7senses.co.jp/",
+]
+
+
+def organization():
+    """全ページ共通の発行者情報。法人番号まで出して実在を機械的に確認できるようにする"""
+    return {
+        "@type": "Organization", "name": ORG_NAME, "alternateName": "SEVEN SENSES Inc.",
+        "url": SITE_URL, "telephone": ORG_TEL,
+        "identifier": {"@type": "PropertyValue", "name": "法人番号",
+                       "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+                       "value": ORG_NUMBER},
+        "address": {"@type": "PostalAddress", "addressCountry": "JP",
+                    "postalCode": ORG_ADDRESS["postal"],
+                    "addressRegion": ORG_ADDRESS["region"],
+                    "addressLocality": ORG_ADDRESS["city"],
+                    "streetAddress": ORG_ADDRESS["street"]},
+        "sameAs": ORG_SAME_AS,
+    }
 # 著者は実在の個人にする。「編集部」を Person として出すと、検索エンジンにもAIにも
 # 「誰が書いたか」が伝わらず、E-E-A-T の Experience / Expertise を主張できない。
 # 経歴・実績・連絡先は /author/haraguchi/ に集約し、Schema からそこへ紐づける。
@@ -125,11 +156,10 @@ def build_json_ld(meta, url):
             "dateModified": str(meta["modified"]),
             "author": {"@type": "Person", "name": AUTHOR_NAME, "url": AUTHOR_URL,
                        "jobTitle": AUTHOR_ROLE,
-                       "worksFor": {"@type": "Organization", "name": ORG_NAME,
-                                    "url": SITE_URL}},
+                       "worksFor": organization()},
             "editor": {"@type": "Person", "name": "原口 優", "jobTitle": "代表取締役",
                        "url": f"{SITE_URL}/author/haraguchi/"},
-            "publisher": {"@type": "Organization", "name": ORG_NAME, "url": SITE_URL},
+            "publisher": organization(),
             "inLanguage": "ja",
         },
         {
