@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""公開した記事をSNSへ配る（X / Facebook / Instagram / Threads / LinkedIn / LINE公式）
+"""公開した記事をSNSへ配る（X / Facebook / Instagram / Threads / LinkedIn）
 
 使い方:
     python scripts/post_social.py <site_id> <slug>        # 設定済みの媒体へ配信
@@ -60,26 +60,74 @@ def pick(e, name, site_id):
     return e.get(f"{name}_{suf}") or e.get(name, "")
 
 
-def compose(meta, url, cfg, limit=None, with_url=True):
-    """投稿文を作る。タイトルの再掲だけでは読む理由にならないので要点を添える"""
+# 媒体ごとの書き方。同じ文面を全媒体に流すと、どこでも中途半端になる。
+#   limit  … 文字数の上限（Noneは実質無制限）
+#   tags   … ハッシュタグの数。Instagramはタグ経由の発見が多いので多め、
+#            Facebookはタグを付けるほど伸びない傾向があるため0にする
+#   url    … 本文にURLを置けるか（Instagramは不可）
+#   lead   … 要点の長さ。読む場所の性質に合わせる
+#   cta    … 相談窓口への導線を載せるか。Xは280字で窮屈になるため記事URLのみ
+STYLE = {
+    "x":         {"limit": 280,  "tags": 2, "url": True,  "lead": 70,  "cta": False},
+    "facebook":  {"limit": None, "tags": 0, "url": True,  "lead": 110, "cta": True},
+    "linkedin":  {"limit": 2900, "tags": 3, "url": True,  "lead": 140, "cta": True},
+    "instagram": {"limit": 2100, "tags": 5, "url": False, "lead": 110, "cta": False},
+    "threads":   {"limit": 490,  "tags": 2, "url": True,  "lead": 80,  "cta": False},
+}
+
+
+def utm(url, platform):
+    """流入元を測れるようにする。付けないとSNS経由がまとめて『Referral』になり、
+    どの媒体が効いているか分からないまま投稿を続けることになる"""
+    if not url:
+        return url
+    q = urllib.parse.urlencode({"utm_source": platform, "utm_medium": "social",
+                                "utm_campaign": "article"})
+    return url + ("&" if "?" in url else "?") + q
+
+
+def compose(meta, url, cfg, platform="x"):
+    """媒体に合わせた投稿文を作る。タイトルの再掲だけでは読む理由にならない"""
+    s = STYLE.get(platform, STYLE["x"])
     title = meta["title"]
-    lead = re.sub(r"\s+", "", str(meta.get("description", "")))[:70]
-    tags = " ".join(f"#{t}" for t in (cfg.get("x_tags") or [])[:2])
+    lead_full = re.sub(r"\s+", "", str(meta.get("description", "")))
+    lead = lead_full[:s["lead"]]
+    tags = " ".join(f"#{t}" for t in (cfg.get("social_tags") or cfg.get("x_tags") or [])[:s["tags"]])
+    link = utm(url, platform) if s["url"] else ""
+    # Instagramは本文にリンクを置けない。何を見に行くのかを書かないと踏まれないため、
+    # 記事名と相談窓口の両方を言葉で示す
+    guide = ""
+    if not s["url"]:
+        guide = "\n\n▼続きはプロフィールのリンクから\n（記事一覧・無料相談はこちら）"
+
+    # 記事だけで終わらせず、相談窓口までの導線を1行置く。
+    # 読んで終わりでは問い合わせにつながらないため。
+    cta = cfg.get("cta") or {}
+    cta_line = ""
+    if s["url"] and s.get("cta") and cta.get("url") and cta.get("label"):
+        cta_url = cta["url"]
+        if cta_url.startswith("/"):
+            cta_url = f"https://{cfg['domain']}{cta_url}"
+        cta_line = f"\n\n▼{cta['label']}\n{utm(cta_url, platform)}"
 
     def build(l):
-        b = f"{title}\n\n{l}…"
-        if with_url:
-            b += f"\n\n{url}"
+        b = f"{title}\n\n{l}"
+        b += "…" if len(l) < len(lead_full) else ""
+        if link:
+            b += f"\n\n{link}"
+        b += guide
+        if cta_line:
+            b += cta_line
         if tags:
             b += f"\n{tags}"
         return b
 
     body = build(lead)
-    if limit:
+    if s["limit"]:
         # Xでは実際の長さに関わらずURLは23字で数えられる
         def length(b):
-            return len(b) - (len(url) - 23 if with_url and url in b else 0)
-        while length(body) > limit and len(lead) > 12:
+            return len(b) - (len(link) - 23 if link and link in b else 0)
+        while length(body) > s["limit"] and len(lead) > 12:
             lead = lead[:-5]
             body = build(lead)
     return body
@@ -197,21 +245,6 @@ def li_post(text, url, img, org_id, token):
         return r.headers.get("x-restli-id") or r.status
 
 
-# ---------------- LINE 公式アカウント ----------------
-
-def line_broadcast(text, img, token):
-    msgs = [{"type": "text", "text": text}]
-    if img:
-        msgs.insert(0, {"type": "image", "originalContentUrl": img, "previewImageUrl": img})
-    req = urllib.request.Request(
-        "https://api.line.me/v2/bot/message/broadcast",
-        data=json.dumps({"messages": msgs}).encode("utf-8"), method="POST")
-    req.add_header("Content-Type", "application/json")
-    req.add_header("Authorization", f"Bearer {token}")
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.status
-
-
 # ---------------- 本体 ----------------
 
 def article(slug):
@@ -227,17 +260,18 @@ def deliver(site_id, slug, e, dry):
     meta = article(slug)
     url = sites_mod.article_url(cfg, meta)
     img = image_url(meta, cfg)
-    xtext = compose(meta, url, cfg, limit=X_LIMIT)
-    notext = compose(meta, url, cfg, with_url=False)   # 本文にURLを置けない媒体用
+    # 媒体ごとに文面を作り分ける。同じ文を全媒体に流すと、どこでも中途半端になる
+    t = {p: compose(meta, url, cfg, p) for p in STYLE}
 
     print(f"\n■ {site_id} / {slug}")
+    print(f"  記事: {url}")
     print(f"  画像: {img or '（アイキャッチ未設定）'}")
+    print(f"  CTA : {cfg.get('cta', {}).get('url') or '（未設定）'}")
 
     if dry:
-        print("\n― X / LINE ―")
-        print(xtext)
-        print("\n― Instagram / Threads（本文にURLを置けないためプロフィール誘導）―")
-        print(notext)
+        for p in ("x", "facebook", "linkedin", "instagram", "threads"):
+            print(f"\n― {p} ―")
+            print(t[p])
         return
 
     # X
@@ -245,7 +279,7 @@ def deliver(site_id, slug, e, dry):
          ("api_key", "api_secret", "access_token", "access_secret")}
     if all(is_set(v) for v in c.values()):
         try:
-            r = x_post(xtext, c)
+            r = x_post(t["x"], c)
             print(f"  X: 投稿 https://x.com/i/status/{(r.get('data') or {}).get('id')}")
         except Exception as ex:
             print(f"  X: 失敗 {str(ex)[:110]}")
@@ -256,7 +290,7 @@ def deliver(site_id, slug, e, dry):
     fbt, fbp = pick(e, "FB_PAGE_TOKEN", site_id), pick(e, "FB_PAGE_ID", site_id)
     if is_set(fbt) and is_set(fbp):
         try:
-            fb_post(notext, url, fbp, fbt)
+            fb_post(t["facebook"], utm(url, "facebook"), fbp, fbt)
             print("  Facebook: 投稿")
         except Exception as ex:
             print(f"  Facebook: 失敗 {str(ex)[:110]}")
@@ -267,7 +301,7 @@ def deliver(site_id, slug, e, dry):
     igi = pick(e, "IG_USER_ID", site_id)
     if is_set(fbt) and is_set(igi) and img:
         try:
-            ig_post(notext, img, igi, fbt)
+            ig_post(t["instagram"], img, igi, fbt)
             print("  Instagram: 投稿")
         except Exception as ex:
             print(f"  Instagram: 失敗 {str(ex)[:110]}")
@@ -278,7 +312,7 @@ def deliver(site_id, slug, e, dry):
     tht, thu = pick(e, "THREADS_TOKEN", site_id), pick(e, "THREADS_USER_ID", site_id)
     if is_set(tht) and is_set(thu):
         try:
-            threads_post(xtext, img, thu, tht)
+            threads_post(t["threads"], img, thu, tht)
             print("  Threads: 投稿")
         except Exception as ex:
             print(f"  Threads: 失敗 {str(ex)[:110]}")
@@ -289,24 +323,12 @@ def deliver(site_id, slug, e, dry):
     lit, lio = pick(e, "LINKEDIN_TOKEN", site_id), pick(e, "LINKEDIN_ORG_ID", site_id)
     if is_set(lit) and is_set(lio):
         try:
-            pid = li_post(notext, url, img, lio, lit)
+            pid = li_post(t["linkedin"], utm(url, "linkedin"), img, lio, lit)
             print(f"  LinkedIn: 投稿 {pid}")
         except Exception as ex:
             print(f"  LinkedIn: 失敗 {str(ex)[:110]}")
     else:
         print("  LinkedIn: スキップ（LINKEDIN_TOKEN / LINKEDIN_ORG_ID）")
-
-    # LINE公式
-    lt = pick(e, "LINE_CHANNEL_TOKEN", site_id)
-    if is_set(lt):
-        try:
-            line_broadcast(xtext, img, lt)
-            print("  LINE: 配信")
-        except Exception as ex:
-            print(f"  LINE: 失敗 {str(ex)[:110]}")
-    else:
-        print("  LINE: スキップ（LINE_CHANNEL_TOKEN）")
-
 
 def main():
     e = env()
