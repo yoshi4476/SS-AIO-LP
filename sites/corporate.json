@@ -71,5 +71,9 @@
     "label": "経理BPOの無料相談",
     "note": "経理・バックオフィスの外部委託についてご相談いただけます"
   },
-  "link_policy": "内部リンクは keiri-bpo / keiri-jitsumu / backoffice の記事から選ぶ。"
+  "link_policy": "内部リンクは keiri-bpo / keiri-jitsumu / backoffice の記事から選ぶ。",
+  "x_tags": [
+    "経理BPO",
+    "バックオフィス"
+  ]
 }

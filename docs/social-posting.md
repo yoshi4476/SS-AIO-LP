@@ -1,0 +1,96 @@
+# SNSへの自動投稿
+
+記事を公開すると `scripts/post_social.py` が走り、設定済みの媒体へ配信する。
+未設定の媒体は黙って飛ばすため、必要なものから順に足せばよい。
+
+3サイトの記事を**1つのアカウント**から配る前提の設定になっている。
+サイトごとにアカウントを分ける場合だけ、環境変数の末尾にサイトIDを付ける
+（`X_ACCESS_TOKEN_CORPORATE` のように。無ければ共通の値が使われる）。
+
+## 対応状況
+
+| 媒体 | 自動投稿 | 画像 | 本文中のリンク | 必要なもの |
+|:--|:--|:--|:--|:--|
+| X | ○ | 添付可 | ○ | APIキー4つ（OAuth 1.0a） |
+| Facebookページ | ○ | OGPが展開される | ○ | ページアクセストークン |
+| Instagram | ○ | **必須** | ×（プロフィール誘導） | プロアカウント＋FBページ連携 |
+| Threads | ○ | 任意 | ○ | Threads APIのトークン |
+| LINE公式 | ○ | 添付可 | ○ | Messaging APIのトークン |
+| note | **×** | — | — | 公開APIが無い（後述） |
+
+## X（設定済みの有料プラン）
+
+**https://developer.x.com/en/portal/dashboard**
+
+App → **Keys and tokens** で4つを発行する。
+User authentication settings で **Read and write** にしておくこと（Readのままだと投稿できない）。
+
+```
+X_API_KEY=
+X_API_SECRET=
+X_ACCESS_TOKEN=
+X_ACCESS_SECRET=
+```
+
+## Facebookページ / Instagram
+
+どちらも Meta の同じトークンを使う。Instagramは**プロアカウント**にして
+Facebookページと連携しておく必要がある。
+
+**https://developers.facebook.com/apps/**
+
+1. アプリを作成 → 製品に「Facebookログイン」「Instagram Graph API」を追加
+2. グラフAPIエクスプローラで `pages_manage_posts` `instagram_content_publish` の権限を付けてトークンを取得
+3. 長期トークンに交換する（短期は約2時間で切れる）
+
+```
+FB_PAGE_ID=
+FB_PAGE_TOKEN=
+IG_USER_ID=
+```
+
+Instagramは**本文にリンクを置けない**。プロフィールのリンクへ誘導する形になるため、
+プロフィールに記事一覧のURLを設定しておくこと。
+
+## Threads
+
+**https://developers.facebook.com/docs/threads**
+
+```
+THREADS_TOKEN=
+THREADS_USER_ID=
+```
+
+## LINE公式アカウント
+
+**https://developers.line.biz/console/**
+
+Messaging API チャネル → **チャネルアクセストークン（長期）** を発行。
+
+```
+LINE_CHANNEL_TOKEN=
+```
+
+ブロードキャストは無料プランで月200通まで。友だち数×配信回数で消費するため、
+記事ごとの配信ではなく週次のまとめ配信に切り替えることも検討する。
+
+## note について
+
+note には投稿用の公開APIが無い。ブラウザ操作を自動化する方法は技術的には
+可能だが、規約が想定していない使い方であり、アカウント停止の risk を負う。
+**自動投稿の対象にしない。**
+
+転載したい場合は次のいずれかになる。
+
+- 手動で転載する（正規URLを本文に置き、canonical代わりに出典として明記する）
+- noteでは記事の要約だけを載せ、本文は自サイトへ誘導する
+
+なお、同じ本文をそのまま note に載せると自サイトと重複コンテンツになり、
+note側が検索で上位に出て自サイトの評価を吸うことがある。全文転載は勧めない。
+
+## 確認
+
+```bash
+python scripts/post_social.py ai-lab <slug> --dry     # 投稿文と画像URLを表示
+python scripts/post_social.py --today                 # 本日公開分を配信
+```

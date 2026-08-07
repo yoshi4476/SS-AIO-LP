@@ -120,6 +120,9 @@ def main():
         category=meta["category"], score=score, chars=len(md2html.plain_text(html)),
         url=url)
 
+    # 6. SNSへ投稿（認証が無ければ黙ってスキップする。公開そのものは止めない）
+    run([PY, "scripts/post_social.py", site_id, slug], check=False)
+
     print(f"\n公開完了: {url}（score {score}）")
 
 
