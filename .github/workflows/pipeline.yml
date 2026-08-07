@@ -130,6 +130,21 @@ jobs:
             done
           fi
 
+      # 順位を測らないとリライト対象が勘になる。GSCの実データを日次で残す
+      - name: 順位の記録とAI引用の推定
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            pip install --quiet google-api-python-client google-auth
+            python scripts/rank_track.py || true
+            python scripts/ai_citation_check.py || true
+            rm -f indexing-service-account.json
+          else
+            echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定のため順位を記録できません"
+          fi
+
       - name: 最終ビルドとコミット
         run: |
           python scripts/build.py

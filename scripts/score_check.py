@@ -66,7 +66,13 @@ def main():
         checks.append((name, ok, detail, warn))
 
     # --- 量・装飾 ---
-    add("本文5,000字以上", len(plain) >= 5000, f"{len(plain):,}字")
+    # 全記事が5,000〜6,000字に収まると、それ自体が量産の指紋になる（実測で50本が680字幅に集中）。
+    # 検索意図で必要な深さは変わるため、下限は意図別に持ち、上限は設けない。
+    # depth: quick=手順や定義の確認（3,000字〜）/ standard=比較検討（5,000字〜）/ deep=網羅（8,000字〜）
+    _depth = (meta.get("depth") or "standard").strip()
+    _min = {"quick": 3000, "standard": 5000, "deep": 8000}.get(_depth, 5000)
+    add(f"本文{_min:,}字以上（depth: {_depth}）", len(plain) >= _min,
+        f"{len(plain):,}字")
     markers = len(re.findall(r"\*\*[^*]+\*\*", body)) + len(re.findall(r"==[^=]+==", body))
     add("強調12〜18箇所（最低8）", markers >= 8, f"{markers}箇所" + ("（推奨帯外）" if not 12 <= markers <= 18 else ""))
 
@@ -142,6 +148,21 @@ def main():
         + (f"・100字超{len(runaway)}文" if runaway else "")
         + (f" 例:「{worst[:32]}…」({len(worst)}字)" if len(long_sents) > limit or runaway else ""),
         warn=True)
+
+    # --- 一次情報（量産の唯一の防波堤）---
+    # 月180本の規模では、外部統計の引き写しだけの記事はスケーラブルコンテンツ濫用と
+    # 判定されうる。「自社でしか出せない事実」が入っているかを機械で担保する。
+    import json as _json
+    _fp = ROOT / "data" / "first_party_facts.json"
+    own_hit = []
+    if _fp.is_file():
+        for f in _json.loads(_fp.read_text(encoding="utf-8")).get("facts", []):
+            # 主張そのものの一致ではなく、固有の数値・名称が本文にあるかで見る
+            for tok in re.findall(r"[0-9][0-9,]{2,}|G-ran|セブンセンシズ|大阪市東成区", f["claim"]):
+                if tok in body:
+                    own_hit.append(f["id"])
+                    break
+    add("自社の一次情報が1つ以上ある", bool(own_hit), "、".join(sorted(set(own_hit))) or "自社実績・自社実測が本文にありません")
 
     # --- 人間味 ---
     first_person = len(re.findall(r"私たち|私も|私は|私が|当社|弊社", body_nc))

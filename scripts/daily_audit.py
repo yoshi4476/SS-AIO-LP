@@ -217,6 +217,51 @@ def check_supply(todo, fix=False):
                             f"（python scripts/kw_discover.py --site {sid} --append）")
 
 
+def check_scaled_risk(todo):
+    """量産と見なされる兆候を見る（新規記事だけを積み続けていないか）
+
+    スケーラブルコンテンツ濫用の判定は本数ではなく「1本ずつに独自の価値があるか」。
+    実運用のサイトは、新規と同時に既存記事の改善が動く。新規しか動いていない状態は
+    その逆の signal になるため、順位データからリライト候補を出して手当てを促す。
+    """
+    import json
+    import statistics
+    print("\n■ 量産リスクの兆候")
+
+    # 1) 文字数の均一さ。全記事が同じ長さだと機械生成の指紋になる
+    lens = []
+    for p_ in (ROOT / "articles").glob("*.md"):
+        t = p_.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+        if m:
+            lens.append(len(re.sub(r"\s|<[^>]+>", "", m.group(2))))
+    if len(lens) >= 10:
+        cv = statistics.pstdev(lens) / statistics.mean(lens)
+        ok = cv >= 0.15   # ばらつきが15%未満なら不自然
+        print(f"  {'OK ' if ok else '注意'} 文字数のばらつき {cv:.0%}"
+              f"（{min(lens):,}〜{max(lens):,}字）")
+        if not ok:
+            todo.append("TODO: 記事の文字数が均一すぎる"
+                        "（frontmatter の depth を quick/standard/deep で使い分けること）")
+
+    # 2) リライトの実施状況。新規だけが積み上がる状態を検知する
+    rd = ROOT / "data" / "ranks"
+    cand = 0
+    for cfg in sites_mod.load_all().values():
+        f = rd / f"{cfg['id']}.json"
+        if not f.is_file():
+            continue
+        hist = json.loads(f.read_text(encoding="utf-8"))
+        if hist:
+            cand += len([r for r in hist[sorted(hist)[-1]] if 11 <= r["pos"] <= 30])
+    if cand:
+        print(f"  ―   リライト候補 {cand}件（11〜30位）")
+        todo.append(f"TODO: リライト候補が{cand}件ある。新規記事と並行して"
+                    "上位の数本を改善する（python scripts/rank_track.py で一覧）")
+    else:
+        print("  ―   リライト候補なし（順位データが未取得か、該当なし）")
+
+
 def main():
     fix_kw = "--fix-kw" in sys.argv
     todo = []
@@ -228,6 +273,7 @@ def main():
     check_external_dup(todo)
     check_readability(todo)
     check_supply(todo, fix=fix_kw)
+    check_scaled_risk(todo)
 
     print("\n===== 結果 =====")
     if not todo:
