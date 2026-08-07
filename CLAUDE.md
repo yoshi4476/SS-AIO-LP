@@ -239,7 +239,13 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
 **目的**: 記事に独自性を持たせる一次情報（X投稿+YouTube文字起こし）を収集する。
 **AIO観点**: 一次情報・独自データはAI検索が最も引用したがる素材。ここで集めた固有ファクトが「自サイトが引用される」決定打になる。
 
-1. **X一次情報の収集**
+0. **収集の実行**: `python scripts/research.py "<KW>" --site <site_id>` を必ず先に実行する。
+   YouTubeの文字起こしと自社の一次情報がまとめて出る（YouTubeはAPIキー不要）。
+   保存された `data/youtube_transcripts/*.txt` を**執筆前に読む**こと。
+   自動字幕は誤変換があるため、数値・固有名詞をそのまま引き写さない。
+
+1. **X一次情報の収集**【現在は使用しない】検索APIがBasicプラン（月100ドル〜）以上のため、
+   費用対効果が見合わず停止中。YouTubeの文字起こしで代替している。
    - X API v2で記事KW関連投稿を検索（直近1ヶ月・min_impressions: 500）
    - 必ず取得: `note_tweet`（長文全文）/ スレッド全文（`conversation_id` + `from:{username}`）/ メディアURL / 投稿URL
    - 30件以上を目標。`data/x_trends/x_enriched_article{N}.json` に保存

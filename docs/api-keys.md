@@ -8,60 +8,34 @@
 
 ---
 
-## 1. YouTube Data API v3（無料・先にこちらを推奨）
+## 1. YouTube — **キーは不要**
 
-現場の実演・解説動画から、実際の発言を引用できるようになる。
+`yt-dlp` の検索機能で動画の検索と字幕取得ができるため、YouTube Data API のキーは
+取得しなくてよい（当初は必要と考えていたが、実測で不要と分かった）。
 
-1. **https://console.cloud.google.com/apis/library/youtube.googleapis.com**
-2. プロジェクトを選ぶ（無ければ「プロジェクトを作成」）
-3. **有効にする** を押す
-4. 左メニュー **認証情報** → 上部 **＋認証情報を作成** → **APIキー**
-5. 表示されたキーをコピー
-
-`.env` に貼る。
-
-```
-YOUTUBE_API_KEY=ここに貼る
-```
-
-無料枠は1日10,000ユニット。検索1回で100ユニットなので、1日6記事×8動画でも十分収まる。
-
-**yt-dlp も要る**（字幕の取得に使う）。
+必要なのは yt-dlp だけ。導入済み。
 
 ```bash
-pip install yt-dlp
+python -m pip install --upgrade yt-dlp
 ```
 
----
-
-## 2. X API v2（有料・月100ドル〜）
-
-現場の生の声を引用できる。ただし検索APIは **Basicプラン以上** が必要。
-
-1. **https://developer.x.com/en/portal/dashboard**
-2. プロジェクト → App を作成
-3. **Keys and tokens** → **Bearer Token** を生成
-4. Basic以上のプランに加入（Freeプランでは検索できない）
-
-`.env` に貼る。
-
-```
-X_BEARER_TOKEN=ここに貼る
-```
-
-費用対効果を先に見たい場合は、YouTubeだけ先に入れて1か月運用し、記事の質と
-順位の動きを見てから判断してもよい。
-
----
-
-## 確認
+確認:
 
 ```bash
 python scripts/research.py "AIO対策 やり方"
 ```
 
-キーが有効なら投稿・動画が集まり、`data/x_trends/` と `data/youtube_transcripts/`
-に保存される。未設定なら「スキップ」と表示され、何が足りないかが出る。
+動画6本の文字起こしが `data/youtube_transcripts/*.txt` に保存される。
+
+---
+
+## 2. X（Twitter）— **使わない**
+
+検索APIが Basic プラン（月100ドル〜）以上でしか使えない。YouTubeの文字起こしで
+同等以上の一次情報が無料で取れるため、費用に見合わないと判断した。
+
+収集コード（`collect_x`）は残してあるので、必要になれば `.env` に
+`X_BEARER_TOKEN` を入れて `research.py` の呼び出しを戻すだけで動く。
 
 ---
 
