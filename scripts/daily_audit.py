@@ -26,6 +26,9 @@ import sites as sites_mod  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
 DAILY_TARGET = 2       # 1サイトあたりの1日の公開本数
+MONTHLY_CAP = 60       # 1サイトあたりの1か月の上限。31日ある月は2本/日で62本になり
+                       # 上限を超える。同一ドメインへ短期に大量投入すると機械的な
+                       # 生成と見なされる risk があるため、月単位で頭を打たせる
 KW_MIN_DAYS = 8        # 未着手KWがこの日数分を切ったら補充する
 KW_WARN_DAYS = 30      # この日数分を切ったら早期警戒（補充の井戸が枯れていないか見る）
                        # 週次補充まで最大7日空くため、4日分では次の補充を待てずに枯れる
@@ -61,15 +64,24 @@ def articles_by_site():
 
 
 def check_volume(todo):
-    """当日の公開本数が目標に届いているか"""
-    print(f"■ 本数（目標: 1サイト {DAILY_TARGET}本/日・{today_iso()}）")
+    """当日の公開本数が目標に届いているか（月の上限も見る）"""
+    print(f"■ 本数（目標: 1サイト {DAILY_TARGET}本/日・上限 {MONTHLY_CAP}本/月・{today_iso()}）")
     by_site = articles_by_site()
+    ym = today_iso()[:7]
     for sid, arts in by_site.items():
         n = sum(1 for a in arts if a["date"] == today_iso())
-        mark = "OK " if n >= DAILY_TARGET else "不足"
-        print(f"  {mark} {sid:10s} 本日 {n}/{DAILY_TARGET}本  （累計 {len(arts)}本）")
-        if n < DAILY_TARGET:
-            todo.append(f"TODO: {sid} の記事を本日あと {DAILY_TARGET - n} 本作成して公開する")
+        month = sum(1 for a in arts if a["date"][:7] == ym)
+        left = MONTHLY_CAP - month
+        if left <= 0:
+            # 上限に達したら「不足」と言わない。言えば救済が走って超過する
+            print(f"  上限 {sid:10s} 今月 {month}/{MONTHLY_CAP}本 — 今月はこれ以上公開しません")
+            continue
+        want = min(DAILY_TARGET, left)
+        mark = "OK " if n >= want else "不足"
+        print(f"  {mark} {sid:10s} 本日 {n}/{want}本  今月 {month}/{MONTHLY_CAP}本"
+              f"  （累計 {len(arts)}本）")
+        if n < want:
+            todo.append(f"TODO: {sid} の記事を本日あと {want - n} 本作成して公開する")
     return by_site
 
 

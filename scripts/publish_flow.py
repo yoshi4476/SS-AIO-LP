@@ -70,6 +70,18 @@ def main():
             "  対処: この記事を取り下げて別のKWで書き直すか、"
             f"python scripts/publish_flow.py {invader} {slug} で正しいサイトへ配信すること")
 
+    # 0-3. 月の上限（監査だけでは止まらない。配信の入口で頭を打たせる）
+    #      同一ドメインへ短期に大量投入すると、機械的な生成と見なされる risk がある。
+    import daily_audit
+    _ym = str(meta.get("date", ""))[:7] or datetime.now().strftime("%Y-%m")
+    _n = sum(1 for a in daily_audit.articles_by_site().get(site_id, [])
+             if a["date"][:7] == _ym and a["slug"] != slug)
+    if _n >= daily_audit.MONTHLY_CAP:
+        raise SystemExit(
+            f"{site_id} は今月すでに {_n} 本公開しており、上限 "
+            f"{daily_audit.MONTHLY_CAP} 本/月に達しています。\n"
+            "  来月まで待つか、scripts/daily_audit.py の MONTHLY_CAP を見直してください")
+
     # 1. 画像（アイキャッチ・図解）
     run([PY, "scripts/make_images.py", slug], check=False)
 
