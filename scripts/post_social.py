@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""公開した記事をSNSへ配る（X / Facebookページ / Instagram / Threads / LINE公式）
+"""公開した記事をSNSへ配る（X / Facebook / Instagram / Threads / LinkedIn / LINE公式）
 
 使い方:
     python scripts/post_social.py <site_id> <slug>        # 設定済みの媒体へ配信
@@ -165,6 +165,38 @@ def threads_post(text, img, user_id, token):
         return json.loads(r.read().decode("utf-8"))
 
 
+# ---------------- LinkedIn 会社ページ ----------------
+
+def li_post(text, url, img, org_id, token):
+    """会社ページへ投稿する。
+
+    LinkedInはリンク付き投稿にすると相手側がOGPを展開するため、画像の再送は要らない。
+    投稿主体は organizationalEntityUrn（会社ページ）で指定する。
+    """
+    api = "https://api.linkedin.com/rest/posts"
+    body = {
+        "author": f"urn:li:organization:{org_id}",
+        "commentary": text,
+        "visibility": "PUBLIC",
+        "distribution": {"feedDistribution": "MAIN_FEED",
+                         "targetEntities": [], "thirdPartyDistributionChannels": []},
+        "lifecycleState": "PUBLISHED",
+        "isReshareDisabledByAuthor": False,
+    }
+    if url:
+        body["content"] = {"article": {"source": url,
+                                       "title": text.splitlines()[0][:200]}}
+        if img:
+            body["content"]["article"]["thumbnail"] = img
+    req = urllib.request.Request(api, data=json.dumps(body).encode("utf-8"), method="POST")
+    req.add_header("Authorization", f"Bearer {token}")
+    req.add_header("Content-Type", "application/json")
+    req.add_header("LinkedIn-Version", "202405")
+    req.add_header("X-Restli-Protocol-Version", "2.0.0")
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.headers.get("x-restli-id") or r.status
+
+
 # ---------------- LINE 公式アカウント ----------------
 
 def line_broadcast(text, img, token):
@@ -252,6 +284,17 @@ def deliver(site_id, slug, e, dry):
             print(f"  Threads: 失敗 {str(ex)[:110]}")
     else:
         print("  Threads: スキップ（THREADS_TOKEN / THREADS_USER_ID）")
+
+    # LinkedIn 会社ページ
+    lit, lio = pick(e, "LINKEDIN_TOKEN", site_id), pick(e, "LINKEDIN_ORG_ID", site_id)
+    if is_set(lit) and is_set(lio):
+        try:
+            pid = li_post(notext, url, img, lio, lit)
+            print(f"  LinkedIn: 投稿 {pid}")
+        except Exception as ex:
+            print(f"  LinkedIn: 失敗 {str(ex)[:110]}")
+    else:
+        print("  LinkedIn: スキップ（LINKEDIN_TOKEN / LINKEDIN_ORG_ID）")
 
     # LINE公式
     lt = pick(e, "LINE_CHANNEL_TOKEN", site_id)

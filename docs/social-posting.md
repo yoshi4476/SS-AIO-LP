@@ -15,6 +15,7 @@
 | Facebookページ | ○ | OGPが展開される | ○ | ページアクセストークン |
 | Instagram | ○ | **必須** | ×（プロフィール誘導） | プロアカウント＋FBページ連携 |
 | Threads | ○ | 任意 | ○ | Threads APIのトークン |
+| LinkedIn | ○ | OGPが展開される | ○ | 会社ページのトークン |
 | LINE公式 | ○ | 添付可 | ○ | Messaging APIのトークン |
 | note | **×** | — | — | 公開APIが無い（後述） |
 
@@ -60,6 +61,24 @@ Instagramは**本文にリンクを置けない**。プロフィールのリン�
 THREADS_TOKEN=
 THREADS_USER_ID=
 ```
+
+## LinkedIn 会社ページ
+
+経理BPOや補助金の記事は法人担当者に届きやすい。
+
+**https://www.linkedin.com/developers/apps**
+
+1. アプリを作成し、会社ページを紐づける
+2. 製品から **Community Management API** を申請（審査あり・無料）
+3. 権限 `w_organization_social` を付けてトークンを取得
+4. 会社ページIDは、管理画面のURL `linkedin.com/company/<数字>/admin` の数字部分
+
+```
+LINKEDIN_TOKEN=
+LINKEDIN_ORG_ID=
+```
+
+トークンは60日で失効する。切れたら再取得が要る（`post_social.py` は失敗を表示して次へ進む）。
 
 ## LINE公式アカウント
 
