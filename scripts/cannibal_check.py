@@ -118,6 +118,33 @@ def cross_site_check():
                 hits.append({"score": round(s, 2), "a": a, "b": b})
     hits.sort(key=lambda h: -h["score"])
 
+    # --- 同一サイト内: これから書くKW × そのサイトの公開済み記事 ---
+    # find_pairs は articles/ の中しか見ず、external_dup_check は「書き上がった記事」しか見ない。
+    # 別リポジトリのサイトでは、この隙間に「既存記事と同テーマのKWをこれから書く」が落ちる。
+    # (2026-08: 補助金サイトで「活用事例」の記事が2本できた実例あり)
+    pending = [k for k in kws if k.get("status") not in ("公開済み", "対象外")]
+    published = [k for k in kws if k.get("status") == "公開済み"]
+    same = []
+    for p in pending:
+        for q in published:
+            if p.get("site") != q.get("site"):
+                continue
+            s = dice(p.get("keyword", ""), q.get("keyword", ""))
+            if s >= WARN:
+                same.append({"score": round(s, 2), "kw": p, "art": q})
+    same.sort(key=lambda h: -h["score"])
+    print(f"SAME_SITE_DUP_CHECK: 未着手KW {len(pending)}件 × 公開済み {len(published)}件")
+    if same:
+        print("SAME_SITE_DUP=yes")
+        for h in same[:10]:
+            print(f"\n  [{h['score']}] {h['kw']['site']} 内で重複のおそれ")
+            print(f"    これから書くKW: {h['kw']['keyword']}")
+            print(f"    既に公開済み  : {h['art']['keyword']}")
+            print(f"                    {h['art'].get('url', '')}")
+            print("    → 対処: このKWを台帳で「対象外」にするか、切り口を変えて別の検索意図を狙う")
+    else:
+        print("SAME_SITE_DUP=no")
+
     print(f"CROSS_CANNIBAL_CHECK: {len(kws)}件のKW・記事を横断検査 / 重複疑い {len(hits)}組")
     if not hits:
         print("CROSS_CANNIBAL=no")
