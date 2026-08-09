@@ -7,6 +7,8 @@ category: ai-marketing
 date: 2026-08-09
 modified: 2026-08-09
 depth: standard
+score: 92
+score_breakdown: {design: 18, seo: 19, editorial: 18, expert: 18, persona: 19, aio: 19}
 eyecatch: /images/souba-kiji-tsukurikata/eyecatch.png
 diagrams:
   - name: mistakes

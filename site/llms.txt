@@ -52,3 +52,4 @@
 - [住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法](https://ai.7senses.co.jp/ai-marketing/jutaku-instagram-renkei/): 注文住宅検討者の68%がInstagramで情報収集する調査をもとに、サイト・GBPに繋ぐ4つの方法と失敗しやすい注意点を解説
 - [見学会集客を伸ばす6つの施策｜申込を増やす導線設計](https://ai.7senses.co.jp/ai-marketing/kengakukai-shukyaku-hoho/): 国交省統計・住宅展示場アンケートをもとに、見学会の申込を増やす6つの施策と予約導線の作り方を解説
 - [不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップ](https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/): AI検索の市場データとおとり広告規制を踏まえた、不動産会社がAI検索に選ばれる4つの実践ステップを解説
+- [相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](https://ai.7senses.co.jp/ai-marketing/souba-kiji-tsukurikata/): 相場記事の作り方とは、公的データと自社実績を組み合わせ、出典と時点を明記して数値を書くことです。信頼を失う失敗パターンと信頼される6つの構成要素を解説します。
