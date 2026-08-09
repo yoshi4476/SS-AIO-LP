@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-09T00:00:00+09:00</updated>
+  <updated>2026-08-10T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/</id>
+    <updated>2026-08-10T00:00:00+09:00</updated>
+    <summary>OB客紹介の仕組みとは、引き渡し後のフォロー接点・依頼タイミング・謝礼制度を設計し、紹介が継続的に生まれる状態を作ることです。注文住宅・リフォーム・不動産仲介会社向けに、紹介が増えない原因、5つの施策、景品表示法・宅建業法の注意点を実務目線で解説します。</summary>
+  </entry>
   <entry>
     <title>資料請求を増やす方法とは？6つの施策と見直す順序</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/shiryoseikyu-fuyasu-hoho/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/</id>
     <updated>2026-08-02T00:00:00+09:00</updated>
     <summary>SaaS比較記事対策とは、第三者比較サイトでの評価改善と自社比較コンテンツの整備を同時に進め、検索とAIの両方から選ばれる状態をつくることです。不利になる原因からAIに引用される5つの施策まで解説します。</summary>
-  </entry>
-  <entry>
-    <title>ホワイトペーパーの作り方｜BtoBリードを増やす5ステップ</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/whitepaper-tsukurikata/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/whitepaper-tsukurikata/</id>
-    <updated>2026-08-02T00:00:00+09:00</updated>
-    <summary>ホワイトペーパーの作り方とは、読者の課題から解決策・証拠・行動へとつなぐ資料設計です。BtoB・SaaS企業向けに、陥りやすい失敗から企画・構成・DL促進・AI検索時代の活用法まで5ステップで解説します。</summary>
   </entry>
 </feed>

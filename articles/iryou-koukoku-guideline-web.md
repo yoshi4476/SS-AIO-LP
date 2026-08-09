@@ -2,6 +2,7 @@
 title: 医療広告ガイドラインとは？クリニックHPの禁止6表現
 description: 医療広告ガイドラインとは、医療法に基づきクリニックのWebサイトも規制対象とする厚労省の指針です。禁止される6類型と自由診療ページで使える限定解除4要件を、3,200店舗以上の支援実務から解説します。
 slug: iryou-koukoku-guideline-web
+keyword: 医療広告ガイドライン Web
 category: seo
 date: 2026-07-31
 modified: 2026-07-31
