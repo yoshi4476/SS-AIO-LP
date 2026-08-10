@@ -70,6 +70,21 @@ def main():
             "  対処: この記事を取り下げて別のKWで書き直すか、"
             f"python scripts/publish_flow.py {invader} {slug} で正しいサイトへ配信すること")
 
+    # 0-2-2. カニバリ検査（配信の入口で止める）
+    #        領域検査はあったがカニバリ検査が無く、業種名だけ差し替えた同型記事が
+    #        繰り返し公開されていた。監査で見つけて後から直す運用では追いつかない。
+    _pairs = [x for x in cannibal_check.find_pairs(cannibal_check.load_articles())
+              if slug in (x["a"]["slug"], x["b"]["slug"])]
+    if _pairs:
+        w = _pairs[0]
+        other = w["b"] if w["a"]["slug"] == slug else w["a"]
+        raise SystemExit(
+            f"既存記事と重複しています（類似度 {w['score']}）。\n"
+            f"  相手: {other['slug']}「{other['title']}」\n"
+            f"  タイトル類似 {w['title_sim']} / H2構成の重なり {w['h2_overlap']}\n"
+            "  対処: タイトルとH2を、その業種・対象読者にしか当てはまらない切り口へ変える。\n"
+            "        業種名だけを差し替えた構成は、量産の痕跡として評価を下げる")
+
     # 0-3. 月の上限（監査だけでは止まらない。配信の入口で頭を打たせる）
     #      同一ドメインへ短期に大量投入すると、機械的な生成と見なされる risk がある。
     import daily_audit
