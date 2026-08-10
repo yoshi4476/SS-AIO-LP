@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-09",
+  "date": "2026-08-10",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 0,
       "suspect_taken": 0,
       "healthy": 0,
-      "too_thin": 1,
+      "too_thin": 2,
       "items": []
     },
     "corporate": {
