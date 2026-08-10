@@ -2,6 +2,7 @@
 title: AIO対策とは？AI検索に引用される5つの手順
 description: AIO対策とは、Google AI OverviewやChatGPTなどのAI検索に自社情報が引用されるよう最適化する施策です。中小企業が今日から実践できる5つの手順を解説します。
 slug: aio-taisaku-guide
+keyword: aio対策
 category: aio
 date: 2026-07-27
 modified: 2026-07-27
