@@ -14,7 +14,7 @@ diagrams:
   - name: tool-list
     type: list
     title: AIO対策の無料ツール6選
-    items: ["Search Console|AI引用状況を確認", "GA4|AI経由の流入を確認", "AIチャットに直接質問|手動で引用を確認", "リッチリザルトテスト|構造化データを検証", "Schema Validator|Schema全体を確認", "robots.txtレポート|クローラー許可を確認"]
+    items: ["Search ConsoleでAI引用状況を確認", "GA4でAI経由の流入を確認", "AIチャットに直接質問して引用を確認", "リッチリザルトテストで構造化データを検証", "Schema Validatorで全体を確認", "robots.txtレポートでクローラー許可を確認"]
   - name: steps
     type: flow
     title: 無料ツール導入3ステップ
