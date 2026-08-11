@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>実装ラボ｜このサイト自体をAIO対策の実験場にしています</title>
+<meta name="description" content="AI集客ラボは、記事で解説するAIO対策を自社サイトで実装し、日次で計測しています。構造化データ・llms.txt・AIクローラー20種の許可・自動公開の仕組みまで、実装の中身と計測結果を公開します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/lab/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="実装ラボ｜このサイト自体をAIO対策の実験場にしています">
+<meta property="og:description" content="解説していることを、自社サイトで実装して計測しています。中身と結果を公開します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/lab/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/ogp-default.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
+<link rel="stylesheet" href="/css/style.css?v=4c3055ea">
+<script defer src="/js/site.js?v=85532eca"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/lab/">実装ラボ</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金（独自メディア）</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li aria-current="page">実装ラボ</li>
+  </ol>
+</nav>
+
+<main class="article">
+<section class="hero">
+  <span class="kicker">Implementation Lab</span>
+  <h1>このサイト自体を、AIO対策の実験場にしています</h1>
+  <p class="lead">記事で解説していることを、自社サイトで実装して日次で計測しています。うまくいったことも、まだ結果が出ていないことも、そのまま公開します。</p>
+</section>
+
+<p><strong>「やり方を解説する記事」は世の中に多くありますが、書いた本人が実装して計測しているとは限りません。</strong>当サイトは自社を題材にしているため、実装の中身と、その結果として何が起きたかを具体的に出せます。</p>
+
+<p class="freshness">※ 2026年8月時点の実装内容です。</p>
+
+<h2>いま実装しているもの</h2>
+
+<p>AI検索に引用されるために必要とされる項目を、実際に入れています。記事で解説している内容と一対一で対応します。</p>
+
+<table>
+  <thead><tr><th>実装項目</th><th>中身</th><th>解説記事</th></tr></thead>
+  <tbody>
+    <tr><td>AIクローラーの許可</td><td>GPTBot・ClaudeBot・PerplexityBot など20種を robots.txt に明示</td><td><a href="/aio/aio-taisaku-guide/">AIO対策とは</a></td></tr>
+    <tr><td>llms.txt</td><td>AI向けのサイト案内。公開記事を自動で追記</td><td><a href="/aio/llmo-taisaku-hoho/">LLMO対策とは</a></td></tr>
+    <tr><td>構造化データ</td><td>BlogPosting／FAQPage／BreadcrumbList を全記事に。著者は実在の個人＋法人番号</td><td><a href="/aio/aio-taisaku-guide/">AIO対策とは</a></td></tr>
+    <tr><td>抽出しやすい構造</td><td>冒頭200字の断言／H2直下の1文結論／定義ブロック／比較表／FAQ5問以上</td><td><a href="/seo/ai-jidai-seo-taisaku/">AI時代のSEO対策</a></td></tr>
+    <tr><td>鮮度の明示</td><td>「◯年◯月時点」の表記と dateModified を一致させる</td><td><a href="/aio/aio-taisaku-guide/">AIO対策とは</a></td></tr>
+    <tr><td>順位の計測</td><td>Search Console の平均掲載順位を日次で記録し、11〜30位を改善対象として抽出</td><td><a href="/seo/ai-jidai-seo-taisaku/">AI時代のSEO対策</a></td></tr>
+  </tbody>
+</table>
+
+<h2>公開までの工程を自動化しています</h2>
+
+<p>キーワードの選定から公開後のインデックス通知まで、人が手を動かす工程を減らしています。人が判断するのは、品質の最終確認と事業の方向づけだけです。</p>
+
+<div class="callout">
+  <b>工程:</b> キーワード選定 → 一次情報の収集 → 構成設計 → 執筆 → 品質審査 → 画像生成 → 公開 → インデックス通知 → 順位計測 → リライト
+</div>
+
+<p>品質は機械で判定しています。文字数・強調の数・FAQの件数・内部リンク・本文とSchemaの一致など<strong>19項目を自動で採点し、1項目でも欠ければ公開されません</strong>。加えて、既存記事とタイトルや見出しが似すぎている場合も、公開の手前で止まります。</p>
+
+<h2>まだ結果が出ていないこと</h2>
+
+<p>正直に書きます。<strong>実装は済んでいますが、順位はこれからです。</strong></p>
+
+<p>サイトの運用を始めたのは2026年7月末で、まだ2週間ほどです。この期間で検索に表示される語は増えていますが、上位表示に届いているものはわずかです。AI検索に引用されるには、まず検索で上位に入ることが前提になります。</p>
+
+<p>そのため当サイトでは、<strong>順位・表示回数・クリックを分けて記録し、どの順序で動くかを確かめています</strong>。実装の効果は表示回数から先に現れ、クリックはそのあとに続きます。この過程も記事にしていきます。</p>
+
+<h2>同じ仕組みを導入したい方へ</h2>
+
+<p>ここで解説している仕組みは、<strong>オウンドメディアの器と、記事を書いて出し続けるAIエージェントをセットにした形</strong>で提供しています。キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計まで、毎日自動で動きます。</p>
+
+<section class="cta-final" data-area="CTA" data-area-id="lab-cta">
+  <h2>同じ仕組みを、自社サイトでも。</h2>
+  <p>オウンドメディアの器と、記事を書いて出し続けるAIエージェントをセットで提供しています。ここで公開している実装が、そのまま入ります。</p>
+  <a class="btn btn-primary" href="https://corp.7senses.co.jp/aio-agent" target="_blank" rel="noopener" data-cta="lab_aio_agent">AIO対策エージェントの詳細を見る <span class="arw">→</span></a>
+  <p class="note">運営: セブンセンシズ株式会社（法人番号 3120001227825）</p>
+</section>
+
+<h2>関連する解説記事</h2>
+<ul>
+  <li><a href="/aio/aio-taisaku-guide/">AIO対策とは？AI検索に引用される5つの手順</a></li>
+  <li><a href="/aio/llmo-taisaku-hoho/">LLMO対策とは？ChatGPTに引用される7つの方法</a></li>
+  <li><a href="/seo/ai-jidai-seo-taisaku/">AI時代のSEO対策とは？中小企業がやるべき5つの基本</a></li>
+  <li><a href="/ai-marketing/ai-shukyaku-guide/">AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像</a></li>
+</ul>
+
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/meo/">MEO診断</a>
+      <a href="/diagnosis/aio/">AIO診断</a>
+      <a href="/site-audit/">サイト診断</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/lab/">実装ラボ</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

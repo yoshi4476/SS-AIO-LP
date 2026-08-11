@@ -1173,3 +1173,11 @@ main.article p + p { margin-top: 0; }
 
 /* 監修者ページなど、article-body でラップされない直下の本文にも行長の上限を効かせる */
 .article > p, .article > ul, .article > ol, .article > dl { max-width: var(--max-article); }
+
+/* 記事内に暗背景のCTAを置くと、main.article h2 の白帯が効いて白地に白文字になる。
+   暗い面ではCTA側の見た目を優先する */
+main.article .cta-final h2 {
+  background: none; border-left: 0; border-radius: 0; padding: 0;
+  margin: 0 0 1rem; color: #fff;
+}
+main.article .cta-final { border-radius: 18px; margin: 2.6em 0; }
