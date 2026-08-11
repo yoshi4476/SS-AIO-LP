@@ -21,6 +21,22 @@ import sites as sites_mod  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 W, H = 1200, 675
 
+# 背景のグラデーション（濃→淡）。カテゴリごとに変える。
+# これまで全記事が同じ紺→青だったため、82枚が文字違いの同一デザインになっていた。
+# 一覧で並んだときに区別がつかず、SNSでも同じ画像が流れ続ける状態だった。
+CAT_BG = {
+    "AIO・LLMO運用": ((13, 53, 133), (59, 130, 246)),      # 紺 → 青
+    "SEO運用": ((49, 32, 120), (124, 92, 245)),            # 紫紺 → 紫
+    "MEO運用": ((6, 78, 74), (20, 184, 166)),              # 深緑 → 青緑
+    "AI集客・活用全般": ((7, 62, 96), (14, 165, 233)),      # 藍 → 水色
+    "経理BPO・経理代行": ((24, 60, 92), (56, 132, 176)),    # 落ち着いた青
+    "経理実務・法対応": ((30, 50, 80), (82, 118, 160)),      # 灰青
+    "バックオフィス効率化": ((17, 70, 78), (44, 150, 154)),  # 青緑
+    "店舗経営・人材": ((92, 42, 18), (198, 106, 44)),        # 茶 → 橙
+    "補助金・助成金": ((94, 20, 60), (214, 62, 122)),        # 臙脂 → 桃
+    "補助金": ((94, 20, 60), (214, 62, 122)),
+}
+
 CAT_COLORS = {
     "AIO・LLMO運用": (37, 99, 235),
     "SEO運用": (79, 70, 229),
@@ -106,7 +122,7 @@ def render(slug, cat, lines_or_title, brand="AI集客ラボ"):
 
     img = Image.new("RGB", (W, H))
     px = img.load()
-    c1, c2 = (13, 53, 133), (59, 130, 246)
+    c1, c2 = CAT_BG.get(cat, ((13, 53, 133), (59, 130, 246)))
     for y in range(H):
         for x in range(0, W, 4):
             t = (x / W + y / H) / 2
@@ -116,9 +132,34 @@ def render(slug, cat, lines_or_title, brand="AI集客ラボ"):
                     px[x + dx, y] = col
 
     d = ImageDraw.Draw(img)
-    for gy in range(30, H, 44):
-        for gx in range(30, W, 44):
-            d.ellipse([gx, gy, gx + 2, gy + 2], fill=(255, 255, 255))
+
+    # 記事ごとに幾何の型を変える。同じカテゴリでも並べたときに区別がつくようにする。
+    # slugから決めるので、同じ記事なら何度生成しても同じ絵になる（再現性を保つ）。
+    import hashlib
+    seed = int(hashlib.md5(slug.encode()).hexdigest()[:8], 16)
+    shape = seed % 4
+    ov = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    od = ImageDraw.Draw(ov)
+
+    if shape == 0:      # 点描（従来の型）
+        for gy in range(30, H, 44):
+            for gx in range(30, W, 44):
+                od.ellipse([gx, gy, gx + 2, gy + 2], fill=(255, 255, 255, 60))
+    elif shape == 1:    # 右上から差す斜線
+        for i in range(-H, W, 78):
+            od.line([(i, H), (i + H, 0)], fill=(255, 255, 255, 22), width=3)
+    elif shape == 2:    # 右側の同心円
+        cx, cy = W - 240, H // 2 - 40
+        for r in range(90, 460, 76):
+            od.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(255, 255, 255, 30), width=3)
+    else:               # 右下の階段状ブロック
+        for i in range(7):
+            x = W - 120 - i * 96
+            y = H - 150 - i * 44
+            od.rectangle([x, y, x + 70, y + 70], fill=(255, 255, 255, 16))
+
+    img.paste(Image.alpha_composite(img.convert("RGBA"), ov).convert("RGB"), (0, 0))
+    d = ImageDraw.Draw(img)
 
     # カテゴリバッジ
     bf = font(26)
