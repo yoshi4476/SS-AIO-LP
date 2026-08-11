@@ -1182,13 +1182,155 @@ main.article .cta-final h2 {
 }
 main.article .cta-final { border-radius: 18px; margin: 2.6em 0; }
 
-/* 自社プロダクトの紹介カード（実装ラボ）。既存の .card-grid に載せる */
-.prod-grid { margin: 1.6em 0 2.4em; }
-.prod-card {
-  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1.7rem 1.6rem 1.4rem; box-shadow: var(--shadow-sm);
+/* ============ 実装ラボ（/lab/）============
+   このページの主張は「書いてあることを実際に動かしている」の一点。
+   装飾を足すより、各項目から実物へ飛べることを見た目の中心に置く。 */
+
+main.lab { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--gutter) 4rem; }
+
+/* ---- 冒頭 ---- */
+.lab-hero {
+  position: relative; overflow: hidden; border-radius: 20px; color: #fff;
+  background: linear-gradient(145deg, #071a38 0%, #0d3585 58%, #1a4fa8 100%);
+  margin: 1.4rem 0 3rem; padding: clamp(2.6rem, 5.5vw, 4.2rem) clamp(1.6rem, 4vw, 3.4rem);
 }
-.prod-card h3 { margin: 0 0 .2em; font-size: 1.12rem; }
-.prod-card .role { margin: 0 0 .8em; font-size: .84rem; color: var(--muted); }
-.prod-card p { margin: 0 0 .9em; line-height: 1.95; }
-.prod-card p:last-child { margin: 0; }
+/* 計測している感じを、方眼で薄く出す。主張しすぎない濃度にとどめる */
+.lab-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(120% 90% at 78% 18%, #000 12%, transparent 76%);
+  mask-image: radial-gradient(120% 90% at 78% 18%, #000 12%, transparent 76%);
+}
+.lab-hero-inner { position: relative; }
+.lab-kicker {
+  display: inline-block; font-family: var(--en); font-size: .72rem; letter-spacing: .26em;
+  text-transform: uppercase; color: #8ec5ff; margin-bottom: 1.1rem;
+}
+.lab-hero h1 {
+  font-family: var(--head); font-weight: 900; margin: 0 0 1.1rem; color: #fff;
+  font-size: clamp(1.7rem, 3.9vw, 2.9rem); line-height: 1.5; letter-spacing: .01em;
+}
+.lab-lead { max-width: 38em; margin: 0; color: rgba(255,255,255,.86); line-height: 2.05; font-size: 1.02rem; }
+.lab-lead strong { color: #fff; }
+
+.lab-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem; margin: 2.4rem 0 0;
+  border-top: 1px solid rgba(255,255,255,.18); padding-top: 1.8rem;
+}
+.lab-stats b {
+  display: block; font-family: var(--en); font-weight: 700; font-size: 2.3rem;
+  line-height: 1; color: #fff;
+}
+.lab-stats span { display: block; margin-top: .5rem; font-size: .8rem; color: rgba(255,255,255,.66); }
+.lab-asof { margin: 1.5rem 0 0; font-size: .76rem; color: rgba(255,255,255,.5); }
+
+/* ---- 節 ---- */
+.lab-sec { margin: 0 0 3.4rem; }
+.lab-sec > h2 {
+  font-family: var(--head); font-weight: 900; font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  margin: 0 0 .9rem; padding: 0 0 .7rem; color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.lab-sec > p { max-width: 40em; line-height: 2.05; }
+.lab-note { color: var(--muted); }
+
+/* ---- 実装項目（このページの主役）---- */
+/* 1列だと1行が70字を超えて読みにくい。2列にして行長を45字前後に収める */
+.spec-list { list-style: none; margin: 1.8rem 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 1rem; }
+.spec-list > li {
+  background: #fff; border: 1px solid var(--line); border-radius: 14px;
+  padding: 1.5rem 1.6rem 1.2rem;
+  transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out);
+}
+.spec-list > li:hover { border-color: color-mix(in srgb, var(--blue) 42%, var(--line)); box-shadow: var(--shadow-sm); }
+.spec-h { display: flex; align-items: baseline; gap: .9rem; margin-bottom: .6rem; }
+/* 通し番号は装飾ではなく、工程の並びを示すために置く */
+.spec-no {
+  font-family: var(--en); font-weight: 700; font-size: .82rem; letter-spacing: .1em;
+  color: var(--blue); padding-top: .15em;
+}
+.spec-h h3 { margin: 0; font-size: 1.06rem; font-weight: 700; }
+.spec-list p { margin: 0 0 1rem; line-height: 2; font-size: .95rem; }
+.spec-list code {
+  font-size: .86em; background: var(--sky); padding: .12em .45em; border-radius: 5px;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+.spec-f { display: flex; flex-wrap: wrap; gap: .6rem; }
+/* 「実物を見る」導線はページの核なので、他のリンクより強く出す */
+.spec-verify, .spec-read {
+  display: inline-flex; align-items: center; gap: .4em; text-decoration: none;
+  font-size: .84rem; font-weight: 700; border-radius: 999px; padding: .5em 1.1em;
+  transition: background .2s var(--ease-out), color .2s var(--ease-out);
+}
+.spec-verify { background: var(--blue); color: #fff; }
+.spec-verify::before { content: "↗"; font-size: .9em; }
+.spec-verify:hover { background: #1d4ed8; }
+.spec-read { background: var(--sky); color: var(--blue); }
+.spec-read:hover { background: #dbeafe; }
+
+/* ---- 工程 ---- */
+.lab-flow { list-style: none; counter-reset: f; margin: 1.8rem 0 1.6rem; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .8rem; }
+.lab-flow li {
+  counter-increment: f; position: relative; background: #fff;
+  border: 1px solid var(--line); border-radius: 12px; padding: 1.15rem 1.1rem 1rem 1.1rem;
+}
+.lab-flow li::before {
+  content: counter(f, decimal-leading-zero);
+  font-family: var(--en); font-size: .74rem; font-weight: 700; letter-spacing: .1em;
+  color: var(--blue); display: block; margin-bottom: .5rem;
+}
+.lab-flow b { display: block; font-size: .96rem; margin-bottom: .3rem; }
+.lab-flow span { display: block; font-size: .8rem; color: var(--muted); line-height: 1.85; }
+
+.lab-callout {
+  max-width: 56em;
+  background: var(--sky); border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0;
+  padding: 1.2rem 1.4rem; line-height: 2; font-size: .93rem;
+}
+
+/* ---- プロダクト ---- */
+.prod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 1.2rem; margin: 1.8rem 0 0; }
+.prod-card {
+  display: flex; flex-direction: column; background: #fff;
+  border: 1px solid var(--line); border-radius: 16px; padding: 1.7rem 1.7rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+}
+.prod-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.prod-tag {
+  align-self: flex-start; font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+  background: var(--sky); color: var(--blue); padding: .35em .9em; border-radius: 999px;
+  margin-bottom: .9rem;
+}
+.prod-card h3 { margin: 0 0 .25em; font-size: 1.18rem; }
+.prod-card .role { margin: 0 0 .9em; font-size: .82rem; color: var(--muted); }
+.prod-card > p { margin: 0 0 1.2em; line-height: 2; font-size: .93rem; }
+.prod-link {
+  margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: .5em;
+  font-weight: 700; font-size: .9rem; text-decoration: none; color: var(--blue);
+}
+.prod-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- 関連記事 ---- */
+.lab-links { display: grid; gap: .6rem; margin-top: 1.4rem; }
+.lab-links a {
+  display: block; background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  padding: 1rem 1.3rem; text-decoration: none; color: var(--ink); font-weight: 500;
+  transition: border-color .2s var(--ease-out), transform .2s var(--ease-out);
+}
+.lab-links a:hover { border-color: var(--blue); transform: translateX(4px); }
+
+/* ---- 最終CTA（このページ内では角を丸めて馴染ませる）---- */
+main.lab .cta-final { border-radius: 20px; margin: 0 0 3.4rem; }
+main.lab .cta-final h2 { color: #fff; }
+
+@media (max-width: 640px) {
+  .lab-stats b { font-size: 1.9rem; }
+  .spec-f { gap: .5rem; }
+}

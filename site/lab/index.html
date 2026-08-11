@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="stylesheet" href="/css/style.css?v=f3f778ae">
+<link rel="stylesheet" href="/css/style.css?v=39dca5f4">
 <script defer src="/js/site.js?v=85532eca"></script>
 </head>
 <body>
@@ -52,74 +52,127 @@
   </ol>
 </nav>
 
-<main class="article">
-<section class="hero">
-  <span class="kicker">Implementation Lab</span>
-  <h1>このサイト自体を、AIO対策の実験場にしています</h1>
-  <p class="lead">記事で解説していることを、自社サイトで実装して日次で計測しています。実装の中身と、何をどう測っているかを公開します。</p>
+<main class="lab">
+
+<section class="lab-hero">
+  <div class="lab-hero-inner">
+    <span class="lab-kicker">Implementation Lab</span>
+    <h1>解説していることを、<br>このサイトで実装しています。</h1>
+    <p class="lab-lead">AI検索に引用されるための実装を、自社サイトに入れて日次で計測しています。<strong>書いてあることが本当かどうかは、この場で確かめられます。</strong></p>
+    <div class="lab-stats">
+      <div><b>20</b><span>許可したAIクローラー</span></div>
+      <div><b>59</b><span>公開しているURL</span></div>
+      <div><b>131</b><span>計測中の検索語</span></div>
+      <div><b>19</b><span>公開前の自動検査</span></div>
+    </div>
+    <p class="lab-asof">2026年8月時点</p>
+  </div>
 </section>
 
-<p><strong>「やり方を解説する記事」は世の中に多くありますが、書いた本人が実装して計測しているとは限りません。</strong>当サイトは自社を題材にしているため、実装の中身と、その結果として何が起きたかを具体的に出せます。</p>
+<section class="lab-sec">
+  <h2>実装した項目と、その確認方法</h2>
+  <p class="lab-note">「やり方を解説する記事」は多くありますが、書いた本人が実装しているとは限りません。以下はすべて当サイトで動いており、右側のリンクから実物を見られます。</p>
 
-<p class="freshness">※ 2026年8月時点の実装内容です。</p>
+  <ul class="spec-list">
+    <li>
+      <div class="spec-h"><span class="spec-no">01</span><h3>AIクローラーの許可</h3></div>
+      <p>GPTBot・ClaudeBot・PerplexityBot・Applebot-Extended など<strong>20種</strong>を robots.txt に明示しています。<code>User-agent: *</code> で全許可でも動きますが、判定を相手任せにしないため個別に書いています。</p>
+      <div class="spec-f">
+        <a class="spec-verify" href="/robots.txt" target="_blank" rel="noopener">robots.txt を見る</a>
+        <a class="spec-read" href="/aio/aio-taisaku-guide/">解説記事</a>
+      </div>
+    </li>
+    <li>
+      <div class="spec-h"><span class="spec-no">02</span><h3>llms.txt の設置</h3></div>
+      <p>AI向けのサイト案内です。運営者情報と全記事を<strong>47件</strong>掲載しており、記事を公開するたびに自動で追記されます。</p>
+      <div class="spec-f">
+        <a class="spec-verify" href="/llms.txt" target="_blank" rel="noopener">llms.txt を見る</a>
+        <a class="spec-read" href="/aio/llmo-taisaku-hoho/">解説記事</a>
+      </div>
+    </li>
+    <li>
+      <div class="spec-h"><span class="spec-no">03</span><h3>構造化データ</h3></div>
+      <p>全記事に <code>BlogPosting</code> + <code>FAQPage</code> + <code>BreadcrumbList</code> を入れています。著者は「編集部」ではなく<strong>実在の個人</strong>で、発行者には<strong>法人番号</strong>を持たせ、同名の別法人と機械的に区別できるようにしています。</p>
+      <div class="spec-f">
+        <a class="spec-verify" href="https://search.google.com/test/rich-results?url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-taisaku-guide%2F" target="_blank" rel="noopener">リッチリザルトテストで確認</a>
+        <a class="spec-read" href="/author/haraguchi/">監修者</a>
+      </div>
+    </li>
+    <li>
+      <div class="spec-h"><span class="spec-no">04</span><h3>抽出しやすい本文構造</h3></div>
+      <p>冒頭200字の断言／各H2直下の1文結論／定義ブロック／比較テーブル／FAQ5問以上。AIが答えを切り出しやすい形を、全記事で守っています。</p>
+      <div class="spec-f">
+        <a class="spec-verify" href="/aio/aio-taisaku-guide/" target="_blank" rel="noopener">実例の記事を見る</a>
+        <a class="spec-read" href="/seo/ai-jidai-seo-taisaku/">解説記事</a>
+      </div>
+    </li>
+    <li>
+      <div class="spec-h"><span class="spec-no">05</span><h3>鮮度の明示</h3></div>
+      <p>本文の「◯年◯月時点」と、構造化データの <code>dateModified</code> を一致させています。AI検索は情報の新しさを重く見るため、更新のたびに両方を書き換えます。</p>
+      <div class="spec-f">
+        <a class="spec-verify" href="/feed.xml" target="_blank" rel="noopener">更新履歴（Atom）</a>
+        <a class="spec-read" href="/aio/aio-taisaku-guide/">解説記事</a>
+      </div>
+    </li>
+    <li>
+      <div class="spec-h"><span class="spec-no">06</span><h3>順位の日次計測</h3></div>
+      <p>Search Console の平均掲載順位を毎日記録し、<strong>11〜30位の記事を「あと少しで1ページ目」として自動抽出</strong>してリライト対象にしています。</p>
+      <div class="spec-f">
+        <a class="spec-verify" href="/site-audit/" target="_blank" rel="noopener">同じ観点の無料採点を試す</a>
+        <a class="spec-read" href="/seo/ai-jidai-seo-taisaku/">解説記事</a>
+      </div>
+    </li>
+  </ul>
+</section>
 
-<h2>いま実装しているもの</h2>
+<section class="lab-sec lab-flow-sec">
+  <h2>記事が公開されるまで</h2>
+  <p class="lab-note">キーワードの選定から公開後のインデックス通知まで、順番に自動で流れます。人が判断するのは、品質の最終確認と事業の方向づけだけです。</p>
 
-<p>AI検索に引用されるために必要とされる項目を、実際に入れています。記事で解説している内容と一対一で対応します。</p>
+  <ol class="lab-flow">
+    <li><b>KW選定</b><span>台帳から次の1件を取り出す</span></li>
+    <li><b>一次情報</b><span>関連動画の文字起こしを取得</span></li>
+    <li><b>構成設計</b><span>上位記事のH2を分析して骨子を作る</span></li>
+    <li><b>執筆</b><span>自社の事実を織り込む</span></li>
+    <li><b>品質審査</b><span>19項目を機械採点。1つでも欠ければ止まる</span></li>
+    <li><b>画像生成</b><span>アイキャッチと図解</span></li>
+    <li><b>公開</b><span>重複・領域違反があれば入口で拒否</span></li>
+    <li><b>通知と計測</b><span>インデックス登録と順位記録</span></li>
+  </ol>
 
-<table>
-  <thead><tr><th>実装項目</th><th>中身</th><th>解説記事</th></tr></thead>
-  <tbody>
-    <tr><td>AIクローラーの許可</td><td>GPTBot・ClaudeBot・PerplexityBot など20種を robots.txt に明示</td><td><a href="/aio/aio-taisaku-guide/">AIO対策とは</a></td></tr>
-    <tr><td>llms.txt</td><td>AI向けのサイト案内。公開記事を自動で追記</td><td><a href="/aio/llmo-taisaku-hoho/">LLMO対策とは</a></td></tr>
-    <tr><td>構造化データ</td><td>BlogPosting／FAQPage／BreadcrumbList を全記事に。著者は実在の個人＋法人番号</td><td><a href="/aio/aio-taisaku-guide/">AIO対策とは</a></td></tr>
-    <tr><td>抽出しやすい構造</td><td>冒頭200字の断言／H2直下の1文結論／定義ブロック／比較表／FAQ5問以上</td><td><a href="/seo/ai-jidai-seo-taisaku/">AI時代のSEO対策</a></td></tr>
-    <tr><td>鮮度の明示</td><td>「◯年◯月時点」の表記と dateModified を一致させる</td><td><a href="/aio/aio-taisaku-guide/">AIO対策とは</a></td></tr>
-    <tr><td>順位の計測</td><td>Search Console の平均掲載順位を日次で記録し、11〜30位を改善対象として抽出</td><td><a href="/seo/ai-jidai-seo-taisaku/">AI時代のSEO対策</a></td></tr>
-  </tbody>
-</table>
+  <div class="lab-callout">
+    <b>止まる条件:</b> 文字数・強調の数・FAQ件数・内部リンク・本文とSchemaの一致など<strong>19項目のいずれかが欠けたとき</strong>。加えて、既存記事とタイトルや見出しが似すぎている場合も公開されません。
+  </div>
+</section>
 
-<h2>公開までの工程を自動化しています</h2>
+<section class="lab-sec">
+  <h2>効果をどう見ているか</h2>
+  <p><strong>AIO対策の効果は、順位・表示回数・クリックを分けて見ないと判断を誤ります。</strong>実装の効果はまず表示回数に現れ、順位が上がってからクリックが伸びます。合計だけを見ていると、動いているのに止まって見えます。</p>
+  <p>AI検索に引用されるには、まず検索で上位に入ることが前提です。当サイトでは、順位を上げる工程と、引用されやすい構造を整える工程を同時に回しています。</p>
+</section>
 
-<p>キーワードの選定から公開後のインデックス通知まで、人が手を動かす工程を減らしています。人が判断するのは、品質の最終確認と事業の方向づけだけです。</p>
+<section class="lab-sec">
+  <h2>自社で開発・運用しているプロダクト</h2>
+  <p class="lab-note">ここで解説している内容は、実際に自社で作って動かしているものが元になっています。</p>
 
-<div class="callout">
-  <b>工程:</b> キーワード選定 → 一次情報の収集 → 構成設計 → 執筆 → 品質審査 → 画像生成 → 公開 → インデックス通知 → 順位計測 → リライト
-</div>
+  <div class="prod-grid">
+    <article class="prod-card">
+      <span class="prod-tag">AIO運用</span>
+      <h3>AIO対策エージェント</h3>
+      <p class="role">オウンドメディア ＋ 記事を出し続けるAIエージェント</p>
+      <p>キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計までを自動で回します。<strong>このサイト自体が、その稼働例</strong>です。</p>
+      <a class="prod-link" href="https://corp.7senses.co.jp/aio-agent" target="_blank" rel="noopener" data-cta="lab_aio_agent">詳細を見る<span class="arw">→</span></a>
+    </article>
 
-<p>品質は機械で判定しています。文字数・強調の数・FAQの件数・内部リンク・本文とSchemaの一致など<strong>19項目を自動で採点し、1項目でも欠ければ公開されません</strong>。加えて、既存記事とタイトルや見出しが似すぎている場合も、公開の手前で止まります。</p>
-
-<h2>効果をどう見ているか</h2>
-
-<p><strong>AIO対策の効果は、順位・表示回数・クリックを分けて見ないと判断を誤ります。</strong>実装の効果はまず表示回数に現れ、順位が上がってからクリックが伸びます。合計だけを見ていると、動いているのに止まって見えます。</p>
-
-<p>当サイトでは、Search Console の平均掲載順位を日次で記録し、この3つを別々に追っています。11〜30位にある記事は「あと少しで1ページ目」として自動で抽出し、改善の対象にしています。</p>
-
-<div class="callout">
-  <b>見ている指標:</b> 検索語ごとの平均掲載順位／表示回数／クリック／CTR。7日前との差分を取り、上下した記事を特定します。
-</div>
-
-<p>AI検索に引用されるには、まず検索で上位に入ることが前提になります。順位を上げる工程と、引用されやすい構造を整える工程を、同時に回しています。</p>
-
-<h2>自社で開発・運用しているプロダクト</h2>
-
-<p>このサイトで解説している内容は、実際に自社で作って動かしているものが元になっています。同じ仕組みを導入したい方は、コーポレートサイトに詳細があります。</p>
-
-<div class="card-grid prod-grid">
-  <article class="prod-card">
-    <h3>AIO対策エージェント</h3>
-    <p class="role">オウンドメディア＋記事を出し続けるAIエージェント</p>
-    <p>キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計までを自動で回します。<strong>このサイト自体が、その稼働例</strong>です。</p>
-    <p><a href="https://corp.7senses.co.jp/aio-agent" target="_blank" rel="noopener" data-cta="lab_aio_agent">詳細を見る（コーポレートサイト） →</a></p>
-  </article>
-
-  <article class="prod-card">
-    <h3>ラクシフトAI</h3>
-    <p class="role">AIシフト自動作成クラウド</p>
-    <p>営業時間と必要人数を登録すると、<strong>数理最適化AIが労働基準法を守ったシフトを数十秒で組みます</strong>。飲食店・小売店・医療介護施設・シフト制オフィス向け。月額3,380円（税込）・初期費用0円。</p>
-    <p><a href="https://corp.7senses.co.jp/rakushift" target="_blank" rel="noopener" data-cta="lab_rakushift">詳細を見る（コーポレートサイト） →</a></p>
-  </article>
-</div>
+    <article class="prod-card">
+      <span class="prod-tag">シフト管理</span>
+      <h3>ラクシフトAI</h3>
+      <p class="role">AIシフト自動作成クラウド</p>
+      <p>営業時間と必要人数を登録すると、<strong>数理最適化AIが労働基準法を守ったシフトを数十秒で組みます</strong>。飲食店・小売店・医療介護施設向け。月額3,380円（税込）・初期費用0円。</p>
+      <a class="prod-link" href="https://corp.7senses.co.jp/rakushift" target="_blank" rel="noopener" data-cta="lab_rakushift">詳細を見る<span class="arw">→</span></a>
+    </article>
+  </div>
+</section>
 
 <section class="cta-final" data-area="CTA" data-area-id="lab-cta">
   <h2>同じ仕組みを、自社サイトでも。</h2>
@@ -128,15 +181,18 @@
   <p class="note">運営: セブンセンシズ株式会社（法人番号 3120001227825）</p>
 </section>
 
-<h2>関連する解説記事</h2>
-<ul>
-  <li><a href="/aio/aio-taisaku-guide/">AIO対策とは？AI検索に引用される5つの手順</a></li>
-  <li><a href="/aio/llmo-taisaku-hoho/">LLMO対策とは？ChatGPTに引用される7つの方法</a></li>
-  <li><a href="/seo/ai-jidai-seo-taisaku/">AI時代のSEO対策とは？中小企業がやるべき5つの基本</a></li>
-  <li><a href="/ai-marketing/ai-shukyaku-guide/">AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像</a></li>
-</ul>
+<section class="lab-sec">
+  <h2>関連する解説記事</h2>
+  <div class="lab-links">
+    <a href="/aio/aio-taisaku-guide/">AIO対策とは？AI検索に引用される5つの手順</a>
+    <a href="/aio/llmo-taisaku-hoho/">LLMO対策とは？ChatGPTに引用される7つの方法</a>
+    <a href="/seo/ai-jidai-seo-taisaku/">AI時代のSEO対策とは？中小企業がやるべき5つの基本</a>
+    <a href="/ai-marketing/ai-shukyaku-guide/">AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像</a>
+  </div>
+</section>
 
 </main>
+
 <footer class="site-footer">
   <div class="inner">
     <div>
