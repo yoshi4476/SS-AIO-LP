@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="実装ラボ｜このサイト自体をAIO対策の実験場にしています">
-<meta property="og:description" content="解説していることを、自社サイトで実装して計測しています。中身と結果を公開します。">
+<meta property="og:description" content="解説していることを、自社サイトで実装して計測しています。実装の中身を公開します。">
 <meta property="og:url" content="https://ai.7senses.co.jp/lab/">
 <meta property="og:image" content="https://ai.7senses.co.jp/images/ogp-default.png">
 <meta property="og:site_name" content="AI集客ラボ">
@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="stylesheet" href="/css/style.css?v=4c3055ea">
+<link rel="stylesheet" href="/css/style.css?v=f3f778ae">
 <script defer src="/js/site.js?v=85532eca"></script>
 </head>
 <body>
@@ -56,7 +56,7 @@
 <section class="hero">
   <span class="kicker">Implementation Lab</span>
   <h1>このサイト自体を、AIO対策の実験場にしています</h1>
-  <p class="lead">記事で解説していることを、自社サイトで実装して日次で計測しています。うまくいったことも、まだ結果が出ていないことも、そのまま公開します。</p>
+  <p class="lead">記事で解説していることを、自社サイトで実装して日次で計測しています。実装の中身と、何をどう測っているかを公開します。</p>
 </section>
 
 <p><strong>「やり方を解説する記事」は世の中に多くありますが、書いた本人が実装して計測しているとは限りません。</strong>当サイトは自社を題材にしているため、実装の中身と、その結果として何が起きたかを具体的に出せます。</p>
@@ -89,22 +89,42 @@
 
 <p>品質は機械で判定しています。文字数・強調の数・FAQの件数・内部リンク・本文とSchemaの一致など<strong>19項目を自動で採点し、1項目でも欠ければ公開されません</strong>。加えて、既存記事とタイトルや見出しが似すぎている場合も、公開の手前で止まります。</p>
 
-<h2>まだ結果が出ていないこと</h2>
+<h2>効果をどう見ているか</h2>
 
-<p>正直に書きます。<strong>実装は済んでいますが、順位はこれからです。</strong></p>
+<p><strong>AIO対策の効果は、順位・表示回数・クリックを分けて見ないと判断を誤ります。</strong>実装の効果はまず表示回数に現れ、順位が上がってからクリックが伸びます。合計だけを見ていると、動いているのに止まって見えます。</p>
 
-<p>サイトの運用を始めたのは2026年7月末で、まだ2週間ほどです。この期間で検索に表示される語は増えていますが、上位表示に届いているものはわずかです。AI検索に引用されるには、まず検索で上位に入ることが前提になります。</p>
+<p>当サイトでは、Search Console の平均掲載順位を日次で記録し、この3つを別々に追っています。11〜30位にある記事は「あと少しで1ページ目」として自動で抽出し、改善の対象にしています。</p>
 
-<p>そのため当サイトでは、<strong>順位・表示回数・クリックを分けて記録し、どの順序で動くかを確かめています</strong>。実装の効果は表示回数から先に現れ、クリックはそのあとに続きます。この過程も記事にしていきます。</p>
+<div class="callout">
+  <b>見ている指標:</b> 検索語ごとの平均掲載順位／表示回数／クリック／CTR。7日前との差分を取り、上下した記事を特定します。
+</div>
 
-<h2>同じ仕組みを導入したい方へ</h2>
+<p>AI検索に引用されるには、まず検索で上位に入ることが前提になります。順位を上げる工程と、引用されやすい構造を整える工程を、同時に回しています。</p>
 
-<p>ここで解説している仕組みは、<strong>オウンドメディアの器と、記事を書いて出し続けるAIエージェントをセットにした形</strong>で提供しています。キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計まで、毎日自動で動きます。</p>
+<h2>自社で開発・運用しているプロダクト</h2>
+
+<p>このサイトで解説している内容は、実際に自社で作って動かしているものが元になっています。同じ仕組みを導入したい方は、コーポレートサイトに詳細があります。</p>
+
+<div class="card-grid prod-grid">
+  <article class="prod-card">
+    <h3>AIO対策エージェント</h3>
+    <p class="role">オウンドメディア＋記事を出し続けるAIエージェント</p>
+    <p>キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計までを自動で回します。<strong>このサイト自体が、その稼働例</strong>です。</p>
+    <p><a href="https://corp.7senses.co.jp/aio-agent" target="_blank" rel="noopener" data-cta="lab_aio_agent">詳細を見る（コーポレートサイト） →</a></p>
+  </article>
+
+  <article class="prod-card">
+    <h3>ラクシフトAI</h3>
+    <p class="role">AIシフト自動作成クラウド</p>
+    <p>営業時間と必要人数を登録すると、<strong>数理最適化AIが労働基準法を守ったシフトを数十秒で組みます</strong>。飲食店・小売店・医療介護施設・シフト制オフィス向け。月額3,380円（税込）・初期費用0円。</p>
+    <p><a href="https://corp.7senses.co.jp/rakushift" target="_blank" rel="noopener" data-cta="lab_rakushift">詳細を見る（コーポレートサイト） →</a></p>
+  </article>
+</div>
 
 <section class="cta-final" data-area="CTA" data-area-id="lab-cta">
   <h2>同じ仕組みを、自社サイトでも。</h2>
   <p>オウンドメディアの器と、記事を書いて出し続けるAIエージェントをセットで提供しています。ここで公開している実装が、そのまま入ります。</p>
-  <a class="btn btn-primary" href="https://corp.7senses.co.jp/aio-agent" target="_blank" rel="noopener" data-cta="lab_aio_agent">AIO対策エージェントの詳細を見る <span class="arw">→</span></a>
+  <a class="btn btn-primary" href="https://corp.7senses.co.jp/aio-agent" target="_blank" rel="noopener" data-cta="lab_cta_agent">AIO対策エージェントの詳細を見る <span class="arw">→</span></a>
   <p class="note">運営: セブンセンシズ株式会社（法人番号 3120001227825）</p>
 </section>
 

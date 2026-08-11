@@ -1181,3 +1181,14 @@ main.article .cta-final h2 {
   margin: 0 0 1rem; color: #fff;
 }
 main.article .cta-final { border-radius: 18px; margin: 2.6em 0; }
+
+/* 自社プロダクトの紹介カード（実装ラボ）。既存の .card-grid に載せる */
+.prod-grid { margin: 1.6em 0 2.4em; }
+.prod-card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.7rem 1.6rem 1.4rem; box-shadow: var(--shadow-sm);
+}
+.prod-card h3 { margin: 0 0 .2em; font-size: 1.12rem; }
+.prod-card .role { margin: 0 0 .8em; font-size: .84rem; color: var(--muted); }
+.prod-card p { margin: 0 0 .9em; line-height: 1.95; }
+.prod-card p:last-child { margin: 0; }
