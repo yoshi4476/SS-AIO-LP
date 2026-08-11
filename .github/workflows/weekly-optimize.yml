@@ -128,7 +128,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           for i in 1 2 3; do
-            npx --yes wrangler@4 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
+            npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
             echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
             sleep 40
           done

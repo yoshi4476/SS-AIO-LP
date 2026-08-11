@@ -295,6 +295,25 @@ def check_tokens(todo):
                         "（python scripts/refresh_tokens.py で更新する）")
 
 
+def check_deploy(todo):
+    """本番が手元のビルドと一致しているか。
+
+    ワークフローが成功していてもデプロイだけ落ちることがある。
+    実際、wrangler の依存の公開遅れでデプロイが3回とも失敗し、
+    記事はコミット済みなのに本番が数日古いままだった。
+    """
+    print("\n■ 本番への反映")
+    r = subprocess.run([PY, "scripts/deploy_check.py"], cwd=ROOT,
+                       capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    out = (r.stdout or "")
+    for line in out.splitlines():
+        if line.strip() and "DEPLOY_OK" not in line:
+            print(f"  {line.strip()}")
+    if "DEPLOY_OK=no" in out:
+        todo.append("TODO: 本番が手元のビルドより古い。Deployワークフローを実行して反映する"
+                    "（python scripts/deploy_check.py で差分を確認）")
+
+
 def main():
     fix_kw = "--fix-kw" in sys.argv
     todo = []
@@ -308,6 +327,7 @@ def main():
     check_supply(todo, fix=fix_kw)
     check_scaled_risk(todo)
     check_tokens(todo)
+    check_deploy(todo)
 
     print("\n===== 結果 =====")
     if not todo:

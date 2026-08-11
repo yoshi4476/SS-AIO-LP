@@ -156,7 +156,7 @@ jobs:
         run: |
           # Cloudflare APIは稀に522（一時的な接続タイムアウト）を返す。瞬断でrunを落とさないため再試行する
           for i in 1 2 3; do
-            npx --yes wrangler@4 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
+            npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
             echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
             sleep 40
           done
