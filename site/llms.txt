@@ -57,3 +57,4 @@
 - [資料請求を増やす方法とは？6つの施策と見直す順序](https://ai.7senses.co.jp/ai-marketing/shiryoseikyu-fuyasu-hoho/): フォーム改善からフォロー体制まで、資料請求を増やす6つの施策と着手順を解説
 - [OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/): 国交省調査データをもとに、紹介の仕組みを作る5つの施策と景品表示法・宅建業法の注意点を解説
 - [AIO診断とは？AI検索対応度がわかる8つの視点](https://ai.7senses.co.jp/aio/aio-shindan-yarikata/): AIO診断とは、自社サイトがAI検索にどれだけ引用されやすいかを確認する作業です。クローラー許可や構造化データなど8つの視点と、自分でできる診断手順を解説します。
+- [AIかんたん集客とは？専門知識ゼロで始める5つの方法](https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/): 専門知識がなくても使えるAIツールで問い合わせや来店につなげる、AIかんたん集客の落とし穴と始め方5ステップを解説します。
