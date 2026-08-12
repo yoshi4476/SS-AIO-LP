@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-12T00:00:00+09:00</updated>
+  <updated>2026-08-13T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>AIO対策なのに表示されない8つの原因と対処法</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/</id>
+    <updated>2026-08-13T00:00:00+09:00</updated>
+    <summary>AIO対策をしてもAI Overviewに表示されない・引用されない原因は、症状によって異なります。8つの原因と自分でできる診断手順、優先順位付きの対処法を解説します。</summary>
+  </entry>
   <entry>
     <title>AI検索とは？AIO対策との違いと5種類の対応ポイント</title>
     <link href="https://ai.7senses.co.jp/aio/aio-taisaku-ai-kensaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/saas-shimei-kensaku-fuyashikata/</id>
     <updated>2026-08-04T00:00:00+09:00</updated>
     <summary>SaaS指名検索の増やし方とは、接触回数を積み重ねて認知を蓄積し、AI引用の構造を整えてサービス名で検索される状態を作ることです。BtoB購買データと5つの施策を解説します。</summary>
-  </entry>
-  <entry>
-    <title>展示会後フォローで商談化率を上げる5つの施策</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/tenjikaigo-follow-hoho/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/tenjikaigo-follow-hoho/</id>
-    <updated>2026-08-04T00:00:00+09:00</updated>
-    <summary>展示会後フォローとは、獲得した名刺情報をもとに優先順位をつけて商談化を目指す連絡活動です。商談化率のデータと5つの施策、着手の順番を解説します。</summary>
   </entry>
 </feed>

@@ -59,3 +59,5 @@
 - [AIO診断とは？AI検索対応度がわかる8つの視点](https://ai.7senses.co.jp/aio/aio-shindan-yarikata/): AIO診断とは、自社サイトがAI検索にどれだけ引用されやすいかを確認する作業です。クローラー許可や構造化データなど8つの視点と、自分でできる診断手順を解説します。
 - [AIかんたん集客とは？専門知識ゼロで始める5つの方法](https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/): 専門知識がなくても使えるAIツールで問い合わせや来店につなげる、AIかんたん集客の落とし穴と始め方5ステップを解説します。
 - [AIO対策の注意点とは？始める前に知る7つの落とし穴](https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/): 検索順位を無視した構造化・クローラーの誤ブロックなど、AIO対策で成果につながらない7つの落とし穴と対処法を解説します。
+- [AI検索とは？AIO対策との違いと5種類の対応ポイント](https://ai.7senses.co.jp/aio/aio-taisaku-ai-kensaku/): AI検索とAIO対策の関係と、プラットフォーム別に対策を使い分ける5つのポイントを解説します。
+- [AIO対策なのに表示されない8つの原因と対処法](https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/): AIO対策をしても表示されない・引用されない原因を8つ整理し、自分でできる診断手順と対処法を解説します。
