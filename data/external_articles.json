@@ -1,7 +1,82 @@
 {
-  "fetched": "2026-08-05",
+  "fetched": "2026-08-13",
   "sites": {
     "corporate": [
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-donyu-jirei",
+        "slug": "keiri-outsourcing-donyu-jirei",
+        "title": "経理アウトソーシング導入事例｜3パターンで見る選び方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-hikitsugi",
+        "slug": "keiri-gaichuu-hikitsugi",
+        "title": "経理外注の引き継ぎ｜必要資料と失敗しない5ステップ【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-daiko-security",
+        "slug": "keiri-daiko-security",
+        "title": "経理代行のセキュリティ｜契約前に確認すべき5つのポイント"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-bpo-haken-chigai",
+        "slug": "keiri-bpo-haken-chigai",
+        "title": "経理BPOと人材派遣の違い5つ｜費用・契約形態を比較"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-marunage-dekiru-hani",
+        "slug": "keiri-marunage-dekiru-hani",
+        "title": "経理の丸投げできる範囲とできない範囲｜残す業務4つ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
+        "slug": "keiri-daiko-kojin-jigyonushi",
+        "title": "経理代行は個人事業主でも使える？費用相場と選び方3つの軸"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-bpo-donyu-nagare",
+        "slug": "keiri-bpo-donyu-nagare",
+        "title": "経理BPO導入の流れ｜6ステップと期間の目安【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-demerit",
+        "slug": "keiri-outsourcing-demerit",
+        "title": "経理アウトソーシングのデメリット6つ｜失敗しない対策も解説"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-daiko-erabikata",
+        "slug": "keiri-daiko-erabikata",
+        "title": "経理代行の選び方5選｜比較軸と契約前チェックリスト"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-hitode-busoku-taisaku",
+        "slug": "keiri-hitode-busoku-taisaku",
+        "title": "経理の人手不足対策8つ｜原因とすぐできる対応を解説"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/backoffice-outsourcing-merit",
+        "slug": "backoffice-outsourcing-merit",
+        "title": "バックオフィスアウトソーシングの5つのメリット【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba",
+        "slug": "kichodaiko-hiyou-souba",
+        "title": "記帳代行の費用相場｜依頼先別の料金と抑える4つのコツ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-handan-kijun",
+        "slug": "keiri-gaichuu-handan-kijun",
+        "title": "経理外注の判断基準5つ｜自社に向いているかのチェックリスト"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-zokujinka-kaisho",
+        "slug": "keiri-zokujinka-kaisho",
+        "title": "経理の属人化を解消する5つの方法｜原因とリスクも解説"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba",
+        "slug": "keiri-outsourcing-hiyou-souba",
+        "title": "経理アウトソーシングの費用相場【2026年】内訳と抑え方"
+      },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha",
         "slug": "keiri-bpo-toha",
@@ -33,6 +108,86 @@
         "url": "https://lp.7senses.co.jp/blog/category/hojokin/",
         "slug": "hojokin",
         "title": "カテゴリ: 補助金の記事一覧"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/",
+        "slug": "jizokuka-hojokin-kojinjigyonushi-saitakuritsu",
+        "title": "小規模事業者持続化補助金｜個人事業主の採択率47.2%と対策"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kyufukin-shinsei/",
+        "slug": "kojinjigyonushi-kyufukin-shinsei",
+        "title": "個人事業主の給付金・補助金｜申請方法と使える4つの制度"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+        "slug": "it-hojokin-kojinjigyonushi-kaikeisoft",
+        "title": "IT導入補助金の会計ソフト｜個人事業主が使える2つの枠と補助率"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-pc/",
+        "slug": "it-hojokin-kojinjigyonushi-pc",
+        "title": "IT導入補助金のパソコン購入｜個人事業主の条件と上限10万円"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-biyoushitsu/",
+        "slug": "it-hojokin-biyoushitsu",
+        "title": "美容室のIT導入補助金｜対象ツール3分野と対象外の注意点"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-unsougyou/",
+        "slug": "it-hojokin-unsougyou",
+        "title": "IT導入補助金は運送業も対象？2024年問題に効く対象ツール3分野"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-ai-hojokin/",
+        "slug": "kojin-jigyonushi-ai-hojokin",
+        "title": "個人事業主のAI導入補助金｜開業1年未満は対象外？条件を解説"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/seicho-kasokuka-hojokin-schedule/",
+        "slug": "seicho-kasokuka-hojokin-schedule",
+        "title": "中小企業成長加速化補助金｜1次2次の実績とスケジュール"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/",
+        "slug": "ai-hojokin-ikura-moraeru",
+        "title": "AI導入補助金はいくらもらえる？3つの枠の上限額と計算例"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-chusho-teigi/",
+        "slug": "it-hojokin-chusho-teigi",
+        "title": "IT導入補助金の中小企業とは？業種別4区分の資本金・従業員数"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/",
+        "slug": "ai-hojokin-shinsei-yarikata",
+        "title": "AI導入補助金の申請のやり方｜受給までの5ステップを解説"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool/",
+        "slug": "ai-hojokin-taisho-tool",
+        "title": "AI導入補助金の対象ツール6分野｜対象外との見分け方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-clinic-katsuyou/",
+        "slug": "ai-hojokin-clinic-katsuyou",
+        "title": "AI導入補助金はクリニックも対象？電子カルテ3分野の補助額"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kensetsugyou-katsuyou/",
+        "slug": "ai-hojokin-kensetsugyou-katsuyou",
+        "title": "AI導入補助金は建設業も対象？ツール3分野と2024年問題対策"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-chatbot-donyu/",
+        "slug": "ai-hojokin-chatbot-donyu",
+        "title": "補助金でAIチャットボット導入｜対象条件と申請の流れ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-inshokuten-katsuyou/",
+        "slug": "ai-hojokin-inshokuten-katsuyou",
+        "title": "AI導入補助金は飲食店でも使える？対象ツール3分野とハード対応"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-ai-katsuyo-jirei/",
