@@ -61,3 +61,4 @@
 - [AIO対策の注意点とは？始める前に知る7つの落とし穴](https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/): 検索順位を無視した構造化・クローラーの誤ブロックなど、AIO対策で成果につながらない7つの落とし穴と対処法を解説します。
 - [AI検索とは？AIO対策との違いと5種類の対応ポイント](https://ai.7senses.co.jp/aio/aio-taisaku-ai-kensaku/): AI検索とAIO対策の関係と、プラットフォーム別に対策を使い分ける5つのポイントを解説します。
 - [AIO対策なのに表示されない8つの原因と対処法](https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/): AIO対策をしても表示されない・引用されない原因を8つ整理し、自分でできる診断手順と対処法を解説します。
+- [美容室の集客方法｜新規とリピートを両立する6つの取り組み](https://ai.7senses.co.jp/ai-marketing/biyoushitsu-shukyaku-houhou/): 美容室の集客方法は、Googleマップ・口コミ・Instagramでの新規接点づくりとリピート化を両輪で進めることが要点です。6つの取り組みと値引き広告の注意点を解説します。
