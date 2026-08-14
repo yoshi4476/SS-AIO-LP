@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-14T00:00:00+09:00</updated>
+  <updated>2026-08-15T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>クリニックの集客事例5選｜成功パターンと始め方</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-jirei/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-jirei/</id>
+    <updated>2026-08-15T00:00:00+09:00</updated>
+    <summary>クリニックの集客事例は、MEO・SEO・AI検索・口コミ・予約導線の5パターンに整理できます。通算3,200店舗以上を支援してきた実務経験から、各パターンの仕組みと始め方を解説します。</summary>
+  </entry>
   <entry>
     <title>AIO対策は自分でできる？無料で始める5つの手順と3つの限界</title>
     <link href="https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/ai-marketing/reform-shukyaku-hoho/</id>
     <updated>2026-08-06T00:00:00+09:00</updated>
     <summary>リフォームの集客方法とは、ポータルサイト・自社サイト・紹介など複数チャネルを組み合わせて反響を生む仕組みです。訪問販売トラブルで業界不信が根強い中、信頼を築きながら反響を増やす6つの施策と始め方を実務目線で解説します。</summary>
-  </entry>
-  <entry>
-    <title>施工事例の書き方｜反響が増える7つの要素とNG例</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/</id>
-    <updated>2026-08-06T00:00:00+09:00</updated>
-    <summary>施工事例の書き方とは、間取り・予算・工期の数値と施主の要望を型に沿って書くことです。工務店・リフォーム会社・不動産仲介向けに、反響が増える7つの構成要素、書く5つのステップ、NG例とOK例、AI検索時代のポイントまで解説します。</summary>
   </entry>
 </feed>
