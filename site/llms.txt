@@ -63,3 +63,4 @@
 - [AIO対策なのに表示されない8つの原因と対処法](https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/): AIO対策をしても表示されない・引用されない原因を8つ整理し、自分でできる診断手順と対処法を解説します。
 - [美容室の集客方法｜新規とリピートを両立する6つの取り組み](https://ai.7senses.co.jp/ai-marketing/biyoushitsu-shukyaku-houhou/): 美容室の集客方法は、Googleマップ・口コミ・Instagramでの新規接点づくりとリピート化を両輪で進めることが要点です。6つの取り組みと値引き広告の注意点を解説します。
 - [AIO対策は自分でできる？無料で始める5つの手順と3つの限界](https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/): AIO対策は基礎の8割を自分で対応できますが一次情報収集と計測分析には限界があります。無料でできる5つの手順とプロに任せるべき境界を解説します。
+- [クリニックSEOとは？順位が上がる5つの施策](https://ai.7senses.co.jp/seo/clinic-seo-taisaku/): 地域名なしの一般検索で上位表示を狙うクリニックSEOを、MEO・AIOとの違い、YMYL基準、順位を左右する5つの施策から解説します。
