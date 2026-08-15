@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-15T00:00:00+09:00</updated>
+  <updated>2026-08-16T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>クリニックの集客集患サポートとは？3つの型と選び方</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-shukan-support/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-shukan-support/</id>
+    <updated>2026-08-16T00:00:00+09:00</updated>
+    <summary>クリニックの集客集患サポートは、フルサポート型・部分サポート型・伴走型の3つに分かれます。内製と外部化の判断基準、費用相場、失敗しない選び方を実務経験から解説します。</summary>
+  </entry>
   <entry>
     <title>クリニック集客コンサルの選び方5つの基準｜費用相場</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-consaru-erabikata/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/</id>
     <updated>2026-08-08T00:00:00+09:00</updated>
     <summary>士業のSEO対策とは、専門分野の情報発信で見込み客に見つかり選ばれる仕組みづくりです。弁護士・税理士・社労士など士業の集客で失敗しやすい原因と、成功させる5つの施策を実務目線で解説します。</summary>
-  </entry>
-  <entry>
-    <title>住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/jutaku-instagram-renkei/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/jutaku-instagram-renkei/</id>
-    <updated>2026-08-07T00:00:00+09:00</updated>
-    <summary>住宅会社のInstagram連携とは、投稿の埋め込み・プロフィールリンク・GBPを組み合わせ施主候補との接点を増やす施策です。検討者の68%がInstagramで情報収集する調査をもとに、サイト・MEOに繋ぐ4つの方法と注意点を解説します。</summary>
   </entry>
 </feed>
