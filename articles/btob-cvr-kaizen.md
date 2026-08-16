@@ -92,6 +92,8 @@ CVRが伸び悩む企業に共通するのは、フォームの離脱・内容�
 
 CVR改善の主な施策は、フォーム最適化・LP構成の見直し・証拠情報の追加など5つに整理できます。
 
+資料請求という着地点そのものを増やす施策は、[資料請求を増やす方法とは？6つの施策と見直す順序](/ai-marketing/shiryoseikyu-fuyasu-hoho/)にまとめています。
+
 <a href="https://www.formstack.com/blog/form-conversion-tips" target="_blank" rel="noopener">Formstack社が紹介する調査</a>では、**フォームから項目を1つ減らすだけでコンバージョンが50%増加した**事例が報告されています。項目数を絞るほど入力の心理的な負担が下がるためです。
 
 | 施策 | 具体的な内容 | 効果が出るまで |

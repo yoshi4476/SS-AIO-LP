@@ -94,6 +94,8 @@ BtoB SEOの失敗は、内容の抽象度・更新頻度・比較情報の不足
 
 成功の土台は、KW選定・比較コンテンツ・専門コラム・E-E-A-Tの明示・商談前フォローという5つの施策の組み合わせ。
 
+一般キーワードでの露出が積み上がったあとは、[SaaS指名検索の増やし方｜AI時代に効く5つの施策](/aio/saas-shimei-kensaku-fuyashikata/)で指名検索を伸ばす段階に進みます。
+
 <figure><img src="/images/btob-seo-taisaku/steps.png" alt="BtoB SEOを成功させる5つの施策: KW選定で購買プロセス別に検索語を洗い出す、比較コンテンツを整備し導入事例・比較表を用意する、専門コラムを継続発信する、E-E-A-Tを明示し実績・監修者・数値を明記する、商談前フォローの導線を設計する" loading="lazy"><figcaption>BtoB SEOを成功させる5つの施策</figcaption></figure>
 
 ### 施策1: 購買プロセス別に検索語を洗い出す

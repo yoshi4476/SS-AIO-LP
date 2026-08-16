@@ -103,6 +103,8 @@ faq:
 
 施工事例は、取材設計から公開・許諾確認までの5ステップで進めると抜け漏れなく仕上がります。
 
+施工事例をAI検索に拾わせる書き方は、[不動産のAI検索対策｜AI Overviewで選ばれる4つの実践](/aio/fudousan-ai-kensaku-taisaku/)でも扱っています。
+
 <figure><img src="/images/shiko-jirei-kakikata/steps.png" alt="施工事例を書く5つのステップ: 質問リストを事前に準備する取材設計、写真撮影と施主へのヒアリングを行う現地取材、型に沿って骨子を作る構成整理、数値と発言を正確に書く執筆・校正、施主の確認を得て公開する公開・許諾確認" loading="lazy"><figcaption>施工事例を書く5つのステップ</figcaption></figure>
 
 ### ステップ1: 取材設計で質問リストを準備する

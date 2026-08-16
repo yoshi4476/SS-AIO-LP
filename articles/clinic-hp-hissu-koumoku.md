@@ -86,6 +86,8 @@ faq:
 
 必須項目は、基本情報・診療内容・医師紹介・予約導線・料金目安・表現の適正化という6つに整理できます。
 
+掲載項目を整えたあとに取り組むAI検索対策は、[クリニックのAIO対策｜AI検索で患者に選ばれる5ステップ](/aio/clinic-ai-kensaku-taisaku/)で解説しています。
+
 <figure><img src="/images/clinic-hp-hissu-koumoku/koumoku.png" alt="クリニックのホームページに必須の6つの項目: 基本情報とアクセス、診療科目・対応疾患、医師・スタッフ紹介、初診の流れ・予約導線、自由診療の料金目安、医療広告ガイドライン準拠の表現" loading="lazy"><figcaption>クリニックのホームページに必須の6つの項目</figcaption></figure>
 
 ### 項目1: 基本情報とアクセス

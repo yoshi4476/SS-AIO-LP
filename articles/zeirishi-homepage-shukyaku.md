@@ -84,6 +84,8 @@ faq:
 
 成功の土台は、SEO・MEO・AIOの3施策と、専門コラムの継続発信、そして問い合わせ導線の整備の組み合わせです。
 
+士業全体に共通する広告規程の中での発信方法は、[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)で整理しています。
+
 <figure><img src="/images/zeirishi-homepage-shukyaku/steps.png" alt="税理士のホームページ集客を成功させる5つの施策: SEO対策で専門分野のロングテールキーワードを狙う、MEO対策で地域名×税理士の検索に対応する、AIO・LLMO対応でAI検索での紹介に備える、専門コラムを継続発信する、相談への導線を設計する" loading="lazy"><figcaption>税理士のホームページ集客を成功させる5つの施策</figcaption></figure>
 
 ### 施策1: 専門分野のロングテールKWでSEO対策をする
