@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-17T00:00:00+09:00</updated>
+  <updated>2026-08-18T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ</title>
+    <link href="https://ai.7senses.co.jp/seo/shika-seo-taisaku/"/>
+    <id>https://ai.7senses.co.jp/seo/shika-seo-taisaku/</id>
+    <updated>2026-08-18T00:00:00+09:00</updated>
+    <summary>歯科医院のSEOは、クリニックSEOの土台に、矯正・インプラントなど自由診療科目別のキーワード設計とポータルサイトとの併用戦略を掛け合わせて進めます。全国66,818軒が競う中で選ばれるための基本5ステップと、科目別のコンテンツ設計を解説します。</summary>
+  </entry>
   <entry>
     <title>クリニックSEOコンサル活用術｜依頼の目安と注意点</title>
     <link href="https://ai.7senses.co.jp/seo/clinic-seo-consulting-erabikata/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/ai-marketing/souba-kiji-tsukurikata/</id>
     <updated>2026-08-09T00:00:00+09:00</updated>
     <summary>相場記事の作り方とは、公的データと自社実績を組み合わせ、出典と時点を明記して数値を書くことです。信頼を失う失敗パターン、信頼される6つの構成要素、書く5つのステップ、AI検索時代のポイントを解説します。</summary>
-  </entry>
-  <entry>
-    <title>医療機関の口コミ返信例文8選｜病院・クリニック向け</title>
-    <link href="https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/"/>
-    <id>https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/</id>
-    <updated>2026-08-08T00:00:00+09:00</updated>
-    <summary>病院・クリニックの口コミ返信の例文は、症状に触れず状況別の定型文を使い分けることが基本です。守秘義務と医療広告ガイドラインに配慮した返信例8パターンと、NG表現・運用体制をG-ranの支援実務から解説します。</summary>
   </entry>
 </feed>
