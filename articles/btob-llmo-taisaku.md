@@ -183,4 +183,4 @@ AI検索対策の効果は、AI経由セッション数と、そこからの資�
 
 BtoB AI検索対策（LLMO）は、発注先探しで生成AI検索を使う担当者に向けて、比較表・FAQ・出典付き数値ファクトという抽出しやすい形で情報を整え、SEOで積み上げた上位表示の上に構築するものです。まずはステップ1のrobots.txt確認を今日中に済ませてください。
 
-BtoB SEOとの関係は[BtoB SEOとは？商談前に選ばれる5つの施策](/seo/btob-seo-taisaku/)、発注先探しからリード獲得までの全体像は[BtoBリード獲得の方法とは？6つの施策と選び方の基準](/ai-marketing/btob-lead-kakutoku-hoho/)でも解説しています。
+BtoB SEOとの関係はBtoB SEOとは？商談前に選ばれる5つの施策、発注先探しからリード獲得までの全体像は[BtoBリード獲得の方法とは？6つの施策と選び方の基準](/ai-marketing/btob-lead-kakutoku-hoho/)でも解説しています。

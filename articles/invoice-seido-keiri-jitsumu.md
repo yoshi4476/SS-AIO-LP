@@ -68,6 +68,8 @@ faq:
 
 請求書処理の実務フローは、記載要件の確認から証憑の保存まで4つのステップで構成されます。
 
+自社が発行する側の電子化は、[請求書電子化の進め方｜紙からデータへ切り替える5つの手順](/blog/seikyusho-denshika-susumekata/)で整理しています。
+
 <figure><img src="/images/invoice-seido-keiri-jitsumu/flow.png" alt="請求書処理の実務フロー4ステップ: 記載要件を確認する、登録番号を照合する、税率区分を仕訳に反映する、証憑を保存する" loading="lazy"><figcaption>請求書処理の実務フロー4ステップ</figcaption></figure>
 
 ステップ1は記載要件の確認。登録番号・取引年月日・税率ごとの消費税額など、必要事項がそろっているかを1件ずつ確認します。

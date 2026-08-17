@@ -180,4 +180,4 @@ AI検索対策で最も多い失敗は、プラットフォームの違いを無
 
 AI検索とひとことで言っても、検索統合型と対話完結型ではAIO対策の起点が異なります。まずは自社の主要記事がGoogle検索で**上位表示**されているかを確認してください。そのうえで、ChatGPTやPerplexity向けの被リンク・鮮度対策を重ねます。
 
-AI検索対策の本質は、土台と個別対応の両立。AIO対策の基本手順は[AIO対策の5ステップ](/aio/aio-taisaku-guide/)、SEO・MEOを含めた全体設計は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)をご覧ください。
+AI検索対策の本質は、土台と個別対応の両立。AIO対策の基本手順はAIO対策の5ステップ、SEO・MEOを含めた全体設計は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)をご覧ください。

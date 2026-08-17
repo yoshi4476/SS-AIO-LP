@@ -110,13 +110,15 @@ faq:
 
 <a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>によると、申請には電子申請システムでのGビズIDプライムの取得が必要です。GビズIDプライムは発行までに2〜3週間かかるため、締切ぎりぎりでは間に合わない可能性があります。
 
-補助金の申請でGビズIDが必要になる点は他の制度でも共通です。取得の流れを先に知っておきたい場合は[AI導入補助金のGビズID取得方法](https://lp.7senses.co.jp/blog/ai-hojokin-gbizid-shutoku/)を参考にしてください。
+補助金の申請でGビズIDが必要になる点は他の制度でも共通です。取得の流れを先に知っておきたい場合は[GビズIDプライムの取得方法(最短2週間の逆算スケジュール)](/blog/gbizid-shutoku/)を参考にしてください。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
 ## 補助上限額と補助率｜個人事業主が使える枠の目安
 
 **新事業進出・ものづくり商業サービス補助金の補助上限額は、枠と従業員規模により750万円〜2,500万円が目安です。**個人事業主の規模だと、革新的新製品・サービス枠は750万円、新事業進出枠は2,500万円が上限になります。
+
+同じ個人事業主向けでも、会計ソフトの導入ならIT導入補助金が使えます。[IT導入補助金の会計ソフト｜個人事業主が使える2つの枠と補助率](/blog/it-hojokin-kojinjigyonushi-kaikeisoft/)で条件を解説しています。
 
 | 枠 | 従業員規模 | 補助上限額の目安 | 補助率 |
 |:--|:--|:--|:--|

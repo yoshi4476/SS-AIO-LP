@@ -129,7 +129,7 @@ faq:
 
 たとえば飲食店であれば予約・注文管理、クリニックであれば電子カルテ関連のツールが、優先度の高い選択肢になります。<span class="txt-blue">業種特有の対象ツールを具体的に知りたい場合は、業種別の記事のほうが詳しく参考にできます。</span>
 
-飲食店の対象ツールは[AI導入補助金は飲食店でも使える？対象ツール3分野とハード対応](https://lp.7senses.co.jp/blog/ai-hojokin-inshokuten-katsuyou/)、建設業の対象ツールは[AI導入補助金は建設業も対象？ツール3分野と2024年問題対策](https://lp.7senses.co.jp/blog/ai-hojokin-kensetsugyou-katsuyou/)で解説しています。
+飲食店の対象ツールは[飲食店のIT導入補助金｜名称変更後の3つの確認点](/blog/it-hojokin-inshokuten/)、建設業の対象ツールは[AI導入補助金は建設業も対象？ツール3分野と2024年問題対策](https://lp.7senses.co.jp/blog/ai-hojokin-kensetsugyou-katsuyou/)で解説しています。
 
 自社の業種に近い記事がなければ、この記事で紹介した6分野の考え方をベースに、ITツール検索で業種を指定して検索してみてください。多くの場合、複数の候補が見つかります。
 

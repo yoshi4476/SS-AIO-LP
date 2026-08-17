@@ -87,6 +87,8 @@ faq:
 
 作り方の土台は、テーマ選定・構成設計・執筆デザイン・DLページ設計・公開後の改善という5ステップです。
 
+費用の目安は[相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](/ai-marketing/souba-kiji-tsukurikata/)でも扱っています。
+
 資料をどう見せて請求まで運ぶかは、[資料請求を増やす方法とは？6つの施策と見直す順序](/ai-marketing/shiryoseikyu-fuyasu-hoho/)で順序立てて解説しています。
 
 <figure><img src="/images/whitepaper-tsukurikata/steps.png" alt="ホワイトペーパーの作り方5ステップ: テーマ選定で課題起点で1本に絞る、構成設計で課題から解決・証拠・行動の骨子を作る、執筆・デザインで1スライド1メッセージで作る、DLページ設計で入力項目を絞りCTAを明確にする、公開後の改善でDL数と商談化率を見て更新する" loading="lazy"><figcaption>ホワイトペーパーの作り方5ステップ</figcaption></figure>
