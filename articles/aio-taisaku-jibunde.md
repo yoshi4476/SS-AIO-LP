@@ -64,6 +64,8 @@ faq:
 
 **自分でできる範囲は、現状診断から月次計測までの5つの手順にほぼ収まります。**この順番を崩さずに進めると、途中で迷いにくくなります。
 
+あわせて[AIかんたん集客とは？専門知識ゼロで始める5つの方法](/ai-marketing/ai-kantan-shukyaku/)もご覧ください。
+
 <figure><img src="/images/aio-taisaku-jibunde/steps.png" alt="自分でできるAIO対策5つの手順: 現状を診断する、冒頭を断言型に書き換える、H2に1文結論を追加する、FAQを5問作る、月1回計測する" width="1200" height="675" loading="lazy"><figcaption>自分でできるAIO対策5つの手順（当メディア作成）</figcaption></figure>
 
 1. 対象記事の検索順位とクローラー許可状況を診断する

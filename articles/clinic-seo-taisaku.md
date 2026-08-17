@@ -126,6 +126,8 @@ YMYLとは「Your Money or Your Life」の略で、健康や生命に影響す�
 
 **クリニックSEOでよくある失敗は、監修者情報の欠如・MEO偏重・表現規制の見落としの3つです。**どれも致命的ではありませんが、気づかないまま長期間放置されがちです。
 
+つまずきやすい点は[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)で整理しています。
+
 <figure><img src="/images/clinic-seo-taisaku/mistakes.png" alt="クリニックSEOでよくある失敗3つ: 監修者情報がない、MEOだけに偏る、表現規制を見落とす" width="1200" height="675" loading="lazy"><figcaption>クリニックSEOでよくある失敗3つ（当メディア作成）</figcaption></figure>
 
 監修者情報がないと、YMYL基準を満たせずSEOの評価が頭打ちになります。まず院長のプロフィールページを整備することが、遠回りに見えて最短の対処法です。

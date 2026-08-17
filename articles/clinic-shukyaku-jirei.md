@@ -130,6 +130,8 @@ Googleのローカル検索順位は<a href="https://support.google.com/business
 
 **集客事例でよくある失敗は、経路の一極集中・口コミ放置・情報更新の停止の3つです。**
 
+関連する内容を先に押さえるなら、[クリニック集客の設計図｜MEO・SEO・AIO優先順位と90日ロードマップ](/ai-marketing/clinic-shukyaku-sekkeizu/)が参考になります。
+
 私たちの支援現場で相談を受ける失敗の多くは、施策そのものの質よりも継続と分散の欠如が原因です。ここでは特に相談の多い3つのパターンを紹介します。事例を集める際は<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>への抵触にも注意してください。
 
 <figure><img src="/images/clinic-shukyaku-jirei/ng-ok.png" alt="集客施策のNG・OKパターン比較: NGは1つの経路に依存・口コミ返信を放置・情報が古いまま。OKは複数経路を並行整備・口コミに全件返信・半年に一度は更新" loading="lazy"><figcaption>集客施策のNG・OKパターン</figcaption></figure>

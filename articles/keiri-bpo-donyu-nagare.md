@@ -48,6 +48,8 @@ faq:
 
 経理BPOの導入は、現状の棚卸しから本稼働まで大きく6つのステップで進みます。
 
+費用の目安については、[経理BPOと人材派遣の違い5つ｜費用・契約形態を比較](/blog/keiri-bpo-haken-chigai/)にまとめています。
+
 <div class="definition-box"><span class="term">経理BPOとは</span>、記帳から請求書発行、月次試算表の作成まで経理業務全般を外部の専門会社に委託し、業務の仕組みづくりまで任せる形態のことです。==単純作業だけを頼む「記帳代行」より対応範囲が広く、業務フローの設計そのものを外部に委ねる点が特徴です。==経理BPOの基本については、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で詳しく解説しています。</div>
 
 <figure><img src="/images/keiri-bpo-donyu-nagare/nagare.png" alt="経理BPO導入の6ステップ: 現状の棚卸し、委託範囲の切り分け、複数社へ相見積もり、契約条件の確認、引き継ぎとテスト運用、本稼働への移行" loading="lazy"><figcaption>経理BPO導入の6ステップ</figcaption></figure>

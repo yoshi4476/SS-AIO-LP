@@ -48,6 +48,8 @@ faq:
 
 経理アウトソーシングのデメリットとは、コスト削減や人手不足解消と引き換えに生じる6種類のリスクのことです。
 
+選ぶときの基準は[経理アウトソーシング導入事例｜3パターンで見る選び方](/blog/keiri-outsourcing-donyu-jirei/)で整理しています。
+
 <div class="definition-box"><span class="term">経理アウトソーシングのデメリットとは</span>、社内で経理を抱え続けるリスクと引き換えに、外部委託によって新たに生じる情報管理・柔軟性・コストに関するリスクのことです。==メリットだけでなくリスク側も具体的に把握してから契約するのが安全です。==</div>
 
 <figure><img src="/images/keiri-outsourcing-demerit/ichiran.png" alt="経理アウトソーシングの主なデメリット6つ: 情報漏洩のリスク、ノウハウが残らない、柔軟な対応がしにくい、経営状況の把握遅れ、コストが割高になる、法律上の注意点" loading="lazy"><figcaption>経理アウトソーシングの主なデメリット6つ</figcaption></figure>

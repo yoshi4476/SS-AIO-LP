@@ -120,6 +120,8 @@ GA4のAI参照元セッションも合わせて見ると、「順位はあるの
 
 **着手前・公開前に以下の5項目を確認するだけで、大きな落とし穴の大半は避けられます。**
 
+実際の進め方については、[AIO対策は自分でできる？無料で始める5つの手順と3つの限界](/aio/aio-taisaku-jibunde/)にまとめています。
+
 <figure><img src="/images/aio-taisaku-chuiten/check.png" alt="AIO対策の注意点チェックリスト5項目: 狙うKWが検索10位以内に入っているか、robots.txtでGooglebotを許可しているか、FAQの本文とSchemaが一致しているか、月1回AI経由の流入を計測しているか、記事ごとに文字数や構成を検索意図に合わせているか" width="1200" height="675" loading="lazy"><figcaption>AIO対策の注意点チェックリスト5項目（当メディア作成）</figcaption></figure>
 
 1. 狙うKWが検索10位以内に入っているか

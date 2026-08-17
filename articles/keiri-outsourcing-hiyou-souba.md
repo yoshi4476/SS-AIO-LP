@@ -48,6 +48,8 @@ faq:
 
 経理アウトソーシングの費用は、記帳のみの委託と、給与計算まで含む全般委託とで数倍から数十倍の差が出ます。
 
+選ぶときの基準は[経理アウトソーシング導入事例｜3パターンで見る選び方](/blog/keiri-outsourcing-donyu-jirei/)でも扱っています。
+
 <div class="definition-box"><span class="term">経理アウトソーシングとは</span>、記帳・請求書処理・給与計算といった経理業務の一部または全体を、外部の専門会社に委託する仕組みのことです。==範囲が狭いほど費用は抑えやすく、範囲が広いほど任せられる業務は増えます。==</div>
 
 詳しい定義や記帳代行との違いは、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)でも整理しています。経理代行大手のCASTER BIZ accounting社が公開する<a href="https://accounting.cast-er.com/tips/bookkeeping-service-market-rates-and-fee-structure/" target="_blank" rel="noopener">「記帳代行の相場と料金体系」</a>があります。税理士に記帳代行を依頼する場合、**月50件までの仕訳で5,000円〜1万円、200件では2万〜3万5,000円**が目安とされています。仕訳数が増えるほど費用も比例して上がる料金体系です。

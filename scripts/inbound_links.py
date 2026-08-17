@@ -29,6 +29,10 @@ THIN = 3            # 本文リンクがこれ以下なら、サイト内で孤�
 
 def load_articles(site_id):
     """当該サイトの公開済み記事だけを読む（他サイトの記事は指示に出さない）"""
+    # 記事URLはサイトごとに形が違う。ai-labは /{category}/{slug}/ だが
+    # corporate・subsidyは /blog/{slug}/ で、カテゴリはパスに入らない。
+    # 決め打ちにすると、リンク先の分からない指示が出る。
+    cfg = sites_mod.load(site_id)
     arts = {}
     for p in sorted((ROOT / "articles").glob("*.md")):
         m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", p.read_text(encoding="utf-8-sig"), re.S)
@@ -49,9 +53,18 @@ def load_articles(site_id):
             score = 0
         if score < 90:      # 未公開の記事はリンク元にもリンク先にもしない
             continue
+        url = re.sub(r"^https?://[^/]+", "",
+                     sites_mod.article_url(cfg, {"slug": p.stem, "category": cat,
+                                                 "date": fv("date")}))
+        # リンクは相対パスと絶対URLの両方の書き方が混在している。
+        # 相対だけを数えると、絶対URLで書かれたサイトが「リンク0本」に見え、
+        # 足りているサイトへ追加を促す誤った指示が出る（実際に出した）。
+        out = set(re.findall(r"\]\(/[a-z-]+/([a-z0-9-]+)/\)", body))
+        out |= set(re.findall(rf"\]\(https?://{re.escape(cfg['domain'])}/[a-z-]+/([a-z0-9-]+)/\)",
+                              body))
         arts[p.stem] = {
             "slug": p.stem, "title": fv("title"), "cat": cat, "kw": fv("keyword"),
-            "out": set(re.findall(r"\]\(/[a-z-]+/([a-z0-9-]+)/\)", body)),
+            "url": url, "out": out,
         }
     return arts
 
@@ -67,7 +80,7 @@ def plan(pages, site_id="ai-lab", limit=12):
 
     rows = []
     for x in arts.values():
-        g = pages.get(f'/{x["cat"]}/{x["slug"]}/') or {}
+        g = pages.get(x["url"]) or {}
         pos, imp = g.get("pos"), g.get("imp", 0)
         if pos and POS_FROM < pos <= POS_TO and imp >= MIN_IMP:
             pri, why = 0, f"{pos}位・表示{imp:,}回（1ページ目の手前で停滞）"
@@ -91,9 +104,9 @@ def plan(pages, site_id="ai-lab", limit=12):
         if not cands:
             continue
         rows.append({
-            "to": x["title"], "to_url": f'/{x["cat"]}/{x["slug"]}/',
+            "to": x["title"], "to_url": x["url"],
             "inbound": inbound[x["slug"]], "pri": pri, "why": why,
-            "froms": [(y["title"], f'/{y["cat"]}/{y["slug"]}/') for _, y in cands[:3]],
+            "froms": [(y["title"], y["url"]) for _, y in cands[:3]],
         })
 
     rows.sort(key=lambda r: (r["pri"], r["inbound"]))
