@@ -69,3 +69,4 @@
 - [クリニックの集客集患サポートとは？3つの型と選び方](https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-shukan-support/): クリニックの集客集患サポートを、フルサポート型・部分サポート型・伴走型の3つに整理し、内製との使い分けと費用相場を解説します。
 - [クリニック集客の設計図｜MEO・SEO・AIO優先順位と90日ロードマップ](https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-sekkeizu/): クリニック集客の設計図として、MEO・SEO・AIOの優先順位、体制の選び方、90日ロードマップを解説します。
 - [クリニックSEOコンサル活用術｜依頼の目安と注意点](https://ai.7senses.co.jp/seo/clinic-seo-consulting-erabikata/): クリニックSEOコンサルの費用相場・依頼すべき目安・契約前に見抜くべきNG施策を解説します。
+- [歯科医院のMEO対策｜自由診療で新患を増やす7つの実践ポイント](https://ai.7senses.co.jp/meo/shika-meo-taisaku/): メインカテゴリの固定と自由診療科の追加カテゴリ設計、口コミ運用の注意点まで、歯科医院特有のMEO対策を解説します。
