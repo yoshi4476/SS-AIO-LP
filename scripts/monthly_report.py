@@ -548,6 +548,13 @@ def audit_site(d):
             "audited": len(arts)}
 
 
+def inbound_plan(d):
+    """被リンクの追加指示（実装は inbound_links.py。グループレポートと共用する）"""
+    import inbound_links
+    pages = {p["path"]: p for p in d.get("pages", [])}
+    return inbound_links.plan(pages, "ai-lab")
+
+
 # ============================================================
 # 分析（何が効いたか / 直すべきか / 来月プラン）
 # ============================================================
@@ -877,7 +884,7 @@ def analyze(d):
             "assets": assets, "targets": targets, "audit": audit_site(d),
             "target_nums": target_nums, "achievement": achievement, "assess": assess,
             "efficiency": efficiency, "headline": headline, "risks": risks,
-            "media_plan": media_plan, "lp_plan": lp_plan}
+            "media_plan": media_plan, "lp_plan": lp_plan, "inbound": inbound_plan(d)}
 
 
 # ============================================================
@@ -1181,6 +1188,28 @@ def render(d, a):
 <th style="width:28%">現状（実測）</th><th>変更内容</th></tr>
 {"".join(_media_row(x) for x in mp[i:i + MEDIA_PER_PAGE])}</table>
 </div>"""
+    # 被リンクの追加指示（月初のサイト改修でそのまま作業できる粒度で出す）
+    ib = a["inbound"]
+
+    def _ib_row(r):
+        return (f'<tr><td><b>{r["to"][:26]}</b><br><span class="mono">{r["to_url"]}</span></td>'
+                f'<td class="num">{r["inbound"]}本</td><td>{r["why"]}</td>'
+                f'<td>{"／".join(t[:20] for t, _ in r["froms"])}</td></tr>')
+
+    IB_PER_PAGE = 7
+    inbound_rows = "".join(_ib_row(r) for r in ib["rows"][:IB_PER_PAGE])
+    if not inbound_rows:
+        inbound_rows = ('<tr><td colspan="4">追加すべき被リンクはありません'
+                        '（全記事が基準を満たしています）</td></tr>')
+    inbound_extra = ""
+    for n_, i in enumerate(range(IB_PER_PAGE, len(ib["rows"]), IB_PER_PAGE), 2):
+        inbound_extra += f"""
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>被リンクを送るべき記事（続き {n_}）</h2><div class="gold"></div></div>
+<table><tr><th style="width:26%">リンク先（この記事へ送る）</th><th style="width:9%">現在</th>
+<th style="width:26%">優先する理由</th><th>リンク元にする記事</th></tr>
+{"".join(_ib_row(r) for r in ib["rows"][i:i + IB_PER_PAGE])}</table>
+</div>"""
     lpplan_rows = "".join(
         f'<tr><td>{x["target"]}</td><td style="white-space:nowrap">{x["kind"]}</td>'
         f'<td>{x["now"]}</td><td>{x["fix"]}</td></tr>' for x in a["lp_plan"])
@@ -1315,6 +1344,7 @@ table {{ border-collapse: collapse; width: 100%; font-size: 9pt; }}
 th, td {{ border: 1px solid #dbe3ee; padding: 5px 8px; text-align: left; vertical-align: top; }}
 th {{ background: var(--navy); color: #fff; font-weight: 600; }}
 td.num {{ text-align: right; font-variant-numeric: tabular-nums; }}
+.mono {{ font-family: Consolas, "Courier New", monospace; font-size: 7.6pt; color: var(--muted); }}
 tr:nth-child(even) td {{ background: #f7fafd; }}
 .two-col {{ display: flex; gap: 12px; }}
 .two-col > div {{ flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }}
@@ -1699,6 +1729,24 @@ generate_lead は送信完了を表します。押されているのに送信ま
 新しい記事を書くより、既にある記事を直すほうが早く成果が出るためです。</p>
 </div>
 {media_extra}
+
+<!-- 被リンクの追加指示 -->
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>被リンクを送るべき記事（内部リンクの追加指示）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">サイト内のどの記事へ、どの記事からリンクを足すかの指示です。
+本文中のリンクを数えると、公開{ib["articles"]}記事で<b>最小{ib["min"]}本・中央{ib["mid"]}本・最大{ib["max"]}本</b>と開いています
+（一覧・関連記事欄の自動リンクは除く）。人気のある記事にリンクが集まり、
+順位が1ページ目の手前で止まっている記事ほど不足しています。
+記事を新しく書かずに順位を動かせる、最も費用のかからない打ち手です。</p>
+<table><tr><th style="width:26%">リンク先（この記事へ送る）</th><th style="width:9%">現在</th>
+<th style="width:26%">優先する理由</th><th>リンク元にする記事</th></tr>{inbound_rows}</table>
+<p class="note">作業手順: リンク元の記事本文で、リンク先の話題に触れている段落を探し、
+その直後に1文を足してリンクを置きます。まとめ・FAQの中ではなく<b>本文H2の1文結論の直後</b>に置くこと。
+読者が次に知りたくなる位置と一致し、AI検索にも文脈ごと読まれます。
+アンカーテキストは<b>リンク先の記事タイトルをそのまま</b>使い、「こちら」は使いません。
+リンク先が何かを検索エンジンにもAIにも伝えないためです。</p>
+</div>
+{inbound_extra}
 
 <!-- LP改修プラン -->
 <div class="sheet">

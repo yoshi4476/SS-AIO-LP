@@ -346,6 +346,19 @@ def analyze(sites, labels, arts, pipeline):
         fix_plan.append(("3サイト共通", "—", "—", "改修が必要な水準の指標は検出されていません",
                          "現在の構成を維持し、上位記事の型を新規記事へ横展開する"))
 
+    # 被リンクの追加指示（月初のサイト改修でそのまま作業できる粒度で出す）
+    import inbound_links
+    inbound, inbound_dist = [], []
+    for s in sites:
+        # group側のpagesはフルURL。monthlyと同じパス形式に揃えてから渡す
+        pages = {}
+        for pg in s.get("pages", []):
+            path = re.sub(r"^https?://[^/]+", "", pg.get("k", "")) or "/"
+            pages[path] = {"pos": pg.get("pos"), "imp": pg.get("imp", 0)}
+        r = inbound_links.plan(pages, s["id"], limit=4)
+        inbound += [dict(x, site=s["name"][:12]) for x in r["rows"]]
+        inbound_dist.append(f'{s["name"][:12]} 最小{r["min"]}・中央{r["mid"]}・最大{r["max"]}本')
+
     # 改善プラン（データから機械的に導く）
     plan = []
     for s in sites:
@@ -411,7 +424,7 @@ def analyze(sites, labels, arts, pipeline):
     return {"cur": cur, "prev": prev, "mom": mom, "ai": ai, "ctr": ctr, "cvr": cvr, "pos": pos,
             "ai_ratio": ai_ratio, "ad_value": ad_value, "assess": assess, "contrib": contrib,
             "plan": plan, "targets": targets, "headline": headline, "risks": risks,
-            "fix_plan": fix_plan}
+            "fix_plan": fix_plan, "inbound": inbound, "inbound_dist": inbound_dist}
 
 
 # ============================================================
@@ -460,6 +473,7 @@ def render(sites, labels, arts, cross, links, pipeline, a):
            "投資対効果（広告換算）", "サイト間の重複と役割分担の健全性",
            "コンテンツ資産の状況", "記事の供給状況（KW台帳）"] + site_toc + \
           ["AI検索（AIO/LLMO）分析", "サイト間の相互送客", "サイト別の改修プラン（記事・導線）",
+           "被リンクを送るべき記事（内部リンクの追加指示）",
            "グループ全体の改善プラン", "来月のKPI目標", "実行スケジュール",
            "リスクと前提条件", "付録: 指標の定義"]
     # クリックが0だと「約0円」が4枚並び、集計が壊れているように見える。
@@ -504,6 +518,21 @@ def render(sites, labels, arts, cross, links, pipeline, a):
         f'<tr><td>{s}</td><td style="word-break:break-all">{t}</td>'
         f'<td style="white-space:nowrap">{k}</td><td>{n}</td><td>{h}</td></tr>'
         for s, t, k, n, h in a["fix_plan"][:8])
+    # 1サイト2件ずつ。全体順で並べるとリンクの薄いサイトだけで埋まり、
+    # 他サイトの指示が1件も載らないため、サイトごとに枠を確保する
+    _pick, _seen = [], {}
+    for x in sorted(a["inbound"], key=lambda x: (x["pri"], x["inbound"])):
+        if _seen.get(x["site"], 0) >= 2:
+            continue
+        _seen[x["site"]] = _seen.get(x["site"], 0) + 1
+        _pick.append(x)
+    inbound_rows = "".join(
+        f'<tr><td>{x["site"]}</td>'
+        f'<td><b>{x["to"][:24]}</b><br><span class="mono">{x["to_url"]}</span></td>'
+        f'<td class="num">{x["inbound"]}本</td><td>{x["why"]}</td>'
+        f'<td>{"／".join(t[:18] for t, _ in x["froms"])}</td></tr>' for x in _pick[:6]
+    ) or '<tr><td colspan="5">追加すべき被リンクはありません（全記事が基準を満たしています）</td></tr>'
+    inbound_summary = " ／ ".join(a["inbound_dist"]) or "—"
     pipe_rows = "".join(
         f'<tr><td>{sites_mod.load(sid)["name"][:20] if sid in sites_mod.load_all() else sid}</td>'
         f'<td class="num">{v["todo"]}</td><td class="num">{v["doing"]}</td>'
@@ -615,6 +644,7 @@ table {{ border-collapse:collapse;width:100%;font-size:8.9pt;margin-top:6px; }}
 th,td {{ border:1px solid #dbe3ee;padding:5px 8px;text-align:left;vertical-align:top; }}
 th {{ background:{NAVY};color:#fff;font-weight:600; }}
 td.num {{ text-align:right;font-variant-numeric:tabular-nums; }}
+.mono {{ font-family:Consolas,"Courier New",monospace;font-size:7.4pt;color:{MUTED}; }}
 tr:nth-child(even) td {{ background:#f7fafd; }}
 .heat {{ border:1px solid {LINE};border-radius:8px;padding:9px 11px;margin-top:6px; }}
 .hm-row {{ display:flex;align-items:center;gap:8px;margin:3px 0; }}
@@ -961,7 +991,21 @@ Perplexity比率が高い場合は記事の鮮度更新を強化するのが定�
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{12 + len(sites) * 2:02d}</span><h2>グループ全体の改善プラン</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{12 + len(sites) * 2:02d}</span><h2>被リンクを送るべき記事（内部リンクの追加指示）</h2><div class="gold"></div></div>
+<p class="lead">サイト内のどの記事へ、どの記事からリンクを足すかの指示です。
+記事を新しく書かずに順位を動かせる、最も費用のかからない打ち手です。</p>
+<table><tr><th style="width:13%">サイト</th><th style="width:23%">リンク先（この記事へ送る）</th>
+<th style="width:8%">現在</th><th style="width:22%">優先する理由</th><th>リンク元にする記事</th></tr>
+{inbound_rows}</table>
+<p class="note">現在の本文リンク数: {inbound_summary}（一覧・関連記事欄の自動リンクは除く）。
+数字が開いているほど、人気のある記事だけにリンクが集まっている状態です。</p>
+<p class="note">作業手順: リンク元の記事本文で、リンク先の話題に触れている段落を探し、その直後に1文を足してリンクを置きます。
+まとめ・FAQの中ではなく<b>本文H2の1文結論の直後</b>に置くこと。読者が次に知りたくなる位置と一致し、AI検索にも文脈ごと読まれます。
+アンカーテキストは<b>リンク先の記事タイトルをそのまま</b>使い、「こちら」は使いません。</p>
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">{13 + len(sites) * 2:02d}</span><h2>グループ全体の改善プラン</h2><div class="gold"></div></div>
 <p class="lead">データから機械的に抽出した、今月取り組むべき項目です。優先度の高い順に並んでいます。</p>
 <table><tr><th style="width:8%">優先度</th><th style="width:24%">対象</th>
 <th style="width:30%">現状（データ根拠）</th><th>改善アクション</th></tr>{plan_rows}</table>
@@ -980,12 +1024,12 @@ Perplexity比率が高い場合は記事の鮮度更新を強化するのが定�
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{13 + len(sites) * 2:02d}</span><h2>来月のKPI目標</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{14 + len(sites) * 2:02d}</span><h2>来月のKPI目標</h2><div class="gold"></div></div>
 <p class="lead">当月実績をベースに、来月の目標値を設定します。目標は「前月比の成長率」と
 「最低増加量」の大きい方を採用し、立ち上げ期でも歩みを止めない設計です。</p>
 <table><tr><th>指標</th><th style="width:15%">当月実績</th><th style="width:15%">来月目標</th>
 <th>目標の根拠</th></tr>{tgt_rows}</table>
-<div class="sec" style="margin-top:16px"><span class="no">{14 + len(sites) * 2:02d}</span>
+<div class="sec" style="margin-top:16px"><span class="no">{15 + len(sites) * 2:02d}</span>
 <h2>実行スケジュール</h2><div class="gold"></div></div>
 <table><tr><th style="width:14%">時期</th><th style="width:30%">実施内容</th><th>狙い</th></tr>
 <tr><td>毎日</td><td>3サイト合計で記事を生成・公開</td><td>テーマの面を広げ、AI引用の入口を増やす</td></tr>
@@ -998,7 +1042,7 @@ Perplexity比率が高い場合は記事の鮮度更新を強化するのが定�
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{15 + len(sites) * 2:02d}</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{16 + len(sites) * 2:02d}</span><h2>リスクと前提条件</h2><div class="gold"></div></div>
 <p class="lead">数字を正しく受け取っていただくために、知っておいていただきたい前提をまとめます。</p>
 <table><tr><th style="width:32%">前提・注意点</th><th>内容</th></tr>{risk_rows}</table>
 <h3>成果が出るまでの一般的な流れ</h3>
@@ -1019,7 +1063,7 @@ Perplexity比率が高い場合は記事の鮮度更新を強化するのが定�
 </div>
 
 <div class="sheet">
-<div class="sec"><span class="no">{16 + len(sites) * 2:02d}</span><h2>付録: 指標の定義</h2><div class="gold"></div></div>
+<div class="sec"><span class="no">{17 + len(sites) * 2:02d}</span><h2>付録: 指標の定義</h2><div class="gold"></div></div>
 <table>
 <tr><td style="width:26%"><b>セッション</b></td><td>サイトへの訪問回数。1人が朝と夜に見れば2セッション</td></tr>
 <tr><td><b>CV（コンバージョン）</b></td><td>無料相談・資料ダウンロードなど、成果地点への到達件数</td></tr>
