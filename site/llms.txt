@@ -71,3 +71,4 @@
 - [クリニックSEOコンサル活用術｜依頼の目安と注意点](https://ai.7senses.co.jp/seo/clinic-seo-consulting-erabikata/): クリニックSEOコンサルの費用相場・依頼すべき目安・契約前に見抜くべきNG施策を解説します。
 - [歯科医院のMEO対策｜自由診療で新患を増やす7つの実践ポイント](https://ai.7senses.co.jp/meo/shika-meo-taisaku/): メインカテゴリの固定と自由診療科の追加カテゴリ設計、口コミ運用の注意点まで、歯科医院特有のMEO対策を解説します。
 - [歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](https://ai.7senses.co.jp/seo/shika-seo-taisaku/): クリニックSEOの土台に、自由診療科目別のキーワード設計とポータルサイトとの併用戦略を掛け合わせた歯科医院SEOの基本5ステップを解説します。
+- [整骨院の集客成功事例5選｜院の規模で変わる打ち手と注意点](https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-jirei/): 整骨院の集客成功事例を院の規模別（1人院・多店舗展開・自由診療特化）に整理し、規模に合う打ち手とやってはいけないことを解説します。
