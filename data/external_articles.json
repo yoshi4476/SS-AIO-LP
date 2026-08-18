@@ -1,7 +1,47 @@
 {
-  "fetched": "2026-08-13",
+  "fetched": "2026-08-17",
   "sites": {
     "corporate": [
+      {
+        "url": "https://corp.7senses.co.jp/blog/urikakekin-kanri-houhou",
+        "slug": "urikakekin-kanri-houhou",
+        "title": "売掛金管理の方法とは？基本4ステップと未回収を防ぐコツ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/shiwake-miss-fusegu-houhou",
+        "slug": "shiwake-miss-fusegu-houhou",
+        "title": "仕訳ミスを防ぐ方法とは？原因別4つの対策とチェック体制"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-rule-tsukurikata",
+        "slug": "keihi-seisan-rule-tsukurikata",
+        "title": "経費精算ルールの作り方｜中小企業の5ステップと規程項目"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-checklist",
+        "slug": "getsuji-kessan-checklist",
+        "title": "月次決算早期化チェックリスト｜工程別15項目で今日から使える"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-denshika-susumekata",
+        "slug": "seikyusho-denshika-susumekata",
+        "title": "請求書電子化の進め方｜紙からデータへ切り替える5つの手順"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/invoice-seido-keiri-jitsumu",
+        "slug": "invoice-seido-keiri-jitsumu",
+        "title": "インボイス制度の経理実務とは？請求書処理の4ステップ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-tantousha-taishoku-taiou",
+        "slug": "keiri-tantousha-taishoku-taiou",
+        "title": "経理担当者の退職対応｜直後にやる5つのこと【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/denshichoboho-chusho-kigyo-taio",
+        "slug": "denshichoboho-chusho-kigyo-taio",
+        "title": "電子帳簿保存法とは？中小企業の対応3ステップ【2026年最新】"
+      },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-donyu-jirei",
         "slug": "keiri-outsourcing-donyu-jirei",
@@ -110,6 +150,46 @@
         "title": "カテゴリ: 補助金の記事一覧"
       },
       {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/",
+        "slug": "jigyou-saikouchiku-kojinjigyonushi-itsumade",
+        "title": "事業再構築補助金は個人事業主もいつまで？後継3制度の使い方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kyuyo-shikyu-sogaku/",
+        "slug": "monozukuri-hojokin-kyuyo-shikyu-sogaku",
+        "title": "ものづくり補助金の給与支給総額とは？個人事業主の計算3ステップ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-chusho-kigyo-taisho/",
+        "slug": "jizokuka-hojokin-chusho-kigyo-taisho",
+        "title": "小規模事業者持続化補助金は中小企業も対象｜3制度の使い分け"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kojinjigyonushi-1nin/",
+        "slug": "monozukuri-hojokin-kojinjigyonushi-1nin",
+        "title": "ものづくり補助金は個人事業主1人だと対象外？23次の結論"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-chusho-teigi/",
+        "slug": "monozukuri-hojokin-chusho-teigi",
+        "title": "ものづくり補助金は資本金オーバーでも対象？中小企業者7区分"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-seizougyou/",
+        "slug": "monozukuri-hojokin-seizougyou",
+        "title": "ものづくり補助金は製造業でどう使う？対象経費3つと上限4,000万円"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-inshokuten/",
+        "slug": "it-hojokin-inshokuten",
+        "title": "飲食店のIT導入補助金｜名称変更後の3つの確認点"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-seizougyou/",
+        "slug": "it-hojokin-seizougyou",
+        "title": "製造業のIT導入補助金｜技能継承と人手不足への活かし方"
+      },
+      {
         "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/",
         "slug": "jizokuka-hojokin-kojinjigyonushi-saitakuritsu",
         "title": "小規模事業者持続化補助金｜個人事業主の採択率47.2%と対策"
@@ -183,11 +263,6 @@
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-chatbot-donyu/",
         "slug": "ai-hojokin-chatbot-donyu",
         "title": "補助金でAIチャットボット導入｜対象条件と申請の流れ"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-inshokuten-katsuyou/",
-        "slug": "ai-hojokin-inshokuten-katsuyou",
-        "title": "AI導入補助金は飲食店でも使える？対象ツール3分野とハード対応"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-ai-katsuyo-jirei/",
