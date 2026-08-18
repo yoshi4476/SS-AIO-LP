@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-17",
+  "date": "2026-08-18",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
@@ -18,8 +18,8 @@
         {
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 4.5,
-          "imp": 11,
+          "pos": 3.9,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
