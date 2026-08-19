@@ -1277,6 +1277,32 @@ main.lab { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--gutter) 
   padding: 1.2rem 1.4rem; line-height: 2; font-size: .93rem;
 }
 
+/* ---- 2つの論点を左右に置く ---- */
+/* 段落を続けると要点が埋もれる。対になる話は横に並べて、
+   どちらの話をしているかが見出しで分かるようにする。 */
+.lab-pair {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 1.1rem; margin: 1.6rem 0 1.8rem;
+}
+.pair-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.3rem; box-shadow: var(--shadow-sm);
+}
+.pair-label {
+  display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .08em;
+  background: var(--sky); color: var(--blue); padding: .3em .9em; border-radius: 999px;
+}
+.pair-card h3 {
+  margin: .85rem 0 .7rem; font-size: 1.06rem; line-height: 1.55; color: var(--navy);
+}
+.pair-card p { margin: 0 0 .8em; font-size: .93rem; line-height: 2; }
+.pair-card p:last-child { margin-bottom: 0; }
+/* 理由は主張より一段落として、視線が先に主張へ行くようにする */
+.pair-why {
+  padding-top: .8rem; border-top: 1px dashed var(--line);
+  font-size: .87rem !important; color: var(--muted);
+}
+
 /* ---- プロダクト ---- */
 .prod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 1.2rem; margin: 1.8rem 0 0; }
