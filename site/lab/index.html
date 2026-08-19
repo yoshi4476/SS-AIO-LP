@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="stylesheet" href="/css/style.css?v=5f70f4d2">
+<link rel="stylesheet" href="/css/style.css?v=3c505083">
 <script defer src="/js/site.js?v=85532eca"></script>
 </head>
 <body>
@@ -66,50 +66,22 @@
   <h2>このサイトで実装している項目</h2>
   <p class="lab-note">「やり方を解説する記事」は多くありますが、書いた本人が実装しているとは限りません。以下はすべて当サイトで実際に動いている実装です。</p>
 
-  <ul class="spec-list">
-    <li>
-      <div class="spec-h"><span class="spec-no">01</span><h3>AIクローラーの許可</h3></div>
-      <p>GPTBot・ClaudeBot・PerplexityBot・Applebot-Extended など<strong>20種</strong>を robots.txt に明示しています。<code>User-agent: *</code> で全許可でも動きますが、判定を相手任せにしないため個別に書いています。</p>
-      <div class="spec-f">
-        <a class="spec-read" href="/aio/aio-taisaku-guide/">解説記事</a>
-      </div>
-    </li>
-    <li>
-      <div class="spec-h"><span class="spec-no">02</span><h3>llms.txt の設置</h3></div>
-      <p>AI向けのサイト案内です。運営者情報と全記事を掲載しており、記事を公開するたびに更新しています。</p>
-      <div class="spec-f">
-        <a class="spec-read" href="/aio/llmo-taisaku-hoho/">解説記事</a>
-      </div>
-    </li>
-    <li>
-      <div class="spec-h"><span class="spec-no">03</span><h3>構造化データ</h3></div>
-      <p>全記事に <code>BlogPosting</code> + <code>FAQPage</code> + <code>BreadcrumbList</code> を入れています。著者は「編集部」ではなく<strong>実在の個人</strong>で、発行者には<strong>法人番号</strong>を持たせ、同名の別法人と機械的に区別できるようにしています。</p>
-      <div class="spec-f">
-        <a class="spec-read" href="/author/haraguchi/">監修者</a>
-      </div>
-    </li>
-    <li>
-      <div class="spec-h"><span class="spec-no">04</span><h3>抽出しやすい本文構造</h3></div>
-      <p>冒頭200字の断言／各H2直下の1文結論／定義ブロック／比較テーブル／FAQ5問以上。AIが答えを切り出しやすい形を、全記事で守っています。</p>
-      <div class="spec-f">
-        <a class="spec-read" href="/seo/ai-jidai-seo-taisaku/">解説記事</a>
-      </div>
-    </li>
-    <li>
-      <div class="spec-h"><span class="spec-no">05</span><h3>鮮度の明示</h3></div>
-      <p>本文の「◯年◯月時点」と、構造化データの <code>dateModified</code> を一致させています。AI検索は情報の新しさを重く見るため、更新のたびに両方を書き換えます。</p>
-      <div class="spec-f">
-        <a class="spec-read" href="/aio/aio-taisaku-guide/">解説記事</a>
-      </div>
-    </li>
-    <li>
-      <div class="spec-h"><span class="spec-no">06</span><h3>順位の日次計測</h3></div>
-      <p>Search Console の平均掲載順位を毎日記録し、<strong>11〜30位の記事を「あと少しで1ページ目」として抽出</strong>し、リライト対象にしています。</p>
-      <div class="spec-f">
-        <a class="spec-read" href="/seo/ai-jidai-seo-taisaku/">解説記事</a>
-      </div>
-    </li>
-  </ul>
+  <div class="spec-wrap">
+  <table class="spec-table">
+    <thead>
+      <tr><th scope="col">項目</th><th scope="col">実装</th>
+          <th scope="col">中身</th><th scope="col"></th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">AIクローラーの許可</th><td class="spec-do">robots.txt に20種を明示</td><td>GPTBot・ClaudeBot・PerplexityBot・Applebot-Extended ほか。判定を相手任せにしない</td><td class="spec-lnk"><a href="/aio/aio-taisaku-guide/">解説</a></td></tr>
+      <tr><th scope="row">llms.txt の設置</th><td class="spec-do">AI向けのサイト案内を公開</td><td>運営者情報と全記事を掲載。公開のたびに更新</td><td class="spec-lnk"><a href="/aio/llmo-taisaku-hoho/">解説</a></td></tr>
+      <tr><th scope="row">構造化データ</th><td class="spec-do">全記事に3種を付与</td><td>BlogPosting + FAQPage + BreadcrumbList。著者は実在の個人、発行者に法人番号</td><td class="spec-lnk"><a href="/aio/aio-taisaku-guide/">解説</a></td></tr>
+      <tr><th scope="row">抽出しやすい本文構造</th><td class="spec-do">5つの型を全記事で統一</td><td>冒頭200字の断言／H2直下の1文結論／定義ブロック／比較テーブル／FAQ5問以上</td><td class="spec-lnk"><a href="/aio/aio-taisaku-jibunde/">解説</a></td></tr>
+      <tr><th scope="row">鮮度の明示</th><td class="spec-do">本文とdateModifiedを一致</td><td>「◯年◯月時点」と構造化データを、更新のたびに揃える</td><td class="spec-lnk"><a href="/aio/aio-shindan-yarikata/">解説</a></td></tr>
+      <tr><th scope="row">順位の日次計測</th><td class="spec-do">毎日記録し、11〜30位を抽出</td><td>「あと少しで1ページ目」の記事をリライト対象にする</td><td class="spec-lnk"><a href="/seo/ai-jidai-seo-taisaku/">解説</a></td></tr>
+    </tbody>
+  </table>
+</div>
 </section>
 
 <section class="lab-sec">
@@ -139,14 +111,42 @@
     <div class="pair-card">
       <span class="pair-label">見方</span>
       <h3>3つの数字を分けて見る</h3>
-      <p><strong>順位・表示回数・クリックを分けて見ないと判断を誤ります。</strong>効果はまず表示回数に現れ、順位が上がってからクリックが伸びます。</p>
+      <svg class="pair-fig" viewBox="0 0 340 96" role="img" aria-label="表示回数がまず動き、次に検索順位が上がり、最後にクリックが伸びる。3つの指標には時間差がある">
+        <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
+        <g font-family="inherit" text-anchor="middle">
+          <rect x="2" y="18" width="98" height="42" rx="9" fill="#eaf2fe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="51" y="35" font-size="12.5" font-weight="700" fill="#0b2447">表示回数</text>
+          <text x="51" y="51" font-size="10.5" fill="#5b6b84">まず動く</text>
+          <line x1="104" y1="39" x2="118" y2="39" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ar)"/>
+          <rect x="121" y="18" width="98" height="42" rx="9" fill="#f5f8fd" stroke="#c9d8ef" stroke-width="1.5"/>
+          <text x="170" y="35" font-size="12.5" font-weight="700" fill="#0b2447">検索順位</text>
+          <text x="170" y="51" font-size="10.5" fill="#5b6b84">次に上がる</text>
+          <line x1="223" y1="39" x2="237" y2="39" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ar)"/>
+          <rect x="240" y="18" width="98" height="42" rx="9" fill="#f5f8fd" stroke="#c9d8ef" stroke-width="1.5"/>
+          <text x="289" y="35" font-size="12.5" font-weight="700" fill="#0b2447">クリック</text>
+          <text x="289" y="51" font-size="10.5" fill="#5b6b84">最後に伸びる</text>
+          <text x="170" y="82" font-size="10.5" fill="#5b6b84">動く順番が違うので、合計だけでは判断できません</text>
+        </g>
+      </svg>
+      <p><strong>順位・表示回数・クリックを分けて見ないと判断を誤ります。</strong></p>
       <p class="pair-why">合計だけを見ていると、動いているのに止まって見えます。</p>
     </div>
     <div class="pair-card">
       <span class="pair-label">順序</span>
       <h3>上位表示が引用の前提</h3>
-      <p>AI検索に引用されるには、<strong>まず検索で上位に入ることが前提</strong>です。</p>
-      <p class="pair-why">順位を上げる工程と、引用されやすい構造を整える工程を同時に進めています。</p>
+      <svg class="pair-fig" viewBox="0 0 340 96" role="img" aria-label="AI検索に引用されるには、検索で上位に入り、抽出しやすい構造を整えることが前提になる。3層の積み上げ構造">
+        <g font-family="inherit">
+          <rect x="86" y="6" width="168" height="26" rx="7" fill="#0b2447"/>
+          <text x="170" y="19" font-size="12" font-weight="700" fill="#fff" text-anchor="middle" dominant-baseline="middle">AIに引用される</text>
+          <rect x="52" y="36" width="236" height="26" rx="7" fill="#dcebfd"/>
+          <text x="170" y="49" font-size="12" font-weight="700" fill="#0b2447" text-anchor="middle" dominant-baseline="middle">抽出しやすい構造がある</text>
+          <rect x="18" y="66" width="304" height="26" rx="7" fill="#f1f5fb" stroke="#dbe5f2"/>
+          <text x="170" y="79" font-size="12" font-weight="700" fill="#0b2447" text-anchor="middle" dominant-baseline="middle">検索で上位に入っている</text>
+        </g>
+      </svg>
+      <p>下の段が欠けると、上は成立しません。<strong>まず検索で上位に入ることが前提</strong>です。</p>
+      <p class="pair-why">順位を上げる工程と、構造を整える工程を同時に進めています。</p>
     </div>
   </div>
 </section>

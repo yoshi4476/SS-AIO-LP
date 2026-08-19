@@ -1227,35 +1227,7 @@ main.lab { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--gutter) 
 
 /* ---- 実装項目（このページの主役）---- */
 /* 1列だと1行が70字を超えて読みにくい。2列にして行長を45字前後に収める */
-.spec-list { list-style: none; margin: 1.8rem 0 0; padding: 0;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 1rem; }
-.spec-list > li {
-  background: #fff; border: 1px solid var(--line); border-radius: 14px;
-  padding: 1.5rem 1.6rem 1.2rem;
-  transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out);
-}
-.spec-list > li:hover { border-color: color-mix(in srgb, var(--blue) 42%, var(--line)); box-shadow: var(--shadow-sm); }
-.spec-h { display: flex; align-items: baseline; gap: .9rem; margin-bottom: .6rem; }
 /* 通し番号は装飾ではなく、工程の並びを示すために置く */
-.spec-no {
-  font-family: var(--en); font-weight: 700; font-size: .82rem; letter-spacing: .1em;
-  color: var(--blue); padding-top: .15em;
-}
-.spec-h h3 { margin: 0; font-size: 1.06rem; font-weight: 700; }
-.spec-list p { margin: 0 0 1rem; line-height: 2; font-size: .95rem; }
-.spec-list code {
-  font-size: .86em; background: var(--sky); padding: .12em .45em; border-radius: 5px;
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-}
-.spec-f { display: flex; flex-wrap: wrap; gap: .6rem; }
-.spec-read {
-  display: inline-flex; align-items: center; gap: .4em; text-decoration: none;
-  font-size: .84rem; font-weight: 700; border-radius: 999px; padding: .5em 1.1em;
-  background: var(--sky); color: var(--blue);
-  transition: background .2s var(--ease-out), color .2s var(--ease-out);
-}
-.spec-read:hover { background: #dbeafe; }
-
 /* ---- 工程 ---- */
 .lab-flow { list-style: none; counter-reset: f; margin: 1.8rem 0 1.6rem; padding: 0;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .8rem; }
@@ -1276,6 +1248,35 @@ main.lab { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--gutter) 
   background: var(--sky); border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0;
   padding: 1.2rem 1.4rem; line-height: 2; font-size: .93rem;
 }
+
+/* ---- 実装項目の一覧表 ---- */
+/* 6項目を段落で並べると、1つずつ読まないと全体が掴めない。
+   横に走査できる表にして、必要な行だけ読めるようにする。 */
+.spec-wrap { overflow-x: auto; margin: 1.8rem 0 1.4rem; -webkit-overflow-scrolling: touch; }
+.spec-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: .9rem; }
+.spec-table thead th {
+  text-align: left; font-size: .74rem; letter-spacing: .06em; color: var(--muted);
+  font-weight: 700; padding: 0 1rem .6rem; border-bottom: 2px solid var(--line);
+  background: none;
+}
+.spec-table tbody th, .spec-table tbody td {
+  padding: 1rem; border-bottom: 1px solid var(--line); vertical-align: top;
+  line-height: 1.85; text-align: left; background: none;
+}
+.spec-table tbody th { font-weight: 700; color: var(--navy); white-space: nowrap; }
+.spec-table tbody tr:hover td, .spec-table tbody tr:hover th { background: #fafcff; }
+.spec-table .spec-do { font-weight: 700; color: var(--blue); white-space: nowrap; }
+.spec-table td:nth-child(3) { color: var(--muted); font-size: .87rem; }
+.spec-table .spec-lnk { text-align: right; }
+.spec-table .spec-lnk a {
+  display: inline-block; white-space: nowrap; text-decoration: none; font-weight: 700;
+  font-size: .8rem; color: var(--blue); background: var(--sky);
+  padding: .4em 1em; border-radius: 999px; background-image: none;
+}
+.spec-table .spec-lnk a:hover { background: var(--sky-2); }
+
+/* 概念図。文章だけだと「順序がある」ことが読み流される */
+.pair-fig { display: block; width: 100%; height: auto; margin: .2rem 0 1rem; }
 
 /* ---- 2つの論点を左右に置く ---- */
 /* 段落を続けると要点が埋もれる。対になる話は横に並べて、
