@@ -71,9 +71,13 @@ def ga4_property():
 # データ取得
 # ============================================================
 def month_labels(n=6):
+    # 既定は前月まで（月初に前月分を発行するため）。
+    # --current のときは当月を末尾に置き、月の途中でも現況を見られるようにする。
     labels = []
     d = date.today().replace(day=1)
-    for _ in range(n):
+    if "--current" in sys.argv:
+        labels.append(f"{d.year}-{d.month:02d}")
+    for _ in range(n - len(labels)):
         d = (d - timedelta(days=1)).replace(day=1)
         labels.append(f"{d.year}-{d.month:02d}")
     return list(reversed(labels))
@@ -115,7 +119,9 @@ def fetch_real():
     prop = f"properties/{ga4_property()}"
     for m in labels:
         y, mo = map(int, m.split("-"))
-        end = (date(y + (mo == 12), (mo % 12) + 1, 1) - timedelta(days=1)).isoformat()
+        # 当月はまだ月末が来ていない。未来日を渡すと期間が空になるため今日で止める
+        end = min(date(y + (mo == 12), (mo % 12) + 1, 1) - timedelta(days=1),
+                  date.today()).isoformat()
         rep = ga.run_report(RunReportRequest(
             property=prop, date_ranges=[DateRange(start_date=f"{m}-01", end_date=end)],
             metrics=[Metric(name="sessions"), Metric(name="conversions")]))
@@ -166,7 +172,9 @@ def fetch_real():
     site = ENV["GSC_SITE_URL"]
     for i, m in enumerate(labels):
         y, mo = map(int, m.split("-"))
-        end = (date(y + (mo == 12), (mo % 12) + 1, 1) - timedelta(days=1)).isoformat()
+        # 当月はまだ月末が来ていない。未来日を渡すと期間が空になるため今日で止める
+        end = min(date(y + (mo == 12), (mo % 12) + 1, 1) - timedelta(days=1),
+                  date.today()).isoformat()
         res = sc.searchanalytics().query(siteUrl=site, body={
             "startDate": f"{m}-01", "endDate": end}).execute()
         r = (res.get("rows") or [{}])[0]

@@ -150,6 +150,28 @@ def main():
     # 6. SNSへ投稿（認証が無ければ黙ってスキップする。公開そのものは止めない）
     run([PY, "scripts/post_social.py", site_id, slug], check=False)
 
+    # 7. 公開した記事へ、既存記事からリンクを送る。
+    #    毎日2本公開しているため、ここでやらないと「どこからもリンクされていない
+    #    記事」が増え続ける。手作業で整えても数日で元に戻っていた。
+    import link_new
+    # 生成された記事は本文とまとめの両方で同じ記事に触れがち。
+    # 同じ先への2本目以降はリンクの重みを分散させるだけなので外す。
+    if link_new.dedupe(site_id, [slug]):
+        print("内部リンク: この記事の中の重複リンクを外しました")
+    edited = link_new.send_links(site_id, [slug], quiet=True)
+    if edited:
+        print(f"内部リンク: {len(edited)}記事から この記事へリンクを追加")
+        if cfg["type"] == "self-static":
+            run([PY, "scripts/build.py"], check=False)   # 全記事を作り直すので1回で足りる
+        else:
+            for s in edited:      # 外部サイトは記事ごとに送り直す必要がある
+                a = [PY, "scripts/publish.py", "--site", site_id, "--slug", s]
+                if push:
+                    a.append("--push")
+                run(a, check=False)
+    else:
+        print("内部リンク: 話題の近い記事がなく、送り元を作れませんでした")
+
     print(f"\n公開完了: {url}（score {score}）")
 
 

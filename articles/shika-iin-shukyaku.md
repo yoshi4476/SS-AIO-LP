@@ -52,6 +52,8 @@ diagrams:
 
 歯科医院の集客でMEOと口コミが重要なのは、歯科診療所の激しい競争密度と、口コミを読んでから来院先を決める患者行動の2点にあります。
 
+関連する内容は、[歯科医院のMEO対策｜自由診療で新患を増やす7つの実践ポイント](/meo/shika-meo-taisaku/)で解説しています。
+
 第一に、歯科医院は競争密度が非常に高い業種です。<a href="https://www.mhlw.go.jp/toukei/list/79-1.html" target="_blank" rel="noopener">厚生労働省「医療施設調査」</a>の集計では、全国の歯科診療所数は6万件台後半で推移し、コンビニエンスストアの店舗数を上回る規模です。**「地域名×歯医者」の検索結果には常に多数の競合が並ぶ**ため、マップ上位に表示されるかどうかが新患数を直接左右します。
 
 第二に、口コミが受診先選びの主要な判断材料になっていることです。<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、**83%が確認先としてGoogleを利用**しています。歯の治療という不安を伴う選択では、口コミの重みはさらに増します。

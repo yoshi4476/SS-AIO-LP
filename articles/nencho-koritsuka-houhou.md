@@ -100,6 +100,8 @@ faq:
 
 年末調整の効率化は、電子化・証明書のデータ収集・リスト化・前倒し・外部委託の5つの取り組みで進められます。
 
+実際の進め方は[支払業務の効率化とは？基本4ステップと方法の比較](/blog/shiharai-gyomu-koritsuka/)で整理しています。
+
 <figure><img src="/images/nencho-koritsuka-houhou/flow.png" alt="年末調整を効率化する5つの方法: 申告書を電子化する、証明書をデータ収集、確認をリスト化する、スケジュールを前倒す、外部委託を検討する" loading="lazy"><figcaption>年末調整を効率化する5つの方法</figcaption></figure>
 
 1つ目は、申告書の電子化です。国税庁が無償で提供する<a href="https://www.nta.go.jp/users/gensen/nenmatsu/nencho.htm" target="_blank" rel="noopener">年末調整手続の電子化に向けた取組</a>にある年調ソフトを使えば、従業員がパソコンやスマートフォンで控除申告書を作成し、控除額の計算や扶養親族の年齢判定を自動化できます。
