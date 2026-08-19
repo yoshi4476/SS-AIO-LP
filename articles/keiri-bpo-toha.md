@@ -76,6 +76,8 @@ faq:
 
 経理BPOでは、記帳・仕訳入力から請求書処理、給与計算、月次試算表の作成まで、経理業務の大部分を任せられます。
 
+実際の進め方は、[経理の業務フロー見直し3ステップ｜属人化と遅延を防ぐ](/blog/keiri-gyomu-flow-minaoshi/)で解説しています。
+
 対象になる範囲は[経理の丸投げできる範囲とできない範囲｜残す業務4つ](/blog/keiri-marunage-dekiru-hani/)で整理しています。
 
 <figure><img src="/images/keiri-bpo-toha/hani.png" alt="経理BPOに任せられる業務範囲: 記帳・仕訳入力、請求書発行・支払処理、経費精算のチェック、給与計算・年末調整、月次試算表の作成" loading="lazy"><figcaption>経理BPOに任せられる業務範囲</figcaption></figure>

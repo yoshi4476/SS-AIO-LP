@@ -45,10 +45,21 @@ def load_env():
 
 ENV = load_env()
 
+# どのサイトのレポートかは引数で決める。既定は従来どおりAI集客ラボ。
+# 管制塔が持つ3サイトそれぞれで発行するため、決め打ちをやめた。
+SITE_ID = "ai-lab"
+if "--site" in sys.argv:
+    SITE_ID = sys.argv[sys.argv.index("--site") + 1]
+
+
+def site_cfg():
+    import sites as _s
+    return _s.load(SITE_ID)
+
 
 def ga4_property():
     """GA4プロパティIDを数値だけに正規化する（GA4 APIは数値以外を受け付けない）"""
-    raw = ENV.get("GA4_PROPERTY_ID", "")
+    raw = site_cfg().get("ga4_property_id") or ENV.get("GA4_PROPERTY_ID", "")
     # BOM・ゼロ幅文字・前後の空白を落とす（Secretsへの貼り付けで混入しやすい）
     v = "".join(c for c in raw if c.isdigit() or c.isalpha() or c in "-_/")
     v = v.removeprefix("properties/")
@@ -71,13 +82,10 @@ def ga4_property():
 # データ取得
 # ============================================================
 def month_labels(n=6):
-    # 既定は前月まで（月初に前月分を発行するため）。
-    # --current のときは当月を末尾に置き、月の途中でも現況を見られるようにする。
+    # 月初に前月分を発行する。当月は途中経過にしかならないため対象にしない。
     labels = []
     d = date.today().replace(day=1)
-    if "--current" in sys.argv:
-        labels.append(f"{d.year}-{d.month:02d}")
-    for _ in range(n - len(labels)):
+    for _ in range(n):
         d = (d - timedelta(days=1)).replace(day=1)
         labels.append(f"{d.year}-{d.month:02d}")
     return list(reversed(labels))
@@ -169,7 +177,7 @@ def fetch_real():
 
     # --- GSC: 月別クリック/表示/CTR/順位 + クエリ別 ---
     sc = build("searchconsole", "v1", credentials=creds)
-    site = ENV["GSC_SITE_URL"]
+    site = f'https://{site_cfg()["domain"]}/'
     for i, m in enumerate(labels):
         y, mo = map(int, m.split("-"))
         # 当月はまだ月末が来ていない。未来日を渡すと期間が空になるため今日で止める
@@ -445,6 +453,8 @@ def fetch_demo():
 # サイト全体監査（記事別・ページ別の具体的な修正指示を自動生成）
 # ============================================================
 def audit_site(d):
+    import sites as _sites
+    _dom = _sites.load(SITE_ID)["domain"]
     import re as _re
     today = date.today()
     arts = []
@@ -459,10 +469,17 @@ def audit_site(d):
             mm = _re.search(rf"^{key}:\s*(.+?)\s*$", fm, _re.M)
             return mm.group(1).strip('"') if mm else ""
 
+        # articles/ には3サイト分の原稿が入っている。絞らないと3サイトとも
+        # 「全123記事を監査」と同じ数字になり、他サイトの記事に対する
+        # 修正指示が並んでしまう。
+        if _sites.find_category_owner(fv("category")) != SITE_ID:
+            continue
         arts.append({
             "slug": p.stem, "title": fv("title"), "cat": fv("category"),
             "date": fv("dateModified") or fv("date"),
-            "links": len(_re.findall(r"\]\(/(?:aio|seo|meo|ai-marketing)/[a-z0-9-]+/\)", body)),
+            "links": len(_re.findall(r"\]\(/[a-z-]+/[a-z0-9-]+/\)", body))
+            + len(_re.findall(rf"\]\(https?://{_re.escape(_dom)}/[a-z-]+/[a-z0-9-]+/\)",
+                              body)),
             "faq": len(_re.findall(r"<details><summary>", body)),
             "len": len(_re.sub(r"\s", "", body)),
         })
@@ -474,7 +491,9 @@ def audit_site(d):
 
     art_rows, keep = [], []
     for x in arts:
-        path = f'/{x["cat"]}/{x["slug"]}/'
+        path = _re.sub(r"^https?://[^/]+", "", _sites.article_url(
+            _sites.load(SITE_ID), {"slug": x["slug"], "category": x["cat"],
+                                   "date": x["date"]}))
         g = pages.get(path)
         issues = []
         # 検索データにもとづく指示
@@ -560,7 +579,7 @@ def inbound_plan(d):
     """被リンクの追加指示（実装は inbound_links.py。グループレポートと共用する）"""
     import inbound_links
     pages = {p["path"]: p for p in d.get("pages", [])}
-    return inbound_links.plan(pages, "ai-lab")
+    return inbound_links.plan(pages, SITE_ID)
 
 
 # ============================================================
@@ -657,7 +676,7 @@ def analyze(d):
             continue
         fm, body = m.groups()
         _cm = _re.search(r"^category:\s*(\S+)", fm, _re.M)
-        if _cm and _sites.find_category_owner(_cm.group(1)) != "ai-lab":
+        if _cm and _sites.find_category_owner(_cm.group(1)) != SITE_ID:
             continue
         sc = _re.search(r"^score:\s*(\d+)", fm, _re.M)
         if sc:
@@ -703,7 +722,8 @@ def analyze(d):
     # 前月号で設定した「当月の目標」との突合（初月は前月号が無いため空になる）
     import json as _json
     prev_targets, achievement = {}, []
-    tf = ROOT / "reports" / "targets.json"
+    tf = ROOT / "reports" / ("targets.json" if SITE_ID == "ai-lab"
+                            else f"targets-{SITE_ID}.json")
     if tf.exists():
         try:
             prev_targets = _json.loads(tf.read_text(encoding="utf-8")).get(cur["label"], {})
@@ -1422,7 +1442,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
     <span class="cv-badge">LPコンバージョン分析</span><span class="cv-badge">改善プラン</span>
   </div>
   <div class="cv-meta">
-    対象メディア: <b>AI集客ラボ</b>（https://ai.7senses.co.jp）+ 集客支援LP<br>
+    対象メディア: <b>{site_cfg()["name"]}</b>（https://{site_cfg()["domain"]}）<br>
     発行: <b>セブンセンシズ株式会社</b>｜発行日: {date.today().isoformat()}｜作成: 自動集計+分析エンジン<br>
     本レポートの数値は Google Analytics 4 / Google Search Console / 運用ログの実測にもとづきます
   </div>
@@ -1954,7 +1974,7 @@ AI経由参照は chatgpt.com・chat.openai.com・perplexity.ai・gemini.google.
 <!-- ページ10: 裏表紙 -->
 <div class="sheet back-cover">
   {logo_b64}
-  <div class="l">AI集客ラボ｜セブンセンシズ株式会社</div>
+  <div class="l">{site_cfg()["name"]}｜セブンセンシズ株式会社</div>
   <div class="s">〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>
   TEL 06-4305-7547（9:00〜20:00 / 土日祝休）<br>
   https://ai.7senses.co.jp ｜ https://corp.7senses.co.jp<br><br>
@@ -1973,7 +1993,8 @@ def main():
     html = render(d, a)
 
     ym = d["months"][-1]["label"]
-    out_dir = ROOT / "reports" / ym
+    # サイトごとに分ける。同じ場所へ書くと最後に走ったサイトだけが残る。
+    out_dir = ROOT / "reports" / (ym if SITE_ID == "ai-lab" else f"{ym}-{SITE_ID}")
     out_dir.mkdir(parents=True, exist_ok=True)
     html_path = out_dir / "report.html"
     pdf_path = out_dir / "report.pdf"
@@ -1983,7 +2004,8 @@ def main():
     if not DEMO:
         y, mo = map(int, ym.split("-"))
         next_ym = f"{y + (mo == 12)}-{(mo % 12) + 1:02d}"
-        tf = ROOT / "reports" / "targets.json"
+        tf = ROOT / "reports" / ("targets.json" if SITE_ID == "ai-lab"
+                                else f"targets-{SITE_ID}.json")
         store = {}
         if tf.exists():
             try:
@@ -2010,7 +2032,7 @@ def main():
                footer_template=(
                    '<div style="width:100%;font-size:7px;color:#8ba0bd;'
                    'padding:0 12mm;display:flex;justify-content:space-between;">'
-                   '<span>AI集客ラボ 月次コンサルティングレポート ｜ セブンセンシズ株式会社</span>'
+                   f'<span>{site_cfg()["name"]} 月次コンサルティングレポート ｜ セブンセンシズ株式会社</span>'
                    '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>'),
                margin={"top": "0", "bottom": "10mm", "left": "0", "right": "0"})
         b.close()
@@ -2024,7 +2046,7 @@ def main():
             return
         payload = json.dumps({
             "from": frm, "to": [to],
-            "subject": f"【AI集客ラボ】月次コンサルティングレポート {ym}",
+            "subject": f"【{site_cfg()['name']}】月次コンサルティングレポート {ym}",
             "text": f"{ym} の月次レポートをお送りします。PDFをご確認ください。",
             "attachments": [{"filename": f"report-{ym}.pdf",
                              "content": base64.b64encode(pdf_path.read_bytes()).decode()}],

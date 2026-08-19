@@ -128,6 +128,8 @@ diagrams:
 
 **失敗の多くは、規模に合わない施策の流用・保険と自由診療の混同案内・情報更新の停止という3パターンに集約されます。**
 
+つまずきやすい点は[整骨院の集客イベント5選｜広告規制内でできる企画と注意点](/ai-marketing/seikotsuin-shukyaku-event/)でも扱っています。
+
 私たちの支援現場で相談を受ける失敗の多くは、施策そのものの質よりも自院の規模との不一致が原因です。ここでは特に相談の多い3つを紹介します。
 
 <figure><img src="/images/seikotsuin-shukyaku-jirei/ng-ok.png" alt="規模別に見る集客のNG・OKパターン比較: NGは規模に合わない施策の流用・口コミ返信を放置・情報更新の停止。OKは自院の規模に合う施策から着手・口コミに全件返信・月1回の情報更新" loading="lazy"><figcaption>規模別に見る集客のNG・OKパターン</figcaption></figure>

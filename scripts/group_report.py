@@ -37,12 +37,9 @@ AI_DOMAINS = {"chatgpt": ["chatgpt.com", "chat.openai.com"], "perplexity": ["per
 # データ取得
 # ============================================================
 def months(n=6):
-    # 既定は前月まで（月初に前月分を発行するため）。
-    # --current のときは当月を末尾に置き、月の途中でも現況を見られるようにする。
+    # 月初に前月分を発行する。当月は途中経過にしかならないため対象にしない。
     out, d = [], date.today().replace(day=1)
-    if "--current" in sys.argv:
-        out.append(f"{d.year}-{d.month:02d}")
-    for _ in range(n - len(out)):
+    for _ in range(n):
         d = (d - timedelta(days=1)).replace(day=1)
         out.append(f"{d.year}-{d.month:02d}")
     return list(reversed(out))
@@ -50,10 +47,7 @@ def months(n=6):
 
 def month_end(label):
     y, m = map(int, label.split("-"))
-    last = date(y + (m == 12), (m % 12) + 1, 1) - timedelta(days=1)
-    # 当月は月末がまだ来ていない。GSCは3日ほど遅れて確定するのでそこまでを見る。
-    today = date.today() - timedelta(days=3)
-    return min(last, today).isoformat()
+    return (date(y + (m == 12), (m % 12) + 1, 1) - timedelta(days=1)).isoformat()
 
 
 def creds(scopes):

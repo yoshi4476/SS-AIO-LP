@@ -64,9 +64,15 @@ jobs:
             echo "LEAD_TO_EMAIL=info.ai@7senses.co.jp"
           } > .env
 
-      - name: 月次レポート生成・メール送付（サイト単体の詳細版・17ページ）
+      # 管制塔が持つ3サイトそれぞれで発行する。以前はAI集客ラボの分しか
+      # 出ておらず、コーポレートと補助金サイトの月次報告が存在しなかった。
+      - name: 月次レポート生成・メール送付（サイト単体の詳細版）
         if: steps.gate.outputs.ready == 'true'
-        run: python scripts/monthly_report.py --email
+        run: |
+          for s in ai-lab corporate subsidy; do
+            echo "── $s"
+            python scripts/monthly_report.py --site "$s" --email || echo "  $s は生成できませんでした"
+          done
 
       # 3サイトを1枚で見渡す経営向けのレポート。単体版とは役割が違うため別送する
       - name: グループ月次レポート生成・メール送付
@@ -82,7 +88,7 @@ jobs:
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add reports/targets.json || true
+          git add reports/targets.json reports/targets-*.json || true
           if git diff --cached --quiet; then
             echo "保存すべき目標値の変更なし"
           else

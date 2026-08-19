@@ -1215,18 +1215,6 @@ main.lab { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--gutter) 
 .lab-lead { max-width: 38em; margin: 0; color: rgba(255,255,255,.86); line-height: 2.05; font-size: 1.02rem; }
 .lab-lead strong { color: #fff; }
 
-.lab-stats {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem; margin: 2.4rem 0 0;
-  border-top: 1px solid rgba(255,255,255,.18); padding-top: 1.8rem;
-}
-.lab-stats b {
-  display: block; font-family: var(--en); font-weight: 700; font-size: 2.3rem;
-  line-height: 1; color: #fff;
-}
-.lab-stats span { display: block; margin-top: .5rem; font-size: .8rem; color: rgba(255,255,255,.66); }
-.lab-asof { margin: 1.5rem 0 0; font-size: .76rem; color: rgba(255,255,255,.5); }
-
 /* ---- 節 ---- */
 .lab-sec { margin: 0 0 3.4rem; }
 .lab-sec > h2 {
@@ -1260,16 +1248,12 @@ main.lab { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--gutter) 
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 .spec-f { display: flex; flex-wrap: wrap; gap: .6rem; }
-/* 「実物を見る」導線はページの核なので、他のリンクより強く出す */
-.spec-verify, .spec-read {
+.spec-read {
   display: inline-flex; align-items: center; gap: .4em; text-decoration: none;
   font-size: .84rem; font-weight: 700; border-radius: 999px; padding: .5em 1.1em;
+  background: var(--sky); color: var(--blue);
   transition: background .2s var(--ease-out), color .2s var(--ease-out);
 }
-.spec-verify { background: var(--blue); color: #fff; }
-.spec-verify::before { content: "↗"; font-size: .9em; }
-.spec-verify:hover { background: #1d4ed8; }
-.spec-read { background: var(--sky); color: var(--blue); }
 .spec-read:hover { background: #dbeafe; }
 
 /* ---- 工程 ---- */
@@ -1331,6 +1315,5 @@ main.lab .cta-final { border-radius: 20px; margin: 0 0 3.4rem; }
 main.lab .cta-final h2 { color: #fff; }
 
 @media (max-width: 640px) {
-  .lab-stats b { font-size: 1.9rem; }
   .spec-f { gap: .5rem; }
 }

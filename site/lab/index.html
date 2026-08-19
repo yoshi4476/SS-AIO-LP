@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>実装ラボ｜このサイト自体をAIO対策の実験場にしています</title>
-<meta name="description" content="AI集客ラボは、記事で解説するAIO対策を自社サイトで実装し、日次で計測しています。構造化データ・llms.txt・AIクローラー20種の許可・自動公開の仕組みまで、実装の中身と計測結果を公開します。">
+<meta name="description" content="AI集客ラボは、記事で解説するAIO対策を自社サイトで実装し、日次で計測しています。構造化データ・llms.txt・AIクローラーの許可設定まで、実装の中身と計測結果を公開します。">
 <link rel="canonical" href="https://ai.7senses.co.jp/lab/">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="stylesheet" href="/css/style.css?v=39dca5f4">
+<link rel="stylesheet" href="/css/style.css?v=d7ef4703">
 <script defer src="/js/site.js?v=85532eca"></script>
 </head>
 <body>
@@ -59,34 +59,25 @@
     <span class="lab-kicker">Implementation Lab</span>
     <h1>解説していることを、<br>このサイトで実装しています。</h1>
     <p class="lab-lead">AI検索に引用されるための実装を、自社サイトに入れて日次で計測しています。<strong>書いてあることが本当かどうかは、この場で確かめられます。</strong></p>
-    <div class="lab-stats">
-      <div><b>20</b><span>許可したAIクローラー</span></div>
-      <div><b>59</b><span>公開しているURL</span></div>
-      <div><b>131</b><span>計測中の検索語</span></div>
-      <div><b>19</b><span>公開前の自動検査</span></div>
-    </div>
-    <p class="lab-asof">2026年8月時点</p>
   </div>
 </section>
 
 <section class="lab-sec">
-  <h2>実装した項目と、その確認方法</h2>
-  <p class="lab-note">「やり方を解説する記事」は多くありますが、書いた本人が実装しているとは限りません。以下はすべて当サイトで動いており、右側のリンクから実物を見られます。</p>
+  <h2>このサイトで実装している項目</h2>
+  <p class="lab-note">「やり方を解説する記事」は多くありますが、書いた本人が実装しているとは限りません。以下はすべて当サイトで実際に動いている実装です。</p>
 
   <ul class="spec-list">
     <li>
       <div class="spec-h"><span class="spec-no">01</span><h3>AIクローラーの許可</h3></div>
       <p>GPTBot・ClaudeBot・PerplexityBot・Applebot-Extended など<strong>20種</strong>を robots.txt に明示しています。<code>User-agent: *</code> で全許可でも動きますが、判定を相手任せにしないため個別に書いています。</p>
       <div class="spec-f">
-        <a class="spec-verify" href="/robots.txt" target="_blank" rel="noopener">robots.txt を見る</a>
         <a class="spec-read" href="/aio/aio-taisaku-guide/">解説記事</a>
       </div>
     </li>
     <li>
       <div class="spec-h"><span class="spec-no">02</span><h3>llms.txt の設置</h3></div>
-      <p>AI向けのサイト案内です。運営者情報と全記事を<strong>47件</strong>掲載しており、記事を公開するたびに自動で追記されます。</p>
+      <p>AI向けのサイト案内です。運営者情報と全記事を掲載しており、記事を公開するたびに更新しています。</p>
       <div class="spec-f">
-        <a class="spec-verify" href="/llms.txt" target="_blank" rel="noopener">llms.txt を見る</a>
         <a class="spec-read" href="/aio/llmo-taisaku-hoho/">解説記事</a>
       </div>
     </li>
@@ -94,7 +85,6 @@
       <div class="spec-h"><span class="spec-no">03</span><h3>構造化データ</h3></div>
       <p>全記事に <code>BlogPosting</code> + <code>FAQPage</code> + <code>BreadcrumbList</code> を入れています。著者は「編集部」ではなく<strong>実在の個人</strong>で、発行者には<strong>法人番号</strong>を持たせ、同名の別法人と機械的に区別できるようにしています。</p>
       <div class="spec-f">
-        <a class="spec-verify" href="https://search.google.com/test/rich-results?url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-taisaku-guide%2F" target="_blank" rel="noopener">リッチリザルトテストで確認</a>
         <a class="spec-read" href="/author/haraguchi/">監修者</a>
       </div>
     </li>
@@ -102,7 +92,6 @@
       <div class="spec-h"><span class="spec-no">04</span><h3>抽出しやすい本文構造</h3></div>
       <p>冒頭200字の断言／各H2直下の1文結論／定義ブロック／比較テーブル／FAQ5問以上。AIが答えを切り出しやすい形を、全記事で守っています。</p>
       <div class="spec-f">
-        <a class="spec-verify" href="/aio/aio-taisaku-guide/" target="_blank" rel="noopener">実例の記事を見る</a>
         <a class="spec-read" href="/seo/ai-jidai-seo-taisaku/">解説記事</a>
       </div>
     </li>
@@ -110,15 +99,13 @@
       <div class="spec-h"><span class="spec-no">05</span><h3>鮮度の明示</h3></div>
       <p>本文の「◯年◯月時点」と、構造化データの <code>dateModified</code> を一致させています。AI検索は情報の新しさを重く見るため、更新のたびに両方を書き換えます。</p>
       <div class="spec-f">
-        <a class="spec-verify" href="/feed.xml" target="_blank" rel="noopener">更新履歴（Atom）</a>
         <a class="spec-read" href="/aio/aio-taisaku-guide/">解説記事</a>
       </div>
     </li>
     <li>
       <div class="spec-h"><span class="spec-no">06</span><h3>順位の日次計測</h3></div>
-      <p>Search Console の平均掲載順位を毎日記録し、<strong>11〜30位の記事を「あと少しで1ページ目」として自動抽出</strong>してリライト対象にしています。</p>
+      <p>Search Console の平均掲載順位を毎日記録し、<strong>11〜30位の記事を「あと少しで1ページ目」として抽出</strong>し、リライト対象にしています。</p>
       <div class="spec-f">
-        <a class="spec-verify" href="/site-audit/" target="_blank" rel="noopener">同じ観点の無料採点を試す</a>
         <a class="spec-read" href="/seo/ai-jidai-seo-taisaku/">解説記事</a>
       </div>
     </li>
@@ -126,11 +113,11 @@
 </section>
 
 <section class="lab-sec">
-  <h2>公開までを自動で回しています</h2>
-  <p>キーワードの選定から公開後のインデックス通知まで、順番に自動で流れます。人が判断するのは、品質の最終確認と事業の方向づけだけです。</p>
-  <p>品質は人の目視ではなく<strong>機械で判定</strong>しており、基準を満たさない記事は公開されません。既存記事と内容が重なる場合も、公開の手前で止まります。<strong>1日に複数本を出しながら品質を保てるのは、この判定を自動化しているためです。</strong></p>
+  <h2>公開の基準を決めています</h2>
+  <p>記事は書き上がった時点では公開しません。<strong>定めた基準を満たしたものだけを公開しています。</strong>基準に届かない原稿は、満たすまで書き直します。</p>
+  <p>既存記事と内容が重なるものも公開しません。同じ話題の記事が並ぶと、検索エンジンがどちらを評価するか決められず、両方の順位が下がるためです。</p>
   <div class="lab-callout">
-    判定の項目と工程の詳細は、当社のサービスとして提供している部分のため公開していません。導入をご検討の方には個別にご説明します。
+    基準の項目と運用の詳細は、当社のサービスとして提供している部分のため公開していません。導入をご検討の方には個別にご説明します。
   </div>
 </section>
 
@@ -149,7 +136,7 @@
       <span class="prod-tag">AIO運用</span>
       <h3>AIO対策エージェント</h3>
       <p class="role">オウンドメディア ＋ 記事を出し続けるAIエージェント</p>
-      <p>キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計までを自動で回します。<strong>このサイト自体が、その稼働例</strong>です。</p>
+      <p>キーワード設計から執筆・品質審査・公開・インデックス登録・順位集計までを一貫して担います。<strong>このサイト自体が、その運用例</strong>です。</p>
       <a class="prod-link" href="https://corp.7senses.co.jp/aio-agent" target="_blank" rel="noopener" data-cta="lab_aio_agent">詳細を見る<span class="arw">→</span></a>
     </article>
 

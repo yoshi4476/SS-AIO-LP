@@ -43,6 +43,8 @@ diagrams:
 
 整骨院の集客とは、地域検索とマップからの新規来院と、骨盤矯正などの自由診療メニューへの専門性訴求を、別々の導線として設計する取り組みです。
 
+つまずきやすい点を先に押さえるなら、[整骨院の集客イベント5選｜広告規制内でできる企画と注意点](/ai-marketing/seikotsuin-shukyaku-event/)が参考になります。
+
 実際の例は[整骨院の集客成功事例5選｜院の規模で変わる打ち手と注意点](/ai-marketing/seikotsuin-shukyaku-jirei/)でも扱っています。
 
 あわせて[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)もご覧ください。
