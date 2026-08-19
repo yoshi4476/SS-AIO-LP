@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-19T00:00:00+09:00</updated>
+  <updated>2026-08-20T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>整骨院のSEO対策とは？MEOと役割分担する5つの手順</title>
+    <link href="https://ai.7senses.co.jp/seo/seikotsuin-seo-taisaku/"/>
+    <id>https://ai.7senses.co.jp/seo/seikotsuin-seo-taisaku/</id>
+    <updated>2026-08-20T00:00:00+09:00</updated>
+    <summary>整骨院のSEO対策とは、Googleの自然検索から新規患者に見つけてもらうための施策です。MEOとの役割分担、症状別ページの作り方、柔整広告の注意点まで5つの手順で解説します。</summary>
+  </entry>
   <entry>
     <title>整骨院の集客イベント5選｜広告規制内でできる企画と注意点</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-event/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/</id>
     <updated>2026-08-10T00:00:00+09:00</updated>
     <summary>AIO対策は、Search ConsoleやGA4、Googleのリッチリザルトテストなど無料ツール6つで今日から始められます。AI引用状況と構造化データを無料で計測・診断する具体的な手順を解説します。</summary>
-  </entry>
-  <entry>
-    <title>不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップ</title>
-    <link href="https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/"/>
-    <id>https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/</id>
-    <updated>2026-08-10T00:00:00+09:00</updated>
-    <summary>不動産のAI検索対策とは、ChatGPTやAI Overviewが物件相談・会社選びに答える際、自社の情報が回答の中で紹介されるよう情報を整備することです。3,200店舗以上の支援実績をもとに、AI検索で選ばれる4つの実践ステップを解説します。</summary>
   </entry>
 </feed>

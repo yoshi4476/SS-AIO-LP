@@ -72,6 +72,8 @@ diagrams:
 
 **歯科医院SEOは、症状KWでのページ構成から自由診療の専門ページ強化、歯科用の構造化データ実装まで5段階で進めます。**
 
+実際の進め方は[整骨院のSEO対策とは？MEOと役割分担する5つの手順](/seo/seikotsuin-seo-taisaku/)でも扱っています。
+
 <figure><img src="/images/shika-seo-taisaku/steps.png" alt="歯科医院SEO基本5ステップ: 症状KWで構成、自由診療ページ強化、内部リンクで回遊、歯科用データ実装、ポータルと併用" loading="lazy"><figcaption>歯科医院SEO基本5ステップ。前半3つがコンテンツ整備、後半2つが技術・戦略面の対応です</figcaption></figure>
 
 ### ステップ1: 症状名・治療名のキーワードでページを構成する
