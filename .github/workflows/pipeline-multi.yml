@@ -63,6 +63,14 @@ jobs:
           pip install -r requirements.txt
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
           npm install -g @anthropic-ai/claude-code
+          # ネイティブバイナリが落ちてこないことがある（postinstallが走らない／
+          # optional依存が省かれる）。実行時まで気づけず、記事生成ごと落ちる。
+          # ここで動作を確かめ、駄目ならインストーラを直接叩き直す。
+          if ! claude --version >/dev/null 2>&1; then
+            echo "claude が動かないため postinstall をやり直します"
+            node "$(npm root -g)/@anthropic-ai/claude-code/install.cjs" || true
+          fi
+          claude --version
 
       - name: Git識別情報の設定
         run: |
