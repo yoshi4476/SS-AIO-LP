@@ -104,6 +104,8 @@ Google公式は、<a href="https://developers.google.com/search/docs/appearance/
 
 **診断は、順位確認→クローラー確認→構造確認→鮮度確認の順で進めます。**
 
+関連する内容は[税理士の集客ができない原因5つと処方箋【2026年】](/ai-marketing/zeirishi-shukyaku-dekinai/)でも扱っています。
+
 <figure><img src="/images/aio-taisaku-hyouji-sarenai/shindan-flow.png" alt="表示されない原因を診断する4ステップ: 順位を確認、クローラーを確認、構造を確認、鮮度を確認" width="1200" height="400" loading="lazy"><figcaption>表示されない原因を診断する4ステップ（当メディア作成）</figcaption></figure>
 
 まず対象KWでの自社ページの検索順位を確認します。10位以内に入っていなければ、AIO対策より先に通常のSEOでの上位表示を優先してください。次に自社サイトの「/robots.txt」を直接開き、GPTBot・ClaudeBot・PerplexityBot・Googlebotの許可状況を確認します。
