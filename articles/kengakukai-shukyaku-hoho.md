@@ -49,6 +49,8 @@ diagrams:
 
 **見学会集客とは、来場予約の獲得から当日運営、来場後のフォローまでを一体で設計する取り組みです。**
 
+あわせて[工務店のインスタ集客とは？問い合わせにつなげる5つの施策](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
+
 <div class="definition-box"><span class="term">見学会集客とは</span>、完成見学会・オープンハウス・モデルハウス見学会などのイベントに、狙った層の見込み客を予約獲得から来場まで導く一連の施策のことです。単発の広告出稿ではなく、告知・予約導線・当日体験・アフターフォローまでを一つの流れとして設計する点が特徴です。</div>
 
 国土交通省の<a href="https://www.mlit.go.jp/sogoseisaku/jouhouka/sosei_jouhouka_tk4_000002.html" target="_blank" rel="noopener">建築着工統計調査報告</a>によると、**2025年度の新設住宅着工戸数は71万1,171戸で前年度比12.9%減**、持家は19万5,111戸で同12.6%減でした。
