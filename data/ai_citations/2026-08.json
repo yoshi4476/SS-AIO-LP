@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-19",
+  "date": "2026-08-20",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
@@ -10,8 +10,8 @@
       "items": []
     },
     "corporate": {
-      "judged": 1,
-      "suspect_taken": 1,
+      "judged": 2,
+      "suspect_taken": 2,
       "healthy": 0,
       "too_thin": 5,
       "items": [
@@ -19,7 +19,17 @@
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/",
           "pos": 3.7,
-          "imp": 22,
+          "imp": 27,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 8.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "セブンセンシズ株式会社",
+          "url": "https://corp.7senses.co.jp/company",
+          "pos": 4,
+          "imp": 10,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -31,7 +41,7 @@
       "judged": 0,
       "suspect_taken": 0,
       "healthy": 0,
-      "too_thin": 4,
+      "too_thin": 5,
       "items": []
     }
   }
