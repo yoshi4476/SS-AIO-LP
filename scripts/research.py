@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""一次情報を集める（X投稿＋YouTube文字起こし）
+"""一次情報を集める（YouTubeの字幕）
 
 使い方: python scripts/research.py "<キーワード>" [--site ai-lab]
 
@@ -18,7 +18,6 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-X_DIR = ROOT / "data" / "x_trends"
 YT_DIR = ROOT / "data" / "youtube_transcripts"
 
 
@@ -36,32 +35,6 @@ def env():
 def is_set(v):
     """未設定と雛形（YOUR_...）を同じ扱いにする。雛形のまま動いたと誤解しないため"""
     return bool(v) and not v.upper().startswith("YOUR_")
-
-
-def collect_x(kw, token, limit=30):
-    """X API v2 で直近の投稿を集める。長文(note_tweet)も取る"""
-    q = urllib.parse.quote(f"{kw} -is:retweet lang:ja")
-    url = (f"https://api.twitter.com/2/tweets/search/recent?query={q}"
-           f"&max_results={min(limit, 100)}"
-           "&tweet.fields=created_at,public_metrics,note_tweet,conversation_id"
-           "&expansions=author_id&user.fields=username,name,public_metrics")
-    r = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"})
-    with urllib.request.urlopen(r, timeout=30) as res:
-        d = json.loads(res.read().decode("utf-8"))
-    users = {u["id"]: u for u in d.get("includes", {}).get("users", [])}
-    out = []
-    for t in d.get("data", []):
-        u = users.get(t.get("author_id"), {})
-        body = (t.get("note_tweet") or {}).get("text") or t.get("text", "")
-        m = t.get("public_metrics", {})
-        out.append({"user": u.get("username", ""), "name": u.get("name", ""),
-                    "date": t.get("created_at", "")[:10], "text": body,
-                    "url": f"https://x.com/{u.get('username','i')}/status/{t['id']}",
-                    "impressions": m.get("impression_count", 0),
-                    "likes": m.get("like_count", 0), "retweets": m.get("retweet_count", 0)})
-    # 反応の多い順＝話題になっている実例から使う
-    out.sort(key=lambda x: -(x["impressions"] or x["likes"]))
-    return out
 
 
 def collect_youtube(kw, api_key=None, limit=6):
@@ -152,11 +125,6 @@ def main():
 
     print(f"■ 一次情報の収集: 「{kw}」\n")
 
-    # X（Twitter）は使わない。検索APIがBasicプラン（月100ドル〜）以上で、
-    # YouTubeの字幕から同等以上の一次情報が無料で取れるため見合わない。
-    # 収集関数（collect_x）は残してあるので、必要になれば .env に
-    # X_BEARER_TOKEN を入れて呼び出しを戻すだけで動く。
-
     # YouTubeはキー不要（yt-dlpの検索を使う）。導入されていなければそれだけ伝える
     try:
         vids = collect_youtube(kw)
@@ -180,6 +148,30 @@ def main():
     subprocess.run([sys.executable, "scripts/facts.py",
                     sys.argv[sys.argv.index("--site") + 1] if "--site" in sys.argv else "ai-lab",
                     kw], cwd=ROOT)
+
+    # 字幕は数万字ある。そのまま渡しても読まれないので、
+    # 引用できそうな一文だけを抜き出して見せる。
+    try:
+        import yt_quotes
+        shown = 0
+        for v in yt_quotes.load(kw):
+            num, exp, bad = yt_quotes.pick(v["sentences"])
+            if not (num or exp or bad):
+                continue
+            if shown == 0:
+                print("\n  ■ 記事に使えそうな発言（字幕から抜粋）")
+            shown += 1
+            print(f"\n    {v['title'][:50]}")
+            print(f"    https://www.youtube.com/watch?v={v['id']}")
+            for label, items in (("数字", num), ("体験", exp), ("つまずき", bad)):
+                for s in items[:2]:
+                    print(f"      [{label}] {s[:76]}")
+            if shown >= 4:
+                break
+        if shown:
+            print("\n    ※ 自動字幕は誤変換があります。数値と固有名詞は動画で確認してから引用すること")
+    except Exception as err:
+        print(f"\n  発言の抜き出しに失敗: {err}")
 
     if missing:
         print("\n  ＜未設定のため使えない情報源＞")

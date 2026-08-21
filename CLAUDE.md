@@ -246,16 +246,15 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
    保存された `data/youtube_transcripts/*.txt` を**執筆前に読む**こと。
    自動字幕は誤変換があるため、数値・固有名詞をそのまま引き写さない。
 
-1. **X一次情報の収集**【現在は使用しない】検索APIがBasicプラン（月100ドル〜）以上のため、
-   費用対効果が見合わず停止中。YouTubeの文字起こしで代替している。
-   - X API v2で記事KW関連投稿を検索（直近1ヶ月・min_impressions: 500）
-   - 必ず取得: `note_tweet`（長文全文）/ スレッド全文（`conversation_id` + `from:{username}`）/ メディアURL / 投稿URL
-   - 30件以上を目標。`data/x_trends/x_enriched_article{N}.json` に保存
-   - 「X一次情報」タブに記録（G列は200字以上の全文）
+1. **X（Twitter）は使わない**。検索APIがBasicプラン（月100ドル〜）以上で、
+   YouTubeの字幕から同等以上の一次情報が無料で取れるため見合わない。収集コードも削除済み。
 2. **YouTube一次情報の収集**
    - YouTube Data API v3で関連動画上位10本を検索
    - `yt-dlp --write-auto-sub --sub-lang ja --skip-download -o "data/youtube_transcripts/%(id)s" "VIDEO_URL"`
    - 文字起こしを `data/youtube_transcripts/{videoId}.txt` に保存し「YouTube一次情報」タブに記録
+   - **`python scripts/yt_quotes.py "<KW>"` で引用できる一文だけを抜き出す**。
+     数万字の字幕をそのまま読んでも執筆に使われない（実際、字幕12本に対し引用0本だった）。
+     数字を含む発言・体験・つまずきの3種に分けて出るので、そこから選んで本文へ組み込む
 3. **数値ファクトの抽出【AIO対応】**
    - 「数値で語れるファクト」を3つ以上抽出してメモ化（例:「導入企業のN%が〜」）
    - AIは数値付き断定文を優先的に引用するため、Phase 4で出典付きで配置
