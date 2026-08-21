@@ -24,6 +24,17 @@
  */
 
 // ▼ 設定 ────────────────────────────────
+// 台帳として使うスプレッドシート。
+// このGASは別のスプレッドシートに紐づいているため、getActiveSpreadsheet() だと
+// 意図しない先に書き込む。IDで固定して、どこに書くかを一意にする。
+// 空にすると、紐づいているスプレッドシート（従来どおり）を使う。
+const BOOK_ID = '1ew-xG28Nd-jWSorqGgwYmHoV-DCwUtI40bRH2Y4IDOQ';
+
+/** 台帳の本体を返す。以降 getActiveSpreadsheet() は直接使わない */
+function book_() {
+  return BOOK_ID ? SpreadsheetApp.openById(BOOK_ID) : SpreadsheetApp.getActiveSpreadsheet();
+}
+
 const SHARED_SECRET = 'vPwJAYWcenPoAUBx7TQFEufmjF5qpplc'; // 記事工場・フォームと共有する合言葉
 const NOTIFY_TO = 'info.ai@7senses.co.jp';                // 問い合わせ通知の宛先
 const AUTO_REPLY = false;                                  // true にすると送信者へ自動返信
@@ -59,7 +70,7 @@ const TABS = {
 // 初期セットアップ
 // ============================================================
 function setup() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = book_();
   Object.keys(TABS).forEach(function (name) {
     let sh = ss.getSheetByName(name);
     if (!sh) sh = ss.insertSheet(name);
@@ -85,11 +96,11 @@ function setup() {
   const first = ss.getSheetByName('シート1') || ss.getSheetByName('Sheet1');
   if (first && first.getLastRow() === 0 && ss.getSheets().length > 1) ss.deleteSheet(first);
 
-  SpreadsheetApp.getActiveSpreadsheet().toast('11タブの準備が完了しました', '管制塔セットアップ', 5);
+  book_().toast('11タブの準備が完了しました', '管制塔セットアップ', 5);
 }
 
 function sheet_(name) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = book_();
   let sh = ss.getSheetByName(name);
   if (!sh) { setup(); sh = ss.getSheetByName(name); }
   return sh;
@@ -176,7 +187,7 @@ function contact_(body) {
     subject: '【' + site.split(' ')[0] + '】' + label + ': ' + clean_(data.company) + ' ' + clean_(data.name) + '様',
     body: site + ' のフォームから' + label + 'が届きました。\n\n' + lines
         + '\n\n送信元ページ: ' + (referer || '不明')
-        + '\n台帳: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+        + '\n台帳: ' + book_().getUrl(),
   };
   if (isEmail_(data.email)) opts.replyTo = data.email;
   if (!silent) {
@@ -420,7 +431,7 @@ function authorizeMail() {
       '  ・問い合わせ / 無料診断 / サイト無料診断 の受信通知（社内向け）',
       '  ・送信者への自動返信（診断は結果つき）',
       '',
-      '台帳: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+      '台帳: ' + book_().getUrl(),
     ].join('\n'),
   });
   console.log('テストメールを ' + NOTIFY_TO + ' へ送りました。届いていれば承認は完了です。');

@@ -159,7 +159,7 @@ function leadNotify_(site, type, temp, d, referer) {
   const detail = leadDetail_(type, d);
   if (detail) lines.push('詳細: ' + detail, '');
   lines.push('送信元: ' + (referer || '不明'),
-             '台帳: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
+             '台帳: ' + book_().getUrl());
 
   const opts = {
     to: NOTIFY_TO,
@@ -239,7 +239,7 @@ function メール権限を承認する() {
       '  ・問い合わせ / 無料診断 / サイト無料診断 の受信通知（社内向け）',
       '  ・送信者への自動返信（診断は結果つき）',
       '',
-      '台帳: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+      '台帳: ' + book_().getUrl(),
     ].join('\n'),
   });
   console.log('テストメールを ' + to + ' へ送りました。届いていれば承認は完了です。');

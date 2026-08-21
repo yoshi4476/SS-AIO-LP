@@ -40,7 +40,7 @@ function installTriggers() {
     if (t.getHandlerFunction() === 'updateKpi') ScriptApp.deleteTrigger(t);
   });
   ScriptApp.newTrigger('updateKpi').timeBased().atHour(6).everyDays(1).create();
-  SpreadsheetApp.getActiveSpreadsheet().toast('毎朝6時のKPI自動集計を設定しました', '管制塔', 5);
+  book_().toast('毎朝6時のKPI自動集計を設定しました', '管制塔', 5);
 }
 
 function ymd_(d) {

@@ -190,8 +190,15 @@ def check_supply(todo, fix=False):
     if not hub_client.enabled():
         print("  ?   管制塔が未接続のため判定できません（HUB_URL未設定）")
         return
+    # 失敗を握りつぶすと在庫0件と区別がつかない。実際、通信が一瞬切れただけで
+    # 「全サイト在庫0」と出て、補充が必要だと誤解する状態になっていた。
+    try:
+        rows = hub_client.all_kw(strict=True)
+    except Exception as err:
+        print(f"  ?   管制塔から取得できず判定できません（{str(err)[:60]}）")
+        return
     per = {}
-    for k in hub_client.all_kw():
+    for k in rows:
         if (k.get("status") or "").strip() == "未着手":
             per[k.get("site") or "?"] = per.get(k.get("site") or "?", 0) + 1
     need = DAILY_TARGET * KW_MIN_DAYS

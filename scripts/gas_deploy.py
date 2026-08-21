@@ -47,7 +47,8 @@ TARGETS = {
         # プロジェクト全体が動かなくなる。
         "files": [("automation/gas/hub.gs", "コード.gs"),
                   ("automation/gas/kpi.gs", "KPI.gs"),
-                  ("automation/gas/contact.hub.gs", "contact.gs")],
+                  ("automation/gas/contact.hub.gs", "contact.gs"),
+                  ("automation/gas/migrate.gs", "migrate.gs")],
     },
 }
 
