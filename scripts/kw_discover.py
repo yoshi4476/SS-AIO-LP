@@ -110,15 +110,45 @@ def gsc_queries(site=None):
         return []
 
 
-def suggest(q):
-    """Googleサジェスト（認証不要・無料）"""
-    u = ("https://suggestqueries.google.com/complete/search?client=firefox&hl=ja&q="
-         + urllib.parse.quote(q))
+def suggest(q, source="web"):
+    """サジェスト（認証不要・無料）
+
+    source="web"     Google検索のサジェスト
+    source="youtube" YouTube検索のサジェスト。動画で調べられる言葉は
+                     「やり方」「手順」など手を動かす前の検索が多く、
+                     Google検索とは並びが変わる。
+    """
+    ds = "yt" if source == "youtube" else ""
+    u = ("https://suggestqueries.google.com/complete/search?client=firefox&hl=ja"
+         + (f"&ds={ds}" if ds else "") + "&q=" + urllib.parse.quote(q))
     try:
         with urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=15) as r:
             return json.loads(r.read().decode("utf-8", "ignore"))[1]
     except Exception:
         return []
+
+
+# 語尾に1文字ずつ足して、サジェストの続きを引き出す。
+# ラッコキーワードが「あ〜ん」で候補を広げているのと同じ考え方で、
+# 1語につき取れる候補が10件前後から100件超に増える。
+KANA = list("あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ")
+ALNUM = list("abcdefghijklmnopqrstuvwxyz0123456789")
+
+
+def suggest_deep(q, source="web", chars=None, wait=0.25):
+    """語尾を1文字ずつ変えて候補を広く集める"""
+    out = list(suggest(q, source))
+    for ch in (chars if chars is not None else KANA):
+        got = suggest(f"{q} {ch}", source)
+        out += got
+        time.sleep(wait)          # 連続で叩くと弾かれるため間隔をあける
+    # 順番を保ったまま重複を落とす（先に出たものほど検索需要が大きい）
+    seen, uniq = set(), []
+    for k in out:
+        if k not in seen:
+            seen.add(k)
+            uniq.append(k)
+    return uniq
 
 
 BRAND_TERMS = ("セブンセンシズ", "セブンセンシス", "7senses", "sevensenses",
@@ -198,11 +228,18 @@ def main():
         proven.append(q)
     proven.sort(key=lambda q: -q["imp"])
 
-    # --- 2. Googleサジェスト（検索需要の裏付けあり）---
+    # --- 2. サジェスト（検索需要の裏付けあり）---
+    # Google検索とYouTube検索の両方から集める。動画で調べられる言葉は
+    # 「やり方」「手順」寄りで、Google検索とは並びが変わる。
+    # --deep を付けると語尾を1文字ずつ変えて候補を広げる（取得数は増えるが時間もかかる）
+    sources = ["web", "youtube"] if "--no-youtube" not in sys.argv else ["web"]
     for ind in S["industries"]:
         for it in S["intents"]:
             picked = 0
-            for s in suggest(f"{ind} {it}"):
+            cand = []
+            for src in sources:
+                cand += suggest(f"{ind} {it}", src)
+            for s in cand:
                 s = s.strip()
                 low = s.lower()
                 # 起点そのもの・短すぎる語・既出は除外し、ロングテールだけ残す
@@ -221,6 +258,34 @@ def main():
                 if picked >= PER_SEED:
                     break
             time.sleep(0.2)  # サジェストAPIへの配慮
+
+    # --- 2-2. 業種語だけを50音で深掘り（--deep のとき）---
+    # 業種×意図の全通りで深掘りすると数万リクエストになり現実的でない。
+    # 業種語だけに絞れば十数分で終わり、意図の欄には無い言い回しが拾える。
+    if "--deep" in sys.argv:
+        before = len(discovered)
+        for ind in S["industries"]:
+            cand = []
+            for src in sources:
+                cand += suggest_deep(ind, src)
+            picked = 0
+            for s in cand:
+                s = s.strip()
+                low = s.lower()
+                if len(s) < 6 or s == ind or is_written(s, corpus):
+                    continue
+                if ind not in s or not any(t in low for t in S["domain_terms"]):
+                    continue
+                if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
+                    continue
+                if is_dup(s, arts, seen):
+                    continue
+                seen.add(s)
+                discovered.append(s)
+                picked += 1
+                if picked >= PER_SEED * 3:   # 深掘りぶんは多めに採る
+                    break
+        print(f"  深掘りで追加: {len(discovered) - before}件")
 
     print(f"KW_DISCOVER: GSC実証={len(proven)}件 / サジェスト発掘={len(discovered)}件")
     if proven:
