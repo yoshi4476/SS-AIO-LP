@@ -216,3 +216,31 @@ function leadReply_(site, type, d) {
   MailApp.sendEmail({ to: email, subject: subject, body: body + foot,
                       name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
 }
+
+/**
+ * メール送信の権限を承認するための関数。
+ *
+ * setup を実行しても承認画面は出ない。スプレッドシート操作しか使っておらず、
+ * その権限は既に承認済みだから。MailApp を実際に呼ぶこの関数を実行して初めて
+ * 「メールの送信」の承認が求められる。
+ *
+ * 使い方: Apps Script エディタの関数一覧からこれを選んで実行する。
+ *         承認画面が出たら許可する。テストメールが1通届けば完了。
+ */
+function メール権限を承認する() {
+  const to = NOTIFY_TO;
+  MailApp.sendEmail({
+    to: to,
+    subject: '【設定確認】メール送信の権限が有効になりました',
+    body: [
+      'このメールが届いていれば、管制塔からの通知メールが使えるようになっています。',
+      '',
+      'これ以降、次のメールが自動で送られます。',
+      '  ・問い合わせ / 無料診断 / サイト無料診断 の受信通知（社内向け）',
+      '  ・送信者への自動返信（診断は結果つき）',
+      '',
+      '台帳: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+    ].join('\n'),
+  });
+  console.log('テストメールを ' + to + ' へ送りました。届いていれば承認は完了です。');
+}
