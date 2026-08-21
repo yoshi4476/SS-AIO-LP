@@ -149,6 +149,7 @@ function doPost(e) {
       case 'kpi_log':     return json_(kpiLog_(body));
       // 保守用の操作。エディタを開かなくても実行できるようにする
       // （書式の適用や定期実行の登録は、手で押すと忘れるため）
+      case 'clean_inquiry': return json_(cleanInquiry_(body));
       case 'link_log':    return json_(linkLog_(body));
       case 'rewrite_log': return json_(rewriteLog_(body));
       case 'admin':       return json_(admin_(body.task));
@@ -164,55 +165,9 @@ function doPost(e) {
 // ============================================================
 // 問い合わせ受付
 // ============================================================
-function contact_(body) {
-  const data = body.data || {};
-  // 各サイトのGASから転送されたコピーは、向こうで既に通知メールを送っている。
-  // ここでも送ると1件の問い合わせで2通届くため、台帳への記録だけにする。
-  const silent = body.silent === true || body.silent === 'true';
-  const site = SITES[body.site] || body.site || '（不明）';
-  const referer = body.referer || '';
 
-  const known = ['form_type', 'company', 'name', 'email', 'tel', 'phone', 'message', 'body'];
-  const rest = Object.keys(data)
-    .filter(function (k) { return known.indexOf(k) < 0 && k.charAt(0) !== '_'; })
-    .map(function (k) { return k + ': ' + data[k]; }).join(' / ');
 
-  sheet_('問い合わせ').appendRow([
-    new Date(), site, data.form_type || 'お問い合わせ', data.company || '', data.name || '',
-    data.email || '', data.tel || data.phone || '', data.message || data.body || '',
-    referer, rest, '未対応',
-  ]);
 
-  const label = clean_(data.form_type) || 'お問い合わせ';
-  const lines = Object.keys(data)
-    .filter(function (k) { return k.charAt(0) !== '_'; })
-    .map(function (k) { return k + ': ' + data[k]; }).join('\n');
-  const opts = {
-    to: NOTIFY_TO,
-    subject: '【' + site.split(' ')[0] + '】' + label + ': ' + clean_(data.company) + ' ' + clean_(data.name) + '様',
-    body: site + ' のフォームから' + label + 'が届きました。\n\n' + lines
-        + '\n\n送信元ページ: ' + (referer || '不明')
-        + '\n台帳: ' + book_().getUrl(),
-  };
-  if (isEmail_(data.email)) opts.replyTo = data.email;
-  if (!silent) {
-    MailApp.sendEmail(opts);
-    if (AUTO_REPLY && isEmail_(data.email)) autoReply_(data);
-  }
-  return { ok: true, silent: silent };
-}
-
-function autoReply_(data) {
-  MailApp.sendEmail({
-    to: data.email,
-    name: 'セブンセンシズ株式会社',
-    subject: '【受付完了】お問い合わせありがとうございます',
-    body: (data.name || 'ご担当') + '様\n\n'
-        + 'お問い合わせいただきありがとうございます。内容を確認のうえ、2営業日以内に担当者よりご連絡いたします。\n\n'
-        + 'お急ぎの場合は 06-4305-7547（9:00〜20:00 / 土日祝休）までお電話ください。\n\n'
-        + '——\nセブンセンシズ株式会社\nhttps://corp.7senses.co.jp\n',
-  });
-}
 
 // ============================================================
 // キーワード台帳

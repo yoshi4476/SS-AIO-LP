@@ -111,3 +111,40 @@ function rewriteLog_(body) {
   });
   return n ? { ok: true, added: n } : { ok: false, error: '記録する行がありません' };
 }
+
+/**
+ * 問い合わせ台帳から、動作確認で入れた行と中身の無い行を消す（action: clean_inquiry）
+ *
+ * 通知メールの権限が通っていなかった時期に、記録だけが残って中身が空の行ができた。
+ * 動作確認の送信も混ざっている。実際の問い合わせと見分けがつかないと、
+ * 未対応の件数が信用できなくなる。
+ *
+ * dry を true で呼ぶと、消す対象を数えるだけで消さない。
+ */
+function cleanInquiry_(body) {
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  if (last < 2) return { ok: true, removed: 0, kept: 0 };
+
+  const width = sh.getLastColumn();
+  const rows = sh.getRange(2, 1, last - 1, width).getValues();
+  const MARK = ['接続テスト', '列テスト', '反映確認', '権限確認', '移行後確認',
+                'テスト株式会社', 'example.com', '対応不要'];
+
+  const del = [];
+  rows.forEach(function (r, i) {
+    const blob = r.join(' ');
+    const isTest = MARK.some(function (m) { return blob.indexOf(m) !== -1; });
+    // 名前もメールも本文も無い行は、記録だけが残った失敗の跡
+    const empty = !String(r[3] || '').trim() && !String(r[4] || '').trim()
+               && !String(r[6] || '').trim() && !String(r[8] || '').trim();
+    if (isTest || empty) del.push(i + 2);
+  });
+
+  if (body && body.dry) {
+    return { ok: true, wouldRemove: del.length, kept: rows.length - del.length };
+  }
+  // 下から消す。上から消すと行番号がずれる
+  del.reverse().forEach(function (r) { sh.deleteRow(r); });
+  return { ok: true, removed: del.length, kept: rows.length - del.length };
+}
