@@ -48,7 +48,9 @@ TARGETS = {
         "files": [("automation/gas/hub.gs", "コード.gs"),
                   ("automation/gas/kpi.gs", "KPI.gs"),
                   ("automation/gas/contact.hub.gs", "contact.gs"),
-                  ("automation/gas/migrate.gs", "migrate.gs")],
+                  ("automation/gas/migrate.gs", "migrate.gs"),
+                  ("automation/gas/format.gs", "format.gs"),
+                  ("automation/gas/dashboard.gs", "dashboard.gs")],
     },
 }
 

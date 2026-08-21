@@ -147,6 +147,11 @@ function doPost(e) {
       case 'add_kw':      return json_(addKw_(body.site, body.keywords || []));
       case 'error_log':   return json_(errorLog_(body));
       case 'kpi_log':     return json_(kpiLog_(body));
+      // 保守用の操作。エディタを開かなくても実行できるようにする
+      // （書式の適用や定期実行の登録は、手で押すと忘れるため）
+      case 'link_log':    return json_(linkLog_(body));
+      case 'rewrite_log': return json_(rewriteLog_(body));
+      case 'admin':       return json_(admin_(body.task));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
       default:            return json_(form_(body));
@@ -435,4 +440,20 @@ function authorizeMail() {
     ].join('\n'),
   });
   console.log('テストメールを ' + NOTIFY_TO + ' へ送りました。届いていれば承認は完了です。');
+}
+
+// ============================================================
+// 保守（合言葉つきで外から呼ぶ）
+// ============================================================
+function admin_(task) {
+  switch (task) {
+    case 'format':    return { ok: true, result: formatBook() };
+    case 'triggers':  return { ok: true, result: installTriggers() };
+    case 'kpi':       return { ok: true, result: updateKpi() };
+    case 'dashboard': return { ok: true, result: refreshDashboard() };
+    case 'setup':     setup(); return { ok: true, result: 'タブを整えました' };
+    default:
+      return { ok: false, error: '不明なtask: ' + task
+               + '（format / triggers / kpi / dashboard / setup）' };
+  }
 }
