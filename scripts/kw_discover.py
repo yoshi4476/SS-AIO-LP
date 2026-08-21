@@ -18,7 +18,6 @@ kw_seeds（業種×課題の起点）から自動生成するため、補充し�
 補充されたKWをそのまま書いてもカニバリにならない。
 """
 import json
-import re
 import sys
 import time
 import urllib.parse

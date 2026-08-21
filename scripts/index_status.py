@@ -89,7 +89,7 @@ def main():
                 time.sleep(1)      # 1分600件の上限に触れないよう間隔をあける
         got = sum(tally.values())
         if got:
-            print(f"    " + " / ".join(f"{JP.get(k, k)} {v}件" for k, v in tally.most_common()))
+            print("    " + " / ".join(f"{JP.get(k, k)} {v}件" for k, v in tally.most_common()))
         for u, cov, rob, can in ng:
             line = f"      {u[:44]:<44} {cov[:34]}"
             if can and can.rstrip("/") != f"https://{d}{u}".rstrip("/"):

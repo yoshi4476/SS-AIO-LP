@@ -8,7 +8,6 @@ AI検索は「同じ事実が複数の外部サイトで一致しているか」
 同名の別法人（東京都目黒区）があるので、法人番号の掲載を必須にしている。
 """
 import json
-import re
 import sys
 import urllib.request
 from pathlib import Path

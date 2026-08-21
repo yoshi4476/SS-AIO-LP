@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import hub_client  # noqa: E402
 import sites as sites_mod  # noqa: E402
 from cannibal_check import load_articles  # noqa: E402
-from monthly_report import ENV, svg_line, svg_spark  # noqa: E402
+from monthly_report import ENV, svg_line  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SA = ROOT / "indexing-service-account.json"
@@ -438,7 +438,7 @@ def tile(label, value, sub, good=True):
 
 def bars(pairs, color=BLUE, total=None):
     if not pairs:
-        return f'<p class="dim" style="font-size:9pt">データなし</p>'
+        return '<p class="dim" style="font-size:9pt">データなし</p>'
     tot = total or sum(v for _, v in pairs) or 1
     out = ""
     for name, v in pairs:

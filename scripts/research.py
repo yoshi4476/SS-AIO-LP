@@ -12,9 +12,6 @@ import json
 import re
 import subprocess
 import sys
-import urllib.parse
-import urllib.request
-from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -120,7 +117,6 @@ def main():
     if len(sys.argv) < 2:
         raise SystemExit('使い方: python scripts/research.py "<キーワード>"')
     kw = sys.argv[1]
-    e = env()
     missing = []
 
     print(f"■ 一次情報の収集: 「{kw}」\n")

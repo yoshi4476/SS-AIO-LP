@@ -16,11 +16,7 @@ clasp（Apps Script の CLI）で push とデプロイまで通す。
     python scripts/gas_deploy.py --all            # 全部配る
 """
 import json
-import os
-import shutil
-import subprocess
 import sys
-import tempfile
 import urllib.parse
 import urllib.request
 from pathlib import Path

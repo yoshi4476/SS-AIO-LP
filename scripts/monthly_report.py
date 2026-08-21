@@ -1035,7 +1035,7 @@ def svg_series(vals, labels, color, title, height=170):
 
 def render(d, a):
     labels = d["months"]
-    cur, prev = labels[-1], labels[-2]
+    cur = labels[-1]
     ym = cur["label"]
     demo_banner = ('<div class="demo-banner">SAMPLE ― 本レポートはサンプルデータです。'
                    'GA4/GSC接続後、実データで自動発行されます。</div>') if d["demo"] else ""
