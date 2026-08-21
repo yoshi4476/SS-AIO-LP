@@ -102,9 +102,14 @@ function leadSave_(site, type, temp, d) {
       if (String(vals[i][6]).toLowerCase() !== email.toLowerCase()) continue;
       if (!(t instanceof Date) || now - t > LEAD_DUP_WINDOW_MS) break;
       // 既存行の「その他項目」へ追記する（別々の行にすると同一人物と分からない）
+      // 追記先は「診断・詳細」(10列目)。13列目は温度なので上書きしてはいけない。
       const r = i + 2;
-      const cur = String(sh.getRange(r, 13).getValue() || '');
-      sh.getRange(r, 13).setValue(
+      const RANK = { HOT: 3, WARM: 2, COOL: 1 };
+      const before = String(sh.getRange(r, 13).getValue() || '');
+      // 診断を出した人が後から相談してきたときに、温度が下がらないようにする
+      if ((RANK[temp] || 0) > (RANK[before] || 0)) sh.getRange(r, 13).setValue(temp);
+      const cur = String(sh.getRange(r, 10).getValue() || '');
+      sh.getRange(r, 10).setValue(
         (cur ? cur + '\n' : '') + Utilities.formatDate(now, 'Asia/Tokyo', 'MM/dd HH:mm')
         + ' 再送信(' + (LEAD_TYPE_LABELS[type] || type) + ') ' + leadDetail_(type, d));
       return r;
