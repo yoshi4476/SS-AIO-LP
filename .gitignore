@@ -24,3 +24,6 @@ automation/logs/
 
 # 支給された写真の原本（サイトへは site/images/ へ書き出したものを載せる）
 写真素材/
+
+# 管制塔のURLと合言葉を埋め込んだ貼り付け用コード（配布物ではない）
+automation/gas/*.ready.gs
