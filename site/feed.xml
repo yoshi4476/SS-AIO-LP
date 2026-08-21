@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-21T00:00:00+09:00</updated>
+  <updated>2026-08-22T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>整骨院のMEO対策とは？無資格「整体」と差がつく5つの実践ポイント</title>
+    <link href="https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/"/>
+    <id>https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/</id>
+    <updated>2026-08-22T00:00:00+09:00</updated>
+    <summary>整骨院のMEO対策は、国家資格を持つ施術所であることをGoogleマップ上で正しく伝える取り組みです。無資格の整体院と混同されない5つの実践ポイントを、G-ranの支援実務から解説します。</summary>
+  </entry>
   <entry>
     <title>工務店のインスタ集客とは？問い合わせにつなげる5つの施策</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-ai-kensaku/</id>
     <updated>2026-08-12T00:00:00+09:00</updated>
     <summary>AI検索とは、Google AI OverviewやChatGPT検索など生成AIが直接回答を返す検索の総称です。AIO対策との関係と、プラットフォーム別に対策を使い分ける5つのポイントを解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO対策の注意点とは？始める前に知る7つの落とし穴</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/</id>
-    <updated>2026-08-12T00:00:00+09:00</updated>
-    <summary>AIO対策の注意点とは、検索順位を無視した構造化・クローラーの誤ブロック・独自性のない記事量産など、成果につながらない7つの落とし穴です。原因と具体的な対処法を解説します。</summary>
   </entry>
 </feed>
