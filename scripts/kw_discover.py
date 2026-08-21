@@ -259,6 +259,37 @@ def main():
                     break
             time.sleep(0.2)  # サジェストAPIへの配慮
 
+    # --- 2-1. ラッコキーワード（キーがあるときだけ）---
+    # 無料のサジェストは候補は取れるが検索ボリュームが分からない。
+    # ラッコはボリューム付きで返すので、多い順に採れる。
+    # キー未設定なら何も起きない（無料ぶんだけで動き続ける）。
+    try:
+        import rakko
+        if rakko.enabled():
+            before = len(discovered)
+            for ind in S["industries"]:
+                pairs = rakko.as_pairs(rakko.suggest(ind)) + rakko.as_pairs(rakko.related(ind))
+                picked = 0
+                for s, vol in pairs:
+                    s = s.strip()
+                    low = s.lower()
+                    if len(s) < 6 or s == ind or is_written(s, corpus):
+                        continue
+                    if not any(t in low for t in S["domain_terms"]):
+                        continue
+                    if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
+                        continue
+                    if is_dup(s, arts, seen):
+                        continue
+                    seen.add(s)
+                    discovered.append(s)
+                    picked += 1
+                    if picked >= PER_SEED * 3:
+                        break
+            print(f"  ラッコキーワードから追加: {len(discovered) - before}件")
+    except Exception as err:
+        print(f"  ラッコキーワードの取得を飛ばしました: {str(err)[:70]}")
+
     # --- 2-2. 業種語だけを50音で深掘り（--deep のとき）---
     # 業種×意図の全通りで深掘りすると数万リクエストになり現実的でない。
     # 業種語だけに絞れば十数分で終わり、意図の欄には無い言い回しが拾える。
