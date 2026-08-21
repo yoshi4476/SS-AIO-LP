@@ -88,3 +88,13 @@
 
 3サイトの問い合わせが管制塔スプレッドシートに集まる。
 各サイトのシートにも従来どおり残るので、これまでの運用は変えなくてよい。
+
+---
+
+## 管制塔スプレッドシート
+
+https://docs.google.com/spreadsheets/d/1ew-xG28Nd-jWSorqGgwYmHoV-DCwUtI40bRH2Y4IDOQ/edit
+
+スクリプトIDは、このシートで **拡張機能 → Apps Script → ⚙️プロジェクトの設定 → スクリプト ID**。
+`.env` の `GAS_SCRIPT_ID_HUB` に入れると、`python scripts/gas_deploy.py hub` で
+コードの更新とデプロイが自動で通るようになる。
