@@ -27,3 +27,5 @@ automation/logs/
 
 # 管制塔のURLと合言葉を埋め込んだ貼り付け用コード（配布物ではない）
 automation/gas/*.ready.gs
+# .env の控え（認証情報を含むため）
+.env.backup-*
