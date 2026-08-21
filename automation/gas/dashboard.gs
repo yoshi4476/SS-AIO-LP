@@ -85,11 +85,17 @@ function linkLog_(body) {
   const rows = body.rows || [];
   if (!rows.length) return { ok: false, error: '記録する行がありません' };
   const sh = sheet_('内部リンク管理');
-  rows.forEach(function (r) {
-    sh.appendRow([new Date(), r.site || body.site || '', r.from || '', r.to || '',
-                  r.anchor || '']);
+  const now = new Date();
+  // appendRow を1行ずつ呼ぶと数百件で応答が返らなくなる。
+  // まとめて1回で書き込む。
+  const values = rows.map(function (r) {
+    return [now, r.site || body.site || '', r.from || '', r.to || '', r.anchor || ''];
   });
-  return { ok: true, added: rows.length };
+  if (body.replace === true && sh.getLastRow() > 1) {
+    sh.deleteRows(2, sh.getLastRow() - 1);   // 貼り直しのとき、古い行と混ざらないように
+  }
+  sh.getRange(sh.getLastRow() + 1, 1, values.length, 5).setValues(values);
+  return { ok: true, added: values.length };
 }
 
 /** リライトの実施を記録する（action: rewrite_log） */
