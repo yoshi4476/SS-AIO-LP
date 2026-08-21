@@ -141,29 +141,6 @@ function updateKpi() {
 }
 
 /** ダッシュボードを3サイト合計で書き換える（前日比つき） */
-function writeDashboard_(t, dateStr) {
-  const sh = sheet_('ダッシュボード');
-  const prev = {};
-  if (sh.getLastRow() > 1) {
-    sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues().forEach(function (r) {
-      prev[r[0]] = Number(r[1]) || 0;
-    });
-  }
-  const rows = [
-    ['セッション（3サイト合計）', t.sessions],
-    ['PV（3サイト合計）', t.pv],
-    ['CV（3サイト合計）', t.cv],
-    ['検索表示回数（3サイト合計）', t.impressions],
-    ['検索クリック（3サイト合計）', t.clicks],
-    ['AI経由セッション（3サイト合計）', t.ai],
-    ['公開記事数（台帳の公開済み）', kwRows_().filter(function (r) {
-      return String(r[2]).trim() === '公開済み';
-    }).length],
-  ];
-  if (sh.getLastRow() > 1) sh.deleteRows(2, sh.getLastRow() - 1);
-  rows.forEach(function (r) {
-    const before = prev[r[0]];
-    const diff = (before === undefined) ? '' : (r[1] - before >= 0 ? '+' : '') + (r[1] - before);
-    sh.appendRow([r[0], r[1], diff, new Date(), dateStr + ' 時点']);
-  });
-}
+
+// ダッシュボードの書き込みは hub.gs の writeDashboard_ を使う。
+// 同じ関数を2ファイルに置くと、どちらが動いているか追えなくなる。

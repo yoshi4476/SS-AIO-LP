@@ -43,8 +43,11 @@ TARGETS = {
     "hub": {
         "name": "管制塔",
         "env": "GAS_SCRIPT_ID_HUB",
-        "files": [("automation/gas/hub.gs", "hub.gs"),
-                  ("automation/gas/kpi.gs", "kpi.gs")],
+        # 配布先のファイル名に合わせる。別名で置くと同じ関数が二重定義になり、
+        # プロジェクト全体が動かなくなる。
+        "files": [("automation/gas/hub.gs", "コード.gs"),
+                  ("automation/gas/kpi.gs", "KPI.gs"),
+                  ("automation/gas/contact.hub.gs", "contact.gs")],
     },
 }
 

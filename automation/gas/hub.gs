@@ -39,8 +39,8 @@ const TABS = {
   'ダッシュボード': ['指標', '値', '前日比', '更新日時', '備考'],
   'サイト一覧': ['サイトID', 'サイト名', 'ドメイン', 'テーマ', '公開記事数', '最終公開日'],
   '問い合わせ': ['受信日時', 'サイト', '種別', '会社名', 'お名前', 'ご担当者様',
-                'メールアドレス', '電話番号', 'ご相談内容', '詳細', '特典',
-                '送信元ページ', 'その他項目', '対応状況'],
+                'メールアドレス', '電話番号', 'ご相談内容', '診断・詳細', '特典',
+                '送信元ページ', '温度', '対応状況'],
   'KW台帳': ['サイト', 'キーワード', '状態', '優先度', '想定カテゴリ', '狙い',
             '登録日', '着手日', '公開日', '記事URL', '備考'],
   '記事作成ログ': ['公開日時', 'サイト', 'タイトル', 'キーワード', 'カテゴリ',
@@ -120,7 +120,12 @@ function doPost(e) {
   } catch (err) {
     return json_({ ok: false, error: 'JSONの解析に失敗しました' });
   }
-  if (SHARED_SECRET && body.secret !== SHARED_SECRET) {
+  // 記事工場からの操作（action あり）は合言葉を必須にする。
+  // 各サイトのフォームは合言葉を持たない（ブラウザのJSに書けば誰でも読めるため）。
+  // フォームは action を持たないので、その場合だけ合言葉を求めない。
+  // 転送（forwardToHub_）は合言葉を付けてくるので、あれば照合する。
+  const hasAction = !!body.action;
+  if (SHARED_SECRET && (hasAction || body.secret) && body.secret !== SHARED_SECRET) {
     return json_({ ok: false, error: 'unauthorized' });
   }
   try {
@@ -131,7 +136,9 @@ function doPost(e) {
       case 'add_kw':      return json_(addKw_(body.site, body.keywords || []));
       case 'error_log':   return json_(errorLog_(body));
       case 'kpi_log':     return json_(kpiLog_(body));
-      default:            return json_(contact_(body)); // 既定は問い合わせ受付
+      // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
+      // 判定と記録は contact.hub.gs の form_() にまとめている。
+      default:            return json_(form_(body));
     }
   } catch (err) {
     return json_({ ok: false, error: String(err) });
