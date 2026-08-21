@@ -398,3 +398,30 @@ function json_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * メール送信の権限を承認する。
+ *
+ * 関数の選択欄には、いま開いているファイルの関数しか出てこない。
+ * 承認作業でファイルを切り替えさせるのは分かりにくいので、
+ * 最初に開かれる「コード」側にも置いておく。
+ *
+ * 使い方: 関数一覧から authorizeMail を選んで実行し、承認画面で許可する。
+ *         テストメールが1通届けば完了。
+ */
+function authorizeMail() {
+  MailApp.sendEmail({
+    to: NOTIFY_TO,
+    subject: '【設定確認】メール送信の権限が有効になりました',
+    body: [
+      'このメールが届いていれば、管制塔からの通知メールが使えるようになっています。',
+      '',
+      'これ以降、次のメールが自動で送られます。',
+      '  ・問い合わせ / 無料診断 / サイト無料診断 の受信通知（社内向け）',
+      '  ・送信者への自動返信（診断は結果つき）',
+      '',
+      '台帳: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+    ].join('\n'),
+  });
+  console.log('テストメールを ' + NOTIFY_TO + ' へ送りました。届いていれば承認は完了です。');
+}
