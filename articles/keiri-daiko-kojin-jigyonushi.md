@@ -128,6 +128,8 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 個人事業主が経理代行を選ぶ際は、確定申告との連携・対応ソフトの一致・繁忙期の対応力の3点を確認してください。
 
+実際の例は[小規模事業者の経理体制の作り方｜規模別3パターンと注意点](/blog/shokibo-jigyousha-keiri-taisei/)でも扱っています。
+
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/erabikata.png" alt="個人事業主に合う経理代行の選び方3つのポイント" loading="lazy"><figcaption>個人事業主に合う経理代行の選び方</figcaption></figure>
 
 1つ目は確定申告との連携です。記帳だけを頼むのか、提携税理士による申告まで任せられるのかを事前に確認します。2つ目は対応ソフトの一致です。**自分が使っている、または使う予定の会計ソフトに対応しているかを必ず確認してください。**非対応だと、データの移行作業が余分に発生します。
