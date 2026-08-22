@@ -1,13 +1,34 @@
 {
-  "date": "2026-08-21",
+  "date": "2026-08-22",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 0,
-      "suspect_taken": 0,
+      "judged": 2,
+      "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 11,
-      "items": []
+      "too_thin": 10,
+      "items": [
+        {
+          "kw": "ai集客とは",
+          "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
+          "pos": 9,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "meo診断",
+          "url": "https://ai.7senses.co.jp/diagnosis/meo/",
+          "pos": 8.4,
+          "imp": 12,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        }
+      ]
     },
     "corporate": {
       "judged": 2,
@@ -19,17 +40,17 @@
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/",
           "pos": 3.3,
-          "imp": 35,
+          "imp": 36,
           "clicks": 1,
-          "ctr": 2.86,
+          "ctr": 2.78,
           "expected_ctr": 11.0,
-          "ratio": 0.26
+          "ratio": 0.25
         },
         {
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/company",
-          "pos": 4.2,
-          "imp": 12,
+          "pos": 4.5,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
