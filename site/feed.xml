@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-22T00:00:00+09:00</updated>
+  <updated>2026-08-23T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>税理士の集客サイトとは？必須6ページと掲載内容の決め方</title>
+    <link href="https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/"/>
+    <id>https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/</id>
+    <updated>2026-08-23T00:00:00+09:00</updated>
+    <summary>税理士の集客サイトとは、問い合わせにつながる6つのページで構成されたホームページです。掲載すべき内容と、依頼の決め手になる情報の載せ方を実務目線で解説します。</summary>
+  </entry>
   <entry>
     <title>整骨院のホームページ集客｜予約につながる5つの必須要素</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/seikotsuin-hp-shukyaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/</id>
     <updated>2026-08-13T00:00:00+09:00</updated>
     <summary>AIO対策をしてもAI Overviewに表示されない・引用されない原因は、症状によって異なります。8つの原因と自分でできる診断手順、優先順位付きの対処法を解説します。</summary>
-  </entry>
-  <entry>
-    <title>美容室の集客方法｜新規とリピートを両立する6つの取り組み</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/biyoushitsu-shukyaku-houhou/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/biyoushitsu-shukyaku-houhou/</id>
-    <updated>2026-08-13T00:00:00+09:00</updated>
-    <summary>美容室の集客方法は、Googleマップ・口コミ・Instagramでの新規接点づくりと、来店後のリピート化を両輪で進めることが要点です。全国27万店超が競う市場で、通算3,200店舗以上の支援実務から見えた6つの取り組みと値引き広告の注意点を解説します。</summary>
   </entry>
 </feed>
