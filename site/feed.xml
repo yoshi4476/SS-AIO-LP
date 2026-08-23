@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-23T00:00:00+09:00</updated>
+  <updated>2026-08-24T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>税理士事務所の集客とは？6つのチャネルの選び方</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/</id>
+    <updated>2026-08-24T00:00:00+09:00</updated>
+    <summary>税理士事務所の集客とは、紹介・MEO・ホームページ・ブログなど複数チャネルを事務所の特性に応じて使い分ける取り組みです。6つのチャネルの特徴と選び方、着手の3ステップを実務目線で解説します。</summary>
+  </entry>
   <entry>
     <title>税理士のブログ集客とは？書くべき5つの記事テーマ</title>
     <link href="https://ai.7senses.co.jp/seo/zeirishi-blog-shukyaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/</id>
     <updated>2026-08-14T00:00:00+09:00</updated>
     <summary>AIO対策は自分でできるかというと、基礎の8割は自分で対応できますが、一次情報収集と計測分析には限界があります。無料でできる5つの手順と、プロに任せるべき3つの境界を解説します。</summary>
-  </entry>
-  <entry>
-    <title>クリニックSEOとは？順位が上がる5つの施策</title>
-    <link href="https://ai.7senses.co.jp/seo/clinic-seo-taisaku/"/>
-    <id>https://ai.7senses.co.jp/seo/clinic-seo-taisaku/</id>
-    <updated>2026-08-14T00:00:00+09:00</updated>
-    <summary>クリニックSEOは、地域名なしの一般検索で自院の情報を上位表示させる施策で、YMYL基準を満たすE-E-A-Tの明示が土台になります。MEO・AIOとの違い、順位を左右する5つの施策、医療広告ガイドラインのNG表現まで解説します。</summary>
   </entry>
 </feed>
