@@ -90,6 +90,8 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 経理の人手不足には、優先順位の見直し・応援体制・作業の削減・締め時期の調整という4つの対応がすぐ始められます。
 
+選ぶときの基準は[管理部門の人手不足解決｜5つの選択肢と選び方](/blog/kanribumon-hitodebusoku-kaiketsu/)で整理しています。
+
 対象になる範囲を先に押さえるなら、[経理の丸投げできる範囲とできない範囲｜残す業務4つ](/blog/keiri-marunage-dekiru-hani/)が参考になります。
 
 <figure><img src="/images/keiri-hitode-busoku-taisaku/sokujitsu.png" alt="経理の人手不足にすぐできる4つの対応: 優先順位を見直す、繁忙期は応援を頼む、ムダな作業をやめる、締め時期を調整する" loading="lazy"><figcaption>経理の人手不足にすぐできる4つの対応</figcaption></figure>

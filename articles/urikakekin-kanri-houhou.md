@@ -77,6 +77,8 @@ faq:
 
 売掛金管理は、請求書発行・入金予定日の記録・消込照合・督促という4つのステップを回すことで運用できます。
 
+関連する内容として[管理部門の人手不足解決｜5つの選択肢と選び方](/blog/kanribumon-hitodebusoku-kaiketsu/)も公開しています。
+
 <figure><img src="/images/urikakekin-kanri-houhou/step.png" alt="売掛金管理の基本4ステップ: 請求書を発行する、入金予定日を記録する、入金を消込・照合する、未入金を督促する" loading="lazy"><figcaption>売掛金管理の基本4ステップ</figcaption></figure>
 
 第一に、請求書を発行します。取引先ごとの締め日・支払条件に沿って、金額や振込先に誤りがないか確認したうえで発行します。
