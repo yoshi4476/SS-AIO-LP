@@ -60,6 +60,8 @@ faq:
 
 集客不振の事務所には、紹介依存・強み不明・情報未更新など共通する5つのサインがあります。
 
+紹介以外の接点を作る方法は[税理士のブログ集客とは？書くべき5つの記事テーマ](/seo/zeirishi-blog-shukyaku/)でも扱っています。
+
 前提となる考え方は、[税理士の集客サイトとは？必須6ページと掲載内容の決め方](/seo/zeirishi-shukyaku-site/)で解説しています。
 
 <figure><img src="/images/zeirishi-shukyaku-dekinai/signs.png" alt="税理士事務所が陥る集客不振の5つのサイン: 紹介だけに依存、強みが不明瞭、更新が止まった、料金が不明、導線が分かりにくい" loading="lazy"><figcaption>税理士事務所が陥る集客不振の5つのサイン</figcaption></figure>
