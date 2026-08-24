@@ -38,6 +38,78 @@ ARTICLES = ROOT / "articles"
 SITE = ROOT / "site"
 TEMPLATE = ROOT / "templates" / "article.html"
 
+# ---- ナビゲーション ----
+# 別のサイトへ移したとき、ここが直書きだと全ページに存在しないページへの
+# リンクが並ぶ。site.config.json に nav / footer_nav があればそれを使い、
+# 無ければ下の既定を使う（このサイトの表示は変わらない）。
+NAV_DEFAULT = [
+    {"label": "AIO・LLMO", "url": "/aio/"},
+    {"label": "SEO運用", "url": "/seo/"},
+    {"label": "MEO運用", "url": "/meo/"},
+    {"label": "AI集客", "url": "/ai-marketing/"},
+    {"label": "AI導入補助金（独自メディア）", "url": "https://lp.7senses.co.jp/",
+     "blank": True},
+    {"label": "コーポレートサイト", "url": "https://corp.7senses.co.jp/", "blank": True},
+    {"label": "無料相談", "url": "/lp/", "class": "nav-cta", "cta": "nav_consult"},
+]
+FOOTER_NAV_DEFAULT = [
+    {"label": "はじめての方へ", "url": "/start/"},
+    {"label": "記事一覧", "url": "/blog/"},
+    {"label": "用語集", "url": "/glossary/"},
+    {"label": "MEO診断", "url": "/diagnosis/meo/"},
+    {"label": "AIO診断", "url": "/diagnosis/aio/"},
+    {"label": "サイト診断", "url": "/site-audit/"},
+    {"label": "AIO・LLMO運用", "url": "/aio/"},
+    {"label": "SEO運用", "url": "/seo/"},
+    {"label": "MEO運用", "url": "/meo/"},
+    {"label": "AI集客・活用", "url": "/ai-marketing/"},
+    {"label": "運営者情報", "url": "/about/"},
+    {"label": "監修者プロフィール", "url": "/author/haraguchi/"},
+    {"label": "AI導入補助金サポート", "url": "https://lp.7senses.co.jp/", "blank": True},
+    {"label": "コーポレートサイト", "url": "https://corp.7senses.co.jp/", "blank": True},
+    {"label": "集客支援サービス", "url": "/lp/"},
+    {"label": "お問い合わせ", "url": "/contact/"},
+    {"label": "編集・訂正ポリシー", "url": "/editorial-policy/"},
+    {"label": "プライバシーポリシー", "url": "/privacy/"},
+    {"label": "特定商取引法に基づく表記", "url": "/tokushoho/"},
+]
+
+
+CTA_DEFAULT = {
+    "cta_copy": "読んで終わりにせず、自社の集客改善につなげませんか？",
+    "cta_url": "/lp/",
+    "cta_label": "AIO・LLMO・SEO・MEO集客支援の無料相談へ",
+    "cta_sub": "現状分析レポートを無料でお渡ししています",
+}
+
+
+def _conf():
+    p = ROOT / "site.config.json"
+    if p.is_file():
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            pass
+    return {}
+
+
+def _cta():
+    c = _conf()
+    return {k: c.get(k) or v for k, v in CTA_DEFAULT.items()}
+
+
+def _nav(key, fallback):
+    got = _conf().get(key)
+    items = got if isinstance(got, list) and got else fallback
+    out = []
+    for it in items:
+        cls = ' class="' + it["class"] + '"' if it.get("class") else ""
+        tgt = ' target="_blank" rel="noopener"' if it.get("blank") else ""
+        cta = ' data-cta="' + it["cta"] + '"' if it.get("cta") else ""
+        out.append('      <a href="' + it["url"] + '"' + tgt + cls + cta + ">"
+                   + it["label"] + "</a>")
+    return "\n".join(out)
+
 # ---- サイト設定（ドメイン取得後に SITE_URL を差し替え） ----
 SITE_URL = "https://ai.7senses.co.jp"
 SITE_NAME = "AI集客ラボ"  # TODO: メディア名確定後に変更（PROJECT.md参照）
@@ -296,6 +368,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{CANONICAL}}": url,
         "{{OG_IMAGE}}": SITE_URL + meta.get("eyecatch", "/images/ogp-default.png"),
         "{{SITE_NAME}}": SITE_NAME,
+        "{{NAV}}": _nav("nav", NAV_DEFAULT),
+        "{{FOOTER_NAV}}": _nav("footer_nav", FOOTER_NAV_DEFAULT),
         "{{CAT_NAME}}": cat_name,
         "{{CAT_SLUG}}": meta["category"],
         "{{CAT_CLASS}}": cat_class,
@@ -491,12 +565,7 @@ BLOG_PAGE = """<!DOCTYPE html>
     </a>
     <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
     <nav class="global-nav" aria-label="グローバルナビゲーション">
-      <a href="/aio/">AIO・LLMO</a>
-      <a href="/seo/">SEO運用</a>
-      <a href="/meo/">MEO運用</a>
-      <a href="/ai-marketing/">AI集客</a>
-      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金（独自メディア）</a>
-      <a href="/lp/" class="nav-cta">無料相談</a>
+{nav}
     </nav>
   </div>
 </header>
@@ -529,9 +598,9 @@ BLOG_PAGE = """<!DOCTYPE html>
 
 <section class="section">
   <div class="cta reveal">
-    <p class="cta-copy">読んで終わりにせず、自社の集客改善につなげませんか？</p>
-    <a class="btn btn-primary" href="/lp/">AIO・LLMO・SEO・MEO集客支援の無料相談へ <span class="arw">→</span></a>
-    <p class="cta-sub">現状分析レポートを無料でお渡ししています</p>
+    <p class="cta-copy">{cta_copy}</p>
+    <a class="btn btn-primary" href="{cta_url}">{cta_label} <span class="arw">→</span></a>
+    <p class="cta-sub">{cta_sub}</p>
   </div>
 </section>
 
@@ -544,24 +613,7 @@ BLOG_PAGE = """<!DOCTYPE html>
       <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
     </div>
     <nav aria-label="フッターナビゲーション">
-      <a href="/start/">はじめての方へ</a>
-      <a href="/blog/">記事一覧</a>
-      <a href="/glossary/">用語集</a>
-      <a href="/diagnosis/meo/">MEO診断</a>
-      <a href="/diagnosis/aio/">AIO診断</a>
-      <a href="/site-audit/">サイト診断</a>
-      <a href="/aio/">AIO・LLMO運用</a>
-      <a href="/seo/">SEO運用</a>
-      <a href="/meo/">MEO運用</a>
-      <a href="/ai-marketing/">AI集客・活用</a>
-      <a href="/about/">運営者情報</a>
-      <a href="/author/haraguchi/">監修者プロフィール</a>
-      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
-      <a href="/lp/">集客支援サービス</a>
-      <a href="/contact/">お問い合わせ</a>
-      <a href="/editorial-policy/">編集・訂正ポリシー</a>
-      <a href="/privacy/">プライバシーポリシー</a>
-      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+{footer_nav}
     </nav>
     <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
   </div>
@@ -598,7 +650,10 @@ def build_blog_index(all_metas):
             f'<ul class="post-list">\n{tiles}\n</ul></div>')
     out = SITE / "blog" / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(BLOG_PAGE.format(site=SITE_NAME, url=SITE_URL, items="\n".join(blocks)),
+    out.write_text(BLOG_PAGE.format(site=SITE_NAME, url=SITE_URL, items="\n".join(blocks),
+                                    nav=_nav("nav", NAV_DEFAULT),
+                                    footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
+                                    **_cta()),
                    encoding="utf-8")
 
 

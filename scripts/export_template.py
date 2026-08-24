@@ -22,7 +22,17 @@ ROOT = Path(__file__).resolve().parent.parent
 COPY_DIRS = ["scripts", "templates", "automation/gas", ".github/workflows"]
 # この道具自身は渡さない。検査用に自社の値を文字列として持っているため。
 SKIP_FILES = {"export_template.py"}
-COPY_FILES = ["requirements.txt", ".gitignore"]
+COPY_FILES = [
+    "requirements.txt", ".gitignore",
+    # AIクローラーの一覧。robots.txt との整合を見るのに使う。
+    # 自社の値を含まない定義データで、無いと aio_check.py が動かない。
+    "automation/ai-crawlers.txt",
+]
+
+# 実行時に書き込む場所。空でも作っておく。
+# 無いまま走ると、記事を1本書いたあとの保存で落ちる。
+KEEP_DIRS = ["articles", "reports", "data/ranks", "data/ai_citations",
+             "data/youtube_transcripts", "site/images"]
 
 # .env.example は写さずにここから作る。自社のものは使わない項目が残っていて、
 # 手順書に出てくる HUB_URL などが載っていないため、渡す先で埋めようがない。
@@ -219,6 +229,10 @@ def main():
             n += 1
     (out / ".env.example").write_text(ENV_TEMPLATE, encoding="utf-8")
     n += 1
+    for d in KEEP_DIRS:
+        (out / d).mkdir(parents=True, exist_ok=True)
+        (out / d / ".gitkeep").write_text("", encoding="utf-8")
+        n += 1
     # 手順書。書き出し先は毎回作り直すので、原本はリポジトリ側に置いてある
     readme = ROOT / "docs" / "client-readme.md"
     if readme.is_file():

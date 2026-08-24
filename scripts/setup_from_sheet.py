@@ -118,7 +118,7 @@ def to_config(a):
         "repo": "", "branch": "main",
         "type": site_type,
         "content_dir": "content", "url_prefix": prefix,
-        "ga4_property_id": a.get("H1", ""),
+        "ga4_property_id": a.get("H1", "") or a.get("K21", ""),
         "kw_plan": "docs/kw-" + site_id + ".md",
         "theme": a.get("B1", ""),
         "audience": a.get("B2", ""),
@@ -132,15 +132,18 @@ def to_config(a):
         "cta": {"label": a.get("G3", "") or "無料相談する",
                 "url": a.get("G2", ""), "note": a.get("G4", "")},
         "x_tags": [],
-        # 会社情報。サイトの雛形とE-E-A-Tの記述に使う
+        # 会社情報。サイトの雛形とE-E-A-Tの記述に使う。
+        # 電話番号は住所と別に持つ。名寄せ（NAP）の検査が住所・電話・社名を
+        # 別々に突き合わせるため、1つの欄にまとめると検査が働かない。
         "company": {
             "name": a.get("K14", "") or a.get("A1", ""),
             "corporate_number": a.get("A2", ""),
             "address": a.get("K15", ""),
-            "representative": a.get("K16", ""),
-            "founded": a.get("K17", ""),
-            "business": a.get("K18", ""),
-            "license": a.get("K19", ""),
+            "tel": a.get("K16", ""),
+            "representative": a.get("K17", ""),
+            "founded": a.get("K18", ""),
+            "business": a.get("K19", ""),
+            "license": a.get("K20", ""),
             "email": a.get("H4", ""),
         },
         "facts": [x for x in (a.get("F1", ""), a.get("F2", ""),
@@ -172,10 +175,9 @@ def check(cfg):
     return ng, warn
 
 
-def page(title, body, cfg, depth=0):
+def page(title, body, cfg, _depth=0):
     """サイトの骨格。凝った見た目は後から差し替える前提で、構造だけ整える"""
     c = cfg["company"]
-    root = "../" * depth
     nav = "\n".join(
         '      <a href="/' + s + '/">' + n + "</a>"
         for s, n in cfg["categories"].items())
@@ -186,7 +188,9 @@ def page(title, body, cfg, depth=0):
         "<title>" + title + "｜" + cfg["name"] + "</title>\n"
         "<meta name=\"description\" content=\"" + cfg["theme"][:110] + "\">\n"
         "<link rel=\"canonical\" href=\"https://" + cfg["domain"] + "/\">\n"
-        "<link rel=\"stylesheet\" href=\"/" + root + "css/style.css\">\n"
+        # サイトのルートから配信するので絶対パスでよい。「/」と「../」を
+        # 混ぜると /../css/ のような、どこも指さないパスになる
+        "<link rel=\"stylesheet\" href=\"/css/style.css\">\n"
         "</head>\n<body>\n"
         "<header class=\"site-header\">\n  <div class=\"inner\">\n"
         "    <a class=\"brand\" href=\"/\">" + cfg["name"] + "</a>\n"
@@ -229,6 +233,7 @@ def build_site(cfg, out):
         "    <tr><th>代表者</th><td>" + c["representative"] + "</td></tr>\n"
         "    <tr><th>設立</th><td>" + c["founded"] + "</td></tr>\n"
         "    <tr><th>所在地</th><td>" + c["address"] + "</td></tr>\n"
+        "    <tr><th>電話番号</th><td>" + c["tel"] + "</td></tr>\n"
         "    <tr><th>事業内容</th><td>" + c["business"] + "</td></tr>\n"
         "    <tr><th>許認可・資格</th><td>" + c["license"] + "</td></tr>\n"
         "  </tbody></table></div>\n"
@@ -257,11 +262,32 @@ def build_site(cfg, out):
         "  <p>ご本人からのお申し出があった場合、速やかに対応します。</p>\n"
         "  <p>連絡先: " + c["email"] + "</p>")
 
+    # 記事テンプレートのフッターがここへリンクしている。作らないと
+    # 公開した全記事がリンク切れになり、ビルドの検査で毎回警告が出る。
+    tokusho = (
+        "  <header class=\"article-header\">"
+        "<h1>特定商取引法に基づく表記</h1></header>\n"
+        "  <div class=\"table-wrap\"><table><tbody>\n"
+        "    <tr><th>販売事業者</th><td>" + c["name"] + "</td></tr>\n"
+        "    <tr><th>代表者</th><td>" + c["representative"] + "</td></tr>\n"
+        "    <tr><th>所在地</th><td>" + c["address"] + "</td></tr>\n"
+        "    <tr><th>電話番号</th><td>" + c["tel"] + "</td></tr>\n"
+        "    <tr><th>メール</th><td>" + c["email"] + "</td></tr>\n"
+        "    <tr><th>販売価格</th><td>各サービスのご案内ページに記載します</td></tr>\n"
+        "    <tr><th>お支払い方法</th><td>銀行振込</td></tr>\n"
+        "    <tr><th>提供時期</th><td>契約後、個別にご案内します</td></tr>\n"
+        "    <tr><th>返品・キャンセル</th><td>役務提供の性質上、"
+        "提供開始後の返金はいたしかねます</td></tr>\n"
+        "  </tbody></table></div>\n"
+        "  <p>内容は取り扱うサービスに合わせて必ず書き換えてください。"
+        "この雛形のままでは表示義務を満たしません。</p>")
+
     pages = {
         "index.html": page(cfg["name"], top, cfg),
         "about/index.html": page("運営者情報", about, cfg, 1),
         "contact/index.html": page("お問い合わせ", contact, cfg, 1),
         "privacy/index.html": page("プライバシーポリシー", privacy, cfg, 1),
+        "tokushoho/index.html": page("特定商取引法に基づく表記", tokusho, cfg, 1),
     }
     for slug, name in cfg["categories"].items():
         body = ("  <header class=\"article-header\">\n"
@@ -282,6 +308,170 @@ def build_site(cfg, out):
         (out / "css" / "style.css").write_text(
             css.read_text(encoding="utf-8"), encoding="utf-8", newline="")
     return len(pages)
+
+
+def make_icons(cfg):
+    """仮のアプリアイコン。頭文字を1字だけ置いた無地の四角。
+
+    ロゴが届くまでの仮置き。無いと全ページでリンク切れになる。
+    """
+    made = []
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        return made
+    d = ROOT / "site" / "images"
+    d.mkdir(parents=True, exist_ok=True)
+    ch = (cfg["name"] or "M")[0]
+    for size in (180, 192, 512):
+        f = d / ("icon-" + str(size) + ".png")
+        if f.exists():
+            continue
+        im = Image.new("RGB", (size, size), "#0b2447")
+        dr = ImageDraw.Draw(im)
+        font = None
+        for name in ("YuGothB.ttc", "meiryob.ttc", "msgothic.ttc"):
+            try:
+                font = ImageFont.truetype("C:/Windows/Fonts/" + name, int(size * 0.52))
+                break
+            except OSError:
+                continue
+        if font is None:
+            font = ImageFont.load_default()
+        box = dr.textbbox((0, 0), ch, font=font)
+        dr.text(((size - box[2] + box[0]) / 2, (size - box[3] + box[1]) / 2),
+                ch, font=font, fill="#ffffff")
+        im.save(f, optimize=True)
+        made.append("site/images/" + f.name)
+    return made
+
+
+def write_support(cfg):
+    """設定JSONだけでは動かない。各スクリプトが読む土台をここで揃える。
+
+    無いと落ちる／黙って効かなくなるものを、シートの回答から作る。
+    手で作らせると、作り忘れても原因が表に出ないまま数日進んでしまう。
+    """
+    made = []
+    c = cfg["company"]
+
+    # 1. 会社の正規表記。外部掲載・Schema・レポートが全部ここを見る。
+    #    表記がぶれると同名の別法人と混ざり、名寄せが壊れる。
+    prof = ROOT / "data" / "company_profile.json"
+    prof.parent.mkdir(parents=True, exist_ok=True)
+    if not prof.exists():
+        prof.write_text(json.dumps({
+            "_readme": "会社の正規表記（NAP）。外部への掲載・Schema・レポートはすべて"
+                       "ここを参照する。表記がぶれると名寄せが壊れ、同名の別法人と"
+                       "混ざる。変更するときは掲載済みの記事も直すこと。",
+            "name": c["name"], "corporate_number": c["corporate_number"],
+            "address": c["address"], "tel": c["tel"], "email": c["email"],
+            "founded": c["founded"], "ceo": c["representative"],
+            "business": c["business"], "license": c["license"],
+            "sites": {cfg["id"]: "https://" + cfg["domain"] + "/"},
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
+        made.append("data/company_profile.json")
+
+    # 2. 一次情報。記事はここから最低1つ引く。
+    #    空のままだと「どのサイトでも書ける記事」になり、AI検索に引用されない。
+    facts = ROOT / "data" / "first_party_facts.json"
+    if not facts.exists():
+        facts.write_text(json.dumps({
+            "_readme": "自社でしか出せない一次情報。記事はここから最低1つ引く。"
+                       "出典と時点を必ず持たせ、確認できない数値は載せない。",
+            "facts": [{"id": cfg["id"] + "-" + str(i), "sites": [cfg["id"]],
+                       "topic": [], "text": t, "source": "ヒアリング", "as_of": ""}
+                      for i, t in enumerate(cfg["facts"], 1)],
+            "pending": [{"note": "数値は出典と集計期間が要る（景品表示法）。"
+                                 "確認できるまで記事に書かない", "owner": "クライアント"}],
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
+        made.append("data/first_party_facts.json")
+
+    # 3. 別サイトへ移すときの置換元
+    sc = ROOT / "site.config.json"
+    if not sc.exists():
+        # ナビはここが元になる。書かないと build.py の既定（別サイトのカテゴリ）が
+        # 全ページに出て、存在しないページへのリンクが並ぶ。
+        nav = [{"label": name, "url": "/" + slug + "/"}
+               for slug, name in cfg["categories"].items()]
+        nav.append({"label": cfg["cta"]["label"], "class": "nav-cta",
+                    "url": cfg["cta"]["url"] or "/contact/", "cta": "nav_consult"})
+        foot = [{"label": "記事一覧", "url": "/blog/"}] + [
+            {"label": name, "url": "/" + slug + "/"}
+            for slug, name in cfg["categories"].items()] + [
+            {"label": "運営者情報", "url": "/about/"},
+            {"label": "お問い合わせ", "url": "/contact/"},
+            {"label": "プライバシーポリシー", "url": "/privacy/"},
+            {"label": "特定商取引法に基づく表記", "url": "/tokushoho/"}]
+        sc.write_text(json.dumps({
+            "_comment": "このサイトの識別情報とナビゲーション。"
+                        "nav / footer_nav は build.py が全ページに出す。",
+            "nav": nav, "footer_nav": foot,
+            # 記事一覧の下に出る誘導。書かないと別サイトの /lp/ を指したままになる
+            "cta_copy": cfg["cta_title"],
+            "cta_url": cfg["cta"]["url"] or "/contact/",
+            "cta_label": cfg["cta"]["label"],
+            "cta_sub": cfg["cta_desc"] or "お気軽にご相談ください",
+            "domain": cfg["domain"], "site_name": cfg["name"],
+            "site_tagline": cfg["theme"], "org_name": c["name"],
+            "author_name": c["name"] + " 編集部", "author_role": cfg["theme"],
+            "tel": c["tel"], "address": c["address"],
+            "cf_project": cfg["id"], "github_repo": cfg.get("repo", ""),
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
+        made.append("site.config.json")
+
+    # 4. AI向けのサイト案内。無いと build.py が読み込みで止まる
+    llms = ROOT / "site" / "llms.txt"
+    llms.parent.mkdir(parents=True, exist_ok=True)
+    if not llms.exists():
+        llms.write_text(
+            "# " + cfg["name"] + "\n> " + (cfg["theme"] or cfg["name"]) + "\n\n"
+            "## 運営者情報\n"
+            "- " + c["name"] + (("（法人番号 " + c["corporate_number"] + "）")
+                                if c["corporate_number"] else "") + "\n"
+            + ("- " + c["business"] + "\n" if c["business"] else "")
+            + ("- " + c["address"] + "\n" if c["address"] else "")
+            + "\n## 主要コンテンツ\n（記事の公開時に自動で追記されます）\n",
+            encoding="utf-8")
+        made.append("site/llms.txt")
+
+    # 5. 業種ごとの記事計画。無いと kw_status が在庫を数えられない
+    pillar = ROOT / "docs" / "industry-pillar-plan.md"
+    if not pillar.exists():
+        # 「**業種**: KW / KW」の形でしか読まれない。表で書くと
+        # 在庫が0件と判定され、補充が必要かどうかを見誤る。
+        rows = ["# " + cfg["name"] + " 記事計画", "",
+                "> 業種 × 切り口で広げる。kw_discover.py がここを起点に補充する。",
+                "> 書式を変えると kw_status.py が在庫を数えられなくなる。", ""]
+        for ind in cfg["kw_seeds"]["industries"]:
+            kws = [ind + " " + it for it in cfg["kw_seeds"]["intents"]]
+            rows.append("**" + ind + "**: " + " / ".join(kws))
+            rows.append("")
+        pillar.write_text("\n".join(rows) + "\n", encoding="utf-8")
+        made.append("docs/industry-pillar-plan.md")
+
+    # 6. アプリアイコンとマニフェスト。全ページの<head>から参照されるため、
+    #    無いと公開のたびにリンク切れが出て、本物の404が埋もれる。
+    man = ROOT / "site" / "manifest.webmanifest"
+    if not man.exists():
+        man.write_text(json.dumps({
+            "name": cfg["name"], "short_name": cfg["name"][:12],
+            "description": cfg["theme"][:110], "start_url": "/",
+            "display": "standalone", "background_color": "#ffffff",
+            "theme_color": "#0b2447",
+            "icons": [{"src": "/images/icon-192.png", "sizes": "192x192",
+                       "type": "image/png"},
+                      {"src": "/images/icon-512.png", "sizes": "512x512",
+                       "type": "image/png"}],
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
+        made.append("site/manifest.webmanifest")
+    made += make_icons(cfg)
+
+    # 7. 実行時に書き込む場所。無いまま走ると途中で落ちる
+    for d in ("articles", "reports", "data/ranks", "data/ai_citations",
+              "data/youtube_transcripts", "site/images"):
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+    return made
 
 
 def main():
@@ -317,8 +507,18 @@ def main():
     plan.parent.mkdir(parents=True, exist_ok=True)
     plan.write_text("# " + cfg["name"] + " KW計画\n\n対象: " + cfg["audience"]
                     + "\n\n（kw_discover.py が自動補充します）\n", encoding="utf-8")
-    out = ROOT / ("site-" + cfg["id"])
+    # 当社が作るサイトは site/ がビルドの対象。別フォルダに作ると
+    # build.py が見に行かず、ページが1枚も出ないまま気づけない。
+    # 先方のサイトへ記事だけ納める場合は、渡す用に site-<id>/ へ出す。
+    own = cfg["type"] == "self-static"
+    out = ROOT / "site" if own else ROOT / ("site-" + cfg["id"])
     n_page = build_site(cfg, out)
+    # 先方のサイトへ納める場合も、手元の site/ に固定ページが要る。
+    # 記事テンプレートのフッターが /about/ などを指しているため、
+    # 無いとビルドのリンク検査が毎回警告を出し、本物の404に気づけなくなる。
+    if not own:
+        build_site(cfg, ROOT / "site")
+    made = write_support(cfg)
 
     memo = ROOT / ("setup-memo-" + cfg["id"] + ".md")
     memo.write_text(
@@ -326,7 +526,8 @@ def main():
         "## 作られたもの\n"
         "- sites/" + cfg["id"] + ".json\n"
         "- " + cfg["kw_plan"] + "\n"
-        "- site-" + cfg["id"] + "/（" + str(n_page) + "ページ）\n\n"
+        "- " + out.name + "/（" + str(n_page) + "ページ）\n"
+        + "".join("- " + m + "\n" for m in made) + "\n"
         "## 次にやること\n"
         "1. サイトを公開先へ設置し、repo を sites/" + cfg["id"] + ".json に書く\n"
         "2. GA4とSearch Consoleにサービスアカウントを追加（Search Consoleはオーナー）\n"
@@ -338,7 +539,9 @@ def main():
 
     print("\n  作成: sites/" + cfg["id"] + ".json")
     print("  作成: " + cfg["kw_plan"])
-    print("  作成: site-" + cfg["id"] + "/（" + str(n_page) + "ページ）")
+    print("  作成: " + out.name + "/（" + str(n_page) + "ページ）")
+    for m in made:
+        print("  作成: " + m)
     print("  作成: " + memo.name)
 
 
