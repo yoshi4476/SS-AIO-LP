@@ -22,7 +22,83 @@ ROOT = Path(__file__).resolve().parent.parent
 COPY_DIRS = ["scripts", "templates", "automation/gas", ".github/workflows"]
 # この道具自身は渡さない。検査用に自社の値を文字列として持っているため。
 SKIP_FILES = {"export_template.py"}
-COPY_FILES = ["requirements.txt", ".gitignore", ".env.example"]
+COPY_FILES = ["requirements.txt", ".gitignore"]
+
+# .env.example は写さずにここから作る。自社のものは使わない項目が残っていて、
+# 手順書に出てくる HUB_URL などが載っていないため、渡す先で埋めようがない。
+ENV_TEMPLATE = """\
+# 認証情報の雛形。これを .env にコピーして埋める。
+# .env は git に入らない（.gitignore 済み）。
+#
+# GitHub Actions で動かす場合、同じ値をリポジトリの Secrets にも登録する。
+# ローカルの .env だけ埋めても、定期実行は動かない。
+
+# ── 管制塔 ───────────────────────────────────────────────
+# scripts/bootstrap.py が作り、ここへ自動で書き込む。手で埋めなくてよい。
+HUB_URL=
+HUB_SECRET=
+GAS_SCRIPT_ID_HUB=
+
+# ── 記事の生成 ───────────────────────────────────────────
+# どちらか一方でよい。OAuth トークンは claude setup-token で発行する。
+ANTHROPIC_API_KEY=
+CLAUDE_CODE_OAUTH_TOKEN=
+
+# ── 公開先 ───────────────────────────────────────────────
+# GitHub の Fine-grained token（Contents: Read and write）。
+# 切れると記事が公開されない。scripts/token_check.py で確認できる。
+SITE_PUSH_TOKEN=
+SITE_URL=https://example.com
+
+# Cloudflare Pages に置く場合のみ
+CLOUDFLARE_ACCOUNT_ID=
+CLOUDFLARE_API_TOKEN=
+
+# ── 計測 ─────────────────────────────────────────────────
+# GA4 → 管理 → プロパティ設定 に出る数字
+GA4_PROPERTY_ID=
+# サービスアカウントの鍵。GA4に「閲覧者」、Search Consoleに「オーナー」で追加する。
+# オーナーでないとインデックス通知が使えず、検索に載るまで数週間延びる。
+INDEXING_SERVICE_ACCOUNT_PATH=./indexing-service-account.json
+
+# ── キーワードの発掘 ─────────────────────────────────────
+# 無くても Google/YouTube サジェストで動く。あると検索ボリューム順に採れる。
+YOUTUBE_API_KEY=
+RAKKO_API_KEY=
+
+# ── 問い合わせの通知 ─────────────────────────────────────
+RESEND_API_KEY=
+LEAD_FROM_EMAIL=
+LEAD_TO_EMAIL=
+NOTIFY_TO_EMAIL=
+RESEND_AUDIENCE_ID=
+
+# ── 任意 ─────────────────────────────────────────────────
+# Bing/Copilot への即時通知。キーファイルをサイトルートに置く
+INDEXNOW_KEY=
+SLACK_WEBHOOK_URL=
+# Actions から別のリポジトリへ push する場合のみ
+GH_SECRET_TOKEN=
+
+# ── SNS自動投稿（任意。未設定でも記事の公開は止まらない）──
+X_API_KEY=
+X_API_SECRET=
+X_ACCESS_TOKEN=
+X_ACCESS_SECRET=
+FB_PAGE_ID=
+FB_PAGE_TOKEN=
+FB_APP_ID=
+FB_APP_SECRET=
+FB_USER_TOKEN=
+IG_USER_ID=
+THREADS_TOKEN=
+THREADS_USER_ID=
+LINKEDIN_TOKEN=
+LINKEDIN_ORG_ID=
+LINKEDIN_CLIENT_ID=
+LINKEDIN_CLIENT_SECRET=
+LINKEDIN_REFRESH_TOKEN=
+"""
 
 # サイトの骨格。記事と画像は持っていかない（クライアントごとに作る）
 SITE_KEEP = ["css", "js", "robots.txt"]
@@ -58,6 +134,11 @@ REPLACE = [
     ("セブンセンシス", "{{COMPANY_KANA}}"),
     ("sevensenses", "{{COMPANY_SLUG}}"),
     ("7senses", "{{COMPANY_SLUG}}"),
+    # 通信するときの名乗り（User-Agent）。秘密ではないが、渡した先の
+    # アクセスログに当社の内部の呼び名が出るため、一般名に替える。
+    # ss-aio-lp / ss-aio-media を先に処理してから、残りをまとめて替える
+    ("ss-aio-pipeline", "media-pipeline"),
+    ("ss-aio", "media-pipeline"),
 ]
 
 # 合言葉やIDは、値そのものを渡してはいけない。空にして埋めてもらう。
@@ -82,6 +163,9 @@ FORBIDDEN = [
     (r"re_\w{20,}", "Resendのキー"),
     (r"-----BEGIN [A-Z ]*PRIVATE KEY", "秘密鍵"),
     (r"\b1[A-Za-z0-9_-]{40,}\b", "スプレッドシート/スクリプトID"),
+    # 置換の網から漏れた自社の名前。値そのものより気づきにくく、
+    # 「検査は通ったのに社名が入ったまま渡した」が起きるため最後の砦にする
+    (r"7senses|セブンセンシ[スズ]|ss-aio|3120001227825|aio-report@", "自社の名前"),
 ]
 
 TEXT_EXT = {".py", ".gs", ".yml", ".yaml", ".json", ".md", ".txt", ".html",
@@ -133,6 +217,13 @@ def main():
         if (ROOT / f).is_file():
             copy_file(ROOT / f, out / f)
             n += 1
+    (out / ".env.example").write_text(ENV_TEMPLATE, encoding="utf-8")
+    n += 1
+    # 手順書。書き出し先は毎回作り直すので、原本はリポジトリ側に置いてある
+    readme = ROOT / "docs" / "client-readme.md"
+    if readme.is_file():
+        copy_file(readme, out / "README.md")
+        n += 1
 
     # サイトの骨格だけ。記事と画像はクライアントごとに作る
     for k in SITE_KEEP:
