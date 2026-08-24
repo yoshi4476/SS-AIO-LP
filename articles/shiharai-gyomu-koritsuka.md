@@ -78,6 +78,8 @@ faq:
 
 支払業務は、請求書の受領・確認、承認、振込データ作成、仕訳記帳という4つのステップに分けて仕組み化すると効率化できます。
 
+実際の進め方は[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](/blog/keiri-koritsuka-jirei/)で整理しています。
+
 関連する内容を先に押さえるなら、[年末調整の効率化ポイント5つ｜2026年の改正にどう備えるか](/blog/nencho-koritsuka-houhou/)が参考になります。
 
 <figure><img src="/images/shiharai-gyomu-koritsuka/step.png" alt="支払業務を効率化する基本4ステップ: 請求書を受領・確認する、承認フローを回す、振込データを作成する、支払後に仕訳を記帳する" loading="lazy"><figcaption>支払業務を効率化する基本4ステップ</figcaption></figure>

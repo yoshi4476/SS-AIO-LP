@@ -100,6 +100,8 @@ faq:
 
 年末調整の効率化は、電子化・証明書のデータ収集・リスト化・前倒し・外部委託の5つの取り組みで進められます。
 
+実際の進め方は[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](/blog/keiri-koritsuka-jirei/)で整理しています。
+
 実際の進め方は[支払業務の効率化とは？基本4ステップと方法の比較](/blog/shiharai-gyomu-koritsuka/)で整理しています。
 
 <figure><img src="/images/nencho-koritsuka-houhou/flow.png" alt="年末調整を効率化する5つの方法: 申告書を電子化する、証明書をデータ収集、確認をリスト化する、スケジュールを前倒す、外部委託を検討する" loading="lazy"><figcaption>年末調整を効率化する5つの方法</figcaption></figure>
