@@ -122,6 +122,8 @@ def to_config(a):
         "kw_plan": "docs/kw-" + site_id + ".md",
         "theme": a.get("B1", ""),
         "audience": a.get("B2", ""),
+        # 読者の悩み。Phase 5 のペルソナ採点が「悩みに答えているか」を見る
+        "pains": split(a.get("B3", "")),
         "owns": split(a.get("C1", "")),
         "avoid": split(a.get("C2", "")),
         "categories": cats,
@@ -412,9 +414,20 @@ def write_support(cfg):
             "cta_url": cfg["cta"]["url"] or "/contact/",
             "cta_label": cfg["cta"]["label"],
             "cta_sub": cfg["cta_desc"] or "お気軽にご相談ください",
-            "domain": cfg["domain"], "site_name": cfg["name"],
+            "domain": cfg["domain"],
+            "site_url": "https://" + cfg["domain"],
+            "site_name": cfg["name"],
             "site_tagline": cfg["theme"], "org_name": c["name"],
-            "author_name": c["name"] + " 編集部", "author_role": cfg["theme"],
+            "author_name": c["name"] + " 編集部",
+            "author_role": cfg["theme"],
+            # 記事の署名。実在の個人にする。「編集部」名義はAI検索に信頼されにくく、
+            # 引用されにくい。監修者が決まったらここを差し替える。
+            "byline": {
+                "name": c["representative"] or (c["name"] + " 編集部"),
+                "role": (c["name"] + " " + (c["business"] or "")).strip(),
+                "bio": " ".join(cfg["facts"][:2]),
+                "url": "https://" + cfg["domain"] + "/about/",
+            },
             "tel": c["tel"], "address": c["address"],
             "cf_project": cfg["id"], "github_repo": cfg.get("repo", ""),
         }, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -435,7 +448,74 @@ def write_support(cfg):
             encoding="utf-8")
         made.append("site/llms.txt")
 
-    # 5. 業種ごとの記事計画。無いと kw_status が在庫を数えられない
+    # 5. このメディア固有の設定。記事を書くときの指示（CLAUDE.md）が
+    #    ここを読む。無いと、誰に向けて何を書くかが決まらないまま生成が走る。
+    pj = ROOT / "PROJECT.md"
+    if not pj.exists():
+        cats = "\n".join("| " + n + " | `" + s + "` |"
+                         for s, n in cfg["categories"].items())
+        pains = "\n".join("- " + x for x in cfg.get("pains", [])) or "- （ヒアリングB3）"
+        seeds = cfg["kw_seeds"]
+        clusters = "\n".join(
+            "- **" + ind + "**: " + " / ".join(ind + " " + it for it in seeds["intents"][:4])
+            for ind in seeds["industries"][:6])
+        pj.write_text(
+            "# PROJECT.md — このメディア固有の設定\n\n"
+            "> パイプライン（[CLAUDE.md](CLAUDE.md)）が参照する。\n"
+            "> ヒアリングシートから作られた。変えたいときはここを直す。\n\n"
+            "## サイト基本情報\n\n"
+            "| 項目 | 値 |\n|:--|:--|\n"
+            "| メディア名 | " + cfg["name"] + " |\n"
+            "| ドメイン | https://" + cfg["domain"] + " |\n"
+            "| 記事URL | " + cfg["url_prefix"] + "/{記事スラッグ}/ |\n"
+            "| サイト形式 | " + cfg["type"] + " |\n"
+            "| メディアの目的 | " + cfg["theme"] + " |\n"
+            "| 運営会社 | " + c["name"] + " |\n"
+            "| CV | " + cfg["cta_title"] + "（" + (cfg["cta"]["url"] or "/contact/") + "） |\n\n"
+            "## E-E-A-T 著者情報\n\n"
+            "| 項目 | 値 |\n|:--|:--|\n"
+            "| 著者名 | " + c["name"] + " 編集部 |\n"
+            "| 監修者 | " + (c["representative"] or "（ヒアリングI3）") + " |\n"
+            "| 会社実績 | " + (c["founded"] or "") + " / "
+            + (c["license"] or "") + " |\n"
+            "| プロフィールURL | https://" + cfg["domain"] + "/about/ |\n\n"
+            "## ターゲットペルソナ（Phase 5 ペルソナエージェント用）\n\n"
+            "- " + cfg["audience"] + "\n"
+            "- 主な悩み:\n" + pains + "\n\n"
+            "## 扱う領域 / 扱わない領域\n\n"
+            "- 扱う: " + " / ".join(cfg["owns"]) + "\n"
+            "- 扱わない: " + " / ".join(cfg["avoid"]) + "\n\n"
+            "**扱わない領域の記事は公開の入口で止まる。** 他サイトと同じ話題を"
+            "書くと、検索エンジンがどちらを評価するか決められず両方が下がる。\n\n"
+            "## 業種別KWクラスター案\n\n" + clusters + "\n\n"
+            "## 記事カテゴリ\n\n"
+            "| カテゴリ名 | スラッグ |\n|:--|:--|\n" + cats + "\n\n"
+            "## CTA設定\n\n"
+            "| 項目 | 値 |\n|:--|:--|\n"
+            "| 見出し | " + cfg["cta_title"] + " |\n"
+            "| ボタン文言 | " + cfg["cta"]["label"] + " |\n"
+            "| 誘導先 | " + (cfg["cta"]["url"] or "/contact/") + " |\n"
+            "| 応対体制 | " + (cfg["cta_desc"] or "（ヒアリングG4）") + " |\n\n"
+            "## 一次情報（全記事に最低1つ入れる）\n\n"
+            + "\n".join("- " + x for x in cfg["facts"]) + "\n\n"
+            "数値は出典と集計期間を添える（景品表示法）。"
+            "確認できない数値は書かない。\n",
+            encoding="utf-8")
+        made.append("PROJECT.md")
+
+    # 6. 前日までの成功・失敗の記録。翌朝の生成がこれを読んで踏襲する
+    kf = ROOT / "kpi_feedback.md"
+    if not kf.exists():
+        kf.write_text(
+            "# KPIフィードバック\n\n"
+            "毎日の計測が自動で書き足す。翌朝の記事生成が冒頭で読み込む。\n\n"
+            "## 成功パターン（これを踏襲せよ）\n\n（まだありません）\n\n"
+            "## 失敗パターン（これを避けよ）\n\n（まだありません）\n\n"
+            "## リライト優先度リスト\n\n（まだありません）\n",
+            encoding="utf-8")
+        made.append("kpi_feedback.md")
+
+    # 7. 業種ごとの記事計画。無いと kw_status が在庫を数えられない
     pillar = ROOT / "docs" / "industry-pillar-plan.md"
     if not pillar.exists():
         # 「**業種**: KW / KW」の形でしか読まれない。表で書くと
@@ -450,7 +530,7 @@ def write_support(cfg):
         pillar.write_text("\n".join(rows) + "\n", encoding="utf-8")
         made.append("docs/industry-pillar-plan.md")
 
-    # 6. アプリアイコンとマニフェスト。全ページの<head>から参照されるため、
+    # 8. アプリアイコンとマニフェスト。全ページの<head>から参照されるため、
     #    無いと公開のたびにリンク切れが出て、本物の404が埋もれる。
     man = ROOT / "site" / "manifest.webmanifest"
     if not man.exists():
@@ -467,7 +547,7 @@ def write_support(cfg):
         made.append("site/manifest.webmanifest")
     made += make_icons(cfg)
 
-    # 7. 実行時に書き込む場所。無いまま走ると途中で落ちる
+    # 9. 実行時に書き込む場所。無いまま走ると途中で落ちる
     for d in ("articles", "reports", "data/ranks", "data/ai_citations",
               "data/youtube_transcripts", "site/images"):
         (ROOT / d).mkdir(parents=True, exist_ok=True)

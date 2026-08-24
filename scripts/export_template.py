@@ -27,6 +27,16 @@ COPY_FILES = [
     # AIクローラーの一覧。robots.txt との整合を見るのに使う。
     # 自社の値を含まない定義データで、無いと aio_check.py が動かない。
     "automation/ai-crawlers.txt",
+    # 記事を書くときの指示。スクリプトは道具で、実際に何を書くかはこれが決める。
+    # 定期実行のワークフローがこの4つをそのまま読み込むため、
+    # 無いと中身が空のまま起動し、記事が1本も出ない。
+    "automation/pipeline_prompt.txt",
+    "automation/multi_site_prompt.txt",
+    "automation/retry_prompt.txt",
+    "automation/weekly_optimize_prompt.txt",
+    # パイプラインの定義そのもの。全7工程・品質基準・AIO対応の規則が入る。
+    # プロンプトはこれを参照する形で書かれている。
+    "CLAUDE.md",
 ]
 
 # 実行時に書き込む場所。空でも作っておく。
@@ -121,6 +131,10 @@ REPLACE = [
     ("www.7senses.co.jp", "{{MAIN_DOMAIN}}"),
     ("7senses.co.jp", "{{DOMAIN}}"),
     ("セブンセンシズ株式会社", "{{COMPANY_NAME}}"),
+    # メディア名。社名ではないので見落としやすいが、渡した先の全ページの
+    # タイトルとJSON-LDに出る
+    ("AI集客ラボ", "{{MEDIA_NAME}}"),
+    ("AI導入補助金サポート", "{{LP_NAME}}"),
     ("セブンセンシズ", "{{COMPANY_SHORT}}"),
     ("SEVEN SENSES", "{{COMPANY_EN}}"),
     ("3120001227825", "{{CORPORATE_NUMBER}}"),
@@ -176,6 +190,7 @@ FORBIDDEN = [
     # 置換の網から漏れた自社の名前。値そのものより気づきにくく、
     # 「検査は通ったのに社名が入ったまま渡した」が起きるため最後の砦にする
     (r"7senses|セブンセンシ[スズ]|ss-aio|3120001227825|aio-report@", "自社の名前"),
+    (r"AI集客ラボ|AI導入補助金サポート|G-ran|原口", "自社のメディア名・サービス名・人名"),
 ]
 
 TEXT_EXT = {".py", ".gs", ".yml", ".yaml", ".json", ".md", ".txt", ".html",

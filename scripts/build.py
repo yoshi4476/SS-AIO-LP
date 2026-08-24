@@ -110,10 +110,14 @@ def _nav(key, fallback):
                    + it["label"] + "</a>")
     return "\n".join(out)
 
-# ---- サイト設定（ドメイン取得後に SITE_URL を差し替え） ----
-SITE_URL = "https://ai.7senses.co.jp"
-SITE_NAME = "AI集客ラボ"  # TODO: メディア名確定後に変更（PROJECT.md参照）
-ORG_NAME = "セブンセンシズ株式会社"
+# ---- サイト設定 ----
+# 別のサイトへ移したときは site.config.json を置けば切り替わる。
+# 無ければ下の値を使う（このサイトの出力は変わらない）。
+_C = _conf()
+SITE_URL = _C.get("site_url") or (
+    "https://" + _C["domain"] if _C.get("domain") else "https://ai.7senses.co.jp")
+SITE_NAME = _C.get("site_name") or "AI集客ラボ"
+ORG_NAME = _C.get("org_name") or "セブンセンシズ株式会社"
 # 同名の別法人（東京都目黒区・法人番号9120001168304）が存在する。社名だけでは
 # 機械が区別できないため、法人番号と所在地を必ず添えて出す。
 # sameAs には法人番号がURLに含まれるページだけを入れる（名前しか載らないページを
@@ -148,10 +152,14 @@ def organization():
 # 著者は実在の個人にする。「編集部」を Person として出すと、検索エンジンにもAIにも
 # 「誰が書いたか」が伝わらず、E-E-A-T の Experience / Expertise を主張できない。
 # 経歴・実績・連絡先は /author/haraguchi/ に集約し、Schema からそこへ紐づける。
-AUTHOR_NAME = "原口 優"
-AUTHOR_ROLE = "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年"
-AUTHOR_BIO = "通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
-AUTHOR_URL = f"{SITE_URL}/author/haraguchi/"   # 経歴・実績の実体があるページへ
+# site.config.json の byline。author_name は別の用途（移行時の置換元）で
+# 使っているため、記事の署名はここに分けて持つ。
+_B = _C.get("byline") or {}
+AUTHOR_NAME = _B.get("name") or "原口 優"
+AUTHOR_ROLE = _B.get("role") or "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年"
+AUTHOR_BIO = _B.get("bio") or "通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
+# 経歴・実績の実体があるページへ。無い人を指すと E-E-A-T の主張が空振りする
+AUTHOR_URL = _B.get("url") or f"{SITE_URL}/author/haraguchi/"
 
 CATEGORIES = {
     "aio": ("AIO・LLMO運用", "cat-aio"),
