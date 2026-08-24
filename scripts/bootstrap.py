@@ -73,6 +73,22 @@ def token():
     return d["access_token"], d.get("scope", "").split()
 
 
+def whoami(tok):
+    """どのGoogleアカウントで作るのかを出す。
+
+    clasp のログイン先が意図と違うと、別アカウントの中に管制塔ができる。
+    見た目には成功するのに、あとから本人が開けず、原因も分かりにくい。
+    """
+    try:
+        req = urllib.request.Request(
+            "https://www.googleapis.com/oauth2/v3/userinfo",
+            headers={"Authorization": f"Bearer {tok}"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.load(r).get("email", "")
+    except (urllib.error.HTTPError, urllib.error.URLError, ValueError):
+        return ""
+
+
 def call(tok, url, method="GET", body=None):
     req = urllib.request.Request(
         url, data=json.dumps(body).encode() if body is not None else None,
@@ -106,6 +122,17 @@ def fill_head(src, book_id, secret, notify):
         else:
             out.append(line)
     return "\n".join(out)
+
+
+def read_env():
+    out = {}
+    p = ROOT / ".env"
+    if p.is_file():
+        for line in p.read_text(encoding="utf-8-sig").splitlines():
+            if "=" in line and not line.strip().startswith("#"):
+                k, v = line.split("=", 1)
+                out[k.strip()] = v.strip().strip("'\"")
+    return out
 
 
 def write_env(pairs):
@@ -144,12 +171,31 @@ def main():
     ap.add_argument("--name", help="会社名。スプレッドシートの名前になる")
     ap.add_argument("--notify", default="", help="問い合わせの通知先メール")
     ap.add_argument("--check", action="store_true", help="権限の確認だけ")
+    ap.add_argument("--verify", action="store_true",
+                    help="画面で「初期設定」を実行したあと、疎通を確かめる")
     a = ap.parse_args()
+
+    if a.verify:
+        e = read_env()
+        if not e.get("HUB_URL"):
+            raise SystemExit("HUB_URL がありません。先に管制塔を作ってください")
+        r = post_exec(e["HUB_URL"], e.get("HUB_SECRET", ""),
+                      {"action": "admin", "task": "dashboard"})
+        if r.get("ok"):
+            print("○ 管制塔とつながりました")
+            print("  ダッシュボード:", r.get("result", r))
+        else:
+            print("× まだつながりません:", str(r.get("error", r))[:150])
+            print("  スプレッドシート → 拡張機能 → Apps Script で")
+            print("  関数「初期設定」を実行し、権限を承認してください")
+        return
 
     tok, scopes = token()
     need = {"https://www.googleapis.com/auth/drive.file": "スプレッドシートの作成",
             "https://www.googleapis.com/auth/script.projects": "コードの配置",
             "https://www.googleapis.com/auth/script.deployments": "デプロイ"}
+    who = whoami(tok)
+    print(f"■ ログイン中: {who or '（不明）'}")
     print("■ 権限")
     ng = False
     for s, why in need.items():
@@ -163,13 +209,7 @@ def main():
     if not a.name:
         raise SystemExit("--name に会社名を指定してください")
 
-    e = {}
-    p = ROOT / ".env"
-    if p.is_file():
-        for line in p.read_text(encoding="utf-8-sig").splitlines():
-            if "=" in line and not line.strip().startswith("#"):
-                k, v = line.split("=", 1)
-                e[k.strip()] = v.strip().strip("'\"")
+    e = read_env()
     if e.get("HUB_URL"):
         print(f"\n既に管制塔があります: {e['HUB_URL']}")
         if input("別に作り直しますか（y で続行）: ").strip().lower() != "y":
@@ -177,6 +217,11 @@ def main():
 
     secret = secrets.token_urlsafe(24)
     title = f"{a.name} 自動化管制塔"
+    if who:
+        print(f"\n{who} のドライブに「{title}」を作ります。")
+        if input("よろしければ y: ").strip().lower() != "y":
+            raise SystemExit("中止しました。別のアカウントで作るなら "
+                             "npx @google/clasp login をやり直してください")
 
     print(f"\n■ スプレッドシートを作る")
     book = make_sheet(tok, title)
@@ -213,28 +258,21 @@ def main():
     write_env({"HUB_URL": url, "HUB_SECRET": secret, "GAS_SCRIPT_ID_HUB": sid})
     print("■ .env に書きました（HUB_URL / HUB_SECRET / GAS_SCRIPT_ID_HUB）")
 
-    print("■ タブを作る")
-    r = post_exec(url, secret, {"action": "admin", "task": "setup"})
-    if r.get("ok"):
-        print(f"   {r.get('made', r.get('result', '完了'))}")
-        post_exec(url, secret, {"action": "admin", "task": "format"})
-        print("   幅と色を整えました")
-        done = True
-    else:
-        print(f"   まだ動きません: {r.get('error', '')[:120]}")
-        done = False
+    # タブの作成はここでは試さない。作ったばかりのプロジェクトは、
+    # 本人が画面で権限を承認するまでWebアプリが403を返す。
+    # 試すと「まだ動きません」と出て、失敗したように見えてしまう。
 
     print("\n" + "=" * 56)
     print(f"管制塔: https://docs.google.com/spreadsheets/d/{book}/edit")
-    if not done:
-        print("\n【この1回だけ手作業が要ります】")
-        print("  スプレッドシートを開く → 拡張機能 → Apps Script")
-        print("  関数 setup を選んで実行 → 権限を承認")
-        print("  続けて authorizeMail を実行（問い合わせ通知のため）")
-        print("  そのあと: python scripts/bootstrap.py --check で疎通を確認")
-    else:
-        print("\n次: Apps Script エディタで authorizeMail を1回実行（通知メールの承認）")
-        print("    そのあと installTriggers を1回実行（毎朝のKPI集計）")
+    print("\n【この1回だけ画面での作業が要ります】")
+    print("  1. 上のスプレッドシートを開く")
+    print("  2. 拡張機能 → Apps Script")
+    print("  3. 関数の一覧から「初期設定」を選んで実行 → 権限を承認")
+    print("\n  タブの作成・見た目の調整・メール送信の承認・毎朝の集計登録が")
+    print("  まとめて終わります。")
+    print("  メール送信とトリガー登録は、本人が画面で承認したときにしか")
+    print("  許可されないため、ここだけ自動にできません。")
+    print(f"\n  終わったら: python scripts/bootstrap.py --verify")
 
 
 if __name__ == "__main__":

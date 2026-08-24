@@ -69,6 +69,51 @@ const TABS = {
 // ============================================================
 // 初期セットアップ
 // ============================================================
+
+/**
+ * 立ち上げのときに、この関数だけを1回実行する。
+ *
+ * メール送信とトリガー登録は、本人が画面で承認したときにしか許可されない。
+ * APIからは実行できないため、ここだけ手作業が残る。
+ * 3つに分けると実行漏れが起き、問い合わせに気づけない・ダッシュボードが
+ * 空のままといった形で、あとから分かりにくい壊れ方をする。
+ */
+function 初期設定() {
+  const log = [];
+  try {
+    setup();
+    log.push('○ タブを作りました');
+  } catch (e) {
+    log.push('× タブの作成に失敗: ' + e.message);
+  }
+  try {
+    formatBook();
+    log.push('○ 幅と色を整えました');
+  } catch (e) {
+    log.push('- 見た目の調整は飛ばしました（' + e.message + '）');
+  }
+  try {
+    authorizeMail();
+    log.push('○ メール送信を承認しました');
+  } catch (e) {
+    log.push('× メール送信の承認に失敗: ' + e.message);
+  }
+  try {
+    installTriggers();
+    log.push('○ 毎朝の集計を登録しました');
+  } catch (e) {
+    log.push('× 集計の登録に失敗: ' + e.message);
+  }
+  const msg = log.join('\n');
+  Logger.log(msg);
+  try {
+    SpreadsheetApp.getUi().alert('初期設定', msg, SpreadsheetApp.getUi().ButtonSet.OK);
+  } catch (e) {
+    // エディタから実行したときは画面が無い。ログに出ていればよい
+  }
+  return msg;
+}
+
 function setup() {
   const ss = book_();
   Object.keys(TABS).forEach(function (name) {
