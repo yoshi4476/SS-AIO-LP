@@ -1,7 +1,72 @@
 {
-  "fetched": "2026-08-17",
+  "fetched": "2026-08-25",
   "sites": {
     "corporate": [
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei",
+        "slug": "keiri-koritsuka-jirei",
+        "title": "経理効率化の事例4選｜方法別のポイントと進め方【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
+        "slug": "keiri-haken-jikyu-souba",
+        "title": "経理派遣の時給相場｜経験・地域別の目安と実質コストの計算法"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-zangyo-herasu",
+        "slug": "keiri-zangyo-herasu",
+        "title": "経理の残業を減らす7つの方法｜原因と今日からできる対策"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kanribumon-hitodebusoku-kaiketsu",
+        "slug": "kanribumon-hitodebusoku-kaiketsu",
+        "title": "管理部門の人手不足解決｜5つの選択肢と選び方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/shokibo-jigyousha-keiri-taisei",
+        "slug": "shokibo-jigyousha-keiri-taisei",
+        "title": "小規模事業者の経理体制の作り方｜規模別3パターンと注意点"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-naisei-gaichuu-hikaku",
+        "slug": "keiri-naisei-gaichuu-hikaku",
+        "title": "経理の内製と外注を比較｜6つの軸で見る違いと選び方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-manual-tsukurikata",
+        "slug": "keiri-manual-tsukurikata",
+        "title": "経理マニュアルの作り方とは？属人化を防ぐ5つの手順"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-hikitsugi-shiryou",
+        "slug": "keiri-hikitsugi-shiryou",
+        "title": "経理引き継ぎ資料とは？必須6点と作り方3ステップ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-minaoshi",
+        "slug": "keiri-gyomu-flow-minaoshi",
+        "title": "経理の業務フロー見直し3ステップ｜属人化と遅延を防ぐ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kyuyokeisan-gaichuu-hiyou-souba",
+        "slug": "kyuyokeisan-gaichuu-hiyou-souba",
+        "title": "給与計算の外注費用はいくら？【2026年】人数別シミュレーション"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/backoffice-gyomu-kaizen",
+        "slug": "backoffice-gyomu-kaizen",
+        "title": "バックオフィス業務改善の4ステップ｜進まない原因と対策"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/shiharai-gyomu-koritsuka",
+        "slug": "shiharai-gyomu-koritsuka",
+        "title": "支払業務の効率化とは？基本4ステップと方法の比較"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/nencho-koritsuka-houhou",
+        "slug": "nencho-koritsuka-houhou",
+        "title": "年末調整の効率化ポイント5つ｜2026年の改正にどう備えるか"
+      },
       {
         "url": "https://corp.7senses.co.jp/blog/urikakekin-kanri-houhou",
         "slug": "urikakekin-kanri-houhou",
@@ -150,6 +215,86 @@
         "title": "カテゴリ: 補助金の記事一覧"
       },
       {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-biyoushitsu-jirei/",
+        "slug": "jigyou-saikouchiku-biyoushitsu-jirei",
+        "title": "事業再構築補助金 美容室の脱毛転換3事例｜美容師法の注意点"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-biyoushitsu-kakikata/",
+        "slug": "jizokuka-hojokin-biyoushitsu-kakikata",
+        "title": "小規模事業者持続化補助金｜美容室の書き方4ステップ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-biyoushitsu/",
+        "slug": "monozukuri-hojokin-biyoushitsu",
+        "title": "ものづくり補助金は美容室で使える？対象機器と上限750万円の目安"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/unsougyou-jissekihoukokusho/",
+        "slug": "unsougyou-jissekihoukokusho",
+        "title": "運送業の実績報告書｜傭車の契約名義とデジタコ対応の壁"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/kensetsugyou-jissekihoukokusho/",
+        "slug": "kensetsugyou-jissekihoukokusho",
+        "title": "建設業の実績報告書｜下請け構造でも迷わない3つの証憑ポイント"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
+        "slug": "monozukuri-hojokin-unsougyou",
+        "title": "ものづくり補助金は運送業で使える？対象設備と車両の線引き"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kensetsugyou-jirei/",
+        "slug": "jigyou-saikouchiku-kensetsugyou-jirei",
+        "title": "事業再構築補助金は建設業も対象｜3つの事例と今の後継制度"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-kensetsugyou/",
+        "slug": "jizokuka-hojokin-kensetsugyou",
+        "title": "小規模事業者持続化補助金2025｜建設業の対象条件と経費"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kensetsugyou-jirei/",
+        "slug": "monozukuri-hojokin-kensetsugyou-jirei",
+        "title": "ものづくり補助金｜建設業の採択事例3業種と上限9,000万円"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kourigyou/",
+        "slug": "monozukuri-hojokin-kourigyou",
+        "title": "ものづくり補助金は小売業に使えない？対象になる投資の見極め方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-inshokuten-jirei/",
+        "slug": "jigyou-saikouchiku-inshokuten-jirei",
+        "title": "事業再構築補助金の飲食店活用事例3選と今の申請方法"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/",
+        "slug": "jigyou-saikouchiku-kojinjigyonushi-houjinnari",
+        "title": "事業再構築補助金は法人成り後も続く？承継に必要な4つの手続き"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/",
+        "slug": "jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku",
+        "title": "事業再構築補助金の確定申告｜個人事業主が守る3つの注意点"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-inshokuten-jirei/",
+        "slug": "jizokuka-hojokin-inshokuten-jirei",
+        "title": "小規模事業者持続化補助金｜飲食店で対象になる4つの投資"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-2025-kojinjigyonushi/",
+        "slug": "monozukuri-hojokin-2025-kojinjigyonushi",
+        "title": "ものづくり補助金2025年度｜個人事業主の申請ガイド決定版"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-inshokuten-jirei/",
+        "slug": "monozukuri-hojokin-inshokuten-jirei",
+        "title": "ものづくり補助金は飲食店で使える？採択事例3パターン"
+      },
+      {
         "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/",
         "slug": "jigyou-saikouchiku-kojinjigyonushi-itsumade",
         "title": "事業再構築補助金は個人事業主もいつまで？後継3制度の使い方"
@@ -257,7 +402,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kensetsugyou-katsuyou/",
         "slug": "ai-hojokin-kensetsugyou-katsuyou",
-        "title": "AI導入補助金は建設業も対象？ツール3分野と2024年問題対策"
+        "title": "建設業の2024年問題をAI導入補助金でどう埋めるか"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-chatbot-donyu/",
