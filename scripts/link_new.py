@@ -164,8 +164,7 @@ def dedupe(site_id, slugs):
     本文は削らず、リンクだけを外す。
     """
     import sites as sites_mod
-    dom = {sites_mod.load(s)["domain"]: s
-           for s in ("ai-lab", "corporate", "subsidy")}
+    dom = {c["domain"]: s for s, c in sites_mod.load_all().items()}
     pat = re.compile(r"\[([^\]\[]+)\]\((?:https?://([^/)]+))?(/[a-z-]+/[a-z0-9-]+/)\)")
     removed = 0
     for slug in slugs:

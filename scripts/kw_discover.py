@@ -175,7 +175,8 @@ def is_dup(kw, arts, seen):
 
 
 def main():
-    site_id = "ai-lab"
+    import sites as _sm
+    site_id = _sm.primary()
     if "--site" in sys.argv:
         site_id = sys.argv[sys.argv.index("--site") + 1]
     S = site_config(site_id)

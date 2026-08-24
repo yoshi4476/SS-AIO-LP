@@ -142,7 +142,8 @@ def main():
 
     print("\n  自社の一次情報:")
     subprocess.run([sys.executable, "scripts/facts.py",
-                    sys.argv[sys.argv.index("--site") + 1] if "--site" in sys.argv else "ai-lab",
+                    sys.argv[sys.argv.index("--site") + 1] if "--site" in sys.argv
+                    else __import__("sites").primary(),
                     kw], cwd=ROOT)
 
     # 字幕は数万字ある。そのまま渡しても読まれないので、

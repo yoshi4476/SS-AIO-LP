@@ -680,8 +680,9 @@ def main():
             continue
         # 他サイト向けの記事は publish.py が配信済み。ここで「不正」と扱うと
         # 救済処理が当サイトのカテゴリへ書き換えてしまい、2ドメインに同じ記事が出る
+        import sites as sites_mod
         owner = article_site(p)
-        if owner and owner != "ai-lab":
+        if owner and owner != sites_mod.primary():
             print(f"SKIP(他サイト): {p.stem} → {owner} へ配信済み")
             drop_stale_html(p.stem)
             continue

@@ -94,7 +94,8 @@ def cross_site_check():
     # ここを ai-lab 固定にすると、他サイト向け記事が自サイトの重複として誤検出される。
     import sites as sites_mod
     for a in load_articles():
-        kws.append({"site": sites_mod.find_category_owner(a["cat"]) or "ai-lab",
+        kws.append({"site": sites_mod.find_category_owner(a["cat"])
+                            or next(iter(sites_mod.load_all()), ""),
                     "keyword": a["title"], "status": "公開済み", "url": "", "_from": "article"})
 
     # 別リポジトリのサイトは移管前から独自に記事を持っており、台帳に載っていない。

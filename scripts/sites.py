@@ -20,6 +20,19 @@ def load_all():
     return out
 
 
+def primary():
+    """自前でビルドするサイト。無ければ並び順の先頭。
+
+    レポートの出力先や記事の帰属を決めるのに使う。ここにサイトIDを
+    直接書くと、別の会社へ移したときに存在しないサイトを指したまま動く。
+    """
+    all_ = load_all()
+    for sid, cfg in all_.items():
+        if cfg.get("type") == "self-static":
+            return sid
+    return next(iter(all_), "")
+
+
 def load(site_id):
     all_ = load_all()
     if site_id not in all_:

@@ -617,6 +617,18 @@ def main():
         "## 一次情報（記事に必ず入れる）\n"
         + "\n".join("- " + x for x in cfg["facts"]) + "\n", encoding="utf-8")
 
+    # 書き出した一式には自社の値が {{ }} の印で残っている。ここで埋めないと
+    # 記事のタイトル・構造化データ・デプロイ先が印のまま動く。
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import fill_placeholders
+        sys.argv = ["fill_placeholders", cfg["id"], "--write"]
+        fill_placeholders.main()
+    except SystemExit:
+        pass
+    except ImportError:
+        pass
+
     print("\n  作成: sites/" + cfg["id"] + ".json")
     print("  作成: " + cfg["kw_plan"])
     print("  作成: " + out.name + "/（" + str(n_page) + "ページ）")

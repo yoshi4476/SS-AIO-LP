@@ -69,7 +69,7 @@ def load_articles(site_id):
     return arts
 
 
-def plan(pages, site_id="ai-lab", limit=12):
+def plan(pages, site_id="", limit=12):
     """pages: {"/cat/slug/": {"pos": float, "imp": int}} 形式の検索実績"""
     arts = load_articles(site_id)
     inbound = {s: 0 for s in arts}
@@ -116,7 +116,9 @@ def plan(pages, site_id="ai-lab", limit=12):
 
 
 def main():
-    site_id = sys.argv[1] if len(sys.argv) > 1 else "ai-lab"
+    import sites as sites_mod
+    ids = list(sites_mod.load_all())
+    site_id = sys.argv[1] if len(sys.argv) > 1 else (ids[0] if ids else "")
     r = plan({}, site_id)
     print(f"{site_id}: 公開{r['articles']}記事 / 本文リンク 最小{r['min']} 中央{r['mid']} 最大{r['max']}")
     print(f"  被リンクを足すべき記事: {r['total']}本")

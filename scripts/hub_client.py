@@ -135,7 +135,8 @@ def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "status"
     site = sys.argv[2] if len(sys.argv) > 2 else ""
     if cmd == "status":
-        for s in ([site] if site else ["ai-lab", "subsidy", "corporate"]):
+        import sites as sites_mod
+        for s in ([site] if site else list(sites_mod.load_all())):
             r = status(s)
             print(f"{s:10s} 全{r.get('total', 0):3d}件  未着手{r.get('todo', 0):3d}  "
                   f"執筆中{r.get('doing', 0):2d}  公開済み{r.get('done', 0):3d}")

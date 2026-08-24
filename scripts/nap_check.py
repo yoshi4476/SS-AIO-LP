@@ -30,7 +30,7 @@ def main():
     num = P["corporate_number"]
     for sid, url in P["sites"].items():
         h = get(url)
-        about = get(url.rstrip("/") + ("/company" if sid == "corporate" else "/about/"))
+        about = get(url.rstrip("/") + P.get("about_path", {}).get(sid, "/about/"))
         both = h + about
         print(f"■ {sid}（{url}）")
         checks = [

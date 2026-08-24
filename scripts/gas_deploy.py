@@ -24,18 +24,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CLASPRC = Path.home() / ".clasprc.json"
 
-# 配る対象。どのサイトへ、どのファイルを置くか
-TARGETS = {
-    "corporate": {
-        "name": "コーポレートサイト",
-        "env": "GAS_SCRIPT_ID_CORPORATE",
-        "files": [("automation/gas/forward-to-hub.gs", "forward-to-hub.gs")],
-    },
-    "subsidy": {
-        "name": "AI導入補助金サポート",
-        "env": "GAS_SCRIPT_ID_SUBSIDY",
-        "files": [("automation/gas/forward-to-hub.gs", "forward-to-hub.gs")],
-    },
+# 配る対象。どのサイトへ、どのファイルを置くか。
+# サイト側のフォームは sites/*.json から作る。ここにサイトIDを直接書くと、
+# 別の会社へ移したときに存在しないサイトへ配ろうとして毎回失敗する。
+TARGETS = {}
+try:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as _sites
+    for _sid, _cfg in _sites.load_all().items():
+        if _cfg.get("type") == "self-static":
+            continue          # 自前のサイトはフォームを管制塔が直接受ける
+        TARGETS[_sid] = {
+            "name": _cfg.get("name", _sid),
+            "env": "GAS_SCRIPT_ID_" + _sid.upper().replace("-", "_"),
+            "files": [("automation/gas/forward-to-hub.gs", "forward-to-hub.gs")],
+        }
+except (ImportError, OSError, ValueError):
+    pass
+
+TARGETS.update({
     "hub": {
         "name": "管制塔",
         "env": "GAS_SCRIPT_ID_HUB",
@@ -48,7 +55,7 @@ TARGETS = {
                   ("automation/gas/format.gs", "format.gs"),
                   ("automation/gas/dashboard.gs", "dashboard.gs")],
     },
-}
+})
 
 
 def env():

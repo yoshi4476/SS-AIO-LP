@@ -1,13 +1,12 @@
 name: Multi-Site Article Pipeline
 
-# 3サイトの記事生成を1本のワークフローに統合したもの。
-# cronの時刻でどのサイトを書くかを決める（JST = UTC+9）。
-# 各サイト1日2本（計6本/日）。1回の実行が10〜17分かかるため2時間ずつ空け、
+# 全サイトの記事生成を1本のワークフローにまとめたもの。
+# どのサイトを書くかは sites/*.json の並び順で決める（JST = UTC+9）。
+# 各サイト1日2本。1回の実行が10〜17分かかるため2時間ずつ空け、
 # 同時実行によるpush競合とActionsの待ち行列を避けている。
 #
-# 補助金（subsidy）は 2026-07-30 にこちらへ移管した。
-# seven-HPunyou 側の記事生成(auto-publish.yml)は停止済みで、
-# 向こうは納品Markdownの受け入れ・HTML化・公開のみを担当する。
+# 枠は3サイト分ある。サイトが少ないときは余った枠が何もせず終わるので、
+# 1サイトなら1日2本、2サイトなら4本になる。
 on:
   schedule:
     - cron: "0 23 * * *"  # JST 08:00 — AI集客ラボ 1本目
@@ -19,10 +18,9 @@ on:
   workflow_dispatch:
     inputs:
       site:
-        description: "対象サイト"
-        type: choice
-        options: [ai-lab, corporate, subsidy]
-        default: ai-lab
+        description: "対象サイト（空なら sites/ の並び順で判定）"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -44,21 +42,46 @@ jobs:
       - name: 対象サイトの判定
         id: site
         run: |
+          # sites/*.json の並び順で決める。サイトIDを直接書くと、
+          # 別の会社へ移したときに存在しないサイトを指したまま毎日空振りする。
+          mapfile -t SITES < <(ls sites/*.json | xargs -n1 basename | sed 's/\.json$//' | grep -v '^sample$' | sort)
+          N=${#SITES[@]}
+          # 時刻ごとの枠。前半3つが1本目、後半3つが2本目
           case "${{ github.event.schedule }}" in
-            "0 1 * * *"|"0 8 * * *")   s=corporate ;;
-            "0 3 * * *"|"0 10 * * *")  s=subsidy ;;
-            *)                         s=ai-lab ;;
+            "0 23 * * *") i=0 ;;
+            "0 1 * * *")  i=1 ;;
+            "0 3 * * *")  i=2 ;;
+            "0 6 * * *")  i=0 ;;
+            "0 8 * * *")  i=1 ;;
+            "0 10 * * *") i=2 ;;
+            *)            i=0 ;;
           esac
-          [ "${{ github.event_name }}" = "workflow_dispatch" ] && s="${{ inputs.site }}"
+          s="${{ inputs.site }}"
+          if [ -z "$s" ]; then
+            # サイト数より後ろの枠は動かさない。1サイトなら1日2本、3サイトなら6本
+            if [ "$i" -ge "$N" ]; then
+              echo "skip=yes" >> "$GITHUB_OUTPUT"
+              echo "この枠に対応するサイトがありません（サイト数 $N）。何もしません"
+              exit 0
+            fi
+            s="${SITES[$i]}"
+          fi
+          # 自前でビルドするサイトかどうか。デプロイと配信の分岐に使う
+          own=$(python -c "import json;print(json.load(open('sites/$s.json',encoding='utf-8')).get('type')=='self-static')")
+          first="${SITES[0]}"
           echo "id=$s" >> "$GITHUB_OUTPUT"
-          echo "対象サイト: $s"
+          echo "own=$own" >> "$GITHUB_OUTPUT"
+          echo "first=$first" >> "$GITHUB_OUTPUT"
+          echo "対象サイト: $s（自前ビルド: $own / 全$N サイト）"
 
       - uses: actions/setup-python@v5
+        if: steps.site.outputs.skip != 'yes'
         with:
           python-version: "3.12"
           cache: pip
 
       - name: 依存インストール
+        if: steps.site.outputs.skip != 'yes'
         run: |
           pip install -r requirements.txt
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
@@ -73,6 +96,7 @@ jobs:
           claude --version
 
       - name: Git識別情報の設定
+        if: steps.site.outputs.skip != 'yes'
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
@@ -80,7 +104,7 @@ jobs:
       # 記事を1本書いてから最後のpushで落ちるのが一番もったいない。
       # トークンが失効していれば、着手前にここで止める。
       - name: 配信トークンの事前確認
-        if: steps.site.outputs.id != 'ai-lab'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.own != 'True'
         env:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
         run: |
@@ -92,12 +116,14 @@ jobs:
           fi
 
       - name: 執筆ブリーフの表示（KW残数と担当領域をログに残す）
+        if: steps.site.outputs.skip != 'yes'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: python scripts/site_brief.py "${{ steps.site.outputs.id }}"
 
       - name: 全サイト横断のカニバリ・領域チェック
+        if: steps.site.outputs.skip != 'yes'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -106,6 +132,7 @@ jobs:
       # 一次情報を先に集めておく。執筆側に任せると取りこぼすため、
       # 次に書くKWで文字起こしを取得し、本文を読める状態にしておく
       - name: 一次情報の収集（YouTube文字起こし）
+        if: steps.site.outputs.skip != 'yes'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -114,6 +141,7 @@ jobs:
           python scripts/research_next.py "${{ steps.site.outputs.id }}" || true
 
       - name: 記事生成（Phase 1〜7）
+        if: steps.site.outputs.skip != 'yes'
         env:
           SITE_ID: ${{ steps.site.outputs.id }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -130,6 +158,7 @@ jobs:
           rm -f indexing-service-account.json
 
       - name: 自リポジトリの記事をコミット
+        if: steps.site.outputs.skip != 'yes'
         run: |
           python scripts/build.py
           python scripts/local_kpi.py || true
@@ -154,26 +183,29 @@ jobs:
             done
           fi
 
-      # AI集客ラボは自リポジトリのサイトなので、ここでデプロイまで行う
+      # 自前でビルドするサイトはここでデプロイまで行う
       # （他サイトは publish.py が対象リポジトリへpushし、各サイトのビルドが動く）
-      - name: Cloudflare Pagesへデプロイ（ai-labのみ）
-        if: steps.site.outputs.id == 'ai-lab'
+      - name: Cloudflare Pagesへデプロイ（自前ビルドのサイトのみ）
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.own == 'True'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          # 配信先のプロジェクト名。直書きだと別のサイトへ配りにいく
+          proj=$(python -c "import json,pathlib;p=pathlib.Path('site.config.json');print(json.loads(p.read_text(encoding='utf-8')).get('cf_project','') if p.is_file() else '')")
+          [ -z "$proj" ] && proj="${{ steps.site.outputs.id }}"
           # Cloudflare APIは稀に522（一時的な接続タイムアウト）を返す。瞬断でrunを落とさないため再試行する
           for i in 1 2 3; do
-            npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
+            npx --yes wrangler@4.121.0 pages deploy site --project-name="$proj" --branch="${GITHUB_REF_NAME}" --commit-dirty=true && exit 0
             echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
             sleep 40
           done
           echo "::error::3回ともデプロイ失敗。記事はコミット済みなので次回のデプロイで反映される"
           exit 1
 
-      # KPIは1日1回だけでよいので、朝の枠（ai-lab）のときにまとめて3サイト分を集計する
+      # KPIは1日1回でよいので、朝いちばんの枠のときに全サイト分をまとめて集計する
       - name: KPI集計 → 管制塔ダッシュボード
-        if: steps.site.outputs.id == 'ai-lab' && github.event.schedule == '0 23 * * *'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.id == steps.site.outputs.first && github.event.schedule == '0 23 * * *'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -187,7 +219,7 @@ jobs:
           fi
 
       - name: 運用通知
-        if: always()
+        if: steps.site.outputs.skip != 'yes' && always()
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

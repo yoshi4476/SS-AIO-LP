@@ -722,7 +722,8 @@ def analyze(d):
     # 前月号で設定した「当月の目標」との突合（初月は前月号が無いため空になる）
     import json as _json
     prev_targets, achievement = {}, []
-    tf = ROOT / "reports" / ("targets.json" if SITE_ID == "ai-lab"
+    import sites as _sm
+    tf = ROOT / "reports" / ("targets.json" if SITE_ID == _sm.primary()
                             else f"targets-{SITE_ID}.json")
     if tf.exists():
         try:
@@ -1994,7 +1995,9 @@ def main():
 
     ym = d["months"][-1]["label"]
     # サイトごとに分ける。同じ場所へ書くと最後に走ったサイトだけが残る。
-    out_dir = ROOT / "reports" / (ym if SITE_ID == "ai-lab" else f"{ym}-{SITE_ID}")
+    import sites as _sm2
+    out_dir = ROOT / "reports" / (ym if SITE_ID == _sm2.primary()
+                                  else f"{ym}-{SITE_ID}")
     out_dir.mkdir(parents=True, exist_ok=True)
     html_path = out_dir / "report.html"
     pdf_path = out_dir / "report.pdf"
@@ -2004,7 +2007,8 @@ def main():
     if not DEMO:
         y, mo = map(int, ym.split("-"))
         next_ym = f"{y + (mo == 12)}-{(mo % 12) + 1:02d}"
-        tf = ROOT / "reports" / ("targets.json" if SITE_ID == "ai-lab"
+        import sites as _sm3
+        tf = ROOT / "reports" / ("targets.json" if SITE_ID == _sm3.primary()
                                 else f"targets-{SITE_ID}.json")
         store = {}
         if tf.exists():

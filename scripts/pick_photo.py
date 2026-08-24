@@ -97,7 +97,9 @@ def make_thumbnail(src: Path, dest: Path, size=(1200, 630)):
 def main():
     import yaml
     slug = sys.argv[1]
-    site = sys.argv[sys.argv.index("--site") + 1] if "--site" in sys.argv else "subsidy"
+    import sites as _sm
+    site = (sys.argv[sys.argv.index("--site") + 1] if "--site" in sys.argv
+            else _sm.primary())
     src = ROOT / "articles" / f"{slug}.md"
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", src.read_text(encoding="utf-8-sig"), re.S)
     meta, body = yaml.safe_load(m.group(1)), m.group(2)

@@ -217,13 +217,14 @@ def article_stats():
         # スコア・文字数の平均は全サイト共通の品質指標なので絞らない
     # articles/ には3サイト分の原稿が入っている。全件を ai-lab として数えると
     # 他サイトの記事まで当サイトの実績に混ざる（38本と誤報していた）。
-    counts = {"ai-lab": sum(1 for a in arts
-                            if sites_mod.find_category_owner(a.get("cat", "")) == "ai-lab")}
+    _main = sites_mod.primary()
+    counts = {_main: sum(1 for a in arts
+                         if sites_mod.find_category_owner(a.get("cat", "")) == _main)}
     # 台帳の「公開済み」は記録であって現況ではない。取り下げた記事も公開済みのまま残るため、
     # 実際にコーポレートの7本を取り下げた後も12本と報告していた。公開中のページを数える。
     mine = {}
     for k in hub_client.all_kw():
-        if k.get("status") == "公開済み" and k.get("site") != "ai-lab":
+        if k.get("status") == "公開済み" and k.get("site") != _main:
             mine[k["site"]] = mine.get(k["site"], 0) + 1
     try:
         import external_index
