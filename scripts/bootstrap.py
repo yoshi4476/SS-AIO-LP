@@ -212,7 +212,12 @@ def main():
     e = read_env()
     if e.get("HUB_URL"):
         print(f"\n既に管制塔があります: {e['HUB_URL']}")
-        if input("別に作り直しますか（y で続行）: ").strip().lower() != "y":
+        print("  管制塔はクライアントごとに1つです。")
+        print("  同じクライアントのサイトを増やすだけなら、作り直さずに")
+        print("  setup_from_sheet.py を実行してください（既存の管制塔に足されます）。")
+        print("  ここで作ると .env が新しい管制塔に切り替わり、"
+              "これまでの台帳を読まなくなります。")
+        if input("それでも新しく作りますか（y で続行）: ").strip().lower() != "y":
             return
 
     secret = secrets.token_urlsafe(24)
