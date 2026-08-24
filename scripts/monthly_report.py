@@ -45,9 +45,11 @@ def load_env():
 
 ENV = load_env()
 
-# どのサイトのレポートかは引数で決める。既定は従来どおりAI集客ラボ。
-# 管制塔が持つ3サイトそれぞれで発行するため、決め打ちをやめた。
-SITE_ID = "ai-lab"
+# どのサイトのレポートかは引数で決める。既定は自前でビルドするサイト。
+# ここにIDを直接書くと、別の会社では存在しないサイトのレポートを出そうとする。
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import sites as _sites_mod  # noqa: E402
+SITE_ID = _sites_mod.primary()
 if "--site" in sys.argv:
     SITE_ID = sys.argv[sys.argv.index("--site") + 1]
 

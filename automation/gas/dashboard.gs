@@ -60,10 +60,12 @@ function refreshDashboard() {
     ['本日の公開数', todayN],
     ['今月の公開数', monthN],
     ['平均品質スコア', avg],
-    ['KW在庫（未着手・3サイト計）', count('', '未着手')],
-    ['　AI集客ラボ', count('ai-lab', '未着手')],
-    ['　コーポレート', count('corporate', '未着手')],
-    ['　AI導入補助金', count('subsidy', '未着手')],
+    ['KW在庫（未着手・全サイト計）', count('', '未着手')],
+    // サイトごとの内訳は「サイト一覧」の登録から作る。ここにIDを直接書くと、
+    // 別の会社では常に0のまま並び、本当に在庫が切れても気づけない
+    ...Object.keys(siteMap_()).map(function (id) {
+      return ['　' + siteMap_()[id].name, count(id, '未着手')];
+    }),
     ['問い合わせ（累計）', inq.length],
     ['　うちHOT', hot],
     ['　未対応', open],

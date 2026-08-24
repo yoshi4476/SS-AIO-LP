@@ -85,7 +85,7 @@ jobs:
           fi
           # 1サイトの失敗で全体を止めたくないが、黙って0件のまま進むと在庫が枯れる。
           # 結果を必ず表示し、追記できなかったサイトは管制塔のエラーログへ残す。
-          for s in ai-lab corporate subsidy; do
+          for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
             echo "--- $s のKW補充 ---"
             if out=$(python scripts/kw_discover.py --site "$s" --append 2>&1); then
               echo "$out" | tail -3

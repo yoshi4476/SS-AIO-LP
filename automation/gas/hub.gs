@@ -40,15 +40,41 @@ const NOTIFY_TO = 'info.ai@7senses.co.jp';                // 問い合わせ通�
 const AUTO_REPLY = false;                                  // true にすると送信者へ自動返信
 // ────────────────────────────────────
 
-const SITES = {
-  'ai-lab': 'AI集客ラボ (ai.7senses.co.jp)',
-  'subsidy': 'AI導入補助金 (lp.7senses.co.jp)',
-  'corporate': 'コーポレート (corp.7senses.co.jp)',
-};
+/**
+ * サイトの一覧は「サイト一覧」タブが正。ここに書くと、別の会社へ移したときに
+ * 使わないサイトを集計しにいって毎朝失敗する。しかも失敗はログの中だけで、
+ * 表からは気づけない。
+ * 返す形: { 'site-id': { name, domain, ga4, gsc, label } }
+ */
+function siteMap_() {
+  const sh = book_().getSheetByName('サイト一覧');
+  const out = {};
+  if (!sh || sh.getLastRow() < 2) return out;
+  sh.getRange(2, 1, sh.getLastRow() - 1, 8).getValues().forEach(function (r) {
+    const id = String(r[0] || '').trim();
+    if (!id) return;
+    const name = String(r[1] || id).trim();
+    const dom = String(r[2] || '').trim();
+    out[id] = {
+      name: name, domain: dom,
+      ga4: String(r[6] || '').trim(),
+      gsc: String(r[7] || '').trim() || (dom ? 'https://' + dom + '/' : ''),
+      label: dom ? name + ' (' + dom + ')' : name,
+    };
+  });
+  return out;
+}
+
+/** 台帳に出す表示名。未登録のサイトはIDのまま出す（消さずに気づけるように） */
+function siteLabel_(id) {
+  const m = siteMap_()[id];
+  return m ? m.label : (id || '');
+}
 
 const TABS = {
   'ダッシュボード': ['指標', '値', '前日比', '更新日時', '備考'],
-  'サイト一覧': ['サイトID', 'サイト名', 'ドメイン', 'テーマ', '公開記事数', '最終公開日'],
+  'サイト一覧': ['サイトID', 'サイト名', 'ドメイン', 'テーマ', '公開記事数', '最終公開日',
+                'GA4プロパティID', 'Search ConsoleのURL'],
   '問い合わせ': ['受信日時', 'サイト', '種別', '会社名', 'お名前', 'ご担当者様',
                 'メールアドレス', '電話番号', 'ご相談内容', '診断・詳細', '特典',
                 '送信元ページ', '温度', '対応状況'],
@@ -128,14 +154,10 @@ function setup() {
     }
   });
 
-  // サイト一覧の初期値
-  const sites = ss.getSheetByName('サイト一覧');
-  if (sites.getLastRow() <= 1) {
-    sites.appendRow(['ai-lab', 'AI集客ラボ', 'ai.7senses.co.jp', 'AIO・LLMO・SEO・MEO', 0, '']);
-    sites.appendRow(['subsidy', 'AI導入補助金サポート', 'lp.7senses.co.jp', '補助金・IT導入補助金', 0, '']);
-    sites.appendRow(['corporate', 'セブンセンシズ コーポレート', 'corp.7senses.co.jp',
-                     '店舗経営（人材・オペレーション・DX）と導入事例', 0, '']);
-  }
+  // サイト一覧は空のまま作る。
+  // setup_from_sheet.py が register_site で登録する。ここにサイトIDを
+  // 直接書くと、別の会社でも使わない行が残り、KPIがその行を集めにいって
+  // 毎朝失敗する（しかも失敗はログの中だけで、表からは気づけない）。
 
   // 既定シート「シート1」が空なら削除して見た目を整える
   const first = ss.getSheetByName('シート1') || ss.getSheetByName('Sheet1');
@@ -198,6 +220,9 @@ function doPost(e) {
       case 'link_log':    return json_(linkLog_(body));
       case 'rewrite_log': return json_(rewriteLog_(body));
       case 'admin':       return json_(admin_(body.task));
+      // サイトの登録。setup_from_sheet.py が呼ぶ。
+      // 手で書かせると、GA4のIDだけ空のままKPIが毎朝0で埋まる
+      case 'register_site': return json_(registerSite_(body));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
       default:            return json_(form_(body));
@@ -213,6 +238,27 @@ function doPost(e) {
 
 
 
+
+/** サイトを「サイト一覧」に登録する。同じIDがあれば上書きする */
+function registerSite_(b) {
+  const id = String(b.id || '').trim();
+  if (!id) return { ok: false, error: 'id が必要です' };
+  const sh = sheet_('サイト一覧');
+  const row = [id, b.name || id, b.domain || '', b.theme || '', 0, '',
+               b.ga4 || '', b.gsc || (b.domain ? 'https://' + b.domain + '/' : '')];
+  const last = sh.getLastRow();
+  if (last >= 2) {
+    const ids = sh.getRange(2, 1, last - 1, 1).getValues();
+    for (let i = 0; i < ids.length; i++) {
+      if (String(ids[i][0]).trim() === id) {
+        sh.getRange(i + 2, 1, 1, row.length).setValues([row]);
+        return { ok: true, updated: id };
+      }
+    }
+  }
+  sh.appendRow(row);
+  return { ok: true, added: id };
+}
 
 // ============================================================
 // キーワード台帳
@@ -317,7 +363,7 @@ function addKw_(site, keywords) {
 /** 公開完了の記録（KW台帳と記事作成ログの両方を更新） */
 function publishLog_(b) {
   sheet_('記事作成ログ').appendRow([
-    new Date(), SITES[b.site] || b.site, b.title || '', b.keyword || '', b.category || '',
+    new Date(), siteLabel_(b.site), b.title || '', b.keyword || '', b.category || '',
     b.score || '', b.chars || '', b.url || '', b.note || '',
   ]);
   if (b.keyword) {
@@ -337,7 +383,7 @@ function publishLog_(b) {
 
 function errorLog_(b) {
   sheet_('エラーログ').appendRow([
-    new Date(), SITES[b.site] || b.site || '', b.phase || '', b.message || '', '', '未対応',
+    new Date(), siteLabel_(b.site) || '', b.phase || '', b.message || '', '', '未対応',
   ]);
   return { ok: true };
 }
@@ -357,11 +403,11 @@ function kpiLog_(b) {
   const total = { sessions: 0, pv: 0, cv: 0, impressions: 0, clicks: 0, ai: 0 };
 
   rows.forEach(function (r) {
-    kpi.appendRow([r.date || '', SITES[r.site] || r.site, r.sessions || 0, r.pv || 0,
+    kpi.appendRow([r.date || '', siteLabel_(r.site), r.sessions || 0, r.pv || 0,
                    r.impressions || 0, r.clicks || 0, (r.ctr || 0) + '%', r.position || 0,
                    r.cv || 0, r.note || '']);
     const bd = r.breakdown || {};
-    aio.appendRow([r.date || '', SITES[r.site] || r.site, '', r.ai || 0,
+    aio.appendRow([r.date || '', siteLabel_(r.site), '', r.ai || 0,
                    bd.chatgpt || 0, bd.perplexity || 0, bd.gemini || 0, bd.copilot || 0, '']);
     Object.keys(total).forEach(function (k) { total[k] += Number(r[k] || 0); });
   });

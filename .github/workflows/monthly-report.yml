@@ -69,7 +69,7 @@ jobs:
       - name: 月次レポート生成・メール送付（サイト単体の詳細版）
         if: steps.gate.outputs.ready == 'true'
         run: |
-          for s in ai-lab corporate subsidy; do
+          for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
             echo "── $s"
             python scripts/monthly_report.py --site "$s" --email || echo "  $s は生成できませんでした"
           done

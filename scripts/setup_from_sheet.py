@@ -617,6 +617,23 @@ def main():
         "## 一次情報（記事に必ず入れる）\n"
         + "\n".join("- " + x for x in cfg["facts"]) + "\n", encoding="utf-8")
 
+    # 管制塔にサイトを登録する。ここが空だと、KPIの集計が対象を見つけられず
+    # ダッシュボードが毎朝0のままになる（失敗はログの中だけで表に出ない）。
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import hub_client
+        if not hub_client.enabled():
+            raise RuntimeError("HUB_URL が未設定")
+        r = hub_client._post({"action": "register_site", "id": cfg["id"],
+                             "name": cfg["name"], "domain": cfg["domain"],
+                             "theme": cfg["theme"],
+                             "ga4": cfg.get("ga4_property_id", ""),
+                             "gsc": "https://" + cfg["domain"] + "/"})
+        print("  管制塔へ登録: " + ("完了" if r.get("ok") else str(r)[:60]))
+    except Exception as e:
+        print("  管制塔へ登録できませんでした（あとで --write を再実行してください）: "
+              + str(e)[:70])
+
     # 書き出した一式には自社の値が {{ }} の印で残っている。ここで埋めないと
     # 記事のタイトル・構造化データ・デプロイ先が印のまま動く。
     try:

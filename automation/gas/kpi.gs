@@ -9,7 +9,8 @@
  * 2. 左メニュー「サービス」の＋ から次の2つを追加する（これが無いと動きません）
  *      ・Google Analytics Data API   → 識別子は AnalyticsData のまま
  *      ・Search Console API          → 識別子は SearchConsole のまま
- * 3. 下の GA4_PROPERTIES に各サイトのGA4プロパティID（数字）を記入する
+ * 3. 「サイト一覧」タブに、サイトごとのGA4プロパティIDと
+ *    Search ConsoleのURLを記入する
  * 4. 関数「updateKpi」を選んで ▶実行（初回は権限承認）
  * 5. 関数「installTriggers」を1回だけ実行 → 毎朝6時の自動集計が有効になる
  *
@@ -19,17 +20,9 @@
  */
 
 // ▼ 設定 ────────────────────────────────
-const GA4_PROPERTIES = {
-  'ai-lab': '547346579',   // ai.7senses.co.jp
-  'subsidy': '',           // lp.7senses.co.jp （GA4プロパティIDを記入）
-  'corporate': '',         // corp.7senses.co.jp （GA4プロパティIDを記入）
-};
-
-const GSC_SITES = {
-  'ai-lab': 'https://ai.7senses.co.jp/',
-  'subsidy': 'https://lp.7senses.co.jp/',
-  'corporate': 'https://corp.7senses.co.jp/',
-};
+// GA4プロパティIDとSearch ConsoleのURLは「サイト一覧」タブに書く。
+// ここに直接書くと、別の会社へ移したときに使わないサイトを集めにいって
+// 毎朝失敗する。失敗はログの中だけなので、表からは気づけない。
 
 const AI_REFERRERS = ['chatgpt.com', 'chat.openai.com', 'perplexity.ai',
                       'gemini.google.com', 'copilot.microsoft.com', 'claude.ai'];
@@ -118,14 +111,20 @@ function updateKpi() {
   const aio = sheet_('AIO計測');
   const totals = { sessions: 0, pv: 0, cv: 0, clicks: 0, impressions: 0, ai: 0 };
 
-  Object.keys(GSC_SITES).forEach(function (site) {
-    const g = ga4Metrics_(GA4_PROPERTIES[site], gaDate) || { sessions: 0, pv: 0, cv: 0, ai: 0, breakdown: {} };
-    const s = gscMetrics_(GSC_SITES[site], scDate) || { impressions: 0, clicks: 0, ctr: 0, position: 0 };
+  const map = siteMap_();
+  if (!Object.keys(map).length) {
+    book_().toast('サイト一覧が空です。先にサイトを登録してください', '管制塔', 8);
+    return;
+  }
+  Object.keys(map).forEach(function (site) {
+    const cfg = map[site];
+    const g = ga4Metrics_(cfg.ga4, gaDate) || { sessions: 0, pv: 0, cv: 0, ai: 0, breakdown: {} };
+    const s = gscMetrics_(cfg.gsc, scDate) || { impressions: 0, clicks: 0, ctr: 0, position: 0 };
 
-    kpi.appendRow([gaDate, SITES[site] || site, g.sessions, g.pv, s.impressions, s.clicks,
+    kpi.appendRow([gaDate, siteLabel_(site), g.sessions, g.pv, s.impressions, s.clicks,
                    s.ctr + '%', s.position, g.cv,
                    'GSCは' + scDate + '時点（確定待ちのため3日前）']);
-    aio.appendRow([gaDate, SITES[site] || site, '', g.ai,
+    aio.appendRow([gaDate, siteLabel_(site), '', g.ai,
                    g.breakdown['chatgpt.com'] || g.breakdown['chat.openai.com'] || 0,
                    g.breakdown['perplexity.ai'] || 0,
                    g.breakdown['gemini.google.com'] || 0,

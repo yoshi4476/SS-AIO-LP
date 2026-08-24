@@ -34,7 +34,7 @@ function form_(body) {
   // 転送（forwardToHub_）は data の中に入れて送ってくる。直接送信は平置き。
   const d = body.data && Object.keys(body.data).length ? body.data : body;
   const type = String(d.type || 'contact');
-  const site = SITES[body.site || d.site] || body.site || d.site || '（不明）';
+  const site = siteLabel_(body.site || d.site) || '（不明）';
   const name = clean_(d.name);
   const email = clean_(d.email);
 
