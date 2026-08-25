@@ -178,12 +178,44 @@ python scripts/publish_flow.py <id> <slug>
 
 ```bash
 python scripts/daily_audit.py              # 全体の健康診断（週1回は見る）
+python scripts/growth_guard.py             # 表示・クリックが落ちていないか
+python scripts/cannibal_check.py --serp    # 自社ページ同士の食い合い
+python scripts/anchor_audit.py             # 内部リンクのアンカー
 python scripts/gsc_detail.py               # 表示・クリックの内訳
 python scripts/index_status.py --site <id> # インデックスの状況
-python scripts/rank_track.py               # 順位の推移
 ```
 
-`daily_audit.py` に、記事の不足・KW在庫・公開の失敗・量産の兆候がまとまって出る。
+`daily_audit.py` に上の4つがまとめて出る。**まずこれだけ見ればよい。**
+
+---
+
+## 毎月積み上げるための考え方
+
+表示とクリックはこの式で決まる。
+
+```
+今月の表示 ＝ 新規記事の寄与 −（既存記事の下落 ＋ 消えたページ）
+```
+
+**新規を毎日出しても、既存が落ちていれば総量は増えない。**
+だから毎回の実行で、先に落ちを止めてから新規を積む。記事生成の指示にも
+この順序を入れてある。
+
+落ちる原因は限られている。上から順に潰す。
+
+| 順 | 原因 | 見つけ方 | なぜこの順か |
+|:--|:--|:--|:--|
+| 1 | ページが消えた（404・noindex・配信漏れ） | `growth_guard.py` | **1ページで数百の表示を失う** |
+| 2 | 自社ページ同士の食い合い | `cannibal_check.py --serp` | どちらも上がらない |
+| 3 | 鮮度切れ（更新から6か月） | 週次の最適化が拾う | 徐々に落ちる |
+| 4 | 狙う語との結びつきが弱い | `anchor_audit.py` | 上がりきらない |
+
+**「毎月必ず上がる」は約束できない。** アルゴリズムの更新も季節変動もあり、
+順位は自社の外側で決まる部分がある。この仕組みで防げるのは、
+自分たちの不注意で落とす分。実際には下落の大半がそれにあたる。
+
+外側の要因で落ちたときも、**原因が外側だと切り分けられること自体に意味がある。**
+内側の問題と混同すると、直さなくていいものを直して事態を悪化させる。
 
 ---
 
@@ -199,6 +231,9 @@ python scripts/rank_track.py               # 順位の推移
 | 字幕から引用を探す | `yt_quotes.py "<KW>"` |
 | 内部リンクの偏りを見る | `inbound_links.py <id>` |
 | 重複を検査 | `cannibal_check.py` |
+| 下落の検知と原因分解 | `growth_guard.py` |
+| アンカーの検査 | `anchor_audit.py` |
+| 運用データを調査記事に | `data_report.py <CSV> --write` |
 | 月次レポート | `monthly_report.py --site <id>` |
 | GASを更新 | `gas_deploy.py hub` |
 
