@@ -72,7 +72,7 @@
 | Google Indexing API | 即時インデックス登録 | サービスアカウント+GSCオーナー権限 |
 | Google Search Console | 検索計測+生成AIパフォーマンスレポート（2026年6月導入） | AIO計測の中核 |
 | IndexNow（オプション） | Bing/Copilot系への即時URL通知 | キーをサイトルートに設置 |
-| AI画像生成（NanoBanana MCP or Gemini API） | アイキャッチ+図解 | NanoBanana推奨 |
+| 画像生成（Pillow） | アイキャッチ+図解 | `scripts/make_images.py` がローカルで描画。外部APIは呼ばないため、キーの設定は不要 |
 | yt-dlp | YouTube自動字幕取得 | `pip install yt-dlp` |
 | Python 3.10+ | Markdown→HTML変換 | `markdown` ライブラリ（tables, extra） |
 
@@ -391,7 +391,7 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
 
 **目的**: 画像生成→HTML生成（メタ+Schema直書き）→Cloudflare Pagesへデプロイ。
 
-1. **アイキャッチ画像生成**: NanoBanana Flash or Gemini Flash / 16:9 / フラットイラスト・カテゴリカラー準拠 / タイトルの最重要KWをデザイン反映 / `site/images/{slug}/` に配置
+1. **アイキャッチ画像生成**: `python scripts/make_images.py <slug>` / 16:9 / カテゴリカラー準拠 / タイトルを自動折り返し・自動縮小 / `site/images/{slug}/` に配置
 2. **H2直下の図解画像生成**（目安3-5枚）
    - イラストonlyの高品質フラットベクターイラスト
    - **英語テキスト禁止**: プロンプトに「No English text whatsoever. Japanese text only or no text at all.」必須
@@ -763,9 +763,10 @@ A:日付 / B:Phase / C:エラー内容 / D:対応内容 / E:解決状態
 2. 6回連続503: エラーログ記録 → 該当Phaseスキップ（一次情報収集のみ） or 翌日再実行
 
 ### 画像生成失敗
-1. NanoBanana Pro → NanoBanana Flash → Gemini Flash の順でフォールバック
-2. 全失敗: 画像なし公開（alt設定済み）→翌日再生成
-3. 日本語文字化け: 英語なしで再生成、日本語はfigcaptionで補完
+画像はローカル生成のため、APIの失敗による欠落は起きない。
+1. フォントが見つからない → YuGothB / meiryob の有無を確認
+2. 文字がはみ出す → 自動縮小が効かない長さ。タイトルか項目名を短くする
+3. 生成漏れ → build.py が機械検出する。`make_images.py <slug>` を再実行
 
 ### ビルド・デプロイエラー（静的サイト）
 1. build.py エラー → Markdown構文（テーブル・コードブロックの閉じ忘れ）を確認
