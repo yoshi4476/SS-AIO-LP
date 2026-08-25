@@ -120,11 +120,27 @@ def publish_log(**kw):
         return None
 
 
-def error_log(site, phase, message):
+def error_log(site, phase, message, fix="", status="未対応"):
+    """詰まりを台帳に残す。fix に「次に何をすればいいか」を書く。
+    原因だけ残しても、時間が経つと本人にも次の一手が分からなくなる"""
     if not enabled():
         return None
     try:
-        return _post({"action": "error_log", "site": site, "phase": phase, "message": message})
+        return _post({"action": "error_log", "site": site, "phase": phase,
+                      "message": message, "fix": fix, "status": status})
+    except Exception:
+        return None
+
+
+def rewrite_log(site, article, reason, summary, pos_before="", pos_after="", effect=""):
+    """リライトの記録。前後の順位を残さないと効いたか判定できない。
+    受け取り側のキーは posBefore / posAfter。名前が違うと黙って空欄になる"""
+    if not enabled():
+        return None
+    try:
+        return _post({"action": "rewrite_log", "site": site, "article": article,
+                      "reason": reason, "summary": summary,
+                      "posBefore": pos_before, "posAfter": pos_after, "effect": effect})
     except Exception:
         return None
 

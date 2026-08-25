@@ -382,8 +382,11 @@ function publishLog_(b) {
 }
 
 function errorLog_(b) {
+  // fix（対応）を捨てていた。原因だけ残しても、次に何をすればいいかが
+  // 記録されず、時間が経つと本人にも分からなくなる
   sheet_('エラーログ').appendRow([
-    new Date(), siteLabel_(b.site) || '', b.phase || '', b.message || '', '', '未対応',
+    new Date(), siteLabel_(b.site) || '', b.phase || '', b.message || '',
+    b.fix || '', b.status || '未対応',
   ]);
   return { ok: true };
 }
