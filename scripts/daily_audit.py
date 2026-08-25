@@ -183,6 +183,27 @@ def check_serp_overlap(todo, limit=5):
               f"python scripts/cannibal_check.py --serp）")
 
 
+def check_growth(todo):
+    """表示・クリックが前の期間より落ちていないか
+
+    落ちたその日に気づかないと、原因が重なって特定できなくなる。
+    合計だけ見ても何を直せばいいか分からないので、消えた語と
+    順位が下がった語に分解して出す。
+    """
+    print()
+    print("■ 表示・クリックの推移（直近28日 vs その前）")
+    import growth_guard
+    try:
+        alerts = growth_guard.main()
+    except Exception as e:
+        print(f"  GSCから取得できません（{str(e)[:60]}）")
+        return
+    for sid, di, lost, worse, pages in alerts or []:
+        todo.append(f"TODO: {sid} の表示が前の期間より{abs(di) * 100:.0f}%落ちた。"
+                    f"消えた語{lost}語・順位が下がった語{worse}語。"
+                    f"まず {pages[0] if pages else '該当ページ'} が200を返すか確認する")
+
+
 def check_readability(todo, limit=3):
     """公開済み記事の読みやすさ（段落・文の長さ）を検査する。
 

@@ -102,6 +102,18 @@ jobs:
       - name: カニバリゼーション検査
         run: python scripts/cannibal_check.py
 
+      # 落ちたときに気づく仕組み。合計だけ見ても何を直せばいいか分からないので、
+      # 消えた語と順位が下がった語に分解して出す
+      - name: 表示・クリックが落ちていないかの確認
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/growth_guard.py || true
+          rm -f indexing-service-account.json
+
       # 書く前の類似度では見つからない食い合い。似ていない記事どうしでも、
       # 同じ語で自社ページが並べばどれも上がらないため、実績で見る
       - name: 同じ検索語での自社ページの食い合い（GSC実績）
