@@ -146,6 +146,8 @@ AIかんたん集客は、来店型の店舗からBtoBの中小企業まで、�
 
 AIかんたん集客を自分でやるか専門家に依頼するかは、割ける時間と社内にAIツールの知識があるかで判断します。
 
+AI検索への対応まで含めて外部に頼むかどうかは、[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)の判断表も合わせて見ると決めやすくなります。
+
 <figure><img src="/images/ai-kantan-shukyaku/ng-ok.png" alt="AIかんたん集客のNG・OK: NG例はAI任せの文章をそのまま公開、数字を確認せず放置、一度に全チャネル自動化。OK例はAI下書きに自社事実を追記、月1回は数字を確認、1チャネルずつ広げる" loading="lazy"><figcaption>AIかんたん集客のNG・OK</figcaption></figure>
 
 | 判断軸 | 自分でやる（内製） | 専門家に依頼する |
