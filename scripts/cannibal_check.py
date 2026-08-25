@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """カニバリゼーション（検索意図の重複）を機械検出する
 
-使い方: python scripts/cannibal_check.py
+使い方:
+    python scripts/cannibal_check.py           # 書く前の類似度検査
+    python scripts/cannibal_check.py --serp    # 公開後の食い合い（GSC実績）
+    python scripts/cannibal_check.py --cross   # サイトをまたいだ検査
 
 タイトル・説明文・H2見出しの文字バイグラム類似度で、既存記事どうしの重複を検出する。
 形態素解析ライブラリなしで日本語の意図重複を判定するため、文字2-gramのDice係数を使う。
@@ -317,7 +320,88 @@ def written_territory_check():
     return bad
 
 
+# ── 公開後の食い合い（GSCの実データ） ───────────────────────
+# 上の類似度検査は「書く前」に止めるためのもの。似ていない記事どうしでも、
+# 同じ検索語で自社ページが並べば検索エンジンはどれを評価するか決められず、
+# どれも上がらない。これは実際に検索された結果を見ないと分からない。
+#
+# 一覧・カテゴリ・トップは構造上どうしても出るため、下位に沈んでいる限りは
+# 数えない。記事どうしの競合と、明確に足を引っ張っている場合だけ挙げる。
+LIST_PAGES = ("blog", "glossary", "aio", "seo", "meo", "ai-marketing",
+              "diagnosis", "top", "lp")
+MIN_IMP = 8        # 表示がこれ未満の語は誤差
+GAP = 25           # 1位ページとの順位差がこれ以上なら「足を引っ張っている」
+
+
+def _slug(url):
+    return url.rstrip("/").split("/")[-1] or "top"
+
+
+def serp_overlap(days=28, min_imp=MIN_IMP):
+    """同じ検索語に自社の複数ページが出ている状態を、GSCの実績から拾う"""
+    import collections
+    from datetime import date, timedelta
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import gsc_detail as G
+    import sites as S
+
+    sc = G.client()
+    end = date.today() - timedelta(days=3)
+    start = end - timedelta(days=days - 1)
+    out = []
+    for sid, cfg in S.load_all().items():
+        try:
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 5000)
+        except Exception as e:
+            print(f"  {sid}: GSCから取得できません（{str(e)[:50]}）")
+            continue
+        g = collections.defaultdict(list)
+        for x in rows:
+            g[x["keys"][0]].append((_slug(x["keys"][1]), x["position"], x["impressions"]))
+        for kw, v in g.items():
+            if len(v) < 2:
+                continue
+            tot = sum(p[2] for p in v)
+            if tot < min_imp:
+                continue
+            v.sort(key=lambda y: y[1])
+            win = v[0]
+            # 足を引っ張っている側だけ挙げる。一覧ページは大きく離れていれば無視する
+            drags = [x for x in v[1:]
+                     if not (x[0] in LIST_PAGES and x[1] - win[1] >= GAP)]
+            if not drags:
+                continue
+            out.append({"site": sid, "kw": kw, "imp": tot,
+                        "win": win, "drag": drags})
+    out.sort(key=lambda x: -x["imp"])
+    return out
+
+
+def serp_overlap_check(days=28):
+    hits = serp_overlap(days)
+    print(f"SERP_OVERLAP: 同じ検索語に自社の複数ページが出ている {len(hits)}語")
+    if not hits:
+        print("SERP_OVERLAP_FOUND=no")
+        return hits
+    print("SERP_OVERLAP_FOUND=yes")
+    for h in hits[:20]:
+        w = h["win"]
+        print(f"  [{h['site']}] 「{h['kw']}」表示{h['imp']}")
+        print(f"      勝たせる  {w[1]:5.1f}位 {w[0]}")
+        for d in h["drag"]:
+            print(f"      下げる    {d[1]:5.1f}位 {d[0]}（表示{d[2]}）")
+    if len(hits) > 20:
+        print(f"  ほか{len(hits) - 20}語")
+    print()
+    print("  対処: 勝たせる側へ内部リンクを集め、下げる側からはその語の見出しを外す。"
+          "同型の記事なら統合する")
+    return hits
+
+
 def main():
+    if "--serp" in sys.argv:
+        serp_overlap_check()
+        return
     if "--cross" in sys.argv:
         cross_site_check()
         print()

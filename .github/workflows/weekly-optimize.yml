@@ -102,6 +102,18 @@ jobs:
       - name: カニバリゼーション検査
         run: python scripts/cannibal_check.py
 
+      # 書く前の類似度では見つからない食い合い。似ていない記事どうしでも、
+      # 同じ語で自社ページが並べばどれも上がらないため、実績で見る
+      - name: 同じ検索語での自社ページの食い合い（GSC実績）
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/cannibal_check.py --serp || true
+          rm -f indexing-service-account.json
+
       # 実行時間の無料枠を使い切ると全自動運転が無言で止まるため事前に警告する
       - name: Actions実行時間の残枠チェック
         env:

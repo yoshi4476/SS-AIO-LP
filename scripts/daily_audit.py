@@ -158,6 +158,31 @@ def check_external_dup(todo):
                     "自作側を取り下げて既存記事へ301転送する")
 
 
+def check_serp_overlap(todo, limit=5):
+    """同じ検索語に自社の複数ページが出ていないか（公開後の食い合い）
+
+    書く前の類似度検査では見つからない。似ていない記事どうしでも、
+    同じ語で自社ページが並べば検索エンジンは評価先を決められず、どれも上がらない。
+    """
+    print()
+    print("■ 同じ検索語での自社ページの食い合い")
+    import cannibal_check
+    try:
+        hits = cannibal_check.serp_overlap()
+    except Exception as e:
+        print(f"  GSCから取得できません（{str(e)[:60]}）")
+        return
+    print(f"  {len(hits)}語")
+    for h in hits[:limit]:
+        drag = "・".join(f"{x[0]}({x[1]:.0f}位)" for x in h["drag"][:3])
+        todo.append(f"TODO: 「{h['kw']}」で自社ページが競合（{h['site']}）。"
+                    f"{h['win'][0]}({h['win'][1]:.0f}位)を勝たせ、{drag}から"
+                    "その語の見出しを外して内部リンクを集約する")
+    if len(hits) > limit:
+        print(f"  （上位{limit}語だけTODOに出す。全体は "
+              f"python scripts/cannibal_check.py --serp）")
+
+
 def check_readability(todo, limit=3):
     """公開済み記事の読みやすさ（段落・文の長さ）を検査する。
 
@@ -330,6 +355,7 @@ def main():
     check_blocked(todo)
     check_territory(todo)
     check_external_dup(todo)
+    check_serp_overlap(todo)
     check_readability(todo)
     check_supply(todo, fix=fix_kw)
     check_scaled_risk(todo)

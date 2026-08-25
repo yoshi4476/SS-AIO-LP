@@ -56,8 +56,8 @@ FOOTER_NAV_DEFAULT = [
     {"label": "はじめての方へ", "url": "/start/"},
     {"label": "記事一覧", "url": "/blog/"},
     {"label": "用語集", "url": "/glossary/"},
-    {"label": "MEO診断", "url": "/diagnosis/meo/"},
-    {"label": "AIO診断", "url": "/diagnosis/aio/"},
+    {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
+    {"label": "AI検索の対応度チェック（30秒）", "url": "/diagnosis/aio/"},
     {"label": "サイト診断", "url": "/site-audit/"},
     {"label": "AIO・LLMO運用", "url": "/aio/"},
     {"label": "SEO運用", "url": "/seo/"},
@@ -289,10 +289,10 @@ def related_html(meta, all_metas):
 
 # カテゴリ連動の記事末診断バナー（読者→診断→85点以下は無料相談へ、のリード導線）
 DIAG_BANNERS = {
-    "meo": ("/diagnosis/meo/", "MEO診断（無料・30秒）", "8つの質問で、Googleマップ集客の整備度を100点満点で採点します。"),
-    "aio": ("/diagnosis/aio/", "AIO診断（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
+    "meo": ("/diagnosis/meo/", "マップ集客の整備度チェック（無料・30秒）", "8つの質問で、Googleマップ集客の整備度を100点満点で採点します。"),
+    "aio": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
     "seo": ("/site-audit/", "サイト無料採点（URL入力だけ）", "SEO・AI対応の技術12項目を100点満点で自動チェックします。"),
-    "ai-marketing": ("/diagnosis/aio/", "AIO診断（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
+    "ai-marketing": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
 }
 
 
