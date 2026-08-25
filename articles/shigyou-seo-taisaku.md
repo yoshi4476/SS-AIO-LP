@@ -2,6 +2,7 @@
 title: 士業のSEO｜広告規制の中で専門性をどう発信するか
 description: 士業のSEO対策とは、専門分野の情報発信で見込み客に見つかり選ばれる仕組みづくりです。弁護士・税理士・社労士など士業の集客で失敗しやすい原因と、成功させる5つの施策を実務目線で解説します。
 slug: shigyou-seo-taisaku
+keyword: 士業 seo
 category: seo
 date: 2026-07-29
 modified: 2026-08-08

@@ -50,7 +50,7 @@ faq:
 
 対象になる範囲を先に押さえるなら、[小規模事業者持続化補助金2025｜建設業の対象条件と経費](/blog/jizokuka-hojokin-kensetsugyou/)が参考になります。
 
-対象になる範囲は[小規模事業者持続化補助金｜飲食店で対象になる4つの投資](/blog/jizokuka-hojokin-inshokuten-jirei/)で整理しています。
+対象になる範囲は[小規模事業者持続化補助金の飲食店の事例](/blog/jizokuka-hojokin-inshokuten-jirei/)で整理しています。
 
 関連する内容は[中小企業成長加速化補助金｜1次2次の実績とスケジュール](/blog/seicho-kasokuka-hojokin-schedule/)で整理しています。
 
@@ -123,7 +123,7 @@ faq:
 
 <div class="caution-box"><span class="box-title">注意: <span class="txt-red">従業員10人前後は要注意</span></span><br>従業員が10人前後まで増えると、業種によっては小規模事業者の基準を超えます。増員のタイミングで対象制度が変わっていないか確認してください。</div>
 
-デジタル化・AI導入補助金2026とものづくり補助金は、中小企業者であれば小規模事業者でなくても対象です。対象経費や中小企業者の判定方法は、[ものづくり補助金は資本金オーバーでも対象？中小企業者7区分](https://lp.7senses.co.jp/blog/monozukuri-hojokin-chusho-teigi/)で詳しく解説しています。
+デジタル化・AI導入補助金2026とものづくり補助金は、中小企業者であれば小規模事業者でなくても対象です。対象経費や中小企業者の判定方法は、[ものづくり補助金の中小企業の定義](/blog/monozukuri-hojokin-chusho-teigi/)で詳しく解説しています。
 
 個人事業主の場合の対象条件や採択率は、[小規模事業者持続化補助金｜個人事業主の採択率47.2%と対策](https://lp.7senses.co.jp/blog/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/)を参考にしてください。
 

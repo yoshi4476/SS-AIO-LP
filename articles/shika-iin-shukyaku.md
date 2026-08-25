@@ -2,6 +2,7 @@
 title: 歯科医院の集客方法とは？新患を増やす5つの基本施策
 description: 歯科医院の集客は、MEO・口コミ・自由診療の専門性訴求を軸にした5つの基本施策で新患を増やせます。医療広告ガイドラインに配慮した進め方を、通算3,200店舗以上の支援実務から解説します。
 slug: shika-iin-shukyaku
+keyword: 歯科 ai 集客
 category: ai-marketing
 date: 2026-07-28
 modified: 2026-07-28

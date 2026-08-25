@@ -2,6 +2,7 @@
 title: クリニックのMEO対策とは？集患につながる5つの手順
 description: クリニックのMEO対策とは、Googleマップの「地域名×診療科」検索で自院を上位表示させ、来院につなげる施策です。医療広告ガイドラインに配慮した進め方を、通算3,200店舗以上の支援実務から5つの手順で解説します。
 slug: clinic-meo-taisaku
+keyword: クリニック meo
 category: meo
 date: 2026-07-28
 modified: 2026-07-28

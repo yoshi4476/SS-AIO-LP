@@ -2,6 +2,7 @@
 title: AI時代のSEO対策とは？中小企業がやるべき5つの基本
 description: AI時代のSEO対策とは、検索上位表示に加えて「AIの回答に引用される」ことまで見据えた最適化です。中小企業が限られたリソースでやるべき5つの基本を優先順位つきで解説します。
 slug: ai-jidai-seo-taisaku
+keyword: AI時代 SEO 対策
 category: seo
 date: 2026-07-27
 modified: 2026-07-27

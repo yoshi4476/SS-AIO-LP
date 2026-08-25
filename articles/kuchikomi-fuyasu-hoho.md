@@ -2,6 +2,7 @@
 title: Googleマップの口コミを増やす方法5選と返信のコツ
 description: Googleマップの口コミを増やす方法は、来店直後の自然な依頼とQRコードの導線づくりが基本です。ポリシー違反にならない増やし方5つと、低評価にも使える返信のコツを解説します。
 slug: kuchikomi-fuyasu-hoho
+keyword: googleマップ 口コミ 増やす
 category: meo
 date: 2026-07-27
 modified: 2026-07-28

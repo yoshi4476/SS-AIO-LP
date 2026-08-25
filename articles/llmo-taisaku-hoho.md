@@ -2,6 +2,7 @@
 title: LLMO対策とは？ChatGPTに引用される7つの方法
 description: LLMO対策とは、ChatGPTやPerplexityなどのAIチャットの回答で自社が引用・言及されるための最適化です。中小企業が実践できる7つの方法を、計測のやり方まで含めて解説します。
 slug: llmo-taisaku-hoho
+keyword: LLMO対策 方法
 category: aio
 date: 2026-07-27
 modified: 2026-07-27

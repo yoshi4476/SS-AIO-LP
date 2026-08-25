@@ -2,6 +2,7 @@
 title: 税理士のホームページ集客とは？失敗しない5つの施策
 description: 税理士のホームページ集客とは、SEO・MEO・AIOを組み合わせて専門性と実績を伝え、問い合わせにつなげる施策です。8万人超が競合する中で選ばれるための、失敗原因と5つの施策を実務目線で解説します。
 slug: zeirishi-homepage-shukyaku
+keyword: 税理士 集客 ホームページ
 category: seo
 date: 2026-07-28
 modified: 2026-07-28

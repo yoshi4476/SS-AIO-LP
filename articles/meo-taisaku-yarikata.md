@@ -2,6 +2,7 @@
 title: MEO対策のやり方7ステップ｜マップ上位表示の手順
 description: MEO対策のやり方は、Googleビジネスプロフィールの整備から口コミ運用・投稿継続までの7ステップで進めます。店舗集客支援の実務で使っている手順を、無料でできる範囲を中心に解説します。
 slug: meo-taisaku-yarikata
+keyword: meo 上げ 方
 category: meo
 date: 2026-07-27
 modified: 2026-07-28
