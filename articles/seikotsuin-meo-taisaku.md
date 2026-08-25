@@ -76,6 +76,8 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 
 整骨院のMEO対策は、**カテゴリ・説明文・写真・口コミ**の4つの接点に資格情報を一貫して落とし込むことで進みます。
 
+選ぶときの基準は[医療機関のMEO対策｜施設タイプ別に見る違いと選び方](/meo/iryou-meo-taisaku/)でも扱っています。
+
 実際の進め方については、[美容皮膚科のMEO対策とは？広告規制下で選ばれる3ステップ](/meo/biyou-hifuka-meo/)にまとめています。
 
 <figure><img src="/images/seikotsuin-meo-taisaku/steps.png" alt="整骨院MEOで資格を伝える5ステップ: メインカテゴリ固定、類似カテゴリと差別化、説明文に資格明記、資格証の写真掲載、口コミ・Q&Aで回答" loading="lazy"><figcaption>整骨院MEOで資格を伝える5ステップ</figcaption></figure>
