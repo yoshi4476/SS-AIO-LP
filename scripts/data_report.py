@@ -73,13 +73,24 @@ def num(v):
 
 
 def load(path):
-    rows, skipped = [], 0
+    rows, skipped, sample = [], 0, 0
     with open(path, encoding="utf-8-sig", newline="") as f:
         for r in csv.DictReader(f):
+            # 雛形の記入例。消し忘れたまま集計すると、架空の数字が記事に出る
+            if str(r.get("store_id", "")).strip().upper().startswith("SAMPLE"):
+                sample += 1
+                continue
             if all(str(r.get(k, "")).strip() for k in REQUIRED):
                 rows.append(r)
             else:
                 skipped += 1
+    if sample and not rows:
+        raise SystemExit(
+            f"記入例が{sample}行あるだけで、実データがありません。\n"
+            "  docs/meo-data-template.csv の SAMPLE 行を消して、"
+            "実際の店舗データを入れてください")
+    if sample:
+        print(f"  記入例{sample}行を除外しました（store_idがSAMPLEで始まる行）")
     return rows, skipped
 
 

@@ -1,0 +1,4 @@
+store_id,industry,start_ym,end_ym,reviews_before,reviews_after,rating_before,rating_after,reply_rate,posts_per_month,photos_added
+SAMPLE001,飲食,2025-04,2026-07,12,58,3.6,4.2,92,12,40
+SAMPLE002,美容,2025-06,2026-07,31,77,4.0,4.4,100,10,25
+SAMPLE003,クリニック,2025-09,2026-07,8,33,3.8,4.1,76,8,15
