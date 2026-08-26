@@ -31,6 +31,8 @@ faq:
 
 MEO対策とは、Googleマップの検索結果で自店舗を上位に表示させ、来店につなげる施策です。
 
+実際の進め方は[MEO設定の始め方｜登録から公開までの5ステップ](/meo/meo-settei-guide/)でも扱っています。
+
 医療機関の場合は施設タイプで注意点が変わるため、[医療機関のMEO対策｜施設タイプ別に見る違いと選び方](/meo/iryou-meo-taisaku/)もあわせてご確認ください。
 
 <div class="definition-box"><span class="term">MEO（Map Engine Optimization）とは</span>、「地域名×業種」などで検索されたとき、Googleマップの上位（特に目立つ上位3枠）に自店舗を表示させるための最適化のことです。ローカルSEOとも呼ばれます。</div>
