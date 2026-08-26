@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-25",
+  "date": "2026-08-26",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 2,
+      "judged": 3,
       "suspect_taken": 2,
-      "healthy": 0,
-      "too_thin": 11,
+      "healthy": 1,
+      "too_thin": 12,
       "items": [
         {
           "kw": "ai集客とは",
@@ -22,7 +22,7 @@
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
           "pos": 8.6,
-          "imp": 32,
+          "imp": 33,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -32,25 +32,15 @@
     },
     "corporate": {
       "judged": 2,
-      "suspect_taken": 2,
-      "healthy": 0,
+      "suspect_taken": 1,
+      "healthy": 1,
       "too_thin": 6,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
-          "url": "https://corp.7senses.co.jp/",
-          "pos": 3.0,
-          "imp": 44,
-          "clicks": 1,
-          "ctr": 2.27,
-          "expected_ctr": 11.0,
-          "ratio": 0.21
-        },
-        {
-          "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/company",
-          "pos": 4.3,
-          "imp": 14,
+          "pos": 4.1,
+          "imp": 15,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -67,11 +57,11 @@
         {
           "kw": "エクセル 開発 補助金",
           "url": "https://lp.7senses.co.jp/service/dev/",
-          "pos": 7.1,
-          "imp": 12,
+          "pos": 7.5,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 4.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         }
       ]
