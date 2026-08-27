@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-26",
+  "date": "2026-08-28",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 3,
-      "suspect_taken": 2,
+      "judged": 4,
+      "suspect_taken": 3,
       "healthy": 1,
-      "too_thin": 12,
+      "too_thin": 15,
       "items": [
         {
           "kw": "ai集客とは",
@@ -27,20 +27,50 @@
           "ctr": 0,
           "expected_ctr": 3.0,
           "ratio": 0.0
+        },
+        {
+          "kw": "口コミ 返信 例文 医療",
+          "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
+          "pos": 9,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.0,
+          "ratio": 0.0
         }
       ]
     },
     "corporate": {
-      "judged": 2,
-      "suspect_taken": 1,
-      "healthy": 1,
-      "too_thin": 6,
+      "judged": 3,
+      "suspect_taken": 3,
+      "healthy": 0,
+      "too_thin": 8,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
+          "url": "https://corp.7senses.co.jp/",
+          "pos": 2.8,
+          "imp": 64,
+          "clicks": 2,
+          "ctr": 3.12,
+          "expected_ctr": 11.0,
+          "ratio": 0.28
+        },
+        {
+          "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/company",
-          "pos": 4.1,
-          "imp": 15,
+          "pos": 3.9,
+          "imp": 21,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 8.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "ラクシフト",
+          "url": "https://corp.7senses.co.jp/rakushift",
+          "pos": 4.4,
+          "imp": 10,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -52,16 +82,16 @@
       "judged": 1,
       "suspect_taken": 1,
       "healthy": 0,
-      "too_thin": 7,
+      "too_thin": 9,
       "items": [
         {
           "kw": "エクセル 開発 補助金",
           "url": "https://lp.7senses.co.jp/service/dev/",
-          "pos": 7.5,
-          "imp": 13,
+          "pos": 7.3,
+          "imp": 15,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 4.0,
           "ratio": 0.0
         }
       ]
