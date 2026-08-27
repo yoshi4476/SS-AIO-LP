@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-26T00:00:00+09:00</updated>
+  <updated>2026-08-27T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>不動産の反響が来ない5つの原因とポータル依存の脱却法</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/fudousan-hankyou-konai/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/fudousan-hankyou-konai/</id>
+    <updated>2026-08-27T00:00:00+09:00</updated>
+    <summary>不動産会社の反響が来ない主な原因は、ポータル依存・強み未発信・追客の遅さなど5つです。宅建業者13万社超が競合する市場での自己診断と、今日からできる立て直し方を実務目線で解説します。</summary>
+  </entry>
   <entry>
     <title>医療機関のMEO対策｜施設タイプ別に見る違いと選び方</title>
     <link href="https://ai.7senses.co.jp/meo/iryou-meo-taisaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-jirei/</id>
     <updated>2026-08-18T00:00:00+09:00</updated>
     <summary>整骨院の集客成功事例は、1人院・多店舗展開・自由診療特化など院の規模と業態によって打ち手が変わります。通算3,200店舗以上を支援してきた実務経験から、規模別の成功パターンとやってはいけないことを解説します。</summary>
-  </entry>
-  <entry>
-    <title>歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ</title>
-    <link href="https://ai.7senses.co.jp/seo/shika-seo-taisaku/"/>
-    <id>https://ai.7senses.co.jp/seo/shika-seo-taisaku/</id>
-    <updated>2026-08-18T00:00:00+09:00</updated>
-    <summary>歯科医院のSEOは、クリニックSEOの土台に、矯正・インプラントなど自由診療科目別のキーワード設計とポータルサイトとの併用戦略を掛け合わせて進めます。全国66,818軒が競う中で選ばれるための基本5ステップと、科目別のコンテンツ設計を解説します。</summary>
   </entry>
 </feed>

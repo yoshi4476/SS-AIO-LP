@@ -104,6 +104,8 @@ Google公式は、<a href="https://developers.google.com/search/docs/appearance/
 
 **診断は、順位確認→クローラー確認→構造確認→鮮度確認の順で進めます。**
 
+あわせて[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)もご覧ください。
+
 関連する内容は[税理士の集客ができない原因5つと処方箋【2026年】](/ai-marketing/zeirishi-shukyaku-dekinai/)でも扱っています。
 
 <figure><img src="/images/aio-taisaku-hyouji-sarenai/shindan-flow.png" alt="表示されない原因を診断する4ステップ: 順位を確認、クローラーを確認、構造を確認、鮮度を確認" width="1200" height="400" loading="lazy"><figcaption>表示されない原因を診断する4ステップ（当メディア作成）</figcaption></figure>
