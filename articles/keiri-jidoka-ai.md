@@ -50,6 +50,8 @@ faq:
 
 経理AI自動化とは、請求書の読み取りから仕訳提案まで、判断を伴う定型業務をAIが代行する仕組みです。
 
+実際の進め方を先に押さえるなら、[経理の自動化はエクセルでどこまで可能？限界と移行の4ステップ](/blog/keiri-excel-jidoka/)が参考になります。
+
 <div class="definition-box"><span class="term">経理AI自動化とは</span>、AI-OCRや学習型の仕訳エンジンなどを使い、経理担当者が行ってきた入力・分類・チェックの一部をAIに代行させる取り組みを指します。==従来の自動化と異なり、表記ゆれや例外パターンもある程度学習して対応できる点が特徴です。==</div>
 
 独立行政法人中小企業基盤整備機構が2026年3月に公表した<a href="https://www.smrj.go.jp/research_case/questionnaire/fbrion0000002pjw-att/202603_AI_point.pdf" target="_blank" rel="noopener">「中小企業のAI等の利活用に係る実態調査」</a>があります。**中小企業のAI導入率は20.4%、検討中の企業を含めても39.0%**にとどまります。
@@ -85,6 +87,8 @@ AI-OCRなどのツール導入では、AI導入補助金の対象になる場合
 ## 経理AI自動化を始める4つの手順
 
 経理AI自動化は、現状把握→対象業務の選定→試験運用→本番運用という4つの手順で進めます。
+
+選ぶときの基準は、[経理自動化ツールとは？機能5分類と失敗しない選び方](/blog/keiri-jidoka-tool/)で解説しています。
 
 <figure><img src="/images/keiri-jidoka-ai/tejun.png" alt="経理AI自動化を始める4つの手順: 経理業務を棚卸しする、自動化する業務を選ぶ、試験運用で精度を確認、本番運用に移行する" loading="lazy"><figcaption>経理AI自動化を始める4つの手順</figcaption></figure>
 
