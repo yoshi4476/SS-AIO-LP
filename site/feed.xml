@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-08-27T00:00:00+09:00</updated>
+  <updated>2026-08-28T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>工務店の集客セミナー、FC加盟の前に確認すべき3つのこと</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/koumuten-shukyaku-seminar/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/koumuten-shukyaku-seminar/</id>
+    <updated>2026-08-28T00:00:00+09:00</updated>
+    <summary>工務店の集客セミナーは無料の学びの場からFC加盟契約に直結するものまで幅があり、確認すべき論点を知らずに参加すると高額契約のリスクがあります。加盟金・ロイヤリティ・契約期間の見方と、学びを受注につなげる手順を実務経験から解説します。</summary>
+  </entry>
   <entry>
     <title>不動産の反響が来ない5つの原因とポータル依存の脱却法</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/fudousan-hankyou-konai/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-seminar/</id>
     <updated>2026-08-19T00:00:00+09:00</updated>
     <summary>整骨院の集客セミナーは、種類・費用相場・見極め方を知ってから参加すると失敗しにくくなります。良いセミナーと怪しい高額セミナーの違い、学びを実践に移す4ステップを、通算3,200店舗以上の支援実務から解説します。</summary>
-  </entry>
-  <entry>
-    <title>整骨院の集客成功事例5選｜院の規模で変わる打ち手と注意点</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-jirei/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-jirei/</id>
-    <updated>2026-08-18T00:00:00+09:00</updated>
-    <summary>整骨院の集客成功事例は、1人院・多店舗展開・自由診療特化など院の規模と業態によって打ち手が変わります。通算3,200店舗以上を支援してきた実務経験から、規模別の成功パターンとやってはいけないことを解説します。</summary>
   </entry>
 </feed>
