@@ -88,6 +88,8 @@ AI-OCRなどのツール導入では、AI導入補助金の対象になる場合
 
 経理AI自動化は、現状把握→対象業務の選定→試験運用→本番運用という4つの手順で進めます。
 
+つまずきやすい点については、[経理自動化はPythonで可能か？できることと4つの注意点](/blog/keiri-jidoka-python/)にまとめています。
+
 選ぶときの基準は、[経理自動化ツールとは？機能5分類と失敗しない選び方](/blog/keiri-jidoka-tool/)で解説しています。
 
 <figure><img src="/images/keiri-jidoka-ai/tejun.png" alt="経理AI自動化を始める4つの手順: 経理業務を棚卸しする、自動化する業務を選ぶ、試験運用で精度を確認、本番運用に移行する" loading="lazy"><figcaption>経理AI自動化を始める4つの手順</figcaption></figure>
