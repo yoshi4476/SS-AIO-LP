@@ -73,6 +73,8 @@ faq:
 
 反響を増やす集客方法は、ポータルサイト・自社サイトのSEO・MEO・SNS・紹介・チラシ・Web広告の6つに整理できます。
 
+実際の例を先に押さえるなら、[リフォーム会社のインスタグラム運用｜反響につながる投稿5パターン](/ai-marketing/reform-instagram-shukyaku/)が参考になります。
+
 実際の進め方は[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)で整理しています。
 
 <figure><img src="/images/reform-shukyaku-hoho/houhou.png" alt="リフォームの集客方法6つ: ポータルサイトへの掲載、自社サイトのSEO・MEO対策、SNSでの施工事例発信、OB客・紹介の仕組み化、チラシ・折込広告、Web広告の活用" loading="lazy"><figcaption>リフォームの集客方法6つ</figcaption></figure>
