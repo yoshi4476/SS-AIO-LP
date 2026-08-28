@@ -31,6 +31,8 @@ faq:
 
 AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引用される層」を重ねた二階建ての構造です。
 
+住宅業界であれば、[工務店のWeb集客をHP・SEO・MEO・SNSのどれから始めるか](/ai-marketing/koumuten-web-shukyaku/)を先に押さえておくと迷いにくくなります。
+
 住宅業界向けには、[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)を活用して集客力を底上げする方法もまとめています。
 
 <div class="definition-box"><span class="term">AI集客とは</span>、検索エンジン・地図アプリ・AI検索・AIチャットなど、顧客が情報収集に使うすべてのチャネルで自社が見つかり、選ばれる状態をつくる集客活動の総称です。</div>

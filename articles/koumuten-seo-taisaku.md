@@ -43,6 +43,8 @@ faq:
 
 工務店のSEO対策とは、施工事例と専門情報の発信を通じて検索から見つかり、選ばれる工務店になるための一連の施策です。
 
+SEO以外の施策も含めた[工務店のWeb集客の全体像と始める順番](/ai-marketing/koumuten-web-shukyaku/)も合わせて確認しておくと、優先順位を付けやすくなります。
+
 前提となる考え方は、[工務店のインスタ集客とは？問い合わせにつなげる5つの施策](/ai-marketing/koumuten-instagram-shukyaku/)で解説しています。
 
 実際の進め方は、[整骨院のSEO対策とは？MEOと役割分担する5つの手順](/seo/seikotsuin-seo-taisaku/)で解説しています。
