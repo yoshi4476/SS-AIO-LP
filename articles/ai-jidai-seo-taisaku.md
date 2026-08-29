@@ -31,6 +31,8 @@ faq:
 
 AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置いた検索最適化です。
 
+前提となる考え方については、[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)にまとめています。
+
 <div class="definition-box"><span class="term">SEO（Search Engine Optimization）とは</span>、検索エンジンの検索結果で自社ページが上位に表示されるよう最適化することです。AI時代には、この上位表示が「AIの回答に引用されるための前提条件」という新しい役割も持ちます。</div>
 
 「SEOはオワコン」という言説を耳にしますが、実務の感覚は逆です。Google AI OverviewもChatGPTの検索機能も、回答を作るときに検索上位のページを参照します。つまり検索圏外のサイトは、人間からもAIからも見つからない状態になります。
