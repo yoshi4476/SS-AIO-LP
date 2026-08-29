@@ -7,6 +7,8 @@ category: keiri-jitsumu
 date: 2026-08-29
 modified: 2026-08-29
 depth: standard
+score: 94
+score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 19}
 eyecatch: /images/keiri-yarikata-kojin-jigyonushi/eyecatch.png
 diagrams:
   - name: shuuki
@@ -133,6 +135,8 @@ faq:
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/kuzureru.png" alt="経理のやり方が崩れるNGパターンと立て直し方の比較" loading="lazy"><figcaption>経理のやり方が崩れるNGパターンと立て直し方</figcaption></figure>
 
 NGパターンは、按分比率をその都度変える、用途メモを残さない、申告直前にまとめて計算する、の3つです。**どれも「そのときの気分」で処理してしまう点が共通しています。**
+
+私たちが導入支援の現場で見てきたケースでも、按分比率を毎月変えていたために、あとから根拠を説明できなくなった相談は珍しくありません。**多くの場合、原因は比率を最初に固定していなかったことにあります。**
 
 立て直し方はシンプルです。比率は年1回だけ見直し、受け取った日に用途をメモし、按分額は月次のタイミングで確定させます。**ルールを毎月ではなく年1回だけ見直す形にすると、判断の回数そのものが減ります。**
 
