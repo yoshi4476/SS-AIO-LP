@@ -50,6 +50,8 @@ faq:
 
 **AI導入補助金の申請は、準備・選定・交付申請・発注・実績報告という5つのステップで進みます。**制度の対象や補助率を知っていても、実際の手続き順序を誤ると審査や受給でつまずきます。
 
+実際の進め方を先に押さえるなら、[農業の補助金の申請方法｜制度の選び方と5ステップ【2026年】](/blog/nougyou-hojokin-shinsei-houhou/)が参考になります。
+
 対象になる範囲については、[AI導入補助金はクリニックも対象？電子カルテ3分野の補助額](/blog/ai-hojokin-clinic-katsuyou/)にまとめています。
 
 <figure><img src="/images/ai-hojokin-shinsei-yarikata/flow5.png" alt="申請から受給までの5ステップ: GビズID取得・SECURITY ACTION宣言、支援事業者選定・ツールを決める、交付申請、交付決定後に発注、実績報告"><figcaption>申請から受給までの5ステップ</figcaption></figure>
