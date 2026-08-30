@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-30",
+  "date": "2026-08-31",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 5,
-      "suspect_taken": 4,
+      "judged": 7,
+      "suspect_taken": 6,
       "healthy": 1,
-      "too_thin": 14,
+      "too_thin": 21,
       "items": [
         {
           "kw": "ai集客とは",
@@ -21,8 +21,8 @@
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 8.7,
-          "imp": 34,
+          "pos": 8.8,
+          "imp": 36,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -31,56 +31,66 @@
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 8.6,
+          "pos": 8.0,
+          "imp": 21,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "医療機関 meo",
+          "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
+          "pos": 5,
           "imp": 12,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 7.0,
           "ratio": 0.0
         },
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 9,
-          "imp": 11,
+          "pos": 7.8,
+          "imp": 23,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "税理士 ai 集客",
+          "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+          "pos": 4.9,
+          "imp": 12,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
           "ratio": 0.0
         }
       ]
     },
     "corporate": {
       "judged": 3,
-      "suspect_taken": 3,
-      "healthy": 0,
-      "too_thin": 10,
+      "suspect_taken": 2,
+      "healthy": 1,
+      "too_thin": 11,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 2.7,
-          "imp": 66,
+          "pos": 2.6,
+          "imp": 71,
           "clicks": 2,
-          "ctr": 3.03,
+          "ctr": 2.82,
           "expected_ctr": 11.0,
-          "ratio": 0.28
-        },
-        {
-          "kw": "セブンセンシズ株式会社",
-          "url": "https://corp.7senses.co.jp/company",
-          "pos": 3.9,
-          "imp": 21,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 8.0,
-          "ratio": 0.0
+          "ratio": 0.26
         },
         {
           "kw": "ラクシフト",
           "url": "https://corp.7senses.co.jp/rakushift",
           "pos": 4.4,
-          "imp": 10,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -92,16 +102,16 @@
       "judged": 1,
       "suspect_taken": 1,
       "healthy": 0,
-      "too_thin": 11,
+      "too_thin": 12,
       "items": [
         {
           "kw": "エクセル 開発 補助金",
           "url": "https://lp.7senses.co.jp/service/dev/",
-          "pos": 7.6,
-          "imp": 16,
+          "pos": 7.4,
+          "imp": 20,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 4.0,
           "ratio": 0.0
         }
       ]
