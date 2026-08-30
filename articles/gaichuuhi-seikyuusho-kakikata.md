@@ -52,6 +52,8 @@ faq:
 
 **外注費の請求書とは、外注先の業務内容と金額を証明する書類で、消費税の仕入税額控除には6つの項目が必須です。**
 
+実際の進め方は[請求書の発行のやり方｜必須6項目と基本4ステップ【2026年】](/blog/seikyusho-hakko-yarikata/)で整理しています。
+
 <div class="definition-box"><span class="term">適格請求書(インボイス)とは</span>、発行事業者の登録番号など決められた項目を満たした請求書のことです。==この項目が欠けていると、仕入税額控除を受けられない場合があります。==</div>
 
 <figure><img src="/images/gaichuuhi-seikyuusho-kakikata/kisai.png" alt="適格請求書の必須記載項目6つ: 発行者の氏名・登録番号、取引年月日、取引内容、税率ごとの対価と適用税率、税率ごとの消費税額、受領者の氏名・名称" loading="lazy"><figcaption>適格請求書の必須記載項目6つ</figcaption></figure>

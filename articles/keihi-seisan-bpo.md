@@ -119,6 +119,8 @@ faq:
 
 経費精算BPOは、棚卸し・範囲の線引き・テスト運用の3ステップで導入すると失敗しにくくなります。
 
+実際の進め方は[freeeの経費精算のやり方｜申請から承認までの4ステップ](/blog/freee-keihi-seisan-yarikata/)でも扱っています。
+
 <figure><img src="/images/keihi-seisan-bpo/step.png" alt="経費精算BPO導入までの3ステップ: 現状の運用を棚卸しする、任せる範囲を線引きする、委託先とテスト運用する" loading="lazy"><figcaption>経費精算BPO導入までの3ステップ</figcaption></figure>
 
 第一に、現状の申請件数・承認フロー・規程の有無を棚卸しします。規程が存在しない、または古いままの場合は、[経費精算ルールの作り方｜中小企業の5ステップと規程項目](https://corp.7senses.co.jp/blog/keihi-seisan-rule-tsukurikata/)を参考に、先に規程を整えることが前提になります。
