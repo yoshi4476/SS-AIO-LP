@@ -87,6 +87,8 @@ diagrams:
 
 成果を出す不動産SEOは、KW選定からE-E-A-Tの明示まで5つの施策を積み重ねて進めます。
 
+近い論点を[飲食店のMEO対策とは？6つの基本施策と口コミの増やし方](/meo/inshokuten-meo-taisaku/)で扱っています。
+
 <figure><img src="/images/fudousan-seo-taisaku/steps.png" alt="不動産SEOで成果を出す5つの施策: エリア×悩み語のロングテールでKW選定、物件ページに独自解説を追加、エリアガイド記事の継続発信、宅建士資格・取引実績でE-E-A-Tを明示、問い合わせ導線の設計" loading="lazy"><figcaption>不動産SEOで成果を出す5つの施策</figcaption></figure>
 
 ### 施策1: エリア×悩み語のロングテールKWを選ぶ
@@ -147,6 +149,8 @@ diagrams:
 ## 不動産SEOの始め方3ステップ
 
 不動産SEOは、現状分析・ページ整備・コラム発信の3ステップで始めます。
+
+費用の目安は[不動産SEO会社への外注は必要か？費用相場と6つの判断軸](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
 ### ステップ1: 現状分析を1週間で終わらせる
 

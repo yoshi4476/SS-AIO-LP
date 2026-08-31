@@ -118,6 +118,8 @@ faq:
 
 個人事業主特有の実務は、家事按分の判断基準と、白色・青色で共通して使える勘定科目の型です。
 
+実際の進め方を先に押さえるなら、[個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方](/blog/kojin-jigyonushi-choubo-tsukekata/)が参考になります。
+
 <div class="definition-box"><span class="term">家事按分とは</span>、自宅家賃や電気代のように事業と生活の両方に使う費用を、業務で使った割合分だけ必要経費に計上する処理のことです。</div>
 
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/anbun-kufuu.png" alt="家事按分をラクにする3つの工夫: 比率を先に固定する、レシートに用途をメモ、年1回だけ見直す" loading="lazy"><figcaption>家事按分をラクにする3つの工夫</figcaption></figure>

@@ -31,6 +31,8 @@ faq:
 
 AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置いた検索最適化です。
 
+前提となる考え方は[飲食店のMEO対策とは？6つの基本施策と口コミの増やし方](/meo/inshokuten-meo-taisaku/)で整理しています。
+
 前提となる考え方については、[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)にまとめています。
 
 <div class="definition-box"><span class="term">SEO（Search Engine Optimization）とは</span>、検索エンジンの検索結果で自社ページが上位に表示されるよう最適化することです。AI時代には、この上位表示が「AIの回答に引用されるための前提条件」という新しい役割も持ちます。</div>
