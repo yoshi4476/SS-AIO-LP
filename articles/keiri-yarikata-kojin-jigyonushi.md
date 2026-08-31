@@ -56,6 +56,8 @@ faq:
 
 経理のやり方は、日次・月次・年次の3つの周期に分けて仕組み化すると、個人事業主でも一人で回せます。
 
+あわせて[フリーランスの経理のやり方｜請求・入金・源泉徴収の3ステップ管理](/blog/freelance-keiri-yarikata/)もご覧ください。
+
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/shuuki.png" alt="経理のやり方3つの周期: 日次でやること、月次でやること、年次でやること" loading="lazy"><figcaption>経理のやり方は3つの周期で仕組み化する</figcaption></figure>
 
 <div class="definition-box"><span class="term">経理の3周期管理とは</span>、日々の経理作業を「日次」「月次」「年次」の3つの周期に分け、周期ごとにやることを固定して判断の負荷を分散させる進め方のことです。</div>

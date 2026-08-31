@@ -72,6 +72,8 @@ faq:
 
 経理のやり方は、証憑整理・記帳・月次確認・保存・申告準備という5ステップで進めます。
 
+あわせて[フリーランスの経理のやり方｜請求・入金・源泉徴収の3ステップ管理](/blog/freelance-keiri-yarikata/)もご覧ください。
+
 <figure><img src="/images/keiri-yarikata-shoshinsha/gosuteppu.png" alt="経理のやり方5ステップ: 証憑を集める、帳簿に記帳する、月次で確認する、書類を保存する、申告に備える" loading="lazy"><figcaption>経理のやり方5ステップ</figcaption></figure>
 
 1つ目は、領収書や請求書などの証憑を集めることです。取引のたびにレシートを一箇所にまとめておくと、記帳のときに慌てません。
