@@ -50,7 +50,7 @@ faq:
 
 経費精算ルールとは、申請期限・承認ルート・領収書保存など、精算の進め方を定めた社内の取り決めです。
 
-実際の進め方は[freeeの経費精算のやり方｜申請から承認までの4ステップ](/blog/freee-keihi-seisan-yarikata/)でも扱っています。
+部門が複数ある会社向けの実際の進め方は、[楽楽精算の経費精算のやり方｜複数部門の承認設計まで解説](/blog/rakurakuseisan-keihi-seisan-yarikata/)でまとめています。個人事業主〜中小企業向けには、[freeeの経費精算のやり方｜申請から承認までの4ステップ](/blog/freee-keihi-seisan-yarikata/)も参考になります。
 
 費用の目安は、[経費精算BPOとは？任せられる業務3つと費用相場](/blog/keihi-seisan-bpo/)で解説しています。
 
