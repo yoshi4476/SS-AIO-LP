@@ -44,6 +44,8 @@ faq:
 
 AI検索は生成AIが答える検索全般を指し、AIO対策はその回答に引用されるための最適化を意味します。
 
+費用の目安を先に押さえるなら、[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)が参考になります。
+
 <div class="definition-box"><span class="term">AI検索とは</span>、Google AI OverviewやAIモード、ChatGPT検索、Perplexity、Geminiなど、生成AIが検索の場で直接回答を返す検索行動全般を指す総称です。</div>
 
 似た言葉に「AIO対策」がありますが、これは行動ではなく施策側の呼び名です。AI検索という土俵の中で、自社の情報が回答の引用元に選ばれるよう構造や一次情報を整える取り組みがAIO対策にあたります。AIO対策の基本手順は[AIO対策の5ステップ](/aio/aio-taisaku-guide/)で解説していますので、本記事ではAI検索の種類ごとに対策をどう使い分けるかに絞って整理します。

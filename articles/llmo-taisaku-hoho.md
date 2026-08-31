@@ -5,7 +5,7 @@ slug: llmo-taisaku-hoho
 keyword: LLMO対策 方法
 category: aio
 date: 2026-07-27
-modified: 2026-07-27
+modified: 2026-08-31
 eyecatch: /images/llmo-taisaku-hoho/eyecatch.png
 score: 95
 faq:
@@ -25,7 +25,7 @@ faq:
 
 <div class="target-reader">この記事は、自社サイトの集客を強化したい中小企業の経営者・マーケティング担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## LLMO対策とは？AIOとの違い
 

@@ -143,6 +143,8 @@ SNSキャンペーンは、フォロー・保存特典やハッシュタグ企�
 
 **整骨院の集客イベントは、目的設定→ターゲット設定→告知→効果測定という4ステップで進めます。**
 
+費用の目安は、[整骨院の集客セミナーは受けるべき？費用相場と失敗しない選び方](/ai-marketing/seikotsuin-shukyaku-seminar/)で解説しています。
+
 関連する内容は、[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)で解説しています。
 
 <figure><img src="/images/seikotsuin-shukyaku-event/steps.png" alt="整骨院の集客イベントを成功させる4ステップ: 目的の明確化、ターゲット設定、告知と集客、効果測定とフォロー" loading="lazy"><figcaption>整骨院の集客イベントを成功させる4ステップ</figcaption></figure>

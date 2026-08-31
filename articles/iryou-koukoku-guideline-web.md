@@ -5,7 +5,7 @@ slug: iryou-koukoku-guideline-web
 keyword: 医療広告ガイドライン Web
 category: seo
 date: 2026-07-31
-modified: 2026-07-31
+modified: 2026-08-31
 eyecatch: /images/iryou-koukoku-guideline-web/eyecatch.png
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 19, expert: 19, persona: 19, aio: 19}
@@ -41,7 +41,7 @@ diagrams:
 
 <div class="target-reader">この記事は、クリニック・歯科医院・美容クリニックなどの院長・事務長・Web担当者、および制作会社の担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## 医療広告ガイドラインとは？
 

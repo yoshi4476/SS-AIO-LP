@@ -5,7 +5,7 @@ slug: kuchikomi-fuyasu-hoho
 keyword: googleマップ 口コミ 増やす
 category: meo
 date: 2026-07-27
-modified: 2026-07-28
+modified: 2026-08-31
 eyecatch: /images/kuchikomi-fuyasu-hoho/eyecatch.png
 score: 93
 faq:
@@ -25,7 +25,7 @@ faq:
 
 <div class="target-reader">この記事は、Googleマップの口コミ数・評価を改善したい店舗オーナー・店長向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## 口コミがMEOと売上に効く理由
 

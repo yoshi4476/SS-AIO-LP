@@ -5,7 +5,7 @@ slug: chatgpt-shukyaku-katsuyo
 keyword: chatgpt sns集客
 category: ai-marketing
 date: 2026-07-27
-modified: 2026-07-27
+modified: 2026-08-31
 eyecatch: /images/chatgpt-shukyaku-katsuyo/eyecatch.png
 score: 92
 faq:
@@ -25,7 +25,7 @@ faq:
 
 <div class="target-reader">この記事は、日々の集客業務に追われる中小企業の経営者・店舗オーナー・ひとり担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## ChatGPT活用の基本方針
 

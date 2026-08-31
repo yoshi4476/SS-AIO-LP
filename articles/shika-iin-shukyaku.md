@@ -5,7 +5,7 @@ slug: shika-iin-shukyaku
 keyword: 歯科 ai 集客
 category: ai-marketing
 date: 2026-07-28
-modified: 2026-07-28
+modified: 2026-08-31
 eyecatch: /images/shika-iin-shukyaku/eyecatch.png
 score: 96
 score_breakdown: {design: 19, seo: 19, editorial: 19, expert: 19, persona: 19, aio: 20}
@@ -37,7 +37,7 @@ diagrams:
 
 <div class="target-reader">この記事は、歯科医院の院長・経営者・集患担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## 歯科医院の集客とは？新患獲得の3つのチャネル
 

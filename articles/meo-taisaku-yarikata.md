@@ -5,7 +5,7 @@ slug: meo-taisaku-yarikata
 keyword: meo 上げ 方
 category: meo
 date: 2026-07-27
-modified: 2026-07-28
+modified: 2026-08-31
 eyecatch: /images/meo-taisaku-yarikata/eyecatch.png
 score: 94
 faq:
@@ -25,7 +25,7 @@ faq:
 
 <div class="target-reader">この記事は、来店型ビジネス（飲食・美容・治療院・小売等）の店舗オーナー・集客担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## MEO対策とは
 

@@ -5,7 +5,7 @@ slug: clinic-meo-taisaku
 keyword: クリニック meo
 category: meo
 date: 2026-07-28
-modified: 2026-07-28
+modified: 2026-08-31
 eyecatch: /images/clinic-meo-taisaku/eyecatch.png
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
@@ -35,7 +35,7 @@ diagrams:
 
 <div class="target-reader">この記事は、クリニック・診療所・歯科医院などの院長・事務長・集患担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## クリニックのMEO対策とは？
 

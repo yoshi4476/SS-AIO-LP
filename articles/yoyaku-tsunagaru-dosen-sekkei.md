@@ -5,7 +5,7 @@ slug: yoyaku-tsunagaru-dosen-sekkei
 keyword: 予約につながる導線設計
 category: seo
 date: 2026-07-30
-modified: 2026-07-30
+modified: 2026-08-31
 eyecatch: /images/yoyaku-tsunagaru-dosen-sekkei/eyecatch.png
 score: 95
 score_breakdown: {design: 19, seo: 20, editorial: 18, expert: 19, persona: 19, aio: 19}
@@ -43,7 +43,7 @@ faq:
 
 <div class="target-reader">この記事は、クリニック・法律事務所・税理士事務所など、予約や相談申し込みをホームページで受け付けている事業者の院長・所長、ホームページ担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## 予約につながる導線設計とは？
 

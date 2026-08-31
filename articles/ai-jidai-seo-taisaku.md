@@ -5,7 +5,7 @@ slug: ai-jidai-seo-taisaku
 keyword: AI時代 SEO 対策
 category: seo
 date: 2026-07-27
-modified: 2026-07-27
+modified: 2026-08-31
 eyecatch: /images/ai-jidai-seo-taisaku/eyecatch.png
 score: 94
 faq:
@@ -25,7 +25,7 @@ faq:
 
 <div class="target-reader">この記事は、SEOにこれから本格的に取り組む中小企業の経営者・Web担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## AI時代のSEO対策とは
 

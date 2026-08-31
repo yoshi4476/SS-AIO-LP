@@ -5,7 +5,7 @@ slug: ai-shukyaku-guide
 keyword: AI集客
 category: ai-marketing
 date: 2026-07-27
-modified: 2026-07-27
+modified: 2026-08-31
 eyecatch: /images/ai-shukyaku-guide/eyecatch.png
 score: 96
 faq:
@@ -25,7 +25,7 @@ faq:
 
 <div class="target-reader">この記事は、AI時代の集客の全体像をまず把握したい中小企業の経営者・マーケティング担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## AI集客とは？4つの施策の関係
 

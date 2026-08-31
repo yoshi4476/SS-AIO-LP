@@ -5,7 +5,7 @@ slug: seikotsuin-shukyaku
 keyword: 整骨院 集客
 category: meo
 date: 2026-07-30
-modified: 2026-07-30
+modified: 2026-08-31
 eyecatch: /images/seikotsuin-shukyaku/eyecatch.png
 score: 93
 score_breakdown: {design: 18, seo: 19, editorial: 19, expert: 18, persona: 18, aio: 20}
@@ -37,7 +37,7 @@ diagrams:
 
 <div class="target-reader">この記事は、整骨院・接骨院の院長・経営者・集客担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## 整骨院の集客とは？保険施術と自由診療で戦略が変わる理由
 

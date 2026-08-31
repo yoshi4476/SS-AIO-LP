@@ -5,7 +5,7 @@ slug: zeirishi-homepage-shukyaku
 keyword: 税理士 集客 ホームページ
 category: seo
 date: 2026-07-28
-modified: 2026-07-28
+modified: 2026-08-31
 eyecatch: /images/zeirishi-homepage-shukyaku/eyecatch.png
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
@@ -35,7 +35,7 @@ faq:
 
 <div class="target-reader">この記事は、税理士事務所の代表・所長、集客やホームページ運用を担当する事務所スタッフ向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## 税理士のホームページ集客とは
 

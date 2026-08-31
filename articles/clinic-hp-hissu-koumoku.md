@@ -5,7 +5,7 @@ slug: clinic-hp-hissu-koumoku
 keyword: クリニック ホームページ 必須項目
 category: seo
 date: 2026-07-29
-modified: 2026-07-29
+modified: 2026-08-31
 eyecatch: /images/clinic-hp-hissu-koumoku/eyecatch.png
 score: 92
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 18, persona: 18, aio: 19}
@@ -39,7 +39,7 @@ faq:
 
 <div class="target-reader">この記事は、クリニック・医院の院長・事務長、ホームページの制作や更新を担当するスタッフ向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年8月時点の情報です。</p>
 
 ## クリニックのホームページに必須の項目とは
 

@@ -48,6 +48,8 @@ diagrams:
 
 **不動産のAI検索対策とは、生成AIが物件相談や会社選びに答える際、自社が紹介・引用される状態をつくる取り組みです。**AIO（AI Overview Optimization）・AI検索対策・LLMOはいずれもほぼ同じ取り組みを指し、呼び方の違いと考えて構いません。
 
+前提となる考え方は[不動産の集客代行とは？任せられる業務と依頼前の4つの確認点](/ai-marketing/fudousan-shukyaku-daikou/)で整理しています。
+
 前提となる考え方を先に押さえるなら、[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)が参考になります。
 
 関連する内容については、[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)にまとめています。
