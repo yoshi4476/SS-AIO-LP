@@ -29,3 +29,6 @@ automation/logs/
 automation/gas/*.ready.gs
 # .env の控え（認証情報を含むため）
 .env.backup-*
+
+# 認証情報の一括反映に使う控え（絶対にコミットしない）
+secrets.local.txt
