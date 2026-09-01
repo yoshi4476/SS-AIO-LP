@@ -79,8 +79,25 @@
       cfg.links.map(function (l) { return '<a href="' + l[1] + '">' + l[0] + "</a>"; }).join(" ／ ") + "</p>" +
       btns +
       '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本診断は回答にもとづく簡易判定です。無料相談では実データで詳細分析します。</p></div>';
+    // 点数と「最初の3つ」を見た直後に置く。ここが最も関心の高い瞬間で、
+    // 相談は身構えても、自分の点数の続きを受け取ることには抵抗が小さい。
+    // 無料相談の訴求より後ろに置くと、この瞬間を過ぎてしまう。
+    if (window.leadCapture) {
+      var label = cfg.type === "aio" ? "AI検索の対応度" : "マップ集客の整備度";
+      var lc = window.leadCapture({
+        title: "この結果の詳しい読み方を、メールで受け取る",
+        sub: "点数の内訳と、" + band.acts.length + "つの手を進める順番をお送りします",
+        formType: label + "チェックの結果送付",
+        route: "diagnosis_" + cfg.type,
+        detail: label + "チェック " + pct + "点／" + band.name,
+      });
+      var acts = body.querySelector(".action-list");
+      if (acts) acts.parentNode.insertBefore(lc, acts.nextSibling);
+      else body.querySelector(".result-type").appendChild(lc);
+    }
     var h2 = body.querySelector("h2");
     if (h2) { h2.setAttribute("tabindex", "-1"); h2.focus(); }
   }
   show();
 })();
+

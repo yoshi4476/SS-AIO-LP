@@ -38,7 +38,13 @@ TOPIC_NOTE = 0.20
 
 
 def gsc_rows(site_id):
-    """直近90日のGSC実績（語×ページ）。取れなければ空を返す"""
+    """直近90日のGSC実績（語×ページ）。取れなければ空を返す
+
+    自サイトだけでなく、グループの全サイトを見る。1サイトだけ見ていたため、
+    補助金サイトが「aioコンサルティング」で18.2位を取っている状態に気づかず、
+    ラボ側で同じ語を狙う記事を書いてしまった。
+    自社どうしの食い合いは、ドメインをまたいでも同じように起きる。
+    """
     try:
         import gcreds
         import sites as S
@@ -47,24 +53,38 @@ def gsc_rows(site_id):
     except Exception:
         return []
     try:
-        conf = S.load(site_id)
         sc = gbuild("searchconsole", "v1", credentials=gcreds.load(
             ROOT / "indexing-service-account.json",
             ["https://www.googleapis.com/auth/webmasters.readonly"]))
         end = date.today() - timedelta(days=3)
-        return sc.searchanalytics().query(
-            siteUrl="https://" + conf["domain"] + "/", body={
-                "startDate": str(end - timedelta(days=90)), "endDate": str(end),
-                "dimensions": ["query", "page"], "rowLimit": 5000}).execute().get("rows", [])
+        all_conf = S.load_all()
     except Exception as e:
         print(f"   （GSC照合はスキップ: {type(e).__name__}）")
         return []
+    rows = []
+    for sid, conf in all_conf.items():
+        dom = conf.get("domain")
+        if not dom:
+            continue
+        try:
+            r = sc.searchanalytics().query(
+                siteUrl="https://" + dom + "/", body={
+                    "startDate": str(end - timedelta(days=90)), "endDate": str(end),
+                    "dimensions": ["query", "page"], "rowLimit": 5000}).execute().get("rows", [])
+        except Exception:
+            continue          # 権限の無いプロパティは黙って飛ばす
+        for x in r:
+            x["_site"] = sid
+            x["_own"] = (sid == site_id)
+        rows += r
+    return rows
 
 
 def owned(rows):
     """すでに自社ページが順位を持っている語だけに絞る"""
     return [{"q": r["keys"][0], "page": r["keys"][1],
-             "pos": r["position"], "imp": r["impressions"]}
+             "pos": r["position"], "imp": r["impressions"],
+             "site": r.get("_site", ""), "own": r.get("_own", True)}
             for r in rows
             if r["position"] <= OWNED_POS and r["impressions"] >= OWNED_IMP]
 
@@ -128,10 +148,18 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True):
     own = owned(gsc_rows(site_id)) if (use_gsc and site_id) else []
     for o in gsc_owner(kw, own)[:5]:
         level = max(level, 2)
-        reasons.append((
-            "禁止", f"既に順位を持つページがある: {o['page'].split('//')[-1]}",
-            f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
-            f"新記事を当てると順位が割れます。このページを書き足してください"))
+        if o.get("own", True):
+            reasons.append((
+                "禁止", f"既に順位を持つページがある: {o['page'].split('//')[-1]}",
+                f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
+                f"新記事を当てると順位が割れます。このページを書き足してください"))
+        else:
+            reasons.append((
+                "禁止", f"他サイト（{o['site']}）が既に取っている語: "
+                f"{o['page'].split('//')[-1]}",
+                f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
+                f"ドメインが違っても自社どうしの食い合いになります。"
+                f"担当をどちらに寄せるか決めてから書いてください"))
 
     # ③ 見出し案の主題を、実績に1本ずつ当てる。
     #    タイトルを差別化しても、見出しが既存記事の主題まで伸びていれば食い合う

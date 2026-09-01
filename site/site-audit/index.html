@@ -22,9 +22,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=2558082d">
+<link rel="stylesheet" href="/css/style.css?v=919b850c">
 <script>document.documentElement.classList.add('js');</script>
-<script defer src="/js/site.js?v=85532eca"></script>
+<script defer src="/js/site.js?v=f1246049"></script>
 <style>
 .audit-panel { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.5rem, 3vw, 2.6rem); max-width: 820px; margin: 0 auto; box-shadow: var(--shadow-lg); }
 .audit-form { display: flex; gap: .8rem; flex-wrap: wrap; }
@@ -183,6 +183,16 @@
         '<a class="btn btn-primary" href="/lp/#form" data-cta="site_audit_result_lp">この結果をもとに無料相談する <span class="arw">→</span></a>' +
         '<a class="btn btn-ghost" href="/diagnosis/" data-cta="audit_to_diagnosis">集客タイプ診断もやってみる</a></div>' +
         '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本チェックは公開ページの自動検査による簡易採点です。検索順位・AI引用状況を含む詳細分析は無料相談で承ります。</p>';
+      // 点数を見た直後に、結果の送付先だけを尋ねる（ページは移さない）
+      if (window.leadCapture) {
+        out.appendChild(window.leadCapture({
+          title: "12項目の判定結果を、メールで受け取る",
+          sub: "項目ごとの合否と、直す順番をお送りします",
+          formType: "サイトの技術チェックの結果送付",
+          route: "site_audit",
+          detail: "サイトの技術チェック " + d.score + "点／判定" + d.grade + "／対象 " + d.url,
+        }));
+      }
     }).catch(function () {
       out.innerHTML = '<p style="color:#b91c1c;font-weight:700;margin-top:1.2rem;">検査サーバーに接続できませんでした。本機能はサイト公開後（Cloudflare Pages上）で利用できます。</p>';
     });

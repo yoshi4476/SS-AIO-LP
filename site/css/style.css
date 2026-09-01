@@ -1356,3 +1356,28 @@ main.lab .cta-final h2 { color: #fff; }
   .cta.cta-mid { padding: 1.3rem 1rem; }
   .cta.cta-mid .cta-copy { font-size: .95rem; }
 }
+
+/* 診断結果でのリード受付（点数を見た直後に、送付先だけを尋ねる） */
+.lead-capture{
+  margin:1.8rem 0 .4rem;padding:1.35rem 1.4rem;text-align:left;
+  background:var(--sky,#f1f5fb);border:1.5px solid var(--line,#dbe3ec);border-radius:14px;
+}
+.lc-head{display:flex;flex-direction:column;gap:.25em;margin-bottom:1rem}
+.lc-head strong{font-family:var(--head);font-weight:900;font-size:1.04rem;line-height:1.5}
+.lc-head span{font-size:.85rem;color:var(--muted)}
+.lc-form{display:grid;gap:.7rem}
+.lc-form label{display:grid;gap:.3em;font-size:.84rem;font-weight:700}
+.lc-form input{
+  font:inherit;font-weight:400;padding:.62em .8em;border:1.5px solid var(--line,#dbe3ec);
+  border-radius:9px;background:#fff;color:var(--text,#1a2430);width:100%;
+}
+.lc-form input:focus-visible{outline:2px solid var(--navy,#1d4ed8);outline-offset:1px;border-color:transparent}
+.lc-form input[name="_gotcha"]{position:absolute;left:-9999px;width:1px;height:1px}
+.lc-form button{justify-self:start;margin-top:.2rem}
+.lc-note{font-size:.75rem;color:var(--muted);margin:.1em 0 0;line-height:1.7}
+.lc-msg{font-size:.82rem;color:#b91c1c;font-weight:700;margin:0;min-height:1em}
+.lc-done{font-size:.92rem;margin:0;line-height:1.8}
+@media (min-width:620px){
+  .lc-form{grid-template-columns:1fr 1fr}
+  .lc-form label:nth-of-type(3),.lc-form button,.lc-note,.lc-msg{grid-column:1/-1}
+}

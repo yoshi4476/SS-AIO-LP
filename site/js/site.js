@@ -404,3 +404,54 @@
     onScroll();
   }
 })();
+
+/* 結果画面でリードを受け取る（quiz.js / site-audit.js から呼ぶ）
+ *
+ * これまで3つの診断ツールは点数を出して終わりで、誰が受けたのか分からなかった。
+ * 相談は身構えるが、自分の点数の続きを受け取ることには抵抗が小さい。
+ *
+ * ページ遷移させないのが要点。/api/lead は成功時に /thanks/ へ303を返すが、
+ * 画面ごと移ると、いま見せた点数が消える。fetchで送って画面に留める。 */
+window.leadCapture = function (opts) {
+  var wrap = document.createElement("section");
+  wrap.className = "lead-capture";
+  wrap.innerHTML =
+    '<div class="lc-head"><strong>' + opts.title + '</strong>' +
+    '<span>' + opts.sub + '</span></div>' +
+    '<form class="lc-form" novalidate>' +
+    '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+    '<label>お名前 <input type="text" name="name" required autocomplete="name"></label>' +
+    '<label>会社名・店舗名 <input type="text" name="company" required autocomplete="organization"></label>' +
+    '<label>メールアドレス <input type="email" name="email" required autocomplete="email"></label>' +
+    '<button type="submit" class="btn btn-primary">診断結果を受け取る</button>' +
+    '<p class="lc-note">送るのは診断結果とその読み方だけです。' +
+    '<a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信してください。</p>' +
+    '<p class="lc-msg" role="status" aria-live="polite"></p></form>';
+
+  var form = wrap.querySelector(".lc-form");
+  var msg = wrap.querySelector(".lc-msg");
+  var btn = wrap.querySelector("button");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { msg.textContent = "未入力の項目があります。"; return; }
+    btn.disabled = true;
+    msg.textContent = "送信しています…";
+    var fd = new FormData(form);
+    fd.append("form_type", opts.formType);
+    fd.append("message", opts.detail);
+    fetch("/api/lead", { method: "POST", body: fd })
+      .then(function (r) {
+        if (!r.ok) return r.text().then(function (t) { throw new Error(t); });
+        if (window.trackLead) window.trackLead("lead_form_submit", { lead_route: opts.route });
+        form.innerHTML =
+          '<p class="lc-done"><strong>お送りしました。</strong>' +
+          '数分で届かない場合は迷惑メールをご確認ください。</p>';
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        msg.textContent = String(err.message || "").slice(0, 120) ||
+          "送信できませんでした。恐れ入りますが 06-4305-7547 までご連絡ください。";
+      });
+  });
+  return wrap;
+};
