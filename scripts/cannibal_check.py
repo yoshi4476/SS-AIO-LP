@@ -59,8 +59,14 @@ def norm_kw(s):
 
     「aio 診断」と「aio診断」は検索エンジンからは同じ意図に見える。
     分けて数えると、同じ語を2記事が狙っている状態を見逃す。
+
+    全角の英数字もそろえる。管制塔（hub.gs）の normKw_ は変換していたのに
+    こちらは素通りしていたため、「ＡＩＯ診断」を管制塔は弾き、
+    こちらは通すという食い違いが起きていた。
     """
-    return _NOISE.sub("", str(s)).lower()
+    import unicodedata
+    t = unicodedata.normalize("NFKC", str(s))
+    return _NOISE.sub("", t).lower()
 
 
 def kw_tokens(s):

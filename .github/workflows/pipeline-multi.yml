@@ -136,6 +136,28 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: python scripts/cannibal_check.py --cross || true
 
+      # 手順書に「必ず実行すること」と書いても、それは関門ではない。
+      # 実行を忘れれば素通りする。実際、タイトル類似だけのゲートを通り抜けて
+      # 狙う範囲が8記事と重なり、51語・表示484回でクリック0の記事ができた。
+      # ここで止めれば、書き始める前に判定が終わる。
+      - name: 食い合いゲート（執筆前）
+        if: steps.site.outputs.skip != 'yes'
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          out=$(python scripts/kw_gate.py --before --site "${{ steps.site.outputs.id }}") || true
+          rm -f indexing-service-account.json
+          echo "$out"
+          if echo "$out" | grep -q "KW_GATE=block"; then
+            echo "::error::次のKWが既存ページと食い合います。台帳を直すまで記事を書きません"
+            exit 1
+          fi
+
       # 一次情報を先に集めておく。執筆側に任せると取りこぼすため、
       # 次に書くKWで文字起こしを取得し、本文を読める状態にしておく
       - name: 一次情報の収集（YouTube文字起こし）
@@ -163,6 +185,24 @@ jobs:
           claude -p "$(cat automation/multi_site_prompt.txt)" \
             --dangerously-skip-permissions --max-turns 160
           rm -f indexing-service-account.json
+
+      # 書き手が執筆前ゲートと違うKWを選ぶことがある。
+      # 実際に書かれた記事の keyword を見て、公開前にもう一度止める。
+      - name: 食い合いゲート（執筆後）
+        if: steps.site.outputs.skip != 'yes'
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          out=$(python scripts/kw_gate.py --after --site "${{ steps.site.outputs.id }}") || true
+          rm -f indexing-service-account.json
+          echo "$out"
+          if echo "$out" | grep -q "KW_GATE=block"; then
+            echo "::error::書かれた記事が既存ページと食い合います。公開しません"
+            exit 1
+          fi
 
       - name: 自リポジトリの記事をコミット
         if: steps.site.outputs.skip != 'yes'
@@ -209,6 +249,31 @@ jobs:
           done
           echo "::error::3回ともデプロイ失敗。記事はコミット済みなので次回のデプロイで反映される"
           exit 1
+
+      # ワークフローが成功しても、デプロイだけ落ちていることがある。
+      # 実際、wrangler の依存パッケージの公開遅れでデプロイが3回とも失敗し、
+      # 記事はコミット済みなのに本番が数日古いままだった。
+      # そのために作った道具が、これまで手動でしか動いていなかった。
+      - name: 本番に届いたかの確認
+        if: steps.site.outputs.skip != 'yes'
+        continue-on-error: true      # 反映の遅れで run を落とさない。気づければよい
+        run: |
+          sleep 45                   # Cloudflare の配信が行き渡るのを待つ
+          python scripts/deploy_check.py || true
+          python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}" || true
+
+      # 品質ゲートはすべて原稿とビルド出力を見ている。公開後の実物を見る工程が
+      # 無かったため、社内向けTODOコメント・生成時の作業タグ </content>・
+      # 失敗すると訪問者を追い出すフォームが、そのまま本番に届いていた。
+      - name: 公開ページの検査
+        if: steps.site.outputs.skip != 'yes'
+        continue-on-error: true      # 検知が目的。反映待ちで run を落とさない
+        run: |
+          out=$(python scripts/live_check.py --site "${{ steps.site.outputs.id }}") || true
+          echo "$out"
+          if echo "$out" | grep -q "LIVE_CHECK=ng"; then
+            echo "::warning::公開ページに問題が見つかりました。ログを確認してください"
+          fi
 
       # KPIは1日1回でよいので、朝いちばんの枠のときに全サイト分をまとめて集計する
       - name: KPI集計 → 管制塔ダッシュボード

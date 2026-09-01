@@ -144,15 +144,45 @@ def _category_of(slug):
     return _front(slug, "category")
 
 
+def latest_slug(site):
+    """直近のコミットで追加された、そのサイトの記事のslugを返す
+
+    ワークフローから呼ぶときに slug を渡せない（何が書かれたかは
+    実行してみるまで分からない）。gitの差分から拾えば、
+    人が指定しなくても直近の1本を確認できる。
+    """
+    import subprocess
+    import sites as _s
+    root = Path(__file__).resolve().parent.parent
+    r = subprocess.run(["git", "show", "--name-only", "--pretty=", "HEAD"],
+                       capture_output=True, text=True, cwd=root)
+    for line in r.stdout.splitlines():
+        if not (line.startswith("articles/") and line.endswith(".md")):
+            continue
+        p = root / line
+        if not p.is_file():
+            continue
+        fm = p.read_text(encoding="utf-8-sig").split("---", 2)[1]
+        cat = (re.search(r"^category:\s*(\S+)", fm, re.M) or [0, ""])[1]
+        if _s.find_category_owner(cat) == site:
+            return p.stem
+    return ""
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True)
-    ap.add_argument("--slug", required=True)
+    ap.add_argument("--slug", help="省略時は直近のコミットで追加された記事を見る")
     ap.add_argument("--since", help="この時刻以降のビルドを見る（ISO8601・省略時は現在）")
     ap.add_argument("--build-timeout", type=int, default=BUILD_TIMEOUT)
     ap.add_argument("--live-timeout", type=int, default=LIVE_TIMEOUT)
     a = ap.parse_args()
-    ok, msgs = verify(a.site, a.slug, a.since, a.build_timeout, a.live_timeout)
+    slug = a.slug or latest_slug(a.site)
+    if not slug:
+        print("  この実行で追加された記事はありません")
+        print("VERIFY_OK=skip")
+        raise SystemExit(0)
+    ok, msgs = verify(a.site, slug, a.since, a.build_timeout, a.live_timeout)
     for m in msgs:
         print(f"  {m}")
     print("VERIFY_OK=yes" if ok else "VERIFY_OK=no")
