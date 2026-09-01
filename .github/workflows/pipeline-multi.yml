@@ -110,10 +110,17 @@ jobs:
         run: |
           out=$(python scripts/token_check.py) || true
           echo "$out"
-          if ! echo "$out" | grep -q "TOKEN_OK=yes"; then
-            echo "::error::SITE_PUSH_TOKEN が使えません。再発行してSecretsを更新してください"
-            exit 1
+          if echo "$out" | grep -q "TOKEN_OK=yes"; then
+            exit 0
           fi
+          # 原因を決めつけない。GitHub側の5xxで「再発行してください」と出すと、
+          # 無効でないトークンを作り直すことになり、原因が残ったままになる。
+          if echo "$out" | grep -q "トークンの問題ではありません"; then
+            echo "::error::GitHub側の問題で確認できませんでした。トークンの再発行では直りません。githubstatus.com を確認し、時間をおいて再実行してください"
+          else
+            echo "::error::SITE_PUSH_TOKEN が使えません。再発行して Secrets と .env の両方を更新してください"
+          fi
+          exit 1
 
       - name: 執筆ブリーフの表示（KW残数と担当領域をログに残す）
         if: steps.site.outputs.skip != 'yes'
