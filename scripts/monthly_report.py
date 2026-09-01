@@ -131,6 +131,149 @@ def renumber_sections(html):
                   html, count=1, flags=re.S)
 
 
+def group_totals(sc_, cur_m):
+    """3サイト全部の表示・クリックを取る。
+
+    自サイトの数字だけ見ても、グループ全体で伸びているのか、
+    他サイトから食い合って移っただけなのかが分からない。
+    """
+    try:
+        import sites as _s
+        out = []
+        for sid, cfg in _s.load_all().items():
+            try:
+                r = sc_.searchanalytics().query(
+                    siteUrl=f"https://{cfg['domain']}/",
+                    body={"startDate": f"{cur_m}-01", "endDate": month_end(cur_m)}
+                ).execute().get("rows", [])
+            except Exception:
+                out.append({"id": sid, "name": cfg["name"], "ok": False}); continue
+            x = r[0] if r else {}
+            out.append({"id": sid, "name": cfg["name"], "ok": True,
+                        "imp": int(x.get("impressions", 0)),
+                        "clicks": int(x.get("clicks", 0)),
+                        "pos": round(x.get("position", 0), 1),
+                        "ctr": round(x.get("ctr", 0) * 100, 2)})
+        return out
+    except Exception:
+        return []
+
+
+def group_table(rows, me):
+    if not rows:
+        return '<p class="note">3サイトの横断集計は取得できませんでした。</p>'
+    ti = sum(r.get("imp", 0) for r in rows if r.get("ok"))
+    tc = sum(r.get("clicks", 0) for r in rows if r.get("ok"))
+    body = []
+    for r in rows:
+        mark = ' style="background:#f5f8ff"' if r["id"] == me else ""
+        if not r.get("ok"):
+            body.append(f'<tr{mark}><td>{r["name"]}</td>'
+                        '<td colspan="4">権限付与待ち（取得できません）</td></tr>')
+            continue
+        share = r["imp"] / ti * 100 if ti else 0
+        body.append(
+            f'<tr{mark}><td>{r["name"]}{"（本レポート）" if r["id"] == me else ""}</td>'
+            f'<td class="num">{r["imp"]:,}</td><td class="num">{r["clicks"]}</td>'
+            f'<td class="num">{r["ctr"]}%</td><td class="num">{r["pos"]}位</td></tr>')
+    body.append(f'<tr><td><b>合計</b></td><td class="num"><b>{ti:,}</b></td>'
+                f'<td class="num"><b>{tc}</b></td><td class="num">—</td>'
+                f'<td class="num">—</td></tr>')
+    return ('<table><tr><th>サイト</th><th style="width:16%">表示回数</th>'
+            '<th style="width:13%">クリック</th><th style="width:12%">CTR</th>'
+            '<th style="width:13%">平均順位</th></tr>' + "".join(body) + "</table>")
+
+
+def section_heat(sections):
+    """セクション到達のヒートマップ。先頭を100%として、どこで落ちたかを見る"""
+    if not sections:
+        return ('<p class="note">セクション到達は計測されていません。'
+                '各セクションに <code>data-area</code> 属性を設置すると、'
+                '翌月から離脱位置が特定できます。</p>')
+    rows = []
+    for s in sections[:16]:
+        pct = s["pct"]
+        col = "#0d9488" if pct >= 60 else ("#2563eb" if pct >= 30 else "#dc2626")
+        flag = '<b style="color:#dc2626">離脱大</b>' if pct < 30 else ""
+        rows.append(
+            f'<tr><td>{s["name"]}</td><td class="num">{s["n"]}</td>'
+            f'<td class="num">{pct}%</td>'
+            f'<td><div style="background:{col};height:11px;width:{max(pct,2)}%;'
+            f'border-radius:2px"></div></td><td>{flag}</td></tr>')
+    return ('<table><tr><th style="width:22%">セクション</th><th style="width:12%">到達</th>'
+            '<th style="width:10%">割合</th><th>到達率</th><th style="width:12%"></th></tr>'
+            + "".join(rows) + "</table>")
+
+
+def fix_list(d):
+    """実測から改修点を出す。担当者の勘ではなく、数字が閾値を割った箇所だけ挙げる"""
+    out = []
+    b = d.get("behavior") or {}
+    ss = b.get("sessions", 0)
+
+    # 直帰が極端に高い入口。サイト平均から大きく外れたページだけ挙げる
+    lands = [x for x in (d.get("landing") or []) if x["sessions"] >= 5]
+    if lands:
+        avg = sum(x["engagement"] for x in lands) / len(lands)
+        for x in lands:
+            if x["engagement"] < max(avg - 25, 15):
+                out.append((
+                    "最優先", f'入口 <code>{x["path"]}</code> の直帰が突出',
+                    f'{x["sessions"]}セッション入って、エンゲージ率{x["engagement"]}%'
+                    f'（サイト平均{avg:.0f}%）。ファーストビューで何のページか伝わっているか、'
+                    f'流入元の話題とページの話題がつながっているかを確認します'))
+
+    # CTAは押されているのにフォームに来ない
+    cta, fs, fe = b.get("cta", 0), b.get("form_start", 0), b.get("form_submit", 0)
+    if cta >= 5 and fs <= max(cta * 0.15, 1):
+        out.append((
+            "最優先", "CTAは押されているが、フォームに到達していない",
+            f'CTA押下{cta}回に対しフォーム開始{fs}件。押す意思はあるため、'
+            f'CTAの遷移先とフォームの位置を確認します'))
+    if fs >= 3 and fe == 0:
+        out.append((
+            "高", "フォームを開いた人が全員離脱している",
+            f'開始{fs}件・送信{fe}件。項目数か必須指定を見直します'))
+
+    # CTAが読まれる位置にあるか
+    sec = d.get("sections") or []
+    cta_sec = [s for s in sec if "cta" in s["name"] or "form" in s["name"]]
+    if cta_sec:
+        worst = min(cta_sec, key=lambda x: x["pct"])
+        if worst["pct"] < 35:
+            out.append((
+                "高", "CTAがページの下すぎる位置にある",
+                f'<code>{worst["name"]}</code> の到達率は{worst["pct"]}%。'
+                f'到達率50%以上の位置にもCTAを置きます'))
+    if len(sec) >= 12:
+        thin = [s for s in sec if s["pct"] < 15]
+        if len(thin) >= 4:
+            out.append((
+                "中", "セクションが多く、下部が読まれていない",
+                f'{len(sec)}セクションのうち{len(thin)}個が到達率15%未満。'
+                f'統合か削除を検討します'))
+    if not sec:
+        out.append((
+            "高", "セクション到達が計測されていない",
+            "各セクションに <code>data-area</code> 属性が未設置です。"
+            "どこで離脱しているか分からないため、改修の根拠が作れません"))
+    if not out:
+        out.append(("—", "実測の閾値を割った箇所はありません",
+                    "現状の導線に大きな詰まりは検出されていません"))
+    return out
+
+
+def fix_table(d):
+    rows = []
+    for pr, title, body in fix_list(d):
+        cls = {"最優先": "jd-未達", "高": "jd-注意", "中": "jd-良好"}.get(pr, "jd-良好")
+        rows.append(f'<tr><td><span class="jd {cls}">{pr}</span></td>'
+                    f'<td><b>{title}</b></td><td>{body}</td></tr>')
+    return ('<table><tr><th style="width:10%">優先</th>'
+            '<th style="width:30%">見つかったこと</th><th>対処</th></tr>'
+            + "".join(rows) + "</table>")
+
+
 def month_end(label):
     """その月の末日。対象月が8月なら 2026-08-31 を返す。
 
@@ -351,6 +494,36 @@ def fetch_real():
                           for r in rep.rows if r.dimension_values[0].value not in skip][:6]
     except Exception:
         data["events"] = []
+
+    # --- 3サイト横断の表示・クリック ---
+    try:
+        data["group"] = group_totals(sc, cur_m)
+    except Exception:
+        data["group"] = []
+
+    # --- GA4: セクション到達（ヒートマップ）と行動の内訳 ---
+    # どこで読者が離脱したかは、合計の滞在時間では分からない。
+    # section_view_<名前> の到達数を先頭比で見ると、落ちる位置が特定できる。
+    try:
+        rep = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=cur_range, dimensions=[Dimension(name="eventName")],
+            metrics=[Metric(name="eventCount")], limit=120))
+        ev = {r.dimension_values[0].value: int(r.metric_values[0].value) for r in rep.rows}
+        sec = {k.replace("section_view_", ""): v for k, v in ev.items()
+               if k.startswith("section_view_")}
+        base = max(sec.values()) if sec else 0
+        data["sections"] = sorted(
+            [{"name": k, "n": v, "pct": round(v / base * 100) if base else 0}
+             for k, v in sec.items()], key=lambda x: -x["n"])
+        data["behavior"] = {
+            "sessions": ev.get("session_start", 0),
+            "cta": sum(v for k, v in ev.items() if k.startswith("cta")),
+            "form_start": ev.get("form_start", 0),
+            "form_submit": ev.get("form_submit", 0),
+        }
+    except Exception:
+        data["sections"] = []
+        data["behavior"] = {}
 
     # --- GSC: 順位帯の分布（リライト対象がどれだけ眠っているかの可視化）---
     try:
@@ -1418,8 +1591,8 @@ h3 {{ font-size: 11pt; margin: 14px 0 6px; color: var(--navy); }}
 .callout {{ border-left: 4px solid var(--gold); background: #fbf8ef; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 10px 0; font-size: 9.5pt; }}
 
 /* ---- 目次・サマリー ---- */
-.toc {{ columns: 2; column-gap: 22px; margin: 6px 0 0; }}
-.toc li {{ list-style: none; padding: 0.9px 0; border-bottom: 1px dotted var(--line); font-size: 8pt; break-inside: avoid; }}
+.toc {{ columns: 3; column-gap: 16px; margin: 6px 0 0; }}
+.toc li {{ list-style: none; padding: 0.9px 0; border-bottom: 1px dotted var(--line); font-size: 7.4pt; break-inside: avoid; }}
 .toc li span {{ color: var(--gold); font-weight: bold; margin-right: 8px; }}
 .exec {{ font-size: 10pt; line-height: 1.9; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 11px 15px; }}
 .hl-cards {{ display: flex; gap: 10px; margin-top: 12px; }}
@@ -1667,6 +1840,49 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 立ち上げ期はセッションよりも先に表示回数が動きます。
 表示回数が伸びていれば記事が検索結果に載り始めた証拠で、クリックとセッションは<b>その2〜3ヶ月後</b>に付いてきます。
 現時点でセッションが小さくても、表示回数と順位が上向いていれば計画どおりです。</div>
+</div>
+
+<!-- ページ: 3サイト横断の実績 -->
+<div class="sheet">
+<div class="sec"><span class="no">00</span><h2>3サイト横断の検索実績</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">自サイトの数字だけでは、<span class="mark">グループ全体で伸びたのか、
+他サイトから移っただけなのか</span>が分かりません。3サイトを並べて確認します。</p>
+{group_table(d.get("group", []), SITE_ID)}
+<p class="note">網掛けが本レポートの対象サイトです。合計はグループ全体の露出量を示します。
+同じテーマを複数サイトで扱うと検索評価を奪い合うため、
+1サイトだけ伸びて他が落ちている場合は、担当領域の重なりを確認します。</p>
+<div class="callout"><b>この表の見方:</b>
+表示回数は「検索結果に出た回数」、クリックは「選ばれた回数」です。
+立ち上げ期は表示が先に伸び、クリックはその2〜3ヶ月後に付いてきます。
+<b>合計の表示が増え続けているか</b>が、この段階で最も重要な指標です。</div>
+</div>
+
+<!-- ページ: 読まれ方のヒートマップと改修点（GA4実測） -->
+<div class="sheet">
+<div class="sec"><span class="no">00</span><h2>ページのどこで離脱しているか</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">滞在時間の合計では、<span class="mark">どこで読むのをやめたか</span>が分かりません。
+セクションごとの到達数を先頭比で見ると、落ちる位置が特定できます。</p>
+<h3>セクション到達（ヒートマップ）</h3>
+{section_heat(d.get("sections", []))}
+<h3 style="margin-top:14px">行動の内訳</h3>
+<table><tr><th style="width:28%">指標</th><th style="width:16%">件数</th><th>読み方</th></tr>
+<tr><td>セッション</td><td class="num">{(d.get("behavior") or {}).get("sessions", 0)}</td><td>訪問の総数</td></tr>
+<tr><td>CTA押下</td><td class="num">{(d.get("behavior") or {}).get("cta", 0)}</td><td>ボタンが押された回数。ここが少ない場合は位置か文言の問題</td></tr>
+<tr><td>フォーム開始</td><td class="num">{(d.get("behavior") or {}).get("form_start", 0)}</td><td>入力を始めた数。CTA押下より極端に少ない場合、遷移先で落ちている</td></tr>
+<tr><td>フォーム送信</td><td class="num">{(d.get("behavior") or {}).get("form_submit", 0)}</td><td>完了した数。開始との差が項目数の問題</td></tr>
+</table>
+</div>
+
+<!-- ページ: 実測から出た改修点 -->
+<div class="sheet">
+<div class="sec"><span class="no">00</span><h2>今月の改修点（実測から）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">担当者の印象ではなく、<span class="mark">数字が基準を割った箇所だけ</span>を挙げています。
+該当が無ければ「詰まりなし」と表示され、無理に指摘は作りません。</p>
+{fix_table(d)}
+<div class="callout"><b>優先順位の意味:</b>
+<b>最優先</b>は問い合わせ導線が塞がっている状態で、記事を増やしても成果になりません。
+<b>高</b>は今月中に手を入れれば翌月の数字に出ます。
+<b>中</b>は翌々月以降に効いてきます。</div>
 </div>
 
 <!-- ページ: AI検索分析 -->
