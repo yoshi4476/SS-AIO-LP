@@ -75,6 +75,8 @@ Google公式は、<a href="https://developers.google.com/search/docs/appearance/
 
 **症状2の原因は、検索順位・クローラー許可・文章構造・独自性・鮮度の5つに整理できます。**
 
+実際の進め方は[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)でも扱っています。
+
 自社のクエリでAI Overviewが表示されているのに、自社サイトが引用元に出てこない場合は、以下の5つを順に疑ってください。
 
 原因1は検索順位そのものの不足です。<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/" target="_blank" rel="noopener">Ahrefsが86万件のKW・400万件のURLを調べた調査</a>では、AI Overviewの引用元URLのうち上位10位以内は38%にとどまり、11〜100位からの引用も31.2%ありました。**上位表示は絶対条件ではありませんが、確率を大きく左右します。**
