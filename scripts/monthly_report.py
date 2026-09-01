@@ -19,6 +19,7 @@ GA4 + Search Console + スプレッドシート(記事作成ログ)から実デ�
 """
 import base64
 import json
+import re
 import sys
 import urllib.request
 from datetime import date, timedelta
@@ -91,6 +92,43 @@ def month_labels(n=6):
         d = (d - timedelta(days=1)).replace(day=1)
         labels.append(f"{d.year}-{d.month:02d}")
     return list(reversed(labels))
+
+
+def renumber_sections(html):
+    """セクション番号を振り直し、目次を本文から作り直す。
+
+    ページを足したり分けたりするたびに手で番号を直すと、必ずどこかで
+    重複する。実際に05・08・11が二重になり、目次は22件なのに本文は
+    26件という状態だった。番号が飛び、目次と中身が食い違う資料は
+    「作りが雑」に見え、中身まで疑われる。
+
+    目次も手で並べていたため、ページを分けるたびにずれた。
+    本文の見出しから作れば、二度とずれない。
+    """
+    n = [0]
+    titles = []
+
+    def bump(m):
+        n[0] += 1
+        return f'<span class="no">{n[0]:02d}</span>'
+
+    # 番号と見出しを同時に拾う。「（続き 2/2）」は目次に出さない
+    def collect(m):
+        titles.append(re.sub(r"（続き[^）]*）", "", m.group(2)).strip())
+        return m.group(0)
+
+    html = re.sub(r'<span class="no">\d+</span>', bump, html)
+    re.sub(r'<span class="no">(\d+)</span><h2>([^<]+)</h2>', collect, html)
+
+    seen, items = set(), []
+    for i, ti in enumerate(titles, 1):
+        if ti in seen:
+            continue        # 分割ページは1項目にまとめる
+        seen.add(ti)
+        items.append(f'<li><span>{i:02d}</span>{ti}</li>')
+    return re.sub(r'<ul class="toc">.*?</ul>',
+                  '<ul class="toc">' + "".join(items) + "</ul>",
+                  html, count=1, flags=re.S)
 
 
 def month_end(label):
@@ -1325,7 +1363,8 @@ def render(d, a):
         "エグゼクティブサマリー（3行まとめ）", "指標の評価（良し悪しの判定）",
         "KPIダッシュボード（前月比・6ヶ月推移）",
         "検索パフォーマンス詳細（クエリ分析）", "記事別パフォーマンス+サイト資産",
-        "流入構造分析（チャネル・デバイス・日別）", "AI検索（AIO/LLMO）分析",
+        "流入構造分析（チャネル・デバイス・日別）", "チャネル別の打ち手",
+        "AI検索（AIO/LLMO）分析",
         "読まれ方の質（エンゲージメント・滞在・回遊）",
         "入口ページ別の成績（改修の根拠）",
         "検索順位の分布（伸びしろの在り処）",
@@ -1334,7 +1373,8 @@ def render(d, a):
         "LPコンバージョン分析（ファネル+ヒートマップ）", "成果の要因分析",
         "改善プラン（優先度つき対比表）",
         "サイト全体監査（記事別の修正指示）", "サイト全体監査（サイト構造・導線）",
-        "コンテンツ実績", "前月目標の達成率と来月のKPI目標", "来月の実行スケジュール",
+        "コンテンツ実績", "1記事に含まれるもの",
+        "前月目標の達成率と来月のKPI目標", "来月の実行スケジュール",
         "リスクと前提条件", "付録: 指標の定義"]
     toc_html = "".join(f'<li><span>{i:02d}</span>{t}</li>' for i, t in enumerate(toc_items, 1))
 
@@ -1379,7 +1419,7 @@ h3 {{ font-size: 11pt; margin: 14px 0 6px; color: var(--navy); }}
 
 /* ---- 目次・サマリー ---- */
 .toc {{ columns: 2; column-gap: 22px; margin: 6px 0 0; }}
-.toc li {{ list-style: none; padding: 1.4px 0; border-bottom: 1px dotted var(--line); font-size: 8.2pt; break-inside: avoid; }}
+.toc li {{ list-style: none; padding: 0.9px 0; border-bottom: 1px dotted var(--line); font-size: 8pt; break-inside: avoid; }}
 .toc li span {{ color: var(--gold); font-weight: bold; margin-right: 8px; }}
 .exec {{ font-size: 10pt; line-height: 1.9; background: #f6f9fd; border: 1px solid var(--line); border-radius: 10px; padding: 11px 15px; }}
 .hl-cards {{ display: flex; gap: 10px; margin-top: 12px; }}
@@ -1602,7 +1642,12 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 {svg_series(d.get("daily", {}).get("clicks", []), d.get("daily", {}).get("labels", []), "#0d9488", "検索クリック数の日次推移")}
 <p class="note">読み方: 自然検索比率が高いほど広告費に依存しない集客構造。日別推移の右肩上がりは新規記事のインデックス進行を示します。
 スマートフォン比率が高い場合、記事の冒頭結論・図解・表の見やすさがCVを左右します。</p>
-<h3 style="margin-top:14px">チャネルごとの意味と、増やすための打ち手</h3>
+</div>
+
+<!-- ページ: チャネル別の打ち手（流入構造分析から分割）
+     1ページに詰めると次ページへ流れ、表が途中で切れる -->
+<div class="sheet">
+<div class="sec"><span class="no">07</span><h2>チャネル別の打ち手</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">流入経路は「どこから来たか」ではなく<span class="mark">「何をすれば増えるか」</span>で見ます。
 チャネルごとに効く施策がまったく違うため、内訳の変化はそのまま来月の施策の優先順位になります。</p>
 <table>
@@ -1912,7 +1957,12 @@ GA4の独自イベント（画面内40%表示で発火）による計測で、�
 <td>基準に届かない記事は、システム上サイトに載せられません。
 「本数が足りないから品質を落として出す」が構造的に起きない設計です</td></tr>
 </table>
-<h3>1記事に含まれるもの</h3>
+</div>
+
+<!-- ページ: 記事の中身（コンテンツ実績から分割）
+     検査の表と併記すると1ページに収まらず、表が途中で切れる -->
+<div class="sheet">
+<div class="sec"><span class="no">19</span><h2>1記事に含まれるもの</h2><div class="gold"></div></div>
 <table>
 <tr><td style="width:20%"><b>本文</b></td><td>5,000字以上</td>
 <td style="width:20%"><b>画像</b></td><td>アイキャッチ1枚＋図解3〜5枚</td></tr>
@@ -2033,6 +2083,7 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     html_path = out_dir / "report.html"
     pdf_path = out_dir / "report.pdf"
+    html = renumber_sections(html)
     html_path.write_text(html, encoding="utf-8")
 
     # 来月号で達成率を突合するため、設定した目標を翌月のキーで保存する
