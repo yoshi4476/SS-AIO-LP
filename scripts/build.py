@@ -373,12 +373,17 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         print(f"WARN: マーカー不足: {meta['slug']} は強調が{marker_count}箇所"
               f"（基準8箇所以上・推奨12-18箇所。**太字** か ==マーカー== を追加すること）")
 
-    # 文字数チェック（Phase 5基準: 本文5,000字以上。タグ・空白を除いた実文字数で判定）
+    # 文字数チェック（タグ・空白を除いた実文字数で判定）
+    # 基準は depth で変わる。全記事を同じ長さに揃えると、それ自体が量産の指紋になる。
+    # 一律5,000字で見ていたため、手順や定義だけの quick 記事を誤って警告していた。
     plain = re.sub(r"<[^>]+>", "", content)
     plain = re.sub(r"\s", "", plain)
-    if len(plain) < 5000:
+    need = {"quick": 3000, "standard": 5000, "deep": 8000}.get(
+        str(meta.get("depth") or "standard"), 5000)
+    if len(plain) < need:
         print(f"WARN: 文字数不足: {meta['slug']} は本文{len(plain):,}字"
-              f"（基準5,000字以上。セクション追加・実務情報の深掘りで増強すること）")
+              f"（depth: {meta.get('depth') or 'standard'} の基準{need:,}字以上。"
+              f"セクション追加・実務情報の深掘りで増強すること）")
 
     # 画像実在チェック（生成漏れ・パスtypoの検出。生成: python scripts/make_images.py <slug>）
     if meta.get("eyecatch") and not (SITE / meta["eyecatch"].lstrip("/")).exists():

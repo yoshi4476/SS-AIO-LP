@@ -56,7 +56,15 @@ def main():
     # コードブロック内はH2・文言カウントの対象外（プロンプト例の ## 等を誤検出しない）
     body_nc = re.sub(r"```.*?```", "", body, flags=re.S)
 
-    plain = re.sub(r"\s|<[^>]+>", "", re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", body))
+    # 読者が読む文字だけを数える。build.py と同じ数え方にそろえる。
+    # 見出しの # や表の | まで数えていたため、採点は5,251字で通ったのに
+    # ビルドは4,922字で警告する、という食い違いが起きていた。
+    # その結果、24本が基準の直下（4,844〜4,998字）に並んだ。
+    try:
+        import md2html
+        plain = re.sub(r"\s|<[^>]+>", "", md2html.convert(body)[0])
+    except Exception:
+        plain = re.sub(r"\s|<[^>]+>", "", re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", body))
     checks = []
 
     def add(name, ok, detail, warn=False):
