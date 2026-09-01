@@ -151,6 +151,35 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
 JP_ERA = "%Y年%-m月%-d日"
 
 
+def insert_mid_cta(html, cfg):
+    """本文の中盤に問い合わせへの導線を1つ差し込む。
+
+    記事末のCTAだけだと、読み終えた読者しか見られない。補助金サイトの
+    実測では、ボタン押下12回のうち問い合わせへ向かうものが1回だった。
+    診断や記事一覧など途中で終わる導線に流れており、問い合わせへの
+    入口そのものが足りていない。
+
+    置く場所はH2の切れ目。段落の途中に入れると読みを断ち切る。
+    """
+    heads = [m.start() for m in re.finditer(r"<h2[ >]", html)]
+    if len(heads) < 5:
+        return html
+    pos = heads[len(heads) // 2]
+    label = (cfg.get("cta") or {}).get("label", "無料で相談する")
+    url = (cfg.get("cta") or {}).get("url", "/#contact")
+    block = (
+        '<div class="cta-mid" style="background:#f4f7fc;border:1px solid #dbe4f0;'
+        'border-radius:12px;padding:20px;margin:28px 0;text-align:center">'
+        '<p style="margin:0 0 12px;font-weight:700">'
+        'ここまでの内容が自社に当てはまるか、確認しませんか。</p>'
+        f'<a class="cta-button" href="{url}" data-cta="article_mid_contact" '
+        'style="display:inline-block;padding:12px 26px;border-radius:8px;'
+        f'background:#1b4fa0;color:#fff;text-decoration:none;font-weight:700">{label}</a>'
+        '<p style="margin:10px 0 0;font-size:.82rem;color:#5b6980">'
+        '要件の確認だけでもご利用いただけます</p></div>' + "\n")
+    return html[:pos] + block + html[pos:]
+
+
 def _jp_date(iso):
     y, m, d = str(iso).split("-")
     return f"{int(y)}年{int(m)}月{int(d)}日"
@@ -276,7 +305,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         "READ_MIN": str(max(3, round(len(plain) / 600))),
         "LEAD_DANGEN": re.sub(r"<[^>]+>", "", lead).strip(),
         "TARGET": target_txt,
-        "BODY": html,
+        "BODY": insert_mid_cta(html, cfg),
         "TOC_ITEMS": toc,
         "FAQ_HTML": faq_html,
         "FAQ_JSONLD": faq_jsonld,

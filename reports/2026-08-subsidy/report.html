@@ -236,12 +236,12 @@ ol.head3 li::before { content: counter(h); position: absolute; left: 0; top: 10p
 <div class="hl-cards">
   <div class="hl"><div class="k">公開記事ストック<span style="font-weight:normal;color:#8a94a6">（今までに出した記事の合計）</span></div><div class="v">64本</div><div class="s">品質90点以上のみ</div></div>
   <div class="hl"><div class="k">平均品質スコア<span style="font-weight:normal;color:#8a94a6">（記事の採点（100点満点））</span></div><div class="v">94.4点</div><div class="s">6観点採点/100点</div></div>
-  <div class="hl"><div class="k">平均文字数<span style="font-weight:normal;color:#8a94a6">（記事1本あたりの長さ）</span></div><div class="v">7,554字</div><div class="s">基準5,000字以上</div></div>
+  <div class="hl"><div class="k">平均文字数<span style="font-weight:normal;color:#8a94a6">（記事1本あたりの長さ）</span></div><div class="v">7,594字</div><div class="s">基準5,000字以上</div></div>
 </div>
 <h3 style="margin-top:14px">カテゴリ別の記事構成</h3>
 <div class="heatmap"><div class="hm-row"><div class="hm-label">hojokin</div><div class="hm-track"><div class="hm-bar" style="width:100%;background:#0d9488"></div></div><div class="hm-val">64<span style="color:#5b6b84;font-weight:normal"> (100%)</span></div></div></div>
 <div class="callout"><b>資産の考え方:</b> 記事は広告と違い、公開後も検索とAI回答の両方から流入を生み続けるストック資産です。
-1記事あたりの平均7,554字・平均94.4点の品質を保ったまま蓄積することが、ドメイン全体の評価とAI引用確率を押し上げます。</div>
+1記事あたりの平均7,594字・平均94.4点の品質を保ったまま蓄積することが、ドメイン全体の評価とAI引用確率を押し上げます。</div>
 </div>
 
 <div class="sheet">
@@ -314,9 +314,10 @@ ol.head3 li::before { content: counter(h); position: absolute; left: 0; top: 10p
 <h3 style="margin-top:14px">行動の内訳</h3>
 <table><tr><th style="width:28%">指標</th><th style="width:16%">件数</th><th>読み方</th></tr>
 <tr><td>セッション</td><td class="num">68</td><td>訪問の総数</td></tr>
-<tr><td>CTA押下</td><td class="num">12</td><td>ボタンが押された回数。ここが少ない場合は位置か文言の問題</td></tr>
-<tr><td>フォーム開始</td><td class="num">1</td><td>入力を始めた数。CTA押下より極端に少ない場合、遷移先で落ちている</td></tr>
-<tr><td>フォーム送信</td><td class="num">1</td><td>完了した数。開始との差が項目数の問題</td></tr>
+<tr><td>ボタン押下（全体）</td><td class="num">12</td><td>サイト内のボタンが押された回数。診断・記事一覧なども含みます</td></tr>
+<tr><td>うち問い合わせ方向</td><td class="num">1</td><td>問い合わせフォームへ向かうボタン。ここが少ないと入口が足りていません</td></tr>
+<tr><td>入力開始</td><td class="num">1</td><td>入力を始めた数。CTA押下より極端に少ない場合、遷移先で落ちている</td></tr>
+<tr><td>送信完了</td><td class="num">1</td><td>完了した数。開始との差が項目数の問題</td></tr>
 </table>
 </div>
 
@@ -325,7 +326,7 @@ ol.head3 li::before { content: counter(h); position: absolute; left: 0; top: 10p
 <div class="sec"><span class="no">11</span><h2>今月の改修点（実測から）</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">担当者の印象ではなく、<span class="mark">数字が基準を割った箇所だけ</span>を挙げています。
 該当が無ければ「詰まりなし」と表示され、無理に指摘は作りません。</p>
-<table><tr><th style="width:10%">優先</th><th style="width:30%">見つかったこと</th><th>対処</th></tr><tr><td><span class="jd jd-未達">最優先</span></td><td><b>CTAは押されているが、フォームに到達していない</b></td><td>CTA押下12回に対しフォーム開始1件。押す意思はあるため、CTAの遷移先とフォームの位置を確認します</td></tr></table>
+<table><tr><th style="width:10%">優先</th><th style="width:30%">見つかったこと</th><th>対処</th></tr><tr><td><span class="jd jd-注意">高</span></td><td><b>押されているボタンが、問い合わせにつながっていない</b></td><td>ボタン押下12回のうち、問い合わせへ向かうものは1回。診断や記事一覧など、途中で終わる導線に流れています。問い合わせへの入口を増やします</td></tr></table>
 <div class="callout"><b>優先順位の意味:</b>
 <b>最優先</b>は問い合わせ導線が塞がっている状態で、記事を増やしても成果になりません。
 <b>高</b>は今月中に手を入れれば翌月の数字に出ます。
@@ -503,12 +504,12 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <div class="sheet">
 <div class="sec"><span class="no">18</span><h2>被リンクを送るべき記事（内部リンクの追加指示）</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">サイト内のどの記事へ、どの記事からリンクを足すかの指示です。
-本文中のリンクを数えると、公開64記事で<b>最小1本・中央4本・最大40本</b>と開いています
+本文中のリンクを数えると、公開64記事で<b>最小2本・中央4本・最大40本</b>と開いています
 （一覧・関連記事欄の自動リンクは除く）。人気のある記事にリンクが集まり、
 順位が1ページ目の手前で止まっている記事ほど不足しています。
 記事を新しく書かずに順位を動かせる、最も費用のかからない打ち手です。</p>
 <table><tr><th style="width:26%">リンク先（この記事へ送る）</th><th style="width:9%">現在</th>
-<th style="width:26%">優先する理由</th><th>リンク元にする記事</th></tr><tr><td><b>美容室のIT導入補助金｜対象ツール3分野と対象外の注</b><br><span class="mono">/blog/it-hojokin-biyoushitsu/</span></td><td class="num">7本</td><td>15.7位・表示20回（1ページ目の手前で停滞）</td><td>宿泊業のIT導入補助金は有利？20人以下／学習塾はIT導入補助金の対象？入退室通知／製造業のIT導入補助金｜技能継承と人手不</td></tr><tr><td><b>ものづくり補助金はエステサロン向け、脱毛機3タイプの</b><br><span class="mono">/blog/monozukuri-hojokin-esute/</span></td><td class="num">1本</td><td>被リンク1本（サイト内で孤立ぎみ）</td><td>ネイルサロンのものづくり補助金｜対象は集／ものづくり補助金は運送業で使える？対象設／ものづくり補助金は美容室で使える？対象機</td></tr><tr><td><b>補助金でAIチャットボット導入｜対象条件と申請の流れ</b><br><span class="mono">/blog/ai-hojokin-chatbot-donyu/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>AI導入補助金の申請に失敗する5つの原因／AI導入補助金の申請のやり方｜受給までの／建設業の2024年問題をAI導入補助金で</td></tr><tr><td><b>AI導入補助金のみらデジ経営チェックは終了｜代わりの</b><br><span class="mono">/blog/ai-hojokin-miradigi-keieicheck/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>AI導入補助金の申請に失敗する5つの原因／AI導入補助金はクリニックも対象？電子カ／AI導入補助金の対象ツール6分野｜対象外</td></tr><tr><td><b>学習塾はIT導入補助金の対象？入退室通知と課金の境界</b><br><span class="mono">/blog/it-hojokin-gakushujuku/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>運送業のIT導入補助金｜デジタコ・運行管／宿泊業のIT導入補助金は有利？20人以下／飲食店のIT導入補助金｜名称変更後の3つ</td></tr><tr><td><b>製造業のIT導入補助金｜技能継承と人手不足への活かし</b><br><span class="mono">/blog/it-hojokin-seizougyou/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>宿泊業のIT導入補助金は有利？20人以下／飲食店のIT導入補助金｜名称変更後の3つ／美容室のIT導入補助金｜対象ツール3分野</td></tr><tr><td><b>事業再構築補助金 美容室の脱毛転換3事例｜美容師法の</b><br><span class="mono">/blog/jigyou-saikouchiku-biyoushitsu-jirei/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>事業再構築補助金で農業が使えたのは6次産／宿泊業のインバウンド投資を支えた事業再構／事業再構築補助金の確定申告｜個人事業主が</td></tr></table>
+<th style="width:26%">優先する理由</th><th>リンク元にする記事</th></tr><tr><td><b>美容室のIT導入補助金｜対象ツール3分野と対象外の注</b><br><span class="mono">/blog/it-hojokin-biyoushitsu/</span></td><td class="num">7本</td><td>15.7位・表示20回（1ページ目の手前で停滞）</td><td>宿泊業のIT導入補助金は有利？20人以下／学習塾はIT導入補助金の対象？入退室通知／製造業のIT導入補助金｜技能継承と人手不</td></tr><tr><td><b>AI導入補助金のみらデジ経営チェックは終了｜代わりの</b><br><span class="mono">/blog/ai-hojokin-miradigi-keieicheck/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>AI導入補助金の申請に失敗する5つの原因／AI導入補助金はクリニックも対象？電子カ／AI導入補助金の対象ツール6分野｜対象外</td></tr><tr><td><b>学習塾はIT導入補助金の対象？入退室通知と課金の境界</b><br><span class="mono">/blog/it-hojokin-gakushujuku/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>運送業のIT導入補助金｜デジタコ・運行管／宿泊業のIT導入補助金は有利？20人以下／飲食店のIT導入補助金｜名称変更後の3つ</td></tr><tr><td><b>ものづくり補助金2025年度｜個人事業主の申請ガイド</b><br><span class="mono">/blog/monozukuri-hojokin-2025-kojinjigyonushi/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>ものづくり補助金は宿泊業で使える？旅館業／ものづくり補助金を運送業で使う｜対象設備／ものづくり補助金は資本金オーバーでも対象</td></tr><tr><td><b>農業の補助金の申請方法｜制度の選び方と5ステップ【2</b><br><span class="mono">/blog/nougyou-hojokin-shinsei-houhou/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>個人事業主の給付金・補助金｜申請方法と使／AI導入補助金の実績報告の書き方｜必要書／農業の倉庫投資は建物費NG｜ものづくり補</td></tr><tr><td><b>AI導入補助金2026｜クリニックの次の締切と今から</b><br><span class="mono">/blog/ai-hojokin-clinic-2026-schedule/</span></td><td class="num">3本</td><td>被リンク3本（サイト内で孤立ぎみ）</td><td>AI導入補助金の実績報告の書き方｜必要書／AI導入補助金の申請のやり方｜受給までの／建設業の2024年問題をAI導入補助金で</td></tr><tr><td><b>IT導入補助金のパソコン購入｜個人事業主の条件と上限</b><br><span class="mono">/blog/it-hojokin-kojinjigyonushi-pc/</span></td><td class="num">3本</td><td>被リンク3本（サイト内で孤立ぎみ）</td><td>IT導入補助金の中小企業とは？業種別4区／学習塾はIT導入補助金の対象？入退室通知／飲食店のIT導入補助金｜名称変更後の3つ</td></tr></table>
 <p class="note">作業手順: リンク元の記事本文で、リンク先の話題に触れている段落を探し、
 その直後に1文を足してリンクを置きます。まとめ・FAQの中ではなく<b>本文H2の1文結論の直後</b>に置くこと。
 読者が次に知りたくなる位置と一致し、AI検索にも文脈ごと読まれます。
@@ -520,7 +521,7 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <div class="sec"><span class="no">19</span><h2>被リンクを送るべき記事（続き 2）</h2><div class="gold"></div></div>
 <table><tr><th style="width:26%">リンク先（この記事へ送る）</th><th style="width:9%">現在</th>
 <th style="width:26%">優先する理由</th><th>リンク元にする記事</th></tr>
-<tr><td><b>事業再構築補助金で個人事業主が出す事業化状況報告｜5</b><br><span class="mono">/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>事業再構築補助金は法人成り後も続く？承継／事業再構築補助金で農業が使えたのは6次産／事業再構築補助金の飲食店活用事例3選と今</td></tr><tr><td><b>小規模事業者持続化補助金｜飲食店で対象になる4つの投</b><br><span class="mono">/blog/jizokuka-hojokin-inshokuten-jirei/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>小規模事業者持続化補助金｜クリニックは対／小規模事業者持続化補助金｜美容室の書き方／小規模事業者持続化補助金2025｜建設業</td></tr><tr><td><b>ものづくり補助金2025年度｜個人事業主の申請ガイド</b><br><span class="mono">/blog/monozukuri-hojokin-2025-kojinjigyonushi/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>ものづくり補助金は宿泊業で使える？旅館業／ものづくり補助金は運送業で使える？対象設／ものづくり補助金は資本金オーバーでも対象</td></tr><tr><td><b>ネイルサロンのものづくり補助金｜対象は集塵機とAI機</b><br><span class="mono">/blog/monozukuri-hojokin-nail-salon/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>ものづくり補助金は美容室で使える？対象機／農業の倉庫投資は建物費NG｜ものづくり補／ものづくり補助金は運送業で使える？対象設</td></tr><tr><td><b>ものづくり補助金は宿泊業で使える？旅館業200人以下</b><br><span class="mono">/blog/monozukuri-hojokin-shukuhakugyou/</span></td><td class="num">2本</td><td>被リンク2本（サイト内で孤立ぎみ）</td><td>ものづくり補助金は飲食店で使える？採択事／ものづくり補助金は製造業でどう使う？対象／ものづくり補助金はクリニックで使える？医</td></tr></table>
+<tr><td><b>IT導入補助金はネイルサロンも使える？材料費と面貸し</b><br><span class="mono">/blog/it-hojokin-nail-salon/</span></td><td class="num">3本</td><td>被リンク3本（サイト内で孤立ぎみ）</td><td>宿泊業のIT導入補助金は有利？20人以下／飲食店のIT導入補助金｜名称変更後の3つ／運送業のIT導入補助金｜デジタコ・運行管</td></tr><tr><td><b>製造業のIT導入補助金｜技能継承と人手不足への活かし</b><br><span class="mono">/blog/it-hojokin-seizougyou/</span></td><td class="num">3本</td><td>被リンク3本（サイト内で孤立ぎみ）</td><td>宿泊業のIT導入補助金は有利？20人以下／美容室のIT導入補助金｜対象ツール3分野／学習塾はIT導入補助金の対象？入退室通知</td></tr><tr><td><b>事業再構築補助金 クリニックは医療法人不可｜個人開業</b><br><span class="mono">/blog/jigyou-saikouchiku-clinic-jirei/</span></td><td class="num">3本</td><td>被リンク3本（サイト内で孤立ぎみ）</td><td>事業再構築補助金は建設業も対象｜3つの事／事業再構築補助金で農業が使えたのは6次産／ものづくり補助金はクリニックで使える？医</td></tr><tr><td><b>事業再構築補助金で農業が使えたのは6次産業化｜対象外</b><br><span class="mono">/blog/jigyou-saikouchiku-nougyou-jirei/</span></td><td class="num">3本</td><td>被リンク3本（サイト内で孤立ぎみ）</td><td>事業再構築補助金 美容室の脱毛転換3事例／事業再構築補助金の飲食店活用事例3選と今／事業再構築補助金 クリニックは医療法人不</td></tr><tr><td><b>宿泊業のインバウンド投資を支えた事業再構築補助金、今</b><br><span class="mono">/blog/jigyou-saikouchiku-shukuhakugyou-jirei/</span></td><td class="num">3本</td><td>被リンク3本（サイト内で孤立ぎみ）</td><td>事業再構築補助金の飲食店活用事例3選と今／事業再構築補助金 クリニックは医療法人不／事業再構築補助金は個人事業主もいつまで？</td></tr></table>
 </div>
 
 <!-- LP改修プラン -->

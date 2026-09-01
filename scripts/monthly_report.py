@@ -255,13 +255,22 @@ def fix_list(d):
                     f'（サイト平均{avg:.0f}%）。ファーストビューで何のページか伝わっているか、'
                     f'流入元の話題とページの話題がつながっているかを確認します'))
 
-    # CTAは押されているのにフォームに来ない
+    # CTAとフォームの落差。ただし「CTA」には診断・記事一覧など
+    # フォームへ向かわないものが混ざる。全部を同じ扱いにすると、
+    # 実際には起きていない詰まりを毎月報告することになる。
     cta, fs, fe = b.get("cta", 0), b.get("form_start", 0), b.get("form_submit", 0)
-    if cta >= 5 and fs <= max(cta * 0.15, 1):
+    to_form = b.get("cta_to_form", cta)   # フォームへ向かうCTAだけ
+    if to_form >= 5 and fs <= max(to_form * 0.15, 1):
         out.append((
-            "最優先", "CTAは押されているが、フォームに到達していない",
-            f'CTA押下{cta}回に対しフォーム開始{fs}件。押す意思はあるため、'
-            f'CTAの遷移先とフォームの位置を確認します'))
+            "最優先", "問い合わせボタンは押されているが、入力が始まっていない",
+            f'ボタン押下{to_form}回に対し入力開始{fs}件。押す意思はあるため、'
+            f'ボタンの遷移先とフォームの位置を確認します'))
+    elif cta >= 8 and to_form <= cta * 0.3:
+        out.append((
+            "高", "押されているボタンが、問い合わせにつながっていない",
+            f'ボタン押下{cta}回のうち、問い合わせへ向かうものは{to_form}回。'
+            f'診断や記事一覧など、途中で終わる導線に流れています。'
+            f'問い合わせへの入口を増やします'))
     if fs >= 3 and fe == 0:
         out.append((
             "高", "フォームを開いた人が全員離脱している",
@@ -547,9 +556,15 @@ def fetch_real():
         data["sections"] = sorted(
             [{"name": k, "n": v, "pct": round(v / base * 100) if base else 0}
              for k, v in sec.items()], key=lambda x: -x["n"])
+        # フォームへ向かうCTAだけを別に数える。診断・記事一覧・
+        # ヘッダーのリンクを同じ「CTA」に混ぜると、詰まりを誤検知する
+        FORM_CTA = ("form", "contact", "soudan", "consult", "lp", "mv")
         data["behavior"] = {
             "sessions": ev.get("session_start", 0),
             "cta": sum(v for k, v in ev.items() if k.startswith("cta")),
+            "cta_to_form": sum(v for k, v in ev.items()
+                               if k.startswith("cta")
+                               and any(w in k for w in FORM_CTA)),
             "form_start": ev.get("form_start", 0),
             "form_submit": ev.get("form_submit", 0),
         }
@@ -1899,9 +1914,10 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <h3 style="margin-top:14px">行動の内訳</h3>
 <table><tr><th style="width:28%">指標</th><th style="width:16%">件数</th><th>読み方</th></tr>
 <tr><td>セッション</td><td class="num">{(d.get("behavior") or {}).get("sessions", 0)}</td><td>訪問の総数</td></tr>
-<tr><td>CTA押下</td><td class="num">{(d.get("behavior") or {}).get("cta", 0)}</td><td>ボタンが押された回数。ここが少ない場合は位置か文言の問題</td></tr>
-<tr><td>フォーム開始</td><td class="num">{(d.get("behavior") or {}).get("form_start", 0)}</td><td>入力を始めた数。CTA押下より極端に少ない場合、遷移先で落ちている</td></tr>
-<tr><td>フォーム送信</td><td class="num">{(d.get("behavior") or {}).get("form_submit", 0)}</td><td>完了した数。開始との差が項目数の問題</td></tr>
+<tr><td>ボタン押下（全体）</td><td class="num">{(d.get("behavior") or {}).get("cta", 0)}</td><td>サイト内のボタンが押された回数。診断・記事一覧なども含みます</td></tr>
+<tr><td>うち問い合わせ方向</td><td class="num">{(d.get("behavior") or {}).get("cta_to_form", 0)}</td><td>問い合わせフォームへ向かうボタン。ここが少ないと入口が足りていません</td></tr>
+<tr><td>入力開始</td><td class="num">{(d.get("behavior") or {}).get("form_start", 0)}</td><td>入力を始めた数。CTA押下より極端に少ない場合、遷移先で落ちている</td></tr>
+<tr><td>送信完了</td><td class="num">{(d.get("behavior") or {}).get("form_submit", 0)}</td><td>完了した数。開始との差が項目数の問題</td></tr>
 </table>
 </div>
 
