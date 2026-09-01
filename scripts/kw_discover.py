@@ -169,9 +169,16 @@ def hub_client_enabled_but_unreadable(ledger_ok):
         return False
 
 def is_dup(kw, arts, seen):
+    """すでに書いた語とぶつかるか
+
+    タイトルとの文字類似で見ていたため、「it導入補助金 学習塾」と
+    「it導入補助金 飲食店」のようにカテゴリ語が同じだけのKWまで弾いていた。
+    食い合うのは、狙う範囲が含まれる関係のときだけ。
+    """
     if any(dice(kw, s) >= 0.75 for s in seen):
         return True
-    return any(dice(kw, a["title"]) >= DUP_THRESHOLD for a in arts)
+    from cannibal_check import kw_conflicts
+    return bool(kw_conflicts(kw, arts))
 
 
 def main():

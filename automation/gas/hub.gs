@@ -293,11 +293,16 @@ function normKw_(s) {
  * 同一サイト内の重複は順位が割れる。サイトをまたぐ重複は担当領域の侵食で、
  * グループ全体で見ると同じ語を自社2サイトで奪い合うことになる。どちらも止める。
  */
-function kwConflict_(site, keyword) {
+function kwConflict_(site, keyword, rows, selfRow) {
   const n = normKw_(keyword);
   if (!n) return { ok: false, error: 'キーワードが空です' };
   const same = [], cross = [];
-  kwRows_().forEach(function (r) {
+  // rows を渡せるようにしてある。渡さないと1件ごとに台帳を読み直すことになり、
+  // 未着手が数百件あるとGASの実行時間の上限に当たる。
+  // selfRow は「その語自身の台帳行」。台帳から取り出したKWを審査するときは、
+  // 自分の行を重複として数えてしまい、どのKWも着手できなくなる。
+  (rows || kwRows_()).forEach(function (r, idx) {
+    if (selfRow && idx + 2 === selfRow) return;
     const st = String(r[2]).trim();
     if (st === '対象外' || st === '取り下げ') return;   // 生きている行だけ見る
     const m = normKw_(r[1]);
@@ -333,7 +338,7 @@ function nextKw_(site) {
   const blocked = [];
   for (let i = 0; i < cands.length; i++) {
     const c = cands[i];
-    const cf = kwConflict_(c.site, c.keyword);
+    const cf = kwConflict_(c.site, c.keyword, rows, c.row);  // 台帳は使い回し、自分の行は除く
     if (cf.level === 2) { blocked.push({ keyword: c.keyword, why: cf.verdict }); continue; }
     return { ok: true, keyword: c.keyword, category: c.category, aim: c.aim,
              site: c.site, remaining: remaining, need_replenish: remaining <= 5,
