@@ -1,7 +1,102 @@
 {
-  "fetched": "2026-08-25",
+  "fetched": "2026-09-02",
   "sites": {
     "corporate": [
+      {
+        "url": "https://corp.7senses.co.jp/blog/kojin-jigyonushi-choubo-tsukekata",
+        "slug": "kojin-jigyonushi-choubo-tsukekata",
+        "title": "個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-nashi",
+        "slug": "gaichuuhi-seikyuusho-nashi",
+        "title": "外注費に請求書がない場合の経費計上｜証憑3つで対応"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/freelance-keiri-yarikata",
+        "slug": "freelance-keiri-yarikata",
+        "title": "フリーランスの経理のやり方｜請求・入金・源泉徴収の3ステップ管理"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-hakko-yarikata",
+        "slug": "seikyusho-hakko-yarikata",
+        "title": "請求書の発行のやり方｜必須6項目と基本4ステップ【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+        "slug": "rakurakuseisan-keihi-seisan-yarikata",
+        "title": "楽楽精算の経費精算のやり方｜複数部門の承認設計まで解説"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/freee-keihi-seisan-yarikata",
+        "slug": "freee-keihi-seisan-yarikata",
+        "title": "freeeの経費精算のやり方｜申請から承認までの4ステップ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-shori-koritsuka",
+        "slug": "seikyusho-shori-koritsuka",
+        "title": "請求書処理の効率化とは？進まない原因と5つの改善策【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku",
+        "slug": "kichodaiko-hiyou-kanjoukamoku",
+        "title": "記帳代行費用の勘定科目｜外注費と支払手数料の使い分け【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-bpo",
+        "slug": "keihi-seisan-bpo",
+        "title": "経費精算BPOとは？任せられる業務3つと費用相場"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
+        "slug": "gaichuuhi-seikyuusho-kakikata",
+        "title": "外注費の請求書の書き方｜記載項目6つと2026年の変更点"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-yarikata-shoshinsha",
+        "slug": "keiri-yarikata-shoshinsha",
+        "title": "経理のやり方とは？初心者向け5ステップ【個人事業主版】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-yarikata-kojin-jigyonushi",
+        "slug": "keiri-yarikata-kojin-jigyonushi",
+        "title": "個人事業主の経理のやり方｜日次・月次・年次の3周期で仕組み化"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-tool",
+        "slug": "keiri-jidoka-tool",
+        "title": "経理自動化ツールとは？機能5分類と失敗しない選び方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-python",
+        "slug": "keiri-jidoka-python",
+        "title": "経理自動化はPythonで可能か？できることと4つの注意点"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-excel-jidoka",
+        "slug": "keiri-excel-jidoka",
+        "title": "経理の自動化はエクセルでどこまで可能？限界と移行の4ステップ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-seminar",
+        "slug": "keiri-koritsuka-seminar",
+        "title": "経理効率化セミナーの費用相場と選び方｜失敗しない3つの視点"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai",
+        "slug": "keiri-jidoka-ai",
+        "title": "経理AI自動化とは？できること5つと導入4ステップ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-system",
+        "slug": "keiri-koritsuka-system",
+        "title": "経理効率化システムの選び方｜比較軸5つと失敗しない導入手順"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-jikyu-souba",
+        "slug": "keiri-jikyu-souba",
+        "title": "経理の時給相場と直接雇用の決め方｜106万円の壁撤廃対応"
+      },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei",
         "slug": "keiri-koritsuka-jirei",
@@ -215,6 +310,101 @@
         "title": "カテゴリ: 補助金の記事一覧"
       },
       {
+        "url": "https://lp.7senses.co.jp/blog/hojokin-denshishinsei-gimuka-itsukara/",
+        "slug": "hojokin-denshishinsei-gimuka-itsukara",
+        "title": "補助金の電子申請はいつから義務化？中小企業が今やること"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-nail-salon/",
+        "slug": "it-hojokin-nail-salon",
+        "title": "IT導入補助金はネイルサロンも使える？材料費と面貸しの壁"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-esute/",
+        "slug": "jizokuka-hojokin-esute",
+        "title": "小規模事業者持続化補助金｜エステサロン対象経費と5人以下基準"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nail-salon/",
+        "slug": "monozukuri-hojokin-nail-salon",
+        "title": "ネイルサロンのものづくり補助金｜対象は集塵機とAI機器"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-esute/",
+        "slug": "monozukuri-hojokin-esute",
+        "title": "ものづくり補助金はエステサロン向け、脱毛機3タイプの対象可否"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-gakushujuku/",
+        "slug": "it-hojokin-gakushujuku",
+        "title": "学習塾はIT導入補助金の対象？入退室通知と課金の境界線"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-nougyou-jirei/",
+        "slug": "jigyou-saikouchiku-nougyou-jirei",
+        "title": "事業再構築補助金で農業が使えたのは6次産業化｜対象外の境界線"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-jirei/",
+        "slug": "monozukuri-hojokin-nougyou-jirei",
+        "title": "精米ラインで売上2倍｜農業のものづくり補助金採択事例"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/nougyou-hojokin-shinsei-houhou/",
+        "slug": "nougyou-hojokin-shinsei-houhou",
+        "title": "農業の補助金の申請方法｜制度の選び方と5ステップ【2026年】"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-shukuhakugyou-jirei/",
+        "slug": "jigyou-saikouchiku-shukuhakugyou-jirei",
+        "title": "宿泊業のインバウンド投資を支えた事業再構築補助金、今の姿は"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
+        "slug": "monozukuri-hojokin-nougyou-souko",
+        "title": "農業の倉庫投資は建物費NG｜ものづくり補助金の対象は設備費"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-shukuhakugyou/",
+        "slug": "monozukuri-hojokin-shukuhakugyou",
+        "title": "ものづくり補助金は宿泊業で使える？旅館業200人以下基準"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-shukuhakugyou/",
+        "slug": "it-hojokin-shukuhakugyou",
+        "title": "宿泊業のIT導入補助金は有利？20人以下特例と対象ツール"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-clinic-jirei/",
+        "slug": "jigyou-saikouchiku-clinic-jirei",
+        "title": "事業再構築補助金 クリニックは医療法人不可｜個人開業医の採択3事例"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-clinic/",
+        "slug": "jizokuka-hojokin-clinic",
+        "title": "小規模事業者持続化補助金｜クリニックは対象外と代替2制度"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+        "slug": "it-hojokin-clinic",
+        "title": "クリニックのIT導入補助金｜予約システム選びの5つの視点"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/",
+        "slug": "monozukuri-hojokin-clinic",
+        "title": "ものづくり補助金はクリニックで使える？医療法人は対象外に注意"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-clinic-2026-schedule/",
+        "slug": "ai-hojokin-clinic-2026-schedule",
+        "title": "AI導入補助金2026｜クリニックの次の締切と今から動く3ステップ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/",
+        "slug": "jigyou-saikouchiku-jigyouka-hokoku-kojin",
+        "title": "事業再構築補助金で個人事業主が出す事業化状況報告｜5年間の流れ"
+      },
+      {
         "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-biyoushitsu-jirei/",
         "slug": "jigyou-saikouchiku-biyoushitsu-jirei",
         "title": "事業再構築補助金 美容室の脱毛転換3事例｜美容師法の注意点"
@@ -362,7 +552,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-unsougyou/",
         "slug": "it-hojokin-unsougyou",
-        "title": "IT導入補助金は運送業も対象？2024年問題に効く対象ツール3分野"
+        "title": "運送業のIT導入補助金｜デジタコ・運行管理の対象範囲"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-ai-hojokin/",
@@ -508,11 +698,6 @@
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fusaitaku-riyu/",
         "slug": "ai-hojokin-fusaitaku-riyu",
         "title": "AI導入補助金 不採択の理由7選【2026年最新】再申請で採択されるコツ"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-katsuyou-jirei-2026/",
-        "slug": "ai-hojokin-katsuyou-jirei-2026",
-        "title": "AI導入補助金の活用事例2026|中小企業のAI導入を採択事例で解説"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-homepage-taisho/",
