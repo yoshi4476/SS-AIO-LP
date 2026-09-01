@@ -180,8 +180,40 @@ def group_table(rows, me):
                 f'<td class="num"><b>{tc}</b></td><td class="num">—</td>'
                 f'<td class="num">—</td></tr>')
     return ('<table><tr><th>サイト</th><th style="width:16%">表示回数</th>'
-            '<th style="width:13%">クリック</th><th style="width:12%">CTR</th>'
+            '<th style="width:13%">クリック</th><th style="width:12%">クリック率</th>'
             '<th style="width:13%">平均順位</th></tr>' + "".join(body) + "</table>")
+
+
+# 指標の言い換え。専門用語のままだと、読み手が巻末の用語集まで戻ることになり、
+# 実際には戻らずに読み飛ばされる。その場で一言そえる。
+PLAIN = {
+    "セッション": "訪問した回数",
+    "検索表示回数": "検索結果に出た回数",
+    "検索クリック": "検索から来た回数",
+    "平均CTR": "出たうち押された割合",
+    "平均掲載順位": "検索での平均の順位",
+    "CV（相談+資料DL）": "問い合わせ・資料請求の件数",
+    "AI経由参照": "ChatGPTなどから来た回数",
+    "当月公開記事": "今月出した記事",
+    "公開記事ストック": "今までに出した記事の合計",
+    "平均品質スコア": "記事の採点（100点満点）",
+    "平均文字数": "記事1本あたりの長さ",
+    "AI経由セッション（当月）": "ChatGPTなどから来た訪問",
+    "AI経由の全体比": "全訪問のうちAI経由の割合",
+    "実装済みAIO施策": "AI検索向けに入れている対策",
+}
+
+
+def plain(label):
+    """指標名に、素人にも分かる一言を添える"""
+    s = PLAIN.get(label)
+    if not s:
+        return label
+    # ラベル自体に括弧があると「（相談+資料DL）（問い合わせ…）」と二重になる。
+    # その場合は括弧の中身を説明で置き換える
+    base = label.split("（")[0]
+    return (f'{base}<span style="font-weight:normal;color:#8a94a6">'
+            f'（{s}）</span>')
 
 
 def section_heat(sections):
@@ -1292,7 +1324,7 @@ def render(d, a):
 
     def tile_q(label, value, sub):
         """値を直接渡すタイル（前月差つきの文字列をそのまま表示する）"""
-        return (f'<div class="tile"><div class="t-label">{label}</div>'
+        return (f'<div class="tile"><div class="t-label">{plain(label)}</div>'
                 f'<div class="t-val" style="font-size:14pt">{value}</div>'
                 f'<div class="t-mom" style="color:{MUTED};font-weight:normal">{sub}</div></div>')
 
@@ -1302,7 +1334,7 @@ def render(d, a):
         mom = a["mom"](key)
         up = not mom.startswith("-")
         good = (not up) if key == "pos" else up  # 順位は下がる=良い
-        return (f'<div class="tile"><div class="t-label">{label}</div>'
+        return (f'<div class="tile"><div class="t-label">{plain(label)}</div>'
                 f'<div class="t-val">{v:,}{unit}</div>'
                 f'<div class="t-mom {"good" if good else "bad"}">前月比 {mom}</div>'
                 f'<div class="t-spark">{svg_spark(series, BLUE if key != "pos" else TEAL)}</div></div>')
@@ -1328,7 +1360,7 @@ def render(d, a):
 <div class="sheet">
 <div class="sec"><span class="no">05</span><h2>記事別パフォーマンス（続き {_n}/{len(_chunks)}）</h2><div class="gold"></div></div>
 <h3 style="margin-top:0">ページ別実績（続き・表示回数順）</h3>
-<table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>
+<table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>クリック率</th><th>平均順位</th></tr>
 {"".join(_prow(x) for x in _chunk)}</table>
 </div>"""
     trows = "".join(f'<tr><td>{k}</td><td class="num">{now}</td><td class="num" style="color:#067647;font-weight:bold">{tv}</td><td>{why}</td></tr>'
@@ -1703,10 +1735,10 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <h3>詳しい総評</h3>
 <p class="exec">{a["summary"]}</p>
 <div class="hl-cards">
-  <div class="hl"><div class="k">セッション</div><div class="v">{cur.get("sessions",0):,}</div><div class="s">前月比 {a["mom"]("sessions")}</div></div>
-  <div class="hl"><div class="k">CV（相談+資料DL）</div><div class="v">{cur.get("cv",0)}件</div><div class="s">前月比 {a["mom"]("cv")}</div></div>
-  <div class="hl"><div class="k">AI経由参照</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
-  <div class="hl"><div class="k">当月公開記事</div><div class="v">{d["content"]["published"]}本</div><div class="s">品質90点以上のみ</div></div>
+  <div class="hl"><div class="k">{plain("セッション")}</div><div class="v">{cur.get("sessions",0):,}</div><div class="s">前月比 {a["mom"]("sessions")}</div></div>
+  <div class="hl"><div class="k">{plain("CV（相談+資料DL）")}</div><div class="v">{cur.get("cv",0)}件</div><div class="s">前月比 {a["mom"]("cv")}</div></div>
+  <div class="hl"><div class="k">{plain("AI経由参照")}</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
+  <div class="hl"><div class="k">{plain("当月公開記事")}</div><div class="v">{d["content"]["published"]}本</div><div class="s">品質90点以上のみ</div></div>
 </div>
 <div class="callout"><b>今月の結論:</b> {a["grown"][0].replace("<b>","").replace("</b>","") if a["grown"] else "-"}</div>
 <h3>本レポートの構成</h3>
@@ -1764,7 +1796,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="sheet">
 <div class="sec"><span class="no">04</span><h2>検索パフォーマンス詳細</h2><div class="gold"></div></div>
 <h3>クエリ別実績（上位10）</h3>
-<table><tr><th>クエリ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{qrows}</table>
+<table><tr><th>クエリ</th><th>表示回数</th><th>クリック</th><th>クリック率</th><th>平均順位</th></tr>{qrows}</table>
 <div class="two-col" style="margin-top:14px">
   <div><h3>🏅 勝ちクエリ（横展開する）</h3><ul>{winner_rows}</ul></div>
   <div><h3>🎯 テコ入れクエリ（リライト対象）</h3><ul>{challenger_rows}</ul></div>
@@ -1789,13 +1821,13 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="sheet">
 <div class="sec"><span class="no">05</span><h2>記事別パフォーマンス</h2><div class="gold"></div></div>
 <h3>ページ別実績（当月・表示回数順）</h3>
-<table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{prows}</table>
+<table><tr><th>ページ</th><th>表示回数</th><th>クリック</th><th>クリック率</th><th>平均順位</th></tr>{prows}</table>
 <p class="note">読み方: 表示回数が多く順位が11位以下のページはリライトの最有力候補。CTRが同順位帯の平均より低いページはタイトル改善候補です。</p>
 <h3 style="margin-top:14px">サイト資産サマリー（累計ストック）</h3>
 <div class="hl-cards">
-  <div class="hl"><div class="k">公開記事ストック</div><div class="v">{assets["count"]}本</div><div class="s">品質90点以上のみ</div></div>
-  <div class="hl"><div class="k">平均品質スコア</div><div class="v">{assets["avg_score"]}点</div><div class="s">6観点採点/100点</div></div>
-  <div class="hl"><div class="k">平均文字数</div><div class="v">{assets["avg_len"]:,}字</div><div class="s">基準5,000字以上</div></div>
+  <div class="hl"><div class="k">{plain("公開記事ストック")}</div><div class="v">{assets["count"]}本</div><div class="s">品質90点以上のみ</div></div>
+  <div class="hl"><div class="k">{plain("平均品質スコア")}</div><div class="v">{assets["avg_score"]}点</div><div class="s">6観点採点/100点</div></div>
+  <div class="hl"><div class="k">{plain("平均文字数")}</div><div class="v">{assets["avg_len"]:,}字</div><div class="s">基準5,000字以上</div></div>
 </div>
 <h3 style="margin-top:14px">カテゴリ別の記事構成</h3>
 {dist_bars(cat_pairs, "#0d9488")}
@@ -1890,9 +1922,9 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="sec"><span class="no">07</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。ゼロクリック時代の新しい流入経路であり、当メディアの中核戦略です。</p>
 <div class="hl-cards" style="margin:10px 0 14px">
-  <div class="hl"><div class="k">AI経由セッション（当月）</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
-  <div class="hl"><div class="k">AI経由の全体比</div><div class="v">{round(ai_total / max(cur.get("sessions",1),1) * 100, 1)}%</div><div class="s">対セッション</div></div>
-  <div class="hl"><div class="k">実装済みAIO施策</div><div class="v">12項目</div><div class="s">全記事に標準適用</div></div>
+  <div class="hl"><div class="k">{plain("AI経由セッション（当月）")}</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
+  <div class="hl"><div class="k">{plain("AI経由の全体比")}</div><div class="v">{round(ai_total / max(cur.get("sessions",1),1) * 100, 1)}%</div><div class="s">対セッション</div></div>
+  <div class="hl"><div class="k">{plain("実装済みAIO施策")}</div><div class="v">12項目</div><div class="s">全記事に標準適用</div></div>
 </div>
 <h3>プラットフォーム別内訳</h3>
 {ai_bars(d.get("ai_breakdown", []), ai_total)}
@@ -1927,22 +1959,22 @@ ChatGPT比率が高い場合はサイト外の言及（プレスリリース・�
 「同じ流入を広告で買ったらいくらか」と「記事1本がどれだけ働いているか」を金額と数字で示します。</p>
 <div class="roi">
   <div class="roi-box">
-    <div class="k">当月の流入を広告で買った場合の金額</div>
+    <div class="k">{plain("当月の流入を広告で買った場合の金額")}</div>
     <div class="v">{eff["yen"](eff["ad_value"])}</div>
     <div class="s">検索クリック{cur.get("clicks", 0):,}回 × 想定クリック単価{eff["cpc"]}円で換算</div>
   </div>
   <div class="roi-box">
-    <div class="k">記事1本あたりの月間価値</div>
+    <div class="k">{plain("記事1本あたりの月間価値")}</div>
     <div class="v">{eff["yen"](eff["per_article_value"])}</div>
     <div class="s">累計{a["assets"]["count"]}本で割った1本あたりの広告換算値</div>
   </div>
   <div class="roi-box">
-    <div class="k">記事1本あたりの月間セッション</div>
+    <div class="k">{plain("記事1本あたりの月間セッション")}</div>
     <div class="v">{eff["per_article_sessions"]}</div>
     <div class="s">記事が増えるほど合計は積み上がる</div>
   </div>
   <div class="roi-box">
-    <div class="k">記事1本あたりの月間クリック</div>
+    <div class="k">{plain("記事1本あたりの月間クリック")}</div>
     <div class="v">{eff["per_article_clicks"]}</div>
     <div class="s">順位が上がると同じ本数でも増える</div>
   </div>
@@ -2034,7 +2066,7 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <p class="note">増加見込みは「1ページ目のCTRを4%と仮定した場合の追加クリック数」です。
 順位を10位以内に上げるだけで、記事を新しく書かずにクリックが増えることを示しています。</p>
 <h3>デバイス別の検索実績</h3>
-<table><tr><th style="width:22%">デバイス</th><th>表示回数</th><th>クリック</th><th>CTR</th><th>平均順位</th></tr>{gdev_rows}</table>
+<table><tr><th style="width:22%">デバイス</th><th>表示回数</th><th>クリック</th><th>クリック率</th><th>平均順位</th></tr>{gdev_rows}</table>
 <p class="note">スマホとPCでCTRが大きく違う場合、タイトルの後半が切れて訴求が届いていない可能性があります。
 スマホの検索結果では前半28文字程度しか表示されません。</p>
 </div>
