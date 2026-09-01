@@ -5,7 +5,7 @@ slug: ai-kantan-shukyaku
 keyword: aiかんたん集客
 category: ai-marketing
 date: 2026-08-11
-modified: 2026-08-11
+modified: 2026-09-01
 depth: standard
 eyecatch: /images/ai-kantan-shukyaku/eyecatch.png
 score: 98

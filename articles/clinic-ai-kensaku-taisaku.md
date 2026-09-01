@@ -1,11 +1,11 @@
 ---
-title: クリニックのAIO対策｜AI検索で患者に選ばれる5ステップ
+title: AIO対策をクリニックで始める5ステップ｜AI検索で選ばれる
 description: クリニックのAI検索対策とは、ChatGPTやAI Overviewが受診先を紹介する際に自院の情報が引用されるよう整備することです。自院の伝え方を医療広告ガイドラインの範囲内でAI検索向けに整える具体策を、3,200件超の支援実績にもとづき5ステップで紹介します。
 slug: clinic-ai-kensaku-taisaku
-keyword: クリニック AI検索 対策
+keyword: aio対策 クリニック
 category: aio
 date: 2026-08-01
-modified: 2026-08-01
+modified: 2026-09-01
 eyecatch: /images/clinic-ai-kensaku-taisaku/eyecatch.png
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
