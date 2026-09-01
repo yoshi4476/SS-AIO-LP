@@ -121,6 +121,8 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 ソフトウェア導入が中心ならデジタル化・AI導入補助金、設備投資が中心なら中小企業省力化投資補助金が向いています。目的に合わない制度を選ぶこと自体が失敗の入り口になります。
 
+関連する内容は[補助金の電子申請はいつから義務化？中小企業が今やること](/blog/hojokin-denshishinsei-gimuka-itsukara/)でも扱っています。
+
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">通常枠の補助率・補助上限額のページ</a>と<a href="https://shoryokuka.smrj.go.jp/ippan/" target="_blank" rel="noopener">中小企業省力化投資補助金（一般型）公式サイト</a>の情報を整理すると、次のような違いがあります。
 
 | 項目 | デジタル化・AI導入補助金2026（通常枠） | 中小企業省力化投資補助金（一般型） |
