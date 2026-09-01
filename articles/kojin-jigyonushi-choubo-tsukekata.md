@@ -183,4 +183,3 @@ Airレジ マガジンが公開する<a href="https://airregi.jp/magazine/guide/
 現在の記帳方式に不安がある、あるいは複式簿記への移行を機に記帳ごと外部に任せたいという場合は、経理BPOの無料相談で相談することもできます。まずは自分の帳簿が簡易簿記と複式簿記のどちらに当たるかを確認するところから始めてください。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
-</content>

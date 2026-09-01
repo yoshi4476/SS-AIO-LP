@@ -48,7 +48,7 @@ faq:
 
 **経理の自動化は、Pythonのライブラリを組み合わせれば集計から大量データ処理まで対応できます。**
 
-<div class="definition-box"><span class="term">経理業務でのPython自動化とは</span>、pandas・openpyxlといったライブラリを使い、取引データの集計・突合・転記をスクリプトで処理する仕組みを指します。==エクセルの関数やマクロと違い、複数ファイルの一括処理や外部システムとのデータ連携まで扱える==点が大きな違いです。
+<div class="definition-box"><span class="term">経理業務でのPython自動化とは</span>、pandas・openpyxlといったライブラリを使い、取引データの集計・突合・転記をスクリプトで処理する仕組みを指します。==エクセルの関数やマクロと違い、複数ファイルの一括処理や外部システムとのデータ連携まで扱える==点が大きな違いです。</div>
 
 経済産業省が公表している<a href="https://www.meti.go.jp/policy/it_policy/jinzai/index.html" target="_blank" rel="noopener">「IT人材需給に関する調査」</a>では、**IT人材の不足数は2030年に最大約79万人に達する**と試算されています。専任のシステム担当者を置けない中小企業では、経理担当者自身がPythonを学んで自動化に取り組むケースも増えています。
 

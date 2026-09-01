@@ -385,6 +385,31 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
               f"（depth: {meta.get('depth') or 'standard'} の基準{need:,}字以上。"
               f"セクション追加・実務情報の深掘りで増強すること）")
 
+    # タグの対応チェック。数が合っていても入れ子が壊れていれば見つからないため、
+    # 開始タグを積んで照合する。生成の作業タグ（</content> など）が原稿の末尾に
+    # 残っていたことがあり、そのまま公開HTMLに出ていた。
+    _VOID = {"br", "img", "hr", "input", "meta", "link", "source", "col",
+             "area", "base", "embed", "wbr", "track", "param"}
+    _src = re.sub(r"```.*?```", "", content, flags=re.S)
+    _stack, _bad = [], []
+    for _m in re.finditer(r"<(/?)([a-zA-Z][a-zA-Z0-9]*)([^>]*?)(/?)>", _src):
+        _close, _name, _self = _m.group(1), _m.group(2).lower(), _m.group(4)
+        if _name in _VOID or _self:
+            continue
+        if not _close:
+            _stack.append(_name)
+        elif _stack and _stack[-1] == _name:
+            _stack.pop()
+        elif _name in _stack:
+            while _stack and _stack[-1] != _name:
+                _bad.append(f"<{_stack.pop()}> が閉じられていない")
+            _stack.pop()
+        else:
+            _bad.append(f"</{_name}> に対応する開始タグが無い")
+    _bad += [f"<{t}> が閉じられていない" for t in _stack]
+    for _b in _bad[:4]:
+        print(f"WARN: タグの対応が取れていない: {meta['slug']} → {_b}")
+
     # 画像実在チェック（生成漏れ・パスtypoの検出。生成: python scripts/make_images.py <slug>）
     if meta.get("eyecatch") and not (SITE / meta["eyecatch"].lstrip("/")).exists():
         print(f"WARN: アイキャッチ未生成: {meta['slug']} → {meta['eyecatch']}")
