@@ -68,7 +68,7 @@ def main():
         d = cfg["domain"]
         site_url = f"https://{d}/"
         urls = sitemap_urls(d)
-        print(f"■ {cfg['name']}（sitemap {len(urls)}件）")
+        print(f"■ {cfg['name']}（sitemap {len(urls)}件）", flush=True)
         if not urls:
             continue
         tally, ng, err = Counter(), [], 0
@@ -77,19 +77,26 @@ def main():
             if "error" in r:
                 err += 1
                 if err == 1:
-                    print(f"    APIエラー: {r['error']}")
+                    print(f"    APIエラー: {r['error']}", flush=True)
                 continue
             v = r.get("verdict", "NEUTRAL")
             tally[v] += 1
             if v != "PASS":
-                ng.append((u.replace(f"https://{d}", "") or "/",
-                           r.get("coverageState", "—"),
+                path = u.replace(f"https://{d}", "") or "/"
+                ng.append((path, r.get("coverageState", "—"),
                            r.get("robotsTxtState", ""), r.get("googleCanonical", "")))
+                # 見つけたその場で出す。1件ずつAPIに問い合わせるため数分かかり、
+                # 最後にまとめて出す作りだと、途中で止めたときに何も残らない。
+                # 実際、時間切れで打ち切ると出力が丸ごと消えていた。
+                print(f"      未登録 {path[:44]:<44} {r.get('coverageState','—')[:30]}",
+                      flush=True)
             if i % 20 == 0:
+                print(f"    …{i}/{len(urls)}件を確認（登録済み{tally['PASS']}）", flush=True)
                 time.sleep(1)      # 1分600件の上限に触れないよう間隔をあける
         got = sum(tally.values())
         if got:
-            print("    " + " / ".join(f"{JP.get(k, k)} {v}件" for k, v in tally.most_common()))
+            print("    " + " / ".join(f"{JP.get(k, k)} {v}件" for k, v in tally.most_common()),
+                  flush=True)
         for u, cov, rob, can in ng:
             line = f"      {u[:44]:<44} {cov[:34]}"
             if can and can.rstrip("/") != f"https://{d}{u}".rstrip("/"):

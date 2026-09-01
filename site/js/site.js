@@ -455,3 +455,38 @@ window.leadCapture = function (opts) {
   });
   return wrap;
 };
+
+/* 購読フォームを画面内で送る
+ *
+ * これまでは素のPOSTで、送信に失敗すると訪問者は
+ * 「購読設定が未完了です。」だけが書かれたページに飛ばされていた。
+ * 戻る導線もなく、そこでサイトから出てしまう。記事84本すべてに
+ * 置いてあるフォームなので、失敗したときの見え方は無視できない。 */
+(function () {
+  document.querySelectorAll('form.nl-form[action="/api/subscribe"]').forEach(function (f) {
+    var msg = document.createElement("p");
+    msg.className = "nl-msg";
+    msg.setAttribute("role", "status");
+    msg.setAttribute("aria-live", "polite");
+    f.appendChild(msg);
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var btn = f.querySelector("button");
+      if (!f.checkValidity()) { msg.textContent = "メールアドレスをご確認ください。"; return; }
+      btn.disabled = true;
+      msg.textContent = "送信しています…";
+      fetch("/api/subscribe", { method: "POST", body: new FormData(f) })
+        .then(function (r) {
+          if (!r.ok) return r.text().then(function (t) { throw new Error(t); });
+          if (window.trackLead) window.trackLead("newsletter_submit", { page_path: location.pathname });
+          f.innerHTML = '<p class="nl-done"><strong>登録しました。</strong>' +
+            '次回の配信からお届けします。</p>';
+        })
+        .catch(function (err) {
+          btn.disabled = false;
+          msg.textContent = String(err.message || "").slice(0, 110) ||
+            "登録できませんでした。恐れ入りますがお問い合わせフォームからご連絡ください。";
+        });
+    });
+  });
+})();
