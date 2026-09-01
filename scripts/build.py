@@ -296,6 +296,30 @@ DIAG_BANNERS = {
 }
 
 
+def insert_mid_cta(content, meta):
+    """本文の中盤にCTAを1つ差し込む。
+
+    記事末（本文の9割地点）のCTAだけだと、そこまで到達した読者しか見られない。
+    実測では、記事67本からのCTA押下が月2回しか発生していなかった。
+    読み終える前に離脱する読者のほうが多いので、途中にも置く。
+
+    差し込む位置はH2の切れ目。段落の途中に入れると読みを断ち切る。
+    """
+    import re as _re
+    heads = [m.start() for m in _re.finditer(r"<h2[ >]", content)]
+    if len(heads) < 5:
+        return content        # 見出しが少ない記事は末尾だけでよい
+    pos = heads[len(heads) // 2]
+    href, title, _ = DIAG_BANNERS.get(meta["category"], ("/lp/", "無料相談", ""))
+    cta = (f'<section class="cta cta-mid">'
+           f'<p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p>'
+           f'<a class="btn btn-primary" href="{href}" '
+           f'data-cta="article_mid_{meta["category"]}">{title} '
+           f'<span class="arw">→</span></a>'
+           f'<p class="cta-sub">読みながらでも1分で終わります</p></section>' + "\n")
+    return content[:pos] + cta + content[pos:]
+
+
 def diag_banner_html(meta):
     href, title, desc = DIAG_BANNERS[meta["category"]]
     return (f'<aside class="diag-banner"><div class="db-text">'
@@ -391,7 +415,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{JSON_LD}}": build_json_ld(meta, url),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
-        "{{CONTENT}}": content,
+        "{{CONTENT}}": insert_mid_cta(content, meta),
         "{{RELATED}}": related,
         "{{DIAG_BANNER}}": diag_banner_html(meta),
         "{{PREVNEXT}}": prevnext,

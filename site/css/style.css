@@ -1344,3 +1344,15 @@ main.lab .cta-final h2 { color: #fff; }
 @media (max-width: 640px) {
   .spec-f { gap: .5rem; }
 }
+
+/* 本文中盤のCTA。記事末と同じ大きさだと読みを断ち切るため、
+   高さを抑えて動きも止める。目的は「気づかせる」で「立ち止まらせる」ではない */
+.cta.cta-mid { padding: 1.6rem 1.4rem; margin: 2.4em 0; border-radius: 16px; }
+.cta.cta-mid::before { animation: none; opacity: .55; }
+.cta.cta-mid .cta-copy { font-size: 1.02rem; margin-bottom: .9rem; }
+.cta.cta-mid .cta-sub { font-size: .72rem; margin-top: .7rem; }
+.cta.cta-mid .btn { padding: .7rem 1.4rem; font-size: .88rem; }
+@media (max-width: 640px) {
+  .cta.cta-mid { padding: 1.3rem 1rem; }
+  .cta.cta-mid .cta-copy { font-size: .95rem; }
+}
