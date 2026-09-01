@@ -19,7 +19,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 # そのまま持っていくもの（仕組みの本体）
-COPY_DIRS = ["scripts", "templates", "automation/gas", ".github/workflows"]
+COPY_DIRS = ["scripts", "templates", "automation/gas", ".github/workflows",
+             # 品質ゲートの回帰テスト。実際に起きた不具合を固定してある。
+             # 渡した先で仕組みを直したとき、壊れたことに気づける唯一の手段。
+             "tests"]
 # この道具自身は渡さない。検査用に自社の値を文字列として持っているため。
 SKIP_FILES = {"export_template.py"}
 COPY_FILES = [
@@ -37,6 +40,10 @@ COPY_FILES = [
     # パイプラインの定義そのもの。全7工程・品質基準・AIO対応の規則が入る。
     # プロンプトはこれを参照する形で書かれている。
     "CLAUDE.md",
+    # 認証情報の発行と反映の手順。発行URLと必要な権限まで書いてある。
+    # .env と GitHub Secrets の片方だけを更新して食い違うのが最も多い事故で、
+    # これが無いと渡した先で同じことが起きる。
+    "docs/認証情報の更新手順.md",
 ]
 
 # 実行時に書き込む場所。空でも作っておく。
