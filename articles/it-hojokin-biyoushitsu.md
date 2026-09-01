@@ -145,7 +145,6 @@ faq:
 
 
 関連して、[小規模事業者持続化補助金｜飲食店で対象になる4つの投資](/blog/jizokuka-hojokin-inshokuten-jirei/)もあわせてご確認ください。
-関連する内容を先に押さえるなら、[IT導入補助金はネイルサロンも使える？材料費と面貸しの壁](/blog/it-hojokin-nail-salon/)が参考になります。
 
 対象になる範囲は、[学習塾はIT導入補助金の対象？入退室通知と課金の境界線](/blog/it-hojokin-gakushujuku/)で解説しています。
 

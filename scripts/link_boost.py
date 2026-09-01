@@ -76,8 +76,16 @@ def words(a):
             if len(w) >= 3}
 
 
+# リンクだけで成り立つ段落。ここに重ねるとリンク集になり、読者もAIも読み飛ばす
+LINK_PARA = re.compile(r"^(?:関連して、|関連する内容を|近い論点を|あわせて読む)[^\n]*\]\([^\n]*$", re.M)
+
+
 def pick_spot(body, target_words):
-    """置く位置を決める。H2の1文結論の直後で、話題が合うところ"""
+    """置く位置を決める。H2の1文結論の直後で、話題が合うところ
+
+    同じ区画に二重で置かない。リンクが並ぶとリンク集になり、
+    読者は読み飛ばし、AIも文脈ごと拾えなくなる。
+    """
     blocks = list(re.finditer(r"^## .+$", body, re.M))
     best = None
     for i, m in enumerate(blocks):
@@ -86,6 +94,9 @@ def pick_spot(body, target_words):
         head = m.group(0)
         # まとめ・FAQ・よくある質問には置かない。読者が読み終えた後になる
         if re.search(r"まとめ|よくある質問|FAQ", head):
+            continue
+        # すでにリンクだけの段落がある区画は避ける（積み上がりの防止）
+        if LINK_PARA.search(seg):
             continue
         hit = sum(1 for w in target_words if w in seg)
         if hit == 0:

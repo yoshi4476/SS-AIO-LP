@@ -117,10 +117,8 @@
         <form class="form-panel hero-form" action="/api/lead" method="post" style="margin:0;box-shadow:0 30px 70px -20px rgba(2,10,30,.55);padding:1.6rem 1.5rem 1.3rem;border-radius:20px;">
           <input type="hidden" name="form_type" value="無料相談（LPヒーロー）">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
-          <div class="hf-title">無料の現状分析を申し込む</div>
-          <div class="hf-sub">検索・マップ・AI検索での見え方を分析してご報告します</div>
-          <p class="perk-note"><span class="ic" aria-hidden="true">🎁</span>
-            <span><b>特典（MEOスタンダード無料付帯）</b>は、オウンドメディア運営をご契約いただいたお客様専用です。ご希望の方は特典コード<span class="code">3010</span>を下の「詳細（任意）」欄にご記入ください。</span></p>
+          <div class="hf-title">無料で、いまの見え方を診断する</div>
+          <div class="hf-sub">検索・マップ・AI検索の3つで、御社がいまどう見えているかを調べてご報告します。<strong>入力は30秒。2営業日以内にご返信し、営業電話はいたしません。</strong></div>
           <label>お名前 <span class="req">必須</span>
             <input type="text" name="name" required autocomplete="name">
           </label>
@@ -130,28 +128,12 @@
           <label>メールアドレス <span class="req">必須</span>
             <input type="email" name="email" required autocomplete="email">
           </label>
-          <label>電話番号
-            <input type="tel" name="tel" autocomplete="tel">
-          </label>
-          <label>ご相談内容 <span class="req">必須</span>
-            <select name="topic" required>
-              <option value="">選択してください</option>
-              <option>AIO（AI検索最適化）について</option>
-              <option>LLMO（AIチャット対策）について</option>
-              <option>SEO運用について</option>
-              <option>MEO運用について</option>
-              <option>まとめて相談したい</option>
-            </select>
-          </label>
-          <label>詳細（任意）
-            <textarea name="message" rows="3" placeholder="現在の集客状況やお困りごとをご記入ください"></textarea>
-          </label>
           <label class="consent">
             <input type="checkbox" required>
             <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する</span>
           </label>
-          <button type="submit" class="btn btn-primary" data-cta="lp_hero_form_submit">無料相談を申し込む（現状分析レポート付き） <span class="arw">→</span></button>
-          <p class="hf-note">いただいた情報は相談対応の目的以外には使用しません。</p>
+          <button type="submit" class="btn btn-primary" data-cta="lp_hero_form_submit">無料の現状分析を受け取る <span class="arw">→</span></button>
+          <p class="hf-note">いただいた情報は診断とご連絡以外に使用しません。ご相談内容が固まっていなくても構いません。</p>
         </form>
       </div>
     </div>
@@ -363,7 +345,7 @@
       <h2>料金</h2>
       <p class="sub">課題も商圏も違うのに、一律料金では最適になりません。<strong>無料の現状分析の結果をもとに、必要な施策だけを組み合わせたお見積り</strong>をご提示します。</p>
     </div>
-    <!-- TODO: 標準料金の掲載が決まったら、各プランの price コメントを実額に差し替えて表示する -->
+    
     <!-- おすすめプラン: 上段・横長フィーチャー -->
     <div class="pillar cat-aio reveal" style="position:relative;border:3px solid var(--blue);box-shadow:0 24px 56px -18px rgba(37,99,235,.4);margin-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));gap:clamp(1.2rem,3vw,3rem);align-items:center;padding:clamp(1.8rem,3.5vw,2.8rem);">
       <span style="position:absolute;top:-16px;left:clamp(1.5rem,4vw,2.8rem);background:linear-gradient(120deg,var(--blue),#60a5fa);color:#fff;font-weight:900;font-size:.85rem;padding:.4em 1.6em;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px -6px rgba(37,99,235,.6);">★ いちばん人気・おすすめ</span>
@@ -372,7 +354,7 @@
         <h3 style="font-size:clamp(1.5rem,3vw,2.1rem);margin:.25em 0 .2em;">おまかせパック</h3>
         <p style="display:inline-block;font-weight:700;font-size:.85rem;letter-spacing:.08em;color:#96751a;border:1px solid rgba(183,146,46,.55);background:rgba(183,146,46,.08);padding:.35em 1.1em;margin:0 0 .8em;">AIO・SEO完全対応型</p>
         <p style="font-size:.95rem;">記事制作からレポート・改善まで、<strong>集客の仕組みを丸ごとお任せ</strong>いただくプランです。社内の作業はほぼゼロで、資産型の集客が積み上がります。</p>
-        <p style="font-weight:700;color:var(--text);margin-top:.8em;font-size:1.05rem;">料金: <span style="font-size:1.5em;color:var(--blue-deep);">個別お見積り</span><!-- TODO: 例) 初期◯円+月額◯円 --><br><span style="font-size:.82rem;color:#92400e;background:linear-gradient(transparent 55%,#ffe873 55%);">🎁 今なら MEOスタンダード（月額3万円相当）無料付帯</span></p>
+        <p style="font-weight:700;color:var(--text);margin-top:.8em;font-size:1.05rem;">料金: <span style="font-size:1.5em;color:var(--blue-deep);">個別お見積り</span><br><span style="font-size:.82rem;color:#92400e;background:linear-gradient(transparent 55%,#ffe873 55%);">🎁 今なら MEOスタンダード（月額3万円相当）無料付帯</span></p>
         <p style="margin-top:.9em;"><a class="btn btn-primary" href="#form" data-cta="lp_price_omakase" style="padding:.95em 2.4em;font-size:1rem;">おまかせパックを相談する <span class="arw">→</span></a></p>
       </div>
       <ul style="font-size:.95rem;color:var(--text);margin:0;padding:0;list-style:none;display:grid;gap:.8em;">
@@ -410,7 +392,7 @@
           <li>✓ 月次レポート提出</li>
         </ul>
         <p style="font-size:.83rem;color:var(--muted);margin-top:.8em;border-top:1px dashed var(--line);padding-top:.7em;">※「口コミを増やします」と謳う業者の代理投稿・購入は<strong style="background:none;color:#b91c1c;">Googleの規約違反でアカウント削除のリスク</strong>があるため、当社は一切行いません。<strong>正攻法での上位表示</strong>に集中してご支援します。</p>
-        <p style="font-weight:700;color:var(--text);margin-top:1em;">料金: <span style="font-size:1.35em;color:var(--blue-deep);">月額3万円</span><!-- TODO: 税込/税別・初期費用の有無を確認して表記 --></p>
+        <p style="font-weight:700;color:var(--text);margin-top:1em;">料金: <span style="font-size:1.35em;color:var(--blue-deep);">月額3万円</span></p>
       </div>
       <div class="pillar cat-seo reveal reveal-d1">
         <span class="num">Plan 02</span>
@@ -465,16 +447,7 @@
     </div>
   </div>
   <p style="font-size:.85rem;color:var(--muted);margin-top:1.5rem;">※ 上記以外の業種（飲食・美容・小売等の店舗ビジネスなど）も、MEOを軸にご支援しています。</p>
-  <!-- TODO: 実名事例の掲載テンプレート（許諾取得後にコメントを外して使用）
-  <div class="pillar-grid" style="margin-top:1.5rem;">
-    <div class="pillar cat-meo">
-      <span class="num">Case 01 — 業種・地域</span>
-      <h3>店舗名（許諾済み実名）</h3>
-      <p>課題: ◯◯ / 施策: ◯◯ / 結果: ◯ヶ月でマップ表示回数◯倍・問い合わせ月◯件（実測値）</p>
-      <p style="font-size:.85rem;color:var(--muted);">「お客様のコメント（原文のまま掲載・許諾済み）」</p>
-    </div>
-  </div>
-  -->
+  
 </section>
 
 <div class="section" style="padding-top:0;padding-bottom:0;">
@@ -530,7 +503,7 @@
       <span class="en">Message</span>
       <h2>「AIに聞いたら自社が出てくる」を、当たり前に。</h2>
     </div>
-    <!-- TODO: メッセージ文言はご本人（原口様）の確認を経て確定すること -->
+    
     <p>検索もマップもAIも、お客様がお店を選ぶ「入口」は変わり続けています。私たちはG-ranの支援現場で、入口の変化に追いつけたお店とそうでないお店の差を見てきました。だからこそ、流行り言葉ではなく、<strong>成果から逆算した施策だけ</strong>をご提案します。</p>
     <p style="font-weight:700;">セブンセンシズ株式会社 代表取締役 原口 優</p>
     <a class="btn btn-ghost" href="/about/">運営者情報を見る <span class="arw">→</span></a>
@@ -604,7 +577,7 @@
     <div><span style="display:inline-block;font-family:var(--en);font-weight:700;font-size:2.8rem;line-height:1.1;letter-spacing:.2em;color:#b45309;background:#fff;border:2.5px solid #eab308;border-radius:12px;padding:.08em .35em .08em .55em;box-shadow:0 8px 20px -8px rgba(234,179,8,.5);">3010</span></div>
     <div style="font-size:.86rem;color:#92400e;margin-top:.5rem;">を、下の<strong style="background:none;">「詳細（任意）」欄に詳細とあわせてご記入</strong>ください</div>
   </div>
-  <!-- TODO: フォーム送信先の設定（Cloudflare Pages Functions推奨。contact/downloadと方式統一） -->
+  
   <form class="form-panel" action="/api/lead" method="post" style="margin:0;max-width:none;">
     <input type="hidden" name="form_type" value="無料相談（LP）">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">

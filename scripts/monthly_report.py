@@ -222,8 +222,15 @@ def section_heat(sections):
         return ('<p class="note">セクション到達は計測されていません。'
                 '各セクションに <code>data-area</code> 属性を設置すると、'
                 '翌月から離脱位置が特定できます。</p>')
-    rows = []
-    for s in sections[:16]:
+    rows, seen = [], None
+    for s in sections[:20]:
+        # ページが変わったら見出し行を挟む。どのページの区画かが分からないと
+        # 「下部が読まれていない」の判断ができない
+        page = s.get("page")
+        if page and page != seen:
+            seen = page
+            rows.append(f'<tr><td colspan="5" style="background:#f1f5f9;font-weight:700">'
+                        f'ページ: <code>{page}</code>（先頭の区画を100%とした到達率）</td></tr>')
         pct = s["pct"]
         col = "#0d9488" if pct >= 60 else ("#2563eb" if pct >= 30 else "#dc2626")
         flag = '<b style="color:#dc2626">離脱大</b>' if pct < 30 else ""
@@ -277,22 +284,37 @@ def fix_list(d):
             f'開始{fs}件・送信{fe}件。項目数か必須指定を見直します'))
 
     # CTAが読まれる位置にあるか
+    # ページ単位で判定する。全ページ合算だと、訪問の多いページの区画が分母になり
+    # 他ページの区画が一律「下部で読まれていない」に見えてしまう
     sec = d.get("sections") or []
-    cta_sec = [s for s in sec if "cta" in s["name"] or "form" in s["name"]]
-    if cta_sec:
-        worst = min(cta_sec, key=lambda x: x["pct"])
-        if worst["pct"] < 35:
-            out.append((
-                "高", "CTAがページの下すぎる位置にある",
-                f'<code>{worst["name"]}</code> の到達率は{worst["pct"]}%。'
-                f'到達率50%以上の位置にもCTAを置きます'))
-    if len(sec) >= 12:
-        thin = [s for s in sec if s["pct"] < 15]
-        if len(thin) >= 4:
-            out.append((
-                "中", "セクションが多く、下部が読まれていない",
-                f'{len(sec)}セクションのうち{len(thin)}個が到達率15%未満。'
-                f'統合か削除を検討します'))
+    pages = {}
+    for s in sec:
+        pages.setdefault(s.get("page", ""), []).append(s)
+    for page, ss in pages.items():
+        cta_sec = [s for s in ss if "cta" in s["name"] or "form" in s["name"]]
+        if cta_sec:
+            worst = min(cta_sec, key=lambda x: x["pct"])
+            if worst["pct"] < 35:
+                out.append((
+                    "高", f'<code>{page}</code> のCTAが下すぎる位置にある',
+                    f'区画 <code>{worst["name"]}</code> の到達率は{worst["pct"]}%。'
+                    f'到達率50%以上の位置にもCTAを置きます'))
+        if len(ss) >= 12:
+            thin = [s for s in ss if s["pct"] < 15]
+            if len(thin) >= 4:
+                out.append((
+                    "中", f'<code>{page}</code> は区画が多く、下部が読まれていない',
+                    f'{len(ss)}区画のうち{len(thin)}個が到達率15%未満。'
+                    f'統合か削除を検討します'))
+        # 先頭の直後で大きく落ちている＝ファーストビューで判断されている
+        if len(ss) >= 3:
+            second = sorted(ss, key=lambda x: -x["n"])[1]
+            if second["pct"] < 55:
+                out.append((
+                    "最優先", f'<code>{page}</code> はファーストビューで離脱している',
+                    f'先頭の次の区画 <code>{second["name"]}</code> への到達が{second["pct"]}%。'
+                    f'半分以上が1画面目で判断して離れています。冒頭の見出しと'
+                    f'最初のひと押しを、何の会社かが1行で分かる文言に変えます'))
     if not sec:
         out.append((
             "高", "セクション到達が計測されていない",
@@ -550,12 +572,31 @@ def fetch_real():
             property=prop, date_ranges=cur_range, dimensions=[Dimension(name="eventName")],
             metrics=[Metric(name="eventCount")], limit=120))
         ev = {r.dimension_values[0].value: int(r.metric_values[0].value) for r in rep.rows}
-        sec = {k.replace("section_view_", ""): v for k, v in ev.items()
-               if k.startswith("section_view_")}
-        base = max(sec.values()) if sec else 0
-        data["sections"] = sorted(
-            [{"name": k, "n": v, "pct": round(v / base * 100) if base else 0}
-             for k, v in sec.items()], key=lambda x: -x["n"])
+
+        # 区画はページごとに数える。全ページを合算すると、訪問の多いページの
+        # 区画が分母になり、他ページの区画が一律「離脱大」に見える。
+        # 実際それで、LPの区画が到達41%あるのに15%と報告されていた。
+        rep2 = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=cur_range,
+            dimensions=[Dimension(name="eventName"), Dimension(name="pagePath")],
+            metrics=[Metric(name="eventCount")], limit=400))
+        per_page = {}
+        for r in rep2.rows:
+            name = r.dimension_values[0].value
+            if not name.startswith("section_view_"):
+                continue
+            page = r.dimension_values[1].value
+            per_page.setdefault(page, {})
+            key = name.replace("section_view_", "")
+            per_page[page][key] = per_page[page].get(key, 0) + int(r.metric_values[0].value)
+
+        secs = []
+        for page, d in sorted(per_page.items(), key=lambda kv: -sum(kv[1].values())):
+            base = max(d.values())
+            for k, v in sorted(d.items(), key=lambda kv: -kv[1]):
+                secs.append({"name": k, "page": page, "n": v,
+                             "pct": round(v / base * 100) if base else 0})
+        data["sections"] = secs
         # フォームへ向かうCTAだけを別に数える。診断・記事一覧・
         # ヘッダーのリンクを同じ「CTA」に混ぜると、詰まりを誤検知する
         FORM_CTA = ("form", "contact", "soudan", "consult", "lp", "mv")
