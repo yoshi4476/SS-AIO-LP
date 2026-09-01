@@ -93,6 +93,17 @@ def month_labels(n=6):
     return list(reversed(labels))
 
 
+def month_end(label):
+    """その月の末日。対象月が8月なら 2026-08-31 を返す。
+
+    終了日を「今日」にすると、月初に発行したとき当月の数日分が混ざる。
+    前月の報告に翌月のデータが入ると、数字が合わない理由が誰にも分からなくなる。
+    """
+    y, m = map(int, label.split("-"))
+    nxt = date(y + (m == 12), (m % 12) + 1, 1)
+    return (nxt - timedelta(days=1)).isoformat()
+
+
 def fetch_real():
     """GA4/GSC/Sheetsから実データ取得。未設定なら例外に設定手順を含める"""
     try:
@@ -192,7 +203,7 @@ def fetch_real():
             "clicks": int(r.get("clicks", 0)), "impressions": int(r.get("impressions", 0)),
             "ctr": round(r.get("ctr", 0) * 100, 2), "pos": round(r.get("position", 0), 1)})
     res = sc.searchanalytics().query(siteUrl=site, body={
-        "startDate": f"{labels[-1]}-01", "endDate": date.today().isoformat(),
+        "startDate": f"{labels[-1]}-01", "endDate": month_end(labels[-1]),
         "dimensions": ["query"], "rowLimit": 10}).execute()
     data["queries"] = [{"q": r["keys"][0], "imp": int(r["impressions"]), "clicks": int(r["clicks"]),
                         "ctr": round(r["ctr"] * 100, 1), "pos": round(r["position"], 1)}
@@ -201,7 +212,7 @@ def fetch_real():
     # ページ別実績（当月・上位12）
     try:
         res = sc.searchanalytics().query(siteUrl=site, body={
-            "startDate": f"{labels[-1]}-01", "endDate": date.today().isoformat(),
+            "startDate": f"{labels[-1]}-01", "endDate": month_end(labels[-1]),
             "dimensions": ["page"], "rowLimit": 12}).execute()
         data["pages"] = [{"path": r["keys"][0].replace(site.rstrip("/"), "") or "/",
                           "imp": int(r["impressions"]), "clicks": int(r["clicks"]),
@@ -213,7 +224,7 @@ def fetch_real():
     # 日別クリック推移（当月）
     try:
         res = sc.searchanalytics().query(siteUrl=site, body={
-            "startDate": f"{labels[-1]}-01", "endDate": date.today().isoformat(),
+            "startDate": f"{labels[-1]}-01", "endDate": month_end(labels[-1]),
             "dimensions": ["date"], "rowLimit": 31}).execute()
         rows = sorted(res.get("rows", []), key=lambda r: r["keys"][0])
         data["daily"] = {"labels": [r["keys"][0][8:] for r in rows],
@@ -306,7 +317,7 @@ def fetch_real():
     # --- GSC: 順位帯の分布（リライト対象がどれだけ眠っているかの可視化）---
     try:
         res = sc.searchanalytics().query(siteUrl=site, body={
-            "startDate": f"{cur_m}-01", "endDate": date.today().isoformat(),
+            "startDate": f"{cur_m}-01", "endDate": month_end(cur_m),
             "dimensions": ["query"], "rowLimit": 1000}).execute()
         buckets = {"1〜3位": 0, "4〜10位": 0, "11〜20位": 0, "21〜50位": 0, "51位以下": 0}
         bucket_imp = dict.fromkeys(buckets, 0)
@@ -330,7 +341,7 @@ def fetch_real():
     # --- GSC: デバイス別（スマホとPCで順位・CTRが違うことがある）---
     try:
         res = sc.searchanalytics().query(siteUrl=site, body={
-            "startDate": f"{cur_m}-01", "endDate": date.today().isoformat(),
+            "startDate": f"{cur_m}-01", "endDate": month_end(cur_m),
             "dimensions": ["device"]}).execute()
         jp = {"MOBILE": "スマートフォン", "DESKTOP": "PC", "TABLET": "タブレット"}
         data["gsc_devices"] = [{
@@ -345,12 +356,31 @@ def fetch_real():
         sh = build("sheets", "v4", credentials=creds)
         vals = sh.spreadsheets().values().get(
             spreadsheetId=ENV["SPREADSHEET_ID"], range="記事作成ログ!A2:L200").execute().get("values", [])
+        # 記事作成ログの列: 0=公開日時 1=サイト 2=タイトル 3=キーワード
+        #                  4=カテゴリ 5=スコア 6=文字数 7=URL 8=備考
+        # 日付は0列目。1列目（サイト名）を日付として見ていたため、
+        # 常に0件になり「新規公開記事 0本」と報告していた。
         cur = labels[-1].replace("-", "/")
-        rows = [v for v in vals if len(v) > 9 and str(v[1]).startswith((labels[-1], cur))]
+        # 台帳のサイト表記は「AI導入補助金 (lp.7senses.co.jp)」のような形で、
+        # 設定側の name（AI導入補助金サポート）と一致しない。
+        # 名前で照合すると常に0件になるため、ドメインで照合する。
+        # 旧ドメインで記録された行もあるので、URL側も見る。
+        dom = site_cfg().get("domain", "")
+        rows = []
+        for v in vals:
+            v = list(v) + [""] * (9 - len(v))
+            if not str(v[0]).startswith((labels[-1], cur)):
+                continue
+            if dom and dom not in str(v[1]) and dom not in str(v[7]):
+                continue
+            rows.append(v)
         data["content"] = {
-            "published": len([v for v in rows if "公開" in str(v[9])]),
-            "rows": [{"date": v[1], "title": v[3][:30], "score": v[8] if len(v) > 8 else "-",
-                      "status": v[9]} for v in rows[:15]],
+            # URLが入っていれば公開済み。備考は「既存記事の同期」等が入り、
+            # 「公開」の文字で判定すると取りこぼす
+            "published": len([v for v in rows if str(v[7]).startswith("http")]),
+            "rows": [{"date": v[0], "title": v[2][:30], "score": v[5] or "-",
+                      "status": "公開済み" if str(v[7]).startswith("http") else "-"}
+                     for v in rows[:15]],
         }
     except Exception as e:
         data["content"] = {"published": 0, "rows": [], "note": f"スプレッドシート未接続: {e}"}
