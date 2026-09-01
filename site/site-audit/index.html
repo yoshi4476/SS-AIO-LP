@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>サイトの技術チェック（無料）｜URL入力だけで12項目を採点</title>
-<meta name="description" content="URLを入力するだけで、サイトの技術面12項目・100点満点で無料診断。タイトル・構造化データ・AIクローラー許可・llms.txtまで自動チェックし、改善アドバイスを表示します。">
+<meta name="description" content="URLを入力するだけで、サイトの技術面12項目を100点満点で自動チェック。タイトル・構造化データ・AIクローラー許可・llms.txtまで自動チェックし、改善アドバイスを表示します。">
 <link rel="canonical" href="https://ai.7senses.co.jp/site-audit/">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="無料サイト診断｜AIO/SEO対応を100点満点で採点">
-<meta property="og:description" content="URL入力だけでAI検索対応度を12項目で自動診断。">
+<meta property="og:title" content="サイトの技術チェック（無料）｜12項目を自動採点">
+<meta property="og:description" content="URL入力だけで、サイトの技術面12項目を自動チェック。">
 <meta property="og:url" content="https://ai.7senses.co.jp/site-audit/">
 <meta property="og:image" content="https://ai.7senses.co.jp/images/ogp-default.png">
 <meta property="og:site_name" content="AI集客ラボ">
@@ -50,7 +50,7 @@
  "@type": "BreadcrumbList",
  "itemListElement": [
   {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://ai.7senses.co.jp/"},
-  {"@type": "ListItem", "position": 2, "name": "無料サイト診断", "item": "https://ai.7senses.co.jp/site-audit/"}
+  {"@type": "ListItem", "position": 2, "name": "サイトの技術チェック", "item": "https://ai.7senses.co.jp/site-audit/"}
  ]
 }
 </script>
@@ -80,7 +80,7 @@
 <nav class="breadcrumb" aria-label="パンくずリスト">
   <ol>
     <li><a href="/">ホーム</a></li>
-    <li aria-current="page">無料サイト診断</li>
+    <li aria-current="page">サイトの技術チェック</li>
   </ol>
 </nav>
 
@@ -93,10 +93,10 @@
 <section class="section" style="padding-top:1rem;">
   <div class="audit-panel">
     <form class="audit-form" id="auditForm">
-      <input type="url" id="auditUrl" aria-label="診断したいサイトのURL" placeholder="https://example.co.jp/" required>
-      <button type="submit" class="btn btn-primary" data-cta="site_audit_run">無料で診断する</button>
+      <input type="url" id="auditUrl" aria-label="チェックしたいサイトのURL" placeholder="https://example.co.jp/" required>
+      <button type="submit" class="btn btn-primary" data-cta="site_audit_run">無料でチェックする</button>
     </form>
-    <p style="font-size:.78rem;color:var(--muted);margin:.7rem 0 0;">※ 登録不要。診断対象はご自身が管理するサイト、または公開されているページに限ります。</p>
+    <p style="font-size:.78rem;color:var(--muted);margin:.7rem 0 0;">※ 登録不要。対象はご自身が管理するサイト、または公開されているページに限ります。</p>
     <div id="auditResult"></div>
   </div>
 </section>
@@ -104,12 +104,12 @@
 <section class="section" style="padding-top:2rem;">
   <div class="section-head">
     <span class="en">About</span>
-    <h2>この診断でわかること</h2>
+    <h2>このチェックでわかること</h2>
   </div>
   <div style="max-width:52em;">
-    <p><strong>無料サイト診断は、入力されたページを実際に取得し、AI検索とSEOの技術対応12項目を機械的に検査して100点満点で採点するツールです。</strong>検査項目には、タイトル・メタディスクリプションの適切さ、構造化データ（Schema）の有無、robots.txtでのAIクローラー許可、llms.txtの設置、OGP設定などが含まれます。いずれも、AIに引用されるため・検索で正しく評価されるための土台となる項目です。</p>
-    <p>85点以下だった場合は、改善余地がそのまま集客の伸びしろです。診断結果には項目ごとの合否が表示されるため、<strong>不合格項目を上から順に直すだけで対応が進みます</strong>。技術的な修正が難しい場合や、コンテンツ面（記事の構造・一次情報）まで含めた本格的な分析が必要な場合は、<a href="/lp/">無料の現状分析</a>をご利用ください。</p>
-    <p>※ 本診断は公開ページの機械検査であり、検索順位やAI引用の実績そのものを測定するものではありません。コンテンツ対応もあわせて確認したい方は<a href="/diagnosis/aio/">AIO診断（30秒）</a>を、店舗のマップ対策は<a href="/diagnosis/meo/">MEO診断（30秒）</a>をどうぞ。チェック項目の意味から知りたい方は<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方｜無料チェック8項目とツールの使い分け</a>もあわせてご覧ください。<br>監修: <a href="/author/haraguchi/">セブンセンシズ株式会社 代表取締役 原口優</a></p>
+    <p><strong>サイトの技術チェックは、入力されたページを実際に取得し、AI検索とSEOの技術対応12項目を機械的に検査して100点満点で採点するツールです。</strong>検査項目には、タイトル・メタディスクリプションの適切さ、構造化データ（Schema）の有無、robots.txtでのAIクローラー許可、llms.txtの設置、OGP設定などが含まれます。いずれも、AIに引用されるため・検索で正しく評価されるための土台となる項目です。</p>
+    <p>85点以下だった場合は、改善余地がそのまま集客の伸びしろです。結果には項目ごとの合否が表示されるため、<strong>不合格項目を上から順に直すだけで対応が進みます</strong>。技術的な修正が難しい場合や、コンテンツ面（記事の構造・一次情報）まで含めた本格的な分析が必要な場合は、<a href="/lp/">無料の現状分析</a>をご利用ください。</p>
+    <p>※ 本チェックは公開ページの機械検査であり、検索順位やAI引用の実績そのものを測定するものではありません。コンテンツ対応もあわせて確認したい方は<a href="/diagnosis/aio/">AI検索対応度チェック（30秒）</a>を、店舗のマップ対策は<a href="/diagnosis/meo/">MEO対応度チェック（30秒）</a>をどうぞ。チェック項目の意味から知りたい方は<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方｜無料チェック8項目とツールの使い分け</a>もあわせてご覧ください。<br>監修: <a href="/author/haraguchi/">セブンセンシズ株式会社 代表取締役 原口優</a></p>
   </div>
 </section>
 
@@ -127,7 +127,7 @@
       <a href="/glossary/">用語集</a>
       <a href="/diagnosis/meo/">マップ集客の整備度チェック（30秒）</a>
       <a href="/diagnosis/aio/">AI検索の対応度チェック（30秒）</a>
-      <a href="/site-audit/">サイト診断</a>
+      <a href="/site-audit/">サイトの技術チェック</a>
       <a href="/aio/">AIO・LLMO運用</a>
       <a href="/seo/">SEO運用</a>
       <a href="/meo/">MEO運用</a>
@@ -154,7 +154,7 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var url = document.getElementById("auditUrl").value.trim();
-    out.innerHTML = '<div class="loading">診断中です…（5〜10秒ほどかかります）</div>';
+    out.innerHTML = '<div class="loading">チェック中です…（5〜10秒ほどかかります）</div>';
     fetch("/api/audit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -182,9 +182,9 @@
         '<div class="btn-row" style="justify-content:center;margin-top:1.6rem;">' +
         '<a class="btn btn-primary" href="/lp/#form" data-cta="site_audit_result_lp">この結果をもとに無料相談する <span class="arw">→</span></a>' +
         '<a class="btn btn-ghost" href="/diagnosis/" data-cta="audit_to_diagnosis">集客タイプ診断もやってみる</a></div>' +
-        '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本診断は公開ページの自動チェックによる簡易採点です。検索順位・AI引用状況を含む詳細分析は無料相談で承ります。</p>';
+        '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本チェックは公開ページの自動検査による簡易採点です。検索順位・AI引用状況を含む詳細分析は無料相談で承ります。</p>';
     }).catch(function () {
-      out.innerHTML = '<p style="color:#b91c1c;font-weight:700;margin-top:1.2rem;">診断サーバーに接続できませんでした。本機能はサイト公開後（Cloudflare Pages上）で利用できます。</p>';
+      out.innerHTML = '<p style="color:#b91c1c;font-weight:700;margin-top:1.2rem;">検査サーバーに接続できませんでした。本機能はサイト公開後（Cloudflare Pages上）で利用できます。</p>';
     });
   });
 })();

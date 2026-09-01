@@ -48,10 +48,50 @@ def load_articles():
 
         arts.append({
             "slug": p.stem, "title": fv("title"), "desc": fv("description"),
-            "cat": fv("category"),
+            "cat": fv("category"), "kw": fv("keyword"),
             "h2": [h.strip() for h in re.findall(r"^##\s+(.+?)\s*$", body, re.M)],
         })
     return arts
+
+
+def norm_kw(s):
+    """狙う語の正規化。表記ゆれ（空白・記号・全半角）を吸収して同一視する
+
+    「aio 診断」と「aio診断」は検索エンジンからは同じ意図に見える。
+    分けて数えると、同じ語を2記事が狙っている状態を見逃す。
+    """
+    return _NOISE.sub("", str(s)).lower()
+
+
+def kw_tokens(s):
+    """狙う語を語のかたまりに割る。「it導入補助金 学習塾」→ {it導入補助金, 学習塾}"""
+    return {norm_kw(t) for t in re.split(r"[\s　]+", str(s)) if norm_kw(t)}
+
+
+def kw_conflicts(kw, arts):
+    """狙う語が既存記事とぶつかっていないか
+
+    文字の似かたで判定してはいけない。「it導入補助金 学習塾」と
+    「it導入補助金 飲食店」は8割方同じ文字だが、業種が違う別記事で、
+    食い合わない。カテゴリ共通の語が似ているだけで止めると、
+    書けるはずのKWが大量に弾かれる（実データで88件中ほとんどが誤検出だった）。
+
+    食い合うのは、一方の狙う範囲がもう一方に含まれるときだけ。
+    """
+    n, nt = norm_kw(kw), kw_tokens(kw)
+    out = []
+    for a in arts:
+        if not a.get("kw"):
+            continue
+        m, mt = norm_kw(a["kw"]), kw_tokens(a["kw"])
+        if not m:
+            continue
+        if m == n or (nt and nt == mt):
+            out.append((1.0, a, "完全一致"))
+        elif (m in n or n in m) or (nt < mt or mt < nt):
+            # 例:「クリニック seo」⊂「クリニック seo コンサルティング」
+            out.append((0.9, a, "包含"))
+    return sorted(out, key=lambda x: -x[0])
 
 
 def h2_overlap(a, b):
@@ -60,6 +100,62 @@ def h2_overlap(a, b):
         return 0.0
     hits = sum(1 for x in a["h2"] if any(dice(x, y) >= 0.6 for y in b["h2"]))
     return hits / min(len(a["h2"]), len(b["h2"]))
+
+
+# 骨組みの語。パイプラインが全記事に同じ枠を作らせるため、
+# ここが一致しても「同じ主題」の証拠にはならない
+_FRAME = {
+    "とは", "違い", "手順", "方法", "理由", "失敗", "対処", "対処法", "注意", "注意点",
+    "選び方", "費用", "相場", "目安", "基準", "判断", "ポイント", "まとめ", "質問",
+    "よくある", "ステップ", "つの", "始め方", "進め方", "流れ", "比較", "事例",
+    "メリット", "デメリット", "効果", "実装", "設定", "確認", "改善", "解説",
+    "必要", "場合", "とき", "ため", "こと", "もの", "以上", "以内", "できる",
+}
+_TERM = re.compile(r"[ァ-ヶー]{2,}|[一-龥]{2,}|[A-Za-z][A-Za-z0-9\-]{1,}")
+
+
+def terms(*texts):
+    """主題を表す語だけを取り出す。骨組みの語は落とす"""
+    out = set()
+    for t in texts:
+        for x in (t if isinstance(t, (list, tuple)) else [t]):
+            for w in _TERM.findall(str(x)):
+                w = w.lower()
+                if w not in _FRAME and len(w) >= 2:
+                    out.add(w)
+    return out
+
+
+def topic_overlap(plan_terms, arts):
+    """主題の重なりを、その語の珍しさで重みづけして測る
+
+    同じカテゴリの記事は「AIO」「対策」を全部が持つ。素の一致率で比べると
+    どれも高く出て使いものにならない。全記事に出る語の重みを下げ、
+    その記事にしかない語（診断・チェックリストなど）で判定する。
+    """
+    import math
+    n = max(len(arts), 1)
+    df = {}
+    for a in arts:
+        for w in terms(a["title"], a["h2"], a.get("kw", "")):
+            df[w] = df.get(w, 0) + 1
+
+    def wt(w):
+        return math.log((n + 1) / (df.get(w, 0) + 1))
+
+    base = sum(wt(w) for w in plan_terms)
+    if base <= 0:
+        return []
+    out = []
+    for a in arts:
+        at = terms(a["title"], a["h2"], a.get("kw", ""))
+        shared = plan_terms & at
+        if not shared:
+            continue
+        r = sum(wt(w) for w in shared) / base
+        if r > 0:
+            out.append((round(r, 2), a, sorted(shared, key=lambda w: -wt(w))[:6]))
+    return sorted(out, key=lambda x: -x[0])
 
 
 def find_pairs(arts):

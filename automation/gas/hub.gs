@@ -209,6 +209,8 @@ function doPost(e) {
   try {
     switch (body.action) {
       case 'claim_kw':    return json_(claimKw_(body.site, body.keyword));
+      // 書く前の食い合い審査。記事工場が Phase 1 と Phase 3 の両方で呼ぶ
+      case 'kw_conflict': return json_(kwConflict_(body.site, body.keyword));
       case 'retire_kw':   return json_(retireKw_(body.site, body.keywords, body.reason, body.force));
       case 'publish_log': return json_(publishLog_(body));
       case 'add_kw':      return json_(addKw_(body.site, body.keywords || []));
@@ -269,6 +271,49 @@ function kwRows_() {
   return sh.getRange(2, 1, sh.getLastRow() - 1, TABS['KW台帳'].length).getValues();
 }
 
+/**
+ * 狙う語の正規化。空白・記号・全半角のゆれを落として同一視する。
+ *
+ * 「aio 診断」と「aio診断」は検索エンジンからは同じ意図に見える。
+ * 文字列の完全一致で重複を見ていたため、両方が台帳に入り、
+ * 2記事が同じ語を狙って順位が割れた。
+ */
+function normKw_(s) {
+  return String(s || '')
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (c) {
+      return String.fromCharCode(c.charCodeAt(0) - 0xFEE0);
+    })
+    .replace(/[\s　・|｜:：\-—?？!！。、,.／\/（）()【】\[\]]/g, '')
+    .toLowerCase();
+}
+
+/**
+ * その語が既存の台帳とぶつかっていないかを返す。
+ *
+ * 同一サイト内の重複は順位が割れる。サイトをまたぐ重複は担当領域の侵食で、
+ * グループ全体で見ると同じ語を自社2サイトで奪い合うことになる。どちらも止める。
+ */
+function kwConflict_(site, keyword) {
+  const n = normKw_(keyword);
+  if (!n) return { ok: false, error: 'キーワードが空です' };
+  const same = [], cross = [];
+  kwRows_().forEach(function (r) {
+    const st = String(r[2]).trim();
+    if (st === '対象外' || st === '取り下げ') return;   // 生きている行だけ見る
+    const m = normKw_(r[1]);
+    if (!m) return;
+    const hit = (m === n) ? '完全一致'
+      : (m.indexOf(n) === 0 || n.indexOf(m) === 0) ? '包含' : '';
+    if (!hit) return;
+    const rec = { site: r[0], keyword: r[1], status: st, url: r[9] || '', match: hit };
+    (String(r[0]) === String(site) ? same : cross).push(rec);
+  });
+  const level = same.length ? 2 : (cross.length ? 1 : 0);
+  return { ok: true, level: level, same_site: same, other_site: cross,
+           verdict: level === 2 ? '着手禁止（同じサイトに同じ語がある）'
+             : level === 1 ? '要確認（他サイトが同じ語を持っている）' : '着手可' };
+}
+
 /** 次に書くべきKWを1件返す（状態が「未着手」で優先度の高い順） */
 function nextKw_(site) {
   const rows = kwRows_();
@@ -282,9 +327,21 @@ function nextKw_(site) {
   cands.sort(function (a, b) { return String(a.priority).localeCompare(String(b.priority)); });
   const remaining = cands.length;
   if (!remaining) return { ok: true, keyword: null, remaining: 0, need_replenish: true };
-  const top = cands[0];
-  return { ok: true, keyword: top.keyword, category: top.category, aim: top.aim,
-           site: top.site, remaining: remaining, need_replenish: remaining <= 5 };
+
+  // 渡す前に食い合いを確かめる。台帳に残った古い重複を、
+  // そのまま次の記事のKWとして渡すと、書いたあとに気づくことになる。
+  const blocked = [];
+  for (let i = 0; i < cands.length; i++) {
+    const c = cands[i];
+    const cf = kwConflict_(c.site, c.keyword);
+    if (cf.level === 2) { blocked.push({ keyword: c.keyword, why: cf.verdict }); continue; }
+    return { ok: true, keyword: c.keyword, category: c.category, aim: c.aim,
+             site: c.site, remaining: remaining, need_replenish: remaining <= 5,
+             cross_site_warning: cf.other_site, skipped_conflict: blocked };
+  }
+  return { ok: true, keyword: null, remaining: remaining, need_replenish: true,
+           skipped_conflict: blocked,
+           note: '未着手のKWはすべて既存記事と食い合います。台帳の補充が必要です' };
 }
 
 /** 全サイトのKWを返す（サイト横断の重複チェック・領域侵食チェック用） */
@@ -330,34 +387,65 @@ function kwStatus_(site) {
            todo: count('未着手'), doing: count('執筆中'), done: count('公開済み') };
 }
 
-/** 執筆開始をマーク（同じKWを二重に書かないため） */
+/**
+ * 執筆開始をマーク（同じKWを二重に書かないため）
+ *
+ * ここが最後の砦。この先は本文を書く工程で、公開後に気づくと
+ * 統合か削除しか残らない。既存記事と食い合う語は、ここで止める。
+ */
 function claimKw_(site, keyword) {
   const sh = sheet_('KW台帳');
   const rows = kwRows_();
+  const n = normKw_(keyword);
   for (let i = 0; i < rows.length; i++) {
-    if (String(rows[i][0]) === site && String(rows[i][1]) === keyword) {
-      sh.getRange(i + 2, 3).setValue('執筆中');
-      sh.getRange(i + 2, 8).setValue(new Date());
-      return { ok: true };
+    if (String(rows[i][0]) !== site || normKw_(rows[i][1]) !== n) continue;
+    // 自分の行を除いて、生きている同じ語がないか見る
+    const dup = [];
+    rows.forEach(function (r, j) {
+      if (j === i || normKw_(r[1]) !== n) return;
+      const st = String(r[2]).trim();
+      if (st === '対象外' || st === '取り下げ') return;
+      dup.push({ site: r[0], keyword: r[1], status: st, url: r[9] || '' });
+    });
+    if (dup.length) {
+      return { ok: false, error: '同じ語が台帳にすでにあります。書くと順位が割れます',
+               conflicts: dup };
     }
+    sh.getRange(i + 2, 3).setValue('執筆中');
+    sh.getRange(i + 2, 8).setValue(new Date());
+    return { ok: true };
   }
   return { ok: false, error: 'KWが見つかりません: ' + keyword };
 }
 
-/** KWをまとめて追加（自動補充） */
+/** KWをまとめて追加（自動補充）。表記ゆれを吸収して重複を弾く */
 function addKw_(site, keywords) {
   const sh = sheet_('KW台帳');
-  const exist = {};
-  kwRows_().forEach(function (r) { exist[r[0] + '|' + r[1]] = true; });
+  // 文字列の完全一致では「aio 診断」と「aio診断」が両方通る。正規化して比べる。
+  const exist = {}, other = {};
+  kwRows_().forEach(function (r) {
+    const st = String(r[2]).trim();
+    if (st === '対象外' || st === '取り下げ') return;
+    const n = normKw_(r[1]);
+    if (!n) return;
+    if (String(r[0]) === String(site)) exist[n] = r[1];
+    else other[n] = r[0];
+  });
   let added = 0;
+  const skipped = [], crossed = [];
   keywords.forEach(function (k) {
     const kw = typeof k === 'string' ? { keyword: k } : k;
-    if (!kw.keyword || exist[site + '|' + kw.keyword]) return;
+    const n = normKw_(kw.keyword);
+    if (!n) return;
+    if (exist[n]) { skipped.push({ keyword: kw.keyword, dup: exist[n] }); return; }
+    // 他サイトが持つ語は入れない。グループ内で同じ語を奪い合うことになる
+    if (other[n]) { crossed.push({ keyword: kw.keyword, site: other[n] }); return; }
     sh.appendRow([site, kw.keyword, '未着手', kw.priority || 'B', kw.category || '',
                   kw.aim || '', new Date(), '', '', '', kw.note || '']);
+    exist[n] = kw.keyword;
     added++;
   });
-  return { ok: true, added: added };
+  return { ok: true, added: added, skipped_dup: skipped, skipped_other_site: crossed };
 }
 
 /** 公開完了の記録（KW台帳と記事作成ログの両方を更新） */

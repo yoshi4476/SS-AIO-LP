@@ -12,12 +12,11 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from cannibal_check import dice, load_articles  # noqa: E402
+from cannibal_check import kw_conflicts, load_articles  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAN = ROOT / "docs" / "industry-pillar-plan.md"
 REPLENISH_THRESHOLD = 5  # 残りがこの数以下になったらKWリストの補充を促す
-DUP_THRESHOLD = 0.50     # 既存記事タイトルとの類似度がこれ以上のKWは重複疑いとして除外
 
 
 def plan_keywords():
@@ -66,22 +65,30 @@ def main():
     corpus = written_corpus()
     remaining = [(g, k) for g, k in kws if not is_written(k, corpus)]
 
-    # 既存記事と検索意図が近すぎるKWは、書く前にカニバリ候補として除外する
+    # 既存記事とぶつかるKWは、書く前に候補から外す。
+    # タイトルとの文字類似で判定していたが、「it導入補助金 学習塾」と
+    # 「it導入補助金 飲食店」のようにカテゴリ語が同じだけのKWまで弾いていた。
+    # 狙う範囲が含まれる関係かどうかで判定する。
     arts = load_articles()
     safe, dup = [], []
     for g, k in remaining:
-        hit = max(((dice(k, a["title"]), a["slug"]) for a in arts), default=(0.0, ""))
-        (dup if hit[0] >= DUP_THRESHOLD else safe).append((g, k, hit))
+        cf = kw_conflicts(k, arts)
+        if cf:
+            dup.append((g, k, (cf[0][2], cf[0][1]["slug"])))
+        else:
+            safe.append((g, k, ("", "")))
 
     print(f"KW_TOTAL={len(kws)}  KW_WRITTEN={len(kws) - len(remaining)}  "
           f"KW_REMAINING={len(safe)}  KW_DUP_SKIPPED={len(dup)}")
     print("次のKW候補（上から順に採用する）:")
     for g, k, _ in safe[:5]:
         print(f"  - {k}  ［{g}］")
+    print("※ 採用の前に必ず実行: python scripts/kw_guard.py \"<KW>\" --site <site_id>")
+    print("   （GSCの実績と照合する。台帳に無くても、既存ページが順位を持つ語は書けない）")
     if dup:
-        print("重複疑いのため除外したKW（採用禁止。書くとカニバリになる）:")
-        for g, k, (s, slug) in dup:
-            print(f"  x {k}  ［{g}］ ← {slug} と類似度{s:.2f}")
+        print("重複のため除外したKW（採用禁止。書くとカニバリになる）:")
+        for g, k, (kind, slug) in dup:
+            print(f"  x {k}  ［{g}］ ← {slug} と{kind}")
     remaining = safe
     if len(remaining) <= REPLENISH_THRESHOLD:
         print(f"NEED_REPLENISH=yes  （残り{len(remaining)}本 ≤ 閾値{REPLENISH_THRESHOLD}本）")

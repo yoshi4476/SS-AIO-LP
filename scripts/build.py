@@ -58,7 +58,7 @@ FOOTER_NAV_DEFAULT = [
     {"label": "用語集", "url": "/glossary/"},
     {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
     {"label": "AI検索の対応度チェック（30秒）", "url": "/diagnosis/aio/"},
-    {"label": "サイト診断", "url": "/site-audit/"},
+    {"label": "サイトの技術チェック", "url": "/site-audit/"},
     {"label": "AIO・LLMO運用", "url": "/aio/"},
     {"label": "SEO運用", "url": "/seo/"},
     {"label": "MEO運用", "url": "/meo/"},
@@ -472,6 +472,21 @@ def quality_checks(all_metas):
             if r >= 0.8:
                 warns.append(f"カニバリ疑い: タイトル類似{r:.0%} {all_metas[i]['slug']} ↔ {all_metas[j]['slug']}"
                              "（80%ゲート。タイトル/切り口を差別化するか統合を検討）")
+
+    # 狙う語の重複。タイトル類似だけでは通り抜ける（実際、タイトルは似ていないのに
+    # 同じ語を狙って51語・表示484回・クリック0になった記事があった）。
+    # 「aio 診断」と「aio診断」は検索エンジンには同じに見えるので、表記ゆれを吸収して比べる。
+    import re as _re
+    _n = lambda s: _re.sub(r"[\s　・|｜:：\-—?？!！。、,.／/（）()【】\[\]]", "", str(s)).lower()
+    bykw = {}
+    for m in all_metas:
+        k = _n(m.get("keyword", ""))
+        if k:
+            bykw.setdefault(k, []).append(m["slug"])
+    for k, slugs in bykw.items():
+        if len(slugs) > 1:
+            warns.append(f"カニバリ: 同じ狙う語を{len(slugs)}記事が持っている「{k}」 → "
+                         + " / ".join(slugs) + "（1語1記事。統合するか語をずらす）")
     return warns
 
 
