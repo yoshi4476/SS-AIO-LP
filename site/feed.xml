@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-02T00:00:00+09:00</updated>
+  <updated>2026-09-03T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>美容室のMEO対策とは？指名予約が増える6つの実践ポイント</title>
+    <link href="https://ai.7senses.co.jp/meo/biyoushitsu-meo-taisaku/"/>
+    <id>https://ai.7senses.co.jp/meo/biyoushitsu-meo-taisaku/</id>
+    <updated>2026-09-03T00:00:00+09:00</updated>
+    <summary>美容室のMEO対策とは、Googleマップでの表示情報を整え指名予約や新規来店につなげる取り組みです。全国27万店舗超が競う市場で、3,200店舗以上の支援実績から見えた6つの実践ポイントを解説します。</summary>
+  </entry>
   <entry>
     <title>AIO対策でAIに引用されるには？5つの実践ポイント</title>
     <link href="https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/</id>
     <updated>2026-08-31T00:00:00+09:00</updated>
     <summary>Googleマップの口コミを増やす方法は、来店直後の自然な依頼とQRコードの導線づくりが基本です。ポリシー違反にならない増やし方5つと、低評価にも使える返信のコツを解説します。</summary>
-  </entry>
-  <entry>
-    <title>LLMO対策とは？ChatGPTに引用される7つの方法</title>
-    <link href="https://ai.7senses.co.jp/aio/llmo-taisaku-hoho/"/>
-    <id>https://ai.7senses.co.jp/aio/llmo-taisaku-hoho/</id>
-    <updated>2026-08-31T00:00:00+09:00</updated>
-    <summary>LLMO対策とは、ChatGPTやPerplexityなどのAIチャットの回答で自社が引用・言及されるための最適化です。中小企業が実践できる7つの方法を、計測のやり方まで含めて解説します。</summary>
   </entry>
 </feed>
