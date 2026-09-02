@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=9d3da35b">
+<link rel="stylesheet" href="/css/style.css?v=374c877a">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=386c6e76"></script>
 <style>
@@ -182,7 +182,10 @@
         '<div class="btn-row" style="justify-content:center;margin-top:1.6rem;">' +
         '<a class="btn btn-primary" href="/lp/#form" data-cta="site_audit_result_lp">この結果をもとに無料相談する <span class="arw">→</span></a>' +
         '<a class="btn btn-ghost" href="/diagnosis/" data-cta="audit_to_diagnosis">集客タイプ診断もやってみる</a></div>' +
-        '<p style="font-size:.78rem;color:var(--muted);margin-top:1rem;">※ 本チェックは公開ページの自動検査による簡易採点です。検索順位・AI引用状況を含む詳細分析は無料相談で承ります。</p>';
+        '<div class="detail-note">' +
+        '<p><strong>この採点は、公開ページの機械検査による簡易版です。</strong></p>' +
+        '<p>実際の御社サイトの情報をお預かりし、検索順位やAI検索での見え方まで評価軸ごとに詳細に測るシステムを別途ご用意しています。本格的に現状を分析されたい際は、お気軽にご連絡くださいませ。</p>' +
+        '<p class="dn-free">こちらの簡易チェックは、無料でご利用いただけます。</p></div>';
       // 点数を見た直後に、結果の送付先だけを尋ねる（ページは移さない）
       if (window.leadCapture) {
         out.appendChild(window.leadCapture({

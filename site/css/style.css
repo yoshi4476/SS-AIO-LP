@@ -1385,3 +1385,12 @@ main.lab .cta-final h2 { color: #fff; }
 /* 購読フォームの結果表示（画面内で完結させる） */
 .nl-msg{font-size:.8rem;font-weight:700;color:#b91c1c;margin:.4em 0 0;min-height:1em;flex-basis:100%}
 .nl-done{font-size:.9rem;margin:0;line-height:1.8}
+
+/* 診断結果の下の案内（簡易版であること・詳細分析の存在・無料の明示） */
+.detail-note{
+  margin-top:1.4rem;padding:1.1rem 1.3rem;text-align:left;
+  background:#fff;border:1.5px dashed var(--line,#dbe3ec);border-radius:12px;
+}
+.detail-note p{font-size:.88rem;margin:0 0 .5em;line-height:1.8;color:var(--text,#1a2430)}
+.detail-note p:last-child{margin-bottom:0}
+.detail-note .dn-free{color:var(--navy,#1d4ed8);font-weight:700}
