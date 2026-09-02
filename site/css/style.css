@@ -1394,3 +1394,7 @@ main.lab .cta-final h2 { color: #fff; }
 .detail-note p{font-size:.88rem;margin:0 0 .5em;line-height:1.8;color:var(--text,#1a2430)}
 .detail-note p:last-child{margin-bottom:0}
 .detail-note .dn-free{color:var(--navy,#1d4ed8);font-weight:700}
+
+/* 資料区画: 動画とスライドを横並びに（狭い画面では縦に戻す） */
+.doc-duo{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;align-items:start;max-width:1160px;margin:0 auto;}
+@media(max-width:920px){.doc-duo{grid-template-columns:1fr;max-width:640px;}}
