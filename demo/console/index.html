@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AI集客ラボ 運用コンソール（デモ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0b1220; --panel:#121c2e; --panel2:#0f1829; --line:#22314c; --line2:#2c3d5c;
+  --ink:#e8eef7; --muted:#8fa0b8; --faint:#61728c;
+  --machine:#74c7d6;      /* 機械がやること */
+  --human:#e8a33d;        /* 人がやること */
+  --ok:#4ade80; --warn:#fbbf24; --ng:#f87171;
+  --head:"Zen Kaku Gothic New","Yu Gothic UI","Yu Gothic",sans-serif;
+  --sans:"Yu Gothic UI","Yu Gothic","Noto Sans JP",sans-serif;
+  --num:"Outfit","Yu Gothic UI",sans-serif;
+  --mono:"Consolas","Courier New",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:14px;line-height:1.7;display:grid;grid-template-columns:246px 1fr;
+  height:100vh;overflow:hidden;
+}
+/* ── 左の柱 ───────────────────────── */
+.rail{background:var(--panel2);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:20px 0}
+.brand{display:flex;align-items:center;gap:10px;padding:0 20px 20px;border-bottom:1px solid var(--line)}
+.brand .mk{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#1c3f7c,#74c7d6);
+  display:grid;place-items:center;font-family:var(--num);font-weight:700;font-size:13px;color:#04101f}
+.brand b{font-family:var(--head);font-size:14px;letter-spacing:.02em;display:block;line-height:1.35}
+.brand span{font-size:10px;color:var(--faint);letter-spacing:.16em;font-family:var(--num)}
+.nav{padding:14px 12px;display:grid;gap:2px}
+.nav button{
+  all:unset;display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;
+  cursor:pointer;color:var(--muted);font-size:13px;transition:background .15s,color .15s;
+}
+.nav button:hover{background:#16223a;color:var(--ink)}
+.nav button[aria-current="true"]{background:#182742;color:var(--ink);font-weight:700}
+.nav .no{font-family:var(--num);font-size:11px;color:var(--faint);width:14px}
+.nav button[aria-current="true"] .no{color:var(--machine)}
+.rail-foot{margin-top:auto;padding:16px 20px 0;border-top:1px solid var(--line);font-size:11px;color:var(--faint)}
+.legend{display:grid;gap:7px;margin-bottom:12px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.dot.m{background:var(--machine)} .dot.h{background:var(--human)}
+
+/* ── 本体 ───────────────────────── */
+.main{overflow-y:auto;padding:0 0 60px}
+.top{
+  position:sticky;top:0;z-index:5;background:rgba(11,18,32,.93);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding:16px 32px;display:flex;align-items:center;gap:26px;flex-wrap:wrap
+}
+.top h1{font-family:var(--head);font-size:17px;margin:0;font-weight:900}
+.top .sub{font-size:11.5px;color:var(--faint);margin-top:1px}
+.livedot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(74,222,128,.16);
+  animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.top .right{margin-left:auto;display:flex;gap:26px;align-items:center}
+.kv{text-align:right}
+.kv b{font-family:var(--num);font-size:19px;font-weight:700;display:block;line-height:1.15}
+.kv small{font-size:10px;color:var(--faint);letter-spacing:.06em}
+.kv.m b{color:var(--machine)} .kv.h b{color:var(--human)}
+.wrap{padding:26px 32px;max-width:1180px}
+.page{display:none} .page.on{display:block}
+
+h2.sec{font-family:var(--head);font-size:20px;margin:0 0 4px;font-weight:900}
+p.lead{color:var(--muted);margin:0 0 22px;font-size:13px;max-width:62em}
+h3.sub{font-family:var(--head);font-size:14px;margin:26px 0 10px;display:flex;align-items:center;gap:9px}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.card .lb{font-size:10.5px;color:var(--faint);letter-spacing:.12em;font-family:var(--num);text-transform:uppercase}
+.card .vl{font-family:var(--num);font-size:29px;font-weight:700;line-height:1.15;margin-top:5px}
+.card .un{font-size:12px;color:var(--muted);margin-left:3px;font-family:var(--sans)}
+.card .nt{font-size:11px;color:var(--faint);margin-top:3px}
+.card.m .vl{color:var(--machine)} .card.h .vl{color:var(--human)}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.panel + .panel{margin-top:14px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.split3{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;padding:2.5px 9px;border-radius:20px;
+  border:1px solid var(--line2);color:var(--muted);font-family:var(--num);letter-spacing:.08em}
+.tag.m{color:var(--machine);border-color:rgba(116,199,214,.45);background:rgba(116,199,214,.09)}
+.tag.h{color:var(--human);border-color:rgba(232,163,61,.45);background:rgba(232,163,61,.10)}
+
+/* 端末の出力 */
+.term{background:#060d18;border:1px solid var(--line);border-radius:11px;overflow:hidden;font-family:var(--mono)}
+.term .bar{background:#0c1626;border-bottom:1px solid var(--line);padding:7px 12px;display:flex;gap:6px;align-items:center}
+.term .bar i{width:9px;height:9px;border-radius:50%;background:#2b3b56;display:block}
+.term .bar span{margin-left:8px;font-size:10.5px;color:var(--faint);font-family:var(--mono)}
+.term pre{margin:0;padding:13px 15px;font-size:11.5px;line-height:1.85;color:#9fb4cf;white-space:pre-wrap;
+  max-height:330px;overflow:auto}
+.term .g{color:#5ee08a} .term .r{color:#ff8b8b} .term .y{color:#ffcc66} .term .c{color:#7fd3e3}
+
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:10.5px;color:var(--faint);letter-spacing:.1em;font-family:var(--num);text-transform:uppercase;font-weight:600}
+td.n{font-family:var(--num);text-align:right}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:5px;font-family:var(--num);font-weight:600}
+.pill.ok{background:rgba(74,222,128,.14);color:var(--ok)}
+.pill.ng{background:rgba(248,113,113,.15);color:var(--ng)}
+.pill.wt{background:rgba(232,163,61,.15);color:var(--human)}
+
+/* 工程の帯 */
+.flow{display:flex;gap:0;align-items:stretch;margin:6px 0 4px}
+.step{flex:1;background:var(--panel);border:1px solid var(--line);padding:11px 12px;position:relative}
+.step:first-child{border-radius:11px 0 0 11px} .step:last-child{border-radius:0 11px 11px 0}
+.step + .step{border-left:none}
+.step .w{font-size:10px;letter-spacing:.1em;font-family:var(--num);display:flex;align-items:center;gap:6px}
+.step .t{font-size:12px;font-weight:700;margin-top:5px;font-family:var(--head)}
+.step.m .w{color:var(--machine)} .step.h .w{color:var(--human)}
+.step.h{background:linear-gradient(180deg,rgba(232,163,61,.10),rgba(232,163,61,.03))}
+.step.now{outline:1.5px solid var(--machine);outline-offset:-1.5px;z-index:1}
+.step.now.h{outline-color:var(--human)}
+
+/* 人の確認キュー */
+.q{display:grid;gap:9px}
+.qi{display:flex;gap:13px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);
+  border-left:2.5px solid var(--human);border-radius:9px;padding:12px 15px}
+.qi .ic{font-family:var(--num);font-size:11px;color:var(--human);padding-top:2px;min-width:15px}
+.qi b{font-family:var(--head);font-size:13px;display:block}
+.qi p{margin:3px 0 0;font-size:11.5px;color:var(--muted);line-height:1.7}
+.qi .st{margin-left:auto;text-align:right;min-width:96px}
+
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:5px 20px;font-size:12px}
+.checks div{display:flex;gap:8px;align-items:baseline;color:var(--muted);padding:3px 0}
+.checks .cm{color:var(--machine);font-family:var(--num);font-size:10px}
+.checks .ch{color:var(--human);font-family:var(--num);font-size:10px}
+
+.bars{display:grid;gap:9px;margin-top:4px}
+.bar{display:grid;grid-template-columns:88px 1fr 40px;align-items:center;gap:11px;font-size:12px}
+.bar .tr{height:7px;background:#182742;border-radius:4px;overflow:hidden}
+.bar .fl{height:100%;background:linear-gradient(90deg,#1c3f7c,var(--machine));border-radius:4px}
+.bar .vv{font-family:var(--num);text-align:right;color:var(--muted);font-size:11.5px}
+.note{font-size:11px;color:var(--faint);margin-top:12px;line-height:1.75}
+.kbd{font-family:var(--mono);font-size:11px;background:#0a1424;border:1px solid var(--line);
+  border-radius:5px;padding:1.5px 6px;color:var(--machine)}
+</style>
+</head>
+<body>
+
+<aside class="rail">
+  <div class="brand">
+    <span class="mk">7S</span>
+    <span><b>運用コンソール</b><span>AI集客ラボ</span></span>
+  </div>
+  <nav class="nav" id="nav"></nav>
+  <div class="rail-foot">
+    <div class="legend">
+      <div><i class="dot m"></i>機械が担う工程</div>
+      <div><i class="dot h"></i>人が判断する工程</div>
+    </div>
+    実データ表示（社内デモ用）
+  </div>
+</aside>
+
+<main class="main">
+  <header class="top">
+    <div>
+      <h1 id="ttl">稼働状況</h1>
+      <div class="sub" id="stl">3サイトの記事制作パイプライン</div>
+    </div>
+    <span class="livedot" aria-hidden="true"></span>
+    <div class="right">
+      <div class="kv m"><b id="kA">—</b><small>MACHINE / 記事あたり</small></div>
+      <div class="kv h"><b id="kB">—</b><small>HUMAN / 記事あたり</small></div>
+    </div>
+  </header>
+  <div class="wrap" id="pages"></div>
+</main>
+
+<script id="D" type="application/json">{
+ "sites": {
+  "ai-lab": {
+   "name": "AI集客ラボ",
+   "domain": "ai.7senses.co.jp",
+   "categories": [
+    "aio",
+    "seo",
+    "meo",
+    "ai-marketing"
+   ]
+  },
+  "corporate": {
+   "name": "セブンセンシズ コーポレートサイト",
+   "domain": "corp.7senses.co.jp",
+   "categories": [
+    "keiri-bpo",
+    "keiri-jitsumu",
+    "backoffice"
+   ]
+  },
+  "subsidy": {
+   "name": "AI導入補助金サポート",
+   "domain": "lp.7senses.co.jp",
+   "categories": [
+    "hojokin"
+   ]
+  }
+ },
+ "totals": {
+  "articles": 215,
+  "avg_score": 94.8,
+  "avg_chars": 7450,
+  "min_score": 91,
+  "by_cat": [
+   [
+    "hojokin",
+    67
+   ],
+   [
+    "ai-marketing",
+    38
+   ],
+   [
+    "keiri-jitsumu",
+    30
+   ],
+   [
+    "keiri-bpo",
+    28
+   ],
+   [
+    "seo",
+    20
+   ],
+   [
+    "aio",
+    16
+   ],
+   [
+    "meo",
+    12
+   ],
+   [
+    "backoffice",
+    4
+   ]
+  ]
+ },
+ "recent": [
+  {
+   "slug": "ai-hojokin-gbizid-shutoku",
+   "title": "AI導入補助金のGビズID取得方法｜プライム取得の5つの手順",
+   "kw": "AI導入補助金 GビズID 取得方法",
+   "cat": "hojokin",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 7040
+  },
+  {
+   "slug": "ai-hojokin-security-action-hoshi2",
+   "title": "AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ",
+   "kw": "AI導入補助金 セキュリティアクション 二つ星",
+   "cat": "hojokin",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 6927
+  },
+  {
+   "slug": "aio-taisaku-ai-inyou-sareru",
+   "title": "AIO対策でAIに引用されるには？5つの実践ポイント",
+   "kw": "AIO対策 AIに引用される",
+   "cat": "aio",
+   "date": "2026-09-02",
+   "score": 96,
+   "chars": 7406
+  },
+  {
+   "slug": "aio-taisaku-yattewaikenai",
+   "title": "AIO対策でやってはいけない5つのNG行動と正しい進め方",
+   "kw": "AIO対策 やってはいけない",
+   "cat": "aio",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 7225
+  },
+  {
+   "slug": "keihi-seisan-system-erabikata",
+   "title": "経費精算システムとは？選び方の4つの軸と導入前の注意点",
+   "kw": "経費精算システム",
+   "cat": "keiri-jitsumu",
+   "date": "2026-09-02",
+   "score": 96,
+   "chars": 7323
+  },
+  {
+   "slug": "keiri-daiko-kaigyou",
+   "title": "開業したばかりの経理代行、使うべき？判断基準3つ",
+   "kw": "経理代行 開業",
+   "cat": "keiri-bpo",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 7435
+  },
+  {
+   "slug": "biyoushitsu-shukyaku-idea",
+   "title": "美容室の集客アイデア12選｜無料で今日から試せる施策",
+   "kw": "美容室 集客アイデア",
+   "cat": "ai-marketing",
+   "date": "2026-09-01",
+   "score": 92,
+   "chars": 7221
+  },
+  {
+   "slug": "freelance-keiri-yarikata",
+   "title": "フリーランスの経理のやり方｜請求・入金・源泉徴収の3ステップ管理",
+   "kw": "フリーランス 経理 やり方",
+   "cat": "keiri-jitsumu",
+   "date": "2026-09-01",
+   "score": 96,
+   "chars": 7781
+  },
+  {
+   "slug": "fudousan-seo-consulting",
+   "title": "不動産SEOコンサルティングとは？外注との違いと費用相場",
+   "kw": "seo 不動産 コンサルティング",
+   "cat": "seo",
+   "date": "2026-09-01",
+   "score": 95,
+   "chars": 7417
+  },
+  {
+   "slug": "fudousan-seo-kaisha-erabikata",
+   "title": "不動産SEO会社への外注は必要か？費用相場と6つの判断軸",
+   "kw": "不動産 seo 会社",
+   "cat": "seo",
+   "date": "2026-09-01",
+   "score": 95,
+   "chars": 7312
+  },
+  {
+   "slug": "gaichuuhi-seikyuusho-nashi",
+   "title": "外注費に請求書がない場合の経費計上｜証憑3つで対応",
+   "kw": "外注費 請求書 なし",
+   "cat": "keiri-jitsumu",
+   "date": "2026-09-01",
+   "score": 94,
+   "chars": 7120
+  },
+  {
+   "slug": "hojokin-denshishinsei-gimuka-itsukara",
+   "title": "補助金の電子申請はいつから義務化？中小企業が今やること",
+   "kw": "電子申請 義務化 中小企業 いつから",
+   "cat": "hojokin",
+   "date": "2026-09-01",
+   "score": 95,
+   "chars": 7056
+  }
+ ],
+ "guard_ok": [
+  "■ 食い合い審査: 「動物病院 集客」（ai-lab）",
+  "",
+  "   ぶつかる既存記事はありません。",
+  "",
+  "   判定: 着手可"
+ ],
+ "guard_ng": [
+  "■ 食い合い審査: 「aio診断」（ai-lab）",
+  "",
+  "   [禁止] 狙う語が既存記事と完全一致: aio-shindan-yarikata（aio診断）",
+  "           同じ語を2記事で狙うと順位が割れます。既存記事を書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+  "           「aio 診断」で16.2位・表示62。新記事を当てると順位が割れます。このページを書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+  "           「aio 診断 ツール」で17.0位・表示21。新記事を当てると順位が割れます。このページを書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+  "           「aio診断」で17.3位・表示32。新記事を当てると順位が割れます。このページを書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/diagnosis/aio/",
+  "           「aio 診断」で17.6位・表示30。新記事を当てると順位が割れます。このページを書き足してください",
+  "",
+  "   判定: 着手禁止（既存記事を書き足す）"
+ ],
+ "score": [
+  "PASS | 本文5,000字以上（depth: standard） | 5,087字",
+  "PASS | 強調12〜18箇所（最低8） | 14箇所",
+  "PASS | 冒頭が断言型（**で開始・80字以上） | 248字",
+  "PASS | 対象読者の限定文言 | target-reader div",
+  "PASS | 鮮度表記（◯年◯月時点）",
+  "PASS | 定義ブロック | definition-box div",
+  "PASS | 比較テーブルあり",
+  "PASS | 失敗例・注意点セクション",
+  "PASS | H2が6〜12個（FAQ・まとめ除く） | 7個",
+  "PASS | 全H2直下がリード文（表・リスト直置きなし）",
+  "PASS | FAQ 5問以上 | 6問",
+  "PASS | FAQ回答が40〜60字目安（許容30〜75）",
+  "PASS | 本文FAQとfrontmatter数が一致 | 本文6 / meta6",
+  "PASS | 内部リンク3本以上 | 5本",
+  "PASS | 外部権威リンク（出典）2本以上 | 5本",
+  "PASS | ［警告］段落が200字以内（規定150字＋余裕） | 最長189字",
+  "WARN | ［警告］長文が1割強以内・100字超はゼロ（規定50字） | 70字超4/47文（上限5）・100字超1文 例:「アノテの中小企業向けAI導入費用比較記事では、既存AIツールの活…」(138字)",
+  "PASS | 自社の一次情報が1つ以上ある | subsidy-vendor",
+  "PASS | 一人称の体験・観察2箇所以上 | 4箇所",
+  "PASS | 「これにより」ゼロ | 0回",
+  "PASS | 「重要です」3回以下 | 0回",
+  "",
+  "機械採点: 19/19 PASS / 警告1件（公開は可能。日次監査で順次直します）"
+ ],
+ "rules": {
+  "machine": 19,
+  "plan": 14,
+  "ai_feel": 7,
+  "agents": 60
+ }
+}</script>
+<script>
+const D = JSON.parse(document.getElementById("D").textContent);
+const T = D.totals, R = D.rules;
+const HUMAN_ITEMS = R.plan + R.ai_feel + R.agents;
+
+const term = (lines) => {
+  const paint = (l) => {
+    let s = l.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+    s = s.replace(/^(PASS)/, '<span class="g">$1</span>')
+         .replace(/^(FAIL|NG)/, '<span class="r">$1</span>')
+         .replace(/(\[禁止\])/g, '<span class="r">$1</span>')
+         .replace(/(判定: 着手可)/, '<span class="g">$1</span>')
+         .replace(/(判定: 着手禁止（既存記事を書き足す）)/, '<span class="r">$1</span>')
+         .replace(/(■[^\n]*)/, '<span class="c">$1</span>');
+    return s;
+  };
+  return lines.map(paint).join("\n");
+};
+const box = (title, lines) => `<div class="term"><div class="bar"><i></i><i></i><i></i>
+  <span>${title}</span></div><pre>${term(lines)}</pre></div>`;
+
+const flow = (nowIdx) => {
+  const st = [["機械","題材を決める","m"],["機械","食い合いを審査","m"],["人","書かない判断","h"],
+              ["機械","構成と執筆","m"],["機械","19項目を検査","m"],["人","81項目を採点","h"],
+              ["機械","公開と通知","m"]];
+  return `<div class="flow">` + st.map(([w,t,c],i) =>
+    `<div class="step ${c}${i===nowIdx?" now":""}"><div class="w"><i class="dot ${c}"></i>${w}</div>
+     <div class="t">${t}</div></div>`).join("") + `</div>`;
+};
+
+const PAGES = [
+{ id:"ops", nav:"稼働状況", ttl:"稼働状況", stl:"3サイトの記事制作パイプライン", html: () => `
+  <h2 class="sec">いま積み上がっているもの</h2>
+  <p class="lead">数字はすべてリポジトリからの実測値です。目標値や想定値は表示していません。</p>
+  <div class="cards">
+    <div class="card m"><div class="lb">Published</div><div class="vl">${T.articles}<span class="un">本</span></div><div class="nt">3サイト合計・公開済み</div></div>
+    <div class="card m"><div class="lb">Avg. score</div><div class="vl">${T.avg_score}<span class="un">点</span></div><div class="nt">100点満点・90点未満は公開不可</div></div>
+    <div class="card m"><div class="lb">Avg. length</div><div class="vl">${T.avg_chars.toLocaleString()}<span class="un">字</span></div><div class="nt">1本あたりの本文</div></div>
+    <div class="card h"><div class="lb">Human checks</div><div class="vl">${HUMAN_ITEMS}<span class="un">項目</span></div><div class="nt">1本あたり人が判断する数</div></div>
+  </div>
+  <h3 class="sub"><i class="dot m"></i>1本の記事が通る7工程</h3>
+  ${flow(-1)}
+  <p class="note">機械が担うのは、数え間違いや見落としが起きる作業。人が担うのは、正解が一つに決まらない判断。
+  <span class="kbd">python scripts/daily_audit.py</span> が毎日この流れを回します。</p>
+  <div class="split" style="margin-top:22px">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot m"></i>直近に公開した記事</h3>
+      <table><thead><tr><th>記事</th><th style="text-align:right">スコア</th><th style="text-align:right">文字数</th></tr></thead><tbody>
+      ${D.recent.slice(0,6).map(a=>`<tr><td>${a.title.slice(0,26)}</td>
+        <td class="n"><span class="pill ok">${a.score}</span></td><td class="n">${a.chars.toLocaleString()}</td></tr>`).join("")}
+      </tbody></table>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot m"></i>カテゴリ別の本数</h3>
+      <div class="bars">
+      ${T.by_cat.slice(0,6).map(([c,n])=>`<div class="bar"><span>${c}</span>
+        <span class="tr"><span class="fl" style="width:${Math.round(n/T.by_cat[0][1]*100)}%"></span></span>
+        <span class="vv">${n}</span></div>`).join("")}
+      </div>
+    </div>
+  </div>`},
+
+{ id:"kw", nav:"題材の在庫", ttl:"題材の在庫", stl:"何を書くかを決める", html: () => `
+  <h2 class="sec">書く題材は、在庫として管理します</h2>
+  <p class="lead">思いつきで書きません。狙う語を台帳に貯め、上から順に取り出します。3サイト共通の台帳なので、別サイトが持つ語も重複として弾かれます。</p>
+  ${flow(0)}
+  <div class="split3" style="margin-top:20px">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot m"></i>台帳から次の1件を取り出す</h3>
+      ${box("python scripts/kw_gate.py --before --site ai-lab", [
+        "候補: 「動物病院 集客」（台帳）","","   ■ 食い合い審査: 「動物病院 集客」（ai-lab）",
+        "      ぶつかる既存記事はありません。","      判定: 着手可","","次に書くKW: 「動物病院 集客」","KW_GATE=ok"])}
+      <p class="note">在庫が減れば自動で補充されます。人が毎朝ネタを考える必要がありません。</p>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot h"></i>ここで人が決めること</h3>
+      <div class="q">
+        <div class="qi"><span class="ic">01</span><div><b>何を書かないか</b>
+          <p>御社の事業と競合する話題、規制のある領域は台帳から外します。</p></div></div>
+        <div class="qi"><span class="ic">02</span><div><b>業種で使える表現か</b>
+          <p>医療・金融は同じ言葉でも扱いが変わります。人が線を引きます。</p></div></div>
+        <div class="qi"><span class="ic">03</span><div><b>どの市場で戦うか</b>
+          <p>台帳に何を足すかは、そのまま事業戦略の判断です。</p></div></div>
+      </div>
+    </div>
+  </div>`},
+
+{ id:"guard", nav:"食い合い審査", ttl:"食い合い審査", stl:"書く前に重複を止める", html: () => `
+  <h2 class="sec">同じ語を2記事で狙わせない</h2>
+  <p class="lead">自社の記事同士が順位を奪い合うと、どちらも上がりません。書き始める前に、既存記事と<b>実際の検索順位</b>の両方に照らして判定します。</p>
+  ${flow(1)}
+  <div class="split" style="margin-top:20px">
+    <div>
+      <h3 class="sub"><i class="dot m"></i>通った場合</h3>
+      ${box("python scripts/kw_guard.py \"動物病院 集客\" --site ai-lab", D.guard_ok)}
+    </div>
+    <div>
+      <h3 class="sub"><i class="dot m"></i>止まった場合（実際の出力）</h3>
+      ${box("python scripts/kw_guard.py \"aio診断\" --site ai-lab", D.guard_ng)}
+    </div>
+  </div>
+  <p class="note">止まる理由は推測ではありません。<b>Search Consoleの実績</b>を引いて「この語で何位・何回表示されているページが既にある」と示します。
+  止まった語は自動で台帳から退避し、次の候補へ進みます。</p>`},
+
+{ id:"write", nav:"構成と執筆", ttl:"構成と執筆", stl:"書く前に14項目を審査する", html: () => `
+  <h2 class="sec">書き始める前に、構成を審査します</h2>
+  <p class="lead">書いてから直すより、構成の段階で直すほうが速く確実です。14項目すべてが○になるまで執筆を始めません。</p>
+  ${flow(2)}
+  <div class="split3" style="margin-top:20px">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot h"></i>構成の事前審査 ${R.plan}項目（人が判断）</h3>
+      <div class="checks">
+        ${["タイトルが15〜45字・狙う語が先頭","メタ記述が60〜160字","見出し案で食い合いを再審査",
+           "H2が6〜8個・質問型に対応","全H2に1文結論の草案","冒頭200字の断言型回答",
+           "定義・比較表・FAQの配置","出典付き数値を3つ以上","一人称の体験を2箇所以上",
+           "失敗例・注意点の節","内部リンク3本を公開済みから","図解の型と内容",
+           "各H2の想定字数の合計","対象読者と鮮度の文面"].map((t,i)=>
+          `<div><span class="ch">${String(i+1).padStart(2,"0")}</span>${t}</div>`).join("")}
+      </div>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot m"></i>執筆で機械が守ること</h3>
+      <div class="q">
+        <div class="qi" style="border-left-color:var(--machine)"><span class="ic" style="color:var(--machine)">A</span>
+          <div><b>結論を先に置く</b><p>冒頭200字を断言型に。見出しごとに40〜60字の結論を先頭へ。</p></div></div>
+        <div class="qi" style="border-left-color:var(--machine)"><span class="ic" style="color:var(--machine)">B</span>
+          <div><b>AI感の7項目を排除</b><p>「これにより」「おすすめします」等を機械が検出して書き換えます。</p></div></div>
+        <div class="qi" style="border-left-color:var(--machine)"><span class="ic" style="color:var(--machine)">C</span>
+          <div><b>一次情報を組み込む</b><p>動画の書き起こしから、引用できる一文だけを抜き出して使います。</p></div></div>
+      </div>
+      <p class="note">機械が書くのは<b>骨格と規則の部分</b>だけです。何を書かないか、どの数字を使うかは人が決めています。</p>
+    </div>
+  </div>`},
+
+{ id:"score", nav:"品質検査", ttl:"品質検査", stl:"機械19項目 → 人が81項目", html: () => `
+  <h2 class="sec">数えられるものは機械が、判断は人が</h2>
+  <p class="lead">文字数や見出しの数は、200本もあれば人は必ず数え間違えます。先に機械で全項目を通してから、人の採点に入ります。</p>
+  ${flow(4)}
+  <div class="split3" style="margin-top:20px">
+    <div>
+      <h3 class="sub"><i class="dot m"></i>機械採点 ${R.machine}項目（実際の出力）</h3>
+      ${box("python scripts/score_check.py <slug>", D.score)}
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot h"></i>人の採点 ${R.agents}項目</h3>
+      <table><tbody>
+      ${[["デザイン","見出し・図解の配置"],["SEO","タイトル・文字数・内部リンク"],
+         ["編集","AI感の排除・文体の統一"],["技術正確性","正確さ・手順の再現性"],
+         ["読者目線","悩みへの対応・次の行動"],["AI検索対応","冒頭断言・FAQの整合"]].map(([a,b])=>
+        `<tr><td><b>${a}</b><div style="font-size:11px;color:var(--faint)">${b}</div></td>
+         <td class="n"><span class="tag h">10項目</span></td></tr>`).join("")}
+      </tbody></table>
+      <p class="note">合計点が足りていても、<b>1つの観点が基準を割れば不合格</b>です。弱点を合計点で覆い隠さないための決まりです。</p>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <h3 class="sub" style="margin-top:0"><i class="dot m"></i>公開の関門</h3>
+    <p style="margin:0;font-size:13px">${T.min_score}点が公開済み記事の最低点です。<b>90点未満の記事は、サイトに載る経路そのものがありません。</b>
+    急いでいても、本数が足りなくても、出せない作りにしています。</p>
+  </div>`},
+
+{ id:"human", nav:"人の確認", ttl:"人の確認", stl:"機械に任せないと決めた領域", html: () => `
+  <h2 class="sec">人が引き受けている6つのこと</h2>
+  <p class="lead">1本あたり<b>${HUMAN_ITEMS}項目</b>を人が見ています。加えて、記事の外側にある次の6つは、機械に任せていません。正解が一つに決まらないからです。</p>
+  ${flow(5)}
+  <div class="panel" style="margin-top:20px">
+    <div class="q">
+      ${[["何を書かないかを決める","御社の事業と競合する話題、規制のある領域を、書く前に外します。","記事ごと"],
+         ["数字の出典を確かめる","根拠を示せない数字は書きません。出典に当たり直します。","記事ごと"],
+         ["業種ごとの表現を判断する","医療・金融は、同じ言葉でも扱いが変わります。","記事ごと"],
+         ["サイトの改修を設計する","どのページを、どう直すか。数字を見ながら人が決めます。","毎月"],
+         ["リライトの構成を組む","どの記事を、どう組み直すか。ここも人の仕事です。","毎週"],
+         ["マーケティング戦略を立てる","どの市場で、どの言葉で戦うか。最後に決めるのは人です。","随時"]
+        ].map(([t,b,f],i)=>`<div class="qi"><span class="ic">${String(i+1).padStart(2,"0")}</span>
+          <div><b>${t}</b><p>${b}</p></div><div class="st"><span class="tag h">${f}</span></div></div>`).join("")}
+    </div>
+  </div>
+  <p class="note">人を減らしたのではありません。<b>人が力を発揮する場所を変えました。</b>
+  誤字を探していた時間を、戦略を考える時間へ移しています。</p>`},
+
+{ id:"pub", nav:"公開と計測", ttl:"公開と計測", stl:"出して終わりにしない", html: () => `
+  <h2 class="sec">公開してからが、運用の本番です</h2>
+  <p class="lead">記事は書いて終わりではありません。公開後の手入れと毎月の改善は、すべて運用に含まれます。</p>
+  ${flow(6)}
+  <div class="split" style="margin-top:20px">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot m"></i>機械が毎日やること</h3>
+      <table><tbody>
+      ${[["公開と配信","品質を満たした記事だけを配信"],["検索エンジンへの通知","Google・Bingへ即時通知"],
+         ["リンク切れの検査","全内部リンクの生存を毎日確認"],["重複の照合","3サイト横断で話題の重なりを検出"],
+         ["順位と表示の集計","Search Consoleから毎日取得"]].map(([a,b])=>
+        `<tr><td><b>${a}</b><div style="font-size:11px;color:var(--faint)">${b}</div></td>
+         <td class="n"><span class="pill ok">自動</span></td></tr>`).join("")}
+      </tbody></table>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot h"></i>人が毎月やること</h3>
+      <table><tbody>
+      ${[["レポートの読み解き","数字の裏で何が起きているかを言葉にする"],
+         ["リライトの構成","どの記事をどう組み直すかを設計"],
+         ["サイト改修の設計","導線・カテゴリ構成の見直し"],
+         ["翌月の方針決定","どの語を攻め、どこを捨てるか"]].map(([a,b])=>
+        `<tr><td><b>${a}</b><div style="font-size:11px;color:var(--faint)">${b}</div></td>
+         <td class="n"><span class="pill wt">人が実施</span></td></tr>`).join("")}
+      </tbody></table>
+      <p class="note">指摘して終わりにしません。見つけた改善点は、翌月の運用の中で当社が実行します。</p>
+    </div>
+  </div>`},
+];
+
+// 描画
+const nav = document.getElementById("nav"), pages = document.getElementById("pages");
+nav.innerHTML = PAGES.map((p,i)=>
+  `<button data-i="${i}" aria-current="${i===0}"><span class="no">${String(i+1).padStart(2,"0")}</span>${p.nav}</button>`).join("");
+pages.innerHTML = PAGES.map((p,i)=>`<section class="page${i===0?" on":""}" id="pg-${p.id}">${p.html()}</section>`).join("");
+document.getElementById("kA").textContent = R.machine + "項目";
+document.getElementById("kB").textContent = HUMAN_ITEMS + "項目";
+
+function go(i){
+  document.querySelectorAll(".page").forEach((s,j)=>s.classList.toggle("on", i===j));
+  nav.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current", String(i===j)));
+  document.getElementById("ttl").textContent = PAGES[i].ttl;
+  document.getElementById("stl").textContent = PAGES[i].stl;
+  document.querySelector(".main").scrollTop = 0;
+}
+nav.addEventListener("click", e => { const b = e.target.closest("button"); if (b) go(+b.dataset.i); });
+window.__go = go;
+</script>
+</body>
+</html>

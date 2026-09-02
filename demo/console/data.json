@@ -1,0 +1,234 @@
+{
+ "sites": {
+  "ai-lab": {
+   "name": "AI集客ラボ",
+   "domain": "ai.7senses.co.jp",
+   "categories": [
+    "aio",
+    "seo",
+    "meo",
+    "ai-marketing"
+   ]
+  },
+  "corporate": {
+   "name": "セブンセンシズ コーポレートサイト",
+   "domain": "corp.7senses.co.jp",
+   "categories": [
+    "keiri-bpo",
+    "keiri-jitsumu",
+    "backoffice"
+   ]
+  },
+  "subsidy": {
+   "name": "AI導入補助金サポート",
+   "domain": "lp.7senses.co.jp",
+   "categories": [
+    "hojokin"
+   ]
+  }
+ },
+ "totals": {
+  "articles": 215,
+  "avg_score": 94.8,
+  "avg_chars": 7450,
+  "min_score": 91,
+  "by_cat": [
+   [
+    "hojokin",
+    67
+   ],
+   [
+    "ai-marketing",
+    38
+   ],
+   [
+    "keiri-jitsumu",
+    30
+   ],
+   [
+    "keiri-bpo",
+    28
+   ],
+   [
+    "seo",
+    20
+   ],
+   [
+    "aio",
+    16
+   ],
+   [
+    "meo",
+    12
+   ],
+   [
+    "backoffice",
+    4
+   ]
+  ]
+ },
+ "recent": [
+  {
+   "slug": "ai-hojokin-gbizid-shutoku",
+   "title": "AI導入補助金のGビズID取得方法｜プライム取得の5つの手順",
+   "kw": "AI導入補助金 GビズID 取得方法",
+   "cat": "hojokin",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 7040
+  },
+  {
+   "slug": "ai-hojokin-security-action-hoshi2",
+   "title": "AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ",
+   "kw": "AI導入補助金 セキュリティアクション 二つ星",
+   "cat": "hojokin",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 6927
+  },
+  {
+   "slug": "aio-taisaku-ai-inyou-sareru",
+   "title": "AIO対策でAIに引用されるには？5つの実践ポイント",
+   "kw": "AIO対策 AIに引用される",
+   "cat": "aio",
+   "date": "2026-09-02",
+   "score": 96,
+   "chars": 7406
+  },
+  {
+   "slug": "aio-taisaku-yattewaikenai",
+   "title": "AIO対策でやってはいけない5つのNG行動と正しい進め方",
+   "kw": "AIO対策 やってはいけない",
+   "cat": "aio",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 7225
+  },
+  {
+   "slug": "keihi-seisan-system-erabikata",
+   "title": "経費精算システムとは？選び方の4つの軸と導入前の注意点",
+   "kw": "経費精算システム",
+   "cat": "keiri-jitsumu",
+   "date": "2026-09-02",
+   "score": 96,
+   "chars": 7323
+  },
+  {
+   "slug": "keiri-daiko-kaigyou",
+   "title": "開業したばかりの経理代行、使うべき？判断基準3つ",
+   "kw": "経理代行 開業",
+   "cat": "keiri-bpo",
+   "date": "2026-09-02",
+   "score": 95,
+   "chars": 7435
+  },
+  {
+   "slug": "biyoushitsu-shukyaku-idea",
+   "title": "美容室の集客アイデア12選｜無料で今日から試せる施策",
+   "kw": "美容室 集客アイデア",
+   "cat": "ai-marketing",
+   "date": "2026-09-01",
+   "score": 92,
+   "chars": 7221
+  },
+  {
+   "slug": "freelance-keiri-yarikata",
+   "title": "フリーランスの経理のやり方｜請求・入金・源泉徴収の3ステップ管理",
+   "kw": "フリーランス 経理 やり方",
+   "cat": "keiri-jitsumu",
+   "date": "2026-09-01",
+   "score": 96,
+   "chars": 7781
+  },
+  {
+   "slug": "fudousan-seo-consulting",
+   "title": "不動産SEOコンサルティングとは？外注との違いと費用相場",
+   "kw": "seo 不動産 コンサルティング",
+   "cat": "seo",
+   "date": "2026-09-01",
+   "score": 95,
+   "chars": 7417
+  },
+  {
+   "slug": "fudousan-seo-kaisha-erabikata",
+   "title": "不動産SEO会社への外注は必要か？費用相場と6つの判断軸",
+   "kw": "不動産 seo 会社",
+   "cat": "seo",
+   "date": "2026-09-01",
+   "score": 95,
+   "chars": 7312
+  },
+  {
+   "slug": "gaichuuhi-seikyuusho-nashi",
+   "title": "外注費に請求書がない場合の経費計上｜証憑3つで対応",
+   "kw": "外注費 請求書 なし",
+   "cat": "keiri-jitsumu",
+   "date": "2026-09-01",
+   "score": 94,
+   "chars": 7120
+  },
+  {
+   "slug": "hojokin-denshishinsei-gimuka-itsukara",
+   "title": "補助金の電子申請はいつから義務化？中小企業が今やること",
+   "kw": "電子申請 義務化 中小企業 いつから",
+   "cat": "hojokin",
+   "date": "2026-09-01",
+   "score": 95,
+   "chars": 7056
+  }
+ ],
+ "guard_ok": [
+  "■ 食い合い審査: 「動物病院 集客」（ai-lab）",
+  "",
+  "   ぶつかる既存記事はありません。",
+  "",
+  "   判定: 着手可"
+ ],
+ "guard_ng": [
+  "■ 食い合い審査: 「aio診断」（ai-lab）",
+  "",
+  "   [禁止] 狙う語が既存記事と完全一致: aio-shindan-yarikata（aio診断）",
+  "           同じ語を2記事で狙うと順位が割れます。既存記事を書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+  "           「aio 診断」で16.2位・表示62。新記事を当てると順位が割れます。このページを書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+  "           「aio 診断 ツール」で17.0位・表示21。新記事を当てると順位が割れます。このページを書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+  "           「aio診断」で17.3位・表示32。新記事を当てると順位が割れます。このページを書き足してください",
+  "   [禁止] 既に順位を持つページがある: ai.7senses.co.jp/diagnosis/aio/",
+  "           「aio 診断」で17.6位・表示30。新記事を当てると順位が割れます。このページを書き足してください",
+  "",
+  "   判定: 着手禁止（既存記事を書き足す）"
+ ],
+ "score": [
+  "PASS | 本文5,000字以上（depth: standard） | 5,087字",
+  "PASS | 強調12〜18箇所（最低8） | 14箇所",
+  "PASS | 冒頭が断言型（**で開始・80字以上） | 248字",
+  "PASS | 対象読者の限定文言 | target-reader div",
+  "PASS | 鮮度表記（◯年◯月時点）",
+  "PASS | 定義ブロック | definition-box div",
+  "PASS | 比較テーブルあり",
+  "PASS | 失敗例・注意点セクション",
+  "PASS | H2が6〜12個（FAQ・まとめ除く） | 7個",
+  "PASS | 全H2直下がリード文（表・リスト直置きなし）",
+  "PASS | FAQ 5問以上 | 6問",
+  "PASS | FAQ回答が40〜60字目安（許容30〜75）",
+  "PASS | 本文FAQとfrontmatter数が一致 | 本文6 / meta6",
+  "PASS | 内部リンク3本以上 | 5本",
+  "PASS | 外部権威リンク（出典）2本以上 | 5本",
+  "PASS | ［警告］段落が200字以内（規定150字＋余裕） | 最長189字",
+  "WARN | ［警告］長文が1割強以内・100字超はゼロ（規定50字） | 70字超4/47文（上限5）・100字超1文 例:「アノテの中小企業向けAI導入費用比較記事では、既存AIツールの活…」(138字)",
+  "PASS | 自社の一次情報が1つ以上ある | subsidy-vendor",
+  "PASS | 一人称の体験・観察2箇所以上 | 4箇所",
+  "PASS | 「これにより」ゼロ | 0回",
+  "PASS | 「重要です」3回以下 | 0回",
+  "",
+  "機械採点: 19/19 PASS / 警告1件（公開は可能。日次監査で順次直します）"
+ ],
+ "rules": {
+  "machine": 19,
+  "plan": 14,
+  "ai_feel": 7,
+  "agents": 60
+ }
+}
