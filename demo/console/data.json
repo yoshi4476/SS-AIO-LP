@@ -230,5 +230,12 @@
   "plan": 14,
   "ai_feel": 7,
   "agents": 60
+ },
+ "build": {
+  "programs": 68,
+  "lines": 15767,
+  "gas_lines": 1599,
+  "workflows": 6,
+  "articles_all": 223
  }
 }

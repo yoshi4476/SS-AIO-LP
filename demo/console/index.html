@@ -409,6 +409,13 @@ tr:last-child td{border-bottom:none}
   "plan": 14,
   "ai_feel": 7,
   "agents": 60
+ },
+ "build": {
+  "programs": 68,
+  "lines": 15767,
+  "gas_lines": 1599,
+  "workflows": 6,
+  "articles_all": 223
  }
 }</script>
 <script>
@@ -590,6 +597,50 @@ const PAGES = [
   </div>
   <p class="note">人を減らしたのではありません。<b>人が力を発揮する場所を変えました。</b>
   誤字を探していた時間を、戦略を考える時間へ移しています。</p>`},
+
+{ id:"diy", nav:"自社でやる場合", ttl:"自社でやる場合", stl:"同じことを内製すると何が起きるか", html: () => `
+  <h2 class="sec">同じことを、社内でやるとどうなるか</h2>
+  <p class="lead">ここまでご覧いただいた工程を、そのまま自社で回す場合に必要になるものです。数字はこの仕組みの実測値です。</p>
+  <div class="cards">
+    <div class="card h"><div class="vl">${(6000).toLocaleString()}<span class="un">件</span></div>
+      <div class="lb" style="margin-top:6px">毎月の確認</div><div class="nt">月60本 ×（人81＋機械19）項目</div></div>
+    <div class="card m"><div class="vl">${D.build.programs}<span class="un">本</span></div>
+      <div class="lb" style="margin-top:6px">動かすプログラム</div><div class="nt">${D.build.lines.toLocaleString()}行。作って、直し続ける</div></div>
+    <div class="card m"><div class="vl">${D.build.articles_all}<span class="un">本</span></div>
+      <div class="lb" style="margin-top:6px">照合先の既存記事</div><div class="nt">1本書くたび全部と突き合わせる</div></div>
+    <div class="card h"><div class="vl">365<span class="un">日</span></div>
+      <div class="lb" style="margin-top:6px">止められない日数</div><div class="nt">1日止まると、その日の分は戻らない</div></div>
+  </div>
+  <div class="split3" style="margin-top:22px">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot h"></i>内製でつまずくのは、たいていここ</h3>
+      <div class="q">
+        <div class="qi"><span class="ic">01</span><div><b>担当者が辞めると止まる</b>
+          <p>手順が頭の中にあるため、引き継げません。多くのメディアがここで止まります。</p></div></div>
+        <div class="qi"><span class="ic">02</span><div><b>忙しい月に品質が落ちる</b>
+          <p>本数を優先すると基準が下がります。下がったことに、後から気づきます。</p></div></div>
+        <div class="qi"><span class="ic">03</span><div><b>記事が増えるほど重複する</b>
+          <p>${D.build.articles_all}本を記憶で管理はできません。自社の記事同士で順位を奪い合います。</p></div></div>
+        <div class="qi"><span class="ic">04</span><div><b>仕組みを作る手が要る</b>
+          <p>${D.build.lines.toLocaleString()}行のプログラムと、管制塔${D.build.gas_lines.toLocaleString()}行。検索の仕様が変われば直し続けます。</p></div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0"><i class="dot m"></i>お任せいただいた場合</h3>
+      <table><tbody>
+      ${[["書く題材を考える","不要","当社が台帳で管理"],
+         ["重複していないか調べる","不要","3サイト横断で自動"],
+         ["執筆・図解・公開","不要","当社が実施"],
+         ["品質のばらつきを見る","不要","基準未満は出せない作り"],
+         ["毎日の監視","不要","機械が全ページを確認"],
+         ["改善点を見つけて直す","不要","翌月の運用で当社が実行"],
+         ["方針を決める","<b>御社</b>","月次レポートを見て判断"]].map(([a,b,c])=>
+        `<tr><td><b>${a}</b><div style="font-size:11px;color:var(--faint)">${c}</div></td>
+         <td class="n"><span class="pill ${b==="不要"?"ok":"wt"}">${b}</span></td></tr>`).join("")}
+      </tbody></table>
+      <p class="note">御社にお願いするのは、<b>初回のヒアリングと、月次レポートを読むこと</b>だけです。</p>
+    </div>
+  </div>`},
 
 { id:"pub", nav:"公開と計測", ttl:"公開と計測", stl:"出して終わりにしない", html: () => `
   <h2 class="sec">公開してからが、運用の本番です</h2>
