@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIO対策の計測方法｜見るべき5つの指標と週次の運用手順</title>
+<meta name="description" content="AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AIO対策の計測方法｜見るべき5つの指標と週次の運用手順">
+<meta property="og:description" content="AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/aio-taisaku-keisoku-houhou/eyecatch.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=711a8bfa">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=2701d1e4"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AIO対策の計測方法｜見るべき5つの指標と週次の運用手順",
+   "description": "AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+   "image": "https://ai.7senses.co.jp/images/aio-taisaku-keisoku-houhou/eyecatch.png",
+   "datePublished": "2026-09-02",
+   "dateModified": "2026-09-02",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/"
+    ]
+   },
+   "inLanguage": "ja"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AIO対策の計測方法｜見るべき5つの指標と週次の運用手順",
+     "item": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "AIO対策の計測は何から始めればいいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "検索順位の確認だけで終わらせず、GSCの生成AIパフォーマンスレポートを開くことから始めます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GSCの生成AIパフォーマンスレポートで何が分かりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "AI Overviewの表示回数と、引用されたページの一覧が確認できます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GA4でAI検索からの流入はどう見分けますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "chatgpt.comやperplexity.aiなど、AI検索サービスのリファラーを個別に確認します。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "AI引用のスポットチェックはどのくらいの頻度で行いますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "月1回、主要キーワードの検索結果でAI回答の出典を目視確認するのが目安です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "表示回数はあるのにクリックがない場合はどうすればいいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ゼロクリックの引用は珍しくありません。指名検索や問い合わせの増加もあわせて見ます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "計測データはどう記事の改善に活かせばいいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "引用のない上位記事から優先し、冒頭の断言や見出し直下の結論を書き直します。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金（独自メディア）</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AIO対策の計測方法｜見るべき5つの指標と週</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AIO対策の計測方法｜見るべき5つの指標と週次の運用手順</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-09-02">2026年9月2日</time></span>
+      <span>更新: <time datetime="2026-09-02">2026年9月2日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AIO%E5%AF%BE%E7%AD%96%E3%81%AE%E8%A8%88%E6%B8%AC%E6%96%B9%E6%B3%95%EF%BD%9C%E8%A6%8B%E3%82%8B%E3%81%B9%E3%81%8D5%E3%81%A4%E3%81%AE%E6%8C%87%E6%A8%99%E3%81%A8%E9%80%B1%E6%AC%A1%E3%81%AE%E9%81%8B%E7%94%A8%E6%89%8B%E9%A0%86&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-taisaku-keisoku-houhou%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! ブックマーク</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/aio-taisaku-keisoku-houhou/eyecatch.png" alt="AIO対策の計測方法｜見るべき5つの指標と週次の運用手順" width="1200" height="675"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#aio">AIO対策の計測方法とは？順位計測と何が違うのか</a></li><li><a href="#_1">なぜ検索順位の確認だけでは不十分なのか</a></li><li><a href="#aio5">AIO対策の計測で見るべき5つの指標</a></li><li><a href="#gscai">GSC生成AIパフォーマンスレポートの見方と使い方</a></li><li><a href="#ga4ai">GA4でAI参照元セッションを計測する設定手順</a></li><li><a href="#aio_1">AIO計測データをスプレッドシートで一元管理する</a></li><li><a href="#1ai">月1回のAI引用スポットチェックのやり方</a></li><li><a href="#_2">計測データを改善につなげる週次・月次の運用サイクル</a></li><li><a href="#_3">計測でよくある失敗と注意点</a></li><li><a href="#_4">よくある質問</a></li><li><a href="#aio3">まとめ：AIO対策の計測は「表示・引用・流入」の3層で見る</a></li></ol></nav>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AIO対策の計測方法とは、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、AI検索での表示・引用・流入を月次で追う仕組みです。</strong>検索順位だけを見ていても、AI Overviewでの表示や引用は分かりません。この記事では、見るべき5つの指標と、今日から始められる設定手順を、当社が自社サイトで実際に運用している方法とあわせて解説します。</p>
+<div class="target-reader">この記事は、AIO対策を始めたが効果測定の仕組みがまだない、店舗・中小企業の集客担当者向けです。順位は上がっているのに、AI検索での手応えが分からない方を想定しています。</div>
+
+<p class="freshness">※ 2026年9月時点の情報です。Search Consoleの生成AIパフォーマンスレポートは2026年6月に追加された新しい機能のため、指標の見方は今後変わる可能性があります。</p>
+
+<h2 id="aio">AIO対策の計測方法とは？順位計測と何が違うのか</h2>
+<p><strong>AIO対策の計測とは、AI検索での表示・引用・流入を、複数のツールを組み合わせて捉える仕組みです。</strong></p>
+<p>順位計測は、検索結果の何位に表示されているかだけを追います。一方でAIO対策の計測は、AI Overviewに表示されたか、AIの回答に引用されたか、そこからサイトに来た人がいるかまでを追います。</p>
+<div class="definition-box"><span class="term">AIO対策の計測とは</span>、検索順位に加えて、AI Overview・AIモードでの表示回数、AI検索サービスからの参照セッション、実際の引用状況の3つを定期的に確認する運用のことです。</div>
+
+<p>順位が10位以内でも、AI Overviewに一度も引用されない記事は珍しくありません。逆に、圏外に近い記事がAI回答に引用されることは、ほぼありません。だからこそ、順位とAIO計測は別々に見る必要があります。自社の現状をまず採点したい場合は<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方</a>を先に確認してください。</p>
+<h2 id="_1">なぜ検索順位の確認だけでは不十分なのか</h2>
+<p><strong>検索順位が上がっても、AI Overviewでの表示や引用は別に確認しないと分かりません。</strong></p>
+<p>Googleは<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">検索セントラルの公式ドキュメント</a>で、AI OverviewもAIモードも通常の検索と同じ評価基準を使うと説明しています。順位が土台であることは変わりませんが、土台の上で何が起きているかは別の指標が必要です。</p>
+<p><a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>によると、<strong>米国のGoogle検索の58.5%はどのサイトもクリックされずに終わります</strong>。検索結果の中でAIが答えを完結させると、順位が良くてもクリックは発生しません。</p>
+<p>当社の実測でも、この傾向ははっきり出ています。<strong>直近28日で302個の検索語からのべ2,164回表示されながら、クリックは6回にとどまりました</strong>（自社Search Console実測・2026年9月時点）。表示回数は伸びているのに、クリックだけを見ていると効果が出ていないと誤解してしまいます。</p>
+<p><a href="https://www.semrush.com/blog/semrush-ai-overviews-study/" target="_blank" rel="noopener">Semrushの2025年調査</a>では、AI Overviewの表示クエリ比率が2ヶ月で6.49%から13.14%へ倍増しました。ゼロクリックで完結する検索は、今後さらに増える見込みです。</p>
+<h2 id="aio5">AIO対策の計測で見るべき5つの指標</h2>
+<p><strong>見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。</strong></p>
+<p>順位だけでなく、この5つを毎月並べて見ることで、記事のどこに手を入れるべきかが分かります。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">指標</th>
+<th style="text-align: left;">何が分かるか</th>
+<th style="text-align: left;">主な確認先</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">AI Overviewの表示回数</td>
+<td style="text-align: left;">AIの回答に自社情報が使われている可能性</td>
+<td style="text-align: left;">GSC生成AIパフォーマンス</td>
+</tr>
+<tr>
+<td style="text-align: left;">AI参照セッション数</td>
+<td style="text-align: left;">AI検索サービス経由で実際に来た人数</td>
+<td style="text-align: left;">GA4</td>
+</tr>
+<tr>
+<td style="text-align: left;">AI引用ページ数</td>
+<td style="text-align: left;">何本の記事が引用されているか</td>
+<td style="text-align: left;">GSC生成AIパフォーマンス</td>
+</tr>
+<tr>
+<td style="text-align: left;">検索11〜20位の記事本数</td>
+<td style="text-align: left;">次に上位表示・引用が狙える記事の在庫</td>
+<td style="text-align: left;">GSC通常の検索パフォーマンス</td>
+</tr>
+<tr>
+<td style="text-align: left;">問い合わせへの流入経路</td>
+<td style="text-align: left;">AI経由の閲覧が成果につながっているか</td>
+<td style="text-align: left;">GA4のコンバージョン経路</td>
+</tr>
+</tbody>
+</table></div>
+<p>この表は単体でも使えます。まずは月初にこの5指標だけを埋める運用から始めてください。</p>
+<h2 id="gscai">GSC生成AIパフォーマンスレポートの見方と使い方</h2>
+<p><strong>生成AIパフォーマンスレポートは、AI Overviewの表示回数と引用ページを検索タイプ別に確認できます。</strong></p>
+<p>Search Consoleの左メニューから開くと、通常の検索パフォーマンスと同じ画面構成で、AI Overview・AIモードに絞ったデータが見られます。<a href="https://support.google.com/webmasters/answer/16984139?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ</a>によると、このレポートは2026年6月に追加された新しい機能です。</p>
+<p>現時点ではインプレッション中心のデータで、どのクエリでクリックされたかの内訳までは見えません。この制約を理解せずに使うと、クリックがゼロだから失敗と早合点してしまいます。</p>
+<p>見るべき順番は3つです。まず表示回数の推移を週単位で確認します。次に、引用ページの一覧から自社のどの記事が使われているかを見ます。最後に、引用が多いページと少ないページの構造の違いを比較します。</p>
+<p>検索タイプは「ウェブ」「画像」などと並んで「AI Overview」「AIモード」が個別に選べます。<strong>2つを合算せず別々に見ることで、どちらの機能で自社が拾われているかが分かります。</strong>数値は日によって上下するため、1日単位ではなく7日移動平均で眺めると、実際の傾向がつかみやすくなります。</p>
+<h2 id="ga4ai">GA4でAI参照元セッションを計測する設定手順</h2>
+<p><strong>GA4では、chatgpt.comなど主要AI検索サービスのリファラーを参照元として個別に確認します。</strong></p>
+<p>手順は次の3ステップです。</p>
+<ol>
+<li>GA4の「集客」レポートを開き、セッションの参照元/メディアを表示する</li>
+<li>chatgpt.com / chat.openai.com / perplexity.ai / gemini.google.com / copilot.microsoft.com / claude.ai の6つで絞り込む</li>
+<li>セッション数の推移を、週次または月次でスプレッドシートに書き出す</li>
+</ol>
+<p>この6つは、AI検索からの流入で特に発生しやすいリファラーです。まとめて「AI検索」というセグメントを作っておくと、毎回の絞り込みが不要になります。</p>
+<p>GSCの生成AIパフォーマンスレポートは表示回数中心、GA4のAI参照元は実際の行動が中心です。<strong>この2つは片方だけでは判断を誤るため、必ず併用してください。</strong></p>
+<section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_mid_aio">AI検索の対応度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
+<h2 id="aio_1">AIO計測データをスプレッドシートで一元管理する</h2>
+<p><strong>計測データはツールごとに見るのではなく、1枚のスプレッドシートに集約して初めて比較できます。</strong></p>
+<p>GSCとGA4を毎回別々に開いて見比べるのは非効率です。月1回、両方の数値を同じ行に転記するだけで、指標同士の関係が見えるようになります。</p>
+<p>管理する列の例は次のとおりです。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">列</th>
+<th style="text-align: left;">記録する内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">日付</td>
+<td style="text-align: left;">集計対象の月</td>
+</tr>
+<tr>
+<td style="text-align: left;">AI Overview表示回数</td>
+<td style="text-align: left;">GSC生成AIパフォーマンスから転記</td>
+</tr>
+<tr>
+<td style="text-align: left;">AI引用ページ数</td>
+<td style="text-align: left;">GSC生成AIパフォーマンスから転記</td>
+</tr>
+<tr>
+<td style="text-align: left;">AI参照セッション</td>
+<td style="text-align: left;">GA4のAI検索セグメントから転記</td>
+</tr>
+<tr>
+<td style="text-align: left;">スポットチェック結果</td>
+<td style="text-align: left;">月1回の目視確認メモ</td>
+</tr>
+</tbody>
+</table></div>
+<p>この形にしておくと、前月・前々月との比較が一目でできるようになります。表計算ソフトのグラフ機能を使えば、伸びている指標と停滞している指標もすぐに分かります。当社もKPIレポート用のシートを同じ考え方で運用しており、記事ごとの優先順位づけに使っています。</p>
+<h2 id="1ai">月1回のAI引用スポットチェックのやり方</h2>
+<p><strong>スポットチェックとは、主要キーワードで実際にAI回答を開き、出典を目視で確認する作業です。</strong></p>
+<p>GSCのデータはインプレッション中心のため、実際に何と書かれて引用されているかまでは分かりません。ここを補うのが、月1回の手動チェックです。</p>
+<p>やり方はシンプルです。自社の主要キーワード上位20個を、ChatGPTやGoogleのAIモードで実際に検索し、回答の出典に自社サイトが含まれているかを確認します。含まれていれば、どの記事のどの記述が使われたかも記録します。</p>
+<p>当社では、自社サイト自体をAIO対策の実験場にしています。<strong>構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています</strong>（自社サイトの実装・2026年8月時点）。ここまで頻度を上げなくても、月1回のスポットチェックを続けるだけで大きな変化には十分気づけます。</p>
+<h2 id="_2">計測データを改善につなげる週次・月次の運用サイクル</h2>
+<p><strong>計測は見て終わりにせず、週次で異常を確認し、月次で記事の優先順位に反映します。</strong></p>
+<p>週次では、表示回数が急に落ちた記事がないかだけを確認します。原因の多くは、記事の削除やnoindex化、サイトの配信トラブルです。週次のチェックは5分程度で終わらせ、深掘りは月次にまわしてください。</p>
+<p>判定は感覚に頼らず、毎月同じ順番で機械的に行うことをおすすめします。順番を決めておけば、担当者が変わっても同じ基準で判断できます。月次では、5つの指標を並べて、次のどれに当てはまるかを判定します。</p>
+<ul>
+<li>表示回数もクリックもゼロ → インデックスされているか、まず確認する</li>
+<li>表示回数はあるが引用がゼロ → 冒頭の断言、見出し直下の結論を書き直す</li>
+<li>引用はあるがセッションが少ない → ブランド名や社名を回答内で拾われる書き方に直す</li>
+<li>すべて伸びている → その記事の構造を、次の新規記事のひな形にする</li>
+</ul>
+<p>この判定を毎月続けると、直すべき記事の優先順位が自然と決まります。</p>
+<h2 id="_3">計測でよくある失敗と注意点</h2>
+<p><span class="txt-red">最も多い失敗は、クリック数だけを見て効果がないと判断してしまうことです。</span>ゼロクリックの引用は珍しくなく、指名検索や問い合わせの増加もあわせて見る必要があります。</p>
+<p><strong>NG：週次で一喜一憂する</strong>
+表示回数は日によって振れ幅が大きく、1週間の増減で判断すると方向性を見失います。判断は最低でも月単位で行ってください。</p>
+<p><strong>NG：GSCだけを見て、GA4を見ない</strong>
+生成AIパフォーマンスレポートは表示回数中心のデータです。実際に人が来ているかは、GA4を見なければ分かりません。</p>
+<p><strong>NG：スポットチェックを1回で終わらせる</strong>
+AIの回答は同じ質問でも日によって変わります。1回の結果だけで引用されない記事と判断するのは早計です。</p>
+<p>計測の土台となるクロール許可の確認は<a href="/aio/aio-taisaku-hyouji-sarenai/">AIO対策なのに表示されない8つの原因</a>、記事構造の直し方は<a href="/aio/aio-taisaku-ai-inyou-sareru/">AIO対策でAIに引用されるには？5つの実践ポイント</a>にまとめています。無料で使える計測ツールの一覧は<a href="/aio/aio-taisaku-muryou-tool/">AIO対策の無料ツール6選</a>を参考にしてください。</p>
+<h2 id="_4">よくある質問</h2>
+<div class="faq">
+<details><summary>AIO対策の計測は何から始めればいいですか？</summary><p class="faq-a">検索順位の確認だけで終わらせず、GSCの生成AIパフォーマンスレポートを開くことから始めます。</p></details>
+<details><summary>GSCの生成AIパフォーマンスレポートで何が分かりますか？</summary><p class="faq-a">AI Overviewの表示回数と、引用されたページの一覧が確認できます。</p></details>
+<details><summary>GA4でAI検索からの流入はどう見分けますか？</summary><p class="faq-a">chatgpt.comやperplexity.aiなど、AI検索サービスのリファラーを個別に確認します。</p></details>
+<details><summary>AI引用のスポットチェックはどのくらいの頻度で行いますか？</summary><p class="faq-a">月1回、主要キーワードの検索結果でAI回答の出典を目視確認するのが目安です。</p></details>
+<details><summary>表示回数はあるのにクリックがない場合はどうすればいいですか？</summary><p class="faq-a">ゼロクリックの引用は珍しくありません。指名検索や問い合わせの増加もあわせて見ます。</p></details>
+<details><summary>計測データはどう記事の改善に活かせばいいですか？</summary><p class="faq-a">引用のない上位記事から優先し、冒頭の断言や見出し直下の結論を書き直します。</p></details>
+</div>
+
+<h2 id="aio3">まとめ：AIO対策の計測は「表示・引用・流入」の3層で見る</h2>
+<p>AIO対策の計測は、<strong>表示回数・引用・流入の3層を、GSCとGA4の両方で追うことに尽きます。</strong></p>
+<p>順位が上がっても、AI検索での手応えは別に測らないと見えてきません。<strong>当社は2020年3月の創業以来、大阪市東成区を拠点に店舗集客とAI活用を支援してきました。</strong>MEO運用サービス「G-ran」で通算3,200店舗以上を運用し、当社は3つの自社メディアを運営して、記事からの問い合わせ導線を実際に運用しています。</p>
+<p>計測の仕組みは、一度作れば毎月の作業は数字を転記するだけで済みます。最初の1ヶ月だけ手間をかけて型を作れば、あとは10〜15分の月次作業に落ち着きます。難しく考えず、まずはGSCの生成AIパフォーマンスレポートを開くところから始めてください。</p>
+<p>自社での計測に迷ったら、まずは<a href="/lp/">無料の現状分析</a>で、いまの表示回数と引用状況を一緒に確認しましょう。</p>
+
+      <aside class="diag-banner"><div class="db-text"><span class="db-kicker">この記事のテーマで、自社の現在地を測る</span><span class="db-title">AI検索の対応度チェック（無料・30秒）</span><span class="db-desc">AI検索に引用される準備ができているかを100点満点で採点します。</span></div><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_diag_aio">無料で診断する <span class="arw">→</span></a></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/aio-shindan-yarikata/"><span class="thumb"><img src="/images/aio-shindan-yarikata/eyecatch.png" alt="AIO診断のやり方｜無料チェック8項目とツールの使い分けのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-11">2026.08.11</time><h3>AIO診断のやり方｜無料チェック8項目とツールの使い分け<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-taisaku-ai-inyou-sareru/"><span class="thumb"><img src="/images/aio-taisaku-ai-inyou-sareru/eyecatch.png" alt="AIO対策でAIに引用されるには？5つの実践ポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-02">2026.09.02</time><h3>AIO対策でAIに引用されるには？5つの実践ポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-taisaku-ai-kensaku/"><span class="thumb"><img src="/images/aio-taisaku-ai-kensaku/eyecatch.png" alt="AI検索とは？AIO対策との違いと5種類の対応ポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-12">2026.08.12</time><h3>AI検索とは？AIO対策との違いと5種類の対応ポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/aio-taisaku-ai-inyou-sareru/"><span>← 前の記事</span><strong>AIO対策でAIに引用されるには？5つの実践ポイント</strong></a><a class="pn pn-next" href="/aio/aio-taisaku-yattewaikenai/"><span>次の記事 →</span><strong>AIO対策でやってはいけない5つのNG行動と正しい進め方</strong></a></nav>
+
+      <section class="cta">
+        <p class="cta-copy">AI検索時代の集客、プロに相談してみませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">AIO・LLMO・SEO・MEO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="Seven Senses" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/meo/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/diagnosis/aio/">AI検索の対応度チェック（30秒）</a>
+      <a href="/site-audit/">サイトの技術チェック</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

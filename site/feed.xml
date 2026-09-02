@@ -14,6 +14,13 @@
     <summary>AIO対策でAIに引用される記事とは、検索10位以内の土台とクロール許可を満たしたうえで、抽出しやすい構造と出典付きの独自情報を備えた記事です。仕組みと5つの実践ポイントを解説します。</summary>
   </entry>
   <entry>
+    <title>AIO対策の計測方法｜見るべき5つの指標と週次の運用手順</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/</id>
+    <updated>2026-09-02T00:00:00+09:00</updated>
+    <summary>AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。</summary>
+  </entry>
+  <entry>
     <title>AIO対策でやってはいけない5つのNG行動と正しい進め方</title>
     <link href="https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/"/>
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/llmo-taisaku-hoho/</id>
     <updated>2026-08-31T00:00:00+09:00</updated>
     <summary>LLMO対策とは、ChatGPTやPerplexityなどのAIチャットの回答で自社が引用・言及されるための最適化です。中小企業が実践できる7つの方法を、計測のやり方まで含めて解説します。</summary>
-  </entry>
-  <entry>
-    <title>MEO対策のやり方7ステップ｜マップ上位表示の手順</title>
-    <link href="https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/"/>
-    <id>https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/</id>
-    <updated>2026-08-31T00:00:00+09:00</updated>
-    <summary>MEO対策のやり方は、Googleビジネスプロフィールの整備から口コミ運用・投稿継続までの7ステップで進めます。店舗集客支援の実務で使っている手順を、無料でできる範囲を中心に解説します。</summary>
   </entry>
 </feed>

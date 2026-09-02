@@ -50,6 +50,8 @@ faq:
 
 AIO対策の導入とは、AI検索への最適化をツール単発の作業ではなく、社内で継続する仕組みに変えることです。
 
+実際の進め方は[AIO対策の計測方法｜見るべき5つの指標と週次の運用手順](/aio/aio-taisaku-keisoku-houhou/)でも扱っています。
+
 実際の進め方は、[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)で解説しています。
 
 <div class="definition-box"><span class="term">AIO対策の導入とは</span>、冒頭の断言回答やFAQ整備といった構造改善を1回きりで終わらせず、担当者・診断・計測をセットにして社内の業務フローに組み込む取り組みを指します。</div>
