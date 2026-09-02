@@ -105,6 +105,14 @@ def claim_kw(site, keyword):
     return _post({"action": "claim_kw", "site": site, "keyword": keyword}) if enabled() else None
 
 
+def retire_kw(site, keywords, reason, force=False):
+    """食い合い等で書けないKWを台帳から退避する（状態を「対象外」にする）"""
+    if not enabled():
+        return None
+    return _post({"action": "retire_kw", "site": site, "keywords": keywords,
+                  "reason": reason, "force": force})
+
+
 def add_kw(site, keywords):
     return _post({"action": "add_kw", "site": site, "keywords": keywords}) if enabled() else None
 

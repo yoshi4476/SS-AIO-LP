@@ -212,6 +212,9 @@ function doPost(e) {
       // 書く前の食い合い審査。記事工場が Phase 1 と Phase 3 の両方で呼ぶ
       case 'kw_conflict': return json_(kwConflict_(body.site, body.keyword));
       case 'retire_kw':   return json_(retireKw_(body.site, body.keywords, body.reason, body.force));
+      // 執筆中のまま記事が残らなかったKWを、未着手へ戻す。
+      // ゲートの不具合で実行が途中で落ちると、KWだけが執筆中で取り残される
+      case 'unclaim_kw':  return json_(unclaimKw_(body.site, body.keywords));
       case 'publish_log': return json_(publishLog_(body));
       case 'add_kw':      return json_(addKw_(body.site, body.keywords || []));
       case 'error_log':   return json_(errorLog_(body));
@@ -422,6 +425,28 @@ function claimKw_(site, keyword) {
   }
   return { ok: false, error: 'KWが見つかりません: ' + keyword };
 }
+
+/**
+ * 執筆中のまま記事が残らなかったKWを、未着手へ戻す。
+ * 実行が途中で落ちると、記事は消えるのにKWだけが執筆中で取り残され、
+ * そのKWは二度と書かれなくなる。
+ */
+function unclaimKw_(site, keywords) {
+  const sh = sheet_('KW台帳');
+  const rows = kwRows_();
+  const set = {};
+  (keywords || []).forEach(function (k) { set[normKw_(k)] = true; });
+  let n = 0;
+  for (let i = 0; i < rows.length; i++) {
+    if (String(rows[i][0]) !== site || !set[normKw_(rows[i][1])]) continue;
+    if (String(rows[i][2]).trim() !== '執筆中') continue;   // 公開済みは触らない
+    sh.getRange(i + 2, 3).setValue('未着手');
+    sh.getRange(i + 2, 8).setValue('');
+    n++;
+  }
+  return { ok: true, unclaimed: n };
+}
+
 
 /** KWをまとめて追加（自動補充）。表記ゆれを吸収して重複を弾く */
 function addKw_(site, keywords) {

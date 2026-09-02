@@ -118,9 +118,16 @@ def h2_owner(heading, own):
     return sorted(best.values(), key=lambda x: x["pos"])
 
 
-def judge(kw, site_id, title="", h2=None, use_gsc=True):
-    """着手可否を返す。(終了コード, 見出し, 理由の一覧)"""
+def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
+    """着手可否を返す。(終了コード, 見出し, 理由の一覧)
+
+    exclude_slug: 審査対象の記事そのもの。書いた直後の検査では、その記事が
+    もうディスクにあるため、除かないと必ず自分自身と「完全一致」になる。
+    実際、正当な新記事3本が全部この誤検出で止まり、その回の執筆が無駄になった。
+    """
     arts = load_articles()
+    if exclude_slug:
+        arts = [a for a in arts if a["slug"] != exclude_slug]
     if site_id:
         try:
             import sites as S
@@ -146,6 +153,9 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True):
 
     # ② GSCの実績。すでに順位を持っているページがあるか（最も確かな指標）
     own = owned(gsc_rows(site_id)) if (use_gsc and site_id) else []
+    if exclude_slug:
+        own = [o for o in own if f"/{exclude_slug}/" not in o["page"]
+               and not o["page"].rstrip("/").endswith("/" + exclude_slug)]
     for o in gsc_owner(kw, own)[:5]:
         level = max(level, 2)
         if o.get("own", True):
@@ -197,9 +207,11 @@ def main():
     ap.add_argument("--title", default="")
     ap.add_argument("--h2", action="append", default=[])
     ap.add_argument("--no-gsc", action="store_true", help="GSC照合を省く（オフライン時）")
+    ap.add_argument("--exclude-slug", default="", help="審査対象の記事自身（自分と照合しない）")
     a = ap.parse_args()
 
-    level, reasons = judge(a.keyword, a.site, a.title, a.h2, use_gsc=not a.no_gsc)
+    level, reasons = judge(a.keyword, a.site, a.title, a.h2,
+                           use_gsc=not a.no_gsc, exclude_slug=a.exclude_slug)
     print(f'■ 食い合い審査: 「{a.keyword}」'
           f'{"（" + a.site + "）" if a.site else ""}\n')
     if not reasons:

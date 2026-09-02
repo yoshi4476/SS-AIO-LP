@@ -110,8 +110,27 @@ console.log(JSON.stringify({reads: READS, kw: r.keyword,
     check("本当の重複だけを飛ばす", d.get("skipped"), 20)
 
 
+# ── 5. 執筆後ゲートの自己照合 ────────────────────
+def test_self_exclusion():
+    """書いた記事が自分自身と「完全一致」で止まった事故の再現。
+    正当な新記事3本が全部この誤検出で止まり、その回の執筆が無駄になった。"""
+    from kw_guard import judge
+    print("\n■ 執筆後ゲートの自己照合")
+    import glob, re
+    # 実在の記事を1本選び、自分のKWで審査する
+    f = sorted(glob.glob(str(ROOT / "articles" / "*.md")))[0]
+    slug = Path(f).stem
+    fm = Path(f).read_text(encoding="utf-8-sig").split("---", 2)[1]
+    kw = (re.search(r"^keyword:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()
+    lv_with, _ = judge(kw, "", use_gsc=False, exclude_slug=slug)
+    lv_without, _ = judge(kw, "", use_gsc=False)
+    check("自分を除けば自分とは食い合わない", lv_with < 2, True)
+    check("除かなければ完全一致で止まる（検査自体は生きている）", lv_without, 2)
+
+
 def main():
-    for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas):
+    for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
+              test_self_exclusion):
         try:
             t()
         except Exception as e:

@@ -199,8 +199,12 @@ jobs:
           out=$(python scripts/kw_gate.py --after --site "${{ steps.site.outputs.id }}") || true
           rm -f indexing-service-account.json
           echo "$out"
-          if echo "$out" | grep -q "KW_GATE=block"; then
-            echo "::error::書かれた記事が既存ページと食い合います。公開しません"
+          # 隔離は警告どまり。食い合う記事だけが articles/_conflicted/ へ移り、
+          # 問題のない記事はそのまま公開される（全体を巻き添えにしない）
+          if echo "$out" | grep -q "KW_GATE=quarantined"; then
+            echo "::warning::食い合う記事を隔離しました。残りの記事は公開されます"
+          elif echo "$out" | grep -q "KW_GATE=block"; then
+            echo "::error::食い合いゲートの判定に失敗しました。ログを確認してください"
             exit 1
           fi
 
