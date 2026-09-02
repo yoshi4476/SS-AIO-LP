@@ -117,8 +117,13 @@ def test_self_exclusion():
     from kw_guard import judge
     print("\n■ 執筆後ゲートの自己照合")
     import glob, re
-    # 実在の記事を1本選び、自分のKWで審査する
-    f = sorted(glob.glob(str(ROOT / "articles" / "*.md")))[0]
+    # 実在の記事を1本選び、自分のKWで審査する。
+    # 導入直後は記事が無いので、その場合は飛ばす（雛形でも落ちないように）
+    files = sorted(glob.glob(str(ROOT / "articles" / "*.md")))
+    if not files:
+        print("  --  記事が無いため飛ばします（導入直後の状態）")
+        return
+    f = files[0]
     slug = Path(f).stem
     fm = Path(f).read_text(encoding="utf-8-sig").split("---", 2)[1]
     kw = (re.search(r"^keyword:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()
