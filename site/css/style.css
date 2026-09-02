@@ -1398,3 +1398,10 @@ main.lab .cta-final h2 { color: #fff; }
 /* 資料区画: 動画とスライドを横並びに（狭い画面では縦に戻す） */
 .doc-duo{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;align-items:start;max-width:1160px;margin:0 auto;}
 @media(max-width:920px){.doc-duo{grid-template-columns:1fr;max-width:640px;}}
+
+/* 動画・資料の白カード */
+.media-card{background:#fff;border:1px solid var(--line,#dbe3ec);border-radius:16px;padding:1.2rem 1.3rem 1.3rem;box-shadow:0 18px 44px -26px rgba(2,10,30,.35);}
+.media-card video{width:100%;border-radius:12px;display:block;background:#071226;}
+.mc-label{font-size:.66rem;letter-spacing:.24em;color:var(--blue,#2563eb);font-weight:700;margin:0 0 .35rem;}
+.mc-title{font-family:var(--head);font-weight:900;font-size:1.06rem;margin:0 0 .2rem;}
+.mc-sub{font-size:.8rem;color:var(--muted);margin:0 0 .8rem;}

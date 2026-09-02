@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&family=Shippori+Mincho+B1:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=380daaa3">
+<link rel="stylesheet" href="/css/style.css?v=711a8bfa">
 <link rel="stylesheet" href="/css/lp.css">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=2701d1e4"></script>
@@ -175,55 +175,52 @@
 </section>
 
 
-<!-- 紹介動画（課題に共感した直後に、仕組みを10分で説明する） -->
-<section class="section" data-area="紹介動画" data-area-id="prvideo">
+<!-- 動画と資料（課題に共感した直後に1区画へ統合。縦積み3連は読み飛ばされるため、
+     動画2本を横並び → 資料 → 相談、の順に圧縮。料金スライドは資料に含まれない） -->
+<section class="section" data-area="動画と資料" data-area-id="proposal">
   <div class="section-head reveal" style="text-align:center;">
-    <span class="en">Movie</span>
-    <h2>10分で分かる、AIで集客する仕組み</h2>
-    <p class="sub" style="margin-left:auto;margin-right:auto;">なぜ今AI検索なのか。実際の画面で、記事ができて公開されるまでをご覧いただけます。<strong>人が決めることと、機械に任せることの分担</strong>まで説明しています。</p>
-  </div>
-  <div class="reveal" style="max-width:880px;margin:0 auto;">
-    <video controls preload="none" poster="/videos/aio-pr-poster.jpg" style="width:100%;border-radius:16px;box-shadow:0 24px 60px -24px rgba(2,10,30,.45);" data-cta="lp_pr_video">
-      <source src="/videos/aio-pr.mp4" type="video/mp4">
-      お使いのブラウザでは動画を再生できません。
-    </video>
-    <div style="text-align:center;margin-top:1.4rem;">
-      <a class="btn btn-primary" href="#form" data-cta="lp_video_form">動画の内容で相談してみる <span class="arw">→</span></a>
-      <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem;">入力は3項目・30秒です。営業電話はいたしません。</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- サービス資料（料金スライドは掲載しない約束。画像はp15/p16除外・金額塗り消し済み） -->
-<section class="section" data-area="サービス資料" data-area-id="proposal">
-  <div class="section-head reveal" style="text-align:center;">
-    <span class="en">Document</span>
-    <h2>サービス資料</h2>
-    <p class="sub" style="margin-left:auto;margin-right:auto;">ご提案時にお渡ししている資料です。サービスの全体像・AIに引用されるための12の工夫・品質を守る仕組みまで、この場でご覧いただけます。</p>
+    <span class="en">Movie &amp; Document</span>
+    <h2>動画と資料で、仕組みを先にご確認ください</h2>
+    <p class="sub" style="margin-left:auto;margin-right:auto;">実際の画面で、記事ができて公開されるまでをご覧いただけます。<strong>人が決めることと、機械に任せることの分担</strong>まで説明しています。</p>
   </div>
   <div class="reveal doc-duo">
-    <div>
-      <p style="text-align:center;font-weight:700;margin:0 0 .7rem;">説明動画で見る（6分19秒）</p>
-      <video controls preload="none" poster="/videos/doc-guide-poster.jpg" style="width:100%;border-radius:16px;box-shadow:0 24px 60px -24px rgba(2,10,30,.45);" data-cta="lp_doc_video">
+    <div class="media-card">
+      <p class="mc-label">MOVIE 01</p>
+      <p class="mc-title">10分で分かる、AIで集客する仕組み</p>
+      <p class="mc-sub">なぜ今AI検索なのか、市場の変化から。実際の制作画面つき</p>
+      <video controls preload="none" poster="/videos/aio-pr-poster.jpg" data-cta="lp_pr_video">
+        <source src="/videos/aio-pr.mp4" type="video/mp4">
+        お使いのブラウザでは動画を再生できません。
+      </video>
+    </div>
+    <div class="media-card">
+      <p class="mc-label">MOVIE 02</p>
+      <p class="mc-title">サービス資料を6分でご説明</p>
+      <p class="mc-sub">下の資料をスライドに沿って解説。お急ぎの方はこちらから</p>
+      <video controls preload="none" poster="/videos/doc-guide-poster.jpg" data-cta="lp_doc_video">
         <source src="/videos/doc-guide.mp4" type="video/mp4">
         お使いのブラウザでは動画を再生できません。
       </video>
-      <p style="font-size:.82rem;color:var(--muted);text-align:center;margin:.7rem 0 0;">スライドに沿って全体像をご説明します</p>
-    </div>
-    <div class="slide-viewer" data-total="15">
-      <p style="text-align:center;font-weight:700;margin:0 0 .7rem;">資料をめくって読む（全15枚）</p>
-      <div class="sv-frame" style="position:relative;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px -24px rgba(2,10,30,.45);background:#fff;">
-        <img class="sv-img" src="/images/proposal/p01.jpg" alt="サービス資料 1ページ目" style="display:block;width:100%;" width="1600" height="1131">
-        <button type="button" class="sv-prev" aria-label="前のページ" style="position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">‹</button>
-        <button type="button" class="sv-next" aria-label="次のページ" style="position:absolute;right:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">›</button>
-      </div>
-      <div style="display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:.8rem;">
-        <span class="sv-count" style="font-size:.85rem;color:var(--muted);">1 / 15</span>
-      </div>
     </div>
   </div>
-  <div class="reveal" style="text-align:center;margin-top:1.6rem;">
+  <div class="reveal media-card slide-viewer" data-total="15" style="max-width:1160px;margin:1.8rem auto 0;">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem;">
+      <div>
+        <p class="mc-label">DOCUMENT</p>
+        <p class="mc-title">サービス資料（全15枚）</p>
+      </div>
+      <p style="font-size:.8rem;color:var(--muted);margin:0;">ボタンか矢印キーでめくれます</p>
+    </div>
+    <div class="sv-frame" style="position:relative;border-radius:12px;overflow:hidden;margin-top:.9rem;background:#fff;border:1px solid var(--line,#dbe3ec);">
+      <img class="sv-img" src="/images/proposal/p01.jpg" alt="サービス資料 1ページ目" style="display:block;width:100%;" width="1600" height="1131">
+      <button type="button" class="sv-prev" aria-label="前のページ" style="position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">‹</button>
+      <button type="button" class="sv-next" aria-label="次のページ" style="position:absolute;right:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">›</button>
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:.7rem;">
+      <span class="sv-count" style="font-size:.85rem;color:var(--muted);">1 / 15</span>
+    </div>
+  </div>
+  <div class="reveal" style="text-align:center;margin-top:1.8rem;">
     <a class="btn btn-primary" href="#form" data-cta="lp_proposal_form">この内容で相談してみる <span class="arw">→</span></a>
     <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem;">料金は御社の状況に合わせてお見積りします。入力は3項目・30秒です。</p>
   </div>
