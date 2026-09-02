@@ -490,3 +490,28 @@ window.leadCapture = function (opts) {
     });
   });
 })();
+
+/* 資料のスライド送り（.slide-viewer）。画像は /images/proposal/pNN.jpg */
+document.querySelectorAll(".slide-viewer").forEach(function (v) {
+  var total = +v.dataset.total || 1, cur = 1;
+  var img = v.querySelector(".sv-img"), count = v.querySelector(".sv-count");
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function go(d) {
+    cur = Math.min(total, Math.max(1, cur + d));
+    img.src = "/images/proposal/p" + pad(cur) + ".jpg";
+    img.alt = "サービス資料 " + cur + "ページ目";
+    count.textContent = cur + " / " + total;
+    var nx = new Image(); nx.src = "/images/proposal/p" + pad(Math.min(total, cur + 1)) + ".jpg";
+    if (window.trackLead && cur === 2 && !v.dataset.seen) {
+      v.dataset.seen = "1";
+      window.trackLead("proposal_view", { lead_route: "proposal" });
+    }
+  }
+  v.querySelector(".sv-prev").addEventListener("click", function () { go(-1); });
+  v.querySelector(".sv-next").addEventListener("click", function () { go(1); });
+  v.setAttribute("tabindex", "0");
+  v.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { go(-1); e.preventDefault(); }
+    if (e.key === "ArrowRight") { go(1); e.preventDefault(); }
+  });
+});
