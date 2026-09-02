@@ -136,6 +136,8 @@ faq:
 
 経理のやり方が崩れる典型は、按分比率や仕訳のルールをその都度変えてしまうことです。
 
+関連する内容として[自営業の経理のやり方｜挫折しない4つの土台と外注の見極め方](/blog/jieigyou-keiri-yarikata/)も公開しています。
+
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/kuzureru.png" alt="経理のやり方が崩れるNGパターンと立て直し方の比較" loading="lazy"><figcaption>経理のやり方が崩れるNGパターンと立て直し方</figcaption></figure>
 
 NGパターンは、按分比率をその都度変える、用途メモを残さない、申告直前にまとめて計算する、の3つです。**どれも「そのときの気分」で処理してしまう点が共通しています。**
