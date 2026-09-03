@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLMO集客とは？AI引用を問い合わせに変える5つの導線設計</title>
+<meta name="description" content="LLMO集客とは、AIチャットの引用を認知・指名検索・問い合わせにつなげる導線設計です。引用されても集客に繋がらない理由、比較表・FAQ・CTAの実装ポイント、GA4・GSCでの効果測定まで、自社サイトの実測データを交えて解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/llmo-shukyaku/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="LLMO集客とは？AI引用を問い合わせに変える5つの導線設計">
+<meta property="og:description" content="LLMO集客とは、AIチャットの引用を認知・指名検索・問い合わせにつなげる導線設計です。引用されても集客に繋がらない理由、比較表・FAQ・CTAの実装ポイント、GA4・GSCでの効果測定まで、自社サイトの実測データを交えて解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/llmo-shukyaku/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/llmo-shukyaku/eyecatch.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=711a8bfa">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=2701d1e4"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "LLMO集客とは？AI引用を問い合わせに変える5つの導線設計",
+   "description": "LLMO集客とは、AIチャットの引用を認知・指名検索・問い合わせにつなげる導線設計です。引用されても集客に繋がらない理由、比較表・FAQ・CTAの実装ポイント、GA4・GSCでの効果測定まで、自社サイトの実測データを交えて解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/llmo-shukyaku/",
+   "image": "https://ai.7senses.co.jp/images/llmo-shukyaku/eyecatch.png",
+   "datePublished": "2026-09-04",
+   "dateModified": "2026-09-04",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/"
+    ]
+   },
+   "inLanguage": "ja"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "LLMO集客とは？AI引用を問い合わせに変える5つの導線設計",
+     "item": "https://ai.7senses.co.jp/aio/llmo-shukyaku/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "LLMO集客とLLMO対策は何が違いますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "LLMO対策は引用を獲得する施策、LLMO集客は引用を問い合わせに変える導線設計です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "AI引用が増えても問い合わせが増えないのはなぜですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "引用が指名検索やCTAに接続されておらず、認知止まりになっているためです。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "LLMO集客の効果はどう測定すればいいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "GA4のAI参照セッションとGSCの指名検索数を月次で並べて確認してください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "比較表とFAQ、どちらを先に整備すべきですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "AI回答に現れやすいのは比較表とFAQの2つなので、この2つから着手してください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "業種によってLLMO集客の測り方は変わりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "変わります。来院・問い合わせ・商談化率など業種ごとの最終指標に合わせてください。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金（独自メディア）</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">LLMO集客とは？AI引用を問い合わせに変え</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>LLMO集客とは？AI引用を問い合わせに変える5つの導線設計</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-09-04">2026年9月4日</time></span>
+      <span>更新: <time datetime="2026-09-04">2026年9月4日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=LLMO%E9%9B%86%E5%AE%A2%E3%81%A8%E3%81%AF%EF%BC%9FAI%E5%BC%95%E7%94%A8%E3%82%92%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E3%81%AB%E5%A4%89%E3%81%88%E3%82%8B5%E3%81%A4%E3%81%AE%E5%B0%8E%E7%B7%9A%E8%A8%AD%E8%A8%88&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Fllmo-shukyaku%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/llmo-shukyaku/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! ブックマーク</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/llmo-shukyaku/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/llmo-shukyaku/eyecatch.png" alt="LLMO集客とは？AI引用を問い合わせに変える5つの導線設計" width="1200" height="675"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#llmoaiollmo">LLMO集客とは？AIO・LLMO対策との違い</a></li><li><a href="#cvai">指名検索とCVに結びつかないAI引用のよくある原因</a></li><li><a href="#aicv">AI引用を問い合わせにつなげる導線設計｜認知→指名検索→CV</a></li><li><a href="#faqcta3">比較表・FAQ・CTA導線の実装ポイント3つ</a></li><li><a href="#llmo3">LLMO集客でよくある失敗3パターン</a></li><li><a href="#llmoga4gsc">LLMO集客の効果測定｜GA4・GSCで見るべき指標</a></li><li><a href="#llmo">業種別｜LLMO集客のつなげ方</a></li><li><a href="#_1">よくある質問</a></li><li><a href="#llmo_1">まとめ: LLMO集客は「引用を通過点にする」設計</a></li></ol></nav>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>LLMO集客とは、AIチャットの回答に自社が引用されることをゴールにせず、そこから認知・指名検索・問い合わせまでの導線を設計してつなげる取り組みです。</strong>引用されているのに問い合わせが増えないという相談を、私たちはLLMO対策の支援現場で何度も受けてきました。本記事では、AI引用が集客につながらない理由と、比較表・FAQ・CTAの実装ポイント、効果測定のやり方までを自社サイトの実測データとあわせて解説します。</p>
+<div class="target-reader">この記事は、LLMOやAI検索対策にすでに取り組んでいるものの、引用や表示は増えても問い合わせが増えないと感じている店舗・中小企業の担当者向けです。</div>
+
+<p class="freshness">※ 2026年9月時点の情報です。</p>
+
+<div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>LLMO集客の意味とLLMO対策との違い</li><li>AI引用が問い合わせにつながらない理由</li><li>認知→指名検索→CVの導線設計</li><li>比較表・FAQ・CTAの実装ポイント</li><li>効果測定で見るべき指標と業種別の測り方</li></ul></div>
+
+<h2 id="llmoaiollmo">LLMO集客とは？AIO・LLMO対策との違い</h2>
+<p><strong>LLMO集客とは、AIチャットの引用を「認知」で終わらせず、指名検索や問い合わせまでの導線を設計してつなげる考え方です。</strong>LLMO対策そのものとは目的が異なります。</p>
+<div class="definition-box"><span class="term">LLMO集客とは</span>、ChatGPTやPerplexityなどのAIチャットに引用・言及されたあと、その認知を指名検索・問い合わせという次の行動に接続する一連の設計を指します。引用の獲得そのものはゴールではなく、通過点という位置づけです。</div>
+
+<p>LLMO対策の基本的な進め方は<a href="/aio/llmo-taisaku-hoho/">LLMO対策とは？ChatGPTに引用される7つの方法</a>で解説しています。本記事はその先、<mark>引用を実際の問い合わせにどうつなげるか</mark>というCV導線側を扱います。引用を取ることと、引用を売上につなげることは別の工程です。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">観点</th>
+<th style="text-align: left;">LLMO対策</th>
+<th style="text-align: left;">LLMO集客</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">目的</td>
+<td style="text-align: left;">AI回答内での引用・言及を獲得する</td>
+<td style="text-align: left;">引用を認知・指名検索・CVへつなげる</td>
+</tr>
+<tr>
+<td style="text-align: left;">主な打ち手</td>
+<td style="text-align: left;">一次情報・比較表・FAQの整備</td>
+<td style="text-align: left;">導線設計・CTA配置・効果測定</td>
+</tr>
+<tr>
+<td style="text-align: left;">計測指標</td>
+<td style="text-align: left;">引用スポットチェック・AI参照セッション</td>
+<td style="text-align: left;">指名検索数・CTAクリック・問い合わせ数</td>
+</tr>
+</tbody>
+</table></div>
+<figure><img src="/images/llmo-shukyaku/dosen.png" alt="AI引用から問い合わせまでの3段階導線: 認知、指名検索、CV" loading="lazy"><figcaption>AI引用から問い合わせまでの3段階導線</figcaption></figure>
+
+<h2 id="cvai">指名検索とCVに結びつかないAI引用のよくある原因</h2>
+<p><strong>引用されても指名検索やCVに結びつかない最大の原因は、社名やサービス名が記憶に残る形で回答に出ていないことです。</strong>AI回答の中に埋もれてしまうと、読んだ人の行動は起きません。</p>
+<p>私たちが支援現場で見てきたのは、比較表やFAQの中に固有名詞が入っておらず、AIが要約する際に社名が落ちてしまうケースです。<strong><mark>「◯◯というサービスがある」で終わり、社名まで引用されない</mark></strong>と、読んだ人は次に何を検索すればよいか分かりません。</p>
+<p><a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。まだ全員が使っているわけではないため、AI経由の認知は「知らない人に知ってもらう入口」というより「比較検討中の人の背中を押す一押し」に近い役割を担います。この前提を踏まえずに広く浅い認知だけを狙うと、CVに結びつく確率はさらに下がります。</p>
+<p><a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>では、米国の検索の58.5%がクリックなしで終わっています。AI回答も同じ性質を持つため、<mark>「読まれたら覚えてもらえる」という前提自体が崩れつつある</mark>ことを踏まえて導線を設計する必要があります。</p>
+<div class="cta-box"><p>自社の引用状況と導線設計を、無料で確認しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
+
+<h2 id="aicv">AI引用を問い合わせにつなげる導線設計｜認知→指名検索→CV</h2>
+<p><strong>AI引用を成果につなげるには、認知→指名検索→CVという3段階に、それぞれ異なる着地点を用意する設計が必要です。</strong>1つの記事だけで全部を完結させようとすると、どこかの段階で離脱が起きます。前章の図で示した3段階を、ここでは各段階の具体的な中身に分解します。</p>
+<p>1段階目の認知は、AI回答に社名・サービス名・特徴が具体的な言葉で載ることで生まれます。2段階目の指名検索は、認知した人が「あの会社、本当にいいのか」を自分の目で確かめる行動です。ここで公式サイトの一次情報が薄いと、離脱してしまいます。3段階目のCVは、指名検索でたどり着いた記事やトップページに明確なCTAがあって初めて起きます。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">段階</th>
+<th style="text-align: left;">起きていること</th>
+<th style="text-align: left;">用意すべきもの</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">認知</td>
+<td style="text-align: left;">AI回答に社名・特徴が挙がる</td>
+<td style="text-align: left;">固有名詞を含む比較表・FAQ</td>
+</tr>
+<tr>
+<td style="text-align: left;">指名検索</td>
+<td style="text-align: left;">社名でGoogle検索して確かめる</td>
+<td style="text-align: left;">公式サイトの一次情報・実績</td>
+</tr>
+<tr>
+<td style="text-align: left;">CV</td>
+<td style="text-align: left;">記事やLPから問い合わせに至る</td>
+<td style="text-align: left;">明確なCTAと導線</td>
+</tr>
+</tbody>
+</table></div>
+<p>私も支援先の担当者に、「引用されているか」だけでなく「指名検索が増えているか」を必ずセットで見るよう伝えています。<strong>指名検索数の伸びは、AI引用が実際に認知として機能している証拠</strong>になるためです。</p>
+<h2 id="faqcta3">比較表・FAQ・CTA導線の実装ポイント3つ</h2>
+<p><strong>比較表・FAQ・CTAの3つを引用されやすい記事に集約することが、LLMO集客の実装の中心です。</strong>この3つは役割が異なるため、順番に整備する必要があります。</p>
+<figure><img src="/images/llmo-shukyaku/jissou.png" alt="比較表・FAQ・CTA導線の実装ポイント3つ: 比較表に固有名詞と数値を入れる、FAQの回答を40〜60字にまとめる、CTAは引用されやすい記事に集約する" loading="lazy"><figcaption>比較表・FAQ・CTA導線の実装ポイント3つ</figcaption></figure>
+
+<p>比較表は、AIが要約しやすい形式のまま社名や特徴を引用できるため、<strong><mark>最初に整備すべき素材</mark></strong>です。<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Googleが公開する生成AI向け最適化ガイド</a>でも、構造化データ以上に「抽出しやすい本文構造」が重視されると説明されています。</p>
+<p>FAQは、ユーザーの疑問文にそのまま対応する回答を用意できるため、比較表と並んで引用されやすい形式です。回答を40〜60字程度にまとめておくと、AIがそのまま引用しやすくなります。</p>
+<p>人手が少ない店舗であれば、比較表とFAQの2つだけを月1本のペースで整備するだけでも十分です。すべてを一度にやろうとせず、優先度の高い2つから着手してください。</p>
+<p>CTAは、比較表やFAQのすぐ近く、<strong>引用されやすい記事の中</strong>に置くことが重要です。引用元にならない記事の奥深くにCTAを置いても、指名検索でたどり着いたユーザーの目に触れません。</p>
+<div class="caution-box"><span class="box-title">注意: CTAを引用されにくい記事に置かない</span><br>実装優先度の低い記事にCTAだけ豪華に作り込んでも、その記事自体が引用されなければ意味がありません。まず引用されやすい比較表・FAQのある記事を特定し、その記事にCTAを集約してください。</div>
+
+<section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_mid_aio">AI検索の対応度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
+<h2 id="llmo3">LLMO集客でよくある失敗3パターン</h2>
+<p><strong>LLMO集客がうまくいかない現場には、計測をしていない・比較表やFAQが弱い・CTAの位置が悪いという3つの共通パターンがあります。</strong></p>
+<figure><img src="/images/llmo-shukyaku/shippai.png" alt="LLMO集客でよくある失敗3パターン: AI参照セッションや指名検索数を計測していない、比較表・FAQが未整備、CTAを引用されやすい記事に置いていない" loading="lazy"><figcaption>LLMO集客でよくある失敗3パターン</figcaption></figure>
+
+<p><span class="txt-red">計測をしていないと、引用が増えているのか減っているのかすら分からず、打ち手の判断ができません</span>。GA4でAI参照セッションを追う運用を、まず月1回だけでも始めてください。</p>
+<p>比較表やFAQが弱いまま「引用されない」と悩む相談も多く受けます。実際に本文を確認すると、固有名詞や具体的な数値が入っておらず、AIが要約に使える材料がそもそも不足していることがほとんどです。</p>
+<figure><img src="/images/llmo-shukyaku/hikaku.png" alt="引用されるだけ(NG)と集客につながる設計(OK)の違いの比較: NGはAI回答に載ることをゴールにし指名検索・CVを追わずCTAを引用元の記事に置いていない。OKは引用を中間指標として扱いAI参照セッションと指名検索数を月次で追いCTAを引用されやすい記事に設置する" loading="lazy"><figcaption>引用されるだけで終わらせず、集客につながる設計に切り替えます</figcaption></figure>
+
+<p>共通する原因は、計測の欠如・比較素材の不足・CTAの不在。3つに共通するのは、<strong><mark>引用そのものをゴールにしてしまっている</mark></strong>点です。引用は通過点であり、その先の指名検索とCVまで含めて設計して初めて集客と呼べます。</p>
+<p>私も「引用されました」という報告だけで終わる打ち合わせを何度も経験しました。<strong>その先に指名検索やCVの数字がなければ、引用は成果として確定していません</strong>。報告のたびに、指名検索数とCTAクリック数の2つを必ずセットで確認する習慣をつけてください。</p>
+<h2 id="llmoga4gsc">LLMO集客の効果測定｜GA4・GSCで見るべき指標</h2>
+<p><strong>LLMO集客の効果測定は、GA4のAI参照セッションとGSCの指名検索数を月次で並べて確認することが基本です。</strong>片方だけでは、引用が実際の行動につながっているか判断できません。</p>
+<p>具体的な計測手順は<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法｜見るべき5つの指標と週次の運用手順</a>で詳しく解説しています。本記事ではLLMO集客の観点から、見るべき3つの指標に絞って説明します。</p>
+<p>指名検索数は、GSCの検索パフォーマンスレポートでクエリを社名・サービス名で絞り込み、期間比較で伸びを確認する方法が最も手早く始められます。GA4未導入の店舗でも、まずは問い合わせフォームの「流入経路」欄を月次で見返すだけで、指名検索経由の申込が増えているかどうかは把握できます。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">指標</th>
+<th style="text-align: left;">確認先</th>
+<th style="text-align: left;">見るポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">AI参照セッション</td>
+<td style="text-align: left;">GA4（chatgpt.com・perplexity.ai等）</td>
+<td style="text-align: left;">月次で増減しているか</td>
+</tr>
+<tr>
+<td style="text-align: left;">指名検索数</td>
+<td style="text-align: left;">GSC（社名・サービス名クエリ）</td>
+<td style="text-align: left;">AI参照セッションと連動して伸びているか</td>
+</tr>
+<tr>
+<td style="text-align: left;">CTAクリック・問い合わせ数</td>
+<td style="text-align: left;">GA4イベント・フォーム集計</td>
+<td style="text-align: left;">指名検索から実際の行動に至っているか</td>
+</tr>
+</tbody>
+</table></div>
+<p>当社は自社サイト「AI集客ラボ」自体をAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。</p>
+<p>直近28日の実測では、326個の検索語からのべ2,352回表示された一方で、クリックは7件にとどまりました。<mark>表示が増えてもクリックにつながりにくいこの傾向こそ、認知から先の導線設計が要る理由</mark>を、自社の数字が裏づけています。</p>
+<p>私たちはこの数字を見て、表示回数だけを追う計測をやめました。<strong>表示・クリック・指名検索・問い合わせの4つを並べて初めて、どの段階で人が離脱しているかが見えてくる</strong>ためです。表示だけが伸びている状態を「順調」と判断してしまうと、実際には認知止まりの記事を量産することになりかねません。</p>
+<p>3つの指標がそろって初めて、「引用は増えているが指名検索が伸びない」「指名検索は伸びているがCVしない」といった<mark>どの段階で離脱しているかの特定</mark>ができます。段階が分かれば、直すべき打ち手も絞り込めます。</p>
+<div class="cta-box"><p>自社の指標をどう見ればいいか、無料で一緒に整理しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
+
+<h2 id="llmo">業種別｜LLMO集客のつなげ方</h2>
+<p><strong>LLMO集客の最終指標は業種によって異なり、クリニックは指名来院、士業は問い合わせ、BtoBは商談化率で成果を測ります。</strong>業種ごとに検討期間と意思決定者が違うためです。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">業種</th>
+<th style="text-align: left;">最終指標</th>
+<th style="text-align: left;">導線設計の要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">クリニック・医療機関</td>
+<td style="text-align: left;">指名来院・予約数</td>
+<td style="text-align: left;">診療内容と実績を具体語でFAQ化する</td>
+</tr>
+<tr>
+<td style="text-align: left;">士業・専門サービス</td>
+<td style="text-align: left;">問い合わせ・相談申込</td>
+<td style="text-align: left;">専門分野と対応エリアを比較表で明示する</td>
+</tr>
+<tr>
+<td style="text-align: left;">BtoB・SaaS</td>
+<td style="text-align: left;">商談化率・資料請求</td>
+<td style="text-align: left;">比較表とFAQを商談前の候補入りに直結させる</td>
+</tr>
+</tbody>
+</table></div>
+<p>クリニックの具体的な進め方は<a href="/aio/clinic-ai-kensaku-taisaku/">AIO対策をクリニックで始める5ステップ</a>、BtoB企業の進め方は<a href="/aio/btob-llmo-taisaku/">BtoBのLLMO対策とは？</a>で詳しく解説しています。業種が変わっても、認知→指名検索→CVという導線の骨格自体は共通です。</p>
+<p><strong>異なるのは、CVをどこで確定させるかという1点です。</strong>クリニックは来院予約、士業は初回相談、BtoBは商談化。成果を確定させる場所は、業種ごとにまったく異なります。導線の骨格を共通のテンプレートとして流用しつつ、着地点だけを業種に合わせて差し替えるのが実務上は効率的です。</p>
+<p>私たちがG-ranの支援現場で見てきたクリニックの例では、指名来院を測る際に「予約フォーム経由」と「電話経由」を分けずに集計しているケースが目立ちました。AI経由で指名検索した人が電話を選びやすい傾向があるため、<strong><mark>経路を分けずに集計すると、LLMO集客の実際の効果を過小評価してしまいます</mark></strong>。</p>
+<p>指名検索の増やし方そのものを詳しく知りたい方は、<a href="/aio/saas-shimei-kensaku-fuyashikata/">SaaS指名検索の増やし方｜AI時代に効く5つの施策</a>もあわせてご確認ください。BtoB以外の業種でも、指名検索を増やす考え方の多くは応用できます。</p>
+<h2 id="_1">よくある質問</h2>
+<div class="faq">
+<details><summary>LLMO集客とLLMO対策は何が違いますか？</summary><p class="faq-a">LLMO対策は引用を獲得する施策、LLMO集客は引用を問い合わせに変える導線設計です。</p></details>
+<details><summary>AI引用が増えても問い合わせが増えないのはなぜですか？</summary><p class="faq-a">引用が指名検索やCTAに接続されておらず、認知止まりになっているためです。</p></details>
+<details><summary>LLMO集客の効果はどう測定すればいいですか？</summary><p class="faq-a">GA4のAI参照セッションとGSCの指名検索数を月次で並べて確認してください。</p></details>
+<details><summary>比較表とFAQ、どちらを先に整備すべきですか？</summary><p class="faq-a">AI回答に現れやすいのは比較表とFAQの2つなので、この2つから着手してください。</p></details>
+<details><summary>業種によってLLMO集客の測り方は変わりますか？</summary><p class="faq-a">変わります。来院・問い合わせ・商談化率など業種ごとの最終指標に合わせてください。</p></details>
+</div>
+
+<h2 id="llmo_1">まとめ: LLMO集客は「引用を通過点にする」設計</h2>
+<p>LLMO集客は、AI引用そのものをゴールにせず、認知→指名検索→CVという3段階の通過点として扱う設計です。比較表・FAQ・CTAを引用されやすい記事に集約し、GA4とGSCで指標を月次で追うところから始めてください。</p>
+<p>引用されているのに問い合わせが増えないと感じたら、まず指名検索数が伸びているかを確認してみてください。認知が指名検索につながっていなければ、比較表やFAQに固有名詞と具体的な数値を足すことが最初の一手になります。業種別の詳しい進め方は、本記事からリンクした各記事もあわせてご覧ください。導線は一度作って終わりではなく、毎月の数字を見ながら着地点を微調整していく前提で運用してください。</p>
+
+      <aside class="diag-banner"><div class="db-text"><span class="db-kicker">この記事のテーマで、自社の現在地を測る</span><span class="db-title">AI検索の対応度チェック（無料・30秒）</span><span class="db-desc">AI検索に引用される準備ができているかを100点満点で採点します。</span></div><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_diag_aio">無料で診断する <span class="arw">→</span></a></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/aio-taisaku-ai-inyou-sareru/"><span class="thumb"><img src="/images/aio-taisaku-ai-inyou-sareru/eyecatch.png" alt="AIO対策でAIに引用されるには？5つの実践ポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-02">2026.09.02</time><h3>AIO対策でAIに引用されるには？5つの実践ポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-taisaku-ai-kensaku/"><span class="thumb"><img src="/images/aio-taisaku-ai-kensaku/eyecatch.png" alt="AI検索とは？AIO対策との違いと5種類の対応ポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-12">2026.08.12</time><h3>AI検索とは？AIO対策との違いと5種類の対応ポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-taisaku-chuiten/"><span class="thumb"><img src="/images/aio-taisaku-chuiten/eyecatch.png" alt="AIO対策の注意点とは？始める前に知る7つの落とし穴のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-12">2026.08.12</time><h3>AIO対策の注意点とは？始める前に知る7つの落とし穴<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/ai-marketing/inshokuten-shukyaku-hoho/"><span>← 前の記事</span><strong>飲食店の集客方法とは？グルメサイト依存から抜け出す5つの施策</strong></a><span class="pn pn-empty" aria-hidden="true"></span></nav>
+
+      <section class="cta">
+        <p class="cta-copy">AI検索時代の集客、プロに相談してみませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">AIO・LLMO・SEO・MEO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="Seven Senses" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/meo/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/diagnosis/aio/">AI検索の対応度チェック（30秒）</a>
+      <a href="/site-audit/">サイトの技術チェック</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
