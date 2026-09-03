@@ -68,6 +68,8 @@ faq:
 
 MEO対策の基本は、正確な情報登録・カテゴリ設定・写真更新・口コミ返信・定期投稿・メニュー更新の6点です。
 
+実際の進め方については、[飲食店の集客方法とは？グルメサイト依存から抜け出す5つの施策](/ai-marketing/inshokuten-shukyaku-hoho/)にまとめています。
+
 <figure><img src="/images/inshokuten-meo-taisaku/kiso.png" alt="飲食店のMEO対策6つの基本施策: 正確な基本情報を登録する、カテゴリを実態に合わせる、写真を月2回以上追加する、口コミへ24時間以内に返信する、GBP投稿を週1回行う、メニュー情報を最新に保つ" loading="lazy"><figcaption>飲食店のMEO対策6つの基本施策</figcaption></figure>
 
 ### 施策1: 正確な基本情報を登録する

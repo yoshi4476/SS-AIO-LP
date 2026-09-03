@@ -75,6 +75,8 @@ faq:
 
 新規とリピートを両方増やす取り組みは、マップ表示・Instagram発信・口コミ返信・指名検索導線・来店後の声かけ・広告表示ルールの6つに整理できます。
 
+近い論点を[飲食店の集客方法とは？グルメサイト依存から抜け出す5つの施策](/ai-marketing/inshokuten-shukyaku-hoho/)で扱っています。
+
 あわせて[整骨院の集客成功事例5選｜院の規模で変わる打ち手と注意点](/ai-marketing/seikotsuin-shukyaku-jirei/)もご覧ください。
 
 近い論点を[リフォームの集客方法とは？反響を増やす6つの施策](/ai-marketing/reform-shukyaku-hoho/)で扱っています。
