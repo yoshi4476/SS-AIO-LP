@@ -133,9 +133,25 @@ def test_self_exclusion():
     check("除かなければ完全一致で止まる（検査自体は生きている）", lv_without, 2)
 
 
+# ── 6. 公開済み記事を新規とみなさない ────────────
+def test_published_not_rewritten_as_new():
+    """公開中の記事10本が隔離された事故の再現。
+
+    内部リンクの追加などで既存記事が書き換わると、gitの差分では
+    「変更」として出る。それを新規として審査すると、別ページが同じ語で
+    順位を持っているという理由で、公開中の記事が隔離されてしまう。
+    """
+    import kw_gate
+    print("\n■ 公開済み記事の扱い")
+    pairs = kw_gate.written_keyword("ai-lab")
+    published = [s for s, _ in pairs
+                 if list((ROOT / "site").glob(f"*/{s}/index.html"))]
+    check("公開済みの記事を新規として拾わない", published, [])
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
-              test_self_exclusion):
+              test_self_exclusion, test_published_not_rewritten_as_new):
         try:
             t()
         except Exception as e:

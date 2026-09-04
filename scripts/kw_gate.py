@@ -59,20 +59,40 @@ def next_keyword(site):
 
 
 def written_keyword(site):
-    """直近に書かれた記事の keyword を、gitの差分から拾う"""
+    """この実行で新しく書かれた記事の keyword を拾う。
+
+    「変更された記事」は含めない。公開済みの記事は内部リンクの追加などで
+    毎日書き換わるため、変更を拾うと既存記事が新規として審査され、
+    別ページが同じ語で順位を持っているという理由で隔離されてしまう。
+    実際、公開中でランクインしていた10本がこれで隔離された。
+    審査したいのは「これから世に出る記事」だけ。
+    """
+    def added(args):
+        r = subprocess.run(args, capture_output=True, text=True, cwd=ROOT)
+        return [l.strip() for l in r.stdout.splitlines()
+                if l.strip().startswith("articles/") and l.strip().endswith(".md")]
+
+    # 未コミットで新規に置かれたもの（?? = 追跡外 / A = 追加）
     r = subprocess.run(["git", "status", "--short", "articles/"],
                        capture_output=True, text=True, cwd=ROOT)
-    files = [l.split()[-1] for l in r.stdout.splitlines() if l.strip().endswith(".md")]
+    files = [l[3:].strip() for l in r.stdout.splitlines()
+             if l[:2].strip() in ("??", "A") and l.strip().endswith(".md")]
     if not files:
-        # 直前のコミットで追加された記事を見る
-        r = subprocess.run(["git", "show", "--name-only", "--pretty=", "HEAD"],
-                           capture_output=True, text=True, cwd=ROOT)
-        files = [l for l in r.stdout.splitlines()
-                 if l.startswith("articles/") and l.endswith(".md")]
+        # 直前のコミットで「追加」された記事だけ（変更や改名は見ない）
+        files = added(["git", "show", "--name-only", "--diff-filter=A",
+                       "--pretty=", "HEAD"])
+    head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+                          text=True, cwd=ROOT).stdout.strip()
     out = []
     for f in files:
         p = ROOT / f
         if not p.is_file():
+            continue
+        # 以前のコミットに存在していた記事は、既に世に出ている。審査の対象外。
+        # site/ はラボ専用なので、3サイトを等しく見られる git の履歴で判定する
+        hist = subprocess.run(["git", "log", "--format=%H", "--follow", "--", f],
+                              capture_output=True, text=True, cwd=ROOT).stdout.split()
+        if hist and not (len(hist) == 1 and hist[0] == head):
             continue
         fm = p.read_text(encoding="utf-8-sig").split("---", 2)[1]
         kw = (re.search(r"^keyword:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()
