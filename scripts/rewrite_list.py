@@ -37,8 +37,19 @@ def articles():
     return out
 
 
+def cat_to_site():
+    """カテゴリ → サイト。記事の所属はカテゴリで決まる"""
+    out = {}
+    for f in (ROOT / "sites").glob("*.json"):
+        c = json.loads(f.read_text(encoding="utf-8"))
+        for k in (c.get("categories") or {}):
+            out[k] = f.stem
+    return out
+
+
 def collect(site, conf, arts):
     """ページ×クエリで引き、あと一歩の語を記事ごとにまとめる"""
+    cat_site = cat_to_site()
     from datetime import date, timedelta
     sc = G.client()
     end = date.today() - timedelta(days=3)      # 確定分だけを見る
@@ -57,6 +68,9 @@ def collect(site, conf, arts):
     for page, qs in by_page.items():
         slug = page.rstrip("/").rsplit("/", 1)[-1]
         a = arts.get(slug)
+        # 301で移した記事は、旧ドメインの実績として出る。所属はカテゴリで決める
+        if a and a.get("cat"):
+            site = cat_site.get(a["cat"], site)
         qs.sort(key=lambda x: -x["imp"])
         out.append({"site": site, "page": page, "slug": slug,
                     "title": (a or {}).get("title", "（記事が見つかりません）"),
