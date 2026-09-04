@@ -8,6 +8,7 @@ date: 2026-08-11
 modified: 2026-09-01
 depth: standard
 eyecatch: /images/ai-kantan-shukyaku/eyecatch.png
+updated: 2026-09-05
 score: 98
 score_breakdown: {design: 20, seo: 20, editorial: 18, expert: 20, persona: 19, aio: 20}
 diagrams:
@@ -42,11 +43,11 @@ faq:
 
 <div class="target-reader">この記事は、AI集客に興味はあるものの専門知識がなく、何から手をつければよいか分からない店舗・中小企業の経営者・集客担当者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。</p>
+<p class="freshness">※ 2026年9月時点の情報です。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>AIかんたん集客の意味と、従来のAI活用との違い</li><li>今「かんたん」に集客できるようになった背景</li><li>陥りやすい3つの落とし穴と避け方</li><li>専門知識ゼロで始められる5つのステップ</li><li>自分でやるか専門家に依頼するかの判断基準</li></ul></div>
 
-## AIかんたん集客とは
+## AIかんたん集客とは｜「かんたん集客」で何ができるようになったか
 
 AIかんたん集客とは、ノーコードで使えるAIツールを使い、専門知識がなくても問い合わせや来店につなげる集客の進め方です。
 

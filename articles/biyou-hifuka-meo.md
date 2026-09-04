@@ -8,6 +8,7 @@ date: 2026-08-24
 modified: 2026-08-24
 eyecatch: /images/biyou-hifuka-meo/eyecatch.png
 depth: standard
+updated: 2026-09-05
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
 faq:
@@ -40,11 +41,11 @@ diagrams:
 
 <div class="target-reader">この記事は、美容皮膚科・美容クリニックの院長・マーケティング担当者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。</p>
+<p class="freshness">※ 2026年9月時点の情報です。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>美容皮膚科MEOの定義と、一般クリニックのMEOとの違い</li><li>医療広告ガイドラインが美容医療に課す追加規制（限定解除の4要件・ステマ規制）</li><li>施術メニュー登録・写真戦略・口コミ運用の実務ポイント</li><li>着手の3ステップと、ありがちな失敗</li></ul></div>
 
-## 美容皮膚科のMEO対策とは？
+## MEO対策を美容皮膚科で行うとは？
 
 美容皮膚科のMEO対策とは、Googleマップの「地域名×美容皮膚科」検索で自由診療の候補に選ばれるための情報整備です。
 
