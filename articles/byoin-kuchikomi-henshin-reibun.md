@@ -8,6 +8,7 @@ date: 2026-07-31
 modified: 2026-08-08
 eyecatch: /images/byoin-kuchikomi-henshin-reibun/eyecatch.png
 depth: standard
+updated: 2026-09-05
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
 faq:
@@ -27,6 +28,8 @@ faq:
     a: 文面の型は同じです。ただしクリニックは承認者が不在になりやすいため、投稿前に第三者が読む仕組みを作ってください。
   - q: 歯科医院で自由診療の料金を書かれた口コミにはどう返信しますか？
     a: 返信に金額を書かないでください。料金の説明は医療広告ガイドラインの規制対象になるため、窓口へ案内する一文で受け止めます。
+  - q: クリニックのクチコミ返信で気をつけることは？
+    a: 個人の治療内容に触れないことです。来院の事実も伏せ、一般的な案内にとどめます。
 diagrams:
   - name: flow
     type: flow
@@ -46,7 +49,7 @@ diagrams:
 
 <div class="target-reader">この記事は、病院・クリニック・歯科医院の院長・事務長・受付スタッフなど、口コミ返信の担当者向けです。</div>
 
-<p class="freshness">※ 2026年7月時点の情報です。</p>
+<p class="freshness">※ 2026年9月時点の情報です。</p>
 
 ## 医療機関の口コミ返信で最初に押さえる2つの原則
 
@@ -211,6 +214,7 @@ diagrams:
 ## よくある質問
 
 <div class="faq">
+<details><summary>クリニックのクチコミ返信で気をつけることは？</summary><p class="faq-a">個人の治療内容に触れないことです。来院の事実も伏せ、一般的な案内にとどめます。</p></details>
 <details><summary>病院の口コミ返信で診療内容に触れてもいいですか？</summary><p class="faq-a">触れてはいけません。個別の症状や治療内容への言及は守秘義務違反になるため、感謝と一般案内にとどめてください。</p></details>
 <details><summary>低評価の口コミは削除できますか？</summary><p class="faq-a">ポリシー違反がない限り削除できません。事実に基づく丁寧な返信で閲覧者の印象を整えるのが現実的です。</p></details>
 <details><summary>返信で「必ず改善します」と書いてもいいですか？</summary><p class="faq-a">避けてください。断定的な改善保証は医療広告ガイドラインの誇大広告に該当するおそれがあります。</p></details>

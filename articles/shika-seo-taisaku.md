@@ -8,6 +8,7 @@ date: 2026-08-18
 modified: 2026-08-18
 eyecatch: /images/shika-seo-taisaku/eyecatch.png
 depth: standard
+updated: 2026-09-05
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
 faq:
@@ -23,6 +24,8 @@ faq:
     a: 必須ではありませんが、Dentist型を実装すると検索・AI双方に情報が伝わりやすくなります。
   - q: 歯科医院SEOの効果はどのくらいで出ますか？
     a: ページ構成や症例数によりますが、数週間で表示回数が動き始めるのが一般的です。
+  - q: 審美歯科クリニックのSEOは一般歯科と違いますか？
+    a: 自由診療のため比較検討が長く、症例と費用の透明性が順位と来院の双方を左右します。
 diagrams:
   - name: steps
     type: flow
@@ -42,7 +45,7 @@ diagrams:
 
 <div class="target-reader">この記事は、歯科医院の院長・経営者・Web担当者などSEO対策の担当者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。</p>
+<p class="freshness">※ 2026年9月時点の情報です。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>歯科医院のSEOがクリニックSEOと何が違うのか</li><li>歯科医院SEOの基本5ステップ</li><li>自由診療科目別のキーワード・コンテンツ設計</li><li>歯科ポータルサイトとの併用戦略とAI検索時代の対策</li></ul></div>
 
@@ -157,6 +160,7 @@ diagrams:
 ## よくある質問
 
 <div class="faq">
+<details><summary>審美歯科クリニックのSEOは一般歯科と違いますか？</summary><p class="faq-a">自由診療のため比較検討が長く、症例と費用の透明性が順位と来院の双方を左右します。</p></details>
 <details><summary>歯科医院のSEOとMEO対策はどちらを優先すべきですか？</summary><p class="faq-a">来院直結度が高いMEOを先に整え、並行して一般検索向けのSEOに着手する順番が現実的です。</p></details>
 <details><summary>歯科医院SEOとクリニックSEOは何が違いますか？</summary><p class="faq-a">自由診療科目別のキーワード設計と、歯科ポータルサイトとの併用戦略が加わる点です。</p></details>
 <details><summary>歯科ポータルサイトへの掲載はSEOにとって不要になりますか？</summary><p class="faq-a">不要ではありません。ポータルは新規接点、自院サイトは比較検討の受け皿と役割を分けます。</p></details>

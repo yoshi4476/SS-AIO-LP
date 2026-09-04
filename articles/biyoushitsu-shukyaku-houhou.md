@@ -7,6 +7,7 @@ category: ai-marketing
 date: 2026-08-13
 modified: 2026-08-13
 eyecatch: /images/biyoushitsu-shukyaku-houhou/eyecatch.png
+updated: 2026-09-05
 score: 97
 score_breakdown: {design: 19, seo: 20, editorial: 18, expert: 19, persona: 20, aio: 20}
 diagrams:
@@ -41,11 +42,11 @@ faq:
 
 <div class="target-reader">この記事は、美容室・ヘアサロンのオーナー、店長、集客担当のスタッフ向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。</p>
+<p class="freshness">※ 2026年9月時点の情報です。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>美容室の集客方法とは何か、新規とリピートを両輪で見る考え方</li><li>美容室の集客が伸び悩みやすい3つの原因</li><li>新規とリピートを増やす6つの施策と、始める順番</li><li>値引き広告で注意すべき景品表示法のポイントとAI検索時代の集客</li></ul></div>
 
-## 美容室の集客方法、新規接点とリピート化を両輪で考える
+## 美容院・美容室の集客方法、新規接点とリピート化を両輪で考える
 
 美容室の集客方法は、新規のお客様を呼び込む取り組みと、既存のお客様に再来店してもらう取り組みを、別々に設計することが出発点です。
 
