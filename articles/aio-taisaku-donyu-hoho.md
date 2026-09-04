@@ -50,6 +50,8 @@ faq:
 
 AIO対策の導入とは、AI検索への最適化をツール単発の作業ではなく、社内で継続する仕組みに変えることです。
 
+費用の目安は[AIO導入のメリット5つと費用相場｜投資対効果の考え方](/aio/aio-taisaku-merit-hiyou/)で整理しています。
+
 実際の進め方は[AIO対策の計測方法｜見るべき5つの指標と週次の運用手順](/aio/aio-taisaku-keisoku-houhou/)でも扱っています。
 
 実際の進め方は、[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)で解説しています。
