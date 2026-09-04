@@ -78,6 +78,8 @@ Sansan株式会社が2024年8月22日〜27日に経理担当者1,000名（20〜5
 
 経理の残業には、優先順位の見直し・繰り返し作業の削減・繁忙期の分散・承認の電子化という4つの対応がすぐ始められます。
 
+実際の進め方を先に押さえるなら、[経理の仕事を効率化する9つの方法｜今日からできる時短術](/blog/keiri-shigoto-koritsuka/)が参考になります。
+
 業務フローそのものを見直したい場合は、[経理の業務フロー見直し3ステップ｜属人化と遅延を防ぐ](https://corp.7senses.co.jp/blog/keiri-gyomu-flow-minaoshi/)で手順を解説しています。
 
 <figure><img src="/images/keiri-zangyo-herasu/sokujitsu.png" alt="経理の残業を今日から減らす4つの対応: 優先順位を見直す、繰り返し作業を減らす、繁忙期を分散する、承認を電子化する" loading="lazy"><figcaption>経理の残業を今日から減らす4つの対応</figcaption></figure>
