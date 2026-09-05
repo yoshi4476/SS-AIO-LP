@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-05",
+  "date": "2026-09-06",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
@@ -32,7 +32,7 @@
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
           "pos": 7.4,
-          "imp": 55,
+          "imp": 58,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -61,8 +61,8 @@
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 8.0,
-          "imp": 66,
+          "pos": 7.9,
+          "imp": 69,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -71,8 +71,8 @@
         {
           "kw": "口コミ返信 医療機関",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 9.8,
-          "imp": 68,
+          "pos": 9.9,
+          "imp": 71,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -81,36 +81,46 @@
         {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 6.5,
-          "imp": 22,
+          "pos": 6.6,
+          "imp": 25,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 5.0,
+          "expected_ctr": 4.0,
           "ratio": 0.0
         }
       ]
     },
     "corporate": {
-      "judged": 4,
-      "suspect_taken": 3,
+      "judged": 5,
+      "suspect_taken": 4,
       "healthy": 1,
-      "too_thin": 13,
+      "too_thin": 14,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/",
           "pos": 2.8,
-          "imp": 85,
+          "imp": 86,
           "clicks": 3,
-          "ctr": 3.53,
+          "ctr": 3.49,
           "expected_ctr": 11.0,
           "ratio": 0.32
+        },
+        {
+          "kw": "セブンセンシズ",
+          "url": "https://corp.7senses.co.jp/company",
+          "pos": 9.5,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 2.5,
+          "ratio": 0.0
         },
         {
           "kw": "ラクシフト",
           "url": "https://corp.7senses.co.jp/rakushift",
           "pos": 4.2,
-          "imp": 24,
+          "imp": 25,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -119,8 +129,8 @@
         {
           "kw": "経理 派遣 時給 相場",
           "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
-          "pos": 8.1,
-          "imp": 14,
+          "pos": 8.4,
+          "imp": 17,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -132,7 +142,7 @@
       "judged": 2,
       "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 13,
+      "too_thin": 14,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",
@@ -147,11 +157,11 @@
         {
           "kw": "エクセル 開発 補助金",
           "url": "https://lp.7senses.co.jp/service/dev/",
-          "pos": 7.3,
-          "imp": 27,
+          "pos": 7.5,
+          "imp": 28,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 4.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         }
       ]
