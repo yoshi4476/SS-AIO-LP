@@ -135,6 +135,30 @@ jobs:
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: python scripts/actions_budget.py || true
 
+      - name: 内部リンクの補充（被リンクの少ない記事へ）
+        run: |
+          for s in ai-lab corporate subsidy; do
+            python scripts/link_boost.py "$s" --write || true
+          done
+
+      - name: 無料診断への導線を新しい記事にも入れる
+        run: python scripts/tool_links.py --write || true
+
+      - name: 2ページ目で止まっている記事の洗い出し
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+            python scripts/rewrite_list.py --top 12 || true
+            rm -f indexing-service-account.json
+          fi
+
+      - name: 直した記事が基準を割っていないか
+        run: |
+          # 機械の直しでも品質は落とさない。割っていれば週次を落とす
+          python scripts/build.py
+
       - name: 週次最適化の実行
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}

@@ -117,6 +117,8 @@ jobs:
           # 無効でないトークンを作り直すことになり、原因が残ったままになる。
           if echo "$out" | grep -q "トークンの問題ではありません"; then
             echo "::error::GitHub側の問題で確認できませんでした。トークンの再発行では直りません。githubstatus.com を確認し、時間をおいて再実行してください"
+          elif echo "$out" | grep -q "権限不足"; then
+            echo "::error::SITE_PUSH_TOKEN の権限が足りません。github.com/settings/personal-access-tokens で該当トークンを開き、Repository permissions の Contents を Read and write にして Update token。その後 python scripts/set_secrets.py --apply で .env と Secrets を更新してください"
           else
             echo "::error::SITE_PUSH_TOKEN が使えません。再発行して Secrets と .env の両方を更新してください"
           fi

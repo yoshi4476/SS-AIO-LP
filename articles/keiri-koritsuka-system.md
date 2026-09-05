@@ -67,6 +67,8 @@ MM総研が2026年3月末時点で公表した調査によると、<a href="http
 
 経理効率化システムは、クラウド会計・経費精算・RPA/AI-OCR・受発注連携の4種類に大別できます。
 
+
+関連して、[経理業務の自動化事例5つ｜仕訳から給与計算までの進め方](/blog/keiri-gyomu-jidoka-jirei/)もあわせてご確認ください。
 <figure><img src="/images/keiri-koritsuka-system/shurui.png" alt="経理効率化システムの主な種類4つ: クラウド会計ソフト、経費精算システム、RPA・AI-OCR、受発注連携システム" loading="lazy"><figcaption>経理効率化システムの主な種類4つ</figcaption></figure>
 
 | 種類 | 得意な業務 | 向いている企業 |
