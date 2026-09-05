@@ -91,6 +91,7 @@ def main():
             continue
 
         ok = ng = 0
+        miss = 0        # 続けて落ちた数。1本の失敗で残り全部を諦めない
         for i, slug in enumerate(targets, 1):
             r = subprocess.run(
                 [sys.executable, str(ROOT / "scripts" / "publish.py"),
@@ -99,16 +100,20 @@ def main():
                 errors="replace", cwd=ROOT)
             if r.returncode == 0:
                 ok += 1
+                miss = 0
                 print(f"   [{i}/{len(targets)}] ○ {slug}", flush=True)
             else:
                 ng += 1
+                miss += 1
                 why = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
                 print(f"   [{i}/{len(targets)}] × {slug}: {why[-1][:70] if why else '原因不明'}",
                       flush=True)
-                # 認証で落ちているなら、以降も同じ結果になる。早めに止める
-                if any("401" in l or "unauthorized" in l.lower()
-                       or "SITE_PUSH_TOKEN" in l for l in why):
-                    print("   → トークンの問題です。ここで中断します")
+                # 1本落ちただけで残りを諦めない。配信先が一時的に進んでいるなど、
+                # 次の1本では通ることが多い（79本中18本で止まり、単発では通った）。
+                # 続けて落ちるときだけ、環境の問題とみなして止める。
+                if miss >= 3:
+                    print("   → 3本続けて失敗しました。環境の問題とみなして中断します")
+                    print("      python scripts/token_check.py で権限を確かめてください")
                     break
         print(f"   配信 {ok}本 / 失敗 {ng}本\n")
         total_ok += ok
