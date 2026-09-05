@@ -132,6 +132,8 @@ RPA・AI-OCRは、請求書や納品書の転記作業を自動化します。�
 
 経理の仕事効率化で失敗しやすいのは、全業務を一度に効率化しようとしたり、属人化を残したままツールだけ導入したりするケースです。
 
+関連する内容は[エクセル経理の効率化のコツ7選｜関数とショートカットの実践術](/blog/excel-keiri-koritsuka/)でも扱っています。
+
 <figure><img src="/images/keiri-shigoto-koritsuka/chuui.png" alt="経理の仕事効率化のNGとOK: NG例は全業務を一度に効率化しようとする・属人化を残したままツールだけ導入する・効果を測らず次の施策に移る・現場に周知せず新システムを始める、OK例は時間がかかる業務から着手する・属人化解消とセットで進める・導入後の時間を数値で比較する・移行期間を区切って周知する" loading="lazy"><figcaption>経理の仕事効率化のNGとOK</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 属人化を残したままの効率化はNG</span><br>特定の担当者しか手順を把握していない状態でツールだけ導入すると、<span class="txt-red">担当者の不在時にかえって業務が止まりやすくなります。</span></div>
