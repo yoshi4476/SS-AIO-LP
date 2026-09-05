@@ -13,7 +13,12 @@
  */
 export async function onRequestPost({ request, env }) {
   const data = {};
-  const fd = await request.formData();
+  let fd;
+  try {
+    fd = await request.formData();
+  } catch (_) {
+    return new Response("フォーム形式で送信してください。", { status: 400 });
+  }
   for (const [k, v] of fd) data[k] = String(v).slice(0, 2000);
 
   // ハニーポット（botはこの不可視フィールドを埋める）

@@ -70,10 +70,21 @@ def inbound(arts):
 
 
 def words(a):
-    """記事を代表する語。タイトルと狙う語から拾う"""
-    src = a["title"] + " " + a["kw"]
-    return {w for w in re.split(r"[\s　｜|・、。（）()【】\[\]？?！!]+", src)
-            if len(w) >= 3}
+    """記事を代表する語。タイトルと狙う語から拾う
+
+    タイトルだけを記号で割ると「専門知識ゼロで始める5つの方法」のような
+    長い塊になり、他の記事に丸ごと現れない。狙う語は空白区切りなので、
+    そこからも語を取り、短い語まで拾えるようにする。
+    """
+    sep = r"[\s　｜|・、。（）()【】\[\]？?！!]+"
+    out = {w for w in re.split(sep, a["title"]) if len(w) >= 3}
+    out |= {w for w in re.split(sep, a["kw"]) if len(w) >= 2}
+    return out
+
+
+def distinctive(target_words):
+    """その記事を言い当てる語。これが無い記事からは送らない"""
+    return {w for w in target_words if len(w) >= 4}
 
 
 # リンクだけで成り立つ段落。ここに重ねるとリンク集になり、読者もAIも読み飛ばす
@@ -134,7 +145,9 @@ def main():
             if src == tgt or f"/{tgt}/" in b["body"]:
                 continue
             hit = sum(1 for w in tw if w in b["body"])
-            if hit >= 2:
+            # 短い語だけの一致は話題が近いとは限らない。言い当てる語を必ず含める
+            key = distinctive(tw)
+            if hit >= 2 and (not key or any(w in b["body"] for w in key)):
                 cands.append((hit, cnt[src], src))
         # 話題が近く、かつ自身の被リンクが多い記事から送る（力のある記事から送る）
         cands.sort(key=lambda x: (-x[0], -x[1]))
