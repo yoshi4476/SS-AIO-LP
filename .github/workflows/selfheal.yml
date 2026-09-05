@@ -1,0 +1,147 @@
+name: 自動修復
+
+# パイプラインが落ちたら、その原因を自動で直す。
+# 人が朝まで気づかないと1日分の記事が失われるため、落ちた直後に動かす。
+on:
+  workflow_run:
+    # 名前は各ワークフローの name: と1文字も違ってはいけない。
+    # 違うと待ち受けが成立せず、落ちても何も起きない
+    workflows: ["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize"]
+    types: [completed]
+  schedule:
+    - cron: "0 15 * * *"   # JST 00:00 — 1日の最後に検査だけはかける
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: selfheal
+  cancel-in-progress: false
+
+jobs:
+  heal:
+    # 定期実行のときは常に。ワークフロー起因のときは、失敗したときだけ動かす
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 依存インストール
+        run: |
+          python -m pip install --quiet --upgrade pip
+          pip install --quiet -r requirements.txt || true
+          npm install -g @anthropic-ai/claude-code
+
+      - name: Git識別情報の設定
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+
+      # 何が壊れているかを先に確定させる。ここで問題が無ければ何もしない。
+      - name: いま壊れているものの確認
+        id: diag
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          bad=0
+          python tests/test_gates.py || bad=1
+          python scripts/build.py    || bad=1
+          echo "broken=$bad" >> "$GITHUB_OUTPUT"
+          if [ "$bad" = "0" ]; then
+            echo "検査はすべて通っています。修復は不要です"
+          fi
+
+      - name: 不具合の自動修復
+        if: steps.diag.outputs.broken == '1'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          claude -p "$(cat automation/selfheal_prompt.txt)" \
+            --dangerously-skip-permissions --max-turns 120 || true
+
+      # 直したつもりで壊していないかを、人の目の代わりに機械で見る。
+      # 通らなければ変更を捨てる。壊れたまま配信するより安全。
+      - name: 直った状態の検証
+        if: steps.diag.outputs.broken == '1'
+        id: verify
+        run: |
+          ok=1
+          python tests/test_gates.py || ok=0
+          python scripts/build.py    || ok=0
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+          if [ "$ok" = "0" ]; then
+            echo "::error::修復後も検査が通りません。変更を捨てます"
+            git checkout -- . || true
+          fi
+
+      - name: 直った分だけコミット
+        if: steps.diag.outputs.broken == '1' && steps.verify.outputs.ok == '1'
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "変更なし"
+          else
+            git commit -m "selfheal: パイプラインを止めていた不具合を自動修復 $(date '+%Y-%m-%d %H:%M')"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
+
+      # 記事が落ちた日は、修復のあとで書き直す。1日分を失わない。
+      - name: 修復後に記事を書き直す
+        if: >-
+          github.event_name == 'workflow_run' &&
+          steps.verify.outputs.ok == '1'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          claude -p "$(cat automation/retry_prompt.txt)" \
+            --dangerously-skip-permissions --max-turns 160 || true
+          rm -f indexing-service-account.json
+          python scripts/build.py || true
+          git add -A
+          git diff --cached --quiet || {
+            git commit -m "selfheal: 落ちた回の記事を書き直し $(date '+%Y-%m-%d')"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          }
+
+      - name: 結果の通知
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          if [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
+            msg="✅ 自動修復: 異常なし"
+          elif [ "${{ steps.verify.outputs.ok }}" = "1" ]; then
+            msg="🔧 自動修復: 不具合を直しました"
+          else
+            msg="🚨 自動修復: 直せませんでした。手当てが必要です"
+          fi
+          python scripts/notify_slack.py "$msg
+          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

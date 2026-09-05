@@ -184,8 +184,25 @@ jobs:
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          claude -p "$(cat automation/multi_site_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 160
+          # 1回で書けなくても、その日の記事は落とさない。書けたかどうかを
+          # 記事ファイルの数で判定し、増えるまで繰り返す。回数を切るのは、
+          # 壊れたまま無限に回して実行時間を食い潰さないため。
+          before=$(ls articles/*.md 2>/dev/null | wc -l)
+          for try in 1 2 3; do
+            claude -p "$(cat automation/multi_site_prompt.txt)" \
+              --dangerously-skip-permissions --max-turns 160 || true
+            after=$(ls articles/*.md 2>/dev/null | wc -l)
+            if [ "$after" -gt "$before" ]; then
+              echo "記事が増えました（$before → $after）。$try 回目で完了"
+              break
+            fi
+            echo "::warning::記事が増えていません。書き直します（$try/3）"
+            if [ "$try" = "3" ]; then
+              echo "::error::3回試しても記事が増えませんでした"
+              python scripts/hub_client.py error_log write \
+                "${{ steps.site.outputs.id }}: 3回試しても記事を書けませんでした" || true
+            fi
+          done
           rm -f indexing-service-account.json
 
       # 書き手が執筆前ゲートと違うKWを選ぶことがある。

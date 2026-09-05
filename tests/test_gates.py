@@ -165,10 +165,31 @@ def test_token_check_probes_write():
     check("403を権限不足として扱う", "403" in src, True)
 
 
+# ── 8. 自動修復の待ち受け名 ──────────────────────
+def test_selfheal_watches_real_workflows():
+    """待ち受ける名前が1文字でも違うと、落ちても何も起きない。
+
+    最初に書いたときは日本語の名前を並べていたが、実際の name: は
+    英語だった。名前は目で合わせず、機械で突き合わせる。
+    """
+    import yaml
+    print("\n■ 自動修復の待ち受け名")
+    wf = ROOT / ".github" / "workflows"
+    heal = yaml.safe_load((wf / "selfheal.yml").read_text(encoding="utf-8"))
+    # PyYAML は on: を True と読む
+    trig = heal.get("on") or heal.get(True) or {}
+    watched = set((trig.get("workflow_run") or {}).get("workflows") or [])
+    actual = {yaml.safe_load(f.read_text(encoding="utf-8")).get("name")
+              for f in wf.glob("*.yml") if f.name != "selfheal.yml"}
+    missing = sorted(watched - actual)
+    check("待ち受け名がすべて実在する", missing, [])
+    check("待ち受けが空でない", bool(watched), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
-              test_token_check_probes_write):
+              test_token_check_probes_write, test_selfheal_watches_real_workflows):
         try:
             t()
         except Exception as e:
