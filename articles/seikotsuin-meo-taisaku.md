@@ -1,6 +1,6 @@
 ---
 title: 整骨院のMEO対策とは？無資格「整体」と差がつく5つの実践ポイント
-description: 整骨院のMEO対策は、国家資格を持つ施術所であることをGoogleマップ上で正しく伝える取り組みです。無資格の整体院と混同されない5つの実践ポイントを、G-ranの支援実務から解説します。
+description: 整骨院・カイロプラクティック院のMEO対策は、国家資格の有無をGoogleマップ上で正しく伝える取り組みです。無資格の整体院と混同されない5つの実践ポイントを、G-ranの支援実務から解説します。
 slug: seikotsuin-meo-taisaku
 keyword: 整骨院 meo対策
 category: meo

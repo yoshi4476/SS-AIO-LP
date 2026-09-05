@@ -739,6 +739,18 @@ def main():
     only = sys.argv[1] if len(sys.argv) > 1 else None
     entries, warns = [], []
 
+    # 隔離フォルダに公開済みの記事が入っていたら知らせる。
+    # 公開してランクインしていた10本が、2度にわたり誤って隔離された。
+    # 気づかないとサイトから静かに消えるため、ビルドのたびに見る。
+    conflicted = ARTICLES / "_conflicted"
+    if conflicted.is_dir():
+        live = [f.stem for f in conflicted.glob("*.md")
+                if (SITE / "sitemap.xml").read_text(encoding="utf-8").find(f"/{f.stem}/") >= 0]
+        if live:
+            print(f"!! 公開済みの記事が隔離されています（{len(live)}本）: "
+                  + ", ".join(live[:5]) + ("…" if len(live) > 5 else ""))
+            print("   articles/ へ戻してください。隔離は新規記事にだけ使います")
+
     llms = (SITE / "llms.txt").read_text(encoding="utf-8")
 
     # 品質審査ゲート: score(100点満点) 90点未満・未審査はアップロードしない
