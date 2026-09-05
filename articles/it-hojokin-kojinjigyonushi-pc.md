@@ -8,7 +8,7 @@ date: 2026-08-11
 modified: 2026-08-11
 depth: standard
 eyecatch: /images/it-hojokin-kojinjigyonushi-pc/eyecatch.png
-updated: 2026-09-05
+updated: 2026-09-06
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 19, expert: 18, persona: 19, aio: 20}
 diagrams:
@@ -49,7 +49,7 @@ faq:
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>パソコン購入が対象になる条件</li><li>補助率・上限額の目安</li><li>個人事業主が満たすべき要件</li><li>交付決定からパソコン購入までの流れ</li></ul></div>
 
-## IT導入補助金でパソコンは購入できるか？結論
+## IT導入補助金2026でパソコン購入はできるか？結論
 
 **個人事業主がIT導入補助金でパソコンを購入する場合、単体では対象外です。**対象ソフトウェアと同時に導入する場合に限り、補助の対象に含められます。
 

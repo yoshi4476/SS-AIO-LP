@@ -8,7 +8,7 @@ date: 2026-08-12
 modified: 2026-08-12
 eyecatch: /images/aio-taisaku-chuiten/eyecatch.png
 depth: standard
-updated: 2026-09-05
+updated: 2026-09-06
 score: 93
 score_breakdown: {design: 18, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 19}
 diagrams:
@@ -41,7 +41,7 @@ faq:
 
 <p class="freshness">※ 2026年9月時点の情報です。</p>
 
-## AIO対策の注意点とは？失敗事例に共通する2つの原因
+## AIO対策の注意点とは？やってはいけない失敗事例に共通する2つの原因
 
 AIO対策の注意点の多くは、**「土台を確認しない」か「結果を確認しない」のどちらか**に集約されます。
 

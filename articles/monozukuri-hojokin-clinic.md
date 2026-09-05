@@ -7,7 +7,7 @@ category: hojokin
 date: 2026-08-26
 modified: 2026-08-26
 depth: standard
-updated: 2026-09-05
+updated: 2026-09-06
 score: 96
 score_breakdown: {design: 19, seo: 19, editorial: 19, expert: 19, persona: 19, aio: 20}
 eyecatch: /images/monozukuri-hojokin-clinic/eyecatch.png
@@ -77,7 +77,7 @@ faq:
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
-## クリニックで対象になりやすい医療機器の早見表
+## ものづくり・商業・サービス生産性向上促進補助金で対象になる医療機器の早見表
 
 **審査で評価されるのは、既存機器の更新ではなく新規メニューにつながる医療機器への投資です。**保険診療の枠内にとどまる投資は、生産性向上や新事業性の観点で評価されにくくなります。
 
@@ -119,7 +119,7 @@ faq:
 
 <a href="https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/m26/is2603.html" target="_blank" rel="noopener">厚生労働省の医療施設動態調査（令和8年3月末概数）</a>によると、全国の一般診療所数は10万5,631施設に上ります。**同業の開業医が増えるほど、自由診療メニューによる差別化が経営の分かれ目になります。**
 
-## 段階別の補助上限額はいくらか
+## 新事業進出枠を含む段階別の補助上限額はいくらか
 
 **補助上限額は従業員5人以下で750万円が目安で、規模が大きいほど段階的に上がります。**補助率は中小企業が1/2、小規模事業者が2/3です。個人開業医の多くは従業員5人以下の区分に当てはまります。
 

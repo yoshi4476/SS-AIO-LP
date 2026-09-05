@@ -8,7 +8,7 @@ date: 2026-08-18
 modified: 2026-08-18
 eyecatch: /images/shika-seo-taisaku/eyecatch.png
 depth: standard
-updated: 2026-09-05
+updated: 2026-09-06
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
 faq:
@@ -105,7 +105,7 @@ diagrams:
 
 ポータルサイトへの掲載をやめる必要はありません。**ポータルは新規の接点、自院サイトは比較検討と指名検索の受け皿**、と役割を分けて運用するのが現実的です。次の章で、自由診療科目別の具体的なコンテンツ設計を見ていきます。
 
-## 自由診療科目別のキーワード・コンテンツ設計
+## 審美歯科クリニックなど自由診療科目別のキーワード設計
 
 **自由診療は科目ごとに検索キーワードと患者さんが知りたい情報が異なるため、科目別にページ設計を分けます。**
 

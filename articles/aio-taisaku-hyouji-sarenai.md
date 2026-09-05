@@ -8,7 +8,7 @@ date: 2026-08-13
 modified: 2026-08-13
 eyecatch: /images/aio-taisaku-hyouji-sarenai/eyecatch.png
 depth: standard
-updated: 2026-09-05
+updated: 2026-09-06
 score: 92
 score_breakdown: {design: 18, seo: 18, editorial: 18, expert: 18, persona: 19, aio: 19}
 diagrams:
@@ -39,6 +39,8 @@ faq:
     a: 順位やrobots.txtの基本確認は自社で可能です。構造化データの設計は専門支援が近道です。
   - q: AI Overviewが表示されない理由は何ですか？
     a: 検索意図が明確で答えが一つに定まる語では、AI Overview自体が出ないことがあります。
+  - q: AI Overviewが表示されない理由を先に確認するには？
+    a: 検索語の種類を見ます。答えが一つに定まる語や取引目的の語では、そもそも出ません。
 ---
 
 **AIO対策をしても表示されない主な原因は、検索順位の不足・AIクローラーの遮断・抽出しにくい文章構造・独自性の不足の4つに集約されます。**「対策したのに変化がない」と感じたら、まず自社の状態がどの原因に当てはまるかを切り分けることが近道です。本記事では8つの原因を整理し、自分でできる診断手順と対処法を順番に解説します。
@@ -163,6 +165,7 @@ AI Overviewの引用元は固定ではなく、Googleが再クロールするた
 
 ## よくある質問
 
+<details><summary>AI Overviewが表示されない理由を先に確認するには？</summary><p class="faq-a">検索語の種類を見ます。答えが一つに定まる語や取引目的の語では、そもそも出ません。</p></details>
 <details><summary>AI Overviewが表示されない理由は何ですか？</summary><p class="faq-a">検索意図が明確で答えが一つに定まる語では、AI Overview自体が出ないことがあります。</p></details>
 <details><summary>AIO対策をしても表示されないのはなぜですか？</summary><p class="faq-a">検索順位の不足・AIクローラーの遮断・抽出しにくい構造・独自性の不足のいずれかが主な原因です。</p></details>
 

@@ -7,7 +7,7 @@ category: hojokin
 date: 2026-08-22
 modified: 2026-09-01
 depth: standard
-updated: 2026-09-05
+updated: 2026-09-06
 score: 93
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 18, persona: 19, aio: 19}
 eyecatch: /images/monozukuri-hojokin-unsougyou/eyecatch.png
@@ -116,7 +116,7 @@ faq:
 
 パソコン・タブレットなど日常業務で使う汎用品も対象外です。事業計画で説明する効果に特化した機器かどうかが、審査の分かれ目になります。
 
-## 上限9,000万円｜運送業に合う申請枠の選び方
+## 上限9,000万円｜新事業進出枠を含む運送業に合う申請枠の選び方
 
 **申請枠は革新的新製品・サービス枠、新事業進出枠、グローバル枠の3つで、上限額は2,500万円から最大9,000万円まで幅があります。**投資の規模と目的に合う枠を選ぶ必要があります。
 
