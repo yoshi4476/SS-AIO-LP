@@ -159,6 +159,16 @@ jobs:
           # 機械の直しでも品質は落とさない。割っていれば週次を落とす
           python scripts/build.py
 
+      # 直した記事は他2サイトへ配信しないと本番に反映されない。
+      # 直すだけ直して届かないのでは意味がないため、ここで押し切る。
+      - name: 直した記事を他サイトへ配信
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+        run: |
+          git add -A
+          git diff --cached --quiet || git commit -m "weekly: 内部リンクと導線の補充"
+          python scripts/publish_changed.py --all --since HEAD~1 --push || true
+
       - name: 週次最適化の実行
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}

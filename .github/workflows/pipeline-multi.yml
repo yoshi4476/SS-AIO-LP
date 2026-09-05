@@ -299,6 +299,20 @@ jobs:
           fi
 
       # KPIは1日1回でよいので、朝いちばんの枠のときに全サイト分をまとめて集計する
+      # 手元にあるのに本番に無い記事を、公開サイトのsitemapと突き合わせて拾う。
+      # gitの差分では「配信済み」に見えてしまい、抜けに気づけない。
+      - name: 未配信の記事がないかの確認
+        continue-on-error: true
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+        run: |
+          out=$(python scripts/publish_gap.py --publish) || true
+          echo "$out"
+          n=$(echo "$out" | grep -oE 'PUBLISH_GAP=[0-9]+' | cut -d= -f2)
+          if [ "${n:-0}" -gt 0 ]; then
+            echo "::warning::未配信が ${n} 本ありました。この実行で配信しています"
+          fi
+
       - name: KPI集計 → 管制塔ダッシュボード
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.id == steps.site.outputs.first && github.event.schedule == '0 23 * * *'
         env:
