@@ -153,6 +153,9 @@ faq:
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
+
+自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
 ## IT導入補助金との使い分け
 
 **設備投資が中心ならものづくり補助金、ITツール導入が中心ならIT導入補助金が向いています。**対象経費の性質が異なるため、投資内容によって選ぶ制度が変わります。

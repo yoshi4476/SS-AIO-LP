@@ -158,6 +158,9 @@ GビズIDプライムは、行政手続きをオンラインで行うための�
 
 法人成りや確定申告に関するつまずきは[事業再構築補助金と個人事業主の法人成り](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)や[事業再構築補助金の確定申告｜個人事業主が守る3つの注意点](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)でも整理しています。
 
+
+自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
 ## よくある質問
 
 <div class="faq">

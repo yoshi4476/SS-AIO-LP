@@ -134,6 +134,9 @@ GビズIDアプリは、iOSならApp Store、AndroidならGoogle Playからそ�
 
 交付申請そのものでのつまずきや失敗パターンは、[AI導入補助金の申請に失敗する5つの原因と対策](/blog/ai-hojokin-shinsei-shippai-yokuaru/)で詳しく解説しています。
 
+
+自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
 ## よくある質問
 
 <div class="faq">

@@ -134,6 +134,9 @@ GビズIDやSECURITY ACTIONの宣言が失効していないかの確認も忘�
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
+
+自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
 ## 導入したシステムを、繁忙期までに使える状態にする
 
 **交付決定から実際に使えるまでには、設定と練習の期間が要ります。**この期間を見ずに繁忙期に当てると、現場が混乱します。

@@ -151,6 +151,9 @@ diagrams:
 
 事例を集める際は<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>の考え方も参考になります。患者の体験談を広告のように掲載することは原則認められていないため、事例づくりは事実ベースの情報整備を中心に進めてください。
 
+
+自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
+
 ## 自院の規模に合う事例を選ぶ3ステップ
 
 **自院に合う事例を選ぶには、規模の把握→近い事例の選定→小さく試すという3ステップで進めます。**

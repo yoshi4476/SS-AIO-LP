@@ -138,6 +138,9 @@ AIチャットボットは、想定外の質問に誤った回答をしてしま
 
 AI活用にかかる費用感を先につかんでおきたい場合は、[AI導入の費用相場｜中小企業の内訳と抑える3つのコツ](https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/)を確認してください。交付決定後の手続きは、[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
 
+
+自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
 ## よくある質問
 
 <div class="faq">
