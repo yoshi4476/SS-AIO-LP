@@ -149,9 +149,26 @@ def test_published_not_rewritten_as_new():
     check("公開済みの記事を新規として拾わない", published, [])
 
 
+# ── 7. トークンの権限判定 ──────────────────────
+def test_token_check_probes_write():
+    """「書き込み可」と出るのに配信が403で落ちた事故の再現。
+
+    GitHub APIの permissions.push は「その利用者の権限」であって
+    トークンの権限ではない。細粒度PATが Contents: Read only でも
+    true が返るため、これを見ていた検査は通り、配信で落ちた。
+    """
+    src = (ROOT / "scripts" / "token_check.py").read_text(encoding="utf-8")
+    print("\n■ トークンの権限判定")
+    check("利用者の権限で判定していない",
+          'get("permissions") or {}).get("push")' in src, False)
+    check("実際に書き込みを試している", "_probe_write" in src, True)
+    check("403を権限不足として扱う", "403" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
-              test_self_exclusion, test_published_not_rewritten_as_new):
+              test_self_exclusion, test_published_not_rewritten_as_new,
+              test_token_check_probes_write):
         try:
             t()
         except Exception as e:
