@@ -470,15 +470,27 @@ def main():
     # その場合はgitの資格情報にフォールバックする（手元の開発者は認証済みのため）。
     plain_url = f"https://github.com/{cfg['repo']}.git"
     urls = [f"https://x-access-token:{token}@github.com/{cfg['repo']}.git", plain_url] if token else [plain_url]
-    for i, u in enumerate(urls):
-        if try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest):
-            if i:
-                print("※ SITE_PUSH_TOKEN では認証できませんでした。PATの再発行が必要です")
-            print("push完了。対象サイトのビルドが自動で走ります。")
-            return
+    for attempt in range(2):
+        for i, u in enumerate(urls):
+            if try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest):
+                if i:
+                    print("※ SITE_PUSH_TOKEN では認証できませんでした。PATの再発行が必要です")
+                print("push完了。対象サイトのビルドが自動で走ります。")
+                return
+        if attempt == 0:
+            # 押せない理由は権限だけではない。配信先が先に進んでいると弾かれる。
+            # それを「トークンの問題」と伝えると、無関係な再発行に時間を使わせる。
+            # 実際、配信先が1コミット進んでいるだけで4本ごとに止まっていた。
+            print("  押せませんでした。配信先の変更を取り込んで、もう一度試します")
+            if not (try_run(["git", "fetch", "origin"], cwd=dest)
+                    and try_run(["git", "rebase", f"origin/{cfg['branch']}"], cwd=dest)):
+                break
     raise SystemExit(
-        "pushできません。SITE_PUSH_TOKEN（repo権限のPAT）を再発行して .env と\n"
-        "  GitHub Secrets の両方を更新してください。記事は未配信のままです")
+        "pushできません。次の順に確かめてください。\n"
+        "  1. python scripts/token_check.py で TOKEN_OK=yes か\n"
+        "     （権限不足なら Contents: Read and write を付ける）\n"
+        "  2. 配信先に手を入れていないか（衝突していると取り込めません）\n"
+        "  記事は未配信のままです")
 
 
 if __name__ == "__main__":
