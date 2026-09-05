@@ -39,6 +39,27 @@ def live_slugs(domain):
     return None
 
 
+def _title_matches(domain, slug, title):
+    """公開ページのタイトルが、手元の記事と合っているか。
+    ページが在るだけでは、直した内容が届いたかは分からない"""
+    for path in (f"/blog/{slug}/", f"/blog/{slug}"):
+        code, html = _get(f"https://{domain}{path}")
+        if code == 200:
+            m = re.search(r"<title>(.*?)</title>", html, re.S | re.I)
+            return bool(m and title[:24] in m.group(1))
+    return True        # 場所が違うだけかもしれない。判断できないものは古い扱いにしない
+
+
+def _get(url):
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "SevenSenses-PublishGap/1.0 (+https://7senses.co.jp)"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.status, r.read().decode("utf-8", "replace")
+    except Exception:
+        return 0, ""
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--publish", action="store_true", help="足りない分を配信する")
@@ -59,7 +80,10 @@ def main():
             continue
         site = cat_site.get(g("category"))
         if site:
-            mine.setdefault(site, []).append(p.stem)
+            # タイトルも持つ。ページが在るかだけでは、内容の更新が届いたかを
+            # 見られない。実際、タイトルを直しても「配信済み」に見え、
+            # 古いまま公開され続けていた
+            mine.setdefault(site, []).append((p.stem, g("title").strip('"')))
 
     total_gap = 0
     for site, slugs in sorted(mine.items()):
@@ -68,10 +92,16 @@ def main():
         if live is None:
             print(f"■ {site}: 公開状況を取れません（{c['domain']}）")
             continue
-        gap = [s for s in slugs if s not in live]
+        missing = [s for s, _ in slugs if s not in live]
+        # 在るページは、タイトルが手元と一致しているかまで見る
+        stale = []
+        for s, title in slugs:
+            if s in live and title and not _title_matches(c["domain"], s, title):
+                stale.append(s)
+        gap = missing + stale
         total_gap += len(gap)
-        print(f"■ {site}: 手元 {len(slugs)}本 / 公開 {len(slugs) - len(gap)}本"
-              f" / 未配信 {len(gap)}本")
+        print(f"■ {site}: 手元 {len(slugs)}本 / 公開 {len(slugs) - len(missing)}本"
+              f" / 未配信 {len(missing)}本 / 内容が古い {len(stale)}本")
         for s in gap[:8]:
             print(f"     {s}")
         if len(gap) > 8:
