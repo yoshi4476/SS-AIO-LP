@@ -90,6 +90,28 @@ def fail(kind, detail):
     sys.exit(1)
 
 
+def _probe_write(repo, token):
+    """書き込めるかを実際に試す。存在しないSHAで参照を作ろうとすると、
+    権限があれば422（内容が不正）、無ければ403（権限が無い）が返る。
+    参照は作られないので、リポジトリには何も残らない"""
+    import json as _json
+    import urllib.error
+    import urllib.request
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{repo}/git/refs",
+        data=_json.dumps({"ref": "refs/heads/_perm_probe", "sha": "0" * 40}).encode(),
+        headers={"Authorization": "Bearer " + token,
+                 "Accept": "application/vnd.github+json",
+                 "Content-Type": "application/json"}, method="POST")
+    try:
+        urllib.request.urlopen(req, timeout=20)
+        return 201
+    except urllib.error.HTTPError as e:
+        return e.code
+    except Exception:
+        return 0
+
+
 def main():
     token = publish._push_token()
     if not token:
@@ -116,13 +138,21 @@ def main():
             continue
         repo = cfg["repo"]
         try:
-            r, _ = _api(f"/repos/{repo}", token)
-            # 読めても書けるとは限らない。push権限まで確かめる
-            if (r.get("permissions") or {}).get("push"):
+            _api(f"/repos/{repo}", token)      # まず届くかを見る
+            # permissions.push は「利用者の権限」で、トークンの権限ではない。
+            # 細粒度PATが Contents:write を持たなくても True が返るため、
+            # これを見ていた検査は通ってしまい、配信で403になった。
+            # 書き込みを実際に試す。権限があれば422（内容が不正なだけ）が返る。
+            code = _probe_write(repo, token)
+            if code == 422:
                 print(f"  OK       {cfg['id']:10s} {repo}（書き込み可）")
-            else:
-                print(f"  権限不足 {cfg['id']:10s} {repo}（読めるが書けません）")
+            elif code == 403:
+                print(f"  権限不足 {cfg['id']:10s} {repo}"
+                      f"（Contents: Read and write を付けてください）")
                 ng.append(repo)
+            else:
+                print(f"  確認不可 {cfg['id']:10s} {repo}（HTTP {code}）")
+                unknown.append(repo)
         except AuthError as e:
             print(f"  届かない {cfg['id']:10s} {repo}（{e}）")
             ng.append(repo)

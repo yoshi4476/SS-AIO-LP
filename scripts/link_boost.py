@@ -82,9 +82,15 @@ def words(a):
     return out
 
 
-def distinctive(target_words):
-    """その記事を言い当てる語。これが無い記事からは送らない"""
-    return {w for w in target_words if len(w) >= 4}
+def distinctive(a):
+    """その記事を言い当てる語。これが無い記事からは送らない
+
+    タイトルの断片は「AIO対策との違いと5種類の対応ポイント」のように長く、
+    他の記事に丸ごと現れない。これを必須にすると候補がゼロになる。
+    狙う語は空白区切りの短い語なので、そちらから取る。
+    """
+    sep = r"[\s　｜|・、。（）()【】\[\]？?！!]+"
+    return {w for w in re.split(sep, a["kw"]) if len(w) >= 3}
 
 
 # リンクだけで成り立つ段落。ここに重ねるとリンク集になり、読者もAIも読み飛ばす
@@ -146,7 +152,7 @@ def main():
                 continue
             hit = sum(1 for w in tw if w in b["body"])
             # 短い語だけの一致は話題が近いとは限らない。言い当てる語を必ず含める
-            key = distinctive(tw)
+            key = distinctive(a)
             if hit >= 2 and (not key or any(w in b["body"] for w in key)):
                 cands.append((hit, cnt[src], src))
         # 話題が近く、かつ自身の被リンクが多い記事から送る（力のある記事から送る）
