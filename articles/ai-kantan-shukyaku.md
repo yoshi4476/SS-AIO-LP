@@ -1,6 +1,6 @@
 ---
-title: AIかんたん集客とは？専門知識ゼロで始める5つの方法
-description: AIかんたん集客とは、専門知識がなくても使えるAIツールで問い合わせや来店につなげる集客手法です。陥りやすい3つの落とし穴と、始め方5ステップを中小企業・店舗向けに解説します。
+title: AI集客とは？無料で今日から始める5つの方法と落とし穴3つ
+description: AI集客とは、専門知識がなくても使えるAIツールで問い合わせや来店につなげる手法です。無料で始められるものと費用がかかるものを分け、業種別の実例、陥りやすい3つの落とし穴、始め方5ステップまで示します。
 slug: ai-kantan-shukyaku
 keyword: aiかんたん集客
 category: ai-marketing
@@ -8,7 +8,7 @@ date: 2026-08-11
 modified: 2026-09-01
 depth: standard
 eyecatch: /images/ai-kantan-shukyaku/eyecatch.png
-updated: 2026-09-05
+updated: 2026-09-06
 score: 98
 score_breakdown: {design: 20, seo: 20, editorial: 18, expert: 20, persona: 19, aio: 20}
 diagrams:
