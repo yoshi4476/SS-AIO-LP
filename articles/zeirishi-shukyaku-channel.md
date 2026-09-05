@@ -1,6 +1,6 @@
 ---
-title: 税理士事務所の集客とは？6つのチャネルの選び方
-description: 税理士事務所の集客とは、紹介・MEO・ホームページ・ブログなど複数チャネルを事務所の特性に応じて使い分ける取り組みです。6つのチャネルの特徴と選び方、着手の3ステップを実務目線で解説します。
+title: 税理士事務所の集客とは？AI検索を含む6チャネルの選び方
+description: 税理士事務所の集客は、紹介・MEO・ホームページ・ブログに加え、AI検索からの流入まで6つのチャネルを事務所の特性で使い分けます。生成AIの利用率が26.7%まで伸びた今、どこから着手するかを判断できます。
 slug: zeirishi-shukyaku-channel
 keyword: 税理士 事務所 集客
 category: ai-marketing
@@ -8,7 +8,7 @@ date: 2026-08-24
 modified: 2026-08-24
 eyecatch: /images/zeirishi-shukyaku-channel/eyecatch.png
 depth: standard
-updated: 2026-09-05
+updated: 2026-09-06
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
 diagrams:

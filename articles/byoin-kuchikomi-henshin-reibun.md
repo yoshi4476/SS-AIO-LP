@@ -1,6 +1,6 @@
 ---
-title: 医療機関の口コミ返信例文8選｜病院・クリニック向け
-description: 病院・クリニックの口コミ返信の例文は、症状に触れず状況別の定型文を使い分けることが基本です。守秘義務と医療広告ガイドラインに配慮した返信例8パターンと、NG表現・運用体制をG-ranの支援実務から解説します。
+title: 医療機関の口コミ返信 例文8選｜そのまま使える病院・クリニック用
+description: 医療機関の口コミ返信は、そのまま使える例文8パターンから選べます。高評価・低評価・事実誤認・待ち時間など状況別に用意し、症状に触れず守秘義務と医療広告ガイドラインに配慮した文面です。返信前の確認点も示します。
 slug: byoin-kuchikomi-henshin-reibun
 keyword: 病院 口コミ 返信 例文
 category: meo
@@ -8,7 +8,7 @@ date: 2026-07-31
 modified: 2026-08-08
 eyecatch: /images/byoin-kuchikomi-henshin-reibun/eyecatch.png
 depth: standard
-updated: 2026-09-05
+updated: 2026-09-06
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 19, aio: 20}
 faq:

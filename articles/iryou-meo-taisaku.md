@@ -1,12 +1,13 @@
 ---
-title: 医療機関のMEO対策｜施設タイプ別に見る違いと選び方
-description: 医療機関のMEO対策は、施設タイプによってカテゴリ設計や広告規制の力点が変わります。クリニック・歯科・整骨院・美容皮膚科・病院を比較し、自院に合った対策の選び方を通算3,200店舗以上の支援実務から解説します。
+title: 医療機関のMEO対策｜5つの施設タイプ別に違いと進め方
+description: 医療機関のMEO対策は、施設タイプごとにカテゴリ設計と広告規制の力点が変わります。クリニック・歯科・整骨院・美容皮膚科・病院の5タイプを比較し、共通の基本5ステップと、やりがちな失敗3パターンまで示します。
 slug: iryou-meo-taisaku
 keyword: 医療 meo対策
 category: meo
 date: 2026-08-26
 modified: 2026-08-26
 eyecatch: /images/iryou-meo-taisaku/eyecatch.png
+updated: 2026-09-06
 score: 96
 score_breakdown: {design: 19, seo: 19, editorial: 19, expert: 19, persona: 19, aio: 20}
 faq:
