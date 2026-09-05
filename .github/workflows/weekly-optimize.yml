@@ -144,6 +144,15 @@ jobs:
       - name: 無料診断への導線を新しい記事にも入れる
         run: python scripts/tool_links.py --write || true
 
+      - name: 生成エンジンから読める状態かの検査（GEO）
+        run: |
+          out=$(python scripts/geo_check.py) || true
+          echo "$out"
+          if ! echo "$out" | grep -q "GEO_OK=yes"; then
+            echo "::warning::生成エンジン向けの状態に欠けがあります"
+            python scripts/hub_client.py error_log geo               "$(echo "$out" | grep -A6 'GEO_OK=no' | head -6)" || true
+          fi
+
       - name: 2ページ目で止まっている記事の洗い出し
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
