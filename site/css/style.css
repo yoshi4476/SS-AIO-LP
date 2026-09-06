@@ -1405,3 +1405,13 @@ main.lab .cta-final h2 { color: #fff; }
 .mc-label{font-size:.66rem;letter-spacing:.24em;color:var(--blue,#2563eb);font-weight:700;margin:0 0 .35rem;}
 .mc-title{font-family:var(--head);font-weight:900;font-size:1.06rem;margin:0 0 .2rem;}
 .mc-sub{font-size:.8rem;color:var(--muted);margin:0 0 .8rem;}
+
+/* カテゴリー末尾の関連サービス。ラボからコーポレートへ渡す導線 */
+.svc-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;max-width:1100px;margin:0 auto;}
+.svc-links .svc-card{display:flex;flex-direction:column;gap:.5rem;background:#fff;border:1px solid var(--line,#dbe3ec);
+  border-radius:14px;padding:1.3rem 1.4rem;text-decoration:none;color:inherit;
+  box-shadow:0 14px 34px -24px rgba(2,10,30,.3);transition:border-color .2s,transform .2s;}
+.svc-links .svc-card:hover{border-color:var(--blue,#2563eb);transform:translateY(-2px);}
+.svc-links .svc-card b{font-family:var(--head);font-size:1.02rem;}
+.svc-links .svc-card>span{font-size:.84rem;color:var(--muted);line-height:1.75;}
+.svc-links .svc-more{margin-top:auto;color:var(--blue,#2563eb);font-weight:700;font-size:.82rem;}

@@ -186,10 +186,46 @@ def test_selfheal_watches_real_workflows():
     check("待ち受けが空でない", bool(watched), True)
 
 
+# ── 9. ラボからコーポレートへの導線 ────────────────
+def test_lab_links_to_corporate():
+    """カテゴリーの記事を読み切った人の行き先。
+
+    ラボは読む場所、コーポレートは頼む場所。つながっていないと、
+    記事を読み終えた人が次にどこへ行けばいいか分からない。
+    リンク先を手で書いているので、綴りの間違いを機械で見る。
+    """
+    import glob
+    import json as _json
+    print("\n■ ラボからコーポレートへの導線")
+    conf = _json.loads((ROOT / "sites" / "ai-lab.json").read_text(encoding="utf-8"))
+    cats = list((conf.get("categories") or {}).keys())
+    # コーポレート側に実在するページ
+    src = (ROOT / ".publish-work" / "corporate" / "src" / "lib" / "services.ts")
+    known = {"/aio-agent", "/rakushift", "/contact", "/company", "/"}
+    if src.exists():
+        known |= {"/services/" + s for s in
+                  re.findall(r'slug: "([^"]+)"', src.read_text(encoding="utf-8"))}
+    missing, nolink = [], []
+    for c in cats:
+        f = ROOT / "site" / c / "index.html"
+        if not f.is_file():
+            continue
+        html = f.read_text(encoding="utf-8")
+        urls = set(re.findall(r'href="https://corp\.7senses\.co\.jp([^"]*)"', html))
+        deep = {u for u in urls if u not in ("", "/")}
+        if not deep:
+            nolink.append(c)
+        if src.exists():
+            missing += [f"{c}{u}" for u in deep if u.split("#")[0] not in known]
+    check("全カテゴリーに個別リンクがある", nolink, [])
+    check("リンク先がコーポレートに実在する", missing, [])
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
-              test_token_check_probes_write, test_selfheal_watches_real_workflows):
+              test_token_check_probes_write, test_selfheal_watches_real_workflows,
+              test_lab_links_to_corporate):
         try:
             t()
         except Exception as e:
