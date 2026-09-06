@@ -63,6 +63,8 @@ faq:
 
 経理自動化ツールは、記帳・経費精算・請求書・給与計算・ワークフロー承認という5つの機能に分類できます。
 
+実際の例を先に押さえるなら、[SMBCグループの経理自動化事例｜中小企業が学べる3つの視点](/blog/smbc-keiri-jidouka/)が参考になります。
+
 
 関連して、[エクセル経理の効率化のコツ7選｜関数とショートカットの実践術](/blog/excel-keiri-koritsuka/)もあわせてご確認ください。
 <figure><img src="/images/keiri-jidoka-tool/bunrui.png" alt="経理自動化ツールの機能5分類: 記帳・仕訳ツール、経費精算ツール、請求書発行・受領ツール、給与計算ツール、ワークフロー承認ツール" loading="lazy"><figcaption>経理自動化ツールの機能5分類</figcaption></figure>

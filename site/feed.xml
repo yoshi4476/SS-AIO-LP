@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-06T00:00:00+09:00</updated>
+  <updated>2026-09-07T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>クリニックM&amp;A後の集患再建｜GBP引き継ぎ事例と5つの注意点</title>
+    <link href="https://ai.7senses.co.jp/meo/clinic-ma-shukyaku-jirei/"/>
+    <id>https://ai.7senses.co.jp/meo/clinic-ma-shukyaku-jirei/</id>
+    <updated>2026-09-07T00:00:00+09:00</updated>
+    <summary>クリニックM&amp;Aでは、Googleビジネスプロフィールの引き継ぎ方法が集患を左右します。新規アカウント開設のリスク、所有権リクエストの手順、口コミ・名称変更の扱い方を2026年9月時点の情報で解説します。</summary>
+  </entry>
   <entry>
     <title>クリニックの施工事例｜見るべき5つのポイント</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/clinic-shiko-jirei/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/</id>
     <updated>2026-08-31T00:00:00+09:00</updated>
     <summary>AI時代のSEO対策とは、検索上位表示に加えて「AIの回答に引用される」ことまで見据えた最適化です。中小企業が限られたリソースでやるべき5つの基本を優先順位つきで解説します。</summary>
-  </entry>
-  <entry>
-    <title>AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/</id>
-    <updated>2026-08-31T00:00:00+09:00</updated>
-    <summary>AI集客とは、AI検索・AIチャット・検索・マップのすべてから見込み客を集める考え方です。AIO・LLMO・SEO・MEOの関係と着手の順番を、1枚の地図としてまとめた完全ガイドです。</summary>
   </entry>
 </feed>
