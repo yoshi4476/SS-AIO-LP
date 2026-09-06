@@ -58,6 +58,8 @@ faq:
 
 **自営業の経理は、土台を先に4つ決めておくと、取引が増えても自分だけで回しやすくなります。**
 
+実際の進め方は[会社の経理のやり方｜個人事業主と違う4つのポイント](/blog/kaisha-keiri-yarikata/)で整理しています。
+
 <figure><img src="/images/jieigyou-keiri-yarikata/dodai.png" alt="自営業の経理を自分で回す4つの土台: 事業用口座を分ける、記帳の頻度を先に決める、経費の判断基準を先に決める、記録ツールを1つに絞る" loading="lazy"><figcaption>自営業の経理を自分で回す4つの土台</figcaption></figure>
 
 <div class="definition-box"><span class="term">経理の4つの土台とは</span>、口座・頻度・判断基準・ツールという、経理を続けるうえで最初に固定しておくべき4つの決めごとのことです。</div>
