@@ -103,6 +103,8 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 エクセル経理の自動化は、現状の洗い出しから運用ルールの整備まで、4つの手順で進めると失敗しにくくなります。
 
+実際の例は[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)で整理しています。
+
 選ぶときの基準は[経理自動化ツールとは？機能5分類と失敗しない選び方](/blog/keiri-jidoka-tool/)でも扱っています。
 
 <figure><img src="/images/keiri-excel-jidoka/tejun.png" alt="エクセル経理を自動化する4つの手順: 現状の作業を洗い出す、自動化する作業と方法を選ぶ、関数・マクロを設計してテストする、運用ルールとバックアップ体制を整える" loading="lazy"><figcaption>エクセル経理を自動化する4つの手順</figcaption></figure>
