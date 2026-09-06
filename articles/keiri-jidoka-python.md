@@ -62,6 +62,8 @@ Pythonの導入自体に高額なライセンス費用はかかりません。**
 
 Pythonでの経理自動化には、集計・Excel生成・CSV整形・API連携という4つの代表的な処理があります。
 
+前提となる考え方は[経理マクロ自動化とは？VBAでできる5つの作業と始め方](/blog/keiri-macro-jidoka/)で整理しています。
+
 <figure><img src="/images/keiri-jidoka-python/shori.png" alt="Pythonでできる経理自動化の代表的な処理4つ: pandasによる大量データの集計・突合、openpyxlによるExcel自動生成、CSVデータの自動整形・取込、会計ソフトAPIとの連携処理" loading="lazy"><figcaption>Pythonでできる経理自動化の代表的な処理4つ</figcaption></figure>
 
 第一に、pandasによる大量データの集計・突合です。数万行の取引データでも、エクセルより高速に集計し、複数の帳票間の金額が一致しているかを自動でチェックできます。
