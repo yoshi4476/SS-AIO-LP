@@ -77,6 +77,8 @@ Googleビジネスプロフィールの入力画面は項目ごとに進みま�
 
 **設定はアカウント準備から公開まで、大きく5つの工程で完了します。**
 
+実際の進め方は[MEOアルゴリズム攻略｜順位を決める3要素と実践5手順](/meo/meo-algorithm-kouryaku/)でも扱っています。
+
 <figure><img src="/images/meo-settei-guide/steps.png" alt="MEO設定の5つの工程: Googleアカウントを準備する、ビジネスプロフィールを作成・基本情報を入力する、カテゴリ・営業時間・写真を登録する、オーナー確認を行う、確認完了後に検索・マップへ公開する" width="1200" height="400" loading="lazy"><figcaption>MEO設定の5つの工程（当メディア作成）</figcaption></figure>
 
 ### ステップ1: Googleアカウントを準備する

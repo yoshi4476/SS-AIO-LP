@@ -30,6 +30,8 @@ faq:
 
 AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置いた検索最適化です。
 
+実際の進め方は[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)でも扱っています。
+
 
 関連して、[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)もあわせてご確認ください。
 前提となる考え方は[飲食店のMEO対策とは？6つの基本施策と口コミの増やし方](/meo/inshokuten-meo-taisaku/)で整理しています。

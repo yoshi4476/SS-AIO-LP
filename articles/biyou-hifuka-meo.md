@@ -150,6 +150,8 @@ diagrams:
 
 プロフィールの基本整備、施術メニュー登録、口コミ運用の順で着手すると迷わず進められます。
 
+実際の進め方は、[MEOアルゴリズム攻略｜順位を決める3要素と実践5手順](/meo/meo-algorithm-kouryaku/)で解説しています。
+
 <figure><img src="/images/biyou-hifuka-meo/steps.png" alt="美容皮膚科MEO対策 着手の3ステップ: 基本整備でプロフィールとNAP統一、メニュー登録で施術名を網羅登録、口コミ運用で依頼と返信を継続" loading="lazy"><figcaption>美容皮膚科MEO対策 着手の3ステップ</figcaption></figure>
 
 ### ステップ1: 基本情報とNAPを統一する
