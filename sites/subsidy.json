@@ -6,6 +6,7 @@
   "branch": "master",
   "type": "external-html",
   "content_dir": "blog-system/content/posted",
+  "images_dir": "images",
   "url_prefix": "/blog",
   "ga4_property_id": "547715435",
   "kw_plan": "docs/kw-subsidy.md",

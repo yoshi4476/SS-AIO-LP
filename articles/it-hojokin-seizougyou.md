@@ -156,6 +156,8 @@ faq:
 
 **申請から入金までは、要件準備→ツール選定→交付申請→実績報告の4ステップで進みます。**採択はゴールではなく、実績報告を終えて初めて交付額が確定します。
 
+関連する内容は[IT導入補助金を名古屋で使う｜国・県・市の3制度と相談窓口](/blog/it-hojokin-nagoya/)で整理しています。
+
 対象になる範囲は[運送業のIT導入補助金｜デジタコ・運行管理の対象範囲](/blog/it-hojokin-unsougyou/)で整理しています。
 
 <figure><img src="/images/it-hojokin-seizougyou/flow-steps.png" alt="製造業がIT導入補助金を使うまでの4ステップ: GビズID・SECURITY ACTIONを準備、IT導入支援事業者とツールを選定、交付申請から交付決定後に契約・導入、実績報告を提出し交付額が確定" loading="lazy"><figcaption>製造業がIT導入補助金を使うまでの4ステップ</figcaption></figure>

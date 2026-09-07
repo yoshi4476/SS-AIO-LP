@@ -348,6 +348,17 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     shutil.copy2(src, md)
 
     written = [page, md] + _update_external_index(dest, cfg, meta)
+
+    # アイキャッチと本文図解も配信先へ複製する。
+    # 本文は /images/<slug>/… を参照しているのに複製していなかったため、
+    # 配信済みの記事で図解が全て404になっていた（サムネイルだけが届いていた）。
+    img_src = ROOT / "site" / "images" / meta["slug"]
+    if cfg.get("images_dir") and img_src.is_dir():
+        img_dest = dest / cfg["images_dir"] / meta["slug"]
+        shutil.rmtree(img_dest, ignore_errors=True)
+        shutil.copytree(img_src, img_dest)
+        written.append(img_dest)
+
     thumb_file = dest / "images" / "blog" / meta["slug"] / "thumbnail.webp"
     if thumb_file.is_file():
         written.append(thumb_file)
