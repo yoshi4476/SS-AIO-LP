@@ -58,6 +58,8 @@ faq:
 
 **個人経営の経理は、コツを3つ先に決めておくと、現場の仕事が忙しくなっても崩れにくくなります。**
 
+実際の進め方については、[個人店の経理のやり方｜現金・在庫・スタッフの3点で仕組み化](/blog/kojinten-keiri-yarikata/)にまとめています。
+
 <figure><img src="/images/kojin-keiei-keiri-yarikata/kotsu.png" alt="個人経営の経理を回す3つのコツ: 経理の時間を予定化する、記録の入口を1つにする、月次で数字を確認する日を作る" loading="lazy"><figcaption>個人経営の経理を回す3つのコツ</figcaption></figure>
 
 <div class="definition-box"><span class="term">個人経営の経理を回す3つのコツとは</span>、経理をする時間・記録の入口・数字を見る日という、後回しにされやすい3点を先に固定しておくことです。</div>

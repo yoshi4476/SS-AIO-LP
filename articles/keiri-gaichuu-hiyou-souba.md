@@ -49,6 +49,8 @@ faq:
 
 経理外注の依頼先は、フリーランス・記帳代行専門会社・経理BPO会社・税理士事務所の4タイプに分かれ、費用の出し方がそれぞれ異なります。
 
+選ぶときの基準は[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)でも扱っています。
+
 <div class="definition-box"><span class="term">経理外注とは</span>、記帳・請求書処理・給与計算といった経理業務の一部または全部を、社外の個人や会社に委託することです。==依頼先のタイプによって、時給制・従量制・月額制など料金の考え方自体が変わります。==</div>
 
 <figure><img src="/images/keiri-gaichuu-hiyou-souba/taipu.png" alt="経理外注 依頼先4タイプ別の費用の目安: フリーランス（個人）は時給1,000〜3,000円、記帳代行専門会社は仕訳1件50〜100円、経理BPO会社は月5万〜20万円、税理士事務所は顧問料込み月2万円台〜" loading="lazy"><figcaption>経理外注 依頼先4タイプ別の費用の目安</figcaption></figure>
