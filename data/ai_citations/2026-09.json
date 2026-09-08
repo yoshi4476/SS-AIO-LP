@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-08",
+  "date": "2026-09-09",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 9,
       "suspect_taken": 8,
       "healthy": 1,
-      "too_thin": 29,
+      "too_thin": 33,
       "items": [
         {
           "kw": "ai集客とは",
@@ -22,7 +22,7 @@
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
           "pos": 8.9,
-          "imp": 51,
+          "imp": 52,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -31,8 +31,8 @@
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 7.2,
-          "imp": 64,
+          "pos": 7.3,
+          "imp": 67,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -61,8 +61,8 @@
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 8.1,
-          "imp": 75,
+          "pos": 8.3,
+          "imp": 77,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -71,8 +71,8 @@
         {
           "kw": "口コミ返信 医療機関",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 9.9,
-          "imp": 76,
+          "pos": 10.0,
+          "imp": 79,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -81,8 +81,8 @@
         {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 6.8,
-          "imp": 29,
+          "pos": 7.1,
+          "imp": 31,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -92,28 +92,18 @@
     },
     "corporate": {
       "judged": 6,
-      "suspect_taken": 3,
-      "healthy": 3,
-      "too_thin": 18,
+      "suspect_taken": 2,
+      "healthy": 4,
+      "too_thin": 17,
       "items": [
-        {
-          "kw": "セブンセンシズ株式会社",
-          "url": "https://corp.7senses.co.jp/",
-          "pos": 2.8,
-          "imp": 86,
-          "clicks": 3,
-          "ctr": 3.49,
-          "expected_ctr": 11.0,
-          "ratio": 0.32
-        },
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/company",
-          "pos": 9.2,
-          "imp": 13,
+          "pos": 9.6,
+          "imp": 15,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 2.5,
           "ratio": 0.0
         },
         {
@@ -129,10 +119,10 @@
       ]
     },
     "subsidy": {
-      "judged": 2,
-      "suspect_taken": 2,
+      "judged": 3,
+      "suspect_taken": 3,
       "healthy": 0,
-      "too_thin": 21,
+      "too_thin": 23,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",
@@ -147,8 +137,18 @@
         {
           "kw": "エクセル 開発 補助金",
           "url": "https://lp.7senses.co.jp/service/dev/",
-          "pos": 7.8,
-          "imp": 29,
+          "pos": 8.1,
+          "imp": 30,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "農業用倉庫 補助金 2026",
+          "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
+          "pos": 8,
+          "imp": 11,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
