@@ -89,6 +89,8 @@ faq:
 
 請求書の発行は、記載項目を確認する・請求書を作成する・取引先へ送付する・控えを保存する、という4ステップで進めます。
 
+費用の目安は[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)で整理しています。
+
 逆に発注側として[外注費の請求書がないときの経費計上](/blog/gaichuuhi-seikyuusho-nashi/)に悩んでいる場合は、代わりになる証憑を別記事でまとめています。
 
 <figure><img src="/images/seikyusho-hakko-yarikata/step.png" alt="請求書発行の基本4ステップ: 記載項目を確認する、請求書を作成する、取引先へ送付する、控えを保存する" loading="lazy"><figcaption>請求書発行の基本4ステップ</figcaption></figure>
