@@ -125,6 +125,8 @@ AIO診断（無料・30秒）は、8つの質問に答えるだけで100点満�
 
 **AIO診断でよくある失敗は、一度診断して終わりにし、放置してしまうことです。**
 
+選ぶときの基準は、[AIO・SEO・MEOの違いと使い分け｜店舗が今やるべき順番](/aio/aio-seo-meo-chigai/)で解説しています。
+
 <div class="caution-box"><span class="box-title">注意: 診断は一度きりで終わらせない</span><br>AI検索のアルゴリズムも自社の記事も変化し続けます。月1回程度の再診断を前提にしてください。</div>
 
 <figure><img src="/images/aio-shindan-yarikata/ng-ok.png" alt="AIO診断でよくある失敗と正しい進め方の比較" width="1200" height="500" loading="lazy"><figcaption>AIO診断のNG例とOK例（当メディア作成）</figcaption></figure>
