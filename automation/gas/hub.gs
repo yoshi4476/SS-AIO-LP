@@ -159,6 +159,13 @@ function setup() {
   // 直接書くと、別の会社でも使わない行が残り、KPIがその行を集めにいって
   // 毎朝失敗する（しかも失敗はログの中だけで、表からは気づけない）。
 
+  // 列幅を整える。既定の幅（約100px）だとURLも相談内容も途中で切れ、
+  // 表を開いても中身が読めない。読む列は広く、折り返して全文を見せる。
+  Object.keys(TABS).forEach(function (name) {
+    const sh = ss.getSheetByName(name);
+    if (sh) fitColumns_(sh, TABS[name]);
+  });
+
   // 既定シート「シート1」が空なら削除して見た目を整える
   const first = ss.getSheetByName('シート1') || ss.getSheetByName('Sheet1');
   if (first && first.getLastRow() === 0 && ss.getSheets().length > 1) ss.deleteSheet(first);
@@ -172,6 +179,50 @@ function sheet_(name) {
   if (!sh) { setup(); sh = ss.getSheetByName(name); }
   return sh;
 }
+
+/**
+ * 列の幅と折り返しを、見出しの意味に合わせて決める。
+ *
+ * 既定の幅では、URL・相談内容・エラー内容・備考が途中で切れる。
+ * 表を開いた人が中身を読めないため、判断に使えない。
+ * 長い文が入る列は広げたうえで折り返し、日付や数値は狭いままにする。
+ */
+function fitColumns_(sh, headers) {
+  // 見出しに含まれる語で幅を決める。列の位置ではなく意味で決めるので、
+  // 列を足したり並べ替えても崩れない
+  const WIDE = 420;   // 長文が入る（相談内容・エラー内容・備考）
+  const MID = 240;    // URL・タイトル・キーワードなど
+  const NARROW = 110; // 日付・数値・状態
+  headers.forEach(function (h, i) {
+    let w = 150;
+    let wrap = false;
+    if (/状況|状態|温度|優先度/.test(h)) { w = NARROW; }
+    else if (/内容|備考|概要|理由|狙い|説明|詳細|特典|対応$/.test(h)) { w = WIDE; wrap = true; }
+    else if (/URL|ページ|タイトル|キーワード|リンク|アンカー|メール|サイト名|ドメイン|記事/.test(h)) { w = MID; wrap = true; }
+    else if (/日時|日付|日$|数|率|順位|スコア|CTR|PV|CV/.test(h)) { w = NARROW; }
+    sh.setColumnWidth(i + 1, w);
+    if (wrap) {
+      sh.getRange(1, i + 1, sh.getMaxRows())
+        .setWrapStrategy(SpreadsheetApp.WrapStrategy.WRAP);
+    }
+  });
+  // 見出しは折り返さない。折り返すと1行目だけ高くなって読みにくい
+  sh.getRange(1, 1, 1, headers.length)
+    .setWrapStrategy(SpreadsheetApp.WrapStrategy.CLIP)
+    .setVerticalAlignment('middle');
+}
+
+
+/** 既にあるシートの幅を、後から整え直す（列を足したときなどに使う） */
+function fixColumnWidths() {
+  const ss = book_();
+  Object.keys(TABS).forEach(function (name) {
+    const sh = ss.getSheetByName(name);
+    if (sh) fitColumns_(sh, TABS[name]);
+  });
+  ss.toast('列幅を整えました', '管制塔', 5);
+}
+
 
 // ============================================================
 // Web API（記事工場とフォームからの入口）
