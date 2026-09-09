@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-09T00:00:00+09:00</updated>
+  <updated>2026-09-10T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>AIO対策のキーワード選定｜選ぶ基準5つと進め方3ステップ</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/</id>
+    <updated>2026-09-10T00:00:00+09:00</updated>
+    <summary>AIO対策のキーワード選定とは、検索ボリュームだけでなくAI Overviewの表示有無とサブクエリへの対応可否で語を選ぶ作業です。5つの基準と3ステップの進め方を、自社サイトの実測データをもとに解説します。</summary>
+  </entry>
   <entry>
     <title>歯科医院の閉院費用とは？相場と見落としがちな3つの後始末</title>
     <link href="https://ai.7senses.co.jp/meo/shika-heiin-hiyou/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/</id>
     <updated>2026-09-02T00:00:00+09:00</updated>
     <summary>AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO対策でやってはいけない5つのNG行動と正しい進め方</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/</id>
-    <updated>2026-09-02T00:00:00+09:00</updated>
-    <summary>AIO対策でやってはいけないNG行動は、検索順位を無視したAIO単独狙い・クローラーの一括ブロック・機械的な量産・FAQとSchemaの不一致・CV導線の軽視という5つです。具体例と正しい進め方を解説します。</summary>
   </entry>
 </feed>
