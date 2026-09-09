@@ -197,7 +197,12 @@ def test_lab_links_to_corporate():
     import glob
     import json as _json
     print("\n■ ラボからコーポレートへの導線")
-    conf = _json.loads((ROOT / "sites" / "ai-lab.json").read_text(encoding="utf-8"))
+    own = [f for f in (ROOT / "sites").glob("*.json")
+           if _json.loads(f.read_text(encoding="utf-8")).get("type") == "self-static"]
+    if not own:
+        print("  --  自前ビルドのサイトが無いため飛ばします")
+        return
+    conf = _json.loads(own[0].read_text(encoding="utf-8"))
     cats = list((conf.get("categories") or {}).keys())
     # コーポレート側に実在するページ
     src = (ROOT / ".publish-work" / "corporate" / "src" / "lib" / "services.ts")
@@ -217,8 +222,11 @@ def test_lab_links_to_corporate():
             nolink.append(c)
         if src.exists():
             missing += [f"{c}{u}" for u in deep if u.split("#")[0] not in known]
+    if not any((ROOT / "site" / c / "index.html").is_file() for c in cats):
+        print("  --  カテゴリーページがまだ無いため飛ばします（導入直後の状態）")
+        return
     check("全カテゴリーに個別リンクがある", nolink, [])
-    check("リンク先がコーポレートに実在する", missing, [])
+    check("リンク先が配信先に実在する", missing, [])
 
 
 # ── 10. 日次監査の本数カウント ────────────────────

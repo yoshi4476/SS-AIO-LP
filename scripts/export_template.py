@@ -33,10 +33,10 @@ COPY_FILES = [
     # 記事を書くときの指示。スクリプトは道具で、実際に何を書くかはこれが決める。
     # 定期実行のワークフローがこの4つをそのまま読み込むため、
     # 無いと中身が空のまま起動し、記事が1本も出ない。
-    "automation/pipeline_prompt.txt",
-    "automation/multi_site_prompt.txt",
-    "automation/retry_prompt.txt",
-    "automation/weekly_optimize_prompt.txt",
+    # ここは名前で列挙しない。automation/*.txt をまとめて渡す。
+    # 一覧に手で足す形だと新しいプロンプトが漏れ、渡した先で
+    # 中身の無いまま起動する（自動修復の手順書が実際に漏れた）
+    *sorted(str(p).replace("\\", "/") for p in Path("automation").glob("*.txt")),
     # パイプラインの定義そのもの。全7工程・品質基準・AIO対応の規則が入る。
     # プロンプトはこれを参照する形で書かれている。
     "CLAUDE.md",
