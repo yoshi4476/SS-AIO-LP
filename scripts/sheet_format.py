@@ -60,8 +60,20 @@ def _api(sid):
     return get
 
 
+def wanted_widths():
+    """format.gs が定めている列幅を読む。手元の定義と実物を比べるために使う"""
+    src = (ROOT / "automation" / "gas" / "format.gs").read_text(encoding="utf-8")
+    block = re.search(r"const COL_WIDTH = \{(.*?)\n\};", src, re.S)
+    if not block:
+        return {}
+    out = {}
+    for m in re.finditer(r"'([^']+)'\s*:\s*\[([^\]]*)\]", block.group(1)):
+        out[m.group(1)] = [int(x) for x in re.findall(r"\d+", m.group(2))]
+    return out
+
+
 def check(sid):
-    """(切れているもの, 広げたほうがよいもの) を返す"""
+    """(切れているもの, 広げたほうがよいもの, 配信待ちのもの) を返す"""
     get = _api(sid)
     titles = [s["properties"]["title"]
               for s in get("?fields=sheets.properties.title")["sheets"]]
@@ -75,7 +87,8 @@ def check(sid):
                "formattedValue))))&" + rng(4))["sheets"]
     vals = get("/values:batchGet?" + rng(300))["valueRanges"]
 
-    cut, tall = [], []
+    want = wanted_widths()
+    cut, tall, stale = [], [], []
     for s, vr in zip(grid, vals):
         title = s["properties"]["title"]
         data = s.get("data", [{}])[0]
@@ -108,7 +121,15 @@ def check(sid):
             if lines > TALL:
                 tall.append("%s / %s 列: 最長%d字が幅%dで約%.0f行になります"
                             % (title, head, len(longest), w, lines))
-    return cut, tall
+
+        # 手元の format.gs を直しても、Apps Script へ配信するまで実物は変わらない。
+        # 直したつもりで効いていない、を見えるようにする
+        for i, px in enumerate(want.get(title, [])):
+            actual = widths[i] if i < len(widths) else None
+            if actual is not None and actual != px and i < len(heads):
+                stale.append("%s / %s 列: 実物%d ← format.gs は%d"
+                             % (title, heads[i], actual, px))
+    return cut, tall, stale
 
 
 def main():
@@ -135,7 +156,7 @@ def main():
             if line.strip():
                 print("   ", line)
 
-    cut, tall = check(sid)
+    cut, tall, stale = check(sid)
     print("\n■ 文字が切れていないか")
     if cut:
         print("   SHEET_OK=no（%d件）" % len(cut))
@@ -148,8 +169,15 @@ def main():
         print("\n   参考: 縦に伸びている列（切れてはいません）")
         for x in tall[:10]:
             print("    -", x)
-        print("   広げるなら automation/gas/format.gs の COL_WIDTH を直し、"
-              "Apps Script へ配信してから format を実行します")
+        print("   広げるなら automation/gas/format.gs の COL_WIDTH を直します")
+
+    if stale:
+        print()
+        print("   配信待ち: format.gs の直しが、まだ実物に届いていません（%d件）"
+              % len(stale))
+        for x in stale[:10]:
+            print("    -", x)
+        print("   Apps Script のエディタで format.gs を更新すると効きます")
     return 1 if cut else 0
 
 
