@@ -144,6 +144,9 @@ jobs:
       - name: 無料診断への導線を新しい記事にも入れる
         run: python scripts/tool_links.py --write || true
 
+      - name: 管制塔スプレッドシートを整える（文字切れの防止）
+        run: python scripts/sheet_format.py || true
+
       - name: 生成エンジンから読める状態かの検査（GEO）
         run: |
           out=$(python scripts/geo_check.py) || true
