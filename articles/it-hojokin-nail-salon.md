@@ -50,6 +50,8 @@ faq:
 
 **ネイルサロンは、予約管理・POSレジ会計・デザインカルテ顧客管理の3分野でIT導入補助金の対象になります。**電話・SNS予約の一本化や、紙の施術記録のデータ化に使える制度です。
 
+選ぶときの基準は[ネイルサロンの補助金3種を比較｜IT導入・ものづくり・持続化](/blog/nail-salon-hojokin-hikaku/)で整理しています。
+
 <div class="definition-box"><span class="term">デジタル化・AI導入補助金とは</span>、中小企業庁が実施する「中小企業デジタル化・AI導入支援事業」の愛称です。ソフトウェアやクラウドサービスの導入費用の一部を補助し、業務効率化や生産性向上を後押しします。</div>
 
 <figure><img src="/images/it-hojokin-nail-salon/tool3.png" alt="ネイルサロンで対象になるITツール3分野: 予約管理システム、POSレジ・会計ソフト、デザインカルテ・顧客管理" loading="lazy"><figcaption>ネイルサロンで対象になるITツール3分野</figcaption></figure>
