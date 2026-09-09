@@ -63,10 +63,24 @@ def articles_by_site():
     return out
 
 
+def _is_published(a):
+    """score>=90（公開基準）が付いた記事だけを「公開済み」として数える。
+
+    score未設定の記事はまだPhase 5を通っておらず、publish.pyも配信を拒む
+    （score<90はSystemExit）。それを「本日公開」に数えると、本数は満たしたと
+    誤表示され、check_liveでは「公開したのに404」という偽の不具合を報告する。
+    """
+    try:
+        return int(a.get("score") or 0) >= 90
+    except ValueError:
+        return False
+
+
 def check_volume(todo):
     """当日の公開本数が目標に届いているか（月の上限も見る）"""
     print(f"■ 本数（目標: 1サイト {DAILY_TARGET}本/日・上限 {MONTHLY_CAP}本/月・{today_iso()}）")
-    by_site = articles_by_site()
+    by_site = {sid: [a for a in arts if _is_published(a)]
+               for sid, arts in articles_by_site().items()}
     ym = today_iso()[:7]
     for sid, arts in by_site.items():
         n = sum(1 for a in arts if a["date"] == today_iso())

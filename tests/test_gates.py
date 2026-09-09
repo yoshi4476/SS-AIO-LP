@@ -221,11 +221,34 @@ def test_lab_links_to_corporate():
     check("リンク先がコーポレートに実在する", missing, [])
 
 
+# ── 10. 日次監査の本数カウント ────────────────────
+def test_daily_audit_ignores_unscored_drafts():
+    """score未設定（Phase 5未通過）の記事を「本日公開」に数えた事故の再現。
+
+    publish.pyはscore<90を配信拒否するため、そういう記事はまだサイトに無い。
+    それを本数に数えると「本日OK」と誤表示した上で、check_liveが
+    「公開したのに404」という偽の不具合をTODOに積む。"""
+    import daily_audit
+    print("\n■ 日次監査の本数カウント")
+    today = daily_audit.today_iso()
+    fixture = {"ai-lab": [
+        {"slug": "a", "date": today, "score": "95", "title": "t", "category": "c"},
+        {"slug": "b", "date": today, "score": "", "title": "t2", "category": "c"},
+    ]}
+    orig = daily_audit.articles_by_site
+    daily_audit.articles_by_site = lambda: fixture
+    try:
+        by_site = daily_audit.check_volume([])
+    finally:
+        daily_audit.articles_by_site = orig
+    check("scoreのない記事は本数に数えない", len(by_site["ai-lab"]), 1)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
               test_token_check_probes_write, test_selfheal_watches_real_workflows,
-              test_lab_links_to_corporate):
+              test_lab_links_to_corporate, test_daily_audit_ignores_unscored_drafts):
         try:
             t()
         except Exception as e:

@@ -94,6 +94,11 @@ def written_keyword(site):
                               capture_output=True, text=True, cwd=ROOT).stdout.split()
         if hist and not (len(hist) == 1 and hist[0] == head):
             continue
+        # 執筆と公開（build.py実行＋push）が同じコミットにまとまることがある。
+        # その場合は履歴の深さでは新規に見えるが、site/にビルド済みHTMLが
+        # 既に存在する＝もう世に出ている。審査の対象外にする。
+        if list((ROOT / "site").glob(f"*/{p.stem}/index.html")):
+            continue
         fm = p.read_text(encoding="utf-8-sig").split("---", 2)[1]
         kw = (re.search(r"^keyword:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()
         if kw:
