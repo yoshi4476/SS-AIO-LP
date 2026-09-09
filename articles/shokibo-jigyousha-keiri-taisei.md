@@ -80,6 +80,8 @@ faq:
 
 小規模事業者の経理体制は、経営者兼務・パート活用・経理BPO併用の3パターンに大別でき、取引量と成長スピードで選び方が変わります。
 
+関連する内容として[ATM入出金の記帳のやり方｜仕訳3パターンと手数料の勘定科目](/blog/atm-kicho-yarikata/)も公開しています。
+
 <figure><img src="/images/shokibo-jigyousha-keiri-taisei/patterns.png" alt="小規模事業者の経理体制3パターン: 経営者が自分で兼務する、パート・アルバイトを雇う、経理BPOを併用する" loading="lazy"><figcaption>小規模事業者の経理体制3パターン</figcaption></figure>
 
 | パターン | 向いている状態 | 強み | 弱み |
