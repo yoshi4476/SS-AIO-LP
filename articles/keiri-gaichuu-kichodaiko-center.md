@@ -101,6 +101,8 @@ faq:
 
 **税理士資格を持たない記帳代行センターには、税務代理・税務書類の作成・税務相談の3つを依頼できません。**
 
+あわせて[銀行口座の記帳のやり方｜振込・引き落とし4パターンの仕訳](/blog/ginko-kicho-yarikata/)もご覧ください。
+
 <figure><img src="/images/keiri-gaichuu-kichodaiko-center/hani.png" alt="記帳代行センターに頼めない業務（税務書類の作成・税務代理・税務相談）と頼める業務（仕訳入力・データ登録・月次資料作成）の比較" loading="lazy"><figcaption>記帳代行センターに頼めない業務と頼める業務</figcaption></figure>
 
 線引きの根拠は税理士法です。国税庁の<a href="https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/02.htm" target="_blank" rel="noopener">税理士の業務</a>によると、税理士業務は税務代理、税務書類の作成、税務相談の3つと定められています。同じ資料では、財務書類の作成と会計帳簿の記帳の代行について「必ずしも税理士業務そのものではない」と位置づけられています。
