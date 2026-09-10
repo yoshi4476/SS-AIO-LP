@@ -50,6 +50,8 @@ faq:
 
 **ネイルサロンの補助金申請は、情報収集から実績報告まで5フェーズ・8ステップで進みます。**制度ごとに細部は違いますが、大枠の流れはほぼ共通しています。
 
+対象になる範囲は[ネイルサロンの技術チェックAI化｜補助金の対象基準](/blog/nail-salon-gijutsu-check/)で整理しています。
+
 <div class="definition-box"><span class="term">補助金申請の5フェーズとは</span>、情報収集・制度選定、準備（GビズID取得等）、交付申請、発注・導入、実績報告の5段階を指します。各フェーズの中に複数のステップが含まれます。</div>
 
 <figure><img src="/images/nail-salon-hojokin-tejun/phase5.png" alt="申請の5フェーズ: 情報収集・制度選定、ID取得・準備、交付申請、発注・導入、実績報告" loading="lazy"><figcaption>申請の5フェーズ</figcaption></figure>
