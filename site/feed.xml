@@ -4,7 +4,7 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-09T00:00:00+09:00</updated>
+  <updated>2026-09-10T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
     <title>AIO対策のキーワード選定｜選ぶ基準5つと進め方3ステップ</title>
@@ -12,6 +12,13 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/</id>
     <updated>2026-09-10T00:00:00+09:00</updated>
     <summary>AIO対策のキーワード選定とは、検索ボリュームだけでなくAI Overviewの表示有無とサブクエリへの対応可否で語を選ぶ作業です。5つの基準と3ステップの進め方を、自社サイトの実測データをもとに解説します。</summary>
+  </entry>
+  <entry>
+    <title>歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応</title>
+    <link href="https://ai.7senses.co.jp/meo/shika-reform-hiyou/"/>
+    <id>https://ai.7senses.co.jp/meo/shika-reform-hiyou/</id>
+    <updated>2026-09-10T00:00:00+09:00</updated>
+    <summary>歯科医院のリフォーム費用は、居抜きなら坪単価30万〜50万円、スケルトンなら50万〜100万円が目安です。工事内訳・費用を抑える方法に加え、休診中に見落としがちなGoogleビジネスプロフィール対応まで、3,200店舗以上のMEO支援実務から解説します。</summary>
   </entry>
   <entry>
     <title>歯科医院の閉院費用とは？相場と見落としがちな3つの後始末</title>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/</id>
     <updated>2026-09-02T00:00:00+09:00</updated>
     <summary>AIO対策でAIに引用される記事とは、検索10位以内の土台とクロール許可を満たしたうえで、抽出しやすい構造と出典付きの独自情報を備えた記事です。仕組みと5つの実践ポイントを解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO対策の計測方法｜見るべき5つの指標と週次の運用手順</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/</id>
-    <updated>2026-09-02T00:00:00+09:00</updated>
-    <summary>AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。</summary>
   </entry>
 </feed>
