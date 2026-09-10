@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-10T00:00:00+09:00</updated>
+  <updated>2026-09-11T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>注文住宅SEO対策とは？工務店が検索とAIに選ばれる7つの施策</title>
+    <link href="https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/"/>
+    <id>https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/</id>
+    <updated>2026-09-11T00:00:00+09:00</updated>
+    <summary>注文住宅SEO対策とは、地域名×工法などの検索語で見つかり施工事例で信頼を得る一連の施策です。キーワード選定からAI引用構造まで実務手順を解説します。</summary>
+  </entry>
   <entry>
     <title>AIO対策のキーワード選定｜選ぶ基準5つと進め方3ステップ</title>
     <link href="https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/meo/biyoushitsu-meo-taisaku/</id>
     <updated>2026-09-03T00:00:00+09:00</updated>
     <summary>美容室のMEO対策とは、Googleマップでの表示情報を整え指名予約や新規来店につなげる取り組みです。全国27万店舗超が競う市場で、3,200店舗以上の支援実績から見えた6つの実践ポイントを解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO対策でAIに引用されるには？5つの実践ポイント</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/</id>
-    <updated>2026-09-02T00:00:00+09:00</updated>
-    <summary>AIO対策でAIに引用される記事とは、検索10位以内の土台とクロール許可を満たしたうえで、抽出しやすい構造と出典付きの独自情報を備えた記事です。仕組みと5つの実践ポイントを解説します。</summary>
   </entry>
 </feed>
