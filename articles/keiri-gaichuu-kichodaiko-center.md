@@ -155,6 +155,8 @@ faq:
 
 **依頼をスムーズに始めるには、通帳データ・領収書・請求書・勘定科目のルールの4点を先に揃えます。**
 
+費用の目安は、[記帳代行費用の相場は法人でいくら？資本金1,000万円の壁](/blog/kichodaiko-houjin-hiyou-souba/)で解説しています。
+
 <figure><img src="/images/keiri-gaichuu-kichodaiko-center/junbi.png" alt="依頼前に準備する4つのもの: 事業用口座の通帳データ、領収書とレシート、受領した請求書と発行した請求書、勘定科目の社内ルール" loading="lazy"><figcaption>依頼前に準備する4つのもの</figcaption></figure>
 
 準備するのは次の4点です。どれも初月の仕訳精度に直結します。
