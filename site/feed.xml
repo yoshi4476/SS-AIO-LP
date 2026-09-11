@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-11T00:00:00+09:00</updated>
+  <updated>2026-09-12T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>整骨院の費用は医療費控除の対象になる？対象外との違い3つ</title>
+    <link href="https://ai.7senses.co.jp/seo/seikotsuin-hiyou-iryouhikojo/"/>
+    <id>https://ai.7senses.co.jp/seo/seikotsuin-hiyou-iryouhikojo/</id>
+    <updated>2026-09-12T00:00:00+09:00</updated>
+    <summary>整骨院の費用は、柔道整復師による治療目的の施術なら医療費控除の対象です。健康維持目的の施術や一部の自由診療は対象外になります。対象になる条件、対象外になる3パターン、確定申告での申請方法までG-ranの支援実務を交えて解説します。</summary>
+  </entry>
   <entry>
     <title>注文住宅SEO対策とは？工務店が検索とAIに選ばれる7つの施策</title>
     <link href="https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/</id>
     <updated>2026-09-04T00:00:00+09:00</updated>
     <summary>AIO対策導入のメリットは、広告費に頼らずAI回答内で引用され続け、指名検索や問い合わせにつながることです。得られる効果5つ、費用相場、投資対効果の考え方、費用に見合わないケースまで解説します。</summary>
-  </entry>
-  <entry>
-    <title>飲食店の集客方法とは？グルメサイト依存から抜け出す5つの施策</title>
-    <link href="https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/"/>
-    <id>https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/</id>
-    <updated>2026-09-04T00:00:00+09:00</updated>
-    <summary>飲食店の集客方法は、Googleビジネスプロフィールを土台にグルメサイト・SNS・デリバリーアプリを役割分担させる進め方です。G-ranの3,200店舗超の支援実績から、業態別の重みづけと使い分けを解説します。</summary>
   </entry>
 </feed>
