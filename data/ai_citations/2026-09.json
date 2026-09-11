@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-11",
+  "date": "2026-09-12",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
@@ -71,8 +71,8 @@
         {
           "kw": "口コミ返信 医療機関",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 10.0,
-          "imp": 85,
+          "pos": 9.8,
+          "imp": 83,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
