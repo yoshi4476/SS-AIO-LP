@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-13T00:00:00+09:00</updated>
+  <updated>2026-09-14T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>クリニックの建築事例｜失敗しない5つの視点と坪単価</title>
+    <link href="https://ai.7senses.co.jp/ai-marketing/clinic-kenchiku-jirei/"/>
+    <id>https://ai.7senses.co.jp/ai-marketing/clinic-kenchiku-jirei/</id>
+    <updated>2026-09-14T00:00:00+09:00</updated>
+    <summary>クリニックの建築事例は、立地・動線・駐車場・法規制の4点を着工前に確認すると失敗しません。MEO運用サービスG-ranで3,200店舗以上を支援してきた実務経験から、坪単価の目安と開院後のMEO対応まで解説します。</summary>
+  </entry>
   <entry>
     <title>クリニックの電話予約のやり方｜受付が聞く5項目と対応の流れ</title>
     <link href="https://ai.7senses.co.jp/ai-marketing/clinic-denwa-yoyaku-yarikata/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/meo/clinic-ma-shukyaku-jirei/</id>
     <updated>2026-09-07T00:00:00+09:00</updated>
     <summary>クリニックM&amp;Aでは、Googleビジネスプロフィールの引き継ぎ方法が集患を左右します。新規アカウント開設のリスク、所有権リクエストの手順、口コミ・名称変更の扱い方を2026年9月時点の情報で解説します。</summary>
-  </entry>
-  <entry>
-    <title>口コミ返信テンプレート集｜星評価別の例文とAI活用術</title>
-    <link href="https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/"/>
-    <id>https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/</id>
-    <updated>2026-09-07T00:00:00+09:00</updated>
-    <summary>Googleマップの口コミ返信は、星評価別のテンプレートと業種別例文で書けます。低評価対応のコツやAI（ChatGPT）を使った時短プロンプトも紹介し、MEO順位への影響まで解説します。</summary>
   </entry>
 </feed>
