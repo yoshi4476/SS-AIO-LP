@@ -20,21 +20,36 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# カテゴリ → (リンク先, アンカー, 導入の一文)
+# その場で点数が出る自己診断につなぐときの文末。登録不要で完結する
+TOOL_TAIL = "で確かめられます。登録は不要で、その場で点数が出ます。"
+# コーポレートには自己診断が無く、人が読んで返す現状分析につなぐ。
+# 同じ文末を使うと「その場で点数が出る」が事実と違ってしまうため分けている
+TALK_TAIL = "からご相談いただけます。ご契約を前提としたご案内ではありません。"
+
+# カテゴリ → (リンク先, アンカー, 導入の一文, 文末)
 OFFER = {
     "meo": ("/diagnosis/meo/", "マップ集客の整備度チェック（無料・30秒）",
-            "いまの自店舗がどこでつまずいているかは、"),
+            "いまの自店舗がどこでつまずいているかは、", TOOL_TAIL),
     "aio": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）",
-            "自社サイトがAI検索にどこまで対応できているかは、"),
+            "自社サイトがAI検索にどこまで対応できているかは、", TOOL_TAIL),
     "seo": ("/site-audit/", "サイトの技術チェック（無料・URL入力だけ）",
-            "自社サイトの技術面が基準を満たしているかは、"),
+            "自社サイトの技術面が基準を満たしているかは、", TOOL_TAIL),
     "ai-marketing": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）",
-                     "自社がAI検索からどう見えているかは、"),
+                     "自社がAI検索からどう見えているかは、", TOOL_TAIL),
     # 補助金サイトはトップに4つの診断をまとめて置いている
     "hojokin": ("/#diagnosis", "3分の適性診断（無料・8問）",
-                "自社が補助金の対象になるかどうかは、"),
+                "自社が補助金の対象になるかどうかは、", TOOL_TAIL),
+    # コーポレートは88本中75本に行き先が無かった。読んだ人が動けない
+    "keiri-bpo": ("https://corp.7senses.co.jp/contact/?s=keiri-shindan",
+                  "経理の現状分析（無料）",
+                  "どこから手をつけるべきかの整理は、", TALK_TAIL),
+    "keiri-jitsumu": ("https://corp.7senses.co.jp/contact/?s=keiri-shindan",
+                      "経理の現状分析（無料）",
+                      "自社の経理のどこに時間がかかっているかは、", TALK_TAIL),
+    "backoffice": ("https://corp.7senses.co.jp/contact/?s=backoffice",
+                   "バックオフィスの現状分析（無料）",
+                   "どの業務から整理すべきかは、", TALK_TAIL),
 }
-TAIL = "で確かめられます。登録は不要で、その場で点数が出ます。"
 # 困りを自覚した直後に置く。この見出しの後ろが最良
 AFTER = re.compile(r"^## .*(失敗|注意点|やってはいけない|つまずく|落とし穴|NG).*$", re.M)
 
@@ -66,13 +81,13 @@ def main(write=False):
         key = cat if cat in OFFER else ("hojokin" if cat_site.get(cat) == "subsidy" else None)
         if not key:
             continue
-        url, anchor, lead = OFFER[key]
+        url, anchor, lead, tail = OFFER[key]
         if url in t:
             continue
         pos = insert_at(t)
         if pos is None:
             continue
-        line = f"\n{lead}[{anchor}]({url}){TAIL}\n\n"
+        line = f"\n{lead}[{anchor}]({url}){tail}\n\n"
         done[key] = done.get(key, 0) + 1
         if write:
             p.write_text(t[:pos] + line + t[pos:], encoding="utf-8", newline="")

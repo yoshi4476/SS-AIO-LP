@@ -162,6 +162,9 @@ faq:
 
 デメリットも含めて判断したい場合は、[経理アウトソーシングのデメリット6つ｜失敗しない対策も解説](https://corp.7senses.co.jp/blog/keiri-outsourcing-demerit/)を先に読んでおくと、契約後の想定外を減らせます。
 
+
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+
 ## よくある質問
 
 <div class="faq">

@@ -188,7 +188,10 @@
       ga('cta_tel', { page_path: location.pathname });
       return;
     }
-    if (a.classList && (a.classList.contains('btn') || a.classList.contains('nav-cta'))) {
+    // 記事本文のCTAは cta-button / cta-box を使う。ここを入れ忘れると
+    // 記事からの反応が1件も記録されず、導線が効いているか判断できなくなる
+    if (a.classList && (a.classList.contains('btn') || a.classList.contains('nav-cta') ||
+                        a.classList.contains('cta-button'))) {
       var id = a.getAttribute('data-cta') || slugId((a.textContent || '').trim());
       var params = { cta_id: id, page_path: location.pathname };
       if (a.getAttribute('data-ab-variant')) params.ab_variant = a.getAttribute('data-ab-variant');

@@ -160,6 +160,9 @@ MJS税経システム研究所は2024年6月、経理担当者362名を対象に
 
 完成した図を業務マニュアルとして整備し直したい場合は、[経理マニュアルの作り方とは？属人化を防ぐ5つの手順](https://corp.7senses.co.jp/blog/keiri-manual-tsukurikata/)が参考になります。経理以外の部署も含めて業務フローを見直したい場合は、[バックオフィス業務改善の4ステップ｜進まない原因と対策](https://corp.7senses.co.jp/blog/backoffice-gyomu-kaizen/)もあわせてご覧ください。
 
+
+自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+
 ## よくある質問
 
 <div class="faq">
