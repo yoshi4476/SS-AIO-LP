@@ -227,6 +227,10 @@ jobs:
             exit 1
           fi
 
+      - name: リード導線を新しい記事に入れる
+        if: steps.site.outputs.skip != 'yes'
+        run: python scripts/tool_links.py --write || true
+
       - name: 自リポジトリの記事をコミット
         if: steps.site.outputs.skip != 'yes'
         run: |

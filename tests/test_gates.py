@@ -252,11 +252,37 @@ def test_daily_audit_ignores_unscored_drafts():
     check("scoreのない記事は本数に数えない", len(by_site["ai-lab"]), 1)
 
 
+def test_every_article_has_a_lead_path():
+    """全記事にリード導線があること。
+
+    読んで納得した人の行き先が無いと、記事はそこで終わる。
+    実際コーポレートは88本中75本に行き先が無く、記事からの反応がゼロだった。
+    新しい記事が増えるたびに漏れるため、機械で見張る。
+    """
+    lead = re.compile(r"/diagnosis/|/site-audit/|#diagnosis|/contact|/lp/")
+    missing = []
+    for f in sorted((ROOT / "articles").glob("*.md")):
+        body = f.read_text(encoding="utf-8", errors="replace").split("---", 2)[-1]
+        if not lead.search(body):
+            missing.append(f.stem)
+    check("リード導線の無い記事", missing[:5], [])
+
+    # 検査そのものが働いているか。build.py が見張っていないと、
+    # 上の判定が通っていても次に増えた記事で崩れる
+    src = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("build.pyがリード導線を見張っている", "リード導線なし" in src, True)
+
+    # 日次パイプラインで新しい記事にも入ること
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("日次で導線を入れている", "tool_links.py --write" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
               test_token_check_probes_write, test_selfheal_watches_real_workflows,
-              test_lab_links_to_corporate, test_daily_audit_ignores_unscored_drafts):
+              test_lab_links_to_corporate, test_daily_audit_ignores_unscored_drafts,
+              test_every_article_has_a_lead_path):
         try:
             t()
         except Exception as e:

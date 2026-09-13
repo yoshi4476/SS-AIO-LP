@@ -373,6 +373,13 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         print(f"WARN: マーカー不足: {meta['slug']} は強調が{marker_count}箇所"
               f"（基準8箇所以上・推奨12-18箇所。**太字** か ==マーカー== を追加すること）")
 
+    # リード導線チェック。読んで納得した人の行き先が無いと、記事はそこで終わる。
+    # 実際、コーポレートは88本中75本に行き先が無く、記事からの反応がゼロだった。
+    # 自己診断・サイト診断・問い合わせのどれか1つは必ず本文に置く。
+    if not re.search(r"/diagnosis/|/site-audit/|#diagnosis|/contact|/lp/", content):
+        print(f"WARN: リード導線なし: {meta['slug']} には無料診断・問い合わせのリンクが"
+              f"ありません（python scripts/tool_links.py --write で入ります）")
+
     # 文字数チェック（タグ・空白を除いた実文字数で判定）
     # 基準は depth で変わる。全記事を同じ長さに揃えると、それ自体が量産の指紋になる。
     # 一律5,000字で見ていたため、手順や定義だけの quick 記事を誤って警告していた。
