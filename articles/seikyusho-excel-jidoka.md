@@ -68,6 +68,8 @@ faq:
 
 **請求書の作成は、関数・マクロ・入力用テンプレートという3つの手段を組み合わせると、手作業を大きく減らせます。**
 
+
+関連して、[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)もあわせてご確認ください。
 <figure><img src="/images/seikyusho-excel-jidoka/shudan.png" alt="請求書の自動化に使える3つの手段: 関数で単価や合計を自動反映、マクロで定型操作を自動実行、テンプレートで入力項目を統一" loading="lazy"><figcaption>請求書の自動化に使える3つの手段</figcaption></figure>
 
 第一に、VLOOKUPやSUMなどの関数による自動反映です。取引先マスタのシートから単価や品目を呼び出し、数量を入れるだけで合計金額まで自動計算できます。

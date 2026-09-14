@@ -74,6 +74,8 @@ faq:
 
 反響を増やす集客方法は、ポータルサイト・自社サイトのSEO・MEO・SNS・紹介・チラシ・Web広告の6つに整理できます。
 
+
+関連して、[OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](/ai-marketing/obkyaku-shoukai-shikumi/)もあわせてご確認ください。
 実際の例を先に押さえるなら、[リフォーム会社のインスタグラム運用｜反響につながる投稿5パターン](/ai-marketing/reform-instagram-shukyaku/)が参考になります。
 
 実際の進め方は[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)で整理しています。

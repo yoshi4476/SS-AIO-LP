@@ -49,6 +49,8 @@ faq:
 
 **個人事業主は、国内で事業を営み、業種ごとの従業員数の基準を満たせば申請できます。**法人か個人事業主かで、対象になるかどうかの扱いは変わりません。
 
+
+関連して、[宿泊業の補助金は3つの入口｜目的別の選び方と優先順位](/blog/shukuhakugyou-hojokin-erabikata/)もあわせてご確認ください。
 対象になる範囲を先に押さえるなら、[IT導入補助金のパソコン購入｜個人事業主の条件と上限10万円](/blog/it-hojokin-kojinjigyonushi-pc/)が参考になります。
 
 <div class="definition-box"><span class="term">小規模事業者とは</span>、商業・サービス業（宿泊業・娯楽業を除く）で常時使用する従業員数5人以下、宿泊業・娯楽業や製造業その他は20人以下の事業者を指します。個人事業主の多くは、この基準を自然に満たします。</div>
@@ -63,6 +65,8 @@ faq:
 
 **開業から1年未満の個人事業主は、申請に必須の所得税納税証明書と確定申告書の控えを用意できないため、対象外になります。**制度自体が個人事業主を排除しているわけではなく、書類が物理的に存在しないことが原因です。
 
+
+関連して、[事業再構築補助金で個人事業主が出す事業化状況報告｜5年間の流れ](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)もあわせてご確認ください。
 <a href="https://hojyokin-portal.jp/columns/itdonyu_kojinjigyonushi_summary" target="_blank" rel="noopener">補助金ポータルが公開している個人事業主向けの解説</a>でも、開業1年未満は納税証明書と確定申告書控えの準備ができず、申請資格を満たさないと案内されています。
 
 <div class="caution-box"><span class="box-title">注意: <span class="txt-red">開業間もない方は要確認</span></span><br>開業して間もない場合は、直近の確定申告を1回終えているかを先に確認してください。まだの場合は、確定申告を終えるまで申請を待つ必要があります。</div>
@@ -75,6 +79,8 @@ faq:
 
 **個人事業主が用意する必要書類は、身分証明書、所得税納税証明書、確定申告書Bの控えの3点です。**法人が用意する登記簿謄本や納税証明書とは種類が異なります。
 
+
+関連して、[事業再構築補助金は法人成り後も続く？承継に必要な4つの手続き](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)もあわせてご確認ください。
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/shorui3.png" alt="個人事業主が用意する書類3点: 身分証明書（運転免許証等）、所得税納税証明書（その1/2）、確定申告書Bの控え"><figcaption>個人事業主が用意する書類3点</figcaption></figure>
 
 1点目は運転免許証・運転経歴証明書・発行から3ヶ月以内の住民票のいずれかです。2点目は所得税の納税証明書で、「その1」「その2」のどちらでも要件を満たします。税目や種類の詳しい違いは[AI導入補助金の納税証明書はどれ？その1とその2の違い](https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/)で解説しています。
@@ -89,6 +95,8 @@ faq:
 
 **個人事業主も法人と同じ申請枠から選べ、上限額も変わりません。**通常枠は最大450万円、インボイス対応類型・電子取引類型は最大350万円です。
 
+
+関連して、[宿泊業のインバウンド投資を支えた事業再構築補助金、今の姿は](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)もあわせてご確認ください。
 関連する内容は[事業再構築補助金は個人事業主もいつまで？後継3制度の使い方](/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/)で整理しています。
 
 | 申請枠 | 補助率 | 補助上限額 |
@@ -119,6 +127,8 @@ faq:
 
 **個人事業主の申請でつまずきやすいのは、開業年数の見落とし、書類準備の後回し、GビズID取得の遅れの3パターンです。**制度の複雑さより、準備の順番のミスが原因になっています。
 
+
+関連して、[事業再構築補助金の確定申告｜個人事業主が守る3つの注意点](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)もあわせてご確認ください。
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/ngok.png" alt="個人事業主の申請でよくあるNG・OK: NG例は開業1年未満で申請・証明書取得を後回し・GビズID未取得のまま進める、OK例は開業1年経過を確認・証明書を早めに取得・GビズIDを先に取得"><figcaption>個人事業主の申請でよくあるNG・OK</figcaption></figure>
 
 <a href="https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf" target="_blank" rel="noopener">中小企業庁が公開した制度概要</a>でも、財務書類の準備が2026年度から全申請者で必須になったと案内されています。個人事業主は確定申告書類がこの財務書類にあたるため、準備不足は差し戻しの直接原因になります。
