@@ -6,6 +6,7 @@
 サイトのテーマ・読者・担当領域・書いてはいけない領域・カテゴリ・次に書くKWをまとめて表示する。
 記事を書くAIがサイト設定を探し回らずに済むようにし、担当領域の取り違えを防ぐのが目的。
 """
+import re
 import sys
 from pathlib import Path
 
@@ -62,6 +63,33 @@ def main():
     print("\n■ 使えるカテゴリ（この中から必ず選ぶ）")
     for slug, name in cfg.get("categories", {}).items():
         print(f"  - {slug:14s} {name}")
+
+    # 狙う配分と現在地。指定が無いと、書きやすい領域に寄って偏る。
+    # 実際MEOとAIOがほぼ同数になり、主戦場に置いたはずのAIOが埋もれていた
+    mix = {k: v for k, v in (cfg.get("category_mix") or {}).items()
+           if not k.startswith("_")}
+    if mix:
+        import collections
+        now = collections.Counter()
+        for f in (ROOT / "articles").glob("*.md"):
+            m = re.search(r"^category:\s*(.+)$",
+                          f.read_text(encoding="utf-8", errors="replace")[:1200], re.M)
+            if m and m.group(1).strip() in cfg.get("categories", {}):
+                now[m.group(1).strip()] += 1
+        total = sum(now.values()) or 1
+        print("\n■ カテゴリの配分（狙い / いま）")
+        short = []
+        for slug in mix:
+            pct = now[slug] / total * 100
+            diff = mix[slug] - pct
+            mark = "  ← 不足" if diff >= 5 else ("  （多い）" if diff <= -5 else "")
+            print(f"  {slug:14s} 狙い{mix[slug]:3d}%  いま{pct:5.1f}%（{now[slug]}本）{mark}")
+            if diff >= 5:
+                short.append((diff, slug))
+        if short:
+            short.sort(reverse=True)
+            print(f"\n  次に書くなら: {short[0][1]}"
+                  f"（狙いに対して{short[0][0]:.0f}ポイント不足しています）")
 
     # 内部リンクの方針も設定で1か所に持つ。旧テーマの記事へリンクすると導線が逸れる
     pol = cfg.get("link_policy")
