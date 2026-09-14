@@ -76,6 +76,24 @@ def _is_published(a):
         return False
 
 
+# 記事を公開する時刻（JST）。この時刻を過ぎていなければ、まだ無くて当然。
+# GitHub Actions の定期実行は数時間ずれることがある。実際、21:30の救済が
+# 翌03:07に走り、「本日0本」と見て6本を書こうとしてターン上限で落ちた
+PUBLISH_HOURS = {"ai-lab": (8, 15), "corporate": (10, 17), "subsidy": (12, 19)}
+GRACE_HOURS = 2      # 公開の時刻から、これだけ過ぎて無ければ不足とみなす
+
+
+def _due_now(sid):
+    """いまの時刻で、何本まで公開されているべきか"""
+    import datetime
+    jst = (datetime.datetime.now(datetime.timezone.utc)
+           + datetime.timedelta(hours=9))
+    hours = PUBLISH_HOURS.get(sid)
+    if not hours:
+        return DAILY_TARGET
+    return sum(1 for h in hours if jst.hour >= h + GRACE_HOURS)
+
+
 def check_volume(todo):
     """当日の公開本数が目標に届いているか（月の上限も見る）"""
     print(f"■ 本数（目標: 1サイト {DAILY_TARGET}本/日・上限 {MONTHLY_CAP}本/月・{today_iso()}）")
@@ -91,11 +109,15 @@ def check_volume(todo):
             print(f"  上限 {sid:10s} 今月 {month}/{MONTHLY_CAP}本 — 今月はこれ以上公開しません")
             continue
         want = min(DAILY_TARGET, left)
-        mark = "OK " if n >= want else "不足"
+        due = min(want, _due_now(sid))      # いまの時刻で在るべき本数
+        mark = "OK " if n >= due else "不足"
+        yet = "" if due >= want else f"（この時刻での期待は{due}本）"
         print(f"  {mark} {sid:10s} 本日 {n}/{want}本  今月 {month}/{MONTHLY_CAP}本"
-              f"  （累計 {len(arts)}本）")
-        if n < want:
-            todo.append(f"TODO: {sid} の記事を本日あと {want - n} 本作成して公開する")
+              f"  （累計 {len(arts)}本）{yet}")
+        # 公開の時刻より前に「不足」と言うと、救済が先回りして1日分を
+        # まとめて書こうとする。時刻が来たぶんだけを不足として数える
+        if n < due:
+            todo.append(f"TODO: {sid} の記事を本日あと {due - n} 本作成して公開する")
     return by_site
 
 
@@ -381,6 +403,28 @@ def check_deploy(todo):
                     "（python scripts/deploy_check.py で差分を確認）")
 
 
+# 同日救済が1回の実行で片づけるもの。ここに入らない指摘は「知らせるだけ」に回す。
+# 全部を今日やらせると、記事1本目に着手する前にターン上限へ達する
+# （実際、300ターン使って5本の記事が1本も書けずに落ちた）
+TODAY = ("の記事を本日あと", "を品質基準まで直して", "の領域。", "の既存記事と重複",
+         "がサイトで見られない", "のKWを補充する", "のKW補充が0件")
+
+# 1回の実行で扱う上限。記事の作成がいちばん重く、他を積むと本数が埋まらない
+MAX_TODAY = 8
+
+
+def split_todo(todo):
+    """「今日やること」と「知らせるだけ」に分ける。
+
+    本数の不足を先頭に置く。ここが埋まらないと、翌日以降の積み上がりが
+    遅れ続ける。カニバリの解消は1件が重く、週次の担当にする。
+    """
+    now = [t for t in todo if any(k in t for k in TODAY)]
+    later = [t for t in todo if t not in now]
+    now.sort(key=lambda t: 0 if "の記事を本日あと" in t else 1)
+    return now[:MAX_TODAY], now[MAX_TODAY:] + later
+
+
 def main():
     fix_kw = "--fix-kw" in sys.argv
     todo = []
@@ -401,9 +445,14 @@ def main():
     if not todo:
         print("AUDIT_OK=yes（本日の運用は計画どおりです）")
         return
-    print("AUDIT_OK=no")
-    for t in todo:
+    now, later = split_todo(todo)
+    print("AUDIT_OK=no" if now else "AUDIT_OK=yes（今日やることはありません）")
+    for t in now:
         print(t)
+    if later:
+        print("\n--- 以下は今日やらないこと（週次で扱う / 知らせるだけ） ---")
+        for t in later:
+            print(t.replace("TODO:", "NOTE:", 1))
 
 
 if __name__ == "__main__":
