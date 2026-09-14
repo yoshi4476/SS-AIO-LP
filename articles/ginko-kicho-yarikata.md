@@ -49,6 +49,8 @@ faq:
 
 銀行口座の記帳は、明細を入手し、入金か出金かを区分し、摘要欄の取引内容を確認する3つの手順から始まります。
 
+実際の進め方は[請求書を銀行振込で支払う手順｜先に確認する5つのポイント](/blog/seikyusho-ginko-furikomi-yarikata/)でも扱っています。
+
 <div class="definition-box"><span class="term">摘要欄とは</span>、通帳やネットバンキング明細に記載される取引相手や取引内容のメモ欄です。==「フリコミ」「フリコミテスウリヨウ」のような表示から、誰との取引で何が動いたかを読み取ります。==</div>
 
 <figure><img src="/images/ginko-kicho-yarikata/kakunin.png" alt="銀行口座の記帳で最初に確認する3つのこと: 明細の入手方法、入金か出金かの区分、摘要欄の取引内容" loading="lazy"><figcaption>銀行口座の記帳で最初に確認する3つのこと</figcaption></figure>
