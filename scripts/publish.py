@@ -12,6 +12,7 @@
   self-static  … 本リポジトリの静的サイト。build.py が担当するため何もしない
   nextjs-json  … Next.jsサイト。src/content/blog/<slug>.json を書き出す
   external-md  … 別リポジトリの静的サイト。Markdownをそのまま置く
+  wordpress    … WordPress。REST APIで投稿する（公開可否は先方のmu-pluginが判定）
 
 対象リポジトリへの書き込みには SITE_PUSH_TOKEN（repo権限のPAT）が必要。
 未設定ならローカルのクローンに書き込むだけで止まる（--push は失敗する）。
@@ -486,6 +487,151 @@ def _update_external_index(dest: Path, cfg, meta):
     return touched
 
 
+
+# ============================================================
+# WordPress（REST API で投稿する）
+# ============================================================
+def _wp_auth(cfg):
+    """接続情報を返す。合言葉は .env に置き、ログには出さない
+
+    WP_USER_<SITE_ID> / WP_APP_PASSWORD_<SITE_ID> を見る。
+    アプリケーションパスワードは WordPress の
+    ユーザー > プロフィール > アプリケーションパスワード で発行する。
+    """
+    import base64
+    sid = cfg["id"].upper().replace("-", "_")
+    user = os.environ.get(f"WP_USER_{sid}", "")
+    pw = os.environ.get(f"WP_APP_PASSWORD_{sid}", "")
+    if not (user and pw):
+        env = ROOT / ".env"
+        if env.is_file():
+            for line in env.read_text(encoding="utf-8", errors="ignore").splitlines():
+                if line.startswith(f"WP_USER_{sid}="):
+                    user = line.split("=", 1)[1].strip().strip('"')
+                elif line.startswith(f"WP_APP_PASSWORD_{sid}="):
+                    pw = line.split("=", 1)[1].strip().strip('"')
+    if not (user and pw):
+        raise SystemExit(
+            f"WordPressの接続情報がありません。.env に次の2行を足してください:\n"
+            f"  WP_USER_{sid}=<ユーザー名>\n"
+            f"  WP_APP_PASSWORD_{sid}=<アプリケーションパスワード>")
+    token = base64.b64encode(f"{user}:{pw}".encode()).decode()
+    return {"Authorization": f"Basic {token}",
+            "Content-Type": "application/json",
+            "User-Agent": "SS-AIO-Pipeline"}
+
+
+def _wp_api(cfg):
+    base = cfg.get("wp_api") or f"https://{cfg['domain']}/wp-json/wp/v2"
+    return base.rstrip("/")
+
+
+def _wp_call(cfg, path, data=None, method=None, headers=None, raw=None):
+    import urllib.error
+    import urllib.request
+    url = f"{_wp_api(cfg)}/{path.lstrip('/')}"
+    h = dict(_wp_auth(cfg))
+    if headers:
+        h.update(headers)
+    body = raw if raw is not None else (
+        json.dumps(data, ensure_ascii=False).encode("utf-8") if data else None)
+    req = urllib.request.Request(url, data=body, headers=h,
+                                 method=method or ("POST" if body else "GET"))
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode("utf-8") or "{}")
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode("utf-8", "ignore")[:300]
+        raise SystemExit(f"WordPressの応答が {e.code} でした（{path}）\n  {detail}")
+    except urllib.error.URLError as e:
+        raise SystemExit(f"WordPressに接続できません（{url}）: {e.reason}")
+
+
+def _wp_term(cfg, slug, name, taxonomy="categories"):
+    """カテゴリを slug で探し、無ければ作ってIDを返す"""
+    found = _wp_call(cfg, f"{taxonomy}?slug={slug}&per_page=1")
+    if isinstance(found, list) and found:
+        return found[0]["id"]
+    made = _wp_call(cfg, taxonomy, {"slug": slug, "name": name})
+    return made["id"]
+
+
+def _wp_media(cfg, path: Path, alt=""):
+    """アイキャッチを上げてIDを返す。同名が既にあれば使い回す"""
+    if not path.is_file():
+        return 0
+    name = path.name
+    found = _wp_call(cfg, f"media?search={name}&per_page=1")
+    if isinstance(found, list) and found and found[0].get("slug") == path.stem:
+        return found[0]["id"]
+    kind = "image/png" if path.suffix.lower() == ".png" else "image/jpeg"
+    res = _wp_call(cfg, "media", raw=path.read_bytes(), method="POST",
+                   headers={"Content-Type": kind,
+                            "Content-Disposition": f'attachment; filename="{name}"'})
+    if alt and res.get("id"):
+        _wp_call(cfg, f"media/{res['id']}", {"alt_text": alt}, method="POST")
+    return res.get("id", 0)
+
+
+def write_wordpress(cfg, meta, body, src: Path, push=False):
+    """記事をWordPressへ送る。
+
+    公開してよいかの最終判断は、WordPress側の mu-plugin が行う。
+    こちらが publish で送っても、スコアが基準に届かなければ下書きへ戻る。
+    二重に見るのは、配信側だけの検査では管理画面からの投稿を止められないため。
+    """
+    import md2html
+    html, _ = md2html.convert(body)
+    html = insert_mid_cta(html, cfg)
+    score = int(meta.get("score") or 0)
+
+    cat_slug = meta["category"]
+    cat_id = _wp_term(cfg, cat_slug, cfg["categories"].get(cat_slug, cat_slug))
+
+    thumb = 0
+    eye = meta.get("eyecatch") or ""
+    if eye:
+        p = ROOT / "site" / eye.lstrip("/")
+        thumb = _wp_media(cfg, p, meta.get("title", ""))
+
+    payload = {
+        "slug": meta["slug"], "title": meta["title"], "content": html,
+        "excerpt": meta.get("description", ""), "status": "publish",
+        "categories": [cat_id],
+        "meta": {"_ss_quality_score": score, "_ss_written_by": "agent"},
+    }
+    if thumb:
+        payload["featured_media"] = thumb
+
+    exist = _wp_call(cfg, f"posts?slug={meta['slug']}&status=publish,draft,pending&per_page=1")
+    if isinstance(exist, list) and exist:
+        res = _wp_call(cfg, f"posts/{exist[0]['id']}", payload, method="POST")
+        how = "更新"
+    else:
+        res = _wp_call(cfg, "posts", payload, method="POST")
+        how = "新規"
+
+    status = res.get("status", "?")
+    link = res.get("link", "")
+    print(f"配信先: {cfg['name']}（WordPress / {cfg['domain']}）")
+    print(f"  {how}: 投稿ID {res.get('id')} / カテゴリ {cat_slug}"
+          + (f" / アイキャッチ {thumb}" if thumb else ""))
+    print(f"  本文: {len(re.sub(r'<[^>]+>|\\s', '', html)):,}字 / score {score}")
+
+    if status == "publish":
+        print(f"  公開しました: {link}")
+    else:
+        why = ""
+        m = res.get("meta") or {}
+        if isinstance(m, dict):
+            why = m.get("_ss_gate_last_reason") or ""
+        print(f"  × 公開されませんでした（状態: {status}）")
+        print(f"    {why or 'WordPress側の品質ゲートが公開を止めています'}")
+        print("    基準を満たしてから再実行してください")
+        return False
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True)
@@ -509,6 +655,10 @@ def main():
     if cfg["type"] == "self-static":
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")
         return
+
+    if cfg["type"] == "wordpress":
+        ok = write_wordpress(cfg, meta, body, src, push=args.push)
+        raise SystemExit(0 if ok else 1)
 
     token = _push_token()
     dest = ensure_clone(cfg, token)

@@ -56,6 +56,7 @@ TYPES = {
     "nextjs-json": "Next.jsサイト。src/content/blog/<slug>.json を書き出す",
     "external-md": "別リポジトリの静的サイト。Markdownをそのまま置く",
     "external-html": "別リポジトリ。HTMLに変換して置く（相手のテンプレートを使う）",
+    "wordpress": "WordPress。REST APIで投稿する（品質ゲートは先方のmu-pluginが担う）",
 }
 
 
@@ -68,7 +69,7 @@ def check(cfg):
             ng.append(f"{k} が空です")
     if cfg.get("type") not in TYPES:
         ng.append(f"type が不正です（{' / '.join(TYPES)}）")
-    if cfg.get("type") != "self-static" and not cfg.get("repo"):
+    if cfg.get("type") not in ("self-static", "wordpress") and not cfg.get("repo"):
         ng.append("repo が空です（外部サイトは配信先リポジトリが要ります）")
 
     ids = {p.stem for p in SITES.glob("*.json")}

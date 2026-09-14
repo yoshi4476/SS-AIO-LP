@@ -521,6 +521,37 @@ def test_client_onboarding_is_one_sheet():
     check("執筆ブリーフが材料を読む", hasattr(site_brief, "show_brief"), True)
 
 
+def test_quality_gate_holds_on_wordpress():
+    """納品方式が変わっても、基準に届かない記事が公開されないこと。
+
+    静的サイトはファイルごと生成しないため物理的に公開できない。
+    WordPressはデータベースに入ってしまうので、公開ステータスへの
+    遷移を先方側で止める必要がある。配信スクリプトだけで見ていると、
+    管理画面から直接投稿された記事を止められない。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import client_add as ca
+    import publish
+    check("WordPress納品に対応している", "wordpress" in ca.TYPES, True)
+    check("WordPressへ配信できる", hasattr(publish, "write_wordpress"), True)
+
+    php = ROOT / "automation" / "wordpress" / "ss-quality-gate.php"
+    check("品質ゲートのプラグインがある", php.is_file(), True)
+    src = php.read_text(encoding="utf-8")
+    # 管理画面から止められる場所に置くと「忙しいので一旦切った」が起きる
+    check("mu-plugins に置く指示がある", "mu-plugins" in src, True)
+    # 個別の入口をふさぐ形にすると、入口が増えたときに漏れる
+    check("すべての保存が通る関所で止める", "wp_insert_post_data" in src, True)
+    check("公開を下書きへ戻す", "'draft'" in src or '"draft"' in src, True)
+    check("予約投稿も対象にする", "future" in src, True)
+    check("未採点は公開させない", "品質スコアがありません" in src, True)
+    check("止めた理由を管理画面に出す", "admin_notices" in src, True)
+    # 配信側でも見る。二重に見ないと、どちらか一方の抜け道が残る
+    pub = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
+    check("配信側も90点未満を止める", "公開基準未達" in pub, True)
+    check("公開されなかったことに気づける", "公開されませんでした" in pub, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -535,7 +566,8 @@ def main():
               test_next_keyword_prefers_main_offer,
               test_improvements_apply_themselves,
               test_auto_fixes_are_reviewed,
-              test_client_onboarding_is_one_sheet):
+              test_client_onboarding_is_one_sheet,
+              test_quality_gate_holds_on_wordpress):
         try:
             t()
         except Exception as e:

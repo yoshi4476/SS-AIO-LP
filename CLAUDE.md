@@ -118,6 +118,30 @@ python scripts/client_intake.py <記入済み.xlsx> --apply    # 登録する
 JSONを直接書く場合は `client_add.py`（既存クライアントの設定変更など）。
 
 
+### 3.0.1 納品方式（クライアントごとに選ぶ）
+
+| 形式 | 配信先 | 品質ゲートの効き方 |
+|:--|:--|:--|
+| `self-static` | 本リポジトリの静的サイト | build.py がビルド対象から除外。**ファイルが存在しない** |
+| `external-md` / `external-html` / `nextjs-json` | 別リポジトリの静的サイト | publish.py が90点未満を配信しない |
+| `wordpress` | WordPress（REST API） | **先方の mu-plugin が公開を止める**（下記） |
+
+**WordPress納品での品質ゲート**
+
+静的サイトは「基準に届かない記事はファイルごと生成されない」ため物理的に公開できない。WordPressはデータベースに入るため、公開ステータスへの遷移を先方側で止める必要がある。
+
+1. `automation/wordpress/ss-quality-gate.php` を先方の `wp-content/mu-plugins/` に置く
+2. `.env` に `WP_USER_<SITE_ID>` と `WP_APP_PASSWORD_<SITE_ID>` を設定（アプリケーションパスワード）
+3. `python scripts/publish.py --site <id> --slug <slug>` で投稿
+
+mu-plugins に置くのは、**管理画面に停止ボタンが出ない**ため。「忙しかったので一旦切った」が起きない。`wp_insert_post_data` で止めるのは、管理画面・REST API・WP-CLI・予約投稿のすべてが必ず通る場所だから。個別の入口をふさぐ形にすると、入口が増えたときに漏れる。
+
+- パイプラインが入れた記事: `_ss_quality_score` が90未満、または未設定なら下書きへ戻す
+- 人が管理画面で書いた記事: `_ss_written_by=human` として、文字数と見出し数の簡易チェックのみ
+- 止めた理由は管理画面に表示し、REST API経由の場合はメタに残す
+
+**限界**: サーバーのファイルを触れる人がこのファイルを消せば外れる。ただし管理画面からは無効化できないため、事故では起きない。
+
 ### 3.1 ディレクトリ構成
 
 ```

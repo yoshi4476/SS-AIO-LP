@@ -53,11 +53,20 @@ FIELDS = [
     ("repo", "配信先リポジトリ", "owner/repo の形式。自社ビルドなら空欄", "example/media-site", False),
     ("branch", "ブランチ", "通常は main", "main", False),
     ("type", "サイトの形式",
-     "self-static（当社が構築）/ external-md / external-html / nextjs-json のいずれか",
-     "external-html", True),
+     "WordPressをお使いなら wordpress。当社で新規構築するなら self-static。"
+     "既存の静的サイトへ配信する場合は external-html / external-md / nextjs-json",
+     "wordpress", True),
     ("url_prefix", "記事URLの接頭辞", "記事が /blog/xxx/ に出るなら /blog", "/blog", False),
     ("content_dir", "記事の置き場所", "配信先リポジトリ内のパス", "src/content/blog", False),
     ("images_dir", "画像の置き場所", "同上", "public/images/blog", False),
+    ("wp_api", "WordPressのAPIのURL",
+     "形式が wordpress のときのみ。通常は空欄で構いません"
+     "（https://ドメイン/wp-json/wp/v2 を自動で使います）", "", False),
+    ("wp_note", "WordPressの管理情報",
+     "形式が wordpress のときのみ。管理画面のURLと、"
+     "アプリケーションパスワードを発行できる権限のユーザー名。"
+     "パスワード自体はこのシートに書かず、別途お預かりします",
+     "https://example.co.jp/wp-admin/ / ユーザー名: editor-bot", False),
 
     ("#offer", "3. 主力商材", "いちばん大切な項目です。ここが曖昧だと、"
      "表示回数は増えても問い合わせにつながらない記事が量産されます。", "", False),
@@ -494,7 +503,7 @@ def make_sheet(path=SHEET, industry=""):
         ws.cell(row=r, column=6, value=key)
         r += 1
 
-    dv = DataValidation(type="list", formula1='"self-static,external-md,external-html,nextjs-json"')
+    dv = DataValidation(type="list", formula1='"wordpress,self-static,external-md,external-html,nextjs-json"')
     ws.add_data_validation(dv)
     for row in range(SAMPLE_ROW, r):
         if ws.cell(row=row, column=6).value == "type":
@@ -574,7 +583,7 @@ def to_config(got):
         "cta": {"label": got.get("cta.label", ""), "url": got.get("cta.url", ""),
                 "note": got.get("cta.note", "")},
     }
-    for k in ("content_dir", "images_dir", "cta_title", "cta_desc", "note"):
+    for k in ("content_dir", "images_dir", "cta_title", "cta_desc", "note", "wp_api"):
         if got.get(k):
             cfg[k] = got[k]
     mix = pairs(got.get("category_mix"), num=True)
