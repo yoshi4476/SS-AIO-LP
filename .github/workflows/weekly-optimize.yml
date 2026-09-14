@@ -158,6 +158,9 @@ jobs:
       - name: 実測データの公開ページを更新
         run: python scripts/data_page.py || true
 
+      - name: 効果の出ていない記事を自動で手当てする
+        run: python scripts/auto_improve.py --write || true
+
       - name: CTA文言のA/B結果
         run: python scripts/ab_result.py || true
 

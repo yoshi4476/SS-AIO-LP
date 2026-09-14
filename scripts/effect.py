@@ -130,9 +130,41 @@ def collect(days=30, until=None):
     return out
 
 
+
+def actions(rows):
+    """効果の数字から、次にやることを決める。
+
+    感想ではなく条件で決める。人が毎回判断すると、判断の基準が
+    その日の気分で変わり、何が効いたのか後から検証できなくなる。
+    """
+    out = []
+    for r in rows:
+        if "before" not in r:
+            continue
+        bi, bc, bp = r["before"]
+        ai, ac, ap_ = r["after"]
+        if ai >= 20 and ac == 0 and ap_ and ap_ <= 20.5:
+            # 1ページ目に近いのにクリックが出ない。snippetの問題
+            out.append({"slug": r["slug"], "site": r["site"], "do": "title",
+                        "why": f"表示{ai}・クリック0・{ap_:.0f}位",
+                        "how": "タイトルに、検索結果には出せないもの"
+                               "（違反例・失敗例・自社の実測）を置く"})
+        elif ai >= 20 and ap_ and ap_ > 20.5:
+            # 見られているが順位が足りない。機械で足せる
+            out.append({"slug": r["slug"], "site": r["site"], "do": "links",
+                        "why": f"表示{ai}・{ap_:.0f}位",
+                        "how": "関連記事から内部リンクを送って順位を押し上げる"})
+        elif bi > 0 and ai < bi * 0.7:
+            out.append({"slug": r["slug"], "site": r["site"], "do": "review",
+                        "why": f"表示が{bi}から{ai}へ減少",
+                        "how": "直した内容が検索意図とずれていないか見直す"})
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=30)
+    ap.add_argument("--json", default="", help="やることを機械が読む形で書き出す")
     ap.add_argument("--until", default="",
                     help="この日より前の更新だけを見る（YYYY-MM-DD）")
     a = ap.parse_args()
@@ -165,6 +197,12 @@ def main():
         print("\n  表示が増えた記事 %d / %d本" % (len(up), len(done)))
         print("  ※ 直した効果のほかに、季節や競合の動きも混ざります。"
               "1本ごとの増減より、全体の傾向で見てください。")
+    if a.json:
+        acts = actions(rows)
+        Path(a.json).write_text(json.dumps(acts, ensure_ascii=False, indent=1),
+                                encoding="utf-8")
+        print()
+        print("  やること %d件を書き出しました: %s" % (len(acts), a.json))
     return 0
 
 

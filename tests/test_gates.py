@@ -382,6 +382,26 @@ def test_next_keyword_prefers_main_offer():
     check("next_kw が主力を優先している", "主力優先" in src, True)
 
 
+def test_improvements_apply_themselves():
+    """効果の出ていない記事が、毎週自動で手当てされること。
+
+    「対策した」と「効果があった」は別物で、測って終わりでは何も変わらない。
+    条件で決まる手当て（内部リンク）は機械に任せ、文章の判断が要るものだけ
+    人（AI）へ渡す。全部を自動にすると、主張のずれた記事が量産される。
+    """
+    for f in ("effect.py", "auto_improve.py"):
+        check(f"{f} がある", (ROOT / "scripts" / f).is_file(), True)
+    src = (ROOT / "scripts" / "auto_improve.py").read_text(encoding="utf-8")
+    check("内部リンクは自動で当てる", "add_links" in src, True)
+    # タイトルの書き換えを機械に任せると、中身の無い約束が並ぶ
+    check("タイトルは自動で書き換えない", "def rewrite_title" in src, False)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次で自動改善が走る", "auto_improve.py --write" in wf, True)
+    pr = (ROOT / "automation" / "weekly_optimize_prompt.txt").read_text(encoding="utf-8")
+    check("人が判断する分はAIへ渡している", "人が判断すること" in pr, True)
+    check("一度に触る本数を制限している", "最大5本" in pr, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -393,7 +413,8 @@ def main():
               test_lead_funnel_is_watched,
               test_cta_wording_is_measured_not_guessed,
               test_each_site_declares_what_it_sells,
-              test_next_keyword_prefers_main_offer):
+              test_next_keyword_prefers_main_offer,
+              test_improvements_apply_themselves):
         try:
             t()
         except Exception as e:
