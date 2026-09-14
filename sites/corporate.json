@@ -76,5 +76,13 @@
   "x_tags": [
     "経理BPO",
     "バックオフィス"
-  ]
+  ],
+  "main_offer": "経理BPO（記帳代行の受託）と経理システムのセルフ版",
+  "main_category": "keiri-bpo",
+  "category_mix": {
+    "keiri-bpo": 50,
+    "keiri-jitsumu": 40,
+    "backoffice": 10,
+    "_note": "BPOが主力。keiri-jitsumu は実務の悩みからBPOへ送る役割で、主力を超えると「調べて終わり」の読者ばかりになる"
+  }
 }

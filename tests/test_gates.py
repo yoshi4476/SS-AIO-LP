@@ -343,6 +343,26 @@ def test_cta_wording_is_measured_not_guessed():
     check("週次で結果を見る", "ab_result.py" in wf, True)
 
 
+def test_each_site_declares_what_it_sells():
+    """サイトごとに、何を売る記事なのかが決まっていること。
+
+    主力が決まっていないと、書きやすい領域に寄る。実際3サイトとも
+    主力が最多ではなかった（ラボはAIO 19.8%、コーポレートはBPO 40.8%、
+    補助金はAI導入補助金 37.6%）。読まれても売上につながらない。
+    """
+    import json
+    for f in sorted((ROOT / "sites").glob("*.json")):
+        c = json.loads(f.read_text(encoding="utf-8"))
+        check(f"{f.stem} に主力がある", bool(c.get("main_offer")), True)
+        mix = c.get("category_mix") or c.get("scheme_mix") or {}
+        real = {k: v for k, v in mix.items() if not k.startswith("_")}
+        check(f"{f.stem} に狙う配分がある", bool(real), True)
+        if real:
+            check(f"{f.stem} の配分が100%", sum(real.values()), 100)
+    brief = (ROOT / "scripts" / "site_brief.py").read_text(encoding="utf-8")
+    check("執筆前に主力を見せている", "このサイトで売るもの" in brief, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -352,7 +372,8 @@ def main():
               test_token_never_in_command_line,
               test_kw_intent_separates_click_need,
               test_lead_funnel_is_watched,
-              test_cta_wording_is_measured_not_guessed):
+              test_cta_wording_is_measured_not_guessed,
+              test_each_site_declares_what_it_sells):
         try:
             t()
         except Exception as e:

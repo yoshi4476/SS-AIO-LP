@@ -56,6 +56,14 @@ def main():
     print(f"  読者     : {cfg.get('audience', '（未設定）')}")
     print("=" * 68)
 
+    # 何を売る記事なのかを先に置く。ここが定まらないと、読まれても
+    # 「調べて終わり」で帰る読者ばかりになり、記事が売上につながらない
+    offer = cfg.get("main_offer")
+    if offer:
+        print("\n■ このサイトで売るもの（記事はここへ送るために書く）")
+        print(f"  → {offer}")
+        print("  ※ 主題が主力から離れる記事は、読まれても売上につながりません。")
+
     print("\n■ 書いてはいけない領域（他サイトの担当。主題にしない）")
     for a in cfg.get("avoid", []):
         print(f"  × {a}")
@@ -86,6 +94,45 @@ def main():
             print(f"  {slug:14s} 狙い{mix[slug]:3d}%  いま{pct:5.1f}%（{now[slug]}本）{mark}")
             if diff >= 5:
                 short.append((diff, slug))
+        if short:
+            short.sort(reverse=True)
+            print(f"\n  次に書くなら: {short[0][1]}"
+                  f"（狙いに対して{short[0][0]:.0f}ポイント不足しています）")
+
+    # カテゴリが1つのサイトは、記事の主題（制度）で配分を見る。
+    # 補助金サイトは hojokin 1つしか無く、カテゴリ別では偏りが見えない
+    smix = {k: v for k, v in (cfg.get("scheme_mix") or {}).items()
+            if not k.startswith("_")}
+    if smix:
+        import collections
+        pats = [("AI導入補助金", r"ai(導入)?補助金|ai-hojokin"),
+                ("IT導入補助金", r"it導入補助金|it-hojokin"),
+                ("ものづくり", r"ものづくり|monozukuri"),
+                ("持続化", r"持続化|jizokuka"),
+                ("事業再構築", r"事業再構築|saikouchiku")]
+        now = collections.Counter()
+        for f in (ROOT / "articles").glob("*.md"):
+            raw = f.read_text(encoding="utf-8", errors="replace")
+            m = re.search(r"^category:\s*(.+)$", raw[:1200], re.M)
+            if not m or m.group(1).strip() not in cfg.get("categories", {}):
+                continue
+            head = (raw[:800] + f.stem).lower()
+            for name, pat in pats:
+                if re.search(pat, head):
+                    now[name] += 1
+                    break
+            else:
+                now["その他"] += 1
+        total = sum(now.values()) or 1
+        print("\n■ 制度の配分（狙い / いま）")
+        short = []
+        for name in smix:
+            pct = now[name] / total * 100
+            diff = smix[name] - pct
+            mark = "  ← 不足" if diff >= 5 else ("  （多い）" if diff <= -5 else "")
+            print(f"  {name:14s} 狙い{smix[name]:3d}%  いま{pct:5.1f}%（{now[name]}本）{mark}")
+            if diff >= 5:
+                short.append((diff, name))
         if short:
             short.sort(reverse=True)
             print(f"\n  次に書くなら: {short[0][1]}"

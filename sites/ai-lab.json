@@ -82,10 +82,12 @@
     "AI検索"
   ],
   "category_mix": {
-    "aio": 40,
-    "ai-marketing": 30,
+    "aio": 45,
+    "ai-marketing": 25,
     "seo": 20,
     "meo": 10,
-    "_note": "百分率。AIOを主戦場に置く。MEOは既存の強みだが、検索需要の伸びと自社の差別化余地はAIO側にある"
-  }
+    "_note": "AIOが主力。他は主力へ送るための周辺。MEOはG-ranの実績があるが、差別化の余地と検索需要の伸びはAIO側にある"
+  },
+  "main_offer": "AIO・LLMO運用代行（AI検索で引用される状態をつくる）",
+  "main_category": "aio"
 }
