@@ -27,6 +27,9 @@ COPY_DIRS = ["scripts", "templates", "automation/gas", ".github/workflows",
 SKIP_FILES = {"export_template.py"}
 COPY_FILES = [
     "requirements.txt", ".gitignore",
+    # 導入の入口。これが無いと、渡した先で設定を手で書くことになり、
+    # 主力商材や一次情報が空のまま記事を作り始めてしまう
+    "docs/client/ヒアリングシート.xlsx",
     # AIクローラーの一覧。robots.txt との整合を見るのに使う。
     # 自社の値を含まない定義データで、無いと aio_check.py が動かない。
     "automation/ai-crawlers.txt",
