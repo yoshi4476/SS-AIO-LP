@@ -68,7 +68,7 @@ faq:
 
 電子申請はマイナンバーカードを持ち手続きに慣れている人向き、郵送・窓口提出はその場で収受印付きの控えが欲しい人向きです。
 
-関連する内容は、[労働保険の年度更新は電子申請が任意｜個人事業主2026年版](/blog/roudouhoken-nendokoshin-denshishinsei/)で解説しています。
+関連する内容は、[社労士事務所のAI導入補助金｜労務ソフトは対象になるか](/blog/roudouhoken-nendokoshin-denshishinsei/)で解説しています。
 
 実際の進め方は、[e-Gov電子申請とは｜個人事業主が使う場面と4ステップ](/blog/egov-denshishinsei-kojinjigyonushi/)で解説しています。
 

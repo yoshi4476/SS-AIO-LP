@@ -51,7 +51,7 @@ faq:
 **ものづくり補助金の中小企業者とは、業種ごとに定められた資本金の額または従業員数のどちらか一方の基準を満たす事業者です。**両方を満たす必要はなく、どちらか一方で足ります。
 
 
-関連して、[労働保険の年度更新は電子申請が任意｜個人事業主2026年版](/blog/roudouhoken-nendokoshin-denshishinsei/)もあわせてご確認ください。
+関連して、[社労士事務所のAI導入補助金｜労務ソフトは対象になるか](/blog/roudouhoken-nendokoshin-denshishinsei/)もあわせてご確認ください。
 対象になる範囲については、[社会保険の電子申請義務化｜中小企業が対象になる3つの条件](/blog/shakaihoken-denshishinsei-gimuka-chusho/)にまとめています。
 
 対象になる範囲は[ネイルサロンのものづくり補助金｜対象は集塵機とAI機器](/blog/monozukuri-hojokin-nail-salon/)でも扱っています。
