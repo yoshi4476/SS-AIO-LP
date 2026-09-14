@@ -162,7 +162,7 @@ faq:
 **記帳代行の費用は、証憑のデータ化と依頼範囲の絞り込みという2つの工夫で抑えられます。**
 
 
-関連して、[管理会計の時給相場はいくら？雇用形態別の費用比較【2026年】](/blog/kanri-kaikei-jikyu-souba/)もあわせてご確認ください。
+関連して、[管理会計まで頼む経理BPOの料金｜範囲別の増え方](/blog/kanri-kaikei-jikyu-souba/)もあわせてご確認ください。
 費用の目安については、[記帳代行費用の勘定科目｜外注費と支払手数料の使い分け【2026年】](/blog/kichodaiko-hiyou-kanjoukamoku/)にまとめています。
 
 <figure><img src="/images/kichodaiko-hiyou-souba/step.png" alt="記帳代行の依頼先を決める3ステップ: 現在の仕訳件数を数える、依頼先候補を2〜3社ピックアップする、同じ条件で見積もりを比較する" loading="lazy"><figcaption>記帳代行の依頼先を決める3ステップ</figcaption></figure>
