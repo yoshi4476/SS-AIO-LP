@@ -6,6 +6,7 @@ keyword: ものづくり補助金 中小企業 定義
 category: hojokin
 date: 2026-08-14
 modified: 2026-08-14
+updated: 2026-09-14
 depth: standard
 score: 97
 score_breakdown: {design: 18, seo: 20, editorial: 19, expert: 20, persona: 19, aio: 20}
@@ -41,7 +42,7 @@ faq:
 
 <div class="target-reader">この記事は、ものづくり補助金の申請を検討していて、自社が中小企業者に該当するかを確認したい経営者・個人事業主向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。</p>
+<p class="freshness">※ 2026年9月時点の情報です。ものづくり補助金は第23次を最後に新事業進出補助金と統合され、後継制度「新事業進出・ものづくり商業サービス補助金」の第1回公募が始まっています（応募締切は2026年9月30日18時、第2回は10月30日18時）。本記事は第23次公募の内容を基準にしていますが、今から申請する場合は後継制度が対象になります。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>業種別7区分の資本金・従業員数の基準</li><li>小規模事業者との違いと補助率の優遇</li><li>みなし大企業に該当する条件</li><li>個人事業主の判定方法</li></ul></div>
 

@@ -6,6 +6,7 @@ keyword: ものづくり補助金 飲食店 事例
 category: hojokin
 date: 2026-08-17
 modified: 2026-08-17
+updated: 2026-09-14
 depth: standard
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 19, persona: 20, aio: 19}
@@ -42,7 +43,7 @@ faq:
 
 <div class="target-reader">この記事は、店舗改装ではなく厨房設備や食品製造ラインへの投資でものづくり補助金の活用を検討している飲食店経営者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。第23次公募の情報を基準にしています。</p>
+<p class="freshness">※ 2026年9月時点の情報です。ものづくり補助金は第23次を最後に新事業進出補助金と統合され、後継制度「新事業進出・ものづくり商業サービス補助金」の第1回公募が始まっています（応募締切は2026年9月30日18時、第2回は10月30日18時）。本記事は第23次公募の内容を基準にしていますが、今から申請する場合は後継制度が対象になります。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>飲食店で対象になる経費の中心</li><li>採択されやすい3つの事例パターン</li><li>対象にならない経費との違い</li><li>補助率・補助上限額の目安</li></ul></div>
 

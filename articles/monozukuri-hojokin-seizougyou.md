@@ -6,6 +6,7 @@ keyword: ものづくり補助金 製造業
 category: hojokin
 date: 2026-08-14
 modified: 2026-08-14
+updated: 2026-09-14
 depth: standard
 score: 96
 score_breakdown: {design: 19, seo: 19, editorial: 18, expert: 20, persona: 19, aio: 20}
@@ -44,7 +45,7 @@ faq:
 
 <div class="target-reader">この記事は、老朽化した設備の更新や自動化投資を検討していて、ものづくり補助金が自社の製造業でどう使えるか知りたい経営者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。第23次公募の採択発表は2026年8月上旬を予定しています。</p>
+<p class="freshness">※ 2026年9月時点の情報です。ものづくり補助金は第23次を最後に新事業進出補助金と統合され、後継制度「新事業進出・ものづくり商業サービス補助金」の第1回公募が始まっています（応募締切は2026年9月30日18時、第2回は10月30日18時）。本記事は第23次公募の内容を基準にしていますが、今から申請する場合は後継制度が対象になります。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>製造業で対象になる経費3分野</li><li>補助率・補助上限額の目安</li><li>直近公募の採択率と申請枠の違い</li><li>IT導入補助金との使い分け</li></ul></div>
 

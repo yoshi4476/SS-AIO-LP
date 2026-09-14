@@ -6,6 +6,7 @@ keyword: ものづくり補助金 小売業
 category: hojokin
 date: 2026-08-20
 modified: 2026-08-20
+updated: 2026-09-14
 depth: standard
 score: 95
 score_breakdown: {design: 19, seo: 19, editorial: 19, expert: 19, persona: 19, aio: 19}
@@ -41,7 +42,7 @@ faq:
 
 <div class="target-reader">この記事は、在庫管理や発注業務のシステム投資でものづくり補助金の活用を検討している小売業経営者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。第23次公募の情報を基準にしています。</p>
+<p class="freshness">※ 2026年9月時点の情報です。ものづくり補助金は第23次を最後に新事業進出補助金と統合され、後継制度「新事業進出・ものづくり商業サービス補助金」の第1回公募が始まっています（応募締切は2026年9月30日18時、第2回は10月30日18時）。本記事は第23次公募の内容を基準にしていますが、今から申請する場合は後継制度が対象になります。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>小売業で評価される投資の考え方</li><li>業態別の対象経費・対象外経費</li><li>サービス業・卸売業との基準の違い</li><li>IT導入補助金との使い分け</li></ul></div>
 
