@@ -310,6 +310,22 @@ def test_kw_intent_separates_click_need():
     check("候補の並びに反映している", "kw_intent" in disc, True)
 
 
+def test_lead_funnel_is_watched():
+    """リード導線の各段階が、週次で測られ続けること。
+
+    導線を入れただけでは伸びない。押されているのか、押した先で
+    落ちているのかが分からないと、次に直す場所が決まらない。
+    実際、記事のCTAは長らくクリックが記録されず、判断できなかった。
+    """
+    f = ROOT / "scripts" / "funnel.py"
+    check("段階を測る道具がある", f.is_file(), True)
+    src = f.read_text(encoding="utf-8") if f.is_file() else ""
+    for ev in ("cta_click", "form_start", "form_submit"):
+        check(f"{ev} を見ている", ev in src, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次で走る", "funnel.py" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -317,7 +333,8 @@ def main():
               test_lab_links_to_corporate, test_daily_audit_ignores_unscored_drafts,
               test_every_article_has_a_lead_path,
               test_token_never_in_command_line,
-              test_kw_intent_separates_click_need):
+              test_kw_intent_separates_click_need,
+              test_lead_funnel_is_watched):
         try:
             t()
         except Exception as e:

@@ -152,6 +152,12 @@ jobs:
       - name: 管制塔スプレッドシートを整える（文字切れの防止）
         run: python scripts/sheet_format.py || true
 
+      - name: リード導線のどこで落ちているか
+        run: |
+          out=$(python scripts/funnel.py) || true
+          echo "$out"
+          echo "$out" | grep -q "最も落ちている段階"             && echo "::warning::リード導線に落ち込みがあります。ログを確認してください" || true
+
       - name: 生成エンジンから読める状態かの検査（GEO）
         run: |
           out=$(python scripts/geo_check.py) || true
