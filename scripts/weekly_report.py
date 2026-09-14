@@ -26,9 +26,13 @@ NAVY, MUTED, ACCENT = "#0b2447", "#6b7c93", "#1967d2"
 GOOD, WARN = "#137333", "#b06000"
 
 
-def weeks(n):
-    """直近n週の区切り。GSCの確定は3日前まで"""
-    end = date.today() - timedelta(days=3)
+def weeks(n, until=None):
+    """n週ぶんの区切り。GSCの確定は3日前まで。
+
+    until を渡すと過去の週まで遡って作れる。後から振り返るとき、
+    そのときの数字で出せないと比較にならない。
+    """
+    end = until or (date.today() - timedelta(days=3))
     end -= timedelta(days=(end.weekday() + 1) % 7)      # 直近の土曜で切る
     out = []
     for i in range(n - 1, -1, -1):
@@ -285,11 +289,13 @@ def html(ws, site_rows, kw_pos, picks, conf, funnel_txt):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--weeks", type=int, default=8)
+    ap.add_argument("--until", default="", help="この日までで区切る（YYYY-MM-DD）")
     a = ap.parse_args()
 
     conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
             for p in (ROOT / "sites").glob("*.json")}
-    ws = weeks(a.weeks)
+    until = date.fromisoformat(a.until) if a.until else None
+    ws = weeks(a.weeks, until)
     sc = sc_client()
     site_rows, kw_pos = collect(sc, conf, ws)
     picks = picked_keywords(conf)
