@@ -277,12 +277,25 @@ def test_every_article_has_a_lead_path():
     check("日次で導線を入れている", "tool_links.py --write" in wf, True)
 
 
+def test_token_never_in_command_line():
+    """配信のコマンドラインにトークンを載せないこと。
+
+    URLに埋めると、プロセス一覧を見るだけでPATが読める。特権は要らない。
+    実際、稼働中の配信からPATの全体が読み出せた。失敗時のログにも残る。
+    """
+    src = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
+    check("URLにトークンを埋めていない", "x-access-token:{token}" in src, False)
+    check("askpass経由で渡している", "GIT_ASKPASS" in src, True)
+    check("失敗ログでトークンを伏せている", "def mask(" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
               test_token_check_probes_write, test_selfheal_watches_real_workflows,
               test_lab_links_to_corporate, test_daily_audit_ignores_unscored_drafts,
-              test_every_article_has_a_lead_path):
+              test_every_article_has_a_lead_path,
+              test_token_never_in_command_line):
         try:
             t()
         except Exception as e:

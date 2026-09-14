@@ -36,18 +36,46 @@ ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".publish-work"  # 対象リポジトリのクローン置き場（.gitignore対象）
 
 
-def run(args, cwd=None, check=True):
+def mask(s):
+    """ログに出す前にトークンらしき文字列を伏せる"""
+    return re.sub(r"(github_pat_|ghp_|ghs_|gho_)[A-Za-z0-9_]+", r"\1***", str(s))
+
+
+def git_auth(token):
+    """トークンをコマンドラインに出さずに git へ渡す。
+
+    URLに埋めると、プロセス一覧を見るだけでPATが読める。特権は要らない。
+    実際、稼働中の配信からPATの全体が読み出せた。
+    ユーザー名だけURLに残し、パスワードは GIT_ASKPASS から渡す。
+    """
+    if not token:
+        return None
+    WORK.mkdir(exist_ok=True)
+    if os.name == "nt":
+        ask = WORK / "_askpass.bat"
+        ask.write_text("@echo off\r\necho %GIT_TOKEN%\r\n", encoding="ascii")
+    else:
+        ask = WORK / "_askpass.sh"
+        ask.write_text('#!/bin/sh\nprintf "%s" "$GIT_TOKEN"\n', encoding="ascii")
+        ask.chmod(0o700)
+    env = dict(os.environ)
+    env["GIT_TOKEN"] = token
+    env["GIT_ASKPASS"] = str(ask)
+    return env
+
+
+def run(args, cwd=None, check=True, env=None):
     r = subprocess.run(args, cwd=cwd, capture_output=True, text=True,
-                       encoding="utf-8", errors="ignore")
+                       encoding="utf-8", errors="ignore", env=env)
     if check and r.returncode != 0:
-        raise SystemExit(f"コマンド失敗: {' '.join(args)}\n{r.stdout}\n{r.stderr}")
+        raise SystemExit(mask(f"コマンド失敗: {' '.join(args)}\n{r.stdout}\n{r.stderr}"))
     return r.stdout.strip()
 
 
-def try_run(args, cwd=None):
+def try_run(args, cwd=None, env=None):
     """成否だけ知りたいとき用（run は標準出力を返すため成否の判定に使えない）"""
     r = subprocess.run(args, cwd=cwd, capture_output=True, text=True,
-                       encoding="utf-8", errors="ignore")
+                       encoding="utf-8", errors="ignore", env=env)
     return r.returncode == 0
 
 
@@ -64,12 +92,14 @@ def ensure_clone(cfg, token):
     WORK.mkdir(exist_ok=True)
     dest = WORK / cfg["id"]
     url = f"https://github.com/{cfg['repo']}.git"
-    auth_url = f"https://x-access-token:{token}@github.com/{cfg['repo']}.git" if token else url
+    auth_url = f"https://x-access-token@github.com/{cfg['repo']}.git" if token else url
+    env = git_auth(token)
     if not (dest / ".git").exists():
         shutil.rmtree(dest, ignore_errors=True)
-        run(["git", "clone", "--depth", "1", "--branch", cfg["branch"], auth_url, str(dest)])
+        run(["git", "clone", "--depth", "1", "--branch", cfg["branch"], auth_url,
+             str(dest)], env=env)
     else:
-        run(["git", "fetch", "--depth", "1", auth_url, cfg["branch"]], cwd=dest)
+        run(["git", "fetch", "--depth", "1", auth_url, cfg["branch"]], cwd=dest, env=env)
         run(["git", "reset", "--hard", "FETCH_HEAD"], cwd=dest)
     return dest
 
@@ -480,10 +510,13 @@ def main():
     # 実際に失効したPATで押せず記事7本が配信されないまま止まっていた。
     # その場合はgitの資格情報にフォールバックする（手元の開発者は認証済みのため）。
     plain_url = f"https://github.com/{cfg['repo']}.git"
-    urls = [f"https://x-access-token:{token}@github.com/{cfg['repo']}.git", plain_url] if token else [plain_url]
+    urls = [f"https://x-access-token@github.com/{cfg['repo']}.git", plain_url] if token else [plain_url]
+    env = git_auth(token)
     for attempt in range(2):
         for i, u in enumerate(urls):
-            if try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest):
+            # トークン付きのURLにだけ askpass を渡す。素のURLは手元の資格情報に任せる
+            if try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest,
+                       env=(env if i == 0 else None)):
                 if i:
                     print("※ SITE_PUSH_TOKEN では認証できませんでした。PATの再発行が必要です")
                 print("push完了。対象サイトのビルドが自動で走ります。")
