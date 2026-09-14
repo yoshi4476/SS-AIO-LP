@@ -26,6 +26,9 @@ from pptx.util import Emu, Inches, Pt
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "sales" / "service-proposal.pptx"
+# 商談の直前に探し回らずに済むよう、デスクトップにも置く。
+# レポートが Desktop/レポート一式 に出ているのと同じ考え方
+DESK = Path.home() / "Desktop" / "提案資料"
 
 # 料金・機能一覧・FAQ は sales_deck.py（PDF版）から引き継ぐ。
 # 両方に書くと、料金改定のたびに片方だけ古くなる
@@ -845,9 +848,27 @@ def build():
     return len(prs.slides._sldIdLst)
 
 
+def to_desktop():
+    """デスクトップへ複製する。同名で上書きするので、常に最新の1組だけが残る"""
+    import shutil
+    DESK.mkdir(parents=True, exist_ok=True)
+    put = []
+    # PDF は sales_deck.py が作る別構成（15ページの読み物）。
+    # 「PDF版」と呼ぶと同じ中身だと誤解されるので、名前で用途を分ける
+    for src, name in ((OUT, "提案書_商談用スライド.pptx"),
+                      (OUT.with_suffix(".pdf"), "提案書_読み物（先方送付用）.pdf")):
+        if src.is_file():
+            shutil.copy2(src, DESK / name)
+            put.append(name)
+    return put
+
+
 def main():
     n = build()
     print(f"作成しました: {OUT.relative_to(ROOT)}（{n}枚）")
+    if "--no-desktop" not in sys.argv:
+        for name in to_desktop():
+            print(f"  デスクトップへ: 提案資料/{name}")
     if "--open" in sys.argv:
         subprocess.run(["cmd", "/c", "start", "", str(OUT)], shell=False)
     return 0
