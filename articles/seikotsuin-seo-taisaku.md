@@ -50,7 +50,7 @@ faq:
 
 整骨院のSEOとは、Googleの自然検索順位を上げて新規患者からの流入を増やす施策です。
 
-費用の目安は[整骨院の費用は平均いくら？初検料1,560円からの相場](/seo/seikotsuin-hiyou-heikin/)でも扱っています。
+費用の目安は[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)でも扱っています。
 
 費用の目安は[整骨院の費用は保険でいくら？自己負担3割の目安と相場](/seo/seikotsuin-hiyou-hoken/)でも扱っています。
 

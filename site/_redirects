@@ -12,3 +12,6 @@
 /ai-marketing/ai-donyu-hojokin-jirei/     https://lp.7senses.co.jp/blog/ai-hojokin-katsuyou-jirei-2026/  301
 /ai-marketing/ai-hojokin-futaitaku-riyu/  https://lp.7senses.co.jp/blog/ai-hojokin-fusaitaku-riyu/       301
 /ai-marketing/ai-hojokin-gbizid-shutoku/  https://lp.7senses.co.jp/blog/gbizid-shutoku/                  301
+# 主力（AIO）へ寄せる書き換えでカテゴリが変わった記事。
+# 旧URLを放置すると404になり、積み上げた評価も引き継げない。
+/seo/seikotsuin-hiyou-heikin/  /aio/seikotsuin-hiyou-heikin/  301
