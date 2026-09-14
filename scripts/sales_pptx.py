@@ -77,7 +77,8 @@ def _font(run, size, bold=False, color=INK, name=JP):
 
 
 def text(slide, x, y, w, h, s, size=14, bold=False, color=INK,
-         align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP, space=0, line=None):
+         align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP, space=0, line=None,
+         name=JP):
     tb = slide.shapes.add_textbox(x, y, w, h)
     tf = tb.text_frame
     tf.word_wrap = True
@@ -89,7 +90,7 @@ def text(slide, x, y, w, h, s, size=14, bold=False, color=INK,
         p.space_after = Pt(space)
         if line:
             p.line_spacing = line
-        _font(p.add_run(), size, bold, color)
+        _font(p.add_run(), size, bold, color, name)
         p.runs[0].text = part
     return tb
 
@@ -532,8 +533,143 @@ def s_proof(prs):
             "同じ数値をお約束するものではありません。")
 
 
+
+# ============================================================
+# 実際に動いている記録（すべて実物のログ・出力）
+# ============================================================
+TERM_BG = RGBColor(0x0E, 0x1B, 0x2B)
+TERM_FG = RGBColor(0xD7, 0xE2, 0xEF)
+TERM_OK = RGBColor(0x5F, 0xC5, 0x85)
+TERM_NG = RGBColor(0xF0, 0x90, 0x84)
+TERM_DIM = RGBColor(0x72, 0x88, 0xA3)
+TERM_KEY = RGBColor(0xE8, 0xC2, 0x6A)
+MONO = "ＭＳ ゴシック"
+
+
+def term(s, x, y, w, h, lines, size=9.5, title=""):
+    """実際の画面出力をそのまま貼る枠。色は行頭の記号で切り替える"""
+    box(s, x, y, w, h, fill=TERM_BG)
+    ty = y + Inches(0.12)
+    if title:
+        text(s, x + Inches(0.22), ty, w - Inches(0.44), Inches(0.2),
+             title, 8.5, False, TERM_DIM, name=MONO)
+        ty += Inches(0.26)
+    for ln in lines:
+        col = TERM_FG
+        if ln.startswith("+"):
+            col, ln = TERM_OK, ln[1:]
+        elif ln.startswith("-"):
+            col, ln = TERM_NG, ln[1:]
+        elif ln.startswith("~"):
+            col, ln = TERM_DIM, ln[1:]
+        elif ln.startswith("*"):
+            col, ln = TERM_KEY, ln[1:]
+        text(s, x + Inches(0.22), ty, w - Inches(0.4), Inches(0.19),
+             ln, size, False, col, name=MONO)
+        ty += Inches(size / 48)
+    return ty
+
+
+def s_live_log(prs):
+    s, y = slide(prs, "14", "実際に動いている記録 ― 2026年9月14日",
+                 "以下は当社の運用サイトで、その日に実際に走った処理の記録です。時刻は日本時間。")
+    rows = [("11:38", "自動修復", "skipped", "直すものなし"),
+            ("11:17", "記事パイプライン", "success", "補助金サイト 1本公開"),
+            ("10:47", "サイトへ配信", "success", "Cloudflareへデプロイ"),
+            ("09:04", "自動修復", "skipped", "直すものなし"),
+            ("08:45", "記事パイプライン", "success", "コーポレート 1本公開"),
+            ("06:26", "週次の最適化", "success", "リライト・内部リンク・見直し"),
+            ("05:39", "記事パイプライン", "success", "AI集客ラボ 1本公開"),
+            ("02:56", "週刊ダイジェスト配信", "success", "購読者へメール送信")]
+    y = table(s, y, ["時刻", "処理", "結果", "内容"],
+              [[r[0], r[1], (r[2], TERM_OK if r[2] == "success" else MUTED), r[3]]
+               for r in rows],
+              [0.09, 0.26, 0.12, 0.53], row_h=0.42)
+    box(s, M, y, CW, Inches(0.92), fill=SOFT, line_col=LINE)
+    text(s, M + Inches(0.28), y + Inches(0.18), CW - Inches(0.56), Inches(0.6),
+         "「自動修復」が skipped になっているのは、直すものが無かったという意味です。"
+         "壊れていれば自動で直し、直せなければ通知が飛びます。人がログを見に行く必要はありません。",
+         12, False, INK, line=1.5)
+    foot(s, "※ GitHub Actions の実行履歴より。人の操作は一切入っていません。")
+
+
+def s_live_judge(prs):
+    s, y = slide(prs, "15", "エージェントが実際に出した判断",
+                 "画面の出力をそのまま載せています。どれも人が介在せず、条件だけで判定したものです。")
+    colw = Emu(int((CW - Inches(0.3)) / 2))
+    term(s, M, y, colw, Inches(2.0),
+         ["$ kw_guard.py \"社労士 AI導入補助金\"",
+          "",
+          "~■ 食い合い審査（補助金サイト）",
+          "+   ぶつかる既存記事はありません",
+          "*   判定: 着手可",
+          "",
+          "~■ 開かないと済まない語か",
+          "*   [強] 3点（費用/いくら/内訳）"],
+         title="① 書く前 ― この語で書いてよいか")
+    term(s, M + colw + Inches(0.3), y, colw, Inches(2.0),
+         ["$ score_check.py nougyou-shoki-hiyou",
+          "",
+          "-FAIL | 本文5,000字以上  | 4,784字",
+          "+PASS | 冒頭が断言型     | 172字",
+          "+PASS | FAQ 5問以上      | 6問",
+          "+PASS | 内部リンク3本以上 | 8本",
+          "~...",
+          "*機械採点: 18/19 → 修正してから再検査"],
+         title="② 書いた後 ― 基準を満たしているか")
+    y += Inches(2.24)
+    term(s, M, y, CW, Inches(1.95),
+         ["$ auto_improve.py",
+          "",
+          "~■ 効果測定から出たやること: 31件",
+          "+   内部リンクを足す（自動）        4件",
+          "*   タイトルを直す（人が判断）      3件",
+          "*   検索意図を見直す（人が判断）   24件",
+          "",
+          "~   [review] backoffice-gyomu-kaizen       表示が10から1へ減少",
+          "~        → 直した内容が検索意図とずれていないか見直す"],
+         title="③ 公開の後 ― 効いたか、次に何をするか")
+    foot(s, "※ ②は実際に基準を満たさず差し戻された記録です。この記事は加筆して19/19にしてから公開しました。")
+
+
+def s_live_growth(prs):
+    s, y = slide(prs, "16", "止まらずに積み上がっています",
+                 "直近11日間に新しく公開された記事です。3サイト合計、すべて品質基準を満たしたもののみ。")
+    data = [("09/04", 1), ("09/05", 5), ("09/06", 8), ("09/07", 11), ("09/08", 12),
+            ("09/09", 8), ("09/10", 8), ("09/11", 9), ("09/12", 9), ("09/13", 6),
+            ("09/14", 5)]
+    top = y + Inches(0.28)          # 目盛りの一番上がリード文に寄らないよう下げる
+    ch_h = Inches(2.3)
+    base = top + ch_h
+    peak = max(v for _, v in data)
+    bw = Emu(int((CW - Inches(1.0)) / len(data)))
+    # 目盛り
+    for g in (0, 4, 8, 12):
+        gy = base - Emu(int(ch_h * g / peak))
+        box(s, M + Inches(0.42), gy, CW - Inches(0.42), Pt(0.75),
+            fill=LINE if g else MUTED)
+        text(s, M, gy - Inches(0.1), Inches(0.34), Inches(0.2),
+             str(g), 9, False, MUTED, align=PP_ALIGN.RIGHT)
+    for i, (d, v) in enumerate(data):
+        h = Emu(int(ch_h * v / peak))
+        x = M + Inches(0.5) + Emu(int(bw * i))
+        box(s, x, base - h, bw - Inches(0.16), h, fill=BLUE if v >= 8 else RGBColor(0x8F, 0xB2, 0xDE))
+        text(s, x, base - h - Inches(0.24), bw - Inches(0.16), Inches(0.2),
+             str(v), 10, True, NAVY, align=PP_ALIGN.CENTER)
+        text(s, x, base + Inches(0.08), bw - Inches(0.16), Inches(0.2),
+             d, 9.5, False, MUTED, align=PP_ALIGN.CENTER)
+    y = base + Inches(0.46)
+    y = cards(s, y, [
+        ("11日間の公開数", "82本", "1日あたり平均7.5本。3サイトに配分しています"),
+        ("差し戻された記事", "0本が未公開のまま", "基準に届かないものは加筆して通してから公開"),
+        ("人が書いた記事", "0本", "方向性の決定と最終判断のみ人が行います"),
+    ], per=3, h=1.15)
+    foot(s, "※ 当社運用サイトのコミット履歴より集計（2026/09/04〜09/14）。"
+            "日ごとの本数は、公募や季節の事情でテーマを入れ替えるため上下します。")
+
+
 def s_price(prs):
-    s, y = slide(prs, "14", "料金",
+    s, y = slide(prs, "17", "料金",
                  f"サイト構築の初期費用と、記事{PRICE['articles']}本＋レポート＋改善作業を含む月額費用です。")
     text(s, M, y, CW, Inches(0.3), "初期費用（サイト構築）", 14, True, NAVY)
     y += Inches(0.46)
@@ -575,7 +711,7 @@ def s_price(prs):
 
 
 def s_compare(prs):
-    s, y = slide(prs, "15", "他の方法と比べた場合",
+    s, y = slide(prs, "18", "他の方法と比べた場合",
                  f"同じ「月{PRICE['articles']}本の記事を作る」を、他の手段で実現した場合と比べます。")
     w_low = MARKET["writer_low"] * PRICE["articles"]
     w_high = MARKET["writer_high"] * PRICE["articles"]
@@ -603,7 +739,7 @@ def s_compare(prs):
 
 
 def s_steps(prs):
-    s, y = slide(prs, "16", "導入の流れ",
+    s, y = slide(prs, "19", "導入の流れ",
                  "お申し込みから最初の記事が公開されるまで、おおむね3〜4週間です。")
     steps = [("01", "無料相談・ヒアリング", "60分",
               "御社の強み、狙いたい層、競合状況を伺います。この段階で、"
@@ -636,7 +772,7 @@ def s_steps(prs):
 
 def s_faq(prs, part):
     half = FAQS[:4] if part == 1 else FAQS[4:]
-    s, y = slide(prs, "17", f"よくあるご質問（{part}/2）", "")
+    s, y = slide(prs, "20", f"よくあるご質問（{part}/2）", "")
     for q, a in half:
         box(s, M, y, Inches(0.3), Inches(0.3), fill=NAVY)
         text(s, M, y + Inches(0.04), Inches(0.3), Inches(0.24),
@@ -695,6 +831,9 @@ def build():
     s_ops(prs)
     s_report(prs)
     s_proof(prs)
+    s_live_log(prs)
+    s_live_judge(prs)
+    s_live_growth(prs)
     s_price(prs)
     s_compare(prs)
     s_steps(prs)
