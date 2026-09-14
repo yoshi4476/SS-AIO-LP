@@ -326,6 +326,23 @@ def test_lead_funnel_is_watched():
     check("週次で走る", "funnel.py" in wf, True)
 
 
+def test_cta_wording_is_measured_not_guessed():
+    """CTAの文言を推測で決めないこと。
+
+    記事を見た544件に対しクリックは38件。どの文言なら押されるかは
+    推測では決まらない。半々で出し分けて実測する仕組みを保つ。
+    """
+    b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("記事のCTAをA/Bの対象にしている", 'data-ab="article_cta"' in b, True)
+    js = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
+    # パラメータはGA4の管理画面で登録しないと集計できない。名前に入れる
+    check("A/Bを出来事の名前に入れている", "'cta_click_' + abv" in js, True)
+    check("表示側も名前に入れている", "'ab_impression_' + v" in js, True)
+    check("結果を読む道具がある", (ROOT / "scripts" / "ab_result.py").is_file(), True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次で結果を見る", "ab_result.py" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -334,7 +351,8 @@ def main():
               test_every_article_has_a_lead_path,
               test_token_never_in_command_line,
               test_kw_intent_separates_click_need,
-              test_lead_funnel_is_watched):
+              test_lead_funnel_is_watched,
+              test_cta_wording_is_measured_not_guessed):
         try:
             t()
         except Exception as e:

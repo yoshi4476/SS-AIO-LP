@@ -194,7 +194,13 @@
                         a.classList.contains('cta-button'))) {
       var id = a.getAttribute('data-cta') || slugId((a.textContent || '').trim());
       var params = { cta_id: id, page_path: location.pathname };
-      if (a.getAttribute('data-ab-variant')) params.ab_variant = a.getAttribute('data-ab-variant');
+      var abv = a.getAttribute('data-ab-variant');
+      if (abv) {
+        params.ab_variant = abv;
+        // 出来事の名前にA/Bを入れる。GA4のパラメータは管理画面で登録しないと
+        // 後から集計できないが、名前なら登録なしで数えられる
+        ga('cta_click_' + abv, params);
+      }
       ga('cta_click', params);
       ga('cta_' + slugId(id), params);
     }
@@ -226,6 +232,7 @@
     }
     el.setAttribute('data-ab-variant', v);
     ga('ab_impression', { ab_key: key, ab_variant: v, page_path: location.pathname });
+    ga('ab_impression_' + v, { ab_key: key, page_path: location.pathname });
   });
 
   // 記事の音声読み上げ（Web Speech API。非対応ブラウザではボタンを隠す）

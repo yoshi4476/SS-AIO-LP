@@ -367,6 +367,15 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
             return m.group(0)
         content = re.sub(r'<a href="(/[^":]+?)"[^>]*>(.*?)</a>', _unwrap, content)
 
+    # 記事のCTAをA/Bテストの対象にする。
+    # 記事を見た544件に対しCTAのクリックは38件で、3サイトとも同じ段階で落ちている。
+    # どの文言なら押されるかは推測では決まらないため、半々で出し分けて実測する。
+    # 文言は記事ごとに書かず、ここで一括して当てる（350箇所を手で直さないため）。
+    content = re.sub(
+        r'(<a\s+class="cta-button"(?![^>]*data-ab))',
+        r'\1 data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう"',
+        content)
+
     # マーカー数チェック（自動生成記事の装飾漏れ検出。基準: 8箇所以上、推奨12-18）
     marker_count = content.count("<strong>") + content.count("<mark>")
     if marker_count < 8:
