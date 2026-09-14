@@ -60,6 +60,20 @@ def source_hash(md_path):
     return hashlib.sha1(Path(md_path).read_bytes()).hexdigest()[:12]
 
 
+def recently_edited(days=2):
+    """ここ数日で手を入れた記事。指紋がまだ無いサイト向けの受け皿。
+
+    指紋の記録は配信時に始まるので、仕組みを入れた直後は空になる。
+    その間に本文だけ直した記事は、タイトルが同じなので取りこぼされる。
+    直近の編集分だけを配信し直せば、1周で指紋が揃って以降は正確に判定できる。
+    """
+    r = subprocess.run(
+        ["git", "log", f"--since={days} days ago", "--name-only", "--pretty=",
+         "--", "articles/"],
+        cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    return {Path(l).stem for l in r.stdout.split() if l.endswith(".md")}
+
+
 def _flat(s):
     """飾りを落として、地の文だけを続いた1本の文字列にする。
 
@@ -154,7 +168,13 @@ def main():
         missing = [s for s, _, _, _ in slugs if s not in live]
         # 在るページは、配信時に残した指紋と突き合わせる。
         # 指紋がまだ無いサイトでは、タイトルと本文で判断する
+        # 自前でビルドするサイトは同じリポジトリで完結し、配信という工程が無い。
+        # 「届いたか」を問う対象ではないので、内容の照合はしない
+        if c.get("type") == "self-static":
+            print(f"■ {site}: 手元 {len(slugs)}本 / 自前ビルドのため照合しません")
+            continue
         man = live_manifest(c["domain"])
+        fresh = set() if man is not None else recently_edited()
         stale, why = [], {}
         for s, title, frags, h in slugs:
             if s not in live:
@@ -163,6 +183,12 @@ def main():
                 if man.get(s) != h:
                     stale.append(s)
                     why[s] = "未記録" if s not in man else "内容"
+                continue
+            # 指紋がまだ無い間は、直近で手を入れた記事を配信し直す。
+            # 本文だけの修正はタイトル比較では見つけられないため
+            if s in fresh:
+                stale.append(s)
+                why[s] = "直近の修正が未達"
                 continue
             ok, reason = _live_matches(c["domain"], s, title, frags)
             if not ok:
@@ -173,7 +199,7 @@ def main():
         print(f"■ {site}: 手元 {len(slugs)}本 / 公開 {len(slugs) - len(missing)}本"
               f" / 未配信 {len(missing)}本 / 内容が古い {len(stale)}本")
         for s in gap[:8]:
-            print(f"     {s}" + (f"（{why[s]}が違う）" if s in why else "（未配信）"))
+            print(f"     {s}（{why.get(s, '未配信')}）")
         if len(gap) > 8:
             print(f"     …ほか {len(gap) - 8}本")
 
