@@ -1256,6 +1256,64 @@ def analyze(d):
 # ============================================================
 # 描画（SVGチャート / ヒートマップ / HTML）
 # ============================================================
+
+def weekly_blocks(domain, weeks_n=8):
+    """月次にも週単位の順位推移を入れる。
+
+    月次の数字だけでは、月の途中で何が起きたかが見えない。
+    3週目に直したのか、月末に落ちたのかが分からないまま次の月に入る。
+    描画は週次レポートと同じものを使い、2か所で見た目がずれないようにする。
+    """
+    try:
+        import weekly_report as wr
+    except Exception:
+        return "", ""
+    try:
+        ws = wr.weeks(weeks_n)
+        sc = wr.sc_client()
+        labels = [f"{s.month}/{s.day}" for s, _ in ws]
+        imp, series = [], {}
+        for i, (s, e) in enumerate(ws):
+            rows = wr.query(sc, domain, s, e)
+            imp.append(int(rows[0]["impressions"]) if rows else 0)
+            for x in wr.query(sc, domain, s, e, ["query"]):
+                series.setdefault(x["keys"][0], [None] * len(ws))[i] = x["position"]
+        cand = [(k, v) for k, v in series.items()
+                if sum(1 for x in v if x) >= max(2, len(ws) // 3)]
+        cand.sort(key=lambda kv: min(x for x in kv[1] if x))
+        # 紙面が1ページに決まっている。表示回数の推移は別ページの6か月折れ線と
+        # 重複するため、ここでは順位の推移だけに絞る
+        chart = wr.svg_rank(labels, dict(cand[:5]),
+                            "主要キーワードの順位推移（上ほど上位）")
+        return chart, ""
+    except Exception as ex:
+        return f'<p class="note">週次の推移を取得できませんでした（{ex}）</p>', ""
+
+
+def picked_kw_table(site_id):
+    """次に狙う語と、選んだ理由。結果だけでは進捗にならない"""
+    try:
+        import weekly_report as wr
+        import sites as sites_mod
+        picks = [x for x in wr.picked_keywords({site_id: sites_mod.load(site_id)}, limit=7)
+                 if x["site"] == site_id]
+    except Exception:
+        return '<p class="note">台帳を読めませんでした</p>'
+    if not picks:
+        return '<p class="note">未着手の語がありません。kw_discover.py で補充してください</p>'
+    rows = ""
+    for x in picks:
+        rows += (f'<tr><td>{x["kw"][:30]}</td><td>{x["aim"][:14]}</td>'
+                 f'<td>{x["verdict"]}（{x["point"]:+d}）</td><td>{x["why"][:30]}</td></tr>')
+    weak = len([x for x in picks if x["verdict"] == "弱"])
+    note = ("" if not weak else
+            f'<p class="note">「弱」が{weak}件あります。検索結果に答えが出た時点で'
+            "用が済む語です。書くなら、検索結果には出せないもの"
+            "（違反例・失敗例・自社の実測）をタイトルに置いてください。</p>")
+    return ('<table><tr><th>検索語</th><th style="width:18%">狙い</th>'
+            '<th style="width:14%">開く理由</th><th style="width:26%">判定の根拠</th></tr>'
+            + rows + "</table>" + note)
+
 def svg_line(months, key, color, title, unit=""):
     vals = [m.get(key, 0) or 0 for m in months]
     if not any(vals):
@@ -1499,6 +1557,10 @@ def render(d, a):
         f'{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}</span></td></tr>'
         for x in d.get("landing", [])[:10]) or '<tr><td colspan="6">GA4接続後に表示されます</td></tr>'
 
+    # 週単位の推移と、次に狙う語。月の合計だけでは月中の動きが見えない
+    weekly_chart, _ = weekly_blocks(site_cfg().get('domain', ''))
+    picked_kw = picked_kw_table(SITE_ID)
+
     rank_rows = ""
     rimp = d.get("rank_imp", {})
     for k, n in d.get("rank_buckets", []):
@@ -1635,6 +1697,8 @@ def render(d, a):
         "読まれ方の質（エンゲージメント・滞在・回遊）",
         "入口ページ別の成績（改修の根拠）",
         "検索順位の分布（伸びしろの在り処）",
+        "主要キーワードの週次の順位推移",
+        "次に狙う検索語と、選んだ理由",
         "オウンドメディアの改修プラン",
         "LPの改修プラン",
         "LPコンバージョン分析（ファネル+ヒートマップ）", "成果の要因分析",
@@ -2132,6 +2196,16 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <table><tr><th style="width:22%">デバイス</th><th>表示回数</th><th>クリック</th><th>クリック率</th><th>平均順位</th></tr>{gdev_rows}</table>
 <p class="note">スマホとPCでCTRが大きく違う場合、タイトルの後半が切れて訴求が届いていない可能性があります。
 スマホの検索結果では前半28文字程度しか表示されません。</p>
+</div>
+
+<!-- ページ: 週次の推移と、次に狙う語 -->
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>主要キーワードの週次の順位推移</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">月の合計では月中の動きが見えません。<b>週単位なら、直した翌週に効いたかが分かります。</b></p>
+{weekly_chart}
+<div class="sec" style="margin-top:16px"><span class="no">12</span><h2>次に狙う検索語と、選んだ理由</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">台帳で「未着手」の語。同じ順位でもクリック率は5倍違うため、<b>検索結果で用が済む語か</b>を機械で判定しています。</p>
+{picked_kw}
 </div>
 
 <!-- オウンドメディア改修プラン -->
