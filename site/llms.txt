@@ -135,3 +135,4 @@
 - [AIOとSEOの違いとは？記事の書き方と評価指標を5つの視点で比較](https://ai.7senses.co.jp/aio/aio-to-seo-no-chigai/): AIOとSEOの違いは、記事の書き方・評価される仕組み・KPIの3点に表れます。定義の比較ではなく、執筆と計測で実務上どう変わるかを5つの視点とチェックリストで整理します。
 - [AI検索の実測データ](https://ai.7senses.co.jp/data/): 自社運営3サイトで計測した、生成AI経由の流入実数と検索順位ごとのクリック率。推計値ではなく実測。集計期間と母数を明記。出典明記のうえ引用可。
 - [整骨院がAI検索に表示されない5つの理由｜費用ページの直し方](https://ai.7senses.co.jp/aio/seikotsuin-hiyou-heikin/): 整骨院がAI検索に表示されない原因は、料金の書き方・施術範囲の曖昧さ・出典のなさなど5つに整理できます。ChatGPTやAI Overviewに引用される費用ページの条件と、直す順番を2026年9月時点で解説します。
+- [工務店のSNS集客とは？5媒体の選び方と続け方](https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/): 工務店のSNS集客とは、Instagram・LINE公式・YouTube等の複数媒体を目的別に使い分け、問い合わせにつなげる施策です。5媒体の向き不向きと無理なく続ける始め方を解説します。
