@@ -1,72 +1,142 @@
-<!doctype html><meta charset="utf-8"><title>週次レポート 2026-08-02</title>
-<style>body{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
-color:#0b2447;background:#f4f7fb;margin:0;padding:28px}
-.wrap{max-width:780px;margin:0 auto;background:#fff;padding:34px 38px;border-radius:14px;
-box-shadow:0 2px 16px rgba(11,36,71,.07)}
-h1{font-size:1.5rem;margin:0 0 4px}h2{font-size:1.1rem;margin:34px 0 10px;
-padding-left:10px;border-left:4px solid #1967d2}
-.sub{color:#6b7c93;font-size:.82rem;margin:0 0 6px}
-table{border-collapse:collapse;width:100%;font-size:.84rem;margin:10px 0}
-th,td{border:1px solid #e3eaf3;padding:7px 9px;text-align:left}
-th{background:#0b2447;color:#fff;font-weight:600}
-td.num{text-align:right;font-variant-numeric:tabular-nums}
-.chart{margin:14px 0 6px}.chart-t{font-weight:700;font-size:.9rem;margin-bottom:4px}
-svg{width:100%;height:auto}
-.legend{font-size:.78rem;color:#6b7c93;margin:4px 0 0}
-.note{font-size:.76rem;color:#6b7c93;margin:2px 0 0}
-.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:.72rem;font-weight:700}
-.t-strong{background:#e6f4ea;color:#137333}.t-mid{background:#f1f3f4;color:#5f6368}
-.t-weak{background:#fce8e6;color:#c5221f}
-.kpi{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
-.kpi div{flex:1;min-width:130px;background:#f4f7fb;border-radius:10px;padding:12px 14px}
-.kpi b{display:block;font-size:1.35rem}
-.kpi span{font-size:.76rem;color:#6b7c93}</style><div class='wrap'>
-<h1>週次レポート</h1>
-<p class='sub'>集計: 2026-06-08 〜 2026-08-02（8週）／作成: 2026-09-14／出典: Search Console・GA4の実測</p>
-<div class='kpi'>
-<div><b>385</b><span>今週の表示（前週比 +385）</span></div>
-<div><b>0</b><span>今週のクリック（前週比 +0）</span></div>
-<div><b>0.00%</b><span>クリック率</span></div></div>
-<h2>1. 表示とクリックの推移</h2>
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<title>週次レポート 2026-08-02</title><style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; }
+:root { --navy:#0b2447; --blue:#1967d2; --teal:#00838f; --gold:#b7922e;
+        --muted:#6b7c93; --line:#e3eaf3; }
+body { font-family:"Yu Gothic","Meiryo",sans-serif; color:#10203a;
+       font-size:10pt; line-height:1.8; }
+.sheet { width:210mm; min-height:296mm; padding:16mm 15mm 18mm;
+         page-break-after:always; position:relative; }
+.sheet:last-child { page-break-after:auto; }
+.cover-page { background:linear-gradient(150deg,#071a38 0%,#0b2447 45%,#14345c 100%);
+  color:#fff; display:flex; flex-direction:column; padding:22mm 20mm; }
+.cv-gold { width:64px; height:4px; background:var(--gold); margin:10mm 0 6mm; }
+.cv-kicker { letter-spacing:.35em; font-size:9pt; color:#93b4e8; }
+.cv-title { font-size:27pt; font-weight:bold; line-height:1.4; margin-top:4mm; }
+.cv-month { font-size:15pt; color:var(--gold); font-weight:bold; margin-top:3mm;
+            letter-spacing:.1em; }
+.cv-meta { margin-top:auto; font-size:9.5pt; color:#bcd0ee; line-height:2.1;
+           border-top:1px solid rgba(255,255,255,.25); padding-top:6mm; }
+.cv-meta b { color:#fff; }
+.cv-badges { display:flex; gap:8px; margin-top:8mm; flex-wrap:wrap; }
+.cv-badge { border:1px solid rgba(255,255,255,.35); border-radius:999px;
+            padding:3px 14px; font-size:8.5pt; color:#dbe7fa; }
+.sec { display:flex; align-items:center; gap:10px; margin:0 0 12px;
+       page-break-after:avoid; }
+.sec .no { background:var(--navy); color:#fff; font-weight:bold; font-size:10pt;
+           padding:3px 12px; border-radius:4px; letter-spacing:.08em; }
+.sec h2 { font-size:14.5pt; }
+.sec .gold { flex:1; height:2px;
+             background:linear-gradient(90deg,var(--gold),transparent); }
+h3 { font-size:11pt; margin:14px 0 6px; color:var(--navy); }
+.note { font-size:8.5pt; color:var(--muted); }
+table { border-collapse:collapse; width:100%; font-size:9pt; margin:8px 0; }
+th,td { border:1px solid var(--line); padding:5px 8px; text-align:left; }
+th { background:var(--navy); color:#fff; font-weight:600; font-size:8.5pt; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+.hl-cards { display:flex; gap:10px; margin:10px 0 4px; }
+.hl { flex:1; border:1px solid var(--line); border-top:3px solid var(--blue);
+      border-radius:8px; padding:10px 12px; }
+.hl .k { font-size:8.5pt; color:var(--muted); }
+.hl .v { font-size:16pt; font-weight:bold; color:var(--navy); }
+.hl .s { font-size:8.5pt; color:var(--teal); font-weight:bold; }
+.chart { margin:10px 0 4px; page-break-inside:avoid; }
+.chart-t { font-weight:700; font-size:10pt; color:var(--navy); margin-bottom:3px; }
+svg { width:100%; height:auto; }
+.legend { font-size:8pt; color:var(--muted); margin:3px 0 0; }
+.tag { display:inline-block; padding:1px 7px; border-radius:10px;
+       font-size:8pt; font-weight:700; }
+.t-strong { background:#e6f4ea; color:#137333; }
+.t-mid { background:#f1f3f4; color:#5f6368; }
+.t-weak { background:#fce8e6; color:#c5221f; }
+</style></head><body>
+<div class="sheet cover-page">
+<div class="cv-kicker">WEEKLY REPORT</div>
+<div class="cv-gold"></div>
+<div class="cv-title">週次レポート<br>検索順位と導線の推移</div>
+<div class="cv-month">2026-08-02 まで（直近8週）</div>
+<div class="cv-badges"><span class="cv-badge">順位の推移</span>
+<span class="cv-badge">表示・クリック</span>
+<span class="cv-badge">次に狙う検索語</span>
+<span class="cv-badge">リード導線</span></div>
+<div class="cv-meta">対象: <b>AI集客ラボ / セブンセンシズ コーポレート / AI導入補助金サポート</b><br>
+集計期間: <b>2026-06-08 〜 2026-08-02</b>　｜　作成: 2026-09-14<br>
+出典: Search Console・GA4の実測値（推計値は使用していません）<br>
+発行: セブンセンシズ株式会社</div></div>
+<div class="sheet">
+<div class="sec"><span class="no">01</span><h2>今週の要点</h2><div class="gold"></div></div>
+<div class="hl-cards">
+<div class="hl"><div class="k">今週の表示回数</div><div class="v">385</div>
+<div class="s">前週比 +385</div></div>
+<div class="hl"><div class="k">今週のクリック</div><div class="v">0</div>
+<div class="s">前週比 +0</div></div>
+<div class="hl"><div class="k">クリック率</div><div class="v">0.00%</div>
+<div class="s">3サイト合計</div></div></div>
+<p class="note">月の合計では月中の動きが見えません。週単位なら、直した翌週に効いたかが分かります。</p>
+<div class="sec" style="margin-top:14px"><span class="no">02</span>
+<h2>表示とクリックの推移</h2><div class="gold"></div></div>
 <div class="chart"><div class="chart-t">週ごとの表示回数（3サイト合計）</div><svg viewBox="0 0 700 250"><line x1="46" y1="216" x2="684" y2="216" stroke="#e3eaf3"/><line x1="46" y1="166" x2="684" y2="166" stroke="#e3eaf3"/><line x1="46" y1="116" x2="684" y2="116" stroke="#e3eaf3"/><line x1="46" y1="66" x2="684" y2="66" stroke="#e3eaf3"/><line x1="46" y1="16" x2="684" y2="16" stroke="#e3eaf3"/><rect x="61" y="216" width="49" height="0" fill="#1967d2" rx="3"/><text x="86" y="211" font-size="10" fill="#0b2447" text-anchor="middle">0</text><rect x="141" y="216" width="49" height="0" fill="#1967d2" rx="3"/><text x="166" y="211" font-size="10" fill="#0b2447" text-anchor="middle">0</text><rect x="221" y="216" width="49" height="0" fill="#1967d2" rx="3"/><text x="245" y="211" font-size="10" fill="#0b2447" text-anchor="middle">0</text><rect x="300" y="216" width="49" height="0" fill="#1967d2" rx="3"/><text x="325" y="211" font-size="10" fill="#0b2447" text-anchor="middle">0</text><rect x="380" y="216" width="49" height="0" fill="#1967d2" rx="3"/><text x="405" y="211" font-size="10" fill="#0b2447" text-anchor="middle">0</text><rect x="460" y="216" width="49" height="0" fill="#1967d2" rx="3"/><text x="485" y="211" font-size="10" fill="#0b2447" text-anchor="middle">0</text><rect x="540" y="216" width="49" height="0" fill="#1967d2" rx="3"/><text x="564" y="211" font-size="10" fill="#0b2447" text-anchor="middle">0</text><rect x="619" y="42" width="49" height="174" fill="#1967d2" rx="3"/><text x="644" y="37" font-size="10" fill="#0b2447" text-anchor="middle">385</text><text x="86" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">6/8</text><text x="166" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">6/15</text><text x="245" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">6/22</text><text x="325" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">6/29</text><text x="405" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">7/6</text><text x="485" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">7/13</text><text x="564" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">7/20</text><text x="644" y="240" font-size="9.5" fill="#6b7c93" text-anchor="middle">7/27</text></svg></div>
 <p style="color:#6b7c93">データなし</p>
-<h2>2. 主要キーワードの順位推移</h2>
-<h3 style='font-size:.95rem;margin:18px 0 2px'>AI集客ラボ</h3>
+</div>
+<div class="sheet">
+<div class="sec"><span class="no">03</span>
+<h2>AI集客ラボ の順位推移</h2><div class="gold"></div></div>
 <p style="color:#6b7c93">この期間に順位のついたデータがありません</p>
-<h3 style='font-size:.95rem;margin:18px 0 2px'>セブンセンシズ コーポレートサイト</h3>
+<h3>今週の実績</h3>
+<table><tr><th style="width:30%">指標</th><th>今週</th><th>前週</th><th>差</th></tr>
+<tr><td>表示回数</td><td class="num">226</td>
+<td class="num">0</td><td class="num">+226</td></tr>
+<tr><td>クリック</td><td class="num">0</td>
+<td class="num">0</td><td class="num">+0</td></tr>
+<tr><td>平均順位</td><td class="num">64.9位</td>
+<td class="num">0.0位</td>
+<td class="num">+64.9</td></tr></table>
+</div>
+<div class="sheet">
+<div class="sec"><span class="no">04</span>
+<h2>セブンセンシズ コーポレートサイト の順位推移</h2><div class="gold"></div></div>
 <p style="color:#6b7c93">この期間に順位のついたデータがありません</p>
-<h3 style='font-size:.95rem;margin:18px 0 2px'>AI導入補助金サポート</h3>
+<h3>今週の実績</h3>
+<table><tr><th style="width:30%">指標</th><th>今週</th><th>前週</th><th>差</th></tr>
+<tr><td>表示回数</td><td class="num">0</td>
+<td class="num">0</td><td class="num">+0</td></tr>
+<tr><td>クリック</td><td class="num">0</td>
+<td class="num">0</td><td class="num">+0</td></tr>
+<tr><td>平均順位</td><td class="num">0.0位</td>
+<td class="num">0.0位</td>
+<td class="num">+0.0</td></tr></table>
+</div>
+<div class="sheet">
+<div class="sec"><span class="no">05</span>
+<h2>AI導入補助金サポート の順位推移</h2><div class="gold"></div></div>
 <p style="color:#6b7c93">この期間に順位のついたデータがありません</p>
-<h2>3. 次に狙う検索語と、選んだ理由</h2>
-<p class='note'>管制塔の台帳で「未着手」の語です。同じ順位でもクリック率は5倍違うため、検索結果で用が済む語かどうかを機械で判定しています。</p>
-<table><thead><tr><th>サイト</th><th>検索語</th><th>狙い</th><th>開く理由</th><th>判定の根拠</th></tr></thead><tbody>
-<tr><td>ai-lab</td><td>歯科医院 廃業 費用</td><td></td><td><span class='tag t-strong'>強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr>
-<tr><td>ai-lab</td><td>ナイトガード 歯科医院 費用</td><td></td><td><span class='tag t-strong'>強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr>
-<tr><td>ai-lab</td><td>整骨院 受付 やり方</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>ai-lab</td><td>骨盤矯正 整骨院 やり方</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>ai-lab</td><td>整骨院 費用 高い</td><td></td><td><span class='tag t-strong'>強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr>
-<tr><td>ai-lab</td><td>腰痛 整骨院 費用</td><td></td><td><span class='tag t-strong'>強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr>
-<tr><td>ai-lab</td><td>腱鞘炎 整骨院 費用</td><td></td><td><span class='tag t-strong'>強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr>
-<tr><td>ai-lab</td><td>o 脚 整骨院 費用</td><td></td><td><span class='tag t-strong'>強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr>
-<tr><td>corporate</td><td>請求書 銀行 振込 やり方</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>corporate</td><td>請求書 電子化 やり方</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>corporate</td><td>請求書 支払い やり方</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>corporate</td><td>請求書 三つ折り やり方</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>corporate</td><td>請求書 外注費</td><td></td><td><span class='tag t-mid'>並</span> +0</td><td>手がかりなし</td></tr>
-<tr><td>corporate</td><td>外注費 請求書 テンプレート</td><td></td><td><span class='tag t-weak'>弱</span> -2</td><td>例文/テンプレート/ひな形/文例・+具体的</td></tr>
-<tr><td>corporate</td><td>経費精算 効率化 事例</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>corporate</td><td>ai 経費精算 自動化</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>subsidy</td><td>農業を始める方法</td><td></td><td><span class='tag t-mid'>並</span> +0</td><td>手がかりなし</td></tr>
-<tr><td>subsidy</td><td>飲食店 開業 補助金</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>subsidy</td><td>飲食店 コツ</td><td></td><td><span class='tag t-mid'>並</span> +0</td><td>手がかりなし</td></tr>
-<tr><td>subsidy</td><td>飲食店 初期費用</td><td></td><td><span class='tag t-strong'>強</span> +2</td><td>+費用/相場/いくら/料金/内訳/</td></tr>
-<tr><td>subsidy</td><td>新事業進出 ものづくり補助金 医療機器</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>subsidy</td><td>ものづくり 商業 サービス生産性向上促進補助金 医療機器</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-<tr><td>subsidy</td><td>it補助金 対象ツール</td><td></td><td><span class='tag t-strong'>強</span> +2</td><td>+対象/条件/要件/基準/資格/使</td></tr>
-<tr><td>subsidy</td><td>日本フルハップ 助成金 パソコン購入</td><td></td><td><span class='tag t-mid'>並</span> +1</td><td>+具体的</td></tr>
-</tbody></table>
-<p class='note'>「弱」が1件あります。検索結果に答えが出た時点で用が済む語です。書くなら、検索結果には出せないもの（違反例・失敗例・自社の実測）をタイトルに置いてください。</p>
-<h2>4. リード導線の通過率</h2><pre style='font-size:.8rem;background:#f4f7fb;padding:12px;border-radius:8px;overflow-x:auto'>■ AI集客ラボ（直近28日）
+<h3>今週の実績</h3>
+<table><tr><th style="width:30%">指標</th><th>今週</th><th>前週</th><th>差</th></tr>
+<tr><td>表示回数</td><td class="num">159</td>
+<td class="num">0</td><td class="num">+159</td></tr>
+<tr><td>クリック</td><td class="num">0</td>
+<td class="num">0</td><td class="num">+0</td></tr>
+<tr><td>平均順位</td><td class="num">50.7位</td>
+<td class="num">0.0位</td>
+<td class="num">+50.7</td></tr></table>
+</div>
+<div class="sheet">
+<div class="sec"><span class="no">06</span>
+<h2>次に狙う検索語と、選んだ理由</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">台帳で「未着手」の語です。同じ順位でもクリック率は5倍違うため、
+<b>検索結果で用が済む語かどうか</b>を機械で判定しています。</p>
+<table><tr><th style="width:14%">サイト</th><th>検索語</th>
+<th style="width:16%">狙い</th><th style="width:14%">開く理由</th>
+<th style="width:24%">判定の根拠</th></tr><tr><td>ai-lab</td><td>歯科医院 廃業 費用</td><td></td><td><span class="tag t-strong">強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr><tr><td>ai-lab</td><td>ナイトガード 歯科医院 費用</td><td></td><td><span class="tag t-strong">強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr><tr><td>ai-lab</td><td>整骨院 受付 やり方</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>ai-lab</td><td>骨盤矯正 整骨院 やり方</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>ai-lab</td><td>整骨院 費用 高い</td><td></td><td><span class="tag t-strong">強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr><tr><td>ai-lab</td><td>腰痛 整骨院 費用</td><td></td><td><span class="tag t-strong">強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr><tr><td>ai-lab</td><td>腱鞘炎 整骨院 費用</td><td></td><td><span class="tag t-strong">強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr><tr><td>ai-lab</td><td>o 脚 整骨院 費用</td><td></td><td><span class="tag t-strong">強</span> +3</td><td>+費用/相場/いくら/料金/内訳/・+具体的</td></tr><tr><td>corporate</td><td>請求書 電子化 やり方</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>corporate</td><td>請求書 支払い やり方</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>corporate</td><td>請求書 三つ折り やり方</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>corporate</td><td>請求書 外注費</td><td></td><td><span class="tag t-mid">並</span> +0</td><td>手がかりなし</td></tr><tr><td>corporate</td><td>外注費 請求書 テンプレート</td><td></td><td><span class="tag t-weak">弱</span> -2</td><td>例文/テンプレート/ひな形/文例・+具体的</td></tr><tr><td>corporate</td><td>経費精算 効率化 事例</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>corporate</td><td>ai 経費精算 自動化</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>corporate</td><td>concur 経費精算 自動化</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr><tr><td>subsidy</td><td>農業を始める方法</td><td></td><td><span class="tag t-mid">並</span> +0</td><td>手がかりなし</td></tr><tr><td>subsidy</td><td>飲食店 開業 補助金</td><td></td><td><span class="tag t-mid">並</span> +1</td><td>+具体的</td></tr></table><p class="note">「弱」が1件あります。検索結果に答えが出た時点で用が済む語です。書くなら、検索結果には出せないもの（違反例・失敗例・自社の実測）をタイトルに置いてください。</p>
+</div>
+<div class="sheet">
+<div class="sec"><span class="no">07</span>
+<h2>リード導線の通過率</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">記事を読んだ人が、どこで離れているかです。
+<b>前の段階に対する割合</b>で見ます。</p>
+<pre style="font-size:8.5pt;background:#f6f9fd;border:1px solid var(--line);
+padding:10px 14px;border-radius:8px;white-space:pre-wrap">■ AI集客ラボ（直近28日）
    記事を見た           175
    CTAを押した          17  前段階の 9.7%
    フォームを開いた          4  前段階の 23.5%
@@ -88,8 +158,7 @@ svg{width:100%;height:auto}
    corporate: 「CTAを押した」で 207 件が落ちています（通過 6.8%）
    ai-lab: 「CTAを押した」で 158 件が落ちています（通過 9.7%）
    subsidy: 「CTAを押した」で 141 件が落ちています（通過 4.1%）</pre>
-<h2>サイト別の内訳</h2><table><thead><tr><th>サイト</th><th>今週の表示</th><th>クリック</th><th>平均順位</th><th>前週比（表示）</th></tr></thead><tbody>
-<tr><td>AI集客ラボ</td><td class='num'>226</td><td class='num'>0</td><td class='num'>64.9位</td><td class='num'>+226</td></tr>
-<tr><td>セブンセンシズ コーポレートサイト</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0.0位</td><td class='num'>+0</td></tr>
-<tr><td>AI導入補助金サポート</td><td class='num'>159</td><td class='num'>0</td><td class='num'>50.7位</td><td class='num'>+159</td></tr>
-</tbody></table></div>
+<p class="note">段階は入れ子ではないため、通過率が100%を超えることがあります。
+診断結果のメール送信のように、フォームを開かずに送信まで至る経路があるためです。</p>
+</div>
+</body></html>

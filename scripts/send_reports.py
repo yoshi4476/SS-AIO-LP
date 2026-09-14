@@ -69,6 +69,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--to", default="")
+    # 既定で両方送る作りだと、片方だけ送り直したいときに重複して届く。
+    # 実際、週次をPDFで送り直したときに月次まで二重に送ってしまった
+    ap.add_argument("--only", choices=["monthly", "weekly"], default="",
+                    help="月次だけ / 週次だけ送る")
     a = ap.parse_args()
     to = a.to or env("LEAD_TO_EMAIL", "info.ai@7senses.co.jp")
 
@@ -82,7 +86,7 @@ def main():
         return 1
 
     ok = True
-    if monthly:
+    if monthly and a.only != "weekly":
         ok &= send(
             f"【セブンセンシズ】月次レポート一式（{len(monthly)}件）",
             "これまでに作成した月次レポートをまとめてお送りします。\n\n"
@@ -94,10 +98,10 @@ def main():
             "新しく入れています。\n\n"
             f"作成: {date.today()}／出典: Search Console・GA4の実測",
             monthly, to, a.dry_run)
-    if weekly:
+    if weekly and a.only != "monthly":
         ok &= send(
             f"【セブンセンシズ】週次レポート（{len(weekly)}件）",
-            "週次レポートをお送りします。ブラウザで開いてご覧ください。\n\n"
+            "週次レポートをお送りします。\n\n"
             "月次では、直した結果が出たのか分からないまま次の月に入ります。\n"
             "週単位で順位・表示・クリックを見ると、直した翌週に効いたかが分かります。\n\n"
             "順位の折れ線は上下を反転して描いています。"

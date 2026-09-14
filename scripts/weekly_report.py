@@ -192,97 +192,164 @@ def picked_keywords(conf, limit=8):
     return out
 
 
-CSS = """body{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
-color:#0b2447;background:#f4f7fb;margin:0;padding:28px}
-.wrap{max-width:780px;margin:0 auto;background:#fff;padding:34px 38px;border-radius:14px;
-box-shadow:0 2px 16px rgba(11,36,71,.07)}
-h1{font-size:1.5rem;margin:0 0 4px}h2{font-size:1.1rem;margin:34px 0 10px;
-padding-left:10px;border-left:4px solid #1967d2}
-.sub{color:#6b7c93;font-size:.82rem;margin:0 0 6px}
-table{border-collapse:collapse;width:100%;font-size:.84rem;margin:10px 0}
-th,td{border:1px solid #e3eaf3;padding:7px 9px;text-align:left}
-th{background:#0b2447;color:#fff;font-weight:600}
-td.num{text-align:right;font-variant-numeric:tabular-nums}
-.chart{margin:14px 0 6px}.chart-t{font-weight:700;font-size:.9rem;margin-bottom:4px}
-svg{width:100%;height:auto}
-.legend{font-size:.78rem;color:#6b7c93;margin:4px 0 0}
-.note{font-size:.76rem;color:#6b7c93;margin:2px 0 0}
-.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:.72rem;font-weight:700}
-.t-strong{background:#e6f4ea;color:#137333}.t-mid{background:#f1f3f4;color:#5f6368}
-.t-weak{background:#fce8e6;color:#c5221f}
-.kpi{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
-.kpi div{flex:1;min-width:130px;background:#f4f7fb;border-radius:10px;padding:12px 14px}
-.kpi b{display:block;font-size:1.35rem}
-.kpi span{font-size:.76rem;color:#6b7c93}"""
+CSS = """
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; }
+:root { --navy:#0b2447; --blue:#1967d2; --teal:#00838f; --gold:#b7922e;
+        --muted:#6b7c93; --line:#e3eaf3; }
+body { font-family:"Yu Gothic","Meiryo",sans-serif; color:#10203a;
+       font-size:10pt; line-height:1.8; }
+.sheet { width:210mm; min-height:296mm; padding:16mm 15mm 18mm;
+         page-break-after:always; position:relative; }
+.sheet:last-child { page-break-after:auto; }
+.cover-page { background:linear-gradient(150deg,#071a38 0%,#0b2447 45%,#14345c 100%);
+  color:#fff; display:flex; flex-direction:column; padding:22mm 20mm; }
+.cv-gold { width:64px; height:4px; background:var(--gold); margin:10mm 0 6mm; }
+.cv-kicker { letter-spacing:.35em; font-size:9pt; color:#93b4e8; }
+.cv-title { font-size:27pt; font-weight:bold; line-height:1.4; margin-top:4mm; }
+.cv-month { font-size:15pt; color:var(--gold); font-weight:bold; margin-top:3mm;
+            letter-spacing:.1em; }
+.cv-meta { margin-top:auto; font-size:9.5pt; color:#bcd0ee; line-height:2.1;
+           border-top:1px solid rgba(255,255,255,.25); padding-top:6mm; }
+.cv-meta b { color:#fff; }
+.cv-badges { display:flex; gap:8px; margin-top:8mm; flex-wrap:wrap; }
+.cv-badge { border:1px solid rgba(255,255,255,.35); border-radius:999px;
+            padding:3px 14px; font-size:8.5pt; color:#dbe7fa; }
+.sec { display:flex; align-items:center; gap:10px; margin:0 0 12px;
+       page-break-after:avoid; }
+.sec .no { background:var(--navy); color:#fff; font-weight:bold; font-size:10pt;
+           padding:3px 12px; border-radius:4px; letter-spacing:.08em; }
+.sec h2 { font-size:14.5pt; }
+.sec .gold { flex:1; height:2px;
+             background:linear-gradient(90deg,var(--gold),transparent); }
+h3 { font-size:11pt; margin:14px 0 6px; color:var(--navy); }
+.note { font-size:8.5pt; color:var(--muted); }
+table { border-collapse:collapse; width:100%; font-size:9pt; margin:8px 0; }
+th,td { border:1px solid var(--line); padding:5px 8px; text-align:left; }
+th { background:var(--navy); color:#fff; font-weight:600; font-size:8.5pt; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+.hl-cards { display:flex; gap:10px; margin:10px 0 4px; }
+.hl { flex:1; border:1px solid var(--line); border-top:3px solid var(--blue);
+      border-radius:8px; padding:10px 12px; }
+.hl .k { font-size:8.5pt; color:var(--muted); }
+.hl .v { font-size:16pt; font-weight:bold; color:var(--navy); }
+.hl .s { font-size:8.5pt; color:var(--teal); font-weight:bold; }
+.chart { margin:10px 0 4px; page-break-inside:avoid; }
+.chart-t { font-weight:700; font-size:10pt; color:var(--navy); margin-bottom:3px; }
+svg { width:100%; height:auto; }
+.legend { font-size:8pt; color:var(--muted); margin:3px 0 0; }
+.tag { display:inline-block; padding:1px 7px; border-radius:10px;
+       font-size:8pt; font-weight:700; }
+.t-strong { background:#e6f4ea; color:#137333; }
+.t-mid { background:#f1f3f4; color:#5f6368; }
+.t-weak { background:#fce8e6; color:#c5221f; }
+"""
+
+
+def cover(ws):
+    """表紙。月次レポートと同じ体裁に揃える"""
+    return f"""<div class="sheet cover-page">
+<div class="cv-kicker">WEEKLY REPORT</div>
+<div class="cv-gold"></div>
+<div class="cv-title">週次レポート<br>検索順位と導線の推移</div>
+<div class="cv-month">{ws[-1][1]} まで（直近{len(ws)}週）</div>
+<div class="cv-badges"><span class="cv-badge">順位の推移</span>
+<span class="cv-badge">表示・クリック</span>
+<span class="cv-badge">次に狙う検索語</span>
+<span class="cv-badge">リード導線</span></div>
+<div class="cv-meta">対象: <b>AI集客ラボ / セブンセンシズ コーポレート / AI導入補助金サポート</b><br>
+集計期間: <b>{ws[0][0]} 〜 {ws[-1][1]}</b>　｜　作成: {date.today()}<br>
+出典: Search Console・GA4の実測値（推計値は使用していません）<br>
+発行: セブンセンシズ株式会社</div></div>"""
 
 
 def html(ws, site_rows, kw_pos, picks, conf, funnel_txt):
     labels = [f"{s.month}/{s.day}" for s, _ in ws]
-    h = [f'<!doctype html><meta charset="utf-8"><title>週次レポート {ws[-1][1]}</title>',
-         f"<style>{CSS}</style><div class='wrap'>",
-         f"<h1>週次レポート</h1>",
-         f"<p class='sub'>集計: {ws[0][0]} 〜 {ws[-1][1]}（{len(ws)}週）／"
-         f"作成: {date.today()}／出典: Search Console・GA4の実測</p>"]
-
     tot = [sum(site_rows[s][i]["imp"] for s in site_rows) for i in range(len(ws))]
     clk = [sum(site_rows[s][i]["clk"] for s in site_rows) for i in range(len(ws))]
     d_i = tot[-1] - tot[-2] if len(tot) > 1 else 0
     d_c = clk[-1] - clk[-2] if len(clk) > 1 else 0
-    h.append(f"""<div class='kpi'>
-<div><b>{tot[-1]:,}</b><span>今週の表示（前週比 {d_i:+,}）</span></div>
-<div><b>{clk[-1]:,}</b><span>今週のクリック（前週比 {d_c:+,}）</span></div>
-<div><b>{tot[-1] and clk[-1]/tot[-1]*100:.2f}%</b><span>クリック率</span></div></div>""")
+    ctr = clk[-1] / tot[-1] * 100 if tot[-1] else 0
 
-    h.append("<h2>1. 表示とクリックの推移</h2>")
-    h.append(svg_bars(labels, tot, "週ごとの表示回数（3サイト合計）"))
-    h.append(svg_bars(labels, clk, "週ごとのクリック数（3サイト合計）", GOOD))
+    h = ['<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">',
+         f"<title>週次レポート {ws[-1][1]}</title><style>{CSS}</style></head><body>",
+         cover(ws),
+         f"""<div class="sheet">
+<div class="sec"><span class="no">01</span><h2>今週の要点</h2><div class="gold"></div></div>
+<div class="hl-cards">
+<div class="hl"><div class="k">今週の表示回数</div><div class="v">{tot[-1]:,}</div>
+<div class="s">前週比 {d_i:+,}</div></div>
+<div class="hl"><div class="k">今週のクリック</div><div class="v">{clk[-1]:,}</div>
+<div class="s">前週比 {d_c:+,}</div></div>
+<div class="hl"><div class="k">クリック率</div><div class="v">{ctr:.2f}%</div>
+<div class="s">3サイト合計</div></div></div>
+<p class="note">月の合計では月中の動きが見えません。週単位なら、直した翌週に効いたかが分かります。</p>
+<div class="sec" style="margin-top:14px"><span class="no">02</span>
+<h2>表示とクリックの推移</h2><div class="gold"></div></div>
+{svg_bars(labels, tot, "週ごとの表示回数（3サイト合計）")}
+{svg_bars(labels, clk, "週ごとのクリック数（3サイト合計）", GOOD)}
+</div>"""]
 
-    h.append("<h2>2. 主要キーワードの順位推移</h2>")
+    n = 3
     for site, c in sorted(conf.items()):
-        # 直近週の表示が多い語を選ぶ。少ない語は線が飛んで読めない
         cand = [(k, v) for (s, k), v in kw_pos.items() if s == site]
         cand = [(k, v) for k, v in cand if sum(1 for x in v if x) >= max(2, len(ws) // 3)]
         cand.sort(key=lambda kv: min(x for x in kv[1] if x))
-        top = dict(cand[:5])
-        h.append(f"<h3 style='font-size:.95rem;margin:18px 0 2px'>{esc(c.get('name', site))}</h3>")
-        h.append(svg_rank(labels, top, "順位の推移（上ほど上位）"))
+        r = site_rows[site]
+        prev = r[-2] if len(r) > 1 else {"imp": 0, "clk": 0, "pos": 0}
+        h.append(f"""<div class="sheet">
+<div class="sec"><span class="no">{n:02d}</span>
+<h2>{esc(c.get("name", site))} の順位推移</h2><div class="gold"></div></div>
+{svg_rank(labels, dict(cand[:5]), "主要キーワードの順位（上ほど上位）")}
+<h3>今週の実績</h3>
+<table><tr><th style="width:30%">指標</th><th>今週</th><th>前週</th><th>差</th></tr>
+<tr><td>表示回数</td><td class="num">{r[-1]["imp"]:,}</td>
+<td class="num">{prev["imp"]:,}</td><td class="num">{r[-1]["imp"] - prev["imp"]:+,}</td></tr>
+<tr><td>クリック</td><td class="num">{r[-1]["clk"]:,}</td>
+<td class="num">{prev["clk"]:,}</td><td class="num">{r[-1]["clk"] - prev["clk"]:+,}</td></tr>
+<tr><td>平均順位</td><td class="num">{r[-1]["pos"]:.1f}位</td>
+<td class="num">{prev["pos"]:.1f}位</td>
+<td class="num">{r[-1]["pos"] - prev["pos"]:+.1f}</td></tr></table>
+</div>""")
+        n += 1
 
     if picks:
-        h.append("<h2>3. 次に狙う検索語と、選んだ理由</h2>")
-        h.append("<p class='note'>管制塔の台帳で「未着手」の語です。"
-                 "同じ順位でもクリック率は5倍違うため、"
-                 "検索結果で用が済む語かどうかを機械で判定しています。</p>")
-        h.append("<table><thead><tr><th>サイト</th><th>検索語</th><th>狙い</th>"
-                 "<th>開く理由</th><th>判定の根拠</th></tr></thead><tbody>")
         cls = {"強": "t-strong", "並": "t-mid", "弱": "t-weak"}
-        for p in picks:
-            h.append(f"<tr><td>{esc(p['site'])}</td><td>{esc(p['kw'])[:34]}</td>"
-                     f"<td>{esc(p['aim'])[:16]}</td>"
-                     f"<td><span class='tag {cls[p['verdict']]}'>{p['verdict']}</span>"
-                     f" {p['point']:+d}</td><td>{esc(p['why'])[:34]}</td></tr>")
-        h.append("</tbody></table>")
-        weak = [p for p in picks if p["verdict"] == "弱"]
-        if weak:
-            h.append(f"<p class='note'>「弱」が{len(weak)}件あります。"
-                     "検索結果に答えが出た時点で用が済む語です。"
-                     "書くなら、検索結果には出せないもの（違反例・失敗例・自社の実測）を"
-                     "タイトルに置いてください。</p>")
+        rows = "".join(
+            f'<tr><td>{esc(p["site"])}</td><td>{esc(p["kw"])[:30]}</td>'
+            f'<td>{esc(p["aim"])[:14]}</td>'
+            f'<td><span class="tag {cls[p["verdict"]]}">{p["verdict"]}</span>'
+            f' {p["point"]:+d}</td>'
+            f'<td>{esc(p["why"])[:28]}</td></tr>' for p in picks[:18])
+        weak = len([p for p in picks if p["verdict"] == "弱"])
+        note = ("" if not weak else
+                f'<p class="note">「弱」が{weak}件あります。検索結果に答えが出た時点で'
+                "用が済む語です。書くなら、検索結果には出せないもの"
+                "（違反例・失敗例・自社の実測）をタイトルに置いてください。</p>")
+        h.append(f"""<div class="sheet">
+<div class="sec"><span class="no">{n:02d}</span>
+<h2>次に狙う検索語と、選んだ理由</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">台帳で「未着手」の語です。同じ順位でもクリック率は5倍違うため、
+<b>検索結果で用が済む語かどうか</b>を機械で判定しています。</p>
+<table><tr><th style="width:14%">サイト</th><th>検索語</th>
+<th style="width:16%">狙い</th><th style="width:14%">開く理由</th>
+<th style="width:24%">判定の根拠</th></tr>{rows}</table>{note}
+</div>""")
+        n += 1
 
     if funnel_txt:
-        h.append("<h2>4. リード導線の通過率</h2><pre style='font-size:.8rem;"
-                 "background:#f4f7fb;padding:12px;border-radius:8px;overflow-x:auto'>"
-                 + esc(funnel_txt) + "</pre>")
+        h.append(f"""<div class="sheet">
+<div class="sec"><span class="no">{n:02d}</span>
+<h2>リード導線の通過率</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">記事を読んだ人が、どこで離れているかです。
+<b>前の段階に対する割合</b>で見ます。</p>
+<pre style="font-size:8.5pt;background:#f6f9fd;border:1px solid var(--line);
+padding:10px 14px;border-radius:8px;white-space:pre-wrap">{esc(funnel_txt)}</pre>
+<p class="note">段階は入れ子ではないため、通過率が100%を超えることがあります。
+診断結果のメール送信のように、フォームを開かずに送信まで至る経路があるためです。</p>
+</div>""")
 
-    h.append("<h2>サイト別の内訳</h2><table><thead><tr><th>サイト</th>"
-             "<th>今週の表示</th><th>クリック</th><th>平均順位</th><th>前週比（表示）</th>"
-             "</tr></thead><tbody>")
-    for site, c in sorted(conf.items()):
-        r = site_rows[site]
-        d = r[-1]["imp"] - r[-2]["imp"] if len(r) > 1 else 0
-        h.append(f"<tr><td>{esc(c.get('name', site))}</td>"
-                 f"<td class='num'>{r[-1]['imp']:,}</td><td class='num'>{r[-1]['clk']:,}</td>"
-                 f"<td class='num'>{r[-1]['pos']:.1f}位</td><td class='num'>{d:+,}</td></tr>")
-    h.append("</tbody></table></div>")
+    h.append("</body></html>")
     return "\n".join(h)
 
 
@@ -315,6 +382,32 @@ def main():
     f.write_text(html(ws, site_rows, kw_pos, picks, conf, funnel_txt),
                  encoding="utf-8", newline="")
     print(f"週次レポート: {f.relative_to(ROOT).as_posix()}")
+
+    # PDFにする。HTMLのまま渡すと、受け取った環境の文字コード判定によっては
+    # 日本語が化ける。実際、メールで送った週次が文字化けした。
+    pdf = f.with_suffix(".pdf")
+    try:
+        from playwright.sync_api import sync_playwright
+        import pdf_util
+        with sync_playwright() as pw:
+            b = pw.chromium.launch()
+            pg = b.new_page()
+            pg.goto(f.as_uri())
+            pg.wait_for_timeout(400)
+            pdf_util.check_overflow(pg, "週次レポート")
+            pg.pdf(path=str(pdf), format="A4", print_background=True,
+                   display_header_footer=True, header_template="<span></span>",
+                   footer_template=(
+                       '<div style="width:100%;font-size:7px;color:#8ba0bd;'
+                       'padding:0 12mm;display:flex;justify-content:space-between;">'
+                       '<span>週次レポート ｜ セブンセンシズ株式会社</span>'
+                       '<span><span class="pageNumber"></span> / '
+                       '<span class="totalPages"></span></span></div>'),
+                   margin={"top": "0", "bottom": "10mm", "left": "0", "right": "0"})
+            b.close()
+        print(f"PDF: {pdf.relative_to(ROOT).as_posix()}")
+    except Exception as e:
+        print(f"PDFにできませんでした（HTMLは作成済み）: {str(e)[:90]}")
     print(f"  期間 {ws[0][0]} 〜 {ws[-1][1]} / 狙う語 {len(picks)}件")
     return 0
 
