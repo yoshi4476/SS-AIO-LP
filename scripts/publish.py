@@ -36,6 +36,40 @@ ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".publish-work"  # 対象リポジトリのクローン置き場（.gitignore対象）
 
 
+def source_hash(md_path: Path):
+    """配信した原稿そのものの指紋。届いたかどうかの判定に使う"""
+    import hashlib
+    return hashlib.sha1(md_path.read_bytes()).hexdigest()[:12]
+
+
+def manifest_path(cfg, dest: Path):
+    """公開サイトから読める場所に置く。認証なしで照合できるようにするため。
+
+    Next.jsは public/ の中身がそのままURLになる。静的サイトは直下。
+    """
+    pub = "public" if (cfg.get("images_dir") or "").startswith("public/") else ""
+    return dest / pub / "article-manifest.json" if pub else dest / "article-manifest.json"
+
+
+def stamp_manifest(cfg, dest: Path, meta, src: Path):
+    """配信した原稿の指紋を残す。
+
+    ページが在るか・タイトルが合うかだけでは、本文だけ直したときに
+    「配信済み」に見える。実際、リード導線を全記事に足したのに
+    1本も届いていないことに、後から実物を見るまで気づけなかった。
+    """
+    p = manifest_path(cfg, dest)
+    try:
+        data = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
+    except ValueError:
+        data = {}
+    data[meta["slug"]] = source_hash(src)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(data, ensure_ascii=False, indent=0, sort_keys=True),
+                 encoding="utf-8")
+    return p
+
+
 def mask(s):
     """ログに出す前にトークンらしき文字列を伏せる"""
     return re.sub(r"(github_pat_|ghp_|ghs_|gho_)[A-Za-z0-9_]+", r"\1***", str(s))
@@ -487,6 +521,8 @@ def main():
         written, chars = write_external_html(cfg, dest, meta, body, src)
     else:
         raise SystemExit(f"未対応のサイト種別: {cfg['type']}")
+
+    written.append(stamp_manifest(cfg, dest, meta, src))
 
     print(f"配信先: {cfg['name']}（{cfg['repo']} / {cfg['branch']}）")
     for w in written:

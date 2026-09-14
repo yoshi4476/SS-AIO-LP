@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: "23 1 * * 1"
   workflow_dispatch:
+    inputs:
+      since:
+        description: "配信し直す起点（既定は直近1コミット。取りこぼしを流すときだけ広げる）"
+        type: string
+        default: "HEAD~1"
 
 permissions:
   contents: write
@@ -179,7 +184,7 @@ jobs:
         run: |
           git add -A
           git diff --cached --quiet || git commit -m "weekly: 内部リンクと導線の補充"
-          python scripts/publish_changed.py --all --since HEAD~1 --push || true
+          python scripts/publish_changed.py --all --since "${{ inputs.since || 'HEAD~1' }}" --push || true
 
       - name: 週次最適化の実行
         env:
