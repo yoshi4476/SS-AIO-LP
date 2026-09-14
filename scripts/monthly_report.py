@@ -1257,6 +1257,43 @@ def analyze(d):
 # 描画（SVGチャート / ヒートマップ / HTML）
 # ============================================================
 
+
+def effect_table(days=30):
+    """直した記事の効果を表にする。週次と同じ計算を使う"""
+    try:
+        import effect
+        rows = [r for r in effect.collect(days) if "before" in r]
+    except Exception as e:
+        return f'<p class="note">効果を取得できませんでした（{e}）</p>'
+    if not rows:
+        return '<p class="note">この期間に判定できる記事がありません（直してから7日未満は待ちます）</p>'
+    rows.sort(key=lambda r: -(r["after"][0] - r["before"][0]))
+    out, advice = "", []
+    for r in rows[:8]:
+        bi, bc, bp = r["before"]
+        ai, ac, ap_ = r["after"]
+        dp = (bp - ap_) if (bp and ap_) else 0
+        out += (f'<tr><td>{r["slug"][:26]}</td><td>{r["when"]}</td>'
+                f'<td class="num">{bi}→{ai}</td><td class="num">{bc}→{ac}</td>'
+                f'<td class="num">{dp:+.1f}</td></tr>')
+        for q, i, c, pos in r["queries"][:1]:
+            out += (f'<tr><td colspan="2" style="padding-left:16px;color:#6b7c93">'
+                    f'↳ {q[:28]}</td><td class="num">{i}</td>'
+                    f'<td class="num">{c}</td><td class="num">{pos:.1f}位</td></tr>')
+        if ai >= 20 and ac == 0 and ap_ and ap_ <= 20.5:
+            advice.append(f"{r['slug']}: 表示{ai}でクリック0。{ap_:.0f}位まで来ているので、"
+                          "タイトルに「検索結果に出せないもの」を置く")
+        elif ai >= 20 and ap_ and ap_ > 20.5:
+            advice.append(f"{r['slug']}: 表示{ai}だが{ap_:.0f}位。内部リンクを足して順位を上げる")
+    adv = ""
+    if advice:
+        adv = ("<h3>次にやること</h3><ul style=\"font-size:9pt\">"
+               + "".join(f"<li>{x}</li>" for x in advice[:5]) + "</ul>")
+    return ('<table><tr><th>記事 / キーワード</th><th style="width:14%">直した日</th>'
+            '<th style="width:14%">表示</th><th style="width:13%">クリック</th>'
+            '<th style="width:12%">順位改善</th></tr>' + out + "</table>" + adv)
+
+
 def weekly_blocks(domain, weeks_n=8):
     """月次にも週単位の順位推移を入れる。
 
@@ -1560,6 +1597,7 @@ def render(d, a):
     # 週単位の推移と、次に狙う語。月の合計だけでは月中の動きが見えない
     weekly_chart, _ = weekly_blocks(site_cfg().get('domain', ''))
     picked_kw = picked_kw_table(SITE_ID)
+    effect_table_html = effect_table()
 
     rank_rows = ""
     rimp = d.get("rank_imp", {})
@@ -2206,6 +2244,14 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <div class="sec" style="margin-top:16px"><span class="no">12</span><h2>次に狙う検索語と、選んだ理由</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">台帳で「未着手」の語。同じ順位でもクリック率は5倍違うため、<b>検索結果で用が済む語か</b>を機械で判定しています。</p>
 {picked_kw}
+</div>
+
+<!-- ページ: 直した記事の効果 -->
+<div class="sheet">
+<div class="sec"><span class="no">13</span><h2>直した記事の効果</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">直した日を起点に、前後で同じ日数を比べています。
+<b>「対策した」と「効果があった」は別</b>なので、数字で確かめます。順位は改善を正の値で表示。</p>
+{effect_table_html}
 </div>
 
 <!-- オウンドメディア改修プラン -->

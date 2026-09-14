@@ -246,6 +246,23 @@ svg { width:100%; height:auto; }
 """
 
 
+def effect_rows(days=30):
+    """直した記事が、その後どうなったか。
+
+    「対策した」と「効果があった」は別物である。直した日を起点に
+    前後で同じ日数を比べれば、効いたかどうかが数字で出る。
+    """
+    try:
+        import effect
+        rows = effect.collect(days)
+    except Exception:
+        return [], []
+    done = [r for r in rows if "before" in r]
+    done.sort(key=lambda r: -(r["after"][0] - r["before"][0]))
+    waiting = [r for r in rows if "wait" in r]
+    return done[:7], waiting
+
+
 def cover(ws):
     """表紙。月次レポートと同じ体裁に揃える"""
     return f"""<div class="sheet cover-page">
@@ -337,6 +354,52 @@ def html(ws, site_rows, kw_pos, picks, conf, funnel_txt):
 </div>""")
         n += 1
 
+
+    done, waiting = effect_rows()
+    if done:
+        rows = ""
+        advice = []
+        for r in done:
+            bi, bc, bp = r["before"]
+            ai, ac, ap_ = r["after"]
+            dp = (bp - ap_) if (bp and ap_) else 0
+            rows += (f'<tr><td>{esc(r["slug"])[:26]}</td><td>{r["when"]}</td>'
+                     f'<td class="num">{bi}→{ai}</td><td class="num">{bc}→{ac}</td>'
+                     f'<td class="num">{dp:+.1f}</td></tr>')
+            for q, i, c, pos in r["queries"][:1]:
+                rows += (f'<tr><td colspan="2" style="padding-left:18px;color:#6b7c93">'
+                         f'↳ {esc(q)[:30]}</td><td class="num">{i}</td>'
+                         f'<td class="num">{c}</td><td class="num">{pos:.1f}位</td></tr>')
+            # 改善の指示は数字から導く。感想を書かない
+            if ai >= 20 and ac == 0 and ap_ and ap_ <= 20.5:
+                advice.append(f"{r['slug']}: 表示{ai}でクリック0。"
+                              f"{ap_:.0f}位まで来ているので、タイトルに"
+                              "「検索結果に出せないもの」を置く")
+            elif ai >= 20 and ap_ and ap_ > 20.5:
+                advice.append(f"{r['slug']}: 表示{ai}だが{ap_:.0f}位。"
+                              "内部リンクを足して順位を上げる")
+            elif ai < bi:
+                advice.append(f"{r['slug']}: 表示が{bi}から{ai}へ減った。"
+                              "直した内容が検索意図とずれていないか見直す")
+        adv = ""
+        if advice:
+            adv = ("<h3>次にやること</h3><ul style='font-size:9pt'>"
+                   + "".join(f"<li>{esc(x)}</li>" for x in advice[:6]) + "</ul>")
+        h.append(f"""<div class="sheet">
+<div class="sec"><span class="no">{n:02d}</span>
+<h2>直した記事の効果</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">直した日を起点に、前後で同じ日数を比べています。
+<b>「対策した」と「効果があった」は別</b>なので、数字で確かめます。
+順位は改善を正の値で表示しています。</p>
+<table><tr><th>記事 / キーワード</th><th style="width:15%">直した日</th>
+<th style="width:15%">表示</th><th style="width:14%">クリック</th>
+<th style="width:12%">順位改善</th></tr>{rows}</table>
+{adv}
+<p class="note">直した効果のほかに、季節や競合の動きも混ざります。
+1本ごとの増減より全体の傾向で見てください。
+判定待ち（直してから7日未満）が{len(waiting)}本あります。</p>
+</div>""")
+        n += 1
     if funnel_txt:
         h.append(f"""<div class="sheet">
 <div class="sec"><span class="no">{n:02d}</span>
