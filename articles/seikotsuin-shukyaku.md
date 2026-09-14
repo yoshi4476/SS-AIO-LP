@@ -46,8 +46,6 @@ diagrams:
 関連して、[クリニックの集客事例5選｜成功パターンと始め方](/ai-marketing/clinic-shukyaku-jirei/)もあわせてご確認ください。
 つまずきやすい点を先に押さえるなら、[整骨院の集客イベント5選｜広告規制内でできる企画と注意点](/ai-marketing/seikotsuin-shukyaku-event/)が参考になります。
 
-実際の例は[整骨院の集客成功事例5選｜院の規模で変わる打ち手と注意点](/ai-marketing/seikotsuin-shukyaku-jirei/)でも扱っています。
-
 あわせて[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)もご覧ください。
 
 <div class="definition-box"><span class="term">整骨院の集客とは</span>、「地域名×整骨院」「駅名×接骨院」といった検索でGoogleマップから来院を呼び込む保険施術の導線と、骨盤矯正・姿勢矯正・産後ケアといった自由診療メニューをウェブサイトやSNSで専門性訴求する導線の、2本立てで組み立てる取り組みのことです。==同じ院でも保険施術と自由診療では、患者さんの検討プロセスも訴求の仕方も別物==になります。</div>
@@ -111,8 +109,6 @@ diagrams:
 
 
 関連して、[歯科医院の閉院費用とは？相場と見落としがちな3つの後始末](/meo/shika-heiin-hiyou/)もあわせてご確認ください。
-同じ地域密着型でも歯科医院は競合数と単価が異なります。[歯科医院の集客方法とは？新患を増やす5つの基本施策](/ai-marketing/shika-iin-shukyaku/)で違いを整理しています。
-
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html" target="_blank" rel="noopener">厚生労働省の案内</a>によると、健康保険が使えるのは**骨折・脱臼・打撲・捻挫（肉ばなれを含む）の施術を受けた場合**に限られます。単なる肩こりや筋肉疲労に対する施術は保険の対象にならず、全額自己負担です。この線引きは、集客の見せ方にもそのまま関わってきます。
 
 保険施術の窓口では、患者が自己負担分だけを支払い、残りを整骨院が保険者に請求する「受領委任払い」という仕組みが使われています。

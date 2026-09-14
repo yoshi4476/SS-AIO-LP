@@ -51,7 +51,7 @@ faq:
 経理効率化とは、記帳・請求・支払い・決算といった経理業務の手間や時間を、仕組みの見直しで減らす取り組み全般を指します。
 
 
-関連して、[銀行口座の記帳のやり方｜振込・引き落とし4パターンの仕訳](/blog/ginko-kicho-yarikata/)もあわせてご確認ください。
+あわせて[銀行口座の記帳のやり方｜振込・引き落とし4パターンの仕訳](/blog/ginko-kicho-yarikata/)もご覧ください。
 <div class="definition-box"><span class="term">経理効率化とは</span>、経理担当者の作業時間そのものを短縮し、月次決算のスピードとミスの少なさを両立させる取り組みを指します。==ツール導入だけでなく、業務フローの見直しも含みます。==</div>
 
 東京商工会議所が2025年1月10日に公表した<a href="https://www.tokyo-cci.or.jp/page.jsp?id=1205152" target="_blank" rel="noopener">「中小企業のデジタルシフト・DX実態調査」</a>（対象10,000社・回答1,218社）があります。**デジタル化・DXの効果として「業務効率化（コスト削減、時間短縮、ミス防止等）」を挙げた企業は81.0%**にのぼりました。
@@ -67,7 +67,7 @@ faq:
 クラウド会計への切り替えは、銀行明細やカード情報の自動取り込みで入力作業そのものを減らす事例です。
 
 
-関連して、[freeeの経費精算のやり方｜申請から承認までの4ステップ](/blog/freee-keihi-seisan-yarikata/)もあわせてご確認ください。
+関連する内容として[freeeの経費精算のやり方｜申請から承認までの4ステップ](/blog/freee-keihi-seisan-yarikata/)も公開しています。
 <figure><img src="/images/keiri-koritsuka-jirei/jirei4.png" alt="経理効率化の4つの事例: クラウド会計に切り替える、定型業務を自動化する、業務フローを見直す、経理BPOを活用する" loading="lazy"><figcaption>経理効率化の4つの事例</figcaption></figure>
 
 株式会社ＭＭ総研が2026年4月21日に公表した<a href="https://www.m2ri.jp/release/detail.html?id=711" target="_blank" rel="noopener">「クラウド会計ソフトの利用状況調査（2026年3月末）」</a>があります。**個人事業主のクラウド会計利用率は38.4%**でした。前年同時期の38.3%からさらに拡大しています。

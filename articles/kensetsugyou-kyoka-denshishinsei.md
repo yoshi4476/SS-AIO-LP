@@ -52,7 +52,7 @@ faq:
 **建設業許可の電子申請とは、国土交通省が運営する「JCIP」を使って許可・経審の手続きをインターネット経由で行うことです。**窓口に出向かなくても、24時間好きなタイミングで申請書を作成・提出できます。
 
 
-関連して、[福岡県の建設業電子申請「JCIP」窓口と手数料の注意点3つ](/blog/fukuoka-kensetsugyou-denshishinsei/)もあわせてご確認ください。
+つまずきやすい点は[福岡県の建設業電子申請「JCIP」窓口と手数料の注意点3つ](/blog/fukuoka-kensetsugyou-denshishinsei/)でも扱っています。
 <div class="definition-box"><span class="term">JCIPとは</span>、正式名称「建設業許可・経営事項審査電子申請システム」の略称です。<a href="https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/tochi_fudousan_kensetsugyo_const_tk1_000001_00019.html" target="_blank" rel="noopener">国土交通省の案内</a>によると、**2023年1月から建設業許可・経営事項審査の電子申請の受付が始まりました。**</div>
 
 <a href="https://prod.jcip.mlit.go.jp/TO/TO00001" target="_blank" rel="noopener">JCIP公式サイト</a>では、ログインにGビズIDによる認証が必要と案内されています。窓口に出向く従来の書面申請も、多くの都道府県で並行して選べる状態が続いています。
@@ -120,7 +120,7 @@ GビズIDでログインし、画面の案内に沿って申請書を作成し�
 **JCIPは全国共通のシステムですが、都道府県ごとに運用開始時期や手数料の払い方が異なります。**他県の情報をそのまま自社の管轄にあてはめると、開始時期や納付方法が食い違うことがあります。
 
 
-関連して、[神奈川県のJCIP電子申請｜通知書はPDFと郵送どちらも選べる](/blog/kanagawa-kensetsugyou-denshishinsei/)もあわせてご確認ください。
+あわせて[神奈川県のJCIP電子申請｜通知書はPDFと郵送どちらも選べる](/blog/kanagawa-kensetsugyou-denshishinsei/)もご覧ください。
 | 都道府県 | 電子申請の開始時期 | 手数料の払い方 |
 |:--|:--|:--|
 | 神奈川県 | 2023年1月10日 | ペイジーのみ |

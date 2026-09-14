@@ -60,7 +60,7 @@ faq:
 **経審・建設業許可の電子申請システム「JCIP」は国土交通省が運営する無料の行政ポータルで、IT導入補助金の対象にはなりません。**購入する製品ではなく、行政手続きの窓口そのものだからです。
 
 
-関連して、[建設業許可の電子申請｜JCIPでできる3手続きと5ステップ](/blog/kensetsugyou-kyoka-denshishinsei/)もあわせてご確認ください。
+実際の進め方については、[建設業許可の電子申請｜JCIPでできる3手続きと5ステップ](/blog/kensetsugyou-kyoka-denshishinsei/)にまとめています。
 <div class="definition-box"><span class="term">JCIPとは</span>、正式名称「建設業許可・経営事項審査電子申請システム」の略称です。<a href="https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/tochi_fudousan_kensetsugyo_const_tk1_000001_00019.html" target="_blank" rel="noopener">国土交通省の案内</a>によると、**2023年1月10日から運用が始まり**、建設業許可や経営事項審査の申請・届出をインターネット経由で行えます。</div>
 
 <a href="https://prod.jcip.mlit.go.jp/TO/TO00001" target="_blank" rel="noopener">JCIP公式サイト</a>では、ログインにGビズIDでの認証が必要と案内されています。申請手数料は窓口での現金納付ではなく、Pay-easyによる電子納付を使います。
@@ -74,8 +74,6 @@ faq:
 **IT導入補助金の対象になるのは、事務局にITツールとして登録された、民間の電子契約・電子受発注クラウドサービスの利用料です。**JCIPのような行政システムとは対象の性質が異なります。
 
 対象になるには、販売元が「IT導入支援事業者」として事務局に登録され、扱うツールも公式のITツール一覧に載っている必要があります。**登録の有無は、契約前にIT導入支援事業者へ確認するのが確実です。**
-
-施工管理アプリの中にも、電子契約機能を備えたものが増えています。ツール分野ごとの選び方は[建設業の2024年問題をAI導入補助金でどう埋めるか](/blog/ai-hojokin-kensetsugyou-katsuyou/)で解説しているので、施工管理・積算まで含めた全体像はそちらを参考にしてください。
 
 <figure><img src="/images/kensetsugyou-denshishinsei-system/jcip-vs-tool.png" alt="JCIPと電子契約ツールの違い: JCIPは国交省の行政ポータルで利用無料・経審や建設業許可の申請専用、電子契約・受発注ツールは民間のクラウドサービスで有料・契約書や見積書のやり取りに使う" loading="lazy"><figcaption>JCIPと電子契約ツールの違い</figcaption></figure>
 

@@ -96,7 +96,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 ツールを使った経理の仕事効率化は、クラウド会計・経費精算システム・RPA/AI-OCRの3領域に分かれます。
 
 
-関連して、[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)もあわせてご確認ください。
+関連する内容として[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)も公開しています。
 <figure><img src="/images/keiri-shigoto-koritsuka/tool3.png" alt="ツールで効率化できる3つの領域: クラウド会計による入力の自動化、経費精算システムによる申請・承認の効率化、RPA・AI-OCRによる転記の自動化" loading="lazy"><figcaption>ツールで効率化できる3つの領域</figcaption></figure>
 
 | 領域 | できること | 向いている業務 |

@@ -402,6 +402,45 @@ def test_improvements_apply_themselves():
     check("一度に触る本数を制限している", "最大5本" in pr, True)
 
 
+def test_auto_fixes_are_reviewed():
+    """自動で当てた修正が、必ず見直されること。
+
+    当てる側は1本ずつしか見ないため、積み上がりを検知できない。実測では
+    「関連して、[X]もあわせてご確認ください。」という同じ一文が内部リンク文
+    970本中403本（41.5%）を占め、1記事に11本並んだものまであった。
+    1本単位では基準内でも、全体で見れば量産の指紋になる。
+    """
+    check("見直し役がある", (ROOT / "scripts" / "auto_review.py").is_file(), True)
+    rv = (ROOT / "scripts" / "auto_review.py").read_text(encoding="utf-8")
+    im = (ROOT / "scripts" / "auto_improve.py").read_text(encoding="utf-8")
+
+    # 当てたら自動で見直しへ繋ぐ。人の判断に委ねると忙しい週に飛ばされる
+    check("自動修正のあと見直しが走る", "auto_review.py" in im, True)
+    # 検算なしで書き込むと、パターンの取りこぼしが本番の記事を壊す
+    check("書き込む前に検算する", "def guard" in rv, True)
+    for keep in ("cta-button", "diagnosis", "contact"):
+        check(f"リード導線「{keep}」は削除対象から外す", keep in rv, True)
+    check("HTMLタグの開閉数を見る", "</figure>" in rv, True)
+    check("台帳に残す", "auto_fix.jsonl" in rv and "auto_fix.jsonl" in im, True)
+    check("ビルドの機械ゲートに通す", "build.py" in rv, True)
+
+    # 言い回しを自前で書くスクリプトがあると、その一文がサイト中に並ぶ
+    for f in ("auto_improve.py", "link_boost.py"):
+        src = (ROOT / "scripts" / f).read_text(encoding="utf-8")
+        check(f"{f} は自前の定型文を書かない",
+              "もあわせてご確認ください" in src, False)
+        check(f"{f} は link_new の型を使う", "ln.sentence" in src, True)
+
+    # サイト全体の偏りを測れること（記事単位の基準では捕まらない）
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import auto_review as ar
+    check("全体の偏りに上限がある", ar.MAX_SHARE <= 0.2, True)
+    check("1記事のリンク段落に上限がある", ar.MAX_LINK_PARA <= 6, True)
+
+    doc = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    check("パイプライン定義に載っている", "自動修正と、その見直し" in doc, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -414,7 +453,8 @@ def main():
               test_cta_wording_is_measured_not_guessed,
               test_each_site_declares_what_it_sells,
               test_next_keyword_prefers_main_offer,
-              test_improvements_apply_themselves):
+              test_improvements_apply_themselves,
+              test_auto_fixes_are_reviewed):
         try:
             t()
         except Exception as e:

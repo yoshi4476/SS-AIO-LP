@@ -24,6 +24,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
 sys.path.insert(0, str(ROOT / "scripts"))
+import auto_review as ar  # noqa: E402
+import cannibal_check as cc  # noqa: E402
+import link_new as ln  # noqa: E402
 
 LINK = re.compile(r"\]\((?:https?://[^/)]+)?(/[a-z0-9-]+/([a-z0-9-]+)/)\)")
 # しきい値。実測に合わせる。90日間で一度も検索結果に出ていない88本は
@@ -169,7 +172,12 @@ def main():
             if pos is None:
                 continue
             url = f"/blog/{tgt}/" if site != "ai-lab" else f"/{a['cat']}/{tgt}/"
-            line = (f"\n関連して、[{a['title']}]({url})もあわせてご確認ください。\n")
+            # 言い回しは link_new の型から選ぶ。ここで自前の一文を書くと、
+            # 同じ文がサイト中に並ぶ。実測で1つの型が全体の41.5%を占めた
+            h2 = ar.h2_before(b["body"], pos)
+            fit = cc.dice(ln.topic(h2), ln.topic(a["title"])) if h2 else 0.0
+            line = "\n" + ln.sentence(a["title"], url,
+                                      abs(hash(src + tgt)) % 8, fit) + "\n"
             print(f"   {tgt[:34]:<36}← {src[:32]}")
             if write:
                 nb = b["body"][:pos] + line + b["body"][pos:]

@@ -146,13 +146,11 @@ faq:
 つまずきやすい点については、[自動車整備業のIT導入補助金2026｜スキャンツールは対象外になる理由](/blog/it-hojokin-jidousha-seibi/)にまとめています。
 
 
-関連して、[小規模事業者持続化補助金｜飲食店で対象になる4つの投資](/blog/jizokuka-hojokin-inshokuten-jirei/)もあわせてご確認ください。
+対象になる範囲については、[小規模事業者持続化補助金｜飲食店で対象になる4つの投資](/blog/jizokuka-hojokin-inshokuten-jirei/)にまとめています。
 
 対象になる範囲は、[学習塾はIT導入補助金の対象？入退室通知と課金の境界線](/blog/it-hojokin-gakushujuku/)で解説しています。
 
 対象になる範囲は[宿泊業のIT導入補助金は有利？20人以下特例と対象ツール](/blog/it-hojokin-shukuhakugyou/)でも扱っています。
-
-関連する内容は[飲食店のIT導入補助金｜名称変更後の3つの確認点](/blog/it-hojokin-inshokuten/)で整理しています。
 
 | 項目 | IT導入補助金（通常枠） | 小規模事業者持続化補助金 |
 |:--|:--|:--|

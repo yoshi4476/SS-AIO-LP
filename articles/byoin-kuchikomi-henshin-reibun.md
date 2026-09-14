@@ -57,7 +57,7 @@ diagrams:
 **医療機関の口コミ返信の原則は、守秘義務の遵守と誇大表現の回避の2つです。**この2点さえ外さなければ、返信の言い回しに迷う場面は大きく減ります。
 
 
-関連して、[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)もあわせてご確認ください。
+関連する内容として[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)も公開しています。
 <div class="definition-box"><span class="term">守秘義務とは</span>、診療で知り得た患者の情報を第三者に明かさない義務のことです。口コミへの返信も公開の場での発信であるため、投稿者が患者であることや受診内容を返信文でうかがわせるだけで違反になり得ます。</div>
 
 <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人を対象）によると、**地域の医療機関などを探す消費者の71%が口コミを日常的に読み**、確認先としては**83%がGoogleを使う**と回答しています。体への不安を伴う受診先選びでは、口コミの一言一句がより慎重に読まれると考えてください。

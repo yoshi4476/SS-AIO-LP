@@ -136,7 +136,7 @@ faq:
 個人の不動産集客は、発信の準備、実績の蓄積、紹介の仕組み化という3ステップで安定させます。
 
 
-関連して、[OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](/ai-marketing/obkyaku-shoukai-shikumi/)もあわせてご確認ください。
+近い論点を[OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](/ai-marketing/obkyaku-shoukai-shikumi/)で扱っています。
 <figure><img src="/images/fudousan-kojin-shukyaku/steps.png" alt="個人の不動産集客を仕組み化する3ステップ: 顔を出すでプロフィールと得意分野を明示する、実績を残すで成約事例を1件ずつ蓄積する、紹介を仕組み化するでOB客への定期連絡をルール化する" loading="lazy"><figcaption>個人の不動産集客を仕組み化する3ステップ</figcaption></figure>
 
 ### ステップ1: 顔を出す

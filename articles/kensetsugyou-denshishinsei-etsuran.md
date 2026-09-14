@@ -50,7 +50,7 @@ faq:
 **建設業の電子申請を閲覧する方法は、申請書類を見る「JCIP電子閲覧システム」と経審の点数を見る「CIIC」の2つです。**同じ「経審」を指していても、見たい情報によって使う窓口が変わります。
 
 
-関連して、[建設業許可の電子申請｜JCIPでできる3手続きと5ステップ](/blog/kensetsugyou-kyoka-denshishinsei/)もあわせてご確認ください。
+実際の進め方については、[建設業許可の電子申請｜JCIPでできる3手続きと5ステップ](/blog/kensetsugyou-kyoka-denshishinsei/)にまとめています。
 つまずきやすい点は[大阪府のJCIP電子申請｜GビズID取得に2週間かかる注意点](/blog/osaka-kensetsugyou-denshishinsei/)で整理しています。
 
 選ぶときの基準を先に押さえるなら、[神奈川県のJCIP電子申請｜通知書はPDFと郵送どちらも選べる](/blog/kanagawa-kensetsugyou-denshishinsei/)が参考になります。
@@ -151,8 +151,6 @@ JCIPとCIICのどちらを見るべきか迷ったときは、「これから申
 下請け20社と取引する会社なら、契約前に毎回JCIPとCIICを確認する運用にしておくだけでも効果があります。**許可切れや経審の期限切れに気づかないまま契約するリスクを減らせるからです。**確認の手間は数分で終わるため、発注前のチェックリストに組み込んでしまうのが実務的です。
 
 なお、電子閲覧システムそのものはJCIPが無料で提供する行政サービスのため、IT導入補助金などの補助対象にはなりません。**一方で、協力会社とのやり取りを電子契約・電子受発注に切り替える取り組みは、通常枠で補助率1/2以内・上限450万円の対象になり得ます。**
-
-対象になる範囲の詳しい判断基準は前述の関連記事で解説しています。施工管理や積算まで含めたIT活用の全体像は[建設業の2024年問題をAI導入補助金でどう埋めるか](/blog/ai-hojokin-kensetsugyou-katsuyou/)でも整理しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

@@ -72,7 +72,7 @@ faq:
 2026年の交付申請でIT戦略ナビwithは必須要件ではなく、加点対象の任意項目という位置づけです。実施しなくても申請自体は可能です。
 
 
-関連して、[AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ](/blog/ai-hojokin-security-action-hoshi2/)もあわせてご確認ください。
+実際の進め方については、[AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ](/blog/ai-hojokin-security-action-hoshi2/)にまとめています。
 <a href="https://hojyokin-portal.jp/columns/degital_ai_summary" target="_blank" rel="noopener">補助金ポータルが整理したデジタル化・AI導入補助金2026の概要</a>では、**GビズIDプライムとSECURITY ACTION（★一つ星または★★二つ星）の宣言が全類型で必須要件とされる一方、IT戦略ナビwithの実施は加点項目**と説明されています。<span class="term">GビズIDプライムとは行政サービスに使える法人・個人事業主向けの共通認証、SECURITY ACTIONとは中小企業向けの情報セキュリティ対策の自己宣言制度</span>で、いずれも交付申請前に取得しておく前提の仕組みです。みらデジ経営チェックが必須だった2024年度から、位置づけが変わった形です。
 
 | 項目 | みらデジ経営チェック（〜2025年3月） | IT戦略ナビwith（2025年4月〜） |

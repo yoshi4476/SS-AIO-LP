@@ -51,7 +51,7 @@ faq:
 
 実際の進め方は[クリニックの電話予約のやり方｜受付が聞く5項目と対応の流れ](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でも扱っています。
 
-関連して、[クリニックのホームページに必須の項目とは？外せない6要素](/seo/clinic-hp-hissu-koumoku/)もあわせてご確認ください。
+近い論点を[クリニックのホームページに必須の項目とは？外せない6要素](/seo/clinic-hp-hissu-koumoku/)で扱っています。
 
 <div class="definition-box"><span class="term">クリニックのインスタ集客とは</span>、Instagramのビジネスアカウントで院内風景・スタッフ紹介・健康コラムなどを発信し、フォロワーとの接点を積み上げて来院や指名検索につなげる一連の活動を指します。症例の誇張や体験談の投稿ではなく、事実に基づく発信の継続が土台になります。</div>
 
@@ -73,7 +73,7 @@ faq:
 クリニックにインスタ集客が必要な理由は、無料で始められ、通院前の不安を減らせるからです。
 
 
-関連して、[歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応](/meo/shika-reform-hiyou/)もあわせてご確認ください。
+関連する内容として[歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応](/meo/shika-reform-hiyou/)も公開しています。
 <figure><img src="/images/clinic-instagram-yarikata/riyu.png" alt="クリニックにインスタ集客が必要な3つの理由: 無料で始められる、通院前の不安を減らせる、スタッフの人柄が伝わる" loading="lazy"><figcaption>クリニックにインスタ集客が必要な3つの理由</figcaption></figure>
 
 <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、口コミの確認先としては**83%がGoogleを利用**しています。体への不安を伴う医療機関選びでは、この確認行動はさらに慎重になります。
@@ -140,7 +140,7 @@ faq:
 クリニックのインスタ投稿では、説明のない術前術後写真や治療の体験談が医療広告ガイドライン違反に当たります。
 
 
-関連して、[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)もあわせてご確認ください。
+近い論点を[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)で扱っています。
 <figure><img src="/images/clinic-instagram-yarikata/ngok.png" alt="医療広告ガイドラインのNG例とOK例: NG例は説明なしの術前術後写真・治療効果の体験談・断定表現、OK例は院内・スタッフの紹介・一般的な治療の選択肢説明・説明付きの症例掲載" loading="lazy"><figcaption>医療広告ガイドラインのNG例とOK例</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: ビフォーアフター写真と体験談は原則NG</span><br><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">厚生労働省の医療広告ガイドライン</a>では、治療内容・費用・リスクの説明を伴わない術前術後の比較写真や、患者の体験談は禁止表現として扱われます。SNS投稿もWebサイトと同じ「広告」の規制対象です。</div>
@@ -156,7 +156,7 @@ faq:
 クリニックインスタ集客でよくある失敗は、個人運用のまま放置・症例写真だけ・更新停止の3パターンです。
 
 
-関連して、[工務店のWeb集客とは？5つの施策と始める順番](/ai-marketing/koumuten-web-shukyaku/)もあわせてご確認ください。
+あわせて[工務店のWeb集客とは？5つの施策と始める順番](/ai-marketing/koumuten-web-shukyaku/)もご覧ください。
 失敗1は、**個人アカウントのまま院長個人が運用してしまうこと**です。担当者の異動や退職時に引き継げず、実績が個人に紐づいたままになります。
 
 失敗2は、**症例写真だけを説明なしで並べること**です。規制違反のリスクだけでなく、人柄が見えないため他院との違いも伝わりません。

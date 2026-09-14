@@ -45,7 +45,7 @@ diagrams:
 **クリニックのAIO対策とは、生成AIの受診先紹介で自院が引用・言及される状態をつくる取り組みです。**AIO（AI Overview Optimization）・AI検索対策・LLMO はいずれもほぼ同じ取り組みを指し、呼び方が違うだけと考えて構いません。
 
 
-関連して、[整骨院のホームページ集客｜予約につながる5つの必須要素](/ai-marketing/seikotsuin-hp-shukyaku/)もあわせてご確認ください。
+近い論点を[整骨院のホームページ集客｜予約につながる5つの必須要素](/ai-marketing/seikotsuin-hp-shukyaku/)で扱っています。
 選ぶときの基準については、[AI検索とは？AIO対策との違いと5種類の対応ポイント](/aio/aio-taisaku-ai-kensaku/)にまとめています。
 
 <div class="definition-box"><span class="term">クリニックのAI検索対策とは</span>、患者が「地域名+診療科」や「症状 病院」とAIチャットに尋ねたとき、自院の情報が回答の候補として紹介されるよう、ホームページやGoogleビジネスプロフィールの情報を整備することです。従来のSEO・MEO対策と対立するものではなく、両方の土台の上に成り立ちます。</div>
@@ -93,7 +93,7 @@ AI検索エンジンは、検索上位のページとマップ情報を突き合
 AI検索対応の手順は、情報の具体化・表記統一・実名開示・規制準拠・計測という5段階で進めます。
 
 
-関連して、[整骨院の費用は保険でいくら？自己負担3割の目安と相場](/seo/seikotsuin-hiyou-hoken/)もあわせてご確認ください。
+関連する内容として[整骨院の費用は保険でいくら？自己負担3割の目安と相場](/seo/seikotsuin-hiyou-hoken/)も公開しています。
 費用の目安は、[AIO導入のメリット5つと費用相場｜投資対効果の考え方](/aio/aio-taisaku-merit-hiyou/)で解説しています。
 
 <figure><img src="/images/clinic-ai-kensaku-taisaku/steps.png" alt="クリニックがAI検索に対応する5つの手順: 診療科目を具体語で書く、HPとGBPの表記を統一する、医師の経歴を実名で明記する、医療広告ガイドラインに準拠する、AI経由の流入を計測する" loading="lazy"><figcaption>クリニックがAI検索に対応する5つの手順</figcaption></figure>
@@ -129,7 +129,7 @@ Search Consoleの生成AIパフォーマンスレポートと、GA4のAI参照�
 AI検索対応で最も見落とされやすいのは、AIが参照する元情報自体が医療広告ガイドラインに抵触しているケースです。
 
 
-関連して、[整骨院のSEO対策とは？MEOと役割分担する5つの手順](/seo/seikotsuin-seo-taisaku/)もあわせてご確認ください。
+あわせて[整骨院のSEO対策とは？MEOと役割分担する5つの手順](/seo/seikotsuin-seo-taisaku/)もご覧ください。
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>は、ホームページも広告規制の対象に含めています。AIは公開されている文章をそのまま要約・引用するため、==体験談や誇大表現を含むページはAIの回答にもその表現ごと反映されるリスクがあります==。ガイドラインの詳しい内容と禁止6表現は[医療広告ガイドラインとは？クリニックHPの禁止6表現](/seo/iryou-koukoku-guideline-web/)で解説しています。
 
 <div class="caution-box"><span class="box-title">注意: AI向けに「盛った表現」は逆効果</span><br>AIに選ばれたいからといって効果を誇張すると、ガイドライン違反のリスクと、AIが不正確な情報として引用を避けるリスクの両方を抱えます。事実を具体的に書き切ることが、規制順守とAI検索対策を同時に満たす唯一の道です。</div>
@@ -156,7 +156,7 @@ AI検索対応で最も見落とされやすいのは、AIが参照する元情�
 **同じクリニックでも、診療科によってAIに聞かれる内容が変わります。**そこに答えていないと、対策していても引用されません。
 
 
-関連して、[整骨院の費用は医療費控除の対象になる？対象外との違い3つ](/seo/seikotsuin-hiyou-iryouhikojo/)もあわせてご確認ください。
+関連する内容として[整骨院の費用は医療費控除の対象になる？対象外との違い3つ](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
 | 診療科 | よく聞かれる形 | 用意しておくもの |
 |:--|:--|:--|
 | 内科・小児科 | 「この症状は何科か」 | **症状から受診先を案内するページ** |

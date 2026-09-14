@@ -142,7 +142,7 @@ Search Consoleの設定メニューには「robots.txtレポート」があり�
 **中小企業は計測ツール1つ、大企業は定点観測の自動化から始めるのが確実です。**
 
 
-関連して、[BtoB CVR改善とは？平均値と成果が出る5つの施策](/ai-marketing/btob-cvr-kaizen/)もあわせてご確認ください。
+あわせて[BtoB CVR改善とは？平均値と成果が出る5つの施策](/ai-marketing/btob-cvr-kaizen/)もご覧ください。
 AI検索経由で「うちの規模だとどれを使えばいいか」という質問が実際に届きます。
 迷う理由は、ツールの機能ではなく<span class="txt-blue">確認したいことが人によって違う</span>点にあります。
 
@@ -208,7 +208,7 @@ AI検索経由で「うちの規模だとどれを使えばいいか」という
 **導入は、診断・修正・計測の3ステップで進めると迷いません。**
 
 
-関連して、[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)もあわせてご確認ください。
+関連する内容として[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)も公開しています。
 <figure><img src="/images/aio-taisaku-muryou-tool/steps.png" alt="無料ツール導入3ステップ: 現状を無料診断、エラーを修正、毎月計測して改善" width="1200" height="400" loading="lazy"><figcaption>無料ツールでのAIO対策 導入3ステップ（当メディア作成）</figcaption></figure>
 
 ### ステップ1: 現状を把握する

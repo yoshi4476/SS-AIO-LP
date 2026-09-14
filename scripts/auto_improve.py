@@ -73,22 +73,43 @@ def add_links(slug, texts, want=3, write=False):
         if hits >= max(1, len(words) - 1):
             cands.append((hits, len(body), s))
     cands.sort(reverse=True)
+    import auto_review as ar
+    import cannibal_check as cc
+    import link_new as ln
     done = []
-    line = ("\n関連して、[%s](%s)もあわせてご確認ください。\n" %
-            (ttl, url if url.startswith("http") else url))
     for _, _, s in cands[:want]:
         t = texts[s]
         m = list(re.finditer(r"^## .+$", t, re.M))
         if len(m) < 3:
             continue
         pos = m[len(m) // 2].start()          # 中ほどの見出しの前に置く
+        # 言い回しは link_new の型から選ぶ。自前の一文をここで書くと、
+        # 同じ文がサイト中に並ぶ。実測で1つの型が全体の41.5%を占めた
+        h2 = ar.h2_before(t, pos)
+        fit = cc.dice(ln.topic(h2), ln.topic(ttl)) if h2 else 0.0
+        line = ln.sentence(ttl, url, abs(hash(s + slug)) % 8, fit)
         if write:
             p = ROOT / "articles" / f"{s}.md"
-            p.write_text(t[:pos] + line.lstrip("\n") + "\n" + t[pos:],
+            p.write_text(t[:pos] + line + "\n\n" + t[pos:],
                          encoding="utf-8", newline="")
             texts[s] = p.read_text(encoding="utf-8")
+            record("auto_improve", s, "%s へ内部リンク（%s）" % (slug, line[:24]))
         done.append(s)
     return len(done), done
+
+
+LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
+
+
+def record(by, slug, what):
+    """当てた修正を1行ずつ残す。後から何をしたか追えないと見直せない"""
+    import datetime
+    import json
+    LOG.parent.mkdir(parents=True, exist_ok=True)
+    with open(LOG, "a", encoding="utf-8", newline="") as f:
+        f.write(json.dumps({"when": datetime.datetime.now().isoformat(),
+                            "by": by, "slug": slug, "what": what},
+                           ensure_ascii=False) + "\n")
 
 
 def main():
@@ -134,6 +155,18 @@ def main():
             print("   …ほか%d件" % (len(hand) - 8))
     if not a.write:
         print("\n  --write を付けると内部リンクを実際に足します")
+        return 0
+
+    # 当てたら必ず見直す。1本ずつは正しくても、積み上がると記事が壊れる。
+    # 見直しを人の判断に委ねると、忙しい週に飛ばされて溜まっていく
+    print()
+    import subprocess
+    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "auto_review.py"),
+                        "--fix"], cwd=ROOT, text=True, encoding="utf-8",
+                       errors="ignore")
+    if r.returncode != 0:
+        print("\n  見直しで止まりました。git checkout -- articles/ で戻せます")
+        return 1
     return 0
 
 

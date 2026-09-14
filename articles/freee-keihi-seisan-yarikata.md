@@ -50,7 +50,7 @@ faq:
 **freeeの経費精算とは、従業員や経営者がスマホやWebで立て替え経費を申請し、承認を経てそのまま会計データに反映される仕組みのことです。**紙の申請書やExcelでの集計作業を減らせる点が特徴です。
 
 
-関連して、[フリーランスの経理のやり方｜請求・入金・源泉徴収の3ステップ管理](/blog/freelance-keiri-yarikata/)もあわせてご確認ください。
+関連する内容として[フリーランスの経理のやり方｜請求・入金・源泉徴収の3ステップ管理](/blog/freelance-keiri-yarikata/)も公開しています。
 <div class="definition-box"><span class="term">freeeの経費精算とは</span>、レシートの撮影・ICカード連携などで経費情報を自動入力し、申請から承認、仕訳への反映までを一連の流れとして処理する機能のことです。個人事業主から複数人の会社まで、規模を問わず使えます。</div>
 
 <figure><img src="/images/freee-keihi-seisan-yarikata/eyecatch.png" alt="freeeの経費精算のやり方｜申請から承認までの4ステップ" loading="lazy"><figcaption>freeeの経費精算は初期設定から始まる</figcaption></figure>

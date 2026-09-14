@@ -161,6 +161,12 @@ jobs:
       - name: 効果の出ていない記事を自動で手当てする
         run: python scripts/auto_improve.py --write || true
 
+      # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
+      # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。
+      # 実測で同じ一文がリンク文の41.5%を占めていた
+      - name: 自動修正の見直し（積み上がりと言い回しの偏り）
+        run: python scripts/auto_review.py --fix || true
+
       - name: CTA文言のA/B結果
         run: python scripts/ab_result.py || true
 

@@ -76,8 +76,6 @@ faq:
 
 
 関連して、[OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](/ai-marketing/obkyaku-shoukai-shikumi/)もあわせてご確認ください。
-実際の例を先に押さえるなら、[リフォーム会社のインスタグラム運用｜反響につながる投稿5パターン](/ai-marketing/reform-instagram-shukyaku/)が参考になります。
-
 実際の進め方は[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)で整理しています。
 
 <figure><img src="/images/reform-shukyaku-hoho/houhou.png" alt="リフォームの集客方法6つ: ポータルサイトへの掲載、自社サイトのSEO・MEO対策、SNSでの施工事例発信、OB客・紹介の仕組み化、チラシ・折込広告、Web広告の活用" loading="lazy"><figcaption>リフォームの集客方法6つ</figcaption></figure>
@@ -118,8 +116,6 @@ InstagramやXでビフォーアフター写真を発信すると、検討初期�
 ## オンラインとオフライン、どちらを優先すべきか
 
 集客チャネルの優先順位は、自社の商圏の広さと、主な施主の年齢層によって変わります。
-
-写真が主役になる商材では、Instagramからの導線が効きます。[住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法](/ai-marketing/jutaku-instagram-renkei/)で繋ぎ方を解説しています。
 
 <a href="https://www.homepro.jp/" target="_blank" rel="noopener">ホームプロ</a>には**加盟会社が約1,100社、クチコミが9万件以上**登録されています。比較検討の文化がすでに広く根づいていることが、この登録数からも読み取れます。
 
