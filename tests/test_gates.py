@@ -455,7 +455,8 @@ def test_client_onboarding_is_one_sheet():
     import client_add as ca
     import client_intake as ci
 
-    keys = {k for k, *_ in ci.FIELDS if not k.startswith("#")}
+    # シートは共通＋執筆材料＋被リンクで1枚。fields_for がその全部を返す
+    keys = {k for k, *_ in ci.fields_for() if not k.startswith("#")}
     # 主力商材が無いと、表示は増えても相談につながらない記事が量産される
     for k in ("main_offer", "main_category", "categories", "category_mix"):
         check(f"シートで「{k}」を聞いている", k in keys, True)
@@ -491,6 +492,33 @@ def test_client_onboarding_is_one_sheet():
     # 受託運用で、クライアントの記事に運用会社の実績が混ざらないこと
     import facts
     check("一次情報をクライアント別に読む", hasattr(facts, "load_for"), True)
+
+    # 記事を書くための材料。空だと「どこにでもある記事」になる
+    for k in ("service.list", "customer.faq", "author.name", "tone.style",
+              "target.persona", "kw.main", "kw.sub"):
+        check(f"シートで「{k}」を聞いている", k in keys, True)
+    # 被リンクは買えない。すでにある関係を掘り起こすしかない
+    for k in ("link.orgs", "link.partners", "link.press"):
+        check(f"外部との接点「{k}」を聞いている", k in keys, True)
+    # 業種が変われば必要な材料も変わる
+    check("業種別のシートがある", "restaurant" in ci.INDUSTRY, True)
+    rkeys = {k for k, *_ in ci.fields_for("restaurant") if not k.startswith("#")}
+    for k in ("shop.seats", "menu.signature", "attract.reserve", "flink.gourmet"):
+        check(f"飲食店シートで「{k}」を聞いている", k in rkeys, True)
+
+    # メイン×サブから主題が組み立つこと。同じ語の重ねは出さない
+    got2 = dict(got)
+    got2.update({"kw.main": "梅田 個室 居酒屋", "kw.sub": "梅田 宴会 個室",
+                 "kw_seeds.intents": "個室" + nl + "予約",
+                 "kw.exclude": "求人"})
+    subs = [x["keyword"] for x in ci.subjects(got2)]
+    check("サブキーワードが主題になる", "梅田 宴会 個室" in subs, True)
+    check("同じ語を重ねない", [s for s in subs if s.count("個室") > 1], [])
+    check("狙わない語を除く", [s for s in subs if "求人" in s], [])
+
+    # 執筆エージェントがこれを読めること
+    import site_brief
+    check("執筆ブリーフが材料を読む", hasattr(site_brief, "show_brief"), True)
 
 
 def main():

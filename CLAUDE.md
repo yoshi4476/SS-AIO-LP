@@ -87,7 +87,8 @@
 **ヒアリングシートを1枚埋めれば、運用に必要なものが全部そろう。**
 
 ```bash
-python scripts/client_intake.py --sheet                  # 記入用シートを作る
+python scripts/client_intake.py --sheet                  # 汎用シートを作る
+python scripts/client_intake.py --sheet restaurant       # 飲食店向け（業種別の項目つき）
 python scripts/client_intake.py <記入済み.xlsx>           # 埋まり具合を確認する
 python scripts/client_intake.py <記入済み.xlsx> --apply    # 登録する
 ```
@@ -99,7 +100,12 @@ python scripts/client_intake.py <記入済み.xlsx> --apply    # 登録する
 | `sites/<id>.json` | サイト設定（主力商材・カテゴリ配分・守備範囲・CTA・計測） |
 | `data/clients/<id>/company.json` | 会社の正規表記（著者情報・構造化データ・レポートの宛名） |
 | `data/clients/<id>/facts.json` | その会社にしか出せない一次情報 |
+| `data/clients/<id>/brief.json` | 記事を書くための材料（売り物・読者の困りごと・FAQ・著者・文体・狙う語・外部接点） |
 | `docs/kw-<id>.md` | KW計画の雛形 |
+
+**記事の自動化に効く部分**: シートの回答は `site_brief.py` が執筆時に読み込む。売っているもの・読者の困りごと・よく聞かれる質問（そのままFAQになる）・著者情報・文体・メイン/サブキーワード・外部との接点まで渡るため、「その会社にしか書けない記事」になる。**書かれていないことは書かせない**（憶測で補うと事実と違う記事が公開される）。
+
+**主題キーワードの生成**: メインKW × サブKW × 意図 × 業種 を掛け合わせて主題候補を作る（`client_intake.subjects()`）。同じ語の重なりと「狙わない語」は除外する。候補はそのまま書かず、`kw_guard`（食い合い）と `kw_intent`（開く理由）を必ず通す。
 
 **先に進ませない条件（不備として止める）**:
 - 主力商材・主力カテゴリが空 → 表示は増えても相談につながらない記事が量産される

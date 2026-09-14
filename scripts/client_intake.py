@@ -136,13 +136,301 @@ FIELDS = [
     ("note", "その他の申し送り", "競合、過去の施策、社内の事情など何でも", "", False),
 ]
 
+
+# ── 狙う語と読者 ──────────────────────────────
+# 業種×意図の掛け合わせ（5番）だけだと、機械的な組み合わせしか出ない。
+# 実際に取りたい語と、その周辺語をここで受け取り、主題を作る材料にする。
+KEYWORD = [
+    ("#target", "5-1. ターゲット（誰に読ませるか）",
+     "「誰に」がぼやけると、読まれても相談につながりません。"
+     "1人の顔が浮かぶくらい具体的に書いてください。", "", False),
+    ("target.persona", "いちばん来てほしいお客様",
+     "年齢・立場・状況を1〜2文で。社内で呼んでいる呼び方でも構いません",
+     "従業員20〜50名の会社で、経理をひとりで担当している40代の管理部長。"
+     "決算期に毎年残業が続いている", True),
+    ("target.second", "その次に来てほしい層",
+     "無ければ空欄。2つ目の読者像があれば記事の幅が広がります",
+     "これから経理担当を採用しようとしている経営者", False),
+    ("target.area", "商圏・エリア",
+     "地域名を含む検索を狙うかの判断に使います。全国対応なら「全国」",
+     "大阪市内を中心に、京阪神エリア", False),
+    ("target.stage", "検討の段階",
+     "まだ困りごとを調べている段階か、業者を比べている段階か。"
+     "記事の書き方が変わります",
+     "困りごとを調べ始めた段階の人が多い（比較検討はまだ先）", False),
+    ("target.decide", "決め手になること",
+     "改行区切り。最後に何で選ばれるか",
+     "対応の速さ\n担当者が変わらないこと\n見積の分かりやすさ", False),
+
+    ("#kw", "5-2. 狙うキーワード",
+     "実際に取りたい語を教えてください。ここを起点に、"
+     "掛け合わせて記事の主題を作ります。思いつく範囲で構いません。", "", False),
+    ("kw.main", "メインキーワード",
+     "改行区切りで3〜5個。事業の柱になる、いちばん取りたい語",
+     "経理代行\n記帳代行\n経理アウトソーシング", True),
+    ("kw.sub", "サブキーワード",
+     "改行区切り。メインと一緒に検索される語、言い換え、略称、"
+     "お客様が使う言い方",
+     "経理 外注\n経理 丸投げ\n記帳 代行 料金\n月次決算 早期化\n経理 属人化", True),
+    ("kw.area_word", "地域を付けて狙う語",
+     "改行区切り。「大阪 経理代行」のように地域名を付けたい語があれば",
+     "経理代行 大阪\n記帳代行 梅田", False),
+    ("kw.exclude", "狙わない語",
+     "改行区切り。対応できない業務や、来てほしくない層が使う語",
+     "経理 求人\n経理 資格\n無料 テンプレート", False),
+    ("kw.known", "すでに上位に出ている語",
+     "改行区切り。分かる範囲で。既存サイトがある場合のみ",
+     "", False),
+]
+
+# ── 記事を書くための材料 ────────────────────────
+# ここから下は、埋まっているほど記事の中身が濃くなる。空でも記事は出るが、
+# 「どこにでもある記事」になり、AI検索にも引用されず問い合わせにもつながらない。
+WRITING = [
+    ("#service", "10. 商品・サービスの中身",
+     "記事の結論を「で、何を頼めばいいのか」まで書くための材料です。"
+     "ここが空だと、一般論で終わる記事になります。", "", False),
+    ("service.list", "提供しているもの",
+     "改行区切り。メニュー・プラン・サービス名を具体的に",
+     "記帳代行\n月次決算の代行\n給与計算\n請求書発行の代行", True),
+    ("service.price", "価格帯", "記事に載せてよい範囲で。「応相談」でも構いません",
+     "月額3万円〜（仕訳数と業務範囲による）", False),
+    ("service.area", "提供エリア", "地域名を書くと、地域名を含む検索で拾えます",
+     "大阪府全域・兵庫県南部（オンラインは全国）", False),
+    ("service.strength", "他社と違う点",
+     "改行区切りで3つ。「安い・早い・丁寧」ではなく、具体的な事実で",
+     "税理士と連携し申告まで一貫して対応できる\n初月は並行稼働して引き継ぎ漏れを防ぐ\n"
+     "業務フローの図を作って納品する", True),
+    ("service.flow", "依頼から開始までの流れ", "記事の「次にやること」に使います",
+     "問い合わせ → 現状のヒアリング（60分）→ 見積 → 契約 → 並行稼働1ヶ月 → 本稼働", False),
+
+    ("#customer", "11. お客様のこと",
+     "検索する人が何に困っているかが分かると、記事の入口が決まります。"
+     "よくある質問はそのままFAQとして記事に載ります。", "", False),
+    ("customer.problem", "お客様が困っていること",
+     "改行区切りで3つ以上。相談時に実際に言われる言葉で",
+     "経理担当が1人しかいなくて、休まれると業務が止まる\n"
+     "月次決算が翌月20日を過ぎてしまい、判断が遅れる\n"
+     "インボイスと電帳法の対応が追いつかない", True),
+    ("customer.faq", "よく聞かれる質問",
+     "改行区切りで5つ以上。そのままFAQとして記事に載ります",
+     "どこまでの業務を任せられますか\n社内に何も残らなくなりませんか\n"
+     "契約期間の縛りはありますか\n途中で範囲を変えられますか\n"
+     "うちの会計ソフトのままで対応できますか", True),
+    ("customer.trigger", "問い合わせのきっかけ",
+     "どんなときに相談が来るか。記事を出す時期の判断に使います",
+     "経理担当の退職が決まったとき / 決算期の前 / 税理士に指摘されたとき", False),
+    ("customer.ng", "よくある誤解",
+     "改行区切り。記事で先回りして解いておくと、相談の質が上がります",
+     "丸投げすると社内が何も分からなくなる、と思われがちです\n"
+     "大企業向けだと思われがちです", False),
+
+    ("#author", "12. 記事の書き手",
+     "誰が書いたか分からない記事は、検索エンジンにもAIにも信用されません。"
+     "実在する方のお名前と肩書きをお願いします。", "", False),
+    ("author.name", "著者名", "記事に表示するお名前", "山田 太郎", True),
+    ("author.title", "肩書き", "", "セブンセンシズ株式会社 経理BPO事業責任者", True),
+    ("author.credential", "保有資格・経歴",
+     "改行区切り。専門性の裏づけになるもの",
+     "日商簿記1級\n上場企業の経理部で10年\n中小企業の経理支援を通算120社", False),
+    ("author.supervisor", "監修者", "別の方が監修する場合のみ。資格も添えてください",
+     "佐藤 花子（税理士・登録番号00000）", False),
+
+    ("#tone", "13. 書き方のきまり",
+     "文体や言い回しを揃えるための指定です。既存サイトがある場合は、"
+     "そちらに合わせます。", "", False),
+    ("tone.person", "自社の呼び方", "記事中の一人称", "当社", False),
+    ("tone.style", "文体", "ですます / だ・である", "ですます", False),
+    ("tone.level", "専門用語の扱い",
+     "初心者向け（都度説明）/ 実務者向け（説明は最小限）",
+     "初心者向け（都度説明）", False),
+    ("tone.avoid", "使いたくない表現",
+     "改行区切り。社内で避けている言い回しがあれば",
+     "丸投げ\nお任せください", False),
+
+    ("#compete", "14. 競合",
+     "競合が書いていないことを書くために聞きます。"
+     "同じ内容を書いても、後から出した側は上位に出ません。", "", False),
+    ("compete.sites", "競合のサイト",
+     "改行区切りでURL。3つほど", "https://example-a.co.jp\nhttps://example-b.co.jp", False),
+    ("compete.diff", "競合にはない自社の強み",
+     "上の「他社と違う点」と重なっても構いません。競合を見たうえでの差",
+     "地域密着で訪問できる点。競合は全国対応だが訪問はしない", False),
+
+    ("#asset", "15. すでにあるもの",
+     "作り直しになるか、活かせるかの判断に使います。", "", False),
+    ("asset.site", "既存サイト", "URL。無ければ空欄", "https://example.co.jp", False),
+    ("asset.articles", "既存の記事数", "おおよその本数", "15本", False),
+    ("asset.sns", "運用中のSNS", "改行区切り", "X: @example\nInstagram: example", False),
+    ("asset.gbp", "Googleビジネスプロフィール",
+     "登録済み / 未登録。店舗がある場合は重要です", "登録済み", False),
+]
+
+
+BACKLINK = [
+    ("#backlink", "20. 外部との接点（被リンクの起点）",
+     "他サイトからリンクされている数は、検索順位にもAI検索での信頼にも効きます。"
+     "ただし買うことはできません（ペナルティの対象です）。"
+     "現実的なのは、すでにある関係を掘り起こすことです。"
+     "ここは思い出せる範囲で構いません。", "", False),
+    ("link.orgs", "加盟している団体・協会",
+     "改行区切り。会員一覧ページからリンクされていることが多く、"
+     "いちばん確実な起点です",
+     "大阪商工会議所\n全国経理協会\n地元の商店会", False),
+    ("link.portals", "掲載中のポータル・媒体",
+     "改行区切り。業界ポータル、比較サイト、求人媒体など",
+     "エキテン\n比較ビズ\nマイナビ転職", False),
+    ("link.partners", "取引先・パートナー",
+     "改行区切り。実績紹介や導入事例として載せてもらえる相手",
+     "○○システム株式会社（販売代理）\n△△税理士事務所（提携）", False),
+    ("link.awards", "受賞歴・認定・表彰",
+     "改行区切り。認定機関のサイトに掲載されることがあります",
+     "健康経営優良法人2025\n大阪府の○○認定事業者", False),
+    ("link.press", "取材・メディア掲載の実績",
+     "改行区切り。過去のものでも構いません",
+     "日経新聞 2024年5月（地域面）\n業界誌○○ 2025年3月号", False),
+    ("link.release", "プレスリリースの配信",
+     "配信したことがあるか、使っている媒体",
+     "PR TIMESで年2回ほど配信", False),
+    ("link.gov", "自治体・公的機関との関わり",
+     "支援制度の活用事例、講師派遣、委員など。"
+     "公的機関からのリンクは評価が高くなります",
+     "市の補助金の採択事例として掲載\n商工会のセミナー講師", False),
+    ("link.person", "代表者・担当者の発信",
+     "改行区切り。個人の登壇・寄稿・SNSも起点になります",
+     "業界セミナーで年3回登壇\nnoteで月1回執筆", False),
+    ("link.writable", "寄稿できそうな媒体",
+     "書けそうな先の心当たり。無ければ空欄で構いません",
+     "業界誌○○（編集部に知人あり）", False),
+    ("link.known", "すでに把握している被リンク",
+     "改行区切りでURL。分かる範囲で。分からなければ当社で調べます",
+     "", False),
+]
+
+INDUSTRY_LINK_restaurant = [
+    ("#food_link", "21. 飲食店の外部掲載【飲食店】",
+     "グルメサイトと地図サービスは、来店にも検索評価にも直結します。"
+     "登録済みかどうかだけでも教えてください。", "", False),
+    ("flink.gourmet", "登録中のグルメサイト",
+     "改行区切り。店舗ページのURLが分かれば添えてください",
+     "食べログ\nぐるなび\nホットペッパーグルメ\nRetty", False),
+    ("flink.map", "Googleビジネスプロフィールの状況",
+     "オーナー確認済みか、口コミ数、返信しているか",
+     "オーナー確認済み・口コミ82件・返信は未対応", False),
+    ("flink.sns", "SNSアカウント",
+     "改行区切り。フォロワー数も分かれば",
+     "Instagram @example（1,200人）\nX @example（300人）", False),
+    ("flink.local", "地域のポータル・観光協会",
+     "改行区切り。市区町村の観光サイト、商店会のページなど",
+     "○○市観光協会の飲食店一覧\n△△商店会のサイト", False),
+    ("flink.media", "グルメ媒体の取材",
+     "雑誌・テレビ・地域情報誌など。過去のものでも",
+     "関西ウォーカー 2024年11月号", False),
+]
+
+# ── 業種別に追加で聞くこと ──────────────────────
+# 業種が変われば、記事に必要な材料も変わる。飲食店に「仕訳数」を聞いても
+# 意味がなく、経理代行に「席数」を聞いても意味がない
+INDUSTRY_LINK = {"restaurant": INDUSTRY_LINK_restaurant}
+
+INDUSTRY = {
+    "restaurant": ("飲食店", [
+        ("#shop", "16. 店舗の基本【飲食店】",
+         "地域名を含む検索（「梅田 居酒屋 個室」など）で拾うための情報です。"
+         "ここが具体的なほど、来店につながる記事が書けます。", "", False),
+        ("shop.type", "業態", "居酒屋 / カフェ / レストラン / 焼肉 / ラーメン など",
+         "居酒屋（海鮮中心）", True),
+        ("shop.seats", "席数", "カウンター・テーブル・個室の内訳も書けると理想です",
+         "42席（カウンター8・テーブル24・個室10）", True),
+        ("shop.budget", "客単価", "昼と夜で分けて", "昼1,200円 / 夜4,500円", True),
+        ("shop.hours", "営業時間・定休日", "",
+         "11:30〜14:00 / 17:00〜23:00、日曜定休", True),
+        ("shop.access", "最寄駅と徒歩分数", "複数路線あれば全部",
+         "JR大阪駅 徒歩6分 / 地下鉄梅田駅 徒歩4分", True),
+        ("shop.parking", "駐車場", "有無と台数、提携の有無", "なし（近隣コインパーキング）", False),
+        ("shop.capacity", "貸切・団体の可否",
+         "最大人数も。宴会需要の記事に使います", "最大30名まで貸切可", False),
+        ("shop.smoking", "喫煙・禁煙", "", "全席禁煙（店外に喫煙所）", False),
+        ("shop.kids", "お子様連れ対応",
+         "ベビーカー・子ども椅子・おむつ替え", "子ども椅子あり、ベビーカー入店可", False),
+
+        ("#menu", "17. メニューと食材【飲食店】",
+         "「何がおいしいのか」を書けないと、どの店の記事か分からなくなります。"
+         "AI検索も、固有の食材名や産地を手がかりに引用します。", "", False),
+        ("menu.signature", "看板メニュー",
+         "改行区切りで3つ。価格も添えてください",
+         "本日の鮮魚5種盛り 1,880円\n炭焼き金目鯛の煮付け 2,200円\n自家製さつま揚げ 680円", True),
+        ("menu.ingredient", "食材のこだわり・産地",
+         "改行区切り。仕入れ先や産地は、そこにしかない情報になります",
+         "鮮魚は明石浦漁港から毎朝直送\n米は兵庫県産コシヒカリ", True),
+        ("menu.course", "コース・宴会プラン", "価格と品数、飲み放題の有無",
+         "宴会コース 4,000円（8品・2時間飲み放題付）", False),
+        ("menu.drink", "ドリンクの特徴", "日本酒の銘柄数、クラフトビールなど",
+         "日本酒は常時20種類。月替わりの地酒あり", False),
+        ("menu.allergy", "アレルギー・食事制限への対応",
+         "対応可否。検索されやすい項目です",
+         "アレルギー対応可（事前予約制）。ベジタリアン対応は要相談", False),
+        ("menu.takeout", "テイクアウト・デリバリー",
+         "有無と対応メニュー、利用サービス",
+         "テイクアウトあり（弁当・オードブル）。デリバリーはUber Eats", False),
+
+        ("#attract", "18. 集客と予約【飲食店】",
+         "記事から予約までの導線を作るために聞きます。", "", False),
+        ("attract.reserve", "予約の受付方法",
+         "電話・ネット・アプリ。記事のCTAに直結します",
+         "電話 / 食べログ / 公式LINE", True),
+        ("attract.now", "いまの集客経路",
+         "改行区切り。割合が分かれば添えてください",
+         "食べログ 4割\n通りがかり 3割\nInstagram 2割\n紹介 1割", False),
+        ("attract.target", "来てほしいお客様",
+         "記事の読者像になります",
+         "会社帰りの30〜50代。接待や歓送迎会の幹事", True),
+        ("attract.want", "埋めたい時間帯・曜日",
+         "記事のテーマの優先順位に使います", "平日の昼と、月〜水の夜", False),
+        ("attract.season", "繁忙期・閑散期",
+         "記事を出す時期の設計に使います",
+         "繁忙: 12月・3月・歓送迎会シーズン / 閑散: 1月・2月・8月", False),
+        ("attract.event", "季節の催し",
+         "改行区切り。記事のネタとして毎年使えます",
+         "1月 ふぐコース\n5月 初鰹フェア\n9月 秋刀魚まつり", False),
+
+        ("#food_rule", "19. 表示のきまり【飲食店】",
+         "飲食店の記事は景品表示法・食品表示法に触れやすい領域です。"
+         "書ける表現と書けない表現をあらかじめ確認します。", "", False),
+        ("food.claim", "使ってよい表現",
+         "根拠のあるものだけ。改行区切り",
+         "明石浦漁港から毎朝直送（仕入伝票あり）\n創業35年", False),
+        ("food.ng", "使えない表現",
+         "根拠のない最上級・健康効果の断定は景表法・薬機法に触れます",
+         "日本一\n最高級\n血圧が下がる\n体に良い", False),
+        ("food.cert", "資格・認証",
+         "改行区切り。記事の信頼性の裏づけになります",
+         "食品衛生責任者\nふぐ調理師免許\nHACCP対応済み", False),
+    ]),
+}
+
 SAMPLE_ROW = 4          # 記入欄の開始行（1-2行目は説明、3行目は見出し）
 
 
 # ============================================================
 # シートを作る
 # ============================================================
-def make_sheet(path=SHEET):
+def fields_for(industry=""):
+    """そのシートで聞く項目。共通＋書くための材料＋（あれば）業種別"""
+    # ターゲットと狙う語は「5. キーワードの起点」の直後に差し込む。
+    # 聞く順序がそのまま考える順序になる
+    base = list(FIELDS)
+    at = next((i for i, f in enumerate(base) if f[0] == "#facts"), len(base))
+    out = base[:at] + list(KEYWORD) + base[at:] + list(WRITING) + list(BACKLINK)
+    if industry:
+        if industry not in INDUSTRY:
+            raise SystemExit(f"未対応の業種です（{' / '.join(INDUSTRY)}）")
+        out += INDUSTRY[industry][1]
+        out += INDUSTRY_LINK.get(industry, [])
+    return out
+
+
+def make_sheet(path=SHEET, industry=""):
     from openpyxl import Workbook
     from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     from openpyxl.worksheet.datavalidation import DataValidation
@@ -154,7 +442,8 @@ def make_sheet(path=SHEET):
     thin = Side(style="thin", color="D8DEE7")
     border = Border(left=thin, right=thin, top=thin, bottom=thin)
 
-    ws["A1"] = "オウンドメディア運用 ヒアリングシート"
+    label = INDUSTRY[industry][0] if industry else ""
+    ws["A1"] = "オウンドメディア運用 ヒアリングシート" + (f"【{label}向け】" if label else "")
     ws["A1"].font = Font(name="游ゴシック", size=16, bold=True, color=navy)
     ws["A2"] = ("水色の欄にご記入ください。「必須」の行が埋まれば運用を開始できます。"
                 "分からない項目は空欄のままで構いません（導入時に一緒に決めます）。")
@@ -172,7 +461,7 @@ def make_sheet(path=SHEET):
     ws.row_dimensions[3].height = 22
 
     r = SAMPLE_ROW
-    for key, label, desc, ex, req in FIELDS:
+    for key, label, desc, ex, req in fields_for(industry):
         if key.startswith("#"):
             c = ws.cell(row=r, column=1, value=label)
             c.font = Font(name="游ゴシック", size=11, bold=True, color=navy)
@@ -307,6 +596,105 @@ def to_config(got):
     return cfg
 
 
+
+def subjects(got, limit=60):
+    """メイン × サブ × 意図 から、記事の主題になる語を組み立てる。
+
+    メインだけでは本数が足りず、業種×意図の機械的な掛け合わせだけでは
+    お客様が実際に使う言い方から離れる。両方を掛けると、
+    「その事業で実際に検索される語」に近いものが出る。
+
+    ここで出すのは候補。実際に書くかは kw_guard（食い合い）と
+    kw_intent（開く理由）を通してから決める。
+    """
+    main = lines(got.get("kw.main"))
+    sub = lines(got.get("kw.sub"))
+    area = lines(got.get("kw.area_word"))
+    intents = lines(got.get("kw_seeds.intents"))
+    inds = lines(got.get("kw_seeds.industries"))
+    exclude = [x for x in lines(got.get("kw.exclude")) if x]
+
+    out, seen = [], set()
+
+    def push(kw, why):
+        kw = re.sub(r"[ 　]+", " ", kw).strip()
+        if not kw or kw in seen:
+            return
+        # 狙わない語に含まれる言葉が入っていたら捨てる
+        for ng in exclude:
+            if any(w and w in kw for w in re.split(r"[ 　]+", ng)):
+                return
+        seen.add(kw)
+        out.append({"keyword": kw, "from": why})
+
+    # サブキーワードは、お客様が実際に使う言い方。そのまま主題になる
+    for s in sub:
+        push(s, "サブKW")
+    # メイン × 意図。事業の柱を意図ごとに割る
+    for m in main:
+        for i in intents[:12]:
+            # メインに既に入っている語を足すと「梅田 個室 居酒屋 個室」になる
+            if i in m:
+                continue
+            push(f"{m} {i}", "メインKW×意図")
+    # 地域を付けて狙う語
+    for a in area:
+        push(a, "地域KW")
+    # メイン × 業種。誰向けかで割る
+    for m in main[:3]:
+        for ind in inds[:10]:
+            if ind in m:
+                continue
+            push(f"{ind} {m}", "メインKW×業種")
+    return out[:limit]
+
+
+def to_brief(got, industry=""):
+    """記事を書くときに読む材料。sites/*.json は配信の設定なので分けて持つ"""
+    def pick(prefix):
+        return {k.split(".", 1)[1]: v for k, v in got.items()
+                if k.startswith(prefix + ".")}
+    brief = {
+        "_readme": "記事を書くときに読む材料。ここが埋まっているほど、"
+                   "その会社にしか書けない記事になる。空の項目は無理に埋めず、"
+                   "分かった時点で足すこと（憶測で書くと事実と違う記事になる）。",
+        "industry": industry,
+        "service": pick("service"),
+        "customer": pick("customer"),
+        "author": pick("author"),
+        "tone": pick("tone"),
+        "compete": pick("compete"),
+        "asset": pick("asset"),
+        "backlink": pick("link"),
+        "target": pick("target"),
+        "keyword": pick("kw"),
+        "subjects": subjects(got),
+    }
+    for pre in set(k.split(".")[0] for k in got if "." in k):
+        if pre in ("company", "facts", "cta", "kw_seeds", "service", "customer",
+                   "author", "tone", "compete", "asset", "link", "target", "kw"):
+            continue
+        brief.setdefault("industry_detail", {})[pre] = pick(pre)
+    # 改行区切りで書かれたものは配列にしておく。記事側で1つずつ使える
+    multi = {"backlink": ["orgs", "portals", "partners", "awards", "press",
+                         "gov", "person", "known"],
+             "target": ["decide"],
+             "keyword": ["main", "sub", "area_word", "exclude", "known"],
+             "service": ["list", "strength"],
+             "customer": ["problem", "faq", "ng"],
+             "author": ["credential"], "tone": ["avoid"],
+             "compete": ["sites"], "asset": ["sns"]}
+    for sec, keys in multi.items():
+        for k in keys:
+            if brief.get(sec, {}).get(k):
+                brief[sec][k] = lines(brief[sec][k])
+    for sec in (brief.get("industry_detail") or {}).values():
+        for k, v in list(sec.items()):
+            if isinstance(v, str) and chr(10) in v:
+                sec[k] = lines(v)
+    return brief
+
+
 def to_company(got):
     out = {k.split(".", 1)[1]: v for k, v in got.items() if k.startswith("company.")}
     if out:
@@ -424,6 +812,10 @@ def show(cfg, got, ng, warn):
           f"意図{len(seeds.get('intents', []))} = "
           f"{len(seeds.get('industries', [])) * len(seeds.get('intents', []))}通り")
     facts = to_facts(got, cfg.get("id") or "client")
+    subs = subjects(got)
+    print(f"    狙う語  : メイン{len(lines(got.get('kw.main')))} / サブ{len(lines(got.get('kw.sub')))} → 主題候補{len(subs)}件")
+    for x in subs[:4]:
+        print(f"        ・{x['keyword']}  〔{x['from']}〕")
     print(f"    一次情報: {len(facts)}件")
     for f in facts[:3]:
         print(f"        ・{f['claim'][:44]}  〔{f['source']} / {f['as_of']}〕")
@@ -439,7 +831,7 @@ def show(cfg, got, ng, warn):
 # ============================================================
 # 反映する
 # ============================================================
-def apply(got, cfg):
+def apply(got, cfg, industry=""):
     site_id = cfg["id"]
     made = []
 
@@ -456,6 +848,12 @@ def apply(got, cfg):
         p = cdir / "company.json"
         p.write_text(json.dumps(comp, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         made.append(p)
+    brief = to_brief(got, industry)
+    bp = cdir / "brief.json"
+    bp.write_text(json.dumps(brief, ensure_ascii=False, indent=2) + chr(10),
+                  encoding="utf-8")
+    made.append(bp)
+
     facts = to_facts(got, site_id)
     if facts:
         p = cdir / "facts.json"
@@ -483,11 +881,22 @@ def apply(got, cfg):
 
 
 def main():
+    ind = ""
+    for i, a in enumerate(sys.argv):
+        if a == "--industry" and i + 1 < len(sys.argv):
+            ind = sys.argv[i + 1]
     if "--sheet" in sys.argv:
-        p = make_sheet()
+        k = sys.argv.index("--sheet")
+        if not ind and k + 1 < len(sys.argv) and not sys.argv[k + 1].startswith("-"):
+            ind = sys.argv[k + 1]
+        out = SHEET if not ind else SHEET.with_name(
+            f"ヒアリングシート_{INDUSTRY[ind][0] if ind in INDUSTRY else ind}.xlsx")
+        p = make_sheet(out, ind)
         print(f"ヒアリングシートを作成しました: {p.relative_to(ROOT).as_posix()}")
         print("  クライアントにお渡しし、水色の欄をご記入いただいてください。")
         print(f"  記入後: python scripts/client_intake.py {p.name} --apply")
+        if not ind:
+            print(f"  業種別: --sheet <{' / '.join(INDUSTRY)}> で専用の項目が付きます")
         return 0
 
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
@@ -514,7 +923,10 @@ def main():
         print("\n  確認のみ（--apply を付けると登録します）")
         return 0
 
-    made = apply(got, cfg)
+    # ファイル名から業種を拾う。シート名を変えられても動くよう、中身でも見る
+    ind2 = ind or next((k for k, (lab, _) in INDUSTRY.items()
+                        if lab in src.name), "")
+    made = apply(got, cfg, ind2)
     print("\n  作成したファイル")
     for p in made:
         print(f"    {p.relative_to(ROOT).as_posix()}")

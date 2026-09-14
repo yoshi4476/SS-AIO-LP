@@ -7,6 +7,7 @@
 記事を書くAIがサイト設定を探し回らずに済むようにし、担当領域の取り違えを防ぐのが目的。
 """
 import re
+import json
 import sys
 from pathlib import Path
 
@@ -42,6 +43,96 @@ def local_next_kw(cfg, limit=5):
             if len(out) >= limit:
                 return out
     return out
+
+
+
+def show_brief(site_id):
+    """ヒアリングシートで集めた執筆材料を出す。
+
+    ここが埋まっているほど「その会社にしか書けない記事」になる。
+    逆に空の項目を憶測で埋めると、事実と違う記事が公開される。
+    書いていないことは書かない、という前提で読ませる。
+    """
+    f = ROOT / "data" / "clients" / site_id / "brief.json"
+    if not f.is_file():
+        return
+    b = json.loads(f.read_text(encoding="utf-8"))
+
+    def block(title, rows):
+        rows = [(k, v) for k, v in rows if v]
+        if not rows:
+            return
+        print(f"\n■ {title}")
+        for k, v in rows:
+            if isinstance(v, list):
+                print(f"  {k}:")
+                for x in v:
+                    print(f"    ・{x}")
+            else:
+                print(f"  {k}: {v}")
+
+    tg = b.get("target") or {}
+    block("ターゲット（この人に向けて書く）", [
+        ("いちばん来てほしい人", tg.get("persona")),
+        ("次に来てほしい層", tg.get("second")),
+        ("商圏", tg.get("area")), ("検討の段階", tg.get("stage")),
+        ("決め手", tg.get("decide"))])
+
+    kw = b.get("keyword") or {}
+    block("狙う語", [
+        ("メインキーワード", kw.get("main")),
+        ("サブキーワード", kw.get("sub")),
+        ("地域を付けて狙う語", kw.get("area_word")),
+        ("狙わない語（主題にしない）", kw.get("exclude"))])
+
+    subs = b.get("subjects") or []
+    if subs:
+        print()
+        print("■ 主題の候補（メイン×サブ×意図から生成）")
+        for x in subs[:18]:
+            print(f"    ・{x['keyword']}  〔{x['from']}〕")
+        if len(subs) > 18:
+            print(f"    …ほか{len(subs) - 18}件")
+        print("    ※ ここから選ぶ前に kw_guard（食い合い）と "
+              "kw_intent（開く理由）を必ず通すこと")
+
+    s = b.get("service") or {}
+    block("売っているもの（記事の結論はここへ着地させる）", [
+        ("提供するもの", s.get("list")), ("価格帯", s.get("price")),
+        ("提供エリア", s.get("area")), ("他社と違う点", s.get("strength")),
+        ("依頼から開始まで", s.get("flow"))])
+
+    c = b.get("customer") or {}
+    block("読者が困っていること（記事の入口に使う）", [
+        ("困りごと", c.get("problem")),
+        ("よく聞かれる質問（FAQにそのまま使える）", c.get("faq")),
+        ("相談のきっかけ", c.get("trigger")), ("よくある誤解", c.get("ng"))])
+
+    a = b.get("author") or {}
+    block("記事の書き手（著者情報に入れる）", [
+        ("著者", a.get("name")), ("肩書き", a.get("title")),
+        ("資格・経歴", a.get("credential")), ("監修", a.get("supervisor"))])
+
+    t = b.get("tone") or {}
+    block("書き方のきまり", [
+        ("自社の呼び方", t.get("person")), ("文体", t.get("style")),
+        ("専門用語", t.get("level")), ("使わない表現", t.get("avoid"))])
+
+    for name, sec in (b.get("industry_detail") or {}).items():
+        block(f"業種の詳細（{name}）", list(sec.items()))
+
+    bl = b.get("backlink") or {}
+    block("外部との接点（記事で触れると自然にリンクが生まれる相手）", [
+        ("加盟団体", bl.get("orgs")), ("掲載中の媒体", bl.get("portals")),
+        ("取引先・提携", bl.get("partners")), ("受賞・認定", bl.get("awards")),
+        ("取材実績", bl.get("press")), ("公的機関との関わり", bl.get("gov")),
+        ("代表者の発信", bl.get("person"))])
+
+    cp = b.get("compete") or {}
+    block("競合", [("競合サイト", cp.get("sites")), ("競合にない強み", cp.get("diff"))])
+
+    print("\n  ※ ここに書かれていないことは書かないこと。"
+          "憶測で補うと、事実と違う記事が公開されます。")
 
 
 def main():
@@ -184,6 +275,8 @@ def main():
             print(line)
     except Exception as e:
         print(f"  （一次情報を取得できませんでした: {e}）")
+
+    show_brief(cfg["id"])
 
     print("\n■ 公開の流れ")
     if cfg["type"] == "self-static":
