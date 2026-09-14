@@ -54,14 +54,28 @@ def own_data_facts(site_id):
     return out
 
 
+def load_for(site_id):
+    """そのサイトで使ってよい一次情報だけを返す。
+
+    受託運用では、クライアントの記事に自社（運用会社）の実績を書くと
+    事実と違う記事になる。クライアント用の登録がある場合は、そちらだけを
+    使い、自社分は混ぜない。
+    """
+    client = ROOT / "data" / "clients" / site_id / "facts.json"
+    if client.is_file():
+        d = json.loads(client.read_text(encoding="utf-8"))
+        return d, list(d.get("facts", []))
+    data = json.loads(SRC.read_text(encoding="utf-8")) if SRC.is_file() else {"facts": []}
+    return data, [f for f in data["facts"] if site_id in f.get("sites", [])]
+
+
 def main():
     if len(sys.argv) < 2:
         raise SystemExit("使い方: python scripts/facts.py <site_id> [KW]")
     site_id = sys.argv[1]
     kw = sys.argv[2] if len(sys.argv) > 2 else ""
 
-    data = json.loads(SRC.read_text(encoding="utf-8"))
-    picked = [f for f in data["facts"] if site_id in f["sites"]]
+    data, picked = load_for(site_id)
     if kw:
         # KWに関係するものを先に出す（関係ないファクトを無理に入れると不自然になる）
         picked.sort(key=lambda f: -sum(1 for t in f["topic"] if t in kw))

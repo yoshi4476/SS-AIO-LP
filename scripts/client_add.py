@@ -5,6 +5,10 @@ sites/*.json を手で書くと項目の抜けに気づけず、記事を作り�
 「カテゴリが未定義」「担当領域が空でカニバリ検査が効かない」と分かる。
 ヒアリングの回答をJSONで渡せば、必要な項目が揃った状態で作られる。
 
+ヒアリングシートから入れる場合は client_intake.py を使う。聞くことが1枚に
+まとまっていて、会社情報と一次情報まで同時に登録される。こちらはJSONを
+直接書きたいとき（既存クライアントの設定変更など）に使う。
+
 使い方:
     python scripts/client_add.py --template > client.json   # 記入用の雛形を出す
     python scripts/client_add.py client.json                # 内容を確認（書き込まない）
@@ -34,6 +38,9 @@ TEMPLATE = {
     "owns": ["自社が扱う語1", "自社が扱う語2"],
     "avoid": ["扱わない領域1（理由も書く）"],
     "categories": {"category-slug": "カテゴリ表示名"},
+    "main_offer": "この記事群で最終的に売りたいもの（1行）",
+    "main_category": "category-slug",
+    "category_mix": {"category-slug": 50, "_note": "合計100。主力は40〜50%が目安"},
     "kw_seeds": {"industries": ["業種1", "業種2"], "intents": ["意図1", "意図2"]},
     "cta_title": "記事下CTAの見出し",
     "cta_desc": "記事下CTAの説明文",
@@ -43,7 +50,7 @@ TEMPLATE = {
 }
 
 REQUIRED = ["id", "name", "domain", "type", "theme", "audience",
-            "owns", "categories", "kw_seeds"]
+            "owns", "categories", "kw_seeds", "main_offer", "main_category"]
 TYPES = {
     "self-static": "この管制塔リポジトリ内の静的サイト（build.py が公開する）",
     "nextjs-json": "Next.jsサイト。src/content/blog/<slug>.json を書き出す",
@@ -75,6 +82,27 @@ def check(cfg):
             ng.append(f"カテゴリ {sorted(dup)} が {p.stem} と重複しています")
         if cfg.get("domain") == other.get("domain"):
             ng.append(f"ドメインが {p.stem} と同じです")
+
+    cats = cfg.get("categories", {})
+    if cfg.get("main_category") and cfg["main_category"] not in cats:
+        ng.append(f"main_category「{cfg['main_category']}」が categories にありません")
+    mix = {k: v for k, v in (cfg.get("category_mix") or {}).items()
+           if not str(k).startswith("_")}
+    if mix:
+        unknown = set(mix) - set(cats)
+        if unknown:
+            ng.append(f"category_mix に無いカテゴリがあります: {sorted(unknown)}")
+        if abs(sum(mix.values()) - 100) > 2:
+            warn.append(f"category_mix の合計が{sum(mix.values())}です（100に揃えてください）")
+        main = mix.get(cfg.get("main_category"), 0)
+        if main and main < 35:
+            warn.append(f"主力カテゴリの配分が{main}%です。40〜50%を下回ると、"
+                        "表示は増えても相談につながりにくくなります")
+    # 一次情報はAI検索に引用されるかを決める材料。無いまま書き始めると、
+    # どのサイトでも書ける記事になる
+    if not (ROOT / "data" / "clients" / str(cfg.get("id")) / "facts.json").is_file():
+        warn.append("一次情報が未登録です（data/clients/<id>/facts.json）。"
+                    "client_intake.py のヒアリングシートから登録できます")
 
     seeds = cfg.get("kw_seeds", {})
     n = len(seeds.get("industries", [])) * len(seeds.get("intents", []))

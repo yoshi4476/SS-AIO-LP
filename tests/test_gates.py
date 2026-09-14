@@ -441,6 +441,58 @@ def test_auto_fixes_are_reviewed():
     check("パイプライン定義に載っている", "自動修正と、その見直し" in doc, True)
 
 
+
+def test_client_onboarding_is_one_sheet():
+    """ヒアリングシートを1枚埋めれば運用が立ち上がること。
+
+    設定が sites/ と data/ に散っていると、埋め忘れたまま記事を作り始めて
+    後から気づく。特に一次情報（その会社にしか出せない数値）が無いまま
+    書くと、どのサイトでも書ける記事になりAI検索に引用されない。
+    """
+    check("ヒアリングシートを作る口がある",
+          (ROOT / "scripts" / "client_intake.py").is_file(), True)
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import client_add as ca
+    import client_intake as ci
+
+    keys = {k for k, *_ in ci.FIELDS if not k.startswith("#")}
+    # 主力商材が無いと、表示は増えても相談につながらない記事が量産される
+    for k in ("main_offer", "main_category", "categories", "category_mix"):
+        check(f"シートで「{k}」を聞いている", k in keys, True)
+    # 一次情報はAI検索に引用されるかを決める材料。必須で聞く
+    check("一次情報を必須で聞いている",
+          any(k == "facts.1.claim" and req for k, _, _, _, req in ci.FIELDS), True)
+    check("一次情報の時点も聞いている", "facts.1.as_of" in keys, True)
+    for k in ("company.name", "company.address", "cta.label", "cta.url"):
+        check(f"シートで「{k}」を聞いている", k in keys, True)
+
+    # シートの回答が、そのまま設定として通ること
+    nl = chr(10)
+    got = {k: "x" for k in keys}
+    got.update({
+        "id": "sample-media", "type": "external-html", "repo": "o/r",
+        "categories": "sample-a: A" + nl + "sample-b: B",
+        "category_mix": "sample-a: 60" + nl + "sample-b: 40",
+        "main_category": "sample-a",
+        "kw_seeds.industries": nl.join("業種%d" % i for i in range(25)),
+        "kw_seeds.intents": nl.join("意図%d" % i for i in range(10)),
+        "facts.1.as_of": "2026-09",
+    })
+    cfg = ci.to_config(got)
+    check("シートから設定が組み立つ", bool(cfg["main_offer"] and cfg["categories"]), True)
+    check("配分が数値として読める", cfg["category_mix"]["sample-a"], 60)
+    check("一次情報が取り出せる", len(ci.to_facts(got, "sample-media")) >= 1, True)
+    ng, _ = ci.review(got, cfg)
+    check("埋まったシートは不備なしで通る", ng, [])
+    # JSONから直接入れる口（client_add）の必須項目も満たせること
+    check("JSON側の必須項目もすべて埋まる",
+          [k for k in ca.REQUIRED if not cfg.get(k)], [])
+
+    # 受託運用で、クライアントの記事に運用会社の実績が混ざらないこと
+    import facts
+    check("一次情報をクライアント別に読む", hasattr(facts, "load_for"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -454,7 +506,8 @@ def main():
               test_each_site_declares_what_it_sells,
               test_next_keyword_prefers_main_offer,
               test_improvements_apply_themselves,
-              test_auto_fixes_are_reviewed):
+              test_auto_fixes_are_reviewed,
+              test_client_onboarding_is_one_sheet):
         try:
             t()
         except Exception as e:
