@@ -137,3 +137,4 @@
 - [整骨院がAI検索に表示されない5つの理由｜費用ページの直し方](https://ai.7senses.co.jp/aio/seikotsuin-hiyou-heikin/): 整骨院がAI検索に表示されない原因は、料金の書き方・施術範囲の曖昧さ・出典のなさなど5つに整理できます。ChatGPTやAI Overviewに引用される費用ページの条件と、直す順番を2026年9月時点で解説します。
 - [工務店のSNS集客とは？5媒体の選び方と続け方](https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/): 工務店のSNS集客とは、Instagram・LINE公式・YouTube等の複数媒体を目的別に使い分け、問い合わせにつなげる施策です。5媒体の向き不向きと無理なく続ける始め方を解説します。
 - [BtoB向けAIO対策会社の選び方｜比較5基準と費用相場](https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/): BtoB向けAIO対策会社の選び方を、比較すべき5つの基準と費用相場から解説します。内製かどうかの判断軸、依頼前に確認すべき実績確認ポイントもまとめました。
+- [AIに選ばれる記事の書き方｜5つのコツとNG例](https://ai.7senses.co.jp/aio/aio-erabareru-kiji-kakikata/): AIに選ばれる記事の書き方は、冒頭の断言、H2直下の1文結論、FAQの答え方に型があります。すぐ使える5つのコツと、やりがちなNG例をテンプレート付きで解説します。
