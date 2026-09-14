@@ -253,7 +253,7 @@ def cover(prs):
          14.5, False, RGBColor(0xC5, 0xD6, 0xEB), line=1.7)
     for i, b in enumerate(["AI検索（AIO/LLMO）対応", f"月{PRICE['articles']}記事",
                            "レポート・改善込み"]):
-        bx = box(s, M + Emu(int(Inches(2.72) * i)), Inches(6.15),
+        box(s, M + Emu(int(Inches(2.72) * i)), Inches(6.15),
                  Inches(2.5), Inches(0.42), fill=None, line_col=RGBColor(0x3E, 0x5C, 0x82))
         text(s, M + Emu(int(Inches(2.72) * i)), Inches(6.25), Inches(2.5),
              Inches(0.3), b, 11.5, False, RGBColor(0xC5, 0xD6, 0xEB), align=PP_ALIGN.CENTER)

@@ -56,7 +56,18 @@ def show_brief(site_id):
     f = ROOT / "data" / "clients" / site_id / "brief.json"
     if not f.is_file():
         return
-    b = json.loads(f.read_text(encoding="utf-8"))
+    try:
+        b = json.loads(f.read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        # ここで落とすと記事が1本も書けなくなる。材料が読めないことだけ伝える
+        print()
+        print(f"■ 執筆材料を読めませんでした（{f.name}: {e}）")
+        print("  材料なしで書くと一般論の記事になります。ファイルを直してください")
+        return
+    if not isinstance(b, dict):
+        print()
+        print(f"■ 執筆材料の形式が不正です（{f.name}）")
+        return
 
     def block(title, rows):
         rows = [(k, v) for k, v in rows if v]

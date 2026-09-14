@@ -104,7 +104,6 @@ LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 def record(by, slug, what):
     """当てた修正を1行ずつ残す。後から何をしたか追えないと見直せない"""
     import datetime
-    import json
     LOG.parent.mkdir(parents=True, exist_ok=True)
     with open(LOG, "a", encoding="utf-8", newline="") as f:
         f.write(json.dumps({"when": datetime.datetime.now().isoformat(),
@@ -160,7 +159,6 @@ def main():
     # 当てたら必ず見直す。1本ずつは正しくても、積み上がると記事が壊れる。
     # 見直しを人の判断に委ねると、忙しい週に飛ばされて溜まっていく
     print()
-    import subprocess
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "auto_review.py"),
                         "--fix"], cwd=ROOT, text=True, encoding="utf-8",
                        errors="ignore")

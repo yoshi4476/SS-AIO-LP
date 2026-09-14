@@ -61,12 +61,25 @@ def load_for(site_id):
     事実と違う記事になる。クライアント用の登録がある場合は、そちらだけを
     使い、自社分は混ぜない。
     """
+    def read(path):
+        try:
+            d = json.loads(path.read_text(encoding="utf-8"))
+            return d if isinstance(d, dict) else None
+        except (ValueError, OSError) as e:
+            print(f"  （{path.name} を読めませんでした: {e}）")
+            return None
+
     client = ROOT / "data" / "clients" / site_id / "facts.json"
     if client.is_file():
-        d = json.loads(client.read_text(encoding="utf-8"))
-        return d, list(d.get("facts", []))
-    data = json.loads(SRC.read_text(encoding="utf-8")) if SRC.is_file() else {"facts": []}
-    return data, [f for f in data["facts"] if site_id in f.get("sites", [])]
+        d = read(client)
+        if d is not None:
+            return d, list(d.get("facts", []))
+        # 読めないときに自社の一次情報へ落とすと、他社の実績を書いてしまう
+        return {"facts": []}, []
+    data = read(SRC) if SRC.is_file() else {"facts": []}
+    if data is None:
+        return {"facts": []}, []
+    return data, [f for f in data.get("facts", []) if site_id in f.get("sites", [])]
 
 
 def main():
