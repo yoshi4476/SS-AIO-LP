@@ -152,6 +152,9 @@ jobs:
       - name: 管制塔スプレッドシートを整える（文字切れの防止）
         run: python scripts/sheet_format.py || true
 
+      - name: 週次レポートの作成
+        run: python scripts/weekly_report.py || true
+
       - name: 実測データの公開ページを更新
         run: python scripts/data_page.py || true
 
