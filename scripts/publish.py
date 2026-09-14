@@ -556,14 +556,22 @@ def _wp_term(cfg, slug, name, taxonomy="categories"):
     return made["id"]
 
 
-def _wp_media(cfg, path: Path, alt=""):
-    """アイキャッチを上げてIDを返す。同名が既にあれば使い回す"""
+def _wp_media(cfg, path: Path, alt="", slug=""):
+    """アイキャッチを上げてIDを返す。同じ記事のものが既にあれば使い回す
+
+    記事の画像はどれも eyecatch.png という同じ名前で作られる。
+    そのまま上げると、検索で別の記事の画像を拾ってしまう。
+    記事のスラッグを付けて、記事ごとに別のファイル名にする。
+    """
     if not path.is_file():
         return 0
-    name = path.name
-    found = _wp_call(cfg, f"media?search={name}&per_page=1")
-    if isinstance(found, list) and found and found[0].get("slug") == path.stem:
-        return found[0]["id"]
+    name = f"{slug}-{path.name}" if slug else path.name
+    want = Path(name).stem
+    found = _wp_call(cfg, f"media?search={want}&per_page=5")
+    if isinstance(found, list):
+        for m in found:
+            if m.get("slug") == want:
+                return m["id"]
     kind = "image/png" if path.suffix.lower() == ".png" else "image/jpeg"
     res = _wp_call(cfg, "media", raw=path.read_bytes(), method="POST",
                    headers={"Content-Type": kind,
@@ -592,11 +600,14 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     eye = meta.get("eyecatch") or ""
     if eye:
         p = ROOT / "site" / eye.lstrip("/")
-        thumb = _wp_media(cfg, p, meta.get("title", ""))
+        thumb = _wp_media(cfg, p, meta.get("title", ""), meta["slug"])
 
+    # --push が付くまでは下書きで入れる。他の形式が「書き込むがpushしない」
+    # のと揃える。ここを publish 固定にすると、確認のつもりの実行で公開される
     payload = {
         "slug": meta["slug"], "title": meta["title"], "content": html,
-        "excerpt": meta.get("description", ""), "status": "publish",
+        "excerpt": meta.get("description", ""),
+        "status": "publish" if push else "draft",
         "categories": [cat_id],
         "meta": {"_ss_quality_score": score, "_ss_written_by": "agent"},
     }
@@ -611,6 +622,13 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
         res = _wp_call(cfg, "posts", payload, method="POST")
         how = "新規"
 
+    # 先方のゲートは、メタが保存されたあとに公開を下書きへ戻す。
+    # 投稿時の応答は、その前の状態を返すことがある。取り直して確かめる
+    pid = res.get("id")
+    if pid:
+        after = _wp_call(cfg, f"posts/{pid}?context=edit&_fields=status,link,meta")
+        if isinstance(after, dict) and after.get("status"):
+            res = {**res, **after}
     status = res.get("status", "?")
     link = res.get("link", "")
     print(f"配信先: {cfg['name']}（WordPress / {cfg['domain']}）")
@@ -620,6 +638,10 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
 
     if status == "publish":
         print(f"  公開しました: {link}")
+    elif not push:
+        print(f"  下書きとして入れました（投稿ID {res.get('id')}）")
+        print("  ※ --push を付けると公開します")
+        return True
     else:
         why = ""
         m = res.get("meta") or {}

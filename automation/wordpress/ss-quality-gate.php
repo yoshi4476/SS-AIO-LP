@@ -90,11 +90,11 @@ function ssqg_reasons($post_id, $content)
 
 
 /**
- * すべての保存が通る関所。公開へ進もうとしたら、ここで下書きへ戻す。
+ * ① 更新時の関所。すでにメタがある記事は、ここで止められる。
  *
- * wp_insert_post_data を使うのは、管理画面・REST API・WP-CLI・
- * 予約投稿のどれもが必ずここを通るため。個別の入口をふさぐ形にすると、
- * 新しい入口が増えたときに漏れる。
+ * wp_insert_post_data は管理画面・REST API・WP-CLI・予約投稿のどれもが
+ * 必ず通る。ただし新規投稿では $postarr['ID'] がまだ 0 で、メタも
+ * 保存前のため判定できない。新規は下の②で受け止める。
  */
 add_filter('wp_insert_post_data', function ($data, $postarr) {
     if ($data['post_status'] !== 'publish' && $data['post_status'] !== 'future') {
@@ -104,16 +104,56 @@ add_filter('wp_insert_post_data', function ($data, $postarr) {
         return $data;   // 固定ページ・カスタム投稿は対象外
     }
     $post_id = (int) ($postarr['ID'] ?? 0);
+    if (!$post_id) {
+        return $data;   // 新規。メタがまだ無いので②で見る
+    }
     $reasons = ssqg_reasons($post_id, $data['post_content'] ?? '');
     if (empty($reasons)) {
         return $data;
     }
     $data['post_status'] = 'draft';
-    if ($post_id) {
-        update_post_meta($post_id, '_ss_gate_blocked', implode(' / ', $reasons));
-    }
+    update_post_meta($post_id, '_ss_gate_blocked', implode(' / ', $reasons));
     return $data;
 }, 999, 2);   // 優先度を大きくして、他のプラグインの書き換えより後に効かせる
+
+
+/**
+ * ② メタが保存されたあとの関所。ここが本体。
+ *
+ * 新規投稿では、本文とメタが別々に保存される。メタが入る前に判定すると
+ * 「スコアが無い」と誤判定して、正しく採点した記事まで下書きに落ちる。
+ * 保存が終わってから見直し、だめなら下書きへ戻す。
+ */
+function ssqg_recheck($post_id, $post = null)
+{
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+    $post = $post ?: get_post($post_id);
+    if (!$post || $post->post_type !== 'post') {
+        return;
+    }
+    if ($post->post_status !== 'publish' && $post->post_status !== 'future') {
+        return;
+    }
+    $reasons = ssqg_reasons($post_id, $post->post_content);
+    if (empty($reasons)) {
+        delete_post_meta($post_id, '_ss_gate_blocked');
+        return;
+    }
+    update_post_meta($post_id, '_ss_gate_blocked', implode(' / ', $reasons));
+    update_post_meta($post_id, '_ss_gate_last_reason', implode(' / ', $reasons));
+    // 自分のフックで無限に呼ばれないよう、いったん外してから戻す
+    remove_action('save_post', 'ssqg_recheck', 999);
+    wp_update_post(['ID' => $post_id, 'post_status' => 'draft']);
+    add_action('save_post', 'ssqg_recheck', 999, 2);
+}
+add_action('save_post', 'ssqg_recheck', 999, 2);
+
+// REST API はメタの保存がさらに後になるため、そこでもう一度見る
+add_action('rest_after_insert_post', function ($post) {
+    ssqg_recheck($post->ID, $post);
+}, 999, 1);
 
 
 /**
@@ -140,20 +180,6 @@ add_action('admin_notices', function () {
     );
     delete_post_meta($post_id, '_ss_gate_blocked');
 });
-
-
-/**
- * REST API から来た投稿にも、同じ理由を返す。
- * 配信スクリプト側で「公開されなかった」ことに気づけるようにする
- */
-add_action('rest_after_insert_post', function ($post, $request) {
-    $why = get_post_meta($post->ID, '_ss_gate_blocked', true);
-    if ($why) {
-        delete_post_meta($post->ID, '_ss_gate_blocked');
-        // ステータスは既に draft へ戻っている。配信側はこれを見て判断する
-        update_post_meta($post->ID, '_ss_gate_last_reason', $why);
-    }
-}, 10, 2);
 
 
 /**

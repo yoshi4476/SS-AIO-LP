@@ -22,6 +22,34 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def live_slugs_wp(domain):
+    """WordPressは REST API から公開済みのslugを取る。
+
+    sitemap から拾おうとすると、WordPress標準は /wp-sitemap.xml、
+    Yoastは /sitemap_index.xml と入口が分かれるうえ、どちらも
+    インデックス形式で子を辿る必要がある。RESTなら1回で確実に取れる。
+    公開記事の一覧は認証なしで読める。
+    """
+    out, page = set(), 1
+    while page <= 20:
+        url = (f"https://{domain}/wp-json/wp/v2/posts"
+               f"?per_page=100&page={page}&status=publish&_fields=slug")
+        try:
+            req = urllib.request.Request(
+                url, headers={"User-Agent": "SevenSenses-PublishGap/1.0"})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                rows = json.loads(r.read().decode("utf-8", "replace"))
+        except Exception:
+            return None if page == 1 else out
+        if not isinstance(rows, list) or not rows:
+            break
+        out |= {x.get("slug", "") for x in rows if x.get("slug")}
+        if len(rows) < 100:
+            break
+        page += 1
+    return out
+
+
 def live_slugs(domain):
     """公開サイトのsitemapから、いま出ている記事のslugを集める"""
     for path in ("/sitemap.xml", "/sitemap-0.xml", "/blog/sitemap.xml"):
@@ -161,7 +189,8 @@ def main():
     total_gap = 0
     for site, slugs in sorted(mine.items()):
         c = conf[site]
-        live = live_slugs(c["domain"])
+        live = (live_slugs_wp(c["domain"]) if c.get("type") == "wordpress"
+                else live_slugs(c["domain"]))
         if live is None:
             print(f"■ {site}: 公開状況を取れません（{c['domain']}）")
             continue
@@ -173,7 +202,7 @@ def main():
         if c.get("type") == "self-static":
             print(f"■ {site}: 手元 {len(slugs)}本 / 自前ビルドのため照合しません")
             continue
-        man = live_manifest(c["domain"])
+        man = None if c.get("type") == "wordpress" else live_manifest(c["domain"])
         fresh = set() if man is not None else recently_edited()
         stale, why = [], {}
         for s, title, frags, h in slugs:
