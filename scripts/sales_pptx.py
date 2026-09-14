@@ -488,7 +488,7 @@ def s_roles(prs, part):
 
 
 def s_vs_consult(prs):
-    s, y = slide(prs, "20", "一般的なSEO支援と、何が違うのか",
+    s, y = slide(prs, "22", "一般的なSEO支援と、何が違うのか",
                  "「SEOコンサル」「記事制作代行」「AIライティングツール」と比べます。"
                  "どれも一部は重なりますが、担う範囲が違います。", eyebrow="優位点")
     y = table(s, y, ["", "SEOコンサル", "記事制作代行", "AIツール", "本サービス"],
@@ -574,8 +574,84 @@ def s_flow(prs):
             "全記事を同じ長さに揃えると、それ自体が機械生成の痕跡になるためです。")
 
 
+
+def s_sheet(prs):
+    """御社にしていただくことの具体。営業でいちばん不安がられるところ"""
+    s, y = slide(prs, "10", "ご記入いただくのは、この1枚だけです",
+                 "記事づくりに必要な情報を1枚のシートにまとめてあります。"
+                 "ご記入は最初の1回のみ。所要時間は30分ほどです。",
+                 eyebrow="御社にしていただくこと")
+    y = table(s, y, ["ご記入いただくこと", "記事のどこになるか"],
+              [[("主力商材とカテゴリの配分", NAVY),
+                "記事の結論をどこへ着地させるか。ここが曖昧だと、読まれても相談につながりません"],
+               [("ターゲット（人物像・商圏）", NAVY),
+                "誰に向けて書くか。1人の顔が浮かぶ粒度まで伺います"],
+               [("メインキーワード / サブキーワード", NAVY),
+                "掛け合わせて記事の主題を作ります。実例では メイン3語＋サブ4語 から主題候補50件"],
+               [("実績の数値（3つまで）", NAVY),
+                "AI検索が最も引用したがる一次情報。出典と時点をセットで伺います"],
+               [("よく聞かれる質問（5つ以上）", NAVY),
+                "記事のFAQにそのまま載ります。お客様の言葉のまま使えるほど強くなります"],
+               [("著者名・肩書き・保有資格", NAVY),
+                "記事の著者情報。誰が書いたか分からない記事は検索にもAIにも信用されません"],
+               [("文体・使いたくない表現", NAVY),
+                "全記事の書き方が揃います。既存サイトがあればそちらに合わせます"],
+               [("外部との接点（加盟団体・取引先・取材）", NAVY),
+                "他サイトからリンクされる起点。買うことはできないので、"
+                "すでにある関係から広げます"]],
+              [0.3, 0.7], row_h=0.5, size=11.5)
+    box(s, M, y, CW, Inches(0.94), fill=SOFT, line_col=LINE)
+    text(s, M + Inches(0.28), y + Inches(0.16), CW - Inches(0.56), Inches(0.64),
+         "ご記入いただいた内容は、記事を書くたびに読み込まれます。"
+         "書かれていないことは書きません。憶測で補うと、事実と違う記事が公開されるためです。",
+         12, True, NAVY, line=1.5)
+    foot(s, "※ 分からない項目は空欄のままで構いません。導入時のお打ち合わせで一緒に決めます。")
+
+
+def s_sheet_industry(prs):
+    s, y = slide(prs, "11", "業種によって、聞くことを変えています",
+                 "同じ質問票では、その業種でしか書けない記事になりません。"
+                 "業種ごとに専用の項目をご用意しています。", eyebrow="御社にしていただくこと")
+    half = Emu(int((CW - Inches(0.3)) / 2))
+    box(s, M, y, half, Inches(2.5), fill=SOFT, line_col=LINE)
+    box(s, M, y, Pt(3), Inches(2.5), fill=BLUE)
+    text(s, M + Inches(0.26), y + Inches(0.18), half - Inches(0.5), Inches(0.28),
+         "共通（全業種）", 13, True, NAVY)
+    text(s, M + Inches(0.26), y + Inches(0.52), half - Inches(0.5), Inches(0.24),
+         "95項目 / 18セクション", 11, True, BLUE)
+    bullets_in(s, M + Inches(0.26), y + Inches(0.88), half - Inches(0.52), [
+        "会社情報・著者・文体",
+        "主力商材とカテゴリの配分",
+        "ターゲットと狙うキーワード",
+        "実績の数値・よくある質問",
+        "外部との接点（被リンクの起点）",
+    ], 11, BLUE)
+    x2 = M + half + Inches(0.3)
+    box(s, x2, y, half, Inches(2.5), fill=RGBColor(0xEB, 0xF2, 0xFC), line_col=BLUE)
+    box(s, x2, y, Pt(3), Inches(2.5), fill=TEAL)
+    text(s, x2 + Inches(0.26), y + Inches(0.18), half - Inches(0.5), Inches(0.28),
+         "飲食店向け（追加分）", 13, True, NAVY)
+    text(s, x2 + Inches(0.26), y + Inches(0.52), half - Inches(0.5), Inches(0.24),
+         "124項目 / 23セクション", 11, True, TEAL)
+    bullets_in(s, x2 + Inches(0.26), y + Inches(0.88), half - Inches(0.52), [
+        "席数・客単価・最寄駅と徒歩分数",
+        "看板メニューと価格・食材の産地",
+        "予約の受付方法・貸切の可否",
+        "グルメサイトと地図サービスの状況",
+        "景品表示法で使えない表現",
+    ], 11, TEAL)
+    y += Inches(2.74)
+    box(s, M, y, CW, Inches(1.0), fill=SOFT, line_col=LINE)
+    text(s, M + Inches(0.28), y + Inches(0.16), CW - Inches(0.56), Inches(0.7),
+         "たとえば飲食店の記事で「明石浦漁港から毎朝直送」「JR大阪駅から徒歩6分」と書けるかどうかで、"
+         "記事の説得力はまったく変わります。AI検索も、固有の地名・食材名・産地を手がかりに引用します。"
+         "経理代行に席数を伺っても意味がないように、必要な材料は業種ごとに違います。",
+         12, False, INK, line=1.55)
+    foot(s, "※ 上記以外の業種も、同じ考え方で専用シートをご用意します（クリニック・士業・工務店など）。")
+
+
 def s_gates(prs):
-    s, y = slide(prs, "10", "品質を落とさない四重の検査",
+    s, y = slide(prs, "12", "品質を落とさない四重の検査",
                  "「気をつける」では品質は保てません。基準を割った記事が物理的に公開できない形にしてあります。")
     for i, (k, n, v) in enumerate(GATES):
         yy = y + Emu(int(Inches(1.14) * i))
@@ -594,7 +670,7 @@ def s_gates(prs):
 
 
 def s_checks(prs):
-    s, y = slide(prs, "11", f"機械が数える{FACT['checks']}項目",
+    s, y = slide(prs, "13", f"機械が数える{FACT['checks']}項目",
                  "数えられるものを人に採点させません。全項目が通るまで、人による採点に進みません。")
     items = ["規定字数以上", "強調が12〜18箇所", "冒頭が断言型・80字以上", "対象読者の明記",
              "鮮度表記（◯年◯月時点）", "用語の定義ブロック", "比較テーブル", "失敗例・注意点の節",
@@ -619,7 +695,7 @@ def s_checks(prs):
 
 
 def s_effect(prs):
-    s, y = slide(prs, "12", "効かなかった記事を、毎週自動で直します",
+    s, y = slide(prs, "14", "効かなかった記事を、毎週自動で直します",
                  "「対策した」と「効果があった」は別物です。直した日の前後で同じ日数を比べ、効いたかどうかを数字で判定します。")
     y = table(s, y, ["数字の状態", "判定", "やること"],
               [["表示20回以上 / クリック0 / 20位以内", ("タイトルの問題", RED),
@@ -642,7 +718,7 @@ def s_effect(prs):
 
 
 def s_review(prs):
-    s, y = slide(prs, "13", "自動修正を、そのままにしません",
+    s, y = slide(prs, "15", "自動修正を、そのままにしません",
                  "自動化でいちばん危ないのは、1本ずつは正しいのに積み上がると記事が壊れることです。"
                  "当てる側は1本しか見ていないため、これを検知できません。")
     box(s, M, y, Inches(3.6), Inches(1.55), fill=RGBColor(0xFC, 0xEF, 0xED),
@@ -669,7 +745,7 @@ def s_review(prs):
 
 
 def s_ops(prs):
-    s, y = slide(prs, "14", "公開したあとの運用",
+    s, y = slide(prs, "16", "公開したあとの運用",
                  "公開して終わりではありません。毎日・毎週・毎月の運用が自動で回り続けます。")
     for i, (k, v) in enumerate(OPS):
         yy = y + Emu(int(Inches(0.82) * i))
@@ -688,7 +764,7 @@ def s_ops(prs):
 
 
 def s_report(prs):
-    s, y = slide(prs, "15", "月次レポート（サイト再構成の指示つき）",
+    s, y = slide(prs, "17", "月次レポート（サイト再構成の指示つき）",
                  "数字を並べるだけのレポートではありません。"
                  "「どの記事のどこを、どう変えるか」まで書いて毎月お渡しします。")
     half = -(-len(REPORT_ITEMS) // 2)
@@ -705,7 +781,7 @@ def s_report(prs):
     foot(s, "※ 金色の項目は、他社のレポートにはあまり含まれない改善指示のパートです。")
 
 def s_proof(prs):
-    s, y = slide(prs, "16", "この仕組みは、当社自身が使っています",
+    s, y = slide(prs, "18", "この仕組みは、当社自身が使っています",
                  "提案のために作ったものではありません。当社が自社の3サイトで毎日動かしている仕組みを、そのままご提供します。")
     y = cards(s, y, [
         ("運用中のサイト", f"{FACT['sites']}サイト", "AI集客・経理BPO・補助金支援の3領域"),
@@ -766,7 +842,7 @@ def term(s, x, y, w, h, lines, size=9.5, title=""):
 
 
 def s_live_log(prs):
-    s, y = slide(prs, "17", "実際に動いている記録 ― 2026年9月14日",
+    s, y = slide(prs, "19", "実際に動いている記録 ― 2026年9月14日",
                  "以下は当社の運用サイトで、その日に実際に走った処理の記録です。時刻は日本時間。")
     rows = [("11:38", "自動修復", "skipped", "直すものなし"),
             ("11:17", "記事パイプライン", "success", "補助金サイト 1本公開"),
@@ -789,7 +865,7 @@ def s_live_log(prs):
 
 
 def s_live_judge(prs):
-    s, y = slide(prs, "18", "エージェントが実際に出した判断",
+    s, y = slide(prs, "20", "エージェントが実際に出した判断",
                  "画面の出力をそのまま載せています。どれも人が介在せず、条件だけで判定したものです。")
     colw = Emu(int((CW - Inches(0.3)) / 2))
     term(s, M, y, colw, Inches(2.0),
@@ -828,7 +904,7 @@ def s_live_judge(prs):
 
 
 def s_live_growth(prs):
-    s, y = slide(prs, "19", "止まらずに積み上がっています",
+    s, y = slide(prs, "21", "止まらずに積み上がっています",
                  "直近11日間に新しく公開された記事です。3サイト合計、すべて品質基準を満たしたもののみ。")
     data = [("09/04", 1), ("09/05", 5), ("09/06", 8), ("09/07", 11), ("09/08", 12),
             ("09/09", 8), ("09/10", 8), ("09/11", 9), ("09/12", 9), ("09/13", 6),
@@ -864,7 +940,7 @@ def s_live_growth(prs):
 
 
 def s_price(prs):
-    s, y = slide(prs, "21", "料金",
+    s, y = slide(prs, "23", "料金",
                  f"サイト構築の初期費用と、記事{PRICE['articles']}本＋レポート＋改善作業を含む月額費用です。")
     text(s, M, y, CW, Inches(0.3), "初期費用（サイト構築）", 14, True, NAVY)
     y += Inches(0.46)
@@ -906,7 +982,7 @@ def s_price(prs):
 
 
 def s_compare(prs):
-    s, y = slide(prs, "22", "他の方法と比べた場合",
+    s, y = slide(prs, "24", "他の方法と比べた場合",
                  f"同じ「月{PRICE['articles']}本の記事を作る」を、他の手段で実現した場合と比べます。")
     w_low = MARKET["writer_low"] * PRICE["articles"]
     w_high = MARKET["writer_high"] * PRICE["articles"]
@@ -934,7 +1010,7 @@ def s_compare(prs):
 
 
 def s_steps(prs):
-    s, y = slide(prs, "23", "導入の流れ",
+    s, y = slide(prs, "25", "導入の流れ",
                  "お申し込みから最初の記事が公開されるまで、おおむね3〜4週間です。")
     steps = [("01", "無料相談・ヒアリング", "60分",
               "御社の強み、狙いたい層、競合状況を伺います。この場で、"
@@ -971,7 +1047,7 @@ def s_steps(prs):
 
 def s_faq(prs, part):
     half = FAQS[:4] if part == 1 else FAQS[4:]
-    s, y = slide(prs, "24", f"よくあるご質問（{part}/2）", "")
+    s, y = slide(prs, "26", f"よくあるご質問（{part}/2）", "")
     for q, a in half:
         box(s, M, y, Inches(0.3), Inches(0.3), fill=NAVY)
         text(s, M, y + Inches(0.04), Inches(0.3), Inches(0.24),
@@ -1028,6 +1104,8 @@ def build():
     s_flow(prs)
     s_roles(prs, 1)
     s_roles(prs, 2)
+    s_sheet(prs)
+    s_sheet_industry(prs)
     s_gates(prs)
     s_checks(prs)
     s_effect(prs)
