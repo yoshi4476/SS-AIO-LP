@@ -363,6 +363,25 @@ def test_each_site_declares_what_it_sells():
     check("執筆前に主力を見せている", "このサイトで売るもの" in brief, True)
 
 
+def test_next_keyword_prefers_main_offer():
+    """次に書く語は、そのサイトの主力を先に選ぶこと。
+
+    台帳は優先度順に返すが、いま台帳の語はすべて優先度Bで実質は行の並び順。
+    主力から離れた古い語が先に出ていた（ラボで「工務店 sns 集客」など）。
+    配信済みの管制塔コードは優先度付きの追加に対応しておらず、
+    台帳側では順序を変えられないため、取り出す側で寄せている。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import hub_client
+    for site, must in (("ai-lab", "aio"), ("subsidy", "ai導入補助金"),
+                       ("corporate", "bpo")):
+        pat = hub_client._main_offer_pattern(site)
+        check(f"{site} の主力の目印がある", bool(pat), True)
+        check(f"{site} の目印が主力を含む", must in pat, True)
+    src = (ROOT / "scripts" / "hub_client.py").read_text(encoding="utf-8")
+    check("next_kw が主力を優先している", "主力優先" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -373,7 +392,8 @@ def main():
               test_kw_intent_separates_click_need,
               test_lead_funnel_is_watched,
               test_cta_wording_is_measured_not_guessed,
-              test_each_site_declares_what_it_sells):
+              test_each_site_declares_what_it_sells,
+              test_next_keyword_prefers_main_offer):
         try:
             t()
         except Exception as e:

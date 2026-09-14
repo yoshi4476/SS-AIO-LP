@@ -64,15 +64,51 @@ def _post(body):
         return json.load(r)
 
 
+def _main_offer_pattern(site):
+    """そのサイトの主力に当たる語の目印。sites/<site>.json の main_offer と対にする"""
+    return {
+        "ai-lab": r"aio|llmo|ai検索|生成ai|chatgpt|ai overview",
+        "subsidy": r"ai導入補助金|ai補助金",
+        "corporate": r"bpo|経理代行|記帳代行",
+    }.get(site, "")
+
+
 def next_kw(site):
-    """次に書くKWを取得。管制塔が使えなければ None を返す（呼び出し側でローカルにフォールバック）"""
+    """次に書くKWを取得。管制塔が使えなければ None を返す（呼び出し側でローカルにフォールバック）
+
+    台帳は優先度の順に返すが、いま台帳にある語はすべて優先度Bで、
+    実質は行の並び順になっている。主力から離れた古い語が先に出てしまうため、
+    ここで主力の語を先に拾う。配信済みの管制塔コードは優先度付きの追加に
+    対応しておらず、台帳側では順序を変えられない。
+    """
     if not enabled():
         return None
     try:
-        return _get({"action": "next_kw", "site": site})
+        got = _get({"action": "next_kw", "site": site})
     except (urllib.error.URLError, ValueError, TimeoutError) as e:
         print(f"管制塔に接続できません（ローカルのKWリストを使います）: {e}")
         return None
+    pat = _main_offer_pattern(site)
+    if not pat or not isinstance(got, dict) or not got.get("keyword"):
+        return got
+    import re
+    if re.search(pat, str(got["keyword"]).lower()):
+        return got                       # すでに主力の語ならそのまま
+    try:
+        rows = all_kw()
+    except Exception:
+        return got
+    for r in rows or []:
+        if r.get("site") != site or str(r.get("status", "")).strip() != "未着手":
+            continue
+        kw = str(r.get("keyword", ""))
+        if kw and re.search(pat, kw.lower()):
+            out = dict(got)
+            out.update({"keyword": kw, "aim": r.get("aim", ""),
+                        "category": r.get("category", ""),
+                        "picked_by": "主力優先"})
+            return out
+    return got                           # 主力の語が尽きていれば、あるものを書く
 
 
 def all_kw(strict=False):
