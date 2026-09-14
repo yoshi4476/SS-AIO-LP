@@ -221,6 +221,20 @@ def main():
     verdict = {0: "着手可", 1: "要差別化（切り口をずらしてから書く）",
                2: "着手禁止（既存記事を書き足す）"}[level]
     print(f"\n   判定: {verdict}")
+
+    # 食い合わなくても、検索結果で用が済む語は書いても読まれない。
+    # 止めはしないが、書く前に開く理由を用意させる
+    try:
+        import kw_intent
+        v, pt, why = kw_intent.verdict(a.keyword)
+        print(f"\n■ 開く理由: [{v}] {pt}点（{why}）")
+        if v == "弱":
+            print("   この語は検索結果に答えが出た時点で用が済みます。"
+                  "実測でも、例文・診断系は8〜9位で表示88回・クリック0でした。")
+            print("   書くなら、検索結果には出せないもの"
+                  "（違反例・失敗例・自社の一次データ）をタイトルに置いてください。")
+    except Exception:
+        pass
     sys.exit(level)
 
 

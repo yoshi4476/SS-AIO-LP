@@ -289,13 +289,35 @@ def test_token_never_in_command_line():
     check("失敗ログでトークンを伏せている", "def mask(" in src, True)
 
 
+def test_kw_intent_separates_click_need():
+    """検索結果で用が済む語と、開かないと済まない語を見分けられること。
+
+    同じ順位でもCTRは5倍違った。例文・診断系は8〜9位で表示88回・クリック0、
+    不採択理由・書き方は5〜7位でクリックが付いていた。
+    この判定が壊れると、読まれない語を書き続けることになる。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import kw_intent
+    weak = ["口コミ 返信 例文 医療", "aio 診断", "meo対策 とは"]
+    strong = ["ai導入補助金 不採択理由", "実績報告 書き方", "持続化補助金 対象 条件"]
+    check("弱い語を弱と判定", [kw_intent.verdict(k)[0] for k in weak], ["弱"] * 3)
+    check("強い語を強と判定", [kw_intent.verdict(k)[0] for k in strong], ["強"] * 3)
+
+    # 執筆前のゲートが注意を出すこと。判定だけあっても使われなければ意味がない
+    guard = (ROOT / "scripts" / "kw_guard.py").read_text(encoding="utf-8")
+    check("食い合いゲートが開く理由を見る", "kw_intent" in guard, True)
+    disc = (ROOT / "scripts" / "kw_discover.py").read_text(encoding="utf-8")
+    check("候補の並びに反映している", "kw_intent" in disc, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
               test_token_check_probes_write, test_selfheal_watches_real_workflows,
               test_lab_links_to_corporate, test_daily_audit_ignores_unscored_drafts,
               test_every_article_has_a_lead_path,
-              test_token_never_in_command_line):
+              test_token_never_in_command_line,
+              test_kw_intent_separates_click_need):
         try:
             t()
         except Exception as e:

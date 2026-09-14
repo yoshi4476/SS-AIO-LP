@@ -325,18 +325,29 @@ def main():
                     break
         print(f"  深掘りで追加: {len(discovered) - before}件")
 
-    print(f"KW_DISCOVER: GSC実証={len(proven)}件 / サジェスト発掘={len(discovered)}件")
+    # 開く理由のある語を先に出す。順位が同じでもCTRは5倍違った（kw_intent 参照）
+    import kw_intent
+    proven.sort(key=lambda q: (-kw_intent.score(q["kw"])[0], -q["imp"]))
+    discovered.sort(key=lambda s: -kw_intent.score(s)[0])
+    weak = [s for s in discovered if kw_intent.score(s)[0] < 0]
+
+    print(f"KW_DISCOVER: GSC実証={len(proven)}件 / サジェスト発掘={len(discovered)}件"
+          f"（うち開く理由の弱い語 {len(weak)}件）")
     if proven:
         print("\n■ 表示実績あり・記事なし（最優先で執筆する）")
         for q in proven[:15]:
-            print(f"  - {q['kw']}  （表示{q['imp']}回・平均{q['pos']}位）")
+            v, pt, _ = kw_intent.verdict(q["kw"])
+            print(f"  - [{v}] {q['kw']}  （表示{q['imp']}回・平均{q['pos']}位）")
     if discovered:
         print("\n■ サジェスト由来の新規候補（検索需要の裏付けあり）")
         for s in discovered[:20]:
-            print(f"  - {s}")
+            v, pt, why = kw_intent.verdict(s)
+            print(f"  - [{v}] {s}" + (f"   ← {why}" if v == "弱" else ""))
 
     if "--append" in sys.argv:
-        picks = [q["kw"] for q in proven[:10]] + discovered
+        # 弱い語は捨てずに後ろへ回す。数が足りないときの控えとして残す
+        strong = [s for s in discovered if kw_intent.score(s)[0] >= 0]
+        picks = [q["kw"] for q in proven[:10]] + strong + weak
         picks = picks[:MAX_APPEND]
         if not picks:
             print("\n追記対象なし（新規候補が見つかりませんでした）")
