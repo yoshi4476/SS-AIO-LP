@@ -611,6 +611,31 @@ def test_near_page1_is_pushed_every_week():
     check("毎週走る", "priority_boost.py --write" in wf, True)
 
 
+def test_main_category_actually_grows():
+    """主力カテゴリが、狙いの配分に向かって増えること。
+
+    site_brief が「次に書くなら◯◯」と出していても、執筆する側が
+    それに従わなければ配分は動かない。実測で、AI集客ラボの主力（aio）は
+    21%（狙い45%）まで落ち、直近21日の新規記事でも22%のままだった。
+    指示が出ているだけでは足りず、従わせる一文が要る。
+    """
+    pr = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
+    check("配分に従う指示がある", "次に書くなら" in pr, True)
+    check("主力が不足すると何が起きるか書いてある",
+          "相談につながらない" in pr, True)
+
+    # 主力優先の目印が、主力カテゴリの語だけを拾うこと。
+    # 広すぎると別カテゴリの語まで主力扱いになり、配分が動かない
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import re as _re
+    import hub_client as hb
+    pat = _re.compile(hb._main_offer_pattern("ai-lab"), _re.I)
+    check("主力の語を拾う", bool(pat.search("aio 診断")), True)
+    check("別カテゴリの語は拾わない", bool(pat.search("chatgpt 集客 方法")), False)
+    for sid in ("ai-lab", "corporate", "subsidy"):
+        check(f"{sid} に主力の目印がある", bool(hb._main_offer_pattern(sid)), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -628,7 +653,8 @@ def main():
               test_client_onboarding_is_one_sheet,
               test_quality_gate_holds_on_wordpress,
               test_daily_todo_fits_in_one_run,
-              test_near_page1_is_pushed_every_week):
+              test_near_page1_is_pushed_every_week,
+              test_main_category_actually_grows):
         try:
             t()
         except Exception as e:

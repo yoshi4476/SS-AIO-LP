@@ -67,7 +67,9 @@ def _post(body):
 def _main_offer_pattern(site):
     """そのサイトの主力に当たる語の目印。sites/<site>.json の main_offer と対にする"""
     return {
-        "ai-lab": r"aio|llmo|ai検索|生成ai|chatgpt|ai overview",
+        # 主力は AIO。chatgpt・生成ai を入れると ai-marketing の語まで拾い、
+        # 主力カテゴリが増えない（実測で aio が21%まで落ちた）
+        "ai-lab": r"aio|llmo|ai検索|ai overview|生成エンジン|ai引用",
         "subsidy": r"ai導入補助金|ai補助金",
         "corporate": r"bpo|経理代行|記帳代行",
     }.get(site, "")
