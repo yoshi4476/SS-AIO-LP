@@ -129,7 +129,7 @@ Search Consoleの生成AIパフォーマンスレポートと、GA4のAI参照�
 AI検索対応で最も見落とされやすいのは、AIが参照する元情報自体が医療広告ガイドラインに抵触しているケースです。
 
 
-あわせて[整骨院のSEO対策とは？MEOと役割分担する5つの手順](/seo/seikotsuin-seo-taisaku/)もご覧ください。
+近い論点を[整骨院のSEO対策とは？MEOと役割分担する5つの手順](/seo/seikotsuin-seo-taisaku/)で扱っています。
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>は、ホームページも広告規制の対象に含めています。AIは公開されている文章をそのまま要約・引用するため、==体験談や誇大表現を含むページはAIの回答にもその表現ごと反映されるリスクがあります==。ガイドラインの詳しい内容と禁止6表現は[医療広告ガイドラインとは？クリニックHPの禁止6表現](/seo/iryou-koukoku-guideline-web/)で解説しています。
 
 <div class="caution-box"><span class="box-title">注意: AI向けに「盛った表現」は逆効果</span><br>AIに選ばれたいからといって効果を誇張すると、ガイドライン違反のリスクと、AIが不正確な情報として引用を避けるリスクの両方を抱えます。事実を具体的に書き切ることが、規制順守とAI検索対策を同時に満たす唯一の道です。</div>

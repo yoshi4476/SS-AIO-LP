@@ -53,10 +53,6 @@ faq:
 近い論点を[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)で扱っています。
 あわせて[経理派遣の時給相場｜経験・地域別の目安と実質コストの計算法](/blog/keiri-haken-jikyu-souba/)もご覧ください。
 
-選ぶときの基準については、[経理の内製と外注を比較｜6つの軸で見る違いと選び方](/blog/keiri-naisei-gaichuu-hikaku/)にまとめています。
-
-関連する内容として[給与計算の外注費用はいくら？【2026年】人数別シミュレーション](/blog/kyuyokeisan-gaichuu-hiyou-souba/)も公開しています。
-
 <div class="definition-box"><span class="term">経理外注の判断基準とは</span>、経理業務を社内で抱え続けるリスクと、外部委託によるコスト・手離れのバランスを比較するための5つの視点のことです。==1つの基準だけで即断せず、複数を組み合わせて確認すると精度が上がります。==</div>
 
 <figure><img src="/images/keiri-gaichuu-handan-kijun/kijun.png" alt="経理外注の判断基準5つ: 業務量が増え続けているか、属人化・引き継ぎリスクがあるか、繁忙期と閑散期の差が大きいか、経理人材を採用できる見込みがあるか、コストが妥当な範囲か" loading="lazy"><figcaption>経理外注の判断基準5つ</figcaption></figure>
@@ -71,6 +67,8 @@ faq:
 
 月次の経理業務にかかる時間が増加傾向にあるなら、外注を検討すべき最初のサインです。
 
+
+あわせて[SMBCグループの経理自動化事例｜中小企業が学べる3つの視点](/blog/smbc-keiri-jidouka/)もご覧ください。
 
 あわせて[経理の残業を減らす7つの方法｜原因と今日からできる対策](/blog/keiri-zangyo-herasu/)もご覧ください。
 当社は会計ソフトの導入支援を通じて、経理の実務が属人化している会社を数多く見てきました。**判断が分かれるのは、業務量よりも「引き継ぎ資料があるかどうか」**です。
@@ -165,6 +163,8 @@ faq:
 
 判断に迷ったら、業務の棚卸し→リスクの言語化→見積もり比較の順で進めます。
 
+
+近い論点を[管理会計まで頼む経理BPOの料金｜範囲別の増え方](/blog/kanri-kaikei-jikyu-souba/)で扱っています。
 
 あわせて[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)もご覧ください。
 <figure><img src="/images/keiri-gaichuu-handan-kijun/step.png" alt="判断に迷ったときの3ステップ: 経理業務を棚卸しする、属人化・繁忙期のリスクを言語化する、内製継続と外注の見積もりを比較する" loading="lazy"><figcaption>判断に迷ったときの3ステップ</figcaption></figure>

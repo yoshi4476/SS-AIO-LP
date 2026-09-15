@@ -26,6 +26,11 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import sites as S  # noqa: E402
 
+# 内部リンクの数え方は score_check と同じものを使う。相対パスだけを数えると、
+# 絶対URLで書かれたリンクが漏れる（実際、41本を「リンク不足」と誤判定していた）
+import score_check  # noqa: E402
+_INTERNAL, _ = score_check._link_patterns()
+
 # 記事1本ごとに見るAIOの実装。AI検索が引用するときに使う手がかり
 RULES = [
     ("冒頭の断言型回答", lambda b, f: b.lstrip().startswith("**")),
@@ -37,7 +42,7 @@ RULES = [
     ("FAQの構造化データ", lambda b, f: "faq:" in f),
     ("H2が6個以上", lambda b, f: len(re.findall(r"^## ", b, re.M)) >= 6),
     ("失敗例・注意点", lambda b, f: bool(re.search(r"NG|失敗|注意|つまず|落とし穴", b))),
-    ("内部リンク3本以上", lambda b, f: len(re.findall(r"\]\(/", b)) >= 3),
+    ("内部リンク3本以上", lambda b, f: len(_INTERNAL.findall(b)) >= 3),
 ]
 TRUST = [
     ("数値ファクト3箇所", lambda b, f: len(

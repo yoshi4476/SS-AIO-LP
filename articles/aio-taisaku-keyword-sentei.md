@@ -98,7 +98,7 @@ AIOキーワード選定とは、検索ボリュームとキーワード難易�
 サブクエリは、メインKWの分解、検索意図の整理、重複を除いた絞り込みという3ステップで洗い出します。
 
 
-関連する内容として[AIO対策なのに表示されない8つの原因と対処法](/aio/aio-taisaku-hyouji-sarenai/)も公開しています。
+近い論点を[AIO対策なのに表示されない8つの原因と対処法](/aio/aio-taisaku-hyouji-sarenai/)で扱っています。
 <figure><img src="/images/aio-taisaku-keyword-sentei/steps.png" alt="サブクエリの洗い出し3ステップ: メインKWを分解する、検索意図を整理する、重複を除いて絞る" loading="lazy"><figcaption>サブクエリの洗い出し3ステップ</figcaption></figure>
 
 **ステップ1: メインKWを分解する。**「aio対策」であれば「やり方」「費用」「無料ツール」「表示されない理由」のように、関連する疑問を思いつく限り列挙します。

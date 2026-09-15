@@ -50,8 +50,11 @@ faq:
 **IT導入補助金の中小企業者とは、業種ごとに定められた資本金の額または従業員数のどちらか一方の基準を満たす事業者です。**両方を満たす必要はなく、どちらか一方で足ります。
 
 
-関連する内容として[福岡県の建設業電子申請「JCIP」窓口と手数料の注意点3つ](/blog/fukuoka-kensetsugyou-denshishinsei/)も公開しています。
-関連する内容は、[補助金の電子申請はいつから義務化？中小企業が今やること](/blog/hojokin-denshishinsei-gimuka-itsukara/)で解説しています。
+関連する内容として[ネイルサロンの補助金申請手順を8ステップで解説](/blog/nail-salon-hojokin-tejun/)も公開しています。
+
+あわせて[建設業のAI導入補助金｜必要書類10点と揃える順番](/blog/kanagawa-kensetsugyou-denshishinsei/)もご覧ください。
+
+関連する内容は、[AI導入補助金の着金はいつ？実績報告後の日数目安](/blog/ai-hojokin-chakkin-itsu/)で解説しています。
 
 関連する内容については、[IT導入補助金はネイルサロンも使える？材料費と面貸しの壁](/blog/it-hojokin-nail-salon/)にまとめています。
 

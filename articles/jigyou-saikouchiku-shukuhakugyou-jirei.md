@@ -94,6 +94,8 @@ faq:
 **2026年8月時点で宿泊業が使えるのは「新事業進出・ものづくり商業サービス補助金」です。**事業再構築補助金から2段階先の制度にあたります。
 
 
+近い論点を[事業再構築補助金で農業が使えたのは6次産業化｜対象外の境界線](/blog/jigyou-saikouchiku-nougyou-jirei/)で扱っています。
+
 関連する内容として[農業の補助金の申請方法｜制度の選び方と5ステップ【2026年】](/blog/nougyou-hojokin-shinsei-houhou/)も公開しています。
 <figure><img src="/images/jigyou-saikouchiku-shukuhakugyou-jirei/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能" loading="lazy"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 
