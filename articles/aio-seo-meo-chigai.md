@@ -46,6 +46,8 @@ diagrams:
 
 **3つの違いは、狙う検索結果の場所と、評価される情報の種類の組み合わせにあります。**表で並べると、混同していた部分が見えてきます。
 
+前提となる考え方は、[AIO SEO対策とは？両方に効く6つの施策と進める順番](/aio/aio-seo-taisaku/)で解説しています。
+
 前提となる考え方は[AIO SEO監査とは？既存SEO監査に足す7つの視点](/aio/aio-seo-audit/)で整理しています。
 
 <figure><img src="/images/aio-seo-meo-chigai/sanshu.png" alt="AIO・SEO・MEOを一言でいうと示した図" loading="lazy"><figcaption>AIO・SEO・MEOを一言でいうと</figcaption></figure>
