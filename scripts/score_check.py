@@ -136,7 +136,14 @@ def main():
         p = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", p)      # Markdownリンクは表示文だけ残す
         return re.sub(r"[*_=`]", "", p)
 
-    plain_paras = [_plain(p) for p in paras]
+    # 表・箇条書き・コードは「文」ではない。1行ずつ読むものなので、
+    # 塊のまま1文として数えると長文の誤検出になる（191字の表が挙がった）
+    def _is_prose(p):
+        s = p.strip()
+        return not (s.startswith(("|", "-", "*", ">", "#", "```"))
+                    or "|:--" in s)
+
+    plain_paras = [_plain(p) for p in paras if _is_prose(p)]
     # 基準は「読者が壁に感じる塊」を潰すことに絞る。完璧な短文化を求めると
     # 毎回落ちて公開が止まるため、実害の大きい超過だけを不合格にする。
     long_paras = [p for p in plain_paras if len(p) > 200]
