@@ -158,7 +158,7 @@ faq:
 属人化の解消は、退職直前の聞き取りだけで済ませたり、担当者任せにしたりすると失敗します。
 
 
-近い論点を[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)で扱っています。
+あわせて[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)もご覧ください。
 
 あわせて[請求書のAI自動化｜4つの工程とOCR精度の限界【2026年】](/blog/seikyusho-jidoka-ai/)もご覧ください。
 <figure><img src="/images/keiri-zokujinka-kaisho/hikaku.png" alt="属人化解消でのNGとOK: NG例は退職者への聞き取りだけで済ませる・マニュアル化を担当者任せにする・一度作って更新しない・口頭引き継ぎだけで終える、OK例は在職中に手順を可視化する・マニュアル化の期限と担当を会社が決める・定期的に見直す運用にする・書面と実務確認の両方で引き継ぐ" loading="lazy"><figcaption>属人化解消でのNGとOK</figcaption></figure>
