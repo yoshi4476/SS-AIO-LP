@@ -54,7 +54,7 @@ diagrams:
 
 </div>
 
-<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、令和6年末時点で全国の柔道整復師施術所数は**5万924件**にのぼります。競合が多い地域ほど、広告費をかけずに信頼を積み上げられるイベントの価値は高くなります。
+<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、令和6年末時点で全国の柔道整復師施術所数は<strong>5万924件</strong>にのぼります。競合が多い地域ほど、広告費をかけずに信頼を積み上げられるイベントの価値は高くなります。
 
 私たちがG-ranの支援現場で相談を受ける院長の多くは、「イベントをやりたいが何から手をつければいいかわからない」と口にします。まずはイベントの種類を知り、自院に合うものから小さく試すことが出発点です。
 

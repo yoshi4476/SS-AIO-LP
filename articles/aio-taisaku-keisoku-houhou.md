@@ -59,7 +59,7 @@ faq:
 
 Googleは<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">検索セントラルの公式ドキュメント</a>で、AI OverviewもAIモードも通常の検索と同じ評価基準を使うと説明しています。順位が土台であることは変わりませんが、土台の上で何が起きているかは別の指標が必要です。
 
-<a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>によると、**米国のGoogle検索の58.5%はどのサイトもクリックされずに終わります**。検索結果の中でAIが答えを完結させると、順位が良くてもクリックは発生しません。
+<a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>によると、<strong>米国のGoogle検索の58.5%はどのサイトもクリックされずに終わります</strong>。検索結果の中でAIが答えを完結させると、順位が良くてもクリックは発生しません。
 
 当社の実測でも、この傾向ははっきり出ています。**直近28日で302個の検索語からのべ2,164回表示されながら、クリックは6回にとどまりました**（自社Search Console実測・2026年9月時点）。表示回数は伸びているのに、クリックだけを見ていると効果が出ていないと誤解してしまいます。
 

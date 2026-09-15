@@ -57,7 +57,7 @@ diagrams:
 
 **宅建業者が11年連続で増える中、検索で見つかる会社だけが新規の反響を得られます。**
 
-<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、**令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています**。供給過多の市場では、ポータルへの物件掲載だけで反響が入ってきた時代は終わりつつあります。
+<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。供給過多の市場では、ポータルへの物件掲載だけで反響が入ってきた時代は終わりつつあります。
 
 | データ | 数値 | 出典 |
 |:--|:--|:--|
@@ -175,7 +175,7 @@ diagrams:
 
 **AI検索時代の不動産SEOは、具体語と表記の一致がそのままAI引用の土台になります。**
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省 令和7年版情報通信白書</a>によると、個人の生成AI利用経験率は2023年度の9.1%から2024年度は**26.7%**へと約3倍に増えました。「◯◯駅 不動産屋 おすすめ」とAIチャットに相談先を尋ねる利用者も今後増えていくと見込まれます。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省 令和7年版情報通信白書</a>によると、個人の生成AI利用経験率は2023年度の9.1%から2024年度は<strong>26.7%</strong>へと約3倍に増えました。「◯◯駅 不動産屋 おすすめ」とAIチャットに相談先を尋ねる利用者も今後増えていくと見込まれます。
 
 AIが参照する素材は、コラムやエリアガイド記事に書かれた具体的な事実です。対応エリアを「関西一円」ではなく駅名まで具体語で書くこと。ホームページとGoogleビジネスプロフィールの表記を一致させること。
 

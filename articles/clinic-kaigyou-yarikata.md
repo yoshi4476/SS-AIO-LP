@@ -94,7 +94,7 @@ faq:
 
 保健所の届出や内装工事には具体的な期日があり、遅れると開業日そのものが動きます。一方でホームページやMEOには「いつまでに」という外部からの締め切りがありません。結果として、期限のあるタスクから先に処理され、集患準備は「手が空いたら」の扱いになりがちです。
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、確認先としては**83%がGoogleを利用**しています。体調不安を伴う医療機関選びでは、この確認行動はさらに慎重になります。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）によると、<strong>消費者の71%が地域の店や施設を探す際に口コミを日常的に読み</strong>、確認先としては<strong>83%がGoogleを利用</strong>しています。体調不安を伴う医療機関選びでは、この確認行動はさらに慎重になります。
 
 ==ホームページやGoogleビジネスプロフィールは、開設した直後から検索結果に反映されるわけではありません==。インデックスや情報の反映には数週間かかることもあり、開業日の2週間前に着手しても間に合わない場合があります。
 

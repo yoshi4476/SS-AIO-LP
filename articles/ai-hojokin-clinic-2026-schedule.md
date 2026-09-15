@@ -56,7 +56,7 @@ faq:
 
 当社はAI導入補助金の登録支援事業者として、対象ツールの選定から申請書類の作成、採択後の実績報告まで一貫して支援しています。医療機関の対象ツール・補助率・補助上限額の詳細は[医療・クリニックのAI導入と補助金](/blog/ai-hojokin-clinic-katsuyou/)で解説しているので、本記事では申請タイミングに絞って進めます。
 
-<a href="https://www.phchd.com/jp/medicom/park/tech/ehr-penetrationrate" target="_blank" rel="noopener">ウィーメックスが公表した2025年11月時点の調査</a>によると、**診療所の電子カルテ普及率は71.0%**まで上昇しました。それでも、レセコン連携やAI問診の追加導入を締切に合わせて検討している医療機関はまだ多く残っています。
+<a href="https://www.phchd.com/jp/medicom/park/tech/ehr-penetrationrate" target="_blank" rel="noopener">ウィーメックスが公表した2025年11月時点の調査</a>によると、<strong>診療所の電子カルテ普及率は71.0%</strong>まで上昇しました。それでも、レセコン連携やAI問診の追加導入を締切に合わせて検討している医療機関はまだ多く残っています。
 
 資本金3億円以下・従業員300人以下という中小企業基本法の要件は、医療法人でも個人クリニックでも共通です。開設者本人が申請する個人クリニックの場合、確定申告書の写しなど法人と異なる添付書類を求められる点だけ確認しておいてください。分院を持つ医療法人は、常時雇用の従業員数を法人全体で合算して判定します。
 
@@ -95,7 +95,7 @@ faq:
 
 <figure><img src="/images/ai-hojokin-clinic-2026-schedule/prep-flow.png" alt="締切までの準備4ステップ: 支援事業者に相談、GビズID取得、申請書類を準備、締切前に交付申請" loading="lazy"><figcaption>締切までの準備4ステップ</figcaption></figure>
 
-<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>では、交付申請に「GビズIDプライム」と「SECURITY ACTION」の宣言が必須と案内されています。**マイナンバーカードによるオンライン申請なら、GビズIDプライムは最短即日〜1週間で発行されます。**
+<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>では、交付申請に「GビズIDプライム」と「SECURITY ACTION」の宣言が必須と案内されています。<strong>マイナンバーカードによるオンライン申請なら、GビズIDプライムは最短即日〜1週間で発行されます。</strong>
 
 IT導入支援事業者の選定では、対象ツールを事前登録済みの事業者から選ぶ必要があります。まずは自院の候補ツールが対象になっているかの確認から始めてください。
 

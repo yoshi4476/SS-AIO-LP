@@ -184,7 +184,7 @@ MEOと紹介の整備効果は数週間で表れますが、自社サイトのSE
 
 生成AI検索の広がりにより、AIが会社名を挙げて物件相談に答える場面が増えており、正確な情報発信の積み重ねが対策になります。
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、**日本の個人の生成AI利用経験は26.7%**です。「〇〇駅 賃貸 会社」のようにAIに候補を尋ねる利用者も、今後増えていくと見込まれます。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。「〇〇駅 賃貸 会社」のようにAIに候補を尋ねる利用者も、今後増えていくと見込まれます。
 
 AIが引用する情報源は、ポータル・自社サイト・SNSに書かれた内容そのものです。会社名・電話番号・対応エリアの表記がすべての媒体で揃っていることが、そのまま引用されやすさにつながります。<a href="https://support.google.com/business/answer/7091?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ</a>でも、掲載順位は「関連性・距離・知名度」の3要素で決まると明記されています。
 

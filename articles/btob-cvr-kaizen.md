@@ -57,11 +57,11 @@ BtoB CVR改善が重要なのは、商談前の比較検討がオンライン上
 
 当社は3つの自社メディアを運営し、記事から問い合わせまでの導線を実際に運用しています。**改善の最初の一手は、記事の下に置くCTAの行き先を1つに絞ること**でした。
 
-<a href="https://www.gartner.com/en/sales/insights/b2b-buying-journey" target="_blank" rel="noopener">Gartnerの調査</a>によると、**B2B購買担当者が営業担当者と対面する時間は、購買プロセス全体のわずか17%**にとどまります。複数ベンダーを比較している場合、1社あたりに割ける時間はさらに5〜6%まで縮小し、残りの多くの時間は独自リサーチ（27%）に充てられています。
+<a href="https://www.gartner.com/en/sales/insights/b2b-buying-journey" target="_blank" rel="noopener">Gartnerの調査</a>によると、<strong>B2B購買担当者が営業担当者と対面する時間は、購買プロセス全体のわずか17%</strong>にとどまります。複数ベンダーを比較している場合、1社あたりに割ける時間はさらに5〜6%まで縮小し、残りの多くの時間は独自リサーチ（27%）に充てられています。
 
 つまり、営業が接触する前の段階で、LPやサイトの情報だけで比較候補に残れるかどうかが決まってしまう構造です。この段階で離脱されると、営業が優秀でも挽回する機会自体が生まれません。
 
-<a href="https://firstpagesage.com/seo-blog/b2b-landing-page-conversion-rates/" target="_blank" rel="noopener">First Page Sage社の2026年レポート</a>（海外83社・27業種のBtoB企業を分析）では、**ページ種別ごとの平均CVRに大きな差**が見られます。国内企業とは母集団が異なるため、絶対値ではなく傾向として参考にしてください。
+<a href="https://firstpagesage.com/seo-blog/b2b-landing-page-conversion-rates/" target="_blank" rel="noopener">First Page Sage社の2026年レポート</a>（海外83社・27業種のBtoB企業を分析）では、<strong>ページ種別ごとの平均CVRに大きな差</strong>が見られます。国内企業とは母集団が異なるため、絶対値ではなく傾向として参考にしてください。
 
 | ページ種別 | 平均CVR |
 |:--|:--|
@@ -94,7 +94,7 @@ CVR改善の主な施策は、フォーム最適化・LP構成の見直し・証
 
 資料請求という着地点そのものを増やす施策は、[資料請求を増やす方法とは？6つの施策と見直す順序](/ai-marketing/shiryoseikyu-fuyasu-hoho/)にまとめています。
 
-<a href="https://www.formstack.com/blog/form-conversion-tips" target="_blank" rel="noopener">Formstack社が紹介する調査</a>では、**フォームから項目を1つ減らすだけでコンバージョンが50%増加した**事例が報告されています。項目数を絞るほど入力の心理的な負担が下がるためです。
+<a href="https://www.formstack.com/blog/form-conversion-tips" target="_blank" rel="noopener">Formstack社が紹介する調査</a>では、<strong>フォームから項目を1つ減らすだけでコンバージョンが50%増加した</strong>事例が報告されています。項目数を絞るほど入力の心理的な負担が下がるためです。
 
 | 施策 | 具体的な内容 | 効果が出るまで |
 |:--|:--|:--|

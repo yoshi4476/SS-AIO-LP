@@ -63,7 +63,7 @@ LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先�
 
 日本のAIチャット利用はまだ3割未満で、だからこそLLMO対策は「先に動いた企業が独占しやすい」市場です。
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、**日本の個人の生成AI利用経験は26.7%**です。中国の81.2%、米国の68.8%と比べれば低いものの、前年調査から明確に増加しており、方向は一方通行です。企業側でも、AI活用の方針を定めている日本企業は49.7%と半数に達しています。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。中国の81.2%、米国の68.8%と比べれば低いものの、前年調査から明確に増加しており、方向は一方通行です。企業側でも、AI活用の方針を定めている日本企業は49.7%と半数に達しています。
 
 一方、検索側の変化はすでに数字に表れています。<a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>では米国の検索の58.5%がクリックなしで終わっています。「答えだけ受け取る」行動が当たり前になった先で、AIチャットが次の入口になるのは自然な流れです。
 

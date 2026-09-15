@@ -133,7 +133,7 @@ faq:
 | 革新的新製品・サービス枠 | 1〜5人 | 750万円 | 中小1/2・小規模2/3 |
 | 新事業進出枠 | 1〜20人 | 2,500万円 | 中小1/2 |
 
-<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請に電子申請システムでのGビズIDプライムの取得が必要と説明されています。**取得までに2〜3週間かかるため、締切ぎりぎりでは間に合いません。**
+<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請に電子申請システムでのGビズIDプライムの取得が必要と説明されています。<strong>取得までに2〜3週間かかるため、締切ぎりぎりでは間に合いません。</strong>
 
 <div class="caution-box"><span class="box-title">注意: 交付決定前の発注は対象外</span><br>採択されても、交付決定の通知を受け取る前に美容機器を発注・契約すると、その経費は補助対象になりません。見積もりの取得までにとどめ、契約は交付決定後に進めてください。</div>
 

@@ -62,7 +62,7 @@ faq:
 
 <figure><img src="/images/jigyou-saikouchiku-clinic-jirei/taisho-vs.png" alt="対象になる法人とならない法人: 対象になるのは個人開業医と収益事業を行う社会医療法人、対象にならないのは一般の医療法人と大病院・大学病院・医療法人財団" loading="lazy"><figcaption>対象になる法人とならない法人</figcaption></figure>
 
-<a href="https://so-labo.co.jp/hojyokin/meti/basic/750/" target="_blank" rel="noopener">事業再構築補助金の医療法人対象条件を解説する記事</a>によると、**個人開業医は出資額3億円以下・従業員300人以下を満たせば対象**でした。一方、大病院（病床400以上）・大学病院・特定機能病院・医療法人財団は明確に対象外とされています。
+<a href="https://so-labo.co.jp/hojyokin/meti/basic/750/" target="_blank" rel="noopener">事業再構築補助金の医療法人対象条件を解説する記事</a>によると、<strong>個人開業医は出資額3億円以下・従業員300人以下を満たせば対象</strong>でした。一方、大病院（病床400以上）・大学病院・特定機能病院・医療法人財団は明確に対象外とされています。
 
 | 法人形態 | 対象可否 | 備考 |
 |:--|:--|:--|

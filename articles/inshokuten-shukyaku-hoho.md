@@ -58,7 +58,7 @@ diagrams:
 
 飲食店の集客が伸び悩む最大の理由は、**来店客が複数の情報源を使い分けている**ことです。MEOだけ・SNSだけを整備しても、届く客層は一部にとどまります。
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、**消費者の71%が地域の店を探す際に口コミを日常的に読み**、口コミの確認先としては**83%がGoogleを利用**しています。さらに48%はAIが生成した口コミの要約も読むと回答しており、口コミはAI検索の素材にもなり始めています。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、<strong>消費者の71%が地域の店を探す際に口コミを日常的に読み</strong>、口コミの確認先としては<strong>83%がGoogleを利用</strong>しています。さらに48%はAIが生成した口コミの要約も読むと回答しており、口コミはAI検索の素材にもなり始めています。
 
 | 情報源 | 参考にする割合 | 対応する施策 |
 |:--|:--|:--|
@@ -170,7 +170,7 @@ MEO・SEO・AIOの3施策と、グルメサイト・SNS・デリバリーアプ�
 
 同じ状況に心当たりがある店舗は、慌てて表示回数だけを追わず、まずMEO・SEOの土台が整っているかを確認してみてください。店舗情報は具体語で書くほどAIに拾われやすくなります。「個室あり」だけでなく「4名用個室2部屋・完全個室」まで書き込むと、より具体的な質問にも回答素材として使われやすくなります。
 
-<a href="https://shokuhin.net/106478/2024/09/30/ryutu/gaishoku/" target="_blank" rel="noopener">食品新聞の報道</a>によると、日本フードサービス協会の推計で2023年の外食産業市場規模は**24兆1,512億円**、前年比+20.2%まで回復しました。市場が拡大局面にある今こそ、複数の情報源に一貫して現れる店舗ほど、候補として選ばれやすくなります。
+<a href="https://shokuhin.net/106478/2024/09/30/ryutu/gaishoku/" target="_blank" rel="noopener">食品新聞の報道</a>によると、日本フードサービス協会の推計で2023年の外食産業市場規模は<strong>24兆1,512億円</strong>、前年比+20.2%まで回復しました。市場が拡大局面にある今こそ、複数の情報源に一貫して現れる店舗ほど、候補として選ばれやすくなります。
 
 ## よくある質問
 

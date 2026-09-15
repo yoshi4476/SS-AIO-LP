@@ -57,7 +57,7 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 
 「SEOはオワコン」かどうかは感覚ではなくデータで判断すべきで、データは「変質したが、終わっていない」ことを示しています。
 
-<a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>によると、**米国のGoogle検索の58.5%はどのサイトもクリックされずに終わります**。さらに<a href="https://www.semrush.com/blog/semrush-ai-overviews-study/" target="_blank" rel="noopener">Semrushの2025年調査</a>では、AI Overviewの表示クエリ比率が2ヶ月で6.49%から13.14%へ倍増しました。
+<a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>によると、<strong>米国のGoogle検索の58.5%はどのサイトもクリックされずに終わります</strong>。さらに<a href="https://www.semrush.com/blog/semrush-ai-overviews-study/" target="_blank" rel="noopener">Semrushの2025年調査</a>では、AI Overviewの表示クエリ比率が2ヶ月で6.49%から13.14%へ倍増しました。
 
 | データ | 数値 | 出典 |
 |:--|:--|:--|
@@ -101,6 +101,7 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 実際の進め方は[AIO対策のキーワード選定](/aio/aio-taisaku-keyword-sentei/)で整理しています。
 
 近い論点を[不動産SEO記事のライター選び方](/seo/fudousan-seo-kiji-writer/)で扱っています。
+
 ### ステップ1: 顧客の質問を30個書き出す
 
 営業・接客で実際に受けた質問、問い合わせメールの文面、商談で聞かれたことを30個書き出します。ツールより先に、現場の言葉から始めます。
@@ -131,7 +132,6 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 冒頭200字: 「◯◯は◯◯です」と断言で回答
 対象読者: この記事は◯◯向けです
 鮮度表記: ◯年◯月時点の情報です
-
 H2-1: ◯◯とは（定義+基礎）
 H2-2: なぜ今必要か（データ・背景）
 H2-3: やり方・手順（本体。H3で3〜7ステップ）

@@ -707,6 +707,47 @@ def test_anchor_text_stays_readable():
     check("毎週走る", "shorten_anchors.py --write" in wf, True)
 
 
+def test_block_breaks_render_correctly():
+    """段落の切れ目が壊れていないこと。
+
+    リンク挿入と段落分割が、それぞれ別の壊し方をしていた。どちらも記事の点数には
+    出ず、画面で初めて分かる。表がパイプ記号のまま本文に出て、** がそのまま表示される。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import fix_block_breaks as fb
+    import split_paragraphs as sp
+    nl = chr(10)
+
+    # 1. 空行なしで続く表・リストの前に空行を入れる
+    for block in ("| 列A | 列B |", "1. 最初の手順", "- 箇条書き"):
+        out, n = fb.add_blank_lines("本文です。" + nl + block)
+        check(f"「{block[:6]}」の前に空行を入れる", n == 1 and nl + nl in out, True)
+    out, n = fb.add_blank_lines("1. 一つ目" + nl + "2. 二つ目")
+    check("リストの行同士には入れない", n, 0)
+
+    # 2. 装飾の途中で分かれた段落を戻す
+    broken = "**失敗1: 土台を飛ばす。" + nl + nl + "**理由はこうです。"
+    out, n = fb.rejoin_marks(broken)
+    check("** が分かれた段落を戻す", n == 1 and out.count(nl + nl) == 0, True)
+    ok = "普通の段落です。" + nl + nl + "次の段落です。"
+    check("閉じている段落は触らない", fb.rejoin_marks(ok)[1], 0)
+
+    # 3. 生HTMLの中の ** を <strong> にする（Markdownが処理しないため）
+    out, n = fb.strong_in_html('<div class="caution-box">罰金は**100万円**です。</div>')
+    check("生HTMLの ** を <strong> にする", n == 1 and "<strong>100万円</strong>" in out, True)
+    check("地の文の ** は触らない", fb.strong_in_html("本文の**強調**です。")[1], 0)
+
+    # 4. 分割側でも、装飾の内側では切らない（同じ壊れ方を作らない）
+    body = nl.join(["---", "title: x", "---",
+                    "あ" * 100 + "。**" + "い" * 100 + "。" + "う" * 100 + "**。"])
+    after, _ = sp.process(body)
+    for para in after.split(nl + nl):
+        check("分けた各段落で ** が閉じている", para.count("**") % 2, 0)
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週走る", "fix_block_breaks.py --write" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -727,7 +768,8 @@ def main():
               test_near_page1_is_pushed_every_week,
               test_main_category_actually_grows,
               test_paragraph_split_keeps_text,
-              test_anchor_text_stays_readable):
+              test_anchor_text_stays_readable,
+              test_block_breaks_render_correctly):
         try:
             t()
         except Exception as e:

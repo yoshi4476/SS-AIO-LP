@@ -75,7 +75,7 @@ diagrams:
 
 **院長1人の整骨院は、Googleビジネスプロフィールの基本情報を整えるだけでも新規来院が動き出します。**
 
-<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、全国の柔道整復師施術所数は令和6年末時点で**5万件超（50,924件）**です。競争密度が高い中、1人院は広告予算をかけにくい分、無料で整備できるプロフィールの完成度が新規来院を大きく左右します。
+<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、全国の柔道整復師施術所数は令和6年末時点で<strong>5万件超（50,924件）</strong>です。競争密度が高い中、1人院は広告予算をかけにくい分、無料で整備できるプロフィールの完成度が新規来院を大きく左右します。
 
 私たちがG-ranの支援現場で見てきた1人院でも、院名・住所・電話番号の統一とカテゴリ設定を見直しただけで、マップ経由の電話タップが動き出すケースがはっきり出ています。==院長が施術の合間に10分だけ時間を取る運用でも、続ければ十分に効果が出ます==。
 
@@ -105,7 +105,7 @@ diagrams:
 
 **口コミへの全件返信を仕組み化した整骨院ほど、院名を直接検索する「指名検索」が増える傾向があります。**
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、**83%が確認先としてGoogleを利用**しています。体の不調という不安を伴う選択だからこそ、口コミの存在感は重くなります。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、<strong>消費者の71%が地域の店や施設を探す際に口コミを日常的に読み</strong>、<strong>83%が確認先としてGoogleを利用</strong>しています。体の不調という不安を伴う選択だからこそ、口コミの存在感は重くなります。
 
 会計時や次回来院の案内時に自然に口コミをお願いするだけでも、依頼していない院との差は大きく開きます。**依頼をやめると口コミの増加も止まる**院を何院も見てきました。返信の具体的な型は[口コミを増やす方法と返信のコツ](/meo/kuchikomi-fuyasu-hoho/)で紹介しています。
 
@@ -117,13 +117,13 @@ diagrams:
 
 
 関連して、[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)もあわせてご確認ください。
-<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html" target="_blank" rel="noopener">厚生労働省の案内</a>によると、健康保険が使えるのは**骨折・脱臼・打撲・捻挫の施術を受けた場合**に限られます。慢性の肩こりや疲労は自由診療で全額自己負担です。
+<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html" target="_blank" rel="noopener">厚生労働省の案内</a>によると、健康保険が使えるのは<strong>骨折・脱臼・打撲・捻挫の施術を受けた場合</strong>に限られます。慢性の肩こりや疲労は自由診療で全額自己負担です。
 
 「保険が使えると思って来院したら実費だった」という患者さんの声を、私自身も取材の中で何度も聞いてきました。区分をはっきり伝える案内に切り替えた院ほど、来院後の不信感が減っています。
 
 <div class="caution-box"><span class="box-title">注意: 柔整広告ガイドラインの表現制限</span><br>「腰痛が治る」等の効能効果を標榜する表現や、保険が全て使えると誤認させる表現は禁止されています。詳しい表示ルールは<a href="https://www.mhlw.go.jp/stf/shingi/other-isei_547242.html" target="_blank" rel="noopener">厚生労働省の検討会資料</a>で確認してください。</div>
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、**日本の個人の生成AI利用経験は26.7%**です。プロフィールとサイトの情報が食い違ったままだと、ChatGPT等の受診先相談で候補から静かに外れてしまいます。区分をはっきり分けて発信する姿勢は、そのままAI検索対応にもつながります。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。プロフィールとサイトの情報が食い違ったままだと、ChatGPT等の受診先相談で候補から静かに外れてしまいます。区分をはっきり分けて発信する姿勢は、そのままAI検索対応にもつながります。
 
 私たちは自社サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで引用状況を日次で計測しています。直近28日の実測では、**202個の検索語からのべ1,207回表示された一方でクリックは0回**でした。表示はされてもクリックされないという段階は、多くの院が今まさに直面している課題そのものだと感じています。
 

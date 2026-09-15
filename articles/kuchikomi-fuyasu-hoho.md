@@ -38,7 +38,7 @@ faq:
 
 「口コミがどれほど見られているか」は消費者調査の数字がはっきり示しています。
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人を対象）によると、**地域の店を探す消費者の71%が口コミを日常的に読み**、確認先としては**83%がGoogleを使う**と回答しています。つまりGoogleマップの口コミ欄は、事実上「店の玄関」です。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人を対象）によると、<strong>地域の店を探す消費者の71%が口コミを日常的に読み</strong>、確認先としては<strong>83%がGoogleを使う</strong>と回答しています。つまりGoogleマップの口コミ欄は、事実上「店の玄関」です。
 
 | データ | 数値 | 出典 |
 |:--|:--|:--|
@@ -152,6 +152,7 @@ faq:
 
 
 関連して、[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)もあわせてご確認ください。
+
 | NG行為 | 何が問題か | 起きうる結果 |
 |:--|:--|:--|
 | 割引・特典と引き換えの依頼 | Googleポリシー違反 | 口コミの一括削除 |

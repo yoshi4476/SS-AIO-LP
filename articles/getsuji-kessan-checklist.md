@@ -51,7 +51,7 @@ faq:
 
 <div class="definition-box"><span class="term">月次決算早期化チェックリストとは</span>、事前準備・仕訳残高照合・試算表確定という3つの工程に沿って確認項目を並べ、各項目に担当者と期限を添えた一覧表を指します。==項目を並べるだけの表と違い、「誰が」「いつまでに」を明記する点==が、確認漏れを防ぐ実務上の分かれ目になります。</div>
 
-<a href="https://biz.moneyforward.com/accounting/basic/85224/" target="_blank" rel="noopener">クラウド会計ソフトが公開する実務ガイド</a>によると、チェックリストは資料収集→仕訳入力・残高確認→試算表作成→分析・報告という業務フロー順に項目を並べるのが原則とされています。<a href="https://maro-kaikei.co.jp/monthly-closing-speed-up-guide/" target="_blank" rel="noopener">税理士事務所が公開する早期化ガイド</a>でも、この順序を崩さずに**翌月5営業日前後**で試算表を確定させる企業の実践例が紹介されています。
+<a href="https://biz.moneyforward.com/accounting/basic/85224/" target="_blank" rel="noopener">クラウド会計ソフトが公開する実務ガイド</a>によると、チェックリストは資料収集→仕訳入力・残高確認→試算表作成→分析・報告という業務フロー順に項目を並べるのが原則とされています。<a href="https://maro-kaikei.co.jp/monthly-closing-speed-up-guide/" target="_blank" rel="noopener">税理士事務所が公開する早期化ガイド</a>でも、この順序を崩さずに<strong>翌月5営業日前後</strong>で試算表を確定させる企業の実践例が紹介されています。
 
 私たちが中小企業の経理体制づくりを支援する中でも、チェックリストがあるのに早期化が進まない企業の多くは、この並び順が業務の実態とずれているか、担当者欄が空欄のまま運用されているケースでした。
 

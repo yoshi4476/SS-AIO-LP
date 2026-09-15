@@ -128,7 +128,7 @@ faq:
 | 革新的新製品・サービス枠 | 1〜5人 | 750万円 | 中小1/2・小規模2/3 |
 | 新事業進出枠 | 1〜20人 | 2,500万円 | 中小1/2 |
 
-<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請に電子申請システムでのGビズIDプライムの取得が必要と説明されています。**取得までに2〜3週間かかるため、締切ぎりぎりでは間に合いません。**
+<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請に電子申請システムでのGビズIDプライムの取得が必要と説明されています。<strong>取得までに2〜3週間かかるため、締切ぎりぎりでは間に合いません。</strong>
 
 ## 制度名の思い込みで手続きを間違えた宿泊業の例
 

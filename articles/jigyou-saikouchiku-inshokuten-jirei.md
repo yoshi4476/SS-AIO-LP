@@ -127,7 +127,7 @@ faq:
 | 革新的新製品・サービス枠 | 1〜5人 | 750万円 | 中小1/2・小規模2/3 |
 | 新事業進出枠 | 1〜20人 | 2,500万円 | 中小1/2 |
 
-<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請に電子申請システムでのGビズIDプライムの取得が必要と説明されています。**取得までに2〜3週間かかるため、締切ぎりぎりでは間に合いません。**
+<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請に電子申請システムでのGビズIDプライムの取得が必要と説明されています。<strong>取得までに2〜3週間かかるため、締切ぎりぎりでは間に合いません。</strong>
 
 小規模な投資であれば、[小規模事業者持続化補助金｜中小企業が使える条件](https://lp.7senses.co.jp/blog/jizokuka-hojokin-chusho-kigyo-taisho/)のほうが向いている場合もあります。
 

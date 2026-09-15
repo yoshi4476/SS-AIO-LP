@@ -51,7 +51,7 @@ faq:
 
 Googleは公式ヘルプで、<a href="https://support.google.com/business/answer/3474050?hl=ja" target="_blank" rel="noopener">返信はわかりやすく丁寧に、そして速やかに行うこと</a>を案内しています。返信の審査は通常10分以内で終わりますが、最長で30日ほどかかる場合もあると明記されています。
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocalの2026年調査</a>によると、**口コミへの返信を期待する消費者は89%**にのぼる一方、実際に返信している企業は5%程度にとどまると報告されています。この差こそが、返信を続けるだけで周辺の競合と差がつく理由です。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocalの2026年調査</a>によると、<strong>口コミへの返信を期待する消費者は89%</strong>にのぼる一方、実際に返信している企業は5%程度にとどまると報告されています。この差こそが、返信を続けるだけで周辺の競合と差がつく理由です。
 
 同調査では、投稿当日の返信を期待する消費者が19%（前年6%）、翌日までを含めると32%（前年18%）に増えたとも報告されています。返信の速さそのものが、評価の対象になりつつあります。
 

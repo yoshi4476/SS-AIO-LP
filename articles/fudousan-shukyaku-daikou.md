@@ -54,7 +54,7 @@ faq:
 
 <div class="definition-box"><span class="term">不動産の集客代行とは</span>、ポータルサイトへの物件掲載・自社サイトの運用・SNS発信・広告出稿・問い合わせ対応のうち、一部または全部を月額契約や成果報酬で外部委託する仕組みを指します。丸投げではなく、社内で担う範囲と委託する範囲を線引きする発想が土台になります。</div>
 
-<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、**令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています**。担当者一人あたりが抱える集客業務も増える一方で、専任の担当を置けない会社ほど代行の検討価値が高まっています。
+<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。担当者一人あたりが抱える集客業務も増える一方で、専任の担当を置けない会社ほど代行の検討価値が高まっています。
 
 自社の反響が伸び悩む原因を先に切り分けたい場合は、[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)で診断してから読み進めると判断しやすくなります。
 

@@ -84,7 +84,7 @@ faq:
 
 紹介依存が通用しなくなった背景には、顧問税理士の高齢化と検索・AI回答起点の事務所選びの広がりがあります。
 
-<a href="https://www.nichizeiren.or.jp/" target="_blank" rel="noopener">日本税理士会連合会</a>によると、**全国の税理士登録者数は8万人を超えています**。供給過多の市場では、選ばれる理由を自分から発信できる事務所だけが新規の顧問先を得られます。
+<a href="https://www.nichizeiren.or.jp/" target="_blank" rel="noopener">日本税理士会連合会</a>によると、<strong>全国の税理士登録者数は8万人を超えています</strong>。供給過多の市場では、選ばれる理由を自分から発信できる事務所だけが新規の顧問先を得られます。
 
 同会が実施した<a href="https://www.nichizeiren.or.jp/datalibrary/system/survey/250221b/" target="_blank" rel="noopener">第7回税理士実態調査</a>は、回答数38,607件・回答率44.8%という業界を代表する規模で行われました。これだけの規模の税理士が実態調査に協力する背景には、事務所経営そのものへの危機感の広がりがあります。
 

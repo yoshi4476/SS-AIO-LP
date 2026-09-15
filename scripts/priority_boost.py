@@ -118,7 +118,10 @@ def send_links(tgt, words, want, texts):
             continue
         fit = cc.dice(ln.topic(ar.h2_before(body, pos)), ln.topic(title))
         line = ln.sentence(title, url, abs(hash(s + tgt)) % 8, fit)
-        nb = body[:pos] + "\n" + line + "\n" + body[pos:]
+        # 改行1つだと、直後の番号リストや箇条書きと1段落に繋がる。
+        # 実測で306字の塊になり、検査が「1文」として数えていた
+        nb = body[:pos] + "\n\n" + line + "\n\n" + body[pos:]
+        nb = re.sub(r"\n{3,}", "\n\n", nb)
         (ROOT / "articles" / f"{s}.md").write_text(f"---\n{fm2}\n---\n{nb}",
                                                    encoding="utf-8", newline="")
         texts[s] = f"---\n{fm2}\n---\n{nb}"

@@ -71,7 +71,7 @@ diagrams:
 
 **SEOとは、自然検索の一覧で自社ページの順位を上げるための対策全般を指します。**AIOとMEOも、広い意味ではSEOの一部と説明されることがあります。
 
-<div class="definition-box"><span class="term">SEOとは</span>、コンテンツの質・技術要件・被リンクなどを整え、検索エンジンの評価を高める対策の総称です。Googleの<a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener">役立つコンテンツガイド</a>では、経験・専門性・権威性・信頼性（E-E-A-T）のうち**信頼が最も重要**だとされています。</div>
+<div class="definition-box"><span class="term">SEOとは</span>、コンテンツの質・技術要件・被リンクなどを整え、検索エンジンの評価を高める対策の総称です。Googleの<a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener">役立つコンテンツガイド</a>では、経験・専門性・権威性・信頼性（E-E-A-T）のうち<strong>信頼が最も重要</strong>だとされています。</div>
 
 私たちが記事制作で最初に確認するのも、この信頼の部分です。誰が書き、何を根拠にしているかが曖昧な記事は、SEOでもAIOでも評価されにくくなっています。AI時代のSEOの基本は[AI時代のSEO対策とは？](/seo/ai-jidai-seo-taisaku/)にまとめました。
 

@@ -76,7 +76,7 @@ faq:
 関連する内容として[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)も公開しています。
 <figure><img src="/images/clinic-instagram-yarikata/riyu.png" alt="クリニックにインスタ集客が必要な3つの理由: 無料で始められる、通院前の不安を減らせる、スタッフの人柄が伝わる" loading="lazy"><figcaption>クリニックにインスタ集客が必要な3つの理由</figcaption></figure>
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、口コミの確認先としては**83%がGoogleを利用**しています。体への不安を伴う医療機関選びでは、この確認行動はさらに慎重になります。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）によると、<strong>消費者の71%が地域の店や施設を探す際に口コミを日常的に読み</strong>、口コミの確認先としては<strong>83%がGoogleを利用</strong>しています。体への不安を伴う医療機関選びでは、この確認行動はさらに慎重になります。
 
 第一に、無料で始められることです。撮影とキャプション作成の手間だけで、初期費用なく始められます。
 
@@ -84,7 +84,7 @@ faq:
 
 第三に、スタッフの人柄が伝わることです。医師やスタッフの日常的な発信は、ホームページの経歴欄だけでは伝わらない安心材料になります。
 
-<a href="https://www.glad-cube.com/blog/?p=35640" target="_blank" rel="noopener">グラッドキューブ社の調査分析</a>によると、総務省の2024年度データでInstagramの利用率は**男性47.6％・女性57.5％**、60代でも34.7％まで伸びています。子育て世代だけでなく、通院の意思決定に関わる親世代にも届く土台ができています。
+<a href="https://www.glad-cube.com/blog/?p=35640" target="_blank" rel="noopener">グラッドキューブ社の調査分析</a>によると、総務省の2024年度データでInstagramの利用率は<strong>男性47.6％・女性57.5％</strong>、60代でも34.7％まで伸びています。子育て世代だけでなく、通院の意思決定に関わる親世代にも届く土台ができています。
 
 私たちはMEO運用サービス「G-ran」で3,200店舗以上を支援してきました。==クリニックは「ホームページはあるがSNSは手つかず」の状態が最も多い業種の一つ==です。院内の写真という素材は十分にあるのに、発信していないだけのケースがほとんどです。
 

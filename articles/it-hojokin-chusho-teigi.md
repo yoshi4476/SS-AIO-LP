@@ -89,6 +89,7 @@ faq:
 
 
 あわせて[大阪府のJCIP電子申請](/blog/osaka-kensetsugyou-denshishinsei/)もご覧ください。
+
 | 業種区分 | 小規模事業者の従業員数 |
 |:--|:--|
 | 製造業・建設業・運輸業その他 | 20人以下 |

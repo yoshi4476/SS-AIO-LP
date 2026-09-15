@@ -84,7 +84,7 @@ AI検索での見え方は[不動産のAI検索対策](/aio/fudousan-ai-kensaku-
 
 反響が落ちやすくなっている背景には、宅建業者数の増加とAI回答起点の会社選びの広がりがあります。
 
-<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、**令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています**。供給過多の市場では、選ばれる理由を自分から発信できる会社だけが新規の反響を得られます。
+<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。供給過多の市場では、選ばれる理由を自分から発信できる会社だけが新規の反響を得られます。
 
 見込み客側の変化も無視できません。<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省 令和7年版情報通信白書</a>によると、個人の生成AI利用経験率は2023年度の9.1%から2024年度は**26.7%**へと約3倍に増えました。「地域名 不動産 口コミ」のような相談をAIチャットに投げる人も確実に増えています。
 

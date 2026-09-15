@@ -127,7 +127,7 @@ google.com/business からビジネス名・住所・電話番号を入力しま
 
 店舗名・住所・電話番号は、自社サイトや他の掲載媒体とも表記を一致させてください。プロフィール単体を整えても、ウェブ上の他の情報と食い違っていると、Googleにとって「同一店舗」という判断がしにくくなります。この一致は、AI検索が店舗情報を引用する際の手がかりにもなります。
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocalの2026年調査</a>(米国消費者1,002人対象)では、**ローカルビジネスを選ぶ前に口コミを確認する消費者が97%**にのぼると報告されています。営業時間や住所といった基本情報の正確さは、口コミと並んで来店判断の土台になっている項目です。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocalの2026年調査</a>(米国消費者1,002人対象)では、<strong>ローカルビジネスを選ぶ前に口コミを確認する消費者が97%</strong>にのぼると報告されています。営業時間や住所といった基本情報の正確さは、口コミと並んで来店判断の土台になっている項目です。
 
 <div class="cta-box"><p>自社のGoogleビジネスプロフィールが正しく設定できているか、無料で確認しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 

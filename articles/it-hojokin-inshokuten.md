@@ -59,7 +59,7 @@ faq:
 
 <div class="definition-box"><span class="term">デジタル化・AI導入補助金とは</span>、中小企業庁が実施する「中小企業デジタル化・AI導入支援事業」の愛称です。ソフトウェアやクラウドサービスの導入費用の一部を補助し、業務効率化や生産性向上を後押しします。</div>
 
-<a href="https://www.asasimple.jp/it-hojyokin-2026/" target="_blank" rel="noopener">IT導入補助金の変更点を整理した解説記事</a>によると、**2026年度から「IT導入補助金」は正式に「デジタル化・AI導入補助金」へ改称されました**。最大450万円という補助上限額の骨格自体は変わっておらず、通常枠・インボイス対応類型・電子取引類型の3つに整理されています。
+<a href="https://www.asasimple.jp/it-hojyokin-2026/" target="_blank" rel="noopener">IT導入補助金の変更点を整理した解説記事</a>によると、<strong>2026年度から「IT導入補助金」は正式に「デジタル化・AI導入補助金」へ改称されました</strong>。最大450万円という補助上限額の骨格自体は変わっておらず、通常枠・インボイス対応類型・電子取引類型の3つに整理されています。
 
 <figure><img src="/images/it-hojokin-inshokuten/name-change.png" alt="IT導入補助金の呼び方の変遷: 〜2025年度はIT導入補助金として運用、2026年度はデジタル化・AI導入補助金に改称、最大450万円の枠の骨格は継続" loading="lazy"><figcaption>IT導入補助金の呼び方の変遷</figcaption></figure>
 
@@ -150,6 +150,7 @@ faq:
 
 
 関連する内容として[小規模事業者持続化補助金](/blog/jizokuka-hojokin-inshokuten-jirei/)も公開しています。
+
 | 項目 | IT導入補助金（通常枠） | 小規模事業者持続化補助金 |
 |:--|:--|:--|
 | 主な目的 | ITツール導入による業務効率化 | 販路開拓・店舗改装等の経費 |

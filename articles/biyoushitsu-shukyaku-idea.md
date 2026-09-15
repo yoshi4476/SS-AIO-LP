@@ -51,7 +51,7 @@ faq:
 
 
 あわせて[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
-<div class="definition-box"><span class="term">美容室の集客アイデアとは</span>、Googleマップ・口コミ・SNS・季節施策・予算施策という5つの引き出しから、店の状況に合わせて選ぶ具体的な打ち手を指します。**思いつきで手を広げるほど、どれも中途半端に終わり効果が見えなくなります。**</div>
+<div class="definition-box"><span class="term">美容室の集客アイデアとは</span>、Googleマップ・口コミ・SNS・季節施策・予算施策という5つの引き出しから、店の状況に合わせて選ぶ具体的な打ち手を指します。<strong>思いつきで手を広げるほど、どれも中途半端に終わり効果が見えなくなります。</strong></div>
 
 厚生労働省の<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei_houkoku/24/index.html" target="_blank" rel="noopener">令和5年度衛生行政報告例</a>によると、**全国の美容所数は27万4,070件（前年比+1.5%）**で過去最多を更新しました。アイデアの数を増やすより、==1つを腰を据えて続ける仕組み==があるかどうかが差になります。
 

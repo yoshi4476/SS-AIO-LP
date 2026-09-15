@@ -79,7 +79,7 @@ faq:
 
 #### GビズIDプライムを取得する
 
-<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">事務局の申請前手続きページ</a>によると、**GビズIDプライムの発行には概ね2週間**かかります。GビズID公式サイトから申請し、印鑑証明書などの本人確認書類を提出する流れです。即日発行はできません。
+<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">事務局の申請前手続きページ</a>によると、<strong>GビズIDプライムの発行には概ね2週間</strong>かかります。GビズID公式サイトから申請し、印鑑証明書などの本人確認書類を提出する流れです。即日発行はできません。
 
 #### SECURITY ACTIONを宣言する
 
@@ -97,7 +97,7 @@ GビズIDプライムの申請は、マイナンバーカードとスマート�
 あわせて[ベンダー登録とは？IT導入補助金の確認方法と2つのリスク](/blog/vendor-touroku-toha/)もご覧ください。
 導入したいツールが決まっている場合は、まずそのツールを扱う事業者が登録済みかを確認します。ツールが決まっていない場合は、自社の業種や経営課題に合う支援事業者を先に探し、相談しながらツールを絞り込む進め方も可能です。
 
-<a href="https://it-shien.smrj.go.jp/search/" target="_blank" rel="noopener">事務局のITツール検索</a>では、登録済みの支援事業者とITツールを業種・目的から検索できます。**カタログに載っていないツールは、機能がどれだけ優れていても補助対象になりません。**契約前に登録状況を確認する一手間が、後の失格を防ぎます。飲食店での具体的な活用例は[飲食店のIT導入補助金｜名称変更後の3つの確認点](/blog/it-hojokin-inshokuten/)で紹介しています。
+<a href="https://it-shien.smrj.go.jp/search/" target="_blank" rel="noopener">事務局のITツール検索</a>では、登録済みの支援事業者とITツールを業種・目的から検索できます。<strong>カタログに載っていないツールは、機能がどれだけ優れていても補助対象になりません。</strong>契約前に登録状況を確認する一手間が、後の失格を防ぎます。飲食店での具体的な活用例は[飲食店のIT導入補助金｜名称変更後の3つの確認点](/blog/it-hojokin-inshokuten/)で紹介しています。
 
 #### 支援事業者は複数を比較する
 

@@ -62,11 +62,11 @@ AI導入費用は、どの業務にAIを使うかで大きく変わります。�
 
 
 あわせて[AI導入補助金の必要書類一覧と準備の順番](/blog/ai-hojokin-hitsuyo-shorui-hojin/)もご覧ください。
-<a href="https://aismiley.co.jp/ai_news/chatgpt-business-plan/" target="_blank" rel="noopener">ChatGPT Businessプランの料金紹介記事</a>によると、**法人向けのChatGPT Businessは1ユーザーあたり月額20〜25ドル（年払い・月払い）**で契約できます。
+<a href="https://aismiley.co.jp/ai_news/chatgpt-business-plan/" target="_blank" rel="noopener">ChatGPT Businessプランの料金紹介記事</a>によると、<strong>法人向けのChatGPT Businessは1ユーザーあたり月額20〜25ドル（年払い・月払い）</strong>で契約できます。
 
 2026年8月時点のレートで換算すると、1人あたり月3,000〜4,000円程度の負担感です。文章作成やアイデア出しといった総務・企画系の業務なら、この価格帯で十分に運用できます。
 
-<a href="https://tayori.com/blog/ai-chatbot-pricing/" target="_blank" rel="noopener">Tayori Blogのチャットボット料金相場の解説</a>では、**AIチャットボットの月額費用はシナリオ型で0〜3万円、AI型（自然言語処理搭載）で3〜15万円、生成AI型で15万円以上**と紹介されています。初期費用もクラウド型なら0〜5万円、カスタマイズ型になると20万円以上が目安です。
+<a href="https://tayori.com/blog/ai-chatbot-pricing/" target="_blank" rel="noopener">Tayori Blogのチャットボット料金相場の解説</a>では、<strong>AIチャットボットの月額費用はシナリオ型で0〜3万円、AI型（自然言語処理搭載）で3〜15万円、生成AI型で15万円以上</strong>と紹介されています。初期費用もクラウド型なら0〜5万円、カスタマイズ型になると20万円以上が目安です。
 
 | チャットボットの型 | 月額費用の目安 | 特徴 |
 |:--|:--|:--|
@@ -92,7 +92,7 @@ AI導入費用は、どの業務にAIを使うかで大きく変わります。�
 
 実際の進め方を先に押さえるなら、[中小企業の助成金とは？](/blog/chusho-kigyo-joseikin/)が参考になります。
 
-<a href="https://www.smrj.go.jp/research_case/questionnaire/fbrion0000002pjw-att/202603_AI_point.pdf" target="_blank" rel="noopener">中小企業基盤整備機構が2026年3月に公表した実態調査</a>（全国の中小企業10,000社対象・有効回答1,668社）によると、**AIの導入率（全社的導入＋一部導入）は20.4%で、導入を検討中の企業（18.6%）と合わせると39.0%が前向き**という結果でした。導入済み企業では「生成AI」の活用が82.6%と圧倒的に多く、文章作成や資料作成の代行から始める企業が中心です。
+<a href="https://www.smrj.go.jp/research_case/questionnaire/fbrion0000002pjw-att/202603_AI_point.pdf" target="_blank" rel="noopener">中小企業基盤整備機構が2026年3月に公表した実態調査</a>（全国の中小企業10,000社対象・有効回答1,668社）によると、<strong>AIの導入率（全社的導入＋一部導入）は20.4%で、導入を検討中の企業（18.6%）と合わせると39.0%が前向き</strong>という結果でした。導入済み企業では「生成AI」の活用が82.6%と圧倒的に多く、文章作成や資料作成の代行から始める企業が中心です。
 
 同調査で注目すべきは、**AI・IT導入を推進するために必要な公的支援として「導入費用などの助成」を求める声が77.9%で最多**だった点です。「導入事例などの情報提供」（70.5%）を上回っており、費用面の不安が導入をためらう最大の要因になっていることが分かります。この結果は、後述する補助金の活用がいかに現実的な選択肢かを裏づけています。
 
@@ -104,7 +104,7 @@ AI導入費用は、どの業務にAIを使うかで大きく変わります。�
 関連する内容として[農業の補助金の申請方法｜制度の選び方と5ステップ](/blog/nougyou-hojokin-shinsei-houhou/)も公開しています。
 枠ごとの上限額と計算方法は、[AI導入補助金はいくらもらえる？](/blog/ai-hojokin-ikura-moraeru/)で整理しています。
 
-<a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の通常枠ページ</a>によると、**通常枠の補助率は1/2以内（一定の賃上げ要件を満たす場合は2/3以内）で、補助額は1プロセス以上で5万円〜150万円未満、4プロセス以上導入すると150万円〜450万円以下**まで拡大されます。
+<a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の通常枠ページ</a>によると、<strong>通常枠の補助率は1/2以内（一定の賃上げ要件を満たす場合は2/3以内）で、補助額は1プロセス以上で5万円〜150万円未満、4プロセス以上導入すると150万円〜450万円以下</strong>まで拡大されます。
 
 | 導入費用 | 補助率1/2の補助額（実質負担） | 賃上げ要件適用時2/3の補助額（実質負担） |
 |:--|:--|:--|

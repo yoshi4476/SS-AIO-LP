@@ -52,7 +52,7 @@ faq:
 
 <div class="definition-box"><span class="term">リフォームのインスタ集客とは</span>、Instagramのビジネスアカウントを使い、施工前後の写真・工事中の様子・スタッフ紹介などを継続的に投稿し、フォロワーや保存経由で問い合わせにつなげる取り組みを指します。ポータルサイトのように横並びで比較される場所ではなく、施主が会社の人柄や仕事ぶりをじっくり確認できる場所という役割を持ちます。</div>
 
-<a href="https://www.soumu.go.jp/menu_news/s-news/01iicp01_02000125.html" target="_blank" rel="noopener">総務省の調査</a>によると、**Instagramの全年代利用率は52.6%**に達しています。もはや一部の若年層だけのツールではなく、リフォームの意思決定層にも広く浸透している計算です。
+<a href="https://www.soumu.go.jp/menu_news/s-news/01iicp01_02000125.html" target="_blank" rel="noopener">総務省の調査</a>によると、<strong>Instagramの全年代利用率は52.6%</strong>に達しています。もはや一部の若年層だけのツールではなく、リフォームの意思決定層にも広く浸透している計算です。
 
 <div class="cta-box"><p>自社のインスタ運用がどこで反響を逃しているか、無料で確認しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
@@ -137,7 +137,7 @@ faq:
 
 住宅リフォームの広告表示には景品表示法が適用され、根拠のない比較価格や加工した写真の投稿は不当表示にあたります。
 
-<div class="caution-box"><span class="box-title">注意: 根拠のない比較価格表示はNG</span><br><a href="https://www.jftc.go.jp/houdou/pressrelease/h29/jun/170608_1.html" target="_blank" rel="noopener">公正取引委員会の措置命令事例</a>では、あるリフォーム会社が実際に提供したことのない「当社通常価格」を投稿に表示し、実際の価格が割安であるかのように見せたとして景品表示法違反と判断されました。2024年10月施行の改正法では、こうした違反に対して**100万円以下の罰金**が直接科される仕組みも新設されています。</div>
+<div class="caution-box"><span class="box-title">注意: 根拠のない比較価格表示はNG</span><br><a href="https://www.jftc.go.jp/houdou/pressrelease/h29/jun/170608_1.html" target="_blank" rel="noopener">公正取引委員会の措置命令事例</a>では、あるリフォーム会社が実際に提供したことのない「当社通常価格」を投稿に表示し、実際の価格が割安であるかのように見せたとして景品表示法違反と判断されました。2024年10月施行の改正法では、こうした違反に対して<strong>100万円以下の罰金</strong>が直接科される仕組みも新設されています。</div>
 
 <figure><img src="/images/reform-instagram-shukyaku/hikaku.png" alt="リフォームのインスタ集客のNG例とOK例: NG例は根拠のない比較価格を表示・加工した写真をそのまま投稿・更新が数週間止まる、OK例は実際の見積額をそのまま記載・加工の有無を注記する・週3回以上を継続する" loading="lazy"><figcaption>リフォームのインスタ集客のNG例とOK例</figcaption></figure>
 

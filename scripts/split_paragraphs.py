@@ -42,6 +42,12 @@ def split_one(p):
     ends = [e for e in ends if e < len(p)]      # 末尾の「。」では分けられない
     if not ends:
         return None
+    # 装飾の内側では切らない。「**失敗1: 〜。」で切ると、閉じる ** が次の段落へ
+    # 残り、記事に ** がそのまま表示される（実測32箇所）
+    ends = [e for e in ends if p[:e].count("**") % 2 == 0
+            and p[:e].count("==") % 2 == 0 and p[:e].count("`") % 2 == 0]
+    if not ends:
+        return None
     mid = len(p) / 2
     best = min(ends, key=lambda e: abs(e - mid))
     a, b = p[:best].strip(), p[best:].strip()

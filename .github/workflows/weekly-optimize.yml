@@ -190,6 +190,11 @@ jobs:
       - name: 長すぎるアンカーテキストを詰める
         run: python scripts/shorten_anchors.py --write || true
 
+      # 段落の切れ目の崩れは点数に出ないが、画面では表がパイプ記号のまま出る。
+      # リンク挿入と段落分割がそれぞれ別の壊し方をしていた
+      - name: 段落の切れ目の崩れを直す
+        run: python scripts/fix_block_breaks.py --write || true
+
       - name: CTA文言のA/B結果
         run: python scripts/ab_result.py || true
 

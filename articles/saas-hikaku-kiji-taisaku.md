@@ -57,7 +57,7 @@ SaaS比較記事対策が欠かせない理由は、購買担当者の多くがA
 
 当社は自社メディアを3つ運営しており、比較記事に自社が出てこない状態を実際に経験しています。**比較サイト側に載る前に、自社サイトで比較の判断軸を書いておく**ほうが先です。
 
-<a href="https://www.prnewswire.com/news-releases/new-g2-research-half-of-b2b-software-buyers-now-start-their-research-with-ai-chatbots-302742807.html" target="_blank" rel="noopener">G2が2026年3月に実施した調査</a>があります。B2Bソフトウェア購買担当者1,076名を対象にしたこの調査では、**51%がGoogle検索よりもAIチャットボットで情報収集を始める**と回答しました。2025年4月は29%だったため、急増した数字です。さらに**69%がAIチャットボットの助言で当初予定と違うベンダーを選んだ**と回答しています。3分の1は、聞いたこともなかったベンダーから購入していました。
+<a href="https://www.prnewswire.com/news-releases/new-g2-research-half-of-b2b-software-buyers-now-start-their-research-with-ai-chatbots-302742807.html" target="_blank" rel="noopener">G2が2026年3月に実施した調査</a>があります。B2Bソフトウェア購買担当者1,076名を対象にしたこの調査では、<strong>51%がGoogle検索よりもAIチャットボットで情報収集を始める</strong>と回答しました。2025年4月は29%だったため、急増した数字です。さらに<strong>69%がAIチャットボットの助言で当初予定と違うベンダーを選んだ</strong>と回答しています。3分の1は、聞いたこともなかったベンダーから購入していました。
 
 | データ | 数値 | 出典 |
 |:--|:--|:--|
@@ -78,7 +78,7 @@ SaaS比較記事は、レビュー型・資料請求型・AI生成型という3�
 | 資料請求型 | BOXIL SaaS、アスピック | 資料掲載契約・カテゴリ登録 | カテゴリと訴求文を定期更新する |
 | AI生成型 | ChatGPT・AI Overview | 検索順位＋引用しやすい構造 | 自社比較ページを出典として整備する |
 
-<a href="https://www.aspicjapan.org/asu/article/39596" target="_blank" rel="noopener">アスピックの解説記事</a>によると、日本国内だけでもレビュー型・資料請求型の比較サイトは十数種類あります。レビュー型最大手の<a href="https://www.itreview.jp/labo/archives/23706" target="_blank" rel="noopener">ITreview</a>は掲載製品数が約15,000製品です。規模が大きいほど、1製品あたりの露出は薄まりやすくなります。**この3タイプは掲載条件も対策方法も別物**です。同じやり方で全部に対応しようとすると、どれも中途半端になりがちです。
+<a href="https://www.aspicjapan.org/asu/article/39596" target="_blank" rel="noopener">アスピックの解説記事</a>によると、日本国内だけでもレビュー型・資料請求型の比較サイトは十数種類あります。レビュー型最大手の<a href="https://www.itreview.jp/labo/archives/23706" target="_blank" rel="noopener">ITreview</a>は掲載製品数が約15,000製品です。規模が大きいほど、1製品あたりの露出は薄まりやすくなります。<strong>この3タイプは掲載条件も対策方法も別物</strong>です。同じやり方で全部に対応しようとすると、どれも中途半端になりがちです。
 
 ## SaaS比較記事で不利になりやすい3つの原因
 

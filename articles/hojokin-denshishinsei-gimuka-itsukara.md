@@ -55,7 +55,7 @@ faq:
 あわせて[小規模事業者持続化補助金](/blog/jizokuka-hojokin-clinic/)もご覧ください。
 前提となる考え方については、[介護事業所の電子申請・届出システムとは？](/blog/kaigo-denshishinsei-todokede/)にまとめています。
 
-<a href="https://portal.monodukuri-hojo.jp/" target="_blank" rel="noopener">ものづくり・商業・サービス生産性向上促進補助金の公式サイト</a>では、**申請方法は電子申請のみと明記されており、電子申請システムの利用には事前のGビズIDプライムアカウント取得が必須**とされています。この制度は2020年前後からJグランツでの電子申請への移行を進め、以降は郵送での受付を行っていません。
+<a href="https://portal.monodukuri-hojo.jp/" target="_blank" rel="noopener">ものづくり・商業・サービス生産性向上促進補助金の公式サイト</a>では、<strong>申請方法は電子申請のみと明記されており、電子申請システムの利用には事前のGビズIDプライムアカウント取得が必須</strong>とされています。この制度は2020年前後からJグランツでの電子申請への移行を進め、以降は郵送での受付を行っていません。
 
 <figure><img src="/images/hojokin-denshishinsei-gimuka-itsukara/seido3.png" alt="電子申請が原則になっている主要3制度: 新事業進出・ものづくり商業サービス補助金、デジタル化・AI導入補助金、小規模事業者持続化補助金" loading="lazy"><figcaption>電子申請が原則になっている主要3制度</figcaption></figure>
 
@@ -79,13 +79,14 @@ faq:
 
 
 関連する内容として[ものづくり補助金はクリニックで使える？](/blog/monozukuri-hojokin-clinic/)も公開しています。
+
 | 制度 | 申請方法 | GビズID | 出典 |
 |:--|:--|:--|:--|
 | 新事業進出・ものづくり商業サービス補助金 | 電子申請のみ | プライム必須 | 制度公式サイト |
 | デジタル化・AI導入補助金 | 申請マイページでの電子申請 | プライム必須 | 制度公式サイト |
 | 小規模事業者持続化補助金 | 電子申請が基本（詳細は公募要領） | 制度・回により異なる | 制度公式サイト |
 
-<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">デジタル化・AI導入補助金の公式サイトが案内する申請フロー</a>によると、**GビズIDプライムの発行にはおおむね2週間、あわせて必要なSECURITY ACTIONの宣言IDの取得にはおおむね2〜3日**かかります。公募締切の直前に動き出すと、この準備段階だけで間に合わなくなります。
+<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">デジタル化・AI導入補助金の公式サイトが案内する申請フロー</a>によると、<strong>GビズIDプライムの発行にはおおむね2週間、あわせて必要なSECURITY ACTIONの宣言IDの取得にはおおむね2〜3日</strong>かかります。公募締切の直前に動き出すと、この準備段階だけで間に合わなくなります。
 
 私たちは登録支援事業者として申請書類の作成から実績報告まで支援していますが、相談の入口で最初に確認するのは**GビズIDの取得状況**です。個人事業主のGビズID取得の流れは[個人事業主のAI導入補助金](/blog/kojin-jigyonushi-ai-hojokin/)でも整理しています。
 
@@ -111,7 +112,7 @@ faq:
 
 <figure><img src="/images/hojokin-denshishinsei-gimuka-itsukara/gbizid-vs.png" alt="2026年7月のGビズID変更点3つ: 有効期限2年3か月が新設された、郵送審査は最大2週間から最大1か月に延長、オンライン審査は24時間365日対応に" loading="lazy"><figcaption>2026年7月のGビズID変更点3つ</figcaption></figure>
 
-<a href="https://gbiz-id.go.jp/top/" target="_blank" rel="noopener">GビズID公式サイト</a>によると、**初回の有効期限切れは2028年10月ごろで、期限が切れると行政サービスへのログインなど一部機能が利用できなくなります。**一方でオンライン審査は24時間365日対応になり、マイナンバーカードを使った申請なら即日発行という点は変わっていません。
+<a href="https://gbiz-id.go.jp/top/" target="_blank" rel="noopener">GビズID公式サイト</a>によると、<strong>初回の有効期限切れは2028年10月ごろで、期限が切れると行政サービスへのログインなど一部機能が利用できなくなります。</strong>一方でオンライン審査は24時間365日対応になり、マイナンバーカードを使った申請なら即日発行という点は変わっていません。
 
 <div class="caution-box"><span class="box-title">注意: 郵送でのGビズID取得は最大1か月かかる</span><br>書類を郵送してGビズIDプライムを取得する場合、審査期間は最大1か月です。公募締切の直前に着手すると、電子申請の準備が間に合わなくなります。急ぐ場合はマイナンバーカードを使ったオンライン申請（最短即日）を選んでください。</div>
 

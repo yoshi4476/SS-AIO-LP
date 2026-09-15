@@ -68,7 +68,7 @@ faq:
 
 コンサルティングが向くのは、社内に担当者を置ける場合、型を社内に残したい場合、複数の外注先を評価したい場合の3つの場面です。
 
-<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、**令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています**。これだけの数の会社すべてに、SEOの実務知識を持つ専任担当者を置くのは現実的ではありません。だからこそ、実行の一部を外注しながらも、判断の型だけは社内に残すコンサルティングという選択肢が意味を持ちます。
+<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。これだけの数の会社すべてに、SEOの実務知識を持つ専任担当者を置くのは現実的ではありません。だからこそ、実行の一部を外注しながらも、判断の型だけは社内に残すコンサルティングという選択肢が意味を持ちます。
 
 <figure><img src="/images/fudousan-seo-consulting/bamen.png" alt="コンサルティングを検討すべき3つの場面: 社内に担当者を置ける場合、型を社内に残したい場合、複数の外注先を評価したい場合" loading="lazy"><figcaption>コンサルティングを検討すべき3つの場面</figcaption></figure>
 

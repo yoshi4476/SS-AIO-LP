@@ -53,7 +53,7 @@ BtoCの購買は個人の判断で完結しますが、==BtoBの購買は稟議�
 
 BtoB企業にSEOが重要な理由は、購買担当者の情報収集が営業接点なしに完結し始めていることです。
 
-<a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-09-gartner-sales-survey-finds-67-percent-of-b2b-buyers-prefer-a-rep-free-experience" target="_blank" rel="noopener">Gartnerが2025年8〜9月に購買担当者646人を対象に実施した調査</a>によると、**B2B購買担当者の67%が営業担当者を介さない購買体験を好み**、45%が直近の購買でAIツールを活用したと回答しています。営業がアプローチする前に、検討の大部分がすでに終わっているということです。
+<a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-09-gartner-sales-survey-finds-67-percent-of-b2b-buyers-prefer-a-rep-free-experience" target="_blank" rel="noopener">Gartnerが2025年8〜9月に購買担当者646人を対象に実施した調査</a>によると、<strong>B2B購買担当者の67%が営業担当者を介さない購買体験を好み</strong>、45%が直近の購買でAIツールを活用したと回答しています。営業がアプローチする前に、検討の大部分がすでに終わっているということです。
 
 国内の調査でも同様の傾向が出ています。<a href="https://www.coleta.jp/digitalsalesnavi/btob-buying-process-survey-2026" target="_blank" rel="noopener">エヌケーエナジーシステムが2026年1月に法人向けサービス導入担当者180名を対象に実施した調査</a>では、**73.9%が営業と接点を持たなくても検討が進んだ経験がある**と回答し、意思決定に関与した全員が営業と直接話したケースはわずか27.2%にとどまりました。情報収集にAI(ChatGPT等)を活用していると答えた担当者は38.3%で、判断材料として営業担当者の説明を重視する割合は11.1%と最下位です。
 

@@ -120,9 +120,9 @@ diagrams:
 
 **口コミは視認性の高さを構成する要素であり、売上そのものへの影響も研究で確認されています。**件数を追う前に、返信の速さと質を先に整えてください。
 
-<a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=41233" target="_blank" rel="noopener">ハーバードビジネススクールのMichael Luca氏の研究</a>では、Yelpの星評価が1つ上がると、レストランの売上が**5〜9%増加**すると報告されています。効果はチェーン店より個人経営店で大きく出ました。
+<a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=41233" target="_blank" rel="noopener">ハーバードビジネススクールのMichael Luca氏の研究</a>では、Yelpの星評価が1つ上がると、レストランの売上が<strong>5〜9%増加</strong>すると報告されています。効果はチェーン店より個人経営店で大きく出ました。
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の成人1,026人）では、口コミを探す場所としてGoogleを使う人が**84%**にのぼりました。さらに**48%**がAIによる口コミ要約を先に読み、**18%**は要約だけで判断してよいと答えています。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の成人1,026人）では、口コミを探す場所としてGoogleを使う人が<strong>84%</strong>にのぼりました。さらに<strong>48%</strong>がAIによる口コミ要約を先に読み、<strong>18%</strong>は要約だけで判断してよいと答えています。
 
 2つの調査は米国が対象で、扱うのもYelpとGoogleの口コミです。Googleマップの順位そのものを測ったものではありません。読み取るべきは、==評価が売上と選択に影響する構造==があるという点に絞ってください。
 

@@ -124,7 +124,7 @@ OB客紹介の伸び悩みは、接点の途切れ・依頼タイミングの欠
 
 <figure><img src="/images/obkyaku-shoukai-shikumi/shourei-vs.png" alt="謝礼制度のNG例とOK例: NG例は上限を決めず口約束で進める・物件説明までOB客に任せる、OK例は謝礼額の上限を書面で明示・紹介は会社紹介までに限定" loading="lazy"><figcaption>謝礼制度のNG例とOK例</figcaption></figure>
 
-<a href="https://www.caa.go.jp/policies/policy/representation/fair_labeling/premium_regulation" target="_blank" rel="noopener">消費者庁の景品規制</a>では、顧客全員に提供する「総付景品」は**取引価額1,000円以上の場合、取引価額の20%が上限**と定められています。紹介謝礼もこの対象になり得るため、高額商材ほど事前確認が欠かせません。
+<a href="https://www.caa.go.jp/policies/policy/representation/fair_labeling/premium_regulation" target="_blank" rel="noopener">消費者庁の景品規制</a>では、顧客全員に提供する「総付景品」は<strong>取引価額1,000円以上の場合、取引価額の20%が上限</strong>と定められています。紹介謝礼もこの対象になり得るため、高額商材ほど事前確認が欠かせません。
 
 <div class="caution-box"><span class="box-title">注意: 謝礼額を口約束で決めるのはNG</span><br>謝礼額の上限や支払い条件を文書化せず、口頭の約束だけで進めると、後からトラブルになりやすいです。必ず規約として書面化してください。</div>
 
@@ -150,6 +150,7 @@ OB客管理は、引き渡し日・フォロー日・紹介実績をスプレッ
 
 
 あわせて[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)もご覧ください。
+
 | 業種 | 効きやすい訴求 | 紹介時に伝えると良い情報 |
 |:--|:--|:--|
 | 注文住宅・工務店 | 総額・坪単価の実例 | 施工事例と担当者対応の丁寧さ |

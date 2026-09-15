@@ -126,7 +126,7 @@ AI検索特有の対策は[クリニックのAI検索対策とは？](/aio/clini
 
 症状名やKWを不自然に詰め込む文章も要注意です。読みやすさを損なうだけでなく、読者の信頼を落とす原因にもなります。契約前の提案書に、こうした表現がないかを一度確認してください。
 
-<a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja" target="_blank" rel="noopener">Google検索セントラルのSEOスターターガイド</a>でも、読者にとって役立つコンテンツを作ることが基本方針として明記されています。**検索エンジン向けの小手先の工夫より、読者の疑問に答える内容そのものが評価される仕組み**です。この方針に沿った提案かどうかを、契約前の資料で確認してください。
+<a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja" target="_blank" rel="noopener">Google検索セントラルのSEOスターターガイド</a>でも、読者にとって役立つコンテンツを作ることが基本方針として明記されています。<strong>検索エンジン向けの小手先の工夫より、読者の疑問に答える内容そのものが評価される仕組み</strong>です。この方針に沿った提案かどうかを、契約前の資料で確認してください。
 
 
 自社サイトの技術面が基準を満たしているかは、[サイトの技術チェック（無料・URL入力だけ）](/site-audit/)で確かめられます。登録は不要で、その場で点数が出ます。

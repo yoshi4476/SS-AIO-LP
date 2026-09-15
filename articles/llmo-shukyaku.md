@@ -70,7 +70,7 @@ LLMO対策の基本的な進め方は[LLMO対策とは？ChatGPTに引用され�
 
 私たちが支援現場で見てきたのは、比較表やFAQの中に固有名詞が入っておらず、AIが要約する際に社名が落ちてしまうケースです。**==「◯◯というサービスがある」で終わり、社名まで引用されない==**と、読んだ人は次に何を検索すればよいか分かりません。
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、**日本の個人の生成AI利用経験は26.7%**です。まだ全員が使っているわけではないため、AI経由の認知は「知らない人に知ってもらう入口」というより「比較検討中の人の背中を押す一押し」に近い役割を担います。この前提を踏まえずに広く浅い認知だけを狙うと、CVに結びつく確率はさらに下がります。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。まだ全員が使っているわけではないため、AI経由の認知は「知らない人に知ってもらう入口」というより「比較検討中の人の背中を押す一押し」に近い役割を担います。この前提を踏まえずに広く浅い認知だけを狙うと、CVに結びつく確率はさらに下がります。
 
 <a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>では、米国の検索の58.5%がクリックなしで終わっています。AI回答も同じ性質を持つため、==「読まれたら覚えてもらえる」という前提自体が崩れつつある==ことを踏まえて導線を設計する必要があります。
 

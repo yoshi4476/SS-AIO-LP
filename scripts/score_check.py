@@ -143,7 +143,15 @@ def main():
         return not (s.startswith(("|", "-", "*", ">", "#", "```"))
                     or "|:--" in s)
 
-    plain_paras = [_plain(p) for p in paras if _is_prose(p)]
+    # 段落の途中に番号リストが混ざると、塊ごと1文として数えられる（実測306字）。
+    # 段落の先頭だけを見る _is_prose では拾えないため、行単位でも落とす
+    def _drop_list_lines(p):
+        keep = [ln for ln in p.split("\n")
+                if not re.match(r"\s*(?:[0-9０-９]+[.．、)）]|[-*+]\s|\||>)", ln)]
+        return "\n".join(keep).strip()
+
+    plain_paras = [x for x in (_plain(_drop_list_lines(p))
+                               for p in paras if _is_prose(p)) if x]
     # 基準は「読者が壁に感じる塊」を潰すことに絞る。完璧な短文化を求めると
     # 毎回落ちて公開が止まるため、実害の大きい超過だけを不合格にする。
     long_paras = [p for p in plain_paras if len(p) > 200]

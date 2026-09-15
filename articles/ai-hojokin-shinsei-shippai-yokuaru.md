@@ -59,7 +59,7 @@ faq:
 
 当社はAI導入補助金の登録支援事業者として申請を支援していますが、不採択の連絡を受けてから相談に来られる方の多くは、**「何が足りなかったか」を通知書からは読み取れていません**。以下は、支援の現場で繰り返し見てきたつまずきです。
 
-<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260723001.html" target="_blank" rel="noopener">中小企業庁が2026年7月に公表した採択結果</a>によると、**デジタル化・AI導入補助金2026の2次締切では、応募5,699者に対して2,936者が採択**されました。内訳は通常枠の採択率が43.59%、セキュリティ対策推進枠が71.43%、インボイス枠（インボイス対応類型）が55.30%で、4枠全体では51.5%でした。
+<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260723001.html" target="_blank" rel="noopener">中小企業庁が2026年7月に公表した採択結果</a>によると、<strong>デジタル化・AI導入補助金2026の2次締切では、応募5,699者に対して2,936者が採択</strong>されました。内訳は通常枠の採択率が43.59%、セキュリティ対策推進枠が71.43%、インボイス枠（インボイス対応類型）が55.30%で、4枠全体では51.5%でした。
 
 | 申請枠 | 2次締切の採択率 |
 |:--|:--|
@@ -76,7 +76,7 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 
 関連する内容として[AI導入補助金のセキュリティアクション二つ星](/blog/ai-hojokin-security-action-hoshi2/)も公開しています。
-<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の申請手続きフロー</a>によると、**交付申請には「GビズIDプライム」と、IPA（情報処理推進機構）の「SECURITY ACTION」の宣言（★一つ星または★★二つ星）が必須**です。GビズIDプライムの発行には概ね2週間、SECURITY ACTIONの宣言済アカウントID発行には概ね2〜3日かかると案内されています。
+<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の申請手続きフロー</a>によると、<strong>交付申請には「GビズIDプライム」と、IPA（情報処理推進機構）の「SECURITY ACTION」の宣言（★一つ星または★★二つ星）が必須</strong>です。GビズIDプライムの発行には概ね2週間、SECURITY ACTIONの宣言済アカウントID発行には概ね2〜3日かかると案内されています。
 
 <div class="caution-box"><span class="box-title">注意: GビズIDは即日発行できない</span><br>締切の直前に気づいて申請しても、発行が間に合わず応募自体ができなくなります。締切から逆算して、遅くとも1か月前には取得手続きを始めてください。</div>
 
@@ -116,7 +116,7 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 
 関連する内容として[ベンダー登録とは？IT導入補助金の確認方法と2つのリスク](/blog/vendor-touroku-toha/)も公開しています。
-<a href="https://it-shien.smrj.go.jp/aftergrantdecision/measures/" target="_blank" rel="noopener">事務局の交付決定後の手続きページ</a>では、**「事業が適正に行われなかった場合や、実績報告期間中に正しく実績報告が行われなかった場合、補助金の交付を受けることができない」**と明記されています。実績報告の提出までに、すべてのITツールの契約・納品・支払い・利用開始を完了させておく必要があります。
+<a href="https://it-shien.smrj.go.jp/aftergrantdecision/measures/" target="_blank" rel="noopener">事務局の交付決定後の手続きページ</a>では、<strong>「事業が適正に行われなかった場合や、実績報告期間中に正しく実績報告が行われなかった場合、補助金の交付を受けることができない」</strong>と明記されています。実績報告の提出までに、すべてのITツールの契約・納品・支払い・利用開始を完了させておく必要があります。
 
 <span class="big">採択されたことに安心せず、実績報告までの社内スケジュールを最初に確定させておくことが何より大切です。</span>期限を過ぎると、<span class="txt-red">補助金の全部または一部を受け取れなくなる</span>リスクがあります。ベンダーの納品スケジュールが遅れる可能性も踏まえ、余裕を持った契約日程を組んでください。
 

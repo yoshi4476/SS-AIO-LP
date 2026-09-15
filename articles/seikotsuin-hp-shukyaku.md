@@ -75,7 +75,7 @@ MEOは地図上での発見を、SEOは症状名検索での接触を担いま�
 
 <figure><img src="/images/seikotsuin-hp-shukyaku/riyu.png" alt="整骨院にホームページが必要な3つの理由: MEOで伝えきれない情報を補う、来院前の不安を解消する、予約導線を自院で管理する" loading="lazy"><figcaption>整骨院にホームページが必要な3つの理由</figcaption></figure>
 
-<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、柔道整復師の施術所数は令和6年末時点で**5万件超（50,924件）**です。近隣に競合が複数ある前提に立つと、地図の3枠に入れなかった場合の受け皿がホームページになります。
+<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、柔道整復師の施術所数は令和6年末時点で<strong>5万件超（50,924件）</strong>です。近隣に競合が複数ある前提に立つと、地図の3枠に入れなかった場合の受け皿がホームページになります。
 
 第一に、MEOで伝えきれない情報を補えます。地図上の情報欄には文字数の制約があり、施術方針や院長の考え方までは書ききれません。
 
@@ -147,7 +147,7 @@ MEOは地図上での発見を、SEOは症状名検索での接触を担いま�
 
 整骨院のホームページは、表示速度・予約ボタンの位置・文字サイズの3つを整えるだけでスマホでの離脱を減らせます。
 
-<a href="https://www.thinkwithgoogle.com/intl/en-emea/marketing-strategies/app-and-mobile/find-out-how-you-stack-new-industry-benchmarks-mobile-page-speed/" target="_blank" rel="noopener">Google（Think with Google）の調査</a>によると、**モバイルサイト訪問者の53%が、表示に3秒以上かかるページを離脱**しています。整骨院のホームページも例外ではありません。
+<a href="https://www.thinkwithgoogle.com/intl/en-emea/marketing-strategies/app-and-mobile/find-out-how-you-stack-new-industry-benchmarks-mobile-page-speed/" target="_blank" rel="noopener">Google（Think with Google）の調査</a>によると、<strong>モバイルサイト訪問者の53%が、表示に3秒以上かかるページを離脱</strong>しています。整骨院のホームページも例外ではありません。
 
 画像は容量を圧縮し、院内写真1枚あたり200KB前後に収めるだけでも表示は体感できるほど速くなります。<a href="https://web.dev/articles/optimize-lcp" target="_blank" rel="noopener">Googleの公式ガイド</a>でも、画像の最適化はページの表示速度を測る指標（LCP）の短縮に直結すると案内されています。
 

@@ -106,7 +106,7 @@ faq:
 関連する内容については、[AI導入補助金2026](/blog/ai-hojokin-clinic-2026-schedule/)にまとめています。
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026の公式サイト</a>によると、資本金3億円以下または従業員300人以下の会社・個人事業主が「中小企業者等」として対象に含まれ、医療法人も申請対象の組織形態に含まれています。補助上限額は最大450万円です。
 
-<a href="https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/m26/is2603.html" target="_blank" rel="noopener">厚生労働省の医療施設動態調査（令和8年3月末概数）</a>によると、全国の一般診療所数は10万5,631施設に上ります。**同業が多いほど、電子カルテ連携や予約導線の差が来院数に響きやすくなります。**
+<a href="https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/m26/is2603.html" target="_blank" rel="noopener">厚生労働省の医療施設動態調査（令和8年3月末概数）</a>によると、全国の一般診療所数は10万5,631施設に上ります。<strong>同業が多いほど、電子カルテ連携や予約導線の差が来院数に響きやすくなります。</strong>
 
 具体的な対象ツールの分野と補助率は、[AI導入補助金はクリニックも対象？](/blog/ai-hojokin-clinic-katsuyou/)で詳しく整理しています。予約システムを選ぶ基準まで知りたい場合は、[クリニックのIT導入補助金](/blog/it-hojokin-clinic/)もあわせてご覧ください。
 

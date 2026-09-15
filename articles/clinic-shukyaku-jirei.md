@@ -98,7 +98,7 @@ Googleのローカル検索順位は<a href="https://support.google.com/business
 
 **AI検索対応が進んだ医院は、ChatGPT等の受診先相談で紹介されやすくなります。**
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、**日本の個人の生成AI利用経験は26.7%**です。まだ検索エンジンほど多数派ではありませんが、前年から明確に増えています。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。まだ検索エンジンほど多数派ではありませんが、前年から明確に増えています。
 
 診療科目を具体語で書き、ホームページとGoogleビジネスプロフィールの表記を一致させるだけで、AIの回答候補に挙がりやすくなります。具体的な5つの手順は[クリニックのAIO対策5ステップ](/aio/clinic-ai-kensaku-taisaku/)で紹介しています。
 
@@ -108,7 +108,7 @@ Googleのローカル検索順位は<a href="https://support.google.com/business
 
 **口コミへの全件返信を続けた医院は、院名そのものを検索する“指名検索”が増える傾向があります。**
 
-<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>では、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、**83%が確認先としてGoogleを利用**すると回答しています。体への不安を伴う医院選びでは、この傾向はさらに強まります。
+<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>では、<strong>消費者の71%が地域の店や施設を探す際に口コミを日常的に読み</strong>、<strong>83%が確認先としてGoogleを利用</strong>すると回答しています。体への不安を伴う医院選びでは、この傾向はさらに強まります。
 
 低評価にも事実ベースで冷静に返信を続けた医院ほど、口コミ全体の印象が安定し、後から来る患者さんの背中を押しています。返信の型は[口コミを増やす方法と返信のコツ](/meo/kuchikomi-fuyasu-hoho/)で紹介しています。
 

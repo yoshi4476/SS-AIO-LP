@@ -64,7 +64,7 @@ diagrams:
 関連して、[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)もあわせてご確認ください。
 第一に、整骨院・接骨院は競争密度が非常に高い業種です。
 
-<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、全国の柔道整復師施術所数は令和6年末時点で**5万件超（50,924件）**と、コンビニエンスストアに匹敵する規模で推移しています。「地域名×整骨院」の検索結果には常に多数の競合が並ぶため、マップ上位に表示されるかどうかが新規患者数を直接左右します。
+<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、全国の柔道整復師施術所数は令和6年末時点で<strong>5万件超（50,924件）</strong>と、コンビニエンスストアに匹敵する規模で推移しています。「地域名×整骨院」の検索結果には常に多数の競合が並ぶため、マップ上位に表示されるかどうかが新規患者数を直接左右します。
 
 第二に、口コミが来院先選びの主要な判断材料になっていることです。<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、**83%が確認先としてGoogleを利用**しています。体の不調という不安を伴う選択だからこそ、より重くなる口コミの存在感。
 
@@ -113,7 +113,7 @@ diagrams:
 
 
 関連して、[歯科医院の閉院費用とは？](/meo/shika-heiin-hiyou/)もあわせてご確認ください。
-<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html" target="_blank" rel="noopener">厚生労働省の案内</a>によると、健康保険が使えるのは**骨折・脱臼・打撲・捻挫（肉ばなれを含む）の施術を受けた場合**に限られます。単なる肩こりや筋肉疲労に対する施術は保険の対象にならず、全額自己負担です。この線引きは、集客の見せ方にもそのまま関わってきます。
+<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html" target="_blank" rel="noopener">厚生労働省の案内</a>によると、健康保険が使えるのは<strong>骨折・脱臼・打撲・捻挫（肉ばなれを含む）の施術を受けた場合</strong>に限られます。単なる肩こりや筋肉疲労に対する施術は保険の対象にならず、全額自己負担です。この線引きは、集客の見せ方にもそのまま関わってきます。
 
 保険施術の窓口では、患者が自己負担分だけを支払い、残りを整骨院が保険者に請求する「受領委任払い」という仕組みが使われています。
 

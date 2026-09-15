@@ -51,7 +51,7 @@ faq:
 
 <div class="definition-box"><span class="term">受発注ソフトとは</span>、発注・受注・見積・請求といった商取引のやり取りを、インボイス（適格請求書）の記載要件を満たす形式で発行・保存できるソフトウェアです。会計ソフト・決済ソフトと並び、デジタル化・AI導入補助金2026における主要な対象機能の1つに位置づけられています。</div>
 
-<a href="https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局のインボイス対応類型ページ</a>では、対象ツールを**「会計」「受発注」「決済」のうち1機能以上を有するソフトウェア**と定義しています。つまり受発注ソフトは、会計ソフトや決済ソフトと同格の選択肢の1つであり、受発注機能だけを持つソフトでも要件を満たせば対象になります。
+<a href="https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局のインボイス対応類型ページ</a>では、対象ツールを<strong>「会計」「受発注」「決済」のうち1機能以上を有するソフトウェア</strong>と定義しています。つまり受発注ソフトは、会計ソフトや決済ソフトと同格の選択肢の1つであり、受発注機能だけを持つソフトでも要件を満たせば対象になります。
 
 私たちが申請支援の相談を受ける中でも、==「受発注ソフトという専用の申請枠がある」と誤解している経営者が少なくありません==。実際には枠の名前ではなく機能要件の話であるという前提を押さえておくと、以降の枠選びで迷いにくくなります。相談の初期段階でこの前提を共有しておくだけでも、その後のヒアリングがスムーズに進み、候補ソフトの絞り込みにかかる時間を短縮できます。
 
@@ -63,7 +63,7 @@ faq:
 
 <figure><img src="/images/ai-hojokin-juhatchu-soft-toha/waku3.png" alt="受発注ソフトが対象になる3つの申請枠: 通常枠、インボイス対応類型、電子取引類型" loading="lazy"><figcaption>受発注ソフトが対象になる3つの申請枠</figcaption></figure>
 
-<a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">通常枠のページ</a>によると、対象となる業務プロセスには顧客対応・販売支援や供給・在庫・物流など幅広い区分が含まれ、受発注に関わる機能もその一部として扱われます。一方、<a href="https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_invoice/" target="_blank" rel="noopener">電子取引類型のページ</a>では、**「インボイス制度に対応した『受発注』の機能を有し、発注側の事業者が受注側の事業者に対してアカウントを無償で発行・利用させることのできる機能を有するクラウド型のソフトウェア」**が対象と明記されています。
+<a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">通常枠のページ</a>によると、対象となる業務プロセスには顧客対応・販売支援や供給・在庫・物流など幅広い区分が含まれ、受発注に関わる機能もその一部として扱われます。一方、<a href="https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_invoice/" target="_blank" rel="noopener">電子取引類型のページ</a>では、<strong>「インボイス制度に対応した『受発注』の機能を有し、発注側の事業者が受注側の事業者に対してアカウントを無償で発行・利用させることのできる機能を有するクラウド型のソフトウェア」</strong>が対象と明記されています。
 
 つまり電子取引類型は、自社と取引先を1つの受発注ソフトでつなぐ用途に特化した枠です。自社単独で会計・受発注・決済ソフトを導入したいだけなら、通常枠かインボイス対応類型のほうが選びやすいケースが多くなります。
 

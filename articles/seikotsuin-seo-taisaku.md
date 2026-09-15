@@ -75,7 +75,7 @@ MEOは「近くの整骨院を探す」段階の患者に、地図と口コミ�
 
 <figure><img src="/images/seikotsuin-seo-taisaku/riyu.png" alt="整骨院にSEO対策が必要な3つの理由: MEO圏外の患者に届く、比較段階で読まれる、記事が資産として残る" loading="lazy"><figcaption>整骨院にSEO対策が必要な3つの理由</figcaption></figure>
 
-<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省の衛生行政報告例</a>によると、**柔道整復師の登録施術所数は令和4年度時点で50,919か所**です。地域の患者を取り合う競合が多いほど、地図パックの3枠だけに頼る集客はリスクになります。
+<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省の衛生行政報告例</a>によると、<strong>柔道整復師の登録施術所数は令和4年度時点で50,919か所</strong>です。地域の患者を取り合う競合が多いほど、地図パックの3枠だけに頼る集客はリスクになります。
 
 第一に、MEO圏外の患者に届くことです。近隣に激戦区があると地図表示だけでは埋もれますが、症状名で検索するSEO経由なら広いエリアからの流入を狙えます。
 

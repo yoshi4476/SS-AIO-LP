@@ -65,7 +65,7 @@ faq:
 
 紹介依存の事務所が減った一方、検索とAI回答から事務所を比較する見込み客が増えたためです。
 
-<a href="https://www.nichizeiren.or.jp/" target="_blank" rel="noopener">日本税理士会連合会</a>によると、**全国の税理士登録者数は8万人を超えています**。供給過多の市場では、紹介を待つだけの事務所は比較の土俵に上がる前に候補から外れます。
+<a href="https://www.nichizeiren.or.jp/" target="_blank" rel="noopener">日本税理士会連合会</a>によると、<strong>全国の税理士登録者数は8万人を超えています</strong>。供給過多の市場では、紹介を待つだけの事務所は比較の土俵に上がる前に候補から外れます。
 
 見込み客側の変化も無視できません。<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省 令和7年版情報通信白書</a>によると、個人の生成AI利用経験率は2023年度の9.1%から2024年度は**26.7%**へと約3倍に増えました。「地域名 税理士 相続」のような検索だけでなく、AIチャットに事務所選びを相談する人も増えています。
 

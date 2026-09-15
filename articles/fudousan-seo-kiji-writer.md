@@ -112,7 +112,7 @@ AIを使って下書きの速度を上げつつ、一次情報と事実確認は
 
 費用の目安は[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
-<a href="https://fungry.co.jp/cnaps/blog/writer-cost-price/" target="_blank" rel="noopener">C-NAPS</a>によると、**初級ライターの文字単価は0.5〜2円、中級は2〜5円、上級は5〜20円**が目安とされています。SEO記事に限ると、専門知識や構成力が求められる分、3〜6円以上が相場という指摘もあります。
+<a href="https://fungry.co.jp/cnaps/blog/writer-cost-price/" target="_blank" rel="noopener">C-NAPS</a>によると、<strong>初級ライターの文字単価は0.5〜2円、中級は2〜5円、上級は5〜20円</strong>が目安とされています。SEO記事に限ると、専門知識や構成力が求められる分、3〜6円以上が相場という指摘もあります。
 
 | 経験レベル | 文字単価の目安 | 対応できる記事の傾向 |
 |:--|:--|:--|
@@ -161,7 +161,7 @@ KW: ◯◯駅 賃貸 ペット可
 
 AI検索時代のライターには、AIでは書けない一次情報を扱う力が求められます。
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省 令和7年版情報通信白書</a>によると、個人の生成AI利用経験率は2023年度の9.1%から2024年度は**26.7%**へと約3倍に増えました。AIチャットに相談先を尋ねる利用者が増えるほど、AIが引用したくなる独自の事実を記事に書けるライターの価値は上がります。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省 令和7年版情報通信白書</a>によると、個人の生成AI利用経験率は2023年度の9.1%から2024年度は<strong>26.7%</strong>へと約3倍に増えました。AIチャットに相談先を尋ねる利用者が増えるほど、AIが引用したくなる独自の事実を記事に書けるライターの価値は上がります。
 
 当社は自社サイト自体をAIO対策の実験場にしており、構造化データ・llms.txtの設置・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。直近28日の実測では、305個の検索語からのべ2,171回表示され、6回のクリックがありました。**表示は増えてもクリックは伸びにくい**、ゼロクリック時代の厳しさを自社の数字でも日々実感しています。
 
