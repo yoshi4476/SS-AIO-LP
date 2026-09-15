@@ -552,6 +552,43 @@ def test_quality_gate_holds_on_wordpress():
     check("公開されなかったことに気づける", "公開されませんでした" in pub, True)
 
 
+def test_daily_todo_fits_in_one_run():
+    """同日救済が1回で終わる量にとどまること。
+
+    定期実行は数時間ずれる。実際、21:30の救済が翌03:07に走り、
+    深夜に「本日0本」を見て6本書こうとしてターン上限で落ちた。
+    さらにTODOが13件あり、救済プロンプトが説明しているのは4種類だけだった。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import daily_audit as da
+    # 公開の時刻を過ぎていないものを「不足」と言わない
+    check("公開時刻を持っている", bool(da.PUBLISH_HOURS), True)
+    check("1回で扱う上限がある", da.MAX_TODAY <= 10, True)
+    now, later = da.split_todo([
+        "TODO: ai-lab の記事を本日あと 2 本作成して公開する",
+        "TODO: 「aio診断」で自社ページが競合（ai-lab）。…",
+        "TODO: リライト候補が223件ある。…",
+        "TODO: x は subsidy の既存記事と重複（類似度0.6・url）。…",
+    ])
+    check("記事の作成が先頭に来る", "の記事を本日あと" in now[0], True)
+    check("カニバリは今日やらない", any("競合" in x for x in later), True)
+    check("リライト候補は今日やらない", any("リライト候補" in x for x in later), True)
+    check("重複301は今日やる", any("既存記事と重複" in x for x in now), True)
+
+    # 救済プロンプトが、今日やるTODOの全種類を説明していること
+    pr = (ROOT / "automation" / "retry_prompt.txt").read_text(encoding="utf-8")
+    for key in ("本作成して公開する", "品質基準まで直して", "の領域。",
+                "既存記事と重複", "のKWを補充する"):
+        check(f"救済プロンプトが「{key}」を説明している", key in pr, True)
+    check("NOTE行は触らないと書いてある", "NOTE" in pr, True)
+
+    # 似ているだけの記事を毎日TODOに出さない（実害で判定する）
+    import cannibal_check as cc
+    check("重複を実績で仕分ける", hasattr(cc, "judge_overlap"), True)
+    src = cc.judge_overlap.__doc__ or ""
+    check("食い合っていないものは出さない", "clear" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -567,7 +604,8 @@ def main():
               test_improvements_apply_themselves,
               test_auto_fixes_are_reviewed,
               test_client_onboarding_is_one_sheet,
-              test_quality_gate_holds_on_wordpress):
+              test_quality_gate_holds_on_wordpress,
+              test_daily_todo_fits_in_one_run):
         try:
             t()
         except Exception as e:

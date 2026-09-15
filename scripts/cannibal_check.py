@@ -341,6 +341,125 @@ def territory_check():
     return bad
 
 
+
+def _gsc():
+    """GSCへの接続。候補ごとに作り直すと遅い"""
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import gsc_detail as G
+        return G.client()
+    except Exception:
+        return None
+
+
+def _page_stats(site_ids, sc=None):
+    """サイトごとに、ページ別の表示回数をまとめて取る。
+
+    重複の疑いが出るたびにGSCを叩くと遅い。1サイト1回で済ませる。
+    取れないときは空を返し、判定は「分からない」に倒す。
+    """
+    import sites as sites_mod
+    from datetime import date, timedelta
+    out = {}
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import gsc_detail as G
+        sc = sc or G.client()
+        if sc is None:
+            return out
+    except Exception:
+        return out
+    end = date.today() - timedelta(days=3)
+    start = end - timedelta(days=27)
+    for sid in site_ids:
+        cfg = sites_mod.load_all().get(sid)
+        if not cfg:
+            continue
+        try:
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 2000)
+        except Exception:
+            continue
+        out[sid] = {r["keys"][0].rstrip("/").rsplit("/", 1)[-1]:
+                    {"imp": r["impressions"], "pos": r["position"]} for r in rows}
+    return out
+
+
+def _shared_queries(site_id, a_slug, b_slug, limit=5, sc=None):
+    """2つのページが同じ検索語に出ているか。出ている語を返す"""
+    import sites as sites_mod
+    from datetime import date, timedelta
+    cfg = sites_mod.load_all().get(site_id)
+    if not cfg:
+        return []
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import gsc_detail as G
+        sc = sc or G.client()
+    except Exception:
+        return []
+    end = date.today() - timedelta(days=3)
+    start = end - timedelta(days=27)
+
+    def qs(slug):
+        body = {"startDate": str(start), "endDate": str(end),
+                "dimensions": ["query"], "rowLimit": 200,
+                "dimensionFilterGroups": [{"filters": [
+                    {"dimension": "page", "operator": "contains",
+                     "expression": f"/{slug}"}]}]}
+        try:
+            rows = sc.searchanalytics().query(
+                siteUrl=f"https://{cfg['domain']}/", body=body).execute().get("rows", [])
+        except Exception:
+            return {}
+        return {r["keys"][0]: (r["impressions"], r["position"]) for r in rows}
+
+    a, b = qs(a_slug), qs(b_slug)
+    both = set(a) & set(b)
+    return sorted(((k, a[k][0] + b[k][0], a[k][1], b[k][1]) for k in both),
+                  key=lambda x: -x[1])[:limit]
+
+
+def judge_overlap(hits):
+    """類似度で挙がった候補を、実績で仕分ける。
+
+    タイトルが似ているだけでは食い合いにならない。実際、類似度0.52〜0.53で
+    挙がった2組は、どちらも表示が月5〜6回か、そもそも検索結果に出ていなかった。
+    実害の無いものを毎日TODOに出すと、本当に対処すべきものが埋もれる。
+
+    verdict は3つ:
+      conflict … 同じ語に両方が出ている。取り下げの検討が要る
+      clear    … 少なくとも一方が検索結果に出ていない。食い合いようがない
+      unknown  … GSCを引けなかった。判断しない
+    """
+    sc = _gsc()
+    stats = _page_stats({h["site"] for h in hits}, sc)
+    for h in hits:
+        st = stats.get(h["site"])
+        if st is None:
+            h["verdict"], h["why"] = "unknown", "GSCを引けませんでした"
+            continue
+        a = st.get(h["mine"]["slug"], {}).get("imp", 0)
+        b = st.get(h["theirs"]["slug"], {}).get("imp", 0)
+        h["imp"] = (a, b)
+        if a == 0 or b == 0:
+            who = ("どちらも" if a == 0 and b == 0
+                   else ("自作側が" if a == 0 else "既存側が"))
+            h["verdict"] = "clear"
+            h["why"] = f"{who}検索結果に出ていません（表示 自作{a}回 / 既存{b}回）"
+            continue
+        shared = _shared_queries(h["site"], h["mine"]["slug"],
+                                 h["theirs"]["slug"], sc=sc)
+        h["shared"] = shared
+        if shared:
+            h["verdict"] = "conflict"
+            h["why"] = (f"同じ語で両方が出ています（{len(shared)}語・"
+                        f"表示 自作{a}回 / 既存{b}回）")
+        else:
+            h["verdict"] = "clear"
+            h["why"] = (f"同じ語には出ていません（表示 自作{a}回 / 既存{b}回）")
+    return hits
+
+
 def external_dup_check():
     """自分が書いた記事と、同じサイトに元からある記事の重複を検査する。
 
@@ -371,18 +490,33 @@ def external_dup_check():
                 hits.append({"score": round(s, 2), "site": site, "mine": a, "theirs": e})
     hits.sort(key=lambda h: -h["score"])
 
-    print(f"EXTERNAL_DUP_CHECK: {len(load_articles())}記事 × 既存記事を突合 / 重複疑い {len(hits)}組")
+    print(f"EXTERNAL_DUP_CHECK: {len(load_articles())}記事 × 既存記事を突合 / "
+          f"タイトルが似ている {len(hits)}組")
     if not hits:
         print("EXTERNAL_DUP=no")
         return []
-    print("EXTERNAL_DUP=yes")
-    for h in hits[:10]:
-        print(f"\n  [{h['score']}] {h['site']} の既存記事と重複")
+
+    # 似ているだけでは食い合いにならない。実績で仕分ける
+    hits = judge_overlap(hits[:10])
+    real = [h for h in hits if h.get("verdict") == "conflict"]
+    print(f"  うち実際に同じ語で並んでいる: {len(real)}組")
+    print("EXTERNAL_DUP=yes" if real else "EXTERNAL_DUP=no")
+
+    for h in hits:
+        mark = {"conflict": "×", "clear": "―", "unknown": "?"}.get(h.get("verdict"), "?")
+        print()
+        print(f"  {mark} [{h['score']}] {h['site']} の既存記事とタイトルが似ています")
         print(f"    自作: {h['mine']['title']}（{h['mine']['slug']}）")
         print(f"    既存: {h['theirs']['title']}")
         print(f"          {h['theirs']['url']}")
-        print("    → 対処: 既存記事が先にあるため自作側を取り下げ、既存記事へ301で転送する")
-    return hits
+        print(f"    判定: {h.get('why', '')}")
+        for kw, imp, pa, pb in h.get("shared", [])[:3]:
+            print(f"      ・{kw[:30]:<30} 表示{imp:>4}回（自作{pa:.0f}位 / 既存{pb:.0f}位）")
+        if h.get("verdict") == "conflict":
+            print("    → 対処: 既存記事が先にあるため自作側を取り下げ、既存記事へ301で転送する")
+        elif h.get("verdict") == "clear":
+            print("    → いまは実害がありません。表示が出てから再判定します")
+    return real
 
 
 def written_territory_check():
