@@ -165,6 +165,8 @@ faq:
 
 ツール選定の比較軸は[経理効率化システムの選び方｜比較軸5つと失敗しない導入手順](https://corp.7senses.co.jp/blog/keiri-koritsuka-system/)、外注の基本的な仕組みは[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で整理しています。ツール導入と並行した業務改善の進め方は[バックオフィス業務改善の4ステップ｜進まない原因と対策](https://corp.7senses.co.jp/blog/backoffice-gyomu-kaizen/)でも扱っています。
 
+特に記帳分野は、自動化ツールと記帳代行を併用しやすい業務です。[記帳代行の自動化とは？判断基準3つ](https://corp.7senses.co.jp/blog/kichodaiko-jidoka/)で、自社導入と外注のどちらに向いているかの判断基準を解説しています。
+
 ## 導入すると、代わりに増える仕事がある
 
 **自動化は仕事を消すのではなく、種類を変えます。**減る仕事と増える仕事を先に見ておいてください。
