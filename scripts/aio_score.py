@@ -129,7 +129,26 @@ def structure_score(arts):
     return got, detail
 
 
-def trust_score(arts, backlinks=0):
+def known_backlinks(sid):
+    """分かっている被リンクの件数。
+
+    正確な数はAhrefsかSearch Consoleの管理画面でしか取れない。
+    調べた結果を data/backlinks.json に書いておけば、採点に反映される。
+    書いていなければ「未計測」として0点にするが、理由は明示する。
+    """
+    f = ROOT / "data" / "backlinks.json"
+    if not f.is_file():
+        return None
+    try:
+        import json
+        d = json.loads(f.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    v = d.get(sid)
+    return len(v) if isinstance(v, list) else (v if isinstance(v, int) else None)
+
+
+def trust_score(arts, backlinks=None):
     """信頼15点。一次情報・出典・著者と、外部からの評価"""
     if not arts:
         return 0, ["記事なし  0/15"]
@@ -141,9 +160,13 @@ def trust_score(arts, backlinks=0):
         got += per * r
         detail.append(f"{name} {hit}/{len(arts)}本（{r * 100:.0f}%）  {per * r:.1f}/{per:.1f}")
     # 外部からの評価5点。買えないので、実測がゼロなら素直にゼロにする
-    pt = min(5, backlinks / 10 * 5) if backlinks else 0
-    got += pt
-    detail.append(f"外部からの被リンク {backlinks}件  {pt:.1f}/5")
+    if backlinks is None:
+        detail.append("外部からの被リンク 未計測  0.0/5"
+                      "（data/backlinks.json に調べた件数を書くと反映されます）")
+    else:
+        pt = min(5, backlinks / 10 * 5)
+        got += pt
+        detail.append(f"外部からの被リンク {backlinks}件  {pt:.1f}/5")
     return got, detail
 
 
@@ -208,7 +231,7 @@ def main():
         a = arts.get(sid, [])
         e, ed = entry_score(sid, cfg)
         s, sd = structure_score(a)
-        t, td = trust_score(a)
+        t, td = trust_score(a, known_backlinks(sid))
         r, rd = result_score(sid, cfg)
         pt = e + s + t + r
         total.append(pt)

@@ -31,6 +31,8 @@ faq:
 AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引用される層」を重ねた二階建ての構造です。
 
 
+近い論点を[AI集客とは？無料で今日から始める5つの方法と落とし穴3つ](/ai-marketing/ai-kantan-shukyaku/)で扱っています。
+
 近い論点を[不動産SEOコンサルティングとは？外注との違いと費用相場](/seo/fudousan-seo-consulting/)で扱っています。
 住宅業界であれば、[工務店のWeb集客をHP・SEO・MEO・SNSのどれから始めるか](/ai-marketing/koumuten-web-shukyaku/)を先に押さえておくと迷いにくくなります。
 

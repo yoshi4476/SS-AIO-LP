@@ -1,0 +1,39 @@
+{
+  "_readme": "調べて確認できた被リンク。Ahrefs・Search Consoleの管理画面で確認し、分かった分だけ書く。買ったリンクは絶対に載せない（ペナルティの対象）。",
+  "_checked": "2026-09-15",
+  "ai-lab": [],
+  "corporate": [],
+  "subsidy": [],
+  "_candidates": [
+    {
+      "url": "https://www.7senses.co.jp/",
+      "note": "自社の本体サイト。3サイトへのリンクが1本も無い。最優先",
+      "status": "未依頼"
+    },
+    {
+      "url": "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "note": "企業情報サイト。会社名で掲載済み。サイトURLの掲載を依頼できる",
+      "status": "掲載あり・リンク未確認"
+    },
+    {
+      "url": "https://www.houjin-bangou.nta.go.jp/",
+      "note": "法人番号公表サイト。掲載済み",
+      "status": "掲載あり"
+    },
+    {
+      "url": "IT導入補助金 支援事業者一覧",
+      "note": "登録支援事業者として掲載されるはず。要確認",
+      "status": "未確認"
+    },
+    {
+      "url": "大阪商工会議所",
+      "note": "加盟していれば会員一覧から。未加盟なら加盟を検討",
+      "status": "未確認"
+    },
+    {
+      "url": "G-ran導入店舗（3,200店舗）",
+      "note": "導入事例として相互掲載を依頼できる",
+      "status": "未依頼"
+    }
+  ]
+}

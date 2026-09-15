@@ -41,6 +41,8 @@ diagrams:
 クリニックのMEO対策とは、Googleマップの「地域名×診療科」検索で自院を上位表示させ、来院につなげる施策です。
 
 
+実際の進め方は、[医療機関のMEO対策｜5つの施設タイプ別に違いと進め方](/meo/iryou-meo-taisaku/)で解説しています。
+
 関連する内容として[整骨院のホームページ集客｜予約につながる5つの必須要素](/ai-marketing/seikotsuin-hp-shukyaku/)も公開しています。
 <div class="definition-box"><span class="term">クリニックのMEO（Map Engine Optimization）とは</span>、「地域名×診療科」「駅名×クリニック」などで検索されたとき、Googleマップの上位（特に目立つ上位3枠）に自院を表示させるための最適化のことです。医科・歯科・整骨院を問わず、来院型の医療機関すべてが対象になります。</div>
 
