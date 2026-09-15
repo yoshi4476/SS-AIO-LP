@@ -91,13 +91,13 @@ faq:
 
 必須項目は、基本情報・診療内容・医師紹介・予約導線・料金目安・表現の適正化という6つに整理できます。
 
+
+関連する内容として[美容皮膚科のMEO対策とは？広告規制下で選ばれる3ステップ](/meo/biyou-hifuka-meo/)も公開しています。
 実際の例は[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)でも扱っています。
 
 関連する内容は[オンライン診療チェックリスト｜クリニックが導入前に確認すべき8項目](/ai-marketing/online-shinryo-checklist/)でも扱っています。
 
 関連する内容を先に押さえるなら、[整骨院のホームページ集客｜予約につながる5つの必須要素](/ai-marketing/seikotsuin-hp-shukyaku/)が参考になります。
-
-掲載項目を整えたあとに取り組むAI検索対策は、[クリニックのAIO対策｜AI検索で患者に選ばれる5ステップ](/aio/clinic-ai-kensaku-taisaku/)で解説しています。
 
 <figure><img src="/images/clinic-hp-hissu-koumoku/koumoku.png" alt="クリニックのホームページに必須の6つの項目: 基本情報とアクセス、診療科目・対応疾患、医師・スタッフ紹介、初診の流れ・予約導線、自由診療の料金目安、医療広告ガイドライン準拠の表現" loading="lazy"><figcaption>クリニックのホームページに必須の6つの項目</figcaption></figure>
 

@@ -50,9 +50,9 @@ faq:
 経理外注の判断基準は、業務量・属人化・繁忙期差・採用難易度・コストの5つで見極めます。
 
 
-近い論点を[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)で扱っています。
-あわせて[経理派遣の時給相場｜経験・地域別の目安と実質コストの計算法](/blog/keiri-haken-jikyu-souba/)もご覧ください。
+あわせて[経理の外注と丸投げの違い｜任せられる範囲と残す業務4つ](/keiri-bpo/keiri-marunage-dekiru-hani/)もご覧ください。
 
+近い論点を[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)で扱っています。
 <div class="definition-box"><span class="term">経理外注の判断基準とは</span>、経理業務を社内で抱え続けるリスクと、外部委託によるコスト・手離れのバランスを比較するための5つの視点のことです。==1つの基準だけで即断せず、複数を組み合わせて確認すると精度が上がります。==</div>
 
 <figure><img src="/images/keiri-gaichuu-handan-kijun/kijun.png" alt="経理外注の判断基準5つ: 業務量が増え続けているか、属人化・引き継ぎリスクがあるか、繁忙期と閑散期の差が大きいか、経理人材を採用できる見込みがあるか、コストが妥当な範囲か" loading="lazy"><figcaption>経理外注の判断基準5つ</figcaption></figure>

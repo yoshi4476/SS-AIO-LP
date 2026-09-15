@@ -585,8 +585,30 @@ def test_daily_todo_fits_in_one_run():
     # 似ているだけの記事を毎日TODOに出さない（実害で判定する）
     import cannibal_check as cc
     check("重複を実績で仕分ける", hasattr(cc, "judge_overlap"), True)
-    src = cc.judge_overlap.__doc__ or ""
-    check("食い合っていないものは出さない", "clear" in src, True)
+    check("食い合っていないものは出さない",
+          "clear" in (cc.judge_overlap.__doc__ or ""), True)
+
+
+def test_near_page1_is_pushed_every_week():
+    """1ページ目に近い記事が、放置されずに毎週底上げされること。
+
+    順位そのものは約束できない。決めるのはGoogleで、反映にも数ヶ月かかる。
+    できるのは「こちら側でやれることを漏れなく続ける」ことだけなので、
+    そこを仕組みに固定する。
+    """
+    check("底上げの工程がある", (ROOT / "scripts" / "priority_boost.py").is_file(), True)
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import priority_boost as pb
+    # 主力の語に絞る。関係ない語で上位を取っても相談につながらない
+    for sid in ("ai-lab", "corporate", "subsidy"):
+        check(f"{sid} の主力の語を持っている", bool(pb.MAIN_PATTERN.get(sid)), True)
+    check("あと少しの帯を狙う", pb.NEAR[0] >= 10 and pb.NEAR[1] <= 21, True)
+    check("被リンクの下限がある", pb.INBOUND_FLOOR >= 10, True)
+    # タイトルの判断は人に残す。機械が当てると主張のずれた記事になる
+    src = (ROOT / "scripts" / "priority_boost.py").read_text(encoding="utf-8")
+    check("タイトルは自動で書き換えない", "人が判断して直す" in src, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週走る", "priority_boost.py --write" in wf, True)
 
 
 def main():
@@ -605,7 +627,8 @@ def main():
               test_auto_fixes_are_reviewed,
               test_client_onboarding_is_one_sheet,
               test_quality_gate_holds_on_wordpress,
-              test_daily_todo_fits_in_one_run):
+              test_daily_todo_fits_in_one_run,
+              test_near_page1_is_pushed_every_week):
         try:
             t()
         except Exception as e:

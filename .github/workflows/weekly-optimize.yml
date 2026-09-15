@@ -158,6 +158,18 @@ jobs:
       - name: 実測データの公開ページを更新
         run: python scripts/data_page.py || true
 
+      # あと少しで1ページ目に届く記事は、放っておいても上がらない。
+      # 被リンクが足りないまま何ヶ月も止まるので、毎週そこを埋める
+      - name: 1ページ目に近い記事の底上げ（主力の語のみ）
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/priority_boost.py --write || true
+          rm -f indexing-service-account.json
+
       - name: 効果の出ていない記事を自動で手当てする
         run: python scripts/auto_improve.py --write || true
 

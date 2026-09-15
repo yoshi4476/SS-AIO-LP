@@ -86,6 +86,10 @@ faq:
 **2026年8月時点で個人事業主が使えるのは「新事業進出・ものづくり商業サービス補助金」です。**中小企業新事業進出補助金とものづくり補助金を統合した制度で、事業再構築補助金からは2段階先にあたります。
 
 
+関連する内容として[クリニックのIT導入補助金｜予約システム選びの5つの視点](/hojokin/it-hojokin-clinic/)も公開しています。
+
+つまずきやすい点は、[ものづくり補助金はクリニックで使える？医療法人は対象外に注意](/hojokin/monozukuri-hojokin-clinic/)で解説しています。
+
 近い論点を[社労士事務所のAI導入補助金｜労務ソフトは対象になるか](/blog/roudouhoken-nendokoshin-denshishinsei/)で扱っています。
 <figure><img src="/images/jigyou-saikouchiku-kojinjigyonushi-itsumade/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 

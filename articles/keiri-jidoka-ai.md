@@ -50,6 +50,8 @@ faq:
 経理AI自動化とは、請求書の読み取りから仕訳提案まで、判断を伴う定型業務をAIが代行する仕組みです。
 
 
+近い論点を[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](/keiri-bpo/keiri-koritsuka-jirei/)で扱っています。
+
 近い論点を[エクセル経理の効率化のコツ7選｜関数とショートカットの実践術](/blog/excel-keiri-koritsuka/)で扱っています。
 実際の進め方を先に押さえるなら、[経理の自動化はエクセルでどこまで可能？限界と移行の4ステップ](/blog/keiri-excel-jidoka/)が参考になります。
 
@@ -90,8 +92,6 @@ AI-OCRなどのツール導入では、AI導入補助金の対象になる場合
 経理AI自動化は、現状把握→対象業務の選定→試験運用→本番運用という4つの手順で進めます。
 
 実際の例は[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)でも扱っています。
-
-つまずきやすい点については、[経理自動化はPythonで可能か？できることと4つの注意点](/blog/keiri-jidoka-python/)にまとめています。
 
 <figure><img src="/images/keiri-jidoka-ai/tejun.png" alt="経理AI自動化を始める4つの手順: 経理業務を棚卸しする、自動化する業務を選ぶ、試験運用で精度を確認、本番運用に移行する" loading="lazy"><figcaption>経理AI自動化を始める4つの手順</figcaption></figure>
 
