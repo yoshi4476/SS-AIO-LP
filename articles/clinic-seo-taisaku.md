@@ -44,7 +44,7 @@ faq:
 **クリニックSEOは、地図検索ではなく一般検索での自院サイトの掲載順位を高める施策です。**同じ集患施策でも、狙う検索結果の場所がMEO・AIOとは異なります。
 
 
-近い論点を[医療機関のMEO対策｜5つの施設タイプ別に違いと進め方](/meo/iryou-meo-taisaku/)で扱っています。
+近い論点を[医療機関のMEO対策](/meo/iryou-meo-taisaku/)で扱っています。
 <div class="definition-box"><span class="term">クリニックSEOとは</span>、症状名や治療法など地域名を伴わない検索クエリで、自院サイトの掲載順位を上げるための施策のことです。</div>
 
 MEOはGoogleマップとローカルパックでの表示を狙い、AIOはAI Overviewでの引用を狙います。SEOはこの2つより手前、通常のオーガニック検索結果そのものが対象です。私たちがAIO・SEO・MEOを横断して支援する中でも、この3つを混同したまま予算配分を決めているクリニックを何度も見てきました。
@@ -80,7 +80,7 @@ YMYLとは「Your Money or Your Life」の略で、健康や生命に影響す�
 **検索順位を左右するクリニックSEOの施策は、監修者明示から構造化データまでの5つに整理できます。**優先順位をつけずに全部を同時に進めようとすると、どれも中途半端になりがちです。
 
 
-近い論点を[美容皮膚科のMEO対策とは？広告規制下で選ばれる3ステップ](/meo/biyou-hifuka-meo/)で扱っています。
+近い論点を[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で扱っています。
 <figure><img src="/images/clinic-seo-taisaku/steps.png" alt="クリニックSEO5つの施策: 監修者情報を明示、症状KWで構成、内部リンクを整備、構造化データ実装、NG表現をチェック" width="1200" height="675" loading="lazy"><figcaption>クリニックSEO5つの施策（当メディア作成）</figcaption></figure>
 
 1. 院長・監修医の氏名と資格をページ内に明示する
@@ -134,7 +134,7 @@ YMYLとは「Your Money or Your Life」の略で、健康や生命に影響す�
 
 **クリニックSEOでよくある失敗は、監修者情報の欠如・MEO偏重・表現規制の見落としの3つです。**どれも致命的ではありませんが、気づかないまま長期間放置されがちです。
 
-関連する内容は[オンライン診療チェックリスト｜クリニックが導入前に確認すべき8項目](/ai-marketing/online-shinryo-checklist/)で整理しています。
+関連する内容は[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)で整理しています。
 
 つまずきやすい点は[クリニックのSEOコンサルティング](/seo/clinic-seo-consulting-erabikata/)で整理しています。
 

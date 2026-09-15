@@ -52,9 +52,9 @@ faq:
 **宿泊業が使える補助金の入口は、デジタル化・AI導入補助金、新事業進出等補助金、持続化補助金の3つです。**それぞれ対象にする投資の規模と目的が異なります。
 
 
-あわせて[クリニックのIT導入補助金｜予約システム選びの5つの視点](/hojokin/it-hojokin-clinic/)もご覧ください。
+あわせて[クリニックのIT導入補助金](/hojokin/it-hojokin-clinic/)もご覧ください。
 
-同業種向けの制度別の解説は、[宿泊業のIT導入補助金は有利？20人以下特例と対象ツール](/blog/it-hojokin-shukuhakugyou/)で詳しく扱っています。
+同業種向けの制度別の解説は、[宿泊業のIT導入補助金は有利？](/blog/it-hojokin-shukuhakugyou/)で詳しく扱っています。
 
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026の通常枠ページ</a>によると、この制度はソフトウェア・クラウドサービスの導入費用を補助します。宿泊業ならPMSや予約システムが対象になりやすい分野です。
 
@@ -74,9 +74,9 @@ faq:
 
 私たちが宿泊業のオーナーから相談を受ける際、「ものづくり補助金」と「事業再構築補助金」を別の制度として探しているケースを何度か見てきました。探すべきは1つの制度の中のどの枠かという視点です。制度名ではなく、投資の目的から入る発想。
 
-事業再構築補助金として宿泊業が採択された実例は、[宿泊業のインバウンド投資を支えた事業再構築補助金、今の姿は](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)で紹介しています。
+事業再構築補助金として宿泊業が採択された実例は、[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)で紹介しています。
 
-ものづくり補助金として宿泊業が使える投資パターンの詳細は、[ものづくり補助金は宿泊業で使える？旅館業200人以下基準](/blog/monozukuri-hojokin-shukuhakugyou/)で解説しています。
+ものづくり補助金として宿泊業が使える投資パターンの詳細は、[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)で解説しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

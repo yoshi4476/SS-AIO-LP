@@ -110,7 +110,7 @@ AIを使って下書きの速度を上げつつ、一次情報と事実確認は
 
 不動産SEO記事の文字単価は、経験レベルによって0.5円から20円まで幅があります。
 
-費用の目安は[不動産SEO会社への外注は必要か？費用相場と6つの判断軸](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
+費用の目安は[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
 <a href="https://fungry.co.jp/cnaps/blog/writer-cost-price/" target="_blank" rel="noopener">C-NAPS</a>によると、**初級ライターの文字単価は0.5〜2円、中級は2〜5円、上級は5〜20円**が目安とされています。SEO記事に限ると、専門知識や構成力が求められる分、3〜6円以上が相場という指摘もあります。
 
@@ -167,7 +167,7 @@ AI検索時代のライターには、AIでは書けない一次情報を扱う�
 
 だからこそ、ライターに求めるスキルも「キーワードを詰め込む力」から「一次情報を具体語で書く力」へと変わってきています。<a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja" target="_blank" rel="noopener">GoogleのSEOスターターガイド</a>も、独自性のあるコンテンツの重要性に触れています。私たちは3つの自社メディアを運営し、記事からの問い合わせ導線を実際に運用する中で、この傾向を日々の数字から確認しています。
 
-不動産のAI検索対策そのものについては[不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップ](/aio/fudousan-ai-kensaku-taisaku/)で詳しく解説しています。相場データを扱う記事の書き方は[相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](/ai-marketing/souba-kiji-tsukurikata/)も参考にしてください。
+不動産のAI検索対策そのものについては[不動産のAI検索対策](/aio/fudousan-ai-kensaku-taisaku/)で詳しく解説しています。相場データを扱う記事の書き方は[相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](/ai-marketing/souba-kiji-tsukurikata/)も参考にしてください。
 
 <div class="cta-box"><p>記事制作の体制づくりから、無料で診断します。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
@@ -188,4 +188,4 @@ AI検索時代のライターには、AIでは書けない一次情報を扱う�
 
 不動産SEO記事のライターは、単価の安さではなく、業界知識・構成提案力・ファクトチェック体制の3つで選ぶことが失敗を避ける近道です。まずは基準1〜3を満たす候補に、今回紹介したブリーフの型を使って1本だけ試作を依頼してみてください。
 
-内製か外注かで迷う時間があるなら、その時間で構成指示書を1本作るほうが記事は早く増えていきます。検索・マップ・AIまで含めた集客の全体像は[AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像](/ai-marketing/ai-shukyaku-guide/)で解説しています。
+内製か外注かで迷う時間があるなら、その時間で構成指示書を1本作るほうが記事は早く増えていきます。検索・マップ・AIまで含めた集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)で解説しています。

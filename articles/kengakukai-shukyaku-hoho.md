@@ -49,8 +49,8 @@ diagrams:
 **見学会集客とは、来場予約の獲得から当日運営、来場後のフォローまでを一体で設計する取り組みです。**
 
 
-近い論点を[整骨院の集客イベント5選｜広告規制内でできる企画と注意点](/ai-marketing/seikotsuin-shukyaku-event/)で扱っています。
-あわせて[工務店のインスタ集客とは？問い合わせにつなげる5つの施策](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
+近い論点を[整骨院の集客イベント5選](/ai-marketing/seikotsuin-shukyaku-event/)で扱っています。
+あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">見学会集客とは</span>、完成見学会・オープンハウス・モデルハウス見学会などのイベントに、狙った層の見込み客を予約獲得から来場まで導く一連の施策のことです。単発の広告出稿ではなく、告知・予約導線・当日体験・アフターフォローまでを一つの流れとして設計する点が特徴です。</div>
 
@@ -64,7 +64,7 @@ diagrams:
 
 
 関連する内容として[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)も公開しています。
-前提となる考え方は[整骨院の集客が伸びない原因とは？新規患者を増やす5つの打ち手](/meo/seikotsuin-shukyaku/)でも扱っています。
+前提となる考え方は[整骨院の集客が伸びない原因とは？](/meo/seikotsuin-shukyaku/)でも扱っています。
 
 第一に、告知の接点不足です。見学会の存在自体を知らせる場が少ないと、比較検討の土俵にすら乗れません。チラシ1回・SNS投稿1回といった単発の告知では、情報が届く前に検討が終わってしまいます。
 

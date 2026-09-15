@@ -146,7 +146,7 @@ SNSキャンペーンは、フォロー・保存特典やハッシュタグ企�
 
 **整骨院の集客イベントは、目的設定→ターゲット設定→告知→効果測定という4ステップで進めます。**
 
-費用の目安は、[整骨院の集客セミナーは受けるべき？費用相場と失敗しない選び方](/ai-marketing/seikotsuin-shukyaku-seminar/)で解説しています。
+費用の目安は、[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で解説しています。
 
 関連する内容は、[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)で解説しています。
 
@@ -180,7 +180,7 @@ SNSキャンペーンは、フォロー・保存特典やハッシュタグ企�
 
 イベント開催後の口コミ依頼も、MEOとAI検索の両方に効く施策です。具体的な依頼方法は[Googleマップの口コミを増やす方法5選と返信のコツ](/meo/kuchikomi-fuyasu-hoho/)で紹介しています。
 
-整骨院の集客成功事例は[整骨院の集客成功事例5選](/ai-marketing/seikotsuin-shukyaku-jirei/)、AI検索全体への対応は[クリニックのAIO対策｜AI検索で患者に選ばれる5ステップ](/aio/clinic-ai-kensaku-taisaku/)でも解説しています。
+整骨院の集客成功事例は[整骨院の集客成功事例5選](/ai-marketing/seikotsuin-shukyaku-jirei/)、AI検索全体への対応は[クリニックのAIO対策](/aio/clinic-ai-kensaku-taisaku/)でも解説しています。
 
 ## よくある質問
 

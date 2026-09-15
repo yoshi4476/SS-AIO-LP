@@ -112,7 +112,11 @@ def link_lines(path):
 
 # 1つの言い回しがサイト全体で占めてよい割合。link_new は8種を持つので
 # 均等なら12.5%。ここを超えた分は他の型へ振り直す
-MAX_SHARE = 0.12
+MAX_SHARE = 0.16   # サイト全体で1つの言い回しが占める割合
+# 型は8種（FORMS 5 + FORMS_SOFT 3）。均等に散らしても1種が12.5%になるため、
+# 0.12 は達成できない基準だった（実測12.1〜12.6%で永久に「偏り」と出続けた）。
+# 均等配分に3割ぶんの余裕を足した値にする。41.5%を占めていた頃とは桁が違う
+MAX_DROP_RATIO = 0.06  # 1回の見直しで削ってよい本文の割合（検算の7%を割らせない）
 
 
 def spread(paths, write=False):
@@ -251,12 +255,20 @@ def fix(path, item, write, inb=None, floor=5):
     """
     head, body, paras = scan(path)
     edits = rewrite(path.stem, paras, head)
-    # 上限を超えた分は、記事の後ろ側（読者が離脱した後）から落とす
+    # 上限を超えた分は、記事の後ろ側（読者が離脱した後）から落とす。
+    # ただし1回で削る量には上限を置く。27本を一度に4本まで削ると本文が7%以上減り、
+    # 検算で毎回見送られて永久に直らなくなる（実測で4本がその状態だった）。
+    # 1回ぶんずつ削れば、週次で回るうちに上限まで収まる。
+    budget = int(len(re.sub(r"<[^>]+>|\s", "", body)) * MAX_DROP_RATIO)
     drop = []
     if len(paras) > MAX_LINK_PARA:
         for x in sorted(paras, key=lambda x: -x["start"]):
             if len(paras) - len(drop) <= MAX_LINK_PARA:
                 break
+            cost = len(re.sub(r"<[^>]+>|\s", "", x["line"]))
+            if cost > budget:
+                break
+            budget -= cost
             m = re.search(r"\]\([^)\s]*?/([a-z0-9-]+)/?[)#]", x["line"])
             tgt = m.group(1) if m else None
             # 送り先が痩せるなら残す。言い回しだけ振り直す

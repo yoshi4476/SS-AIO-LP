@@ -37,24 +37,13 @@ faq:
 
 関連する内容は、[建設業がAI導入補助金で不採択になる6つの理由と直し方](/blog/tokyo-kensetsugyou-denshishinsei/)で解説しています。
 
-あわせて[建設業の電子申請は行政書士に依頼すべき？費用相場3つの基準](/blog/kensetsugyou-denshishinsei-gyoseishoshi/)もご覧ください。
+近い論点を[建設業の電子申請は行政書士に依頼すべき？](/blog/kensetsugyou-denshishinsei-gyoseishoshi/)で扱っています。
 
 関連する内容は[建設業のAI導入補助金｜必要書類10点と揃える順番](/blog/kanagawa-kensetsugyou-denshishinsei/)で整理しています。
 
-対象になる範囲については、[農業はAI導入補助金の対象になるか｜条件と使えるソフト](/blog/nougyou-shoki-hiyou/)にまとめています。
+対象になる範囲については、[農業はAI導入補助金の対象になるか](/blog/nougyou-shoki-hiyou/)にまとめています。
 
 関連する内容については、[AI導入補助金の着金はいつ？実績報告後の日数目安](/blog/ai-hojokin-chakkin-itsu/)にまとめています。
-実際の進め方は[AI導入補助金のGビズID取得方法｜プライム取得の5つの手順](/blog/ai-hojokin-gbizid-shutoku/)で整理しています。
-
-
-関連する内容として[中小企業成長加速化補助金｜1次2次の実績とスケジュール](/blog/seicho-kasokuka-hojokin-schedule/)も公開しています。
-実際の進め方を先に押さえるなら、[農業の補助金の申請方法｜制度の選び方と5ステップ【2026年】](/blog/nougyou-hojokin-shinsei-houhou/)が参考になります。
-
-正しい手順を先に押さえるなら、[AI導入補助金の申請のやり方｜受給までの5ステップを解説](/blog/ai-hojokin-shinsei-yarikata/)が参考になります。
-
-関連する内容については、[建設業の2024年問題をAI導入補助金でどう埋めるか](/blog/ai-hojokin-kensetsugyou-katsuyou/)にまとめています。
-
-対象になる範囲は[AI導入補助金はクリニックも対象？電子カルテ3分野の補助額](/blog/ai-hojokin-clinic-katsuyou/)でも扱っています。
 
 <div class="definition-box"><span class="term">デジタル化・AI導入補助金とは</span>、中小企業庁が実施する「中小企業デジタル化・AI導入支援事業」の愛称で、2026年に旧IT導入補助金から名称が変更された制度です。ソフトウェアやクラウドサービスの導入費用の一部を補助し、業務効率化や生産性向上を後押しします。</div>
 
@@ -67,9 +56,6 @@ faq:
 
 通常枠の採択率は2026年7月公表分で43.59%と、半数近くが不採択になっています。思ったより狭き門だと感じる経営者も多いはずです。
 
-
-実際の例については、[AI導入補助金の不採択理由｜審査で落ちる6つのパターン](/blog/ai-hojokin-fusaitaku-riyu/)にまとめています。
-実際の進め方は[AI導入補助金2026｜クリニックの次の締切と今から動く3ステップ](/blog/ai-hojokin-clinic-2026-schedule/)でも扱っています。
 
 当社はAI導入補助金の登録支援事業者として申請を支援していますが、不採択の連絡を受けてから相談に来られる方の多くは、**「何が足りなかったか」を通知書からは読み取れていません**。以下は、支援の現場で繰り返し見てきたつまずきです。
 
@@ -89,7 +75,7 @@ faq:
 GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間に合いません。この2つは交付申請の前提条件であり、後回しにできない手続きです。
 
 
-近い論点を[AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ](/blog/ai-hojokin-security-action-hoshi2/)で扱っています。
+関連する内容として[AI導入補助金のセキュリティアクション二つ星](/blog/ai-hojokin-security-action-hoshi2/)も公開しています。
 <a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の申請手続きフロー</a>によると、**交付申請には「GビズIDプライム」と、IPA（情報処理推進機構）の「SECURITY ACTION」の宣言（★一つ星または★★二つ星）が必須**です。GビズIDプライムの発行には概ね2週間、SECURITY ACTIONの宣言済アカウントID発行には概ね2〜3日かかると案内されています。
 
 <div class="caution-box"><span class="box-title">注意: GビズIDは即日発行できない</span><br>締切の直前に気づいて申請しても、発行が間に合わず応募自体ができなくなります。締切から逆算して、遅くとも1か月前には取得手続きを始めてください。</div>
@@ -115,7 +101,7 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 過去に交付決定を受けたプロセスと同一内容で再申請すると、減点や不採択の対象になります。制度は毎年似た枠組みのため、うっかり同じ内容で申請してしまう例が見られます。
 
 
-近い論点を[AI導入補助金のAI活用事例5選｜対象ツールと申請のコツ](/blog/ai-hojokin-ai-katsuyo-jirei/)で扱っています。
+近い論点を[AI導入補助金のAI活用事例5選](/blog/ai-hojokin-ai-katsuyo-jirei/)で扱っています。
 過去の採択で賃上げ加点を受けたにもかかわらず、要件を満たす取り組みを実行していないまま放置しているケースも減点の要因です。
 
 **賃上げ目標を掲げて加点を受けた場合は、実行状況の記録を残しておく**必要があります。同一機能のITツールを別の年度でまた導入しようとする申請も、プロセスが重複していると判断されやすいので注意してください。
@@ -146,9 +132,6 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 ソフトウェア導入が中心ならデジタル化・AI導入補助金、設備投資が中心なら中小企業省力化投資補助金が向いています。目的に合わない制度を選ぶこと自体が失敗の入り口になります。
 
-
-近い論点を[建設業の電子申請システムを閲覧する2つの方法｜JCIPとCIICの違い](/blog/kensetsugyou-denshishinsei-etsuran/)で扱っています。
-関連する内容は[補助金の電子申請はいつから義務化？中小企業が今やること](/blog/hojokin-denshishinsei-gimuka-itsukara/)でも扱っています。
 
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">通常枠の補助率・補助上限額のページ</a>と<a href="https://shoryokuka.smrj.go.jp/ippan/" target="_blank" rel="noopener">中小企業省力化投資補助金（一般型）公式サイト</a>の情報を整理すると、次のような違いがあります。
 

@@ -45,9 +45,9 @@ diagrams:
 **クリニックのAIO対策とは、生成AIの受診先紹介で自院が引用・言及される状態をつくる取り組みです。**AIO（AI Overview Optimization）・AI検索対策・LLMO はいずれもほぼ同じ取り組みを指し、呼び方が違うだけと考えて構いません。
 
 
-近い論点を[美容皮膚科のMEO対策とは？広告規制下で選ばれる3ステップ](/meo/biyou-hifuka-meo/)で扱っています。
+近い論点を[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で扱っています。
 
-近い論点を[整骨院のホームページ集客｜予約につながる5つの必須要素](/ai-marketing/seikotsuin-hp-shukyaku/)で扱っています。
+近い論点を[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)で扱っています。
 選ぶときの基準については、[AI検索とは？AIO対策との違いと5種類の対応ポイント](/aio/aio-taisaku-ai-kensaku/)にまとめています。
 
 <div class="definition-box"><span class="term">クリニックのAI検索対策とは</span>、患者が「地域名+診療科」や「症状 病院」とAIチャットに尋ねたとき、自院の情報が回答の候補として紹介されるよう、ホームページやGoogleビジネスプロフィールの情報を整備することです。従来のSEO・MEO対策と対立するものではなく、両方の土台の上に成り立ちます。</div>
@@ -131,7 +131,7 @@ Search Consoleの生成AIパフォーマンスレポートと、GA4のAI参照�
 AI検索対応で最も見落とされやすいのは、AIが参照する元情報自体が医療広告ガイドラインに抵触しているケースです。
 
 
-近い論点を[整骨院のSEO対策とは？MEOと役割分担する5つの手順](/seo/seikotsuin-seo-taisaku/)で扱っています。
+近い論点を[整骨院のSEO対策とは？](/seo/seikotsuin-seo-taisaku/)で扱っています。
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>は、ホームページも広告規制の対象に含めています。
 
 AIは公開されている文章をそのまま要約・引用するため、==体験談や誇大表現を含むページはAIの回答にもその表現ごと反映されるリスクがあります==。ガイドラインの詳しい内容と禁止6表現は[医療広告ガイドラインとは？クリニックHPの禁止6表現](/seo/iryou-koukoku-guideline-web/)で解説しています。
@@ -160,7 +160,7 @@ AIは公開されている文章をそのまま要約・引用するため、==�
 **同じクリニックでも、診療科によってAIに聞かれる内容が変わります。**そこに答えていないと、対策していても引用されません。
 
 
-関連する内容として[整骨院の費用は医療費控除の対象になる？対象外との違い3つ](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
+関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
 | 診療科 | よく聞かれる形 | 用意しておくもの |
 |:--|:--|:--|
 | 内科・小児科 | 「この症状は何科か」 | **症状から受診先を案内するページ** |

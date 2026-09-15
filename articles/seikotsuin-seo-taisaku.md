@@ -53,7 +53,7 @@ faq:
 
 費用の目安は[整骨院の費用は保険でいくら？自己負担3割の目安と相場](/seo/seikotsuin-hiyou-hoken/)でも扱っています。
 
-前提となる考え方は[整骨院のMEO対策とは？無資格「整体」と差がつく5つの実践ポイント](/meo/seikotsuin-meo-taisaku/)で整理しています。
+前提となる考え方は[整骨院のMEO対策とは？](/meo/seikotsuin-meo-taisaku/)で整理しています。
 
 <div class="definition-box"><span class="term">整骨院のSEO対策とは</span>、ホームページの記事・ページの内容や構造を改善し、「腰痛 整骨院 ◯◯市」のような検索結果で自院のページを上位表示させる取り組みを指します。地図パック（Googleビジネスプロフィール）を狙う==MEOとは表示される場所が別==で、対策方法も異なります。</div>
 
@@ -94,7 +94,7 @@ MEOは「近くの整骨院を探す」段階の患者に、地図と口コミ�
 整骨院SEO対策の基本は、キーワード選定から更新継続までの5ステップで進めます。
 
 
-近い論点を[AIO対策のキーワード選定｜選ぶ基準5つと進め方3ステップ](/aio/aio-taisaku-keyword-sentei/)で扱っています。
+関連する内容については、[AIO対策のキーワード選定](/aio/aio-taisaku-keyword-sentei/)にまとめています。
 <figure><img src="/images/seikotsuin-seo-taisaku/steps.png" alt="整骨院SEO対策の基本5ステップ: キーワードを決める、症状別ページを作る、内部リンクでつなぐ、院の情報を書く、更新を継続する" loading="lazy"><figcaption>整骨院SEO対策の基本5ステップ</figcaption></figure>
 
 ### ステップ1: キーワードを決める

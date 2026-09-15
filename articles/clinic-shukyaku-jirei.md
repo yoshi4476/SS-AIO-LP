@@ -46,7 +46,7 @@ diagrams:
 
 ## クリニックの集客事例は5つのパターンに分けられる
 
-**クリニックの集客事例は、MEO・SEO・AI検索・口コミ・予約導線の5パターンに大別できます。**口コミの返信文そのものは[病院・クリニックの口コミ返信｜違反になるNG表現と例文8つ](/meo/byoin-kuchikomi-henshin-reibun/)にまとめています。
+**クリニックの集客事例は、MEO・SEO・AI検索・口コミ・予約導線の5パターンに大別できます。**口コミの返信文そのものは[病院・クリニックの口コミ返信](/meo/byoin-kuchikomi-henshin-reibun/)にまとめています。
 
 選ぶときの基準は[クリニックの集客集患サポートとは？3つの型と選び方](/ai-marketing/clinic-shukyaku-shukan-support/)でも扱っています。
 
@@ -132,7 +132,7 @@ Googleのローカル検索順位は<a href="https://support.google.com/business
 
 **集客事例でよくある失敗は、経路の一極集中・口コミ放置・情報更新の停止の3つです。**
 
-関連する内容を先に押さえるなら、[クリニック集客の設計図｜MEO・SEO・AIO優先順位と90日ロードマップ](/ai-marketing/clinic-shukyaku-sekkeizu/)が参考になります。
+関連する内容を先に押さえるなら、[クリニック集客の設計図](/ai-marketing/clinic-shukyaku-sekkeizu/)が参考になります。
 
 私たちの支援現場で相談を受ける失敗の多くは、施策そのものの質よりも継続と分散の欠如が原因です。ここでは特に相談の多い3つのパターンを紹介します。事例を集める際は<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>への抵触にも注意してください。
 

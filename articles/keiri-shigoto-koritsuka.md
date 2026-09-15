@@ -96,7 +96,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 ツールを使った経理の仕事効率化は、クラウド会計・経費精算システム・RPA/AI-OCRの3領域に分かれます。
 
 
-関連する内容として[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](/keiri-bpo/keiri-koritsuka-jirei/)も公開しています。
+関連する内容として[経理効率化の事例4選｜方法別のポイントと進め方](/keiri-bpo/keiri-koritsuka-jirei/)も公開しています。
 
 関連する内容として[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)も公開しています。
 <figure><img src="/images/keiri-shigoto-koritsuka/tool3.png" alt="ツールで効率化できる3つの領域: クラウド会計による入力の自動化、経費精算システムによる申請・承認の効率化、RPA・AI-OCRによる転記の自動化" loading="lazy"><figcaption>ツールで効率化できる3つの領域</figcaption></figure>
@@ -137,7 +137,7 @@ RPA・AI-OCRは、請求書や納品書の転記作業を自動化します。�
 
 経理の仕事効率化で失敗しやすいのは、全業務を一度に効率化しようとしたり、属人化を残したままツールだけ導入したりするケースです。
 
-関連する内容は[エクセル経理の効率化のコツ7選｜関数とショートカットの実践術](/blog/excel-keiri-koritsuka/)でも扱っています。
+関連する内容は[エクセル経理の効率化のコツ7選](/blog/excel-keiri-koritsuka/)でも扱っています。
 
 <figure><img src="/images/keiri-shigoto-koritsuka/chuui.png" alt="経理の仕事効率化のNGとOK: NG例は全業務を一度に効率化しようとする・属人化を残したままツールだけ導入する・効果を測らず次の施策に移る・現場に周知せず新システムを始める、OK例は時間がかかる業務から着手する・属人化解消とセットで進める・導入後の時間を数値で比較する・移行期間を区切って周知する" loading="lazy"><figcaption>経理の仕事効率化のNGとOK</figcaption></figure>
 

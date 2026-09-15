@@ -83,7 +83,7 @@ freee株式会社は2024年4月9日〜12日、従業員数11〜1,000名の企業
 
 対象業務の洗い出しから運用の定着まで、5つのステップで請求書電子化を進められます。
 
-関連する内容は、[外注費の請求書の書き方｜記載項目6つと2026年の変更点](/blog/gaichuuhi-seikyuusho-kakikata/)で解説しています。
+関連する内容は、[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)で解説しています。
 
 <figure><img src="/images/seikyusho-denshika-susumekata/step.png" alt="請求書電子化の進め方5ステップ: 対象業務を洗い出す、システムを選ぶ、取引先の合意を得る、運用へ移行する、ルールを定着させる" loading="lazy"><figcaption>請求書電子化の進め方5ステップ</figcaption></figure>
 

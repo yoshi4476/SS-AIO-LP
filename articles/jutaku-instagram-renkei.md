@@ -54,7 +54,7 @@ diagrams:
 住宅会社がInstagram連携を優先すべき理由は、施主の情報収集行動・信頼性の見え方・費用対効果の3つです。
 
 
-関連する内容として[注文住宅SEO対策とは？工務店が検索とAIに選ばれる7つの施策](/seo/chumon-jutaku-seo-taisaku/)も公開しています。
+関連する内容として[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)も公開しています。
 第一に、==注文住宅の検討者はInstagramを情報収集の中心に据えている==ことです。ゼロシード株式会社が注文住宅購入者674名を対象に調査を行いました。
 
 その結果、<a href="https://prtimes.jp/main/html/rd/p/000000003.000030074.html" target="_blank" rel="noopener">Instagramで情報収集した人は68%</a>にのぼり、住宅系ポータルサイトの利用（2割未満）を大きく上回りました。年齢別でも20〜30代46%・40代以上54%と、若年層に偏らず幅広い層が利用しています。
@@ -98,7 +98,7 @@ diagrams:
 
 <figure><img src="/images/jutaku-instagram-renkei/embed-vs-gbp.png" alt="サイト埋め込みとGBP連携の役割の違い: サイトへの埋め込みは投稿を随時表示できて回遊・滞在時間に寄与しMeta開発者アプリの登録が必要な場合があり、GBPとの連携はプロフィール下部にアイコン表示のみで写真は自動反映されず設定は数分で完了する" loading="lazy"><figcaption>サイト埋め込みとGBP連携は役割が異なり、両方を整備するのが基本です</figcaption></figure>
 
-不動産・住宅業のGBP整備そのものについては[不動産MEO対策とは？物件でなく店舗を上位表示する5つの手順](/meo/fudousan-meo-taisaku/)でも詳しく解説しています。
+不動産・住宅業のGBP整備そのものについては[不動産MEO対策とは？](/meo/fudousan-meo-taisaku/)でも詳しく解説しています。
 
 ## プロフィールリンクと投稿で相互送客を設計する
 
@@ -168,7 +168,7 @@ GBPにリンクを登録しただけで「Instagramの写真がGoogleマップ�
 
 AIチャットに「◯◯市 工務店 施工事例」のように聞かれたとき、回答の材料になるのはサイトの本文です。Instagramに載せた工夫や数値も、サイト側の施工事例ページに文章として書き残しておくことで、初めてAIが参照できる情報になります。私たちが運営するこのサイト自体も、構造化データ・llms.txt・主要AIクローラー20種の許可を実装してAIO対策の実験場にしています。
 
-AI検索対策の全体像は[AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像](/ai-marketing/ai-shukyaku-guide/)で解説しています。投稿文の下書きに迷ったときは[ChatGPTを集客に活用する方法7選【中小企業向け】](/ai-marketing/chatgpt-shukyaku-katsuyo/)で紹介している型も参考にしてください。
+AI検索対策の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)で解説しています。投稿文の下書きに迷ったときは[ChatGPTを集客に活用する方法7選](/ai-marketing/chatgpt-shukyaku-katsuyo/)で紹介している型も参考にしてください。
 
 私たちがG-ranの支援先で確認している限り、Instagramと連携したサイトほど「会社名＋施工事例」のような指名検索に近いキーワードでの流入が安定する傾向があります。写真だけのSNS運用と、文章で裏付けたサイト運用を両輪で回すことが、AI検索時代でも変わらない基本になります。
 

@@ -99,7 +99,7 @@ faq:
 経費精算を外注する主なメリットは、不正発見の精度向上・確認負担の軽減・繁忙期対応の3つです。
 
 
-関連する内容として[小規模事業者の経理体制の作り方｜規模別3パターンと注意点](/blog/shokibo-jigyousha-keiri-taisei/)も公開しています。
+関連する内容として[小規模事業者の経理体制の作り方](/blog/shokibo-jigyousha-keiri-taisei/)も公開しています。
 株式会社ChillStackが2024年7月17日に公表した<a href="https://prtimes.jp/main/html/rd/p/000000037.000046548.html" target="_blank" rel="noopener">「経費精算における不正実態調査」</a>（経理担当者200名対象）があります。この調査では、**経費精算の不正・不備を発見した経験がある経理担当者は67.5%**にのぼり、**チェック業務に負担を感じる割合は83.5%**でした。
 
 社内の1人だけで確認していると、慣れによる見落としが起きやすくなります。**第三者の目でチェックする体制を作れる**ことが、外注の大きな価値です。加えて、決算期や年末調整で申請が集中する時期も、委託先の体制でまとめて処理できます。
@@ -122,9 +122,9 @@ faq:
 
 経費精算BPOは、棚卸し・範囲の線引き・テスト運用の3ステップで導入すると失敗しにくくなります。
 
-選ぶときの基準は[経費精算システムとは？選び方の4つの軸と導入前の注意点](/blog/keihi-seisan-system-erabikata/)でも扱っています。
+選ぶときの基準は[経費精算システムとは？](/blog/keihi-seisan-system-erabikata/)でも扱っています。
 
-実際の進め方は[freeeの経費精算のやり方｜申請から承認までの4ステップ](/blog/freee-keihi-seisan-yarikata/)でも扱っています。
+実際の進め方は[freeeの経費精算のやり方](/blog/freee-keihi-seisan-yarikata/)でも扱っています。
 
 <figure><img src="/images/keihi-seisan-bpo/step.png" alt="経費精算BPO導入までの3ステップ: 現状の運用を棚卸しする、任せる範囲を線引きする、委託先とテスト運用する" loading="lazy"><figcaption>経費精算BPO導入までの3ステップ</figcaption></figure>
 

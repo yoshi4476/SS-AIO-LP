@@ -75,7 +75,7 @@ faq:
 | SNS（インスタ） | 認知と施工事例の発信 | 施工事例の閲覧・保存 |
 | Web広告（Google広告・Instagram広告） | 短期的な流入の補完 | 即効性が必要な期間限定施策 |
 
-役割が異なるため、**1つの施策だけで問い合わせが安定することはまれ**です。ホームページを土台に、他の施策から流入を集める設計が基本になります。5つの施策別の具体的な始め方は、[工務店のSEO対策｜施工事例で選ばれる5つの施策と始め方](/seo/koumuten-seo-taisaku/)や[工務店のインスタ集客とは？問い合わせにつなげる5つの施策](/ai-marketing/koumuten-instagram-shukyaku/)で扱っています。
+役割が異なるため、**1つの施策だけで問い合わせが安定することはまれ**です。ホームページを土台に、他の施策から流入を集める設計が基本になります。5つの施策別の具体的な始め方は、[工務店のSEO対策｜施工事例で選ばれる5つの施策と始め方](/seo/koumuten-seo-taisaku/)や[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で扱っています。
 
 表の5施策を眺めると、SEOとMEOは似た施策に見えますが、検索結果に出る場所が異なります。SEOは検索結果の通常枠、MEOは地図付きの枠に表示されるため、対策すべきページの作り方も別物として考える必要があります。両方を混同したまま1つのページで対応しようとすると、どちらの評価も中途半端になりがちです。
 
@@ -153,7 +153,7 @@ Web集客はどの施策も、公開・登録した後の運用を続けて初�
 
 <div class="cta-box"><p>Web集客の現状診断から、施策の優先順位づけまで無料でご相談いただけます。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
-見学会や集客セミナーを活用したい場合は[工務店の集客セミナー、FC加盟の前に確認すべき3つのこと](/ai-marketing/koumuten-shukyaku-seminar/)、AI検索経由の引用まで見据えたい場合は[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)が実践の手順として役立ちます。
+見学会や集客セミナーを活用したい場合は[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)、AI検索経由の引用まで見据えたい場合は[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)が実践の手順として役立ちます。
 
 住宅需要の全体像を公的統計で確認したい場合は<a href="https://www.mlit.go.jp/toukeijouhou/index.html" target="_blank" rel="noopener">国土交通省 統計情報</a>、検索エンジンに評価される基本方針を確認したい場合は<a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja" target="_blank" rel="noopener">Google検索セントラル SEOスターターガイド</a>が参考になります。
 

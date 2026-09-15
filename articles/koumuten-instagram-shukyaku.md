@@ -48,8 +48,8 @@ faq:
 工務店のインスタ集客とは、施工事例や家づくりの過程を発信し、来場予約や問い合わせにつなげる取り組みです。
 
 
-関連して、[住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法](/ai-marketing/jutaku-instagram-renkei/)もあわせてご確認ください。
-実際の例を先に押さえるなら、[リフォーム会社のインスタグラム運用｜反響につながる投稿5パターン](/ai-marketing/reform-instagram-shukyaku/)が参考になります。
+関連して、[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)もあわせてご確認ください。
+実際の例を先に押さえるなら、[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)が参考になります。
 
 <div class="definition-box"><span class="term">工務店のインスタ集客とは</span>、Instagramのビジネスアカウントで施工事例・スタッフの人柄・家づくりの豆知識を発信し、フォロワーとの接点を積み上げて来場予約や問い合わせにつなげる一連の活動を指します。単なる写真置き場ではなく、比較検討中の見込み客との継続的な接点づくりが本来の目的です。</div>
 
@@ -71,7 +71,7 @@ faq:
 工務店にインスタ集客が必要な理由は、無料で始められ、投稿がそのまま実績として資産になるからです。
 
 
-関連して、[リフォーム会社のホームページ集客｜施主の不安を消す6つの工夫](/seo/reform-hp-shukyaku/)もあわせてご確認ください。
+関連して、[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)もあわせてご確認ください。
 <figure><img src="/images/koumuten-instagram-shukyaku/riyu.png" alt="工務店にインスタ集客が必要な3つの理由: 無料で始められる、事例が資産になる、不安を解消できる" loading="lazy"><figcaption>工務店にインスタ集客が必要な3つの理由</figcaption></figure>
 
 <a href="https://www.mlit.go.jp/report/press/house04_hh_000519.html" target="_blank" rel="noopener">国土交通省の調査</a>によると、回答した中小工務店・大工事業者の**平均雇用社員数は4.4名、平均年間新築受注戸数は5.3戸**です。広告費を大きくかけられない小規模事業者が大半という実態が、この調査から見えてきます。

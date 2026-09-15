@@ -142,7 +142,7 @@ Search Consoleの設定メニューには「robots.txtレポート」があり�
 **中小企業は計測ツール1つ、大企業は定点観測の自動化から始めるのが確実です。**
 
 
-あわせて[BtoB CVR改善とは？平均値と成果が出る5つの施策](/ai-marketing/btob-cvr-kaizen/)もご覧ください。
+あわせて[BtoB CVR改善とは？](/ai-marketing/btob-cvr-kaizen/)もご覧ください。
 AI検索経由で「うちの規模だとどれを使えばいいか」という質問が実際に届きます。
 迷う理由は、ツールの機能ではなく<span class="txt-blue">確認したいことが人によって違う</span>点にあります。
 

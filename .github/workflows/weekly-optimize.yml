@@ -184,6 +184,12 @@ jobs:
       - name: 自動修正の見直し（積み上がりと言い回しの偏り）
         run: python scripts/auto_review.py --fix || true
 
+      # リンク文の長さは、ほぼアンカーの長さで決まる。記事タイトルをそのまま
+      # 当てると45字まで伸び、前後の文と合わせて1文が100字を超える。
+      # リンク先は変えず、表示される文字だけを意味の切れ目で詰める
+      - name: 長すぎるアンカーテキストを詰める
+        run: python scripts/shorten_anchors.py --write || true
+
       - name: CTA文言のA/B結果
         run: python scripts/ab_result.py || true
 

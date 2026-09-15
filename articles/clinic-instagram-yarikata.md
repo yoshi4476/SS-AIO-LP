@@ -48,12 +48,12 @@ faq:
 クリニックのインスタ集客とは、院内の様子や医師・スタッフの人柄を発信し、来院前の不安を減らして予約につなげる取り組みです。
 
 
-関連する内容として[美容皮膚科のMEO対策とは？広告規制下で選ばれる3ステップ](/meo/biyou-hifuka-meo/)も公開しています。
-実際の進め方については、[クリニック開業のやり方｜必要な6ステップと集患の始め方](/ai-marketing/clinic-kaigyou-yarikata/)にまとめています。
+関連する内容として[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)も公開しています。
+実際の進め方については、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)にまとめています。
 
-実際の進め方は[クリニックの電話予約のやり方｜受付が聞く5項目と対応の流れ](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でも扱っています。
+実際の進め方は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でも扱っています。
 
-近い論点を[クリニックのホームページに必須の項目とは？外せない6要素](/seo/clinic-hp-hissu-koumoku/)で扱っています。
+前提となる考え方は[クリニックのホームページに必須の項目とは？](/seo/clinic-hp-hissu-koumoku/)でも扱っています。
 
 <div class="definition-box"><span class="term">クリニックのインスタ集客とは</span>、Instagramのビジネスアカウントで院内風景・スタッフ紹介・健康コラムなどを発信し、フォロワーとの接点を積み上げて来院や指名検索につなげる一連の活動を指します。症例の誇張や体験談の投稿ではなく、事実に基づく発信の継続が土台になります。</div>
 
@@ -73,7 +73,7 @@ faq:
 クリニックにインスタ集客が必要な理由は、無料で始められ、通院前の不安を減らせるからです。
 
 
-関連する内容として[歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応](/meo/shika-reform-hiyou/)も公開しています。
+関連する内容として[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)も公開しています。
 <figure><img src="/images/clinic-instagram-yarikata/riyu.png" alt="クリニックにインスタ集客が必要な3つの理由: 無料で始められる、通院前の不安を減らせる、スタッフの人柄が伝わる" loading="lazy"><figcaption>クリニックにインスタ集客が必要な3つの理由</figcaption></figure>
 
 <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読み**、口コミの確認先としては**83%がGoogleを利用**しています。体への不安を伴う医療機関選びでは、この確認行動はさらに慎重になります。

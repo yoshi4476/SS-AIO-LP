@@ -50,7 +50,7 @@ faq:
 美容室の集客アイデアは、無料でできることから着手し、1つずつ根づかせる順番が成功の条件です。
 
 
-あわせて[美容室のMEO対策とは？指名予約が増える6つの実践ポイント](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
+あわせて[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
 <div class="definition-box"><span class="term">美容室の集客アイデアとは</span>、Googleマップ・口コミ・SNS・季節施策・予算施策という5つの引き出しから、店の状況に合わせて選ぶ具体的な打ち手を指します。**思いつきで手を広げるほど、どれも中途半端に終わり効果が見えなくなります。**</div>
 
 厚生労働省の<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei_houkoku/24/index.html" target="_blank" rel="noopener">令和5年度衛生行政報告例</a>によると、**全国の美容所数は27万4,070件（前年比+1.5%）**で過去最多を更新しました。アイデアの数を増やすより、==1つを腰を据えて続ける仕組み==があるかどうかが差になります。
@@ -171,7 +171,7 @@ faq:
 集客アイデアが定着しない美容室は、同時着手・効果測定なし・担当者任せの3つに共通点があります。
 
 
-関連する内容として[税理士事務所の集客とは？AI検索を含む6チャネルの選び方](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
+関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
 <figure><img src="/images/biyoushitsu-shukyaku-idea/teichaku.png" alt="定着する集客アイデア・続かない集客アイデア: 続かないアイデアは一度に3つ以上を同時に始める、効果測定をせず数か月続ける、担当者任せで仕組み化しない。定着するアイデアは1つずつ試して定着させる、数値で効果を確認する、予約システムに組み込み仕組み化する" loading="lazy"><figcaption>定着する集客アイデア・続かない集客アイデア</figcaption></figure>
 
 **失敗1: 一度に3つ以上のアイデアを同時に始める。**マップ・SNS・口コミ返信を一気に始めると、どれも更新が続かず、何が効いたのか分からなくなります。

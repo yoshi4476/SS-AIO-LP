@@ -76,7 +76,7 @@ faq:
 必須項目の欠落は、離脱・規制違反・AI検索での機会損失という3つの問題に直結します。
 
 
-近い論点を[クリニックDX事例5選｜患者数が変わった導入ポイントと注意点](/ai-marketing/clinic-dx-jirei/)で扱っています。
+近い論点を[クリニックDX事例5選](/ai-marketing/clinic-dx-jirei/)で扱っています。
 <figure><img src="/images/clinic-hp-hissu-koumoku/mondai.png" alt="クリニックホームページに必須項目が抜けると起こる3つの問題: 予約前に離脱される、医療広告ガイドライン違反を指摘される、AI検索の回答候補から外れる" loading="lazy"><figcaption>クリニックホームページに必須項目が抜けると起こる3つの問題</figcaption></figure>
 
 **問題1: 予約前に離脱される。**診療時間や休診日、駐車場の有無が書かれていないと、患者は確認の電話をかけるか、他院の情報が整ったホームページに流れてしまいます。
@@ -92,12 +92,12 @@ faq:
 必須項目は、基本情報・診療内容・医師紹介・予約導線・料金目安・表現の適正化という6つに整理できます。
 
 
-関連する内容として[美容皮膚科のMEO対策とは？広告規制下で選ばれる3ステップ](/meo/biyou-hifuka-meo/)も公開しています。
+関連する内容として[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)も公開しています。
 実際の例は[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)でも扱っています。
 
-関連する内容は[オンライン診療チェックリスト｜クリニックが導入前に確認すべき8項目](/ai-marketing/online-shinryo-checklist/)でも扱っています。
+関連する内容は[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)でも扱っています。
 
-関連する内容を先に押さえるなら、[整骨院のホームページ集客｜予約につながる5つの必須要素](/ai-marketing/seikotsuin-hp-shukyaku/)が参考になります。
+関連する内容を先に押さえるなら、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)が参考になります。
 
 <figure><img src="/images/clinic-hp-hissu-koumoku/koumoku.png" alt="クリニックのホームページに必須の6つの項目: 基本情報とアクセス、診療科目・対応疾患、医師・スタッフ紹介、初診の流れ・予約導線、自由診療の料金目安、医療広告ガイドライン準拠の表現" loading="lazy"><figcaption>クリニックのホームページに必須の6つの項目</figcaption></figure>
 
@@ -141,7 +141,7 @@ faq:
 医療広告ガイドラインは、ホームページを含むあらゆる医療情報発信の表現を規制する基準です。
 
 
-関連する内容として[クリニックM&A後の集患再建｜GBP引き継ぎ事例と5つの注意点](/meo/clinic-ma-shukyaku-jirei/)も公開しています。
+関連する内容として[クリニックM&A後の集患再建](/meo/clinic-ma-shukyaku-jirei/)も公開しています。
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>は2018年6月の改正医療法施行に伴い、ウェブサイトも広告規制の対象に含めました。患者を誘引する情報発信である以上、==ホームページの文言も規制の趣旨に沿って書くのが安全==です。
 
 具体的には、患者の体験談やビフォーアフター写真、「絶対に治ります」といった効果を保証する表現、他院と比較して優良と誤認させる表現がNGとされています。**「重要です」という言葉を多用して不安を煽る書き方**も避け、事実に基づいた説明に徹してください。実績は「診療実績◯年」「対応件数◯件」のように、断定を伴わない表現に置き換えるのが基本です。

@@ -666,6 +666,47 @@ def test_paragraph_split_keeps_text():
     check("毎週走る", "split_paragraphs.py --all --write" in wf, True)
 
 
+def test_anchor_text_stays_readable():
+    """内部リンクのアンカーが、読める長さに収まること。
+
+    自動で入れるリンク文は記事タイトルをそのままアンカーにする。
+    タイトルは45字まで許されるため、前後の文と合わせると1文が100字を超える。
+    実測で公開317本中49本がこれで警告に引っかかっていた。
+    リンク先は絶対に変えず、表示される文字だけを意味の切れ目で詰める。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import link_new as ln
+    import shorten_anchors as sa
+    check("詰める工程がある", (ROOT / "scripts" / "shorten_anchors.py").is_file(), True)
+
+    long_title = "飲食店のAI導入補助金 対象要件｜資本金・従業員数など5つの基準【2026年】"
+    s = sa.shorten(long_title)
+    check("長いアンカーを詰める", len(s) < len(long_title), True)
+    check("詰めた結果が短すぎない", len(s) >= sa.MIN, True)
+    check("元の文字列から作る（作文しない）",
+          all(c in long_title for c in s), True)
+
+    # 短いものには触らない
+    check("短いアンカーは触らない", sa.shorten("AIO対策の始め方"), "AIO対策の始め方")
+
+    # 今後生成されるリンクも詰まっていること（そうしないと毎週また溜まる）
+    for fit in (0.1, 0.9):
+        for seed in range(8):
+            line = ln.sentence(long_title, "/aio/x/", seed, fit)
+            anchor = line[line.index("[") + 1:line.index("](")]
+            check(f"生成されるアンカーが{sa.MAX}字以内（seed={seed} fit={fit}）",
+                  len(anchor) <= sa.MAX, True)
+
+    # リンク先は変えない
+    import re as _re
+    body = f"[{long_title}](/subsidy/inshokuten-hojokin/)"
+    out = _re.sub(r"\[([^\]]+)\]", lambda m: "[" + sa.shorten(m.group(1)) + "]", body)
+    check("リンク先は変わらない", "(/subsidy/inshokuten-hojokin/)" in out, True)
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週走る", "shorten_anchors.py --write" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -685,7 +726,8 @@ def main():
               test_daily_todo_fits_in_one_run,
               test_near_page1_is_pushed_every_week,
               test_main_category_actually_grows,
-              test_paragraph_split_keeps_text):
+              test_paragraph_split_keeps_text,
+              test_anchor_text_stays_readable):
         try:
             t()
         except Exception as e:

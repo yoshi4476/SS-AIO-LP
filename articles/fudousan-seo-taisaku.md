@@ -49,7 +49,7 @@ diagrams:
 
 <div class="definition-box"><span class="term">不動産SEOとは</span>、「エリア名+賃貸」「エリア名+不動産会社」のように検索されたとき、自社のホームページやコラム記事が上位に表示され、物件情報だけでなく会社の信頼性・専門性まで伝えて問い合わせにつなげるための一連の施策です。ポータルサイトへの物件掲載とは別物で、あくまで「自社が運用できる資産」を検索エンジン経由で育てる取り組みを指します。</div>
 
-関連する内容は[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)、マップ経由の集客は[不動産業がGoogleマップで選ばれるには？店舗情報の整え方](/meo/fudousan-meo-taisaku/)でも扱っています。
+関連する内容は[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)、マップ経由の集客は[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)でも扱っています。
 
 物件探しはポータルサイトから始まる人が多い一方で、==会社を最終的に選ぶ段階では「エリア名+不動産屋」のような検索で自社サイトを直接確認する行動が入ります==。ここで検索結果に出てこない会社は、物件の魅力にかかわらず比較の候補から静かに外れてしまいます。工務店業界での同様の構造は[工務店のSEO対策](/seo/koumuten-seo-taisaku/)でも解説している通りです。
 
@@ -86,7 +86,7 @@ diagrams:
 
 成果を出す不動産SEOは、KW選定からE-E-A-Tの明示まで5つの施策を積み重ねて進めます。
 
-近い論点を[飲食店のMEO対策とは？6つの基本施策と口コミの増やし方](/meo/inshokuten-meo-taisaku/)で扱っています。
+近い論点を[飲食店のMEO対策とは？](/meo/inshokuten-meo-taisaku/)で扱っています。
 
 <figure><img src="/images/fudousan-seo-taisaku/steps.png" alt="不動産SEOで成果を出す5つの施策: エリア×悩み語のロングテールでKW選定、物件ページに独自解説を追加、エリアガイド記事の継続発信、宅建士資格・取引実績でE-E-A-Tを明示、問い合わせ導線の設計" loading="lazy"><figcaption>不動産SEOで成果を出す5つの施策</figcaption></figure>
 
@@ -152,8 +152,8 @@ diagrams:
 不動産SEOは、現状分析・ページ整備・コラム発信の3ステップで始めます。
 
 
-あわせて[BtoBのLLMO対策とは？SEOとの違いと発注候補に残る条件](/aio/btob-llmo-taisaku/)もご覧ください。
-費用の目安は[不動産SEO会社への外注は必要か？費用相場と6つの判断軸](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
+あわせて[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)もご覧ください。
+費用の目安は[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
 ### ステップ1: 現状分析を1週間で終わらせる
 

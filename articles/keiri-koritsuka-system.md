@@ -50,10 +50,10 @@ faq:
 経理効率化システムとは、記帳・仕訳・経費精算・請求書処理をITで自動化し、手作業を減らす仕組みの総称です。
 
 
-近い論点を[経理の残業を減らす7つの方法｜原因と今日からできる対策](/blog/keiri-zangyo-herasu/)で扱っています。
-選ぶときの基準を先に押さえるなら、[経費精算システムとは？選び方の4つの軸と導入前の注意点](/blog/keihi-seisan-system-erabikata/)が参考になります。
+近い論点を[経理の残業を減らす7つの方法](/blog/keiri-zangyo-herasu/)で扱っています。
+選ぶときの基準を先に押さえるなら、[経費精算システムとは？](/blog/keihi-seisan-system-erabikata/)が参考になります。
 
-前提となる考え方を先に押さえるなら、[請求書処理の効率化とは？進まない原因と5つの改善策【2026年】](/blog/seikyusho-shori-koritsuka/)が参考になります。
+前提となる考え方を先に押さえるなら、[請求書処理の効率化とは？進まない原因と5つの改善策](/blog/seikyusho-shori-koritsuka/)が参考になります。
 
 <div class="definition-box"><span class="term">経理効率化システムとは</span>、クラウド会計ソフトやRPA、AI-OCRなど、経理の定型業務をIT化して省力化するツール全般を指す言葉です。==1つのツールで全業務が完結するわけではなく、複数を組み合わせて使うのが一般的です==。</div>
 
@@ -68,7 +68,7 @@ MM総研が2026年3月末時点で公表した調査によると、<a href="http
 経理効率化システムは、クラウド会計・経費精算・RPA/AI-OCR・受発注連携の4種類に大別できます。
 
 
-近い論点を[経理業務の自動化事例5つ｜仕訳から給与計算までの進め方](/blog/keiri-gyomu-jidoka-jirei/)で扱っています。
+近い論点を[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)で扱っています。
 <figure><img src="/images/keiri-koritsuka-system/shurui.png" alt="経理効率化システムの主な種類4つ: クラウド会計ソフト、経費精算システム、RPA・AI-OCR、受発注連携システム" loading="lazy"><figcaption>経理効率化システムの主な種類4つ</figcaption></figure>
 
 | 種類 | 得意な業務 | 向いている企業 |
@@ -118,7 +118,7 @@ MM総研の同調査では、<strong>会計ソフトの事業者別シェアは�
 
 費用相場は、クラウド会計で月数千円〜、経費精算やRPA・AI-OCRは月数万円〜が目安です。
 
-費用の目安は[経理効率化セミナーの費用相場と選び方｜失敗しない3つの視点](/blog/keiri-koritsuka-seminar/)でも扱っています。
+費用の目安は[経理効率化セミナーの費用相場と選び方](/blog/keiri-koritsuka-seminar/)でも扱っています。
 
 | 種類 | 月額費用の目安 | 初期費用 |
 |:--|:--|:--|

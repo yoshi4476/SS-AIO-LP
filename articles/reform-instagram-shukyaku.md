@@ -150,9 +150,9 @@ faq:
 
 Instagramは接点を増やす補助チャネルであり、検索で見つかる自社サイトを土台にする役割分担が基本です。土台となる[リフォームSEOとは？受注につながる5つの施策](/seo/reform-seo-taisaku/)を先に押さえたうえで、Instagramを接点拡大に使うと役割分担が明確になります。
 
-新築中心の工務店向けの運用は[工務店のインスタ集客とは？問い合わせにつなげる5つの施策](/ai-marketing/koumuten-instagram-shukyaku/)で解説しています。リフォームは完成形が見えないまま契約する不安への対応が中心になる点が、新築との違いです。
+新築中心の工務店向けの運用は[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で解説しています。リフォームは完成形が見えないまま契約する不安への対応が中心になる点が、新築との違いです。
 
-投稿した施工事例は、自社サイトの施工事例ページにも転載しておくと資産が積み上がります。書き方は[施工事例の書き方](/ai-marketing/shiko-jirei-kakikata/)、Instagramのフィードをサイトに埋め込む方法は[住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法](/ai-marketing/jutaku-instagram-renkei/)で解説しています。
+投稿した施工事例は、自社サイトの施工事例ページにも転載しておくと資産が積み上がります。書き方は[施工事例の書き方](/ai-marketing/shiko-jirei-kakikata/)、Instagramのフィードをサイトに埋め込む方法は[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)で解説しています。
 
 **Instagramだけで完結させず、自社サイトとの往復導線を作る**ことが、フォロワーを問い合わせに変える近道です。
 

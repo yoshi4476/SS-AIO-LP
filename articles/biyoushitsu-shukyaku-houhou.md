@@ -50,7 +50,7 @@ faq:
 美容室の集客方法は、新規のお客様を呼び込む取り組みと、既存のお客様に再来店してもらう取り組みを、別々に設計することが出発点です。
 
 
-関連する内容として[美容室のMEO対策とは？指名予約が増える6つの実践ポイント](/meo/biyoushitsu-meo-taisaku/)も公開しています。
+あわせて[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
 今日から着手できる具体的な[美容室の集客アイデア](/ai-marketing/biyoushitsu-shukyaku-idea/)を無料施策から順に12個まとめているので、あわせてご覧ください。
 
 <div class="definition-box"><span class="term">美容室の集客方法とは</span>、Googleマップでの表示・口コミ対応・Instagram発信・指名検索の導線づくり・リピート化の仕組み・広告表示のルール順守という6つの施策を通じて、新規来店とリピート来店の両方を安定させる一連の取り組みを指します。新規獲得だけに偏ると、集客をやめた瞬間に客数が落ち込みます。</div>
@@ -77,11 +77,11 @@ faq:
 
 新規とリピートを両方増やす取り組みは、マップ表示・Instagram発信・口コミ返信・指名検索導線・来店後の声かけ・広告表示ルールの6つに整理できます。
 
-近い論点を[飲食店の集客方法とは？グルメサイト依存から抜け出す5つの施策](/ai-marketing/inshokuten-shukyaku-hoho/)で扱っています。
+関連する内容として[飲食店の集客方法とは？](/ai-marketing/inshokuten-shukyaku-hoho/)も公開しています。
 
-あわせて[整骨院の集客成功事例5選｜院の規模で変わる打ち手と注意点](/ai-marketing/seikotsuin-shukyaku-jirei/)もご覧ください。
+あわせて[整骨院の集客成功事例5選](/ai-marketing/seikotsuin-shukyaku-jirei/)もご覧ください。
 
-近い論点を[リフォームの集客方法とは？反響を増やす6つの施策](/ai-marketing/reform-shukyaku-hoho/)で扱っています。
+あわせて[リフォームの集客方法とは？反響を増やす6つの施策](/ai-marketing/reform-shukyaku-hoho/)もご覧ください。
 
 <figure><img src="/images/biyoushitsu-shukyaku-houhou/houhou.png" alt="集客導線を整える6つの取り組み: マップ表示を整える、Instagram発信、口コミに全件返信、指名検索の導線、来店後の声かけ、値引き表示を守る" loading="lazy"><figcaption>集客導線を整える6つの取り組み</figcaption></figure>
 

@@ -49,11 +49,11 @@ faq:
 
 実際の進め方については、[小規模事業者持続化補助金｜美容室の書き方4ステップ](/blog/jizokuka-hojokin-biyoushitsu-kakikata/)にまとめています。
 
-対象になる範囲については、[小規模事業者持続化補助金2025｜建設業の対象条件と経費](/blog/jizokuka-hojokin-kensetsugyou/)にまとめています。
+対象になる範囲については、[小規模事業者持続化補助金2025](/blog/jizokuka-hojokin-kensetsugyou/)にまとめています。
 
-対象になる範囲は、[小規模事業者持続化補助金｜飲食店で対象になる4つの投資](/blog/jizokuka-hojokin-inshokuten-jirei/)で解説しています。
+対象になる範囲は、[小規模事業者持続化補助金](/blog/jizokuka-hojokin-inshokuten-jirei/)で解説しています。
 
-選ぶときの基準は、[小規模事業者持続化補助金は中小企業も対象｜3制度の使い分け](/blog/jizokuka-hojokin-chusho-kigyo-taisho/)で解説しています。
+選ぶときの基準は、[小規模事業者持続化補助金は中小企業も対象](/blog/jizokuka-hojokin-chusho-kigyo-taisho/)で解説しています。
 
 <div class="definition-box"><span class="term">小規模事業者持続化補助金とは</span>、商工会議所・商工会の管轄地域で、小規模事業者が販路開拓や生産性向上に取り組む経費の一部を補助する制度です。</div>
 
@@ -88,7 +88,7 @@ faq:
 **採択率が回ごとに変わるのは、申請件数・予算配分・審査基準の3つが毎回変化するためです。**同じ制度でも回によって難易度が違います。
 
 
-関連する内容として[AI導入補助金の不採択理由｜審査で落ちる6つのパターン](/blog/ai-hojokin-fusaitaku-riyu/)も公開しています。
+関連する内容として[AI導入補助金の不採択理由](/blog/ai-hojokin-fusaitaku-riyu/)も公開しています。
 - 申請件数の増減: 第17回は23,365件と過去最多で、採択率は51.0%まで戻りました
 - 予算配分の変化: 公募回ごとに採択予定件数が事務局から示されます
 - 審査基準の見直し: 加点項目や様式が改訂されると、書類の質による差が出やすくなります

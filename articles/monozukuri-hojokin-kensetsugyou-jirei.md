@@ -52,23 +52,23 @@ faq:
 **ものづくり補助金は、生産性向上につながる機械装置やシステムへの投資を支援する制度で、建設業も対象です。**全業種が対象ですが、対象経費の中心が機械装置費であるため、設備投資を行う建設業との相性が良い制度です。
 
 
-関連して、[事業再構築補助金 美容室の脱毛転換3事例｜美容師法の注意点](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)もあわせてご確認ください。
+関連して、[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)もあわせてご確認ください。
 建設業以外では、[ものづくり補助金の農業分野における採択事例](/blog/monozukuri-hojokin-nougyou-jirei/)でも、専用設備への投資という同じ評価軸が使われています。
 
-対象になる範囲を先に押さえるなら、[ものづくり補助金は美容室で使える？対象機器と上限750万円の目安](/blog/monozukuri-hojokin-biyoushitsu/)が参考になります。
+対象になる範囲を先に押さえるなら、[ものづくり補助金は美容室で使える？](/blog/monozukuri-hojokin-biyoushitsu/)が参考になります。
 
 <div class="definition-box"><span class="term">ものづくり補助金とは</span>、中小企業庁が実施する「新事業進出・ものづくり商業サービス補助金」の通称です。旧ものづくり補助金と事業再構築補助金の一部枠が統合され、2026年6月29日に第1回公募要領が公開されました。</div>
 
 私たちセブンセンシズ株式会社（大阪市東成区・2020年3月創業）は、登録支援事業者として補助金の相談を受けています。==「ものづくり補助金は製造業向けだと思っていた」==という声を建設業の経営者からもよく聞きます。
 
-実際には、i-Construction関連のICT機器導入や測量機器の高度化でも採択実績があります。中小企業者の判定基準は[ものづくり補助金は資本金オーバーでも対象？中小企業者7区分](/blog/monozukuri-hojokin-chusho-teigi/)で解説しているので、あわせて確認してください。
+実際には、i-Construction関連のICT機器導入や測量機器の高度化でも採択実績があります。中小企業者の判定基準は[ものづくり補助金は資本金オーバーでも対象？](/blog/monozukuri-hojokin-chusho-teigi/)で解説しているので、あわせて確認してください。
 
 ## 建設業の採択事例3パターン
 
 **建設業の採択事例は、総合工事業・鉄骨工事業・測量関連の技術サービス業の3パターンに整理できます。**同じ機械装置費でも、業種によって投資の狙いが異なります。
 
 
-関連して、[事業再構築補助金は建設業も対象｜3つの事例と今の後継制度](/blog/jigyou-saikouchiku-kensetsugyou-jirei/)もあわせてご確認ください。
+関連して、[事業再構築補助金は建設業も対象](/blog/jigyou-saikouchiku-kensetsugyou-jirei/)もあわせてご確認ください。
 <figure><img src="/images/monozukuri-hojokin-kensetsugyou-jirei/jirei3.png" alt="建設業の採択事例3パターン: 総合工事業は重機駆動システムやi-Construction活用の開発事例、鉄骨工事業は加工機導入で納期短縮・受注増加を実現、測量関連の技術サービス業は3Dレーザースキャナー等で精度向上" loading="lazy"><figcaption>建設業の採択事例3パターン</figcaption></figure>
 
 <a href="https://so-labo.co.jp/hojyokin/monodukuri/know-how/160/" target="_blank" rel="noopener">補助金の採択事例をまとめた解説記事</a>によると、総合工事業では低コスト・高効率な重機駆動システムの開発やi-Construction導入による施工管理効率化が採択されています。鉄骨工事業では、平板自動開先加工機の導入で納期を短縮し、受注増加につなげた事例が紹介されています。
@@ -118,7 +118,7 @@ faq:
 **建設業の中小企業者は資本金3億円以下または従業員300人以下で判定され、従業員0名の事業者は全枠で対象外です。**一人親方が単独で申請できない点は見落とされがちです。
 
 
-関連して、[事業再構築補助金で個人事業主が出す事業化状況報告｜5年間の流れ](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)もあわせてご確認ください。
+関連して、[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)もあわせてご確認ください。
 
 <a href="https://hojokin-shinsei.co.jp/meti-subsidy/shinjigyo-monodukuri-hojokin/" target="_blank" rel="noopener">対象企業の要件を整理した記事</a>によると、日本国内に本社と実施場所を持つ中小企業者等が対象で、新事業進出枠は創業1年未満の事業者も対象外とされています。過去3年で同種補助金の交付決定を2回以上受けた事業者も除外されます。
 

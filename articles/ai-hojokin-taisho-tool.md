@@ -51,9 +51,9 @@ faq:
 
 
 関連する内容は、[建設業がAI導入補助金で不採択になる6つの理由と直し方](/blog/tokyo-kensetsugyou-denshishinsei/)で解説しています。
-実際の例については、[AI導入補助金の不採択理由｜審査で落ちる6つのパターン](/blog/ai-hojokin-fusaitaku-riyu/)にまとめています。
+実際の例については、[AI導入補助金の不採択理由](/blog/ai-hojokin-fusaitaku-riyu/)にまとめています。
 
-実際の進め方は[AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ](/blog/ai-hojokin-security-action-hoshi2/)でも扱っています。
+実際の進め方は[AI導入補助金のセキュリティアクション二つ星](/blog/ai-hojokin-security-action-hoshi2/)でも扱っています。
 
 <div class="definition-box"><span class="term">ITツール検索とは</span>、事務局に登録された支援事業者と対象ITツールを、業種・目的から検索できる公式データベースです。ここに載っていないツールは、機能がどれだけ優れていても補助対象になりません。</div>
 

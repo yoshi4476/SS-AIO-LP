@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import cannibal_check as cc  # noqa: E402
 import inbound_links as il  # noqa: E402
+import shorten_anchors as sa  # noqa: E402
 
 WANT = 2            # 1記事が受けるリンクの下限
 MAX_OUT = 8         # 1記事が出すリンクの上限（増やすほど1本の重みが薄まる）
@@ -82,6 +83,9 @@ def h2_list(body):
 
 
 def sentence(title, url, seed, fit):
+    # 記事タイトルは45字まで許されるため、そのままアンカーにすると1文が100字を超える。
+    # 実測で公開317本中49本がこれで警告に引っかかっていた。リンク先は変えず表示だけ詰める。
+    title = sa.shorten(title)
     if fit < 0.25:
         return FORMS_SOFT[seed % len(FORMS_SOFT)].format(title=title, url=url)
     lead = next((v for pat, v in LEAD_BY_KIND if re.search(pat, title)), "関連する内容")

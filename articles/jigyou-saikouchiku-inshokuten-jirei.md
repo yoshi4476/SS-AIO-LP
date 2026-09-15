@@ -50,13 +50,13 @@ faq:
 **結論として、事業再構築補助金は飲食店も対象で、業態転換や新分野展開の投資が数多く採択されてきました。**制度上、業種による除外はなく、居酒屋・カフェ・レストランなど幅広い業態が申請していました。
 
 
-あわせて[ものづくり補助金はクリニックで使える？医療法人は対象外に注意](/blog/monozukuri-hojokin-clinic/)もご覧ください。
+あわせて[ものづくり補助金はクリニックで使える？](/blog/monozukuri-hojokin-clinic/)もご覧ください。
 
-あわせて[小規模事業者持続化補助金｜クリニックは対象外と代替2制度](/blog/jizokuka-hojokin-clinic/)もご覧ください。
+あわせて[小規模事業者持続化補助金](/blog/jizokuka-hojokin-clinic/)もご覧ください。
 
-実際の例については、[事業再構築補助金 クリニックは医療法人不可｜個人開業医の採択3事例](/blog/jigyou-saikouchiku-clinic-jirei/)にまとめています。
+実際の例については、[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)にまとめています。
 
-実際の例は[事業再構築補助金 美容室の脱毛転換3事例｜美容師法の注意点](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)でも扱っています。
+実際の例は[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)でも扱っています。
 
 <div class="definition-box"><span class="term">事業再構築補助金とは</span>、新型コロナウイルス対応の緊急経済対策として2021年に始まった制度です。事業転換や業態転換に伴う設備投資を、新市場開拓や新分野展開を条件に支援していました。</div>
 
@@ -95,7 +95,7 @@ faq:
 **2026年8月時点で飲食店が使えるのは「新事業進出・ものづくり商業サービス補助金」です。**事業再構築補助金から2段階先の制度にあたります。
 
 
-近い論点を[事業再構築補助金で個人事業主が出す事業化状況報告｜5年間の流れ](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)で扱っています。
+近い論点を[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)で扱っています。
 <figure><img src="/images/jigyou-saikouchiku-inshokuten-jirei/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能" loading="lazy"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 
 事業再構築補助金は2025年6月に中小企業新事業進出補助金へ引き継がれ、この制度も2026年6月19日の第4回公募で終了しました。第1回公募要領は2026年6月29日に公開され、申請受付は2026年8月31日に始まっています。
@@ -155,7 +155,7 @@ GビズIDプライムは、行政手続きをオンラインで行うための�
 
 私も相談の現場で、==「事業再構築補助金で聞いた話のまま」準備を進め、制度名の変化に気づいていない==飲食店経営者を見てきました。申請直前には必ず最新の公募要領を確認してください。
 
-法人成りや確定申告に関するつまずきは[事業再構築補助金と個人事業主の法人成り](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)や[事業再構築補助金の確定申告｜個人事業主が守る3つの注意点](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)でも整理しています。
+法人成りや確定申告に関するつまずきは[事業再構築補助金と個人事業主の法人成り](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)や[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)でも整理しています。
 
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。

@@ -51,11 +51,11 @@ faq:
 
 **結論として、事業再構築補助金は宿泊業も対象で、インバウンド需要の回復を見込んだ業態転換や新分野展開の投資が数多く採択されてきました。**制度上、業種による除外はなく、旅館・ホテル・簡易宿泊所・民泊事業者まで幅広い事業者が申請していました。
 
-他業種の事例は、[事業再構築補助金 クリニックは医療法人不可｜個人開業医の採択3事例](/blog/jigyou-saikouchiku-clinic-jirei/)で紹介しています。
+他業種の事例は、[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)で紹介しています。
 
 飲食店の転換事例は[事業再構築補助金の飲食店活用事例3選と今の申請方法](/blog/jigyou-saikouchiku-inshokuten-jirei/)にまとめました。
 
-建設業のケースは[事業再構築補助金は建設業も対象｜3つの事例と今の後継制度](/blog/jigyou-saikouchiku-kensetsugyou-jirei/)で解説しています。
+建設業のケースは[事業再構築補助金は建設業も対象](/blog/jigyou-saikouchiku-kensetsugyou-jirei/)で解説しています。
 
 <div class="definition-box"><span class="term">事業再構築補助金とは</span>、新型コロナウイルス対応の緊急経済対策として2021年に始まった制度です。事業転換や業態転換に伴う設備投資を、新市場開拓や新分野展開を条件に支援していました。</div>
 
@@ -94,9 +94,9 @@ faq:
 **2026年8月時点で宿泊業が使えるのは「新事業進出・ものづくり商業サービス補助金」です。**事業再構築補助金から2段階先の制度にあたります。
 
 
-近い論点を[事業再構築補助金で農業が使えたのは6次産業化｜対象外の境界線](/blog/jigyou-saikouchiku-nougyou-jirei/)で扱っています。
+近い論点を[事業再構築補助金で農業が使えたのは6次産業化](/blog/jigyou-saikouchiku-nougyou-jirei/)で扱っています。
 
-関連する内容として[農業の補助金の申請方法｜制度の選び方と5ステップ【2026年】](/blog/nougyou-hojokin-shinsei-houhou/)も公開しています。
+関連する内容として[農業の補助金の申請方法｜制度の選び方と5ステップ](/blog/nougyou-hojokin-shinsei-houhou/)も公開しています。
 <figure><img src="/images/jigyou-saikouchiku-shukuhakugyou-jirei/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能" loading="lazy"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 
 事業再構築補助金は2025年6月に中小企業新事業進出補助金へ引き継がれ、この制度も2026年6月19日の第4回公募で終了しました。第1回公募要領は2026年6月29日に公開され、申請受付は2026年8月31日に始まっています。

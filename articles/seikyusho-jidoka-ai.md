@@ -79,7 +79,7 @@ faq:
 
 請求書自動化AIは、対象書類を絞る→試験運用で精度確認→本番運用という3つのステップで進めます。
 
-実際の進め方を先に押さえるなら、[請求書照合の自動化｜3点照合の仕組みと導入4ステップ【2026年】](/blog/seikyusho-shougou-jidoka/)が参考になります。
+実際の進め方を先に押さえるなら、[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)が参考になります。
 
 <figure><img src="/images/seikyusho-jidoka-ai/tejun.png" alt="請求書自動化AIを導入する3つのステップ: 対象書類を絞る、試験運用で精度確認、本番運用へ移行" loading="lazy"><figcaption>請求書自動化AIを導入する3つのステップ</figcaption></figure>
 

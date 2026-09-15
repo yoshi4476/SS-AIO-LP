@@ -64,7 +64,7 @@ faq:
 
 業種を問わない基本手順は[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)でも扱っています。ただし不動産業には、物件情報自体は登録対象外という他業種にはない制約が加わります。
 
-AI検索での見え方は[不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップ](/aio/fudousan-ai-kensaku-taisaku/)でも扱っています。
+AI検索での見え方は[不動産のAI検索対策](/aio/fudousan-ai-kensaku-taisaku/)でも扱っています。
 
 <figure><img src="/images/fudousan-hankyou-konai/signs.png" alt="反響が減る不動産会社の5つの共通点: ポータル任せ、強みが不明、反響対応が遅い、更新が止まった、表記がバラバラ" loading="lazy"><figcaption>反響が減る不動産会社の5つの共通点</figcaption></figure>
 
@@ -131,7 +131,7 @@ AI検索での見え方は[不動産のAI検索対策｜AI Overviewで選ばれ�
 
 まず自社名・地域名・「賃貸」「売買」などの語でGoogle検索し、自社がどこに表示されるか確認します。表示されない、または情報が古いなら、Googleビジネスプロフィールの登録内容を最新化することから始めます。
 
-<a href="https://support.google.com/business/answer/13763036?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ「ビジネスの適格性とオーナー権限に関するガイドライン」</a>には、賃貸物件や販売物件そのものは掲載対象から除外されると明記されています。物件単体ではなく、営業拠点としての店舗を登録するのが不動産業のルールです。詳しい設定手順は[不動産業がGoogleマップで選ばれるには？店舗情報の整え方](/meo/fudousan-meo-taisaku/)で解説しています。
+<a href="https://support.google.com/business/answer/13763036?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ「ビジネスの適格性とオーナー権限に関するガイドライン」</a>には、賃貸物件や販売物件そのものは掲載対象から除外されると明記されています。物件単体ではなく、営業拠点としての店舗を登録するのが不動産業のルールです。詳しい設定手順は[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)で解説しています。
 
 ### 強みが一言で言えない場合
 

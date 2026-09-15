@@ -47,7 +47,7 @@ faq:
 リフォームの集客方法とは、施主が情報を集める複数の経路に自社の情報を置き、比較検討の土俵に乗るための一連の施策です。
 
 
-関連して、[リフォーム会社のホームページ集客｜施主の不安を消す6つの工夫](/seo/reform-hp-shukyaku/)もあわせてご確認ください。
+関連して、[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)もあわせてご確認ください。
 あわせて[展示会後フォローで商談化率を上げる5つの施策](/ai-marketing/tenjikaigo-follow-hoho/)もご覧ください。
 
 <div class="definition-box"><span class="term">リフォームの集客方法とは</span>、ポータルサイト（複数のリフォーム会社を一覧で比較できる情報サイト）・自社サイト・SNS・紹介・チラシ・Web広告といった複数のチャネルに、施工実績と信頼できる情報を継続的に発信し、施主からの問い合わせにつなげる一連の取り組みを指します。1つのチャネルに頼らず、経路を分散させることが本来の狙いです。</div>
@@ -75,7 +75,7 @@ faq:
 反響を増やす集客方法は、ポータルサイト・自社サイトのSEO・MEO・SNS・紹介・チラシ・Web広告の6つに整理できます。
 
 
-関連して、[OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](/ai-marketing/obkyaku-shoukai-shikumi/)もあわせてご確認ください。
+関連して、[OB客紹介の仕組み化とは？](/ai-marketing/obkyaku-shoukai-shikumi/)もあわせてご確認ください。
 実際の進め方は[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)で整理しています。
 
 <figure><img src="/images/reform-shukyaku-hoho/houhou.png" alt="リフォームの集客方法6つ: ポータルサイトへの掲載、自社サイトのSEO・MEO対策、SNSでの施工事例発信、OB客・紹介の仕組み化、チラシ・折込広告、Web広告の活用" loading="lazy"><figcaption>リフォームの集客方法6つ</figcaption></figure>

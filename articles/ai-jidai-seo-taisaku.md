@@ -34,7 +34,7 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 
 
 近い論点を[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)で扱っています。
-前提となる考え方は[飲食店のMEO対策とは？6つの基本施策と口コミの増やし方](/meo/inshokuten-meo-taisaku/)で整理しています。
+前提となる考え方は[飲食店のMEO対策とは？](/meo/inshokuten-meo-taisaku/)で整理しています。
 
 <div class="definition-box"><span class="term">SEO（Search Engine Optimization）とは</span>、検索エンジンの検索結果で自社ページが上位に表示されるよう最適化することです。AI時代には、この上位表示が「AIの回答に引用されるための前提条件」という新しい役割も持ちます。</div>
 
@@ -72,7 +72,7 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 5つの基本は「態勢→設計→制作→構造→計測」の順で、上から着手すると無駄がありません。
 
 
-近い論点を[不動産SEOコンサルティングとは？外注との違いと費用相場](/seo/fudousan-seo-consulting/)で扱っています。
+近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
 <figure><img src="/images/ai-jidai-seo-taisaku/steps.png" alt="AI時代のSEO対策5つの基本: 運営者と著者を明記する、勝てるキーワードを選ぶ、1記事1質問で答えを書く、構造化と内部リンクを整える、毎月ふりかえる" width="1200" height="400" loading="lazy"><figcaption>AI時代のSEO対策 5つの基本（当メディア作成）</figcaption></figure>
 
 ### 基本1: 運営者と著者を明記する（E-E-A-T）
@@ -98,9 +98,9 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 キーワード選定は「洗い出す→検索して確かめる→勝てるものに絞る」の流れを型どおりに回すのが確実です。
 
 
-実際の進め方は[AIO対策のキーワード選定｜選ぶ基準5つと進め方3ステップ](/aio/aio-taisaku-keyword-sentei/)で整理しています。
+実際の進め方は[AIO対策のキーワード選定](/aio/aio-taisaku-keyword-sentei/)で整理しています。
 
-近い論点を[不動産SEO記事のライター選び方｜失敗しない5つの基準](/seo/fudousan-seo-kiji-writer/)で扱っています。
+近い論点を[不動産SEO記事のライター選び方](/seo/fudousan-seo-kiji-writer/)で扱っています。
 ### ステップ1: 顧客の質問を30個書き出す
 
 営業・接客で実際に受けた質問、問い合わせメールの文面、商談で聞かれたことを30個書き出します。ツールより先に、現場の言葉から始めます。

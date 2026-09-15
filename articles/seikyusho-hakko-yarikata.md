@@ -50,7 +50,7 @@ faq:
 **請求書の発行とは、取引先に対して代金の請求内容を書面またはデータで示し、支払いを求める手続きのことです。**規模の小さい会社ほど、この作業を経営者自身が兼務しているのが実情です。
 
 
-関連して、[飲食店の経理のやり方｜日次・月次で回す4つの基本と外注の目安](/blog/inshokuten-keiri-yarikata/)もあわせてご確認ください。
+関連して、[飲食店の経理のやり方](/blog/inshokuten-keiri-yarikata/)もあわせてご確認ください。
 <div class="definition-box"><span class="term">請求書の発行とは</span>、納品したものやサービスの内容・金額・支払期日を書面またはデータにまとめ、取引先に交付することです。法律上の様式は定められていませんが、インボイス制度に登録している場合は決められた記載項目を満たす必要があります。</div>
 
 <figure><img src="/images/seikyusho-hakko-yarikata/eyecatch.png" alt="請求書の発行のやり方｜必須6項目と基本4ステップ【2026年】" loading="lazy"><figcaption>請求書の発行は6項目の確認から始まる</figcaption></figure>
@@ -92,7 +92,7 @@ faq:
 
 関連する内容は[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)でも扱っています。
 
-実際の進め方を先に押さえるなら、[請求書チェックの効率化｜確認項目6つと時短の3ステップ【2026年】](/blog/seikyusho-check-koritsuka/)が参考になります。
+実際の進め方を先に押さえるなら、[請求書チェックの効率化](/blog/seikyusho-check-koritsuka/)が参考になります。
 
 費用の目安は[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)で整理しています。
 

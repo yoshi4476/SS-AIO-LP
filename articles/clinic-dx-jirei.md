@@ -130,7 +130,7 @@ diagrams:
 
 **DX事例の失敗の多くは、導入して終わりにする姿勢と、運用の定着不足が原因です。**
 
-実際の進め方は[クリニックの電話予約のやり方｜受付が聞く5項目と対応の流れ](/ai-marketing/clinic-denwa-yoyaku-yarikata/)で整理しています。
+実際の進め方は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)で整理しています。
 
 <figure><img src="/images/clinic-dx-jirei/ng-ok.png" alt="DX導入のNG・OKパターン比較: NGは導入して終わりにする・一部スタッフしか使えない・効果を測定しない。OKは業務フローごと見直す・全スタッフに操作を定着・月次で指標を確認" loading="lazy"><figcaption>DX導入のNG・OKパターン</figcaption></figure>
 

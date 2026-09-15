@@ -47,9 +47,9 @@ faq:
 
 つまずきやすい点は[福岡県の建設業電子申請「JCIP」窓口と手数料の注意点3つ](/blog/fukuoka-kensetsugyou-denshishinsei/)で整理しています。
 
-費用の目安は、[建設業の電子申請は行政書士に依頼すべき？費用相場3つの基準](/blog/kensetsugyou-denshishinsei-gyoseishoshi/)で解説しています。
+費用の目安は、[建設業の電子申請は行政書士に依頼すべき？](/blog/kensetsugyou-denshishinsei-gyoseishoshi/)で解説しています。
 
-実際の進め方を先に押さえるなら、[建設業の電子申請システムを閲覧する2つの方法｜JCIPとCIICの違い](/blog/kensetsugyou-denshishinsei-etsuran/)が参考になります。
+実際の進め方を先に押さえるなら、[建設業の電子申請システムを閲覧する2つの方法](/blog/kensetsugyou-denshishinsei-etsuran/)が参考になります。
 
 私たちが登録支援事業者として相談を受ける中で、==「電子申請システムを補助金で導入したい」というご相談の中身が、実は経審のオンライン申請の操作方法だった==という場面に何度も出会っています。この2つを区別しないまま話を進めると、後の手続きでつまずきやすくなります。
 
@@ -60,14 +60,14 @@ faq:
 **経審・建設業許可の電子申請システム「JCIP」は国土交通省が運営する無料の行政ポータルで、IT導入補助金の対象にはなりません。**購入する製品ではなく、行政手続きの窓口そのものだからです。
 
 
-実際の進め方については、[建設業許可の電子申請｜JCIPでできる3手続きと5ステップ](/blog/kensetsugyou-kyoka-denshishinsei/)にまとめています。
+実際の進め方については、[建設業許可の電子申請](/blog/kensetsugyou-kyoka-denshishinsei/)にまとめています。
 <div class="definition-box"><span class="term">JCIPとは</span>、正式名称「建設業許可・経営事項審査電子申請システム」の略称です。<a href="https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/tochi_fudousan_kensetsugyo_const_tk1_000001_00019.html" target="_blank" rel="noopener">国土交通省の案内</a>によると、**2023年1月10日から運用が始まり**、建設業許可や経営事項審査の申請・届出をインターネット経由で行えます。</div>
 
 <a href="https://prod.jcip.mlit.go.jp/TO/TO00001" target="_blank" rel="noopener">JCIP公式サイト</a>では、ログインにGビズIDでの認証が必要と案内されています。申請手数料は窓口での現金納付ではなく、Pay-easyによる電子納付を使います。
 
 <div class="caution-box"><span class="box-title">注意: JCIPの利用そのものは無料</span><br>JCIPは国が提供する行政システムで、月額利用料やライセンス費用は発生しません。「電子申請システムを補助金で安く導入できる」という説明を受けた場合は、指しているのがJCIPなのか別のツールなのかを必ず確認してください。</div>
 
-補助金の申請自体は「Jグランツ」という別のシステムで行います。JグランツとGビズIDの関係は[補助金の電子申請はいつから義務化？中小企業が今やること](/blog/hojokin-denshishinsei-gimuka-itsukara/)で詳しく整理しているので、あわせて確認してください。
+補助金の申請自体は「Jグランツ」という別のシステムで行います。JグランツとGビズIDの関係は[補助金の電子申請はいつから義務化？](/blog/hojokin-denshishinsei-gimuka-itsukara/)で詳しく整理しているので、あわせて確認してください。
 
 ## IT導入補助金で対象になる電子申請・電子契約機能とは
 
@@ -113,7 +113,7 @@ IT導入補助金のツールは、事務局が定める業務プロセスの区
 
 <figure><img src="/images/kensetsugyou-denshishinsei-system/flow4.png" alt="建設業がIT導入補助金で電子契約ツールを導入する4ステップ: GビズIDを取得する、IT導入支援事業者とツールを選定、交付申請から契約・導入、実績報告を提出し交付額が確定" loading="lazy"><figcaption>建設業がIT導入補助金で電子契約ツールを導入する4ステップ</figcaption></figure>
 
-すでにJCIP用にGビズIDプライムを取得済みの会社なら、この手順はステップ2から始められます。GビズIDプライムの取得手順そのものは[AI導入補助金のGビズID取得方法｜プライム取得の5つの手順](/blog/ai-hojokin-gbizid-shutoku/)で解説しています。
+すでにJCIP用にGビズIDプライムを取得済みの会社なら、この手順はステップ2から始められます。GビズIDプライムの取得手順そのものは[AI導入補助金のGビズID取得方法](/blog/ai-hojokin-gbizid-shutoku/)で解説しています。
 
 ### ステップ1: GビズIDを取得しJCIPと補助金の違いを整理する
 

@@ -108,7 +108,7 @@ faq:
 
 定型業務はBPOに任せ、繁忙期だけ派遣で人手を補う併用も選べます。
 
-関連する内容として[税理士の記帳代行報酬相場と経理BPO比較【2026年】](/blog/zeirishi-houshu-kichodaiko-souba/)も公開しています。
+関連する内容として[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)も公開しています。
 
 費用の目安を先に押さえるなら、[経費精算BPOとは？任せられる業務3つと費用相場](/blog/keihi-seisan-bpo/)が参考になります。
 
