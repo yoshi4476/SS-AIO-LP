@@ -157,7 +157,11 @@ AI問診システムを追加して3領域まで拡張しても、上限150万�
 
 小規模なクリニックでは、経理・総務の専任担当がいないケースも多いはずです。申請書類の作成やIT導入支援事業者とのやり取りに時間を割きにくい場合に検討したいのが、外部の申請サポートへの相談という選択肢。
 
-他業種の活用イメージは[AI導入補助金のAI活用事例5選｜対象ツールと申請のコツ](https://lp.7senses.co.jp/blog/ai-hojokin-ai-katsuyo-jirei/)が参考になります。交付決定後の手続きは[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。導入費用そのものの目安は[AI導入の費用相場｜中小企業の内訳と抑える3つのコツ](https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/)も参考にしてください。
+他業種の活用イメージは[AI導入補助金のAI活用事例5選｜対象ツールと申請のコツ](https://lp.7senses.co.jp/blog/ai-hojokin-ai-katsuyo-jirei/)が参考になります。
+
+交付決定後の手続きは[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
+
+導入費用そのものの目安は[AI導入の費用相場｜中小企業の内訳と抑える3つのコツ](https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/)も参考にしてください。
 
 ## よくある質問
 

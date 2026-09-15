@@ -160,7 +160,9 @@ faq:
 
 <div class="cta-box"><p>ホームページの構成診断から、公開後の運用まで無料でご相談いただけます。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
-集客の入口をInstagramと連携させたい場合は、[住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法](/ai-marketing/jutaku-instagram-renkei/)も合わせて参考にしてください。マップ検索からの反響を増やしたい場合は、[MEO対策のやり方7ステップ｜マップ上位表示の手順](/meo/meo-taisaku-yarikata/)、AI検索経由の引用を狙う場合は[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)が実践の手順として役立ちます。
+集客の入口をInstagramと連携させたい場合は、[住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法](/ai-marketing/jutaku-instagram-renkei/)も合わせて参考にしてください。
+
+マップ検索からの反響を増やしたい場合は、[MEO対策のやり方7ステップ｜マップ上位表示の手順](/meo/meo-taisaku-yarikata/)、AI検索経由の引用を狙う場合は[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)が実践の手順として役立ちます。
 
 住宅需要の全体像を公的統計で確認したい場合は<a href="https://www.mlit.go.jp/toukeijouhou/index.html" target="_blank" rel="noopener">国土交通省 統計情報</a>、検索エンジンに評価される基本方針を確認したい場合は<a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja" target="_blank" rel="noopener">Google検索セントラル SEOスターターガイド</a>が参考になります。
 

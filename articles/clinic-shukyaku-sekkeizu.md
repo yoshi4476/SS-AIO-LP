@@ -51,7 +51,9 @@ diagrams:
 
 <div class="definition-box"><span class="term">クリニック集客の設計図とは</span>、MEO(マップ集客)・SEO(検索集客)・AIO(AI検索対策)という3つの施策を、どの順番で・どの体制で・何日で動かすかをあらかじめ決めておく実行計画です。個別の施策手順書ではなく、施策同士の優先順位と接続のしかたを扱う点が特徴です。</div>
 
-[クリニックのMEO対策](/meo/clinic-meo-taisaku/)や[クリニックSEO](/seo/clinic-seo-taisaku/)、[クリニックのAI検索対策](/aio/clinic-ai-kensaku-taisaku/)は、それぞれ個別に手順を解説した記事です。本記事はそれらをどの順番で・どこまで自院でやるかという==全体地図の役割を担います==。個別の手順を知っていても、着手する順番を誤ると成果が出るまでの期間が大きく伸びてしまいます。順番を決める判断材料は、次の章で具体的に見ていきます。
+[クリニックのMEO対策](/meo/clinic-meo-taisaku/)や[クリニックSEO](/seo/clinic-seo-taisaku/)、[クリニックのAI検索対策](/aio/clinic-ai-kensaku-taisaku/)は、それぞれ個別に手順を解説した記事です。
+
+本記事はそれらをどの順番で・どこまで自院でやるかという==全体地図の役割を担います==。個別の手順を知っていても、着手する順番を誤ると成果が出るまでの期間が大きく伸びてしまいます。順番を決める判断材料は、次の章で具体的に見ていきます。
 
 <figure><img src="/images/clinic-shukyaku-sekkeizu/layer.png" alt="クリニック集客の設計図3階層: MEO(即効)、SEO(中期)、AIO(比較検討)" loading="lazy"><figcaption>クリニック集客の設計図3階層</figcaption></figure>
 

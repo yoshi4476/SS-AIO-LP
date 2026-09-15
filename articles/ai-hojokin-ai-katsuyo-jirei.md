@@ -136,9 +136,13 @@ AIチャットボットは、想定外の質問に誤った回答をしてしま
 
 <figure><img src="/images/ai-hojokin-ai-katsuyo-jirei/nagare.png" alt="AI活用事例を参考にした導入までの流れ: 課題整理、ツール調査、事業者への相談、交付申請・導入、効果測定" loading="lazy"><figcaption>AI活用事例を参考にした導入までの流れ</figcaption></figure>
 
-申請段階でつまずきたくない方は、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)もあわせて確認してください。導入したいツールが会計・受発注系であれば、[AI導入補助金の受発注ソフトとは？対象3枠と補助額を解説](https://lp.7senses.co.jp/blog/ai-hojokin-juhatchu-soft-toha/)が参考になります。
+申請段階でつまずきたくない方は、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)もあわせて確認してください。
 
-AI活用にかかる費用感を先につかんでおきたい場合は、[AI導入の費用相場｜中小企業の内訳と抑える3つのコツ](https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/)を確認してください。交付決定後の手続きは、[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
+導入したいツールが会計・受発注系であれば、[AI導入補助金の受発注ソフトとは？対象3枠と補助額を解説](https://lp.7senses.co.jp/blog/ai-hojokin-juhatchu-soft-toha/)が参考になります。
+
+AI活用にかかる費用感を先につかんでおきたい場合は、[AI導入の費用相場｜中小企業の内訳と抑える3つのコツ](https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/)を確認してください。
+
+交付決定後の手続きは、[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
 
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。

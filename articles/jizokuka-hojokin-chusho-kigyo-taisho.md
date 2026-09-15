@@ -158,7 +158,9 @@ faq:
 
 **交付決定の通知が届く前に契約・発注をすると、補助対象から外れてしまいます。**この順番はどの制度でも共通のルールなので、必ず通知を待ってから発注してください。
 
-申請の詳しい流れやよくある失敗は、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも解説しています。採択後の実績報告の書き方は[実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)にまとめています。
+申請の詳しい流れやよくある失敗は、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも解説しています。
+
+採択後の実績報告の書き方は[実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)にまとめています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

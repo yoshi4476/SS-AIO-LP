@@ -161,7 +161,9 @@ faq:
 
 個人事業主がAI・IT導入補助金と迷う場合は、[個人事業主のAI導入補助金｜開業1年未満は対象外？条件を解説](https://lp.7senses.co.jp/blog/kojin-jigyonushi-ai-hojokin/)もあわせて確認してください。制度ごとの対象条件を比較すると、自分に合う制度が見つかりやすくなります。
 
-給付金と補助金の違いから知りたい方は、[個人事業主の給付金・補助金｜申請方法と使える4つの制度](https://lp.7senses.co.jp/blog/kojinjigyonushi-kyufukin-shinsei/)を参考にしてください。採択後の実績報告の進め方は[実績報告書の書き方](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)にまとめています。
+給付金と補助金の違いから知りたい方は、[個人事業主の給付金・補助金｜申請方法と使える4つの制度](https://lp.7senses.co.jp/blog/kojinjigyonushi-kyufukin-shinsei/)を参考にしてください。
+
+採択後の実績報告の進め方は[実績報告書の書き方](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)にまとめています。
 
 申請書類の準備でつまずきやすいポイントは制度を問わず共通する部分があります。[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)も参考になります。
 

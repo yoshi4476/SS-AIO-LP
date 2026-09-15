@@ -110,7 +110,9 @@ faq:
 
 小規模なカフェの場合も考え方は同じです。席数10席・客単価800円の店舗が、POSレジと予約システムを年間25万円で導入するとします。
 
-インボイス対応類型なら**50万円以下の部分に3/4〜4/5の高い補助率が適用され、実質負担は5〜6万円程度**に収まる試算になります。自店の契約額に補助率を掛け合わせるだけで、実質負担額を試算できます。契約額別の試算例は[AI導入補助金はいくらもらえる？3つの枠の上限額と計算例](https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/)で詳しく紹介しています。
+インボイス対応類型なら**50万円以下の部分に3/4〜4/5の高い補助率が適用され、実質負担は5〜6万円程度**に収まる試算になります。自店の契約額に補助率を掛け合わせるだけで、実質負担額を試算できます。
+
+契約額別の試算例は[AI導入補助金はいくらもらえる？3つの枠の上限額と計算例](https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/)で詳しく紹介しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
@@ -138,7 +140,9 @@ faq:
 
 4点目は、GビズIDやSECURITY ACTIONの宣言が失効していないかの確認です。しばらく利用していない店舗ほど見落としがちな盲点。再取得や更新の手間を早めに確認しておくと安心です。
 
-私も過去の相談事例で、==以前の枠の記憶のまま申請書類を準備し、必要書類の増加に気づかず差し戻しになった==というケースを確認しています。複数法人で店舗を運営している場合は、それぞれの法人で個別に要件を確認してください。よくある失敗パターン全般は[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも整理しているので、あわせて確認してください。
+私も過去の相談事例で、==以前の枠の記憶のまま申請書類を準備し、必要書類の増加に気づかず差し戻しになった==というケースを確認しています。複数法人で店舗を運営している場合は、それぞれの法人で個別に要件を確認してください。
+
+よくある失敗パターン全般は[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも整理しているので、あわせて確認してください。
 
 ## IT導入補助金と他の補助金との使い分け
 
@@ -160,7 +164,9 @@ faq:
 
 <figure><img src="/images/it-hojokin-inshokuten/flow-steps.png" alt="飲食店がIT導入補助金を使うまでの4ステップ: GビズID・SECURITY ACTIONを準備、IT導入支援事業者とツール選定、交付申請から交付決定後に契約、実績報告を提出し交付額確定" loading="lazy"><figcaption>飲食店がIT導入補助金を使うまでの4ステップ</figcaption></figure>
 
-繁忙期に導入を始めると、スタッフが操作に慣れないまま現場が混乱しやすくなります。**閑散期に交付申請から導入・研修までを終わらせ、繁忙期には運用が安定した状態で臨む**のが理想的な逆算です。実績報告の必要書類まで含めた手順は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で整理しています。
+繁忙期に導入を始めると、スタッフが操作に慣れないまま現場が混乱しやすくなります。**閑散期に交付申請から導入・研修までを終わらせ、繁忙期には運用が安定した状態で臨む**のが理想的な逆算です。
+
+実績報告の必要書類まで含めた手順は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で整理しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

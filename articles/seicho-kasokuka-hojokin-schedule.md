@@ -145,7 +145,11 @@ GビズID取得を申請直前に始めると、締切に間に合わなくな�
 
 自社の投資規模や事業計画に合わせて、どちらの制度が対象になるかを早い段階で見極めることが、スケジュールを無駄にしないための第一歩です。将来的に売上高10億円を超えて成長加速化補助金の対象に近づく企業でも、まずは小規模なAI・ITツールで足元の生産性を底上げしておくと、次の大型投資に向けた事業計画の説得力が増します。
 
-AI・ITツールの申請を具体的に検討する場合は、[AI導入補助金の申請のやり方｜受給までの5ステップを解説](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/)で全体の流れを確認できます。申請でつまずきやすいポイントは、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)にまとめています。補助額の目安を知りたい方は、[AI導入補助金はいくらもらえる？3つの枠の上限額と計算例](https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/)も参考になります。
+AI・ITツールの申請を具体的に検討する場合は、[AI導入補助金の申請のやり方｜受給までの5ステップを解説](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/)で全体の流れを確認できます。
+
+申請でつまずきやすいポイントは、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)にまとめています。
+
+補助額の目安を知りたい方は、[AI導入補助金はいくらもらえる？3つの枠の上限額と計算例](https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/)も参考になります。
 
 ## よくある質問
 

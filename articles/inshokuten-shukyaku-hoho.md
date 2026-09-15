@@ -86,7 +86,9 @@ diagrams:
 
 ### ステップ3: AIO｜比較検討層にAI経由で届く
 
-AI検索対策は、SEOで整えた情報を土台にAIの回答内で紹介されることを狙う施策です。Google検索での上位表示がAI Overview引用の前提条件のため、==SEOを飛ばしてAIOだけ整えても効果は限定的==です。詳しくは[AIO対策の導入方法](/aio/aio-taisaku-donyu-hoho/)で解説しています。SEO記事整備の土台となる考え方は[AI時代のSEO対策](/seo/ai-jidai-seo-taisaku/)でも扱っています。
+AI検索対策は、SEOで整えた情報を土台にAIの回答内で紹介されることを狙う施策です。Google検索での上位表示がAI Overview引用の前提条件のため、==SEOを飛ばしてAIOだけ整えても効果は限定的==です。
+
+詳しくは[AIO対策の導入方法](/aio/aio-taisaku-donyu-hoho/)で解説しています。SEO記事整備の土台となる考え方は[AI時代のSEO対策](/seo/ai-jidai-seo-taisaku/)でも扱っています。
 
 | ステップ | 施策 | 主な対象客層 | 成果が出るまでの目安 |
 |:--|:--|:--|:--|

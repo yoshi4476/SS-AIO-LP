@@ -636,6 +636,36 @@ def test_main_category_actually_grows():
         check(f"{sid} に主力の目印がある", bool(hb._main_offer_pattern(sid)), True)
 
 
+def test_paragraph_split_keeps_text():
+    """長い段落を分けても、地の文が変わらないこと。
+
+    読みにくい段落は機械で分けられるが、文の途中で切れば意味が壊れる。
+    「。」の直後だけで分け、分けた前後で文字が1字でも増減したら
+    その記事は書き換えない。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import split_paragraphs as sp
+    check("分ける工程がある", (ROOT / "scripts" / "split_paragraphs.py").is_file(), True)
+
+    # 文の途中では切らない
+    nl = chr(10)
+    body = nl.join(["---", "title: x", "---", ("あ" * 120 + "です。") * 3])
+    after, n = sp.process(body)
+    check("長い段落を分ける", n > 0, True)
+    check("地の文は変わらない", sp.plain(body) == sp.plain(after), True)
+    check("「。」の直後で分かれる",
+          all(p.rstrip().endswith(("。", "」", "）")) or "あ" not in p
+              for p in after.split(nl + nl)[1:]), True)
+
+    # 表・リスト・HTMLの塊には触らない
+    check("表は触らない", sp.splittable("| 列A | 列B |" + "あ" * 300), False)
+    check("リストは触らない", sp.splittable("- " + "あ" * 300), False)
+    check("HTMLの塊は触らない", sp.splittable("<div>" + "あ" * 300 + "</div>"), False)
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週走る", "split_paragraphs.py --all --write" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -654,7 +684,8 @@ def main():
               test_quality_gate_holds_on_wordpress,
               test_daily_todo_fits_in_one_run,
               test_near_page1_is_pushed_every_week,
-              test_main_category_actually_grows):
+              test_main_category_actually_grows,
+              test_paragraph_split_keeps_text):
         try:
             t()
         except Exception as e:

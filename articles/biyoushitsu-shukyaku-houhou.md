@@ -158,7 +158,9 @@ AIが引用する情報源は、Googleマップ・予約サイト・SNSに書か
 
 私は日々の支援の中で、**「AI対策」を特別な施策だと身構えてしまう美容室オーナー**に何度も出会ってきました。実際に効くのは表記統一と口コミ返信の継続という地道な積み重ねでした。新しいツールを探す前に、まず既存の6施策を丁寧に回すことが近道です。
 
-AI集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)、地図検索での見つかりやすさは[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)で詳しく解説しています。ChatGPTを日々の集客業務に使う具体策は[ChatGPTを集客に活用する方法7選](/ai-marketing/chatgpt-shukyaku-katsuyo/)にまとめています。
+AI集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)、地図検索での見つかりやすさは[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)で詳しく解説しています。
+
+ChatGPTを日々の集客業務に使う具体策は[ChatGPTを集客に活用する方法7選](/ai-marketing/chatgpt-shukyaku-katsuyo/)にまとめています。
 
 <div class="cta-box"><p>マップ・口コミ・AI検索まで含めた集客の見直しを無料でご相談いただけます。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 

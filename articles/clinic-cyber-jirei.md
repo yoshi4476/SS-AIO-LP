@@ -151,7 +151,9 @@ Googleビジネスプロフィールの投稿機能とホームページのお�
 
 <div class="cta-box"><p>万が一の際の情報発信・集患の立て直しについて、無料でご相談いただけます。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
-クリニックの集患づくりの基本は[クリニックの集客事例5選｜成功パターンと始め方](/ai-marketing/clinic-shukyaku-jirei/)、Googleビジネスプロフィールの運用は[クリニックのMEO対策とは？集患につながる5つの手順](/meo/clinic-meo-taisaku/)で解説しています。経営体制が変わる場面での引き継ぎ方は[クリニックM&A後の集患再建｜GBP引き継ぎ事例と5つの注意点](/meo/clinic-ma-shukyaku-jirei/)もあわせてご確認ください。
+クリニックの集患づくりの基本は[クリニックの集客事例5選｜成功パターンと始め方](/ai-marketing/clinic-shukyaku-jirei/)、Googleビジネスプロフィールの運用は[クリニックのMEO対策とは？集患につながる5つの手順](/meo/clinic-meo-taisaku/)で解説しています。
+
+経営体制が変わる場面での引き継ぎ方は[クリニックM&A後の集患再建｜GBP引き継ぎ事例と5つの注意点](/meo/clinic-ma-shukyaku-jirei/)もあわせてご確認ください。
 
 
 自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。

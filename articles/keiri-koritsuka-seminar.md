@@ -147,7 +147,9 @@ faq:
 
 人手不足そのものが課題なら、セミナーより先に外部委託を検討したほうが早く解決することもあります。詳しくは[経理の人手不足対策8つ｜原因とすぐできる対応を解説](https://corp.7senses.co.jp/blog/keiri-hitode-busoku-taisaku/)で解説しています。
 
-内製と外注のどちらが自社に合うか迷う場合は、[経理の内製と外注を比較｜6つの軸で見る違いと選び方](https://corp.7senses.co.jp/blog/keiri-naisei-gaichuu-hikaku/)も参考にしてください。経理BPOの基本的な仕組みと費用感は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)にまとめています。
+内製と外注のどちらが自社に合うか迷う場合は、[経理の内製と外注を比較｜6つの軸で見る違いと選び方](https://corp.7senses.co.jp/blog/keiri-naisei-gaichuu-hikaku/)も参考にしてください。
+
+経理BPOの基本的な仕組みと費用感は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)にまとめています。
 
 セミナーで学んだ内容を実行する体制を自社で作れない場合は、経理BPOの無料相談で、業務の切り出し方から相談することもできます。
 

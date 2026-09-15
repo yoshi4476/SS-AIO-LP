@@ -152,7 +152,9 @@ CT・電子カルテ導入による検査体制のDX投資も、個人開業医�
 
 GビズIDの取得は、他の補助金と同様に申請の前提になります。**取得までに2〜3週間かかるため、締切ぎりぎりでは間に合いません。**
 
-小規模な投資であれば、[小規模事業者持続化補助金はクリニックで使える？対象と注意点](/blog/jizokuka-hojokin-clinic/)のほうが向いている場合もあります。設備投資の規模が大きい場合は、[ものづくり補助金はクリニックで使える？対象と注意点](/blog/monozukuri-hojokin-clinic/)もあわせて確認してください。他業種の事例は[事業再構築補助金の飲食店活用事例3選と今の申請方法](/blog/jigyou-saikouchiku-inshokuten-jirei/)でも整理しています。
+小規模な投資であれば、[小規模事業者持続化補助金はクリニックで使える？対象と注意点](/blog/jizokuka-hojokin-clinic/)のほうが向いている場合もあります。
+
+設備投資の規模が大きい場合は、[ものづくり補助金はクリニックで使える？対象と注意点](/blog/monozukuri-hojokin-clinic/)もあわせて確認してください。他業種の事例は[事業再構築補助金の飲食店活用事例3選と今の申請方法](/blog/jigyou-saikouchiku-inshokuten-jirei/)でも整理しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

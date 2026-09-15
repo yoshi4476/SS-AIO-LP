@@ -55,8 +55,6 @@ faq:
 対象になる範囲は[農業はAI導入補助金の対象になるか｜条件と使えるソフト](/blog/nougyou-shoki-hiyou/)で整理しています。
 
 実際の進め方を先に押さえるなら、[AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ](/blog/ai-hojokin-security-action-hoshi2/)が参考になります。
-実際の進め方は[AI導入補助金のGビズID取得方法｜プライム取得の5つの手順](/blog/ai-hojokin-gbizid-shutoku/)でも扱っています。
-
 <figure><img src="/images/ai-hojokin-shinsei-yarikata/flow5.png" alt="申請から受給までの5ステップ: GビズID取得・SECURITY ACTION宣言、支援事業者選定・ツールを決める、交付申請、交付決定後に発注、実績報告"><figcaption>申請から受給までの5ステップ</figcaption></figure>
 
 5つのステップごとの目安期間と、そのタイミングで必要になるものをまとめました。全体の見通しを立てるときの参考にしてください。
@@ -151,11 +149,14 @@ GビズIDプライムの申請は、マイナンバーカードとスマート�
 
 
 関連する内容として[AI導入補助金2026｜クリニックの次の締切と今から動く3ステップ](/blog/ai-hojokin-clinic-2026-schedule/)も公開しています。
+
 <a href="https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260723001.html" target="_blank" rel="noopener">中小企業庁が2026年7月に公表した採択結果</a>によると、この回は応募5,699者に対して2,936者が採択され、採択率は51.5%でした。全員が採択されるわけではないため、事業計画書の内容も含めて丁寧に準備する必要があります。
 
 以前は「みらデジ経営チェック」という診断が加点要件として案内されていましたが、2025年3月31日に終了しました。古い情報のまま準備を進めると、実施先が存在しない手続きに時間を使ってしまいます。
 
-最新の加点要件と代わりの手順は[AI導入補助金のみらデジ経営チェックは終了｜代わりの手順3つ](https://lp.7senses.co.jp/blog/ai-hojokin-miradigi-keieicheck/)で確認してください。申請書類の不備を中心とした失敗パターンの全体像は[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でまとめています。
+最新の加点要件と代わりの手順は[AI導入補助金のみらデジ経営チェックは終了｜代わりの手順3つ](https://lp.7senses.co.jp/blog/ai-hojokin-miradigi-keieicheck/)で確認してください。
+
+申請書類の不備を中心とした失敗パターンの全体像は[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でまとめています。
 
 見積書やカタログの金額だけでツールを決めると、自社の業務課題を解決できないまま導入だけが目的になりがちです。**支援事業者には、費用感だけでなく自社の課題への理解度も確認してから依頼してください。**
 

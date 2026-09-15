@@ -110,7 +110,9 @@ faq:
 | 生徒80名前後 | 教材配信+入退室管理 | 50万円 | 25万円 | 25万円 |
 | 複数教室（生徒200名前後） | 教材配信+入退室管理+会計ソフト | 120万円 | 60万円 | 60万円 |
 
-契約額が小さい教室ほど、補助額よりも申請・実績報告にかける事務コストの比率が高くなりがちです。優先すべきは、事務負担を抑えられる範囲での段階導入。個人経営で経理担当を置いていない塾は、[IT導入補助金の会計ソフト｜個人事業主が使える2つの枠と補助率](https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/)も参考にしてください。採択後に必要な書類の全体像は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で整理しています。
+契約額が小さい教室ほど、補助額よりも申請・実績報告にかける事務コストの比率が高くなりがちです。優先すべきは、事務負担を抑えられる範囲での段階導入。個人経営で経理担当を置いていない塾は、[IT導入補助金の会計ソフト｜個人事業主が使える2つの枠と補助率](https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/)も参考にしてください。
+
+採択後に必要な書類の全体像は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で整理しています。
 
 ## 新学期・季節講習の繁忙期を外した導入スケジュール
 
@@ -139,7 +141,9 @@ faq:
 
 なお、学習塾は中小企業基本法上「サービス業」に区分されます。資本金5,000万円以下または従業員100人以下なら中小企業者です。<a href="https://www.chusho.meti.go.jp/soshiki/teigi.html" target="_blank" rel="noopener">中小企業庁が公表している中小企業者の定義</a>で確認できます。
 
-フランチャイズ加盟塾の判定基準や業種区分の詳細は[IT導入補助金の中小企業とは？業種別4区分の資本金・従業員数](https://lp.7senses.co.jp/blog/it-hojokin-chusho-teigi/)で整理しています。正式名称と旧IT導入補助金の関係は[AI導入補助金とIT導入補助金の違いは?結論は同じ制度【2026年の呼び方】](https://lp.7senses.co.jp/blog/ai-hojokin-it-hojokin-chigai/)で詳しく整理しています。
+フランチャイズ加盟塾の判定基準や業種区分の詳細は[IT導入補助金の中小企業とは？業種別4区分の資本金・従業員数](https://lp.7senses.co.jp/blog/it-hojokin-chusho-teigi/)で整理しています。
+
+正式名称と旧IT導入補助金の関係は[AI導入補助金とIT導入補助金の違いは?結論は同じ制度【2026年の呼び方】](https://lp.7senses.co.jp/blog/ai-hojokin-it-hojokin-chigai/)で詳しく整理しています。
 
 ## よくある質問
 

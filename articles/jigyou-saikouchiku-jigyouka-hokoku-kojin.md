@@ -128,7 +128,9 @@ faq:
 
 報告のたびに使った資料は、決算書控え・原価集計表を含めてフォルダにまとめて保管しておくと、翌年以降の作業が大幅に短縮できます。同じ様式で毎年聞かれる項目が多いため、前回の入力内容を控えておくと迷いが減ります。
 
-申請段階での失敗を避けたい方は[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)も参考にしてください。他制度の実績報告の書き方は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
+申請段階での失敗を避けたい方は[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)も参考にしてください。
+
+他制度の実績報告の書き方は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
 
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
@@ -141,7 +143,9 @@ faq:
 
 事業拡大にともない法人化を検討している場合、報告義務がどう引き継がれるかも早めに確認しておきたい点です。**法人成り後の手続きは[事業再構築補助金は法人成り後も続く？承継に必要な4つの手続き](https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)にまとめています。**
 
-補助事業の完了時期によって報告義務がいつまで続くかを知りたい方は[事業再構築補助金は個人事業主もいつまで？後継3制度の使い方](https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/)もあわせて確認してください。他の給付金・補助金制度を横断で知りたい場合は[個人事業主の給付金・補助金｜申請方法と使える4つの制度](https://lp.7senses.co.jp/blog/kojinjigyonushi-kyufukin-shinsei/)が参考になります。
+補助事業の完了時期によって報告義務がいつまで続くかを知りたい方は[事業再構築補助金は個人事業主もいつまで？後継3制度の使い方](https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/)もあわせて確認してください。
+
+他の給付金・補助金制度を横断で知りたい場合は[個人事業主の給付金・補助金｜申請方法と使える4つの制度](https://lp.7senses.co.jp/blog/kojinjigyonushi-kyufukin-shinsei/)が参考になります。
 
 個人事業主は、法人のように経理担当者が別にいるとは限らず、事業主本人が確定申告と事業化状況報告の両方を抱えることになりがちです。税理士に依頼している場合は、確定申告の打ち合わせの場で事業化状況報告の期限もあわせて確認しておくと、二度手間になりません。顧問税理士がいない場合は、事務局の相談窓口や無料相談を活用し、初回だけでも第三者の目を通しておくと安心です。
 

@@ -59,7 +59,9 @@ faq:
 
 <div class="definition-box"><span class="term">GビズIDとは</span>、経済産業省が運営する法人・個人事業主向けの共通認証システムです。1つのアカウントで社会保険手続きや補助金の電子申請など、複数の行政サービスを利用できます。</div>
 
-私も相談の現場で、締切の直前に「GビズIDって何ですか」と聞かれることが何度もありました。**制度や事業計画書の準備を先に進めていても、GビズIDがなければ交付申請の画面にすら進めません。**申請のやり方全体の流れは[AI導入補助金の申請のやり方｜受給までの5ステップを解説](/blog/ai-hojokin-shinsei-yarikata/)で紹介していますが、本記事ではその最初の関門であるGビズID取得だけを掘り下げます。
+私も相談の現場で、締切の直前に「GビズIDって何ですか」と聞かれることが何度もありました。**制度や事業計画書の準備を先に進めていても、GビズIDがなければ交付申請の画面にすら進めません。
+
+**申請のやり方全体の流れは[AI導入補助金の申請のやり方｜受給までの5ステップを解説](/blog/ai-hojokin-shinsei-yarikata/)で紹介していますが、本記事ではその最初の関門であるGビズID取得だけを掘り下げます。
 
 AI導入補助金の対象になるツールの範囲を先に確認したい方は、[AI導入補助金の対象ツール6分野｜対象外との見分け方](/blog/ai-hojokin-taisho-tool/)もあわせてご覧ください。GビズIDはAI導入補助金以外にも、社会保険の手続きやjGrants経由の他の補助金申請など幅広い行政サービスで使われているため、一度取得すれば今後の手続きでも役立ちます。
 
@@ -123,7 +125,9 @@ GビズIDアプリは、iOSならApp Store、AndroidならGoogle Playからそ�
 
 
 近い論点を[中小企業成長加速化補助金｜1次2次の実績とスケジュール](/blog/seicho-kasokuka-hojokin-schedule/)で扱っています。
-<a href="https://gbiz-id.go.jp/top/apply/prime_document_01.html" target="_blank" rel="noopener">GビズID公式サイトの案内</a>では、書類申請について「申請から審査、アカウント発行まで最大1か月の時間がかかる」と明記されています。一方で<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">IT導入補助金事務局の申請前手続きページ</a>は、実務上の目安として「GビズIDプライムの発行までおおむね2週間、SECURITY ACTION宣言の発行までおおむね2〜3日」を見込むよう案内しています。
+<a href="https://gbiz-id.go.jp/top/apply/prime_document_01.html" target="_blank" rel="noopener">GビズID公式サイトの案内</a>では、書類申請について「申請から審査、アカウント発行まで最大1か月の時間がかかる」と明記されています。
+
+一方で<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">IT導入補助金事務局の申請前手続きページ</a>は、実務上の目安として「GビズIDプライムの発行までおおむね2週間、SECURITY ACTION宣言の発行までおおむね2〜3日」を見込むよう案内しています。
 
 即日発行はあくまで最短ケースであり、混雑状況や書類の不備によって前後します。締切から逆算した、余裕あるスケジュール管理が肝心です。**目安は1か月前の着手**。SECURITY ACTIONの宣言もあわせて必要になるため、GビズIDと同じタイミングで準備を進めてください。
 

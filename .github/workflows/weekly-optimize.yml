@@ -170,6 +170,11 @@ jobs:
           python scripts/priority_boost.py --write || true
           rm -f indexing-service-account.json
 
+      # 長い段落は読みにくいだけでなく、AI検索も一文を切り出しにくい。
+      # 文の切れ目でだけ分け、地の文が1字でも変わったら書き換えない
+      - name: 長すぎる段落を分ける
+        run: python scripts/split_paragraphs.py --all --write || true
+
       - name: 効果の出ていない記事を自動で手当てする
         run: python scripts/auto_improve.py --write || true
 

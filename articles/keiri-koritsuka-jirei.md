@@ -108,7 +108,9 @@ faq:
 
 私たちが中小企業のバックオフィス支援で相談を受ける中でも、**ツールは最新なのに手順が古いまま**という会社を数多く見てきました。フローの見直しだけで、承認待ちの時間が大きく減ることもあります。
 
-見直しの具体的な手順は[経理の業務フロー見直し3ステップ｜属人化と遅延を防ぐ](https://corp.7senses.co.jp/blog/keiri-gyomu-flow-minaoshi/)で整理しています。属人化そのものの解消法は[経理の属人化を解消する5つの方法](https://corp.7senses.co.jp/blog/keiri-zokujinka-kaisho/)も参考になります。
+見直しの具体的な手順は[経理の業務フロー見直し3ステップ｜属人化と遅延を防ぐ](https://corp.7senses.co.jp/blog/keiri-gyomu-flow-minaoshi/)で整理しています。
+
+属人化そのものの解消法は[経理の属人化を解消する5つの方法](https://corp.7senses.co.jp/blog/keiri-zokujinka-kaisho/)も参考になります。
 
 見直しの進め方は、まず現状の業務フローを紙やホワイトボードに書き出すところから始まります。誰がどの承認を担当しているかを可視化すると、重複したチェックや、不要な待ち時間が見えてきます。
 
@@ -126,7 +128,9 @@ faq:
 
 厚生労働省の<a href="https://www.mhlw.go.jp/stf/newpage_73416.html" target="_blank" rel="noopener">「一般職業紹介状況」</a>（2026年9月時点）では、会計事務従事者の有効求人倍率は0.61倍と、一般事務の0.32倍を上回っています。採用による人手確保が難しい職種であることが、経理BPOという選択肢の背景にあります。
 
-経理BPOの基本的な仕組みと費用相場は[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で解説しています。委託範囲ごとの事例パターンは[経理アウトソーシング導入事例｜3パターンで見る選び方](https://corp.7senses.co.jp/blog/keiri-outsourcing-donyu-jirei/)で確認できます。
+経理BPOの基本的な仕組みと費用相場は[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で解説しています。
+
+委託範囲ごとの事例パターンは[経理アウトソーシング導入事例｜3パターンで見る選び方](https://corp.7senses.co.jp/blog/keiri-outsourcing-donyu-jirei/)で確認できます。
 
 全部を任せる必要はなく、記帳だけ・月次決算だけといった部分委託から始める進め方もあります。社内には確認と承認の役割だけを残し、実作業は委託先に任せる分担も選べます。
 

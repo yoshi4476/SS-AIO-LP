@@ -140,7 +140,9 @@ faq:
 
 
 実際の進め方は、[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)で解説しています。
-同じ個人事業主向けでも、会計ソフトの導入ならIT導入補助金が使えます。[IT導入補助金の会計ソフト｜個人事業主が使える2つの枠と補助率](/blog/it-hojokin-kojinjigyonushi-kaikeisoft/)で条件を解説しています。
+同じ個人事業主向けでも、会計ソフトの導入ならIT導入補助金が使えます。
+
+[IT導入補助金の会計ソフト｜個人事業主が使える2つの枠と補助率](/blog/it-hojokin-kojinjigyonushi-kaikeisoft/)で条件を解説しています。
 
 | 枠 | 従業員規模 | 補助上限額の目安 | 補助率 |
 |:--|:--|:--|:--|

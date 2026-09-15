@@ -124,7 +124,9 @@ faq:
 近い論点を[AI導入補助金の必要書類【2026年 法人版】一覧と準備の順番](/blog/ai-hojokin-hitsuyo-shorui-hojin/)で扱っています。
 <div class="caution-box"><span class="box-title">注意: 基準を満たしても対象外になることがある</span><br>資本金・従業員数の基準を満たしていても、法人税・消費税の未納がある場合や、直近の公募回で既に採択・交付を受けている場合は対象外になることがあります。基準表の確認だけで安心せず、その他の要件も併せて確認してください。</div>
 
-具体的な必要書類や納税証明書の準備については、[AI導入補助金の納税証明書はどれ？その1とその2の違い](https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/)で解説しています。申請全体の流れを先に把握したい場合は、[AI導入補助金の申請のやり方｜受給までの5ステップを解説](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/)も参考にしてください。
+具体的な必要書類や納税証明書の準備については、[AI導入補助金の納税証明書はどれ？その1とその2の違い](https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/)で解説しています。
+
+申請全体の流れを先に把握したい場合は、[AI導入補助金の申請のやり方｜受給までの5ステップを解説](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/)も参考にしてください。
 
 過去の採択実績についても注意が必要です。**直近の公募回で既に交付決定を受けている場合、次の公募回では申請できないことがあります。**何回目の公募まで間隔を空ければよいかは公募回ごとに案内されるため、事務局の最新情報を都度確認してください。
 

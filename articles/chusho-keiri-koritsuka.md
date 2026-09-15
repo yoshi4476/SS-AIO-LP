@@ -115,7 +115,9 @@ faq:
 | システム化 | クラウド会計やRPAで定型業務を自動化する | 定型業務の量が多い企業 |
 | 経理BPO | 記帳から判断業務まで外部に委託する | 担当者の採用・育成が難しい企業 |
 
-システム化の比較軸を詳しく知りたい場合は、[経理効率化システムの選び方｜比較軸5つと失敗しない導入手順](https://corp.7senses.co.jp/blog/keiri-koritsuka-system/)にまとめています。方法別の実例は、[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/)も参考になります。
+システム化の比較軸を詳しく知りたい場合は、[経理効率化システムの選び方｜比較軸5つと失敗しない導入手順](https://corp.7senses.co.jp/blog/keiri-koritsuka-system/)にまとめています。
+
+方法別の実例は、[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/)も参考になります。
 
 経理BPOの費用感は、[経理アウトソーシングの費用相場【2026年】内訳と抑え方](https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba/)で解説しています。**3パターンは併用も可能で、定型業務はシステム、判断業務はBPOという組み合わせも一般的です。**
 
