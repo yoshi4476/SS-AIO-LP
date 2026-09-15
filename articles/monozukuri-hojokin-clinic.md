@@ -119,7 +119,7 @@ faq:
 | 小売業 | 5,000万円以下 | 50人以下 |
 | 卸売業 | 1億円以下 | 100人以下 |
 
-<a href="https://www.chusho.meti.go.jp/soshiki/teigi.html" target="_blank" rel="noopener">中小企業庁が公開している業種別の定義</a>によると、サービス業は小売業より従業員数の基準が広く設定されています。詳しい業種区分の考え方は[ものづくり補助金は資本金オーバーでも対象？](/blog/monozukuri-hojokin-chusho-teigi/)でも解説しています。
+<a href="https://www.chusho.meti.go.jp/soshiki/teigi.html" target="_blank" rel="noopener">中小企業庁が公開している業種別の定義</a>によると、サービス業は小売業より従業員数の基準が広く設定されています。詳しい業種区分の考え方は<a href="/blog/monozukuri-hojokin-chusho-teigi/">ものづくり補助金は資本金オーバーでも対象？</a>でも解説しています。
 
 <a href="https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/m26/is2603.html" target="_blank" rel="noopener">厚生労働省の医療施設動態調査（令和8年3月末概数）</a>によると、全国の一般診療所数は10万5,631施設に上ります。<strong>同業の開業医が増えるほど、自由診療メニューによる差別化が経営の分かれ目になります。</strong>
 

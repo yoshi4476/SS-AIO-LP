@@ -65,26 +65,30 @@ def rejoin_marks(body):
 
 
 def strong_in_html(body):
-    """生HTMLブロックの中の「**」を <strong> に直す
+    """生HTMLブロックの中の Markdown 記法を、HTMLタグに直す
 
     Markdownは raw HTML ブロックの中身を処理しない。注意ボックスの中に
-    「**罰金**」と書くと、記事に ** がそのまま出る（実測8本）。
+    「**罰金**」と書くと記事に ** がそのまま出る（実測282箇所）。
+    リンクも同じで、[文字](/url/) がそのまま出て読者が押せない（実測34箇所）。
     """
     n = 0
 
     def one(line):
         nonlocal n
-        if not line.lstrip().startswith("<") or "**" not in line:
+        if not line.lstrip().startswith("<"):
             return line
-        new, k = re.subn(r"\*\*([^*\n]+)\*\*", r"<strong>\1</strong>", line)
-        n += k
-        return new
+        line, a = re.subn(r"\[([^\]\n]+)\]\((/[^)\s]*|https?://[^)\s]+)\)",
+                          r'<a href="\2">\1</a>', line)
+        line, b = re.subn(r"\*\*([^*\n]+)\*\*", r"<strong>\1</strong>", line)
+        n += a + b
+        return line
 
     return "\n".join(one(x) for x in body.split("\n")), n
 
 
 def plain(s):
     """読者が読む文字だけを残す。装飾記法とタグの差は見ない"""
+    s = re.sub(r"\[([^\]\n]*)\]\([^)\s]*\)", r"\1", s)   # リンクは表示文だけ残す
     return re.sub(r"<[^>]+>|[*=`]|\s", "", s)
 
 

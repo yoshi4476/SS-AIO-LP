@@ -41,7 +41,7 @@ faq:
 
 <div class="target-reader">この記事は、AI導入補助金・IT導入補助金で交付決定を受け、これから実績報告書を提出する建設業（工務店・下請け業者・一人親方を含む）の経営者・担当者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。実績報告の基本手続きは[実績報告の書き方の基本4ステップ](/blog/ai-hojokin-jissekihoukoku-kakikata/)もあわせてご確認ください。</p>
+<p class="freshness">※ 2026年8月時点の情報です。実績報告の基本手続きは<a href="/blog/ai-hojokin-jissekihoukoku-kakikata/">実績報告の書き方の基本4ステップ</a>もあわせてご確認ください。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>建設業の実績報告書で追加になる証憑整理のポイント</li><li>下請けへの発注分をまとめて報告する方法</li><li>出来高払いと完了検収がずれるときの対処</li><li>タブレット・測量機器の対象可否と一人親方の注意点</li></ul></div>
 

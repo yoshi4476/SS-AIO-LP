@@ -32,6 +32,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import md2html  # noqa: E402
+import render_check  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
@@ -854,6 +855,17 @@ def main():
         print(f"WARN: {w}")
     if not warns:
         print("品質検査: メタ字数・カニバリ・内部リンク404 すべてクリア")
+    # ここまでの検査は全部、原稿（Markdown）だけを見ている。
+    # 「原稿は正しいが変換すると壊れる」崩れは、出力を見ないと分からない。
+    # 実際、表がパイプ記号のまま出る・** がそのまま表示される崩れを長く見逃した
+    render_warns = render_check.scan(sorted((ROOT / "site").rglob("index.html")))
+    if render_warns:
+        fixes = {n: f for n, _, f in render_check.SYMPTOMS}
+        for name, hits in sorted(render_warns.items(), key=lambda x: -len(x[1])):
+            print(f"WARN: 描画 — {name}（{len(hits)}ページ / 例: "
+                  f"{hits[0][0].parent.name}）→ {fixes[name]}")
+    else:
+        print("描画検査: 生成HTMLに崩れなし")
 
 
 if __name__ == "__main__":

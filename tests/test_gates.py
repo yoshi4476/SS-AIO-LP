@@ -748,6 +748,56 @@ def test_block_breaks_render_correctly():
     check("毎週走る", "fix_block_breaks.py --write" in wf, True)
 
 
+def test_rendered_html_is_checked():
+    """出来上がったHTMLを見る検査が、ビルドの中で動くこと。
+
+    これまでの検査は全部、原稿（Markdown）だけを見ていた。そのため
+    「原稿は正しいが変換すると壊れる」崩れを長く見逃した。表がパイプ記号の
+    まま出る・** がそのまま表示される・リンクが押せない、の3種。
+    どれも記事の点数には出ず、読者の画面にだけ出る。
+    """
+    import tempfile
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import render_check as rc
+
+    # ビルドが必ず通ること（単体スクリプトのままだと呼ばれずに終わる）
+    b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("ビルドが描画検査を呼ぶ", "render_check.scan(" in b, True)
+
+    # 実際に捕まえること。素通りする検査は無いのと同じ
+    cases = {
+        "強調記号がそのまま出ている": "<article><p>罰金は**100万円**です。</p></article>",
+        "Markdownリンクが押せない形で出ている":
+            "<article><p>詳細は[解説](/seo/x/)です。</p></article>",
+        "表の区切り記号が本文に出ている":
+            "<article><p>| 列A |" + chr(10) + "|:--|</p></article>",
+        "altの無い画像がある": '<article><p><img src="a.png"></p></article>',
+        "押せないリンクがある": '<article><p><a href="">文字</a></p></article>',
+        "句点が続いている": "<article><p>そうです。。</p></article>",
+    }
+    d = Path(tempfile.mkdtemp())
+    for i, (name, src) in enumerate(cases.items()):
+        f = d / str(i) / "index.html"
+        f.parent.mkdir(parents=True)
+        f.write_text(src, encoding="utf-8")
+        check(f"崩れを見つける: {name}", name in rc.scan([f]), True)
+
+    # 正しいページを間違いと言わないこと
+    f = d / "ok" / "index.html"
+    f.parent.mkdir(parents=True)
+    f.write_text('<article><p>罰金は<strong>100万円</strong>、詳細は'
+                 '<a href="/seo/x/">解説</a>。</p>'
+                 '<img src="a.png" alt="図"></article>', encoding="utf-8")
+    check("正しいページを誤検出しない", dict(rc.scan([f])), {})
+
+    # コード例の中の記法は崩れではない（誤検出すると検査が信用されなくなる）
+    f2 = d / "code" / "index.html"
+    f2.parent.mkdir(parents=True)
+    f2.write_text("<article><pre><code>**太字**の書き方</code></pre></article>",
+                  encoding="utf-8")
+    check("コード例は崩れと数えない", dict(rc.scan([f2])), {})
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -769,7 +819,8 @@ def main():
               test_main_category_actually_grows,
               test_paragraph_split_keeps_text,
               test_anchor_text_stays_readable,
-              test_block_breaks_render_correctly):
+              test_block_breaks_render_correctly,
+              test_rendered_html_is_checked):
         try:
             t()
         except Exception as e:

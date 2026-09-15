@@ -60,7 +60,7 @@ faq:
 
 私たちセブンセンシズ株式会社は、登録支援事業者として補助金の相談を受けています。==「農業は対象外だと思っていた」==という声を経営者からよく聞きますが、実際には収穫後の加工・選別工程で採択された事例が数多くあります。
 
-<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請受付が2026年8月31日に始まり、締切は2026年9月30日18時と案内されています。中小企業者の判定基準は[ものづくり補助金は資本金オーバーでも対象？](/blog/monozukuri-hojokin-chusho-teigi/)で解説しているので、あわせて確認してください。
+<a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>では、申請受付が2026年8月31日に始まり、締切は2026年9月30日18時と案内されています。中小企業者の判定基準は<a href="/blog/monozukuri-hojokin-chusho-teigi/">ものづくり補助金は資本金オーバーでも対象？</a>で解説しているので、あわせて確認してください。
 
 ## 農業の採択事例4パターン｜精米・環境制御・食品加工・畜産
 

@@ -118,7 +118,7 @@ IT導入補助金（AI導入補助金2026）の通常枠は、補助上限額が
 
 最初のGビズIDプライムは発行までに約2〜3週間かかります。**給付金と違い、補助金は準備の段階から時間がかかる**ため、早めの着手が全体スケジュールを左右します。
 
-<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>では、SECURITY ACTIONの宣言も交付申請の必須条件とされています。ステップごとの詳しい期間の目安は[AI導入補助金の申請のやり方｜受給までの5ステップを解説](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/)にまとめています。
+<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>では、SECURITY ACTIONの宣言も交付申請の必須条件とされています。ステップごとの詳しい期間の目安は<a href="https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/">AI導入補助金の申請のやり方｜受給までの5ステップを解説</a>にまとめています。
 
 補助額がいくらになるかは枠ごとに異なります。契約金額から自社の補助額を試算したい場合は、[AI導入補助金はいくらもらえる？3つの枠の上限額と計算例](https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/)を参考にしてください。
 
@@ -138,7 +138,7 @@ IT導入補助金（AI導入補助金2026）の通常枠は、補助上限額が
 
 もう一つの失敗は、交付決定の通知を待たずにツールを契約してしまうことです。中小企業庁が公開する制度概要でも、交付決定前の発注は補助対象外になると明記されています。私も相談の現場で、決定を待てずに契約してしまい対象外になった個人事業主の方を見てきました。
 
-<a href="https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf" target="_blank" rel="noopener">中小企業庁が公開した制度概要</a>を事前に確認しておくと、こうした失敗を防ぎやすくなります。失敗の傾向をさらに詳しく知りたい場合は、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)もあわせて確認してください。
+<a href="https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf" target="_blank" rel="noopener">中小企業庁が公開した制度概要</a>を事前に確認しておくと、こうした失敗を防ぎやすくなります。失敗の傾向をさらに詳しく知りたい場合は、<a href="https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/">AI導入補助金の申請に失敗する5つの原因と対策</a>もあわせて確認してください。
 
 3つ目の失敗は、複数の制度情報を比較せず、最初に見つけた情報だけで判断してしまうことです。同じ「補助金」でも年度によって公募回や要件が変わるため、古い情報のまま申請書類を準備すると差し戻しの原因になります。**申請の直前には必ず公式サイトの最新情報を確認する**習慣をつけてください。
 

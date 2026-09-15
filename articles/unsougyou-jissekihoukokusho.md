@@ -42,7 +42,7 @@ faq:
 
 <div class="target-reader">この記事は、AI導入補助金・IT導入補助金やものづくり補助金で交付決定を受け、これから実績報告書を提出する運送業（一般貨物・軽貨物・個人事業主ドライバーを含む）の経営者・担当者向けです。</div>
 
-<p class="freshness">※ 2026年8月時点の情報です。実績報告の基本手続きは[実績報告の書き方の基本4ステップ](/blog/ai-hojokin-jissekihoukoku-kakikata/)もあわせてご確認ください。</p>
+<p class="freshness">※ 2026年8月時点の情報です。実績報告の基本手続きは<a href="/blog/ai-hojokin-jissekihoukoku-kakikata/">実績報告の書き方の基本4ステップ</a>もあわせてご確認ください。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>運送業の実績報告書で追加になる証憑整理のポイント</li><li>傭車・庸車先分をどう扱えばよいか</li><li>デジタコ・車載器の対象可否</li><li>軽貨物・個人事業主ドライバーの注意点</li></ul></div>
 

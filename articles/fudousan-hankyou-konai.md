@@ -131,7 +131,7 @@ AI検索での見え方は[不動産のAI検索対策](/aio/fudousan-ai-kensaku-
 
 まず自社名・地域名・「賃貸」「売買」などの語でGoogle検索し、自社がどこに表示されるか確認します。表示されない、または情報が古いなら、Googleビジネスプロフィールの登録内容を最新化することから始めます。
 
-<a href="https://support.google.com/business/answer/13763036?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ「ビジネスの適格性とオーナー権限に関するガイドライン」</a>には、賃貸物件や販売物件そのものは掲載対象から除外されると明記されています。物件単体ではなく、営業拠点としての店舗を登録するのが不動産業のルールです。詳しい設定手順は[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)で解説しています。
+<a href="https://support.google.com/business/answer/13763036?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ「ビジネスの適格性とオーナー権限に関するガイドライン」</a>には、賃貸物件や販売物件そのものは掲載対象から除外されると明記されています。物件単体ではなく、営業拠点としての店舗を登録するのが不動産業のルールです。詳しい設定手順は<a href="/meo/fudousan-meo-taisaku/">不動産業がGoogleマップで選ばれるには？</a>で解説しています。
 
 ### 強みが一言で言えない場合
 

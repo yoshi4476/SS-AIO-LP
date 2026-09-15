@@ -134,7 +134,7 @@ diagrams:
 
 <figure><img src="/images/clinic-dx-jirei/ng-ok.png" alt="DX導入のNG・OKパターン比較: NGは導入して終わりにする・一部スタッフしか使えない・効果を測定しない。OKは業務フローごと見直す・全スタッフに操作を定着・月次で指標を確認" loading="lazy"><figcaption>DX導入のNG・OKパターン</figcaption></figure>
 
-<div class="caution-box"><span class="box-title">注意: ツール選定だけで終わらせない</span><br>クリニックのMEO対策で基本情報を整備するのと同様に、DXも「入れて終わり」では効果が出ません。運用ルールまで含めて設計してください。詳しくは[クリニックのMEO対策とは？集患につながる5つの手順](/meo/clinic-meo-taisaku/)でも触れています。</div>
+<div class="caution-box"><span class="box-title">注意: ツール選定だけで終わらせない</span><br>クリニックのMEO対策で基本情報を整備するのと同様に、DXも「入れて終わり」では効果が出ません。運用ルールまで含めて設計してください。詳しくは<a href="/meo/clinic-meo-taisaku/">クリニックのMEO対策とは？集患につながる5つの手順</a>でも触れています。</div>
 
 **失敗パターン1: 導入して終わりにする。**システムを入れた直後は現場が慣れず、一時的に業務が増えたように感じられます。ここで運用を止めてしまうと、投資が回収できません。
 

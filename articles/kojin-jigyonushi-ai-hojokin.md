@@ -120,7 +120,7 @@ faq:
 
 最初のGビズIDプライムは、発行までに約2〜3週間かかります。**個人事業主も法人と同じプライムアカウントが必要で、簡易版のエントリーでは申請できません。**早めの取得が、全体スケジュールを左右します。
 
-<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>によると、SECURITY ACTIONの★一つ星以上の宣言も交付申請の必須条件です。申請全体のステップと期間の目安は[AI導入補助金の申請のやり方｜受給までの5ステップを解説](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/)にまとめています。
+<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>によると、SECURITY ACTIONの★一つ星以上の宣言も交付申請の必須条件です。申請全体のステップと期間の目安は<a href="https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/">AI導入補助金の申請のやり方｜受給までの5ステップを解説</a>にまとめています。
 
 **交付決定の通知が届く前に発注・契約・支払いを済ませると、補助対象から外れます。**この順番は個人事業主でも法人でも共通のルールなので、必ず守ってください。
 

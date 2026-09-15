@@ -133,7 +133,7 @@ GビズIDプライムの発行に要する期間は、目安で約2〜3週間。
 
 1つ目は、==持続化補助金やものづくり補助金にパソコンを含めて申請書を作り込んでしまい、後から対象外だと気づくケースです。==2つ目は、インボイス枠を選んだものの、同時導入する対象ソフトが決まらないまま機種選定を進めてしまうケースです。3つ目は、交付決定前にパソコンを購入・支払いしてしまい、ソフト分もまとめて対象外になるケースです。
 
-<span class="txt-red">交付決定前の購入は、どの制度でも共通のNGパターンです。</span>見積もりが出ても、通知が届くまでは発注を待つ必要があります。申請全体でつまずきやすいポイントは[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも整理しています。
+<span class="txt-red">交付決定前の購入は、どの制度でも共通のNGパターンです。</span>見積もりが出ても、通知が届くまでは発注を待つ必要があります。申請全体でつまずきやすいポイントは<a href="https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/">AI導入補助金の申請に失敗する5つの原因と対策</a>でも整理しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

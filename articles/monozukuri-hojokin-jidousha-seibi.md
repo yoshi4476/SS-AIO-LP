@@ -127,7 +127,7 @@ faq:
 | 500万円 | 塗装ブースまたは洗車機単体 | 250万円 | 333万円 |
 | 1,400万円 | 大型塗装ブース一式 | 700万円 | 933万円 |
 
-<a href="https://rigid-consulting.com/column/jidoushaseibikoujyou/" target="_blank" rel="noopener">前出の解説記事</a>が紹介する採択事例でも、これに近い投資額と補助額の組み合わせが確認できます。契約額に補助率を掛け合わせるだけで、実質負担額を試算できる点は他制度と共通です。試算の考え方は[AI導入補助金はいくらもらえる？](/blog/ai-hojokin-ikura-moraeru/)も参考にしてください。
+<a href="https://rigid-consulting.com/column/jidoushaseibikoujyou/" target="_blank" rel="noopener">前出の解説記事</a>が紹介する採択事例でも、これに近い投資額と補助額の組み合わせが確認できます。契約額に補助率を掛け合わせるだけで、実質負担額を試算できる点は他制度と共通です。試算の考え方は<a href="/blog/ai-hojokin-ikura-moraeru/">AI導入補助金はいくらもらえる？</a>も参考にしてください。
 
 **投資額が大きいほど実質負担額も大きくなるため、まず自社の設備で優先順位をつけてから見積もりを取る**のが試算の近道です。複数設備をまとめて申請すると、1件あたりの手続き負担を減らせる利点もあります。
 
@@ -156,7 +156,7 @@ faq:
 
 車検の繁忙期（3月・9月）に大型設備を入れ替えると、工場の稼働が止まり受け入れ台数に響きます。**閑散期に発注・設置・研修までを終わらせ、繁忙期には運用が安定した状態で臨む**のが理想的な逆算です。
 
-<span class="txt-red">交付決定前に発注した経費は、理由を問わず補助対象になりません。</span>私も相談の現場で、==採択通知を受けてすぐ設備を発注し、交付決定前だったため対象外と指摘された==整備工場を見てきました。申請全体でよくある失敗パターンは[AI導入補助金の申請に失敗する5つの原因と対策](/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも整理しているので、あわせて確認してください。
+<span class="txt-red">交付決定前に発注した経費は、理由を問わず補助対象になりません。</span>私も相談の現場で、==採択通知を受けてすぐ設備を発注し、交付決定前だったため対象外と指摘された==整備工場を見てきました。申請全体でよくある失敗パターンは<a href="/blog/ai-hojokin-shinsei-shippai-yokuaru/">AI導入補助金の申請に失敗する5つの原因と対策</a>でも整理しているので、あわせて確認してください。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
