@@ -97,8 +97,6 @@ faq:
 
 
 関連して、[宿泊業のインバウンド投資を支えた事業再構築補助金、今の姿は](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)もあわせてご確認ください。
-関連する内容は[事業再構築補助金は個人事業主もいつまで？後継3制度の使い方](/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/)で整理しています。
-
 | 申請枠 | 補助率 | 補助上限額 |
 |:--|:--|:--|
 | 通常枠 | 1/2以内（賃上げ要件達成で2/3） | 5万円〜450万円 |
@@ -129,6 +127,8 @@ faq:
 
 **個人事業主の申請でつまずきやすいのは、開業年数の見落とし、書類準備の後回し、GビズID取得の遅れの3パターンです。**制度の複雑さより、準備の順番のミスが原因になっています。
 
+
+あわせて[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)もご覧ください。
 
 関連して、[事業再構築補助金の確定申告｜個人事業主が守る3つの注意点](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)もあわせてご確認ください。
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/ngok.png" alt="個人事業主の申請でよくあるNG・OK: NG例は開業1年未満で申請・証明書取得を後回し・GビズID未取得のまま進める、OK例は開業1年経過を確認・証明書を早めに取得・GビズIDを先に取得"><figcaption>個人事業主の申請でよくあるNG・OK</figcaption></figure>

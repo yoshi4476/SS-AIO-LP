@@ -50,6 +50,8 @@ faq:
 **個人事業主も、要件さえ満たせば法人と同じ条件でものづくり補助金に申請できます。**
 
 
+実際の進め方は[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)でも扱っています。
+
 つまずきやすい点を先に押さえるなら、[ものづくり補助金はクリニックで使える？医療法人は対象外に注意](/hojokin/monozukuri-hojokin-clinic/)が参考になります。
 
 対象になる範囲は、[ものづくり補助金は運送業も対象｜使える設備3分野と車両の線引き](/hojokin/monozukuri-hojokin-unsougyou/)で解説しています。
