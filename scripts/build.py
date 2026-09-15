@@ -131,6 +131,9 @@ ORG_SAME_AS = [
     f"https://alarmbox.jp/companyinfo/entities/{ORG_NUMBER}",
     "https://corp.7senses.co.jp/",
     "https://lp.7senses.co.jp/",
+    # 旧サイト（別業者が運用）。同じ会社のものだと示しておく。
+    # 示さないと、社名の検索で「別の組織」として評価が分かれる
+    "https://www.7senses.co.jp/",
 ]
 
 

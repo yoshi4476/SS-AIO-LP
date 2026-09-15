@@ -6,6 +6,11 @@
   "subsidy": [],
   "_candidates": [
     {
+      "url": "https://it-shien.smrj.go.jp/search/businessdetail/?business_numbering=ITP07-0003698",
+      "note": "IT導入支援事業者として登録済み（事業者番号 ITP07-0003698）。中小企業基盤整備機構の .go.jp ドメイン。ページに「会社URL」欄があり、ここに自社URLが載っていれば公的機関からの被リンクになる。APIが403でプログラムからは中身を取れないため、ブラウザでの目視確認が要る",
+      "status": "登録は確認済み / 会社URL欄の掲載とリンク有無は未確認"
+    },
+    {
       "url": "https://www.7senses.co.jp/",
       "note": "自社の本体サイト。3サイトへのリンクが1本も無い。最優先",
       "status": "未依頼"
@@ -19,11 +24,6 @@
       "url": "https://www.houjin-bangou.nta.go.jp/",
       "note": "法人番号公表サイト。掲載済み",
       "status": "掲載あり"
-    },
-    {
-      "url": "IT導入補助金 支援事業者一覧",
-      "note": "登録支援事業者として掲載されるはず。要確認",
-      "status": "未確認"
     },
     {
       "url": "大阪商工会議所",
