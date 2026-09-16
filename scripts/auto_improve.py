@@ -111,6 +111,18 @@ def record(by, slug, what):
                            ensure_ascii=False) + "\n")
 
 
+def human_items(days=28, until=None):
+    """文章の判断が要るものを、全件そのまま返す。
+
+    画面に出すときは8件で打ち切っているため、出力を読み取る側が
+    残りを取りこぼしていた（27件のうち8件しか拾えていなかった）。
+    """
+    import effect
+    acts = effect.actions(effect.collect(days, until))
+    return [{"kind": x["do"], "slug": x["slug"], "why": x["why"], "how": x["how"]}
+            for x in acts if x["do"] in ("title", "review")]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")

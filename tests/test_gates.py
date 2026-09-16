@@ -917,6 +917,49 @@ def test_long_sentences_are_split():
     check("毎週走る", "split_sentences.py --write" in wf, True)
 
 
+def test_rewrite_is_verified_and_reverted():
+    """文章の判断を任せた直しが、必ず検算され、外れたら戻ること。
+
+    auto_improve は、タイトルと検索意図の見直しを人へ回していた。
+    判断そのものは機械に任せてよいが、**通してよいかを決めるのは機械側**でなければ
+    ならない。検算が無い書き換えは、主張のずれた記事を静かに量産する。
+    """
+    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    check("直しの工程がある", (ROOT / "scripts" / "auto_rewrite.py").is_file(), True)
+
+    # 外れたら必ず元に戻す
+    check("検算に外れたら元に戻す", 'git", "checkout", "--"' in src, True)
+    check("戻したあとビルドし直す",
+          src.count("build.py") >= 2, True)
+
+    # 検算の中身。1つでも欠けると、その穴から壊れた記事が通る
+    for name, key in (("数字を作らせない", "numbers("),
+                      ("出典を消させない", "sources("),
+                      ("狙う語を変えさせない", "狙う語が変わりました"),
+                      ("タイトルの字数", "TITLE_MIN"),
+                      ("警告を増やさせない", "警告が増えました"),
+                      ("食い合いを作らせない", "kw_guard"),
+                      ("ビルドを通す", "ビルドが通りません"),
+                      ("他の記事に触らせない", "別の記事まで変わっています")):
+        check(f"検算: {name}", key in src, True)
+
+    # 台帳に残す（何をいつ直したか追えないと、戻す判断ができない）
+    check("台帳に残す", "auto_fix.jsonl" in src, True)
+
+    # 1回に触る本数を絞る（まとめて当てると原因が分からなくなる）
+    m = re.search(r'"--limit", type=int, default=(\d+)', src)
+    check("1回に触る本数を絞る", bool(m) and int(m.group(1)) <= 5, True)
+
+    # 全権限を飛ばさない。使う道具を読み書きだけに絞る
+    check("権限を全部は飛ばさない", "dangerously-skip-permissions" in src, False)
+    check("使う道具を絞る", "--allowedTools" in src, True)
+
+    # 対象を取りこぼさない（画面表示は8件で打ち切られる）
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import auto_improve
+    check("全件を返す口がある", hasattr(auto_improve, "human_items"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -941,7 +984,8 @@ def main():
               test_block_breaks_render_correctly,
               test_rendered_html_is_checked,
               test_import_has_no_side_effects,
-              test_long_sentences_are_split):
+              test_long_sentences_are_split,
+              test_rewrite_is_verified_and_reverted):
         try:
             t()
         except Exception as e:
