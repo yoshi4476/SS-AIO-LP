@@ -135,7 +135,7 @@ diagrams:
 
 <div class="definition-box"><span class="term">AI参照元セッションとは</span>、chatgpt.com・perplexity.ai・gemini.google.com・copilot.microsoft.com・claude.aiなどからの流入を指します。GA4の参照元レポートで確認できます。<a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener">Googleの役立つコンテンツガイド</a>でも、経験・専門性・権威性・信頼性のうち信頼が最も重要だと説明されています。</div>
 
-当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。直近28日の実測では、291個の検索語からのべ2,156回表示され、7回のクリックがありました。表示のほとんどは、検索順位を持つ記事に構造面の施策を足した後に増えています。
+当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。直近28日の実測では、291個の検索語からのべ2,156回表示され、7回のクリックがありました。表示のほとんどは、検索順位を持つ記事に構造面の施策を足した後に増えています。
 
 GSCの生成AIパフォーマンスレポートはインプレッション中心で、クリックやクエリの内訳が見えない仕様です。この点はGA4のAI参照元セッションと必ず併用してください。片方の数字だけで一喜一憂すると、実際の効果を見誤ります。
 

@@ -84,7 +84,7 @@ AIOコンサルティングとは、**AIの回答に自社が引用されるた�
 - Google検索で20位以内の記事が1本もない（AIO以前にSEOの問題）
 - 何を売りたいかが社内で定まっていない
 
-とくに2つ目です。**AI Overviewへの引用は、Google検索での上位表示がほぼ前提条件**になります。Googleは<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">検索セントラルの公式ドキュメント</a>で「AI OverviewやAIモードに表示されるための追加要件や特別な最適化は不要」と明記しており、通常の検索で評価されることが前提だと読めます。圏外の記事にAIO対策をしても引用されません。順位が先です。
+とくに2つ目です。**AI Overviewへの引用は、Google検索での上位表示がほぼ前提条件**になります。Googleは<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">検索セントラルの公式ドキュメント</a>で「AI OverviewやAIモードに表示されるための追加要件や特別な最適化は不要」と明記しています。通常の検索で評価されることが前提だと読めます。圏外の記事にAIO対策をしても引用されません。順位が先です。
 
 ## AIOコンサルティングの費用の目安
 
