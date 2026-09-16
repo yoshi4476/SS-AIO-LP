@@ -121,11 +121,11 @@ faq:
 
 封入封緘機は、三つ折りと封入・封をする作業を自動化する機器です。導入コストはかかりますが、発送枚数が多い会社では手作業の時間を大きく減らせます。発送枚数がそれほど多くない場合にまず見直すべきは、機器の導入ではなく折る順番と重ねる順番のルール統一。社内でルールを統一するだけでも作業のばらつきは減ります。
 
-発送業務そのものを含めて経理業務全体を外部に任せる場合は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)で任せられる範囲を確認できます。請求書の発行にかかる手数料相場は、[請求書発行の手数料相場【2026年】依頼先別の料金と内訳](/blog/seikyusho-hakko-tesuryo-souba/)で解説しています。
+発送業務そのものを含めて経理業務全体を外部に任せる場合は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)で任せられる範囲を確認できます。請求書の発行にかかる手数料相場は、[請求書発行の手数料相場依頼先別の料金と内訳](/blog/seikyusho-hakko-tesuryo-souba/)で解説しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
-外注費として請求書を発行する側の書き方は、[外注費の請求書の書き方｜記載必須項目とインボイス対応](/blog/gaichuuhi-seikyuusho-kakikata/)で確認できます。銀行振込で請求書を支払う手順は、[請求書を銀行振込で支払う手順｜先に確認する5つのポイント](/blog/seikyusho-ginko-furikomi-yarikata/)にまとめています。
+外注費として請求書を発行する側の書き方は、[外注費の請求書の書き方｜記載必須項目とインボイス対応](/blog/gaichuuhi-seikyuusho-kakikata/)で確認できます。銀行振込で請求書を支払う手順は、[請求書を銀行振込で支払う手順](/blog/seikyusho-ginko-furikomi-yarikata/)にまとめています。
 
 ## よくある質問
 

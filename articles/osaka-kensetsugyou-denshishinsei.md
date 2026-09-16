@@ -42,7 +42,7 @@ faq:
 
 **建設業は業種として除外されていません。**満たすべきは規模・形態・ソフト・時期・体制の5つです。
 
-あわせて[クリーニング店のAI導入補助金 対象要件｜取次店とフランチャイズの判定【2026年】](/blog/kurininguten-ai-hojokin-taisho-youken/)もご覧ください。
+あわせて[クリーニング店のAI導入補助金 対象要件](/blog/kurininguten-ai-hojokin-taisho-youken/)もご覧ください。
 
 <div class="definition-box"><span class="term">中小企業デジタル化・AI導入支援事業とは</span>、中小企業や小規模事業者がソフトウェアを導入する費用の一部を国が補助する制度です。==旧称のIT導入補助金で呼ばれることが多く、検索でもその名前で探されています==。</div>
 

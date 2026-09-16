@@ -52,7 +52,7 @@ diagrams:
 
 AIOが対象にするのはGoogle検索のAI Overview・AIモードです。一方で==LLMOはChatGPT・Perplexity・Gemini・Claudeなど個別のAIチャットサービスを対象にします==。
 
-不動産のAI検索対策の全体像は[不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップ](/aio/fudousan-ai-kensaku-taisaku/)で解説しています。LLMOの基本的な考え方は[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)にまとめました。
+不動産のAI検索対策の全体像は[不動産のAI検索対策](/aio/fudousan-ai-kensaku-taisaku/)で解説しています。LLMOの基本的な考え方は[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)にまとめました。
 
 両者は施策の多くが重なりますが、プラットフォームごとに重視するシグナルが違うため、狙う相手に応じて優先順位を調整する必要があります。この違いを押さえずに「AI検索対策」を一括りにすると、ChatGPTには効くのにPerplexityには効かない、といったズレが起きやすくなります。
 
@@ -135,7 +135,7 @@ GA4のAI参照元セッションとSearch Consoleの生成AIパフォーマン�
 
 **Google上位表示が前提のため、AIOを整えた上でLLMOに取り組む順番が効率的です。**AI Overviewの多くはGoogle検索の上位ページを参照して作られるため、検索順位そのものが土台になります。
 
-<a href="https://ahrefs.com/ja/blog/ai-overviews-reduce-clicks-june-2026/" target="_blank" rel="noopener">Ahrefsが2026年6月時点で公表した調査</a>によると、日本の情報系キーワードで検索1位でも、AI Overview表示によりクリック率は62.7%減少しています。**検索順位を維持するだけでは反響が減り続ける時代**に入っています。
+<a href="https://ahrefs.com/ja/blog/ai-overviews-reduce-clicks-june-2026/" target="_blank" rel="noopener">Ahrefsが2026年6月時点で公表した調査</a>によると、日本の情報系キーワードで検索1位でも、AI Overview表示によりクリック率は62.7%減少しています。<strong>検索順位を維持するだけでは反響が減り続ける時代</strong>に入っています。
 
 だからこそ、AIOで検索上位とAI Overviewでの引用を押さえます。そのうえでChatGPTやPerplexityにも同じ情報が届くよう、LLMOを重ねる二段構えが合理的です。一次情報の明文化やFAQ整備など、実務で重なる施策も多いため、二重に作業が増えるわけではありません。
 
@@ -174,4 +174,4 @@ GA4では、chatgpt.com・perplexity.ai・gemini.google.comなどをAI経由の�
 
 不動産のLLMO対策は、一次情報を数値で明文化し、比較表・FAQを整え、クロールを許可したうえで計測を続けるという土台の上に成り立ちます。ChatGPT・Perplexity・Geminiで重視される基準が異なることを踏まえ、Google上位表示を軸にしたAIOと合わせて取り組むのが効率的です。
 
-まずはステップ1の一次情報の明文化を今週中に見直してください。AIに選ばれるかどうかを分けるのは、情報の具体性という地道な差。不動産のマップ表示を軸にした施策は[不動産業がGoogleマップで選ばれるには？店舗情報の整え方](/meo/fudousan-meo-taisaku/)、反響そのものを増やす視点は[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)でも詳しく解説しています。
+まずはステップ1の一次情報の明文化を今週中に見直してください。AIに選ばれるかどうかを分けるのは、情報の具体性という地道な差。不動産のマップ表示を軸にした施策は[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)、反響そのものを増やす視点は[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)でも詳しく解説しています。

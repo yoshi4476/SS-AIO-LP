@@ -144,7 +144,7 @@ faq:
 
 開業期に経理代行を選ぶ際は、少額の取引数から契約できるか・税理士との連携実績があるか・使う予定の会計ソフトに対応しているかを確認してください。
 
-実際の例は、[経理代行の失敗5パターン｜原因と防ぐための確認ポイント](/blog/keiri-daiko-shippai/)で解説しています。
+実際の例は、[経理代行の失敗5パターン](/blog/keiri-daiko-shippai/)で解説しています。
 
 <figure><img src="/images/keiri-daiko-kaigyou/erabikata.png" alt="開業期の経理代行の選び方3つのポイント: 少額の取引数から契約できるか、税理士との連携実績があるか、使う予定の会計ソフトに対応しているか" loading="lazy"><figcaption>開業期の経理代行の選び方3つのポイント</figcaption></figure>
 

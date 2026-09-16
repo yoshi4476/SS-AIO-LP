@@ -50,7 +50,7 @@ faq:
 
 関連する内容は、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)で解説しています。
 
-費用の目安を先に押さえるなら、[BtoB向けAIO対策会社の選び方｜比較5基準と費用相場](/aio/btob-aio-taisaku-kaisha/)が参考になります。
+費用の目安を先に押さえるなら、[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)が参考になります。
 
 <div class="definition-box"><span class="term">AIO対策でAIに引用されるとは</span>、ChatGPTやGoogleのAI Overviewなどの生成AIが、回答を組み立てる際に特定のWebページを根拠として採用し、その内容や運営者名を回答に含めることを指します。</div>
 

@@ -49,7 +49,7 @@ faq:
 
 **AIO SEO監査とは、既存のSEO監査項目に、AI検索への引用しやすさを確認する視点を追加した点検作業です。**
 
-前提となる考え方については、[AIO SEO対策とは？両方に効く6つの施策と進める順番](/aio/aio-seo-taisaku/)にまとめています。
+前提となる考え方については、[AIO SEO対策とは？](/aio/aio-seo-taisaku/)にまとめています。
 
 <div class="definition-box"><span class="term">AIO SEO監査とは</span>、タイトル・メタ情報・表示速度といった従来のSEO監査項目に加え、AIクローラーの許可状況や構造化データ、書き出しの構造まで確認することです。</div>
 

@@ -145,7 +145,7 @@ FAQの回答は、質問文の言葉を繰り返しながら40〜60字で単体�
 
 <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Googleが公開する生成AI向け最適化ガイド</a>でも、構造化データより「抽出しやすい本文構造」が重視されると説明されています。文章の型を整えることは、Schemaの実装と同じくらい実務上の優先度が高い作業です。
 
-計測方法は[AIO対策の計測方法｜見るべき5つの指標と週次の運用手順](/aio/aio-taisaku-keisoku-houhou/)、やってはいけない行動全般は[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)もあわせて確認してください。
+計測方法は[AIO対策の計測方法](/aio/aio-taisaku-keisoku-houhou/)、やってはいけない行動全般は[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)もあわせて確認してください。
 
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
