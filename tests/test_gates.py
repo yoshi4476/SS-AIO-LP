@@ -868,6 +868,55 @@ def test_import_has_no_side_effects():
     check("全スクリプトが安全に読み込める", broke, [])
 
 
+def test_long_sentences_are_split():
+    """長すぎる1文が、意味を変えずに分かれること。
+
+    切ってよいのは「左がそれだけで文として成り立つ形」だけ。
+    「〜によると、」「〜し、」で切ると主語と述語がねじれる。
+    「が」は逆接とは限らず、前置きの「が」に「ただし」を足すと意味がずれる。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import split_sentences as ss
+    nl = chr(10)
+
+    long_ok = "あ" * 40 + "を運用しており、" + "い" * 40 + "という結果になりました。"
+    out = ss.split_sentence(long_ok)
+    check("連用中止法で分ける", out and "しています。" in out, True)
+
+    reason = "あ" * 40 + "が公開されているため、" + "い" * 40 + "を先に確認します。"
+    out = ss.split_sentence(reason)
+    check("理由の「ため」を「そのため」で受け直す",
+          out and "そのため、" in out, True)
+
+    # 左が文にならない形では切らない
+    for bad in ("によると、", "を使い、", "が必要なため、"):
+        s = "あ" * 40 + bad + "い" * 40 + "です。"
+        out = ss.split_sentence(s)
+        if bad == "が必要なため、":
+            continue          # 「ため」は受け直せるので対象
+        check(f"「{bad}」では切らない", out, None)
+
+    # 前置きの「が」には「ただし」を足さない
+    preface = "あ" * 40 + "について解説していますが、" + "い" * 20 + "は対象外です。"
+    check("前置きの「が」は切らない", ss.split_sentence(preface), None)
+
+    # 装飾の内側では切らない
+    deco = "あ" * 30 + "**" + "い" * 20 + "しており、" + "う" * 20 + "**" + "え" * 30 + "です。"
+    out = ss.split_sentence(deco)
+    check("装飾の内側では切らない", out is None or out.count("**") % 2 == 0, True)
+
+    # 検算: 記録した書き換え以外は動いていない
+    body = nl.join(["---", "title: x", "---", long_ok])
+    after, n, edits = ss.process(body)
+    check("分けた数を記録する", n, len(edits))
+    check("検算が通る", ss.verify(body, after, edits), "")
+    check("食い違いを見つける",
+          bool(ss.verify(body, after + "余計な文字", edits)), True)
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週走る", "split_sentences.py --write" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -891,7 +940,8 @@ def main():
               test_anchor_text_stays_readable,
               test_block_breaks_render_correctly,
               test_rendered_html_is_checked,
-              test_import_has_no_side_effects):
+              test_import_has_no_side_effects,
+              test_long_sentences_are_split):
         try:
             t()
         except Exception as e:

@@ -175,6 +175,12 @@ jobs:
       - name: 長すぎる段落を分ける
         run: python scripts/split_paragraphs.py --all --write || true
 
+      # 段落を分ける工程は「。」の位置でしか切れない。1文が100字を超えるものは
+      # その中に「。」が無いので手が出せなかった。左がそれだけで文になる形に限れば、
+      # 意味を変えずに機械で分けられる
+      - name: 長すぎる1文を分ける
+        run: python scripts/split_sentences.py --write || true
+
       - name: 効果の出ていない記事を自動で手当てする
         run: python scripts/auto_improve.py --write || true
 
