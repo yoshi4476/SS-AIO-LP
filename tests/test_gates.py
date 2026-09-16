@@ -820,6 +820,54 @@ def test_rendered_html_is_checked():
     check("コード例は崩れと数えない", dict(rc.scan([f2])), {})
 
 
+def test_import_has_no_side_effects():
+    """読み込むだけで外へ出ていくスクリプトが無いこと。
+
+    notify_indexnow.py は処理をモジュール直下に書いていたため、
+    `import notify_indexnow` した瞬間にIndexNowへ送信していた。
+    実際、検査のために読み込んだだけで136件のURLを送ってしまった。
+    副作用は必ず main() の中に置き、__main__ ガードで囲う。
+    """
+    import ast
+    print("\n■ 読み込みの副作用")
+    OUT = ("urlopen", "urlretrieve", "post", "put", "get", "request", "run",
+           "check_output", "call", "Popen", "write_text", "write_bytes", "unlink")
+    ng = []
+    for p in sorted((ROOT / "scripts").glob("*.py")):
+        src = p.read_text(encoding="utf-8", errors="replace")
+        tree = ast.parse(src)
+        has_main = any(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                       and n.name == "main" for n in tree.body)
+        if has_main and '__name__ == "__main__"' not in src \
+                and "__name__ == '__main__'" not in src:
+            ng.append(f"{p.name}: main() があるのに __main__ ガードが無い")
+        # モジュール直下で外に出ていく呼び出しをしていないか
+        for n in tree.body:
+            if not isinstance(n, ast.Expr):
+                continue
+            for c in ast.walk(n):
+                if isinstance(c, ast.Call):
+                    f = c.func
+                    name = f.attr if isinstance(f, ast.Attribute) else \
+                        (f.id if isinstance(f, ast.Name) else "")
+                    if name in OUT:
+                        ng.append(f"{p.name}: 読み込み時に {name}() を呼んでいる")
+    check("読み込むだけで動くスクリプトが無い", ng, [])
+
+    # 実際に読み込んでも何も起きないこと（構文だけ見ても分からない）
+    import importlib
+    sys.path.insert(0, str(ROOT / "scripts"))
+    broke = []
+    for p in sorted((ROOT / "scripts").glob("*.py")):
+        try:
+            importlib.import_module(p.stem)
+        except SystemExit:
+            broke.append(f"{p.name}: 読み込みで終了した")
+        except Exception as e:
+            broke.append(f"{p.name}: {type(e).__name__}")
+    check("全スクリプトが安全に読み込める", broke, [])
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -842,7 +890,8 @@ def main():
               test_paragraph_split_keeps_text,
               test_anchor_text_stays_readable,
               test_block_breaks_render_correctly,
-              test_rendered_html_is_checked):
+              test_rendered_html_is_checked,
+              test_import_has_no_side_effects):
         try:
             t()
         except Exception as e:
