@@ -758,7 +758,11 @@ def test_rendered_html_is_checked():
     """
     import tempfile
     sys.path.insert(0, str(ROOT / "scripts"))
+    import md2html
     import render_check as rc
+
+    def md2html_convert(src):
+        return md2html.convert(src)[0]
 
     # ビルドが必ず通ること（単体スクリプトのままだと呼ばれずに終わる）
     b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
@@ -789,6 +793,24 @@ def test_rendered_html_is_checked():
                  '<a href="/seo/x/">解説</a>。</p>'
                  '<img src="a.png" alt="図"></article>', encoding="utf-8")
     check("正しいページを誤検出しない", dict(rc.scan([f])), {})
+
+    # 配信の全方式が同じ検査を通ること。writerごとに書くと方式が増えたとき漏れる。
+    # 実際 external-html と wordpress には検査が無く、表がパイプ記号のまま
+    # 5本配信されていた
+    src = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
+    body = re.search(r"(?s)def main\(\):.*?if cfg\[.type.\] == .self-static.", src)
+    check("配信前の検査が main にある（方式ごとではなく）",
+          bool(body and "render_check.problems(" in body.group(0)), True)
+    check("writerの中に個別の検査を残していない",
+          "raw_markdown_left(" in src, False)
+
+    # 表の列数が合わないと、Markdownは表として扱わず本文にそのまま出す
+    n = chr(10)
+    broken = md2html_convert("| A | B | C |" + n + "|:--|:--|" + n + "| 1 | 2 | 3 |")
+    check("列数の合わない表を崩れとして見つける",
+          any("表の区切り記号" in x[0] for x in rc.problems(broken)), True)
+    good = md2html_convert("| A | B | C |" + n + "|:--|:--|:--|" + n + "| 1 | 2 | 3 |")
+    check("列数の合う表は崩れと数えない", rc.problems(good), [])
 
     # コード例の中の記法は崩れではない（誤検出すると検査が信用されなくなる）
     f2 = d / "code" / "index.html"

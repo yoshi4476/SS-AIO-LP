@@ -31,6 +31,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import md2html  # noqa: E402
+import render_check  # noqa: E402
 import sites as sites_mod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -157,12 +158,8 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     """Next.jsサイト用: 本文HTML込みのJSONを書き出す"""
     html, _ = md2html.convert(body)
     faq = md2html.extract_faq(body)
-
-    # 変換がどこかで止まると、Markdownのまま配信先に届いて段落の無い記事になる。
-    # 配信自体は止めない (欠測より読みにくい記事の方がまし) が、必ず気付けるようにする。
-    left = md2html.raw_markdown_left(html)
-    if left:
-        print(f"  [警告] {meta['slug']}: Markdownが変換されずに残っています — {' / '.join(left)}")
+    # 変換されずに残ったMarkdownの検査は main() に移した。
+    # ここに置くと nextjs-json だけが見られ、他の配信方式が素通りする
 
     # 記事Markdownは自リポジトリの慣習（/images/<slug>/…）で書かれているため、
     # 配信先の実際の画像置き場に合わせてパスを書き換える。
@@ -673,6 +670,13 @@ def main():
     if meta["category"] not in cfg.get("categories", {}):
         raise SystemExit(f"カテゴリ '{meta['category']}' は {cfg['id']} に定義されていません"
                          f"（候補: {', '.join(cfg.get('categories', {}))}）")
+
+    # 描画の崩れは、ここで一度だけ見る。各writerの中に書くと、配信方式が
+    # 増えたときに必ず漏れる（実際 external-html と wordpress には検査が無く、
+    # 表がパイプ記号のまま5本配信されていた）。全方式がこの行を必ず通る。
+    for name, sample, fix in render_check.problems(md2html.convert(body)[0]):
+        print(f"  [警告] {meta['slug']}: {name}"
+              + (f" 「{sample}」" if sample else "") + f" → {fix}")
 
     if cfg["type"] == "self-static":
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")

@@ -27,11 +27,10 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def readable(page):
-    """読者が実際に読む部分だけを取り出す。ヘッダー・スクリプト・コードは外す"""
+    """読者が実際に読む部分だけを取り出す。ヘッダーやナビは外す"""
     m = re.search(r"(?s)<article.*?</article>", page) or \
         re.search(r"(?s)<main.*?</main>", page)
-    body = m.group(0) if m else page
-    return re.sub(r"(?s)<(script|style|pre|code|textarea).*?</\1>", "", body)
+    return m.group(0) if m else page
 
 
 # 症状 → (説明, 見つけ方, 直し方)
@@ -57,17 +56,28 @@ SYMPTOMS = [
 ]
 
 
+def problems(fragment):
+    """HTMLの断片を見て [(症状, 例, 直し方)] を返す。空なら崩れなし
+
+    ページ全体でも記事本文だけでも使える。配信の各経路で別々に検査を書くと
+    経路が増えたときに漏れるため、見つけ方はここ1箇所に置く。
+    """
+    x = re.sub(r"(?s)<(script|style|pre|code|textarea).*?</\1>", "", fragment)
+    t = H.unescape(re.sub(r"<[^>]+>", "", x))
+    out = []
+    for name, test, fix in SYMPTOMS:
+        hit = test(t, x)
+        if hit:
+            out.append((name, hit.group(0)[:44] if hasattr(hit, "group") else "", fix))
+    return out
+
+
 def scan(pages):
     found = collections.defaultdict(list)
     for f in pages:
-        raw = f.read_text(encoding="utf-8", errors="replace")
-        x = readable(raw)
-        t = H.unescape(re.sub(r"<[^>]+>", "", x))
-        for name, test, _ in SYMPTOMS:
-            hit = test(t, x)
-            if hit:
-                s = hit.group(0)[:44] if hasattr(hit, "group") else ""
-                found[name].append((f, s))
+        body = readable(f.read_text(encoding="utf-8", errors="replace"))
+        for name, sample, _ in problems(body):
+            found[name].append((f, sample))
     return found
 
 
