@@ -141,3 +141,5 @@
 - [AIO SEO監査とは？既存SEO監査に足す7つの視点](https://ai.7senses.co.jp/aio/aio-seo-audit/): AIO SEO監査とは、通常のSEO監査にAI検索対策の視点を足して点検する作業です。追加すべき7項目と社内で完結する4つの手順、優先順位のつけ方まで解説します。
 - [AIO SEO対策とは？両方に効く6つの施策と進める順番](https://ai.7senses.co.jp/aio/aio-seo-taisaku/): AIO SEO対策とは、AI検索への引用と自然検索の上位表示を同時に狙う施策です。両方に効く6つの具体策と、実行する4ステップの順番、やってはいけないNG例まで実務から解説します。
 - [不動産のLLMO対策とは？AIに選ばれる5つの条件](https://ai.7senses.co.jp/aio/fudousan-llmo-taisaku/): 不動産のLLMO対策とは、ChatGPTやPerplexityが物件相談・会社選びに答える際、自社の情報が引用されるよう整備することです。プラットフォーム別の基準と5つの実践施策を解説します。
+- [AI検索対応とは？公開前に済ませる7つの設定項目](https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/): AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。
+- [AIO集客とは？向いている業種と始める3つの基準](https://ai.7senses.co.jp/aio/aio-shukyaku/): AIO集客とは、AIの回答内で自社の情報が引用され、問い合わせにつながる状態をつくる取り組みです。向いている業種の見分け方、始める前に確認する3条件を解説します。

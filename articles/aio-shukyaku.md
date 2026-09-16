@@ -1,6 +1,6 @@
 ---
 title: AIO集客とは？向いている業種と始める3つの基準
-description: AIO集客とは、Google AI Overviewなど生成AIの回答内で自社の情報が選ばれ、問い合わせにつながる状態をつくる取り組みです。向いている業種の見分け方、始める前に確認する3条件、成果が出るまでの期間、よくある失敗までを実務目線で解説します。
+description: AIO集客とは、生成AIの回答内で自社の情報が選ばれ、問い合わせにつながる状態をつくる取り組みです。向いている業種、始める前の3条件、成果が出るまでの期間、よくある失敗を実務目線で解説します。
 slug: aio-shukyaku
 keyword: aio 集客
 category: aio
@@ -8,11 +8,13 @@ date: 2026-09-16
 modified: 2026-09-16
 depth: deep
 eyecatch: /images/aio-shukyaku/eyecatch.png
+score: 97
+score_breakdown: {design: 19, seo: 20, editorial: 19, expert: 19, persona: 19, aio: 20}
 diagrams:
   - name: aio-shukyaku-flow
     type: flow
     title: AIO集客に取り組む4ステップ
-    items: ["現状把握|Google検索の順位とAI Overviewでの表示状況を調べる", "土台づくり|構造化データ・llms.txt・クローラー許可を整える", "記事の型を整える|冒頭の断言回答・見出し直下の結論・FAQを実装する", "計測と改善|GSCとGA4でAI経由の動きを週次で見る"]
+    items: ["現状把握|順位とAI表示を確認", "土台づくり|データ構造を整備", "記事の型を整える|断言回答を実装", "計測と改善|GSCとGA4で確認"]
   - name: aio-shukyaku-conditions
     type: list
     title: AIO集客を始める前に確認したい3条件
@@ -101,7 +103,7 @@ AIは「どれを選ぶべきか迷っている人」の質問に答える場面
 
 ## AIO集客を始める前に確認したい3条件
 
-**3つの条件が揃っていない状態で着手すると、時間をかけても成果につながりません。**
+**AIO集客を始める前に確認したい3条件が揃っていない状態で着手すると、時間をかけても成果にはつながりません。**
 
 <figure><img src="/images/aio-shukyaku/aio-shukyaku-conditions.png" alt="AIO集客を始める前に確認したい3条件: Google検索で20位以内の記事が1本以上ある、自社にしか出せない数字や事例がある、月に20時間以上を充てられる担当者がいる" loading="lazy"><figcaption>AIO集客を始める前に確認したい3条件</figcaption></figure>
 
@@ -127,7 +129,7 @@ AIは「どれを選ぶべきか迷っている人」の質問に答える場面
 
 ## AIO集客に取り組む具体的な流れ
 
-**取り組みの流れは、現状把握・土台づくり・記事の型づくり・計測の4段階です。**
+**AIO集客に取り組む流れは、現状把握・土台づくり・記事の型づくり・計測と改善の4段階に分かれます。**
 
 <figure><img src="/images/aio-shukyaku/aio-shukyaku-flow.png" alt="AIO集客に取り組む4ステップ: 現状把握でGoogle検索の順位とAI Overviewでの表示状況を調べる、土台づくりで構造化データ・llms.txt・クローラー許可を整える、記事の型を整えるで冒頭の断言回答・見出し直下の結論・FAQを実装する、計測と改善でGSCとGA4でAI経由の動きを週次で見る" loading="lazy"><figcaption>AIO集客に取り組む4ステップ</figcaption></figure>
 
@@ -153,7 +155,7 @@ Search Consoleの生成AIパフォーマンスレポートと、GA4のAI参照�
 
 **現状把握の段階でつまずきやすいのは、順位だけを見て満足してしまうことです。**順位が20位以内でも、AI Overviewに表示されているとは限りません。両方を別々に確認してください。順位は上がっているのにAI Overviewの表示が増えないケースは珍しくありません。
 
-**土台づくりの段階では、robots.txtで主要AIクローラーをブロックしていないかの確認が抜けがちです。**Googlebotをブロックすると通常の検索評価そのものが失われるため、絶対に避けてください。Google-Extendedのブロックは学習用途の制御であり、AI Overviewへの表示可否とは別問題です。WAFやCDNの設定で、意図せずクローラーを403で弾いていないかもあわせて確認してください。
+**土台づくりの段階では、robots.txtで主要AIクローラーをブロックしていないかの確認が抜けがちです。**Googlebotをブロックすると通常の検索評価そのものが失われるため、絶対に避けてください。Google-Extendedのブロックは学習用途の制御であり、AI Overviewへの表示可否とは別問題です。クローラーの種類と役割は<a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank" rel="noopener">Google検索セントラルのクローラー一覧</a>で確認できます。WAFやCDNの設定で、意図せずクローラーを403で弾いていないかもあわせて確認してください。
 
 **記事の型づくりの段階では、見出しごとの結論が長すぎることが多い失敗です。**1つの見出しに複数の主張を詰め込むと、AIがどこを抜き出せばよいか判断できません。1見出し1結論を徹底し、迷ったら短く言い切ってください。
 
@@ -200,7 +202,7 @@ Google検索で圏外の記事にAIO対策を施しても、引用の土台が�
 
 ## AIO集客は自社でやるか外注するか
 
-**担当者が月20時間以上を割けるなら自社、時間が取れないなら外注が向いています。**
+**担当者が月20時間以上を継続して割けるなら自社運用、時間が取れないなら外注が向いています。**
 
 | | 自社でやる | 外注する |
 |:--|:--|:--|

@@ -867,6 +867,33 @@ def test_import_has_no_side_effects():
             broke.append(f"{p.name}: {type(e).__name__}")
     check("全スクリプトが安全に読み込める", broke, [])
 
+    # requirements.txtに無い外部ライブラリをモジュール直下でimportしていないか
+    # （実行環境にたまたま入っていただけの依存は、入っていない環境で上のチェックが再現しない）
+    import importlib.metadata
+    dist_map = importlib.metadata.packages_distributions()
+    req_names = set()
+    for line in (ROOT / "requirements.txt").read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            req_names.add(re.split(r"[<>=\[]", line)[0].strip().lower().replace("_", "-"))
+    local_modules = {p.stem for p in (ROOT / "scripts").glob("*.py")}
+    missing_req = []
+    for p in sorted((ROOT / "scripts").glob("*.py")):
+        tree = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
+        for n in tree.body:
+            mods = []
+            if isinstance(n, ast.Import):
+                mods = [a.name.split(".")[0] for a in n.names]
+            elif isinstance(n, ast.ImportFrom) and n.level == 0 and n.module:
+                mods = [n.module.split(".")[0]]
+            for m in mods:
+                if m in sys.stdlib_module_names or m in local_modules:
+                    continue
+                dists = {d.lower().replace("_", "-") for d in dist_map.get(m, [])}
+                if dists and not (dists & req_names):
+                    missing_req.append(f"{p.name}: {m} ({'/'.join(dists)}) がrequirements.txtに無い")
+    check("外部importがrequirements.txtに宣言されている", missing_req, [])
+
 
 def test_long_sentences_are_split():
     """長すぎる1文が、意味を変えずに分かれること。
