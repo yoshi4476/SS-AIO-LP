@@ -167,6 +167,9 @@ GA4では、chatgpt.com・perplexity.ai・gemini.google.comなどをAI経由の�
 <details><summary>小さな不動産会社でもLLMO対策は効果がありますか？</summary><p class="faq-a">あります。AIは会社の規模より情報の具体性を評価するため、中小会社にも機会があります。</p></details>
 </div>
 
+
+自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
+
 ## まとめ: 不動産のLLMOはプラットフォームごとの基準を押さえることから
 
 不動産のLLMO対策は、一次情報を数値で明文化し、比較表・FAQを整え、クロールを許可したうえで計測を続けるという土台の上に成り立ちます。ChatGPT・Perplexity・Geminiで重視される基準が異なることを踏まえ、Google上位表示を軸にしたAIOと合わせて取り組むのが効率的です。
