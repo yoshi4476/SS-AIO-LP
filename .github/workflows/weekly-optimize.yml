@@ -184,6 +184,13 @@ jobs:
       - name: 効果の出ていない記事を自動で手当てする
         run: python scripts/auto_improve.py --write || true
 
+      # auto_improve が「人が判断」として回していた分を、ここで直す。
+      # 判断は claude がし、通してよいかは機械が決める。検算に1つでも外れたら
+      # git checkout で元に戻すので、悪い書き換えは残らない。
+      # 1回2本に絞るのは、まとめて当てると戻すときに原因が分からなくなるため
+      - name: タイトル・検索意図の直し
+        run: python scripts/auto_rewrite.py --write --limit 2 || true
+
       # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
       # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。
       # 実測で同じ一文がリンク文の41.5%を占めていた

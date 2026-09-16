@@ -959,6 +959,12 @@ def test_rewrite_is_verified_and_reverted():
     import auto_improve
     check("全件を返す口がある", hasattr(auto_improve, "human_items"), True)
 
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週走る", "auto_rewrite.py --write" in wf, True)
+    # 積み上がりの見直しより前に置く。後ろだと、当てた週は見直されないまま公開される
+    check("見直しより前に置く",
+          wf.index("auto_rewrite.py") < wf.index("auto_review.py --fix"), True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
