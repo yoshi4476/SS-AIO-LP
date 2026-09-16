@@ -60,7 +60,9 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 
 第一に、**病院探しは「地域名×診療科」のマップ検索が起点になっている**ことです。クリニックの商圏は半径数キロと狭く、患者さんは「通える範囲」でしか探しません。この条件はマップ検索と完全に一致します。
 
-第二に、口コミが受診の意思決定を左右することです。<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読んでいます**。米国の消費者1,026人を対象とした調査です。口コミの確認先としては**83%がGoogleを利用**しています。体への不安を伴う医療機関選びでは、口コミを読む姿勢はさらに慎重になります。
+第二に、口コミが受診の意思決定を左右することです。<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、**消費者の71%が地域の店や施設を探す際に口コミを日常的に読んでいます**。
+
+米国の消費者1,026人を対象とした調査です。口コミの確認先としては**83%がGoogleを利用**しています。体への不安を伴う医療機関選びでは、口コミを読む姿勢はさらに慎重になります。
 
 | データ | 数値 | 出典 |
 |:--|:--|:--|

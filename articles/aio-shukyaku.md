@@ -60,9 +60,11 @@ SEO集客とAIO集客は、ゴールにしている場面が違います。SEO�
 | 主な計測指標 | 順位・表示回数・CTR | AI Overview表示回数・引用有無 |
 | 有利になる要素 | 被リンク・更新頻度 | 断言的な結論・一次情報・構造化データ |
 
-AI OverviewはGooglebotが集めた検索結果を土台に生成されるため、AIO集客は無関係な話ではなく、SEOの延長線上にあります。Googleは<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">検索セントラルの公式ドキュメント</a>で、AI Overview向けの特別な最適化は不要だと説明しています。つまり、まずSEOで評価される記事を作り、そのうえでAIが抽出しやすい構造に整えるのが正しい順番です。
+AI OverviewはGooglebotが集めた検索結果を土台に生成されます。そのため、AIO集客は無関係な話ではなく、SEOの延長線上にあります。Googleは<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">検索セントラルの公式ドキュメント</a>で、AI Overview向けの特別な最適化は不要だと説明しています。つまり、まずSEOで評価される記事を作り、そのうえでAIが抽出しやすい構造に整えるのが正しい順番です。
 
-似た言葉に「LLMO集客」があります。LLMOはChatGPTやPerplexityなど対話型AIでの引用と問い合わせ導線に焦点を当てた考え方で、AIOはGoogle検索領域の引用を中心に扱います。導線設計の詳しい違いは[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)、AIO・SEO・MEOの全体の使い分けは[AIO・SEO・MEOの違いと使い分け｜店舗が今やるべき順番](/aio/aio-seo-meo-chigai/)にまとめています。
+似た言葉に「LLMO集客」があります。LLMOはChatGPTやPerplexityなど対話型AIでの引用と問い合わせ導線に焦点を当てた考え方で、AIOはGoogle検索領域の引用を中心に扱います。
+
+導線設計の詳しい違いは[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)、AIO・SEO・MEOの全体の使い分けは[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)にまとめています。
 
 ## AIO集客が向いている業種・向いていない業種
 
@@ -149,7 +151,7 @@ AIは「どれを選ぶべきか迷っている人」の質問に答える場面
 
 Search Consoleの生成AIパフォーマンスレポートと、GA4のAI参照元セッション（ChatGPT・Perplexity・Gemini・Copilot・Claude経由）を週次で確認します。表示回数が伸びているのに引用が増えない場合は、構造の見直しが必要なサインです。
 
-計測方法をさらに詳しく知りたい場合は、[AIO対策の計測方法｜見るべき5つの指標と週次の運用手順](/aio/aio-taisaku-keisoku-houhou/)を参考にしてください。
+計測方法をさらに詳しく知りたい場合は、[AIO対策の計測方法](/aio/aio-taisaku-keisoku-houhou/)を参考にしてください。
 
 ### 4段階でつまずきやすいポイント
 
@@ -225,7 +227,7 @@ Google検索で圏外の記事にAIO対策を施しても、引用の土台が�
 
 逆に、記事がまだ10本未満で土台がない場合や、Google検索で20位以内の記事が1本もない場合は、外注する段階ではありません。まずSEOの基礎固めから着手してください。
 
-自社でやると決めた場合の進め方は[AIO対策は自分でできる？無料で始める5つの手順と3つの限界](/aio/aio-taisaku-jibunde/)に、外注を検討する場合の判断基準と費用感は[AIOコンサルティングとは？依頼の判断基準と費用の目安](/aio/aio-taisaku-guide/)に詳しくまとめています。
+自社でやると決めた場合の進め方は[AIO対策は自分でできる？](/aio/aio-taisaku-jibunde/)に、外注を検討する場合の判断基準と費用感は[AIOコンサルティングとは？](/aio/aio-taisaku-guide/)に詳しくまとめています。
 
 AI経由の流入を何で測るかは、必ず契約前に確認してください。Search Consoleの生成AIパフォーマンスレポートとGA4の参照元、両方を使うのが標準です（<a href="https://support.google.com/webmasters/answer/16984139?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ</a>）。順位表だけを提出してくる相手とは、成果の証明ができません。
 

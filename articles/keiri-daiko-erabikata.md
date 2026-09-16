@@ -60,7 +60,9 @@ faq:
 
 記帳代行の費用相場は、[記帳代行の費用相場｜依頼先別の料金と抑える4つのコツ](https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba/)で詳しく比較しています。
 
-経理BPOとの違いや業務範囲の全体像は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)もあわせて確認してください。対応範囲を経理BPOまで広げて比較したい場合は、[経理BPOの選び方6つ｜失敗しない比較の視点と手順](https://corp.7senses.co.jp/blog/keiri-bpo-erabikata/)が参考になります。
+経理BPOとの違いや業務範囲の全体像は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)もあわせて確認してください。
+
+対応範囲を経理BPOまで広げて比較したい場合は、[経理BPOの選び方6つ｜失敗しない比較の視点と手順](https://corp.7senses.co.jp/blog/keiri-bpo-erabikata/)が参考になります。
 
 3つ目の違いは契約の柔軟性です。記帳代行は単純作業の代行に近いため契約条件がシンプルですが、経理代行は業務範囲が広がる分、繁忙期対応や例外処理の扱いを契約時に細かく取り決めておく必要があります。
 
