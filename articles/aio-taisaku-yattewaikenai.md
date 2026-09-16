@@ -141,7 +141,9 @@ AIO対策はゼロクリック検索を前提にした施策です。クリッ�
 
 <figure><img src="/images/aio-taisaku-yattewaikenai/junban.png" alt="NG行動をやめて立て直す4ステップ: 今日はrobots.txtと検索順位を確認、1週目はFAQ本文とSchemaの一致を確認、2週目は量産記事に自社事例を追加、月1回はCV導線とAI参照セッションを計測" width="1200" height="675" loading="lazy"><figcaption>NG行動をやめて立て直す4ステップ（当メディア作成）</figcaption></figure>
 
-順位とクロール許可に問題がなければ、[AIO対策でAIに引用されるには？5つの実践ポイント](/aio/aio-taisaku-ai-inyou-sareru/)で紹介している冒頭200字の断言回答とH2直下の1文結論を、量産気味だった記事から順に足していきます。[AIO対策の注意点とは？始める前に知る7つの落とし穴](/aio/aio-taisaku-chuiten/)もあわせて確認すると、NG行動と注意点の両面から抜け漏れを防げます。
+順位とクロール許可に問題がなければ、[AIO対策でAIに引用されるには？5つの実践ポイント](/aio/aio-taisaku-ai-inyou-sareru/)で紹介している冒頭200字の断言回答とH2直下の1文結論を、量産気味だった記事から順に足していきます。
+
+[AIO対策の注意点とは？始める前に知る7つの落とし穴](/aio/aio-taisaku-chuiten/)もあわせて確認すると、NG行動と注意点の両面から抜け漏れを防げます。
 
 自社で対応しきれない場合は、[AIO対策の導入方法](/aio/aio-taisaku-donyu-hoho/)で進め方6ステップと費用の目安を確認してください。まず[AIO対策の無料ツール6選](/aio/aio-taisaku-muryou-tool/)で自社の現状を数値で把握してから着手すると、5つのNG行動のどこに当てはまっているかが見えやすくなります。
 

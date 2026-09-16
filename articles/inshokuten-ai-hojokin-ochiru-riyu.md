@@ -163,7 +163,9 @@ faq:
 
 **この5項目を順に自己点検するだけでも、次回の計画書の説得力は大きく変わります。**通知書に書かれた理由だけを見て対策すると、飲食店特有のつまずきを見落としがちです。自分の店の言葉で、AI活用と数字を語れるようにしておくことが、次回の採択への近道になります。
 
-申請の流れ全体は[AI導入補助金の申請のやり方](/blog/ai-hojokin-shinsei-yarikata/)、対象になるツールの分野は[AI導入補助金の対象ツール6分野｜対象外との見分け方](/blog/ai-hojokin-taisho-tool/)で確認できます。補助額の試算は[AI導入補助金はいくらもらえる？](/blog/ai-hojokin-ikura-moraeru/)で行えます。
+申請の流れ全体は[AI導入補助金の申請のやり方](/blog/ai-hojokin-shinsei-yarikata/)、対象になるツールの分野は[AI導入補助金の対象ツール6分野｜対象外との見分け方](/blog/ai-hojokin-taisho-tool/)で確認できます。
+
+補助額の試算は[AI導入補助金はいくらもらえる？](/blog/ai-hojokin-ikura-moraeru/)で行えます。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

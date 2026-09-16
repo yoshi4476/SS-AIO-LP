@@ -53,6 +53,7 @@ faq:
 
 
 関連して、[ものづくり補助金は製造業でどう使う？](/blog/monozukuri-hojokin-seizougyou/)もあわせてご確認ください。
+
 <div class="definition-box"><span class="term">ものづくり補助金とは</span>、中小企業が行う生産性向上のための設備投資を支援する国の補助金です。正式名称は「ものづくり・商業・サービス生産性向上促進補助金」で、美容業を含むサービス業も対象に含まれます。</div>
 
 <a href="https://portal.monodukuri-hojo.jp/" target="_blank" rel="noopener">ものづくり・商業・サービス生産性向上促進補助金の公式サイト</a>でも、対象は特定の業種に限定されていないと明記されています。制度が支援するのは工場の機械装置だけでなく、==施術の専門性や提供サービスの幅を広げる設備投資==全般です。
@@ -109,6 +110,7 @@ faq:
 関連する内容として[ものづくり補助金はクリニックで使える？](/hojokin/monozukuri-hojokin-clinic/)も公開しています。
 
 関連する内容として[ものづくり補助金は運送業も対象](/hojokin/monozukuri-hojokin-unsougyou/)も公開しています。
+
 あわせて[ものづくり補助金は自動車整備業も対象](/blog/monozukuri-hojokin-jidousha-seibi/)もご覧ください。
 
 あわせて[美容室のIT導入補助金](/blog/it-hojokin-biyoushitsu/)もご覧ください。予約管理・POSレジ・電子カルテといったソフトウェア中心の投資を扱っています。

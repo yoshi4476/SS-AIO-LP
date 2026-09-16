@@ -169,6 +169,7 @@ faq:
 
 
 近い論点を[ものづくり補助金は運送業も対象](/blog/monozukuri-hojokin-unsougyou/)で扱っています。
+
 <figure><img src="/images/it-hojokin-jidousha-seibi/flow-steps.png" alt="自動車整備工場がIT導入補助金を使うまでの4ステップ: GビズID・SECURITY ACTIONを準備、IT導入支援事業者とツールを選定、交付申請から契約・導入、実績報告を提出し交付額が確定" loading="lazy"><figcaption>自動車整備工場がIT導入補助金を使うまでの4ステップ</figcaption></figure>
 
 車検の繁忙期（3月・9月）に導入を始めると、現場が混乱しやすくなります。**閑散期に交付申請から導入・研修までを終わらせ、繁忙期には運用が安定した状態で臨む**のが理想的な逆算です。運送業の車両管理という近い切り口では、[運送業のIT導入補助金｜デジタコ・運行管理の対象範囲](https://lp.7senses.co.jp/blog/it-hojokin-unsougyou/)も参考になります。

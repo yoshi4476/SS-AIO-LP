@@ -121,6 +121,7 @@ faq:
 
 
 関連して、[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)もあわせてご確認ください。
+
 <figure><img src="/images/seikotsuin-hiyou-hoken/page-items.png" alt="整骨院の費用ページに書くべき5項目: 保険適用の範囲を明記する、自己負担割合の目安を示す、自由診療の料金表を載せる、支払い方法を案内する、来院前の注意書きを添える" loading="lazy"><figcaption>整骨院の費用ページに書くべき5項目</figcaption></figure>
 
 「整骨院 費用 保険」のように費用を先に調べてから来院を決める患者さんは多く、この検索は来院直前の高い関心を示しています。曖昧な説明のままだと、他院の費用ページに患者さんが流れてしまいます。

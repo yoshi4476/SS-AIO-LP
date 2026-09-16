@@ -51,6 +51,7 @@ faq:
 
 
 あわせて[運送業のIT導入補助金｜デジタコ・運行管理の対象範囲](/blog/it-hojokin-unsougyou/)もご覧ください。
+
 関連する内容は、[運送業の実績報告書｜傭車の契約名義とデジタコ対応の壁](/blog/unsougyou-jissekihoukokusho/)で解説しています。
 
 <div class="definition-box"><span class="term">実績報告とは</span>、交付決定後にIT導入支援事業者と契約し、事業実施期間内に導入・支払いを完了させたうえで、請求書や支払い証明などの証拠書類を事務局へ提出する手続きです。</div>
@@ -172,6 +173,8 @@ faq:
 
 書式の難しさよりも、そろえる証憑の点数と関係者の多さが、建設業の実績報告を時間のかかる作業にしています。契約段階で証憑の担当と保管方法を決めておけば、事業実施期間の終盤に慌てて書類を集め直す事態は避けられます。
 
-一人親方から元請け企業まで、実績報告の証憑整理に不安がある場合は、<a href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a>で申請要件の確認から実績報告まで伴走します。あわせて[建設業でのAI導入補助金の活用方法](/blog/ai-hojokin-kensetsugyou-katsuyou/)や、[小規模事業者持続化補助金の建設業向け活用](/blog/jizokuka-hojokin-kensetsugyou/)、[ものづくり補助金の建設業事例](/blog/monozukuri-hojokin-kensetsugyou-jirei/)もあわせてご覧ください。
+一人親方から元請け企業まで、実績報告の証憑整理に不安がある場合は、<a href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a>で申請要件の確認から実績報告まで伴走します。
+
+あわせて[建設業でのAI導入補助金の活用方法](/blog/ai-hojokin-kensetsugyou-katsuyou/)や、[小規模事業者持続化補助金の建設業向け活用](/blog/jizokuka-hojokin-kensetsugyou/)、[ものづくり補助金の建設業事例](/blog/monozukuri-hojokin-kensetsugyou-jirei/)もあわせてご覧ください。
 
 <p class="freshness">※ 実績報告の要件・上限額は制度改定で変わることがあります。最新情報は<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026公式サイトの申請前手続きページ</a>、交付決定後の手続きは<a href="https://it-shien.smrj.go.jp/aftergrantdecision/measures/" target="_blank" rel="noopener">交付決定後の手続きページ</a>で確認してください。</p>

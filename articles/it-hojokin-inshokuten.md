@@ -55,6 +55,7 @@ faq:
 つまずきやすい点を先に押さえるなら、[歯科医院のIT導入補助金](/hojokin/it-hojokin-shika-iin/)が参考になります。
 
 関連する内容については、[製造業のIT導入補助金](/blog/it-hojokin-seizougyou/)にまとめています。
+
 つまずきやすい点は、[美容室のIT導入補助金](/blog/it-hojokin-biyoushitsu/)で解説しています。
 
 <div class="definition-box"><span class="term">デジタル化・AI導入補助金とは</span>、中小企業庁が実施する「中小企業デジタル化・AI導入支援事業」の愛称です。ソフトウェアやクラウドサービスの導入費用の一部を補助し、業務効率化や生産性向上を後押しします。</div>
@@ -75,7 +76,8 @@ faq:
 
 
 あわせて[宿泊業のIT導入補助金は有利？](/blog/it-hojokin-shukuhakugyou/)もご覧ください。
-<a href="https://houseikyoku.sangiin.go.jp/column/column084.htm" target="_blank" rel="noopener">参議院法制局が整理した中小企業基本法の業種別基準</a>では、製造業その他は資本金3億円以下・従業員300人以下、卸売業は資本金1億円以下・従業員100人以下、サービス業は資本金5000万円以下・従業員100人以下、小売業は資本金5000万円以下・従業員50人以下と定められています。
+
+<a href="https://houseikyoku.sangiin.go.jp/column/column084.htm" target="_blank" rel="noopener">参議院法制局が整理した中小企業基本法の業種別基準</a>では、製造業その他は資本金3億円以下・従業員300人以下、卸売業は資本金1億円以下・従業員100人以下と定められています。サービス業は資本金5000万円以下・従業員100人以下、小売業は資本金5000万円以下・従業員50人以下です。
 
 <a href="https://studying.jp/shindanshi/examarchive/chusho_h20_14.html" target="_blank" rel="noopener">中小企業診断士試験の過去問解説サイト</a>では、飲食店の扱いについて==「飲食店は小売業と同じ扱いとなります」==と説明されています。統計上は「宿泊業、飲食サービス業」に分類される飲食店ですが、中小企業基本法上の類型では小売業として扱われる点に注意してください。
 

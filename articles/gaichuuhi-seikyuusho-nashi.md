@@ -137,6 +137,7 @@ faq:
 
 
 関連する内容として[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)も公開しています。
+
 <figure><img src="/images/gaichuuhi-seikyuusho-nashi/hikaku.png" alt="請求書なし対応のNGパターンとOKパターン: NGパターンは記録を残さず現金で払う・証憑なしで経費計上する・控除率を確認せず計算する、OKパターンは振込明細か出金伝票を残す・支払通知書を作成して送る・経過措置の控除率で計算する" loading="lazy"><figcaption>請求書なし対応のNGパターンとOKパターン</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 証憑なしの現金払いは税務調査で否認されやすい</span><br>現金で支払って記録を残さないと、税務調査で支払いの実在性を疑われることがあります。<span class="txt-red">出金伝票を作らずに済ませる運用は、金額の大小にかかわらず避けてください。</span></div>

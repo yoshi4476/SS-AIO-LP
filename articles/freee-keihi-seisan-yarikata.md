@@ -51,6 +51,7 @@ faq:
 
 
 関連する内容として[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)も公開しています。
+
 <div class="definition-box"><span class="term">freeeの経費精算とは</span>、レシートの撮影・ICカード連携などで経費情報を自動入力し、申請から承認、仕訳への反映までを一連の流れとして処理する機能のことです。個人事業主から複数人の会社まで、規模を問わず使えます。</div>
 
 <figure><img src="/images/freee-keihi-seisan-yarikata/eyecatch.png" alt="freeeの経費精算のやり方｜申請から承認までの4ステップ" loading="lazy"><figcaption>freeeの経費精算は初期設定から始まる</figcaption></figure>

@@ -51,6 +51,7 @@ faq:
 
 
 あわせて[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)もご覧ください。
+
 実際の進め方は[請求書を銀行振込で支払う手順](/blog/seikyusho-ginko-furikomi-yarikata/)でも扱っています。
 
 <div class="definition-box"><span class="term">摘要欄とは</span>、通帳やネットバンキング明細に記載される取引相手や取引内容のメモ欄です。==「フリコミ」「フリコミテスウリヨウ」のような表示から、誰との取引で何が動いたかを読み取ります。==</div>

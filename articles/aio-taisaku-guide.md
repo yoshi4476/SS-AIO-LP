@@ -34,7 +34,8 @@ AIOコンサルティングとは、**AIの回答に自社が引用されるた�
 
 
 近い論点を[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)で扱っています。
-<div class="definition-box"><span class="term">AIOコンサルティングとは</span>、Google の AI Overview や ChatGPT・Perplexity などの回答文の中で、自社の情報が引用元として採用されるよう、記事の構造・技術実装・一次情報の3面を設計し運用する支援のことです。</div>
+
+<div class="definition-box"><span class="term">AIOコンサルティングとは</span>、AIの回答文の中で自社の情報が引用元として採用されるよう設計し運用する支援のことです。対象はGoogle の AI Overview や ChatGPT・Perplexity などで、記事の構造・技術実装・一次情報の3面を扱います。</div>
 
 作業の中身を分解すると、次の4つに分かれます。ここを分けて理解しないと、見積書の金額が何に対する対価なのかが読めません。
 
@@ -92,6 +93,7 @@ AIOコンサルティングとは、**AIの回答に自社が引用されるた�
 
 
 費用の目安は[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)でも扱っています。
+
 選ぶときの基準は[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)でも扱っています。
 
 選ぶときの基準を先に押さえるなら、[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)が参考になります。

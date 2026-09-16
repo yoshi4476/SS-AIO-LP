@@ -51,6 +51,7 @@ faq:
 
 
 関連して、[ネイルサロンのものづくり補助金](/blog/monozukuri-hojokin-nail-salon/)もあわせてご確認ください。
+
 <figure><img src="/images/nail-salon-gijutsu-check/ba3.png" alt="技術チェックAIを使う3つの場面: 採用試験は応募者の技術力を数値評価、研修進捗は新人の上達度を可視化、仕上がり検品は接客前に品質を確認" loading="lazy"><figcaption>技術チェックAIを使う3つの場面</figcaption></figure>
 
 <div class="definition-box"><span class="term">技術チェックとは</span>、施術の仕上がり（ラインの均一さ・厚みのムラ・持ちの良さなど）を一定の基準で評価する作業です。ネイルサロンでは店長やベテランスタッフが目視で行うのが一般的でした。</div>

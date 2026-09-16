@@ -53,6 +53,7 @@ faq:
 選ぶときの基準は[経理の外注と丸投げの違い](/keiri-bpo/keiri-marunage-dekiru-hani/)でも扱っています。
 
 実際の進め方は[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)で整理しています。
+
 <div class="definition-box"><span class="term">経理の個人外注とは</span>、経理BPO会社や記帳代行会社のような法人ではなく、==元経理担当者や独立した記帳代行フリーランスに、業務委託契約で直接依頼する形態==を指します。仲介する組織がない分、単価は抑えやすく、やり取りも直接的です。</div>
 
 会社への外注では、担当者が複数人在籍し、繁忙期のフォロー体制や品質管理の仕組みが組織として整っていることが多いです。一方、個人への外注は基本的に1人が窓口かつ実務担当者になるため、体制の厚みという点では会社に劣ります。
@@ -137,6 +138,7 @@ faq:
 
 
 費用の目安は[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)で整理しています。
+
 選ぶときの基準は、[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)で解説しています。
 
 <figure><img src="/images/keiri-gaichuu-kojin/hikaku.png" alt="個人（フリーランス）と経理BPO会社の違い: 個人は単価が安めだが担当は1人体制で急な休止への備えが手薄になりやすい、経理BPO会社は単価が上がるが複数人の体制で担当者が休んでも引き継ぎ対応できる" loading="lazy"><figcaption>個人（フリーランス）と経理BPO会社の違い</figcaption></figure>

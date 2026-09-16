@@ -53,6 +53,7 @@ faq:
 
 
 関連して、[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)もあわせてご確認ください。
+
 建設業以外では、[ものづくり補助金の農業分野における採択事例](/blog/monozukuri-hojokin-nougyou-jirei/)でも、専用設備への投資という同じ評価軸が使われています。
 
 対象になる範囲を先に押さえるなら、[ものづくり補助金は美容室で使える？](/blog/monozukuri-hojokin-biyoushitsu/)が参考になります。
@@ -69,6 +70,7 @@ faq:
 
 
 関連して、[事業再構築補助金は建設業も対象](/blog/jigyou-saikouchiku-kensetsugyou-jirei/)もあわせてご確認ください。
+
 <figure><img src="/images/monozukuri-hojokin-kensetsugyou-jirei/jirei3.png" alt="建設業の採択事例3パターン: 総合工事業は重機駆動システムやi-Construction活用の開発事例、鉄骨工事業は加工機導入で納期短縮・受注増加を実現、測量関連の技術サービス業は3Dレーザースキャナー等で精度向上" loading="lazy"><figcaption>建設業の採択事例3パターン</figcaption></figure>
 
 <a href="https://so-labo.co.jp/hojyokin/monodukuri/know-how/160/" target="_blank" rel="noopener">補助金の採択事例をまとめた解説記事</a>によると、総合工事業では低コスト・高効率な重機駆動システムの開発やi-Construction導入による施工管理効率化が採択されています。鉄骨工事業では、平板自動開先加工機の導入で納期を短縮し、受注増加につなげた事例が紹介されています。

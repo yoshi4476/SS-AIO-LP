@@ -149,6 +149,7 @@ faq:
 つまずきやすい点を先に押さえるなら、[小規模事業者持続化補助金](/blog/jizokuka-hojokin-jidousha-seibi/)が参考になります。
 
 関連する内容として[飲食店のAI導入補助金 対象要件](/blog/inshokuten-ai-hojokin-taisho-youken/)も公開しています。
+
 つまずきやすい点については、[自動車整備業のIT導入補助金2026](/blog/it-hojokin-jidousha-seibi/)にまとめています。
 
 

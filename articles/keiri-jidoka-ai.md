@@ -53,6 +53,7 @@ faq:
 近い論点を[経理効率化の事例4選｜方法別のポイントと進め方](/keiri-bpo/keiri-koritsuka-jirei/)で扱っています。
 
 近い論点を[エクセル経理の効率化のコツ7選](/blog/excel-keiri-koritsuka/)で扱っています。
+
 実際の進め方を先に押さえるなら、[経理の自動化はエクセルでどこまで可能？](/blog/keiri-excel-jidoka/)が参考になります。
 
 <div class="definition-box"><span class="term">経理AI自動化とは</span>、AI-OCRや学習型の仕訳エンジンなどを使い、経理担当者が行ってきた入力・分類・チェックの一部をAIに代行させる取り組みを指します。==従来の自動化と異なり、表記ゆれや例外パターンもある程度学習して対応できる点が特徴です。==</div>

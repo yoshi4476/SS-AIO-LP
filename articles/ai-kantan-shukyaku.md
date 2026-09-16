@@ -167,6 +167,7 @@ AIかんたん集客を自分でやるか専門家に依頼するかは、割け
 
 
 関連する内容として[AIO診断のやり方｜無料チェック8項目とツールの使い分け](/aio/aio-shindan-yarikata/)も公開しています。
+
 AI検索への対応まで含めて外部に頼むかどうかは、[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)の判断表も合わせて見ると決めやすくなります。
 
 <figure><img src="/images/ai-kantan-shukyaku/ng-ok.png" alt="AIかんたん集客のNG・OK: NG例はAI任せの文章をそのまま公開、数字を確認せず放置、一度に全チャネル自動化。OK例はAI下書きに自社事実を追記、月1回は数字を確認、1チャネルずつ広げる" loading="lazy"><figcaption>AIかんたん集客のNG・OK</figcaption></figure>
@@ -182,7 +183,9 @@ AI検索への対応まで含めて外部に頼むかどうかは、[AIO対策�
 
 判断に迷ったときは、次の2つを自問してください。1つ目は「毎月、数字を確認する時間を確保できるか」。2つ目は「ツールを選ぶ基準を自社で持てているか」です。どちらも答えに詰まるようであれば、無理に内製にこだわらず、最初の設計だけでも専門家に相談したほうが遠回りを避けられます。
 
-AI集客全体の位置づけは[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)で解説しています。無料ツールだけで診断まで進めたい方は[AIO対策の無料ツール6選](/aio/aio-taisaku-muryou-tool/)、店舗の集客なら[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)、AIチャットでの言及を増やしたい方は[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)もあわせてご覧ください。
+AI集客全体の位置づけは[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)で解説しています。
+
+無料ツールだけで診断まで進めたい方は[AIO対策の無料ツール6選](/aio/aio-taisaku-muryou-tool/)、店舗の集客なら[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)、AIチャットでの言及を増やしたい方は[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)もあわせてご覧ください。
 
 ## よくある質問
 

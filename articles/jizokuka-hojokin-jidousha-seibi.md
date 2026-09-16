@@ -53,6 +53,7 @@ faq:
 
 
 近い論点を[ものづくり補助金の給与支給総額とは？](/blog/monozukuri-hojokin-kyuyo-shikyu-sogaku/)で扱っています。
+
 <div class="definition-box"><span class="term">小規模事業者持続化補助金とは</span>、商工会議所・商工会の管轄地域で、小規模事業者が経営計画に基づいて販路開拓等に取り組む経費の一部を補助する制度です。</div>
 
 整備業向けの補助金というと、設備投資が中心の[ものづくり補助金は自動車整備業も対象](/blog/monozukuri-hojokin-jidousha-seibi/)をイメージする経営者が多いはずです。

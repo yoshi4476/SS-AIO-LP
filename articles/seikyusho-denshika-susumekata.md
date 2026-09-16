@@ -67,6 +67,7 @@ faq:
 
 
 関連して、[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)もあわせてご確認ください。
+
 <figure><img src="/images/seikyusho-denshika-susumekata/kabe.png" alt="請求書電子化が進まない3つの壁: 取引先との合意形成、システム選定の迷い、運用ルールの不足" loading="lazy"><figcaption>請求書電子化が進まない3つの壁</figcaption></figure>
 
 freee株式会社は2024年4月9日〜12日、従業員数11〜1,000名の企業の経理・総務担当者1,000人を対象に<a href="https://corp.freee.co.jp/news/freee20240517.html" target="_blank" rel="noopener">請求業務の現状に関する調査</a>を実施しました。**主な請求書発行方法は「手作業での郵送」が46.9%で最多**、クラウド請求書26.3%、メール送付25.6%という結果でした。

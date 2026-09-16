@@ -49,6 +49,7 @@ faq:
 
 
 関連する内容として[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)も公開しています。
+
 実際の進め方については、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)にまとめています。
 
 実際の進め方は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でも扱っています。
@@ -74,6 +75,7 @@ faq:
 
 
 関連する内容として[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)も公開しています。
+
 <figure><img src="/images/clinic-instagram-yarikata/riyu.png" alt="クリニックにインスタ集客が必要な3つの理由: 無料で始められる、通院前の不安を減らせる、スタッフの人柄が伝わる" loading="lazy"><figcaption>クリニックにインスタ集客が必要な3つの理由</figcaption></figure>
 
 <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）によると、<strong>消費者の71%が地域の店や施設を探す際に口コミを日常的に読み</strong>、口コミの確認先としては<strong>83%がGoogleを利用</strong>しています。体への不安を伴う医療機関選びでは、この確認行動はさらに慎重になります。
@@ -141,6 +143,7 @@ faq:
 
 
 近い論点を[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)で扱っています。
+
 <figure><img src="/images/clinic-instagram-yarikata/ngok.png" alt="医療広告ガイドラインのNG例とOK例: NG例は説明なしの術前術後写真・治療効果の体験談・断定表現、OK例は院内・スタッフの紹介・一般的な治療の選択肢説明・説明付きの症例掲載" loading="lazy"><figcaption>医療広告ガイドラインのNG例とOK例</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: ビフォーアフター写真と体験談は原則NG</span><br><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">厚生労働省の医療広告ガイドライン</a>では、治療内容・費用・リスクの説明を伴わない術前術後の比較写真や、患者の体験談は禁止表現として扱われます。SNS投稿もWebサイトと同じ「広告」の規制対象です。</div>
@@ -157,6 +160,7 @@ faq:
 
 
 関連する内容として[工務店のWeb集客とは？5つの施策と始める順番](/ai-marketing/koumuten-web-shukyaku/)も公開しています。
+
 失敗1は、**個人アカウントのまま院長個人が運用してしまうこと**です。担当者の異動や退職時に引き継げず、実績が個人に紐づいたままになります。
 
 失敗2は、**症例写真だけを説明なしで並べること**です。規制違反のリスクだけでなく、人柄が見えないため他院との違いも伝わりません。

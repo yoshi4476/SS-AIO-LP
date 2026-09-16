@@ -52,7 +52,8 @@ diagrams:
 実際の進め方については、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)にまとめています。
 
 関連して、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もあわせてご確認ください。
-<div class="definition-box"><span class="term">歯科医院のMEO（Map Engine Optimization）とは</span>、「地域名×歯医者」「駅名×矯正歯科」といった検索で、Googleマップの上位（特に目立つ上位3枠）に自院を表示させるための最適化のことです。保険診療の新患集客と、矯正・インプラント・審美歯科といった自由診療のブランディングを、同じプロフィール上で両立させる必要がある点が特徴です。</div>
+
+<div class="definition-box"><span class="term">歯科医院のMEO（Map Engine Optimization）とは</span>、Googleマップの上位に自院を表示させるための最適化のことです。「地域名×歯医者」「駅名×矯正歯科」といった検索で、特に目立つ上位3枠へ入ることを狙います。保険診療の新患集客と、矯正・インプラント・審美歯科といった自由診療のブランディングを、同じプロフィール上で両立させる必要がある点が特徴です。</div>
 
 MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)、医療機関向けの土台は[クリニックのMEO対策](/meo/clinic-meo-taisaku/)で解説しています。
 

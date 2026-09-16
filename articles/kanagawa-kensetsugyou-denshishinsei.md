@@ -52,6 +52,7 @@ faq:
 
 
 あわせて[建設業許可の電子申請](/blog/kensetsugyou-kyoka-denshishinsei/)もご覧ください。
+
 <div class="definition-box"><span class="term">GビズIDプライムとは</span>、法人・個人事業主が行政の手続きをオンラインで行うための共通のアカウントです。==補助金の申請だけでなく、社会保険や建設業許可の電子申請にも使えます==。</div>
 
 | 書類 | 法人 | 個人事業主 | 取得先 |

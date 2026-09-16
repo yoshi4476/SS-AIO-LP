@@ -72,6 +72,7 @@ faq:
 
 
 近い論点を[東京都のJCIP電子申請](/blog/tokyo-kensetsugyou-denshishinsei/)で扱っています。
+
 <figure><img src="/images/it-hojokin-chusho-teigi/kijun4.png" alt="業種別の資本金・従業員数の基準: 製造業・建設業等は資本金3億円以下or従業員300人以下、卸売業は資本金1億円以下or従業員100人以下、サービス業は資本金5000万円以下or従業員100人以下、小売業は資本金5000万円以下or従業員50人以下"><figcaption>業種別の資本金・従業員数の基準</figcaption></figure>
 
 | 業種区分 | 資本金の額 | 従業員数 |
@@ -103,6 +104,7 @@ faq:
 
 
 関連する内容として[e-Gov電子申請とは](/blog/egov-denshishinsei-kojinjigyonushi/)も公開しています。
+
 <figure><img src="/images/it-hojokin-chusho-teigi/kakunin3.png" alt="自社が対象になるかを確認する3ステップ: 自社の業種を確認する(4区分のどれか)、資本金と従業員数を確認する(どちらか一方で判定)、対象要件も確認する(税金滞納なし等)"><figcaption>自社が対象になるかを確認する3ステップ</figcaption></figure>
 
 1. 自社の業種を確認する: 製造業等・卸売業・サービス業・小売業のどの区分に当てはまるかを、主たる事業内容で判断します。
@@ -123,6 +125,7 @@ faq:
 
 
 近い論点を[AI導入補助金の必要書類一覧と準備の順番](/blog/ai-hojokin-hitsuyo-shorui-hojin/)で扱っています。
+
 <div class="caution-box"><span class="box-title">注意: 基準を満たしても対象外になることがある</span><br>資本金・従業員数の基準を満たしていても、法人税・消費税の未納がある場合や、直近の公募回で既に採択・交付を受けている場合は対象外になることがあります。基準表の確認だけで安心せず、その他の要件も併せて確認してください。</div>
 
 具体的な必要書類や納税証明書の準備については、[AI導入補助金の納税証明書はどれ？その1とその2の違い](https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/)で解説しています。

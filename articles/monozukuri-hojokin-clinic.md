@@ -56,6 +56,7 @@ faq:
 
 
 対象になる範囲は、[ものづくり補助金は運送業も対象](/hojokin/monozukuri-hojokin-unsougyou/)で解説しています。
+
 <div class="definition-box"><span class="term">ものづくり補助金とは</span>、中小企業が行う生産性向上のための設備投資を支援する国の補助金です。正式名称は「ものづくり・商業・サービス生産性向上促進補助金」で、個人事業として医療業を営む開業医も対象に含まれます。</div>
 
 <a href="https://inu-llc.co.jp/monohojo-medicalcorporation/" target="_blank" rel="noopener">補助金プラスが解説する医療法人の対象性</a>によると、==医療法に基づいて設立された医療法人の事業は、補助金の政策目的や支給要件と一致しないため対象外==とされています。一方、個人事業として医療業を営む開業医は対象になります。

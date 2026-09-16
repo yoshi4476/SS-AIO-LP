@@ -50,6 +50,7 @@ faq:
 
 
 近い論点を[中小企業成長加速化補助金](/blog/seicho-kasokuka-hojokin-schedule/)で扱っています。
+
 <div class="definition-box"><span class="term">デジタル化・AI導入補助金とは</span>、中小企業庁が実施する「中小企業デジタル化・AI導入支援事業」の愛称です。ソフトウェアやクラウドサービスの導入費用の一部を補助し、業務効率化や生産性向上を後押しします。</div>
 
 <a href="https://www.tdb.co.jp/report/economic/20260519-laborshortage202604/" target="_blank" rel="noopener">帝国データバンクが2026年4月に公表した調査</a>によると、<strong>建設業の正社員における人手不足割合は65.7%で、全51業種中3位の高さ</strong>でした。前年同月比では3.2ポイント低下したものの、依然として厳しい水準です。
@@ -66,6 +67,7 @@ faq:
 
 
 あわせて[ものづくり補助金は飲食店で使える？採択事例3パターン](/blog/monozukuri-hojokin-inshokuten-jirei/)もご覧ください。
+
 <figure><img src="/images/ai-hojokin-kensetsugyou-katsuyou/tool-categories.png" alt="建設業で対象になるITツール3分野: 施工管理アプリ、積算・見積ソフト、電子契約・勤怠管理" loading="lazy"><figcaption>建設業で対象になるITツール3分野</figcaption></figure>
 
 <a href="https://www.photoruction.com/archives/contech/it-introduction-subsidy" target="_blank" rel="noopener">Photoructionが紹介する建設業の導入事例</a>では、ANDPADやPhotoruction、SPIDERPLUSなどの施工管理アプリで工程・写真・図面をクラウド共有する例、Gaia Cloudなどの積算ソフトで数量拾いと見積作成を自動化する例が紹介されています。
@@ -144,7 +146,9 @@ faq:
 
 <figure><img src="/images/ai-hojokin-kensetsugyou-katsuyou/timing-vs.png" alt="建設業のツール導入タイミング比較: 繁忙期に切り替えると現場が混乱しやすく稼働データが残りにくい、閑散期に切り替えると定着期間を確保でき実績報告もスムーズ" loading="lazy"><figcaption>建設業のツール導入タイミング比較</figcaption></figure>
 
-元請け・下請けが混在する現場では、契約や実績報告の名義をどちらの会社にするか事前に整理しておく必要があります。名義の混乱は交付決定後のトラブルにつながりやすいポイントです。申請全体でよくある失敗パターンは[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも整理しているので、あわせて確認してください。
+元請け・下請けが混在する現場では、契約や実績報告の名義をどちらの会社にするか事前に整理しておく必要があります。名義の混乱は交付決定後のトラブルにつながりやすいポイントです。
+
+申請全体でよくある失敗パターンは[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)でも整理しているので、あわせて確認してください。
 
 ## 建設業向けの他制度（IT導入・ものづくり）との使い分け
 

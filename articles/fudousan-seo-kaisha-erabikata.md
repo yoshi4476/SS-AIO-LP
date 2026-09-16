@@ -81,6 +81,7 @@ faq:
 
 
 あわせて[相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](/ai-marketing/souba-kiji-tsukurikata/)もご覧ください。
+
 <figure><img src="/images/fudousan-seo-kaisha-erabikata/kijun.png" alt="不動産SEO会社を選ぶ6つの基準: 不動産業界の実務知識があるか、YMYL・ローカルSEOへの理解があるか、AIO・LLMO対応の実績があるか、レポートに透明性があるか、契約期間に柔軟性があるか、解約時にデータを引き渡すか" loading="lazy"><figcaption>不動産SEO会社を選ぶ6つの基準</figcaption></figure>
 
 ### 基準1: 不動産業界の実務知識があるか

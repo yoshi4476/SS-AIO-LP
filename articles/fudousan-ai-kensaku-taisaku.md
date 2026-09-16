@@ -50,6 +50,7 @@ diagrams:
 
 
 あわせて[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)もご覧ください。
+
 前提となる考え方は[不動産の集客代行とは？](/ai-marketing/fudousan-shukyaku-daikou/)で整理しています。
 
 前提となる考え方を先に押さえるなら、[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)が参考になります。

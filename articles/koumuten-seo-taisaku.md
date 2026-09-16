@@ -44,6 +44,7 @@ faq:
 
 
 関連して、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)もあわせてご確認ください。
+
 SEO以外の施策も含めた[工務店のWeb集客の全体像と始める順番](/ai-marketing/koumuten-web-shukyaku/)も合わせて確認しておくと、優先順位を付けやすくなります。
 
 前提となる考え方は、[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で解説しています。
@@ -60,6 +61,7 @@ SEO以外の施策も含めた[工務店のWeb集客の全体像と始める順�
 
 
 関連して、[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)もあわせてご確認ください。
+
 第一に、施主の情報収集がインターネット中心に移っていることです。
 
 <a href="https://www.homes.co.jp/cont/data/data_00132/" target="_blank" rel="noopener">LIFULL HOME'Sが実施した注文住宅購入者500人への調査（2022年8月）</a>によると、建築会社選びで<strong>「工務店・ハウスメーカー・設計事務所のホームページを見た」施主は50.8%</strong>にのぼります。住宅展示場の見学（59.1%）に次ぐ、主要な情報源です。
@@ -82,6 +84,7 @@ SEO以外の施策も含めた[工務店のWeb集客の全体像と始める順�
 
 
 関連して、[歯科医院の開業費用は5000万円？内訳と抑え方](/meo/shika-kaigyou-hiyou/)もあわせてご確認ください。
+
 <figure><img src="/images/koumuten-seo-taisaku/mistakes.png" alt="工務店のSEOで失敗しやすい3つの原因: 施工事例を数件しか載せていない、更新が半年以上止まっている、対応エリア・価格帯が曖昧" loading="lazy"><figcaption>工務店のSEOで失敗しやすい3つの原因</figcaption></figure>
 
 **原因1: 施工事例を数件しか載せていない。**竣工写真を数枚貼るだけでは、間取り・予算帯・工期といった施主が知りたい情報が伝わりません。事例が少ないと検索にも引っかかりにくく、比較検討の対象からも外れやすくなります。
@@ -98,6 +101,7 @@ SEO以外の施策も含めた[工務店のWeb集客の全体像と始める順�
 
 
 関連して、[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)もあわせてご確認ください。
+
 <figure><img src="/images/koumuten-seo-taisaku/steps.png" alt="工務店のSEO対策を成功させる5つの施策: エリア×工法のロングテールでKW選定、施工事例ページの充実、専門コラムの継続発信、資格・実績・第三者評価でE-E-A-Tを明示、問い合わせ導線の設計" loading="lazy"><figcaption>工務店のSEO対策を成功させる5つの施策</figcaption></figure>
 
 ### 施策1: エリア×工法のロングテールKWを選ぶ

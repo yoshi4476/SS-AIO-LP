@@ -51,6 +51,7 @@ faq:
 
 
 実際の進め方については、[建設業許可の電子申請](/blog/kensetsugyou-kyoka-denshishinsei/)にまとめています。
+
 つまずきやすい点は[大阪府のJCIP電子申請](/blog/osaka-kensetsugyou-denshishinsei/)で整理しています。
 
 選ぶときの基準を先に押さえるなら、[神奈川県のJCIP電子申請](/blog/kanagawa-kensetsugyou-denshishinsei/)が参考になります。

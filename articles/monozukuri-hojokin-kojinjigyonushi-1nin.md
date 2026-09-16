@@ -54,6 +54,7 @@ faq:
 つまずきやすい点は、[ものづくり補助金はクリニックで使える？](/hojokin/monozukuri-hojokin-clinic/)で解説しています。
 
 対象になる範囲については、[ものづくり補助金は運送業も対象](/hojokin/monozukuri-hojokin-unsougyou/)にまとめています。
+
 関連する内容を先に押さえるなら、[ものづくり補助金2025年度](/blog/monozukuri-hojokin-2025-kojinjigyonushi/)が参考になります。
 
 関連する内容は[事業再構築補助金は個人事業主もいつまで？](/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/)で整理しています。

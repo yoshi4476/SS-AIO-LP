@@ -53,6 +53,7 @@ faq:
 あわせて[クリニックのIT導入補助金](/hojokin/it-hojokin-clinic/)もご覧ください。
 
 近い論点を[会計ソフトの補助金｜個人事業主が使える2つの枠と補助率](/hojokin/it-hojokin-kojinjigyonushi-kaikeisoft/)で扱っています。
+
 実際の進め方については、[ネイルサロンの補助金申請手順を8ステップで解説](/blog/nail-salon-hojokin-tejun/)にまとめています。
 
 <div class="definition-box"><span class="term">ネイルサロン向け補助金とは</span>、予約システムなどのソフト導入、集塵・換気設備やAI機器などのハード投資、広報・集客の販路開拓費のいずれかを対象に、国や自治体が費用の一部を補助する制度の総称です。</div>

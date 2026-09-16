@@ -54,6 +54,7 @@ faq:
 
 
 関連して、[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)もあわせてご確認ください。
+
 対象になる範囲は、[ものづくり補助金は自動車整備業も対象](/blog/monozukuri-hojokin-jidousha-seibi/)で解説しています。
 
 対象になる範囲は、[農業の倉庫投資は建物費NG](/blog/monozukuri-hojokin-nougyou-souko/)で解説しています。
@@ -73,6 +74,7 @@ faq:
 
 
 近い論点を[ものづくり補助金はクリニックで使える？](/blog/monozukuri-hojokin-clinic/)で扱っています。
+
 過去に「ものづくり・商業・サービス生産性向上促進補助金」という名称で公募されていたため、その名前で検索される方が多くいます。<span class="txt-blue">同じ制度の系譜ですが、名称と枠組みが変わっています</span>。
 
 | 探している名称 | 現在の扱い |

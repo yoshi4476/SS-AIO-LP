@@ -53,6 +53,7 @@ faq:
 あわせて[建設業がAI導入補助金の対象になる条件](/blog/osaka-kensetsugyou-denshishinsei/)もご覧ください。
 
 あわせて[ものづくり補助金はエステサロン向け](/blog/monozukuri-hojokin-esute/)もご覧ください。
+
 対象になる範囲は、[小規模事業者持続化補助金](/blog/jizokuka-hojokin-esute/)で解説しています。
 
 建設業は対象になりますが、[小規模事業者持続化補助金はクリニックだと医師・歯科医師や医療法人が対象外になる](/blog/jizokuka-hojokin-clinic/)など、業種による線引きは制度ごとに確認が必要です。

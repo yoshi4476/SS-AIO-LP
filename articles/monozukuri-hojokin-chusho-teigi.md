@@ -52,6 +52,7 @@ faq:
 
 
 関連して、[社労士事務所のAI導入補助金](/blog/roudouhoken-nendokoshin-denshishinsei/)もあわせてご確認ください。
+
 対象になる範囲については、[社会保険の電子申請義務化](/blog/shakaihoken-denshishinsei-gimuka-chusho/)にまとめています。
 
 対象になる範囲は[ネイルサロンのものづくり補助金](/blog/monozukuri-hojokin-nail-salon/)でも扱っています。
@@ -70,6 +71,7 @@ faq:
 
 
 関連して、[建設業の電子申請システムを閲覧する2つの方法](/blog/kensetsugyou-denshishinsei-etsuran/)もあわせてご確認ください。
+
 <figure><img src="/images/monozukuri-hojokin-chusho-teigi/gyoshu-kijun.png" alt="業種別の資本金・従業員数の基準（中小企業者）: 製造業・建設業等は資本金3億円以下or従業員300人以下、卸売業は資本金1億円以下or従業員100人以下、サービス業は資本金5000万円以下or従業員100人以下、小売業は資本金5000万円以下or従業員50人以下、ソフトウェア業・情報処理業は資本金3億円以下or従業員300人以下" loading="lazy"><figcaption>業種別の資本金・従業員数の基準（中小企業者）</figcaption></figure>
 
 | 業種区分 | 資本金の額 | 従業員数 |
@@ -126,6 +128,7 @@ faq:
 
 
 関連して、[ネイルサロンの補助金3種を比較](/blog/nail-salon-hojokin-hikaku/)もあわせてご確認ください。
+
 **家族従業員のみで運営している個人事業主の場合、従業員数のカウント方法を事務局に確認しておくと手戻りを防げます。
 **個人事業主が使える補助金全体の選択肢は、[個人事業主の給付金・補助金](/blog/kojinjigyonushi-kyufukin-shinsei/)にまとめています。
 
@@ -137,6 +140,7 @@ faq:
 
 
 関連して、[ものづくり補助金は小売業に使えない？](/blog/monozukuri-hojokin-kourigyou/)もあわせてご確認ください。
+
 <figure><img src="/images/monozukuri-hojokin-chusho-teigi/kakunin4.png" alt="自社が対象になるかを確認する4ステップ: 主たる業種を確認する、資本金・従業員数を基準表と照合、小規模事業者に該当するか確認、みなし大企業でないか確認" loading="lazy"><figcaption>自社が対象になるかを確認する4ステップ</figcaption></figure>
 
 1. 主たる業種を確認する: 7区分のどれに当てはまるかを、売上構成の中心となる事業内容で判断します。

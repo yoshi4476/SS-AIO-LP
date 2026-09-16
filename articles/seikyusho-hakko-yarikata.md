@@ -51,6 +51,7 @@ faq:
 
 
 関連して、[飲食店の経理のやり方](/blog/inshokuten-keiri-yarikata/)もあわせてご確認ください。
+
 <div class="definition-box"><span class="term">請求書の発行とは</span>、納品したものやサービスの内容・金額・支払期日を書面またはデータにまとめ、取引先に交付することです。法律上の様式は定められていませんが、インボイス制度に登録している場合は決められた記載項目を満たす必要があります。</div>
 
 <figure><img src="/images/seikyusho-hakko-yarikata/eyecatch.png" alt="請求書の発行のやり方｜必須6項目と基本4ステップ【2026年】" loading="lazy"><figcaption>請求書の発行は6項目の確認から始まる</figcaption></figure>

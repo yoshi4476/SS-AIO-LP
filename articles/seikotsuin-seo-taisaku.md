@@ -95,6 +95,7 @@ MEOは「近くの整骨院を探す」段階の患者に、地図と口コミ�
 
 
 関連する内容については、[AIO対策のキーワード選定](/aio/aio-taisaku-keyword-sentei/)にまとめています。
+
 <figure><img src="/images/seikotsuin-seo-taisaku/steps.png" alt="整骨院SEO対策の基本5ステップ: キーワードを決める、症状別ページを作る、内部リンクでつなぐ、院の情報を書く、更新を継続する" loading="lazy"><figcaption>整骨院SEO対策の基本5ステップ</figcaption></figure>
 
 ### ステップ1: キーワードを決める

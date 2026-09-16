@@ -44,6 +44,36 @@ def add_blank_lines(body):
     return "\n".join(out), n
 
 
+def split_glued_paragraphs(body):
+    """空行なしで続いている本文の行を、別々の段落に分ける。
+
+    Markdownは改行1つを段落の区切りとみなさないため、2つの文が1つの<p>に
+    押し込まれる。自動で入れたリンク文が次の段落とくっついて起きる（実測232箇所）。
+    前の行が「。」で終わっているときだけ分ける。折り返しの途中では分けない。
+    """
+    out, n = [], 0
+    for para in re.split(r"(\n\s*\n)", body):
+        s = para.strip()
+        if (para.startswith("\n") or not s or "|:--" in s
+                or s.startswith(("|", "-", "*", ">", "#", "<", "```"))):
+            out.append(para)
+            continue
+        lines = para.split("\n")
+        buf = [lines[0]]
+        for prev, cur in zip(lines, lines[1:]):
+            # 次が定義ボックスなどのHTMLの塊なら、そこでも段落を分ける。
+            # 分けないと、リンク文とボックスが1つの<p>に入って200字を超える
+            html_block = re.match(r"\s*<(div|details|figure|table|blockquote|ul|ol)\b", cur)
+            if (prev.rstrip().endswith(("。", "！", "？")) and cur.strip()
+                    and not BLOCK.match(cur)
+                    and (html_block or not cur.lstrip().startswith("<"))):
+                buf.append("")
+                n += 1
+            buf.append(cur)
+        out.append("\n".join(buf))
+    return "".join(out), n
+
+
 def rejoin_marks(body):
     """装飾の途中で分かれた段落を、元の1段落に戻す"""
     parts = re.split(r"(\n\s*\n)", body)
@@ -103,19 +133,20 @@ def run(write):
         if not re.search(r"^score:\s*(9[0-9]|100)\s*$", fm, re.M):
             continue
         nb, a = add_blank_lines(body)
+        nb, d = split_glued_paragraphs(nb)
         nb, b = rejoin_marks(nb)
         nb, c = strong_in_html(nb)
-        if not (a or b or c):
+        if not (a or b or c or d):
             continue
         # 地の文が1字でも変わったら触らない。空行の増減と結合しかしていないはず
         if plain(body) != plain(nb):
             print(f"  × {p.stem}: 前後で本文が変わりました。書き換えません")
             continue
-        blanks += a
+        blanks += a + d
         joins += b
         strongs += c
         touched += 1
-        print(f"  {p.stem[:44]:<44} 空行{a:>2}  結合{b:>2}  強調{c:>2}")
+        print(f"  {p.stem[:44]:<44} 空行{a + d:>3}  結合{b:>2}  強調{c:>2}")
         if write:
             io.open(p, "w", encoding="utf-8", newline="").write(fm + nb)
     return touched, blanks, joins, strongs

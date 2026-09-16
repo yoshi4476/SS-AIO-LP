@@ -49,6 +49,7 @@ faq:
 
 
 関連して、[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)もあわせてご確認ください。
+
 実際の例を先に押さえるなら、[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)が参考になります。
 
 <div class="definition-box"><span class="term">工務店のインスタ集客とは</span>、Instagramのビジネスアカウントで施工事例・スタッフの人柄・家づくりの豆知識を発信し、フォロワーとの接点を積み上げて来場予約や問い合わせにつなげる一連の活動を指します。単なる写真置き場ではなく、比較検討中の見込み客との継続的な接点づくりが本来の目的です。</div>
@@ -72,6 +73,7 @@ faq:
 
 
 関連して、[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)もあわせてご確認ください。
+
 <figure><img src="/images/koumuten-instagram-shukyaku/riyu.png" alt="工務店にインスタ集客が必要な3つの理由: 無料で始められる、事例が資産になる、不安を解消できる" loading="lazy"><figcaption>工務店にインスタ集客が必要な3つの理由</figcaption></figure>
 
 <a href="https://www.mlit.go.jp/report/press/house04_hh_000519.html" target="_blank" rel="noopener">国土交通省の調査</a>によると、回答した中小工務店・大工事業者の<strong>平均雇用社員数は4.4名、平均年間新築受注戸数は5.3戸</strong>です。広告費を大きくかけられない小規模事業者が大半という実態が、この調査から見えてきます。
@@ -172,6 +174,7 @@ AI検索の時代でも、インスタでの発信はホームページ・SEOと
 
 
 関連して、[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)もあわせてご確認ください。
+
 医療機関など規制業種向けの応用は、[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で解説しています。
 
 当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。画像中心のInstagram投稿はAIが直接読み取りにくいぶん、==反響のあった投稿はホームページの記事にも書き起こしてください==。手間はかかりますが、検索とAI回答の両方に拾われる、数少ない橋渡し役です。

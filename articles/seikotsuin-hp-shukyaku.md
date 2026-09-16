@@ -53,6 +53,7 @@ diagrams:
 
 
 関連して、[工務店のWeb集客とは？5つの施策と始める順番](/ai-marketing/koumuten-web-shukyaku/)もあわせてご確認ください。
+
 関連する内容は、[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)で解説しています。
 
 前提となる考え方は、[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)で解説しています。
@@ -133,6 +134,7 @@ MEOは地図上での発見を、SEOは症状名検索での接触を担いま�
 
 
 関連して、[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)もあわせてご確認ください。
+
 <figure><img src="/images/seikotsuin-hp-shukyaku/ng-ok.png" alt="整骨院のホームページで書けること・書けないこと: 書けない表現は効果保証表現・ビフォーアフター写真・体験談の効果根拠利用、書けることは資格・保険適用範囲の説明・料金総額表示・院内スタッフ写真掲載" loading="lazy"><figcaption>整骨院のホームページで書けること・書けないこと</figcaption></figure>
 
 厚生労働省は<a href="https://www.mhlw.go.jp/stf/shingi/other-isei_547242.html" target="_blank" rel="noopener">「あん摩マッサージ指圧師、はり師、きゅう師及び柔道整復師等の広告に関する検討会」</a>で、柔道整復師の施術所が広告できる事項を限定列挙する指針を定めています。ウェブサイトも紙のチラシと同じくこの対象です。

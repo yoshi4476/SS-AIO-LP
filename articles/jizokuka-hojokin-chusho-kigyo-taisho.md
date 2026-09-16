@@ -49,6 +49,7 @@ faq:
 
 
 関連する内容として[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)も公開しています。
+
 対象になる範囲を先に押さえるなら、[小規模事業者持続化補助金2025](/blog/jizokuka-hojokin-kensetsugyou/)が参考になります。
 
 対象になる範囲は[小規模事業者持続化補助金の飲食店の事例](/blog/jizokuka-hojokin-inshokuten-jirei/)で整理しています。
@@ -67,6 +68,7 @@ faq:
 
 
 近い論点を[宿泊業の補助金は3つの入口｜目的別の選び方と優先順位](/blog/shukuhakugyou-hojokin-erabikata/)で扱っています。
+
 <figure><img src="/images/jizokuka-hojokin-chusho-kigyo-taisho/kijun.png" alt="小規模事業者の従業員数基準: 商業・サービス業5人以下、宿泊業・娯楽業20人以下、製造業その他20人以下、中小企業者より基準が厳しい" loading="lazy"><figcaption>小規模事業者の従業員数基準</figcaption></figure>
 
 | 区分 | 判定基準 | 業種別の目安 |
@@ -84,6 +86,7 @@ faq:
 
 
 あわせて[ものづくり補助金は製造業でどう使う？](/blog/monozukuri-hojokin-seizougyou/)もご覧ください。
+
 <figure><img src="/images/jizokuka-hojokin-chusho-kigyo-taisho/kakunin.png" alt="自社が対象か確認する4ステップ: 業種を確認する（4区分のどれか）、従業員数を確認する（小規模事業者に該当するか）、対象経費を確認する（販路開拓か設備投資か）、使う制度を選ぶ（持続化か他の補助金か）" loading="lazy"><figcaption>自社が対象か確認する4ステップ</figcaption></figure>
 
 #### ステップ1: 自社の主たる業種を確認する
@@ -131,6 +134,7 @@ faq:
 
 
 近い論点を[ものづくり補助金は小売業に使えない？](/blog/monozukuri-hojokin-kourigyou/)で扱っています。
+
 <div class="caution-box"><span class="box-title">注意: <span class="txt-red">従業員10人前後は要注意</span></span><br>従業員が10人前後まで増えると、業種によっては小規模事業者の基準を超えます。増員のタイミングで対象制度が変わっていないか確認してください。</div>
 
 デジタル化・AI導入補助金2026とものづくり補助金は、中小企業者であれば小規模事業者でなくても対象です。対象経費や中小企業者の判定方法は、[ものづくり補助金の中小企業の定義](/blog/monozukuri-hojokin-chusho-teigi/)で詳しく解説しています。
@@ -155,6 +159,7 @@ faq:
 
 
 関連する内容として[東京都のJCIP電子申請](/blog/tokyo-kensetsugyou-denshishinsei/)も公開しています。
+
 まず確認すべきは、自社が対象か、対象経費の範囲はどこまでかの2点。次に、商工会・商工会議所や登録支援事業者に相談しながら事業計画書を作成し、jGrantsなどの電子申請システムで提出します。
 
 **交付決定の通知が届く前に契約・発注をすると、補助対象から外れてしまいます。**この順番はどの制度でも共通のルールなので、必ず通知を待ってから発注してください。
@@ -171,6 +176,7 @@ faq:
 
 
 近い論点を[IT導入補助金のパソコン購入](/blog/it-hojokin-kojinjigyonushi-pc/)で扱っています。
+
 <figure><img src="/images/jizokuka-hojokin-chusho-kigyo-taisho/hikaku.png" alt="小規模事業者の判定でよくある誤り: NG例は中小企業者なら対象と誤解・資本金だけで判断・人数を数え間違える。OK例は従業員数だけで判定する・業種区分を先に確認・常時使用の定義を確認" loading="lazy"><figcaption>小規模事業者の判定でよくある誤り</figcaption></figure>
 
 1つ目は、資本金だけで判断してしまうこと。小規模事業者の判定基準は従業員数のみで、資本金の額は関係ありません。資本金が少なくても、従業員数が基準を超えていれば対象外です。

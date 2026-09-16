@@ -55,6 +55,7 @@ diagrams:
 
 
 関連して、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もあわせてご確認ください。
+
 <div class="definition-box"><span class="term">整骨院のMEO（Map Engine Optimization）とは</span>、「地域名×整骨院」で検索されたとき、Googleマップの上位（特に目立つ上位3枠）に自院を表示させるための最適化のことです。整骨院の場合、同じ検索結果に無資格でも開業できる「整体院」「カイロプラクティック」が並ぶ点が、他業種のMEOと異なります。</div>
 
 MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)、医療機関向けの土台は[クリニックのMEO対策](/meo/clinic-meo-taisaku/)で解説しています。
@@ -126,6 +127,7 @@ Googleビジネスプロフィールには、整骨院と紛らわしいカテ�
 
 
 関連して、[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)もあわせてご確認ください。
+
 <figure><img src="/images/seikotsuin-meo-taisaku/ng-ok.png" alt="整骨院MEOの資格表現NG・OK比較: NGは断定表現・金額言及・差別化なし、OKは事実表記・資格証掲載・保険適用範囲の案内" loading="lazy"><figcaption>整骨院MEOの資格表現 NG・OK比較</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 口コミへの返信で避けたい表現</span><br>「絶対に良くなります」といった断定表現や、施術費用への言及は、柔整広告ガイドラインに抵触するおそれがあります。返信では事実の確認と来院への感謝にとどめてください。</div>

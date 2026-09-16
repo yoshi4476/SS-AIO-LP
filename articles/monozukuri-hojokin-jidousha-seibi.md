@@ -53,6 +53,7 @@ faq:
 
 
 関連する内容を先に押さえるなら、[ものづくり補助金はクリニックで使える？](/hojokin/monozukuri-hojokin-clinic/)が参考になります。
+
 <div class="definition-box"><span class="term">ものづくり補助金とは</span>、中小企業庁が実施する「新事業進出・ものづくり商業サービス補助金」の通称です。旧ものづくり補助金と新事業進出補助金が統合され、2026年6月29日に第1回公募要領が公開されました。</div>
 
 <a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>によると、申請受付は2026年8月31日に始まり、締切は2026年9月30日18時と案内されています。採択はゴールではなく、実績報告を終えて初めて交付額が確定します。

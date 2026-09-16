@@ -81,6 +81,7 @@ faq:
 
 
 関連する内容として[経理の外注と丸投げの違い](/keiri-bpo/keiri-marunage-dekiru-hani/)も公開しています。
+
 関連する内容として[ATM入出金の記帳のやり方](/blog/atm-kicho-yarikata/)も公開しています。
 
 <figure><img src="/images/shokibo-jigyousha-keiri-taisei/patterns.png" alt="小規模事業者の経理体制3パターン: 経営者が自分で兼務する、パート・アルバイトを雇う、経理BPOを併用する" loading="lazy"><figcaption>小規模事業者の経理体制3パターン</figcaption></figure>
@@ -95,7 +96,9 @@ faq:
 
 第二に、パートやアルバイトを雇うパターンです。定型的な入力作業が一定量ある場合に有効ですが、会計事務の採用は簡単ではありません。厚生労働省の<a href="https://www.mhlw.go.jp/stf/newpage_73416.html" target="_blank" rel="noopener">「一般職業紹介状況」</a>によると、**会計事務従事者の有効求人倍率は0.61倍と、一般事務の0.32倍を上回ります**。
 
-第三に、経理BPOを併用するパターンです。記帳や給与計算などを外部に委託し、社内には確認と承認だけを残す方法です。**採用や教育の負担なく専門性の高い体制を得られます。**委託できる範囲や費用の考え方は[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)と[経理アウトソーシングの費用相場【2026年】内訳と抑え方](https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba/)で解説しています。
+第三に、経理BPOを併用するパターンです。記帳や給与計算などを外部に委託し、社内には確認と承認だけを残す方法です。
+
+**採用や教育の負担なく専門性の高い体制を得られます。**委託できる範囲や費用の考え方は[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)と[経理アウトソーシングの費用相場【2026年】内訳と抑え方](https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba/)で解説しています。
 
 3パターンは排他的ではなく、経営者兼務+一部BPOのように組み合わせて使う事業者も多くあります。たとえば日々の入金確認だけは社内で行い、月次試算表の作成や給与計算はBPOに任せるといった分け方です。
 

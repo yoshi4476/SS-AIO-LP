@@ -61,6 +61,7 @@ faq:
 
 
 実際の進め方については、[建設業許可の電子申請](/blog/kensetsugyou-kyoka-denshishinsei/)にまとめています。
+
 <div class="definition-box"><span class="term">JCIPとは</span>、正式名称「建設業許可・経営事項審査電子申請システム」の略称です。<a href="https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/tochi_fudousan_kensetsugyo_const_tk1_000001_00019.html" target="_blank" rel="noopener">国土交通省の案内</a>によると、<strong>2023年1月10日から運用が始まり</strong>、建設業許可や経営事項審査の申請・届出をインターネット経由で行えます。</div>
 
 <a href="https://prod.jcip.mlit.go.jp/TO/TO00001" target="_blank" rel="noopener">JCIP公式サイト</a>では、ログインにGビズIDでの認証が必要と案内されています。申請手数料は窓口での現金納付ではなく、Pay-easyによる電子納付を使います。

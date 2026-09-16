@@ -34,6 +34,7 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 
 
 近い論点を[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)で扱っています。
+
 前提となる考え方は[飲食店のMEO対策とは？](/meo/inshokuten-meo-taisaku/)で整理しています。
 
 <div class="definition-box"><span class="term">SEO（Search Engine Optimization）とは</span>、検索エンジンの検索結果で自社ページが上位に表示されるよう最適化することです。AI時代には、この上位表示が「AIの回答に引用されるための前提条件」という新しい役割も持ちます。</div>
@@ -73,6 +74,7 @@ AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置�
 
 
 近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
+
 <figure><img src="/images/ai-jidai-seo-taisaku/steps.png" alt="AI時代のSEO対策5つの基本: 運営者と著者を明記する、勝てるキーワードを選ぶ、1記事1質問で答えを書く、構造化と内部リンクを整える、毎月ふりかえる" width="1200" height="400" loading="lazy"><figcaption>AI時代のSEO対策 5つの基本（当メディア作成）</figcaption></figure>
 
 ### 基本1: 運営者と著者を明記する（E-E-A-T）

@@ -51,6 +51,7 @@ faq:
 
 
 前提となる考え方については、[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)にまとめています。
+
 <div class="definition-box"><span class="term">税理士のブログ集客とは</span>、確定申告・相続・法人設立といった読者の悩みに答える記事を継続的に発信し、検索エンジンとAI回答の両方から自事務所へのアクセスを生み出す活動を指します。開業挨拶だけのブログとは役割が異なります。</div>
 
 日本税理士会連合会の調査によると、税理士登録者数は**8万467人**（令和5年1月末時点）にのぼります。<a href="https://www.nichizeiren.or.jp/category/datalibrary/system/survey/" target="_blank" rel="noopener">日本税理士会連合会の税理士実態調査報告書</a>が示す通り、同業者の数は少なくありません。

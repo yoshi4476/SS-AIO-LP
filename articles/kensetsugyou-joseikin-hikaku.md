@@ -69,6 +69,7 @@ faq:
 
 
 近い論点を[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)で扱っています。
+
 建設業以外の業種で美容室の助成金がどう当てはまるかは、[美容室が使える助成金の基本と金額の目安](/blog/biyoushitsu-joseikin/)でも解説しています。
 
 <figure><img src="/images/kensetsugyou-joseikin-hikaku/joseikin4.png" alt="建設業向け助成金の一覧: 人材開発支援助成金は建設業訓練コースで訓練費と賃金を助成、業務改善助成金は賃上げと設備投資をセットで支援、キャリアアップ助成金は有期雇用の職人を正社員化、トライアル雇用助成金は未経験者を試用雇用で採用" loading="lazy"><figcaption>建設業向け助成金の一覧｜4制度</figcaption></figure>

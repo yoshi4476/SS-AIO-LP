@@ -57,6 +57,7 @@ faq:
 
 
 関連して、[事業再構築補助金は建設業も対象](/blog/jigyou-saikouchiku-kensetsugyou-jirei/)もあわせてご確認ください。
+
 対象になる範囲を先に押さえるなら、[ものづくり補助金｜建設業の採択事例3業種と上限9,000万円](/blog/monozukuri-hojokin-kensetsugyou-jirei/)が参考になります。
 
 <div class="definition-box"><span class="term">ものづくり補助金とは</span>、中小企業庁が実施する「新事業進出・ものづくり商業サービス補助金」の通称です。旧ものづくり補助金と事業再構築補助金の一部枠が統合され、2026年6月29日に第1回公募要領が公開されました。</div>
@@ -71,6 +72,7 @@ faq:
 
 
 あわせて[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)もご覧ください。
+
 <figure><img src="/images/monozukuri-hojokin-shukuhakugyou/kijun-vs.png" alt="サービス業と旅館業の中小企業者基準の違い: サービス業は資本金5000万円以下または従業員100人以下で一般的な業種区分の基準、旅館業は資本金5000万円以下または従業員200人以下で宿泊業だけの緩やかな基準" loading="lazy"><figcaption>サービス業と旅館業の中小企業者基準の違い</figcaption></figure>
 
 | 業種区分 | 資本金の額 | 従業員数 |

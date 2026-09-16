@@ -53,6 +53,7 @@ faq:
 
 
 近い論点を[医療機関のMEO対策](/meo/iryou-meo-taisaku/)で扱っています。
+
 <div class="definition-box"><span class="term">医療費控除とは</span>、本人や家族のために1年間に支払った医療費が一定額を超えた場合に、所得から一部を差し引ける制度のことです。整骨院の施術費も条件を満たせば対象になります。</div>
 
 <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1122.htm" target="_blank" rel="noopener">国税庁のタックスアンサー</a>によると、==柔道整復師による施術の対価は医療費控除の対象==です。ただし、疲れを癒す・体調を整えるといった治療に直接関係のないものは含まれません。

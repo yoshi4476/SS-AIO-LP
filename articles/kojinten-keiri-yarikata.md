@@ -102,6 +102,7 @@ faq:
 
 
 近い論点を[売掛金管理の方法とは？](/blog/urikakekin-kanri-houhou/)で扱っています。
+
 <figure><img src="/images/kojinten-keiri-yarikata/rejishime.png" alt="レジ締めを日次で回す4ステップ: 売上データを集計する、レジの現金を数える、差額の原因を確認する、現金出納帳に記録する" loading="lazy"><figcaption>レジ締めを日次で回す4ステップ</figcaption></figure>
 
 手順は4つです。まずレジやPOSから当日の売上データを集計します。次に、レジ内の現金を数えて実際の残高を出します。3つ目に、理論値と実際の残高に差があれば原因を確認します。最後に、当日の売上と入出金を現金出納帳へ記録します。

@@ -92,6 +92,7 @@ faq:
 
 
 関連する内容として[農業の倉庫投資は建物費NG](/blog/monozukuri-hojokin-nougyou-souko/)も公開しています。
+
 <figure><img src="/images/nougyou-shoki-hiyou/seido-vs.png" alt="対象になるものとならないものの比較: 対象になるのは登録されたソフトの利用料・導入時の初期設定と研修・対象類型でのタブレット・交付決定後に発注したもの。対象にならないのはトラクター等の農業機械・ハウスや倉庫などの建物・自社で作った管理表・交付決定前の発注" loading="lazy"><figcaption>対象になる・ならない</figcaption></figure>
 
 トラクター、田植機、コンバイン、選果機。**いずれもこの制度では補助されません。**ハウスや倉庫といった建物も同様です。

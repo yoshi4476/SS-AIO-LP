@@ -36,6 +36,7 @@ LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先�
 選ぶときの基準については、[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)にまとめています。
 
 関連して、[工務店のWeb集客とは？5つの施策と始める順番](/ai-marketing/koumuten-web-shukyaku/)もあわせてご確認ください。
+
 前提となる考え方は[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)でも扱っています。
 
 関連する内容は[AIO対策でAIに引用されるには？5つの実践ポイント](/aio/aio-taisaku-ai-inyou-sareru/)で整理しています。

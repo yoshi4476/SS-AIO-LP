@@ -118,6 +118,7 @@ faq:
 
 
 近い論点を[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)で扱っています。
+
 <figure><img src="/images/kicho-jidoka-app/tejun.png" alt="記帳自動化アプリを導入する3つの手順: 業務量を洗い出す、候補を2〜3個試す、本番データで検証する" loading="lazy"><figcaption>記帳自動化アプリを導入する3つの手順</figcaption></figure>
 
 第一に、業務量を洗い出します。月間の取引件数や、記帳にかけている時間を業務ごとに書き出し、どこに一番時間がかかっているかを把握します。

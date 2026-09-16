@@ -54,6 +54,7 @@ faq:
 エクセルでの限界を感じたら、[請求書をAIで自動化する方法](/blog/seikyusho-jidoka-ai/)への切り替えも選択肢になります。
 
 関連して、[請求書処理の効率化とは？進まない原因と5つの改善策](/blog/seikyusho-shori-koritsuka/)もあわせてご確認ください。
+
 インボイス制度の実務面は、[インボイス制度の経理実務とは？請求書処理の4ステップ](/blog/invoice-seido-keiri-jitsumu/)で解説しています。
 
 <div class="definition-box"><span class="term">請求書のエクセル自動化とは</span>、関数・マクロ・テンプレートといった標準機能を使い、取引先情報や単価の入力、番号の採番、合計金額の計算を少ない操作で行う仕組みを指します。==会計ソフトのような自動仕訳や電子保存の機能は持たないため、作成そのものの省力化が中心==になる点が特徴です。</div>
@@ -70,6 +71,7 @@ faq:
 
 
 関連して、[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)もあわせてご確認ください。
+
 <figure><img src="/images/seikyusho-excel-jidoka/shudan.png" alt="請求書の自動化に使える3つの手段: 関数で単価や合計を自動反映、マクロで定型操作を自動実行、テンプレートで入力項目を統一" loading="lazy"><figcaption>請求書の自動化に使える3つの手段</figcaption></figure>
 
 第一に、VLOOKUPやSUMなどの関数による自動反映です。取引先マスタのシートから単価や品目を呼び出し、数量を入れるだけで合計金額まで自動計算できます。
@@ -134,6 +136,7 @@ faq:
 
 
 あわせて[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)もご覧ください。
+
 <figure><img src="/images/seikyusho-excel-jidoka/hikaku.png" alt="請求書自動化のNG運用とOK運用: NG例は登録番号の記載漏れがある・税率ごとの内訳がない・番号が重複して発行される・マクロの内容が誰も分からない、OK例は登録番号を必須項目にする・税率ごとに金額を分ける・連番関数で自動採番する・処理内容を手順書に残す" loading="lazy"><figcaption>請求書自動化のNG運用とOK運用</figcaption></figure>
 
 関数が入ったセルを誤って上書きしてしまうと、見た目には数値が入っています。そのため、**次に開いた担当者が誤りに気づけない**まま発行してしまうことがあります。

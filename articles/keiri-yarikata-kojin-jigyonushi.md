@@ -55,6 +55,7 @@ faq:
 
 
 近い論点を[経理外注は個人（フリーランス）でも可能？](/blog/keiri-gaichuu-kojin/)で扱っています。
+
 あわせて[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)もご覧ください。
 
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/shuuki.png" alt="経理のやり方3つの周期: 日次でやること、月次でやること、年次でやること" loading="lazy"><figcaption>経理のやり方は3つの周期で仕組み化する</figcaption></figure>
@@ -81,6 +82,7 @@ faq:
 近い論点を[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)で扱っています。
 
 関連する内容として[ATM入出金の記帳のやり方](/blog/atm-kicho-yarikata/)も公開しています。
+
 領収書や請求書を受け取ったら、内容を思い出せるうちに記帳します。
 
 **判断が割れやすい勘定科目は、迷うたびに決めるのではなく、先に自分なりの基準を1つ決めておくと作業が止まりません。**たとえば「1万円未満の事務用品は消耗品費で統一する」のように、線引きを先に固定します。
@@ -111,6 +113,7 @@ faq:
 
 
 近い論点を[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)で扱っています。
+
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6501.htm" target="_blank" rel="noopener">消費税の納税義務者に関するタックスアンサー</a>があります。
 
 **この情報では、個人事業者は前々年の課税売上高が1,000万円以下であれば原則として消費税の納税義務が免除され、超えた場合や適格請求書発行事業者の登録を受けた場合は免除されないとされています。**この判定は年に1回、忘れずに確認しておきたい項目です。
@@ -163,6 +166,7 @@ NGパターンは、按分比率をその都度変える、用途メモを残さ
 
 
 近い論点を[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)で扱っています。
+
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/gaichuu-sign.png" alt="自分で回す限界を感じる3つのサイン: 月次確認が3か月停滞、科目判断で毎回迷う、本業の時間を圧迫" loading="lazy"><figcaption>自分で回す限界を感じる3つのサイン</figcaption></figure>
 
 1つ目は月次確認が3か月以上滞っていることです。2つ目は科目判断のたびに毎回迷うことです。3つ目は経理にかける時間が本業を圧迫し始めたことです。**3つのうち1つでも当てはまったら、外注を検討する段階に来ています。**

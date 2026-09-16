@@ -168,7 +168,9 @@ faq:
 
 <figure><img src="/images/it-hojokin-seizougyou/flow-steps.png" alt="製造業がIT導入補助金を使うまでの4ステップ: GビズID・SECURITY ACTIONを準備、IT導入支援事業者とツールを選定、交付申請から交付決定後に契約・導入、実績報告を提出し交付額が確定" loading="lazy"><figcaption>製造業がIT導入補助金を使うまでの4ステップ</figcaption></figure>
 
-決算期や繁忙期の直前に導入を始めると、現場が混乱しやすくなります。閑散期に交付申請から導入・研修までを終わらせ、繁忙期には運用が安定した状態で臨むのが理想的な逆算です。実績報告の必要書類まで含めた手順は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で整理しています。
+決算期や繁忙期の直前に導入を始めると、現場が混乱しやすくなります。閑散期に交付申請から導入・研修までを終わらせ、繁忙期には運用が安定した状態で臨むのが理想的な逆算です。
+
+実績報告の必要書類まで含めた手順は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で整理しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

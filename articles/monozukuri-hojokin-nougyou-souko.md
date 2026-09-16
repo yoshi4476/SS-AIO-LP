@@ -51,6 +51,7 @@ faq:
 
 
 関連して、[事業再構築補助金で農業が使えたのは6次産業化](/blog/jigyou-saikouchiku-nougyou-jirei/)もあわせてご確認ください。
+
 関連する内容については、[農業機械補助金は4制度](/blog/nougyou-kikai-hojokin/)にまとめています。
 
 2026年度からは「新事業進出・ものづくり商業サービス補助金」という名称に変わりました。制度の全体像は[ものづくり補助金は運送業で使える？](/blog/monozukuri-hojokin-unsougyou/)でも整理しています。

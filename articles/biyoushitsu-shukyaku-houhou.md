@@ -51,6 +51,7 @@ faq:
 
 
 あわせて[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
+
 今日から着手できる具体的な[美容室の集客アイデア](/ai-marketing/biyoushitsu-shukyaku-idea/)を無料施策から順に12個まとめているので、あわせてご覧ください。
 
 <div class="definition-box"><span class="term">美容室の集客方法とは</span>、Googleマップでの表示・口コミ対応・Instagram発信・指名検索の導線づくり・リピート化の仕組み・広告表示のルール順守という6つの施策を通じて、新規来店とリピート来店の両方を安定させる一連の取り組みを指します。新規獲得だけに偏ると、集客をやめた瞬間に客数が落ち込みます。</div>

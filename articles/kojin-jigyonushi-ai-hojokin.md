@@ -51,6 +51,7 @@ faq:
 
 
 関連して、[宿泊業の補助金は3つの入口｜目的別の選び方と優先順位](/blog/shukuhakugyou-hojokin-erabikata/)もあわせてご確認ください。
+
 対象になる範囲を先に押さえるなら、[IT導入補助金のパソコン購入](/blog/it-hojokin-kojinjigyonushi-pc/)が参考になります。
 
 <div class="definition-box"><span class="term">小規模事業者とは</span>、商業・サービス業（宿泊業・娯楽業を除く）で常時使用する従業員数5人以下、宿泊業・娯楽業や製造業その他は20人以下の事業者を指します。個人事業主の多くは、この基準を自然に満たします。</div>
@@ -81,6 +82,7 @@ faq:
 
 
 関連して、[事業再構築補助金は法人成り後も続く？](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)もあわせてご確認ください。
+
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/shorui3.png" alt="個人事業主が用意する書類3点: 身分証明書（運転免許証等）、所得税納税証明書（その1/2）、確定申告書Bの控え"><figcaption>個人事業主が用意する書類3点</figcaption></figure>
 
 1点目は運転免許証・運転経歴証明書・発行から3ヶ月以内の住民票のいずれかです。2点目は所得税の納税証明書で、「その1」「その2」のどちらでも要件を満たします。税目や種類の詳しい違いは[AI導入補助金の納税証明書はどれ？その1とその2の違い](https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/)で解説しています。
@@ -116,6 +118,7 @@ faq:
 
 
 あわせて[中小企業成長加速化補助金](/blog/seicho-kasokuka-hojokin-schedule/)もご覧ください。
+
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/flow4.png" alt="GビズID取得から交付決定までの4ステップ: GビズID取得（プライムを申請）、支援事業者選定（ツールを決める）、交付申請（事業計画書を提出）、交付決定後に発注（決定前はNG）"><figcaption>GビズID取得から交付決定までの4ステップ</figcaption></figure>
 
 最初のGビズIDプライムは、発行までに約2〜3週間かかります。**個人事業主も法人と同じプライムアカウントが必要で、簡易版のエントリーでは申請できません。**早めの取得が、全体スケジュールを左右します。
@@ -132,6 +135,7 @@ faq:
 あわせて[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)もご覧ください。
 
 関連して、[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)もあわせてご確認ください。
+
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/ngok.png" alt="個人事業主の申請でよくあるNG・OK: NG例は開業1年未満で申請・証明書取得を後回し・GビズID未取得のまま進める、OK例は開業1年経過を確認・証明書を早めに取得・GビズIDを先に取得"><figcaption>個人事業主の申請でよくあるNG・OK</figcaption></figure>
 
 <a href="https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf" target="_blank" rel="noopener">中小企業庁が公開した制度概要</a>でも、財務書類の準備が2026年度から全申請者で必須になったと案内されています。個人事業主は確定申告書類がこの財務書類にあたるため、準備不足は差し戻しの直接原因になります。
@@ -151,6 +155,7 @@ faq:
 
 
 関連して、[補助金でAIチャットボット導入｜対象条件と申請の流れ](/blog/ai-hojokin-chatbot-donyu/)もあわせてご確認ください。
+
 たとえば会計・請求書ソフトは、確定申告の作業負担を直接減らせます。
 
 AIチャットボットは、営業時間外の問い合わせ対応を1人でまかなう手段として有効です。対象ツールの分野全体は[AI導入補助金の対象ツール6分野｜対象外との見分け方](https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool/)で解説しています。

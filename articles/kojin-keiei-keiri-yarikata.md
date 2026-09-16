@@ -79,6 +79,7 @@ faq:
 
 
 あわせて[飲食店の経理のやり方](/blog/inshokuten-keiri-yarikata/)もご覧ください。
+
 <div class="definition-box"><span class="term">個人経営とは</span>、税務上の届出区分ではなく、経営者本人が意思決定から実務までを一人で担っている経営スタイルを指す言葉です。個人事業主として届け出ていても、法人化していても使われます。</div>
 
 <figure><img src="/images/kojin-keiei-keiri-yarikata/keiei-chigai.png" alt="個人経営と会社経営の経理の違い" loading="lazy"><figcaption>個人経営と会社経営の経理の違い</figcaption></figure>
@@ -156,6 +157,7 @@ faq:
 
 
 関連する内容として[経理の外注と丸投げの違い](/keiri-bpo/keiri-marunage-dekiru-hani/)も公開しています。
+
 <figure><img src="/images/kojin-keiei-keiri-yarikata/gaichuu-step.png" alt="外注を検討する3ステップ: 作業時間を計測する、滞りの月数を数える、任せる業務を選ぶ" loading="lazy"><figcaption>外注を検討する3ステップ</figcaption></figure>
 
 外注を検討するかどうかは、次の3ステップで判断すると迷いにくくなります。まず経理に使っている作業時間を1週間分でよいので計測します。次に月次確認が何か月分滞っているかを数えます。最後に、記帳・月次確認・申告準備のうち、どの業務から任せるかを1つだけ選びます。

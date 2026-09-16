@@ -163,7 +163,9 @@ faq:
 
 3つの失敗はいずれも、開業手続きに気を取られて集患を「開業してから考える」後回しにした結果です。開業3ヶ月前の時点で、誰が何を発信するかを簡単な表にまとめておくだけでも、失敗の大半は防げます。
 
-具体的な運用の始め方は[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)、電話での予約対応は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でそれぞれ解説しています。歯科医院で開業費用まで含めて検討したい場合は[歯科医院の開業費用は5000万円？内訳と抑え方](/meo/shika-kaigyou-hiyou/)もあわせてご確認ください。
+具体的な運用の始め方は[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)、電話での予約対応は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でそれぞれ解説しています。
+
+歯科医院で開業費用まで含めて検討したい場合は[歯科医院の開業費用は5000万円？内訳と抑え方](/meo/shika-kaigyou-hiyou/)もあわせてご確認ください。
 
 <div class="cta-box"><p>自院の開業スケジュールと集患準備を、AIO・SEO・MEOの視点で無料診断しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 

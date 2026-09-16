@@ -51,6 +51,7 @@ faq:
 
 
 近い論点を[経理の残業を減らす7つの方法](/blog/keiri-zangyo-herasu/)で扱っています。
+
 選ぶときの基準を先に押さえるなら、[経費精算システムとは？](/blog/keihi-seisan-system-erabikata/)が参考になります。
 
 前提となる考え方を先に押さえるなら、[請求書処理の効率化とは？進まない原因と5つの改善策](/blog/seikyusho-shori-koritsuka/)が参考になります。
@@ -69,6 +70,7 @@ MM総研が2026年3月末時点で公表した調査によると、<a href="http
 
 
 近い論点を[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)で扱っています。
+
 <figure><img src="/images/keiri-koritsuka-system/shurui.png" alt="経理効率化システムの主な種類4つ: クラウド会計ソフト、経費精算システム、RPA・AI-OCR、受発注連携システム" loading="lazy"><figcaption>経理効率化システムの主な種類4つ</figcaption></figure>
 
 | 種類 | 得意な業務 | 向いている企業 |
@@ -139,6 +141,7 @@ MM総研の同調査では、<strong>会計ソフトの事業者別シェアは�
 
 
 関連する内容として[管理部門の人手不足解決｜5つの選択肢と選び方](/blog/kanribumon-hitodebusoku-kaiketsu/)も公開しています。
+
 <div class="caution-box"><span class="box-title">注意: システム導入だけでは経理の人手不足は解消しない</span><br><span class="txt-red">定型的な入力作業は減らせても、仕訳判断や決算の最終チェックは人の判断が必要です。</span>システム化と人員体制の見直しは、別々に検討する必要があります。</div>
 
 たとえば、勘定科目の判断に迷うイレギュラーな取引や、税務調査対応、資金繰りの相談などは、どれだけシステムを導入しても人の専門知識が必要な領域です。こうした判断業務まで含めて任せたい場合は、経理BPOの活用が選択肢になります。

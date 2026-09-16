@@ -51,6 +51,7 @@ diagrams:
 
 
 あわせて[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)もご覧ください。
+
 内装だけでなく、開院後の[クリニックDX事例](/ai-marketing/clinic-dx-jirei/)まで含めて検討すると、集患効果はさらに高まります。
 
 実際の例は[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)で整理しています。

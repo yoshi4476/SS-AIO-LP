@@ -139,6 +139,7 @@ diagrams:
 
 
 関連する内容として[SaaS指名検索の増やし方｜AI時代に効く5つの施策](/aio/saas-shimei-kensaku-fuyashikata/)も公開しています。
+
 <figure><img src="/images/fudousan-seo-taisaku/portal-vs-seo.png" alt="物件ポータルと自社SEOの役割の違い: 物件ポータルは物件そのものを探す入口でSUUMO等への出稿に依存し条件検索からの流入、自社SEOは会社を比較し選ぶ入口で自社で資産として蓄積でき検討後期の指名検索に効く" loading="lazy"><figcaption>物件ポータルと自社SEO（コラム・エリアページ）は役割が異なり、両方の運用が前提になります</figcaption></figure>
 
 物件ポータルへの出稿費用は掲載を止めた瞬間に効果がゼロになります。一方、自社サイトのコラムやエリアページは、公開を続ける限り資産として蓄積されます。
@@ -153,6 +154,7 @@ diagrams:
 
 
 あわせて[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)もご覧ください。
+
 費用の目安は[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
 ### ステップ1: 現状分析を1週間で終わらせる

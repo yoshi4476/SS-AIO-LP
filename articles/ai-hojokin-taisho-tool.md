@@ -51,6 +51,7 @@ faq:
 
 
 関連する内容は、[建設業がAI導入補助金で不採択になる6つの理由と直し方](/blog/tokyo-kensetsugyou-denshishinsei/)で解説しています。
+
 実際の例については、[AI導入補助金の不採択理由](/blog/ai-hojokin-fusaitaku-riyu/)にまとめています。
 
 実際の進め方は[AI導入補助金のセキュリティアクション二つ星](/blog/ai-hojokin-security-action-hoshi2/)でも扱っています。

@@ -53,6 +53,7 @@ faq:
 
 
 関連する内容として[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)も公開しています。
+
 実際の進め方は[請求書の発行のやり方｜必須6項目と基本4ステップ](/blog/seikyusho-hakko-yarikata/)で整理しています。
 
 <div class="definition-box"><span class="term">適格請求書(インボイス)とは</span>、発行事業者の登録番号など決められた項目を満たした請求書のことです。==この項目が欠けていると、仕入税額控除を受けられない場合があります。==</div>

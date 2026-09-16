@@ -71,6 +71,7 @@ faq:
 
 
 あわせて[運送業の実績報告書｜傭車の契約名義とデジタコ対応の壁](/blog/unsougyou-jissekihoukokusho/)もご覧ください。
+
 <figure><img src="/images/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/taisho.png" alt="個人事業主が対象になる主な要件: 商業・サービス業5人以下、宿泊業・娯楽業20人以下、製造業その他20人以下、法人・個人問わず対象"><figcaption>個人事業主が対象になる主な要件</figcaption></figure>
 
 | 業種区分 | 従業員数の目安 | 補足 |
@@ -156,6 +157,7 @@ faq:
 
 
 近い論点を[開業届の電子申請｜個人事業主がe-Taxで出す5ステップ](/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/)で扱っています。
+
 <figure><img src="/images/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/nagare.png" alt="申請から採択発表までの流れ: 公募開始（要領を確認）、商工会に相談（事業計画書作成）、電子申請（jGrantsで提出）、審査（基礎・計画・加点）、採択発表（結果通知）"><figcaption>申請から採択発表までの流れ</figcaption></figure>
 
 第19回は2026年1月28日に公募要領が公開され、4月30日に締切、7月29日に採択発表という流れでした。<a href="https://r6.jizokukahojokin.info/" target="_blank" rel="noopener">小規模事業者持続化補助金の公式サイト</a>で、次回公募の最新スケジュールを確認できます。

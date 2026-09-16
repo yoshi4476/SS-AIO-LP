@@ -92,6 +92,7 @@ faq:
 
 
 関連する内容は[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)でも扱っています。
+
 <figure><img src="/images/jigyou-saikouchiku-biyoushitsu-jirei/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能" loading="lazy"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 
 事業再構築補助金は2025年6月に中小企業新事業進出補助金へ引き継がれ、この制度も2026年6月19日の第4回公募で終了しました。第1回公募要領は2026年6月29日に公開され、申請受付は2026年8月31日に始まる予定です。

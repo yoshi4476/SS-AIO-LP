@@ -53,6 +53,7 @@ faq:
 近い論点を[e-Gov電子申請とは](/blog/egov-denshishinsei-kojinjigyonushi/)で扱っています。
 
 関連する内容として[社会保険の電子申請義務化](/blog/shakaihoken-denshishinsei-gimuka-chusho/)も公開しています。
+
 関連する内容は[AI導入補助金の必要書類一覧と準備の順番](/blog/ai-hojokin-hitsuyo-shorui-hojin/)で整理しています。
 
 関連する内容として[ベンダー登録とは？IT導入補助金の確認方法と2つのリスク](/blog/vendor-touroku-toha/)も公開しています。
@@ -127,7 +128,7 @@ GビズIDアプリは、iOSならApp Store、AndroidならGoogle Playからそ�
 あわせて[中小企業成長加速化補助金](/blog/seicho-kasokuka-hojokin-schedule/)もご覧ください。
 <a href="https://gbiz-id.go.jp/top/apply/prime_document_01.html" target="_blank" rel="noopener">GビズID公式サイトの案内</a>では、書類申請について「申請から審査、アカウント発行まで最大1か月の時間がかかる」と明記されています。
 
-一方で<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">IT導入補助金事務局の申請前手続きページ</a>は、実務上の目安として「GビズIDプライムの発行までおおむね2週間、SECURITY ACTION宣言の発行までおおむね2〜3日」を見込むよう案内しています。
+一方で<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">IT導入補助金事務局の申請前手続きページ</a>は、実務上の目安を案内しています。「GビズIDプライムの発行までおおむね2週間、SECURITY ACTION宣言の発行までおおむね2〜3日」を見込む内容です。
 
 即日発行はあくまで最短ケースであり、混雑状況や書類の不備によって前後します。締切から逆算した、余裕あるスケジュール管理が肝心です。**目安は1か月前の着手**。SECURITY ACTIONの宣言もあわせて必要になるため、GビズIDと同じタイミングで準備を進めてください。
 

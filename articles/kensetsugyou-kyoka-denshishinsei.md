@@ -53,6 +53,7 @@ faq:
 
 
 つまずきやすい点は[福岡県の建設業電子申請「JCIP」窓口と手数料の注意点3つ](/blog/fukuoka-kensetsugyou-denshishinsei/)でも扱っています。
+
 <div class="definition-box"><span class="term">JCIPとは</span>、正式名称「建設業許可・経営事項審査電子申請システム」の略称です。<a href="https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/tochi_fudousan_kensetsugyo_const_tk1_000001_00019.html" target="_blank" rel="noopener">国土交通省の案内</a>によると、<strong>2023年1月から建設業許可・経営事項審査の電子申請の受付が始まりました。</strong></div>
 
 <a href="https://prod.jcip.mlit.go.jp/TO/TO00001" target="_blank" rel="noopener">JCIP公式サイト</a>では、ログインにGビズIDによる認証が必要と案内されています。窓口に出向く従来の書面申請も、多くの都道府県で並行して選べる状態が続いています。
@@ -140,7 +141,9 @@ GビズIDでログインし、画面の案内に沿って申請書を作成し�
 
 **JCIP自体は補助金の対象外ですが、社内業務をDX化する民間ツールはAI導入補助金・IT導入補助金の対象になりえます。**JCIPは無料の行政システムのため、そもそも補助対象になる費用が発生しません。この2つを混同しないことが、無駄な相談を減らす近道です。
 
-JCIPへの入力そのものは無料で行えますが、根拠資料の電子化・進行管理・社内での情報共有には、別途クラウドツールを使う会社が増えています。**電子契約・受発注ツールが補助対象になる条件や補助率は[建設業の電子申請システムはIT導入補助金の対象になる？](/blog/kensetsugyou-denshishinsei-system/)で詳しく解説しているので、導入を検討する場合はあわせてご確認ください。**
+JCIPへの入力そのものは無料で行えますが、根拠資料の電子化・進行管理・社内での情報共有には、別途クラウドツールを使う会社が増えています。
+
+**電子契約・受発注ツールが補助対象になる条件や補助率は[建設業の電子申請システムはIT導入補助金の対象になる？](/blog/kensetsugyou-denshishinsei-system/)で詳しく解説しているので、導入を検討する場合はあわせてご確認ください。**
 
 建設業では人手不足を背景に、施工管理・積算業務そのものをAI活用でどう埋めるかという相談も増えています。**この視点は[建設業の2024年問題をAI導入補助金でどう埋めるか](/blog/ai-hojokin-kensetsugyou-katsuyou/)で詳しく取り上げています。
 **補助金の電子申請自体が実質的な前提になっている点は[補助金の電子申請はいつから義務化？](/blog/hojokin-denshishinsei-gimuka-itsukara/)も参考になります。

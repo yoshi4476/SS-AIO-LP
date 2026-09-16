@@ -76,7 +76,9 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 
 関連する内容として[AI導入補助金のセキュリティアクション二つ星](/blog/ai-hojokin-security-action-hoshi2/)も公開しています。
-<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の申請手続きフロー</a>によると、<strong>交付申請には「GビズIDプライム」と、IPA（情報処理推進機構）の「SECURITY ACTION」の宣言（★一つ星または★★二つ星）が必須</strong>です。GビズIDプライムの発行には概ね2週間、SECURITY ACTIONの宣言済アカウントID発行には概ね2〜3日かかると案内されています。
+<a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の申請手続きフロー</a>によると、<strong>交付申請には「GビズIDプライム」が必須</strong>です。
+
+あわせて、IPA（情報処理推進機構）の「SECURITY ACTION」の宣言（★一つ星または★★二つ星）も求められます。GビズIDプライムの発行には概ね2週間、SECURITY ACTIONの宣言済アカウントID発行には概ね2〜3日かかると案内されています。
 
 <div class="caution-box"><span class="box-title">注意: GビズIDは即日発行できない</span><br>締切の直前に気づいて申請しても、発行が間に合わず応募自体ができなくなります。締切から逆算して、遅くとも1か月前には取得手続きを始めてください。</div>
 
@@ -102,6 +104,7 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 
 近い論点を[AI導入補助金のAI活用事例5選](/blog/ai-hojokin-ai-katsuyo-jirei/)で扱っています。
+
 過去の採択で賃上げ加点を受けたにもかかわらず、要件を満たす取り組みを実行していないまま放置しているケースも減点の要因です。
 
 **賃上げ目標を掲げて加点を受けた場合は、実行状況の記録を残しておく**必要があります。同一機能のITツールを別の年度でまた導入しようとする申請も、プロセスが重複していると判断されやすいので注意してください。
@@ -116,6 +119,7 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 
 関連する内容として[ベンダー登録とは？IT導入補助金の確認方法と2つのリスク](/blog/vendor-touroku-toha/)も公開しています。
+
 <a href="https://it-shien.smrj.go.jp/aftergrantdecision/measures/" target="_blank" rel="noopener">事務局の交付決定後の手続きページ</a>では、<strong>「事業が適正に行われなかった場合や、実績報告期間中に正しく実績報告が行われなかった場合、補助金の交付を受けることができない」</strong>と明記されています。実績報告の提出までに、すべてのITツールの契約・納品・支払い・利用開始を完了させておく必要があります。
 
 <span class="big">採択されたことに安心せず、実績報告までの社内スケジュールを最初に確定させておくことが何より大切です。</span>期限を過ぎると、<span class="txt-red">補助金の全部または一部を受け取れなくなる</span>リスクがあります。ベンダーの納品スケジュールが遅れる可能性も踏まえ、余裕を持った契約日程を組んでください。
@@ -150,11 +154,14 @@ GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間�
 
 
 関連する内容として[補助金でAIチャットボット導入｜対象条件と申請の流れ](/blog/ai-hojokin-chatbot-donyu/)も公開しています。
+
 導入したAIツールを現場のスタッフに使いこなしてもらうには、教育の仕組み化が欠かせません。
 
 手順の分解と記録の作り方は店舗スタッフの教育マニュアルの作り方｜定着に効く4ステップで詳しく解説しています。せっかく導入したツールも、担当者の退職で使い方が分からなくなる例は珍しくないため、アルバイトの早期離職を防ぐには？原因と定着施策7選も合わせて確認しておくと安心です。
 
-補助金で浮いた予算や工数を集客に振り向けるなら、導入したAIツールを活用する具体策は[ChatGPTを集客に活用する方法7選【中小企業向け】](https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/)、AI検索時代の集客の全体像は[AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)で解説しています。
+補助金で浮いた予算や工数を集客に振り向けるなら、導入したAIツールを活用する具体策は[ChatGPTを集客に活用する方法7選](https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/)で解説しています。
+
+AI検索時代の集客の全体像は[AI集客の完全ガイド](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)にまとめています。
 
 自社の発信がAI検索にどう引用されるかという基礎知識は[AIO対策とは？AI検索に引用される5つの手順](https://ai.7senses.co.jp/aio/aio-taisaku-guide/)も参考になります。
 

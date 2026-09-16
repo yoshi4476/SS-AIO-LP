@@ -69,6 +69,7 @@ OB客紹介の伸び悩みは、接点の途切れ・依頼タイミングの欠
 
 
 関連して、[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)もあわせてご確認ください。
+
 <figure><img src="/images/obkyaku-shoukai-shikumi/genin.png" alt="OB客紹介が増えない3つの原因: 引き渡し後に接点が途切れる、紹介を頼むタイミングがない、紹介するメリットが伝わらない" loading="lazy"><figcaption>OB客紹介が増えない3つの原因</figcaption></figure>
 
 **原因1: 引き渡し後に接点が途切れる。**担当者が引き渡しを境に離れると、その後の連絡は不具合対応くらいになりがちです。**接点がなければ、紹介したくても思い出す機会自体がありません**。
@@ -128,7 +129,9 @@ OB客紹介の伸び悩みは、接点の途切れ・依頼タイミングの欠
 
 <div class="caution-box"><span class="box-title">注意: 謝礼額を口約束で決めるのはNG</span><br>謝礼額の上限や支払い条件を文書化せず、口頭の約束だけで進めると、後からトラブルになりやすいです。必ず規約として書面化してください。</div>
 
-もう一つの論点は宅建業法です。<a href="https://www.zenchin.com/news/post-2885.php" target="_blank" rel="noopener">経済産業省のグレーゾーン解消制度</a>による2016年の回答では、**「業者を紹介するだけ」であれば宅建業法の仲介行為に該当しない**とされています。ただし物件説明や契約条件の交渉にOB客が関与すると、仲介行為とみなされるリスクがあります。<span class="txt-red">OB客に物件説明や価格交渉を任せるのはNG</span>です。<span class="big">紹介の役割は「会社を紹介するところまで」に線引きすること</span>が、法律面での最重要ポイントです。
+もう一つの論点は宅建業法です。<a href="https://www.zenchin.com/news/post-2885.php" target="_blank" rel="noopener">経済産業省のグレーゾーン解消制度</a>による2016年の回答では、**「業者を紹介するだけ」であれば宅建業法の仲介行為に該当しない**とされています。
+
+ただし物件説明や契約条件の交渉にOB客が関与すると、仲介行為とみなされるリスクがあります。<span class="txt-red">OB客に物件説明や価格交渉を任せるのはNG</span>です。<span class="big">紹介の役割は「会社を紹介するところまで」に線引きすること</span>が、法律面での最重要ポイントです。
 
 ## OB客管理を仕組み化する方法
 
@@ -136,6 +139,7 @@ OB客管理は、引き渡し日・フォロー日・紹介実績をスプレッ
 
 
 関連して、[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)もあわせてご確認ください。
+
 <figure><img src="/images/obkyaku-shoukai-shikumi/kanri-flow.png" alt="OB客管理を仕組み化する3ステップ: 引き渡し時に記録、定期的にフォロー、紹介時にお礼を伝える" loading="lazy"><figcaption>OB客管理を仕組み化する3ステップ</figcaption></figure>
 
 専用のCRMツールは、この段階では必須ではありません。「引き渡し日」「次回フォロー予定日」「紹介実績」の3列があれば運用は始められます。

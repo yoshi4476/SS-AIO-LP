@@ -53,6 +53,7 @@ faq:
 
 
 あわせて[経理のやり方とは？初心者向け5ステップ](/blog/keiri-yarikata-shoshinsha/)もご覧ください。
+
 経理業務全体の中で月次決算がどう位置づくかは、[経理の属人化を解消する5つの方法｜原因とリスクも解説](https://corp.7senses.co.jp/blog/keiri-zokujinka-kaisho/)でも触れています。
 
 <div class="definition-box"><span class="term">月次決算とは</span>、1か月分の取引をもとに帳簿を締め、試算表を作成する社内向けの決算です。==法律で義務づけられている本決算とは異なり、社内の経営判断のために自主的に行う点が特徴です。==</div>

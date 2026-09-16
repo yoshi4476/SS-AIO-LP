@@ -97,6 +97,7 @@ faq:
 近い論点を[事業再構築補助金で農業が使えたのは6次産業化](/blog/jigyou-saikouchiku-nougyou-jirei/)で扱っています。
 
 関連する内容として[農業の補助金の申請方法｜制度の選び方と5ステップ](/blog/nougyou-hojokin-shinsei-houhou/)も公開しています。
+
 <figure><img src="/images/jigyou-saikouchiku-shukuhakugyou-jirei/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能" loading="lazy"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 
 事業再構築補助金は2025年6月に中小企業新事業進出補助金へ引き継がれ、この制度も2026年6月19日の第4回公募で終了しました。第1回公募要領は2026年6月29日に公開され、申請受付は2026年8月31日に始まっています。

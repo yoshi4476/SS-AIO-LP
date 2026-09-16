@@ -55,6 +55,7 @@ faq:
 関連する内容として[請求書の発行のやり方｜必須6項目と基本4ステップ](/blog/seikyusho-hakko-yarikata/)も公開しています。
 
 関連する内容として[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)も公開しています。
+
 <div class="definition-box"><span class="term">経理代行とは</span>、記帳・請求書の発行・入出金の管理・決算書の作成準備といった経理業務を、外部の専門会社や税理士事務所に委託するサービスのことです。法人だけでなく個人事業主も依頼でき、業務の一部だけを切り出して頼める点が特徴です。</div>
 
 依頼できる業務は幅広く、すべてを一括で頼む必要はありません。日々の記帳だけ、請求書の発行だけ、といった部分的な依頼が一般的です。
@@ -73,6 +74,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 
 近い論点を[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)で扱っています。
+
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/taimingu.png" alt="経理代行を検討すべき3つのタイミング: 確定申告前に帳簿が未整理、売上増で仕訳が増えた、本業に集中したい" loading="lazy"><figcaption>経理代行を検討すべき3つのタイミング</figcaption></figure>
 
 1つ目は、確定申告の時期が近づいているのに帳簿が数か月分たまっているケースです。この段階で依頼すると、記帳の遅れを解消しながら申告準備を進められます。
@@ -93,6 +95,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 あわせて[自営業の経理のやり方](/blog/jieigyou-keiri-yarikata/)もご覧ください。
 
 あわせて[会社の経理のやり方｜個人事業主と違う4つのポイント](/blog/kaisha-keiri-yarikata/)もご覧ください。
+
 関連する内容は[開業したばかりの経理代行、使うべき？判断基準3つ](/blog/keiri-daiko-kaigyou/)で整理しています。
 
 記帳代行は「帳簿をつける」作業のみに特化したサービスです。経理代行はそれに加えて請求書発行や支払い管理まで含む、やや広い範囲を指します。税理士は記帳に加えて、確定申告書の作成・提出という**税理士資格が必要な業務**まで担えます。
@@ -115,6 +118,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 
 近い論点を[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)で扱っています。
+
 大阪の税理士事務所が公開している<a href="https://osakacpa.com/keiri-soba/" target="_blank" rel="noopener">経理代行・税理士費用の相場データ</a>があります。
 
 記帳代行のみの依頼は月額6,000円〜4万円、決算書作成・申告書作成込みの依頼は月額1万円〜5万円が目安とされています。記帳代行会社に単発で頼む場合は、1仕訳あたり60円〜100円という従量課金の例もあります。
@@ -135,6 +139,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 
 あわせて[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)もご覧ください。
+
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2070.htm" target="_blank" rel="noopener">青色申告特別控除に関するタックスアンサー</a>があります。**この情報では、複式簿記で記帳し電子帳簿保存またはe-Taxで申告すると65万円、同じ複式簿記でも紙提出なら55万円、簡易な帳簿では10万円が控除額の上限とされています。**
 
 控除額の差は10万円から65万円まで広がるため、**帳簿の付け方だけで納税額が変わる**ことになります。複式簿記に不慣れな個人事業主にとって、経理代行に記帳を任せることは控除額の維持にも直結する選択です。
@@ -147,6 +152,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 
 関連する内容として[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)も公開しています。
+
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/erabikata.png" alt="個人事業主に合う経理代行の選び方3つのポイント" loading="lazy"><figcaption>個人事業主に合う経理代行の選び方</figcaption></figure>
 
 1つ目は確定申告との連携です。記帳だけを頼むのか、提携税理士による申告まで任せられるのかを事前に確認します。2つ目は対応ソフトの一致です。**自分が使っている、または使う予定の会計ソフトに対応しているかを必ず確認してください。**非対応だと、データの移行作業が余分に発生します。
@@ -163,6 +169,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 
 近い論点を[経理外注は個人（フリーランス）でも可能？](/blog/keiri-gaichuu-kojin/)で扱っています。
+
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/nagare.png" alt="経理代行導入までの3ステップ: 依頼範囲を決める、複数社を比較する、契約して引き継ぐ" loading="lazy"><figcaption>経理代行導入までの3ステップ</figcaption></figure>
 
 ステップ1では、記帳のみか、請求書発行や申告まで含めるかを自分の中で決めます。範囲を紙やメモに書き出しておくと、複数社への説明がぶれません。
@@ -177,6 +184,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 
 あわせて[経理のやり方とは？初心者向け5ステップ](/blog/keiri-yarikata-shoshinsha/)もご覧ください。
+
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/hikaku.png" alt="失敗する依頼方法と失敗しない依頼方法の比較" loading="lazy"><figcaption>失敗する依頼方法と失敗しない依頼方法</figcaption></figure>
 
 1つ目は、範囲を決めずに依頼して、後から「請求書発行は対象外だった」と気づくケースです。回避策は、依頼範囲を書面やメールで明確にしてから契約することです。

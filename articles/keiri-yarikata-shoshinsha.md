@@ -127,6 +127,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 
 近い論点を[個人事業主の帳簿の付け方](/blog/kojin-jigyonushi-choubo-tsukekata/)で扱っています。
+
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/shinkoku/kojin_jigyo/index.htm" target="_blank" rel="noopener">個人で事業を行っている方の記帳・帳簿等の保存について</a>があります。**この情報では、事業所得のある人は白色申告でも記帳と帳簿・書類の保存義務があり、帳簿は原則7年、請求書や領収書などの書類は5年の保存が必要とされています。**
 
 保存が義務だからといって身構える必要はありません。紙は種類ごとにファイル分け、データはクラウドのフォルダに月別で残すだけで十分対応できます。

@@ -141,7 +141,9 @@ IT導入支援事業者の選定では、対象ツールを事前登録済みの
 
 反対に、レセコンの入れ替えだけで導入先も決まっているクリニックもあるはずです。GビズIDの取得と書類作成を並行して進めれば、9月29日にも間に合わせやすいでしょう。
 
-判断に迷ったら、まず支援事業者に現状の準備状況を伝えて相談してみてください。「今から始めてどちらの締切に間に合うか」を最初に確認すると、逆算のスケジュールが立てやすくなります。採択後の実績報告の進め方は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
+判断に迷ったら、まず支援事業者に現状の準備状況を伝えて相談してみてください。「今から始めてどちらの締切に間に合うか」を最初に確認すると、逆算のスケジュールが立てやすくなります。
+
+採択後の実績報告の進め方は[AI導入補助金の実績報告の書き方｜必要書類と提出の4ステップ](https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
