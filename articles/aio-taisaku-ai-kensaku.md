@@ -44,6 +44,8 @@ faq:
 
 AI検索は生成AIが答える検索全般を指し、AIO対策はその回答に引用されるための最適化を意味します。
 
+関連する内容については、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)にまとめています。
+
 関連する内容は[AIO対策でAIに引用されるには？5つの実践ポイント](/aio/aio-taisaku-ai-inyou-sareru/)でも扱っています。
 
 費用の目安を先に押さえるなら、[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)が参考になります。

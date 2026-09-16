@@ -30,6 +30,8 @@ faq:
 
 LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先として選ばれるための最適化施策です。
 
+対象になる範囲は、[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)で解説しています。
+
 
 選ぶときの基準については、[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)にまとめています。
 

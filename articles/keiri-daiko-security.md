@@ -48,6 +48,8 @@ faq:
 
 経理代行のセキュリティは、認証・契約・データ管理・権限・対応体制の5点で確認します。
 
+実際の例については、[経理代行の失敗5パターン｜原因と防ぐための確認ポイント](/blog/keiri-daiko-shippai/)にまとめています。
+
 関連する内容については、[開業したばかりの経理代行、使うべき？判断基準3つ](/blog/keiri-daiko-kaigyou/)にまとめています。
 
 <figure><img src="/images/keiri-daiko-security/kakunin.png" alt="経理代行のセキュリティで確認すべき5つのポイント: 認証取得の有無、NDAの締結有無、データ保管と暗号化、アクセス権限の範囲、漏えい時の対応体制" loading="lazy"><figcaption>経理代行のセキュリティで確認すべき5つのポイント</figcaption></figure>

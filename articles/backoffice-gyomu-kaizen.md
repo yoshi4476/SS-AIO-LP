@@ -81,6 +81,8 @@ faq:
 
 バックオフィス業務改善は、問題の洗い出しから効果の振り返りまで、4つのステップを順に進めます。
 
+選ぶときの基準を先に押さえるなら、[バックオフィスBPOとは？対象業務6つと経理BPOとの違い](/blog/backoffice-bpo-toha/)が参考になります。
+
 <figure><img src="/images/backoffice-gyomu-kaizen/4step.png" alt="バックオフィス業務改善の4ステップ: 問題を洗い出す、原因を特定する、施策を実行する、効果を振り返る" loading="lazy"><figcaption>バックオフィス業務改善の4ステップ</figcaption></figure>
 
 ### ステップ1: 業務を洗い出し問題を定義する

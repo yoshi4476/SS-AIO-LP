@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-14",
+  "date": "2026-09-16",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 9,
       "suspect_taken": 8,
       "healthy": 1,
-      "too_thin": 40,
+      "too_thin": 42,
       "items": [
         {
-          "kw": "ai集客とは",
-          "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
-          "pos": 9.5,
-          "imp": 12,
+          "kw": "aio 診断",
+          "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+          "pos": 9.8,
+          "imp": 55,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -61,18 +61,18 @@
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 8.5,
-          "imp": 88,
+          "pos": 8.6,
+          "imp": 93,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
           "kw": "口コミ返信 医療機関",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 9.9,
-          "imp": 92,
+          "pos": 10.0,
+          "imp": 97,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -81,11 +81,11 @@
         {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 8.5,
-          "imp": 41,
+          "pos": 8.9,
+          "imp": 47,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         }
       ]
@@ -94,16 +94,16 @@
       "judged": 6,
       "suspect_taken": 2,
       "healthy": 4,
-      "too_thin": 22,
+      "too_thin": 24,
       "items": [
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/company",
-          "pos": 8.4,
-          "imp": 26,
+          "pos": 9.0,
+          "imp": 31,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
@@ -119,10 +119,10 @@
       ]
     },
     "subsidy": {
-      "judged": 3,
-      "suspect_taken": 3,
+      "judged": 2,
+      "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 26,
+      "too_thin": 27,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",
@@ -132,16 +132,6 @@
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
-          "ratio": 0.0
-        },
-        {
-          "kw": "エクセル 開発 補助金",
-          "url": "https://lp.7senses.co.jp/service/dev/",
-          "pos": 9.2,
-          "imp": 37,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {

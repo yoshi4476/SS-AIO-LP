@@ -135,3 +135,9 @@
 - [AIOとSEOの違いとは？記事の書き方と評価指標を5つの視点で比較](https://ai.7senses.co.jp/aio/aio-to-seo-no-chigai/): AIOとSEOの違いは、記事の書き方・評価される仕組み・KPIの3点に表れます。定義の比較ではなく、執筆と計測で実務上どう変わるかを5つの視点とチェックリストで整理します。
 - [AI検索の実測データ](https://ai.7senses.co.jp/data/): 自社運営3サイトで計測した、生成AI経由の流入実数と検索順位ごとのクリック率。推計値ではなく実測。集計期間と母数を明記。出典明記のうえ引用可。
 - [整骨院がAI検索に表示されない5つの理由｜費用ページの直し方](https://ai.7senses.co.jp/aio/seikotsuin-hiyou-heikin/): 整骨院がAI検索に表示されない原因は、料金の書き方・施術範囲の曖昧さ・出典のなさなど5つに整理できます。ChatGPTやAI Overviewに引用される費用ページの条件と、直す順番を2026年9月時点で解説します。
+- [工務店のSNS集客とは？5媒体の選び方と続け方](https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/): 工務店のSNS集客とは、Instagram・LINE公式・YouTube等の複数媒体を目的別に使い分け、問い合わせにつなげる施策です。5媒体の向き不向きと無理なく続ける始め方を解説します。
+- [BtoB向けAIO対策会社の選び方｜比較5基準と費用相場](https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/): BtoB向けAIO対策会社の選び方を、比較すべき5つの基準と費用相場から解説します。内製かどうかの判断軸、依頼前に確認すべき実績確認ポイントもまとめました。
+- [AIに選ばれる記事の書き方｜5つのコツとNG例](https://ai.7senses.co.jp/aio/aio-erabareru-kiji-kakikata/): AIに選ばれる記事の書き方は、冒頭の断言、H2直下の1文結論、FAQの答え方に型があります。すぐ使える5つのコツと、やりがちなNG例をテンプレート付きで解説します。
+- [AIO SEO監査とは？既存SEO監査に足す7つの視点](https://ai.7senses.co.jp/aio/aio-seo-audit/): AIO SEO監査とは、通常のSEO監査にAI検索対策の視点を足して点検する作業です。追加すべき7項目と社内で完結する4つの手順、優先順位のつけ方まで解説します。
+- [AIO SEO対策とは？両方に効く6つの施策と進める順番](https://ai.7senses.co.jp/aio/aio-seo-taisaku/): AIO SEO対策とは、AI検索への引用と自然検索の上位表示を同時に狙う施策です。両方に効く6つの具体策と、実行する4ステップの順番、やってはいけないNG例まで実務から解説します。
+- [不動産のLLMO対策とは？AIに選ばれる5つの条件](https://ai.7senses.co.jp/aio/fudousan-llmo-taisaku/): 不動産のLLMO対策とは、ChatGPTやPerplexityが物件相談・会社選びに答える際、自社の情報が引用されるよう整備することです。プラットフォーム別の基準と5つの実践施策を解説します。
