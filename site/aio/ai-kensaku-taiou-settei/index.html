@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI検索対応とは？公開前に済ませる7つの設定項目</title>
+<meta name="description" content="AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AI検索対応とは？公開前に済ませる7つの設定項目">
+<meta property="og:description" content="AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/ai-kensaku-taiou-settei/eyecatch.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=96cf94fa"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AI検索対応とは？公開前に済ませる7つの設定項目",
+   "description": "AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/",
+   "image": "https://ai.7senses.co.jp/images/ai-kensaku-taiou-settei/eyecatch.png",
+   "datePublished": "2026-09-16",
+   "dateModified": "2026-09-16",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/",
+      "https://www.7senses.co.jp/"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/",
+     "https://www.7senses.co.jp/"
+    ]
+   },
+   "inLanguage": "ja"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AI検索対応とは？公開前に済ませる7つの設定項目",
+     "item": "https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "AI検索対応とは具体的に何をすることですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイト情報を機械可読にすることです。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "robots.txtで最低限確認すべきクローラーは何ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Googlebot・GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBotの5つです。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "llms.txtは必ず設置しないといけませんか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "必須ではありませんが、AIにサイト概要を直接伝えられるため設置が推奨されます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "構造化データはどのSchemaを優先すべきですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "記事にはBlogPostingとFAQPage、パンくずにはBreadcrumbListを優先します。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "設定してもすぐにAI検索に反映されますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "反映まで数週間かかることが多く、即日での変化は期待しないほうが安全です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "対応済みかどうかはどこで確認できますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "GSCの生成AIパフォーマンスレポートとアクセスログのクローラー種別で確認します。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金（独自メディア）</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AI検索対応とは？公開前に済ませる7つの設定</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AI検索対応とは？公開前に済ませる7つの設定項目</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-09-16">2026年9月16日</time></span>
+      <span>更新: <time datetime="2026-09-16">2026年9月16日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AI%E6%A4%9C%E7%B4%A2%E5%AF%BE%E5%BF%9C%E3%81%A8%E3%81%AF%EF%BC%9F%E5%85%AC%E9%96%8B%E5%89%8D%E3%81%AB%E6%B8%88%E3%81%BE%E3%81%9B%E3%82%8B7%E3%81%A4%E3%81%AE%E8%A8%AD%E5%AE%9A%E9%A0%85%E7%9B%AE&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Fai-kensaku-taiou-settei%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! ブックマーク</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/ai-kensaku-taiou-settei/eyecatch.png" alt="AI検索対応とは？公開前に済ませる7つの設定項目" width="1200" height="675"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#ai">AI検索対応とは？サイトに必要な状態を定義する</a></li><li><a href="#1-robotstxtai">設定1: robots.txtで主要AIクローラーを個別に許可する</a></li><li><a href="#2-llmstxtai">設定2: llms.txtでサイト概要と実績をAIに渡す</a></li><li><a href="#3-json-ld">設定3: 構造化データ(JSON-LD)で記事を機械可読にする</a></li><li><a href="#4-h2faq">設定4: 本文構造を冒頭断言・H2結論・FAQで抽出しやすくする</a></li><li><a href="#5-httpssitemap">設定5: クロールの土台(HTTPS・表示速度・sitemap)を整える</a></li><li><a href="#gsc">設定後にログとGSCで反映を確認する手順</a></li><li><a href="#ai_1">AI検索対応でよくある失敗と注意点</a></li><li><a href="#_1">よくある質問</a></li><li><a href="#ai_2">まとめ: AI検索対応は「許可」と「構造」の両輪</a></li></ol></nav>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AI検索対応とは、robots.txtでAIクローラーの巡回を許可したうえで、llms.txtと構造化データでサイトの情報をAIが読み取れる形に整えることです。</strong>この3点が揃って初めて、検索順位が良くても引用の候補にすら入らないという事故を防げます。</p>
+<div class="target-reader">この記事は、自社サイトをChatGPT検索・Perplexity・Google AI Overviewなどの生成AI検索に対応させたい店舗・中小企業の集客担当者・経営者向けです。</div>
+
+<p class="freshness">※ 2026年9月時点の情報です。</p>
+
+<h2 id="ai">AI検索対応とは？サイトに必要な状態を定義する</h2>
+<p><strong>AI検索対応とは、AIクローラーへの許可と、AIが読み取れる構造の両方が揃った状態を指します。</strong></p>
+<p>「順位は悪くないのに、AI検索にはまったく出てこない」という相談を受けることがあります。多くの場合、原因は本文の質ではなく、クローラーの許可漏れか、機械が読み取れる構造の不足のどちらかです。基礎知識は、<a href="/aio/aio-taisaku-ai-kensaku/">AI検索とは？AIO対策との違いと5種類の対応ポイント</a>で解説しています。</p>
+<div class="definition-box"><span class="term">AI検索対応</span>とは、ChatGPT検索・Perplexity・Google AI OverviewなどのAIクローラーにサイトへのアクセスを許可し、記事の内容を構造化データ・llms.txt・本文構造を通じて機械が読み取れる形で提供することを指します。</div>
+
+<p>対応の範囲は大きく2つに分かれます。1つはクローラーへの「許可」、もう1つはAIが内容を理解しやすくする「構造」です。順番を間違えて構造だけ整えても、そもそもクローラーが来ていなければ意味がありません。まず許可を確認し、そのあとで構造を整える順序が重要です。</p>
+<h2 id="1-robotstxtai">設定1: robots.txtで主要AIクローラーを個別に許可する</h2>
+<p><strong>robots.txtは、AIクローラーを1つずつ確認し、Googlebotを誤って止めないことが最優先です。</strong></p>
+<p>robots.txtに書く内容自体はシンプルですが、事故が起きやすい設定です。<strong>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot</strong>を個別にAllow設定し、まとめてブロックしないようにしてください。</p>
+<p>静的サイトはルート直下にファイルを置くだけで済みます。WordPressなどCMS側でrobots.txtを動的生成している場合は、プラグインの設定画面から個別許可を確認する必要があります。</p>
+<div class="caution-box"><span class="box-title">注意: Googlebotは絶対にブロックしない</span><br>Google AI OverviewとAIモードは通常のGooglebotのクロール結果を使います。「AI系はまとめて止めておこう」という設定が、Googlebot自体を止める事故につながります。</div>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">クローラー</th>
+<th style="text-align: left;">対象</th>
+<th style="text-align: left;">許可すべき理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Googlebot</td>
+<td style="text-align: left;">Google検索全般・AI Overview</td>
+<td style="text-align: left;">止めると通常検索にも表示されなくなる</td>
+</tr>
+<tr>
+<td style="text-align: left;">GPTBot / OAI-SearchBot</td>
+<td style="text-align: left;">ChatGPT検索</td>
+<td style="text-align: left;">ChatGPTの回答候補に入る前提になる</td>
+</tr>
+<tr>
+<td style="text-align: left;">PerplexityBot</td>
+<td style="text-align: left;">Perplexity</td>
+<td style="text-align: left;">即時性を重視するPerplexityの情報源になる</td>
+</tr>
+<tr>
+<td style="text-align: left;">ClaudeBot</td>
+<td style="text-align: left;">Claude</td>
+<td style="text-align: left;">Claudeが参照する情報源になる</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank" rel="noopener">Google公式のクローラー一覧</a>を見ながら、WAFやCDN側の自動ブロックでも403や429が返っていないか、アクセスログまで確認してください。robots.txtでは許可していても、WAFが弾いているケースは見落とされがちです。</p>
+<p>確認の手順自体は難しくありません。ブラウザで <code>https://自社ドメイン/robots.txt</code> を直接開き、目視でAllow・Disallowの記載を確認します。</p>
+<p>あわせてサーバーのアクセスログを、User-Agentの文字列（GPTBot・PerplexityBot等）でgrepすると、実際にクローラーが巡回しているかどうかが分かります。</p>
+<p>表示はされているのにアクセスログに記録がない場合、WAF側で弾かれている可能性が高いと判断できます。</p>
+<p>robots.txtの記載とサーバー側（WAF・CDN）の設定は別のレイヤーです。片方だけ確認して安心しないことが大切です。特にCloudflareなどのCDNを導入しているサイトは、Bot対策機能がAIクローラーまで巻き込んで止めていないか、robots.txtとは別に確認しておく必要があります。</p>
+<h2 id="2-llmstxtai">設定2: llms.txtでサイト概要と実績をAIに渡す</h2>
+<p><strong>llms.txtは、サイトの概要と運営者情報をAIに直接渡すためのテキストファイルです。</strong></p>
+<p>llms.txtはサイトのルート直下にMarkdown形式で設置します。サイト概要、運営者情報、主要コンテンツへのリンクを簡潔にまとめておくと、AIがサイト全体の文脈を把握しやすくなります。</p>
+<p>私たちは自社サイトのllms.txtに、運営会社の実績と主要記事一覧を記載しています。当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。</p>
+<p>llms.txtの運営者情報には、抽象的な自己紹介ではなく確認できる実績を書くことが重要です。当社は2020年3月創業、大阪市東成区を拠点に店舗集客とAI活用を支援しており、MEO運用サービス「G-ran」では通算3,200店舗以上を運用してきました。こうした具体的な数字は、AIが運営者の信頼性を判断する材料にもなります。</p>
+<p>この運用を続ける中で分かったことがあります。llms.txt単体で順位や引用が急に変わることはありません。ただ、AIがサイト全体の位置づけを把握する手がかりにはなっていると感じています。個別記事のクロールが遅れているときも、llms.txt経由でサイトの存在自体は把握されているケースが多いためです。</p>
+<p>新しい記事を公開したら、llms.txtにも1行追記する運用にしておくと、サイト全体の案内が常に最新の状態を保てます。書き方はシンプルで、<code>- [記事タイトル](URL): 記事の1行説明</code> という形式を1記事1行で追加していくだけです。凝った文章にする必要はなく、むしろ簡潔なほうが機械には読み取りやすくなります。</p>
+<h2 id="3-json-ld">設定3: 構造化データ(JSON-LD)で記事を機械可読にする</h2>
+<p><strong>構造化データは、記事の要点をAIがそのまま読み取れる形でHTMLに埋め込む仕組みです。</strong></p>
+<p>記事には<strong>BlogPosting・FAQPage・BreadcrumbList</strong>の3種類を最低限設定します。手順を扱う記事にはHowToも追加してください。</p>
+<div class="definition-box"><span class="term">JSON-LD</span>とは、HTML内にJSON形式で構造化データを埋め込む記法です。ページの見た目には影響せず、機械だけが読み取れる情報として動作します。</div>
+
+<p>BlogPostingにはauthor(著者名・肩書き)とdateModified(更新日)を必ず含めてください。著者情報が空欄のまま公開されている記事を見かけますが、これはE-E-A-Tの観点でもAI検索の観点でも損をします。</p>
+<p>dateModifiedはページ上の表記とSchema内の日付を一致させることも忘れないでください。表記だけ更新してSchemaが古いままだと、鮮度の主張自体が信用されなくなります。</p>
+<p>FAQPageを設定する際に最も多い事故は、本文のFAQと構造化データの内容が一致していないことです。<a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank" rel="noopener">Google公式のFAQPageガイドライン</a>でも、ページに実在するコンテンツと一致させることが明記されています。<mark>本文とSchemaの完全一致</mark>は、公開前に必ず確認してください。</p>
+<h2 id="4-h2faq">設定4: 本文構造を冒頭断言・H2結論・FAQで抽出しやすくする</h2>
+<p><strong>本文構造は、冒頭の断言・見出し直下の結論・FAQの3点を揃えると抽出されやすくなります。</strong></p>
+<p>構造化データを整えても、本文そのものが抽出しにくい書き方では意味がありません。<strong>冒頭200字</strong>は「◯◯は◯◯です」という断言型で始め、前置きや挨拶は入れません。各H2の直下には40〜60字の1文結論を置き、その1文だけを切り出しても意味が通るようにします。</p>
+<p>具体的な書き方は、<a href="/aio/aio-taisaku-ai-inyou-sareru/">AIO対策でAIに引用されるには？5つの実践ポイント</a>で詳しく解説しています。設定作業と文章構造の調整は別の作業に見えますが、片方だけを整えても引用にはつながりません。</p>
+<figure><img src="/images/ai-kensaku-taiou-settei/point5.png" alt="AI検索対応で整える5つの設定: robots.txtでAIクローラーを個別に許可する、llms.txtでサイト概要と実績を渡す、構造化データで記事を機械可読にする、冒頭断言とH2結論で本文を抽出しやすくする、HTTPS・表示速度・sitemapを整える" width="1200" height="675" loading="lazy"><figcaption>AI検索対応で整える5つの設定（当メディア作成）</figcaption></figure>
+
+<section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_mid_aio">AI検索の対応度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
+<h2 id="5-httpssitemap">設定5: クロールの土台(HTTPS・表示速度・sitemap)を整える</h2>
+<p><strong>クロールの土台は、HTTPS・表示速度・sitemapの3点が整って初めて機能します。</strong></p>
+<p>どれだけrobots.txtや構造化データを整えても、サーバーの応答が遅い、あるいはHTTPS証明書が切れていれば、クローラーは巡回を後回しにします。<strong>HTTPS・表示速度・sitemap</strong>は、他の設定より地味ですが土台として欠かせません。</p>
+<p>表示速度はLCP・INP・CLSの3指標(Core Web Vitals)で確認します。sitemap.xmlは新しい記事を公開するたびに更新し、lastmodを実際の更新日に合わせてください。</p>
+<p>私たちが自社サイトを運用する中でも、sitemap.xmlの更新を怠ると新規記事のインデックスが遅れる場面を何度も見てきました。<a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank" rel="noopener">Google公式のsitemap作成ガイド</a>にも、更新のたびにsitemapを最新化する重要性が書かれています。技術的な土台は地味な作業ですが、抜けると他の設定の効果が発揮されません。</p>
+<h2 id="gsc">設定後にログとGSCで反映を確認する手順</h2>
+<p><strong>設定後は、アクセスログとGSCで実際にクローラーが読みに来ているかを確認します。</strong></p>
+<p>設定して終わりにせず、反映を確認する手順まで運用に組み込んでください。まずアクセスログでGPTBotやPerplexityBotのアクセスが記録されているかを確認します。次にGoogle Search Consoleの生成AIパフォーマンスレポートで、AI Overviewのインプレッションが発生しているかを見ます。</p>
+<p>当サイトの実測では、直近28日で291個の検索語からのべ2,171回表示され、7回のクリックがありました（自社サイトのSearch Console実測・2026年9月時点）。この数値も、設定の効果を継続的に確認するための一つの指標として使っています。対応状況を体系的にチェックしたい場合は、<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方｜無料チェック8項目とツールの使い分け</a>も参考になります。</p>
+<p>社内にエンジニアがいない場合、ここまでの設定を自社だけで完結させるのは負担が大きいこともあります。どこまで自社で対応できるかは、<a href="/aio/aio-taisaku-jibunde/">AIO対策は自分でできる？無料で始める5つの手順と3つの限界</a>で判断基準を整理しています。</p>
+<figure><img src="/images/ai-kensaku-taiou-settei/ngok.png" alt="未設定サイトはAIクローラーをまとめてブロックしている・llms.txtが存在しない・FAQPageと本文が一致していない。設定済みサイトは主要AIクローラーを個別に許可している・llms.txtでサイト概要を渡している・FAQPageと本文が完全一致している" width="1200" height="675" loading="lazy"><figcaption>未設定サイトと設定済みサイトの違い（当メディア作成）</figcaption></figure>
+
+<h2 id="ai_1">AI検索対応でよくある失敗と注意点</h2>
+<p><strong>よくある失敗は、まとめてブロック・設定して放置・本文とSchemaの不一致の3つです。</strong></p>
+<p>1つ目は、AI系クローラーを「念のため」まとめてブロックしてしまうケースです。Googlebotまで巻き込んで止めてしまうと、通常検索の順位まで落ちます。</p>
+<p>2つ目は、robots.txtとllms.txtを一度設置したまま放置することです。<a href="https://www.indexnow.org/" target="_blank" rel="noopener">IndexNow</a>は、更新したURLをBing・Copilot系へ即時通知する仕組みです。この通知や、公開のたびのllms.txt追記を運用に組み込まないと、設定した効果が薄れていきます。</p>
+<p>3つ目は、FAQPageの本文とSchemaが一致しないまま公開することです。修正のたびにどちらか片方だけを直すと、次第にずれが蓄積します。私たちは記事のFAQを修正するたびに、本文とSchemaの両方を突き合わせて確認する運用にしています。</p>
+<p>これら3つの失敗に共通するのは、一度設定して終わりにする運用そのもの。robots.txt・llms.txt・構造化データは、記事を公開するたびに見直す項目としてチェックリスト化しておくと、事故が起きにくくなります。</p>
+<div class="caution-box"><span class="box-title">注意: 設定は一度で終わらない</span><br>robots.txtやllms.txtは一度設置すれば終わりではなく、新しいAIクローラーの追加や記事の公開のたびに見直す運用が必要です。</div>
+
+<figure><img src="/images/ai-kensaku-taiou-settei/junban.png" alt="設定に着手する4ステップ: 今日はrobots.txtを確認、1週目はllms.txtを設置、2週目は構造化データを実装、月1回はGSCで反映を確認" width="1200" height="675" loading="lazy"><figcaption>設定に着手する4ステップ（当メディア作成）</figcaption></figure>
+
+<h2 id="_1">よくある質問</h2>
+<div class="faq">
+<details><summary>AI検索対応とは具体的に何をすることですか？</summary><p class="faq-a">robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイト情報を機械可読にすることです。</p></details>
+<details><summary>robots.txtで最低限確認すべきクローラーは何ですか？</summary><p class="faq-a">Googlebot・GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBotの5つです。</p></details>
+<details><summary>llms.txtは必ず設置しないといけませんか？</summary><p class="faq-a">必須ではありませんが、AIにサイト概要を直接伝えられるため設置が推奨されます。</p></details>
+<details><summary>構造化データはどのSchemaを優先すべきですか？</summary><p class="faq-a">記事にはBlogPostingとFAQPage、パンくずにはBreadcrumbListを優先します。</p></details>
+<details><summary>設定してもすぐにAI検索に反映されますか？</summary><p class="faq-a">反映まで数週間かかることが多く、即日での変化は期待しないほうが安全です。</p></details>
+<details><summary>対応済みかどうかはどこで確認できますか？</summary><p class="faq-a">GSCの生成AIパフォーマンスレポートとアクセスログのクローラー種別で確認します。</p></details>
+</div>
+
+<p>自社サイトがAI検索にどこまで対応できているかは、<a href="/diagnosis/aio/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要です。</p>
+<h2 id="ai_2">まとめ: AI検索対応は「許可」と「構造」の両輪</h2>
+<p>AI検索対応は、単発の設定ではなく、許可と構造という2つの軸を継続的に整える取り組みです。robots.txtとllms.txtでクローラーへの許可を整え、構造化データと本文構造でAIが読み取れる形にする。この2つが揃って初めて、検索順位という土台の上にAI検索対応が成立します。</p>
+<p>今日からできるのは、robots.txtで主要AIクローラーの許可状況を確認することです。次にllms.txtの有無を確認し、なければ設置してください。私たちも新しい記事を公開するたびに、この7つの設定項目に立ち返って点検しています。</p>
+
+      <aside class="diag-banner"><div class="db-text"><span class="db-kicker">この記事のテーマで、自社の現在地を測る</span><span class="db-title">AI検索の対応度チェック（無料・30秒）</span><span class="db-desc">AI検索に引用される準備ができているかを100点満点で採点します。</span></div><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_diag_aio">無料で診断する <span class="arw">→</span></a></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/aio-erabareru-kiji-kakikata/"><span class="thumb"><img src="/images/aio-erabareru-kiji-kakikata/eyecatch.png" alt="AIに選ばれる記事の書き方｜5つのコツとNG例のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-15">2026.09.15</time><h3>AIに選ばれる記事の書き方｜5つのコツとNG例<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-seo-audit/"><span class="thumb"><img src="/images/aio-seo-audit/eyecatch.png" alt="AIO SEO監査とは？既存SEO監査に足す7つの視点のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-15">2026.09.15</time><h3>AIO SEO監査とは？既存SEO監査に足す7つの視点<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-seo-meo-chigai/"><span class="thumb"><img src="/images/aio-seo-meo-chigai/eyecatch.png" alt="AIO・SEO・MEOの違いと使い分け｜店舗が今やるべき順番のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-08">2026.09.08</time><h3>AIO・SEO・MEOの違いと使い分け｜店舗が今やるべき順番<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/btob-aio-taisaku-kaisha/"><span>← 前の記事</span><strong>BtoB向けAIO対策会社の選び方｜比較5基準と費用相場</strong></a><a class="pn pn-next" href="/aio/fudousan-llmo-taisaku/"><span>次の記事 →</span><strong>不動産のLLMO対策とは？AIに選ばれる5つの条件</strong></a></nav>
+
+      <section class="cta">
+        <p class="cta-copy">AI検索時代の集客、プロに相談してみませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">AIO・LLMO・SEO・MEO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="Seven Senses" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/meo/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/diagnosis/aio/">AI検索の対応度チェック（30秒）</a>
+      <a href="/site-audit/">サイトの技術チェック</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

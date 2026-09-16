@@ -51,6 +51,8 @@ faq:
 
 **理由は、料金の書き方・施術範囲の曖昧さ・出典のなさ・重複ページ・クローラーの遮断の5つに整理できます。**このうち4つは費用ページの書き方で解決します。
 
+前提となる考え方を先に押さえるなら、[AI検索対応とは？公開前に済ませる7つの設定項目](/aio/ai-kensaku-taiou-settei/)が参考になります。
+
 <figure><img src="/images/seikotsuin-hiyou-heikin/heikin-youin.png" alt="整骨院がAI検索に表示されない5つの理由: 料金が範囲でしか書かれていない、保険と自由診療の線引きが曖昧、金額の出典・時点が示されていない、同じ内容のページが院内に複数ある、AIクローラーが読めない作りになっている" loading="lazy"><figcaption>整骨院がAI検索に表示されない5つの理由</figcaption></figure>
 
 <div class="definition-box"><span class="term">AI検索に表示されるとは</span>、ChatGPTやGoogleのAI Overviewが質問に答えるとき、その根拠として自院のページを引用し、回答内に院名やURLが出ることを指します。==検索順位で上位に出ることとは別の現象==です。</div>

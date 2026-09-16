@@ -7,6 +7,13 @@
   <updated>2026-09-16T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>AI検索対応とは？公開前に済ませる7つの設定項目</title>
+    <link href="https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/"/>
+    <id>https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/</id>
+    <updated>2026-09-16T00:00:00+09:00</updated>
+    <summary>AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。</summary>
+  </entry>
+  <entry>
     <title>不動産のLLMO対策とは？AIに選ばれる5つの条件</title>
     <link href="https://ai.7senses.co.jp/aio/fudousan-llmo-taisaku/"/>
     <id>https://ai.7senses.co.jp/aio/fudousan-llmo-taisaku/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/meo/shika-heiin-hiyou/</id>
     <updated>2026-09-09T00:00:00+09:00</updated>
     <summary>歯科医院の閉院費用は原状回復・機器処分・カルテ保存など多岐にわたり、1,000万円を超えた例も報告されています。見落とされがちなデジタル資産の後始末を、3,200店舗以上のMEO支援実務から解説します。</summary>
-  </entry>
-  <entry>
-    <title>歯科医院の開業費用は5000万円？内訳と抑え方</title>
-    <link href="https://ai.7senses.co.jp/meo/shika-kaigyou-hiyou/"/>
-    <id>https://ai.7senses.co.jp/meo/shika-kaigyou-hiyou/</id>
-    <updated>2026-09-09T00:00:00+09:00</updated>
-    <summary>歯科医院の開業費用は一般的に5,000万〜8,000万円が目安です。医療機器・テナント・内装の内訳と抑え方、見落とされがちな集客・MEO予算の確保方法を、3,200店舗以上のMEO支援実務から解説します。</summary>
   </entry>
 </feed>
