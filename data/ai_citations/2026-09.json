@@ -1,18 +1,28 @@
 {
-  "date": "2026-09-17",
+  "date": "2026-09-18",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 10,
-      "suspect_taken": 9,
-      "healthy": 1,
-      "too_thin": 43,
+      "suspect_taken": 10,
+      "healthy": 0,
+      "too_thin": 42,
       "items": [
+        {
+          "kw": "原口優",
+          "url": "https://ai.7senses.co.jp/author/haraguchi/",
+          "pos": 1.3,
+          "imp": 33,
+          "clicks": 3,
+          "ctr": 9.09,
+          "expected_ctr": 28.0,
+          "ratio": 0.32
+        },
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
           "pos": 9.6,
-          "imp": 57,
+          "imp": 56,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -32,7 +42,7 @@
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
           "pos": 8.8,
-          "imp": 55,
+          "imp": 53,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
