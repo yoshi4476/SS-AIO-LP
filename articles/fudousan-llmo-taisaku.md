@@ -93,6 +93,8 @@ Geminiは検索順位に加えてFAQPage・HowToといった構造化データ�
 
 **不動産会社が着手すべきLLMO対策は、一次情報の明文化から計測まで5つの手順に整理できます。**特別な専用ツールは不要で、鍵になるのは既存ホームページの地道な情報整備。
 
+選ぶときの基準については、[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)にまとめています。
+
 <figure><img src="/images/fudousan-llmo-taisaku/steps.png" alt="不動産会社が始めるLLMO対策5つのステップ: 一次情報を明文化、比較表とFAQを設置、クロール許可を確認、ポータル掲載も維持、AI参照を計測" loading="lazy"><figcaption>不動産会社が始めるLLMO対策5つのステップ</figcaption></figure>
 
 #### ステップ1: 一次情報を数値で明文化する
