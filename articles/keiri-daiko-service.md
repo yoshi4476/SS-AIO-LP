@@ -136,6 +136,9 @@ Sansanが2024年3月に実施した<a href="https://news.mynavi.jp/techplus/arti
 
 失敗の具体的なパターンと回避策を詳しく知りたい場合は、[経理代行における失敗パターンと回避策](https://corp.7senses.co.jp/blog/keiri-daiko-shippai/)で、セキュリティ面の確認項目は[経理代行のセキュリティ｜契約前に確認すべき5つのポイント](https://corp.7senses.co.jp/blog/keiri-daiko-security/)で解説しています。
 
+
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+
 ## こんな会社に経理代行サービスが向いている
 
 経理代行サービスは、経理担当者が1人しかいない会社や、月次決算の遅れに悩む会社に向いています。
