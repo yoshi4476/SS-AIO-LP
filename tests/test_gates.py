@@ -986,6 +986,19 @@ def test_rewrite_is_verified_and_reverted():
     import auto_improve
     check("全件を返す口がある", hasattr(auto_improve, "human_items"), True)
 
+    # 少ない表示回数の増減はノイズ。ここを根拠に記事を書き換えてはいけない
+    import effect
+    def act(before_imp, after_imp, pos=30.0):
+        return effect.actions([{"slug": "x", "site": "ai-lab",
+                                "before": (before_imp, 0, pos),
+                                "after": (after_imp, 0, pos)}])
+    check("表示1→0では書き換えない", act(1, 0), [])
+    check("表示4→0では書き換えない", act(4, 0), [])
+    check("表示15→2では書き換えない", act(15, 2), [])
+    check("表示94→9なら見直す",
+          [x["do"] for x in act(94, 9)], ["review"])
+    check("下限は他の分岐と同じ値", effect.MIN_IMP, 20)
+
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("毎週走る", "auto_rewrite.py --write" in wf, True)
     # 積み上がりの見直しより前に置く。後ろだと、当てた週は見直されないまま公開される
