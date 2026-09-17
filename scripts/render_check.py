@@ -56,6 +56,59 @@ SYMPTOMS = [
 ]
 
 
+# 原稿に書いたものが、出力に同じ数だけ出ているか。
+# 症状を並べる検査は「こちらが知っている壊れ方」しか見つけられない。
+# 実際、4種類の崩れが長期間だれにも気づかれずに公開されていた。
+# ここでは中身を見ず、**数だけを突き合わせる**。知らない壊れ方でも数は合わなくなる。
+BLOCKS = [
+    ("表", re.compile(r"^\s*\|.+\|\s*$", re.M), re.compile(r"<table[ >]")),
+    ("箇条書き・番号リスト", re.compile(r"^\s*(?:[-*+]\s|[0-9０-９]+[.．]\s)", re.M),
+     re.compile(r"<li[ >]")),
+    ("見出し", re.compile(r"^\s*#{2,4}\s+\S", re.M), re.compile(r"<h[2-4][ >]")),
+    ("画像", re.compile(r"!\[[^\]]*\]\([^)]+\)|<img\b"), re.compile(r"<img\b")),
+    ("リンク", re.compile(r"\[[^\]\n]+\]\([^)\s]+\)|<a\s+href"), re.compile(r"<a\s+href")),
+]
+
+
+def source_blocks(md_body):
+    """原稿にある塊の数。表と箇条書きは行数ではなく塊の数で数える"""
+    body = re.sub(r"(?s)```.*?```", "", md_body)
+    out = {}
+    for name, pat, _ in BLOCKS:
+        if name == "表":
+            # 連続する「|」の行を1つの表として数える
+            n, prev = 0, False
+            for line in body.split("\n"):
+                cur = bool(re.match(r"\s*\|.+\|\s*$", line))
+                n += cur and not prev
+                prev = cur
+            out[name] = n
+        elif name == "箇条書き・番号リスト":
+            out[name] = len(pat.findall(body))       # 項目の数
+        else:
+            out[name] = len(pat.findall(body))
+    return out
+
+
+def rendered_blocks(html):
+    body = readable(html)
+    out = {}
+    for name, _, pat in BLOCKS:
+        out[name] = len(pat.findall(body))
+    return out
+
+
+def structure_gap(md_body, html):
+    """原稿にあって出力に無いものを返す。空なら取りこぼしなし"""
+    a, b = source_blocks(md_body), rendered_blocks(html)
+    gaps = []
+    for name in a:
+        # 出力のほうが多いのは問題にしない（テンプレートが足すものがある）
+        if b[name] < a[name]:
+            gaps.append((name, a[name], b[name]))
+    return gaps
+
+
 def problems(fragment):
     """HTMLの断片を見て [(症状, 例, 直し方)] を返す。空なら崩れなし
 

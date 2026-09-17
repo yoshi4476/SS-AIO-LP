@@ -866,6 +866,26 @@ def main():
                   f"{hits[0][0].parent.name}）→ {fixes[name]}")
     else:
         print("描画検査: 生成HTMLに崩れなし")
+    # 症状を並べる検査は「こちらが知っている壊れ方」しか見つけられない。
+    # ここでは中身を見ず、原稿と出力で塊の数だけを突き合わせる。
+    # 知らない壊れ方でも、変換に失敗すれば数は合わなくなる
+    gaps = 0
+    for md in sorted((ROOT / "articles").glob("*.md")):
+        t = md.read_text(encoding="utf-8", errors="replace")
+        if not re.search(r"^score:\s*(9[0-9]|100)\s*$", t, re.M):
+            continue
+        out = list((ROOT / "site").glob(f"*/{md.stem}/index.html"))
+        if not out:
+            continue
+        body = re.sub(r"^---\s*\n.*?\n---\s*\n", "", t, flags=re.S)
+        g = render_check.structure_gap(
+            body, out[0].read_text(encoding="utf-8", errors="replace"))
+        if g:
+            gaps += 1
+            print(f"WARN: 取りこぼし — {md.stem}: "
+                  + " / ".join(f"{n} 原稿{a}→出力{b}" for n, a, b in g))
+    if not gaps:
+        print("取りこぼし検査: 原稿に書いたものは全て出力に出ています")
 
 
 if __name__ == "__main__":

@@ -1001,9 +1001,55 @@ def test_rewrite_is_verified_and_reverted():
 
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("毎週走る", "auto_rewrite.py --write" in wf, True)
+    # 検算が壊れたままエージェントを動かすと、悪い書き換えがそのまま公開される。
+    # 先に自己診断を通し、落ちたら書き換えを飛ばす
+    check("先に検算の自己診断を通す",
+          wf.index("--selftest") < wf.index("auto_rewrite.py --write"), True)
+    check("診断に落ちたら書き換えない",
+          "steps.guard.outputs.ok == 'yes'" in wf, True)
+    check("自己診断の口がある", "--selftest" in src, True)
+    check("自己診断は必ず元に戻す", "finally:" in src, True)
     # 積み上がりの見直しより前に置く。後ろだと、当てた週は見直されないまま公開される
     check("見直しより前に置く",
           wf.index("auto_rewrite.py") < wf.index("auto_review.py --fix"), True)
+
+
+def test_output_matches_source():
+    """原稿に書いたものが、出力に同じ数だけ出ていること。
+
+    症状を並べる検査は「こちらが知っている壊れ方」しか見つけられない。
+    実際、表が生で出る・** がそのまま出る・リンクが押せない・段落が繋がる、の
+    4種類が長期間だれにも気づかれずに公開されていた。どれも点数には出なかった。
+    ここでは中身を見ず、塊の数だけを突き合わせる。知らない壊れ方でも数は合わなくなる。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import md2html
+    import render_check as rc
+    nl = chr(10)
+    print(nl + "■ 原稿と出力の突き合わせ")
+
+    def gap(src):
+        return rc.structure_gap(src, "<article>" + md2html.convert(src)[0] + "</article>")
+
+    # 実際に起きた4種類を、症状名を使わずに見つけられること
+    check("列数の合わない表を見つける",
+          bool(gap("| A | B | C |" + nl + "|:--|:--|" + nl + "| 1 | 2 | 3 |")), True)
+    check("空行なしのリストを見つける",
+          bool(gap("本文です。" + nl + "- 一つ目" + nl + "- 二つ目")), True)
+    check("空行なしの表を見つける",
+          bool(gap("本文です。" + nl + "| A | B |" + nl + "|:--|:--|" + nl + "| 1 | 2 |")), True)
+    check("生HTML内のリンクを見つける",
+          bool(gap('<div class="box">詳細は[解説](/seo/x/)です。</div>')), True)
+
+    # 正しいものを間違いと言わない（誤検出すると検査が信用されなくなる）
+    check("正しい表は素通り", gap("| A | B |" + nl + "|:--|:--|" + nl + "| 1 | 2 |"), [])
+    check("正しいリストは素通り",
+          gap("本文です。" + nl + nl + "- 一つ目" + nl + "- 二つ目"), [])
+    check("コード例の中は数えない",
+          gap("```" + nl + "| これは表ではない |" + nl + "```"), [])
+
+    b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("ビルドが突き合わせる", "structure_gap(" in b, True)
 
 
 def main():
@@ -1031,7 +1077,8 @@ def main():
               test_rendered_html_is_checked,
               test_import_has_no_side_effects,
               test_long_sentences_are_split,
-              test_rewrite_is_verified_and_reverted):
+              test_rewrite_is_verified_and_reverted,
+              test_output_matches_source):
         try:
             t()
         except Exception as e:

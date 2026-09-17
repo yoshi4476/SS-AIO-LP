@@ -194,11 +194,64 @@ def run_one(item, write):
     return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…）"
 
 
+def selftest():
+    """検算が本当に効くかを、本番の記事で確かめる。
+
+    claude を呼ばずに、こちらで「やってはいけない書き換え」を当てて、
+    検算が止めるかを見る。止まらなければ、その穴から壊れた記事が通る。
+    最後は必ず git checkout で元に戻す。
+    """
+    import auto_improve  # 対象の取り方まで含めて試す
+    items = targets()
+    if not items:
+        print("  対象がないため、記事を1本選んで試します")
+        items = [{"kind": "title", "slug": sorted(
+            p.stem for p in (ROOT / "articles").glob("*.md"))[0], "why": "自己診断"}]
+    slug = items[0]["slug"]
+    p = ROOT / "articles" / f"{slug}.md"
+    orig = p.read_text(encoding="utf-8-sig")
+    before, before_warns = meta(slug), warns(slug)
+    title, kw, body = before
+
+    # やってはいけない書き換えを、1つずつ当てる
+    cases = [
+        ("無かった数字を書く", body.replace("。", "。前年比12.7%増です。", 1)),
+        ("出典リンクを消す",
+         re.sub(r'<a href="https?://[^"]+"[^>]*>(.*?)</a>', r"\1", body, count=1)),
+        ("狙う語を変える", body.replace(f"keyword: {kw}", "keyword: 別の語", 1)),
+        ("タイトルを短くしすぎる",
+         body.replace(f"title: {title}", "title: 短い", 1)),
+    ]
+    ok = 0
+    try:
+        for name, broken in cases:
+            if broken == body:
+                print(f"  --  {name}: この記事では試せません")
+                continue
+            p.write_text(broken, encoding="utf-8", newline="")
+            ng = check(slug, before, before_warns)
+            print(f"  {'OK' if ng else 'NG'}  {name}: "
+                  + (f"止めた（{ng[:44]}）" if ng else "素通りしました"))
+            ok += bool(ng)
+            p.write_text(orig, encoding="utf-8", newline="")
+    finally:
+        p.write_text(orig, encoding="utf-8", newline="")
+        sh([sys.executable, "scripts/build.py"], timeout=1800)
+    print(f"\n  {ok}/{len([c for c in cases])} を止めました（記事は元に戻しました）")
+    return 0 if ok == len(cases) else 1
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--limit", type=int, default=3, help="1回に直す本数")
+    ap.add_argument("--selftest", action="store_true",
+                    help="検算が効くかを本番の記事で確かめる（claudeは呼ばない）")
     a = ap.parse_args()
+
+    if a.selftest:
+        print("■ 検算の自己診断（やってはいけない書き換えを当てて、止まるか見る）\n")
+        return selftest()
 
     items = targets()
     print(f"■ 人の判断に回っていた直し: {len(items)}件"
