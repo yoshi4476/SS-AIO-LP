@@ -140,6 +140,8 @@ MM総研の調査（2026年3月末時点）では、<a href="https://www.m2ri.jp
 
 **記帳代行と自動化の併用は、証憑のデータ化方法を決めることから始めます。**
 
+つまずきやすい点は[記帳代行とは？できる範囲と失敗しやすい3つの落とし穴](/blog/kichodaiko-toha/)でも扱っています。
+
 実際の進め方は、[記帳代行のやり方｜依頼から完了までの5ステップ](/blog/kichodaiko-yarikata/)で解説しています。
 
 <figure><img src="/images/kichodaiko-jidoka/nagare.png" alt="記帳代行×自動化を導入する4ステップ: 証憑のデータ化方法を決める、連携する会計ソフトを選ぶ、代行に依頼する範囲を決める、運用しながら分担を調整する" loading="lazy"><figcaption>記帳代行×自動化を導入する4ステップ</figcaption></figure>
