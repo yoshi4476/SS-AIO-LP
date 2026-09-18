@@ -52,6 +52,8 @@ diagrams:
 
 **LLMO集客とは、AIチャットの引用を「認知」で終わらせず、指名検索や問い合わせまでの導線を設計してつなげる考え方です。**LLMO対策そのものとは目的が異なります。
 
+前提となる考え方を先に押さえるなら、[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)が参考になります。
+
 選ぶときの基準を先に押さえるなら、[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)が参考になります。
 
 <div class="definition-box"><span class="term">LLMO集客とは</span>、ChatGPTやPerplexityなどのAIチャットに引用・言及されたあと、その認知を指名検索・問い合わせという次の行動に接続する一連の設計を指します。引用の獲得そのものはゴールではなく、通過点という位置づけです。</div>
