@@ -98,6 +98,8 @@ ChatGPTやPerplexityになると、仕組みはさらに変わります。学習
 
 SEOはGSCと順位ツールを、AIOはGSCの生成AIレポートとGA4のAI参照元を使い分けます。
 
+関連する内容は[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)で整理しています。
+
 SEOの計測はGoogle Search Consoleの検索パフォーマンスレポートと、順位計測ツールが中心です。AIOの計測はこれに加えて、<a href="https://support.google.com/webmasters/answer/16984139?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ</a>にある生成AIパフォーマンスレポートと、GA4のリファラー別セッションを見る必要があります。
 
 当社は自社サイト「AI集客ラボ」自体をAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。
