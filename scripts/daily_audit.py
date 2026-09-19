@@ -394,6 +394,78 @@ def check_tokens(todo):
                         "（python scripts/refresh_tokens.py で更新する）")
 
 
+def check_unseen(todo):
+    """公開したのに、検索にまったく出ていないページを拾う。
+
+    書いて配信したところで満足すると、載っていないページが溜まる。
+    実測で、公開30日以上たっても28日間まったく表示されないページが19件あった。
+    コーポレートは sitemap の40%が表示ゼロだった。
+
+    30日を境にするのは、それ未満なら「まだ評価が定まっていない」だけで、
+    手を当てても意味がないため（CLAUDE.md 8.2 の基準に合わせる）。
+    """
+    import re as _re
+    from datetime import date as _date, timedelta as _td
+    print("\n■ 検索に出ていないページ")
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import gsc_detail as _G
+        sc = _G.client()
+    except Exception as e:
+        print(f"  （GSCに接続できないため確認できません: {str(e)[:40]}）")
+        return
+    end = _date.today() - _td(days=3)
+    start = end - _td(days=27)
+    # 記事はカテゴリで所属サイトが決まる。全サイトで全記事を照合すると
+    # 1本を3回数えてしまうので、持ち主のサイトだけを見る
+    mine = {}
+    for p_ in (ROOT / "articles").glob("*.md"):
+        t_ = p_.read_text(encoding="utf-8", errors="replace")
+        d_ = _re.search(r"^date:\s*([0-9-]+)", t_, _re.M)
+        c_ = _re.search(r"^category:\s*(.+)$", t_, _re.M)
+        if not (d_ and c_):
+            continue
+        owner = sites_mod.find_category_owner(c_.group(1).strip())
+        if owner:
+            mine.setdefault(owner, []).append((p_.stem, d_.group(1), c_.group(1).strip()))
+
+    total = 0
+    for sid, cfg in sites_mod.load_all().items():
+        rows = mine.get(sid, [])
+        if not rows:
+            continue
+        try:
+            seen = {r["keys"][0].rstrip("/") for r in
+                    _G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000)}
+        except Exception:
+            continue
+        old = []
+        for slug, dt, cat in rows:
+            try:
+                days = (_date.today() - _date.fromisoformat(dt)).days
+            except ValueError:
+                continue
+            if days < 30:
+                continue          # 評価が定まる前に手を当てても意味がない
+            # サイトごとにURLの形が違う。どれかに当たれば「出ている」とみなす
+            cands = {f"https://{cfg['domain']}/{cat}/{slug}",
+                     f"https://{cfg['domain']}/blog/{slug}"}
+            if not (cands & seen):
+                old.append((days, slug))
+        if old:
+            total += len(old)
+            old.sort(reverse=True)
+            print(f"  注意 {cfg['name'][:18]}: 公開30日以上で表示ゼロ {len(old)}件"
+                  f"（最長{old[0][0]}日）")
+            for d_, s_ in old[:3]:
+                print(f"         {d_}日 {s_[:44]}")
+    if total:
+        todo.append(f"TODO: 公開30日以上たっても検索に出ないページが{total}件ある"
+                    "（python scripts/reindex.py で登録状況を確認して再通知する）")
+    else:
+        print("  OK  公開30日以上のページは、すべて検索に出ています")
+
+
 def check_deploy(todo):
     """本番が手元のビルドと一致しているか。
 
@@ -449,6 +521,7 @@ def main():
     check_supply(todo, fix=fix_kw)
     check_scaled_risk(todo)
     check_tokens(todo)
+    check_unseen(todo)
     check_deploy(todo)
 
     print("\n===== 結果 =====")

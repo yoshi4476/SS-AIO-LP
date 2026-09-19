@@ -315,6 +315,22 @@ jobs:
             echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
           fi
 
+      # 当日更新分を通知するだけでは、過去に登録されなかったページが
+      # 放置され続ける。実測で、公開30日以上たっても28日間まったく表示されない
+      # ページが19件あった（コーポレートは sitemap の40%が表示ゼロ）。
+      # 登録状況を1URLずつ確認し、落ちているものだけを再通知する
+      - name: 登録されていないページを拾って再通知
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            python scripts/reindex.py || true
+            rm -f indexing-service-account.json
+          else
+            echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
+          fi
+
       - name: 運用通知（Slack→メール自動フォールバック）
         if: always()
         env:

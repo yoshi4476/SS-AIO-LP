@@ -1166,6 +1166,33 @@ def test_facts_are_per_article():
     check("丸めを禁じている", "丸めたり" in pr, True)
 
 
+def test_unindexed_pages_are_chased():
+    """公開したのに検索に出ていないページを、放置しないこと。
+
+    書いて配信したところで満足すると、載っていないページが溜まる。
+    実測で、公開30日以上たっても28日間まったく表示されないページが19件あった。
+    コーポレートは sitemap の40%（53件）が表示ゼロだった。
+
+    拾う仕組み（index_status.py / reindex.py）は作られていたが、
+    **どこからも呼ばれていなかった**。作っただけで動いていない道具は無いのと同じ。
+    """
+    print(chr(10) + "■ 未掲載ページの追跡")
+    for f in ("index_status.py", "reindex.py"):
+        check(f"{f} がある", (ROOT / "scripts" / f).is_file(), True)
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週、登録状況を見て再通知する", "reindex.py" in wf, True)
+
+    ad = (ROOT / "scripts" / "daily_audit.py").read_text(encoding="utf-8")
+    check("日次監査が気づく", "def check_unseen" in ad, True)
+    check("監査から呼ばれている", "check_unseen(todo)" in ad, True)
+    # 30日未満は評価が定まっていないだけ。手を当てても意味がない
+    check("30日を境にしている", "days < 30" in ad, True)
+    # 記事は所属サイトでだけ数える（全サイトで照合すると1本を3回数える）
+    check("所属サイトだけで数える", "find_category_owner" in ad, True)
+    check("直し方を示す", "reindex.py" in ad, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1195,7 +1222,8 @@ def main():
               test_output_matches_source,
               test_inquiry_body_is_not_truncated,
               test_articles_are_not_uniform,
-              test_facts_are_per_article):
+              test_facts_are_per_article,
+              test_unindexed_pages_are_chased):
         try:
             t()
         except Exception as e:
