@@ -1117,6 +1117,55 @@ def test_articles_are_not_uniform():
     check("1帯への集中を見ている", "share >= 0.5" in ad, True)
 
 
+def test_facts_are_per_article():
+    """一次情報が、記事ごとに違うものになること。
+
+    会社の実績（3,200店舗）はどの記事に書いても同じ一文になる。
+    実測では126本（37%）が同じ数字を載せていた。肩書きとしては正しいが、
+    「その記事にしかない情報」にはならず、AI検索の引用先にも選ばれにくい。
+
+    自サイトのGSC実測は記事ごとに違う。「この語が何位で、何回表示され、
+    何回クリックされたか」は、ほかのどのサイトも書けない。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import facts
+    print(chr(10) + "■ 記事ごとの一次情報")
+
+    check("記事ごとの実測を出す口がある", hasattr(facts, "own_query_facts"), True)
+
+    rows = [{"kw": "口コミ 返信 例文 医療", "pos": 8.7, "imp": 96, "clicks": 0, "ctr": 0.0},
+            {"kw": "aio対策 自分で", "pos": 26.2, "imp": 28, "clicks": 1, "ctr": 3.6},
+            {"kw": "原口優", "pos": 1.3, "imp": 36, "clicks": 4, "ctr": 11.1},
+            {"kw": "少ない語", "pos": 5.0, "imp": 3, "clicks": 0, "ctr": 0.0}]
+    import json as _j, tempfile
+    d = Path(tempfile.mkdtemp())
+    (d / "t.json").write_text(_j.dumps({"2026-09-17": rows}), encoding="utf-8")
+    old = facts.RANKS
+    facts.RANKS = d
+    try:
+        a = facts.own_query_facts("t", "口コミ 返信 例文 医療")
+        b = facts.own_query_facts("t", "aio対策 自分で")
+        check("語ごとに違う数字が出る",
+              bool(a) and bool(b) and a[0]["claim"] != b[0]["claim"], True)
+        # 上位なのにクリックが無い語は、自社の無力さではなく検索の性質として書く
+        check("0クリックを自社の弱みとして書かない",
+              "クリックは0回" not in a[0]["claim"], True)
+        check("0クリックを検索の性質として説明する",
+              "答えが済む" in a[0]["claim"], True)
+        check("数字はそのまま出す", "96回" in a[0]["claim"] and "8.7位" in a[0]["claim"], True)
+        check("出典と時点が付く",
+              bool(a[0].get("source")) and bool(a[0].get("as_of")), True)
+        # 表示が少ない語は偶然と区別できないので出さない
+        check("表示が少ない語は出さない", facts.own_query_facts("t", "少ない語"), [])
+        check("語が無ければ何も出さない", facts.own_query_facts("t", ""), [])
+    finally:
+        facts.RANKS = old
+
+    pr = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
+    check("プロンプトが記事ごとの数字を優先させる", "その記事にしかない数字" in pr, True)
+    check("丸めを禁じている", "丸めたり" in pr, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1145,7 +1194,8 @@ def main():
               test_rewrite_is_verified_and_reverted,
               test_output_matches_source,
               test_inquiry_body_is_not_truncated,
-              test_articles_are_not_uniform):
+              test_articles_are_not_uniform,
+              test_facts_are_per_article):
         try:
             t()
         except Exception as e:
