@@ -49,11 +49,11 @@ diagrams:
 
 **工務店の集客セミナーとは、契約棟数を増やす知識を体系的に学べる、経営者向けの学びの場です。**
 
+あわせて[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)もご覧ください。
+
 あわせて[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)もご覧ください。
 
 選ぶときの基準については、[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)にまとめています。
-
-費用の目安は[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)でも扱っています。
 
 <div class="definition-box"><span class="term">工務店の集客セミナーとは</span>、Web集客・見学会の企画・施工事例の見せ方といった、新規契約につながる知識をまとめて学べる場のことです。==自己流でSNSやブログを触るのと違い、複数の施策を体系立てて学べる点が特徴==です。</div>
 

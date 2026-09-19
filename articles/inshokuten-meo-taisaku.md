@@ -69,6 +69,8 @@ faq:
 
 MEO対策の基本は、正確な情報登録・カテゴリ設定・写真更新・口コミ返信・定期投稿・メニュー更新の6点です。
 
+あわせて[口コミ返信テンプレート集｜星評価別の例文とAI活用術](/meo/googlemap-kuchikomi-henshin/)もご覧ください。
+
 実際の進め方については、[飲食店の集客方法とは？](/ai-marketing/inshokuten-shukyaku-hoho/)にまとめています。
 
 <figure><img src="/images/inshokuten-meo-taisaku/kiso.png" alt="飲食店のMEO対策6つの基本施策: 正確な基本情報を登録する、カテゴリを実態に合わせる、写真を月2回以上追加する、口コミへ24時間以内に返信する、GBP投稿を週1回行う、メニュー情報を最新に保つ" loading="lazy"><figcaption>飲食店のMEO対策6つの基本施策</figcaption></figure>
@@ -146,7 +148,7 @@ MEO対策全体の口コミ施策は[Googleマップの口コミを増やす方�
 
 MEO対策は、現状確認、基本情報と写真の整備、運用の習慣化という3ステップで無理なく始められます。
 
-前提となる考え方については、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)にまとめています。
+前提となる考え方は、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)で解説しています。
 
 <figure><img src="/images/inshokuten-meo-taisaku/steps.png" alt="MEO対策を始める3ステップ: 現状のプロフィールを確認する、基本情報と写真を整備する、口コミ返信と投稿を習慣化する" loading="lazy"><figcaption>MEO対策を始める3ステップ</figcaption></figure>
 

@@ -49,9 +49,9 @@ faq:
 
 工務店のホームページ集客とは、施工事例と対応エリアを軸に見込み客を問い合わせへ導く仕組みです。
 
-関連する内容として[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)も公開しています。
+あわせて[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)もご覧ください。
 
-関連して、[見学会集客を伸ばす6つの施策｜申込を増やす導線設計](/ai-marketing/kengakukai-shukyaku-hoho/)もあわせてご確認ください。
+関連する内容として[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)も公開しています。
 
 関連する内容は[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)で整理しています。
 

@@ -47,7 +47,19 @@ def sh(args, timeout=1800):
 
 
 def targets():
-    """auto_improve が人へ回していた分を受け取る"""
+    """直すべき記事を、効く順に受け取る。
+
+    rank_up は全順位帯を見て「その帯で効く手」を判定している。
+    4〜10位でクリックが取れていないページは、順位があるぶん直せば即効く。
+    そちらを先に返し、無ければ auto_improve の一覧へ落とす。
+    """
+    try:
+        import rank_up
+        items = rank_up.human_items()
+        if items:
+            return items
+    except Exception as e:
+        print(f"  （rank_up から取れないため auto_improve を使います: {str(e)[:40]}）")
     import auto_improve as ai
     try:
         return ai.human_items()

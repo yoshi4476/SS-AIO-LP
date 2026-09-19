@@ -203,7 +203,8 @@ jobs:
       # auto_improve が「人が判断」として回していた分を、ここで直す。
       # 判断は claude がし、通してよいかは機械が決める。検算に1つでも外れたら
       # git checkout で元に戻すので、悪い書き換えは残らない。
-      # 1回2本に絞るのは、まとめて当てると戻すときに原因が分からなくなるため
+      # 1回6本。検算に外れたものは git checkout で戻るため、数を増やしても壊れない。
+      # 実測で直すべきページが35件あり、週2本では18週かかっていた
       # 検算が効いていることを先に確かめる。やってはいけない書き換えを
       # こちらで当てて、止まるかを見る（claude は呼ばない）。
       # 止まらなければ次の工程を飛ばす。検算が壊れたままエージェントを
@@ -222,7 +223,7 @@ jobs:
 
       - name: タイトル・検索意図の直し
         if: steps.guard.outputs.ok == 'yes'
-        run: python scripts/auto_rewrite.py --write --limit 2 || true
+        run: python scripts/auto_rewrite.py --write --limit 6 || true
 
       # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
       # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。

@@ -137,7 +137,6 @@ diagrams:
 
 物件ポータルは物件を探す入口、自社SEOは会社を比較し選ぶ入口という役割の違いがあります。
 
-
 関連する内容として[SaaS指名検索の増やし方｜AI時代に効く5つの施策](/aio/saas-shimei-kensaku-fuyashikata/)も公開しています。
 
 <figure><img src="/images/fudousan-seo-taisaku/portal-vs-seo.png" alt="物件ポータルと自社SEOの役割の違い: 物件ポータルは物件そのものを探す入口でSUUMO等への出稿に依存し条件検索からの流入、自社SEOは会社を比較し選ぶ入口で自社で資産として蓄積でき検討後期の指名検索に効く" loading="lazy"><figcaption>物件ポータルと自社SEO（コラム・エリアページ）は役割が異なり、両方の運用が前提になります</figcaption></figure>
@@ -151,7 +150,6 @@ diagrams:
 ## 不動産SEOの始め方3ステップ
 
 不動産SEOは、現状分析・ページ整備・コラム発信の3ステップで始めます。
-
 
 費用の目安は[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
@@ -192,7 +190,6 @@ AIが参照する素材は、コラムやエリアガイド記事に書かれた
 <details><summary>賃貸仲介でも売買仲介でもSEOの進め方は同じですか？</summary><p class="faq-a">土台は共通ですが、検索語の緊急度が違うため優先すべき施策は変わります。</p></details>
 <details><summary>小規模な不動産会社でもSEOは始められますか？</summary><p class="faq-a">始められます。エリアと悩み語を絞ったロングテール記事から着手すれば予算をかけずに進められます。</p></details>
 </div>
-
 
 自社サイトの技術面が基準を満たしているかは、[サイトの技術チェック（無料・URL入力だけ）](/site-audit/)で確かめられます。登録は不要で、その場で点数が出ます。
 

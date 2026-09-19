@@ -48,6 +48,8 @@ diagrams:
 
 **歯科医院のMEO対策とは、自由診療の専門性を追加カテゴリと院内写真で伝えるMEO運用のことです。**
 
+前提となる考え方については、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)にまとめています。
+
 前提となる考え方は、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で解説しています。
 
 関連する内容として[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)も公開しています。
@@ -82,8 +84,6 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 ## 歯科医院MEO対策の基本5ステップ
 
 歯科医院MEO対策は、基本情報とカテゴリの土台整備から、写真・口コミ・投稿の継続運用まで5段階で進めます。
-
-前提となる考え方は[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)で整理しています。
 
 <figure><img src="/images/shika-meo-taisaku/steps.png" alt="歯科医院MEO対策の基本5ステップ: 基本情報の統一、メインカテゴリの固定、写真で不安を減らす、口コミの依頼と返信、自由診療の投稿更新" loading="lazy"><figcaption>歯科医院MEO対策の基本5ステップ。前半3つが土台整備、後半2つが継続運用です</figcaption></figure>
 

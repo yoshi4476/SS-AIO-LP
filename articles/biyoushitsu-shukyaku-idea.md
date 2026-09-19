@@ -49,7 +49,6 @@ faq:
 
 美容室の集客アイデアは、無料でできることから着手し、1つずつ根づかせる順番が成功の条件です。
 
-
 あわせて[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">美容室の集客アイデアとは</span>、Googleマップ・口コミ・SNS・季節施策・予算施策という5つの引き出しから、店の状況に合わせて選ぶ具体的な打ち手を指します。<strong>思いつきで手を広げるほど、どれも中途半端に終わり効果が見えなくなります。</strong></div>
@@ -148,7 +147,6 @@ faq:
 
 <div class="cta-box"><p>予算をかける施策の前に、無料施策の定着度を診断します。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
-
 自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
 
 ## 集客アイデアの効果を測る、見るべき数字は3つ
@@ -171,8 +169,9 @@ faq:
 
 集客アイデアが定着しない美容室は、同時着手・効果測定なし・担当者任せの3つに共通点があります。
 
+関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
 
-関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
+関連する内容として[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)も公開しています。
 
 <figure><img src="/images/biyoushitsu-shukyaku-idea/teichaku.png" alt="定着する集客アイデア・続かない集客アイデア: 続かないアイデアは一度に3つ以上を同時に始める、効果測定をせず数か月続ける、担当者任せで仕組み化しない。定着するアイデアは1つずつ試して定着させる、数値で効果を確認する、予約システムに組み込み仕組み化する" loading="lazy"><figcaption>定着する集客アイデア・続かない集客アイデア</figcaption></figure>
 
@@ -191,8 +190,6 @@ faq:
 <figure><img src="/images/biyoushitsu-shukyaku-idea/junban.png" alt="集客アイデアを試す順番4ステップ: 無料でできることから着手する、1つ定着させてから次を足す、効果を数値で確認する、うまくいった施策を仕組み化する" loading="lazy"><figcaption>集客アイデアを試す順番4ステップ</figcaption></figure>
 
 私はMEO支援サービス「G-ran」で通算3,200店舗以上を支援してきました。その中でも、無料施策を1つずつ定着させてから予算施策に進んだ店舗ほど、失敗が少ない傾向を確認しています。予約システムの自動送信機能など、既存の仕組みだけで着手できるものから始めてください。
-
-地図検索での見つかりやすさは[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)で詳しく解説しています。
 
 <div class="cta-box"><p>自店の実行順序を無料でご相談いただけます。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 

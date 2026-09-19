@@ -47,6 +47,8 @@ diagrams:
 
 **不動産のLLMOとは、ChatGPTやPerplexityの回答内で自社が紹介される状態をつくる施策です。**LLMO（Large Language Model Optimization）は、Googleの検索結果に表示されるAI Overview向けの最適化であるAIOとは、対象とするプラットフォームが異なります。
 
+近い論点を[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)で扱っています。
+
 <div class="definition-box"><span class="term">不動産のLLMOとは</span>、購入・売却・賃貸を検討する人がChatGPTやPerplexityに「エリア名+不動産会社」「マンション 売却 相談」のように尋ねたとき、自社の情報が回答の候補として紹介されるよう情報を整備することです。SEO・MEO・AIOと対立するものではなく、同じ土台の上に成り立ちます。</div>
 
 AIOが対象にするのはGoogle検索のAI Overview・AIモードです。一方で==LLMOはChatGPT・Perplexity・Gemini・Claudeなど個別のAIチャットサービスを対象にします==。
@@ -91,8 +93,6 @@ Geminiは検索順位に加えてFAQPage・HowToといった構造化データ�
 ## 不動産会社が今日から始められるLLMO対策5選
 
 **不動産会社が着手すべきLLMO対策は、一次情報の明文化から計測まで5つの手順に整理できます。**特別な専用ツールは不要で、鍵になるのは既存ホームページの地道な情報整備。
-
-関連する内容として[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)も公開しています。
 
 対象になる範囲は[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)で整理しています。
 

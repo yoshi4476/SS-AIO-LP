@@ -152,8 +152,6 @@ faq:
 **申請から採択発表までは、公募開始から結果通知までおよそ4〜5か月かかります。**逆算してスケジュールを組むと余裕を持てます。
 
 
-近い論点を[開業届の電子申請｜個人事業主がe-Taxで出す5ステップ](/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/)で扱っています。
-
 <figure><img src="/images/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/nagare.png" alt="申請から採択発表までの流れ: 公募開始（要領を確認）、商工会に相談（事業計画書作成）、電子申請（jGrantsで提出）、審査（基礎・計画・加点）、採択発表（結果通知）"><figcaption>申請から採択発表までの流れ</figcaption></figure>
 
 第19回は2026年1月28日に公募要領が公開され、4月30日に締切、7月29日に採択発表という流れでした。<a href="https://r6.jizokukahojokin.info/" target="_blank" rel="noopener">小規模事業者持続化補助金の公式サイト</a>で、次回公募の最新スケジュールを確認できます。

@@ -42,6 +42,8 @@ faq:
 
 工務店のSEO対策とは、施工事例と専門情報の発信を通じて検索から見つかり、選ばれる工務店になるための一連の施策です。
 
+あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
+
 前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)でも扱っています。
 
 関連して、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)もあわせてご確認ください。
@@ -92,8 +94,6 @@ faq:
 
 成功の土台は、KW選定・施工事例充実・専門コラム・E-E-A-Tの明示・問い合わせ導線という5つの施策の組み合わせです。
 
-関連して、[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)もあわせてご確認ください。
-
 <figure><img src="/images/koumuten-seo-taisaku/steps.png" alt="工務店のSEO対策を成功させる5つの施策: エリア×工法のロングテールでKW選定、施工事例ページの充実、専門コラムの継続発信、資格・実績・第三者評価でE-E-A-Tを明示、問い合わせ導線の設計" loading="lazy"><figcaption>工務店のSEO対策を成功させる5つの施策</figcaption></figure>
 
 ### 施策1: エリア×工法のロングテールKWを選ぶ
@@ -126,8 +126,6 @@ faq:
 ## 注文住宅・リフォーム・分譲で変わる打ち手
 
 優先すべき施策は、新築中心かリフォーム中心かで施主の検索行動が異なるため変わります。
-
-近い論点を[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)で扱っています。
 
 関連して、[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)もあわせてご確認ください。
 

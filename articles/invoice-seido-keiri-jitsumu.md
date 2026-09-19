@@ -54,8 +54,6 @@ faq:
 
 近い論点を[経理効率化の本おすすめ6選｜選び方3ステップと失敗例](/blog/keiri-koritsuka-hon/)で扱っています。
 
-関連する内容として[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)も公開しています。
-
 <div class="definition-box"><span class="term">インボイス制度とは</span>、正式名称を適格請求書等保存方式といい、仕入税額控除を受けるために、登録番号や税率区分などの記載要件を満たした請求書（適格請求書）の保存を求める制度です。2023年10月1日に始まりました。</div>
 
 経理実務で新たに増えた確認作業は3つです。1つ目は、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6497.htm" target="_blank" rel="noopener">国税庁が定める記載事項</a>（登録番号・取引内容・税率ごとの消費税額など）がそろっているかの確認です。

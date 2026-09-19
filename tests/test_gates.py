@@ -1322,7 +1322,15 @@ def test_rank_data_is_verified():
     check("URLを鍵にする（slugで潰さない）", 'pages[url] =' in src, True)
     check("末尾スラッシュの重複を合算する", 'd["urls"] += 1' in src, True)
     check("表示の少ないページを対象にしない", R.MIN_IMP >= 20, True)
-    check("狙うのは1ページ目に近い層", R.NEAR == (10.5, 20.5), True)
+    # 1つの帯だけ見ても全体は動かない。実測で11〜20位は全323ページの22%だった
+    names = [b[2] for b in R.BANDS]
+    check("全順位帯を見る", len(R.BANDS), 5)
+    for n in ("1〜3位", "4〜10位", "11〜20位", "21〜50位", "51位以下"):
+        check(f"帯がある: {n}", n in names, True)
+    # 帯ごとに違う手を当てる（1ページ目にいるページへリンクを足しても効かない）
+    check("帯ごとにやることが違う", len({b[3] for b in R.BANDS}), 5)
+    check("順位相応のクリック率を持っている", R.expected_ctr(5.0) > R.expected_ctr(15.0), True)
+    check("効く順に渡す口がある", hasattr(R, "human_items"), True)
 
     # 直した記録を残し、効果を測れること
     check("記録を残す", "def save_log" in src, True)

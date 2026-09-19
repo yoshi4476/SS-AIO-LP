@@ -55,6 +55,8 @@ faq:
 
 **個人経営の経理は、コツを3つ先に決めておくと、現場の仕事が忙しくなっても崩れにくくなります。**
 
+あわせて[経理自動化はPythonで可能か？](/keiri-jitsumu/keiri-jidoka-python/)もご覧ください。
+
 実際の進め方については、[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)にまとめています。
 
 <figure><img src="/images/kojin-keiei-keiri-yarikata/kotsu.png" alt="個人経営の経理を回す3つのコツ: 経理の時間を予定化する、記録の入口を1つにする、月次で数字を確認する日を作る" loading="lazy"><figcaption>個人経営の経理を回す3つのコツ</figcaption></figure>
@@ -76,7 +78,6 @@ faq:
 ## 個人経営とは何か？個人事業主・会社経営との違い
 
 **個人経営とは、経営者本人が経営判断と現場の実務の両方を一人で担う経営の形のことです。**
-
 
 あわせて[飲食店の経理のやり方](/blog/inshokuten-keiri-yarikata/)もご覧ください。
 
@@ -148,15 +149,11 @@ faq:
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
-
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 ## 自分で回す限界のサインと外注に切り替える判断基準
 
 **自分で回す限界のサインは、月次確認が数か月止まり、本業の時間を圧迫し始めた状態です。**
-
-
-関連する内容として[経理の外注と丸投げの違い](/keiri-bpo/keiri-marunage-dekiru-hani/)も公開しています。
 
 <figure><img src="/images/kojin-keiei-keiri-yarikata/gaichuu-step.png" alt="外注を検討する3ステップ: 作業時間を計測する、滞りの月数を数える、任せる業務を選ぶ" loading="lazy"><figcaption>外注を検討する3ステップ</figcaption></figure>
 

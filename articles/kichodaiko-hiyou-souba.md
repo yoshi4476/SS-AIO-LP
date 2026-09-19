@@ -161,7 +161,7 @@ faq:
 
 **記帳代行の費用は、証憑のデータ化と依頼範囲の絞り込みという2つの工夫で抑えられます。**
 
-関連する内容として[管理会計まで頼む経理BPOの料金｜範囲別の増え方](/blog/kanri-kaikei-jikyu-souba/)も公開しています。
+あわせて[管理会計まで頼む経理BPOの料金｜範囲別の増え方](/blog/kanri-kaikei-jikyu-souba/)もご覧ください。
 
 <figure><img src="/images/kichodaiko-hiyou-souba/step.png" alt="記帳代行の依頼先を決める3ステップ: 現在の仕訳件数を数える、依頼先候補を2〜3社ピックアップする、同じ条件で見積もりを比較する" loading="lazy"><figcaption>記帳代行の依頼先を決める3ステップ</figcaption></figure>
 

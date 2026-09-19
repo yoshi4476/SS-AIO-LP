@@ -47,9 +47,9 @@ faq:
 
 工務店のインスタ集客とは、施工事例や家づくりの過程を発信し、来場予約や問い合わせにつなげる取り組みです。
 
-関連して、[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)もあわせてご確認ください。
+関連する内容として[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)も公開しています。
 
-実際の例を先に押さえるなら、[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)が参考になります。
+関連して、[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)もあわせてご確認ください。
 
 <div class="definition-box"><span class="term">工務店のインスタ集客とは</span>、Instagramのビジネスアカウントで施工事例・スタッフの人柄・家づくりの豆知識を発信し、フォロワーとの接点を積み上げて来場予約や問い合わせにつなげる一連の活動を指します。単なる写真置き場ではなく、比較検討中の見込み客との継続的な接点づくりが本来の目的です。</div>
 

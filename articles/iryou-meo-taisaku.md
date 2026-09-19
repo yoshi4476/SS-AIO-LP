@@ -103,6 +103,8 @@ diagrams:
 
 医療機関MEOで最も差が出るのは、カテゴリ設計と広告規制で気を配るべき力点です。
 
+関連する内容として[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)も公開しています。
+
 近い論点を[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で扱っています。
 
 前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)で整理しています。

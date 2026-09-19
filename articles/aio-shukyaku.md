@@ -49,6 +49,10 @@ faq:
 
 **AIO集客とは、AIの回答の中で引用され、そこから指名検索や問い合わせにつながる状態をつくることです。**
 
+近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
+
+近い論点を[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で扱っています。
+
 関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
 
 <div class="definition-box"><span class="term">AIO集客とは</span>、Google の AI Overview や ChatGPT・Perplexity などの生成AIが検索意図に答える際、自社の情報を引用元として選ばせ、そこから指名検索・問い合わせ・来店につなげる集客の考え方です。</div>
@@ -201,8 +205,6 @@ Search Consoleの生成AIパフォーマンスレポートと、GA4のAI参照�
 <span class="txt-red">NG：順位が悪いままAIO対策だけする</span>
 Google検索で圏外の記事にAIO対策を施しても、引用の土台がないため効果は出ません。まずSEOで20位以内を取ることが先です。
 </div>
-
-失敗の原因を切り分ける詳しい手順は、[AIO対策なのに表示されない8つの原因と対処法](/aio/aio-taisaku-hyouji-sarenai/)にまとめています。
 
 ## AIO集客は自社でやるか外注するか
 

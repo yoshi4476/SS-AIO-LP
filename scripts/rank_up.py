@@ -38,10 +38,40 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 LOG = ROOT / "data" / "rank_up.json"
 
-NEAR = (10.5, 20.5)     # 1ページ目に最も近い層
 MIN_IMP = 20            # これ未満は偶然と区別できない
 INBOUND_FLOOR = 12      # 被リンクの下限
 STALE_DAYS = 120        # 最終更新がこれより古ければ鮮度を疑う
+
+# 順位帯ごとに、効く手が違う。1つの帯だけ見ても全体は動かない。
+# 実測では11〜20位が72ページで、全323ページの22%にすぎなかった。
+#   (下限, 上限, 名前, その帯でやること)
+BANDS = [
+    (0.0,  3.5,  "1〜3位",   "守る"),
+    (3.5,  10.5, "4〜10位",  "クリックを取る"),
+    (10.5, 20.5, "11〜20位", "1ページ目へ押し上げる"),
+    (20.5, 50.5, "21〜50位", "内容を厚くする"),
+    (50.5, 999,  "51位以下", "狙いを見直す"),
+]
+
+# 順位ごとの一般的なクリック率（公開されている調査の中央値）。
+# 「その順位なら普通どれだけ取れるか」と比べ、下回っていればタイトルの問題
+BENCH = [(1.5, 28.0), (2.5, 15.0), (3.5, 11.0), (4.5, 8.0), (5.5, 6.0),
+         (6.5, 4.5), (7.5, 3.5), (8.5, 3.0), (9.5, 2.5), (10.5, 2.2),
+         (20.5, 1.0), (50.5, 0.3)]
+
+
+def band_of(pos):
+    for lo, hi, name, todo in BANDS:
+        if lo < pos <= hi:
+            return name, todo
+    return "圏外", "―"
+
+
+def expected_ctr(pos):
+    for hi, v in BENCH:
+        if pos <= hi:
+            return v
+    return 0.1
 
 
 def fetch(domain, days=28):
@@ -112,22 +142,20 @@ def field(text, key):
 
 
 def diagnose(slug, d, texts, all_pages):
-    """そのページの順位が上がらない理由を、確かめられるものだけ挙げる"""
+    """そのページで次にやることを、順位帯に応じて挙げる。
+
+    帯によって効く手が違う。1ページ目にいるのにクリックが出ないページへ
+    内部リンクを足しても意味がなく、圏外のページのタイトルを直しても届かない。
+    確かめられる事実だけを根拠にする。
+    """
     out = []
     t = texts.get(slug, "")
     kw = d["kws"][0][0] if d["kws"] else ""
-
-    n = inbound(slug, texts)
-    if n < INBOUND_FLOOR:
-        out.append(("links", f"内部リンク{n}本（下限{INBOUND_FLOOR}本）", INBOUND_FLOOR - n))
-
+    band, _ = band_of(d["pos"])
     title = field(t, "title")
-    parts = [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
-    if parts and not all(w.lower() in title.lower() for w in parts):
-        miss = [w for w in parts if w.lower() not in title.lower()]
-        out.append(("title", f"タイトルに「{' '.join(miss)}」が無い", 0))
 
-    # 同じ語で自社の別ページが出ていないか
+    # --- どの帯でも見るもの ---
+    # 同じ語で自社の別ページが出ていないか（競合すると両方とも上がらない）
     rivals = []
     for d2 in all_pages.values():
         s2 = d2["slug"]
@@ -142,13 +170,102 @@ def diagnose(slug, d, texts, all_pages):
                              f"（最上位 {rivals[0][0]} {rivals[0][1]:.0f}位）", 0))
 
     mod = field(t, "modified") or field(t, "date")
+    old = None
     try:
         old = (date.today() - date.fromisoformat(mod)).days
-        if old > STALE_DAYS:
-            out.append(("stale", f"最終更新から{old}日", 0))
     except ValueError:
         pass
+
+    # --- 帯ごとに見るもの ---
+    if band in ("1〜3位", "4〜10位"):
+        # 1ページ目にいる。足りないのは順位ではなくクリック。
+        # 内部リンクを足しても意味がないので、ここでは足さない
+        want = expected_ctr(d["pos"])
+        got = d["clicks"] / max(1, d["imp"]) * 100
+        if d["imp"] >= MIN_IMP and got < want * 0.5:
+            out.append(("snippet",
+                        f"{band}にいるがクリック率{got:.1f}%"
+                        f"（この順位なら{want:.0f}%前後）。"
+                        f"タイトルか説明文が選ばれていない", 0))
+        if old is not None and old > STALE_DAYS:
+            out.append(("stale", f"最終更新から{old}日。上位を守るには鮮度が要る", 0))
+
+    elif band == "11〜20位":
+        n = inbound(slug, texts)
+        if n < INBOUND_FLOOR:
+            out.append(("links", f"内部リンク{n}本（下限{INBOUND_FLOOR}本）",
+                        INBOUND_FLOOR - n))
+        parts = [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
+        if parts and not all(w.lower() in title.lower() for w in parts):
+            miss = [w for w in parts if w.lower() not in title.lower()]
+            out.append(("title", f"タイトルに「{' '.join(miss)}」が無い", 0))
+
+    elif band == "21〜50位":
+        # 2ページ目より下。リンクだけでは届かない。内容と狙いを見る
+        n = inbound(slug, texts)
+        if n < INBOUND_FLOOR:
+            out.append(("links", f"内部リンク{n}本（下限{INBOUND_FLOOR}本）",
+                        INBOUND_FLOOR - n))
+        body = t.split("---", 2)[-1]
+        chars = len(re.sub(r"\s|<[^>]+>", "", body))
+        if chars < 5000:
+            out.append(("thin", f"本文{chars:,}字。同じ語で上位のページより薄い", 0))
+        parts = [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
+        if parts and not all(w.lower() in title.lower() for w in parts):
+            miss = [w for w in parts if w.lower() not in title.lower()]
+            out.append(("title", f"タイトルに「{' '.join(miss)}」が無い", 0))
+        if old is not None and old > STALE_DAYS:
+            out.append(("stale", f"最終更新から{old}日", 0))
+
+    elif band == "51位以下":
+        # 圏外。小手先では届かない。狙う語が合っているかを疑う
+        out.append(("intent",
+                    f"51位以下。表示{d['imp']}回あるのに届いていない。"
+                    f"狙う語（{kw or '不明'}）が記事の中身と合っているかを見直す", 0))
     return out
+
+
+def human_items(site=""):
+    """文章の判断が要るものを、効く順に返す（auto_rewrite が読む）。
+
+    順番は「直したときに、いちばんクリックが増える順」にする。
+      1. 4〜10位でクリックが取れていない … 順位はある。タイトルを直せば即効く
+      2. 11〜20位でタイトルに狙う語が無い … 押し上げの前提が欠けている
+      3. 自社ページどうしの競合          … 片方を勝たせないと両方上がらない
+      4. 21位以下で狙う語が合っていない   … 直しても届くまで時間がかかる
+    """
+    import sites as S
+    order = {"snippet": 0, "title": 1, "rival": 2, "thin": 3, "intent": 4}
+    why = {"snippet": "1ページ目にいるのにクリックが取れていない",
+           "title": "タイトルに狙う語が入っていない",
+           "rival": "同じ語で自社の別ページと competing している",
+           "thin": "本文が薄い", "intent": "狙う語が記事の中身と合っていない"}
+    texts = articles()
+    out = []
+    for sid, cfg in S.load_all().items():
+        if site and sid != site:
+            continue
+        try:
+            pages = fetch(cfg["domain"])
+        except Exception:
+            continue
+        for d in pages.values():
+            if d["slug"] not in texts or d["imp"] < MIN_IMP:
+                continue
+            for kind, msg, _ in diagnose(d["slug"], d, texts, pages):
+                if kind in order:
+                    out.append({"kind": "title" if kind in ("snippet", "title") else "review",
+                                "slug": d["slug"], "site": sid,
+                                "why": f"{d['pos']:.0f}位・表示{d['imp']}・"
+                                       f"クリック{d['clicks']}｜{why[kind]}",
+                                "how": msg, "rank": order[kind], "imp": d["imp"]})
+    # 同じ記事が複数の理由で挙がったら、最も効くものだけ残す
+    best = {}
+    for x in out:
+        k = x["slug"]
+        if k not in best or x["rank"] < best[k]["rank"]:
+            best[k] = x
+    return sorted(best.values(), key=lambda x: (x["rank"], -x["imp"]))
 
 
 def load_log():
@@ -221,35 +338,60 @@ def main():
 
     texts = articles()
     log = load_log()
-    print(f"■ 1ページ目に最も近い層（{NEAR[0]:.0f}〜{NEAR[1]:.0f}位・表示{MIN_IMP}回以上）\n")
-    added = human = 0
-    for sid, pages in by_site.items():
-        near = {d["slug"]: d for d in pages.values()
-                if NEAR[0] < d["pos"] <= NEAR[1] and d["imp"] >= MIN_IMP
-                and d["slug"] in texts}
-        if not near:
-            continue
-        print(f"  ── {S.load(sid)['name'][:20]}  {len(near)}ページ")
-        for slug, d in sorted(near.items(), key=lambda kv: -kv[1]["imp"])[:a.limit]:
-            issues = diagnose(slug, d, texts, pages)
-            head = (f"  {d['pos']:>5.1f}位 表示{d['imp']:>4} ｸﾘｯｸ{d['clicks']:>3}  "
-                    f"{slug[:30]}")
-            print(head)
-            for kind, msg, need in issues:
-                print(f"        ・{msg}")
-                if kind == "links" and a.write and need:
-                    import priority_boost as P
-                    kws = [(k, p, i) for k, p, i in d["kws"][:3]]
-                    n = P.send_links(slug, P.topic_words(slug, kws, texts), need, texts)
-                    added += n
-                    print(f"          → 内部リンクを{n}本足しました")
-                elif kind in ("title", "rival"):
-                    human += 1
-            if a.write:
-                log[slug] = {"at": date.today().isoformat(), "pos": round(d["pos"], 1),
-                             "imp": d["imp"], "site": sid}
-        print()
+    added = 0
+    human = {}
+    covered = total = 0
 
+    for sid, pages in by_site.items():
+        mine = [d for d in pages.values() if d["slug"] in texts]
+        if not mine:
+            continue
+        total += len(mine)
+        print(f"■ {S.load(sid)['name'][:22]}  {len(mine)}ページ\n")
+        # 帯ごとに、表示の多い順で見る。表示が少ないものは偶然と区別できない
+        for lo, hi, name, todo in BANDS:
+            in_band = sorted([d for d in mine if lo < d["pos"] <= hi],
+                             key=lambda x: -x["imp"])
+            if not in_band:
+                continue
+            imp = sum(d["imp"] for d in in_band)
+            clk = sum(d["clicks"] for d in in_band)
+            print(f"  ── {name}（{todo}）  {len(in_band)}ページ / "
+                  f"表示{imp} / クリック{clk}")
+            acted = 0
+            for d in in_band:
+                if d["imp"] < MIN_IMP:
+                    continue      # 少ない表示は偶然と区別できない
+                slug = d["slug"]
+                issues = diagnose(slug, d, texts, pages)
+                if not issues:
+                    continue
+                acted += 1
+                covered += 1
+                if acted <= a.limit:
+                    print(f"     {d['pos']:>5.1f}位 表示{d['imp']:>4} "
+                          f"ｸﾘｯｸ{d['clicks']:>3}  {slug[:30]}")
+                for kind, msg, need in issues:
+                    if acted <= a.limit:
+                        print(f"           ・{msg}")
+                    if kind == "links" and a.write and need:
+                        import priority_boost as P
+                        n = P.send_links(slug, P.topic_words(slug, d["kws"][:3], texts),
+                                         need, texts)
+                        added += n
+                        if acted <= a.limit and n:
+                            print(f"             → 内部リンクを{n}本足しました")
+                    elif kind in ("title", "rival", "snippet", "thin", "intent"):
+                        human.setdefault(kind, []).append(slug)
+                if a.write:
+                    log[slug] = {"at": date.today().isoformat(),
+                                 "pos": round(d["pos"], 1), "imp": d["imp"],
+                                 "band": name, "site": sid}
+            if acted > a.limit:
+                print(f"     …ほか{acted - a.limit}ページ")
+            print()
+
+    print(f"  手を当てた/当てるべきページ: {covered} / 全{total}ページ")
     if a.write:
         save_log(log)
         print(f"  内部リンクを計{added}本足し、{len(log)}件を記録しました")
@@ -257,8 +399,14 @@ def main():
         print("      python scripts/rank_up.py --effect で数週間後に効果を見る")
     else:
         print("  --write を付けると、内部リンクの不足を埋めて記録します")
+
     if human:
-        print(f"  人の判断が要るもの: {human}件（タイトル・競合の解消）")
+        label = {"title": "タイトルに狙う語が無い", "rival": "自社ページどうしの競合",
+                 "snippet": "順位はあるがクリックされていない（タイトル・説明文）",
+                 "thin": "本文が薄い（内容の追加）", "intent": "狙う語が合っていない"}
+        print("\n  文章の判断が要るもの（auto_rewrite が週6本ずつ当たります）")
+        for k, v in sorted(human.items(), key=lambda kv: -len(kv[1])):
+            print(f"     {label.get(k, k):<38} {len(v):>3}件  例: {v[0][:28]}")
     return 0
 
 
