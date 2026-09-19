@@ -44,7 +44,7 @@ function form_(body) {
   if (!email || !isEmail_(email)) {
     return { ok: false, error: 'メールアドレスの形式をご確認ください。' };
   }
-  if (type === 'contact' && (!name || !clean_(d.message))) {
+  if (type === 'contact' && (!name || !body_(d.message))) {
     return { ok: false, error: '必須項目が入力されていません。' };
   }
   if ((type === 'diagnosis' || type === 'site_audit') && !name) {
@@ -118,7 +118,7 @@ function leadSave_(site, type, temp, d) {
 
   sh.appendRow([
     now, site, LEAD_TYPE_LABELS[type] || type, clean_(d.company), clean_(d.name), '',
-    email, clean_(d.tel || d.phone), clean_(d.message || d.body),
+    email, clean_(d.tel || d.phone), body_(d.message || d.body),
     leadDetail_(type, d), '', clean_(d.referer), temp, '未対応',
   ]);
   return sh.getLastRow();
@@ -148,6 +148,26 @@ function leadDetail_(type, d) {
     .map(function (k) { return k + ': ' + JSON.stringify(d[k]); }).join(' / ');
 }
 
+/**
+ * 相談内容など、長い本文のためのもの。
+ *
+ * clean_() は件名や会社名のための関数で、改行を空白に潰して80字で切る。
+ * これを相談内容にも使っていたため、**届いた相談が80字で切れていた**。
+ * 実際に「インド人新卒採用支援サービスを…検索され」でちょうど80字で途切れた
+ * 問い合わせが届き、続きが読めなかった。台帳にも切れたまま保存されていた。
+ *
+ * 本文は改行が意味を持つ。潰さずに残す。長さの上限は、送信側
+ * （functions/api/lead.js）が 2000字で切っているので、それを超える値にして
+ * ここでは実質切らない。ただし無制限にはしない（壊れた入力で台帳が壊れるため）。
+ */
+function body_(s) {
+  return String(s == null ? '' : s)
+    .replace(/\r\n?/g, '\n')      // 改行コードを揃える。改行自体は残す
+    .replace(/ /g, '')       // 制御文字だけ落とす
+    .slice(0, 5000)
+    .trim();
+}
+
 /** 社内向けの通知。温度を件名に出して、見た瞬間に優先度が分かるようにする */
 function leadNotify_(site, type, temp, d, referer) {
   const tag = { HOT: '🔥【HOT】', WARM: '🌤【WARM】', COOL: '❄️【COOL】' }[temp] || '';
@@ -155,7 +175,7 @@ function leadNotify_(site, type, temp, d, referer) {
   const lines = ['サイト: ' + site, '種別: ' + label, '温度: ' + temp, '',
                  '会社・店舗: ' + clean_(d.company), 'お名前: ' + clean_(d.name),
                  'メール: ' + clean_(d.email), '電話: ' + clean_(d.tel || d.phone), ''];
-  if (clean_(d.message)) lines.push('ご相談内容:', clean_(d.message), '');
+  if (body_(d.message)) lines.push('ご相談内容:', body_(d.message), '');
   const detail = leadDetail_(type, d);
   if (detail) lines.push('詳細: ' + detail, '');
   lines.push('送信元: ' + (referer || '不明'),

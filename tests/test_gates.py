@@ -1052,6 +1052,45 @@ def test_output_matches_source():
     check("ビルドが突き合わせる", "structure_gap(" in b, True)
 
 
+def test_inquiry_body_is_not_truncated():
+    """届いた相談の本文が、途中で切れないこと。
+
+    clean_() は件名や会社名のための関数で、改行を空白に潰して80字で切る。
+    これを相談内容にも使っていたため、実際に届いた問い合わせが
+    「インド人新卒採用支援サービスを…検索され」でちょうど80字で途切れた。
+    メールだけでなく台帳にも切れたまま保存されており、続きは復元できない。
+
+    本文には body_() を使う。改行を残し、送信側の上限（2000字）を超える値にする。
+    """
+    import re as _re
+    print(chr(10) + "■ 問い合わせ本文の扱い")
+    gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
+
+    check("本文用の関数がある", "function body_(" in gs, True)
+    # 本文に clean_ を使っていないこと（ここが事故の原因だった）
+    for field in ("d.message", "d.body", "d.message || d.body"):
+        check(f"clean_({field}) を使っていない",
+              f"clean_({field})" in gs, False)
+    check("台帳へは body_ で書く", "body_(d.message || d.body)" in gs, True)
+    check("メールへは body_ で出す", "body_(d.message)" in gs, True)
+
+    # 上限が、送信側（lead.js）の上限より大きいこと。小さいとそこで切れる
+    m = _re.search(r"function body_\(s\)[\s\S]*?slice\(0, *(\d+)\)", gs)
+    js = (ROOT / "functions" / "api" / "lead.js").read_text(encoding="utf-8")
+    m2 = _re.search(r"String\(v\)\.slice\(0, *(\d+)\)", js)
+    gas_max = int(m.group(1)) if m else 0
+    web_max = int(m2.group(1)) if m2 else 0
+    check(f"上限が送信側（{web_max}字）を上回る", gas_max > web_max, True)
+
+    # 改行を潰していないこと（段落が読めなくなる）
+    body_fn = m.group(0) if m else ""
+    check("改行を空白に潰していない",
+          _re.search(r"replace\(/\[\r\n\]\+/g, *['\"] ['\"]\)", body_fn) is None, True)
+
+    # 件名や会社名は従来どおり clean_（1行に収める必要がある）
+    check("件名は clean_ のまま", "clean_(d.company)" in gs, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1078,7 +1117,8 @@ def main():
               test_import_has_no_side_effects,
               test_long_sentences_are_split,
               test_rewrite_is_verified_and_reverted,
-              test_output_matches_source):
+              test_output_matches_source,
+              test_inquiry_body_is_not_truncated):
         try:
             t()
         except Exception as e:
