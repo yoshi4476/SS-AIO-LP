@@ -1341,6 +1341,34 @@ def test_rank_data_is_verified():
     check("効果を先に記録する", wf.index("--effect") < wf.index("rank_up.py --write"), True)
 
 
+def test_measurement_pitfalls_are_documented():
+    """間違えやすい測り方が、手順として残っていること。
+
+    1つのセッションで9回、誤った数字を報告した。どれも30秒の再確認で防げた。
+    共通していたのは「自分の測り方が正しい」と仮定したこと。
+    対象の性質ではなく、道具の癖を見ていた。
+
+    人の注意に任せると忘れるので、手順を文書に残し、検算の道具を用意する。
+    """
+    print(chr(10) + "■ 測り方の落とし穴")
+    md = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    check("数字を出す前の手順がある", "数字を出す前に必ず通す手順" in md, True)
+    for k in ("別の方法で同じ数字を出す", "内訳に分ける",
+              "逆を探す", "前提を口に出して確かめる"):
+        check(f"手順に含まれる: {k}", k in md, True)
+
+    # 実際に踏んだ落とし穴が、名指しで残っていること
+    for k in ("query次元", "末尾スラッシュ", "指名検索", "lead_capture"):
+        check(f"落とし穴が明記されている: {k}", k in md, True)
+
+    check("検算の道具がある", (ROOT / "scripts" / "data_sanity.py").is_file(), True)
+    ds = (ROOT / "scripts" / "data_sanity.py").read_text(encoding="utf-8")
+    for name, key in (("二重計上", "check_double_count"), ("無効な流入", "check_invalid"),
+                      ("GA4とGSCの食い違い", "check_ga_vs_gsc"),
+                      ("指名検索の割合", "check_brand_share")):
+        check(f"検算する: {name}", key in ds, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1375,7 +1403,8 @@ def main():
               test_rate_claims_need_evidence,
               test_submissions_are_not_double_counted,
               test_boost_finds_link_sources,
-              test_rank_data_is_verified):
+              test_rank_data_is_verified,
+              test_measurement_pitfalls_are_documented):
         try:
             t()
         except Exception as e:
