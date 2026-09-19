@@ -1,28 +1,28 @@
 {
-  "date": "2026-09-19",
+  "date": "2026-09-20",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 11,
-      "suspect_taken": 11,
+      "judged": 10,
+      "suspect_taken": 10,
       "healthy": 0,
-      "too_thin": 44,
+      "too_thin": 43,
       "items": [
         {
           "kw": "原口優",
           "url": "https://ai.7senses.co.jp/author/haraguchi/",
           "pos": 1.4,
-          "imp": 37,
+          "imp": 34,
           "clicks": 3,
-          "ctr": 8.11,
+          "ctr": 8.82,
           "expected_ctr": 28.0,
-          "ratio": 0.29
+          "ratio": 0.32
         },
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 9.2,
-          "imp": 60,
+          "pos": 9.1,
+          "imp": 58,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -42,7 +42,7 @@
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
           "pos": 8.9,
-          "imp": 50,
+          "imp": 44,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -99,16 +99,6 @@
           "ratio": 0.0
         },
         {
-          "kw": "口コミ返信 医療機関",
-          "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 10.0,
-          "imp": 104,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 2.5,
-          "ratio": 0.0
-        },
-        {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
           "pos": 9.3,
@@ -152,7 +142,7 @@
       "judged": 2,
       "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 24,
+      "too_thin": 23,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",
