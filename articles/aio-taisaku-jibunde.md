@@ -53,7 +53,7 @@ faq:
 
 **自分で対策する前に、検索順位・クローラー許可・更新体制の3つを確認してください。**この3つが欠けたまま構造だけ整えても、成果にはつながりません。
 
-1つ目は検索順位です。AI Overviewの引用元は検索10位以内のページからほぼ選ばれるため、圏外の記事を自分で構造化しても引用の候補に入りません。[AIO診断](/aio/aio-shindan-yarikata/)で対象記事の現在地を先に確認してください。
+1つ目は検索順位です。AI Overviewの引用元は検索10位以内のページからほぼ選ばれるため、圏外の記事を自分で構造化しても引用の候補に入りません。[AIO診断のやり方](/aio/aio-shindan-yarikata/)で対象記事の現在地を先に確認してください。
 
 2つ目はrobots.txtでのクローラー許可です。<a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank" rel="noopener">Google公式のクローラー一覧</a>を見ながら、GooglebotをはじめAI系クローラーを誤ってブロックしていないか確認してください。自分で確認するときは、robots.txtだけでなくWAFやCDNの自動ブロック設定も見落としがちなので注意します。
 
