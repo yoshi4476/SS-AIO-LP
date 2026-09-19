@@ -146,3 +146,6 @@
 - [AIOのやり方｜5ステップの実践手順と失敗例](https://ai.7senses.co.jp/aio/aio-yarikata/): AIOのやり方は、クローラーの受け入れ整備→本文の断言型書き換え→数値ファクトの追加→FAQの整備→公開後の計測という5ステップです。自社サイトの実装データをもとに、つまずきやすい失敗例とあわせて手順を解説します。
 - [MEO会社の選び方｜LLMO対応の見極め3基準](https://ai.7senses.co.jp/aio/meo-kaisha-llmo-taiou/): MEO会社を選ぶ際にLLMO対応まで確認すべき理由と、見極めの3つの基準を解説します。MEO専業との違いや依頼前の確認ステップ、よくある失敗も紹介します。
 - [AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方](https://ai.7senses.co.jp/aio/aio-koka-sokutei-report-hinagata/): AIO効果測定レポートの雛形を紹介します。表示回数・引用ページ数・参照セッションなど入れるべき5つの指標と、週次・月次の運用手順、そのまま使える表形式のテンプレートを解説します。
+- [LLMO代理店募集の見分け方｜確認すべき5つの条件](https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/): LLMO代理店の募集情報は条件があいまいなまま契約すると業務範囲でトラブルになります。契約前に確認すべき5つの条件、始め方3ステップ、失敗しやすい3つの落とし穴を2026年9月時点の情報で解説します。
+- [LLMO店舗集客とは？MEOだけで足りない理由と5つの施策](https://ai.7senses.co.jp/aio/llmo-tenpo-shukyaku/): LLMO店舗集客とは、AI検索での引用を来店・予約につなげる店舗向けの取り組みです。MEO対策との違い、取り組むべき5つの施策、業種別の進め方、GA4・GSCでの効果測定までを、自社の運用実績とあわせて解説します。
+- [安いAIO対策ツールおすすめ6選｜無料〜月3万円台の価格帯を比較](https://ai.7senses.co.jp/aio/aio-taisaku-yasui-tool/): 安いAIO対策ツールは、無料のSearch Console・GA4から、海外製Otterly.AI Lite（月25ドル）、国産DolphinX AIOライト（月3万円）まで価格帯が分かれます。価格帯別の選び方を解説します。
