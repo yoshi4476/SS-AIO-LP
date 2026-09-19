@@ -70,8 +70,6 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 入口の分散は印象論ではなく、国内外の調査データで確認できる構造変化です。
 
 
-関連する内容として[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)も公開しています。
-
 | データ | 数値 | 出典 |
 |:--|:--|:--|
 | クリックなしで終わる検索（米国） | 58.5% | <a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToro（2024年）</a> |

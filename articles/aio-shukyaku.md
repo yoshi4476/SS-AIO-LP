@@ -49,6 +49,8 @@ faq:
 
 **AIO集客とは、AIの回答の中で引用され、そこから指名検索や問い合わせにつながる状態をつくることです。**
 
+関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
+
 <div class="definition-box"><span class="term">AIO集客とは</span>、Google の AI Overview や ChatGPT・Perplexity などの生成AIが検索意図に答える際、自社の情報を引用元として選ばせ、そこから指名検索・問い合わせ・来店につなげる集客の考え方です。</div>
 
 SEO集客とAIO集客は、ゴールにしている場面が違います。SEO集客は「検索結果の一覧で選ばれ、クリックされること」がゴールです。一方でAIO集客は、AIがまとめた回答の中で、社名や実績ごと引用されることがゴールになります。

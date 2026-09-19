@@ -170,6 +170,22 @@ jobs:
           python scripts/priority_boost.py --write || true
           rm -f indexing-service-account.json
 
+      # 順位を上げることだけに絞った工程。11〜20位の層を狙う。
+      # データの取り方を1か所に固定し、page次元の数字を正とする。
+      # query次元は検索数の少ない語をGSCが返さないため、実測でクリックが
+      # 3〜4割少なく出た。その食い違いに気づかず誤った判断をしたことがある。
+      # 直した記録を data/rank_up.json に残し、--effect で前後を比べる
+      - name: 順位を上げる（1ページ目に最も近い層）
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/rank_up.py --effect || true
+          python scripts/rank_up.py --write || true
+          rm -f indexing-service-account.json
+
       # 長い段落は読みにくいだけでなく、AI検索も一文を切り出しにくい。
       # 文の切れ目でだけ分け、地の文が1字でも変わったら書き換えない
       - name: 長すぎる段落を分ける

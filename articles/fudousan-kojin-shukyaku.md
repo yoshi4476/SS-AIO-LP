@@ -59,6 +59,8 @@ faq:
 
 独立直後の不動産個人集客は、資金・信用・時間という3つの壁に共通してぶつかります。
 
+あわせて[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)もご覧ください。
+
 会社単位の集客改善は[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)でも扱っていますが、個人にはさらに開業資金という会社員時代にはなかった制約が加わります。
 
 <figure><img src="/images/fudousan-kojin-shukyaku/walls.png" alt="個人が不動産集客でぶつかる3つの壁: 資金の壁で開業資金の大半が保証金に消える、信用の壁で屋号だけでは実績が伝わらない、時間の壁で営業と事務を一人でこなす" loading="lazy"><figcaption>個人が不動産集客でぶつかる3つの壁</figcaption></figure>
@@ -135,7 +137,6 @@ faq:
 
 個人の不動産集客は、発信の準備、実績の蓄積、紹介の仕組み化という3ステップで安定させます。
 
-
 前提となる考え方は[OB客紹介の仕組み化とは？](/ai-marketing/obkyaku-shoukai-shikumi/)でも扱っています。
 
 <figure><img src="/images/fudousan-kojin-shukyaku/steps.png" alt="個人の不動産集客を仕組み化する3ステップ: 顔を出すでプロフィールと得意分野を明示する、実績を残すで成約事例を1件ずつ蓄積する、紹介を仕組み化するでOB客への定期連絡をルール化する" loading="lazy"><figcaption>個人の不動産集客を仕組み化する3ステップ</figcaption></figure>
@@ -197,7 +198,6 @@ OB客への連絡タイミングをカレンダーに登録し、担当者の記
 <details><summary>個人事業と法人、どちらが集客で有利ですか？</summary><p class="faq-a">集客面では大差ありません。屋号より担当者個人の実績発信が信頼を左右します。</p></details>
 <details><summary>一人で集客と実務を両立するコツはありますか？</summary><p class="faq-a">発信を月1本の型に固定し、反響対応を最優先で先にこなす順序にします。</p></details>
 </div>
-
 
 自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
 

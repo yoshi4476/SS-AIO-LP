@@ -97,7 +97,7 @@ faq:
 経理アウトソーシングの料金形態には、月額固定・従量課金・スポット対応の3種類があり、業務量の安定度で向き不向きが分かれます。
 
 
-あわせて[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)もご覧ください。
+近い論点を[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)で扱っています。
 
 | 料金形態 | 特徴 | 向いている企業 |
 |:--|:--|:--|
@@ -137,7 +137,7 @@ faq:
 経理アウトソーシングの見積もりは、自社の業務量を数値で把握してから、複数社に同じ条件で依頼すると精度が上がります。
 
 
-関連する内容として[記帳代行費用の勘定科目｜外注費と支払手数料の使い分け](/blog/kichodaiko-hiyou-kanjoukamoku/)も公開しています。
+あわせて[記帳代行費用の勘定科目｜外注費と支払手数料の使い分け](/blog/kichodaiko-hiyou-kanjoukamoku/)もご覧ください。
 
 <figure><img src="/images/keiri-outsourcing-hiyou-souba/step.png" alt="見積もりを比較する3ステップ: 自社の業務量を洗い出す、複数社に同じ条件で見積もりを依頼する、対応範囲外の追加費用を確認する" loading="lazy"><figcaption>見積もりを比較する3ステップ</figcaption></figure>
 

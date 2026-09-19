@@ -82,7 +82,7 @@ faq:
 
 あわせて[整骨院の集客成功事例5選](/ai-marketing/seikotsuin-shukyaku-jirei/)もご覧ください。
 
-あわせて[リフォームの集客方法とは？反響を増やす6つの施策](/ai-marketing/reform-shukyaku-hoho/)もご覧ください。
+近い論点を[リフォームの集客方法とは？反響を増やす6つの施策](/ai-marketing/reform-shukyaku-hoho/)で扱っています。
 
 <figure><img src="/images/biyoushitsu-shukyaku-houhou/houhou.png" alt="集客導線を整える6つの取り組み: マップ表示を整える、Instagram発信、口コミに全件返信、指名検索の導線、来店後の声かけ、値引き表示を守る" loading="lazy"><figcaption>集客導線を整える6つの取り組み</figcaption></figure>
 

@@ -48,9 +48,9 @@ diagrams:
 
 **歯科医院のMEO対策とは、自由診療の専門性を追加カテゴリと院内写真で伝えるMEO運用のことです。**
 
-関連する内容は、[医療機関のMEO対策](/meo/iryou-meo-taisaku/)で解説しています。
+前提となる考え方は、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で解説しています。
 
-前提となる考え方については、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)にまとめています。
+関連する内容として[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)も公開しています。
 
 関連して、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もあわせてご確認ください。
 

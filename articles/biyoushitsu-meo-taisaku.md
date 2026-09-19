@@ -137,6 +137,10 @@ Instagramにスタイル写真を投稿する習慣がある美容室は多い�
 
 美容室のMEO対策は、現状確認、基本情報整備、運用開始という3ステップで進めます。
 
+関連する内容は[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)でも扱っています。
+
+前提となる考え方は、[整骨院のMEO対策とは？](/meo/seikotsuin-meo-taisaku/)で解説しています。
+
 前提となる考え方については、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)にまとめています。
 
 <figure><img src="/images/biyoushitsu-meo-taisaku/steps.png" alt="美容室のMEO対策を始める3ステップ: 現状確認で自店名と地域名で検索し表示状況を確認する、基本情報整備でNAP・カテゴリ・営業時間を統一する、運用開始で写真投稿と口コミ返信を月次で継続する" loading="lazy"><figcaption>美容室のMEO対策を始める3ステップ</figcaption></figure>

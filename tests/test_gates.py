@@ -1300,6 +1300,39 @@ def test_boost_finds_link_sources():
     check("語を取りすぎない（無関係な記事に当たる）", len(w) <= 8, True)
 
 
+def test_rank_data_is_verified():
+    """順位改善が使う数字が、別の取り方と一致すること。
+
+    GSCは見る次元で数字が変わる。query次元は検索数の少ない語を返さないため、
+    実測で page次元50クリックが query次元では0と出た。この食い違いに
+    気づかず「クリックが出ていない」と判断し、誤った結論を重ねた。
+
+    同じページが「末尾スラッシュあり/なし」で2行に分かれることもあり、
+    上書きすると表示が消える（実測で2ページ・37表示が消えた）。
+
+    取り方は rank_up.fetch() の1か所に固定し、page次元を正とする。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import rank_up as R
+    print(chr(10) + "■ 順位データの取り方")
+
+    src = (ROOT / "scripts" / "rank_up.py").read_text(encoding="utf-8")
+    check("取得の入口が1つ", src.count("def fetch(") == 1, True)
+    check("page次元を使う", '["page"], 25000' in src, True)
+    check("URLを鍵にする（slugで潰さない）", 'pages[url] =' in src, True)
+    check("末尾スラッシュの重複を合算する", 'd["urls"] += 1' in src, True)
+    check("表示の少ないページを対象にしない", R.MIN_IMP >= 20, True)
+    check("狙うのは1ページ目に近い層", R.NEAR == (10.5, 20.5), True)
+
+    # 直した記録を残し、効果を測れること
+    check("記録を残す", "def save_log" in src, True)
+    check("前後を比べる口がある", "--effect" in src, True)
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("毎週走る", "rank_up.py --write" in wf, True)
+    check("効果を先に記録する", wf.index("--effect") < wf.index("rank_up.py --write"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1333,7 +1366,8 @@ def main():
               test_unindexed_pages_are_chased,
               test_rate_claims_need_evidence,
               test_submissions_are_not_double_counted,
-              test_boost_finds_link_sources):
+              test_boost_finds_link_sources,
+              test_rank_data_is_verified):
         try:
             t()
         except Exception as e:

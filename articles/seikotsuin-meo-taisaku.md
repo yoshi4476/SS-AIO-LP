@@ -53,6 +53,8 @@ diagrams:
 
 **整骨院のMEO対策とは、柔道整復師という国家資格を持つ施術所であることを、Googleマップ上のプロフィールで明確に伝える取り組みです。**
 
+関連する内容として[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)も公開しています。
+
 関連して、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もあわせてご確認ください。
 
 <div class="definition-box"><span class="term">整骨院のMEO（Map Engine Optimization）とは</span>、「地域名×整骨院」で検索されたとき、Googleマップの上位（特に目立つ上位3枠）に自院を表示させるための最適化のことです。整骨院の場合、同じ検索結果に無資格でも開業できる「整体院」「カイロプラクティック」が並ぶ点が、他業種のMEOと異なります。</div>
@@ -78,8 +80,6 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 ## 整骨院のMEO対策｜資格を伝える5つの実践ポイント
 
 整骨院のMEO対策は、**カテゴリ・説明文・写真・口コミ**の4つの接点に資格情報を一貫して落とし込むことで進みます。
-
-前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)でも扱っています。
 
 <figure><img src="/images/seikotsuin-meo-taisaku/steps.png" alt="整骨院MEOで資格を伝える5ステップ: メインカテゴリ固定、類似カテゴリと差別化、説明文に資格明記、資格証の写真掲載、口コミ・Q&Aで回答" loading="lazy"><figcaption>整骨院MEOで資格を伝える5ステップ</figcaption></figure>
 

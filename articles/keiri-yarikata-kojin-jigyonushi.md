@@ -159,7 +159,7 @@ NGパターンは、按分比率をその都度変える、用途メモを残さ
 自分で回す限界のサインは、月次確認が3か月以上滞り、本業の時間を圧迫し始めた状態です。
 
 
-近い論点を[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)で扱っています。
+あわせて[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)もご覧ください。
 
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/gaichuu-sign.png" alt="自分で回す限界を感じる3つのサイン: 月次確認が3か月停滞、科目判断で毎回迷う、本業の時間を圧迫" loading="lazy"><figcaption>自分で回す限界を感じる3つのサイン</figcaption></figure>
 

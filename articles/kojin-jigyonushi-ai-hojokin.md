@@ -132,7 +132,7 @@ faq:
 **個人事業主の申請でつまずきやすいのは、開業年数の見落とし、書類準備の後回し、GビズID取得の遅れの3パターンです。**制度の複雑さより、準備の順番のミスが原因になっています。
 
 
-あわせて[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)もご覧ください。
+近い論点を[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)で扱っています。
 
 関連する内容として[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)も公開しています。
 

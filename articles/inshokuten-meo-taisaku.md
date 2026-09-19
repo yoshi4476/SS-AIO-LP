@@ -146,7 +146,7 @@ MEO対策全体の口コミ施策は[Googleマップの口コミを増やす方�
 
 MEO対策は、現状確認、基本情報と写真の整備、運用の習慣化という3ステップで無理なく始められます。
 
-関連する内容については、[医療機関のMEO対策](/meo/iryou-meo-taisaku/)にまとめています。
+前提となる考え方については、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)にまとめています。
 
 <figure><img src="/images/inshokuten-meo-taisaku/steps.png" alt="MEO対策を始める3ステップ: 現状のプロフィールを確認する、基本情報と写真を整備する、口コミ返信と投稿を習慣化する" loading="lazy"><figcaption>MEO対策を始める3ステップ</figcaption></figure>
 

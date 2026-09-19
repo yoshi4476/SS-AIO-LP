@@ -1,0 +1,110 @@
+{
+ "btob-llmo-taisaku": {
+  "at": "2026-09-20",
+  "pos": 16.6,
+  "imp": 190,
+  "site": "ai-lab"
+ },
+ "aio-taisaku-muryou-tool": {
+  "at": "2026-09-20",
+  "pos": 16.9,
+  "imp": 168,
+  "site": "ai-lab"
+ },
+ "ai-kantan-shukyaku": {
+  "at": "2026-09-20",
+  "pos": 14.3,
+  "imp": 118,
+  "site": "ai-lab"
+ },
+ "seikotsuin-meo-taisaku": {
+  "at": "2026-09-20",
+  "pos": 16.6,
+  "imp": 118,
+  "site": "ai-lab"
+ },
+ "aio-shindan-yarikata": {
+  "at": "2026-09-20",
+  "pos": 14.7,
+  "imp": 86,
+  "site": "ai-lab"
+ },
+ "zeirishi-shukyaku-channel": {
+  "at": "2026-09-20",
+  "pos": 12.7,
+  "imp": 84,
+  "site": "ai-lab"
+ },
+ "iryou-meo-taisaku": {
+  "at": "2026-09-20",
+  "pos": 11.8,
+  "imp": 71,
+  "site": "ai-lab"
+ },
+ "meo-algorithm-kouryaku": {
+  "at": "2026-09-20",
+  "pos": 13.6,
+  "imp": 42,
+  "site": "ai-lab"
+ },
+ "koumuten-meo-taisaku": {
+  "at": "2026-09-20",
+  "pos": 16.3,
+  "imp": 29,
+  "site": "ai-lab"
+ },
+ "biyou-hifuka-meo": {
+  "at": "2026-09-20",
+  "pos": 10.6,
+  "imp": 23,
+  "site": "ai-lab"
+ },
+ "gaichuuhi-seikyuusho-kakikata": {
+  "at": "2026-09-20",
+  "pos": 11.7,
+  "imp": 52,
+  "site": "corporate"
+ },
+ "keiri-koritsuka-jirei": {
+  "at": "2026-09-20",
+  "pos": 20.2,
+  "imp": 41,
+  "site": "corporate"
+ },
+ "keiri-gyomu-flow-template": {
+  "at": "2026-09-20",
+  "pos": 15.0,
+  "imp": 25,
+  "site": "corporate"
+ },
+ "keiri-jidoka-python": {
+  "at": "2026-09-20",
+  "pos": 18.9,
+  "imp": 20,
+  "site": "corporate"
+ },
+ "monozukuri-hojokin-clinic": {
+  "at": "2026-09-20",
+  "pos": 13.0,
+  "imp": 95,
+  "site": "subsidy"
+ },
+ "it-hojokin-kojinjigyonushi-kaikeisoft": {
+  "at": "2026-09-20",
+  "pos": 14.9,
+  "imp": 88,
+  "site": "subsidy"
+ },
+ "monozukuri-hojokin-nougyou-souko": {
+  "at": "2026-09-20",
+  "pos": 13.0,
+  "imp": 22,
+  "site": "subsidy"
+ },
+ "it-hojokin-osusume": {
+  "at": "2026-09-20",
+  "pos": 17.4,
+  "imp": 20,
+  "site": "subsidy"
+ }
+}

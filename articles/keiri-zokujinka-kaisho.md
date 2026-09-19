@@ -133,7 +133,7 @@ faq:
 マニュアル化は、業務の棚卸し・手順書の作成・第三者による確認という3ステップで進めます。
 
 
-関連する内容として[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)も公開しています。
+あわせて[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)もご覧ください。
 
 <figure><img src="/images/keiri-zokujinka-kaisho/step.png" alt="マニュアル化を進める3ステップ: 業務を棚卸しして書き出す、手順書のひな形に沿って書く、第三者が試して抜けを確認する" loading="lazy"><figcaption>マニュアル化を進める3ステップ</figcaption></figure>
 
@@ -150,7 +150,7 @@ faq:
 経理BPOへの委託は、業務フローの標準化を伴うため、属人化の再発防止策としても機能します。
 
 
-あわせて[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)もご覧ください。
+関連する内容として[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)も公開しています。
 
 経理BPO（アウトソーシング）は、委託先が業務範囲・手順・スケジュールを明文化したうえで運用します。
 
@@ -169,9 +169,9 @@ faq:
 属人化の解消は、退職直前の聞き取りだけで済ませたり、担当者任せにしたりすると失敗します。
 
 
-関連する内容として[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)も公開しています。
+近い論点を[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)で扱っています。
 
-近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
+あわせて[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)もご覧ください。
 
 <figure><img src="/images/keiri-zokujinka-kaisho/hikaku.png" alt="属人化解消でのNGとOK: NG例は退職者への聞き取りだけで済ませる・マニュアル化を担当者任せにする・一度作って更新しない・口頭引き継ぎだけで終える、OK例は在職中に手順を可視化する・マニュアル化の期限と担当を会社が決める・定期的に見直す運用にする・書面と実務確認の両方で引き継ぐ" loading="lazy"><figcaption>属人化解消でのNGとOK</figcaption></figure>
 

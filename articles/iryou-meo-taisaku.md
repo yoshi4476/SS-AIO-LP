@@ -103,6 +103,8 @@ diagrams:
 
 医療機関MEOで最も差が出るのは、カテゴリ設計と広告規制で気を配るべき力点です。
 
+近い論点を[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で扱っています。
+
 前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)で整理しています。
 
 <figure><img src="/images/iryou-meo-taisaku/chigai.png" alt="施設形態ごとに最優先すべき違い: クリニックは診療科カテゴリの正確さ、歯科医院は自由診療の追加カテゴリ設計、整骨院は国家資格の明記、美容皮膚科は限定解除4要件を満たす写真戦略" loading="lazy"><figcaption>施設形態ごとに最優先すべき違い</figcaption></figure>

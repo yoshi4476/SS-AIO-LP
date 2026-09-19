@@ -134,7 +134,7 @@ faq:
 月次決算の早期化は、経理部だけで進めたり、確認作業を省略して急いだりすると、かえって数字の精度が下がります。
 
 
-近い論点を[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)で扱っています。
+あわせて[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)もご覧ください。
 
 <figure><img src="/images/getsuji-kessan-soukika-houhou/hikaku.png" alt="月次決算早期化のNGとOK: NG例は経理部だけの課題として進める・システム導入だけで満足する・締切を通知するだけで進捗管理しない・毎月同じ流れを検証せず繰り返す、OK例は営業・製造部門にも協力を依頼する・業務プロセスの見直しと並行して導入する・経営層が進捗を定期的に確認する・月次で振り返り運用を改善する" loading="lazy"><figcaption>月次決算早期化のNGとOK</figcaption></figure>
 

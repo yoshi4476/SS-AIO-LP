@@ -63,8 +63,6 @@ faq:
 
 仕訳の自動化には、明細の自動取込・OCR読み取り・ルール学習・API連携という4つの方法があります。
 
-関連して、[経費精算BPOとは？任せられる業務3つと費用相場](/blog/keihi-seisan-bpo/)もあわせてご確認ください。
-
 当社は会計ソフトの導入を補助金で支援する立場から見ると、**自動化が定着するかどうかは、最初の勘定科目の設計でほぼ決まります**。
 
 <figure><img src="/images/shiwake-jidoka-houhou/houhou.png" alt="仕訳を自動化する4つの方法: 銀行口座・カード明細の自動取込、請求書・領収書のOCR読み取り、ルール学習による自動仕訳、他システムとのAPI連携" loading="lazy"><figcaption>仕訳を自動化する4つの方法</figcaption></figure>
@@ -96,8 +94,6 @@ faq:
 ## 仕訳自動化を始める4つの手順
 
 仕訳の自動化は、現状の棚卸しからルールの見直しまで、4つの手順で進めると失敗しにくくなります。
-
-あわせて[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)もご覧ください。
 
 <figure><img src="/images/shiwake-jidoka-houhou/tejun.png" alt="仕訳自動化を始める4つの手順: 現状の仕訳を棚卸しする、自動化する範囲とツールを選ぶ、仕訳ルールを設定・学習させる、運用ルールとチェック体制を作る" loading="lazy"><figcaption>仕訳自動化を始める4つの手順</figcaption></figure>
 

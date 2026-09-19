@@ -105,7 +105,7 @@ faq:
 
 **予約管理システムのようなソフト単体導入はIT導入補助金、機器導入を伴う投資はものづくり補助金が向きます。**どちらも美容室のシステム投資を支援する制度ですが、対象経費の考え方が異なります。
 
-あわせて[ものづくり補助金は運送業も対象](/hojokin/monozukuri-hojokin-unsougyou/)もご覧ください。
+近い論点を[ものづくり補助金はクリニックで使える？](/hojokin/monozukuri-hojokin-clinic/)で扱っています。
 
 あわせて[ものづくり補助金は自動車整備業も対象](/blog/monozukuri-hojokin-jidousha-seibi/)もご覧ください。
 

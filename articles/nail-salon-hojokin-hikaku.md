@@ -49,10 +49,11 @@ faq:
 
 **ネイルサロンが使える補助金は、IT導入補助金・ものづくり補助金・小規模事業者持続化補助金の3種類です。**それぞれ狙いが異なり、投資したい中身によって向き不向きがはっきり分かれます。
 
+あわせて[IT導入補助金のおすすめの選び方](/hojokin/it-hojokin-osusume/)もご覧ください。
+
+あわせて[農業の倉庫投資は建物費NG](/hojokin/monozukuri-hojokin-nougyou-souko/)もご覧ください。
 
 あわせて[クリニックのIT導入補助金](/hojokin/it-hojokin-clinic/)もご覧ください。
-
-近い論点を[会計ソフトの補助金｜個人事業主が使える2つの枠と補助率](/hojokin/it-hojokin-kojinjigyonushi-kaikeisoft/)で扱っています。
 
 実際の進め方については、[ネイルサロンの補助金申請手順を8ステップで解説](/blog/nail-salon-hojokin-tejun/)にまとめています。
 
