@@ -54,8 +54,6 @@ faq:
 
 選ぶときの基準を先に押さえるなら、[経費精算システムとは？](/blog/keihi-seisan-system-erabikata/)が参考になります。
 
-前提となる考え方を先に押さえるなら、[請求書処理の効率化とは？進まない原因と5つの改善策](/blog/seikyusho-shori-koritsuka/)が参考になります。
-
 <div class="definition-box"><span class="term">経理効率化システムとは</span>、クラウド会計ソフトやRPA、AI-OCRなど、経理の定型業務をIT化して省力化するツール全般を指す言葉です。==1つのツールで全業務が完結するわけではなく、複数を組み合わせて使うのが一般的です==。</div>
 
 クラウド化・自動化・BPO活用まで含めた事例は[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/)で紹介していますが、本記事はシステム選定そのものに絞って解説します。
@@ -139,8 +137,6 @@ MM総研の同調査では、<strong>会計ソフトの事業者別シェアは�
 
 判断業務や例外処理はシステム化になじまず、経理BPOとの併用が現実的な選択肢です。
 
-
-関連する内容として[管理部門の人手不足解決｜5つの選択肢と選び方](/blog/kanribumon-hitodebusoku-kaiketsu/)も公開しています。
 
 <div class="caution-box"><span class="box-title">注意: システム導入だけでは経理の人手不足は解消しない</span><br><span class="txt-red">定型的な入力作業は減らせても、仕訳判断や決算の最終チェックは人の判断が必要です。</span>システム化と人員体制の見直しは、別々に検討する必要があります。</div>
 

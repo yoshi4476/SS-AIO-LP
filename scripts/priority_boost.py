@@ -26,7 +26,13 @@ import sites as S  # noqa: E402
 
 # 主力商材に直結する語。ここが取れないと、読まれても相談につながらない
 MAIN_PATTERN = {
-    "ai-lab": r"aio|llmo|ai検索|ai\s*overview|生成ai|meo|seo",
+    # サイト名が「AI集客ラボ」で、主力商材は AI を使った集客そのもの。
+    # それなのに ai集客・集客代行 の語が入っておらず、実測で表示118回・
+    # 11.3位の「aiかんたん集客」が対象から外れていた。
+    # 士業・業種名での集客も同じ商材なので拾う
+    "ai-lab": (r"aio|llmo|ai検索|ai\s*overview|生成ai|meo|seo|"
+               r"ai集客|ai.{0,4}集客|集客代行|集客ツール|集客支援|"
+               r"かんたん集客|指名検索"),
     "corporate": r"経理|記帳|月次決算|バックオフィス|請求書|bpo|アウトソ|代行",
     "subsidy": r"補助金|助成金|申請|採択|交付",
 }
@@ -129,6 +135,31 @@ def send_links(tgt, words, want, texts):
     return done
 
 
+def topic_words(slug, kws, texts):
+    """リンク元を探すための語を作る。
+
+    検索語を空白で割るだけだと、空白の無い日本語の語が1つの塊のまま残る。
+    実測で「aiかんたん集客」は分割されず、その文字列を3回以上含む記事が
+    0本だったため、11.3位・表示88回のページに1本もリンクを送れなかった。
+
+    記事のタイトルとカテゴリからも語を取る。リンク元は「話題が近い記事」で
+    あればよく、検索語と完全に一致している必要はない。
+    """
+    words = []
+    for kw, _, _ in kws[:3]:
+        words += [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
+    t = texts.get(slug, "")
+    fm = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
+    if fm:
+        title = (re.search(r"^title:\s*(.+)$", fm.group(1), re.M) or [0, ""])[1]
+        # タイトルは「｜」「？」で区切られる。飾りを落として話題語だけ残す
+        head = re.split(r"[｜|？?]", title)[0]
+        words += [w for w in re.split(
+            r"[\s　のとをにはがでへや・、,。（）()【】\[\]0-9０-９]+", head) if len(w) >= 2]
+    # 長い語から順に使う。短い語だけだと無関係な記事まで当たる
+    return sorted(dict.fromkeys(w for w in words if len(w) >= 2), key=len, reverse=True)[:8]
+
+
 def title_has(slug, kws, texts):
     """狙う語がタイトルに入っているか。入っていなければ順位が伸びない"""
     fm = re.match(r"^---\s*\n(.*?)\n---", texts[slug], re.S).group(1)
@@ -167,10 +198,7 @@ def main():
         mark = f"  ←{need}本不足" if need else ""
         print(f"  {d['pos']:>5.1f}{d['imp']:>6}{inb:>6}  {slug[:32]:<32} {top[:22]}{mark}")
         if a.write and need:
-            words = []
-            for kw, _, _ in kws[:3]:
-                words += [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
-            n = send_links(slug, list(dict.fromkeys(words)), need, texts)
+            n = send_links(slug, topic_words(slug, kws, texts), need, texts)
             added += n
         miss = title_has(slug, kws, texts)
         if miss:

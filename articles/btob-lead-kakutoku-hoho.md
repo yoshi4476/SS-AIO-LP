@@ -44,7 +44,6 @@ faq:
 
 BtoBリード獲得とは、自社の商材に関心を持つ法人担当者の連絡先や興味関心の情報を、商談前の段階で獲得する活動です。
 
-
 関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
 
 前提となる考え方は[BtoB CVR改善とは？](/ai-marketing/btob-cvr-kaizen/)で整理しています。
@@ -56,9 +55,6 @@ BtoBリード獲得とは、自社の商材に関心を持つ法人担当者の�
 ## なぜ今、BtoBリード獲得の方法を見直す必要があるのか
 
 BtoBリード獲得の方法を見直す必要があるのは、施策ごとの効果に差が開き、単一チャネル依存のリスクが高まっているためです。
-
-
-あわせて[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)もご覧ください。
 
 近い論点を[資料請求を増やす方法とは？6つの施策と見直す順序](/ai-marketing/shiryoseikyu-fuyasu-hoho/)で扱っています。
 
@@ -91,13 +87,11 @@ BtoBリード獲得の方法を見直す必要があるのは、施策ごとの�
 
 <div class="caution-box"><span class="box-title">注意: リード数だけで施策を評価するのはNG</span><br>リード獲得数だけを見て予算配分を決めると、質の低いリードを大量に集める施策に予算が偏ります。必ず商談化率・受注率まで遡って評価してください。</div>
 
-
 自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
 
 ## BtoBリード獲得の6つの方法と特徴比較
 
 BtoBリード獲得の主な方法は、展示会・Web広告・コンテンツSEO・ホワイトペーパー・ウェビナー・紹介の6つに整理できます。
-
 
 関連する内容として[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)も公開しています。
 
@@ -153,7 +147,6 @@ BtoBリード獲得の成果は、獲得数だけでなく商談化率・受注�
 ## AI検索時代のBtoBリード獲得で見られるポイント
 
 AI検索時代のBtoBリード獲得では、検討初期段階の情報収集がAIチャットで完結し始めている点が新たな変数になります。
-
 
 近い論点を[ウェビナー集客の平均参加率46%と申込を増やす5つの施策](/ai-marketing/webinar-shukyaku-hoho/)で扱っています。
 <a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-09-gartner-sales-survey-finds-67-percent-of-b2b-buyers-prefer-a-rep-free-experience" target="_blank" rel="noopener">Gartnerが2026年3月に発表した調査</a>によると、<strong>B2B購買担当者の45%が直近の購買検討でAIツールを活用した</strong>と回答しています。営業と話す前の段階で、AIの回答に自社が挙がるかどうかが比較候補入りの分かれ目になり始めています。

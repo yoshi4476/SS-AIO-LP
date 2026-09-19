@@ -73,7 +73,6 @@ diagrams:
 
 美容医療はビフォーアフター写真や自由診療の説明に、通常の医療広告より厳しい追加要件が課されます。
 
-
 近い論点を[医療機関のMEO対策](/meo/iryou-meo-taisaku/)で扱っています。
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html" target="_blank" rel="noopener">医療広告ガイドライン（厚生労働省）</a>は2024年3月の改訂で、未承認医薬品・機器を用いる自由診療について、リスクや副作用を含めた情報提供のルールを追加しました。海外製の未承認薬剤・機器を使う美容医療が増えたことが背景です。
 
@@ -151,6 +150,8 @@ diagrams:
 
 プロフィールの基本整備、施術メニュー登録、口コミ運用の順で着手すると迷わず進められます。
 
+前提となる考え方については、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)にまとめています。
+
 実際の進め方は、[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で解説しています。
 
 <figure><img src="/images/biyou-hifuka-meo/steps.png" alt="美容皮膚科MEO対策 着手の3ステップ: 基本整備でプロフィールとNAP統一、メニュー登録で施術名を網羅登録、口コミ運用で依頼と返信を継続" loading="lazy"><figcaption>美容皮膚科MEO対策 着手の3ステップ</figcaption></figure>
@@ -176,7 +177,6 @@ diagrams:
 <details><summary>美容皮膚科ならではのカテゴリ設定のコツはありますか？</summary><p class="faq-a">メインは「皮膚科医」とし、追加カテゴリと施術メニュー欄で自由診療の専門性を補います。</p></details>
 <details><summary>低評価の口コミにはどう返信すればいいですか？</summary><p class="faq-a">感情的な反論を避け、受け止め・改善の事実・感謝の3要素だけで簡潔に返信します。</p></details>
 </div>
-
 
 自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
 

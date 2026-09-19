@@ -139,8 +139,6 @@ faq:
 
 費用の目安は[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)で整理しています。
 
-選ぶときの基準は、[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)で解説しています。
-
 <figure><img src="/images/keiri-gaichuu-kojin/hikaku.png" alt="個人（フリーランス）と経理BPO会社の違い: 個人は単価が安めだが担当は1人体制で急な休止への備えが手薄になりやすい、経理BPO会社は単価が上がるが複数人の体制で担当者が休んでも引き継ぎ対応できる" loading="lazy"><figcaption>個人（フリーランス）と経理BPO会社の違い</figcaption></figure>
 
 | 比較項目 | 個人（フリーランス） | 経理BPO会社・記帳代行会社 |

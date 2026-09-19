@@ -120,7 +120,7 @@ faq:
 **建設業の中小企業者は資本金3億円以下または従業員300人以下で判定され、従業員0名の事業者は全枠で対象外です。**一人親方が単独で申請できない点は見落とされがちです。
 
 
-関連して、[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)もあわせてご確認ください。
+近い論点を[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)で扱っています。
 
 <a href="https://hojokin-shinsei.co.jp/meti-subsidy/shinjigyo-monodukuri-hojokin/" target="_blank" rel="noopener">対象企業の要件を整理した記事</a>によると、日本国内に本社と実施場所を持つ中小企業者等が対象で、新事業進出枠は創業1年未満の事業者も対象外とされています。過去3年で同種補助金の交付決定を2回以上受けた事業者も除外されます。
 

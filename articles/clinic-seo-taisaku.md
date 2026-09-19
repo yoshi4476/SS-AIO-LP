@@ -81,8 +81,6 @@ YMYLとは「Your Money or Your Life」の略で、健康や生命に影響す�
 **検索順位を左右するクリニックSEOの施策は、監修者明示から構造化データまでの5つに整理できます。**優先順位をつけずに全部を同時に進めようとすると、どれも中途半端になりがちです。
 
 
-近い論点を[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で扱っています。
-
 <figure><img src="/images/clinic-seo-taisaku/steps.png" alt="クリニックSEO5つの施策: 監修者情報を明示、症状KWで構成、内部リンクを整備、構造化データ実装、NG表現をチェック" width="1200" height="675" loading="lazy"><figcaption>クリニックSEO5つの施策（当メディア作成）</figcaption></figure>
 
 1. 院長・監修医の氏名と資格をページ内に明示する

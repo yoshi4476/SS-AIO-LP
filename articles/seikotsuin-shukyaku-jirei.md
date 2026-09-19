@@ -136,8 +136,6 @@ diagrams:
 
 関連する内容は、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)で解説しています。
 
-前提となる考え方については、[整骨院のMEO対策とは？](/meo/seikotsuin-meo-taisaku/)にまとめています。
-
 つまずきやすい点は[整骨院の集客イベント5選](/ai-marketing/seikotsuin-shukyaku-event/)でも扱っています。
 
 私たちの支援現場で相談を受ける失敗の多くは、施策そのものの質よりも自院の規模との不一致が原因です。ここでは特に相談の多い3つを紹介します。

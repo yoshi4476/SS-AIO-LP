@@ -152,7 +152,7 @@ Google公式ヘルプでは、サービス提供地域は市区町村や郵便�
 工務店のMEO対策で避けるべきなのは、対応エリア外への地域名の詰め込み、口コミの金銭誘導、専門用語だけの説明文の3つです。
 
 
-関連して、[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)もあわせてご確認ください。
+実際の進め方は、[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)で解説しています。
 
 <figure><img src="/images/koumuten-meo-taisaku/ngok.png" alt="工務店MEO対策のNGとOK比較: NG例は複数拠点を過剰に登録する・口コミを金銭で依頼する・専門用語だけで書く。OK例は実際の拠点だけ登録する・工事後に自然に依頼する・地域名を入れて説明する" loading="lazy"><figcaption>工務店MEO対策のNGとOK</figcaption></figure>
 

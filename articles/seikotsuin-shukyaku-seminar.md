@@ -69,10 +69,6 @@ diagrams:
 **整骨院向け集客セミナーは、業界団体系・公的機関系・ツールベンダー系・コンサル会社系の4種類に分かれます。**
 
 
-あわせて[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)もご覧ください。
-
-関連して、[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)もあわせてご確認ください。
-
 <figure><img src="/images/seikotsuin-shukyaku-seminar/types.png" alt="整骨院向け集客セミナーの4つの種類: 業界団体・士業系セミナー、商工会議所・公的機関系セミナー、ツールベンダー系セミナー、集客コンサル会社系セミナー" loading="lazy"><figcaption>整骨院向け集客セミナーの4つの種類</figcaption></figure>
 
 4種類それぞれで、主催者の目的も、学べる内容の粒度も異なります。同じ「集客セミナー」という看板でも、中身は別物と考えて選ぶ必要があります。

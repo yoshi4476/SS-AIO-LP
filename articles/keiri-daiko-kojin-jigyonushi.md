@@ -138,8 +138,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 経理代行を使って複式簿記による記帳を整えると、青色申告特別控除の**65万円控除**を受けやすくなります。*複式簿記*とは、取引を「借方」と「貸方」に分けて記録し、資産・負債・利益のつながりまで把握できる帳簿形式のことです。
 
 
-あわせて[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)もご覧ください。
-
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2070.htm" target="_blank" rel="noopener">青色申告特別控除に関するタックスアンサー</a>があります。**この情報では、複式簿記で記帳し電子帳簿保存またはe-Taxで申告すると65万円、同じ複式簿記でも紙提出なら55万円、簡易な帳簿では10万円が控除額の上限とされています。**
 
 控除額の差は10万円から65万円まで広がるため、**帳簿の付け方だけで納税額が変わる**ことになります。複式簿記に不慣れな個人事業主にとって、経理代行に記帳を任せることは控除額の維持にも直結する選択です。
@@ -151,7 +149,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 個人事業主が経理代行を選ぶ際は、確定申告との連携・対応ソフトの一致・繁忙期の対応力の3点を確認してください。
 
 
-関連する内容として[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)も公開しています。
+あわせて[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)もご覧ください。
 
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/erabikata.png" alt="個人事業主に合う経理代行の選び方3つのポイント" loading="lazy"><figcaption>個人事業主に合う経理代行の選び方</figcaption></figure>
 
@@ -168,8 +166,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 経理代行の導入は、依頼範囲を決める・複数社を比較する・契約して引き継ぐ、という3ステップで進めます。
 
 
-近い論点を[経理外注は個人（フリーランス）でも可能？](/blog/keiri-gaichuu-kojin/)で扱っています。
-
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/nagare.png" alt="経理代行導入までの3ステップ: 依頼範囲を決める、複数社を比較する、契約して引き継ぐ" loading="lazy"><figcaption>経理代行導入までの3ステップ</figcaption></figure>
 
 ステップ1では、記帳のみか、請求書発行や申告まで含めるかを自分の中で決めます。範囲を紙やメモに書き出しておくと、複数社への説明がぶれません。
@@ -182,8 +178,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 経理代行でよくある失敗は、依頼範囲を決めずに契約し、確定申告の直前になって対応外だと気づくことです。
 
-
-あわせて[経理のやり方とは？初心者向け5ステップ](/blog/keiri-yarikata-shoshinsha/)もご覧ください。
 
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/hikaku.png" alt="失敗する依頼方法と失敗しない依頼方法の比較" loading="lazy"><figcaption>失敗する依頼方法と失敗しない依頼方法</figcaption></figure>
 

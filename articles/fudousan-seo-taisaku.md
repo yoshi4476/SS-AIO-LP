@@ -153,8 +153,6 @@ diagrams:
 不動産SEOは、現状分析・ページ整備・コラム発信の3ステップで始めます。
 
 
-あわせて[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)もご覧ください。
-
 費用の目安は[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
 ### ステップ1: 現状分析を1週間で終わらせる

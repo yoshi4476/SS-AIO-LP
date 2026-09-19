@@ -98,7 +98,7 @@ faq:
 **個人事業主も法人と同じ申請枠から選べ、上限額も変わりません。**通常枠は最大450万円、インボイス対応類型・電子取引類型は最大350万円です。
 
 
-関連して、[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)もあわせてご確認ください。
+あわせて[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)もご覧ください。
 
 | 申請枠 | 補助率 | 補助上限額 |
 |:--|:--|:--|
@@ -134,7 +134,7 @@ faq:
 
 あわせて[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)もご覧ください。
 
-関連して、[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)もあわせてご確認ください。
+関連する内容として[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)も公開しています。
 
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/ngok.png" alt="個人事業主の申請でよくあるNG・OK: NG例は開業1年未満で申請・証明書取得を後回し・GビズID未取得のまま進める、OK例は開業1年経過を確認・証明書を早めに取得・GビズIDを先に取得"><figcaption>個人事業主の申請でよくあるNG・OK</figcaption></figure>
 
@@ -154,7 +154,7 @@ faq:
 **個人事業主が選ぶべきツールは、自分1人でも運用できる会計・請求・顧客対応の分野が中心です。**従業員が少ない分、複数の業務を一つのツールで効率化できるかを基準に選ぶと失敗しにくくなります。
 
 
-関連して、[補助金でAIチャットボット導入｜対象条件と申請の流れ](/blog/ai-hojokin-chatbot-donyu/)もあわせてご確認ください。
+関連する内容として[補助金でAIチャットボット導入｜対象条件と申請の流れ](/blog/ai-hojokin-chatbot-donyu/)も公開しています。
 
 たとえば会計・請求書ソフトは、確定申告の作業負担を直接減らせます。
 

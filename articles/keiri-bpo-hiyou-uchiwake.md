@@ -49,6 +49,8 @@ faq:
 
 経理BPOの月額料金は、基本委託料・従量部分・オプション料金という3つの費目の合計で決まります。
 
+あわせて[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)もご覧ください。
+
 つまずきやすい点を先に押さえるなら、[請求書の経理BPOでやりがちな失敗5つ](/blog/seikyusho-keiri-bpo-shippai/)が参考になります。
 
 <div class="definition-box"><span class="term">経理BPOの料金の内訳とは</span>、月額の合計金額を、何にいくらかかっているかで分解した費目ごとの明細のことです。==合計額だけを比べると、範囲の狭い会社が安く見えるだけ、ということが起こります。==</div>
@@ -160,7 +162,6 @@ CREXコンサルティングが公開する<a href="https://crex-consulting.com/
 私たちが中小企業の経理支援に携わる中でも、**初期費用の存在を契約直前まで知らなかった**という相談を受けることがあります。初期費用は見積書の下部や別紙に小さく記載されているだけのことも多いため、契約前に必ず質問し、書面で確認しておいてください。
 
 <div class="cta-box"><p>自社の業務量なら、内訳ごとにどのくらいの費用感になるか無料で確認しませんか。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
-
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 

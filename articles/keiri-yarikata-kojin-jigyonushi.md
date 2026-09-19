@@ -56,8 +56,6 @@ faq:
 
 近い論点を[経理外注は個人（フリーランス）でも可能？](/blog/keiri-gaichuu-kojin/)で扱っています。
 
-あわせて[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)もご覧ください。
-
 <figure><img src="/images/keiri-yarikata-kojin-jigyonushi/shuuki.png" alt="経理のやり方3つの周期: 日次でやること、月次でやること、年次でやること" loading="lazy"><figcaption>経理のやり方は3つの周期で仕組み化する</figcaption></figure>
 
 <div class="definition-box"><span class="term">経理の3周期管理とは</span>、日々の経理作業を「日次」「月次」「年次」の3つの周期に分け、周期ごとにやることを固定して判断の負荷を分散させる進め方のことです。</div>
@@ -78,10 +76,6 @@ faq:
 
 日次でやることは、証憑をその場でルールどおりに仕訳し、その日のうちに記録することです。
 
-
-近い論点を[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)で扱っています。
-
-関連する内容として[ATM入出金の記帳のやり方](/blog/atm-kicho-yarikata/)も公開しています。
 
 領収書や請求書を受け取ったら、内容を思い出せるうちに記帳します。
 

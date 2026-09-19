@@ -52,8 +52,6 @@ faq:
 
 あわせて[ものづくり補助金はクリニックで使える？](/blog/monozukuri-hojokin-clinic/)もご覧ください。
 
-あわせて[小規模事業者持続化補助金](/blog/jizokuka-hojokin-clinic/)もご覧ください。
-
 実際の例については、[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)にまとめています。
 
 実際の例は[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)でも扱っています。

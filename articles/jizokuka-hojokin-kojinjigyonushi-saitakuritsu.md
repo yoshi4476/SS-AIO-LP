@@ -53,8 +53,6 @@ faq:
 
 対象になる範囲は、[小規模事業者持続化補助金](/blog/jizokuka-hojokin-inshokuten-jirei/)で解説しています。
 
-選ぶときの基準は、[小規模事業者持続化補助金は中小企業も対象](/blog/jizokuka-hojokin-chusho-kigyo-taisho/)で解説しています。
-
 <div class="definition-box"><span class="term">小規模事業者持続化補助金とは</span>、商工会議所・商工会の管轄地域で、小規模事業者が販路開拓や生産性向上に取り組む経費の一部を補助する制度です。</div>
 
 採択率は制度開始当初の第1回で90.9%でした。<a href="https://hojyokin-portal.jp/columns/jizokuka2025_saitaku" target="_blank" rel="noopener">補助金ポータルの分析記事</a>によると、申請数の増加とともに水準は下がり続けています。
@@ -88,8 +86,6 @@ faq:
 
 **採択率が回ごとに変わるのは、申請件数・予算配分・審査基準の3つが毎回変化するためです。**同じ制度でも回によって難易度が違います。
 
-
-関連する内容として[AI導入補助金の不採択理由](/blog/ai-hojokin-fusaitaku-riyu/)も公開しています。
 
 - 申請件数の増減: 第17回は23,365件と過去最多で、採択率は51.0%まで戻りました
 - 予算配分の変化: 公募回ごとに採択予定件数が事務局から示されます

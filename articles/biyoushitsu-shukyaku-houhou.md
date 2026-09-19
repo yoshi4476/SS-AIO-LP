@@ -161,8 +161,6 @@ AIが引用する情報源は、Googleマップ・予約サイト・SNSに書か
 
 AI集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)、地図検索での見つかりやすさは[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)で詳しく解説しています。
 
-ChatGPTを日々の集客業務に使う具体策は[ChatGPTを集客に活用する方法7選](/ai-marketing/chatgpt-shukyaku-katsuyo/)にまとめています。
-
 <div class="cta-box"><p>マップ・口コミ・AI検索まで含めた集客の見直しを無料でご相談いただけます。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
 ## よくある質問

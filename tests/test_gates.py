@@ -1267,6 +1267,39 @@ def test_submissions_are_not_double_counted():
     check("取れなくても落ちない", "except Exception as e:" in src, True)
 
 
+def test_boost_finds_link_sources():
+    """押し上げるページに、リンク元を見つけられること。
+
+    検索語を空白で割るだけだと、空白の無い日本語の語が1つの塊のまま残る。
+    実測で「aiかんたん集客」は分割されず、その文字列を3回以上含む記事が
+    0本だったため、11.3位・表示88回のページに1本もリンクを送れなかった。
+    「0本足しました」と表示されるだけで、原因は何も示されない。
+
+    主力語の判定にも漏れがあった。サイト名が「AI集客ラボ」で主力商材が
+    AIを使った集客そのものなのに、判定に ai集客 が入っていなかった。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import priority_boost as P
+    import re as _re
+    print(chr(10) + "■ 押し上げのリンク元探し")
+
+    # サイトの主力語が判定に入っていること
+    pat = _re.compile(P.MAIN_PATTERN["ai-lab"], _re.I)
+    for kw in ("aiかんたん集客", "ai集客", "aio対策", "meo 病院", "seo 対策"):
+        check(f"主力語として拾う: {kw}", bool(pat.search(kw)), True)
+    check("無関係な語は拾わない", bool(pat.search("確定申告 やり方")), False)
+
+    # 空白の無い語からも、リンク元を探せる語を作れること
+    nl2 = chr(10)
+    texts = {"x": nl2.join(["---", "title: AI集客とは？かんたんに始める方法",
+                            "category: ai-marketing", "---", "本文"])}
+    w = P.topic_words("x", [("aiかんたん集客", 11.3, 88)], texts)
+    check("空白の無い語でも語を作れる", len(w) >= 2, True)
+    check("タイトルからも語を取る", any("集客" in x for x in w), True)
+    check("1文字の語は使わない", all(len(x) >= 2 for x in w), True)
+    check("語を取りすぎない（無関係な記事に当たる）", len(w) <= 8, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1299,7 +1332,8 @@ def main():
               test_facts_are_per_article,
               test_unindexed_pages_are_chased,
               test_rate_claims_need_evidence,
-              test_submissions_are_not_double_counted):
+              test_submissions_are_not_double_counted,
+              test_boost_finds_link_sources):
         try:
             t()
         except Exception as e:

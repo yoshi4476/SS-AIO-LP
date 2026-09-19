@@ -153,8 +153,6 @@ faq:
 対応を担当者1人に任せて先送りにすると、猶予措置が使えなくなったときに一気に負担が集中します。
 
 
-あわせて[経費精算BPOとは？任せられる業務3つと費用相場](/blog/keihi-seisan-bpo/)もご覧ください。
-
 <figure><img src="/images/denshichoboho-chusho-kigyo-taio/ng.png" alt="電子帳簿保存法対応でやってはいけないNG対応: NG例は対応を先送りにする・検索要件を確認せず放置する・猶予措置の条件を確認しない・担当者1人に判断を任せる、OK例は早めに対象範囲を洗い出す・検索要件の要否を確認する・猶予措置の条件を整理しておく・複数人・外部で確認体制を作る" loading="lazy"><figcaption>電子帳簿保存法対応でやってはいけないNG対応</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 対応を先送りにするのはNG</span><br>猶予措置があるからと対応を止めてしまうと、終了のタイミングで保存要件を満たせず、税務調査時に対応できなくなります。</div>

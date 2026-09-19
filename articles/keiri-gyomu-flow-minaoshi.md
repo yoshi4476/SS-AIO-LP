@@ -113,8 +113,6 @@ faq:
 
 実際の進め方は[経理の業務フローチャートの書き方](/blog/keiri-gyomu-flowchart-kakikata/)でも扱っています。
 
-実際の進め方を先に押さえるなら、[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)が参考になります。
-
 初めて自分で経理を担う場合は、[経理のやり方を初心者向けに整理した5ステップ](/blog/keiri-yarikata-shoshinsha/)から見直すと、フローの土台を作りやすくなります。
 
 <figure><img src="/images/keiri-gyomu-flow-minaoshi/step.png" alt="経理の業務フロー見直し3ステップ: 現状を可視化する、課題を特定する、フローを再設計する" loading="lazy"><figcaption>経理の業務フロー見直し3ステップ</figcaption></figure>
@@ -158,8 +156,6 @@ faq:
 
 経理BPOへの委託は、業務フローの標準化を伴うため、見直しの選択肢のひとつになります。
 
-
-近い論点を[経理BPO導入の流れ｜6ステップと期間の目安](/blog/keiri-bpo-donyu-nagare/)で扱っています。
 
 [経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で紹介した通り、委託先は業務範囲や手順をあらかじめ明文化したうえで運用します。**社内でフローを再設計する時間がない場合、委託先の標準的なフローに合わせる形で整理が進む**こともあります。
 
