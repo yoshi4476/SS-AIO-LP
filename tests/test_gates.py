@@ -1235,6 +1235,38 @@ def test_rate_claims_need_evidence():
           judge({**base, "id": "x7", "claim": "2026年9月までに42社の申請を支援しました"}), True)
 
 
+def test_submissions_are_not_double_counted():
+    """送信の数を、二重に数えないこと。
+
+    site.js は1回の送信で form_submit と lead_capture の両方を発火させる。
+    両方を足していたため「送信10件」と出ていたが、実際は4件だった
+    （form_submit 4 + lead_capture 6）。転換率を2倍以上に見せてしまう。
+
+    問い合わせと購読も分ける。同じ箱に入れると、商談につながる数が分からない。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import funnel
+    print(chr(10) + "■ 送信数の数え方")
+    names = dict(funnel.STEPS)["送信した"]
+    check("lead_capture を送信に数えない", "lead_capture" in names, False)
+    check("form_submit は数える", "form_submit" in names, True)
+    # 同じ送信で飛ぶイベントを2つ以上足していないか
+    fired_together = {"form_submit", "lead_capture", "lead_newsletter"}
+    check("同時に飛ぶイベントを重ねて数えない",
+          len(fired_together & set(names)) <= 1, True)
+
+    routes = dict(funnel.LEAD_ROUTES)
+    check("問い合わせと購読を分ける口がある",
+          "問い合わせ・相談" in routes and "ニュースレター購読" in routes, True)
+    check("購読を問い合わせに含めない",
+          "newsletter" in routes["問い合わせ・相談"], False)
+
+    src = (ROOT / "scripts" / "funnel.py").read_text(encoding="utf-8")
+    # 内訳が出せないときは、黙らずに何をすればよいかを出す
+    check("設定が要るときに案内する", "カスタムディメンションを作成" in src, True)
+    check("取れなくても落ちない", "except Exception as e:" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1266,7 +1298,8 @@ def main():
               test_articles_are_not_uniform,
               test_facts_are_per_article,
               test_unindexed_pages_are_chased,
-              test_rate_claims_need_evidence):
+              test_rate_claims_need_evidence,
+              test_submissions_are_not_double_counted):
         try:
             t()
         except Exception as e:

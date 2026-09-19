@@ -26,11 +26,23 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
+# 1回の送信で複数のイベントが飛ぶ。site.js は form_submit と lead_capture の
+# 両方を発火させるため、両方を足すと同じ送信を2回数える。
+# 実測で「送信10件」と出ていたが、中身は form_submit 4 + lead_capture 6 で、
+# 実際の送信は4件だった。数える対象は form_submit 系だけにする。
 STEPS = [
     ("記事を見た", ("page_view",)),
     ("CTAを押した", ("cta_click", "diagnosis_click", "contact_intent")),
     ("フォームを開いた", ("form_start",)),
-    ("送信した", ("form_submit", "lead_form_submit", "lead_capture")),
+    ("送信した", ("form_submit", "lead_form_submit")),
+]
+
+# 送信の中身。問い合わせと購読を同じ箱に入れると、商談につながる数が分からない。
+# lead_route は site.js が付けている（newsletter / dl / form / diagnosis）
+LEAD_ROUTES = [
+    ("問い合わせ・相談", ("form", "diagnosis", "site_audit")),
+    ("資料ダウンロード", ("dl",)),
+    ("ニュースレター購読", ("newsletter",)),
 ]
 
 
@@ -50,6 +62,32 @@ def events(prop, days):
     return {x.dimension_values[0].value: int(x.metric_values[0].value) for x in r.rows}
 
 
+def lead_routes(prop, days):
+    """送信を経路ごとに数える。
+
+    site.js は送信のたびに lead_route（newsletter / dl / form / diagnosis）を
+    付けている。これを見ないと、問い合わせと購読が同じ数に混ざる。
+    """
+    import gcreds
+    from google.analytics.data_v1beta import BetaAnalyticsDataClient
+    from google.analytics.data_v1beta.types import (DateRange, Dimension, Metric,
+                                                    RunReportRequest)
+    cl = BetaAnalyticsDataClient(credentials=gcreds.load(
+        ROOT / "indexing-service-account.json",
+        ["https://www.googleapis.com/auth/analytics.readonly"]))
+    r = cl.run_report(RunReportRequest(
+        property="properties/" + str(prop),
+        date_ranges=[DateRange(start_date=f"{days}daysAgo", end_date="yesterday")],
+        dimensions=[Dimension(name="customEvent:lead_route")],
+        metrics=[Metric(name="eventCount")], limit=50))
+    out = {}
+    for x in r.rows:
+        k = x.dimension_values[0].value
+        if k and k != "(not set)":
+            out[k] = int(x.metric_values[0].value)
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=28)
@@ -58,6 +96,7 @@ def main():
     conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
             for p in (ROOT / "sites").glob("*.json")}
     worst = []
+    need_setup = set()
     for site, c in sorted(conf.items()):
         prop = c.get("ga4_property_id")
         if not prop:
@@ -88,6 +127,33 @@ def main():
                 x not in ev for x in names) else ""
             print(f"   {label:<12} {n:6,}{rate}{missing}")
             prev = n
+        # 送信の中身を分ける。問い合わせと購読を同じ数で語ると、
+        # 商談につながる数が分からなくなる。
+        # lead_route はGA4の「カスタム定義」に登録しないとAPIから読めない
+        try:
+            routes = lead_routes(prop, a.days)
+        except Exception as e:
+            routes = {}
+            if "not a valid dimension" in str(e):
+                need_setup.add(str(prop))
+        if routes:
+            print("     ├ 内訳")
+            for label2, keys in LEAD_ROUTES:
+                v = sum(routes.get(k, 0) for k in keys)
+                if v:
+                    print(f"     │  {label2:<14} {v:>4}")
+            other = sum(v for k, v in routes.items()
+                        if not any(k in keys for _, keys in LEAD_ROUTES))
+            if other:
+                print(f"     │  {'その他・未分類':<14} {other:>4}")
+
+    if need_setup:
+        print("\n■ 設定が要ります（問い合わせと購読を分けて数えるため）")
+        print("   GA4 の 管理 → カスタム定義 → カスタムディメンションを作成")
+        print("     ディメンション名: lead_route / 範囲: イベント / "
+              "イベントパラメータ: lead_route")
+        print(f"   対象プロパティ: {', '.join(sorted(need_setup))}")
+        print("   登録するまで、送信の内訳（問い合わせ/資料DL/購読）は出せません")
 
     if worst:
         worst.sort(reverse=True)
