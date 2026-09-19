@@ -341,9 +341,19 @@ def check_scaled_risk(todo):
         ok = cv >= 0.15   # ばらつきが15%未満なら不自然
         print(f"  {'OK ' if ok else '注意'} 文字数のばらつき {cv:.0%}"
               f"（{min(lens):,}〜{max(lens):,}字）")
-        if not ok:
-            todo.append("TODO: 記事の文字数が均一すぎる"
-                        "（frontmatter の depth を quick/standard/deep で使い分けること）")
+        # ばらつきの数字だけだと、どのくらい偏っているかが伝わらない。
+        # 実測で312本（92%）が5,000字台の1帯に固まっていたが、
+        # 「ばらつき8%」という表示からはその状態が読み取れなかった
+        import collections as _c
+        band = _c.Counter((n // 1000) * 1000 for n in lens)
+        top, n_top = band.most_common(1)[0]
+        share = n_top / len(lens)
+        print(f"  {'OK ' if share < 0.5 else '注意'} 最も多い帯 "
+              f"{top:,}〜{top + 999:,}字 に {n_top}本（{share:.0%}）")
+        if not ok or share >= 0.5:
+            todo.append(f"TODO: 記事の長さが{top:,}字台に{share:.0%}集中している"
+                        "（frontmatter の depth を quick/standard/deep で使い分けること。"
+                        "手順や定義だけの語は quick で短く終える）")
 
     # 2) リライトの実施状況。新規だけが積み上がる状態を検知する
     rd = ROOT / "data" / "ranks"

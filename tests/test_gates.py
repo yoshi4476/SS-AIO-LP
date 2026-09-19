@@ -1091,6 +1091,32 @@ def test_inquiry_body_is_not_truncated():
     check("件名は clean_ のまま", "clean_(d.company)" in gs, True)
 
 
+def test_articles_are_not_uniform():
+    """記事の長さが1つの帯に固まっていないこと。
+
+    CLAUDE.md は「全記事が同じ長さに揃うと、それ自体が量産の指紋になる」と
+    書いているのに、実測では312本（92%）が5,000字台に固まっていた。
+    depth も273本（81%）が standard のまま。仕組みはあるのに使われていなかった。
+    原因は、執筆プロンプトに長さの指示が1行も無かったこと。
+
+    透かし（SynthID）は関係ない。この仕組みは画像をPillowで描いており、
+    AI画像生成を使っていないので透かし自体が存在しない。
+    見られているのは「書き方が揃っていること」のほうである。
+    """
+    print(chr(10) + "■ 記事の均一さ")
+    pr = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
+    check("執筆プロンプトが長さを指示する", "depth:" in pr, True)
+    for d in ("quick", "standard", "deep"):
+        check(f"{d} の使いどころが書いてある", d in pr, True)
+    check("水増しを禁じている", "水増し" in pr, True)
+    check("冒頭の型を固定しないよう書いてある", "とは" in pr and "型を固定" in pr, True)
+
+    ad = (ROOT / "scripts" / "daily_audit.py").read_text(encoding="utf-8")
+    check("日次監査が偏りの中身まで出す", "最も多い帯" in ad, True)
+    # ばらつきの数字だけでは、どれだけ固まっているか読み取れなかった
+    check("1帯への集中を見ている", "share >= 0.5" in ad, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1118,7 +1144,8 @@ def main():
               test_long_sentences_are_split,
               test_rewrite_is_verified_and_reverted,
               test_output_matches_source,
-              test_inquiry_body_is_not_truncated):
+              test_inquiry_body_is_not_truncated,
+              test_articles_are_not_uniform):
         try:
             t()
         except Exception as e:
