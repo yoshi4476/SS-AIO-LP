@@ -32,6 +32,10 @@ from kw_status import is_written, plan_keywords, written_corpus  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 DUP_THRESHOLD = 0.50
 MAX_APPEND = 30
+# 1回の補充で「弱い語」（検索結果で答えが済む語）が占めてよい割合。
+# 捨てると供給が止まるが、放っておくと台帳が弱い語で埋まる。
+# 実測でAI集客ラボは表示20回以上の38%が弱い語で、CTRは0.24%だった
+WEAK_SHARE = 0.2
 UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"}
 PER_SEED = 4  # 1つの起点から採用する上限（特定業種に偏らせない）
 
@@ -346,9 +350,22 @@ def main():
 
     if "--append" in sys.argv:
         # 弱い語は捨てずに後ろへ回す。数が足りないときの控えとして残す
-        strong = [s for s in discovered if kw_intent.score(s)[0] >= 0]
-        picks = [q["kw"] for q in proven[:10]] + strong + weak
+        # 「開かないと済まない語」を優先して積む。
+        #
+        # 実測で、AI集客ラボは順位相応のクリックの15%しか取れていなかった。
+        # 表示20回以上の23語に「強」が1つも無く、38%が「弱」（検索結果で答えが済む）
+        # だった。一方コーポレートは73%取れており、語の性質が違うだけだった。
+        #
+        # 弱い語を捨てはしない（供給が止まる）。ただし全体の WEAK_SHARE までに抑える。
+        # 順番だけを変えても、台帳は前から消費されるとは限らないため、数で絞る。
+        strong = [s for s in discovered if kw_intent.score(s)[0] > 0]
+        mid = [s for s in discovered if kw_intent.score(s)[0] == 0]
+        room = max(1, int(MAX_APPEND * WEAK_SHARE))
+        picks = [q["kw"] for q in proven[:10]] + strong + mid + weak[:room]
         picks = picks[:MAX_APPEND]
+        n_weak = len([p for p in picks if kw_intent.score(p)[0] < 0])
+        print(f"  積んだ語の内訳: 開く理由あり {len(picks) - n_weak}件 / "
+              f"弱い語 {n_weak}件（上限{room}件）")
         if not picks:
             print("\n追記対象なし（新規候補が見つかりませんでした）")
             return

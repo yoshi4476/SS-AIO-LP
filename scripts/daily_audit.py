@@ -394,6 +394,36 @@ def check_tokens(todo):
                         "（python scripts/refresh_tokens.py で更新する）")
 
 
+def check_brand(todo):
+    """指名検索の伸び。AIO型メディアの主指標。
+
+    クリック率で測ると、AIO・SEO・MEOのような「検索結果で答えが済む」主題は
+    構造上かならず低く出る。実測でAI集客ラボは順位相応のクリックの15%しか
+    取れていなかったが、指名検索は28日で11→38表示（+245%）に伸びていた。
+    引用でブランドを知った人が社名で検索し直す動きは、こちらに出る。
+    """
+    print("\n■ 指名検索（主指標）")
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import brand_search as B
+        d = B.collect(28)
+    except Exception as e:
+        print(f"  （取得できません: {str(e)[:40]}）")
+        return
+    ti = sum(v["cur"]["imp"] for v in d.values())
+    pi = sum(v["prev"]["imp"] for v in d.values())
+    tc = sum(v["cur"]["clicks"] for v in d.values())
+    print(f"  {'OK ' if ti >= pi else '注意'} 合計 {pi}表示 → {ti}表示"
+          f"（{B.growth(pi, ti)}）/ クリック{tc}回")
+    for sid, v in d.items():
+        mark = "OK " if v["cur"]["imp"] >= v["prev"]["imp"] else "注意"
+        print(f"     {mark} {v['name'][:18]:<20} {v['prev']['imp']:>4} → "
+              f"{v['cur']['imp']:<4} {B.growth(v['prev']['imp'], v['cur']['imp'])}")
+    if ti < pi:
+        todo.append("TODO: 指名検索が前期より減っている"
+                    "（python scripts/brand_search.py --list で語を確認する）")
+
+
 def check_unseen(todo):
     """公開したのに、検索にまったく出ていないページを拾う。
 
@@ -521,6 +551,7 @@ def main():
     check_supply(todo, fix=fix_kw)
     check_scaled_risk(todo)
     check_tokens(todo)
+    check_brand(todo)
     check_unseen(todo)
     check_deploy(todo)
 

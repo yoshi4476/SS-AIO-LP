@@ -117,6 +117,22 @@ python scripts/client_intake.py <記入済み.xlsx> --apply    # 登録する
 
 JSONを直接書く場合は `client_add.py`（既存クライアントの設定変更など）。
 
+**一次情報の追加**: `scripts/add_fact.py` で登録する。JSONを手で書かない。
+
+```bash
+python scripts/add_fact.py --pending              # 何を入れれば記事が書けるか
+python scripts/add_fact.py --template saitaku     # 記入用の雛形
+python scripts/add_fact.py --check <file.json>    # 条件を満たすか検査
+python scripts/add_fact.py --add <file.json>      # 通れば登録
+```
+
+**割合を書くなら、母数と集計期間を本文に含める。** 「採択率90%」だけでは、何社中何社か・いつからいつまでかが分からず、優良誤認になる（景品表示法・根拠の明示）。登録の時点で機械が止める。母数が10件未満なら割合では書かせず、実数で書かせる。
+
+| 止める書き方 | 通る書き方 |
+|:--|:--|
+| 当社の採択率は90%です | 2025年4月〜2026年3月に支援した42社のうち38社が採択されました（採択率90.5%） |
+| 多くの企業を支援してきました | 2026年9月までに42社の申請を支援しました |
+
 
 ### 3.0.1 納品方式（クライアントごとに選ぶ）
 

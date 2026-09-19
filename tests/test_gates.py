@@ -1193,6 +1193,48 @@ def test_unindexed_pages_are_chased():
     check("直し方を示す", "reindex.py" in ad, True)
 
 
+def test_rate_claims_need_evidence():
+    """割合を書くなら、母数と集計期間を必ず添えること。
+
+    「採択率90%」だけでは、何社中何社か、いつからいつまでかが分からない。
+    根拠を示さない割合は優良誤認になる（景品表示法）。
+    人の注意に任せると、忙しいときに抜ける。登録の時点で機械が止める。
+    """
+    import json as _j, subprocess as _s, tempfile
+    print(chr(10) + "■ 一次情報の登録条件")
+    d = Path(tempfile.mkdtemp())
+
+    def judge(obj):
+        f = d / "f.json"
+        f.write_text(_j.dumps(obj, ensure_ascii=False), encoding="utf-8")
+        r = _s.run([sys.executable, str(ROOT / "scripts" / "add_fact.py"),
+                    "--check", str(f)], cwd=ROOT, capture_output=True,
+                   text=True, encoding="utf-8", errors="ignore")
+        return r.returncode == 0
+
+    base = {"sites": ["subsidy"], "topic": ["補助金"],
+            "source": "自社実績", "as_of": "2026-09"}
+    check("母数も期間も無い割合は止める",
+          judge({**base, "id": "x1", "claim": "当社の採択率は90%です"}), False)
+    check("母数を本文に書いていなければ止める",
+          judge({**base, "id": "x2", "claim": "当社の採択率は90.5%です",
+                 "denominator": 42, "period": "2025-04〜2026-03"}), False)
+    check("母数が小さすぎれば止める",
+          judge({**base, "id": "x3", "denominator": 3, "period": "2026-01〜2026-09",
+                 "claim": "2026年に支援した3社のうち3社が採択されました（採択率100%）"}), False)
+    check("雛形のままは止める",
+          judge({**base, "id": "x4", "claim": "＜例＞◯◯社を支援しました"}), False)
+    check("数値が無ければ止める",
+          judge({**base, "id": "x5", "claim": "多くの企業を支援してきました"}), False)
+    check("母数と期間を本文に書いてあれば通す",
+          judge({**base, "id": "x6", "denominator": 42, "period": "2025-04〜2026-03",
+                 "claim": "2025年4月〜2026年3月に支援した42社のうち38社が採択されました"
+                          "（採択率90.5%）"}), True)
+    # 実数（割合でない）は母数を求めない
+    check("割合でなければ母数は求めない",
+          judge({**base, "id": "x7", "claim": "2026年9月までに42社の申請を支援しました"}), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1223,7 +1265,8 @@ def main():
               test_inquiry_body_is_not_truncated,
               test_articles_are_not_uniform,
               test_facts_are_per_article,
-              test_unindexed_pages_are_chased):
+              test_unindexed_pages_are_chased,
+              test_rate_claims_need_evidence):
         try:
             t()
         except Exception as e:
