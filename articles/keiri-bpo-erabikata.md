@@ -50,6 +50,8 @@ faq:
 
 経理BPOの選び方は、業務範囲・移行体制・レポーティング・システム連携・拡張性・解約条件の6視点で複数社を比較することです。
 
+費用の目安を先に押さえるなら、[経理BPOの料金の内訳｜3つの費目と見積書の見方](/blog/keiri-bpo-hiyou-uchiwake/)が参考になります。
+
 <div class="definition-box"><span class="term">経理BPOとは</span>、記帳から月次試算表の作成まで、経理業務のプロセス全体を委託先に任せる仕組みです。==単発の作業を頼む「記帳代行」より対応範囲が広く、継続的なパートナーとして機能するかどうかが選び方の分かれ目になります。==経理BPOそのものの仕組みは、<a href="/blog/keiri-bpo-toha/">経理BPOとは？メリット3つと費用相場をわかりやすく解説</a>で詳しく解説しています。</div>
 
 <figure><img src="/images/keiri-bpo-erabikata/point.png" alt="経理BPO選びで確認する6つの視点: 対応範囲の広さ、移行・引き継ぎ体制、レポーティングの頻度、システム連携、事業拡大への対応力、解約のしやすさ" loading="lazy"><figcaption>経理BPO選びで確認する6つの視点</figcaption></figure>

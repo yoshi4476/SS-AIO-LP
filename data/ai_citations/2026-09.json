@@ -1,38 +1,48 @@
 {
-  "date": "2026-09-17",
+  "date": "2026-09-20",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 10,
-      "suspect_taken": 9,
-      "healthy": 1,
+      "suspect_taken": 10,
+      "healthy": 0,
       "too_thin": 43,
       "items": [
         {
+          "kw": "原口優",
+          "url": "https://ai.7senses.co.jp/author/haraguchi/",
+          "pos": 1.4,
+          "imp": 34,
+          "clicks": 3,
+          "ctr": 8.82,
+          "expected_ctr": 28.0,
+          "ratio": 0.32
+        },
+        {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 9.6,
-          "imp": 57,
+          "pos": 9.1,
+          "imp": 58,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 2.5,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
           "kw": "meo アルゴリズム攻略",
           "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
-          "pos": 4.5,
-          "imp": 15,
+          "pos": 4.9,
+          "imp": 21,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 8.0,
+          "expected_ctr": 7.0,
           "ratio": 0.0
         },
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 8.8,
-          "imp": 55,
+          "pos": 8.9,
+          "imp": 44,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -49,10 +59,20 @@
           "ratio": 0.0
         },
         {
+          "kw": "中小企業でaioツールの導入を検討しています。まずは無料で試したく、使いやすいものを探しているので、候補をいくつか教えてください。",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+          "pos": 8.2,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
           "kw": "医療機関 meo",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 6.6,
-          "imp": 27,
+          "pos": 7,
+          "imp": 29,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -61,38 +81,28 @@
         {
           "kw": "医療機関のmeo対策",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 8.4,
-          "imp": 15,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 3.5,
-          "ratio": 0.0
-        },
-        {
-          "kw": "口コミ 返信 例文 医療",
-          "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 8.7,
-          "imp": 96,
+          "pos": 9,
+          "imp": 18,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
-          "kw": "口コミ返信 医療機関",
+          "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 10.0,
-          "imp": 100,
+          "pos": 8.7,
+          "imp": 101,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 2.5,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 9.0,
-          "imp": 48,
+          "pos": 9.3,
+          "imp": 55,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -102,28 +112,18 @@
     },
     "corporate": {
       "judged": 7,
-      "suspect_taken": 3,
-      "healthy": 4,
-      "too_thin": 28,
+      "suspect_taken": 2,
+      "healthy": 5,
+      "too_thin": 35,
       "items": [
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 3,
-          "imp": 10,
+          "pos": 4,
+          "imp": 17,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 11.0,
-          "ratio": 0.0
-        },
-        {
-          "kw": "セブンセンシズ",
-          "url": "https://corp.7senses.co.jp/company",
-          "pos": 8.8,
-          "imp": 35,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 8.0,
           "ratio": 0.0
         },
         {
@@ -142,7 +142,7 @@
       "judged": 2,
       "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 26,
+      "too_thin": 23,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",

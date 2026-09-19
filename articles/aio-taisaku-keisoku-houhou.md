@@ -69,6 +69,10 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
+関連する内容については、[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-yasui-tool/)にまとめています。
+
+関連する内容は、[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)で解説しています。
+
 費用の目安は[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)で整理しています。
 
 順位だけでなく、この5つを毎月並べて見ることで、記事のどこに手を入れるべきかが分かります。
