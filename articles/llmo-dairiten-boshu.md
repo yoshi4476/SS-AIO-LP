@@ -69,7 +69,7 @@ LLMO代理店の募集情報は、ツール提供元の公式サイトとビジ�
 
 第二の入口は、フランチャイズ・代理店専門のビジネスマッチングサービスです。複数の募集を比較できる反面、掲載情報だけでは実態が分からない案件も混ざります。
 
-私たちも自社サービスの提携について相談を受けることがありますが、公式サイトに条件を明記していない募集ほど、契約後の認識違いが起きやすいと感じています。
+私たちも自社サービスの提携について相談を受けることがあります。ただし、公式サイトに条件を明記していない募集ほど、契約後の認識違いが起きやすいと感じています。
 
 第三の入口は、既存の代理店からの紹介です。**紹介経由の募集は実際に運用している事業者の声を聞けるため、公式サイトだけでは分からない実務の負荷を事前に把握できます。**
 
@@ -170,7 +170,7 @@ LLMO代理店の始め方は、情報収集・契約・実務準備という3ス
 
 7項目のうち4個以下しか満たさない募集は、契約前に提供元へ直接質問し、回答内容と対応の速さも判断材料に加えてください。質問への回答が曖昧な提供元は、契約後のサポートも同様に曖昧になりがちです。
 
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、日本の個人の生成AI利用経験は**26.7%**まで伸びています。<a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>では、米国の検索の**58.5%**がクリックなしで終わっています。AIに答えを聞く行動が広がるほど、LLMO関連の商材そのものへの需要も増えていく見通しです。
+<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、日本の個人の生成AI利用経験は<strong>26.7%</strong>まで伸びています。<a href="https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/" target="_blank" rel="noopener">SparkToroの2024年調査</a>では、米国の検索の<strong>58.5%</strong>がクリックなしで終わっています。AIに答えを聞く行動が広がるほど、LLMO関連の商材そのものへの需要も増えていく見通しです。
 
 需要が伸びる市場ほど、実態の薄い募集も増えます。当サイトの実測では、直近28日で316個の検索語からのべ**2,321回**表示され、クリックは**5回**でした。表示だけが先に伸び、成果はあとから追いつくという順序は、LLMO代理店の実務でも同じように起こります。
 

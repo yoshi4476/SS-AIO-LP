@@ -153,7 +153,9 @@ faq:
 
 一般のAI導入補助金の申請の流れは[AI導入補助金の申請のやり方｜受給までの5ステップを解説](/blog/ai-hojokin-shinsei-yarikata/)で解説しているとおり、GビズIDの取得から実績報告まで5ステップで進みます。介護ICT補助金も、交付申請と実績報告が必要な点は共通しています。
 
-一般のAI導入補助金全体の枠組みと上限額は[AI導入補助金はいくらもらえる？3つの枠の上限額と計算例](/blog/ai-hojokin-ikura-moraeru/)で詳しく整理しています。介護事業所が電子申請・届出への対応を進める場合は、[介護事業所の電子申請・届出システムとは？義務化はいつからか](/blog/kaigo-denshishinsei-todokede/)もあわせてご確認ください。
+一般のAI導入補助金全体の枠組みと上限額は[AI導入補助金はいくらもらえる？3つの枠の上限額と計算例](/blog/ai-hojokin-ikura-moraeru/)で詳しく整理しています。
+
+介護事業所が電子申請・届出への対応を進める場合は、[介護事業所の電子申請・届出システムとは？義務化はいつからか](/blog/kaigo-denshishinsei-todokede/)もあわせてご確認ください。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
