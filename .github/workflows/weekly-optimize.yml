@@ -387,6 +387,6 @@ jobs:
           if [ -f automation/logs/findings.txt ]; then
             found=$(cat automation/logs/findings.txt)
           fi
-          python scripts/notify_slack.py "$icon 週次最適化: ${{ job.status }}
+          python scripts/notify_slack.py --routine "$icon 週次最適化: ${{ job.status }}
           $found
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

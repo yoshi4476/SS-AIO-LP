@@ -134,6 +134,8 @@ jobs:
           if echo "$out" | grep -q "AUDIT_OK=no"; then
             echo "$out" | grep "^TODO:" | while IFS= read -r t; do
               echo "::warning::救済後も未解決: $t"
+              mkdir -p automation/logs
+              echo "要対応: 救済後も未解決 — $t" >> automation/logs/findings.txt
               python scripts/hub_client.py error_log rescue "$t" || true
             done
           fi
@@ -230,6 +232,10 @@ jobs:
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="✅"; else icon="🚨"; fi
           latest=$(git log -1 --pretty=%s)
-          python scripts/notify_slack.py "$icon 記事パイプライン（${{ steps.mode.outputs.mode }}モード）: ${{ job.status }}
+          # うまくいった回は送らない（--routine）
+          found=""
+          if [ -f automation/logs/findings.txt ]; then found=$(cat automation/logs/findings.txt); fi
+          python scripts/notify_slack.py --routine "$icon 記事パイプライン（${{ steps.mode.outputs.mode }}モード）: ${{ job.status }}
+          $found
           最新コミット: $latest
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

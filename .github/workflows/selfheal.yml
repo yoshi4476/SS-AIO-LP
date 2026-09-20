@@ -136,12 +136,15 @@ jobs:
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
+          # 異常が無かった回は黙る。直した回は「何が起きたか」を知らせる
+          routine=""
           if [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
             msg="✅ 自動修復: 異常なし"
+            routine="--routine"
           elif [ "${{ steps.verify.outputs.ok }}" = "1" ]; then
-            msg="🔧 自動修復: 不具合を直しました"
+            msg="🔧 自動修復: 不具合を直しました（内容は実行ログ）"
           else
             msg="🚨 自動修復: 直せませんでした。手当てが必要です"
           fi
-          python scripts/notify_slack.py "$msg
+          python scripts/notify_slack.py $routine "$msg
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

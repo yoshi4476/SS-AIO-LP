@@ -999,6 +999,32 @@ GitHub Actions では `::warning::` の注釈になり、run の画面に出る�
 （`form_submit` と `lead_capture` が同時に飛ぶ、国が取れない流入がある等）。
 **消すべき警告ではなく、数字を報告する前に読む前提条件**として扱う（0.1節）。
 
+#### メールで届けるのは4つだけ
+
+**うまくいった報告は送らない。** 1日2〜3通の成功通知が届くと、本当に見てほしい
+回が埋もれる。定時の工程は `--routine` を付けて呼び、知らせることがある回だけ送る。
+
+| 届ける | 経路 |
+|:--|:--|
+| 問い合わせ | Apps Script（`automation/gas/`）が直接送る。絞り込みを通らない |
+| 異常のアラート | `job.status` が failure、または救済後も未解決のとき |
+| 月次レポート | `monthly_report.py --email` / `group_report.py --email` が本体を送る |
+| 変えたほうが良い点 | `findings.txt` に「要対応」が入った回だけ |
+
+```bash
+python scripts/notify_slack.py --routine "定時の報告"   # 知らせることがある回だけ送る
+python scripts/notify_slack.py "異常です"                # 必ず送る
+python scripts/notify_slack.py --force "手元から送る"    # 手元では既定で送らない
+```
+
+**手元での実行は本番の宛先に届かない。** `.env` に `RESEND_API_KEY` と
+`LEAD_TO_EMAIL` があるため、動作確認のつもりの実行が info.ai へ本物のメールを
+出していた（`（メッセージなし）` と、引用符が壊れて `$icon` だけの本文が実際に
+届いた）。`GITHUB_ACTIONS` が無い環境では送らない。
+
+**Slackに切り替えるには**: GitHub Secrets に `SLACK_WEBHOOK_URL` を登録する。
+現在は未登録のため、すべての通知がメールで届いている（コード変更は不要）。
+
 ---
 
 ## 9. スプレッドシート構成（詳細）

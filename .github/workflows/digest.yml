@@ -49,4 +49,4 @@ jobs:
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="📮"; else icon="🚨"; fi
-          python scripts/notify_slack.py "$icon 週刊ニュースレター配信: ${{ job.status }}" || true
+          python scripts/notify_slack.py --routine "$icon 週刊ニュースレター配信: ${{ job.status }}" || true

@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 """運用通知（Slack Webhook → 未設定ならメールへ自動フォールバック）
 
-使い方: python scripts/notify_slack.py "メッセージ"
+使い方: python scripts/notify_slack.py [--routine] "メッセージ"
 優先順位:
   1. SLACK_WEBHOOK_URL が設定されていれば Slack へ送信
   2. なければ Resend でメール送信（宛先: NOTIFY_TO_EMAIL または LEAD_TO_EMAIL）
   3. どちらも未設定なら静かにスキップ（自動実行を失敗させない）
 
+**届けるのは4つだけ**: 問い合わせ / 異常のアラート / 月次レポート /
+変えたほうが良い点。うまくいった報告は送らない。毎日届くと、本当に見て
+ほしい回が埋もれる。定時の工程は `--routine` を付けて呼ぶこと。
+
 **手元で動かしても本番の宛先には送らない。** `.env` に RESEND_API_KEY と
 LEAD_TO_EMAIL があるため、動作確認のつもりの実行が info.ai へ本物のメールを
 出していた（`（メッセージなし）` と、引用符が壊れて `$icon` だけの本文が
 実際に届いた）。送るには --force を付ける。
+
+なお問い合わせの通知は Apps Script（automation/gas/）が直接メールを出すため、
+ここは通らない。絞り込みの影響を受けない。
 """
 import json
 import os
@@ -24,6 +31,14 @@ ROOT = Path(__file__).resolve().parent.parent
 # 引用符が壊れると、展開されないシェル変数が本文の先頭に残る。
 # 中身の無い通知を送ると、次から誰も通知を読まなくなる
 UNEXPANDED = re.compile(r"^\s*\$\{?\{?\s*[A-Za-z_]")
+
+# --routine を付けた工程で、これが本文に無ければ送らない。
+# 自分たちの検査が出す言葉と、Actionsの結果語だけを見る
+NEEDS_ATTENTION = re.compile(
+    "要対応|動かせず|見つかりました|手当てが必要|直せませんでした|"
+    "失敗|エラー|未解決|不足|止まりました|"
+    "failure|cancelled|timed_out|BLOCKED|"
+    "🚨|⚠")
 
 
 def load_env():
@@ -46,10 +61,15 @@ def unsendable(text):
     return ""
 
 
+def worth_sending(text, routine):
+    """定時の工程なら、知らせることがあるときだけ送る"""
+    return (not routine) or bool(NEEDS_ATTENTION.search(text or ""))
+
+
 def main():
     load_env()
-    args = [a for a in sys.argv[1:] if a != "--force"]
-    force = "--force" in sys.argv[1:]
+    flags = {a for a in sys.argv[1:] if a.startswith("--")}
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
     text = args[0] if args else ""
 
     why = unsendable(text)
@@ -58,9 +78,14 @@ def main():
         print("  受け取った本文:", repr(text[:80]))
         return
 
+    if not worth_sending(text, "--routine" in flags):
+        print("定時の報告で、知らせることがないため送りません")
+        print("  本文:", text.splitlines()[0][:70])
+        return
+
     # 手元での実行が本番の宛先に届かないようにする。
     # 定期実行は GitHub Actions 上なので、この判定で止まらない
-    if not os.environ.get("GITHUB_ACTIONS") and not force:
+    if not os.environ.get("GITHUB_ACTIONS") and "--force" not in flags:
         print("手元での実行のため送信しません（送るなら --force）")
         print("  本文:", text.splitlines()[0][:70])
         return

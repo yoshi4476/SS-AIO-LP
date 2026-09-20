@@ -106,4 +106,5 @@ jobs:
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="📊"; else icon="🚨"; fi
-          python scripts/notify_slack.py "$icon 月次レポート: ${{ job.status }}（info.ai@7senses.co.jp へ送付）" || true
+          # レポート本体は monthly_report --email が送る。ここは失敗したときだけ
+          python scripts/notify_slack.py --routine "$icon 月次レポート: ${{ job.status }}（info.ai@7senses.co.jp へ送付）" || true

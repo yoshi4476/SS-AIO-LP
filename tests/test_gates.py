@@ -1491,6 +1491,44 @@ def test_notify_does_not_send_junk():
     check("手元では送らない歯止めがある", "GITHUB_ACTIONS" in src, True)
 
 
+def test_routine_success_is_not_emailed():
+    """うまくいっただけの回を、メールで送らないこと。
+
+    届けるのは4つだけ: 問い合わせ / 異常のアラート / 月次レポート /
+    変えたほうが良い点。1日2〜3通の成功報告が届くと、本当に見てほしい回が
+    埋もれる。定時の工程は --routine を付けて呼び、知らせることがある回だけ送る。
+    """
+    import notify_slack as N
+    print(chr(10) + "■ 定時の報告を送らない")
+    ok = "✅ 記事パイプライン [ai-lab]: success" + chr(10) + "publish(ai-lab)"
+    check("成功だけの回は送らない", N.worth_sending(ok, True), False)
+    check("--routine が無ければ送る", N.worth_sending(ok, False), True)
+    check("失敗は送る",
+          N.worth_sending("🚨 記事パイプライン: failure", True), True)
+    check("要対応があれば送る",
+          N.worth_sending("✅ 週次最適化: success" + chr(10) + "要対応: 会社表記のゆれ", True), True)
+    check("検査がすべてOKなら送らない",
+          N.worth_sending("🔧 週次最適化: success" + chr(10) + "検査4件すべて問題なし", True), False)
+    check("公開が止まっていれば送る",
+          N.worth_sending("✅ パイプライン: success" + chr(10) + "BLOCKED記事あり", True), True)
+
+    # 定時の工程が --routine を付けて呼んでいること（付け忘れると元に戻る）
+    wfs = {p.name: p.read_text(encoding="utf-8", errors="replace")
+           for p in (ROOT / ".github" / "workflows").glob("*.yml")}
+    for name in ("pipeline-multi.yml", "pipeline.yml", "weekly-optimize.yml",
+                 "digest.yml", "monthly-report.yml"):
+        src = wfs.get(name, "")
+        if "notify_slack.py" not in src:
+            continue
+        check(f"{name} が定時の報告を絞っている",
+              "notify_slack.py --routine" in src, True)
+
+    # 問い合わせは Apps Script が直接送るため、この絞り込みを通らない
+    gas = " ".join(p.read_text(encoding="utf-8", errors="replace")
+                   for p in (ROOT / "automation" / "gas").glob("*.gs"))
+    check("問い合わせは別経路で届く", "MailApp.sendEmail" in gas, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1531,7 +1569,8 @@ def main():
               test_quality_fixes_run_before_publishing,
               test_findings_judges_by_marker_not_exit_code,
               test_detection_scripts_do_not_fail_the_run,
-              test_notify_does_not_send_junk):
+              test_notify_does_not_send_junk,
+              test_routine_success_is_not_emailed):
         try:
             t()
         except Exception as e:
