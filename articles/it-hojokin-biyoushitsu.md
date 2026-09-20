@@ -147,7 +147,7 @@ faq:
 
 選ぶときの基準は[IT導入補助金のおすすめの選び方](/hojokin/it-hojokin-osusume/)でも扱っています。
 
-つまずきやすい点を先に押さえるなら、[小規模事業者持続化補助金｜自動車整備業の経費区分3つと注意点](/blog/jizokuka-hojokin-jidousha-seibi/)が参考になります。
+つまずきやすい点を先に押さえるなら、[小規模事業者持続化補助金](/blog/jizokuka-hojokin-jidousha-seibi/)が参考になります。
 
 関連する内容として[飲食店のAI導入補助金 対象要件](/blog/inshokuten-ai-hojokin-taisho-youken/)も公開しています。
 

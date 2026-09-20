@@ -51,9 +51,9 @@ faq:
 
 関連する内容として[開業届の電子申請｜個人事業主がe-Taxで出す5ステップ](/hojokin/kojinjigyonushi-kaigyoutodoke-denshishinsei/)も公開しています。
 
-近い論点を[e-Gov電子申請とは｜個人事業主が使う場面と4ステップ](/blog/egov-denshishinsei-kojinjigyonushi/)で扱っています。
+近い論点を[e-Gov電子申請とは](/blog/egov-denshishinsei-kojinjigyonushi/)で扱っています。
 
-関連する内容として[社会保険の電子申請義務化｜中小企業が対象になる3つの条件](/blog/shakaihoken-denshishinsei-gimuka-chusho/)も公開しています。
+関連する内容として[社会保険の電子申請義務化](/blog/shakaihoken-denshishinsei-gimuka-chusho/)も公開しています。
 
 関連する内容は[AI導入補助金の必要書類一覧と準備の順番](/blog/ai-hojokin-hitsuyo-shorui-hojin/)で整理しています。
 
@@ -120,7 +120,7 @@ GビズIDアプリは、iOSならApp Store、AndroidならGoogle Playからそ�
 
 **GビズIDプライムの審査期間は、オンライン申請が最短即日、書類申請が最大1か月です。**申請方法によって、期間の幅が大きく変わります。
 
-あわせて[中小企業成長加速化補助金｜1次2次の実績とスケジュール](/blog/seicho-kasokuka-hojokin-schedule/)もご覧ください。
+あわせて[中小企業成長加速化補助金](/blog/seicho-kasokuka-hojokin-schedule/)もご覧ください。
 <a href="https://gbiz-id.go.jp/top/apply/prime_document_01.html" target="_blank" rel="noopener">GビズID公式サイトの案内</a>では、書類申請について「申請から審査、アカウント発行まで最大1か月の時間がかかる」と明記されています。
 
 一方で<a href="https://it-shien.smrj.go.jp/applicant/measures/" target="_blank" rel="noopener">IT導入補助金事務局の申請前手続きページ</a>は、実務上の目安を案内しています。「GビズIDプライムの発行までおおむね2週間、SECURITY ACTION宣言の発行までおおむね2〜3日」を見込む内容です。
