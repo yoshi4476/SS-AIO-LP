@@ -1468,6 +1468,29 @@ def test_detection_scripts_do_not_fail_the_run():
     check("data_sanity が印を出す", "SANITY_OK=" in src, True)
 
 
+def test_notify_does_not_send_junk():
+    """中身の無い通知を、本物の宛先に送らないこと。
+
+    .env に RESEND_API_KEY と LEAD_TO_EMAIL があるため、手元での動作確認が
+    info.ai へ本物のメールを出していた。実際に届いたのは2通:
+      - 「（メッセージなし）」… 引数なしで呼んだもの
+      - 「$icon …」        … 呼び出し側の引用符が壊れ、変数が展開されなかったもの
+    通知は人の注意を使う。中身の無いものを送ると、次から読まれなくなる。
+    """
+    import notify_slack as N
+    print("\n■ 送ってはいけない通知")
+    check("空は送らない", bool(N.unsendable("")), True)
+    check("空白だけも送らない", bool(N.unsendable("   \n  ")), True)
+    check("未展開の変数は送らない", bool(N.unsendable("$icon 週次最適化: success")), True)
+    check("Actionsの式も送らない", bool(N.unsendable("${{ job.status }}")), True)
+    check("正常な本文は送れる", N.unsendable("✅ 記事パイプライン: success"), "")
+    # 金額の $ を誤って弾かないこと（先頭でなければ通す）
+    check("本文中のドルは弾かない", N.unsendable("月額 $99 のプランに変更"), "")
+
+    src = (ROOT / "scripts" / "notify_slack.py").read_text(encoding="utf-8")
+    check("手元では送らない歯止めがある", "GITHUB_ACTIONS" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1507,7 +1530,8 @@ def main():
               test_built_tools_actually_run,
               test_quality_fixes_run_before_publishing,
               test_findings_judges_by_marker_not_exit_code,
-              test_detection_scripts_do_not_fail_the_run):
+              test_detection_scripts_do_not_fail_the_run,
+              test_notify_does_not_send_junk):
         try:
             t()
         except Exception as e:
