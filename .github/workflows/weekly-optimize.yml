@@ -234,6 +234,13 @@ jobs:
       # リンク文の長さは、ほぼアンカーの長さで決まる。記事タイトルをそのまま
       # 当てると45字まで伸び、前後の文と合わせて1文が100字を超える。
       # リンク先は変えず、表示される文字だけを意味の切れ目で詰める
+      # リンクの文言は、そのページの主題を検索エンジンへ伝える。
+      # 「こちら」や記事タイトルの丸写しばかりだと、狙う語との結びつきが作られない。
+      # 実測で38本が「狙う語を含むアンカー0本」だった。
+      # 先に狙う語を入れ、そのあとで長さを詰める（順序を逆にすると語が落ちる）
+      - name: リンクの文言に狙う語を入れる
+        run: python scripts/anchor_audit.py --fix --write || true
+
       - name: 長すぎるアンカーテキストを詰める
         run: python scripts/shorten_anchors.py --write || true
 
@@ -316,6 +323,26 @@ jobs:
           done
           echo "::error::3回ともデプロイ失敗。次回のデプロイで反映される"
           exit 1
+
+      # 設定のずれは、放っておくと気づけない。毎週、公開中の実物を突き合わせる。
+      # AIクローラーの明示が6種と13種で混在していたことがある
+      - name: AIO基盤と会社表記のずれを見る
+        run: |
+          python scripts/aio_check.py || true
+          python scripts/nap_check.py || true
+          python scripts/aio_score.py || true
+
+      # 数字が信じられるかを、報告より先に確かめる。
+      # 二重計上・無効な流入・GA4とGSCの食い違い・指名検索の割合を見る
+      - name: 計測が壊れていないかの確認
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/data_sanity.py || true
+          rm -f indexing-service-account.json
 
       - name: 更新URLをIndexNow通知
         run: python scripts/notify_indexnow.py || true

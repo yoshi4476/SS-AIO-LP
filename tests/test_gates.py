@@ -1369,6 +1369,33 @@ def test_measurement_pitfalls_are_documented():
         check(f"検算する: {name}", key in ds, True)
 
 
+def test_built_tools_actually_run():
+    """作った道具が、実際に動いていること。
+
+    scripts に96本あるうち22本が、ワークフローからも他スクリプトからも
+    呼ばれていなかった。index_status.py と reindex.py はその典型で、
+    未登録ページを拾う仕組みがあるのに一度も走っていなかった。
+    作っただけで動いていない道具は、無いのと同じ。
+
+    手で使う道具（営業資料・クライアント導入など）は定期実行しなくてよい。
+    ここでは「毎週走るべきもの」だけを固定する。
+    """
+    print(chr(10) + "■ 作った道具が動いているか")
+    wf = " ".join(p.read_text(encoding="utf-8", errors="replace")
+                  for p in (ROOT / ".github" / "workflows").glob("*.yml"))
+    for name, why in (("reindex.py", "登録されていないページを拾う"),
+                      ("rank_up.py", "順位を上げる"),
+                      ("anchor_audit.py", "リンクの文言に狙う語を入れる"),
+                      ("aio_check.py", "AIO基盤のずれを見る"),
+                      ("nap_check.py", "会社表記のずれを見る"),
+                      ("data_sanity.py", "計測が壊れていないか")):
+        check(f"毎週走る: {why}", name in wf, True)
+
+    # 順序が逆だと、入れた狙う語が短縮で落ちる
+    check("狙う語を入れてから詰める",
+          wf.index("anchor_audit.py") < wf.index("shorten_anchors.py"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1404,7 +1431,8 @@ def main():
               test_submissions_are_not_double_counted,
               test_boost_finds_link_sources,
               test_rank_data_is_verified,
-              test_measurement_pitfalls_are_documented):
+              test_measurement_pitfalls_are_documented,
+              test_built_tools_actually_run):
         try:
             t()
         except Exception as e:
