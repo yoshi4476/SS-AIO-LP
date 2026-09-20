@@ -39,7 +39,10 @@ def main():
             ("電話番号", P["tel"].replace("-", "") in both.replace("-", "")),
             ("所在地", "東成区" in both),
             ("法人番号ページへのsameAs", "houjin-bangou.nta.go.jp" in both),
-            ("旧サイト(www)への言及なし", "www.7senses.co.jp" not in both),
+            # 旧サイト(www)は sameAs に載せる方針（build.py の SAME_AS）。
+            # 別業者の運用だが同じ会社のものであり、示さないと社名検索で
+            # 別の組織として評価が分かれる。ここで「言及なし」を求めると
+            # 毎週必ず要修正が出て、通知そのものが読まれなくなる
             ("逆順の商号なし", "株式会社セブンセンシズ" not in both),
             # 単位がぶれると、同じ事実なのか別の事実なのか機械が判断できない
             ("実績表記のゆれなし（3,200社）", "3,200社" not in both and "3200社" not in both),
