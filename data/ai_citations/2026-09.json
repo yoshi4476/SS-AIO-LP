@@ -1,22 +1,22 @@
 {
-  "date": "2026-09-20",
+  "date": "2026-09-21",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 10,
-      "suspect_taken": 10,
+      "judged": 11,
+      "suspect_taken": 11,
       "healthy": 0,
-      "too_thin": 43,
+      "too_thin": 44,
       "items": [
         {
           "kw": "原口優",
           "url": "https://ai.7senses.co.jp/author/haraguchi/",
           "pos": 1.4,
-          "imp": 34,
+          "imp": 35,
           "clicks": 3,
-          "ctr": 8.82,
+          "ctr": 8.57,
           "expected_ctr": 28.0,
-          "ratio": 0.32
+          "ratio": 0.31
         },
         {
           "kw": "aio 診断",
@@ -31,8 +31,8 @@
         {
           "kw": "meo アルゴリズム攻略",
           "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
-          "pos": 4.9,
-          "imp": 21,
+          "pos": 5.0,
+          "imp": 26,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -41,8 +41,8 @@
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 8.9,
-          "imp": 44,
+          "pos": 9.0,
+          "imp": 39,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -71,8 +71,8 @@
         {
           "kw": "医療機関 meo",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 7,
-          "imp": 29,
+          "pos": 7.3,
+          "imp": 31,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -92,20 +92,30 @@
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
           "pos": 8.7,
-          "imp": 101,
+          "imp": 107,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
-          "kw": "税理士 ai 集客",
-          "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 9.3,
-          "imp": 55,
+          "kw": "歯科医院 閉院費用",
+          "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
+          "pos": 6.1,
+          "imp": 10,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 5.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "税理士 ai 集客",
+          "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+          "pos": 9.5,
+          "imp": 60,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 2.5,
           "ratio": 0.0
         }
       ]
@@ -114,16 +124,16 @@
       "judged": 7,
       "suspect_taken": 2,
       "healthy": 5,
-      "too_thin": 35,
+      "too_thin": 39,
       "items": [
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 4,
-          "imp": 17,
+          "pos": 2.7,
+          "imp": 30,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 8.0,
+          "expected_ctr": 11.0,
           "ratio": 0.0
         },
         {
@@ -142,7 +152,7 @@
       "judged": 2,
       "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 23,
+      "too_thin": 24,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",
