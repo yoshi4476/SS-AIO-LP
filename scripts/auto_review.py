@@ -354,6 +354,7 @@ def main():
         print("   積み上がりすぎている記事はありません")
         print("   基準: リンク段落 %d本まで / 同じ言い回し %d本まで"
               % (MAX_LINK_PARA, MAX_SAME_FORM))
+        print("REVIEW_OK=yes")
         return 0
 
     print("  %-36s %6s %s" % ("記事", "リンク段落", "内訳"))
@@ -369,7 +370,8 @@ def main():
 
     if not a.fix:
         print("\n  --fix を付けると、言い回しを振り直し、上限を超えた分を外します")
-        return 1
+        print("REVIEW_OK=no")
+        return 0
 
     rw = dr = 0
     skipped = []

@@ -164,6 +164,7 @@ def main():
             print("     OK  数え方に崩れは見つかりませんでした")
         print()
     print(f"  注意 {total_warn}件")
+    print("SANITY_OK=" + ("no" if total_warn else "yes"))
     print("  ※ ここで注意が出た数字は、そのまま報告しないこと。"
           "原因を確かめてから使う")
     return 0

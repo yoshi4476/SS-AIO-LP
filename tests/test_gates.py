@@ -1383,6 +1383,12 @@ def test_built_tools_actually_run():
     print(chr(10) + "■ 作った道具が動いているか")
     wf = " ".join(p.read_text(encoding="utf-8", errors="replace")
                   for p in (ROOT / ".github" / "workflows").glob("*.yml"))
+    # 読むだけの検査は findings.py がまとめて呼ぶ。YAMLに名前は出ないため、
+    # その一覧も「毎週走るもの」として数える（間接呼び出しを追わないと、
+    # まとめ役に移しただけで「動いていない」と誤検出する）
+    check("まとめ役が毎週走る", "findings.py" in wf, True)
+    import findings
+    wf += " " + " ".join(sc for _, sc, _ in findings.CHECKS)
     for name, why in (("reindex.py", "登録されていないページを拾う"),
                       ("rank_up.py", "順位を上げる"),
                       ("anchor_audit.py", "リンクの文言に狙う語を入れる"),
@@ -1423,6 +1429,45 @@ def test_quality_fixes_run_before_publishing():
               wf.index("anchor_audit.py") < wf.index("shorten_anchors.py"), True)
 
 
+def test_findings_judges_by_marker_not_exit_code():
+    """「見つかった」と「壊れた」を、終了コードで混同しないこと。
+
+    auto_review は検出だけで終了コード1を返していた。CIのログでは
+    本当に落ちたときと区別がつかず、正常な検出を不具合と読み違えた。
+    判定は印（*_OK=）で行い、終了コードは検査が動いたかだけに使う。
+    """
+    import findings
+    print("\n■ 検出と故障の見分け")
+    cases = [
+        ("見つかった（終了コードは0）", "NAP_OK=no", 0, "要対応"),
+        ("見つからなかった", "NAP_OK=yes", 0, "問題なし"),
+        ("印が故障より優先される", "AIO_OK=no", 1, "要対応"),
+        ("印が無ければ終了コードを見る", "なにも出ていません", 1, "要対応"),
+        ("印が無く終了コードも0", "なにも出ていません", 0, "問題なし"),
+        ("検査が動かない", "（起動できません）", 127, "動かせず"),
+    ]
+    for name, text, rc, want in cases:
+        check(name, findings.judge(text, rc), want)
+
+    # 検査対象のスクリプトが実在すること（名前を変えたら気づける）
+    for label, script, _ in findings.CHECKS:
+        check("検査が実在: " + label, (ROOT / "scripts" / script).exists(), True)
+
+
+def test_detection_scripts_do_not_fail_the_run():
+    """検出だけのスクリプトが、終了コード1で止めないこと。
+
+    例外は nap_check と deploy_check（人が手を動かすまで消えない問題）。
+    """
+    print("\n■ 検出＝0 の規約")
+    src = (ROOT / "scripts" / "auto_review.py").read_text(encoding="utf-8")
+    check("auto_review が印を出す", "REVIEW_OK=" in src, True)
+    check("auto_review の検出が return 1 でない",
+          'print("REVIEW_OK=no")\n        return 0' in src, True)
+    src = (ROOT / "scripts" / "data_sanity.py").read_text(encoding="utf-8")
+    check("data_sanity が印を出す", "SANITY_OK=" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1460,7 +1505,9 @@ def main():
               test_rank_data_is_verified,
               test_measurement_pitfalls_are_documented,
               test_built_tools_actually_run,
-              test_quality_fixes_run_before_publishing):
+              test_quality_fixes_run_before_publishing,
+              test_findings_judges_by_marker_not_exit_code,
+              test_detection_scripts_do_not_fail_the_run):
         try:
             t()
         except Exception as e:

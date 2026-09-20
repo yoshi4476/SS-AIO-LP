@@ -300,8 +300,17 @@ jobs:
         continue-on-error: true      # 反映の遅れで run を落とさない。気づければよい
         run: |
           sleep 45                   # Cloudflare の配信が行き渡るのを待つ
-          python scripts/deploy_check.py || true
-          python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}" || true
+          # 印を拾って注釈にする。`|| true` だけだと、古いまま気づけない
+          out=$(python scripts/deploy_check.py) || true
+          echo "$out"
+          if echo "$out" | grep -q "DEPLOY_OK=no"; then
+            echo "::warning::本番が手元より古い状態です。次のデプロイまで反映されません"
+          fi
+          out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}") || true
+          echo "$out"
+          if echo "$out" | grep -q "VERIFY_OK=no"; then
+            echo "::warning::公開したはずの記事が本番で確認できません"
+          fi
 
       # 品質ゲートはすべて原稿とビルド出力を見ている。公開後の実物を見る工程が
       # 無かったため、社内向けTODOコメント・生成時の作業タグ </content>・

@@ -324,24 +324,22 @@ jobs:
           echo "::error::3回ともデプロイ失敗。次回のデプロイで反映される"
           exit 1
 
-      # 設定のずれは、放っておくと気づけない。毎週、公開中の実物を突き合わせる。
-      # AIクローラーの明示が6種と13種で混在していたことがある
-      - name: AIO基盤と会社表記のずれを見る
-        run: |
-          python scripts/aio_check.py || true
-          python scripts/nap_check.py || true
-          python scripts/aio_score.py || true
+      - name: 生成エンジン向けの点数
+        run: python scripts/aio_score.py || true
 
-      # 数字が信じられるかを、報告より先に確かめる。
-      # 二重計上・無効な流入・GA4とGSCの食い違い・指名検索の割合を見る
-      - name: 計測が壊れていないかの確認
+      # 検査は全部 `|| true` で呼んでいるため、何を見つけても終了コードは
+      # 捨てられ、実行ログの奥に埋もれて誰にも届いていなかった。
+      # ここでまとめて回し、見つかったものを注釈とSlack本文に載せる。
+      # 中身: AIO基盤（robots・llms.txt・構造化データ）/ 会社表記のゆれ /
+      #       内部リンクの積み上がり / 数字の信頼性（二重計上・無効流入・指名検索）
+      - name: 見つかったものを集めて知らせる
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          python scripts/data_sanity.py || true
+          python scripts/findings.py || true
           rm -f indexing-service-account.json
 
       - name: 更新URLをIndexNow通知
@@ -384,5 +382,11 @@ jobs:
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="🔧"; else icon="🚨"; fi
+          # 検査が見つけたものを本文に載せる。リンクだけの通知は開かれない
+          found="（検査の結果を取得できませんでした）"
+          if [ -f automation/logs/findings.txt ]; then
+            found=$(cat automation/logs/findings.txt)
+          fi
           python scripts/notify_slack.py "$icon 週次最適化: ${{ job.status }}
+          $found
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
