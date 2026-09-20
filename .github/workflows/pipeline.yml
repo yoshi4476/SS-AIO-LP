@@ -153,6 +153,16 @@ jobs:
             echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定のため順位を記録できません"
           fi
 
+      # 書いた直後に、機械で直せる崩れを直す（pipeline-multi と同じ工程）。
+      # 週次にしか入っていなかったため、公開から最大6日そのままになっていた
+      - name: 公開前に、機械で直せる崩れを直す
+        run: |
+          python scripts/fix_block_breaks.py --write || true
+          python scripts/split_paragraphs.py --all --write || true
+          python scripts/split_sentences.py --write || true
+          python scripts/anchor_audit.py --fix --write || true
+          python scripts/shorten_anchors.py --write || true
+
       - name: 最終ビルドとコミット
         run: |
           python scripts/build.py

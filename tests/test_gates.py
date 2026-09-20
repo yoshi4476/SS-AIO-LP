@@ -1396,6 +1396,33 @@ def test_built_tools_actually_run():
           wf.index("anchor_audit.py") < wf.index("shorten_anchors.py"), True)
 
 
+def test_quality_fixes_run_before_publishing():
+    """機械で直せる崩れは、公開する前に直すこと。
+
+    記事は1日6本公開されるのに、崩れを直す工程は週1回しか走っていなかった。
+    最大6日間そのまま公開される計算で、実測でも直近7日の記事に1本残っていた。
+    読者が崩れたページを見てから直しても遅い。
+
+    どの工程も地の文を変えず、検算に外れたら書き込まない作りになっている。
+    公開前に置いても壊れない。
+    """
+    print(chr(10) + "■ 公開前の品質修正")
+    for f in ("pipeline-multi.yml", "pipeline.yml"):
+        wf = (ROOT / ".github" / "workflows" / f).read_text(encoding="utf-8")
+        for name, label in (("fix_block_breaks.py", "段落の崩れ"),
+                            ("split_paragraphs.py", "長すぎる段落"),
+                            ("split_sentences.py", "長すぎる1文"),
+                            ("shorten_anchors.py", "長すぎるアンカー"),
+                            ("anchor_audit.py", "アンカーに狙う語")):
+            check(f"{f} で公開前に直す: {label}", name in wf, True)
+        # ビルド（＝公開物の生成）より前でなければ意味がない
+        check(f"{f}: ビルドより前に直す",
+              wf.index("fix_block_breaks.py") < wf.rindex("python scripts/build.py"), True)
+        # 狙う語を入れてから詰める（逆だと語が落ちる）
+        check(f"{f}: 狙う語を入れてから詰める",
+              wf.index("anchor_audit.py") < wf.index("shorten_anchors.py"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1432,7 +1459,8 @@ def main():
               test_boost_finds_link_sources,
               test_rank_data_is_verified,
               test_measurement_pitfalls_are_documented,
-              test_built_tools_actually_run):
+              test_built_tools_actually_run,
+              test_quality_fixes_run_before_publishing):
         try:
             t()
         except Exception as e:
