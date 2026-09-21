@@ -16,6 +16,7 @@ intake/ に置いたまま `intake_watch.py --apply` でも拾う（ファイル
 シートは会社名・担当者名が入るためコミットしない（intake/*.xlsx は .gitignore 済み）。
 """
 import argparse
+import html
 import json
 import re
 import sys
@@ -224,26 +225,41 @@ def review(got):
 
 
 def render(voices, style="lp"):
-    """お客様の声のHTML。掲載する側の許可と、数字の期間を必ず添える"""
+    """お客様の声のHTML。数字を先頭に置き、引用は読み物として下に置く。
+
+    以前は長い引用が先頭にあり、6件並ぶと何が書いてあるか掴めなかった。
+    読む人が最初に知りたいのは「何がどう変わったか」なので、その一行を上に出す。
+    """
+    e = html.escape
     cards = []
     for v in voices:
-        num = ""
-        if v.get("number"):
-            n = v["number"]
-            num = (f'<p style="margin:0 0 .4rem;font-weight:700;">{n["metric"]} {n["before"]} → {n["after"]}'
-                   f'<small style="font-weight:400;color:#556;">（{n["period"]}）</small></p>')
-        who = f'{v["who"]}（{v["industry"]}）' + (f'／{v["person"]}' if v.get("person") else "")
-        cards.append('<figure style="margin:0;padding:1.2rem;border:1px solid #e3e8ef;border-radius:12px;background:#fff;">'
-                     f'<blockquote style="margin:0 0 .8rem;line-height:1.7;">「{v["quote"]}」</blockquote>{num}'
-                     f'<figcaption style="color:#556;font-size:.9rem;">{who}</figcaption></figure>')
-    note = ('<p style="font-size:.85rem;color:#667;margin-top:1rem;">掲載はご本人の許可を得たものだけです。'
+        n = v.get("number") or {}
+        metric = ""
+        if n:
+            metric = (f'<p class="voice-metric"><span class="m-label">{e(n["metric"])}</span>'
+                      f'<span class="m-from">{e(n["before"])}</span>'
+                      f'<span class="m-arw" aria-hidden="true">→</span>'
+                      f'<span class="m-to">{e(n["after"])}</span></p>')
+        # 表示名に業種が入っていることが多い。そのまま足すと「製造業（従業員約50名）（製造業）」になる
+        who = v["who"]
+        if v.get("industry") and v["industry"] not in who:
+            who = f'{who}（{v["industry"]}）'
+        if v.get("person"):
+            who = f'{who}／{v["person"]}'
+        term = f'<span class="voice-term">{e(n["period"])}</span>' if n.get("period") else ""
+        cards.append(f'<figure class="voice">{metric}'
+                     f'<blockquote>{e(v["quote"])}</blockquote>'
+                     f'<figcaption>{e(who)}{term}</figcaption></figure>')
+    note = ('<p class="voice-note">掲載はご本人の許可を得たものだけです。'
             '数字は各社の集計期間を添えています。個別の成果を保証するものではありません。</p>')
-    grid = f'<div class="card-grid">{"".join(cards)}</div>'
+    grid = f'<div class="voice-grid">{"".join(cards)}</div>'
     if style == "about":
         body = f"<h2>お客様の声</h2>\n  {grid}\n  {note}"
     else:
         body = ('<section class="section" data-area="お客様の声" data-area-id="voices">\n'
-                '  <div class="section-head"><span class="en">Voice</span><h2>お客様の声</h2></div>\n'
+                '  <div class="section-head"><span class="en">Voice</span><h2>お客様の声</h2>\n'
+                '  <p class="section-lead">実際に運用させていただいている会社さまの言葉です。'
+                '数字は各社が測った値で、集計期間を添えています。</p></div>\n'
                 f"  {grid}\n  {note}\n</section>")
     return f"{START}\n{body}\n{END}"
 

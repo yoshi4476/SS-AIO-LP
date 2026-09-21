@@ -2012,6 +2012,22 @@ def test_jisseki_intake_never_invents_numbers():
     check("2回目は置き換えで増えない", again.count(J.START), 1)
     wf = (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8")
     check("intake_watch が実績シートを振り分ける", "jisseki_intake" in wf, True)
+    # 声は「何がどう変わったか」を先に出す。長い引用が先頭だと、並べたときに読めない
+    v = [{"who": "製造業（従業員約50名）", "industry": "製造業", "person": "", "quote": "増えました",
+          "number": {"metric": "問い合わせ", "before": "月3件", "after": "月8件", "period": "導入から2年"}, "sites": ["ai-lab"]}]
+    h = J.render(v, "lp")
+    check("数字が引用より前に出る", h.index("voice-metric") < h.index("<blockquote>"), True)
+    check("業種を二重に書かない", h.count("製造業"), 1)
+    check("期間の札が出る", "voice-term" in h and "導入から2年" in h, True)
+    css = (ROOT / "site" / "css" / "style.css").read_text(encoding="utf-8")
+    check("声の見た目はCSSで持つ", ".voice-grid" in css and ".voice-metric" in css, True)
+    # 外部プロフィールは、機械（sameAs）だけでなく読者からもたどれること
+    import social_footer as SF
+    check("フッターの外部リンクが公開ページに入っている",
+          all(SF.MARK in (ROOT / "site" / p).read_text(encoding="utf-8")
+              for p in ("index.html", "about/index.html", "lp/index.html")), True)
+    check("記事の雛形にも入っている", SF.MARK in (ROOT / "templates" / "article.html").read_text(encoding="utf-8"), True)
+    check("2回当てても増えない", SF.insert(SF.insert("<p class=\"addr\">x</p>", SF.AI_ANCHOR), SF.AI_ANCHOR).count(SF.MARK), 1)
 
 
 def test_speed_fix_keeps_pages_light():
