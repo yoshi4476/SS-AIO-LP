@@ -298,14 +298,44 @@ def chunks(xs, n):
     return [xs[i:i + n] for i in range(0, len(xs), n)]
 
 
+VOL_CACHE = ROOT / "data" / "rakko_volume.json"
+
+
+def _vol_cache():
+    try:
+        return json.loads(VOL_CACHE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
 def fill_volume(cands):
-    """検索数の無い候補を、一括登録で埋める（500件ずつ）"""
-    missing = [c["kw"] for c in cands.values() if c.get("vol") is None]
+    """検索数の無い候補を、一括登録で埋める（500件ずつ）。
+    一度取った語は data/rakko_volume.json に残し、次からは登録しない
+    （登録は1回最低15クレジット。条件を直すたびに払っていた）"""
+    known = _vol_cache()
+    hit = 0
+    for k, c in cands.items():
+        if c.get("vol") is None and k in known:
+            v = known[k]
+            c["vol"], c["trend"] = v.get("vol"), v.get("trend")
+            if c.get("kd") is None:
+                c["kd"] = v.get("kd")
+            hit += 1
+    missing = [c["kw"] for c in cands.values()
+               if c.get("vol") is None and norm(c["kw"]) not in known]
+    if hit:
+        print(f"   検索数を手元の記録から埋めました: {hit}件（課金なし）")
     if not missing or not rakko.enabled():
-        return 0
-    total = 0
+        return hit
+    total = hit
     for part in chunks(missing, BULK):
         total += _fill_part(cands, part)
+    # 取れた語も「取れなかった語」も残す。取れない語を毎回登録し直さないため
+    for k, c in cands.items():
+        if k not in known and c["kw"] in missing:
+            known[k] = {"vol": c.get("vol"), "kd": c.get("kd"), "trend": c.get("trend")}
+    VOL_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    VOL_CACHE.write_text(json.dumps(known, ensure_ascii=False), encoding="utf-8")
     return total
 
 

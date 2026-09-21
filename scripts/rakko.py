@@ -72,12 +72,52 @@ def over_budget():
     return BUDGET is not None and CONSUMED >= BUDGET
 
 
+# 応答をディスクに残す。条件の調整のたびに取り直していたため、計画作成を
+# 十数回やり直して約1,000クレジットを無駄にした。同じ問い合わせは期限内なら
+# 課金なしで返す。一括調査（search-volume）の登録・状況確認は毎回違うので残さない
+CACHE_DIR = ROOT / "data" / "rakko_cache"
+CACHE_DAYS = 14
+NO_CACHE = ("/v1/search-volume", "/status", "/histories", "/metadata/")
+
+
+def _cache_path(path, body, method):
+    import hashlib
+    key = json.dumps([method, path, body], ensure_ascii=False, sort_keys=True)
+    return CACHE_DIR / (hashlib.sha1(key.encode("utf-8")).hexdigest() + ".json")
+
+
+def _cache_get(path, body, method):
+    if any(x in path for x in NO_CACHE):
+        return None
+    p = _cache_path(path, body, method)
+    if not p.exists():
+        return None
+    import time as _t
+    if _t.time() - p.stat().st_mtime > CACHE_DAYS * 86400:
+        return None
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def _cache_put(path, body, method, res):
+    if any(x in path for x in NO_CACHE) or not res or not res.get("result"):
+        return
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    _cache_path(path, body, method).write_text(
+        json.dumps(res, ensure_ascii=False), encoding="utf-8")
+
+
 def call(path, body=None, method="POST"):
     global _OUT_OF_CREDIT
     global CONSUMED
     key = api_key()
     if not key or _OUT_OF_CREDIT:
         return None
+    hit = _cache_get(path, body, method)
+    if hit is not None:
+        return hit
     if over_budget():
         return None
     req = urllib.request.Request(
@@ -88,6 +128,7 @@ def call(path, body=None, method="POST"):
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
                 res = json.load(r)
+                _cache_put(path, body, method, res)
                 CONSUMED += float(((res or {}).get("meta") or {}).get("consumedCredit") or 0)
                 if over_budget():
                     print(f"  ラッコの消費が上限 {BUDGET} クレジットに達しました。以降の呼び出しは行いません")

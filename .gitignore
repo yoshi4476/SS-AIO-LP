@@ -39,3 +39,7 @@ secrets.local.txt
 intake/*.xlsx
 intake/done/
 intake/todo/
+
+# ラッコの応答のキャッシュ（課金を減らすための手元の控え。公開リポジトリには置かない）
+data/rakko_cache/
+data/rakko_volume.json

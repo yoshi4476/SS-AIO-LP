@@ -1702,6 +1702,21 @@ def test_kw_plan_keeps_only_buyers():
         check("上限まで呼べる（1.5×2=3.0）", got[:2], [True, True])
         check("上限に達したら止まる", got[2:], [False, False])
         check("消費を数えている", rakko.spent(), 3.0)
+        # 同じ問い合わせは期限内なら課金なしで返す。条件の調整で取り直して約1,000クレジット無駄にした
+        import tempfile, pathlib
+        rakko.CACHE_DIR = pathlib.Path(tempfile.mkdtemp())
+        rakko.CONSUMED, rakko.BUDGET = 0.0, None
+        hits = {"n": 0}
+        def counted(req, timeout=0):
+            hits["n"] += 1
+            return _io.BytesIO(b'{"result":true,"meta":{"consumedCredit":1.5},"data":{"items":[1]}}')
+        rakko.urllib.request.urlopen = counted
+        a = rakko.call("/v1/suggest-keywords", {"keyword": "x"})
+        b = rakko.call("/v1/suggest-keywords", {"keyword": "x"})
+        check("同じ問い合わせは1回しか課金しない", (hits["n"], rakko.spent()), (1, 1.5))
+        check("2回目も同じ中身が返る", a == b, True)
+        rakko.call("/v1/search-volume", {"keywords": ["x"]}); rakko.call("/v1/search-volume", {"keywords": ["x"]})
+        check("一括調査の登録は残さない（毎回別物）", hits["n"], 3)
     finally:
         rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT = saved
         rakko.CONSUMED, rakko.BUDGET = 0.0, None
