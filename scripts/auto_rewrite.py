@@ -174,6 +174,21 @@ def site_of(slug):
     return S.find_category_owner(cat) or "ai-lab"
 
 
+def hub_rewrite_log(item, why):
+    """管制塔の「リライトログ」に残す。手元の台帳（auto_fix.jsonl）だけだと、
+    シートを見る人には直した記録が1件も見えなかった（4行しか無かった）"""
+    try:
+        import hub_client
+        if not hub_client.enabled():
+            return
+        m = re.search(r"(\d+(?:\.\d+)?)位", item.get("why", ""))
+        hub_client.rewrite_log(item.get("site", ""), item["slug"],
+                               reason=f"{item['kind']}: {item.get('why', '')[:60]}",
+                               summary=why[:80], pos_before=(m.group(1) if m else ""))
+    except Exception as e:
+        print(f"     （管制塔への記録をスキップ: {str(e)[:60]}）")
+
+
 def note(slug, kind, ok, why):
     LOG.parent.mkdir(parents=True, exist_ok=True)
     with LOG.open("a", encoding="utf-8") as f:
@@ -297,6 +312,8 @@ def main():
         good, why = run_one(x, True)
         print(f"  {'○' if good else '×'} [{x['kind']}] {x['slug'][:34]:<34} {why[:56]}")
         note(x["slug"], x["kind"], good, why)
+        if good and why.startswith("直しました"):
+            hub_rewrite_log(x, why)
         ok, ng = ok + good, ng + (not good)
     print(f"\n  直した {ok}件 / 戻した {ng}件 / {(time.time() - started) / 60:.0f}分")
     print("  台帳: automation/logs/auto_fix.jsonl")

@@ -1856,6 +1856,19 @@ def test_reports_carry_diagnosis_and_next_actions():
           wf.index("name: 見つかったものを集めて知らせる") < wf.index("name: 週次レポートの作成"), True)
 
 
+def test_rewrites_reach_the_sheet():
+    """週次で直した内容が、管制塔の「リライトログ」に届くこと。
+
+    hub_client.rewrite_log は定義だけあって呼ぶ側が無く、リライトログは4行の
+    ままだった。手元の台帳（auto_fix.jsonl / rank_up.json）にしか残らず、
+    シートを見る人には直した記録が見えなかった。
+    """
+    print(chr(10) + "■ 直した記録がシートに届く")
+    for name in ("auto_rewrite.py", "rank_up.py"):
+        src = (ROOT / "scripts" / name).read_text(encoding="utf-8")
+        check(f"{name} がリライトログに書く", "hub_client.rewrite_log(" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1901,7 +1914,8 @@ def main():
               test_every_site_gets_articles,
               test_intake_sheets_are_not_published,
               test_kw_plan_keeps_only_buyers,
-              test_reports_carry_diagnosis_and_next_actions):
+              test_reports_carry_diagnosis_and_next_actions,
+              test_rewrites_reach_the_sheet):
         try:
             t()
         except Exception as e:

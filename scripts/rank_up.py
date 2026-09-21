@@ -275,6 +275,18 @@ def load_log():
         return {}
 
 
+def hub_rewrite_log(site, slug, reason, summary, pos_before=""):
+    """管制塔の「リライトログ」に残す。手元の data/rank_up.json だけだと、
+    シートを見る人には直した記録が見えない"""
+    try:
+        import hub_client
+        if hub_client.enabled():
+            hub_client.rewrite_log(site, slug, reason=reason, summary=summary,
+                                   pos_before=pos_before)
+    except Exception as e:
+        print(f"             （管制塔への記録をスキップ: {str(e)[:60]}）")
+
+
 def save_log(d):
     LOG.parent.mkdir(parents=True, exist_ok=True)
     LOG.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
@@ -381,6 +393,9 @@ def main():
                         added += n
                         if acted <= a.limit and n:
                             print(f"             → 内部リンクを{n}本足しました")
+                        if n and a.write:
+                            hub_rewrite_log(sid, slug, f"{name}・内部リンク不足",
+                                            f"内部リンクを{n}本追加", round(d["pos"], 1))
                     elif kind in ("title", "rival", "snippet", "thin", "intent"):
                         human.setdefault(kind, []).append(slug)
                 if a.write:
