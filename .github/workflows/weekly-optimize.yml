@@ -83,6 +83,9 @@ jobs:
       - name: KWキューの実データ補充
         env:
           SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          # 未設定なら無料のサジェストだけで動く（キー待ちで止めない）。
+          # ここへ渡し忘れると、手元では効いているのにCIだけ効かない
+          RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
         run: |
           if [ -n "$SA_JSON" ]; then
             printf '%s' "$SA_JSON" > indexing-service-account.json

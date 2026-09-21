@@ -31,6 +31,7 @@ TO_GITHUB = {
     "HUB_URL", "HUB_SECRET", "SLACK_WEBHOOK_URL", "RESEND_API_KEY",
     "RESEND_AUDIENCE_ID", "LEAD_TO_EMAIL", "LEAD_FROM_EMAIL",
     "YOUTUBE_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN", "GCP_SERVICE_ACCOUNT_JSON",
+    "RAKKO_API_KEY",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。
@@ -72,6 +73,12 @@ LEAD_FROM_EMAIL=
 # ── 通知 ────────────────────────────────────────────────
 # 発行: https://api.slack.com/apps → Incoming Webhooks
 SLACK_WEBHOOK_URL=
+
+# ── KW候補の検索ボリューム（無くても無料のサジェストだけで動きます）──
+# 発行: ラッコキーワード → マイページ → API → キー発行
+#   スタンダードプラン（月2,475円〜）以上でのみ発行できます
+#   消費の目安: 1社あたり約168クレジット/月（10社で1,680／枠3,000）
+RAKKO_API_KEY=
 
 # ── 一次情報の収集 ──────────────────────────────────────────
 # 発行: https://console.cloud.google.com/apis/credentials
