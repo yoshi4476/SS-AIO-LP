@@ -55,6 +55,17 @@ NOT_BUYER = ("求人", "転職", "副業", "在宅ワーク", "フリーラン�
              "面接", "志望動機", "学校", "スクール", "講座", "検定", "試験")
 
 
+# 他社の製品・サービス名。その名前で検索する人はその製品を使いたい人で、
+# 「請求書freee」（9,900/月）を書いても経理BPOの相談には来ない。
+# 指名検索の除外（is_brand_query）は自社名だけを見ていた
+RIVALS = ("freee", "フリー会計", "マネーフォワード", "money forward", "弥生", "やよい",
+          "ジョブカン", "楽楽精算", "楽楽明細", "奉行", "pca", "jdl", "tkc", "勘定奉行",
+          "ドットコム", "misoca", "board", "invoice", "バクラク", "concur", "sansan",
+          "bill one", "kintone", "salesforce", "hubspot", "canva", "chatgpt plus",
+          "kinmaq", "キンマク", "レジーナ", "湘南美容", "ホットペッパー", "エキテン", "ぐるなび",
+          "食べログ", "リクルート", "indeed", "タウンページ", "ミツモア", "くらしのマーケット")
+
+
 def norm(kw):
     return re.sub(r"[\s　]+", "", str(kw)).lower()
 
@@ -238,6 +249,8 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
         return "除外語"
     if any(t in low for t in NOT_BUYER):
         return "見込み客でない"
+    if any(t in low for t in RIVALS):
+        return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
     if is_written(kw, corpus):
