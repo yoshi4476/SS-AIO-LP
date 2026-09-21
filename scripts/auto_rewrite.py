@@ -88,12 +88,16 @@ PROMPT = """articles/{slug}.md を直してください。この1ファイル以
 直したら、変更点を1行で説明して終了してください。"""
 
 WHAT = {
-    "title": ("フロントマターの title と、H1相当の書き出しを見直してください。\n"
+    "title": ("フロントマターの title・description と、H1相当の書き出しを\n"
+              "見直してください。検索結果に出るのはタイトルと説明文の両方で、\n"
+              "説明文だけを直しても、タイトルだけを直しても効きません。\n"
               "この記事は表示されているのにクリックされていません。検索結果に並ぶ他の\n"
               "ページと同じことを言っているためです。**検索結果に出せないもの**\n"
               "（違反になる例・失敗した事例・自社で実際に測った数字）をタイトルの前半に置いて\n"
               "ください。15〜45字。狙う語（keyword）は必ず残すこと。\n"
-              "本文にない内容をタイトルに書かないこと（書くなら本文にも追記する）。"),
+              "description は60〜160字。狙う語を含め、タイトルで言っていないことを書く\n"
+              "（同じ文言を繰り返すと、検索結果で見える情報量が半分になる）。\n"
+              "本文にない内容をタイトルや説明文に書かないこと（書くなら本文にも追記する）。"),
     "review": ("直前の自動修正で表示回数が落ちています。検索意図とずれた可能性があります。\n"
                "冒頭200字と各H2直下の1文結論を読み、狙う語で検索した人が求めている答えに\n"
                "なっているか確かめてください。ずれていれば直してください。\n"
@@ -257,6 +261,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--limit", type=int, default=3, help="1回に直す本数")
+    # 1本あたり最大30分かかる。本数だけ増やすとCIの時間上限で途中終了し、
+    # 直した分がcommitされずに捨てられる。残り時間を見て、次を始めない
+    ap.add_argument("--budget-min", type=int, default=0,
+                    help="この分数を超えたら、次の記事に着手しない（0=無制限）")
     ap.add_argument("--selftest", action="store_true",
                     help="検算が効くかを本番の記事で確かめる（claudeは呼ばない）")
     a = ap.parse_args()
@@ -279,12 +287,18 @@ def main():
         return 0
 
     ok = ng = 0
+    started = time.time()
     for x in items[:a.limit]:
+        used = (time.time() - started) / 60
+        if a.budget_min and used >= a.budget_min:
+            print(f"\n  {used:.0f}分使ったので、ここで止めます"
+                  f"（残りは次回。上限{a.budget_min}分）")
+            break
         good, why = run_one(x, True)
         print(f"  {'○' if good else '×'} [{x['kind']}] {x['slug'][:34]:<34} {why[:56]}")
         note(x["slug"], x["kind"], good, why)
         ok, ng = ok + good, ng + (not good)
-    print(f"\n  直した {ok}件 / 戻した {ng}件")
+    print(f"\n  直した {ok}件 / 戻した {ng}件 / {(time.time() - started) / 60:.0f}分")
     print("  台帳: automation/logs/auto_fix.jsonl")
     return 0
 

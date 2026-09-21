@@ -223,7 +223,11 @@ jobs:
 
       - name: タイトル・検索意図の直し
         if: steps.guard.outputs.ok == 'yes'
-        run: python scripts/auto_rewrite.py --write --limit 6 || true
+        # 対象37件に対して週6本では追いつかない（検索での取りこぼしは28日で
+        # 約100クリック）。リポジトリはpublicでActionsの時間制限が無いため
+        # 本数を上げる。1本最大30分かかるので、時計でも止める（ジョブの上限は60分で、
+        # 途中で切られると直した分がcommitされずに捨てられる）
+        run: python scripts/auto_rewrite.py --write --limit 14 --budget-min 25 || true
 
       # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
       # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。
