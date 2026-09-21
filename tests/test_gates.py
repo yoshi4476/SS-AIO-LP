@@ -1924,6 +1924,58 @@ def test_five_hub_features_are_wired():
     check("AI参照の着地ページ: 送る側", 'out["ai_pages"]' in dk and "landingPage" in dk, True)
 
 
+def test_merge_is_wired():
+    """統合の自動化が、候補の判定・検算・配信先の取り下げまでつながっていること"""
+    print(chr(10) + "■ 食い合う記事の統合")
+    import auto_merge as M
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8", errors="replace")
+    check("週次が検算を先に通す", "auto_merge.py --selftest" in wf and "auto_merge.py --write" in wf, True)
+    check("配信先からも外す", "retract.py --pending --push" in wf, True)
+    st = {"ai-lab": {"a": {"imp": 100, "clicks": 5, "pos": 8.0}, "b": {"imp": 40, "clicks": 1, "pos": 15.0},
+                     "c": {"imp": 200, "clicks": 0, "pos": 12.0}}}
+    arts = {"a": {"title": "整骨院のMEO対策", "kw": "整骨院 meo", "h2": ["口コミ"]},
+            "b": {"title": "整骨院のMEO対策と口コミ", "kw": "整骨院 meo 口コミ", "h2": ["口コミ"]},
+            "c": {"title": "農業用倉庫の補助金", "kw": "農業用倉庫 補助金", "h2": ["倉庫"]}}
+    two = [{"kw": "x"}, {"kw": "y"}]
+    j = lambda s, l, rev=0: M.judge({"site": "ai-lab", "survivor": s, "loser": l, "imp": 50, "kws": list(two)}, st, rev, arts)["skip"]
+    one = lambda s, l: M.judge({"site": "ai-lab", "survivor": s, "loser": l, "imp": 50, "kws": [{"kw": "x"}]}, st, 0, arts)["skip"]
+    check("同じ語が1つだけなら見送る（偶然の重なり）", "同じ語が1つだけ" in one("a", "b"), True)
+    check("同じ語が2つでも主題が違えば見送る", "主題が違う" in j("c", "b"), True)
+    check("同じ語が2つで題名が似ていれば通す", "主題が違う" in j("a", "b"), False)
+    import tempfile as _tf, pathlib as _pl
+    import retract as R
+    d = _pl.Path(_tf.mkdtemp())
+    (d / "content").mkdir(); (d / "content" / "old.json").write_text("{}", encoding="utf-8")
+    (d / "blog" / "old").mkdir(parents=True); (d / "blog" / "old" / "index.html").write_text("x", encoding="utf-8")
+    (d / "article-manifest.json").write_text('{"old": "abc", "new": "def"}', encoding="utf-8")
+    (d / "sitemap.xml").write_text("<urlset>\n  <url>\n    <loc>https://ex.jp/blog/old/</loc>\n  </url>\n  <url>\n    <loc>https://ex.jp/blog/new/</loc>\n  </url>\n</urlset>\n", encoding="utf-8")
+    (d / "llms.txt").write_text("- [old](/blog/old/): x\n- [new](/blog/new/): y\n", encoding="utf-8")
+    cfg = {"domain": "ex.jp", "content_dir": "content"}
+    R.apply({"slug": "old", "from": "/blog/old/", "to": "/blog/new/", "at": "2026-09-21", "reason": "統合"}, cfg, d)
+    check("配信先の記事ファイルを消す", (d / "content" / "old.json").exists() or (d / "blog" / "old").exists(), False)
+    check("manifest から外す", "old" in (d / "article-manifest.json").read_text(encoding="utf-8"), False)
+    check("sitemap から外し、残す方は残る", ("/blog/old/" in (d / "sitemap.xml").read_text(encoding="utf-8"), "/blog/new/" in (d / "sitemap.xml").read_text(encoding="utf-8")), (False, True))
+    check("llms.txt から外す", "/blog/old/" in (d / "llms.txt").read_text(encoding="utf-8"), False)
+    check("301 を書く", "/blog/old/ /blog/new/ 301" in (d / "_redirects").read_text(encoding="utf-8"), True)
+    check("クリックのある記事は消さない", "クリック" in j("b", "a"), True)
+    check("表示が多い側は消さない", "表示が多い" in j("a", "c"), True)
+    check("逆向きの組が強ければ見送る", "逆向き" in j("a", "b", rev=99), True)
+    check("GSCが引けなければ判断しない", "GSC" in M.judge({"site": "x", "survivor": "a", "loser": "b", "imp": 1, "kws": []}, {}, 0)["skip"], True)
+    lo = "---\ntitle: t\n---\n## 開業届の書き方\n本文\n## まとめ\n"
+    check("吸収の証拠になる語を取り出す", M.distinct_terms(lo, "これは本文です"), ["開業届"])
+    # 「触ったのは1本だけか」は git ではなく直前の指紋と比べる（週次では先の工程の未コミットの直しがある）
+    import auto_rewrite as ARw
+    snap = ARw.snapshot()
+    check("指紋が全記事ぶんある", len(snap) > 100, True)
+    check("変わっていなければ空", ARw.changed_since(snap), [])
+    check("既にある語は数えない", M.distinct_terms(lo, "開業届の書き方を説明します"), [])
+    check("骨組みの語（まとめ）は数えない", "まとめ" in M.distinct_terms(lo, ""), False)
+    check("本文の長さは装飾を除いて数える", M.plain_len("---\na: b\n---\n<p>あ い</p>\n"), 2)
+    import retract as R
+    check("Next.js は public/_redirects に書く", str(R.redirects_file({"images_dir": "public/images"}, ROOT / "nope")).replace("\\", "/").endswith("public/_redirects"), True)
+    check("静的サイトは直下の _redirects に書く", str(R.redirects_file({}, ROOT / "nope")).replace("\\", "/").endswith("nope/_redirects"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1972,7 +2024,8 @@ def main():
               test_reports_carry_diagnosis_and_next_actions,
               test_rewrites_reach_the_sheet,
               test_hub_has_one_kpi_writer,
-              test_five_hub_features_are_wired):
+              test_five_hub_features_are_wired,
+              test_merge_is_wired):
         try:
             t()
         except Exception as e:

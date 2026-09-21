@@ -126,11 +126,29 @@ def sources(s):
     return set(re.findall(r'href="(https?://[^"]+)"', s))
 
 
-def check(slug, before, before_warns):
+def snapshot():
+    """articles/ の指紋。「触ったのはこの1本だけか」を、git ではなく直前の状態と比べる。
+
+    週次では link_boost・rank_up・split_paragraphs が先に記事を直し、その分は
+    まだコミットされていない。git status と比べると、その未コミットの記事が
+    「別の記事まで変わっている」と見なされ、正しい書き換えまで毎回戻していた"""
+    import hashlib
+    return {p.name: hashlib.sha1(p.read_bytes()).hexdigest() for p in (ROOT / "articles").glob("*.md")}
+
+
+def changed_since(snap):
+    now = snapshot()
+    return sorted(n for n in set(snap) | set(now) if snap.get(n) != now.get(n))
+
+
+def check(slug, before, before_warns, snap=None):
     """直した結果を検算する。通らない理由を返す（空なら合格）"""
-    changed = [l[3:].strip() for l in
-               (sh(["git", "status", "--porcelain", "--", "articles"]).stdout or "").splitlines()]
-    other = [c for c in changed if c != f"articles/{slug}.md"]
+    if snap is not None:
+        other = [c for c in changed_since(snap) if c != f"{slug}.md"]
+    else:
+        changed = [l[3:].strip() for l in
+                   (sh(["git", "status", "--porcelain", "--", "articles"]).stdout or "").splitlines()]
+        other = [c for c in changed if c != f"articles/{slug}.md"]
     if other:
         return f"別の記事まで変わっています: {', '.join(other[:3])}"
 
@@ -212,7 +230,7 @@ def run_one(item, write):
     if not write:
         return True, "（確認のみ）"
 
-    before, before_warns = meta(slug), warns(slug)
+    before, before_warns, snap = meta(slug), warns(slug), snapshot()
     prompt = PROMPT.format(slug=slug, why=item["why"], what=WHAT[kind])
     # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
     # この工程がやるのは1ファイルの書き換えだけで、コマンド実行も外部通信も要らない
@@ -224,7 +242,7 @@ def run_one(item, write):
     if p.read_text(encoding="utf-8-sig") == before[2]:
         return True, "変更なし（直す必要なしと判断）"
 
-    ng = check(slug, before, before_warns)
+    ng = check(slug, before, before_warns, snap)
     if ng:
         sh(["git", "checkout", "--", f"articles/{slug}.md"])
         sh([sys.executable, "scripts/build.py"], timeout=1800)
@@ -248,7 +266,7 @@ def selftest():
     slug = items[0]["slug"]
     p = ROOT / "articles" / f"{slug}.md"
     orig = p.read_text(encoding="utf-8-sig")
-    before, before_warns = meta(slug), warns(slug)
+    before, before_warns, snap = meta(slug), warns(slug), snapshot()
     title, kw, body = before
 
     # やってはいけない書き換えを、1つずつ当てる
@@ -267,7 +285,7 @@ def selftest():
                 print(f"  --  {name}: この記事では試せません")
                 continue
             p.write_text(broken, encoding="utf-8", newline="")
-            ng = check(slug, before, before_warns)
+            ng = check(slug, before, before_warns, snap)
             print(f"  {'OK' if ng else 'NG'}  {name}: "
                   + (f"止めた（{ng[:44]}）" if ng else "素通りしました"))
             ok += bool(ng)

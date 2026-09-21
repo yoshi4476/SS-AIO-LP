@@ -944,6 +944,26 @@ Morning/Afternoon Pipeline 冒頭で kpi_feedback.md を読み込み:
 2. 同一KWで2本以上ランクイン → カニバリ抽出
 3. 対処: 統合（低品質側を削除・301リダイレクト） or 差別化（H1・メタディスク・構成）
 4. 【AIO】カニバリはAI検索でも不利（AIが両方落とすことがある）。**統合を基本方針とする**
+5. **統合は `auto_merge.py` が週2組ずつ行う**（判断は claude、通してよいかは機械が決める）
+
+   ```bash
+   python scripts/auto_merge.py              # 候補を見る（GSCで同じ語に2本が出ている組）
+   python scripts/auto_merge.py --write      # 統合する
+   python scripts/auto_merge.py --selftest   # 検算が効くか確かめる（週次が先に通す）
+   python scripts/retract.py --pending       # 他サイトの配信先から外す分（週次が --push で行う）
+   ```
+
+   根拠はGSCの実績だけ。タイトルが似ているだけでは統合しない。**同じ語が2つ以上**で両方が出ていて、
+   かつ題名か構成が似ている（または負けた側の狙う語を勝った側が既に扱っている）組だけ。
+   1語だけの重なりは偶然が多い（実際「農業機械補助金」と「農業用倉庫の補助金」が1語で挙がった）。
+   負けた側（drag）の28日クリックが3回を超える、表示が勝った側より多い、未公開、別サイト、
+   のどれかなら見送る。
+   吸収後は loser を `articles/_merged/` へ移し、内部リンクを付け替え、301を書く
+   （AI集客ラボは `site/_redirects`。他サイトは `data/retractions.jsonl` に積み、
+   `retract.py` が配信先の content・manifest・sitemap・llms.txt から外して `_redirects` に足す）。
+
+   検算は auto_rewrite の8つに加えて3つ: **本文が減っていない**／**数字は2本のどちらかにあったものだけ**／
+   **loser にしか無かった見出しの語が1つ以上入った**（何もしない統合を通さない）。
 
 ### 8.2 リライト対象の選定基準
 

@@ -236,6 +236,20 @@ jobs:
         # 途中で切られると直した分がcommitされずに捨てられる）
         run: python scripts/auto_rewrite.py --write --limit 14 --budget-min 25 || true
 
+      # 同じ語に自社の2本が出ている組は、差別化ではなく統合する（第8.1章）。
+      # 負けた側の中身を勝った側へ claude に足させ、検算に通ったものだけ 301 で送る。
+      # 検算が効くことを先に確かめる（効かなければ統合しない）
+      - name: 食い合う記事の統合（検算つき）
+        if: steps.guard.outputs.ok == 'yes'
+        run: |
+          if python scripts/auto_merge.py --selftest; then
+            python scripts/auto_merge.py --write --limit 2 --budget-min 20 || true
+          else
+            echo "::error::統合の検算が効いていません。統合は行いません"
+            python scripts/hub_client.py error_log merge \
+              "auto_merge の検算が効いていません（統合は飛ばしました）" || true
+          fi
+
       # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
       # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。
       # 実測で同じ一文がリンク文の41.5%を占めていた
@@ -302,6 +316,8 @@ jobs:
           git add -A
           git diff --cached --quiet || git commit -m "weekly: 内部リンクと導線の補充"
           python scripts/publish_changed.py --all --since "${{ inputs.since || 'HEAD~1' }}" --push || true
+          # 統合で消した記事は配信先にも残っている。外して 301 で送らないと2本が出続ける
+          python scripts/retract.py --pending --push || true
 
       - name: 週次最適化の実行
         env:
