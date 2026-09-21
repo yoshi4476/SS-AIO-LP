@@ -136,7 +136,7 @@ def gather(site_id, S, deep):
     # 起点が領域語そのもの（経理・記帳）なら単体で聞く。起点が業種名
     # （クリニック・飲食店）のときは単体で聞くと患者・消費者の検索しか返らない
     # （クリックポスト／ペインクリニック）。業種×領域語で聞く
-    own_core = [t for t in S["own_terms"][:CORE_TERMS]]
+    own_core = core_terms(S)
     for ind in S["industries"]:
         if ind.lower() in S["own_terms"]:
             queries = [ind]
@@ -163,6 +163,16 @@ def gather(site_id, S, deep):
                 put(s, ind, "suggest")
         time.sleep(0.2)
     return cands
+
+
+def core_terms(S):
+    """業種に掛ける領域語。sites/<id>.json の kw_seeds.core があればそれを使う。
+    無ければ owns の先頭から。owns は「AIO / LLMO / SEO / MEO」の順で、
+    そのまま使うと「クリニック llmo」のようなほぼ検索されない組ができ、
+    いちばん自然な「クリニック 集客」が入らなかった"""
+    core = S["cfg"].get("kw_seeds", {}).get("core") or []
+    core = [str(t).lower() for t in core if str(t).strip()]
+    return core[:CORE_TERMS] if core else [t for t in S["own_terms"][:CORE_TERMS]]
 
 
 MAX_INTENTS = 14

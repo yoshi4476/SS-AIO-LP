@@ -1647,6 +1647,13 @@ def test_kw_plan_keeps_only_buyers():
     check("患者の評判検索は落とす（クリニック 口コミ）", lab2_ok("レジーナ クリニック 口コミ"), "領域語なし")
     check("事業者側の口コミは通す（口コミ 返信）", lab2_ok("クリニック 口コミ 返信 例文"), "")
     check("領域語を含む複合意図は通す（aio対策 失敗）", lab_ok("工務店 aio対策 失敗"), "")
+    # 業種に掛ける領域語は設定で明示できる。無ければ owns の先頭
+    check("core があればそれを使う",
+          kw_plan.core_terms({"cfg": {"kw_seeds": {"core": ["集客", "MEO"]}}, "own_terms": ("aio", "llmo")}),
+          ["集客", "meo"])
+    check("core が無ければ owns の先頭",
+          kw_plan.core_terms({"cfg": {}, "own_terms": ("aio", "llmo", "seo", "meo", "x")}),
+          ["aio", "llmo", "seo", "meo"])
     check("買い手の意図（申請 代行）が上限内に残る", "申請 代行" in kw_plan.intents_for(
         {"intents": ["申請 代行"] + ["意図%d" % i for i in range(30)]}), True)
     check("検索数も表示も無い語は落とす", ok("経理 記帳 手順", vol=None), "検索数が少ない")
