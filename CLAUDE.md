@@ -999,10 +999,17 @@ Morning/Afternoon Pipeline 冒頭で kpi_feedback.md を読み込み:
 | robots.txt | フェッチしブロック確認 | AIクローラー6種許可済み |
 | llms.txt | フェッチし記事数確認 | 公開記事数と一致 |
 | Core Web Vitals | PageSpeed Insights API | LCP<=2.5s, INP<=200ms, CLS<=0.1 |
+| **重い読み方の再発** | `speed_fix.leftovers()`（ゲート） | Google Fonts 0件・先読みの計測タグ 0件 |
 | HTTPS | SSL証明書期限 | 30日以上 |
 | 404 | GSCカバレッジ | 404ゼロ |
 | Schema | JSON-LD確認 | BlogPosting+FAQPage+BreadcrumbList（手順系はHowTo） |
 | dateModified | サンプル記事Schema確認 | 実際の更新日と一致 |
+
+**表示速度の方針（3サイト共通・`scripts/speed_fix.py`）**: 日本語のWebフォントは使わない
+（Noto Sans JP は文字範囲ごとに60〜95本・1.0〜1.4MB読まれ、モバイルの LCP が7〜13秒だった）。
+端末のフォント（ヒラギノ／游ゴシック／Noto Sans CJK）で描く。計測タグは load の1.2秒後に読む
+（それまでの出来事は dataLayer に溜まる）。本文画像は `loading="lazy"`、アイキャッチは `fetchpriority="high"`。
+実測: 記事ページ 総合62→96、LCP 7.3秒→2.1秒、転送1.8MB→0.38MB。
 
 ### 8.5 AIO監査（週次）
 

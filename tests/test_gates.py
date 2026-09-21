@@ -2012,6 +2012,30 @@ def test_jisseki_intake_never_invents_numbers():
     check("intake_watch が実績シートを振り分ける", "jisseki_intake" in wf, True)
 
 
+def test_speed_fix_keeps_pages_light():
+    """日本語Webフォントと先読みの計測タグが戻っていないこと。1ページ1MB超の主因だった"""
+    print(chr(10) + "■ 表示速度")
+    import speed_fix as S
+    sample = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+              '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
+              '<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Outfit:wght@500&display=swap" rel="stylesheet">\n'
+              '<script async src="https://www.googletagmanager.com/gtag/js?id=G-TEST1"></script>\n'
+              "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TEST1');</script>\n"
+              '<img src="/a.png"><img src="/b.png">')
+    once = S.fix_html(sample, "ai-lab", lazy_images=True)
+    twice = S.fix_html(once, "ai-lab", lazy_images=True)
+    check("日本語Webフォントの読み込みを外す", "Noto+Sans+JP" in once, False)
+    check("Google Fonts を一切読まない", "fonts.googleapis" in once, False)
+    check("計測タグは描画後に読む", "<script async src" not in once and "addEventListener('load'" in once and "G-TEST1" in once, True)
+    check("最初の画像以外を遅延読み込み", (once.count('loading="lazy"'), '<img src="/a.png">' in once), (1, True))
+    check("2回当てても変わらない", once == twice, True)
+    check("公開HTMLに重い読み方が残っていない", S.leftovers(ROOT / "site"), [])
+    tpl = (ROOT / "templates" / "article.html").read_text(encoding="utf-8")
+    check("記事の雛形も軽い", "Noto+Sans+JP" not in tpl and "<script async src" not in tpl, True)
+    css = (ROOT / "site" / "css" / "style.css").read_text(encoding="utf-8")
+    check("本文フォントは端末のフォント", "--sans: \"Hiragino Kaku Gothic ProN\"" in css, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2062,7 +2086,8 @@ def main():
               test_hub_has_one_kpi_writer,
               test_five_hub_features_are_wired,
               test_merge_is_wired,
-              test_jisseki_intake_never_invents_numbers):
+              test_jisseki_intake_never_invents_numbers,
+              test_speed_fix_keeps_pages_light):
         try:
             t()
         except Exception as e:

@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -227,7 +225,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/saas-hikaku-kiji-taisaku/eyecatch.png" alt="SaaS比較記事で不利にならない5つの打ち手｜AI引用対策" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/saas-hikaku-kiji-taisaku/eyecatch.png" alt="SaaS比較記事で不利にならない5つの打ち手｜AI引用対策" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -330,7 +328,7 @@
 <p><a href="https://www.aspicjapan.org/asu/article/39596" target="_blank" rel="noopener">アスピックの解説記事</a>によると、日本国内だけでもレビュー型・資料請求型の比較サイトは十数種類あります。レビュー型最大手の<a href="https://www.itreview.jp/labo/archives/23706" target="_blank" rel="noopener">ITreview</a>は掲載製品数が約15,000製品です。規模が大きいほど、1製品あたりの露出は薄まりやすくなります。<strong>この3タイプは掲載条件も対策方法も別物</strong>です。同じやり方で全部に対応しようとすると、どれも中途半端になりがちです。</p>
 <h2 id="saas3_1">SaaS比較記事で不利になりやすい3つの原因</h2>
 <p>SaaS比較記事で不利になる原因は、情報の古さ・独自性の欠如・比較表の作られ方という3点に集約されます。</p>
-<figure><img src="/images/saas-hikaku-kiji-taisaku/mistakes.png" alt="SaaS比較記事で不利になりやすい3つの原因: 情報が古く価格や機能が実態と食い違っている、独自の強み・数値ファクトがなく競合と横並びに見える、比較表の項目が競合に有利な軸で作られている" loading="lazy"><figcaption>SaaS比較記事で不利になりやすい3つの原因</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="SaaS比較記事で不利になりやすい3つの原因: 情報が古く価格や機能が実態と食い違っている、独自の強み・数値ファクトがなく競合と横並びに見える、比較表の項目が競合に有利な軸で作られている" loading="lazy"><figcaption>SaaS比較記事で不利になりやすい3つの原因</figcaption></figure>
 
 <p><strong>原因1: 情報が古く、価格や機能が実態と食い違っている。</strong>料金改定や機能追加を反映しないまま放置された比較ページは、担当者にもAIにも「信頼できない情報源」として扱われます。</p>
 <p><strong>原因2: 独自の強み・数値ファクトがなく、競合と横並びに見える。</strong>「多機能」「使いやすい」といった抽象的な説明だけでは、比較表の中で埋もれてしまいます。</p>
@@ -340,7 +338,7 @@
 <h2 id="_1">第三者比較サイトでの掲載を改善する打ち手</h2>
 <p>第三者比較サイトでの掲載改善は、情報の更新依頼・レビュー収集・カテゴリ登録の見直しという3つの打ち手で進めます。</p>
 <p>比較記事に載る前提となる認知づくりは、<a href="/aio/saas-shimei-kensaku-fuyashikata/">SaaS指名検索の増やし方｜AI時代に効く5つの施策</a>で扱っています。</p>
-<figure><img src="/images/saas-hikaku-kiji-taisaku/ng_ok.png" alt="比較サイトへの働きかけNG例とOK例: NG例は社員に好意的なレビューを不正投稿させる・競合の悪評を書き込む、OK例は導入企業に正当なレビュー投稿を依頼する・事実誤認は根拠付きで訂正依頼する" loading="lazy"><figcaption>比較サイトへの働きかけ NG例とOK例</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="比較サイトへの働きかけNG例とOK例: NG例は社員に好意的なレビューを不正投稿させる・競合の悪評を書き込む、OK例は導入企業に正当なレビュー投稿を依頼する・事実誤認は根拠付きで訂正依頼する" loading="lazy"><figcaption>比較サイトへの働きかけ NG例とOK例</figcaption></figure>
 
 <p>料金や機能が変わったら、掲載中の比較サイトすべてに更新依頼を出すことを運用に組み込んでください。<strong>四半期に1回の棚卸し</strong>を決めておくと、更新漏れによる機会損失を防げます。レビュー型サイトでは、導入企業に依頼してレビュー投稿を増やすことが評価スコアと露出の両方に効きます。依頼のタイミングは、導入直後よりも定着後3〜6ヶ月時点のほうが具体的な効果を語ってもらいやすい傾向があります。</p>
 <p>事実と異なる内容が掲載されている場合は、感情的なクレームではなく、根拠を添えて運営元の問い合わせ窓口から訂正を依頼します。<mark>多くの比較サイトは正確な情報提供を歓迎する立場</mark>なので、誠実な依頼であれば対応してもらえることがほとんどです。カテゴリ登録も見直しの対象です。自社の強みが伝わる細分化されたカテゴリに登録し直すだけで、比較対象となる競合の顔ぶれが変わることがあります。</p>
@@ -348,7 +346,7 @@
 <section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_mid_aio">AI検索の対応度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
 <h2 id="ai5">自社比較コンテンツでAIに引用される5つの施策</h2>
 <p>自社比較コンテンツでAIに引用される土台は、比較対象・比較表・独自データ・レビュー・更新頻度という5つの施策です。</p>
-<figure><img src="/images/saas-hikaku-kiji-taisaku/steps.png" alt="自社比較コンテンツでAIに引用される5つの施策: 比較対象の選定で優位な軸で3〜5社選ぶ、比較表の設計で同一軸で数値化する、独自データの追加で出典付きで明記する、レビューの収集で評価を集めてもらう、更新頻度の担保で都度反映する" loading="lazy"><figcaption>自社比較コンテンツでAIに引用される5つの施策</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="自社比較コンテンツでAIに引用される5つの施策: 比較対象の選定で優位な軸で3〜5社選ぶ、比較表の設計で同一軸で数値化する、独自データの追加で出典付きで明記する、レビューの収集で評価を集めてもらう、更新頻度の担保で都度反映する" loading="lazy"><figcaption>自社比較コンテンツでAIに引用される5つの施策</figcaption></figure>
 
 <h3 id="1">施策1: 比較対象を戦略的に選ぶ</h3>
 <p>競合を網羅的に並べる必要はありません。自社が優位に見える軸で戦える3〜5社に絞り込みます。<strong>同じ土俵に立てない大手ばかりを並べる</strong>と、逆に見劣りする比較ページになってしまいます。</p>

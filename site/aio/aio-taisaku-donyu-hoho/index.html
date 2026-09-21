@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -235,7 +233,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/aio-taisaku-donyu-hoho/eyecatch.png" alt="AIO対策の導入方法｜進め方6ステップと費用の目安" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/aio-taisaku-donyu-hoho/eyecatch.png" alt="AIO対策の導入方法｜進め方6ステップと費用の目安" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -276,14 +274,14 @@
 <p>導入を主導する立場は、会社の規模によって変わります。従業員数名の店舗であれば経営者自身が兼務することが多く、中規模の企業であればマーケティング担当や広報担当が窓口になるケースが目立ちます。<strong>役職名よりも「数字を見る責任を持つ人が1人いるか」のほうが重要</strong>です。責任者が曖昧なまま複数部署で分担すると、誰も進捗を追わなくなり、導入が立ち消えになりやすくなります。</p>
 <h2 id="3">導入前に確認すべき3つの前提条件</h2>
 <p>AIO対策を導入する前に、検索順位の土台・自社の一次情報・計測できる担当者の3つを確認してください。</p>
-<figure><img src="/images/aio-taisaku-donyu-hoho/prereq.png" alt="導入前に確認すべき3つの前提条件: 検索順位の土台があるか、自社の一次情報があるか、計測できる担当者がいるか" loading="lazy"><figcaption>導入前に確認すべき3つの前提条件</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="導入前に確認すべき3つの前提条件: 検索順位の土台があるか、自社の一次情報があるか、計測できる担当者がいるか" loading="lazy"><figcaption>導入前に確認すべき3つの前提条件</figcaption></figure>
 
 <p><strong>条件1: 検索順位の土台があるか。</strong>AI Overviewの引用元は、多くの場合すでに検索10位以内の記事です。圏外のページに構造改善だけを施しても、引用の土俵に上がれません。まず自社サイトの順位を確認してください。</p>
 <p><strong>条件2: 自社の一次情報があるか。</strong>AIが優先的に引用するのは、他社にない数字や事例です。当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。こうした自社でしか出せないデータの有無が、導入後の成果を大きく左右します。</p>
 <p><strong>条件3: 計測できる担当者がいるか。</strong>Search ConsoleとGA4を継続して見る担当者がいなければ、改善の効果を判断できません。<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>AI活用の方針を定めている日本企業は49.7%</strong>にとどまり、方針はあっても運用担当が曖昧な企業が少なくありません。<a href="https://www.smrj.go.jp/research_case/questionnaire/fbrion0000002pjw-att/202603_AI_point.pdf" target="_blank" rel="noopener">中小機構が2026年3月に公表した実態調査</a>でも、AIの導入率は20.4%、検討中を含めても39.0%にとどまっています。3つの条件が1つでも欠けている場合は、導入を始める前にそこから着手することをおすすめします。</p>
 <h2 id="aio6">AIO対策導入までの6ステップ</h2>
 <p>AIO対策の導入は、体制構築・現状診断・構造改善・計測設定・試験運用・定着化という6ステップで進めます。</p>
-<figure><img src="/images/aio-taisaku-donyu-hoho/steps.png" alt="AIO対策導入までの6ステップ: 担当者を決める、現状を診断、構造を改善、計測を設定、試験運用、運用を定着させる" loading="lazy"><figcaption>AIO対策導入までの6ステップ</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="AIO対策導入までの6ステップ: 担当者を決める、現状を診断、構造を改善、計測を設定、試験運用、運用を定着させる" loading="lazy"><figcaption>AIO対策導入までの6ステップ</figcaption></figure>
 
 <h3 id="1">ステップ1: 担当者を決める</h3>
 <p>最初に、AIO対策の数字を見る担当者を1人決めます。<strong>複数人の兼務にすると「誰も見ていない」状態になりやすい</strong>ため、責任の所在を明確にしてください。担当者は専門知識がなくても構いません。まず数字を見る習慣を作ることが目的です。</p>
@@ -343,7 +341,7 @@
 
 <h2 id="_3">導入時によくある失敗と回避策</h2>
 <p>AIO対策の導入でよくある失敗は、体制を決めずにツールだけ導入すること、そして導入後に計測せず放置することです。</p>
-<figure><img src="/images/aio-taisaku-donyu-hoho/ng-ok.png" alt="AIO対策導入のNG・OK: NG例は体制を決めずツールだけ導入する、導入後に計測せず放置する、一度に全ページを作り直す。OK例は担当者を1人決めてから始める、月1回は数字を確認する、優先度の高いページから着手する" loading="lazy"><figcaption>AIO対策導入のNG・OK</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="AIO対策導入のNG・OK: NG例は体制を決めずツールだけ導入する、導入後に計測せず放置する、一度に全ページを作り直す。OK例は担当者を1人決めてから始める、月1回は数字を確認する、優先度の高いページから着手する" loading="lazy"><figcaption>AIO対策導入のNG・OK</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 体制なしのツール導入はNG</span><br>計測ツールだけを先に契約し、見る担当者を決めないまま放置すると、数字は溜まっても改善につながりません。ツールを増やす前に、担当者と振り返りの頻度を先に決めてください。</div>
 

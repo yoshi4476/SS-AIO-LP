@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -227,7 +225,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/yoyaku-tsunagaru-dosen-sekkei/eyecatch.png" alt="予約につながる導線設計とは？離脱を防ぐ5つの視点" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/yoyaku-tsunagaru-dosen-sekkei/eyecatch.png" alt="予約につながる導線設計とは？離脱を防ぐ5つの視点" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -297,7 +295,7 @@
 <p>私たちの支援先でも、<strong>予約フォームの項目数を減らしただけで、送信完了率が体感できるほど上がった</strong>という声を何度も聞いています。デザインを変えなくても、導線の整理だけで結果が変わる典型的な例です。</p>
 <h2 id="3">予約が離脱する3つの原因</h2>
 <p>予約の離脱は、入力の負担・手段の少なさ・予約後の不安という3つの原因に集約されます。</p>
-<figure><img src="/images/yoyaku-tsunagaru-dosen-sekkei/mondai.png" alt="予約が離脱する3つの原因: 予約フォームの入力項目が多すぎる、予約手段が電話しかない、予約後の流れが見えず不安になる" loading="lazy"><figcaption>予約が離脱する3つの原因</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="予約が離脱する3つの原因: 予約フォームの入力項目が多すぎる、予約手段が電話しかない、予約後の流れが見えず不安になる" loading="lazy"><figcaption>予約が離脱する3つの原因</figcaption></figure>
 
 <p><strong>原因1: 予約フォームの入力項目が多すぎる。</strong>症状の詳細や紹介経路、希望する担当者名まで必須にしていると、入力の途中で面倒になり離脱されます。</p>
 <p><strong>原因2: 予約手段が電話しかない。</strong>診療時間・営業時間外に検討している利用者は、その場で予約できず後回しにし、そのまま忘れられてしまいます。</p>
@@ -306,7 +304,7 @@
 
 <h2 id="5">予約につながる導線設計5つの視点</h2>
 <p>離脱を防ぐ導線設計は、入力項目・予約手段・予約後案内・動線の一本化・スマホ対応という5つの視点で整理できます。</p>
-<figure><img src="/images/yoyaku-tsunagaru-dosen-sekkei/shiten.png" alt="予約につながる導線設計5つの視点: 入力項目を3つまで絞る、電話以外の予約手段を用意する、予約後の流れを可視化する、最初の動線を1つに絞る、スマホでの見やすさを確認する" loading="lazy"><figcaption>予約につながる導線設計5つの視点</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="予約につながる導線設計5つの視点: 入力項目を3つまで絞る、電話以外の予約手段を用意する、予約後の流れを可視化する、最初の動線を1つに絞る、スマホでの見やすさを確認する" loading="lazy"><figcaption>予約につながる導線設計5つの視点</figcaption></figure>
 
 <h3 id="1-3">視点1: 入力項目を3つまで絞る</h3>
 <p>必須項目は氏名・連絡先・希望日時の3つにとどめ、症状や相談内容は任意欄にします。<strong>「後で聞けばいい情報」を初回フォームに含めないことが、送信完了率を左右する最大のポイントです</strong>。</p>
@@ -389,7 +387,7 @@
 <section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/site-audit/" data-cta="article_mid_seo">サイト無料採点（URL入力だけ） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
 <h2 id="ng">士業・クリニックが陥りやすいNG設計</h2>
 <p>士業やクリニックのホームページでは、良かれと思って追加した項目や案内が、かえって離脱を招いているケースが目立ちます。</p>
-<figure><img src="/images/yoyaku-tsunagaru-dosen-sekkei/ng.png" alt="予約フォームのNG設計とOK設計。NG設計: 入力項目15個以上を必須にする、予約手段が電話のみ、確認連絡が来ない。OK設計: 必須項目を3つに絞る、Web・LINE予約も用意する、自動返信で日時を通知する" loading="lazy"><figcaption>予約フォームのNG設計とOK設計</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="予約フォームのNG設計とOK設計。NG設計: 入力項目15個以上を必須にする、予約手段が電話のみ、確認連絡が来ない。OK設計: 必須項目を3つに絞る、Web・LINE予約も用意する、自動返信で日時を通知する" loading="lazy"><figcaption>予約フォームのNG設計とOK設計</figcaption></figure>
 
 <p><span class="txt-red">NG例1: 相談内容の詳細を予約段階で全て必須にする。</span>士業の相談予約では、案件の背景や希望する解決方法まで初回フォームで求めがちですが、これは面談時のヒアリングで十分です。</p>
 <p><span class="txt-red">NG例2: 予約完了後に何の連絡も来ない。</span>送信したのに確認の返信がないと、利用者は「予約できているか」が分からず不安なまま来院・来所することになります。</p>
@@ -397,7 +395,7 @@
 <p>自社サイトの技術面が基準を満たしているかは、<a href="/site-audit/">サイトの技術チェック（無料・URL入力だけ）</a>で確かめられます。登録は不要で、その場で点数が出ます。</p>
 <h2 id="3_2">予約導線を整備する3ステップ</h2>
 <p>導線の整備は、現状把握、離脱ポイントの改善、フォローの自動化という3ステップで迷いなく進められます。</p>
-<figure><img src="/images/yoyaku-tsunagaru-dosen-sekkei/steps.png" alt="予約導線を整備する3ステップ: 現状の予約経路を洗い出す、離脱ポイントを1つずつ改善する、予約後のフォローを自動化する" loading="lazy"><figcaption>予約導線を整備する3ステップ</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="予約導線を整備する3ステップ: 現状の予約経路を洗い出す、離脱ポイントを1つずつ改善する、予約後のフォローを自動化する" loading="lazy"><figcaption>予約導線を整備する3ステップ</figcaption></figure>
 
 <h3 id="1">ステップ1: 現状の予約経路を洗い出す</h3>
 <p>自院・自事務所のホームページで、電話・Web・LINEそれぞれの予約経路を実際にたどり、入力項目数や完了までのタップ数を洗い出します。第三者に実際に予約操作を試してもらうと、担当者では気づきにくい迷いポイントが見つかります。</p>

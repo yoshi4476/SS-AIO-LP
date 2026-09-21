@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -235,7 +233,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/aio-seo-meo-chigai/eyecatch.png" alt="AIO・SEO・MEOの違いと使い分け｜店舗が今やるべき順番" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/aio-seo-meo-chigai/eyecatch.png" alt="AIO・SEO・MEOの違いと使い分け｜店舗が今やるべき順番" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -266,7 +264,7 @@
 <p><strong>3つの違いは、狙う検索結果の場所と、評価される情報の種類の組み合わせにあります。</strong>表で並べると、混同していた部分が見えてきます。</p>
 <p>前提となる考え方は、<a href="/aio/aio-seo-taisaku/">AIO SEO対策とは？</a>で解説しています。</p>
 <p>前提となる考え方は<a href="/aio/aio-seo-audit/">AIO SEO監査とは？</a>で整理しています。</p>
-<figure><img src="/images/aio-seo-meo-chigai/sanshu.png" alt="AIO・SEO・MEOを一言でいうと示した図" loading="lazy"><figcaption>AIO・SEO・MEOを一言でいうと</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="AIO・SEO・MEOを一言でいうと示した図" loading="lazy"><figcaption>AIO・SEO・MEOを一言でいうと</figcaption></figure>
 
 <div class="table-wrap"><table>
 <thead>
@@ -371,7 +369,7 @@
 <p>実際の相談でも、業種による優先度の違いははっきり出ます。整体院からの相談は「マップに出ない」という悩みが大半で、着手初月はGoogleビジネスプロフィールの整備に絞ります。一方でBtoBのSaaS企業からの相談は「比較記事に自社が出てこない」という悩みが中心で、着手初月から記事のSEOとAIO構造に手をかけます。<strong>同じ「集客の悩み」でも、最初に触る場所はまったく違います</strong>。</p>
 <h2 id="3">3つを同時に伸ばす実務の進め方</h2>
 <p><strong>同時に伸ばす進め方は、現状把握・土台整備・地図対応・計測という4つの手順で進めます。</strong>順番を守らないと、整備の手戻りが発生します。</p>
-<figure><img src="/images/aio-seo-meo-chigai/susumekata.png" alt="AIO・SEO・MEOを同時に伸ばす4つの手順を示した図" loading="lazy"><figcaption>3つを同時に伸ばす4つの手順</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="AIO・SEO・MEOを同時に伸ばす4つの手順を示した図" loading="lazy"><figcaption>3つを同時に伸ばす4つの手順</figcaption></figure>
 
 <p>まず現状把握です。狙う検索語での自然検索順位、Googleマップの順位、AI Overviewでの引用有無を1つの表にまとめます。<strong>バラバラに管理すると、どこに手が足りていないかが見えなくなります</strong>。</p>
 <p>次に土台整備です。SEOの基本要件、つまり検索意図に合った内容・E-E-A-Tの明示・技術的な不備の解消を先に終わらせます。ここが整っていないと、後段のMEOとAIOの効果が乗りません。</p>

@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -227,7 +225,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/aio-seo-taisaku/eyecatch.png" alt="AIO SEO対策とは？両方に効く6つの施策と進める順番" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/aio-seo-taisaku/eyecatch.png" alt="AIO SEO対策とは？両方に効く6つの施策と進める順番" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -263,7 +261,7 @@
 <p>よくある誤解は、AIOを「AI向けの別のライティング技術」と捉えてしまうことです。実際には、検索意図に正しく答える記事の書き方を、より抽出しやすい形に整えているだけです。ゼロから新しい文章術を学ぶ必要はありません。今書いている記事に、この後紹介する6つの施策を足していく形で十分対応できます。</p>
 <h2 id="6">両方に効く6つの施策｜まず全体像をつかむ</h2>
 <p><strong>両方に効く施策は、AIが抽出しやすくする構造面3つと、検索順位を支える権威面3つに分かれます。</strong>片方だけでは効果が半減します。</p>
-<figure><img src="/images/aio-seo-taisaku/shisaku.png" alt="AIOとSEO両方に効く6つの施策を示した図" loading="lazy"><figcaption>AIOとSEO両方に効く6つの施策</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="AIOとSEO両方に効く6つの施策を示した図" loading="lazy"><figcaption>AIOとSEO両方に効く6つの施策</figcaption></figure>
 
 <div class="table-wrap"><table>
 <thead>
@@ -326,7 +324,7 @@
 <section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_mid_aio">AI検索の対応度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
 <h2 id="4">施策を実行する順番｜4ステップで進める</h2>
 <p><strong>実行する順番は、現状把握・構造面3施策・権威面3施策・月次計測の4ステップです。</strong>順番を崩すと、どの施策が効いたか検証できなくなります。</p>
-<figure><img src="/images/aio-seo-taisaku/junban.png" alt="施策を進める4ステップを示した図" loading="lazy"><figcaption>施策を進める4ステップ</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="施策を進める4ステップを示した図" loading="lazy"><figcaption>施策を進める4ステップ</figcaption></figure>
 
 <p>まず現状把握です。既存記事の検索順位とAI Overviewでの引用有無を1枚の表にまとめます。<strong>ここを飛ばすと、後の効果測定で何が原因か分からなくなります</strong>。記事数が多いサイトでは、まず表示回数の多い上位20記事に絞って着手するのが現実的です。全記事を一度に棚卸ししようとすると、途中で作業が止まりがちです。</p>
 <p>次に構造面3施策です。冒頭回答・H2結論・FAQ整備は文章の書き換えだけで完結するため、着手コストが低く効果測定もしやすい順番です。</p>

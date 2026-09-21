@@ -439,8 +439,11 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
 
     eyecatch = ""
     if meta.get("eyecatch"):
+        # アイキャッチは最初に見える最大の要素（LCP）。優先して読む
         eyecatch = (f'<figure class="article-eyecatch"><img src="{meta["eyecatch"]}" '
-                    f'alt="{meta["title"]}" width="1200" height="675"></figure>')
+                    f'alt="{meta["title"]}" width="1200" height="675" fetchpriority="high" decoding="async"></figure>')
+    # 本文の画像は画面に入るまで読まない（モバイルで1.5MB超を先に運んでいた）
+    content = re.sub(r'<img src="(/images/[^"]+)"(?![^>]*loading=)', r'<img src="" loading="lazy" decoding="async"', content)
 
     html = template
     replacements = {
@@ -643,11 +646,9 @@ BLOG_PAGE = """<!DOCTYPE html>
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="{site} 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){{setTimeout(function(){{var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);}},1200);}});</script>
 <link rel="stylesheet" href="/css/style.css">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js"></script>

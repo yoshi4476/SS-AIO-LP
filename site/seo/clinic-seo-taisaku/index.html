@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -227,7 +225,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/clinic-seo-taisaku/eyecatch.png" alt="クリニックSEOとは？順位が上がる5つの施策" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/clinic-seo-taisaku/eyecatch.png" alt="クリニックSEOとは？順位が上がる5つの施策" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -298,7 +296,7 @@
 <p>執筆者名だけを載せて満足してしまうケースも多く見られます。<strong>資格の種類・専門分野・経歴年数まで具体的に書く</strong>ことで、初めて監修体制として評価される水準に近づきます。プロフィールページを別に作り、症状ページから相互にリンクする構成が実務上は扱いやすい方法です。</p>
 <h2 id="seo5">検索順位を左右するクリニックSEO5つの施策</h2>
 <p><strong>検索順位を左右するクリニックSEOの施策は、監修者明示から構造化データまでの5つに整理できます。</strong>優先順位をつけずに全部を同時に進めようとすると、どれも中途半端になりがちです。</p>
-<figure><img src="/images/clinic-seo-taisaku/steps.png" alt="クリニックSEO5つの施策: 監修者情報を明示、症状KWで構成、内部リンクを整備、構造化データ実装、NG表現をチェック" width="1200" height="675" loading="lazy"><figcaption>クリニックSEO5つの施策（当メディア作成）</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="クリニックSEO5つの施策: 監修者情報を明示、症状KWで構成、内部リンクを整備、構造化データ実装、NG表現をチェック" width="1200" height="675" loading="lazy"><figcaption>クリニックSEO5つの施策（当メディア作成）</figcaption></figure>
 
 <ol>
 <li>院長・監修医の氏名と資格をページ内に明示する</li>
@@ -333,7 +331,7 @@
 <p><strong>クリニックSEOでよくある失敗は、監修者情報の欠如・MEO偏重・表現規制の見落としの3つです。</strong>どれも致命的ではありませんが、気づかないまま長期間放置されがちです。</p>
 <p>関連する内容は<a href="/ai-marketing/online-shinryo-checklist/">オンライン診療チェックリスト</a>で整理しています。</p>
 <p>つまずきやすい点は<a href="/seo/clinic-seo-consulting-erabikata/">クリニックのSEOコンサルティング</a>で整理しています。</p>
-<figure><img src="/images/clinic-seo-taisaku/mistakes.png" alt="クリニックSEOでよくある失敗3つ: 監修者情報がない、MEOだけに偏る、表現規制を見落とす" width="1200" height="675" loading="lazy"><figcaption>クリニックSEOでよくある失敗3つ（当メディア作成）</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="クリニックSEOでよくある失敗3つ: 監修者情報がない、MEOだけに偏る、表現規制を見落とす" width="1200" height="675" loading="lazy"><figcaption>クリニックSEOでよくある失敗3つ（当メディア作成）</figcaption></figure>
 
 <p>監修者情報がないと、YMYL基準を満たせずSEOの評価が頭打ちになります。まず院長のプロフィールページを整備することが、遠回りに見えて最短の対処法です。</p>
 <p>MEO対策だけに集中し、SEOを後回しにする失敗もよく見られます。当社はMEO運用サービス「G-ran」で通算<strong>3,200店舗以上</strong>を運用してきましたが、地図の表示だけでは拾えない一般検索の需要が一定数あることを、この規模の運用データから実感しています。</p>

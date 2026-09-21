@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -235,7 +233,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/shika-meo-taisaku/eyecatch.png" alt="歯科医院のMEO対策｜自由診療で新患を増やす7つの実践ポイント" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/shika-meo-taisaku/eyecatch.png" alt="歯科医院のMEO対策｜自由診療で新患を増やす7つの実践ポイント" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -303,7 +301,7 @@
 
 <h2 id="meo5">歯科医院MEO対策の基本5ステップ</h2>
 <p>歯科医院MEO対策は、基本情報とカテゴリの土台整備から、写真・口コミ・投稿の継続運用まで5段階で進めます。</p>
-<figure><img src="/images/shika-meo-taisaku/steps.png" alt="歯科医院MEO対策の基本5ステップ: 基本情報の統一、メインカテゴリの固定、写真で不安を減らす、口コミの依頼と返信、自由診療の投稿更新" loading="lazy"><figcaption>歯科医院MEO対策の基本5ステップ。前半3つが土台整備、後半2つが継続運用です</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="歯科医院MEO対策の基本5ステップ: 基本情報の統一、メインカテゴリの固定、写真で不安を減らす、口コミの依頼と返信、自由診療の投稿更新" loading="lazy"><figcaption>歯科医院MEO対策の基本5ステップ。前半3つが土台整備、後半2つが継続運用です</figcaption></figure>
 
 <h3 id="1-nap">ステップ1: 基本情報をNAP統一で正確に登録する</h3>
 <p>医院名・住所・電話番号（NAP）を、公式サイトや歯科ポータルサイトの表記と完全に一致させます。矯正・審美歯科など<strong>自由診療専用のランディングページを別に持つ歯科医院は、そのページのNAPも本院と一致させる</strong>必要があります。表記が食い違うと、評価が分散する原因になります。</p>
@@ -355,14 +353,14 @@
 </tbody>
 </table></div>
 <p>追加カテゴリは登録すれば終わりではありません。<strong>ビジネス説明文に治療内容を具体語で書き込む</strong>ことで、検索との照合対象が広がり、後述するAI検索の引用素材にもなります。数を追うのではなく、実際に力を入れている分野だけを厳選して登録してください。</p>
-<figure><img src="/images/shika-meo-taisaku/category-ng-ok.png" alt="メインカテゴリ設定のNG・OK比較: NGはメインを「矯正歯科」に変更し一般の「歯医者」検索で露出低下・専門外の患者接点を失う。OKはメインを「歯科医院」で固定し追加カテゴリで矯正・審美を補完・保険診療と自由診療を両取り" loading="lazy"><figcaption>メインカテゴリ設定のNG・OK比較</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="メインカテゴリ設定のNG・OK比較: NGはメインを「矯正歯科」に変更し一般の「歯医者」検索で露出低下・専門外の患者接点を失う。OKはメインを「歯科医院」で固定し追加カテゴリで矯正・審美を補完・保険診療と自由診療を両取り" loading="lazy"><figcaption>メインカテゴリ設定のNG・OK比較</figcaption></figure>
 
 <p>私たちがG-ranの支援現場で歯科医院に伝えているのは、<mark>「診療実態のない専門カテゴリは登録しない」</mark>という原則です。矯正の症例が月1件程度なのに「矯正歯科」を前面に出すと、来院後の期待値とのギャップが低評価につながります。カテゴリは実態を伝える道具であり、集患を誇張する道具ではありません。</p>
 <p>追加カテゴリの見直しは、開業当初に一度設定したら終わりではなく、診療内容の変化に合わせて年1回は棚卸しする運用が理想です。新しく力を入れ始めた分野があれば追加し、実施していない分野は外す。この小さな更新の積み重ねが、検索との関連性を保つ土台になります。</p>
 <section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/meo/" data-cta="article_mid_meo">マップ集客の整備度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
 <h2 id="_2">歯科医院の口コミ運用で注意したい医療広告ガイドライン</h2>
 <p>歯科医院の口コミ運用は、<strong>自由診療の金額表現</strong>と<strong>症状・治療内容への言及</strong>の2点に、他業種にはない注意が必要です。</p>
-<figure><img src="/images/shika-meo-taisaku/kuchikomi-ng.png" alt="歯科医院の口コミ返信で避けたい3つの表現: 症状・治療内容への言及、自由診療の金額を断定する表現、「絶対」「必ず」等の誇大表現" loading="lazy"><figcaption>歯科医院の口コミ返信で避けたい3つの表現</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="歯科医院の口コミ返信で避けたい3つの表現: 症状・治療内容への言及、自由診療の金額を断定する表現、「絶対」「必ず」等の誇大表現" loading="lazy"><figcaption>歯科医院の口コミ返信で避けたい3つの表現</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 自由診療の金額を書かれた口コミへの返信</span><br>「インプラント1本◯万円でした」という口コミに、金額を肯定・訂正する形で返信すると、実質的な料金広告とみなされるおそれがあります。返信では金額に触れず、来院への感謝と「詳しくは窓口までお問い合わせください」という一文で受け止めてください。</div>
 

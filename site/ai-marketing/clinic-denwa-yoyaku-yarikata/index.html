@@ -19,12 +19,10 @@
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=5eeccfba">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=96cf94fa"></script>
 <script type="application/ld+json">
@@ -235,7 +233,7 @@
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/clinic-denwa-yoyaku-yarikata/eyecatch.png" alt="クリニックの電話予約のやり方｜受付が聞く5項目と対応の流れ" width="1200" height="675"></figure>
+    <figure class="article-eyecatch"><img src="/images/clinic-denwa-yoyaku-yarikata/eyecatch.png" alt="クリニックの電話予約のやり方｜受付が聞く5項目と対応の流れ" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -293,7 +291,7 @@
 <h2 id="4">クリニックの電話予約対応、基本の流れ4ステップ</h2>
 <p><strong>電話予約対応の基本は、受電・聞き取り・空き枠提示・復唱確定の4ステップに固定することです。</strong>この順番さえ守れば、対応者による差はほとんど出ません。</p>
 <p>実際の進め方については、<a href="/ai-marketing/clinic-kaigyou-yarikata/">クリニック開業のやり方</a>にまとめています。</p>
-<figure><img src="/images/clinic-denwa-yoyaku-yarikata/flow.png" alt="電話予約対応の基本4ステップ: 電話を受ける、5項目を聞き取る、空き枠を提示する、復唱して確定する" width="1200" height="400" loading="lazy"><figcaption>電話予約対応の基本4ステップ（当メディア作成）</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="電話予約対応の基本4ステップ: 電話を受ける、5項目を聞き取る、空き枠を提示する、復唱して確定する" width="1200" height="400" loading="lazy"><figcaption>電話予約対応の基本4ステップ（当メディア作成）</figcaption></figure>
 
 <p>4ステップのうち、特に効果が大きいのは最後の「復唱して確定する」です。電話予約対応の要は、日時・氏名・連絡先の復唱の徹底。これだけで聞き間違いによる予約ミスの大半を防げます。</p>
 <p>受付が1人だけのクリニックでは、この型がないと電話ごとに対応の質がばらつきます。属人的な対応は、担当者が休んだ日に聞き漏れが起きる最大の原因です。マニュアルに4ステップを書き出し、新人が最初に読む資料にしておくと定着が早まります。</p>
@@ -301,7 +299,7 @@
 <p><strong>電話予約で聞くべき項目は、初診再診・症状・希望日時・氏名・連絡先の5つで、この順に固定すると聞き漏れを防げます。</strong>5項目という数を決めておくだけで、聞き取りにかかる時間も安定します。</p>
 <div class="definition-box"><span class="term">初診とは</span>、その医療機関を過去に受診したことがない、または一定期間受診していない患者の診療を指します。再診より問診とカルテ作成に時間がかかるため、電話の段階で見分ける必要があります。</div>
 
-<figure><img src="/images/clinic-denwa-yoyaku-yarikata/kikitori.png" alt="電話予約で聞き取る5つの項目: 初診・再診の別、症状・受診理由、希望日時、氏名・生年月日、連絡先電話番号" loading="lazy"><figcaption>電話予約で聞き取る5つの項目</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="電話予約で聞き取る5つの項目: 初診・再診の別、症状・受診理由、希望日時、氏名・生年月日、連絡先電話番号" loading="lazy"><figcaption>電話予約で聞き取る5つの項目</figcaption></figure>
 
 <div class="table-wrap"><table>
 <thead>
@@ -437,7 +435,7 @@
 <p>この2点を曖昧にしたまま導入すると、AIが受けた予約と受付が手書きで管理する予約が二重に存在し、かえって重複予約が増えるケースがあります。AI導入は、既存の型を壊さずに一次対応だけを置き換えるという考え方で検討してください。</p>
 <h2 id="ng">クリニックの電話予約でやってはいけないNG対応</h2>
 <p><strong>電話予約のNG対応は、曖昧な返事で保留すること、無断キャンセルの放置、初診と再診を同列に扱うことの3つです。</strong>この3つを避けるだけで、トラブルの大半は防げます。</p>
-<figure><img src="/images/clinic-denwa-yoyaku-yarikata/vs.png" alt="電話予約対応のNG・OK比較。NGは曖昧な返事での保留・無断キャンセルの放置・初診再診の同列扱い。OKは確認期限を伝える・前日確認・初診の所要時間を長めに案内する対応" loading="lazy"><figcaption>電話予約対応、NGとOKの分かれ目</figcaption></figure>
+<figure><img src="" loading="lazy" decoding="async" alt="電話予約対応のNG・OK比較。NGは曖昧な返事での保留・無断キャンセルの放置・初診再診の同列扱い。OKは確認期限を伝える・前日確認・初診の所要時間を長めに案内する対応" loading="lazy"><figcaption>電話予約対応、NGとOKの分かれ目</figcaption></figure>
 
 <p>「一度確認して折り返します」で終わる曖昧な返事は、患者に不安を残したまま電話を切ることになります。折り返す期限をその場で伝えるだけで、印象は大きく変わります。</p>
 <p>初診の患者に再診と同じ短い案内で済ませると、来院当日に持ち物不足や時間超過が起きがちです。<strong>初診は所要時間を長めに案内する</strong>一言を、対応の型に必ず入れてください。</p>
