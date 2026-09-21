@@ -199,6 +199,16 @@ def error_log(site, phase, message, fix="", status="未対応"):
         return None
 
 
+def rewrite_effect(rows):
+    """リライトログの後順位・効果を埋める。rows: [{site, article, posAfter, effect}]"""
+    return _post({"action": "rewrite_effect", "rows": rows}) if enabled() else None
+
+
+def error_sync(phase, messages):
+    """今回出なかった同じ工程の「未対応」を「解消」にする（増えるだけの表を止める）"""
+    return _post({"action": "error_sync", "phase": phase, "messages": list(messages)}) if enabled() else None
+
+
 def rewrite_log(site, article, reason, summary, pos_before="", pos_after="", effect=""):
     """リライトの記録。前後の順位を残さないと効いたか判定できない。
     受け取り側のキーは posBefore / posAfter。名前が違うと黙って空欄になる"""
@@ -228,6 +238,12 @@ def main():
     elif cmd == "all":
         for k in all_kw():
             print(f"{k['site']:10s} {k['status']:6s} {k['keyword']}")
+    elif cmd == "error_sync":
+        # 使い方: hub_client.py error_sync <phase> <TODOを1行ずつ書いたファイル>
+        from pathlib import Path as _P
+        f = _P(sys.argv[3]) if len(sys.argv) > 3 else None
+        msgs = [x.strip() for x in f.read_text(encoding="utf-8").splitlines() if x.strip()] if f and f.exists() else []
+        print(error_sync(site, msgs))
     elif cmd == "error_log":
         # 使い方: hub_client.py error_log <phase> <message...>
         error_log("", site, " ".join(sys.argv[3:]))

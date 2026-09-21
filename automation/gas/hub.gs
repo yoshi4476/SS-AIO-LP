@@ -82,6 +82,7 @@ const TABS = {
             '登録日', '着手日', '公開日', '記事URL', '備考'],
   '記事作成ログ': ['公開日時', 'サイト', 'タイトル', 'キーワード', 'カテゴリ',
                  'スコア', '文字数', 'URL', '備考'],
+  'AI参照': ['日付', 'サイト', '参照元', '着地ページ', 'セッション'],
   'KPIレポート': ['日付', 'サイト', 'セッション', 'PV', '表示回数', 'クリック',
                 'CTR', '平均順位', 'CV', '備考'],
   'AIO計測': ['日付', 'サイト', 'AI Overview表示', 'AI参照セッション', 'ChatGPT',
@@ -224,6 +225,10 @@ function doPost(e) {
       case 'clean_inquiry': return json_(cleanInquiry_(body));
       case 'link_log':    return json_(linkLog_(body));
       case 'rewrite_log': return json_(rewriteLog_(body));
+      // 直した記事の「後順位・効果」を、あとから埋める（rank_up --effect が週次で呼ぶ）
+      case 'rewrite_effect': return json_(rewriteEffect_(body));
+      // 救済のTODOのうち、今回出なかったものを「解消」にする（増えるだけの表を止める）
+      case 'error_sync': return json_(errorSync_(body));
       case 'admin':       return json_(admin_(body.task));
       // サイトの登録。setup_from_sheet.py が呼ぶ。
       // 手で書かせると、GA4のIDだけ空のままKPIが毎朝0で埋まる
@@ -499,6 +504,46 @@ function publishLog_(b) {
   return { ok: true };
 }
 
+/** 救済のTODOを同期する。今回のTODOに無い「未対応」の同じ工程の行は「解消」にする */
+function errorSync_(b) {
+  const sh = sheet_('エラーログ');
+  const phase = String(b.phase || '').trim();
+  const now = {};
+  (b.messages || []).forEach(function (m) { now[String(m || '').trim()] = true; });
+  if (!phase || sh.getLastRow() < 2) return { ok: true, closed: 0 };
+  const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
+  let closed = 0;
+  for (let i = 0; i < rows.length; i++) {
+    if (String(rows[i][2]).trim() !== phase) continue;
+    if (String(rows[i][5]).trim() !== '未対応') continue;
+    if (now[String(rows[i][3]).trim()]) continue;
+    sh.getRange(i + 2, 5).setValue('翌日の再監査で再発せず（自動）');
+    sh.getRange(i + 2, 6).setValue('解消');
+    closed++;
+  }
+  return { ok: true, closed: closed };
+}
+
+/** リライトログの「後順位・効果」を埋める。同じサイト・記事の、後順位が空の最新行 */
+function rewriteEffect_(b) {
+  const sh = sheet_('リライトログ');
+  if (sh.getLastRow() < 2) return { ok: true, updated: 0 };
+  const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 8).getValues();
+  let updated = 0;
+  (b.rows || []).forEach(function (r) {
+    for (let i = rows.length - 1; i >= 0; i--) {
+      if (String(rows[i][1]).trim() !== String(r.site || '').trim()) continue;
+      if (String(rows[i][2]).trim() !== String(r.article || '').trim()) continue;
+      if (String(rows[i][6] || '').trim() !== '') continue;
+      sh.getRange(i + 2, 7).setValue(r.posAfter || '');
+      sh.getRange(i + 2, 8).setValue(r.effect || '');
+      updated++;
+      break;
+    }
+  });
+  return { ok: true, updated: updated };
+}
+
 function errorLog_(b) {
   // fix（対応）を捨てていた。原因だけ残しても、次に何をすればいいかが
   // 記録されず、時間が経つと本人にも分からなくなる
@@ -547,6 +592,11 @@ function kpiLog_(b) {
                    (r.aio_est === undefined || r.aio_est === null) ? '' : r.aio_est, r.ai || 0,
                    bd.chatgpt || 0, bd.perplexity || 0, bd.gemini || 0, bd.copilot || 0,
                    r.aio_note || '']);
+    // AI検索からの流入は「どのページに着地したか」が価値。0か非0かだけでは何も分からない
+    (r.ai_pages || []).forEach(function (p) {
+      sheet_('AI参照').appendRow([r.date || '', siteLabel_(r.site), p.source || '',
+                                  p.page || '', Number(p.sessions) || 0]);
+    });
     Object.keys(total).forEach(function (k) { total[k] += Number(r[k] || 0); });
   });
 
@@ -599,7 +649,7 @@ function upsertDashboard_(rows, note) {
   rows.forEach(function (r) {
     const i = index[String(r[0])];
     const before = (i === undefined) ? undefined : Number(cur[i][1]);
-    const diff = (before === undefined || isNaN(before)) ? ''
+    const diff = (before === undefined || isNaN(before) || typeof r[1] !== 'number') ? ''
       : ((r[1] - before >= 0 ? '+' : '') + (Math.round((r[1] - before) * 10) / 10));
     const line = [r[0], r[1], diff, now, note];
     if (i === undefined) sh.appendRow(line);

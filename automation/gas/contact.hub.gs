@@ -51,7 +51,7 @@ function form_(body) {
     return { ok: false, error: 'お名前をご入力ください。' };
   }
 
-  const temp = leadTemp_(type, d.message);
+  const temp = leadTemp_(type, d.message, d, body.referer || d.referer || '');
   const row = leadSave_(site, type, temp, d);
   const silent = body.silent === true || body.silent === 'true';
   // 記録は済んでいる。メールで失敗しても、送信者にはエラーを返さない。
@@ -79,13 +79,21 @@ function form_(body) {
 }
 
 /** リードの温度。診断とサイト診断は、自社の情報を差し出しているので高く見る */
-function leadTemp_(type, message) {
+// 流入経路で温度を1段上げる。料金・サービス・診断・費用系の記事から来た人は、
+// 「相談」と書いていなくても導入を検討している
+const LEAD_HOT_PATHS = /\/lp\b|\/service|\/diagnosis|\/price|\/plan|hiyou|souba|daikou|gaichuu|contact/i;
+
+function leadTemp_(type, message, d, referer) {
   if (type === 'diagnosis' || type === 'site_audit') return 'HOT';
+  let level = 0;                                   // 0=COOL 1=WARM 2=HOT
   if (type === 'contact') {
     const msg = String(message || '');
-    return LEAD_HOT_WORDS.some(function (w) { return msg.indexOf(w) !== -1; }) ? 'HOT' : 'WARM';
+    level = LEAD_HOT_WORDS.some(function (w) { return msg.indexOf(w) !== -1; }) ? 2 : 1;
   }
-  return 'COOL';
+  // 会社名と電話番号の両方がある＝連絡を受ける前提で書いている
+  if (d && clean_(d.company) && clean_(d.tel || d.phone)) level++;
+  if (referer && LEAD_HOT_PATHS.test(String(referer))) level++;
+  return ['COOL', 'WARM', 'HOT'][Math.min(level, 2)];
 }
 
 /** 「問い合わせ」タブへ記録する。24時間以内の同一メールは既存行にまとめる */
@@ -189,6 +197,17 @@ function leadNotify_(site, type, temp, d, referer) {
   };
   if (isEmail_(d.email)) opts.replyTo = clean_(d.email);
   MailApp.sendEmail(opts);
+  // HOTは待たせない。スクリプトのプロパティに SLACK_WEBHOOK_URL があればSlackにも送る
+  if (temp === 'HOT') {
+    try {
+      const hook = PropertiesService.getScriptProperties().getProperty('SLACK_WEBHOOK_URL');
+      if (hook) {
+        UrlFetchApp.fetch(hook, { method: 'post', contentType: 'application/json',
+          payload: JSON.stringify({ text: opts.subject + '\n' + lines.join('\n') }),
+          muteHttpExceptions: true });
+      }
+    } catch (e) { Logger.log('Slack通知に失敗: ' + e); }
+  }
 }
 
 /** 送信者への自動返信。種別ごとに文面を変える */

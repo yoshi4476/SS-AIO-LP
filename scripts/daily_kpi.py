@@ -67,6 +67,19 @@ def ga4(prop, day):
             if any(d in src for d in doms):
                 out["ai"] += n
                 out["breakdown"][key] = out["breakdown"].get(key, 0) + n
+    # どのページに着地したか。AI検索は「引用されたページ」に来るので、0か非0かより
+    # ページが分かるほうが次の手につながる
+    out["ai_pages"] = []
+    if out["ai"]:
+        rep3 = c.run_report(RunReportRequest(
+            property=p, date_ranges=rng,
+            dimensions=[Dimension(name="sessionSource"), Dimension(name="landingPage")],
+            metrics=[Metric(name="sessions")], limit=200))
+        for r in rep3.rows:
+            src = r.dimension_values[0].value.lower()
+            if any(d in src for doms in AI_DOMAINS.values() for d in doms):
+                out["ai_pages"].append({"source": src, "page": r.dimension_values[1].value,
+                                        "sessions": int(r.metric_values[0].value)})
     return out
 
 
@@ -87,7 +100,6 @@ def aio_estimate(site_id):
     月ごとに出す（data/ai_citations/YYYY-MM.json）。APIでは取れない値なので推定と明記する"""
     try:
         import json as _j
-        from pathlib import Path as _P
         files = sorted((ROOT / "data" / "ai_citations").glob("*.json"))
         if not files:
             return {}

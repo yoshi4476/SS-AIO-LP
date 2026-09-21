@@ -1753,7 +1753,6 @@ def test_kw_plan_keeps_only_buyers():
         # 同じ問い合わせは期限内なら課金なしで返す。条件の調整で取り直して約1,000クレジット無駄にした
         rakko.CACHE_DIR = pathlib.Path(tempfile.mkdtemp())
         rakko.CONSUMED, rakko.BUDGET = 0.0, None
-        rakko.CACHE_DIR = saved_cache
         hits = {"n": 0}
         def counted(req, timeout=0):
             hits["n"] += 1
@@ -1768,6 +1767,7 @@ def test_kw_plan_keeps_only_buyers():
     finally:
         rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT = saved
         rakko.CONSUMED, rakko.BUDGET = 0.0, None
+        rakko.CACHE_DIR = saved_cache
 
     # 管制塔の一時的な404も待ってやり直す。取り下げ直後の追加で当たると未着手が0件で残る
     import hub_client
@@ -1900,6 +1900,30 @@ def test_hub_has_one_kpi_writer():
     check("CTRを文字列で書かない", "(r.ctr || 0) + '%'" not in hub, True)
 
 
+def test_five_hub_features_are_wired():
+    """管制塔まわりの5機能が、書く側と受ける側の両方につながっていること。
+
+    片側だけだと黙って何も起きない（rewrite_log がそうだった）。
+    """
+    print(chr(10) + "■ 管制塔の5機能の配線")
+    c = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
+    h = (ROOT / "automation" / "gas" / "hub.gs").read_text(encoding="utf-8")
+    d = (ROOT / "automation" / "gas" / "dashboard.gs").read_text(encoding="utf-8")
+    hc = (ROOT / "scripts" / "hub_client.py").read_text(encoding="utf-8")
+    ru = (ROOT / "scripts" / "rank_up.py").read_text(encoding="utf-8")
+    dk = (ROOT / "scripts" / "daily_kpi.py").read_text(encoding="utf-8")
+    wf = (ROOT / ".github" / "workflows" / "pipeline.yml").read_text(encoding="utf-8", errors="replace")
+    check("温度に流入経路を使う", "LEAD_HOT_PATHS" in c and "leadTemp_(type, d.message, d," in c, True)
+    check("HOTはSlackにも送る", "SLACK_WEBHOOK_URL" in c and "temp === 'HOT'" in c, True)
+    check("問い合わせを生んだページを出す", "問い合わせを生んだページ" in d, True)
+    check("エラーログの同期: 受ける側", "case 'error_sync'" in h and "function errorSync_" in h, True)
+    check("エラーログの同期: 送る側", "error_sync rescue" in wf and "def error_sync" in hc, True)
+    check("後順位: 受ける側", "case 'rewrite_effect'" in h and "function rewriteEffect_" in h, True)
+    check("後順位: 送る側", "hub_client.rewrite_effect(" in ru and "def rewrite_effect" in hc, True)
+    check("AI参照の着地ページ: 受ける側", "'AI参照'" in h and "ai_pages" in h, True)
+    check("AI参照の着地ページ: 送る側", 'out["ai_pages"]' in dk and "landingPage" in dk, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1947,7 +1971,8 @@ def main():
               test_kw_plan_keeps_only_buyers,
               test_reports_carry_diagnosis_and_next_actions,
               test_rewrites_reach_the_sheet,
-              test_hub_has_one_kpi_writer):
+              test_hub_has_one_kpi_writer,
+              test_five_hub_features_are_wired):
         try:
             t()
         except Exception as e:

@@ -300,6 +300,7 @@ def show_effect(pages_by_site):
     print(f"  {'記事':<34}{'直した日':<12}{'直前':>7}{'いま':>7}{'動き':>8}")
     print("  " + "-" * 70)
     up = down = same = 0
+    posted = []          # 管制塔のリライトログへ「後順位・効果」を埋める分
     for slug, rec in sorted(log.items(), key=lambda kv: kv[1].get("at", "")):
         now = None
         for pages in pages_by_site.values():
@@ -318,10 +319,22 @@ def show_effect(pages_by_site):
             up += diff > 0.5
             down += diff < -0.5
             same += abs(diff) <= 0.5
+            posted.append({"site": rec.get("site", ""), "article": slug,
+                           "posAfter": round(now, 1),
+                           "effect": ("上昇 " if diff > 0.5 else "下降 " if diff < -0.5 else "変わらず ") + f"{diff:+.1f}位"})
         print(f"  {slug[:32]:<34}{rec.get('at','')[:10]:<12}"
               f"{before or 0:>6.1f}位{now:>6.1f}位{mark:>8}")
     print("  " + "-" * 70)
     print(f"  上がった {up} / 下がった {down} / 変わらず {same}")
+    # 「直して効いたか」を台帳の表でも見られるようにする。手元の画面だけでは残らない
+    if posted:
+        try:
+            import hub_client
+            if hub_client.enabled():
+                r = hub_client.rewrite_effect(posted) or {}
+                print(f"  管制塔のリライトログに後順位を {r.get('updated', 0)} 件埋めました")
+        except Exception as e:
+            print(f"  （管制塔への記録をスキップ: {str(e)[:60]}）")
     print("\n  ※ 順位はGoogleが決める。反映に数週間かかり、競合の動きも混ざる")
 
 

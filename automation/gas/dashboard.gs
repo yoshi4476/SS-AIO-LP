@@ -55,6 +55,21 @@ function refreshDashboard() {
   const errSh = ss.getSheetByName('エラーログ');
   const errN = errSh ? Math.max(0, errSh.getLastRow() - 1) : 0;
 
+  // どのページが問い合わせを生んだか。送信元ページ（12列目）を数え、
+  // 記事作成ログのURL（8列目）と突き合わせて題名を添える
+  const byPage = {};
+  inq.forEach(function (r) {
+    const src = String(r[11] || '').trim().replace(/[?#].*$/, '');
+    if (!src) return;
+    byPage[src] = (byPage[src] || 0) + 1;
+  });
+  const titleOf = {};
+  logs.forEach(function (r) {
+    const u = String(r[7] || '').trim().replace(/[?#].*$/, '');
+    if (u) titleOf[u] = String(r[2] || '');
+  });
+  const topPages = Object.keys(byPage).sort(function (a, b) { return byPage[b] - byPage[a]; }).slice(0, 3);
+
   const rows = [
     ['公開記事数（累計）', logs.length],
     ['本日の公開数', todayN],
@@ -70,6 +85,10 @@ function refreshDashboard() {
     ['　うちHOT', hot],
     ['　未対応', open],
     ['エラーログ件数', errN],
+    ...topPages.map(function (u, i) {
+      const t = titleOf[u] || titleOf[u.replace(/\/$/, '')] || u.replace(/^https?:\/\/[^/]+/, '');
+      return ['　問い合わせを生んだページ ' + (i + 1) + '位', byPage[u] + '件 ｜ ' + t.slice(0, 40)];
+    }),
   ];
 
   // 全行を消さない。流入の合計（kpi_log が書く7項目）が消えていた

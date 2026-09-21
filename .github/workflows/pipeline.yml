@@ -139,6 +139,12 @@ jobs:
               python scripts/hub_client.py error_log rescue "$t" || true
             done
           fi
+          # 今回出なかったTODOは「解消」にする。書き足すだけだと214行が全部「未対応」で並ぶ
+          # 監査そのものが動かなかった回（AUDIT_OK= が無い）は同期しない。全部「解消」にしてしまう
+          if echo "$out" | grep -q "AUDIT_OK="; then
+            echo "$out" | grep "^TODO:" > "$RUNNER_TEMP/todos.txt" || true
+            python scripts/hub_client.py error_sync rescue "$RUNNER_TEMP/todos.txt" || true
+          fi
 
       # 順位を測らないとリライト対象が勘になる。GSCの実データを日次で残す
       - name: 順位の記録とAI引用の推定
