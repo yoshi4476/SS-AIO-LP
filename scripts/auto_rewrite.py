@@ -46,18 +46,46 @@ def sh(args, timeout=1800):
                           encoding="utf-8", errors="ignore", timeout=timeout)
 
 
+def aio_items():
+    """1ページ目にいるのに AI Overview に答えを取られている疑いの記事（最優先）。
+
+    ai_citation_check が月ごとに data/ai_citations/YYYY-MM.json に残す。
+    順位はあるのにクリックが期待の半分未満＝AIが答えを出し、自社は引用されていない。
+    直す手は「そこにしか無い情報」を先頭に置くこと（第8.2章の最高優先度）
+    """
+    files = sorted((ROOT / "data" / "ai_citations").glob("*.json"))
+    if not files:
+        return []
+    try:
+        d = json.loads(files[-1].read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    out, seen = [], set()
+    for sid, s in (d.get("sites") or {}).items():
+        for it in s.get("items") or []:
+            slug = (it.get("url") or "").rstrip("/").rsplit("/", 1)[-1]
+            if not slug or slug in seen or not (ROOT / "articles" / f"{slug}.md").is_file():
+                continue
+            seen.add(slug)
+            out.append({"kind": "aio", "slug": slug, "site": sid,
+                        "why": (f"{it.get('pos', 0):.1f}位・表示{it.get('imp', 0)}・CTR{it.get('ctr', 0)}%"
+                                f"（目安{it.get('expected_ctr', 0)}%）｜「{it.get('kw', '')}」でAI Overviewに答えを取られている疑い")})
+    return out
+
+
 def targets():
     """直すべき記事を、効く順に受け取る。
 
-    rank_up は全順位帯を見て「その帯で効く手」を判定している。
-    4〜10位でクリックが取れていないページは、順位があるぶん直せば即効く。
-    そちらを先に返し、無ければ auto_improve の一覧へ落とす。
+    最優先は「1ページ目にいるのに AI Overview に取られている」記事（aio_items）。
+    次に rank_up の「4〜10位でクリックが取れていない」。無ければ auto_improve の一覧。
     """
+    head = aio_items()
     try:
         import rank_up
         items = rank_up.human_items()
-        if items:
-            return items
+        if items or head:
+            seen = {x["slug"] for x in head}
+            return head + [x for x in items if x["slug"] not in seen]
     except Exception as e:
         print(f"  （rank_up から取れないため auto_improve を使います: {str(e)[:40]}）")
     import auto_improve as ai
@@ -98,6 +126,13 @@ WHAT = {
               "description は60〜160字。狙う語を含め、タイトルで言っていないことを書く\n"
               "（同じ文言を繰り返すと、検索結果で見える情報量が半分になる）。\n"
               "本文にない内容をタイトルや説明文に書かないこと（書くなら本文にも追記する）。"),
+    "aio": ("この記事は検索1ページ目にいるのに、AI Overview（AIによる概要）が答えを出してしまい、\n"
+            "クリックされていません。AIが引用するのは「そこにしか無い情報」です。\n"
+            "1. 冒頭200字を、下に示す自社の一次情報（実数）を含む断言型の回答に書き直す\n"
+            "2. 狙う語に対する答えを、40〜60字の1文＋比較表（または手順表）で本文の最初のH2直下に置く\n"
+            "3. 「失敗例・注意点」の見出しに、一次情報から言える具体例を1つ足す\n"
+            "4. FAQ の最初の1問を、狙う語そのものの質問にし、回答に一次情報の数字を1つ入れる\n"
+            "使ってよい自社の一次情報（**この数字以外の新しい数字は書かない**）:\n{facts}"),
     "review": ("直前の自動修正で表示回数が落ちています。検索意図とずれた可能性があります。\n"
                "冒頭200字と各H2直下の1文結論を読み、狙う語で検索した人が求めている答えに\n"
                "なっているか確かめてください。ずれていれば直してください。\n"
@@ -141,7 +176,7 @@ def changed_since(snap):
     return sorted(n for n in set(snap) | set(now) if snap.get(n) != now.get(n))
 
 
-def check(slug, before, before_warns, snap=None):
+def check(slug, before, before_warns, snap=None, allowed=""):
     """直した結果を検算する。通らない理由を返す（空なら合格）"""
     if snap is not None:
         other = [c for c in changed_since(snap) if c != f"{slug}.md"]
@@ -163,7 +198,7 @@ def check(slug, before, before_warns, snap=None):
         return f"タイトルに狙う語が入っていません（{kw}）"
 
     b = before[2]
-    new_nums = numbers(after) - numbers(b)
+    new_nums = numbers(after) - numbers(b) - numbers(allowed or "")
     if new_nums:
         return f"本文に無かった数字が増えました: {dict(list(new_nums.items())[:4])}"
     lost = sources(b) - sources(after)
@@ -231,7 +266,14 @@ def run_one(item, write):
         return True, "（確認のみ）"
 
     before, before_warns, snap = meta(slug), warns(slug), snapshot()
-    prompt = PROMPT.format(slug=slug, why=item["why"], what=WHAT[kind])
+    allowed = ""
+    what = WHAT[kind]
+    if kind == "aio":
+        import facts as F
+        _, fs = F.load_for(item.get("site") or site_of(slug))
+        allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
+        what = what.format(facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    prompt = PROMPT.format(slug=slug, why=item["why"], what=what)
     # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
     # この工程がやるのは1ファイルの書き換えだけで、コマンド実行も外部通信も要らない
     r = sh(["claude", "-p", prompt, "--max-turns", "40",
@@ -242,7 +284,7 @@ def run_one(item, write):
     if p.read_text(encoding="utf-8-sig") == before[2]:
         return True, "変更なし（直す必要なしと判断）"
 
-    ng = check(slug, before, before_warns, snap)
+    ng = check(slug, before, before_warns, snap, allowed)
     if ng:
         sh(["git", "checkout", "--", f"articles/{slug}.md"])
         sh([sys.executable, "scripts/build.py"], timeout=1800)

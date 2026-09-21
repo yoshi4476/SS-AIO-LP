@@ -111,12 +111,26 @@ jobs:
             echo "要対応: ラッコキーワードのクレジットが尽きました（在庫の組み直しが途中）" >> automation/logs/findings.txt
           fi
 
+      # AI検索に本当に引用されているかを実測する（キーがあるエンジンだけ。無ければ飛ばす）。
+      # 1サイト20語・月1回。試行錯誤で本番を叩かない
+      - name: AI引用の実測
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+        run: |
+          out=$(python scripts/ai_cite_check.py); echo "$out"
+          if echo "$out" | grep -q "AI_CITED="; then
+            mkdir -p automation/logs
+            echo "AI引用の実測: $(echo "$out" | grep 'AI_CITED=' | sed 's/AI_CITED=//')語で引用（data/ai_citations 参照）" >> automation/logs/findings.txt
+          fi
+
       - name: 目標値の保存をコミット
         if: steps.gate.outputs.ready == 'true'
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add reports/targets.json reports/targets-*.json docs/kw-plan-*.md || true
+          git add reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json || true
           if git diff --cached --quiet; then
             echo "保存すべき目標値の変更なし"
           else

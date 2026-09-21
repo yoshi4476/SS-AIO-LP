@@ -979,7 +979,7 @@ Morning/Afternoon Pipeline 冒頭で kpi_feedback.md を読み込み:
 | 優先度 | 条件 | 対処 |
 |:--|:--|:--|
 | 最高 | GSC順位11-30位 | H2追加・一次情報追加・内部リンク強化で1ページ目へ |
-| 最高 | 順位10位以内なのにAI Overview引用なし | 冒頭断言回答化・H2直下1文結論・FAQ整備・数値ファクト追加・鮮度更新 |
+| 最高 | 順位10位以内なのにAI Overview引用なし | 冒頭断言回答化・H2直下1文結論・FAQ整備・数値ファクト追加・鮮度更新。**`auto_rewrite` の `aio` 種別が週次で自動処理**（`ai_citation_check` の疑い一覧を最優先に取り、登録済みの一次情報の数字だけを足す） |
 | 高 | 表示回数高×CTR低 | タイトル・メタディスク改善。AI Overview表示クエリなら引用獲得+CV導線強化 |
 | 中 | 公開30日以上&インデックス未登録 | テクニカルSEO確認 |
 | 中 | 公開/更新から6ヶ月経過 | 鮮度更新（数値・事例・料金・「◯月時点」・dateModified） |
@@ -1018,6 +1018,10 @@ Morning/Afternoon Pipeline 冒頭で kpi_feedback.md を読み込み:
 3. GA4 AI参照元をプラットフォーム別に確認 → 伸びているプラットフォームの重視シグナル（第0章）に沿った施策強化
 4. FAQ Schema整合性チェック（サンプル5記事）
 5. 結果を「AIO計測」タブと kpi_feedback.md に記録
+6. **引用の実測**（月次）: `python scripts/ai_cite_check.py` が主要20語を検索つきAI（ChatGPT / Gemini / Perplexity）に
+   投げ、出典に自社URLが入るかを `data/ai_citations/YYYY-MM.json` の `measured` に残す。キーは
+   `OPENAI_API_KEY` / `GEMINI_API_KEY` / `PERPLEXITY_API_KEY`（あるものだけ使う。無ければ飛ばす）。
+   月1回・1サイト20語まで。試行錯誤で本番を叩かない（`--limit 1` で1語だけ試す）
 
 ### 8.6 自動修正と、その見直し（週次・必須セット）
 

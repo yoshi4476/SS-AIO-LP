@@ -2055,6 +2055,21 @@ def test_entities_link_articles_to_official_sources():
     check("補助金の配信も同じ実体を書く", "ABOUT_JSONLD" in p and "MENTIONS_JSONLD" in p, True)
 
 
+def test_aio_rewrites_and_citation_measurement():
+    """AI Overviewに取られている記事を最優先で直し、引用は実測できる形になっていること"""
+    print(chr(10) + "■ AI引用の対策と実測")
+    import auto_rewrite as A, ai_cite_check as C
+    check("aio 種別の直し方がある", "aio" in A.WHAT and "{facts}" in A.WHAT["aio"], True)
+    check("一次情報の数字は検算で許される", A.numbers("継続率86.5%") - A.numbers("") - A.numbers("74件中10件（86.5%）"), A.numbers(""))
+    check("一次情報に無い数字は今までどおり止める", bool(A.numbers("継続率86.5%") - A.numbers("") - A.numbers("")), True)
+    src = (ROOT / "scripts" / "ai_cite_check.py").read_text(encoding="utf-8")
+    check("キーが無ければ課金せずに飛ばす", "AI_CITE=skipped" in src and "if not engines:" in src, True)
+    check("自社URLはドメインで判定する", C.domain_of("https://www.ai.7senses.co.jp/aio/x/"), "ai.7senses.co.jp")
+    check("1サイトの上限は20語", C.MAX_QUERIES, 20)
+    wf = (ROOT / ".github" / "workflows" / "monthly-report.yml").read_text(encoding="utf-8", errors="replace")
+    check("月次で実測を回す", "ai_cite_check.py" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2107,7 +2122,8 @@ def main():
               test_merge_is_wired,
               test_jisseki_intake_never_invents_numbers,
               test_speed_fix_keeps_pages_light,
-              test_entities_link_articles_to_official_sources):
+              test_entities_link_articles_to_official_sources,
+              test_aio_rewrites_and_citation_measurement):
         try:
             t()
         except Exception as e:

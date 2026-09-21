@@ -106,8 +106,12 @@ def aio_estimate(site_id):
         d = _j.loads(files[-1].read_text(encoding="utf-8"))
         s = (d.get("sites") or {}).get(site_id) or {}
         n = int(s.get("suspect_taken") or 0)
-        return {"aio_est": n,
-                "aio_note": f"推定（{d.get('date', '')} CTR歪み・判定{s.get('judged', 0)}語中）"}
+        note = f"推定（{d.get('date', '')} CTR歪み・判定{s.get('judged', 0)}語中）"
+        # 実測（ai_cite_check）があれば添える。推定と実測を同じ欄で区別できるように
+        m = ((d.get("measured") or {}).get("sites") or {}).get(site_id)
+        if m:
+            note += f"／実測: 引用{m.get('cited', 0)}/{m.get('queries', 0)}語（{'・'.join((d.get('measured') or {}).get('engines') or [])}）"
+        return {"aio_est": n, "aio_note": note}
     except Exception:
         return {}
 
