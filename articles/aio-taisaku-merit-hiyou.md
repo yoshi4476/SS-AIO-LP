@@ -50,6 +50,8 @@ faq:
 
 AIO対策導入の最大のメリットは、広告費なしでAI回答内に引用され続けられることです。
 
+実際の例を先に押さえるなら、[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)が参考になります。
+
 <figure><img src="/images/aio-taisaku-merit-hiyou/merit.png" alt="AIO対策導入で得られる5つのメリット: AI回答に引用される、指名検索が増える、クリックなしでも認知が残る、先行者として信頼を得られる、広告費への依存を減らせる" loading="lazy"><figcaption>AIO対策導入で得られる5つのメリット</figcaption></figure>
 
 <div class="definition-box"><span class="term">AIO対策とは</span>、Google AI OverviewやAIモードなど生成AIの回答に自社の情報が引用されるよう、記事の構造や書き方を整える取り組みです。</div>

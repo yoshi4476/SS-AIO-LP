@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIO導入事例｜自社サイトで実践した4施策と数値</title>
+<meta name="description" content="AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/aio-donyu-jirei/">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AIO導入事例｜自社サイトで実践した4施策と数値">
+<meta property="og:description" content="AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/aio-donyu-jirei/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/aio-donyu-jirei/eyecatch.png">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=4550923a">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=96cf94fa"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AIO導入事例｜自社サイトで実践した4施策と数値",
+   "description": "AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/aio-donyu-jirei/",
+   "image": "https://ai.7senses.co.jp/images/aio-donyu-jirei/eyecatch.png",
+   "datePublished": "2026-09-21",
+   "dateModified": "2026-09-21",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/",
+      "https://www.7senses.co.jp/"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/",
+     "https://www.7senses.co.jp/"
+    ]
+   },
+   "inLanguage": "ja"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AIO導入事例｜自社サイトで実践した4施策と数値",
+     "item": "https://ai.7senses.co.jp/aio/aio-donyu-jirei/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "AIO導入事例とは具体的に何を指しますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "検索とAI検索の両方で評価される構造を、実際にどう実装したかという実例です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "自社サイトでの実装は何から着手しましたか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "構造化データとllms.txtの整備を先に行い、そのあとクローラー許可を確認しました。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "AIクローラーの許可はどう確認すればよいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "robots.txtでGooglebotとAI系クローラーを1種ずつ個別に確認します。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "引用状況はどのくらいの頻度で計測すればよいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "月次ではなく日次で、GSCの生成AIレポートとGA4のAI参照元を確認します。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "業種によって導入の進め方は変わりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "変わります。店舗型とBtoB型では、有効な一次情報の種類が異なります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "導入から効果が出るまでどのくらいかかりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "構造整備は数週間、検索順位や引用の変化は数ヶ月単位で見る必要があります。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金（独自メディア）</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AIO導入事例｜自社サイトで実践した4施策と</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AIO導入事例｜自社サイトで実践した4施策と数値</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-09-21">2026年9月21日</time></span>
+      <span>更新: <time datetime="2026-09-21">2026年9月21日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AIO%E5%B0%8E%E5%85%A5%E4%BA%8B%E4%BE%8B%EF%BD%9C%E8%87%AA%E7%A4%BE%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E5%AE%9F%E8%B7%B5%E3%81%97%E3%81%9F4%E6%96%BD%E7%AD%96%E3%81%A8%E6%95%B0%E5%80%A4&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-donyu-jirei%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/aio-donyu-jirei/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! ブックマーク</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/aio-donyu-jirei/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/aio-donyu-jirei/eyecatch.png" alt="AIO導入事例｜自社サイトで実践した4施策と数値" width="1200" height="675"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#aio">AIO導入事例とは？押さえておきたい前提</a></li><li><a href="#aio1llmstxt">自社サイトでのAIO導入事例①：構造化データとllms.txtの実装</a></li><li><a href="#aio2ai">自社サイトでのAIO導入事例②：AIクローラー許可の設計と記録</a></li><li><a href="#aio3">自社サイトでのAIO導入事例③：引用状況とクリックの日次計測</a></li><li><a href="#_1">業種によって進め方が変わる理由</a></li><li><a href="#aio_1">AIO導入事例に見る、よくある失敗</a></li><li><a href="#aio_2">AIO導入完了までの期間と費用の目安</a></li><li><a href="#_2">導入事例から学ぶ、次に着手すべきこと</a></li><li><a href="#_3">よくある質問</a></li><li><a href="#aio_3">まとめ: AIO導入は「構造・許可・計測」を同時に進めて初めて事例になる</a></li></ol></nav>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AIO導入事例とは、検索エンジンとAI検索の両方から評価される構造を、実際のサイトでどう実装し、どんな数値になったかという実例です。</strong>当メディアは自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。この記事では、その実装内容と業種による進め方の違い、よくある失敗事例までをまとめて解説します。</p>
+<div class="target-reader">この記事は、AIO対策を検討しているが「実際に何を、どの順番でやればよいか」を具体例で確認したい店舗・中小企業の集客担当者と経営者向けです。</div>
+
+<p class="freshness">※ 2026年9月時点の情報です。</p>
+
+<div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>自社サイトで実践したAIO導入の4施策</li><li>構造化データ・llms.txtの実装方法</li><li>AIクローラー許可の確認と記録の仕方</li><li>引用状況を日次で計測する理由</li><li>業種によって進め方が変わる理由</li><li>導入でよくある失敗と期間・費用の目安</li></ul></div>
+
+<h2 id="aio">AIO導入事例とは？押さえておきたい前提</h2>
+<p><strong>AIO導入事例とは、構造化データやクロール許可といった個別施策を、実際のサイトでどう組み合わせて実装したかを示す実例です。</strong></p>
+<p>施策を1つずつ単体で紹介する記事は多くありますが、実装の順番や、施策どうしがどう関係し合うかまで書かれた事例は多くありません。私たちが自社サイトで検証してきた限り、個別の施策を知っているだけでは導入は進みません。<em>どの順番で着手し、何を計測するか</em>まで含めて初めて「事例」と呼べます。</p>
+<div class="definition-box"><span class="term">AIO導入</span>とは、検索エンジンでの上位表示を土台にしたうえで、生成AIが回答の根拠として引用しやすい構造をサイトに実装することです。</div>
+
+<p>先に費用の目安を確認したい場合は、<a href="/aio/aio-taisaku-donyu-hoho/">AIO対策の導入方法｜進め方6ステップと費用の目安</a>が参考になります。自社対応か外注かで迷っている場合は、<a href="/aio/btob-aio-taisaku-kaisha/">BtoB向けAIO対策会社の選び方</a>もあわせてご確認ください。</p>
+<h2 id="aio1llmstxt">自社サイトでのAIO導入事例①：構造化データとllms.txtの実装</h2>
+<p><strong>最初に着手したのは、構造化データのテンプレート直書きと、llms.txtの設置です。</strong></p>
+<p>当メディアはWordPressのプラグインに頼らず、記事テンプレートに<strong>BlogPosting・FAQPage・BreadcrumbList</strong>のJSON-LDを直書きする方法を選びました。理由は単純で、テンプレートを直接管理したほうが、公開日や更新日の整合を機械的に保証しやすいためです。あわせて、サイトルートにllms.txtを設置し、記事を公開するたびに1行ずつ追記する運用にしています。</p>
+<p><a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank" rel="noopener">Google公式のFAQPageガイドライン</a>では、実際にページ上に表示されている内容と構造化データを一致させることが明記されています。本文とSchemaが食い違うと、スパムとみなされるリスクがあるため、私たちは公開前に必ず本文とJSON-LDの突き合わせを行っています。</p>
+<figure><img src="/images/aio-donyu-jirei/4sesaku.png" alt="自社サイトで実践したAIOの4施策: 構造化データをテンプレートに直書きする、llms.txtを設置し記事公開のたびに追記する、主要AIクローラー20種の許可を個別に確認する、引用状況とクリックを日次で計測する" width="1200" height="675" loading="lazy"><figcaption>自社サイトで実践したAIOの4施策（当メディア作成）</figcaption></figure>
+
+<p>この2つを最初に選んだのは、あとから追加する数値ファクトやFAQを正しく認識してもらうための土台になるからです。構造が整っていない状態でFAQを増やしても、AIが回答の根拠として拾いにくいという傾向を、私たちは日々の計測の中で確認してきました。</p>
+<h2 id="aio2ai">自社サイトでのAIO導入事例②：AIクローラー許可の設計と記録</h2>
+<p><strong>AIクローラー許可は、Googlebotを含む主要20種を1つずつ個別に確認し、許可状況を記録しました。</strong></p>
+<p>「AI系のクローラーはまとめて許可しておけばよい」という判断は、実は危険です。</p>
+<p>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extendedは、それぞれ用途が異なります。Google-ExtendedはGemini学習用の制御であり、AI Overview表示の可否とは別物です。robots.txtの各行は、クローラーごとにコメント付きで管理しています。</p>
+<div class="caution-box"><span class="box-title">注意: Googlebotを止めない</span><br>AI系クローラーをまとめてブロックする設定は、結果的にGooglebot自体を止める事故につながります。<strong>Googlebotだけは絶対にブロックしない</strong>という前提を、他のどの判断より優先してください。</div>
+
+<p><a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank" rel="noopener">Google公式のクローラー一覧</a>を確認しながら、WAFやCDN側の自動ブロック設定でも403・429が出ていないか、アクセスログまで見る運用に変えました。</p>
+<h2 id="aio3">自社サイトでのAIO導入事例③：引用状況とクリックの日次計測</h2>
+<p><strong>引用状況の計測は月次ではなく日次にし、GSCの生成AIレポートとGA4のAI参照元を毎日確認しています。</strong></p>
+<p>引用は検索順位と同じように毎日動きます。月1回のチェックでは、引用が増えた・減えたという変化の原因を特定できません。</p>
+<p>当サイトの実測として、直近28日のデータを毎日確認しています。<strong>316個の検索語からのべ2,302回表示され、5回のクリック</strong>がありました（自社サイトのSearch Console実測・2026年9月時点）。</p>
+<p>この数値自体が高いとは言えません。それでも、<em>何を計測すれば施策の効果が見えるか</em>という計測の型を確立できたことには意味があります。表示回数とクリック数を分けて見ることで、記事のどこに問題があるかを切り分けられるようになりました。表示は多いのにクリックが伸びない記事は、タイトルや検索結果の見え方に課題があると判断できます。逆に表示自体が少ない記事は、まず順位そのものを見直す対象だと分かります。</p>
+<p>計測を始める前は、順位が上がったという感覚だけで施策の良し悪しを判断していました。数値で確認する運用に変えてからは、どの記事のどの部分を直せば引用や表示が伸びるかを、感覚ではなく事実として議論できるようになりました。</p>
+<p>計測の型を先に固めたい場合は、<a href="/aio/aio-koka-sokutei-report-hinagata/">AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方</a>と<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法｜見るべき5つの指標と週次の運用手順</a>を先に読んでおくと、自社での再現がしやすくなります。</p>
+<figure><img src="/images/aio-donyu-jirei/before-after.png" alt="AIO導入前後で変わったこと: 導入前は構造化データが未実装・llms.txtが未設置・クロール許可が未確認・引用状況を計測していない。導入後はBlogPosting・FAQPage・BreadcrumbListを直書き・llms.txtを継続的に追記・主要20種のクローラー許可を記録・GSC生成AIレポートを日次で確認" width="1200" height="675" loading="lazy"><figcaption>AIO導入前後で変わったこと（当メディア作成）</figcaption></figure>
+
+<p>導入前後で何が変わったかを、以下の表に整理しました。単体で見ても意味が通るように、項目ごとに書いています。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">導入前</th>
+<th style="text-align: left;">導入後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">構造化データ</td>
+<td style="text-align: left;">未実装</td>
+<td style="text-align: left;">BlogPosting・FAQPage・BreadcrumbListを直書き</td>
+</tr>
+<tr>
+<td style="text-align: left;">llms.txt</td>
+<td style="text-align: left;">未設置</td>
+<td style="text-align: left;">記事公開のたびに追記</td>
+</tr>
+<tr>
+<td style="text-align: left;">AIクローラー許可</td>
+<td style="text-align: left;">未確認</td>
+<td style="text-align: left;">主要20種を個別に許可・記録</td>
+</tr>
+<tr>
+<td style="text-align: left;">引用状況の計測</td>
+<td style="text-align: left;">月次で目視</td>
+<td style="text-align: left;">日次でGSC生成AIレポートを確認</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_1">業種によって進め方が変わる理由</h2>
+<p><strong>業種によって進め方が変わるのは、読者が求める一次情報の種類が業種ごとに異なるためです。</strong></p>
+<p>MEO運用サービス「G-ran」では、<strong>通算3,200店舗以上</strong>を運用してきました。この経験から、業種によって有効な一次情報の種類は次のように変わると考えています。</p>
+<ul>
+<li>店舗型: 口コミ件数・来店数といった現場の数値</li>
+<li>士業・BtoB: 実務の手順・判断基準・失敗事例</li>
+<li>EC・通販: 転換率やレビュー内容といった行動データ</li>
+</ul>
+<p>店舗型のビジネスでは、現場の数値がそのまま引用されやすい一次情報になります。一方、士業やBtoB企業では、現場の数値よりも実務の手順や判断基準のほうが評価される傾向があります。</p>
+<p>実際、当サイトの実測では「税理士 ai 集客」という語は平均9.5位に表示されながら、60回の表示でクリックが発生しませんでした。検索結果の時点で答えが済んでしまう語だったと考えられます。士業向けの記事では、検索結果に出せない一次情報、つまり自社の一次データや失敗例をタイトルと冒頭に置く必要があります。</p>
+<p>2020年3月の創業から2026年9月までに、のべ50社以上の導入を支援してきた経験からも、業種をひとくくりにした一般論だけでは差別化になりません。鍵は、業種ごとの検索意図をどれだけ先に確認できるかという一点。</p>
+<section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_mid_aio">AI検索の対応度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
+<h2 id="aio_1">AIO導入事例に見る、よくある失敗</h2>
+<p><strong>AIO導入でよくある失敗は、構造だけを整えて検索順位を確認しない、または計測を月次で済ませてしまうことです。</strong></p>
+<p>自社の実装で経験した失敗も含め、代表的なパターンを挙げます。まず、構造化データを整えただけで満足し、狙う語の検索順位を確認しないまま公開を続けるケースです。AI Overviewの引用元はほぼ検索10位以内から選ばれるため、順位を確認しない施策は土台のないまま進めることになります。</p>
+<div class="caution-box"><span class="box-title">NG: 計測を後回しにする</span><br>構造化データとllms.txtを実装しても、計測を後回しにすると「何が効いたか」が分からないまま次の施策に進んでしまいます。<strong>実装と計測は同時に始める</strong>という順番を崩さないでください。</div>
+
+<p>もう1つの失敗は、業種特性を無視して同じ構成をすべての記事に当てはめることです。前述の「税理士 ai 集客」の例のように、検索結果だけで用が済む語に一般的な解説記事を当ててしまうと、表示されてもクリックされません。<mark>失敗の多くは、実装のミスではなく前提の確認不足から起きています。</mark></p>
+<h2 id="aio_2">AIO導入完了までの期間と費用の目安</h2>
+<p><strong>構造整備そのものは数週間で完了しますが、検索順位や引用状況の変化として現れるまでには数ヶ月単位の時間がかかります。</strong></p>
+<p>私たちの経験では、構造化データとllms.txtの実装、クローラー許可の確認までは、既存サイトであれば2〜3週間程度で一通り終わります。ここから先の、検索順位の変化やAI Overviewでの引用は、狙う語の競合状況によって数ヶ月単位で変動します。費用感を含めた比較は、<a href="/aio/aio-taisaku-merit-hiyou/">AIO導入のメリット5つと費用相場｜投資対効果の考え方</a>にまとめています。</p>
+<p>自社の人員だけで対応が難しい場合は、外注の判断基準をBtoB向けAIO対策会社の選び方｜比較5基準と費用相場で確認したうえで検討してください。</p>
+<h2 id="_2">導入事例から学ぶ、次に着手すべきこと</h2>
+<p><strong>次に着手すべきは、自社サイトの検索順位とrobots.txtの許可状況を、この記事の4施策の順番で確認することです。</strong></p>
+<figure><img src="/images/aio-donyu-jirei/steps.png" alt="導入までの4ステップ: 現状確認は順位と許可を確認する、土台整備は構造化データを実装する、許可確認はクローラー20種を1つずつ確認する、計測開始はGSCとGA4で日次に計測する" width="1200" height="675" loading="lazy"><figcaption>導入までの4ステップ（当メディア作成）</figcaption></figure>
+
+<p>今日の時点でできるのは、狙う語の検索順位とrobots.txtの許可状況を確認することです。ここに問題がなければ、構造化データとllms.txtの実装に進み、最後に計測の運用を日次に切り替えてください。<span class="big">実装した施策の数より、計測を続けられるかどうかが差になります。</span></p>
+<p>私たちも新しい記事を公開するたびに、この4施策に立ち返って点検しています。自社サイトがどこまで対応できているかは、<a href="/diagnosis/aio/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要です。</p>
+<h2 id="_3">よくある質問</h2>
+<div class="faq">
+<details><summary>AIO導入事例とは具体的に何を指しますか？</summary><p class="faq-a">検索とAI検索の両方で評価される構造を、実際にどう実装したかという実例です。</p></details>
+<details><summary>自社サイトでの実装は何から着手しましたか？</summary><p class="faq-a">構造化データとllms.txtの整備を先に行い、そのあとクローラー許可を確認しました。</p></details>
+<details><summary>AIクローラーの許可はどう確認すればよいですか？</summary><p class="faq-a">robots.txtでGooglebotとAI系クローラーを1種ずつ個別に確認します。</p></details>
+<details><summary>引用状況はどのくらいの頻度で計測すればよいですか？</summary><p class="faq-a">月次ではなく日次で、GSCの生成AIレポートとGA4のAI参照元を確認します。</p></details>
+<details><summary>業種によって導入の進め方は変わりますか？</summary><p class="faq-a">変わります。店舗型とBtoB型では、有効な一次情報の種類が異なります。</p></details>
+<details><summary>導入から効果が出るまでどのくらいかかりますか？</summary><p class="faq-a">構造整備は数週間、検索順位や引用の変化は数ヶ月単位で見る必要があります。</p></details>
+</div>
+
+<p>自社サイトのAIO対応度を無料で確認したい場合は、<a href="/lp/">AI検索対策の無料相談</a>からご相談ください。現状分析を踏まえて、この記事の4施策のうちどこから着手すべきかをお伝えします。</p>
+<h2 id="aio_3">まとめ: AIO導入は「構造・許可・計測」を同時に進めて初めて事例になる</h2>
+<p>AIO導入事例は、構造化データ・llms.txt・クローラー許可・日次計測という4つの施策を、順番を守って同時並行に進めたときに初めて成立します。どれか1つだけを整えても、効果を検証できないまま終わってしまいます。</p>
+<p>私たちが自社サイトで確認できたのは、施策そのものより計測を続けられるかどうかが差を生むという点でした。今日からできるのは、狙う語の検索順位とrobots.txtの許可状況を確認すること。そこから、この記事で紹介した順番で1つずつ進めてください。</p>
+
+      <aside class="diag-banner"><div class="db-text"><span class="db-kicker">この記事のテーマで、自社の現在地を測る</span><span class="db-title">AI検索の対応度チェック（無料・30秒）</span><span class="db-desc">AI検索に引用される準備ができているかを100点満点で採点します。</span></div><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_diag_aio">無料で診断する <span class="arw">→</span></a></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/ai-kensaku-taiou-settei/"><span class="thumb"><img src="/images/ai-kensaku-taiou-settei/eyecatch.png" alt="AI検索対応とは？公開前に済ませる7つの設定項目のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-16">2026.09.16</time><h3>AI検索対応とは？公開前に済ませる7つの設定項目<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-erabareru-kiji-kakikata/"><span class="thumb"><img src="/images/aio-erabareru-kiji-kakikata/eyecatch.png" alt="AIに選ばれる記事の書き方｜5つのコツとNG例のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-15">2026.09.15</time><h3>AIに選ばれる記事の書き方｜5つのコツとNG例<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-koka-sokutei-report-hinagata/"><span class="thumb"><img src="/images/aio-koka-sokutei-report-hinagata/eyecatch.png" alt="AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-18">2026.09.18</time><h3>AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/shika-aio-taisaku-hiyou/"><span>← 前の記事</span><strong>歯科医院のAIO対策にかかる費用はいくら？内訳と相場【2026年】</strong></a><a class="pn pn-next" href="/aio/seikotsuin-aio-taisaku-shippai/"><span>次の記事 →</span><strong>整骨院のAIO対策でやりがちな失敗5つ｜柔整広告制限と口コミ不足の壁</strong></a></nav>
+
+      <section class="cta">
+        <p class="cta-copy">AI検索時代の集客、プロに相談してみませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">AIO・LLMO・SEO・MEO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="Seven Senses" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/diagnosis/meo/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/diagnosis/aio/">AI検索の対応度チェック（30秒）</a>
+      <a href="/site-audit/">サイトの技術チェック</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -7,6 +7,13 @@
   <updated>2026-09-21T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>AIO導入事例｜自社サイトで実践した4施策と数値</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-donyu-jirei/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</id>
+    <updated>2026-09-21T00:00:00+09:00</updated>
+    <summary>AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。</summary>
+  </entry>
+  <entry>
     <title>整骨院のAIO対策でやりがちな失敗5つ｜柔整広告制限と口コミ不足の壁</title>
     <link href="https://ai.7senses.co.jp/aio/seikotsuin-aio-taisaku-shippai/"/>
     <id>https://ai.7senses.co.jp/aio/seikotsuin-aio-taisaku-shippai/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/</id>
     <updated>2026-09-14T00:00:00+09:00</updated>
     <summary>工務店のSNS集客とは、複数のSNS媒体を目的に応じて使い分け、問い合わせにつなげる施策です。Instagram・LINE公式・YouTube等5媒体の向き不向きと、無理なく続けるための始め方を実務目線で解説します。</summary>
-  </entry>
-  <entry>
-    <title>整骨院がAI検索に表示されない5つの理由｜費用ページの直し方</title>
-    <link href="https://ai.7senses.co.jp/aio/seikotsuin-hiyou-heikin/"/>
-    <id>https://ai.7senses.co.jp/aio/seikotsuin-hiyou-heikin/</id>
-    <updated>2026-09-14T00:00:00+09:00</updated>
-    <summary>整骨院がAI検索に表示されない原因は、料金の書き方・施術範囲の曖昧さ・出典のなさなど5つに整理できます。ChatGPTやAI Overviewに引用される費用ページの条件と、直す順番を2026年9月時点で解説します。</summary>
   </entry>
 </feed>
