@@ -48,6 +48,8 @@ faq:
 
 **AIに引用されるとは、生成AIが回答を作る際に、特定のページを情報源として選び、内容や社名を回答文中に反映することです。**
 
+つまずきやすい点を先に押さえるなら、[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)が参考になります。
+
 関連する内容は、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)で解説しています。
 
 費用の目安を先に押さえるなら、[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)が参考になります。
