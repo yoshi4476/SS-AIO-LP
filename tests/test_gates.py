@@ -1538,7 +1538,7 @@ def test_every_site_gets_articles():
     ただし余りだけだと1社のとき同じサイトに6回回るため、1社2本の上限もかける。
     """
     print(chr(10) + "■ サイト数ごとの記事の割り当て")
-    SLOTS = 6                       # cron の数（2本 × 3サイト）
+    SLOTS = 20                      # cron の数（2本 × 10社）
 
     def assign(n):
         out = {}
@@ -1549,23 +1549,31 @@ def test_every_site_gets_articles():
             out[i] = out.get(i, 0) + 1
         return out
 
-    for n, want_total in ((1, 2), (2, 4), (3, 6), (4, 6), (5, 6), (6, 6)):
+    # 10社までは、どの社も1日2本ずつ受け取れること
+    for n in (1, 2, 3, 5, 8, 10):
         got = assign(n)
         zero = [i for i in range(n) if got.get(i, 0) == 0]
-        print("   %d社 → 合計%d本 / 0本のサイト %d件" % (n, sum(got.values()), len(zero)))
+        print("   %2d社 → 合計%2d本 / 1社あたり %d〜%d本"
+              % (n, sum(got.values()), min(got.values()), max(got.values())))
         check("%d社で全サイトに記事が回る" % n, zero, [])
-        check("%d社の合計本数" % n, sum(got.values()), want_total)
-        check("%d社で1日3本以上になるサイトが無い" % n, max(got.values()) <= 2, True)
+        check("%d社は全社2本ずつ" % n, (min(got.values()), max(got.values())), (2, 2))
+        check("%d社の合計本数" % n, sum(got.values()), n * 2)
 
-    # 枠が足りない規模では、cronを足す必要があることを明示する
-    check("7社は枠が足りない（cronの追加が要る）",
-          len([i for i in range(7) if assign(7).get(i, 0) == 0]) > 0, True)
+    # 上限を超えても0本の社は出さない（本数が減るだけ）。そのうえで知らせる
+    over = assign(11)
+    print("   11社 → 合計%d本 / 1社あたり %d〜%d本（上限超え）"
+          % (sum(over.values()), min(over.values()), max(over.values())))
+    check("11社でも0本の社は出ない", [i for i in range(11) if over.get(i, 0) == 0], [])
 
-    # ワークフロー側が余りで割り当てていること（直書きに戻ると4社目が消える）
     wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(
         encoding="utf-8", errors="replace")
+    # 直書きに戻ると4社目が静かに消えるため、余りで選んでいることを固定する
     check("余りでサイトを選んでいる", "slot % N" in wf, True)
     check("1サイト2本の上限がある", "N * 2" in wf, True)
+    check("枠が20ある（10社ぶん）", wf.count("* * *\"") >= 20, True)
+    # 10社を超えたら、実行のたびに知らせる（黙って本数が減ると気づけない）
+    check("10社超をエラーで知らせる", '[ "$N" -gt 10 ]' in wf, True)
+    check("別リポジトリへ分けるよう示す", "別リポジトリに分けて" in wf, True)
 
 
 def main():
