@@ -47,10 +47,31 @@ def enabled():
     return bool(HUB_URL)
 
 
+RETRY_WAIT = (3, 8, 15)   # Apps Script は302の先で一時的に404/5xxを返すことがある。今日2回起きた
+
+
+def _open(req):
+    """管制塔へつなぐ。一時的な 404/5xx・通信断は待ってやり直す。
+    取り下げの直後の追加でこれに当たり、未着手が0件のまま残るところだった"""
+    import time
+    for i in range(len(RETRY_WAIT) + 1):
+        try:
+            return urllib.request.urlopen(req, timeout=TIMEOUT)
+        except urllib.error.HTTPError as e:
+            if e.code not in (404, 429, 500, 502, 503, 504) or i >= len(RETRY_WAIT):
+                raise
+            print(f"  管制塔 {e.code}。{RETRY_WAIT[i]}秒待ってやり直します（{i + 2}/{len(RETRY_WAIT) + 1}）")
+        except (urllib.error.URLError, TimeoutError) as e:
+            if i >= len(RETRY_WAIT):
+                raise
+            print(f"  管制塔に接続できません（{type(e).__name__}）。{RETRY_WAIT[i]}秒待ってやり直します")
+        time.sleep(RETRY_WAIT[i])
+
+
 def _get(params):
     url = HUB_URL + ("&" if "?" in HUB_URL else "?") + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+    with _open(req) as r:
         return json.load(r)
 
 
@@ -60,7 +81,7 @@ def _post(body):
     req = urllib.request.Request(
         HUB_URL, data=json.dumps(body).encode("utf-8"), method="POST",
         headers={**UA, "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+    with _open(req) as r:
         return json.load(r)
 
 

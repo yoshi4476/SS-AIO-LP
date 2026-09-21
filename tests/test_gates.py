@@ -1696,6 +1696,23 @@ def test_kw_plan_keeps_only_buyers():
     finally:
         rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT = saved
 
+    # 管制塔の一時的な404も待ってやり直す。取り下げ直後の追加で当たると未着手が0件で残る
+    import hub_client
+    hits = {"n": 0}
+    def flaky_hub(req, timeout=0):
+        hits["n"] += 1
+        if hits["n"] < 3:
+            raise urllib.error.HTTPError("u", 404, "Not Found", {}, _io.BytesIO(b""))
+        return _io.BytesIO(b'{"ok":true}')
+    saved2 = (hub_client.urllib.request.urlopen, hub_client.RETRY_WAIT)
+    hub_client.urllib.request.urlopen, hub_client.RETRY_WAIT = flaky_hub, (0, 0, 0)
+    try:
+        with hub_client._open(hub_client.urllib.request.Request("https://example.invalid/")) as r:
+            check("管制塔の404は待ってやり直す", r.read(), b'{"ok":true}')
+        check("やり直しの回数（管制塔）", hits["n"], 3)
+    finally:
+        hub_client.urllib.request.urlopen, hub_client.RETRY_WAIT = saved2
+
     # 計画ファイルの表を読み戻せること（レポートが検索数・難易度を引く経路）
     tmp = ROOT / "docs" / "kw-plan-_gate_.md"
     tmp.write_text("| 優先 | キーワード | 月間 | 難易度 | 開く理由 | 12か月 | 表示 | 出どころ |" + chr(10)
