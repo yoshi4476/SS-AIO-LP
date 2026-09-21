@@ -1529,6 +1529,45 @@ def test_routine_success_is_not_emailed():
     check("問い合わせは別経路で届く", "MailApp.sendEmail" in gas, True)
 
 
+def test_every_site_gets_articles():
+    """サイトを増やしたとき、どのサイトも0本にならないこと。
+
+    日次は6つの時刻枠に 0/1/2 を直接書いていたため、4社目以降は一度も
+    選ばれず記事が1本も書かれなかった。サイトを足しても静かに無視される。
+    枠の番号をサイト数で割った余りにすると、全社へ行き渡る。
+    ただし余りだけだと1社のとき同じサイトに6回回るため、1社2本の上限もかける。
+    """
+    print(chr(10) + "■ サイト数ごとの記事の割り当て")
+    SLOTS = 6                       # cron の数（2本 × 3サイト）
+
+    def assign(n):
+        out = {}
+        for slot in range(SLOTS):
+            if slot >= n * 2:       # 1サイト2本まで
+                continue
+            i = slot % n
+            out[i] = out.get(i, 0) + 1
+        return out
+
+    for n, want_total in ((1, 2), (2, 4), (3, 6), (4, 6), (5, 6), (6, 6)):
+        got = assign(n)
+        zero = [i for i in range(n) if got.get(i, 0) == 0]
+        print("   %d社 → 合計%d本 / 0本のサイト %d件" % (n, sum(got.values()), len(zero)))
+        check("%d社で全サイトに記事が回る" % n, zero, [])
+        check("%d社の合計本数" % n, sum(got.values()), want_total)
+        check("%d社で1日3本以上になるサイトが無い" % n, max(got.values()) <= 2, True)
+
+    # 枠が足りない規模では、cronを足す必要があることを明示する
+    check("7社は枠が足りない（cronの追加が要る）",
+          len([i for i in range(7) if assign(7).get(i, 0) == 0]) > 0, True)
+
+    # ワークフロー側が余りで割り当てていること（直書きに戻ると4社目が消える）
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(
+        encoding="utf-8", errors="replace")
+    check("余りでサイトを選んでいる", "slot % N" in wf, True)
+    check("1サイト2本の上限がある", "N * 2" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1570,7 +1609,8 @@ def main():
               test_findings_judges_by_marker_not_exit_code,
               test_detection_scripts_do_not_fail_the_run,
               test_notify_does_not_send_junk,
-              test_routine_success_is_not_emailed):
+              test_routine_success_is_not_emailed,
+              test_every_site_gets_articles):
         try:
             t()
         except Exception as e:
