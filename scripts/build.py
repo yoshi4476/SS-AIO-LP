@@ -167,6 +167,8 @@ AUTHOR_ROLE = _B.get("role") or "セブンセンシズ株式会社 代表取締�
 AUTHOR_BIO = _B.get("bio") or "通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
 # 経歴・実績の実体があるページへ。無い人を指すと E-E-A-T の主張が空振りする
 AUTHOR_URL = _B.get("url") or f"{SITE_URL}/author/haraguchi/"
+# 外部の実在プロフィール。サイトの外でも同じ人物だと機械が結び付けられるようにする
+AUTHOR_SAME_AS = _B.get("same_as") or ["https://www.linkedin.com/in/%E5%84%AA-%E5%8E%9F%E5%8F%A3-b89362439", "https://corp.7senses.co.jp/"]
 
 CATEGORIES = {
     "aio": ("AIO・LLMO運用", "cat-aio"),
@@ -245,10 +247,10 @@ def build_json_ld(meta, url, body_text=""):
             "datePublished": str(meta["date"]),
             "dateModified": str(meta["modified"]),
             "author": {"@type": "Person", "name": AUTHOR_NAME, "url": AUTHOR_URL,
-                       "jobTitle": AUTHOR_ROLE,
+                       "jobTitle": AUTHOR_ROLE, "sameAs": AUTHOR_SAME_AS,
                        "worksFor": organization()},
             "editor": {"@type": "Person", "name": "原口 優", "jobTitle": "代表取締役",
-                       "url": f"{SITE_URL}/author/haraguchi/"},
+                       "url": f"{SITE_URL}/author/haraguchi/", "sameAs": AUTHOR_SAME_AS},
             "publisher": organization(),
             "inLanguage": "ja",
             **({"about": about} if about else {}),
