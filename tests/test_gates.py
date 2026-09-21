@@ -1849,7 +1849,7 @@ def test_reports_carry_diagnosis_and_next_actions():
     check("材料が無くても落ちない", "取得できません" in h2, True)
     wk = (ROOT / "scripts" / "weekly_report.py").read_text(encoding="utf-8")
     mo = (ROOT / "scripts" / "monthly_report.py").read_text(encoding="utf-8")
-    check("週次レポートが診断を載せる", "site_diagnosis.html(" in wk, True)
+    check("週次レポートが診断を載せる", "site_diagnosis.html_block(" in wk or "site_diagnosis.html(" in wk, True)
     check("月次レポートが診断を載せる", "site_diagnosis.html(" in mo, True)
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8", errors="replace")
     check("週次は検査の後にレポートを作る",

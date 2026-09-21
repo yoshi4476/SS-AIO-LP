@@ -425,14 +425,15 @@ padding:10px 14px;border-radius:8px;white-space:pre-wrap">{esc(funnel_txt)}</pre
 
     # 数字の推移だけでは「いまどこが弱く、次に何をするか」が読み手に委ねられる。
     # 同じ材料（順位帯・台帳・指名検索・導線・検査の要対応）から機械的に組み立てる
-    if diag_html:
+    # 3サイトを1頁に詰めるとA4に収まらない。サイトごとに1頁にする
+    for block in (diag_html or []):
         h.append(f"""<div class="sheet">
 <div class="sec"><span class="no">{n:02d}</span>
 <h2>現在のサイト診断と、次にやること</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">順位帯ごとの「順位相応なら増えるクリック」は、順位を上げずに
 タイトル・説明文で取り返せる量です。「誰が」の<b>自動</b>は週次・月次の自動化が処理し、
 <b>人</b>は手当てが要るものです。</p>
-{diag_html}
+{block}
 </div>""")
         n += 1
 
@@ -468,9 +469,9 @@ def main():
     # 診断は外部に何度も問い合わせる。落ちてもレポートは出す
     try:
         import site_diagnosis
-        diag_html = site_diagnosis.html(sorted(conf))
+        diag_html = [site_diagnosis.html_block(site_diagnosis.diagnose(s)) for s in sorted(conf)]
     except Exception as e:
-        diag_html = f'<p class="note">診断を作れませんでした: {esc(str(e)[:80])}</p>'
+        diag_html = [f'<p class="note">診断を作れませんでした: {esc(str(e)[:80])}</p>']
     f = OUT / f"{ws[-1][1].isoformat()}.html"
     f.write_text(html(ws, site_rows, kw_pos, picks, conf, funnel_txt, diag_html),
                  encoding="utf-8", newline="")
