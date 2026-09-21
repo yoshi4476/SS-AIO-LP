@@ -66,11 +66,16 @@ def bag(kw):
     return " ".join(sorted(t for t in re.split(r"[\s　]+", s) if t))
 
 
+def core(kw):
+    """空白も助詞も外した形。「請求書の書き方 封筒」と「請求書封筒書き方」を比べるため"""
+    return re.sub(r"[のをにへとがで]", "", norm(kw))
+
+
 def same(a, b):
     """同じ検索とみなすか。語順違い・助詞違い・表記のわずかな差を吸収する"""
     if bag(a) == bag(b):
         return True
-    return dice(norm(a), norm(b)) >= 0.7
+    return dice(core(a), core(b)) >= 0.7
 
 
 def gsc_owned(site_id):
@@ -272,10 +277,12 @@ def fill_volume(cands):
         print(f"   （一括の検索数取得が時間内に終わりません: {len(missing)}件。次回に持ち越し）")
         return 0
     res = rakko.call(f"/v1/search-volume/{rid}/results", {"limit": len(missing) + 50})
-    n = 0
-    for it in (res or {}).get("data", {}).get("items", []):
+    items = (res or {}).get("data", {}).get("items", []) or []
+    n, unmatched = 0, []
+    for it in items:
         c = cands.get(norm(it.get("keyword", "")))
         if not c:
+            unmatched.append(it.get("keyword", ""))
             continue
         m = it.get("metrics") or {}
         c["vol"] = m.get("searchVolume")
@@ -285,6 +292,10 @@ def fill_volume(cands):
         if tr is not None:
             c["trend"] = tr
         n += 1
+    # 照合できない語が多いときは、鍵の作り方か応答の形が変わっている。黙らせない
+    if items and n < len(items) * 0.5:
+        print(f"   （一括の応答 {len(items)}件のうち照合できたのは {n}件。"
+              f"返った語の例: {unmatched[:3]} / こちらの鍵の例: {missing[:3]}）")
     return n
 
 

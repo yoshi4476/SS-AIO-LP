@@ -1663,6 +1663,7 @@ def test_kw_plan_keeps_only_buyers():
     # 語順・助詞が違うだけの語は同じ検索。別枠で採ると採用枠を食い合う
     check("語順違いは同じ語", kw_plan.same("請求書 書き方 封筒", "請求書 封筒 書き方"), True)
     check("助詞の有無も同じ語", kw_plan.same("請求書の封筒の書き方", "請求書 封筒 書き方"), True)
+    check("空白なし・助詞ありも同じ語", kw_plan.same("請求書封筒書き方", "請求書の書き方 封筒"), True)
     check("違う語は別", kw_plan.same("経理代行 費用", "記帳代行 副業"), False)
     # 買い手の語は、検索数が少なくても上に来ること
     buyer = kw_plan.score({"kw": "経理代行 費用 相場", "vol": 210, "kd": 31})
