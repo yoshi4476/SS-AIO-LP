@@ -82,6 +82,24 @@ def gsc(site_url, day):
             "ctr": round(r.get("ctr", 0) * 100, 2), "position": round(r.get("position", 0), 1)}
 
 
+def aio_estimate(site_id):
+    """AI Overview に取られている表示の推定。GSCのCTRの歪みから ai_citation_check が
+    月ごとに出す（data/ai_citations/YYYY-MM.json）。APIでは取れない値なので推定と明記する"""
+    try:
+        import json as _j
+        from pathlib import Path as _P
+        files = sorted((ROOT / "data" / "ai_citations").glob("*.json"))
+        if not files:
+            return {}
+        d = _j.loads(files[-1].read_text(encoding="utf-8"))
+        s = (d.get("sites") or {}).get(site_id) or {}
+        n = int(s.get("suspect_taken") or 0)
+        return {"aio_est": n,
+                "aio_note": f"推定（{d.get('date', '')} CTR歪み・判定{s.get('judged', 0)}語中）"}
+    except Exception:
+        return {}
+
+
 def main():
     if not SA.exists():
         raise SystemExit("indexing-service-account.json がありません")
@@ -104,6 +122,7 @@ def main():
                       "python scripts/gsc_check.py で対処手順を確認してください）")
             else:
                 print(f"  {sid}: GSC取得スキップ（{e}）")
+        row.update(aio_estimate(sid))
         rows.append(row)
         print(f"{sid:10s} セッション{row.get('sessions', 0):5d}  表示{row.get('impressions', 0):6d}  "
               f"クリック{row.get('clicks', 0):4d}  AI参照{row.get('ai', 0):3d}")

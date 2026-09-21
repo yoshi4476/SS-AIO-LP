@@ -29,10 +29,13 @@ const AI_REFERRERS = ['chatgpt.com', 'chat.openai.com', 'perplexity.ai',
 // ────────────────────────────────────
 
 function installTriggers() {
+  // KPIの集計はGitHub Actions側のPython（daily_kpi.py）が行い、kpi_log で届く。
+  // ここでも毎朝6時に updateKpi を回していたため、サイト一覧のGA4/GSCが空のまま
+  // 「全部0」の行を毎日3本追加し、最後に書いた側としてダッシュボードを0で上書きしていた。
+  // 二重の書き手を止める。手で試すときは admin の 'kpi' から呼べる
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'updateKpi') ScriptApp.deleteTrigger(t);
   });
-  ScriptApp.newTrigger('updateKpi').timeBased().atHour(6).everyDays(1).create();
   book_().toast('毎朝6時のKPI自動集計を設定しました', '管制塔', 5);
 }
 
@@ -116,10 +119,14 @@ function updateKpi() {
     book_().toast('サイト一覧が空です。先にサイトを登録してください', '管制塔', 8);
     return;
   }
+  let measured = 0;
   Object.keys(map).forEach(function (site) {
     const cfg = map[site];
+    // 計測の設定が無いサイトは書かない。書くと「0」が実績として残る
+    if (!cfg.ga4 && !cfg.gsc) return;
     const g = ga4Metrics_(cfg.ga4, gaDate) || { sessions: 0, pv: 0, cv: 0, ai: 0, breakdown: {} };
     const s = gscMetrics_(cfg.gsc, scDate) || { impressions: 0, clicks: 0, ctr: 0, position: 0 };
+    measured++;
 
     kpi.appendRow([gaDate, siteLabel_(site), g.sessions, g.pv, s.impressions, s.clicks,
                    s.ctr + '%', s.position, g.cv,
@@ -135,8 +142,10 @@ function updateKpi() {
     });
   });
 
+  if (!measured) { Logger.log('計測の設定があるサイトが無いため書きません'); return '計測対象なし'; }
   writeDashboard_(totals, gaDate);
   Logger.log('KPI集計完了: ' + gaDate);
+  return 'KPI集計完了: ' + gaDate + '（' + measured + 'サイト）';
 }
 
 /** ダッシュボードを3サイト合計で書き換える（前日比つき） */

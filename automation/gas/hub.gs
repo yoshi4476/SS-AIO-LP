@@ -502,7 +502,20 @@ function publishLog_(b) {
 function errorLog_(b) {
   // fix（対応）を捨てていた。原因だけ残しても、次に何をすればいいかが
   // 記録されず、時間が経つと本人にも分からなくなる
-  sheet_('エラーログ').appendRow([
+  // 同じ内容が「未対応」で残っていれば積まない。救済が毎日同じTODOを書き、
+  // 214行が全部「未対応」で並んでいた。増えるだけの表は誰も読まない
+  const sh = sheet_('エラーログ');
+  const msg = String(b.message || '').trim();
+  if (sh.getLastRow() > 1 && msg) {
+    const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
+    for (let i = 0; i < rows.length; i++) {
+      if (String(rows[i][3]).trim() === msg && String(rows[i][2]).trim() === String(b.phase || '')
+          && String(rows[i][5]).trim() === '未対応') {
+        return { ok: true, skipped: 'same_open' };
+      }
+    }
+  }
+  sh.appendRow([
     new Date(), siteLabel_(b.site) || '', b.phase || '', b.message || '',
     b.fix || '', b.status || '未対応',
   ]);
@@ -528,8 +541,12 @@ function kpiLog_(b) {
                    r.impressions || 0, r.clicks || 0, (r.ctr || 0) + '%', r.position || 0,
                    r.cv || 0, r.note || '']);
     const bd = r.breakdown || {};
-    aio.appendRow([r.date || '', siteLabel_(r.site), '', r.ai || 0,
-                   bd.chatgpt || 0, bd.perplexity || 0, bd.gemini || 0, bd.copilot || 0, '']);
+    // AI Overview の表示回数はAPIで取れない。CTRの歪みからの推定（ai_citation_check）を
+    // 「推定」と明記して入れる。空欄のままだと計測していないように見えた
+    aio.appendRow([r.date || '', siteLabel_(r.site),
+                   (r.aio_est === undefined || r.aio_est === null) ? '' : r.aio_est, r.ai || 0,
+                   bd.chatgpt || 0, bd.perplexity || 0, bd.gemini || 0, bd.copilot || 0,
+                   r.aio_note || '']);
     Object.keys(total).forEach(function (k) { total[k] += Number(r[k] || 0); });
   });
 
@@ -538,6 +555,25 @@ function kpiLog_(b) {
 }
 
 /** ダッシュボードを3サイト合計で書き換える（前日比つき） */
+/** KPIレポート・AIO計測から、指標が全部0（または空）の行を消す。
+ *  GAS側の集計がサイト一覧のGA4/GSCが空のまま毎日3本書いていた行。
+ *  0の行は情報を持たず、グラフと前日比を歪めるだけ */
+function cleanKpi_() {
+  const out = [];
+  [['KPIレポート', [2, 3, 4, 5, 8]], ['AIO計測', [3, 4, 5, 6, 7]]].forEach(function (spec) {
+    const sh = sheet_(spec[0]);
+    if (!sh || sh.getLastRow() < 2) { out.push(spec[0] + ': 0行'); return; }
+    const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 9).getValues();
+    let removed = 0;
+    for (let i = rows.length - 1; i >= 0; i--) {
+      const zero = spec[1].every(function (c) { return !Number(rows[i][c]); });
+      if (zero) { sh.deleteRow(i + 2); removed++; }
+    }
+    out.push(spec[0] + ': ' + removed + '行を消しました');
+  });
+  return out.join(' / ');
+}
+
 function writeDashboard_(t, dateStr) {
   const sh = sheet_('ダッシュボード');
   const prev = {};
@@ -549,6 +585,14 @@ function writeDashboard_(t, dateStr) {
   const published = kwRows_().filter(function (r) {
     return String(r[2]).trim() === '公開済み';
   }).length;
+  // 全部0の集計で上書きしない。計測に失敗した回や、設定の無い書き手が
+  // 「0」を実績として残し、前日比まで壊す。実際にそれで合計が0のまま表示されていた
+  const allZero = !(t.sessions || t.pv || t.cv || t.impressions || t.clicks || t.ai);
+  const hadValue = Object.keys(prev).some(function (k) { return prev[k] > 0 && k.indexOf('公開記事数') < 0; });
+  if (allZero && hadValue) {
+    Logger.log('集計が全て0のため、ダッシュボードは更新しません（' + dateStr + '）');
+    return;
+  }
   const rows = [
     ['セッション（3サイト合計）', t.sessions],
     ['PV（3サイト合計）', t.pv],
@@ -619,6 +663,7 @@ function admin_(task) {
     case 'kpi':       return { ok: true, result: updateKpi() };
     case 'dashboard': return { ok: true, result: refreshDashboard() };
     case 'setup':     setup(); return { ok: true, result: 'タブを整えました' };
+    case 'clean_kpi': return { ok: true, result: cleanKpi_() };
     default:
       return { ok: false, error: '不明なtask: ' + task
                + '（format / triggers / kpi / dashboard / setup）' };

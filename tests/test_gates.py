@@ -1873,6 +1873,25 @@ def test_rewrites_reach_the_sheet():
         check(f"{name} がリライトログに書く", "hub_client.rewrite_log(" in src, True)
 
 
+def test_hub_has_one_kpi_writer():
+    """管制塔のKPIは、書き手が1つであること。
+
+    GASの毎朝6時の updateKpi と、CIの daily_kpi.py が両方書いていた。GAS側は
+    サイト一覧のGA4/GSCが空のまま「全部0」の行を毎日3本足し、最後に書いた側として
+    ダッシュボードを0で上書きしていた（合計が全て0で表示されていた）。
+    """
+    print(chr(10) + "■ 管制塔の書き手")
+    kpi = (ROOT / "automation" / "gas" / "kpi.gs").read_text(encoding="utf-8")
+    hub = (ROOT / "automation" / "gas" / "hub.gs").read_text(encoding="utf-8")
+    check("GASは updateKpi のトリガーを作らない", "newTrigger('updateKpi')" not in kpi, True)
+    check("計測設定の無いサイトは書かない", "if (!cfg.ga4 && !cfg.gsc) return;" in kpi, True)
+    check("全部0でダッシュボードを上書きしない", "allZero && hadValue" in hub, True)
+    check("エラーログは同じ未対応を積まない", "same_open" in hub, True)
+    check("0行を掃除する保守タスクがある", "case 'clean_kpi'" in hub, True)
+    dk = (ROOT / "scripts" / "daily_kpi.py").read_text(encoding="utf-8")
+    check("AIO計測に推定を添える", "aio_est" in dk and "aio_est" in hub, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1919,7 +1938,8 @@ def main():
               test_intake_sheets_are_not_published,
               test_kw_plan_keeps_only_buyers,
               test_reports_carry_diagnosis_and_next_actions,
-              test_rewrites_reach_the_sheet):
+              test_rewrites_reach_the_sheet,
+              test_hub_has_one_kpi_writer):
         try:
             t()
         except Exception as e:
