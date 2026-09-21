@@ -1633,6 +1633,15 @@ def test_kw_plan_keeps_only_buyers():
             "industries": ["運送業"], "intents": ["小規模事業者持続化補助金", "申請 代行"]}
     check("設定にある複合語は通す（〜補助金）",
           kw_plan.relevant({"kw": "小規模事業者持続化補助金 運送業", "vol": 50, "imp": 0}, subs, corpus, arts, owned, picked), "")
+    # 業種はサブジェクトであって領域ではない。業種名だけでは通さない
+    lab = {"own_terms": ("aio", "meo", "集客"), "domain_terms": ("aio",), "ng_terms": (),
+           "industries": ["リフォーム", "飲食店"], "intents": ["AIO対策 失敗"]}
+    def lab_ok(kw):
+        return kw_plan.relevant({"kw": kw, "vol": 5000, "imp": 0}, lab, corpus, arts, owned, picked)
+    check("業種名だけの語は落とす（リフォーム キッチン 費用）", lab_ok("リフォーム キッチン 費用"), "領域語なし")
+    check("業種名だけの語は落とす（飲食店 近くの）", lab_ok("飲食店 近くの"), "領域語なし")
+    check("業種×領域語は通す（リフォーム meo 対策）", lab_ok("リフォーム meo 対策"), "")
+    check("領域語を含む複合意図は通す（aio対策 失敗）", lab_ok("工務店 aio対策 失敗"), "")
     check("買い手の意図（申請 代行）が上限内に残る", "申請 代行" in kw_plan.intents_for(
         {"intents": ["申請 代行"] + ["意図%d" % i for i in range(30)]}), True)
     check("検索数も表示も無い語は落とす", ok("経理 記帳 手順", vol=None), "検索数が少ない")

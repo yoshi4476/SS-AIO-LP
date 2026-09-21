@@ -166,12 +166,16 @@ def intents_for(S):
 
 
 def known_heads(S):
-    """語の先頭として認める語。担当領域語と、サイト設定にある複合語
-    （業種・意図・領域の各起点）。設定に無い複合語は認めない"""
-    heads = set(t.lower() for t in S["own_terms"])
-    for t in list(S.get("industries", [])) + list(S.get("intents", [])):
+    """語の先頭として認める語。担当領域語（owns）と、領域語を含む複合意図
+    （小規模事業者持続化補助金・AIO対策）。業種名は入れない。
+    業種はサブジェクトであって領域ではない。業種を認めると、AI集客サイトに
+    「リフォーム キッチン 費用」（660万/月）が、補助金サイトに「飲食店 近くの」
+    （150万/月）が入る。検索数が大きいぶん上位を占め、計画が丸ごとずれる"""
+    own = [t.lower() for t in S["own_terms"]]
+    heads = set(own)
+    for t in S.get("intents", []):
         for tok in re.split(r"[\s　]+", str(t).lower()):
-            if len(tok) >= 3:
+            if len(tok) >= 3 and any(o in tok for o in own):
                 heads.add(tok)
     return heads
 
