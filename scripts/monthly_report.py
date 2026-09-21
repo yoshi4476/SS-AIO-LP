@@ -1601,6 +1601,12 @@ def render(d, a):
     weekly_chart, _ = weekly_blocks(site_cfg().get('domain', ''))
     picked_kw = picked_kw_table(SITE_ID)
     effect_table_html = effect_table()
+    # 現在地と次にやること。落ちてもレポートは出す
+    try:
+        import site_diagnosis
+        diag_html = site_diagnosis.html([SITE_ID])
+    except Exception as e:
+        diag_html = f'<p class="note">診断を作れませんでした: {str(e)[:80]}</p>'
 
     rank_rows = ""
     rimp = d.get("rank_imp", {})
@@ -2247,6 +2253,9 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <div class="sec" style="margin-top:16px"><span class="no">12</span><h2>次に狙う検索語と、選んだ理由</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">台帳で「未着手」の語。同じ順位でもクリック率は5倍違うため、<b>検索結果で用が済む語か</b>を機械で判定しています。</p>
 {picked_kw}
+<h3 style="margin-top:16px">現在のサイト診断と、次にやること</h3>
+<p style="font-size:9.5pt">順位帯ごとの「順位相応なら増えるクリック」は、順位を上げずにタイトル・説明文で取り返せる量です。「誰が」の<b>自動</b>は週次・月次の自動化が処理し、<b>人</b>は手当てが要るものです。</p>
+{diag_html}
 </div>
 
 <!-- ページ: 直した記事の効果 -->

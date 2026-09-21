@@ -1816,6 +1816,46 @@ def test_kw_plan_keeps_only_buyers():
     check("force で公開済みを落とさない", "force=True" not in src, True)
 
 
+def test_reports_carry_diagnosis_and_next_actions():
+    """レポートに「現在のサイト診断と、次にやること」が入っていること。
+
+    数字の推移だけでは、いまどこが弱く次に何をするかが読み手に委ねられていた。
+    順位帯・台帳・指名検索・導線・検査の要対応から機械的に組み立てる。
+    週次は検査（findings）の後に作らないと、要対応が載らない。
+    """
+    import site_diagnosis
+    print(chr(10) + "■ レポートの診断と次にやること")
+    d = {"site": "x", "name": "テスト", "domain": "example.invalid", "days": 28,
+         "bands": {"4〜10位": {"pages": 3, "imp": 300, "clicks": 3, "gap": 9.0},
+                   "11〜20位": {"pages": 2, "imp": 100, "clicks": 1, "gap": 1.0}},
+         "funnel": [("記事を見た", 200), ("CTAを押した", 2), ("フォームを開いた", 1), ("送信した", 1)],
+         "brand": {"prev": 10, "cur": 30, "growth": "+200%"},
+         "stock": {"todo": 12, "doing": 1, "done": 50, "A": 4},
+         "fixes": [{"slug": "a-b", "why": "9位・表示101・クリック1｜1ページ目にいるのにクリックが取れていない"}],
+         "findings": ["要対応: 会社表記のゆれ（NAP）"]}
+    acts = site_diagnosis.next_actions(d)
+    who = [w for w, _ in acts]
+    check("1ページ目の取りこぼしを自動の手当てに出す", any("タイトル・説明文" in a for _, a in acts), True)
+    check("在庫が薄ければ自動の手当てに出す", any("在庫が 12 本" in a for _, a in acts), True)
+    check("CTA押下率が低ければ人の手当てに出す", any("CTAの押下率" in a for w, a in acts if w == "人"), True)
+    check("検査の要対応を人の手当てに出す", any("会社表記のゆれ" in a for w, a in acts if w == "人"), True)
+    h = site_diagnosis.html_block(d)
+    check("HTMLに順位帯の表がある", "順位相応なら増える" in h, True)
+    check("HTMLに次にやることの表がある", "次にやること（効く順）" in h, True)
+    # 材料が取れなくてもHTMLは出る
+    h2 = site_diagnosis.html_block({"site": "x", "name": "テスト", "domain": "e", "days": 28,
+                                     "bands": None, "funnel": None, "brand": None, "stock": None,
+                                     "fixes": [], "findings": []})
+    check("材料が無くても落ちない", "取得できません" in h2, True)
+    wk = (ROOT / "scripts" / "weekly_report.py").read_text(encoding="utf-8")
+    mo = (ROOT / "scripts" / "monthly_report.py").read_text(encoding="utf-8")
+    check("週次レポートが診断を載せる", "site_diagnosis.html(" in wk, True)
+    check("月次レポートが診断を載せる", "site_diagnosis.html(" in mo, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8", errors="replace")
+    check("週次は検査の後にレポートを作る",
+          wf.index("name: 見つかったものを集めて知らせる") < wf.index("name: 週次レポートの作成"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1860,7 +1900,8 @@ def main():
               test_routine_success_is_not_emailed,
               test_every_site_gets_articles,
               test_intake_sheets_are_not_published,
-              test_kw_plan_keeps_only_buyers):
+              test_kw_plan_keeps_only_buyers,
+              test_reports_carry_diagnosis_and_next_actions):
         try:
             t()
         except Exception as e:
