@@ -166,7 +166,7 @@ def main():
         # ページ別
         ps = sorted([row(r) for r in q(sc, d, str(start), str(end), ["page"], 1000)],
                     key=lambda x: -x["imp"])[:top]
-        print(f"\n  ▼ ページ別（表示回数順）")
+        print("\n  ▼ ページ別（表示回数順）")
         print(f"    {'表示':>7} {'クリック':>8} {'CTR':>7} {'順位':>6}  ページ")
         for x in ps:
             print(f"    {x['imp']:>7,} {x['clicks']:>8,} {x['ctr']:>6.1f}% "

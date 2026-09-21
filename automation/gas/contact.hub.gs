@@ -163,7 +163,7 @@ function leadDetail_(type, d) {
 function body_(s) {
   return String(s == null ? '' : s)
     .replace(/\r\n?/g, '\n')      // 改行コードを揃える。改行自体は残す
-    .replace(/ /g, '')       // 制御文字だけ落とす
+    .replace(/\u0000/g, '')       // 制御文字だけ落とす
     .slice(0, 5000)
     .trim();
 }

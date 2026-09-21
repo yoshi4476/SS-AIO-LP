@@ -171,7 +171,6 @@ def group_table(rows, me):
             body.append(f'<tr{mark}><td>{r["name"]}</td>'
                         '<td colspan="4">権限付与待ち（取得できません）</td></tr>')
             continue
-        share = r["imp"] / ti * 100 if ti else 0
         body.append(
             f'<tr{mark}><td>{r["name"]}{"（本レポート）" if r["id"] == me else ""}</td>'
             f'<td class="num">{r["imp"]:,}</td><td class="num">{r["clicks"]}</td>'

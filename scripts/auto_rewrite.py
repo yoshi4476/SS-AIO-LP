@@ -297,7 +297,7 @@ def main():
     if not a.write:
         for x in items[:12]:
             print(f"  [{x['kind']}] {x['slug'][:36]:<36} {x['why'][:40]}")
-        print(f"\n  --write を付けると claude が直し、機械が検算します"
+        print("\n  --write を付けると claude が直し、機械が検算します"
               f"（通らなければ元に戻します）")
         return 0
 

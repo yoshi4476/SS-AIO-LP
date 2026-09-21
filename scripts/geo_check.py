@@ -112,7 +112,7 @@ def main():
         total = len([u for u in re.findall(r"<loc>([^<]+)</loc>", xml)
                      if u.rstrip("/").count("/") >= 4])
         rate = (listed / total * 100) if total else 0
-        print(f"\n  ▼ 生成エンジン向けの案内（llms.txt）")
+        print("\n  ▼ 生成エンジン向けの案内（llms.txt）")
         print(f"     掲載 {listed}件 / 記事 {total}本（{rate:.0f}%）")
         if rate < 80:
             ng.append(f"{site}: llms.txt の掲載が {rate:.0f}% しかありません")

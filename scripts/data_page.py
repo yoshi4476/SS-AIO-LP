@@ -122,7 +122,7 @@ def build_body(days=28):
         n = ai_tot[name]
         pct = n / all_tot * 100 if all_tot else 0
         h.append(f"<tr><td>{esc(name)}</td><td>{n:,}</td><td>{pct:.2f}%</td></tr>")
-    h.append(f'''</tbody></table>
+    h.append('''</tbody></table>
 <p>母数が小さいため、割合は参考値です。実数をそのまま載せているのは、
 割合だけでは規模が分からず、比較に使えないためです。</p>
 </section>

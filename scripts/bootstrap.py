@@ -228,7 +228,7 @@ def main():
             raise SystemExit("中止しました。別のアカウントで作るなら "
                              "npx @google/clasp login をやり直してください")
 
-    print(f"\n■ スプレッドシートを作る")
+    print("\n■ スプレッドシートを作る")
     book = make_sheet(tok, title)
     print(f"   https://docs.google.com/spreadsheets/d/{book}/edit")
 
@@ -277,7 +277,7 @@ def main():
     print("  まとめて終わります。")
     print("  メール送信とトリガー登録は、本人が画面で承認したときにしか")
     print("  許可されないため、ここだけ自動にできません。")
-    print(f"\n  終わったら: python scripts/bootstrap.py --verify")
+    print("\n  終わったら: python scripts/bootstrap.py --verify")
 
 
 if __name__ == "__main__":

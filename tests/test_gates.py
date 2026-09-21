@@ -1753,6 +1753,7 @@ def test_kw_plan_keeps_only_buyers():
         # 同じ問い合わせは期限内なら課金なしで返す。条件の調整で取り直して約1,000クレジット無駄にした
         rakko.CACHE_DIR = pathlib.Path(tempfile.mkdtemp())
         rakko.CONSUMED, rakko.BUDGET = 0.0, None
+        rakko.CACHE_DIR = saved_cache
         hits = {"n": 0}
         def counted(req, timeout=0):
             hits["n"] += 1
@@ -1838,7 +1839,6 @@ def test_reports_carry_diagnosis_and_next_actions():
          "fixes": [{"slug": "a-b", "why": "9位・表示101・クリック1｜1ページ目にいるのにクリックが取れていない"}],
          "findings": ["要対応: 会社表記のゆれ（NAP）"]}
     acts = site_diagnosis.next_actions(d)
-    who = [w for w, _ in acts]
     check("1ページ目の取りこぼしを自動の手当てに出す", any("タイトル・説明文" in a for _, a in acts), True)
     check("在庫が薄ければ自動の手当てに出す", any("在庫が 12 本" in a for _, a in acts), True)
     check("CTA押下率が低ければ人の手当てに出す", any("CTAの押下率" in a for w, a in acts if w == "人"), True)
