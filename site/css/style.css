@@ -1439,3 +1439,17 @@ main.lab .cta-final h2 { color: #fff; }
 .social-links a:hover, .social-links a:focus-visible { color: #fff; border-color: transparent; }
 .social-links a[data-net="linkedin"]:hover, .social-links a[data-net="linkedin"]:focus-visible { background: #0a66c2; }
 .social-links a[data-net="note"]:hover, .social-links a[data-net="note"]:focus-visible { background: #41c9b4; }
+
+/* 業種ハブ（手法とは別の軸で記事を束ねる） */
+.hub-lead { margin: .4rem 0 0; color: var(--muted); font-size: .92rem; line-height: 1.85; }
+.hub-list { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: .9rem; }
+.hub-list li { border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; background: #fff; }
+.hub-list li > a { display: flex; align-items: baseline; gap: .6em; text-decoration: none; color: var(--blue-deep); }
+.hub-list li > a strong { font-size: 1.05rem; }
+.hub-list .cnt { margin-left: auto; font-size: .78rem; color: var(--muted); }
+.hub-list .hub-lead { font-size: .84rem; margin-top: .4rem; }
+.hub-note { margin-top: 1rem; font-size: .84rem; color: var(--muted); }
+.industry-box ul { list-style: none; margin: .6rem 0 0; padding: 0; }
+.industry-box li { padding: .5em 0; border-bottom: 1px dashed var(--line); display: flex; gap: .6em; align-items: baseline; }
+.industry-box li .tag { margin-left: auto; font-size: .72rem; color: var(--muted); white-space: nowrap; }
+.industry-box .more { display: inline-block; margin-top: .8rem; font-weight: 700; }

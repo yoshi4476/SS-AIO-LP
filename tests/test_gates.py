@@ -2158,6 +2158,56 @@ def test_data_intake_publishes_only_grounded_numbers():
     check("intake_watch がデータシートを振り分ける", "data_intake" in (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8"), True)
 
 
+def test_site_has_two_axes_and_no_orphans():
+    """手法だけでなく業種でも記事に行けること。入口ページが孤立していないこと。
+
+    実測で、一次データの入口（/data/）に内部リンクが1本も無く、誰もたどり着けなかった。
+    記事は手法（AIO/SEO/MEO）でしか分類されておらず、「クリニックの集客」を探す読者は
+    4カテゴリに散った21本を自力で集めるしかなかった。
+    """
+    print(chr(10) + "■ サイト構成（2軸と入口）")
+    import collections
+    import industry_hub as IH
+    inds, mn = IH.load()
+    check("業種の定義がある", len(inds) >= 5 and mn >= 3, True)
+    check("具体的な業種を先に判定する（歯科は医院を含む）",
+          IH.detect("歯科医院のMEO対策", "歯科 meo"), "shika")
+    check("当てはまらない記事は業種なし", IH.detect("AIO対策とは", "aio 対策"), None)
+    # 内部リンクの実測（生成済みの公開ページで見る）
+    site = ROOT / "site"
+    pages, links, inbound = {}, collections.defaultdict(set), collections.Counter()
+    for p in site.rglob("index.html"):
+        u = "/" + str(p.parent.relative_to(site)).replace("\\", "/") + "/"
+        pages[u if u != "/./" else "/"] = p
+    for u, p in pages.items():
+        body = re.sub(r"<script.*?</script>|<style.*?</style>", "",
+                      p.read_text(encoding="utf-8", errors="surrogateescape"), flags=re.S)
+        for h in re.findall(r'href="(/[^"#?]*)"', body):
+            h = h if h.endswith("/") else h + "/"
+            if h in pages and h != u:
+                links[u].add(h)
+                inbound[h] += 1
+    depth, q = {"/": 0}, ["/"]
+    while q:
+        u = q.pop(0)
+        for v in links.get(u, ()):
+            if v not in depth:
+                depth[v] = depth[u] + 1
+                q.append(v)
+    lost = [u for u in sorted(pages) if u not in depth and u != "/thanks/"]
+    check("トップからたどり着けないページが無い", lost, [])
+    for u in ("/data/", "/industry/", "/download/"):
+        check(f"{u} に内部リンクがある", inbound[u] > 0, True)
+    hubs = sorted(p.parent.name for p in (site / "industry").glob("*/index.html"))
+    check("業種ハブが作られている", len(hubs) >= 5, True)
+    check("業種ハブは一覧からたどれる", all(inbound[f"/industry/{h}/"] > 0 for h in hubs), True)
+    llms = (site / "llms.txt").read_text(encoding="utf-8")
+    check("llms.txt に業種の目次がある", "## 業種から探す" in llms, True)
+    check("llms.txt の業種は1ブロックだけ", llms.count("## 業種から探す"), 1)
+    sm = (site / "sitemap.xml").read_text(encoding="utf-8")
+    check("sitemap に業種ハブが載る", all(f"/industry/{h}/" in sm for h in hubs), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2212,7 +2262,8 @@ def main():
               test_speed_fix_keeps_pages_light,
               test_entities_link_articles_to_official_sources,
               test_aio_rewrites_and_citation_measurement,
-              test_data_intake_publishes_only_grounded_numbers):
+              test_data_intake_publishes_only_grounded_numbers,
+              test_site_has_two_axes_and_no_orphans):
         try:
             t()
         except Exception as e:

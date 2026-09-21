@@ -8,6 +8,15 @@
 - コーポレートサイト: https://corp.7senses.co.jp/
 - 関連サービス（同社運営）: AI導入補助金（IT導入補助金）申請サポート https://lp.7senses.co.jp/ （最大350万円の補助金申請から導入・集客まで支援）
 
+## 業種から探す
+- [歯科医院の集客](https://ai.7senses.co.jp/industry/shika/): 歯科医院は、商圏が狭いうえに競合が密集します。（8本）
+- [整骨院・接骨院の集客](https://ai.7senses.co.jp/industry/seikotsuin/): 整骨院・接骨院は、資格のない「整体」と同じ土俵で比較されながら、柔道整復師としての広告制限を受ける立場にあります。（12本）
+- [クリニック・医療機関の集客](https://ai.7senses.co.jp/industry/clinic/): 患者はいま、Googleマップ・検索・AI検索の3つで受診先を探しています。（21本）
+- [不動産の集客](https://ai.7senses.co.jp/industry/fudosan/): 不動産は物件ポータルが検索の上位を占め、自社サイトが同じ土俵で戦っても届きません。（12本）
+- [工務店・注文住宅の集客](https://ai.7senses.co.jp/industry/koumuten/): 注文住宅は検討期間が長く、その間に何度も検索されます。（9本）
+- [士業（税理士・社労士ほか）の集客](https://ai.7senses.co.jp/industry/shigyou/): 士業は、相談される前に比較されます。（6本）
+- [BtoB・法人向けサービスの集客](https://ai.7senses.co.jp/industry/btob/): BtoBは検討期間が長く、担当者・決裁者・現場と読む人が変わります。（6本）
+
 ## 主要ページ
 - [はじめての方へ](https://ai.7senses.co.jp/start/): サイトの歩き方3ステップ（全体像→無料診断→カテゴリ深掘り）
 - [AI集客用語集](https://ai.7senses.co.jp/glossary/): AIO・LLMO等の基本用語30個を60字以内で定義

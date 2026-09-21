@@ -49,6 +49,7 @@ NAV_DEFAULT = [
     {"label": "SEO運用", "url": "/seo/"},
     {"label": "MEO運用", "url": "/meo/"},
     {"label": "AI集客", "url": "/ai-marketing/"},
+    {"label": "業種から探す", "url": "/industry/"},
     {"label": "AI導入補助金（独自メディア）", "url": "https://lp.7senses.co.jp/",
      "blank": True},
     {"label": "コーポレートサイト", "url": "https://corp.7senses.co.jp/", "blank": True},
@@ -56,6 +57,9 @@ NAV_DEFAULT = [
 ]
 FOOTER_NAV_DEFAULT = [
     {"label": "はじめての方へ", "url": "/start/"},
+    {"label": "業種から探す", "url": "/industry/"},
+    {"label": "実測データ（一次データ）", "url": "/data/"},
+    {"label": "無料資料ダウンロード", "url": "/download/"},
     {"label": "記事一覧", "url": "/blog/"},
     {"label": "用語集", "url": "/glossary/"},
     {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
@@ -304,14 +308,24 @@ def datasets_box(meta):
     return f'<section class="related datasets"><h2>自社の一次データ</h2><ul>{lis}</ul></section>'
 
 
+def industry_box(meta, all_metas):
+    """同じ業種の記事へつなぐ。手法の軸だけだと、読者は自分の業種の全体像に届かない"""
+    try:
+        import industry_hub
+        return industry_hub.box(meta, all_metas, CATEGORIES)
+    except Exception:
+        return ""
+
+
 def related_html(meta, all_metas):
     same = [m for m in all_metas if m["slug"] != meta["slug"] and m["category"] == meta["category"]]
     others = [m for m in all_metas if m["slug"] != meta["slug"] and m["category"] != meta["category"]]
     picks = (same + others)[:3]
+    head = industry_box(meta, all_metas) + datasets_box(meta)
     if not picks:
-        return datasets_box(meta)
+        return head
     tiles = "\n".join(post_tile(m) for m in picks)
-    return (datasets_box(meta) + '<section class="related"><h2>あわせて読みたい関連記事</h2>'
+    return (head + '<section class="related"><h2>あわせて読みたい関連記事</h2>'
             f'<ul class="post-list">\n{tiles}\n  </ul></section>')
 
 
@@ -649,6 +663,11 @@ def build_sitemap(article_entries):
     # 一次データのページ（data_intake.py が作る）。固定の一覧に無くても拾う
     for d in sorted((SITE / "data").glob("*/index.html")):
         lines.append(f"  <url><loc>{SITE_URL}/data/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
+    # 業種ハブ（industry_hub.py が作る）
+    for d in sorted((SITE / "industry").glob("*/index.html")):
+        lines.append(f"  <url><loc>{SITE_URL}/industry/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
+    if (SITE / "industry" / "index.html").is_file():
+        lines.append(f"  <url><loc>{SITE_URL}/industry/</loc><lastmod>{today}</lastmod></url>")
     for meta, url in article_entries:
         lines.append(f"  <url><loc>{url}</loc><lastmod>{meta['modified']}</lastmod></url>")
     lines.append("</urlset>")
@@ -748,6 +767,50 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 </body>
 </html>
 """
+
+
+def build_industry_hubs(all_metas):
+    """業種ハブ（/industry/ と /industry/<slug>/）。記事が増えるほど厚くなる"""
+    try:
+        import industry_hub as IH
+    except Exception as e:
+        print(f"WARN: 業種ハブを作れません（{str(e)[:50]}）")
+        return []
+    pairs, g = IH.live(all_metas)
+    shell = dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
+                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT), **_cta())
+    made = []
+    for ind, metas in pairs:
+        out = SITE / "industry" / ind["slug"] / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        page = BLOG_PAGE.format(items=IH.hub_body(ind, metas, CATEGORIES, post_tile), **shell)
+        page = page.replace("記事一覧｜" + SITE_NAME, f'{ind["name"]}の集客｜{SITE_NAME}')
+        page = page.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/')
+        made.append((ind, metas))
+        out.write_text(page, encoding="utf-8", newline="\n")
+    if made:
+        out = SITE / "industry" / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        page = BLOG_PAGE.format(items=IH.index_body(pairs, g), **shell)
+        page = page.replace("記事一覧｜" + SITE_NAME, f"業種から探す｜{SITE_NAME}")
+        page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")
+        out.write_text(page, encoding="utf-8", newline="\n")
+    # llms.txt に業種の目次を出す。AIクローラーはここを読んで全体像を掴む
+    lt = SITE / "llms.txt"
+    if made and lt.is_file():
+        head = "## 業種から探す"
+        body = "\n".join(
+            f'- [{i["name"]}の集客]({SITE_URL}/industry/{i["slug"]}/): '
+            f'{i["lead"].split("。")[0]}。（{len(v)}本）' for i, v in made)
+        t = lt.read_text(encoding="utf-8")
+        block = f"{head}\n{body}\n"
+        if head in t:
+            t = re.sub(rf"{head}\n(?:- .*\n)*", block, t, count=1)
+        else:
+            t = t.replace("## 主要ページ", block + "\n## 主要ページ", 1)
+        lt.write_text(t, encoding="utf-8", newline="\n")
+    print(f"業種ハブ: {len(made)}件（{'、'.join(i['name'] for i, _ in made)}）")
+    return made
 
 
 def build_blog_index(all_metas):
@@ -873,6 +936,7 @@ def main():
             print(f"built: {url}")
 
     build_blog_index(all_metas)
+    build_industry_hubs(all_metas)
     build_sitemap(entries)
     build_feed(entries)
     sync_listings(all_metas)
