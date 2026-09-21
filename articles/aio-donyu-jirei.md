@@ -92,7 +92,7 @@ GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extendedは、それ
 
 計測を始める前は、順位が上がったという感覚だけで施策の良し悪しを判断していました。数値で確認する運用に変えてからは、どの記事のどの部分を直せば引用や表示が伸びるかを、感覚ではなく事実として議論できるようになりました。
 
-計測の型を先に固めたい場合は、[AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方](/aio/aio-koka-sokutei-report-hinagata/)と[AIO対策の計測方法｜見るべき5つの指標と週次の運用手順](/aio/aio-taisaku-keisoku-houhou/)を先に読んでおくと、自社での再現がしやすくなります。
+計測の型を先に固めたい場合は、[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)と[AIO対策の計測方法](/aio/aio-taisaku-keisoku-houhou/)を先に読んでおくと、自社での再現がしやすくなります。
 
 <figure><img src="/images/aio-donyu-jirei/before-after.png" alt="AIO導入前後で変わったこと: 導入前は構造化データが未実装・llms.txtが未設置・クロール許可が未確認・引用状況を計測していない。導入後はBlogPosting・FAQPage・BreadcrumbListを直書き・llms.txtを継続的に追記・主要20種のクローラー許可を記録・GSC生成AIレポートを日次で確認" width="1200" height="675" loading="lazy"><figcaption>AIO導入前後で変わったこと（当メディア作成）</figcaption></figure>
 
@@ -135,7 +135,9 @@ MEO運用サービス「G-ran」では、**通算3,200店舗以上**を運用し
 
 **構造整備そのものは数週間で完了しますが、検索順位や引用状況の変化として現れるまでには数ヶ月単位の時間がかかります。**
 
-私たちの経験では、構造化データとllms.txtの実装、クローラー許可の確認までは、既存サイトであれば2〜3週間程度で一通り終わります。ここから先の、検索順位の変化やAI Overviewでの引用は、狙う語の競合状況によって数ヶ月単位で変動します。費用感を含めた比較は、[AIO導入のメリット5つと費用相場｜投資対効果の考え方](/aio/aio-taisaku-merit-hiyou/)にまとめています。
+私たちの経験では、構造化データとllms.txtの実装、クローラー許可の確認までは、既存サイトであれば2〜3週間程度で一通り終わります。ここから先の、検索順位の変化やAI Overviewでの引用は、狙う語の競合状況によって数ヶ月単位で変動します。
+
+費用感を含めた比較は、[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)にまとめています。
 
 自社の人員だけで対応が難しい場合は、外注の判断基準をBtoB向けAIO対策会社の選び方｜比較5基準と費用相場で確認したうえで検討してください。
 
