@@ -236,6 +236,24 @@ def own_hit(low, S):
     return False
 
 
+def cheap_reject(c, S):
+    """外部に問い合わせずに落とせる理由。検索数を取る前に使う。
+    補助金サイトは候補が1万件を超え、そのまま一括登録すると500エラーで
+    落ちたうえ、どうせ落とす語に料金を払っていた"""
+    low = c["kw"].lower()
+    if not own_hit(low, S):
+        return "領域語なし"
+    if any(t in low for t in S["ng_terms"]):
+        return "除外語"
+    if any(t in low for t in NOT_BUYER):
+        return "見込み客でない"
+    if any(t in low for t in RIVALS):
+        return "他社名"
+    if KD.is_brand_query(low):
+        return "指名検索"
+    return ""
+
+
 def relevant(c, S, corpus, arts, owned, picked_norms):
     """採用してよいか。理由を返す（空なら採用）"""
     kw, low = c["kw"], c["kw"].lower()
@@ -269,15 +287,34 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
     return ""
 
 
+BULK = 500   # 1回の一括登録の件数。2,000件超で500エラーになった。
+             # 最低料金15クレジット＝500件×0.03 なので、500件ずつなら分けても損しない
+
+
+def chunks(xs, n):
+    return [xs[i:i + n] for i in range(0, len(xs), n)]
+
+
 def fill_volume(cands):
-    """検索数の無い候補を、1回の一括登録で埋める（最低15クレジット。分けると損）"""
+    """検索数の無い候補を、一括登録で埋める（500件ずつ）"""
     missing = [c["kw"] for c in cands.values() if c.get("vol") is None]
     if not missing or not rakko.enabled():
         return 0
+    total = 0
+    for part in chunks(missing, BULK):
+        total += _fill_part(cands, part)
+    return total
+
+
+def _fill_part(cands, missing):
     r = rakko.call("/v1/search-volume", {"keywords": missing, "seoDifficulty": True})
     rid = (r or {}).get("data", {}).get("requestId")
     if not rid:
-        print("   （一括の検索数取得に失敗。サジェスト由来の語は検索数なしのまま）")
+        time.sleep(3)                               # 一過性の500は少し待つと通る
+        r = rakko.call("/v1/search-volume", {"keywords": missing, "seoDifficulty": True})
+        rid = (r or {}).get("data", {}).get("requestId")
+    if not rid:
+        print(f"   （一括の検索数取得に失敗: {len(missing)}件。この分は検索数なしのまま）")
         return 0
     done = False
     for _ in range(120):                       # 1,000件超は数分かかる。200秒では足りなかった
@@ -438,7 +475,15 @@ def run(site_id, deep, replace):
         print("   RAKKO_API_KEY が未設定です。python scripts/set_key.py RAKKO_API_KEY")
         return
     cands = gather(site_id, S, deep)
-    print(f"   候補 {len(cands)}件（起点 {len(S['industries'])}件）")
+    pre = defaultdict(int)
+    for k in list(cands):
+        why = cheap_reject(cands[k], S)
+        if why:
+            pre[why] += 1
+            del cands[k]
+    print(f"   候補 {len(cands) + sum(pre.values())}件（起点 {len(S['industries'])}件）→ "
+          f"事前選別で {sum(pre.values())}件を除外（"
+          + " / ".join(f"{k} {v}" for k, v in sorted(pre.items(), key=lambda x: -x[1])) + "）")
     n = fill_volume(cands)
     print(f"   検索数を一括で埋めました: {n}件（未取得 "
           f"{sum(1 for c in cands.values() if c.get('vol') is None)}件）")

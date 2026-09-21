@@ -1674,6 +1674,11 @@ def test_kw_plan_keeps_only_buyers():
     diy = kw_plan.score({"kw": "請求書 封筒 書き方", "vol": 5400, "kd": 33})
     check("外注を考える語が、自分でやる語より上", buyer > diy, True)
 
+    # 検索数を取る前に、安い条件で落とす（1万件を一括登録して500エラーになった）
+    check("事前選別: 見込み客でない語", kw_plan.cheap_reject({"kw": "経理代行 求人"}, S), "見込み客でない")
+    check("事前選別: 通る語", kw_plan.cheap_reject({"kw": "経理代行 費用 相場"}, S), "")
+    check("一括登録は500件ずつ", [len(c) for c in kw_plan.chunks(list(range(1201)), kw_plan.BULK)], [500, 500, 201])
+
     # 計画ファイルの表を読み戻せること（レポートが検索数・難易度を引く経路）
     tmp = ROOT / "docs" / "kw-plan-_gate_.md"
     tmp.write_text("| 優先 | キーワード | 月間 | 難易度 | 開く理由 | 12か月 | 表示 | 出どころ |" + chr(10)
