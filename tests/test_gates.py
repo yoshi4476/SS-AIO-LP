@@ -1609,6 +1609,7 @@ def test_kw_plan_keeps_only_buyers():
     一新は非破壊で、台帳の「未着手」だけを対象外にし、公開済み・執筆中は触らない。
     """
     import kw_plan
+    import kw_intent
     print(chr(10) + "■ 計画の一新で入れてよい語")
     S = {"own_terms": ("経理", "記帳", "請求書"), "domain_terms": ("経理", "記帳", "費用", "相場"),
          "ng_terms": ("aio",), "industries": ["経理"], "intents": ["経理代行 費用"]}
@@ -1685,6 +1686,14 @@ def test_kw_plan_keeps_only_buyers():
     buyer = kw_plan.score({"kw": "経理代行 費用 相場", "vol": 210, "kd": 31})
     diy = kw_plan.score({"kw": "請求書 封筒 書き方", "vol": 5400, "kd": 33})
     check("外注を考える語が、自分でやる語より上", buyer > diy, True)
+
+    # 一括調査に送るのは価値の高い語だけ、1回ぶんまで（1万件を20回送って300クレジット払った）
+    many = [{"kw": "補助金 その%d" % i} for i in range(700)] \
+         + [{"kw": "補助金 申請 代行 費用"}, {"kw": "補助金 不採択 理由"}, {"kw": "補助金 とは", "imp": 30}]
+    sel = kw_plan.worth_lookup(many)
+    check("価値の無い語は一括調査に送らない", len(sel) <= kw_plan.LOOKUP_MAX and all(
+        c.get("imp") or kw_plan.BUYER.search(c["kw"]) or kw_intent.score(c["kw"])[0] >= 2 for c in sel), True)
+    check("買い手の語が先頭に来る", sel[0]["kw"], "補助金 申請 代行 費用")
 
     # 検索数を取る前に、安い条件で落とす（1万件を一括登録して500エラーになった）
     check("事前選別: 見込み客でない語", kw_plan.cheap_reject({"kw": "経理代行 求人"}, S), "見込み客でない")

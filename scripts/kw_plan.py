@@ -137,9 +137,13 @@ def score(c, prio=()):
     return round(s, 2)
 
 
+DRY = False   # True のとき、ラッコは呼ばず（キャッシュにあれば使う）、課金の見積もりだけ出す
+
+
 def gather(site_id, S, deep):
     """サブジェクト（起点）ごとに候補を集める。(kw -> 候補dict)"""
     cands = {}
+    paid = {"calls": 0}
 
     def put(kw, subject, src, vol=None, kd=None, trend=None, imp=None, pos=None):
         kw = re.sub(r"\s+", " ", str(kw)).strip()
@@ -165,18 +169,32 @@ def gather(site_id, S, deep):
     # （クリニック・飲食店）のときは単体で聞くと患者・消費者の検索しか返らない
     # （クリックポスト／ペインクリニック）。業種×領域語で聞く
     own_core = core_terms(S)
+
+    def paid_call(fn, *a, **k):
+        """課金の呼び出し。--dry-run ではキャッシュにあるときだけ返し、無ければ数だけ数える"""
+        if DRY:
+            path = "/v1/related-keywords" if fn is rakko.related else "/v1/suggest-keywords"
+            body = ({"keyword": a[0], "limit": 100} if fn is rakko.related
+                    else {"keyword": a[0], "modes": ["google", "youtube"], "limit": 100})
+            hit = rakko._cache_get(path, body, "POST")
+            if hit is None:
+                paid["calls"] += 1
+                return []
+            return rakko._rows(hit)
+        return fn(*a, **k)
+
     for ind in S["industries"]:
         if ind.lower() in S["own_terms"]:
             queries = [ind]
-            rows = rakko.as_rows(rakko.related(ind))
+            rows = rakko.as_rows(paid_call(rakko.related, ind))
         else:
             queries = [f"{ind} {t}" for t in own_core]
             rows = []
         for q in queries:
-            rows += rakko.as_rows(rakko.suggest(q))
+            rows += rakko.as_rows(paid_call(rakko.suggest, q))
         for kw, vol, kd in rows:
             put(kw, ind, "rakko", vol=vol, kd=kd)
-        if deep:
+        if deep and not DRY:
             res = rakko.call("/v1/other-keywords", {"keyword": ind, "sortBy": "importance"})
             for it in (res or {}).get("data", {}).get("items", []):
                 m = it.get("metrics") or {}
@@ -190,6 +208,8 @@ def gather(site_id, S, deep):
             for s in KD.suggest(f"{ind} {it}"):
                 put(s, ind, "suggest")
         time.sleep(0.2)
+    if DRY:
+        print(f"   [dry-run] ラッコのサジェスト／関連語: キャッシュ外 {paid['calls']}回 → 約{paid['calls'] * 1.5:.0f}クレジット")
     return cands
 
 
@@ -308,6 +328,28 @@ def chunks(xs, n):
 
 
 VOL_CACHE = ROOT / "data" / "rakko_volume.json"
+LOOKUP_MAX = BULK    # 一括調査に送る語は1サイト1回ぶん（500件＝15クレジット）まで
+
+
+def pre_score(c):
+    """課金なしで付けられる点。一括調査に送る語を選ぶために使う"""
+    s = kw_intent.score(c["kw"])[0] * 1.0
+    if BUYER.search(c["kw"].lower()):
+        s += 3.0
+    if c.get("imp"):
+        s += math.log1p(c["imp"])
+    return s
+
+
+def worth_lookup(cands):
+    """検索数を取りに行く価値のある語だけを、価値の高い順に上限まで返す。
+    無料サジェスト由来の候補は補助金サイトで1万件になり、全部を一括調査に
+    送ると500件ずつ20回（300クレジット）払っていた。買い手の語・開く理由の
+    強い語・表示実績のある語に限る"""
+    good = [c for c in cands
+            if c.get("imp") or BUYER.search(c["kw"].lower()) or kw_intent.score(c["kw"])[0] >= 2]
+    good.sort(key=lambda c: -pre_score(c))
+    return good[:LOOKUP_MAX]
 
 
 VOL_DAYS = 90    # 検索数は月次で大きくは動かない。90日は使い回す
@@ -340,10 +382,18 @@ def fill_volume(cands):
             if c.get("kd") is None:
                 c["kd"] = v.get("kd")
             hit += 1
-    missing = [c["kw"] for c in cands.values()
-               if c.get("vol") is None and norm(c["kw"]) not in known]
+    need = [c for c in cands.values()
+            if c.get("vol") is None and norm(c["kw"]) not in known]
+    missing = [c["kw"] for c in worth_lookup(need)]
     if hit:
         print(f"   検索数を手元の記録から埋めました: {hit}件（課金なし）")
+    if len(need) > len(missing):
+        print(f"   検索数の無い候補 {len(need)}件のうち、価値の高い {len(missing)}件だけ一括調査に送ります"
+              f"（{max(1, -(-len(missing) // BULK)) if missing else 0}回・約{15 * max(1, -(-len(missing) // BULK)) if missing else 0}クレジット）")
+    if DRY:
+        n = max(1, -(-len(missing) // BULK)) if missing else 0
+        print(f"   [dry-run] 一括調査: {len(missing)}件を{n}回 → 約{15 * n}クレジット（登録しません）")
+        return hit
     if not missing or not rakko.enabled():
         return hit
     total = hit
@@ -445,7 +495,7 @@ def choose(cands, S, site_id):
 
 
 def write_plan(site_id, S, picked, dropped, deep):
-    out = ROOT / "docs" / f"kw-plan-{site_id}.md"
+    out = ROOT / "docs" / (f"kw-plan-{site_id}.md" if not DRY else f"kw-plan-{site_id}.dry.md")
     by = defaultdict(list)
     for c in picked:
         by[c["subject"]].append(c)
@@ -606,7 +656,13 @@ def main():
     ap.add_argument("--replace", action="store_true", help="台帳の未着手を対象外にして積み直す")
     ap.add_argument("--if-needed", action="store_true",
                     help=f"未着手が{ENOUGH}本未満のサイトだけ組み直す（月次の定常運転用）")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="ラッコを呼ばず（キャッシュは使う）、候補の構成と課金の見積もりだけ出す")
     a = ap.parse_args()
+    global DRY
+    DRY = a.dry_run
+    if DRY and a.replace:
+        raise SystemExit("--dry-run と --replace は同時に使えません（見積もりで台帳は変えない）")
     import sites as S_
     ids = sorted(S_.load_all()) if a.all else ([a.site] if a.site else [S_.primary()])
     for sid in ids:

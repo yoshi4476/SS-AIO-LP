@@ -44,3 +44,4 @@ intake/todo/
 data/rakko_cache/
 data/rakko_volume.json
 data/rakko_spend.jsonl
+docs/kw-plan-*.dry.md
