@@ -98,6 +98,8 @@ GビズIDプライムの申請では、申請書を印刷して印鑑証明書�
 
 **GビズIDから始めてください。**発行を待つ間に、他の書類を集められます。
 
+関連する内容として[小売業のAI導入補助金](/blog/kourigyou-ai-hojokin-keihi/)も公開しています。
+
 <figure><img src="/images/kanagawa-kensetsugyou-denshishinsei/flow-start.png" alt="書類を揃える順番: GビズIDを申請する、納税証明書を取りに行く、登記簿謄本を取得する、見積書を受け取る、事業計画書を書く" loading="lazy"><figcaption>書類を揃える順番</figcaption></figure>
 
 1. **GビズIDプライムを申請する**（2〜3週間かかる）
