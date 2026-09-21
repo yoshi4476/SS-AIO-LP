@@ -113,6 +113,54 @@ def gsc_queries(site=None):
         return []
 
 
+def gsc_rising(site=None, days=28, min_imp=15, ratio=2.0):
+    """直近と、その前の同じ日数を比べて、急に伸びたクエリを返す。
+
+    「いま話題」を外部のトレンド情報から取ると、担当領域と関係ない語が混ざる。
+    自サイトに実際に出ている語の中で伸びたものを見れば、話題性と関連性が
+    同時に担保される（表示されている時点で、Googleが自社を関連と見ている）。
+
+    GSCは日付の反映が2〜3日遅れるため、直近3日は数えない。
+    ここを入れないと、末尾がいつも「減少」に見える。
+    """
+    sa = ROOT / "indexing-service-account.json"
+    site = site or load_env().get("GSC_SITE_URL", "https://ai.7senses.co.jp/")
+    if not sa.exists():
+        return []
+    try:
+        import gcreds
+        from googleapiclient.discovery import build
+        creds = gcreds.load(sa, ["https://www.googleapis.com/auth/webmasters.readonly"])
+        sc = build("searchconsole", "v1", credentials=creds)
+
+        def span(end_days_ago, n):
+            end = date.today() - timedelta(days=end_days_ago)
+            res = sc.searchanalytics().query(siteUrl=site, body={
+                "startDate": (end - timedelta(days=n - 1)).isoformat(),
+                "endDate": end.isoformat(),
+                "dimensions": ["query"], "rowLimit": 500}).execute()
+            return {r["keys"][0]: (int(r["impressions"]), round(r["position"], 1))
+                    for r in res.get("rows", [])}
+
+        now = span(3, days)
+        before = span(3 + days, days)
+    except Exception as e:
+        print(f"（伸びている語の取得をスキップ: {str(e)[:70]}）")
+        return []
+
+    out = []
+    for kw, (imp, pos) in now.items():
+        prev = before.get(kw, (0, 0))[0]
+        if imp < min_imp:
+            continue
+        if prev and imp / prev < ratio:
+            continue
+        out.append({"kw": kw, "imp": imp, "prev": prev, "pos": pos,
+                    "growth": (imp / prev) if prev else float("inf")})
+    out.sort(key=lambda q: -q["imp"])
+    return out
+
+
 def suggest(q, source="web"):
     """サジェスト（認証不要・無料）
 
@@ -238,6 +286,30 @@ def main():
         seen.add(kw)
         proven.append(q)
     proven.sort(key=lambda q: -q["imp"])
+
+    # --- 1.5 いま伸びている語（前の同じ日数と比べて2倍以上）---
+    # 話題性を外部のトレンド情報から取ると、担当領域と関係ない語が混ざる。
+    # 自サイトに出ている語の中で伸びたものだけを見れば、両方が担保される
+    rising = []
+    for q in gsc_rising(S["gsc"]):
+        kw = q["kw"]
+        low = kw.lower()
+        if is_written(kw, corpus) or is_dup(kw, arts, seen):
+            continue
+        if not any(t in low for t in S["own_terms"]):
+            continue
+        if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
+            continue
+        seen.add(kw)
+        rising.append(q)
+    if rising:
+        print(f"\n■ いま伸びている語（前の28日と比べて2倍以上・担当領域内）{len(rising)}件")
+        for q in rising[:12]:
+            g = "新規" if q["prev"] == 0 else f"{q['growth']:.1f}倍"
+            print(f"   表示{q['imp']:>4}（前{q['prev']:>3}／{g}） {q['pos']:>5.1f}位  {q['kw']}")
+        # 伸びている語は、表示実績のある語と同じ扱いで先頭に積む。
+        # 鮮度が価値なので、順番待ちの後ろに回すと機会を逃す
+        proven = rising + proven
 
     # --- 2. サジェスト（検索需要の裏付けあり）---
     # Google検索とYouTube検索の両方から集める。動画で調べられる言葉は
