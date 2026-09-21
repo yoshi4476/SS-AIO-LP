@@ -1340,15 +1340,18 @@ def picked_kw_table(site_id):
         return '<p class="note">未着手の語がありません。kw_discover.py で補充してください</p>'
     rows = ""
     for x in picks:
-        rows += (f'<tr><td>{x["kw"][:30]}</td><td>{x["aim"][:14]}</td>'
+        vk = (f'{x["vol"] if x.get("vol") is not None else "—"} / '
+              f'{x["kd"] if x.get("kd") is not None else "—"}')
+        rows += (f'<tr><td>{x["kw"][:30]}</td><td>{x["aim"][:14]}</td><td>{vk}</td>'
                  f'<td>{x["verdict"]}（{x["point"]:+d}）</td><td>{x["why"][:30]}</td></tr>')
     weak = len([x for x in picks if x["verdict"] == "弱"])
     note = ("" if not weak else
             f'<p class="note">「弱」が{weak}件あります。検索結果に答えが出た時点で'
             "用が済む語です。書くなら、検索結果には出せないもの"
             "（違反例・失敗例・自社の実測）をタイトルに置いてください。</p>")
-    return ('<table><tr><th>検索語</th><th style="width:18%">狙い</th>'
-            '<th style="width:14%">開く理由</th><th style="width:26%">判定の根拠</th></tr>'
+    return ('<table><tr><th>検索語</th><th style="width:16%">狙い</th>'
+            '<th style="width:12%">月間 / 難易度</th>'
+            '<th style="width:14%">開く理由</th><th style="width:24%">判定の根拠</th></tr>'
             + rows + "</table>" + note)
 
 def svg_line(months, key, color, title, unit=""):

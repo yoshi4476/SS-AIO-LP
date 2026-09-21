@@ -1600,6 +1600,66 @@ def test_intake_sheets_are_not_published():
     check("10社の上限で止める", "MAX_SITES = 10" in src, True)
 
 
+def test_kw_plan_keeps_only_buyers():
+    """計画の一新で、関連しない語・見込み客でない語が入らないこと。
+
+    ラッコのLSIは「経理代行 求人」「記帳代行 儲かる」を重要度highで返す。
+    検索している人は顧客ではなく求職者・副業者で、記事にしても問い合わせに
+    ならない。担当領域の条件（kw_discover と同じ）に加えて、ここで落とす。
+    一新は非破壊で、台帳の「未着手」だけを対象外にし、公開済み・執筆中は触らない。
+    """
+    import kw_plan
+    print(chr(10) + "■ 計画の一新で入れてよい語")
+    S = {"own_terms": ("経理", "記帳"), "domain_terms": ("経理", "記帳", "費用", "相場"),
+         "ng_terms": ("aio", "補助金")}
+    corpus, arts, owned, picked = [], [], [], []
+
+    def ok(kw, vol=100):
+        return kw_plan.relevant({"kw": kw, "vol": vol, "imp": 0}, S, corpus, arts, owned, picked)
+
+    check("見込み客の語は通す", ok("経理代行 費用 相場"), "")
+    check("求人は落とす", ok("経理代行 求人"), "見込み客でない")
+    check("副業は落とす", ok("記帳代行 副業 在宅"), "見込み客でない")
+    check("儲かるは落とす", ok("記帳代行 儲かる"), "見込み客でない")
+    check("他サイトの領域語は落とす", ok("経理 aio対策"), "除外語")
+    check("領域語の無い語は落とす", ok("ホームページ 作成 費用"), "領域語なし")
+    check("検索数も表示も無い語は落とす", ok("経理 記帳 手順", vol=None), "検索数が少ない")
+    check("検索数が無くても表示があれば通す",
+          kw_plan.relevant({"kw": "経理 記帳 手順", "vol": None, "imp": 30}, S, corpus, arts, owned, picked), "")
+
+    # 語順・助詞が違うだけの語は同じ検索。別枠で採ると採用枠を食い合う
+    check("語順違いは同じ語", kw_plan.same("請求書 書き方 封筒", "請求書 封筒 書き方"), True)
+    check("助詞の有無も同じ語", kw_plan.same("請求書の封筒の書き方", "請求書 封筒 書き方"), True)
+    check("違う語は別", kw_plan.same("経理代行 費用", "記帳代行 副業"), False)
+    # 買い手の語は、検索数が少なくても上に来ること
+    buyer = kw_plan.score({"kw": "経理代行 費用 相場", "vol": 210, "kd": 31})
+    diy = kw_plan.score({"kw": "請求書 封筒 書き方", "vol": 5400, "kd": 33})
+    check("外注を考える語が、自分でやる語より上", buyer > diy, True)
+
+    # 計画ファイルの表を読み戻せること（レポートが検索数・難易度を引く経路）
+    tmp = ROOT / "docs" / "kw-plan-_gate_.md"
+    tmp.write_text("| 優先 | キーワード | 月間 | 難易度 | 開く理由 | 12か月 | 表示 | 出どころ |" + chr(10)
+                   + "|:--|:--|--:|--:|--:|--:|--:|:--|" + chr(10)
+                   + "| A | 記帳代行 相場 | 480 | 29 | +2 | -33% | — | rakko |" + chr(10)
+                   + "| C | 経理 やり方 | — | — | +3 | — | 12 | suggest |" + chr(10),
+                   encoding="utf-8")
+    try:
+        m = kw_plan.plan_metrics("_gate_")
+        check("表から月間・難易度・優先を読める", m.get("記帳代行相場"), (480, 29, "A"))
+        check("欠けている値は None", m.get("経理やり方"), (None, None, "C"))
+    finally:
+        tmp.unlink(missing_ok=True)
+
+    # 意図の掛け合わせは上限まで（補助金サイトは26×30で時間切れになった）
+    many = {"intents": ["意図%d" % i for i in range(30)]}
+    check("意図は上限まで", len(kw_plan.intents_for(many)) <= kw_plan.MAX_INTENTS, True)
+
+    # 一新は「未着手」だけを対象外にする。公開済み・執筆中を落とすと生きている記事が消える
+    src = (ROOT / "scripts" / "kw_plan.py").read_text(encoding="utf-8")
+    check("未着手だけを取り下げる", 'get("status") == "未着手"' in src, True)
+    check("force で公開済みを落とさない", "force=True" not in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1643,7 +1703,8 @@ def main():
               test_notify_does_not_send_junk,
               test_routine_success_is_not_emailed,
               test_every_site_gets_articles,
-              test_intake_sheets_are_not_published):
+              test_intake_sheets_are_not_published,
+              test_kw_plan_keeps_only_buyers):
         try:
             t()
         except Exception as e:

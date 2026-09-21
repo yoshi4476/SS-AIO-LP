@@ -15,6 +15,7 @@
 """
 import argparse
 import json
+import re
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -174,6 +175,11 @@ def picked_keywords(conf, limit=8):
     except Exception:
         return out
     todo = [k for k in rows if str(k.get("status", "")).strip() == "未着手"]
+    try:
+        import kw_plan
+        metrics = {site: kw_plan.plan_metrics(site) for site in conf}
+    except Exception:
+        metrics = {}
     for site in sorted(conf):
         n = 0
         for k in todo:
@@ -183,8 +189,11 @@ def picked_keywords(conf, limit=8):
             if not kw:
                 continue
             v, pt, why = kw_intent.verdict(kw)
+            # 検索数・難易度は計画ファイルから（台帳のAPIは note を返さない）
+            vol, kd, _ = metrics.get(site, {}).get(re.sub(r"[\s　]+", "", kw).lower(), (None, None, ""))
             out.append({"site": site, "kw": kw, "aim": str(k.get("aim", "")),
                         "priority": str(k.get("priority", "")),
+                        "vol": vol, "kd": kd,
                         "verdict": v, "point": pt, "why": why})
             n += 1
             if n >= limit:
@@ -335,6 +344,8 @@ def html(ws, site_rows, kw_pos, picks, conf, funnel_txt):
         rows = "".join(
             f'<tr><td>{esc(p["site"])}</td><td>{esc(p["kw"])[:30]}</td>'
             f'<td>{esc(p["aim"])[:14]}</td>'
+            f'<td class="num">{p["vol"] if p.get("vol") is not None else "—"}'
+            f' / {p["kd"] if p.get("kd") is not None else "—"}</td>'
             f'<td><span class="tag {cls[p["verdict"]]}">{p["verdict"]}</span>'
             f' {p["point"]:+d}</td>'
             f'<td>{esc(p["why"])[:28]}</td></tr>' for p in picks[:18])
@@ -348,9 +359,9 @@ def html(ws, site_rows, kw_pos, picks, conf, funnel_txt):
 <h2>次に狙う検索語と、選んだ理由</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">台帳で「未着手」の語です。同じ順位でもクリック率は5倍違うため、
 <b>検索結果で用が済む語かどうか</b>を機械で判定しています。</p>
-<table><tr><th style="width:14%">サイト</th><th>検索語</th>
-<th style="width:16%">狙い</th><th style="width:14%">開く理由</th>
-<th style="width:24%">判定の根拠</th></tr>{rows}</table>{note}
+<table><tr><th style="width:12%">サイト</th><th>検索語</th>
+<th style="width:14%">狙い</th><th style="width:12%">月間 / 難易度</th><th style="width:12%">開く理由</th>
+<th style="width:22%">判定の根拠</th></tr>{rows}</table>{note}
 </div>""")
         n += 1
 
