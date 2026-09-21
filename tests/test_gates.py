@@ -2036,6 +2036,25 @@ def test_speed_fix_keeps_pages_light():
     check("本文フォントは端末のフォント", "--sans: \"Hiragino Kaku Gothic ProN\"" in css, True)
 
 
+def test_entities_link_articles_to_official_sources():
+    """記事の実体（about/mentions）が実在の公式URLに結ばれ、3サイトで同じ表を使うこと"""
+    print(chr(10) + "■ 実体の構造化データ")
+    import entities as E, json as _j
+    check("実体のURLは全て https", all(e["sameAs"].startswith("https://") for e in E.ENTITIES), True)
+    check("実体名は重複しない", len({e["name"] for e in E.ENTITIES}), len(E.ENTITIES))
+    a, m = E.about_and_mentions("IT導入補助金のパソコン購入", "gBizIDを取得。SEOULは無関係。ChatGPTで下書き")
+    check("題名の実体は about に", [x["name"] for x in a], ["IT導入補助金"])
+    check("本文の実体は mentions に（英字は語の途中に当てない）", [x["name"] for x in m], ["gBizID", "ChatGPT"])
+    check("about は最大3件", len(E.about_and_mentions("IT導入補助金 ものづくり補助金 持続化補助金 事業再構築補助金", "")[0]), 3)
+    corp = ROOT / ".publish-work" / "corporate" / "src" / "lib" / "entities.json"
+    if corp.is_file():
+        check("コーポレートも同じ表", _j.loads(corp.read_text(encoding="utf-8"))["entities"] == E.ENTITIES, True)
+    b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("build.py が about/mentions/knowsAbout を書く", "about_and_mentions" in b and "knowsAbout" in b, True)
+    p = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
+    check("補助金の配信も同じ実体を書く", "ABOUT_JSONLD" in p and "MENTIONS_JSONLD" in p, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2087,7 +2106,8 @@ def main():
               test_five_hub_features_are_wired,
               test_merge_is_wired,
               test_jisseki_intake_never_invents_numbers,
-              test_speed_fix_keeps_pages_light):
+              test_speed_fix_keeps_pages_light,
+              test_entities_link_articles_to_official_sources):
         try:
             t()
         except Exception as e:

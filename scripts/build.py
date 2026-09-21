@@ -31,7 +31,8 @@ from urllib.parse import quote as urlquote
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import md2html  # noqa: E402
+import md2html
+import entities  # noqa: E402
 import render_check  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -152,6 +153,8 @@ def organization():
                     "addressLocality": ORG_ADDRESS["city"],
                     "streetAddress": ORG_ADDRESS["street"]},
         "sameAs": ORG_SAME_AS,
+        # 専門領域。実体（about）と合わせて「この会社はこの領域の専門」と機械に伝える
+        "knowsAbout": entities.KNOWS_ABOUT,
     }
 # 著者は実在の個人にする。「編集部」を Person として出すと、検索エンジンにもAIにも
 # 「誰が書いたか」が伝わらず、E-E-A-T の Experience / Expertise を主張できない。
@@ -227,8 +230,11 @@ def render_toc(toc_tokens) -> str:
             f'<ol>{"".join(items)}</ol></nav>')
 
 
-def build_json_ld(meta, url):
+def build_json_ld(meta, url, body_text=""):
     cat_name, _ = CATEGORIES[meta["category"]]
+    # 記事が扱う実体を公式の場所へ結ぶ（題名・狙う語→about、本文→mentions）
+    about, mentions = entities.about_and_mentions(
+        f"{meta.get('title', '')} {meta.get('keyword', '')}", re.sub(r"<[^>]+>", " ", body_text or ""))
     graph = [
         {
             "@type": "BlogPosting",
@@ -245,6 +251,8 @@ def build_json_ld(meta, url):
                        "url": f"{SITE_URL}/author/haraguchi/"},
             "publisher": organization(),
             "inLanguage": "ja",
+            **({"about": about} if about else {}),
+            **({"mentions": mentions} if mentions else {}),
         },
         {
             "@type": "BreadcrumbList",
@@ -465,7 +473,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{AUTHOR_NAME}}": AUTHOR_NAME,
         "{{AUTHOR_ROLE}}": AUTHOR_ROLE,
         "{{AUTHOR_BIO}}": AUTHOR_BIO,
-        "{{JSON_LD}}": build_json_ld(meta, url),
+        "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
         "{{CONTENT}}": insert_mid_cta(content, meta),

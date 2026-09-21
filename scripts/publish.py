@@ -373,6 +373,10 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     target_txt = re.sub(r"^この記事は[、,]?\s*", "", target_txt)
     target_txt = re.sub(r"(の方)?向けです[。.]?\s*$", "", target_txt)
 
+    # 記事が扱う実体（IT導入補助金など）を公式の場所へ結ぶ（AI検索が同じ実体として束ねる）
+    import entities
+    _about, _mentions = entities.about_and_mentions(f"{meta['title']} {meta.get('keyword', '')}", plain)
+    about_json, mentions_json = json.dumps(_about, ensure_ascii=False), json.dumps(_mentions, ensure_ascii=False)
     vals = {
         "TITLE": meta["title"],
         "TITLE_SHORT": meta["title"][:28],
@@ -389,6 +393,8 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         "TOC_ITEMS": toc,
         "FAQ_HTML": faq_html,
         "FAQ_JSONLD": faq_jsonld,
+        "ABOUT_JSONLD": about_json,
+        "MENTIONS_JSONLD": mentions_json,
         "RELATED_LINKS": related,
         "CTA_TITLE": cfg.get("cta_title", "補助金が使えるか、無料で確認しませんか"),
         "CTA_DESC": cfg.get("cta_desc",
