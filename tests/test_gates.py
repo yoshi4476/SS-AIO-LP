@@ -867,8 +867,10 @@ def test_import_has_no_side_effects():
             broke.append(f"{p.name}: {type(e).__name__}")
     check("全スクリプトが安全に読み込める", broke, [])
 
-    # requirements.txtに無い外部ライブラリをモジュール直下でimportしていないか
-    # （実行環境にたまたま入っていただけの依存は、入っていない環境で上のチェックが再現しない）
+    # requirements.txtに無い外部ライブラリをimportしていないか（関数内の遅延importも含む）
+    # （実行環境にたまたま入っていただけの依存は、入っていない環境で上のチェックが再現しない。
+    #  openpyxlが関数内でしかimportされておらず、tree.body直下しか見ていなかったために
+    #  requirements.txtへの記載漏れを検出できなかった実例がある。ast.walkで全体を見る）
     import importlib.metadata
     dist_map = importlib.metadata.packages_distributions()
     req_names = set()
@@ -880,7 +882,7 @@ def test_import_has_no_side_effects():
     missing_req = []
     for p in sorted((ROOT / "scripts").glob("*.py")):
         tree = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
-        for n in tree.body:
+        for n in ast.walk(tree):
             mods = []
             if isinstance(n, ast.Import):
                 mods = [a.name.split(".")[0] for a in n.names]
@@ -892,7 +894,7 @@ def test_import_has_no_side_effects():
                 dists = {d.lower().replace("_", "-") for d in dist_map.get(m, [])}
                 if dists and not (dists & req_names):
                     missing_req.append(f"{p.name}: {m} ({'/'.join(dists)}) がrequirements.txtに無い")
-    check("外部importがrequirements.txtに宣言されている", missing_req, [])
+    check("外部importがrequirements.txtに宣言されている（関数内含む）", missing_req, [])
 
 
 def test_long_sentences_are_split():
