@@ -185,21 +185,39 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     }
     if meta.get("eyecatch"):
         out["eyecatch"] = meta["eyecatch"]
-    target = dest / cfg["content_dir"] / f"{meta['slug']}.json"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    # Next.jsサイトでも sitemap.xml / llms.txt への追記が要る。呼んでいなかったため、
-    # 公開した記事がAIクローラー向けの案内に1本も載っていなかった
-    written = [target] + _update_external_index(dest, cfg, meta)
-
-    # 画像も対象リポジトリへ複製（本文が /images/... を参照するため）
+    # 画像を先に複製する（本文が /images/... を参照するため）。JSONはその後に書く。
+    # アイキャッチはWebP（PNGの1/3）も作り、表示はそちらを使う。OG画像はPNGのまま
+    img_written = []
     img_src = ROOT / "site" / "images" / meta["slug"]
     if cfg.get("images_dir") and img_src.exists():
         img_dest = dest / cfg["images_dir"] / meta["slug"]
         shutil.rmtree(img_dest, ignore_errors=True)
         shutil.copytree(img_src, img_dest)
-        written.append(img_dest)
+        img_written.append(img_dest)
+        if to_webp(img_dest / "eyecatch.png") and meta.get("eyecatch"):
+            out["eyecatchWebp"] = str(meta["eyecatch"]).rsplit(".", 1)[0] + ".webp"
+    target = dest / cfg["content_dir"] / f"{meta['slug']}.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Next.jsサイトでも sitemap.xml / llms.txt への追記が要る。呼んでいなかったため、
+    # 公開した記事がAIクローラー向けの案内に1本も載っていなかった
+    written = [target] + _update_external_index(dest, cfg, meta) + img_written
     return written, len(md2html.plain_text(html))
+
+
+def to_webp(png: Path, quality=80):
+    """PNGの隣にWebPを作る（無ければ何もしない）。モバイルの転送量を減らすため"""
+    if not png.is_file():
+        return None
+    try:
+        from PIL import Image
+        out = png.with_suffix(".webp")
+        with Image.open(png) as im:
+            im.convert("RGB").save(out, "WEBP", quality=quality, method=6)
+        return out
+    except Exception as e:
+        print(f"  WebP変換をスキップ: {png.name}（{str(e)[:40]}）")
+        return None
 
 
 def write_external_md(cfg, dest: Path, meta, body, src: Path):
