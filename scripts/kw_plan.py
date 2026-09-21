@@ -42,6 +42,9 @@ from cannibal_check import dice, kw_conflicts, load_articles  # noqa: E402
 from kw_status import is_written, written_corpus              # noqa: E402
 
 MAX_PLAN = 120        # 1サイトの計画本数。1日2本で60日分
+CREDIT_CAP = 400      # 1サイト1回のラッコ消費の上限。自動課金だと尽きずに請求が伸びる。
+                      # 実測は corporate 約35 / ai-lab 約75 / subsidy 約170 で、
+                      # 400 を超えるのは何かが暴走しているとき
 PER_SUBJECT = 14      # 1サブジェクトから採る上限。1業種に偏らせない
 WEAK_SHARE = 0.2      # 「開く理由の弱い語」が占めてよい割合（kw_discover と同じ）
 MIN_VOL = 10          # これ未満は、GSCに表示が無ければ採らない
@@ -399,6 +402,8 @@ def write_plan(site_id, S, picked, dropped, deep):
          f"作成: {date.today().isoformat()} ／ 根拠: ラッコキーワード（月間検索数・SEO難易度・12か月の伸び）"
          f"＋Search Console（自サイトの表示実績）{'＋LSI/PAA' if deep else ''}",
          "",
+         f"ラッコの消費: 約{rakko.spent():.0f}クレジット（1回の上限 {CREDIT_CAP}）",
+         "",
          f"採用 {len(picked)}本（A={sum(c['priority']=='A' for c in picked)} / "
          f"B={sum(c['priority']=='B' for c in picked)} / C={sum(c['priority']=='C' for c in picked)}）。"
          "点は「検索数・開く理由・難易度の低さ・伸び・自サイトの表示実績」の合計。",
@@ -490,6 +495,7 @@ def replace_ledger(site_id, picked):
 def run(site_id, deep, replace):
     S = KD.site_config(site_id)
     print(f"\n■ {site_id}（{S['cfg']['name']}）")
+    rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
     if not S["industries"]:
         print("   kw_seeds が未定義のため作れません")
         return
@@ -511,7 +517,8 @@ def run(site_id, deep, replace):
           f"{sum(1 for c in cands.values() if c.get('vol') is None)}件）")
     picked, dropped = choose(cands, S, site_id)
     out = write_plan(site_id, S, picked, dropped, deep)
-    print(f"   採用 {len(picked)}本 → {out.relative_to(ROOT).as_posix()}")
+    print(f"   採用 {len(picked)}本 → {out.relative_to(ROOT).as_posix()}"
+          f"（ラッコ消費 {rakko.spent():.0f} クレジット）")
     print("   落とした理由: " + " / ".join(f"{k} {v}" for k, v in sorted(dropped.items(), key=lambda x: -x[1])[:6]))
     for c in picked[:8]:
         print("     %s %-30s 月間%-5s KD%-3s 意図%+d %s" % (

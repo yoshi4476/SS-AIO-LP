@@ -58,11 +58,27 @@ def exhausted():
 
 RETRY_WAIT = (5, 15, 30)   # 5xx のときの待ち秒。実測で 502/503/504 が数分続いた
 
+# このプロセスで使ったクレジット。自動課金を入れると尽きずに請求が伸びるので、
+# 呼び出し側が上限をかけられるように数えておく（応答の meta.consumedCredit を足す）
+CONSUMED = 0.0
+BUDGET = None      # None なら上限なし。数値を入れると、超えた時点で以降の呼び出しを止める
+
+
+def spent():
+    return CONSUMED
+
+
+def over_budget():
+    return BUDGET is not None and CONSUMED >= BUDGET
+
 
 def call(path, body=None, method="POST"):
     global _OUT_OF_CREDIT
+    global CONSUMED
     key = api_key()
     if not key or _OUT_OF_CREDIT:
+        return None
+    if over_budget():
         return None
     req = urllib.request.Request(
         BASE + path, method=method,
@@ -71,7 +87,11 @@ def call(path, body=None, method="POST"):
     for i in range(len(RETRY_WAIT) + 1):
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
-                return json.load(r)
+                res = json.load(r)
+                CONSUMED += float(((res or {}).get("meta") or {}).get("consumedCredit") or 0)
+                if over_budget():
+                    print(f"  ラッコの消費が上限 {BUDGET} クレジットに達しました。以降の呼び出しは行いません")
+                return res
         except urllib.error.HTTPError as e:
             detail = e.read().decode("utf-8", "ignore")
             # 5xx はHTMLのエラーページで返る。本文を出しても読めないので状態だけ出す

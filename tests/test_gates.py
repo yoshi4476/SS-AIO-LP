@@ -1693,8 +1693,18 @@ def test_kw_plan_keeps_only_buyers():
         r = rakko.call("/v1/x", {"a": 1})
         check("5xx は待ってやり直す", (r or {}).get("data"), {"ok": 1})
         check("やり直しの回数", calls["n"], 3)
+        # 自動課金だと尽きずに請求が伸びる。上限に達したら以降は呼ばない
+        def paid(req, timeout=0):
+            return _io.BytesIO(b'{"result":true,"meta":{"consumedCredit":1.5},"data":{}}')
+        rakko.urllib.request.urlopen = paid
+        rakko.CONSUMED, rakko.BUDGET = 0.0, 3.0
+        got = [rakko.call("/v1/x", {}) is not None for _ in range(4)]
+        check("上限まで呼べる（1.5×2=3.0）", got[:2], [True, True])
+        check("上限に達したら止まる", got[2:], [False, False])
+        check("消費を数えている", rakko.spent(), 3.0)
     finally:
         rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT = saved
+        rakko.CONSUMED, rakko.BUDGET = 0.0, None
 
     # 管制塔の一時的な404も待ってやり直す。取り下げ直後の追加で当たると未着手が0件で残る
     import hub_client
