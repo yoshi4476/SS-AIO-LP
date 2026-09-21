@@ -1576,6 +1576,30 @@ def test_every_site_gets_articles():
     check("別リポジトリへ分けるよう示す", "別リポジトリに分けて" in wf, True)
 
 
+def test_intake_sheets_are_not_published():
+    """ヒアリングシートがリポジトリに入らないこと。
+
+    シートには会社名・住所・電話・担当者のメールが入る。このリポジトリは
+    public なので、置いたまま commit すると誰でも読める。取り込みは手元で
+    実行し、生成された sites/*.json だけを commit する。
+    """
+    import subprocess
+    print(chr(10) + "■ ヒアリングシートの扱い")
+    for name in ("intake/A社.xlsx", "intake/done/A社.xlsx", "intake/todo/A社.xlsx"):
+        r = subprocess.run(["git", "check-ignore", "-q", name],
+                           cwd=str(ROOT), capture_output=True)
+        check(f"{name} は公開されない", r.returncode == 0, True)
+
+    # 置き場の説明だけは残す（フォルダが消えると使い方が分からなくなる）
+    check("置き場の説明がある", (ROOT / "intake" / "README.md").is_file(), True)
+
+    src = (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8")
+    # 不備のあるシートを通すと、どのサイトでも書ける記事が量産される
+    check("不備があれば登録しない", "intake/todo/ へ移しました" in src, True)
+    # 上限を超えて受け入れると、記事の枠が足りず全社の本数が減る
+    check("10社の上限で止める", "MAX_SITES = 10" in src, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -1618,7 +1642,8 @@ def main():
               test_detection_scripts_do_not_fail_the_run,
               test_notify_does_not_send_junk,
               test_routine_success_is_not_emailed,
-              test_every_site_gets_articles):
+              test_every_site_gets_articles,
+              test_intake_sheets_are_not_published):
         try:
             t()
         except Exception as e:

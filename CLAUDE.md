@@ -154,9 +154,26 @@ python scripts/data_sanity.py      # 二重計上・無効流入・GA4とGSCの�
 ```bash
 python scripts/client_intake.py --sheet                  # 汎用シートを作る
 python scripts/client_intake.py --sheet restaurant       # 飲食店向け（業種別の項目つき）
-python scripts/client_intake.py <記入済み.xlsx>           # 埋まり具合を確認する
-python scripts/client_intake.py <記入済み.xlsx> --apply    # 登録する
 ```
+
+**記入済みのシートは `intake/` に置くだけでよい。** ファイル名を指定し損ねたり、
+不備の確認を飛ばしたりするのを防ぐため、置き場を決めて機械に拾わせる。
+
+```bash
+python scripts/intake_watch.py            # 何が起きるかを見るだけ
+python scripts/intake_watch.py --apply    # 登録まで行う
+```
+
+| 結果 | 行き先 |
+|:--|:--|
+| 登録できた | `intake/done/` |
+| 不備があった | `intake/todo/` と、同じ名前の `.不備.txt`（直す箇所を書く） |
+
+**シートそのものはコミットされない**（`.gitignore` 済み）。会社名・住所・電話・
+担当者のメールが入るうえ、このリポジトリは public のため。登録後に生成される
+`sites/*.json` だけをコミットする。**10社を超えるシートは受け付けずに止める。**
+
+1枚ずつ指定したいときは従来どおり `client_intake.py <記入済み.xlsx> --apply` も使える。
 
 `--apply` で作られるもの:
 
