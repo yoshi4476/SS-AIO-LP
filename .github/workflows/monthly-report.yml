@@ -95,8 +95,16 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           if [ -z "$RAKKO_API_KEY" ]; then echo "RAKKO_API_KEY 未設定 — 組み直しはスキップ"; exit 0; fi
+          # 課金の前に、必ず構成と見積もりを記録する（ルール: 設計を固めてからラッコは1回だけ）
+          python scripts/kw_plan.py --all --if-needed --dry-run 2>&1 | grep -E "^■|RAKKO_EST|dry-run|見積もり" || true
+          # 本番。スクリプト側が見積もりと月の目安を見て、超えていれば取得しない
           out=$(python scripts/kw_plan.py --all --if-needed --replace 2>&1) || true
           echo "$out" | tail -40
+          if echo "$out" | grep -q "RAKKO_GUARD=over"; then
+            echo "::warning::ラッコの予算を超えるため、在庫の組み直しを取得せずに終えたサイトがあります"
+            mkdir -p automation/logs
+            echo "要対応: ラッコの月の目安を超えるため在庫の組み直しを見送りました（目安の見直しか来月）" >> automation/logs/findings.txt
+          fi
           if echo "$out" | grep -q "クレジットが尽きました"; then
             echo "::warning::ラッコキーワードのクレジットが尽きました（在庫の組み直しは途中まで）"
             mkdir -p automation/logs

@@ -597,6 +597,46 @@ def replace_ledger(site_id, picked):
     print(f"   新しい計画 {added}件を台帳に積みました（site={site_id}）")
 
 
+def paid_queries(S):
+    """このサイトで課金になる問い合わせの一覧（キャッシュにあるものは除く）"""
+    out = []
+    core = core_terms(S)
+    for ind in S["industries"]:
+        if ind.lower() in S["own_terms"]:
+            qs = [("/v1/related-keywords", {"keyword": ind, "limit": 100}),
+                  ("/v1/suggest-keywords", {"keyword": ind, "modes": ["google", "youtube"], "limit": 100})]
+        else:
+            qs = [("/v1/suggest-keywords", {"keyword": f"{ind} {t}", "modes": ["google", "youtube"], "limit": 100})
+                  for t in core]
+        for path, body in qs:
+            if rakko._cache_get(path, body, "POST") is None:
+                out.append((path, body))
+    return out
+
+
+def estimate(S):
+    """課金の見積もり（クレジット）。問い合わせ1回1.5 ＋ 一括調査1回15"""
+    return len(paid_queries(S)) * 1.5 + 15
+
+
+def budget_ok(S):
+    """今月の合計＋見積もりが目安を超えるなら取得しない。手で走らせても同じ"""
+    est = estimate(S)
+    used = rakko.month_spent()
+    print(f"   見積もり: 約{est:.0f}クレジット（今月の合計 {used:.0f} ＋ → {used + est:.0f} / 目安 {rakko.MONTHLY_BUDGET}）")
+    print(f"RAKKO_EST={est:.0f}")
+    if est > CREDIT_CAP:
+        print(f"   1回の上限 {CREDIT_CAP} を超えるため取得しません。起点か掛ける語を減らしてください")
+        print("RAKKO_GUARD=over")
+        return False
+    if used + est > rakko.MONTHLY_BUDGET:
+        print(f"   今月の目安 {rakko.MONTHLY_BUDGET} を超えるため取得しません（来月か、目安の見直しを）")
+        print("RAKKO_GUARD=over")
+        return False
+    print("RAKKO_GUARD=ok")
+    return True
+
+
 def todo_count(site_id):
     try:
         import hub_client
@@ -617,6 +657,9 @@ def run(site_id, deep, replace, if_needed=False):
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
     if not S["industries"]:
         print("   kw_seeds が未定義のため作れません")
+        return
+    # 課金の前に必ず見積もる。予算内でなければ取得しない（--dry-run は見積もりだけ）
+    if not budget_ok(S) and not DRY:
         return
     if not rakko.enabled():
         print("   RAKKO_API_KEY が未設定です。python scripts/set_key.py RAKKO_API_KEY")

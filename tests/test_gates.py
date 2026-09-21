@@ -1687,6 +1687,26 @@ def test_kw_plan_keeps_only_buyers():
     diy = kw_plan.score({"kw": "請求書 封筒 書き方", "vol": 5400, "kd": 33})
     check("外注を考える語が、自分でやる語より上", buyer > diy, True)
 
+    # ルール: 課金の前に必ず見積もり、予算内でだけ取得する（手で走らせても同じ）
+    src_plan = (ROOT / "scripts" / "kw_plan.py").read_text(encoding="utf-8")
+    check("課金の前に見積もる", "if not budget_ok(S) and not DRY" in src_plan, True)
+    import rakko as _rk
+    S_est = {"cfg": {"kw_seeds": {"core": ["集客"]}}, "own_terms": ("aio",),
+             "industries": ["クリニック", "歯科医院"], "intents": []}
+    check("見積もりは問い合わせ数×1.5＋一括15", kw_plan.estimate(S_est), 2 * 1.5 + 15)
+    saved_ms, saved_mb = _rk.month_spent, _rk.MONTHLY_BUDGET
+    try:
+        _rk.month_spent, _rk.MONTHLY_BUDGET = (lambda month=None: 995.0), 1000
+        check("月の目安を超えるなら取得しない", kw_plan.budget_ok(S_est), False)
+        _rk.month_spent = lambda month=None: 0.0
+        check("予算内なら取得する", kw_plan.budget_ok(S_est), True)
+    finally:
+        _rk.month_spent, _rk.MONTHLY_BUDGET = saved_ms, saved_mb
+    wf_m = (ROOT / ".github" / "workflows" / "monthly-report.yml").read_text(encoding="utf-8", errors="replace")
+    check("月次は dry-run を先に記録してから本番", wf_m.index("--dry-run") < wf_m.index("--if-needed --replace"), True)
+    src_disc = (ROOT / "scripts" / "kw_discover.py").read_text(encoding="utf-8")
+    check("週次補充も月の目安を見る", "rakko.month_spent() > rakko.MONTHLY_BUDGET" in src_disc, True)
+
     # 一括調査に送るのは価値の高い語だけ、1回ぶんまで（1万件を20回送って300クレジット払った）
     many = [{"kw": "補助金 その%d" % i} for i in range(700)] \
          + [{"kw": "補助金 申請 代行 費用"}, {"kw": "補助金 不採択 理由"}, {"kw": "補助金 とは", "imp": 30}]
