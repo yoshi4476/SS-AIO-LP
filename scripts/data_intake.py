@@ -44,7 +44,8 @@ RULES = [
     "この1枚に入れた数字だけが公開されます。機械は数字を作りません。空欄のシートは登録しません。",
     "「母数（件数）」と「対象期間」は必須です。無いデータは公開しません（根拠を読者が確かめられないため）。",
     "母数が10件未満のデータは公開しません（割合として意味を持たず、個社が特定される恐れがあるため）。",
-    "「データ」タブは「項目」と「値」の2列が必須です。値は数字だけ（単位は概要タブの「単位」に）。",
+    "「データ」タブは「項目」と「値」が必須です。値は数字だけ（単位は概要タブの「単位」に）。",
+    "割合のデータは「分子」「分母」も書いてください。実数の表・信頼区間・1件あたりの振れ幅まで自動で出ます。",
     "個社が分かる情報（会社名・店名・住所）は入れないでください。業種・規模などの区分で書きます。",
     "URLの一部になる「slug」は英小文字・数字・ハイフンだけ（例: meo-review-reply-rate）。",
 ]
@@ -60,9 +61,12 @@ OVERVIEW = [
     ("値の単位", "%", "例: % / 件 / 営業日"),
     ("関連カテゴリ", "meo", "aio / seo / meo / ai-marketing をカンマ区切り（記事に枠を出す先）"),
     ("引用用の一文（空なら自動で作ります）", "", "例: 3,200店舗の集計では、口コミ返信率80%以上の店舗は新患数が1.6倍でした"),
+    ("分母の呼び名（任意）", "", "例: 契約件数（データタブに分子・分母を書いたときだけ使います）"),
+    ("分子の呼び名（任意）", "", "例: 継続"),
+    ("差の呼び名（任意）", "", "例: 解約"),
 ]
-DATA_COLS = ["項目", "値", "備考"]
-DATA_EXAMPLE = ["例: 返信率80%以上", "1.6", "新患数の相対値（返信率20%未満＝1.0）"]
+DATA_COLS = ["項目", "値", "分子（任意）", "分母（任意）", "判定の条件（任意）", "備考"]
+DATA_EXAMPLE = ["例: SEO運用", "86.5", "64", "74", "契約から1年以内の解約で判定", "2023年5月〜2026年9月の契約"]
 
 
 def make_sheet(path=SHEET):
@@ -92,11 +96,12 @@ def make_sheet(path=SHEET):
     for c in d[2]:
         c.font = Font(color="888888", italic=True)
     for _ in range(8):
-        d.append(["", "", ""])
-    for row in d.iter_rows(min_row=3, min_col=1, max_col=2):
+        d.append([""] * len(DATA_COLS))
+    for row in d.iter_rows(min_row=3, min_col=1, max_col=4):
         for c in row:
             c.fill = yellow
-    d.column_dimensions["A"].width = 36; d.column_dimensions["B"].width = 14; d.column_dimensions["C"].width = 44
+    for col, wd in zip("ABCDEF", (24, 10, 12, 12, 30, 40)):
+        d.column_dimensions[col].width = wd
     path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(path)
     return path
@@ -112,10 +117,11 @@ def read(path):
                 got["overview"][str(row[0]).strip()] = "" if row[1] is None else str(row[1]).strip()
     if "データ" in wb.sheetnames:
         for row in wb["データ"].iter_rows(min_row=2, values_only=True):
-            vals = ["" if v is None else str(v).strip() for v in (list(row) + [""] * 3)[:3]]
+            vals = ["" if v is None else str(v).strip() for v in (list(row) + [""] * 6)[:6]]
             if not vals[0] or vals[0].startswith("例:"):
                 continue
-            got["rows"].append({"label": vals[0], "value": vals[1], "note": vals[2]})
+            got["rows"].append({"label": vals[0], "value": vals[1], "num": vals[2],
+                                "den": vals[3], "window": vals[4], "note": vals[5]})
     return got
 
 
@@ -176,7 +182,23 @@ def review(got):
             continue
         if re.search(r"株式会社|有限会社|合同会社|店\b|医院|クリニック[^・]", r["label"]) and "業種" not in r["label"]:
             warn.append(f"「{r['label']}」は個社名に見えます。区分名にしてください")
-        data.append({"label": r["label"], "value": v, "note": r["note"]})
+        item = {"label": r["label"], "value": v, "note": r.get("note", "")}
+        num, den = _num(r.get("num")), _num(r.get("den"))
+        if (num is None) != (den is None):
+            ng.append(f"「{r['label']}」は分子と分母の両方が要ります（片方だけでは割合を確かめられません）")
+            continue
+        if num is not None:
+            if den <= 0 or num < 0 or num > den:
+                ng.append(f"「{r['label']}」の分子{num:g}・分母{den:g}が成り立ちません")
+                continue
+            calc = num / den * 100
+            if unit in ("%", "％") and abs(calc - v) > 0.1:
+                ng.append(f"「{r['label']}」の値{v:g}%が分子分母と合いません（{num:g}/{den:g}={calc:.1f}%）")
+                continue
+            item.update(num=int(num), den=int(den))
+        if r.get("window"):
+            item["window"] = r["window"]
+        data.append(item)
     if len(data) < 2:
         ng.append("データは2行以上要ります")
     if ng:
@@ -185,6 +207,8 @@ def review(got):
     sentence = g("引用用の一文") or (f"{ORG}が{s}〜{e}に{int(n):,}{unit_n}を集計した「{title}」では、"
                                    f"{top['label']}が{_fmt(top['value'], unit)}で最も大きな値でした")
     ds = {"slug": slug, "title": title, "description": desc, "n": int(n), "n_unit": unit_n,
+          "den_label": g("分母の呼び名") or "", "num_label": g("分子の呼び名") or "",
+          "neg_label": g("差の呼び名") or "",
           "period": f"{s}〜{e}", "start": s, "end": e, "method": method, "unit": unit,
           "categories": cats or ["ai-marketing"], "sentence": sentence, "rows": data,
           "published": date.today().isoformat(), "modified": date.today().isoformat()}
@@ -192,6 +216,122 @@ def review(got):
         ng.append("引用用の一文に数字が入っていません")
         return None, ng, warn
     return ds, [], warn
+
+
+def wilson(k, n, z=1.96):
+    """95%信頼区間（Wilson）。母数が小さいほど幅が広い＝数字が当てにならないことを、そのまま示す"""
+    import math
+    if not n:
+        return (0.0, 0.0)
+    p = k / n
+    c = (p + z * z / (2 * n)) / (1 + z * z / n)
+    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
+    return (max(0.0, (c - h) * 100), min(100.0, (c + h) * 100))
+
+
+def has_counts(ds):
+    return all("den" in r for r in ds["rows"]) and len(ds["rows"]) > 0
+
+
+def totals(ds):
+    num = sum(r["num"] for r in ds["rows"])
+    den = sum(r["den"] for r in ds["rows"])
+    return num, den
+
+
+def stack_svg(ds):
+    """分子と分母を積み上げで見せる。割合だけの棒より、母数の差が一目で分かる"""
+    rows = ds["rows"]
+    den_max = max(r["den"] for r in rows) or 1
+    lab = ds.get("num_label") or "該当"
+    neg = ds.get("neg_label") or "非該当"
+    h = 46 * len(rows) + 34
+    p = [f'<svg viewBox="0 0 640 {h}" width="100%" role="img" '
+         f'aria-label="{html.escape(lab)}と{html.escape(neg)}の件数" style="max-width:640px;font-family:inherit">',
+         f'<rect x="170" y="4" width="12" height="12" rx="3" fill="#1a73e8"></rect>'
+         f'<text x="188" y="14" font-size="11" fill="#243">{html.escape(lab)}</text>'
+         f'<rect x="240" y="4" width="12" height="12" rx="3" fill="#d0d7e4"></rect>'
+         f'<text x="258" y="14" font-size="11" fill="#243">{html.escape(neg)}</text>']
+    for i, r in enumerate(rows):
+        y = 30 + i * 46
+        w = 380 * r["den"] / den_max
+        wn = w * r["num"] / r["den"] if r["den"] else 0
+        p.append(f'<text x="0" y="{y + 14}" font-size="12" fill="#243">{html.escape(r["label"][:14])}</text>'
+                 f'<text x="0" y="{y + 30}" font-size="10" fill="#667">{r["den"]}{html.escape(ds.get("n_unit", ""))}</text>'
+                 f'<rect x="170" y="{y}" width="{w:.0f}" height="22" rx="4" fill="#d0d7e4"></rect>'
+                 f'<rect x="170" y="{y}" width="{wn:.0f}" height="22" rx="4" fill="#1a73e8"></rect>'
+                 f'<text x="{170 + w + 8:.0f}" y="{y + 16}" font-size="12" fill="#123">'
+                 f'{r["num"]} / {r["den"]}（{r["value"]:g}%）</text>')
+    p.append("</svg>")
+    return "".join(p)
+
+
+def counts_table(ds):
+    lab = ds.get("num_label") or "該当"
+    neg = ds.get("neg_label") or "非該当"
+    den_l = ds.get("den_label") or "母数"
+    e = html.escape
+    head = (f"<tr><th>項目</th><th style=\"text-align:right\">{e(den_l)}</th>"
+            f"<th style=\"text-align:right\">{e(lab)}</th><th style=\"text-align:right\">{e(neg)}</th>"
+            f"<th style=\"text-align:right\">割合</th><th style=\"text-align:right\">95%の範囲</th>"
+            f"<th style=\"text-align:right\">1件で動く幅</th></tr>")
+    body = []
+    for r in ds["rows"]:
+        lo, hi = wilson(r["num"], r["den"])
+        body.append(f'<tr><td>{e(r["label"])}</td>'
+                    f'<td style="text-align:right">{r["den"]}</td>'
+                    f'<td style="text-align:right">{r["num"]}</td>'
+                    f'<td style="text-align:right">{r["den"] - r["num"]}</td>'
+                    f'<td style="text-align:right"><strong>{r["value"]:g}%</strong></td>'
+                    f'<td style="text-align:right">{lo:.1f}〜{hi:.1f}%</td>'
+                    f'<td style="text-align:right">{100 / r["den"]:.1f}pt</td></tr>')
+    tn, td = totals(ds)
+    lo, hi = wilson(tn, td)
+    body.append(f'<tr style="background:#f3f7ff;font-weight:700"><td>合計</td>'
+                f'<td style="text-align:right">{td}</td><td style="text-align:right">{tn}</td>'
+                f'<td style="text-align:right">{td - tn}</td>'
+                f'<td style="text-align:right">{tn / td * 100:.1f}%</td>'
+                f'<td style="text-align:right">{lo:.1f}〜{hi:.1f}%</td>'
+                f'<td style="text-align:right">{100 / td:.1f}pt</td></tr>')
+    return (f'<div class="table-wrap"><table><thead>{head}</thead>'
+            f'<tbody>{"".join(body)}</tbody></table></div>')
+
+
+def window_table(ds):
+    """判定の条件が行ごとに違う場合だけ出す。条件を伏せた割合は比べられない"""
+    rows = [r for r in ds["rows"] if r.get("window")]
+    if not rows:
+        return ""
+    e = html.escape
+    # 条件が書かれていない行もある。全行を r["window"] で回すと落ちる
+    trs = "".join(f'<tr><td>{e(r["label"])}</td><td>{e(r.get("window") or "—")}</td>'
+                  f'<td>{e(r.get("note", ""))}</td></tr>' for r in ds["rows"])
+    return ('<section class="section">\n<h2>判定の条件</h2>\n'
+            '<p>項目ごとに判定の条件が違います。1つの条件に揃えたほうが見栄えはよくなりますが、'
+            '性質の違うものを同じ物差しで測ると、比べられない数字になります。条件を明示したうえで並べています。</p>\n'
+            f'<div class="table-wrap"><table><thead><tr><th>項目</th><th>判定の条件</th><th>対象</th></tr></thead>'
+            f'<tbody>{trs}</tbody></table></div>\n</section>')
+
+
+def reading_section(ds):
+    """この数字の読み方。母数が小さいほど動くことを、実際の値で説明する"""
+    rows = sorted(ds["rows"], key=lambda r: r["den"])
+    small, big = rows[0], rows[-1]
+    tn, td = totals(ds)
+    lo, hi = wilson(small["num"], small["den"])
+    e = html.escape
+    return ('<section class="section">\n<h2>この数字の読み方</h2>\n'
+            f'<p>母数が小さい項目ほど、1件の増減で割合が大きく動きます。'
+            f'母数がいちばん小さい<strong>{e(small["label"])}</strong>は{small["den"]}{e(ds.get("n_unit", ""))}なので、'
+            f'1件変われば{100 / small["den"]:.1f}ポイント動きます。'
+            f'いちばん大きい<strong>{e(big["label"])}</strong>は{big["den"]}{e(ds.get("n_unit", ""))}で、'
+            f'1件あたり{100 / big["den"]:.1f}ポイントです。</p>\n'
+            f'<p>上の表の「95%の範囲」は、同じやり方で母数を増やしていったときに'
+            f'落ち着く先の目安です。{e(small["label"])}は{lo:.1f}〜{hi:.1f}%と幅が広く、'
+            f'現時点の{small["value"]:g}%をそのまま実力と読むことはできません。'
+            f'合計（{td}{e(ds.get("n_unit", ""))}）では{tn / td * 100:.1f}%です。</p>\n'
+            '<p>割合だけを見ず、母数と判定の条件と合わせて読んでください。'
+            'そのために、この3つを同じ表に並べています。</p>\n</section>')
 
 
 def chart_svg(rows, unit):
@@ -222,7 +362,14 @@ def dataset_jsonld(ds):
         "keywords": [CATS.get(c, c) for c in ds["categories"]],
         "isAccessibleForFree": True,
         "creditText": f"出典: {ORG}「{ds['title']}」（{url}）",
-        "variableMeasured": [{"@type": "PropertyValue", "name": r["label"], "value": r["value"], "unitText": ds["unit"]} for r in ds["rows"]],
+        # 分子・分母まで書く。割合だけでは、AIも読者も「何件中何件か」を確かめられない
+        "variableMeasured": [
+            {"@type": "PropertyValue", "name": r["label"], "value": r["value"], "unitText": ds["unit"],
+             **({"description": (f'{ds.get("den_label") or "母数"} {r["den"]}'
+                                 f'{ds.get("n_unit", "")}のうち{ds.get("num_label") or "該当"} {r["num"]}'
+                                 f'{ds.get("n_unit", "")}'
+                                 + (f'（{r["window"]}）' if r.get("window") else ''))} if "den" in r else {})}
+            for r in ds["rows"]],
         "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": f"{url}data.csv"}],
     }
 
@@ -231,6 +378,19 @@ def page_html(ds):
     url = f"{SITE_URL}/data/{ds['slug']}/"
     e = html.escape
     trs = "".join(f"<tr><td>{e(r['label'])}</td><td style=\"text-align:right\">{e(_fmt(r['value'], ds['unit']))}</td><td>{e(r.get('note', ''))}</td></tr>" for r in ds["rows"])
+    rich = has_counts(ds)
+    if rich:
+        data_block = (f"<h2>実数で見る</h2>\n{stack_svg(ds)}\n{counts_table(ds)}\n"
+                      f'<p style="font-size:.9rem;color:#556;">「95%の範囲」は母数から計算した目安（Wilson信頼区間）、'
+                      f'「1件で動く幅」は1件の増減で割合が何ポイント動くかです。どちらも上の実数から導いた値です。</p>\n'
+                      f'<p><a href="data.csv" download>CSVをダウンロード</a></p>')
+        extra = window_table(ds) + "\n\n" + reading_section(ds)
+    else:
+        data_block = (f"<h2>データ</h2>\n{chart_svg(ds['rows'], ds['unit'])}\n"
+                      f'<div class="table-wrap"><table><thead><tr><th>項目</th>'
+                      f'<th style="text-align:right">値（{e(ds["unit"]) or "—"}）</th><th>備考</th></tr></thead>'
+                      f'<tbody>{trs}</tbody></table></div>\n<p><a href="data.csv" download>CSVをダウンロード</a></p>')
+        extra = ""
     body = f'''<main class="lab">
 <section class="hero">
 <span class="kicker">FIRST-PARTY DATA</span>
@@ -246,11 +406,10 @@ def page_html(ds):
 </section>
 
 <section class="section">
-<h2>データ</h2>
-{chart_svg(ds["rows"], ds["unit"])}
-<div class="table-wrap"><table><thead><tr><th>項目</th><th style="text-align:right">値（{e(ds["unit"]) or "—"}）</th><th>備考</th></tr></thead><tbody>{trs}</tbody></table></div>
-<p><a href="data.csv" download>CSVをダウンロード</a></p>
+{data_block}
 </section>
+
+{extra}
 
 <section class="section">
 <h2>集計方法と限界</h2>
@@ -303,9 +462,19 @@ def apply(ds):
     out.mkdir(parents=True, exist_ok=True)
     (out / "index.html").write_text(page_html(ds), encoding="utf-8", newline="\n")
     with (out / "data.csv").open("w", encoding="utf-8-sig", newline="") as f:
-        w = csv.writer(f); w.writerow(["項目", f"値（{ds['unit']}）", "備考"])
-        for r in ds["rows"]:
-            w.writerow([r["label"], r["value"], r.get("note", "")])
+        w = csv.writer(f)
+        if has_counts(ds):
+            w.writerow(["項目", ds.get("den_label") or "母数", ds.get("num_label") or "該当",
+                        ds.get("neg_label") or "非該当", f"割合（{ds['unit']}）", "95%下限", "95%上限",
+                        "判定の条件", "備考"])
+            for r in ds["rows"]:
+                lo, hi = wilson(r["num"], r["den"])
+                w.writerow([r["label"], r["den"], r["num"], r["den"] - r["num"], r["value"],
+                            f"{lo:.1f}", f"{hi:.1f}", r.get("window", ""), r.get("note", "")])
+        else:
+            w.writerow(["項目", f"値（{ds['unit']}）", "備考"])
+            for r in ds["rows"]:
+                w.writerow([r["label"], r["value"], r.get("note", "")])
     touched = [f"site/data/{ds['slug']}/index.html", f"site/data/{ds['slug']}/data.csv"]
     # /data/ の一覧（印の間を置き換える）
     idx = SITE / "data" / "index.html"
@@ -374,10 +543,17 @@ def main():
     ap.add_argument("xlsx", nargs="?")
     ap.add_argument("--sheet", action="store_true")
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--rebuild", action="store_true", help="登録済みのデータからページを作り直す")
     a = ap.parse_args()
     if a.sheet:
         p = make_sheet()
         print(f"記入シートを作りました → {p.relative_to(ROOT).as_posix()}")
+        return 0
+    if a.rebuild:
+        items = load_all()
+        for ds in items:
+            print("  作り直し:", ", ".join(apply(ds)))
+        print(f"\n  {len(items)}件のページを作り直しました")
         return 0
     if not a.xlsx:
         raise SystemExit(__doc__.strip())

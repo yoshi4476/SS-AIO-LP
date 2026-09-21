@@ -2105,6 +2105,27 @@ def test_data_intake_publishes_only_grounded_numbers():
     wb.save(p)
     ds2, ng2, _ = D.review(D.read(p))
     check("母数10未満は公開しない", ds2 is None and any("10未満" in x for x in ng2), True)
+    # 分子・分母があれば、実数・信頼区間・振れ幅まで出す（割合だけでは根拠を確かめられない）
+    ds3 = {"rows": [{"label": "A", "value": 86.5, "num": 64, "den": 74, "window": "1年以内"},
+                    {"label": "B", "value": 90.0, "num": 9, "den": 10}],
+           "n_unit": "件", "unit": "%", "den_label": "契約件数", "num_label": "継続", "neg_label": "解約"}
+    check("実数があるデータと判定できる", D.has_counts(ds3), True)
+    check("合計は実数の足し算", D.totals(ds3), (73, 84))
+    lo, hi = D.wilson(9, 10)
+    check("母数10の95%区間は幅が広い", (round(lo), round(hi)), (60, 98))
+    lo2, hi2 = D.wilson(64, 74)
+    check("母数74なら幅は狭い", (round(lo2), round(hi2)), (77, 92))
+    tbl = D.counts_table(ds3)
+    check("表に実数と区間と振れ幅が出る", ("64" in tbl and "10.0pt" in tbl and "合計" in tbl), True)
+    check("積み上げ図に凡例が出る", ("継続" in D.stack_svg(ds3) and "解約" in D.stack_svg(ds3)), True)
+    check("判定の条件が違えば節を出す", "判定の条件" in D.window_table(ds3), True)
+    check("読み方の節は実際の値で説明する", "10.0ポイント" in D.reading_section(ds3), True)
+    bad = dict(ds3); bad = {**ds3, "rows": [{"label": "A", "value": "70", "num": "64", "den": "74", "window": "", "note": ""}]}
+    _, ng2, _ = D.review({"overview": {"slug": "x-y-z", "題名": "十分に長い題名です", "説明（1〜2文）": "何をどう数えたかを説明する十分な長さの文です。",
+                                        "母数（件数）": 74, "母数の単位": "件", "対象期間（開始）": "2024-01", "対象期間（終了）": "2026-08",
+                                        "集計方法・出典": "契約一覧から集計しました", "値の単位": "%", "関連カテゴリ": "seo"},
+                          "rows": bad["rows"]})
+    check("値が分子分母と合わなければ止める", any("合いません" in x for x in ng2), True)
     b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
     check("sitemap と記事の枠に配線されている", 'glob("*/index.html")' in b and "datasets_box" in b, True)
     check("intake_watch がデータシートを振り分ける", "data_intake" in (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8"), True)
