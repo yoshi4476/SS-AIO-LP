@@ -115,6 +115,21 @@ def questions(keyword):
     return _rows(call("/v1/question-search", {"keyword": keyword}))
 
 
+def metrics(r):
+    """1行から (月間ボリューム, SEO難易度) を取り出す。
+
+    現行のAPIは metrics の下に入れて返す（searchVolume / seoDifficulty）。
+    以前は1階層上だけを見ていたため、キーが通っていてもボリュームが
+    すべて None になり、入れた意味が無くなっていた。両方の置き方を見る。
+    """
+    if isinstance(r, str):
+        return None, None
+    m = r.get("metrics") or {}
+    vol = m.get("searchVolume", r.get("searchVolume", r.get("volume")))
+    kd = m.get("seoDifficulty", r.get("seoDifficulty", r.get("difficulty")))
+    return vol, kd
+
+
 def as_pairs(rows):
     """(キーワード, 月間ボリューム) の形に揃える。キー名の違いを吸収する"""
     out = []
@@ -123,9 +138,20 @@ def as_pairs(rows):
             out.append((r, None))
             continue
         kw = r.get("keyword") or r.get("word") or r.get("name")
-        vol = r.get("searchVolume", r.get("volume"))
+        vol, _ = metrics(r)
         if kw:
             out.append((kw, vol))
+    return out
+
+
+def as_rows(rows):
+    """(キーワード, 月間ボリューム, SEO難易度) の形。優先順位づけに使う"""
+    out = []
+    for r in rows:
+        kw = r if isinstance(r, str) else (r.get("keyword") or r.get("word") or r.get("name"))
+        if kw:
+            vol, kd = metrics(r)
+            out.append((kw, vol, kd))
     return out
 
 
@@ -155,10 +181,10 @@ def main():
         rows, label = questions(kw), "よくある質問"
     else:
         rows, label = suggest(kw), "サジェスト"
-    pairs = as_pairs(rows)
-    print(f"■ {label}「{kw}」 {len(pairs)}件")
-    for k, v in pairs[:40]:
-        print(f"    {str(v) if v is not None else '—':>7}  {k}")
+    rs = as_rows(rows)
+    print(f"■ {label}「{kw}」 {len(rs)}件（月間検索数 / SEO難易度）")
+    for k, v, kd in rs[:40]:
+        print(f"    {str(v) if v is not None else '—':>7} {('KD' + str(kd)) if kd is not None else '':>6}  {k}")
 
 
 if __name__ == "__main__":
