@@ -298,7 +298,7 @@ def main():
         for x in items[:12]:
             print(f"  [{x['kind']}] {x['slug'][:36]:<36} {x['why'][:40]}")
         print("\n  --write を付けると claude が直し、機械が検算します"
-              f"（通らなければ元に戻します）")
+              "（通らなければ元に戻します）")
         return 0
 
     ok = ng = 0
