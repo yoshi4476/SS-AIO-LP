@@ -185,6 +185,13 @@ def hub_rewrite_log(item, why):
         hub_client.rewrite_log(item.get("site", ""), item["slug"],
                                reason=f"{item['kind']}: {item.get('why', '')[:60]}",
                                summary=why[:80], pos_before=(m.group(1) if m else ""))
+        # rank_up --effect が前後を比べる台帳にも残す。ここに無いと後順位が永遠に空欄のまま
+        if m:
+            import rank_up
+            log = rank_up.load_log()
+            log[item["slug"]] = {"at": time.strftime("%Y-%m-%d"), "pos": float(m.group(1)),
+                                 "site": item.get("site", ""), "by": "auto_rewrite"}
+            rank_up.save_log(log)
     except Exception as e:
         print(f"     （管制塔への記録をスキップ: {str(e)[:60]}）")
 
