@@ -1679,6 +1679,23 @@ def test_kw_plan_keeps_only_buyers():
     check("事前選別: 通る語", kw_plan.cheap_reject({"kw": "経理代行 費用 相場"}, S), "")
     check("一括登録は500件ずつ", [len(c) for c in kw_plan.chunks(list(range(1201)), kw_plan.BULK)], [500, 500, 201])
 
+    # ラッコの 502/503/504 は数分続く。1回で諦めると計画が半分で止まる
+    import io as _io, urllib.error, rakko
+    calls = {"n": 0}
+    def flaky(req, timeout=0):
+        calls["n"] += 1
+        if calls["n"] < 3:
+            raise urllib.error.HTTPError("u", 502, "Bad Gateway", {}, _io.BytesIO(b"<html>502</html>"))
+        return _io.BytesIO(b'{"result":true,"data":{"ok":1}}')
+    saved = (rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT)
+    rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT = flaky, (lambda: "k"), (0, 0, 0)
+    try:
+        r = rakko.call("/v1/x", {"a": 1})
+        check("5xx は待ってやり直す", (r or {}).get("data"), {"ok": 1})
+        check("やり直しの回数", calls["n"], 3)
+    finally:
+        rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT = saved
+
     # 計画ファイルの表を読み戻せること（レポートが検索数・難易度を引く経路）
     tmp = ROOT / "docs" / "kw-plan-_gate_.md"
     tmp.write_text("| 優先 | キーワード | 月間 | 難易度 | 開く理由 | 12か月 | 表示 | 出どころ |" + chr(10)

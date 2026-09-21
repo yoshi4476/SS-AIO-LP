@@ -328,6 +328,11 @@ def _fill_part(cands, missing):
         return 0
     res = rakko.call(f"/v1/search-volume/{rid}/results", {"limit": len(missing) + 50})
     items = (res or {}).get("data", {}).get("items", []) or []
+    if not items:
+        # 「完了」の直後に取りに行くと空で返ることがあった（サーバー側の反映待ち）
+        time.sleep(10)
+        res = rakko.call(f"/v1/search-volume/{rid}/results", {"limit": len(missing) + 50})
+        items = (res or {}).get("data", {}).get("items", []) or []
     n, unmatched = 0, []
     for it in items:
         c = cands.get(norm(it.get("keyword", "")))

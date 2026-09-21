@@ -21,6 +21,7 @@ APIキーは .env の RAKKO_API_KEY。未設定なら黙って何も返さず、
 """
 import json
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -55,6 +56,9 @@ def exhausted():
     return _OUT_OF_CREDIT
 
 
+RETRY_WAIT = (5, 15, 30)   # 5xx のときの待ち秒。実測で 502/503/504 が数分続いた
+
+
 def call(path, body=None, method="POST"):
     global _OUT_OF_CREDIT
     key = api_key()
@@ -64,20 +68,34 @@ def call(path, body=None, method="POST"):
         BASE + path, method=method,
         data=json.dumps(body).encode() if body is not None else None,
         headers={"X-API-Key": key, "Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=40) as r:
-            return json.load(r)
-    except urllib.error.HTTPError as e:
-        detail = e.read().decode("utf-8", "ignore")[:200]
-        print(f"  ラッコAPI {e.code}: {detail}")
-        if e.code == 402:
-            _OUT_OF_CREDIT = True
-            print("  クレジットが尽きました。以降の呼び出しは行いません")
-            print("  （無料のサジェストだけで発掘を続けます。記事作成は止まりません）")
-        return None
-    except Exception as e:
-        print(f"  ラッコAPI 通信失敗: {str(e)[:100]}")
-        return None
+    for i in range(len(RETRY_WAIT) + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.load(r)
+        except urllib.error.HTTPError as e:
+            detail = e.read().decode("utf-8", "ignore")
+            # 5xx はHTMLのエラーページで返る。本文を出しても読めないので状態だけ出す
+            short = detail[:200] if not detail.lstrip().startswith("<") else "（サーバー側のエラー）"
+            if e.code == 402:
+                print(f"  ラッコAPI 402: {short}")
+                _OUT_OF_CREDIT = True
+                print("  クレジットが尽きました。以降の呼び出しは行いません")
+                print("  （無料のサジェストだけで発掘を続けます。記事作成は止まりません）")
+                return None
+            if 500 <= e.code < 600 and i < len(RETRY_WAIT):
+                print(f"  ラッコAPI {e.code} {short}。{RETRY_WAIT[i]}秒待ってやり直します（{i + 2}/{len(RETRY_WAIT) + 1}）")
+                time.sleep(RETRY_WAIT[i])
+                continue
+            print(f"  ラッコAPI {e.code}: {short}")
+            return None
+        except Exception as e:
+            if i < len(RETRY_WAIT):
+                print(f"  ラッコAPI 通信失敗（{type(e).__name__}）。{RETRY_WAIT[i]}秒待ってやり直します")
+                time.sleep(RETRY_WAIT[i])
+                continue
+            print(f"  ラッコAPI 通信失敗: {str(e)[:100]}")
+            return None
+    return None
 
 
 def _rows(res):
