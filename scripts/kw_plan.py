@@ -153,22 +153,47 @@ def gather(site_id, S, deep):
     return cands
 
 
-MAX_INTENTS = 10
+MAX_INTENTS = 14
 
 
 def intents_for(S):
-    """起点に掛ける意図。開く理由の強い順に上限まで"""
+    """起点に掛ける意図。開く理由の強い順に上限まで。
+    kw_intent は「代行」を点に含めないため、買い手の語（申請 代行）が落ちていた。
+    ここでは買い手の語にも加点して選ぶ"""
     its = list(S["intents"])
-    its.sort(key=lambda t: -kw_intent.score(t)[0])
+    its.sort(key=lambda t: -(kw_intent.score(t)[0] + (2 if BUYER.search(t.lower()) else 0)))
     return its[:MAX_INTENTS]
+
+
+def known_heads(S):
+    """語の先頭として認める語。担当領域語と、サイト設定にある複合語
+    （業種・意図・領域の各起点）。設定に無い複合語は認めない"""
+    heads = set(t.lower() for t in S["own_terms"])
+    for t in list(S.get("industries", [])) + list(S.get("intents", [])):
+        for tok in re.split(r"[\s　]+", str(t).lower()):
+            if len(tok) >= 3:
+                heads.add(tok)
+    return heads
+
+
+def own_hit(low, S):
+    heads = S.setdefault("_heads", known_heads(S))
+    toks = [t for t in re.split(r"[\s　のをにへとがで]+", low) if t]
+    for tok in toks:
+        for h in heads:
+            if tok.startswith(h):
+                return True
+    return False
 
 
 def relevant(c, S, corpus, arts, owned, picked_norms):
     """採用してよいか。理由を返す（空なら採用）"""
     kw, low = c["kw"], c["kw"].lower()
     # 汎用語（費用・方法・とは）だけでは通さない。「ホームページ 作成 費用」が
-    # 経理サイトの計画に入る。担当領域の語（owns）を必ず含むこと
-    if not any(t in low for t in S["own_terms"]):
+    # 経理サイトの計画に入る。担当領域の語（owns）を必ず含むこと。
+    # ただし部分一致だと「日記帳」が「記帳」に、「給付金請求書」が「請求書」に
+    # 当たる。語の先頭か、サイト設定にある複合語（IT導入補助金・経理代行）だけを認める
+    if not own_hit(low, S):
         return "領域語なし"
     if any(t in low for t in S["ng_terms"]):
         return "除外語"

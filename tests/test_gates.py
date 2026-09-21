@@ -1610,8 +1610,8 @@ def test_kw_plan_keeps_only_buyers():
     """
     import kw_plan
     print(chr(10) + "■ 計画の一新で入れてよい語")
-    S = {"own_terms": ("経理", "記帳"), "domain_terms": ("経理", "記帳", "費用", "相場"),
-         "ng_terms": ("aio", "補助金")}
+    S = {"own_terms": ("経理", "記帳", "請求書"), "domain_terms": ("経理", "記帳", "費用", "相場"),
+         "ng_terms": ("aio",), "industries": ["経理"], "intents": ["経理代行 費用"]}
     corpus, arts, owned, picked = [], [], [], []
 
     def ok(kw, vol=100):
@@ -1623,6 +1623,18 @@ def test_kw_plan_keeps_only_buyers():
     check("儲かるは落とす", ok("記帳代行 儲かる"), "見込み客でない")
     check("他サイトの領域語は落とす", ok("経理 aio対策"), "除外語")
     check("領域語の無い語は落とす", ok("ホームページ 作成 費用"), "領域語なし")
+    # 部分一致の罠。「日記帳」は「記帳」ではなく、「給付金請求書」は「請求書」ではない
+    check("別の語の一部は落とす（日記帳）", ok("おすすめ 日記帳"), "領域語なし")
+    check("別の語の一部は落とす（給付金請求書）", ok("年金生活者支援給付金請求書"), "領域語なし")
+    check("番号を調べるだけの語は落とす", ok("適格請求書発行事業者登録番号"), "領域語なし")
+    check("先頭一致は通す（請求書の封筒の書き方）", ok("請求書の封筒の書き方"), "")
+    check("設定にある複合語は通す（経理代行）", ok("経理代行 相場"), "")
+    subs = {"own_terms": ("補助金", "申請"), "domain_terms": ("補助金",), "ng_terms": (),
+            "industries": ["運送業"], "intents": ["小規模事業者持続化補助金", "申請 代行"]}
+    check("設定にある複合語は通す（〜補助金）",
+          kw_plan.relevant({"kw": "小規模事業者持続化補助金 運送業", "vol": 50, "imp": 0}, subs, corpus, arts, owned, picked), "")
+    check("買い手の意図（申請 代行）が上限内に残る", "申請 代行" in kw_plan.intents_for(
+        {"intents": ["申請 代行"] + ["意図%d" % i for i in range(30)]}), True)
     check("検索数も表示も無い語は落とす", ok("経理 記帳 手順", vol=None), "検索数が少ない")
     check("検索数が無くても表示があれば通す",
           kw_plan.relevant({"kw": "経理 記帳 手順", "vol": None, "imp": 30}, S, corpus, arts, owned, picked), "")
