@@ -47,6 +47,7 @@ WEAK_SHARE = 0.2      # 「開く理由の弱い語」が占めてよい割合�
 MIN_VOL = 10          # これ未満は、GSCに表示が無ければ採らない
 GSC_KEEP_IMP = 10     # 検索数が取れなくても、この表示数があれば採る
 CHUNK = 40            # 台帳へ一度に送る本数（応答が30秒で切れるため）
+CORE_TERMS = 4        # 業種に掛ける領域語の数（sites/*.json の owns の先頭から）
 
 # 見込み客でない検索。ラッコのLSIは重要度highで返すが、読者は顧客ではない
 NOT_BUYER = ("求人", "転職", "副業", "在宅ワーク", "フリーランス", "資格", "儲かる",
@@ -131,9 +132,20 @@ def gather(site_id, S, deep):
     for q in KD.gsc_rising(S["gsc"]):
         put(q["kw"], "GSC実証", "rising", imp=q["imp"], pos=q["pos"])
 
-    # 2. サブジェクトごとに、ラッコで検索数つきの候補を集める
+    # 2. サブジェクトごとに、ラッコで検索数つきの候補を集める。
+    # 起点が領域語そのもの（経理・記帳）なら単体で聞く。起点が業種名
+    # （クリニック・飲食店）のときは単体で聞くと患者・消費者の検索しか返らない
+    # （クリックポスト／ペインクリニック）。業種×領域語で聞く
+    own_core = [t for t in S["own_terms"][:CORE_TERMS]]
     for ind in S["industries"]:
-        rows = rakko.as_rows(rakko.suggest(ind)) + rakko.as_rows(rakko.related(ind))
+        if ind.lower() in S["own_terms"]:
+            queries = [ind]
+            rows = rakko.as_rows(rakko.related(ind))
+        else:
+            queries = [f"{ind} {t}" for t in own_core]
+            rows = []
+        for q in queries:
+            rows += rakko.as_rows(rakko.suggest(q))
         for kw, vol, kd in rows:
             put(kw, ind, "rakko", vol=vol, kd=kd)
         if deep:
@@ -180,12 +192,20 @@ def known_heads(S):
     return heads
 
 
+# 領域語でも、消費者の検索に多い語は文脈を要求する。「レジーナ クリニック 口コミ」は
+# 患者が評判を調べる検索で、MEOの相談には来ない
+OWN_NEEDS = {"口コミ": re.compile(r"返信|対策|管理|増や|集め|依頼|削除|悪い|評価 上げ|書いてもらう")}
+
+
 def own_hit(low, S):
-    heads = S.setdefault("_heads", known_heads(S))
+    heads = known_heads(S)      # 毎回計算する。設定を差し替えても古い先頭語が残らない
     toks = [t for t in re.split(r"[\s　のをにへとがで]+", low) if t]
     for tok in toks:
         for h in heads:
             if tok.startswith(h):
+                need = OWN_NEEDS.get(h)
+                if need and not need.search(low):
+                    continue
                 return True
     return False
 
@@ -231,11 +251,16 @@ def fill_volume(cands):
     if not rid:
         print("   （一括の検索数取得に失敗。サジェスト由来の語は検索数なしのまま）")
         return 0
-    for _ in range(40):
+    done = False
+    for _ in range(120):                       # 1,000件超は数分かかる。200秒では足りなかった
         st = rakko.call(f"/v1/search-volume/{rid}/status", method="GET")
         if (st or {}).get("data", {}).get("isCompleted"):
+            done = True
             break
         time.sleep(5)
+    if not done:
+        print(f"   （一括の検索数取得が時間内に終わりません: {len(missing)}件。次回に持ち越し）")
+        return 0
     res = rakko.call(f"/v1/search-volume/{rid}/results", {"limit": len(missing) + 50})
     n = 0
     for it in (res or {}).get("data", {}).get("items", []):
@@ -381,8 +406,8 @@ def run(site_id, deep, replace):
     cands = gather(site_id, S, deep)
     print(f"   候補 {len(cands)}件（起点 {len(S['industries'])}件）")
     n = fill_volume(cands)
-    if n:
-        print(f"   検索数を一括で埋めました: {n}件")
+    print(f"   検索数を一括で埋めました: {n}件（未取得 "
+          f"{sum(1 for c in cands.values() if c.get('vol') is None)}件）")
     picked, dropped = choose(cands, S, site_id)
     out = write_plan(site_id, S, picked, dropped, deep)
     print(f"   採用 {len(picked)}本 → {out.relative_to(ROOT).as_posix()}")

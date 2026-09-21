@@ -1641,6 +1641,11 @@ def test_kw_plan_keeps_only_buyers():
     check("業種名だけの語は落とす（リフォーム キッチン 費用）", lab_ok("リフォーム キッチン 費用"), "領域語なし")
     check("業種名だけの語は落とす（飲食店 近くの）", lab_ok("飲食店 近くの"), "領域語なし")
     check("業種×領域語は通す（リフォーム meo 対策）", lab_ok("リフォーム meo 対策"), "")
+    lab2 = dict(lab, own_terms=("aio", "meo", "口コミ"))
+    def lab2_ok(kw):
+        return kw_plan.relevant({"kw": kw, "vol": 5000, "imp": 0}, lab2, corpus, arts, owned, picked)
+    check("患者の評判検索は落とす（クリニック 口コミ）", lab2_ok("レジーナ クリニック 口コミ"), "領域語なし")
+    check("事業者側の口コミは通す（口コミ 返信）", lab2_ok("クリニック 口コミ 返信 例文"), "")
     check("領域語を含む複合意図は通す（aio対策 失敗）", lab_ok("工務店 aio対策 失敗"), "")
     check("買い手の意図（申請 代行）が上限内に残る", "申請 代行" in kw_plan.intents_for(
         {"intents": ["申請 代行"] + ["意図%d" % i for i in range(30)]}), True)
