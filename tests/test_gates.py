@@ -2070,6 +2070,44 @@ def test_aio_rewrites_and_citation_measurement():
     check("月次で実測を回す", "ai_cite_check.py" in wf, True)
 
 
+def test_data_intake_publishes_only_grounded_numbers():
+    """一次データは母数・期間つきで、人が入れた数字だけを公開すること。ページは構造化データつき"""
+    print(chr(10) + "■ 一次データページ")
+    import tempfile as _tf, pathlib as _pl, json as _j
+    import data_intake as D
+    from openpyxl import load_workbook
+    d = _pl.Path(_tf.mkdtemp())
+    p = D.make_sheet(d / "データ記入シート.xlsx")
+    ds, ng, warn = D.review(D.read(p))
+    check("空のシートは公開しない", (ds, bool(ng)), (None, True))
+    wb = load_workbook(p); w = wb["概要"]
+    vals = {"slug": "meo-reply-rate", "題名": "業種別・口コミ返信率と新患数（3,200店舗）", "説明（1〜2文）": "G-ranで運用する店舗の口コミ返信率を区分し、新患数の相対値を集計しました。",
+            "母数（件数）": 3200, "母数の単位": "店舗", "対象期間（開始）": "2024-01", "対象期間（終了）": "2026-08",
+            "集計方法・出典": "G-ranの運用データから月次で集計", "値の単位": "倍", "関連カテゴリ": "meo"}
+    for row in w.iter_rows(min_row=2):
+        k = str(row[0].value)
+        for kk, v in vals.items():
+            if k.startswith(kk): row[1].value = v
+    wd = wb["データ"]; wd.append(["返信率80%以上", 1.6, ""]); wd.append(["返信率20%未満", 1.0, "基準"]); wb.save(p)
+    ds, ng, warn = D.review(D.read(p))
+    check("条件を満たせば通る", ng, [])
+    check("引用用の一文に母数と期間が入る", "3,200店舗" in ds["sentence"] and "2024-01〜2026-08" in ds["sentence"], True)
+    h = D.page_html(ds)
+    ld = [x for x in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S)]
+    ok = any(_j.loads(x).get("@type") == "Dataset" for x in ld)
+    check("Dataset の構造化データが入る", ok, True)
+    check("表と棒グラフと引用用の一文がある", "<table>" in h and "<svg" in h and ds["sentence"] in h, True)
+    w = wb["概要"]
+    for row in w.iter_rows(min_row=2):
+        if str(row[0].value).startswith("母数（件数）"): row[1].value = 8
+    wb.save(p)
+    ds2, ng2, _ = D.review(D.read(p))
+    check("母数10未満は公開しない", ds2 is None and any("10未満" in x for x in ng2), True)
+    b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("sitemap と記事の枠に配線されている", 'glob("*/index.html")' in b and "datasets_box" in b, True)
+    check("intake_watch がデータシートを振り分ける", "data_intake" in (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8"), True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2123,7 +2161,8 @@ def main():
               test_jisseki_intake_never_invents_numbers,
               test_speed_fix_keeps_pages_light,
               test_entities_link_articles_to_official_sources,
-              test_aio_rewrites_and_citation_measurement):
+              test_aio_rewrites_and_citation_measurement,
+              test_data_intake_publishes_only_grounded_numbers):
         try:
             t()
         except Exception as e:

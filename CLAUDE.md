@@ -175,6 +175,13 @@ python scripts/intake_watch.py --apply    # 登録まで行う
 
 1枚ずつ指定したいときは従来どおり `client_intake.py <記入済み.xlsx> --apply` も使える。
 
+**自社の一次データも同じ置き場で公開する**（`python scripts/data_intake.py --sheet` で
+`intake/データ記入シート.xlsx` を作る → 埋めて intake/ に置く → `intake_watch.py --apply`）。
+`site/data/<slug>/` に表・棒グラフ・引用用の一文・Dataset 構造化データ・CSV のページができ、
+llms.txt と sitemap に載り、同じカテゴリの記事末に「自社の一次データ」枠が出て、引用用の一文は
+一次情報として登録される（記事から使われる）。**AIが根拠に選ぶのは「そこにしか無い数字」**で、
+これが引用を取る最大の手。母数10未満・期間なし・個社名入りは公開しない。
+
 **実績・お客様の声も同じ置き場で登録する**（`python scripts/jisseki_intake.py --sheet` で
 `intake/実績記入シート.xlsx` を作る → 埋めて intake/ に置く → `intake_watch.py --apply`）。
 経理BPOの効果・継続率は一次情報（記事に使われる）に、お客様の声は `data/voices.json` と

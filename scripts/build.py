@@ -288,14 +288,28 @@ def post_tile(meta):
             f'<h3>{meta["title"]}<span class="tag">{cat_name.replace("・活用全般", "").replace("運用", "")}</span></h3></a></li>')
 
 
+def datasets_box(meta):
+    """同じカテゴリの一次データへの枠。AIが引用するのは「そこにしか無い数字」なので、記事から必ず辿れるようにする"""
+    try:
+        import data_intake
+        items = [d for d in data_intake.load_all() if meta["category"] in d.get("categories", [])][:3]
+    except Exception:
+        return ""
+    if not items:
+        return ""
+    import html as _h
+    lis = "".join(f'<li><a href="/data/{d["slug"]}/">{_h.escape(d["title"])}</a>（母数{d["n"]:,}{_h.escape(d["n_unit"])}・{_h.escape(d["period"])}）</li>' for d in items)
+    return f'<section class="related datasets"><h2>自社の一次データ</h2><ul>{lis}</ul></section>'
+
+
 def related_html(meta, all_metas):
     same = [m for m in all_metas if m["slug"] != meta["slug"] and m["category"] == meta["category"]]
     others = [m for m in all_metas if m["slug"] != meta["slug"] and m["category"] != meta["category"]]
     picks = (same + others)[:3]
     if not picks:
-        return ""
+        return datasets_box(meta)
     tiles = "\n".join(post_tile(m) for m in picks)
-    return ('<section class="related"><h2>あわせて読みたい関連記事</h2>'
+    return (datasets_box(meta) + '<section class="related"><h2>あわせて読みたい関連記事</h2>'
             f'<ul class="post-list">\n{tiles}\n  </ul></section>')
 
 
@@ -630,6 +644,9 @@ def build_sitemap(article_entries):
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for p in STATIC_PAGES:
         lines.append(f"  <url><loc>{SITE_URL}/{p}</loc><lastmod>{today}</lastmod></url>")
+    # 一次データのページ（data_intake.py が作る）。固定の一覧に無くても拾う
+    for d in sorted((SITE / "data").glob("*/index.html")):
+        lines.append(f"  <url><loc>{SITE_URL}/data/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
     for meta, url in article_entries:
         lines.append(f"  <url><loc>{url}</loc><lastmod>{meta['modified']}</lastmod></url>")
     lines.append("</urlset>")

@@ -141,6 +141,8 @@ def build_body(days=28):
 <p>ページ数が少ない帯の数値は揺れます。判断に使う場合は表示回数の欄も併せてご覧ください。</p>
 </section>
 
+{datasets}
+
 <section class="section">
 <h2>この数字の使い方</h2>
 <p>出典を明記いただければ、記事・資料への引用は自由です。
@@ -150,7 +152,13 @@ def build_body(days=28):
 （https://ai.7senses.co.jp/data/、集計期間: ''' + esc(period) + '''）</p>
 </section>
 </main>''')
-    return "\n".join(h)
+    body_ = "\n".join(h)
+    try:
+        import data_intake
+        body_ = body_.replace('{datasets}', data_intake.datasets_html())
+    except Exception:
+        body_ = body_.replace('{datasets}', '')
+    return body_
 
 
 def main():
