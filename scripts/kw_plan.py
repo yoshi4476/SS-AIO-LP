@@ -46,7 +46,9 @@ ENOUGH = 40           # 未着手がこれ以上あるサイトは、--if-needed
 CREDIT_CAP = 400      # 1サイト1回のラッコ消費の上限。自動課金だと尽きずに請求が伸びる。
                       # 実測は corporate 約35 / ai-lab 約75 / subsidy 約170 で、
                       # 400 を超えるのは何かが暴走しているとき
-PER_SUBJECT = 14      # 1サブジェクトから採る上限。1業種に偏らせない
+PER_SUBJECT = 10      # 1サブジェクトから採る上限。1業種に偏らせない
+PER_PRIORITY = 20     # 優先業種（kw_seeds.priority）の上限。月1件の成約で費用が回収できる業種を厚くする
+PRIORITY_BONUS = 1.5  # 優先業種の語への加点。汎用性は他業種を残すことで保つ
 WEAK_SHARE = 0.2      # 「開く理由の弱い語」が占めてよい割合（kw_discover と同じ）
 MIN_VOL = 10          # これ未満は、GSCに表示が無ければ採らない
 GSC_KEEP_IMP = 10     # 検索数が取れなくても、この表示数があれば採る
@@ -110,8 +112,12 @@ BUYER = re.compile(r"代行|外注|委託|依頼|会社|業者|サービス|比�
                    r"費用|料金|相場|見積|導入|申請 代行|コンサル|支援|丸投げ")
 
 
-def score(c):
-    """並べ替えの点。買い手の語・開く理由・検索数・難易度・伸び・実証を足す"""
+def priority_subjects(S):
+    return [str(t) for t in (S["cfg"].get("kw_seeds", {}).get("priority") or [])]
+
+
+def score(c, prio=()):
+    """並べ替えの点。買い手の語・開く理由・検索数・難易度・伸び・実証・優先業種を足す"""
     vol = c.get("vol") or 0
     kd = c.get("kd")
     intent = kw_intent.score(c["kw"])[0]
@@ -126,6 +132,8 @@ def score(c):
         s += 1.0                                  # 12か月で3割以上伸びている
     if c.get("imp"):
         s += math.log1p(c["imp"]) * 0.6           # 自サイトに表示実績がある
+    if prio and (c.get("subject") in prio or any(p.lower() in c["kw"].lower() for p in prio)):
+        s += PRIORITY_BONUS                        # 月1件で費用が回収できる業種
     return round(s, 2)
 
 
@@ -402,7 +410,8 @@ def _fill_part(cands, missing):
 def choose(cands, S, site_id):
     corpus, arts = written_corpus(), load_articles()
     owned = gsc_owned(site_id)
-    ranked = sorted(cands.values(), key=lambda c: -score(c))
+    prio = priority_subjects(S)
+    ranked = sorted(cands.values(), key=lambda c: -score(c, prio))
     picked, why_drop, per_subject = [], defaultdict(int), defaultdict(int)
     picked_norms = []
     weak_room = max(1, int(MAX_PLAN * WEAK_SHARE))
@@ -413,14 +422,15 @@ def choose(cands, S, site_id):
         if r:
             why_drop[r] += 1
             continue
-        if per_subject[c["subject"]] >= PER_SUBJECT:
+        cap = PER_PRIORITY if c["subject"] in prio else PER_SUBJECT
+        if per_subject[c["subject"]] >= cap:
             why_drop["サブジェクト上限"] += 1
             continue
         weak = kw_intent.score(c["kw"])[0] < 0
         if weak and weak_room <= 0:
             why_drop["弱い語の上限"] += 1
             continue
-        c["score"] = score(c)
+        c["score"] = score(c, prio)
         c["intent"] = kw_intent.score(c["kw"])[0]
         picked.append(c)
         picked_norms.append(c["kw"])
@@ -443,6 +453,9 @@ def write_plan(site_id, S, picked, dropped, deep):
          "",
          f"作成: {date.today().isoformat()} ／ 根拠: ラッコキーワード（月間検索数・SEO難易度・12か月の伸び）"
          f"＋Search Console（自サイトの表示実績）{'＋LSI/PAA' if deep else ''}",
+         "",
+         f"優先業種（枠{PER_PRIORITY}本・加点{PRIORITY_BONUS}）: "
+         + ("／".join(priority_subjects(S)) or "指定なし") + f" ／ その他は枠{PER_SUBJECT}本",
          "",
          f"ラッコの消費: 約{rakko.spent():.0f}クレジット（1回の上限 {CREDIT_CAP}）",
          "",

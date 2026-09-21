@@ -1669,6 +1669,18 @@ def test_kw_plan_keeps_only_buyers():
     check("助詞の有無も同じ語", kw_plan.same("請求書の封筒の書き方", "請求書 封筒 書き方"), True)
     check("空白なし・助詞ありも同じ語", kw_plan.same("請求書封筒書き方", "請求書の書き方 封筒"), True)
     check("違う語は別", kw_plan.same("経理代行 費用", "記帳代行 副業"), False)
+    # 優先業種（月1件の成約で費用が回収できる業種）は点が上がり、枠も厚い
+    base = kw_plan.score({"kw": "美容室 meo 対策", "vol": 100, "kd": 30, "subject": "美容室"}, ["クリニック"])
+    top = kw_plan.score({"kw": "クリニック meo 対策", "vol": 100, "kd": 30, "subject": "クリニック"}, ["クリニック"])
+    check("優先業種の語に加点される", round(top - base, 2), kw_plan.PRIORITY_BONUS)
+    check("優先業種の枠は他業種より厚い", kw_plan.PER_PRIORITY > kw_plan.PER_SUBJECT, True)
+    check("ai-lab の優先業種が設定にある",
+          set(kw_plan.priority_subjects({"cfg": __import__("json").load(open(ROOT / "sites" / "ai-lab.json", encoding="utf-8"))}))
+          >= {"クリニック", "不動産", "リフォーム"}, True)
+    check("補助金の優先が個人事業主と中小企業",
+          set(kw_plan.priority_subjects({"cfg": __import__("json").load(open(ROOT / "sites" / "subsidy.json", encoding="utf-8"))})),
+          {"個人事業主", "中小企業"})
+
     # 買い手の語は、検索数が少なくても上に来ること
     buyer = kw_plan.score({"kw": "経理代行 費用 相場", "vol": 210, "kd": 31})
     diy = kw_plan.score({"kw": "請求書 封筒 書き方", "vol": 5400, "kd": 33})

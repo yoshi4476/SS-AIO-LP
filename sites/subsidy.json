@@ -11,7 +11,7 @@
   "ga4_property_id": "547715435",
   "kw_plan": "docs/kw-subsidy.md",
   "theme": "AI導入補助金・IT導入補助金の活用",
-  "audience": "補助金を使ってAI・ITツールを導入したい中小企業の経営者",
+  "audience": "補助金を使ってAI・ITツールを導入したい中小企業の経営者と、売上の大きい個人事業主（申請の手間より採択の確度と自己負担を気にする層）。業種は問わない",
   "avoid": [
     "AIO・LLMO・SEO・MEOの手法解説（ai.7senses.co.jp の担当領域）",
     "人材採用・オペレーション（corp.7senses.co.jp の担当領域）"
@@ -96,7 +96,12 @@
       "IT導入補助金",
       "AI導入補助金",
       "助成金"
-    ]
+    ],
+    "priority": [
+      "個人事業主",
+      "中小企業"
+    ],
+    "_priority_note": "企業全般の汎用性を保ちつつ、売上の高い個人事業主と中小企業全般を厚くする"
   },
   "template": "blog/_template.html",
   "cta_title": "補助金が使えるか、無料で確認しませんか",
