@@ -320,7 +320,7 @@ def show_effect(pages_by_site):
             down += diff < -0.5
             same += abs(diff) <= 0.5
             posted.append({"site": rec.get("site", ""), "article": slug,
-                           "posAfter": round(now, 1),
+                           "posBefore": round(before, 1), "posAfter": round(now, 1),
                            "effect": ("上昇 " if diff > 0.5 else "下降 " if diff < -0.5 else "変わらず ") + f"{diff:+.1f}位"})
         print(f"  {slug[:32]:<34}{rec.get('at','')[:10]:<12}"
               f"{before or 0:>6.1f}位{now:>6.1f}位{mark:>8}")

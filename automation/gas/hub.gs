@@ -146,12 +146,20 @@ function setup() {
   Object.keys(TABS).forEach(function (name) {
     let sh = ss.getSheetByName(name);
     if (!sh) sh = ss.insertSheet(name);
+    const headers = TABS[name];
     if (sh.getLastRow() === 0) {
-      const headers = TABS[name];
       sh.appendRow(headers);
       sh.getRange(1, 1, 1, headers.length)
         .setFontWeight('bold').setBackground('#0b2447').setFontColor('#ffffff');
       sh.setFrozenRows(1);
+    } else {
+      // 列が増えたのに見出しが古いままだと、送信元ページの列に「ご相談内容」と
+      // 書いてある表になる（問い合わせで実際にそうなっていた）。見出し行だけ揃える
+      const cur = sh.getRange(1, 1, 1, headers.length).getValues()[0].map(String);
+      if (cur.join('	') !== headers.join('	')) {
+        sh.getRange(1, 1, 1, headers.length).setValues([headers])
+          .setFontWeight('bold').setBackground('#0b2447').setFontColor('#ffffff');
+      }
     }
   });
 
@@ -513,11 +521,17 @@ function errorSync_(b) {
   if (!phase || sh.getLastRow() < 2) return { ok: true, closed: 0 };
   const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
   let closed = 0;
-  for (let i = 0; i < rows.length; i++) {
+  const seen = {};                                  // 重複を止める前に積まれた同じTODOは最新の1行だけ残す
+  for (let i = rows.length - 1; i >= 0; i--) {
     if (String(rows[i][2]).trim() !== phase) continue;
     if (String(rows[i][5]).trim() !== '未対応') continue;
-    if (now[String(rows[i][3]).trim()]) continue;
-    sh.getRange(i + 2, 5).setValue('翌日の再監査で再発せず（自動）');
+    const msg = String(rows[i][3]).trim();
+    let why = '';
+    if (!now[msg]) why = '翌日の再監査で再発せず（自動）';
+    else if (seen[msg]) why = '同じ内容の新しい行に集約（自動）';
+    seen[msg] = true;
+    if (!why) continue;
+    sh.getRange(i + 2, 5).setValue(why);
     sh.getRange(i + 2, 6).setValue('解消');
     closed++;
   }
@@ -535,6 +549,7 @@ function rewriteEffect_(b) {
       if (String(rows[i][1]).trim() !== String(r.site || '').trim()) continue;
       if (String(rows[i][2]).trim() !== String(r.article || '').trim()) continue;
       if (String(rows[i][6] || '').trim() !== '') continue;
+      if (String(rows[i][5] || '').trim() === '' && r.posBefore) sh.getRange(i + 2, 6).setValue(r.posBefore);
       sh.getRange(i + 2, 7).setValue(r.posAfter || '');
       sh.getRange(i + 2, 8).setValue(r.effect || '');
       updated++;

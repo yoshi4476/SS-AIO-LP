@@ -52,8 +52,10 @@ function refreshDashboard() {
   const hot = inq.filter(function (r) { return String(r[12]).trim() === 'HOT'; }).length;
   const open = inq.filter(function (r) { return String(r[13]).trim() === '未対応'; }).length;
 
+  // 解消した行まで数えると、自動で閉じても数字が減らない。未対応だけを数える
   const errSh = ss.getSheetByName('エラーログ');
-  const errN = errSh ? Math.max(0, errSh.getLastRow() - 1) : 0;
+  const errRows = (errSh && errSh.getLastRow() > 1) ? errSh.getRange(2, 6, errSh.getLastRow() - 1, 1).getValues() : [];
+  const errN = errRows.filter(function (r) { return String(r[0]).trim() === '未対応'; }).length;
 
   // どのページが問い合わせを生んだか。送信元ページ（12列目）を数え、
   // 記事作成ログのURL（8列目）と突き合わせて題名を添える
@@ -84,7 +86,7 @@ function refreshDashboard() {
     ['問い合わせ（累計）', inq.length],
     ['　うちHOT', hot],
     ['　未対応', open],
-    ['エラーログ件数', errN],
+    ['エラーログ（未対応）', errN],
     ...topPages.map(function (u, i) {
       const t = titleOf[u] || titleOf[u.replace(/\/$/, '')] || u.replace(/^https?:\/\/[^/]+/, '');
       return ['　問い合わせを生んだページ ' + (i + 1) + '位', byPage[u] + '件 ｜ ' + t.slice(0, 40)];

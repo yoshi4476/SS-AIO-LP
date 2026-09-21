@@ -52,7 +52,7 @@ function form_(body) {
   }
 
   const temp = leadTemp_(type, d.message, d, body.referer || d.referer || '');
-  const row = leadSave_(site, type, temp, d);
+  const row = leadSave_(site, type, temp, d, body.referer || d.referer || '');
   const silent = body.silent === true || body.silent === 'true';
   // 記録は済んでいる。メールで失敗しても、送信者にはエラーを返さない。
   // ここで例外を投げると、問い合わせが届いていないと誤解される。
@@ -97,7 +97,7 @@ function leadTemp_(type, message, d, referer) {
 }
 
 /** 「問い合わせ」タブへ記録する。24時間以内の同一メールは既存行にまとめる */
-function leadSave_(site, type, temp, d) {
+function leadSave_(site, type, temp, d, referer) {
   const sh = sheet_('問い合わせ');
   const email = clean_(d.email);
   const now = new Date();
@@ -127,7 +127,8 @@ function leadSave_(site, type, temp, d) {
   sh.appendRow([
     now, site, LEAD_TYPE_LABELS[type] || type, clean_(d.company), clean_(d.name), '',
     email, clean_(d.tel || d.phone), body_(d.message || d.body),
-    leadDetail_(type, d), '', clean_(d.referer), temp, '未対応',
+    // AI集客ラボは referer を body の外側に載せて送る。d.referer だけ見ると空欄になる
+    leadDetail_(type, d), '', clean_(referer || d.referer), temp, '未対応',
   ]);
   return sh.getLastRow();
 }
