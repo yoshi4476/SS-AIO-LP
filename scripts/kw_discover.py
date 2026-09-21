@@ -370,6 +370,10 @@ def main():
                     if picked >= PER_SEED * 3:
                         break
             print(f"  ラッコキーワードから追加: {len(discovered) - before}件")
+            # 尽きたことを機械が読める形で出す。実行ログの奥に埋もれると、
+            # 補充が細っている理由に誰も気づけない
+            if rakko.exhausted():
+                print("RAKKO_CREDIT=out（クレジットが尽きました）")
     except Exception as err:
         print(f"  ラッコキーワードの取得を飛ばしました: {str(err)[:70]}")
 

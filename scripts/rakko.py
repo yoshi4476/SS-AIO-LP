@@ -14,7 +14,10 @@ APIキーは .env の RAKKO_API_KEY。未設定なら黙って何も返さず、
 使い方:
     python scripts/rakko.py "経理代行"            # サジェスト
     python scripts/rakko.py "経理代行" --related  # 関連キーワード
-    python scripts/rakko.py --check               # キーの有無と残クレジット
+    python scripts/rakko.py --check               # キーが通るかの確認
+
+残クレジットはAPIからは取れない。ラッコの契約管理ページで見ること。
+尽きると 402 が返り、そこで打ち切って無料のサジェストに切り替える。
 """
 import json
 import sys
@@ -41,9 +44,21 @@ def enabled():
     return bool(api_key())
 
 
+# クレジットが尽きると 402 が返る。1件目で分かるのに、残りの起点でも
+# 叩き続けていた（38件ぶん無駄に往復する）。一度尽きたら以降は呼ばない。
+# リトライでは解消しないため、待っても意味がない
+_OUT_OF_CREDIT = False
+
+
+def exhausted():
+    """このプロセスでクレジット切れを踏んだか"""
+    return _OUT_OF_CREDIT
+
+
 def call(path, body=None, method="POST"):
+    global _OUT_OF_CREDIT
     key = api_key()
-    if not key:
+    if not key or _OUT_OF_CREDIT:
         return None
     req = urllib.request.Request(
         BASE + path, method=method,
@@ -55,6 +70,10 @@ def call(path, body=None, method="POST"):
     except urllib.error.HTTPError as e:
         detail = e.read().decode("utf-8", "ignore")[:200]
         print(f"  ラッコAPI {e.code}: {detail}")
+        if e.code == 402:
+            _OUT_OF_CREDIT = True
+            print("  クレジットが尽きました。以降の呼び出しは行いません")
+            print("  （無料のサジェストだけで発掘を続けます。記事作成は止まりません）")
         return None
     except Exception as e:
         print(f"  ラッコAPI 通信失敗: {str(e)[:100]}")
@@ -119,6 +138,8 @@ def main():
             return
         res = call("/v1/metadata/languages", method="GET")
         print("  キー設定あり /", "接続OK" if res else "接続できません")
+        if exhausted():
+            print("  クレジットが尽きています（契約管理ページで追加購入できます）")
         return
 
     args = [a for a in sys.argv[1:] if not a.startswith("--")]

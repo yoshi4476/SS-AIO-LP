@@ -99,6 +99,13 @@ jobs:
               echo "$out" | tail -5
               python scripts/hub_client.py error_log kw "$s: 週次補充が失敗しました" || true
             fi
+            # クレジット切れは実行ログの奥に埋もれる。補充が細る原因に
+            # 気づけないため、注釈と通知に回す（記事作成自体は止まらない）
+            if echo "$out" | grep -q "RAKKO_CREDIT=out"; then
+              echo "::warning::ラッコキーワードのクレジットが尽きました（無料のサジェストだけで継続中）"
+              mkdir -p automation/logs
+              echo "要対応: ラッコキーワードのクレジットが尽きました（候補の質が落ちます）" >> automation/logs/findings.txt
+            fi
           done
           rm -f indexing-service-account.json
           python scripts/kw_status.py
