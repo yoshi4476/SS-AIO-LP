@@ -49,9 +49,24 @@ def sitemap_urls(domain):
         return []
 
 
-def unindexed(sc, urls, site_url):
+BUDGET_MIN = 15      # 1回の上限。全URLを毎週見ると30分を超え、週次の通知工程まで道連れに止まった
+PER_SITE = 120       # 1サイト1回に検査する上限。週ごとに起点をずらして全体を回す
+
+
+def rotated(urls, per_site):
+    """毎週同じ先頭だけを見ないよう、週番号で起点をずらす"""
+    if len(urls) <= per_site:
+        return urls
+    k = (time.gmtime().tm_yday // 7 * per_site) % len(urls)
+    return (urls[k:] + urls[:k])[:per_site]
+
+
+def unindexed(sc, urls, site_url, deadline=None):
     out = []
     for i, u in enumerate(urls, 1):
+        if deadline and time.time() > deadline:
+            print(f"    時間の上限に達したため、残り{len(urls) - i + 1}件は次回に回します")
+            break
         try:
             r = sc.urlInspection().index().inspect(
                 body={"inspectionUrl": u, "siteUrl": site_url,
@@ -75,6 +90,8 @@ def main():
 
     sc = svc("searchconsole", "v1", READ)
     idx = None if dry else svc("indexing", "v3", PUBLISH)
+    budget = float(a[a.index("--budget-min") + 1]) if "--budget-min" in a else BUDGET_MIN
+    deadline = time.time() + budget * 60
 
     for sid, cfg in sites_mod.load_all().items():
         if only and sid != only:
@@ -84,8 +101,12 @@ def main():
         urls = sitemap_urls(d)
         if not urls:
             continue
-        ng = unindexed(sc, urls, site_url)
-        print(f"■ {cfg['name']}  sitemap {len(urls)}件 / 未登録 {len(ng)}件")
+        if time.time() > deadline:
+            print(f"■ {cfg['name']}  時間の上限のため今回は見送り（次回）")
+            continue
+        picked = rotated(urls, PER_SITE)
+        ng = unindexed(sc, picked, site_url, deadline)
+        print(f"■ {cfg['name']}  sitemap {len(urls)}件（今回 {len(picked)}件を検査）/ 未登録 {len(ng)}件")
         if not ng:
             print("    すべて登録済み")
             continue
