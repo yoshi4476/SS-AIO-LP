@@ -563,15 +563,39 @@ def plan_metrics(site_id):
     return out
 
 
-def split_retire(todo, plan_kws):
+ADDED = ROOT / "data" / "kw_plan_added.json"   # kw_plan が積んだ語の記録（サイト別）
+
+
+def added_before(site_id):
+    try:
+        return set(json.loads(ADDED.read_text(encoding="utf-8")).get(site_id, []))
+    except Exception:
+        return set()
+
+
+def remember_added(site_id, kws):
+    """積んだ語を記録する。次の再実行で取り下げないため"""
+    try:
+        d = json.loads(ADDED.read_text(encoding="utf-8")) if ADDED.exists() else {}
+    except Exception:
+        d = {}
+    cur = set(d.get(site_id, []))
+    cur.update(norm(k) for k in kws)
+    d[site_id] = sorted(cur)
+    ADDED.parent.mkdir(parents=True, exist_ok=True)
+    ADDED.write_text(json.dumps(d, ensure_ascii=False, indent=0), encoding="utf-8")
+
+
+def split_retire(todo, plan_kws, own_norms=()):
     """未着手のうち、取り下げる語と残す語に分ける。
 
-    新計画にもある語まで取り下げると、配備中の管制塔（手元より古い）が
-    「既にある」として再追加を弾き、その語が計画から消える。実際に17本消えた。
-    同じ検索とみなせる語（語順・助詞違い）は残す"""
+    取り下げるのは kw_plan 以前の古い在庫だけ。新計画にもある語と、kw_plan が
+    以前に積んだ語は残す。再実行のたびに前回の計画まで取り下げると、点の
+    付け方が少し変わるだけで在庫がかき混ぜられ、減る方向に働く（実際に1回で
+    25本減った）。同じ検索とみなせる語（語順・助詞違い）も残す"""
     retire, keep = [], []
     for kw in todo:
-        if any(same(kw, p) for p in plan_kws):
+        if norm(kw) in own_norms or any(same(kw, p) for p in plan_kws):
             keep.append(kw)
         else:
             retire.append(kw)
@@ -586,7 +610,7 @@ def replace_ledger(site_id, picked):
         return
     rows = hub_client.all_kw(strict=True)
     todo = [r["keyword"] for r in rows if r.get("site") == site_id and r.get("status") == "未着手"]
-    retire, keep = split_retire(todo, [c["kw"] for c in picked])
+    retire, keep = split_retire(todo, [c["kw"] for c in picked], added_before(site_id))
     if retire:
         for i in range(0, len(retire), CHUNK):
             hub_client.retire_kw(site_id, retire[i:i + CHUNK],
@@ -601,6 +625,7 @@ def replace_ledger(site_id, picked):
         r = hub_client.add_kw(site_id, items[i:i + CHUNK]) or {}
         added += r.get("added", 0)
     print(f"   新しい計画 {added}件を台帳に積みました（site={site_id}）")
+    remember_added(site_id, [c["kw"] for c in picked])
 
 
 def paid_queries(S):

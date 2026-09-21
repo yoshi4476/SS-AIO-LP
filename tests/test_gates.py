@@ -1809,6 +1809,10 @@ def test_kw_plan_keeps_only_buyers():
                                 ["経理 アウトソース 費用", "請求書の書き方 封筒"])
     check("新計画にある語は残す", sorted(k), ["経理 アウトソース 費用", "請求書 封筒 書き方"])
     check("新計画に無い語だけ取り下げる", r, ["古い語 A"])
+    # kw_plan が以前に積んだ語は、今回の計画に無くても取り下げない（再実行で在庫が減る）
+    r2, k2 = kw_plan.split_retire(["前回の計画の語", "古い語 A"], ["別の語"], own_norms={kw_plan.norm("前回の計画の語")})
+    check("以前に積んだ語は残す", (r2, k2), (["古い語 A"], ["前回の計画の語"]))
+    check("積んだ語の記録がある", (ROOT / "data" / "kw_plan_added.json").is_file(), True)
 
     # 一新は「未着手」だけを対象外にする。公開済み・執筆中を落とすと生きている記事が消える
     src = (ROOT / "scripts" / "kw_plan.py").read_text(encoding="utf-8")
