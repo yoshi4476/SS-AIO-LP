@@ -17,7 +17,7 @@ env:
 jobs:
   report:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45   # 在庫の組み直し（kw_plan）が1サイト10分前後かかる
     steps:
       - uses: actions/checkout@v4
 
@@ -83,12 +83,32 @@ jobs:
         run: python scripts/group_report.py --email
 
       # 目標値は翌月号の達成率突合に使うためリポジトリへ残す
+      # 対策キーワードの在庫を、月1回・必要なサイトだけ組み直す。
+      # 毎週やると課金が伸びる。未着手が40本以上あるサイトは飛ばし、
+      # 応答は30日キャッシュされるため、同じ起点への問い合わせは月1回しか課金されない。
+      # RAKKO_API_KEY が無ければ何もしない（無料のサジェストだけの補充は週次が担う）
+      - name: 対策キーワードの在庫を組み直す（必要なサイトだけ）
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          if [ -z "$RAKKO_API_KEY" ]; then echo "RAKKO_API_KEY 未設定 — 組み直しはスキップ"; exit 0; fi
+          out=$(python scripts/kw_plan.py --all --if-needed --replace 2>&1) || true
+          echo "$out" | tail -40
+          if echo "$out" | grep -q "クレジットが尽きました"; then
+            echo "::warning::ラッコキーワードのクレジットが尽きました（在庫の組み直しは途中まで）"
+            mkdir -p automation/logs
+            echo "要対応: ラッコキーワードのクレジットが尽きました（在庫の組み直しが途中）" >> automation/logs/findings.txt
+          fi
+
       - name: 目標値の保存をコミット
         if: steps.gate.outputs.ready == 'true'
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add reports/targets.json reports/targets-*.json || true
+          git add reports/targets.json reports/targets-*.json docs/kw-plan-*.md || true
           if git diff --cached --quiet; then
             echo "保存すべき目標値の変更なし"
           else
