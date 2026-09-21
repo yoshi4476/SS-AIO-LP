@@ -69,6 +69,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
+つまずきやすい点を先に押さえるなら、[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)が参考になります。
+
 関連する内容については、[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-yasui-tool/)にまとめています。
 
 関連する内容は、[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)で解説しています。
