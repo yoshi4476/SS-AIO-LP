@@ -5,3 +5,6 @@ google-api-python-client
 google-auth
 python-pptx
 openpyxl
+# レポートのPDF化（weekly_report / monthly_report / group_report / sales_deck が関数内で使う）。
+# ブラウザ本体は必要なワークフローだけが `playwright install chromium` で入れる
+playwright
