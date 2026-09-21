@@ -1976,6 +1976,42 @@ def test_merge_is_wired():
     check("静的サイトは直下の _redirects に書く", str(R.redirects_file({}, ROOT / "nope")).replace("\\", "/").endswith("nope/_redirects"), True)
 
 
+def test_jisseki_intake_never_invents_numbers():
+    """実績・お客様の声は、シートに入れた数字だけを母数・期間の条件で通すこと"""
+    print(chr(10) + "■ 実績・お客様の声の記入シート")
+    import tempfile as _tf, pathlib as _pl
+    import jisseki_intake as J
+    from openpyxl import load_workbook
+    d = _pl.Path(_tf.mkdtemp())
+    p = J.make_sheet(d / "実績記入シート.xlsx")
+    check("記入シートが4タブで作られる", load_workbook(p).sheetnames, ["書き方", "経理BPOの効果", "継続率", "お客様の声"])
+    f, v, ng, warn = J.review(J.read(p))
+    check("空のシートは登録しない", (f, v, bool(ng)), ([], [], True))
+    wb = load_workbook(p)
+    w = wb["経理BPOの効果"]; w["B2"], w["B3"], w["B4"], w["B5"] = 12, "2025-01", "2026-08", 3
+    w = wb["継続率"]; w["B2"], w["B3"], w["B4"], w["B5"] = 8, 7, "2025-04", "2026-03"
+    w = wb["お客様の声"]
+    w.append(["可", "", "大阪市の歯科医院", "歯科", "院長", "新患が増えました", "3", "11", "月の問い合わせ件数", "2026-01〜2026-06", "ai-lab"])
+    w.append(["不可", "A社", "", "不動産", "", "載せないで", "", "", "", "", ""])
+    w.append(["可", "", "", "リフォーム", "", "表示名が無い", "", "", "", "", ""])
+    wb.save(p)
+    f, v, ng, warn = J.review(J.read(p))
+    claims = {x["id"].split("-2")[0]: x["claim"] for x in f}
+    check("BPOの効果は社数と期間つきの実数", "12社" in claims.get("keiri-bpo-effect", "") and "2025-01〜2026-08" in claims.get("keiri-bpo-effect", ""), True)
+    check("母数10件未満の継続率は割合にしない", "%" in claims.get("keizoku", "x"), False)
+    check("掲載可否が可の声だけ載る", [x["who"] for x in v], ["大阪市の歯科医院"])
+    check("表示名も会社名も無い声は不備", any("表示名" in x for x in ng), True)
+    check("不可の声は警告で知らせる", any("可」でない" in x for x in warn), True)
+    html = J.render(v, "lp")
+    check("掲載HTMLに数字の期間と許可の注記がある", "2026-01〜2026-06" in html and "許可" in html and J.START in html, True)
+    placed = J.place("<x>\n<!-- 代表メッセージ -->\n<y>", html, "<!-- 代表メッセージ -->")
+    check("印が無ければ目印の直前に入る", placed.index(J.START) < placed.index("<!-- 代表メッセージ -->"), True)
+    again = J.place(placed, J.render(v, "lp"), "<!-- 代表メッセージ -->")
+    check("2回目は置き換えで増えない", again.count(J.START), 1)
+    wf = (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8")
+    check("intake_watch が実績シートを振り分ける", "jisseki_intake" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2025,7 +2061,8 @@ def main():
               test_rewrites_reach_the_sheet,
               test_hub_has_one_kpi_writer,
               test_five_hub_features_are_wired,
-              test_merge_is_wired):
+              test_merge_is_wired,
+              test_jisseki_intake_never_invents_numbers):
         try:
             t()
         except Exception as e:

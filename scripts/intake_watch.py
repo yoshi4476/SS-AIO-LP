@@ -60,6 +60,10 @@ def move(src, dst_dir, note=""):
 
 def one(src, write):
     """シート1枚を見る。(登録できたか, 説明) を返す"""
+    # 実績・お客様の声の記入シートは会社の立ち上げではなく、一次情報と掲載の登録
+    if "実績" in src.name:
+        import jisseki_intake as J
+        return J.one(src, write)
     import client_intake as C
     try:
         got = C.read_sheet(src)
@@ -107,7 +111,7 @@ def main():
     for p in found:
         # 上限を超えて受け入れると、記事の枠が足りず全社の本数が減る。
         # 受け入れる前に止めて、別リポジトリへ分ける判断をしてもらう
-        if a.apply and before + ok >= MAX_SITES:
+        if a.apply and "実績" not in p.name and before + ok >= MAX_SITES:
             print("   %-28s 保留（%d社が上限です）" % (p.name[:28], MAX_SITES))
             ng += 1
             continue

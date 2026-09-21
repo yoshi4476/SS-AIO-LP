@@ -175,6 +175,13 @@ python scripts/intake_watch.py --apply    # 登録まで行う
 
 1枚ずつ指定したいときは従来どおり `client_intake.py <記入済み.xlsx> --apply` も使える。
 
+**実績・お客様の声も同じ置き場で登録する**（`python scripts/jisseki_intake.py --sheet` で
+`intake/実績記入シート.xlsx` を作る → 埋めて intake/ に置く → `intake_watch.py --apply`）。
+経理BPOの効果・継続率は一次情報（記事に使われる）に、お客様の声は `data/voices.json` と
+運営者情報・LP（AI集客ラボ）に載る。**数字は本人が入れたものだけ。機械は作らない。**
+割合は母数10件以上・期間つきのときだけで、未満は実数に落とす（`add_fact` と同じ条件）。
+掲載可否が「可」でない声は載せない。会社名を出さない場合は表示名（例: 大阪市の歯科医院）。
+
 `--apply` で作られるもの:
 
 | 生成物 | 中身 |
