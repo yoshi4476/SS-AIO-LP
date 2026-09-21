@@ -267,6 +267,27 @@
       "denominator": 10,
       "period": "2023-01〜2026-08",
       "verifiable": true
+    },
+    {
+      "id": "dataset-keizoku-ritsu-service",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "SEO運用",
+        "AIO・LLMO運用",
+        "AI集客・活用全般",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "セブンセンシズ株式会社が2023-01〜2026-09に契約した99件（SEO運用74件・AIO運用15件・経理BPO10社）を集計した「運用サービス別の契約継続率」では、SEO運用が86.5%（1年以内の解約10件）、AIO運用が100%（3か月以内の解約0件）、経理BPOが90%（2年以内の解約1社）でした",
+      "source": "セブンセンシズ株式会社 一次データ「運用サービス別の契約継続率（契約99件の集計）」 https://ai.7senses.co.jp/data/keizoku-ritsu-service/",
+      "as_of": "2026-09",
+      "denominator": 99,
+      "period": "2023-01〜2026-09",
+      "verifiable": true
     }
   ],
   "pending": [
