@@ -1689,6 +1689,10 @@ def test_kw_plan_keeps_only_buyers():
         return _io.BytesIO(b'{"result":true,"data":{"ok":1}}')
     saved = (rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT)
     rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT = flaky, (lambda: "k"), (0, 0, 0)
+    # 本物のキャッシュに触らない（前回のテストの応答が残っていると呼び出し回数が0になる）
+    import tempfile, pathlib
+    saved_cache = rakko.CACHE_DIR
+    rakko.CACHE_DIR = pathlib.Path(tempfile.mkdtemp())
     try:
         r = rakko.call("/v1/x", {"a": 1})
         check("5xx は待ってやり直す", (r or {}).get("data"), {"ok": 1})
@@ -1698,12 +1702,12 @@ def test_kw_plan_keeps_only_buyers():
             return _io.BytesIO(b'{"result":true,"meta":{"consumedCredit":1.5},"data":{}}')
         rakko.urllib.request.urlopen = paid
         rakko.CONSUMED, rakko.BUDGET = 0.0, 3.0
-        got = [rakko.call("/v1/x", {}) is not None for _ in range(4)]
+        # 問い合わせを変える（同じ内容はキャッシュから返って課金されないため）
+        got = [rakko.call("/v1/x", {"i": i}) is not None for i in range(4)]
         check("上限まで呼べる（1.5×2=3.0）", got[:2], [True, True])
         check("上限に達したら止まる", got[2:], [False, False])
         check("消費を数えている", rakko.spent(), 3.0)
         # 同じ問い合わせは期限内なら課金なしで返す。条件の調整で取り直して約1,000クレジット無駄にした
-        import tempfile, pathlib
         rakko.CACHE_DIR = pathlib.Path(tempfile.mkdtemp())
         rakko.CONSUMED, rakko.BUDGET = 0.0, None
         hits = {"n": 0}
