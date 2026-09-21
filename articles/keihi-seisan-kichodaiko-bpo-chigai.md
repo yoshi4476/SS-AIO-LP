@@ -87,6 +87,8 @@ faq:
 
 違いは「チェックの有無」「対応範囲」「向いている企業規模」の3点です。
 
+実際の進め方は[経理BPOの契約書｜見落としやすい条項6つと確認手順](/blog/keiri-bpo-keiyakusho-kakunin/)で整理しています。
+
 <figure><img src="/images/keihi-seisan-kichodaiko-bpo-chigai/chigai.png" alt="記帳代行と経理BPOの違い: 記帳代行は入力中心でチェックは対象外、経理BPOはチェックから記帳まで一括対応" loading="lazy"><figcaption>記帳代行と経理BPOの違い</figcaption></figure>
 
 | 比較軸 | 記帳代行 | 経理BPO |
