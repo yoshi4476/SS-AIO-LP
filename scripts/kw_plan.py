@@ -410,12 +410,18 @@ def fill_volume(cands):
 
 
 def _fill_part(cands, missing):
-    r = rakko.call("/v1/search-volume", {"keywords": missing, "seoDifficulty": True})
+    # SEO難易度は取らない。同時取得は1語 +0.5（API 1.5倍で 0.75）で、500語なら 375 に
+    # なる（検索数だけなら 15）。今日の大量消費の主因はこれだった。難易度は
+    # サジェスト・関連語の応答に付いてくる分で足りる
+    body = {"keywords": missing, "seoDifficulty": False}
+    r = rakko.call("/v1/search-volume", body)
     rid = (r or {}).get("data", {}).get("requestId")
     if not rid:
         time.sleep(3)                               # 一過性の500は少し待つと通る
-        r = rakko.call("/v1/search-volume", {"keywords": missing, "seoDifficulty": True})
+        r = rakko.call("/v1/search-volume", body)
         rid = (r or {}).get("data", {}).get("requestId")
+    if rid:
+        print(f"   一括調査を登録: {len(missing)}件（消費 {((r or {}).get('meta') or {}).get('consumedCredit')}）")
     if not rid:
         print(f"   （一括の検索数取得に失敗: {len(missing)}件。この分は検索数なしのまま）")
         return 0
@@ -614,9 +620,12 @@ def paid_queries(S):
     return out
 
 
+BULK_COST = 15   # 一括調査1回（検索数のみ・500語まで）。難易度を付けると +0.75/語 になるので付けない
+
+
 def estimate(S):
-    """課金の見積もり（クレジット）。問い合わせ1回1.5 ＋ 一括調査1回15"""
-    return len(paid_queries(S)) * 1.5 + 15
+    """課金の見積もり（クレジット）。問い合わせ1回1.5 ＋ 一括調査1回（500語まで）15"""
+    return len(paid_queries(S)) * 1.5 + BULK_COST
 
 
 def budget_ok(S):
