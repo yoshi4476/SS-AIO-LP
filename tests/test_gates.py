@@ -2136,6 +2136,17 @@ def test_data_intake_publishes_only_grounded_numbers():
     check("積み上げ図に凡例が出る", ("継続" in D.stack_svg(ds3) and "解約" in D.stack_svg(ds3)), True)
     check("判定の条件が違えば節を出す", "判定の条件" in D.window_table(ds3), True)
     check("読み方の節は実際の値で説明する", "10.0ポイント" in D.reading_section(ds3), True)
+    # 95%の範囲は表の数字だけでは伝わらない。図と「言えること/言えないこと」まで出す
+    rs = D.range_svg(ds3)
+    check("95%の範囲を図にする", ("<svg" in rs and "95%の範囲" in rs), True)
+    ds4 = {**ds3, "rows": [{**ds3["rows"][0], "months": 12, "row_start": "2023-05", "row_end": "2026-09"},
+                           {**ds3["rows"][1], "months": 3, "row_start": "2026-05", "row_end": "2026-09"}]}
+    check("期間の差を月で数える", D.span_months("2023-05", "2026-09"), 40)
+    tl = D.timeline_svg(ds4)
+    check("観測期間と判定期間を図にする", ("40か月" in tl and "判定 12か月" in tl), True)
+    check("期間が無ければ図を出さない", D.timeline_svg(ds3), "")
+    lt = D.limits_table(ds4)
+    check("言えること・言えないことを出す", ("言えること" in lt and "実力値としては読めない" in lt), True)
     bad = dict(ds3); bad = {**ds3, "rows": [{"label": "A", "value": "70", "num": "64", "den": "74", "window": "", "note": ""}]}
     _, ng2, _ = D.review({"overview": {"slug": "x-y-z", "題名": "十分に長い題名です", "説明（1〜2文）": "何をどう数えたかを説明する十分な長さの文です。",
                                         "母数（件数）": 74, "母数の単位": "件", "対象期間（開始）": "2024-01", "対象期間（終了）": "2026-08",

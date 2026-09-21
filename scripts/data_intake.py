@@ -65,8 +65,10 @@ OVERVIEW = [
     ("分子の呼び名（任意）", "", "例: 継続"),
     ("差の呼び名（任意）", "", "例: 解約"),
 ]
-DATA_COLS = ["項目", "値", "分子（任意）", "分母（任意）", "判定の条件（任意）", "備考"]
-DATA_EXAMPLE = ["例: SEO運用", "86.5", "64", "74", "契約から1年以内の解約で判定", "2023年5月〜2026年9月の契約"]
+DATA_COLS = ["項目", "値", "分子（任意）", "分母（任意）", "判定の条件（任意）",
+             "判定期間・月（任意）", "開始（任意）", "終了（任意）", "備考"]
+DATA_EXAMPLE = ["例: SEO運用", "86.5", "64", "74", "契約から1年以内の解約で判定",
+                "12", "2023-05", "2026-09", "いちばん古い契約から数えます"]
 
 
 def make_sheet(path=SHEET):
@@ -100,7 +102,7 @@ def make_sheet(path=SHEET):
     for row in d.iter_rows(min_row=3, min_col=1, max_col=4):
         for c in row:
             c.fill = yellow
-    for col, wd in zip("ABCDEF", (24, 10, 12, 12, 30, 40)):
+    for col, wd in zip("ABCDEFGHI", (22, 9, 11, 11, 28, 14, 12, 12, 34)):
         d.column_dimensions[col].width = wd
     path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(path)
@@ -117,11 +119,12 @@ def read(path):
                 got["overview"][str(row[0]).strip()] = "" if row[1] is None else str(row[1]).strip()
     if "データ" in wb.sheetnames:
         for row in wb["データ"].iter_rows(min_row=2, values_only=True):
-            vals = ["" if v is None else str(v).strip() for v in (list(row) + [""] * 6)[:6]]
+            vals = ["" if v is None else str(v).strip() for v in (list(row) + [""] * 9)[:9]]
             if not vals[0] or vals[0].startswith("例:"):
                 continue
-            got["rows"].append({"label": vals[0], "value": vals[1], "num": vals[2],
-                                "den": vals[3], "window": vals[4], "note": vals[5]})
+            got["rows"].append({"label": vals[0], "value": vals[1], "num": vals[2], "den": vals[3],
+                                "window": vals[4], "months": vals[5], "row_start": vals[6],
+                                "row_end": vals[7], "note": vals[8]})
     return got
 
 
@@ -198,6 +201,12 @@ def review(got):
             item.update(num=int(num), den=int(den))
         if r.get("window"):
             item["window"] = r["window"]
+        months = _num(r.get("months"))
+        if months:
+            item["months"] = int(months)
+        rs, re_ = _ym(r.get("row_start")), _ym(r.get("row_end"))
+        if rs and re_:
+            item["row_start"], item["row_end"] = rs, re_
         data.append(item)
     if len(data) < 2:
         ng.append("データは2行以上要ります")
@@ -227,6 +236,98 @@ def wilson(k, n, z=1.96):
     c = (p + z * z / (2 * n)) / (1 + z * z / n)
     h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
     return (max(0.0, (c - h) * 100), min(100.0, (c + h) * 100))
+
+
+def span_months(a, b):
+    """YYYY-MM の差を月で返す"""
+    ya, ma = int(a[:4]), int(a[5:7])
+    yb, mb = int(b[:4]), int(b[5:7])
+    return (yb - ya) * 12 + (mb - ma)
+
+
+def range_svg(ds):
+    """95%の範囲を横線で見せる。表の数字だけでは「幅が広い＝まだ当てにできない」が伝わらない"""
+    rows = ds["rows"]
+    h = 44 * len(rows) + 40
+    x0, w = 150, 420
+    p = [f'<svg viewBox="0 0 640 {h}" width="100%" role="img" '
+         f'aria-label="項目ごとの95%の範囲" style="max-width:640px;font-family:inherit">']
+    for g in range(0, 101, 25):                       # 目盛り
+        x = x0 + w * g / 100
+        p.append(f'<line x1="{x:.0f}" y1="24" x2="{x:.0f}" y2="{h - 20}" stroke="#e3e8ef" stroke-width="1"></line>'
+                 f'<text x="{x:.0f}" y="16" font-size="10" fill="#8a97a8" text-anchor="middle">{g}%</text>')
+    for i, r in enumerate(rows):
+        y = 40 + i * 44
+        lo, hi = wilson(r["num"], r["den"])
+        xl, xh = x0 + w * lo / 100, x0 + w * hi / 100
+        xv = x0 + w * r["value"] / 100
+        p.append(f'<text x="0" y="{y + 4}" font-size="12" fill="#243">{html.escape(r["label"][:14])}</text>'
+                 f'<line x1="{xl:.0f}" y1="{y}" x2="{xh:.0f}" y2="{y}" stroke="#9db8e8" stroke-width="8" stroke-linecap="round"></line>'
+                 f'<circle cx="{xv:.0f}" cy="{y}" r="6" fill="#1a73e8"></circle>'
+                 f'<text x="0" y="{y + 20}" font-size="10" fill="#667">{lo:.1f}〜{hi:.1f}%（{r["den"]}件）</text>')
+    p.append(f'<text x="{x0}" y="{h - 4}" font-size="10" fill="#8a97a8">'
+             f'● は集計値、横線は95%の範囲。母数が小さいほど横線が長くなります</text></svg>')
+    return "".join(p)
+
+
+def timeline_svg(ds):
+    """観測できている期間と判定期間の比較。AIOが100%な理由は「まだ短い」ことにある"""
+    rows = [r for r in ds["rows"] if r.get("row_start") and r.get("row_end")]
+    if not rows:
+        return ""
+    obs = [(r, span_months(r["row_start"], r["row_end"])) for r in rows]
+    mx = max(max(m for _, m in obs), max((r.get("months") or 0) for r in rows)) or 1
+    h = 52 * len(rows) + 34
+    x0, w = 150, 400
+    p = [f'<svg viewBox="0 0 640 {h}" width="100%" role="img" '
+         f'aria-label="観測できている期間と判定期間" style="max-width:640px;font-family:inherit">',
+         '<rect x="150" y="4" width="12" height="10" rx="2" fill="#1a73e8"></rect>'
+         '<text x="168" y="13" font-size="11" fill="#243">観測できている期間</text>'
+         '<rect x="290" y="4" width="12" height="10" rx="2" fill="#f3b23f"></rect>'
+         '<text x="308" y="13" font-size="11" fill="#243">判定期間</text>']
+    for i, (r, m) in enumerate(obs):
+        y = 28 + i * 52
+        wo = max(3, w * m / mx)
+        p.append(f'<text x="0" y="{y + 12}" font-size="12" fill="#243">{html.escape(r["label"][:14])}</text>'
+                 f'<rect x="{x0}" y="{y}" width="{wo:.0f}" height="16" rx="3" fill="#1a73e8"></rect>'
+                 f'<text x="{x0 + wo + 8:.0f}" y="{y + 13}" font-size="11" fill="#123">{m}か月</text>')
+        wm = r.get("months")
+        if wm:
+            ww = max(3, w * wm / mx)
+            p.append(f'<rect x="{x0}" y="{y + 20}" width="{ww:.0f}" height="12" rx="3" fill="#f3b23f"></rect>'
+                     f'<text x="{x0 + ww + 8:.0f}" y="{y + 30}" font-size="10" fill="#667">判定 {wm}か月</text>')
+    p.append("</svg>")
+    return "".join(p)
+
+
+def limits_table(ds):
+    """この数字で言えること・言えないこと。引用する側がいちばん知りたい部分"""
+    rows = sorted(ds["rows"], key=lambda r: r["den"])
+    small, big = rows[0], rows[-1]
+    lo_s, hi_s = wilson(small["num"], small["den"])
+    lo_b, hi_b = wilson(big["num"], big["den"])
+    e = html.escape
+    u = e(ds.get("n_unit", ""))
+    can = [f'{e(big["label"])}は{big["den"]}{u}の集計で、{big["value"]:g}%（95%の範囲 {lo_b:.1f}〜{hi_b:.1f}%）']
+    if big.get("months"):
+        can.append(f'{e(big["label"])}は{span_months(big["row_start"], big["row_end"])}か月ぶんの契約を、'
+                   f'{big["months"]}か月の判定期間で見た結果')
+    cannot = [f'{e(small["label"])}の{small["value"]:g}%は母数{small["den"]}{u}で、'
+              f'95%の範囲が{lo_s:.1f}〜{hi_s:.1f}%と広い。実力値としては読めない']
+    newest = min((r for r in ds["rows"] if r.get("row_start")), key=lambda r: r["row_start"], default=None)
+    late = max((r for r in ds["rows"] if r.get("row_start")), key=lambda r: r["row_start"], default=None)
+    if late is not None and late.get("row_end"):
+        cannot.append(f'{e(late["label"])}は観測が{span_months(late["row_start"], late["row_end"])}か月しかなく、'
+                      f'長い目で見た数字は分からない')
+    del newest
+    cannot.append("業界の平均との比較（他社の数字を同じやり方で集計していないため）")
+    li = lambda xs: "".join(f"<li>{x}</li>" for x in xs)
+    return ('<section class="section">\n<h2>この数字で言えること・言えないこと</h2>\n'
+            '<div class="table-wrap"><table><thead><tr><th style="width:50%">言えること</th>'
+            '<th style="width:50%">言えないこと</th></tr></thead><tbody><tr>'
+            f'<td><ul style="margin:0;padding-left:1.1em">{li(can)}</ul></td>'
+            f'<td><ul style="margin:0;padding-left:1.1em">{li(cannot)}</ul></td>'
+            '</tr></tbody></table></div>\n</section>')
 
 
 def has_counts(ds):
@@ -330,8 +431,13 @@ def reading_section(ds):
             f'落ち着く先の目安です。{e(small["label"])}は{lo:.1f}〜{hi:.1f}%と幅が広く、'
             f'現時点の{small["value"]:g}%をそのまま実力と読むことはできません。'
             f'合計（{td}{e(ds.get("n_unit", ""))}）では{tn / td * 100:.1f}%です。</p>\n'
-            '<p>割合だけを見ず、母数と判定の条件と合わせて読んでください。'
-            'そのために、この3つを同じ表に並べています。</p>\n</section>')
+            f'<p>言い換えると、{e(big["label"])}はおよそ'
+            f'{big["den"] / max(1, big["den"] - big["num"]):.0f}件に1件が'
+            f'{e(ds.get("neg_label") or "非該当")}です'
+            f'（{big["den"]}件中{big["den"] - big["num"]}件）。'
+            + (f'判定の条件は「{e(big["window"])}」です。' if big.get("window") else '')
+            + '割合だけを見ず、母数と判定の条件と合わせて読んでください。'
+            + 'そのために、この3つを同じ表に並べています。</p>\n</section>')
 
 
 def chart_svg(rows, unit):
@@ -380,11 +486,22 @@ def page_html(ds):
     trs = "".join(f"<tr><td>{e(r['label'])}</td><td style=\"text-align:right\">{e(_fmt(r['value'], ds['unit']))}</td><td>{e(r.get('note', ''))}</td></tr>" for r in ds["rows"])
     rich = has_counts(ds)
     if rich:
+        tl = timeline_svg(ds)
         data_block = (f"<h2>実数で見る</h2>\n{stack_svg(ds)}\n{counts_table(ds)}\n"
                       f'<p style="font-size:.9rem;color:#556;">「95%の範囲」は母数から計算した目安（Wilson信頼区間）、'
                       f'「1件で動く幅」は1件の増減で割合が何ポイント動くかです。どちらも上の実数から導いた値です。</p>\n'
                       f'<p><a href="data.csv" download>CSVをダウンロード</a></p>')
-        extra = window_table(ds) + "\n\n" + reading_section(ds)
+        extra = ('<section class="section">\n<h2>数字の確からしさ</h2>\n'
+                 '<p>同じ「90%」でも、母数が10件のときと100件のときでは意味が違います。'
+                 '下の図は、集計値（●）と、母数から計算した95%の範囲（横線）です。'
+                 '横線が長い項目は、いま出ている数字がそのまま実力とは読めません。</p>\n'
+                 f'{range_svg(ds)}\n</section>')
+        if tl:
+            extra += ('\n\n<section class="section">\n<h2>観測できている期間</h2>\n'
+                      '<p>判定期間より、契約を見てきた期間のほうが短ければ、'
+                      'その数字はまだ途中経過です。青が観測できている期間、黄色が判定期間です。</p>\n'
+                      f'{tl}\n</section>')
+        extra += "\n\n" + window_table(ds) + "\n\n" + limits_table(ds) + "\n\n" + reading_section(ds)
     else:
         data_block = (f"<h2>データ</h2>\n{chart_svg(ds['rows'], ds['unit'])}\n"
                       f'<div class="table-wrap"><table><thead><tr><th>項目</th>'
