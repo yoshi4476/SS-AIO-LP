@@ -1731,6 +1731,13 @@ def test_kw_plan_keeps_only_buyers():
     many = {"intents": ["意図%d" % i for i in range(30)]}
     check("意図は上限まで", len(kw_plan.intents_for(many)) <= kw_plan.MAX_INTENTS, True)
 
+    # 新計画にもある語は取り下げない。配備中の管制塔は取り下げ済みの語の再追加を弾き、
+    # その語が計画から消える（実際に17本消えた）
+    r, k = kw_plan.split_retire(["経理 アウトソース 費用", "古い語 A", "請求書 封筒 書き方"],
+                                ["経理 アウトソース 費用", "請求書の書き方 封筒"])
+    check("新計画にある語は残す", sorted(k), ["経理 アウトソース 費用", "請求書 封筒 書き方"])
+    check("新計画に無い語だけ取り下げる", r, ["古い語 A"])
+
     # 一新は「未着手」だけを対象外にする。公開済み・執筆中を落とすと生きている記事が消える
     src = (ROOT / "scripts" / "kw_plan.py").read_text(encoding="utf-8")
     check("未着手だけを取り下げる", 'get("status") == "未着手"' in src, True)

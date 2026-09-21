@@ -447,6 +447,21 @@ def plan_metrics(site_id):
     return out
 
 
+def split_retire(todo, plan_kws):
+    """未着手のうち、取り下げる語と残す語に分ける。
+
+    新計画にもある語まで取り下げると、配備中の管制塔（手元より古い）が
+    「既にある」として再追加を弾き、その語が計画から消える。実際に17本消えた。
+    同じ検索とみなせる語（語順・助詞違い）は残す"""
+    retire, keep = [], []
+    for kw in todo:
+        if any(same(kw, p) for p in plan_kws):
+            keep.append(kw)
+        else:
+            retire.append(kw)
+    return retire, keep
+
+
 def replace_ledger(site_id, picked):
     """台帳の「未着手」を対象外にし、新しい計画を積む。公開済み・執筆中は触らない"""
     import hub_client
@@ -455,11 +470,13 @@ def replace_ledger(site_id, picked):
         return
     rows = hub_client.all_kw(strict=True)
     todo = [r["keyword"] for r in rows if r.get("site") == site_id and r.get("status") == "未着手"]
-    if todo:
-        for i in range(0, len(todo), CHUNK):
-            hub_client.retire_kw(site_id, todo[i:i + CHUNK],
+    retire, keep = split_retire(todo, [c["kw"] for c in picked])
+    if retire:
+        for i in range(0, len(retire), CHUNK):
+            hub_client.retire_kw(site_id, retire[i:i + CHUNK],
                                  "計画を一新（ラッコの実測で組み直し）")
-        print(f"   未着手 {len(todo)}件を「対象外」にしました（行は残っています）")
+    print(f"   未着手 {len(todo)}件のうち {len(retire)}件を「対象外」に、"
+          f"新計画にもある {len(keep)}件はそのまま残しました")
     items = [{"keyword": c["kw"], "priority": c["priority"], "aim": c["subject"],
               "note": "月間%s/KD%s/意図%+d" % (c.get("vol", "—"), c.get("kd", "—"), c["intent"])}
              for c in picked]
