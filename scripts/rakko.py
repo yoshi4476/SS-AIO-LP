@@ -64,6 +64,40 @@ CONSUMED = 0.0
 BUDGET = None      # None なら上限なし。数値を入れると、超えた時点で以降の呼び出しを止める
 
 
+SPEND_LOG = ROOT / "data" / "rakko_spend.jsonl"   # 1行1回。月の合計を出すため
+MONTHLY_BUDGET = 1000                             # 3,000の1/3。超えたら知らせる（止めはしない）
+
+
+def _log_spend(path, credit):
+    if not credit:
+        return
+    try:
+        SPEND_LOG.parent.mkdir(parents=True, exist_ok=True)
+        from datetime import datetime
+        with SPEND_LOG.open("a", encoding="utf-8") as f:
+            f.write(json.dumps({"at": datetime.now().isoformat(timespec="seconds"),
+                                "path": path, "credit": credit}, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
+def month_spent(month=None):
+    """その月に使ったクレジット。month は 'YYYY-MM'（省略時は今月）"""
+    from datetime import date
+    month = month or date.today().strftime("%Y-%m")
+    total = 0.0
+    if not SPEND_LOG.exists():
+        return 0.0
+    for ln in SPEND_LOG.read_text(encoding="utf-8").splitlines():
+        try:
+            r = json.loads(ln)
+            if str(r.get("at", "")).startswith(month):
+                total += float(r.get("credit") or 0)
+        except Exception:
+            continue
+    return total
+
+
 def spent():
     return CONSUMED
 
@@ -76,7 +110,7 @@ def over_budget():
 # 十数回やり直して約1,000クレジットを無駄にした。同じ問い合わせは期限内なら
 # 課金なしで返す。一括調査（search-volume）の登録・状況確認は毎回違うので残さない
 CACHE_DIR = ROOT / "data" / "rakko_cache"
-CACHE_DAYS = 14
+CACHE_DAYS = 30     # 週次補充は毎週同じ起点で聞くので、30日あれば月1回しか課金されない
 NO_CACHE = ("/v1/search-volume", "/status", "/histories", "/metadata/")
 
 
@@ -129,7 +163,9 @@ def call(path, body=None, method="POST"):
             with urllib.request.urlopen(req, timeout=60) as r:
                 res = json.load(r)
                 _cache_put(path, body, method, res)
-                CONSUMED += float(((res or {}).get("meta") or {}).get("consumedCredit") or 0)
+                credit = float(((res or {}).get("meta") or {}).get("consumedCredit") or 0)
+                CONSUMED += credit
+                _log_spend(path, credit)
                 if over_budget():
                     print(f"  ラッコの消費が上限 {BUDGET} クレジットに達しました。以降の呼び出しは行いません")
                 return res
@@ -245,6 +281,8 @@ def main():
         print("  キー設定あり /", "接続OK" if res else "接続できません")
         if exhausted():
             print("  クレジットが尽きています（契約管理ページで追加購入できます）")
+        print(f"  今月の消費（手元の記録）: {month_spent():.0f} クレジット / 目安 {MONTHLY_BUDGET}")
+        print("RAKKO_MONTH=%s" % ("over" if month_spent() > MONTHLY_BUDGET else "ok"))
         return
 
     args = [a for a in sys.argv[1:] if not a.startswith("--")]

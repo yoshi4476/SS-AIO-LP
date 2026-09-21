@@ -42,6 +42,7 @@ from cannibal_check import dice, kw_conflicts, load_articles  # noqa: E402
 from kw_status import is_written, written_corpus              # noqa: E402
 
 MAX_PLAN = 120        # 1サイトの計画本数。1日2本で60日分
+ENOUGH = 40           # 未着手がこれ以上あるサイトは、--if-needed のとき組み直さない（20日分）
 CREDIT_CAP = 400      # 1サイト1回のラッコ消費の上限。自動課金だと尽きずに請求が伸びる。
                       # 実測は corporate 約35 / ai-lab 約75 / subsidy 約170 で、
                       # 400 を超えるのは何かが暴走しているとき
@@ -301,11 +302,21 @@ def chunks(xs, n):
 VOL_CACHE = ROOT / "data" / "rakko_volume.json"
 
 
+VOL_DAYS = 90    # 検索数は月次で大きくは動かない。90日は使い回す
+
+
 def _vol_cache():
+    """語ごとの検索数の記録。日付が古いものは無いものとして扱う"""
     try:
-        return json.loads(VOL_CACHE.read_text(encoding="utf-8"))
+        raw = json.loads(VOL_CACHE.read_text(encoding="utf-8"))
     except Exception:
         return {}
+    import time as _t
+    out = {}
+    for k, v in raw.items():
+        if _t.time() - float(v.get("at") or 0) <= VOL_DAYS * 86400:
+            out[k] = v
+    return out
 
 
 def fill_volume(cands):
@@ -333,7 +344,8 @@ def fill_volume(cands):
     # 取れた語も「取れなかった語」も残す。取れない語を毎回登録し直さないため
     for k, c in cands.items():
         if k not in known and c["kw"] in missing:
-            known[k] = {"vol": c.get("vol"), "kd": c.get("kd"), "trend": c.get("trend")}
+            known[k] = {"vol": c.get("vol"), "kd": c.get("kd"), "trend": c.get("trend"),
+                        "at": time.time()}
     VOL_CACHE.parent.mkdir(parents=True, exist_ok=True)
     VOL_CACHE.write_text(json.dumps(known, ensure_ascii=False), encoding="utf-8")
     return total
@@ -522,9 +534,23 @@ def replace_ledger(site_id, picked):
     print(f"   新しい計画 {added}件を台帳に積みました（site={site_id}）")
 
 
-def run(site_id, deep, replace):
+def todo_count(site_id):
+    try:
+        import hub_client
+        st = hub_client.status(site_id) or {}
+        return int(st.get("todo") or 0)
+    except Exception:
+        return None
+
+
+def run(site_id, deep, replace, if_needed=False):
     S = KD.site_config(site_id)
     print(f"\n■ {site_id}（{S['cfg']['name']}）")
+    if if_needed:
+        n = todo_count(site_id)
+        if n is not None and n >= ENOUGH:
+            print(f"   未着手が {n} 本あるので、今回は組み直しません（{ENOUGH}本未満で組み直す）")
+            return
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
     if not S["industries"]:
         print("   kw_seeds が未定義のため作れません")
@@ -565,11 +591,14 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--deep", action="store_true", help="LSI/PAA も使う（1起点22.5クレジット）")
     ap.add_argument("--replace", action="store_true", help="台帳の未着手を対象外にして積み直す")
+    ap.add_argument("--if-needed", action="store_true",
+                    help=f"未着手が{ENOUGH}本未満のサイトだけ組み直す（月次の定常運転用）")
     a = ap.parse_args()
     import sites as S_
     ids = sorted(S_.load_all()) if a.all else ([a.site] if a.site else [S_.primary()])
     for sid in ids:
-        run(sid, a.deep, a.replace)
+        run(sid, a.deep, a.replace, a.if_needed)
+    print(f"\nRAKKO_SPENT={rakko.spent():.0f}（今月の合計 {rakko.month_spent():.0f} / 目安 {rakko.MONTHLY_BUDGET}）")
     return 0
 
 

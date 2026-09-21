@@ -34,17 +34,20 @@ CHECKS = [
      re.compile(r"上限\+\d+本|同じ言い回し\d+本")),
     ("数字の信頼性", "data_sanity.py",
      re.compile(r"^\s*注意\s+(?!\d+件)\S")),
+    ("ラッコキーワードの消費", "rakko.py",
+     re.compile(r"今月の消費")),
 ]
 
 # 「問題あり」を表す印。検査ごとに語尾が違うため、値の側で見る
-BAD = re.compile(r"(?:[A-Z_]+_OK=no|LIVE_CHECK=ng|KW_GATE=block)")
-GOOD = re.compile(r"(?:[A-Z_]+_OK=yes|LIVE_CHECK=ok|KW_GATE=ok)")
+BAD = re.compile(r"(?:[A-Z_]+_OK=no|LIVE_CHECK=ng|KW_GATE=block|RAKKO_MONTH=over)")
+GOOD = re.compile(r"(?:[A-Z_]+_OK=yes|LIVE_CHECK=ok|KW_GATE=ok|RAKKO_MONTH=ok)")
 
 
 def run(script):
     """検査を1本動かして、出力と終了コードを返す。落ちても例外にしない。"""
     try:
-        r = subprocess.run([sys.executable, str(ROOT / "scripts" / script)],
+        args = ["--check"] if script == "rakko.py" else []
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / script)] + args,
                            cwd=str(ROOT), capture_output=True, text=True,
                            encoding="utf-8", errors="replace", timeout=TIMEOUT)
         return (r.stdout or "") + (r.stderr or ""), r.returncode
