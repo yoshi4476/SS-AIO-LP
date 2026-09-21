@@ -36,7 +36,7 @@ RULES = [
     "この1枚に入れた数字だけが、記事と運営者情報・LPに載ります。機械は数字を作りません。",
     "割合（◯%・◯割）を載せるには「何社中何社か（母数）」と「いつからいつまで（期間）」が必要です。",
     "母数が10件未満なら割合にはせず、実数（◯社のうち◯社）で載ります。",
-    "お客様の声は「掲載可否」が「可」のものだけ載ります。会社名を出さない場合は表示名（例: 大阪市の歯科医院）を書いてください。",
+    "お客様の声は「掲載可否」が「可」のものだけ載ります。「可」にできるのは、本人が書いた文章か、本人が内容を確認して掲載を許可したものだけです（事業者が作った感想の表示はステルスマーケティング規制の違反）。会社名を出さない場合は表示名（例: 大阪市の歯科医院）を書いてください。",
     "数字を添える場合は「前」「後」「内容（例: 月の問い合わせ件数）」「期間」の4つをそろえてください。",
     "空欄の項目は登録しません。分からないものは空欄のままで構いません。",
 ]
@@ -54,7 +54,7 @@ KEIZOKU_ROWS = [
     ("期間（終了）", "", "例: 2026-03"),
     ("掲載サイト", "corporate,subsidy,ai-lab", "corporate / subsidy / ai-lab をカンマ区切り"),
 ]
-VOICE_COLS = ["掲載可否", "会社名", "表示名（会社名を出さない場合）", "業種", "お名前・役職", "一言（120字まで）",
+VOICE_COLS = ["掲載可否", "会社名", "表示名（会社名を出さない場合）", "業種", "お名前・役職", "一言（240字まで）",
               "数字（前）", "数字（後）", "数字の内容", "期間", "掲載サイト"]
 VOICE_EXAMPLE = ["例", "○○歯科医院", "大阪市の歯科医院", "歯科", "院長", "口コミ返信を任せてから新患の予約が増えました",
                  "3", "11", "月の問い合わせ件数", "2026-01〜2026-06", "ai-lab"]
@@ -202,8 +202,8 @@ def review(got):
         if not v["industry"] or not v["quote"]:
             ng.append(f"お客様の声{i}: 業種と一言は必須です")
             continue
-        if len(v["quote"]) > 120:
-            ng.append(f"お客様の声{i}: 一言が{len(v['quote'])}字です（120字まで）")
+        if len(v["quote"]) > 240:
+            ng.append(f"お客様の声{i}: 一言が{len(v['quote'])}字です（240字まで）")
             continue
         num = None
         if v["before"] or v["after"] or v["metric"]:
@@ -218,7 +218,7 @@ def review(got):
     for f in facts:
         for p in add_fact.problems({k_: v_ for k_, v_ in f.items() if not k_.startswith("_")}, ids):
             ng.append(f"{f['id']}: {p}")
-    if not facts and not voices and not ng:
+    if not facts and not voices and not ng and not got.get("voices"):
         ng.append("何も記入されていません（空欄のシートです）")
     return facts, voices, ng, warn
 
