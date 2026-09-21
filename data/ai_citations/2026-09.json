@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-21",
+  "date": "2026-09-22",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 11,
       "suspect_taken": 11,
       "healthy": 0,
-      "too_thin": 44,
+      "too_thin": 47,
       "items": [
         {
           "kw": "原口優",
@@ -41,8 +41,8 @@
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 9.0,
-          "imp": 39,
+          "pos": 8.8,
+          "imp": 31,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -71,11 +71,11 @@
         {
           "kw": "医療機関 meo",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 7.3,
-          "imp": 31,
+          "pos": 7.5,
+          "imp": 33,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 4.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         },
         {
@@ -92,7 +92,7 @@
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
           "pos": 8.7,
-          "imp": 107,
+          "imp": 109,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -111,8 +111,8 @@
         {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 9.5,
-          "imp": 60,
+          "pos": 9.6,
+          "imp": 62,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -129,11 +129,11 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 2.7,
-          "imp": 30,
+          "pos": 2.4,
+          "imp": 38,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 11.0,
+          "expected_ctr": 15.0,
           "ratio": 0.0
         },
         {
@@ -152,7 +152,7 @@
       "judged": 2,
       "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 24,
+      "too_thin": 26,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",
