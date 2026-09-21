@@ -1890,6 +1890,14 @@ def test_hub_has_one_kpi_writer():
     check("0行を掃除する保守タスクがある", "case 'clean_kpi'" in hub, True)
     dk = (ROOT / "scripts" / "daily_kpi.py").read_text(encoding="utf-8")
     check("AIO計測に推定を添える", "aio_est" in dk and "aio_est" in hub, True)
+    # ダッシュボードは項目名で上書きする。全行を消すと別の書き手の項目が消える
+    dash = (ROOT / "automation" / "gas" / "dashboard.gs").read_text(encoding="utf-8")
+    body = hub.split("function writeDashboard_")[1].split(chr(10) + "function ")[0]
+    body2 = dash.split("function refreshDashboard")[1].split(chr(10) + "function ")[0]
+    check("ダッシュボードの書き手は行を消さない", "deleteRows" not in body2 and "deleteRows" not in body, True)
+    check("両方の書き手が upsert を使う", dash.count("upsertDashboard_(") >= 1 and hub.count("upsertDashboard_(") >= 2, True)
+    # CTRは数値で書く（'2.4%' は 0.024 に解釈され「0.02%」と出ていた）
+    check("CTRを文字列で書かない", "(r.ctr || 0) + '%'" not in hub, True)
 
 
 def main():

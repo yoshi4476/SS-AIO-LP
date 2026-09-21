@@ -72,13 +72,8 @@ function refreshDashboard() {
     ['エラーログ件数', errN],
   ];
 
-  if (sh.getLastRow() > 1) sh.deleteRows(2, sh.getLastRow() - 1);
-  rows.forEach(function (r) {
-    const before = prev[r[0]];
-    const diff = (before === undefined) ? ''
-      : ((r[1] - before >= 0 ? '+' : '') + (Math.round((r[1] - before) * 10) / 10));
-    sh.appendRow([r[0], r[1], diff, new Date(), '台帳から集計']);
-  });
+  // 全行を消さない。流入の合計（kpi_log が書く7項目）が消えていた
+  upsertDashboard_(rows, '台帳から集計');
   return rows.length + '項目を更新しました';
 }
 

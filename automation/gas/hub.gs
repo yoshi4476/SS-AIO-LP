@@ -538,7 +538,7 @@ function kpiLog_(b) {
 
   rows.forEach(function (r) {
     kpi.appendRow([r.date || '', siteLabel_(r.site), r.sessions || 0, r.pv || 0,
-                   r.impressions || 0, r.clicks || 0, (r.ctr || 0) + '%', r.position || 0,
+                   r.impressions || 0, r.clicks || 0, Number(r.ctr) || 0, r.position || 0,
                    r.cv || 0, r.note || '']);
     const bd = r.breakdown || {};
     // AI Overview の表示回数はAPIで取れない。CTRの歪みからの推定（ai_citation_check）を
@@ -571,7 +571,40 @@ function cleanKpi_() {
     }
     out.push(spec[0] + ': ' + removed + '行を消しました');
   });
+  // CTRは文字列 '2.4%' で書かれて 0.024 に解釈されていた。クリック÷表示から入れ直す
+  const kpi = sheet_('KPIレポート');
+  if (kpi && kpi.getLastRow() > 1) {
+    const n = kpi.getLastRow() - 1;
+    const v = kpi.getRange(2, 5, n, 2).getValues();     // 表示回数, クリック
+    const ctr = v.map(function (r) {
+      const imp = Number(r[0]) || 0, clk = Number(r[1]) || 0;
+      return [imp ? Math.round(clk / imp * 10000) / 100 : 0];
+    });
+    kpi.getRange(2, 7, n, 1).setValues(ctr).setNumberFormat('0.00"%"');
+    out.push('CTRを' + n + '行入れ直しました');
+  }
   return out.join(' / ');
+}
+
+/** ダッシュボードの行を項目名で上書きする（無ければ追加）。
+ *  流入の合計（kpi_log）と台帳の集計（refreshDashboard）が同じタブを
+ *  全行消して書き直し合い、最後に書いた側の項目しか残らなかった */
+function upsertDashboard_(rows, note) {
+  const sh = sheet_('ダッシュボード');
+  const last = sh.getLastRow();
+  const cur = last > 1 ? sh.getRange(2, 1, last - 1, 5).getValues() : [];
+  const index = {};
+  cur.forEach(function (r, i) { index[String(r[0])] = i; });
+  const now = new Date();
+  rows.forEach(function (r) {
+    const i = index[String(r[0])];
+    const before = (i === undefined) ? undefined : Number(cur[i][1]);
+    const diff = (before === undefined || isNaN(before)) ? ''
+      : ((r[1] - before >= 0 ? '+' : '') + (Math.round((r[1] - before) * 10) / 10));
+    const line = [r[0], r[1], diff, now, note];
+    if (i === undefined) sh.appendRow(line);
+    else sh.getRange(i + 2, 1, 1, 5).setValues([line]);
+  });
 }
 
 function writeDashboard_(t, dateStr) {
@@ -602,12 +635,7 @@ function writeDashboard_(t, dateStr) {
     ['AI経由セッション（3サイト合計）', t.ai],
     ['公開記事数（台帳の公開済み）', published],
   ];
-  if (sh.getLastRow() > 1) sh.deleteRows(2, sh.getLastRow() - 1);
-  rows.forEach(function (r) {
-    const before = prev[r[0]];
-    const diff = (before === undefined) ? '' : (r[1] - before >= 0 ? '+' : '') + (r[1] - before);
-    sh.appendRow([r[0], r[1], diff, new Date(), dateStr + ' 時点']);
-  });
+  upsertDashboard_(rows, dateStr + ' 時点');
 }
 
 // ============================================================
