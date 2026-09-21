@@ -168,7 +168,7 @@ AUTHOR_BIO = _B.get("bio") or "通算3,200店舗以上の運営実績を持つME
 # 経歴・実績の実体があるページへ。無い人を指すと E-E-A-T の主張が空振りする
 AUTHOR_URL = _B.get("url") or f"{SITE_URL}/author/haraguchi/"
 # 外部の実在プロフィール。サイトの外でも同じ人物だと機械が結び付けられるようにする
-AUTHOR_SAME_AS = _B.get("same_as") or ["https://www.linkedin.com/in/%E5%84%AA-%E5%8E%9F%E5%8F%A3-b89362439", "https://corp.7senses.co.jp/"]
+AUTHOR_SAME_AS = _B.get("same_as") or ["https://www.linkedin.com/in/yu-haraguchi", "https://corp.7senses.co.jp/"]
 
 CATEGORIES = {
     "aio": ("AIO・LLMO運用", "cat-aio"),
