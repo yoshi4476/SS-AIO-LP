@@ -95,6 +95,11 @@ function refreshDashboard() {
 
   // 全行を消さない。流入の合計（kpi_log が書く7項目）が消えていた
   upsertDashboard_(rows, '台帳から集計');
+  // 名前を変えた項目の古い行は残ると二重に見える
+  ['エラーログ件数'].forEach(function (name) {
+    const v = sh.getRange(2, 1, Math.max(1, sh.getLastRow() - 1), 1).getValues();
+    for (let i = v.length - 1; i >= 0; i--) if (String(v[i][0]) === name) sh.deleteRow(i + 2);
+  });
   return rows.length + '項目を更新しました';
 }
 

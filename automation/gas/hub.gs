@@ -548,10 +548,14 @@ function rewriteEffect_(b) {
     for (let i = rows.length - 1; i >= 0; i--) {
       if (String(rows[i][1]).trim() !== String(r.site || '').trim()) continue;
       if (String(rows[i][2]).trim() !== String(r.article || '').trim()) continue;
-      if (String(rows[i][6] || '').trim() !== '') continue;
-      if (String(rows[i][5] || '').trim() === '' && r.posBefore) sh.getRange(i + 2, 6).setValue(r.posBefore);
-      sh.getRange(i + 2, 7).setValue(r.posAfter || '');
-      sh.getRange(i + 2, 8).setValue(r.effect || '');
+      const noAfter = String(rows[i][6] || '').trim() === '';
+      const noBefore = String(rows[i][5] || '').trim() === '';
+      if (!noAfter && !(noBefore && r.posBefore)) continue;   // 両方入っている行は触らない
+      if (noBefore && r.posBefore) sh.getRange(i + 2, 6).setValue(r.posBefore);
+      if (noAfter) {
+        sh.getRange(i + 2, 7).setValue(r.posAfter || '');
+        sh.getRange(i + 2, 8).setValue(r.effect || '');
+      }
       updated++;
       break;
     }
