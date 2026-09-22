@@ -51,8 +51,6 @@ diagrams:
 
 関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
 
-近い論点を[口コミ返信テンプレート集｜星評価別の例文とAI活用術](/meo/googlemap-kuchikomi-henshin/)で扱っています。
-
 関連して、[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)もあわせてご確認ください。
 
 <div class="definition-box"><span class="term">整骨院の集客成功事例とは</span>、来院につながった施策のうち他院でも再現しやすい「型」として整理したものです。==同じ整骨院でも、院長1人の院と多店舗展開する院とでは、抱える課題も打てる手も別物==になります。</div>

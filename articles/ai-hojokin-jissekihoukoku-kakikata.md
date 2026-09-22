@@ -166,8 +166,6 @@ faq:
 実績報告と入金が完了したら、次は導入したAIツールを現場に定着させ、投資効果を実際に引き出す段階に移ります。書類対応だけで終わらせないことが、補助金活用の本当の成果につながります。
 
 
-近い論点を[農業の補助金の申請方法｜制度の選び方と5ステップ](/blog/nougyou-hojokin-shinsei-houhou/)で扱っています。
-
 近い論点を[AI導入補助金のAI活用事例5選](/blog/ai-hojokin-ai-katsuyo-jirei/)で扱っています。
 
 実績報告の前提となる証憑の集め方に不安がある場合は、[AI導入補助金の申請に失敗する5つの原因と対策](https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/)も合わせて確認してください。

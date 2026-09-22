@@ -76,9 +76,8 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 
 クリニックのMEO対策は、基本情報・カテゴリ・写真の土台整備と、口コミ・投稿の継続運用の5手順で進めます。
 
-前提となる考え方は、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で解説しています。
 
-実際の進め方は、[MEO設定の始め方｜登録から公開までの5ステップ](/meo/meo-settei-guide/)で解説しています。
+関連する内容として[口コミ返信テンプレート集｜星評価別の例文とAI活用術](/meo/googlemap-kuchikomi-henshin/)も公開しています。
 
 <figure><img src="/images/clinic-meo-taisaku/steps.png" alt="クリニックMEO対策の5つの手順: 基本情報の登録、診療科カテゴリの設定、写真・院内情報の充実、口コミの依頼と全件返信、投稿・情報更新の継続" loading="lazy"><figcaption>クリニックMEO対策の5つの手順。前半3つが土台整備、後半2つが継続運用です</figcaption></figure>
 

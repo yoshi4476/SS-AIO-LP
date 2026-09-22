@@ -34,6 +34,13 @@ LINK = re.compile(r"\]\((?:https?://[^/)]+)?(/[a-z0-9-]+/([a-z0-9-]+)/)\)")
 # 2本以下だけを拾っていては、出ていない記事のほとんどに届かない。
 LOW = 5
 ADD_PER = 2      # 1記事につき足す本数。増やしすぎると不自然になる
+# --rescue: 順位で止まっている記事を優先する経路。被リンク5本以下という条件では
+# 拾えなかった。実測（2026-09-22）で11〜30位に止まる27本の被リンクは2〜18本で、
+# LOW=5 に該当したのは3本だけだった。順位が近いほど1本の効きが大きいので、
+# 「少ない順」ではなく「1ページ目に近く表示が多い順」に配る
+RESCUE_FLOOR = 12
+RESCUE_ADD = 3   # 1回で足す上限。週次で回るうちに下限へ寄せる（8.6の振動防止と同じ考え）
+NL_CH = chr(10)
 _NOISE = re.compile(r"[\s　・|｜:：\-—?？!！。、,.／/（）()【】\[\]]")
 
 
@@ -133,19 +140,42 @@ def pick_spot(body, target_words):
     return best[1] if best else None
 
 
+def rescue_targets(site, arts, cnt):
+    """11〜30位で止まり、被リンクが下限に届いていない記事を、効く順に返す"""
+    import rank_rescue as RR
+    rows, _ = RR.diagnose()
+    out = []
+    for r in rows:
+        if r["site"] != site or r["slug"] not in arts:
+            continue
+        if cnt.get(r["slug"], 0) >= RESCUE_FLOOR:
+            continue
+        out.append((r["slug"], r["pos"], r["imp"], cnt.get(r["slug"], 0)))
+    out.sort(key=lambda x: -(x[2] * max(0.0, 31 - x[1])))
+    return out
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
         raise SystemExit("使い方: python scripts/link_boost.py <site_id> [--write]")
     site = args[0]
     write = "--write" in sys.argv
+    rescue = "--rescue" in sys.argv
     arts = load(site)
     if not arts:
         raise SystemExit(f"{site} の記事が見つかりません")
     cnt = inbound(arts)
-    poor = [s for s, n in cnt.items() if n <= LOW]
-    poor.sort(key=lambda s: cnt[s])
-    print(f"■ {site}: {len(arts)}記事 / 被リンク{LOW}本以下 {len(poor)}記事\n")
+    if rescue:
+        tg = rescue_targets(site, arts, cnt)
+        poor = [s for s, _, _, _ in tg]
+        print(f"■ {site}: 11〜30位で止まり、被リンクが{RESCUE_FLOOR}本未満 {len(poor)}記事")
+        for s, pos, imp, n in tg:
+            print(f"     {pos:>5.1f}位 表示{imp:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
+    else:
+        poor = [s for s, n in cnt.items() if n <= LOW]
+        poor.sort(key=lambda s: cnt[s])
+        print(f"■ {site}: {len(arts)}記事 / 被リンク{LOW}本以下 {len(poor)}記事")
 
     done = 0
     for tgt in poor:
@@ -164,8 +194,9 @@ def main():
         # 話題が近く、かつ自身の被リンクが多い記事から送る（力のある記事から送る）
         cands.sort(key=lambda x: (-x[0], -x[1]))
         added = 0
+        cap = RESCUE_ADD if rescue else ADD_PER
         for hit, _, src in cands:
-            if added >= ADD_PER:
+            if added >= cap:
                 break
             b = arts[src]
             pos = pick_spot(b["body"], tw)
@@ -180,7 +211,11 @@ def main():
                                       abs(hash(src + tgt)) % 8, fit) + "\n"
             print(f"   {tgt[:34]:<36}← {src[:32]}")
             if write:
-                nb = b["body"][:pos] + line + b["body"][pos:]
+                # 前後に必ず空行を1つ作る。直結すると次の塊（表・箇条書き・見出し）が
+                # 段落の続きとして扱われ、表がパイプ記号のまま本文に出る
+                # （CLAUDE.md の装飾ルール。実測62箇所。ここでも3箇所やってしまった）
+                nb = (b["body"][:pos].rstrip(NL_CH) + NL_CH * 2
+                      + line.strip() + NL_CH * 2 + b["body"][pos:].lstrip(NL_CH))
                 t = b["path"].read_text(encoding="utf-8-sig")
                 head = t.split("---", 2)[1]
                 b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")

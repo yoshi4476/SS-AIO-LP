@@ -73,8 +73,6 @@ faq:
 
 実際の進め方は、[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)で解説しています。
 
-関連する内容として[クリニックのIT導入補助金](/hojokin/it-hojokin-clinic/)も公開しています。
-
 関連して、[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)もあわせてご確認ください。
 
 <figure><img src="/images/kojinjigyonushi-kyufukin-shinsei/seido3.png" alt="個人事業主が対象になる主な補助金: IT導入補助金、小規模事業者持続化補助金、ものづくり補助金、事業再構築補助金"><figcaption>個人事業主が対象になる主な補助金</figcaption></figure>

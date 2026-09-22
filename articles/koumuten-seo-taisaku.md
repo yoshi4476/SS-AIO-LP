@@ -44,8 +44,6 @@ faq:
 
 あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
 
-前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)でも扱っています。
-
 関連して、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)もあわせてご確認ください。
 
 <div class="definition-box"><span class="term">工務店のSEOとは</span>、注文住宅・リフォームを手がける工務店が、検索エンジン経由で比較検討中の施主に見つけてもらい、施工実績と専門性を伝えて問い合わせにつなげる一連の施策を指します。単にホームページを持つことではなく、検索されて→比較され→選ばれる、という3段階を意識した情報設計が本来の意味です。</div>

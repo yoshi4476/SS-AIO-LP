@@ -31,6 +31,8 @@ faq:
 集客でのChatGPT活用は、「ゼロから任せる」のではなく「自社の情報を渡して整えさせる」のが成功の基本方針です。
 
 
+近い論点を[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)で扱っています。
+
 あわせて[税理士のブログ集客とは？書くべき5つの記事テーマ](/seo/zeirishi-blog-shukyaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">ChatGPTとは</span>、OpenAI社が提供する対話型の生成AIです。文章の作成・要約・言い換え・アイデア出しを、チャット形式の指示（プロンプト）で実行できます。</div>

@@ -69,6 +69,9 @@ faq:
 
 **旧ものづくり補助金と旧事業再構築補助金は、2026年6月29日の統合で同じ制度の異なる申請枠になりました。**制度名の思い込みで探すと、古い情報に行き着いてしまいます。
 
+
+関連する内容は[農業の倉庫投資は建物費NG](/blog/monozukuri-hojokin-nougyou-souko/)で整理しています。
+
 関連する内容については、[ものづくり補助金は美容室で使える？](/hojokin/monozukuri-hojokin-biyoushitsu/)にまとめています。
 
 関連する内容は[ものづくり補助金はクリニックで使える？](/hojokin/monozukuri-hojokin-clinic/)で整理しています。
@@ -80,8 +83,6 @@ faq:
 私たちが宿泊業のオーナーから相談を受ける際、「ものづくり補助金」と「事業再構築補助金」を別の制度として探しているケースを何度か見てきました。探すべきは1つの制度の中のどの枠かという視点です。制度名ではなく、投資の目的から入る発想。
 
 事業再構築補助金として宿泊業が採択された実例は、[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)で紹介しています。
-
-ものづくり補助金として宿泊業が使える投資パターンの詳細は、[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)で解説しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 

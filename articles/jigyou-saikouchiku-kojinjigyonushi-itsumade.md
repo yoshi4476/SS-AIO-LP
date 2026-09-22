@@ -87,8 +87,6 @@ faq:
 
 関連する内容は、[ものづくり補助金は美容室で使える？](/hojokin/monozukuri-hojokin-biyoushitsu/)で解説しています。
 
-あわせて[会計ソフトの補助金｜個人事業主が使える2つの枠と補助率](/hojokin/it-hojokin-kojinjigyonushi-kaikeisoft/)もご覧ください。
-
 <figure><img src="/images/jigyou-saikouchiku-kojinjigyonushi-itsumade/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 
 第1回の公募要領は2026年6月29日に公開されました。技術的革新性のある製品・サービスの開発、既存事業とは異なる新市場・高付加価値事業への進出、海外市場開拓に向けた設備投資などが対象です。

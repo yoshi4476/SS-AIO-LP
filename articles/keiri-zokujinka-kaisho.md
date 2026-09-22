@@ -133,7 +133,7 @@ faq:
 マニュアル化は、業務の棚卸し・手順書の作成・第三者による確認という3ステップで進めます。
 
 
-関連する内容として[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)も公開しています。
+あわせて[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)もご覧ください。
 
 <figure><img src="/images/keiri-zokujinka-kaisho/step.png" alt="マニュアル化を進める3ステップ: 業務を棚卸しして書き出す、手順書のひな形に沿って書く、第三者が試して抜けを確認する" loading="lazy"><figcaption>マニュアル化を進める3ステップ</figcaption></figure>
 
@@ -149,8 +149,6 @@ faq:
 
 経理BPOへの委託は、業務フローの標準化を伴うため、属人化の再発防止策としても機能します。
 
-
-近い論点を[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)で扱っています。
 
 経理BPO（アウトソーシング）は、委託先が業務範囲・手順・スケジュールを明文化したうえで運用します。
 

@@ -108,6 +108,9 @@ SUUMOやLIFULL HOME'Sは、掲載件数と被リンクの量で自社サイト�
 
 キーワードは、地域名×工法、地域名×悩み、こだわり軸の3パターンで洗い出すと網羅しやすくなります。
 
+
+あわせて[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)もご覧ください。
+
 <figure><img src="/images/chumon-jutaku-seo-taisaku/flow.png" alt="注文住宅SEO対策 導入5ステップ: 現状把握、KW選定、事例ページ整備、AIO構造化、計測・改善" loading="lazy"><figcaption>注文住宅SEO対策 導入5ステップ</figcaption></figure>
 
 | キーワードのパターン | 例 | 検討フェーズ |

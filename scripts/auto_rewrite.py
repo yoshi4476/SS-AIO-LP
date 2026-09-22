@@ -81,6 +81,13 @@ def targets():
     """
     head = aio_items()
     try:
+        import rank_rescue as RR
+        # 11〜30位で止まり、需要のある語に答えていない記事。表示が多い順に来る
+        seen0 = {x["slug"] for x in head}
+        head = head + [x for x in RR.items() if x["slug"] not in seen0]
+    except Exception as e:
+        print(f"  （rank_rescue から取れません: {str(e)[:50]}）")
+    try:
         import rank_up
         items = rank_up.human_items()
         if items or head:
@@ -133,6 +140,19 @@ WHAT = {
             "3. 「失敗例・注意点」の見出しに、一次情報から言える具体例を1つ足す\n"
             "4. FAQ の最初の1問を、狙う語そのものの質問にし、回答に一次情報の数字を1つ入れる\n"
             "使ってよい自社の一次情報（**この数字以外の新しい数字は書かない**）:\n{facts}"),
+    "stuck": ("この記事は検索1ページ目の手前（11〜30位）で止まっています。\n"
+              "**実際に検索されている語に、記事が答えていない**のが原因です。\n"
+              "下に、その語と順位・表示回数を挙げます。\n"
+              "1. その語が扱う内容が、この記事の主題に**本当に含まれるか**を最初に判断する\n"
+              "   含まれないなら、何も変えずに終了する（無理に足すと主題がぼやけて、\n"
+              "   いま取れている順位まで落ちる）\n"
+              "2. 含まれるなら、その語に答える**H2またはH3の節を1つ足す**。\n"
+              "   見出しにその語を自然な日本語で入れ、直下に40〜60字の1文結論を置く\n"
+              "3. 語を本文にちりばめる直し方はしないこと。読者が読んで意味のある\n"
+              "   節になっていなければ順位は動かない\n"
+              "4. 既存の見出し・本文は消さない。足すだけにする\n"
+              "5. 同義語・言い換え（例: 整骨院と接骨院）なら別々の節を作らず、\n"
+              "   1つの節でまとめて扱い、両方の呼び方を本文に書く\n"),
     "review": ("直前の自動修正で表示回数が落ちています。検索意図とずれた可能性があります。\n"
                "冒頭200字と各H2直下の1文結論を読み、狙う語で検索した人が求めている答えに\n"
                "なっているか確かめてください。ずれていれば直してください。\n"
@@ -176,7 +196,7 @@ def changed_since(snap):
     return sorted(n for n in set(snap) | set(now) if snap.get(n) != now.get(n))
 
 
-def check(slug, before, before_warns, snap=None, allowed=""):
+def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     """直した結果を検算する。通らない理由を返す（空なら合格）"""
     if snap is not None:
         other = [c for c in changed_since(snap) if c != f"{slug}.md"]
@@ -209,10 +229,23 @@ def check(slug, before, before_warns, snap=None, allowed=""):
     if len(now) > len(before_warns):
         return f"警告が増えました（{len(before_warns)} → {len(now)}）"
 
+    # --exclude-slug を必ず渡す。渡さないと、その記事自身が食い合い相手として
+    # 数えられ、順位を持つ記事のリライトは100%差し戻される。
+    # 実際 kw_guard は「狙う語が既存記事と完全一致: meo-algorithm-kouryaku」と
+    # 自分自身を挙げて終了コード2を返していた（2026-09-22 に発見）
     r = sh([sys.executable, "scripts/kw_guard.py", kw, "--site",
-            site_of(slug), "--title", title], timeout=600)
+            site_of(slug), "--title", title, "--exclude-slug", slug], timeout=600)
     if r.returncode:
         return f"既存記事と食い合います（kw_guard 終了コード{r.returncode}）"
+
+    if terms:
+        # 「足した」と言いながら見出しが変わっていないものを通さない。
+        # 本文にちりばめるだけの直し方では順位は動かない
+        heads = " ".join(re.findall(r"^#{2,4}\\s*(.+)$", after, re.M)).lower()
+        if not any(x.lower() in heads for x in terms):
+            return "狙った語が見出しに入っていません（" + "/".join(terms[:3]) + "）"
+        if len(after) < len(b) * 0.98:
+            return f"本文が減りました（{len(b)}→{len(after)}字）。足す直しのはずです"
 
     r = sh([sys.executable, "scripts/build.py"], timeout=1800)
     if r.returncode or "BLOCKED" in (r.stdout or ""):
@@ -284,7 +317,8 @@ def run_one(item, write):
     if p.read_text(encoding="utf-8-sig") == before[2]:
         return True, "変更なし（直す必要なしと判断）"
 
-    ng = check(slug, before, before_warns, snap, allowed)
+    ng = check(slug, before, before_warns, snap, allowed,
+               item.get("terms") or ())
     if ng:
         sh(["git", "checkout", "--", f"articles/{slug}.md"])
         sh([sys.executable, "scripts/build.py"], timeout=1800)
@@ -320,8 +354,22 @@ def selftest():
         ("タイトルを短くしすぎる",
          body.replace(f"title: {title}", "title: 短い", 1)),
     ]
+    # stuck 種別の検算は terms を渡したときだけ効く。別に試す
+    stuck_cases = [
+        ("語を本文にちりばめるだけ（見出しに入れない）",
+         body + chr(10) + "この記事は接骨院にも当てはまります。" + chr(10), ("接骨院",)),
+        ("見出しに入れたが本文を削る",
+         body[:len(body) // 2] + chr(10) + "## 接骨院の場合" + chr(10), ("接骨院",)),
+    ]
     ok = 0
     try:
+        for name, broken, terms in stuck_cases:
+            p.write_text(broken, encoding="utf-8", newline="")
+            ng = check(slug, before, before_warns, snap, "", terms)
+            print(f"  {'OK' if ng else 'NG'}  {name}: "
+                  + (f"止めた（{ng[:44]}）" if ng else "素通りしました"))
+            ok += bool(ng)
+            p.write_text(orig, encoding="utf-8", newline="")
         for name, broken in cases:
             if broken == body:
                 print(f"  --  {name}: この記事では試せません")
@@ -335,8 +383,9 @@ def selftest():
     finally:
         p.write_text(orig, encoding="utf-8", newline="")
         sh([sys.executable, "scripts/build.py"], timeout=1800)
-    print(f"\n  {ok}/{len([c for c in cases])} を止めました（記事は元に戻しました）")
-    return 0 if ok == len(cases) else 1
+    total = len(cases) + len(stuck_cases)
+    print(f"\n  {ok}/{total} を止めました（記事は元に戻しました）")
+    return 0 if ok == total else 1
 
 
 def main():

@@ -1,0 +1,4719 @@
+{
+ "at": "2026-09-22",
+ "span": [
+  "2026-08-23",
+  "2026-09-19"
+ ],
+ "sites": {
+  "ai-lab": [
+   {
+    "kw": "原口優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "pos": 1.4,
+    "imp": 35,
+    "clk": 3
+   },
+   {
+    "kw": "不動産 集客代行",
+    "url": "https://ai.7senses.co.jp/ai-marketing/fudousan-shukyaku-daikou/",
+    "pos": 8,
+    "imp": 3,
+    "clk": 1
+   },
+   {
+    "kw": "ai hack aio",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 58.125,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "ai overview 計測",
+    "url": "https://ai.7senses.co.jp/aio/",
+    "pos": 14.333333333333334,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "ai overview 計測",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 40.8,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "ai リード獲得",
+    "url": "https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/",
+    "pos": 32.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "ai 口コミ返信",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 28,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "ai 意味 最新 基本 用語",
+    "url": "https://ai.7senses.co.jp/glossary/",
+    "pos": 8,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ai 診断 無料",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 31,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/",
+    "pos": 31.818181818181817,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "ai 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
+    "pos": 33.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio b2b 企業 特化",
+    "url": "https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/",
+    "pos": 14.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio seo スコア",
+    "url": "https://ai.7senses.co.jp/aio/aio-to-seo-no-chigai/",
+    "pos": 56,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio tool",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 23.25,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "aio やり方",
+    "url": "https://ai.7senses.co.jp/aio/aio-yarikata/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio チェッカー",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 70,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "aio チェッカー",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 59,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio チェック",
+    "url": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+    "pos": 15,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio チェック",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 28.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio チェック",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 50.125,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "aio チェック",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 37,
+    "imp": 42,
+    "clk": 0
+   },
+   {
+    "kw": "aio ツール 無料",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 20,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio メリット",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+    "pos": 15,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio レポート",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 33,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio 効果 測定",
+    "url": "https://ai.7senses.co.jp/aio/aio-koka-sokutei-report-hinagata/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio 効果 測定",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 16.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio 効果測定 レポート 雛形",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 28.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio 外注 依頼 注意点",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 43.666666666666664,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "aio 安く",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 44.4,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "aio 対策 費用",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio 対策 費用",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+    "pos": 12,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio 導入 メリット 費用",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 24.066666666666666,
+    "imp": 15,
+    "clk": 0
+   },
+   {
+    "kw": "aio 導入 メリット 費用",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+    "pos": 10.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio 導入事例",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 36.59090909090909,
+    "imp": 22,
+    "clk": 0
+   },
+   {
+    "kw": "aio 導入事例",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+    "pos": 27,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio 表示確認 方法 手順",
+    "url": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+    "pos": 29.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio 表示確認 方法 手順",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 16,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio 診断",
+    "url": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+    "pos": 17.25,
+    "imp": 20,
+    "clk": 0
+   },
+   {
+    "kw": "aio 診断",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 9.203703703703704,
+    "imp": 54,
+    "clk": 0
+   },
+   {
+    "kw": "aio 診断",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 57.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio 診断 ツール",
+    "url": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+    "pos": 17.5,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "aio 集客",
+    "url": "https://ai.7senses.co.jp/aio/aio-shukyaku/",
+    "pos": 3,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aioseo違い",
+    "url": "https://ai.7senses.co.jp/aio/aio-to-seo-no-chigai/",
+    "pos": 61.4,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "aioとseoの違い",
+    "url": "https://ai.7senses.co.jp/aio/aio-seo-meo-chigai/",
+    "pos": 41,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aioとは",
+    "url": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+    "pos": 2,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aioチェッカー",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 71,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aioチェッカー",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 71.45,
+    "imp": 20,
+    "clk": 0
+   },
+   {
+    "kw": "aioチェッカー",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 52.6875,
+    "imp": 16,
+    "clk": 0
+   },
+   {
+    "kw": "aioチェック",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 29.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aioチェック",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 75.72727272727273,
+    "imp": 22,
+    "clk": 0
+   },
+   {
+    "kw": "aioチェック",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 45.705882352941174,
+    "imp": 17,
+    "clk": 0
+   },
+   {
+    "kw": "aioツール",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 63,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 43,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 やってはいけない",
+    "url": "https://ai.7senses.co.jp/aio/",
+    "pos": 13.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 やってはいけない",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 28,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 やってはいけない",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-faq/",
+    "pos": 28.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 やってはいけない",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/",
+    "pos": 7,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 やり方",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 キーワード選定",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
+    "pos": 3.8333333333333335,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 クリニック",
+    "url": "https://ai.7senses.co.jp/aio/clinic-ai-kensaku-taisaku/",
+    "pos": 14.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 チェックリスト",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 32,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 内製",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+    "pos": 45,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 失敗事例",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/",
+    "pos": 62,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 引用される方法",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/",
+    "pos": 46,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 引用される方法",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-guide/",
+    "pos": 47.875,
+    "imp": 16,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 無料ツール",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 24.3125,
+    "imp": 32,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 相場",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 自分で",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-faq/",
+    "pos": 24,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 自分で",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/",
+    "pos": 31,
+    "imp": 12,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 費用",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策ツール おすすめ",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-yasui-tool/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策会社で契約後にトラブルになりやすいポイントは？",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/",
+    "pos": 10.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aio診断",
+    "url": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+    "pos": 17.714285714285715,
+    "imp": 14,
+    "clk": 0
+   },
+   {
+    "kw": "aio診断",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio診断",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 17.5,
+    "imp": 76,
+    "clk": 0
+   },
+   {
+    "kw": "aio診断",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 54.65,
+    "imp": 20,
+    "clk": 0
+   },
+   {
+    "kw": "aio診断とは",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 13,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aiかんたん集客",
+    "url": "https://ai.7senses.co.jp/",
+    "pos": 44.8235294117647,
+    "imp": 17,
+    "clk": 0
+   },
+   {
+    "kw": "aiかんたん集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/",
+    "pos": 40.38095238095238,
+    "imp": 21,
+    "clk": 0
+   },
+   {
+    "kw": "aiかんたん集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
+    "pos": 11.215686274509803,
+    "imp": 51,
+    "clk": 0
+   },
+   {
+    "kw": "ai引用率計測",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 69.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ai診断 無料",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 41.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ai集客とは",
+    "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
+    "pos": 10.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "ai集客ツール",
+    "url": "https://ai.7senses.co.jp/ai-marketing/",
+    "pos": 34.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "ai集客ツール",
+    "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
+    "pos": 38,
+    "imp": 9,
+    "clk": 0
+   },
+   {
+    "kw": "ai集患",
+    "url": "https://ai.7senses.co.jp/aio/clinic-ai-kensaku-taisaku/",
+    "pos": 30,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "audit seo free",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 1,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "btob ai集客 会社",
+    "url": "https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/",
+    "pos": 58,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "btob ai集客 会社",
+    "url": "https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/",
+    "pos": 11.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "btob ec リード獲得",
+    "url": "https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/",
+    "pos": 80.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "btob llmo",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 16,
+    "imp": 14,
+    "clk": 0
+   },
+   {
+    "kw": "btob llmo対策",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 17,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "btob seo llmo",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 15.043478260869565,
+    "imp": 23,
+    "clk": 0
+   },
+   {
+    "kw": "btob リード 獲得",
+    "url": "https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/",
+    "pos": 71,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "btob リード獲得",
+    "url": "https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/",
+    "pos": 72.5,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "btob リード獲得 方法",
+    "url": "https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/",
+    "pos": 82,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "btob企業のaio対策に強い会社を探しています",
+    "url": "https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/",
+    "pos": 5.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "btob企業向けのaio対策に強い会社を教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/",
+    "pos": 9.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "btob企業向けのai検索対策ツールを教えてください",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 22,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "btob向けllmo対策のおすすめ会社は？",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 28,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "chatgptで不動産を検索する人が増えているらしいですが、どう対策すればいいですか?",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/",
+    "pos": 38,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "chatgptやbardで不動産を検索された時に自社が表示されるツールはありますか?",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/",
+    "pos": 48.666666666666664,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "gmo aioチェック",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+    "pos": 33,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "google 口コミ 返信（テンプレート）",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 29,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "googleマップで不動産店舗の露出を増やせるツールはありますか?",
+    "url": "https://ai.7senses.co.jp/meo/fudousan-meo-taisaku/",
+    "pos": 34.666666666666664,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "hp 反響 増やす 方法",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-hp-shukyaku/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "llmo btob",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 16.4,
+    "imp": 20,
+    "clk": 0
+   },
+   {
+    "kw": "llmo meo",
+    "url": "https://ai.7senses.co.jp/aio/meo-kaisha-llmo-taiou/",
+    "pos": 11,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "llmo meo",
+    "url": "https://ai.7senses.co.jp/glossary/",
+    "pos": 26.90909090909091,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "llmo 不動産",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/",
+    "pos": 44,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "llmo 代理店 募集",
+    "url": "https://ai.7senses.co.jp/lp/",
+    "pos": 85.33333333333333,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "llmo 対策 btob 会社",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 20.875,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "llmo 店舗集客",
+    "url": "https://ai.7senses.co.jp/",
+    "pos": 21,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "llmo 店舗集客",
+    "url": "https://ai.7senses.co.jp/lp/",
+    "pos": 46,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "llmo 集客",
+    "url": "https://ai.7senses.co.jp/glossary/",
+    "pos": 72.2,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "llmo 集客",
+    "url": "https://ai.7senses.co.jp/lp/",
+    "pos": 74,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "mdoc クリニック seoチェックリスト",
+    "url": "https://ai.7senses.co.jp/ai-marketing/online-shinryo-checklist/",
+    "pos": 65,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "mdoc クリニック 集患 施策",
+    "url": "https://ai.7senses.co.jp/meo/clinic-meo-taisaku/",
+    "pos": 73,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "mdoc 歯科医院 集客方法 新患",
+    "url": "https://ai.7senses.co.jp/ai-marketing/shika-iin-shukyaku/",
+    "pos": 57.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "meo アルゴリズム",
+    "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
+    "pos": 23.928571428571427,
+    "imp": 14,
+    "clk": 0
+   },
+   {
+    "kw": "meo アルゴリズム攻略",
+    "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
+    "pos": 5.038461538461538,
+    "imp": 26,
+    "clk": 0
+   },
+   {
+    "kw": "meo 上げ方",
+    "url": "https://ai.7senses.co.jp/meo/meo-settei-guide/",
+    "pos": 29,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "meo 工務店",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 26.8,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "meo 攻略",
+    "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
+    "pos": 33,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "meo 病院",
+    "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
+    "pos": 18.2,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "meo、クチコミ、llmoをまとめて扱える代理店制度を教えてください",
+    "url": "https://ai.7senses.co.jp/aio/meo-kaisha-llmo-taiou/",
+    "pos": 25,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "meo会社 llmo",
+    "url": "https://ai.7senses.co.jp/lp/",
+    "pos": 47.714285714285715,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "meo対策 美容室",
+    "url": "https://ai.7senses.co.jp/meo/biyoushitsu-meo-taisaku/",
+    "pos": 23.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "meo対策 美容皮膚科",
+    "url": "https://ai.7senses.co.jp/meo/biyou-hifuka-meo/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "meo診断",
+    "url": "https://ai.7senses.co.jp/diagnosis/meo/",
+    "pos": 8.592592592592592,
+    "imp": 27,
+    "clk": 0
+   },
+   {
+    "kw": "ob客とは",
+    "url": "https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/",
+    "pos": 6.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "seo meo aio",
+    "url": "https://ai.7senses.co.jp/",
+    "pos": 21,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "seo 採点",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 19,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "seo 注文住宅",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 29.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "web集客ラボ",
+    "url": "https://ai.7senses.co.jp/",
+    "pos": 28.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "おすすめの安いaio対策ツール教えて",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 2,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "かんたん集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
+    "pos": 12.945945945945946,
+    "imp": 37,
+    "clk": 0
+   },
+   {
+    "kw": "カイロ meo",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+    "pos": 7.253731343283582,
+    "imp": 67,
+    "clk": 0
+   },
+   {
+    "kw": "クチコミ 返信",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 18.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック llmo",
+    "url": "https://ai.7senses.co.jp/aio/clinic-ai-kensaku-taisaku/",
+    "pos": 32,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック meo",
+    "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
+    "pos": 40,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック seo コンサル",
+    "url": "https://ai.7senses.co.jp/seo/clinic-seo-consulting-erabikata/",
+    "pos": 23.333333333333332,
+    "imp": 12,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック seoコンサルティング",
+    "url": "https://ai.7senses.co.jp/seo/clinic-seo-consulting-erabikata/",
+    "pos": 35,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック sns 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-instagram-yarikata/",
+    "pos": 64,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック インスタ",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-instagram-yarikata/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック インスタ やり方",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-instagram-yarikata/",
+    "pos": 6.25,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック インスタ 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-instagram-yarikata/",
+    "pos": 16,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック クチコミ返信",
+    "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
+    "pos": 17.833333333333332,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック 集客 gmo",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-jirei/",
+    "pos": 22.285714285714285,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック 集客 gmo",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-sekkeizu/",
+    "pos": 28,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック 集客 コンサルティング",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-consaru-erabikata/",
+    "pos": 21.625,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック 集客 サポート",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-shukan-support/",
+    "pos": 30,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック 電話予約 やり方",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-denwa-yoyaku-yarikata/",
+    "pos": 5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "グルメサイト 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "セブンセンシズ株式会社",
+    "url": "https://ai.7senses.co.jp/about/",
+    "pos": 18,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "ゼネコン meo",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 44,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "マンション売買 seo",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-taisaku/",
+    "pos": 17,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ラクシフト",
+    "url": "https://ai.7senses.co.jp/lab/",
+    "pos": 1,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "リノベーション seo対策",
+    "url": "https://ai.7senses.co.jp/seo/reform-seo-taisaku/",
+    "pos": 32,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム seo",
+    "url": "https://ai.7senses.co.jp/seo/reform-seo-taisaku/",
+    "pos": 29.272727272727273,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム seo対策",
+    "url": "https://ai.7senses.co.jp/seo/reform-seo-taisaku/",
+    "pos": 33,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム sns集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/reform-instagram-shukyaku/",
+    "pos": 61.666666666666664,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム コンテンツseo",
+    "url": "https://ai.7senses.co.jp/seo/reform-seo-taisaku/",
+    "pos": 24,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "リフォームseo",
+    "url": "https://ai.7senses.co.jp/seo/reform-seo-taisaku/",
+    "pos": 30,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム会社 instagram広告",
+    "url": "https://ai.7senses.co.jp/ai-marketing/reform-instagram-shukyaku/",
+    "pos": 29,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム会社 seo",
+    "url": "https://ai.7senses.co.jp/seo/reform-seo-taisaku/",
+    "pos": 33,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム会社 運用",
+    "url": "https://ai.7senses.co.jp/ai-marketing/reform-instagram-shukyaku/",
+    "pos": 38,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "リフォーム業界 seo",
+    "url": "https://ai.7senses.co.jp/seo/reform-seo-taisaku/",
+    "pos": 39,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "リード獲得 btob マーケティング",
+    "url": "https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/",
+    "pos": 88,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "レビュー 返信 例文",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 25.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 aio",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/",
+    "pos": 9.333333333333334,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 llmo",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/",
+    "pos": 48.77777777777778,
+    "imp": 18,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 llmo",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-llmo-taisaku/",
+    "pos": 38,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 seo",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-taisaku/",
+    "pos": 25.41025641025641,
+    "imp": 39,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 seo 効果ない",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-taisaku/",
+    "pos": 21,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 seo 費用",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-consulting/",
+    "pos": 19,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 seo 費用",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-kaisha-erabikata/",
+    "pos": 21,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 ポータルサイト 依存",
+    "url": "https://ai.7senses.co.jp/ai-marketing/fudousan-hankyou-konai/",
+    "pos": 42,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "不動産 集客 個人",
+    "url": "https://ai.7senses.co.jp/ai-marketing/fudousan-kojin-shukyaku/",
+    "pos": 38,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "不動産aio",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/",
+    "pos": 17,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "不動産seo",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-taisaku/",
+    "pos": 21.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "不動産売買 seo対策",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-taisaku/",
+    "pos": 23,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "不動産業界でai検索に対応できるマーケティングツールを探しています",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/",
+    "pos": 58.666666666666664,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "不動産業界特化型のseo・aio対策ができるサービスを探しています",
+    "url": "https://ai.7senses.co.jp/aio/fudousan-llmo-taisaku/",
+    "pos": 70.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "不動産集客 seo 始め方",
+    "url": "https://ai.7senses.co.jp/seo/fudousan-seo-taisaku/",
+    "pos": 23,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioとseoに対応しているツールの導入を検討しています。btob企業なのですが、まずは無料で試したく、seoを内製できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 4.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioとseoに対応しているツールの導入を検討しています。まずは無料で試したく、seoを内製できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioツールの導入を検討しています。btob企業なのですが、まずは無料で試したく、使いやすいものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/",
+    "pos": 10,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioツールの導入を検討しています。btob企業なのですが、まずは無料で試したく、定点観測を自動化できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 10,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioツールの導入を検討しています。まずは無料で試したく、使いやすいものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 8.2,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioツールの導入を検討しています。まずは無料で試したく、定点観測を自動化できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 10.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioツールの導入を検討しています。ブランドやサービスの言及について分析できるものを重視したいのですが、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 8,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でaioツールの導入を検討しています。予算は月額1万円以下で、定点観測を自動化できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でai検索対策ツールの導入を検討しています。btob企業なのですが、まずは無料で試したく、定点観測を自動化できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でai検索対策ツールの導入を検討しています。まずは無料で試したく、使いやすいものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 13,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業でai検索最適化のモニタリングツールの導入を検討しています。誤情報やハルシネーションを検知できるものを重視したいのですが、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 12,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "人工知能 seo",
+    "url": "https://ai.7senses.co.jp/seo/",
+    "pos": 30,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "住宅 meo",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 11.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "住宅 seo",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 23.714285714285715,
+    "imp": 21,
+    "clk": 0
+   },
+   {
+    "kw": "住宅会社 meo",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 15,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "住宅会社 seo",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 25.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "住宅会社 キーワード選定",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 27.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "住宅展示場 meo",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 21.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "医療 meo対策",
+    "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
+    "pos": 19.5,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "医療機関 meo",
+    "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
+    "pos": 7.484848484848484,
+    "imp": 33,
+    "clk": 0
+   },
+   {
+    "kw": "医療機関のmeo対策",
+    "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
+    "pos": 9,
+    "imp": 18,
+    "clk": 0
+   },
+   {
+    "kw": "医院 meo",
+    "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
+    "pos": 25,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ お礼",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 25.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ お礼 例文",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 27,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ 低評価 返信",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 26.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ 返信",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 26.642857142857142,
+    "imp": 14,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ 返信 お礼",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 28.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ 返信 テンプレート",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 24,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ 返信 例文",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 26.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ 返信 例文 医療",
+    "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
+    "pos": 8.722222222222221,
+    "imp": 108,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ 返信例",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 24,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "口コミの返信",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 26,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ返信",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 28.153846153846153,
+    "imp": 13,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ返信 例文",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 24.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ返信 医療機関",
+    "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
+    "pos": 10.08411214953271,
+    "imp": 107,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ返信 強気",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 46,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "口コミ返信例文",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 23,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "大企業でaioとseoに対応しているツールの導入を検討しています。btob企業なのですが、まずは無料で試したく、使いやすいものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 1,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大企業でaioとseoに対応しているツールの導入を検討しています。btob企業なのですが、予算は月額10万前後で、使いやすいものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+    "pos": 2,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大企業でaioツールの導入を検討しています。btob企業なのですが、まずは無料で試したく、使いやすいものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大企業でaioツールの導入を検討しています。btob企業なのですが、まずは無料で試したく、定点観測を自動化できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 6.666666666666667,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "大企業でaioツールの導入を検討しています。btob企業なのですが、予算は月額1万円以下で、定点観測を自動化できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大企業でaioツールの導入を検討しています。まずは無料で試したく、定点観測を自動化できるものを探しているので、候補をいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 11,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "大阪 ローカルseo 飲食店 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/",
+    "pos": 61.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "大阪でmeoとaioの両方を支援してくれる会社を教えてください。",
+    "url": "https://ai.7senses.co.jp/",
+    "pos": 75.76923076923077,
+    "imp": 13,
+    "clk": 0
+   },
+   {
+    "kw": "大阪でmeoとaioの両方を支援してくれる会社を教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+    "pos": 86,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "大阪でmeoとaioの両方を支援してくれる会社を教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/meo-kaisha-llmo-taiou/",
+    "pos": 35,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "工務 店 meo",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 15,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "工務 店 seo",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 47,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "工務 店 seo 対策",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 45,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 instagram",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/",
+    "pos": 50,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 meo",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 11.8,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 meo 上がらない",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 1,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 seo",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 47.6,
+    "imp": 15,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 seo対策",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 sns 伸びない",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/",
+    "pos": 13,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 sns 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/",
+    "pos": 20.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 sns集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/",
+    "pos": 19.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 tiktok集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/",
+    "pos": 25,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 web 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-hp-shukyaku/",
+    "pos": 60.333333333333336,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 web集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-hp-shukyaku/",
+    "pos": 59.333333333333336,
+    "imp": 27,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 インスタ",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/",
+    "pos": 41,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 インスタ 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/",
+    "pos": 28.153846153846153,
+    "imp": 52,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 インスタ集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/",
+    "pos": 23.4,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 キーワード選定",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 26.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "工務店 ホームページ 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-hp-shukyaku/",
+    "pos": 50,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "工務店web集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-hp-shukyaku/",
+    "pos": 64,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "建築会社 インスタ 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/",
+    "pos": 32.66666666666667,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "建設会社 meo",
+    "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
+    "pos": 10,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "接骨院 meo",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+    "pos": 32,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "接骨院 患者 減少",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-shukyaku/",
+    "pos": 24,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "整体 meo",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+    "pos": 23.8,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "整体医療費控除",
+    "url": "https://ai.7senses.co.jp/seo/seikotsuin-hiyou-iryouhikojo/",
+    "pos": 86,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "整体院 meo",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+    "pos": 46.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "整骨 meo",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+    "pos": 29.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "整骨院 meo",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+    "pos": 37.94117647058823,
+    "imp": 17,
+    "clk": 0
+   },
+   {
+    "kw": "整骨院 web集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-hp-shukyaku/",
+    "pos": 52.4,
+    "imp": 15,
+    "clk": 0
+   },
+   {
+    "kw": "整骨院 コンサル",
+    "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-seminar/",
+    "pos": 8,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "整骨院 ホームページ 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-hp-shukyaku/",
+    "pos": 52.94736842105263,
+    "imp": 19,
+    "clk": 0
+   },
+   {
+    "kw": "整骨院 確定申告",
+    "url": "https://ai.7senses.co.jp/seo/seikotsuin-hiyou-iryouhikojo/",
+    "pos": 66,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "整骨院 自費 料金 相場",
+    "url": "https://ai.7senses.co.jp/seo/seikotsuin-hiyou-hoken/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "整骨院 開業 成功事例",
+    "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-jirei/",
+    "pos": 25.714285714285715,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "日本整骨院費用",
+    "url": "https://ai.7senses.co.jp/seo/seikotsuin-hiyou-heikin/",
+    "pos": 8,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "東京都 aio 事業内容 会社案内",
+    "url": "https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/",
+    "pos": 66,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "歯医者 突然 閉院",
+    "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
+    "pos": 3,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "歯科 ai 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/shika-iin-shukyaku/",
+    "pos": 12.333333333333334,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "歯科医院 閉院 費用",
+    "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
+    "pos": 5.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "歯科医院 閉院費用",
+    "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
+    "pos": 6.1,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "歯科医院のmeo対策の方法",
+    "url": "https://ai.7senses.co.jp/meo/shika-meo-taisaku/",
+    "pos": 30,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "治療院 meo",
+    "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+    "pos": 46,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "注文住宅 seo",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 30,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "注文住宅 seo対策",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 21.125,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "注文住宅会社の施工事例はai検索に引用されるのか？",
+    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "無料aio",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 26.285714285714285,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "無料aioチェック",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 28.181818181818183,
+    "imp": 22,
+    "clk": 0
+   },
+   {
+    "kw": "無料aioチェック",
+    "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+    "pos": 72.88888888888889,
+    "imp": 9,
+    "clk": 0
+   },
+   {
+    "kw": "無料aioチェック",
+    "url": "https://ai.7senses.co.jp/site-audit/",
+    "pos": 69.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "無料で試せるaioツールを探しています。おすすめをいくつか教えてください。",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 4.4,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "生成 ai 引用 対策",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/",
+    "pos": 69,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "生成ai 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/",
+    "pos": 17.88888888888889,
+    "imp": 9,
+    "clk": 0
+   },
+   {
+    "kw": "確定申告 整骨院",
+    "url": "https://ai.7senses.co.jp/seo/seikotsuin-hiyou-iryouhikojo/",
+    "pos": 56,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 ai 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+    "pos": 9.580645161290322,
+    "imp": 62,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 ai 集客",
+    "url": "https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/",
+    "pos": 8,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 ブログ 集客 seo",
+    "url": "https://ai.7senses.co.jp/seo/zeirishi-blog-shukyaku/",
+    "pos": 20,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 ブログ 集客 テーマ選び",
+    "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+    "pos": 13.666666666666666,
+    "imp": 9,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 ブログ 集客 テーマ選び",
+    "url": "https://ai.7senses.co.jp/seo/zeirishi-blog-shukyaku/",
+    "pos": 8.166666666666668,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+    "pos": 30.2,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "税理士事務所 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+    "pos": 29,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "税理士事務所 集客方法",
+    "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+    "pos": 37,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "素晴らしい 口コミ返信",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 26,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "素晴らしい 口コミ返信 例文",
+    "url": "https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/",
+    "pos": 27.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "美容室 meo",
+    "url": "https://ai.7senses.co.jp/meo/biyoushitsu-meo-taisaku/",
+    "pos": 44.57142857142857,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "美容室meo",
+    "url": "https://ai.7senses.co.jp/meo/biyoushitsu-meo-taisaku/",
+    "pos": 4,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "美容皮膚科 meo",
+    "url": "https://ai.7senses.co.jp/meo/biyou-hifuka-meo/",
+    "pos": 10.944444444444445,
+    "imp": 18,
+    "clk": 0
+   },
+   {
+    "kw": "費用対効果の高いai検索分析ツールはありますか？",
+    "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "資料請求 増えない",
+    "url": "https://ai.7senses.co.jp/ai-marketing/shiryoseikyu-fuyasu-hoho/",
+    "pos": 28,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "資料請求 増やす",
+    "url": "https://ai.7senses.co.jp/ai-marketing/shiryoseikyu-fuyasu-hoho/",
+    "pos": 27,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業医 集客 コンサル",
+    "url": "https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-consaru-erabikata/",
+    "pos": 16,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "集客 ai",
+    "url": "https://ai.7senses.co.jp/ai-marketing/",
+    "pos": 39,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "集客 ai",
+    "url": "https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/",
+    "pos": 28,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "集客 整骨院 hp",
+    "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-hp-shukyaku/",
+    "pos": 57.76923076923077,
+    "imp": 13,
+    "clk": 0
+   },
+   {
+    "kw": "集客 整骨院 コンサル",
+    "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-seminar/",
+    "pos": 38.21875,
+    "imp": 32,
+    "clk": 0
+   },
+   {
+    "kw": "集客 税理士",
+    "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
+    "pos": 20.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "飲食 店 web 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/",
+    "pos": 90,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "飲食 店 ネット 集客",
+    "url": "https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/",
+    "pos": 84.66666666666667,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "飲食店 ai seo対策",
+    "url": "https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/",
+    "pos": 51,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "飲食店 ai seo対策",
+    "url": "https://ai.7senses.co.jp/seo/inshokuten-seo-taisaku/",
+    "pos": 23.22222222222222,
+    "imp": 9,
+    "clk": 0
+   }
+  ],
+  "corporate": [
+   {
+    "kw": "セブンセンシズ株式会社",
+    "url": "https://corp.7senses.co.jp/",
+    "pos": 2,
+    "imp": 67,
+    "clk": 8
+   },
+   {
+    "kw": "ラクシフト",
+    "url": "https://corp.7senses.co.jp/rakushift/",
+    "pos": 4.151515151515151,
+    "imp": 33,
+    "clk": 4
+   },
+   {
+    "kw": "セブンセンシズ",
+    "url": "https://corp.7senses.co.jp/company/",
+    "pos": 7.833333333333333,
+    "imp": 42,
+    "clk": 1
+   },
+   {
+    "kw": "セブンセンシズ株式会社",
+    "url": "https://corp.7senses.co.jp/company/",
+    "pos": 2.166666666666667,
+    "imp": 12,
+    "clk": 1
+   },
+   {
+    "kw": "外注費 請求書なし",
+    "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-nashi/",
+    "pos": 2.111111111111111,
+    "imp": 9,
+    "clk": 1
+   },
+   {
+    "kw": "株式会社セブンセンシズ",
+    "url": "https://corp.7senses.co.jp/",
+    "pos": 4.666666666666666,
+    "imp": 3,
+    "clk": 1
+   },
+   {
+    "kw": "派遣 経理 時給 相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 8.5,
+    "imp": 10,
+    "clk": 1
+   },
+   {
+    "kw": "3点照合",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 3.6666666666666665,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "3点照合とは",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 10.857142857142858,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "7senses",
+    "url": "https://corp.7senses.co.jp/company/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai ocr 請求書",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 28,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ai 経理",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 28,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai 経理 自動化",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 18.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ai 経理 自動化 設定",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 14,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai 経理 自動化 軽減",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 17,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai 請求書 読み取り",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 22,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio agent",
+    "url": "https://corp.7senses.co.jp/aio-agent/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio python 自動化 スクリプト",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-python/",
+    "pos": 28.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio とは seo",
+    "url": "https://corp.7senses.co.jp/aio-agent/",
+    "pos": 12,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio 外注",
+    "url": "https://corp.7senses.co.jp/services/aio/",
+    "pos": 36.8,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "aioとは seo",
+    "url": "https://corp.7senses.co.jp/aio-agent/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 代行",
+    "url": "https://corp.7senses.co.jp/services/aio/",
+    "pos": 24.416666666666668,
+    "imp": 24,
+    "clk": 0
+   },
+   {
+    "kw": "ai検索最適化 代行",
+    "url": "https://corp.7senses.co.jp/services/aio/",
+    "pos": 21.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "bpo back office",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "bpo バックオフィス",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha/",
+    "pos": 25.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "bpo 会計",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha/",
+    "pos": 59,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "bpo 契約形態",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-haken-chigai/",
+    "pos": 43,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "bpo 経理",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha/",
+    "pos": 44,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "bpotoha",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "bpotoha",
+    "url": "https://corp.7senses.co.jp/blog/bpo-toha/",
+    "pos": 3,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "bpotoha",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "bpoと派遣の違い",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-haken-chigai/",
+    "pos": 45.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "bpo管理 時給相場",
+    "url": "https://corp.7senses.co.jp/blog/kanri-kaikei-jikyu-souba/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "meo 運用代行",
+    "url": "https://corp.7senses.co.jp/services/meo/",
+    "pos": 26,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "python 経理",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-python/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ゆうちょ 振込 送金 同じ",
+    "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ゆうちょ 振込 送金 違い",
+    "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata/",
+    "pos": 9.4,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "ゆうちょ 送金 振込 違い",
+    "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata/",
+    "pos": 17,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ゆうちょ銀行 送金機能 確認方法",
+    "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata/",
+    "pos": 18,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "インボイス制度 外注費",
+    "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata/",
+    "pos": 7,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "エクセル 請求書 自動作成",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-excel-jidoka/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "セブンせんしず",
+    "url": "https://corp.7senses.co.jp/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "セブンセンシス",
+    "url": "https://corp.7senses.co.jp/company/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "セブンセンシズ",
+    "url": "https://corp.7senses.co.jp/",
+    "pos": 2.4210526315789473,
+    "imp": 38,
+    "clk": 0
+   },
+   {
+    "kw": "セブンセンシズ株式会社",
+    "url": "https://corp.7senses.co.jp/contact/",
+    "pos": 22,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "セブンセンシズ株式会社",
+    "url": "https://corp.7senses.co.jp/news/blog-open/",
+    "pos": 29,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "バック オフィス bpo",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha/",
+    "pos": 25,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "バック オフィス bpo",
+    "url": "https://corp.7senses.co.jp/blog/bpo-toha/",
+    "pos": 50,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "バック オフィス 問題 解決 マニュアル",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-gyomu-kaizen/",
+    "pos": 35.666666666666664,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "バック オフィス 業務 改善",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-gyomu-kaizen/",
+    "pos": 53.666666666666664,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "バックオフィス bpo",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha/",
+    "pos": 17,
+    "imp": 15,
+    "clk": 0
+   },
+   {
+    "kw": "バックオフィス アウトソーシング メリット",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-outsourcing-merit/",
+    "pos": 28,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "バックオフィス 業務改善",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-gyomu-kaizen/",
+    "pos": 51.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "バックオフィス 略",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha/",
+    "pos": 2,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "バックオフィスbpo",
+    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha/",
+    "pos": 24.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "パワフル会計",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 12,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ラクシフト",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-haken-chigai/",
+    "pos": 4,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ラクシフト",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-system/",
+    "pos": 8,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ラクシフト",
+    "url": "https://corp.7senses.co.jp/services/",
+    "pos": 10.2,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "三点照合 自動化",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 4,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "三点突合",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 9.333333333333334,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "仕訳ミス 防止策",
+    "url": "https://corp.7senses.co.jp/blog/shiwake-miss-fusegu-houhou/",
+    "pos": 13.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "会計コンサルタント 時給相場",
+    "url": "https://corp.7senses.co.jp/blog/kanri-kaikei-jikyu-souba/",
+    "pos": 15,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "入出金 読み方",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 24,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "外注 請求書 書き方",
+    "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata/",
+    "pos": 11.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "外注費 請求書",
+    "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata/",
+    "pos": 23.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "外注費 請求書 書き方",
+    "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata/",
+    "pos": 10.333333333333334,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "外注費 領収書 書き方",
+    "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata/",
+    "pos": 34,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "年末調整 回収 効率化",
+    "url": "https://corp.7senses.co.jp/blog/nencho-koritsuka-houhou/",
+    "pos": 17.666666666666668,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "振込業務 効率化",
+    "url": "https://corp.7senses.co.jp/blog/shiharai-gyomu-koritsuka/",
+    "pos": 25,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "摘 要 読み方",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 26,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "摘要欄 読み方",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 10.074074074074074,
+    "imp": 27,
+    "clk": 0
+   },
+   {
+    "kw": "支払い業務",
+    "url": "https://corp.7senses.co.jp/blog/shiharai-gyomu-koritsuka/",
+    "pos": 29,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "支払業務",
+    "url": "https://corp.7senses.co.jp/blog/shiharai-gyomu-koritsuka/",
+    "pos": 27,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "支払業務 効率化",
+    "url": "https://corp.7senses.co.jp/blog/shiharai-gyomu-koritsuka/",
+    "pos": 24.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "支払業務流れ",
+    "url": "https://corp.7senses.co.jp/blog/shiharai-gyomu-koritsuka/",
+    "pos": 28.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "株式会社セブンセンシズ",
+    "url": "https://corp.7senses.co.jp/company/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "検収照合とは",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 32.33333333333333,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "派遣 経理 時給",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 28.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "現金出納帳 手書き 締め方",
+    "url": "https://corp.7senses.co.jp/blog/kojinten-keiri-yarikata/",
+    "pos": 1,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 外注",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 34,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 経理 代行",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 記帳",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 38,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "税理士 記帳代行",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 31.5,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "管理会計 時給",
+    "url": "https://corp.7senses.co.jp/blog/kanri-kaikei-jikyu-souba/",
+    "pos": 13,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "管理会計 時給相場",
+    "url": "https://corp.7senses.co.jp/blog/kanri-kaikei-jikyu-souba/",
+    "pos": 2,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "管理会計 時給相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 20.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 ai",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 2,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 ai導入",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 26,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理 bpo",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha/",
+    "pos": 47.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "経理 bpo 比較",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-erabikata/",
+    "pos": 20.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 bpo 比較",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-haken-chigai/",
+    "pos": 17,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 bpo 比較",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-system/",
+    "pos": 9.666666666666666,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 やり方",
+    "url": "https://corp.7senses.co.jp/blog/keiri-yarikata-shoshinsha/",
+    "pos": 12.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理 フロー",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template/",
+    "pos": 24.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理 代行",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-service/",
+    "pos": 14.857142857142858,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "経理 代行 個人事業",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi/",
+    "pos": 33.30434782608695,
+    "imp": 23,
+    "clk": 0
+   },
+   {
+    "kw": "経理 代行 個人事業",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi/",
+    "pos": 35.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理 代行 税理士",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 63,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 効率化 システム",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-system/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 効率化 事例",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/",
+    "pos": 18,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理 外注 丸投げ",
+    "url": "https://corp.7senses.co.jp/blog/keiri-marunage-dekiru-hani/",
+    "pos": 11.692307692307692,
+    "imp": 13,
+    "clk": 0
+   },
+   {
+    "kw": "経理 引継ぎ",
+    "url": "https://corp.7senses.co.jp/blog/keiri-hikitsugi-shiryou/",
+    "pos": 66,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 方法",
+    "url": "https://corp.7senses.co.jp/blog/keiri-yarikata-shoshinsha/",
+    "pos": 21,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 時給 相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 16.333333333333336,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 時給 相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jikyu-souba/",
+    "pos": 8.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 本 おすすめ",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-hon/",
+    "pos": 10.666666666666666,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 本 ベストセラー",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-hon/",
+    "pos": 8.375,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "経理 業務 bpo",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha/",
+    "pos": 43,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 業務 フロー",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template/",
+    "pos": 20.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 業務 効率 化 事例",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/",
+    "pos": 16.166666666666664,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "経理 業務フロー",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template/",
+    "pos": 18.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 業務効率化 事例",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/",
+    "pos": 24,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "経理 業務改善 事例",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/",
+    "pos": 32,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理 派遣",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 5,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 派遣 時給",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 30.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理 派遣 時給 相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 8.526315789473685,
+    "imp": 19,
+    "clk": 0
+   },
+   {
+    "kw": "経理 相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 34,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理 自動化",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 29,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理bpo",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-toha/",
+    "pos": 49,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理bpo 選び方",
+    "url": "https://corp.7senses.co.jp/blog/keiri-bpo-erabikata/",
+    "pos": 14.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理bpo 選び方",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-seminar/",
+    "pos": 18,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理の本 おすすめ",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-hon/",
+    "pos": 12,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理の流れ フローチャート",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template/",
+    "pos": 11,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理アウトソーシングシステム 比較",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-system/",
+    "pos": 26.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理アウトソ－シングシステム 比較",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-system/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理システム 比較",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-system/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理事務 時給相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 29,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理代行",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-service/",
+    "pos": 15.272727272727273,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "経理代行 サービス",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-service/",
+    "pos": 14.333333333333334,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理代行 失敗",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-shippai/",
+    "pos": 30,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理代行 業務",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-service/",
+    "pos": 26.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "経理代行 税理士 違い",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 34.833333333333336,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "経理代行 開業",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kaigyou/",
+    "pos": 9,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理代行サービス",
+    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-service/",
+    "pos": 18.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理体制 構築",
+    "url": "https://corp.7senses.co.jp/blog/shokibo-jigyousha-keiri-taisei/",
+    "pos": 18,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経理効率化 事例",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/",
+    "pos": 19.615384615384617,
+    "imp": 13,
+    "clk": 0
+   },
+   {
+    "kw": "経理実務 本 おすすめ",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-hon/",
+    "pos": 11,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "経理業務 フロー",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template/",
+    "pos": 18.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "経理自動化",
+    "url": "https://corp.7senses.co.jp/blog/keiri-jidoka-ai/",
+    "pos": 28,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "経費精算 効率化 事例",
+    "url": "https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/",
+    "pos": 33,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "給与計算 外注 費用",
+    "url": "https://corp.7senses.co.jp/blog/kyuyokeisan-gaichuu-hiyou-souba/",
+    "pos": 49,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "複数のクライアントへの請求を手動で処理するのが大変すぎる。自動化できるツールはありますか？",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 63,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "記帳 やり方 ゆうちょ",
+    "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata/",
+    "pos": 5.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "記帳 代行 センター",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 17.571428571428573,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "記帳 代行 料金",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "記帳 代行 相場",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba/",
+    "pos": 41,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "記帳とは 通帳",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 27,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "記帳のみ",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "記帳代行 ai",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-jidoka/",
+    "pos": 18,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "記帳代行 勘定科目",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku/",
+    "pos": 2.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "記帳代行 料金 相場",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba/",
+    "pos": 47,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "記帳代行 税理士",
+    "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-kichodaiko-center/",
+    "pos": 27.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "記帳代行 費用 相場",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "記帳代行相場",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba/",
+    "pos": 40,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求 aiocr",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 33.6,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "請求 支払",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shiharai-yarikata/",
+    "pos": 40,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求 書 ocr",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 24,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 ai",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 19,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 aiocr",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 35,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 ocr",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 23.285714285714285,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 外注",
+    "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata/",
+    "pos": 31.666666666666668,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 支払い方法",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shiharai-yarikata/",
+    "pos": 49,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 照合",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 19,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 照合 自動化",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 11.625,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 照合 自動化 エクセル",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-excel-jidoka/",
+    "pos": 47,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 照合 自動化 エクセル",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 13,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 自動化 エクセル",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-excel-jidoka/",
+    "pos": 14.6,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "請求書 読み取り ai",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 22.714285714285715,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "請求書ocr",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 23.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "請求書支払い 効率化",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shori-koritsuka/",
+    "pos": 54,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "請求書照合",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka/",
+    "pos": 13,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "請求書発行 aiocr",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 36.8,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "請求管理 aiocr",
+    "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai/",
+    "pos": 39,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "財務 時給相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 16,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "財務会計 時給相場",
+    "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba/",
+    "pos": 25,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "送金 振込 違い ゆうちょ",
+    "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata/",
+    "pos": 19,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳 摘要 印字",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 16,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳 摘要 欄 記号",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳 摘要欄 記号",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 10,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳 記帳 記号 意味",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 13,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳 記帳とは",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 21,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳に記帳 されない 方法 振込",
+    "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata/",
+    "pos": 11.666666666666666,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "通帳に記帳する方法",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳の摘要欄",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 25,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "通帳の記帳の仕方",
+    "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata/",
+    "pos": 9,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "電話代行サービス 勘定科目",
+    "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku/",
+    "pos": 27,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "飲食店 棚卸し やり方",
+    "url": "https://corp.7senses.co.jp/blog/kojinten-keiri-yarikata/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   }
+  ],
+  "subsidy": [
+   {
+    "kw": "ai システム開発 補助金",
+    "url": "https://lp.7senses.co.jp/blog/ai-kaihatsu-hojokin/",
+    "pos": 27,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai 導入 支援 選定基準",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-guide-2026/",
+    "pos": 64.53846153846155,
+    "imp": 26,
+    "clk": 0
+   },
+   {
+    "kw": "ai 導入 支援 選定基準",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool-2026/",
+    "pos": 85.21428571428571,
+    "imp": 14,
+    "clk": 0
+   },
+   {
+    "kw": "ai 導入 支援 選定基準",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool/",
+    "pos": 30,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai 導入 支援 選定基準",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+    "pos": 95.4,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "aio とは コンサル",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 28,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "aio コンサル",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 38.2,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "aio コンサルティング",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 31.51219512195122,
+    "imp": 82,
+    "clk": 0
+   },
+   {
+    "kw": "aio ドメイン",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 82,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aioコンサル",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 34.903225806451616,
+    "imp": 31,
+    "clk": 0
+   },
+   {
+    "kw": "aioコンサルおすすめ企業",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "aioコンサルおすすめ会社",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 11,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "aioコンサルティング",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 26.044444444444444,
+    "imp": 45,
+    "clk": 0
+   },
+   {
+    "kw": "aio対策 コンサル",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 50,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai導入 中小企業 費用",
+    "url": "https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/",
+    "pos": 34.833333333333336,
+    "imp": 18,
+    "clk": 0
+   },
+   {
+    "kw": "ai導入 補助金 福岡",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
+    "pos": 35.888888888888886,
+    "imp": 9,
+    "clk": 0
+   },
+   {
+    "kw": "ai導入 補助金 福岡 サポート",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
+    "pos": 27.846153846153847,
+    "imp": 13,
+    "clk": 0
+   },
+   {
+    "kw": "ai導入 補助金 福岡 中小企業",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
+    "pos": 33.8,
+    "imp": 10,
+    "clk": 0
+   },
+   {
+    "kw": "ai導入 補助金 福岡 導入事例",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
+    "pos": 29.555555555555557,
+    "imp": 9,
+    "clk": 0
+   },
+   {
+    "kw": "ai導入 補助金 福岡 小規模事業者",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
+    "pos": 45.666666666666664,
+    "imp": 9,
+    "clk": 0
+   },
+   {
+    "kw": "ai導入 補助金 福岡 申請サポート",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
+    "pos": 30.818181818181817,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "ai開発 補助金",
+    "url": "https://lp.7senses.co.jp/blog/ai-kaihatsu-hojokin/",
+    "pos": 25,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ai開発補助金",
+    "url": "https://lp.7senses.co.jp/blog/ai-kaihatsu-hojokin/",
+    "pos": 25,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "chatgptからの流入や推薦を増やすのに強い会社を教えて下さい。",
+    "url": "https://lp.7senses.co.jp/service/aio/",
+    "pos": 1,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ciic",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
+    "pos": 16.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "e tax 開業 届",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 65,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "e-gov 読み方",
+    "url": "https://lp.7senses.co.jp/blog/egov-denshishinsei-kojinjigyonushi/",
+    "pos": 39,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "e-govとは",
+    "url": "https://lp.7senses.co.jp/blog/egov-denshishinsei-kojinjigyonushi/",
+    "pos": 57,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "e-tax 個人事業主 開業届",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "e-tax 開業届",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "e-tax 開業届 提出方法",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 49,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "etax 開業届",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 54,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "etax開業届",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 55,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it 導入 補助 金 対象 ソフト 一覧",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+    "pos": 57,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it・ソフトウェア 補助金申請代行 株式会社 -一覧 -ランキング -求人",
+    "url": "https://lp.7senses.co.jp/service/hojokin/",
+    "pos": 60,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "it導入支援事業者 おすすめ",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
+    "pos": 15.666666666666666,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "it導入支援事業者 選び方",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
+    "pos": 14,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "it導入支援事業者 選び方",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+    "pos": 25,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 2026 個人事業主",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+    "pos": 1,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 おすすめ",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
+    "pos": 29,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 システム開発",
+    "url": "https://lp.7senses.co.jp/service/hojokin/",
+    "pos": 11.666666666666666,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 ホテル",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-shukuhakugyou/",
+    "pos": 22.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 ランキング",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
+    "pos": 10,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 会計ソフト",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+    "pos": 23.708333333333332,
+    "imp": 24,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 個人事業主",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+    "pos": 5.8,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 名古屋",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-nagoya/",
+    "pos": 32.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 対象ソフト一覧",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+    "pos": 54,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 支援事業者 選び方",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+    "pos": 22,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 選び方",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
+    "pos": 16.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "it導入補助金 選び方",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+    "pos": 71,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it補助金 個人事業主",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "it補助金 対象ツール",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/",
+    "pos": 57,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "jcip 行政書士",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-gyoseishoshi/",
+    "pos": 62,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "jcip 閲覧",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
+    "pos": 8,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "meo コンサル",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 41.75,
+    "imp": 8,
+    "clk": 0
+   },
+   {
+    "kw": "meo コンサルティング",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 34.791666666666664,
+    "imp": 24,
+    "clk": 0
+   },
+   {
+    "kw": "meo 大阪",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 49.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "meo 対策 大阪",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 51.86666666666667,
+    "imp": 30,
+    "clk": 0
+   },
+   {
+    "kw": "meoコンサルティング",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 35.05555555555556,
+    "imp": 18,
+    "clk": 0
+   },
+   {
+    "kw": "meo対策 コンサル 会社",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 41.25,
+    "imp": 12,
+    "clk": 0
+   },
+   {
+    "kw": "meo対策 会社 大阪",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 38,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "meo対策 外注 大阪",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 27.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "meo対策 大阪",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 48.88235294117647,
+    "imp": 17,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり 商業 サービス生産性向上促進補助金 医療機器",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/",
+    "pos": 13.846153846153847,
+    "imp": 13,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり 商業 サービス生産性向上促進補助金 運送業",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
+    "pos": 11.125,
+    "imp": 16,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり 補助 金 個人 事業 主",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-2025-kojinjigyonushi/",
+    "pos": 46.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり補助金 倉庫業",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
+    "pos": 43.666666666666664,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり補助金 個人事業主",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-2025-kojinjigyonushi/",
+    "pos": 48.285714285714285,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり補助金 医療機器",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/",
+    "pos": 15.266666666666667,
+    "imp": 15,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり補助金 医療法人",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/",
+    "pos": 9.8,
+    "imp": 5,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり補助金 車両 トラック",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "ものづくり補助金 運送業",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
+    "pos": 8.454545454545453,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "エクセル 開発 補助金",
+    "url": "https://lp.7senses.co.jp/service/dev/",
+    "pos": 14.051282051282051,
+    "imp": 39,
+    "clk": 0
+   },
+   {
+    "kw": "オンライン診療 it導入補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 59,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック 予約システム it導入補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 23,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "クリニック 予約システム 補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 19.636363636363637,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "グループウェア 導入 it補助金 スケジュール",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-schedule/",
+    "pos": 28,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "コンサルタント meo対策",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 44.095238095238095,
+    "imp": 21,
+    "clk": 0
+   },
+   {
+    "kw": "デジタル化 ai導入補助金 ランキング",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
+    "pos": 27.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "デジタル化 ai導入補助金 選び方",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
+    "pos": 23.333333333333332,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "デジタル化・ai導入補助金 名古屋",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-nagoya/",
+    "pos": 32.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "トラクター 補助金 個人",
+    "url": "https://lp.7senses.co.jp/blog/nougyou-kikai-hojokin/",
+    "pos": 47,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "ドクターズコスメ クリニック 導入 支援",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/",
+    "pos": 67.5,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "パソコン購入補助金 個人",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-pc-hojokin-hikaku/",
+    "pos": 10,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "レセコン it導入補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 41,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "中小企業 助成金",
+    "url": "https://lp.7senses.co.jp/blog/chusho-kigyo-joseikin/",
+    "pos": 31,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "予約システム 補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 23,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "事業再構築補助金 個人事業主",
+    "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/",
+    "pos": 45,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "事業再構築補助金 建設業",
+    "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kensetsugyou-jirei/",
+    "pos": 46,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "会計ソフト",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+    "pos": 3,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "会計ソフト 補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+    "pos": 51.666666666666664,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "会計ソフト 補助金 個人事業主",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
+    "pos": 15.666666666666666,
+    "imp": 12,
+    "clk": 0
+   },
+   {
+    "kw": "倉庫 建設 補助金",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "個人事業主 補助金 パソコン",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-pc-hojokin-hikaku/",
+    "pos": 10,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "個人事業主 開業届 オンライン",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 48.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "傭車",
+    "url": "https://lp.7senses.co.jp/blog/unsougyou-jissekihoukokusho/",
+    "pos": 16,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "入退室管理システム",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-gakushujuku/",
+    "pos": 2,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "原口優",
+    "url": "https://lp.7senses.co.jp/about/",
+    "pos": 2,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "名古屋でit導入補助金の相談ができる会社はありますか？",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-nagoya/",
+    "pos": 18,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大阪 meo",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 22,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大阪 meo 対策",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 57,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大阪 meo対策",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 51.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "大阪 meo対策 代理店",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 37,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "大阪 meo対策 会社",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 34,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大阪 ローカルseo 飲食店 対策",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 62.31818181818182,
+    "imp": 22,
+    "clk": 0
+   },
+   {
+    "kw": "大阪でmeoとaioの両方を支援してくれる会社を教えてください。",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 88,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "大阪でmeo対策に強い会社はどこ？",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 49.53846153846154,
+    "imp": 26,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 49.86666666666667,
+    "imp": 30,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 代理店",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 77.20689655172414,
+    "imp": 29,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 代理店 サービス",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 75.37037037037037,
+    "imp": 27,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 代理店 ノウハウ",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 85.81818181818181,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 代理店 運用",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 83.28571428571429,
+    "imp": 14,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 会社",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 48.87096774193548,
+    "imp": 31,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 会社 売上",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 73.36666666666666,
+    "imp": 30,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 会社 施策",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 57.2,
+    "imp": 30,
+    "clk": 0
+   },
+   {
+    "kw": "大阪市中央区 meo対策 会社 違い",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 67.3,
+    "imp": 30,
+    "clk": 0
+   },
+   {
+    "kw": "小規模事業者持続化補助金 コンサル 飲食",
+    "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-inshokuten-jirei/",
+    "pos": 51.96551724137931,
+    "imp": 29,
+    "clk": 0
+   },
+   {
+    "kw": "小規模事業者持続化補助金 パソコン購入",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-pc-hojokin-hikaku/",
+    "pos": 10,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "小規模事業者持続化補助金 第20回 公募要領",
+    "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-kensetsugyou/",
+    "pos": 7,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "小規模事業者持続化補助金 美容室",
+    "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-biyoushitsu-kakikata/",
+    "pos": 24,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "小規模持続化補助金20回 経費 広報 web",
+    "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-kensetsugyou/",
+    "pos": 8.166666666666668,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "建設業 許可 閲覧",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
+    "pos": 72,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "建設業 電子申請 行政書士",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-gyoseishoshi/",
+    "pos": 76,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "建設業許可電子閲覧システム",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
+    "pos": 10,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "建設業電子閲覧システム",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "料金はかかる？",
+    "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-gyoseishoshi/",
+    "pos": 6,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "新事業進出 ものづくり補助金 医療機器",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/",
+    "pos": 16.92857142857143,
+    "imp": 14,
+    "clk": 0
+   },
+   {
+    "kw": "新事業進出 ものづくり補助金 運送業",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
+    "pos": 10.857142857142858,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "業務用 脱毛機 補助金",
+    "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-biyoushitsu-jirei/",
+    "pos": 50,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "業務用脱毛機 メーカー 補助金",
+    "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-biyoushitsu-jirei/",
+    "pos": 47,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "業種は何になりますか？",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/",
+    "pos": 8,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "病院 it導入補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 65,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "病院 ｉｔ 導入",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 48,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "相場",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
+    "pos": 9,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "社労士 救済",
+    "url": "https://lp.7senses.co.jp/blog/shakaihoken-denshishinsei-gimuka-chusho/",
+    "pos": 26.666666666666668,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "積算ソフト 補助金",
+    "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kensetsugyou-katsuyou/",
+    "pos": 28,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "精米機 補助金",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-jirei/",
+    "pos": 15,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "美容室 補助金2026",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-biyoushitsu/",
+    "pos": 37,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "美容師 助成金",
+    "url": "https://lp.7senses.co.jp/blog/biyoushitsu-joseikin/",
+    "pos": 27,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "美容機器 補助金",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-biyoushitsu/",
+    "pos": 61.21739130434783,
+    "imp": 23,
+    "clk": 0
+   },
+   {
+    "kw": "美容機器 補助金",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-esute/",
+    "pos": 50.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "脱毛器 補助金",
+    "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-biyoushitsu-jirei/",
+    "pos": 47,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "脱毛器 補助金",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-esute/",
+    "pos": 32,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "自動車整備工場 事業計画書",
+    "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-jidousha-seibi/",
+    "pos": 12,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "補助金 中小企業",
+    "url": "https://lp.7senses.co.jp/blog/chusho-kigyo-joseikin/",
+    "pos": 33,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "農業用倉庫 補助金 2026",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
+    "pos": 7.416666666666667,
+    "imp": 12,
+    "clk": 0
+   },
+   {
+    "kw": "農業用倉庫 補助金 2026",
+    "url": "https://lp.7senses.co.jp/blog/nougyou-kikai-hojokin/",
+    "pos": 52,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "運送業 補助金 2026",
+    "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
+    "pos": 11,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "運送管理システム 補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-unsougyou/",
+    "pos": 27,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業 届 e tax",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 43,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業 届 オンライン",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 49.333333333333336,
+    "imp": 3,
+    "clk": 0
+   },
+   {
+    "kw": "開業 届 控え",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 63,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 e tax",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 45,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 e-tax",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 39.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 etax やり方",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 54,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 web",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 29,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 オンライン",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 42.72727272727273,
+    "imp": 11,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 オンライン やり方",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 49.25,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 スマホ",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 46,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 マイナポータル",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 4,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 個人番号",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 62,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 受理",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 55,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 受理 され たか どうか",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 49,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 受理 確認",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 44.75,
+    "imp": 4,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 控え",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 58.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 控え e-tax",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 40.5,
+    "imp": 2,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 確認",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 42,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 郵送",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 14,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "開業届 電子申請",
+    "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/",
+    "pos": 25,
+    "imp": 6,
+    "clk": 0
+   },
+   {
+    "kw": "電子カルテ it導入補助金",
+    "url": "https://lp.7senses.co.jp/blog/it-hojokin-clinic/",
+    "pos": 50,
+    "imp": 1,
+    "clk": 0
+   },
+   {
+    "kw": "電子申請義務化 中小企業 いつから",
+    "url": "https://lp.7senses.co.jp/blog/hojokin-denshishinsei-gimuka-itsukara/",
+    "pos": 5.285714285714286,
+    "imp": 7,
+    "clk": 0
+   },
+   {
+    "kw": "ｍｅｏ コンサルティング",
+    "url": "https://lp.7senses.co.jp/service/meo/",
+    "pos": 38,
+    "imp": 3,
+    "clk": 0
+   }
+  ]
+ }
+}
