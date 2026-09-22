@@ -49,6 +49,16 @@ def fetch(sc, dom, span, dims):
         return []
 
 
+def totals(sc, dom, span):
+    """表示・クリックの合計は「次元なし」で取る。次元を付けた合計は信用しない"""
+    import gsc_detail as G
+    try:
+        r = G.q(sc, dom, str(span[0]), str(span[1]), None, 1)
+    except Exception:
+        return 0, 0
+    return (r[0]["impressions"], r[0]["clicks"]) if r else (0, 0)
+
+
 def main():
     import gsc_detail as G
     import sites as S
@@ -62,12 +72,15 @@ def main():
     print(f"■ {now[0]}〜{now[1]}  と  {prev[0]}〜{prev[1]} の比較\n")
     alerts = []
     for sid, cfg in S.load_all().items():
+        # 内訳（どの語が消えたか）には語が要るので query+page で取る。
+        # ただし合計はこれで数えない — query次元は検索数の少ない語を返さないため、
+        # 実測で補助金のクリックが 51回→2回 に見えていた（CLAUDE.md 0.1）
         a = fetch(sc, cfg["domain"], now, ["query", "page"])
         b = fetch(sc, cfg["domain"], prev, ["query", "page"])
-        if not a and not b:
+        ai, ac = totals(sc, cfg["domain"], now)
+        bi, bc = totals(sc, cfg["domain"], prev)
+        if not ai and not bi:
             continue
-        ai, ac = sum(x["impressions"] for x in a), sum(x["clicks"] for x in a)
-        bi, bc = sum(x["impressions"] for x in b), sum(x["clicks"] for x in b)
         di = (ai - bi) / bi if bi else None
         dc = (ac - bc) / bc if bc else None
 

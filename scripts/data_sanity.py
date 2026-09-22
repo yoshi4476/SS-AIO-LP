@@ -85,6 +85,18 @@ def check_invalid(prop, days, out):
     return tot, bad
 
 
+def total_clicks(sc, domain, start, end):
+    """クリック・表示の合計は必ず「次元なし」で取る（CLAUDE.md 0.1）。
+
+    query次元は検索数の少ない語を返さないため、合計が大きく減る。実測（28日・
+    2026-08-23〜09-19）では query次元 4/17/2回 に対し、次元なしは 25/43/51回だった。
+    補助金は実際の3.9%しか見えておらず、毎週「GA4と食い違う」と誤報していた。
+    """
+    import gsc_detail as G
+    r = G.q(sc, domain, str(start), str(end), None, 1)
+    return r[0]["clicks"] if r else 0
+
+
 def check_ga_vs_gsc(sid, cfg, prop, days, out):
     """GA4の自然検索セッションと、GSCのクリック数が近いか。
 
@@ -98,8 +110,7 @@ def check_ga_vs_gsc(sid, cfg, prop, days, out):
     sc = G.client()
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
-    clicks = sum(r["clicks"] for r in
-                 G.q(sc, cfg["domain"], str(start), str(end), ["query"], 25000))
+    clicks = total_clicks(sc, cfg["domain"], start, end)
     if organic == 0 and clicks == 0:
         return organic, clicks
     big, small = max(organic, clicks), min(organic, clicks)
@@ -123,11 +134,13 @@ def check_brand_share(cfg, days, out):
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
     rows = G.q(sc, cfg["domain"], str(start), str(end), ["query"], 25000)
-    tot = sum(r["clicks"] for r in rows)
+    # 分母は必ず次元なしの合計。query次元の合計を分母にすると指名の割合が跳ね上がる
+    # （実測: コーポレートは 15/17=88% と出たが、本当は 15/43=35% 以下だった）
+    tot = total_clicks(sc, cfg["domain"], start, end)
     brand = sum(r["clicks"] for r in rows if B.BRAND.search(r["keys"][0]))
     if tot and brand / tot >= 0.5:
-        out.append(("注意", f"クリック{tot}回のうち{brand}回が指名検索です"
-                            f"（{brand / tot * 100:.0f}%）。"
+        out.append(("注意", f"クリック{tot}回のうち{brand}回以上が指名検索です"
+                            f"（{brand / tot * 100:.0f}%以上）。"
                             f"記事の実力を語るなら指名検索を除いて数えてください"))
     return tot, brand
 

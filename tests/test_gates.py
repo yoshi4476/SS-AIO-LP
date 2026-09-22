@@ -2275,6 +2275,47 @@ def test_lessons_are_learned_and_pruned():
     check("週次で棚卸しする", "lessons.py --review" in wf, True)
 
 
+def test_totals_never_come_from_a_dimensioned_query():
+    """表示・クリックの合計を GSC の次元つき問い合わせから数えていないか。
+
+    query 次元は検索数の少ない語を返さない。合計をこれで数えると大きく減る。
+    実測（28日・2026-08-23〜09-19）では、補助金サイトのクリックが
+    実際51回のところ2回、コーポレートが43回のところ17回に見えていた。
+    その結果 growth_guard は伸び率を +38% と報告していたが、実際は +107% で、
+    data_sanity は毎週「GA4とGSCが食い違う」と誤報し、指名検索の割合を
+    35%以下のところ88%と出していた。数字は施策の優先順位まで動かすため、
+    書き方そのものを禁じる（CLAUDE.md 0.1）。
+    """
+    bad = []
+    for name in ("growth_guard.py", "data_sanity.py", "gsc_check.py", "daily_kpi.py",
+                 "monthly_report.py", "brand_search.py", "local_kpi.py"):
+        p = ROOT / "scripts" / name
+        if not p.is_file():
+            continue
+        src = p.read_text(encoding="utf-8")
+        for i, line in enumerate(src.splitlines(), 1):
+            s = line.strip()
+            # 「合計を出す」形（sum(... for ... in G.q(..., ["query"...]))）だけを止める。
+            # 内訳のために語ごとに取るのは正しい使い方なので触らない
+            if "sum(" in s and "G.q(" in s and '["query"' in s:
+                bad.append(f"{name}:{i} {s[:78]}")
+    if bad:
+        print("  NG  合計を次元つきで数えています（次元なしで取ること）:")
+        for b in bad:
+            print(f"      {b}")
+        FAIL.append("totals_from_dimensioned_query")
+        return
+    # 直したあとの形が残っているかも確かめる（消されたら気づけない）
+    gg = (ROOT / "scripts" / "growth_guard.py").read_text(encoding="utf-8")
+    ds = (ROOT / "scripts" / "data_sanity.py").read_text(encoding="utf-8")
+    for name, src in (("growth_guard.py", gg), ("data_sanity.py", ds)):
+        if "None, 1)" not in src:
+            print(f"  NG  {name} が次元なしの合計を取っていません")
+            FAIL.append("totals_from_dimensioned_query")
+            return
+    print("  OK  表示・クリックの合計は次元なしで取っている（3サイトとも）")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2332,7 +2373,8 @@ def main():
               test_data_intake_publishes_only_grounded_numbers,
               test_site_has_two_axes_and_no_orphans,
               test_search_engines_are_told_about_all_sites,
-              test_lessons_are_learned_and_pruned):
+              test_lessons_are_learned_and_pruned,
+              test_totals_never_come_from_a_dimensioned_query):
         try:
             t()
         except Exception as e:
