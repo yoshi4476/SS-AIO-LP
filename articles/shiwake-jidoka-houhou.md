@@ -59,9 +59,6 @@ faq:
 
 仕訳の自動化には、明細の自動取込・OCR読み取り・ルール学習・API連携という4つの方法があります。
 
-
-あわせて[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)もご覧ください。
-
 当社は会計ソフトの導入を補助金で支援する立場から見ると、**自動化が定着するかどうかは、最初の勘定科目の設計でほぼ決まります**。
 
 <figure><img src="/images/shiwake-jidoka-houhou/houhou.png" alt="仕訳を自動化する4つの方法: 銀行口座・カード明細の自動取込、請求書・領収書のOCR読み取り、ルール学習による自動仕訳、他システムとのAPI連携" loading="lazy"><figcaption>仕訳を自動化する4つの方法</figcaption></figure>

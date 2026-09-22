@@ -128,6 +128,7 @@ faq:
 
 振込が完了したら、振込明細を証憑として保存し、会計ソフトで支払手数料を含めた仕訳を行うところまでが一連の作業です。
 
+あわせて[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)もご覧ください。
 
 あわせて[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)もご覧ください。
 
@@ -147,8 +148,6 @@ faq:
 
 一括振込の仕組みを導入しても、振込先の新規登録や、名義相違が起きたときの確認作業は人の手で対応する必要があります。**この確認・保存作業までまとめて負担に感じる場合は、支払業務そのものを経理BPOへ任せる方法が現実的です。
 **任せられる範囲や費用相場は、[経理アウトソーシングの費用相場内訳と抑え方](/blog/keiri-outsourcing-hiyou-souba/)で解説しています。
-
-経理業務全体をどこまで外部に任せられるかを知りたい場合は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)もあわせてご確認ください。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 

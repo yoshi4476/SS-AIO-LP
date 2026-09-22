@@ -452,7 +452,6 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>冒頭200字での断言型回答、見出し直下の40〜60字の結論、比較テーブル、FAQを記事に実装します。AIは、質問に対して単体で完結した答えを優先的に抜き出すため、見出しごとに答えが完結している構造が有利です。</p>
 <h3 id="_4">計測と改善</h3>
 <p>Search Consoleの生成AIパフォーマンスレポートと、GA4のAI参照元セッション（ChatGPT・Perplexity・Gemini・Copilot・Claude経由）を週次で確認します。表示回数が伸びているのに引用が増えない場合は、構造の見直しが必要なサインです。</p>
-<p>計測方法をさらに詳しく知りたい場合は、<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法</a>を参考にしてください。</p>
 <h3 id="4">4段階でつまずきやすいポイント</h3>
 <p><strong>現状把握の段階でつまずきやすいのは、順位だけを見て満足してしまうことです。</strong>順位が20位以内でも、AI Overviewに表示されているとは限りません。両方を別々に確認してください。順位は上がっているのにAI Overviewの表示が増えないケースは珍しくありません。</p>
 <p><strong>土台づくりの段階では、robots.txtで主要AIクローラーをブロックしていないかの確認が抜けがちです。</strong>Googlebotをブロックすると通常の検索評価そのものが失われるため、絶対に避けてください。Google-Extendedのブロックは学習用途の制御であり、AI Overviewへの表示可否とは別問題です。クローラーの種類と役割は<a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank" rel="noopener">Google検索セントラルのクローラー一覧</a>で確認できます。WAFやCDNの設定で、意図せずクローラーを403で弾いていないかもあわせて確認してください。</p>

@@ -95,7 +95,6 @@ faq:
 
 **2026年8月時点で建設業が使えるのは「新事業進出・ものづくり商業サービス補助金」です。**事業再構築補助金から2段階先の制度にあたります。
 
-
 あわせて[農業の補助金の申請方法｜制度の選び方と5ステップ](/blog/nougyou-hojokin-shinsei-houhou/)もご覧ください。
 
 <figure><img src="/images/jigyou-saikouchiku-kensetsugyou-jirei/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能" loading="lazy"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>

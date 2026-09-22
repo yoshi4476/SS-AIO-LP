@@ -149,7 +149,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 個人事業主が経理代行を選ぶ際は、確定申告との連携・対応ソフトの一致・繁忙期の対応力の3点を確認してください。
 
 
-関連する内容として[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)も公開しています。
+あわせて[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)もご覧ください。
 
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/erabikata.png" alt="個人事業主に合う経理代行の選び方3つのポイント" loading="lazy"><figcaption>個人事業主に合う経理代行の選び方</figcaption></figure>
 

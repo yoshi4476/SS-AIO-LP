@@ -84,6 +84,7 @@ faq:
 
 属人化を放置すると、退職時の業務停止・ミスの発見遅れ・法改正への対応遅れという3つのリスクが顕在化し、経営判断にも影響します。
 
+あわせて[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)もご覧ください。
 
 あわせて[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)もご覧ください。
 
@@ -133,7 +134,7 @@ faq:
 マニュアル化は、業務の棚卸し・手順書の作成・第三者による確認という3ステップで進めます。
 
 
-あわせて[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)もご覧ください。
+関連する内容として[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)も公開しています。
 
 <figure><img src="/images/keiri-zokujinka-kaisho/step.png" alt="マニュアル化を進める3ステップ: 業務を棚卸しして書き出す、手順書のひな形に沿って書く、第三者が試して抜けを確認する" loading="lazy"><figcaption>マニュアル化を進める3ステップ</figcaption></figure>
 
@@ -167,7 +168,7 @@ faq:
 属人化の解消は、退職直前の聞き取りだけで済ませたり、担当者任せにしたりすると失敗します。
 
 
-あわせて[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)もご覧ください。
+近い論点を[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)で扱っています。
 
 <figure><img src="/images/keiri-zokujinka-kaisho/hikaku.png" alt="属人化解消でのNGとOK: NG例は退職者への聞き取りだけで済ませる・マニュアル化を担当者任せにする・一度作って更新しない・口頭引き継ぎだけで終える、OK例は在職中に手順を可視化する・マニュアル化の期限と担当を会社が決める・定期的に見直す運用にする・書面と実務確認の両方で引き継ぐ" loading="lazy"><figcaption>属人化解消でのNGとOK</figcaption></figure>
 

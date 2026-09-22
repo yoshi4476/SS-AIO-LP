@@ -11,10 +11,14 @@ eyecatch: /images/aio-taisaku-donyu-hoho/eyecatch.png
 score: 95
 score_breakdown: {design: 19, seo: 20, editorial: 18, expert: 18, persona: 19, aio: 20}
 diagrams:
-  - name: steps
+  - name: steps-zenhan
     type: flow
-    title: AIO対策導入までの6ステップ
-    items: ["担当者を決める|体制を明確化", "現状を診断|順位と構造を確認", "構造を改善|冒頭回答とFAQを整備", "計測を設定|GSCとGA4を連携", "試験運用|数ページで数字を確認", "運用を定着|月1回振り返る"]
+    title: AIO対策導入 前半3ステップ（体制と診断）
+    items: ["担当者を決める|体制を明確化", "現状を診断|順位と構造を確認", "構造を改善|冒頭回答とFAQを整備"]
+  - name: steps-kouhan
+    type: flow
+    title: AIO対策導入 後半3ステップ（計測と定着）
+    items: ["計測を設定|GSCとGA4を連携", "試験運用|数ページで数字を確認", "運用を定着|月1回振り返る"]
   - name: prereq
     type: list
     title: 導入前に確認すべき3つの前提条件
@@ -81,7 +85,7 @@ AIO対策を導入する前に、検索順位の土台・自社の一次情報�
 
 AIO対策の導入は、体制構築・現状診断・構造改善・計測設定・試験運用・定着化という6ステップで進めます。
 
-<figure><img src="/images/aio-taisaku-donyu-hoho/steps.png" alt="AIO対策導入までの6ステップ: 担当者を決める、現状を診断、構造を改善、計測を設定、試験運用、運用を定着させる" loading="lazy"><figcaption>AIO対策導入までの6ステップ</figcaption></figure>
+<figure><img src="/images/aio-taisaku-donyu-hoho/steps-zenhan.png" alt="AIO対策導入 前半3ステップ（体制と診断）: 担当者を決める、現状を診断、構造を改善" loading="lazy"><figcaption>AIO対策導入 前半3ステップ（体制と診断）</figcaption></figure>
 
 ### ステップ1: 担当者を決める
 
@@ -94,6 +98,8 @@ AIO対策の導入は、体制構築・現状診断・構造改善・計測設�
 ### ステップ3: 構造を改善する
 
 診断結果をもとに、冒頭200字の断言回答・各見出し直下の1文結論・FAQ・比較テーブルを整備します。すべてのページを一度に直す必要はありません。**順位10位以内なのに引用されていないページから優先的に着手する**と、成果が出やすくなります。
+
+<figure><img src="/images/aio-taisaku-donyu-hoho/steps-kouhan.png" alt="AIO対策導入 後半3ステップ（計測と定着）: 計測を設定、試験運用、運用を定着" loading="lazy"><figcaption>AIO対策導入 後半3ステップ（計測と定着）</figcaption></figure>
 
 ### ステップ4: 計測を設定する
 

@@ -138,7 +138,6 @@ faq:
 
 経理アウトソーシングの見積もりは、自社の業務量を数値で把握してから、複数社に同じ条件で依頼すると精度が上がります。
 
-
 あわせて[記帳代行費用の勘定科目｜外注費と支払手数料の使い分け](/blog/kichodaiko-hiyou-kanjoukamoku/)もご覧ください。
 
 <figure><img src="/images/keiri-outsourcing-hiyou-souba/step.png" alt="見積もりを比較する3ステップ: 自社の業務量を洗い出す、複数社に同じ条件で見積もりを依頼する、対応範囲外の追加費用を確認する" loading="lazy"><figcaption>見積もりを比較する3ステップ</figcaption></figure>
