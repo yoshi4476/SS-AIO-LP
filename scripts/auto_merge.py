@@ -391,9 +391,10 @@ def run_one(pair, write):
         survivor_pos=round(ss.get("pos", 0), 1), loser_url=url_of(pair["site"], l), keyword=before[1])
     # 実行ファイルの解決と書き込み承認は auto_rewrite と揃える。
     # どちらが欠けても、統合は静かに「変更なし」で終わる
-    r = AR.sh([AR.claude_bin(), "-p", prompt, "--max-turns", "60",
+    # プロンプトは stdin で渡す（引数だと1行目しか届かない）
+    r = AR.sh([AR.claude_bin(), "-p", "--max-turns", "60",
                "--allowedTools", "Read,Edit",
-               "--settings", AR.PERM], timeout=2400)
+               "--settings", AR.PERM], timeout=2400, stdin_text=prompt)
     p = ARTICLES / f"{s}.md"
     if r.returncode and p.read_text(encoding="utf-8-sig") == before[2]:
         return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"

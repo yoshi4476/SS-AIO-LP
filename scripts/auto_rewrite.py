@@ -41,9 +41,16 @@ LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 TITLE_MIN, TITLE_MAX = 15, 45
 
 
-def sh(args, timeout=1800):
+def sh(args, timeout=1800, stdin_text=None):
+    """外部コマンドを動かす。stdin_text を渡すと標準入力から流し込む。
+
+    **複数行の文字列を引数で渡してはいけない。** Windows では claude が
+    claude.CMD（バッチ）に解決されるため、最初の改行で切れる。実測で、
+    引数で渡した複数行は1行目しか届かず、書き換えが24本続けて空振りした。
+    """
     return subprocess.run(args, cwd=ROOT, capture_output=True, text=True,
-                          encoding="utf-8", errors="ignore", timeout=timeout)
+                          encoding="utf-8", errors="ignore", timeout=timeout,
+                          input=stdin_text)
 
 
 def aio_items():
@@ -230,6 +237,23 @@ def numbers(s):
     return collections.Counter(re.findall(r"[0-9０-９][0-9０-９,，.．%％]*", s))
 
 
+def fact_numbers(added, had):
+    """増えた数字のうち、事実として扱うべきものだけを返す。
+
+    節を足す直しでは「3つの観点」のような個数が必ず増える。回数の差だけで
+    見ると、正しい書き換えまで差し戻されて一本も直せない（実測で2/3が該当）。
+    止めたいのは、記事に無かった事実の数字が公開されることだけ。
+    """
+    out = {}
+    for tok, n in added.items():
+        brand_new = tok not in had
+        figure = ("%" in tok or "％" in tok or "." in tok or "．" in tok
+                  or "," in tok or "，" in tok or len(tok) >= 4)
+        if brand_new or figure:
+            out[tok] = n
+    return out
+
+
 def sources(s):
     return set(re.findall(r'href="(https?://[^"]+)"', s))
 
@@ -270,7 +294,8 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
         return f"タイトルに狙う語が入っていません（{kw}）"
 
     b = before[2]
-    new_nums = numbers(after) - numbers(b) - numbers(allowed or "")
+    new_nums = fact_numbers(numbers(after) - numbers(b) - numbers(allowed or ""),
+                            numbers(b) + numbers(allowed or ""))
     if new_nums:
         return f"本文に無かった数字が増えました: {dict(list(new_nums.items())[:4])}"
     lost = sources(b) - sources(after)
@@ -371,9 +396,10 @@ def run_one(item, write):
     # 手で1本動かして初めて「権限の許可が必要です」と出ているのが分かった。
     # 道具は Read,Edit に絞ったままなので、できるのは1ファイルの書き換えだけ。
     # 悪い書き換えは check() が見つけて git checkout で戻す
-    r = sh([exe, "-p", prompt, "--max-turns", "40",
+    # プロンプトは stdin で渡す（引数だと1行目しか届かない）
+    r = sh([exe, "-p", "--max-turns", "40",
             "--allowedTools", "Read,Edit",
-            "--settings", PERM], timeout=1800)
+            "--settings", PERM], timeout=1800, stdin_text=prompt)
     if r.returncode and not p.read_text(encoding="utf-8-sig") != before[2]:
         return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
 
