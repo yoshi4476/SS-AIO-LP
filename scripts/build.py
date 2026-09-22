@@ -552,6 +552,14 @@ def quality_checks(all_metas):
     import difflib
     warns = []
     for m in all_metas:
+        # 図解のflow型は描画が5項目までで、6個目以降は黙って切り捨てられる。
+        # 本文やタイトルが「6ステップ」と言っているのに図は5つ、というずれが実際に起きた
+        for dg in (m.get("diagrams") or []):
+            if isinstance(dg, dict) and (dg.get("type") or "flow") == "flow":
+                items = dg.get("items") or []
+                if len(items) > 5:
+                    warns.append(f"図解の項目が多すぎ: {m['slug']} の「{dg.get('title', '')}」は"
+                                 f"{len(items)}項目（flow型は5項目まで。6個目以降は画像に出ない）")
         tl = len(m["title"])
         if not 15 <= tl <= 45:
             warns.append(f"タイトル字数NG: {m['slug']} = {tl}字（基準15〜45字）")

@@ -2236,6 +2236,45 @@ def test_search_engines_are_told_about_all_sites():
     check("鍵ファイルが無いドメインは通知しない", N.key_ok("example.com", "dummykey0000000000000000"), False)
 
 
+def test_lessons_are_learned_and_pruned():
+    """やって分かったことが台帳に残り、記事を書く前に読まれ、増えすぎない仕組みであること。
+
+    以前は kpi_feedback.md に文章で積むだけで、36件11.7KBを毎回まるごと読ませていた。
+    機械で守れる学びまで人とAIが覚え続けており、クライアントが増えれば破綻する形だった。
+    """
+    print(chr(10) + "■ 学びの台帳")
+    import lessons as L
+    rows = L.load()
+    check("台帳に学びがある", len(rows) >= 10, True)
+    check("すべて必須の項目を持つ",
+          all(set(("id", "at", "kind", "phase", "rule", "gate", "status")) <= set(r) for r in rows), True)
+    # 機械が守るものは読ませない（覚える対象を増やさないため）
+    gated = [r for r in rows if r.get("gate")]
+    check("機械が守る学びがある", len(gated) >= 1, True)
+    br = L.brief("ai-lab")
+    check("機械が守る学びは読ませない", any(g["rule"] in br for g in gated), False)
+    check("読ませる量に上限がある", len(br) <= L.BRIEF_CHARS + 200, True)
+    check("読ませる件数に上限がある", br.count(chr(10) + "- ") <= L.BRIEF_MAX, True)
+    # 同じ学びを二重に積まない
+    before = len(L.load())
+    r1, made1 = L.add("failure", "kw", "（検査用）同じ学びは二重に積まない")
+    r2, made2 = L.add("failure", "kw", "（検査用）同じ学びは二重に積まない")
+    check("同じ学びは1件だけ", (made1, made2), (True, False))
+    rows = [r for r in L.load() if r["id"] != r1["id"]]
+    L.save(rows)
+    check("後片付けできた", len(L.load()), before)
+    del r2
+    # 次からこうする、の一文を本文から取れる
+    detail = "2026-09-01、図解が5個に切られた。原因は描画の上限。次回はPhase 3の構成審査時点でflow型は5個以内に収めること。"
+    check("対処の一文を拾う", "5個以内に収めること" in L.best_rule(detail), True)
+    # 配線
+    prompt = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
+    check("記事を書く前に読ませる", "lessons.py --brief" in prompt, True)
+    check("終わったら積ませる", "lessons.py --add" in prompt, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8", errors="replace")
+    check("週次で棚卸しする", "lessons.py --review" in wf, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2292,7 +2331,8 @@ def main():
               test_aio_rewrites_and_citation_measurement,
               test_data_intake_publishes_only_grounded_numbers,
               test_site_has_two_axes_and_no_orphans,
-              test_search_engines_are_told_about_all_sites):
+              test_search_engines_are_told_about_all_sites,
+              test_lessons_are_learned_and_pruned):
         try:
             t()
         except Exception as e:

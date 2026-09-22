@@ -189,6 +189,8 @@ def main():
     slug, name, title = args[0], args[1], args[2]
     rest = args[3:]
     if dtype == "flow":
+        if len(rest) > 5:
+            print(f"WARN: flow型は5項目までです（{len(rest)}項目が渡され、6個目以降は描きません）")
         draw_flow(slug, name, title, rest[:5])
     elif dtype == "list":
         draw_list(slug, name, title, rest[:6])

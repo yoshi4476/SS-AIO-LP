@@ -359,6 +359,15 @@ jobs:
       # ここでまとめて回し、見つかったものを注釈とSlack本文に載せる。
       # 中身: AIO基盤（robots・llms.txt・構造化データ）/ 会社表記のゆれ /
       #       内部リンクの積み上がり / 数字の信頼性（二重計上・無効流入・指名検索）
+      # 学びは貯めるだけだと読まれなくなる。多すぎ・古すぎを毎週知らせて減らす
+      - name: 学びの棚卸し
+        run: |
+          out=$(python scripts/lessons.py --review); echo "$out"
+          if echo "$out" | grep -q "LESSONS_OK=no"; then
+            mkdir -p automation/logs
+            echo "要対応: 判断が要る学びが多すぎます（機械検査に変えるか退役させてください）" >> automation/logs/findings.txt
+          fi
+
       - name: 見つかったものを集めて知らせる
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
