@@ -722,6 +722,12 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
        body={'url': 'https://YOUR_DOMAIN.com/post-url/', 'type': 'URL_UPDATED'}).execute()
    ```
    未設定の場合: GSC URL検査ツールでの手動登録をユーザーに依頼
+**通知は3サイトすべてに送る。** 以前は AI集客ラボ の sitemap しか見ておらず、コーポレートと
+補助金は記事を出しても検索エンジンに知らせていなかった。実測で、公開から13日以内に一度でも
+検索結果に出た割合が AI集客ラボ 72% に対しコーポレート 41% と差が出ていた（2026-09-22）。
+IndexNow は**鍵ファイルが各ドメインの直下で配信されていること**が条件（置いただけでは足りない。
+補助金サイトは `tools/make_dist.py` の配信対象に入っておらず、置いた鍵が配信されていなかった）。
+
 2. **IndexNow送信【オプション】**
    ```bash
    curl "https://api.indexnow.org/indexnow?url=https://YOUR_DOMAIN.com/post-url/&key=${INDEXNOW_KEY}"
@@ -870,7 +876,7 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
 | 内部リンク404 | 全内部リンクの存在検証（404ゼロ保証） | build.py link_check |
 | マーカー数 | 強調8箇所以上（推奨12-18） | build.py（記事ごと） |
 | 文字数 | 本文5,000字以上（タグ・空白除く実文字数） | build.py（記事ごと） |
-| 鮮度・通知 | sitemap lastmod自動 + `scripts/notify_indexnow.py` で即時通知 | Phase 7 / 週次リライト後 |
+| 鮮度・通知 | sitemap lastmod自動 + `notify_indexnow.py` / `notify_indexing.py` で**3サイトとも**即時通知 | Phase 7 / 週次リライト後 |
 | **描画の崩れ** | 生成HTMLに生のMarkdown記法・空リンク・alt無し画像が残っていない | `scripts/render_check.py`（build.py が自動で呼ぶ） |
 | **取りこぼし** | 原稿にある表・リスト・見出し・画像・リンクが、出力に同じ数だけ出ている | `render_check.structure_gap()`（build.py が自動で呼ぶ） |
 

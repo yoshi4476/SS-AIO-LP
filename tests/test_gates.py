@@ -2217,6 +2217,25 @@ def test_site_has_two_axes_and_no_orphans():
     check("ずれているページが無い", sync_nav.run(False), [])
 
 
+def test_search_engines_are_told_about_all_sites():
+    """公開した記事を、3サイトぶん検索エンジンへ知らせていること。
+
+    以前は AI集客ラボ の sitemap しか見ておらず、コーポレートと補助金は記事を出しても
+    通知していなかった。実測で、公開から13日以内に一度でも検索結果に出た割合が
+    AI集客ラボ72%に対しコーポレート41%と差が出ていた（2026-09-22）。
+    """
+    print(chr(10) + "■ 検索エンジンへの通知")
+    now = (ROOT / "scripts" / "notify_indexnow.py").read_text(encoding="utf-8")
+    idx = (ROOT / "scripts" / "notify_indexing.py").read_text(encoding="utf-8")
+    check("IndexNow が全サイトを回る", "S.load_all()" in now, True)
+    check("鍵ファイルの有無を先に確かめる", "def key_ok" in now, True)
+    check("Indexing API が全サイトを回る", "S.load_all()" in idx, True)
+    check("1サイト固定のURLが残っていない",
+          ('SITE_URL = "https://ai.7senses.co.jp"' in idx), False)
+    import notify_indexnow as N
+    check("鍵ファイルが無いドメインは通知しない", N.key_ok("example.com", "dummykey0000000000000000"), False)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2272,7 +2291,8 @@ def main():
               test_entities_link_articles_to_official_sources,
               test_aio_rewrites_and_citation_measurement,
               test_data_intake_publishes_only_grounded_numbers,
-              test_site_has_two_axes_and_no_orphans):
+              test_site_has_two_axes_and_no_orphans,
+              test_search_engines_are_told_about_all_sites):
         try:
             t()
         except Exception as e:

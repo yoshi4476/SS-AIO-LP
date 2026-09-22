@@ -38,9 +38,30 @@ def find_key(env):
     return ""
 
 
-def sitemap_urls():
-    sm = (ROOT / "site" / "sitemap.xml").read_text(encoding="utf-8")
-    return re.findall(r"<loc>(.*?)</loc>", sm)
+def sitemap_urls(domain=None):
+    """公開中の sitemap。他サイトは手元に無いのでHTTPで取る"""
+    if domain is None:
+        sm = (ROOT / "site" / "sitemap.xml").read_text(encoding="utf-8")
+        return re.findall(r"<loc>(.*?)</loc>", sm)
+    try:
+        import urllib.request as _u
+        req = _u.Request(f"https://{domain}/sitemap.xml", headers={"User-Agent": "Mozilla/5.0"})
+        with _u.urlopen(req, timeout=30) as r:
+            return re.findall(r"<loc>(.*?)</loc>", r.read().decode("utf-8", "ignore"))
+    except Exception as e:
+        print(f"  {domain}: sitemapを取得できません（{str(e)[:50]}）")
+        return []
+
+
+def key_ok(domain, key):
+    """鍵ファイルが置かれているか。無いドメインへの通知は拒否される（実際にそうなっていた）"""
+    try:
+        import urllib.request as _u
+        req = _u.Request(f"https://{domain}/{key}.txt", headers={"User-Agent": "Mozilla/5.0"})
+        with _u.urlopen(req, timeout=20) as r:
+            return r.read().decode("utf-8", "ignore").strip() == key
+    except Exception:
+        return False
 
 
 def notify(urls, key, site_url):
@@ -54,14 +75,36 @@ def notify(urls, key, site_url):
 
 
 def main(argv=None):
+    """3サイトすべてに通知する。以前は AI集客ラボ だけを見ていたため、
+    コーポレートと補助金は記事を出しても検索エンジンに知らせていなかった"""
     argv = sys.argv[1:] if argv is None else argv
     env = load_env()
     key = find_key(env)
     if not key:
         raise SystemExit("INDEXNOW_KEY が未設定です（.env または site/{KEY}.txt を設置してください）")
-    urls = argv or sitemap_urls()
-    status = notify(urls, key, env.get("SITE_URL", "https://ai.7senses.co.jp").strip())
-    print(f"IndexNow通知: {len(urls)}件 → HTTP {status}")
+    if argv:
+        status = notify(argv, key, env.get("SITE_URL", "https://ai.7senses.co.jp").strip())
+        print(f"IndexNow通知: {len(argv)}件 → HTTP {status}")
+        return 0
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S
+    sent = 0
+    for sid, cfg in S.load_all().items():
+        dom = cfg["domain"]
+        if not key_ok(dom, key):
+            print(f"  {sid}: 鍵ファイル https://{dom}/{key}.txt がありません（通知は拒否されます）")
+            continue
+        urls = sitemap_urls(None if sid == S.primary() else dom)
+        if not urls:
+            continue
+        try:
+            status = notify(urls, key, f"https://{dom}")
+        except Exception as e:
+            print(f"  {sid}: 通知に失敗（{str(e)[:60]}）")
+            continue
+        sent += len(urls)
+        print(f"  {sid}: {len(urls)}件 → HTTP {status}")
+    print(f"IndexNow通知: 合計{sent}件")
     return 0
 
 
