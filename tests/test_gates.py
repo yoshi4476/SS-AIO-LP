@@ -2206,6 +2206,15 @@ def test_site_has_two_axes_and_no_orphans():
     check("llms.txt の業種は1ブロックだけ", llms.count("## 業種から探す"), 1)
     sm = (site / "sitemap.xml").read_text(encoding="utf-8")
     check("sitemap に業種ハブが載る", all(f"/industry/{h}/" in sm for h in hubs), True)
+    # ナビはサイト全体で1つ。固定ページは手書きで、生成ページと中身が食い違っていた
+    import sync_nav
+    navs = set()
+    for p in site.rglob("*.html"):
+        m = sync_nav.G_RX.search(p.read_text(encoding="utf-8", errors="surrogateescape"))
+        if m:
+            navs.add(tuple(re.findall(r'href="([^"]+)"', m.group(2))))
+    check("ナビは全ページで同じ", len(navs), 1)
+    check("ずれているページが無い", sync_nav.run(False), [])
 
 
 def main():

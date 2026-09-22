@@ -50,6 +50,7 @@ NAV_DEFAULT = [
     {"label": "MEO運用", "url": "/meo/"},
     {"label": "AI集客", "url": "/ai-marketing/"},
     {"label": "業種から探す", "url": "/industry/"},
+    {"label": "実装ラボ", "url": "/lab/"},
     {"label": "AI導入補助金（独自メディア）", "url": "https://lp.7senses.co.jp/",
      "blank": True},
     {"label": "コーポレートサイト", "url": "https://corp.7senses.co.jp/", "blank": True},
