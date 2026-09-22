@@ -1,28 +1,28 @@
 {
-  "date": "2026-09-22",
+  "date": "2026-09-23",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 11,
       "suspect_taken": 11,
       "healthy": 0,
-      "too_thin": 47,
+      "too_thin": 49,
       "items": [
         {
           "kw": "原口優",
           "url": "https://ai.7senses.co.jp/author/haraguchi/",
           "pos": 1.4,
-          "imp": 35,
+          "imp": 36,
           "clicks": 3,
-          "ctr": 8.57,
+          "ctr": 8.33,
           "expected_ctr": 28.0,
-          "ratio": 0.31
+          "ratio": 0.3
         },
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 9.1,
-          "imp": 58,
+          "pos": 9.2,
+          "imp": 54,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -31,8 +31,8 @@
         {
           "kw": "meo アルゴリズム攻略",
           "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
-          "pos": 5.0,
-          "imp": 26,
+          "pos": 5.1,
+          "imp": 27,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -41,8 +41,8 @@
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 8.8,
-          "imp": 31,
+          "pos": 8.6,
+          "imp": 27,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -71,8 +71,8 @@
         {
           "kw": "医療機関 meo",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 7.5,
-          "imp": 33,
+          "pos": 7.7,
+          "imp": 36,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -92,7 +92,7 @@
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
           "pos": 8.7,
-          "imp": 109,
+          "imp": 108,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -101,8 +101,8 @@
         {
           "kw": "歯科医院 閉院費用",
           "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
-          "pos": 6.1,
-          "imp": 10,
+          "pos": 6.3,
+          "imp": 11,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -112,7 +112,7 @@
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
           "pos": 9.6,
-          "imp": 62,
+          "imp": 63,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -129,11 +129,11 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 2.4,
-          "imp": 38,
+          "pos": 2.7,
+          "imp": 39,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 15.0,
+          "expected_ctr": 11.0,
           "ratio": 0.0
         },
         {
