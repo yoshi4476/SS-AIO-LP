@@ -84,7 +84,11 @@ faq:
 
 属人化を放置すると、退職時の業務停止・ミスの発見遅れ・法改正への対応遅れという3つのリスクが顕在化し、経営判断にも影響します。
 
-あわせて[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)もご覧ください。
+あわせて[管理会計まで頼む経理BPOの料金｜範囲別の増え方](/blog/kanri-kaikei-jikyu-souba/)もご覧ください。
+
+あわせて[請求書の経理BPOでやりがちな失敗5つ](/blog/seikyusho-keiri-bpo-shippai/)もご覧ください。
+
+関連する内容として[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)も公開しています。
 
 関連する内容として[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)も公開しています。
 
@@ -104,10 +108,11 @@ faq:
 
 属人化の解消は、業務の可視化・複数担当制・システム化・第三者チェック・外部委託の組み合わせで進めます。
 
+関連する内容として[記帳の経理代行を断られる理由6つ｜再依頼前の対処法](/blog/kichodaiko-kotowarareru-riyu/)も公開しています。
 
 関連する内容として[Notionで記帳を自動化する方法](/blog/notion-kicho-jidoka/)も公開しています。
 
-関連する内容として[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)も公開しています。
+近い論点を[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)で扱っています。
 
 | 方法 | 概要 | 始めやすさ |
 |:--|:--|:--|
@@ -132,9 +137,6 @@ faq:
 ## マニュアル化を進める3ステップ
 
 マニュアル化は、業務の棚卸し・手順書の作成・第三者による確認という3ステップで進めます。
-
-
-関連する内容として[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)も公開しています。
 
 <figure><img src="/images/keiri-zokujinka-kaisho/step.png" alt="マニュアル化を進める3ステップ: 業務を棚卸しして書き出す、手順書のひな形に沿って書く、第三者が試して抜けを確認する" loading="lazy"><figcaption>マニュアル化を進める3ステップ</figcaption></figure>
 
@@ -167,9 +169,6 @@ faq:
 ## 属人化解消でやってはいけないNG対応
 
 属人化の解消は、退職直前の聞き取りだけで済ませたり、担当者任せにしたりすると失敗します。
-
-
-あわせて[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)もご覧ください。
 
 <figure><img src="/images/keiri-zokujinka-kaisho/hikaku.png" alt="属人化解消でのNGとOK: NG例は退職者への聞き取りだけで済ませる・マニュアル化を担当者任せにする・一度作って更新しない・口頭引き継ぎだけで終える、OK例は在職中に手順を可視化する・マニュアル化の期限と担当を会社が決める・定期的に見直す運用にする・書面と実務確認の両方で引き継ぐ" loading="lazy"><figcaption>属人化解消でのNGとOK</figcaption></figure>
 

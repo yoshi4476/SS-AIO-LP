@@ -49,7 +49,7 @@ diagrams:
 
 **工務店の集客セミナーとは、契約棟数を増やす知識を体系的に学べる、経営者向けの学びの場です。**
 
-あわせて[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)もご覧ください。
+あわせて[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)もご覧ください。
 
 あわせて[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)もご覧ください。
 

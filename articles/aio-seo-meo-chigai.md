@@ -33,7 +33,6 @@ diagrams:
     title: 3つを同時に伸ばす4つの手順
     items: ["現状把握|検索順位とAI引用の有無を確認", "土台整備|SEOの基本要件を満たす", "地図対応|MEOの店舗情報を整える", "計測|AI参照とMEO順位を月次で見る"]
 ---
-
 **AIOとSEOとMEOの違いは、同じ「検索で選ばれる対策」でも狙う表示場所が違う点にあります。**AIOはAIの回答文の中、SEOは自然検索の一覧、MEOはGoogleマップとローカル検索の一覧です。**3つは競合する施策ではなく、SEOという土台の上にMEOとAIOが乗る関係**にあります。この記事では違いの正体と、店舗が今どれから手をつけるべきかを整理します。
 
 <div class="target-reader">この記事は、AIO・SEO・MEOという言葉の違いが分からず、何から手をつければよいか迷っている店舗オーナー・集客担当者向けです。</div>
@@ -45,6 +44,8 @@ diagrams:
 ## AIO・SEO・MEOの違いとは？1枚の比較表で理解する
 
 **3つの違いは、狙う検索結果の場所と、評価される情報の種類の組み合わせにあります。**表で並べると、混同していた部分が見えてきます。
+
+関連する内容として[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)も公開しています。
 
 前提となる考え方は、[AIO SEO対策とは？](/aio/aio-seo-taisaku/)で解説しています。
 
@@ -84,8 +85,6 @@ diagrams:
 **MEOとは、Googleマップとローカル検索の一覧で、自店の順位を上げるための対策です。**SEOと違い、評価の軸に「距離」という店舗側で動かせない要素が入ります。
 
 <div class="definition-box"><span class="term">MEOとは</span>、Googleビジネスプロフィールの情報整備と口コミ運用を通じて、地図検索での掲載順位を高める対策です。<a href="https://support.google.com/business/answer/7091" target="_blank" rel="noopener">Googleビジネスプロフィール ヘルプ</a>は、順位が関連性・距離・知名度の3要素で決まると説明しています。</div>
-
-私たちはMEO運用サービス「G-ran」で通算**3,200店舗以上**を運用してきました。実務での手順は[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)で公開しています。
 
 <div class="cta-box"><p>自店の検索状況を、AIO・SEO・MEOの3つの視点で無料診断しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 

@@ -47,9 +47,9 @@ faq:
 
 **「AI開発補助金」は制度名ではなく、自社開発に使える複数制度をまとめた通称です。**自社で独自のAIシステムや新サービスを開発する際に使える補助金をこう呼びますが、「AI導入補助金」と混同されがちなため、まずこの違いを整理します。
 
-あわせて[ものづくり補助金は美容室で使える？](/hojokin/monozukuri-hojokin-biyoushitsu/)もご覧ください。
+関連する内容を先に押さえるなら、[ものづくり補助金は美容室で使える？](/hojokin/monozukuri-hojokin-biyoushitsu/)が参考になります。
 
-あわせて[農業の倉庫投資は建物費NG](/hojokin/monozukuri-hojokin-nougyou-souko/)もご覧ください。
+関連する内容として[農業の倉庫投資は建物費NG](/hojokin/monozukuri-hojokin-nougyou-souko/)も公開しています。
 
 近い論点を[クリニックのIT導入補助金](/hojokin/it-hojokin-clinic/)で扱っています。
 
@@ -62,6 +62,8 @@ faq:
 ## 自社開発のAIに使える3つの補助金制度
 
 **自社開発のAIに使える主な制度は、新事業進出・ものづくり商業サービス補助金、省力化投資補助金（一般型）、小規模事業者持続化補助金の3つです。**投資規模と開発の内容によって、向いている制度が変わります。
+
+関連する内容として[農業の補助金を世界と比較｜日本の3つの違いと使い方](/blog/nougyou-hojokin-sekai-hikaku/)も公開しています。
 
 <figure><img src="/images/ai-kaihatsu-hojokin/kaihatsu3.png" alt="自社開発のAIに使える3制度と上限額: ものづくり系は上限9,000万円、省力化投資は上限1億円、持続化補助金は上限250万円"><figcaption>自社開発のAIに使える3制度と上限額</figcaption></figure>
 

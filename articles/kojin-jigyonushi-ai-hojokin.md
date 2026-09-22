@@ -97,7 +97,9 @@ faq:
 
 **個人事業主も法人と同じ申請枠から選べ、上限額も変わりません。**通常枠は最大450万円、インボイス対応類型・電子取引類型は最大350万円です。
 
-関連する内容については、[会計ソフトの補助金｜個人事業主が使える2つの枠と補助率](/blog/it-hojokin-kojinjigyonushi-kaikeisoft/)にまとめています。
+近い論点を[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)で扱っています。
+
+関連する内容は、[ものづくり補助金2025年度](/blog/monozukuri-hojokin-2025-kojinjigyonushi/)で解説しています。
 
 あわせて[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)もご覧ください。
 
@@ -117,7 +119,6 @@ faq:
 
 **個人事業主の申請は、GビズID取得、支援事業者選定、交付申請、交付決定後の発注という4ステップで進みます。**流れ自体は法人と同じです。
 
-
 あわせて[中小企業成長加速化補助金](/blog/seicho-kasokuka-hojokin-schedule/)もご覧ください。
 
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/flow4.png" alt="GビズID取得から交付決定までの4ステップ: GビズID取得（プライムを申請）、支援事業者選定（ツールを決める）、交付申請（事業計画書を提出）、交付決定後に発注（決定前はNG）"><figcaption>GビズID取得から交付決定までの4ステップ</figcaption></figure>
@@ -132,10 +133,6 @@ faq:
 
 **個人事業主の申請でつまずきやすいのは、開業年数の見落とし、書類準備の後回し、GビズID取得の遅れの3パターンです。**制度の複雑さより、準備の順番のミスが原因になっています。
 
-
-近い論点を[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)で扱っています。
-
-関連する内容として[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)も公開しています。
 
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/ngok.png" alt="個人事業主の申請でよくあるNG・OK: NG例は開業1年未満で申請・証明書取得を後回し・GビズID未取得のまま進める、OK例は開業1年経過を確認・証明書を早めに取得・GビズIDを先に取得"><figcaption>個人事業主の申請でよくあるNG・OK</figcaption></figure>
 
@@ -153,9 +150,6 @@ faq:
 ## 個人事業主におすすめの対象ツールの選び方
 
 **個人事業主が選ぶべきツールは、自分1人でも運用できる会計・請求・顧客対応の分野が中心です。**従業員が少ない分、複数の業務を一つのツールで効率化できるかを基準に選ぶと失敗しにくくなります。
-
-
-関連する内容として[補助金でAIチャットボット導入｜対象条件と申請の流れ](/blog/ai-hojokin-chatbot-donyu/)も公開しています。
 
 たとえば会計・請求書ソフトは、確定申告の作業負担を直接減らせます。
 

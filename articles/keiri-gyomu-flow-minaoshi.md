@@ -105,13 +105,7 @@ faq:
 
 経理の業務フロー見直しは、可視化・課題特定・再設計という3ステップで進めます。
 
-関連する内容については、[経理の業務フローテンプレート4選](/keiri-jitsumu/keiri-gyomu-flow-template/)にまとめています。
-
-あわせて[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)もご覧ください。
-
 実際の進め方は[経理の業務フローチャートの書き方](/blog/keiri-gyomu-flowchart-kakikata/)でも扱っています。
-
-初めて自分で経理を担う場合は、[経理のやり方を初心者向けに整理した5ステップ](/blog/keiri-yarikata-shoshinsha/)から見直すと、フローの土台を作りやすくなります。
 
 <figure><img src="/images/keiri-gyomu-flow-minaoshi/step.png" alt="経理の業務フロー見直し3ステップ: 現状を可視化する、課題を特定する、フローを再設計する" loading="lazy"><figcaption>経理の業務フロー見直し3ステップ</figcaption></figure>
 
@@ -134,8 +128,6 @@ faq:
 ## 業務フロー図の書き方｜可視化のコツと使うツール
 
 業務フロー図は、担当者・作業・承認の流れを1枚の図にまとめると、課題が一目で分かります。
-
-関連する内容として[経理の仕事を効率化する9つの方法](/blog/keiri-shigoto-koritsuka/)も公開しています。
 
 | ツール | 特徴 | 向いている場面 |
 |:--|:--|:--|

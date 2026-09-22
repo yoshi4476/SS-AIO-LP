@@ -91,6 +91,8 @@ BtoBリード獲得の方法を見直す必要があるのは、施策ごとの�
 
 BtoBリード獲得の主な方法は、展示会・Web広告・コンテンツSEO・ホワイトペーパー・ウェビナー・紹介の6つに整理できます。
 
+近い論点を[整骨院の集客イベント5選](/ai-marketing/seikotsuin-shukyaku-event/)で扱っています。
+
 関連する内容として[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)も公開しています。
 
 | 方法 | 即効性 | コスト傾向 | 向いている検討フェーズ |
@@ -156,8 +158,6 @@ AI検索時代のBtoBリード獲得では、検討初期段階の情報収集�
 ## BtoBリード獲得を始める3ステップ
 
 始め方は、現状棚卸し・検討フェーズ別の配置・小さく試すという3ステップで進めると迷いません。
-
-関連する内容として[OB客紹介の仕組み化とは？](/ai-marketing/obkyaku-shoukai-shikumi/)も公開しています。
 
 <figure><img src="/images/btob-lead-kakutoku-hoho/steps.png" alt="BtoBリード獲得を始める3ステップ: 現状棚卸しで既存チャネルの成果を洗い出す、検討フェーズ別に施策を配置する、小さく試して伸びた施策に予算を寄せる" loading="lazy"><figcaption>BtoBリード獲得を始める3ステップ</figcaption></figure>
 

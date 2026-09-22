@@ -196,6 +196,18 @@ jobs:
 
       # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
+      # 順位そのものは保証できない。保証できるのは「順位を決める要因のうち
+      # こちら側にあるものを毎回100%満たすこと」。その達成率を毎週出す
+      - name: こちら側で決まる要因の達成率
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/guarantee.py || true
+          rm -f indexing-service-account.json
+
       - name: 盤面の空きを出す（業種 × 手法）
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}

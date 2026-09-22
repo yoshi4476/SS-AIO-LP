@@ -62,7 +62,7 @@ AI導入費用は、ツール利用料・初期設定費・運用費の3つに�
 AI導入費用は、どの業務にAIを使うかで大きく変わります。汎用的な生成AIチャットは安価に始められますが、専用のチャットボットや画像認識AIは費用帯が上がります。
 
 
-あわせて[AI導入補助金の必要書類一覧と準備の順番](/blog/ai-hojokin-hitsuyo-shorui-hojin/)もご覧ください。
+近い論点を[AI導入補助金の必要書類一覧と準備の順番](/blog/ai-hojokin-hitsuyo-shorui-hojin/)で扱っています。
 <a href="https://aismiley.co.jp/ai_news/chatgpt-business-plan/" target="_blank" rel="noopener">ChatGPT Businessプランの料金紹介記事</a>によると、<strong>法人向けのChatGPT Businessは1ユーザーあたり月額20〜25ドル（年払い・月払い）</strong>で契約できます。
 
 2026年8月時点のレートで換算すると、1人あたり月3,000〜4,000円程度の負担感です。文章作成やアイデア出しといった総務・企画系の業務なら、この価格帯で十分に運用できます。
@@ -102,7 +102,7 @@ AI導入費用は、どの業務にAIを使うかで大きく変わります。�
 **デジタル化・AI導入補助金2026（旧IT導入補助金）を使えば、対象経費の1/2〜2/3が補助され、実質的な自己負担を大きく減らせます。**費用の高さだけを見て導入を諦める前に、補助金の対象になるかを確認する価値があります。
 
 
-関連する内容として[農業の補助金の申請方法｜制度の選び方と5ステップ](/blog/nougyou-hojokin-shinsei-houhou/)も公開しています。
+近い論点を[農業の補助金の申請方法｜制度の選び方と5ステップ](/blog/nougyou-hojokin-shinsei-houhou/)で扱っています。
 
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026事務局の通常枠ページ</a>によると、<strong>通常枠の補助率は1/2以内（一定の賃上げ要件を満たす場合は2/3以内）で、補助額は1プロセス以上で5万円〜150万円未満、4プロセス以上導入すると150万円〜450万円以下</strong>まで拡大されます。
 

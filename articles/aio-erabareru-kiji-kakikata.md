@@ -59,7 +59,7 @@ AIに選ばれる記事とは、生成AIが回答を作る際に、文単位・�
 
 選ばれる記事とそうでない記事の違いは、結論の位置・代名詞の使い方・事実と意見の分け方の3点に表れます。
 
-あわせて[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)もご覧ください。
+関連する内容として[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)も公開しています。
 
 <figure><img src="/images/aio-erabareru-kiji-kakikata/before-after.png" alt="選ばれない書き方と選ばれる書き方: 選ばれない書き方は前置きから書き始める・「これ」「それ」を多用する・事実と感想を1文に混ぜる、選ばれる書き方は結論から断言で書き始める・主語を明示して言い換える・事実と感想を文で分ける" loading="lazy"><figcaption>選ばれない書き方と選ばれる書き方</figcaption></figure>
 

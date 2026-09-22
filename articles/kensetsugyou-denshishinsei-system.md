@@ -45,13 +45,13 @@ faq:
 
 **「建設業 電子申請システム」という言葉には、経審・許可用の行政ポータルと、民間の業務ツールという別の意味が混ざっています。**どちらを指しているかで、補助金の使える・使えないが真逆になります。
 
+関連する内容として[建設業の助成金4制度｜補助金との違いと使う順番](/blog/kensetsugyou-joseikin-hikaku/)も公開しています。
+
 関連する内容として[開業届の電子申請｜個人事業主がe-Taxで出す5ステップ](/hojokin/kojinjigyonushi-kaigyoutodoke-denshishinsei/)も公開しています。
 
 つまずきやすい点は[福岡県の建設業電子申請「JCIP」窓口と手数料の注意点3つ](/blog/fukuoka-kensetsugyou-denshishinsei/)で整理しています。
 
 費用の目安は、[建設業の電子申請は行政書士に依頼すべき？](/blog/kensetsugyou-denshishinsei-gyoseishoshi/)で解説しています。
-
-実際の進め方を先に押さえるなら、[建設業の電子申請システムを閲覧する2つの方法](/blog/kensetsugyou-denshishinsei-etsuran/)が参考になります。
 
 私たちが登録支援事業者として相談を受ける中で、==「電子申請システムを補助金で導入したい」というご相談の中身が、実は経審のオンライン申請の操作方法だった==という場面に何度も出会っています。この2つを区別しないまま話を進めると、後の手続きでつまずきやすくなります。
 
@@ -60,8 +60,6 @@ faq:
 ## 経審・建設業許可のJCIPはIT導入補助金の対象外
 
 **経審・建設業許可の電子申請システム「JCIP」は国土交通省が運営する無料の行政ポータルで、IT導入補助金の対象にはなりません。**購入する製品ではなく、行政手続きの窓口そのものだからです。
-
-実際の進め方については、[建設業許可の電子申請](/blog/kensetsugyou-kyoka-denshishinsei/)にまとめています。
 
 <div class="definition-box"><span class="term">JCIPとは</span>、正式名称「建設業許可・経営事項審査電子申請システム」の略称です。<a href="https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/tochi_fudousan_kensetsugyo_const_tk1_000001_00019.html" target="_blank" rel="noopener">国土交通省の案内</a>によると、<strong>2023年1月10日から運用が始まり</strong>、建設業許可や経営事項審査の申請・届出をインターネット経由で行えます。</div>
 

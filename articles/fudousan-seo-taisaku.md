@@ -47,6 +47,8 @@ diagrams:
 
 **不動産SEOとは、自社サイトの検索順位を上げ、比較検討中の見込み客に会社ごと見つけてもらう施策です。**
 
+近い論点を[不動産の集客代行とは？](/ai-marketing/fudousan-shukyaku-daikou/)で扱っています。
+
 <div class="definition-box"><span class="term">不動産SEOとは</span>、「エリア名+賃貸」「エリア名+不動産会社」のように検索されたとき、自社のホームページやコラム記事が上位に表示され、物件情報だけでなく会社の信頼性・専門性まで伝えて問い合わせにつなげるための一連の施策です。ポータルサイトへの物件掲載とは別物で、あくまで「自社が運用できる資産」を検索エンジン経由で育てる取り組みを指します。</div>
 
 関連する内容は[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)、マップ経由の集客は[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)でも扱っています。
@@ -56,6 +58,8 @@ diagrams:
 ## 宅建業者13万社時代に不動産SEOが欠かせない理由
 
 **宅建業者が11年連続で増える中、検索で見つかる会社だけが新規の反響を得られます。**
+
+あわせて[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)もご覧ください。
 
 <a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。供給過多の市場では、ポータルへの物件掲載だけで反響が入ってきた時代は終わりつつあります。
 
@@ -136,8 +140,6 @@ diagrams:
 ## 物件ポータルと自社SEOの役割の違い
 
 物件ポータルは物件を探す入口、自社SEOは会社を比較し選ぶ入口という役割の違いがあります。
-
-関連する内容として[SaaS指名検索の増やし方｜AI時代に効く5つの施策](/aio/saas-shimei-kensaku-fuyashikata/)も公開しています。
 
 <figure><img src="/images/fudousan-seo-taisaku/portal-vs-seo.png" alt="物件ポータルと自社SEOの役割の違い: 物件ポータルは物件そのものを探す入口でSUUMO等への出稿に依存し条件検索からの流入、自社SEOは会社を比較し選ぶ入口で自社で資産として蓄積でき検討後期の指名検索に効く" loading="lazy"><figcaption>物件ポータルと自社SEO（コラム・エリアページ）は役割が異なり、両方の運用が前提になります</figcaption></figure>
 

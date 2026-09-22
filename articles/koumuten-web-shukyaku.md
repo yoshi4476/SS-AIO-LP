@@ -69,6 +69,8 @@ faq:
 
 5つの施策は役割が異なり、比較検討の受け皿になるのはホームページだけです。
 
+関連する内容として[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)も公開しています。
+
 <figure><img src="/images/koumuten-web-shukyaku/channels.png" alt="工務店のWeb集客 主要5施策: ホームページ、SEO対策、MEO対策、SNS(インスタ)、Web広告" loading="lazy"><figcaption>工務店のWeb集客 主要5施策</figcaption></figure>
 
 | 施策 | 主な役割 | 向いている検索・行動 |
@@ -144,8 +146,6 @@ Web集客が伸びない工務店には、施策の質より前に共通するNG
 ## 公開後に成果を伸ばす3つの運用ポイント
 
 Web集客はどの施策も、公開・登録した後の運用を続けて初めて成果につながります。
-
-関連して、[見学会集客を伸ばす6つの施策｜申込を増やす導線設計](/ai-marketing/kengakukai-shukyaku-hoho/)もあわせてご確認ください。
 
 **ポイント1: 検索語を月1回は確認する。**どのエリア名・キーワードからの流入が多いかを把握すると、次に強化すべき施策が見えてきます。
 

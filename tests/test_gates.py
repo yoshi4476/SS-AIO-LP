@@ -2547,6 +2547,60 @@ def test_howto_is_emitted_for_step_articles():
     print(f"  OK  手順記事に HowTo を出している（{n_howto}件 / JSON-LD {n_block}件すべて正常）")
 
 
+def test_guarantee_rate_is_measured():
+    """保証できる部分が数字になっているか。
+
+    順位そのものは保証できない。決めるのはGoogleで、アルゴリズムの更新も
+    競合の動きもこちらの外側にある。保証できるのは「順位を決める要因のうち
+    こちら側にあるものを毎回100%満たすこと」で、それは数字にできる。
+
+    あわせて、達成率に混ぜる基準に根拠があることも見る。
+    根拠の無い基準（実測で否定された下限12本など）を混ぜると、
+    達成率そのものが意味を失う。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    p = ROOT / "scripts" / "guarantee.py"
+    if not p.is_file():
+        print("  NG  scripts/guarantee.py がありません")
+        FAIL.append("guarantee_rate")
+        return
+    src = p.read_text(encoding="utf-8")
+
+    # 保証しないものを「保証する」と書いていないか
+    for ng in ("順位を保証", "上位表示を保証", "確実に上位"):
+        if ng in src:
+            print(f"  NG  保証できないことを保証すると書いています: {ng}")
+            FAIL.append("guarantee_rate")
+            return
+    if "順位そのものは保証できない" not in src:
+        print("  NG  何を保証しないのかが書かれていません")
+        FAIL.append("guarantee_rate")
+        return
+
+    # 実測で否定された下限を、達成率に数えていないか
+    if '"止まっている記事の内部リンクが12本以上", n_stuck_ok' in src:
+        print("  NG  裏づけの無い基準（内部リンク12本）を達成率に数えています")
+        FAIL.append("guarantee_rate")
+        return
+
+    import importlib
+    import guarantee as G
+    importlib.reload(G)
+    for fn in ("published", "article_checks", "schema_coverage", "site_checks"):
+        if not hasattr(G, fn):
+            print(f"  NG  guarantee.{fn} がありません")
+            FAIL.append("guarantee_rate")
+            return
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    fd = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
+    if "guarantee.py" not in wf or "guarantee.py" not in fd:
+        print("  NG  達成率が週次か通知に載っていません")
+        FAIL.append("guarantee_rate")
+        return
+    print("  OK  こちら側で決まる要因の達成率を毎週出し、通知に載せている")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2609,7 +2663,8 @@ def main():
               test_stuck_articles_are_pushed_every_week,
               test_publish_gate_actually_blocks,
               test_coverage_matrix_shows_gaps,
-              test_howto_is_emitted_for_step_articles):
+              test_howto_is_emitted_for_step_articles,
+              test_guarantee_rate_is_measured):
         try:
             t()
         except Exception as e:

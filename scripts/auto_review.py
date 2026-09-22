@@ -247,7 +247,21 @@ def inbound_count(paths=None):
     return n
 
 
-def fix(path, item, write, inb=None, floor=5):
+def stuck_floor():
+    """1ページ目の手前で止まっている記事は、下限を厚くする。
+
+    全記事一律5本にしていたため、link_boost が止まっている記事へ足した分を
+    ここが外し、足しては消すの繰り返しになっていた（実測で達成率4.3%）。
+    順位で止まっている記事だけ12本まで守る。
+    """
+    try:
+        import rank_rescue as RR
+        return {r["slug"]: 12 for r in RR.diagnose()[0]}
+    except Exception:
+        return {}
+
+
+def fix(path, item, write, inb=None, floor=5, floors=None):
     """言い回しを振り直し、なお多すぎる分は後ろから外す
 
     外すのは、送り先の被リンクが下限を割らないものだけ。割るものまで外すと、
@@ -272,7 +286,8 @@ def fix(path, item, write, inb=None, floor=5):
             m = re.search(r"\]\([^)\s]*?/([a-z0-9-]+)/?[)#]", x["line"])
             tgt = m.group(1) if m else None
             # 送り先が痩せるなら残す。言い回しだけ振り直す
-            if inb is not None and tgt and inb.get(tgt, 0) - 1 < floor:
+            need = (floors or {}).get(tgt, floor)
+            if inb is not None and tgt and inb.get(tgt, 0) - 1 < need:
                 continue
             if tgt and inb is not None:
                 inb[tgt] -= 1
@@ -376,9 +391,10 @@ def main():
     rw = dr = 0
     skipped = []
     inb = inbound_count(paths)
+    floors = stuck_floor()          # 止まっている記事は厚く守る
     for x in bad:
         p = ROOT / "articles" / f"{x['slug']}.md"
-        r, d, ng = fix(p, x, write=True, inb=inb)
+        r, d, ng = fix(p, x, write=True, inb=inb, floors=floors)
         if ng:
             skipped.append((x["slug"], ng))
             continue

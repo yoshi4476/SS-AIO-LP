@@ -49,9 +49,7 @@ faq:
 
 **経理の自動化は、エクセルの関数とマクロを組み合わせれば、手作業の転記や集計をかなり減らせます。**
 
-関連する内容は[エクセル経理の効率化のコツ7選](/blog/excel-keiri-koritsuka/)で整理しています。
-
-つまずきやすい点は、[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)で解説しています。
+あわせて[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)もご覧ください。
 
 <div class="definition-box"><span class="term">エクセルでの経理自動化とは</span>、関数・マクロ・Power Queryなど標準機能を使い、入力された取引データの集計や転記を人の手を介さずに処理する仕組みを指します。==会計ソフトのような自動仕訳の学習機能は持たないため、集計や転記の効率化が中心==になる点が、クラウド会計ソフトとの大きな違いです。</div>
 
@@ -64,8 +62,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 ## エクセルで経理を自動化する4つの方法
 
 エクセルの経理自動化には、関数による集計・マクロによる定型処理・Power Queryの外部データ取込・RPA連携という4つの方法があります。
-
-前提となる考え方は[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)でも扱っています。
 
 <figure><img src="/images/keiri-excel-jidoka/houhou.png" alt="経理のエクセル自動化に使える4つの機能: SUM・VLOOKUPなど関数による自動集計、マクロ・VBAによる定型作業の自動実行、Power Queryによる外部データの自動取込、RPAツールと連携した転記の自動化" loading="lazy"><figcaption>経理のエクセル自動化に使える4つの機能</figcaption></figure>
 
@@ -106,8 +102,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 ## エクセル経理を自動化する4つの手順
 
 エクセル経理の自動化は、現状の洗い出しから運用ルールの整備まで、4つの手順で進めると失敗しにくくなります。
-
-実際の例は[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)で整理しています。
 
 <figure><img src="/images/keiri-excel-jidoka/tejun.png" alt="エクセル経理を自動化する4つの手順: 現状の作業を洗い出す、自動化する作業と方法を選ぶ、関数・マクロを設計してテストする、運用ルールとバックアップ体制を整える" loading="lazy"><figcaption>エクセル経理を自動化する4つの手順</figcaption></figure>
 

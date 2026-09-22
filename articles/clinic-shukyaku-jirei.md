@@ -47,6 +47,8 @@ diagrams:
 
 **クリニックの集客事例は、MEO・SEO・AI検索・口コミ・予約導線の5パターンに大別できます。**口コミの返信文そのものは[病院・クリニックの口コミ返信](/meo/byoin-kuchikomi-henshin-reibun/)にまとめています。
 
+実際の例については、[クリニックDX事例5選](/ai-marketing/clinic-dx-jirei/)にまとめています。
+
 選ぶときの基準は[クリニックの集客集患サポートとは？3つの型と選び方](/ai-marketing/clinic-shukyaku-shukan-support/)でも扱っています。
 
 <div class="definition-box"><span class="term">クリニックの集客事例とは</span>、来院につながった施策のうち、他院でも再現しやすい「型」として整理したものです。特定の医院だけの一回限りの成功ではなく、繰り返し効果が出やすい打ち手を指します。</div>

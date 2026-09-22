@@ -42,7 +42,6 @@ faq:
   - q: AI Overviewが表示されない理由を先に確認するには？
     a: 検索語の種類を見ます。答えが一つに定まる語や取引目的の語では、そもそも出ません。
 ---
-
 **AIO対策をしても表示されない主な原因は、検索順位の不足・AIクローラーの遮断・抽出しにくい文章構造・独自性の不足の4つに集約されます。**「対策したのに変化がない」と感じたら、まず自社の状態がどの原因に当てはまるかを切り分けることが近道です。本記事では8つの原因を整理し、自分でできる診断手順と対処法を順番に解説します。
 
 <div class="target-reader">この記事は、AIO対策に着手しているのに検索結果やAI回答での手応えを感じられない中小企業の経営者・マーケティング担当者向けです。</div>
@@ -111,9 +110,11 @@ Google公式は、<a href="https://developers.google.com/search/docs/appearance/
 
 **診断は、順位確認→クローラー確認→構造確認→鮮度確認の順で進めます。**
 
-関連する内容として[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)も公開しています。
+近い論点を[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)で扱っています。
 
-関連する内容は[税理士の集客ができない原因5つと処方箋【2026年】](/ai-marketing/zeirishi-shukyaku-dekinai/)でも扱っています。
+あわせて[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)もご覧ください。
+
+関連する内容として[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)も公開しています。
 
 <figure><img src="/images/aio-taisaku-hyouji-sarenai/shindan-flow.png" alt="表示されない原因を診断する4ステップ: 順位を確認、クローラーを確認、構造を確認、鮮度を確認" width="1200" height="400" loading="lazy"><figcaption>表示されない原因を診断する4ステップ（当メディア作成）</figcaption></figure>
 

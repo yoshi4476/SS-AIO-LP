@@ -47,13 +47,11 @@ faq:
 
 **対象になるかどうかは、中小企業者かどうかではなく、業種ごとの従業員数基準を満たす小規模事業者かどうかで決まります。**「うちは中小企業だから対象のはず」という思い込みが、誤判定の一番多い原因です。
 
+あわせて[ものづくり補助金は小売業に使えない？](/blog/monozukuri-hojokin-kourigyou/)もご覧ください。
+
 あわせて[会計ソフトの補助金｜個人事業主が使える2つの枠と補助率](/blog/it-hojokin-kojinjigyonushi-kaikeisoft/)もご覧ください。
 
 関連する内容として[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)も公開しています。
-
-対象になる範囲を先に押さえるなら、[小規模事業者持続化補助金2025](/blog/jizokuka-hojokin-kensetsugyou/)が参考になります。
-
-関連する内容は[中小企業成長加速化補助金](/blog/seicho-kasokuka-hojokin-schedule/)で整理しています。
 
 <div class="definition-box"><span class="term">小規模事業者とは</span>、中小企業者の中でもさらに従業員数が少ない事業者を指す区分です。商業・サービス業（宿泊業・娯楽業を除く）は5人以下、宿泊業・娯楽業と製造業その他は20人以下が基準になります。</div>
 
@@ -79,8 +77,6 @@ faq:
 ## 自社が小規模事業者に該当するかを確認する4ステップ
 
 **確認は、業種→従業員数→対象経費→使う制度の順に進めると迷いません。**順番を守れば、初めての方でも自社の立ち位置を把握できます。
-
-あわせて[ものづくり補助金は製造業でどう使う？](/blog/monozukuri-hojokin-seizougyou/)もご覧ください。
 
 <figure><img src="/images/jizokuka-hojokin-chusho-kigyo-taisho/kakunin.png" alt="自社が対象か確認する4ステップ: 業種を確認する（4区分のどれか）、従業員数を確認する（小規模事業者に該当するか）、対象経費を確認する（販路開拓か設備投資か）、使う制度を選ぶ（持続化か他の補助金か）" loading="lazy"><figcaption>自社が対象か確認する4ステップ</figcaption></figure>
 

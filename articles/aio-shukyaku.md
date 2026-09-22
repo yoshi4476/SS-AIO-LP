@@ -53,8 +53,6 @@ faq:
 
 近い論点を[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で扱っています。
 
-関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
-
 <div class="definition-box"><span class="term">AIO集客とは</span>、Google の AI Overview や ChatGPT・Perplexity などの生成AIが検索意図に答える際、自社の情報を引用元として選ばせ、そこから指名検索・問い合わせ・来店につなげる集客の考え方です。</div>
 
 SEO集客とAIO集客は、ゴールにしている場面が違います。SEO集客は「検索結果の一覧で選ばれ、クリックされること」がゴールです。一方でAIO集客は、AIがまとめた回答の中で、社名や実績ごと引用されることがゴールになります。
@@ -76,6 +74,7 @@ AI OverviewはGooglebotが集めた検索結果を土台に生成されます。
 
 **AIO集客は、比較検討に時間がかかる業種ほど効果が出やすく、その場の衝動で決まる業種には向きません。**
 
+近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
 
 関連する内容として[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)も公開しています。
 

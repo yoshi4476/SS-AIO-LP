@@ -51,8 +51,6 @@ faq:
 
 実際の進め方については、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)にまとめています。
 
-実際の進め方は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でも扱っています。
-
 <div class="definition-box"><span class="term">クリニックのインスタ集客とは</span>、Instagramのビジネスアカウントで院内風景・スタッフ紹介・健康コラムなどを発信し、フォロワーとの接点を積み上げて来院や指名検索につなげる一連の活動を指します。症例の誇張や体験談の投稿ではなく、事実に基づく発信の継続が土台になります。</div>
 
 [クリニックのMEO対策](/meo/clinic-meo-taisaku/)が「地域名×診療科」の検索で見つけてもらうための施策であるのに対し、インスタ集客は「見つけた後に安心してもらう」ための施策です。

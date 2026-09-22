@@ -69,8 +69,6 @@ faq:
 
 近い論点を[IT導入補助金のおすすめの選び方](/hojokin/it-hojokin-osusume/)で扱っています。
 
-あわせて[農業の倉庫投資は建物費NG](/hojokin/monozukuri-hojokin-nougyou-souko/)もご覧ください。
-
 実際の進め方は、[個人事業主がパソコンを補助金で買う方法｜3制度を比較](/hojokin/kojinjigyonushi-pc-hojokin-hikaku/)で解説しています。
 
 関連して、[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)もあわせてご確認ください。
@@ -112,8 +110,6 @@ IT導入補助金（AI導入補助金2026）の通常枠は、補助上限額が
 
 **個人事業主がAI・IT導入補助金を申請する流れは、GビズID取得、支援事業者選定、交付申請、交付決定後の発注、実績報告の5ステップです。**法人と同じ流れで進められます。
 
-実際の進め方を先に押さえるなら、[e-Gov電子申請とは](/blog/egov-denshishinsei-kojinjigyonushi/)が参考になります。
-
 <figure><img src="/images/kojinjigyonushi-kyufukin-shinsei/flow5.png" alt="AI・IT導入補助金の申請5ステップ: GビズID取得（プライムを申請）、支援事業者選定（ツールを決める）、交付申請（事業計画書提出）、交付決定後発注（決定前はNG）、実績報告（証拠書類提出）"><figcaption>AI・IT導入補助金の申請5ステップ</figcaption></figure>
 
 最初のGビズIDプライムは発行までに約2〜3週間かかります。**給付金と違い、補助金は準備の段階から時間がかかる**ため、早めの着手が全体スケジュールを左右します。
@@ -147,8 +143,6 @@ IT導入補助金（AI導入補助金2026）の通常枠は、補助上限額が
 ## 個人事業主が給付金・補助金を使うべきタイミングと選び方
 
 **個人事業主が制度を選ぶ基準は、導入したい内容がツール購入なのか販路開拓なのかで決まります。**目的が明確なほど、制度選びで迷わなくなります。
-
-近い論点を[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)で扱っています。
 
 会計ソフトや受発注ソフトを導入したい場合は、IT導入補助金（AI導入補助金2026）が最も使いやすい制度です。
 

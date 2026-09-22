@@ -67,7 +67,6 @@ faq:
 
 **個人事業主も、業種ごとの従業員数の要件を満たせば小規模事業者持続化補助金の対象です。**法人か個人かでは判断されません。
 
-
 あわせて[運送業の実績報告書｜傭車の契約名義とデジタコ対応の壁](/blog/unsougyou-jissekihoukokusho/)もご覧ください。
 
 <figure><img src="/images/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/taisho.png" alt="個人事業主が対象になる主な要件: 商業・サービス業5人以下、宿泊業・娯楽業20人以下、製造業その他20人以下、法人・個人問わず対象"><figcaption>個人事業主が対象になる主な要件</figcaption></figure>
@@ -150,7 +149,6 @@ faq:
 ## 申請から採択発表までの流れとスケジュール
 
 **申請から採択発表までは、公募開始から結果通知までおよそ4〜5か月かかります。**逆算してスケジュールを組むと余裕を持てます。
-
 
 <figure><img src="/images/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/nagare.png" alt="申請から採択発表までの流れ: 公募開始（要領を確認）、商工会に相談（事業計画書作成）、電子申請（jGrantsで提出）、審査（基礎・計画・加点）、採択発表（結果通知）"><figcaption>申請から採択発表までの流れ</figcaption></figure>
 

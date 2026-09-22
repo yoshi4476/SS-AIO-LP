@@ -49,11 +49,13 @@ faq:
 
 **結論として、事業再構築補助金は飲食店も対象で、業態転換や新分野展開の投資が数多く採択されてきました。**制度上、業種による除外はなく、居酒屋・カフェ・レストランなど幅広い業態が申請していました。
 
+近い論点を[小規模事業者持続化補助金](/blog/jizokuka-hojokin-clinic/)で扱っています。
+
+実際の例については、[ものづくり補助金は飲食店で使える？採択事例3パターン](/blog/monozukuri-hojokin-inshokuten-jirei/)にまとめています。
+
 あわせて[ものづくり補助金はクリニックで使える？](/blog/monozukuri-hojokin-clinic/)もご覧ください。
 
 実際の例については、[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)にまとめています。
-
-実際の例は[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)でも扱っています。
 
 <div class="definition-box"><span class="term">事業再構築補助金とは</span>、新型コロナウイルス対応の緊急経済対策として2021年に始まった制度です。事業転換や業態転換に伴う設備投資を、新市場開拓や新分野展開を条件に支援していました。</div>
 
@@ -90,8 +92,6 @@ faq:
 ## 今使える後継制度｜新事業進出・ものづくり商業サービス補助金
 
 **2026年8月時点で飲食店が使えるのは「新事業進出・ものづくり商業サービス補助金」です。**事業再構築補助金から2段階先の制度にあたります。
-
-近い論点を[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)で扱っています。
 
 <figure><img src="/images/jigyou-saikouchiku-inshokuten-jirei/seido-flow.png" alt="事業再構築補助金から今の制度までの流れ: 事業再構築補助金は2025年3月終了、新事業進出補助金は2026年6月終了、新事業進出ものづくり補助金が現在申請可能" loading="lazy"><figcaption>事業再構築補助金から今の制度までの流れ</figcaption></figure>
 

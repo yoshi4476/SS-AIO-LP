@@ -51,6 +51,8 @@ faq:
 
 **電子申請・届出システムとは、介護事業所の指定申請や届出をオンラインで行える厚生労働省の仕組みです。**全国どの自治体に対しても、同じシステムから手続きを進められます。
 
+費用の目安は、[介護事業所のAI導入補助金はいくら？](/blog/kaigo-ai-hojokin-hojogaku-meyasu/)で解説しています。
+
 実際の進め方は[開業届の電子申請｜個人事業主がe-Taxで出す5ステップ](/hojokin/kojinjigyonushi-kaigyoutodoke-denshishinsei/)で整理しています。
 
 実際の進め方は、[建設業の電子申請システムを閲覧する2つの方法](/blog/kensetsugyou-denshishinsei-etsuran/)で解説しています。

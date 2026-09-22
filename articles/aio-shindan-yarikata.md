@@ -52,8 +52,9 @@ faq:
 
 **AIO診断とは、AI検索への引用されやすさを8つの視点で確認する作業です。ツールを使わなくても、ブラウザだけで無料でチェックできます。**
 
+近い論点を[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で扱っています。
 
-あわせて[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)もご覧ください。
+近い論点を[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)で扱っています。
 
 <div class="definition-box"><span class="term">AIO診断とは</span>、検索順位・記事の書き出し・構造化データ・クローラー許可など、AI検索(AI Overview・ChatGPT等)に引用されるための条件を、項目ごとにチェックすることです。</div>
 
@@ -128,11 +129,11 @@ AIO診断（無料・30秒）は、8つの質問に答えるだけで100点満�
 
 **AIO診断でよくある失敗は、一度診断して終わりにし、放置してしまうことです。**
 
+近い論点を[AIO SEO監査とは？](/aio/aio-seo-audit/)で扱っています。
+
 実際の進め方を先に押さえるなら、[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)が参考になります。
 
 関連する内容として[AI検索対応とは？公開前に済ませる7つの設定項目](/aio/ai-kensaku-taiou-settei/)も公開しています。
-
-選ぶときの基準は、[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)で解説しています。
 
 <div class="caution-box"><span class="box-title">注意: 診断は一度きりで終わらせない</span><br>AI検索のアルゴリズムも自社の記事も変化し続けます。月1回程度の再診断を前提にしてください。</div>
 

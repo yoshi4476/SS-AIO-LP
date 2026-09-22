@@ -143,7 +143,7 @@ M&Aの契約段階で、GBPのオーナー権をどちらのアカウントで�
 
 **新規アカウント開設・名称変更の先延ばし・口コミ返信の停止の3つが、M&A後の集患再建で繰り返される失敗パターンです。**どれも「後でまとめて対応しよう」という先送りから発生します。
 
-あわせて[口コミ返信テンプレート集｜星評価別の例文とAI活用術](/meo/googlemap-kuchikomi-henshin/)もご覧ください。
+関連する内容として[口コミ返信テンプレート集｜星評価別の例文とAI活用術](/meo/googlemap-kuchikomi-henshin/)も公開しています。
 
 <figure><img src="/images/clinic-ma-shukyaku-jirei/shippai3.png" alt="集患再建でよくある失敗3パターン: 新規アカウントを開設してしまう、名称変更を後回しにする、口コミ返信が止まってしまう" loading="lazy"><figcaption>集患再建でよくある失敗3パターン</figcaption></figure>
 

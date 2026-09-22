@@ -43,8 +43,8 @@ def _link_patterns():
     return internal_re, domains
 
 
-def main():
-    slug = sys.argv[1]
+def run(slug):
+    """1本を採点して checks を返す。CLI からも、全体の集計からも使う"""
     p = ROOT / "articles" / f"{slug}.md"
     if not p.exists():
         raise SystemExit(f"articles/{slug}.md が見つかりません")
@@ -201,6 +201,11 @@ def main():
     juyou = body_nc.count("重要です")
     add("「重要です」3回以下", juyou <= 3, f"{juyou}回")
 
+    return checks
+
+
+def main():
+    checks = run(sys.argv[1])
     # 警告（warn=True）は公開を止めない。記事が出ないほうが損失が大きいため
     fails = [c for c in checks if not c[1] and not c[3]]
     warns = [c for c in checks if not c[1] and c[3]]

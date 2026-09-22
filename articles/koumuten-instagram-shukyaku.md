@@ -80,6 +80,12 @@ faq:
 
 工務店にインスタ集客が必要な理由は、無料で始められ、投稿がそのまま実績として資産になるからです。
 
+あわせて[クリニックM&A後の集患再建](/meo/clinic-ma-shukyaku-jirei/)もご覧ください。
+
+あわせて[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)もご覧ください。
+
+近い論点を[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)で扱っています。
+
 <figure><img src="/images/koumuten-instagram-shukyaku/riyu.png" alt="工務店にインスタ集客が必要な3つの理由: 無料で始められる、事例が資産になる、不安を解消できる" loading="lazy"><figcaption>工務店にインスタ集客が必要な3つの理由</figcaption></figure>
 
 <a href="https://www.mlit.go.jp/report/press/house04_hh_000519.html" target="_blank" rel="noopener">国土交通省の調査</a>によると、回答した中小工務店・大工事業者の<strong>平均雇用社員数は4.4名、平均年間新築受注戸数は5.3戸</strong>です。広告費を大きくかけられない小規模事業者が大半という実態が、この調査から見えてきます。
@@ -97,6 +103,8 @@ faq:
 ## 工務店インスタ集客を成功させる5つの施策
 
 工務店インスタ集客の成功は、プロフィール整備から問い合わせ導線までの5つの施策で決まります。
+
+関連する内容として[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)も公開しています。
 
 <figure><img src="/images/koumuten-instagram-shukyaku/steps.png" alt="工務店インスタ集客を成功させる5つの施策: プロフィール整備、施工事例を投稿、ハッシュタグ活用、リールで発信、DM導線を作る" loading="lazy"><figcaption>工務店インスタ集客を成功させる5つの施策</figcaption></figure>
 
@@ -176,10 +184,6 @@ faq:
 ## AI検索時代の工務店インスタ集客
 
 AI検索の時代でも、インスタでの発信はホームページ・SEOと組み合わせて初めて集客の力になります。
-
-関連して、[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)もあわせてご確認ください。
-
-医療機関など規制業種向けの応用は、[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で解説しています。
 
 当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。画像中心のInstagram投稿はAIが直接読み取りにくいぶん、==反響のあった投稿はホームページの記事にも書き起こしてください==。手間はかかりますが、検索とAI回答の両方に拾われる、数少ない橋渡し役です。
 

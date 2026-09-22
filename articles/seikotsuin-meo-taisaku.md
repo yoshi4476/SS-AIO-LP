@@ -57,8 +57,6 @@ diagrams:
 
 関連する内容として[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)も公開しています。
 
-関連して、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もあわせてご確認ください。
-
 <div class="definition-box"><span class="term">整骨院のMEO（Map Engine Optimization）とは</span>、「地域名×整骨院」で検索されたとき、Googleマップの上位（特に目立つ上位3枠）に自院を表示させるための最適化のことです。整骨院の場合、同じ検索結果に無資格でも開業できる「整体院」「カイロプラクティック」が並ぶ点が、他業種のMEOと異なります。</div>
 
 MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)、医療機関向けの土台は[クリニックのMEO対策](/meo/clinic-meo-taisaku/)で解説しています。
@@ -70,6 +68,8 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 ## なぜ整骨院に「資格の証明」を軸にしたMEOが必要なのか
 
 整骨院に「資格の証明」を軸にしたMEOが必要な理由は、**競合密度の高さ**と**利用者の資格認識のあいまいさ**の2点です。
+
+あわせて[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)もご覧ください。
 
 <a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、柔道整復の施術所数は全国で<strong>50,919か所</strong>（令和4年度時点）にのぼります。この数字には、柔道整復師の資格を持たない整体院やカイロプラクティックの店舗数は含まれていません。つまり利用者が地図で目にする「整骨院・接骨院・整体」の候補群は、資格の有無が異なる施設が同じ土俵で表示されている状態です。
 

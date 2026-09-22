@@ -50,13 +50,11 @@ faq:
 
 **結論として、飲食店もものづくり補助金の対象ですが、審査の軸は店舗の見た目ではなく設備投資の中身です。**制度上は全業種が対象で、業種を理由に申請が却下されることはありません。ラーメン店・居酒屋・カフェ・惣菜販売を伴う店舗など、業態を問わず同じ基準で審査されます。
 
+あわせて[小規模事業者持続化補助金2025](/blog/jizokuka-hojokin-kensetsugyou/)もご覧ください。
+
 関連する内容は、[農業の倉庫投資は建物費NG](/blog/monozukuri-hojokin-nougyou-souko/)で解説しています。
 
-関連する内容として[小規模事業者持続化補助金](/hojokin/jizokuka-hojokin-inshokuten-jirei/)も公開しています。
-
 他業種の状況が気になる場合は、[ものづくり補助金の農業分野における採択事例](/blog/monozukuri-hojokin-nougyou-jirei/)も、専用設備への投資が評価される点は共通しています。
-
-実際の例は[ものづくり補助金｜建設業の採択事例3業種と上限9,000万円](/blog/monozukuri-hojokin-kensetsugyou-jirei/)でも扱っています。
 
 対象になる範囲を先に押さえるなら、[ものづくり補助金は小売業に使えない？](/blog/monozukuri-hojokin-kourigyou/)が参考になります。
 

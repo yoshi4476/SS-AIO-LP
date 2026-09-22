@@ -133,6 +133,8 @@ faq:
 
 予算をかける集客アイデアは、ポータルサイト掲載と看板・チラシの見直しの2つです。
 
+近い論点を[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)で扱っています。
+
 無料施策が習慣として根づいてから検討する段階の施策です。順番を飛ばして予算をかけても、土台がなければ効果は続きません。
 
 ### アイデア11: ポータルサイトに掲載する
@@ -169,9 +171,7 @@ faq:
 
 集客アイデアが定着しない美容室は、同時着手・効果測定なし・担当者任せの3つに共通点があります。
 
-関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
-
-関連する内容として[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)も公開しています。
+関連する内容として[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)も公開しています。
 
 <figure><img src="/images/biyoushitsu-shukyaku-idea/teichaku.png" alt="定着する集客アイデア・続かない集客アイデア: 続かないアイデアは一度に3つ以上を同時に始める、効果測定をせず数か月続ける、担当者任せで仕組み化しない。定着するアイデアは1つずつ試して定着させる、数値で効果を確認する、予約システムに組み込み仕組み化する" loading="lazy"><figcaption>定着する集客アイデア・続かない集客アイデア</figcaption></figure>
 

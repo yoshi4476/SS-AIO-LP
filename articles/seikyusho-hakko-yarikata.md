@@ -65,6 +65,8 @@ faq:
 
 *インボイス制度に対応した請求書*には、発行者情報・登録番号、取引年月日、取引内容、税率ごとの金額と税率、消費税額、交付先名称という6つの項目が必要です。
 
+関連する内容として[経理の仕事を効率化する9つの方法](/blog/keiri-shigoto-koritsuka/)も公開しています。
+
 <div class="caution-box"><span class="box-title">注意: 1項目でも欠けると仕入税額控除に影響</span><br>適格請求書として認められるには、この6項目すべてが揃っている必要があります。<span class="txt-red">1つでも欠けると、受け取った取引先が仕入税額控除を受けられなくなります。</span></div>
 
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6625.htm" target="_blank" rel="noopener">タックスアンサーNo.6625 適格請求書等の記載事項</a>があります。**この情報では、適格請求書に必要な項目として6つが挙げられています。**
@@ -93,8 +95,6 @@ faq:
 関連する内容は[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)でも扱っています。
 
 費用の目安は[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)で整理しています。
-
-逆に発注側として[外注費の請求書がないときの経費計上](/blog/gaichuuhi-seikyuusho-nashi/)に悩んでいる場合は、代わりになる証憑を別記事でまとめています。
 
 <figure><img src="/images/seikyusho-hakko-yarikata/step.png" alt="請求書発行の基本4ステップ: 記載項目を確認する、請求書を作成する、取引先へ送付する、控えを保存する" loading="lazy"><figcaption>請求書発行の基本4ステップ</figcaption></figure>
 

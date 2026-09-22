@@ -96,6 +96,8 @@ AI検索エンジンは、検索上位のページとマップ情報を突き合
 
 AI検索対応の手順は、情報の具体化・表記統一・実名開示・規制準拠・計測という5段階で進めます。
 
+前提となる考え方は[AIO SEO対策とは？](/aio/aio-seo-taisaku/)でも扱っています。
+
 関連する内容として[整骨院の費用は保険でいくら？自己負担3割の目安と相場](/seo/seikotsuin-hiyou-hoken/)も公開しています。
 
 <figure><img src="/images/clinic-ai-kensaku-taisaku/steps.png" alt="クリニックがAI検索に対応する5つの手順: 診療科目を具体語で書く、HPとGBPの表記を統一する、医師の経歴を実名で明記する、医療広告ガイドラインに準拠する、AI経由の流入を計測する" loading="lazy"><figcaption>クリニックがAI検索に対応する5つの手順</figcaption></figure>

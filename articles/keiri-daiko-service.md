@@ -49,13 +49,13 @@ faq:
 
 **経理代行サービスとは、記帳・請求書発行・支払代行など経理実務の一部を、業務委託契約で外部に任せるサービスです。**
 
+あわせて[記帳代行の自動化とは？判断基準3つ【2026年】](/blog/kichodaiko-jidoka/)もご覧ください。
+
 あわせて[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/keiri-bpo/keiri-gaichuu-kichodaiko-center/)もご覧ください。
 
 関連する内容として[経理自動化はPythonで可能か？](/keiri-jitsumu/keiri-jidoka-python/)も公開しています。
 
 あわせて[経理の業務フローテンプレート4選](/keiri-jitsumu/keiri-gyomu-flow-template/)もご覧ください。
-
-関連する内容として[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)も公開しています。
 
 <div class="definition-box"><span class="term">経理代行サービスとは</span>、仕訳入力に加えて請求書発行・振込データ作成・入出金管理などの日常的な経理実務を代行するサービスのことです。==帳簿入力だけの「記帳代行」より対応範囲が広く、業務フローの見直しまで担う「経理BPO」より対象は限定的です。==</div>
 

@@ -53,13 +53,13 @@ faq:
 
 AIO対策の導入とは、AI検索への最適化をツール単発の作業ではなく、社内で継続する仕組みに変えることです。
 
+関連する内容として[OB客紹介の仕組み化とは？](/ai-marketing/obkyaku-shoukai-shikumi/)も公開しています。
+
+近い論点を[歯科医院の閉院費用とは？](/meo/shika-heiin-hiyou/)で扱っています。
+
 費用の目安を先に押さえるなら、[歯科医院のAIO対策にかかる費用はいくら？内訳と相場](/aio/shika-aio-taisaku-hiyou/)が参考になります。
 
 実際の進め方を先に押さえるなら、[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)が参考になります。
-
-費用の目安は[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)で整理しています。
-
-実際の進め方は[AIO対策の計測方法](/aio/aio-taisaku-keisoku-houhou/)でも扱っています。
 
 <div class="definition-box"><span class="term">AIO対策の導入とは</span>、冒頭の断言回答やFAQ整備といった構造改善を1回きりで終わらせず、担当者・診断・計測をセットにして社内の業務フローに組み込む取り組みを指します。</div>
 
@@ -84,6 +84,8 @@ AIO対策を導入する前に、検索順位の土台・自社の一次情報�
 ## AIO対策導入までの6ステップ
 
 AIO対策の導入は、体制構築・現状診断・構造改善・計測設定・試験運用・定着化という6ステップで進めます。
+
+関連する内容として[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)も公開しています。
 
 <figure><img src="/images/aio-taisaku-donyu-hoho/steps-zenhan.png" alt="AIO対策導入 前半3ステップ（体制と診断）: 担当者を決める、現状を診断、構造を改善" loading="lazy"><figcaption>AIO対策導入 前半3ステップ（体制と診断）</figcaption></figure>
 

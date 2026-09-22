@@ -101,6 +101,8 @@ faq:
 
 **税理士資格を持たない記帳代行センターには、税務代理・税務書類の作成・税務相談の3つを依頼できません。**
 
+あわせて[記帳代行は税理士法違反？3つの独占業務とNG事例](/blog/kichodaiko-zeirishihou-ihan/)もご覧ください。
+
 あわせて[銀行口座の記帳のやり方](/blog/ginko-kicho-yarikata/)もご覧ください。
 
 <figure><img src="/images/keiri-gaichuu-kichodaiko-center/hani.png" alt="記帳代行センターに頼めない業務（税務書類の作成・税務代理・税務相談）と頼める業務（仕訳入力・データ登録・月次資料作成）の比較" loading="lazy"><figcaption>記帳代行センターに頼めない業務と頼める業務</figcaption></figure>
@@ -133,8 +135,6 @@ faq:
 | 税務の相談 | 不可 | 可能 |
 | 契約の単位 | 業務単位で切り出せる | 年間の顧問契約が基本 |
 
-費用の具体的な水準は依頼先タイプで大きく変わります。金額の目安は[経理外注の費用相場｜依頼先4タイプの料金](/blog/keiri-gaichuu-hiyou-souba/)にまとめました。
-
 ## 自社はどちらに頼むべきか？判断する3つの質問
 
 **依頼先は、税務申告を誰が担うか、任せたい業務は何か、有資格者の関与があるかという3つの質問で決まります。**
@@ -155,7 +155,7 @@ faq:
 
 **依頼をスムーズに始めるには、通帳データ・領収書・請求書・勘定科目のルールの4点を先に揃えます。**
 
-費用の目安は、[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)で解説しています。
+関連する内容として[記帳代行費用の勘定科目｜外注費と支払手数料の使い分け](/blog/kichodaiko-hiyou-kanjoukamoku/)も公開しています。
 
 <figure><img src="/images/keiri-gaichuu-kichodaiko-center/junbi.png" alt="依頼前に準備する4つのもの: 事業用口座の通帳データ、領収書とレシート、受領した請求書と発行した請求書、勘定科目の社内ルール" loading="lazy"><figcaption>依頼前に準備する4つのもの</figcaption></figure>
 

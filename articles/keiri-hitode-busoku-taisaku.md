@@ -93,8 +93,6 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 近い論点を[経理引き継ぎ資料とは？必須6点と作り方3ステップ](/blog/keiri-hikitsugi-shiryou/)で扱っています。
 
-実際の進め方は[経理の残業を減らす7つの方法](/blog/keiri-zangyo-herasu/)で整理しています。
-
 <figure><img src="/images/keiri-hitode-busoku-taisaku/sokujitsu.png" alt="経理の人手不足にすぐできる4つの対応: 優先順位を見直す、繁忙期は応援を頼む、ムダな作業をやめる、締め時期を調整する" loading="lazy"><figcaption>経理の人手不足にすぐできる4つの対応</figcaption></figure>
 
 第一に、業務の優先順位を見直すことです。**支払期日や法定期限に関わる業務を最優先にし**、後回しにできる作業を明確にします。
@@ -110,6 +108,8 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 ## 経理の人手不足を中長期で解消する4つの対策
 
 中長期では、クラウド化・自動化・経理BPO・採用条件の見直しという4つの対策で、人手不足そのものを解消します。
+
+あわせて[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)もご覧ください。
 
 関連する内容として[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)も公開しています。
 

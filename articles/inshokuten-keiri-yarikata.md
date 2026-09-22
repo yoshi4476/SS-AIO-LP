@@ -106,6 +106,8 @@ faq:
 
 **飲食店は、店内飲食が10%、持ち帰り・宅配が軽減税率の8%という税率区分を、会計処理に正しく反映する必要があります。**
 
+近い論点を[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)で扱っています。
+
 <figure><img src="/images/inshokuten-keiri-yarikata/zeiritsu.png" alt="飲食店の消費税区分: 店内飲食は10%、持ち帰り・宅配は軽減税率の8%" loading="lazy"><figcaption>飲食店の消費税区分（店内飲食10%・持ち帰り8%）</figcaption></figure>
 
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6102.htm" target="_blank" rel="noopener">消費税の軽減税率制度</a>によると、飲食料品の譲渡は軽減税率8%の対象です。ただし飲食店業等が行う「食事の提供」（外食）は対象外とされ、標準税率10%が適用されます。同じメニューでも、店内で食べるか持ち帰るかで税率が変わるため、レジのオペレーションで区分を確定させる仕組みが欠かせません。
@@ -121,6 +123,8 @@ faq:
 ## 飲食店の経理でつまずきやすい3つのポイント
 
 **飲食店の経理でつまずく典型は、現金記録の持ち越し・原価率の未把握・税率区分の混同という3つに集中します。**
+
+近い論点を[freeeの経費精算のやり方](/blog/freee-keihi-seisan-yarikata/)で扱っています。
 
 あわせて[個人経営の経理のやり方｜後回しにしない3つのコツ](/blog/kojin-keiei-keiri-yarikata/)もご覧ください。
 

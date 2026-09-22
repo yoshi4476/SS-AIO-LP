@@ -76,7 +76,7 @@ BPOは業務プロセスごと任せる点で、単発のアウトソーシン�
 
 BPOは対象業務によって、コールセンター・IT・人事・経理・バックオフィスなど5つの領域に大きく分かれます。
 
-対象業務の詳しい内訳は、[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)で解説しています。
+あわせて[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)もご覧ください。
 
 <figure><img src="/images/bpo-toha/shurui.png" alt="BPOの主な種類5つ: コールセンターBPO、IT BPO、人事BPO、経理BPO、バックオフィスBPO" loading="lazy"><figcaption>BPOの主な種類5つ</figcaption></figure>
 

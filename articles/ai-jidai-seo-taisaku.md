@@ -30,6 +30,10 @@ faq:
 
 AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置いた検索最適化です。
 
+前提となる考え方は[AIO SEO監査とは？](/aio/aio-seo-audit/)でも扱っています。
+
+前提となる考え方は[AIO SEO対策とは？](/aio/aio-seo-taisaku/)でも扱っています。
+
 実際の進め方は[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)でも扱っています。
 
 

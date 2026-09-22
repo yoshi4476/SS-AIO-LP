@@ -871,6 +871,32 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 """
 
 
+def hub_json_ld(name, url, metas, desc=""):
+    """業種ハブの構造化データ。何の集まりで、何が入っているかを機械に渡す"""
+    items = [{"@type": "ListItem", "position": i + 1,
+              "url": f"{SITE_URL}/{m['category']}/{m['slug']}/",
+              "name": m["title"]}
+             for i, m in enumerate(metas[:30])]
+    graph = [
+        {"@type": "CollectionPage", "name": name, "url": url,
+         "inLanguage": "ja",
+         **({"description": desc} if desc else {}),
+         "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL},
+         "publisher": organization(),
+         "mainEntity": {"@type": "ItemList", "numberOfItems": len(metas),
+                        "itemListElement": items}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "ホーム", "item": SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": "業種から探す",
+             "item": f"{SITE_URL}/industry/"},
+            {"@type": "ListItem", "position": 3, "name": name, "item": url}]},
+    ]
+    return ('<script type="application/ld+json">'
+            + json.dumps({"@context": "https://schema.org", "@graph": graph},
+                         ensure_ascii=False, indent=1)
+            + "</script>")
+
+
 def build_industry_hubs(all_metas):
     """業種ハブ（/industry/ と /industry/<slug>/）。記事が増えるほど厚くなる"""
     try:
@@ -888,6 +914,9 @@ def build_industry_hubs(all_metas):
         page = BLOG_PAGE.format(items=IH.hub_body(ind, metas, CATEGORIES, post_tile), **shell)
         page = page.replace("記事一覧｜" + SITE_NAME, f'{ind["name"]}の集客｜{SITE_NAME}')
         page = page.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/')
+        url = f'{SITE_URL}/industry/{ind["slug"]}/'
+        page = page.replace("</head>", hub_json_ld(
+            f'{ind["name"]}の集客', url, metas, str(ind.get("lead") or "")[:300]) + "</head>", 1)
         made.append((ind, metas))
         out.write_text(page, encoding="utf-8", newline="\n")
     if made:
@@ -896,6 +925,10 @@ def build_industry_hubs(all_metas):
         page = BLOG_PAGE.format(items=IH.index_body(pairs, g), **shell)
         page = page.replace("記事一覧｜" + SITE_NAME, f"業種から探す｜{SITE_NAME}")
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")
+        flat = [m for _, ms in pairs for m in ms]
+        page = page.replace("</head>", hub_json_ld(
+            "業種から探す", f"{SITE_URL}/industry/", flat,
+            "業種ごとに、集客・MEO・AIO・SEOの記事をまとめています。") + "</head>", 1)
         out.write_text(page, encoding="utf-8", newline="\n")
     # llms.txt に業種の目次を出す。AIクローラーはここを読んで全体像を掴む
     lt = SITE / "llms.txt"

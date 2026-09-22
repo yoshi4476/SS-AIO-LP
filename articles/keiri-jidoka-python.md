@@ -61,10 +61,11 @@ Pythonの導入自体に高額なライセンス費用はかかりません。**
 
 Pythonでの経理自動化には、集計・Excel生成・CSV整形・API連携という4つの代表的な処理があります。
 
+近い論点を[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)で扱っています。
+
+あわせて[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)もご覧ください。
 
 関連する内容として[経理効率化の事例4選｜方法別のポイントと進め方](/keiri-bpo/keiri-koritsuka-jirei/)も公開しています。
-
-実際の例は[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)でも扱っています。
 
 前提となる考え方は[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)で整理しています。
 
@@ -88,8 +89,6 @@ Pythonでの経理自動化には、集計・Excel生成・CSV整形・API連携
 
 Pythonとエクセルのマクロ・VBAは、処理速度・外部連携・学習のしやすさで比較すると違いが分かりやすくなります。
 
-
-関連する内容として[エクセル経理の効率化のコツ7選](/blog/excel-keiri-koritsuka/)も公開しています。
 
 | 比較項目 | Python | エクセルのマクロ・VBA |
 |:--|:--|:--|
