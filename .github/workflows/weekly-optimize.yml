@@ -203,6 +203,19 @@ jobs:
           python scripts/measure.py --selftest || true
           python scripts/measure.py --log || true
 
+      # 使っている判断（点数・語の性質・内部リンクの下限）が、実際の成果を
+      # 言い当てているかを確かめる。当たっていない判断で選び続けると、
+      # 努力の向き先がずれる。実測で2件が当たっていなかった
+      - name: 判断が当たっているかを確かめる
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/validate_rules.py || true
+          rm -f indexing-service-account.json
+
       # 打った手が効いたかを、触っていない記事と比べて判定する。
       # サイト全体が伸びている時期は、何をしても「効いた」に見えるため
       - name: 打った手の効き（対照群と比較）

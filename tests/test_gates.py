@@ -2742,6 +2742,54 @@ def test_structure_is_proposed_monthly():
     print(f"  OK  月次レポートに構成の提案が載る（いま{len(rows)}件・すべて根拠つき）")
 
 
+def test_rules_are_validated_against_outcomes():
+    """使っている判断が、実際の成果を言い当てているかを確かめているか。
+
+    この仕組みは点数・語の性質・内部リンクの下限で記事を選び、直している。
+    どれも「そう決めた」だけで、当たっているかを誰も確かめていなかった。
+    確かめると、当たっていないものが2件あった（2026-09-23 実測）。
+
+      内部リンクの下限   上位ほど多いはずが、1〜10位は中央値5本で逆
+      品質スコア        96点以上の順位が91〜93点より4.1位悪い（逆相関）
+
+    **向きを見ないと、逆相関を「差が出ている」と読んでしまう。**
+    最初の版が実際にそう報告した。逆に出る判断は、無い判断より悪い。
+    """
+    p = ROOT / "scripts" / "validate_rules.py"
+    if not p.is_file():
+        print("  NG  scripts/validate_rules.py がありません")
+        FAIL.append("rules_validated")
+        return
+    src = p.read_text(encoding="utf-8")
+    if "expect" not in src or "逆になって" not in src:
+        print("  NG  関係の向きを見ていません（逆相関を見逃します）")
+        FAIL.append("rules_validated")
+        return
+
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import importlib
+    import validate_rules as VR
+    importlib.reload(VR)
+    # 逆相関を、その場で作って検出できるか試す
+    p_fake = {f"a{i}": [100, 1, 100 * (10.0 + i)] for i in range(8)}
+    p_fake.update({f"b{i}": [100, 1, 100 * (30.0 + i)] for i in range(8)})
+    got = VR.report("診断", [("低いはず", list(p_fake)[:8]),
+                             ("高いはず", list(p_fake)[8:])],
+                    p_fake, expect="高いはず")
+    if got is not False:
+        print("  NG  逆相関を検出できません（期待と逆でも合格にしています）")
+        FAIL.append("rules_validated")
+        return
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    fd = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
+    if "validate_rules.py" not in wf or "validate_rules.py" not in fd:
+        print("  NG  判断の検証が週次か通知に載っていません")
+        FAIL.append("rules_validated")
+        return
+    print("  OK  使っている判断を毎週実測で検証し、逆相関も検出する")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2808,7 +2856,8 @@ def main():
               test_guarantee_rate_is_measured,
               test_interventions_are_measured_against_control,
               test_numbers_come_from_two_methods,
-              test_structure_is_proposed_monthly):
+              test_structure_is_proposed_monthly,
+              test_rules_are_validated_against_outcomes):
         try:
             t()
         except Exception as e:
