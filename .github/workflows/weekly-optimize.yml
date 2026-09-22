@@ -156,6 +156,22 @@ jobs:
             python scripts/link_boost.py "$s" --write || true
           done
 
+      # 順位で止まっている記事を優先して補充する。被リンクの少ない順に配ると、
+      # 1ページ目の手前にいる記事に届かない。実測で、止まる27本のうち
+      # 被リンク5本以下は3本だけだった
+      - name: 11〜30位で止まっている記事へ内部リンクを寄せる
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/rank_rescue.py --refresh >> automation/logs/findings.txt 2>&1 || true
+          for s in ai-lab corporate subsidy; do
+            python scripts/link_boost.py "$s" --rescue --write || true
+          done
+          rm -f indexing-service-account.json
+
       - name: 無料診断への導線を新しい記事にも入れる
         run: python scripts/tool_links.py --write || true
 

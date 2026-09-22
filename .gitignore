@@ -45,3 +45,6 @@ data/rakko_cache/
 data/rakko_volume.json
 data/rakko_spend.jsonl
 docs/kw-plan-*.dry.md
+
+# GSCから取り直せる派生キャッシュ（112KB・週次で全書き換え）
+data/rank_rescue.json

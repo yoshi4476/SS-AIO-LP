@@ -2316,6 +2316,58 @@ def test_totals_never_come_from_a_dimensioned_query():
     print("  OK  表示・クリックの合計は次元なしで取っている（3サイトとも）")
 
 
+def test_stuck_articles_are_pushed_every_week():
+    """11〜30位で止まった記事に、毎週手が入る形になっているか。
+
+    伸び率の主因は順位で、詰まりは11〜30位にある（実測で244語・表示1,496回・
+    クリック0）。ここに手が入らなければ、新規記事をいくら足しても伸びは戻らない。
+
+    見るのは4つ。
+      1. 押し上げの対象帯が21〜30位まで届いているか（以前は20.5位で切れていた）
+      2. 診断が週次で動くようになっているか
+      3. 内部リンクが「順位で止まっている記事」へ寄るようになっているか
+      4. 書き換えの検算で kw_guard に自分自身を除外させているか
+         （渡さないと、その記事自身が食い合い相手になり100%差し戻される）
+    """
+    pb = (ROOT / "scripts" / "priority_boost.py").read_text(encoding="utf-8")
+    m = re.search(r"^NEAR = \((\d+\.?\d*),\s*(\d+\.?\d*)\)", pb, re.M)
+    if not m or float(m.group(2)) < 30.0:
+        print(f"  NG  priority_boost の対象帯が狭すぎます（{m.group(0) if m else '不明'}）"
+              "。21〜30位が対象外になります")
+        FAIL.append("stuck_articles_are_pushed")
+        return
+
+    rr = ROOT / "scripts" / "rank_rescue.py"
+    if not rr.is_file():
+        print("  NG  scripts/rank_rescue.py がありません（止まった記事の診断）")
+        FAIL.append("stuck_articles_are_pushed")
+        return
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    for need, why in (("rank_rescue.py", "止まった記事の診断が週次で動きません"),
+                      ("--rescue", "内部リンクが順位で止まった記事へ寄りません")):
+        if need not in wf:
+            print(f"  NG  週次に {need} がありません: {why}")
+            FAIL.append("stuck_articles_are_pushed")
+            return
+
+    ar = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    if "--exclude-slug" not in ar:
+        print("  NG  auto_rewrite が kw_guard に --exclude-slug を渡していません。"
+              "その記事自身が食い合い相手になり、リライトは必ず差し戻されます")
+        FAIL.append("stuck_articles_are_pushed")
+        return
+    if '"stuck"' not in ar:
+        print("  NG  auto_rewrite に stuck 種別がありません（語の欠落を直せません）")
+        FAIL.append("stuck_articles_are_pushed")
+        return
+
+    import shutil
+    exe = "claude" if shutil.which("claude") else ""
+    note = "" if exe else "（この端末には claude がないため、書き換えは動きません）"
+    print(f"  OK  11〜30位の記事に毎週手が入る（診断・内部リンク・書き換え）{note}")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2374,7 +2426,8 @@ def main():
               test_site_has_two_axes_and_no_orphans,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
-              test_totals_never_come_from_a_dimensioned_query):
+              test_totals_never_come_from_a_dimensioned_query,
+              test_stuck_articles_are_pushed_every_week):
         try:
             t()
         except Exception as e:

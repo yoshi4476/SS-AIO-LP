@@ -160,6 +160,17 @@ WHAT = {
 }
 
 
+def claude_bin():
+    """claude の実行ファイルを解決する。
+
+    Windows では `claude` は claude.cmd として入るため、名前だけを
+    subprocess に渡すと WinError 2 になる（CreateProcess は PATHEXT を
+    探さない）。Linux の CI では通るので、手元だけで落ちて気づきにくい。
+    """
+    import shutil
+    return shutil.which("claude") or shutil.which("claude.cmd") or "claude"
+
+
 def warns(slug):
     r = sh([sys.executable, "scripts/score_check.py", slug], timeout=300)
     return [l for l in (r.stdout or "").splitlines() if l.startswith("WARN")]
@@ -295,6 +306,10 @@ def run_one(item, write):
     p = ROOT / "articles" / f"{slug}.md"
     if not p.is_file():
         return False, "記事がありません"
+    if write:
+        import shutil
+        if not (shutil.which("claude") or shutil.which("claude.cmd")):
+            return False, "claude が見つかりません（npm install -g @anthropic-ai/claude-code）"
     if not write:
         return True, "（確認のみ）"
 
@@ -309,7 +324,8 @@ def run_one(item, write):
     prompt = PROMPT.format(slug=slug, why=item["why"], what=what)
     # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
     # この工程がやるのは1ファイルの書き換えだけで、コマンド実行も外部通信も要らない
-    r = sh(["claude", "-p", prompt, "--max-turns", "40",
+    exe = claude_bin()
+    r = sh([exe, "-p", prompt, "--max-turns", "40",
             "--allowedTools", "Read,Edit"], timeout=1800)
     if r.returncode and not p.read_text(encoding="utf-8-sig") != before[2]:
         return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"

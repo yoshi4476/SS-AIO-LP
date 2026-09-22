@@ -54,6 +54,11 @@ NL_CHARS, NL_TOKENS = 24, 5
 JUNK = re.compile(r"^[ぁ-ん]{1,3}$|[。、！？]|^(こと|もの|ため|よう|など|それ|これ|どこ|いくつ|候補)$"
                   r"|(ます|です|たい|ました|ください|ている|しま)$")
 MIN_TERM_IMP = 6         # 語ごとの表示合計。これ未満は偶然と区別できない
+# 食い合いと呼べる条件。同じ語で2ページ出ていても、片方が52位なら奪っていない。
+# 実測6件のうち4件は相手が40〜69位で、直す価値のない組だった。
+# 「どちらを出すかGoogleが迷っている」と言えるのは、両方が近い順位にいるとき
+CANN_MAX_POS = 30.0      # competing と言える上限。これより後ろの相手は無視
+CANN_MAX_GAP = 15.0      # 2ページの順位差。開きすぎている組は迷っていない
 
 
 def norm(s):
@@ -176,9 +181,12 @@ def diagnose(refresh=False):
             rivals = [o for o in owner[(sid, norm(r["kw"]))] if o["url"] != url]
             if rivals:
                 best = min(rivals, key=lambda o: o["pos"])
-                cann.append({"kw": r["kw"], "pos": r["pos"], "imp": r["imp"],
-                             "rival": best["url"], "rival_pos": best["pos"]})
-                continue                             # 食い合いは語を足して直すものではない
+                close = (min(r["pos"], best["pos"]) <= CANN_MAX_POS
+                         and abs(r["pos"] - best["pos"]) <= CANN_MAX_GAP)
+                if close:
+                    cann.append({"kw": r["kw"], "pos": r["pos"], "imp": r["imp"],
+                                 "rival": best["url"], "rival_pos": best["pos"]})
+                    continue                         # 食い合いは語を足して直すものではない
             if len(r["kw"]) > NL_CHARS or len(re.split(r"[\s　]+", r["kw"])) > NL_TOKENS:
                 continue                             # 自然文の質問は語の欠落では直らない
             gap = [t for t in terms_of(r["kw"]) if norm(t) not in a["hay"]]
