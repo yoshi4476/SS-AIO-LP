@@ -2505,6 +2505,48 @@ def test_coverage_matrix_shows_gaps():
     print("  OK  業種×手法の盤面を毎週出し、空きマスを通知に載せている（3サイト）")
 
 
+def test_howto_is_emitted_for_step_articles():
+    """手順記事に HowTo 構造化データが出ているか。
+
+    CLAUDE.md は「手順系記事のみ HowTo 追加」と書いているが実装が無く、
+    手順が3つ以上ある記事95本すべてで0件だった（2026-09-23 実測）。
+    HowTo は2023年にGoogleのリッチリザルトから外れたため検索結果の見た目は
+    変わらない。効くのは機械可読性で、AI検索は本文より先に JSON-LD を読む。
+    手順が「何番目に何をするか」で取り出せるかは、引用の正確さに効く。
+
+    あわせて、出している JSON-LD が全ページで壊れていないことも見る。
+    壊れていても画面には出ないため、検査しないと気づけない。
+    """
+    import glob
+    import json as _json
+    n_howto = n_block = broken = 0
+    for p in glob.glob(str(ROOT / "site" / "**" / "index.html"), recursive=True):
+        h = Path(p).read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
+            n_block += 1
+            try:
+                d = _json.loads(m.group(1))
+            except Exception:
+                broken += 1
+                continue
+            for g in (d.get("@graph") or [d]):
+                if g.get("@type") == "HowTo":
+                    n_howto += 1
+                    if len(g.get("step") or []) < 3:
+                        print(f"  NG  HowTo の手順が3つ未満です: {p}")
+                        FAIL.append("howto_emitted")
+                        return
+    if broken:
+        print(f"  NG  壊れた JSON-LD が {broken}件あります（画面には出ないので検査でしか見つかりません）")
+        FAIL.append("howto_emitted")
+        return
+    if n_howto < 20:
+        print(f"  NG  HowTo が {n_howto}件しか出ていません（手順記事に出ていない疑い）")
+        FAIL.append("howto_emitted")
+        return
+    print(f"  OK  手順記事に HowTo を出している（{n_howto}件 / JSON-LD {n_block}件すべて正常）")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2566,7 +2608,8 @@ def main():
               test_totals_never_come_from_a_dimensioned_query,
               test_stuck_articles_are_pushed_every_week,
               test_publish_gate_actually_blocks,
-              test_coverage_matrix_shows_gaps):
+              test_coverage_matrix_shows_gaps,
+              test_howto_is_emitted_for_step_articles):
         try:
             t()
         except Exception as e:

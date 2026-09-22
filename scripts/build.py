@@ -237,6 +237,29 @@ def render_toc(toc_tokens) -> str:
             f'<ol>{"".join(items)}</ol></nav>')
 
 
+def howto_steps(body_html):
+    """本文から手順を取り出す。「ステップN:」「手順N:」の見出しだけを拾う。
+
+    見出しの文言をそのまま名前にし、直後の段落の先頭文を説明にする。
+    手順が3つ未満のものは手順記事ではないので出さない（無理に出すと
+    「読む記事」まで HowTo になり、構造の意味が薄れる）。
+    """
+    out = []
+    heads = list(re.finditer(
+        r"<h[34][^>]*>\s*(?:ステップ|手順|STEP)\s*(\d+)\s*[:：.、]?\s*(.+?)</h[34]>",
+        body_html, re.I | re.S))
+    for i, m in enumerate(heads):
+        name = re.sub(r"<[^>]+>", "", m.group(2)).strip()
+        seg = body_html[m.end(): heads[i + 1].start() if i + 1 < len(heads) else len(body_html)]
+        p = re.search(r"<p[^>]*>(.*?)</p>", seg, re.S)
+        text = re.sub(r"<[^>]+>", "", p.group(1)).strip() if p else ""
+        text = re.sub(r"\s+", " ", text)[:300]
+        if name:
+            out.append({"@type": "HowToStep", "position": i + 1,
+                        "name": name, **({"text": text} if text else {})})
+    return out if len(out) >= 3 else []
+
+
 def build_json_ld(meta, url, body_text=""):
     cat_name, _ = CATEGORIES[meta["category"]]
     # 記事が扱う実体を公式の場所へ結ぶ（題名・狙う語→about、本文→mentions）
@@ -271,6 +294,15 @@ def build_json_ld(meta, url, body_text=""):
             ],
         },
     ]
+    steps = howto_steps(body_text or "")
+    if steps:
+        graph.append({
+            "@type": "HowTo",
+            "name": meta["title"],
+            "description": meta["description"],
+            "inLanguage": "ja",
+            "step": steps,
+        })
     if meta.get("faq"):
         graph.append({
             "@type": "FAQPage",
