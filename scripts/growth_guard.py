@@ -50,13 +50,20 @@ def fetch(sc, dom, span, dims):
 
 
 def totals(sc, dom, span):
-    """表示・クリックの合計は「次元なし」で取る。次元を付けた合計は信用しない"""
-    import gsc_detail as G
+    """表示・クリックの合計。**2通りで一致したものだけ**を返す（measure 経由）。
+
+    次元を付けた合計は信用しない。measure.gsc_totals が
+    「次元なし」と「日次の合算」を突き合わせ、食い違えば例外を投げる。
+    「概ね合っている」で先に進めないようにするのが目的。
+    """
+    import measure
     try:
-        r = G.q(sc, dom, str(span[0]), str(span[1]), None, 1)
+        return measure.gsc_totals(dom, span[0], span[1])
+    except measure.Disagree as e:
+        print(f"  {dom}: 計測が一致しないため、この数字は使いません → {e}")
+        return 0, 0
     except Exception:
         return 0, 0
-    return (r[0]["impressions"], r[0]["clicks"]) if r else (0, 0)
 
 
 def main():

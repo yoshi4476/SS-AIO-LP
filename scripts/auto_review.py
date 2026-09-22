@@ -256,7 +256,10 @@ def stuck_floor():
     """
     try:
         import rank_rescue as RR
-        return {r["slug"]: 12 for r in RR.diagnose()[0]}
+        # 12本には裏づけが無かった（1〜10位の被リンク中央値は5本で、
+        # 11〜30位で止まっている記事の9〜10本より少ない）。priority_boost と
+        # 同じ8本に寄せる。厚く守りすぎると積み上がりを外せなくなる
+        return {r["slug"]: 8 for r in RR.diagnose()[0]}
     except Exception:
         return {}
 

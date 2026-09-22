@@ -79,7 +79,7 @@ faq:
 
 GビズIDとSECURITY ACTIONの取得が遅れると、申請そのものに間に合いません。この2つは交付申請の前提条件であり、後回しにできない手続きです。
 
-近い論点を[建設業の電子申請システムを閲覧する2つの方法](/blog/kensetsugyou-denshishinsei-etsuran/)で扱っています。
+あわせて[建設業の電子申請システムを閲覧する2つの方法](/blog/kensetsugyou-denshishinsei-etsuran/)もご覧ください。
 
 関連する内容として[宿泊業の補助金は3つの入口｜目的別の選び方と優先順位](/blog/shukuhakugyou-hojokin-erabikata/)も公開しています。
 

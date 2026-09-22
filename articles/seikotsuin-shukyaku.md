@@ -44,10 +44,6 @@ diagrams:
 
 近い論点を[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で扱っています。
 
-あわせて[整骨院のMEO対策とは？](/meo/seikotsuin-meo-taisaku/)もご覧ください。
-
-関連して、[クリニックの集客事例5選｜成功パターンと始め方](/ai-marketing/clinic-shukyaku-jirei/)もあわせてご確認ください。
-
 あわせて[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)もご覧ください。
 
 <div class="definition-box"><span class="term">整骨院の集客とは</span>、「地域名×整骨院」「駅名×接骨院」といった検索でGoogleマップから来院を呼び込む保険施術の導線と、骨盤矯正・姿勢矯正・産後ケアといった自由診療メニューをウェブサイトやSNSで専門性訴求する導線の、2本立てで組み立てる取り組みのことです。==同じ院でも保険施術と自由診療では、患者さんの検討プロセスも訴求の仕方も別物==になります。</div>

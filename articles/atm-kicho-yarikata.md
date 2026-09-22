@@ -119,7 +119,7 @@ ATM手数料は、事業に関連する引き出しなら「支払手数料」�
 
 ATM記帳でよくあるミスは、明細の紛失、手数料の記帳漏れ、現金出納帳と通帳残高を照合しないことの3つです。
 
-あわせて[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)もご覧ください。
+関連する内容として[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)も公開しています。
 
 <figure><img src="/images/atm-kicho-yarikata/step.png" alt="ATM引き出しから記帳までの4ステップ: ATMで引き出す、明細を保管する、勘定科目で仕訳る、通帳残高と照合する" loading="lazy"><figcaption>ATM引き出しから記帳までの4ステップ</figcaption></figure>
 

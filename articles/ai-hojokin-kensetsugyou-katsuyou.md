@@ -67,8 +67,6 @@ faq:
 
 関連する内容として[ものづくり補助金｜建設業の採択事例3業種と上限9,000万円](/blog/monozukuri-hojokin-kensetsugyou-jirei/)も公開しています。
 
-関連する内容として[建設業の実績報告書｜下請け構造でも迷わない3つの証憑ポイント](/blog/kensetsugyou-jissekihoukokusho/)も公開しています。
-
 <figure><img src="/images/ai-hojokin-kensetsugyou-katsuyou/tool-categories.png" alt="建設業で対象になるITツール3分野: 施工管理アプリ、積算・見積ソフト、電子契約・勤怠管理" loading="lazy"><figcaption>建設業で対象になるITツール3分野</figcaption></figure>
 
 <a href="https://www.photoruction.com/archives/contech/it-introduction-subsidy" target="_blank" rel="noopener">Photoructionが紹介する建設業の導入事例</a>では、ANDPADやPhotoruction、SPIDERPLUSなどの施工管理アプリで工程・写真・図面をクラウド共有する例、Gaia Cloudなどの積算ソフトで数量拾いと見積作成を自動化する例が紹介されています。

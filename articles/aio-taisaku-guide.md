@@ -58,11 +58,11 @@ AIOコンサルティングとは、**AIの回答に自社が引用されるた�
 
 関連する内容として[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)も公開しています。
 
-関連する内容として[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)も公開しています。
+あわせて[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)もご覧ください。
 
-近い論点を[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)で扱っています。
+あわせて[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もご覧ください。
 
-あわせて[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)もご覧ください。
+近い論点を[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)で扱っています。
 
 | | 自社でやる | 外部に頼む |
 |:--|:--|:--|

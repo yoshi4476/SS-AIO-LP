@@ -55,11 +55,11 @@ faq:
 
 関連する内容として[e-Gov電子申請とは](/blog/egov-denshishinsei-kojinjigyonushi/)も公開しています。
 
-あわせて[小規模事業者持続化補助金](/blog/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/)もご覧ください。
+関連する内容として[小規模事業者持続化補助金](/blog/jizokuka-hojokin-kojinjigyonushi-saitakuritsu/)も公開しています。
 
-関連する内容として[小規模事業者持続化補助金](/blog/jizokuka-hojokin-esute/)も公開しています。
+近い論点を[小規模事業者持続化補助金](/blog/jizokuka-hojokin-esute/)で扱っています。
 
-あわせて[小規模事業者持続化補助金](/blog/jizokuka-hojokin-clinic/)もご覧ください。
+近い論点を[小規模事業者持続化補助金](/blog/jizokuka-hojokin-clinic/)で扱っています。
 
 <div class="definition-box"><span class="term">事業再構築補助金とは</span>、新型コロナウイルス対応の緊急経済対策として2021年に始まった制度です。事業転換や業態転換に伴う設備投資を、新市場開拓や新分野展開を条件に支援していました。</div>
 

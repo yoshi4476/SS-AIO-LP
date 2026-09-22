@@ -1607,6 +1607,15 @@ def render(d, a):
     except Exception as e:
         diag_html = f'<p class="note">診断を作れませんでした: {str(e)[:80]}</p>'
 
+    # 来月つくるもの。盤面の空き・止まっている記事・食い合いから機械が作る。
+    # 1本ずつ人が選ぶと同じマスに重なり、空いたマスが残る（実測で
+    # クリニック21本に対し工務店のAIOは0本だった）
+    try:
+        import structure_plan
+        plan_html = structure_plan.as_html([SITE_ID])
+    except Exception as e:
+        plan_html = f'<p class="note">構成の提案を作れませんでした: {str(e)[:80]}</p>'
+
     rank_rows = ""
     rimp = d.get("rank_imp", {})
     for k, n in d.get("rank_buckets", []):
@@ -2255,6 +2264,7 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <h3 style="margin-top:16px">現在のサイト診断と、次にやること</h3>
 <p style="font-size:9.5pt">順位帯ごとの「順位相応なら増えるクリック」は、順位を上げずにタイトル・説明文で取り返せる量です。「誰が」の<b>自動</b>は週次・月次の自動化が処理し、<b>人</b>は手当てが要るものです。</p>
 {diag_html}
+{plan_html}
 </div>
 
 <!-- ページ: 直した記事の効果 -->

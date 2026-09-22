@@ -92,9 +92,14 @@ def total_clicks(sc, domain, start, end):
     2026-08-23〜09-19）では query次元 4/17/2回 に対し、次元なしは 25/43/51回だった。
     補助金は実際の3.9%しか見えておらず、毎週「GA4と食い違う」と誤報していた。
     """
-    import gsc_detail as G
-    r = G.q(sc, domain, str(start), str(end), None, 1)
-    return r[0]["clicks"] if r else 0
+    # 2通りで一致したものだけを使う（measure 経由）。
+    # 次元つきで数えて誤報を出し続けた経緯があるため、書き方で守る
+    import measure
+    try:
+        return measure.gsc_totals(domain, start, end)[1]
+    except measure.Disagree as e:
+        print(f"  注意 {domain}: 計測が一致しません → {e}")
+        return 0
 
 
 def check_ga_vs_gsc(sid, cfg, prop, days, out):

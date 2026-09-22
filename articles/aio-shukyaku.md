@@ -74,7 +74,7 @@ AI OverviewはGooglebotが集めた検索結果を土台に生成されます。
 
 **AIO集客は、比較検討に時間がかかる業種ほど効果が出やすく、その場の衝動で決まる業種には向きません。**
 
-近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
+関連する内容として[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)も公開しています。
 
 関連する内容として[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)も公開しています。
 

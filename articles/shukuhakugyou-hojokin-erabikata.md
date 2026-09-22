@@ -55,10 +55,6 @@ faq:
 
 あわせて[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)もご覧ください。
 
-関連する内容は、[会計ソフトの補助金｜個人事業主が使える2つの枠と補助率](/hojokin/it-hojokin-kojinjigyonushi-kaikeisoft/)で解説しています。
-
-関連する内容として[クリニックのIT導入補助金](/hojokin/it-hojokin-clinic/)も公開しています。
-
 同業種向けの制度別の解説は、[宿泊業のIT導入補助金は有利？](/blog/it-hojokin-shukuhakugyou/)で詳しく扱っています。
 
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026の通常枠ページ</a>によると、この制度はソフトウェア・クラウドサービスの導入費用を補助します。宿泊業ならPMSや予約システムが対象になりやすい分野です。

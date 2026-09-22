@@ -159,7 +159,7 @@ Search Consoleの設定メニューには「robots.txtレポート」があり�
 
 近い論点を[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)で扱っています。
 
-あわせて[BtoB CVR改善とは？](/ai-marketing/btob-cvr-kaizen/)もご覧ください。
+関連する内容として[BtoB CVR改善とは？](/ai-marketing/btob-cvr-kaizen/)も公開しています。
 
 AI検索経由で「うちの規模だとどれを使えばいいか」という質問が実際に届きます。
 

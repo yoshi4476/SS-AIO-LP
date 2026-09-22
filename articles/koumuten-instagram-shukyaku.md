@@ -104,8 +104,6 @@ faq:
 
 工務店インスタ集客の成功は、プロフィール整備から問い合わせ導線までの5つの施策で決まります。
 
-関連する内容として[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)も公開しています。
-
 <figure><img src="/images/koumuten-instagram-shukyaku/steps.png" alt="工務店インスタ集客を成功させる5つの施策: プロフィール整備、施工事例を投稿、ハッシュタグ活用、リールで発信、DM導線を作る" loading="lazy"><figcaption>工務店インスタ集客を成功させる5つの施策</figcaption></figure>
 
 ### 施策1: プロフィールとビジネスアカウントを整備する

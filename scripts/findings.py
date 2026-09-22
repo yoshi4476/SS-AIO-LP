@@ -47,6 +47,12 @@ CHECKS = [
     # 触っていない記事と比べて差が出ない施策は、続けても時間を使うだけ
     ("打った手の効き（対照群あり）", "effect_ab.py",
      re.compile(r"差が無い施策|対照群と差が無い")),
+    # 2通りで一致しなかった計測。原因を確かめるまで、その数字は使えない
+    ("計測の食い違い", "measure.py --log",
+     re.compile(r"^  \d{4}-\d{2}-\d{2}")),
+    # 来月つくるもの。月次レポートにも載るが、週次でも気づけるようにする
+    ("サイト構成の提案", "structure_plan.py",
+     re.compile(r"^\s+\d+\.\d\s+(新しい|書き足し|統合)")),
 ]
 
 # 「問題あり」を表す印。検査ごとに語尾が違うため、値の側で見る
@@ -57,8 +63,12 @@ GOOD = re.compile(r"(?:[A-Z_]+_OK=yes|LIVE_CHECK=ok|KW_GATE=ok|RAKKO_MONTH=ok)")
 def run(script):
     """検査を1本動かして、出力と終了コードを返す。落ちても例外にしない。"""
     try:
-        args = ["--check"] if script == "rakko.py" else []
-        r = subprocess.run([sys.executable, str(ROOT / "scripts" / script)] + args,
+        # 引数つきの指定（"measure.py --log"）も受ける。
+        # rakko だけ特別扱いしていたため、他の検査に引数を渡せなかった
+        parts = script.split()
+        name, extra = parts[0], parts[1:]
+        args = (["--check"] if name == "rakko.py" else []) + extra
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / name)] + args,
                            cwd=str(ROOT), capture_output=True, text=True,
                            encoding="utf-8", errors="replace", timeout=TIMEOUT)
         return (r.stdout or "") + (r.stderr or ""), r.returncode
@@ -112,8 +122,11 @@ def main():
 
     rows, lines = [], []
     for label, script, pat in CHECKS:
-        if not (ROOT / "scripts" / script).exists():
-            rows.append((label, "動かせず", ["%s がありません" % script]))
+        # 引数つき（"measure.py --log" など）も扱えるようにする。
+        # 実在の判定はファイル名だけで行う
+        fname = script.split()[0]
+        if not (ROOT / "scripts" / fname).exists():
+            rows.append((label, "動かせず", ["%s がありません" % fname]))
             continue
         print("\n===== %s（%s） =====" % (label, script), flush=True)
         text, rc = run(script)

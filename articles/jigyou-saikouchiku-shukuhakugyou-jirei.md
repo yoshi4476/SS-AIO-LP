@@ -55,8 +55,6 @@ faq:
 
 あわせて[宿泊業のAI導入補助金はいくら？](/blog/shukuhakugyou-ai-hojokin-hojogaku-meyasu/)もご覧ください。
 
-あわせて[農業の倉庫投資は建物費NG](/blog/monozukuri-hojokin-nougyou-souko/)もご覧ください。
-
 他業種の事例は、[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)で紹介しています。
 
 飲食店の転換事例は[事業再構築補助金の飲食店活用事例3選と今の申請方法](/blog/jigyou-saikouchiku-inshokuten-jirei/)にまとめました。

@@ -1455,7 +1455,9 @@ def test_findings_judges_by_marker_not_exit_code():
 
     # 検査対象のスクリプトが実在すること（名前を変えたら気づける）
     for label, script, _ in findings.CHECKS:
-        check("検査が実在: " + label, (ROOT / "scripts" / script).exists(), True)
+        # 引数つきの指定（"measure.py --log"）も許す。実在はファイル名で見る
+        check("検査が実在: " + label,
+              (ROOT / "scripts" / script.split()[0]).exists(), True)
 
 
 def test_detection_scripts_do_not_fail_the_run():
@@ -2310,12 +2312,18 @@ def test_totals_never_come_from_a_dimensioned_query():
     # 直したあとの形が残っているかも確かめる（消されたら気づけない）
     gg = (ROOT / "scripts" / "growth_guard.py").read_text(encoding="utf-8")
     ds = (ROOT / "scripts" / "data_sanity.py").read_text(encoding="utf-8")
+    # 次元なしで直接取っているか、measure（2通りの照合）に任せているか。
+    # measure 経由のほうが強い（一致しなければ値そのものが返らない）
+    ms = (ROOT / "scripts" / "measure.py")
     for name, src in (("growth_guard.py", gg), ("data_sanity.py", ds)):
-        if "None, 1)" not in src:
+        direct = "None, 1)" in src
+        delegated = "measure" in src and ms.is_file() and "None, 1)" in ms.read_text(
+            encoding="utf-8")
+        if not (direct or delegated):
             print(f"  NG  {name} が次元なしの合計を取っていません")
             FAIL.append("totals_from_dimensioned_query")
             return
-    print("  OK  表示・クリックの合計は次元なしで取っている（3サイトとも）")
+    print("  OK  表示・クリックの合計は次元なしで取っている（measure で2通り照合）")
 
 
 def test_stuck_articles_are_pushed_every_week():
@@ -2643,6 +2651,97 @@ def test_interventions_are_measured_against_control():
     print("  OK  打った手を対照群と比べ、記録は3つの自動修正すべてが残している")
 
 
+def test_numbers_come_from_two_methods():
+    """数字が2通りで一致したものだけになっているか。
+
+    CLAUDE.md 0.1 は「1つの測り方の結果をそのまま事実として報告しない」と
+    決めているが、守るかどうかが人とAIの側にあったため同じ誤りが繰り返された。
+    実測（2026-09-23）だけで、合計をquery次元で数える誤りが2箇所、
+    検出器の書き方が違う誤りが3箇所あった。
+    measure.verified を通せば、一致しないかぎり値が取れない。
+
+    あわせて、自動で書き込む工程すべてが検算を持っていることも見る。
+    link_boost は検算を持たない唯一の工程で、実際に表を壊した。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    p = ROOT / "scripts" / "measure.py"
+    if not p.is_file():
+        print("  NG  scripts/measure.py がありません（2通りの照合）")
+        FAIL.append("two_method_numbers")
+        return
+
+    import importlib
+    import measure as M
+    importlib.reload(M)
+    # 食い違ったときに本当に止まるか、その場で試す
+    try:
+        M.verified("ゲートの確認", lambda: 100, lambda: 51, 0.0)
+        print("  NG  食い違っても値を返しています（検算が効いていません）")
+        FAIL.append("two_method_numbers")
+        return
+    except M.Disagree:
+        pass
+    try:
+        if M.verified("ゲートの確認", lambda: 100, lambda: 100, 0.0) != 100:
+            raise AssertionError
+    except Exception:
+        print("  NG  一致しているのに値を返しません")
+        FAIL.append("two_method_numbers")
+        return
+
+    # 合計を measure 経由で取っているか
+    for name in ("growth_guard.py", "data_sanity.py"):
+        s = (ROOT / "scripts" / name).read_text(encoding="utf-8")
+        if "measure" not in s:
+            print(f"  NG  {name} が2通りの照合を通していません")
+            FAIL.append("two_method_numbers")
+            return
+
+    # 自動で書き込む工程は、すべて検算を持つこと
+    checks = {"auto_rewrite.py": "def check(", "auto_review.py": "def guard(",
+              "auto_merge.py": "def ", "link_boost.py": "def insert_ok("}
+    for name, need in checks.items():
+        s = (ROOT / "scripts" / name).read_text(encoding="utf-8")
+        if need not in s:
+            print(f"  NG  {name} に検算がありません（書きっぱなしは壊れます）")
+            FAIL.append("two_method_numbers")
+            return
+    print("  OK  数字は2通りで一致したものだけ／書き込む工程はすべて検算を持つ")
+
+
+def test_structure_is_proposed_monthly():
+    """サイト構成の案が、月次レポートに自動で載るか。
+
+    「次に何を作るか」を人が考えていた。1本ずつ選ぶと同じマスに重なり、
+    空いたマスが残る（実測でクリニック21本に対し工務店のAIOは0本）。
+    盤面・止まっている記事・食い合いから機械が案を作り、月次に載せる。
+    """
+    p = ROOT / "scripts" / "structure_plan.py"
+    if not p.is_file():
+        print("  NG  scripts/structure_plan.py がありません")
+        FAIL.append("structure_proposed")
+        return
+    mr = (ROOT / "scripts" / "monthly_report.py").read_text(encoding="utf-8")
+    if "structure_plan" not in mr or "{plan_html}" not in mr:
+        print("  NG  月次レポートに構成の提案が入っていません")
+        FAIL.append("structure_proposed")
+        return
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import importlib
+    import structure_plan as SP
+    importlib.reload(SP)
+    rows = SP.plan("ai-lab")
+    if not rows:
+        print("  OK  盤面に空きが無いため提案なし（空きが出れば載ります）")
+        return
+    for r in rows[:3]:
+        if not r.get("why"):
+            print("  NG  提案に根拠がありません（実測から作ってください）")
+            FAIL.append("structure_proposed")
+            return
+    print(f"  OK  月次レポートに構成の提案が載る（いま{len(rows)}件・すべて根拠つき）")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2707,7 +2806,9 @@ def main():
               test_coverage_matrix_shows_gaps,
               test_howto_is_emitted_for_step_articles,
               test_guarantee_rate_is_measured,
-              test_interventions_are_measured_against_control):
+              test_interventions_are_measured_against_control,
+              test_numbers_come_from_two_methods,
+              test_structure_is_proposed_monthly):
         try:
             t()
         except Exception as e:

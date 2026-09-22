@@ -189,6 +189,34 @@ def note(tgt, src, kind):
                            ensure_ascii=False) + NL_CH)
 
 
+def insert_ok(before, after):
+    """1本挿し込んだ結果が壊れていないか。崩れていれば理由を返す（空なら合格）。
+
+    link_boost は書き込み後の検算を持たない唯一の自動修正だった。
+    実際にこれが表を壊している（リンク文が表に直結し、パイプ記号のまま
+    本文に出た）。auto_review が週次で拾うまで、壊れたまま配信されていた。
+    """
+    # 塊の数が変わってはいけない。増えるのは段落1つだけ
+    for pat, label in ((r"^\|", "表の行"), (r"^#{2,4} ", "見出し"),
+                       (r"^\s*[-*] ", "箇条書き"), (r"^\s*\d+\. ", "番号リスト")):
+        b = len(re.findall(pat, before, re.M))
+        a = len(re.findall(pat, after, re.M))
+        if b != a:
+            return f"{label}の数が変わった（{b}→{a}）"
+    for tag in ("<figure", "</figure>", "<div", "</div>", "<details", "</details>",
+                "<table", "</table>", "cta-button"):
+        if before.count(tag) != after.count(tag):
+            return f"{tag} の数が変わった"
+    # 表・箇条書き・見出しに直結していないか（空行が要る）
+    for m in re.finditer(r"^(.*\]\(/[^)]+/\)[^\n]*)\n(?=[|#]|\s*[-*] |\s*\d+\. )",
+                         after, re.M):
+        if m.group(1).strip():
+            return "挿し込んだ行が次の塊に直結している（前後に空行が要る）"
+    if len(after) <= len(before):
+        return "本文が増えていない"
+    return ""
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -257,6 +285,10 @@ def main():
                 # （CLAUDE.md の装飾ルール。実測62箇所。ここでも3箇所やってしまった）
                 nb = (b["body"][:pos].rstrip(NL_CH) + NL_CH * 2
                       + line.strip() + NL_CH * 2 + b["body"][pos:].lstrip(NL_CH))
+                ng = insert_ok(b["body"], nb)
+                if ng:
+                    print(f"      見送り（{ng}）")
+                    continue
                 t = b["path"].read_text(encoding="utf-8-sig")
                 head = t.split("---", 2)[1]
                 b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")

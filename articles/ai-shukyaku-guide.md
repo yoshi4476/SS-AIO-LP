@@ -60,17 +60,17 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 近い論点を[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)で扱っています。
 
-近い論点を[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)で扱っています。
+関連する内容として[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)も公開しています。
 
 関連する内容として[税理士のブログ集客とは？書くべき5つの記事テーマ](/seo/zeirishi-blog-shukyaku/)も公開しています。
 
-関連する内容として[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)も公開しています。
+あわせて[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)もご覧ください。
 
-近い論点を[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)で扱っています。
+あわせて[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)もご覧ください。
 
-あわせて[AIO集客とは？向いている業種と始める3つの基準](/aio/aio-shukyaku/)もご覧ください。
+近い論点を[AIO集客とは？向いている業種と始める3つの基準](/aio/aio-shukyaku/)で扱っています。
 
-関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
+あわせて[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)もご覧ください。
 
 当社はMEO運用「G-ran」で通算3,200店舗以上を支援し、その集客の前提が「順位を取る」から「AIの回答に載る」へ移りつつあることを現場で感じています。本記事はその経験と、自社サイトでの実装・計測をもとにしています。
 
@@ -82,13 +82,11 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 入口の分散は印象論ではなく、国内外の調査データで確認できる構造変化です。
 
-近い論点を[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で扱っています。
+関連する内容として[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)も公開しています。
 
-あわせて[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)もご覧ください。
+近い論点を[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)で扱っています。
 
-関連する内容として[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)も公開しています。
-
-近い論点を[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)で扱っています。
+あわせて[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)もご覧ください。
 
 | データ | 数値 | 出典 |
 |:--|:--|:--|
@@ -103,9 +101,9 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 着手の順番は「来店型はMEOから、非来店型はSEOから、その後に全業態でAIO・LLMO」が基本形です。
 
-あわせて[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)もご覧ください。
+関連する内容として[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)も公開しています。
 
-関連する内容として[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)も公開しています。
+近い論点を[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)で扱っています。
 
 ### 来店型・地域密着型（クリニック・士業事務所・不動産店舗・住宅ショールーム・飲食/美容）
 
@@ -137,7 +135,7 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 AI集客の予算は「広告費の置き換え」ではなく「資産づくりの投資」として考えると判断を誤りません。
 
-関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
+あわせて[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)もご覧ください。
 
 広告は止めた瞬間に流入も止まりますが、記事・プロフィール・口コミは止めても残り続ける資産です。判断の目安は3つあります。
 
