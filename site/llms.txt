@@ -167,3 +167,5 @@
 
 ## 一次データ（自社で集計した実測値）
 - [運用サービス別の契約継続率（契約99件の集計）](https://ai.7senses.co.jp/data/keizoku-ritsu-service/): セブンセンシズが提供するSEO運用・AIO運用・経理BPOについて、契約後の一定期間内に解約しなかった割合を、契約一覧から集計しました。
+- [生成AI経由の流入（90日で42セッション）](https://ai.7senses.co.jp/data/ai-keiyu-ryunyu/): ChatGPT・Perplexity・Gemini などの生成AIから自社3サイトへ来たセッション数を、GA4の参照元で集計しました。
+- [検索順位ごとの実測クリック率（表示7,015回の集計）](https://ai.7senses.co.jp/data/kensaku-juni-ctr/): セブンセンシズが運営する3サイトのSearch Consoleから、検索順位の帯ごとに表示回数とクリック数を集計しました。日本語・中小企業向けの実測値です。

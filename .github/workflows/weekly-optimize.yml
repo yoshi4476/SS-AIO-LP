@@ -181,6 +181,19 @@ jobs:
       - name: 実測データの公開ページを更新
         run: python scripts/data_page.py || true
 
+      # 自社の計測結果そのものを一次データとして公開する。
+      # AIが根拠に選ぶのは「そこにしか無い数字」で、手で集計する形にしていた
+      # ため1本しか増えていなかった。GSC・GA4から毎週自動で作り直す
+      - name: 一次データを計測から作り直す
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/data_auto.py --write || true
+          rm -f indexing-service-account.json
+
       # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
       - name: 盤面の空きを出す（業種 × 手法）

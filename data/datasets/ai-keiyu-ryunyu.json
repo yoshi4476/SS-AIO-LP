@@ -1,0 +1,53 @@
+{
+  "slug": "ai-keiyu-ryunyu",
+  "title": "生成AI経由の流入（90日で42セッション）",
+  "description": "ChatGPT・Perplexity・Gemini などの生成AIから自社3サイトへ来たセッション数を、GA4の参照元で集計しました。",
+  "n": 42,
+  "n_unit": "セッション",
+  "period": "2026-06-23〜2026-09-20",
+  "start": "2026-06-23",
+  "end": "2026-09-20",
+  "method": "GA4 の sessionSource を参照元ホスト名で分類し、生成AIのドメインに一致したセッションを合計",
+  "unit": "セッション",
+  "categories": [
+    "aio"
+  ],
+  "den_label": "セッション",
+  "num_label": "流入",
+  "neg_label": "",
+  "rows": [
+    {
+      "label": "chatgpt",
+      "value": 36,
+      "num": 36,
+      "den": 42,
+      "window": "2026-06-23〜2026-09-20",
+      "note": "3サイト合算",
+      "row_start": "2026-06",
+      "row_end": "2026-09"
+    },
+    {
+      "label": "claude",
+      "value": 3,
+      "num": 3,
+      "den": 42,
+      "window": "2026-06-23〜2026-09-20",
+      "note": "3サイト合算",
+      "row_start": "2026-06",
+      "row_end": "2026-09"
+    },
+    {
+      "label": "gemini",
+      "value": 3,
+      "num": 3,
+      "den": 42,
+      "window": "2026-06-23〜2026-09-20",
+      "note": "3サイト合算",
+      "row_start": "2026-06",
+      "row_end": "2026-09"
+    }
+  ],
+  "published": "2026-09-23",
+  "modified": "2026-09-23",
+  "sentence": "セブンセンシズ株式会社が2026-06-23〜2026-09-20に自社3サイトで計測した42セッションをもとに集計した「生成AI経由の流入」では、chatgpt36セッション, claude3セッション, gemini3セッションでした（GA4 の sessionSource を参照元ホスト名で分類し、生成AIのドメインに一致したセッションを合計）。"
+}

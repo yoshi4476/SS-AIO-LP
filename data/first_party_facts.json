@@ -269,6 +269,25 @@
       "verifiable": true
     },
     {
+      "id": "dataset-ai-keiyu-ryunyu",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "セブンセンシズ株式会社が2026-06-23〜2026-09-20に自社3サイトで計測した42セッションをもとに集計した「生成AI経由の流入」では、chatgpt36セッション, claude3セッション, gemini3セッションでした（GA4 の sessionSource を参照元ホスト名で分類し、生成AIのドメインに一致したセッションを合計）。",
+      "source": "セブンセンシズ株式会社 一次データ「生成AI経由の流入（90日で42セッション）」 https://ai.7senses.co.jp/data/ai-keiyu-ryunyu/",
+      "as_of": "2026-09",
+      "denominator": 42,
+      "period": "2026-06-23〜2026-09-20",
+      "verifiable": true
+    },
+    {
       "id": "dataset-keizoku-ritsu-service",
       "sites": [
         "ai-lab",
@@ -287,6 +306,26 @@
       "as_of": "2026-09",
       "denominator": 99,
       "period": "2023-01〜2026-09",
+      "verifiable": true
+    },
+    {
+      "id": "dataset-kensaku-juni-ctr",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "SEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "セブンセンシズ株式会社が2026-06-23〜2026-09-20に自社3サイトで計測した7015回（表示）をもとに集計した「検索順位ごとの実測クリック率」では、1〜3位6.28%, 4〜10位1.02%, 11〜20位0.09%, 21〜30位0.16%でした（Search Console の query×page 次元を90日分取得し、平均掲載順位の帯ごとに表示回数とクリック数を合計。クリック率＝クリック数÷表示回数。表示30回未満の帯は除外）。",
+      "source": "セブンセンシズ株式会社 一次データ「検索順位ごとの実測クリック率（表示7,015回の集計）」 https://ai.7senses.co.jp/data/kensaku-juni-ctr/",
+      "as_of": "2026-09",
+      "denominator": 7015,
+      "period": "2026-06-23〜2026-09-20",
       "verifiable": true
     }
   ],
