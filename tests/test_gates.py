@@ -14,6 +14,7 @@
      相殺し、</content> が公開HTMLに残った
   4. 採点とビルドで文字数の数え方が違い、同じ記事が5,251字と4,922字になった
 """
+import os
 import re
 import subprocess
 import sys
@@ -2369,6 +2370,81 @@ def test_stuck_articles_are_pushed_every_week():
     print(f"  OK  11〜30位の記事に毎週手が入る（診断・内部リンク・書き換え）{note}")
 
 
+def test_publish_gate_actually_blocks():
+    """品質検査に落ちた新規記事が、本当に公開されないか。
+
+    CLAUDE.md は「警告ゼロが公開条件」と書いているが、build.py は長らく
+    WARN を印字するだけで、記事はそのまま site/ に書き出され配信されていた。
+    実測（2026-09-23）で、文字数不足・図解の項目超過・狙う語がタイトルに無い
+    記事が公開済みだった。印字は検査ではない。ここで実際に止まるかを見る。
+
+    止めるのは未公開の記事だけにする。公開済みを後から取り下げると、
+    取れている順位まで失うため。
+    """
+    import shutil
+    import subprocess
+
+    src = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    for need, why in (("QUALITY_ISSUES", "品質不合格を集める入れ物がありません"),
+                      ("published.json", "公開済みの台帳がありません"),
+                      ("title_has_keyword", "狙う語がタイトルにあるかの検査がありません")):
+        if need not in src:
+            print(f"  NG  {why}")
+            FAIL.append("publish_gate_blocks")
+            return
+
+    slug = "zz-gate-selftest-kiji"
+    NL = chr(10)
+    md = ROOT / "articles" / f"{slug}.md"
+    body = (
+        "---" + NL
+        + "title: 門番の自己診断に使う記事｜公開されてはいけません" + NL
+        + "description: このファイルはゲートが実際に公開を止めるかを確かめるために"
+        + "その場で作られ、確認が終わると必ず消されます。公開されたら不具合です。" + NL
+        + f"slug: {slug}" + NL
+        + "keyword: 門番 自己診断" + NL
+        + "category: meo" + NL
+        + "date: 2026-01-01" + NL
+        + "depth: standard" + NL
+        + "score: 95" + NL
+        + "---" + NL + NL
+        + "## 短すぎる見出し" + NL + NL
+        + "基準に届かない短い本文です。" + NL)
+    try:
+        md.write_text(body, encoding="utf-8", newline="")
+        env = dict(os.environ, PYTHONIOENCODING="utf-8")
+        r = subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, env=env,
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=1800)
+        out = r.stdout or ""
+        blocked = f"BLOCKED(公開不可): {slug}" in out
+        html = list((ROOT / "site").glob(f"*/{slug}/index.html"))
+        smap = (ROOT / "site" / "sitemap.xml").read_text(encoding="utf-8")
+        broke = [l for l in out.splitlines() if "リンク切れ" in l and slug in l]
+        if not blocked:
+            print("  NG  品質検査に落ちた新規記事が BLOCKED になりません")
+            FAIL.append("publish_gate_blocks")
+        elif html:
+            print("  NG  止めたはずの記事のHTMLが作られています")
+            FAIL.append("publish_gate_blocks")
+        elif slug in smap:
+            print("  NG  止めたはずの記事が sitemap に載っています")
+            FAIL.append("publish_gate_blocks")
+        elif broke:
+            print(f"  NG  止めた記事への内部リンクが残っています（{len(broke)}件）")
+            FAIL.append("publish_gate_blocks")
+        else:
+            print("  OK  品質検査に落ちた新規記事は公開されない（HTML・sitemap・リンクとも）")
+    finally:
+        md.unlink(missing_ok=True)
+        for d in (ROOT / "site").glob(f"*/{slug}"):
+            shutil.rmtree(d, ignore_errors=True)
+        subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT,
+                       env=dict(os.environ, PYTHONIOENCODING="utf-8"),
+                       capture_output=True, text=True, encoding="utf-8",
+                       errors="replace", timeout=1800)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2428,7 +2504,8 @@ def main():
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,
-              test_stuck_articles_are_pushed_every_week):
+              test_stuck_articles_are_pushed_every_week,
+              test_publish_gate_actually_blocks):
         try:
             t()
         except Exception as e:

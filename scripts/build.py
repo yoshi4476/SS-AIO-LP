@@ -422,6 +422,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     # マーカー数チェック（自動生成記事の装飾漏れ検出。基準: 8箇所以上、推奨12-18）
     marker_count = content.count("<strong>") + content.count("<mark>")
     if marker_count < 8:
+        QUALITY_ISSUES.setdefault(meta["slug"], []).append(
+            f"マーカー不足（強調{marker_count}箇所・基準8以上）")
         print(f"WARN: マーカー不足: {meta['slug']} は強調が{marker_count}箇所"
               f"（基準8箇所以上・推奨12-18箇所。**太字** か ==マーカー== を追加すること）")
 
@@ -429,6 +431,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     # 実際、コーポレートは88本中75本に行き先が無く、記事からの反応がゼロだった。
     # 自己診断・サイト診断・問い合わせのどれか1つは必ず本文に置く。
     if not re.search(r"/diagnosis/|/site-audit/|#diagnosis|/contact|/lp/", content):
+        QUALITY_ISSUES.setdefault(meta["slug"], []).append("リード導線なし")
         print(f"WARN: リード導線なし: {meta['slug']} には無料診断・問い合わせのリンクが"
               f"ありません（python scripts/tool_links.py --write で入ります）")
 
@@ -440,6 +443,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     need = {"quick": 3000, "standard": 5000, "deep": 8000}.get(
         str(meta.get("depth") or "standard"), 5000)
     if len(plain) < need:
+        QUALITY_ISSUES.setdefault(meta["slug"], []).append(
+            f"文字数不足（{len(plain):,}字・基準{need:,}字）")
         print(f"WARN: 文字数不足: {meta['slug']} は本文{len(plain):,}字"
               f"（depth: {meta.get('depth') or 'standard'} の基準{need:,}字以上。"
               f"セクション追加・実務情報の深掘りで増強すること）")
@@ -545,6 +550,62 @@ def sync_listings(all_metas):
     for cat in CATEGORIES:
         cat_metas = [m for m in newest if m["category"] == cat]
         replace(SITE / cat / "index.html", cat_metas, f"カテゴリ {cat}")
+
+
+# 記事ごとの品質不合格。印字するだけでは公開を止められないため、ここに集める。
+# 「まだ公開していない記事」だけを止める（公開済みを取り下げると順位を失う）
+QUALITY_ISSUES = {}
+PUBLISHED_LEDGER = ROOT / "data" / "published.json"
+
+
+def published_slugs():
+    """これまでに公開した記事。初回は空を返さず、今ある記事で台帳を作る"""
+    import json
+    if PUBLISHED_LEDGER.is_file():
+        try:
+            return set(json.loads(PUBLISHED_LEDGER.read_text(encoding="utf-8")))
+        except Exception:
+            return None
+    return None                      # 台帳が無い＝初回。今回は何も止めない
+
+
+def save_published(slugs):
+    import json
+    PUBLISHED_LEDGER.parent.mkdir(parents=True, exist_ok=True)
+    PUBLISHED_LEDGER.write_text(
+        json.dumps(sorted(slugs), ensure_ascii=False, indent=1),
+        encoding="utf-8", newline="\n")
+
+
+def title_has_keyword(title, kw):
+    """狙う語がタイトルに入っているか。助詞と記号の違いは同じ語とみなす。
+
+    実測（2026-09-23）で、記事全体が「AIかんたん集客」で書かれているのに
+    タイトルだけ「AI集客とは？」の記事があり、表示88回を取りこぼしていた。
+    検索結果に出るのはタイトルなので、ここが外れると順位があっても選ばれない。
+    """
+    if not kw:
+        return True
+    # 自然文の狙う語（AI検索でそのまま聞かれる形）は、タイトルに丸ごと入れない。
+    # 「大阪でmeoとaioの両方を支援してくれる会社を教えてください。」のような語を
+    # タイトルに要求すると、読みにくい見出しを強いることになる
+    import re as _re
+    if (_re.search(r"[？?。]$|教えて|ですか|ください|したい|おすすめの", kw)
+            or (len(kw) >= 14 and " " not in kw and "　" not in kw)):
+        return True
+    drop = "\u3000・･／/（）()｜|【】[]「」、。,.-‐－—ー_ のをにはがともへやかでるな？?！!"
+    def norm(s):
+        return re.sub(r"\s", "", s.lower().translate({ord(c): None for c in drop}))
+    lt, nt, nk = title.lower(), norm(title), norm(kw)
+    parts = [w for w in re.split(r"[\s\u3000]+", kw) if len(w) >= 2]
+    if any(w.lower() in lt for w in parts):
+        return True
+    if nk and nk in nt:
+        return True
+    toks = [x for x in re.split(r"[\s\u3000]+", kw) if len(x) >= 2]
+    if not toks:
+        return True
+    return sum(1 for x in toks if norm(x) in nt) / len(toks) >= 0.7
 
 
 def quality_checks(all_metas):
@@ -911,6 +972,10 @@ def main():
             blocked.append(f"{meta['slug']}: 観点足切り {weak}（各16/20以上が必要）")
             blocked_metas.append(meta)
             continue
+        if not title_has_keyword(str(meta.get("title") or ""),
+                                 str(meta.get("keyword") or "")):
+            QUALITY_ISSUES.setdefault(meta["slug"], []).append(
+                f"狙う語がタイトルに無い（{meta.get('keyword')}）")
         paths.append(p)
         all_metas.append(meta)
     for b in blocked:
@@ -926,24 +991,65 @@ def main():
             shutil.rmtree(stale)
             print(f"REMOVED: 隔離記事の生成HTMLを削除: {stale.relative_to(SITE)}/")
 
+    # これまでに公開した記事。台帳が無い初回は何も止めず、台帳だけ作る
+    _known = published_slugs()
+    late_blocked = set()          # 品質検査で止めた記事。一覧からも外す
+
     # 前後ナビ用の時系列順（公開日→slugで安定ソート）
     ordered = sorted(all_metas, key=lambda m: (str(m["date"]), m["slug"]))
     pos = {m["slug"]: i for i, m in enumerate(ordered)}
 
-    for path in paths:
-        meta = next(m for m in all_metas if m["slug"] == parse_article(path)[0]["slug"])
-        i = pos[meta["slug"]]
-        prev_meta = ordered[i - 1] if i > 0 else None
-        next_meta = ordered[i + 1] if i < len(ordered) - 1 else None
-        meta, url = build_article(path, template, related_html(meta, all_metas),
-                                  unpublished_urls=unpublished_urls,
-                                  prevnext=prev_next_html(prev_meta, next_meta))
+    def render_all(metas, skip):
+        """記事を描画して (meta, url) を集める。skip の記事は描かない。
+
+        前後ナビの並びは、渡された metas から作り直す。止めた記事を含んだ並びを
+        使い回すと、隣の記事から「次の記事」として404へリンクが残る
+        """
+        seq = sorted(metas, key=lambda m: (str(m["date"]), m["slug"]))
+        idx = {m["slug"]: i for i, m in enumerate(seq)}
+        out = []
+        for path in paths:
+            slug = parse_article(path)[0]["slug"]
+            if slug in skip or slug not in idx:
+                continue
+            meta = next(m for m in metas if m["slug"] == slug)
+            i = idx[meta["slug"]]
+            prev_meta = seq[i - 1] if i > 0 else None
+            next_meta = seq[i + 1] if i < len(seq) - 1 else None
+            meta, url = build_article(path, template, related_html(meta, metas),
+                                      unpublished_urls=unpublished_urls,
+                                      prevnext=prev_next_html(prev_meta, next_meta))
+            out.append((meta, url))
+        return out
+
+    rendered = render_all(all_metas, set())
+    for meta, url in rendered:
+        # 「警告ゼロが公開条件」を実際に守らせる。ただし止めるのは未公開の記事だけ。
+        # 公開済みを後から取り下げると、取れている順位まで失う
+        issues = QUALITY_ISSUES.get(meta["slug"]) or []
+        if issues and _known is not None and meta["slug"] not in _known:
+            blocked.append(f"{meta['slug']}: " + " / ".join(issues))
+            print(f"BLOCKED(公開不可): {meta['slug']}: " + " / ".join(issues)
+                  + " → 直してから再度ビルドしてください")
+            stale = SITE / meta["category"] / meta["slug"]
+            if stale.exists():
+                import shutil
+                shutil.rmtree(stale)
+            unpublished_urls.add(f"/{meta['category']}/{meta['slug']}/")
+            late_blocked.add(meta["slug"])
+            continue
         entries.append((meta, url))
         if url not in llms:
             warns.append(f"llms.txt 未追記: {meta['title']} -> {url}")
         if only and meta["slug"] == only:
             print(f"built: {url}")
 
+    # 止めた記事を一覧・関連・業種ハブから外す。残すと内部リンクが404になる。
+    # 先に描いた記事は、止めた記事への関連リンクを持ったままなので描き直す
+    if late_blocked:
+        all_metas = [m for m in all_metas if m["slug"] not in late_blocked]
+        print(f"再描画: {len(late_blocked)}本を止めたため、関連リンクを作り直します")
+        entries = render_all(all_metas, late_blocked)
     build_blog_index(all_metas)
     build_industry_hubs(all_metas)
     build_sitemap(entries)
@@ -988,6 +1094,19 @@ def main():
                   + " / ".join(f"{n} 原稿{a}→出力{b}" for n, a, b in g))
     if not gaps:
         print("取りこぼし検査: 原稿に書いたものは全て出力に出ています")
+
+    # 公開できた記事を台帳に残す。次回からは、ここに無い記事が不合格なら止まる
+    save_published({m["slug"] for m, _ in entries})
+    if _known is None:
+        print(f"公開台帳を作りました（{len(entries)}本）。"
+              "次のビルドからは、品質検査に落ちた新規記事は公開されません")
+    still = {s: v for s, v in QUALITY_ISSUES.items()
+             if _known and s in _known}
+    if still:
+        print(f"要対応: 公開済みで品質検査に落ちている記事 {len(still)}本"
+              "（取り下げず、直す対象として扱います）")
+        for s, v in list(still.items())[:6]:
+            print(f"   {s}: " + " / ".join(v))
 
 
 if __name__ == "__main__":
