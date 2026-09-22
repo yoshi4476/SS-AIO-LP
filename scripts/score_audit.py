@@ -85,24 +85,28 @@ def published(limit=0, seed=0):
 
 
 def audit_one(slug, html_path):
-    """1本を採点し直す。書き換えはできない（Read だけ）"""
+    """1本を採点し直す。書き換えはできない（Read だけ）。
+
+    基準は rubric.py（3軸×10点）。機械で数えられることは採点させない。
+    証拠を書かせたうえで、最後の1行だけを機械が読む。
+    """
     import auto_rewrite as A
+    import rubric as R
     rel = html_path.relative_to(ROOT).as_posix()
-    prompt = PROMPT.format(path=rel)
+    prompt = R.prompt_for(rel)
     r = A.sh([A.claude_bin(), "-p", "--max-turns", "12", "--allowedTools", "Read"],
              timeout=900, stdin_text=prompt)
     text = (r.stdout or "")
-    m = re.search(r"SCORES\s+design=(\d+)\s+seo=(\d+)\s+editorial=(\d+)\s+"
-                  r"expert=(\d+)\s+persona=(\d+)\s+aio=(\d+)", text)
+    m = re.search(r"SCORES\s+originality=(\d+)\s+extractability=(\d+)\s+"
+                  r"decision=(\d+)", text)
     if not m:
-        return None, text[:200]
-    bd = dict(zip(("design", "seo", "editorial", "expert", "persona", "aio"),
-                  (int(x) for x in m.groups())))
-    total = sum(bd.values())
-    return {"breakdown": bd, "total120": total,
-            "score100": round(total / 120 * 100),
-            # 足切り: 1観点でも16未満なら不合格（合計で壊滅観点を隠さない）
-            "weak": {k: v for k, v in bd.items() if v < 16}}, ""
+        return None, text[-200:] if text else "応答がありません"
+    sc = {"originality": int(m.group(1)), "extractability": int(m.group(2)),
+          "decision": int(m.group(3))}
+    got = R.judge(sc)
+    # 証拠（採点者が書いた弱い点）も残す。点数だけでは直せない
+    reason = text[:1800]
+    return {"axes": sc, **got, "reason": reason}, ""
 
 
 def load():
@@ -122,31 +126,37 @@ def save(d):
 
 def compare():
     d = load()
-    rows = [(s, v["self"], v["audit"]["score100"], v["audit"].get("weak") or {})
-            for s, v in d.items() if v.get("audit")]
+    rows = [(s, v["self"], v["audit"].get("total", 0), v["audit"].get("weak") or {})
+            for s, v in d.items() if v.get("audit") and "total" in v["audit"]]
     if not rows:
         print("  採点し直した記事がありません（--limit で実行してください）")
         print("SCORE_AUDIT_OK=yes")
         return 0
+    import rubric as R
     import statistics as st
-    gaps = [a - b for _, a, b, _ in rows]
-    below = [r for r in rows if r[2] < 90]
+    below = [r for r in rows if r[2] < R.PASS_TOTAL]
     weak = [r for r in rows if r[3]]
-    print(f"■ 自己申告と、別工程の採点の差（{len(rows)}本）\n")
-    print(f"{'記事':<34}{'自己申告':>9}{'採点し直し':>11}{'差':>7}")
-    for s, a, b, w in sorted(rows, key=lambda x: x[1] - x[2], reverse=True)[:15]:
-        mark = " ×" if b < 90 else ("  足切り" if w else "")
-        print(f"{s[:32]:<34}{a:>9}{b:>11}{a - b:>+7}{mark}")
-    print(f"\n  差の中央値: {st.median(gaps):+.0f}点"
-          f"（自己申告のほうが高ければプラス）")
-    print(f"  90点を割った記事: {len(below)}/{len(rows)}本")
-    print(f"  1観点が16点未満（足切り）: {len(weak)}/{len(rows)}本")
+    print(f"■ 別工程の採点（基準 {R.VERSION}・{len(rows)}本）\n")
+    print(f"{'記事':<34}{'合計':>7}{'一次性':>7}{'抽出性':>7}{'決定':>6}  判定")
+    for s, _self, tot, w in sorted(rows, key=lambda x: x[2]):
+        ax = (d[s]["audit"].get("axes") or {})
+        mark = d[s]["audit"].get("why", "")
+        print(f"{s[:32]:<34}{tot:>5}/30{ax.get('originality', 0):>7}"
+              f"{ax.get('extractability', 0):>7}{ax.get('decision', 0):>6}  {mark[:28]}")
+    tots = [r[2] for r in rows]
+    print(f"\n  合計の中央値: {st.median(tots):.0f}/30")
+    print(f"  合計{R.PASS_TOTAL}点を割った記事: {len(below)}/{len(rows)}本")
+    print(f"  1軸が{R.PASS_EACH}点未満（足切り）: {len(weak)}/{len(rows)}本")
+    for a in R.AXES:
+        vals = [(d[s]["audit"].get("axes") or {}).get(a["key"], 0) for s, *_ in rows]
+        if vals:
+            print(f"    {a['name']:<8}中央値 {st.median(vals):>4.1f}/10"
+                  f"  （{a['what']}）")
     bad = len(below) + len(weak)
     print("SCORE_AUDIT_OK=" + ("no" if bad else "yes"))
     if bad:
-        print(f"   ::warning::別工程の採点で基準を割った記事が{len(below)}本、"
-              f"1観点が壊滅している記事が{len(weak)}本あります。"
-              "自己申告の点数は公開条件として働いていません")
+        print(f"   ::warning::別工程の採点で合計が基準を割った記事が{len(below)}本、"
+              f"1軸が壊滅している記事が{len(weak)}本あります")
     return 0
 
 
@@ -174,10 +184,10 @@ def main():
             print(f"  {i:>2}. × {slug[:32]:<34} 採点できません（{err[:50]}）")
             continue
         d[slug] = {"at": str(date.today()), "self": self_score, "audit": res}
-        gap = self_score - res["score100"]
-        w = "／足切り " + ",".join(res["weak"]) if res["weak"] else ""
-        print(f"  {i:>2}. {slug[:32]:<34} 自己{self_score} → 採点{res['score100']}"
-              f"（{gap:+d}）{w}")
+        ax = res["axes"]
+        print(f"  {i:>2}. {slug[:32]:<34} 合計{res['total']:>2}/30"
+              f"（一次性{ax['originality']} 抽出性{ax['extractability']}"
+              f" 決定{ax['decision']}）{res['why'][:24]}")
         save(d)
     print()
     return compare()

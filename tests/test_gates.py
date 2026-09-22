@@ -2808,6 +2808,46 @@ def test_score_is_audited_and_cta_is_enforced():
             FAIL.append("score_audited")
             return
 
+    # 採点の基準が1か所にまとまり、版が付いていること
+    rb = ROOT / "scripts" / "rubric.py"
+    if not rb.is_file():
+        print("  NG  scripts/rubric.py がありません（採点の基準）")
+        FAIL.append("score_audited")
+        return
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import importlib
+    import rubric as R
+    importlib.reload(R)
+    if not getattr(R, "VERSION", ""):
+        print("  NG  採点の基準に版がありません（変えたときに比べられません）")
+        FAIL.append("score_audited")
+        return
+    # 各軸に、点の目安（アンカー）が書かれていること。無いと採点がぶれる
+    for ax in R.AXES:
+        if len(ax.get("anchors") or []) < 3:
+            print(f"  NG  {ax['name']} に点の目安がありません（採点がぶれます）")
+            FAIL.append("score_audited")
+            return
+    # 足切りが効くこと。合計だけで壊滅軸を隠さない
+    if R.judge({a["key"]: 10 for a in R.AXES})["ok"] is not True:
+        print("  NG  満点が合格になりません")
+        FAIL.append("score_audited")
+        return
+    low = {a["key"]: 10 for a in R.AXES}
+    low[R.AXES[0]["key"]] = R.PASS_EACH - 1
+    if R.judge(low)["ok"] is not False:
+        print("  NG  1軸が下限を割っても合格にしています（足切りが効いていません）")
+        FAIL.append("score_audited")
+        return
+    # 書く側にも同じ基準が渡っていること
+    wp = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
+    for ax in R.AXES:
+        if ax["name"] not in wp:
+            print(f"  NG  記事を書く指示に「{ax['name']}」がありません"
+                  "（採点だけ変えても書く側が古い基準を見ます）")
+            FAIL.append("score_audited")
+            return
+
     sa = (ROOT / "scripts" / "score_audit.py").read_text(encoding="utf-8")
     # 採点者が元の点数を見ないこと（公開HTMLを読ませる）
     if "site" not in sa or "Read" not in sa:

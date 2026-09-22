@@ -55,8 +55,27 @@ def _post(url, body, headers, timeout=TIMEOUT):
             return json.loads(r.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         # 何が悪いか（モデル名・ツール名・キーの制限）は本文にしか書かれていない
-        body = e.read().decode("utf-8", "ignore")[:200].replace(chr(10), " ")
-        raise RuntimeError(f"HTTP {e.code}: {body}") from None
+        body = e.read().decode("utf-8", "ignore")[:300].replace(chr(10), " ")
+        # 何が悪いかで対処が違う。まとめて「失敗」にすると原因が分からない
+        hint = {404: "モデル名が古い（GEMINI_MODEL で指定できます）",
+                429: "枠切れ。検索つきの呼び出しは無料枠では足りません",
+                503: "一時的な混雑。しばらく待つと通ります",
+                401: "鍵が正しくありません",
+                403: "鍵に権限がありません"}.get(e.code, "")
+        raise RuntimeError(f"HTTP {e.code}: {hint}｜{body}") from None
+
+
+def _mark(r):
+    """引用の有無と、失敗なら理由の要点。対処が違うので区別して出す"""
+    if r.get("cited"):
+        return "引用"
+    e = str(r.get("error") or "")
+    if not e:
+        return "無"
+    for code, label in (("429", "枠切れ"), ("503", "混雑"), ("404", "モデル名"), ("401", "鍵"), ("403", "権限")):
+        if code in e:
+            return label
+    return "失敗"
 
 
 def _final_url(u):
@@ -89,7 +108,10 @@ def ask_gemini(q):
     key = _env("GEMINI_API_KEY")
     if not key:
         return None
-    d = _post(f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={key}",
+    # モデル名は変わる。gemini-2.5-flash は新規利用が止まり404になった（2026-09-23）。
+    # 環境変数で差し替えられるようにして、次に変わったとき直さずに済ませる
+    model = _env("GEMINI_MODEL") or "gemini-3.6-flash"
+    d = _post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
               {"contents": [{"parts": [{"text": q}]}], "tools": [{"google_search": {}}]}, {})
     urls = []
     for cand in d.get("candidates", []):
@@ -199,7 +221,7 @@ def main():
             cited += hit
             items.append(row)
             print(f"   {'○' if hit else '－'} {q[:30]:<30} " + " ".join(
-                f"{n}:{'引用' if (r.get('cited')) else ('失敗' if 'error' in r else '無')}" for n, r in row["engines"].items()))
+                f"{n}:{_mark(r)}" for n, r in row["engines"].items()))
         measured["sites"][sid] = {"queries": len(qs), "cited": cited, "items": items}
         total_q += len(qs); total_cited += cited
         print(f"   {cfg['name']}: 引用 {cited}/{len(qs)}語")

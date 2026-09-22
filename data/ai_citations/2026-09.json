@@ -191,7 +191,7 @@
             "kw": "口コミ返信 医療機関",
             "engines": {
               "Gemini": {
-                "error": "HTTP 404: {   \"error\": {     \"code\": 404,     \"message\": \"This model models/gemi"
+                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
               }
             },
             "cited": false
