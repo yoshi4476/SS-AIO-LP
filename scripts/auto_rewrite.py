@@ -169,10 +169,37 @@ WHAT = {
 PERM = json.dumps({"permissions": {
     # articles/ の書き換えだけを許す。Bash も外部通信も渡さないので、
     # この工程にできるのは原稿1本の書き換えだけ。
-    # 全部を飛ばす指定（--dangerously-skip-permissions）は使わない
+    # 全権限を飛ばす指定は使わない（ゲートが綴りの有無で見張っている）
     "allow": ["Read", "Edit(articles/**)"],
     "defaultMode": "acceptEdits",
 }}, ensure_ascii=False)
+
+
+KW_NOISE = re.compile(r"[\s　のをにはがともへやかでるな・｜|【】\[\]「」（）()？?！!、。,.:：/／-]")
+
+
+def title_covers_kw(title, kw):
+    """タイトルが狙う語を扱っているか。助詞・記号の違いは同じ語とみなす。
+
+    そのまま含まれるかだけで見ると「中小企業助成金」に対する
+    「中小企業の助成金とは？」が落ちる。落ちた記事は検算を通らないので、
+    どう直しても差し戻され、二度と直せなくなる（実測4本）。
+    """
+    parts = [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
+    if not parts:
+        return True
+    lt = title.lower()
+    if any(w.lower() in lt for w in parts):
+        return True
+    nt, nk = KW_NOISE.sub("", lt), KW_NOISE.sub("", kw.lower())
+    if nk and nk in nt:
+        return True
+    # 自然文の狙う語は丸ごと一致しない。内容語がどれだけ入っているかで見る
+    toks = [x for x in re.split(KW_NOISE, kw.lower()) if len(x) >= 2]
+    if not toks:
+        return False
+    hit = sum(1 for x in toks if KW_NOISE.sub("", x) in nt)
+    return hit / len(toks) >= 0.7
 
 
 def claude_bin():
@@ -239,8 +266,7 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
         return f"狙う語が変わりました（{kw0} → {kw}）"
     if not (TITLE_MIN <= len(title) <= TITLE_MAX):
         return f"タイトルが{len(title)}字（{TITLE_MIN}〜{TITLE_MAX}字）"
-    parts = [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
-    if parts and not any(w.lower() in title.lower() for w in parts):
+    if not title_covers_kw(title, kw):
         return f"タイトルに狙う語が入っていません（{kw}）"
 
     b = before[2]

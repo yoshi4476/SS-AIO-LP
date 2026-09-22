@@ -602,7 +602,8 @@ def test_near_page1_is_pushed_every_week():
     # 主力の語に絞る。関係ない語で上位を取っても相談につながらない
     for sid in ("ai-lab", "corporate", "subsidy"):
         check(f"{sid} の主力の語を持っている", bool(pb.MAIN_PATTERN.get(sid)), True)
-    check("あと少しの帯を狙う", pb.NEAR[0] >= 10 and pb.NEAR[1] <= 21, True)
+    # 11〜30位。20.5で切っていたため21〜30位の138語・表示801回が対象外だった
+    check("あと少しの帯を狙う", pb.NEAR[0] >= 10 and pb.NEAR[1] >= 30, True)
     check("被リンクの下限がある", pb.INBOUND_FLOOR >= 10, True)
     # タイトルの判断は人に残す。機械が当てると主張のずれた記事になる
     src = (ROOT / "scripts" / "priority_boost.py").read_text(encoding="utf-8")
