@@ -172,6 +172,8 @@ faq:
 
 自社での確認に不安がある場合、経理BPOの無料相談で請求書のチェック体制を相談することもできます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -183,6 +185,8 @@ faq:
 </div>
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 外注費の請求書は6項目の記載と2026年の制度変更への対応が鍵
 

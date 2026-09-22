@@ -174,6 +174,8 @@ faq:
 
 Sansanが2024年3月に実施した<a href="https://news.mynavi.jp/techplus/article/20240328-2916279/" target="_blank" rel="noopener">経理担当者向けの人手不足に関する調査</a>（請求書業務担当者1,000人対象）があります。この調査では、**経理担当者の50.1%が人手不足を感じ、うち85.2%が「深刻」**と回答しています。個人事業主やひとり経理の会社ほど、丸投げできる範囲を正確に把握する意味は大きいといえます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -183,6 +185,8 @@ Sansanが2024年3月に実施した<a href="https://news.mynavi.jp/techplus/arti
 <details><summary>経理を丸投げすると偽装請負になりませんか？</summary><p class="faq-a">委託先の担当者に直接指示を出すと偽装請負のおそれがあります。業務の完成責任は委託先に委ねてください。</p></details>
 <details><summary>丸投げを始める前に何を決めておくべきですか？</summary><p class="faq-a">委託する業務と自社に残す業務の線引きを、契約書で具体的に明文化しておくことが重要です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理の丸投げは範囲を決めてから始める
 

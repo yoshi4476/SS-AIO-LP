@@ -159,6 +159,8 @@ Sansanが2024年3月に実施した<a href="https://news.mynavi.jp/techplus/arti
 
 第三に、契約書案の業務範囲・費用条件・解除条件を確認します。第四に、いきなり全業務を任せず、1〜2か月は一部業務だけで試験運用し、報告の質と対応スピードを見極めてから本格移行するのが安全です。自社だけで判断がつかない場合は、経理BPOの無料相談で比較のポイントを一緒に整理することもできます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -168,6 +170,8 @@ Sansanが2024年3月に実施した<a href="https://news.mynavi.jp/techplus/arti
 <details><summary>経理代行の費用相場はどれくらいですか？</summary><p class="faq-a">仕訳数に応じた従量制が中心で、100仕訳まで月額数千円〜が目安です。範囲により変動します。</p></details>
 <details><summary>経理代行を比較する際、何社に見積もりを依頼すべきですか？</summary><p class="faq-a">最低3社に同条件で依頼すると、対応範囲と費用の相場感を客観的に比較できます。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理代行の選び方は5軸の比較と段階的な試験運用で決める
 

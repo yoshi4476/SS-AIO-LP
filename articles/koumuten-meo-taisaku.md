@@ -169,6 +169,8 @@ Googleビジネスプロフィールの管理画面では、検索での表示�
 
 AI検索での紹介先候補になるかどうかも、プロフィールと口コミの整備が土台です。対応エリア・工法・強みをテキストで具体的に書くことは、[AIO対策なのに表示されない8つの原因と対処法](/aio/aio-taisaku-hyouji-sarenai/)で解説した「抽出しやすい構造」の考え方にも通じます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -179,6 +181,8 @@ AI検索での紹介先候補になるかどうかも、プロフィールと口
 <details><summary>MEOの効果が出るまでどのくらいかかりますか？</summary><p class="faq-a">整備状況によりますが、数週間〜3ヶ月で表示回数の変化が見え始めるケースが多いです。</p></details>
 <details><summary>支店やモデルハウスが複数ある場合はどうすればいいですか？</summary><p class="faq-a">実際に来場・常駐対応できる拠点ごとに1つずつプロフィールを分けて登録します。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 工務店のMEOは「実態の正確な登録×継続運用」
 

@@ -168,6 +168,8 @@ Notionは入力されたデータをそのまま記録するだけで、金額�
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -178,6 +180,8 @@ Notionは入力されたデータをそのまま記録するだけで、金額�
 <details><summary>Notionでの記帳自動化はどんな人に向いていますか？</summary><p class="faq-a">取引件数が少なく、収支を自由な形式で可視化したい個人事業主に向いています。</p></details>
 <details><summary>Notionの記帳データベースが限界に達したらどうすればいいですか？</summary><p class="faq-a">取引量が増えたら会計ソフトへの移行や記帳代行への外注を検討してください。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: Notionの記帳自動化は「入力ルール」と「バックアップ」で機能する
 

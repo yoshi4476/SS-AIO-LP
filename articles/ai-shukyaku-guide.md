@@ -68,9 +68,9 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 あわせて[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)もご覧ください。
 
-近い論点を[AIO集客とは？向いている業種と始める3つの基準](/aio/aio-shukyaku/)で扱っています。
+あわせて[AIO集客とは？向いている業種と始める3つの基準](/aio/aio-shukyaku/)もご覧ください。
 
-あわせて[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)もご覧ください。
+関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
 
 当社はMEO運用「G-ran」で通算3,200店舗以上を支援し、その集客の前提が「順位を取る」から「AIの回答に載る」へ移りつつあることを現場で感じています。本記事はその経験と、自社サイトでの実装・計測をもとにしています。
 
@@ -82,11 +82,11 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 入口の分散は印象論ではなく、国内外の調査データで確認できる構造変化です。
 
-関連する内容として[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)も公開しています。
+近い論点を[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で扱っています。
 
-近い論点を[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)で扱っています。
+あわせて[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)もご覧ください。
 
-あわせて[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)もご覧ください。
+関連する内容として[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)も公開しています。
 
 | データ | 数値 | 出典 |
 |:--|:--|:--|
@@ -101,9 +101,9 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 着手の順番は「来店型はMEOから、非来店型はSEOから、その後に全業態でAIO・LLMO」が基本形です。
 
-関連する内容として[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)も公開しています。
+近い論点を[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)で扱っています。
 
-近い論点を[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)で扱っています。
+あわせて[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)もご覧ください。
 
 ### 来店型・地域密着型（クリニック・士業事務所・不動産店舗・住宅ショールーム・飲食/美容）
 
@@ -135,7 +135,7 @@ AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引
 
 AI集客の予算は「広告費の置き換え」ではなく「資産づくりの投資」として考えると判断を誤りません。
 
-あわせて[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)もご覧ください。
+関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
 
 広告は止めた瞬間に流入も止まりますが、記事・プロフィール・口コミは止めても残り続ける資産です。判断の目安は3つあります。
 
@@ -207,6 +207,8 @@ AI集客の失敗は、施策の中身よりも「順番と期待値の設定ミ
 
 自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -216,6 +218,8 @@ AI集客の失敗は、施策の中身よりも「順番と期待値の設定ミ
 <details><summary>自社だけでAI集客はできますか？</summary><p class="faq-a">基本の整備は可能です。記事の構造化・計測・改善の継続は専門支援を使うと立ち上がりが速くなります。</p></details>
 <details><summary>広告とAI集客はどちらを優先すべきですか？</summary><p class="faq-a">即効性は広告、資産性はAI集客です。広告費が利益を圧迫しているなら、資産型のAI集客への投資を検討してください。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 地図を持って、1つずつ入口を増やす
 

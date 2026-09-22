@@ -467,6 +467,17 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         print(f"WARN: リード導線なし: {meta['slug']} には無料診断・問い合わせのリンクが"
               f"ありません（python scripts/tool_links.py --write で入ります）")
 
+    # CTAの本数。CLAUDE.md は「最低2箇所」と決めているのに検査が無く、
+    # 公開136本のうち59本（43%）が2箇所未満だった（2026-09-23 実測）。
+    # 別工程の採点でも、デザイン観点が11本中11本で足切りになった主因がこれ。
+    # 読み終えた人の行き先が1つしか無い記事は、そこで離脱する
+    n_cta = content.count("cta-button")
+    if n_cta < 2:
+        QUALITY_ISSUES.setdefault(meta["slug"], []).append(
+            f"CTAが{n_cta}箇所（基準2箇所以上）")
+        print(f"WARN: CTA不足: {meta['slug']} は{n_cta}箇所"
+              f"（基準2箇所以上。python scripts/tool_links.py --write で入ります）")
+
     # 文字数チェック（タグ・空白を除いた実文字数で判定）
     # 基準は depth で変わる。全記事を同じ長さに揃えると、それ自体が量産の指紋になる。
     # 一律5,000字で見ていたため、手順や定義だけの quick 記事を誤って警告していた。
@@ -519,7 +530,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         eyecatch = (f'<figure class="article-eyecatch"><img src="{meta["eyecatch"]}" '
                     f'alt="{meta["title"]}" width="1200" height="675" fetchpriority="high" decoding="async"></figure>')
     # 本文の画像は画面に入るまで読まない（モバイルで1.5MB超を先に運んでいた）
-    content = re.sub(r'<img src="(/images/[^"]+)"(?![^>]*loading=)', r'<img src="" loading="lazy" decoding="async"', content)
+    content = re.sub(r'<img src="(/images/[^"]+)"(?![^>]*\bloading=)', r'<img src="\1" loading="lazy" decoding="async"', content)
 
     html = template
     replacements = {

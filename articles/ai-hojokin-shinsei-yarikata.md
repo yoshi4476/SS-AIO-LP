@@ -169,6 +169,8 @@ GビズIDプライムの申請は、マイナンバーカードとスマート�
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -179,6 +181,8 @@ GビズIDプライムの申請は、マイナンバーカードとスマート�
 <details><summary>交付申請にはどんな書類が必要ですか？</summary><p class="faq-a">GビズID・SECURITY ACTION宣言IDに加え、事業計画書や納税証明書が必要です。</p></details>
 <details><summary>実績報告では何を提出しますか？</summary><p class="faq-a">ツール導入の証憑書類と事業実施効果報告を提出し、確認後に補助金が交付されます。</p></details>
 </div>
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: 申請のやり方は順番を守れば難しくない
 

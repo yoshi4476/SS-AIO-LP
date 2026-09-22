@@ -145,6 +145,8 @@ GビズIDアプリは、iOSならApp Store、AndroidならGoogle Playからそ�
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -155,6 +157,8 @@ GビズIDアプリは、iOSならApp Store、AndroidならGoogle Playからそ�
 <details><summary>個人事業主でもGビズIDプライムを取得できますか？</summary><p class="faq-a">取得できます。法人代表者と同じく、本人名義でオンラインか書類から申請します。</p></details>
 <details><summary>一度取得したGビズIDは他の補助金でも使えますか？</summary><p class="faq-a">使えます。取得済みのIDをそのまま、他の補助金や行政手続きに利用できます。</p></details>
 </div>
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: GビズIDは早めの取得が申請の近道
 

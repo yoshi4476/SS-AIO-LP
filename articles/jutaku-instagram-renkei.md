@@ -173,6 +173,8 @@ AI検索対策の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shuky
 
 私たちがG-ranの支援先で確認している限り、Instagramと連携したサイトほど「会社名＋施工事例」のような指名検索に近いキーワードでの流入が安定する傾向があります。写真だけのSNS運用と、文章で裏付けたサイト運用を両輪で回すことが、AI検索時代でも変わらない基本になります。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -183,6 +185,8 @@ AI検索対策の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shuky
 <details><summary>投稿の更新頻度はどのくらいが目安ですか？</summary><p class="faq-a">施工事例なら週1〜2回が目安です。更新が止まると信頼感が下がります。</p></details>
 <details><summary>Facebookページとの連携は必須ですか？</summary><p class="faq-a">高度な連携機能を使う場合は必須です。基本のリンク設置だけなら不要です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 住宅会社のInstagram連携は「サイト・GBPとの三点整備」
 

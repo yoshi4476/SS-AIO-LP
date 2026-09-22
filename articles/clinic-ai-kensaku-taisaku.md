@@ -191,6 +191,8 @@ AI検索対策は一度の整備で終わらず、計測と更新を続けるこ
 
 AI検索対策の考え方全般は[AIO対策の5つの手順](/aio/aio-taisaku-guide/)、ChatGPTなど個別プラットフォームへの対応は[LLMO対策の方法](/aio/llmo-taisaku-hoho/)でも詳しく解説しています。マップとAIの両方で選ばれる医院づくりの土台は共通しており、二重に施策を分ける必要はありません。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -200,6 +202,8 @@ AI検索対策の考え方全般は[AIO対策の5つの手順](/aio/aio-taisaku-
 <details><summary>効果が出るまでどのくらいかかりますか？</summary><p class="faq-a">情報整備自体は数週間で終わりますが、AIに引用され始めるまでは3〜6ヶ月が目安です。</p></details>
 <details><summary>小規模なクリニックでも対応できますか？</summary><p class="faq-a">できます。特別なツールは不要で、既存情報の表記統一と具体化だけで今日から着手できます。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: クリニックのAI検索対策は「具体化×表記統一×規制順守」
 

@@ -180,6 +180,8 @@ faq:
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -189,6 +191,8 @@ faq:
 <details><summary>開業期は取引が少ないので自分で記帳しても平気ですか？</summary><p class="faq-a">取引数が少ないうちは可能ですが、売上が伸びる前に仕組み化すると後が楽になります。</p></details>
 <details><summary>経理代行を使わずに開業期を乗り切るとどんなリスクがありますか？</summary><p class="faq-a">資金繰りの把握が遅れ、赤字や資金ショートへの対応が遅れるリスクがあります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 開業期は「小さく任せる」判断が後の負担を減らす
 

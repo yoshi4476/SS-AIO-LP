@@ -199,6 +199,8 @@ NG例とOK例を見比べると分かるとおり、違いは文章力ではな�
 
 AI検索・SEOの全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)、個別の対応手順は[AIO対策とは](/aio/aio-taisaku-guide/)でも解説しています。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 相場記事の作り方について、読者からよく寄せられる質問をまとめました。
@@ -212,6 +214,8 @@ AI検索・SEOの全体像は[AI集客の完全ガイド](/ai-marketing/ai-shuky
 <details><summary>相場記事の出典には何を使えばいいですか？</summary><p class="faq-a">国土交通省の取引価格情報検索やレインズ・マーケット・インフォメーションが使えます。</p></details>
 <details><summary>AI検索時代でも相場記事の書き方は変わりますか？</summary><p class="faq-a">基本の型は同じですが、AI検索では出典と集計時点をより厳密に書く必要が出てきます。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 相場記事は「出典×時点×自社実績」で書くと信頼が変わる
 

@@ -175,6 +175,8 @@ AI検索対策全体の基礎は[AI集客の完全ガイド](/ai-marketing/ai-sh
 
 **ステップ3: 記事内・資料内にCTAを設置する。**導入事例の最後に問い合わせや資料請求への導線を置かないと、読了した見込み客をそのまま離脱させてしまいます。**「重要です」で終わらせず、次の行動につながる一文を必ず添えてください。**
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -186,6 +188,8 @@ AI検索対策全体の基礎は[AI集客の完全ガイド](/ai-marketing/ai-sh
 <details><summary>AI検索時代でも導入事例の書き方は変わりますか？</summary><p class="faq-a">基本構成は同じですが、AIが引用しやすい具体的な数値と現場の発言の記述が新たに重要になります。</p></details>
 <details><summary>導入事例の掲載許諾がなかなか下りない場合はどうすればいいですか？</summary><p class="faq-a">社名非公開・数値のみ表現・担当者名を伏せるなど複数の公開レベルを用意し先方に選んでもらってください。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 導入事例は「型」と「一次情報」で決まる
 

@@ -184,6 +184,8 @@ AIが回答に含める材料は、自社サイトに書かれた情報がすべ
 
 派手な演出より、目の前の1件を正確に書き切ることのほうが、結果的に近道です。AI検索・SEOの全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)、個別の対応手順は[AIO対策とは](/aio/aio-taisaku-guide/)でも解説しています。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -195,6 +197,8 @@ AIが回答に含める材料は、自社サイトに書かれた情報がすべ
 <details><summary>不動産仲介でも施工事例と同じ考え方は使えますか？</summary><p class="faq-a">リフォーム履歴や周辺環境を同じ型で書けば、購入検討者への説得力が高まります。</p></details>
 <details><summary>AI検索時代でも施工事例の書き方は変わりますか？</summary><p class="faq-a">基本の型は同じですが、数値と施主の発言を具体的に書くことが一段と大切になります。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 施工事例は「数値×施主の声」で書くと反響が変わる
 

@@ -227,6 +227,8 @@ AI検索対策の効果は、AI経由セッション数と、そこからの資�
 
 発注担当者が比較検討時に読む記事から優先し、単体で意味が通る比較表とFAQを追加していきます。**完璧な網羅より、比較検討層が読む記事から順に手を入れる速さが成果につながります。**
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -239,6 +241,8 @@ AI検索対策の効果は、AI経由セッション数と、そこからの資�
 <details><summary>中小のBtoB企業でもAI検索対策（LLMO）は効果がありますか？</summary><p class="faq-a">あります。AIは企業規模より情報の具体性を重視するため、実績を数値で示せれば十分に対抗できます。</p></details>
 <details><summary>LLMO対策とコンテンツSEOはどちらを優先すべきですか？</summary><p class="faq-a">新規記事はコンテンツSEOを土台にしつつ、公開時点からLLMO向けの構造を組み込むのが効率的です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: BtoB AI検索対策（LLMO）は「比較検討層への抽出しやすさ」が核心
 

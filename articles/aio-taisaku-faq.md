@@ -164,6 +164,8 @@ GA4側の設定も忘れずに行ってください。次の6つのリファラ�
 
 順位はあるのに引用されない場合は、事情が少し違います。技術面の実装よりも、記事の構造や鮮度に原因があることが多いためです。[AIO対策なのに表示されない8つの原因](/aio/aio-taisaku-hyouji-sarenai/)で症状別に原因を切り分けられます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -173,6 +175,8 @@ GA4側の設定も忘れずに行ってください。次の6つのリファラ�
 <details><summary>AI Overviewに表示されないのはなぜですか？</summary><p class="faq-a">検索順位の不足、クローラーの遮断、抽出しにくい構造のいずれかが主な原因です。</p></details>
 <details><summary>AI検索に引用されるために一番大事なことは何ですか？</summary><p class="faq-a">まず検索10位以内に入ることです。順位がAI引用のほぼ前提条件になります。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ：迷ったら順位確認とクローラー許可から
 

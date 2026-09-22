@@ -197,6 +197,8 @@ LLMOチェックリストは10項目中7個以上を満たせば合格圏の対�
 9. GA4でAIサービスからの参照流入を分類・計測している
 10. 月1回、主要な質問をAIに投げて自社の登場を確認している
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -206,6 +208,8 @@ LLMOチェックリストは10項目中7個以上を満たせば合格圏の対�
 <details><summary>小さな会社でもLLMO対策は意味がありますか？</summary><p class="faq-a">あります。AIは規模より「答えとして使いやすい情報」を選ぶため、中小企業にも引用の機会があります。</p></details>
 <details><summary>LLMO対策だけをやればSEOは不要ですか？</summary><p class="faq-a">不要にはなりません。AIの回答は検索結果を参照することが多く、SEOの土台があるほど引用されやすくなります。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: LLMOは「AIに読ませて、答えさせる」設計
 

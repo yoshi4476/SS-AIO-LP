@@ -176,6 +176,8 @@ Googleビジネスプロフィールの<a href="https://support.google.com/busin
 
 AI検索対策の全体像は[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)で解説しています。マップとサイトの情報が一致している住宅会社は、AIにも紹介されやすい住宅会社です。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -188,6 +190,8 @@ AI検索対策の全体像は[AIO対策とは？AI検索に引用される5つ�
 </div>
 
 自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 見学会集客は「導線設計×正確な情報×アフターフォロー」
 

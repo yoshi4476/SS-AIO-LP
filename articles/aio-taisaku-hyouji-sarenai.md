@@ -164,6 +164,8 @@ AI Overviewの引用元は固定ではなく、Googleが再クロールするた
 
 公開前・公開後を問わず、この5項目を月1回のペースで見直すと、原因の再発を早い段階で拾えます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <details><summary>AI Overviewが表示されない理由を先に確認するには？</summary><p class="faq-a">検索語の種類を見ます。答えが一つに定まる語や取引目的の語では、そもそも出ません。</p></details>
@@ -182,6 +184,8 @@ AI Overviewの引用元は固定ではなく、Googleが再クロールするた
 
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 「表示されない」は原因を切り分けてから動く
 

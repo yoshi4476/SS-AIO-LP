@@ -152,6 +152,8 @@ AI活用にかかる費用感を先につかんでおきたい場合は、[AI導
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -161,6 +163,8 @@ AI活用にかかる費用感を先につかんでおきたい場合は、[AI導
 <details><summary>AI活用事例はどの申請枠が対象になりますか？</summary><p class="faq-a">通常枠が中心で、最低賃金近傍事業者は補助率が2/3まで引き上げられます。</p></details>
 <details><summary>AI活用事例を参考にするときの注意点は？</summary><p class="faq-a">他社事例をそのまま真似ず、自社の課題に近い事例を選んで効果を測定してください。</p></details>
 </div>
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: AI活用事例は分野別に自社との近さで選ぶ
 

@@ -203,6 +203,8 @@ AIはマップとサイトの情報を突き合わせて信頼度を判断しま
 
 マップで選ばれる店は、AIにも推薦されやすい。この構図を押さえておけば、MEOへの投資は二重に回収できます。AI側の対策の全体像は[AIO対策の5つの手順](/aio/aio-taisaku-guide/)をご覧ください。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -212,6 +214,8 @@ AIはマップとサイトの情報を突き合わせて信頼度を判断しま
 <details><summary>口コミは自分で書いてもらってもいいのですか？</summary><p class="faq-a">金銭等の見返りを伴う口コミ依頼はポリシー違反です。来店客への自然な依頼にとどめてください。</p></details>
 <details><summary>MEOとSEOはどちらを先にやるべきですか？</summary><p class="faq-a">来店型ビジネスならMEOが先です。商圏内の「地域名×業種」検索に直接効くため、成果が早く出やすいです。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: MEOは「正確さ×継続」で決まる
 

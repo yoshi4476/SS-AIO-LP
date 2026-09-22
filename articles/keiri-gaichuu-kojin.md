@@ -162,6 +162,8 @@ faq:
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -172,6 +174,8 @@ faq:
 <details><summary>経理を任せられる個人（フリーランス）はどこで探せますか？</summary><p class="faq-a">クラウドソーシングサイトや、税理士・取引先からの紹介で探すのが一般的です。</p></details>
 <details><summary>記帳代行の報酬を個人に支払う場合、源泉徴収は必要ですか？</summary><p class="faq-a">一般的な記帳代行は対象外になりやすいですが、税理士資格者への依頼は対象です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理の個人外注は「範囲の見極めとリスク対策」がカギ
 

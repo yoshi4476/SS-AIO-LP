@@ -243,6 +243,8 @@ AI経由の流入を何で測るかは、必ず契約前に確認してくださ
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -253,6 +255,8 @@ AI経由の流入を何で測るかは、必ず契約前に確認してくださ
 <details><summary>AIO集客は自社と外注のどちらがいいですか？</summary><p class="faq-a">担当者が月20時間以上割けるなら自社、時間が取れないなら外注が向いています。</p></details>
 <details><summary>AIO集客で最初に何をすればいいですか？</summary><p class="faq-a">まずGoogle検索の順位とAI Overviewでの表示状況を確認することから始めます。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ：AIO集客は「引用される状態づくり」から始める
 

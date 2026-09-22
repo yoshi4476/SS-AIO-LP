@@ -156,6 +156,8 @@ IPA（情報処理推進機構）は<a href="https://www.ipa.go.jp/security/emot
 
 自社の作業量でマクロと外注のどちらが向いているか分からない場合は、経理BPOの無料相談で概算を確認することもできます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -166,6 +168,8 @@ IPA（情報処理推進機構）は<a href="https://www.ipa.go.jp/security/emot
 <details><summary>マクロ運用でよくある失敗は何ですか？</summary><p class="faq-a">手順書を残さないまま作成者が異動・退職し、誰も直せなくなることです。</p></details>
 <details><summary>マクロだけでは対応できない経理業務はありますか？</summary><p class="faq-a">例外対応や判断業務は残るため、限界を感じたら経理BPOへの外注も選択肢です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理マクロ自動化は「対象業務を絞って」始める
 

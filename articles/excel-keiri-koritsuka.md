@@ -166,6 +166,8 @@ OneDriveやSharePoint経由で共有すると、複数人が同時にエクセ�
 
 自社にどこまでの効率化が向いているか分からない場合は、経理BPOの無料相談で、現状の作業量を一緒に整理することもできます。エクセルの使い方を見直しただけで十分なのか、外部の手を借りるべきなのかは、実際の作業時間を洗い出してみないと判断できないことが多いためです。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -179,6 +181,8 @@ OneDriveやSharePoint経由で共有すると、複数人が同時にエクセ�
 
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: エクセル経理の効率化は「絞り込み」が近道
 

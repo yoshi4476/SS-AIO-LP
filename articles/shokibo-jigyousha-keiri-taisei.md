@@ -169,6 +169,8 @@ faq:
 
 自社に合う体制が分からない場合は、経理BPOの無料相談で、委託できる範囲だけでも相談することができます。体制の見直しは、業務が止まってからでは選べる手段が限られます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -179,6 +181,8 @@ faq:
 <details><summary>個人事業主でも経理体制は必要ですか？</summary><p class="faq-a">記帳や申告の負担は事業規模を問わず発生するため、簡易な体制でも必要です。</p></details>
 <details><summary>経理体制の見直しはいつ検討すべきですか？</summary><p class="faq-a">取引量や従業員数が増えたときや、月次決算が遅れ始めた時が見直しの目安です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理体制は規模に合わせて「今」決める
 

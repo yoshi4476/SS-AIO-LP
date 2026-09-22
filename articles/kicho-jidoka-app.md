@@ -160,6 +160,8 @@ faq:
 
 経理BPOの基本的な仕組みは[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)、仕訳自体の自動化の考え方は[仕訳の自動化方法とは？中小企業ができる4つのステップ](/blog/shiwake-jidoka-houhou/)で整理しています。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -170,6 +172,8 @@ faq:
 <details><summary>記帳自動化アプリの導入でよくある失敗は何ですか？</summary><p class="faq-a">連携未確認のまま契約し、二重入力が残ってしまう失敗が目立ちます。</p></details>
 <details><summary>アプリを入れても人手不足は解消しますか？</summary><p class="faq-a">入力作業は減っても判断業務は残るため、経理BPOも選択肢になります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 記帳自動化アプリは「連携」と「試用」を軸に選ぶ
 

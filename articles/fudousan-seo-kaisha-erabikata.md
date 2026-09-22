@@ -206,6 +206,8 @@ AI検索時代の不動産SEOでは、検索順位の改善に加えて、AI Ove
 
 **社内の承認者も1人に決めてください。**確認が複数人に回ると、公開が1〜2週間遅れます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -215,6 +217,8 @@ AI検索時代の不動産SEOでは、検索順位の改善に加えて、AI Ove
 <details><summary>SEO会社を変える判断基準はありますか？</summary><p class="faq-a">半年以上レポートに反響数の記載がなければ、変更を検討する目安になります。</p></details>
 <details><summary>小規模な不動産会社でもSEO会社に依頼する意味はありますか？</summary><p class="faq-a">あります。ポータル依存を減らし、自社サイトからの反響を作れる点が利点です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 不動産SEO会社は「業界知識×透明なレポート×AIO対応」で選ぶ
 

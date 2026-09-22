@@ -160,6 +160,8 @@ faq:
 
 判断や確認作業も含めて外部に任せたい場合は、経理BPOの無料相談で自社に合った委託範囲を相談することもできます。まずは自社の仕訳ミスのうち、どのパターンが多いかを1か月分振り返るところから始めてください。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -170,6 +172,8 @@ faq:
 <details><summary>ダブルチェック体制はどうつくればよいですか？</summary><p class="faq-a">チェック項目を決め、入力者と確認者を分け、月次で運用を見直す3ステップで整えます。</p></details>
 <details><summary>社内で防ぎきれない場合はどうすればよいですか？</summary><p class="faq-a">入力から確認までを任せられる経理BPOへの外注も選択肢の一つです。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 仕訳ミスは「ルール化」と「分担」で防ぐ
 

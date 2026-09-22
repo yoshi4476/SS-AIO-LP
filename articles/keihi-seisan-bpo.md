@@ -158,6 +158,8 @@ faq:
 
 一方で申請件数がごく少ない場合は、外注の費用対効果が出にくいこともあります。**月の経費申請が数件程度なら、規程の整備だけを先に進め、件数が増えてから外注を検討する**という順序でも遅くありません。取引先が増えて申請件数が読みにくくなってきたタイミングが、外注を再検討する1つの目安になります。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -168,6 +170,8 @@ faq:
 <details><summary>個人事業主でも経費精算BPOは使えますか？</summary><p class="faq-a">使えますが、確定申告に関わる最終確認は事業主本人が行う必要があります。</p></details>
 <details><summary>経費精算BPOと経費精算システムの違いは何ですか？</summary><p class="faq-a">システムは入力補助のツールで、BPOはチェック・記帳までを人が代行する点が違います。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経費精算BPOは「任せる範囲」を決めてから始める
 

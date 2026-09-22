@@ -90,7 +90,7 @@ faq:
 
 関連する内容として[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)も公開しています。
 
-関連する内容として[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)も公開しています。
+近い論点を[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)で扱っています。
 
 第一のリスクは、退職や休職をきっかけとした業務停止です。
 
@@ -108,11 +108,11 @@ faq:
 
 属人化の解消は、業務の可視化・複数担当制・システム化・第三者チェック・外部委託の組み合わせで進めます。
 
-近い論点を[記帳の経理代行を断られる理由6つ｜再依頼前の対処法](/blog/kichodaiko-kotowarareru-riyu/)で扱っています。
+あわせて[記帳の経理代行を断られる理由6つ｜再依頼前の対処法](/blog/kichodaiko-kotowarareru-riyu/)もご覧ください。
 
-あわせて[Notionで記帳を自動化する方法](/blog/notion-kicho-jidoka/)もご覧ください。
+関連する内容として[Notionで記帳を自動化する方法](/blog/notion-kicho-jidoka/)も公開しています。
 
-関連する内容として[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)も公開しています。
+近い論点を[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)で扱っています。
 
 | 方法 | 概要 | 始めやすさ |
 |:--|:--|:--|
@@ -152,7 +152,7 @@ faq:
 
 経理BPOへの委託は、業務フローの標準化を伴うため、属人化の再発防止策としても機能します。
 
-近い論点を[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)で扱っています。
+あわせて[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)もご覧ください。
 
 経理BPO（アウトソーシング）は、委託先が業務範囲・手順・スケジュールを明文化したうえで運用します。
 
@@ -183,6 +183,8 @@ faq:
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -193,6 +195,8 @@ faq:
 <details><summary>属人化解消にアウトソーシングは有効ですか？</summary><p class="faq-a">業務フローが標準化されるため、有効な選択肢のひとつになります。</p></details>
 <details><summary>マニュアルは一度作れば安心ですか？</summary><p class="faq-a">法改正や手順変更が起こるたびに内容を見直し、更新し続ける運用が必要です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 属人化の解消は「在職中の可視化」から始まる
 

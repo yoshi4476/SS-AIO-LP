@@ -157,6 +157,11 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "@type": "Thing",
      "name": "Perplexity",
      "sameAs": "https://www.perplexity.ai/"
+    },
+    {
+     "@type": "Thing",
+     "name": "検索エンジン最適化（SEO）",
+     "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
     }
    ]
   },
@@ -376,11 +381,13 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>BlogPostingにはauthor(著者名・肩書き)とdateModified(更新日)を必ず含めてください。著者情報が空欄のまま公開されている記事を見かけますが、これはE-E-A-Tの観点でもAI検索の観点でも損をします。</p>
 <p>dateModifiedはページ上の表記とSchema内の日付を一致させることも忘れないでください。表記だけ更新してSchemaが古いままだと、鮮度の主張自体が信用されなくなります。</p>
 <p>FAQPageを設定する際に最も多い事故は、本文のFAQと構造化データの内容が一致していないことです。<a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank" rel="noopener">Google公式のFAQPageガイドライン</a>でも、ページに実在するコンテンツと一致させることが明記されています。<mark>本文とSchemaの完全一致</mark>は、公開前に必ず確認してください。</p>
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
 <h2 id="4-h2faq">設定4: 本文構造を冒頭断言・H2結論・FAQで抽出しやすくする</h2>
 <p><strong>本文構造は、冒頭の断言・見出し直下の結論・FAQの3点を揃えると抽出されやすくなります。</strong></p>
 <p>構造化データを整えても、本文そのものが抽出しにくい書き方では意味がありません。<strong>冒頭200字</strong>は「◯◯は◯◯です」という断言型で始め、前置きや挨拶は入れません。各H2の直下には40〜60字の1文結論を置き、その1文だけを切り出しても意味が通るようにします。</p>
 <p>具体的な書き方は、<a href="/aio/aio-taisaku-ai-inyou-sareru/">AIO対策でAIに引用されるには？5つの実践ポイント</a>で詳しく解説しています。設定作業と文章構造の調整は別の作業に見えますが、片方だけを整えても引用にはつながりません。</p>
-<figure><img src="" loading="lazy" decoding="async" alt="AI検索対応で整える5つの設定: robots.txtでAIクローラーを個別に許可する、llms.txtでサイト概要と実績を渡す、構造化データで記事を機械可読にする、冒頭断言とH2結論で本文を抽出しやすくする、HTTPS・表示速度・sitemapを整える" width="1200" height="675" loading="lazy"><figcaption>AI検索対応で整える5つの設定（当メディア作成）</figcaption></figure>
+<figure><img src="/images/ai-kensaku-taiou-settei/point5.png" alt="AI検索対応で整える5つの設定: robots.txtでAIクローラーを個別に許可する、llms.txtでサイト概要と実績を渡す、構造化データで記事を機械可読にする、冒頭断言とH2結論で本文を抽出しやすくする、HTTPS・表示速度・sitemapを整える" width="1200" height="675" loading="lazy"><figcaption>AI検索対応で整える5つの設定（当メディア作成）</figcaption></figure>
 
 <section class="cta cta-mid"><p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p><a class="btn btn-primary" href="/diagnosis/aio/" data-cta="article_mid_aio">AI検索の対応度チェック（無料・30秒） <span class="arw">→</span></a><p class="cta-sub">読みながらでも1分で終わります</p></section>
 <h2 id="5-httpssitemap">設定5: クロールの土台(HTTPS・表示速度・sitemap)を整える</h2>
@@ -394,7 +401,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>当サイトの実測では、直近28日で291個の検索語からのべ2,171回表示され、7回のクリックがありました（自社サイトのSearch Console実測・2026年9月時点）。</p>
 <p>この数値も、設定の効果を継続的に確認するための一つの指標として使っています。対応状況を体系的にチェックしたい場合は、<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方｜無料チェック8項目とツールの使い分け</a>も参考になります。</p>
 <p>社内にエンジニアがいない場合、ここまでの設定を自社だけで完結させるのは負担が大きいこともあります。どこまで自社で対応できるかは、<a href="/aio/aio-taisaku-jibunde/">AIO対策は自分でできる？</a>で判断基準を整理しています。</p>
-<figure><img src="" loading="lazy" decoding="async" alt="未設定サイトはAIクローラーをまとめてブロックしている・llms.txtが存在しない・FAQPageと本文が一致していない。設定済みサイトは主要AIクローラーを個別に許可している・llms.txtでサイト概要を渡している・FAQPageと本文が完全一致している" width="1200" height="675" loading="lazy"><figcaption>未設定サイトと設定済みサイトの違い（当メディア作成）</figcaption></figure>
+<figure><img src="/images/ai-kensaku-taiou-settei/ngok.png" alt="未設定サイトはAIクローラーをまとめてブロックしている・llms.txtが存在しない・FAQPageと本文が一致していない。設定済みサイトは主要AIクローラーを個別に許可している・llms.txtでサイト概要を渡している・FAQPageと本文が完全一致している" width="1200" height="675" loading="lazy"><figcaption>未設定サイトと設定済みサイトの違い（当メディア作成）</figcaption></figure>
 
 <h2 id="ai_1">AI検索対応でよくある失敗と注意点</h2>
 <p><strong>よくある失敗は、まとめてブロック・設定して放置・本文とSchemaの不一致の3つです。</strong></p>
@@ -404,7 +411,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>これら3つの失敗に共通するのは、一度設定して終わりにする運用そのもの。robots.txt・llms.txt・構造化データは、記事を公開するたびに見直す項目としてチェックリスト化しておくと、事故が起きにくくなります。</p>
 <div class="caution-box"><span class="box-title">注意: 設定は一度で終わらない</span><br>robots.txtやllms.txtは一度設置すれば終わりではなく、新しいAIクローラーの追加や記事の公開のたびに見直す運用が必要です。</div>
 
-<figure><img src="" loading="lazy" decoding="async" alt="設定に着手する4ステップ: 今日はrobots.txtを確認、1週目はllms.txtを設置、2週目は構造化データを実装、月1回はGSCで反映を確認" width="1200" height="675" loading="lazy"><figcaption>設定に着手する4ステップ（当メディア作成）</figcaption></figure>
+<figure><img src="/images/ai-kensaku-taiou-settei/junban.png" alt="設定に着手する4ステップ: 今日はrobots.txtを確認、1週目はllms.txtを設置、2週目は構造化データを実装、月1回はGSCで反映を確認" width="1200" height="675" loading="lazy"><figcaption>設定に着手する4ステップ（当メディア作成）</figcaption></figure>
 
 <h2 id="_1">よくある質問</h2>
 <div class="faq">
@@ -417,6 +424,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </div>
 
 <p>自社サイトがAI検索にどこまで対応できているかは、<a href="/diagnosis/aio/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要です。</p>
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
 <h2 id="ai_2">まとめ: AI検索対応は「許可」と「構造」の両輪</h2>
 <p>AI検索対応は、単発の設定ではなく、許可と構造という2つの軸を継続的に整える取り組みです。robots.txtとllms.txtでクローラーへの許可を整え、構造化データと本文構造でAIが読み取れる形にする。この2つが揃って初めて、検索順位という土台の上にAI検索対応が成立します。</p>
 <p>今日からできるのは、robots.txtで主要AIクローラーの許可状況を確認することです。次にllms.txtの有無を確認し、なければ設置してください。私たちも新しい記事を公開するたびに、この7つの設定項目に立ち返って点検しています。</p>

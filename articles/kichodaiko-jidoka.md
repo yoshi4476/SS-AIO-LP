@@ -158,6 +158,8 @@ MM総研の調査（2026年3月末時点）では、<a href="https://www.m2ri.jp
 
 記帳代行側との役割分担は、契約時点で文書化しておくと後々のトラブルを防げます。「どの業務を誰が、いつまでに確認するか」を簡単な一覧にまとめ、双方で共有しておいてください。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -167,6 +169,8 @@ MM総研の調査（2026年3月末時点）では、<a href="https://www.m2ri.jp
 <details><summary>記帳代行と自動化は併用できますか？</summary><p class="faq-a">可能です。データ化と一次チェックを代行に任せ、反映作業を自動化すると確認作業が減ります。</p></details>
 <details><summary>自動化を導入すると記帳のミスはなくなりますか？</summary><p class="faq-a">なくなりません。科目判断の誤りは残るため、定期的な確認体制が必要です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 記帳代行と自動化は、併用を前提に検討する
 

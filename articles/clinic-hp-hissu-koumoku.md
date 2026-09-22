@@ -177,6 +177,8 @@ AI検索は情報の正確さと矛盾のなさを見ており、必須項目の
 
 これは[クリニックのMEO対策](/meo/clinic-meo-taisaku/)や[歯科医院の集客方法](/ai-marketing/shika-iin-shukyaku/)で解説してきた内容と土台が同じです。ホームページの必須項目を整えることは、MEOの評価向上とAI検索での引用獲得を同時に狙える、遠回りに見えて最短の施策です。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -186,6 +188,8 @@ AI検索は情報の正確さと矛盾のなさを見ており、必須項目の
 <details><summary>必須項目をすべて揃えるのにどれくらいかかりますか？</summary><p class="faq-a">情報の整理から掲載まで、優先度順に進めれば最短1〜2週間ほどで着手できます。</p></details>
 <details><summary>医師の経歴はどこまで詳しく書くべきですか？</summary><p class="faq-a">出身大学・専門医資格・経験年数を具体的に書くほど、信頼性と検索評価の両方が高まります。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: クリニックのホームページ必須項目は「情報の網羅×表現の適正化」
 

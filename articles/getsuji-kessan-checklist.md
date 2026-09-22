@@ -159,6 +159,8 @@ faq:
 
 あわせて確認すると、チェックリストと早期化の全体像がつながります。チェックリストは早期化の手段の一つであり、両方を組み合わせて初めて締めまでの日数が安定して縮まります。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -169,6 +171,8 @@ faq:
 <details><summary>チェックリストを運用しても早期化が進まないのはなぜですか？</summary><p class="faq-a">担当者や期限を書かず、確認だけで終わらせている運用が主な原因です。</p></details>
 <details><summary>社内でチェックしきれない場合はどうすればよいですか？</summary><p class="faq-a">記帳から試算表作成までを任せられる経理BPOへの外注も選択肢です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: チェックリストは「担当者と期限」を書いて初めて機能する
 

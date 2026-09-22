@@ -159,6 +159,8 @@ freee株式会社は2024年4月9日〜12日、従業員数11〜1,000名の企業
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -169,6 +171,8 @@ freee株式会社は2024年4月9日〜12日、従業員数11〜1,000名の企業
 <details><summary>取引先の合意なしに請求書電子化を進められますか？</summary><p class="faq-a">送付方法が変わるため、事前に取引先へ説明し合意を得ることが欠かせません。</p></details>
 <details><summary>請求書電子化は経理BPOに任せられますか？</summary><p class="faq-a">システム選定から取引先への案内、運用ルールの整備まで含めて委託できます。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 請求書電子化は「洗い出し→選ぶ→合意→移行→定着」の5ステップで進める
 

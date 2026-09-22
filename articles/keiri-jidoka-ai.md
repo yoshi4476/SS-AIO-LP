@@ -200,6 +200,8 @@ AI自動化は、あくまで既存の業務量を効率化する手段です。
 
 自社にAI自動化とBPOのどちらが向いているか判断がつかない場合は、経理BPOの無料相談で、業務範囲の洗い出しから相談することもできます。ツールの選定作業自体を任せたい場合も、委託先に相談できるケースがあります。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -210,6 +212,8 @@ AI自動化は、あくまで既存の業務量を効率化する手段です。
 <details><summary>AI自動化しても人手不足が解消しない場合はどうすればいいですか？</summary><p class="faq-a">業務ごと任せられる経理BPOへの委託を組み合わせる方法があります。</p></details>
 <details><summary>電子帳簿保存法とAI自動化は関係がありますか？</summary><p class="faq-a">電子取引データを電子のまま保存する義務があり、AI-OCRの活用と運用ルール整備が関わります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理AI自動化は「できることの見極め」から始める
 

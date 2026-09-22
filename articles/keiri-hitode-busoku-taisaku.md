@@ -186,6 +186,8 @@ DX化は一度に全部を変える必要はありません。まずは入力の
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -196,6 +198,8 @@ DX化は一度に全部を変える必要はありません。まずは入力の
 <details><summary>経理BPOは人手不足対策として有効ですか？</summary><p class="faq-a">採用や教育の負担なく体制を整えられるため、有効な選択肢のひとつです。</p></details>
 <details><summary>経理人材の定着率を上げるにはどうすればいいですか？</summary><p class="faq-a">業務量の適正化とマニュアル化、評価制度の見直しを組み合わせて進めます。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理の人手不足対策は「今すぐ」と「中長期」の両輪で
 

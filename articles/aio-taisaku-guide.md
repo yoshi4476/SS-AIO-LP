@@ -208,6 +208,8 @@ AIOはSEOの上位表示が前提です。分けて発注すると、順位の�
 
 この4つは**契約前の商談中に決めておいて構いません。**むしろ、ここを一緒に整理してくれる会社かどうかが、選定の判断材料になります。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -217,6 +219,8 @@ AIOはSEOの上位表示が前提です。分けて発注すると、順位の�
 <details><summary>SEO会社にそのまま頼んでもいいですか？</summary><p class="faq-a">計測方法を確認してください。AI経由の流入を測っていない会社は、成果を証明できません。</p></details>
 <details><summary>契約前に必ず確認すべきことは何ですか？</summary><p class="faq-a">成果の定義・計測方法・解約条件の3つです。順位のみを成果とする契約は避けてください。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ：外注の判断は「時間」で決める
 

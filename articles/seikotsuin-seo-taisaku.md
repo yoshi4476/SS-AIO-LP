@@ -174,6 +174,8 @@ AI検索の時代でも、整骨院SEOの土台は正確な情報を書き続け
 
 AIが情報源として参照するのは、特別な登録をしたページではなく、事実が正確に書かれた通常のページです。整骨院のSEO対策は、そのままAI検索対策としても生きてきます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -183,6 +185,8 @@ AIが情報源として参照するのは、特別な登録をしたページで
 <details><summary>症状別ページはいくつ作ればいいですか？</summary><p class="faq-a">まずは来院の多い症状から3〜5ページ作成し、反応を見ながら順次増やすのが目安です。</p></details>
 <details><summary>SEO対策は院長が自分で行うべきですか、外注すべきですか？</summary><p class="faq-a">症状ページの執筆は院長の専門知識が生きるため、内製と外部支援の併用が現実的です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 整骨院SEOは「MEOとの役割分担×症状別コンテンツ×継続更新」
 

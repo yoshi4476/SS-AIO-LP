@@ -152,6 +152,11 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "@type": "Thing",
      "name": "Gemini",
      "sameAs": "https://gemini.google.com/"
+    },
+    {
+     "@type": "Thing",
+     "name": "検索エンジン最適化（SEO）",
+     "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
     }
    ]
   },
@@ -320,7 +325,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p><strong>最初に着手したのは、構造化データのテンプレート直書きと、llms.txtの設置です。</strong></p>
 <p>当メディアはWordPressのプラグインに頼らず、記事テンプレートに<strong>BlogPosting・FAQPage・BreadcrumbList</strong>のJSON-LDを直書きする方法を選びました。理由は単純で、テンプレートを直接管理したほうが、公開日や更新日の整合を機械的に保証しやすいためです。あわせて、サイトルートにllms.txtを設置し、記事を公開するたびに1行ずつ追記する運用にしています。</p>
 <p><a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank" rel="noopener">Google公式のFAQPageガイドライン</a>では、実際にページ上に表示されている内容と構造化データを一致させることが明記されています。本文とSchemaが食い違うと、スパムとみなされるリスクがあるため、私たちは公開前に必ず本文とJSON-LDの突き合わせを行っています。</p>
-<figure><img src="" loading="lazy" decoding="async" alt="自社サイトで実践したAIOの4施策: 構造化データをテンプレートに直書きする、llms.txtを設置し記事公開のたびに追記する、主要AIクローラー20種の許可を個別に確認する、引用状況とクリックを日次で計測する" width="1200" height="675" loading="lazy"><figcaption>自社サイトで実践したAIOの4施策（当メディア作成）</figcaption></figure>
+<figure><img src="/images/aio-donyu-jirei/4sesaku.png" alt="自社サイトで実践したAIOの4施策: 構造化データをテンプレートに直書きする、llms.txtを設置し記事公開のたびに追記する、主要AIクローラー20種の許可を個別に確認する、引用状況とクリックを日次で計測する" width="1200" height="675" loading="lazy"><figcaption>自社サイトで実践したAIOの4施策（当メディア作成）</figcaption></figure>
 
 <p>この2つを最初に選んだのは、あとから追加する数値ファクトやFAQを正しく認識してもらうための土台になるからです。構造が整っていない状態でFAQを増やしても、AIが回答の根拠として拾いにくいという傾向を、私たちは日々の計測の中で確認してきました。</p>
 <h2 id="aio2ai">自社サイトでのAIO導入事例②：AIクローラー許可の設計と記録</h2>
@@ -337,7 +342,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>この数値自体が高いとは言えません。それでも、<em>何を計測すれば施策の効果が見えるか</em>という計測の型を確立できたことには意味があります。表示回数とクリック数を分けて見ることで、記事のどこに問題があるかを切り分けられるようになりました。表示は多いのにクリックが伸びない記事は、タイトルや検索結果の見え方に課題があると判断できます。逆に表示自体が少ない記事は、まず順位そのものを見直す対象だと分かります。</p>
 <p>計測を始める前は、順位が上がったという感覚だけで施策の良し悪しを判断していました。数値で確認する運用に変えてからは、どの記事のどの部分を直せば引用や表示が伸びるかを、感覚ではなく事実として議論できるようになりました。</p>
 <p>計測の型を先に固めたい場合は、<a href="/aio/aio-koka-sokutei-report-hinagata/">AIO効果測定レポートの雛形</a>と<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法</a>を先に読んでおくと、自社での再現がしやすくなります。</p>
-<figure><img src="" loading="lazy" decoding="async" alt="AIO導入前後で変わったこと: 導入前は構造化データが未実装・llms.txtが未設置・クロール許可が未確認・引用状況を計測していない。導入後はBlogPosting・FAQPage・BreadcrumbListを直書き・llms.txtを継続的に追記・主要20種のクローラー許可を記録・GSC生成AIレポートを日次で確認" width="1200" height="675" loading="lazy"><figcaption>AIO導入前後で変わったこと（当メディア作成）</figcaption></figure>
+<figure><img src="/images/aio-donyu-jirei/before-after.png" alt="AIO導入前後で変わったこと: 導入前は構造化データが未実装・llms.txtが未設置・クロール許可が未確認・引用状況を計測していない。導入後はBlogPosting・FAQPage・BreadcrumbListを直書き・llms.txtを継続的に追記・主要20種のクローラー許可を記録・GSC生成AIレポートを日次で確認" width="1200" height="675" loading="lazy"><figcaption>AIO導入前後で変わったこと（当メディア作成）</figcaption></figure>
 
 <p>導入前後で何が変わったかを、以下の表に整理しました。単体で見ても意味が通るように、項目ごとに書いています。</p>
 <div class="table-wrap"><table>
@@ -402,10 +407,12 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>自社の人員だけで対応が難しい場合は、外注の判断基準をBtoB向けAIO対策会社の選び方｜比較5基準と費用相場で確認したうえで検討してください。</p>
 <h2 id="_3">導入事例から学ぶ、次に着手すべきこと</h2>
 <p><strong>次に着手すべきは、自社サイトの検索順位とrobots.txtの許可状況を、この記事の4施策の順番で確認することです。</strong></p>
-<figure><img src="" loading="lazy" decoding="async" alt="導入までの4ステップ: 現状確認は順位と許可を確認する、土台整備は構造化データを実装する、許可確認はクローラー20種を1つずつ確認する、計測開始はGSCとGA4で日次に計測する" width="1200" height="675" loading="lazy"><figcaption>導入までの4ステップ（当メディア作成）</figcaption></figure>
+<figure><img src="/images/aio-donyu-jirei/steps.png" alt="導入までの4ステップ: 現状確認は順位と許可を確認する、土台整備は構造化データを実装する、許可確認はクローラー20種を1つずつ確認する、計測開始はGSCとGA4で日次に計測する" width="1200" height="675" loading="lazy"><figcaption>導入までの4ステップ（当メディア作成）</figcaption></figure>
 
 <p>今日の時点でできるのは、狙う語の検索順位とrobots.txtの許可状況を確認することです。ここに問題がなければ、構造化データとllms.txtの実装に進み、最後に計測の運用を日次に切り替えてください。<span class="big">実装した施策の数より、計測を続けられるかどうかが差になります。</span></p>
 <p>私たちも新しい記事を公開するたびに、この4施策に立ち返って点検しています。自社サイトがどこまで対応できているかは、<a href="/diagnosis/aio/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要です。</p>
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
 <h2 id="_4">よくある質問</h2>
 <div class="faq">
 <details><summary>AIO導入事例とは具体的に何を指しますか？</summary><p class="faq-a">検索とAI検索の両方で評価される構造を、実際にどう実装したかという実例です。</p></details>
@@ -417,6 +424,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </div>
 
 <p>自社サイトのAIO対応度を無料で確認したい場合は、<a href="/lp/">AI検索対策の無料相談</a>からご相談ください。現状分析を踏まえて、この記事の4施策のうちどこから着手すべきかをお伝えします。</p>
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
 <h2 id="aio_3">まとめ: AIO導入は「構造・許可・計測」を同時に進めて初めて事例になる</h2>
 <p>AIO導入事例は、構造化データ・llms.txt・クローラー許可・日次計測という4つの施策を、順番を守って同時並行に進めたときに初めて成立します。どれか1つだけを整えても、効果を検証できないまま終わってしまいます。</p>
 <p>私たちが自社サイトで確認できたのは、施策そのものより計測を続けられるかどうかが差を生むという点でした。今日からできるのは、狙う語の検索順位とrobots.txtの許可状況を確認すること。そこから、この記事で紹介した順番で1つずつ進めてください。</p>

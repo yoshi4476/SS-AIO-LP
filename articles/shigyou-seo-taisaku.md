@@ -194,6 +194,8 @@ AI集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-gu
 
 私は日々の支援の中で、**「AI対策」を特別なテクニックだと身構えてしまう士業の方**によく出会います。実際に効くのは奇をてらった施策ではなく、資格・実績・対応分野を正確に書き続けるという地味な積み重ねです。派手な施策を探すより、まずは目の前のプロフィールページの情報を正確に整えることから始めてください。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -203,6 +205,8 @@ AI集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-gu
 <details><summary>専門分野が複数ある場合、どう書き分ければいいですか？</summary><p class="faq-a">分野ごとにページを分け、それぞれで具体的な実績と悩み語を書き分けてください。</p></details>
 <details><summary>集客サイトに料金の記載は必要ですか？</summary><p class="faq-a">目安料金の掲載は比較検討を後押しします。個別事情は相談導線で確認する設計が安全です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 士業のSEO対策は「専門性の言語化×継続発信」
 

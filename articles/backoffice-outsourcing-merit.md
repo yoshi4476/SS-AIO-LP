@@ -173,6 +173,8 @@ faq:
 
 契約書を十分に読まずに契約するのもNG対応です。業務範囲・料金・解約条件は、契約前に必ず確認してください。自社の委託範囲や進め方に迷う場合は、経理BPOの無料相談で相談することもできます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -183,6 +185,8 @@ faq:
 <details><summary>どんな企業に向いていますか？</summary><p class="faq-a">管理部門の人員が少なく、業務が特定の担当者に集中している企業ほど効果を得やすい仕組みです。</p></details>
 <details><summary>導入までにどのくらいの期間がかかりますか？</summary><p class="faq-a">委託範囲の洗い出しから運用開始まで、1〜2か月程度を見込む会社が多い傾向です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: バックオフィスアウトソーシングは「範囲を絞って始める」が成功の近道
 

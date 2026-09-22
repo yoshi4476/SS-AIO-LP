@@ -205,6 +205,8 @@ faq:
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -215,6 +217,8 @@ faq:
 <details><summary>経理効率化を進める際に経営者がすべきことは何ですか？</summary><p class="faq-a">コスト・スピード・リスク許容度の優先順位を決め、現場に丸投げしないことです。</p></details>
 <details><summary>経理効率化で失敗しやすいポイントは何ですか？</summary><p class="faq-a">比較軸を決めずに一気に導入したり、安さだけでBPOを選んだりすることです。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理効率化は診断してから打ち手を選ぶ
 

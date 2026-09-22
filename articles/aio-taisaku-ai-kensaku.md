@@ -31,7 +31,6 @@ faq:
   - q: 中小企業でもAI検索対策は必要ですか？
     a: 必要です。指名検索やCVに近いクエリほど、AI検索経由の比較検討に含まれやすくなっています。
 ---
-
 **AI検索とは、生成AIが検索結果の中で直接回答を返す検索行動の総称です。**Google AI OverviewやAIモード、ChatGPT検索、Perplexity、Geminiなどが代表例です。AIO対策は、このAI検索の回答内で自社情報が引用元に選ばれるよう最適化する取り組みを指します。似た言葉が並ぶため範囲を混同している経営者が多く、対策の起点を誤ると成果までの遠回りになります。
 
 <div class="target-reader">この記事は、自社サイトやオウンドメディアの集客を担当する中小企業の経営者・マーケティング担当者向けです。</div>
@@ -172,6 +171,8 @@ AI検索対策で最も多い失敗は、プラットフォームの違いを無
 
 なお、AI検索がまだ発展途上の分野であることも押さえておく必要があります。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Centralの公式ドキュメント</a>は、AI OverviewとAIモードへの表示に追加の特別な対策は不要だと明記しています。条件は、通常のSEOの基本を満たすことだけです。プラットフォームが増えても、土台がGoogle上位表示であることは変わりません。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -184,6 +185,8 @@ AI検索対策で最も多い失敗は、プラットフォームの違いを無
 
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: AI検索は一枚岩ではない
 

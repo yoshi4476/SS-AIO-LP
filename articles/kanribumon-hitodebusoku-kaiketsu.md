@@ -176,6 +176,8 @@ faq:
 
 どの業務から整理すべきかは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact/?s=backoffice)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -185,6 +187,8 @@ faq:
 <details><summary>どの選択肢を選べばいいか迷う場合はどうすればいいですか？</summary><p class="faq-a">コスト・スピード・機密性・属人化解消の4つの基準で比較すると選びやすくなります。</p></details>
 <details><summary>管理部門の人手不足解決で気をつけることはありますか？</summary><p class="faq-a">比較せず1つの案に即決することは避け、小さく始めて検証してください。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 管理部門の人手不足は「比較してから小さく始める」ことで解決できる
 

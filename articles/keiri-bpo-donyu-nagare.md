@@ -160,6 +160,8 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -169,6 +171,8 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 <details><summary>引き継ぎ資料は何を準備すればよいですか？</summary><p class="faq-a">業務フロー図、会計ソフトのアカウント情報、仕訳ルールをまとめた資料が必要です。</p></details>
 <details><summary>全業務をいきなり委託しても問題ありませんか？</summary><p class="faq-a">一部業務のテスト運用を1〜2か月挟んでから全面移行すると、移行リスクを抑えられます。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理BPO導入の流れは準備段階の丁寧さで決まる
 

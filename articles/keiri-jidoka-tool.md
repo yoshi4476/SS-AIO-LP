@@ -179,6 +179,8 @@ faq:
 
 **導入初期の3か月は、手作業とツールの二重運用になる前提で計画してください。**この期間を見込まずに「来月から楽になる」と説明すると、現場の信頼を失います。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -189,6 +191,8 @@ faq:
 <details><summary>経理自動化ツールを導入しても人手不足は解消しますか？</summary><p class="faq-a">入力作業は減っても判断業務は残るため、経理BPOへの外注も選択肢です。</p></details>
 <details><summary>ツール同士を連携させないとどうなりますか？</summary><p class="faq-a">データの二重入力が発生し、かえって作業時間が増えることがあります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理自動化ツールは「連携」を軸に選ぶことが近道
 

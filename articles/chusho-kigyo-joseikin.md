@@ -158,6 +158,8 @@ faq:
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。対象になるかどうかで迷う場合は、[無料相談](https://lp.7senses.co.jp/#contact)で状況を伝えていただければ、要件の確認から実績報告まで一緒に確認できます。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -168,6 +170,8 @@ faq:
 <details><summary>IT導入補助金とAI導入補助金は別の制度ですか？</summary><p class="faq-a">同じ制度の呼び方です。2026年度は「デジタル化・AI導入補助金2026」に名称が変わりました。</p></details>
 <details><summary>助成金は補助金より簡単にもらえますか？</summary><p class="faq-a">審査による採択がない分、要件を満たす証明書類の準備は補助金以上に丁寧さが必要です。</p></details>
 </div>
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: まず助成金か補助金かを見極める
 

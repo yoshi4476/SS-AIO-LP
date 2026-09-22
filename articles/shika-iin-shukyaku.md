@@ -148,6 +148,8 @@ AI時代を見据えた対策は3つです。第一に、ビジネス説明文�
 
 第三に、実態と異なる誇張表現を書かないことです。情報源が複数あってもすべて一致していれば、AIは安心して医院名を引用できます。AI検索対策の全体像は[AIO対策の5つの手順](/aio/aio-taisaku-guide/)で詳しく解説しています。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -158,6 +160,8 @@ AI時代を見据えた対策は3つです。第一に、ビジネス説明文�
 <details><summary>歯科医院の集客にAI検索対策は必要ですか？</summary><p class="faq-a">必要です。プロフィールと口コミの情報整備がそのままAIの紹介材料になります。</p></details>
 <details><summary>開業したばかりの歯科医院でも集客できますか？</summary><p class="faq-a">できます。まずは基本情報の登録と写真充実だけでも、地域検索での見え方が変わります。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 歯科医院の集客は「土台整備×自由診療の専門性×AI対応」
 

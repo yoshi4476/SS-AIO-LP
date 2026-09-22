@@ -118,7 +118,13 @@ ENGINES = {"ChatGPT": ask_openai, "Gemini": ask_gemini, "Perplexity": ask_perple
 
 
 def queries_for(site_id, limit):
-    """表示が多く、20位以内にいる語（引用の前提は上位表示）"""
+    """表示が多く、20位以内にいる語（引用の前提は上位表示）。
+
+    **指名検索は外す。** 社名で聞けば自社が出るのは当たり前で、引用されて
+    いるかの測定にならない。実際、コーポレートは3語とも「セブンセンシズ」で、
+    しかも重複していた（2026-09-23）。課金して無意味な質問を投げるところだった。
+    表記ゆれを吸収して重複も落とす。
+    """
     f = RANKS / f"{site_id}.json"
     if not f.is_file():
         return []
@@ -126,7 +132,24 @@ def queries_for(site_id, limit):
     rows = hist[sorted(hist)[-1]]
     rows = [r for r in rows if r.get("pos", 99) <= 20 and len(r.get("kw", "")) >= 3]
     rows.sort(key=lambda r: -r.get("imp", 0))
-    return [r["kw"] for r in rows[:limit]]
+    try:
+        import brand_search
+        brand = brand_search.BRAND
+    except Exception:
+        brand = None
+    seen, out = set(), []
+    for r in rows:
+        kw = r["kw"]
+        if brand is not None and brand.search(kw):
+            continue                       # 指名検索は測る意味がない
+        key = re.sub(r"[\s　・･／/（）()｜|【】\[\]「」、。,.\-‐－—ー_]", "", kw.lower())
+        if key in seen:
+            continue                       # 表記ゆれの重複
+        seen.add(key)
+        out.append(kw)
+        if len(out) >= limit:
+            break
+    return out
 
 
 def domain_of(u):

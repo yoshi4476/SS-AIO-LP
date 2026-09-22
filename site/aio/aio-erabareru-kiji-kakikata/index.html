@@ -141,7 +141,14 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "経理BPO"
     ]
    },
-   "inLanguage": "ja"
+   "inLanguage": "ja",
+   "mentions": [
+    {
+     "@type": "Thing",
+     "name": "検索エンジン最適化（SEO）",
+     "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
+    }
+   ]
   },
   {
    "@type": "BreadcrumbList",
@@ -307,7 +314,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <h2 id="_1">選ばれる記事とそうでない記事の書き方の違い</h2>
 <p>選ばれる記事とそうでない記事の違いは、結論の位置・代名詞の使い方・事実と意見の分け方の3点に表れます。</p>
 <p>関連する内容として<a href="/meo/fudousan-meo-taisaku/">不動産業がGoogleマップで選ばれるには？</a>も公開しています。</p>
-<figure><img src="" loading="lazy" decoding="async" alt="選ばれない書き方と選ばれる書き方: 選ばれない書き方は前置きから書き始める・「これ」「それ」を多用する・事実と感想を1文に混ぜる、選ばれる書き方は結論から断言で書き始める・主語を明示して言い換える・事実と感想を文で分ける" loading="lazy"><figcaption>選ばれない書き方と選ばれる書き方</figcaption></figure>
+<figure><img src="/images/aio-erabareru-kiji-kakikata/before-after.png" alt="選ばれない書き方と選ばれる書き方: 選ばれない書き方は前置きから書き始める・「これ」「それ」を多用する・事実と感想を1文に混ぜる、選ばれる書き方は結論から断言で書き始める・主語を明示して言い換える・事実と感想を文で分ける" loading="lazy"><figcaption>選ばれない書き方と選ばれる書き方</figcaption></figure>
 
 <p>選ばれない記事は「近年、AI検索が注目されています。そこで今回は…」のように前置きから始まります。選ばれる記事は「AIO対策とは、AI検索での引用獲得を目的にした施策です。」のように、結論から断言で書き始めます。</p>
 <p><mark>代名詞の扱いも大きな差になります</mark>。「それによって効果が高まります」という文は、前後の文脈がないと何を指すか分かりません。「H2直下に1文結論を置くことで、AIが抜き出しやすくなります」のように、主語を毎回言い換えて書く必要があります。</p>
@@ -348,7 +355,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h2 id="2003">冒頭200字を断言型で書く3つのコツ</h2>
 <p>冒頭200字は、結論から書く・前置きを削る・数字を入れるの3つのコツで断言型になります。</p>
-<figure><img src="" loading="lazy" decoding="async" alt="AIに選ばれる記事を書く5つのコツ: 冒頭200字を断言型で書く、H2直下に1文結論を置く、FAQの回答を単体完結にする、代名詞を主語に言い換える、ファクトと意見を文で分ける" loading="lazy"><figcaption>AIに選ばれる記事を書く5つのコツ</figcaption></figure>
+<figure><img src="/images/aio-erabareru-kiji-kakikata/kotsu5.png" alt="AIに選ばれる記事を書く5つのコツ: 冒頭200字を断言型で書く、H2直下に1文結論を置く、FAQの回答を単体完結にする、代名詞を主語に言い換える、ファクトと意見を文で分ける" loading="lazy"><figcaption>AIに選ばれる記事を書く5つのコツ</figcaption></figure>
 
 <p><strong>コツ1: 結論から書く。</strong>「◯◯とは◯◯です」という定義文を最初の1文に置きます。読者が知りたい答えを、説明より先に提示する書き方です。結論を先に置くと、そのあとの文章は結論を補足する立場に回るため、全体の構成も自然と整理されます。</p>
 <p><strong>コツ2: 前置きを削る。</strong>「近年注目されている」「今回は〜について解説します」といった導入は、抜き出したときに情報量がゼロです。丸ごと削っても記事は成立します。書き終えたあとに冒頭の1〜2文を削って読み返し、意味が変わらなければ、その文は不要だったということです。</p>
@@ -369,7 +376,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>本文中のFAQセクションと、フロントマターのSchema用データは<strong>文言を完全一致させる</strong>必要があります。表現がずれていると、生成AIだけでなく検索エンジン側からもスパムと判定されるリスクがあります。<a href="https://support.google.com/webmasters/answer/16984139?hl=ja" target="_blank" rel="noopener">Google検索セントラルのFAQリッチリザルトガイドライン</a>でも、ページ上に表示される内容と構造化データの内容を一致させることが明記されています。</p>
 <h2 id="5">書いた後にセルフチェックする5項目</h2>
 <p>書いた後は、1文抜き出し・主語確認・事実意見の分離・代名詞チェック・数字の出典確認の5項目でセルフチェックします。</p>
-<figure><img src="" loading="lazy" decoding="async" alt="書いた後のセルフチェック3ステップ: 1文だけ抜き出して意味が通るか声に出して確認する、主語を確認して「これ」「それ」が残っていないか探す、事実と意見を仕分けて同じ文に混在していないか確認する" loading="lazy"><figcaption>書いた後のセルフチェック3ステップ</figcaption></figure>
+<figure><img src="/images/aio-erabareru-kiji-kakikata/check-steps.png" alt="書いた後のセルフチェック3ステップ: 1文だけ抜き出して意味が通るか声に出して確認する、主語を確認して「これ」「それ」が残っていないか探す、事実と意見を仕分けて同じ文に混在していないか確認する" loading="lazy"><figcaption>書いた後のセルフチェック3ステップ</figcaption></figure>
 
 <p><strong>チェック1: 各段落から1文だけ抜き出す。</strong>前後の文を隠した状態で、その1文だけを声に出して読み、意味が通るか確認します。</p>
 <p><strong>チェック2: 主語を確認する。</strong>「これ」「それ」「この方法」が残っていないかを探します。見つけたら、指している内容そのものに言い換えます。</p>
@@ -385,6 +392,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Googleが公開する生成AI向け最適化ガイド</a>でも、構造化データより「抽出しやすい本文構造」が重視されると説明されています。文章の型を整えることは、Schemaの実装と同じくらい実務上の優先度が高い作業です。</p>
 <p>計測方法は<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法</a>、やってはいけない行動全般は<a href="/aio/aio-taisaku-yattewaikenai/">AIO対策でやってはいけない5つのNG行動と正しい進め方</a>もあわせて確認してください。</p>
 <p>自社サイトがAI検索にどこまで対応できているかは、<a href="/diagnosis/aio/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要で、その場で点数が出ます。</p>
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
 <h2 id="ai_1">まとめ: AIに選ばれる記事は「抜き出しやすさ」で決まる</h2>
 <p>AIに選ばれる記事の書き方は、冒頭200字の断言・H2直下の1文結論・代名詞の言い換え・事実と意見の分離という型に集約されます。文章としての巧拙より、1文・1段落だけを抜き出しても意味が通るかどうかが分かれ目です。</p>
 <p>当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装して計測しています。</p>

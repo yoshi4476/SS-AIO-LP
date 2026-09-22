@@ -130,6 +130,10 @@ def report(name, groups, p, note="", expect=None):
         print(f"   → 順序が入れ替わっています（best={best[0]} / worst={worst[0]}）。"
               "この判断は成果の順番を言い当てていません")
         return False
+    if expect and expect not in [r[0] for r in rows]:
+        print(f"   → 期待していた区分「{expect}」は本数が足りず比べられません。"
+              "残った区分だけでは向きを判定できません")
+        return None
     if expect and best[0] != expect:
         print(f"   → **逆になっています**。良いはずの「{expect}」ではなく"
               f"「{best[0]}」が{gap:.1f}位ぶん良い。"
@@ -168,13 +172,26 @@ def main():
         [(k, g[k]) for k in ("強", "並", "弱") if k in g], p,
         "開かないと済まない語かどうか", expect="強")
 
-    # 3) 記事の長さ
+    # 3) 記事の長さ。depth の札は実質使われていない（372本中362本が standard）
+    #    ので、実際の文字数で分ける
     g2 = defaultdict(list)
     for s, v in arts.items():
         g2[v["depth"]].append(s)
-    results["記事の長さ"] = report(
-        "記事の長さ（depth）",
-        [(k, g2[k]) for k in ("quick", "standard", "deep") if k in g2], p)
+    n_std = len(g2.get("standard", []))
+    n_all = sum(len(v) for v in g2.values())
+    if n_all and n_std / n_all > 0.9:
+        print(chr(10) + "■ 記事の長さ（depth の札）")
+        print(f"   {n_std}/{n_all}本が standard。検索意図で長さを決める仕組みが"
+              "使われていません（CLAUDE.md Phase 4）")
+        print("   → 手順や定義だけの記事まで5,000字に伸ばしている可能性があります")
+    lens = {}
+    for s, v in arts.items():
+        lens[s] = len(re.sub(r"\s|<[^>]+>", "", v["body"]))
+    bands3 = [("5,500字未満", [s for s in lens if lens[s] < 5500]),
+              ("5,500〜7,000字", [s for s in lens if 5500 <= lens[s] < 7000]),
+              ("7,000字以上", [s for s in lens if lens[s] >= 7000])]
+    results["記事の長さ"] = report("記事の長さ（実際の文字数）", bands3, p,
+                               "5,000字以上を基準にしていた", expect="7,000字以上")
 
     # 4) 内部リンクの本数
     bands4 = [("0〜4本", [s for s in arts if inb.get(s, 0) <= 4]),

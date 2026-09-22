@@ -167,6 +167,8 @@ faq:
 
 自社でマニュアル化する範囲と、委託先に任せる範囲を分けて考えると、優先順位もつけやすくなります。**社内に残す業務ほど先にマニュアル化する**という順番で進めると、限られた時間を有効に使えます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -177,6 +179,8 @@ faq:
 <details><summary>経理マニュアルを社内に定着させるにはどうすればいいですか？</summary><p class="faq-a">実際の画面や記入例を入れて、更新日を決めて定期的に見直す運用にすることです。</p></details>
 <details><summary>マニュアルを作る人手が足りない場合はどうすればいいですか？</summary><p class="faq-a">経理BPOに運用ごと委託し、標準化された手順を活用する方法があります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理マニュアルは「5ステップで作り、更新し続ける」ことが定着の条件
 

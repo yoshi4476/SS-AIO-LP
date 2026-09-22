@@ -191,6 +191,8 @@ SNSとホームページを連動させる全体設計は[AI集客の完全ガ�
 
 インスタで生まれた信頼を、検索でも見つかるホームページの記事に橋渡しする。この往復が、AI検索時代の工務店集客の基本形になります。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -200,6 +202,8 @@ SNSとホームページを連動させる全体設計は[AI集客の完全ガ�
 <details><summary>完成予想図をそのまま投稿しても問題ありませんか？</summary><p class="faq-a">事実と異なる表示は避けてください。完成予想図である旨を明記し、現況との相違に注意します。</p></details>
 <details><summary>インスタとホームページ・SEOはどちらを優先すべきですか？</summary><p class="faq-a">検索で見つかる資産のホームページ・SEOを土台にし、インスタは接点を増やす補助に使います。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 工務店のインスタ集客は「継続発信×事実の正確さ×SEOとの連動」
 

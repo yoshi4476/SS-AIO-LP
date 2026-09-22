@@ -180,6 +180,8 @@ ChatGPTやGoogleのAI Overviewは、複数の情報源を突き合わせて回�
 
 そのため、[整骨院の集客](/meo/seikotsuin-shukyaku/)で扱う広告規制と本記事の医療広告ガイドラインは、根拠法が異なる点に注意してください。AI検索対策全体の考え方は[AIO対策の5つの手順](/aio/aio-taisaku-guide/)を参考にしてください。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -192,6 +194,8 @@ ChatGPTやGoogleのAI Overviewは、複数の情報源を突き合わせて回�
 </div>
 
 自社サイトの技術面が基準を満たしているかは、[サイトの技術チェック（無料・URL入力だけ）](/site-audit/)で確かめられます。登録は不要で、その場で点数が出ます。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 医療広告ガイドラインは「6類型の回避×限定解除4要件×継続チェック」
 

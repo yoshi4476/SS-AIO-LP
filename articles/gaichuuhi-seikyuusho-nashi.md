@@ -157,6 +157,8 @@ faq:
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -166,6 +168,8 @@ faq:
 <details><summary>免税事業者への外注費は今どれくらい控除できますか？</summary><p class="faq-a">2026年10月から2028年9月までの経過措置で70%控除が適用されます。</p></details>
 <details><summary>取引先が請求書を発行してくれないときはどうすればいいですか？</summary><p class="faq-a">自社で支払通知書を作成して送付し、支払いの記録を書面で残してください。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 外注費は証憑があれば請求書なしでも経費にできる
 

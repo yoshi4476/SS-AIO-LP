@@ -163,6 +163,8 @@ faq:
 
 担当者1人に判断を任せる運用も、負担軽減とは逆方向です。私たちが経理BPOの相談を受ける中でも、**制度対応の判断を1人に集中させた結果、その担当者が休むと確認作業が止まる**という相談を受けたことがあります。確認体制は複数人、または外部の委託先と分散させてください。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -173,6 +175,8 @@ faq:
 <details><summary>電子帳簿保存法に対応しないとどうなりますか？</summary><p class="faq-a">税務調査でデータの提示を求められた際に、要件を満たせず対応に困ることになります。</p></details>
 <details><summary>電子帳簿保存法の対応は経理BPOに任せられますか？</summary><p class="faq-a">対象データの洗い出しや保存方法の整理を含めて、確認作業ごと委託できます。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 電子帳簿保存法は「洗い出し→選ぶ→整理する」の3ステップで対応する
 

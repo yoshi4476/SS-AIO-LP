@@ -162,6 +162,8 @@ Python自動化を内製するか経理BPOへ外注するかは、社内にス�
 
 内製する場合は、開発時のコストだけでなく、法改正や会計ソフトの仕様変更に合わせてスクリプトを継続的に修正する保守コストも見込んでおく必要があります。**保守を担当できる人材が退職した場合の代替手段まで含めて検討する**ことが、後悔しない選び方につながります。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -171,6 +173,8 @@ Python自動化を内製するか経理BPOへ外注するかは、社内にス�
 <details><summary>Python自動化にはどんなリスクがありますか？</summary><p class="faq-a">属人化、保守負担の増加、検証不足によるミスが代表的なリスクです。</p></details>
 <details><summary>Pythonでの自動化と経理BPOはどちらを選ぶべきですか？</summary><p class="faq-a">定型処理はPython、判断業務まで任せたい場合は経理BPOが向いています。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: Python自動化は「できる範囲の見極め」から始める
 

@@ -37,7 +37,6 @@ faq:
   - q: 対応済みかどうかはどこで確認できますか？
     a: GSCの生成AIパフォーマンスレポートとアクセスログのクローラー種別で確認します。
 ---
-
 **AI検索対応とは、robots.txtでAIクローラーの巡回を許可したうえで、llms.txtと構造化データでサイトの情報をAIが読み取れる形に整えることです。**この3点が揃って初めて、検索順位が良くても引用の候補にすら入らないという事故を防げます。
 
 <div class="target-reader">この記事は、自社サイトをChatGPT検索・Perplexity・Google AI Overviewなどの生成AI検索に対応させたい店舗・中小企業の集客担当者・経営者向けです。</div>
@@ -109,6 +108,8 @@ dateModifiedはページ上の表記とSchema内の日付を一致させるこ�
 
 FAQPageを設定する際に最も多い事故は、本文のFAQと構造化データの内容が一致していないことです。<a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank" rel="noopener">Google公式のFAQPageガイドライン</a>でも、ページに実在するコンテンツと一致させることが明記されています。==本文とSchemaの完全一致==は、公開前に必ず確認してください。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## 設定4: 本文構造を冒頭断言・H2結論・FAQで抽出しやすくする
 
 **本文構造は、冒頭の断言・見出し直下の結論・FAQの3点を揃えると抽出されやすくなります。**
@@ -171,6 +172,8 @@ FAQPageを設定する際に最も多い事故は、本文のFAQと構造化デ�
 </div>
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: AI検索対応は「許可」と「構造」の両輪
 

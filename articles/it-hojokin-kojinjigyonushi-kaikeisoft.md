@@ -174,6 +174,8 @@ freeeやマネーフォワードといった名前で探しても、対象かど
 
 会計ソフトと同時にPCやタブレットの導入も検討している場合は、[AI導入補助金の受発注ソフトとは？対象3枠と補助額を解説](https://lp.7senses.co.jp/blog/ai-hojokin-juhatchu-soft-toha/)で紹介しているハードウェアの扱いも参考になります。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -184,6 +186,8 @@ freeeやマネーフォワードといった名前で探しても、対象かど
 <details><summary>クラウド型なら利用料も補助されますか？</summary><p class="faq-a">されます。通常枠ではクラウド利用料が最大2年分まで補助対象になります。</p></details>
 <details><summary>白色申告でもインボイス対応のソフトは必要ですか？</summary><p class="faq-a">課税事業者として請求書を発行するなら、申告方式にかかわらず対応が必要です。</p></details>
 </div>
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: 会計ソフト選びは申告方式が最初の分かれ道
 

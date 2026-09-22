@@ -185,6 +185,8 @@ faq:
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -195,6 +197,8 @@ faq:
 <details><summary>経理費用はどのタイミングで外注に切り替えるべきですか？</summary><p class="faq-a">仕訳件数が増え、自分の時給換算額が外注費用を上回った時点が目安です。</p></details>
 <details><summary>経理費用を抑えるにはどうすればいいですか？</summary><p class="faq-a">証憑を早めにデータ化し、依頼範囲を絞って複数社を比較すると抑えられます。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: フリーランスの経理費用は「分岐点」を知ることで選びやすくなる
 

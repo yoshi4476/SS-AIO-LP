@@ -1,0 +1,213 @@
+{
+ "clinic-dx-jirei": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 14,
+    "seo": 16,
+    "editorial": 17,
+    "expert": 16,
+    "persona": 17,
+    "aio": 17
+   },
+   "total120": 97,
+   "score100": 81,
+   "weak": {
+    "design": 14
+   }
+  }
+ },
+ "jutaku-instagram-renkei": {
+  "at": "2026-09-23",
+  "self": 96,
+  "audit": {
+   "breakdown": {
+    "design": 15,
+    "seo": 18,
+    "editorial": 18,
+    "expert": 17,
+    "persona": 18,
+    "aio": 18
+   },
+   "total120": 104,
+   "score100": 87,
+   "weak": {
+    "design": 15
+   }
+  }
+ },
+ "obkyaku-shoukai-shikumi": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 14,
+    "seo": 18,
+    "editorial": 18,
+    "expert": 17,
+    "persona": 18,
+    "aio": 18
+   },
+   "total120": 103,
+   "score100": 86,
+   "weak": {
+    "design": 14
+   }
+  }
+ },
+ "shika-meo-taisaku": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 15,
+    "seo": 16,
+    "editorial": 16,
+    "expert": 18,
+    "persona": 17,
+    "aio": 18
+   },
+   "total120": 100,
+   "score100": 83,
+   "weak": {
+    "design": 15
+   }
+  }
+ },
+ "tenjikaigo-follow-hoho": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 13,
+    "seo": 16,
+    "editorial": 17,
+    "expert": 18,
+    "persona": 17,
+    "aio": 18
+   },
+   "total120": 99,
+   "score100": 82,
+   "weak": {
+    "design": 13
+   }
+  }
+ },
+ "biyou-hifuka-meo": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 14,
+    "seo": 16,
+    "editorial": 17,
+    "expert": 17,
+    "persona": 16,
+    "aio": 17
+   },
+   "total120": 97,
+   "score100": 81,
+   "weak": {
+    "design": 14
+   }
+  }
+ },
+ "ai-shukyaku-guide": {
+  "at": "2026-09-23",
+  "self": 96,
+  "audit": {
+   "breakdown": {
+    "design": 15,
+    "seo": 17,
+    "editorial": 14,
+    "expert": 16,
+    "persona": 16,
+    "aio": 18
+   },
+   "total120": 96,
+   "score100": 80,
+   "weak": {
+    "design": 15,
+    "editorial": 14
+   }
+  }
+ },
+ "seikotsuin-hiyou-heikin": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 15,
+    "seo": 17,
+    "editorial": 18,
+    "expert": 17,
+    "persona": 17,
+    "aio": 16
+   },
+   "total120": 100,
+   "score100": 83,
+   "weak": {
+    "design": 15
+   }
+  }
+ },
+ "clinic-ma-shukyaku-jirei": {
+  "at": "2026-09-23",
+  "self": 96,
+  "audit": {
+   "breakdown": {
+    "design": 14,
+    "seo": 16,
+    "editorial": 15,
+    "expert": 16,
+    "persona": 16,
+    "aio": 17
+   },
+   "total120": 94,
+   "score100": 78,
+   "weak": {
+    "design": 14,
+    "editorial": 15
+   }
+  }
+ },
+ "clinic-shukyaku-consaru-erabikata": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 15,
+    "seo": 17,
+    "editorial": 17,
+    "expert": 17,
+    "persona": 17,
+    "aio": 16
+   },
+   "total120": 99,
+   "score100": 82,
+   "weak": {
+    "design": 15
+   }
+  }
+ },
+ "seikotsuin-shukyaku-jirei": {
+  "at": "2026-09-23",
+  "self": 95,
+  "audit": {
+   "breakdown": {
+    "design": 15,
+    "seo": 16,
+    "editorial": 17,
+    "expert": 17,
+    "persona": 16,
+    "aio": 18
+   },
+   "total120": 99,
+   "score100": 82,
+   "weak": {
+    "design": 15
+   }
+  }
+ }
+}

@@ -172,6 +172,8 @@ AI時代を見据えた追加の対策は3つです。第一に、ビジネス�
 
 AI検索対策の全体像は[AIO対策の5つの手順](/aio/aio-taisaku-guide/)で詳しく解説しています。マップで選ばれる不動産会社は、AIにも紹介されやすい会社です。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -183,6 +185,8 @@ AI検索対策の全体像は[AIO対策の5つの手順](/aio/aio-taisaku-guide/
 </div>
 
 自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 不動産MEOは「物件でなく店舗の信頼性」を整える施策
 

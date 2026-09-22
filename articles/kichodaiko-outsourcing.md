@@ -170,6 +170,8 @@ faq:
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -180,6 +182,8 @@ faq:
 <details><summary>記帳代行会社を選ぶときの基準は何ですか？</summary><p class="faq-a">対応範囲の明確さ、セキュリティ体制、対応スピード、担当者の実務理解の4点です。</p></details>
 <details><summary>記帳代行をアウトソーシングするデメリットはありますか？</summary><p class="faq-a">社内にノウハウが残りにくく、例外対応にタイムラグが生じやすい点に注意が必要です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 記帳代行のアウトソーシングは「範囲」を決めてから
 

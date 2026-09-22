@@ -180,6 +180,8 @@ freeeの経費精算でよくある失敗は、初期設定をせずに使い始
 
 **ルールは1枚の紙にまとめて配ってください。**マニュアルの中に埋めると読まれません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -190,6 +192,8 @@ freeeの経費精算でよくある失敗は、初期設定をせずに使い始
 <details><summary>申請した経費が差し戻されることはありますか？</summary><p class="faq-a">承認者が内容を確認し、科目や金額に誤りがあれば差し戻しや却下になります。</p></details>
 <details><summary>freeeの経費精算でよくある失敗は何ですか？</summary><p class="faq-a">初期設定をせずに使い始め、科目や承認経路が現場に合わないまま運用することです。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: freeeの経費精算は初期設定を先に済ませるのが近道
 

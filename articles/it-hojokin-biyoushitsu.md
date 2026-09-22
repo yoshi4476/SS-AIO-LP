@@ -61,7 +61,7 @@ faq:
 
 あわせて[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)もご覧ください。
 
-関連する内容として[美容室の助成金とは｜歩合給でも使える5制度と金額の目安](/blog/biyoushitsu-joseikin/)も公開しています。
+近い論点を[美容室の助成金とは｜歩合給でも使える5制度と金額の目安](/blog/biyoushitsu-joseikin/)で扱っています。
 
 <div class="definition-box"><span class="term">デジタル化・AI導入補助金とは</span>、中小企業庁が実施する「中小企業デジタル化・AI導入支援事業」の愛称です。ソフトウェアやクラウドサービスの導入費用の一部を補助し、業務効率化や生産性向上を後押しします。</div>
 
@@ -139,7 +139,7 @@ faq:
 
 **一人サロンの個人事業主でも、GビズIDとSECURITY ACTIONの宣言があれば申請できます。**法人と申請要件そのものは変わりません。
 
-近い論点を[小規模事業者持続化補助金｜美容室の書き方4ステップ](/blog/jizokuka-hojokin-biyoushitsu-kakikata/)で扱っています。
+あわせて[小規模事業者持続化補助金｜美容室の書き方4ステップ](/blog/jizokuka-hojokin-biyoushitsu-kakikata/)もご覧ください。
 
 <a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>では、交付申請に「GビズIDプライム」と「SECURITY ACTION」の宣言が必須と案内されています。
 
@@ -163,7 +163,7 @@ faq:
 
 関連する内容は[小規模事業者持続化補助金](/blog/jizokuka-hojokin-esute/)でも扱っています。
 
-関連する内容として[学習塾はAI導入補助金の申請をどう進める？](/blog/gakushujuku-ai-hojokin-shinsei-susumekata/)も公開しています。
+近い論点を[学習塾はAI導入補助金の申請をどう進める？](/blog/gakushujuku-ai-hojokin-shinsei-susumekata/)で扱っています。
 
 つまずきやすい点を先に押さえるなら、[小規模事業者持続化補助金](/blog/jizokuka-hojokin-jidousha-seibi/)が参考になります。
 
@@ -184,6 +184,8 @@ faq:
 
 正式名称と旧IT導入補助金の関係は[AI導入補助金とIT導入補助金の違いは?結論は同じ制度【2026年の呼び方】](https://lp.7senses.co.jp/blog/ai-hojokin-it-hojokin-chigai/)で詳しく整理しています。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -196,6 +198,8 @@ faq:
 </div>
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: 美容室は「対象外の広告費」と切り分けて検討する
 

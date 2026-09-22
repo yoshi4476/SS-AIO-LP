@@ -170,6 +170,8 @@ AI検索時代でも、飲食店集客の土台はGoogleマップの正確な情
 
 AIO対策の始め方全般は[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)で解説しています。MEO対策とAIO対策は別物ではなく、正確な情報整備という同じ土台の上に成り立っています。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -181,6 +183,8 @@ AIO対策の始め方全般は[AIO対策とは？AI検索に引用される5つ�
 </div>
 
 自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 飲食店のMEO対策は「正確な情報×写真の更新×口コミ対応」
 

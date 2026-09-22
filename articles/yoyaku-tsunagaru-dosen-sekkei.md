@@ -188,6 +188,8 @@ AI検索は情報の正確さと矛盾のなさを見ており、予約手段や
 
 予約導線の整備は、離脱防止とAI検索での案内精度を同時に高める、地味に見えて確実な施策です。集患・集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)でも詳しく解説しています。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -197,6 +199,8 @@ AI検索は情報の正確さと矛盾のなさを見ており、予約手段や
 <details><summary>予約の無断キャンセルを減らすにはどうすればいいですか？</summary><p class="faq-a">予約確認と前日リマインドを自動送信するだけで、無断キャンセルは大きく減らせます。</p></details>
 <details><summary>士業事務所の相談予約でも同じ考え方は使えますか？</summary><p class="faq-a">使えます。入力項目の絞り込みと複数の予約手段の用意は、業種を問わず有効です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 予約導線は「項目の削減×手段の複線化×予約後の安心」
 

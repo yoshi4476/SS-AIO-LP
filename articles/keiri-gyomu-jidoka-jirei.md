@@ -163,6 +163,8 @@ Sansan株式会社が2025年3月25日に公表した<a href="https://jp.corp-san
 
 委託範囲ごとの事例パターンは[経理アウトソーシング導入事例｜3パターンで見る選び方](https://corp.7senses.co.jp/blog/keiri-outsourcing-donyu-jirei/)、経理BPOの基本的な仕組みは[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で確認できます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -173,6 +175,8 @@ Sansan株式会社が2025年3月25日に公表した<a href="https://jp.corp-san
 <details><summary>経理業務の自動化で失敗しやすいのはどんなケースですか？</summary><p class="faq-a">全業務を一度に自動化し、チェック役を残さずに任せきりにするケースです。</p></details>
 <details><summary>自動化しても対応しきれない業務量が残る場合はどうすればいいですか？</summary><p class="faq-a">業務ごと外部の専門会社に委託する、経理BPOの活用も選択肢になります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理業務の自動化は業務単位で着手範囲を決める
 

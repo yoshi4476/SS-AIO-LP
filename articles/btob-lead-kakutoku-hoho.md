@@ -173,6 +173,8 @@ AI検索時代のBtoBリード獲得では、検討初期段階の情報収集�
 
 いきなり全施策に予算を分散させず、1〜2施策を小さく試してから、伸びた施策に予算を寄せていきます。**完璧な計画より、小さく試して数字を見る動きの速さがBtoBリード獲得では成果につながります。**
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -183,6 +185,8 @@ AI検索時代のBtoBリード獲得では、検討初期段階の情報収集�
 <details><summary>BtoBリード獲得の効果はどのくらいで出ますか？</summary><p class="faq-a">広告・展示会は数週間、SEO・コンテンツマーケティングは6ヶ月〜1年ほど見込んでください。</p></details>
 <details><summary>AI検索時代でもリード獲得の方法は変わりますか？</summary><p class="faq-a">方法自体は変わりませんが、AIに引用される情報設計を伴わせることが新たに重要になります。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: BtoBリード獲得は「組み合わせ」と「フェーズ合わせ」
 

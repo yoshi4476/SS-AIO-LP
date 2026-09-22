@@ -179,6 +179,8 @@ AI時代に見られているポイントは3つです。第一に、専門分�
 
 これはSEO・MEOの基本を丁寧に積み上げることと、ほぼ同じ作業です。**AIのためだけの特別な施策を探す必要はなく、これまで解説した5つの施策をやり切ることが、そのままAI検索対策にもなります。**AI集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-guide/)でも解説しています。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -188,6 +190,8 @@ AI時代に見られているポイントは3つです。第一に、専門分�
 <details><summary>SNSとホームページ、どちらを優先すべきですか？</summary><p class="faq-a">検索されて見つかる資産になるホームページを優先し、SNSは補助的に使うのが安全です。</p></details>
 <details><summary>顧問料などの料金はホームページに載せるべきですか？</summary><p class="faq-a">目安料金の掲載は比較検討を後押しします。個別事情は問い合わせ導線で確認する設計が有効です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 税理士のホームページ集客は「整備×専門発信×導線」
 

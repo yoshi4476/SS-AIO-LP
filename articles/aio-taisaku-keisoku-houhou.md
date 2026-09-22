@@ -182,6 +182,8 @@ AIの回答は同じ質問でも日によって変わります。1回の結果�
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -192,6 +194,8 @@ AIの回答は同じ質問でも日によって変わります。1回の結果�
 <details><summary>表示回数はあるのにクリックがない場合はどうすればいいですか？</summary><p class="faq-a">ゼロクリックの引用は珍しくありません。指名検索や問い合わせの増加もあわせて見ます。</p></details>
 <details><summary>計測データはどう記事の改善に活かせばいいですか？</summary><p class="faq-a">引用のない上位記事から優先し、冒頭の断言や見出し直下の結論を書き直します。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ：AIO対策の計測は「表示・引用・流入」の3層で見る
 

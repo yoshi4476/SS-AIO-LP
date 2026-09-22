@@ -160,6 +160,8 @@ Sansanが2024年3月に実施した<a href="https://news.mynavi.jp/techplus/arti
 
 会社の規模が大きくなり、経理部門を段階的に強化していきたい場合は、記帳特化型から経理代行型へ、さらに経理BPO型へと委託範囲を広げていく進め方もあります。**いきなり最終形を決め打ちせず、業務量の変化に合わせてタイプを見直す前提で契約を組んでおく**と、規模の変化に対応しやすくなります。自社だけで判断がつかない場合は、経理BPOの無料相談で比較のポイントを一緒に整理することもできます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -170,6 +172,8 @@ Sansanが2024年3月に実施した<a href="https://news.mynavi.jp/techplus/arti
 <details><summary>経理代行サービスはどんな会社に向いていますか？</summary><p class="faq-a">経理担当者が1人しかいない会社や、月次決算の遅れ・属人化に悩む中小企業に向いています。</p></details>
 <details><summary>経理代行サービスを使い始めるまでどれくらいかかりますか？</summary><p class="faq-a">業務範囲の洗い出しから試験運用まで含めると、1〜2か月程度を見込む会社が多いです。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理代行サービスは範囲とタイプを見極めて選ぶ
 

@@ -162,6 +162,8 @@ Sansan株式会社も2023年11月20日、<a href="https://jp.corp-sansan.com/new
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -172,6 +174,8 @@ Sansan株式会社も2023年11月20日、<a href="https://jp.corp-sansan.com/new
 <details><summary>経理BPOに任せるとインボイス対応の負担は減りますか？</summary><p class="faq-a">登録番号確認や要件チェックを含めて委託できるため、確認作業そのものを社外に任せられます。</p></details>
 <details><summary>インボイス対応で経理担当者が特に注意すべき点は何ですか？</summary><p class="faq-a">取引先の登録状況確認を後回しにすると、仕入税額控除の計算で手戻りが発生します。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: インボイス経理の負担は「減らす」と「任せる」の両輪で軽減する
 

@@ -145,6 +145,8 @@ faq:
 
 どの業務から整理すべきかは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact/?s=backoffice)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -155,6 +157,8 @@ faq:
 <details><summary>請求書処理の効率化とインボイス対応は関係がありますか？</summary><p class="faq-a">登録番号の確認作業が加わるため、チェック項目に組み込んでおく必要があります。</p></details>
 <details><summary>請求書処理を外部に委託することもできますか？</summary><p class="faq-a">記帳や支払処理を含めて経理BPOに委託し、社内の負担を減らす方法もあります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 請求書処理の効率化はフローの整理が先
 

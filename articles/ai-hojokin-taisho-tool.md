@@ -155,6 +155,8 @@ faq:
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -165,6 +167,8 @@ faq:
 <details><summary>対象ツールを決める前に何を確認すべきですか？</summary><p class="faq-a">ITツール検索への登録状況と、自社が使う申請枠の対象経費区分です。</p></details>
 <details><summary>業種によって対象ツールの種類は変わりますか？</summary><p class="faq-a">分野の考え方は共通で、業種特有の機能要件がある場合のみ確認が必要です。</p></details>
 </div>
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: 対象ツールは登録状況を先に確認する
 

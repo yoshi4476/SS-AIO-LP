@@ -168,6 +168,8 @@ faq:
 
 3つの軸に優劣はありません。組み合わせて進める会社も多く、大切なのは自社が最も困っている軸から手をつける順序。迷ったときは、3つとも書き出してから優先順位をつけると判断しやすくなります。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -178,6 +180,8 @@ faq:
 <details><summary>自社に合う効率化の事例はどう選べばいいですか？</summary><p class="faq-a">業務量・コストの許容度・内製化したい範囲の3つの軸で絞り込みます。</p></details>
 <details><summary>経理効率化は一気に進めるべきですか？</summary><p class="faq-a">一度に全部は避け、効果の大きい業務から段階的に進めるのが安全です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理効率化はできる範囲から段階的に
 

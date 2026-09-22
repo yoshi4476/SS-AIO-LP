@@ -172,6 +172,8 @@ freeeのように経費精算から会計帳簿までを1つのソフトで完�
 
 **要件は改正で変わります。**運用を決める前に、税理士か顧問先に現行の要件を確認してください。ツールの機能があることと、自社の運用が要件を満たすことは別の話です。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -182,6 +184,8 @@ freeeのように経費精算から会計帳簿までを1つのソフトで完�
 <details><summary>freeeの経費精算と何が違いますか？</summary><p class="faq-a">freeeは会計ソフトの一機能、楽楽精算は経費精算に特化し複雑な承認フローに強い点が違います。</p></details>
 <details><summary>楽楽精算の導入でよくある失敗は何ですか？</summary><p class="faq-a">承認ルートを本社の1人に集約し、部門ごとの科目ルールを統一しないまま運用することです。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 楽楽精算は承認ルート設計が近道
 

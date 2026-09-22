@@ -243,6 +243,8 @@ AI検索経由で「うちの規模だとどれを使えばいいか」という
 
 Search ConsoleとGA4の数値を毎月同じ条件で記録し、改善の効果を追います。[AIO対策の基本手順](/aio/aio-taisaku-guide/)と組み合わせると、診断から改善まで一貫して回せます。AIチャットでの引用対策は[LLMO対策の記事](/aio/llmo-taisaku-hoho/)で詳しく解説しています。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -255,6 +257,8 @@ Search ConsoleとGA4の数値を毎月同じ条件で記録し、改善の効果
 <details><summary>構造化データのエラーは無料で確認できますか？</summary><p class="faq-a">Googleのリッチリザルトテストとschema.orgのValidatorの2つで無料検出できます。</p></details>
 <details><summary>無料ツールでは何ができませんか？</summary><p class="faq-a">競合サイトとの引用状況比較や、数百ページ規模の一括監視は有料ツールが必要です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: AIO対策はまず無料ツールで現状を知ることから
 

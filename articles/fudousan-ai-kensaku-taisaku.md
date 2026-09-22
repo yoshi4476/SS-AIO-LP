@@ -169,6 +169,8 @@ AI検索対策は一度の整備で終わらず、計測と更新を続けるこ
 
 不動産のマップ表示を軸にした施策は[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)、AI検索対策の考え方全般は[AIO対策とは？AI検索に引用される5つの手順](/aio/aio-taisaku-guide/)、ChatGPTなど個別プラットフォームへの対応は[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)でも詳しく解説しています。マップとAIの両方で選ばれる会社づくりの土台は共通しており、二重に施策を分ける必要はありません。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -178,6 +180,8 @@ AI検索対策は一度の整備で終わらず、計測と更新を続けるこ
 <details><summary>AI検索対策の効果が出るまでどのくらいかかりますか？</summary><p class="faq-a">情報の整備は数週間で完了しますが、AIに引用され始めるまでは3〜6ヶ月ほど見ておくと安心です。</p></details>
 <details><summary>支店が複数ある不動産会社はどう対応すればいいですか？</summary><p class="faq-a">支店ごとに対応エリアと担当者情報を分けて明記し、本社情報と矛盾させないことが大切です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 不動産のAI検索対策はエリア表記の統一と実名開示から
 

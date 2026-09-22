@@ -158,6 +158,8 @@ faq:
 
 定型業務は外注し、判断が必要なコア業務だけ採用でまかなうハイブリッド型を選ぶ会社もあります。採用と外注は二者択一ではなく、業務内容ごとに使い分ける発想を持つと、選択肢が広がります。自社の取引量ではどの程度の費用感になるか分からない場合は、経理BPOの無料相談で概算を確認することもできます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -169,6 +171,8 @@ faq:
 <details><summary>経理の求人と外注（BPO）はどちらが早く着手できますか？</summary><p class="faq-a">外注は数週間〜1か月程度で着手でき、採用より早く体制を整えられます。</p></details>
 <details><summary>求人と外注は併用できますか？</summary><p class="faq-a">定型業務を外注し、コア業務のみ採用するハイブリッド型を選ぶ会社もあります。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理の求人が難航するなら、外注という選択肢も並行して検討する
 

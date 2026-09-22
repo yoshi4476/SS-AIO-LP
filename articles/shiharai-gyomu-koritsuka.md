@@ -164,6 +164,8 @@ faq:
 
 私も、支払業務の担当者が1人しかおらず、月末の数日間に振込作業が集中して他の業務が止まっていた会社の話を聞いたことがあります。振込データ作成だけを外部委託し、締め日どおりの支払いを維持できるようになったそうです。自社の取引件数や体制でどこまで任せられるか分からない場合は、経理BPOの無料相談で相談することもできます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -174,6 +176,8 @@ faq:
 <details><summary>下請法は支払業務にどう関係しますか？</summary><p class="faq-a">下請取引に該当する場合、支払期日60日以内と遅延利息のルールが適用されます。</p></details>
 <details><summary>振込手数料を抑える方法はありますか？</summary><p class="faq-a">全銀ネットの手数料体系見直し後の水準を踏まえ、金融機関やサービスの手数料を比較します。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 支払業務の効率化は「受領から記帳まで」を仕組み化する
 

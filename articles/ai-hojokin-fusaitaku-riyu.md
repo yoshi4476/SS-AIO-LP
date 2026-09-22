@@ -140,6 +140,8 @@ GビズIDプライムの発行には概ね2週間かかるため、締切から�
 
 採択後の実績報告でつまずかないための準備は[AI導入補助金の実績報告の書き方](/blog/ai-hojokin-jissekihoukoku-kakikata/)でも解説しています。<span class="big">不採択は終わりではなく、計画を磨き直す機会です。</span>焦らず、次回締切に向けて足場を固め直してください。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -153,6 +155,8 @@ GビズIDプライムの発行には概ね2週間かかるため、締切から�
 
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: 不採択理由は審査の視点で切り分けて対策する
 

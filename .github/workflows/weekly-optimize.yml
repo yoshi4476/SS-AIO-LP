@@ -203,6 +203,19 @@ jobs:
           python scripts/measure.py --selftest || true
           python scripts/measure.py --log || true
 
+      # CTAが2箇所に満たない記事を埋める。CLAUDE.md が決めているのに検査が
+      # 無く、公開136本のうち59本が足りていなかった
+      - name: CTAの本数を揃える
+        run: python scripts/cta_fill.py --write || true
+
+      # 品質スコアは書いた本人が付けている。別工程で採点し直して差を見る。
+      # 毎週4本ずつ。全部を採点し直すと時間がかかりすぎる
+      - name: 品質スコアを別工程で採点し直す
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/score_audit.py --limit 4 || true
+
       # 使っている判断（点数・語の性質・内部リンクの下限）が、実際の成果を
       # 言い当てているかを確かめる。当たっていない判断で選び続けると、
       # 努力の向き先がずれる。実測で2件が当たっていなかった

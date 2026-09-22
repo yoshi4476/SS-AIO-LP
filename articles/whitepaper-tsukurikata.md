@@ -172,6 +172,8 @@ AI検索時代のホワイトペーパーは、リード獲得だけでなくAI�
 
 **社名・サービス名は数値ファクトとセットで記述する**ことも欠かせません。AIの回答内で社名ごと紹介されれば、指名検索の増加につながります。検索で上位を取る構造づくりは[BtoB SEOとは？商談前に選ばれる5つの施策](/seo/btob-seo-taisaku/)、AI回答内での言及を増やす考え方は[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)で詳しく解説しています。比較検討段階の記事対策は[SaaS比較記事対策とは？](/aio/saas-hikaku-kiji-taisaku/)もあわせてご覧ください。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -182,6 +184,8 @@ AI検索時代のホワイトペーパーは、リード獲得だけでなくAI�
 <details><summary>ホワイトペーパーはAI検索対策にも役立ちますか？</summary><p class="faq-a">独自データを含む資料は一次情報としてAIに引用されやすくなります。</p></details>
 <details><summary>内製と外注、どちらで作るべきですか？</summary><p class="faq-a">初回は内製で骨子を固め、デザインだけ外注する進め方をおすすめします。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: ホワイトペーパーは「課題起点のストーリー設計」
 

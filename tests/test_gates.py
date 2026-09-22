@@ -2790,6 +2790,114 @@ def test_rules_are_validated_against_outcomes():
     print("  OK  使っている判断を毎週実測で検証し、逆相関も検出する")
 
 
+def test_score_is_audited_and_cta_is_enforced():
+    """点数を別工程が付け直しているか。CTAの本数を機械が見ているか。
+
+    公開条件は score >= 90 だが、その点数は記事を書いたエージェント自身が
+    付けていた。372本すべてが90点以上で90点未満は0本、95点に177本が集中。
+    **一度も門として働いていない。**
+    別工程（公開HTMLを読む・Readのみ）で11本を採点し直すと、
+    11本すべてが90点を割り、11本すべてが1観点16点未満の足切りだった。
+    主因はデザイン観点で、CTAが2箇所に満たない記事が59本あったこと。
+    CLAUDE.md は「CTA 最低2箇所」と決めているのに検査が無かった。
+    """
+    for name, why in (("score_audit.py", "別工程の採点がありません"),
+                      ("cta_fill.py", "CTAを埋める工程がありません")):
+        if not (ROOT / "scripts" / name).is_file():
+            print(f"  NG  {why}")
+            FAIL.append("score_audited")
+            return
+
+    sa = (ROOT / "scripts" / "score_audit.py").read_text(encoding="utf-8")
+    # 採点者が元の点数を見ないこと（公開HTMLを読ませる）
+    if "site" not in sa or "Read" not in sa:
+        print("  NG  採点が公開HTMLを読む形になっていません（点数に引きずられます）")
+        FAIL.append("score_audited")
+        return
+    if '"--allowedTools", "Read"' not in sa:
+        print("  NG  採点工程が書き換えられる状態です（Readだけに絞ってください）")
+        FAIL.append("score_audited")
+        return
+
+    # CTAの本数を build が見ていること
+    bd = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    if "CTA不足" not in bd:
+        print("  NG  build.py がCTAの本数を見ていません")
+        FAIL.append("score_audited")
+        return
+
+    # 実際に2箇所未満の記事が残っていないか
+    import re as _re
+    short = 0
+    for p in (ROOT / "articles").glob("*.md"):
+        if p.name.startswith("_"):
+            continue
+        t2 = p.read_text(encoding="utf-8-sig", errors="ignore")
+        if not _re.search(r"^score:\s*(9[0-9]|100)\s*$", t2, _re.M):
+            continue
+        if t2.count("cta-button") < 2:
+            short += 1
+    if short:
+        print(f"  NG  CTAが2箇所未満の記事が{short}本あります"
+              "（python scripts/cta_fill.py --write）")
+        FAIL.append("score_audited")
+        return
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    if "score_audit.py" not in wf or "cta_fill.py" not in wf:
+        print("  NG  採点し直しかCTAの補充が週次に入っていません")
+        FAIL.append("score_audited")
+        return
+    print("  OK  点数は別工程が付け直し、CTAは全記事2箇所以上（機械で確認）")
+
+
+def test_no_control_characters_anywhere():
+    """置換が壊れて制御文字が紛れていないか。
+
+    実測（2026-09-23）で、376個の画像が134ページで表示されていなかった。
+    build.py の置換で後方参照が制御文字として埋め込まれ、
+    src が chr(1) になっていた。原稿は正しく、出力だけが壊れていた。
+    さらに否定先読みの \b も chr(8) になっており、条件が常に成立していた。
+
+    **src が空ではなかったため、「空srcを探す」検査では見つからなかった。**
+    見えない壊れは、範囲で探さないと見つからない。
+    """
+    bad = []
+    for p in sorted((ROOT / "scripts").glob("*.py")) + sorted((ROOT / "tests").glob("*.py")):
+        s = p.read_text(encoding="utf-8", errors="replace")
+        hits = [c for c in s if ord(c) < 9 or (13 < ord(c) < 32)]
+        if hits:
+            bad.append(f"{p.name}（{len(hits)}個 {[hex(ord(c)) for c in hits[:3]]}）")
+    if bad:
+        print("  NG  スクリプトに制御文字が混ざっています: " + " / ".join(bad[:3]))
+        print("      置換でエスケープが壊れています。生成物も壊れます")
+        FAIL.append("no_control_chars")
+        return
+
+    out = []
+    for p in (ROOT / "site").rglob("index.html"):
+        b = p.read_bytes()
+        if any(bytes([c]) in b for c in list(range(0, 9)) + [11, 12] + list(range(14, 32))):
+            out.append(p.parent.name)
+    if out:
+        print(f"  NG  生成HTMLに制御文字が残っています（{len(out)}ページ / 例: {out[0]}）")
+        FAIL.append("no_control_chars")
+        return
+
+    # 検査そのものが効くか、壊れた例で試す
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import importlib
+    import render_check as RC
+    importlib.reload(RC)
+    broken = '<img src="' + chr(1) + '" alt="x">'
+    names = [n for n, fn, _ in RC.SYMPTOMS if fn(broken, broken)]
+    if not names:
+        print("  NG  壊れた画像を検出できません（検査が効いていません）")
+        FAIL.append("no_control_chars")
+        return
+    print(f"  OK  制御文字なし（スクリプト・生成HTMLとも）／壊れた画像を検出できる")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2857,7 +2965,9 @@ def main():
               test_interventions_are_measured_against_control,
               test_numbers_come_from_two_methods,
               test_structure_is_proposed_monthly,
-              test_rules_are_validated_against_outcomes):
+              test_rules_are_validated_against_outcomes,
+              test_score_is_audited_and_cta_is_enforced,
+              test_no_control_characters_anywhere):
         try:
             t()
         except Exception as e:

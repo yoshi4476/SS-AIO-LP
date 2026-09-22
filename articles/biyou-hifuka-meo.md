@@ -168,6 +168,8 @@ diagrams:
 
 会計時に中立的な言葉で口コミを依頼し、届いた口コミには低評価も含めて全件返信します。**継続の有無が、半年後の口コミ件数を大きく左右**します。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -179,6 +181,8 @@ diagrams:
 </div>
 
 自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: 美容皮膚科MEOは「規制順守×事実の具体性×継続」
 

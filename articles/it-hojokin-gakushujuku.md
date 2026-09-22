@@ -148,6 +148,8 @@ faq:
 
 正式名称と旧IT導入補助金の関係は[AI導入補助金とIT導入補助金の違いは?結論は同じ制度【2026年の呼び方】](https://lp.7senses.co.jp/blog/ai-hojokin-it-hojokin-chigai/)で詳しく整理しています。
 
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -161,6 +163,8 @@ faq:
 
 
 自社が補助金の対象になるかどうかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録は不要で、その場で点数が出ます。
+
+<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: 学習塾は「生徒への再請求分」を切り分けて検討する
 

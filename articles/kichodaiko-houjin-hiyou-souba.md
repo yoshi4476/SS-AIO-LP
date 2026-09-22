@@ -153,6 +153,8 @@ TOKIUMが公開する<a href="https://www.keihi.com/column/46260/" target="_blan
 
 自社に必要な依頼範囲が分からない場合は、経理BPOの無料相談で概算を確認することもできます。まずは直近の仕訳数と資本金額を書き出すところから始めてください。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -163,6 +165,8 @@ TOKIUMが公開する<a href="https://www.keihi.com/column/46260/" target="_blan
 <details><summary>法人が記帳代行の費用を抑えるにはどうすればいいですか？</summary><p class="faq-a">依頼範囲を記帳のみに絞り、資本金と仕訳数を伝えて複数社を比較することです。</p></details>
 <details><summary>税理士事務所と記帳代行専門会社、法人はどちらを選ぶべきですか？</summary><p class="faq-a">税務相談や決算まで必要なら税理士事務所、記帳のみなら専門会社が費用を抑えやすいです。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: 記帳代行の費用は「法人特有の要因」を踏まえて比較する
 

@@ -163,6 +163,8 @@ RPA・AI-OCRは、請求書や納品書の転記作業を自動化します。�
 
 効率化の記録を残しておくことも定着のコツです。何をいつ変えて、作業時間がどれだけ減ったかを簡単にメモしておくと、担当者が交代しても取り組みが引き継がれます。
 
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -173,6 +175,8 @@ RPA・AI-OCRは、請求書や納品書の転記作業を自動化します。�
 <details><summary>経理BPOも仕事効率化の方法に含まれますか？</summary><p class="faq-a">含まれます。業務ごと外部委託することで、業務量そのものを減らせます。</p></details>
 <details><summary>経理の仕事効率化の効果はいつ実感できますか？</summary><p class="faq-a">個人の工夫は即日、ツール導入は1〜2か月ほどで実感しやすい傾向です。</p></details>
 </div>
+
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 
 ## まとめ: できることから積み上げるのが経理の仕事効率化の近道
 

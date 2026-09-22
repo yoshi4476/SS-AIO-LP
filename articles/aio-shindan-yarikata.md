@@ -211,6 +211,8 @@ AIO診断（無料・30秒）は、8つの質問に答えるだけで100点満�
 
 当社は3つの自社メディアを実際に運営しながらAIO対策を検証しており、[AI検索対策の無料相談](/lp/)では自社サイトの現状分析を無料で行っています。診断結果を見ながら、次に何を直すべきかを一緒に整理することも可能です。
 
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
@@ -222,6 +224,8 @@ AIO診断（無料・30秒）は、8つの質問に答えるだけで100点満�
 <details><summary>AIOチェックとAIO診断は違うものですか？</summary><p class="faq-a">同じ作業を指します。呼び名が違うだけで、確認する視点は8項目で共通です。</p></details>
 <details><summary>AIO診断はどのくらいの頻度で行うべきですか？</summary><p class="faq-a">記事公開時に加え、月1回程度は主要記事を再診断するのが目安です。</p></details>
 </div>
+
+<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: AIO診断は順位とは別軸のチェックが必要
 
