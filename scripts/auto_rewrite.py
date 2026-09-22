@@ -294,8 +294,13 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
         return f"タイトルに狙う語が入っていません（{kw}）"
 
     b = before[2]
-    new_nums = fact_numbers(numbers(after) - numbers(b) - numbers(allowed or ""),
-                            numbers(b) + numbers(allowed or ""))
+    # 許可した一次情報の数字は、何回使ってもよい。回数で引くと、同じ事実を
+    # 2箇所に書いただけで差し戻される（実測で4本が「3,200」で落ちた）
+    ok_tokens = set(numbers(allowed or ""))
+    added = numbers(after) - numbers(b)
+    for tok in ok_tokens:
+        added.pop(tok, None)
+    new_nums = fact_numbers(added, numbers(b) + numbers(allowed or ""))
     if new_nums:
         return f"本文に無かった数字が増えました: {dict(list(new_nums.items())[:4])}"
     lost = sources(b) - sources(after)

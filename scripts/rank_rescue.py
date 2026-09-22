@@ -73,6 +73,19 @@ def norm(s):
     return s.translate(str.maketrans("０１２３４５６７８９", "0123456789"))
 
 
+# 英語表記の語は、日本語の対応語が見出しにあれば足りているとみなす。
+# 「aio tool」に対して記事は「AIOツール」と書いており、見出しに tool を
+# 入れさせようとすると不自然な日本語になる（実測で1本が直せなかった）
+KANA = {"tool": "ツール", "tools": "ツール", "check": "チェック",
+        "service": "サービス", "price": "価格", "guide": "ガイド",
+        "agency": "会社", "company": "会社"}
+
+
+def _covered_by_kana(term, hay):
+    k = KANA.get(term.lower())
+    return bool(k) and norm(k) in hay
+
+
 def terms_of(kw):
     """語を意味の単位に割る。空白区切りだけでは自然文KWを扱えない"""
     parts = [t for t in re.split(r"[\s　]+", kw) if t]
@@ -195,7 +208,8 @@ def diagnose(refresh=False):
                     continue                         # 食い合いは語を足して直すものではない
             if len(r["kw"]) > NL_CHARS or len(re.split(r"[\s　]+", r["kw"])) > NL_TOKENS:
                 continue                             # 自然文の質問は語の欠落では直らない
-            gap = [t for t in terms_of(r["kw"]) if norm(t) not in a["hay"]]
+            gap = [t for t in terms_of(r["kw"])
+                   if norm(t) not in a["hay"] and not _covered_by_kana(t, a["hay"])]
             if gap:
                 miss.append({"kw": r["kw"], "pos": r["pos"], "imp": r["imp"], "gap": gap,
                              "in_body": all(norm(t) in a["body_hay"] for t in gap)})
