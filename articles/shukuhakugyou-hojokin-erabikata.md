@@ -72,8 +72,6 @@ faq:
 
 関連する内容は[農業の倉庫投資は建物費NG](/blog/monozukuri-hojokin-nougyou-souko/)で整理しています。
 
-関連する内容については、[ものづくり補助金は美容室で使える？](/hojokin/monozukuri-hojokin-biyoushitsu/)にまとめています。
-
 <div class="definition-box"><span class="term">新事業進出・ものづくり商業サービス補助金とは</span>、旧ものづくり補助金と旧事業再構築補助金（新事業進出補助金）が統合された制度の名称です。革新的新製品・サービス枠、新事業進出枠、グローバル枠という3つの申請枠に分かれています。</div>
 
 <a href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260630002.html" target="_blank" rel="noopener">中小企業庁が公開した第1回公募要領</a>によると、この統合は2026年6月29日付で、業種を問わず共通の枠組みとして運用されています。<strong>上限額は申請枠によって異なり、最大9,000万円まで幅があります。</strong>

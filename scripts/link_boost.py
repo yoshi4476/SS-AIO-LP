@@ -155,6 +155,22 @@ def rescue_targets(site, arts, cnt):
     return out
 
 
+def industry_of(text, site_id):
+    """その記事が扱う業種。語が重ならない記事同士をつなぐ手がかりにする"""
+    try:
+        import coverage as CV
+    except Exception:
+        return set()
+    hay = CV._norm(text)
+    out = set()
+    for i in CV.industries(site_id):
+        for s in [i["name"]] + (i.get("synonyms") or []):
+            if CV._norm(s) and CV._norm(s) in hay:
+                out.add(i["slug"])
+                break
+    return out
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -183,6 +199,7 @@ def main():
         tw = words(a)
         # 送り元候補: 同じ話題に触れていて、まだリンクしていない記事
         cands = []
+        tgt_ind = industry_of(a["title"] + a["kw"], site)
         for src, b in arts.items():
             if src == tgt or f"/{tgt}/" in b["body"]:
                 continue
@@ -191,6 +208,12 @@ def main():
             key = distinctive(a)
             if hit >= 2 and (not key or any(w in b["body"] for w in key)):
                 cands.append((hit, cnt[src], src))
+                continue
+            # 語が重ならなくても、同じ業種を扱う記事なら読者の次の行き先になる。
+            # これが無いと、語の重なりが無い記事は送り元が見つからず、
+            # 被リンクが下限に届かないまま止まる（実測23本）
+            if tgt_ind and tgt_ind & industry_of(b["title"] + b["kw"], site):
+                cands.append((1, cnt[src], src))
         # 話題が近く、かつ自身の被リンクが多い記事から送る（力のある記事から送る）
         cands.sort(key=lambda x: (-x[0], -x[1]))
         added = 0

@@ -47,11 +47,11 @@ faq:
 
 経理BPOの導入は、現状の棚卸しから本稼働まで大きく6つのステップで進みます。
 
+あわせて[経理派遣の時給相場は1,600〜2,500円](/blog/keiri-haken-jikyu-souba/)もご覧ください。
+
 あわせて[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)もご覧ください。
 
 実際の進め方は、[経理BPOの選び方6つ｜失敗しない比較の視点と手順](/blog/keiri-bpo-erabikata/)で解説しています。
-
-関連する内容として[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)も公開しています。
 
 費用の目安については、[経理BPOと人材派遣の違い5つ｜費用・契約形態を比較](/blog/keiri-bpo-haken-chigai/)にまとめています。
 
