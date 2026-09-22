@@ -2445,6 +2445,66 @@ def test_publish_gate_actually_blocks():
                        errors="replace", timeout=1800)
 
 
+def test_coverage_matrix_shows_gaps():
+    """どの業種×手法が空いているかを、毎週見ているか。
+
+    記事は1本ずつ選ばれており、全体としてどこが埋まっているかを誰も見ていなかった。
+    実測（2026-09-23）で、優先業種の工務店とリフォームに AIO の記事が1本も無い
+    一方、コーポレートは経理×経理に67本が集中していた。
+    検索エンジンとAIが「この分野を扱うサイト」と見るのは、1本の出来ではなく
+    面の広さと深さによる。空いたマスは、そのまま次に書くべき記事になる。
+
+    業種の軸はサイト固有のものを使う。共通の一覧を当てると、経理BPOのサイトに
+    歯科医院のマスが並び、埋まるはずのない空きが37マス出る。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    p = ROOT / "scripts" / "coverage.py"
+    if not p.is_file():
+        print("  NG  scripts/coverage.py がありません（盤面の検査）")
+        FAIL.append("coverage_matrix")
+        return
+
+    import importlib
+    import coverage as CV
+    importlib.reload(CV)
+
+    ok = True
+    for sid in ("ai-lab", "corporate", "subsidy"):
+        inds = CV.industries(sid)
+        cs = CV.cores(sid)
+        if not inds or not cs:
+            print(f"  NG  {sid}: 盤面の軸が作れません（業種{len(inds)} / 手法{len(cs)}）")
+            ok = False
+            continue
+        cells, _, _, arts, _ = CV.matrix(sid)
+        if not arts:
+            print(f"  NG  {sid}: 記事を1本も拾えていません")
+            ok = False
+    if not ok:
+        FAIL.append("coverage_matrix")
+        return
+
+    # サイト固有の軸を使っているか（共通一覧を全サイトに当てていないか）
+    a = {i["name"] for i in CV.industries("ai-lab")}
+    c = {i["name"] for i in CV.industries("corporate")}
+    if a == c:
+        print("  NG  業種の軸が全サイトで同じです。サイト固有の起点を使ってください")
+        FAIL.append("coverage_matrix")
+        return
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    fd = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
+    if "coverage.py" not in wf:
+        print("  NG  週次で盤面を出していません")
+        FAIL.append("coverage_matrix")
+        return
+    if "coverage.py" not in fd:
+        print("  NG  盤面の結果が通知に載りません（findings に入っていません）")
+        FAIL.append("coverage_matrix")
+        return
+    print("  OK  業種×手法の盤面を毎週出し、空きマスを通知に載せている（3サイト）")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2505,7 +2565,8 @@ def main():
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,
               test_stuck_articles_are_pushed_every_week,
-              test_publish_gate_actually_blocks):
+              test_publish_gate_actually_blocks,
+              test_coverage_matrix_shows_gaps):
         try:
             t()
         except Exception as e:

@@ -181,6 +181,21 @@ jobs:
       - name: 実測データの公開ページを更新
         run: python scripts/data_page.py || true
 
+      # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
+      # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
+      - name: 盤面の空きを出す（業種 × 手法）
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          for s in ai-lab corporate subsidy; do
+            python scripts/coverage.py --site "$s" || true
+            python scripts/coverage.py --site "$s" --gaps 8 || true
+          done
+          rm -f indexing-service-account.json
+
       # あと少しで1ページ目に届く記事は、放っておいても上がらない。
       # 被リンクが足りないまま何ヶ月も止まるので、毎週そこを埋める
       - name: 1ページ目に近い記事の底上げ（主力の語のみ）
