@@ -175,7 +175,142 @@ def sentence_of(ds):
             f"{head}でした（{ds['method']}）。")
 
 
-BUILDERS = [("順位ごとのクリック率", ctr_by_rank), ("生成AI経由の流入", ai_referral)]
+def index_speed(days=DAYS):
+    """記事を公開してから検索結果に出るまでの日数。
+
+    「記事はいつ順位がつくか」は誰もが知りたいのに、日本語の実測が少ない。
+    公開日ごとに、その後の期間で一度でも表示されたかを数える。
+    """
+    import re
+    from collections import defaultdict
+    import gsc_detail as G
+    import sites as S
+    sc = G.client()
+    start, end = _spans(days)
+    seen = set()
+    for cfg in S.load_all().values():
+        try:
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000)
+        except Exception:
+            continue
+        for r in rows:
+            seen.add(r["keys"][0].rstrip("/").split("/")[-1])
+
+    bands = [(0, 13, "0〜13日"), (14, 27, "14〜27日"),
+             (28, 41, "28〜41日"), (42, 999, "42日以上")]
+    agg = {b[2]: [0, 0] for b in bands}          # [公開本数, 検索に出た本数]
+    for p in (ROOT / "articles").glob("*.md"):
+        if p.name.startswith("_"):
+            continue
+        t2 = p.read_text(encoding="utf-8-sig", errors="ignore")[:1500]
+        if not re.search(r"^score:\s*(9[0-9]|100)\s*$", t2, re.M):
+            continue
+        dm = re.search(r"^date:\s*(\d{4})-(\d{2})-(\d{2})", t2, re.M)
+        sl = re.search(r"^slug:\s*(\S+)", t2, re.M)
+        if not dm:
+            continue
+        slug = sl.group(1) if sl else p.stem
+        age = (date.today() - date(int(dm.group(1)), int(dm.group(2)),
+                                   int(dm.group(3)))).days
+        for lo, hi, lab in bands:
+            if lo <= age <= hi:
+                agg[lab][0] += 1
+                agg[lab][1] += 1 if slug in seen else 0
+                break
+
+    rows_out, total = [], 0
+    for _, _, lab in bands:
+        n, ok = agg[lab]
+        total += n
+        if n < 10:
+            continue
+        rows_out.append({"label": lab, "value": round(ok / n * 100, 1),
+                         "num": ok, "den": n,
+                         "window": f"{start}〜{end}",
+                         "note": "3サイト合算", "row_start": str(start)[:7],
+                         "row_end": str(end)[:7]})
+    if total < MIN_N or len(rows_out) < 3:
+        return None
+    return {
+        "slug": "kiji-hyouji-madeno-nissuu",
+        "title": f"記事を公開してから検索結果に出るまでの日数（{total}本の集計）",
+        "description": ("セブンセンシズが運営する3サイトの記事について、"
+                        "公開からの経過日数ごとに、Search Consoleで一度でも"
+                        "表示された記事の割合を集計しました。"),
+        "n": total, "n_unit": "本",
+        "period": f"{start}〜{end}", "start": str(start), "end": str(end),
+        "method": (f"公開日からの経過日数で記事を区分し、直近{days}日の"
+                   "Search Console（page次元）に1回でも表示が記録された記事を"
+                   "「検索結果に出た」として数えた。10本未満の区分は除外"),
+        "unit": "%", "categories": ["seo", "aio"],
+        "den_label": "記事数", "num_label": "検索に出た", "neg_label": "出ていない",
+        "rows": rows_out,
+    }
+
+
+def links_by_rank(days=DAYS):
+    """順位帯ごとの内部リンク本数。通説（上位ほど多い）と実測が合うかを出す"""
+    import re
+    import statistics as st
+    from collections import defaultdict
+    import gsc_detail as G
+    import sites as S
+    sc = G.client()
+    start, end = _spans(days)
+    pos = defaultdict(lambda: [0, 0.0])
+    for cfg in S.load_all().values():
+        try:
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000)
+        except Exception:
+            continue
+        for r in rows:
+            s = r["keys"][0].rstrip("/").split("/")[-1]
+            pos[s][0] += r["impressions"]
+            pos[s][1] += r["position"] * r["impressions"]
+
+    inb = defaultdict(int)
+    for p in (ROOT / "articles").glob("*.md"):
+        body = p.read_text(encoding="utf-8-sig", errors="ignore")
+        for u in set(re.findall(r"\]\((/[^)]+/)\)", body)):
+            inb[u.rstrip("/").split("/")[-1]] += 1
+
+    bands = [(1, 10, "1〜10位"), (11, 20, "11〜20位"),
+             (21, 30, "21〜30位"), (31, 100, "31位以下")]
+    rows_out, total = [], 0
+    for lo, hi, lab in bands:
+        vals = [inb.get(s, 0) for s, (imp, ps) in pos.items()
+                if imp >= 10 and lo <= ps / imp <= hi]
+        if len(vals) < 5:
+            continue
+        total += len(vals)
+        rows_out.append({"label": lab, "value": round(st.median(vals), 1),
+                         "num": len(vals), "den": len(vals),
+                         "window": f"{start}〜{end}",
+                         "note": f"{len(vals)}本の中央値",
+                         "row_start": str(start)[:7], "row_end": str(end)[:7]})
+    if len(rows_out) < 3 or total < 30:
+        return None
+    return {
+        "slug": "juni-naibu-link",
+        "title": f"検索順位ごとの内部リンク本数（{total}本の集計）",
+        "description": ("「上位の記事ほど内部リンクが多い」と言われますが、"
+                        "自社3サイトで実測すると必ずしもそうではありませんでした。"
+                        "順位帯ごとに、その記事が受けている内部リンクの中央値を出しています。"),
+        "n": total, "n_unit": "本",
+        "period": f"{start}〜{end}", "start": str(start), "end": str(end),
+        "method": ("Search Console の page 次元で表示10回以上の記事を対象に、"
+                   "表示回数で重みづけした平均掲載順位で区分し、"
+                   "原稿内の内部リンク（他記事へのリンク）を受けている本数の中央値を出した。"
+                   "5本未満の区分は除外"),
+        "unit": "本", "categories": ["seo", "aio"],
+        "den_label": "記事数", "num_label": "記事数", "neg_label": "",
+        "rows": rows_out,
+    }
+
+
+BUILDERS = [("順位ごとのクリック率", ctr_by_rank), ("生成AI経由の流入", ai_referral),
+            ("公開から検索に出るまでの日数", index_speed),
+            ("順位ごとの内部リンク本数", links_by_rank)]
 
 
 def main():

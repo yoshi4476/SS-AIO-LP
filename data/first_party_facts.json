@@ -288,6 +288,26 @@
       "verifiable": true
     },
     {
+      "id": "dataset-juni-naibu-link",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "SEO運用",
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "セブンセンシズ株式会社が2026-06-23〜2026-09-20に自社3サイトで計測した196本をもとに集計した「検索順位ごとの内部リンク本数」では、1〜10位5.0本, 11〜20位6.0本, 21〜30位6本, 31位以下5本でした（Search Console の page 次元で表示10回以上の記事を対象に、表示回数で重みづけした平均掲載順位で区分し、原稿内の内部リンク（他記事へのリンク）を受けている本数の中央値を出した。5本未満の区分は除外）。",
+      "source": "セブンセンシズ株式会社 一次データ「検索順位ごとの内部リンク本数（196本の集計）」 https://ai.7senses.co.jp/data/juni-naibu-link/",
+      "as_of": "2026-09",
+      "denominator": 196,
+      "period": "2026-06-23〜2026-09-20",
+      "verifiable": true
+    },
+    {
       "id": "dataset-keizoku-ritsu-service",
       "sites": [
         "ai-lab",
@@ -325,6 +345,26 @@
       "source": "セブンセンシズ株式会社 一次データ「検索順位ごとの実測クリック率（表示7,015回の集計）」 https://ai.7senses.co.jp/data/kensaku-juni-ctr/",
       "as_of": "2026-09",
       "denominator": 7015,
+      "period": "2026-06-23〜2026-09-20",
+      "verifiable": true
+    },
+    {
+      "id": "dataset-kiji-hyouji-madeno-nissuu",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "SEO運用",
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "セブンセンシズ株式会社が2026-06-23〜2026-09-20に自社3サイトで計測した372本をもとに集計した「記事を公開してから検索結果に出るまでの日数」では、0〜13日58.9%, 14〜27日68.4%, 28〜41日96.2%, 42日以上90.5%でした（公開日からの経過日数で記事を区分し、直近90日のSearch Console（page次元）に1回でも表示が記録された記事を「検索結果に出た」として数えた。10本未満の区分は除外）。",
+      "source": "セブンセンシズ株式会社 一次データ「記事を公開してから検索結果に出るまでの日数（372本の集計）」 https://ai.7senses.co.jp/data/kiji-hyouji-madeno-nissuu/",
+      "as_of": "2026-09",
+      "denominator": 372,
       "period": "2026-06-23〜2026-09-20",
       "verifiable": true
     }
