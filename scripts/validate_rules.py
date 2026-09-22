@@ -200,7 +200,23 @@ def main():
     results["内部リンク"] = report("内部リンクの本数", bands4, p,
                                "下限を決める根拠にしていた", expect="10本以上")
 
-    # 5) 公開からの日数（これは効いて当然。検査そのものが働いているかの確認用）
+    # 5) 別工程の採点（新しい3軸）。当たり始めたら、直す判断に使ってよい
+    try:
+        import json as _json
+        au = _json.loads((ROOT / "data" / "score_audit.json").read_text(encoding="utf-8"))
+        import rubric as _R
+        hi = [s for s, v in au.items()
+              if (v.get("audit") or {}).get("total", 0) >= _R.PASS_TOTAL]
+        lo = [s for s, v in au.items()
+              if 0 < (v.get("audit") or {}).get("total", 99) < _R.PASS_TOTAL]
+        results["別工程の採点"] = report(
+            "別工程の採点（3軸・合格と不合格）",
+            [("合格", hi), ("不合格", lo)], p,
+            "合格のほうが成果が良いはず", expect="合格")
+    except Exception:
+        results["別工程の採点"] = None
+
+    # 6) 公開からの日数（これは効いて当然。検査そのものが働いているかの確認用）
     bands5 = [("0〜20日", [s for s, v in arts.items() if (v["age"] or 99) <= 20]),
               ("21〜40日", [s for s, v in arts.items() if 21 <= (v["age"] or 0) <= 40]),
               ("41日以上", [s for s, v in arts.items() if (v["age"] or 0) >= 41])]
