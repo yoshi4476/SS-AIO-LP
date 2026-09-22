@@ -79,14 +79,20 @@ def targets():
     最優先は「1ページ目にいるのに AI Overview に取られている」記事（aio_items）。
     次に rank_up の「4〜10位でクリックが取れていない」。無ければ auto_improve の一覧。
     """
-    head = aio_items()
+    # 語の欠落（stuck）を先に置く。aio より成果が確かめやすいため。
+    # aio は「1ページ目にいるのにAIに答えを取られている」記事を直す種別だが、
+    # 実行すると3本続けて「変更なし（直す必要なしと判断）」を返した。
+    # 構造が既に整っている記事が多く、直す余地が無い。一方 stuck は
+    # 「需要のある語に答える節が無い」という具体的な欠けで、
+    # 直ったかを見出しで機械的に確かめられる（2026-09-22 の実測）
+    head = []
     try:
         import rank_rescue as RR
-        # 11〜30位で止まり、需要のある語に答えていない記事。表示が多い順に来る
-        seen0 = {x["slug"] for x in head}
-        head = head + [x for x in RR.items() if x["slug"] not in seen0]
+        head = RR.items()                    # 表示が多い順に来る
     except Exception as e:
         print(f"  （rank_rescue から取れません: {str(e)[:50]}）")
+    seen0 = {x["slug"] for x in head}
+    head = head + [x for x in aio_items() if x["slug"] not in seen0]
     try:
         import rank_up
         items = rank_up.human_items()
@@ -158,6 +164,15 @@ WHAT = {
                "なっているか確かめてください。ずれていれば直してください。\n"
                "ずれていなければ何も変えずに終了してください（無理に直さない）。"),
 }
+
+
+PERM = json.dumps({"permissions": {
+    # articles/ の書き換えだけを許す。Bash も外部通信も渡さないので、
+    # この工程にできるのは原稿1本の書き換えだけ。
+    # 全部を飛ばす指定（--dangerously-skip-permissions）は使わない
+    "allow": ["Read", "Edit(articles/**)"],
+    "defaultMode": "acceptEdits",
+}}, ensure_ascii=False)
 
 
 def claude_bin():
@@ -252,7 +267,7 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     if terms:
         # 「足した」と言いながら見出しが変わっていないものを通さない。
         # 本文にちりばめるだけの直し方では順位は動かない
-        heads = " ".join(re.findall(r"^#{2,4}\\s*(.+)$", after, re.M)).lower()
+        heads = " ".join(re.findall(r"^#{2,4}\s*(.+)$", after, re.M)).lower()
         if not any(x.lower() in heads for x in terms):
             return "狙った語が見出しに入っていません（" + "/".join(terms[:3]) + "）"
         if len(after) < len(b) * 0.98:
@@ -325,8 +340,14 @@ def run_one(item, write):
     # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
     # この工程がやるのは1ファイルの書き換えだけで、コマンド実行も外部通信も要らない
     exe = claude_bin()
+    # --permission-mode acceptEdits が無いと、Edit は「承認待ち」で止まり、
+    # 何も書き換わらないまま「変更なし」で終わる。実際 16本連続で空振りし、
+    # 手で1本動かして初めて「権限の許可が必要です」と出ているのが分かった。
+    # 道具は Read,Edit に絞ったままなので、できるのは1ファイルの書き換えだけ。
+    # 悪い書き換えは check() が見つけて git checkout で戻す
     r = sh([exe, "-p", prompt, "--max-turns", "40",
-            "--allowedTools", "Read,Edit"], timeout=1800)
+            "--allowedTools", "Read,Edit",
+            "--settings", PERM], timeout=1800)
     if r.returncode and not p.read_text(encoding="utf-8-sig") != before[2]:
         return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
 
@@ -355,11 +376,26 @@ def selftest():
         print("  対象がないため、記事を1本選んで試します")
         items = [{"kind": "title", "slug": sorted(
             p.stem for p in (ROOT / "articles").glob("*.md"))[0], "why": "自己診断"}]
-    slug = items[0]["slug"]
+    # 手を付ける前から検算に落ちる記事を選ぶと、何を当てても同じ理由で止まり、
+    # 「6/6を止めた」と出ても何も試していないことになる。実際 ai-kantan-shukyaku は
+    # タイトルに狙う語が無いため、5件が同じ理由で止まっていた（2026-09-23）
+    slug = ""
+    for it in items[:8]:
+        s = it["slug"]
+        if not (ROOT / "articles" / f"{s}.md").is_file():
+            continue
+        if not check(s, meta(s), warns(s), None):
+            slug = s
+            break
+        print(f"  --  {s}: 直す前から検算に落ちるため、診断には使いません")
+    if not slug:
+        print("  NG  検算を試せる記事がありません（全件が手つかずで落ちます）")
+        return 1
     p = ROOT / "articles" / f"{slug}.md"
     orig = p.read_text(encoding="utf-8-sig")
     before, before_warns, snap = meta(slug), warns(slug), snapshot()
     title, kw, body = before
+    print(f"  診断に使う記事: {slug}" + chr(10))
 
     # やってはいけない書き換えを、1つずつ当てる
     cases = [
