@@ -2601,6 +2601,48 @@ def test_guarantee_rate_is_measured():
     print("  OK  こちら側で決まる要因の達成率を毎週出し、通知に載せている")
 
 
+def test_interventions_are_measured_against_control():
+    """打った手を、触っていない記事と比べているか。
+
+    サイト全体が28日で+107%伸びている時期には、何をしても「効いた」に見える。
+    実際 effect.py は「表示が増えた記事 55/126本」と出すが、触っていない記事でも
+    同じ割合で増えているなら、その手は効いていない。
+    対照群と比べて初めて、効かない施策を落とせる。
+
+    あわせて、記録が残っているかも見る。残っていない施策は測りようがない。
+    実測（2026-09-23）で link_boost は1件も記録しておらず、内部リンクが
+    効いたかを判定できなかった。
+    """
+    p = ROOT / "scripts" / "effect_ab.py"
+    if not p.is_file():
+        print("  NG  scripts/effect_ab.py がありません（対照群との比較）")
+        FAIL.append("effect_ab")
+        return
+    src = p.read_text(encoding="utf-8")
+    for need, why in (("touched_days", "触った記事を除いた対照群を作っていません"),
+                      ("ctrl_imp", "対照群の動きを測っていません")):
+        if need not in src:
+            print(f"  NG  {why}")
+            FAIL.append("effect_ab")
+            return
+
+    # 自動修正は、どれも台帳に記録していること
+    for name in ("auto_review.py", "auto_rewrite.py", "link_boost.py"):
+        s = (ROOT / "scripts" / name).read_text(encoding="utf-8")
+        if "auto_fix.jsonl" not in s:
+            print(f"  NG  {name} が台帳に記録していません（あとで効果を測れません）")
+            FAIL.append("effect_ab")
+            return
+
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    fd = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
+    if "effect_ab.py" not in wf or "effect_ab.py" not in fd:
+        print("  NG  対照群との比較が週次か通知に載っていません")
+        FAIL.append("effect_ab")
+        return
+    print("  OK  打った手を対照群と比べ、記録は3つの自動修正すべてが残している")
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -2664,7 +2706,8 @@ def main():
               test_publish_gate_actually_blocks,
               test_coverage_matrix_shows_gaps,
               test_howto_is_emitted_for_step_articles,
-              test_guarantee_rate_is_measured):
+              test_guarantee_rate_is_measured,
+              test_interventions_are_measured_against_control):
         try:
             t()
         except Exception as e:

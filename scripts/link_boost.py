@@ -16,6 +16,7 @@ AI検索にも文脈ごと読まれる。
     python scripts/link_boost.py <site_id> --write    # 実際に足す
 """
 import glob
+import io
 import re
 import sys
 from collections import Counter
@@ -171,6 +172,23 @@ def industry_of(text, site_id):
     return out
 
 
+def note(tgt, src, kind):
+    """何をしたかを台帳に残す（CLAUDE.md 8.6 の決まり）。
+
+    残さないと、あとで効果を測れない。実際 effect_ab は
+    link_boost の記録が1件も無いため、内部リンクが効いたかを判定できなかった。
+    """
+    import json
+    import time
+    log = ROOT / "automation" / "logs" / "auto_fix.jsonl"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    with io.open(log, "a", encoding="utf-8", newline="") as f:
+        f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"),
+                            "by": "link_boost", "slug": tgt, "kind": kind,
+                            "ok": True, "note": f"{src} から内部リンクを1本"},
+                           ensure_ascii=False) + NL_CH)
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -243,6 +261,7 @@ def main():
                 head = t.split("---", 2)[1]
                 b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")
                 arts[src]["body"] = nb
+            note(tgt, src, "link_rescue" if rescue else "link")
             added += 1
             done += 1
     print(f"\n   {'追加しました' if write else '候補'}: {done}本")

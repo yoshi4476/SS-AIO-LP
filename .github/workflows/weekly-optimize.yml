@@ -196,6 +196,18 @@ jobs:
 
       # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
+      # 打った手が効いたかを、触っていない記事と比べて判定する。
+      # サイト全体が伸びている時期は、何をしても「効いた」に見えるため
+      - name: 打った手の効き（対照群と比較）
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          python scripts/effect_ab.py || true
+          rm -f indexing-service-account.json
+
       # 順位そのものは保証できない。保証できるのは「順位を決める要因のうち
       # こちら側にあるものを毎回100%満たすこと」。その達成率を毎週出す
       - name: こちら側で決まる要因の達成率
