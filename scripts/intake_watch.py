@@ -37,8 +37,11 @@ def sheets():
     """置かれた記入済みシート。Excelの一時ファイルと、処理済みは除く"""
     if not IN.is_dir():
         return []
+    # 未記入の雛形は、置き場に残しておくもの。毎回「不備」として報告されると、
+    # 本当に直すべきシートが埋もれる
+    blank = {"データ記入シート.xlsx", "実績記入シート.xlsx", "ヒアリングシート.xlsx"}
     return sorted(p for p in IN.glob("*.xlsx")
-                  if not p.name.startswith(("~$", ".")))
+                  if not p.name.startswith(("~$", ".")) and p.name not in blank)
 
 
 def site_count():
@@ -58,13 +61,31 @@ def move(src, dst_dir, note=""):
     return dst
 
 
+def _tabs(src):
+    """シートのタブ名。読めないものは空にして、従来どおり名前で振り分ける"""
+    # read_only は必ず閉じる。開いたままだと、このあとの move で
+    # 「別のプロセスが使用中です」になり、公開の途中で止まる
+    try:
+        from openpyxl import load_workbook
+        wb = load_workbook(src, read_only=True)
+        try:
+            return set(wb.sheetnames)
+        finally:
+            wb.close()
+    except Exception:
+        return set()
+
+
 def one(src, write):
     """シート1枚を見る。(登録できたか, 説明) を返す"""
     # 実績・お客様の声の記入シートは会社の立ち上げではなく、一次情報と掲載の登録
     if "実績" in src.name:
         import jisseki_intake as J
         return J.one(src, write)
-    if "データ" in src.name:
+    # 名前ではなくタブの構成で見る。ファイル名に「データ」が入っているかで
+    # 振り分けていたため、内容は正しいのにクライアント用の検査にかけられ、
+    # 一次データのシートが毎回「不備23件」で弾かれていた
+    if _tabs(src) >= {"概要", "データ"}:
         import data_intake as D
         return D.one(src, write)
     import client_intake as C

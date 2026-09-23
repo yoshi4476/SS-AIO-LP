@@ -38,7 +38,12 @@ SHELL = SITE / "lab" / "index.html"
 SITE_URL = "https://ai.7senses.co.jp"
 ORG = "セブンセンシズ株式会社"
 START, END = "<!-- datasets:start -->", "<!-- datasets:end -->"
-CATS = {"aio": "AIO・LLMO運用", "seo": "SEO運用", "meo": "MEO運用", "ai-marketing": "AI集客・活用全般"}
+# 3サイトぶんのカテゴリを載せる。ページ自体は AI集客ラボ の /data/ に作られるが、
+# 引用用の一文は一次情報として登録され、3サイトすべての記事から使われる。
+# AI集客ラボの4つしか無かったため、補助金・経理BPOのデータが登録できなかった
+CATS = {"aio": "AIO・LLMO運用", "seo": "SEO運用", "meo": "MEO運用", "ai-marketing": "AI集客・活用全般",
+        "hojokin": "AI導入補助金", "keiri-bpo": "経理BPO・経理代行",
+        "keiri-jitsumu": "経理実務・法対応", "backoffice": "バックオフィス効率化"}
 
 RULES = [
     "この1枚に入れた数字だけが公開されます。機械は数字を作りません。空欄のシートは登録しません。",

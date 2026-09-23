@@ -172,3 +172,8 @@
 - [検索順位ごとの実測クリック率（表示7,015回の集計）](https://ai.7senses.co.jp/data/kensaku-juni-ctr/): セブンセンシズが運営する3サイトのSearch Consoleから、検索順位の帯ごとに表示回数とクリック数を集計しました。日本語・中小企業向けの実測値です。
 - [検索順位ごとの内部リンク本数（196本の集計）](https://ai.7senses.co.jp/data/juni-naibu-link/): 「上位の記事ほど内部リンクが多い」と言われますが、自社3サイトで実測すると必ずしもそうではありませんでした。順位帯ごとに、その記事が受けている内部リンクの中央値
 - [記事を公開してから検索結果に出るまでの日数（372本の集計）](https://ai.7senses.co.jp/data/kiji-hyouji-madeno-nissuu/): セブンセンシズが運営する3サイトの記事について、公開からの経過日数ごとに、Search Consoleで一度でも表示された記事の割合を集計しました。
+- [業種別の口コミ増加件数](https://ai.7senses.co.jp/data/meo-kuchikomi-zouka-gyoushu/): G-ranで運用した店舗について、運用開始前後の口コミ件数の変化を業種別に集計しました。
+- [MEO運用を始めてから順位が上がるまでの月数](https://ai.7senses.co.jp/data/meo-kouka-madeno-tsukisuu/): G-ranで12か月以上運用した800店舗について、主要キーワードの順位が運用開始時より上がった月を集計しました。
+- [申請から採択までの日数](https://ai.7senses.co.jp/data/hojokin-saitaku-madeno-nissuu/): 当社が2025年4月〜2026年3月に支援して採択された25社について、申請日から採択日までの日数を集計しました。
+- [経理BPO導入前後の月次決算の所要日数](https://ai.7senses.co.jp/data/keiri-bpo-getsuji-nissuu/): 経理BPOを導入した企業について、月次決算が締まるまでの日数を導入前後で比べました。
+- [AIO運用を始めてから検索順位が上がるまでの月数](https://ai.7senses.co.jp/data/aio-junni-madeno-tsukisuu/): AIO運用を開始した企業について、主要クエリの平均順位が運用開始時より上がった月を集計しました。

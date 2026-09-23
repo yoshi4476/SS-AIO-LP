@@ -367,6 +367,101 @@
       "denominator": 372,
       "period": "2026-06-23〜2026-09-20",
       "verifiable": true
+    },
+    {
+      "id": "dataset-meo-kuchikomi-zouka-gyoushu",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "MEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "G-ranで運用を始めた1,000店舗の集計では、運用開始から6か月で口コミ件数が平均で飲食店135件、美容室105件増えました（2023年10月〜2026年2月に運用を開始した店舗）。",
+      "source": "セブンセンシズ株式会社 一次データ「業種別の口コミ増加件数」 https://ai.7senses.co.jp/data/meo-kuchikomi-zouka-gyoushu/",
+      "as_of": "2026-09",
+      "denominator": 1000,
+      "period": "2023-10〜2026-08",
+      "verifiable": true
+    },
+    {
+      "id": "dataset-meo-kouka-madeno-tsukisuu",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "MEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "G-ranで2023年10月〜2025年8月に運用を開始し12か月以上運用した800店舗のうち、47.1%が6か月以内に、53.3%が12か月以内に主要キーワードの順位が上がりました。",
+      "source": "セブンセンシズ株式会社 一次データ「MEO運用を始めてから順位が上がるまでの月数」 https://ai.7senses.co.jp/data/meo-kouka-madeno-tsukisuu/",
+      "as_of": "2026-09",
+      "denominator": 800,
+      "period": "2023-10〜2026-08",
+      "verifiable": true
+    },
+    {
+      "id": "dataset-hojokin-saitaku-madeno-nissuu",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "AI導入補助金",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "2025年4月〜2026年3月に当社が支援して採択された25社は、全社が申請から31〜60日で採択されました。",
+      "source": "セブンセンシズ株式会社 一次データ「申請から採択までの日数」 https://ai.7senses.co.jp/data/hojokin-saitaku-madeno-nissuu/",
+      "as_of": "2026-09",
+      "denominator": 25,
+      "period": "2025-04〜2026-03",
+      "verifiable": true
+    },
+    {
+      "id": "dataset-keiri-bpo-getsuji-nissuu",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "経理BPO・経理代行",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "経理BPOを導入した10社の集計では、月次決算が締まるまでの日数が中央値で15日から7日に短縮しました（2024年4月〜2026年8月・10社の中央値。個社差が大きい）。",
+      "source": "セブンセンシズ株式会社 一次データ「経理BPO導入前後の月次決算の所要日数」 https://ai.7senses.co.jp/data/keiri-bpo-getsuji-nissuu/",
+      "as_of": "2026-09",
+      "denominator": 10,
+      "period": "2024-04〜2026-08",
+      "verifiable": true
+    },
+    {
+      "id": "dataset-aio-junni-madeno-tsukisuu",
+      "sites": [
+        "ai-lab",
+        "corporate",
+        "subsidy"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "AIO運用を2026年5月に開始した10件のうち、6件が1か月以内、8件が2か月以内、10件が3か月以内に主要クエリの平均順位が開始時より上がりました（2026年5月〜8月の集計。わずかな上昇も含みます）。",
+      "source": "セブンセンシズ株式会社 一次データ「AIO運用を始めてから検索順位が上がるまでの月数」 https://ai.7senses.co.jp/data/aio-junni-madeno-tsukisuu/",
+      "as_of": "2026-09",
+      "denominator": 10,
+      "period": "2026-05〜2026-08",
+      "verifiable": true
     }
   ],
   "pending": [
