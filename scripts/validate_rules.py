@@ -93,6 +93,15 @@ def inbound(arts):
     return n
 
 
+# 質問形の見出しとみなす形。日本語は「?」を付けないことが多いので、
+# 記号ではなく語尾と疑問詞で見る
+QUESTION = re.compile(
+    r"[?？]\s*$|"
+    r"(?:です|ます|でしょう|だろう)か[。\s]*$|"
+    r"^(?:なぜ|なに|何|どこ|いつ|だれ|誰|どの|どう|どれ|いくら|いくつ)|"
+    r"とは[?？]?\s*$")
+
+
 def report(name, groups, p, note="", expect=None):
     """区分ごとに成果の中央値を並べる。
 
@@ -187,11 +196,30 @@ def main():
     lens = {}
     for s, v in arts.items():
         lens[s] = len(re.sub(r"\s|<[^>]+>", "", v["body"]))
+    # 区分は実際の分布に合わせる。7,000字以上は31本しか無く、
+    # 5,500〜7,000 に299本が固まっていたため、どの区分も比べられなかった。
+    # 下限5,000字の決まりが全記事を同じ長さに寄せ、**測れない状態を自分で作っていた**
     bands3 = [("5,500字未満", [s for s in lens if lens[s] < 5500]),
-              ("5,500〜7,000字", [s for s in lens if 5500 <= lens[s] < 7000]),
-              ("7,000字以上", [s for s in lens if lens[s] >= 7000])]
+              ("5,500〜6,500字", [s for s in lens if 5500 <= lens[s] < 6500]),
+              ("6,500字以上", [s for s in lens if lens[s] >= 6500])]
     results["記事の長さ"] = report("記事の長さ（実際の文字数）", bands3, p,
-                               "5,000字以上を基準にしていた", expect="7,000字以上")
+                               "5,000字以上を基準にしていた", expect="6,500字以上")
+
+    # 3.5) 質問形の見出し。AI Overview の表示率は、質問形のクエリで
+    #      13.7% → 64.7% に跳ねる（arXiv 2605.14021・55,393クエリ・2026-03〜04）。
+    #      ただし「だから見出しを質問形にすれば良い」は別の話なので、決まりにする前に自社で測る
+    q = {}
+    for s, v in arts.items():
+        h2 = re.findall(r"^##\s+(.+)$", v["body"], re.M)
+        if not h2:
+            continue
+        n_q = sum(1 for h in h2 if QUESTION.search(h))
+        q[s] = n_q / len(h2)
+    bands35 = [("質問形なし", [s for s in q if q[s] == 0]),
+               ("1〜3割が質問形", [s for s in q if 0 < q[s] <= 0.3]),
+               ("3割超が質問形", [s for s in q if q[s] > 0.3])]
+    results["質問形の見出し"] = report("質問形の見出しの割合", bands35, p,
+                                "AIの回答は質問形のクエリで出やすい", expect="3割超が質問形")
 
     # 4) 内部リンクの本数
     bands4 = [("0〜4本", [s for s in arts if inb.get(s, 0) <= 4]),

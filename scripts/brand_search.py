@@ -108,6 +108,16 @@ def main():
           "多いため。\n     引用でブランドを知った人が社名で検索し直す動きが、"
           "ここに出る")
     print(f"  BRAND_IMP={ti} BRAND_CLICKS={tc} BRAND_GROWTH={growth(pi, ti)}")
+
+    # 指名検索は「引用でブランドを知った人が社名で検索し直す」動きの代理指標。
+    # AI検索での可視性との相関は 0.392 で、被リンク（0.218）の約2倍
+    # （Ahrefs・75,000ブランド・2025-12）。減っていれば知らせる対象にする
+    if ti < pi:
+        print(f"  前の28日より減っています（{pi} → {ti}表示）。"
+              "引用が減ったか、外部での言及が止まっている可能性があります")
+        print("BRAND_OK=no")
+    else:
+        print("BRAND_OK=yes")
     return 0
 
 

@@ -1,0 +1,25 @@
+{
+  "_readme": "外部サイトでの社名の言及。リンクの有無は linked で持つ。AI検索の可視性は被リンクより言及のほうが3倍強く相関するため、リンクが無いものも数える。買ったリンク・相互リンク目的の掲載は入れない。",
+  "items": [
+    {
+      "url": "https://it-shien.smrj.go.jp/search/business/",
+      "where": "中小機構 支援事業者検索",
+      "linked": true,
+      "third": true,
+      "added": "2026-09-23",
+      "last_checked": "2026-09-23",
+      "alive": false,
+      "state": "unknown"
+    }
+  ],
+  "history": [
+    {
+      "at": "2026-09-23",
+      "third": 1,
+      "alive": 0,
+      "gone": 0,
+      "unknown": 1,
+      "linked": 1
+    }
+  ]
+}

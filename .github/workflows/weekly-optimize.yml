@@ -168,6 +168,8 @@ jobs:
           fi
           python scripts/rank_rescue.py --refresh >> automation/logs/findings.txt 2>&1 || true
           python scripts/key_queries.py --track >> automation/logs/findings.txt 2>&1 || true
+          python scripts/brand_search.py >> automation/logs/findings.txt 2>&1 || true
+          python scripts/mentions.py --check >> automation/logs/findings.txt 2>&1 || true
           for s in ai-lab corporate subsidy; do
             python scripts/link_boost.py "$s" --rescue --write || true
           done
