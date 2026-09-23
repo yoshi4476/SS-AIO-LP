@@ -55,3 +55,4 @@ youtube-token.json
 credentials/
 # 動画は作り直せるので追跡しない（1本2〜4MB）
 automation/video/
+automation/proposal.html
