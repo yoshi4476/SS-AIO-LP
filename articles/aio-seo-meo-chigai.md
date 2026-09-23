@@ -66,6 +66,8 @@ diagrams:
 
 **AIOとは、AIが生成する回答文の中で、自社の情報が引用元として使われるようにする対策です。**新しいマークアップを追加する対策ではありません。
 
+前提となる考え方は[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)でも扱っています。
+
 <div class="definition-box"><span class="term">AIOとは</span>、AIの生成する回答の中に、自社サイトの情報が引用・参照されるよう、記事構造と一次情報を整える対策です。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Central</a>は、AI OverviewとAIモードへの表示に追加要件はなく、既存の検索SEOの評価がそのまま使われると明記しています。</div>
 
 つまりAIOは、SEOと別枠の技術対応ではなく、**検索上位表示という土台の上に、抽出されやすい書き方を重ねる対策**です。AIに引用されるための具体的な書き方は[AIO対策でAIに引用されるには？](/aio/aio-taisaku-ai-inyou-sareru/)で詳しく解説しています。
