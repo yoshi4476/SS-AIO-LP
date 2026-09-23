@@ -111,7 +111,10 @@ def slide(path, head, lines, footer="", n=0, total=0, bars=None, caption="",
         bw_full = W - 700
         for label, v in bars[:6]:
             on = (label == active)
-            d.text((100, y + bh / 2), label, font=font(40 if on else 34),
+            # ラベルは棒の手前（x=470）までに収める。固定サイズだと長い項目名が
+            # 棒に食い込む（実測で「リンクの無いWeb言及」がはみ出した）
+            lf = fit(d, label, 470 - 100 - 24, 40 if on else 34, 22)
+            d.text((100, y + bh / 2), label, font=lf,
                    fill=NAVY if on else MUTED, anchor="lm")
             d.rectangle([470, y, 470 + bw_full, y + bh], fill=(226, 234, 243))
             d.rectangle([470, y, 470 + max(8, bw_full * v / mx), y + bh],
