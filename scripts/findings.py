@@ -61,6 +61,10 @@ CHECKS = [
      re.compile(r"^   \S+\s+いま\d箇所")),
     ("判断の当たり具合", "validate_rules.py",
      re.compile(r"逆になって|成果を分けていない判断")),
+    # 宣言した主要クエリが起点より上がったか。ページ単位の工程では
+    # 「何を上げたかったのか」が残らず、上がったかどうかを後から言えない
+    ("主要クエリの推移", "key_queries.py --track",
+     re.compile(r"^\s+\S+（.+→.+） … ")),
     ("サイト構成の提案", "structure_plan.py",
      re.compile(r"^\s+\d+\.\d\s+(新しい|書き足し|統合)")),
 ]
