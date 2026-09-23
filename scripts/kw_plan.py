@@ -122,7 +122,13 @@ def score(c, prio=()):
     kd = c.get("kd")
     intent = kw_intent.score(c["kw"])[0]
     s = math.log1p(vol) * 0.6
-    s += intent * 0.8
+    # 開く理由の重み。0.8 → 1.6 に上げた。
+    # `validate_rules` で、成果を分けている判断は「語の性質」と「公開からの日数」の
+    # 2つだけだった（品質スコア・内部リンク・記事の長さは分けていないか逆）。
+    # それなのに買い手の語（+3.0）より軽く、実測で効くと分かっている要素が
+    # 埋もれていた。実際、AI集客ラボは「強」の語が13.9%しかなく（他サイトは22〜24%）、
+    # CTRも0.77%と他サイトの3分の1だった。点は -2〜+4 なので、重み1.6で -3.2〜+6.4 になる
+    s += intent * 1.6
     if BUYER.search(c["kw"].lower()):
         s += 3.0
     if kd is not None:
@@ -333,7 +339,9 @@ LOOKUP_MAX = BULK    # 一括調査に送る語は1サイト1回ぶん（500件�
 
 def pre_score(c):
     """課金なしで付けられる点。一括調査に送る語を選ぶために使う"""
-    s = kw_intent.score(c["kw"])[0] * 1.0
+    # 本番の点（score）と同じ重みにする。ここが軽いと、開く理由の強い語が
+    # 一括調査に送られる前に落ちてしまう
+    s = kw_intent.score(c["kw"])[0] * 1.6
     if BUYER.search(c["kw"].lower()):
         s += 3.0
     if c.get("imp"):

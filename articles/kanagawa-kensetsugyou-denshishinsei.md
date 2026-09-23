@@ -99,8 +99,6 @@ GビズIDプライムの申請では、申請書を印刷して印鑑証明書�
 
 **GビズIDから始めてください。**発行を待つ間に、他の書類を集められます。
 
-関連する内容として[小売業のAI導入補助金](/blog/kourigyou-ai-hojokin-keihi/)も公開しています。
-
 <figure><img src="/images/kanagawa-kensetsugyou-denshishinsei/flow-start.png" alt="書類を揃える順番: GビズIDを申請する、納税証明書を取りに行く、登記簿謄本を取得する、見積書を受け取る、事業計画書を書く" loading="lazy"><figcaption>書類を揃える順番</figcaption></figure>
 
 1. **GビズIDプライムを申請する**（2〜3週間かかる）
@@ -110,8 +108,6 @@ GビズIDプライムの申請では、申請書を印刷して印鑑証明書�
 5. 見積書の金額を使って事業計画書を書く
 
 順番を守る理由は5番目にあります。**見積書が無いと、事業計画書の数字が組めません。**導入費用が決まらないまま計画を書くと、後で全部書き直しになります。
-
-対象になる要件そのものは[建設業がAI導入補助金の対象になる条件](/blog/osaka-kensetsugyou-denshishinsei/)で整理しています。
 
 <div class="cta-box"><p>自社が対象になるか、3分で判定できます。</p><a class="cta-button" href="https://lp.7senses.co.jp/#diagnosis">3分の適性診断（無料・8問）</a></div>
 

@@ -996,9 +996,8 @@ def analyze(d):
         f"検索クリック{cur_.get('clicks', 0):,}（{mom('clicks')}）、CV{cur_.get('cv', 0)}件（{mom('cv')}）と、"
         f"主要指標が{'揃って伸長しました' if cur_.get('sessions', 0) > prev_.get('sessions', 0) else '伸び悩みました'}。"
         f"平均掲載順位は{prev_.get('pos', '-')}位→{cur_.get('pos', '-')}位。"
-        f"AI経由の参照流入は{d.get('ai_sessions', 0)}セッションを記録し、"
-        "検索とAIの両輪で「見つかる→選ばれる」導線が機能し始めています。"
-        "来月は本レポート8章の実行順プランに沿って、LPの離脱改善とリライトを最優先で進めます。")
+        f"AI経由の参照流入は{d.get('ai_sessions', 0)}セッションでした。"
+        "来月の優先順位は8章「改善点の一覧と、その直し方」に載せています。")
 
     # サイト資産サマリー（リポジトリの記事から実測 — デモ/実データ共通）
     import re as _re
@@ -1579,6 +1578,173 @@ def ai_measured_html(ym):
                    '「どれだけ多くの場所で名前が出ているか」です。'
                    '言及の下位50%に入るブランドは、AI検索でほぼ扱われません。'
                    'リンクが張られていない掲載も登録してください。</div>')
+    return chr(10).join(out)
+
+
+def _imp_facts():
+    """改善点の材料を、手元のファイルだけから集める（ネットを叩かない）"""
+    import json as _j
+    f = {}
+    arts = sorted((ROOT / "articles").glob("*.md"))
+    f["n_articles"] = len(arts)
+
+    # リンクだけの段落の積み上がり
+    try:
+        import auto_review as AR
+        tot, over, worst = 0, 0, []
+        for p in arts:
+            try:
+                _, _, paras = AR.scan(p)
+            except Exception:
+                continue
+            n = len(paras)
+            tot += n
+            if n > AR.MAX_LINK_PARA:
+                over += 1
+                worst.append((p.stem, n))
+        worst.sort(key=lambda x: -x[1])
+        f["link_total"], f["link_over"], f["link_worst"] = tot, over, worst[:3]
+        f["link_max"] = AR.MAX_LINK_PARA
+    except Exception:
+        f["link_total"] = f["link_over"] = 0
+        f["link_worst"], f["link_max"] = [], 4
+
+    # 一次データの本数
+    f["datasets"] = len([p for p in (ROOT / "site" / "data").glob("*") if p.is_dir()])
+
+    # 外部での言及と被リンク
+    try:
+        d = _j.loads((ROOT / "data" / "mentions.json").read_text(encoding="utf-8"))
+        third = [x for x in d.get("items", []) if x.get("third", True)]
+        f["mentions"], f["mention_linked"] = len(third), len([x for x in third if x.get("linked")])
+    except Exception:
+        f["mentions"] = f["mention_linked"] = 0
+    try:
+        d = _j.loads((ROOT / "data" / "backlinks.json").read_text(encoding="utf-8"))
+        f["backlinks"] = sum(len(d.get(s) or []) for s in ("ai-lab", "corporate", "subsidy"))
+        f["bl_todo"] = len(d.get("_candidates") or [])
+    except Exception:
+        f["backlinks"], f["bl_todo"] = 0, 0
+
+    # 生成AIの取り込み
+    f["genai"] = (ROOT / "data" / "genai_impressions.json").is_file()
+    return f
+
+
+def improvements_html(part=1):
+    """改善点と直し方を、根拠つきで並べる。1ページに入らないので2つに分ける"""
+    f = _imp_facts()
+
+    rows_auto = [
+        ("リンクだけの段落が積み上がっている",
+         f'{f["link_over"]}記事が上限{f["link_max"]}本を超過（最大{f["link_worst"][0][1] if f["link_worst"] else 0}本）',
+         "週次の見直しが言い回しを散らし、上限超えを少しずつ外す",
+         "自動"),
+        ("止まっている記事に、検索されている語の節が無い",
+         "11〜30位の記事を毎週診断し、原因を3つに分けている",
+         "auto_rewrite が節を足す。検算に外れたら元に戻す",
+         "自動"),
+        ("業種×手法の盤面に空きがある",
+         "優先業種のマスが埋まっていない",
+         "coverage が空きを出し、翌月の記事に割り当てる",
+         "自動"),
+        ("主要クエリで順位が動いていない語がある",
+         "毎週90語の順位を記録し、上がらない語の原因を分けている",
+         "記事が無い／食い合い／語がタイトルに無い／内容不足 に振り分けて処理",
+         "自動"),
+    ]
+
+    rows_human = [
+        ("外部からのリンクが0本",
+         f'第三者から確認できた被リンク {f["backlinks"]}本／候補 {f["bl_todo"]}件',
+         "中小機構の掲載URLを本命サイトへ変更（無料・申請1回）",
+         "最優先"),
+        ("外部での言及が登録されていない",
+         f'登録済み {f["mentions"]}件（うちリンクあり {f["mention_linked"]}件）',
+         "リンクの無い掲載も登録する。AI検索はリンクより言及に反応する",
+         "高"),
+        ("生成AIの表示回数が取り込まれていない",
+         "未取込" if not f["genai"] else "取込済み",
+         "Search Console からCSVを落として取り込む（APIから取れない）",
+         "中"),
+        ("一次データをさらに増やす",
+         f'公開中 {f["datasets"]}本',
+         "G-ranの生データから業種別の中央値を出す。記録の抽出だけ",
+         "高"),
+    ]
+
+    rows_stop = [
+        ("品質スコアを上げる", "91〜93点が96点以上より4.1位<b>上</b>",
+         "公開の門としては残すが、記事を選ぶ基準には使わない"),
+        ("内部リンクを増やす", "本数の順序と成果の順序が一致しない",
+         "下限を割る記事だけ補う。上積みはしない"),
+        ("記事を長くする", "5,500字未満が最良（17.6位）",
+         "下限は満たす。伸ばすこと自体を目的にしない"),
+        ("llms.txt を整える", "Googleが公式に「読まない」と明言",
+         "設置は残すが、達成率の項目から外した"),
+        ("構造化データを増やす", "Googleが「AI検索に必須ではない」と明言",
+         "リッチリザルト目的の4種は維持。追加はしない"),
+    ]
+
+    def _t(head, rows, w):
+        h = "".join(f'<th style="width:{x}">{html.escape(c)}</th>' for c, x in zip(head, w))
+        b = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+        return f"<table><tr>{h}</tr>{b}</table>"
+
+    bars = _imp_bars(f)
+    if part == 1:
+        return f"""
+<h3>いま見えている改善点</h3>
+<p style="font-size:9.5pt">毎週18種類の検査を回し、見つかったものをここに集めています。
+<b>やることを並べるだけでなく、実測で効かないと分かったものを「やらない」と決める</b>のが要点です。
+努力の総量は変わらないため、効かないことに使えば効くことに使えません。</p>
+{bars}
+
+<h3 style="margin-top:14px">① 機械が直すもの（ご対応は不要です）</h3>
+<p style="font-size:9.5pt">週次・日次の自動化が処理します。進み具合は毎週の検査に出ます。</p>
+{_t(("改善点", "いまの状態", "直し方", "誰が"), rows_auto, ("28%", "24%", "38%", "10%"))}
+"""
+    return f"""
+<h3>② ご対応をお願いするもの</h3>
+<p style="font-size:9.5pt">相手のある話か、御社の記録にしか無い情報のため、機械では埋められません。</p>
+{_t(("改善点", "いまの状態", "やること", "優先度"), rows_human, ("28%", "22%", "40%", "10%"))}
+
+<h3 style="margin-top:14px">③ 実測で効かないと分かったので、追わないもの</h3>
+<p style="font-size:9.5pt">自社の{f["n_articles"]}本を使って、判断ごとに順位の分布を比べた結果です。
+<b>「差が無い」ではなく「逆になっている」ものもあります。</b>逆に出る判断で記事を選ぶと、成果は下がります。</p>
+{_t(("よく言われる施策", "自社データでの実測", "当社の扱い"), rows_stop, ("24%", "34%", "42%"))}
+
+<div class="callout">この3つ目の表が、いちばん費用を左右します。
+<b>効かないと分かったことに時間を使わない</b>ぶんを、外部での言及と一次データに回します。
+AI検索での可視性は、被リンク（相関0.218）より外部での言及（0.656）のほうが3倍強く相関し、
+AIが根拠に選ぶのは「そこにしか無い数字」だからです。</div>
+"""
+
+
+def _imp_bars(f):
+    """改善点の重さを棒で見せる。数字だけの表より、どこが重いかが一目で分かる"""
+    items = [("外部からのリンク", f["backlinks"], 10, "#c0392b"),
+             ("外部での言及", f["mentions"], 30, "#e67e22"),
+             ("一次データの公開", f["datasets"], 15, "#2563eb"),
+             ("リンク段落が上限超え", f["link_over"], 41, "#8e44ad")]
+    W, RH, PL = 560, 26, 150
+    H = RH * len(items) + 26
+    out = [f'<div class="chart"><div class="chart-t">いまの水準と、当面の目安</div>',
+           f'<svg viewBox="0 0 {W} {H}" style="max-width:100%">']
+    for i, (label, now, goal, color) in enumerate(items):
+        y = i * RH + 14
+        full = W - PL - 70
+        ratio = min(1.0, now / goal) if goal else 0
+        out.append(f'<text x="0" y="{y + 11}" font-size="10.5" fill="#243">{html.escape(label)}</text>')
+        out.append(f'<rect x="{PL}" y="{y}" width="{full}" height="15" rx="4" fill="#eef2f7"/>')
+        if ratio > 0:
+            out.append(f'<rect x="{PL}" y="{y}" width="{max(3, full * ratio):.0f}" '
+                       f'height="15" rx="4" fill="{color}"/>')
+        out.append(f'<text x="{W - 64}" y="{y + 11}" font-size="10.5" fill="#556">'
+                   f'{now} / 目安{goal}</text>')
+    out.append('</svg><p class="note" style="margin-top:4px">'
+               '「目安」は当面そこを目指す数で、達成すれば十分という意味ではありません。'
+               'リンク段落の上限超えだけは、0に近づけるほど良い項目です。</p></div>')
     return chr(10).join(out)
 
 
@@ -2269,6 +2435,17 @@ CDNやWAFがその手前で落としていれば届かない。ここが塞が�
 <div class="callout">AIが回答の根拠に選ぶのは<b>「そこにしか無い数字」</b>です。
 Googleの公式ガイドが効くものとして挙げているのも「独自の視点」「一般論に留まらない内容」
 「クロールできること」の3つだけで、自社で集計した一次データはこの3つすべてに同時に効きます。</div>
+</div>
+
+<!-- ページ: 改善点の一覧と、その直し方 -->
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>改善点の一覧と、その直し方</h2><div class="gold"></div></div>
+{improvements_html(1)}
+</div>
+
+<div class="sheet">
+<div class="sec"><span class="no">08</span><h2>改善点の一覧と、その直し方（続き）</h2><div class="gold"></div></div>
+{improvements_html(2)}
 </div>
 
 <!-- 投資対効果 -->

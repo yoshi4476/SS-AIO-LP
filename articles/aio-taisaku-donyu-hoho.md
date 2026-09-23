@@ -85,8 +85,6 @@ AIO対策を導入する前に、検索順位の土台・自社の一次情報�
 
 AIO対策の導入は、体制構築・現状診断・構造改善・計測設定・試験運用・定着化という6ステップで進めます。
 
-関連する内容として[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)も公開しています。
-
 <figure><img src="/images/aio-taisaku-donyu-hoho/steps-zenhan.png" alt="AIO対策導入 前半3ステップ（体制と診断）: 担当者を決める、現状を診断、構造を改善" loading="lazy"><figcaption>AIO対策導入 前半3ステップ（体制と診断）</figcaption></figure>
 
 ### ステップ1: 担当者を決める

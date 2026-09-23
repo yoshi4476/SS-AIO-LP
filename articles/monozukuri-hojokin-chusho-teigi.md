@@ -94,16 +94,6 @@ faq:
 
 **小規模事業者は中小企業者よりさらに厳しい従業員数基準で区分され、賃上げ特例の一部要件では補助率が2/3に優遇されます。**製造業その他は20人以下、商業・サービス業は5人以下が目安です。
 
-近い論点を[ものづくり補助金の給与支給総額とは？](/blog/monozukuri-hojokin-kyuyo-shikyu-sogaku/)で扱っています。
-
-関連する内容として[ものづくり補助金は製造業でどう使う？](/blog/monozukuri-hojokin-seizougyou/)も公開しています。
-
-関連する内容として[建設業の電子申請は行政書士に依頼すべき？](/blog/kensetsugyou-denshishinsei-gyoseishoshi/)も公開しています。
-
-あわせて[建設業がAI導入補助金の対象になる条件](/blog/osaka-kensetsugyou-denshishinsei/)もご覧ください。
-
-近い論点を[e-Gov電子申請とは](/blog/egov-denshishinsei-kojinjigyonushi/)で扱っています。
-
 | 業種区分 | 小規模事業者の従業員数 |
 |:--|:--|
 | 製造業・建設業・運輸業その他 | 20人以下 |

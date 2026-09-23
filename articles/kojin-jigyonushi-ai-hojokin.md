@@ -99,10 +99,6 @@ faq:
 
 近い論点を[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)で扱っています。
 
-関連する内容は、[ものづくり補助金2025年度](/blog/monozukuri-hojokin-2025-kojinjigyonushi/)で解説しています。
-
-あわせて[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)もご覧ください。
-
 | 申請枠 | 補助率 | 補助上限額 |
 |:--|:--|:--|
 | 通常枠 | 1/2以内（賃上げ要件達成で2/3） | 5万円〜450万円 |
@@ -118,8 +114,6 @@ faq:
 ## GビズIDプライムの取得から交付決定までの流れ
 
 **個人事業主の申請は、GビズID取得、支援事業者選定、交付申請、交付決定後の発注という4ステップで進みます。**流れ自体は法人と同じです。
-
-あわせて[中小企業成長加速化補助金](/blog/seicho-kasokuka-hojokin-schedule/)もご覧ください。
 
 <figure><img src="/images/kojin-jigyonushi-ai-hojokin/flow4.png" alt="GビズID取得から交付決定までの4ステップ: GビズID取得（プライムを申請）、支援事業者選定（ツールを決める）、交付申請（事業計画書を提出）、交付決定後に発注（決定前はNG）"><figcaption>GビズID取得から交付決定までの4ステップ</figcaption></figure>
 

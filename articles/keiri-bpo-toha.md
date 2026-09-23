@@ -87,15 +87,7 @@ faq:
 
 経理BPOでは、記帳・仕訳入力から請求書処理、給与計算、月次試算表の作成まで、経理業務の大部分を任せられます。
 
-関連する内容として[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)も公開しています。
-
-関連する内容として[経理効率化の事例4選｜方法別のポイントと進め方](/blog/keiri-koritsuka-jirei/)も公開しています。
-
-近い論点を[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)で扱っています。
-
 つまずきやすい点は[請求書の経理BPOでやりがちな失敗5つ](/blog/seikyusho-keiri-bpo-shippai/)で整理しています。
-
-選ぶときの基準は[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)で整理しています。
 
 <figure><img src="/images/keiri-bpo-toha/hani.png" alt="経理BPOに任せられる業務範囲: 記帳・仕訳入力、請求書発行・支払処理、経費精算のチェック、給与計算・年末調整、月次試算表の作成" loading="lazy"><figcaption>経理BPOに任せられる業務範囲</figcaption></figure>
 
@@ -129,25 +121,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 あわせて[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)もご覧ください。
 
-関連する内容として[個人経営の経理のやり方｜後回しにしない3つのコツ](/blog/kojin-keiei-keiri-yarikata/)も公開しています。
-
-近い論点を[請求書チェックの効率化](/blog/seikyusho-check-koritsuka/)で扱っています。
-
-あわせて[記帳代行費用の勘定科目｜外注費と支払手数料の使い分け](/blog/kichodaiko-hiyou-kanjoukamoku/)もご覧ください。
-
-関連する内容として[自営業の経理のやり方](/blog/jieigyou-keiri-yarikata/)も公開しています。
-
-近い論点を[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)で扱っています。
-
-あわせて[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)もご覧ください。
-
-関連する内容として[年末調整の効率化ポイント5つ](/blog/nencho-koritsuka-houhou/)も公開しています。
-
-近い論点を[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)で扱っています。
-
-費用の目安は[経理BPOの料金の内訳｜3つの費目と見積書の見方](/blog/keiri-bpo-hiyou-uchiwake/)でも扱っています。
-
-関連する内容として[中小企業の経理効率化](/blog/chusho-keiri-koritsuka/)も公開しています。
+関連する内容として[請求書チェックの効率化](/blog/seikyusho-check-koritsuka/)も公開しています。
 
 <div class="caution-box"><span class="box-title">注意: 丸投げは業務のブラックボックス化を招く</span><br>経理業務を完全に外部へ任せきりにすると、社内の誰も業務の中身を把握できなくなります。<span class="txt-red">委託先とのやり取りが担当者1人に集中すると、結局は委託先窓口の属人化という同じ問題が形を変えて残ります。</span></div>
 
@@ -163,10 +137,6 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 経理BPOの費用は、委託する業務範囲によって月3万円台のプランから数十万円規模まで幅があります。
 
-近い論点を[経理派遣の時給相場は1,600〜2,500円](/blog/keiri-haken-jikyu-souba/)で扱っています。
-
-あわせて[開業したばかりの経理代行、使うべき？判断基準3つ](/blog/keiri-daiko-kaigyou/)もご覧ください。
-
 費用の目安は[管理会計まで頼む経理BPOの料金｜範囲別の増え方](/blog/kanri-kaikei-jikyu-souba/)で整理しています。
 
 | プラン | 委託範囲の目安 | 費用感 |
@@ -180,20 +150,6 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 ## 経理BPO導入の流れ（4ステップ）
 
 経理BPOの導入は、現状の棚卸しから運用開始まで、4つのステップで進めると失敗しにくくなります。
-
-近い論点を[楽楽精算の経費精算のやり方](/blog/rakurakuseisan-keihi-seisan-yarikata/)で扱っています。
-
-あわせて[経理のやり方とは？初心者向け5ステップ](/blog/keiri-yarikata-shoshinsha/)もご覧ください。
-
-関連する内容として[請求書の三つ折りのやり方｜向きを間違えない3ステップ](/blog/seikyusho-mitsuori-yarikata/)も公開しています。
-
-近い論点を[記帳代行のやり方｜依頼から完了までの5ステップ](/blog/kichodaiko-yarikata/)で扱っています。
-
-あわせて[記帳代行の自動化とは？判断基準3つ【2026年】](/blog/kichodaiko-jidoka/)もご覧ください。
-
-関連する内容として[iPhoneで記帳を自動化する3ステップ](/blog/iphone-kicho-jidoka/)も公開しています。
-
-近い論点を[Notionで記帳を自動化する方法](/blog/notion-kicho-jidoka/)で扱っています。
 
 <figure><img src="/images/keiri-bpo-toha/nagare.png" alt="経理BPO導入までの4ステップ: 現状の経理業務を洗い出す、委託する範囲を切り分ける、BPO会社を選び見積もりを取る、引き継ぎを経て運用を開始する" loading="lazy"><figcaption>経理BPO導入までの4ステップ</figcaption></figure>
 
@@ -209,8 +165,6 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 経理BPO会社は、対応範囲の明確さ・セキュリティ体制・報告頻度の3点で比較して選びます。
 
-あわせて[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)もご覧ください。
-
 <figure><img src="/images/keiri-bpo-toha/erabikata.png" alt="経理BPO会社選びのNGとOK: NG例は対応範囲が曖昧なまま契約する・セキュリティ体制を確認しない・報告頻度を決めずに任せきる・見積もりの安さだけで決める、OK例は委託範囲を書面で明確にする・情報管理の体制を事前に確認する・月次報告のタイミングを決めておく・対応範囲と実績を含めて比較する" loading="lazy"><figcaption>経理BPO会社選びのNGとOK</figcaption></figure>
 
 対応範囲が契約書上で曖昧なままだと、後になって「ここは対象外でした」という食い違いが起きやすくなります。**委託範囲は口頭確認だけで済ませず、書面やメールで明文化しておく**ことが基本です。
@@ -224,8 +178,6 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 ## 経理BPO導入後に起こりやすい失敗とNG運用
 
 経理BPOを導入しても、委託範囲を曖昧にしたまま運用すると、想定した効果が出にくくなります。
-
-関連する内容として[月次決算の経理BPO契約前に確認すべき5つのこと](/blog/getsuji-kessan-bpo-keiyakumae/)も公開しています。
 
 対応範囲を確認しないまま契約すると、依頼したい業務が実は対象外だったという食い違いが起きます。**契約前に業務範囲の一覧をすり合わせておく**だけで、この種のミスマッチはほとんど防げます。
 

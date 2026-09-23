@@ -77,10 +77,6 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 関連する内容については、[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-yasui-tool/)にまとめています。
 
-関連する内容は、[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)で解説しています。
-
-費用の目安は[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)で整理しています。
-
 順位だけでなく、この5つを毎月並べて見ることで、記事のどこに手を入れるべきかが分かります。
 
 | 指標 | 何が分かるか | 主な確認先 |

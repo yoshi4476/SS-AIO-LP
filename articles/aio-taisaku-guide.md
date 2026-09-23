@@ -56,14 +56,6 @@ AIOコンサルティングとは、**AIの回答に自社が引用されるた�
 
 近い論点を[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)で扱っています。
 
-関連する内容として[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)も公開しています。
-
-あわせて[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)もご覧ください。
-
-あわせて[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もご覧ください。
-
-近い論点を[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)で扱っています。
-
 | | 自社でやる | 外部に頼む |
 |:--|:--|:--|
 | 初期の立ち上がり | 3〜6ヶ月（型を作る時間） | 1〜2ヶ月 |
