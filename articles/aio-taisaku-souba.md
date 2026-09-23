@@ -49,6 +49,8 @@ faq:
 
 AIO対策の相場は、診断のみなら月3万円台、運用まで任せると月10万〜30万円台が目安です。
 
+実際の例は[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)で整理しています。
+
 <div class="definition-box"><span class="term">AIO対策とは</span>、Google AI OverviewやAIモードなど生成AIの回答に自社の情報が引用されるよう、記事の構造や書き方を整える取り組みです。</div>
 
 依頼できる範囲によって価格帯は大きく分かれます。まずは全体像を一覧で確認してください。

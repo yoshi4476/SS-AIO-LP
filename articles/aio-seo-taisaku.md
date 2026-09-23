@@ -44,6 +44,8 @@ diagrams:
 
 **両方に効く施策から始めるべき理由は、AI OverviewがSEOの評価をそのまま使うためです。**土台を分けて考えると、作業が二重になります。
 
+実際の例は、[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)で解説しています。
+
 費用の目安は、[AIO対策の相場は月3万〜30万円](/aio/aio-taisaku-souba/)で解説しています。
 
 <div class="definition-box"><span class="term">AIO SEO対策とは</span>、自然検索の順位を上げる従来のSEO施策に、AIが回答文を抽出しやすい構造（冒頭の直接回答・見出し直下の結論・FAQ整備など）を足した施策の総称です。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Central</a>は、AI OverviewとAIモードへの表示に追加要件はなく、既存の検索SEOの評価がそのまま使われると明記しています。</div>
