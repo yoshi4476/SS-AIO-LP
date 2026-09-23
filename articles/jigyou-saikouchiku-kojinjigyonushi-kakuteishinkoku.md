@@ -49,6 +49,8 @@ faq:
 
 **個人事業主は事業再構築補助金を事業所得の雑収入に算入し、確定申告の総収入金額に含めます。**補助金は売上ではありませんが、事業に関連して得た収入である以上、非課税にはなりません。
 
+関連する内容は[創業支援等事業者の補助金](/blog/sogyo-shien-hojokin-kojinjigyonushi/)でも扱っています。
+
 実際の進め方については、[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)にまとめています。
 
 実際の進め方は、[事業再構築補助金の飲食店活用事例3選と今の申請方法](/blog/jigyou-saikouchiku-inshokuten-jirei/)で解説しています。
