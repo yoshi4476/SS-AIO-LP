@@ -87,7 +87,7 @@ def published(limit=0, seed=0):
 def audit_one(slug, html_path):
     """1本を採点し直す。書き換えはできない（Read だけ）。
 
-    基準は rubric.py（3軸×10点）。機械で数えられることは採点させない。
+    基準は rubric.py（3軸×100点）。機械で数えられることは採点させない。
     証拠を書かせたうえで、最後の1行だけを機械が読む。
     """
     import auto_rewrite as A
@@ -141,11 +141,11 @@ def compare():
     for s, _self, tot, w in sorted(rows, key=lambda x: x[2]):
         ax = (d[s]["audit"].get("axes") or {})
         mark = d[s]["audit"].get("why", "")
-        print(f"{s[:32]:<34}{tot:>5}/30{ax.get('originality', 0):>7}"
+        print(f"{s[:32]:<34}{tot:>5}/100{ax.get('originality', 0):>7}"
               f"{ax.get('extractability', 0):>7}{ax.get('decision', 0):>6}  {mark[:28]}")
     tots = [r[2] for r in rows]
     print(f"\n  合計の中央値: {st.median(tots):.0f}/30")
-    print(f"  合計{R.PASS_TOTAL}点を割った記事: {len(below)}/{len(rows)}本")
+    print(f"  総合{R.PASS_TOTAL}点を割った記事: {len(below)}/{len(rows)}本")
     print(f"  1軸が{R.PASS_EACH}点未満（足切り）: {len(weak)}/{len(rows)}本")
     for a in R.AXES:
         vals = [(d[s]["audit"].get("axes") or {}).get(a["key"], 0) for s, *_ in rows]
@@ -185,7 +185,7 @@ def main():
             continue
         d[slug] = {"at": str(date.today()), "self": self_score, "audit": res}
         ax = res["axes"]
-        print(f"  {i:>2}. {slug[:32]:<34} 合計{res['total']:>2}/30"
+        print(f"  {i:>2}. {slug[:32]:<34} 総合{res['total']:>3}/100"
               f"（一次性{ax['originality']} 抽出性{ax['extractability']}"
               f" 決定{ax['decision']}）{res['why'][:24]}")
         save(d)
