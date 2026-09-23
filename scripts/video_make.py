@@ -31,11 +31,14 @@ sys.path.insert(0, str(ROOT / "scripts"))
 OUT = ROOT / "automation" / "video"
 
 W, H = 1920, 1080
-NAVY = (11, 36, 71)
-BG = (245, 248, 252)
-ACCENT = (37, 99, 235)
-MUTED = (85, 102, 119)
-VOICE = "ja-JP-NanamiNeural"
+# 提案書と同じ意匠（紺＋金・白地）。資料と動画で色が違うと別の会社に見える
+NAVY = (27, 42, 74)          # #1B2A4A
+BG = (255, 255, 255)
+ACCENT = (176, 135, 62)      # #B0873E  金
+ACCENT_L = (239, 228, 206)   # #EFE4CE  淡い金
+MUTED = (107, 122, 141)      # #6B7A8D
+LINE = (228, 232, 238)
+VOICE = "ja-JP-NanamiNeural"   # 女性。男性は ja-JP-KeitaNeural
 RATE = "+5%"
 
 FONT_PATHS = [
@@ -116,9 +119,9 @@ def slide(path, head, lines, footer="", n=0, total=0, bars=None, caption="",
             lf = fit(d, label, 470 - 100 - 24, 40 if on else 34, 22)
             d.text((100, y + bh / 2), label, font=lf,
                    fill=NAVY if on else MUTED, anchor="lm")
-            d.rectangle([470, y, 470 + bw_full, y + bh], fill=(226, 234, 243))
+            d.rectangle([470, y, 470 + bw_full, y + bh], fill=(239, 242, 247))
             d.rectangle([470, y, 470 + max(8, bw_full * v / mx), y + bh],
-                        fill=ACCENT if on else (167, 190, 222))
+                        fill=ACCENT if on else (199, 207, 220))
             d.text((W - 100, y + bh / 2), f"{v:g}{unit}", font=font(42 if on else 34),
                    fill=NAVY if on else MUTED, anchor="rm")
             y += gap

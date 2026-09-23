@@ -21,12 +21,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 OUT_DIR = Path(r"C:\Users\user\Desktop\AIO系")
 HTML = ROOT / "automation" / "proposal.html"
 
-# 配色。**暖色は「効かないと分かったこと」にだけ使う。**
-# この資料の主張は「測ったものだけを根拠にする」なので、
-# 測って否定できたものが目で分かることに意味がある。装飾で色を増やさない
-NAVY, ACCENT, INK, MUTED, LINE, BG = "#0B2447", "#1D4ED8", "#16243A", "#5A6B80", "#DCE4EF", "#F6F9FC"
-STOP, STOPBG = "#B45309", "#FFF8EE"      # 止めたもの（琥珀）
-PAPER = "#FCFDFE"
+# 配色は以前の提案書に合わせる（紺＋金・白地）。
+# 金は「強調」、濃紺は「当社が担当する範囲」、クリームは「補足」。
+# 装飾で色を増やさず、役割のある色だけを置く
+NAVY, GOLD, INK, MUTED, LINE, BG = "#1B2A4A", "#B0873E", "#243347", "#6B7A8D", "#E4E8EE", "#FAFBFD"
+GOLD_L, CREAM, PANEL = "#EFE4CE", "#FBF7EE", "#17253F"
+ACCENT, STOP, STOPBG, PAPER = GOLD, "#A15C2B", "#FDF4EC", "#FFFFFF"
 
 
 def facts():
@@ -60,7 +60,8 @@ def tbl(head, rows, widths=None):
 
 def cards(items):
     return '<div class="cards">' + "".join(
-        f'<div class="card"><div class="cn">{n}</div><div class="ct">{t}</div>'
+        f'<div class="card"><div class="ic">{"◆"}</div>'
+        f'<div class="cn">{n}</div><div class="ct">{t}</div>'
         f'<div class="cb">{b}</div></div>' for n, t, b in items) + "</div>"
 
 
@@ -76,13 +77,18 @@ def bars(rows, unit=""):
     return "".join(out) + "</div>"
 
 
-def flow(steps, note=""):
-    """横に並ぶ工程図。矢印は「この順でしか進まない」ことを示す"""
+def flow(steps, note="", on=-1):
+    """横に並ぶ工程図。矢印は「この順でしか進まない」ことを示す。
+
+    on に番号を渡すと、その段だけ濃紺で塗る。いまどこの話かが一目で分かる
+    （以前の提案書と同じ作法）。
+    """
     items = []
     for i, (t, b) in enumerate(steps):
         if i:
-            items.append('<div class="fa">&rsaquo;</div>')
-        items.append(f'<div class="fs"><div class="ft">{t}</div>'
+            items.append('<div class="fa">&rarr;</div>')
+        cls = "fs on" if i == on else "fs"
+        items.append(f'<div class="{cls}"><div class="ft"><i>{i + 1}</i>{t}</div>'
                      f'<div class="fb">{b}</div></div>')
     out = '<div class="flow">' + "".join(items) + "</div>"
     return out + (f'<p class="note">{note}</p>' if note else "")
@@ -123,7 +129,13 @@ def build_pages(f):
               "相談につながる導線をつくります。"),
              ("03", "止めても消えない<br>資産として積み上がる",
               "広告は出稿を止めれば流入も止まります。記事と一次データは残り、"
-              "翌月以降も働き続けます。")]))
+              "翌月以降も働き続けます。")]) +
+         '<h3 class="mini">毎月、この流れで回り続けます</h3>' +
+         flow([("戦略設計", "狙う業種と扱わない領域を決める"),
+               ("サイト構築", "初期のみ"),
+               ("記事50〜60本", "毎月。検査を通ったものだけ公開"),
+               ("動画とSNS", "同じ内容から自動生成"),
+               ("改善レポート", "翌月の運用にそのまま反映")], on=2))
 
     page("std", "02", "MARKET SHIFT", "なぜ今、AI検索への対応が必要か",
          "検索の入口が変わりつつあります。従来は「検索して、リンクをクリックして、"
@@ -404,91 +416,107 @@ def html(f):
 body{{font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
  color:{INK};-webkit-print-color-adjust:exact;print-color-adjust:exact;
  font-feature-settings:"palt" 1}}
-.p{{width:297mm;height:210mm;padding:15mm 18mm 13mm;position:relative;
+.p{{width:297mm;height:210mm;padding:15mm 17mm 13mm;position:relative;
  page-break-after:always;overflow:hidden;background:{PAPER}}}
 .p:last-child{{page-break-after:auto}}
-.ghost{{position:absolute;top:2mm;right:14mm;font-size:74pt;font-weight:800;
- color:{NAVY};opacity:.045;letter-spacing:-.04em;line-height:1}}
-.eyebrow{{font-size:7pt;letter-spacing:.34em;color:{ACCENT};font-weight:700;
- text-transform:uppercase}}
-.rule{{height:2px;width:26mm;background:{ACCENT};margin:3.4mm 0 5mm;border-radius:2px}}
-h1{{font-size:20pt;line-height:1.38;color:{NAVY};letter-spacing:.005em;margin-bottom:3mm;
- font-weight:800;text-wrap:balance}}
-.lead{{font-size:9.2pt;line-height:1.9;color:{MUTED};max-width:206mm;margin-bottom:6.5mm}}
-.num{{position:absolute;bottom:9mm;right:18mm;font-size:7pt;color:#9FB1C7;
- letter-spacing:.12em;font-variant-numeric:tabular-nums}}
+.eyebrow{{font-size:7.4pt;letter-spacing:.42em;color:{GOLD};font-weight:700;
+ text-transform:uppercase;white-space:nowrap}}
+.eyebrow s{{text-decoration:none;color:{GOLD_L};margin:0 2mm;letter-spacing:0}}
+h1{{font-size:23pt;line-height:1.4;color:{NAVY};letter-spacing:.005em;
+ margin:3.4mm 0 3mm;font-weight:800;text-wrap:balance}}
+h1 em{{color:{GOLD};font-style:normal}}
+.lead{{font-size:9.2pt;line-height:1.9;color:{MUTED};max-width:208mm;margin-bottom:7mm}}
+.num{{position:absolute;bottom:9.4mm;right:17mm;font-size:7.4pt;color:#A8B3C1;
+ letter-spacing:.06em;font-variant-numeric:tabular-nums}}
+.num b{{color:{GOLD};font-weight:800}}
 
-table{{width:100%;border-collapse:collapse;font-size:8.5pt;line-height:1.7;
- font-variant-numeric:tabular-nums}}
-th{{background:{NAVY};color:#fff;text-align:left;padding:2.8mm 3.4mm;
- font-weight:700;font-size:8pt;letter-spacing:.02em}}
-td{{border-bottom:1px solid {LINE};padding:2.8mm 3.4mm;vertical-align:top}}
+table{{width:100%;border-collapse:separate;border-spacing:0;font-size:8.5pt;
+ line-height:1.7;font-variant-numeric:tabular-nums;
+ border:1px solid {LINE};border-radius:6px;overflow:hidden}}
+th{{background:{NAVY};color:#fff;text-align:left;padding:3mm 3.6mm;
+ font-weight:700;font-size:8pt;letter-spacing:.03em}}
+td{{border-top:1px solid {LINE};padding:3mm 3.6mm;vertical-align:top}}
 tbody tr:nth-child(even) td{{background:{BG}}}
 td b{{color:{NAVY}}}
 
-.cards{{display:flex;gap:4.6mm}}
-.card{{flex:1;background:{BG};padding:6mm 5mm 6.5mm;border-radius:3px;
- border-top:2.5px solid {ACCENT};position:relative}}
-.cn{{font-size:7.4pt;color:{ACCENT};font-weight:800;letter-spacing:.18em;margin-bottom:3mm;
+.cards{{display:flex;gap:5mm}}
+.card{{flex:1;background:#fff;border:1px solid {LINE};border-radius:8px;
+ padding:6mm 5.4mm 6.4mm;position:relative;box-shadow:0 1px 3px rgba(27,42,74,.05)}}
+.cn{{font-size:22pt;font-weight:800;color:{GOLD_L};line-height:1;margin-bottom:2mm;
  font-variant-numeric:tabular-nums}}
-.ct{{font-size:11pt;font-weight:800;color:{NAVY};line-height:1.5;margin-bottom:3mm}}
+.ct{{font-size:11.5pt;font-weight:800;color:{NAVY};line-height:1.45;margin-bottom:3mm}}
 .cb{{font-size:8.3pt;line-height:1.85;color:{MUTED}}}
+.card .ic{{position:absolute;top:5.4mm;right:5.4mm;width:11mm;height:11mm;
+ border-radius:50%;background:{GOLD_L};display:flex;align-items:center;
+ justify-content:center;color:{GOLD};font-size:12pt;font-weight:800}}
+
+.panel{{background:{PANEL};border-radius:8px;padding:6.4mm 6mm;color:#fff}}
+.panel h3{{font-size:11.5pt;font-weight:800;margin-bottom:4.4mm;color:#fff}}
+.panel h3 em{{color:{GOLD};font-style:normal}}
+.panel li{{list-style:none;font-size:8.8pt;line-height:1.6;padding:2.2mm 0 2.2mm 8mm;
+ position:relative;color:#DCE4F0}}
+.panel li::before{{content:"";position:absolute;left:0;top:2.6mm;width:4.6mm;height:4.6mm;
+ border-radius:50%;background:{GOLD}}}
 
 .note{{margin-top:5mm;font-size:8pt;line-height:1.85;color:{MUTED};
- background:{BG};border-left:2.5px solid {ACCENT};padding:4mm 5mm;border-radius:2px}}
-.note b{{color:{NAVY}}}
-.note.stop{{background:{STOPBG};border-left-color:{STOP}}}
+ background:{CREAM};padding:4.4mm 5.4mm;border-radius:6px}}
+.note b{{color:{GOLD}}}
+.note.stop{{background:{STOPBG}}}
 .note.stop b{{color:{STOP}}}
 
 .bars{{margin:1mm 0}}
-.bar{{display:flex;align-items:center;gap:4mm;margin-bottom:3.2mm}}
+.bar{{display:flex;align-items:center;gap:4mm;margin-bottom:3.4mm}}
 .bl{{width:50mm;font-size:8.8pt;color:{MUTED};text-align:right}}
-.bt{{flex:1;height:6.4mm;background:#E9EFF7;border-radius:2px;overflow:hidden}}
-.bt i{{display:block;height:100%;background:#AFC4E2;border-radius:2px}}
+.bt{{flex:1;height:6.6mm;background:#EFF2F7;border-radius:3px;overflow:hidden}}
+.bt i{{display:block;height:100%;background:#C7CFDC;border-radius:3px}}
 .bar.on .bl{{color:{NAVY};font-weight:800}}
-.bar.on .bt i{{background:{ACCENT}}}
+.bar.on .bt i{{background:{GOLD}}}
 .bv{{width:12mm;font-size:9.2pt;color:{MUTED};font-weight:800;
  font-variant-numeric:tabular-nums;text-align:right}}
 .bar.on .bv{{color:{NAVY}}}
 
-.cover{{background:{NAVY};color:#fff;padding:0;display:grid;
- grid-template-columns:1.32fr 1fr}}
-.cv-l{{padding:24mm 0 16mm 18mm;display:flex;flex-direction:column;justify-content:center}}
-.cover .eyebrow{{color:#7FA7E8}}
-.cover .rule{{background:#7FA7E8;width:40mm;height:2px}}
-.cover h1{{color:#fff;font-size:31pt;line-height:1.42;margin-bottom:7mm;font-weight:800}}
-.cover .lead{{color:#AFC6E4;font-size:9.6pt;max-width:150mm;line-height:1.95;margin:0}}
-.brand{{position:absolute;bottom:13mm;left:18mm;font-size:7pt;
- letter-spacing:.32em;color:#6E92CE}}
-.cv-r{{background:#08203F;padding:26mm 18mm 20mm 12mm;display:flex;
- flex-direction:column;justify-content:center}}
-.cv-t{{font-size:7pt;letter-spacing:.28em;color:#7FA7E8;font-weight:700;margin-bottom:6mm}}
-.cvb{{display:flex;align-items:center;gap:3.4mm;margin-bottom:3.6mm}}
-.cvl{{width:34mm;font-size:8pt;color:#93AECF;text-align:right;line-height:1.3}}
-.cvt{{flex:1;height:5.4mm;background:#123056;border-radius:2px;overflow:hidden}}
-.cvt i{{display:block;height:100%;background:#2E5C9E;border-radius:2px}}
-.cvb.on .cvl{{color:#fff;font-weight:800}}
-.cvb.on .cvt i{{background:#5B9BFF}}
-.cvv{{width:9mm;font-size:8.4pt;color:#93AECF;font-weight:800;text-align:right;
- font-variant-numeric:tabular-nums}}
-.cvb.on .cvv{{color:#fff}}
-.cv-n{{margin-top:7mm;font-size:7.2pt;line-height:1.8;color:#7D9AC0;
- border-top:1px solid #16375F;padding-top:5mm}}
-
-.toc{{display:grid;grid-template-columns:1fr 1fr;gap:3.2mm 12mm}}
-.ti{{font-size:9.2pt;color:{NAVY};border-bottom:1px solid {LINE};padding-bottom:2.4mm;
- display:flex;gap:4mm}}
-.tn{{color:{ACCENT};font-weight:800;font-variant-numeric:tabular-nums}}
-.foot{{position:absolute;bottom:9mm;left:18mm;font-size:7pt;color:#9FB1C7}}
-.flow{{display:flex;align-items:stretch;gap:2mm;margin-top:1mm}}
-.fs{{flex:1;background:#fff;border:1px solid {LINE};border-top:2.5px solid {ACCENT};
- border-radius:3px;padding:4.6mm 4mm}}
-.ft{{font-size:9.4pt;font-weight:800;color:{NAVY};line-height:1.45;margin-bottom:2.6mm}}
+.mini{{font-size:9.6pt;font-weight:800;color:{NAVY};margin:7mm 0 3.4mm}}
+.flow{{display:flex;align-items:stretch;gap:2.4mm;margin-top:1mm}}
+.fs{{flex:1;background:#fff;border:1px solid {LINE};border-radius:7px;padding:4.6mm 4mm;
+ box-shadow:0 1px 3px rgba(27,42,74,.05)}}
+.fs.on{{background:{PANEL};border-color:{PANEL}}}
+.fs.on .ft{{color:#fff}} .fs.on .fb{{color:#C6D2E4}}
+.ft{{font-size:9.4pt;font-weight:800;color:{NAVY};line-height:1.45;margin-bottom:2.4mm}}
+.ft i{{color:{GOLD};font-style:normal;margin-right:1.6mm}}
 .fb{{font-size:7.9pt;line-height:1.8;color:{MUTED}}}
-.fa{{align-self:center;color:#B9C8DC;font-size:15pt;font-weight:700}}
-.split{{display:flex;gap:6mm;align-items:flex-start}}
+.fa{{align-self:center;color:{GOLD_L};font-size:16pt;font-weight:700}}
+.split{{display:flex;gap:5mm;align-items:stretch}}
 .split>*{{flex:1;min-width:0}}
 
+.cover{{background:{NAVY};color:#fff;padding:0;display:grid;
+ grid-template-columns:1.3fr 1fr}}
+.cv-l{{padding:24mm 0 16mm 17mm;display:flex;flex-direction:column;justify-content:center}}
+.cover .eyebrow{{color:{GOLD}}}
+.cover h1{{color:#fff;font-size:32pt;line-height:1.42;margin:5mm 0 7mm;font-weight:800}}
+.cover h1 em{{color:{GOLD};font-style:normal}}
+.cover .lead{{color:#B6C3D6;font-size:9.6pt;max-width:150mm;line-height:1.95;margin:0}}
+.brand{{position:absolute;bottom:13mm;left:17mm;font-size:7pt;
+ letter-spacing:.34em;color:{GOLD}}}
+.cv-r{{background:{PANEL};padding:26mm 17mm 20mm 12mm;display:flex;
+ flex-direction:column;justify-content:center}}
+.cv-t{{font-size:7pt;letter-spacing:.34em;color:{GOLD};font-weight:700;margin-bottom:6mm}}
+.cvb{{display:flex;align-items:center;gap:3.4mm;margin-bottom:3.6mm}}
+.cvl{{width:34mm;font-size:8pt;color:#93A3BA;text-align:right;line-height:1.3}}
+.cvt{{flex:1;height:5.4mm;background:#223353;border-radius:3px;overflow:hidden}}
+.cvt i{{display:block;height:100%;background:#3D4E6E;border-radius:3px}}
+.cvb.on .cvl{{color:#fff;font-weight:800}}
+.cvb.on .cvt i{{background:{GOLD}}}
+.cvv{{width:9mm;font-size:8.4pt;color:#93A3BA;font-weight:800;text-align:right;
+ font-variant-numeric:tabular-nums}}
+.cvb.on .cvv{{color:{GOLD}}}
+.cv-n{{margin-top:7mm;font-size:7.2pt;line-height:1.85;color:#8FA0B8;
+ border-top:1px solid #2A3A58;padding-top:5mm}}
+
+.toc{{display:grid;grid-template-columns:1fr 1fr;gap:3.4mm 12mm}}
+.ti{{font-size:9.2pt;color:{NAVY};border-bottom:1px solid {LINE};padding-bottom:2.6mm;
+ display:flex;gap:4mm}}
+.tn{{color:{GOLD};font-weight:800;font-variant-numeric:tabular-nums}}
+.foot{{position:absolute;bottom:9.4mm;left:17mm;font-size:7.4pt;color:#A8B3C1}}
 """
     body = []
     total = len(PAGES)
@@ -504,7 +532,7 @@ td b{{color:{NAVY}}}
             body.append(
                 f'<div class="p cover"><div class="cv-l">'
                 f'<div class="eyebrow">{pg["eyebrow"]}</div>'
-                f'<div class="rule"></div><h1>{pg["title"]}</h1>'
+                f'<h1>{pg["title"]}</h1>'
                 f'<div class="lead">{pg["lead"]}</div>'
                 f'<div class="brand">SEVEN SENSES INC.</div></div>'
                 f'<div class="cv-r"><div class="cv-t">WHAT ACTUALLY WORKS</div>{gr}'
@@ -516,7 +544,7 @@ td b{{color:{NAVY}}}
         g = f'<div class="ghost">{pg["num"]}</div>' if pg["num"] else ""
         body.append(
             f'<div class="p">{g}{n}<div class="eyebrow">{pg["eyebrow"]}</div>'
-            f'<div class="rule"></div><h1>{pg["title"]}</h1>'
+            f'<h1>{pg["title"]}</h1>'
             f'<div class="lead">{pg["lead"]}</div>{pg["body"]}'
             f'<div class="foot">AIO特化オウンドメディア構築・運用サービス ｜ '
             f'セブンセンシズ株式会社</div></div>')
