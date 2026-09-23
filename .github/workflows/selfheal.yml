@@ -48,6 +48,16 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
 
+      # Cloudflare は 2026-09-15 から AI のクローラーを既定でブロックする方針に変えた。
+      # 塞がると記事の中身に関係なくAI検索から消えるため、毎日いちばん先に見る。
+      # robots.txt を読んでも分からない（WAFはその手前で落とす）ので、実際のUAで叩く。
+      - name: AIクローラーが本番に入れるか
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_TO_EMAIL: ${{ secrets.LEAD_TO_EMAIL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python scripts/ai_crawler_check.py --alert || true
+
       # 何が壊れているかを先に確定させる。ここで問題が無ければ何もしない。
       - name: いま壊れているものの確認
         id: diag
