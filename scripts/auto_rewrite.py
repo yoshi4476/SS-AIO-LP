@@ -220,6 +220,32 @@ def claude_bin():
     return shutil.which("claude") or shutil.which("claude.cmd") or "claude"
 
 
+# 記事を書く・書き直すときに使うモデル。上から順に、使える最初のものを選ぶ。
+# **版が古いと 400 で落ちる**（実測: 2.1.218 は claude-opus-5-5 を
+# 「version 2.1.280 or newer is required」で拒否した）。手元とCIで版が違うため、
+# 名前を決め打ちにせず、版を見て切り替える
+MODELS = [("claude-opus-5-5", (2, 1, 280)), ("claude-opus-5", (0, 0, 0))]
+
+
+def cli_version():
+    try:
+        out = subprocess.run([claude_bin(), "--version"], capture_output=True,
+                             text=True, timeout=60).stdout
+        m = re.search(r"(\d+)\.(\d+)\.(\d+)", out or "")
+        return tuple(int(x) for x in m.groups()) if m else (0, 0, 0)
+    except Exception:
+        return (0, 0, 0)
+
+
+def model_args():
+    """`--model ...` を返す。使えない版なら1つ下のモデルに落とす"""
+    v = cli_version()
+    for name, need in MODELS:
+        if v >= need:
+            return ["--model", name]
+    return []
+
+
 def warns(slug):
     r = sh([sys.executable, "scripts/score_check.py", slug], timeout=300)
     return [l for l in (r.stdout or "").splitlines() if l.startswith("WARN")]
@@ -403,6 +429,7 @@ def run_one(item, write):
     # 悪い書き換えは check() が見つけて git checkout で戻す
     # プロンプトは stdin で渡す（引数だと1行目しか届かない）
     r = sh([exe, "-p", "--max-turns", "40",
+            *model_args(),
             "--allowedTools", "Read,Edit",
             "--settings", PERM], timeout=1800, stdin_text=prompt)
     if r.returncode and not p.read_text(encoding="utf-8-sig") != before[2]:

@@ -393,6 +393,7 @@ def run_one(pair, write):
     # どちらが欠けても、統合は静かに「変更なし」で終わる
     # プロンプトは stdin で渡す（引数だと1行目しか届かない）
     r = AR.sh([AR.claude_bin(), "-p", "--max-turns", "60",
+               *AR.model_args(),
                "--allowedTools", "Read,Edit",
                "--settings", AR.PERM], timeout=2400, stdin_text=prompt)
     p = ARTICLES / f"{s}.md"

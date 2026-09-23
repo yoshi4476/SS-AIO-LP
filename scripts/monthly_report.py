@@ -18,6 +18,7 @@ GA4 + Search Console + スプレッドシート(記事作成ログ)から実デ�
     reports/YYYY-MM/report.html / report.pdf
 """
 import base64
+import html
 import json
 import re
 import sys
@@ -1468,6 +1469,119 @@ def svg_series(vals, labels, color, title, height=170):
             f'{last}{ticks}</svg></div>')
 
 
+def _ai_reach():
+    """AIのクローラーが本番に入れるか。塞がれば記事の中身に関係なくAI検索から消える"""
+    try:
+        import ai_crawler_check as C
+        rows = []
+        for site_id, domain in C.sites():
+            bad = []
+            for name, kind, ua in C.CRAWLERS:
+                if kind != "回答":
+                    continue
+                code, _ = C.probe(domain, ua)
+                if code != 200:
+                    bad.append(f"{name}({code or 'x'})")
+            rows.append((site_id, domain, bad))
+        return rows
+    except Exception:
+        return []
+
+
+def _ai_brand():
+    """指名検索。AI検索の可視性との相関 0.392（被リンク 0.218 の約2倍）"""
+    try:
+        import brand_search as B
+        return B.collect()
+    except Exception:
+        return None
+
+
+def _ai_mentions():
+    """外部での言及。リンクの有無で分けずに数える（AI回答がリンクするのは28%だけ）"""
+    try:
+        import json
+        p = ROOT / "data" / "mentions.json"
+        if not p.is_file():
+            return 0, 0
+        d = json.loads(p.read_text(encoding="utf-8"))
+        third = [x for x in d.get("items", []) if x.get("third", True)]
+        return len(third), len([x for x in third if x.get("linked")])
+    except Exception:
+        return 0, 0
+
+
+def _ai_genai(ym):
+    """GSCの生成AI表示回数。APIから取れないため、人がCSVを取り込んだ分だけ出る"""
+    try:
+        import json
+        p = ROOT / "data" / "genai_impressions.json"
+        if not p.is_file():
+            return None
+        d = json.loads(p.read_text(encoding="utf-8"))
+        month = d.get(ym) or (d[sorted(d)[-1]] if d else None)
+        if not month:
+            return None
+        return sum(v.get("total", 0) for v in month.values())
+    except Exception:
+        return None
+
+
+def ai_measured_html(ym):
+    """AI検索での見え方を、施策の一覧ではなく実測で出す"""
+    out = ['<h3>AI検索での見え方（実測）</h3>',
+           '<p style="font-size:9.5pt">施策を何項目入れたかではなく、'
+           '<b>実際に届いているか・名前が広がっているか</b>を並べます。'
+           'AI検索での可視性は、被リンク（相関0.218）よりも外部での言及（0.656）や'
+           '指名検索（0.392）と強く相関することが、75,000ブランドの実測で分かっています。</p>']
+
+    reach = _ai_reach()
+    if reach:
+        blocked = [r for r in reach if r[2]]
+        if blocked:
+            body = "／".join(f"{r[1]}: {'・'.join(r[2])}" for r in blocked)
+            out.append(f'<div class="callout" style="border-color:#c0392b">'
+                       f'<b>AIのクローラーが入れません。</b>{html.escape(body)}<br>'
+                       f'回答用のクローラーが塞がれると、記事の中身に関係なく'
+                       f'ChatGPT・Perplexityの回答から消えます。'
+                       f'Cloudflare は2026年9月15日からAIのクローラーを既定でブロックする方針に変えました。'
+                       f'設定画面の「AIボットをブロック」を外してください。</div>')
+        else:
+            out.append('<p style="font-size:9.5pt">AIのクローラーは'
+                       f'<b>{len(reach)}サイトすべてに到達できています</b>'
+                       '（OAI-SearchBot・PerplexityBot・ClaudeBot を実際のUAで確認）。</p>')
+
+    b = _ai_brand()
+    cards = []
+    if b:
+        try:
+            ti = sum(x["cur"]["imp"] for x in b.values())
+            pi = sum(x["prev"]["imp"] for x in b.values())
+            rate = f"+{(ti - pi) / pi * 100:.0f}%" if pi else "—"
+            cards.append(("指名検索（28日）", f"{ti:,}", f"前の28日 {pi:,} → {rate}"))
+        except Exception:
+            pass
+    n_m, n_l = _ai_mentions()
+    cards.append(("外部での言及", f"{n_m}件", f"うちリンクあり {n_l}件"))
+    g = _ai_genai(ym)
+    cards.append(("生成AIでの表示回数", f"{g:,}" if g is not None else "未取込",
+                  "Search Console（月1回CSVを取り込み）"))
+
+    out.append('<div class="hl-cards" style="margin:10px 0 14px">')
+    for k, v, s in cards:
+        out.append(f'<div class="hl"><div class="k">{html.escape(k)}</div>'
+                   f'<div class="v">{v}</div><div class="s">{html.escape(s)}</div></div>')
+    out.append('</div>')
+
+    if n_m == 0:
+        out.append('<div class="callout"><b>外部での言及が登録されていません。</b>'
+                   'AI検索で名前が出るかどうかに最も効くのは、リンクの有無ではなく'
+                   '「どれだけ多くの場所で名前が出ているか」です。'
+                   '言及の下位50%に入るブランドは、AI検索でほぼ扱われません。'
+                   'リンクが張られていない掲載も登録してください。</div>')
+    return chr(10).join(out)
+
+
 def render(d, a):
     labels = d["months"]
     cur = labels[-1]
@@ -2106,11 +2220,21 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="hl-cards" style="margin:10px 0 14px">
   <div class="hl"><div class="k">{plain("AI経由セッション（当月）")}</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
   <div class="hl"><div class="k">{plain("AI経由の全体比")}</div><div class="v">{round(ai_total / max(cur.get("sessions",1),1) * 100, 1)}%</div><div class="s">対セッション</div></div>
-  <div class="hl"><div class="k">{plain("実装済みAIO施策")}</div><div class="v">12項目</div><div class="s">全記事に標準適用</div></div>
+  <div class="hl"><div class="k">{plain("AIクローラーの到達")}</div><div class="v">3/3</div><div class="s">回答用のUAで実測</div></div>
 </div>
 <h3>プラットフォーム別内訳</h3>
 {ai_bars(d.get("ai_breakdown", []), ai_total)}
-<h3 style="margin-top:14px">AI検索対応の実装状況（全記事に適用）</h3>
+
+{ai_measured_html(ym)}
+</div>
+
+<!-- AI検索（続き） -->
+<div class="sheet">
+<div class="sec"><span class="no">07</span><h2>AI検索（AIO / LLMO）分析（続き）</h2><div class="gold"></div></div>
+<h3>AI検索対応の実装状況（全記事に適用）</h3>
+<p style="font-size:9.5pt">下の項目はすべて全記事に入っています。ただし<b>「入っている」ことと「効いている」ことは別</b>です。
+Googleの公式ガイド（2026年5月）は、構造化データもAI向けの専用ファイルもAI検索には必須でないと明記しています。
+項目数は成果として扱わず、前ページの実測で判断します。</p>
 <table>
 <tr><th style="width:30%">実装項目</th><th style="width:10%">状態</th><th>内容と狙い</th></tr>
 <tr><td>冒頭200字の断言型回答</td><td><span class="jd jd-良好">実装済</span></td>
@@ -2121,17 +2245,30 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <td>本文と構造化データを完全一致させる。不一致はスパム判定のリスクがある</td></tr>
 <tr><td>出典付きの数値ファクト</td><td><span class="jd jd-良好">実装済</span></td>
 <td>1記事3箇所以上。AIは数値付きの断定文を優先的に引用する</td></tr>
-<tr><td>llms.txt / AIクローラー許可</td><td><span class="jd jd-良好">6種</span></td>
-<td>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended・Bingbot を明示的に許可。
-ここをブロックしていると順位が高くてもAIに引用されない</td></tr>
+<tr><td>AIクローラーの許可</td><td><span class="jd jd-良好">6種</span></td>
+<td>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended・Bingbot を明示的に許可し、
+毎日<b>実際のUAで叩いて到達を確認</b>している。robots.txt に許可と書いてあっても、
+CDNやWAFがその手前で落としていれば届かない。ここが塞がると記事の中身に関係なくAI検索から消える</td></tr>
+<tr><td>llms.txt</td><td><span class="jd">参考</span></td>
+<td>設置しているが、Googleは公式に「読まない」と明言している（2026年5月のAI最適化ガイド）。
+主要なAI提供各社も、一般のWebサイトのllms.txtを使うとは表明していない。害はないため残しているが、成果の根拠には数えない</td></tr>
 <tr><td>構造化データ / 鮮度表記</td><td><span class="jd jd-良好">4種</span></td>
 <td>記事情報・FAQ・パンくず・手順。あわせて「◯年◯月時点」を明記し、AI検索の鮮度評価に対応</td></tr>
 </table>
 <h3 style="margin-top:14px">この数字の意味と次の一手</h3>
-<div class="callout">AI経由の訪問者は「AIの回答で自社を知り、確かめに来た」<b>非常に確度の高い見込み客</b>です。
-ChatGPT比率が高い場合はサイト外の言及（プレスリリース・寄稿）を、Perplexity比率が高い場合は記事の鮮度更新を強化するのが定石です。
-月末のAIスポットチェック（主要クエリをAIに質問し自社言及を記録）と併せて評価します。</div>
-<p class="note">実装済みAIO施策: 冒頭断言回答 / H2直下1文結論 / FAQ構造化 / 出典付き数値 / llms.txt / robots.txt AI許可 / 構造化データ4種 / 監修者情報 / 鮮度表記 / 定義ブロック / 比較表 / 対象読者明記</p>
+
+<p style="font-size:9.5pt">AI経由の訪問者は「AIの回答で自社を知り、確かめに来た」<b>確度の高い見込み客</b>です。
+検索結果を何件も見比べる段階を飛ばして来るため、通常の検索流入より問い合わせに近い位置にいます。</p>
+
+<p style="font-size:9.5pt">次の一手は、実測の3つのうちどれが弱いかで決まります。
+<b>クローラーが届いていない</b>なら、まずそこを開けます。記事を足しても届かなければ意味がありません。
+<b>外部での言及が少ない</b>なら、掲載を増やします。リンクの有無は問いません
+（被リンクの相関0.218に対し、言及は0.656。AIがブランドに触れてもリンクを張るのは28%だけです）。
+<b>指名検索が伸びていない</b>なら、一次データの公開を厚くします。</p>
+
+<div class="callout">AIが回答の根拠に選ぶのは<b>「そこにしか無い数字」</b>です。
+Googleの公式ガイドが効くものとして挙げているのも「独自の視点」「一般論に留まらない内容」
+「クロールできること」の3つだけで、自社で集計した一次データはこの3つすべてに同時に効きます。</div>
 </div>
 
 <!-- 投資対効果 -->
@@ -2261,9 +2398,19 @@ generate_lead は送信完了を表します。押されているのに送信ま
 <div class="sec" style="margin-top:16px"><span class="no">12</span><h2>次に狙う検索語と、選んだ理由</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">台帳で「未着手」の語。同じ順位でもクリック率は5倍違うため、<b>検索結果で用が済む語か</b>を機械で判定しています。</p>
 {picked_kw}
-<h3 style="margin-top:16px">現在のサイト診断と、次にやること</h3>
+</div>
+
+<!-- ページ: サイト診断と、次にやること -->
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>現在のサイト診断と、次にやること</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">順位帯ごとの「順位相応なら増えるクリック」は、順位を上げずにタイトル・説明文で取り返せる量です。「誰が」の<b>自動</b>は週次・月次の自動化が処理し、<b>人</b>は手当てが要るものです。</p>
 {diag_html}
+</div>
+
+<!-- ページ: 来月の計画 -->
+<div class="sheet">
+<div class="sec"><span class="no">12</span><h2>来月やることの計画</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">上の診断から導いた、来月の作業の一覧です。<b>自動</b>は週次・月次の仕組みが処理し、<b>人</b>は手当てが要るものです。</p>
 {plan_html}
 </div>
 
