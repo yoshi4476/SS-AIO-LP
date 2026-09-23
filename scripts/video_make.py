@@ -134,15 +134,27 @@ def slide(path, head, lines, footer="", n=0, total=0, bars=None, caption="",
         im.save(path)
         return
 
-    y = 270
+    # 行が少ないスライドほど字を大きくし、塊ごと縦の中央に置く。
+    # 上から詰めると、1〜3行のスライドで下半分が白く空く
+    base = 68 if len(lines) <= 2 else (58 if len(lines) <= 4 else 50)
+    step = base + 34
+    rows = []
     for ln in lines:
-        f = fit(d, ln, W - 300, 52, 30)
+        f = fit(d, ln, W - 300, base, 28)
         for part in wrap(d, ln, f, W - 300):
-            if y > body_bottom - 60:
-                break
-            d.rectangle([90, y - 6, 104, y + 40], fill=ACCENT)
-            d.text((136, y + 17), part, font=f, fill=NAVY, anchor="lm")
-            y += 86
+            rows.append((part, f))
+    top = 210
+    room = body_bottom - top
+    if bars:
+        y = 270                      # 棒グラフの置き場を下に空ける
+    else:
+        y = top + max(0, (room - len(rows) * step) // 2)
+    for part, f in rows:
+        if y > body_bottom - 60:
+            break
+        d.rectangle([90, y - 6, 104, y + f.size - 8], fill=ACCENT)
+        d.text((136, y + f.size / 2 - 4), part, font=f, fill=NAVY, anchor="lm")
+        y += step
 
     # 棒グラフ。値の大小が目で分かると、聞き流しても記憶に残る。
     # **いま読み上げている行だけを濃くする。** 全部同じ色だと、音声と絵が

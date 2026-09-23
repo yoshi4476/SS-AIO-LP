@@ -13,7 +13,7 @@
   道具は Read だけ                      … 書き換えられない。採点しかできない
   結果は data/score_audit.json へ        … 元の点数と並べて差を見る
 
-採点の基準は CLAUDE.md 第5章の6観点（各20点・合計120点）をそのまま使う。
+採点の基準は scripts/rubric.py の3観点（各100点）をそのまま使う。
 
     python scripts/score_audit.py --limit 10      # 10本を採点し直す
     python scripts/score_audit.py --compare       # 自己申告との差を見る
@@ -36,7 +36,7 @@ PROMPT = """次のHTMLは、公開済みの記事です。初めて読む読者�
 
 {path}
 
-CLAUDE.md 第5章の6観点で、各20点・合計120点で採点します。
+一次性・抽出性・決定支援の3観点で、各100点で採点します。
 
 1. デザイン   H2構成と目次の対応／各H2冒頭の1文結論／表の体裁／CTA2箇所以上／
               H2直下の図解／強調12〜18箇所／段落3行以内／alt設定

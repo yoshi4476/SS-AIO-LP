@@ -872,7 +872,7 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 <div class="sec"><span class="no">07</span><h2>コンテンツ資産の状況</h2><div class="gold"></div></div>
 <div class="tiles">
 {tile("公開記事（3サイト合計）", f'{arts["total"]}本', "品質90点以上のみ")}
-{tile("平均品質スコア", f'{arts["avg_score"]}点', "6観点採点/100点")}
+{tile("平均品質スコア", f'{arts["avg_score"]}点', "3観点の平均/100点")}
 {tile("平均文字数", f'{arts["avg_len"]:,}字', "基準5,000字以上")}
 {tile("年間の想定増加", "720本", "月60本ペースの場合")}
 </div>
@@ -1075,7 +1075,7 @@ Perplexity比率が高い場合は記事の鮮度更新を強化するのが定�
 <tr><td><b>AI経由参照</b></td><td>ChatGPT・Perplexity等のAIサービスからの流入</td></tr>
 <tr><td><b>AIO / LLMO</b></td><td>AI検索の回答に引用されるための最適化</td></tr>
 <tr><td><b>領域侵食</b></td><td>あるサイトが他サイトの担当テーマを扱ってしまうこと。検索評価の奪い合いにつながる</td></tr>
-<tr><td><b>品質スコア</b></td><td>6観点の採点（100点満点）。90点未満は公開されない</td></tr>
+<tr><td><b>品質スコア</b></td><td>3観点の採点（一次性・抽出性・決定支援／各100点）。各80点以上かつ総合90点以上のみ公開</td></tr>
 <tr><td><b>KW台帳</b></td><td>3サイト分のキーワードを一元管理する表。重複防止の要</td></tr>
 <tr><td><b>エンゲージメント率</b></td><td>10秒以上の滞在・2ページ以上の閲覧・CVのいずれかが起きた訪問の割合</td></tr>
 <tr><td><b>1訪問あたりPV</b></td><td>1回の訪問で何ページ見たか。関連記事への導線が効いているかを表す</td></tr>

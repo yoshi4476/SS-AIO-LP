@@ -2,7 +2,7 @@
 """Phase 5 機械採点（LLM採点の前に走らせる決定的チェック）
 
 数えられる項目はLLMに採点させず、このスクリプトが白黒つける。
-全PASSになってから6エージェントのLLM採点（定性項目）に進むこと。
+全PASSになってから3観点（一次性・抽出性・決定支援）の採点に進むこと。基準は scripts/rubric.py。
 
 使い方: python scripts/score_check.py <slug>
 終了コード: 0=全PASS / 1=FAILあり
