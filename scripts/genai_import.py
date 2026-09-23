@@ -36,6 +36,22 @@ COL_PAGE = ("ページ", "page", "上位のページ", "top pages", "url")
 COL_IMP = ("表示回数", "impressions", "インプレッション")
 COL_DATE = ("日付", "date")
 
+HOW = """  取り込み方（月1回・3サイトぶん。所要5分）
+
+    1. Search Console を開き、対象のプロパティを選ぶ
+    2. 左メニューの「検索パフォーマンス」→ 上部のタブで「生成AI（Search）」
+    3. 期間を「先月」に合わせる
+    4. 右上の「エクスポート」→「CSV をダウンロード」→ ページ別の表を選ぶ
+    5. 落としたCSVを指定して取り込む
+
+       python scripts/genai_import.py <CSVのパス> --site ai-lab --month YYYY-MM
+       python scripts/genai_import.py <CSVのパス> --site corporate --month YYYY-MM
+       python scripts/genai_import.py <CSVのパス> --site subsidy --month YYYY-MM
+
+  **APIからは取れません。** Search Console API の type は web/image/video/news/
+  discover/googleNews だけで、aiOverview も aiMode もありません（2026-09時点）。
+  指標も表示回数のみで、クリック数はGoogleが出していません。"""
+
 
 def site_ids():
     return [p.stem for p in sorted(SITES.glob("*.json")) if p.stem != "sample"]
@@ -83,17 +99,30 @@ def main():
 
     store = load()
     if not a.csv:
-        if not store:
+        # 前月ぶんが揃っているかを見る。APIから取れない以上、
+        # 人が落とすのを忘れれば数字は永久に空く。忘れたことに気づける形にする
+        t = date.today()
+        last = f"{t.year if t.month > 1 else t.year - 1}-{(t.month - 1) or 12:02d}"
+        have = set((store.get(last) or {}))
+        missing = [s for s in site_ids() if s not in have]
+
+        if store:
+            print("■ 取り込み済みの生成AI表示回数")
+            for month in sorted(store):
+                for sid, d in sorted(store[month].items()):
+                    print(f"  {month}  {sid:<10} {d['total']:>7,}表示 / {len(d['pages'])}ページ"
+                          f"（取り込み {d['imported']}）")
+            print()
+        else:
             print("  まだ何も取り込んでいません")
-            print("  Search Console → 検索パフォーマンス → 生成AI（Search）→ エクスポート")
+
+        if missing:
+            print(f"  {last} ぶんが未取込です: {', '.join(missing)}")
+            print(HOW)
+            print("GENAI_OK=no")
+        else:
+            print(f"  {last} ぶんは3サイトとも取り込み済みです")
             print("GENAI_OK=yes")
-            return 0
-        print("■ 取り込み済みの生成AI表示回数")
-        for month in sorted(store):
-            for sid, d in sorted(store[month].items()):
-                print(f"  {month}  {sid:<10} {d['total']:>7,}表示 / {len(d['pages'])}ページ"
-                      f"（取り込み {d['imported']}）")
-        print("GENAI_OK=yes")
         return 0
 
     if a.site not in site_ids():
