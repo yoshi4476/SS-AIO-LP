@@ -103,5 +103,18 @@
     "_note": "AIOが主力。他は主力へ送るための周辺。MEOはG-ranの実績があるが、差別化の余地と検索需要の伸びはAIO側にある"
   },
   "main_offer": "AIO・LLMO運用代行（AI検索で引用される状態をつくる）",
-  "main_category": "aio"
+  "main_category": "aio",
+  "priority": 1,
+  "youtube": {
+    "token": "",
+    "channel_name": "",
+    "voice": "ja-JP-NanamiNeural",
+    "rate": "+5%"
+  },
+  "social": {
+    "x": "",
+    "facebook_page": "",
+    "threads": "",
+    "linkedin": ""
+  }
 }

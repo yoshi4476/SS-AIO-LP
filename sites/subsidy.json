@@ -124,5 +124,18 @@
     "持続化": 8,
     "事業再構築": 7,
     "_note": "カテゴリは1つなので制度別で見る。AI導入補助金が主力。他制度は比較で当社を選ばせるための材料"
+  },
+  "priority": 3,
+  "youtube": {
+    "token": "",
+    "channel_name": "",
+    "voice": "ja-JP-NanamiNeural",
+    "rate": "+5%"
+  },
+  "social": {
+    "x": "",
+    "facebook_page": "",
+    "threads": "",
+    "linkedin": ""
   }
 }

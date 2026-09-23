@@ -48,3 +48,10 @@ docs/kw-plan-*.dry.md
 
 # GSCから取り直せる派生キャッシュ（112KB・週次で全書き換え）
 data/rank_rescue.json
+# YouTube への投稿に使う鍵。**このリポジトリは public なので必ず除外する。**
+# OAuth クライアントとトークンが漏れると、チャンネルへ投稿されうる
+youtube-client.json
+youtube-token.json
+credentials/
+# 動画は作り直せるので追跡しない（1本2〜4MB）
+automation/video/

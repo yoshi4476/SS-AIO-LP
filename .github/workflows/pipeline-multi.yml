@@ -63,7 +63,11 @@ jobs:
         run: |
           # sites/*.json の並び順で決める。サイトIDを直接書くと、
           # 別の会社へ移したときに存在しないサイトを指したまま毎日空振りする。
-          mapfile -t SITES < <(ls sites/*.json | xargs -n1 basename | sed 's/\.json$//' | grep -v '^sample$' | sort)
+          # 並び順は sites/<id>.json の priority（小さいほど先）。同じなら名前順。
+          # 名前順だけで並べていたため、「abc-」で始まるクライアントを1社足すだけで
+          # いちばん伸ばしたいサイトが後ろの枠へ押し出される状態だった。
+          # 枠0（JST 08:00）は最も早く公開できる枠なので、優先度は明示して持つ
+          mapfile -t SITES < <(python scripts/site_order.py)
           N=${#SITES[@]}
           # 時刻ごとの枠を0から数える。枠の番号をサイト数で割った余りを使う。
           # 以前は枠に 0/1/2 を直接書いていたため、4社目以降は一度も選ばれず

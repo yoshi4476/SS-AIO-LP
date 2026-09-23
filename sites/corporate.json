@@ -84,5 +84,18 @@
     "keiri-jitsumu": 40,
     "backoffice": 10,
     "_note": "BPOが主力。keiri-jitsumu は実務の悩みからBPOへ送る役割で、主力を超えると「調べて終わり」の読者ばかりになる"
+  },
+  "priority": 2,
+  "youtube": {
+    "token": "",
+    "channel_name": "",
+    "voice": "ja-JP-NanamiNeural",
+    "rate": "+5%"
+  },
+  "social": {
+    "x": "",
+    "facebook_page": "",
+    "threads": "",
+    "linkedin": ""
   }
 }
