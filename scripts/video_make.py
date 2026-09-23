@@ -65,11 +65,22 @@ def fit(d, text, max_w, base, minimum):
     return font(minimum)
 
 
+# 行頭に来てはいけない文字。**これが無いと「〜では／、5回に」と割れる。**
+# 読めないわけではないが、素人が作った資料に見える
+NO_HEAD = "、。，．）〕］｝」』〉》’”ー々ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮ！？!?・：；"
+
+
 def wrap(d, text, f, max_w):
-    """日本語は単語で切れないので1文字ずつ詰める"""
+    """日本語は単語で切れないので1文字ずつ詰める（行頭の禁則つき）"""
     lines, cur = [], ""
     for ch in text:
         if d.textlength(cur + ch, font=f) > max_w and cur:
+            if ch in NO_HEAD:
+                # 行頭に置けない文字は、あふれても前の行にぶら下げる
+                cur += ch
+                lines.append(cur)
+                cur = ""
+                continue
             lines.append(cur)
             cur = ch
         else:
@@ -80,10 +91,29 @@ def wrap(d, text, f, max_w):
 
 
 def slide(path, head, lines, footer="", n=0, total=0, bars=None, caption="",
-          active="", unit=""):
-    """1枚のスライド。数字の行は棒でも見せる（読み上げだけでは残らない）"""
+          active="", unit="", spec=None):
+    """1枚のスライド。数字の行は棒でも見せる（読み上げだけでは残らない）。
+
+    区間に `kind` があるときは video_slides の型で中身を描く。
+    ヘッダー・字幕の帯・フッターは、どの型でも同じ位置に出す。
+    """
+    import video_slides as VS
+    spec = spec or {}
+    kind = spec.get("kind")
     im = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(im)
+
+    if kind == "title":
+        # 章の扉。ヘッダーも字幕の帯も置かず、1枚で見せる
+        VS.DRAW["title"](im, d, spec, 0, H)
+        if caption:
+            d.rectangle([0, H - 190, W, H - 90], fill=(255, 255, 255))
+            d.rectangle([0, H - 192, W, H - 188], fill=ACCENT)
+            d.text((W / 2, H - 140), caption,
+                   font=fit(d, caption, W - 180, 40, 26), fill=NAVY, anchor="mm")
+        im.save(path)
+        return
+
     d.rectangle([0, 0, W, 150], fill=NAVY)
     d.text((90, 75), head, font=fit(d, head, W - 260, 64, 34), fill=(255, 255, 255), anchor="lm")
     if total:
@@ -91,6 +121,19 @@ def slide(path, head, lines, footer="", n=0, total=0, bars=None, caption="",
 
     # 字幕の帯を下に確保する。ここに本文を重ねると読めなくなる
     body_bottom = H - (210 if caption else 110)
+
+    if kind in VS.DRAW:
+        VS.DRAW[kind](im, d, spec, 210, body_bottom)
+        if caption:
+            d.rectangle([0, H - 190, W, H - 90], fill=(255, 255, 255))
+            d.rectangle([0, H - 192, W, H - 188], fill=ACCENT)
+            d.text((W / 2, H - 140), caption,
+                   font=fit(d, caption, W - 180, 40, 26), fill=NAVY, anchor="mm")
+        if footer:
+            d.text((90, H - 50), footer, font=font(28), fill=MUTED, anchor="lm")
+        im.save(path)
+        return
+
     y = 270
     for ln in lines:
         f = fit(d, ln, W - 300, 52, 30)
@@ -216,7 +259,8 @@ def build(script, out_mp4, quiet=False):
             slide(png, s.get("head") or script["title"], s.get("lines") or [],
                   script.get("footer", ""), i + 1, total,
                   bars=s.get("bars"), caption=s["say"],
-                  active=s.get("active", ""), unit=script.get("unit", ""))
+                  active=s.get("active", ""), unit=script.get("unit", ""),
+                  spec=s)
             mp3s.append(mp3)
             pngs.append(png)
             if not quiet:
