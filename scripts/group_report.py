@@ -1291,6 +1291,18 @@ def main():
         return
 
     if "--email" in sys.argv:
+        # **合算は誤りが3倍になる。** サイトごとに取り直して足し、
+        # 印字と突き合わせてから送る。通らなければ送らない
+        try:
+            import report_audit
+            ok, bad = report_audit.audit_group(str(pdf), ym,
+                                               THROUGH.isoformat() if THROUGH else None)
+        except Exception as ex:
+            ok, bad = False, [f"照合が動きませんでした（{type(ex).__name__}: {ex}）"]
+        if not ok:
+            for b in bad:
+                print(f"  照合で止めました: {b}")
+            raise SystemExit("合算の数字が取り直した値と食い違います。メールは送りません")
         send_mail(pdf, ym)
 
 

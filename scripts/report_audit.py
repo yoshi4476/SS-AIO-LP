@@ -105,6 +105,70 @@ def audit(pdf, month, through=None):
     return ok, bad
 
 
+def audit_group(pdf, month, through=None):
+    """3サイト合算レポートの照合。**サイトごとに取り直して足し、印字と突き合わせる。**
+
+    合算は誤りが3倍になる。1サイトの取り違えが、そのまま合計に乗る。
+    """
+    import json
+    import report_verify as RV
+    import monthly_report as M
+
+    text, pages = pdf_text(pdf)
+    start = f"{month}-01"
+    end = through or M.month_end(month)
+    tot = {"表示回数": 0, "クリック": 0, "リード": 0}
+    per = []
+    for f in sorted((ROOT / "sites").glob("*.json")):
+        cfg = json.loads(f.read_text(encoding="utf-8"))
+        if not cfg.get("domain"):
+            continue
+        url = cfg.get("gsc_site_url") or f"https://{cfg['domain']}/"
+        row = (RV._gsc(url, start, end).get("rows") or [{}])[0]
+        imp, clk = int(row.get("impressions", 0)), int(row.get("clicks", 0))
+        lead = 0
+        if cfg.get("ga4_property_id"):
+            ev = RV._ga_events(cfg["ga4_property_id"], start, end)
+            lead = ev.get("lead_capture", 0)
+            parts = sum(ev.get(k, 0) for k in RV.LEAD_PARTS)
+            if parts != lead:
+                per.append((cfg["id"], f"リードの傘{lead}と内訳{parts}が不一致"))
+        tot["表示回数"] += imp
+        tot["クリック"] += clk
+        tot["リード"] += lead
+        print(f"   {cfg['id']:<10} 表示 {imp:>7,} / クリック {clk:>5,} / リード {lead}")
+
+    print(f"■ {pdf}（{pages}ページ）合算を、サイトごとに取り直して照合")
+    bad = [f"{s}: {m}" for s, m in per]
+    for key, v in tot.items():
+        found = bool(re.search(rf"{v:,}|{v}\b", text))
+        print(f"   {key:<8} 合計 {v:>8,}  … 本文に {'OK' if found else '★見つからない'}")
+        if not found and v:
+            bad.append(f"合算の{key}（{v:,}）が本文に見当たりません")
+    if tot["リード"] and re.search(r"(CV|リード)[^。]{0,8}0\s*件", text):
+        bad.append(f"リードは合計{tot['リード']}件あるのに「0件」と書かれています")
+    if through and "途中経過です" not in text:
+        bad.append("途中経過であることが書かれていません")
+    # 合算レポートは「3サイト分＋合計」で同じ指標の前月比が4つ並ぶのが正常。
+    # 見るのは**同じ値に別の前月比が付いていないか**（353が+25%と+12%の両方など）
+    for name in ("セッション", "検索クリック", "検索表示回数", "CV"):
+        seen = {}
+        pairs = re.findall(rf"{name}[^\d\n]{{0,30}}\n?([\d,]+)件?\n前月比 ([+\-]\d+)%", text)
+        pairs += re.findall(rf"{name}は([\d,]+)件?（前月比([+\-]\d+)%）", text)
+        pairs += re.findall(rf"{name}は([\d,]+)件?（([+\-]\d+)%）", text)
+        for v, pct in pairs:
+            seen.setdefault(v, set()).add(pct)
+        for v, pcts in seen.items():
+            if len(pcts) > 1:
+                bad.append(f"「{name}」{v} の前月比が {sorted(pcts)} と食い違います")
+    print()
+    for b in bad:
+        print(f"   ★ {b}")
+    ok = not bad
+    print(f"AUDIT_OK={'yes' if ok else 'no'}")
+    return ok, bad
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("pdf")

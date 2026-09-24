@@ -3151,6 +3151,21 @@ def main():
         b.close()
     print("PDF:", pdf_path)
 
+    # **印字された数字を読み直して照合し、通らなければ送らない。**
+    # 生成前の検算（report_verify）は通っても、生成の途中で数字が
+    # 入れ替わる事故は紙を読まないと見つからない
+    if SEND_EMAIL:
+        try:
+            import report_audit
+            ok, bad = report_audit.audit(str(pdf_path), ym,
+                                         THROUGH.isoformat() if THROUGH else None)
+        except Exception as ex:
+            ok, bad = False, [f"照合が動きませんでした（{type(ex).__name__}: {ex}）"]
+        if not ok:
+            for b in bad:
+                print(f"  照合で止めました: {b}")
+            raise SystemExit("印字された数字が取り直した値と食い違います。メールは送りません")
+
     if SEND_EMAIL:
         key, to = ENV.get("RESEND_API_KEY", ""), ENV.get("LEAD_TO_EMAIL", "")
         frm = ENV.get("LEAD_FROM_EMAIL", "")
