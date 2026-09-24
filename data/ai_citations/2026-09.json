@@ -1,28 +1,28 @@
 {
-  "date": "2026-09-23",
+  "date": "2026-09-24",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 11,
       "suspect_taken": 11,
       "healthy": 0,
-      "too_thin": 49,
+      "too_thin": 51,
       "items": [
         {
           "kw": "原口優",
           "url": "https://ai.7senses.co.jp/author/haraguchi/",
           "pos": 1.4,
-          "imp": 36,
-          "clicks": 3,
-          "ctr": 8.33,
+          "imp": 37,
+          "clicks": 2,
+          "ctr": 5.41,
           "expected_ctr": 28.0,
-          "ratio": 0.3
+          "ratio": 0.19
         },
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
           "pos": 9.2,
-          "imp": 54,
+          "imp": 53,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -41,18 +41,18 @@
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 8.6,
+          "pos": 8.3,
           "imp": 27,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         },
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
           "pos": 7.3,
-          "imp": 67,
+          "imp": 64,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -71,8 +71,8 @@
         {
           "kw": "医療機関 meo",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 7.7,
-          "imp": 36,
+          "pos": 8.1,
+          "imp": 40,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -91,8 +91,8 @@
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 8.7,
-          "imp": 108,
+          "pos": 8.8,
+          "imp": 110,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -111,8 +111,8 @@
         {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 9.6,
-          "imp": 63,
+          "pos": 9.7,
+          "imp": 66,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -121,16 +121,16 @@
       ]
     },
     "corporate": {
-      "judged": 7,
+      "judged": 8,
       "suspect_taken": 2,
-      "healthy": 5,
+      "healthy": 6,
       "too_thin": 39,
       "items": [
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 2.7,
-          "imp": 39,
+          "pos": 2.6,
+          "imp": 40,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -152,7 +152,7 @@
       "judged": 2,
       "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 26,
+      "too_thin": 25,
       "items": [
         {
           "kw": "ものづくり補助金 運送業",
@@ -175,29 +175,6 @@
           "ratio": 0.0
         }
       ]
-    }
-  },
-  "measured": {
-    "date": "2026-09-23",
-    "engines": [
-      "Gemini"
-    ],
-    "sites": {
-      "ai-lab": {
-        "queries": 1,
-        "cited": 0,
-        "items": [
-          {
-            "kw": "口コミ返信 医療機関",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          }
-        ]
-      }
     }
   }
 }
