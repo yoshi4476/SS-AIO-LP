@@ -458,6 +458,8 @@ jobs:
           python scripts/ai_cite_check.py --limit 5 2>&1 | tee -a /tmp/measure.txt | tail -4 || true
           # 引用が取れた記事の型を、次の記事を書く指示へ渡す（引用実績が無ければ空のまま）
           python scripts/win_patterns.py 2>&1 | tail -4 || true
+          # 著者の実在（sameAs・実績）を台帳から束ね、記事の Person と著者ページへ流す
+          python scripts/author_profile.py --write 2>&1 | tail -3 || true
           grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt || true
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi

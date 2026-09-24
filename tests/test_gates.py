@@ -3067,6 +3067,16 @@ def test_report_actions_close_the_loop():
     check("proposal_make: 業種向けの1ページを作れる", callable(getattr(PM, "industry_page", None)), True)
     check("週次CIが相互引用と出口の導線を回す", "fact_cite.py --write" in wk and "exit_fix.py --write" in wk, True)
 
+    # 著者の実在: sameAs は台帳から束ね、記事の Person と著者ページの両方へ流れる
+    import author_profile as AP
+    prof = AP.gather()
+    check("author_profile: 法人番号ページが sameAs に入る", any("houjin-bangou" in u for u in prof["same_as"]), True)
+    check("author_profile: sameAs に重複が無い", len(prof["same_as"]), len(set(prof["same_as"])))
+    check("author_profile: 数字は台帳から数える", "counts" in prof and prof["counts"]["articles"] > 0, True)
+    check("build: 束ねた sameAs を記事の Person に使う", "author_profile.json" in (ROOT / "scripts" / "build.py").read_text(encoding="utf-8"), True)
+    check("publish: 配信先の記事にも Person（sameAs）を出す", "author_profile.json" in (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8"), True)
+    check("週次CIが著者の実在を束ねる", "author_profile.py --write" in wk, True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,

@@ -174,6 +174,14 @@ AUTHOR_BIO = _B.get("bio") or "通算3,200店舗以上の運営実績を持つME
 AUTHOR_URL = _B.get("url") or f"{SITE_URL}/author/haraguchi/"
 # 外部の実在プロフィール。サイトの外でも同じ人物だと機械が結び付けられるようにする
 AUTHOR_SAME_AS = _B.get("same_as") or ["https://www.linkedin.com/in/yu-haraguchi", "https://note.com/yu_haraguchi", "https://corp.7senses.co.jp/"]
+# author_profile.py が台帳（動画・言及・author.json）から束ねた分があれば、それを使う。
+# 固定リストのままだと、YouTube や登壇が増えても記事の Person に反映されない
+try:
+    _AP = json.loads((ROOT / "data" / "author_profile.json").read_text(encoding="utf-8"))
+    if _AP.get("same_as"):
+        AUTHOR_SAME_AS = list(dict.fromkeys(list(AUTHOR_SAME_AS) + list(_AP["same_as"])))
+except Exception:
+    pass
 
 CATEGORIES = {
     "aio": ("AIO・LLMO運用", "cat-aio"),

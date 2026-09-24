@@ -1351,6 +1351,7 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `exit_fix.py --write`（週次） | 固定ページで到達が最も落ちる区画の手前に、無料診断への導線を1つ置く | 手前に導線があれば置かない。タグの数が変われば置かない |
 | `proposal_make.py --industry <業種>` | 業種向けの1ページ（公開済み記事・よく調べられる質問・入口）を差し込んだ提案書 | 記事とハブにあるものだけ。数字は作らない |
 | `hub_sheets.py`（`HUB_DIRECT=1` で有効） | 管制塔を Sheets API で直接読み書き（GAS と同じ列・同じ判定）。失敗したら GAS に落ちる | サービスアカウントをシートに「編集者」で共有しておく |
+| `author_profile.py --write`（週次） | 著者の実在（sameAs・掲載・動画・一次データ数）を `data/author.json`・動画台帳・言及台帳・法人番号から束ね、記事の Person と `/author/haraguchi/` の両方へ流す。配信先の記事にも Person を出す | URLは本人のものだけ。数字は台帳から数える（手で書かない） |
 
 ---
 

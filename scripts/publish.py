@@ -350,6 +350,18 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         html = video_embed.prepend(html, meta)
     except Exception as e:
         print(f"  [警告] 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
+    # 著者の実在（Person + sameAs）。配信先のテンプレートは著者名しか出さないので、
+    # 台帳から束ねた sameAs を本文側の JSON-LD で足す（AI集客ラボの記事と同じ人物だと機械に分かる）
+    try:
+        ap = json.loads((ROOT / "data" / "author_profile.json").read_text(encoding="utf-8"))
+        if ap.get("same_as"):
+            person = {"@context": "https://schema.org", "@type": "Person", "name": "原口 優",
+                      "@id": "https://ai.7senses.co.jp/author/haraguchi/#person",
+                      "url": "https://ai.7senses.co.jp/author/haraguchi/", "jobTitle": "セブンセンシズ株式会社 代表取締役",
+                      "sameAs": ap["same_as"]}
+            html += '\n<script type="application/ld+json">' + json.dumps(person, ensure_ascii=False) + "</script>\n"
+    except Exception:
+        pass
 
     # 目次のアンカーを相手の書式（#sec1, #sec2 …）に合わせる
     heads = [re.sub(r"<[^>]+>", "", h).strip()

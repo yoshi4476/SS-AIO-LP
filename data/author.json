@@ -1,0 +1,8 @@
+{
+  "_readme": "著者（原口 優）の実在を示す外部プロフィールと実績。author_profile.py が build.py の既定・動画の台帳・言及の台帳と束ねて、記事の Person（sameAs）と /author/haraguchi/ に流す。URLは本人のものだけ。数字は書かない（台帳から数える）。",
+  "youtube_channel": "",
+  "x": "",
+  "note": "https://note.com/yu_haraguchi",
+  "linkedin": "https://www.linkedin.com/in/yu-haraguchi",
+  "credentials": []
+}
