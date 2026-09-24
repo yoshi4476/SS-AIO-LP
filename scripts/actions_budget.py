@@ -30,6 +30,18 @@ def main():
         print("GITHUB_TOKEN / GITHUB_REPOSITORY 未設定 — 残枠チェックをスキップ")
         return
 
+    # public リポジトリは標準ランナーの実行時間が無料・無制限。private の枠（2,000分）で
+    # 判定すると、毎週「枠切れ」と誤警告して動画・書き換えを半分に間引いてしまう
+    # （実測: public なのに 4,004分/1,050分＝381% と出て warn になっていた）
+    try:
+        req = urllib.request.Request(f"https://api.github.com/repos/{repo}",
+                                     headers={"Authorization": f"Bearer {token}", "User-Agent": "ss-aio/1.0"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            is_private = bool(json.load(r).get("private"))
+    except Exception as e:
+        print(f"リポジトリの公開設定を確認できません（{str(e)[:50]}）。private として判定します")
+        is_private = True
+
     now = datetime.now(timezone.utc)
     month = f"{now.year}-{now.month:02d}"
     used, page = 0.0, 1
@@ -53,6 +65,10 @@ def main():
             used += max((b - a).total_seconds(), 0) / 60
         page += 1
 
+    if not is_private:
+        print(f"ACTIONS_USED={used:.0f}分（public リポジトリ: 標準ランナーは無料・無制限。枠の判定はしない）")
+        print("ACTIONS_BUDGET=ok")
+        return
     budget = FREE_QUOTA - OTHER_REPO_RESERVE
     ratio = used / budget if budget else 0
     print(f"ACTIONS_USED={used:.0f}分 / 当リポジトリ想定枠{budget}分（{ratio*100:.0f}%）")
