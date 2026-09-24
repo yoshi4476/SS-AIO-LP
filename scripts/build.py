@@ -232,7 +232,38 @@ def parse_article(path: Path):
     if meta["category"] not in CATEGORIES:
         raise ValueError(f"{path.name}: category は {list(CATEGORIES)} のいずれか")
     meta.setdefault("modified", meta["date"])
+    _modified_guard(meta, m.group(2))
     return meta, m.group(2)
+
+
+# 更新日の実体化: 本文が変わっていないのに modified だけ進んだ記事は、前回の
+# dateModified のままにする（日付だけ動かしても評価されず、鮮度の信号が薄まる）。
+# 本文のハッシュと、そのときの更新日を data/body_hash.json に持つ
+_HASH_FILE = ROOT / "data" / "body_hash.json"
+try:
+    _HASHES = json.loads(_HASH_FILE.read_text(encoding="utf-8")) if _HASH_FILE.is_file() else {}
+except Exception:
+    _HASHES = {}
+
+
+def _modified_guard(meta, body):
+    import hashlib
+    h = hashlib.md5(re.sub(r"\s+", " ", body).encode("utf-8")).hexdigest()
+    rec = _HASHES.get(meta["slug"])
+    cur = str(meta["modified"])
+    if rec and rec.get("hash") == h and rec.get("modified") and str(rec["modified"]) < cur:
+        meta["modified"] = rec["modified"]           # 本文が同じなら日付を進めない
+        return
+    if not rec or rec.get("hash") != h or str(rec.get("modified", "")) < cur:
+        _HASHES[meta["slug"]] = {"hash": h, "modified": cur}
+
+
+def save_body_hashes():
+    try:
+        _HASH_FILE.parent.mkdir(exist_ok=True)
+        _HASH_FILE.write_text(json.dumps(_HASHES, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8", newline="\n")
+    except Exception as e:
+        print(f"WARN: 更新日の台帳を書けません（{str(e)[:40]}）")
 
 
 def render_toc(toc_tokens) -> str:
@@ -438,7 +469,44 @@ def _video_embed(content, meta):
         content = video_embed.prepend(content, meta)
     except Exception as e:
         print(f"WARN: 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
-    return _glossary_links(content, meta)
+    return _topic_box(_glossary_links(content, meta), meta)
+
+
+_TOPIC_GROUPS = None
+
+
+def _topic_box(content, meta):
+    """記事末に「このテーマの記事」（ピラーへのリンク＋兄弟3本）。相互リンクが機械で揃う"""
+    global _TOPIC_GROUPS
+    try:
+        import topics as TP
+        import sites as S
+        if _TOPIC_GROUPS is None:
+            metas = []
+            for p in (ROOT / "articles").glob("*.md"):
+                t = p.read_text(encoding="utf-8-sig")
+                m = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
+                if not m:
+                    continue
+                fm = m.group(1)
+                g = lambda k: (re.search(rf"^{k}:\s*(.+)$", fm, re.M) or [None, ""])[1]
+                sc = re.search(r"^score:\s*(\d+)", fm, re.M)
+                if not sc or int(sc.group(1)) < 90 or g("category") not in CATEGORIES:
+                    continue
+                metas.append({"slug": p.stem, "title": str(g("title")).strip().strip('"'), "keyword": g("keyword"),
+                              "category": g("category"), "date": g("date")})
+            _TOPIC_GROUPS = TP.build(S.primary(), metas)
+        box = TP.box_html(meta, _TOPIC_GROUPS, lambda m: f"/{m['category']}/{m['slug']}/")
+        if not box:
+            return content
+        # FAQ（よくある質問）の直前に置く。無ければ末尾
+        i = content.find("<h2")
+        j = content.rfind("よくある質問")
+        pos = content.rfind("<h2", 0, j) if (j != -1 and i != -1) else -1
+        return content[:pos] + box + content[pos:] if pos > 0 else content + box
+    except Exception as e:
+        print(f"WARN: テーマの箱を飛ばしました（{str(e)[:40]}）")
+        return content
 
 
 _TERMS = None
@@ -821,7 +889,7 @@ def build_sitemap(article_entries):
     if (SITE / "industry" / "index.html").is_file():
         lines.append(f"  <url><loc>{SITE_URL}/industry/</loc><lastmod>{today}</lastmod></url>")
     # 用語集・比較表（build_extra_pages が作る）
-    for top in ("glossary", "compare"):
+    for top in ("glossary", "compare", "topics"):
         if (SITE / top / "index.html").is_file():
             lines.append(f"  <url><loc>{SITE_URL}/{top}/</loc><lastmod>{today}</lastmod></url>")
         for d in sorted((SITE / top).glob("*/index.html")):
@@ -1035,12 +1103,29 @@ def build_extra_pages(all_metas):
     shell = dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
                  footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT), **_cta())
 
+    made_paths = set()
+
     def page(path, items, title, url, desc=""):
         out = SITE / path / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         p = BLOG_PAGE.format(items=items, **shell)
         p = p.replace("記事一覧｜" + SITE_NAME, f"{title}｜{SITE_NAME}").replace(f"{SITE_URL}/blog/", url)
         out.write_text(p, encoding="utf-8", newline="\n")
+        made_paths.add(out.parent)
+
+    def sweep():
+        """今回作らなかった古いページを消す。残すと sitemap に載り続け、主題が変わった
+        テーマページが並ぶ（実測: 5テーマなのに14ページ残った）"""
+        import shutil
+        for top in ("glossary", "compare", "topics"):
+            base = SITE / top
+            if not base.is_dir():
+                continue
+            for d in base.iterdir():
+                if d.is_dir() and d not in made_paths and (d / "index.html").is_file():
+                    shutil.rmtree(d, ignore_errors=True)
+            if base not in made_paths and (base / "index.html").is_file():
+                shutil.rmtree(base, ignore_errors=True)
 
     # 用語集
     terms = GL.collect(sid)
@@ -1063,12 +1148,27 @@ def build_extra_pages(all_metas):
     if made:
         page("compare", CP.index_html(made), "比較表から探す", f"{SITE_URL}/compare/")
         print(f"比較表: {', '.join(f'{n}{c}表' for _, n, c in made)}")
-    # 入口が孤立しないように、業種の入口（/industry/・ナビから届く）から用語集と比較表へリンクする
+    # テーマ（ピラー↔クラスター）。主題ごとに「まず読む1本」と掘り下げる記事を束ねる
+    groups = []
+    try:
+        import topics as TP
+        groups = TP.build(sid, all_metas)
+        for g in groups:
+            page(f"topics/{g['slug']}", TP.page_html(g, lambda m: f"{SITE_URL}/{m['category']}/{m['slug']}/"),
+                 f"{g['name']}の記事", f"{SITE_URL}/topics/{g['slug']}/")
+        if groups:
+            page("topics", TP.index_html(groups), "テーマから探す", f"{SITE_URL}/topics/")
+            print(f"テーマ: {len(groups)}件（{', '.join(g['name'] for g in groups[:6])}…）")
+    except Exception as e:
+        print(f"WARN: テーマの束ねを飛ばしました（{str(e)[:50]}）")
+    sweep()
+    # 入口が孤立しないように、業種の入口（/industry/・ナビから届く）から用語集・比較表・テーマへリンクする
     idx = SITE / "industry" / "index.html"
     if idx.is_file():
         links = "".join(f'<li><a href="/{top}/"><strong>{name}</strong><span class="cnt">{n}</span></a></li>'
                         for top, name, n in (("glossary", "用語集", f"{len(terms)}語" if len(terms) >= 10 else ""),
-                                             ("compare", "比較表から探す", f"{len(made)}カテゴリ" if made else ""))
+                                             ("compare", "比較表から探す", f"{len(made)}カテゴリ" if made else ""),
+                                             ("topics", "テーマから探す", f"{len(groups)}テーマ" if groups else ""))
                         if n)
         if links:
             t = idx.read_text(encoding="utf-8")
@@ -1259,6 +1359,7 @@ def main():
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
     build_sitemap(entries)
+    save_body_hashes()
     build_feed(entries)
     sync_listings(all_metas)
     warns += quality_checks(all_metas)

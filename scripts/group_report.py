@@ -28,9 +28,14 @@ SA = ROOT / "indexing-service-account.json"
 DEMO = "--demo" in sys.argv
 NAVY, BLUE, TEAL, GOLD, MUTED, LINE = "#0b2447", "#2563eb", "#0d9488", "#b7922e", "#5b6b84", "#e3eaf3"
 CPC = 300  # 広告換算に使う想定クリック単価（円）
-AI_DOMAINS = {"chatgpt": ["chatgpt.com", "chat.openai.com"], "perplexity": ["perplexity.ai"],
-              "gemini": ["gemini.google.com"], "copilot": ["copilot.microsoft.com"],
-              "claude": ["claude.ai"]}
+# AI参照元の分類は daily_kpi.AI_SOURCES の1か所に置く（Google以外のAIも全部そこ）。
+# ここに別のリストを持つと、新しいAIが出たときに片方だけ古くなり、レポートで数字が食い違う
+try:
+    from daily_kpi import AI_DOMAINS
+except Exception:
+    AI_DOMAINS = {"chatgpt": ["chatgpt.com", "chat.openai.com"], "perplexity": ["perplexity.ai"],
+                  "gemini": ["gemini.google.com"], "copilot": ["copilot.microsoft.com"],
+                  "claude": ["claude.ai"], "grok": ["grok.com", "x.ai"]}
 
 
 # ============================================================

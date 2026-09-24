@@ -185,6 +185,18 @@ def next_kw(site):
                or pick(lambda k: _norm(k) in aiq, "AI回答あり"))
         if hit:
             return hit
+    # 「開かないと済まない語」（kw_intent で強）を、弱い語より先に書く。
+    # 同じ順位でもクリック率が5倍違う。台帳の並び（登録順）に任せない
+    try:
+        import kw_intent
+        strong = lambda k: kw_intent.verdict(k)[0] == "強"
+        if not strong(kw0):
+            hit = (pick(lambda k: strong(k) and (not pat or re.search(pat, k.lower())), "強い語×主力")
+                   or pick(strong, "強い語"))
+            if hit:
+                return hit
+    except Exception:
+        pass
     if pat:
         if re.search(pat, kw0.lower()):
             return got                   # すでに主力の語ならそのまま

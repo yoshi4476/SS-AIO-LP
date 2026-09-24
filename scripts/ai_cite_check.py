@@ -136,7 +136,51 @@ def ask_perplexity(q):
     return urls
 
 
-ENGINES = {"ChatGPT": ask_openai, "Gemini": ask_gemini, "Perplexity": ask_perplexity}
+def ask_claude(q):
+    """Claude（Anthropic Messages API + web_search）。出典は web_search_result の url"""
+    key = _env("ANTHROPIC_API_KEY")
+    if not key:
+        return None
+    model = _env("ANTHROPIC_MODEL") or "claude-sonnet-4-5"
+    d = _post("https://api.anthropic.com/v1/messages",
+              {"model": model, "max_tokens": 1024,
+               "tools": [{"type": "web_search_20250305", "name": "web_search", "max_uses": 3}],
+               "messages": [{"role": "user", "content": q}]},
+              {"x-api-key": key, "anthropic-version": "2023-06-01"})
+    urls = []
+    for blk in d.get("content", []):
+        if blk.get("type") == "web_search_tool_result":
+            for r in blk.get("content", []) or []:
+                if isinstance(r, dict) and r.get("url"):
+                    urls.append(r["url"])
+        for c in blk.get("citations", []) or []:
+            if isinstance(c, dict) and c.get("url"):
+                urls.append(c["url"])
+    return urls
+
+
+def ask_grok(q):
+    """Grok（xAI Chat Completions + Live Search）。出典は citations"""
+    key = _env("XAI_API_KEY")
+    if not key:
+        return None
+    model = _env("XAI_MODEL") or "grok-4"
+    d = _post("https://api.x.ai/v1/chat/completions",
+              {"model": model, "messages": [{"role": "user", "content": q}],
+               "search_parameters": {"mode": "on", "return_citations": True}},
+              {"Authorization": f"Bearer {key}"})
+    return [u for u in (d.get("citations") or []) if isinstance(u, str)]
+
+
+# 検索つきのAI。鍵があるものだけ使う（無ければ飛ばす）。Google以外も全部ここに並べる
+ENGINES = {"ChatGPT": ask_openai, "Gemini": ask_gemini, "Perplexity": ask_perplexity,
+           "Claude": ask_claude, "Grok": ask_grok}
+ENGINE_KEYS = {"ChatGPT": "OPENAI_API_KEY", "Gemini": "GEMINI_API_KEY", "Perplexity": "PERPLEXITY_API_KEY",
+               "Claude": "ANTHROPIC_API_KEY", "Grok": "XAI_API_KEY"}
+
+
+def engines_available():
+    return {k: v for k, v in ENGINES.items() if _env(ENGINE_KEYS[k])}
 
 
 def queries_for(site_id, limit):
@@ -185,9 +229,9 @@ def main():
     ap.add_argument("--site", default="")
     ap.add_argument("--limit", type=int, default=MAX_QUERIES)
     a = ap.parse_args()
-    engines = {k: v for k, v in ENGINES.items() if _env({"ChatGPT": "OPENAI_API_KEY", "Gemini": "GEMINI_API_KEY", "Perplexity": "PERPLEXITY_API_KEY"}[k])}
+    engines = engines_available()
     if not engines:
-        print("AI_CITE=skipped（APIキーが無い: OPENAI_API_KEY / GEMINI_API_KEY / PERPLEXITY_API_KEY のどれか）")
+        print("AI_CITE=skipped（APIキーが無い: " + " / ".join(ENGINE_KEYS.values()) + " のどれか）")
         return 0
     print(f"■ 引用の実測: エンジン {', '.join(engines)} / 1サイト{a.limit}語まで")
     OUT.mkdir(parents=True, exist_ok=True)

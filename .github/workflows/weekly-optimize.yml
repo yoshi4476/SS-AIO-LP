@@ -446,6 +446,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           mkdir -p automation/logs
           python scripts/cwv_check.py 2>&1 | tee -a /tmp/measure.txt | tail -8 || true
@@ -460,6 +462,13 @@ jobs:
           python scripts/win_patterns.py 2>&1 | tail -4 || true
           # 著者の実在（sameAs・実績）を台帳から束ね、記事の Person と著者ページへ流す
           python scripts/author_profile.py --write 2>&1 | tail -3 || true
+          # 上位表示のための実測: 台帳の並び替え（開かないと済まない語を先に）・タイトルの型・
+          # 共起語の欠け・リッチリザルトの取りこぼし
+          python scripts/kw_reorder.py --write 2>&1 | tail -6 || true
+          python scripts/title_patterns.py 2>&1 | tail -3 || true
+          python scripts/cooccur.py --limit 6 2>&1 | tail -6 || true
+          python scripts/rich_check.py 2>&1 | tee -a /tmp/measure.txt | tail -6 || true
+          grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt || true
           grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt || true
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi
@@ -473,6 +482,8 @@ jobs:
         run: |
           n=2; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=1
           python scripts/auto_rewrite.py --write --kind question --limit $n --budget-min 12 2>&1 | tail -6 || true
+          # 流入語が説明文の先頭に無い記事の説明文だけを直す（本文が1文字でも変われば戻す）
+          python scripts/auto_rewrite.py --write --kind desc --limit $n --budget-min 8 2>&1 | tail -6 || true
 
       # 効かなかった直しは戻す（28日・対照群比）。表示ゼロの記事は近い記事へ統合する。
       # 6か月更新の無い記事は時点表記と dateModified を更新する（数字は年月以外増やさない）

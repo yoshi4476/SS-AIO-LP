@@ -259,6 +259,13 @@ def main():
         poor.sort(key=lambda s: cnt[s])
         print(f"■ {site}: {len(arts)}記事 / 被リンク{LOW}本以下 {len(poor)}記事")
 
+    # --only=<slug>: 公開直後の1本だけに当てる（新記事は被リンク0で始まり、
+    # 週次を待つと最大6日そのまま。インデックスと評価の立ち上がりが遅れる）
+    only = next((x.split("=", 1)[1] for x in sys.argv if x.startswith("--only=")), "")
+    if only:
+        poor = [only] if only in arts else []
+        if not poor:
+            print(f"   --only の記事が見つかりません: {only}")
     done = 0
     for tgt in poor:
         a = arts[tgt]

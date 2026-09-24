@@ -297,6 +297,16 @@ jobs:
         if: steps.site.outputs.skip != 'yes'
         run: python scripts/tool_links.py --write || true
 
+      # 新記事は被リンク0で始まる。週次を待つと最大6日そのままで、インデックスと
+      # 評価の立ち上がりが遅れる。公開と同時に、話題の近い既存記事から先にリンクを張る
+      - name: 公開直後に既存記事から新記事へリンクを張る
+        if: steps.site.outputs.skip != 'yes'
+        run: |
+          for f in $(git ls-files --others --exclude-standard articles/*.md); do
+            slug=$(basename "$f" .md)
+            python scripts/link_boost.py "${{ steps.site.outputs.id }}" --rescue --write --only="$slug" 2>&1 | tail -4 || true
+          done
+
       # 書いた直後に、機械で直せる崩れを直す。
       # これらは週次にしか入っておらず、記事は1日6本公開されるため、
       # 最大6日間そのまま公開されていた（実測で直近7日の記事に1本残っていた）。

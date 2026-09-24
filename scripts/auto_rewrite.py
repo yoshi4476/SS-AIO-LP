@@ -168,6 +168,52 @@ def question_items(limit=4):
     return rows[:limit]
 
 
+def desc_items(limit=4, days=28):
+    """流入している上位の語が description の先頭40字に無い公開記事（表示の多い順）"""
+    import gsc_detail as G
+    import sites as S
+    from datetime import date as _d, timedelta as _td
+    end = _d.today() - _td(days=3)
+    start = end - _td(days=days)
+    try:
+        sc = G.client()
+    except Exception:
+        return []
+    metas = {}
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
+        if not m:
+            continue
+        fm = m.group(1)
+        sc_ = re.search(r"^score:\s*(\d+)", fm, re.M)
+        cat = re.search(r"^category:\s*(\S+)", fm, re.M)
+        if not sc_ or int(sc_.group(1)) < 90 or not cat:
+            continue
+        metas[p.stem] = {"desc": _desc_of(t), "site": S.find_category_owner(cat.group(1)) or ""}
+    rows = []
+    for cfg in S.load_all().values():
+        by = {}
+        for r in G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000):
+            slug = r["keys"][1].rstrip("/").split("/")[-1]
+            if slug in metas:
+                by.setdefault(slug, []).append((r["keys"][0], int(r["impressions"])))
+        for slug, qs in by.items():
+            qs.sort(key=lambda x: -x[1])
+            top = [q for q, imp in qs[:3] if imp >= 10]
+            if not top:
+                continue
+            head = metas[slug]["desc"][:40].lower()
+            toks = [w for w in re.split(r"[\s　]+", top[0].lower()) if len(w) >= 2]
+            if toks and all(w in head for w in toks):
+                continue
+            rows.append({"kind": "desc", "slug": slug, "site": metas[slug]["site"], "queries": top,
+                         "imp": sum(imp for _, imp in qs[:3]),
+                         "why": f"流入語「{top[0]}」が説明文の先頭に無い（表示{sum(imp for _, imp in qs[:3])}回）"})
+    rows.sort(key=lambda r: -r["imp"])
+    return rows[:limit]
+
+
 PROMPT = """articles/{slug}.md を直してください。この1ファイル以外は触らないでください。
 
 直す理由: {why}
@@ -201,6 +247,13 @@ WHAT = {
             "3. 「失敗例・注意点」の見出しに、一次情報から言える具体例を1つ足す\n"
             "4. FAQ の最初の1問を、狙う語そのものの質問にし、回答に一次情報の数字を1つ入れる\n"
             "使ってよい自社の一次情報（**この数字以外の新しい数字は書かない**）:\n{facts}"),
+    "desc": ("この記事に実際に流入している検索語が、説明文（description）の前半に入っていません。\n"
+             "検索結果に出る説明文に検索語が無いと、Googleが本文から別の文を切り出して並べ、意図が伝わりません。\n"
+             "流入している語（多い順）:\n{queries}\n"
+             "1. フロントマターの description だけを書き換える（60〜160字）。先頭40字以内に上の語のうち\n"
+             "   最も多いものを自然に含める。タイトルと同じ文言の繰り返しは避ける\n"
+             "2. 本文・タイトル・keyword・他のフロントマターは1文字も変えない\n"
+             "3. 本文に無い数字・事実を書かない"),
     "question": ("この記事のH2見出しは名詞句ばかりで、質問の形がありません。自社の実測で、H2の1〜3割が\n"
                  "質問形の記事は、質問形ゼロの記事より平均4.2位上にいます。AI Overview は質問形の\n"
                  "クエリで64.7%出ます。\n"
@@ -490,6 +543,28 @@ def run_one(item, write):
         _, fs = F.load_for(item.get("site") or site_of(slug))
         allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
         what = what.format(facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind == "desc":
+        what = what.format(queries="\n".join(f"- {q}" for q in item.get("queries") or []))
+    if kind == "title":
+        # 自社のGSCで実測した「効いた型」を渡す（通説ではなく、このサイトの数字で決める）
+        try:
+            import title_patterns as TPn
+            b = TPn.brief()
+            if b:
+                what += "\n実測（自社GSC・1〜20位）で分かっているタイトルの型:\n" + b
+        except Exception:
+            pass
+    if kind == "stuck":
+        # 上位・引用元の記事が扱っていて、この記事に無い語（cooccur が週次で書く）
+        cp = ROOT / "data" / "cooccur" / f"{slug}.json"
+        if cp.is_file():
+            try:
+                miss = json.loads(cp.read_text(encoding="utf-8")).get("missing") or []
+                if miss:
+                    what += ("\n上位・引用元の記事の見出しにあって、この記事に無い語（扱う価値があるか判断して、"
+                             "主題に含まれるものだけ節を足す）:\n" + "／".join(miss[:10]))
+            except Exception:
+                pass
     if kind == "fresh":
         # 年月の更新だけを許す。今日の年・月・日のトークンは「増えた数字」に数えない
         t = time.localtime()
@@ -527,6 +602,21 @@ def run_one(item, write):
 
     ng = check(slug, before, before_warns, snap, allowed,
                item.get("terms") or ())
+    if not ng and kind == "desc":
+        # 説明文だけの直し。本文・タイトルが1文字でも変わっていたら通さない
+        strip = lambda t: re.sub(r"^description:.*$", "", t, count=1, flags=re.M)
+        after_now = p.read_text(encoding="utf-8-sig")
+        d = _desc_of(after_now)
+        if strip(after_now) != strip(before[2]):
+            ng = "説明文以外が変わりました"
+        elif not (60 <= len(d) <= 160):
+            ng = f"説明文が{len(d)}字（60〜160字）"
+        elif item.get("queries") and not any(w in d[:40].lower() for w in re.split(r"[\s　]+", item["queries"][0].lower()) if len(w) >= 2):
+            ng = "流入語が説明文の先頭に入っていません"
+        if ng:
+            sh(["git", "checkout", "--", f"articles/{slug}.md"])
+            sh([sys.executable, "scripts/build.py"], timeout=1800)
+            return False, ng
     if not ng and kind == "question":
         # 見出しの本数と順番が変わったら通さない（質問形にする直しは言い換えだけ）
         h_before = re.findall(r"^##\s+", before[2], re.M)
@@ -648,6 +738,8 @@ def main():
         items = fresh_items(max(a.limit, 4))
     elif a.kind == "question":
         items = question_items(max(a.limit, 4))
+    elif a.kind == "desc":
+        items = desc_items(max(a.limit, 4))
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     print(f"■ 人の判断に回っていた直し: {len(items)}件"

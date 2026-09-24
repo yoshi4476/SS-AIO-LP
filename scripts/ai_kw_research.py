@@ -96,11 +96,26 @@ def in_territory(kw, cfg):
 
 
 def probe(kw, dom):
-    """検索つきのAIに聞き、答えが出たか・出典に自社が入るかを返す"""
+    """検索つきのAI**すべて**（鍵があるもの）に聞き、エンジンごとに「答えが出たか・出典に自社が入るか」を返す。
+
+    Google（Gemini）だけを見ると、ChatGPT・Perplexity・Claude・Grok で出典が違うことを見落とす。
+    answered / ours は「どれか1つでも」。エンジン別は engines に残す
+    """
     import ai_cite_check as AC
-    urls = AC.ask_gemini(kw) or []
-    doms = sorted({AC.domain_of(u) for u in urls if u})
-    return {"answered": bool(doms), "ours": dom in doms, "sources": doms[:8]}
+    per, all_doms, ours = {}, set(), False
+    for name, fn in AC.engines_available().items():
+        try:
+            urls = fn(kw) or []
+        except Exception as e:
+            if "429" in str(e):
+                raise                              # 枠切れは呼び出し側で打ち切る
+            per[name] = {"error": str(e)[:60]}
+            continue
+        doms = sorted({AC.domain_of(u) for u in urls if u})
+        per[name] = {"answered": bool(doms), "ours": dom in doms, "sources": doms[:8]}
+        all_doms |= set(doms)
+        ours = ours or (dom in doms)
+    return {"answered": bool(all_doms), "ours": ours, "sources": sorted(all_doms)[:12], "engines": per}
 
 
 def research(sid, cfg, probe_n=0):
@@ -187,9 +202,12 @@ def main():
     ap.add_argument("--append", action="store_true")
     a = ap.parse_args()
     import ai_cite_check as AC
-    if a.probe and not AC._env("GEMINI_API_KEY"):
-        print("GEMINI_API_KEY が無いため、AIには聞きません（候補の抽出だけ行います）")
+    if a.probe and not AC.engines_available():
+        print("検索つきAIの鍵が1つも無いため、AIには聞きません（候補の抽出だけ行います）: "
+              + " / ".join(AC.ENGINE_KEYS.values()))
         a.probe = 0
+    elif a.probe:
+        print(f"   聞くAI: {', '.join(AC.engines_available())}")
     targets = S.load_all() if a.all or not a.site else {a.site: S.load(a.site)}
     OUT.mkdir(parents=True, exist_ok=True)
     ok, total = True, 0

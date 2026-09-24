@@ -29,11 +29,29 @@ AI_DOMAINS = {
     "perplexity": ["perplexity.ai"],
     "gemini": ["gemini.google.com", "bard.google.com"],
     "copilot": ["copilot.microsoft.com", "bing.com/chat", "edgeservices.bing.com"],
-    "claude": ["claude.ai"],
-    "その他AI": ["you.com", "poe.com", "felo.ai", "genspark.ai", "grok.com", "x.ai",
+    "claude": ["claude.ai", "anthropic.com"],
+    "grok": ["grok.com", "x.ai", "grok.x.com"],
+    "その他AI": ["you.com", "poe.com", "felo.ai", "genspark.ai",
                  "chat.mistral.ai", "phind.com", "kagi.com", "duckduckgo.com/aichat",
-                 "meta.ai", "iask.ai", "andisearch.com"],
+                 "meta.ai", "iask.ai", "andisearch.com", "deepseek.com", "chat.qwen.ai",
+                 "notebooklm.google", "aistudio.google.com", "search.brave.com/summarizer"],
 }
+# **参照元の分類はこの1か所だけ**。monthly_report / group_report / data_auto はここを読む。
+# 別々に持つと、新しいAIが出たときに1つだけ古くなり、レポートごとに数字が食い違う
+AI_LABELS = {"chatgpt": "ChatGPT", "perplexity": "Perplexity", "gemini": "Gemini", "copilot": "Copilot",
+             "claude": "Claude", "grok": "Grok", "その他AI": "その他AI"}
+
+
+AI_SOURCES = AI_DOMAINS      # 別名（data_auto が AI_SOURCES の名で読む）
+
+
+def ai_label(source):
+    """GA4 の参照元（sessionSource）→ 表示名。AIでなければ None"""
+    s = str(source or "").lower()
+    for key, doms in AI_DOMAINS.items():
+        if any(d in s for d in doms):
+            return AI_LABELS.get(key, key)
+    return None
 
 
 def creds(scopes):

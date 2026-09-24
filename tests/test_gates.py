@@ -3077,6 +3077,40 @@ def test_report_actions_close_the_loop():
     check("publish: 配信先の記事にも Person（sameAs）を出す", "author_profile.json" in (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8"), True)
     check("週次CIが著者の実在を束ねる", "author_profile.py --write" in wk, True)
 
+    # 上位表示の9項目 + Google以外のAI
+    import kw_reorder as KR
+    import topics as TPX
+    import cooccur as CO
+    import title_patterns as TPT
+    import rich_check as RC
+    import daily_kpi as DK
+    import ai_cite_check as ACX
+    import ai_kw_research as AKR
+    check("kw_reorder: 強/並/弱を A/B/C に写す", (KR.grade("補助金 不採択 理由")[0], KR.grade("補助金 例文")[0]), ("A", "C"))
+    check("next_kw: 強い語を先に拾う", "強い語" in inspect.getsource(HC2.next_kw), True)
+    check("topics: 業種名は主題語にしない", "クリニック" not in TPX._terms("クリニック 口コミ 返信"), True)
+    check("topics: 主題語を拾う", "口コミ" in TPX._terms("クリニック 口コミ 返信"), True)
+    check("cooccur: 自社ドメインは出典に数えない", "7senses" in inspect.getsource(CO.source_urls), True)
+    check("title_patterns: 表示300回未満の型は出さない", TPT.MIN_IMP, 300)
+    check("auto_rewrite: 説明文だけの種別がある", "desc" in AR2.WHAT and "説明文以外が変わりました" in inspect.getsource(AR2.run_one), True)
+    check("auto_rewrite: タイトルの型と共起語を指示に渡す",
+          "title_patterns" in inspect.getsource(AR2.run_one) and "cooccur" in inspect.getsource(AR2.run_one), True)
+    check("rich_check: searchAppearance は単独で取る", "['searchAppearance']" in inspect.getsource(RC.appearances).replace('"', "'"), True)
+    check("build: 本文が同じなら dateModified を進めない", callable(getattr(B, "_modified_guard", None)) if (B := __import__("build")) else False, True)
+    check("link_boost: 公開直後の1本だけに当てられる", "--only=" in inspect.getsource(__import__("link_boost").main), True)
+    pm = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("記事CIが公開直後に内部リンクを張る", "link_boost.py" in pm and "--only=" in pm, True)
+    check("youtube_upload: 業種別の再生リストに入れる", callable(getattr(__import__("youtube_upload"), "_add_to_playlist", None)), True)
+    check("AI参照元の分類は1か所（daily_kpi）", "from daily_kpi import AI_DOMAINS" in (ROOT / "scripts" / "group_report.py").read_text(encoding="utf-8")
+          and "_dk.ai_label" in (ROOT / "scripts" / "monthly_report.py").read_text(encoding="utf-8"), True)
+    check("AI参照元: Google以外（ChatGPT/Perplexity/Claude/Copilot/Grok）を分類できる",
+          [DK.ai_label(d) for d in ("chatgpt.com", "perplexity.ai", "claude.ai", "copilot.microsoft.com", "grok.com", "gemini.google.com")],
+          ["ChatGPT", "Perplexity", "Claude", "Copilot", "Grok", "Gemini"])
+    check("引用の実測: 5つの検索つきAIを持つ", set(ACX.ENGINES) >= {"ChatGPT", "Gemini", "Perplexity", "Claude", "Grok"}, True)
+    check("語の調査: 鍵のあるAI全部に聞く", "engines_available" in inspect.getsource(AKR.probe), True)
+    check("週次CIが上位表示の実測（並び替え・型・共起語・リッチ）を回す",
+          all(s in wk for s in ("kw_reorder.py", "title_patterns.py", "cooccur.py", "rich_check.py", "--kind desc")), True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,

@@ -1353,6 +1353,21 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `hub_sheets.py`（`HUB_DIRECT=1` で有効） | 管制塔を Sheets API で直接読み書き（GAS と同じ列・同じ判定）。失敗したら GAS に落ちる | サービスアカウントをシートに「編集者」で共有しておく |
 | `author_profile.py --write`（週次） | 著者の実在（sameAs・掲載・動画・一次データ数）を `data/author.json`・動画台帳・言及台帳・法人番号から束ね、記事の Person と `/author/haraguchi/` の両方へ流す。配信先の記事にも Person を出す | URLは本人のものだけ。数字は台帳から数える（手で書かない） |
 
+### 8.13 上位表示のために毎週回す実測と直し（順位は約束しない。やれることを漏らさない）
+
+| 工程 | 何をするか | 守ること |
+|:--|:--|:--|
+| `kw_reorder.py --write`（週次） | 未着手を `kw_intent` で採点し優先度 A/B/C に付け直す（直接接続があれば台帳を書く）。弱い語の記事に、実際に流入している強い語を `docs/kw-strong-<site>.md` に出す。`next_kw` も強い語を先に拾う | 付け替えは `kw_guard` を通してから |
+| `topics.py`（build が呼ぶ） | 狙う語の主題語（業種名・一般語を除く）で3本以上の記事を束ね、`/topics/<主題>/`（ピラー＝表示が最多の1本）と記事末の「このテーマの記事」を作る | 主題語は kw から。題名の語で束ねると「施策:24本」のような無意味な束になる（実測） |
+| `cooccur.py`（週次） | 止まっている記事の狙う語について、AIの出典・検索上位のページの見出し語のうち自記事に無いものを `data/cooccur/<slug>.json` に出し、`auto_rewrite --kind stuck` が読む | 自社ドメインは出典に数えない。足すかは主題に含まれるかで判断させる |
+| `title_patterns.py`（週次） | 1〜20位の記事について、タイトルの型（年号・数字・疑問・限定…）ごとの実測CTRを出し、勝った型を `auto_rewrite --kind title` に渡す | 表示300回未満の型は出さない。実測（2026-09）: 疑問形・限定が勝ち、年号・費用は負け |
+| `auto_rewrite.py --kind desc`（週2本） | 流入している上位語が説明文の先頭40字に無い記事の説明文だけを直す | 本文・タイトルが1文字でも変われば戻す。60〜160字 |
+| `rich_check.py`（週次） | 検索での見え方（searchAppearance）と全記事の JSON-LD の壊れを検査 | searchAppearance は単独でしか取れない（page と組むと400）。FAQ/HowTo のリッチリザルトは Google が一般サイト向けをやめているので「出ない」は異常ではない |
+| 記事CI「公開直後に…リンク」 | 新記事に、話題の近い既存記事からその場で内部リンクを張る（`link_boost --only=<slug>`） | 週次を待たない（最大6日の空白を無くす） |
+| `build.py` の更新日の実体化 | 本文が変わっていない記事は dateModified を進めない（`data/body_hash.json`） | 日付だけの更新は鮮度の信号を薄める |
+| `youtube_upload.py` の再生リスト | 業種別の再生リストを作り、上げた動画を入れる | 鍵は `youtube.force-ssl` |
+| **Google以外のAI** | 参照元の分類は `daily_kpi.AI_DOMAINS` の1か所（ChatGPT・Perplexity・Gemini・Copilot・Claude・Grok・その他AI）。引用の実測（`ai_cite_check`）と語の調査（`ai_kw_research`）は鍵のあるAI全部に聞く（`OPENAI_API_KEY` / `GEMINI_API_KEY` / `PERPLEXITY_API_KEY` / `ANTHROPIC_API_KEY` / `XAI_API_KEY`） | 鍵が無いAIは飛ばす。robots.txt は20種のAIクローラーを許可済み |
+
 ---
 
 ## 9. スプレッドシート構成（詳細）

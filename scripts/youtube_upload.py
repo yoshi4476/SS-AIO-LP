@@ -88,6 +88,41 @@ def describe(slug):
     return desc, a["title"], tags
 
 
+PLAYLISTS = ROOT / "data" / "youtube_playlists.json"
+
+
+def _playlist_name(title):
+    """業種が判定できれば「<業種>の集客・補助金」、できなければ「AI集客ラボ」"""
+    try:
+        import industry_hub as IH
+        inds, _ = IH.load()
+        s = IH.detect(title, "", inds)
+        if s:
+            name = next(i["name"] for i in inds if i["slug"] == s)
+            return f"{name}の集客・補助金・AI活用"
+    except Exception:
+        pass
+    return "AI集客ラボ｜AI検索・MEO・補助金"
+
+
+def _add_to_playlist(yt, vid, title):
+    name = _playlist_name(title)
+    book = json.loads(PLAYLISTS.read_text(encoding="utf-8")) if PLAYLISTS.is_file() else {}
+    pid = book.get(name)
+    if not pid:
+        res = yt.playlists().insert(part="snippet,status", body={
+            "snippet": {"title": name[:150], "description": "セブンセンシズ株式会社（AI集客ラボ）の解説動画。記事の要点を本文と同じ内容で動画にしています。",
+                        "defaultLanguage": "ja"},
+            "status": {"privacyStatus": "public"}}).execute()
+        pid = res["id"]
+        book[name] = pid
+        PLAYLISTS.parent.mkdir(exist_ok=True)
+        PLAYLISTS.write_text(json.dumps(book, ensure_ascii=False, indent=1), encoding="utf-8")
+    yt.playlistItems().insert(part="snippet", body={
+        "snippet": {"playlistId": pid, "resourceId": {"kind": "youtube#video", "videoId": vid}}}).execute()
+    return name
+
+
 def upload(mp4, slug, public=False, quiet=False):
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload
@@ -121,6 +156,11 @@ def upload(mp4, slug, public=False, quiet=False):
                                  media_body=MediaFileUpload(str(srt), mimetype="application/octet-stream")).execute()
         except Exception as e:
             print(f"  [注意] 字幕を上げられませんでした（{str(e)[:70]}）。--auth をやり直すと権限が付きます")
+    # 業種別の再生リストへ入れる（無ければ作る）。リストは「業種×集客」の言及の面になる
+    try:
+        _add_to_playlist(yt, vid, title)
+    except Exception as e:
+        print(f"  [注意] 再生リストに入れられませんでした（{str(e)[:70]}）")
     if not quiet:
         print(f"  上げました: https://www.youtube.com/watch?v={vid}")
         print(f"  公開設定: {'全体公開' if public else '限定公開（確認してから公開に変えてください）'}")

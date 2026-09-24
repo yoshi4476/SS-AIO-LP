@@ -478,12 +478,11 @@ def fetch_real():
     bk = {}
     for r in rep.rows:
         src = r.dimension_values[0].value
-        for dom in ai_domains:
-            if dom in src:
-                key = {"chat.openai.com": "ChatGPT", "chatgpt.com": "ChatGPT",
-                       "perplexity.ai": "Perplexity", "gemini.google.com": "Gemini",
-                       "copilot.microsoft.com": "Copilot", "claude.ai": "Claude"}[dom]
-                bk[key] = bk.get(key, 0) + int(r.metric_values[0].value)
+        # 表示名は daily_kpi.ai_label に一本化（Google以外のAI＝Grok・Copilot・Claude・その他も同じ表に出る）。
+        # 以前は6ドメインの固定辞書で、それ以外のAI経由は KeyError で落ちるところだった
+        key = _dk.ai_label(src)
+        if key:
+            bk[key] = bk.get(key, 0) + int(r.metric_values[0].value)
     data["ai_breakdown"] = sorted(bk.items(), key=lambda x: -x[1])
 
     # エリア到達（area_reachイベント）
