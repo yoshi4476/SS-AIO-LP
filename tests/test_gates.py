@@ -2988,6 +2988,28 @@ def test_report_actions_close_the_loop():
     import hub_client as HC
     check("next_kw: AI回答ありの語を読む関数がある", callable(getattr(HC, "_ai_targets", None)), True)
 
+    # 当てた手は戻せる・表示ゼロは整理する・鮮度は更新する・FAQと動画は記事から機械が作る
+    import rewrite_rollback as RB
+    import retire_stale as RS
+    import video_embed as VE
+    import industry_hub as IH
+    import auto_rewrite as AR2
+    check("rollback: 対照の8割を割ったら戻す", RB.WORSE, 0.8)
+    check("retire_stale: 近い記事が無ければ統合しない（Dice下限）", RS.MIN_SIM >= 0.3, True)
+    check("auto_rewrite: 鮮度の種別がある", "fresh" in AR2.WHAT, True)
+    check("auto_rewrite: 直す前のタイトルを台帳に残す", "before_title" in inspect.getsource(AR2.run_one), True)
+    fb = IH.faq_body({"slug": "x", "name": "テスト"},
+                     [{"faq": [{"q": f"q{i}", "a": f"a{i}"}], "title": "t", "category": "c", "slug": f"s{i}"} for i in range(5)],
+                     lambda m: "/c/" + m["slug"] + "/")
+    check("industry_hub: FAQが5問以上ならページを作る", bool(fb) and fb[1]["@type"] == "FAQPage", True)
+    check("industry_hub: 4問以下は作らない", IH.faq_body({"slug": "x", "name": "t"}, [], lambda m: "/"), None)
+    check("video_embed: 台帳に無い記事は何もしない", VE.prepend("<p>x</p>", {"slug": "__none__"}), "<p>x</p>")
+    check("週次CIが戻す・整理・鮮度を回す",
+          all(s in wk for s in ("rewrite_rollback.py --write", "retire_stale.py --write", "--kind fresh")), True)
+    check("月次CIが15日に途中経過を出す", '"0 0 15 * *"' in yml and "steps.day.outputs.through" in yml, True)
+    gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
+    check("自動返信に資料の案内が入る", "videos/aio-pr.mp4" in gs and "body + materials + foot" in gs, True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,

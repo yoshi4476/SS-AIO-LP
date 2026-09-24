@@ -253,7 +253,18 @@ function leadReply_(site, type, d) {
             '内容を確認のうえ、3営業日以内に担当よりご連絡します。', '',
             'なお、こちらのメールは自動送信です。', ''].join('\n');
   }
-  MailApp.sendEmail({ to: email, subject: subject, body: body + foot,
+  // 返信を待つ間に、判断に必要な材料を先に渡す（商談化を機械が進める）。
+  // 載せるのは公開済みのものだけ。個別の見積りや約束は人が書く
+  const materials = ['', '▼ ご連絡までの間にご覧いただける資料',
+    '・なぜ今AI検索対策なのか（PR動画・約21分）',
+    '  https://ai.7senses.co.jp/videos/aio-pr.mp4',
+    '・運用の実態（システムの画面そのまま・約14分）',
+    '  https://ai.7senses.co.jp/videos/console-demo.mp4',
+    '・提案資料の説明動画（約18分）',
+    '  https://ai.7senses.co.jp/videos/doc-guide.mp4',
+    '・サービス案内と無料診断',
+    '  https://ai.7senses.co.jp/lp/', ''].join('\n');
+  MailApp.sendEmail({ to: email, subject: subject, body: body + materials + foot,
                       name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
 }
 

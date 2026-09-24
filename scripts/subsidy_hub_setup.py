@@ -42,13 +42,33 @@ if IND_FILE.is_file():
             _g.setdefault(s, []).append(a)
     hub_pairs = [(i, _g[i["slug"]]) for i in _ind.get("industries", [])
                  if len(_g.get(i["slug"], [])) >= _min]
+    def _faq(ia):
+        """記事HTMLの FAQ（details/summary）を集める。答えは記事のまま、新しい文は作らない"""
+        pairs = []
+        for a in ia:
+            f = ROOT / "blog" / a["slug"] / "index.html"
+            if not f.is_file():
+                continue
+            c = f.read_text(encoding="utf-8")
+            for q, ans in re.findall(r'<details[^>]*>\\s*<summary>(.*?)</summary>\\s*<div class="a">(.*?)</div>', c, re.S):
+                q, ans = re.sub("<[^>]+>", "", q).strip(), re.sub("<[^>]+>", "", ans).strip()
+                if q and ans:
+                    pairs.append((q, ans, a))
+        return pairs[:60]
+
+    hub_faqs = {}
     for ind, ia in hub_pairs:
         out = ROOT / "industry" / ind["slug"]
         out.mkdir(parents=True, exist_ok=True)
         lead = (f'{ind["name"]}で使える補助金と申請の実務について書いた記事を、'
                 f'{len(ia)}本まとめました。自社に近い記事から読めます。')
+        fq = _faq(ia)
+        if len(fq) >= 5:
+            hub_faqs[ind["slug"]] = fq
         hub_html = ('  <div class="hub">補助金が使えるかは業種より「導入するツールと事業計画」で決まります。'
-                    '自社の場合は<a href="/#diagnosis">3分の無料診断（8問・登録不要）</a>で確かめられます。</div>')
+                    '自社の場合は<a href="/#diagnosis">3分の無料診断（8問・登録不要）</a>で確かめられます。'
+                    + (f' <a href="/industry/{ind["slug"]}/faq/">{ind["name"]}のよくある質問（{len(fq)}問）</a>' if len(fq) >= 5 else "")
+                    + '</div>')
         jsonld_extra = f',\\n      {{ "@type": "ListItem", "position": 3, "name": "{ind["name"]}" }}'
         (out / "index.html").write_text(page(
             f"/industry/{ind['slug']}/",
@@ -76,6 +96,32 @@ if IND_FILE.is_file():
             "業種から探す", "手法ではなく、自分の業種から記事を探せる入口です。",
             "", "all", "業種から探す", idx_html), encoding="utf-8")
         print(f"生成: industry/index.html ({len(hub_pairs)}業種)")
+    # 業種×よくある質問。質問形のクエリは AI Overview 表示率64.7%。答えは記事の FAQ そのまま
+    for ind, ia in hub_pairs:
+        fq = hub_faqs.get(ind["slug"])
+        if not fq:
+            continue
+        outq = ROOT / "industry" / ind["slug"] / "faq"
+        outq.mkdir(parents=True, exist_ok=True)
+        items = "".join(f'<details style="margin:10px 0;padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:10px">'
+                        f'<summary style="cursor:pointer;font-weight:700">{q}</summary>'
+                        f'<p style="margin:10px 0 6px">{a}</p><p style="font-size:12.5px"><a href="/blog/{m["slug"]}/">→ {m["title"][:48]}</a></p></details>'
+                        for q, a, m in fq)
+        ld = _json.dumps({"@context": "https://schema.org", "@type": "FAQPage",
+                          "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                                         for q, a, _ in fq]}, ensure_ascii=False)
+        faq_html = (f'<div class="hub">{ind["name"]}の記事{len(ia)}本から、よくある質問と答えを1か所に集めました。'
+                    f'答えは各記事に書いたものと同じです。</div>{items}'
+                    f'<script type="application/ld+json">{ld}</script>')
+        (outq / "index.html").write_text(page(
+            f"/industry/{ind['slug']}/faq/",
+            f"{ind['name']}の補助金のよくある質問({len(fq)}問)|セブンセンシズ株式会社",
+            f"{ind['name']}向けの補助金・AI導入について、記事{len(ia)}本のよくある質問{len(fq)}問と答え。",
+            f"<span style='color:#7a5b14'>{ind['name']}</span>の補助金 よくある質問",
+            "記事に書いた質問と答えを、業種ごとに1か所へ集めています。", "", "all",
+            f'<a href="/industry/">業種から探す</a> › <a href="/industry/{ind["slug"]}/">{ind["name"]}</a> › よくある質問',
+            faq_html), encoding="utf-8")
+        print(f"生成: industry/{ind['slug']}/faq/index.html ({len(fq)}問)")
 '''
 
 SITEMAP_ADD = '''for a in arts:
@@ -86,13 +132,17 @@ SITEMAP_NEW = SITEMAP_ADD + '''if hub_pairs:
     urls.append(f"  <url>\\n    <loc>{DOMAIN}/industry/</loc>\\n    <lastmod>{arts[0]['date']}</lastmod>\\n    <priority>0.6</priority>\\n  </url>")
     for i, v in hub_pairs:
         urls.append(f"  <url>\\n    <loc>{DOMAIN}/industry/{i['slug']}/</loc>\\n    <lastmod>{v[0]['date']}</lastmod>\\n    <priority>0.6</priority>\\n  </url>")
+        if i["slug"] in hub_faqs:
+            urls.append(f"  <url>\\n    <loc>{DOMAIN}/industry/{i['slug']}/faq/</loc>\\n    <lastmod>{v[0]['date']}</lastmod>\\n    <priority>0.6</priority>\\n  </url>")
 '''
 LLMS_OLD = '''              f"- [補助金の記事一覧]({DOMAIN}/blog/category/hojokin/)", ""]
 '''
 LLMS_NEW = '''              f"- [補助金の記事一覧]({DOMAIN}/blog/category/hojokin/)", ""]
     if hub_pairs:
         lines += ["## 業種から探す", ""] + [
-            f"- [{i['name']}の補助金・AI導入]({DOMAIN}/industry/{i['slug']}/): {len(v)}本" for i, v in hub_pairs] + [""]
+            f"- [{i['name']}の補助金・AI導入]({DOMAIN}/industry/{i['slug']}/): {len(v)}本" for i, v in hub_pairs] + [
+            f"- [{i['name']}のよくある質問]({DOMAIN}/industry/{i['slug']}/faq/): {len(hub_faqs[i['slug']])}問"
+            for i, v in hub_pairs if i["slug"] in hub_faqs] + [""]
 '''
 SIDEBAR_OLD = '      <li><a href="/blog/category/hojokin/">補助金の記事一覧</a></li>\n'
 SIDEBAR_NEW = SIDEBAR_OLD + '      <li><a href="/industry/">業種から探す</a></li>\n'
@@ -116,6 +166,24 @@ def main():
     cfg = S.load("subsidy")
     dest = publish.ensure_clone(cfg, publish._push_token())      # 配信先の最新に揃える
     gen = dest / "tools" / "gen_blog_pages.py"
+    # 前に入れたハブの塊は一度外してから入れ直す（2回目以降も同じ結果になる）
+    import re as _re
+    t = gen.read_text(encoding="utf-8")
+    t2 = _re.sub(r"\n# ---- 業種ハブ.*?(?=\n# ---- sitemap\.xml ----)", "", t, count=1, flags=_re.S)
+    t2 = t2.replace(SITEMAP_NEW, SITEMAP_ADD).replace(LLMS_NEW, LLMS_OLD)
+    # 1回目に入れた（FAQ無しの）版も外す
+    old_sm = SITEMAP_ADD + '''if hub_pairs:
+    urls.append(f"  <url>\\n    <loc>{DOMAIN}/industry/</loc>\\n    <lastmod>{arts[0]['date']}</lastmod>\\n    <priority>0.6</priority>\\n  </url>")
+    for i, v in hub_pairs:
+        urls.append(f"  <url>\\n    <loc>{DOMAIN}/industry/{i['slug']}/</loc>\\n    <lastmod>{v[0]['date']}</lastmod>\\n    <priority>0.6</priority>\\n  </url>")
+'''
+    old_ll = LLMS_OLD + '''    if hub_pairs:
+        lines += ["## 業種から探す", ""] + [
+            f"- [{i['name']}の補助金・AI導入]({DOMAIN}/industry/{i['slug']}/): {len(v)}本" for i, v in hub_pairs] + [""]
+'''
+    t2 = t2.replace(old_sm, SITEMAP_ADD).replace(old_ll, LLMS_OLD)
+    if t2 != t:
+        gen.write_text(t2, encoding="utf-8", newline="\n")
     patch(gen, [("\n# ---- sitemap.xml ----", HUB_BLOCK + "\n# ---- sitemap.xml ----"),
                 (SITEMAP_ADD, SITEMAP_NEW), (LLMS_OLD, LLMS_NEW), (SIDEBAR_OLD, SIDEBAR_NEW)])
     patch(dest / "tools" / "make_dist.py", [(DIST_OLD, DIST_NEW)])

@@ -423,6 +423,16 @@ def prev_next_html(prev_meta, next_meta):
     return "".join(parts)
 
 
+def _video_embed(content, meta):
+    """YouTube に上がった記事動画があれば、本文の先頭に埋め込む（VideoObject つき）"""
+    try:
+        import video_embed
+        return video_embed.prepend(content, meta)
+    except Exception as e:
+        print(f"WARN: 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
+        return content
+
+
 def build_article(path: Path, template: str, related: str = "", unpublished_urls=None, prevnext: str = ""):
     meta, body = parse_article(path)
     cat_name, cat_class = CATEGORIES[meta["category"]]
@@ -555,7 +565,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
-        "{{CONTENT}}": insert_mid_cta(content, meta),
+        "{{CONTENT}}": insert_mid_cta(_video_embed(content, meta), meta),
         "{{RELATED}}": related,
         "{{DIAG_BANNER}}": diag_banner_html(meta),
         "{{PREVNEXT}}": prevnext,
@@ -779,6 +789,8 @@ def build_sitemap(article_entries):
     # 業種ハブ（industry_hub.py が作る）
     for d in sorted((SITE / "industry").glob("*/index.html")):
         lines.append(f"  <url><loc>{SITE_URL}/industry/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
+        if (d.parent / "faq" / "index.html").is_file():      # 業種×よくある質問
+            lines.append(f"  <url><loc>{SITE_URL}/industry/{d.parent.name}/faq/</loc><lastmod>{today}</lastmod></url>")
     if (SITE / "industry" / "index.html").is_file():
         lines.append(f"  <url><loc>{SITE_URL}/industry/</loc><lastmod>{today}</lastmod></url>")
     for meta, url in article_entries:
@@ -930,6 +942,20 @@ def build_industry_hubs(all_metas):
             f'{ind["name"]}の集客', url, metas, str(ind.get("lead") or "")[:300]) + "</head>", 1)
         made.append((ind, metas))
         out.write_text(page, encoding="utf-8", newline="\n")
+        # 業種×よくある質問（/industry/<slug>/faq/）。記事の FAQ を集めるだけで、
+        # 質問形のクエリ（AI Overview 表示率64.7%）に答える面が増える
+        fq = IH.faq_body(ind, metas, lambda m: f"{SITE_URL}/{m['category']}/{m['slug']}/")
+        if fq:
+            import json as _json
+            fhtml, fld = fq
+            fo = SITE / "industry" / ind["slug"] / "faq" / "index.html"
+            fo.parent.mkdir(parents=True, exist_ok=True)
+            fpage = BLOG_PAGE.format(items=fhtml, **shell)
+            fpage = fpage.replace("記事一覧｜" + SITE_NAME, f'{ind["name"]}のよくある質問｜{SITE_NAME}')
+            fpage = fpage.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/faq/')
+            fpage = fpage.replace("</head>", '<script type="application/ld+json">'
+                                  + _json.dumps(fld, ensure_ascii=False) + "</script></head>", 1)
+            fo.write_text(fpage, encoding="utf-8", newline="\n")
     if made:
         out = SITE / "industry" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)

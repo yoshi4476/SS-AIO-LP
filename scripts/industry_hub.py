@@ -87,13 +87,52 @@ def _tiles(metas, post_tile):
     return "\n".join(post_tile(m) for m in metas)
 
 
+def faq_pairs(metas):
+    """業種の記事が持つ FAQ（フロントマター）を、記事つきで平らに並べる"""
+    out = []
+    for m in metas:
+        for f in (m.get("faq") or []):
+            q, a = str(f.get("q", "")).strip(), str(f.get("a", "")).strip()
+            if q and a:
+                out.append((q, a, m))
+    return out
+
+
+def faq_body(ind, metas, url_of, limit=60):
+    """業種×よくある質問のページ。質問形のクエリは AI Overview 表示率が64.7%で、
+    記事を1本も書かずに質問の面を増やせる。答えは各記事の FAQ そのまま
+    （新しい文を機械が作らない）。返すのは (HTML, FAQPage の JSON-LD) か None"""
+    import html as _h
+    pairs = faq_pairs(metas)[:limit]
+    if len(pairs) < 5:
+        return None
+    items = "\n".join(
+        f'<details class="faq-item"><summary>{_h.escape(q)}</summary>'
+        f'<div class="a"><p>{_h.escape(a)}</p>'
+        f'<p class="src"><a href="{url_of(m)}">→ {_h.escape(str(m.get("title", ""))[:48])}</a></p></div></details>'
+        for q, a, m in pairs)
+    html = (f'<div class="latest-block" data-cat="new"><div class="cat-head">'
+            f'<h2>{_h.escape(ind["name"])}のよくある質問</h2><span class="cnt">{len(pairs)}問</span></div>'
+            f'<p class="hub-lead">{_h.escape(ind["name"])}の記事{len(metas)}本から、よくある質問と答えを1か所に集めました。'
+            f'答えは各記事に書いたものと同じです。詳しい根拠は記事本文をご覧ください。</p>'
+            f'<div class="faq-list">{items}</div>'
+            f'<p class="hub-note"><a href="{BASE}{ind["slug"]}/">← {_h.escape(ind["name"])}の記事一覧へ</a></p></div>')
+    ld = {"@context": "https://schema.org", "@type": "FAQPage",
+          "mainEntity": [{"@type": "Question", "name": q,
+                          "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a, _ in pairs]}
+    return html, ld
+
+
 def hub_body(ind, metas, categories, post_tile):
     """業種ハブの中身。手法ごとに区切る（読者は自分に必要な手法から入る）"""
     import html as _h
+    nq = len(faq_pairs(metas))
+    faq_link = (f'<p class="hub-note"><a href="{BASE}{ind["slug"]}/faq/">'
+                f'{_h.escape(ind["name"])}のよくある質問をまとめて見る（{nq}問）</a></p>' if nq >= 5 else "")
     blocks = [f'<div class="latest-block" data-cat="new">'
               f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の記事</h2>'
               f'<span class="cnt">全{len(metas)}本</span></div>'
-              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p></div>']
+              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{faq_link}</div>']
     for cat, (name, cls) in categories.items():
         part = [m for m in metas if m["category"] == cat]
         if not part:

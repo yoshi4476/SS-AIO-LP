@@ -436,6 +436,22 @@ jobs:
           claude -p "$(cat automation/weekly_optimize_prompt.txt)" \
             --dangerously-skip-permissions --max-turns 120
 
+      # 効かなかった直しは戻す（28日・対照群比）。表示ゼロの記事は近い記事へ統合する。
+      # 6か月更新の無い記事は時点表記と dateModified を更新する（数字は年月以外増やさない）
+      - name: 効かなかった直しを戻す・表示ゼロを整理・鮮度を更新
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          [ -n "$GCP_SERVICE_ACCOUNT_JSON" ] && printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          python scripts/rewrite_rollback.py --write 2>&1 | tail -8 || true
+          python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
+          python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
+          rm -f indexing-service-account.json
+
       # 今週公開した記事を短い動画にして YouTube へ上げる。AI検索での可視性と最も強く
       # 相関するのは YouTube での言及（0.71・被リンクの3倍）。台本は記事の1文結論の
       # 抜き出しだけ。鍵（YOUTUBE_TOKEN_JSON）が無ければ作るだけで上げず、要対応に載せる

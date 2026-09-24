@@ -120,6 +120,32 @@ def targets():
         return out
 
 
+FRESH_DAYS = 180
+
+
+def fresh_items(limit=4):
+    """公開（または更新）から180日以上たった公開記事。古い順"""
+    import datetime as _dt
+    old = (_dt.date.today() - _dt.timedelta(days=FRESH_DAYS)).isoformat()
+    rows = []
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
+        if not m:
+            continue
+        fm = m.group(1)
+        sc = re.search(r"^score:\s*(\d+)", fm, re.M)
+        if not sc or int(sc.group(1)) < 90:
+            continue
+        d = re.search(r"^modified:\s*(\d{4}-\d{2}-\d{2})", fm, re.M) or re.search(r"^date:\s*(\d{4}-\d{2}-\d{2})", fm, re.M)
+        if not d or d.group(1) > old:
+            continue
+        rows.append({"kind": "fresh", "slug": p.stem, "site": site_of(p.stem),
+                     "why": f"公開・更新から{FRESH_DAYS}日以上（{d.group(1)}）。時点表記と dateModified を更新する"})
+    rows.sort(key=lambda r: r["why"])
+    return rows[:limit]
+
+
 PROMPT = """articles/{slug}.md を直してください。この1ファイル以外は触らないでください。
 
 直す理由: {why}
@@ -153,6 +179,14 @@ WHAT = {
             "3. 「失敗例・注意点」の見出しに、一次情報から言える具体例を1つ足す\n"
             "4. FAQ の最初の1問を、狙う語そのものの質問にし、回答に一次情報の数字を1つ入れる\n"
             "使ってよい自社の一次情報（**この数字以外の新しい数字は書かない**）:\n{facts}"),
+    "fresh": ("この記事は公開（または最終更新）から6か月以上たっています。AI検索は鮮度を重視します。\n"
+              "1. 「◯年◯月時点」「現在」「最新」など、時点を示す表現をすべて探す\n"
+              "2. その記述が**いまも事実として正しいと本文の根拠から判断できる**箇所だけ、時点を「{ym}時点」に更新する\n"
+              "3. 制度・料金・機能など、変わった可能性があり本文の根拠だけでは確かめられない箇所は、\n"
+              "   数字も文も変えず、その文の直後に「（{ym}時点の再確認中）」とだけ添える\n"
+              "4. 冒頭の鮮度表記が無ければ、冒頭ボックスの近くに「この記事は{ym}時点の情報です」を1文足す\n"
+              "**新しい数字・新しい事実は書かない。** 年月の更新以外で数字を増やしてはいけない。\n"
+              "見出し・狙う語・出典リンクは変えない。"),
     "stuck": ("この記事は検索1ページ目の手前（11〜30位）で止まっています。\n"
               "**実際に検索されている語に、記事が答えていない**のが原因です。\n"
               "下に、その語と順位・表示回数を挙げます。\n"
@@ -390,12 +424,20 @@ def hub_rewrite_log(item, why):
         print(f"     （管制塔への記録をスキップ: {str(e)[:60]}）")
 
 
+LAST = {}      # slug → 直す前後のタイトル・説明文（rewrite_rollback が戻すのに使う）
+
+
+def _desc_of(text):
+    m = re.search(r"^description:\s*(.+)$", text, re.M)
+    return m.group(1).strip().strip('"') if m else ""
+
+
 def note(slug, kind, ok, why):
     LOG.parent.mkdir(parents=True, exist_ok=True)
     with LOG.open("a", encoding="utf-8") as f:
         f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"),
                             "by": "auto_rewrite", "slug": slug, "kind": kind,
-                            "ok": ok, "note": why}, ensure_ascii=False) + "\n")
+                            "ok": ok, "note": why, **LAST.pop(slug, {})}, ensure_ascii=False) + "\n")
 
 
 def run_one(item, write):
@@ -418,6 +460,12 @@ def run_one(item, write):
         _, fs = F.load_for(item.get("site") or site_of(slug))
         allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
         what = what.format(facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind == "fresh":
+        # 年月の更新だけを許す。今日の年・月・日のトークンは「増えた数字」に数えない
+        t = time.localtime()
+        ym = f"{t.tm_year}年{t.tm_mon}月"
+        what = what.format(ym=ym)
+        allowed = f"{t.tm_year} {t.tm_mon} {t.tm_mon:02d} {t.tm_mday:02d} {t.tm_mday}"
     prompt = PROMPT.format(slug=slug, why=item["why"], what=what)
     # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
     # この工程がやるのは1ファイルの書き換えだけで、コマンド実行も外部通信も要らない
@@ -438,8 +486,20 @@ def run_one(item, write):
     if p.read_text(encoding="utf-8-sig") == before[2]:
         return True, "変更なし（直す必要なしと判断）"
 
+    if kind == "fresh":
+        # 鮮度を更新した記事は dateModified も動かす（検算の前に書き、ビルドまで通す）
+        t = p.read_text(encoding="utf-8-sig")
+        today = time.strftime("%Y-%m-%d")
+        t2 = re.sub(r"^modified:.*$", f"modified: {today}", t, count=1, flags=re.M) if re.search(r"^modified:", t, re.M) \
+            else re.sub(r"^(date:.*)$", rf"\1\nmodified: {today}", t, count=1, flags=re.M)
+        if t2 != t:
+            p.write_text(t2, encoding="utf-8", newline="")
+
     ng = check(slug, before, before_warns, snap, allowed,
                item.get("terms") or ())
+    after_text = p.read_text(encoding="utf-8-sig")
+    LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
+                  "after_title": meta(slug)[0], "after_description": _desc_of(after_text)}
     if ng:
         sh(["git", "checkout", "--", f"articles/{slug}.md"])
         sh([sys.executable, "scripts/build.py"], timeout=1800)
@@ -534,13 +594,17 @@ def main():
                     help="この分数を超えたら、次の記事に着手しない（0=無制限）")
     ap.add_argument("--selftest", action="store_true",
                     help="検算が効くかを本番の記事で確かめる（claudeは呼ばない）")
+    ap.add_argument("--kind", default="", help="種別を絞る（fresh は鮮度更新だけを回す）")
     a = ap.parse_args()
 
     if a.selftest:
         print("■ 検算の自己診断（やってはいけない書き換えを当てて、止まるか見る）\n")
         return selftest()
 
-    items = targets()
+    if a.kind == "fresh":
+        items = fresh_items(max(a.limit, 4))
+    else:
+        items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     print(f"■ 人の判断に回っていた直し: {len(items)}件"
           + (f"（1回に{a.limit}本まで）\n" if a.write else "\n"))
     if not items:

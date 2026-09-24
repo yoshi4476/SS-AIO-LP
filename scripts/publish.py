@@ -344,6 +344,12 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # FAQはテンプレート側が専用セクションを持つので、本文からは先に取り除く
     # （目次を作る前に消さないと、存在しない見出しへのリンクが目次に残る）
     html = re.sub(r"<h2[^>]*>\s*よくある質問\s*</h2>.*?(?=<h2|$)", "", html, flags=re.S)
+    # YouTube に上がった記事動画があれば先頭に埋め込む（build.py と同じ関数）
+    try:
+        import video_embed
+        html = video_embed.prepend(html, meta)
+    except Exception as e:
+        print(f"  [警告] 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
 
     # 目次のアンカーを相手の書式（#sec1, #sec2 …）に合わせる
     heads = [re.sub(r"<[^>]+>", "", h).strip()
