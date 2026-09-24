@@ -6,7 +6,10 @@ on:
   workflow_run:
     # 名前は各ワークフローの name: と1文字も違ってはいけない。
     # 違うと待ち受けが成立せず、落ちても何も起きない
-    workflows: ["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize"]
+    # 月次レポート・週報・デプロイも見張る。以前はここに無く、月次レポートが
+    # 落ちても誰にも知らされず、翌月まで気づかなかった
+    workflows: ["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize",
+                "Monthly Consulting Report", "Weekly Newsletter Digest", "Deploy to Cloudflare Pages"]
     types: [completed]
   schedule:
     - cron: "0 15 * * *"   # JST 00:00 — 1日の最後に検査だけはかける
@@ -137,6 +140,34 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           }
+
+      # 月次レポートが落ちた回は、直したあとで発行し直す。翌月まで届かないのを防ぐ。
+      # 照合（report_audit）が通らなければ送らないのは通常発行と同じ
+      - name: 落ちたのが月次レポートなら発行し直す
+        if: >-
+          github.event_name == 'workflow_run' &&
+          github.event.workflow_run.name == 'Monthly Consulting Report' &&
+          steps.verify.outputs.ok == '1'
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          GA4_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          if [ -z "$GCP_SERVICE_ACCOUNT_JSON" ] || [ -z "$GA4_ID" ]; then echo "実データ未設定のため発行しない"; exit 0; fi
+          pip install --quiet playwright google-analytics-data google-api-python-client google-auth pymupdf
+          python -m playwright install --with-deps chromium
+          printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          { echo "GA4_PROPERTY_ID=$GA4_ID"; echo "GSC_SITE_URL=https://ai.7senses.co.jp/"
+            echo "RESEND_API_KEY=$RESEND_API_KEY"; echo "LEAD_FROM_EMAIL=$LEAD_FROM_EMAIL"
+            echo "LEAD_TO_EMAIL=info.ai@7senses.co.jp"; } > .env
+          for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
+            python scripts/monthly_report.py --site "$s" --email || echo "  $s は生成できませんでした"
+          done
+          python scripts/group_report.py --email || true
+          rm -f indexing-service-account.json .env
 
       - name: 結果の通知
         if: always()

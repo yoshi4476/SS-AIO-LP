@@ -2829,11 +2829,12 @@ def test_score_is_audited_and_cta_is_enforced():
             FAIL.append("score_audited")
             return
     # 足切りが効くこと。合計だけで壊滅軸を隠さない
-    if R.judge({a["key"]: 10 for a in R.AXES})["ok"] is not True:
+    # 満点は R.MAX（資料 v2 で各軸100点になった。10で固定すると基準を変えた瞬間に落ちる）
+    if R.judge({a["key"]: R.MAX for a in R.AXES})["ok"] is not True:
         print("  NG  満点が合格になりません")
         FAIL.append("score_audited")
         return
-    low = {a["key"]: 10 for a in R.AXES}
+    low = {a["key"]: R.MAX for a in R.AXES}
     low[R.AXES[0]["key"]] = R.PASS_EACH - 1
     if R.judge(low)["ok"] is not False:
         print("  NG  1軸が下限を割っても合格にしています（足切りが効いていません）")
@@ -2938,6 +2939,39 @@ def test_no_control_characters_anywhere():
     print(f"  OK  制御文字なし（スクリプト・生成HTMLとも）／壊れた画像を検出できる")
 
 
+def test_report_actions_close_the_loop():
+    """レポートの改善点は、機械が当てて・見直して・残りだけ人へ届く形になっているか。
+
+    レポートは「改善プラン」を毎月書いていたが、実行するのは人だった。
+    月初のCIに人はいないので、レポートの直後に report_actions が動く。
+    当てる道具が消えていたり、通知文から人の項目が落ちていたりすれば、
+    改善は「書いただけ」に戻る。
+    """
+    import report_actions as RA
+    for kind, cmds in RA.RUNNERS.items():
+        for c in cmds:
+            check(f"report_actions: {kind} の道具 scripts/{c[0]} がある",
+                  (ROOT / "scripts" / c[0]).is_file(), True)
+    for k in ("measure", "lp", "hub_external"):
+        check(f"report_actions: 人の種別 {k} に説明がある", bool(RA.HUMAN.get(k)), True)
+    txt = RA.body([{"site": "s", "finding": "f", "action": "a"}], [], "", 1)
+    check("report_actions: 通知文に人の項目が出る", "人の手が要る" in txt and "f → a" in txt, True)
+    txt = RA.body([], [], "build.py", 1)
+    check("report_actions: 検算に落ちた回は通知文で目立つ", "検算" in txt and "捨てました" in txt, True)
+    yml = (ROOT / ".github" / "workflows" / "monthly-report.yml").read_text(encoding="utf-8")
+    check("月次CIがレポートの直後に改善を当てる", "report_actions.py --apply" in yml, True)
+
+    import ai_kw_research as AK
+    check("ai_kw_research: 質問形を見分ける", bool(AK.Q_PAT.search("aio対策 とは")), True)
+    check("ai_kw_research: 質問形でない語は点が低い",
+          AK.score("aio 導入 とは 費用", 100, 15, None) > AK.score("aio 導入", 100, 15, None), True)
+    check("ai_kw_research: AIが答えを出して自社が無い語が最上位",
+          AK.score("aio とは", 10, 15, {"answered": True, "ours": False})
+          > AK.score("aio とは", 10, 15, {"answered": True, "ours": True}), True)
+    wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次CIがAI検索の語を調べる", "ai_kw_research.py" in wk, True)
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -3007,7 +3041,8 @@ def main():
               test_structure_is_proposed_monthly,
               test_rules_are_validated_against_outcomes,
               test_score_is_audited_and_cta_is_enforced,
-              test_no_control_characters_anywhere):
+              test_no_control_characters_anywhere,
+              test_report_actions_close_the_loop):
         try:
             t()
         except Exception as e:

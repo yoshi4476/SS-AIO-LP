@@ -8,3 +8,7 @@ openpyxl
 # レポートのPDF化（weekly_report / monthly_report / group_report / sales_deck が関数内で使う）。
 # ブラウザ本体は必要なワークフローだけが `playwright install chromium` で入れる
 playwright
+# レポートの照合（report_audit）と提案書の画像化（proposal_images）がPDFを読むのに使う
+pymupdf
+# 営業動画のナレーション（video_make）。CIでは使わないが、import の宣言漏れ検査を通す
+edge-tts

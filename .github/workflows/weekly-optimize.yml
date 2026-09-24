@@ -86,6 +86,9 @@ jobs:
           # 未設定なら無料のサジェストだけで動く（キー待ちで止めない）。
           # ここへ渡し忘れると、手元では効いているのにCIだけ効かない
           RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           if [ -n "$SA_JSON" ]; then
             printf '%s' "$SA_JSON" > indexing-service-account.json
@@ -110,6 +113,9 @@ jobs:
               echo "要対応: ラッコキーワードのクレジットが尽きました（候補の質が落ちます）" >> automation/logs/findings.txt
             fi
           done
+          # AI検索で答えが出る語（質問形）を、GSCの実績とサジェストから毎週さがして台帳へ積む。
+          # 検索つきのAI（Gemini）へは1サイト8語まで聞く。キーが無ければ候補の抽出だけ行う
+          python scripts/ai_kw_research.py --all --probe 8 --append 2>&1 | tail -12 || true
           rm -f indexing-service-account.json
           python scripts/kw_status.py
 
