@@ -178,3 +178,4 @@
 - [経理BPO導入前後の月次決算の所要日数](https://ai.7senses.co.jp/data/keiri-bpo-getsuji-nissuu/): 経理BPOを導入した企業について、月次決算が締まるまでの日数を導入前後で比べました。
 - [AIO運用を始めてから検索順位が上がるまでの月数](https://ai.7senses.co.jp/data/aio-junni-madeno-tsukisuu/): AIO運用を開始した企業について、主要クエリの平均順位が運用開始時より上がった月を集計しました。
 - [AIOチェッカーとは？表示と引用を見分ける使い方](https://ai.7senses.co.jp/aio/aio-checker/): AI Overviewの表示と自社の引用を分けて確かめる方法と、結果別の次の一手
+- [AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](https://ai.7senses.co.jp/aio/aio-towa/): AIOの意味、AI Overviewが表示される検索の実測、Googleが公式に否定した5つの通説と効く3条件、成果の測り方を整理

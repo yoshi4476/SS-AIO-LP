@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-09-23T00:00:00+09:00</updated>
+  <updated>2026-09-24T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-towa/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-towa/</id>
+    <updated>2026-09-24T00:00:00+09:00</updated>
+    <summary>AIOとは、GoogleのAI Overview・AIモードで自社ページが引用される状態をつくる施策です。表示される検索の実測、Googleが公式に否定した5つの通説、効くと明記された3条件、成果の測り方を整理します。</summary>
+  </entry>
   <entry>
     <title>AIOチェッカーとは？表示と引用を見分ける使い方</title>
     <link href="https://ai.7senses.co.jp/aio/aio-checker/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-seo-audit/</id>
     <updated>2026-09-15T00:00:00+09:00</updated>
     <summary>AIO SEO監査とは、通常のSEO監査にAI検索対策の視点を足して点検する作業です。追加すべき7項目と社内で完結する4つの手順、優先順位のつけ方まで解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO SEO対策とは？両方に効く6つの施策と進める順番</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-seo-taisaku/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-seo-taisaku/</id>
-    <updated>2026-09-15T00:00:00+09:00</updated>
-    <summary>AIO SEO対策とは、AI検索への引用と自然検索の上位表示を同時に狙う施策です。両方に効く6つの具体策と、実行する4ステップの順番、やってはいけないNG例まで実務から解説します。</summary>
   </entry>
 </feed>

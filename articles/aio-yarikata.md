@@ -122,6 +122,8 @@ FAQは読者が実際に検索しそうな疑問を5問以上そろえ、回答�
 
 **AIOのやり方でよくある失敗は、図解だけに重要情報を入れ、本文には書かないことです。**AIは画像を引用できないため、図解の内容は必ず本文のテキストにも残す必要があります。一番多い原因は、技術設定か文章のどちらか一方だけの対応。
 
+手順に入る前に、[AIOとは何かとAI Overviewの仕組み](/aio/aio-towa/)を押さえておくと迷いません。
+
 <figure><img src="/images/aio-yarikata/ng-ok.png" alt="AIOのやり方でよくある失敗と正しい進め方の比較" width="1200" height="500" loading="lazy"><figcaption>AIOのやり方のNG例とOK例（当メディア作成）</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 一度整えて放置しない</span><br>クローラー許可の設定は、担当者交代やサイト移行のタイミングで意図せず外れることがあります。月1回の再確認を前提にしてください。</div>
