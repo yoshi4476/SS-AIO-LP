@@ -3008,7 +3008,8 @@ def test_report_actions_close_the_loop():
           all(s in wk for s in ("rewrite_rollback.py --write", "retire_stale.py --write", "--kind fresh")), True)
     check("月次CIが15日に途中経過を出す", '"0 0 15 * *"' in yml and "steps.day.outputs.through" in yml, True)
     gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
-    check("自動返信に資料の案内が入る", "videos/aio-pr.mp4" in gs and "body + materials + foot" in gs, True)
+    check("自動返信に資料の案内が入る", "videos/aio-pr.mp4" in gs and "materials + foot" in gs, True)
+    check("温度別フォローと診断レコメンドがある", "function followUp()" in gs and "reco.json" in gs, True)
 
     # 実測系: 検出器は「見つかるはずの例」で試す（0.1節）
     import brand_spelling as BS
@@ -3028,6 +3029,24 @@ def test_report_actions_close_the_loop():
           all(s in wk for s in ("cwv_check.py", "brand_spelling.py --fix", "index_status.py", "ai_cite_check.py --limit 5", "--kind question")), True)
     sh_ = (ROOT / ".github" / "workflows" / "selfheal.yml").read_text(encoding="utf-8")
     check("日次CIが証明書・404・トークンを見る", "cert_check.py" in sh_ and "token_check.py" in sh_, True)
+
+    # 引用の面: 用語集・比較表・勝ちパターン・字幕は「記事にあるもの」だけから作る
+    import glossary as GL
+    import compare_pages as CP
+    import win_patterns as WP
+    import video_make as VM
+    box = '<div class="definition-box"><span class="term">AIOとは</span>、AI Overview に引用されるための最適化で、二十文字以上の説明です。</div>'
+    check("glossary: 定義ブロックから用語を取る", GL.BOX.search(box) is not None, True)
+    check("glossary: 用語集へリンクする", "/glossary/" in GL.link_terms(box, {"AIO": {"id": "x", "slug": "other"}}), True)
+    tbl = "## 料金の比較\n| 種類 | 費用 | 期間 |\n|:--|:--|:--|\n| A | 1 | 2 |\n| B | 3 | 4 |\n"
+    check("compare_pages: 3列以上の比較表を拾う", len(CP._tables(tbl)), 1)
+    check("win_patterns: 引用実績が無ければ渡さない", (ROOT / "data" / "win_patterns" / "ai-lab.md").is_file(), True)
+    check("video_make: 字幕とチャプターを書く関数がある", callable(getattr(VM, "_write_srt_and_chapters", None)), True)
+    prompt = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
+    check("執筆の指示が勝ちパターンを読む", "win_patterns.py --brief" in prompt, True)
+    check("週次CIが勝ちパターンを更新する", "win_patterns.py" in wk, True)
+    sj = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
+    check("フォームの開始と離脱を計測する", "form_start" in sj and "form_abandon" in sj, True)
 
 
 def main():

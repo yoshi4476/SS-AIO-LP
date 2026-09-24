@@ -217,6 +217,26 @@ def insert_ok(before, after):
     return ""
 
 
+_P1 = {}
+
+
+def _page1(site):
+    """検索1ページ目（10位以内）にいる記事の slug。取れなければ空（順序は従来どおり）"""
+    if site in _P1:
+        return _P1[site]
+    out = set()
+    try:
+        import rank_up
+        import sites as S
+        for url, v in rank_up.fetch(S.load(site)["domain"]).items():
+            if (v.get("pos") or 99) <= 10:
+                out.add(url.rstrip("/").split("/")[-1])
+    except Exception:
+        pass
+    _P1[site] = out
+    return out
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -260,8 +280,10 @@ def main():
             # 被リンクが下限に届かないまま止まる（実測23本）
             if tgt_ind and tgt_ind & industry_of(b["title"] + b["kw"], site):
                 cands.append((1, cnt[src], src))
-        # 話題が近く、かつ自身の被リンクが多い記事から送る（力のある記事から送る）
-        cands.sort(key=lambda x: (-x[0], -x[1]))
+        # 話題が近く、**検索1ページ目にいる記事**から先に送る（評価は上から流れる）。
+        # 同じ近さなら自身の被リンクが多い記事を優先する
+        p1 = _page1(site)
+        cands.sort(key=lambda x: (-x[0], -(x[2] in p1), -x[1]))
         added = 0
         cap = RESCUE_ADD if rescue else ADD_PER
         for hit, _, src in cands:

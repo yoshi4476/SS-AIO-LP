@@ -281,7 +281,27 @@
 
   // form_submit（種別付き）+ lead_capture + lead_〈経路〉 + 送信中フィードバック
   document.querySelectorAll('form.form-panel').forEach(function (f) {
+    // 「開いたのに送らなかった」を項目つきで数える。開いた7人中1人しか送らない原因を
+    // 分けるため。form_start = 最初の入力、form_abandon = 送らずに離れた（最後に触った項目つき）
+    var started = false, lastField = '', submitted = false;
+    f.addEventListener('focusin', function (e) {
+      var el = e.target;
+      if (!el || !el.name || el.type === 'hidden') return;
+      lastField = el.name;
+      if (!started) {
+        started = true;
+        var t = f.querySelector('[name="form_type"]');
+        ga('form_start', { form_type: t ? t.value : 'form', page_path: location.pathname });
+      }
+    });
+    window.addEventListener('pagehide', function () {
+      if (started && !submitted) {
+        var t = f.querySelector('[name="form_type"]');
+        ga('form_abandon', { form_type: t ? t.value : 'form', last_field: lastField, page_path: location.pathname });
+      }
+    });
     f.addEventListener('submit', function () {
+      submitted = true;
       var typeEl = f.querySelector('[name="form_type"]');
       var type = typeEl ? typeEl.value : 'form';
       var route = type.indexOf('資料') >= 0 ? 'dl' : 'form';

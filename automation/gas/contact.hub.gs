@@ -264,8 +264,77 @@ function leadReply_(site, type, d) {
     '  https://ai.7senses.co.jp/videos/doc-guide.mp4',
     '・サービス案内と無料診断',
     '  https://ai.7senses.co.jp/lp/', ''].join('\n');
-  MailApp.sendEmail({ to: email, subject: subject, body: body + materials + foot,
+  // 診断は「弱かった項目にまず効く記事」を3本添える。対応表はサイトのビルドが
+  // /data/reco.json に出す（記事が増えれば自動で新しくなる）。取れなければ何も足さない
+  let reco = '';
+  if (type === 'diagnosis' && d.diagnosis) {
+    try {
+      const map = JSON.parse(UrlFetchApp.fetch('https://ai.7senses.co.jp/data/reco.json',
+                                               { muteHttpExceptions: true }).getContentText());
+      const rows = map[String(d.diagnosis.kind || '')] || [];
+      if (rows.length) {
+        reco = ['', '▼ 結果を踏まえて、まず読んでいただきたい記事']
+          .concat(rows.slice(0, 3).map(function (r) { return '・' + r.title + '\n  ' + r.url; }))
+          .concat(['']).join('\n');
+      }
+    } catch (e) {}
+  }
+  MailApp.sendEmail({ to: email, subject: subject, body: body + reco + materials + foot,
                       name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
+}
+
+/**
+ * リード温度別の自動フォロー（時間トリガーで毎日）。
+ * HOT は翌日、WARM は3日後に1通だけ。COOL は送らない。対応状況が「未対応」のままの行だけ。
+ * 送ったら15列目（フォロー）に日付を書き、二度は送らない。内容は公開済みの資料だけ。
+ * 有効化: installFollowUpTrigger を1回実行する（毎日 09:00 に followUp が動く）
+ */
+const FOLLOW_COL = 15;
+const FOLLOW_AFTER_DAYS = { HOT: 1, WARM: 3 };
+
+function followUp() {
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  if (last < 2) return;
+  const vals = sh.getRange(2, 1, last - 1, FOLLOW_COL).getValues();
+  const now = new Date();
+  let sent = 0;
+  for (let i = 0; i < vals.length; i++) {
+    const r = vals[i];
+    const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+    const temp = String(r[12] || '').toUpperCase();
+    const status = String(r[13] || '');
+    const done = String(r[FOLLOW_COL - 1] || '');
+    const email = String(r[6] || '');
+    const wait = FOLLOW_AFTER_DAYS[temp];
+    if (!wait || done || status !== '未対応' || !isEmail_(email)) continue;
+    if ((now - at) / 86400000 < wait || (now - at) / 86400000 > wait + 7) continue;
+    const name = String(r[4] || '') || 'ご担当者';
+    const body = [name + ' 様', '',
+      '先日はお問い合わせいただきありがとうございます。担当からのご連絡が行き違いになっていましたら申し訳ありません。', '',
+      'ご都合の良い曜日・時間帯をこのメールにご返信いただければ、担当が合わせてご連絡します。', '',
+      '▼ お待ちいただく間にご覧いただける資料',
+      '・なぜ今AI検索対策なのか（PR動画・約21分）', '  https://ai.7senses.co.jp/videos/aio-pr.mp4',
+      '・運用の実態（システムの画面そのまま・約14分）', '  https://ai.7senses.co.jp/videos/console-demo.mp4',
+      '・サービス案内と無料診断', '  https://ai.7senses.co.jp/lp/', '',
+      '─────────────', 'セブンセンシズ株式会社', 'TEL 06-4305-7547 / info.ai@7senses.co.jp', ''].join('\n');
+    try {
+      MailApp.sendEmail({ to: email, subject: 'ご相談内容の確認とご案内（セブンセンシズ株式会社）',
+                          body: body, name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
+      sh.getRange(i + 2, FOLLOW_COL).setValue(Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy-MM-dd') + ' ' + temp);
+      sent++;
+    } catch (e) {
+      console.error('フォロー送信に失敗: ' + e);
+    }
+  }
+  console.log('フォロー送信: ' + sent + '件');
+}
+
+function installFollowUpTrigger() {
+  const has = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'followUp'; });
+  if (has) { console.log('followUp のトリガーは既にあります'); return; }
+  ScriptApp.newTrigger('followUp').timeBased().everyDays(1).atHour(9).create();
+  console.log('followUp を毎日 09:00 に動かすトリガーを作りました');
 }
 
 /**

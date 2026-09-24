@@ -267,6 +267,30 @@ def duration(path):
     return float(json.loads(r.stdout)["format"]["duration"])
 
 
+def _fmt_srt(t):
+    h, rem = divmod(int(t), 3600)
+    m, s = divmod(rem, 60)
+    return f"{h:02d}:{m:02d}:{s:02d},{int(round((t - int(t)) * 1000)):03d}"
+
+
+def _write_srt_and_chapters(script, durs, out_mp4):
+    """<動画>.srt（区間ごとの読み上げ文）と <動画>.chapters.txt（見出しが変わる時刻）"""
+    segs = script.get("segments") or []
+    t, srt, chapters, last_head = 0.0, [], [], None
+    for i, (s, d) in enumerate(zip(segs, durs)):
+        srt.append(f"{i + 1}\n{_fmt_srt(t)} --> {_fmt_srt(t + max(d - 0.4, 0.5))}\n{s.get('say', '')}\n")
+        head = s.get("head") or ""
+        if head and head != last_head:
+            m, sec = divmod(int(t), 60)
+            chapters.append(f"{m}:{sec:02d} {head[:40]}")
+            last_head = head
+        t += d
+    out_mp4.with_suffix(".srt").write_text("\n".join(srt), encoding="utf-8")
+    if chapters and not chapters[0].startswith("0:00"):
+        chapters.insert(0, "0:00 はじめに")
+    out_mp4.with_suffix(".chapters.txt").write_text("\n".join(chapters) + "\n", encoding="utf-8")
+
+
 def build(script, out_mp4, quiet=False):
     segs = script["segments"]
     total = len(segs)
@@ -333,6 +357,13 @@ def build(script, out_mp4, quiet=False):
                         "-movflags", "+faststart",
                         "-c:a", "aac", "-b:a", "128k", "-shortest",
                         str(out_mp4)], check=True)
+
+    # 字幕（SRT）とチャプター。動画の言及価値は説明欄と字幕で検索される。
+    # 台本の区間と実測の秒数から作るので、本文に無い言葉は入らない
+    try:
+        _write_srt_and_chapters(script, durs, out_mp4)
+    except Exception as e:
+        print(f"   [警告] 字幕・チャプターを書けませんでした（{str(e)[:60]}）")
 
     if not playable(out_mp4):
         raise SystemExit(f"索引が末尾にあります（途中で止まります）: {out_mp4}")

@@ -31,7 +31,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 CLIENT = ROOT / "youtube-client.json"
 TOKEN = ROOT / "youtube-token.json"
-SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+# upload だけだと字幕（captions.insert）が上げられない。force-ssl は upload を包含する。
+# 既に youtube-token.json がある場合は、次の --auth で作り直すまで字幕は飛ばす
+SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 CATEGORY_HOWTO = "27"        # 「教育」。解説動画はここに入れる
 
 
@@ -95,6 +97,10 @@ def upload(mp4, slug, public=False, quiet=False):
     desc, title, tags = describe(slug)
     # タイトルは100字まで。超えると API が弾く
     title = (title or slug)[:100]
+    # チャプター（video_make が <動画>.chapters.txt に書く）。説明欄の時刻がそのまま章になる
+    ch = Path(mp4).with_suffix(".chapters.txt")
+    if ch.is_file() and ch.read_text(encoding="utf-8").strip():
+        desc = desc.rstrip() + "\n\n▼ チャプター\n" + ch.read_text(encoding="utf-8").strip() + "\n"
     body = {"snippet": {"title": title, "description": desc[:4900],
                         "tags": tags[:10], "categoryId": CATEGORY_HOWTO,
                         "defaultLanguage": "ja", "defaultAudioLanguage": "ja"},
@@ -105,6 +111,16 @@ def upload(mp4, slug, public=False, quiet=False):
     req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
     res = req.execute()
     vid = res["id"]
+    # 字幕（video_make が <動画>.srt に書く）。検索される文字になる。
+    # 鍵の権限が upload だけの古い token では 403 になるので、落とさず知らせるだけ
+    srt = Path(mp4).with_suffix(".srt")
+    if srt.is_file():
+        try:
+            yt.captions().insert(part="snippet", body={"snippet": {"videoId": vid, "language": "ja",
+                                                                     "name": "日本語", "isDraft": False}},
+                                 media_body=MediaFileUpload(str(srt), mimetype="application/octet-stream")).execute()
+        except Exception as e:
+            print(f"  [注意] 字幕を上げられませんでした（{str(e)[:70]}）。--auth をやり直すと権限が付きます")
     if not quiet:
         print(f"  上げました: https://www.youtube.com/watch?v={vid}")
         print(f"  公開設定: {'全体公開' if public else '限定公開（確認してから公開に変えてください）'}")

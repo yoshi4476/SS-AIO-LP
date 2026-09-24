@@ -1339,6 +1339,13 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `actions_budget` → 間引き（週次） | 残枠が75%を超えたら動画・書き換えの本数を半分にする | 枠切れは「何も起きない」形で現れる |
 | `industry_hub.hub_body` | ハブ冒頭に「直近30日の新着◯本・主な質問3つ」を毎ビルドで自動反映 | 人が書き足さない |
 | `social_post`（note 用） | 転載用の長文（1文結論の列＋元記事URL＋社名）をキューに積む | 投稿は人（APIも課金も使わない） |
+| `glossary.py`（build が呼ぶ） | 記事の定義ブロックを `/glossary/<id>/` に集め DefinedTerm を出す。記事の定義ブロックは用語集へリンクする | 10語未満なら作らない。定義は記事のまま |
+| `compare_pages.py`（build が呼ぶ） | 比較・料金・違いの表（3列以上）を `/compare/<カテゴリ>/` に集め ItemList を出す | 3表未満のカテゴリは作らない。表は記事のまま |
+| `win_patterns.py`（週次） | AI検索に引用が取れた記事の型（冒頭・見出し・表/FAQ数）を `data/win_patterns/<site>.md` に書き、執筆の指示（5b）が読む | 引用実績が無ければ空（無いものを型にしない） |
+| `link_boost`（向き） | 送り元は検索1ページ目の記事を先にする（評価は上から流れる） | 順位が取れなければ従来どおり |
+| `video_make` → `youtube_upload` | 字幕（.srt）とチャプター（説明欄）を台本と実測の秒数から作って上げる | 鍵の権限は `youtube.force-ssl`（既存の鍵は `--auth` をやり直す） |
+| `contact.hub.gs` `followUp` | HOT は翌日・WARM は3日後に1通だけ自動フォロー（未対応のままの行だけ・15列目に記録） | 有効化は `installFollowUpTrigger` を1回。診断は `/data/reco.json` から記事3本を添える |
+| `site.js` | `form_start` / `form_abandon`（最後に触った項目つき）を計測 | 開いたのに送らない原因を項目で分ける（翌月から数字が出る） |
 
 ---
 

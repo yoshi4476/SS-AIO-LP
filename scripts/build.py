@@ -427,9 +427,28 @@ def _video_embed(content, meta):
     """YouTube に上がった記事動画があれば、本文の先頭に埋め込む（VideoObject つき）"""
     try:
         import video_embed
-        return video_embed.prepend(content, meta)
+        content = video_embed.prepend(content, meta)
     except Exception as e:
         print(f"WARN: 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
+    return _glossary_links(content, meta)
+
+
+_TERMS = None
+
+
+def _glossary_links(content, meta):
+    """定義ブロックの用語を用語集（/glossary/）へリンクする。内部リンクが機械で増える"""
+    global _TERMS
+    try:
+        import glossary as GL
+        import sites as S
+        if _TERMS is None:
+            _TERMS = {r["term"]: r for r in GL.collect(S.primary())}
+        if len(_TERMS) < 10:
+            return content
+        return GL.link_terms(content, _TERMS, self_slug=meta.get("slug", ""))
+    except Exception as e:
+        print(f"WARN: 用語集リンクを飛ばしました（{str(e)[:40]}）")
         return content
 
 
@@ -793,6 +812,12 @@ def build_sitemap(article_entries):
             lines.append(f"  <url><loc>{SITE_URL}/industry/{d.parent.name}/faq/</loc><lastmod>{today}</lastmod></url>")
     if (SITE / "industry" / "index.html").is_file():
         lines.append(f"  <url><loc>{SITE_URL}/industry/</loc><lastmod>{today}</lastmod></url>")
+    # 用語集・比較表（build_extra_pages が作る）
+    for top in ("glossary", "compare"):
+        if (SITE / top / "index.html").is_file():
+            lines.append(f"  <url><loc>{SITE_URL}/{top}/</loc><lastmod>{today}</lastmod></url>")
+        for d in sorted((SITE / top).glob("*/index.html")):
+            lines.append(f"  <url><loc>{SITE_URL}/{top}/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
     for meta, url in article_entries:
         lines.append(f"  <url><loc>{url}</loc><lastmod>{meta['modified']}</lastmod></url>")
     lines.append("</urlset>")
@@ -985,6 +1010,76 @@ def build_industry_hubs(all_metas):
     return made
 
 
+def build_extra_pages(all_metas):
+    """用語集（/glossary/）・比較表（/compare/）・診断レコメンド（/data/reco.json）。
+
+    どれも記事にあるものを集めるだけで、新しい文は作らない。記事が増えるほど厚くなる。
+    """
+    import json as _json
+    try:
+        import glossary as GL
+        import compare_pages as CP
+        import sites as S
+    except Exception as e:
+        print(f"WARN: 用語集・比較表を作れません（{str(e)[:50]}）")
+        return
+    sid = S.primary()
+    shell = dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
+                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT), **_cta())
+
+    def page(path, items, title, url, desc=""):
+        out = SITE / path / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        p = BLOG_PAGE.format(items=items, **shell)
+        p = p.replace("記事一覧｜" + SITE_NAME, f"{title}｜{SITE_NAME}").replace(f"{SITE_URL}/blog/", url)
+        out.write_text(p, encoding="utf-8", newline="\n")
+
+    # 用語集
+    terms = GL.collect(sid)
+    if len(terms) >= 10:
+        for r in terms:
+            page(f"glossary/{r['id']}", GL.term_html(r, f"{SITE_URL}/{r['category']}/{r['slug']}/"),
+                 f"{r['term']}とは", f"{SITE_URL}/glossary/{r['id']}/")
+        page("glossary", GL.index_html(terms), "用語集", f"{SITE_URL}/glossary/")
+        print(f"用語集: {len(terms)}語")
+    # 比較表
+    cats = CP.collect(sid)
+    made = []
+    for cat, rows in cats.items():
+        if len(rows) < 3 or cat not in CATEGORIES:
+            continue
+        name = CATEGORIES[cat][0]
+        page(f"compare/{cat}", CP.page_html(name, rows, lambda r, c=cat: f"{SITE_URL}/{c}/{r['slug']}/"),
+             f"{name}の比較表", f"{SITE_URL}/compare/{cat}/")
+        made.append((cat, name, len(rows)))
+    if made:
+        page("compare", CP.index_html(made), "比較表から探す", f"{SITE_URL}/compare/")
+        print(f"比較表: {', '.join(f'{n}{c}表' for _, n, c in made)}")
+    # 入口が孤立しないように、業種の入口（/industry/・ナビから届く）から用語集と比較表へリンクする
+    idx = SITE / "industry" / "index.html"
+    if idx.is_file():
+        links = "".join(f'<li><a href="/{top}/"><strong>{name}</strong><span class="cnt">{n}</span></a></li>'
+                        for top, name, n in (("glossary", "用語集", f"{len(terms)}語" if len(terms) >= 10 else ""),
+                                             ("compare", "比較表から探す", f"{len(made)}カテゴリ" if made else ""))
+                        if n)
+        if links:
+            t = idx.read_text(encoding="utf-8")
+            block = ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>ほかの探し方</h2></div>'
+                     f'<ul class="hub-list">{links}</ul></div>')
+            if "ほかの探し方" not in t and '<footer class="site-footer">' in t:
+                t = t.replace('<footer class="site-footer">', f'<section class="wrap">{block}</section>\n<footer class="site-footer">', 1)
+                idx.write_text(t, encoding="utf-8", newline="\n")
+    # 診断の自動返信が読む「弱い項目 → まず読む記事」（管制塔の GAS が UrlFetch で取る）
+    reco = {}
+    for kind, cat in (("meo", "meo"), ("ai", "ai-marketing"), ("aio", "aio"), ("seo", "seo")):
+        ms = sorted([m for m in all_metas if m.get("category") == cat],
+                    key=lambda m: str(m.get("date", "")), reverse=True)[:3]
+        reco[kind] = [{"title": m["title"], "url": f"{SITE_URL}/{cat}/{m['slug']}/"} for m in ms]
+    reco["hojokin"] = [{"title": "AI導入補助金の記事一覧", "url": "https://lp.7senses.co.jp/blog/"}]
+    (SITE / "data").mkdir(exist_ok=True)
+    (SITE / "data" / "reco.json").write_text(_json.dumps(reco, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
+
+
 def build_blog_index(all_metas):
     """記事一覧をカテゴリごとに区切って出す。
 
@@ -1154,6 +1249,7 @@ def main():
         entries = render_all(all_metas, late_blocked)
     build_blog_index(all_metas)
     build_industry_hubs(all_metas)
+    build_extra_pages(all_metas)
     build_sitemap(entries)
     build_feed(entries)
     sync_listings(all_metas)
