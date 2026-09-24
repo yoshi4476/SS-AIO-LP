@@ -140,6 +140,24 @@ def ensure_clone(cfg, token):
     return dest
 
 
+def ensure_images(meta):
+    """フロントマターが指す画像が手元に無ければ、その場で作る（Pillow・外部APIなし）。
+
+    実測で、eyecatch を指しているのに site/images/<slug>/ が空の記事が11本あり、
+    配信先の一覧で画像が 404 になっていた。配信の直前に必ず実体を揃える。
+    """
+    slug = meta.get("slug", "")
+    img_src = ROOT / "site" / "images" / slug
+    if not meta.get("eyecatch") or (img_src / "eyecatch.png").is_file():
+        return
+    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "make_images.py"), slug],
+                       cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if (img_src / "eyecatch.png").is_file():
+        print(f"  画像が無かったので作りました: site/images/{slug}/")
+    else:
+        print(f"  [警告] 画像を作れませんでした（{(r.stderr or r.stdout)[-80:].strip()}）。配信先で 404 になります")
+
+
 def image_prefix(cfg):
     """配信先での画像の公開パス。images_dir から公開URLを導く。
 
@@ -188,6 +206,7 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     # 画像を先に複製する（本文が /images/... を参照するため）。JSONはその後に書く。
     # アイキャッチはWebP（PNGの1/3）も作り、表示はそちらを使う。OG画像はPNGのまま
     img_written = []
+    ensure_images(meta)
     img_src = ROOT / "site" / "images" / meta["slug"]
     if cfg.get("images_dir") and img_src.exists():
         img_dest = dest / cfg["images_dir"] / meta["slug"]
@@ -463,6 +482,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # 本文は /images/<slug>/… を参照しているのに複製していなかったため、
     # 配信済みの記事で図解が全て404になっていた（サムネイルだけが届いていた）。
     img_src = ROOT / "site" / "images" / meta["slug"]
+    ensure_images(meta)
     if cfg.get("images_dir") and img_src.is_dir():
         img_dest = dest / cfg["images_dir"] / meta["slug"]
         shutil.rmtree(img_dest, ignore_errors=True)
