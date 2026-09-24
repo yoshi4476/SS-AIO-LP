@@ -190,6 +190,10 @@ KEYWORD = [
     ("kw.known", "すでに上位に出ている語",
      "改行区切り。分かる範囲で。既存サイトがある場合のみ",
      "", False),
+    ("languages", "多言語の要約ページ",
+     "改行区切りで en（英語）/ zh（中国語）/ ko（韓国語）。空なら作らない（既定）。"
+     "記事の要点（題名・冒頭・各見出しの1文結論・FAQ）だけを訳したページを別URLに置き、日本語の記事と結びます",
+     "", False),
 ]
 
 # ── 記事を書くための材料 ────────────────────────
@@ -575,6 +579,8 @@ def to_config(got):
         "audience": got.get("audience", ""),
         "owns": lines(got.get("owns")),
         "avoid": lines(got.get("avoid")),
+        # 多言語は指示のある社だけ（空なら作らない）
+        "languages": [l for l in lines(got.get("languages")) if l in ("en", "zh", "ko")],
         "categories": pairs(got.get("categories")),
         "kw_seeds": {"industries": lines(got.get("kw_seeds.industries")),
                      "intents": lines(got.get("kw_seeds.intents"))},

@@ -488,14 +488,14 @@ jobs:
           # 流入語が説明文の先頭に無い記事の説明文だけを直す（本文が1文字でも変われば戻す）
           python scripts/auto_rewrite.py --write --kind desc --limit $n --budget-min 8 2>&1 | tail -6 || true
 
-      # 多言語の要約ページ（英語・中国語・韓国語）。AIが切り出す単位（題名・冒頭・H2の1文結論・FAQ）
-      # だけを訳し、数字が1つでも変われば捨てる。訳は1記事1回（元が変わったときだけ訳し直す）
-      - name: 多言語の要約を訳す（週10記事×3言語）
+      # 多言語の要約ページ（英語・中国語・韓国語）。**sites/<id>.json に languages を書いた社だけ**作る
+      # （指示が無ければ何もしない）。AIが切り出す単位だけを訳し、数字が1つでも変われば捨てる
+      - name: 多言語の要約を訳す（指示のある社だけ・週10記事）
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
           n=10; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=5
-          python scripts/i18n.py --write --limit $n --budget-min 25 2>&1 | tail -8 || true
+          python scripts/i18n.py --all --write --limit $n --budget-min 25 2>&1 | tail -8 || true
 
       # 効かなかった直しは戻す（28日・対照群比）。表示ゼロの記事は近い記事へ統合する。
       # 6か月更新の無い記事は時点表記と dateModified を更新する（数字は年月以外増やさない）

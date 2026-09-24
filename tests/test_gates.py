@@ -3121,7 +3121,13 @@ def test_report_actions_close_the_loop():
     check("i18n: 内部リンクの案内文は冒頭にしない", I18N._is_claim("関連して、[MEO対策](/meo/x/)もあわせてご確認ください。"), False)
     check("i18n: 3言語を持つ", set(I18N.LANGS), {"en", "zh", "ko"})
     check("build: 記事の head に hreflang を出す関数がある", callable(getattr(B, "_hreflang", None)), True)
-    check("週次CIが多言語の要約を訳す", "i18n.py --write" in wk, True)
+    check("週次CIが多言語の要約を訳す（指示のある社だけ）", "i18n.py --all --write" in wk, True)
+    # 既定では作らない: languages を書いた社が無ければ、訳もページも hreflang も出ない
+    import sites as _S2
+    check("多言語は既定でオフ（3サイトとも languages なし）",
+          [I18N.langs_for(s) for s in _S2.load_all()], [[] for _ in _S2.load_all()])
+    check("ヒアリングシートで多言語を聞く（空なら作らない）",
+          any(k == "languages" for k, *_ in __import__("client_intake").fields_for("")), True)
     # 1リポジトリで20社: 枠は cron の本数から機械で決める（case 文を持たない）
     check("記事CI: 枠は cron の並びから決める（case 文なし）", "crons.index(s)" in pm and 'case "${{ github.event.schedule }}"' not in pm, True)
     check("記事CI: 枠が40ある（20社×2本）", len(re.findall(r'^\s*- cron:\s*"', pm, re.M)), 40)

@@ -255,28 +255,52 @@ def candidates(site_id, langs):
     return rows
 
 
+def langs_for(site_id):
+    """その社が指示した言語だけ（sites/<id>.json の languages）。**指示が無ければ空＝作らない**"""
+    import sites as S
+    try:
+        return [l for l in (S.load(site_id).get("languages") or []) if l in LANGS]
+    except Exception:
+        return []
+
+
 def main():
     import sites as S
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", default="")
-    ap.add_argument("--langs", default="en,zh,ko")
+    ap.add_argument("--all", action="store_true", help="languages を持つ全サイト")
+    ap.add_argument("--langs", default="", help="言語を上書き（通常は sites/<id>.json の languages を使う）")
     ap.add_argument("--limit", type=int, default=10, help="1回に訳す記事数")
     ap.add_argument("--budget-min", type=int, default=25)
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args()
-    langs = [l for l in a.langs.split(",") if l in LANGS]
-    sid = a.site or S.primary()
-    rows = candidates(sid, langs)
-    print(f"■ {sid}: 訳す候補 {len(rows)}記事（{'・'.join(langs)}）")
-    for imp, slug, _, need in rows[:8]:
-        print(f"   表示{imp:>5} {slug[:40]:<40} {'/'.join(need)}")
-    if not a.write:
-        print(f"I18N_OK=yes\nTRANSLATED=0")
-        return 0
-    t0, n = time.time(), 0
-    for imp, slug, src, need in rows[:a.limit]:
+    targets = list(S.load_all()) if a.all else [a.site or S.primary()]
+    total, t0 = 0, time.time()
+    any_site = False
+    for sid in targets:
+        langs = [l for l in a.langs.split(",") if l in LANGS] if a.langs else langs_for(sid)
+        if not langs:
+            if not a.all:
+                print(f"   {sid}: 多言語の指示がありません（sites/{sid}.json に languages を書くと作ります）")
+            continue
+        any_site = True
+        rows = candidates(sid, langs)
+        print(f"■ {sid}: 訳す候補 {len(rows)}記事（{'・'.join(langs)}）")
+        for imp, slug, _, need in rows[:8]:
+            print(f"   表示{imp:>5} {slug[:40]:<40} {'/'.join(need)}")
+        if a.write:
+            total += _run(rows[:a.limit], t0, a.budget_min)
+    if a.all and not any_site:
+        print("   多言語の指示があるサイトはありません（何もしません）")
+    print(f"I18N_OK=yes\nTRANSLATED={total}")
+    return 0
+
+
+def _run(rows, t0, budget_min):
+    n = 0
+    for imp, slug, src, need in rows:
         for lg in need:
-            if (time.time() - t0) / 60 >= a.budget_min:
+            if (time.time() - t0) / 60 >= budget_min:
                 break
             d, why = translate(src, lg)
             ok = d is not None
@@ -291,8 +315,7 @@ def main():
             with LOG.open("a", encoding="utf-8") as f:
                 f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "i18n", "slug": slug,
                                     "kind": f"i18n-{lg}", "ok": ok, "note": why or "訳した"}, ensure_ascii=False) + "\n")
-    print(f"I18N_OK=yes\nTRANSLATED={n}")
-    return 0
+    return n
 
 
 def page_html(d, ja_url, lang):

@@ -486,7 +486,10 @@ def _i18n():
     if _I18N is None:
         try:
             import i18n
-            _I18N = i18n.translated()
+            import sites as S
+            # 指示のある言語だけ。sites/<id>.json に languages が無ければ多言語ページも hreflang も出さない
+            langs = i18n.langs_for(S.primary())
+            _I18N = {lg: docs for lg, docs in i18n.translated().items() if lg in langs} if langs else {}
         except Exception:
             _I18N = {}
     return _I18N
@@ -1169,6 +1172,11 @@ def build_extra_pages(all_metas):
                 if d.is_dir() and d not in made_paths and (d / "index.html").is_file():
                     shutil.rmtree(d, ignore_errors=True)
             if base not in made_paths and (base / "index.html").is_file():
+                shutil.rmtree(base, ignore_errors=True)
+        # 多言語の要約ページは、指示のある言語以外を残さない（指示が外れたら消える）
+        for lg in ("en", "zh", "ko"):
+            base = SITE / lg
+            if base.is_dir() and lg not in _i18n():
                 shutil.rmtree(base, ignore_errors=True)
 
     # 用語集
