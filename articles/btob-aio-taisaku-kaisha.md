@@ -148,7 +148,7 @@ BtoB向けは比較表やFAQの設計に工数がかかりやすく、店舗集�
 
 構造化データの実装水準については<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Googleが公開する生成AI向け最適化ガイド</a>でも、抽出しやすい本文構造が重視されると説明されています。依頼先が技術要件をどこまで理解しているかも、確認ポイントの一つです。
 
-自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
+AI検索への対応で抜けている箇所は、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で見られます。登録は要らず、結果はその場で出ます。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

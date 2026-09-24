@@ -203,7 +203,7 @@ faq:
 
 自社に合う打ち手が分からない場合や、システム化と経理BPOのどちらが向いているか判断がつかない場合は、経理BPOの無料相談で相談することもできます。
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 

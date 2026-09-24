@@ -169,7 +169,7 @@ MM総研の同調査では、<strong>会計ソフトの事業者別シェアは�
 自社に合うシステムの選び方に迷う場合や、システム化と経理BPOのどちらが合うか判断がつかない場合は、経理BPOの無料相談で相談することもできます。委託先の比較軸は[経理代行の選び方5選｜比較軸と契約前チェックリスト](https://corp.7senses.co.jp/blog/keiri-daiko-erabikata/)にもまとめています。
 
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+経理のどの作業を先に軽くするかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 

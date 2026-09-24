@@ -148,7 +148,7 @@ FAQの回答は、質問文の言葉を繰り返しながら40〜60字で単体�
 
 計測方法は[AIO対策の計測方法](/aio/aio-taisaku-keisoku-houhou/)、やってはいけない行動全般は[AIO対策でやってはいけない5つのNG行動と正しい進め方](/aio/aio-taisaku-yattewaikenai/)もあわせて確認してください。
 
-自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要で、その場で点数が出ます。
+AIの回答に自社サイトが載る準備ができているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で見られます。登録は要らず、結果はその場で出ます。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

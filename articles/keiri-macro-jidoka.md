@@ -124,7 +124,7 @@ IPA（情報処理推進機構）は<a href="https://www.ipa.go.jp/security/emot
 自社で作成したマクロは、保存場所と発行元が明確なため「信頼できる場所」として登録しておけば、毎回警告に悩まされずに済みます。詳しい設定手順は<a href="https://atmarkit.itmedia.co.jp/ait/articles/2202/16/news041.html" target="_blank" rel="noopener">VBAマクロの既定ブロックに関する解説記事</a>でも確認できます。
 
 
-自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 ## マクロ運用でよくある失敗とNG例
 

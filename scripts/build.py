@@ -263,6 +263,28 @@ def _modified_guard(meta, body):
         _HASHES[meta["slug"]] = {"hash": h, "modified": cur}
 
 
+_REVIEWS = None
+
+
+def how_made(slug):
+    """この記事の作り方を開示する一文（誰が・どうやって・どう確かめたか）。
+
+    Google は AI を使った制作そのものではなく、読者が知りたい「どう作ったか」を
+    隠すことを問題にする。監修日は台帳の記録から出し、記録の無い日付は書かない
+    """
+    global _REVIEWS
+    if _REVIEWS is None:
+        import editorial_review
+        _REVIEWS = editorial_review.load()
+    r = _REVIEWS.get(slug) or {}
+    # 一括登録の日付は「記録した日」で、確認した日ではないため出さない
+    when = "" if "一括登録" in (r.get("note") or "") else (r.get("at") or "")[:10]
+    return ("制作の流れ: 一次情報と出典を集め、AIツールで下書き → 機械検査18項目と3観点の採点"
+            "（90点以上のみ公開）→ 監修者が事実と表現を確認"
+            + (f"（{when}）" if when else "") + "。"
+            '<a href="/editorial-policy/">編集・訂正ポリシー</a>')
+
+
 def save_body_hashes():
     try:
         _HASH_FILE.parent.mkdir(exist_ok=True)
@@ -698,6 +720,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{AUTHOR_NAME}}": AUTHOR_NAME,
         "{{AUTHOR_ROLE}}": AUTHOR_ROLE,
         "{{AUTHOR_BIO}}": AUTHOR_BIO,
+        "{{HOW_MADE}}": how_made(meta["slug"]),
         "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
@@ -1469,11 +1492,34 @@ def main():
         return out
 
     rendered = render_all(all_metas, set())
+    # 新しい記事だけに当てる門: 量産の指紋（scaled_guard）と監修の記録（editorial_review）
+    import editorial_review as _ER
+    _reviews = _ER.load()
+    _new = [m["slug"] for m, _ in rendered if _known is not None and m["slug"] not in _known]
+    _corpus = None
+    if _new:
+        import scaled_guard as _SG
+        _corpus = _SG.corpus()
     for meta, url in rendered:
         # 「警告ゼロが公開条件」を実際に守らせる。ただし止めるのは未公開の記事だけ。
         # 公開済みを後から取り下げると、取れている順位まで失う
-        issues = QUALITY_ISSUES.get(meta["slug"]) or []
-        if issues and _known is not None and meta["slug"] not in _known:
+        issues = list(QUALITY_ISSUES.get(meta["slug"]) or [])
+        is_new = _known is not None and meta["slug"] not in _known
+        if is_new:
+            issues += _SG.check(meta["slug"], _corpus)
+        if is_new and not issues and meta["slug"] not in _reviews:
+            # 品質の門は通ったが、監修の記録が無い。BLOCKED と分けるのは、救済の工程が
+            # BLOCKED を「書き直す対象」として拾うため（監修待ちは書き直しても解けない）
+            print(f"HELD(監修待ち): {meta['slug']} → 確認したら "
+                  f"python scripts/editorial_review.py --approve {meta['slug']}")
+            stale = SITE / meta["category"] / meta["slug"]
+            if stale.exists():
+                import shutil
+                shutil.rmtree(stale)
+            unpublished_urls.add(f"/{meta['category']}/{meta['slug']}/")
+            late_blocked.add(meta["slug"])
+            continue
+        if issues and is_new:
             blocked.append(f"{meta['slug']}: " + " / ".join(issues))
             print(f"BLOCKED(公開不可): {meta['slug']}: " + " / ".join(issues)
                   + " → 直してから再度ビルドしてください")

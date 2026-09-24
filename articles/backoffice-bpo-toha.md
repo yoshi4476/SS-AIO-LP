@@ -152,7 +152,7 @@ faq:
 
 導入後にありがちな失敗全般は[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)でも取り上げています。すでに管理部門の人手不足で悩んでいる場合は、[管理部門の人手不足解決｜5つの選択肢と選び方](/blog/kanribumon-hitodebusoku-kaiketsu/)から選択肢を比較するのも近道です。
 
-どの業務から整理すべきかは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact/?s=backoffice)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どの業務から整理すべきかは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact/?s=backoffice)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 

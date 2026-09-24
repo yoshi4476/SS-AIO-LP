@@ -202,7 +202,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 </div>
 
 
-自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 ## まとめ: 経理のやり方は5ステップ、負担が増えたら外注も選べる
 

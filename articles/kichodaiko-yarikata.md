@@ -149,7 +149,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 5つの失敗に共通するのは、**「渡す前に整理する手間を省いた結果」**だという点です。準備の段階で少し手間をかけるだけで、確認の往復は目に見えて減ります。
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 

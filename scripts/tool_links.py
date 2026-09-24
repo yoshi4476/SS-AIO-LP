@@ -16,6 +16,7 @@ import glob
 import json
 import re
 import sys
+import zlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -50,6 +51,72 @@ OFFER = {
                    "バックオフィスの現状分析（無料）",
                    "どの業務から整理すべきかは、", TALK_TAIL),
 }
+# 同じ一文を何十本にも貼ると、それ自体が量産の指紋になる（実測で1文が106本に並んでいた）。
+# 事実（無料・登録不要・その場で点数／契約が前提ではない）は変えず、言い回しだけを記事ごとに変える。
+# どれを使うかは slug で決める。実行のたびに変わると、同じ記事が毎週書き換わる
+LEAD_ALT = {
+    "meo": ["いまの自店舗がどこでつまずいているかは、", "マップ検索で自店舗が見落とされている箇所は、",
+            "口コミや店舗情報のどこから直すべきかは、"],
+    "aio": ["自社サイトがAI検索にどこまで対応できているかは、", "AIの回答に自社サイトが載る準備ができているかは、",
+            "AI検索への対応で抜けている箇所は、"],
+    "seo": ["自社サイトの技術面が基準を満たしているかは、", "検索エンジンが自社サイトを読めているかは、",
+            "表示速度や構造化データなど技術面の抜けは、"],
+    "ai-marketing": ["自社がAI検索からどう見えているかは、", "AIに尋ねたとき自社が候補に挙がる状態かは、",
+                     "AI経由の集客で自社がどこまで準備できているかは、"],
+    "hojokin": ["自社が補助金の対象になるかどうかは、", "使えそうな補助金があるかどうかは、",
+                "申請の要件に自社が当てはまるかは、"],
+    "keiri-bpo": ["どこから手をつけるべきかの整理は、", "外に任せられる経理業務の見極めは、",
+                  "経理のどの作業を先に軽くするかは、"],
+    "keiri-jitsumu": ["自社の経理のどこに時間がかかっているかは、", "毎月の締めが遅れる原因の切り分けは、",
+                      "経理の手間が集中している作業の洗い出しは、"],
+    "backoffice": ["どの業務から整理すべきかは、", "手放せるバックオフィス業務の見極めは、",
+                   "総務・経理のどこに負担が偏っているかは、"],
+}
+TAIL_ALT = {
+    TOOL_TAIL: [TOOL_TAIL, "で確かめられます。登録なしで、答えるとその場で点数が表示されます。",
+                "で見られます。登録は要らず、結果はその場で出ます。"],
+    TALK_TAIL: [TALK_TAIL, "でご相談を受け付けています。契約を前提にしたご案内ではありません。",
+                "からお問い合わせいただけます。ご相談だけでもかまいません。"],
+}
+
+
+def phrase(key, slug):
+    """その記事で使う書き出しと文末。slug で決まるので、何度実行しても同じになる"""
+    _, _, lead, tail = OFFER[key]
+    i = zlib.crc32(slug.encode("utf-8"))
+    leads = LEAD_ALT.get(key) or [lead]
+    tails = TAIL_ALT.get(tail) or [tail]
+    return leads[i % len(leads)], tails[(i // 7) % len(tails)]
+
+
+def vary(write=False):
+    """既に入っている同じ一文を、その記事の言い回しに置き換える（リンク先と文言の事実は変えない）"""
+    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
+            for p in (ROOT / "sites").glob("*.json")}
+    cat_site = {k: s for s, c in conf.items() for k in (c.get("categories") or {})}
+    n = 0
+    for f in sorted(glob.glob(str(ROOT / "articles" / "*.md"))):
+        p = Path(f)
+        t = p.read_text(encoding="utf-8-sig")
+        cat = article_category(t)
+        key = cat if cat in OFFER else ("hojokin" if cat_site.get(cat) == "subsidy" else None)
+        if not key:
+            continue
+        url, anchor, lead, tail = OFFER[key]
+        old = f"{lead}[{anchor}]({url}){tail}"
+        if old not in t:
+            continue
+        nl, nt = phrase(key, p.stem)
+        new = f"{nl}[{anchor}]({url}){nt}"
+        if new == old:
+            continue
+        n += 1
+        if write:
+            p.write_bytes(p.read_bytes().replace(old.encode("utf-8"), new.encode("utf-8"), 1))
+    print(f"  言い回しを{'変えた' if write else '変える候補'}: {n}本")
+    return 0
+
+
 # 困りを自覚した直後に置く。この見出しの後ろが最良
 AFTER = re.compile(r"^## .*(失敗|注意点|やってはいけない|つまずく|落とし穴|NG).*$", re.M)
 
@@ -87,6 +154,7 @@ def main(write=False):
         pos = insert_at(t)
         if pos is None:
             continue
+        lead, tail = phrase(key, p.stem)
         line = f"\n{lead}[{anchor}]({url}){tail}\n\n"
         done[key] = done.get(key, 0) + 1
         if write:
@@ -98,4 +166,6 @@ def main(write=False):
 
 
 if __name__ == "__main__":
+    if "--vary" in sys.argv:
+        sys.exit(vary("--write" in sys.argv))
     sys.exit(main("--write" in sys.argv))

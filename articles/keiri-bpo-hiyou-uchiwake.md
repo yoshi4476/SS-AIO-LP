@@ -167,7 +167,7 @@ CREXコンサルティングが公開する<a href="https://crex-consulting.com/
 
 <div class="cta-box"><p>自社の業務量なら、内訳ごとにどのくらいの費用感になるか無料で確認しませんか。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 ## よくある質問
 

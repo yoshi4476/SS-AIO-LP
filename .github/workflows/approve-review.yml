@@ -1,0 +1,61 @@
+# 監修の記録（記録した記事だけが公開される）
+# GitHub の Actions 画面（スマホのアプリでも可）から slug を入れて実行する。
+# 手元でコマンドを打ってコミットする手間をなくすため
+name: 監修の記録
+
+on:
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: "確認した記事の slug（空白区切り。all と書くと監修待ちを全部記録）"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: approve-review
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 記録する
+        env:
+          SLUGS: ${{ github.event.inputs.slugs }}
+        run: |
+          if [ "$SLUGS" = "all" ]; then
+            python scripts/editorial_review.py --approve-all-pending
+          else
+            # shellcheck disable=SC2086
+            python scripts/editorial_review.py --approve $SLUGS
+          fi
+      - name: 依存の導入
+        run: pip install -r requirements.txt
+      # 記録しただけでは公開されない。自サイトは build で HTML を作り、site/ の変更で
+      # Cloudflare へのデプロイが動く。配信先は publish_gap が監修済みの未配信分を送る
+      - name: 公開（自サイトのビルドと、配信先への送り出し）
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          python scripts/build.py | grep -E "HELD|BLOCKED|built" || true
+          python scripts/publish_gap.py --publish || echo "::warning::配信先への送り出しに失敗（次の記事枠で publish_gap が再試行します）"
+      - name: コミット
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/editorial_reviews.jsonl site data/published.json data/body_hash.json
+          git diff --cached --quiet && { echo "新しい記録はありません"; exit 0; }
+          git commit -m "監修の記録: ${{ github.event.inputs.slugs }}"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+            sleep 5
+          done
+          echo "::error::記録を push できませんでした"; exit 1

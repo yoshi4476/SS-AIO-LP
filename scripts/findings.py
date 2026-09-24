@@ -28,6 +28,10 @@ TIMEOUT = 900
 CHECKS = [
     ("AIO基盤（robots・llms.txt・構造化データ）", "aio_check.py",
      re.compile(r"未記載:|不足:|取得できません|記事が載っていません")),
+    ("量産の指紋（同型記事・定型文・長さの偏り）", "scaled_guard.py",
+     re.compile(r"^要対応:|^\s{4}\d+%|^\s{4}\d+本:")),
+    ("監修待ちの記事", "editorial_review.py --pending",
+     re.compile(r"^要対応:|^\s{2}- ")),
     ("会社表記のゆれ（NAP）", "nap_check.py",
      re.compile(r"^\s{2}-\s")),
     ("内部リンクの積み上がり", "auto_review.py",

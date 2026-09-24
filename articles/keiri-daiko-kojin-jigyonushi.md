@@ -177,7 +177,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 3つ目は、確定申告の繁忙期直前に依頼を始め、対応してもらえないケースです。**依頼は繁忙期の2〜3か月前に動き出すと、選択肢を狭めずに済みます。**焦って1社だけで即決すると、後から条件を見直しにくくなります。
 
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
 

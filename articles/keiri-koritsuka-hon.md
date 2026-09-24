@@ -160,7 +160,7 @@ faq:
 <details><summary>新人の経理担当者に最初に読ませる本はどれですか？</summary><p class="faq-a">物語形式で読み進められる入門書から始めると、挫折しにくくなります。</p></details>
 </div>
 
-自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 ## まとめ: 経理効率化の本は「目的別に選び、1つだけ試す」
 

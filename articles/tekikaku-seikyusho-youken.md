@@ -145,7 +145,7 @@ faq:
 受領時の確認手順を効率よく回したい場合は、[請求書チェックの効率化｜確認項目6つと時短の3ステップ](https://corp.7senses.co.jp/blog/seikyusho-check-koritsuka/)が参考になります。
 
 
-自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 ## 要件確認を自社で続けるか、外部に任せるかの判断
 

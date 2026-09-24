@@ -419,6 +419,7 @@ code { font-family: Consolas, "Courier New", monospace; }
 .author-box .name { font-weight: 700; }
 .author-box .role { font-size: .78rem; color: var(--muted); }
 .author-box p { font-size: .88rem; margin: .5em 0 0; }
+.author-box p.how-made { font-size: .76rem; color: var(--muted); border-top: 1px dashed var(--line, #e2e6ec); padding-top: .5em; margin-top: .7em; }
 
 /* ============================================================
    LP

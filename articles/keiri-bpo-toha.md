@@ -127,7 +127,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 手順を資料として残す考え方は、[店舗の事務作業を効率化する5つの方法](https://corp.7senses.co.jp/blog/tenpo-jimu-sagyou-ai-koritsuka/)でも同じです。
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+経理のどの作業を先に軽くするかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 ## 経理BPOの費用相場
 
