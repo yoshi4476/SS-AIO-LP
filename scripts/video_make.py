@@ -485,7 +485,14 @@ def from_article(slug):
         for j, s in enumerate(split_say(lead)):
             segs.append({"say": s, "head": head, "lines": [head] if j == 0 else []})
 
-    url = f"ai.7senses.co.jp/{cat}/{slug}/"
+    # 公開URLはサイトごとに違う（補助金は lp.7senses.co.jp/blog/…）。
+    # ai.7senses.co.jp を決め打ちすると、他サイトの記事で存在しないURLを読み上げる
+    try:
+        import sites as _S
+        cfg = _S.load(_S.find_category_owner(cat) or _S.primary())
+        url = _S.article_url(cfg, {"slug": slug, "category": cat}).replace("https://", "")
+    except Exception:
+        url = f"ai.7senses.co.jp/{cat}/{slug}/"
     segs.append({"say": "続きは記事にまとめています。概要欄からご覧ください。",
                  "head": "記事はこちら", "lines": [url]})
     return {"title": title, "slug": slug,

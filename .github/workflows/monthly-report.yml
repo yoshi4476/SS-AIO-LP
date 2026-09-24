@@ -128,6 +128,15 @@ jobs:
       # レポートに書いた改善点を、その場で機械が当てる。当てたら見直し（最大3回）、
       # 検算（build + ゲート）に通らなければその回の変更を捨てる。
       # 人にしかできない項目（計測の権限・LPの文言）だけをメールで知らせる
+      # 3倍計画の道筋と先月の実績を突き合わせる。遅れは「要対応」として通知に載る
+      - name: 3倍計画の進み
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          mkdir -p automation/logs
+          out=$(python scripts/growth_plan.py --check 2>&1) || true
+          echo "$out" | tail -6
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+
       - name: レポートの改善点を実行し、残りを人へ知らせる
         if: steps.gate.outputs.ready == 'true'
         env:
@@ -155,7 +164,7 @@ jobs:
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw || true
+          git add reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw reports/growth_plan.json docs/growth-plan.md || true
           if git diff --cached --quiet; then
             echo "保存すべき目標値の変更なし"
           else

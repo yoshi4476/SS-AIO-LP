@@ -2971,6 +2971,23 @@ def test_report_actions_close_the_loop():
     wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("週次CIがAI検索の語を調べる", "ai_kw_research.py" in wk, True)
 
+    # 3倍計画: 道筋は単調に増え、6か月目で起点の3倍。遅れは「要対応」で知らせる
+    import growth_plan as GP
+    base = {"sessions": 100, "clicks": 50, "cv": 4, "ai": 10}
+    p6 = GP.path_for(base, GP.MONTHS)
+    check("growth_plan: 6か月目で3倍", p6["sessions"], 300)
+    check("growth_plan: 道筋が単調に増える",
+          all(GP.path_for(base, k)["clicks"] <= GP.path_for(base, k + 1)["clicks"] for k in range(GP.MONTHS)), True)
+    check("growth_plan: 打ち手にYouTube言及が最上位にある", GP.LEVERS[0][0].startswith("YouTube"), True)
+    check("月次CIが3倍計画の進みを見る", "growth_plan.py --check" in yml, True)
+    import article_videos as AV
+    import inspect
+    check("article_videos: 鍵が無いときの要対応文がある",
+          "youtube-token.json" in inspect.getsource(AV.note_token_missing), True)
+    check("週次CIが記事動画を作る", "article_videos.py --write" in wk, True)
+    import hub_client as HC
+    check("next_kw: AI回答ありの語を読む関数がある", callable(getattr(HC, "_ai_targets", None)), True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,

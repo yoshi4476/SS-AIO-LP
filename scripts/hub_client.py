@@ -112,26 +112,64 @@ def next_kw(site):
         print(f"管制塔に接続できません（ローカルのKWリストを使います）: {e}")
         return None
     pat = _main_offer_pattern(site)
-    if not pat or not isinstance(got, dict) or not got.get("keyword"):
+    if not isinstance(got, dict) or not got.get("keyword"):
         return got
     import re
-    if re.search(pat, str(got["keyword"]).lower()):
-        return got                       # すでに主力の語ならそのまま
+    # AIが答えを出していて自社が出典に無い語（ai_kw_research が週次で記録）を
+    # 最優先で書く。AI Overview は質問形のクエリで64.7%出る。取りに行く価値が
+    # いちばん高い語を、台帳の並び順に埋もれさせない
+    aiq = _ai_targets(site)
+    kw0 = str(got["keyword"])
+    if _norm(kw0) in aiq and (not pat or re.search(pat, kw0.lower())):
+        return got
     try:
         rows = all_kw()
     except Exception:
         return got
-    for r in rows or []:
-        if r.get("site") != site or str(r.get("status", "")).strip() != "未着手":
-            continue
-        kw = str(r.get("keyword", ""))
-        if kw and re.search(pat, kw.lower()):
-            out = dict(got)
-            out.update({"keyword": kw, "aim": r.get("aim", ""),
-                        "category": r.get("category", ""),
-                        "picked_by": "主力優先"})
-            return out
+    todo = [r for r in rows or []
+            if r.get("site") == site and str(r.get("status", "")).strip() == "未着手"
+            and str(r.get("keyword", ""))]
+
+    def pick(rule, why):
+        for r in todo:
+            kw = str(r["keyword"])
+            if rule(kw):
+                out = dict(got)
+                out.update({"keyword": kw, "aim": r.get("aim", ""),
+                            "category": r.get("category", ""), "picked_by": why})
+                return out
+        return None
+
+    if aiq:
+        hit = (pick(lambda k: _norm(k) in aiq and (not pat or re.search(pat, k.lower())), "AI回答×主力")
+               or pick(lambda k: _norm(k) in aiq, "AI回答あり"))
+        if hit:
+            return hit
+    if pat:
+        if re.search(pat, kw0.lower()):
+            return got                   # すでに主力の語ならそのまま
+        hit = pick(lambda k: bool(re.search(pat, k.lower())), "主力優先")
+        if hit:
+            return hit
     return got                           # 主力の語が尽きていれば、あるものを書く
+
+
+def _norm(s):
+    import re
+    return re.sub(r"[\s　・･／/（）()｜|【】\[\]「」、。,.\-‐－—_]", "", str(s).lower())
+
+
+def _ai_targets(site):
+    """data/ai_kw/<site>.json のうち「AIが答えを出し、自社が出典に無い」語"""
+    p = ROOT / "data" / "ai_kw" / f"{site}.json"
+    if not p.is_file():
+        return set()
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    return {_norm(r["kw"]) for r in d.get("items", [])
+            if (r.get("ai") or {}).get("answered") and not (r.get("ai") or {}).get("ours")}
 
 
 def all_kw(strict=False):

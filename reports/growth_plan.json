@@ -1,0 +1,13 @@
+{
+  "baseline_month": "2026-08",
+  "baseline": {
+    "sessions": 282,
+    "clicks": 65,
+    "cv": 5,
+    "ai": 10
+  },
+  "multiple": 3.0,
+  "months": 6,
+  "target_month": "2027-02",
+  "checks": {}
+}
