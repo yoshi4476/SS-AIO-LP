@@ -181,6 +181,10 @@ def main():
                 print(f"   NG {u.replace('https://' + cfg['domain'], '') or '/'}: {p}", flush=True)
             ng += len(probs)
         print(f"   {checked}ページを確認", flush=True)
+        # 通信エラーは飛ばすため、サイトごと落ちていると0ページ確認のまま ok になる
+        if urls and not checked:
+            print("   NG /: 1ページも取得できません（サイトが応答していない可能性）", flush=True)
+            ng += 1
     print(f"\nLIVE_CHECK={'ng' if ng else 'ok'}（問題 {ng}件）")
     return 1 if ng else 0
 

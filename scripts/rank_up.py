@@ -99,7 +99,8 @@ def fetch(domain, days=28):
     # 上書きすると片方の表示が消える（実測で corporate の2ページ・37表示が消えた）。
     # 足し合わせ、順位は表示回数で重みづけする
     pages = {}
-    for r in G.q(sc, domain, str(start), str(end), ["page"], 25000):
+    # 取れなかったのを「表示0のサイト」と読まないよう、失敗は呼び出し側へ上げる
+    for r in G.q(sc, domain, str(start), str(end), ["page"], 25000, raise_errors=True):
         url = r["keys"][0].rstrip("/")
         d = pages.get(url)
         if d is None:
@@ -113,7 +114,7 @@ def fetch(domain, days=28):
             d["imp"] = tot
             d["clicks"] += r["clicks"]
             d["urls"] += 1
-    for r in G.q(sc, domain, str(start), str(end), ["page", "query"], 25000):
+    for r in G.q(sc, domain, str(start), str(end), ["page", "query"], 25000, raise_errors=True):
         url = r["keys"][0].rstrip("/")
         if url in pages:
             pages[url]["kws"].append((r["keys"][1], r["position"], r["impressions"]))

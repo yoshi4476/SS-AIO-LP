@@ -103,17 +103,22 @@ def fetch(days=28):
     sc = G.client()
     end = date.today() - timedelta(days=3)          # 確定待ち
     start = end - timedelta(days=days - 1)
-    out = {}
+    out, failed = {}, False
     for sid, cfg in S.load_all().items():
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000)
+            # 既定の q は失敗を [] で返す。そのまま3日キャッシュすると「止まっている記事0本」になる
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000,
+                       raise_errors=True)
         except Exception as e:
             print(f"  {sid}: GSCから取れません（{str(e)[:50]}）")
+            failed = True
             continue
         out[sid] = [{"kw": r["keys"][0], "url": r["keys"][1].rstrip("/") + "/",
                      "pos": r["position"], "imp": r["impressions"], "clk": r["clicks"]}
                     for r in rows]
     payload = {"at": str(date.today()), "span": [str(start), str(end)], "sites": out}
+    if failed:
+        return payload                               # 欠けた取得は残さない（次回また取り直す）
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8",
                      newline="\n")

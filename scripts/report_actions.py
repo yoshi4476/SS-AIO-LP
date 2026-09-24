@@ -115,7 +115,8 @@ def derive(site_ids):
             d = SD.diagnose(sid)
             b = d.get("bands") or {}
             cfg = _sites(sid).get(sid, {})
-            if b is None or (d.get("funnel") is None and cfg.get("ga4_property_id")):
+            # 取れなかった印は None。{} に置き換えた後の b で見ると、GSC が落ちても知らせない
+            if d.get("bands") is None or (d.get("funnel") is None and cfg.get("ga4_property_id")):
                 add("measure", sid, "GSC または GA4 のデータが取れていません", HUMAN["measure"])
             gap10 = sum(v.get("gap", 0) for k, v in b.items() if k in ("4〜10位", "1〜3位"))
             gap20 = b.get("11〜20位", {}).get("gap", 0)

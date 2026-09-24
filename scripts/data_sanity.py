@@ -182,8 +182,12 @@ def main():
             gsc = (f"GSCクリック{clicks}（うち指名{bc}）" if clicks is not None and bc is not None
                    else "GSCは取得できず確かめられません")
             print(f"     セッション{tot}（うち国不明{bad}）/ 自然検索{org} / {gsc}")
+            if clicks is None or bc is None:
+                # 確かめられなかった（計測の不一致を含む）ものを「崩れなし」と出さない
+                out.append(("注意", "GSCのクリック合計を確かめられず、GA4との照合と指名検索の割合を見ていません"))
         except Exception as e:
-            print(f"     確認できません: {str(e)[:60]}")
+            print(f"     注意 確認できません: {str(e)[:60]}")
+            total_warn += 1
             continue
         for lv, msg in out:
             print(f"     {lv} {msg}")

@@ -254,7 +254,6 @@ def main():
     ng = [k for k, v in results.items() if v is False]
     print(chr(10) + "   ※ 本数が少ないため、因果は言えません。難しい語を狙った記事ほど"
           "点数が高い、といった交絡もありえます。"
-          "点数が高い、といった交絡もありえます。"
           "ここで分かるのは「その判断で選んでも成果は良くならない」ことだけです。")
     print("\n■ まとめ")
     for k, v in results.items():

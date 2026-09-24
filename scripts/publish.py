@@ -918,7 +918,7 @@ def main():
             # それを「トークンの問題」と伝えると、無関係な再発行に時間を使わせる。
             # 実際、配信先が1コミット進んでいるだけで4本ごとに止まっていた。
             print("  押せませんでした。配信先の変更を取り込んで、もう一度試します")
-            if not (try_run(["git", "fetch", "origin"], cwd=dest)
+            if not (try_run(["git", "fetch", "origin"], cwd=dest, env=env)
                     and try_run(["git", "rebase", f"origin/{cfg['branch']}"], cwd=dest)):
                 break
     raise SystemExit(

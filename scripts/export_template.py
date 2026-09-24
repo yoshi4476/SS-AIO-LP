@@ -39,7 +39,9 @@ COPY_FILES = [
     # ここは名前で列挙しない。automation/*.txt をまとめて渡す。
     # 一覧に手で足す形だと新しいプロンプトが漏れ、渡した先で
     # 中身の無いまま起動する（自動修復の手順書が実際に漏れた）
-    *sorted(str(p).replace("\\", "/") for p in Path("automation").glob("*.txt")),
+    # 実行場所（cwd）ではなくリポジトリから探す。cwd 基準だと別の場所から呼んだとき0件になり、
+    # プロンプトの無い一式を黙って書き出す
+    *sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / "automation").glob("*.txt")),
     # パイプラインの定義そのもの。全7工程・品質基準・AIO対応の規則が入る。
     # プロンプトはこれを参照する形で書かれている。
     "CLAUDE.md",
@@ -182,7 +184,9 @@ REPLACE = [
 # 検査だけだと「見つけたが直せない」ため、置換の段で確実に消す。
 Q = chr(34)          # ダブルクォート。正規表現に直接書くと囲み文字とぶつかる
 SECRET_LINES = [
-    (r"(?m)^(const SHARED_SECRET\s*=\s*)'[^']*'", r"\1'{{SHARED_SECRET}}'"),
+    # 合言葉はソースに書かない。gas_deploy が配る時に .env の値で埋める印（XXXX…）にしておく。
+    # {{SHARED_SECRET}} のまま配ると、誰でも知っているその文字列が合言葉として公開される
+    (r"(?m)^(const SHARED_SECRET\s*=\s*)'[^']*'", r"\1'XXXXXXXXXXXXXXXX'"),
     (r"(?m)^(const BOOK_ID\s*=\s*)'[^']*'", r"\1''"),
     (r"(?m)^(const MIGRATE_TO\s*=\s*)'[^']*'", r"\1''"),
     (r"(?m)^(HUB_SHEET\s*=\s*)" + Q + '[^' + Q + ']*' + Q,

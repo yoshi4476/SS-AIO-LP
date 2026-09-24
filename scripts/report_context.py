@@ -24,7 +24,7 @@ METRICS = {
     "clicks": {"name": "検索クリック", "up_is_good": True},
     "sessions": {"name": "セッション", "up_is_good": True},
     "cv": {"name": "リード獲得", "up_is_good": True},
-    "ctr": {"name": "クリック率", "up_is_good": True, "unit": "%"},
+    "ctr": {"name": "クリック率", "up_is_good": True, "unit": "%", "rate": True},
     "pos": {"name": "平均順位", "up_is_good": False, "lower_is_better": True, "unit": "位"},
 }
 
@@ -54,8 +54,8 @@ def compare(cur, prev, key, cur_label, prev_label, through=None):
         return {"dir": "flat", "good": True, "pct": 0.0,
                 "text": "前月の数字が無いため、比べられません"}
 
-    if meta.get("lower_is_better"):
-        # 順位は1日あたりに直さない（平均値なので、日数で割ると意味が変わる）
+    if meta.get("lower_is_better") or meta.get("rate"):
+        # 順位・率は1日あたりに直さない（平均値・比率なので、日数で割ると意味が変わる）
         pa, pb = a, b
     else:
         pa = per_day(a, cur_label, through)

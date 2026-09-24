@@ -56,14 +56,15 @@ def industry_facts(name):
         m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
         if not m:
             continue
-        fm, body = m.group(1), m.group(2)
+        fm = m.group(1)
         title = re.search(r"^title:\s*(.+)$", fm, re.M)
         kw = re.search(r"^keyword:\s*(.+)$", fm, re.M)
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
         if not title or not sc or int(sc.group(1)) < 90:
             continue
         if IH.detect(title.group(1), kw.group(1) if kw else "", inds) == ind["slug"]:
-            faq = re.findall(r"^\s*- q:\s*(.+)$", body, re.M)
+            # FAQ の「- q:」はフロントマターにある。本文には <details> しか無く、本文を探すと必ず空になる
+            faq = [q.strip().strip('"') for q in re.findall(r"^\s*- q:\s*(.+)$", fm, re.M)]
             metas.append({"title": title.group(1).strip().strip('"'), "faq": faq[:2]})
     if not metas:
         return None

@@ -148,6 +148,17 @@ def push(site, e, tok, deploy=True):
         print(f"  {cfg['name']}: {cfg['env']} が未設定のため飛ばします")
         return False
 
+    # 合言葉・URLが .env に無いまま埋めると空文字で配られる。管制塔は合言葉が空だと
+    # 検査を飛ばす（`if (SHARED_SECRET && …)`）ため、誰でも書き込める状態で公開される
+    for local, _ in cfg["files"]:
+        src = (ROOT / local).read_text(encoding="utf-8")
+        need = [k for k, mark in (("HUB_SECRET", "'XXXXXXXXXXXXXXXX'"),
+                                  ("HUB_URL", "macros/s/XXXXXXXXXXXXXXXX/exec"))
+                if mark in src and not e.get(k)]
+        if need:
+            print(f"  {cfg['name']}: .env に {' / '.join(need)} が無いため配りません（{local}）")
+            return False
+
     # いまプロジェクトに入っているファイルを取得し、対象ファイルだけ差し替える。
     # 全置換にすると既存の doPost ごと消えるため、必ずマージする。
     cur = api(tok, f"projects/{sid}/content")

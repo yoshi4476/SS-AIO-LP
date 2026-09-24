@@ -22,7 +22,7 @@
 /* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
 <link rel="stylesheet" href="/css/style.css?v=2ab43d6b">
-<script defer src="/js/site.js?v=fc495b81"></script>
+<script defer src="/js/site.js?v=231d6b7f"></script>
 </head>
 <body>
 <header class="site-header">
@@ -69,42 +69,13 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 
 <section class="section">
-<h2>実数で見る</h2>
-<svg viewBox="0 0 640 172" width="100%" role="img" aria-label="流入と非該当の件数" style="max-width:640px;font-family:inherit"><rect x="170" y="4" width="12" height="12" rx="3" fill="#1a73e8"></rect><text x="188" y="14" font-size="11" fill="#243">流入</text><rect x="240" y="4" width="12" height="12" rx="3" fill="#d0d7e4"></rect><text x="258" y="14" font-size="11" fill="#243">非該当</text><text x="0" y="44" font-size="12" fill="#243">chatgpt</text><text x="0" y="60" font-size="10" fill="#667">42セッション</text><rect x="170" y="30" width="380" height="22" rx="4" fill="#d0d7e4"></rect><rect x="170" y="30" width="326" height="22" rx="4" fill="#1a73e8"></rect><text x="558" y="46" font-size="12" fill="#123">36 / 42（36%）</text><text x="0" y="90" font-size="12" fill="#243">claude</text><text x="0" y="106" font-size="10" fill="#667">42セッション</text><rect x="170" y="76" width="380" height="22" rx="4" fill="#d0d7e4"></rect><rect x="170" y="76" width="27" height="22" rx="4" fill="#1a73e8"></rect><text x="558" y="92" font-size="12" fill="#123">3 / 42（3%）</text><text x="0" y="136" font-size="12" fill="#243">gemini</text><text x="0" y="152" font-size="10" fill="#667">42セッション</text><rect x="170" y="122" width="380" height="22" rx="4" fill="#d0d7e4"></rect><rect x="170" y="122" width="27" height="22" rx="4" fill="#1a73e8"></rect><text x="558" y="138" font-size="12" fill="#123">3 / 42（3%）</text></svg>
-<div class="table-wrap"><table><thead><tr><th>項目</th><th style="text-align:right">セッション</th><th style="text-align:right">流入</th><th style="text-align:right">非該当</th><th style="text-align:right">割合</th><th style="text-align:right">95%の範囲</th><th style="text-align:right">1件で動く幅</th></tr></thead><tbody><tr><td>chatgpt</td><td style="text-align:right">42</td><td style="text-align:right">36</td><td style="text-align:right">6</td><td style="text-align:right"><strong>36%</strong></td><td style="text-align:right">72.2〜93.3%</td><td style="text-align:right">2.4pt</td></tr><tr><td>claude</td><td style="text-align:right">42</td><td style="text-align:right">3</td><td style="text-align:right">39</td><td style="text-align:right"><strong>3%</strong></td><td style="text-align:right">2.5〜19.0%</td><td style="text-align:right">2.4pt</td></tr><tr><td>gemini</td><td style="text-align:right">42</td><td style="text-align:right">3</td><td style="text-align:right">39</td><td style="text-align:right"><strong>3%</strong></td><td style="text-align:right">2.5〜19.0%</td><td style="text-align:right">2.4pt</td></tr><tr style="background:#f3f7ff;font-weight:700"><td>合計</td><td style="text-align:right">126</td><td style="text-align:right">42</td><td style="text-align:right">84</td><td style="text-align:right">33.3%</td><td style="text-align:right">25.7〜41.9%</td><td style="text-align:right">0.8pt</td></tr></tbody></table></div>
-<p style="font-size:.9rem;color:#556;">「95%の範囲」は母数から計算した目安（Wilson信頼区間）、「1件で動く幅」は1件の増減で割合が何ポイント動くかです。どちらも上の実数から導いた値です。</p>
+<h2>データ</h2>
+<svg viewBox="0 0 640 100" width="100%" role="img" aria-label="棒グラフ" style="max-width:640px;font-family:inherit"><text x="0" y="25" font-size="12" fill="#243">chatgpt</text><rect x="150" y="10" width="380" height="20" rx="4" fill="#1a73e8"></rect><text x="536" y="25" font-size="12" fill="#123">36セッション</text><text x="0" y="55" font-size="12" fill="#243">claude</text><rect x="150" y="40" width="32" height="20" rx="4" fill="#1a73e8"></rect><text x="188" y="55" font-size="12" fill="#123">3セッション</text><text x="0" y="85" font-size="12" fill="#243">gemini</text><rect x="150" y="70" width="32" height="20" rx="4" fill="#1a73e8"></rect><text x="188" y="85" font-size="12" fill="#123">3セッション</text></svg>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th style="text-align:right">値（セッション）</th><th>備考</th></tr></thead><tbody><tr><td>chatgpt</td><td style="text-align:right">36セッション</td><td>3サイト合算</td></tr><tr><td>claude</td><td style="text-align:right">3セッション</td><td>3サイト合算</td></tr><tr><td>gemini</td><td style="text-align:right">3セッション</td><td>3サイト合算</td></tr></tbody></table></div>
 <p><a href="data.csv" download>CSVをダウンロード</a></p>
 </section>
 
-<section class="section">
-<h2>数字の確からしさ</h2>
-<p>同じ「90%」でも、母数が10件のときと100件のときでは意味が違います。下の図は、集計値（●）と、母数から計算した95%の範囲（横線）です。横線が長い項目は、いま出ている数字がそのまま実力とは読めません。</p>
-<svg viewBox="0 0 640 172" width="100%" role="img" aria-label="項目ごとの95%の範囲" style="max-width:640px;font-family:inherit"><line x1="150" y1="24" x2="150" y2="152" stroke="#e3e8ef" stroke-width="1"></line><text x="150" y="16" font-size="10" fill="#8a97a8" text-anchor="middle">0%</text><line x1="255" y1="24" x2="255" y2="152" stroke="#e3e8ef" stroke-width="1"></line><text x="255" y="16" font-size="10" fill="#8a97a8" text-anchor="middle">25%</text><line x1="360" y1="24" x2="360" y2="152" stroke="#e3e8ef" stroke-width="1"></line><text x="360" y="16" font-size="10" fill="#8a97a8" text-anchor="middle">50%</text><line x1="465" y1="24" x2="465" y2="152" stroke="#e3e8ef" stroke-width="1"></line><text x="465" y="16" font-size="10" fill="#8a97a8" text-anchor="middle">75%</text><line x1="570" y1="24" x2="570" y2="152" stroke="#e3e8ef" stroke-width="1"></line><text x="570" y="16" font-size="10" fill="#8a97a8" text-anchor="middle">100%</text><text x="0" y="44" font-size="12" fill="#243">chatgpt</text><line x1="453" y1="40" x2="542" y2="40" stroke="#9db8e8" stroke-width="8" stroke-linecap="round"></line><circle cx="301" cy="40" r="6" fill="#1a73e8"></circle><text x="0" y="60" font-size="10" fill="#667">72.2〜93.3%（42件）</text><text x="0" y="88" font-size="12" fill="#243">claude</text><line x1="160" y1="84" x2="230" y2="84" stroke="#9db8e8" stroke-width="8" stroke-linecap="round"></line><circle cx="163" cy="84" r="6" fill="#1a73e8"></circle><text x="0" y="104" font-size="10" fill="#667">2.5〜19.0%（42件）</text><text x="0" y="132" font-size="12" fill="#243">gemini</text><line x1="160" y1="128" x2="230" y2="128" stroke="#9db8e8" stroke-width="8" stroke-linecap="round"></line><circle cx="163" cy="128" r="6" fill="#1a73e8"></circle><text x="0" y="148" font-size="10" fill="#667">2.5〜19.0%（42件）</text><text x="150" y="168" font-size="10" fill="#8a97a8">● は集計値、横線は95%の範囲。母数が小さいほど横線が長くなります</text></svg>
-</section>
 
-<section class="section">
-<h2>観測できている期間</h2>
-<p>判定期間より、契約を見てきた期間のほうが短ければ、その数字はまだ途中経過です。青が観測できている期間、黄色が判定期間です。</p>
-<svg viewBox="0 0 640 190" width="100%" role="img" aria-label="観測できている期間と判定期間" style="max-width:640px;font-family:inherit"><rect x="150" y="4" width="12" height="10" rx="2" fill="#1a73e8"></rect><text x="168" y="13" font-size="11" fill="#243">観測できている期間</text><rect x="290" y="4" width="12" height="10" rx="2" fill="#f3b23f"></rect><text x="308" y="13" font-size="11" fill="#243">判定期間</text><text x="0" y="40" font-size="12" fill="#243">chatgpt</text><rect x="150" y="28" width="400" height="16" rx="3" fill="#1a73e8"></rect><text x="558" y="41" font-size="11" fill="#123">3か月</text><text x="0" y="92" font-size="12" fill="#243">claude</text><rect x="150" y="80" width="400" height="16" rx="3" fill="#1a73e8"></rect><text x="558" y="93" font-size="11" fill="#123">3か月</text><text x="0" y="144" font-size="12" fill="#243">gemini</text><rect x="150" y="132" width="400" height="16" rx="3" fill="#1a73e8"></rect><text x="558" y="145" font-size="11" fill="#123">3か月</text></svg>
-</section>
-
-<section class="section">
-<h2>判定の条件</h2>
-<p>項目ごとに判定の条件が違います。1つの条件に揃えたほうが見栄えはよくなりますが、性質の違うものを同じ物差しで測ると、比べられない数字になります。条件を明示したうえで並べています。</p>
-<div class="table-wrap"><table><thead><tr><th>項目</th><th>判定の条件</th><th>対象</th></tr></thead><tbody><tr><td>chatgpt</td><td>2026-06-23〜2026-09-20</td><td>3サイト合算</td></tr><tr><td>claude</td><td>2026-06-23〜2026-09-20</td><td>3サイト合算</td></tr><tr><td>gemini</td><td>2026-06-23〜2026-09-20</td><td>3サイト合算</td></tr></tbody></table></div>
-</section>
-
-<section class="section">
-<h2>この数字で言えること・言えないこと</h2>
-<div class="table-wrap"><table><thead><tr><th style="width:50%">言えること</th><th style="width:50%">言えないこと</th></tr></thead><tbody><tr><td><ul style="margin:0;padding-left:1.1em"><li>geminiは42セッションの集計で、3%（95%の範囲 2.5〜19.0%）</li></ul></td><td><ul style="margin:0;padding-left:1.1em"><li>chatgptの36%は母数42セッションで、95%の範囲が72.2〜93.3%と広い。実力値としては読めない</li><li>chatgptは観測が3か月しかなく、長い目で見た数字は分からない</li><li>業界の平均との比較（他社の数字を同じやり方で集計していないため）</li></ul></td></tr></tbody></table></div>
-</section>
-
-<section class="section">
-<h2>この数字の読み方</h2>
-<p>母数が小さい項目ほど、1件の増減で割合が大きく動きます。母数がいちばん小さい<strong>chatgpt</strong>は42セッションなので、1件変われば2.4ポイント動きます。いちばん大きい<strong>gemini</strong>は42セッションで、1件あたり2.4ポイントです。</p>
-<p>上の表の「95%の範囲」は、同じやり方で母数を増やしていったときに落ち着く先の目安です。chatgptは72.2〜93.3%と幅が広く、現時点の36%をそのまま実力と読むことはできません。合計（126セッション）では33.3%です。</p>
-<p>言い換えると、geminiはおよそ1件に1件が非該当です（42件中39件）。判定の条件は「2026-06-23〜2026-09-20」です。割合だけを見ず、母数と判定の条件と合わせて読んでください。そのために、この3つを同じ表に並べています。</p>
-</section>
 
 <section class="section">
 <h2>集計方法と限界</h2>

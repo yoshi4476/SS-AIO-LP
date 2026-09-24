@@ -115,14 +115,12 @@ def main():
         print(f"   [{r['site']:<9}] {r['slug'][:36]:<36} ← {r['fact']['claim'][:50]}（重なり{r['overlap']}）")
     n = 0
     if a.write:
-        saved = {}
+        saved, recs = {}, []
         for r in rows[:a.limit]:
             ok, why = insert(r["slug"], r["fact"], saved)
             print(f"   {'○' if ok else '×'} {r['slug'][:36]:<36} {why}")
-            LOG.parent.mkdir(parents=True, exist_ok=True)
-            with LOG.open("a", encoding="utf-8") as f:
-                f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "fact_cite", "slug": r["slug"],
-                                    "kind": "cite", "ok": ok, "note": why}, ensure_ascii=False) + "\n")
+            recs.append({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "fact_cite", "slug": r["slug"],
+                         "kind": "cite", "ok": ok, "note": why})
             n += ok
         if n:
             r = subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, capture_output=True, text=True,
@@ -133,6 +131,15 @@ def main():
                     p.write_bytes(raw)
                 print("   ★ ビルドが通らないため、今回の引用は全部戻しました")
                 n = 0
+                # 戻した分を ok のまま台帳に残すと、effect_ab が「打った手」として数える
+                for x in recs:
+                    if x["ok"]:
+                        x.update(ok=False, note="ビルドが通らず戻した")
+        # 台帳はビルドの結果が出てから書く
+        LOG.parent.mkdir(parents=True, exist_ok=True)
+        with LOG.open("a", encoding="utf-8") as f:
+            for x in recs:
+                f.write(json.dumps(x, ensure_ascii=False) + "\n")
     print(f"FACT_CITE_OK=yes\nCITED={n}")
     return 0
 

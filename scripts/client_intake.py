@@ -754,7 +754,9 @@ def review(got, cfg):
         ng.append("サイトIDは英小文字とハイフンのみで書いてください")
     if cfg.get("type") not in TYPES:
         ng.append(f"サイトの形式が不正です（{' / '.join(TYPES)}）")
-    if cfg.get("type") != "self-static" and not cfg.get("repo"):
+    # wordpress は REST API で投稿するのでリポジトリは要らない（client_add と同じ条件）。
+    # ここで止めると、repo 欄を空にした WordPress の社がいつまでも登録できない
+    if cfg.get("type") not in ("self-static", "wordpress") and not cfg.get("repo"):
         ng.append("配信先リポジトリが空です（自社構築以外は書き込み先が要ります）")
 
     cats = cfg.get("categories") or {}

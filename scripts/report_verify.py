@@ -61,7 +61,9 @@ def check(month, through=None):
 
     start = f"{month}-01"
     end = through or M.month_end(month)
-    site = M.ENV.get("GSC_SITE_URL") or "https://ai.7senses.co.jp/"
+    # monthly_report --site と同じサイトを見る。.env の GSC_SITE_URL は AI集客ラボ固定で、
+    # 他社のレポートを AI集客ラボの数字で検算していた
+    site = f"https://{M.site_cfg()['domain']}/"
     bad, note = [], []
 
     # ── 1. 合計を2通りで出す（次元なし と query次元）────────────

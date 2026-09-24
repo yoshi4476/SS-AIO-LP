@@ -17,7 +17,7 @@
 2. `TODO: <slug> を品質基準まで直して score を更新し、再ビルドする`
    - articles/<slug>.md を CLAUDE.md Phase 5 の基準で修正する（不足セクション追加・AIO構造・マーカー・
      5,000字・FAQ整合）。全文の書き直しはせず、指摘箇所のピンポイント修正にとどめる
-   - `python scripts/score_check.py <slug>` を全PASSにしてから6観点採点をやり直し、90点以上で score を更新する
+   - `python scripts/score_check.py <slug>` を全PASSにしてから3観点採点（rubric.py）をやり直し、90点以上で score を更新する
    - 最大3サイクル。到達しない場合は articles/ に残したまま理由をログに書き、次のTODOへ進む
 
 3. `TODO: <slug> は <site> の領域。... 301転送する`
@@ -49,7 +49,7 @@
 【守ること】
 - 担当領域を越えない。publish_flow が領域外と判定して停止した場合、カテゴリだけ書き換えて通すことは禁止。
   その記事は正しいサイトへ配信し直すか、取り下げて別のKWで書き直す
-- 品質基準（score 90点以上・機械採点19項目全PASS）は救済時も下げない。本数のために基準を緩めない
+- 品質基準（score 90点以上・機械採点18項目全PASS）は救済時も下げない。本数のために基準を緩めない
 - 読み込むファイルは CLAUDE.md / daily_audit.py の出力 / site_brief.py の出力 / 対象記事のみに限定する
 
 【終わったら】

@@ -189,7 +189,12 @@ def cross_site_check():
     if not hub_client.enabled():
         print("CROSS_CANNIBAL=skip （HUB_URL未設定のため横断検査を行いません）")
         return []
-    kws = [k for k in hub_client.all_kw() if k.get("status") != "対象外"]
+    try:
+        kws = [k for k in hub_client.all_kw(strict=True) if k.get("status") != "対象外"]
+    except Exception as e:
+        # 読めなかったのを「台帳が空」と扱うと CROSS_CANNIBAL=no（重複なし）と出てしまう
+        print(f"CROSS_CANNIBAL=skip （台帳を読めません: {str(e)[:60]}）")
+        return []
     if not kws:
         print("CROSS_CANNIBAL=no （台帳にKWがありません）")
         return []
@@ -310,8 +315,14 @@ def territory_check():
         print("TERRITORY_CHECK=skip （HUB_URL未設定）")
         return []
 
+    try:
+        rows = hub_client.all_kw(strict=True)
+    except Exception as e:
+        # 読めなかったのを「侵食0件」と扱うと TERRITORY_OK=yes と出てしまう
+        print(f"TERRITORY_CHECK=skip （台帳を読めません: {str(e)[:60]}）")
+        return []
     bad = []
-    for k in hub_client.all_kw():
+    for k in rows:
         site, kw = k.get("site"), k.get("keyword", "")
         if site not in owns or k.get("status") == "対象外":
             continue  # 取り下げ済みのKWは書かれないため検査対象から外す
@@ -412,10 +423,13 @@ def _shared_queries(site_id, a_slug, b_slug, limit=5, sc=None):
             rows = sc.searchanalytics().query(
                 siteUrl=f"https://{cfg['domain']}/", body=body).execute().get("rows", [])
         except Exception:
-            return {}
+            return None
         return {r["keys"][0]: (r["impressions"], r["position"]) for r in rows}
 
     a, b = qs(a_slug), qs(b_slug)
+    # 取れなかったのを「同じ語に出ていない」と数えると clear に化ける。呼び出し側で unknown にする
+    if a is None or b is None:
+        return None
     both = set(a) & set(b)
     return sorted(((k, a[k][0] + b[k][0], a[k][1], b[k][1]) for k in both),
                   key=lambda x: -x[1])[:limit]
@@ -451,6 +465,9 @@ def judge_overlap(hits):
             continue
         shared = _shared_queries(h["site"], h["mine"]["slug"],
                                  h["theirs"]["slug"], sc=sc)
+        if shared is None:
+            h["verdict"], h["why"] = "unknown", "GSCで検索語を引けませんでした"
+            continue
         h["shared"] = shared
         if shared:
             h["verdict"] = "conflict"

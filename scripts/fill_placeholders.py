@@ -70,7 +70,9 @@ def mapping(cfg, prof, env):
         "SITE_REPO_1": cfg.get("repo", ""),
         "SITE_REPO_2": cfg.get("repo", ""),
         "GITHUB_OWNER": (cfg.get("repo", "").split("/")[0] if "/" in cfg.get("repo", "") else ""),
-        "SHARED_SECRET": env.get("HUB_SECRET", ""),
+        # 合言葉の値はソースに書き込まない（コミットされる）。gas_deploy が配る時に
+        # .env の値で埋める印へ戻すだけにする
+        "SHARED_SECRET": "XXXXXXXXXXXXXXXX",
         "SERVICE_ACCOUNT": env.get("SERVICE_ACCOUNT", ""),
         "GCP_PROJECT": cfg.get("id", ""),
         "RESEND_UNSUBSCRIBE_URL": ("https://" + dom + "/unsubscribe/") if dom else "",

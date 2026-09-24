@@ -116,7 +116,7 @@ def build_body(days=28):
 <h2>1. 生成AI経由の流入（実数）</h2>
 <p>AI検索から自社サイトに何人来ているかを、参照元ドメインで数えた実数です。
 <strong>母数は同じ期間の全セッション{all_tot:,}件</strong>で、そのうちAI経由は{ai_sum:,}件
-（{ai_sum / all_tot * 100:.1f}%）でした。</p>
+（{ai_sum / all_tot * 100 if all_tot else 0:.1f}%）でした。</p>
 <table><thead><tr><th>生成AI</th><th>セッション数</th><th>全体に占める割合</th></tr></thead><tbody>''']
     for name in AI_SOURCES:
         n = ai_tot[name]

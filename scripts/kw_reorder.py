@@ -69,7 +69,9 @@ def strong_variants(site, days=90):
     start = end - timedelta(days=days)
     try:
         sc = G.client()
-        rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000)
+        # 取得失敗を [] で受けると「候補0本」として前回の一覧を空で上書きする
+        rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000,
+                   raise_errors=True)
     except Exception as e:
         print(f"   {site}: GSC を読めません（{str(e)[:50]}）")
         return []

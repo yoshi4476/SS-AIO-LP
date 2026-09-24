@@ -237,7 +237,11 @@ def all_kw(strict=False):
             raise RuntimeError("HUB_URL が未設定です")
         return []
     try:
-        return _get({"action": "all_kw"}).get("keywords", [])
+        d = _get({"action": "all_kw"})
+        # GAS は失敗しても {ok:false} で返す。keywords が無いのを「台帳が空」と読まない
+        if strict and (d.get("ok") is False or "keywords" not in d):
+            raise RuntimeError(d.get("error") or "台帳を読めませんでした")
+        return d.get("keywords", [])
     except Exception:
         if strict:
             raise
@@ -323,7 +327,7 @@ def main():
             r = status(s)
             print(f"{s:10s} 全{r.get('total', 0):3d}件  未着手{r.get('todo', 0):3d}  "
                   f"執筆中{r.get('doing', 0):2d}  公開済み{r.get('done', 0):3d}")
-    elif cmd == "next":
+    elif cmd in ("next", "next_kw"):         # 手順書は next_kw の名で案内している
         print(json.dumps(next_kw(site), ensure_ascii=False, indent=2))
     elif cmd == "all":
         for k in all_kw():

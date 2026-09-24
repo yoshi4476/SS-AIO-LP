@@ -266,6 +266,8 @@ def main():
         poor = [only] if only in arts else []
         if not poor:
             print(f"   --only の記事が見つかりません: {only}")
+    import sites as S
+    pre = S.load(site).get("url_prefix")
     done = 0
     for tgt in poor:
         a = arts[tgt]
@@ -300,7 +302,9 @@ def main():
             pos = pick_spot(b["body"], tw)
             if pos is None:
                 continue
-            url = f"/blog/{tgt}/" if site != "ai-lab" else f"/{a['cat']}/{tgt}/"
+            # URLの形はサイト設定で決まる。サイトIDで決め打ちすると、接頭辞が /blog でない
+            # （または無い）クライアントの記事へ /blog/ で送り、配信先で404になる
+            url = f"{pre.rstrip('/')}/{tgt}/" if pre else f"/{a['cat']}/{tgt}/"
             # 言い回しは link_new の型から選ぶ。ここで自前の一文を書くと、
             # 同じ文がサイト中に並ぶ。実測で1つの型が全体の41.5%を占めた
             h2 = ar.h2_before(b["body"], pos)

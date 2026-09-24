@@ -50,15 +50,19 @@ def sc_client():
         ["https://www.googleapis.com/auth/webmasters.readonly"]))
 
 
-def query(sc, domain, s, e, dims=None, limit=25000):
+def query(sc, domain, s, e, dims=None, limit=25000, none_on_error=False):
+    """none_on_error=True は失敗を None で返す。[] だと「その週は表示0」として
+    合計と前週比に入り、一時的なエラーの週が急落に見える（月次も呼ぶので既定は [] のまま）"""
     body = {"startDate": s.isoformat(), "endDate": e.isoformat(), "rowLimit": limit}
     if dims:
         body["dimensions"] = dims
-    try:
-        return sc.searchanalytics().query(
-            siteUrl=f"https://{domain}/", body=body).execute().get("rows", [])
-    except Exception:
-        return []
+    for _ in range(2):
+        try:
+            return sc.searchanalytics().query(
+                siteUrl=f"https://{domain}/", body=body).execute().get("rows", [])
+        except Exception:
+            continue
+    return None if none_on_error else []
 
 
 def svg_rank(labels, series, title):
@@ -73,6 +77,8 @@ def svg_rank(labels, series, title):
     W, H, PL, PB, PT = 700, 300, 44, 34, 18
     vals = [x for v in alive.values() for x in v if x]
     lo, hi = max(1, min(vals) - 2), min(60, max(vals) + 2)
+    if hi <= lo:              # 全語が60位より下だと上限が下限を割り、線が図の外へ出る
+        hi = max(vals) + 2
     rng = (hi - lo) or 1
 
     def xy(i, v):
@@ -144,8 +150,10 @@ def collect(sc, conf, ws):
         d = c["domain"]
         tot = []
         for s, e in ws:
-            r = query(sc, d, s, e)
-            if r:
+            r = query(sc, d, s, e, none_on_error=True)
+            if r is None:
+                tot.append(None)          # 取得できなかった週。0とは区別する
+            elif r:
                 x = r[0]
                 tot.append({"imp": int(x["impressions"]), "clk": int(x["clicks"]),
                             "pos": x["position"]})
@@ -291,8 +299,14 @@ def cover(ws):
 
 def html(ws, site_rows, kw_pos, picks, conf, funnel_txt, diag_html=""):
     labels = [f"{s.month}/{s.day}" for s, _ in ws]
-    tot = [sum(site_rows[s][i]["imp"] for s in site_rows) for i in range(len(ws))]
-    clk = [sum(site_rows[s][i]["clk"] for s in site_rows) for i in range(len(ws))]
+    tot = [sum(site_rows[s][i]["imp"] for s in site_rows if site_rows[s][i]) for i in range(len(ws))]
+    clk = [sum(site_rows[s][i]["clk"] for s in site_rows if site_rows[s][i]) for i in range(len(ws))]
+    missing = [f"{conf.get(s, {}).get('name', s)} {labels[i]}週"
+               for s in sorted(site_rows) for i in range(len(ws)) if site_rows[s][i] is None]
+    miss_note = ("" if not missing else
+                 '<p class="note">Search Console から取得できなかった週があります（'
+                 + esc("、".join(missing[:8])) + (" ほか" if len(missing) > 8 else "")
+                 + "）。その週の合計からは除いています。0回ではありません。</p>")
     d_i = tot[-1] - tot[-2] if len(tot) > 1 else 0
     d_c = clk[-1] - clk[-2] if len(clk) > 1 else 0
     ctr = clk[-1] / tot[-1] * 100 if tot[-1] else 0
@@ -309,6 +323,7 @@ def html(ws, site_rows, kw_pos, picks, conf, funnel_txt, diag_html=""):
 <div class="s">前週比 {d_c:+,}</div></div>
 <div class="hl"><div class="k">クリック率</div><div class="v">{ctr:.2f}%</div>
 <div class="s">3サイト合計</div></div></div>
+{miss_note}
 <p class="note">月の合計では月中の動きが見えません。週単位なら、直した翌週に効いたかが分かります。</p>
 <div class="sec" style="margin-top:14px"><span class="no">02</span>
 <h2>表示とクリックの推移</h2><div class="gold"></div></div>
@@ -322,20 +337,26 @@ def html(ws, site_rows, kw_pos, picks, conf, funnel_txt, diag_html=""):
         cand = [(k, v) for k, v in cand if sum(1 for x in v if x) >= max(2, len(ws) // 3)]
         cand.sort(key=lambda kv: min(x for x in kv[1] if x))
         r = site_rows[site]
+        cur = r[-1]
         prev = r[-2] if len(r) > 1 else {"imp": 0, "clk": 0, "pos": 0}
+        if cur is None or prev is None:
+            week_tbl = ('<p class="note">今週または前週の数字を Search Console から'
+                        '取得できなかったため、比較を出していません。</p>')
+        else:
+            week_tbl = f"""<table><tr><th style="width:30%">指標</th><th>今週</th><th>前週</th><th>差</th></tr>
+<tr><td>表示回数</td><td class="num">{cur["imp"]:,}</td>
+<td class="num">{prev["imp"]:,}</td><td class="num">{cur["imp"] - prev["imp"]:+,}</td></tr>
+<tr><td>クリック</td><td class="num">{cur["clk"]:,}</td>
+<td class="num">{prev["clk"]:,}</td><td class="num">{cur["clk"] - prev["clk"]:+,}</td></tr>
+<tr><td>平均順位</td><td class="num">{cur["pos"]:.1f}位</td>
+<td class="num">{prev["pos"]:.1f}位</td>
+<td class="num">{cur["pos"] - prev["pos"]:+.1f}</td></tr></table>"""
         h.append(f"""<div class="sheet">
 <div class="sec"><span class="no">{n:02d}</span>
 <h2>{esc(c.get("name", site))} の順位推移</h2><div class="gold"></div></div>
 {svg_rank(labels, dict(cand[:5]), "主要キーワードの順位（上ほど上位）")}
 <h3>今週の実績</h3>
-<table><tr><th style="width:30%">指標</th><th>今週</th><th>前週</th><th>差</th></tr>
-<tr><td>表示回数</td><td class="num">{r[-1]["imp"]:,}</td>
-<td class="num">{prev["imp"]:,}</td><td class="num">{r[-1]["imp"] - prev["imp"]:+,}</td></tr>
-<tr><td>クリック</td><td class="num">{r[-1]["clk"]:,}</td>
-<td class="num">{prev["clk"]:,}</td><td class="num">{r[-1]["clk"] - prev["clk"]:+,}</td></tr>
-<tr><td>平均順位</td><td class="num">{r[-1]["pos"]:.1f}位</td>
-<td class="num">{prev["pos"]:.1f}位</td>
-<td class="num">{r[-1]["pos"] - prev["pos"]:+.1f}</td></tr></table>
+{week_tbl}
 </div>""")
         n += 1
 

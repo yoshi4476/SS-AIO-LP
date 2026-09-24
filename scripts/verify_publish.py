@@ -17,6 +17,7 @@ push が成功しても、配信先のビルドが落ちれば記事は公開さ
 どちらかが駄目なら失敗として返す。呼び出し側はこれを見て再配信や記録の抑止を判断する。
 """
 import argparse
+import html
 import json
 import re
 import os
@@ -101,7 +102,9 @@ def wait_live(url, timeout=LIVE_TIMEOUT, title=None):
                     else:
                         body = r.read().decode("utf-8", "ignore")
                         m = re.search(r"<title>(.*?)</title>", body, re.S)
-                        got = (m.group(1) if m else "")
+                        # <title> は実体参照で書かれる（M&A → M&amp;A）。戻さずに比べると
+                        # 公開済みでも「別の内容」と判定し、台帳を公開済みにしない
+                        got = html.unescape(m.group(1) if m else "")
                         if not title or title[:14] in got:
                             return True, f"公開を確認: {url}"
                         last = f"別の内容が表示されている（title: {got[:30]}）"

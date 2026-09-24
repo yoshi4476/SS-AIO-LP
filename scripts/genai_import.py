@@ -94,15 +94,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("csv", nargs="?", help="Search Console から落としたCSV")
     ap.add_argument("--site", default="", help="サイトID")
-    ap.add_argument("--month", default="", help="対象月（YYYY-MM。省略で今月）")
+    ap.add_argument("--month", default="", help="対象月（YYYY-MM。省略で先月）")
     a = ap.parse_args()
 
     store = load()
+    t = date.today()
+    last = f"{t.year if t.month > 1 else t.year - 1}-{(t.month - 1) or 12:02d}"
     if not a.csv:
         # 前月ぶんが揃っているかを見る。APIから取れない以上、
         # 人が落とすのを忘れれば数字は永久に空く。忘れたことに気づける形にする
-        t = date.today()
-        last = f"{t.year if t.month > 1 else t.year - 1}-{(t.month - 1) or 12:02d}"
         have = set((store.get(last) or {}))
         missing = [s for s in site_ids() if s not in have]
 
@@ -127,7 +127,9 @@ def main():
 
     if a.site not in site_ids():
         raise SystemExit(f"--site は {' / '.join(site_ids())} のどれかです")
-    month = a.month or date.today().strftime("%Y-%m")
+    # 取り込むのは先月ぶん（手順どおり「先月」で落とす）。今月を既定にすると、
+    # 上の未取込の検査が見る先月が永久に空いたまま「未取込」と出続ける
+    month = a.month or last
     if not re.fullmatch(r"\d{4}-\d{2}", month):
         raise SystemExit("--month は YYYY-MM で書いてください")
 

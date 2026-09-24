@@ -52,13 +52,12 @@ def _pages(days):
     start, end = _spans(days)
     rows = []
     for cfg in S.load_all().values():
-        try:
-            for r in G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000):
-                slug = r.get("page", r.get("keys", [""])[0] if isinstance(r.get("keys"), list) else "").rstrip("/").split("/")[-1]
-                rows.append({"site": cfg["id"], "slug": slug, "imp": r["impressions"],
-                             "clicks": r["clicks"], "pos": r["position"]})
-        except Exception as e:
-            print(f"  {cfg['id']}: GSCから取れません（{str(e)[:40]}）")
+        # 1サイトでも取れなければ例外のまま上げる（data_auto が「作れません」にする）。
+        # 欠けたまま「3サイト合算」として公開すると、事実と違う数字になる
+        for r in G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000, raise_errors=True):
+            slug = r.get("page", r.get("keys", [""])[0] if isinstance(r.get("keys"), list) else "").rstrip("/").split("/")[-1]
+            rows.append({"site": cfg["id"], "slug": slug, "imp": r["impressions"],
+                         "clicks": r["clicks"], "pos": r["position"]})
     return rows, start, end
 
 

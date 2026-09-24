@@ -177,7 +177,8 @@ def result_score(sid, cfg, days=28):
         sc = G.client()
         end = date.today() - timedelta(days=3)
         start = end - timedelta(days=days - 1)
-        rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 2000)
+        # 取得失敗を [] で受けると「検索結果に出ているページがありません」と誤って0点にする
+        rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 2000, raise_errors=True)
     except Exception as e:
         return 0, [f"GSCから取得できません（{str(e)[:40]}）  0/25"]
     if not rows:

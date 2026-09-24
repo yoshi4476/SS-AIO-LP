@@ -1682,8 +1682,19 @@ def svg_series(vals, labels, color, title, height=170):
             f'{last}{ticks}</svg></div>')
 
 
+_REACH = None
+
+
 def _ai_reach():
     """AIのクローラーが本番に入れるか。塞がれば記事の中身に関係なくAI検索から消える"""
+    global _REACH
+    if _REACH is not None:           # タイルと本文の2か所で使う。実測は1回にする
+        return _REACH
+    _REACH = _ai_reach_probe()
+    return _REACH
+
+
+def _ai_reach_probe():
     try:
         import ai_crawler_check as C
         rows = []
@@ -1732,7 +1743,8 @@ def _ai_genai(ym):
         if not p.is_file():
             return None
         d = json.loads(p.read_text(encoding="utf-8"))
-        month = d.get(ym) or (d[sorted(d)[-1]] if d else None)
+        # 当月の分だけ。最新の月で埋めると、取り込み忘れの月に前の月の数字が当月として載る
+        month = d.get(ym)
         if not month:
             return None
         return sum(v.get("total", 0) for v in month.values())
@@ -1770,7 +1782,7 @@ def ai_measured_html(ym):
         try:
             ti = sum(x["cur"]["imp"] for x in b.values())
             pi = sum(x["prev"]["imp"] for x in b.values())
-            rate = f"+{(ti - pi) / pi * 100:.0f}%" if pi else "—"
+            rate = f"{(ti - pi) / pi * 100:+.0f}%" if pi else "—"
             cards.append(("指名検索（28日）", f"{ti:,}", f"前の28日 {pi:,} → {rate}"))
         except Exception:
             pass
@@ -2002,8 +2014,13 @@ def render(d, a):
         v = cur.get(key, 0)
         series = [m.get(key, 0) or 0 for m in labels]
         mom = a["mom"](key)
-        up = not mom.startswith("-")
-        good = (not up) if key == "pos" else up  # 順位は下がる=良い
+        if key == "pos":
+            # 順位の mom は「36.1位 → 20.5位（…）」の文で符号を持たない。
+            # 符号で判定すると、上がった月も必ず「悪い」色になる。数字で比べる（小さいほど良い）
+            pv = labels[-2].get("pos") if len(labels) > 1 else None
+            good = not (v and pv) or v <= pv
+        else:
+            good = not mom.startswith("-")
         return (f'<div class="tile"><div class="t-label">{plain(label)}</div>'
                 f'<div class="t-val">{v:,}{unit}</div>'
                 f'<div class="t-mom {"good" if good else "bad"}">前月比 {mom}</div>'
@@ -2254,6 +2271,9 @@ def render(d, a):
     ai_prev = d.get("ai_prev", 0)
     ai_mom = f"+{round((ai_total - ai_prev) / ai_prev * 100)}%" if ai_prev else "―"
     best = max(d["content"]["rows"], key=lambda r: str(r.get("score", "")), default=None)
+    # 到達は実測で書く。固定の「3/3」だと、塞がれた月も全サイト到達と読める
+    _reach = _ai_reach()
+    reach_v = f"{sum(1 for r in _reach if not r[2])}/{len(_reach)}" if _reach else "—"
     toc_items = [
         "エグゼクティブサマリー（3行まとめ）", "指標の評価（良し悪しの判定）",
         "KPIダッシュボード（前月比・6ヶ月推移）",
@@ -2626,7 +2646,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="hl-cards" style="margin:10px 0 14px">
   <div class="hl"><div class="k">{plain("AI経由セッション（当月）")}</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
   <div class="hl"><div class="k">{plain("AI経由の全体比")}</div><div class="v">{round(ai_total / max(cur.get("sessions",1),1) * 100, 1)}%</div><div class="s">対セッション</div></div>
-  <div class="hl"><div class="k">{plain("AIクローラーの到達")}</div><div class="v">3/3</div><div class="s">回答用のUAで実測</div></div>
+  <div class="hl"><div class="k">{plain("AIクローラーの到達")}</div><div class="v">{reach_v}</div><div class="s">回答用のUAで実測</div></div>
 </div>
 <h3>プラットフォーム別内訳</h3>
 {ai_bars(d.get("ai_breakdown", []), ai_total)}

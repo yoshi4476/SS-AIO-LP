@@ -99,12 +99,20 @@ def one(src, write):
         ng.append("品目が1つもありません")
     if [i for i in items if i["price"] is None]:
         ng.append("価格が数字でない品目があります")
+    import intake_watch as W
+    # 置き場のシートは処理後に移す。残すと毎回拾い直し、不備も毎回「要対応」として出続ける
+    placed = write and src.resolve().parent == W.IN.resolve()
     if ng:
+        if placed:
+            W.move(src, W.TODO, "このシートは登録していません。次を直して intake/ に戻してください。\n\n"
+                   + "\n".join("  - " + x for x in ng) + "\n")
         return False, " / ".join(ng)
     if write:
         DATA.mkdir(parents=True, exist_ok=True)
         (DATA / f"{site}.json").write_text(json.dumps({"site": site, "shop": shop, "items": items,
                                                        "updated": date.today().isoformat()}, ensure_ascii=False, indent=1), encoding="utf-8")
+        if placed:
+            W.move(src, W.DONE)
     return True, f"メニュー {len(items)}品目（{site}）"
 
 

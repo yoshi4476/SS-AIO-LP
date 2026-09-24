@@ -48,9 +48,12 @@ def collect(days=28):
         got = []
         for a, b in (prev, cur):
             try:
-                rows = G.q(sc, cfg["domain"], str(a), str(b), ["query"], 25000)
+                rows = G.q(sc, cfg["domain"], str(a), str(b), ["query"], 25000,
+                           raise_errors=True)
             except Exception:
-                rows = []
+                # 取れなかった期を0と数えると「指名検索が減った」と誤って知らせる。そのサイトごと外す
+                got = None
+                break
             hit = [r for r in rows if BRAND.search(r["keys"][0])]
             got.append({
                 "imp": sum(r["impressions"] for r in hit),
@@ -58,7 +61,9 @@ def collect(days=28):
                 "words": len(hit),
                 "rows": sorted(hit, key=lambda r: -r["impressions"]),
             })
-        out[sid] = {"name": cfg["name"], "prev": got[0], "cur": got[1],
+        if got is None:
+            continue
+        out[sid] ={"name": cfg["name"], "prev": got[0], "cur": got[1],
                     "span": (str(cur[0]), str(cur[1]))}
     return out
 

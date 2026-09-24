@@ -455,6 +455,11 @@ def check_unseen(todo):
         c_ = _re.search(r"^category:\s*(.+)$", t_, _re.M)
         if not (d_ and c_):
             continue
+        # 公開していない記事（score 90 未満・未採点）は検索に出なくて当然。数えると
+        # 「公開したのに出ていない」と誤って報告し、無駄な再通知を促す
+        s_ = _re.search(r"^score:\s*(\d+)", t_, _re.M)
+        if not s_ or int(s_.group(1)) < 90:
+            continue
         owner = sites_mod.find_category_owner(c_.group(1).strip())
         if owner:
             mine.setdefault(owner, []).append((p_.stem, d_.group(1), c_.group(1).strip()))

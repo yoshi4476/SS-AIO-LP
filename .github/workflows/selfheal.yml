@@ -27,11 +27,14 @@ jobs:
   heal:
     # 定期実行のときは常に。ワークフロー起因のときは、失敗か取り消しのときだけ動かす。
     # 取り消し（cancelled）も拾う。同じ concurrency グループで待機中の run は後から来た run に
-    # 取り消されるが、failure だけを見ていたため、その日の記事が消えても誰にも知らされなかった
+    # 取り消されるが、failure だけを見ていたため、その日の記事が消えても誰にも知らされなかった。
+    # ただしデプロイは cancel-in-progress で新しい push が古い run を取り消すのが正常の動き。
+    # これを拾うと push が続くたびに修復・書き直し・「cancelled で終わりました」の通知が走る
     if: >-
       github.event_name != 'workflow_run' ||
       github.event.workflow_run.conclusion == 'failure' ||
-      github.event.workflow_run.conclusion == 'cancelled'
+      (github.event.workflow_run.conclusion == 'cancelled' &&
+       github.event.workflow_run.name != 'Deploy to Cloudflare Pages')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

@@ -336,7 +336,11 @@ def limits_table(ds):
 
 
 def has_counts(ds):
-    return all("den" in r for r in ds["rows"]) and len(ds["rows"]) > 0
+    # 分子・分母の表は「値＝分子÷分母の%」のときだけ成り立つ。セッション数・本数・倍率の
+    # データ（data_auto が num/den を付ける）まで通すと、36セッションが「36%」、
+    # 中央値5本が「5%（95%の範囲 95〜100%）」と公開ページに出ていた
+    return (str(ds.get("unit") or "").strip() in ("%", "％")
+            and all(r.get("den") for r in ds["rows"]) and len(ds["rows"]) > 0)
 
 
 def totals(ds):

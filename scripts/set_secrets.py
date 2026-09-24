@@ -149,7 +149,8 @@ def set_github(vals):
     for k, v in vals.items():
         if k not in TO_GITHUB:
             continue
-        r = subprocess.run(["gh", "secret", "set", k, "--body", v],
+        # 値は標準入力で渡す。--body で渡すと、実行中はプロセス一覧から誰でも読める
+        r = subprocess.run(["gh", "secret", "set", k], input=v,
                            capture_output=True, text=True, encoding="utf-8",
                            errors="replace", timeout=60, cwd=ROOT)
         (ok if r.returncode == 0 else ng).append(k)
@@ -214,7 +215,8 @@ def main():
                        errors="replace", cwd=ROOT)
     print("\n".join("   " + l for l in (r.stdout or "").strip().splitlines()[-6:]))
     print(f"\n終わったら `python scripts/set_secrets.py --clean` で {LOCAL.name} を消してください")
-    return 0 if r.returncode == 0 else 1
+    # 確認（token_check）は配信用トークンしか見ない。他の値の反映失敗も終了コードに出す
+    return 0 if r.returncode == 0 and not ng else 1
 
 
 if __name__ == "__main__":

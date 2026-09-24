@@ -291,7 +291,9 @@ def relink(site, from_url, to_url, survivor):
     n = 0
     for p in ARTICLES.glob("*.md"):
         t = p.read_text(encoding="utf-8-sig")
-        u = t.replace(f"https://{dom}{from_url}", to_url).replace(from_url, to_url)
+        # 絶対URLは絶対URLのまま付け替える。相対にすると、他サイトの記事から張った
+        # https://corp…/blog/x/ が /blog/y/ になり、そのサイトのドメインで404になる
+        u = t.replace(f"https://{dom}{from_url}", f"https://{dom}{to_url}").replace(from_url, to_url)
         if p.stem == survivor:
             u = re.sub(rf'<a href="(?:https://{re.escape(dom)})?{re.escape(to_url)}"[^>]*>(.*?)</a>', r"\1", u)
             u = re.sub(rf"\[([^\]]+)\]\((?:https://{re.escape(dom)})?{re.escape(to_url)}\)", r"\1", u)

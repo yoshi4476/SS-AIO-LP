@@ -15,7 +15,6 @@ Excelの経路（data_intake.py）と同じ検査を通すので、
     python scripts/intake_to_sheet.py --pull     # 書かれた内容を取り込む
 """
 import argparse
-import json
 import os
 import re
 import sys
@@ -138,12 +137,13 @@ PLANS = {
             ("対象期間（終了）", ""),
             ("集計方法・出典", "導入前3か月と導入後3か月の平均所要日数を社ごとに出し、その中央値を比較"),
             ("値の単位", "日"),
-            ("関連カテゴリ", "blog"),
+            ("関連カテゴリ", "keiri-bpo"),
             ("分母の呼び名", "社数"),
         ],
         "rows": [
-            ["導入前", "", "", "10", "月末から決算が締まるまでの日数", "3", "", "", "10社の中央値"],
-            ["導入後", "", "", "10", "同上", "3", "", "", "10社の中央値。個社差が大きい"],
+            # 割合ではないので分子・分母は空（分母だけ入れると検査で止まる）。社数は母数と備考に書く
+            ["導入前", "", "", "", "月末から決算が締まるまでの日数", "3", "", "", "10社の中央値"],
+            ["導入後", "", "", "", "同上", "3", "", "", "10社の中央値。個社差が大きい"],
         ],
         "note": "母数10社なので割合では書きません。「◯日短縮」とも書かず、前後2行を出して読者に引き算させます。",
     },
@@ -197,7 +197,7 @@ def push():
 
         # 見た目: 見出しを太字に、記入欄を黄色に
         gid = have[title]
-        ov_start = 4                      # 概要の1行目（0始まり）
+        ov_start = 3                      # 概要の1行目（0始まり。説明・空行・「■ 概要」の次）
         ov_end = ov_start + len(plan["overview"])
         dt_head = ov_end + 2
         dt_start = dt_head + 1
@@ -277,69 +277,20 @@ def pull():
         if not vals:
             print(f"  {title}: まだ数字が入っていません")
             continue
-        ds = _to_dataset(ov, vals)
-        ng = _check(ds)
+        # Excel の経路と同じ検査・同じ公開処理に通す。独自の簡易検査だと、母数10未満の実数や
+        # 分子分母と合わない割合、引用用の一文が空のデータまで公開・一次情報に登録していた
+        keys = ("label", "value", "num", "den", "window", "months", "row_start", "row_end", "note")
+        ds, ng, warn = DI.review({"overview": ov, "rows": [dict(zip(keys, x)) for x in vals]})
+        for w in warn:
+            print(f"  {title}: △ {w}")
         if ng:
-            print(f"  {title}: 公開しません → {ng}")
+            print(f"  {title}: 公開しません → {' / '.join(ng)}")
             continue
-        out = ROOT / "data" / "datasets" / f"{ds['slug']}.json"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps(ds, ensure_ascii=False, indent=1),
-                       encoding="utf-8", newline="\n")
-        print(f"  {title}: data/datasets/{ds['slug']}.json に書きました（{len(vals)}行）")
+        touched = DI.apply(ds)
+        print(f"  {title}: 公開しました（{len(vals)}行）{', '.join(touched[:2])}")
         made += 1
-    if made:
-        import subprocess
-        subprocess.run([sys.executable, "scripts/data_intake.py", "--rebuild"],
-                       cwd=ROOT, check=False)
     print(f"{chr(10)}  公開したデータ: {made}件")
     return 0
-
-
-def _to_dataset(ov, rows):
-    from datetime import date
-    def num(x):
-        try:
-            return float(str(x).replace(",", ""))
-        except Exception:
-            return None
-    today = str(date.today())
-    return {
-        "slug": ov.get("slug", ""), "title": ov.get("題名", ""),
-        "description": ov.get("説明", ""),
-        "n": int(num(ov.get("母数（件数）")) or 0),
-        "n_unit": ov.get("母数の単位", "件"),
-        "period": f"{ov.get('対象期間（開始）', '')}〜{ov.get('対象期間（終了）', '')}",
-        "start": ov.get("対象期間（開始）", ""), "end": ov.get("対象期間（終了）", ""),
-        "method": ov.get("集計方法・出典", ""), "unit": ov.get("値の単位", ""),
-        "categories": [c.strip() for c in ov.get("関連カテゴリ", "").split(",") if c.strip()],
-        "den_label": ov.get("分母の呼び名", ""), "num_label": ov.get("分子の呼び名", ""),
-        "neg_label": ov.get("差の呼び名", ""),
-        "published": today, "modified": today, "sentence": "",
-        "rows": [{"label": r[0], "value": num(r[1]), "num": num(r[2]), "den": num(r[3]),
-                  "window": r[4], "months": num(r[5]), "row_start": r[6],
-                  "row_end": r[7], "note": r[8]} for r in rows],
-    }
-
-
-def _check(ds):
-    """公開してよいか。data_intake と同じ考え方で止める"""
-    if not ds["slug"] or not re.fullmatch(r"[a-z0-9-]+", ds["slug"]):
-        return "slug が英小文字・数字・ハイフンではありません"
-    if not ds["n"]:
-        return "母数（件数）が空です"
-    if not ds["start"] or not ds["end"]:
-        return "対象期間が空です"
-    if not ds["method"]:
-        return "集計方法・出典が空です"
-    if ds["unit"] in ("%", "％") and ds["n"] < 10:
-        return f"母数{ds['n']}で割合は公開できません（実数で書いてください）"
-    for r in ds["rows"]:
-        if r["value"] is None:
-            return f"「{r['label']}」の値が数字ではありません"
-        if ds["unit"] in ("%", "％") and (r["num"] is None or r["den"] is None):
-            return f"「{r['label']}」に分子・分母がありません（割合には必要です）"
-    return ""
 
 
 def main():

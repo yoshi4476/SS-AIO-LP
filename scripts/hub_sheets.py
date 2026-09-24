@@ -12,7 +12,7 @@ GAS 側の関数（nextKw_ / claimKw_ / addKw_ …）と**同じ列・同じ判�
 """
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -50,14 +50,16 @@ def _svc():
 
 
 def _now():
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # GAS は new Date() をシートの時刻（JST）で書く。CI は UTC なので、素の now() だと9時間ずれる
+    return datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def norm_kw(s):
-    """GAS の normKw_ と同じ: 全角英数を半角に、空白・記号を落として小文字に"""
+    """GAS の normKw_ と同じ: 全角英数を半角に、空白・記号を落として小文字に。
+    落とす記号が1つでも違うと、GAS なら弾く重複（「〜とは？」と「〜とは」）を直接接続では通してしまう"""
     s = str(s or "")
-    s = "".join(chr(ord(c) - 0xFEE0) if "Ａ" <= c <= "ｚ" or "０" <= c <= "９" else c for c in s)
-    return re.sub(r"[\s　・･／/（）()｜|【】\[\]「」、。,.\-‐－—_]", "", s).lower()
+    s = "".join(chr(ord(c) - 0xFEE0) if "Ａ" <= c <= "Ｚ" or "ａ" <= c <= "ｚ" or "０" <= c <= "９" else c for c in s)
+    return re.sub(r"[\s　・|｜:：\-—?？!！。、,.／/（）()【】\[\]]", "", s).lower()
 
 
 def rows(tab, cols):
@@ -88,24 +90,37 @@ def kw_status(site=""):
     return {"ok": True, "site": site or "all", "total": len(rs), "todo": c("未着手"), "doing": c("執筆中"), "done": c("公開済み")}
 
 
+def _conflicts(site, keyword, rs, self_i):
+    """GAS の kwConflict_ と同じ: 生きている行のうち、完全一致か前方の包含。(同じサイト, 他サイト)"""
+    n = norm_kw(keyword)
+    same, cross = [], []
+    for j, r in enumerate(rs):
+        if j == self_i or str(r[2]).strip() in ("対象外", "取り下げ"):
+            continue
+        m = norm_kw(r[1])
+        if not m or not (m == n or m.startswith(n) or n.startswith(m)):
+            continue
+        rec = {"site": r[0], "keyword": r[1], "status": str(r[2]).strip(), "url": r[9]}
+        (same if str(r[0]) == str(site) else cross).append(rec)
+    return same, cross
+
+
 def next_kw(site):
-    rs = all_kw()
-    cands = sorted([r for r in rs if (not site or r["site"] == site) and r["status"] == "未着手"],
-                   key=lambda r: str(r["priority"]))
+    rs = rows("KW台帳", KW_COLS)
+    cands = sorted([(i, r) for i, r in enumerate(rs)
+                    if r[1] and (not site or str(r[0]) == site) and str(r[2]).strip() == "未着手"],
+                   key=lambda x: str(x[1][3] or "B"))
     if not cands:
         return {"ok": True, "keyword": None, "remaining": 0, "need_replenish": True}
-    live = {}
-    for r in rs:
-        if r["status"] not in ("対象外", "取り下げ"):
-            live.setdefault(norm_kw(r["keyword"]), []).append(r)
     blocked = []
-    for c in cands:
-        dup = [x for x in live.get(norm_kw(c["keyword"]), []) if x is not c and x["status"] != "未着手"]
-        if dup:                                     # 生きている同じ語が既にある（公開済み・執筆中）
-            blocked.append({"keyword": c["keyword"], "why": f"同じ語が {dup[0]['site']} に {dup[0]['status']}"})
+    for i, c in cands:
+        same, cross = _conflicts(c[0], c[1], rs, i)
+        if same:                                    # 同じサイトに生きている同じ語（包含を含む）がある
+            blocked.append({"keyword": c[1], "why": "着手禁止（同じサイトに同じ語がある）"})
             continue
-        return {"ok": True, "keyword": c["keyword"], "category": c["category"], "aim": c["aim"], "site": c["site"],
-                "remaining": len(cands), "need_replenish": len(cands) <= 5, "skipped_conflict": blocked}
+        return {"ok": True, "keyword": c[1], "category": c[4], "aim": c[5], "site": c[0],
+                "remaining": len(cands), "need_replenish": len(cands) <= 5,
+                "cross_site_warning": cross, "skipped_conflict": blocked}
     return {"ok": True, "keyword": None, "remaining": len(cands), "need_replenish": True, "skipped_conflict": blocked,
             "note": "未着手のKWはすべて既存記事と食い合います。台帳の補充が必要です"}
 
@@ -159,13 +174,17 @@ def add_kw(site, keywords):
     """表記ゆれを吸収して重複を弾く（他サイトの生きている語も弾く）"""
     live = {norm_kw(r["keyword"]) for r in all_kw() if r["status"] not in ("対象外", "取り下げ")}
     added = []
-    for kw in keywords or []:
-        k = norm_kw(kw)
+    for k0 in keywords or []:
+        # GAS と同じく、語だけの文字列と {keyword, priority, category, aim, note} の両方を受ける
+        # （kw_plan・seed_hub は優先度つきの辞書で渡す）
+        kw = k0 if isinstance(k0, dict) else {"keyword": k0}
+        k = norm_kw(kw.get("keyword"))
         if not k or k in live:
             continue
-        _append("KW台帳", [site, kw, "未着手", "B", "", "", _now(), "", "", "", "自動補充"])
+        _append("KW台帳", [site, kw["keyword"], "未着手", kw.get("priority") or "B", kw.get("category") or "",
+                          kw.get("aim") or "", _now(), "", "", "", kw.get("note") or "自動補充"])
         live.add(k)
-        added.append(kw)
+        added.append(kw["keyword"])
     return {"ok": True, "added": len(added), "keywords": added}
 
 

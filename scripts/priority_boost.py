@@ -55,7 +55,9 @@ def near_page1(days=28):
     for sid, cfg in S.load_all().items():
         pat = re.compile(MAIN_PATTERN.get(sid, ""), re.I)
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000)
+            # 既定の q は失敗を [] で返し、下の except に届かない（「対象なし」に化ける）
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000,
+                       raise_errors=True)
         except Exception as e:
             print(f"  {sid}: GSCから取れません（{str(e)[:40]}）")
             continue

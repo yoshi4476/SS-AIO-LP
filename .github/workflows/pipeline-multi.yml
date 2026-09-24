@@ -169,6 +169,8 @@ jobs:
             echo "own=${{ needs.select.outputs.own }}"
             echo "first=${{ needs.select.outputs.first }}"
           } >> "$GITHUB_OUTPUT"
+          # 配信先のビルドを探す起点。push の後の時刻にすると、先に始まったビルドを見失う
+          echo "RUN_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
           over="${{ needs.select.outputs.over }}"
           if [ -n "$over" ]; then
             mkdir -p automation/logs
@@ -453,7 +455,7 @@ jobs:
           fi
           # 待つのは最長4.5分まで（以前は最長18分。1回の実行の半分がこの待ちだった）。
           # 見えなければ「確認中」で残し、翌日の publish_gap と日次の deploy_check が判定する
-          out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}" --build-timeout 180 --live-timeout 90) || true
+          out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}" --since "$RUN_START" --build-timeout 180 --live-timeout 90) || true
           echo "$out"
           # **「見えない」と「公開されていない」は違う。**
           # 配信が10分で終わらない日があり、それを「要対応」で出すと狼少年になる。

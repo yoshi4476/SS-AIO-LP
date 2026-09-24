@@ -60,10 +60,12 @@ def ctr_by_rank(days=DAYS):
     agg = {b[2]: [0, 0] for b in bands}              # [表示, クリック]
     for cfg in S.load_all().values():
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000)
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000,
+                       raise_errors=True)
         except Exception as e:
+            # 1サイト欠けたまま「3サイト合算」として公開すると、事実と違う数字になる。作らない
             print(f"  {cfg['id']}: GSCから取れません（{str(e)[:40]}）")
-            continue
+            return None
         for r in rows:
             for lo, hi, lab in bands:
                 if lo <= r["position"] < hi:
@@ -135,7 +137,7 @@ def ai_referral(days=DAYS):
                 dimensions=[Dimension(name="sessionSource")],
                 metrics=[Metric(name="sessions")]))
         except Exception:
-            continue
+            return None            # 欠けたまま「3サイト合算」と出さない
         for r in rep.rows:
             host = r.dimension_values[0].value.lower()
             for name, hosts in src.items():
@@ -192,9 +194,11 @@ def index_speed(days=DAYS):
     seen = set()
     for cfg in S.load_all().values():
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000)
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000,
+                       raise_errors=True)
         except Exception:
-            continue
+            # 取れなかったサイトの記事が全部「検索に出ていない」に数えられる。作らない
+            return None
         for r in rows:
             seen.add(r["keys"][0].rstrip("/").split("/")[-1])
 
@@ -262,9 +266,10 @@ def links_by_rank(days=DAYS):
     pos = defaultdict(lambda: [0, 0.0])
     for cfg in S.load_all().values():
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000)
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000,
+                       raise_errors=True)
         except Exception:
-            continue
+            return None            # 欠けたまま「3サイト」の実測として出さない
         for r in rows:
             s = r["keys"][0].rstrip("/").split("/")[-1]
             pos[s][0] += r["impressions"]

@@ -69,6 +69,10 @@ def brand(site_id, days=28):
 def stock(site_id):
     import hub_client
     st = hub_client.status(site_id) or {}
+    # 未接続・管制塔のエラーは {"ok": False} で返る。0本として扱うと「在庫0本」と報告し、
+    # report_actions が在庫の補充（kw_discover）まで走らせる
+    if not st.get("ok"):
+        raise RuntimeError(f"管制塔から在庫を取得できません: {st.get('error', '')}")
     a = 0
     try:
         import kw_plan

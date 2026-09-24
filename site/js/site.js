@@ -172,7 +172,9 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           var el = e.target;
-          var id = el.getAttribute('data-area-id') || slugId(el.getAttribute('data-area'));
+          // GA4 のイベント名は英数字と _ だけ。ハイフン入りの id（cat-services 等）は記録されないため、
+          // 集計側（report_heat.slug_id）と同じ規則で揃える
+          var id = slugId(el.getAttribute('data-area-id') || el.getAttribute('data-area'));
           ga('section_view_' + id, { area_name: el.getAttribute('data-area'), page_path: location.pathname });
           ga('area_reach', { area_name: el.getAttribute('data-area'), area_id: id, page_path: location.pathname });
           aio.unobserve(el);

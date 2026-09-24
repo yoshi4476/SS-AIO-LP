@@ -74,10 +74,16 @@ def page_stats(sc, domain, slug, start, end):
             siteUrl=f"https://{domain}/", body=body).execute().get("rows", [])
     except Exception:
         return None
+    # page 次元は末尾スラッシュ違いで同じページが2行に分かれる（CLAUDE.md 0.1）。
+    # 最初の1行だけを採ると、前後で別の行を拾って増減を取り違えるので合算する
+    imp = clk = 0
+    ps = 0.0
     for r in rows:
         if r["keys"][0].rstrip("/").rsplit("/", 1)[-1] == slug:
-            return (int(r["impressions"]), int(r["clicks"]), r["position"])
-    return (0, 0, 0)
+            imp += int(r["impressions"])
+            clk += int(r["clicks"])
+            ps += r["position"] * r["impressions"]
+    return (imp, clk, ps / imp if imp else 0)
 
 
 def top_queries(sc, domain, slug, start, end, n=3):

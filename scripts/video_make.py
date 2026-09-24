@@ -268,9 +268,11 @@ def duration(path):
 
 
 def _fmt_srt(t):
-    h, rem = divmod(int(t), 3600)
+    # ミリ秒で丸めてから割る。小数部だけを丸めると 5.9996 が「00:00:05,1000」になり、SRTとして壊れる
+    sec, ms = divmod(int(round(t * 1000)), 1000)
+    h, rem = divmod(sec, 3600)
     m, s = divmod(rem, 60)
-    return f"{h:02d}:{m:02d}:{s:02d},{int(round((t - int(t)) * 1000)):03d}"
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
 
 
 def _write_srt_and_chapters(script, durs, out_mp4):

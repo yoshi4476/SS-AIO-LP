@@ -37,7 +37,9 @@ def audit(pdf, month, through=None):
     text, pages = pdf_text(pdf)
     start = f"{month}-01"
     end = through or M.month_end(month)
-    site = M.ENV.get("GSC_SITE_URL") or "https://ai.7senses.co.jp/"
+    # PDF と同じサイト（monthly_report --site）から取り直す。.env の GSC_SITE_URL は
+    # AI集客ラボ固定のため、他社の PDF に AI集客ラボの数字を探して毎回「照合NG」にしていた
+    site = f"https://{M.site_cfg()['domain']}/"
 
     # ── データ源から取り直す ────────────────────────
     tot = (RV._gsc(site, start, end).get("rows") or [{}])[0]

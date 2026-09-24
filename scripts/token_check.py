@@ -57,6 +57,10 @@ def _api(path, token):
                 if e.code == 403 and "rate limit" in msg.lower():
                     raise UpstreamError(f"レート制限（403 {msg}） request-id={rid}")
                 raise AuthError(f"{e.code} {msg or e.reason} request-id={rid}")
+            # 細粒度PATの対象に入っていない非公開リポジトリは 403 ではなく 404 になる。
+            # GitHub側の問題として報じると「再発行しても直りません」と逆の案内になる
+            if e.code == 404:
+                raise AuthError(f"404 リポジトリが無いか、トークンの対象に入っていません request-id={rid}")
             if 500 <= e.code < 600:
                 last = UpstreamError(f"GitHub側のエラー（{e.code} {e.reason}） request-id={rid}")
                 if i < RETRY - 1:
@@ -158,7 +162,7 @@ def main():
             code = _probe_write(repo, token)
             if code == 422:
                 print(f"  OK       {cfg['id']:10s} {repo}（書き込み可）")
-            elif code == 403:
+            elif code in (403, 404):
                 print(f"  権限不足 {cfg['id']:10s} {repo}"
                       f"（Contents: Read and write を付けてください）")
                 ng.append(repo)

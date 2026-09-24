@@ -150,7 +150,8 @@ def main():
             continue
         print(f"   {src[:28]:<30} 「{old[:26]}」→「{new[:26]}」")
         if write:
-            f.write_text(t[:m.start()] + f"[{new}]({m.group(1)})" + t[m.end():],
+            # URLは元のまま残す。path だけで書き直すと、他サイトへの絶対URLが自サイトの相対パスになり404になる
+            f.write_text(t[:m.start()] + f"[{new}]" + m.group(0)[len(old) + 2:] + t[m.end():],
                          encoding="utf-8", newline="")
         done += 1
     print(f"\n   {'書き換えました' if write else '候補'}: {done}本")
