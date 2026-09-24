@@ -6,6 +6,7 @@
 
 **数字はすべて提案書から取る。** 動画だけ古い数字が残る事故を防ぐ。
 """
+from sales_shift import segments as shift_segments
 from sales_common import (CAUSES, COST, CORP, CORREL, SEVEN, TEL,
                           VALID, part, seg)
 
@@ -51,6 +52,8 @@ def script():
            ["検索の13.7%にAIの要約", "引用の約30%は1ページ目の外",
             "Googleが「効かない」と明言した施策"],
            "まず、前提となる事実を数字でご覧ください。"))
+    s.extend(shift_segments())
+
     a(seg("ワシントン大学が5万5千件の検索を、40日間観測した結果です。",
           "検索の入口が、AIの回答に変わりはじめた", kind="cards", cards=TRIO))
     a(seg("全検索の13.7パーセントで、AIによる要約が表示されます。",
