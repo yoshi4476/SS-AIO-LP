@@ -690,7 +690,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{AUTHOR_NAME}}": AUTHOR_NAME,
         "{{AUTHOR_ROLE}}": AUTHOR_ROLE,
         "{{AUTHOR_BIO}}": AUTHOR_BIO,
-        "{{JSON_LD}}": build_json_ld(meta, url, content) + _hreflang(meta),
+        "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
         "{{CONTENT}}": insert_mid_cta(_video_embed(content, meta), meta),
@@ -702,6 +702,11 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     }
     for k, v in replacements.items():
         html = html.replace(k, v)
+    # 訳した要約ページへの hreflang は head の末尾に置く（JSON-LD の中に入れると parse が壊れる。
+    # 実測: 1記事の JSON-LD が「Extra data」で壊れた）
+    alt = _hreflang(meta)
+    if alt:
+        html = html.replace("</head>", alt + "\n</head>", 1)
 
     out = SITE / meta["category"] / meta["slug"] / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)

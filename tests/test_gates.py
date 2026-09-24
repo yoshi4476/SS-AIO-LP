@@ -1578,7 +1578,8 @@ def test_every_site_gets_articles():
     check("1サイト2本の上限がある", "N * 2" in wf, True)
     check("枠が20ある（10社ぶん）", wf.count("* * *\"") >= 20, True)
     # 10社を超えたら、実行のたびに知らせる（黙って本数が減ると気づけない）
-    check("10社超をエラーで知らせる", '[ "$N" -gt 10 ]' in wf, True)
+    # 上限は cron の本数÷2（いま20社）。固定の10で判定していた版から、枠の本数で判定する版に変えた
+    check("枠の上限超えをエラーで知らせる", '[ "$N" -gt "$CAP" ]' in wf and "CAP=$(( SLOTS / 2 ))" in wf, True)
     check("別リポジトリへ分けるよう示す", "別リポジトリに分けて" in wf, True)
 
 
@@ -1603,7 +1604,7 @@ def test_intake_sheets_are_not_published():
     # 不備のあるシートを通すと、どのサイトでも書ける記事が量産される
     check("不備があれば登録しない", "intake/todo/ へ移しました" in src, True)
     # 上限を超えて受け入れると、記事の枠が足りず全社の本数が減る
-    check("10社の上限で止める", "MAX_SITES = 10" in src, True)
+    check("受け入れの上限で止める（枠40＝20社）", "MAX_SITES = 20" in src, True)
 
 
 def test_kw_plan_keeps_only_buyers():
