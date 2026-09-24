@@ -86,8 +86,10 @@ def for_site(rows, site):
             and (not r.get("sites") or site in r["sites"])]
 
 
-def brief(site, limit=BRIEF_MAX):
-    """記事を書く直前に渡す文章。短く保つことが目的（長いほど守られない）"""
+def brief(site, limit=BRIEF_MAX, count=True):
+    """記事を書く直前に渡す文章。短く保つことが目的（長いほど守られない）
+
+    count=False は読まれた回数を数えない（検査から呼ぶと hits が水増しされ、棚卸しの判定が狂う）"""
     rows = load()
     live = for_site(rows, site)
     # 失敗の学びを先に。同じ工程が並ばないよう、工程ごとに新しい順で拾う
@@ -105,7 +107,8 @@ def brief(site, limit=BRIEF_MAX):
         used += len(line)
         seen_phase[p] = seen_phase.get(p, 0) + 1
         r["hits"] = int(r.get("hits", 0)) + 1
-    save(rows)
+    if count:
+        save(rows)
     if not out:
         return "（この工程で気をつけることは、いまありません）"
     return ("これまでに分かっていること。ここに書かれたことは必ず守る。\n"

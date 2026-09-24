@@ -2256,7 +2256,9 @@ def test_lessons_are_learned_and_pruned():
     # 機械が守るものは読ませない（覚える対象を増やさないため）
     gated = [r for r in rows if r.get("gate")]
     check("機械が守る学びがある", len(gated) >= 1, True)
-    br = L.brief("ai-lab")
+    hits0 = [r.get("hits", 0) for r in L.load()]
+    br = L.brief("ai-lab", count=False)
+    check("検査では読まれた回数を数えない", [r.get("hits", 0) for r in L.load()], hits0)
     check("機械が守る学びは読ませない", any(g["rule"] in br for g in gated), False)
     check("読ませる量に上限がある", len(br) <= L.BRIEF_CHARS + 200, True)
     check("読ませる件数に上限がある", br.count(chr(10) + "- ") <= L.BRIEF_MAX, True)
