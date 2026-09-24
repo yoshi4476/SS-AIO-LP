@@ -472,6 +472,39 @@ def _video_embed(content, meta):
     return _topic_box(_glossary_links(content, meta), meta)
 
 
+_I18N = None
+
+
+def _html_escape(s):
+    import html as _hm
+    return _hm.escape(str(s))
+
+
+def _i18n():
+    """訳した要約（data/i18n/<lang>/<slug>.json）。{lang: {slug: {...}}}"""
+    global _I18N
+    if _I18N is None:
+        try:
+            import i18n
+            _I18N = i18n.translated()
+        except Exception:
+            _I18N = {}
+    return _I18N
+
+
+def _hreflang(meta):
+    """日本語の記事の head に、訳した要約ページへの hreflang を足す（訳がある言語だけ）"""
+    slug, cat = meta.get("slug", ""), meta.get("category", "")
+    langs = [lg for lg, d in _i18n().items() if slug in d]
+    if not langs:
+        return ""
+    ja = f"{SITE_URL}/{cat}/{slug}/"
+    tags = [f'<link rel="alternate" hreflang="ja" href="{ja}">', f'<link rel="alternate" hreflang="x-default" href="{ja}">']
+    tags += [f'<link rel="alternate" hreflang="{ {"en": "en", "zh": "zh-Hans", "ko": "ko"}[lg] }" href="{SITE_URL}/{lg}/{cat}/{slug}/">'
+             for lg in langs]
+    return "\n" + "\n".join(tags)
+
+
 _TOPIC_GROUPS = None
 
 
@@ -657,7 +690,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{AUTHOR_NAME}}": AUTHOR_NAME,
         "{{AUTHOR_ROLE}}": AUTHOR_ROLE,
         "{{AUTHOR_BIO}}": AUTHOR_BIO,
-        "{{JSON_LD}}": build_json_ld(meta, url, content),
+        "{{JSON_LD}}": build_json_ld(meta, url, content) + _hreflang(meta),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
         "{{CONTENT}}": insert_mid_cta(_video_embed(content, meta), meta),
@@ -894,6 +927,12 @@ def build_sitemap(article_entries):
             lines.append(f"  <url><loc>{SITE_URL}/{top}/</loc><lastmod>{today}</lastmod></url>")
         for d in sorted((SITE / top).glob("*/index.html")):
             lines.append(f"  <url><loc>{SITE_URL}/{top}/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
+    # 多言語の要約ページ（/en/ /zh/ /ko/）
+    for lg in ("en", "zh", "ko"):
+        if (SITE / lg / "index.html").is_file():
+            lines.append(f"  <url><loc>{SITE_URL}/{lg}/</loc><lastmod>{today}</lastmod></url>")
+        for d in sorted((SITE / lg).glob("*/*/index.html")):
+            lines.append(f"  <url><loc>{SITE_URL}/{lg}/{d.parent.parent.name}/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
     for meta, url in article_entries:
         lines.append(f"  <url><loc>{url}</loc><lastmod>{meta['modified']}</lastmod></url>")
     lines.append("</urlset>")
@@ -1161,6 +1200,45 @@ def build_extra_pages(all_metas):
             print(f"テーマ: {len(groups)}件（{', '.join(g['name'] for g in groups[:6])}…）")
     except Exception as e:
         print(f"WARN: テーマの束ねを飛ばしました（{str(e)[:50]}）")
+    # 多言語の要約ページ（/en/ /zh/ /ko/）。訳は i18n.py が週次で作る（ここでは置くだけ）
+    n_i18n = 0
+    try:
+        import i18n as I18N
+        lang_attr = {"en": "en", "zh": "zh-Hans", "ko": "ko"}
+        for lg, docs in _i18n().items():
+            if not docs:
+                continue
+            for slug, d in docs.items():
+                cat = d.get("category", "")
+                if cat not in CATEGORIES:
+                    continue
+                ja = f"{SITE_URL}/{cat}/{slug}/"
+                path = f"{lg}/{cat}/{slug}"
+                page(path, I18N.page_html(d, ja, lg), d["title"], f"{SITE_URL}/{path}/")
+                out = SITE / path / "index.html"
+                t = out.read_text(encoding="utf-8")
+                alts = [f'<link rel="alternate" hreflang="ja" href="{ja}">',
+                        f'<link rel="alternate" hreflang="x-default" href="{ja}">'] + [
+                    f'<link rel="alternate" hreflang="{lang_attr[o]}" href="{SITE_URL}/{o}/{cat}/{slug}/">'
+                    for o in _i18n() if slug in _i18n()[o]]
+                t = t.replace('<html lang="ja">', f'<html lang="{lang_attr[lg]}">', 1)
+                t = t.replace("</head>", "\n".join(alts) + "\n</head>", 1)
+                out.write_text(t, encoding="utf-8", newline="\n")
+                n_i18n += 1
+            names = {"en": "Articles in English", "zh": "中文文章", "ko": "한국어 기사"}
+            lis = "".join(f'<li><a href="/{lg}/{d["category"]}/{s}/"><strong>{_html_escape(d["title"])}</strong>'
+                          f'<span class="cnt">{str(d.get("date", ""))[:7]}</span></a></li>'
+                          for s, d in sorted(docs.items(), key=lambda kv: str(kv[1].get("date", "")), reverse=True)
+                          if d.get("category") in CATEGORIES)
+            page(lg, f'<div class="latest-block" data-cat="new"><div class="cat-head"><h2>{names[lg]}</h2>'
+                     f'<span class="cnt">{len(docs)}</span></div><ul class="hub-list">{lis}</ul></div>',
+                 names[lg], f"{SITE_URL}/{lg}/")
+            t = (SITE / lg / "index.html").read_text(encoding="utf-8").replace('<html lang="ja">', f'<html lang="{lang_attr[lg]}">', 1)
+            (SITE / lg / "index.html").write_text(t, encoding="utf-8", newline="\n")
+        if n_i18n:
+            print(f"多言語の要約: {n_i18n}ページ")
+    except Exception as e:
+        print(f"WARN: 多言語ページを飛ばしました（{str(e)[:60]}）")
     sweep()
     # 入口が孤立しないように、業種の入口（/industry/・ナビから届く）から用語集・比較表・テーマへリンクする
     idx = SITE / "industry" / "index.html"
@@ -1168,7 +1246,10 @@ def build_extra_pages(all_metas):
         links = "".join(f'<li><a href="/{top}/"><strong>{name}</strong><span class="cnt">{n}</span></a></li>'
                         for top, name, n in (("glossary", "用語集", f"{len(terms)}語" if len(terms) >= 10 else ""),
                                              ("compare", "比較表から探す", f"{len(made)}カテゴリ" if made else ""),
-                                             ("topics", "テーマから探す", f"{len(groups)}テーマ" if groups else ""))
+                                             ("topics", "テーマから探す", f"{len(groups)}テーマ" if groups else ""),
+                                             ("en", "English", f"{len(_i18n().get('en', {}))}" if _i18n().get("en") else ""),
+                                             ("zh", "中文", f"{len(_i18n().get('zh', {}))}" if _i18n().get("zh") else ""),
+                                             ("ko", "한국어", f"{len(_i18n().get('ko', {}))}" if _i18n().get("ko") else ""))
                         if n)
         if links:
             t = idx.read_text(encoding="utf-8")

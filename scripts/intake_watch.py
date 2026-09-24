@@ -30,7 +30,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 IN = ROOT / "intake"
 DONE = IN / "done"
 TODO = IN / "todo"
-MAX_SITES = 10   # 日次の枠は20（1社2本×10社）。pipeline-multi.yml と揃える
+MAX_SITES = 20   # 日次の枠は40（1社2本×20社）。pipeline-multi.yml の cron の本数÷2 と揃える
 
 
 def sheets():

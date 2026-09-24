@@ -18,7 +18,7 @@ env:
 jobs:
   report:
     runs-on: ubuntu-latest
-    timeout-minutes: 45   # 在庫の組み直し（kw_plan）が1サイト10分前後かかる
+    timeout-minutes: 120  # 在庫の組み直し（kw_plan）が1サイト10分前後。20社まで受けるため余裕を持つ
     steps:
       - uses: actions/checkout@v4
 

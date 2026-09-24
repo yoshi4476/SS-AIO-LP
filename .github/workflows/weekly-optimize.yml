@@ -344,7 +344,10 @@ jobs:
         # 約100クリック）。リポジトリはpublicでActionsの時間制限が無いため
         # 本数を上げる。1本最大30分かかるので、時計でも止める（ジョブの上限は60分で、
         # 途中で切られると直した分がcommitされずに捨てられる）
-        run: python scripts/auto_rewrite.py --write --limit 14 --budget-min 25 || true
+        run: |
+          # 本数は社数に比例させる（1社あたり週5本）。上限の時間は budget-min が守る
+          N=$(ls sites/*.json | grep -vc sample); n=$(( N * 5 )); [ "$n" -lt 14 ] && n=14
+          python scripts/auto_rewrite.py --write --limit $n --budget-min 25 || true
 
       # 同じ語に自社の2本が出ている組は、差別化ではなく統合する（第8.1章）。
       # 負けた側の中身を勝った側へ claude に足させ、検算に通ったものだけ 301 で送る。
@@ -484,6 +487,15 @@ jobs:
           python scripts/auto_rewrite.py --write --kind question --limit $n --budget-min 12 2>&1 | tail -6 || true
           # 流入語が説明文の先頭に無い記事の説明文だけを直す（本文が1文字でも変われば戻す）
           python scripts/auto_rewrite.py --write --kind desc --limit $n --budget-min 8 2>&1 | tail -6 || true
+
+      # 多言語の要約ページ（英語・中国語・韓国語）。AIが切り出す単位（題名・冒頭・H2の1文結論・FAQ）
+      # だけを訳し、数字が1つでも変われば捨てる。訳は1記事1回（元が変わったときだけ訳し直す）
+      - name: 多言語の要約を訳す（週10記事×3言語）
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          n=10; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=5
+          python scripts/i18n.py --write --limit $n --budget-min 25 2>&1 | tail -8 || true
 
       # 効かなかった直しは戻す（28日・対照群比）。表示ゼロの記事は近い記事へ統合する。
       # 6か月更新の無い記事は時点表記と dateModified を更新する（数字は年月以外増やさない）

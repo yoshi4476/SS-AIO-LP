@@ -34,6 +34,28 @@ on:
     - cron: "0 16 * * *"  # JST 01:00 — 枠17（10社まで対応するための追加枠）
     - cron: "0 17 * * *"  # JST 02:00 — 枠18（10社まで対応するための追加枠）
     - cron: "0 18 * * *"  # JST 03:00 — 枠19（10社まで対応するための追加枠）
+    # 枠20〜39（20社まで）。cron の並び順がそのまま枠番号になる（case 文は無い）。
+    # 実行は concurrency で直列なので、枠を足しても同時実行は増えない
+    - cron: "30 23 * * *"  # JST 08:30 — 枠20
+    - cron: "30 0 * * *"   # JST 09:30 — 枠21
+    - cron: "30 1 * * *"   # JST 10:30 — 枠22
+    - cron: "30 2 * * *"   # JST 11:30 — 枠23
+    - cron: "30 3 * * *"   # JST 12:30 — 枠24
+    - cron: "30 4 * * *"   # JST 13:30 — 枠25
+    - cron: "30 5 * * *"   # JST 14:30 — 枠26
+    - cron: "30 6 * * *"   # JST 15:30 — 枠27
+    - cron: "30 7 * * *"   # JST 16:30 — 枠28
+    - cron: "30 8 * * *"   # JST 17:30 — 枠29
+    - cron: "30 9 * * *"   # JST 18:30 — 枠30
+    - cron: "30 10 * * *"  # JST 19:30 — 枠31
+    - cron: "30 11 * * *"  # JST 20:30 — 枠32
+    - cron: "30 12 * * *"  # JST 21:30 — 枠33
+    - cron: "30 13 * * *"  # JST 22:30 — 枠34
+    - cron: "30 14 * * *"  # JST 23:30 — 枠35
+    - cron: "30 15 * * *"  # JST 00:30 — 枠36
+    - cron: "30 16 * * *"  # JST 01:30 — 枠37
+    - cron: "30 17 * * *"  # JST 02:30 — 枠38
+    - cron: "30 18 * * *"  # JST 03:30 — 枠39
   workflow_dispatch:
     inputs:
       site:
@@ -75,29 +97,16 @@ jobs:
           # 余りにすると、枠が足りなくても全社に行き渡る（本数は減る）。
           # 3社なら 0,1,2,0,1,2 で今までと同じ割り当てになる。
           # 本数を戻したいときは cron を増やし、下の case に枠番号を足す
-          case "${{ github.event.schedule }}" in
-            "0 23 * * *")    slot=0 ;;
-            "0 1 * * *")     slot=1 ;;
-            "0 3 * * *")     slot=2 ;;
-            "0 6 * * *")     slot=3 ;;
-            "0 8 * * *")     slot=4 ;;
-            "0 10 * * *")    slot=5 ;;
-            "0 0 * * *")     slot=6 ;;
-            "0 2 * * *")     slot=7 ;;
-            "0 4 * * *")     slot=8 ;;
-            "0 5 * * *")     slot=9 ;;
-            "0 7 * * *")     slot=10 ;;
-            "0 9 * * *")     slot=11 ;;
-            "0 11 * * *")    slot=12 ;;
-            "0 12 * * *")    slot=13 ;;
-            "0 13 * * *")    slot=14 ;;
-            "0 14 * * *")    slot=15 ;;
-            "0 15 * * *")    slot=16 ;;
-            "0 16 * * *")    slot=17 ;;
-            "0 17 * * *")    slot=18 ;;
-            "0 18 * * *")    slot=19 ;;
-            *)               slot=0 ;;
-          esac
+          # 枠の番号は、このファイルの cron の並び順から機械で決める。以前は case 文に
+          # 20行を手で書いていたため、cron を足しても case を足し忘れると枠0に潰れた。
+          # cron を1行足せば枠が1つ増える（上限＝cron の本数÷2 社）
+          read -r slot SLOTS < <(python - "${{ github.event.schedule }}" <<'PY'
+          import re, sys
+          crons = re.findall(r'^\s*- cron:\s*"([^"]+)"', open(".github/workflows/pipeline-multi.yml", encoding="utf-8").read(), re.M)
+          s = sys.argv[1].strip()
+          print(crons.index(s) if s in crons else 0, len(crons))
+          PY
+          )
           s="${{ inputs.site }}"
           if [ -z "$s" ]; then
             if [ "$N" -eq 0 ]; then
@@ -107,10 +116,11 @@ jobs:
             fi
             # 枠は20（1社2本×10社）。これを超えた分は枠が無く、記事が
             # 書かれないまま静かに放置される。1日1回の実行でも必ず目に入るようにする
-            if [ "$N" -gt 10 ]; then
-              echo "::error::サイトが${N}件あります。この仕組みは10社までです。11社目からは別リポジトリに分けてください"
+            CAP=$(( SLOTS / 2 ))
+            if [ "$N" -gt "$CAP" ]; then
+              echo "::error::サイトが${N}件あります。枠は${SLOTS}（1社2本で${CAP}社まで）。cron を2本足すと1社増やせます"
               mkdir -p automation/logs
-              echo "要対応: サイトが${N}件で上限10社を超えました。11社目からは別リポジトリに分けてください（今の枠では記事が書かれない社が出ます）" >> automation/logs/findings.txt
+              echo "要対応: サイトが${N}件で枠の上限${CAP}社を超えました。pipeline-multi.yml に cron を2本足すか、別リポジトリに分けてください（今の枠では本数が減ります）" >> automation/logs/findings.txt
             fi
             # 1サイトあたり1日2本まで（CLAUDE.md の上限）。サイト数が少ないと
             # 余りだけでは同じサイトに何度も回り、1社のとき1日6本になってしまう
@@ -233,11 +243,16 @@ jobs:
         env:
           SITE_ID: ${{ steps.site.outputs.id }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # 社数が増えてサブスクの枠に当たったら、API の従量課金に切り替える（鍵を登録するだけ。
+          # 記事1本 ¥50〜150 の目安。未登録なら空で、claude はサブスクの鍵を使う）
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
+          # 未登録の鍵は空文字で渡る。空のまま置くと claude が API の鍵として扱って落ちるので外す
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi

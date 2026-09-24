@@ -1,0 +1,68 @@
+{
+ "title": "Review Replies for Hospitals and Clinics: Prohibited Expressions and 8 Sample Replies",
+ "description": "In review replies for hospitals and clinics, 6 categories such as turning a reply into a patient testimonial, exaggerated claims, and comparative superiority claims violate the 医療広告ガイドライン (Medical Advertising Guidelines). This article covers prohibited expressions and safe rewordings, 8 sample replies for different situations, and an in-house approval process, based on information as of September 2026.",
+ "lead": "In review replies for hospitals and clinics, 6 categories such as turning a reply into a patient testimonial, exaggerated claims, and comparative superiority claims violate the 医療広告ガイドライン (Medical Advertising Guidelines). This article covers prohibited expressions and safe rewordings, 8 sample replies for different situations, and an in-house approval process, based on information as of September 2026.",
+ "sections": [
+  {
+   "h2": "2 Principles to Settle First When Replying to Reviews at a Medical Institution",
+   "answer": "Most of the clinics that come to us for help through G-ran get stuck not on how well the reply is written, but on whether a given sentence crosses the line on confidentiality or advertising regulations. This article settles that judgment first, then turns it into wording you can use as is."
+  },
+  {
+   "h2": "3 Sample Replies to Positive Reviews",
+   "answer": "Dear ◯◯, thank you for choosing our clinic."
+  },
+  {
+   "h2": "2 Sample Replies for Low Ratings About Wait Times and Staff Attitude",
+   "answer": "Dear ◯◯, we are sorry to have kept you waiting."
+  },
+  {
+   "h2": "2 Sample Replies to Reviews Alleging Misdiagnosis or Billing Trouble",
+   "answer": "Dear ◯◯, we are sorry for the worry and anxiety this has caused you."
+  },
+  {
+   "h2": "How to Tell Factual Errors from Defamation, and How to Reply",
+   "answer": "A misunderstanding based on a patient's assumption and a malicious falsehood or abusive post are handled differently, even when both are low ratings. The former calls for a reply that carefully explains the facts; the latter is grounds for a removal request under Google's official policy on prohibited and restricted content."
+  },
+  {
+   "h2": "6 Prohibited Expressions to Avoid in Replies",
+   "answer": "Why expressions that read like a patient testimonial are prohibited, and where the line falls for each of the 6 categories, is explained individually in our article on the 6 prohibited expressions under the 医療広告ガイドライン. Anyone drafting replies will find it easier to choose wording after reading through these 6 categories once."
+  },
+  {
+   "h2": "Operating the Reply Process: Who Writes It, Who Approves It",
+   "answer": "Sitting in on in-house meetings at the clinics we support, I have repeatedly seen review replies left entirely to the goodwill of one particular front-desk staff member. Relying on a single person is exactly why a low rating goes unanswered on the days that person is out. Decide the division of roles in advance: the front desk or office manager drafts, and the director or a staff member who understands the advertising guidelines gives final approval."
+  },
+  {
+   "h2": "How Review Reply Operations Differ Between Hospitals and Clinics",
+   "answer": "In what we have seen through G-ran, inappropriate replies to low ratings are overwhelmingly a clinic-side problem. The cause is not writing ability but a setup in which whoever wrote the reply can post it directly. Simply having the front desk read what the director drafted stops almost all aggressive wording."
+  }
+ ],
+ "faq": [
+  {
+   "q": "Can a hospital's review reply mention the details of treatment?",
+   "a": "No. Referring to a specific symptom or treatment breaches confidentiality, so keep replies to thanks and general information."
+  },
+  {
+   "q": "Can low-rated reviews be deleted?",
+   "a": "Not unless they violate policy. The practical approach is a careful, fact-based reply that shapes the impression for other readers."
+  },
+  {
+   "q": "Is it acceptable to write \"we will definitely improve\" in a reply?",
+   "a": "Avoid it. A categorical guarantee of improvement risks counting as exaggerated advertising under the 医療広告ガイドライン."
+  },
+  {
+   "q": "How should we reply to a review alleging misdiagnosis?",
+   "a": "Do not argue back. Direct the person to an in-house contact and avoid disputing the facts in public."
+  },
+  {
+   "q": "Who should write review replies?",
+   "a": "The director or a staff member who understands the advertising guidelines should write them, with a second person checking before they go live."
+  }
+ ],
+ "src_hash": "dd56ec4c610adb6b879ccd9b5fdcd6d5",
+ "slug": "byoin-kuchikomi-henshin-reibun",
+ "category": "meo",
+ "lang": "en",
+ "date": "2026-07-31",
+ "modified": "2026-08-08",
+ "made": "2026-09-25"
+}

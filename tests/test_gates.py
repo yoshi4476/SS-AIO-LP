@@ -3111,6 +3111,25 @@ def test_report_actions_close_the_loop():
     check("週次CIが上位表示の実測（並び替え・型・共起語・リッチ）を回す",
           all(s in wk for s in ("kw_reorder.py", "title_patterns.py", "cooccur.py", "rich_check.py", "--kind desc")), True)
 
+    # 多言語（英・中・韓）: 数字を変える訳は捨てる。月名・万/億・数詞は許す
+    import i18n as I18N
+    src = {"title": "AI導入補助金は10万円", "lead": "2026年9月時点で6つの手順", "sections": [], "faq": [], "description": ""}
+    check("i18n: 数字が同じ訳は通る", I18N._digits_ok(src, {"title": "AI Adoption Subsidy: 100,000 yen", "lead": "As of September 2026, 6 steps", "sections": [], "faq": [], "description": ""})[0], True)
+    check("i18n: 数字が変わった訳は捨てる", I18N._digits_ok(src, {"title": "AI Adoption Subsidy: 200,000 yen", "lead": "As of September 2026, 6 steps", "sections": [], "faq": [], "description": ""})[0], False)
+    check("i18n: 数詞（six）は数字として数える", I18N._digits_ok(src, I18N._normalize_numwords({"title": "AI Adoption Subsidy: 100,000 yen", "lead": "As of September 2026, six steps", "sections": [], "faq": [], "description": ""}, "en"))[0], True)
+    check("i18n: 内部リンクの案内文は冒頭にしない", I18N._is_claim("関連して、[MEO対策](/meo/x/)もあわせてご確認ください。"), False)
+    check("i18n: 3言語を持つ", set(I18N.LANGS), {"en", "zh", "ko"})
+    check("build: 記事の head に hreflang を出す関数がある", callable(getattr(B, "_hreflang", None)), True)
+    check("週次CIが多言語の要約を訳す", "i18n.py --write" in wk, True)
+    # 1リポジトリで20社: 枠は cron の本数から機械で決める（case 文を持たない）
+    check("記事CI: 枠は cron の並びから決める（case 文なし）", "crons.index(s)" in pm and 'case "${{ github.event.schedule }}"' not in pm, True)
+    check("記事CI: 枠が40ある（20社×2本）", len(re.findall(r'^\s*- cron:\s*"', pm, re.M)), 40)
+    check("記事CI: 上限は枠÷2で判定", "CAP=$(( SLOTS / 2 ))" in pm, True)
+    check("記事CI: APIキーが空なら外す", 'unset ANTHROPIC_API_KEY' in pm, True)
+    import intake_watch as IW
+    check("受け入れの上限は枠と揃う（20社）", IW.MAX_SITES, 20)
+    check("月次CIのタイムアウトは20社分", "timeout-minutes: 120" in yml, True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,

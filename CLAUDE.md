@@ -1368,6 +1368,27 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `youtube_upload.py` の再生リスト | 業種別の再生リストを作り、上げた動画を入れる | 鍵は `youtube.force-ssl` |
 | **Google以外のAI** | 参照元の分類は `daily_kpi.AI_DOMAINS` の1か所（ChatGPT・Perplexity・Gemini・Copilot・Claude・Grok・その他AI）。引用の実測（`ai_cite_check`）と語の調査（`ai_kw_research`）は鍵のあるAI全部に聞く（`OPENAI_API_KEY` / `GEMINI_API_KEY` / `PERPLEXITY_API_KEY` / `ANTHROPIC_API_KEY` / `XAI_API_KEY`） | 鍵が無いAIは飛ばす。robots.txt は20種のAIクローラーを許可済み |
 
+### 8.14 多言語（英語・中国語・韓国語）の要約ページ
+
+海外由来のAI（ChatGPT・Claude・Perplexity）は英語資料の引用比率が高い。全文を訳すと Claude の枠を
+食い切るので、**AIが切り出す単位だけ**（題名・冒頭の断言・各H2の1文結論・FAQ）を訳した要約ページを
+`/en/ /zh/ /ko/` に置き、日本語の記事と hreflang で結ぶ（`i18n.py`・週10記事×3言語）。
+
+| 決まり | 理由 |
+|:--|:--|
+| 数字の集合が訳の前後で一致しなければ捨てる（万/億の展開・桁区切り・月名・数詞は許す） | 事実でない数字が外国語で公開される。実測で「10万→100,000」「9月→September」「6つ→six」を許さないと訳が1本も通らなかった |
+| 冒頭は最初のH2まで、1文結論は内部リンクの案内文を除いて拾う | 「関連して…」を冒頭として訳していた（実測） |
+| 訳は1記事1回。元の要約のハッシュが変わったときだけ訳し直す | Claude の枠を積み上げない |
+| 社名は "Seven Senses Inc."、制度名は日本語＋括弧の英訳 | 固有名詞を訳すと別のものになる |
+
+### 8.15 1リポジトリで20社まで（枠は cron の本数で決まる）
+
+- 記事の枠は `pipeline-multi.yml` の cron の本数（いま40＝1社2本×20社）。**枠の番号は cron の並び順から機械で決める**（case 文は無い）。社を増やすときは cron を2本足すだけ
+- 上限は `枠÷2`。超えたら実行のたびに要対応で知らせる。受け入れ（`intake_watch.MAX_SITES=20`）も同じ数
+- 実行は直列（concurrency）なので枠を足しても同時実行は増えない。Actions は public リポジトリで無料・無制限
+- **本当の天井は Claude Code の執筆枠**（記事1本≈9.5分）。当たったら `ANTHROPIC_API_KEY` を Secrets に登録するだけで API の従量課金（記事1本 ¥50〜150 の目安）に切り替わる。空なら外して従来どおりサブスクの鍵を使う
+- 週次の書き換え本数は社数×5（下限14）、月次レポートのタイムアウトは120分。21社目からは2号機（別リポジトリ）
+
 ---
 
 ## 9. スプレッドシート構成（詳細）
