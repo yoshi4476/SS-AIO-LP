@@ -245,18 +245,24 @@ def insert_mid_cta(html, cfg):
     if len(heads) < 5:
         return html
     pos = heads[len(heads) // 2]
-    label = (cfg.get("cta") or {}).get("label", "無料で相談する")
-    url = (cfg.get("cta") or {}).get("url", "/#contact")
+    # 記事の中ほどは、読み手がまだ「相談する」段階にない。実測で補助金サイトは
+    # 記事到達147に対しCTA押下4（2.7%）、診断を前面に出すAI集客ラボは9.4%だった。
+    # サイト設定に cta_mid があれば、中ほどだけ軽い入口（診断など）に差し替える
+    mid = cfg.get("cta_mid") or {}
+    label = mid.get("label") or (cfg.get("cta") or {}).get("label", "無料で相談する")
+    url = mid.get("url") or (cfg.get("cta") or {}).get("url", "/#contact")
+    note = mid.get("note") or "要件の確認だけでもご利用いただけます"
+    tag = "article_mid_diagnosis" if "diagnosis" in url else "article_mid_contact"
     block = (
         '<div class="cta-mid" style="background:#f4f7fc;border:1px solid #dbe4f0;'
         'border-radius:12px;padding:20px;margin:28px 0;text-align:center">'
         '<p style="margin:0 0 12px;font-weight:700">'
         'ここまでの内容が自社に当てはまるか、確認しませんか。</p>'
-        f'<a class="cta-button" href="{url}" data-cta="article_mid_contact" '
+        f'<a class="cta-button" href="{url}" data-cta="{tag}" '
         'style="display:inline-block;padding:12px 26px;border-radius:8px;'
         f'background:#1b4fa0;color:#fff;text-decoration:none;font-weight:700">{label}</a>'
         '<p style="margin:10px 0 0;font-size:.82rem;color:#5b6980">'
-        '要件の確認だけでもご利用いただけます</p></div>' + "\n")
+        f'{note}</p></div>' + "\n")
     return html[:pos] + block + html[pos:]
 
 
@@ -505,6 +511,14 @@ def _update_external_index(dest: Path, cfg, meta):
             lt.write_text(t.rstrip("\n") + f"\n- [{meta['title']}]({url}): {meta['description']}\n",
                           encoding="utf-8", newline="\n")
             touched.append(lt)
+    # 業種ハブの定義を配信先へ写す。配信先の一覧生成（tools/gen_blog_pages.py）が
+    # これを読んで /industry/<slug>/ を作る。定義は本リポジトリを唯一の正とする
+    ind_src = Path(__file__).resolve().parent.parent / "data" / "industries.json"
+    ind_dst = dest / "blog-system" / "data" / "industries.json"
+    if ind_src.is_file() and ind_dst.parent.is_dir() and (
+            not ind_dst.is_file() or ind_dst.read_bytes() != ind_src.read_bytes()):
+        shutil.copy2(ind_src, ind_dst)
+        touched.append(ind_dst)
     return touched
 
 

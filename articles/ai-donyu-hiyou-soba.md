@@ -142,7 +142,6 @@ AI導入で費用面の失敗が起きるのは、契約前の確認不足がほ
 
 <div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
-<div class="cta-box"><p>要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。</p><a class="cta-button" href="https://lp.7senses.co.jp/#contact">AI導入補助金の無料相談</a></div>
 
 ## まとめ: AI導入費用はまず相場を知り、補助金で実質負担を下げる
 

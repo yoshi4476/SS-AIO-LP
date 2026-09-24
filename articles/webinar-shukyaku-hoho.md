@@ -157,7 +157,6 @@ SEO面の土台づくりは[BtoB SEOとは？商談前に選ばれる5つの施�
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
-<div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
 ## まとめ: ウェビナー集客は参加率46%を前提にした逆算設計が鍵
 

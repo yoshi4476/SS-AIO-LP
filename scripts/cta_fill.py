@@ -63,6 +63,9 @@ def spots(body, n):
     if len(body_heads) >= 3:
         mids.append(body_heads[len(body_heads) // 2].start())
     cand = ([ends[0]] if ends else [heads[-1].start()]) + mids
+    # すでにCTAが直前にある位置には入れない。入れると同じ箱が2つ並ぶ
+    # （実測1本。基準の「2箇所」は満たすが、読者には同じ広告が連続して見える）
+    cand = [p for p in cand if "cta-button" not in body[max(0, p - 400):p]] or cand
     # 後ろから入れる（前に入れると後ろの位置がずれる）
     return sorted(set(cand), reverse=True)[:n]
 
