@@ -148,6 +148,24 @@
     return String(s || '').replace(/[^\w]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 30) || 'x';
   }
 
+  // ===== 地図は押したときだけ読む（Googleマップは1枚で数百KB。表示速度を落とさない） =====
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.map-load');
+    if (!btn) return;
+    var box = btn.closest('.map-facade');
+    if (!box || box.classList.contains('is-loaded')) return;
+    var f = document.createElement('iframe');
+    f.src = box.getAttribute('data-map-src');
+    f.title = 'セブンセンシズ株式会社の地図（Googleマップ）';
+    f.loading = 'lazy';
+    f.referrerPolicy = 'no-referrer-when-downgrade';
+    f.setAttribute('allowfullscreen', '');
+    f.addEventListener('load', function () { box.classList.add('is-ready'); });
+    box.appendChild(f);
+    box.classList.add('is-loaded');
+    ga('map_load', { page_path: location.pathname });
+  });
+
   // section_view_〈セクションID〉: LP各エリア到達（ヒートマップ用。25%表示で発火）
   if ('IntersectionObserver' in window) {
     var aio = new IntersectionObserver(function (entries) {

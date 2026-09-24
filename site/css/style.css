@@ -1453,3 +1453,58 @@ main.lab .cta-final h2 { color: #fff; }
 .industry-box li { padding: .5em 0; border-bottom: 1px dashed var(--line); display: flex; gap: .6em; align-items: baseline; }
 .industry-box li .tag { margin-left: auto; font-size: .72rem; color: var(--muted); white-space: nowrap; }
 .industry-box .more { display: inline-block; margin-top: .8rem; font-weight: 700; }
+
+/* ── アクセス（会社概要）──────────────────────────────
+   地図は押すまで読まない（Googleマップ1枚で数百KB。表示速度を落とさない）。
+   押す前の面は、街区の方眼と座標で「地図の会社」らしさを出す */
+.access { margin: 3.2rem 0 1rem; }
+.access-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: stretch; margin-top: 1.4rem; }
+.access-coord { font-family: var(--en); font-variant-numeric: tabular-nums; font-weight: 600; font-size: clamp(1.35rem, 2.6vw, 1.9rem); letter-spacing: .01em; color: var(--navy); line-height: 1.2; margin: 0 0 1.1rem; }
+.access-coord span { font-size: .55em; font-weight: 500; color: var(--blue); margin-left: .12em; letter-spacing: .08em; }
+.access-coord i { font-style: normal; color: var(--line); margin: 0 .35em; font-weight: 300; }
+.access dl { margin: 0; display: grid; gap: .9rem; }
+.access dl > div { display: grid; grid-template-columns: 4.2em 1fr; gap: .8em; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
+.access dt { font-size: .78rem; font-weight: 700; color: var(--muted); letter-spacing: .08em; padding-top: .15em; }
+.access dd { margin: 0; line-height: 1.75; color: var(--text); }
+.access dd a { color: var(--navy); font-family: var(--en); font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: none; border-bottom: 1px solid var(--sky); }
+.access dd a:hover { border-color: var(--blue); }
+.access-note { font-size: .86rem; color: var(--muted); margin: 1rem 0 1.3rem; }
+.access-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.access-actions a { display: inline-flex; align-items: center; gap: .45em; min-height: 44px; padding: .55em 1.15em; border-radius: 999px; font-weight: 700; font-size: .92rem; text-decoration: none; transition: background .2s var(--ease-out), color .2s var(--ease-out), border-color .2s var(--ease-out); }
+.access-actions .to-map { background: var(--navy); color: #fff; }
+.access-actions .to-map:hover { background: var(--blue-deep); }
+.access-actions .to-route { border: 1.5px solid var(--line); color: var(--navy); background: #fff; }
+.access-actions .to-route:hover { border-color: var(--blue); color: var(--blue-deep); }
+.access-actions a:focus-visible, .map-load:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+.map-facade { position: relative; min-height: 320px; border-radius: 18px; overflow: hidden; background: var(--sky); border: 1px solid var(--line); isolation: isolate; }
+.map-facade .map-grid { position: absolute; inset: -20%; transform: rotate(-9deg);
+  background:
+    linear-gradient(rgba(37,99,235,.20) 2px, transparent 2px) 0 0 / 120px 120px,
+    linear-gradient(90deg, rgba(37,99,235,.20) 2px, transparent 2px) 0 0 / 120px 120px,
+    linear-gradient(rgba(11,36,71,.06) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(11,36,71,.06) 1px, transparent 1px) 0 0 / 24px 24px; }
+.map-facade::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 46%, transparent 40%, rgba(234,242,254,.85) 100%); pointer-events: none; }
+.map-pin { position: absolute; left: 50%; top: 44%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--navy); box-shadow: 0 0 0 5px #fff, 0 8px 18px rgba(11,36,71,.35); z-index: 2; }
+.map-pin::before { content: ""; position: absolute; inset: -14px; border-radius: 50%; border: 2px solid var(--blue); opacity: 0; animation: map-ping 2.4s var(--ease-out) infinite; }
+@keyframes map-ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+.map-label { position: absolute; left: 50%; top: calc(44% + 22px); transform: translateX(-50%); z-index: 2; font-size: .78rem; font-weight: 700; color: var(--navy); background: #fff; padding: .25em .7em; border-radius: 6px; box-shadow: var(--shadow-sm); white-space: nowrap; }
+.map-load { position: absolute; left: 50%; bottom: 1.2rem; transform: translateX(-50%); z-index: 3; display: grid; justify-items: center; gap: .15rem; min-height: 44px; padding: .7em 1.4em; border: 0; border-radius: 12px; background: rgba(255,255,255,.94); color: var(--navy); font: 700 .95rem var(--sans); cursor: pointer; box-shadow: var(--shadow-sm); backdrop-filter: blur(6px); }
+.map-load small { font-size: .72rem; font-weight: 500; color: var(--muted); }
+.map-load:hover { color: var(--blue-deep); }
+.map-facade iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; z-index: 4; opacity: 0; transition: opacity .5s var(--ease-out); }
+.map-facade.is-ready iframe { opacity: 1; }
+.map-facade.is-loaded .map-load { display: none; }
+.map-area { position: absolute; left: 1rem; top: .9rem; z-index: 2; font-size: .72rem; font-weight: 700; letter-spacing: .14em; color: var(--muted); }
+.map-load small { white-space: nowrap; }
+@media (max-width: 760px) {
+  .access-grid { grid-template-columns: 1fr; }
+  .map-facade { min-height: 300px; order: -1; }
+  .map-pin { top: 36%; }
+  .map-label { top: calc(36% + 22px); }
+  .map-load { bottom: 1rem; padding: .6em 1.1em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-pin::before { animation: none; opacity: .5; transform: scale(1.4); }
+  .map-facade iframe { transition: none; }
+}

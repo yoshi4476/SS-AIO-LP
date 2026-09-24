@@ -141,7 +141,11 @@ ORG_SAME_AS = [
     # 旧サイト（別業者が運用）。同じ会社のものだと示しておく。
     # 示さないと、社名の検索で「別の組織」として評価が分かれる
     "https://www.7senses.co.jp/",
+    # Googleマップの店舗情報。サイトと地図の店舗が同じ会社だと機械に伝える（地図検索・AI検索の NAP の一致）
+    "https://www.google.com/maps?cid=815053100031552916",
 ]
+ORG_GEO = {"@type": "GeoCoordinates", "latitude": 34.6791137, "longitude": 135.555196}
+ORG_MAP = "https://www.google.com/maps?cid=815053100031552916"
 
 
 def organization():
@@ -158,6 +162,7 @@ def organization():
                     "addressLocality": ORG_ADDRESS["city"],
                     "streetAddress": ORG_ADDRESS["street"]},
         "sameAs": ORG_SAME_AS,
+        "location": {"@type": "Place", "geo": ORG_GEO, "hasMap": ORG_MAP},
         # 専門領域。実体（about）と合わせて「この会社はこの領域の専門」と機械に伝える
         "knowsAbout": entities.KNOWS_ABOUT,
     }
