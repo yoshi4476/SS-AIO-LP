@@ -19,3 +19,5 @@ google-auth-oauthlib
 qrcode[pil]
 # URL検査の呼び出しに時間制限を付ける（reindex）
 httplib2
+# GitHub Secrets の書き込みに使う暗号化（refresh_tokens）
+pynacl
