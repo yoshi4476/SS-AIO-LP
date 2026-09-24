@@ -83,7 +83,8 @@ jobs:
         run: |
           for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
             echo "── $s"
-            python scripts/monthly_report.py --site "$s" --email ${{ steps.day.outputs.through }} || echo "  $s は生成できませんでした"
+            # 社ごとには送らず、照合を通したものを列に積む（最後に report_digest が1通にまとめて送る）
+            python scripts/monthly_report.py --site "$s" --queue ${{ steps.day.outputs.through }} || echo "  $s は生成できませんでした"
           done
 
       # 3サイトを1枚で見渡す経営向けのレポート。単体版とは役割が違うため別送する
@@ -171,6 +172,11 @@ jobs:
           git add -A
           git diff --cached --quiet || git commit -m "monthly: レポートの改善点を自動実行 $(date '+%Y-%m-%d')"
           python scripts/publish_changed.py --all --since HEAD~1 --push || true
+
+      # 各社のレポートを1通にまとめて送る（要対応がある社を先頭に。照合に落ちた社は理由だけ）
+      - name: 各社のレポートを1通にまとめて送る
+        if: steps.gate.outputs.ready == 'true'
+        run: python scripts/report_digest.py --email || true
 
       - name: 目標値の保存をコミット
         if: steps.gate.outputs.ready == 'true'

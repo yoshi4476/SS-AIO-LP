@@ -179,8 +179,37 @@ ENGINE_KEYS = {"ChatGPT": "OPENAI_API_KEY", "Gemini": "GEMINI_API_KEY", "Perplex
                "Claude": "ANTHROPIC_API_KEY", "Grok": "XAI_API_KEY"}
 
 
+CACHE_DIR = ROOT / "data" / "ai_cache"
+CACHE_DAYS = 30
+
+
+def _cached(name, fn):
+    """同じエンジンに同じ質問をしたら、30日は前の答え（出典URL）を使う。
+    語の調査（ai_kw_research）・引用の実測（週次/月次）・共起語（cooccur）が同じ語を
+    別々に聞いていて、同じ課金を何度もしていた。失敗（例外）はキャッシュしない"""
+    import hashlib
+    import time as _t
+
+    def wrap(q):
+        key = hashlib.md5(f"{name}\n{q}".encode("utf-8")).hexdigest()
+        p = CACHE_DIR / name / f"{key}.json"
+        if p.is_file():
+            try:
+                d = json.loads(p.read_text(encoding="utf-8"))
+                if _t.time() - d.get("at", 0) < CACHE_DAYS * 86400:
+                    return d.get("urls") or []
+            except Exception:
+                pass
+        urls = fn(q)
+        if urls is not None:
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(json.dumps({"q": q, "at": _t.time(), "urls": urls}, ensure_ascii=False), encoding="utf-8")
+        return urls
+    return wrap
+
+
 def engines_available():
-    return {k: v for k, v in ENGINES.items() if _env(ENGINE_KEYS[k])}
+    return {k: _cached(k, v) for k, v in ENGINES.items() if _env(ENGINE_KEYS[k])}
 
 
 def queries_for(site_id, limit):

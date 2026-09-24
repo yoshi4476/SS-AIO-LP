@@ -3153,13 +3153,24 @@ def main():
     # **印字された数字を読み直して照合し、通らなければ送らない。**
     # 生成前の検算（report_verify）は通っても、生成の途中で数字が
     # 入れ替わる事故は紙を読まないと見つからない
-    if SEND_EMAIL:
+    queue = "--queue" in sys.argv
+    if SEND_EMAIL or queue:
         try:
             import report_audit
             ok, bad = report_audit.audit(str(pdf_path), ym,
                                          THROUGH.isoformat() if THROUGH else None)
         except Exception as ex:
             ok, bad = False, [f"照合が動きませんでした（{type(ex).__name__}: {ex}）"]
+        if queue:
+            # 社ごとにメールを送らず、まとめて1通にする（report_digest.py が送る）。
+            # 照合に落ちた社は添付せず「照合で止めた」として本文に載る
+            q = ROOT / "automation" / "logs" / "report_queue.jsonl"
+            q.parent.mkdir(parents=True, exist_ok=True)
+            with q.open("a", encoding="utf-8") as f:
+                f.write(json.dumps({"site": SITE_ID, "name": site_cfg()["name"], "ym": ym, "pdf": str(pdf_path),
+                                    "ok": ok, "why": bad[:5]}, ensure_ascii=False) + "\n")
+            print(f"  まとめ送信の列に積みました（照合 {'OK' if ok else 'NG'}）")
+            return
         if not ok:
             for b in bad:
                 print(f"  照合で止めました: {b}")

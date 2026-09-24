@@ -39,7 +39,7 @@ def sheets():
         return []
     # 未記入の雛形は、置き場に残しておくもの。毎回「不備」として報告されると、
     # 本当に直すべきシートが埋もれる
-    blank = {"データ記入シート.xlsx", "実績記入シート.xlsx", "ヒアリングシート.xlsx"}
+    blank = {"データ記入シート.xlsx", "実績記入シート.xlsx", "ヒアリングシート.xlsx", "メニュー記入シート.xlsx"}
     return sorted(p for p in IN.glob("*.xlsx")
                   if not p.name.startswith(("~$", ".")) and p.name not in blank)
 
@@ -82,6 +82,10 @@ def one(src, write):
     if "実績" in src.name:
         import jisseki_intake as J
         return J.one(src, write)
+    # 多言語メニューのシート（訪日客向け）。タブ名で見る
+    if "メニュー" in _tabs(src):
+        import menu_page as MP
+        return MP.one(src, write)
     # 名前ではなくタブの構成で見る。ファイル名に「データ」が入っているかで
     # 振り分けていたため、内容は正しいのにクライアント用の検査にかけられ、
     # 一次データのシートが毎回「不備23件」で弾かれていた
@@ -135,7 +139,7 @@ def main():
     for p in found:
         # 上限を超えて受け入れると、記事の枠が足りず全社の本数が減る。
         # 受け入れる前に止めて、別リポジトリへ分ける判断をしてもらう
-        if a.apply and "実績" not in p.name and "データ" not in p.name and before + ok >= MAX_SITES:
+        if a.apply and "実績" not in p.name and "データ" not in p.name and "メニュー" not in p.name and before + ok >= MAX_SITES:
             print("   %-28s 保留（%d社が上限です）" % (p.name[:28], MAX_SITES))
             ng += 1
             continue

@@ -1,0 +1,127 @@
+{
+"https://corp.7senses.co.jp/blog": {
+"at": 1790270997.679109,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/backoffice-bpo-toha": {
+"at": 1790271160.3767967,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/bpo-toha": {
+"at": 1790271138.866879,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/getsuji-kessan-bpo-keiyakumae": {
+"at": 1790271071.780212,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/keihi-seisan-kichodaiko-bpo-chigai": {
+"at": 1790271064.603126,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-bpo-erabikata": {
+"at": 1790271130.7384615,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-bpo-hiyou-uchiwake": {
+"at": 1790271100.1789343,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-bpo-keiyakusho-kakunin": {
+"at": 1790271057.46914,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-daiko-service": {
+"at": 1790271115.470187,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-daiko-shippai": {
+"at": 1790271153.383226,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-gyomu-itaku": {
+"at": 1790271013.214793,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-jidoka": {
+"at": 1790271146.2541466,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-kotowarareru-riyu": {
+"at": 1790271086.0888674,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-toha": {
+"at": 1790271093.0183191,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-yarikata": {
+"at": 1790271107.6982074,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-zeirishihou-ihan": {
+"at": 1790271050.0942962,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata": {
+"at": 1790271042.2553294,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin": {
+"at": 1790271035.0921037,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/seikyusho-keiri-bpo-shippai": {
+"at": 1790271078.7343197,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata": {
+"at": 1790271123.1324806,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/seikyusho-shiharai-yarikata": {
+"at": 1790271167.7482429,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/seikyusho-template-muryou": {
+"at": 1790271005.6081154,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/seikyusho-tsukurikata": {
+"at": 1790271027.9385874,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken": {
+"at": 1790271020.563963,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/news/blog-open": {
+"at": 1790270989.9459555,
+"state": "送信して登録されました",
+"verdict": "PASS"
+}
+}

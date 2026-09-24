@@ -57,3 +57,10 @@ credentials/
 automation/video/
 automation/proposal.html
 automation/insta/
+# Googleビジネスプロフィールの鍵（クライアントごと）。公開リポジトリなので絶対にコミットしない
+gbp-client.json
+gbp-token-*.json
+# URLから作ったヒアリングの下書き（先方の会社情報が入る）
+intake/下書き/
+# 口コミの返信案（投稿者の名前・本文が入る。公開リポジトリには置かない）
+data/reviews/

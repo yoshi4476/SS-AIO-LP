@@ -322,6 +322,17 @@ jobs:
             python scripts/link_boost.py "${{ steps.site.outputs.id }}" --rescue --write --only="$slug" 2>&1 | tail -4 || true
           done
 
+      # 多言語を指示した社だけ、書いた記事の要約をその場で訳す（週次を待たずに公開と同時に多言語化）。
+      # 指示が無い社では i18n.py が何もせずに終わる
+      - name: 多言語の要約（指示のある社だけ・新しい記事のみ）
+        if: steps.site.outputs.skip != 'yes'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+        run: |
+          new=$(git ls-files --others --exclude-standard articles/*.md | xargs -r -n1 basename | sed 's/\.md$//' | paste -sd, -)
+          [ -n "$new" ] && python scripts/i18n.py --site "${{ steps.site.outputs.id }}" --write --publish --slugs "$new" --budget-min 6 2>&1 | tail -4 || true
+
       # 書いた直後に、機械で直せる崩れを直す。
       # これらは週次にしか入っておらず、記事は1日6本公開されるため、
       # 最大6日間そのまま公開されていた（実測で直近7日の記事に1本残っていた）。

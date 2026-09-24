@@ -930,7 +930,7 @@ def build_sitemap(article_entries):
     if (SITE / "industry" / "index.html").is_file():
         lines.append(f"  <url><loc>{SITE_URL}/industry/</loc><lastmod>{today}</lastmod></url>")
     # 用語集・比較表（build_extra_pages が作る）
-    for top in ("glossary", "compare", "topics"):
+    for top in ("glossary", "compare", "topics", "area"):
         if (SITE / top / "index.html").is_file():
             lines.append(f"  <url><loc>{SITE_URL}/{top}/</loc><lastmod>{today}</lastmod></url>")
         for d in sorted((SITE / top).glob("*/index.html")):
@@ -1164,7 +1164,7 @@ def build_extra_pages(all_metas):
         """今回作らなかった古いページを消す。残すと sitemap に載り続け、主題が変わった
         テーマページが並ぶ（実測: 5テーマなのに14ページ残った）"""
         import shutil
-        for top in ("glossary", "compare", "topics"):
+        for top in ("glossary", "compare", "topics", "area"):
             base = SITE / top
             if not base.is_dir():
                 continue
@@ -1213,6 +1213,19 @@ def build_extra_pages(all_metas):
             print(f"テーマ: {len(groups)}件（{', '.join(g['name'] for g in groups[:6])}…）")
     except Exception as e:
         print(f"WARN: テーマの束ねを飛ばしました（{str(e)[:50]}）")
+    # エリアハブ（/area/<slug>/）。訪日客は業種より先にエリアで探す。5本たまったエリアだけ
+    area_pairs = []
+    try:
+        import area_hub as AH
+        area_pairs, area_g = AH.live(all_metas)
+        for a, ms in area_pairs:
+            page(f"area/{a['slug']}", AH.page_html(a, ms, lambda m: f"{SITE_URL}/{m['category']}/{m['slug']}/"),
+                 f"{a['name']}の記事", f"{SITE_URL}/area/{a['slug']}/")
+        if area_pairs:
+            page("area", AH.index_html(area_pairs, area_g), "エリアから探す", f"{SITE_URL}/area/")
+            print(f"エリアハブ: {len(area_pairs)}件（{'、'.join(a['name'] for a, _ in area_pairs)}）")
+    except Exception as e:
+        print(f"WARN: エリアハブを飛ばしました（{str(e)[:50]}）")
     # 多言語の要約ページ（/en/ /zh/ /ko/）。訳は i18n.py が週次で作る（ここでは置くだけ）
     n_i18n = 0
     try:
@@ -1260,6 +1273,7 @@ def build_extra_pages(all_metas):
                         for top, name, n in (("glossary", "用語集", f"{len(terms)}語" if len(terms) >= 10 else ""),
                                              ("compare", "比較表から探す", f"{len(made)}カテゴリ" if made else ""),
                                              ("topics", "テーマから探す", f"{len(groups)}テーマ" if groups else ""),
+                                             ("area", "エリアから探す", f"{len(area_pairs)}エリア" if area_pairs else ""),
                                              ("en", "English", f"{len(_i18n().get('en', {}))}" if _i18n().get("en") else ""),
                                              ("zh", "中文", f"{len(_i18n().get('zh', {}))}" if _i18n().get("zh") else ""),
                                              ("ko", "한국어", f"{len(_i18n().get('ko', {}))}" if _i18n().get("ko") else ""))

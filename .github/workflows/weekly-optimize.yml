@@ -24,7 +24,9 @@ env:
 jobs:
   optimize:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 60分では足りず、2026-09-21 は再通知の工程で打ち切られ、コミットも配信も走らなかった。
+    # public リポジトリなので実行時間は無料。重い工程はそれぞれ --budget-min で自分を止める
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
 
@@ -451,15 +453,23 @@ jobs:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GBP_CLIENT_JSON: ${{ secrets.GBP_CLIENT_JSON }}
+          GBP_TOKENS_JSON: ${{ secrets.GBP_TOKENS_JSON }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
         run: |
           mkdir -p automation/logs
+          # GSC を使う実測（型・共起語・リッチ・並び替え・国別・季節）はサービスアカウントの鍵が要る
+          [ -n "$GCP_SERVICE_ACCOUNT_JSON" ] && printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          # Googleビジネスプロフィールの鍵（クライアントごと）。無ければ gbp / review_reply は何もしない
+          [ -n "$GBP_CLIENT_JSON" ] && printf '%s' "$GBP_CLIENT_JSON" > gbp-client.json
+          if [ -n "$GBP_TOKENS_JSON" ]; then
+            python -c "import json,os;[open(f'gbp-token-{k}.json','w').write(json.dumps(v) if not isinstance(v,str) else v) for k,v in json.loads(os.environ['GBP_TOKENS_JSON']).items()]" || true
+          fi
           python scripts/cwv_check.py 2>&1 | tee -a /tmp/measure.txt | tail -8 || true
           python scripts/brand_spelling.py --fix 2>&1 | tee -a /tmp/measure.txt | tail -4 || true
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-            python scripts/index_status.py 2>&1 | tee -a /tmp/measure.txt | tail -6 || true
-            rm -f indexing-service-account.json
-          fi
+          # 未登録ページの検査は最後の「再通知」工程（reindex）が行う。ここで index_status を
+          # 回すと同じURL検査を2回することになり、週次が上限に当たる原因になっていた
           python scripts/ai_cite_check.py --limit 5 2>&1 | tee -a /tmp/measure.txt | tail -4 || true
           # 引用が取れた記事の型を、次の記事を書く指示へ渡す（引用実績が無ければ空のまま）
           python scripts/win_patterns.py 2>&1 | tail -4 || true
@@ -471,8 +481,19 @@ jobs:
           python scripts/title_patterns.py 2>&1 | tail -3 || true
           python scripts/cooccur.py --limit 6 2>&1 | tail -6 || true
           python scripts/rich_check.py 2>&1 | tee -a /tmp/measure.txt | tail -6 || true
+          # 訪日客向け: 国別の表示・季節の山（6〜10週後）に当たる語を前へ・地図（GBP）の整備・
+          # 口コミの返信案（投稿は人が承認）・多言語メニュー。鍵や設定が無い社は何もしない
+          python scripts/country_rank.py 2>&1 | tail -4 || true
+          python scripts/season.py --write 2>&1 | tail -4 || true
+          for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$"); do
+            if [ -f "gbp-token-$s.json" ]; then
+              python scripts/gbp.py --sync --site "$s" 2>&1 | tail -2 || true
+              python scripts/review_reply.py --site "$s" --check 2>&1 | tee -a /tmp/measure.txt | tail -3 || true
+            fi
+          done
+          python scripts/menu_page.py --build --all --push 2>&1 | tail -4 || true
           grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt || true
-          grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt || true
+          rm -f indexing-service-account.json gbp-client.json gbp-token-*.json
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi
 
@@ -495,7 +516,7 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
           n=10; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=5
-          python scripts/i18n.py --all --write --limit $n --budget-min 25 2>&1 | tail -8 || true
+          python scripts/i18n.py --all --write --publish --limit $n --budget-min 25 2>&1 | tail -8 || true
 
       # 効かなかった直しは戻す（28日・対照群比）。表示ゼロの記事は近い記事へ統合する。
       # 6か月更新の無い記事は時点表記と dateModified を更新する（数字は年月以外増やさない）
@@ -619,8 +640,15 @@ jobs:
         run: |
           if [ -n "$SA_JSON" ]; then
             printf '%s' "$SA_JSON" > indexing-service-account.json
-            python scripts/reindex.py || true
+            python scripts/reindex.py --budget-min 15 || true
             rm -f indexing-service-account.json
+            # 登録済みと確かめたURLの記録を残す（次の週はそこを検査しない）
+            git add data/index_cache.json 2>/dev/null || true
+            git diff --cached --quiet || {
+              git commit -q -m "weekly: インデックス検査の記録 $(date '+%Y-%m-%d')"
+              git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
+              git push -q || true
+            }
           else
             echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
           fi

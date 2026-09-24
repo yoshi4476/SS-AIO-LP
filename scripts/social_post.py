@@ -130,6 +130,22 @@ def compose(a):
     note += ["", "続きと根拠（数字の出典・表・FAQ）は元記事にまとめています。",
              f"元記事: {url}", f"執筆: {cfg.get('name', '')}（セブンセンシズ株式会社）"]
     out["note"] = "\n".join(note)
+    # 訪日客向け: 韓国は Naver ブログ、中国は小紅書で調べる。多言語を指示した社で、
+    # 訳（数字の検算を通ったもの）があるときだけ作る。新しく訳さない（Claudeを呼ばない）
+    try:
+        import i18n
+        langs = cfg.get("languages") or []
+        for lg, key, tag in (("ko", "naver", "#오사카 #일본여행"), ("zh", "xiaohongshu", "#大阪 #日本旅行")):
+            p = i18n.OUT / lg / f"{a['slug']}.json"
+            if lg not in langs or not p.is_file():
+                continue
+            d = json.loads(p.read_text(encoding="utf-8"))
+            lines2 = [d["title"], "", d.get("lead", ""), ""]
+            lines2 += [f"✔ {s['h2']}\n{s['answer']}" for s in d.get("sections", [])[:4]]
+            lines2 += ["", f"https://{cfg.get('domain', '')}/{lg}/{pre}/{a['slug']}/", tag]
+            out[key] = "\n".join(x for x in lines2 if x is not None)
+    except Exception:
+        pass
     return {"id": a["slug"], "site": sid, "title": a["title"], "url": url,
             "made": date.today().isoformat(), "posts": out}
 

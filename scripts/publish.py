@@ -203,6 +203,22 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     }
     if meta.get("eyecatch"):
         out["eyecatch"] = meta["eyecatch"]
+    # 多言語の要約（指示のある社だけ）。Next.js 側はこの translations を読んで /en/… を出す
+    # （表示の実装は配信先のアプリ側。無ければ JSON に載っているだけで害は無い）
+    langs = [l for l in (cfg.get("languages") or []) if l in ("en", "zh", "ko")]
+    if langs:
+        try:
+            import i18n
+            tr = {}
+            for lg in langs:
+                p = i18n.OUT / lg / f"{meta['slug']}.json"
+                if p.is_file():
+                    d = json.loads(p.read_text(encoding="utf-8"))
+                    tr[lg] = {k: d[k] for k in ("title", "description", "lead", "sections", "faq") if k in d}
+            if tr:
+                out["translations"] = tr
+        except Exception:
+            pass
     # 画像を先に複製する（本文が /images/... を参照するため）。JSONはその後に書く。
     # アイキャッチはWebP（PNGの1/3）も作り、表示はそちらを使う。OG画像はPNGのまま
     img_written = []
@@ -345,6 +361,89 @@ def check_contract(cfg, dest: Path, meta):
     return True
 
 
+_I18N_SHELL = """<!DOCTYPE html>
+<html lang="{lang_attr}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}｜{site}</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{url}">
+{hreflang}
+<style>
+body{{margin:0;background:#fdfcf9;color:#212b3d;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans CJK JP",sans-serif;line-height:1.8}}
+main{{max-width:760px;margin:0 auto;padding:40px 20px 80px}}
+h1{{font-size:1.6rem;line-height:1.4;color:#1d3461}} h2{{font-size:1.15rem;color:#1d3461;margin-top:2em}}
+.latest-block{{margin:1.2em 0}} .hub-lead{{font-size:1.02rem}} .hub-note{{font-size:.9rem;color:#5b6472}}
+details{{margin:.6em 0;padding:.8em 1em;background:#fff;border:1px solid #e7e2d4;border-radius:10px}}
+summary{{font-weight:700;cursor:pointer}} a{{color:#1b4fa0}}
+.cat-head h2{{margin:0}}
+</style>
+</head>
+<body><main>
+{content}
+<p class="hub-note"><a href="https://{domain}/">{site}</a></p>
+</main></body>
+</html>
+"""
+
+
+def _i18n_pages(cfg, meta, dest: Path):
+    """指示のある言語の要約ページを配信先に置き、日本語ページ用の hreflang を返す。
+    訳（data/i18n/<lang>/<slug>.json）が無い言語は何もしない"""
+    langs = [l for l in (cfg.get("languages") or []) if l in ("en", "zh", "ko")]
+    if not langs:
+        return None
+    try:
+        import i18n
+    except Exception:
+        return None
+    attr = {"en": "en", "zh": "zh-Hans", "ko": "ko"}
+    pre = (cfg.get("url_prefix") or "/blog").strip("/")
+    ja = f"https://{cfg['domain']}/{pre}/{meta['slug']}/"
+    have = {}
+    for lg in langs:
+        p = i18n.OUT / lg / f"{meta['slug']}.json"
+        if p.is_file():
+            try:
+                have[lg] = json.loads(p.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+    if not have:
+        return None
+    url_of = lambda lg: f"https://{cfg['domain']}/{lg}/{pre}/{meta['slug']}/"
+    tags = [f'<link rel="alternate" hreflang="ja" href="{ja}">', f'<link rel="alternate" hreflang="x-default" href="{ja}">']
+    tags += [f'<link rel="alternate" hreflang="{attr[lg]}" href="{url_of(lg)}">' for lg in have]
+    import html as _hm
+    for lg, d in have.items():
+        page = dest / lg / pre / meta["slug"] / "index.html"
+        page.parent.mkdir(parents=True, exist_ok=True)
+        page.write_text(_I18N_SHELL.format(
+            lang_attr=attr[lg], title=_hm.escape(d["title"]), site=_hm.escape(cfg.get("name", "")),
+            desc=_hm.escape(d.get("description", "")), url=url_of(lg), hreflang="\n".join(tags),
+            content=i18n.page_html(d, ja, lg), domain=cfg["domain"]), encoding="utf-8", newline="\n")
+    # 配信物の生成（tools/make_dist.py）が言語のフォルダを配信対象に入れていなければ足す。
+    # 入れないと、置いたページが公開されない（補助金サイトの業種ハブで同じことが起きた）
+    md = dest / "tools" / "make_dist.py"
+    if md.is_file():
+        t = md.read_text(encoding="utf-8")
+        m = re.search(r"PUBLIC_DIRS\s*=\s*\[([^\]]*)\]", t)
+        if m:
+            add = [lg for lg in have if f'"{lg}"' not in m.group(1)]
+            if add:
+                t = t[:m.end(1)] + "".join(f', "{lg}"' for lg in add) + t[m.end(1):]
+                md.write_text(t, encoding="utf-8", newline="\n")
+    # sitemap にも載せる
+    sm = _public_file(dest, "sitemap.xml")
+    if sm:
+        t = sm.read_text(encoding="utf-8")
+        add = "".join(f"  <url>\n    <loc>{url_of(lg)}</loc>\n    <lastmod>{meta['date']}</lastmod>\n  </url>\n"
+                      for lg in have if url_of(lg) not in t)
+        if add:
+            sm.write_text(t.replace("</urlset>", add + "</urlset>"), encoding="utf-8", newline="\n")
+    return {"hreflang": "\n".join(tags), "langs": list(have)}
+
+
 def write_external_html(cfg, dest: Path, meta, body, src: Path):
     """別リポジトリの静的サイト用: 相手のテンプレートに流し込んでHTMLを生成する。
 
@@ -466,6 +565,11 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
             print(f"  写真: {name}（一致度 {sc}）→ images/blog/{meta['slug']}/thumbnail.webp")
     except Exception as e:
         print(f"  写真の選定をスキップ: {e}")
+
+    # 多言語の要約（指示のある社だけ）: 日本語ページの head に hreflang を足し、訳のページを置く
+    extra = _i18n_pages(cfg, meta, dest)
+    if extra:
+        out = out.replace("</head>", extra["hreflang"] + "\n</head>", 1)
 
     page = dest / "blog" / meta["slug"] / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)

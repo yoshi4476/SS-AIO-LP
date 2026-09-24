@@ -57,8 +57,9 @@ def source_urls(site_id, keyword, limit=6):
                 urls += [f"https://{d}/" for d in r["ai"]["sources"]]
     try:
         import ai_cite_check as AC
-        if AC._env("GEMINI_API_KEY"):
-            urls += AC.ask_gemini(keyword) or []
+        eng = AC.engines_available()          # 30日キャッシュつき（同じ語を何度も課金しない）
+        if "Gemini" in eng:
+            urls += eng["Gemini"](keyword) or []
     except Exception:
         pass
     seen, out = set(), []

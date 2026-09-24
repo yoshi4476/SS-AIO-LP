@@ -3027,7 +3027,8 @@ def test_report_actions_close_the_loop():
     import social_post as SP2
     check("social_post: note 用の長文を作る", '"note"' in inspect.getsource(SP2.compose), True)
     check("週次CIが実測（速度・表記・インデックス・AI引用）を回す",
-          all(s in wk for s in ("cwv_check.py", "brand_spelling.py --fix", "index_status.py", "ai_cite_check.py --limit 5", "--kind question")), True)
+          # インデックスの検査は reindex.py が担う（index_status と二重に回していたのをやめた）
+          all(s in wk for s in ("cwv_check.py", "brand_spelling.py --fix", "reindex.py", "ai_cite_check.py --limit 5", "--kind question")), True)
     sh_ = (ROOT / ".github" / "workflows" / "selfheal.yml").read_text(encoding="utf-8")
     check("日次CIが証明書・404・トークンを見る", "cert_check.py" in sh_ and "token_check.py" in sh_, True)
 
@@ -3136,6 +3137,39 @@ def test_report_actions_close_the_loop():
     import intake_watch as IW
     check("受け入れの上限は枠と揃う（20社）", IW.MAX_SITES, 20)
     check("月次CIのタイムアウトは20社分", "timeout-minutes: 120" in yml, True)
+
+    # インバウンド・効率化
+    import area_hub as AH
+    import country_rank as CR
+    import season as SE
+    import menu_page as MP
+    import gbp as GB
+    import review_reply as RR
+    import report_digest as RD
+    import intake_from_url as IU
+    import reindex as RX
+    check("area_hub: 題名と狙う語だけで判定（住所では判定しない）", AH.detect("心斎橋の集客", "") == "shinsaibashi" and AH.detect("", "") is None, True)
+    check("area_hub: 具体的なエリアが先（心斎橋は大阪より前）", AH.detect("大阪 心斎橋 集客", ""), "shinsaibashi")
+    check("country_rank: 訪日客の多い国を必ず表に出す", set(CR.FOCUS) >= {"usa", "twn", "kor", "chn", "hkg"}, True)
+    check("season: 12か月分そろうまで台帳を触らない", "span\", 0) < 12" in inspect.getsource(SE.main), True)
+    check("menu_page: 価格が変わった訳は捨てる", "価格が変わった" in inspect.getsource(MP.translate), True)
+    check("gbp: 鍵が無ければ何もしない", "GBP_OK=unset" in inspect.getsource(GB.main), True)
+    check("review_reply: 口コミに無い数字は書かない", RR.check("Thanks! 50% off next time for you and friends.", {"comment": "nice"}) != "", True)
+    check("review_reply: 症状・施術に触れない", RR.check("ご来院ありがとうございます。治療の経過が順調で何よりです。", {"comment": "よかった"}) != "", True)
+    check("review_reply: 週次CIは件数だけ（案と本文をリポジトリに残さない）", "--check" in wk and "data/reviews/" in (ROOT / ".gitignore").read_text(encoding="utf-8"), True)
+    check("GBPの鍵はコミットされない", all(s in (ROOT / ".gitignore").read_text(encoding="utf-8") for s in ("gbp-client.json", "gbp-token-*.json")), True)
+    check("URLから作るヒアリングの下書きはコミットされない", "intake/下書き/" in (ROOT / ".gitignore").read_text(encoding="utf-8"), True)
+    check("intake_from_url: 役職を人名として拾わない", "取締" in inspect.getsource(IU.gather), True)
+    check("月次CI: 社ごとに送らず1通にまとめる", "--queue" in yml and "report_digest.py --email" in yml, True)
+    check("report_digest: 照合に落ちた社は添付しない", "照合で止めました" in inspect.getsource(RD.main), True)
+    check("reindex: 登録済みのURLは30日検査しない", RX.FRESH_DAYS, 30)
+    check("reindex: 1回の呼び出しに時間制限", "timeout=30" in inspect.getsource(RX.svc), True)
+    check("週次CI: 60分で打ち切られない（180分）", "timeout-minutes: 180" in wk, True)
+    check("週次CI: 同じURL検査を2回しない（index_status を外した）", "python scripts/index_status.py" not in wk, True)
+    check("週次CI: 要対応を二重に書かない", wk.count("grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt") == 1, True)
+    check("AI調査の答えを30日使い回す", "CACHE_DAYS = 30" in (ROOT / "scripts" / "ai_cite_check.py").read_text(encoding="utf-8"), True)
+    check("記事CI: 公開直後に多言語の要約（指示のある社だけ）", "i18n.py --site" in pm and "--publish --slugs" in pm, True)
+    check("win_patterns: 引用実績が無ければ同じ業種の上位記事の型", callable(getattr(WP, "ranked_for", None)), True)
 
 
 def main():

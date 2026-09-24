@@ -273,7 +273,10 @@ def main():
     ap.add_argument("--limit", type=int, default=10, help="1回に訳す記事数")
     ap.add_argument("--budget-min", type=int, default=25)
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--slugs", default="", help="この記事だけ訳す（公開直後に記事CIが呼ぶ。カンマ区切り）")
+    ap.add_argument("--publish", action="store_true", help="訳した記事を配信先へ出し直す（別リポジトリの社）")
     a = ap.parse_args()
+    only = {s for s in a.slugs.split(",") if s}
     targets = list(S.load_all()) if a.all else [a.site or S.primary()]
     total, t0 = 0, time.time()
     any_site = False
@@ -285,11 +288,16 @@ def main():
             continue
         any_site = True
         rows = candidates(sid, langs)
+        if only:
+            rows = [r for r in rows if r[1] in only]
         print(f"■ {sid}: 訳す候補 {len(rows)}記事（{'・'.join(langs)}）")
         for imp, slug, _, need in rows[:8]:
             print(f"   表示{imp:>5} {slug[:40]:<40} {'/'.join(need)}")
         if a.write:
-            total += _run(rows[:a.limit], t0, a.budget_min)
+            done = _run(rows[:a.limit], t0, a.budget_min)
+            total += len(done)
+            if a.publish and done:
+                _republish(sid, done)
     if a.all and not any_site:
         print("   多言語の指示があるサイトはありません（何もしません）")
     print(f"I18N_OK=yes\nTRANSLATED={total}")
@@ -297,7 +305,7 @@ def main():
 
 
 def _run(rows, t0, budget_min):
-    n = 0
+    n = set()
     for imp, slug, src, need in rows:
         for lg in need:
             if (time.time() - t0) / 60 >= budget_min:
@@ -309,13 +317,26 @@ def _run(rows, t0, budget_min):
                 d.update({"src_hash": src["hash"], "slug": slug, "category": src["category"], "lang": lg,
                           "date": src["date"], "modified": src["modified"], "made": time.strftime("%Y-%m-%d")})
                 (OUT / lg / f"{slug}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
-                n += 1
+                n.add(slug)
             print(f"   {'○' if ok else '×'} {lg} {slug[:40]:<40} {why}")
             LOG.parent.mkdir(parents=True, exist_ok=True)
             with LOG.open("a", encoding="utf-8") as f:
                 f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "i18n", "slug": slug,
                                     "kind": f"i18n-{lg}", "ok": ok, "note": why or "訳した"}, ensure_ascii=False) + "\n")
     return n
+
+
+def _republish(site_id, slugs):
+    """別リポジトリの社は、訳を足した記事を配信し直す（日本語ページの hreflang と訳のページが届く）。
+    AI集客ラボ（self-static）は build が置くので何もしない"""
+    import subprocess
+    import sites as S
+    if S.load(site_id).get("type") == "self-static":
+        return
+    for s in sorted(slugs):
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / "publish.py"), "--site", site_id, "--slug", s, "--push"],
+                           cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        print(f"   配信 {s[:40]}: {'OK' if r.returncode == 0 else 'NG ' + (r.stdout + r.stderr)[-80:].strip()}")
 
 
 def page_html(d, ja_url, lang):

@@ -12,3 +12,10 @@ playwright
 pymupdf
 # 営業動画のナレーション（video_make）。CIでは使わないが、import の宣言漏れ検査を通す
 edge-tts
+google-auth-httplib2
+# 動画投稿（youtube_upload）と地図の整備（gbp）の OAuth
+google-auth-oauthlib
+# 多言語メニューのQRコード（menu_page）
+qrcode[pil]
+# URL検査の呼び出しに時間制限を付ける（reindex）
+httplib2

@@ -44,12 +44,12 @@ def cited_words(site_id):
     return words
 
 
-def features(body):
+def features(body, fm=""):
     h2 = re.findall(r"^##\s+(.+)$", body, re.M)
-    lead = re.split(r"\n##\s", body, 1)[0]
+    lead = re.split(r"\n##\s", body, maxsplit=1)[0]
     lead_txt = re.sub(r"<[^>]+>|\*\*", "", lead)
     return {"h2": h2, "q_ratio": round(sum(1 for h in h2 if re.search(r"[?？]", h)) / max(len(h2), 1), 2),
-            "tables": len(re.findall(r"^\|:?-", body, re.M)), "faq": len(re.findall(r"^\s*- q:", body, re.M)),
+            "tables": len(re.findall(r"^\|:?-", body, re.M)), "faq": len(re.findall(r"^\s*-\s*q:", fm + "\n" + body, re.M)),
             "defbox": body.count('class="definition-box"'),
             "sourced_numbers": len(re.findall(r"\d[\d,.]*[%円件本社人]?[^\n]{0,60}https?://", body)),
             "lead": lead_txt.strip()[:220]}
@@ -71,7 +71,7 @@ def articles_for(site_id, words):
         if _norm(kw.group(1)) in words:
             title = re.search(r"^title:\s*(.+)$", fm, re.M)
             hits.append({"slug": p.stem, "title": title.group(1).strip() if title else p.stem,
-                         "keyword": kw.group(1).strip(), **features(body)})
+                         "keyword": kw.group(1).strip(), **features(body, fm)})
     return hits
 
 
@@ -94,16 +94,71 @@ def write(site_id):
     return p, n
 
 
+def ranked_for(site_id, kw, n=3):
+    """同じ業種で、検索1ページ目（10位以内）にいる公開記事の型。引用実績が無いときの型にする。
+    業種が判定できない語なら、同じサイトの上位記事から取る"""
+    import industry_hub as IH
+    import sites as S
+    inds, _ = IH.load()
+    ind = IH.detect(kw, kw, inds)
+    pos = {}
+    p = ROOT / "data" / "ranks" / f"{site_id}.json"
+    if p.is_file():
+        try:
+            hist = json.loads(p.read_text(encoding="utf-8"))
+            for r in hist[sorted(hist)[-1]]:
+                s = str(r.get("url", "")).rstrip("/").split("/")[-1]
+                if s and r.get("pos") is not None:
+                    pos[s] = min(pos.get(s, 99), float(r["pos"]))
+        except Exception:
+            pass
+    rows = []
+    for md in (ROOT / "articles").glob("*.md"):
+        if pos.get(md.stem, 99) > 10:
+            continue
+        t = md.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+        if not m:
+            continue
+        fm, body = m.group(1), m.group(2)
+        title = (re.search(r"^title:\s*(.+)$", fm, re.M) or [None, ""])[1].strip().strip('"')
+        k = (re.search(r"^keyword:\s*(.+)$", fm, re.M) or [None, ""])[1].strip()
+        cat = (re.search(r"^category:\s*(\S+)", fm, re.M) or [None, ""])[1]
+        if S.find_category_owner(cat) != site_id:
+            continue
+        if ind and IH.detect(title, k, inds) != ind:
+            continue
+        rows.append({"slug": md.stem, "title": title, "keyword": k, "pos": pos[md.stem], **features(body, fm)})
+    rows.sort(key=lambda r: r["pos"])
+    return ind, rows[:n]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", default="")
     ap.add_argument("--brief", default="", help="書く前に読ませる分を出す")
+    ap.add_argument("--kw", default="", help="これから書く語。引用実績が無ければ、同じ業種の上位記事の型を出す")
     a = ap.parse_args()
     import sites as S
     if a.brief:
         p = OUT / f"{a.brief}.md"
         t = p.read_text(encoding="utf-8") if p.is_file() else ""
-        print(t if t.strip() else "（AI検索での引用実績はまだありません。型は渡しません）")
+        if t.strip():
+            print(t)
+            return 0
+        if a.kw:
+            ind, rows = ranked_for(a.brief, a.kw)
+            if rows:
+                iname = next((i["name"] for i in __import__("industry_hub").load()[0] if i["slug"] == ind), ind)
+                print(f"# 同じ{'業種（' + iname + '）' if ind else 'サイト'}で検索1ページ目にいる記事の型（引用実績はまだ無いので、順位で選んだ）")
+                print("構成を考え直す手間を省くため、この見出しの並びを土台にして、今回の語に合わせて足し引きする。\n")
+                for r in rows:
+                    print(f"## {r['title']}（{r['pos']:.1f}位・狙う語: {r['keyword']}）")
+                    print(f"質問形の見出し {r['q_ratio']:.0%} / 表 {r['tables']} / FAQ {r['faq']}問 / 定義 {r['defbox']}")
+                    print("> " + r["lead"][:160])
+                    print("\n".join(f"- {h}" for h in r["h2"][:8]) + "\n")
+                return 0
+        print("（AI検索での引用実績も、同じ業種の上位記事もまだありません。型は渡しません）")
         return 0
     for sid in ([a.site] if a.site else list(S.load_all())):
         p, n = write(sid)
