@@ -36,18 +36,54 @@ AI_DOMAINS = {"chatgpt": ["chatgpt.com", "chat.openai.com"], "perplexity": ["per
 # ============================================================
 # データ取得
 # ============================================================
+def _through():
+    """`--through [YYYY-MM-DD]` があれば、その日まで当月を含める"""
+    if "--through" not in sys.argv:
+        return None
+    i = sys.argv.index("--through")
+    if i + 1 < len(sys.argv) and sys.argv[i + 1][:2] == "20":
+        return date.fromisoformat(sys.argv[i + 1])
+    return date.today()
+
+
+THROUGH = _through()
+
+
 def months(n=6):
-    # 月初に前月分を発行する。当月は途中経過にしかならないため対象にしない。
+    """直近n月。既定は先月末まで。--through のときだけ当月を足す"""
     out, d = [], date.today().replace(day=1)
     for _ in range(n):
         d = (d - timedelta(days=1)).replace(day=1)
         out.append(f"{d.year}-{d.month:02d}")
-    return list(reversed(out))
+    out = list(reversed(out))
+    if THROUGH:
+        cur = f"{THROUGH.year}-{THROUGH.month:02d}"
+        if cur not in out:
+            out = out[1:] + [cur]
+    return out
+
+
+
+def partial_note_html():
+    """途中の月なら、その旨を必ず出す。**月末と並べて誤読させないため。**"""
+    if not THROUGH:
+        return ""
+    import report_context as RC
+    lab = f"{THROUGH.year}-{THROUGH.month:02d}"
+    return RC.partial_warning(lab, THROUGH)
 
 
 def month_end(label):
+    """その月の末日。**当月を途中まで見るときは、指定された日を返す。**
+
+    期間を使う箇所は8つある。ここ1か所で返す日を変えれば、
+    呼ぶ側は何も変えなくてよい（1つずつ直すと必ず直し忘れる）。
+    """
     y, m = map(int, label.split("-"))
-    return (date(y + (m == 12), (m % 12) + 1, 1) - timedelta(days=1)).isoformat()
+    last = (date(y + (m == 12), (m % 12) + 1, 1) - timedelta(days=1))
+    if THROUGH and THROUGH.year == y and THROUGH.month == m:
+        return min(THROUGH, last).isoformat()
+    return last.isoformat()
 
 
 def creds(scopes):
@@ -76,10 +112,28 @@ def fetch_site(cfg, labels):
             for i, m in enumerate(labels):
                 rep = c.run_report(RunReportRequest(
                     property=p, date_ranges=[DateRange(start_date=f"{m}-01", end_date=month_end(m))],
-                    metrics=[Metric(name="sessions"), Metric(name="conversions")]))
+                    metrics=[Metric(name="sessions")]))
                 r = rep.rows[0].metric_values if rep.rows else None
-                out["months"][i].update({"sessions": int(r[0].value) if r else 0,
-                                         "cv": int(float(r[1].value)) if r else 0})
+
+                # **GA4の conversions 指標は使わない。**
+                # あれは「どのイベントをコンバージョンにするか」という GA4側の
+                # 設定で決まるため、未設定だと0になる。実測で、リードが4件
+                # あった月が0と出ていた。イベントを直接数えれば設定に依存しない
+                ev_rep = c.run_report(RunReportRequest(
+                    property=p,
+                    date_ranges=[DateRange(start_date=f"{m}-01", end_date=month_end(m))],
+                    dimensions=[Dimension(name="eventName")],
+                    metrics=[Metric(name="eventCount")], limit=300))
+                evs = {x.dimension_values[0].value: int(x.metric_values[0].value)
+                       for x in ev_rep.rows}
+                out["months"][i].update({
+                    "sessions": int(r[0].value) if r else 0,
+                    # 傘イベント。form_submit とは足さない（同時に飛ぶため）
+                    "cv": evs.get("lead_capture", 0),
+                    "cv_parts": {"フォーム": evs.get("lead_form", 0),
+                                 "AIO診断": evs.get("lead_diagnosis", 0),
+                                 "サイト監査": evs.get("lead_site_audit", 0)},
+                    "form_submit": evs.get("form_submit", 0)})
             cur = labels[-1]
             rep = c.run_report(RunReportRequest(
                 property=p, date_ranges=[DateRange(start_date=f"{cur}-01", end_date=month_end(cur))],
@@ -459,6 +513,8 @@ def na(v, fmt="{:,}"):
 # レポート本体
 # ============================================================
 def render(sites, labels, arts, cross, links, pipeline, a):
+    # 途中の月なら、その旨を冒頭に出す（月末と並べて誤読させないため）
+    partial_note = partial_note_html()
     ym = labels[-1]
     cur, mom = a["cur"], a["mom"]
     logo = ""
@@ -699,6 +755,7 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 
 <div class="sheet">
 <div class="sec"><span class="no">01</span><h2>エグゼクティブサマリー</h2><div class="gold"></div></div>
+{partial_note}
 <h3 style="margin-top:0">今月を3行で</h3>
 <ol class="head3">{head_html}</ol>
 <div class="tiles" style="margin-top:12px">
@@ -1145,11 +1202,17 @@ def site_detail2(s, no):
 <th style="width:9%">CV</th><th style="width:12%">判定</th></tr>{land}</table>
 <h3>検索順位の分布</h3>
 <table><tr><th style="width:18%">順位帯</th><th style="width:14%">キーワード数</th><th>この層への打ち手</th></tr>{rk}</table>
-<h3>リライトの最優先候補（11〜20位）</h3>
+</div>
+
+<!-- リライト候補は別紙にする。1枚に詰めると溢れ、見出しと表が離れる -->
+<div class="sheet">
+<div class="sec"><span class="no">{no:02d}</span><h2>{s["name"][:18]} のリライト候補</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">11〜20位で止まっている語です。<b>記事を新しく書かずに、
+いまある記事を直すだけでクリックを増やせる余地</b>を示しています。</p>
 <table><tr><th>キーワード</th><th style="width:12%">現順位</th><th style="width:13%">表示</th>
 <th style="width:12%">現クリック</th><th style="width:19%">1ページ目到達時</th></tr>{rw}</table>
 <p class="note">増加見込みは「1ページ目のCTRを4%と仮定した場合の追加クリック数」です。
-記事を新しく書かずにクリックを増やせる余地を示しています。</p>
+仮定を置いた試算であり、実測値ではありません。</p>
 </div>"""
 
 

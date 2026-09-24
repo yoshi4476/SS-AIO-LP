@@ -33,7 +33,7 @@ import sites as sites_mod  # noqa: E402
 UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"}
 POLL = 20          # 何秒おきに見に行くか
 BUILD_TIMEOUT = 480
-LIVE_TIMEOUT = 300
+LIVE_TIMEOUT = 600   # 配信が5分で終わらない日がある。見えないことと、公開されていないことは違う
 
 
 def _token():

@@ -376,9 +376,13 @@ jobs:
           fi
           out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}") || true
           echo "$out"
+          # **「見えない」と「公開されていない」は違う。**
+          # 配信が10分で終わらない日があり、それを「要対応」で出すと狼少年になる。
+          # 公開されたかどうかは、翌日の publish_gap（手元と本番の一覧を突き合わせる）
+          # が判定する。ここでは「確認中」として残すだけにする。
           if echo "$out" | grep -q "VERIFY_OK=no"; then
-            echo "::warning::公開したはずの記事が本番で確認できません"
-            echo "要対応: 公開したはずの記事が本番で確認できません" >> automation/logs/findings.txt
+            echo "::warning::公開直後の確認では本番に出ていません（配信待ちの可能性）"
+            echo "確認中: 公開直後に本番で確認できず（翌日の照合で判定します）" >> automation/logs/findings.txt
           fi
 
       # 品質ゲートはすべて原稿とビルド出力を見ている。公開後の実物を見る工程が

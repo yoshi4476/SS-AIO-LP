@@ -20,11 +20,10 @@
   "site": "ai-lab"
  },
  "seikotsuin-meo-taisaku": {
-  "at": "2026-09-20",
-  "pos": 16.6,
-  "imp": 118,
-  "band": "11〜20位",
-  "site": "ai-lab"
+  "at": "2026-09-24",
+  "pos": 7.3,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
  },
  "aio-shindan-yarikata": {
   "at": "2026-09-20",
@@ -48,11 +47,10 @@
   "site": "ai-lab"
  },
  "meo-algorithm-kouryaku": {
-  "at": "2026-09-20",
-  "pos": 13.6,
-  "imp": 42,
-  "band": "11〜20位",
-  "site": "ai-lab"
+  "at": "2026-09-24",
+  "pos": 5.1,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
  },
  "koumuten-meo-taisaku": {
   "at": "2026-09-20",

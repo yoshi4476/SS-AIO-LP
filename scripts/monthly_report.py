@@ -30,6 +30,22 @@ ROOT = Path(__file__).resolve().parent.parent
 DEMO = "--demo" in sys.argv
 SEND_EMAIL = "--email" in sys.argv
 
+
+def _through():
+    """`--through [YYYY-MM-DD]` があれば、その日まで当月を含める。
+
+    **途中経過だと分かる形でしか出さない。** 月末の数字と並べると、
+    前月比も達成率も意味が変わる。
+    """
+    if "--through" not in sys.argv:
+        return None
+    i = sys.argv.index("--through")
+    if i + 1 < len(sys.argv) and sys.argv[i + 1][:2] == "20":
+        return date.fromisoformat(sys.argv[i + 1])
+    return date.today()
+
+
+
 BLUE, TEAL, NAVY, MUTED = "#2563eb", "#0d9488", "#0b2447", "#5b6b84"
 
 
@@ -85,14 +101,43 @@ def ga4_property():
 # ============================================================
 # データ取得
 # ============================================================
+THROUGH = _through()
+
+
 def month_labels(n=6):
-    # 月初に前月分を発行する。当月は途中経過にしかならないため対象にしない。
+    """直近n月のラベル。既定は先月末まで（当月は途中経過にしかならないため）。
+
+    `--through` を付けたときだけ、当月を最後に足す。
+    足した当月は**途中経過**で、月末の数字と同じようには読めない。
+    """
     labels = []
     d = date.today().replace(day=1)
     for _ in range(n):
         d = (d - timedelta(days=1)).replace(day=1)
         labels.append(f"{d.year}-{d.month:02d}")
-    return list(reversed(labels))
+    labels = list(reversed(labels))
+    if THROUGH:
+        cur = f"{THROUGH.year}-{THROUGH.month:02d}"
+        if cur not in labels:
+            labels = labels[1:] + [cur]
+    return labels
+
+
+def partial_note():
+    """途中経過であることの注記。当月を含めたときだけ出す"""
+    if not THROUGH:
+        return ""
+    return (f'<p class="note stop"><b>当月（{THROUGH.year}年{THROUGH.month}月）は'
+            f'{THROUGH.month}月{THROUGH.day}日までの途中経過です。</b>'
+            f'月末までの日数が残っているため、前月比・達成率は'
+            f'そのまま比べられません。月の何割が過ぎたかを見てご覧ください'
+            f'（{THROUGH.day}日／{_days_in_month(THROUGH)}日。{THROUGH.day / _days_in_month(THROUGH) * 100:.0f}%が経過）。</p>')
+
+
+def _days_in_month(d):
+    """その月の日数。月末は「翌月1日の前日」で出す（月ごとの場合分けを持たない）"""
+    nxt = d.replace(day=28) + timedelta(days=4)
+    return (nxt.replace(day=1) - timedelta(days=1)).day
 
 
 def renumber_sections(html):
@@ -395,11 +440,28 @@ def fetch_real():
                   date.today()).isoformat()
         rep = ga.run_report(RunReportRequest(
             property=prop, date_ranges=[DateRange(start_date=f"{m}-01", end_date=end)],
-            metrics=[Metric(name="sessions"), Metric(name="conversions")]))
+            metrics=[Metric(name="sessions")]))
         row = rep.rows[0].metric_values if rep.rows else None
-        data["months"].append({"label": m,
-                               "sessions": int(row[0].value) if row else 0,
-                               "cv": int(float(row[1].value)) if row else 0})
+
+        # **リードは GA4 の conversions 指標を使わない。**
+        # あれは「どのイベントをコンバージョンにするか」という GA4側の設定で
+        # 決まるため、設定されていなければ0になる。実際、8月はリードが4件
+        # あったのに0と出ていた。イベントを直接数えれば設定に左右されない。
+        ev_rep = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=[DateRange(start_date=f"{m}-01", end_date=end)],
+            dimensions=[Dimension(name="eventName")],
+            metrics=[Metric(name="eventCount")], limit=300))
+        evs = {r.dimension_values[0].value: int(r.metric_values[0].value)
+               for r in ev_rep.rows}
+        data["months"].append({
+            "label": m,
+            "sessions": int(row[0].value) if row else 0,
+            # 傘イベント。form_submit とは足さない（同時に飛ぶため二重計上になる）
+            "cv": evs.get("lead_capture", 0),
+            "cv_parts": {"フォーム": evs.get("lead_form", 0),
+                         "AIO診断": evs.get("lead_diagnosis", 0),
+                         "サイト監査": evs.get("lead_site_audit", 0)},
+            "form_submit": evs.get("form_submit", 0)})
 
     # AI参照元セッション（当月）
     rep = ga.run_report(RunReportRequest(
@@ -452,12 +514,28 @@ def fetch_real():
         data["months"][i].update({
             "clicks": int(r.get("clicks", 0)), "impressions": int(r.get("impressions", 0)),
             "ctr": round(r.get("ctr", 0) * 100, 2), "pos": round(r.get("position", 0), 1)})
-    res = sc.searchanalytics().query(siteUrl=site, body={
-        "startDate": f"{labels[-1]}-01", "endDate": month_end(labels[-1]),
-        "dimensions": ["query"], "rowLimit": 10}).execute()
-    data["queries"] = [{"q": r["keys"][0], "imp": int(r["impressions"]), "clicks": int(r["clicks"]),
-                        "ctr": round(r["ctr"] * 100, 1), "pos": round(r["position"], 1)}
-                       for r in res.get("rows", [])]
+    # **60件取る。** 10件では「いまどの語で何位なのか」の全体像が出ない。
+    # 前月ぶんも取り、順位が上がったか下がったかを添える
+    def _q(label):
+        r = sc.searchanalytics().query(siteUrl=site, body={
+            "startDate": f"{label}-01", "endDate": month_end(label),
+            # **上限で切らない。** 60で切っていたため「60語」が実数のように
+            # 見えていた（実際は293語あった）
+            "dimensions": ["query"], "rowLimit": 1000}).execute()
+        return {x["keys"][0]: {"imp": int(x["impressions"]), "clicks": int(x["clicks"]),
+                               "ctr": round(x["ctr"] * 100, 1),
+                               "pos": round(x["position"], 1)}
+                for x in r.get("rows", [])}
+
+    cur_q = _q(labels[-1])
+    prev_q = _q(labels[-2]) if len(labels) > 1 else {}
+    data["queries"] = [
+        {"q": q, **v,
+         # 順位は小さいほど良い。前月−当月がプラスなら改善
+         "d_pos": round(prev_q[q]["pos"] - v["pos"], 1) if q in prev_q else None,
+         "d_imp": v["imp"] - prev_q[q]["imp"] if q in prev_q else None,
+         "new": q not in prev_q}
+        for q, v in sorted(cur_q.items(), key=lambda kv: -kv[1]["imp"])]
 
     # ページ別実績（当月・上位12）
     try:
@@ -603,6 +681,16 @@ def fetch_real():
                 secs.append({"name": k, "page": page, "n": v,
                              "pct": round(v / base * 100) if base else 0})
         data["sections"] = secs
+
+        # スクロール到達（25/50/75/90%）。区画を置いていないページでも、
+        # どこまで読まれたかが分かる。site.js が scroll_depth として送っている
+        depths = {}
+        for r in rep2.rows:
+            nm = r.dimension_values[0].value
+            if nm.startswith("scroll_depth"):
+                k = "".join(ch for ch in nm if ch.isdigit()) or "?"
+                depths[k] = depths.get(k, 0) + int(r.metric_values[0].value)
+        data["depths"] = depths
         # フォームへ向かうCTAだけを別に数える。診断・記事一覧・
         # ヘッダーのリンクを同じ「CTA」に混ぜると、詰まりを誤検知する
         FORM_CTA = ("form", "contact", "soudan", "consult", "lp", "mv")
@@ -926,10 +1014,20 @@ def analyze(d):
     cur, prev = d["months"][-1], d["months"][-2]
 
     def mom(k):
+        """前月比。**1日あたりに直してから比べる。**
+
+        月の合計をそのまま比べると、日数の違う月（当月の途中など）で
+        必ず少なく見える。実際、同じページに -13% と +12% が並んだ。
+        計算はレポート全体で report_context の1本に統一する。
+        """
         if not prev.get(k):
             return "―"
-        v = (cur.get(k, 0) - prev[k]) / prev[k] * 100
-        return f"{'+' if v >= 0 else ''}{v:.0f}%"
+        import report_context as RC
+        r = RC.compare(cur, prev, k, cur.get("label", ""), prev.get("label", ""),
+                       THROUGH)
+        if k == "pos":
+            return r["text"]
+        return f"{'+' if r['pct'] >= 0 else ''}{r['pct']:.0f}%"
 
     grown = []
     if cur.get("clicks", 0) > prev.get("clicks", 0):
@@ -1353,6 +1451,104 @@ def picked_kw_table(site_id):
             '<th style="width:14%">開く理由</th><th style="width:24%">判定の根拠</th></tr>'
             + rows + "</table>" + note)
 
+
+def kw_rank_table(queries, n=40, start=1, brief=True):
+    """いま、どの語で何位なのか。**順位は小さいほど良い**ことを表の中で示す。
+
+    前月と突き合わせ、上がった語・下がった語・新しく出た語を色で分ける。
+    「上がりました」と書くだけでは、どの語がどれだけ動いたか分からない。
+    """
+    if not queries:
+        return '<p class="note">検索語のデータを取得できませんでした。</p>'
+    rows = []
+    for i, q in enumerate(queries[:n], start):
+        d = q.get("d_pos")
+        if q.get("new"):
+            mv = '<span style="color:#0d9488;font-weight:700">新規</span>'
+        elif d is None:
+            mv = "—"
+        elif d >= 0.5:
+            mv = f'<span style="color:#0d9488;font-weight:700">▲{d:.1f}</span>'
+        elif d <= -0.5:
+            mv = f'<span style="color:#dc2626;font-weight:700">▼{abs(d):.1f}</span>'
+        else:
+            mv = '<span style="color:#6b7a8d">±0</span>'
+        band = ("#0d9488" if q["pos"] <= 10 else
+                ("#2563eb" if q["pos"] <= 30 else "#9aa7b8"))
+        rows.append(
+            f'<tr><td class="num">{i}</td><td>{q["q"]}</td>'
+            f'<td class="num" style="color:{band};font-weight:700">{q["pos"]:.1f}</td>'
+            f'<td class="num">{mv}</td>'
+            f'<td class="num">{q["imp"]:,}</td><td class="num">{q["clicks"]:,}</td>'
+            f'<td class="num">{q["ctr"]:.1f}%</td></tr>')
+    top10 = sum(1 for q in queries if q["pos"] <= 10)
+    top30 = sum(1 for q in queries if q["pos"] <= 30)
+    up = sum(1 for q in queries if (q.get("d_pos") or 0) >= 0.5)
+    down = sum(1 for q in queries if (q.get("d_pos") or 0) <= -0.5)
+    new = sum(1 for q in queries if q.get("new"))
+    head = (
+        f'<p style="font-size:9.5pt">取得できた検索語 <b>{len(queries)}語</b>のうち、'
+        f'<b>10位以内が{top10}語</b>、30位以内が{top30}語。'
+        f'前月より上がった語 <b>{up}語</b>／下がった語 {down}語／新しく出た語 {new}語。</p>'
+    ) if brief else ""
+    return (
+        head +
+        '<table><thead><tr><th>#</th><th>検索語</th><th>平均順位</th>'
+        '<th>前月比</th><th>表示</th><th>クリック</th><th>CTR</th></tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody></table>'
+        '<p class="note">順位は小さいほど上です。前月比の▲は順位が上がったこと'
+        '（数字が小さくなったこと）を指します。10位以内は濃い緑、30位以内は青。</p>')
+
+
+def drop_context(d):
+    """下がった数字に、同じ期間に上がった数字を添える。
+
+    **下がった事実だけを書かない。** 実際、9月の表示回数が885回減ったが、
+    同じ期間に平均順位は36.1位→20.5位と15.6位上がっていた。
+    片方だけ書くと、読んだ人は必ず誤解する。
+    """
+    import report_context as RC
+    ms = d.get("months", [])
+    if len(ms) < 2:
+        return ""
+    cur, prev = ms[-1], ms[-2]
+    res = {}
+    for k in ("impressions", "clicks", "sessions", "cv", "pos"):
+        if k in cur or k in prev:
+            res[k] = RC.compare(cur, prev, k, cur["label"], prev["label"], THROUGH)
+    return RC.partial_warning(cur["label"], THROUGH) + RC.with_context(res)
+
+
+def cv_breakdown(d):
+    """リードの内訳。**傘と内訳の合計が合うことを、その場で示す。**"""
+    ms = d.get("months", [])
+    if not ms:
+        return ""
+    cur = ms[-1]
+    parts = cur.get("cv_parts") or {}
+    if not parts:
+        return ""
+    total = cur.get("cv", 0)
+    s = sum(parts.values())
+    rows = "".join(f'<tr><td>{k}</td><td class="num">{v}</td></tr>'
+                   for k, v in parts.items())
+    warn = ("" if s == total else
+            f'<p class="note stop">内訳の合計（{s}）が全体（{total}）と'
+            f'一致しません。数え漏れか、イベントの追加があります。</p>')
+    fs = cur.get("form_submit", 0)
+    note = ""
+    if total and not fs:
+        note = ('<p class="note">フォームからの送信は0件ですが、'
+                '<b>診断・サイト監査からリードが取れています。</b>'
+                'フォーム送信だけを数えると、この獲得を落とします。</p>')
+    return (f'<h3>リード獲得の内訳（全{total}件）</h3>'
+            f'<table><thead><tr><th>経路</th><th>件数</th></tr></thead>'
+            f'<tbody>{rows}'
+            f'<tr><td><b>合計</b></td><td class="num"><b>{s}</b></td></tr>'
+            f'</tbody></table>{warn}{note}'
+            f'<p class="note">フォーム送信イベントは{fs}件。'
+            f'リードと同時に飛ぶため、足しません（足すと二重計上）。</p>')
+
 def svg_line(months, key, color, title, unit=""):
     vals = [m.get(key, 0) or 0 for m in months]
     if not any(vals):
@@ -1749,6 +1945,23 @@ def _imp_bars(f):
 
 
 def render(d, a):
+    # いまどの語で何位なのかの一覧。週次グラフだけでは全体像が出ない
+    # **20語ずつのページに割る。** 1枚に詰めると溢れて、見出しと表が離れる。
+    # 語数は月によって変わるので、必要な枚数だけ作る
+    _qs = d.get('queries', [])
+    _PER = 20
+    kw_rank = kw_rank_table(_qs, _PER)
+    ctx_note = drop_context(d)
+    cv_parts_html = cv_breakdown(d)
+    _more = []
+    for _i in range(_PER, min(len(_qs), 60), _PER):
+        _more.append(
+            '<div class="sheet">'
+            '<div class="sec"><span class="no">11</span>'
+            '<h2>現在のキーワードと順位（一覧・続き）</h2><div class="gold"></div></div>'
+            + kw_rank_table(_qs[_i:_i + _PER], _PER, start=_i + 1, brief=False)
+            + '</div>')
+    kw_rank2 = "".join(_more)
     labels = d["months"]
     cur = labels[-1]
     ym = cur["label"]
@@ -2032,6 +2245,7 @@ def render(d, a):
         "読まれ方の質（エンゲージメント・滞在・回遊）",
         "入口ページ別の成績（改修の根拠）",
         "検索順位の分布（伸びしろの在り処）",
+        "現在のキーワードと順位（一覧）",
         "主要キーワードの週次の順位推移",
         "次に狙う検索語と、選んだ理由",
         "オウンドメディアの改修プラン",
@@ -2191,6 +2405,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="sheet">
 {demo_banner}
 <div class="sec"><span class="no">01</span><h2>エグゼクティブサマリー</h2><div class="gold"></div></div>
+
 <h3 style="margin-top:0">今月を3行で</h3>
 <ol class="head3">{head_html}</ol>
 <h3>詳しい総評</h3>
@@ -2237,6 +2452,13 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 </div>
 
 <!-- KPIダッシュボード -->
+<div class="sheet">
+<div class="sec"><span class="no">02</span><h2>増減の読み方と、リード獲得の内訳</h2><div class="gold"></div></div>
+{ctx_note}
+<p style="font-size:9.5pt">合計だけでは、どの導線が効いたか分かりません。<b>経路ごとに分けて数え、合計と一致することを毎回確かめています。</b></p>
+{cv_parts_html}
+</div>
+
 <div class="sheet">
 <div class="sec"><span class="no">03</span><h2>KPIダッシュボード</h2><div class="gold"></div></div>
 <div class="tiles">
@@ -2356,7 +2578,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <p style="font-size:9.5pt">滞在時間の合計では、<span class="mark">どこで読むのをやめたか</span>が分かりません。
 セクションごとの到達数を先頭比で見ると、落ちる位置が特定できます。</p>
 <h3>セクション到達（ヒートマップ）</h3>
-{section_heat(d.get("sections", []))}
+{__import__('report_heat').heat_html(d.get('sections', []), MUTED)}{__import__('report_heat').depth_html(d.get('depths', {}))}
 <h3 style="margin-top:14px">行動の内訳</h3>
 <table><tr><th style="width:28%">指標</th><th style="width:16%">件数</th><th>読み方</th></tr>
 <tr><td>セッション</td><td class="num">{(d.get("behavior") or {}).get("sessions", 0)}</td><td>訪問の総数</td></tr>
@@ -2568,6 +2790,15 @@ generate_lead は送信完了を表します。押されているのに送信ま
 </div>
 
 <!-- ページ: 週次の推移と、次に狙う語 -->
+<div class="sheet">
+<div class="sec"><span class="no">11</span><h2>現在のキーワードと順位（一覧）</h2><div class="gold"></div></div>
+<p style="font-size:9.5pt">当月に検索結果へ出た語を、表示回数の多い順に並べています。
+<b>いまどの語で何位なのかを、この1枚で確かめられます。</b></p>
+{kw_rank}
+</div>
+{kw_rank2}
+
+<!-- ページ: 主要キーワードの週次の順位推移 -->
 <div class="sheet">
 <div class="sec"><span class="no">11</span><h2>主要キーワードの週次の順位推移</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">月の合計では月中の動きが見えません。<b>週単位なら、直した翌週に効いたかが分かります。</b></p>
@@ -2878,6 +3109,25 @@ def main():
         store[next_ym] = a["target_nums"]
         tf.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"来月({next_ym})の目標を保存しました: {tf.name}")
+
+    # **検算を通らなければPDFを作らない。**
+    # 1つの測り方の結果をそのまま出して実際に誤った（「60語」「CV 0件」）。
+    # 覚えておく決まりではなく、出せない形にする。
+    try:
+        import report_verify
+        ok, bad, notes = report_verify.check(
+            ym, THROUGH.isoformat() if THROUGH else None)
+        if not ok:
+            for b in bad:
+                print(f"  検算で止めました: {b}")
+            raise SystemExit("数字が別の方法と食い違います。PDFは作りません")
+        for n in notes:
+            print(f"  ※ {n}")
+    except SystemExit:
+        raise
+    except Exception as ex:
+        print(f"  検算が動きませんでした（{type(ex).__name__}: {ex}）。"
+              f"数字を確かめてから配布してください")
 
     from playwright.sync_api import sync_playwright
 
