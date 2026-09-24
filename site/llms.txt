@@ -14,7 +14,7 @@
 - [クリニック・医療機関の集客](https://ai.7senses.co.jp/industry/clinic/): 患者はいま、Googleマップ・検索・AI検索の3つで受診先を探しています。（21本）
 - [不動産の集客](https://ai.7senses.co.jp/industry/fudosan/): 不動産は物件ポータルが検索の上位を占め、自社サイトが同じ土俵で戦っても届きません。（12本）
 - [工務店・注文住宅の集客](https://ai.7senses.co.jp/industry/koumuten/): 注文住宅は検討期間が長く、その間に何度も検索されます。（9本）
-- [士業（税理士・社労士ほか）の集客](https://ai.7senses.co.jp/industry/shigyou/): 士業は、相談される前に比較されます。（6本）
+- [士業（税理士・社労士ほか）の集客](https://ai.7senses.co.jp/industry/shigyou/): 士業は、相談される前に比較されます。（7本）
 - [BtoB・法人向けサービスの集客](https://ai.7senses.co.jp/industry/btob/): BtoBは検討期間が長く、担当者・決裁者・現場と読む人が変わります。（6本）
 
 ## 主要ページ
@@ -179,3 +179,4 @@
 - [AIO運用を始めてから検索順位が上がるまでの月数](https://ai.7senses.co.jp/data/aio-junni-madeno-tsukisuu/): AIO運用を開始した企業について、主要クエリの平均順位が運用開始時より上がった月を集計しました。
 - [AIOチェッカーとは？表示と引用を見分ける使い方](https://ai.7senses.co.jp/aio/aio-checker/): AI Overviewの表示と自社の引用を分けて確かめる方法と、結果別の次の一手
 - [AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](https://ai.7senses.co.jp/aio/aio-towa/): AIOの意味、AI Overviewが表示される検索の実測、Googleが公式に否定した5つの通説と効く3条件、成果の測り方を整理
+- [税理士法人のAIO対策とは？AI検索に引用される5つの準備](https://ai.7senses.co.jp/aio/zeirishi-houjin-aio/): 税理士法人がAIに引用されるための5つの準備、個人事務所との違い、広告ルールとの両立、進め方の判断基準
