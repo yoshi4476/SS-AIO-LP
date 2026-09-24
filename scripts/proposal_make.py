@@ -43,6 +43,48 @@ def facts():
     return f
 
 
+def industry_facts(name):
+    """業種向けの1ページに載せる材料。**記事とハブにあるものだけ**（数字は作らない）"""
+    import industry_hub as IH
+    inds, _ = IH.load()
+    ind = next((i for i in inds if i["name"] == name or name in i.get("synonyms", [])), None)
+    if not ind:
+        return None
+    metas = []
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+        if not m:
+            continue
+        fm, body = m.group(1), m.group(2)
+        title = re.search(r"^title:\s*(.+)$", fm, re.M)
+        kw = re.search(r"^keyword:\s*(.+)$", fm, re.M)
+        sc = re.search(r"^score:\s*(\d+)", fm, re.M)
+        if not title or not sc or int(sc.group(1)) < 90:
+            continue
+        if IH.detect(title.group(1), kw.group(1) if kw else "", inds) == ind["slug"]:
+            faq = re.findall(r"^\s*- q:\s*(.+)$", body, re.M)
+            metas.append({"title": title.group(1).strip().strip('"'), "faq": faq[:2]})
+    if not metas:
+        return None
+    hub = (ROOT / "site" / "industry" / ind["slug"] / "index.html").is_file()
+    return {"name": ind["name"], "slug": ind["slug"], "lead": ind.get("lead", ""), "n": len(metas),
+            "titles": [m["title"] for m in metas[:6]],
+            "questions": [q for m in metas for q in m["faq"]][:5],
+            "hub_url": f"https://ai.7senses.co.jp/industry/{ind['slug']}/" if hub else ""}
+
+
+def industry_page(ind):
+    """御社の業種で、いま何がそろっているか（記事・質問・入口）を1ページで見せる"""
+    import html as _h
+    titles = "".join(f"<li>{_h.escape(t)}</li>" for t in ind["titles"])
+    qs = "".join(f"<li>{_h.escape(q)}</li>" for q in ind["questions"])
+    hub = (f'<p class="note">業種の入口: {ind["hub_url"]}（よくある質問のまとめも同じ場所）</p>' if ind["hub_url"] else "")
+    return (f'<div class="two"><div><h3>{_h.escape(ind["name"])}向けに、すでに公開している記事（{ind["n"]}本）</h3>'
+            f'<ul class="list">{titles}</ul></div>'
+            f'<div><h3>{_h.escape(ind["name"])}の方がよく調べている質問</h3><ul class="list">{qs}</ul></div></div>{hub}')
+
+
 PAGES = []
 
 
@@ -149,6 +191,14 @@ def build_pages(f):
          "AIに引用されるオウンドメディアを、まるごと運用します。"
          "サイト構築から月60本の記事、解説動画とSNSの投稿文、"
          "改善指示つきの月次レポートまで一気通貫で。", "")
+
+    # 業種向け（--industry）: 御社の業種で、いま何がそろっているかを1ページ差し込む
+    if f.get("industry"):
+        ind = f["industry"]
+        page("sec", "", f"FOR {ind['name']}", f"{ind['name']}の集客は、<em>もう書き始めています</em>。",
+             (ind["lead"] or f"{ind['name']}向けの記事を公開済みです。") +
+             f" 公開済み{ind['n']}本と、その業種でよく調べられている質問を、御社の切り口で厚くしていきます。",
+             industry_page(ind))
 
     page("toc", "", "CONTENTS", "目次",
          "AI検索で選ばれる状態を、御社の手間ほぼゼロでつくり、毎月積み上げます。"
@@ -933,9 +983,14 @@ td b{{color:{NAVY}}}
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--html", action="store_true", help="HTMLだけ作る")
+    ap.add_argument("--industry", default="", help="業種名（industries.json の name。例: 歯科医院）で1ページ差し込む")
     a = ap.parse_args()
 
     f = facts()
+    if a.industry:
+        f["industry"] = industry_facts(a.industry)
+        if not f["industry"]:
+            raise SystemExit(f"業種が data/industries.json に無い、または記事が無い: {a.industry}")
     HTML.parent.mkdir(parents=True, exist_ok=True)
     HTML.write_text(html(f), encoding="utf-8")
     print(f"  HTML: {HTML}（{len(PAGES)}ページ）")
@@ -943,7 +998,7 @@ def main():
         return 0
 
     from playwright.sync_api import sync_playwright
-    out = OUT_DIR / "AIO提案書_詳細版.pdf"
+    out = OUT_DIR / (f"AIO提案書_{f['industry']['name']}向け.pdf" if f.get("industry") else "AIO提案書_詳細版.pdf")
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page()

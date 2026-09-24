@@ -1346,6 +1346,11 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `video_make` → `youtube_upload` | 字幕（.srt）とチャプター（説明欄）を台本と実測の秒数から作って上げる | 鍵の権限は `youtube.force-ssl`（既存の鍵は `--auth` をやり直す） |
 | `contact.hub.gs` `followUp` | HOT は翌日・WARM は3日後に1通だけ自動フォロー（未対応のままの行だけ・15列目に記録） | 有効化は `installFollowUpTrigger` を1回。診断は `/data/reco.json` から記事3本を添える |
 | `site.js` | `form_start` / `form_abandon`（最後に触った項目つき）を計測 | 開いたのに送らない原因を項目で分ける（翌月から数字が出る） |
+| `data_auto_more.py`（data_auto が読む） | 業種別CTR・手法別CTR・質問形見出し×順位・自動修正の効き を一次データに足す | 母数・期間の決まりは data_auto と同じ。足りなければ作らない |
+| `fact_cite.py --write`（週3本） | 登録済みの一次情報の文を、題名・狙う語の重なる記事の最初のH2直下へ1文だけ入れる | 引用文に無い数字が増えたら入れない。1記事1文 |
+| `exit_fix.py --write`（週次） | 固定ページで到達が最も落ちる区画の手前に、無料診断への導線を1つ置く | 手前に導線があれば置かない。タグの数が変われば置かない |
+| `proposal_make.py --industry <業種>` | 業種向けの1ページ（公開済み記事・よく調べられる質問・入口）を差し込んだ提案書 | 記事とハブにあるものだけ。数字は作らない |
+| `hub_sheets.py`（`HUB_DIRECT=1` で有効） | 管制塔を Sheets API で直接読み書き（GAS と同じ列・同じ判定）。失敗したら GAS に落ちる | サービスアカウントをシートに「編集者」で共有しておく |
 
 ---
 

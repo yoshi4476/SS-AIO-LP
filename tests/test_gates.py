@@ -3048,6 +3048,25 @@ def test_report_actions_close_the_loop():
     sj = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
     check("フォームの開始と離脱を計測する", "form_start" in sj and "form_abandon" in sj, True)
 
+    # 一次データの拡張・相互引用・出口・提案書・管制塔の直接接続
+    import data_auto as DA
+    import data_auto_more as DM
+    import fact_cite as FC
+    import exit_fix as EF
+    import hub_sheets as HS
+    import hub_client as HC2
+    check("data_auto: 切り口が8種類以上", len(DA.BUILDERS) >= 8, True)
+    check("data_auto_more: 母数の下限は data_auto と同じ", DM.MIN_N, DA.MIN_N)
+    check("fact_cite: 引用文に無い数字は入れない", "引用文に無い数字" in inspect.getsource(FC.insert), True)
+    check("fact_cite: 同じ記事に二度入れない", "セブンセンシズ株式会社が" in inspect.getsource(FC.candidates), True)
+    check("exit_fix: 落差の下限がある", EF.MIN_DROP_PT >= 20, True)
+    check("exit_fix: 同じ区画に二度置かない", 'data-exit-cta="1"' in inspect.getsource(EF.apply), True)
+    check("hub_sheets: GAS と同じ正規化", HS.norm_kw("ＡＩＯ 診断") == HS.norm_kw("aio診断"), True)
+    check("hub_client: 直接接続が失敗したら GAS へ落ちる", "GAS 経由に切り替えます" in inspect.getsource(HC2._direct), True)
+    import proposal_make as PM
+    check("proposal_make: 業種向けの1ページを作れる", callable(getattr(PM, "industry_page", None)), True)
+    check("週次CIが相互引用と出口の導線を回す", "fact_cite.py --write" in wk and "exit_fix.py --write" in wk, True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,

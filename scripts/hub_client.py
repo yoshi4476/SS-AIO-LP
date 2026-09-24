@@ -68,7 +68,44 @@ def _open(req):
         time.sleep(RETRY_WAIT[i])
 
 
+def _direct(action, p):
+    """Sheets API で直接（hub_sheets）。使えない・失敗したら None を返して GAS に落とす"""
+    try:
+        import hub_sheets as HS
+        if not HS.available():
+            return None
+        if action == "next_kw":
+            return HS.next_kw(p.get("site", ""))
+        if action == "all_kw":
+            return {"ok": True, "keywords": HS.all_kw()}
+        if action == "kw_status":
+            return HS.kw_status(p.get("site", ""))
+        if action == "claim_kw":
+            return HS.claim_kw(p.get("site", ""), p.get("keyword", ""))
+        if action == "unclaim_kw":
+            return HS.unclaim_kw(p.get("site", ""), p.get("keywords") or [])
+        if action == "retire_kw":
+            return HS.retire_kw(p.get("site", ""), p.get("keywords") or [], p.get("reason", ""), bool(p.get("force")))
+        if action == "add_kw":
+            return HS.add_kw(p.get("site", ""), p.get("keywords") or [])
+        if action == "publish_log":
+            return HS.publish_log(**{k: v for k, v in p.items() if k not in ("action", "secret")})
+        if action == "error_log":
+            return HS.error_log(p.get("site", ""), p.get("phase", ""), p.get("message", ""), p.get("fix", ""),
+                                p.get("status", "未対応"))
+        if action == "rewrite_log":
+            return HS.rewrite_log(p.get("site", ""), p.get("article", ""), p.get("reason", ""), p.get("summary", ""),
+                                  p.get("pos_before", ""), p.get("pos_after", ""), p.get("effect", ""))
+        return None                                   # それ以外は GAS へ
+    except Exception as e:
+        print(f"  管制塔へ直接つなげません（{type(e).__name__}）。GAS 経由に切り替えます")
+        return None
+
+
 def _get(params):
+    d = _direct(params.get("action", ""), params)
+    if d is not None:
+        return d
     url = HUB_URL + ("&" if "?" in HUB_URL else "?") + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers=UA)
     with _open(req) as r:
@@ -76,6 +113,9 @@ def _get(params):
 
 
 def _post(body):
+    d = _direct(body.get("action", ""), body)
+    if d is not None:
+        return d
     body = dict(body)
     body["secret"] = HUB_SECRET
     req = urllib.request.Request(

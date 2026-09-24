@@ -311,6 +311,12 @@ def links_by_rank(days=DAYS):
 BUILDERS = [("順位ごとのクリック率", ctr_by_rank), ("生成AI経由の流入", ai_referral),
             ("公開から検索に出るまでの日数", index_speed),
             ("順位ごとの内部リンク本数", links_by_rank)]
+# 切り口の追加分（業種別・手法別・質問形見出し・自動修正の効き）。母数の決まりは同じ
+try:
+    import data_auto_more as _more
+    BUILDERS += _more.BUILDERS
+except Exception as _e:
+    print(f"  （追加の切り口を読めません: {str(_e)[:50]}）")
 
 
 def main():

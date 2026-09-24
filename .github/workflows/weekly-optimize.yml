@@ -486,6 +486,9 @@ jobs:
           python scripts/rewrite_rollback.py --write 2>&1 | tail -8 || true
           python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
           python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
+          # 一次情報の1文を関係する記事へ（週3本）／離脱が最大の区画の手前に導線（固定ページ）
+          python scripts/fact_cite.py --write --limit 3 2>&1 | tail -5 || true
+          python scripts/exit_fix.py --write 2>&1 | tail -5 || true
           rm -f indexing-service-account.json
 
       # 今週公開した記事を短い動画にして YouTube へ上げる。AI検索での可視性と最も強く
