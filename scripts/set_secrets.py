@@ -32,6 +32,8 @@ TO_GITHUB = {
     "RESEND_AUDIENCE_ID", "LEAD_TO_EMAIL", "LEAD_FROM_EMAIL",
     "YOUTUBE_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN", "GCP_SERVICE_ACCOUNT_JSON",
     "RAKKO_API_KEY",
+    # AI検索の語の調査（ai_kw_research / ai_cite_check）と記事動画の投稿（article_videos）
+    "GEMINI_API_KEY", "YOUTUBE_CLIENT_JSON", "YOUTUBE_TOKEN_JSON",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。

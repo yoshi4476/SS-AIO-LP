@@ -139,6 +139,12 @@ def research(sid, cfg, probe_n=0):
                 r["ai"] = probe(r["kw"], dom)
             except Exception as e:
                 r["ai"] = {"error": str(e)[:80]}
+                # 枠切れ（429）はその回は何度聞いても同じ。残りは来週に回す
+                # （無駄に叩くと枠の回復も遅れる）。候補の抽出と台帳への追加は続ける
+                if "429" in str(e):
+                    print(f"   AIの枠切れ（429）。今回は{asked}語で打ち切り、来週に回します")
+                    r["ai"] = None
+                    break
             asked += 1
             r["score"] = score(r["kw"], r["imp"], r["pos"], r["ai"])
         cands.sort(key=lambda x: -x["score"])

@@ -444,7 +444,9 @@ jobs:
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
           YOUTUBE_TOKEN_JSON: ${{ secrets.YOUTUBE_TOKEN_JSON }}
         run: |
+          sudo apt-get update -qq > /dev/null 2>&1 || true
           sudo apt-get install -y -qq ffmpeg fonts-noto-cjk > /dev/null 2>&1 || true
+          command -v ffmpeg > /dev/null || echo "::warning::ffmpeg が入らず、記事動画を作れません"
           pip install --quiet edge-tts google-auth-oauthlib || true
           [ -n "$YOUTUBE_CLIENT_JSON" ] && printf '%s' "$YOUTUBE_CLIENT_JSON" > youtube-client.json
           [ -n "$YOUTUBE_TOKEN_JSON" ]  && printf '%s' "$YOUTUBE_TOKEN_JSON"  > youtube-token.json
