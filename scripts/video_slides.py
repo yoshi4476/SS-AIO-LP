@@ -103,7 +103,11 @@ def term(im, d, s, top, bot):
     W = V.W
     x0, x1 = 110, W - 110
     y0 = top
-    y1 = min(bot - 10, y0 + 640)
+    rows = s.get("term", [])[:14]
+    # 高さは中身に合わせる。4行の画面を640pxで描くと、下が黒く空いて間延びする
+    need = 92 + sum(32 if st == "rule" else (42 if st in ("ng", "hi") else 38)
+                    for _, st in rows) + 24
+    y1 = min(bot - 10, y0 + max(240, need))
     d.rounded_rectangle([x0, y0, x1, y1], 14, fill=PANEL)
     d.rounded_rectangle([x0, y0, x1, y0 + 62], 14, fill=PANEL_BAR)
     d.rectangle([x0, y0 + 40, x1, y0 + 62], fill=PANEL_BAR)
@@ -121,7 +125,19 @@ def term(im, d, s, top, bot):
     y = y0 + 92
     colors = {"": (206, 218, 234), "ok": (118, 210, 150), "ng": (240, 130, 120),
               "dim": (120, 137, 160), "hi": V.ACCENT_L, "rule": None}
-    for text, style in s.get("term", [])[:14]:
+
+    # 「名前 … 結果」の列を、**このスライドの中で最も長い左側に合わせて**決める。
+    # 固定位置にすると、長い行で左の文字に右の文字が重なる（実測41箇所）
+    col = 0
+    for text, style in rows:
+        if "…" in text and style in ("ok", "ng"):
+            f = V.font(31 if style in ("ng", "hi") else 28)
+            col = max(col, d.textlength(text.split("…", 1)[0].rstrip(), font=f))
+    col = 36 + col + 28
+    # 右側が入りきらないなら、そろえるのをやめる（重なるより1行のほうがまし）
+    fits = col < (x1 - x0) * 0.62
+
+    for text, style in rows:
         if y > y1 - 40:
             break
         if style == "rule":
@@ -129,15 +145,15 @@ def term(im, d, s, top, bot):
             y += 32
             continue
         f = V.font(31 if style in ("ng", "hi") else 28)
-        col = colors.get(style, colors[""])
+        c = colors.get(style, colors[""])
         # 「名前 … 結果」は列をそろえる。等幅の日本語フォントが無いので、
         # 空白で詰めても そろわない（実測でクローラー名ごとに位置がずれた）
-        if "…" in text and style in ("ok", "ng"):
+        if fits and "…" in text and style in ("ok", "ng"):
             left, right = text.split("…", 1)
-            d.text((x0 + 36, y), left.rstrip(), font=f, fill=col, anchor="lt")
-            d.text((x0 + 470, y), "…" + right, font=f, fill=col, anchor="lt")
+            d.text((x0 + 36, y), left.rstrip(), font=f, fill=c, anchor="lt")
+            d.text((x0 + col, y), "…" + right, font=f, fill=c, anchor="lt")
         else:
-            d.text((x0 + 36, y), text, font=f, fill=col, anchor="lt")
+            d.text((x0 + 36, y), text, font=f, fill=c, anchor="lt")
         y += 42 if style in ("ng", "hi") else 38
 
 

@@ -319,12 +319,23 @@ def build(script, out_mp4, quiet=False):
         vlist.write_text(body + f"file '{pngs[-1].as_posix()}'\n", encoding="utf-8")
 
         out_mp4.parent.mkdir(parents=True, exist_ok=True)
+        # **`+faststart` は外さないこと。** これが無いと再生に必要な索引が
+        # ファイルの末尾に置かれ、読み込みが追いつかない場所で再生が止まる。
+        # 実測で、13分と18分の動画が途中で止まった。
+        # `-g 60` はキーフレームを2秒ごとに置く（止まっても早く戻れる）。
+        # `-fps_mode cfr` は concat 由来の timestamp のゆらぎを消す
+        # （ffmpeg 9 で -vsync は廃止。-vsync を書くと起動時に落ちる）。
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0",
                         "-i", str(vlist), "-i", str(audio),
                         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30",
+                        "-fps_mode", "cfr", "-g", "60", "-keyint_min", "30",
+                        "-profile:v", "high", "-level", "4.0",
+                        "-movflags", "+faststart",
                         "-c:a", "aac", "-b:a", "128k", "-shortest",
                         str(out_mp4)], check=True)
 
+    if not playable(out_mp4):
+        raise SystemExit(f"索引が末尾にあります（途中で止まります）: {out_mp4}")
     got = duration(out_mp4)
     want = sum(durs)
     gap = abs(got - want)
@@ -334,6 +345,16 @@ def build(script, out_mp4, quiet=False):
     if gap > 1.0:
         raise SystemExit(f"音声と映像がずれています（差 {gap:.2f}秒）。書き出しを中止しました")
     return got
+
+
+
+def playable(path):
+    """再生に必要な索引が、ファイルの先頭にあるか。
+
+    **無いと途中で止まる。** 書き出しのたびに確かめる。
+    """
+    head = path.open("rb").read(8192)
+    return b"moov" in head
 
 
 MAX_SAY = 54   # 1区間で読み上げてよい字数。これを超えるとスライドが動かない時間が長くなる
