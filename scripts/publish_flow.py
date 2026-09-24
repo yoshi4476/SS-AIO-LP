@@ -90,7 +90,8 @@ def main():
     import daily_audit
     _ym = str(meta.get("date", ""))[:7] or datetime.now().strftime("%Y-%m")
     _n = sum(1 for a in daily_audit.articles_by_site().get(site_id, [])
-             if a["date"][:7] == _ym and a["slug"] != slug)
+             if a["date"][:7] == _ym and a["slug"] != slug
+             and daily_audit._is_published(a))   # 未採点の下書きは配信されていないので数えない
     if _n >= daily_audit.MONTHLY_CAP:
         raise SystemExit(
             f"{site_id} は今月すでに {_n} 本公開しており、上限 "
