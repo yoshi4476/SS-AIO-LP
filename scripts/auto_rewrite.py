@@ -146,6 +146,28 @@ def fresh_items(limit=4):
     return rows[:limit]
 
 
+def question_items(limit=4):
+    """H2に質問形が1本も無い公開記事（表示の多い順は取らず、古い順）"""
+    rows = []
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+        if not m:
+            continue
+        fm, body = m.group(1), m.group(2)
+        sc = re.search(r"^score:\s*(\d+)", fm, re.M)
+        if not sc or int(sc.group(1)) < 90:
+            continue
+        h2 = re.findall(r"^##\s+(.+)$", body, re.M)
+        if len(h2) < 4 or any(re.search(r"[?？]", h) for h in h2):
+            continue
+        d = re.search(r"^date:\s*(\S+)", fm, re.M)
+        rows.append({"kind": "question", "slug": p.stem, "site": site_of(p.stem),
+                     "why": f"H2 {len(h2)}本に質問形が1本も無い（公開 {d.group(1) if d else '-'}）"})
+    rows.sort(key=lambda r: r["why"])
+    return rows[:limit]
+
+
 PROMPT = """articles/{slug}.md を直してください。この1ファイル以外は触らないでください。
 
 直す理由: {why}
@@ -179,6 +201,14 @@ WHAT = {
             "3. 「失敗例・注意点」の見出しに、一次情報から言える具体例を1つ足す\n"
             "4. FAQ の最初の1問を、狙う語そのものの質問にし、回答に一次情報の数字を1つ入れる\n"
             "使ってよい自社の一次情報（**この数字以外の新しい数字は書かない**）:\n{facts}"),
+    "question": ("この記事のH2見出しは名詞句ばかりで、質問の形がありません。自社の実測で、H2の1〜3割が\n"
+                 "質問形の記事は、質問形ゼロの記事より平均4.2位上にいます。AI Overview は質問形の\n"
+                 "クエリで64.7%出ます。\n"
+                 "1. H2のうち**2〜3本だけ**を、読者がそのまま検索しそうな質問の形（「〜とは？」「〜はいくら？」\n"
+                 "   「〜はどう選ぶ？」）に書き換える。まとめ・よくある質問・失敗例の見出しは変えない\n"
+                 "2. 見出しの数と順番は変えない。増やさない、減らさない、統合しない\n"
+                 "3. 見出しの直下の1文結論は、質問への答えになっているか読み直し、必要なら語順だけ整える\n"
+                 "4. 本文・数字・出典・狙う語は変えない"),
     "fresh": ("この記事は公開（または最終更新）から6か月以上たっています。AI検索は鮮度を重視します。\n"
               "1. 「◯年◯月時点」「現在」「最新」など、時点を示す表現をすべて探す\n"
               "2. その記述が**いまも事実として正しいと本文の根拠から判断できる**箇所だけ、時点を「{ym}時点」に更新する\n"
@@ -497,6 +527,19 @@ def run_one(item, write):
 
     ng = check(slug, before, before_warns, snap, allowed,
                item.get("terms") or ())
+    if not ng and kind == "question":
+        # 見出しの本数と順番が変わったら通さない（質問形にする直しは言い換えだけ）
+        h_before = re.findall(r"^##\s+", before[2], re.M)
+        after_now = p.read_text(encoding="utf-8-sig")
+        h_after = re.findall(r"^##\s+(.+)$", after_now, re.M)
+        if len(h_before) != len(h_after):
+            ng = f"H2の本数が変わりました（{len(h_before)}→{len(h_after)}）"
+        elif not any(re.search(r"[?？]", h) for h in h_after):
+            ng = "質問形の見出しが1本も入りませんでした"
+        if ng:
+            sh(["git", "checkout", "--", f"articles/{slug}.md"])
+            sh([sys.executable, "scripts/build.py"], timeout=1800)
+            return False, ng
     after_text = p.read_text(encoding="utf-8-sig")
     LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
                   "after_title": meta(slug)[0], "after_description": _desc_of(after_text)}
@@ -603,6 +646,8 @@ def main():
 
     if a.kind == "fresh":
         items = fresh_items(max(a.limit, 4))
+    elif a.kind == "question":
+        items = question_items(max(a.limit, 4))
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     print(f"■ 人の判断に回っていた直し: {len(items)}件"

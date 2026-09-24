@@ -3010,6 +3010,25 @@ def test_report_actions_close_the_loop():
     gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
     check("自動返信に資料の案内が入る", "videos/aio-pr.mp4" in gs and "body + materials + foot" in gs, True)
 
+    # 実測系: 検出器は「見つかるはずの例」で試す（0.1節）
+    import brand_spelling as BS
+    got = BS.scan("セブンセンシズ(株) と AI 集客ラボ。https://7senses.co.jp/")
+    check("brand_spelling: ゆれを見つける", sum(sum(v.values()) for v in got.values()), 2)
+    check("brand_spelling: 正規表記を誤検出しない", BS.scan("セブンセンシズ株式会社のAI集客ラボ"), {})
+    check("brand_spelling: URLは触らない", "https://7senses.co.jp/" in BS.fix("セブンセンシズ(株) https://7senses.co.jp/"), True)
+    import cwv_check as CW
+    check("cwv_check: 基準は 8.4節と同じ", (CW.LIMITS["LCP"], CW.LIMITS["INP"], CW.LIMITS["CLS"]), (2500, 200, 0.1))
+    import cert_check as CC2
+    check("cert_check: 30日前に知らせる", CC2.WARN_DAYS, 30)
+    check("auto_rewrite: 質問形の種別がある", "question" in AR2.WHAT, True)
+    check("auto_rewrite: 質問形はH2の本数を守る", "H2の本数が変わりました" in inspect.getsource(AR2.run_one), True)
+    import social_post as SP2
+    check("social_post: note 用の長文を作る", '"note"' in inspect.getsource(SP2.compose), True)
+    check("週次CIが実測（速度・表記・インデックス・AI引用）を回す",
+          all(s in wk for s in ("cwv_check.py", "brand_spelling.py --fix", "index_status.py", "ai_cite_check.py --limit 5", "--kind question")), True)
+    sh_ = (ROOT / ".github" / "workflows" / "selfheal.yml").read_text(encoding="utf-8")
+    check("日次CIが証明書・404・トークンを見る", "cert_check.py" in sh_ and "token_check.py" in sh_, True)
+
 
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,

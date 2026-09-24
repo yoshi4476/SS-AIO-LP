@@ -61,6 +61,24 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python scripts/ai_crawler_check.py --alert || true
 
+      # 証明書の期限・sitemap の 404・配信用トークンの生存も、毎日同じ枠で見る。
+      # どれも「何も起きない」形で現れ、気づくのは最後の push が落ちたとき
+      - name: 生存監視（証明書・404・トークン）
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          mkdir -p automation/logs
+          out=$( (python scripts/cert_check.py; python scripts/token_check.py) 2>&1 ) || true
+          echo "$out" | tail -12
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          if echo "$out" | grep -q '^要対応'; then
+            python scripts/notify_slack.py "🚨 生存監視で要対応があります
+          $(echo "$out" | grep '^要対応' | head -5)" || true
+          fi
+
       # 何が壊れているかを先に確定させる。ここで問題が無ければ何もしない。
       - name: いま壊れているものの確認
         id: diag

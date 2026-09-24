@@ -131,6 +131,18 @@ def main():
     scopes = hdr.get("x-oauth-scopes")
     if scopes is not None:
         print(f"権限（scope）: {scopes or '（なし）'}")
+    # 失効は最後の push が落ちて初めて分かる。期限を毎日見て30日前に知らせる
+    exp = hdr.get("github-authentication-token-expiration")
+    if exp:
+        try:
+            from datetime import datetime, timezone
+            dt = datetime.strptime(exp[:19], "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+            days = (dt - datetime.now(timezone.utc)).days
+            print(f"期限: {exp[:10]}（残り{days}日）")
+            if days < 30:
+                print(f"要対応: 配信用トークン（SITE_PUSH_TOKEN）の期限が残り{days}日。再発行して .env と GitHub Secrets の両方を更新")
+        except ValueError:
+            print(f"期限: {exp}")
 
     ng, unknown = [], []
     for cfg in sites_mod.load_all().values():

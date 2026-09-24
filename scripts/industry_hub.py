@@ -126,13 +126,22 @@ def faq_body(ind, metas, url_of, limit=60):
 def hub_body(ind, metas, categories, post_tile):
     """業種ハブの中身。手法ごとに区切る（読者は自分に必要な手法から入る）"""
     import html as _h
-    nq = len(faq_pairs(metas))
+    pairs = faq_pairs(metas)
+    nq = len(pairs)
     faq_link = (f'<p class="hub-note"><a href="{BASE}{ind["slug"]}/faq/">'
                 f'{_h.escape(ind["name"])}のよくある質問をまとめて見る（{nq}問）</a></p>' if nq >= 5 else "")
+    # ハブの冒頭は毎ビルドで自動更新する: 直近30日の新着本数と、主な質問3つ。
+    # 面の鮮度と網羅性が業種ページの評価を決める（人が書き足す運用にしない）
+    import datetime as _dt
+    since = (_dt.date.today() - _dt.timedelta(days=30)).isoformat()
+    new = sum(1 for m in metas if str(m.get("date", "")) >= since)
+    top_q = "".join(f"<li>{_h.escape(q)}</li>" for q, _, _ in pairs[:3])
+    fresh = (f'<p class="hub-note">直近30日の新着 {new}本 ／ 全{len(metas)}本'
+             + (f'。この業種でよくある質問: <ul class="hub-q">{top_q}</ul>' if top_q else "") + "</p>")
     blocks = [f'<div class="latest-block" data-cat="new">'
               f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の記事</h2>'
               f'<span class="cnt">全{len(metas)}本</span></div>'
-              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{faq_link}</div>']
+              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}</div>']
     for cat, (name, cls) in categories.items():
         part = [m for m in metas if m["category"] == cat]
         if not part:

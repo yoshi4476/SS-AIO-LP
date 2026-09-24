@@ -123,6 +123,13 @@ def compose(a):
     out["facebook"] = fb[:LIMITS["facebook"]]
     out["threads"] = fb[:LIMITS["threads"]]
     out["linkedin"] = fb[:LIMITS["linkedin"]]
+    # note / はてな向けの転載用（長文）。リンクの無いWeb言及（相関0.66）を増やす入口。
+    # 本文の1文結論だけを並べ、出典として元記事と社名を必ず末尾に置く
+    note = [a["title"], "", body, ""]
+    note += [f"■ {p}" for p in a["leads"][1:6]]
+    note += ["", "続きと根拠（数字の出典・表・FAQ）は元記事にまとめています。",
+             f"元記事: {url}", f"執筆: {cfg.get('name', '')}（セブンセンシズ株式会社）"]
+    out["note"] = "\n".join(note)
     return {"id": a["slug"], "site": sid, "title": a["title"], "url": url,
             "made": date.today().isoformat(), "posts": out}
 

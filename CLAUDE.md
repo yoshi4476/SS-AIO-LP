@@ -1331,6 +1331,14 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `industry_hub.faq_body`（build が呼ぶ） | 業種の記事の FAQ を `/industry/<業種>/faq/` に集め、FAQPage を出す | 5問未満は作らない。答えは記事の FAQ そのまま（新しい文を機械が作らない） |
 | 月次CI 15日の回 | 当月の途中経過だけを出す（`--through`）。在庫の組み直し・改善の実行・3倍計画の照合は月初だけ | 途中の数字で判断しない |
 | `contact.hub.gs`（管制塔） | 自動返信に、公開済みの動画3本と案内ページの案内を添える | 個別の見積り・約束は人が書く。配布は `gas_deploy.py hub` |
+| `auto_rewrite.py --kind question`（週次2本） | H2に質問形が無い記事の見出し2〜3本を質問形にする（質問形H2ありの記事は4.2位上） | 本数・順番が変わったら通さない |
+| `cwv_check.py`（週次） | PageSpeed API で3サイトのトップ＋記事1本の LCP/INP/CLS を実測 | 429/403 は鍵・API有効化の問題として知らせ、`CWV_OK=unknown` にする（速度が悪いとは言わない） |
+| `index_status.py`（週次） | URL検査APIで未登録ページを理由つきで出す | 1日2,000URLの枠内 |
+| `brand_spelling.py --fix`（週次） | 社名・サービス名の表記ゆれを原稿で揃え、HTMLの残りを数える | 正規表記そのものに一致する検出式を書かない（4,989件を誤検出した） |
+| `cert_check.py` + `token_check.py`（日次・selfheal） | 証明書の残日数・sitemap の404率・配信用トークンの期限 | 要対応は同じ枠でメール |
+| `actions_budget` → 間引き（週次） | 残枠が75%を超えたら動画・書き換えの本数を半分にする | 枠切れは「何も起きない」形で現れる |
+| `industry_hub.hub_body` | ハブ冒頭に「直近30日の新着◯本・主な質問3つ」を毎ビルドで自動反映 | 人が書き足さない |
+| `social_post`（note 用） | 転載用の長文（1文結論の列＋元記事URL＋社名）をキューに積む | 投稿は人（APIも課金も使わない） |
 
 ---
 
