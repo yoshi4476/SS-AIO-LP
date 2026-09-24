@@ -35,7 +35,7 @@ function book_() {
   return BOOK_ID ? SpreadsheetApp.openById(BOOK_ID) : SpreadsheetApp.getActiveSpreadsheet();
 }
 
-const SHARED_SECRET = 'vPwJAYWcenPoAUBx7TQFEufmjF5qpplc'; // 記事工場・フォームと共有する合言葉
+const SHARED_SECRET = 'XXXXXXXXXXXXXXXX'; // 記事工場・フォームと共有する合言葉
 const NOTIFY_TO = 'info.ai@7senses.co.jp';                // 問い合わせ通知の宛先
 const AUTO_REPLY = false;                                  // true にすると送信者へ自動返信
 // ────────────────────────────────────
