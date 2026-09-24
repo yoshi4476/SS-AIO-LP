@@ -384,7 +384,9 @@ jobs:
             echo "::warning::本番が手元より古い状態です。次のデプロイまで反映されません"
             echo "要対応: 本番が手元より古い（次のデプロイまで反映されません）" >> automation/logs/findings.txt
           fi
-          out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}") || true
+          # 待つのは最長4.5分まで（以前は最長18分。1回の実行の半分がこの待ちだった）。
+          # 見えなければ「確認中」で残し、翌日の publish_gap と日次の deploy_check が判定する
+          out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}" --build-timeout 180 --live-timeout 90) || true
           echo "$out"
           # **「見えない」と「公開されていない」は違う。**
           # 配信が10分で終わらない日があり、それを「要対応」で出すと狼少年になる。
