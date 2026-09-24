@@ -69,9 +69,11 @@ def measure(label):
     tot = {k: 0 for k, _ in METRICS}
     for cfg in S.load_all().values():
         s = G.fetch_site(cfg, [label])
-        if s.get("ga_error") and s.get("sc_error"):
-            return None
         m = s["months"][0]
+        # 片方だけ欠けたサイトを0で足すと、合計が小さく出て「遅れ」や小さい起点になる。
+        # sessions/clicks は月次の取得が通ったときだけ入る。ai は GA4 が落ちると0のまま残る
+        if "sessions" not in m or "clicks" not in m or s.get("ga_error"):
+            return None
         tot["sessions"] += int(m.get("sessions") or 0)
         tot["clicks"] += int(m.get("clicks") or 0)
         tot["cv"] += int(m.get("cv") or 0)

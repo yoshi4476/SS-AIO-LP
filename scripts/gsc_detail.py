@@ -28,7 +28,9 @@ def client():
     return build("searchconsole", "v1", credentials=gcreds.load(SA, SCOPE))
 
 
-def q(sc, domain, start, end, dims=None, limit=1000):
+def q(sc, domain, start, end, dims=None, limit=1000, raise_errors=False):
+    """raise_errors=True は、取得失敗を「0件」と区別したい呼び出し元のため
+    （[] のままだと、判定・比較・履歴で本物の0として扱われる）"""
     body = {"startDate": start, "endDate": end, "rowLimit": limit}
     if dims:
         body["dimensions"] = dims
@@ -36,6 +38,8 @@ def q(sc, domain, start, end, dims=None, limit=1000):
         res = sc.searchanalytics().query(siteUrl=f"https://{domain}/", body=body).execute()
     except Exception as e:
         print(f"    取得失敗: {str(e)[:90]}")
+        if raise_errors:
+            raise
         return []
     return res.get("rows", [])
 

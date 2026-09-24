@@ -80,7 +80,7 @@ faq:
 小規模事業者の経理体制は、経営者兼務・パート活用・経理BPO併用の3パターンに大別でき、取引量と成長スピードで選び方が変わります。
 
 
-関連する内容として[経理の外注と丸投げの違い](/keiri-bpo/keiri-marunage-dekiru-hani/)も公開しています。
+関連する内容として[経理の外注と丸投げの違い](/blog/keiri-marunage-dekiru-hani/)も公開しています。
 
 関連する内容として[ATM入出金の記帳のやり方](/blog/atm-kicho-yarikata/)も公開しています。
 

@@ -20,7 +20,13 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE_URL = "https://ai.7senses.co.jp"  # ドメイン取得後に差し替え（build.pyと合わせる）
+sys.path.insert(0, str(ROOT / "scripts"))
+import sites  # noqa: E402
+
+# articles/ は全サイト共通。このニュースレターは自前サイト（AI集客ラボ）の記事だけを載せる。
+# 他サイトの記事をこのドメインで組むと404リンクになる
+SITE = sites.load(sites.primary())
+SITE_URL = f"https://{SITE['domain']}"
 SITE_NAME = "AI集客ラボ"
 DAYS = 8  # 直近何日分の記事を載せるか
 
@@ -47,6 +53,8 @@ def recent_articles():
         meta = yaml.safe_load(m.group(1))
         if (meta.get("score") or 0) < 90:
             continue
+        if meta.get("category") not in sites.valid_categories(SITE):
+            continue
         pub = date.fromisoformat(str(meta["date"]))
         if pub >= date.today() - timedelta(days=DAYS):
             items.append(meta)
@@ -56,7 +64,7 @@ def recent_articles():
 def digest_html(items):
     rows = "".join(
         f'<tr><td style="padding:14px 0;border-bottom:1px solid #e5e7eb;">'
-        f'<a href="{SITE_URL}/{m["category"]}/{m["slug"]}/" '
+        f'<a href="{sites.article_url(SITE, m)}" '
         f'style="font-size:16px;font-weight:bold;color:#0b2447;text-decoration:none;">{m["title"]}</a>'
         f'<div style="font-size:13px;color:#556;margin-top:4px;">{m["description"]}</div></td></tr>'
         for m in items)

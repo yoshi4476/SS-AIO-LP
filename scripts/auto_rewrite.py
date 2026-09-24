@@ -9,7 +9,7 @@ auto_improve は、タイトルの書き換えと検索意図の見直しを人�
 流れ:
   1. auto_improve が挙げた対象を1本取る
   2. claude -p に、その1本だけを直させる（何を守るかを渡す）
-  3. 検算する。1つでも崩れたら git checkout で元に戻す
+  3. 検算する。1つでも崩れたら直す前の中身へ戻す
   4. 台帳に残す
 
 検算（1つでも外れたら書き込まない）:
@@ -535,6 +535,8 @@ def run_one(item, write):
     if not write:
         return True, "（確認のみ）"
 
+    # 戻すときは HEAD ではなくこの時点の中身へ。同じ週次で先に当てた未コミットの直しを消さない
+    raw = p.read_bytes()
     before, before_warns, snap = meta(slug), warns(slug), snapshot()
     allowed = ""
     what = WHAT[kind]
@@ -579,7 +581,7 @@ def run_one(item, write):
     # 何も書き換わらないまま「変更なし」で終わる。実際 16本連続で空振りし、
     # 手で1本動かして初めて「権限の許可が必要です」と出ているのが分かった。
     # 道具は Read,Edit に絞ったままなので、できるのは1ファイルの書き換えだけ。
-    # 悪い書き換えは check() が見つけて git checkout で戻す
+    # 悪い書き換えは check() が見つけて直前の中身へ戻す
     # プロンプトは stdin で渡す（引数だと1行目しか届かない）
     r = sh([exe, "-p", "--max-turns", "40",
             *model_args(),
@@ -614,7 +616,7 @@ def run_one(item, write):
         elif item.get("queries") and not any(w in d[:40].lower() for w in re.split(r"[\s　]+", item["queries"][0].lower()) if len(w) >= 2):
             ng = "流入語が説明文の先頭に入っていません"
         if ng:
-            sh(["git", "checkout", "--", f"articles/{slug}.md"])
+            p.write_bytes(raw)
             sh([sys.executable, "scripts/build.py"], timeout=1800)
             return False, ng
     if not ng and kind == "question":
@@ -627,14 +629,14 @@ def run_one(item, write):
         elif not any(re.search(r"[?？]", h) for h in h_after):
             ng = "質問形の見出しが1本も入りませんでした"
         if ng:
-            sh(["git", "checkout", "--", f"articles/{slug}.md"])
+            p.write_bytes(raw)
             sh([sys.executable, "scripts/build.py"], timeout=1800)
             return False, ng
     after_text = p.read_text(encoding="utf-8-sig")
     LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
                   "after_title": meta(slug)[0], "after_description": _desc_of(after_text)}
     if ng:
-        sh(["git", "checkout", "--", f"articles/{slug}.md"])
+        p.write_bytes(raw)
         sh([sys.executable, "scripts/build.py"], timeout=1800)
         return False, ng
     return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…）"
@@ -645,7 +647,7 @@ def selftest():
 
     claude を呼ばずに、こちらで「やってはいけない書き換え」を当てて、
     検算が止めるかを見る。止まらなければ、その穴から壊れた記事が通る。
-    最後は必ず git checkout で元に戻す。
+    最後は必ず元のバイト列に戻す。
     """
     import auto_improve  # 対象の取り方まで含めて試す
     items = targets()
@@ -657,11 +659,13 @@ def selftest():
     # 「6/6を止めた」と出ても何も試していないことになる。実際 ai-kantan-shukyaku は
     # タイトルに狙う語が無いため、5件が同じ理由で止まっていた（2026-09-23）
     slug = ""
+    # git status と比べると、先に走った工程の未コミットの記事で全件が落ちる
+    snap0 = snapshot()
     for it in items[:8]:
         s = it["slug"]
         if not (ROOT / "articles" / f"{s}.md").is_file():
             continue
-        if not check(s, meta(s), warns(s), None):
+        if not check(s, meta(s), warns(s), snap0):
             slug = s
             break
         print(f"  --  {s}: 直す前から検算に落ちるため、診断には使いません")
@@ -669,7 +673,8 @@ def selftest():
         print("  NG  検算を試せる記事がありません（全件が手つかずで落ちます）")
         return 1
     p = ROOT / "articles" / f"{slug}.md"
-    orig = p.read_text(encoding="utf-8-sig")
+    # BOM・改行コードまでそのまま戻す（読み直した文字列で書くと差分が残る）
+    orig = p.read_bytes()
     before, before_warns, snap = meta(slug), warns(slug), snapshot()
     title, kw, body = before
     print(f"  診断に使う記事: {slug}" + chr(10))
@@ -698,7 +703,7 @@ def selftest():
             print(f"  {'OK' if ng else 'NG'}  {name}: "
                   + (f"止めた（{ng[:44]}）" if ng else "素通りしました"))
             ok += bool(ng)
-            p.write_text(orig, encoding="utf-8", newline="")
+            p.write_bytes(orig)
         for name, broken in cases:
             if broken == body:
                 print(f"  --  {name}: この記事では試せません")
@@ -708,9 +713,9 @@ def selftest():
             print(f"  {'OK' if ng else 'NG'}  {name}: "
                   + (f"止めた（{ng[:44]}）" if ng else "素通りしました"))
             ok += bool(ng)
-            p.write_text(orig, encoding="utf-8", newline="")
+            p.write_bytes(orig)
     finally:
-        p.write_text(orig, encoding="utf-8", newline="")
+        p.write_bytes(orig)
         sh([sys.executable, "scripts/build.py"], timeout=1800)
     total = len(cases) + len(stuck_cases)
     print(f"\n  {ok}/{total} を止めました（記事は元に戻しました）")

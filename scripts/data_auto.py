@@ -53,8 +53,10 @@ def ctr_by_rank(days=DAYS):
     import sites as S
     sc = G.client()
     start, end = _spans(days)
-    bands = [(1, 3, "1〜3位"), (4, 10, "4〜10位"), (11, 20, "11〜20位"),
-             (21, 30, "21〜30位"), (31, 100, "31位以下")]
+    # GSCの順位は平均なので小数（3.5・10.4）。整数の閉区間だと帯の間と100位超が黙って落ち、
+    # 公開する母数が欠ける。下限を含み上限を含まない帯にする
+    bands = [(1, 4, "1〜3位"), (4, 11, "4〜10位"), (11, 21, "11〜20位"),
+             (21, 31, "21〜30位"), (31, float("inf"), "31位以下")]
     agg = {b[2]: [0, 0] for b in bands}              # [表示, クリック]
     for cfg in S.load_all().values():
         try:
@@ -64,7 +66,7 @@ def ctr_by_rank(days=DAYS):
             continue
         for r in rows:
             for lo, hi, lab in bands:
-                if lo <= r["position"] <= hi:
+                if lo <= r["position"] < hi:
                     agg[lab][0] += r["impressions"]
                     agg[lab][1] += r["clicks"]
                     break
@@ -274,12 +276,13 @@ def links_by_rank(days=DAYS):
         for u in set(re.findall(r"\]\((/[^)]+/)\)", body)):
             inb[u.rstrip("/").split("/")[-1]] += 1
 
-    bands = [(1, 10, "1〜10位"), (11, 20, "11〜20位"),
-             (21, 30, "21〜30位"), (31, 100, "31位以下")]
+    # 加重平均の順位は小数。上限を含まない帯にして、10〜11位などを落とさない
+    bands = [(1, 11, "1〜10位"), (11, 21, "11〜20位"),
+             (21, 31, "21〜30位"), (31, float("inf"), "31位以下")]
     rows_out, total = [], 0
     for lo, hi, lab in bands:
         vals = [inb.get(s, 0) for s, (imp, ps) in pos.items()
-                if imp >= 10 and lo <= ps / imp <= hi]
+                if imp >= 10 and lo <= ps / imp < hi]
         if len(vals) < 5:
             continue
         total += len(vals)

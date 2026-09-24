@@ -67,7 +67,9 @@ def fetch(domain, days=28, dims=("query",)):
     sc = G.client()
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
-    rows = G.q(sc, domain, start.isoformat(), end.isoformat(), dims=list(dims), limit=5000)
+    # 取得失敗を [] で返すと、全語が圏外として起点や履歴に残る。呼び出し側で飛ばす
+    rows = G.q(sc, domain, start.isoformat(), end.isoformat(), dims=list(dims), limit=5000,
+               raise_errors=True)
     return [G.row(r) for r in rows]
 
 
@@ -94,7 +96,11 @@ def keywords_of_site(site_id, cfg):
 def init(site_id, cfg, limit=DEFAULT_N):
     """主要クエリを作る。宣言した語（keyword:）と、実際に表示が出ている語の両方から取る"""
     declared = keywords_of_site(site_id, cfg)
-    rows = fetch(cfg["domain"])
+    try:
+        rows = fetch(cfg["domain"])
+    except Exception as e:
+        print(f"  {site_id}: GSCから取得できないため登録しません: {str(e)[:60]}")
+        return
     seen, picked = set(), []
     by_q = {norm(r["k"][0]): r for r in rows}
 
@@ -170,6 +176,7 @@ def track(only=""):
         print("KEYQ_OK=yes")
         return 0
     today, stuck_all, up_all, tot = date.today().isoformat(), [], 0, 0
+    failed = []
     lines = []
     # 同じ日に2回走ると履歴が二重になる。当日分を落としてから書き直す
     keep = [l for l in (HIST.read_text(encoding="utf-8").splitlines() if HIST.is_file() else [])
@@ -182,9 +189,14 @@ def track(only=""):
             cfg = allsites.get(site_id)
             if not cfg:
                 continue
-            rows = fetch(cfg["domain"])
+            try:
+                rows = fetch(cfg["domain"])
+                rows_pq = fetch(cfg["domain"], dims=("page", "query"))
+            except Exception as e:
+                failed.append(site_id)
+                lines.append(f"  {site_id}: GSCから取得できず、今回は記録しません: {str(e)[:60]}")
+                continue
             by_q = {norm(r["k"][0]): r for r in rows}
-            rows_pq = fetch(cfg["domain"], dims=("page", "query"))
             up, same, down, stuck = 0, 0, 0, []
             for item in blk["queries"]:
                 r = by_q.get(norm(item["q"]))
@@ -218,10 +230,11 @@ def track(only=""):
         print(l)
     if tot:
         print(f"  合計 {tot}語中 {up_all}語が起点より上がりました（{up_all / tot * 100:.1f}%）")
-    print(f"KEYQ_OK={'yes' if not stuck_all else 'no'}")
+    print(f"KEYQ_OK={'no' if stuck_all else ('unknown' if failed else 'yes')}")
     if stuck_all:
         print(f"  上がっていない語 {len(stuck_all)}件に、上の工程を当ててください")
-    return 0
+    # 取れなかったサイトがあるのに0で終えると、「全部見た」と読まれる（CLAUDE.md 8.7）
+    return 1 if failed else 0
 
 
 def show():

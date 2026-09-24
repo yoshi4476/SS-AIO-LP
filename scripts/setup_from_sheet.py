@@ -13,7 +13,8 @@
 
 使い方:
     python scripts/setup_from_sheet.py <記入済みExcel>            # 確認だけ
-    python scripts/setup_from_sheet.py <記入済みExcel> --write    # 実際に作る
+    python scripts/setup_from_sheet.py <記入済みExcel> --write    # 実際に作る（既存ファイルは残す）
+    python scripts/setup_from_sheet.py <記入済みExcel> --write --force  # 既存ファイルも上書きする
 """
 import json
 import re
@@ -212,7 +213,9 @@ def page(title, body, cfg, _depth=0):
         "  </div>\n</footer>\n</body>\n</html>\n")
 
 
-def build_site(cfg, out):
+def build_site(cfg, out, force=False):
+    """無いページだけ作る。out が稼働中の site/ のとき、既存のトップや運営者情報を
+    新しい社の雛形で上書きすると、そのまま次のデプロイで公開されてしまうため"""
     c = cfg["company"]
     top = (
         "  <header class=\"article-header\">\n"
@@ -301,11 +304,14 @@ def build_site(cfg, out):
 
     for rel, html in pages.items():
         f = out / rel
+        if f.exists() and not force:
+            continue
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text(html, encoding="utf-8", newline="")
 
     css = ROOT / "site" / "css" / "style.css"
-    if css.is_file():
+    dst = out / "css" / "style.css"
+    if css.is_file() and dst.resolve() != css.resolve() and (force or not dst.exists()):
         (out / "css").mkdir(exist_ok=True)
         (out / "css" / "style.css").write_text(
             css.read_text(encoding="utf-8"), encoding="utf-8", newline="")
@@ -580,19 +586,27 @@ def main():
         print("\n  確認のみ（--write を付けると作成します）")
         return
 
+    # 同じ id の既存サイトの設定・KW計画を黙って消さない。上書きは --force のときだけ
+    force = "--force" in sys.argv
     (ROOT / "sites").mkdir(exist_ok=True)
-    (ROOT / "sites" / (cfg["id"] + ".json")).write_text(
-        json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
+    conf = ROOT / "sites" / (cfg["id"] + ".json")
+    if conf.exists() and not force:
+        print("  ! sites/" + cfg["id"] + ".json は既にあるため書きません（上書きは --force）")
+    else:
+        conf.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
     plan = ROOT / cfg["kw_plan"]
-    plan.parent.mkdir(parents=True, exist_ok=True)
-    plan.write_text("# " + cfg["name"] + " KW計画\n\n対象: " + cfg["audience"]
-                    + "\n\n（kw_discover.py が自動補充します）\n", encoding="utf-8")
+    if plan.exists() and not force:
+        print("  ! " + cfg["kw_plan"] + " は既にあるため書きません（上書きは --force）")
+    else:
+        plan.parent.mkdir(parents=True, exist_ok=True)
+        plan.write_text("# " + cfg["name"] + " KW計画\n\n対象: " + cfg["audience"]
+                        + "\n\n（kw_discover.py が自動補充します）\n", encoding="utf-8")
     # 当社が作るサイトは site/ がビルドの対象。別フォルダに作ると
     # build.py が見に行かず、ページが1枚も出ないまま気づけない。
     # 先方のサイトへ記事だけ納める場合は、渡す用に site-<id>/ へ出す。
     own = cfg["type"] == "self-static"
     out = ROOT / "site" if own else ROOT / ("site-" + cfg["id"])
-    n_page = build_site(cfg, out)
+    n_page = build_site(cfg, out, force)
     # 先方のサイトへ納める場合も、手元の site/ に固定ページが要る。
     # 記事テンプレートのフッターが /about/ などを指しているため、
     # 無いとビルドのリンク検査が毎回警告を出し、本物の404に気づけなくなる。

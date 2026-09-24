@@ -53,6 +53,10 @@ jobs:
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
+          # 通知本文は工程ごとに追記し、最後に findings.py が既存の要対応を残して組み直す。
+          # 前回分が残っていると先週の要対応が今週の通知に載るので、最初に空にしておく
+          mkdir -p automation/logs
+          rm -f automation/logs/findings.txt
 
       # 期限のあるトークンを、切れる前に更新する。
       # 切れてから気づくと、その間の配信が丸ごと落ちる。
@@ -77,7 +81,8 @@ jobs:
           if [ -z "$SA_JSON" ]; then echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です"; exit 0; fi
           printf '%s' "$SA_JSON" > indexing-service-account.json
           pip install --quiet google-api-python-client google-auth
-          out=$(python scripts/gsc_check.py); echo "$out"
+          # 例外で終わっても週次全体を止めない（-e で代入ごと落ち、下の記録も後続も飛んでいた）
+          out=$(python scripts/gsc_check.py 2>&1) || true; echo "$out"
           echo "$out" | grep -q "GSC_OK=yes"             || python scripts/hub_client.py error_log gsc "GSCの検索データを取得できないサイトがあります（補充がサジェスト頼りになります）" || true
 
       # KWキューを実データ（GSC実績+Googleサジェスト）で補充する。
@@ -174,10 +179,14 @@ jobs:
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          python scripts/rank_rescue.py --refresh >> automation/logs/findings.txt 2>&1 || true
-          python scripts/key_queries.py --track >> automation/logs/findings.txt 2>&1 || true
-          python scripts/brand_search.py >> automation/logs/findings.txt 2>&1 || true
-          python scripts/mentions.py --check >> automation/logs/findings.txt 2>&1 || true
+          # 生の出力は通知本文に入れない（要対応の行だけを拾う）
+          mkdir -p automation/logs
+          { python scripts/rank_rescue.py --refresh || true
+            python scripts/key_queries.py --track || true
+            python scripts/brand_search.py || true
+            python scripts/mentions.py --check || true; } > automation/logs/rank_rescue.txt 2>&1
+          tail -40 automation/logs/rank_rescue.txt
+          grep '^要対応' automation/logs/rank_rescue.txt >> automation/logs/findings.txt || true
           for s in ai-lab corporate subsidy; do
             python scripts/link_boost.py "$s" --rescue --write || true
           done
@@ -433,13 +442,19 @@ jobs:
           python scripts/publish_changed.py --all --since "${{ inputs.since || 'HEAD~1' }}" --push || true
           # 統合で消した記事は配信先にも残っている。外して 301 で送らないと2本が出続ける
           python scripts/retract.py --pending --push || true
+          # 配信先へ出したのと同じ時点で正本にも push する。後ろの工程が落ちると
+          # 最後の push まで届かず、配信先にだけ直しが残って正本とずれていた。
+          # pull は配信の後に行う（先に行うと上の --since HEAD~1 が別のコミットを指す）
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || git rebase --abort || true
+          git push || echo "::warning::正本への push に失敗（最後のコミット工程で再度 push します）"
 
       - name: 週次最適化の実行
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
+          # 利用枠切れ・最大ターン到達で落ちても、後ろの実測・コミット・配信は続ける
           claude -p "$(cat automation/weekly_optimize_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 120
+            --dangerously-skip-permissions --max-turns 120 || echo "::warning::週次の claude 工程が失敗（後続は続行）"
 
       # 速度・インデックス・表記ゆれ・AI引用の週次実測。見つけたものは要対応として通知に載る。
       # Actions の残枠が 75% を超えていたら、後段の重い工程（動画・書き換え）の本数を半分にする

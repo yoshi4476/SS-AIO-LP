@@ -177,12 +177,24 @@ def main():
         if len(det) > MAX_LINES:
             print("       …ほか%d件" % (len(det) - MAX_LINES))
 
+    # 前の工程が追記した「要対応」（クレジット切れ・学びの棚卸し・実測など）を残す。
+    # 以前は "w" で上書きしていたため、どれも通知に1件も載らなかった。
+    # この検査自身が前回書いた行は持ち越さない（直っても残り続けるため）。
+    # 先週分の持ち越しは、ワークフロー側がジョブの冒頭でファイルを消して防ぐ
+    own = {"%s: %s" % (s, label) for label, _, _ in CHECKS for s in ("要対応", "動かせず")}
+    prev = []
+    if OUT.exists():
+        for l in io.open(OUT, encoding="utf-8").read().splitlines():
+            if l.startswith("要対応") and l not in own and l not in prev:
+                prev.append(l)
+    lines.extend(prev)
+
     # 通知に載せる本文。Slackが読める長さに収める
     for label, state, det in bad:
         lines.append("%s: %s" % (state, label))
         for d in det[:3]:
             lines.append("   " + d[:80])
-    if not bad:
+    if not bad and not prev:
         lines.append("検査%d件すべて問題なし" % len(rows))
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

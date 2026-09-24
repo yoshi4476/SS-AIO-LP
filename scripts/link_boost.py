@@ -322,7 +322,8 @@ def main():
                 head = t.split("---", 2)[1]
                 b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")
                 arts[src]["body"] = nb
-            note(tgt, src, "link_rescue" if rescue else "link")
+                # 候補を見るだけの実行で台帳に書くと、effect_ab が当てていない記事を介入群に数える
+                note(tgt, src, "link_rescue" if rescue else "link")
             added += 1
             done += 1
     print(f"\n   {'追加しました' if write else '候補'}: {done}本")

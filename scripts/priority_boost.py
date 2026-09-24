@@ -94,7 +94,9 @@ def send_links(tgt, words, want, texts):
     title = (re.search(r"^title:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()
     cat = (re.search(r"^category:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()
     site = S.find_category_owner(cat)
-    url = f"/{cat}/{tgt}/"
+    # corporate・subsidy は /blog/<slug>/ で配信する。カテゴリ形式で書くと配信先で404になる
+    pre = S.load_all().get(site, {}).get("url_prefix")
+    url = f"{pre.rstrip('/')}/{tgt}/" if pre else f"/{cat}/{tgt}/"
     cands = []
     for s, t in texts.items():
         if s == tgt or tgt in t:

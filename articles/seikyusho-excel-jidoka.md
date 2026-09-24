@@ -49,7 +49,7 @@ faq:
 
 **請求書の自動化は、エクセルの関数とマクロを組み合わせれば、作成から発行までの作業をかなり減らせます。**
 
-あわせて[外注費の請求書の書き方](/keiri-jitsumu/gaichuuhi-seikyuusho-kakikata/)もご覧ください。
+あわせて[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)もご覧ください。
 
 実際の進め方は[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)で整理しています。
 

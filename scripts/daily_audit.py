@@ -466,8 +466,11 @@ def check_unseen(todo):
             continue
         try:
             seen = {r["keys"][0].rstrip("/") for r in
-                    _G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000)}
-        except Exception:
+                    _G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000,
+                         raise_errors=True)}
+        except Exception as e:
+            # 取れなかったのを「表示ゼロ」と数えると、全記事が未登録に見える
+            print(f"  （{cfg['name'][:18]}: GSCから取得できず確かめられません: {str(e)[:40]}）")
             continue
         old = []
         for slug, dt, cat in rows:

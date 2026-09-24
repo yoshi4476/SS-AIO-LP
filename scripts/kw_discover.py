@@ -5,7 +5,7 @@
     python scripts/kw_discover.py --site corporate           # 候補を表示するだけ
     python scripts/kw_discover.py --site corporate --append  # 計画ファイルと管制塔へ追加
 
---site を省略すると ai-lab を対象にする。採用条件は sites/*.json の owns（担当領域語）と
+--site を省略すると環境変数 SITE_ID、それも無ければ ai-lab を対象にする。採用条件は sites/*.json の owns（担当領域語）と
 kw_seeds（業種×課題の起点）から自動生成するため、補充した時点で領域外のKWは混ざらない。
 
 2つの無料の実データソースを使う:
@@ -234,8 +234,11 @@ def is_dup(kw, arts, seen):
 
 
 def main():
+    import os
     import sites as _sm
-    site_id = _sm.primary()
+    # 記事の枠は SITE_ID だけを渡して呼ぶ。--site を付け忘れると別サイトの台帳へ積み、
+    # その枠のサイトは空のままになるため、SITE_ID があればそちらを先に見る
+    site_id = os.environ.get("SITE_ID") or _sm.primary()
     if "--site" in sys.argv:
         site_id = sys.argv[sys.argv.index("--site") + 1]
     S = site_config(site_id)

@@ -107,7 +107,7 @@ faq:
 
 定型業務はBPOに任せ、繁忙期だけ派遣で人手を補う併用も選べます。
 
-前提となる考え方は[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)でも扱っています。
+前提となる考え方は[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)でも扱っています。
 
 関連する内容として[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)も公開しています。
 

@@ -48,7 +48,7 @@ faq:
 
 経理BPOとは、記帳から月次試算表の作成まで、経理業務のプロセス全体を外部の専門会社に任せる委託形態のことです。
 
-前提となる考え方は[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)で整理しています。
+前提となる考え方は[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)で整理しています。
 
 近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
 

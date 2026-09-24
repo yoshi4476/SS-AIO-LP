@@ -319,7 +319,8 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
         return "既存記事と食い合う"
     if owned:
         import kw_guard
-        if kw_guard.gsc_owner(kw, owned):
+        # 計画は自動で積むため、要差別化（包含）の語も入れない
+        if kw_guard.gsc_owner(kw, owned) or kw_guard.gsc_related(kw, owned):
             return "自社ページが順位を持つ"
     if any(same(kw, p) for p in picked_norms):
         return "採用済みと重複"
@@ -365,6 +366,7 @@ def worth_lookup(cands):
 
 
 VOL_DAYS = 90    # 検索数は月次で大きくは動かない。90日は使い回す
+VOL_NONE_DAYS = 7
 
 
 def _vol_cache():
@@ -376,7 +378,10 @@ def _vol_cache():
     import time as _t
     out = {}
     for k, v in raw.items():
-        if _t.time() - float(v.get("at") or 0) <= VOL_DAYS * 86400:
+        # 応答を受け取った印の無い vol=None は、失敗・時間切れの塊を残していた古い記録
+        # （実測で500件が同じ1分に保存されていた）。短い期限で取り直しに回す
+        days = VOL_DAYS if v.get("vol") is not None or v.get("answered") else VOL_NONE_DAYS
+        if _t.time() - float(v.get("at") or 0) <= days * 86400:
             out[k] = v
     return out
 
@@ -408,14 +413,17 @@ def fill_volume(cands):
         return hit
     if not missing or not rakko.enabled():
         return hit
-    total = hit
+    total, answered = hit, set()
     for part in chunks(missing, BULK):
-        total += _fill_part(cands, part)
-    # 取れた語も「取れなかった語」も残す。取れない語を毎回登録し直さないため
+        n, got = _fill_part(cands, part)
+        total += n
+        answered |= got
+    # 応答を受け取った語は、検索数が無くても残す（取れない語を毎回登録し直さないため）。
+    # 失敗・時間切れの語は残さない。残すと90日間「検索数が少ない」で落ち続ける
     for k, c in cands.items():
-        if k not in known and c["kw"] in missing:
+        if k not in known and c["kw"] in answered:
             known[k] = {"vol": c.get("vol"), "kd": c.get("kd"), "trend": c.get("trend"),
-                        "at": time.time()}
+                        "answered": True, "at": time.time()}
     VOL_CACHE.parent.mkdir(parents=True, exist_ok=True)
     VOL_CACHE.write_text(json.dumps(known, ensure_ascii=False), encoding="utf-8")
     return total
@@ -436,7 +444,7 @@ def _fill_part(cands, missing):
         print(f"   一括調査を登録: {len(missing)}件（消費 {((r or {}).get('meta') or {}).get('consumedCredit')}）")
     if not rid:
         print(f"   （一括の検索数取得に失敗: {len(missing)}件。この分は検索数なしのまま）")
-        return 0
+        return 0, set()
     done = False
     for _ in range(120):                       # 1,000件超は数分かかる。200秒では足りなかった
         st = rakko.call(f"/v1/search-volume/{rid}/status", method="GET")
@@ -446,7 +454,7 @@ def _fill_part(cands, missing):
         time.sleep(5)
     if not done:
         print(f"   （一括の検索数取得が時間内に終わりません: {len(missing)}件。次回に持ち越し）")
-        return 0
+        return 0, set()
     res = rakko.call(f"/v1/search-volume/{rid}/results", {"limit": len(missing) + 50})
     items = (res or {}).get("data", {}).get("items", []) or []
     if not items:
@@ -472,7 +480,8 @@ def _fill_part(cands, missing):
     if items and n < len(items) * 0.5:
         print(f"   （一括の応答 {len(items)}件のうち照合できたのは {n}件。"
               f"返った語の例: {unmatched[:3]} / こちらの鍵の例: {missing[:3]}）")
-    return n
+    # 応答が空なら受け取れていない。空を「検索数なし」として残さない
+    return n, (set(missing) if items else set())
 
 
 def choose(cands, S, site_id):

@@ -196,14 +196,47 @@ def run(cmd, timeout=GATE_TIMEOUT):
     return rc, out
 
 
-def gate():
-    """直したあとで基準を割っていないか。割っていれば捨てる"""
+# 道具が書き換える場所。回の頭の中身へ戻す範囲（auto_merge は data/ の台帳にも書く）
+SCOPE = ("articles", "site", "data")
+
+
+def _tmp_index():
+    """HEAD も本物のインデックスも動かさずに作業ツリーを記録するための、使い捨てのインデックス。
+    回ごとにコミットすると、CI の publish_changed --since HEAD~1 が最後の回しか配信しない"""
+    git = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    idx = ROOT / git("rev-parse", "--git-path", "report_actions.index")
+    real = ROOT / git("rev-parse", "--git-path", "index")
+    if real.is_file():
+        idx.write_bytes(real.read_bytes())      # stat を引き継いで全ファイルの読み直しを避ける
+    env = {**os.environ, "GIT_INDEX_FILE": str(idx)}
+    subprocess.run(["git", "add", "-A", "--", *SCOPE], cwd=ROOT, env=env, capture_output=True)
+    return env
+
+
+def snapshot():
+    """回の頭の中身（未追跡の新規ファイルも含む）を tree として取る"""
+    env = _tmp_index()
+    return subprocess.run(["git", "write-tree"], cwd=ROOT, env=env,
+                          capture_output=True, text=True).stdout.strip()
+
+
+def restore(tree):
+    """その回の変更だけを捨てる。HEAD へ戻すと、合格した前の回と、それより前の工程の
+    未コミットの変更まで消える。回の中で増えたファイルは消し、消えたファイルは戻す"""
+    env = _tmp_index()
+    r = subprocess.run(["git", "restore", "--source", tree, "--worktree", "--", *SCOPE],
+                       cwd=ROOT, env=env, capture_output=True, text=True)
+    return r.returncode == 0
+
+
+def gate(tree):
+    """直したあとで基準を割っていないか。割っていればその回の変更を捨てる"""
     for cmd in (["build.py"], ["../tests/test_gates.py"]):
         rc, out = run(cmd)
         if rc != 0:
-            subprocess.run(["git", "checkout", "--", "articles/", "site/"], cwd=ROOT)
-            _log(step="gate", ok=False, cmd=cmd[0], tail=out.strip().splitlines()[-5:])
-            return False, cmd[0]
+            restored = bool(tree) and restore(tree)
+            _log(step="gate", ok=False, cmd=cmd[0], restored=restored, tail=out.strip().splitlines()[-5:])
+            return False, cmd[0] + ("" if restored else "（戻せませんでした）")
     _log(step="gate", ok=True)
     return True, ""
 
@@ -245,7 +278,8 @@ def fingerprint(items):
 def body(human, unresolved, gate_fail, rounds_done):
     lines = ["月次レポートの改善項目を機械で実行しました（見直し%d回）。" % rounds_done, ""]
     if gate_fail:
-        lines += ["🚨 検算（%s）が通らず、その回の変更を捨てました。実行ログを確認してください。" % gate_fail, ""]
+        lines += ["🚨 検算（%s）が通らず、最後の見直しの回の変更だけを捨てました（それより前に通った回は残しています）。"
+                  "実行ログを確認してください。" % gate_fail, ""]
     if human:
         lines.append("■ 人の手が要るもの（%d件）" % len(human))
         for it in human:
@@ -327,14 +361,15 @@ def main():
             break
         prev = fp
         print(f"── 見直し {r}/{a.rounds}（機械 {len(fp)}件）")
+        tree = snapshot()
         ran, spent = apply_round(items, a.budget_min, spent)
         for key, rc in ran:
             print(f"   {'○' if rc == 0 else '×'} {key}")
-        ok, failed = gate()
+        ok, failed = gate(tree)
         done = r
         if not ok:
             gate_fail = failed
-            print(f"   ★ 検算 {failed} が通らず、この回の変更を捨てました")
+            print(f"   ★ 検算 {failed} が通らず、見直し{r}回目の変更だけを捨てました（それより前の回は残しています）")
             break
         if spent >= a.budget_min:
             print(f"   予算 {a.budget_min}分を使い切りました")

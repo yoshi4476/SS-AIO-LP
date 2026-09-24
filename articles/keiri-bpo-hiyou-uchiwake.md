@@ -53,7 +53,7 @@ faq:
 
 選ぶときの基準は[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)でも扱っています。
 
-あわせて[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)もご覧ください。
+あわせて[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)もご覧ください。
 
 つまずきやすい点を先に押さえるなら、[請求書の経理BPOでやりがちな失敗5つ](/blog/seikyusho-keiri-bpo-shippai/)が参考になります。
 

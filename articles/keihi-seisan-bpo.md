@@ -49,7 +49,7 @@ faq:
 
 経費精算BPOとは、立替経費のチェック・記帳という実務だけを外部に任せる委託形態です。
 
-あわせて[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)もご覧ください。
+あわせて[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)もご覧ください。
 
 あわせて[経理BPOと人材派遣の違い5つ｜費用・契約形態を比較](/blog/keiri-bpo-haken-chigai/)もご覧ください。
 

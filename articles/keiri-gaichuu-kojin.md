@@ -49,7 +49,7 @@ faq:
 
 経理を個人に外注するとは、経理業務の一部を法人ではなくフリーランス個人へ直接委託することです。
 
-近い論点を[外注費の請求書の書き方](/keiri-jitsumu/gaichuuhi-seikyuusho-kakikata/)で扱っています。
+近い論点を[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)で扱っています。
 
 実際の進め方は[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)で整理しています。
 

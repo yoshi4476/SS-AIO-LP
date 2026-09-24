@@ -959,7 +959,9 @@ def test_rewrite_is_verified_and_reverted():
     check("直しの工程がある", (ROOT / "scripts" / "auto_rewrite.py").is_file(), True)
 
     # 外れたら必ず元に戻す
-    check("検算に外れたら元に戻す", 'git", "checkout", "--"' in src, True)
+    # HEAD へ戻すと同じ週に先に当てた未コミットの修正まで消えるため、直前の本文を書き戻す形も認める
+    check("検算に外れたら元に戻す",
+          'git", "checkout", "--"' in src or "write_bytes(raw)" in src, True)
     check("戻したあとビルドし直す",
           src.count("build.py") >= 2, True)
 
@@ -2319,9 +2321,11 @@ def test_totals_never_come_from_a_dimensioned_query():
     # measure 経由のほうが強い（一致しなければ値そのものが返らない）
     ms = (ROOT / "scripts" / "measure.py")
     for name, src in (("growth_guard.py", gg), ("data_sanity.py", ds)):
-        direct = "None, 1)" in src
-        delegated = "measure" in src and ms.is_file() and "None, 1)" in ms.read_text(
-            encoding="utf-8")
+        # 取得失敗を 0 と取り違えないよう raise_errors を付けて呼ぶ形も認める
+        nodim = re.compile(r"None, 1[,)]")
+        direct = bool(nodim.search(src))
+        delegated = "measure" in src and ms.is_file() and bool(nodim.search(ms.read_text(
+            encoding="utf-8")))
         if not (direct or delegated):
             print(f"  NG  {name} が次元なしの合計を取っていません")
             FAIL.append("totals_from_dimensioned_query")

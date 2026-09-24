@@ -99,7 +99,11 @@ def total_clicks(sc, domain, start, end):
         return measure.gsc_totals(domain, start, end)[1]
     except measure.Disagree as e:
         print(f"  注意 {domain}: 計測が一致しません → {e}")
-        return 0
+        return None
+    except Exception as e:
+        # 0 を返すと「GA4と食い違う」「指名検索の検査を飛ばす」に化ける
+        print(f"  注意 {domain}: GSCから取得できず確かめられません → {str(e)[:60]}")
+        return None
 
 
 def check_ga_vs_gsc(sid, cfg, prop, days, out):
@@ -116,7 +120,7 @@ def check_ga_vs_gsc(sid, cfg, prop, days, out):
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
     clicks = total_clicks(sc, cfg["domain"], start, end)
-    if organic == 0 and clicks == 0:
+    if clicks is None or (organic == 0 and clicks == 0):
         return organic, clicks
     big, small = max(organic, clicks), min(organic, clicks)
     if small == 0 or big / max(1, small) >= 3:
@@ -138,10 +142,15 @@ def check_brand_share(cfg, days, out):
     sc = G.client()
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
-    rows = G.q(sc, cfg["domain"], str(start), str(end), ["query"], 25000)
+    try:
+        rows = G.q(sc, cfg["domain"], str(start), str(end), ["query"], 25000, raise_errors=True)
+    except Exception:
+        return None, None
     # 分母は必ず次元なしの合計。query次元の合計を分母にすると指名の割合が跳ね上がる
     # （実測: コーポレートは 15/17=88% と出たが、本当は 15/43=35% 以下だった）
     tot = total_clicks(sc, cfg["domain"], start, end)
+    if tot is None:
+        return None, None
     brand = sum(r["clicks"] for r in rows if B.BRAND.search(r["keys"][0]))
     if tot and brand / tot >= 0.5:
         out.append(("注意", f"クリック{tot}回のうち{brand}回以上が指名検索です"
@@ -170,8 +179,9 @@ def main():
             tot, bad = check_invalid(prop, a.days, out)
             org, clicks = check_ga_vs_gsc(sid, cfg, prop, a.days, out)
             tc, bc = check_brand_share(cfg, a.days, out)
-            print(f"     セッション{tot}（うち国不明{bad}）/ 自然検索{org} / "
-                  f"GSCクリック{clicks}（うち指名{bc}）")
+            gsc = (f"GSCクリック{clicks}（うち指名{bc}）" if clicks is not None and bc is not None
+                   else "GSCは取得できず確かめられません")
+            print(f"     セッション{tot}（うち国不明{bad}）/ 自然検索{org} / {gsc}")
         except Exception as e:
             print(f"     確認できません: {str(e)[:60]}")
             continue

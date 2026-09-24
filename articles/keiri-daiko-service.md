@@ -51,11 +51,11 @@ faq:
 
 あわせて[記帳代行の自動化とは？判断基準3つ【2026年】](/blog/kichodaiko-jidoka/)もご覧ください。
 
-あわせて[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/keiri-bpo/keiri-gaichuu-kichodaiko-center/)もご覧ください。
+あわせて[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)もご覧ください。
 
-関連する内容として[経理自動化はPythonで可能か？](/keiri-jitsumu/keiri-jidoka-python/)も公開しています。
+関連する内容として[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)も公開しています。
 
-近い論点を[経理の業務フローテンプレート4選](/keiri-jitsumu/keiri-gyomu-flow-template/)で扱っています。
+近い論点を[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)で扱っています。
 
 <div class="definition-box"><span class="term">経理代行サービスとは</span>、仕訳入力に加えて請求書発行・振込データ作成・入出金管理などの日常的な経理実務を代行するサービスのことです。==帳簿入力だけの「記帳代行」より対応範囲が広く、業務フローの見直しまで担う「経理BPO」より対象は限定的です。==</div>
 

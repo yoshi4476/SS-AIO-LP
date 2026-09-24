@@ -67,7 +67,7 @@ faq:
 
 記帳代行は入力作業の切り出し、経理BPOは経理機能全体の委託という点が大きな違いです。
 
-選ぶときの基準は、[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/keiri-bpo/keiri-gaichuu-kichodaiko-center/)で解説しています。
+選ぶときの基準は、[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)で解説しています。
 
 範囲の境界線をさらに詳しく知りたい場合は、[経理の外注と丸投げの違い｜任せられる範囲と残す業務4つ](https://corp.7senses.co.jp/blog/keiri-marunage-dekiru-hani/)もあわせてご確認ください。
 

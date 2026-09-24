@@ -70,11 +70,17 @@ def ga4(prop, day):
     p = f"properties/{prop}"
     rng = [DateRange(start_date=day, end_date=day)]
     rep = c.run_report(RunReportRequest(property=p, date_ranges=rng, metrics=[
-        Metric(name="sessions"), Metric(name="screenPageViews"), Metric(name="conversions")]))
+        Metric(name="sessions"), Metric(name="screenPageViews")]))
     row = rep.rows[0].metric_values if rep.rows else None
+    # CVは conversions 指標でなく lead_capture を直接数える（GA4側の設定が無いと0になるため）。
+    # form_submit は同時に飛ぶので足さない
+    ev = c.run_report(RunReportRequest(property=p, date_ranges=rng,
+                                       dimensions=[Dimension(name="eventName")],
+                                       metrics=[Metric(name="eventCount")], limit=300))
+    evs = {r.dimension_values[0].value: int(r.metric_values[0].value) for r in ev.rows}
     out = {"sessions": int(row[0].value) if row else 0,
            "pv": int(row[1].value) if row else 0,
-           "cv": int(float(row[2].value)) if row else 0, "ai": 0, "breakdown": {}}
+           "cv": evs.get("lead_capture", 0), "ai": 0, "breakdown": {}}
     rep2 = c.run_report(RunReportRequest(property=p, date_ranges=rng,
                                          dimensions=[Dimension(name="sessionSource")],
                                          metrics=[Metric(name="sessions")]))

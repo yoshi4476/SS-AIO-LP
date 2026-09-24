@@ -150,6 +150,7 @@ jobs:
           out=$(python scripts/growth_plan.py --check 2>&1) || true
           echo "$out" | tail -6
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          echo "$out" | grep -q '^要対応' && echo "::warning::3倍計画から遅れています（通知に載せます）" || true
 
       - name: レポートの改善点を実行し、残りを人へ知らせる
         if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
@@ -184,12 +185,16 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
           git add reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw reports/growth_plan.json docs/growth-plan.md || true
-          if git diff --cached --quiet; then
-            echo "保存すべき目標値の変更なし"
-          else
-            git commit -m "chore(report): 来月のKPI目標を保存"
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git diff --cached --quiet || git commit -m "chore(report): 来月のKPI目標を保存"
+          # 月初は改善の実行（上の工程）が add -A で目標値ごと先にコミットしているため、
+          # ここで staged が空でも未 push のコミットが残っている。以前は「変更なし」で終わり、
+          # 記事の直し・目標値・在庫計画がランナーごと消えていた。push の要否は未 push のコミットで決める
+          ahead=$(git log "origin/${GITHUB_REF_NAME}..HEAD" --oneline 2>/dev/null || echo "不明")
+          if [ -n "$ahead" ]; then
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
             git push
+          else
+            echo "保存すべき変更なし"
           fi
 
       - name: 運用通知（Slack→メール自動フォールバック）
@@ -201,5 +206,9 @@ jobs:
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="📊"; else icon="🚨"; fi
-          # レポート本体は monthly_report --email が送る。ここは失敗したときだけ
-          python scripts/notify_slack.py --routine "$icon 月次レポート: ${{ job.status }}（info.ai@7senses.co.jp へ送付）" || true
+          # レポート本体は monthly_report --email が送る。ここは失敗したときと、
+          # 工程が findings.txt に積んだ要対応（3倍計画の遅れ・ラッコの予算超過）があるときだけ届く
+          found=""
+          if [ -f automation/logs/findings.txt ]; then found=$(cat automation/logs/findings.txt); fi
+          python scripts/notify_slack.py --routine "$icon 月次レポート: ${{ job.status }}（info.ai@7senses.co.jp へ送付）
+          $found" || true

@@ -124,7 +124,7 @@ def main():
         by_site.setdefault(r["site"], []).append(r)
     for sid, items in by_site.items():
         cfg = S.load(sid)
-        if cfg.get("delivery") in (None, "self-static"):
+        if cfg.get("type") in (None, "self-static"):
             for r in items:
                 r["done_at"] = date.today().isoformat(); r["note"] = "自サイト（build.py が処理）"
             continue

@@ -51,7 +51,7 @@ faq:
 
 あわせて[経理派遣の時給相場は1,600〜2,500円](/blog/keiri-haken-jikyu-souba/)もご覧ください。
 
-あわせて[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)もご覧ください。
+あわせて[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)もご覧ください。
 
 費用の目安については、[経理BPOと人材派遣の違い5つ｜費用・契約形態を比較](/blog/keiri-bpo-haken-chigai/)にまとめています。
 

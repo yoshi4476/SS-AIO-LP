@@ -129,7 +129,7 @@ faq:
 判断基準は、応募状況・採用コストの累計・業務が止まるリスクの3つです。
 
 
-あわせて[経理の外注と丸投げの違い](/keiri-bpo/keiri-marunage-dekiru-hani/)もご覧ください。
+あわせて[経理の外注と丸投げの違い](/blog/keiri-marunage-dekiru-hani/)もご覧ください。
 
 <figure><img src="/images/keiri-kyujin-gaichuu/step.png" alt="求人が難航したときの3ステップ: 応募状況を3か月記録する、採用コストを数値化する、外注の見積もりを取る" loading="lazy"><figcaption>求人が難航したときの3ステップ</figcaption></figure>
 

@@ -62,6 +62,12 @@ def write_env(key, value):
     ENV.write_text(text, encoding="utf-8", newline="\n")
 
 
+def put(e, key, value):
+    """.env と手元の値の両方を差し替える。CIには .env が無いため、Secrets へは e の値を書く"""
+    write_env(key, value)
+    e[key] = value
+
+
 def is_set(v):
     return bool(v) and not v.upper().startswith("YOUR_")
 
@@ -101,9 +107,9 @@ def refresh_linkedin(e, state):
     req = urllib.request.Request("https://www.linkedin.com/oauth/v2/accessToken", data=data)
     with urllib.request.urlopen(req, timeout=30) as r:
         d = json.loads(r.read().decode("utf-8"))
-    write_env("LINKEDIN_TOKEN", d["access_token"])
+    put(e, "LINKEDIN_TOKEN", d["access_token"])
     if d.get("refresh_token"):
-        write_env("LINKEDIN_REFRESH_TOKEN", d["refresh_token"])
+        put(e, "LINKEDIN_REFRESH_TOKEN", d["refresh_token"])
     stamp(state, "LINKEDIN_TOKEN", d.get("expires_in", 60 * 24 * 3600))
     return f"更新しました（{d.get('expires_in', 0) // 86400}日有効）"
 
@@ -118,7 +124,7 @@ def refresh_threads(e, state):
            f"?grant_type=th_refresh_token&access_token={urllib.parse.quote(t)}")
     with urllib.request.urlopen(url, timeout=30) as r:
         d = json.loads(r.read().decode("utf-8"))
-    write_env("THREADS_TOKEN", d["access_token"])
+    put(e, "THREADS_TOKEN", d["access_token"])
     stamp(state, "THREADS_TOKEN", d.get("expires_in", 60 * 24 * 3600))
     return f"更新しました（{d.get('expires_in', 0) // 86400}日有効）"
 
@@ -138,7 +144,7 @@ def refresh_meta_user(e, state):
            f"&client_secret={cs}&fb_exchange_token={urllib.parse.quote(t)}")
     with urllib.request.urlopen(url, timeout=30) as r:
         d = json.loads(r.read().decode("utf-8"))
-    write_env("FB_USER_TOKEN", d["access_token"])
+    put(e, "FB_USER_TOKEN", d["access_token"])
     stamp(state, "FB_USER_TOKEN", d.get("expires_in", 60 * 24 * 3600))
     return f"更新しました（{d.get('expires_in', 0) // 86400}日有効）"
 
@@ -201,11 +207,12 @@ def main():
         if left is not None and left > MARGIN_DAYS:
             print(f"  {label:16s} {cur} — まだ更新しません")
             continue
+        before = dict(e)
         try:
             msg = fn(e, state)
             print(f"  {label:16s} {msg}")
-            if "更新" in msg:
-                changed.append(key)
+            # LinkedIn はリフレッシュトークンも入れ替わることがあるので、変わった値を全部拾う
+            changed += [k for k in e if e[k] != before.get(k) and k not in changed]
         except urllib.error.HTTPError as ex:
             print(f"  {label:16s} 失敗（{ex.code}）— 手動での再取得が要ります")
         except Exception as ex:
@@ -216,10 +223,9 @@ def main():
         gh = e.get("GH_SECRET_TOKEN") or e.get("SITE_PUSH_TOKEN", "")
         repo = e.get("HUB_REPO", "yoshi4476/SS-AIO-LP")
         if is_set(gh):
-            e2 = read_env()
             for key in changed:
                 try:
-                    update_secret(key, e2.get(key, ""), repo, gh)
+                    update_secret(key, e[key], repo, gh)
                     print(f"  GitHub Secrets を更新: {key}")
                 except ImportError:
                     print("  GitHub Secrets の更新には PyNaCl が要ります"

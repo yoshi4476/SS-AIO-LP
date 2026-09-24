@@ -97,12 +97,13 @@ def gsc_totals(domain, start, end):
     import gsc_detail as G
     sc = G.client()
 
+    # 取得失敗で両方が [] になると 0==0 で「一致」してしまうため、失敗は例外で伝える
     def none_dim():
-        r = G.q(sc, domain, str(start), str(end), None, 1)
+        r = G.q(sc, domain, str(start), str(end), None, 1, raise_errors=True)
         return (r[0]["impressions"], r[0]["clicks"]) if r else (0, 0)
 
     def by_date():
-        rows = G.q(sc, domain, str(start), str(end), ["date"], 5000)
+        rows = G.q(sc, domain, str(start), str(end), ["date"], 5000, raise_errors=True)
         return (sum(x["impressions"] for x in rows), sum(x["clicks"] for x in rows))
 
     imp = verified(f"{domain} の表示合計", lambda: none_dim()[0], lambda: by_date()[0])

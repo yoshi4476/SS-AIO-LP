@@ -894,6 +894,26 @@ def link_check():
     return warns
 
 
+def prefix_link_check():
+    """他サイト（/blog/<slug>/ で配信する社）の原稿に、カテゴリ形式の内部リンクが無いか。
+
+    上の link_check は当サイトの出力しか見ないため、配信先で404になるリンクが素通りしていた
+    （実際に81本が /hojokin/ や /keiri-bpo/ の形で入っていた）
+    """
+    import sites as sites_mod
+    warns = []
+    for p in sorted(ARTICLES.glob("*.md")):
+        src = article_site(p)
+        pre = (sites_mod.load_all().get(src) or {}).get("url_prefix") if src else None
+        if not pre:
+            continue
+        t = p.read_text(encoding="utf-8")
+        for seg, slug in re.findall(r"\]\(/([a-z0-9-]+)/([a-z0-9-]+)/?(?:#[^)\s]*)?\)", t):
+            if seg != pre.strip("/") and sites_mod.find_category_owner(seg) == src:
+                warns.append(f"配信先で404: {p.stem} → /{seg}/{slug}/（{pre}/{slug}/ に直す）")
+    return warns
+
+
 def build_feed(article_entries):
     from xml.sax.saxutils import escape
     items = sorted(article_entries, key=lambda e: str(e[0]["modified"]), reverse=True)[:20]
@@ -1383,11 +1403,19 @@ def main():
             blocked.append(f"{meta['slug']}: {sc}点 < 基準{QUALITY_GATE}点")
             blocked_metas.append(meta)
             continue
-        # 足切り: score_breakdown がある場合、1観点でも16/20未満なら不合格（合計点で壊滅観点を隠さない）
+        # 足切り: score_breakdown がある場合、1観点でも下限未満なら不合格（合計点で壊滅観点を隠さない）。
+        # 旧6観点は20点満点で16、rubric の3観点は100点満点で PASS_EACH。
+        # 満点を見分けないと、100点満点の70点が16以上として素通りする
+        import rubric
         bd = meta.get("score_breakdown") or {}
-        weak = {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < 16}
+        nums = [v for v in bd.values() if isinstance(v, (int, float))]
+        if set(bd) & {a["key"] for a in rubric.AXES} or max(nums or [0]) > 20:
+            th, full = rubric.PASS_EACH, rubric.MAX
+        else:
+            th, full = 16, 20
+        weak = {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < th}
         if weak:
-            blocked.append(f"{meta['slug']}: 観点足切り {weak}（各16/20以上が必要）")
+            blocked.append(f"{meta['slug']}: 観点足切り {weak}（各{th}/{full}以上が必要）")
             blocked_metas.append(meta)
             continue
         if not title_has_keyword(str(meta.get("title") or ""),
@@ -1478,6 +1506,7 @@ def main():
     warns += quality_checks(all_metas)
     stamp_assets()
     warns += link_check()
+    warns += prefix_link_check()
     print(f"OK: {len(entries)}記事 / blog一覧 + sitemap.xml + feed.xml 更新")
     for w in warns:
         print(f"WARN: {w}")
@@ -1516,7 +1545,12 @@ def main():
         print("取りこぼし検査: 原稿に書いたものは全て出力に出ています")
 
     # 公開できた記事を台帳に残す。次回からは、ここに無い記事が不合格なら止まる
-    save_published({m["slug"] for m, _ in entries})
+    # 前回の台帳との和集合で残す。今回たまたま外れた記事（隔離・フロントマターの一時的な誤り）を
+    # 台帳から落とすと、戻ったときに新規扱いになり、警告1つで HTML ごと取り下げられる。
+    # 原稿が無くなった slug（統合で _merged/ へ移したもの等）だけは外す
+    alive = {f.stem for f in ARTICLES.rglob("*.md") if "_merged" not in f.parts}
+    save_published({s for s in (_known or set()) if s in alive}
+                   | {m["slug"] for m, _ in entries})
     if _known is None:
         print(f"公開台帳を作りました（{len(entries)}本）。"
               "次のビルドからは、品質検査に落ちた新規記事は公開されません")

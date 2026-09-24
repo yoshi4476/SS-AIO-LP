@@ -55,7 +55,7 @@ faq:
 
 **個人経営の経理は、コツを3つ先に決めておくと、現場の仕事が忙しくなっても崩れにくくなります。**
 
-あわせて[経理自動化はPythonで可能か？](/keiri-jitsumu/keiri-jidoka-python/)もご覧ください。
+あわせて[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)もご覧ください。
 
 実際の進め方については、[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)にまとめています。
 

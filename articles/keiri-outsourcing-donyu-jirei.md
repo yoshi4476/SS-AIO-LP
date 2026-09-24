@@ -47,7 +47,7 @@ faq:
 
 経理アウトソーシングの導入事例は、委託する業務範囲の広さによって3つのパターンに分かれます。
 
-あわせて[バックオフィスBPOとは？](/backoffice/backoffice-bpo-toha/)もご覧ください。
+あわせて[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)もご覧ください。
 
 関連する内容として[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)も公開しています。
 

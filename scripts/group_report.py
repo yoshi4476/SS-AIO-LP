@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import hub_client  # noqa: E402
 import sites as sites_mod  # noqa: E402
 from cannibal_check import load_articles  # noqa: E402
-from monthly_report import ENV, svg_line  # noqa: E402
+from monthly_report import ENV, _lead_by_landing, svg_line  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SA = ROOT / "indexing-service-account.json"
@@ -166,13 +166,14 @@ def fetch_site(cfg, labels):
             # 入口ページ別（どの記事が集客の入口か）
             rep = c.run_report(RunReportRequest(
                 property=p, date_ranges=rng, dimensions=[Dimension(name="landingPage")],
-                metrics=[Metric(name="sessions"), Metric(name="engagementRate"),
-                         Metric(name="conversions")], limit=6))
+                metrics=[Metric(name="sessions"), Metric(name="engagementRate")], limit=6))
+            # CVも conversions ではなく lead_capture を直接数える（上の月別と同じ理由）
+            lead = _lead_by_landing(c, p, rng)
             out["landing"] = [{
                 "path": r.dimension_values[0].value or "/",
                 "sessions": int(r.metric_values[0].value),
                 "engagement": round(float(r.metric_values[1].value) * 100, 1),
-                "cv": int(float(r.metric_values[2].value))} for r in rep.rows]
+                "cv": lead.get(r.dimension_values[0].value, 0)} for r in rep.rows]
             out["landing"].sort(key=lambda x: -x["sessions"])
         except Exception as e:
             out["ga_error"] = f"取得失敗: {str(e)[:50]}"

@@ -265,7 +265,7 @@ def main():
     else:
         cands = local_next_kw(cfg)
         if not cands:
-            print("  候補なし。python scripts/kw_discover.py --append でKWを補充すること")
+            print(f"  候補なし。python scripts/kw_discover.py --site {cfg['id']} --append でKWを補充すること")
         else:
             print(f"  → 「{cands[0]['keyword']}」（ローカルのKW計画から）")
             print(f"     狙い: {cands[0]['aim']}")

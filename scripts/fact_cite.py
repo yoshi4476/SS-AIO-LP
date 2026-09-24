@@ -69,7 +69,7 @@ def _counts(body):
             len(re.findall(r"^\s*[-*] ", body, re.M)))
 
 
-def insert(slug, fact):
+def insert(slug, fact, saved=None):
     p = ROOT / "articles" / f"{slug}.md"
     t = p.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
@@ -94,6 +94,8 @@ def insert(slug, fact):
     added = set(re.findall(r"\d[\d,.]*", new_body)) - nums_before - nums_claim
     if added:
         return False, f"引用文に無い数字が増える {sorted(added)[:3]}"
+    if saved is not None:
+        saved.setdefault(p, p.read_bytes())
     p.write_text(f"---\n{fm}\n---\n{new_body}", encoding="utf-8", newline="")
     return True, sentence[:60]
 
@@ -113,8 +115,9 @@ def main():
         print(f"   [{r['site']:<9}] {r['slug'][:36]:<36} ← {r['fact']['claim'][:50]}（重なり{r['overlap']}）")
     n = 0
     if a.write:
+        saved = {}
         for r in rows[:a.limit]:
-            ok, why = insert(r["slug"], r["fact"])
+            ok, why = insert(r["slug"], r["fact"], saved)
             print(f"   {'○' if ok else '×'} {r['slug'][:36]:<36} {why}")
             LOG.parent.mkdir(parents=True, exist_ok=True)
             with LOG.open("a", encoding="utf-8") as f:
@@ -125,7 +128,9 @@ def main():
             r = subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, capture_output=True, text=True,
                                encoding="utf-8", errors="replace")
             if r.returncode or "BLOCKED" in (r.stdout or ""):
-                subprocess.run(["git", "checkout", "--", "articles/"], cwd=ROOT)
+                # HEAD へ戻すと、同じ週次で先に当てた未コミットの直しまで消える
+                for p, raw in saved.items():
+                    p.write_bytes(raw)
                 print("   ★ ビルドが通らないため、今回の引用は全部戻しました")
                 n = 0
     print(f"FACT_CITE_OK=yes\nCITED={n}")

@@ -2,7 +2,7 @@
 
 【最初に必ず行うこと】
 (1) `python scripts/site_brief.py "$SITE_ID"` を実行する。対象サイトのテーマ・読者・担当領域・書いてはいけない領域・カテゴリ・次に書くKWが全て表示される。以降はこの出力に従うこと（自分でサイト設定を探し直さない）。
-(2) 表示された「次のKW」をそのまま採用する。表示が空、または need_replenish=true の場合は `python scripts/kw_discover.py --append` を実行してから再度 site_brief.py を実行する。
+(2) 表示された「次のKW」をそのまま採用する。表示が空、または need_replenish=true の場合は `python scripts/kw_discover.py --site "$SITE_ID" --append` を実行してから再度 site_brief.py を実行する。
 (3) 記事作成の前に `python scripts/cannibal_check.py --cross` を実行し、採用予定のKWが TERRITORY_CHECK や CROSS_CANNIBAL に出ていないことを確認する。出ていた場合はそのKWを使わず、次の候補に移る。
 (4) `python scripts/growth_guard.py` を実行する。GROWTH_DROP=yes の場合、**新規記事より先に、落ちた原因を直すこと**。表示が落ちたまま新規を積んでも総量は増えない。消えた語のページが200を返すか確認し、404や配信漏れなら直す。順位が下がった語は `python scripts/cannibal_check.py --serp` で自社ページの食い合いを確認する。
 (5) `python scripts/lessons.py --brief "$SITE_ID"` を実行する。**これまでに同じ失敗をした内容が出るので、必ず守ること。**機械の検査で止められるものは載っていない（載っているのは判断が要るものだけ）。

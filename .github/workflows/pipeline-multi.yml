@@ -66,17 +66,24 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: article-pipeline
-  cancel-in-progress: false
+# concurrency はワークフロー単位ではなく、記事を書く job（write）にだけ付ける。
+# ワークフロー単位だと空き枠の run までグループに並び、GitHub の仕様（待てるのは1件）で
+# 待機中の実枠や週次を後から来た空き枠が取り消していた（月曜の12:00の枠が12:30の空き枠に消された）。
+# 枠の判定（select）はグループの外で終え、空き枠はグループに並ばずに終わる
 
 env:
   TZ: Asia/Tokyo
 
 jobs:
-  write:
+  select:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 5
+    outputs:
+      skip: ${{ steps.site.outputs.skip }}
+      id: ${{ steps.site.outputs.id }}
+      own: ${{ steps.site.outputs.own }}
+      first: ${{ steps.site.outputs.first }}
+      over: ${{ steps.site.outputs.over }}
     steps:
       - uses: actions/checkout@v4
 
@@ -119,8 +126,8 @@ jobs:
             CAP=$(( SLOTS / 2 ))
             if [ "$N" -gt "$CAP" ]; then
               echo "::error::サイトが${N}件あります。枠は${SLOTS}（1社2本で${CAP}社まで）。cron を2本足すと1社増やせます"
-              mkdir -p automation/logs
-              echo "要対応: サイトが${N}件で枠の上限${CAP}社を超えました。pipeline-multi.yml に cron を2本足すか、別リポジトリに分けてください（今の枠では本数が減ります）" >> automation/logs/findings.txt
+              # この job と記事を書く job はランナーが別。findings.txt は write 側で書く
+              echo "over=要対応: サイトが${N}件で枠の上限${CAP}社を超えました。pipeline-multi.yml に cron を2本足すか、別リポジトリに分けてください（今の枠では本数が減ります）" >> "$GITHUB_OUTPUT"
             fi
             # 1サイトあたり1日2本まで（CLAUDE.md の上限）。サイト数が少ないと
             # 余りだけでは同じサイトに何度も回り、1社のとき1日6本になってしまう
@@ -140,6 +147,34 @@ jobs:
           echo "own=$own" >> "$GITHUB_OUTPUT"
           echo "first=$first" >> "$GITHUB_OUTPUT"
           echo "対象サイト: $s（自前ビルド: $own / 全$N サイト）"
+
+  write:
+    needs: select
+    if: needs.select.outputs.skip != 'yes'
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    # 並ぶのは実際に記事を書く枠だけ。週次・救済（pipeline.yml）とも同じグループで直列にする
+    concurrency:
+      group: article-pipeline
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      # 以降の工程は steps.site.outputs.* で読む（select の判定をそのまま受け取る）
+      - name: 対象サイト（select の判定を受け取る）
+        id: site
+        run: |
+          {
+            echo "id=${{ needs.select.outputs.id }}"
+            echo "own=${{ needs.select.outputs.own }}"
+            echo "first=${{ needs.select.outputs.first }}"
+          } >> "$GITHUB_OUTPUT"
+          over="${{ needs.select.outputs.over }}"
+          if [ -n "$over" ]; then
+            mkdir -p automation/logs
+            echo "$over" >> automation/logs/findings.txt
+          fi
+          echo "対象サイト: ${{ needs.select.outputs.id }}"
 
       - uses: actions/setup-python@v5
         if: steps.site.outputs.skip != 'yes'
@@ -357,8 +392,9 @@ jobs:
             echo "変更なし — コミットをスキップ"
           else
             git commit -m "publish(${{ steps.site.outputs.id }}): $(date '+%Y-%m-%d %H:%M JST')"
+            pushed=0
             for i in 1 2 3; do
-              git push && break
+              git push && { pushed=1; break; }
               echo "push拒否 → リモートと統合して再試行 ($i/3)"
               if ! git pull --rebase -X ours origin "${GITHUB_REF_NAME}"; then
                 git diff --name-only --diff-filter=U | while IFS= read -r f; do
@@ -371,6 +407,11 @@ jobs:
                 GIT_EDITOR=true git rebase --continue || git rebase --skip || git rebase --abort
               fi
             done
+            # 3回目の統合のあとは push していない。成功で終わるとコミットがランナーごと消えるので、
+            # 最後にもう1回だけ押し、それでも届かなければ工程を落とす（自動修復が拾う）
+            if [ "$pushed" != 1 ]; then
+              git push || { echo "::error::push に失敗しました。記事のコミットがリポジトリに反映されていません"; exit 1; }
+            fi
           fi
 
       # 自前でビルドするサイトはここでデプロイまで行う

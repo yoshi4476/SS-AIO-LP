@@ -399,6 +399,20 @@ def month_end(label):
     return (nxt - timedelta(days=1)).isoformat()
 
 
+def _lead_by_landing(ga, prop, date_ranges):
+    """入口ページ別の lead_capture 件数。form_submit は同時に飛ぶので足さない"""
+    from google.analytics.data_v1beta.types import (
+        Dimension, Filter, FilterExpression, Metric, RunReportRequest)
+    rep = ga.run_report(RunReportRequest(
+        property=prop, date_ranges=date_ranges,
+        dimensions=[Dimension(name="landingPage")], metrics=[Metric(name="eventCount")],
+        dimension_filter=FilterExpression(filter=Filter(
+            field_name="eventName",
+            string_filter=Filter.StringFilter(value="lead_capture"))),
+        limit=1000))
+    return {r.dimension_values[0].value: int(r.metric_values[0].value) for r in rep.rows}
+
+
 def fetch_real():
     """GA4/GSC/Sheetsから実データ取得。未設定なら例外に設定手順を含める"""
     try:
@@ -429,6 +443,9 @@ def fetch_real():
 
     labels = month_labels(6)
     data = {"demo": False, "months": []}
+    # 当月の集計の終わり。"today" にすると月初の発行で翌月の日数分が混ざり、
+    # 月末で切った sessions と分母・分子の期間が食い違う（AI経由の比率などがずれる）
+    cur_end = min(date.fromisoformat(month_end(labels[-1])), date.today()).isoformat()
 
     # --- GA4: 月別セッション/CV/AI参照 ---
     ga = BetaAnalyticsDataClient(credentials=creds)
@@ -466,7 +483,7 @@ def fetch_real():
     # AI参照元セッション（当月）
     rep = ga.run_report(RunReportRequest(
         property=prop,
-        date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date="today")],
+        date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date=cur_end)],
         dimensions=[Dimension(name="sessionSource")], metrics=[Metric(name="sessions")]))
     # 参照元ドメインでしか見分けられないため、主要なAIサービスを網羅する。
     # 抜けているサービスからの流入は「Referral」に埋もれてAI流入として数えられない
@@ -489,7 +506,7 @@ def fetch_real():
     try:
         rep = ga.run_report(RunReportRequest(
             property=prop,
-            date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date="today")],
+            date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date=cur_end)],
             dimensions=[Dimension(name="customEvent:area_name")],
             metrics=[Metric(name="eventCount")]))
         total = max(1, max((int(r.metric_values[0].value) for r in rep.rows), default=1))
@@ -565,7 +582,7 @@ def fetch_real():
         try:
             rep = ga.run_report(RunReportRequest(
                 property=prop,
-                date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date="today")],
+                date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date=cur_end)],
                 dimensions=[Dimension(name=dim)], metrics=[Metric(name="sessions")]))
             pairs = [(r.dimension_values[0].value, int(r.metric_values[0].value)) for r in rep.rows]
             return sorted(pairs, key=lambda x: -x[1])
@@ -575,7 +592,7 @@ def fetch_real():
     data["devices"] = ga_dist("deviceCategory")
 
     cur_m = labels[-1]
-    cur_range = [DateRange(start_date=f"{cur_m}-01", end_date="today")]
+    cur_range = [DateRange(start_date=f"{cur_m}-01", end_date=cur_end)]
     prev_m = labels[-2]
     prev_end = (date(int(prev_m[:4]) + (int(prev_m[5:]) == 12),
                      (int(prev_m[5:]) % 12) + 1, 1) - timedelta(days=1)).isoformat()
@@ -607,14 +624,16 @@ def fetch_real():
             property=prop, date_ranges=cur_range,
             dimensions=[Dimension(name="landingPage")],
             metrics=[Metric(name="sessions"), Metric(name="engagementRate"),
-                     Metric(name="conversions"), Metric(name="averageSessionDuration")],
+                     Metric(name="averageSessionDuration")],
             limit=12))
+        # CVは conversions 指標を使わない（GA4側の設定が無いと0になる。上の月別と同じ理由）
+        lead = _lead_by_landing(ga, prop, cur_range)
         data["landing"] = [{
             "path": r.dimension_values[0].value or "/",
             "sessions": int(r.metric_values[0].value),
             "engagement": round(float(r.metric_values[1].value) * 100, 1),
-            "cv": int(float(r.metric_values[2].value)),
-            "duration": round(float(r.metric_values[3].value)),
+            "cv": lead.get(r.dimension_values[0].value, 0),
+            "duration": round(float(r.metric_values[2].value)),
         } for r in rep.rows]
         data["landing"].sort(key=lambda x: -x["sessions"])
     except Exception:

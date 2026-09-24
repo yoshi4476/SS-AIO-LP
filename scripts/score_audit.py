@@ -125,14 +125,21 @@ def save(d):
 
 
 def compare():
+    import rubric as R
     d = load()
+    done = {s: v for s, v in d.items() if v.get("audit") and "total" in v["audit"]}
+    # 旧基準（v2・30点満点）の記録を今の基準（100点満点・総合90）と比べると、全部が基準割れになる。
+    # 換算して混ぜず、今の基準の記録だけを見る
     rows = [(s, v["self"], v["audit"].get("total", 0), v["audit"].get("weak") or {})
-            for s, v in d.items() if v.get("audit") and "total" in v["audit"]]
+            for s, v in done.items()
+            if v["audit"].get("version") == R.VERSION or v["audit"].get("max", R.MAX) == R.MAX]
+    old = len(done) - len(rows)
+    if old:
+        print(f"  旧基準の記録 {old}本は対象外（今の基準 {R.VERSION}・{R.MAX}点満点で採点し直すまで比べない）")
     if not rows:
         print("  採点し直した記事がありません（--limit で実行してください）")
         print("SCORE_AUDIT_OK=yes")
         return 0
-    import rubric as R
     import statistics as st
     below = [r for r in rows if r[2] < R.PASS_TOTAL]
     weak = [r for r in rows if r[3]]
@@ -141,16 +148,16 @@ def compare():
     for s, _self, tot, w in sorted(rows, key=lambda x: x[2]):
         ax = (d[s]["audit"].get("axes") or {})
         mark = d[s]["audit"].get("why", "")
-        print(f"{s[:32]:<34}{tot:>5}/100{ax.get('originality', 0):>7}"
+        print(f"{s[:32]:<34}{tot:>5}/{R.MAX}{ax.get('originality', 0):>7}"
               f"{ax.get('extractability', 0):>7}{ax.get('decision', 0):>6}  {mark[:28]}")
     tots = [r[2] for r in rows]
-    print(f"\n  合計の中央値: {st.median(tots):.0f}/30")
+    print(f"\n  合計の中央値: {st.median(tots):.0f}/{R.MAX}")
     print(f"  総合{R.PASS_TOTAL}点を割った記事: {len(below)}/{len(rows)}本")
     print(f"  1軸が{R.PASS_EACH}点未満（足切り）: {len(weak)}/{len(rows)}本")
     for a in R.AXES:
         vals = [(d[s]["audit"].get("axes") or {}).get(a["key"], 0) for s, *_ in rows]
         if vals:
-            print(f"    {a['name']:<8}中央値 {st.median(vals):>4.1f}/10"
+            print(f"    {a['name']:<8}中央値 {st.median(vals):>4.1f}/{R.MAX}"
                   f"  （{a['what']}）")
     bad = len(below) + len(weak)
     print("SCORE_AUDIT_OK=" + ("no" if bad else "yes"))

@@ -75,7 +75,7 @@ faq:
 
 経理マニュアルは、業務の洗い出しから運用開始まで5つのステップで作ると失敗しにくくなります。
 
-関連する内容として[経理の業務フローテンプレート4選](/keiri-jitsumu/keiri-gyomu-flow-template/)も公開しています。
+関連する内容として[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)も公開しています。
 
 <figure><img src="/images/keiri-manual-tsukurikata/steps.png" alt="経理マニュアル作成の5ステップ: 業務を洗い出す、手順を整理する、様式・ひな型を決める、マニュアルに文書化する、周知して運用を始める" loading="lazy"><figcaption>経理マニュアル作成の5ステップ</figcaption></figure>
 

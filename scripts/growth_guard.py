@@ -43,10 +43,11 @@ def spans(days, month):
 
 def fetch(sc, dom, span, dims):
     import gsc_detail as G
+    # 取れなかったのを [] にすると、前期の語が全部「消えた語」に並ぶ
     try:
-        return G.q(sc, dom, str(span[0]), str(span[1]), dims, 5000)
+        return G.q(sc, dom, str(span[0]), str(span[1]), dims, 5000, raise_errors=True)
     except Exception:
-        return []
+        return None
 
 
 def totals(sc, dom, span):
@@ -61,9 +62,11 @@ def totals(sc, dom, span):
         return measure.gsc_totals(dom, span[0], span[1])
     except measure.Disagree as e:
         print(f"  {dom}: 計測が一致しないため、この数字は使いません → {e}")
-        return 0, 0
-    except Exception:
-        return 0, 0
+        return None
+    except Exception as e:
+        # 0 を返すと前期との比較で -100% の下落として警告してしまう
+        print(f"  {dom}: GSCから取得できないため、この数字は使いません → {str(e)[:60]}")
+        return None
 
 
 def main():
@@ -84,8 +87,11 @@ def main():
         # 実測で補助金のクリックが 51回→2回 に見えていた（CLAUDE.md 0.1）
         a = fetch(sc, cfg["domain"], now, ["query", "page"])
         b = fetch(sc, cfg["domain"], prev, ["query", "page"])
-        ai, ac = totals(sc, cfg["domain"], now)
-        bi, bc = totals(sc, cfg["domain"], prev)
+        tn, tp = totals(sc, cfg["domain"], now), totals(sc, cfg["domain"], prev)
+        if tn is None or tp is None:
+            print(f"  {cfg['name']}: 合計が確かめられないため比較しません\n")
+            continue
+        (ai, ac), (bi, bc) = tn, tp
         if not ai and not bi:
             continue
         di = (ai - bi) / bi if bi else None
@@ -103,6 +109,10 @@ def main():
             print()
             continue
 
+        if a is None or b is None:
+            print("    内訳: 語の一覧が取得できず、分解できません\n")
+            alerts.append((sid, di, 0, 0, []))
+            continue
         # ここから原因の分解。合計だけ見ても何を直せばいいか分からない
         na = {(x["keys"][0], x["keys"][1]): x for x in a}
         nb = {(x["keys"][0], x["keys"][1]): x for x in b}

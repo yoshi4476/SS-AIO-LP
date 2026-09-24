@@ -32,6 +32,8 @@ SHEET = ROOT / "intake" / "メニュー記入シート.xlsx"
 LABEL = {"ja": ("メニュー", "税込", "円"), "en": ("Menu", "tax incl.", "JPY"),
          "zh": ("菜单", "含税", "日元"), "ko": ("메뉴", "세금 포함", "엔")}
 LANG_ATTR = {"ja": "ja", "en": "en", "zh": "zh-Hans", "ko": "ko"}
+# 記入例。消し忘れると実在しない品目が訳されて公開されるため、読むときにも飛ばす
+EXAMPLE = [("麺類", "醤油ラーメン", 950, "鶏と魚介のスープ", "小麦・卵"), ("ご飯もの", "チャーシュー丼", 480, "", "")]
 
 
 # ── シート ───────────────────────────────────────────
@@ -46,15 +48,17 @@ def make_sheet(path=SHEET):
     ws["A2"], ws["B2"] = "サイトID", ""
     ws["A3"], ws["B3"] = "店名", ""
     ws["A4"] = "価格は税込の円で数字だけ（例 1200）。説明は分かる範囲で。書いていないことは訳でも足しません。"
+    ws["A5"] = "7〜8行目（灰色）は記入例です。上書きするか削除してください（残っていても読み込みません）。"
     heads = ["区分（例: 麺類）", "品名", "価格（税込・円）", "説明", "注記（アレルゲン・辛さ等）"]
     for i, h in enumerate(heads, 1):
         c = ws.cell(row=6, column=i, value=h)
         c.font = Font(bold=True, color="FFFFFF")
         c.fill = PatternFill("solid", start_color="1D3461")
-    ex = [("麺類", "醤油ラーメン", 950, "鶏と魚介のスープ", "小麦・卵"), ("ご飯もの", "チャーシュー丼", 480, "", "")]
-    for r, row in enumerate(ex, 7):
+    gray = PatternFill("solid", start_color="D9D9D9")
+    for r, row in enumerate(EXAMPLE, 7):
         for c, v in enumerate(row, 1):
-            ws.cell(row=r, column=c, value=v)
+            cell = ws.cell(row=r, column=c, value=f"例: {v}" if c == 1 else v)
+            cell.fill = gray
     for col, w in zip("ABCDE", (18, 26, 16, 40, 28)):
         ws.column_dimensions[col].width = w
     path.parent.mkdir(exist_ok=True)
@@ -72,6 +76,10 @@ def read_sheet(path):
         if not name:
             continue
         p = re.sub(r"[^\d]", "", str(price or ""))
+        is_example = str(cat or "").strip().startswith(("例:", "例：")) or any(
+            str(name).strip() == e[1] and p == str(e[2]) for e in EXAMPLE)
+        if is_example:
+            continue
         items.append({"cat": str(cat or "").strip(), "name": str(name).strip(), "price": int(p) if p else None,
                       "desc": str(desc or "").strip(), "note": str(note or "").strip()})
     return site, shop, items

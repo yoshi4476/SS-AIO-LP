@@ -95,7 +95,7 @@ def _direct(action, p):
                                 p.get("status", "未対応"))
         if action == "rewrite_log":
             return HS.rewrite_log(p.get("site", ""), p.get("article", ""), p.get("reason", ""), p.get("summary", ""),
-                                  p.get("pos_before", ""), p.get("pos_after", ""), p.get("effect", ""))
+                                  p.get("posBefore", ""), p.get("posAfter", ""), p.get("effect", ""))
         return None                                   # それ以外は GAS へ
     except Exception as e:
         print(f"  管制塔へ直接つなげません（{type(e).__name__}）。GAS 経由に切り替えます")

@@ -25,10 +25,13 @@ concurrency:
 
 jobs:
   heal:
-    # 定期実行のときは常に。ワークフロー起因のときは、失敗したときだけ動かす
+    # 定期実行のときは常に。ワークフロー起因のときは、失敗か取り消しのときだけ動かす。
+    # 取り消し（cancelled）も拾う。同じ concurrency グループで待機中の run は後から来た run に
+    # 取り消されるが、failure だけを見ていたため、その日の記事が消えても誰にも知らされなかった
     if: >-
       github.event_name != 'workflow_run' ||
-      github.event.workflow_run.conclusion == 'failure'
+      github.event.workflow_run.conclusion == 'failure' ||
+      github.event.workflow_run.conclusion == 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -134,10 +137,12 @@ jobs:
           fi
 
       # 記事が落ちた日は、修復のあとで書き直す。1日分を失わない。
+      # コードが壊れていない回（claude の一時失敗・取り消し）がいちばん多い落ち方なので、
+      # 「壊れていない」か「直せた」のどちらかなら動かす。verify は壊れていた回にしか走らない
       - name: 修復後に記事を書き直す
         if: >-
           github.event_name == 'workflow_run' &&
-          steps.verify.outputs.ok == '1'
+          (steps.diag.outputs.broken == '0' || steps.verify.outputs.ok == '1')
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           HUB_URL: ${{ secrets.HUB_URL }}
@@ -165,7 +170,7 @@ jobs:
         if: >-
           github.event_name == 'workflow_run' &&
           github.event.workflow_run.name == 'Monthly Consulting Report' &&
-          steps.verify.outputs.ok == '1'
+          (steps.diag.outputs.broken == '0' || steps.verify.outputs.ok == '1')
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
           GA4_ID: ${{ secrets.GA4_PROPERTY_ID }}
@@ -195,9 +200,12 @@ jobs:
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
-          # 異常が無かった回は黙る。直した回は「何が起きたか」を知らせる
+          # 異常が無かった回は黙る。直した回は「何が起きたか」を知らせる。
+          # ただし元の実行が落ちた・取り消された回は、コードが無事でも黙らない（書き直し・再発行をした）
           routine=""
-          if [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
+          if [ "${{ github.event_name }}" = "workflow_run" ] && [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
+            msg="🔧 自動修復: ${{ github.event.workflow_run.name }} が ${{ github.event.workflow_run.conclusion }} で終わりました。コードに異常は無いため、書き直し／再発行を実行しました（結果は実行ログ）"
+          elif [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
             msg="✅ 自動修復: 異常なし"
             routine="--routine"
           elif [ "${{ steps.verify.outputs.ok }}" = "1" ]; then

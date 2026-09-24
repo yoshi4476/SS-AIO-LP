@@ -33,6 +33,9 @@ const LEAD_DUP_WINDOW_MS = 24 * 60 * 60 * 1000;
 function form_(body) {
   // 転送（forwardToHub_）は data の中に入れて送ってくる。直接送信は平置き。
   const d = body.data && Object.keys(body.data).length ? body.data : body;
+  // 本文の項目名はサイトごとに違う（コーポレートは detail）。message に寄せないと
+  // 転送された問い合わせが「必須項目が入力されていません」で弾かれ、台帳に残らなかった
+  if (!body_(d.message)) d.message = d.detail || d.body || d.topic || '';
   const type = String(d.type || 'contact');
   const site = siteLabel_(body.site || d.site) || '（不明）';
   const name = clean_(d.name);

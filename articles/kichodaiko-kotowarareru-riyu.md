@@ -61,7 +61,7 @@ faq:
 
 記帳代行を断られる理由は、資料の状態・業務の複雑さ・依頼のタイミングの3系統に分かれます。
 
-関連する内容として[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/keiri-bpo/keiri-gaichuu-kichodaiko-center/)も公開しています。
+関連する内容として[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)も公開しています。
 
 <figure><img src="/images/kichodaiko-kotowarareru-riyu/reasons6.png" alt="記帳代行を断られる6つの理由: 資料が未整理、遡り記帳の量が多い、対応外の業種・取引、使用ソフトが対応外、繁忙期で新規停止、税務相談まで求める依頼" loading="lazy"><figcaption>記帳代行を断られる6つの理由</figcaption></figure>
 

@@ -13,7 +13,7 @@
 
 流れ:
   1. claude -p に、負けた側（loser）にしか無い中身を勝った側（survivor）へ足させる
-  2. 検算。1つでも外れたら git checkout で戻す
+  2. 検算。1つでも外れたら統合の直前の中身へ戻す
   3. 通れば loser を articles/_merged/ へ移し、内部リンクを付け替え、301を書く
      AI集客ラボは site/_redirects。他サイトは data/retractions.jsonl に積み、
      retract.py が配信先のリポジトリから外す
@@ -382,6 +382,7 @@ def run_one(pair, write):
         return False, "記事がありません"
     if not write:
         return True, "（確認のみ）"
+    raw = (ARTICLES / f"{s}.md").read_bytes()
     before, before_warns, snap = AR.meta(s), AR.warns(s), AR.snapshot()
     loser_text = fm(l)["text"]
     ls, ss = pair.get("loser_stat", {}), pair.get("survivor_stat", {})
@@ -403,8 +404,8 @@ def run_one(pair, write):
         return False, "変更なし（統合されませんでした）"
     ng = check(pair, before, before_warns, loser_text, snap)
     if ng:
-        # survivor だけ戻す。articles 全体を戻すと、先に走った工程の未コミットの直しまで消える
-        AR.sh(["git", "checkout", "--", f"articles/{s}.md"])
+        # survivor を統合の直前の中身へ戻す。HEAD へ戻すと、先に走った工程の未コミットの直しまで消える
+        p.write_bytes(raw)
         AR.sh([sys.executable, "scripts/build.py"], timeout=1800)
         return False, ng
     why = f"統合しました（{l} → {s}、本文 {plain_len(before[2])} → {plain_len(p.read_text(encoding='utf-8-sig'))}字）"
@@ -424,7 +425,7 @@ def selftest():
         s, l = arts[0]["slug"], arts[1]["slug"]
     pair = {"site": AR.site_of(s), "survivor": s, "loser": l, "kws": [{"kw": "自己診断"}], "imp": 0}
     p = ARTICLES / f"{s}.md"
-    orig = p.read_text(encoding="utf-8-sig")
+    orig = p.read_bytes()
     before, before_warns, snap = AR.meta(s), AR.warns(s), AR.snapshot()
     title, kw, body = before
     loser_text = fm(l)["text"]
@@ -446,9 +447,9 @@ def selftest():
             ng = check(pair, before, before_warns, loser_text, snap)
             print(f"  {'OK' if ng else 'NG'}  {name}: " + (f"止めた（{ng[:44]}）" if ng else "素通りしました"))
             ok += bool(ng)
-            p.write_text(orig, encoding="utf-8", newline="")
+            p.write_bytes(orig)
     finally:
-        p.write_text(orig, encoding="utf-8", newline="")
+        p.write_bytes(orig)
         AR.sh([sys.executable, "scripts/build.py"], timeout=1800)
     print(f"\n  {ok}/{len(cases)} を止めました（記事は元に戻しました）")
     return 0 if ok == len(cases) else 1

@@ -99,9 +99,11 @@ def apply(page_path, exit_slug, write):
     prev_start = max((m.start() for m in tags if m.start() < target.start()), default=0)
     if CTA_PAT.search(html[prev_start:target.start()]) or 'data-exit-cta="1"' in html[prev_start:target.start()]:
         return False, "手前に導線が既にある"
-    new = before + block(page_path) + html[target.start():]
-    if new.count("<") - new.count("</") != html.count("<") - html.count("</") + 1:
+    b = block(page_path)
+    # 足すブロック自身の開閉が釣り合っていれば、ページ側の釣り合いも崩れない
+    if b.count("<") != 2 * b.count("</"):
         return False, "タグの数が合わない"
+    new = before + b + html[target.start():]
     if write:
         f.write_text(new, encoding="utf-8", newline="\n")
     return True, "導線を置いた"

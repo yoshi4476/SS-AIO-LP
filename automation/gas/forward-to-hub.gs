@@ -35,7 +35,11 @@ const HUB_SECRET = 'XXXXXXXXXXXXXXXX';
 function forwardToHub_(data, siteId, referer) {
   if (!HUB_URL || HUB_URL.indexOf('XXXX') >= 0) return;  // 未設定なら何もしない
   try {
-    UrlFetchApp.fetch(HUB_URL, {
+    // 管制塔は本文を message で受ける。フォームの項目名（コーポレートは detail）のまま送ると
+    // 「必須項目が入力されていません」で弾かれる。元の data は書き換えずに写しへ足す
+    const payloadData = Object.assign({}, data);
+    if (!payloadData.message) payloadData.message = data.detail || data.body || data.topic || '';
+    const res = UrlFetchApp.fetch(HUB_URL, {
       method: 'post',
       contentType: 'application/json',
       payload: JSON.stringify({
@@ -45,11 +49,18 @@ function forwardToHub_(data, siteId, referer) {
         referer: referer || '',
         // 通知メールは各サイト側で既に送っている。ここで送ると1件で2通届くため止める
         silent: true,
-        data: data,
+        data: payloadData,
       }),
       muteHttpExceptions: true,   // 管制塔側が落ちていても例外にしない
       followRedirects: true,
     });
+    // 応答を見ないと、弾かれても誰も気づけない（本処理は止めずにログへ残す）
+    let ok = false;
+    try { ok = JSON.parse(res.getContentText()).ok === true; } catch (e) { ok = false; }
+    if (!ok) {
+      console.error('管制塔が転送を受け付けませんでした（本処理は続行）: HTTP ' +
+        res.getResponseCode() + ' ' + res.getContentText().slice(0, 300));
+    }
   } catch (err) {
     console.error('管制塔への転送に失敗（本処理は続行）: ' + err);
   }

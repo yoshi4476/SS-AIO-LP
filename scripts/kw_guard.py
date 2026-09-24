@@ -92,8 +92,19 @@ def owned(rows):
 def gsc_owner(kw, own):
     """その語そのものを、すでに取っているページ"""
     n = norm_kw(kw)
-    hit = [o for o in own if norm_kw(o["q"]) == n
-           or n in norm_kw(o["q"]) or norm_kw(o["q"]) in n]
+    hit = [o for o in own if norm_kw(o["q"]) == n]
+    return sorted(hit, key=lambda x: x["pos"])
+
+
+def gsc_related(kw, own):
+    """その語を含む・その語に含まれる語で順位を持つページ
+
+    包含まで禁止にすると、ピラーの語が順位を持った時点で
+    その語を含むクラスターの語が全部止まる。kw_conflicts の包含と同じく要差別化に留める。
+    """
+    n = norm_kw(kw)
+    hit = [o for o in own if norm_kw(o["q"]) != n
+           and (n in norm_kw(o["q"]) or norm_kw(o["q"]) in n)]
     return sorted(hit, key=lambda x: x["pos"])
 
 
@@ -170,6 +181,12 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
                 f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
                 f"ドメインが違っても自社どうしの食い合いになります。"
                 f"担当をどちらに寄せるか決めてから書いてください"))
+    for o in gsc_related(kw, own)[:3]:
+        level = max(level, 1)
+        reasons.append((
+            "要差別化", f"近い語で順位を持つページがある: {o['page'].split('//')[-1]}",
+            f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
+            f"同じ深さで書くと食い合います。広い側は要約にとどめ、相互にリンクしてください"))
 
     # ③ 見出し案の主題を、実績に1本ずつ当てる。
     #    タイトルを差別化しても、見出しが既存記事の主題まで伸びていれば食い合う

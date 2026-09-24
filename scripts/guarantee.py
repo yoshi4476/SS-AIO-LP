@@ -89,6 +89,9 @@ EXPECT = [
     (r"^industry/",  {"CollectionPage"},           "業種ハブ"),
     (r"^author/",    {"ProfilePage"},              "著者"),
     (r"^diagnosis/", {"BreadcrumbList"},           "診断"),
+    (r"^glossary/",  {"DefinedTerm"},              "用語集"),
+    (r"^compare/",   {"ItemList"},                 "比較表"),
+    (r"^topics/",    {"CollectionPage"},           "テーマ"),
     (r"",            {"BlogPosting", "BreadcrumbList"}, "記事"),
 ]
 

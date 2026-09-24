@@ -49,11 +49,11 @@ faq:
 
 経理AI自動化とは、請求書の読み取りから仕訳提案まで、判断を伴う定型業務をAIが代行する仕組みです。
 
-近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/keiri-bpo/seikyusho-jidoka-ai/)で扱っています。
+近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
 
-関連する内容は、[経理自動化はPythonで可能か？](/keiri-jitsumu/keiri-jidoka-python/)で解説しています。
+関連する内容は、[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)で解説しています。
 
-関連する内容として[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/backoffice/seikyusho-shougou-jidoka/)も公開しています。
+関連する内容として[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)も公開しています。
 
 <div class="definition-box"><span class="term">経理AI自動化とは</span>、AI-OCRや学習型の仕訳エンジンなどを使い、経理担当者が行ってきた入力・分類・チェックの一部をAIに代行させる取り組みを指します。==従来の自動化と異なり、表記ゆれや例外パターンもある程度学習して対応できる点が特徴です。==</div>
 

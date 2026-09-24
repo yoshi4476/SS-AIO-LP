@@ -376,7 +376,9 @@ def _page_stats(site_ids, sc=None):
         if not cfg:
             continue
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 2000)
+            # 失敗を [] で受けると「どちらも出ていない」で clear に化ける。unknown に倒す
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 2000,
+                       raise_errors=True)
         except Exception:
             continue
         out[sid] = {r["keys"][0].rstrip("/").rsplit("/", 1)[-1]:
@@ -587,7 +589,8 @@ def serp_overlap(days=28, min_imp=MIN_IMP):
     out = []
     for sid, cfg in S.load_all().items():
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 5000)
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 5000,
+                       raise_errors=True)
         except Exception as e:
             print(f"  {sid}: GSCから取得できません（{str(e)[:50]}）")
             continue

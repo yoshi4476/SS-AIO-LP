@@ -49,11 +49,11 @@ faq:
 
 経理業務の自動化とは、仕訳・請求書処理・経費精算といった判断の少ない定型作業を、システムに代行させる取り組みを指します。
 
-あわせて[経理効率化の事例4選｜方法別のポイントと進め方](/keiri-bpo/keiri-koritsuka-jirei/)もご覧ください。
+あわせて[経理効率化の事例4選｜方法別のポイントと進め方](/blog/keiri-koritsuka-jirei/)もご覧ください。
 
-関連する内容は、[経理自動化はPythonで可能か？](/keiri-jitsumu/keiri-jidoka-python/)で解説しています。
+関連する内容は、[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)で解説しています。
 
-近い論点を[経理の業務フローテンプレート4選](/keiri-jitsumu/keiri-gyomu-flow-template/)で扱っています。
+近い論点を[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)で扱っています。
 
 <div class="definition-box"><span class="term">経理業務の自動化とは</span>、記帳や請求といった手作業の量そのものを減らし、担当者の作業時間を空ける取り組みです。==判断が必要な業務は自動化の対象から外し、確認と承認だけを人に残す設計が基本です。==</div>
 

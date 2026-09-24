@@ -183,8 +183,9 @@ jobs:
             git commit -m "publish: auto pipeline $(date '+%Y-%m-%d %H:%M JST')"
             # 他の実行（ローカル/手動）が先にpushしていても生成記事を失わない。
             # rebase衝突時は自動解決: リモート削除は尊重 / 共有ファイルはリモート優先 / 新規生成物は保全
+            pushed=0
             for i in 1 2 3; do
-              git push && break
+              git push && { pushed=1; break; }
               echo "push拒否 → リモートと統合して再試行 ($i/3)"
               if ! git pull --rebase -X ours origin "${GITHUB_REF_NAME}"; then
                 git diff --name-only --diff-filter=U | while IFS= read -r f; do
@@ -197,6 +198,11 @@ jobs:
                 GIT_EDITOR=true git rebase --continue || git rebase --skip || git rebase --abort
               fi
             done
+            # 3回目の統合のあとは push していない。成功で終わるとコミットがランナーごと消えるので、
+            # 最後にもう1回だけ押し、それでも届かなければ工程を落とす（自動修復が拾う）
+            if [ "$pushed" != 1 ]; then
+              git push || { echo "::error::push に失敗しました。記事のコミットがリポジトリに反映されていません"; exit 1; }
+            fi
           fi
 
       # GITHUB_TOKENによるpushはdeploy.ymlを起動しない（GitHubの再帰防止仕様）ため、ここで直接デプロイする
