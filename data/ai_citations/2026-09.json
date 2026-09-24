@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 11,
       "suspect_taken": 11,
       "healthy": 0,
-      "too_thin": 51,
+      "too_thin": 50,
       "items": [
         {
           "kw": "原口優",
@@ -21,11 +21,11 @@
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 9.2,
-          "imp": 53,
+          "pos": 8.0,
+          "imp": 47,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         },
         {
@@ -51,8 +51,8 @@
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 7.3,
-          "imp": 64,
+          "pos": 7.1,
+          "imp": 61,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -92,7 +92,7 @@
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
           "pos": 8.8,
-          "imp": 110,
+          "imp": 107,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -121,10 +121,10 @@
       ]
     },
     "corporate": {
-      "judged": 8,
+      "judged": 6,
       "suspect_taken": 2,
-      "healthy": 6,
-      "too_thin": 39,
+      "healthy": 4,
+      "too_thin": 40,
       "items": [
         {
           "kw": "セブンセンシズ",
@@ -139,31 +139,21 @@
         {
           "kw": "経理 派遣 時給 相場",
           "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
-          "pos": 8.5,
-          "imp": 19,
+          "pos": 8.6,
+          "imp": 18,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         }
       ]
     },
     "subsidy": {
-      "judged": 2,
-      "suspect_taken": 2,
+      "judged": 1,
+      "suspect_taken": 1,
       "healthy": 0,
       "too_thin": 25,
       "items": [
-        {
-          "kw": "ものづくり補助金 運送業",
-          "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
-          "pos": 8.5,
-          "imp": 11,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 3.5,
-          "ratio": 0.0
-        },
         {
           "kw": "農業用倉庫 補助金 2026",
           "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
