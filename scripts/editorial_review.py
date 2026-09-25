@@ -38,7 +38,15 @@ def load():
     return out
 
 
+# 承認の記録を公開の条件にするか。監修者が全記事を確認しているため、毎日の承認操作は求めない
+# （2026-09-26 運用者の判断）。承認制に戻すときはここを True にするだけで、
+# build・publish・配信・日次監査・リンク補充のすべてが記録を見る形に戻る
+REQUIRED = False
+
+
 def reviewed(slug, recs=None):
+    if not REQUIRED:
+        return True
     return slug in (recs if recs is not None else load())
 
 
@@ -63,6 +71,8 @@ def _score(path):
 
 def pending():
     """公開の基準（90点）を満たしたのに監修の記録が無い記事"""
+    if not REQUIRED:
+        return []
     recs = load()
     return [p.stem for p in sorted((ROOT / "articles").glob("*.md"))
             if _score(p) >= 90 and p.stem not in recs]

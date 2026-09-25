@@ -1650,7 +1650,7 @@ def main():
         is_new = _known is not None and meta["slug"] not in _known
         if is_new:
             issues += _SG.check(meta["slug"], _corpus)
-        if is_new and not issues and meta["slug"] not in _reviews:
+        if is_new and not issues and not _ER.reviewed(meta["slug"], _reviews):
             # 品質の門は通ったが、監修の記録が無い。BLOCKED と分けるのは、救済の工程が
             # BLOCKED を「書き直す対象」として拾うため（監修待ちは書き直しても解けない）
             print(f"HELD(監修待ち): {meta['slug']} → 確認したら "

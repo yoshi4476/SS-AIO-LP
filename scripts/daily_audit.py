@@ -84,7 +84,8 @@ def _is_published(a, need_review=True):
     if _REVIEWS is None:
         import editorial_review
         _REVIEWS = editorial_review.load()
-    return a.get("slug") in _REVIEWS
+    import editorial_review
+    return editorial_review.reviewed(a.get("slug"), _REVIEWS)
 
 
 _REVIEWS = None      # 監修の記録（1回の実行で1度だけ読む）

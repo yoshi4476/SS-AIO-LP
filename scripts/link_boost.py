@@ -280,7 +280,7 @@ def main():
         import editorial_review
         import publish as _P
         _recs = editorial_review.load()
-        poor = [s for s, n in cnt.items() if n <= LOW and s in _recs
+        poor = [s for s, n in cnt.items() if n <= LOW and editorial_review.reviewed(s, _recs)
                 and _P.gate_ok(_P.read_meta(arts[s]["path"]) or {})]
         poor.sort(key=lambda s: cnt[s])
         print(f"■ {site}: {len(arts)}記事 / 被リンク{LOW}本以下 {len(poor)}記事")

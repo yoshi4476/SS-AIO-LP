@@ -200,8 +200,10 @@ def main():
             print(f"■ {site}: 公開状況を取れません（{c['domain']}）")
             continue
         # 監修待ちは配信しない記事なので、未配信（失敗）に数えない。別に数えて見せる
-        held = [s for s, _, _, _ in slugs if s not in live and s not in reviews]
-        missing = [s for s, _, _, _ in slugs if s not in live and s in reviews]
+        held = [s for s, _, _, _ in slugs
+                if s not in live and not editorial_review.reviewed(s, reviews)]
+        missing = [s for s, _, _, _ in slugs
+                   if s not in live and editorial_review.reviewed(s, reviews)]
         # 在るページは、配信時に残した指紋と突き合わせる。
         # 指紋がまだ無いサイトでは、タイトルと本文で判断する
         # 自前でビルドするサイトは同じリポジトリで完結し、配信という工程が無い。
