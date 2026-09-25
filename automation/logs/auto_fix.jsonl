@@ -455,3 +455,6 @@
 {"at": "2026-09-25 01:00", "by": "i18n", "slug": "byoin-kuchikomi-henshin-reibun", "kind": "i18n-en", "ok": false, "note": "数字が変わった {'9': (1, 0), '1': (0, 1)}"}
 {"at": "2026-09-25 01:02", "by": "i18n", "slug": "byoin-kuchikomi-henshin-reibun", "kind": "i18n-en", "ok": true, "note": "訳した"}
 {"at": "2026-09-25 01:03", "by": "i18n", "slug": "byoin-kuchikomi-henshin-reibun", "kind": "i18n-en", "ok": true, "note": "訳した"}
+{"at": "2026-09-25 10:12", "by": "link_boost", "slug": "koumuten-chumon-jutaku-aio", "kind": "link_rescue", "ok": true, "note": "koumuten-instagram-shukyaku から内部リンクを1本"}
+{"at": "2026-09-25 10:12", "by": "link_boost", "slug": "koumuten-chumon-jutaku-aio", "kind": "link_rescue", "ok": true, "note": "koumuten-meo-taisaku から内部リンクを1本"}
+{"at": "2026-09-25 10:12", "by": "link_boost", "slug": "koumuten-chumon-jutaku-aio", "kind": "link_rescue", "ok": true, "note": "koumuten-seo-taisaku から内部リンクを1本"}
