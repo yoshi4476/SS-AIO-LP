@@ -29,7 +29,8 @@ CHECKS = [
     ("AIO基盤（robots・llms.txt・構造化データ）", "aio_check.py",
      re.compile(r"未記載:|不足:|取得できません|記事が載っていません")),
     ("量産の指紋（同型記事・定型文・長さの偏り）", "scaled_guard.py",
-     re.compile(r"^要対応:|^\s{4}\d+%|^\s{4}\d+本:")),
+     # 明細は先頭数行しか通知に載らない。組の一覧を拾うと肝心の「要対応」が押し出される
+     re.compile(r"^要対応:")),
     ("監修待ちの記事", "editorial_review.py --pending",
      re.compile(r"^要対応:|^\s{2}- ")),
     ("会社表記のゆれ（NAP）", "nap_check.py",

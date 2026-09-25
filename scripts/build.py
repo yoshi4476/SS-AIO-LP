@@ -1432,19 +1432,35 @@ def sync_llms(entries):
     art = re.compile(r"^- \[(.*?)\]\((" + re.escape(SITE_URL) + r"/(?:"
                      + "|".join(re.escape(c) for c in CATEGORIES) + r")/[^/()\s]+/)\)(.*)$")
     t = lt.read_text(encoding="utf-8")
-    out, dropped, renamed = [], [], 0
+    out, dropped, renamed, have = [], [], 0, set()
     for ln in t.split("\n"):
         m = art.match(ln)
         if m and m.group(2) not in live:
             dropped.append(m.group(2))
             continue
+        if m:
+            have.add(m.group(2))
         if m and m.group(1) != live[m.group(2)]["title"]:
             ln = f'- [{live[m.group(2)]["title"]}]({m.group(2)}){m.group(3)}'
             renamed += 1
         out.append(ln)
-    if dropped or renamed:
+    # 公開する記事で行が無いものを「## 主要コンテンツ」の末尾に足す。
+    # 消すだけだと、監修待ち（HELD）で一度消えた行が承認の後も戻らない
+    added = [f'- [{meta["title"]}]({url}): {meta.get("description", "")}'
+             for url, meta in live.items() if url not in have]
+    if added:
+        head = next((i for i, ln in enumerate(out) if ln.strip() == "## 主要コンテンツ"), None)
+        if head is None:
+            out += ["", "## 主要コンテンツ"] + added
+        else:
+            end = next((i for i in range(head + 1, len(out)) if out[i].startswith("## ")), len(out))
+            while end > head + 1 and not out[end - 1].strip():
+                end -= 1          # 節の間の空行は残す
+            out[end:end] = added
+    if dropped or renamed or added:
         lt.write_text("\n".join(out), encoding="utf-8", newline="\n")
-        print(f"SYNC: llms.txt の記事の行を整理（公開しない記事 {len(dropped)}行を削除・題名の差し替え {renamed}行）")
+        print(f"SYNC: llms.txt の記事の行を整理（公開しない記事 {len(dropped)}行を削除・題名の差し替え {renamed}行"
+              f"・行の無い記事 {len(added)}行を追加）")
         for u in dropped[:10]:
             print(f"   削除: {u}")
 

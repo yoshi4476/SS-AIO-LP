@@ -189,6 +189,8 @@ def main():
             mine.setdefault(site, []).append(
                 (p.stem, g("title").strip('"'), _fragments(t), source_hash(p)))
 
+    import editorial_review
+    reviews = editorial_review.load()
     total_gap = 0
     for site, slugs in sorted(mine.items()):
         c = conf[site]
@@ -197,13 +199,16 @@ def main():
         if live is None:
             print(f"■ {site}: 公開状況を取れません（{c['domain']}）")
             continue
-        missing = [s for s, _, _, _ in slugs if s not in live]
+        # 監修待ちは配信しない記事なので、未配信（失敗）に数えない。別に数えて見せる
+        held = [s for s, _, _, _ in slugs if s not in live and s not in reviews]
+        missing = [s for s, _, _, _ in slugs if s not in live and s in reviews]
         # 在るページは、配信時に残した指紋と突き合わせる。
         # 指紋がまだ無いサイトでは、タイトルと本文で判断する
         # 自前でビルドするサイトは同じリポジトリで完結し、配信という工程が無い。
         # 「届いたか」を問う対象ではないので、内容の照合はしない
         if c.get("type") == "self-static":
-            print(f"■ {site}: 手元 {len(slugs)}本 / 自前ビルドのため照合しません")
+            print(f"■ {site}: 手元 {len(slugs)}本 / 自前ビルドのため照合しません"
+                  + (f" / 監修待ち {len(held)}本" if held else ""))
             continue
         man = None if c.get("type") == "wordpress" else live_manifest(c["domain"])
         fresh = set() if man is not None else recently_edited()
@@ -228,8 +233,9 @@ def main():
                 why[s] = reason
         gap = missing + stale
         total_gap += len(gap)
-        print(f"■ {site}: 手元 {len(slugs)}本 / 公開 {len(slugs) - len(missing)}本"
-              f" / 未配信 {len(missing)}本 / 内容が古い {len(stale)}本")
+        print(f"■ {site}: 手元 {len(slugs)}本 / 公開 {len(slugs) - len(missing) - len(held)}本"
+              f" / 未配信 {len(missing)}本 / 内容が古い {len(stale)}本"
+              f" / 監修待ち {len(held)}本（未配信に数えない）")
         for s in gap[:8]:
             print(f"     {s}（{why.get(s, '未配信')}）")
         if len(gap) > 8:

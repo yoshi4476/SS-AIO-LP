@@ -46,7 +46,9 @@ def audit(pdf, month, through=None):
     真 = {"表示回数": int(tot.get("impressions", 0)),
          "クリック": int(tot.get("clicks", 0)),
          "平均順位": round(tot.get("position", 0), 1)}
-    ev = RV._ga_events(M.ga4_property(), start, end)
+    # GA4未設定の社は None。そのまま API に渡すと落ち、GSC の検算まで捨てて毎回照合NGになる
+    pid = M.ga4_property()
+    ev = RV._ga_events(pid, start, end) if pid else {}
     真["リード"] = ev.get("lead_capture", 0)
     rows = RV._gsc(site, start, end, ["query"], 5000).get("rows", [])
     真["検索語数"] = len(rows)

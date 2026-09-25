@@ -56,13 +56,19 @@ def _plain(md):
 
 
 def load(path):
-    t = path.read_text(encoding="utf-8-sig")
+    # 1本の壊れた原稿でビルド全体を止めない（build.py はその記事だけを止めて続行する）
+    try:
+        t = path.read_text(encoding="utf-8-sig")
+    except (OSError, UnicodeDecodeError):
+        return None
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
     if not m:
         return None
     try:
         meta = yaml.safe_load(m.group(1)) or {}
     except yaml.YAMLError:
+        return None
+    if not isinstance(meta, dict):
         return None
     body = _plain(m.group(2))
     flat = re.sub(r"\s+", "", body)

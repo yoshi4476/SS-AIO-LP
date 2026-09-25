@@ -23,6 +23,8 @@ MIN_DEF = 20
 
 
 def _plain(s):
+    # マーカー記法（==…== / **…**）を残すと、説明文や meta description にそのまま出る
+    s = re.sub(r"==(.+?)==|\*\*(.+?)\*\*", lambda m: m.group(1) or m.group(2), s)
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", s)).strip("、。 ")
 
 

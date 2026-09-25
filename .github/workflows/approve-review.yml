@@ -12,33 +12,43 @@ on:
 
 permissions:
   contents: write
+  actions: write        # 記録の後にデプロイを起動する（GITHUB_TOKEN の push では deploy.yml が動かないため）
 
+# 記事の枠と同じ列に並ぶ。枠が site/ や公開台帳を書き換えている最中に push すると必ず競合する
 concurrency:
-  group: approve-review
+  group: article-pipeline
   cancel-in-progress: false
 
 jobs:
   approve:
     runs-on: ubuntu-latest
+    env:
+      SLUGS: ${{ github.event.inputs.slugs }}   # 入力は環境変数で受ける。run に直接埋め込むとコマンドとして実行できてしまう
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: 記録する
-        env:
-          SLUGS: ${{ github.event.inputs.slugs }}
         run: |
+          # 今回記録した slug を残す（公開の後の手順 --finish に渡す）。all のときは記録の前後の差分で決める
+          listed() { python -c "import sys; sys.path.insert(0, 'scripts'); import editorial_review as e; print(*e.load(), sep=chr(10))" | LC_ALL=C sort; }
+          listed > "$RUNNER_TEMP/reviews_before.txt"
           if [ "$SLUGS" = "all" ]; then
             python scripts/editorial_review.py --approve-all-pending
+            listed > "$RUNNER_TEMP/reviews_after.txt"
+            LC_ALL=C comm -13 "$RUNNER_TEMP/reviews_before.txt" "$RUNNER_TEMP/reviews_after.txt" > "$RUNNER_TEMP/approved.txt"
           else
             # shellcheck disable=SC2086
             python scripts/editorial_review.py --approve $SLUGS
+            # shellcheck disable=SC2086
+            printf '%s\n' $SLUGS > "$RUNNER_TEMP/approved.txt"
           fi
+          echo "今回の対象: $(wc -l < "$RUNNER_TEMP/approved.txt")本"
       - name: 依存の導入
         run: pip install -r requirements.txt
-      # 記録しただけでは公開されない。自サイトは build で HTML を作り、site/ の変更で
-      # Cloudflare へのデプロイが動く。配信先は publish_gap が監修済みの未配信分を送る
+      # 記録しただけでは公開されない。自サイトは build で HTML を作ってデプロイを起動し、
+      # 配信先は publish_gap が監修済みの未配信分を送る
       - name: 公開（自サイトのビルドと、配信先への送り出し）
         env:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
@@ -46,16 +56,58 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           python scripts/build.py | grep -E "HELD|BLOCKED|built" || true
-          python scripts/publish_gap.py --publish || echo "::warning::配信先への送り出しに失敗（次の記事枠で publish_gap が再試行します）"
+          date -u +%Y-%m-%dT%H:%M:%SZ > "$RUNNER_TEMP/gap_since.txt"
+          python scripts/publish_gap.py --publish | tee "$RUNNER_TEMP/gap.txt" || echo "::warning::配信先への送り出しに失敗（次の記事枠で publish_gap が再試行します）"
+      # HELD で抜けた記事は、公開の後の手順（管制塔への記録・SNS・既存記事からのリンク）を
+      # 通っていない。公開できたものだけ --finish で通す（台帳が「公開済み」にならないと同じ語がまた書かれる）
+      - name: 公開の後の手順
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          since=$(cat "$RUNNER_TEMP/gap_since.txt")
+          python - "$RUNNER_TEMP/approved.txt" "$RUNNER_TEMP/gap.txt" > "$RUNNER_TEMP/finish.txt" <<'EOF'
+          import re, sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          import publish, sites
+          gap = Path(sys.argv[2]).read_text(encoding="utf-8") if Path(sys.argv[2]).is_file() else ""
+          for slug in Path(sys.argv[1]).read_text(encoding="utf-8").split():
+              p = Path("articles") / f"{slug}.md"
+              meta = publish.read_meta(p) if p.is_file() else None
+              site = sites.find_category_owner((meta or {}).get("category", ""))
+              if not meta or not site:
+                  continue
+              cfg = sites.load(site)
+              if cfg["type"] == "self-static":
+                  ok = (Path("site") / meta["category"] / slug / "index.html").is_file()
+              else:
+                  ok = re.search(r"\] ○ " + re.escape(slug) + r"$", gap, re.M) is not None
+              if ok:
+                  print(site, slug)
+          EOF
+          while read -r site slug; do
+            [ -n "$slug" ] || continue
+            # 標準入力を切る（子の工程が読むと、残りの slug の一覧を食べてしまう）
+            python scripts/publish_flow.py --finish "$site" "$slug" "--since=$since" < /dev/null \
+              || echo "::warning::$slug の公開の後の手順に失敗（台帳を確かめてください）"
+          done < "$RUNNER_TEMP/finish.txt"
       - name: コミット
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/editorial_reviews.jsonl site data/published.json data/body_hash.json
+          # articles は --finish が既存記事へ足した内部リンク（site だけ入れると次のビルドで消える）
+          git add data/editorial_reviews.jsonl site articles data/published.json data/body_hash.json
           git diff --cached --quiet && { echo "新しい記録はありません"; exit 0; }
-          git commit -m "監修の記録: ${{ github.event.inputs.slugs }}"
+          git commit -m "監修の記録: $SLUGS"
           for i in 1 2 3; do
-            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && git push; then exit 0; fi
+            git rebase --abort 2>/dev/null || true     # 途中の rebase を残すと、次の再試行も必ず失敗する
             sleep 5
           done
           echo "::error::記録を push できませんでした"; exit 1
+      - name: 自サイトへデプロイ
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref "${GITHUB_REF_NAME}"

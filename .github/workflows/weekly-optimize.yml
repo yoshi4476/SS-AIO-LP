@@ -55,6 +55,8 @@ jobs:
           claude --version
 
       - name: Git識別情報の設定
+        env:
+          INPUT_SINCE: ${{ inputs.since }}   # 入力は環境変数で受ける（run に直接埋めるとコマンドとして解釈される）
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
@@ -64,7 +66,7 @@ jobs:
           rm -f automation/logs/findings.txt
           # 配信の基点。途中の工程が何度コミット・rebase しても、最後にこの時点からの
           # 差分をまとめて他サイトへ配信する（途中1回だけだと後段の直しが届かなかった）
-          since="${{ inputs.since }}"
+          since="$INPUT_SINCE"
           base=$(git rev-parse HEAD)
           if [ -n "$since" ] && [ "$since" != "HEAD~1" ]; then
             # 取りこぼしを流すときだけ履歴を取り寄せる（checkout は直近1コミットしか持たない）

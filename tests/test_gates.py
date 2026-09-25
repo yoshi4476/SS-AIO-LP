@@ -245,11 +245,15 @@ def test_daily_audit_ignores_unscored_drafts():
         {"slug": "b", "date": today, "score": "", "title": "t2", "category": "c"},
     ]}
     orig = daily_audit.articles_by_site
+    orig_rev = getattr(daily_audit, "_REVIEWS", None)
     daily_audit.articles_by_site = lambda: fixture
+    # 監修の記録が無い記事も公開済みに数えないので、ここでは a を監修済みにして score だけを見る
+    daily_audit._REVIEWS = {"a": {}}
     try:
         by_site = daily_audit.check_volume([])
     finally:
         daily_audit.articles_by_site = orig
+        daily_audit._REVIEWS = orig_rev
     check("scoreのない記事は本数に数えない", len(by_site["ai-lab"]), 1)
 
 

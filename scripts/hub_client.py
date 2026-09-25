@@ -70,12 +70,14 @@ def _open(req):
 
 def _direct(action, p):
     """Sheets API で直接（hub_sheets）。使えない・失敗したら None を返して GAS に落とす"""
-    started = False                                   # 書き込みに入ったか（入る前の失敗は GAS へ落としてよい）
+    HS = None
     try:
         import hub_sheets as HS
+        # 実際に1行でも書けたかは hub_sheets が持つ。ここで立てると、書く前の失敗
+        # （認証・403・404）まで「途中まで書けた」と扱い、記録が GAS に落ちずに消えていた
+        HS.WROTE = False
         if not HS.available():
             return None
-        started = True
         if action == "next_kw":
             return HS.next_kw(p.get("site", ""))
         if action == "all_kw":
@@ -102,7 +104,7 @@ def _direct(action, p):
     except Exception as e:
         # 行を足すだけの記録は、途中まで書けているかもしれない。GAS でやり直すと
         # 同じ公開・同じリライトが2行になり、本数を二重に数える。落とし直さず失敗で返す
-        if started and action in ("publish_log", "rewrite_log"):
+        if HS is not None and getattr(HS, "WROTE", False) and action in ("publish_log", "rewrite_log"):
             print(f"  管制塔への直接記録が途中で失敗しました（{type(e).__name__}）。二重計上を避けるため GAS では記録し直しません")
             return {"ok": False, "error": f"direct: {type(e).__name__}: {str(e)[:120]}"}
         print(f"  管制塔へ直接つなげません（{type(e).__name__}）。GAS 経由に切り替えます")

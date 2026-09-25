@@ -1146,7 +1146,15 @@ def analyze(d):
 
     # エグゼクティブサマリー（総評文）
     cur_, prev_ = d["months"][-1], d["months"][-2]
+    # GA4未接続の社は sessions/cv/ai が計測値ではない0。そこから「伸び悩み」「CV率0%」
+    # 「AI経由0」を書くと、計測していないものを悪化として報告することになる
+    ga_na = bool(d.get("ga_missing"))
     summary = (
+        f"当月は検索クリック{cur_.get('clicks', 0):,}（前月比{mom('clicks')}）、"
+        f"検索表示{cur_.get('impressions', 0):,}（{mom('impressions')}）でした。"
+        f"平均掲載順位は{prev_.get('pos', '-')}位→{cur_.get('pos', '-')}位。"
+        "セッション・CV・AI経由の参照流入は、GA4未接続のため未計測です。"
+        "来月の優先順位は8章「改善点の一覧と、その直し方」に載せています。") if ga_na else (
         f"当月はセッション{cur_.get('sessions', 0):,}（前月比{mom('sessions')}）、"
         f"検索クリック{cur_.get('clicks', 0):,}（{mom('clicks')}）、CV{cur_.get('cv', 0)}件（{mom('cv')}）と、"
         f"主要指標が{'揃って伸長しました' if trend('sessions') == 'up' else '伸び悩みました'}。"
@@ -1200,6 +1208,11 @@ def analyze(d):
         ("新規公開記事", pub_text(d), "60本",
          "毎日2本の自動生成体制の定常値（品質90点以上のみ）"),
     ]
+    if ga_na:
+        targets = [t for t in targets
+                   if t[0] not in ("セッション", "CV（相談+資料DL）", "AI経由参照")]
+        targets.insert(0, ("セッション・CV・AI経由参照", "未計測", "―",
+                           "GA4未接続のため未計測。ga4_property_id を登録した翌号から目標を置く"))
 
     # 機械が読める目標値（翌月号で達成率を突合するために保存する）
     target_nums = {
@@ -1209,6 +1222,10 @@ def analyze(d):
         "cv": tgt(cur.get("cv", 0), 1.5, 2),
         "ai": tgt(d.get("ai_sessions", 0), 1.5, 5),
     }
+    # 未計測の0から作った目標を保存すると、翌号で「未達」と突合される
+    ga_keys = ("sessions", "cv", "ai")
+    if ga_na:
+        target_nums = {k: v for k, v in target_nums.items() if k not in ga_keys}
 
     # 前月号で設定した「当月の目標」との突合（初月は前月号が無いため空になる）
     import json as _json
@@ -1230,7 +1247,7 @@ def analyze(d):
               "cv": "CV（相談+資料DL）", "ai": "AI経由参照"}
         for k, label in jp.items():
             t, a = prev_targets.get(k), actual.get(k, 0)
-            if not t:
+            if not t or (ga_na and k in ga_keys):
                 continue
             rate = round(a / t * 100)
             achievement.append({"label": label, "target": t, "actual": a, "rate": rate,
@@ -1262,6 +1279,11 @@ def analyze(d):
          "base": "3%以上=良好 / 1〜3%=標準 / 1%未満=立ち上げ中",
          "why": "AI検索からの流入比率。まだ市場全体で数%の段階なので、あること自体が先行指標"},
     ]
+    if ga_na:
+        # 判定欄を「要改善」にしない。分母も分子も計測していない
+        for x in assess:
+            if x["k"] in ("CV率", "AI経由の比率"):
+                x.update(v="未計測", j="未計測", why="GA4未接続のため未計測。" + x["why"])
 
     # 広告で同じ流入を買った場合の金額（経営判断のための換算値）
     CPC = 300  # この領域（AIO/SEO/MEO関連KW）の控えめな想定単価（円）
@@ -1272,18 +1294,22 @@ def analyze(d):
         # クリックが0だと「約0円」が並び、集計が壊れているように見える。
         # 実際は公開初月でクリックがまだ発生していないだけなのでそう書く
         "yen": (lambda v: f"約{v:,}円") if ad_value > 0 else (lambda v: "算出前"),
-        "per_article_sessions": round(sess / n_art, 1),
+        "per_article_sessions": "未計測" if ga_na else round(sess / n_art, 1),
         "per_article_clicks": round((cur.get("clicks", 0) or 0) / n_art, 1),
         "per_article_value": round(ad_value / n_art),
     }
 
     # 3行サマリー（詳細を読む前に結論だけ掴めるようにする）
     headline = [
-        f'流入は{"増えました" if trend("sessions") == "up" else "伸び悩みました"}。'
-        f'セッション{cur.get("sessions", 0):,}（前月比{mom("sessions")}）、'
-        f'検索クリック{cur.get("clicks", 0):,}（{mom("clicks")}）。',
-        f'成果は{"前進しました" if trend("cv") == "up" else "横ばいでした"}。'
-        f'CV{cur.get("cv", 0)}件（{mom("cv")}）。'
+        (f'検索クリックは{"増えました" if trend("clicks") == "up" else "伸び悩みました"}。'
+         f'検索クリック{cur.get("clicks", 0):,}（前月比{mom("clicks")}）。'
+         'セッションはGA4未接続のため未計測です。') if ga_na else
+        (f'流入は{"増えました" if trend("sessions") == "up" else "伸び悩みました"}。'
+         f'セッション{cur.get("sessions", 0):,}（前月比{mom("sessions")}）、'
+         f'検索クリック{cur.get("clicks", 0):,}（{mom("clicks")}）。'),
+        ('成果（CV）はGA4未接続のため未計測です。' if ga_na else
+         f'成果は{"前進しました" if trend("cv") == "up" else "横ばいでした"}。'
+         f'CV{cur.get("cv", 0)}件（{mom("cv")}）。')
         + (f'広告で同じクリックを買うと約{ad_value:,}円相当の流入を、記事の資産で獲得しています。'
            if ad_value > 0 else
            '広告換算は当月の検索クリックが0回のため算出前です。表示回数は出ているため、順位が上がり次第この欄に金額が入ります。'),
@@ -1741,6 +1767,9 @@ def _ai_reach_probe():
         import ai_crawler_check as C
         rows = []
         for site_id, domain in C.sites():
+            # クライアントの単体レポートに、他社・運用会社のサイトの到達を載せない
+            if SITE_ID != _sites_mod.primary() and site_id != SITE_ID:
+                continue
             bad = []
             for name, kind, ua in C.CRAWLERS:
                 if kind != "回答":

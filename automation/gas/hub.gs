@@ -342,6 +342,9 @@ function nextKw_(site) {
   rows.forEach(function (r, i) {
     if (site && String(r[0]) !== site) return;
     if (String(r[2]).trim() !== '未着手') return;
+    // 語が空欄・記号だけの行は候補にも残数にも数えない（hub_sheets.next_kw と同じ扱い）。
+    // 数えると kwConflict_ が {ok:false} を返し、空の語を次に書く語として渡していた
+    if (!normKw_(r[1])) return;
     cands.push({ row: i + 2, site: r[0], keyword: r[1], priority: r[3] || 'B',
                  category: r[4] || '', aim: r[5] || '' });
   });
@@ -355,7 +358,7 @@ function nextKw_(site) {
   for (let i = 0; i < cands.length; i++) {
     const c = cands[i];
     const cf = kwConflict_(c.site, c.keyword, rows, c.row);  // 台帳は使い回し、自分の行は除く
-    if (cf.level === 2) { blocked.push({ keyword: c.keyword, why: cf.verdict }); continue; }
+    if (cf.level === 2 || cf.ok === false) { blocked.push({ keyword: c.keyword, why: cf.verdict }); continue; }
     return { ok: true, keyword: c.keyword, category: c.category, aim: c.aim,
              site: c.site, remaining: remaining, need_replenish: remaining <= 5,
              cross_site_warning: cf.other_site, skipped_conflict: blocked };

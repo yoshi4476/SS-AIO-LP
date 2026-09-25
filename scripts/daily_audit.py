@@ -69,11 +69,21 @@ def _is_published(a):
     score未設定の記事はまだPhase 5を通っておらず、publish.pyも配信を拒む
     （score<90はSystemExit）。それを「本日公開」に数えると、本数は満たしたと
     誤表示され、check_liveでは「公開したのに404」という偽の不具合を報告する。
+    監修の記録が無い記事（HELD）も公開されていないので同じく数えない。
     """
     try:
-        return int(a.get("score") or 0) >= 90
+        if int(a.get("score") or 0) < 90:
+            return False
     except ValueError:
         return False
+    global _REVIEWS
+    if _REVIEWS is None:
+        import editorial_review
+        _REVIEWS = editorial_review.load()
+    return a.get("slug") in _REVIEWS
+
+
+_REVIEWS = None      # 監修の記録（1回の実行で1度だけ読む）
 
 
 # 記事を公開する時刻（JST）。この時刻を過ぎていなければ、まだ無くて当然。

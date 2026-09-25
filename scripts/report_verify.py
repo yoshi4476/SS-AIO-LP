@@ -104,12 +104,16 @@ def check(month, through=None):
                     f"**記事の力と分けて書くこと**（合計だけで語らない）")
 
     # ── 4. リードの内訳が合うか ───────────────────────
-    ev = _ga_events(M.ga4_property(), start, end)
+    # GA4未設定の社は None。そのまま API に渡すと落ちるため、リードの検算だけ飛ばす
+    pid = M.ga4_property()
+    ev = _ga_events(pid, start, end) if pid else {}
     umb = ev.get(LEAD_UMBRELLA, 0)
     parts = {k: ev.get(k, 0) for k in LEAD_PARTS}
     s_parts = sum(parts.values())
     print()
     print(f"■ リード（{start} 〜 {end}）")
+    if not pid:
+        print("   GA4未設定のため、リードの検算は飛ばします")
     print(f"   {LEAD_UMBRELLA}（傘）: {umb}")
     for k, v in parts.items():
         print(f"     └ {k}: {v}")

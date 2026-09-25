@@ -870,6 +870,25 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     return True
 
 
+def _delivered(cfg, meta):
+    """この記事が配信先に既にあるか。(在るか, 作業コピー) を返す。
+
+    書き出し先は各 writer と同じ場所を見る（ずれると、配信済みを新記事と取り違える）。
+    作業コピーを作った場合は返して、配信でそのまま使う（取り直さない）
+    """
+    slug = meta["slug"]
+    if cfg["type"] == "self-static":
+        return (ROOT / "site" / meta["category"] / slug / "index.html").is_file(), None
+    if cfg["type"] == "wordpress":
+        found = _wp_call(cfg, f"posts?slug={slug}&status=publish&per_page=1&_fields=id")
+        return bool(isinstance(found, list) and found), None
+    dest = ensure_clone(cfg, _push_token())
+    where = {"nextjs-json": dest / cfg["content_dir"] / f"{slug}.json",
+             "external-md": dest / cfg["content_dir"] / f"{slug}.md",
+             "external-html": dest / "blog" / slug / "index.html"}.get(cfg["type"])
+    return bool(where and where.is_file()), dest
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True)
@@ -888,19 +907,23 @@ def main():
         raise SystemExit(f"公開基準未達のため配信しません: score={score}"
                          f" / 観点 {meta.get('score_breakdown') or '—'}"
                          "（90点以上かつ各観点の足切りを通ることが必要）")
+    # 量産の指紋は、配信先にまだ無い記事だけに当てる。配信済みの直しの再配信まで止めると、
+    # 既にある同型の組を書き分ける修正すら出せなくなる。date だけで判定すると、
+    # 配信済みの記事が後から書かれた記事との重なりで再配信を止められ続ける。
+    # 監修の判定より先に見る（品質NGの記事を HELD にすると、書き直しに回らない）
+    import scaled_guard
+    bad = scaled_guard.check(args.slug)
+    dest = None
+    if bad:
+        delivered, dest = _delivered(cfg, meta)
+        if not delivered:
+            raise SystemExit("BLOCKED(公開不可): " + " / ".join(bad))
     # 配信先のテンプレートは監修者を固定で表示する。記録の無い記事を出すと表示が実態と食い違う
     import editorial_review
     if not editorial_review.reviewed(args.slug):
         raise SystemExit(f"HELD(監修待ち): {args.slug} は監修の記録がありません"
                          f"（確認したら python scripts/editorial_review.py --approve {args.slug}。"
                          "記録後、publish_gap が配信します）")
-    # 量産の指紋は新しく書いた記事だけに当てる。配信済みの直しの再配信まで止めると、
-    # 既にある同型の組を書き分ける修正すら出せなくなる
-    import scaled_guard
-    if str(meta.get("date", "")) >= scaled_guard.SINCE:
-        bad = scaled_guard.check(args.slug)
-        if bad:
-            raise SystemExit("BLOCKED(公開不可): " + " / ".join(bad))
     if meta["category"] not in cfg.get("categories", {}):
         raise SystemExit(f"カテゴリ '{meta['category']}' は {cfg['id']} に定義されていません"
                          f"（候補: {', '.join(cfg.get('categories', {}))}）")
@@ -921,7 +944,7 @@ def main():
         raise SystemExit(0 if ok else 1)
 
     token = _push_token()
-    dest = ensure_clone(cfg, token)
+    dest = dest or ensure_clone(cfg, token)
 
     if cfg["type"] == "nextjs-json":
         written, chars = write_nextjs_json(cfg, dest, meta, body)

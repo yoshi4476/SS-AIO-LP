@@ -100,7 +100,8 @@ def push(cfg, dest: Path, msg):
     u = f"https://x-access-token@github.com/{cfg['repo']}.git"
     if publish.try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest, env=env):
         return True
-    if (publish.try_run(["git", "fetch", "origin"], cwd=dest)
+    # origin はトークン付きのURLで作ったクローン。認証を渡さないと fetch が必ず落ち、取り込み直しが効かない
+    if (publish.try_run(["git", "fetch", "origin"], cwd=dest, env=env)
             and publish.try_run(["git", "rebase", f"origin/{cfg['branch']}"], cwd=dest)):
         return publish.try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest, env=env)
     return False

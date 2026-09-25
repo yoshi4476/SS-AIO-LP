@@ -201,10 +201,13 @@ def review(got):
         if v is None:
             ng.append(f"「{r['label']}」の値が数字ではありません: {r['value']!r}")
             continue
-        # 個社が分かる表記は公開しない（RULES 6）。警告だけにしていたため、そのまま公開されていた
-        if re.search(r"株式会社|有限会社|合同会社|店\b|医院|クリニック[^・]", r["label"]) and "業種" not in r["label"]:
-            ng.append(f"「{r['label']}」は個社名に見えます。区分名にしてください")
+        # 個社が分かる表記は公開しない（RULES 6）。会社の形態名は確実に個社なので止める。
+        # 「店」「医院」「クリニック」は業種名（飲食店・歯科医院）にも入るため、止めると雛形の区分すら通らない
+        if _corp(r["label"]):
+            ng.append(f"「{r['label']}」は個社名に見えます（{_corp(r['label'])}）。区分名にしてください")
             continue
+        if re.search(r"店|医院|クリニック", r["label"]) and "業種" not in r["label"]:
+            warn.append(f"「{r['label']}」が店名・医院名なら区分名にしてください（業種名なら問題ありません）")
         if _corp(r.get("note")):
             ng.append(f"「{r['label']}」の備考に会社名があります（{_corp(r.get('note'))}）。区分で書いてください")
             continue

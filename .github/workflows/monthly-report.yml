@@ -107,7 +107,21 @@ jobs:
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
-        run: python scripts/group_report.py --email ${{ steps.day.outputs.through }}
+        # 照合の食い違いで止めるのは想定内（送らずに知らせる）。ここでジョブを failure にすると
+        # 自動修復が再発行し、各社のまとめが2通届く。本当に落ちたときだけ failure にする
+        run: |
+          mkdir -p automation/logs
+          rc=0
+          out=$(python scripts/group_report.py --email ${{ steps.day.outputs.through }} 2>&1) || rc=$?
+          echo "$out"
+          if [ "$rc" -ne 0 ]; then
+            if echo "$out" | grep -q "取り直した値と食い違います"; then
+              echo "::warning::グループレポートは照合で止めました（送っていません）"
+              echo "要対応: グループ月次レポートが照合で止まり、送っていません（実行ログ参照）" >> automation/logs/findings.txt
+            else
+              exit "$rc"
+            fi
+          fi
 
       # 目標値は翌月号の達成率突合に使うためリポジトリへ残す
       # 対策キーワードの在庫を、月1回・必要なサイトだけ組み直す。

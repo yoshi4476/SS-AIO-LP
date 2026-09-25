@@ -28,7 +28,7 @@ JST = timezone(timedelta(hours=9))
 def load():
     out = {}
     if LEDGER.is_file():
-        for ln in LEDGER.read_text(encoding="utf-8").splitlines():
+        for ln in LEDGER.read_text(encoding="utf-8-sig").splitlines():
             try:
                 r = json.loads(ln)
             except ValueError:

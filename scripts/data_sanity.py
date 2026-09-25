@@ -174,6 +174,10 @@ def main():
         prop = cfg.get("ga4_property_id")
         print(f"  {cfg['name'][:22]}")
         out = []
+        if not prop:
+            # 未設定は「確かめられなかった」ではない。注意に数えると毎週 SANITY_OK=no が消えない
+            print("     GA4未設定のため確かめません\n")
+            continue
         try:
             check_double_count(prop, a.days, out)
             tot, bad = check_invalid(prop, a.days, out)

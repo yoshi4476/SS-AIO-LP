@@ -43,6 +43,11 @@ WEAK = [
 ]
 
 
+def _label(pat):
+    """理由の表示用。先読み・後読みは語ではないので除く（kw_guard・月次レポートの表に「(?<」が出ていた）"""
+    return re.sub(r"[|$\\s]", "/", re.sub(r"\(\?<?[!=][^)]*\)", "", pat))[:16]
+
+
 def score(kw):
     """(点数, 理由) を返す。1以上なら開く理由がある語とみなす"""
     s = str(kw).lower()
@@ -50,11 +55,11 @@ def score(kw):
     for w, pat in STRONG:
         if re.search(pat, s):
             pts += w
-            why.append("+" + re.sub(r"[|$\\s]", "/", pat)[:16])
+            why.append("+" + _label(pat))
     for w, pat in WEAK:
         if re.search(pat, s):
             pts += w
-            why.append(re.sub(r"[|$\\s]", "/", pat)[:16])
+            why.append(_label(pat))
     # 語数が多いほど具体的で、答えが1文で済みにくい
     if len(re.split(r"[\s　]+", s.strip())) >= 3:
         pts += 1

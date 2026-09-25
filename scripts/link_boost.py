@@ -257,6 +257,17 @@ def main():
         poor = [only] if only in arts else []
         if not poor:
             print(f"   --only の記事が見つかりません: {only}")
+        else:
+            # 監修待ち・足切りの記事は公開されない。そこへ既存記事から張ると、
+            # 別リポジトリの社では配信済みの記事から404へ飛ぶ
+            import editorial_review
+            import publish
+            if not editorial_review.reviewed(only):
+                print(f"   {only} は監修の記録が無い（未公開）ため、リンクを張りません")
+                poor = []
+            elif not publish.gate_ok(publish.read_meta(arts[only]["path"]) or {}):
+                print(f"   {only} は公開の基準（score・観点の足切り）を通っていないため、リンクを張りません")
+                poor = []
     elif rescue:
         tg = rescue_targets(site, arts, cnt)
         poor = [s for s, _, _, _ in tg]

@@ -21,6 +21,7 @@ SA = ROOT / "indexing-service-account.json"
 SCOPE = ["https://www.googleapis.com/auth/spreadsheets"]
 KW_COLS = 11        # KW台帳: サイト, キーワード, 状態, 優先度, 想定カテゴリ, 狙い, 登録日, 着手日, 公開日, 記事URL, 備考
 _SV = None
+WROTE = False       # 1行でも append できたか。hub_client が「GAS でやり直すと二重になるか」の判断に使う
 
 
 def sheet_id():
@@ -59,7 +60,10 @@ def norm_kw(s):
     落とす記号が1つでも違うと、GAS なら弾く重複（「〜とは？」と「〜とは」）を直接接続では通してしまう"""
     s = str(s or "")
     s = "".join(chr(ord(c) - 0xFEE0) if "Ａ" <= c <= "Ｚ" or "ａ" <= c <= "ｚ" or "０" <= c <= "９" else c for c in s)
-    return re.sub(r"[\s　・|｜:：\-—?？!！。、,.／/（）()【】\[\]]", "", s).lower()
+    # 空白は JS の \s と同じ集合を明示する。Python の \s は \x1c-\x1f・\x85 を含み BOM を含まないため、
+    # 同じ語が GAS と直接接続とで別の語になっていた
+    return re.sub(r"[\t\n\x0b\x0c\r \xa0  -     　﻿"
+                  r"　・|｜:：\-—?？!！。、,.／/（）()【】\[\]]", "", s).lower()
 
 
 def rows(tab, cols):
@@ -74,8 +78,10 @@ def _set(tab, row, col, value):
 
 
 def _append(tab, values):
+    global WROTE
     _svc().values().append(spreadsheetId=sheet_id(), range=f"'{tab}'!A1", valueInputOption="USER_ENTERED",
                            insertDataOption="INSERT_ROWS", body={"values": [values]}).execute()
+    WROTE = True
 
 
 # ── KW台帳 ────────────────────────────────────────────
@@ -108,7 +114,7 @@ def _conflicts(site, keyword, rs, self_i):
 def next_kw(site):
     rs = rows("KW台帳", KW_COLS)
     cands = sorted([(i, r) for i, r in enumerate(rs)
-                    if r[1] and (not site or str(r[0]) == site) and str(r[2]).strip() == "未着手"],
+                    if norm_kw(r[1]) and (not site or str(r[0]) == site) and str(r[2]).strip() == "未着手"],
                    key=lambda x: str(x[1][3] or "B"))
     if not cands:
         return {"ok": True, "keyword": None, "remaining": 0, "need_replenish": True}
@@ -182,7 +188,7 @@ def add_kw(site, keywords):
         if not k or k in live:
             continue
         _append("KW台帳", [site, kw["keyword"], "未着手", kw.get("priority") or "B", kw.get("category") or "",
-                          kw.get("aim") or "", _now(), "", "", "", kw.get("note") or "自動補充"])
+                          kw.get("aim") or "", _now(), "", "", "", kw.get("note") or ""])
         live.add(k)
         added.append(kw["keyword"])
     return {"ok": True, "added": len(added), "keywords": added}

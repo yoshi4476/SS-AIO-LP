@@ -155,8 +155,10 @@ def latest_slug(site):
     人が指定しなくても直近の1本を確認できる。
     """
     import subprocess
+    import editorial_review
     import sites as _s
     root = Path(__file__).resolve().parent.parent
+    recs = editorial_review.load()
     # 「追加」だけを見る。変更まで拾うと、内部リンクの付け足しで毎日書き換わる
     # 既存記事を「新記事」として確かめにいく。_conflicted/ など下の階層は公開しない記事
     r = subprocess.run(["git", "show", "--name-only", "--diff-filter=A", "--pretty=", "HEAD"],
@@ -167,7 +169,8 @@ def latest_slug(site):
                 and line.count("/") == 1):
             continue
         p = root / line
-        if not p.is_file():
+        # 監修待ちの記事は公開していない。確かめにいくと「公開されていない」を失敗として報告する
+        if not p.is_file() or not editorial_review.reviewed(p.stem, recs):
             continue
         fm = p.read_text(encoding="utf-8-sig").split("---", 2)[1]
         cat = (re.search(r"^category:\s*(\S+)", fm, re.M) or [0, ""])[1]

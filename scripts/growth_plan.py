@@ -72,10 +72,16 @@ def measure(label):
         m = s["months"][0]
         # 片方だけ欠けたサイトを0で足すと、合計が小さく出て「遅れ」や小さい起点になる。
         # sessions/clicks は月次の取得が通ったときだけ入る。ai は GA4 が落ちると0のまま残る
-        if "sessions" not in m or "clicks" not in m or s.get("ga_error"):
+        if "clicks" not in m:
+            return None
+        tot["clicks"] += int(m.get("clicks") or 0)
+        # GA4 を持たない社は GA 分を数えない（クリックだけ足す）。None にすると
+        # 1社でも未設定があるだけで計画が恒久的に取れなくなる。止めるのは一時的な取得失敗だけ
+        if not cfg.get("ga4_property_id"):
+            continue
+        if "sessions" not in m or s.get("ga_error"):
             return None
         tot["sessions"] += int(m.get("sessions") or 0)
-        tot["clicks"] += int(m.get("clicks") or 0)
         tot["cv"] += int(m.get("cv") or 0)
         tot["ai"] += int(s.get("ai") or 0)
     return tot
