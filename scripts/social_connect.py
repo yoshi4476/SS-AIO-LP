@@ -182,6 +182,57 @@ def listing():
     return 0
 
 
+def refresh():
+    """Threads の鍵を切れる前に自動で更新する（週次の CI が呼ぶ）。
+
+    Threads は発行から24時間以上たった有効な鍵なら、人の操作なしに新しい60日の鍵をもらえる。
+    更新した鍵は GitHub の SOCIAL_TOKENS_JSON に書き戻す（GH_SECRET_TOKEN が要る）。
+    LinkedIn は審査を通ったアプリにしか更新用の鍵が出ないので、ここでは更新しない（期限の知らせのみ）
+    """
+    import os
+    raw = os.environ.get("SOCIAL_TOKENS_JSON") or (FILE.read_text(encoding="utf-8") if FILE.is_file() else "")
+    if not raw:
+        print("SOCIAL_REFRESH=skip（鍵がありません）")
+        return 0
+    d, changed, today = json.loads(raw), [], date.today()
+    for site, ent in d.items():
+        exp = ent.get("THREADS_EXPIRES")
+        if not ent.get("THREADS_TOKEN") or not exp or date.fromisoformat(exp) - today > timedelta(days=30):
+            continue
+        try:
+            t = get("https://graph.threads.net/refresh_access_token?" + urllib.parse.urlencode({
+                "grant_type": "th_refresh_token", "access_token": ent["THREADS_TOKEN"]}))
+            ent["THREADS_TOKEN"] = t["access_token"]
+            ent["THREADS_EXPIRES"] = (today + timedelta(seconds=int(t.get("expires_in", 5184000)))).isoformat()
+            changed.append(site)
+        except Exception as e:
+            print(f"要対応: {site} の Threads の鍵を更新できませんでした（{type(e).__name__}）。"
+                  f"python scripts/social_connect.py --site {site} --threads でつなぎ直してください")
+    if not changed:
+        print("SOCIAL_REFRESH=none")
+        return 0
+    body = json.dumps(d, ensure_ascii=False)
+    tok = os.environ.get("GH_SECRET_TOKEN", "")
+    if tok:
+        import refresh_tokens as RT
+        try:
+            RT.update_secret("SOCIAL_TOKENS_JSON", body, REPO, tok)
+            print(f"Threads の鍵を更新しました: {', '.join(changed)}")
+            print("SOCIAL_REFRESH=yes")
+            return 0
+        except Exception as e:
+            print(f"要対応: 更新した Threads の鍵を GitHub に書き戻せませんでした（{type(e).__name__}）。"
+                  "GH_SECRET_TOKEN に Secrets の書き込み権限があるか確かめてください")
+            return 0
+    if FILE.is_file():          # 手元で実行したとき
+        save(d)
+        print("SOCIAL_REFRESH=yes")
+        return 0
+    print("要対応: Threads の鍵を更新しましたが、GH_SECRET_TOKEN が無いため GitHub に書き戻せません"
+          "（このままだと期限で切れます）")
+    return 0
+
+
 def check():
     """期限が14日以内の鍵を要対応で知らせる。CI では SOCIAL_TOKENS_JSON を読む"""
     import os
@@ -208,7 +259,10 @@ def main():
     ap.add_argument("--page", default="", help="Facebook ページ名の一部（複数ページを管理しているとき）")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--refresh", action="store_true", help="Threads の鍵を切れる前に更新する（週次）")
     a = ap.parse_args()
+    if a.refresh:
+        return refresh()
     if a.list:
         return listing()
     if a.check:

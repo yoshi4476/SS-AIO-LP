@@ -101,9 +101,14 @@ jobs:
           LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
           THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}
         run: |
           pip install --quiet pynacl
           python scripts/refresh_tokens.py || true
+          # 社ごとの Threads の鍵を切れる前に更新する（人の操作なしで60日ずつ延びる）
+          mkdir -p automation/logs
+          python scripts/social_connect.py --refresh 2>&1 | tee /tmp/social.txt || true
+          grep '^要対応' /tmp/social.txt >> automation/logs/findings.txt || true
 
       # GSCが読めているかを毎週確認する。ここが黙って落ちると補充が
       # サジェスト頼りになり、有限の候補を掘り尽くして在庫が枯れる。
