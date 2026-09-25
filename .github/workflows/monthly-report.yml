@@ -115,7 +115,8 @@ jobs:
           out=$(python scripts/group_report.py --email ${{ steps.day.outputs.through }} 2>&1) || rc=$?
           echo "$out"
           if [ "$rc" -ne 0 ]; then
-            if echo "$out" | grep -q "取り直した値と食い違います"; then
+            # 照合そのものが動かなかった（一時的な取得エラー等）ときは failure にして自動修復に出し直させる
+            if echo "$out" | grep -q "取り直した値と食い違います" && ! echo "$out" | grep -q "照合が動きませんでした"; then
               echo "::warning::グループレポートは照合で止めました（送っていません）"
               echo "要対応: グループ月次レポートが照合で止まり、送っていません（実行ログ参照）" >> automation/logs/findings.txt
             else

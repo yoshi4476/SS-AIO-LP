@@ -14,9 +14,10 @@ permissions:
   contents: write
   actions: write        # 記録の後にデプロイを起動する（GITHUB_TOKEN の push では deploy.yml が動かないため）
 
-# 記事の枠と同じ列に並ぶ。枠が site/ や公開台帳を書き換えている最中に push すると必ず競合する
+# 記事の枠とは別の列にする。同じグループでは待てるのが1件だけで、後から並んだ枠が
+# 待っている承認を取り消す（記録が残らない）。枠との push の競合は、下の rebase の再試行で吸収する
 concurrency:
-  group: article-pipeline
+  group: approve-review
   cancel-in-progress: false
 
 jobs:

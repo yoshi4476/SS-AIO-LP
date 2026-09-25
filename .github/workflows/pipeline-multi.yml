@@ -515,6 +515,8 @@ jobs:
         continue-on-error: true
         env:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}          # 配信できた記事の公開の後の手順（台帳への記録）に使う
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           out=$(python scripts/publish_gap.py --publish) || true
           echo "$out"
@@ -522,6 +524,14 @@ jobs:
           if [ "${n:-0}" -gt 0 ]; then
             echo "::warning::未配信が ${n} 本ありました。この実行で配信しています"
           fi
+          # ここで配信できた記事は、公開の後の手順（台帳・SNS・既存記事からのリンク）を通っていない
+          # ことがある（承認の回に配信できず翌日に回った記事など）。finish は台帳が公開済みなら何もしない
+          echo "$out" | grep -oE '\] ○ [a-z0-9-]+$' | awk '{print $3}' | while read -r slug; do
+            site=$(python -c "import sys; sys.path.insert(0,'scripts'); import sites, publish; m=publish.read_meta(__import__('pathlib').Path('articles')/(sys.argv[1]+'.md')); print(sites.find_category_owner((m or {}).get('category','')) or '')" "$slug")
+            [ -n "$site" ] || continue
+            python scripts/publish_flow.py --finish "$site" "$slug" < /dev/null \
+              || echo "::warning::$slug の公開の後の手順に失敗"
+          done
 
       - name: KPI集計 → 管制塔ダッシュボード
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.id == steps.site.outputs.first && github.event.schedule == '0 23 * * *'

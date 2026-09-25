@@ -131,7 +131,7 @@ def main():
     _ym = str(meta.get("date", ""))[:7] or datetime.now().strftime("%Y-%m")
     _n = sum(1 for a in daily_audit.articles_by_site().get(site_id, [])
              if a["date"][:7] == _ym and a["slug"] != slug
-             and daily_audit._is_published(a))   # 未採点の下書きは配信されていないので数えない
+             and daily_audit._is_published(a, need_review=False))   # 未採点は数えない。監修待ちは書いた本数に入れる
     if _n >= daily_audit.MONTHLY_CAP:
         raise SystemExit(
             f"{site_id} は今月すでに {_n} 本公開しており、上限 "
@@ -175,7 +175,7 @@ def main():
     def exit_held():
         # 監修待ちは品質の不合格ではない。失敗で返すと救済の工程が書き直しに回すため、0で抜ける
         print(f"HELD(監修待ち): {slug} は監修の記録が無いため公開していません"
-              f"（確認したら python scripts/editorial_review.py --approve {slug}）")
+              f"（確認したら GitHub の Actions →「監修の記録」に {slug} を入れて実行）")
         raise SystemExit(0)
 
     # 3. 配信（サイト種別ごとの出口）

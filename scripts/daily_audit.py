@@ -63,19 +63,23 @@ def articles_by_site():
     return out
 
 
-def _is_published(a):
+def _is_published(a, need_review=True):
     """score>=90（公開基準）が付いた記事だけを「公開済み」として数える。
 
     score未設定の記事はまだPhase 5を通っておらず、publish.pyも配信を拒む
     （score<90はSystemExit）。それを「本日公開」に数えると、本数は満たしたと
     誤表示され、check_liveでは「公開したのに404」という偽の不具合を報告する。
-    監修の記録が無い記事（HELD）も公開されていないので同じく数えない。
+    監修の記録が無い記事（HELD）も公開されていないので、need_review=True では数えない。
+    ただし本数と月の上限は need_review=False で数える。監修待ちを「書いていない」と数えると、
+    救済が毎日記事を書き足し、書いた分もまた監修待ちになって本数が膨らみ続ける
     """
     try:
         if int(a.get("score") or 0) < 90:
             return False
     except ValueError:
         return False
+    if not need_review:
+        return True
     global _REVIEWS
     if _REVIEWS is None:
         import editorial_review
@@ -107,7 +111,7 @@ def _due_now(sid):
 def check_volume(todo):
     """当日の公開本数が目標に届いているか（月の上限も見る）"""
     print(f"■ 本数（目標: 1サイト {DAILY_TARGET}本/日・上限 {MONTHLY_CAP}本/月・{today_iso()}）")
-    by_site = {sid: [a for a in arts if _is_published(a)]
+    by_site = {sid: [a for a in arts if _is_published(a, need_review=False)]
                for sid, arts in articles_by_site().items()}
     ym = today_iso()[:7]
     for sid, arts in by_site.items():
@@ -146,6 +150,8 @@ def check_live(todo, by_site):
     for sid, arts in by_site.items():
         for a in arts:
             if a["date"] != today_iso():
+                continue
+            if not _is_published(a):        # 監修待ちはまだ公開されていないので、404 は正常
                 continue
             meta = {"slug": a["slug"], "category": a.get("category", "")}
             url = sites_mod.article_url(cfgs[sid], meta)

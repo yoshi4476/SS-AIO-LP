@@ -922,8 +922,8 @@ def main():
     import editorial_review
     if not editorial_review.reviewed(args.slug):
         raise SystemExit(f"HELD(監修待ち): {args.slug} は監修の記録がありません"
-                         f"（確認したら python scripts/editorial_review.py --approve {args.slug}。"
-                         "記録後、publish_gap が配信します）")
+                         f"（確認したら GitHub の Actions →「監修の記録」に {args.slug} を入れて実行。"
+                         "配信と台帳への記録まで行います）")
     if meta["category"] not in cfg.get("categories", {}):
         raise SystemExit(f"カテゴリ '{meta['category']}' は {cfg['id']} に定義されていません"
                          f"（候補: {', '.join(cfg.get('categories', {}))}）")

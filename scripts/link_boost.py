@@ -275,7 +275,13 @@ def main():
         for s, pos, imp, n in tg:
             print(f"     {pos:>5.1f}位 表示{imp:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
     else:
-        poor = [s for s, n in cnt.items() if n <= LOW]
+        # 監修待ち・品質の門を通らない記事へは張らない。別リポジトリの社では、
+        # 書き換えた既存記事が週次で配信され、公開前の記事への404リンクになる
+        import editorial_review
+        import publish as _P
+        _recs = editorial_review.load()
+        poor = [s for s, n in cnt.items() if n <= LOW and s in _recs
+                and _P.gate_ok(_P.read_meta(arts[s]["path"]) or {})]
         poor.sort(key=lambda s: cnt[s])
         print(f"■ {site}: {len(arts)}記事 / 被リンク{LOW}本以下 {len(poor)}記事")
     import sites as S

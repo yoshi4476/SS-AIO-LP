@@ -191,8 +191,10 @@ jobs:
           # 落ちた run でも、各社のまとめは always() で送り終えていることがある（グループ版だけ落ちた回など）。
           # そのまま各社分を作り直して送ると、同じまとめが2通届く。送り終えていたら各社分は飛ばす
           sent=$(gh api "repos/${{ github.repository }}/actions/runs/$RUN_ID/jobs" \
-            --jq '[.jobs[].steps[]? | select(.name == "各社のレポートを1通にまとめて送る" and .conclusion == "success")] | length' \
+            --jq '[.jobs[].steps[]? | select((.name == "各社のレポートを1通にまとめて送る" or .name == "月次レポート生成・メール送付（サイト単体の詳細版）") and .conclusion == "success")] | length' \
             2>/dev/null || echo 0)
+          # まとめの工程は always() で、各社分が作られていなくても success になる。両方の成功を見る
+          [ "${sent:-0}" -ge 2 ] && sent=1 || sent=0
           pip install --quiet playwright google-analytics-data google-api-python-client google-auth pymupdf
           python -m playwright install --with-deps chromium
           printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
