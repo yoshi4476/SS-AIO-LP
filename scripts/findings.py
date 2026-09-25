@@ -31,6 +31,8 @@ CHECKS = [
     ("量産の指紋（同型記事・定型文・長さの偏り）", "scaled_guard.py",
      # 明細は先頭数行しか通知に載らない。組の一覧を拾うと肝心の「要対応」が押し出される
      re.compile(r"^要対応:")),
+    ("SNS の鍵の期限（Threads・LinkedIn は60日）", "social_connect.py --check",
+     re.compile(r"^要対応:")),
     ("YouTube の許可の上限（未確認アプリは累計100）", "youtube_upload.py --users",
      re.compile(r"^要対応:")),
     ("監修待ちの記事", "editorial_review.py --pending",

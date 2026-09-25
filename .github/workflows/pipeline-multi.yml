@@ -296,6 +296,8 @@ jobs:
           LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
           LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
           LINKEDIN_PERSON_ID: ${{ secrets.LINKEDIN_PERSON_ID }}
+          # 社ごとのアカウント（social_connect.py が登録。クライアントの記事はその社にだけ投稿する）
+          SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}
         run: |
           # 未登録の鍵は空文字で渡る。空のまま置くと claude が API の鍵として扱って落ちるので外す
           [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY

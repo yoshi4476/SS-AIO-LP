@@ -68,3 +68,6 @@ gbp-token-*.json
 intake/下書き/
 # 口コミの返信案（投稿者の名前・本文が入る。公開リポジトリには置かない）
 data/reviews/
+
+# 社ごとのSNSの鍵（social_connect.py の控え。GitHub では SOCIAL_TOKENS_JSON）
+social-tokens.json

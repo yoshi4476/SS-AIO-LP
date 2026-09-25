@@ -59,10 +59,32 @@ def is_set(v):
     return bool(v) and not v.upper().startswith("YOUR_")
 
 
+SOCIAL_FILE = ROOT / "social-tokens.json"      # 手元の控え（.gitignore 済み）
+
+
+def social():
+    """社ごとの鍵。CI では SOCIAL_TOKENS_JSON、手元では social-tokens.json（social_connect.py が作る）。
+    形: {"_default": {...自社3サイト共通...}, "<site_id>": {"FB_PAGE_ID": ..., ...}}"""
+    import os
+    raw = os.environ.get("SOCIAL_TOKENS_JSON", "")
+    if not raw and SOCIAL_FILE.is_file():
+        raw = SOCIAL_FILE.read_text(encoding="utf-8")
+    try:
+        return json.loads(raw) if raw else {}
+    except ValueError:
+        return {}
+
+
 def pick(e, name, site_id):
-    """サイト別の値を優先し、無ければ共通の値を使う（1アカウント運用でもそのまま動く）"""
+    """その社の鍵を優先する。**クライアントの記事は、その社の鍵が無ければ投稿しない**
+    （共通の鍵へ落とすと、クライアントの記事が運営会社のアカウントに流れる）"""
+    s = social()
+    if (s.get(site_id) or {}).get(name):
+        return s[site_id][name]
+    if (ROOT / "data" / "clients" / site_id).is_dir():
+        return ""
     suf = site_id.upper().replace("-", "_")
-    return e.get(f"{name}_{suf}") or e.get(name, "")
+    return e.get(f"{name}_{suf}") or (s.get("_default") or {}).get(name) or e.get(name, "")
 
 
 # 媒体ごとの書き方。同じ文面を全媒体に流すと、どこでも中途半端になる。

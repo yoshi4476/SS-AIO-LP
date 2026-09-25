@@ -590,6 +590,8 @@ jobs:
           fi
 
       - name: 見つかったものを集めて知らせる
+        env:
+          SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
         run: |
           python scripts/findings.py || true
 
