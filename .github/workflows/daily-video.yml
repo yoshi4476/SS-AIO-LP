@@ -1,0 +1,65 @@
+# 記事動画を毎日1本だけ YouTube へ上げる（3サイトを順番に）
+#
+# AI検索での可視性と最も強く相関するのは YouTube での言及（0.71・被リンクの3倍）。
+# ただし同じ型の動画を1日に何本も上げると、YouTube が量産コンテンツとして扱い、
+# チャンネルごと表示を抑えられる。本数ではなく毎日続くことを取る。
+# リライトで読み上げ部分の数字が変わった記事は、古い動画を限定公開に下げて作り直す（同じ1本の枠）。
+name: 記事動画（毎日1本）
+
+on:
+  schedule:
+    - cron: "30 1 * * *"   # JST 10:30（記事の枠と時刻をずらす）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write           # 動画を記事に埋めたあと、デプロイを起動する（GITHUB_TOKEN の push では動かない）
+
+concurrency:
+  group: daily-video
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TZ: Asia/Tokyo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 準備
+        run: |
+          sudo apt-get update -qq > /dev/null 2>&1 || true
+          sudo apt-get install -y -qq ffmpeg fonts-noto-cjk > /dev/null 2>&1 || true
+          command -v ffmpeg > /dev/null || echo "::warning::ffmpeg が入らず、記事動画を作れません"
+          pip install --quiet -r requirements.txt edge-tts
+      - name: 動画を作って上げる
+        env:
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_TOKEN_JSON: ${{ secrets.YOUTUBE_TOKEN_JSON }}
+        run: |
+          [ -n "$YOUTUBE_CLIENT_JSON" ] && printf '%s' "$YOUTUBE_CLIENT_JSON" > youtube-client.json
+          [ -n "$YOUTUBE_TOKEN_JSON" ]  && printf '%s' "$YOUTUBE_TOKEN_JSON"  > youtube-token.json
+          python scripts/article_videos.py --write --limit 1 --days 7 2>&1 | tail -8 || true
+          rm -f youtube-client.json youtube-token.json
+      - name: 記事に埋めてコミット
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python scripts/build.py > /dev/null 2>&1 || echo "::warning::ビルドに失敗（動画の埋め込みは次のビルドで入ります）"
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          git add data/videos.json site data/published.json data/body_hash.json 2>/dev/null || true
+          git diff --cached --quiet && { echo "変更なし"; exit 0; }
+          git commit -q -m "記事動画: $(date '+%Y-%m-%d')"
+          pushed=0
+          for i in 1 2 3; do
+            if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then pushed=1; break; fi
+            git rebase --abort 2>/dev/null || true
+            sleep 5
+          done
+          [ "$pushed" = 1 ] || { echo "::error::動画の台帳を push できませんでした"; exit 1; }
+          gh workflow run deploy.yml --ref "${GITHUB_REF_NAME}" || echo "::warning::デプロイを起動できませんでした（次の push で反映されます）"

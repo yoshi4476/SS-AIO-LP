@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-"""公開した記事を、毎週まとめて短い動画にして YouTube へ上げる。
+"""公開した記事を、毎日1本ずつ短い動画にして YouTube へ上げる。
+
+1日1本にしているのは、同じ型の動画を大量に上げると YouTube が量産コンテンツとして
+扱い、チャンネルごと表示を抑えられるため（1日6本は危ない）。
+記事をリライトして読み上げ部分の数字が変わったら、古い動画は限定公開に下げ（消さない）、
+その記事を作り直しの列の先頭に置く。作り直しも1日1本の枠の中で行う。
 
 **なぜ要るか**: AI検索での可視性と最も強く相関するのは YouTube での言及
 （AI Overviews 0.712 / ChatGPT 0.737。Ahrefs・75,000ブランド・Spearman）。
@@ -66,6 +71,31 @@ def candidates(days, limit):
     return out
 
 
+def _nums(script):
+    """読み上げる文に含まれる数字（時点表記の年月も含む）。記事と動画の食い違いはここで見る"""
+    say = " ".join(s["say"] for s in script.get("segments", []))
+    return sorted(set(re.findall(r"\d[\d,.]*", say)))
+
+
+def stale(ledger):
+    """動画にした後で、読み上げ部分の数字が変わった記事。以前の分は今を基準として控えるだけ"""
+    import video_make as VM
+    out = []
+    for slug, rec in ledger.items():
+        if not rec.get("youtube") or not (ROOT / "articles" / f"{slug}.md").is_file():
+            continue
+        try:
+            now = _nums(VM.from_article(slug))
+        except SystemExit:
+            continue
+        if "nums" not in rec:
+            rec["nums"] = now
+            continue
+        if now != rec["nums"]:
+            out.append(slug)
+    return out
+
+
 def note_token_missing():
     line = "要対応: YouTube の鍵（youtube-token.json）が無く、記事動画を作るだけで上げていません（初回だけ python scripts/youtube_upload.py --auth）"
     FINDINGS.parent.mkdir(parents=True, exist_ok=True)
@@ -77,28 +107,41 @@ def note_token_missing():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
-    ap.add_argument("--limit", type=int, default=6)
+    ap.add_argument("--limit", type=int, default=1)
     ap.add_argument("--days", type=int, default=7)
     ap.add_argument("--public", action="store_true", default=True)
     a = ap.parse_args()
     import video_make as VM
     import youtube_upload as YT
-    rows = candidates(a.days, a.limit)
+    ledger = load()
     token = YT.TOKEN.is_file()
-    print(f"■ 記事動画: 候補 {len(rows)}本（直近{a.days}日・未作成） / YouTubeの鍵 {'あり' if token else '無し'}")
+    # 作り直しを先に（記事と食い違った動画を長く出したままにしない）。枠は新しい記事と共有する
+    redo = stale(ledger) if token else []
+    rows = [{"slug": s, "site": ledger[s].get("site") or "", "title": s, "date": "", "redo": True}
+            for s in redo][:a.limit]
+    rows += candidates(a.days, a.limit - len(rows)) if len(rows) < a.limit else []
+    print(f"■ 記事動画: 今回 {len(rows)}本（作り直し {len(redo)}本待ち・直近{a.days}日の未作成） / "
+          f"YouTubeの鍵 {'あり' if token else '無し'}")
     for r in rows:
-        print(f"   [{r['site']:<9}] {r['date']} {r['title'][:44]}")
+        print(f"   [{r['site']:<9}] {'作り直し' if r.get('redo') else r['date']} {r['title'][:44]}")
     if not a.write:
         print(f"YT_TOKEN={'yes' if token else 'missing'}")
         return 0
-    ledger, made, ok = load(), 0, True
+    made, ok = 0, True
     for r in rows:
         try:
             script = VM.from_article(r["slug"])
             out = VM.OUT / f'{r["slug"]}.mp4'
             sec = VM.build(script, out, quiet=True)
-            rec = {"site": r["site"], "date": date.today().isoformat(), "sec": round(sec),
-                   "mp4": str(out.relative_to(ROOT)).replace("\\", "/")}
+            old = ledger.get(r["slug"]) or {}
+            rec = {"site": r["site"], "date": date.today().isoformat(),
+                   "sec": round(sec), "mp4": str(out.relative_to(ROOT)).replace("\\", "/"),
+                   "nums": _nums(script)}
+            if r.get("redo") and old.get("youtube"):
+                # 消すと再生数と埋め込みが失われる。限定公開に下げて、新しい動画に差し替える
+                YT.set_privacy(old["youtube"], "unlisted")
+                rec["retired"] = old.get("retired", []) + [old["youtube"]]
+                rec["site"] = old.get("site", rec["site"])
             if token:
                 rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True)
             ledger[r["slug"]] = rec
@@ -109,6 +152,9 @@ def main():
             print(f"   × {r['slug'][:40]:<40} {str(e)[:80]}")
         LEDGER.parent.mkdir(parents=True, exist_ok=True)
         LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 作り直しの判定で控えた基準（nums）も残す（動画を作らなかった回でも）
+    LEDGER.parent.mkdir(parents=True, exist_ok=True)
+    LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
     if rows and not token:
         note_token_missing()
     print(f"VIDEOS_OK={'yes' if ok else 'no'}")

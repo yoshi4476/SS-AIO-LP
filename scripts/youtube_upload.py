@@ -49,6 +49,16 @@ def creds():
     return c
 
 
+def set_privacy(vid, status):
+    """公開範囲だけを変える（消さない。記事と食い違った古い動画を限定公開に下げるのに使う）"""
+    from googleapiclient.discovery import build
+    c = creds()
+    if not c:
+        raise SystemExit("youtube-token.json がありません")
+    yt = build("youtube", "v3", credentials=c, cache_discovery=False)
+    yt.videos().update(part="status", body={"id": vid, "status": {"privacyStatus": status}}).execute()
+
+
 def auth():
     from google_auth_oauthlib.flow import InstalledAppFlow
     if not CLIENT.is_file():

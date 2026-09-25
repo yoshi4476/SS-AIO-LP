@@ -524,23 +524,7 @@ jobs:
           python scripts/fact_cite.py --write --limit 3 2>&1 | tail -5 || true
           python scripts/exit_fix.py --write 2>&1 | tail -5 || true
 
-      # 今週公開した記事を短い動画にして YouTube へ上げる。AI検索での可視性と最も強く
-      # 相関するのは YouTube での言及（0.71・被リンクの3倍）。台本は記事の1文結論の
-      # 抜き出しだけ。鍵（YOUTUBE_TOKEN_JSON）が無ければ作るだけで上げず、要対応に載せる
-      - name: 記事動画を作って上げる
-        env:
-          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
-          YOUTUBE_TOKEN_JSON: ${{ secrets.YOUTUBE_TOKEN_JSON }}
-        run: |
-          sudo apt-get update -qq > /dev/null 2>&1 || true
-          sudo apt-get install -y -qq ffmpeg fonts-noto-cjk > /dev/null 2>&1 || true
-          command -v ffmpeg > /dev/null || echo "::warning::ffmpeg が入らず、記事動画を作れません"
-          pip install --quiet edge-tts google-auth-oauthlib || true
-          [ -n "$YOUTUBE_CLIENT_JSON" ] && printf '%s' "$YOUTUBE_CLIENT_JSON" > youtube-client.json
-          [ -n "$YOUTUBE_TOKEN_JSON" ]  && printf '%s' "$YOUTUBE_TOKEN_JSON"  > youtube-token.json
-          n=6; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=3
-          python scripts/article_videos.py --write --limit $n --days 7 2>&1 | tail -12 || true
-          rm -f youtube-client.json youtube-token.json
+      # 記事動画は daily-video.yml が毎日1本ずつ上げる（週にまとめて上げると量産に見えるため移した）
 
       - name: 最終ビルドとコミット
         run: |

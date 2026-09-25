@@ -2995,7 +2995,10 @@ def test_report_actions_close_the_loop():
     import inspect
     check("article_videos: 鍵が無いときの要対応文がある",
           "youtube-token.json" in inspect.getsource(AV.note_token_missing), True)
-    check("週次CIが記事動画を作る", "article_videos.py --write" in wk, True)
+    # 週にまとめて上げると量産に見えるので、毎日1本の工程に移した
+    dv = (ROOT / ".github" / "workflows" / "daily-video.yml")
+    check("CIが記事動画を毎日1本作る",
+          dv.is_file() and "article_videos.py --write --limit 1" in dv.read_text(encoding="utf-8"), True)
     import hub_client as HC
     check("next_kw: AI回答ありの語を読む関数がある", callable(getattr(HC, "_ai_targets", None)), True)
 
