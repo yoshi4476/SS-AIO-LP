@@ -539,11 +539,17 @@ jobs:
           git add articles data/published.json data/body_hash.json 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -q -m "公開の後の手順: 既存記事から新記事へのリンク"
+            pushed=0
             for i in 1 2 3; do
-              if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then break; fi
+              if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then pushed=1; break; fi
               git rebase --abort 2>/dev/null || true
               sleep 5
             done
+            # 黙って消えると、翌日に元の版で配信し直されてリンクが消える
+            if [ "$pushed" != 1 ]; then
+              echo "::warning::既存記事へのリンクを push できませんでした"
+              echo "要対応: 公開の後の手順で足したリンクを push できませんでした（次の配信で消えます）" >> automation/logs/findings.txt
+            fi
           fi
 
       - name: KPI集計 → 管制塔ダッシュボード
