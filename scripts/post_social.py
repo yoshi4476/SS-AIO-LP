@@ -46,6 +46,11 @@ def env():
             if "=" in line and not line.startswith("#"):
                 k, _, v = line.partition("=")
                 d[k.strip()] = v.strip()
+    # CI には .env が無く、鍵は環境変数で渡る。.env だけを見ていたため CI からは一度も投稿されなかった
+    import os
+    for k, v in os.environ.items():
+        if v and k.startswith(("FB_", "IG_", "THREADS_", "LINKEDIN_", "X_")):
+            d.setdefault(k, v)
     return d
 
 
@@ -215,15 +220,16 @@ def threads_post(text, img, user_id, token):
 
 # ---------------- LinkedIn 会社ページ ----------------
 
-def li_post(text, url, img, org_id, token):
-    """会社ページへ投稿する。
+def li_post(text, url, img, author, token):
+    """会社ページ（urn:li:organization:…）か個人（urn:li:person:…）として投稿する。
 
     LinkedInはリンク付き投稿にすると相手側がOGPを展開するため、画像の再送は要らない。
-    投稿主体は organizationalEntityUrn（会社ページ）で指定する。
+    会社ページへの投稿は LinkedIn の審査（Community Management API）が要り、
+    個人の投稿（Share on LinkedIn）は審査なしで使える。
     """
     api = "https://api.linkedin.com/rest/posts"
     body = {
-        "author": f"urn:li:organization:{org_id}",
+        "author": author,
         "commentary": text,
         "visibility": "PUBLIC",
         "distribution": {"feedDistribution": "MAIN_FEED",
@@ -239,7 +245,10 @@ def li_post(text, url, img, org_id, token):
     req = urllib.request.Request(api, data=json.dumps(body).encode("utf-8"), method="POST")
     req.add_header("Authorization", f"Bearer {token}")
     req.add_header("Content-Type", "application/json")
-    req.add_header("LinkedIn-Version", "202405")
+    # 版は約1年で打ち切られる。固定すると、ある日から全部 426 で落ちる。
+    # 公開済みの版を確実に指すよう、3か月前の年月を使う
+    from datetime import date as _d, timedelta as _td
+    req.add_header("LinkedIn-Version", (_d.today() - _td(days=92)).strftime("%Y%m"))
     req.add_header("X-Restli-Protocol-Version", "2.0.0")
     with urllib.request.urlopen(req, timeout=30) as r:
         return r.headers.get("x-restli-id") or r.status
@@ -319,16 +328,19 @@ def deliver(site_id, slug, e, dry):
     else:
         print("  Threads: スキップ（THREADS_TOKEN / THREADS_USER_ID）")
 
-    # LinkedIn 会社ページ
+    # LinkedIn（会社ページの ID があれば会社ページ、無ければ個人として）
     lit, lio = pick(e, "LINKEDIN_TOKEN", site_id), pick(e, "LINKEDIN_ORG_ID", site_id)
-    if is_set(lit) and is_set(lio):
+    lip = pick(e, "LINKEDIN_PERSON_ID", site_id)
+    author = (f"urn:li:organization:{lio}" if is_set(lio)
+              else f"urn:li:person:{lip}" if is_set(lip) else "")
+    if is_set(lit) and author:
         try:
-            pid = li_post(t["linkedin"], utm(url, "linkedin"), img, lio, lit)
+            pid = li_post(t["linkedin"], utm(url, "linkedin"), img, author, lit)
             print(f"  LinkedIn: 投稿 {pid}")
         except Exception as ex:
             print(f"  LinkedIn: 失敗 {str(ex)[:110]}")
     else:
-        print("  LinkedIn: スキップ（LINKEDIN_TOKEN / LINKEDIN_ORG_ID）")
+        print("  LinkedIn: スキップ（LINKEDIN_TOKEN と LINKEDIN_ORG_ID か LINKEDIN_PERSON_ID）")
 
 def main():
     e = env()
