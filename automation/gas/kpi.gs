@@ -36,7 +36,12 @@ function installTriggers() {
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'updateKpi') ScriptApp.deleteTrigger(t);
   });
-  book_().toast('毎朝6時のKPI自動集計を設定しました', '管制塔', 5);
+  // 相談者へのフォロー（HOT は翌日・WARM は3日後に1通）。エディタで手動実行しなくても、
+  // admin の 'triggers' を呼べば入る（何度呼んでも1本だけ）
+  installFollowUpTrigger();
+  const names = ScriptApp.getProjectTriggers().map(function (t) { return t.getHandlerFunction(); });
+  try { book_().toast('トリガーを整えました', '管制塔', 5); } catch (e) {}
+  return names;
 }
 
 function ymd_(d) {

@@ -45,12 +45,37 @@ def _key():
     return ""
 
 
+_SA_TOKEN = None
+
+
+def _sa_token():
+    """サービスアカウントの鍵があれば、それで呼ぶ（キーのある別プロジェクトでは API が無効で 403 だった。
+    鍵のプロジェクト ss-aio-media では有効にしてある）。PageSpeed の OAuth の範囲は openid"""
+    global _SA_TOKEN
+    if _SA_TOKEN is None:
+        _SA_TOKEN = ""
+        sa = ROOT / "indexing-service-account.json"
+        if sa.is_file():
+            try:
+                from google.oauth2 import service_account
+                import google.auth.transport.requests as gr
+                c = service_account.Credentials.from_service_account_file(str(sa), scopes=["openid"])
+                c.refresh(gr.Request())
+                _SA_TOKEN = c.token
+            except Exception:
+                _SA_TOKEN = ""
+    return _SA_TOKEN
+
+
 def measure(url, strategy="mobile"):
     params = {"url": url, "strategy": strategy, "category": "performance"}
-    if _key():
+    headers = {}
+    if _sa_token():
+        headers["Authorization"] = f"Bearer {_sa_token()}"
+    elif _key():
         params["key"] = _key()
     q = urllib.parse.urlencode(params)
-    with urllib.request.urlopen(f"{API}?{q}", timeout=120) as r:
+    with urllib.request.urlopen(urllib.request.Request(f"{API}?{q}", headers=headers), timeout=120) as r:
         d = json.loads(r.read().decode("utf-8"))
     out = {"url": url, "strategy": strategy, "source": "lab"}
     field = (d.get("loadingExperience") or {}).get("metrics") or {}
