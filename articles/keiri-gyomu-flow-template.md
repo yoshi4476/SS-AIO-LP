@@ -108,6 +108,8 @@ faq:
 
 現状の作業を書き出し、テンプレートに当てはめ、運用しながら直すという3ステップで使いこなせます。
 
+選ぶときの基準を先に押さえるなら、[請求書テンプレ無料の選び方](/blog/seikyusho-template-muryou/)が参考になります。
+
 <figure><img src="/images/keiri-gyomu-flow-template/step.png" alt="テンプレートの使い方3ステップ: 現状の作業を書き出す、テンプレートに当てはめる、運用しながら微修正する" loading="lazy"><figcaption>テンプレートの使い方3ステップ</figcaption></figure>
 
 ### ステップ1: 現状の作業を書き出す
