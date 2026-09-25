@@ -158,6 +158,22 @@ def main():
     print(f"  読者     : {cfg.get('audience', '（未設定）')}")
     print("=" * 68)
 
+    # 月の上限は publish_flow が配信の入口で止める。書き終えてから止まると
+    # 1本分の執筆が無駄になるため、書く前のここでも同じ数え方で知らせる
+    try:
+        import daily_audit
+        from datetime import datetime
+        _ym = datetime.now().strftime("%Y-%m")
+        _n = sum(1 for a in daily_audit.articles_by_site().get(cfg["id"], [])
+                 if a["date"][:7] == _ym
+                 and daily_audit._is_published(a, need_review=False))
+        if _n >= daily_audit.MONTHLY_CAP:
+            print(f"\n!! 今月の公開 {_n}/{daily_audit.MONTHLY_CAP}本で上限に達しています。"
+                  "新規記事は書かず、リライトに回すこと")
+            print("MONTHLY_CAP_REACHED=yes")
+    except Exception as e:   # 上限の表示で案内全体を止めない
+        print(f"\n（今月の公開本数を数えられませんでした: {e}）")
+
     # 何を売る記事なのかを先に置く。ここが定まらないと、読まれても
     # 「調べて終わり」で帰る読者ばかりになり、記事が売上につながらない
     offer = cfg.get("main_offer")
