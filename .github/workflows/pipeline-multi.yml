@@ -518,6 +518,8 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}          # 配信できた記事の公開の後の手順（台帳への記録）に使う
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
+          # 公開確認の起点。finish が呼ばれた時刻を起点にすると、既に始まった配信先のビルドを見失い1本8分待つ
+          since=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           out=$(python scripts/publish_gap.py --publish) || true
           echo "$out"
           n=$(echo "$out" | grep -oE 'PUBLISH_GAP=[0-9]+' | cut -d= -f2)
@@ -529,9 +531,20 @@ jobs:
           echo "$out" | grep -oE '\] ○ [a-z0-9-]+$' | awk '{print $3}' | while read -r slug; do
             site=$(python -c "import sys; sys.path.insert(0,'scripts'); import sites, publish; m=publish.read_meta(__import__('pathlib').Path('articles')/(sys.argv[1]+'.md')); print(sites.find_category_owner((m or {}).get('category','')) or '')" "$slug")
             [ -n "$site" ] || continue
-            python scripts/publish_flow.py --finish "$site" "$slug" < /dev/null \
+            python scripts/publish_flow.py --finish "$site" "$slug" "--since=$since" < /dev/null \
               || echo "::warning::$slug の公開の後の手順に失敗"
           done
+          # finish が既存記事に足したリンクを残す。コミット工程はこの前に終わっているため、
+          # ここで入れないとランナーと一緒に消え、翌日の publish_gap が元の版で配信し直す
+          git add articles data/published.json data/body_hash.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -q -m "公開の後の手順: 既存記事から新記事へのリンク"
+            for i in 1 2 3; do
+              if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep 5
+            done
+          fi
 
       - name: KPI集計 → 管制塔ダッシュボード
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.id == steps.site.outputs.first && github.event.schedule == '0 23 * * *'
