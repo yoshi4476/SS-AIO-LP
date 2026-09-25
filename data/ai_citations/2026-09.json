@@ -1,38 +1,48 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-26",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 11,
-      "suspect_taken": 11,
-      "healthy": 0,
-      "too_thin": 50,
+      "judged": 13,
+      "suspect_taken": 12,
+      "healthy": 1,
+      "too_thin": 53,
       "items": [
-        {
-          "kw": "原口優",
-          "url": "https://ai.7senses.co.jp/author/haraguchi/",
-          "pos": 1.4,
-          "imp": 37,
-          "clicks": 2,
-          "ctr": 5.41,
-          "expected_ctr": 28.0,
-          "ratio": 0.19
-        },
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
           "pos": 8.0,
-          "imp": 47,
+          "imp": 44,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
           "ratio": 0.0
         },
         {
+          "kw": "aio対策 キーワード選定",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
+          "pos": 4.1,
+          "imp": 13,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 8.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "llmo代理店になる方法",
+          "url": "https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/",
+          "pos": 7.4,
+          "imp": 12,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
           "kw": "meo アルゴリズム攻略",
           "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
-          "pos": 5.1,
-          "imp": 27,
+          "pos": 5.2,
+          "imp": 28,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -41,18 +51,18 @@
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 8.3,
-          "imp": 27,
+          "pos": 6.6,
+          "imp": 35,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 4.0,
           "ratio": 0.0
         },
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 7.1,
-          "imp": 61,
+          "pos": 6.9,
+          "imp": 58,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -91,8 +101,8 @@
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 8.8,
-          "imp": 107,
+          "pos": 8.9,
+          "imp": 106,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -111,8 +121,8 @@
         {
           "kw": "税理士 ai 集客",
           "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 9.7,
-          "imp": 66,
+          "pos": 10.0,
+          "imp": 65,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -121,10 +131,10 @@
       ]
     },
     "corporate": {
-      "judged": 6,
-      "suspect_taken": 2,
+      "judged": 7,
+      "suspect_taken": 3,
       "healthy": 4,
-      "too_thin": 40,
+      "too_thin": 45,
       "items": [
         {
           "kw": "セブンセンシズ",
@@ -137,10 +147,20 @@
           "ratio": 0.0
         },
         {
+          "kw": "三点照合 自動化",
+          "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
+          "pos": 4.5,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 8.0,
+          "ratio": 0.0
+        },
+        {
           "kw": "経理 派遣 時給 相場",
           "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
-          "pos": 8.6,
-          "imp": 18,
+          "pos": 8.7,
+          "imp": 17,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -152,7 +172,7 @@
       "judged": 1,
       "suspect_taken": 1,
       "healthy": 0,
-      "too_thin": 25,
+      "too_thin": 27,
       "items": [
         {
           "kw": "農業用倉庫 補助金 2026",
