@@ -343,6 +343,23 @@ jobs:
               "auto_merge の検算が効いていません（統合は飛ばしました）" || true
           fi
 
+      # 業種を入れ替えただけの同型記事（scaled_guard の組）も、同じ統合処理で週2組ずつ片付ける。
+      # 勝ちは28日の実績（クリック→表示）で決め、負けた側にクリックが4回以上ある組は触らない。
+      # 同型の組で検算が効くことを先に確かめる（効かなければ統合しない）
+      - name: 同型記事の統合（検算つき・週2組）
+        if: steps.guard.outputs.ok == 'yes'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if python scripts/auto_merge.py --scaled --selftest; then
+            python scripts/auto_merge.py --scaled --write --limit 2 --budget-min 15 || true
+          else
+            echo "::error::同型記事の統合の検算が効いていません。統合は行いません"
+            python scripts/hub_client.py error_log merge \
+              "auto_merge --scaled の検算が効いていません（同型記事の統合は飛ばしました）" || true
+          fi
+
       # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
       # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。
       # 実測で同じ一文がリンク文の41.5%を占めていた

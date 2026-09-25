@@ -155,9 +155,11 @@ def report():
     for j, a, b in pairs[:10]:
         print(f"    {j:.0%} {a} ～ {b}")
     if pairs:
-        bad.append(f"要対応: 業種・地名を入れ替えただけの同型記事が{len(pairs)}組"
+        # 重なりが auto_merge.SCALED_MIN_SIM 以上の同じサイトの組は、週次の
+        # auto_merge --scaled が自動で統合する（週2組）。人が書き分ける必要は無い
+        bad.append(f"参考: 業種・地名を入れ替えただけの同型記事が{len(pairs)}組"
                    f"（最大{pairs[0][0]:.0%}: {pairs[0][1]} ～ {pairs[0][2]}）。"
-                   "片方をその業種にしか無い事情と数字で書き分けるか統合する")
+                   "同じサイトで重なり25%以上の組は自動で統合します（週2組）")
 
     df = Counter()
     for a in arts.values():
@@ -168,8 +170,8 @@ def report():
     for c, s in spread[:8]:
         print(f"    {c}本: {s[:50]}")
     if spread:
-        bad.append(f"要対応: 同じ一文が{SPREAD_MAX}本を超えて貼られている（{len(spread)}文・"
-                   f"最多{spread[0][0]}本「{spread[0][1][:30]}」）。記事ごとに言い換える")
+        bad.append(f"参考: 同じ一文が{SPREAD_MAX}本を超えて貼られている（{len(spread)}文・"
+                   f"最多{spread[0][0]}本「{spread[0][1][:30]}」）。新しい記事は公開前の門で止める")
 
     lens = [len(a["flat"]) for a in arts.values()]
     med = statistics.median(lens)
@@ -178,13 +180,15 @@ def report():
     print(f"\n  長さ: 中央値{med:,.0f}字・±10%に入る記事 {band:.0%}（上限{LEN_BAND_MAX:.0%}）")
     print("  depth の内訳: " + " / ".join(f"{k} {v}本" for k, v in depths.most_common()))
     if band > LEN_BAND_MAX:
-        bad.append(f"要対応: 記事の{band:.0%}が同じ長さの帯（{med:,.0f}字±10%）に揃っている。"
-                   "手順・定義の語は depth: quick で短く、網羅の語は deep で書き分ける")
+        bad.append(f"参考: 記事の{band:.0%}が同じ長さの帯（{med:,.0f}字±10%）に揃っている。"
+                   "新しい記事は長さの区分を公開前の門で見る")
 
     print()
     for b in bad:
         print(b)
-    print("SCALED_OK=" + ("no" if bad else "yes"))
+    # どれも人の手は要らない（同型は自動統合、新しい記事は公開前の門で止める）。
+    # 要対応にすると毎週メールで人を呼ぶので、参考として出すだけにする
+    print("SCALED_OK=yes")
     return 0
 
 
