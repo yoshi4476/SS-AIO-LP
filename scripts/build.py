@@ -143,6 +143,9 @@ ORG_SAME_AS = [
     "https://www.7senses.co.jp/",
     # Googleマップの店舗情報。サイトと地図の店舗が同じ会社だと機械に伝える（地図検索・AI検索の NAP の一致）
     "https://www.google.com/maps?cid=815053100031552916",
+    # 公式 YouTube チャンネル。AI検索での可視性と最も相関するのは YouTube での言及なので、
+    # チャンネルとサイトが同じ会社だと機械に伝える
+    "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw",
 ]
 ORG_GEO = {"@type": "GeoCoordinates", "latitude": 34.6791137, "longitude": 135.555196}
 ORG_MAP = "https://www.google.com/maps?cid=815053100031552916"

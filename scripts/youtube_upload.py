@@ -162,8 +162,19 @@ def _add_to_playlist(yt, vid, title):
         book[name] = pid
         PLAYLISTS.parent.mkdir(exist_ok=True)
         PLAYLISTS.write_text(json.dumps(book, ensure_ascii=False, indent=1), encoding="utf-8")
-    yt.playlistItems().insert(part="snippet", body={
-        "snippet": {"playlistId": pid, "resourceId": {"kind": "youtube#video", "videoId": vid}}}).execute()
+    # 作ったばかりの再生リストや、上げたばかりの動画は YouTube 側の反映が間に合わず 409 になる。
+    # 数秒おけば通る（実測 2026-09-26）
+    import time
+    from googleapiclient.errors import HttpError
+    for i in range(4):
+        try:
+            yt.playlistItems().insert(part="snippet", body={
+                "snippet": {"playlistId": pid, "resourceId": {"kind": "youtube#video", "videoId": vid}}}).execute()
+            break
+        except HttpError as e:
+            if e.resp.status != 409 or i == 3:
+                raise
+            time.sleep(5 * (i + 1))
     return name
 
 
