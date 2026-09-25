@@ -63,13 +63,22 @@ def plan(site_id):
 
     # 2) 記事がたまったのにハブが無い業種 → 新しいハブ
     try:
-        import industry_hub as IH
         import json
+        import sites as S
         d = json.loads((ROOT / "data" / "industries.json").read_text(encoding="utf-8"))
         floor = int(d.get("_min_articles") or 5)
-        made = {p.name for p in (ROOT / "site" / "industry").glob("*") if p.is_dir()}
-        for i in (d.get("industries") or []):
-            n = len(cells and [s for c in cs for s in cells[(i["slug"], c)]["slugs"]] or [])
+        # ハブの有無はそのサイトの公開物で見る。AI集客ラボの site/industry で見ると、
+        # 配信先のサイトは毎月「ハブが無い」と誤って知らせる
+        if S.load(site_id).get("type") == "self-static":
+            pub = [ROOT / "site"]
+        else:
+            # 配信先の公開物は publish が取ってきたときだけ手元にある。無ければ判定しない
+            w = ROOT / ".publish-work" / site_id
+            pub = [w, w / "out", w / "public"] if w.is_dir() else []
+        made = {p.name for r in pub for p in (r / "industry").glob("*") if p.is_dir()}
+        for i in (d.get("industries") or []) if pub else []:
+            # 1本の記事が複数の手法のマスに入るため、slug の重複を除いて数える
+            n = len({s for c in cs for s in cells[(i["slug"], c)]["slugs"]}) if cells else 0
             if n >= floor and i["slug"] not in made:
                 out.append({"kind": "新しいハブ", "what": f"/industry/{i['slug']}/",
                             "why": f"{i['name']} の記事が{n}本たまっています（下限{floor}本）",

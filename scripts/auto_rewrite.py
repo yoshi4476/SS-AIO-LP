@@ -488,21 +488,25 @@ def site_of(slug):
 def hub_rewrite_log(item, why):
     """管制塔の「リライトログ」に残す。手元の台帳（auto_fix.jsonl）だけだと、
     シートを見る人には直した記録が1件も見えなかった（4行しか無かった）"""
-    try:
-        import hub_client
-        if not hub_client.enabled():
-            return
-        m = re.search(r"(\d+(?:\.\d+)?)位", item.get("why", ""))
-        hub_client.rewrite_log(item.get("site", ""), item["slug"],
-                               reason=f"{item['kind']}: {item.get('why', '')[:60]}",
-                               summary=why[:80], pos_before=(m.group(1) if m else ""))
-        # rank_up --effect が前後を比べる台帳にも残す。ここに無いと後順位が永遠に空欄のまま
-        if m:
+    m = re.search(r"(\d+(?:\.\d+)?)位", item.get("why", ""))
+    # rank_up --effect が前後を比べる台帳にも残す。ここに無いと後順位が永遠に空欄のまま。
+    # 手元の台帳なので管制塔の有無に関係なく残す（管制塔が無い回に記録ごと消えていた）
+    if m:
+        try:
             import rank_up
             log = rank_up.load_log()
             log[item["slug"]] = {"at": time.strftime("%Y-%m-%d"), "pos": float(m.group(1)),
                                  "site": item.get("site", ""), "by": "auto_rewrite"}
             rank_up.save_log(log)
+        except Exception as e:
+            print(f"     （順位の台帳への記録をスキップ: {str(e)[:60]}）")
+    try:
+        import hub_client
+        if not hub_client.enabled():
+            return
+        hub_client.rewrite_log(item.get("site", ""), item["slug"],
+                               reason=f"{item['kind']}: {item.get('why', '')[:60]}",
+                               summary=why[:80], pos_before=(m.group(1) if m else ""))
     except Exception as e:
         print(f"     （管制塔への記録をスキップ: {str(e)[:60]}）")
 

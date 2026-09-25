@@ -151,6 +151,16 @@ def _fmt(v, unit):
     return f"{s}{unit}"
 
 
+CORP = re.compile(r"[^\s、。「」（）()]{0,20}(?:株式会社|有限会社|合同会社|合資会社|合名会社|[(（]株[)）])"
+                  r"[^\s、。「」（）()]{0,20}")
+
+
+def _corp(text):
+    """個社名に見える部分を返す。運営者（ORG）は出典として書くので除く"""
+    m = CORP.search(str(text or "").replace(ORG, ""))
+    return m.group(0) if m else ""
+
+
 def review(got):
     """検査する。(データセット, 不備, 警告) を返す"""
     o, rows, ng, warn = got.get("overview") or {}, got.get("rows") or [], [], []
@@ -165,6 +175,9 @@ def review(got):
         ng.append("題名が短すぎます（8字以上）")
     if len(desc) < 20:
         ng.append("説明が短すぎます（20字以上。何をどう数えたかが分かるように）")
+    for lab, txt in (("題名", title), ("説明", desc), ("引用用の一文", g("引用用の一文"))):
+        if _corp(txt):
+            ng.append(f"{lab}に会社名があります（{_corp(txt)}）。個社が分かる情報は公開しません")
     n = _num(g("母数"))
     unit_n = g("母数の単位") or "件"
     if n is None:
@@ -188,8 +201,13 @@ def review(got):
         if v is None:
             ng.append(f"「{r['label']}」の値が数字ではありません: {r['value']!r}")
             continue
+        # 個社が分かる表記は公開しない（RULES 6）。警告だけにしていたため、そのまま公開されていた
         if re.search(r"株式会社|有限会社|合同会社|店\b|医院|クリニック[^・]", r["label"]) and "業種" not in r["label"]:
-            warn.append(f"「{r['label']}」は個社名に見えます。区分名にしてください")
+            ng.append(f"「{r['label']}」は個社名に見えます。区分名にしてください")
+            continue
+        if _corp(r.get("note")):
+            ng.append(f"「{r['label']}」の備考に会社名があります（{_corp(r.get('note'))}）。区分で書いてください")
+            continue
         item = {"label": r["label"], "value": v, "note": r.get("note", "")}
         num, den = _num(r.get("num")), _num(r.get("den"))
         if (num is None) != (den is None):

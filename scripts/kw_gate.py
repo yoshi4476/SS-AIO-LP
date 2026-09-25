@@ -58,6 +58,13 @@ def next_keyword(site):
     return "", ""
 
 
+def published_html(slug):
+    """site/<cat>/<slug>/index.html が git で追跡済みか（＝以前のコミットで世に出ている）"""
+    r = subprocess.run(["git", "ls-files", "--", f"site/*/{slug}/index.html"],
+                       capture_output=True, text=True, cwd=ROOT)
+    return bool(r.stdout.strip())
+
+
 def written_keyword(site):
     """この実行で新しく書かれた記事の keyword を拾う。
 
@@ -95,9 +102,11 @@ def written_keyword(site):
         if hist and not (len(hist) == 1 and hist[0] == head):
             continue
         # 執筆と公開（build.py実行＋push）が同じコミットにまとまることがある。
-        # その場合は履歴の深さでは新規に見えるが、site/にビルド済みHTMLが
-        # 既に存在する＝もう世に出ている。審査の対象外にする。
-        if list((ROOT / "site").glob(f"*/{p.stem}/index.html")):
+        # その場合は履歴の深さでは新規に見えるが、ビルド済みHTMLが git で
+        # 追跡済み＝もう世に出ている。審査の対象外にする。
+        # ファイルの有無では判定しない。この実行の build.py が作ったばかりの
+        # HTMLまで「公開済み」に見え、新記事が審査を素通りする
+        if published_html(p.stem):
             continue
         fm = p.read_text(encoding="utf-8-sig").split("---", 2)[1]
         kw = (re.search(r"^keyword:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()

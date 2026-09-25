@@ -70,10 +70,12 @@ def _open(req):
 
 def _direct(action, p):
     """Sheets API で直接（hub_sheets）。使えない・失敗したら None を返して GAS に落とす"""
+    started = False                                   # 書き込みに入ったか（入る前の失敗は GAS へ落としてよい）
     try:
         import hub_sheets as HS
         if not HS.available():
             return None
+        started = True
         if action == "next_kw":
             return HS.next_kw(p.get("site", ""))
         if action == "all_kw":
@@ -98,6 +100,11 @@ def _direct(action, p):
                                   p.get("posBefore", ""), p.get("posAfter", ""), p.get("effect", ""))
         return None                                   # それ以外は GAS へ
     except Exception as e:
+        # 行を足すだけの記録は、途中まで書けているかもしれない。GAS でやり直すと
+        # 同じ公開・同じリライトが2行になり、本数を二重に数える。落とし直さず失敗で返す
+        if started and action in ("publish_log", "rewrite_log"):
+            print(f"  管制塔への直接記録が途中で失敗しました（{type(e).__name__}）。二重計上を避けるため GAS では記録し直しません")
+            return {"ok": False, "error": f"direct: {type(e).__name__}: {str(e)[:120]}"}
         print(f"  管制塔へ直接つなげません（{type(e).__name__}）。GAS 経由に切り替えます")
         return None
 
@@ -340,8 +347,13 @@ def main():
         print(error_sync(site, msgs))
     elif cmd == "error_log":
         # 使い方: hub_client.py error_log <phase> <message...>
-        error_log("", site, " ".join(sys.argv[3:]))
-        print("エラーログへ記録しました")
+        # 管制塔は失敗しても {ok:false} を返す（error_log は例外なら None）。見ずに「記録しました」と出さない
+        r = error_log("", site, " ".join(sys.argv[3:]))
+        if r and r.get("ok"):
+            print("エラーログへ記録しました" + ("（同じ内容が未対応で残っているため積みません）"
+                                                if r.get("skipped") else ""))
+        else:
+            print(f"エラーログへ記録できませんでした: {(r or {}).get('error', '管制塔に接続できません')}")
     else:
         raise SystemExit(
             "使い方: python scripts/hub_client.py [status|next|all] [site]\n"

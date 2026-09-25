@@ -75,6 +75,12 @@ def check(cfg):
     ids = {p.stem for p in SITES.glob("*.json")}
     if cfg.get("id") in ids:
         ng.append(f"id「{cfg['id']}」は既にあります")
+    # 上限は intake_watch と同じ数で見る。ここを通すと記事の枠が足りず全社の本数が減る
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import intake_watch
+    if cfg.get("id") not in ids and intake_watch.site_count() >= intake_watch.MAX_SITES:
+        ng.append(f"サイトが既に{intake_watch.site_count()}件あります。この仕組みは"
+                  f"{intake_watch.MAX_SITES}社までです（別リポジトリに分けてください）")
     # 既存サイトとカテゴリ名がぶつかると、記事がどちらのサイトのものか決まらない
     for p in SITES.glob("*.json"):
         other = json.loads(p.read_text(encoding="utf-8-sig"))

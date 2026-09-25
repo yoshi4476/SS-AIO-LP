@@ -20,6 +20,8 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+import publish  # noqa: E402
 
 
 def live_slugs_wp(domain):
@@ -175,8 +177,9 @@ def main():
         p = Path(f)
         t = p.read_text(encoding="utf-8-sig")
         g = lambda k: (re.search(rf"^{k}:\s*(.+)$", t, re.M) or [0, ""])[1].strip()
-        score = g("score")
-        if not score or int(score) < 90:      # 未審査・基準未満は配信対象外
+        # 未審査・基準未満・観点の足切りは配信対象外（判定は publish.py と同じ関数）
+        meta = publish.read_meta(p)
+        if not meta or not publish.gate_ok(meta):
             continue
         site = cat_site.get(g("category"))
         if site:

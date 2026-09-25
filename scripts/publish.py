@@ -115,6 +115,28 @@ def try_run(args, cwd=None, env=None):
     return r.returncode == 0
 
 
+def gate_ok(meta):
+    """公開の基準（score 90以上かつ観点の足切り）。判定は rubric.gate_ok を唯一の正とする。
+
+    配信側が score だけを見ていたため、build.py が止める「1観点だけ壊滅した記事」が
+    別リポジトリの社にはそのまま配信されていた
+    """
+    import rubric
+    f = getattr(rubric, "gate_ok", None)
+    if f:
+        return bool(f(meta))
+    sc = meta.get("score")
+    return isinstance(sc, (int, float)) and not isinstance(sc, bool) and sc >= 90
+
+
+def read_meta(path: Path):
+    """フロントマターだけを読む（壊れていれば None）"""
+    try:
+        return parse_article(path)[0] or None
+    except (SystemExit, yaml.YAMLError):
+        return None
+
+
 def parse_article(path: Path):
     t = path.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
@@ -472,7 +494,8 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # 台帳から束ねた sameAs を本文側の JSON-LD で足す（AI集客ラボの記事と同じ人物だと機械に分かる）
     try:
         ap = json.loads((ROOT / "data" / "author_profile.json").read_text(encoding="utf-8"))
-        if ap.get("same_as"):
+        # クライアントの記事の著者は先方の人。運用会社の代表を著者として付けると事実と違う
+        if ap.get("same_as") and not (ROOT / "data" / "clients" / cfg["id"]).is_dir():
             person = {"@context": "https://schema.org", "@type": "Person", "name": "原口 優",
                       "@id": "https://ai.7senses.co.jp/author/haraguchi/#person",
                       "url": "https://ai.7senses.co.jp/author/haraguchi/", "jobTitle": "セブンセンシズ株式会社 代表取締役",
@@ -519,6 +542,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     import entities
     _about, _mentions = entities.about_and_mentions(f"{meta['title']} {meta.get('keyword', '')}", plain)
     about_json, mentions_json = json.dumps(_about, ensure_ascii=False), json.dumps(_mentions, ensure_ascii=False)
+    mod = str(meta.get("modified") or meta["date"])
     vals = {
         "TITLE": meta["title"],
         "TITLE_SHORT": meta["title"][:28],
@@ -526,8 +550,10 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         "SLUG": meta["slug"],
         "CATEGORY": cfg["categories"].get(meta["category"], meta["category"]),
         "DATE_ISO": str(meta["date"]),
+        "DATE_MOD_ISO": mod,
         "DATE_JP": _jp_date(meta["date"]),
-        "DATE_YM": f"{str(meta['date'])[:4]}年{int(str(meta['date'])[5:7])}月",
+        # 「◯年◯月時点」は情報を確かめた時点。書き直した記事で公開月のままだと古く見える
+        "DATE_YM": f"{mod[:4]}年{int(mod[5:7])}月",
         "READ_MIN": str(max(3, round(len(plain) / 600))),
         "LEAD_DANGEN": re.sub(r"<[^>]+>", "", lead).strip(),
         "TARGET": target_txt,
@@ -548,6 +574,9 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     left = re.findall(r"\{\{([A-Z_]+)\}\}", out)
     if left:
         raise SystemExit(f"テンプレートの未置換タグが残っています: {sorted(set(left))}")
+    # 配信先のテンプレートが古く dateModified に公開日を入れている場合も、更新日に揃える
+    # （書き直しても dateModified が公開日のままだと、鮮度の信号が届かない）
+    out = re.sub(r'("dateModified":\s*")[^"]*(")', lambda m_: m_.group(1) + mod + m_.group(2), out)
 
     # 記事の内容に合う写真を在庫から選び、一覧カードとOGPに当てる。
     # 配信先の一覧は在庫写真を順番に使い回しており、中身と絵が合わないため。
@@ -605,18 +634,21 @@ def _recent_articles(dest: Path, cfg, exclude_slug, n):
     blog = dest / "blog"
     if not blog.exists():
         return out
-    dirs = sorted((d for d in blog.iterdir() if d.is_dir() and d.name != exclude_slug),
-                  key=lambda d: d.stat().st_mtime, reverse=True)
-    for d in dirs:
+    # 並びは記事の公開日で決める。作業コピーの mtime はクローンし直すたびに揃って
+    # しまい、「新しい順」のつもりが実質ディレクトリ名の順になっていた
+    pages = []
+    for d in blog.iterdir():
         idx = d / "index.html"
-        if not idx.exists():
+        if not d.is_dir() or d.name == exclude_slug or not idx.is_file():
             continue
-        m = re.search(r"<h1[^>]*>(.*?)</h1>", idx.read_text(encoding="utf-8"), re.S)
-        if m:
-            out.append((re.sub(r"<[^>]+>", "", m.group(1)).strip(), f"/blog/{d.name}/"))
-        if len(out) >= n:
-            break
-    return out
+        c = idx.read_text(encoding="utf-8")
+        m = re.search(r"<h1[^>]*>(.*?)</h1>", c, re.S)
+        if not m:
+            continue
+        pub = (re.search(r'"datePublished":\s*"([^"]+)"', c) or [None, ""])[1]
+        pages.append((pub, d.name, re.sub(r"<[^>]+>", "", m.group(1)).strip()))
+    pages.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    return [(title, f"/blog/{name}/") for _, name, title in pages[:n]]
 
 
 def _public_file(dest: Path, name: str):
@@ -649,9 +681,16 @@ def _update_external_index(dest: Path, cfg, meta):
     lt = _public_file(dest, "llms.txt")
     if lt:
         t = lt.read_text(encoding="utf-8")
-        if url not in t:
-            lt.write_text(t.rstrip("\n") + f"\n- [{meta['title']}]({url}): {meta['description']}\n",
-                          encoding="utf-8", newline="\n")
+        line = f"- [{meta['title']}]({url}): {meta['description']}"
+        # 既にある行は置き換える。足すだけだと、タイトルや説明を直しても
+        # AIクローラー向けの案内には古い題名が残り続ける
+        pat = re.compile(r"^- \[[^\n]*?\]\(" + re.escape(url) + r"\)[^\n]*$", re.M)
+        if pat.search(t):
+            new = pat.sub(lambda _m: line, t, count=1)
+        else:
+            new = t.rstrip("\n") + f"\n{line}\n"
+        if new != t:
+            lt.write_text(new, encoding="utf-8", newline="\n")
             touched.append(lt)
     # 業種ハブの定義を配信先へ写す。配信先の一覧生成（tools/gen_blog_pages.py）が
     # これを読んで /industry/<slug>/ を作る。定義は本リポジトリを唯一の正とする
@@ -845,8 +884,10 @@ def main():
     meta, body = parse_article(src)
 
     score = meta.get("score") or 0
-    if score < 90:
-        raise SystemExit(f"公開基準未達のため配信しません: score={score}（90点以上が必要）")
+    if not gate_ok(meta):
+        raise SystemExit(f"公開基準未達のため配信しません: score={score}"
+                         f" / 観点 {meta.get('score_breakdown') or '—'}"
+                         "（90点以上かつ各観点の足切りを通ることが必要）")
     # 配信先のテンプレートは監修者を固定で表示する。記録の無い記事を出すと表示が実態と食い違う
     import editorial_review
     if not editorial_review.reviewed(args.slug):

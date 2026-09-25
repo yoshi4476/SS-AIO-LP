@@ -150,7 +150,9 @@ def main():
 
     ng, unknown = [], []
     for cfg in sites_mod.load_all().values():
-        if cfg["type"] == "self-static":
+        # WordPress はアプリケーションパスワードで入れる（GitHub のトークンを使わない）。
+        # repo が空の社に /repos/ を叩くと「届かない」扱いになり、全体が auth で落ちる
+        if cfg["type"] in ("self-static", "wordpress") or not cfg.get("repo"):
             continue
         repo = cfg["repo"]
         try:

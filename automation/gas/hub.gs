@@ -500,13 +500,21 @@ function publishLog_(b) {
   if (b.keyword) {
     const sh = sheet_('KW台帳');
     const rows = kwRows_();
+    // 完全一致だと表記ゆれ（「aio 診断」と「aio診断」）で公開済みにならず、未着手のまま
+    // 残って同じ語がまた書かれる。claim_kw と同じく正規化して照合する
+    // 完全一致の行を優先し、無ければ生きている（対象外・取り下げでない）行に当てる
+    const want = normKw_(b.keyword);
+    let hit = -1;
     for (let i = 0; i < rows.length; i++) {
-      if (String(rows[i][0]) === b.site && String(rows[i][1]) === b.keyword) {
-        sh.getRange(i + 2, 3).setValue('公開済み');
-        sh.getRange(i + 2, 9).setValue(new Date());
-        sh.getRange(i + 2, 10).setValue(b.url || '');
-        break;
-      }
+      if (String(rows[i][0]) !== b.site || normKw_(rows[i][1]) !== want) continue;
+      if (String(rows[i][1]) === b.keyword) { hit = i; break; }
+      const st = String(rows[i][2]).trim();
+      if (hit < 0 && st !== '対象外' && st !== '取り下げ') hit = i;
+    }
+    if (hit >= 0) {
+      sh.getRange(hit + 2, 3).setValue('公開済み');
+      sh.getRange(hit + 2, 9).setValue(new Date());
+      sh.getRange(hit + 2, 10).setValue(b.url || '');
     }
   }
   return { ok: true };

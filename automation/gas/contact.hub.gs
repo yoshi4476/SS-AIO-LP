@@ -75,7 +75,9 @@ function form_(body) {
   if (warn.length) {
     console.error('メール送信に失敗（記録は済んでいます）: ' + warn.join(' / '));
     try {
-      sheet_('エラーログ').appendRow([new Date(), site, 'メール送信', warn.join(' / '), '未対応']);
+      // 列は 日時・サイト・工程・エラー内容・対応・状態 の6つ。5列で書くと「未対応」が
+      // 対応の列に入り、状態（6列目）を数えるダッシュボードと errorSync_ から見えなくなる
+      sheet_('エラーログ').appendRow([new Date(), site, 'メール送信', warn.join(' / '), '', '未対応']);
     } catch (e2) {}
   }
   return { ok: true, temperature: temp, row: row };
@@ -301,9 +303,15 @@ function followUp() {
   if (last < 2) return;
   const vals = sh.getRange(2, 1, last - 1, FOLLOW_COL).getValues();
   const now = new Date();
+  // 添える資料は AI集客ラボ（AIO）のものだけ。コーポレートや補助金の問い合わせに
+  // AIOの動画を送ると、相談した内容と関係のない営業メールになる。
+  // サイト列には表示名が入る（未登録ならIDのまま）ので、両方で見る
+  const aiLab = { 'ai-lab': true };
+  aiLab[siteLabel_('ai-lab')] = true;
   let sent = 0;
   for (let i = 0; i < vals.length; i++) {
     const r = vals[i];
+    if (!aiLab[String(r[1] || '').trim()]) continue;
     const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
     const temp = String(r[12] || '').toUpperCase();
     const status = String(r[13] || '');

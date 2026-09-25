@@ -78,8 +78,16 @@ def site_cfg():
 
 
 def ga4_property():
-    """GA4プロパティIDを数値だけに正規化する（GA4 APIは数値以外を受け付けない）"""
-    raw = site_cfg().get("ga4_property_id") or ENV.get("GA4_PROPERTY_ID", "")
+    """GA4プロパティIDを数値だけに正規化する（GA4 APIは数値以外を受け付けない）
+
+    サイト設定に無ければ、.env（運用会社のプロパティ）に落とすのは自社サイトだけ。
+    クライアントで落とすと、その社のレポートに運用会社の流入が載る。その場合は None（未計測）
+    """
+    raw = site_cfg().get("ga4_property_id")
+    if not raw:
+        if SITE_ID != _sites_mod.primary():
+            return None
+        raw = ENV.get("GA4_PROPERTY_ID", "")
     # BOM・ゼロ幅文字・前後の空白を落とす（Secretsへの貼り付けで混入しやすい）
     v = "".join(c for c in raw if c.isdigit() or c.isalpha() or c in "-_/")
     v = v.removeprefix("properties/")
@@ -388,6 +396,11 @@ def fix_table(d):
             + "".join(rows) + "</table>")
 
 
+def pub_text(d):
+    n = (d.get("content") or {}).get("published")
+    return "取得できず" if n is None else f"{n}本"
+
+
 def month_end(label):
     """その月の末日。対象月が8月なら 2026-08-31 を返す。
 
@@ -449,8 +462,14 @@ def fetch_real():
 
     # --- GA4: 月別セッション/CV/AI参照 ---
     ga = BetaAnalyticsDataClient(credentials=creds)
-    prop = f"properties/{ga4_property()}"
+    pid = ga4_property()
+    data["ga_missing"] = pid is None
+    prop = f"properties/{pid}"
     for m in labels:
+        if data["ga_missing"]:
+            data["months"].append({"label": m, "sessions": 0, "cv": 0, "cv_parts": {},
+                                   "form_submit": 0})
+            continue
         y, mo = map(int, m.split("-"))
         # 当月はまだ月末が来ていない。未来日を渡すと期間が空になるため今日で止める
         end = min(date(y + (mo == 12), (mo % 12) + 1, 1) - timedelta(days=1),
@@ -480,27 +499,34 @@ def fetch_real():
                          "サイト監査": evs.get("lead_site_audit", 0)},
             "form_submit": evs.get("form_submit", 0)})
 
-    # AI参照元セッション（当月）
-    rep = ga.run_report(RunReportRequest(
-        property=prop,
-        date_ranges=[DateRange(start_date=f"{labels[-1]}-01", end_date=cur_end)],
-        dimensions=[Dimension(name="sessionSource")], metrics=[Metric(name="sessions")]))
+    # AI参照元セッション
     # 参照元ドメインでしか見分けられないため、主要なAIサービスを網羅する。
     # 抜けているサービスからの流入は「Referral」に埋もれてAI流入として数えられない
     import daily_kpi as _dk
     ai_domains = tuple(d for v in _dk.AI_DOMAINS.values() for d in v)
-    data["ai_sessions"] = sum(int(r.metric_values[0].value) for r in rep.rows
-                              if any(d in r.dimension_values[0].value for d in ai_domains))
-    # プラットフォーム別内訳（AI検索分析ページ用）
-    bk = {}
-    for r in rep.rows:
-        src = r.dimension_values[0].value
-        # 表示名は daily_kpi.ai_label に一本化（Google以外のAI＝Grok・Copilot・Claude・その他も同じ表に出る）。
-        # 以前は6ドメインの固定辞書で、それ以外のAI経由は KeyError で落ちるところだった
-        key = _dk.ai_label(src)
-        if key:
-            bk[key] = bk.get(key, 0) + int(r.metric_values[0].value)
-    data["ai_breakdown"] = sorted(bk.items(), key=lambda x: -x[1])
+
+    def ai_count(start, end):
+        rep = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=[DateRange(start_date=start, end_date=end)],
+            dimensions=[Dimension(name="sessionSource")], metrics=[Metric(name="sessions")]))
+        total = sum(int(r.metric_values[0].value) for r in rep.rows
+                    if any(d in r.dimension_values[0].value for d in ai_domains))
+        # プラットフォーム別内訳（AI検索分析ページ用）
+        bk = {}
+        for r in rep.rows:
+            # 表示名は daily_kpi.ai_label に一本化（Google以外のAI＝Grok・Copilot・Claude・その他も同じ表に出る）。
+            # 以前は6ドメインの固定辞書で、それ以外のAI経由は KeyError で落ちるところだった
+            key = _dk.ai_label(r.dimension_values[0].value)
+            if key:
+                bk[key] = bk.get(key, 0) + int(r.metric_values[0].value)
+        return total, sorted(bk.items(), key=lambda x: -x[1])
+
+    if data["ga_missing"]:
+        data["ai_sessions"], data["ai_breakdown"], data["ai_prev"] = 0, [], 0
+    else:
+        data["ai_sessions"], data["ai_breakdown"] = ai_count(f"{labels[-1]}-01", cur_end)
+        # 前月も同じ数え方で取る。取らないと前月比が常に「―」になる
+        data["ai_prev"] = ai_count(f"{labels[-2]}-01", month_end(labels[-2]))[0]
 
     # エリア到達（area_reachイベント）
     try:
@@ -536,8 +562,8 @@ def fetch_real():
         r = sc.searchanalytics().query(siteUrl=site, body={
             "startDate": f"{label}-01", "endDate": month_end(label),
             # **上限で切らない。** 60で切っていたため「60語」が実数のように
-            # 見えていた（実際は293語あった）
-            "dimensions": ["query"], "rowLimit": 1000}).execute()
+            # 見えていた（実際は293語あった）。上限は照合（report_audit）と同じ5000にする
+            "dimensions": ["query"], "rowLimit": 5000}).execute()
         return {x["keys"][0]: {"imp": int(x["impressions"]), "clicks": int(x["clicks"]),
                                "ctr": round(x["ctr"] * 100, 1),
                                "pos": round(x["position"], 1)}
@@ -763,10 +789,15 @@ def fetch_real():
         data["gsc_devices"] = []
 
     # --- スプレッドシート: 記事作成ログ ---
+    # 取れなかった月を 0 本とは書かない（「0本公開」と冒頭要約に載り、止まったように読まれる）
+    if not ENV.get("SPREADSHEET_ID"):
+        data["content"] = {"published": None, "rows": [], "note": "SPREADSHEET_ID が未設定"}
+        return data
     try:
         sh = build("sheets", "v4", credentials=creds)
+        # 範囲の末尾を切らない。200行で切ると、それより後に積まれた行（直近の公開）が数えられない
         vals = sh.spreadsheets().values().get(
-            spreadsheetId=ENV["SPREADSHEET_ID"], range="記事作成ログ!A2:L200").execute().get("values", [])
+            spreadsheetId=ENV["SPREADSHEET_ID"], range="記事作成ログ!A2:L").execute().get("values", [])
         # 記事作成ログの列: 0=公開日時 1=サイト 2=タイトル 3=キーワード
         #                  4=カテゴリ 5=スコア 6=文字数 7=URL 8=備考
         # 日付は0列目。1列目（サイト名）を日付として見ていたため、
@@ -794,7 +825,7 @@ def fetch_real():
                      for v in rows[:15]],
         }
     except Exception as e:
-        data["content"] = {"published": 0, "rows": [], "note": f"スプレッドシート未接続: {e}"}
+        data["content"] = {"published": None, "rows": [], "note": f"スプレッドシート未接続: {e}"}
     return data
 
 
@@ -1047,12 +1078,20 @@ def analyze(d):
             return r["text"]
         return f"{'+' if r['pct'] >= 0 else ''}{r['pct']:.0f}%"
 
+    def trend(k):
+        """増減の向き。月合計の大小で決めると、途中経過の月は前月比+24%でも「減った」になる"""
+        if not prev.get(k):
+            return "up" if cur.get(k, 0) else "flat"
+        import report_context as RC
+        return RC.compare(cur, prev, k, cur.get("label", ""), prev.get("label", ""),
+                          THROUGH)["dir"]
+
     grown = []
-    if cur.get("clicks", 0) > prev.get("clicks", 0):
+    if trend("clicks") == "up":
         grown.append(f"検索クリックが <b>{prev['clicks']}→{cur['clicks']}（{mom('clicks')}）</b>。"
                      f"平均順位が {prev.get('pos','-')}位→{cur.get('pos','-')}位 に改善したことが主因で、"
                      "記事の内部リンク網とE-E-A-T整備が順位を押し上げています。")
-    if cur.get("cv", 0) > prev.get("cv", 0):
+    if trend("cv") == "up":
         grown.append(f"CV（相談・資料DL）が <b>{prev['cv']}→{cur['cv']}件</b>。"
                      "記事下CTAと追従サイドバー経由のLP到達が増えています。")
     if d.get("ai_sessions"):
@@ -1110,7 +1149,7 @@ def analyze(d):
     summary = (
         f"当月はセッション{cur_.get('sessions', 0):,}（前月比{mom('sessions')}）、"
         f"検索クリック{cur_.get('clicks', 0):,}（{mom('clicks')}）、CV{cur_.get('cv', 0)}件（{mom('cv')}）と、"
-        f"主要指標が{'揃って伸長しました' if cur_.get('sessions', 0) > prev_.get('sessions', 0) else '伸び悩みました'}。"
+        f"主要指標が{'揃って伸長しました' if trend('sessions') == 'up' else '伸び悩みました'}。"
         f"平均掲載順位は{prev_.get('pos', '-')}位→{cur_.get('pos', '-')}位。"
         f"AI経由の参照流入は{d.get('ai_sessions', 0)}セッションでした。"
         "来月の優先順位は8章「改善点の一覧と、その直し方」に載せています。")
@@ -1158,7 +1197,7 @@ def analyze(d):
          "記事→LP導線の改善プラン実施による転換率向上"),
         ("AI経由参照", str(d.get("ai_sessions", 0)), str(tgt(d.get("ai_sessions", 0), 1.5, 5)),
          "記事蓄積とllms.txt更新によるAI引用の積み上がり"),
-        ("新規公開記事", f'{d["content"]["published"]}本', "60本",
+        ("新規公開記事", pub_text(d), "60本",
          "毎日2本の自動生成体制の定常値（品質90点以上のみ）"),
     ]
 
@@ -1182,7 +1221,8 @@ def analyze(d):
             prev_targets = _json.loads(tf.read_text(encoding="utf-8")).get(cur["label"], {})
         except Exception:
             prev_targets = {}
-    if prev_targets:
+    # 途中経過の月は、月の目標に対して必ず「未達」に見えるため突合しない
+    if prev_targets and not THROUGH:
         actual = {"sessions": cur.get("sessions", 0), "clicks": cur.get("clicks", 0),
                   "impressions": cur.get("impressions", 0), "cv": cur.get("cv", 0),
                   "ai": d.get("ai_sessions", 0)}
@@ -1239,16 +1279,18 @@ def analyze(d):
 
     # 3行サマリー（詳細を読む前に結論だけ掴めるようにする）
     headline = [
-        f'流入は{"増えました" if cur.get("sessions", 0) >= prev.get("sessions", 0) else "伸び悩みました"}。'
+        f'流入は{"増えました" if trend("sessions") == "up" else "伸び悩みました"}。'
         f'セッション{cur.get("sessions", 0):,}（前月比{mom("sessions")}）、'
         f'検索クリック{cur.get("clicks", 0):,}（{mom("clicks")}）。',
-        f'成果は{"前進しました" if cur.get("cv", 0) >= prev.get("cv", 0) else "横ばいでした"}。'
+        f'成果は{"前進しました" if trend("cv") == "up" else "横ばいでした"}。'
         f'CV{cur.get("cv", 0)}件（{mom("cv")}）。'
         + (f'広告で同じクリックを買うと約{ad_value:,}円相当の流入を、記事の資産で獲得しています。'
            if ad_value > 0 else
            '広告換算は当月の検索クリックが0回のため算出前です。表示回数は出ているため、順位が上がり次第この欄に金額が入ります。'),
         f'来月は「{actions[0][0]}」を最優先に進めます。'
-        f'記事は{d["content"]["published"]}本公開し、累計{assets["count"]}本（平均{assets["avg_score"]}点）まで積み上がりました。',
+        + (f'記事は{d["content"]["published"]}本公開し、' if d["content"].get("published") is not None
+         else '当月の公開本数は記事作成ログを取得できず集計していません。')
+        + f'累計{assets["count"]}本（平均{assets["avg_score"]}点）まで積み上がりました。',
     ]
 
     # リスクと前提（数字を過信しないための注記）
@@ -1716,7 +1758,9 @@ def _ai_brand():
     """指名検索。AI検索の可視性との相関 0.392（被リンク 0.218 の約2倍）"""
     try:
         import brand_search as B
-        return B.collect()
+        # 全サイト分が返る。このサイトの分だけにしないと、3サイト合計が1社のレポートに載る
+        mine = B.collect().get(SITE_ID)
+        return {SITE_ID: mine} if mine else None
     except Exception:
         return None
 
@@ -1744,10 +1788,11 @@ def _ai_genai(ym):
             return None
         d = json.loads(p.read_text(encoding="utf-8"))
         # 当月の分だけ。最新の月で埋めると、取り込み忘れの月に前の月の数字が当月として載る
-        month = d.get(ym)
-        if not month:
+        # 月の下はサイトごと。合計すると他サイト（他社）の表示回数まで載る
+        mine = (d.get(ym) or {}).get(SITE_ID)
+        if not mine:
             return None
-        return sum(v.get("total", 0) for v in month.values())
+        return mine.get("total", 0)
     except Exception:
         return None
 
@@ -1997,6 +2042,12 @@ def render(d, a):
     ym = cur["label"]
     demo_banner = ('<div class="demo-banner">SAMPLE ― 本レポートはサンプルデータです。'
                    'GA4/GSC接続後、実データで自動発行されます。</div>') if d["demo"] else ""
+    ga_na = bool(d.get("ga_missing"))
+    if ga_na:
+        # 0 と書くと「流入が無い」と読まれる。計測していないことをそのまま書く
+        demo_banner += ('<div class="callout"><b>このサイトはGA4が未接続です。</b>'
+                        'セッション・CV・AI経由参照は未計測で、0と出ている欄も計測値ではありません。'
+                        'サイト設定の ga4_property_id を登録すると翌号から載ります。</div>')
 
     # 表紙ロゴ（白版）をbase64で埋め込み
     logo_b64 = ""
@@ -2011,6 +2062,8 @@ def render(d, a):
                 f'<div class="t-mom" style="color:{MUTED};font-weight:normal">{sub}</div></div>')
 
     def tile(label, key, unit=""):
+        if ga_na and key in ("sessions", "cv"):
+            return tile_q(label, "未計測", "GA4未接続")
         v = cur.get(key, 0)
         series = [m.get(key, 0) or 0 for m in labels]
         mom = a["mom"](key)
@@ -2093,7 +2146,9 @@ def render(d, a):
         f'<td class="num">{x["actual"]:,}</td>'
         f'<td class="num"><b>{x["rate"]}%</b></td>'
         f'<td><span class="jd jd-{x["judge"]}">{x["judge"]}</span></td></tr>' for x in ach) \
-        or '<tr><td colspan="5">前号がないため今回は突合できません。次号から達成率を表示します。</td></tr>'
+        or ('<tr><td colspan="5">当月は途中経過のため、月の目標とは突合しません。月末の号で達成率を表示します。</td></tr>'
+            if THROUGH else
+            '<tr><td colspan="5">前号がないため今回は突合できません。次号から達成率を表示します。</td></tr>')
     eff = a["efficiency"]
     risk_rows = "".join(f'<tr><td style="white-space:nowrap"><b>{t}</b></td><td>{b}</td></tr>'
                         for t, b in a["risks"])
@@ -2269,7 +2324,13 @@ def render(d, a):
                          for k, v in glossary)
     ai_total = d.get("ai_sessions", 0)
     ai_prev = d.get("ai_prev", 0)
-    ai_mom = f"+{round((ai_total - ai_prev) / ai_prev * 100)}%" if ai_prev else "―"
+    ai_mom = "―"
+    if ai_prev and len(d["months"]) > 1:
+        # 符号は計算に任せる（固定の「+」だと減った月が「+-20%」になる）。途中の月は1日あたりで比べる
+        import report_context as RC
+        _p = RC.compare({"ai": ai_total}, {"ai": ai_prev}, "ai", d["months"][-1]["label"],
+                        d["months"][-2]["label"], THROUGH)["pct"]
+        ai_mom = f"{_p:+.0f}%"
     best = max(d["content"]["rows"], key=lambda r: str(r.get("score", "")), default=None)
     # 到達は実測で書く。固定の「3/3」だと、塞がれた月も全サイト到達と読める
     _reach = _ai_reach()
@@ -2449,10 +2510,10 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <h3>詳しい総評</h3>
 <p class="exec">{a["summary"]}</p>
 <div class="hl-cards">
-  <div class="hl"><div class="k">{plain("セッション")}</div><div class="v">{cur.get("sessions",0):,}</div><div class="s">前月比 {a["mom"]("sessions")}</div></div>
-  <div class="hl"><div class="k">{plain("CV（相談+資料DL）")}</div><div class="v">{cur.get("cv",0)}件</div><div class="s">前月比 {a["mom"]("cv")}</div></div>
-  <div class="hl"><div class="k">{plain("AI経由参照")}</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
-  <div class="hl"><div class="k">{plain("当月公開記事")}</div><div class="v">{d["content"]["published"]}本</div><div class="s">品質90点以上のみ</div></div>
+  <div class="hl"><div class="k">{plain("セッション")}</div><div class="v">{"未計測" if ga_na else f'{cur.get("sessions",0):,}'}</div><div class="s">前月比 {"―" if ga_na else a["mom"]("sessions")}</div></div>
+  <div class="hl"><div class="k">{plain("CV（相談+資料DL）")}</div><div class="v">{"未計測" if ga_na else f'{cur.get("cv",0)}件'}</div><div class="s">前月比 {"―" if ga_na else a["mom"]("cv")}</div></div>
+  <div class="hl"><div class="k">{plain("AI経由参照")}</div><div class="v">{"未計測" if ga_na else ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
+  <div class="hl"><div class="k">{plain("当月公開記事")}</div><div class="v">{pub_text(d)}</div><div class="s">品質90点以上のみ</div></div>
 </div>
 <div class="callout"><b>今月の結論:</b> {a["grown"][0].replace("<b>","").replace("</b>","") if a["grown"] else "-"}</div>
 <h3>本レポートの構成</h3>
@@ -2644,7 +2705,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="sec"><span class="no">07</span><h2>AI検索（AIO / LLMO）分析</h2><div class="gold"></div></div>
 <p style="font-size:9.5pt">検索結果の外側——ChatGPTやPerplexityの「回答」の中で自社がどれだけ参照されたかの分析です。ゼロクリック時代の新しい流入経路であり、当メディアの中核戦略です。</p>
 <div class="hl-cards" style="margin:10px 0 14px">
-  <div class="hl"><div class="k">{plain("AI経由セッション（当月）")}</div><div class="v">{ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
+  <div class="hl"><div class="k">{plain("AI経由セッション（当月）")}</div><div class="v">{"未計測" if ga_na else ai_total}</div><div class="s">前月比 {ai_mom}</div></div>
   <div class="hl"><div class="k">{plain("AI経由の全体比")}</div><div class="v">{round(ai_total / max(cur.get("sessions",1),1) * 100, 1)}%</div><div class="s">対セッション</div></div>
   <div class="hl"><div class="k">{plain("AIクローラーの到達")}</div><div class="v">{reach_v}</div><div class="s">回答用のUAで実測</div></div>
 </div>
@@ -2983,7 +3044,7 @@ GA4の独自イベント（画面内40%表示で発火）による計測で、�
 <!-- ページ8: コンテンツ実績+来月プラン -->
 <div class="sheet">
 <div class="sec"><span class="no">18</span><h2>コンテンツ実績</h2><div class="gold"></div></div>
-<p style="font-size:9.5pt">当月公開: <b>{d["content"]["published"]}本</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
+<p style="font-size:9.5pt">当月公開: <b>{pub_text(d)}</b>（公開基準: 品質採点90点以上・機械検査18項目全PASSのみが公開されます）</p>
 <table><tr><th>日付</th><th>タイトル</th><th>品質スコア</th><th>審査記録</th></tr>{crows}</table>
 {best_html}
 <h3>公開までに通過する検査</h3>
@@ -3115,7 +3176,35 @@ AI経由参照は chatgpt.com・chat.openai.com・perplexity.ai・gemini.google.
 # ============================================================
 # 出力（HTML→PDF→メール）
 # ============================================================
+def _enqueue(ok, why, ym=None, pdf=""):
+    """まとめ送信の列に1行積む。落ちた社も積む（積まなければ、その社が来なかったことに誰も気づかない）"""
+    try:
+        name = site_cfg()["name"]
+    except Exception:
+        name = SITE_ID
+    q = ROOT / "automation" / "logs" / "report_queue.jsonl"
+    q.parent.mkdir(parents=True, exist_ok=True)
+    with q.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"site": SITE_ID, "name": name, "ym": ym or month_labels()[-1],
+                            "pdf": pdf, "ok": ok, "why": list(why)[:5],
+                            "through": THROUGH.isoformat() if THROUGH else None},
+                           ensure_ascii=False) + "\n")
+
+
 def main():
+    if "--queue" not in sys.argv:
+        return _main()
+    try:
+        return _main()
+    except (SystemExit, Exception) as ex:
+        if isinstance(ex, SystemExit) and not ex.code:
+            raise
+        why = str(ex.code) if isinstance(ex, SystemExit) else f"{type(ex).__name__}: {ex}"
+        _enqueue(False, [why[:300]])
+        print(f"  発行できなかったため、理由をまとめ送信の列に積みました: {why[:200]}")
+
+
+def _main():
     d = fetch_demo() if DEMO else fetch_real()
     a = analyze(d)
     html = render(d, a)
@@ -3132,7 +3221,8 @@ def main():
     html_path.write_text(html, encoding="utf-8")
 
     # 来月号で達成率を突合するため、設定した目標を翌月のキーで保存する
-    if not DEMO:
+    # 途中経過の数字から作った目標で、月末の号の目標を上書きしない
+    if not DEMO and not THROUGH:
         y, mo = map(int, ym.split("-"))
         next_ym = f"{y + (mo == 12)}-{(mo % 12) + 1:02d}"
         import sites as _sm3
@@ -3203,11 +3293,7 @@ def main():
         if queue:
             # 社ごとにメールを送らず、まとめて1通にする（report_digest.py が送る）。
             # 照合に落ちた社は添付せず「照合で止めた」として本文に載る
-            q = ROOT / "automation" / "logs" / "report_queue.jsonl"
-            q.parent.mkdir(parents=True, exist_ok=True)
-            with q.open("a", encoding="utf-8") as f:
-                f.write(json.dumps({"site": SITE_ID, "name": site_cfg()["name"], "ym": ym, "pdf": str(pdf_path),
-                                    "ok": ok, "why": bad[:5]}, ensure_ascii=False) + "\n")
+            _enqueue(ok, bad, ym, str(pdf_path))
             print(f"  まとめ送信の列に積みました（照合 {'OK' if ok else 'NG'}）")
             return
         if not ok:

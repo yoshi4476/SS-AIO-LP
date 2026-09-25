@@ -109,16 +109,49 @@ def main():
     if score < 90:
         raise SystemExit(f"score={score} のため公開しません（90点以上が必要）")
 
+    # 2-2. 食い合いゲート（執筆後）を配信の前に置く。
+    #      ワークフローの kw_gate --after は、この工程（記事生成の中で呼ばれる）より後に走る。
+    #      別リポジトリの社は、そこで隔離しても既に配信先へ push 済みで、止める意味が無かった
+    import kw_gate
+    kw = str(meta.get("keyword") or "").strip()
+    if kw:
+        level, out = kw_gate.judge(kw, site_id, exclude_slug=slug)
+        if level >= 2:
+            print("\n".join("   " + ln for ln in out.strip().splitlines()[-4:]))
+            raise SystemExit(
+                f"BLOCKED(食い合い): 「{kw}」は既存ページと食い合うため配信しません。\n"
+                "  この後の kw_gate --after が articles/_conflicted/ へ隔離します")
+
+    import editorial_review
+
+    def held():
+        # 監修待ちは品質の不合格ではない。失敗で返すと救済の工程が書き直しに回すため、0で抜ける
+        print(f"HELD(監修待ち): {slug} は監修の記録が無いため公開していません"
+              f"（確認したら python scripts/editorial_review.py --approve {slug}）")
+        raise SystemExit(0)
+
     # 3. 配信（サイト種別ごとの出口）
     if cfg["type"] == "self-static":
+        # リード導線は build の前に入れる（ワークフローの同じ工程は、この後に走るため）
+        run([PY, "scripts/tool_links.py", "--write"], check=False)
         run([PY, "scripts/build.py"])
-        run([PY, "scripts/notify_indexnow.py"], check=False)
-        run([PY, "scripts/notify_indexing.py"], check=False)
+        # build.py は止めた記事を黙って除外する（終了コードは0）。HTMLの有無で確かめないと、
+        # 公開されていない記事を台帳へ「公開済み」と記録してしまう
+        if not (ROOT / "site" / cat / slug / "index.html").is_file():
+            if not editorial_review.reviewed(slug):
+                held()
+            raise SystemExit(f"BLOCKED(公開不可): build.py が {slug} を止めました。"
+                             "上の BLOCKED の理由を直してから再実行すること")
+        # IndexNow / Indexing API の通知は、デプロイの後にワークフローが送る
+        # （ここで送ると、まだ配信されていないURLを知らせて404を踏ませる）
     else:
         args = [PY, "scripts/publish.py", "--site", site_id, "--slug", slug]
         if push:
             args.append("--push")
-        run(args)
+        if run(args, check=False) != 0:
+            if not editorial_review.reviewed(slug):
+                held()
+            raise SystemExit(f"失敗: {' '.join(str(a) for a in args)}")
 
     # 4. 本当に公開されたかを確認する。
     #    pushが通ってもビルドが落ちれば記事は出ない。実際、配信先のビルドが停止していたのに

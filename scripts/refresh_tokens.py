@@ -195,6 +195,8 @@ def main():
 
     print("\n■ 期限があるトークン")
     changed = []
+    # 更新前の期限の記録と、その更新で変わったキー。Secrets に書けなかったときに戻すため
+    prev_state, owner = {}, {}
     for key, label, fn in TASKS:
         left = days_left(state, key)
         cur = f"残り{left}日" if left is not None else "期限が未記録"
@@ -208,11 +210,15 @@ def main():
             print(f"  {label:16s} {cur} — まだ更新しません")
             continue
         before = dict(e)
+        prev_state[key] = json.loads(json.dumps(state.get(key))) if key in state else None
         try:
             msg = fn(e, state)
             print(f"  {label:16s} {msg}")
             # LinkedIn はリフレッシュトークンも入れ替わることがあるので、変わった値を全部拾う
-            changed += [k for k in e if e[k] != before.get(k) and k not in changed]
+            new = [k for k in e if e[k] != before.get(k) and k not in changed]
+            changed += new
+            for k in new:
+                owner[k] = (key, label)
         except urllib.error.HTTPError as ex:
             print(f"  {label:16s} 失敗（{ex.code}）— 手動での再取得が要ります")
         except Exception as ex:
@@ -222,10 +228,12 @@ def main():
         save_state(state)
         gh = e.get("GH_SECRET_TOKEN") or e.get("SITE_PUSH_TOKEN", "")
         repo = e.get("HUB_REPO", "yoshi4476/SS-AIO-LP")
+        stored = set()
         if is_set(gh):
             for key in changed:
                 try:
                     update_secret(key, e[key], repo, gh)
+                    stored.add(key)
                     print(f"  GitHub Secrets を更新: {key}")
                 except ImportError:
                     print("  GitHub Secrets の更新には PyNaCl が要ります"
@@ -236,6 +244,19 @@ def main():
         else:
             print("  ※ GitHub Secrets は手動で更新してください"
                  "（GH_SECRET_TOKEN を設定すると自動化されます）")
+        # CI には .env が無く、新しい値は Secrets に書けた分しか残らない。書けなかった分の
+        # 期限まで進めると、古いトークンのまま「まだ更新しません」と判定され、失効まで気づけない
+        if not ENV.is_file():
+            for k in changed:
+                if k in stored or k not in owner:
+                    continue
+                tkey, label = owner[k]
+                if prev_state.get(tkey) is None:
+                    state.pop(tkey, None)
+                else:
+                    state[tkey] = prev_state[tkey]
+                print(f"要対応: {label} の新しいトークン（{k}）を GitHub Secrets に保存できませんでした。"
+                      "期限の記録は戻したので次回また更新します。続くなら GH_SECRET_TOKEN の権限を確認してください")
 
     if not check_only:
         save_state(state)

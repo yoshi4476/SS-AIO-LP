@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       since:
-        description: "配信し直す起点（既定は直近1コミット。取りこぼしを流すときだけ広げる）"
+        description: "配信し直す起点（既定はこの実行で直した分。取りこぼしを流すときだけ広げる。例: HEAD~10）"
         type: string
         default: "HEAD~1"
 
@@ -27,6 +27,11 @@ jobs:
     # 60分では足りず、2026-09-21 は再通知の工程で打ち切られ、コミットも配信も走らなかった。
     # public リポジトリなので実行時間は無料。重い工程はそれぞれ --budget-min で自分を止める
     timeout-minutes: 180
+    # 管制塔はジョブ全体で使う。工程ごとに渡していたため、渡し忘れた工程の
+    # hub_client error_log が黙って終わり、見つけた異常がどこにも残らなかった
+    env:
+      HUB_URL: ${{ secrets.HUB_URL }}
+      HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
       - uses: actions/checkout@v4
 
@@ -57,6 +62,32 @@ jobs:
           # 前回分が残っていると先週の要対応が今週の通知に載るので、最初に空にしておく
           mkdir -p automation/logs
           rm -f automation/logs/findings.txt
+          # 配信の基点。途中の工程が何度コミット・rebase しても、最後にこの時点からの
+          # 差分をまとめて他サイトへ配信する（途中1回だけだと後段の直しが届かなかった）
+          since="${{ inputs.since }}"
+          base=$(git rev-parse HEAD)
+          if [ -n "$since" ] && [ "$since" != "HEAD~1" ]; then
+            # 取りこぼしを流すときだけ履歴を取り寄せる（checkout は直近1コミットしか持たない）
+            git fetch -q --unshallow origin || true
+            base=$(git rev-parse "$since" 2>/dev/null) || { echo "::warning::起点 $since を解決できません。この実行の分だけ配信します"; base=$(git rev-parse HEAD); }
+          fi
+          echo "BASE_SHA=$base" >> "$GITHUB_ENV"
+          echo "配信の基点: $base"
+
+      # サービスアカウントの鍵はジョブの最初に1回だけ置き、最後の後始末で消す。
+      # 工程ごとに書いて消していたため、書き忘れた工程（auto_improve・auto_merge・
+      # 週次レポートなど）が鍵なしで動き、GSC/GA4 を読めないまま `|| true` で成功扱いになっていた。
+      # .gitignore 済みなので途中の git add -A には入らない
+      - name: サービスアカウントの鍵を置く（ジョブで1回）
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          else
+            echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です（GSC/GA4 を使う工程は空振りします）"
+          fi
 
       # 期限のあるトークンを、切れる前に更新する。
       # 切れてから気づくと、その間の配信が丸ごと落ちる。
@@ -75,11 +106,8 @@ jobs:
       # GSCが読めているかを毎週確認する。ここが黙って落ちると補充が
       # サジェスト頼りになり、有限の候補を掘り尽くして在庫が枯れる。
       - name: Search Consoleの疎通確認
-        env:
-          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -z "$SA_JSON" ]; then echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です"; exit 0; fi
-          printf '%s' "$SA_JSON" > indexing-service-account.json
+          if [ ! -f indexing-service-account.json ]; then echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です"; exit 0; fi
           pip install --quiet google-api-python-client google-auth
           # 例外で終わっても週次全体を止めない（-e で代入ごと落ち、下の記録も後続も飛んでいた）
           out=$(python scripts/gsc_check.py 2>&1) || true; echo "$out"
@@ -89,18 +117,11 @@ jobs:
       # 推定KWではなく「実際に検索されている語」を供給し続けるための工程。
       - name: KWキューの実データ補充
         env:
-          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
           # 未設定なら無料のサジェストだけで動く（キー待ちで止めない）。
           # ここへ渡し忘れると、手元では効いているのにCIだけ効かない
           RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
-          if [ -n "$SA_JSON" ]; then
-            printf '%s' "$SA_JSON" > indexing-service-account.json
-            pip install --quiet google-api-python-client google-auth
-          fi
           # 1サイトの失敗で全体を止めたくないが、黙って0件のまま進むと在庫が枯れる。
           # 結果を必ず表示し、追記できなかったサイトは管制塔のエラーログへ残す。
           for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
@@ -123,7 +144,6 @@ jobs:
           # AI検索で答えが出る語（質問形）を、GSCの実績とサジェストから毎週さがして台帳へ積む。
           # 検索つきのAI（Gemini）へは1サイト8語まで聞く。キーが無ければ候補の抽出だけ行う
           python scripts/ai_kw_research.py --all --probe 8 --append 2>&1 | tail -12 || true
-          rm -f indexing-service-account.json
           python scripts/kw_status.py
 
       # 既存記事どうしの検索意図の重複を検出（LLMが対処判断に使う）
@@ -133,26 +153,14 @@ jobs:
       # 落ちたときに気づく仕組み。合計だけ見ても何を直せばいいか分からないので、
       # 消えた語と順位が下がった語に分解して出す
       - name: 表示・クリックが落ちていないかの確認
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/growth_guard.py || true
-          rm -f indexing-service-account.json
 
       # 書く前の類似度では見つからない食い合い。似ていない記事どうしでも、
       # 同じ語で自社ページが並べばどれも上がらないため、実績で見る
       - name: 同じ検索語での自社ページの食い合い（GSC実績）
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/cannibal_check.py --serp || true
-          rm -f indexing-service-account.json
 
       # 実行時間の無料枠を使い切ると全自動運転が無言で止まるため事前に警告する
       - name: Actions実行時間の残枠チェック
@@ -173,12 +181,7 @@ jobs:
       # 1ページ目の手前にいる記事に届かない。実測で、止まる27本のうち
       # 被リンク5本以下は3本だけだった
       - name: 11〜30位で止まっている記事へ内部リンクを寄せる
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           # 生の出力は通知本文に入れない（要対応の行だけを拾う）
           mkdir -p automation/logs
           { python scripts/rank_rescue.py --refresh || true
@@ -190,7 +193,6 @@ jobs:
           for s in ai-lab corporate subsidy; do
             python scripts/link_boost.py "$s" --rescue --write || true
           done
-          rm -f indexing-service-account.json
 
       - name: 無料診断への導線を新しい記事にも入れる
         run: python scripts/tool_links.py --write || true
@@ -205,14 +207,8 @@ jobs:
       # AIが根拠に選ぶのは「そこにしか無い数字」で、手で集計する形にしていた
       # ため1本しか増えていなかった。GSC・GA4から毎週自動で作り直す
       - name: 一次データを計測から作り直す
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/data_auto.py --write || true
-          rm -f indexing-service-account.json
 
       # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
@@ -240,63 +236,33 @@ jobs:
       # 言い当てているかを確かめる。当たっていない判断で選び続けると、
       # 努力の向き先がずれる。実測で2件が当たっていなかった
       - name: 判断が当たっているかを確かめる
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/validate_rules.py || true
-          rm -f indexing-service-account.json
 
       # 打った手が効いたかを、触っていない記事と比べて判定する。
       # サイト全体が伸びている時期は、何をしても「効いた」に見えるため
       - name: 打った手の効き（対照群と比較）
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/effect_ab.py || true
-          rm -f indexing-service-account.json
 
       # 順位そのものは保証できない。保証できるのは「順位を決める要因のうち
       # こちら側にあるものを毎回100%満たすこと」。その達成率を毎週出す
       - name: こちら側で決まる要因の達成率
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/guarantee.py || true
-          rm -f indexing-service-account.json
 
       - name: 盤面の空きを出す（業種 × 手法）
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           for s in ai-lab corporate subsidy; do
             python scripts/coverage.py --site "$s" || true
             python scripts/coverage.py --site "$s" --gaps 8 || true
           done
-          rm -f indexing-service-account.json
 
       # あと少しで1ページ目に届く記事は、放っておいても上がらない。
       # 被リンクが足りないまま何ヶ月も止まるので、毎週そこを埋める
       - name: 1ページ目に近い記事の底上げ（主力の語のみ）
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/priority_boost.py --write || true
-          rm -f indexing-service-account.json
 
       # 順位を上げることだけに絞った工程。11〜20位の層を狙う。
       # データの取り方を1か所に固定し、page次元の数字を正とする。
@@ -304,15 +270,9 @@ jobs:
       # 3〜4割少なく出た。その食い違いに気づかず誤った判断をしたことがある。
       # 直した記録を data/rank_up.json に残し、--effect で前後を比べる
       - name: 順位を上げる（1ページ目に最も近い層）
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/rank_up.py --effect || true
           python scripts/rank_up.py --write || true
-          rm -f indexing-service-account.json
 
       # 長い段落は読みにくいだけでなく、AI検索も一文を切り出しにくい。
       # 文の切れ目でだけ分け、地の文が1字でも変わったら書き換えない
@@ -351,6 +311,10 @@ jobs:
 
       - name: タイトル・検索意図の直し
         if: steps.guard.outputs.ok == 'yes'
+        # claude を呼ぶ工程。鍵を渡し忘れると1本も直せないまま `|| true` で成功扱いになる
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         # 対象37件に対して週6本では追いつかない（検索での取りこぼしは28日で
         # 約100クリック）。リポジトリはpublicでActionsの時間制限が無いため
         # 本数を上げる。1本最大30分かかるので、時計でも止める（ジョブの上限は60分で、
@@ -365,6 +329,9 @@ jobs:
       # 検算が効くことを先に確かめる（効かなければ統合しない）
       - name: 食い合う記事の統合（検算つき）
         if: steps.guard.outputs.ok == 'yes'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           if python scripts/auto_merge.py --selftest; then
             python scripts/auto_merge.py --write --limit 2 --budget-min 20 || true
@@ -417,13 +384,9 @@ jobs:
           fi
 
       - name: 2ページ目で止まっている記事の洗い出し
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          if [ -f indexing-service-account.json ]; then
             python scripts/rewrite_list.py --top 12 || true
-            rm -f indexing-service-account.json
           fi
 
       - name: 直した記事が基準を割っていないか
@@ -431,20 +394,14 @@ jobs:
           # 機械の直しでも品質は落とさない。割っていれば週次を落とす
           python scripts/build.py
 
-      # 直した記事は他2サイトへ配信しないと本番に反映されない。
-      # 直すだけ直して届かないのでは意味がないため、ここで押し切る。
-      - name: 直した記事を他サイトへ配信
-        env:
-          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+      # ここまでの直しを正本へ保存しておく。後ろの工程（claude・書き換え）が落ちたり
+      # 時間切れになったりしても、ここまでの分は捨てられない。
+      # 他サイトへの配信は、後段の直しも含めて最終コミットの後に1回だけ行う
+      # （ここで配信すると、後段の直しが corporate/subsidy に届かなかった）
+      - name: 途中までの直しを正本へ保存
         run: |
           git add -A
           git diff --cached --quiet || git commit -m "weekly: 内部リンクと導線の補充"
-          python scripts/publish_changed.py --all --since "${{ inputs.since || 'HEAD~1' }}" --push || true
-          # 統合で消した記事は配信先にも残っている。外して 301 で送らないと2本が出続ける
-          python scripts/retract.py --pending --push || true
-          # 配信先へ出したのと同じ時点で正本にも push する。後ろの工程が落ちると
-          # 最後の push まで届かず、配信先にだけ直しが残って正本とずれていた。
-          # pull は配信の後に行う（先に行うと上の --since HEAD~1 が別のコミットを指す）
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || git rebase --abort || true
           git push || echo "::warning::正本への push に失敗（最後のコミット工程で再度 push します）"
 
@@ -465,9 +422,6 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
-          HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
           GBP_CLIENT_JSON: ${{ secrets.GBP_CLIENT_JSON }}
           GBP_TOKENS_JSON: ${{ secrets.GBP_TOKENS_JSON }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -475,7 +429,7 @@ jobs:
         run: |
           mkdir -p automation/logs
           # GSC を使う実測（型・共起語・リッチ・並び替え・国別・季節）はサービスアカウントの鍵が要る
-          [ -n "$GCP_SERVICE_ACCOUNT_JSON" ] && printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          # （鍵はジョブの最初に置いてある）
           # Googleビジネスプロフィールの鍵（クライアントごと）。無ければ gbp / review_reply は何もしない
           [ -n "$GBP_CLIENT_JSON" ] && printf '%s' "$GBP_CLIENT_JSON" > gbp-client.json
           if [ -n "$GBP_TOKENS_JSON" ]; then
@@ -508,7 +462,11 @@ jobs:
           done
           python scripts/menu_page.py --build --all --push 2>&1 | tail -4 || true
           grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt || true
-          rm -f indexing-service-account.json gbp-client.json gbp-token-*.json
+          # 測れなかった（*_OK=unknown）も知らせる。黙って飛ばすと、鍵やAPIの有効化が
+          # 切れたまま「異常なし」に見える。理由の1行は各検査がログに出している
+          grep -o '[A-Z_]*_OK=unknown' /tmp/measure.txt | sort -u | sed 's/=unknown$//' \
+            | while read -r m; do echo "要対応: $m（測れませんでした）"; done >> automation/logs/findings.txt || true
+          rm -f gbp-client.json gbp-token-*.json
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi
 
@@ -516,8 +474,6 @@ jobs:
       - name: 見出しを質問形へ（週2本）
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           n=2; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=1
           python scripts/auto_rewrite.py --write --kind question --limit $n --budget-min 12 2>&1 | tail -6 || true
@@ -529,6 +485,8 @@ jobs:
       - name: 多言語の要約を訳す（指示のある社だけ・週10記事）
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # --publish は配信先リポジトリへ push する。無いと訳しても届かない
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
         run: |
           n=10; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=5
           python scripts/i18n.py --all --write --publish --limit $n --budget-min 25 2>&1 | tail -8 || true
@@ -538,19 +496,14 @@ jobs:
       - name: 効かなかった直しを戻す・表示ゼロを整理・鮮度を更新
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          [ -n "$GCP_SERVICE_ACCOUNT_JSON" ] && printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           python scripts/rewrite_rollback.py --write 2>&1 | tail -8 || true
           python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
           python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
           # 一次情報の1文を関係する記事へ（週3本）／離脱が最大の区画の手前に導線（固定ページ）
           python scripts/fact_cite.py --write --limit 3 2>&1 | tail -5 || true
           python scripts/exit_fix.py --write 2>&1 | tail -5 || true
-          rm -f indexing-service-account.json
 
       # 今週公開した記事を短い動画にして YouTube へ上げる。AI検索での可視性と最も強く
       # 相関するのは YouTube での言及（0.71・被リンクの3倍）。台本は記事の1文結論の
@@ -574,6 +527,9 @@ jobs:
         run: |
           python scripts/build.py
           git add -A
+          # 介入の台帳。effect_ab・rewrite_rollback が前後を比べる元なので、CI で毎回空に
+          # ならないよう追跡する（automation/logs/ は .gitignore 対象のため -f で足す）
+          [ -f automation/logs/auto_fix.jsonl ] && git add -f automation/logs/auto_fix.jsonl
           if git diff --cached --quiet; then
             echo "変更なし — コミットをスキップ"
           else
@@ -581,6 +537,24 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
+
+      # 直した記事は他サイトへ配信しないと本番に反映されない。週次の最初に記録した
+      # 基点からの差分をまとめて送るので、claude 週次・表記ゆれ・質問形/説明文/鮮度の
+      # 書き換え・統合・一次情報・戻し・動画埋め込み・著者 Person まで1回で届く
+      - name: 直した記事を他サイトへ配信
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+        run: |
+          python scripts/publish_changed.py --all --since "$BASE_SHA" --push || true
+          # 統合で消した記事は配信先にも残っている。外して 301 で送らないと2本が出続ける
+          python scripts/retract.py --pending --push || true
+          # 取り下げ済みの印（data/retractions.jsonl）を正本に残す。残さないと翌週また取り下げ直す
+          git add -A
+          git diff --cached --quiet || {
+            git commit -q -m "weekly: 配信・取り下げの記録 $(date '+%Y-%m-%d')"
+            git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
+            git push -q || echo "::warning::配信の記録を正本へ push できませんでした"
+          }
 
       - name: Cloudflare Pagesへデプロイ
         env:
@@ -613,14 +587,8 @@ jobs:
           fi
 
       - name: 見つかったものを集めて知らせる
-        env:
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-          fi
           python scripts/findings.py || true
-          rm -f indexing-service-account.json
 
       # 検査（findings）の後に作る。要対応の一覧を「次にやること」に載せるため。
       # 前はここより前にあり、検査結果が出る前にレポートが確定していた
@@ -631,13 +599,9 @@ jobs:
         run: python scripts/notify_indexnow.py || true
 
       - name: Google Indexing API即時登録（本日更新分）
-        env:
-          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$SA_JSON" ]; then
-            printf '%s' "$SA_JSON" > indexing-service-account.json
+          if [ -f indexing-service-account.json ]; then
             python scripts/notify_indexing.py || true
-            rm -f indexing-service-account.json
           else
             echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
           fi
@@ -650,13 +614,9 @@ jobs:
       # スクリプト側で15分、工程側で20分の上限を置き、超えても後の工程は動かす
       - name: 登録されていないページを拾って再通知
         timeout-minutes: 20
-        env:
-          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
-          if [ -n "$SA_JSON" ]; then
-            printf '%s' "$SA_JSON" > indexing-service-account.json
+          if [ -f indexing-service-account.json ]; then
             python scripts/reindex.py --budget-min 15 || true
-            rm -f indexing-service-account.json
             # 登録済みと確かめたURLの記録を残す（次の週はそこを検査しない）
             git add data/index_cache.json 2>/dev/null || true
             git diff --cached --quiet || {
@@ -685,3 +645,8 @@ jobs:
           python scripts/notify_slack.py --routine "$icon 週次最適化: ${{ job.status }}
           $found
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+
+      # 鍵の後始末。途中の工程が落ちても必ず消す
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json gbp-client.json gbp-token-*.json youtube-client.json youtube-token.json

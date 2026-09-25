@@ -56,7 +56,8 @@ FIELDS = [
      "WordPressをお使いなら wordpress。当社で新規構築するなら self-static。"
      "既存の静的サイトへ配信する場合は external-html / external-md / nextjs-json",
      "wordpress", True),
-    ("url_prefix", "記事URLの接頭辞", "記事が /blog/xxx/ に出るなら /blog", "/blog", False),
+    ("url_prefix", "記事URLの接頭辞",
+     "記事が /blog/xxx/ に出るなら /blog。自社構築（self-static）以外は必ず記入", "/blog", False),
     ("content_dir", "記事の置き場所", "配信先リポジトリ内のパス", "src/content/blog", False),
     ("images_dir", "画像の置き場所", "同上", "public/images/blog", False),
     ("wp_api", "WordPressのAPIのURL",
@@ -106,12 +107,22 @@ FIELDS = [
      "経理BPOで通算120社の月次決算を受託してきました", True),
     ("facts.1.source", "① の出典", "自社実績 / 自社調査 / 顧客アンケート など", "自社実績", True),
     ("facts.1.as_of", "① の時点", "YYYY-MM。古い数値は使われません", "2026-09", True),
+    # 割合（◯%・◯割）は母数と集計期間が無いと登録しない（景品表示法・根拠の明示。add_fact と同じ検査）
+    ("facts.1.denominator", "① の母数",
+     "割合（◯%・◯割）を書く場合のみ。「何社中何社か」の何社を数字で。一文の中にも同じ数を書いてください",
+     "42", False),
+    ("facts.1.period", "① の集計期間",
+     "割合を書く場合のみ。一文の中にも期間を書いてください", "2025-04〜2026-03", False),
     ("facts.2.claim", "実績・数値 ②", "", "導入企業の月次決算が平均6営業日短縮しました", False),
     ("facts.2.source", "② の出典", "", "自社調査（受託42社・2025年実績）", False),
     ("facts.2.as_of", "② の時点", "", "2026-09", False),
+    ("facts.2.denominator", "② の母数", "割合を書く場合のみ", "", False),
+    ("facts.2.period", "② の集計期間", "割合を書く場合のみ", "", False),
     ("facts.3.claim", "実績・数値 ③", "", "", False),
     ("facts.3.source", "③ の出典", "", "", False),
     ("facts.3.as_of", "③ の時点", "", "", False),
+    ("facts.3.denominator", "③ の母数", "割合を書く場合のみ", "", False),
+    ("facts.3.period", "③ の集計期間", "割合を書く場合のみ", "", False),
     ("facts.note", "事例・体験",
      "数値でなくても、現場で見てきたことがあれば。記事の一人称パートに使います",
      "担当者が1人の会社ほど、退職時に業務が止まるリスクを挙げられます", False),
@@ -572,7 +583,6 @@ def to_config(got):
         "repo": got.get("repo", ""),
         "branch": got.get("branch", "main"),
         "type": got.get("type", "external-html"),
-        "url_prefix": got.get("url_prefix", "/blog"),
         "ga4_property_id": got.get("ga4_property_id", ""),
         "kw_plan": f"docs/kw-{got.get('id', 'client')}.md",
         "theme": got.get("theme", ""),
@@ -580,7 +590,7 @@ def to_config(got):
         "owns": lines(got.get("owns")),
         "avoid": lines(got.get("avoid")),
         # 多言語は指示のある社だけ（空なら作らない）
-        "languages": [l for l in lines(got.get("languages")) if l in ("en", "zh", "ko")],
+        "languages": languages(got.get("languages"))[0],
         "categories": pairs(got.get("categories")),
         "kw_seeds": {"industries": lines(got.get("kw_seeds.industries")),
                      "intents": lines(got.get("kw_seeds.intents"))},
@@ -589,7 +599,14 @@ def to_config(got):
         "cta": {"label": got.get("cta.label", ""), "url": got.get("cta.url", ""),
                 "note": got.get("cta.note", "")},
     }
-    for k in ("content_dir", "images_dir", "cta_title", "cta_desc", "note", "wp_api"):
+    # 接頭辞は既定を補わない。空のまま "/blog" を入れると、実際の記事URLと違う
+    # URLが sitemap・内部リンク・通知に出る。自社構築は カテゴリ/slug で組むので持たせない
+    prefix = (got.get("url_prefix") or "").strip().strip("/")
+    if cfg["type"] != "self-static" and prefix:
+        cfg["url_prefix"] = "/" + prefix
+    # note（社内事情）と report_to（担当者のメール）は sites/ に書かない。
+    # sites/*.json は public リポジトリにコミットされる。private.json に分ける（to_private）
+    for k in ("content_dir", "images_dir", "cta_title", "cta_desc", "wp_api"):
         if got.get(k):
             cfg[k] = got[k]
     mix = pairs(got.get("category_mix"), num=True)
@@ -605,10 +622,39 @@ def to_config(got):
         rule["ng_words"] = lines(got["ng_words"])
     if rule:
         cfg["rules"] = rule
-    if got.get("report_to"):
-        cfg["report_to"] = [x.strip() for x in got["report_to"].replace("、", ",").split(",")
-                            if x.strip()]
     return cfg
+
+
+def to_private(got):
+    """公開リポジトリに置けないもの（担当者のメール・社内の申し送り）。
+    data/clients/<id>/private.json に書き、.gitignore で外す"""
+    out = {}
+    if got.get("report_to"):
+        out["report_to"] = [x.strip() for x in got["report_to"].replace("、", ",").split(",")
+                            if x.strip()]
+    if got.get("note"):
+        out["note"] = got["note"]
+    return out
+
+
+LANGS = ("en", "zh", "ko")
+
+
+def languages(v):
+    """多言語の指定を読む。(拾えた言語, 拾えなかった語) を返す。
+    「en（英語）」「en, zh, ko」「EN」のように書かれても拾う。
+    完全一致だけで見ていたため、こう書いた社の指定が黙って捨てられていた"""
+    got, bad = [], []
+    for w in re.split(r"[\s,，、/／・]+", v or ""):
+        if not w:
+            continue
+        m = re.match(r"(en|zh|ko)(?![a-z])", w, re.I)
+        if m:
+            if m.group(1).lower() not in got:
+                got.append(m.group(1).lower())
+        elif not re.fullmatch(r"[（(].*[)）]", w):
+            bad.append(w)
+    return got, bad
 
 
 
@@ -725,11 +771,17 @@ def to_facts(got, site_id):
         claim = got.get(f"facts.{i}.claim")
         if not claim:
             continue
-        out.append({"id": f"{site_id}-fact{i}", "sites": [site_id],
-                    "topic": [], "claim": claim,
-                    "source": got.get(f"facts.{i}.source", "自社実績"),
-                    "as_of": got.get(f"facts.{i}.as_of", ""),
-                    "verifiable": True})
+        f = {"id": f"{site_id}-fact{i}", "sites": [site_id],
+             "topic": [], "claim": claim,
+             "source": got.get(f"facts.{i}.source", "自社実績"),
+             "as_of": got.get(f"facts.{i}.as_of", ""),
+             "verifiable": True}
+        den = re.sub(r"[^0-9]", "", got.get(f"facts.{i}.denominator", ""))
+        if den:
+            f["denominator"] = int(den)
+        if got.get(f"facts.{i}.period"):
+            f["period"] = got[f"facts.{i}.period"]
+        out.append(f)
     if got.get("facts.note"):
         out.append({"id": f"{site_id}-note", "sites": [site_id], "topic": [],
                     "claim": got["facts.note"], "source": "現場での観察",
@@ -758,6 +810,19 @@ def review(got, cfg):
     # ここで止めると、repo 欄を空にした WordPress の社がいつまでも登録できない
     if cfg.get("type") not in ("self-static", "wordpress") and not cfg.get("repo"):
         ng.append("配信先リポジトリが空です（自社構築以外は書き込み先が要ります）")
+    # 以前は空欄に "/blog" を補っていた。実際の記事URLが違えば、sitemap も通知も
+    # 存在しないURLを指す。推測で埋めず、書いてもらう
+    if cfg.get("type") in TYPES and cfg["type"] != "self-static" and not cfg.get("url_prefix"):
+        ng.append("記事URLの接頭辞が空です（記事が /blog/xxx/ に出るなら /blog と書いてください）")
+    _, bad = languages(got.get("languages"))
+    if bad:
+        warn.append(f"多言語の指定で読めない語があります: {' / '.join(bad)}"
+                    "（en / zh / ko で書いてください。読めた分だけ作ります）")
+    # 上限は intake_watch だけで見ていた。手で client_intake を打つと21社目が通っていた
+    import intake_watch
+    if intake_watch.site_count() >= intake_watch.MAX_SITES:
+        ng.append(f"サイトが既に{intake_watch.site_count()}件あります。この仕組みは"
+                  f"{intake_watch.MAX_SITES}社までです（別リポジトリに分けてください）")
 
     cats = cfg.get("categories") or {}
     if cfg.get("main_category") and cfg["main_category"] not in cats:
@@ -808,6 +873,12 @@ def review(got, cfg):
     for f in hard:
         if not re.fullmatch(r"\d{4}-\d{2}", f.get("as_of") or ""):
             warn.append(f"一次情報の時点が YYYY-MM の形式ではありません: {f['claim'][:24]}…")
+    # 割合は母数と集計期間が無いと優良誤認になる。add_fact と同じ検査を当てる
+    # （「当社の採択率は90%です」がそのまま記事に使われていた）
+    import add_fact
+    for f in facts:
+        for p in add_fact.rate_problems(f):
+            ng.append(f"一次情報「{f['claim'][:24]}…」: {p}")
     if not to_company(got).get("address"):
         warn.append("住所が空です。構造化データの会社情報が不完全になります")
     return ng, warn
@@ -864,6 +935,11 @@ def apply(got, cfg, industry=""):
     if comp:
         p = cdir / "company.json"
         p.write_text(json.dumps(comp, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        made.append(p)
+    priv = to_private(got)
+    if priv:
+        p = cdir / "private.json"          # .gitignore 済み（public リポジトリに出さない）
+        p.write_text(json.dumps(priv, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         made.append(p)
     brief = to_brief(got, industry)
     bp = cdir / "brief.json"

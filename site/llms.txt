@@ -28,7 +28,7 @@
 
 ## 主要コンテンツ
 - [AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/): 4施策の関係と着手順をまとめたピラー記事
-- [AIO対策とは？AI検索に引用される5つの手順](https://ai.7senses.co.jp/aio/aio-taisaku-guide/): AI検索に引用されるための5つの実践手順を解説
+- [AIOコンサルティングとは？依頼の判断基準と費用の目安](https://ai.7senses.co.jp/aio/aio-taisaku-guide/): AI検索に引用されるための5つの実践手順を解説
 - [LLMO対策とは？ChatGPTに引用される7つの方法](https://ai.7senses.co.jp/aio/llmo-taisaku-hoho/): AIチャットに引用されるための7つの実践方法と計測のやり方
 - [AIO対策の無料ツール6選｜計測から診断まで今日から使える](https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/): AI引用状況・構造化データ・クローラー許可を無料で確認する6つのツールと使い方
 - [AI時代のSEO対策とは？中小企業がやるべき5つの基本](https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/): 検索上位とAI引用の両方を狙うSEOの基本を優先順位つきで解説
@@ -38,19 +38,19 @@
 - [ChatGPTを集客に活用する方法7選【中小企業向け】](https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/): プロンプト例つきで今日から使える集客向けChatGPT活用法
 - [歯科医院の集客方法とは？新患を増やす5つの基本施策](https://ai.7senses.co.jp/ai-marketing/shika-iin-shukyaku/): 医療広告ガイドラインに配慮した歯科医院向け集客の実践施策を解説
 - [税理士のホームページ集客とは？失敗しない5つの施策](https://ai.7senses.co.jp/seo/zeirishi-homepage-shukyaku/): 8万人超が競合する市場で選ばれるための失敗原因と5つの施策を解説
-- [士業のSEO対策とは？集客につながる5つの施策](https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/): 弁護士・税理士・司法書士等の士業がSEOで失敗しやすい原因と成功させる5つの施策を解説
+- [士業のSEO｜広告規制の中で専門性をどう発信するか](https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/): 弁護士・税理士・司法書士等の士業がSEOで失敗しやすい原因と成功させる5つの施策を解説
 - [クリニックのホームページに必須の項目とは？外せない6要素](https://ai.7senses.co.jp/seo/clinic-hp-hissu-koumoku/): 医療広告ガイドラインに配慮したクリニックホームページの必須項目6つと整備手順を解説
 - [整骨院の集客が伸びない原因とは？新規患者を増やす5つの打ち手](https://ai.7senses.co.jp/meo/seikotsuin-shukyaku/): 柔整広告ガイドラインに配慮した整骨院向けMEO集客の実践施策を解説
 - [予約につながる導線設計とは？離脱を防ぐ5つの視点](https://ai.7senses.co.jp/seo/yoyaku-tsunagaru-dosen-sekkei/): クリニック・士業事務所の予約フォーム離脱を防ぐ導線設計の5つの視点と整備手順を解説
 - [医療広告ガイドラインとは？クリニックHPの禁止6表現](https://ai.7senses.co.jp/seo/iryou-koukoku-guideline-web/): 厚労省の医療広告ガイドラインで禁止される6類型と自由診療の限定解除4要件を実務目線で解説
-- [病院の口コミ返信例文8選｜低評価・クレームの型](https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/): 守秘義務と医療広告ガイドラインに配慮した病院・クリニック向け口コミ返信例文8パターンを解説
-- [クリニックのAI検索対策とは？患者に選ばれる5つの手順](https://ai.7senses.co.jp/aio/clinic-ai-kensaku-taisaku/): 医療広告ガイドラインに配慮したクリニック向けAI検索対策の実践手順を5つで解説
+- [病院・クリニックの口コミ返信｜違反になるNG表現と例文8つ](https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/): 守秘義務と医療広告ガイドラインに配慮した病院・クリニック向け口コミ返信例文8パターンを解説
+- [AIO対策をクリニックで始める5ステップ｜AI検索で選ばれる](https://ai.7senses.co.jp/aio/clinic-ai-kensaku-taisaku/): 医療広告ガイドラインに配慮したクリニック向けAI検索対策の実践手順を5つで解説
 - [BtoB SEOとは？商談前に選ばれる5つの施策](https://ai.7senses.co.jp/seo/btob-seo-taisaku/): 営業と話す前に検討が固まるBtoB購買の実態と、比較段階で選ばれる5つの施策を解説
-- [SaaS比較記事対策とは？AIに引用される5つの打ち手](https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/): 第三者比較サイトでの評価改善と自社比較コンテンツでAIに引用される5つの施策を解説
+- [SaaS比較記事で不利にならない5つの打ち手｜AI引用対策](https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/): 第三者比較サイトでの評価改善と自社比較コンテンツでAIに引用される5つの施策を解説
 - [ホワイトペーパーの作り方｜BtoBリードを増やす5ステップ](https://ai.7senses.co.jp/ai-marketing/whitepaper-tsukurikata/): 課題起点の資料設計から公開後の改善まで、BtoB向けホワイトペーパーの作り方を5ステップで解説
 - [BtoBリード獲得の方法とは？6つの施策と選び方の基準](https://ai.7senses.co.jp/ai-marketing/btob-lead-kakutoku-hoho/): 展示会・広告・SEO・ホワイトペーパー・ウェビナー・紹介6施策の比較とフェーズ別の選び方を解説
 - [導入事例の書き方とは？成果につながる6ステップ](https://ai.7senses.co.jp/ai-marketing/donyu-jirei-kakikata/): 取材設計から一次情報を活かした執筆まで、読まれる導入事例の書き方を6ステップで解説
-- [BtoB AI検索対策（LLMO）とは？選ばれる5つの施策](https://ai.7senses.co.jp/aio/btob-llmo-taisaku/): BtoB購買担当者のAI検索活用データと、発注候補として選ばれるための5つの施策を解説
+- [BtoBのLLMO対策とは？SEOとの違いと発注候補に残る条件](https://ai.7senses.co.jp/aio/btob-llmo-taisaku/): BtoB購買担当者のAI検索活用データと、発注候補として選ばれるための5つの施策を解説
 - [ウェビナー集客の平均参加率46%と申込を増やす5つの施策](https://ai.7senses.co.jp/ai-marketing/webinar-shukyaku-hoho/): BtoB企業100社の調査データをもとに、開催2週間前から実践する集客5ステップを解説
 - [SaaS指名検索の増やし方｜AI時代に効く5つの施策](https://ai.7senses.co.jp/aio/saas-shimei-kensaku-fuyashikata/): SaaS指名検索の増やし方とは、接触回数を積み重ねて認知を蓄積し、AI引用の構造を整えてサービス名で検索される状態を作ることです。BtoB購買データと5つの施策を解説します。
 - [展示会後フォローで商談化率を上げる5つの施策](https://ai.7senses.co.jp/ai-marketing/tenjikaigo-follow-hoho/): 展示会リードの商談化率データと、放置せず商談化につなげる5つの施策・着手の3ステップを解説
@@ -58,15 +58,15 @@
 - [工務店のSEO対策｜施工事例で選ばれる5つの施策と始め方](https://ai.7senses.co.jp/seo/koumuten-seo-taisaku/): 施主の情報収集データと建設業界の競争激化データをもとに、施工事例を武器にした工務店SEOの5つの施策を解説
 - [施工事例の書き方｜反響が増える7つの要素とNG例](https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/): 反響が増える施工事例の7つの構成要素・書く5つのステップ・NG例とOK例をAI検索時代の観点で解説
 - [リフォームの集客方法とは？反響を増やす6つの施策](https://ai.7senses.co.jp/ai-marketing/reform-shukyaku-hoho/): 市場規模・訪問販売トラブル・相見積もりデータをもとに、反響を増やすリフォーム集客6施策と始め方を解説
-- [不動産MEO対策とは？物件でなく店舗を上位表示する5つの手順](https://ai.7senses.co.jp/meo/fudousan-meo-taisaku/): 物件は登録対象外というGoogleの規約を踏まえた、不動産業向けMEO対策の5つの手順と口コミ対応の注意点を解説
+- [不動産業がGoogleマップで選ばれるには？店舗情報の整え方](https://ai.7senses.co.jp/meo/fudousan-meo-taisaku/): 物件は登録対象外というGoogleの規約を踏まえた、不動産業向けMEO対策の5つの手順と口コミ対応の注意点を解説
 - [住宅会社のInstagram連携とは？サイトに繋ぐ4つの方法](https://ai.7senses.co.jp/ai-marketing/jutaku-instagram-renkei/): 注文住宅検討者の68%がInstagramで情報収集する調査をもとに、サイト・GBPに繋ぐ4つの方法と失敗しやすい注意点を解説
 - [見学会集客を伸ばす6つの施策｜申込を増やす導線設計](https://ai.7senses.co.jp/ai-marketing/kengakukai-shukyaku-hoho/): 国交省統計・住宅展示場アンケートをもとに、見学会の申込を増やす6つの施策と予約導線の作り方を解説
 - [不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップ](https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/): AI検索の市場データとおとり広告規制を踏まえた、不動産会社がAI検索に選ばれる4つの実践ステップを解説
 - [相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](https://ai.7senses.co.jp/ai-marketing/souba-kiji-tsukurikata/): 相場記事の作り方とは、公的データと自社実績を組み合わせ、出典と時点を明記して数値を書くことです。信頼を失う失敗パターンと信頼される6つの構成要素を解説します。
 - [資料請求を増やす方法とは？6つの施策と見直す順序](https://ai.7senses.co.jp/ai-marketing/shiryoseikyu-fuyasu-hoho/): フォーム改善からフォロー体制まで、資料請求を増やす6つの施策と着手順を解説
 - [OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/): 国交省調査データをもとに、紹介の仕組みを作る5つの施策と景品表示法・宅建業法の注意点を解説
-- [AIO診断とは？AI検索対応度がわかる8つの視点](https://ai.7senses.co.jp/aio/aio-shindan-yarikata/): AIO診断とは、自社サイトがAI検索にどれだけ引用されやすいかを確認する作業です。クローラー許可や構造化データなど8つの視点と、自分でできる診断手順を解説します。
-- [AIかんたん集客とは？専門知識ゼロで始める5つの方法](https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/): 専門知識がなくても使えるAIツールで問い合わせや来店につなげる、AIかんたん集客の落とし穴と始め方5ステップを解説します。
+- [AIO診断のやり方｜無料チェック8項目とツールの使い分け](https://ai.7senses.co.jp/aio/aio-shindan-yarikata/): AIO診断とは、自社サイトがAI検索にどれだけ引用されやすいかを確認する作業です。クローラー許可や構造化データなど8つの視点と、自分でできる診断手順を解説します。
+- [AIかんたん集客とは？無料で始める5ステップと落とし穴3つ](https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/): 専門知識がなくても使えるAIツールで問い合わせや来店につなげる、AIかんたん集客の落とし穴と始め方5ステップを解説します。
 - [AIO対策の注意点とは？始める前に知る7つの落とし穴](https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/): 検索順位を無視した構造化・クローラーの誤ブロックなど、AIO対策で成果につながらない7つの落とし穴と対処法を解説します。
 - [AI検索とは？AIO対策との違いと5種類の対応ポイント](https://ai.7senses.co.jp/aio/aio-taisaku-ai-kensaku/): AI検索とAIO対策の関係と、プラットフォーム別に対策を使い分ける5つのポイントを解説します。
 - [AIO対策なのに表示されない8つの原因と対処法](https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/): AIO対策をしても表示されない・引用されない原因を8つ整理し、自分でできる診断手順と対処法を解説します。
@@ -91,10 +91,10 @@
 - [整骨院のホームページ集客｜予約につながる5つの必須要素](https://ai.7senses.co.jp/ai-marketing/seikotsuin-hp-shukyaku/): 整骨院のホームページ集客は、初診患者が来院前に見る5つの情報と予約導線の設計が要です。柔整広告ガイドラインの注意点まで実務目線で解説します。
 - [税理士の集客サイトとは？必須6ページと掲載内容の決め方](https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/): 税理士の集客サイトとは、問い合わせにつながる6つのページで構成されたホームページです。掲載すべき内容と、依頼の決め手になる情報の載せ方を実務目線で解説します。
 - [税理士のブログ集客とは？書くべき5つの記事テーマ](https://ai.7senses.co.jp/seo/zeirishi-blog-shukyaku/): 税理士のブログ集客とは、確定申告や相続など読者の悩みに答える記事を継続発信し、検索とAI回答から問い合わせにつなげる手法です。書くべき5つの記事テーマと更新頻度、AI検索に引用される書き方を解説します。
-- [税理士事務所の集客とは？6つのチャネルの選び方](https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/): 税理士事務所の集客とは、紹介・MEO・ホームページ・ブログなど複数チャネルを事務所の特性に応じて使い分ける取り組みです。6つのチャネルの特徴と選び方、着手の3ステップを実務目線で解説します。
+- [税理士事務所の集客とは？AI検索を含む6チャネルの選び方](https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/): 税理士事務所の集客とは、紹介・MEO・ホームページ・ブログなど複数チャネルを事務所の特性に応じて使い分ける取り組みです。6つのチャネルの特徴と選び方、着手の3ステップを実務目線で解説します。
 - [美容皮膚科のMEO対策とは？広告規制下で選ばれる3ステップ](https://ai.7senses.co.jp/meo/biyou-hifuka-meo/): 美容皮膚科のMEO対策とは、自由診療特有の広告規制に配慮しながらGoogleマップでカウンセリング予約につなげる施策です。限定解除の4要件や口コミ運用の注意点を、通算3,200店舗以上の支援実務から解説します。
 - [AIO対策の導入方法｜進め方6ステップと費用の目安](https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/): AIO対策の導入とは、体制づくりから現状診断・構造改善・計測までを社内の仕組みとして組み込む一連の取り組みです。導入前に確認すべき条件、6つ
-- [医療機関のMEO対策｜施設タイプ別に見る違いと選び方](https://ai.7senses.co.jp/meo/iryou-meo-taisaku/): 医療機関のMEO対策は、施設タイプによってカテゴリ設計や広告規制の力点が変わります。クリニック・歯科・整骨院・美容皮膚科・病院を比較し、自院に合った対策の選び方を通算3,200店舗以上の支援実務から解説します。
+- [医療機関のMEO対策｜5つの施設タイプ別に違いと進め方](https://ai.7senses.co.jp/meo/iryou-meo-taisaku/): 医療機関のMEO対策は、施設タイプによってカテゴリ設計や広告規制の力点が変わります。クリニック・歯科・整骨院・美容皮膚科・病院を比較し、自院に合った対策の選び方を通算3,200店舗以上の支援実務から解説します。
 - [MEO設定の始め方｜登録から公開までの5ステップ](https://ai.7senses.co.jp/meo/meo-settei-guide/): MEO設定とは、Googleビジネスプロフィールを作成し店舗情報を入力してオーナー確認を終え、検索とマップに公開するまでの作業です。準備物から公開後の移行までを解説します。
 - [不動産の反響が来ない5つの原因とポータル依存の脱却法](https://ai.7senses.co.jp/ai-marketing/fudousan-hankyou-konai/): 不動産会社の反響が来ない主な原因は、ポータル依存・強み未発信・追客の遅さなど5つです。宅建業者13万社超が競合する市場での自己診断と、今日からできる立て直し方を実務目線で解説します。
 - [工務店の集客セミナー、FC加盟の前に確認すべき3つのこと](https://ai.7senses.co.jp/ai-marketing/koumuten-shukyaku-seminar/): 工務店の集客セミナーは無料の学びの場からFC加盟契約に直結するものまで幅があります。加盟金・ロイヤリティ・契約期間の確認ポイントと、学びを受注につなげる手順を解説します。

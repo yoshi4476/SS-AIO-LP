@@ -43,7 +43,7 @@ def main():
             continue
         if S.find_category_owner(meta.get("category", "")) != a.site:
             continue
-        if (meta.get("score") or 0) < 90:
+        if not publish.gate_ok(meta):          # 観点の足切りまで見る（build.py と同じ）
             continue
         if not (dest / cfg["url_prefix"].strip("/") / meta["slug"] / "index.html").is_file():
             skipped.append(meta["slug"])           # まだ公開していない記事は触らない（publish の仕事）

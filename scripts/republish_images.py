@@ -76,6 +76,18 @@ def main():
             print(f"   × 記事がありません: {slug}")
             continue
         meta, body = publish.parse_article(md)
+        # --slugs は人が手で渡す。publish.py と同じ門（基準・担当サイト・監修の記録）を
+        # 通さないと、未公開の記事や他社の記事がこの経路から配信先へ出てしまう
+        if S.find_category_owner(meta.get("category", "")) != a.site:
+            print(f"   × {a.site} の記事ではありません: {slug}（category {meta.get('category')}）")
+            continue
+        if not publish.gate_ok(meta):
+            print(f"   × 公開基準未達: {slug}（score {meta.get('score')}）")
+            continue
+        import editorial_review
+        if not editorial_review.reviewed(slug):
+            print(f"   × HELD(監修待ち): {slug}")
+            continue
         if cfg["type"] == "nextjs-json":
             publish.write_nextjs_json(cfg, dest, meta, body)
         elif cfg["type"] == "external-html":

@@ -343,11 +343,7 @@ def analyze(sites, labels, arts, pipeline):
     ai = sum(s["ai"] for s in sites)
 
     def mom(k):
-        a, b = cur.get(k, 0), prev.get(k, 0)
-        if not b:
-            return "―"
-        v = (a - b) / b * 100
-        return f"{'+' if v >= 0 else ''}{v:.0f}%"
+        return pct_text(cur, prev, k, labels[-1], labels[-2])
 
     ctr = round(cur["clicks"] / cur["impressions"] * 100, 2) if cur["impressions"] else 0
     cvr = round(cur["cv"] / cur["sessions"] * 100, 2) if cur["sessions"] else 0
@@ -375,11 +371,8 @@ def analyze(sites, labels, arts, pipeline):
     contrib = []
     for s in sites:
         c, p = s["months"][-1], s["months"][-2]
-        sess, psess = c.get("sessions"), p.get("sessions")
-        growth = "―"
-        if sess is not None and psess:
-            g = (sess - psess) / psess * 100
-            growth = f"{'+' if g >= 0 else ''}{g:.0f}%"
+        sess = c.get("sessions")
+        growth = "―" if sess is None else pct_text(c, p, "sessions", labels[-1], labels[-2])
         share = round((sess or 0) / cur["sessions"] * 100) if cur["sessions"] else 0
         contrib.append({"s": s, "share": share, "growth": growth,
                         "articles": arts["counts"].get(s["id"], 0),
@@ -1222,12 +1215,19 @@ def site_detail2(s, no):
 </div>"""
 
 
-def mom_site(cur, prev, key):
-    a, b = cur.get(key), prev.get(key)
-    if a is None or not b:
+def pct_text(cur, prev, key, cur_label, prev_label):
+    """前月比。**1日あたりに直して比べる**（途中経過の月を月合計で比べると必ず減って見える）"""
+    if not prev.get(key):
         return "―"
-    v = (a - b) / b * 100
+    import report_context as RC
+    v = RC.compare(cur, prev, key, cur_label, prev_label, THROUGH)["pct"]
     return f"{'+' if v >= 0 else ''}{v:.0f}%"
+
+
+def mom_site(cur, prev, key):
+    if cur.get(key) is None:
+        return "―"
+    return pct_text(cur, prev, key, cur.get("label", ""), prev.get("label", ""))
 
 
 def group_months(sites, labels):

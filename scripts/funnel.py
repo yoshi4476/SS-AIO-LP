@@ -38,9 +38,10 @@ STEPS = [
 ]
 
 # 送信の中身。問い合わせと購読を同じ箱に入れると、商談につながる数が分からない。
-# lead_route は site.js が付けている（newsletter / dl / form / diagnosis）
+# lead_route は site.js が付けている（newsletter / dl / form / 診断の結果送付）。
+# 診断の結果送付は quiz.js が diagnosis_<種別> を付ける（diagnosis_aio / diagnosis_meo）
 LEAD_ROUTES = [
-    ("問い合わせ・相談", ("form", "diagnosis", "site_audit")),
+    ("問い合わせ・相談", ("form", "diagnosis", "diagnosis_aio", "diagnosis_meo", "site_audit")),
     ("資料ダウンロード", ("dl",)),
     ("ニュースレター購読", ("newsletter",)),
 ]
@@ -67,10 +68,13 @@ def lead_routes(prop, days):
 
     site.js は送信のたびに lead_route（newsletter / dl / form / diagnosis）を
     付けている。これを見ないと、問い合わせと購読が同じ数に混ざる。
+    lead_route は lead_form_submit にも付くため、lead_capture だけに絞る
+    （絞らないと結果送付の1回が2件に数えられる）。
     """
     import gcreds
     from google.analytics.data_v1beta import BetaAnalyticsDataClient
-    from google.analytics.data_v1beta.types import (DateRange, Dimension, Metric,
+    from google.analytics.data_v1beta.types import (DateRange, Dimension, Filter,
+                                                    FilterExpression, Metric,
                                                     RunReportRequest)
     cl = BetaAnalyticsDataClient(credentials=gcreds.load(
         ROOT / "indexing-service-account.json",
@@ -79,6 +83,9 @@ def lead_routes(prop, days):
         property="properties/" + str(prop),
         date_ranges=[DateRange(start_date=f"{days}daysAgo", end_date="yesterday")],
         dimensions=[Dimension(name="customEvent:lead_route")],
+        dimension_filter=FilterExpression(filter=Filter(
+            field_name="eventName",
+            string_filter=Filter.StringFilter(value="lead_capture"))),
         metrics=[Metric(name="eventCount")], limit=50))
     out = {}
     for x in r.rows:

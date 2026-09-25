@@ -3,7 +3,7 @@
 
 **なぜ要るか**: 社ごとに1通ずつ届くと、20社なら月20通。どれを見るべきか分からず、
 本当に手当てが要る社が埋もれる。monthly_report.py --queue が照合を通したPDFを列に積み、
-ここで1通にまとめる。照合に落ちた社は添付せず「照合で止めた」と理由を書く。
+ここで1通にまとめる。照合・生成に落ちた社は添付せず「照合で止めた／生成できなかった」と理由を書く。
 
 要対応の判断: report_actions（レポート直後に機械が改善を当てた結果）の「人の手が要る」項目。
 
@@ -41,6 +41,12 @@ def human_items():
     return out
 
 
+def partial(r):
+    """途中経過（--through）の号だと分かる印。月末の確定版と取り違えさせない"""
+    t = r.get("through")
+    return f"（{int(t[8:10])}日までの途中経過）" if t else ""
+
+
 def main():
     rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()] if QUEUE.is_file() else []
     if not rows:
@@ -52,30 +58,34 @@ def main():
         last[(r["site"], r["ym"])] = r
     rows = list(last.values())
     hum = human_items()
-    rows.sort(key=lambda r: (not hum.get(r["site"]), not r["ok"] is False, r["name"]))
+    rows.sort(key=lambda r: (not hum.get(r["site"]), not r["ok"] is False, r.get("name") or r["site"]))
     ym = rows[0]["ym"]
-    lines = [f"{ym} の月次レポート（{len(rows)}社）をまとめてお送りします。", ""]
+    tag = partial(rows[0])
+    lines = [f"{ym}{tag} の月次レポート（{len(rows)}社）をまとめてお送りします。", ""]
     need = [r for r in rows if hum.get(r["site"]) or not r["ok"]]
     lines.append(f"■ 手当てが要る社: {len(need)}社" if need else "■ 手当てが要る社はありません")
     for r in rows:
         if not r["ok"]:
-            lines.append(f"・{r['name']}: 照合で止めました（PDFは添付していません）— " + " / ".join(r.get("why") or [])[:200])
+            # PDF がある行は照合で止めた社、無い行は生成そのものが落ちた社
+            why = "照合で止めました" if r.get("pdf") else "生成できませんでした"
+            lines.append(f"・{r.get('name') or r['site']}: {why}（PDFは添付していません）— " + " / ".join(r.get("why") or [])[:200])
         elif hum.get(r["site"]):
             lines.append(f"・{r['name']}:")
             lines += [f"    - {x}" for x in hum[r["site"]][:6]]
     lines += ["", "■ 添付", ""]
     attach, size = [], 0
     for r in rows:
-        p = Path(r["pdf"])
-        if not r["ok"] or not p.is_file():
+        p = Path(r.get("pdf") or "")
+        if not r["ok"] or not r.get("pdf") or not p.is_file():
             continue
         b = p.read_bytes()
         if size + len(b) * 4 // 3 > MAX_BYTES:
             lines.append(f"・{r['name']}（容量の上限のため添付を省略。reports/ にあります）")
             continue
         size += len(b) * 4 // 3
-        attach.append({"filename": f"{r['site']}-{r['ym']}.pdf", "content": base64.b64encode(b).decode()})
-        lines.append(f"・{r['name']}（{r['site']}-{r['ym']}.pdf）")
+        fn = f"{r['site']}-{r['ym']}{partial(r)}.pdf"
+        attach.append({"filename": fn, "content": base64.b64encode(b).decode()})
+        lines.append(f"・{r['name']}（{fn}）")
     body = "\n".join(lines)
     print(body)
     if "--email" not in sys.argv:
@@ -88,7 +98,7 @@ def main():
         print("DIGEST_OK=no")
         return 0
     payload = json.dumps({"from": frm, "to": [to],
-                          "subject": f"【月次レポート】{ym}（{len(rows)}社" + (f"・要対応{len(need)}社" if need else "") + "）",
+                          "subject": f"【月次レポート】{ym}{tag}（{len(rows)}社" + (f"・要対応{len(need)}社" if need else "") + "）",
                           "text": body, "attachments": attach}).encode()
     req = urllib.request.Request("https://api.resend.com/emails", data=payload, headers={
         "Authorization": f"Bearer {key}", "Content-Type": "application/json",

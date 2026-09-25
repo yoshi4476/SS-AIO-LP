@@ -242,15 +242,21 @@ def gate(tree):
     return True, ""
 
 
-def apply_round(items, budget_min, spent):
-    """機械で直せる項目を、道具ごとに1回ずつ当てる。使った分（分）を返す"""
+def apply_round(items, budget_min, spent, blocked=None):
+    """機械で直せる項目を、道具ごとに1回ずつ当てる。使った分（分）を返す
+
+    blocked: selftest に落ちた道具の名前。回をまたいで持ち回る（同じ道具の後続の項目・次の回でも書かせない）
+    """
     seen, ran = set(), []
+    blocked = set() if blocked is None else blocked
     for it in items:
         if not it["auto"]:
             continue
         for cmd in RUNNERS[it["kind"]]:
             c = [x.replace("{site}", it["site"]) for x in cmd]
             if "{site}" in " ".join(cmd) and it["site"] == "all":
+                continue
+            if c[0] in blocked:
                 continue
             key = " ".join(c)
             if key in seen:
@@ -264,8 +270,9 @@ def apply_round(items, budget_min, spent):
             spent += (time.time() - t0) / 60
             ran.append((key, rc))
             # selftest が通らない道具は、その次（--write）を飛ばす（検算が壊れたまま書かせない）
+            # 引数の違う --write は key が一致しないため、道具の名前で止める
             if "--selftest" in c and rc != 0:
-                seen.add(key.replace("--selftest", "--write"))
+                blocked.add(c[0])
                 _log(step="selftest_failed", cmd=key)
                 break
     return ran, spent
@@ -352,7 +359,7 @@ def main():
     n = enqueue_gaps(items)
     if n:
         print(f"   台帳へ {n}語を積みました（空いているマス）")
-    spent, gate_fail, done, prev = 0.0, "", 0, None
+    spent, gate_fail, done, prev, blocked = 0.0, "", 0, None, set()
     for r in range(1, a.rounds + 1):
         if r > 1:
             items = derive(sids)
@@ -363,7 +370,7 @@ def main():
         prev = fp
         print(f"── 見直し {r}/{a.rounds}（機械 {len(fp)}件）")
         tree = snapshot()
-        ran, spent = apply_round(items, a.budget_min, spent)
+        ran, spent = apply_round(items, a.budget_min, spent, blocked)
         for key, rc in ran:
             print(f"   {'○' if rc == 0 else '×'} {key}")
         ok, failed = gate(tree)

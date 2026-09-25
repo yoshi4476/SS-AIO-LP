@@ -7,7 +7,7 @@
 「とは」の面が増える。新しい文は作らない。定義は記事のものをそのまま使う。
 
 build.py が呼ぶ:
-  terms = glossary.collect(site_id)          # [{term, slug_id, definition, article}]
+  terms = glossary.collect(site_id, only)    # [{term, slug_id, definition, article}]（only=公開する slug）
   glossary.link_terms(content, slug)         # 記事の定義ブロックの用語を用語集へリンク
 出力は build.py が BLOG_PAGE で包む（デザインを揃えるため、ここでHTMLの外枠は作らない）。
 """
@@ -30,11 +30,17 @@ def term_id(term):
     return hashlib.md5(term.encode("utf-8")).hexdigest()[:10]
 
 
-def collect(site_id):
-    """公開記事の定義ブロックを集める。同じ用語は新しい記事のものを採る"""
+def collect(site_id, only=None):
+    """公開記事の定義ブロックを集める。同じ用語は新しい記事のものを採る。
+
+    only: 実際に公開する記事の slug の集合（build.py が渡す）。score だけで絞ると、
+    観点の足切りや監修待ちで止めた記事まで出典になり、用語集から404へリンクする
+    """
     import sites as S
     out = {}
     for p in (ROOT / "articles").glob("*.md"):
+        if only is not None and p.stem not in only:
+            continue
         t = p.read_text(encoding="utf-8-sig")
         m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
         if not m:

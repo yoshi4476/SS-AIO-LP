@@ -45,7 +45,9 @@ def own_data_facts(site_id):
             "source": "自社サイトのSearch Console実測",
             "as_of": date.today().strftime("%Y-%m"), "verifiable": True,
         })
-    else:
+    elif not (ROOT / "data" / "clients" / site_id).is_dir():
+        # 「AIO対策の実装を日次で計測」は運用会社の立場の一文。
+        # クライアントの記事に出すと、その会社がしていないことを書くことになる
         out.append({
             "id": "own-gsc-qualitative",
             "claim": "当サイトはAIO対策の実装内容と検索での見え方を日次で計測しており、"

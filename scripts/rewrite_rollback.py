@@ -77,7 +77,7 @@ def main():
         print("ROLLBACK_OK=yes\nROLLED_BACK=0\nKEPT=0")
         return 0
     try:
-        daily = EA.daily_by_slug()
+        daily, _, _ = EA.daily_by_slug()
     except Exception as e:
         print(f"   日次データが取れません（{str(e)[:60]}）。判定を見送ります")
         print("ROLLBACK_OK=yes\nROLLED_BACK=0\nKEPT=0")

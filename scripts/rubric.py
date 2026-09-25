@@ -134,6 +134,37 @@ def judge(scores):
             "why": "／".join(why) or "合格", "version": VERSION}
 
 
+def cutoff(breakdown):
+    """score_breakdown の足切り点と満点。rubric の3観点は100点満点で PASS_EACH、旧6観点は20点満点で16。
+
+    満点を見分けないと、100点満点の70点が16以上として素通りする
+    """
+    nums = [v for v in breakdown.values() if isinstance(v, (int, float))]
+    if set(breakdown) & {a["key"] for a in AXES} or max(nums or [0]) > 20:
+        return PASS_EACH, MAX
+    return 16, 20
+
+
+def weak_axes(meta):
+    """足切りを割った観点 {観点: 点}。score_breakdown が無ければ空"""
+    bd = meta.get("score_breakdown") or {}
+    if not isinstance(bd, dict):
+        return {}
+    th, _ = cutoff(bd)
+    return {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < th}
+
+
+def gate_ok(meta):
+    """公開してよいか。総合が PASS_TOTAL 以上で、1観点も足切りを割っていないこと。
+
+    build.py と同じ規則。配信（publish.py など）もここを見れば、ビルドと判定がずれない
+    """
+    sc = meta.get("score")
+    if isinstance(sc, bool) or not isinstance(sc, (int, float)) or sc < PASS_TOTAL:
+        return False
+    return not weak_axes(meta)
+
+
 def main():
     print(f"■ 採点の基準 {VERSION}\n")
     for a in AXES:

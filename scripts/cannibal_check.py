@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 WARN = 0.50   # これ以上で「要確認」
-STRONG = 0.62  # これ以上で「統合を検討」
+STRONG = 0.62  # これ以上で「統合候補」（統合そのものは auto_merge が行う）
 _NOISE = re.compile(r"[\s　【】\[\]（）()「」『』・、。,.!?！？|｜:：/／〜~\-—+*#\"']")
 
 
@@ -676,7 +676,7 @@ def main():
         return
     print("CANNIBAL_FOUND=yes")
     for p in pairs:
-        action = "統合を検討（低品質側を削除し301相当の内部リンク集約）" if p["score"] >= STRONG \
+        action = "統合候補（auto_merge が GSC 実績で判断し301つきで統合する。手で原稿を削除しない）" if p["score"] >= STRONG \
             else "差別化（H1・メタ・冒頭結論の切り口を分ける／片方を対象読者で限定する）"
         print(f"\n[{p['score']}] {p['a']['slug']}  ×  {p['b']['slug']}")
         print(f"  A: {p['a']['title']}")

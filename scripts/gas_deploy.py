@@ -101,16 +101,20 @@ def fill(src_text, e):
 
 # 既存の doPost に転送の呼び出しを1行足す。ここだけは新規ファイルの追加では済まない。
 # 手で入れると片方だけ忘れるので、目印の直前／直後に機械的に差し込む。
+# 第3引数（referer）を渡さないと、管制塔の台帳で「どのページから来たか」が空になる。
+# old は以前配った呼び出し。既に入っているプロジェクトでは new の形に置き換える。
 HOOKS = {
     "corporate": {
-        "call": "    forwardToHub_(payload, 'corporate');",
+        "call": "    forwardToHub_(payload, 'corporate', data.referer || '');",
+        "old": "forwardToHub_(payload, 'corporate');",
         # 「return json({ ok: true });」だけだと、送信を破棄する分岐にも同じ行があり
         # そちらに入ってしまう。doPost の最後を指す形にする。
         "anchor": "    return json({ ok: true });\n  } catch (err) {",
         "where": "before",
     },
     "subsidy": {
-        "call": "  forwardToHub_(lead, 'subsidy');",
+        "call": "  forwardToHub_(lead, 'subsidy', data.referer || '');",
+        "old": "forwardToHub_(lead, 'subsidy');",
         "anchor": "    try { lock.releaseLock(); } catch (e2) {}\n  }",
         "where": "after",
     },
@@ -118,13 +122,21 @@ HOOKS = {
 
 
 def inject(files, site):
-    """転送の呼び出しを差し込む。既に入っていれば何もしない（何度実行しても同じ結果）"""
+    """転送の呼び出しを差し込む。既に入っていれば何もしない（何度実行しても同じ結果）。
+    古い形（referer なし）が入っていれば、新しい形に置き換える"""
     h = HOOKS.get(site)
     if not h:
         return False
+    new = h["call"].strip()
     for f in files.values():
         src = f.get("source", "")
-        if "forwardToHub_(" in src and "function forwardToHub_" not in src:
+        if "function forwardToHub_" in src:
+            continue
+        if h["old"] in src:
+            f["source"] = src.replace(h["old"], new)
+            print(f"      {f['name']}.gs の呼び出しを referer つきに置き換え")
+            return True
+        if "forwardToHub_(" in src:
             print("      呼び出しは既に入っています")
             return False
     for f in files.values():

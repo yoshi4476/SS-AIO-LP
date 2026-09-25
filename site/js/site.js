@@ -492,7 +492,11 @@ window.leadCapture = function (opts) {
     fetch("/api/lead", { method: "POST", body: fd })
       .then(function (r) {
         if (!r.ok) return r.text().then(function (t) { throw new Error(t); });
-        if (window.trackLead) window.trackLead("lead_form_submit", { lead_route: opts.route });
+        // CVは送れたときに1回だけ数える（診断の完了時には数えない。受けただけでは連絡先が無い）
+        if (window.trackLead) {
+          window.trackLead("lead_form_submit", { lead_route: opts.route });
+          window.trackLead("lead_capture", { lead_route: opts.route, form_type: opts.formType });
+        }
         form.innerHTML =
           '<p class="lc-done"><strong>お送りしました。</strong>' +
           '数分で届かない場合は迷惑メールをご確認ください。</p>';

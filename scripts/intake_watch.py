@@ -76,20 +76,33 @@ def _tabs(src):
         return set()
 
 
-def one(src, write):
-    """シート1枚を見る。(登録できたか, 説明) を返す"""
+def kind(src):
+    """シートの種類。名前ではなくタブの構成で決める。
+    ファイル名で振り分けていたため、一次データのシートがクライアント用の検査にかけられ
+    毎回「不備23件」で弾かれたり、名前に「実績」「データ」を含むヒアリングシートが
+    上限の判定をすり抜けたりしていた"""
+    tabs = _tabs(src)
     # 実績・お客様の声の記入シートは会社の立ち上げではなく、一次情報と掲載の登録
-    if "実績" in src.name:
+    if tabs & {"経理BPOの効果", "継続率", "お客様の声"}:
+        return "jisseki"
+    # 多言語メニューのシート（訪日客向け）
+    if "メニュー" in tabs:
+        return "menu"
+    if tabs >= {"概要", "データ"}:
+        return "data"
+    return "client"
+
+
+def one(src, write, k=None):
+    """シート1枚を見る。(登録できたか, 説明) を返す"""
+    k = k or kind(src)
+    if k == "jisseki":
         import jisseki_intake as J
         return J.one(src, write)
-    # 多言語メニューのシート（訪日客向け）。タブ名で見る
-    if "メニュー" in _tabs(src):
+    if k == "menu":
         import menu_page as MP
         return MP.one(src, write)
-    # 名前ではなくタブの構成で見る。ファイル名に「データ」が入っているかで
-    # 振り分けていたため、内容は正しいのにクライアント用の検査にかけられ、
-    # 一次データのシートが毎回「不備23件」で弾かれていた
-    if _tabs(src) >= {"概要", "データ"}:
+    if k == "data":
         import data_intake as D
         return D.one(src, write)
     import client_intake as C
@@ -137,13 +150,17 @@ def main():
     before = site_count()
     ok = ng = 0
     for p in found:
+        k = kind(p)
         # 上限を超えて受け入れると、記事の枠が足りず全社の本数が減る。
-        # 受け入れる前に止めて、別リポジトリへ分ける判断をしてもらう
-        if a.apply and "実績" not in p.name and "データ" not in p.name and "メニュー" not in p.name and before + ok >= MAX_SITES:
+        # 受け入れる前に止めて、別リポジトリへ分ける判断をしてもらう。
+        # 数えるのはクライアントのシートだけ、しかも実際のサイト数で。
+        # 「登録できた件数」で数えていたため、一次データや実績のシートが通るたびに
+        # クライアントのシートが保留にされていた
+        if a.apply and k == "client" and site_count() >= MAX_SITES:
             print("   %-28s 保留（%d社が上限です）" % (p.name[:28], MAX_SITES))
             ng += 1
             continue
-        good, why = one(p, a.apply)
+        good, why = one(p, a.apply, k)
         print("   %s %s" % ("○" if good else "×", why))
         ok, ng = ok + good, ng + (not good)
 
@@ -152,7 +169,7 @@ def main():
     if after > MAX_SITES:
         print("INTAKE=over")
         print("   ::error::サイトが%d件になりました。この仕組みは%d社までです。"
-              "11社目からは別リポジトリに分けてください" % (after, MAX_SITES))
+              "%d社目からは別リポジトリに分けてください" % (after, MAX_SITES, MAX_SITES + 1))
     elif ng:
         print("INTAKE=ng")
         print("   不備のあるシートは intake/todo/ にあります。"

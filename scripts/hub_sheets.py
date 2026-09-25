@@ -201,12 +201,22 @@ def publish_log(**b):
     _append("記事作成ログ", [_now(), _site_label(b.get("site", "")), b.get("title", ""), b.get("keyword", ""),
                           b.get("category", ""), b.get("score", ""), b.get("chars", ""), b.get("url", ""), b.get("note", "")])
     if b.get("keyword"):
+        # 完全一致だと「aio 診断」と「aio診断」の表記ゆれで台帳が公開済みにならない（GAS の publishLog_ と同じく正規化）
+        # 完全一致の行を優先し、無ければ生きている（対象外・取り下げでない）行に当てる
+        want = norm_kw(b["keyword"])
+        hit = -1
         for i, r in enumerate(rows("KW台帳", KW_COLS)):
-            if str(r[0]) == b.get("site") and str(r[1]) == b["keyword"]:
-                _set("KW台帳", i + 2, 3, "公開済み")
-                _set("KW台帳", i + 2, 9, _now())
-                _set("KW台帳", i + 2, 10, b.get("url", ""))
+            if str(r[0]) != b.get("site") or norm_kw(r[1]) != want:
+                continue
+            if str(r[1]) == b["keyword"]:
+                hit = i
                 break
+            if hit < 0 and str(r[2]).strip() not in ("対象外", "取り下げ"):
+                hit = i
+        if hit >= 0:
+            _set("KW台帳", hit + 2, 3, "公開済み")
+            _set("KW台帳", hit + 2, 9, _now())
+            _set("KW台帳", hit + 2, 10, b.get("url", ""))
     return {"ok": True}
 
 
@@ -220,7 +230,9 @@ def error_log(site, phase, message, fix="", status="未対応"):
 
 
 def rewrite_log(site, article, reason, summary, pos_before="", pos_after="", effect=""):
-    _append("リライトログ", [_now(), _site_label(site), article, reason, summary, pos_before, pos_after, effect])
+    # サイト列は ID のまま（GAS の rewriteLog_ と同じ）。rewrite_effect は ID で行を探すため、
+    # 表示名で書くと後順位・効果が埋まらない
+    _append("リライトログ", [_now(), site, article, reason, summary, pos_before, pos_after, effect])
     return {"ok": True}
 
 

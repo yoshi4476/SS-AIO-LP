@@ -90,8 +90,23 @@ def problems(f, existing_ids):
         out.append("雛形の例文のままです。実際の数値に置き換えてください")
     if not NUM.search(claim):
         out.append("数値が入っていません。一次情報は数値で書きます")
+    out += rate_problems(f)
 
-    # 割合を書くなら、母数と集計期間が要る（景品表示法・根拠の明示）
+    sites = f.get("sites") or []
+    known = {p.stem for p in (ROOT / "sites").glob("*.json")}
+    for s in sites:
+        if s not in known:
+            out.append(f"sites の「{s}」は存在しません（候補: {', '.join(sorted(known))}）")
+    if not str(f.get("as_of", "")).count("-") == 1:
+        out.append("as_of は YYYY-MM の形で書いてください")
+    return out
+
+
+def rate_problems(f):
+    """割合を書くなら、母数と集計期間が要る（景品表示法・根拠の明示）。
+    ヒアリングシート（client_intake）からの登録も同じ検査を通すため分けてある"""
+    out = []
+    claim = str(f.get("claim") or "")
     if RATE.search(claim):
         if not f.get("denominator"):
             out.append("割合を書くなら denominator（母数）が要ります"
@@ -103,19 +118,12 @@ def problems(f, existing_ids):
         if isinstance(d_, int) and d_ < 10:
             out.append(f"母数が{d_}件では割合として意味を持ちません"
                        "（実数で書いてください）")
-        if f.get("denominator") and str(f["denominator"]) not in claim:
+        # 3200 と「3,200」を同じ数として照合する（本文は桁区切りで書くのが普通）
+        if f.get("denominator") and str(f["denominator"]) not in re.sub(r"[,，]", "", claim):
             out.append("claim の中に母数が書かれていません。"
                        "読者が本文だけで根拠を確認できる形にしてください")
         if f.get("period") and not any(x in claim for x in ("年", "月", "〜", "から")):
             out.append("claim の中に集計期間が書かれていません")
-
-    sites = f.get("sites") or []
-    known = {p.stem for p in (ROOT / "sites").glob("*.json")}
-    for s in sites:
-        if s not in known:
-            out.append(f"sites の「{s}」は存在しません（候補: {', '.join(sorted(known))}）")
-    if not str(f.get("as_of", "")).count("-") == 1:
-        out.append("as_of は YYYY-MM の形で書いてください")
     return out
 
 

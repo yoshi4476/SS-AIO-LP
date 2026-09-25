@@ -37,6 +37,28 @@ MIN_N = 100          # 母数がこれ未満なら公開しない（割合を出
 DAYS = 90            # 集計期間。短いと季節の癖が出る
 
 
+def is_client(site_id):
+    """受託運用のクライアントか（data/clients/<id>/ がある）。
+    クライアントの実数は、その会社の数字。運用会社名義の一次データとして公開すると、
+    他社の計測を自社の実績として出すことになる"""
+    return (ROOT / "data" / "clients" / str(site_id)).is_dir()
+
+
+def own_sites():
+    """運用会社が自分で運営しているサイトだけ（一次データの集計対象）"""
+    import sites as S
+    return [c for c in S.load_all().values() if not is_client(c["id"])]
+
+
+def own_categories():
+    return {k for c in own_sites() for k in (c.get("categories") or {})}
+
+
+def _own_article(text, cats):
+    m = re.search(r"^category:\s*(\S+)", text, re.M)
+    return bool(m) and m.group(1).strip().strip('"') in cats
+
+
 def _spans(days):
     end = date.today() - timedelta(days=3)          # GSCの確定待ち
     return end - timedelta(days=days - 1), end
@@ -50,7 +72,6 @@ def ctr_by_rank(days=DAYS):
     自社3サイトの実測をそのまま出す。
     """
     import gsc_detail as G
-    import sites as S
     sc = G.client()
     start, end = _spans(days)
     # GSCの順位は平均なので小数（3.5・10.4）。整数の閉区間だと帯の間と100位超が黙って落ち、
@@ -58,7 +79,7 @@ def ctr_by_rank(days=DAYS):
     bands = [(1, 4, "1〜3位"), (4, 11, "4〜10位"), (11, 21, "11〜20位"),
              (21, 31, "21〜30位"), (31, float("inf"), "31位以下")]
     agg = {b[2]: [0, 0] for b in bands}              # [表示, クリック]
-    for cfg in S.load_all().values():
+    for cfg in own_sites():
         try:
             rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000,
                        raise_errors=True)
@@ -106,7 +127,6 @@ def ai_referral(days=DAYS):
     """生成AI経由のセッション。実数で出す（割合にできる母数が無い）"""
     try:
         import daily_kpi as K
-        import sites as S
     except Exception:
         return None
     src = getattr(K, "AI_SOURCES", None) or {
@@ -126,7 +146,7 @@ def ai_referral(days=DAYS):
     cli = BetaAnalyticsDataClient(credentials=gcreds.load(
         sa, ["https://www.googleapis.com/auth/analytics.readonly"]))
     tally = defaultdict(int)
-    for cfg in S.load_all().values():
+    for cfg in own_sites():
         prop = str(cfg.get("ga4_property_id") or "").strip()
         if not prop:
             continue
@@ -185,14 +205,12 @@ def index_speed(days=DAYS):
     「記事はいつ順位がつくか」は誰もが知りたいのに、日本語の実測が少ない。
     公開日ごとに、その後の期間で一度でも表示されたかを数える。
     """
-    import re
-    from collections import defaultdict
     import gsc_detail as G
-    import sites as S
     sc = G.client()
     start, end = _spans(days)
     seen = set()
-    for cfg in S.load_all().values():
+    cats = own_categories()
+    for cfg in own_sites():
         try:
             rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000,
                        raise_errors=True)
@@ -210,6 +228,8 @@ def index_speed(days=DAYS):
             continue
         t2 = p.read_text(encoding="utf-8-sig", errors="ignore")[:1500]
         if not re.search(r"^score:\s*(9[0-9]|100)\s*$", t2, re.M):
+            continue
+        if not _own_article(t2, cats):
             continue
         dm = re.search(r"^date:\s*(\d{4})-(\d{2})-(\d{2})", t2, re.M)
         sl = re.search(r"^slug:\s*(\S+)", t2, re.M)
@@ -256,15 +276,13 @@ def index_speed(days=DAYS):
 
 def links_by_rank(days=DAYS):
     """順位帯ごとの内部リンク本数。通説（上位ほど多い）と実測が合うかを出す"""
-    import re
     import statistics as st
-    from collections import defaultdict
     import gsc_detail as G
-    import sites as S
     sc = G.client()
     start, end = _spans(days)
     pos = defaultdict(lambda: [0, 0.0])
-    for cfg in S.load_all().values():
+    cats = own_categories()
+    for cfg in own_sites():
         try:
             rows = G.q(sc, cfg["domain"], str(start), str(end), ["page"], 25000,
                        raise_errors=True)
@@ -278,6 +296,8 @@ def links_by_rank(days=DAYS):
     inb = defaultdict(int)
     for p in (ROOT / "articles").glob("*.md"):
         body = p.read_text(encoding="utf-8-sig", errors="ignore")
+        if not _own_article(body[:1500], cats):
+            continue
         for u in set(re.findall(r"\]\((/[^)]+/)\)", body)):
             inb[u.rstrip("/").split("/")[-1]] += 1
 

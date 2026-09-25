@@ -157,10 +157,14 @@ def latest_slug(site):
     import subprocess
     import sites as _s
     root = Path(__file__).resolve().parent.parent
-    r = subprocess.run(["git", "show", "--name-only", "--pretty=", "HEAD"],
+    # 「追加」だけを見る。変更まで拾うと、内部リンクの付け足しで毎日書き換わる
+    # 既存記事を「新記事」として確かめにいく。_conflicted/ など下の階層は公開しない記事
+    r = subprocess.run(["git", "show", "--name-only", "--diff-filter=A", "--pretty=", "HEAD"],
                        capture_output=True, text=True, cwd=root)
     for line in r.stdout.splitlines():
-        if not (line.startswith("articles/") and line.endswith(".md")):
+        line = line.strip()
+        if not (line.startswith("articles/") and line.endswith(".md")
+                and line.count("/") == 1):
             continue
         p = root / line
         if not p.is_file():

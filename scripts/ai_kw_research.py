@@ -188,9 +188,13 @@ def append(sid, cands):
     except Exception as e:
         return 0, f"台帳を読めません（{str(e)[:40]}）— 重複を防げないので積まない"
     picks = [r["kw"] for r in cands if not r["written"] and _norm(r["kw"]) not in have][:MAX_APPEND]
-    if picks:
-        HC.add_kw(sid, picks)
-    return len(picks), ""
+    if not picks:
+        return 0, ""
+    # 管制塔は失敗しても {ok:false} を返す。渡した数ではなく実際に入った数（added）を数える
+    r = HC.add_kw(sid, picks) or {}
+    if not r.get("ok"):
+        return 0, f"管制塔が受け付けませんでした（{str(r.get('error', '応答なし'))[:40]}）"
+    return int(r.get("added", 0) or 0), ""
 
 
 def main():

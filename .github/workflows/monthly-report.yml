@@ -66,10 +66,13 @@ jobs:
           GA4_ID: ${{ secrets.GA4_PROPERTY_ID }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          # 無ければ空。空のときレポートは公開本数を「取得できず」と書く（0本とは書かない）
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
         run: |
           printf '%s' "$SA_JSON" > indexing-service-account.json
           {
             echo "GA4_PROPERTY_ID=$GA4_ID"
+            echo "SPREADSHEET_ID=$SPREADSHEET_ID"
             echo "GSC_SITE_URL=https://ai.7senses.co.jp/"
             echo "RESEND_API_KEY=$RESEND_API_KEY"
             echo "LEAD_FROM_EMAIL=$LEAD_FROM_EMAIL"
@@ -81,10 +84,21 @@ jobs:
       - name: 月次レポート生成・メール送付（サイト単体の詳細版）
         if: steps.gate.outputs.ready == 'true'
         run: |
+          # 生成が異常終了した社も列に1行積む。積まないと、その社が来なかったことに誰も気づかない
+          mkdir -p automation/logs
+          if [ "${{ steps.day.outputs.mid }}" = "true" ]; then
+            ym=$(date +%Y-%m); thr="\"$(date +%F)\""
+          else
+            ym=$(date -d "$(date +%Y-%m-01) -1 day" +%Y-%m); thr=null
+          fi
           for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
             echo "── $s"
             # 社ごとには送らず、照合を通したものを列に積む（最後に report_digest が1通にまとめて送る）
-            python scripts/monthly_report.py --site "$s" --queue ${{ steps.day.outputs.through }} || echo "  $s は生成できませんでした"
+            python scripts/monthly_report.py --site "$s" --queue ${{ steps.day.outputs.through }} || {
+              echo "  $s は生成できませんでした"
+              printf '{"site": "%s", "name": "%s", "ym": "%s", "pdf": "", "ok": false, "why": ["monthly_report.py が異常終了しました（実行ログ参照）"], "through": %s}\n' \
+                "$s" "$s" "$ym" "$thr" >> automation/logs/report_queue.jsonl
+            }
           done
 
       # 3サイトを1枚で見渡す経営向けのレポート。単体版とは役割が違うため別送する
@@ -163,28 +177,36 @@ jobs:
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           npm install -g @anthropic-ai/claude-code || true
-          python scripts/report_actions.py --selftest
+          # 検算が壊れたまま当てると、悪い直しがそのまま配信される。壊れていたら当てずに終える
+          python scripts/report_actions.py --selftest || { echo "::warning::report_actions の selftest NG — 改善の自動実行を飛ばします"; exit 0; }
           out=$(python scripts/report_actions.py --apply --rounds 3 --budget-min 60 2>&1) || true
           echo "$out" | tail -60
           echo "$out" | grep -q "ACTIONS_OK=yes" || echo "::warning::改善の自動実行で検算に落ちた回があります（実行ログ参照）"
           # 直した記事は配信先にも届ける（届かなければ直した意味が無い）
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add -A
+          # 範囲を決めて足す。-A だと reports/*/report.pdf|html（クライアントの実数）まで
+          # public リポジトリに載る。1つずつ足すのは、無いパスが1つあると git add 全体が何も足さずに落ちるため
+          for p in articles site data docs reports/targets.json reports/targets-*.json reports/growth_plan.json; do
+            git add -A -- "$p" 2>/dev/null || true
+          done
           git diff --cached --quiet || git commit -m "monthly: レポートの改善点を自動実行 $(date '+%Y-%m-%d')"
           python scripts/publish_changed.py --all --since HEAD~1 --push || true
 
       # 各社のレポートを1通にまとめて送る（要対応がある社を先頭に。照合に落ちた社は理由だけ）
       - name: 各社のレポートを1通にまとめて送る
-        if: steps.gate.outputs.ready == 'true'
+        if: always() && steps.gate.outputs.ready == 'true'
         run: python scripts/report_digest.py --email || true
 
       - name: 目標値の保存をコミット
-        if: steps.gate.outputs.ready == 'true'
+        if: always() && steps.gate.outputs.ready == 'true'
         run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw reports/growth_plan.json docs/growth-plan.md || true
+          # 1つずつ足す（まとめて渡すと、無いパスが1つあるだけで何も足されない）
+          for p in reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw reports/growth_plan.json docs/growth-plan.md; do
+            git add -- "$p" 2>/dev/null || true
+          done
           git diff --cached --quiet || git commit -m "chore(report): 来月のKPI目標を保存"
           # 月初は改善の実行（上の工程）が add -A で目標値ごと先にコミットしているため、
           # ここで staged が空でも未 push のコミットが残っている。以前は「変更なし」で終わり、

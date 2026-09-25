@@ -20,6 +20,7 @@ import json
 import re
 import sys
 import unicodedata
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -387,8 +388,11 @@ def write_support(cfg):
         facts.write_text(json.dumps({
             "_readme": "自社でしか出せない一次情報。記事はここから最低1つ引く。"
                        "出典と時点を必ず持たせ、確認できない数値は載せない。",
+            # 読む側（facts.py・site_brief）は "claim" を見る。"text" で書いていたため
+            # 1件も記事に渡っていなかった。出典・母数を確かめていないので verifiable は False
             "facts": [{"id": cfg["id"] + "-" + str(i), "sites": [cfg["id"]],
-                       "topic": [], "text": t, "source": "ヒアリング", "as_of": ""}
+                       "topic": [], "claim": t, "source": "ヒアリング",
+                       "as_of": date.today().strftime("%Y-%m"), "verifiable": False}
                       for i, t in enumerate(cfg["facts"], 1)],
             "pending": [{"note": "数値は出典と集計期間が要る（景品表示法）。"
                                  "確認できるまで記事に書かない", "owner": "クライアント"}],

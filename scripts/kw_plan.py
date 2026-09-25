@@ -696,6 +696,9 @@ def todo_count(site_id):
     try:
         import hub_client
         st = hub_client.status(site_id) or {}
+        # 取れなかった（HUB_URL 未設定・管制塔の失敗）を 0 本と数えると、在庫が十分でも課金して組み直す
+        if st.get("ok") is False:
+            return None
         return int(st.get("todo") or 0)
     except Exception:
         return None
@@ -706,7 +709,10 @@ def run(site_id, deep, replace, if_needed=False):
     print(f"\n■ {site_id}（{S['cfg']['name']}）")
     if if_needed:
         n = todo_count(site_id)
-        if n is not None and n >= ENOUGH:
+        if n is None:
+            print("   在庫を確認できないため組み直しません（管制塔の状態が取れない。課金しない）")
+            return
+        if n >= ENOUGH:
             print(f"   未着手が {n} 本あるので、今回は組み直しません（{ENOUGH}本未満で組み直す）")
             return
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける

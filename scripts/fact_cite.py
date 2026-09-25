@@ -36,7 +36,9 @@ def candidates(site_id):
     import facts as F
     import sites as S
     _, fs = F.load_for(site_id)
-    fs = [f for f in fs if f.get("claim") and re.search(r"\d", f["claim"]) and len(f["claim"]) < 220]
+    # 裏付けが取れないと登録された一次情報（verifiable: false）は記事に入れない
+    fs = [f for f in fs if f.get("claim") and re.search(r"\d", f["claim"]) and len(f["claim"]) < 220
+          and f.get("verifiable") is not False]
     out = []
     for p in sorted((ROOT / "articles").glob("*.md")):
         t = p.read_text(encoding="utf-8-sig")

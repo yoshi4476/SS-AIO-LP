@@ -144,6 +144,14 @@ def _ym(s):
     return f"{m.group(1)}-{int(m.group(2)):02d}" if m else ""
 
 
+PREFIXES = ("keizoku-", "keiri-bpo-effect-")
+
+
+def _prefix(fid):
+    """シートから作る一次情報の接頭辞。月が変わると id も変わるので、接頭辞で同じものとみなす"""
+    return next((p for p in PREFIXES if str(fid).startswith(p)), "")
+
+
 def review(got):
     """検査する。(登録する一次情報, 載せる声, 不備, 警告) を返す"""
     import add_fact
@@ -215,7 +223,9 @@ def review(got):
         voices.append({"who": who, "industry": v["industry"], "person": v["person"], "quote": v["quote"],
                        "number": num, "sites": _sites(v["sites"], ["ai-lab"]), "as_of": today})
 
-    ids = {f["id"] for f in add_fact.load()["facts"]}
+    # 置き直しは差し替えになる（apply が同じ接頭辞の既存分を外す）ので、既存の id とは照合しない
+    renew = {_prefix(f["id"]) for f in facts}
+    ids = {f["id"] for f in add_fact.load()["facts"] if _prefix(f["id"]) not in renew}
     for f in facts:
         for p in add_fact.problems({k_: v_ for k_, v_ in f.items() if not k_.startswith("_")}, ids):
             ng.append(f"{f['id']}: {p}")
@@ -276,6 +286,10 @@ def place(html, block, anchor):
 def apply(facts, voices):
     import add_fact
     d = add_fact.load()
+    # 置き直すたびに継続率・効果が1件ずつ増え、古い数字と新しい数字が並んで記事に使われていた。
+    # 同じ接頭辞の既存分を外してから入れる
+    renew = {_prefix(f["id"]) for f in facts} - {""}
+    d["facts"] = [f for f in d["facts"] if _prefix(f.get("id")) not in renew]
     for f in facts:
         key = f.pop("_pending", "")
         d["facts"].append(f)
@@ -284,7 +298,10 @@ def apply(facts, voices):
     if facts:
         add_fact.SRC.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     cur = json.loads(VOICES.read_text(encoding="utf-8")) if VOICES.is_file() else []
-    cur = [v for v in cur if v not in voices] + voices
+    # 同じ人の同じ言葉は1件。as_of（登録月）や数字の欄が変わると辞書として一致せず、
+    # 置き直すたびに二重掲載になっていた
+    new = {(v.get("who"), v.get("quote")) for v in voices}
+    cur = [v for v in cur if (v.get("who"), v.get("quote")) not in new] + voices
     VOICES.parent.mkdir(parents=True, exist_ok=True)
     VOICES.write_text(json.dumps(cur, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     shown = [v for v in cur if "ai-lab" in v.get("sites", [])]

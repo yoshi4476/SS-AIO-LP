@@ -67,8 +67,14 @@ def esc(s):
 
 
 def build_body(days=28):
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    """公開ページの本文。1サイトでも取れなければ None（欠けた合算を公開しない）"""
+    from data_auto import is_client, own_categories
+    # クライアントのサイトは集計しない。その会社の実数を運用会社名義で公開しないため
+    conf = {}
+    for p in (ROOT / "sites").glob("*.json"):
+        c = json.loads(p.read_text(encoding="utf-8-sig"))
+        if not is_client(c.get("id") or p.stem):
+            conf[p.stem] = c
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
 
@@ -78,7 +84,12 @@ def build_body(days=28):
         prop = c.get("ga4_property_id")
         if not prop:
             continue
-        for src, n in ga_sessions(prop, days):
+        try:
+            got = ga_sessions(prop, days)
+        except Exception as e:
+            print(f"  {c.get('id')}: GA4から取れません（{str(e)[:60]}）")
+            return None
+        for src, n in got:
             all_tot += n
             for name, keys in AI_SOURCES.items():
                 if any(k in src for k in keys):
@@ -91,7 +102,12 @@ def build_body(days=28):
          ("11〜20位", 10.5, 20.5), ("21位以下", 20.5, 999)]
     agg = {b[0]: [0, 0, 0] for b in B}
     for c in conf.values():
-        for r in gsc_bands(c["domain"], start, end):
+        try:
+            got = gsc_bands(c["domain"], start, end)
+        except Exception as e:
+            print(f"  {c.get('id')}: Search Consoleから取れません（{str(e)[:60]}）")
+            return None
+        for r in got:
             for n, lo, hi in B:
                 if lo <= r["position"] < hi:
                     a = agg[n]
@@ -100,7 +116,12 @@ def build_body(days=28):
                     a[2] += int(r["clicks"])
                     break
 
-    arts = len(list((ROOT / "articles").glob("*.md")))
+    cats = own_categories()
+    arts = 0
+    for p in (ROOT / "articles").glob("*.md"):
+        m = re.search(r"^category:\s*(\S+)",
+                      p.read_text(encoding="utf-8-sig", errors="ignore")[:1500], re.M)
+        arts += bool(m) and m.group(1).strip('"') in cats
     period = f"{start.isoformat()}〜{end.isoformat()}（{days}日間）"
 
     h = [f'''<main class="lab">
@@ -168,6 +189,13 @@ def main():
     a = ap.parse_args()
 
     body = build_body(a.days)
+    if body is None:
+        # 前回のページを残す。欠けたまま「3サイト」の実測として上書きしない
+        print("  計測が取れないため、公開ページを更新しません")
+        return 1
+    if not SHELL.is_file():
+        print(f"  ひな形がありません: {SHELL.relative_to(ROOT).as_posix()}")
+        return 1
     if a.dry_run:
         print(re.sub(r"<[^>]+>", " ", body)[:1400])
         return 0

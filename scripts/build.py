@@ -196,7 +196,8 @@ CATEGORIES = {
 }
 
 # privacy/tokushoho は noindex のため sitemap から除外（noindex×sitemap掲載の矛盾を防ぐ）
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "glossary/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
+# glossary/ は build_sitemap の生成ページのループが出す（ここにも書くと2回載る）
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
 
 
 def jp_date(iso: str) -> str:
@@ -522,10 +523,23 @@ def _i18n():
     return _I18N
 
 
+def _i18n_live():
+    """訳のうち、今回公開する記事の分だけ（カテゴリも一致するもの）。
+
+    訳は data/i18n に残り続けるため、止めた記事・カテゴリを移した記事の訳から
+    /en/<cat>/<slug>/ を作ると、存在しない日本語ページを指す要約が並ぶ
+    """
+    if _LIVE is None:
+        return _i18n()
+    return {lg: {s: d for s, d in docs.items()
+                 if s in _LIVE and d.get("category") == _LIVE[s]["category"]}
+            for lg, docs in _i18n().items()}
+
+
 def _hreflang(meta):
     """日本語の記事の head に、訳した要約ページへの hreflang を足す（訳がある言語だけ）"""
     slug, cat = meta.get("slug", ""), meta.get("category", "")
-    langs = [lg for lg, d in _i18n().items() if slug in d]
+    langs = [lg for lg, d in _i18n_live().items() if slug in d]
     if not langs:
         return ""
     ja = f"{SITE_URL}/{cat}/{slug}/"
@@ -536,6 +550,18 @@ def _hreflang(meta):
 
 
 _TOPIC_GROUPS = None
+# 今回の描画で公開する記事 {slug: meta}。テーマの箱・用語集リンク・訳のページは、
+# ここに無い記事（観点の足切り・監修待ち・品質NGで止めた記事）を指してはいけない
+_LIVE = None
+
+
+def _set_live(metas):
+    """描画する記事の集合を切り替え、それをもとに作ったキャッシュを捨てる。
+    止めた記事が出たあとの2回目の描画で、1回目の束ね・用語を使い回さないため"""
+    global _LIVE, _TOPIC_GROUPS, _TERMS
+    _LIVE = {m["slug"]: m for m in metas}
+    _TOPIC_GROUPS = None
+    _TERMS = None
 
 
 def _topic_box(content, meta):
@@ -545,20 +571,8 @@ def _topic_box(content, meta):
         import topics as TP
         import sites as S
         if _TOPIC_GROUPS is None:
-            metas = []
-            for p in (ROOT / "articles").glob("*.md"):
-                t = p.read_text(encoding="utf-8-sig")
-                m = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
-                if not m:
-                    continue
-                fm = m.group(1)
-                g = lambda k: (re.search(rf"^{k}:\s*(.+)$", fm, re.M) or [None, ""])[1]
-                sc = re.search(r"^score:\s*(\d+)", fm, re.M)
-                if not sc or int(sc.group(1)) < 90 or g("category") not in CATEGORIES:
-                    continue
-                metas.append({"slug": p.stem, "title": str(g("title")).strip().strip('"'), "keyword": g("keyword"),
-                              "category": g("category"), "date": g("date")})
-            _TOPIC_GROUPS = TP.build(S.primary(), metas)
+            # /topics/ のページ（build_extra_pages）と同じ記事の集合で束ねる
+            _TOPIC_GROUPS = TP.build(S.primary(), list((_LIVE or {}).values()))
         box = TP.box_html(meta, _TOPIC_GROUPS, lambda m: f"/{m['category']}/{m['slug']}/")
         if not box:
             return content
@@ -582,7 +596,7 @@ def _glossary_links(content, meta):
         import glossary as GL
         import sites as S
         if _TERMS is None:
-            _TERMS = {r["term"]: r for r in GL.collect(S.primary())}
+            _TERMS = {r["term"]: r for r in GL.collect(S.primary(), None if _LIVE is None else set(_LIVE))}
         if len(_TERMS) < 10:
             return content
         return GL.link_terms(content, _TERMS, self_slug=meta.get("slug", ""))
@@ -1000,13 +1014,13 @@ BLOG_PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>記事一覧｜{site}</title>
-<meta name="description" content="{site}の全記事一覧。AIO・LLMO・SEO・MEOの実践ノウハウを新着順に掲載しています。">
+<title>{h1}｜{site}</title>
+<meta name="description" content="{desc}">
 <link rel="canonical" href="{url}/blog/">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="記事一覧｜{site}">
+<meta property="og:title" content="{h1}｜{site}">
 <meta property="og:url" content="{url}/blog/">
 <meta property="og:site_name" content="{site}">
 <link rel="icon" type="image/png" href="/images/icon-192.png">
@@ -1038,13 +1052,13 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 <nav class="breadcrumb" aria-label="パンくずリスト">
   <ol>
     <li><a href="/">ホーム</a></li>
-    <li aria-current="page">記事一覧</li>
+    <li aria-current="page">{h1}</li>
   </ol>
 </nav>
 
 <section class="hero">
   <span class="kicker">All Articles</span>
-  <h1>記事一覧</h1>
+  <h1>{h1}</h1>
   <p class="lead">AIO・LLMO・SEO・MEOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。</p>
 </section>
 
@@ -1090,6 +1104,23 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 """
 
 
+def page_shell(h1="記事一覧", desc=""):
+    """BLOG_PAGE に渡す外枠の値。h1 は title・og:title・パンくずにも入る。
+
+    業種・用語集・テーマなどもこの外枠を使うため、h1 と説明を渡さないと
+    どのページも見出しが「記事一覧」になる
+    """
+    desc = re.sub(r"\s+", " ", str(desc or "")).strip()
+    if len(desc) > 120:                  # 文の途中で切らない（120字以内の最後の「。」まで）
+        cut = desc[:120].rfind("。")
+        desc = desc[:cut + 1] if cut >= 40 else desc[:120]
+    desc = desc or (
+        f"{SITE_NAME}の全記事一覧。AIO・LLMO・SEO・MEOの実践ノウハウを新着順に掲載しています。")
+    return dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
+                footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
+                h1=_html_escape(h1), desc=_html_escape(desc), **_cta())
+
+
 def hub_json_ld(name, url, metas, desc=""):
     """業種ハブの構造化データ。何の集まりで、何が入っているかを機械に渡す"""
     items = [{"@type": "ListItem", "position": i + 1,
@@ -1124,14 +1155,12 @@ def build_industry_hubs(all_metas):
         print(f"WARN: 業種ハブを作れません（{str(e)[:50]}）")
         return []
     pairs, g = IH.live(all_metas)
-    shell = dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
-                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT), **_cta())
     made = []
     for ind, metas in pairs:
         out = SITE / "industry" / ind["slug"] / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        page = BLOG_PAGE.format(items=IH.hub_body(ind, metas, CATEGORIES, post_tile), **shell)
-        page = page.replace("記事一覧｜" + SITE_NAME, f'{ind["name"]}の集客｜{SITE_NAME}')
+        page = BLOG_PAGE.format(items=IH.hub_body(ind, metas, CATEGORIES, post_tile), **page_shell(
+            f'{ind["name"]}の集客', ind.get("lead") or f'{ind["name"]}の集客に役立つ記事をまとめています。'))
         page = page.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/')
         url = f'{SITE_URL}/industry/{ind["slug"]}/'
         page = page.replace("</head>", hub_json_ld(
@@ -1146,8 +1175,9 @@ def build_industry_hubs(all_metas):
             fhtml, fld = fq
             fo = SITE / "industry" / ind["slug"] / "faq" / "index.html"
             fo.parent.mkdir(parents=True, exist_ok=True)
-            fpage = BLOG_PAGE.format(items=fhtml, **shell)
-            fpage = fpage.replace("記事一覧｜" + SITE_NAME, f'{ind["name"]}のよくある質問｜{SITE_NAME}')
+            fpage = BLOG_PAGE.format(items=fhtml, **page_shell(
+                f'{ind["name"]}のよくある質問',
+                f'{ind["name"]}の集客について、記事で答えたよくある質問をまとめています。'))
             fpage = fpage.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/faq/')
             fpage = fpage.replace("</head>", '<script type="application/ld+json">'
                                   + _json.dumps(fld, ensure_ascii=False) + "</script></head>", 1)
@@ -1155,8 +1185,8 @@ def build_industry_hubs(all_metas):
     if made:
         out = SITE / "industry" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        page = BLOG_PAGE.format(items=IH.index_body(pairs, g), **shell)
-        page = page.replace("記事一覧｜" + SITE_NAME, f"業種から探す｜{SITE_NAME}")
+        page = BLOG_PAGE.format(items=IH.index_body(pairs, g), **page_shell(
+            "業種から探す", "業種ごとに、集客・MEO・AIO・SEOの記事をまとめています。"))
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")
         flat = [m for _, ms in pairs for m in ms]
         page = page.replace("</head>", hub_json_ld(
@@ -1195,16 +1225,16 @@ def build_extra_pages(all_metas):
         print(f"WARN: 用語集・比較表を作れません（{str(e)[:50]}）")
         return
     sid = S.primary()
-    shell = dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
-                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT), **_cta())
+    # 実際に公開する記事だけを出典にする（止めた記事の用語・表を載せると404へリンクする）
+    only = {m["slug"] for m in all_metas}
 
     made_paths = set()
 
     def page(path, items, title, url, desc=""):
         out = SITE / path / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        p = BLOG_PAGE.format(items=items, **shell)
-        p = p.replace("記事一覧｜" + SITE_NAME, f"{title}｜{SITE_NAME}").replace(f"{SITE_URL}/blog/", url)
+        p = BLOG_PAGE.format(items=items, **page_shell(title, desc or f"{SITE_NAME}の「{title}」のページです。"))
+        p = p.replace(f"{SITE_URL}/blog/", url)
         out.write_text(p, encoding="utf-8", newline="\n")
         made_paths.add(out.parent)
 
@@ -1226,27 +1256,37 @@ def build_extra_pages(all_metas):
             base = SITE / lg
             if base.is_dir() and lg not in _i18n():
                 shutil.rmtree(base, ignore_errors=True)
+            elif base.is_dir():
+                # 指示のある言語でも、公開しなくなった記事の要約（/en/<cat>/<slug>/）は残さない
+                for d in base.glob("*/*/index.html"):
+                    if d.parent not in made_paths:
+                        shutil.rmtree(d.parent, ignore_errors=True)
+                if base not in made_paths and (base / "index.html").is_file():
+                    (base / "index.html").unlink()
 
     # 用語集
-    terms = GL.collect(sid)
+    terms = GL.collect(sid, only)
     if len(terms) >= 10:
         for r in terms:
             page(f"glossary/{r['id']}", GL.term_html(r, f"{SITE_URL}/{r['category']}/{r['slug']}/"),
-                 f"{r['term']}とは", f"{SITE_URL}/glossary/{r['id']}/")
-        page("glossary", GL.index_html(terms), "用語集", f"{SITE_URL}/glossary/")
+                 f"{r['term']}とは", f"{SITE_URL}/glossary/{r['id']}/", f"{r['term']}とは、{r['definition']}")
+        page("glossary", GL.index_html(terms), "用語集", f"{SITE_URL}/glossary/",
+             f"{SITE_NAME}の記事で定義した用語{len(terms)}語を1か所に集めた用語集です。")
         print(f"用語集: {len(terms)}語")
     # 比較表
-    cats = CP.collect(sid)
+    cats = CP.collect(sid, only)
     made = []
     for cat, rows in cats.items():
         if len(rows) < 3 or cat not in CATEGORIES:
             continue
         name = CATEGORIES[cat][0]
         page(f"compare/{cat}", CP.page_html(name, rows, lambda r, c=cat: f"{SITE_URL}/{c}/{r['slug']}/"),
-             f"{name}の比較表", f"{SITE_URL}/compare/{cat}/")
+             f"{name}の比較表", f"{SITE_URL}/compare/{cat}/",
+             f"{name}の記事にある比較表{len(rows)}表を1か所に集めました。")
         made.append((cat, name, len(rows)))
     if made:
-        page("compare", CP.index_html(made), "比較表から探す", f"{SITE_URL}/compare/")
+        page("compare", CP.index_html(made), "比較表から探す", f"{SITE_URL}/compare/",
+             "記事の比較表をカテゴリごとに集め、違いと費用を見比べられる入口です。")
         print(f"比較表: {', '.join(f'{n}{c}表' for _, n, c in made)}")
     # テーマ（ピラー↔クラスター）。主題ごとに「まず読む1本」と掘り下げる記事を束ねる
     groups = []
@@ -1255,9 +1295,11 @@ def build_extra_pages(all_metas):
         groups = TP.build(sid, all_metas)
         for g in groups:
             page(f"topics/{g['slug']}", TP.page_html(g, lambda m: f"{SITE_URL}/{m['category']}/{m['slug']}/"),
-                 f"{g['name']}の記事", f"{SITE_URL}/topics/{g['slug']}/")
+                 f"{g['name']}の記事", f"{SITE_URL}/topics/{g['slug']}/",
+                 f"テーマ「{g['name']}」の記事{len(g['members'])}本。まず読む1本は「{g['pillar']['title']}」です。")
         if groups:
-            page("topics", TP.index_html(groups), "テーマから探す", f"{SITE_URL}/topics/")
+            page("topics", TP.index_html(groups), "テーマから探す", f"{SITE_URL}/topics/",
+                 "同じ主題の記事を束ね、まず読む1本と掘り下げる記事に分けたテーマの一覧です。")
             print(f"テーマ: {len(groups)}件（{', '.join(g['name'] for g in groups[:6])}…）")
     except Exception as e:
         print(f"WARN: テーマの束ねを飛ばしました（{str(e)[:50]}）")
@@ -1268,9 +1310,11 @@ def build_extra_pages(all_metas):
         area_pairs, area_g = AH.live(all_metas)
         for a, ms in area_pairs:
             page(f"area/{a['slug']}", AH.page_html(a, ms, lambda m: f"{SITE_URL}/{m['category']}/{m['slug']}/"),
-                 f"{a['name']}の記事", f"{SITE_URL}/area/{a['slug']}/")
+                 f"{a['name']}の記事", f"{SITE_URL}/area/{a['slug']}/",
+                 f"{a['name']}に関する記事{len(ms)}本をまとめています。")
         if area_pairs:
-            page("area", AH.index_html(area_pairs, area_g), "エリアから探す", f"{SITE_URL}/area/")
+            page("area", AH.index_html(area_pairs, area_g), "エリアから探す", f"{SITE_URL}/area/",
+                 "エリアごとに記事をまとめています。")
             print(f"エリアハブ: {len(area_pairs)}件（{'、'.join(a['name'] for a, _ in area_pairs)}）")
     except Exception as e:
         print(f"WARN: エリアハブを飛ばしました（{str(e)[:50]}）")
@@ -1279,7 +1323,8 @@ def build_extra_pages(all_metas):
     try:
         import i18n as I18N
         lang_attr = {"en": "en", "zh": "zh-Hans", "ko": "ko"}
-        for lg, docs in _i18n().items():
+        live_i18n = _i18n_live()
+        for lg, docs in live_i18n.items():
             if not docs:
                 continue
             for slug, d in docs.items():
@@ -1288,13 +1333,13 @@ def build_extra_pages(all_metas):
                     continue
                 ja = f"{SITE_URL}/{cat}/{slug}/"
                 path = f"{lg}/{cat}/{slug}"
-                page(path, I18N.page_html(d, ja, lg), d["title"], f"{SITE_URL}/{path}/")
+                page(path, I18N.page_html(d, ja, lg), d["title"], f"{SITE_URL}/{path}/", d.get("description"))
                 out = SITE / path / "index.html"
                 t = out.read_text(encoding="utf-8")
                 alts = [f'<link rel="alternate" hreflang="ja" href="{ja}">',
                         f'<link rel="alternate" hreflang="x-default" href="{ja}">'] + [
                     f'<link rel="alternate" hreflang="{lang_attr[o]}" href="{SITE_URL}/{o}/{cat}/{slug}/">'
-                    for o in _i18n() if slug in _i18n()[o]]
+                    for o in live_i18n if slug in live_i18n[o]]
                 t = t.replace('<html lang="ja">', f'<html lang="{lang_attr[lg]}">', 1)
                 t = t.replace("</head>", "\n".join(alts) + "\n</head>", 1)
                 out.write_text(t, encoding="utf-8", newline="\n")
@@ -1322,9 +1367,9 @@ def build_extra_pages(all_metas):
                                              ("compare", "比較表から探す", f"{len(made)}カテゴリ" if made else ""),
                                              ("topics", "テーマから探す", f"{len(groups)}テーマ" if groups else ""),
                                              ("area", "エリアから探す", f"{len(area_pairs)}エリア" if area_pairs else ""),
-                                             ("en", "English", f"{len(_i18n().get('en', {}))}" if _i18n().get("en") else ""),
-                                             ("zh", "中文", f"{len(_i18n().get('zh', {}))}" if _i18n().get("zh") else ""),
-                                             ("ko", "한국어", f"{len(_i18n().get('ko', {}))}" if _i18n().get("ko") else ""))
+                                             ("en", "English", f"{len(_i18n_live().get('en', {}))}" if _i18n_live().get("en") else ""),
+                                             ("zh", "中文", f"{len(_i18n_live().get('zh', {}))}" if _i18n_live().get("zh") else ""),
+                                             ("ko", "한국어", f"{len(_i18n_live().get('ko', {}))}" if _i18n_live().get("ko") else ""))
                         if n)
         if links:
             t = idx.read_text(encoding="utf-8")
@@ -1370,11 +1415,96 @@ def build_blog_index(all_metas):
             f'<ul class="post-list">\n{tiles}\n</ul></div>')
     out = SITE / "blog" / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(BLOG_PAGE.format(site=SITE_NAME, url=SITE_URL, items="\n".join(blocks),
-                                    nav=_nav("nav", NAV_DEFAULT),
-                                    footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
-                                    **_cta()),
+    out.write_text(BLOG_PAGE.format(items="\n".join(blocks), **page_shell()),
                    encoding="utf-8")
+
+
+def sync_llms(entries):
+    """llms.txt の記事の行を、今回公開する記事に合わせる。記事以外の行（業種・主要ページ・一次データ）は触らない。
+
+    記事の行は公開時に足すだけで、止めた記事・原稿の無くなった記事の行が残り、
+    AIクローラーに404を案内していた。タイトルを直した記事も古い題名のままだった
+    """
+    lt = SITE / "llms.txt"
+    if not entries or not lt.is_file():
+        return
+    live = {url: meta for meta, url in entries}
+    art = re.compile(r"^- \[(.*?)\]\((" + re.escape(SITE_URL) + r"/(?:"
+                     + "|".join(re.escape(c) for c in CATEGORIES) + r")/[^/()\s]+/)\)(.*)$")
+    t = lt.read_text(encoding="utf-8")
+    out, dropped, renamed = [], [], 0
+    for ln in t.split("\n"):
+        m = art.match(ln)
+        if m and m.group(2) not in live:
+            dropped.append(m.group(2))
+            continue
+        if m and m.group(1) != live[m.group(2)]["title"]:
+            ln = f'- [{live[m.group(2)]["title"]}]({m.group(2)}){m.group(3)}'
+            renamed += 1
+        out.append(ln)
+    if dropped or renamed:
+        lt.write_text("\n".join(out), encoding="utf-8", newline="\n")
+        print(f"SYNC: llms.txt の記事の行を整理（公開しない記事 {len(dropped)}行を削除・題名の差し替え {renamed}行）")
+        for u in dropped[:10]:
+            print(f"   削除: {u}")
+
+
+def prune_orphan_articles(entries, unparsable):
+    """原稿の無くなった記事の生成HTML（site/<cat>/<slug>/）を消す。
+
+    カテゴリ変更・_conflicted への隔離・削除をすると、原稿は無いのに古いHTMLが
+    配信され続ける（sitemap からは消えるため、誰も気づかない）。
+    消すのは「かつて記事として生成したフォルダ」だけ: index.html 1枚だけを持ち、
+    その中身が記事テンプレート（<main class="article" と BlogPosting）であるもの。
+    カテゴリ一覧・固定ページ・画像は条件に合わないので消えない。
+    カテゴリを移した記事は、旧URLから新URLへ 301 を _redirects に足す
+    """
+    import shutil
+    if not entries:
+        return []
+    live = {(m["category"], m["slug"]) for m, _ in entries}
+    moved_to = {m["slug"]: m["category"] for m, _ in entries}
+    victims = []
+    for cat in CATEGORIES:
+        base = SITE / cat
+        if not base.is_dir():
+            continue
+        for d in sorted(base.iterdir()):
+            # フロントマターが一時的に壊れただけの記事は、直れば戻るので消さない
+            if not d.is_dir() or (cat, d.name) in live or d.name in unparsable:
+                continue
+            files = [f for f in d.rglob("*") if f.is_file()]
+            if [f.name for f in files] != ["index.html"]:
+                continue
+            t = files[0].read_text(encoding="utf-8", errors="replace")
+            if '<main class="article ' not in t or '"BlogPosting"' not in t:
+                continue
+            victims.append((cat, d))
+    if not victims:
+        return []
+    # 一度に大量に消えるのは、判定か原稿の置き場のほうが壊れている。消さずに知らせる
+    if len(victims) > max(10, len(entries) // 5):
+        print(f"WARN: 原稿の無い記事フォルダが{len(victims)}件あります。多すぎるため消しません"
+              "（articles/ の置き場やビルドの判定を確かめてください）: "
+              + ", ".join(f"{c}/{d.name}" for c, d in victims[:5]))
+        return []
+    print(f"REMOVED: 原稿の無くなった記事の生成HTMLを削除（{len(victims)}件）")
+    for cat, d in victims:
+        print(f"   {cat}/{d.name}/"
+              + (f" → /{moved_to[d.name]}/{d.name}/ へ301" if d.name in moved_to else ""))
+    rd = SITE / "_redirects"
+    have = rd.read_text(encoding="utf-8") if rd.is_file() else ""
+    srcs = {ln.split()[0] for ln in have.splitlines() if ln.strip() and not ln.startswith("#")}
+    add = [f"/{cat}/{d.name}/  /{moved_to[d.name]}/{d.name}/  301" for cat, d in victims
+           if d.name in moved_to and f"/{cat}/{d.name}/" not in srcs]
+    if add:
+        head = "" if "# build.py: カテゴリを移した記事" in have else (
+            "# build.py: カテゴリを移した記事。旧URLの評価を新URLへ引き継ぐ（自動で追記）\n")
+        rd.write_text(have.rstrip("\n") + "\n" + head + "\n".join(add) + "\n",
+                      encoding="utf-8", newline="\n")
+    for _, d in victims:
+        shutil.rmtree(d)
+    return [f"{c}/{d.name}" for c, d in victims]
 
 
 def main():
@@ -1399,6 +1529,7 @@ def main():
     # 品質審査ゲート: score(100点満点) 90点未満・未審査はアップロードしない
     QUALITY_GATE = 90
     paths, all_metas, blocked, blocked_metas = [], [], [], []
+    unparsable = set()             # フロントマターが読めなかった記事。生成済みHTMLは消さない
     for p in sorted(ARTICLES.glob("*.md")):
         if p.name.startswith("_"):
             continue
@@ -1415,6 +1546,7 @@ def main():
             meta = parse_article(p)[0]
         except Exception as e:
             blocked.append(f"{p.stem}: フロントマター不正（{e}）")
+            unparsable.add(p.stem)
             print(f"BLOCKED(公開不可): {p.stem}: フロントマター不正 → {e}")
             continue
         sc = meta.get("score")
@@ -1427,17 +1559,11 @@ def main():
             blocked_metas.append(meta)
             continue
         # 足切り: score_breakdown がある場合、1観点でも下限未満なら不合格（合計点で壊滅観点を隠さない）。
-        # 旧6観点は20点満点で16、rubric の3観点は100点満点で PASS_EACH。
-        # 満点を見分けないと、100点満点の70点が16以上として素通りする
+        # 規則は rubric に1か所だけ置く（配信側も rubric.gate_ok で同じ判定をする）
         import rubric
-        bd = meta.get("score_breakdown") or {}
-        nums = [v for v in bd.values() if isinstance(v, (int, float))]
-        if set(bd) & {a["key"] for a in rubric.AXES} or max(nums or [0]) > 20:
-            th, full = rubric.PASS_EACH, rubric.MAX
-        else:
-            th, full = 16, 20
-        weak = {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < th}
+        weak = rubric.weak_axes(meta)
         if weak:
+            th, full = rubric.cutoff(meta.get("score_breakdown") or {})
             blocked.append(f"{meta['slug']}: 観点足切り {weak}（各{th}/{full}以上が必要）")
             blocked_metas.append(meta)
             continue
@@ -1476,6 +1602,7 @@ def main():
         """
         seq = sorted(metas, key=lambda m: (str(m["date"]), m["slug"]))
         idx = {m["slug"]: i for i, m in enumerate(seq)}
+        _set_live(metas)
         out = []
         for path in paths:
             slug = parse_article(path)[0]["slug"]
@@ -1542,6 +1669,8 @@ def main():
         all_metas = [m for m in all_metas if m["slug"] not in late_blocked]
         print(f"再描画: {len(late_blocked)}本を止めたため、関連リンクを作り直します")
         entries = render_all(all_metas, late_blocked)
+    sync_llms(entries)
+    prune_orphan_articles(entries, unparsable)
     build_blog_index(all_metas)
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)

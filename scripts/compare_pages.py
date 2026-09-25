@@ -6,7 +6,7 @@
 カテゴリごとに集め、出典の記事へリンクする。新しい表は作らない。
 
 build.py が呼ぶ:
-  pages = compare_pages.collect(site_id)      # {category: [{title, h2, table_md, slug}]}
+  pages = compare_pages.collect(site_id, only)  # {category: [{title, h2, table_md, slug}]}（only=公開する slug）
   html  = compare_pages.page_html(cat_name, rows, url_of)
 """
 import html as _h
@@ -35,10 +35,13 @@ def _tables(body):
     return out
 
 
-def collect(site_id):
+def collect(site_id, only=None):
+    """only: 実際に公開する記事の slug の集合（build.py が渡す）。止めた記事の表を出典にしない"""
     import sites as S
     cats = {}
     for p in (ROOT / "articles").glob("*.md"):
+        if only is not None and p.stem not in only:
+            continue
         t = p.read_text(encoding="utf-8-sig")
         m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
         if not m:

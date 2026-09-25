@@ -41,11 +41,19 @@ export async function onRequestPost({ request, env }) {
 
   // A) Google Apps Script（スプレッドシート台帳＋Gmail通知）
   if (hasGas) {
+    // 管制塔の受付（contact.hub.gs の form_）は type が無いと contact として本文を必須にする。
+    // LPヒーローと資料DLは本文欄が無いため「必須項目が入力されていません」で弾かれ、
+    // 台帳に残っていなかった。種別を form_type から決め、本文が無ければ相談テーマか種別で補う
+    const ft = String(data.form_type || "");
+    const type = ft.includes("資料") ? "download"
+      : (ft.includes("診断") || ft.includes("結果送付")) ? "diagnosis" : "contact";
+    const hub = { ...data, site: "ai-lab", type };
+    if (!String(hub.message || "").trim()) hub.message = data.topic || ft || "（本文なし）";
     try {
       const gas = await fetch(env.GAS_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", data, referer }),
+        body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", site: "ai-lab", data: hub, referer }),
       });
       // GASは失敗時も200で {ok:false} を返すため、本文まで確認する
       const out = await gas.json().catch(() => ({}));

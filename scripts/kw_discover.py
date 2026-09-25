@@ -461,8 +461,14 @@ def main():
         try:
             import hub_client
             if hub_client.enabled():
-                hub_client.add_kw(site_id, picks)
-                print(f"管制塔の台帳へ {len(picks)}件を追加しました（site={site_id}）")
+                # 管制塔は失敗しても {ok:false} を返し、重複・他サイトの語は黙って飛ばす。
+                # 渡した数ではなく、実際に入った数（added）を出す
+                r = hub_client.add_kw(site_id, picks) or {}
+                if r.get("ok"):
+                    print(f"管制塔の台帳へ {r.get('added', 0)}件を追加しました"
+                          f"（渡した{len(picks)}件・site={site_id}）")
+                else:
+                    print(f"（管制塔が追加を受け付けませんでした: {r.get('error', '応答なし')}）")
             else:
                 print("（管制塔が未接続のため台帳への追加はスキップ）")
         except Exception as e:

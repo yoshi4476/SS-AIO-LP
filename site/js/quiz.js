@@ -40,8 +40,8 @@
     var pct = Math.min(100, Math.round(score / cfg.max * 100));
     var band = cfg.bands.filter(function (b) { return pct >= b[0]; })[0][1];
     if (window.trackLead) {
+      // lead_capture はここで出さない。連絡先を受け取ったとき（leadCapture の送信成功）だけCVに数える
       window.trackLead("diagnosis_complete", { diagnosis_type: cfg.type, score: pct, grade: band.name });
-      window.trackLead("lead_capture", { lead_route: "diagnosis", diagnosis_type: cfg.type });
       window.trackLead("lead_diagnosis", { diagnosis_type: cfg.type, score: pct });
     }
     var C = 2 * Math.PI * 62, off = C * (1 - pct / 100);

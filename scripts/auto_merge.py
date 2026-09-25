@@ -344,20 +344,24 @@ def apply(pair, why):
     rec = {"at": today, "site": site, "survivor": s, "loser": l, "from": from_url, "to": to_url,
            "kws": [k["kw"] for k in pair["kws"]], "imp": pair["imp"], "relinked": n, "note": why[:120]}
     _append(MERGES, rec)
+    pos = pair.get("survivor_stat", {}).get("pos", "")
+    # 順位の台帳は手元のもの。管制塔の有無に関係なく残す（無い回に記録ごと消えていた）
+    if pos:
+        try:
+            import rank_up
+            log = rank_up.load_log()
+            log[s] = {"at": today, "pos": float(pos), "site": site, "by": "auto_merge"}
+            rank_up.save_log(log)
+        except Exception as e:
+            print(f"     （順位の台帳への記録をスキップ: {str(e)[:60]}）")
     try:
         import hub_client
         if hub_client.enabled():
-            pos = pair.get("survivor_stat", {}).get("pos", "")
             hub_client.rewrite_log(site, s, reason=f"統合: {l} を吸収（同じ語{len(pair['kws'])}・表示{pair['imp']}）",
                                    summary=why[:80], pos_before=(round(pos, 1) if pos else ""))
             lkw = fm_merged(l)["keyword"]
             if lkw:
                 hub_client.retire_kw(site, [lkw], f"統合で {s} に吸収", force=True)
-            import rank_up
-            log = rank_up.load_log()
-            if pos:
-                log[s] = {"at": today, "pos": float(pos), "site": site, "by": "auto_merge"}
-                rank_up.save_log(log)
     except Exception as e:
         print(f"     （管制塔への記録をスキップ: {str(e)[:60]}）")
     return rec

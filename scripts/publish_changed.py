@@ -43,8 +43,9 @@ def site_articles(site_id):
         cat = (re.search(r"^category:\s*(\S+)", fm, re.M) or [0, ""])[1]
         if sites_mod.find_category_owner(cat) != site_id:
             continue
-        sc = (re.search(r"^score:\s*(\d+)", fm, re.M) or [0, "0"])[1]
-        if int(sc) < 90:
+        # 観点の足切りまで見る（score だけだと、build.py が止める記事を配信してしまう）
+        meta = P.read_meta(p)
+        if not meta or not P.gate_ok(meta):
             continue
         out.append(p.stem)
     return out

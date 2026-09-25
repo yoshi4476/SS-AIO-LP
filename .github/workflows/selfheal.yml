@@ -74,6 +74,7 @@ jobs:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           mkdir -p automation/logs
@@ -181,18 +182,30 @@ jobs:
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+          RUN_STARTED: ${{ github.event.workflow_run.run_started_at }}
         run: |
           if [ -z "$GCP_SERVICE_ACCOUNT_JSON" ] || [ -z "$GA4_ID" ]; then echo "実データ未設定のため発行しない"; exit 0; fi
           pip install --quiet playwright google-analytics-data google-api-python-client google-auth pymupdf
           python -m playwright install --with-deps chromium
           printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           { echo "GA4_PROPERTY_ID=$GA4_ID"; echo "GSC_SITE_URL=https://ai.7senses.co.jp/"
+            echo "SPREADSHEET_ID=$SPREADSHEET_ID"
             echo "RESEND_API_KEY=$RESEND_API_KEY"; echo "LEAD_FROM_EMAIL=$LEAD_FROM_EMAIL"
             echo "LEAD_TO_EMAIL=info.ai@7senses.co.jp"; } > .env
+          # 落ちたのが15日の回（当月の途中経過版）なら、同じく途中経過として出し直す。
+          # 付けないと先月の確定版を二重に送り、当月の途中経過は届かない
+          through=""
+          if [ -n "$RUN_STARTED" ] && [ "$(TZ=Asia/Tokyo date -d "$RUN_STARTED" +%d)" = "15" ]; then
+            through="--through $(TZ=Asia/Tokyo date -d "$RUN_STARTED" +%F)"
+          fi
+          # 社ごとに送らず列に積み、最後に1通にまとめる（通常の発行と同じ形）
+          mkdir -p automation/logs
           for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
-            python scripts/monthly_report.py --site "$s" --email || echo "  $s は生成できませんでした"
+            python scripts/monthly_report.py --site "$s" --queue $through || echo "  $s は生成できませんでした"
           done
-          python scripts/group_report.py --email || true
+          python scripts/report_digest.py --email || true
+          python scripts/group_report.py --email $through || true
           rm -f indexing-service-account.json .env
 
       - name: 結果の通知

@@ -9,14 +9,15 @@ indexing-service-account.json
 # 収集データ・ログ（容量大・再生成可能）
 data/x_trends/
 data/youtube_transcripts/
-automation/logs/
+automation/logs/*
+# 介入の台帳は週次の効果測定・戻しが過去分を読むので追跡する（CI では毎回空になっていた）
+!automation/logs/auto_fix.jsonl
 automation/images/
 
 # OS/エディタ
 .DS_Store
 Thumbs.db
 __pycache__/
-automation/logs/
 .wrangler/
 
 # 配信先リポジトリの作業クローン
@@ -39,6 +40,9 @@ secrets.local.txt
 intake/*.xlsx
 intake/done/
 intake/todo/
+# シートの「レポートの送付先」（担当者のメール）と「その他の申し送り」（社内事情）。
+# sites/*.json に入れると公開されるため、ここに分けて置く（client_intake.to_private）
+data/clients/*/private.json
 
 # ラッコの応答のキャッシュ（課金を減らすための手元の控え。公開リポジトリには置かない）
 data/rakko_cache/
