@@ -70,6 +70,40 @@ def auth():
     c = flow.run_local_server(port=0)
     TOKEN.write_text(c.to_json(), encoding="utf-8")
     print(f"  {TOKEN.name} を作りました（以降はブラウザ不要）")
+    try:
+        from googleapiclient.discovery import build
+        yt = build("youtube", "v3", credentials=c, cache_discovery=False)
+        items = yt.channels().list(part="id", mine=True).execute().get("items", [])
+        _count_user(items[0]["id"] if items else "")
+    except Exception as e:
+        print(f"  ※ 許可したチャンネルを台帳に数えられませんでした（{type(e).__name__}）")
+    return 0
+
+
+# Google の確認を受けていないアプリは、許可できるアカウントが累計100まで（使い終わっても減らない）。
+# 上限に着いてから確認を申請すると数週間止まるので、90で知らせる
+USERS = ROOT / "data" / "youtube_oauth_users.json"
+USER_CAP, USER_WARN = 100, 90
+
+
+def _count_user(channel_id):
+    d = json.loads(USERS.read_text(encoding="utf-8")) if USERS.is_file() else {"channels": []}
+    if channel_id and channel_id not in d["channels"]:
+        d["channels"].append(channel_id)
+        USERS.parent.mkdir(parents=True, exist_ok=True)
+        USERS.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"  許可したアカウント: 累計{len(d['channels'])}（未確認アプリの上限 {USER_CAP}）")
+
+
+def users():
+    """許可したアカウントの累計が上限に近づいたら知らせる（週次の findings が呼ぶ）"""
+    d = json.loads(USERS.read_text(encoding="utf-8")) if USERS.is_file() else {"channels": []}
+    n = len(d.get("channels", []))
+    print(f"■ YouTube の許可: 累計{n}アカウント（未確認アプリの上限 {USER_CAP}）")
+    if n >= USER_WARN:
+        print(f"要対応: YouTube 用アプリの許可が累計{n}に達しました。上限{USER_CAP}を超えると新しい"
+              "チャンネルを追加できません。Google Cloud の同意画面から「アプリの確認」を申請してください")
+    print("YT_USERS_OK=" + ("no" if n >= USER_WARN else "yes"))
     return 0
 
 
@@ -203,11 +237,14 @@ def main():
     ap.add_argument("--slug", help="記事か一次データのslug（概要欄に使う）")
     ap.add_argument("--auth", action="store_true")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--users", action="store_true", help="許可したアカウントの累計（上限100の手前で知らせる）")
     ap.add_argument("--public", action="store_true", help="全体公開で上げる")
     a = ap.parse_args()
 
     if a.auth:
         return auth()
+    if a.users:
+        return users()
     if a.check or not a.mp4:
         return check()
     slug = a.slug or Path(a.mp4).stem
