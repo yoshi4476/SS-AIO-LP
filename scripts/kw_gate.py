@@ -140,11 +140,19 @@ def main():
                 return 0
             try:
                 import hub_client
-                hub_client.retire_kw(a.site, [kw],
-                                     "既存ページと食い合うため自動退避（kw_gate）")
-                print("   → 台帳から退避しました。次の候補を探します\n")
+                r = hub_client.retire_kw(a.site, [kw],
+                                         "既存ページと食い合うため自動退避（kw_gate）") or {}
             except Exception as e:
-                print(f"   → 台帳を更新できません（{type(e).__name__}）。次の候補を探します\n")
+                r = {"ok": False, "error": type(e).__name__}
+            if not r.get("ok"):
+                # 外せないまま次を取ると同じ語が返り、1件で「全部食い合う」と誤って止まる。
+                # 管制塔は読むだけなら合言葉なしで通るので、書き込みだけ弾かれる形で現れる
+                print(f"   → 台帳から外せませんでした（{r.get('error') or '応答なし'}）")
+                print("KW_GATE=block")
+                print("要対応: 管制塔の台帳を書き換えられません。GitHub Secrets の HUB_SECRET が"
+                      "管制塔の合言葉と一致しているか確かめてください")
+                return 1
+            print("   → 台帳から退避しました。次の候補を探します\n")
         if not tried:
             print("次のKWを取得できませんでした。KW台帳の補充が必要です")
             print("KW_GATE=skip")

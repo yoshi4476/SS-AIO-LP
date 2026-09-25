@@ -176,6 +176,16 @@ def main():
         # 監修待ちは品質の不合格ではない。失敗で返すと救済の工程が書き直しに回すため、0で抜ける
         print(f"HELD(監修待ち): {slug} は監修の記録が無いため公開していません"
               f"（確認したら GitHub の Actions →「監修の記録」に {slug} を入れて実行）")
+        # 台帳では未着手のまま残るため、次の枠が同じ語を選んで既存原稿と食い合って止まる。
+        # 公開までは「執筆中」にしておく（公開の後の手順で「公開済み」になる）
+        if kw:
+            try:
+                import hub_client
+                r = hub_client.claim_kw(site_id, kw) or {}
+                if not r.get("ok"):
+                    print(f"  ※ 台帳を「執筆中」にできませんでした（{r.get('error') or '応答なし'}）")
+            except Exception as e:
+                print(f"  ※ 台帳を「執筆中」にできませんでした（{type(e).__name__}）")
         raise SystemExit(0)
 
     # 3. 配信（サイト種別ごとの出口）
