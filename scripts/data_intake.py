@@ -485,6 +485,9 @@ def chart_svg(rows, unit):
     return "".join(parts)
 
 
+LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/"
+
+
 def dataset_description(ds):
     """構造化データ用の説明。Google は50〜5000字を求める（短いと Dataset ごと検索に出ない）。
     足すのは登録済みの集計方法・期間・母数だけ（新しい数字は作らない）"""
@@ -511,6 +514,8 @@ def dataset_jsonld(ds):
         "measurementTechnique": ds["method"],
         "keywords": [CATS.get(c, c) for c in ds["categories"]],
         "isAccessibleForFree": True,
+        # 出典を明記すれば誰でも引用・転載・加工してよい（引用されることが公開の目的）
+        "license": LICENSE_URL,
         "creditText": f"出典: {ORG}「{ds['title']}」（{url}）",
         # 分子・分母まで書く。割合だけでは、AIも読者も「何件中何件か」を確かめられない
         "variableMeasured": [
@@ -563,7 +568,7 @@ def page_html(ds):
 <section class="section">
 <h2>要点（引用用）</h2>
 <blockquote style="border-left:5px solid #1a73e8;padding:.8em 1.2em;background:#f3f7ff;border-radius:0 12px 12px 0;"><p style="margin:0;font-weight:700;">{e(ds["sentence"])}</p></blockquote>
-<p style="font-size:.9rem;color:#556;">引用される際は「出典: {ORG}「{e(ds["title"])}」（{url}）」と明記してください。</p>
+<p style="font-size:.9rem;color:#556;">引用される際は「出典: {ORG}「{e(ds["title"])}」（{url}）」と明記してください。このデータは <a href="{LICENSE_URL}" rel="license noopener" target="_blank">クリエイティブ・コモンズ 表示 4.0 国際（CC BY 4.0）</a> で提供しています。出典を明記すれば、転載・加工・商用利用ができます。</p>
 </section>
 
 <section class="section">
