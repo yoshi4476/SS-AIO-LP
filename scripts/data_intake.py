@@ -485,11 +485,25 @@ def chart_svg(rows, unit):
     return "".join(parts)
 
 
+def dataset_description(ds):
+    """構造化データ用の説明。Google は50〜5000字を求める（短いと Dataset ごと検索に出ない）。
+    足すのは登録済みの集計方法・期間・母数だけ（新しい数字は作らない）"""
+    parts = [ds["description"].rstrip("。") + "。"]
+    if ds.get("method"):
+        parts.append("集計方法: " + ds["method"].rstrip("。") + "。")
+    if ds.get("period") or (ds.get("start") and ds.get("end")):
+        parts.append(f"対象期間: {ds.get('period') or ds['start'] + '〜' + ds['end']}。")
+    if ds.get("n"):
+        parts.append(f"母数: {int(ds['n']):,}{ds.get('n_unit', '')}。")
+    parts.append(f"出典: {ORG}。")
+    return "".join(parts)[:5000]
+
+
 def dataset_jsonld(ds):
     url = f"{SITE_URL}/data/{ds['slug']}/"
     return {
         "@context": "https://schema.org", "@type": "Dataset",
-        "name": ds["title"], "description": ds["description"], "url": url,
+        "name": ds["title"], "description": dataset_description(ds), "url": url,
         "creator": {"@type": "Organization", "name": ORG, "url": "https://corp.7senses.co.jp/"},
         "publisher": {"@type": "Organization", "name": ORG, "url": "https://corp.7senses.co.jp/"},
         "datePublished": ds["published"], "dateModified": ds["modified"],
