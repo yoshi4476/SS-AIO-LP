@@ -1712,9 +1712,12 @@ def test_kw_plan_keeps_only_buyers():
     saved_ms, saved_mb = _rk.month_spent, _rk.MONTHLY_BUDGET
     try:
         _rk.month_spent, _rk.MONTHLY_BUDGET = (lambda month=None: 995.0), 1000
-        check("月の目安を超えるなら取得しない", kw_plan.budget_ok(S_est), False)
+        check("月の目安を超えても取得する（自動課金・2026-09方針）", kw_plan.budget_ok(S_est), True)
         _rk.month_spent = lambda month=None: 0.0
         check("予算内なら取得する", kw_plan.budget_ok(S_est), True)
+        S_over_cap = {"cfg": {"kw_seeds": {"core": ["集客", "SEO", "MEO", "AIO"]}}, "own_terms": ("aio",),
+                      "industries": ["業種%d" % i for i in range(100)], "intents": []}
+        check("1回の上限は超えたら取得しない（暴走の歯止め）", kw_plan.budget_ok(S_over_cap), False)
     finally:
         _rk.month_spent, _rk.MONTHLY_BUDGET = saved_ms, saved_mb
     wf_m = (ROOT / ".github" / "workflows" / "monthly-report.yml").read_text(encoding="utf-8", errors="replace")
