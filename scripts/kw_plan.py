@@ -675,7 +675,8 @@ def estimate(S):
 
 
 def budget_ok(S):
-    """今月の合計＋見積もりが目安を超えるなら取得しない。手で走らせても同じ"""
+    """1回の見積もりが上限（暴走の歯止め）を超えるなら取得しない。手で走らせても同じ。
+    月の目安は超えても止めない（自動課金にしているため。2026-09 に方針変更）。超えたことは知らせる"""
     est = estimate(S)
     used = rakko.month_spent()
     print(f"   見積もり: 約{est:.0f}クレジット（今月の合計 {used:.0f} ＋ → {used + est:.0f} / 目安 {rakko.MONTHLY_BUDGET}）")
@@ -685,9 +686,8 @@ def budget_ok(S):
         print("RAKKO_GUARD=over")
         return False
     if used + est > rakko.MONTHLY_BUDGET:
-        print(f"   今月の目安 {rakko.MONTHLY_BUDGET} を超えるため取得しません（来月か、目安の見直しを）")
-        print("RAKKO_GUARD=over")
-        return False
+        print(f"   今月の目安 {rakko.MONTHLY_BUDGET} を超えますが、自動課金にしているため続けます")
+        print("RAKKO_MONTH=over")
     print("RAKKO_GUARD=ok")
     return True
 

@@ -351,10 +351,11 @@ def main():
     # キー未設定なら何も起きない（無料ぶんだけで動き続ける）。
     try:
         import rakko
+        # 月の目安は超えても止めない（自動課金にしているため）。超えたことは知らせる
         if rakko.enabled() and rakko.month_spent() > rakko.MONTHLY_BUDGET:
-            print(f"  ラッコは今月の目安（{rakko.MONTHLY_BUDGET}）を超えているため使いません（無料のサジェストだけ）")
-            print("RAKKO_GUARD=over")
-        elif rakko.enabled():
+            print(f"  ラッコは今月の目安（{rakko.MONTHLY_BUDGET}）を超えています（自動課金で続けます）")
+            print("RAKKO_MONTH=over")
+        if rakko.enabled():
             before = len(discovered)
             for ind in S["industries"]:
                 pairs = rakko.as_pairs(rakko.suggest(ind)) + rakko.as_pairs(rakko.related(ind))
