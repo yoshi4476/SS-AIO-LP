@@ -41,6 +41,12 @@ LINE = (228, 232, 238)
 VOICE = "ja-JP-NanamiNeural"   # 女性。男性は ja-JP-KeitaNeural
 RATE = "-5%"     # 速いと高低が潰れて聞き取りにくい。ゆっくりめに読ませる
 
+FONT_REG_PATHS = [
+    r"C:\Windows\Fonts\YuGothM.ttc", r"C:\Windows\Fonts\meiryo.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJKjp-Regular.otf",
+    "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
+]
 FONT_PATHS = [
     r"C:\Windows\Fonts\YuGothB.ttc", r"C:\Windows\Fonts\meiryob.ttc",
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
@@ -56,6 +62,15 @@ def font(size):
         except OSError:
             continue
     raise SystemExit("日本語フォントが見つかりません（文字化け防止のため中断）")
+
+
+def font_regular(size):
+    for p in FONT_REG_PATHS:
+        try:
+            return ImageFont.truetype(p, size)
+        except OSError:
+            continue
+    return font(size)
 
 
 def fit(d, text, max_w, base, minimum):
@@ -204,7 +219,9 @@ READ_AS = [
     # 「人」の読み分け。**数の後ろは「にん」、助詞が続くときは「ひと」。**
     # 実測で「判断は人、作業は機械」が「はんだんはニン」と読まれていた。
     # 前が数（8億人）なら触らない。後ろが字（人間・一人称・人件費）なら触らない
-    (r"(?<![0-9０-９〇一二三四五六七八九十百千万億兆数名何])人(?=[がはをにとの、。])", "ひと"),
+    # 直前が漢字なら熟語（法人・個人・本人・担当人）なので触らない。実際「医療法人の」が
+    # 「医療法ひとの」になっていた（2026-09。聞き直しの検査で発見）
+    (r"(?<![0-9０-９一-龥々ァ-ヺ])人(?=[がはをにとのもかでへや、。])", "ひと"),
     (r"Ahrefs", "エイチレフス"),
     # 音読み・訓読みが入れ替わると意味が変わる語
     (r"行のまま", "ぎょうのまま"),
@@ -267,8 +284,9 @@ COUNTERS = {
     "種": {10: "じゅっしゅ", 20: "にじゅっしゅ", 30: "さんじゅっしゅ"},
     "本": {1: "いっぽん", 3: "さんぼん", 6: "ろっぽん", 8: "はっぽん", 10: "じゅっぽん"},
     "回": {1: "いっかい", 6: "ろっかい", 8: "はっかい", 10: "じゅっかい"},
+    "人": {1: "ひとり", 2: "ふたり"},
 }
-COUNTER_RE = re.compile(r"(?<![0-9.])(\d+)(か月|ヶ月|カ月|件|つ(?![づ])|種|本|回|坪)")
+COUNTER_RE = re.compile(r"(?<![0-9.])(\d+)(か月|ヶ月|カ月|件|つ(?![づ])|種|本|回|坪|人)")
 
 URL_RE = re.compile(r"(https?://\S+|[a-z0-9-]+(?:\.[a-z0-9-]+){2,}[/\w.-]*)")
 
@@ -329,13 +347,14 @@ def read_text(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def say(text, path, voice=None, rate=None):
+def say(text, path, voice=None, rate=None, pitch=None):
     """読み上げる。声と速さはサイトごとに変えられる（クライアントの色に合わせる）"""
     import edge_tts
 
     def synth(spoken, out):
         async def go():
-            await edge_tts.Communicate(spoken, voice or VOICE, rate=rate or RATE).save(str(out))
+            await edge_tts.Communicate(spoken, voice or VOICE, rate=rate or RATE,
+                                       pitch=pitch or "+0Hz").save(str(out))
         asyncio.run(go())
 
     synth(read_text(text), path)

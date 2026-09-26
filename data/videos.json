@@ -1,25 +1,35 @@
 {
   "koumuten-chumon-jutaku-aio": {
     "site": "ai-lab",
-    "date": "2026-09-26",
-    "sec": 135,
+    "date": "2026-09-27",
+    "sec": 352,
     "mp4": "automation/video/koumuten-chumon-jutaku-aio.mp4",
     "nums": [
       "3",
       "4"
     ],
-    "youtube": "pMse2psyJyw"
+    "format": "duo",
+    "retired": [
+      "pMse2psyJyw",
+      "FkAqZuU0eAw"
+    ],
+    "youtube": "XG2aPmerFB0"
   },
   "zeirishi-houjin-aio": {
     "site": "ai-lab",
-    "date": "2026-09-26",
-    "sec": 122,
+    "date": "2026-09-27",
+    "sec": 299,
     "mp4": "automation/video/zeirishi-houjin-aio.mp4",
     "nums": [
       "1",
       "3",
       "5"
     ],
-    "youtube": "DmzW2_zEYYM"
+    "format": "duo",
+    "retired": [
+      "DmzW2_zEYYM",
+      "1rb4V2PLMdU"
+    ],
+    "youtube": "FzB21lfDeTs"
   }
 }

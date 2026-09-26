@@ -87,23 +87,37 @@ def _norm(k):
     return k.replace("ー", "")
 
 
-def spoken_form(s):
-    """台本も、聞き取った文も、同じ読み替えを通してから比べる（英字・数字・記号の見かけの差を消す）"""
+def spoken_form(s, heard=False):
+    """比べる前にそろえる。台本は実際に読ませた文（読み替え後）にする。
+    聞き取った文には英字・数字・記号をそろえるだけで、台本側の読み替えは通さない。
+    （両方に通すと、読み替えの誤り自体が一致して見逃す。実際「医療法人の」を
+    「医療法ひとの」に化けさせていたのに、両側が同じく化けて検出できなかった）"""
     import video_make as V
     s = s.replace("ヶ月", "か月").replace("ケ月", "か月").replace("カ月", "か月")
-    s = V.read_text(apply_dict(s))
+    if heard:
+        s = s.replace("〇〇", "まるまる").replace("○○", "まるまる").replace("%", "パーセント").replace("％", "パーセント")
+        s = V.COUNTER_RE.sub(V._counter, s.replace(",", ""))   # 「3つ」「10件」は助数詞の読みに
+    else:
+        s = V.read_text(apply_dict(s))
+    # 英字は1文字ずつカタカナの読みに（「UA」と「ユーエー」、「GPT」と「ジーピーティー」を同じにする）
+    s = re.sub(r"[A-Za-z]", lambda m: LETTER.get(m.group(0).upper(), ""), s)
     s = re.sub(r"\d+", lambda m: V.kana_num(int(m.group(0))) if int(m.group(0)) < 10000 else m.group(0), s)
     return s
 
 
-def hear(path):
+LETTER = dict(zip("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                  "エー ビー シー ディー イー エフ ジー エイチ アイ ジェー ケー エル エム エヌ オー "
+                  "ピー キュー アール エス ティー ユー ブイ ダブリュー エックス ワイ ゼット".split()))
+
+
+def hear(path, beam=5):
     global _model
     if _model is None:
         from faster_whisper import WhisperModel
         _model = WhisperModel(MODEL, device="cpu", compute_type="int8")
     # ひらがなで書き起こさせる。数字や漢字で書かれると、どう読んだかが消える
     # （「さんじゅうふたつぼ」が「32つぼ」と書かれ、読み違いを見逃した）
-    segs, _ = _model.transcribe(str(path), language="ja", beam_size=5, vad_filter=False,
+    segs, _ = _model.transcribe(str(path), language="ja", beam_size=beam, vad_filter=False,
                                 initial_prompt="ひらがなで、きこえたとおりに かきおこします。")
     return "".join(s.text for s in segs)
 
@@ -112,7 +126,7 @@ def diff(text, heard):
     """台本と聞き取りの、発音のずれ。[(台本の語, 台本の読み, 聞こえた読み)]"""
     tk = tokens(spoken_form(text))
     a = "".join(k for _, k in tk)
-    b = "".join(k for _, k in tokens(spoken_form(heard)))
+    b = "".join(k for _, k in tokens(spoken_form(heard, heard=True)))
     owner = []
     for i, (_, k) in enumerate(tk):
         owner += [i] * len(k)
@@ -132,14 +146,26 @@ def fix_text(text, bad):
     s = V.read_text(apply_dict(text))
     learned = {}
     for w, _, _ in bad:
-        if not re.search(r"[一-龥々]", w) or w not in s:
-            continue
-        kana = "".join((getattr(t.feature, "kana", "") or t.surface) for t in _tag()(w))
-        hira = "".join(chr(ord(c) - 0x60) if "ァ" <= c <= "ヶ" else c for c in kana)
-        if hira and hira != w:
-            s = s.replace(w, hira)
-            learned[w] = hira
+        # 助詞をまたいだ語（「も人」）を覚えると、別の文で誤読の原因になる。
+        # ずれた範囲にある「漢字だけの1語」だけを読みに置き換える
+        for t in _tag()(w):
+            sf = t.surface
+            if not re.fullmatch(r"[一-龥々]{2,}", sf) or sf not in s:
+                continue
+            kana = getattr(t.feature, "kana", "") or ""
+            hira = "".join(chr(ord(c) - 0x60) if "ァ" <= c <= "ヶ" else c for c in kana)
+            if hira and hira != sf:
+                s = s.replace(sf, hira)
+                learned[sf] = hira
     return s, learned
+
+
+def _differs(text, path):
+    """ずれを返す。ずれたら聞き取り方を変えてもう一度聞き、どちらかで一致すれば聞き取りの誤りとみなす"""
+    bad = diff(text, hear(path))
+    if bad and not diff(text, hear(path, beam=1)):
+        return []
+    return bad
 
 
 def guard(text, path, synth):
@@ -148,7 +174,7 @@ def guard(text, path, synth):
     if not available():
         return []
     try:
-        bad = diff(text, hear(path))
+        bad = _differs(text, path)
     except Exception as e:   # 検査が動かないことで動画を止めない
         print(f"  読みの検査を飛ばしました: {e}")
         return []
@@ -157,7 +183,7 @@ def guard(text, path, synth):
     fixed, learned = fix_text(text, bad)
     if learned:
         synth(fixed, path)
-        still = diff(text, hear(path))
+        still = _differs(text, path)
         solved = {w: k for w, k in learned.items() if not any(w in x[0] or x[0] in w for x in still)}
         if solved:
             d = load_dict()
@@ -165,6 +191,8 @@ def guard(text, path, synth):
             DICT.write_text(json.dumps(d, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
             print(f"  読みを直して覚えました: {solved}")
         bad = still
+    # 人が辞書で直せるのは漢字の読み。英字・かなだけのずれは聞き取りの揺れなので残さない
+    bad = [x for x in bad if re.search(r"[一-龥々]", x[0])]
     if bad:
         with open(ISSUES, "a", encoding="utf-8") as f:
             f.write(json.dumps({"date": datetime.date.today().isoformat(), "text": text,
@@ -205,6 +233,10 @@ def selftest():
     d = diff("延床32坪です。", "のべゆかさんじゅうふたつぼです")
     if not d:
         print("  NG 本物の読み違い（32坪）を拾えません")
+        ok = False
+    import video_make as V
+    if "ひと" in V.read_text("医療法人の事業承継と、個人の方。"):
+        print("  NG 熟語の「人」を「ひと」に読み替えています")
         ok = False
     print("YOMI_SELFTEST=" + ("ok" if ok else "ng"))
     return 0 if ok else 1

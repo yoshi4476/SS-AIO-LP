@@ -110,13 +110,21 @@ def main():
     ap.add_argument("--limit", type=int, default=1)
     ap.add_argument("--days", type=int, default=7)
     ap.add_argument("--public", action="store_true", default=True)
+    ap.add_argument("--reuse", action="store_true",
+                    help="手元で書き出して確認済みの動画（台本より新しいもの）を作り直さずに上げる")
     a = ap.parse_args()
+    import duo_video as DV
     import video_make as VM
     import youtube_upload as YT
     ledger = load()
     token = YT.TOKEN.is_file()
     # 作り直しを先に（記事と食い違った動画を長く出したままにしない）。枠は新しい記事と共有する
     redo = stale(ledger) if token else []
+    # 掛け合い形式（基準の形）になっていない動画も作り直す。数字が変わったものの後ろに並べる
+    if token and DV.ready():
+        redo += [k for k, v in ledger.items()
+                 if v.get("youtube") and v.get("format") != "duo" and k not in redo
+                 and (ROOT / "articles" / f"{k}.md").is_file()]
     rows = [{"slug": s, "site": ledger[s].get("site") or "", "title": s, "date": "", "redo": True}
             for s in redo][:a.limit]
     rows += candidates(a.days, a.limit - len(rows)) if len(rows) < a.limit else []
@@ -132,11 +140,20 @@ def main():
         try:
             script = VM.from_article(r["slug"])
             out = VM.OUT / f'{r["slug"]}.mp4'
-            sec = VM.build(script, out, quiet=True)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            # 基準はキャラクター2人の掛け合い（duo_video）。台本が検査に通らなければスライド形式で出す
+            duo = (DV.load_script(r["slug"]) or DV.write_script(r["slug"])) if DV.ready() else None
+            sj = DV.SCRIPTS / f'{r["slug"]}.json'
+            if duo and a.reuse and out.is_file() and sj.is_file() and out.stat().st_mtime > sj.stat().st_mtime:
+                sec, fmt = VM.duration(out), "duo"
+            elif duo:
+                sec, fmt = DV.make(duo, out), "duo"
+            else:
+                sec, fmt = VM.build(script, out, quiet=True), "slides"
             old = ledger.get(r["slug"]) or {}
             rec = {"site": r["site"], "date": date.today().isoformat(),
                    "sec": round(sec), "mp4": str(out.relative_to(ROOT)).replace("\\", "/"),
-                   "nums": _nums(script)}
+                   "nums": _nums(script), "format": fmt}
             if r.get("redo") and old.get("youtube"):
                 # 消すと再生数と埋め込みが失われる。限定公開に下げて、新しい動画に差し替える
                 YT.set_privacy(old["youtube"], "unlisted")
@@ -146,7 +163,7 @@ def main():
                 rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True)
             ledger[r["slug"]] = rec
             made += 1
-            print(f"   ○ {r['slug'][:40]:<40} {sec:.0f}秒" + (f" → youtu.be/{rec['youtube']}" if token else ""))
+            print(f"   ○ {r['slug'][:40]:<40} {sec:.0f}秒 {fmt}" + (f" → youtu.be/{rec['youtube']}" if token else ""))
         except Exception as e:
             ok = False
             print(f"   × {r['slug'][:40]:<40} {str(e)[:80]}")
