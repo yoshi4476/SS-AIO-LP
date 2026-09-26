@@ -1350,6 +1350,7 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `win_patterns.py`（週次） | AI検索に引用が取れた記事の型（冒頭・見出し・表/FAQ数）を `data/win_patterns/<site>.md` に書き、執筆の指示（5b）が読む | 引用実績が無ければ空（無いものを型にしない） |
 | `link_boost`（向き） | 送り元は検索1ページ目の記事を先にする（評価は上から流れる） | 順位が取れなければ従来どおり |
 | `video_make` → `youtube_upload` | 字幕（.srt）とチャプター（説明欄）を台本と実測の秒数から作って上げる | 鍵の権限は `youtube.force-ssl`（既存の鍵は `--auth` をやり直す） |
+| `yomi_guard.py`（`video_make.say` が呼ぶ） | 作った声を音声認識（ひらがなで書き起こし）で聞き直し、台本と発音のかなで突き合わせる。ずれた語は読みをかなで渡して作り直し、直れば `data/yomi_dict.json` に覚える。直らなければ `data/yomi_issues.jsonl` → 週次の要対応 | 実測: 「32坪」を「さんじゅうふたつぼ」、「断熱等性能等級」を「とうせいの」と読んでいた。漢字で書き起こされた語は読みを確かめきれないので、読みの割れる語は `READ_AS` で先回りする |
 | `contact.hub.gs` `followUp` | HOT は翌日・WARM は3日後に1通だけ自動フォロー（未対応のままの行だけ・15列目に記録） | 有効化は `installFollowUpTrigger` を1回。診断は `/data/reco.json` から記事3本を添える |
 | `site.js` | `form_start` / `form_abandon`（最後に触った項目つき）を計測 | 開いたのに送らない原因を項目で分ける（翌月から数字が出る） |
 | `data_auto_more.py`（data_auto が読む） | 業種別CTR・手法別CTR・質問形見出し×順位・自動修正の効き を一次データに足す | 母数・期間の決まりは data_auto と同じ。足りなければ作らない |

@@ -315,6 +315,11 @@ def _paren(m):
 def read_text(s):
     """読み上げ用に直す。URLは読まない（意味が伝わらず、長さだけが伸びる）"""
     s = URL_RE.sub("概要欄のリンク", s)
+    try:   # 聞き直して覚えた読み（yomi_guard が data/yomi_dict.json に足していく）
+        import yomi_guard
+        s = yomi_guard.apply_dict(s)
+    except ImportError:
+        pass
     s = re.sub(r"（([^（）]*)）|\(([^()]*)\)", _paren, s)
     for pat, rep in READ_AS:
         s = re.sub(pat, rep, s)
@@ -328,11 +333,18 @@ def say(text, path, voice=None, rate=None):
     """読み上げる。声と速さはサイトごとに変えられる（クライアントの色に合わせる）"""
     import edge_tts
 
-    async def go():
-        await edge_tts.Communicate(read_text(text), voice or VOICE,
-                                   rate=rate or RATE).save(str(path))
+    def synth(spoken, out):
+        async def go():
+            await edge_tts.Communicate(spoken, voice or VOICE, rate=rate or RATE).save(str(out))
+        asyncio.run(go())
 
-    asyncio.run(go())
+    synth(read_text(text), path)
+    # 作った声を聞き直し、読み違いがあれば直して作り直す（音声認識が無い環境では何もしない）
+    try:
+        import yomi_guard
+        yomi_guard.guard(text, path, synth)
+    except ImportError:
+        pass
 
 
 def duration(path):

@@ -33,6 +33,8 @@ CHECKS = [
      re.compile(r"^要対応:")),
     ("SNS の鍵の期限（Threads・LinkedIn は60日）", "social_connect.py --check",
      re.compile(r"^要対応:")),
+    ("動画の読み違い（聞き直して直せなかった読み）", "yomi_guard.py --report",
+     re.compile(r"^要対応:|^\s{2}- ")),
     ("YouTube の許可の上限（未確認アプリは累計100）", "youtube_upload.py --users",
      re.compile(r"^要対応:")),
     ("監修待ちの記事", "editorial_review.py --pending",
