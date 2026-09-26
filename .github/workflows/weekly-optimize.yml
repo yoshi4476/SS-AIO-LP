@@ -120,6 +120,18 @@ jobs:
           out=$(python scripts/gsc_check.py 2>&1) || true; echo "$out"
           echo "$out" | grep -q "GSC_OK=yes"             || python scripts/hub_client.py error_log gsc "GSCの検索データを取得できないサイトがあります（補充がサジェスト頼りになります）" || true
 
+      # ラッコの利用記録と応答の控えを、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）。
+      # 持ち越さないと月の上限（1,000）が1回分しか数えられず、30日キャッシュも効かずに毎回課金される
+      - name: ラッコの控えを戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}
+          restore-keys: rakko-
+
       # KWキューを実データ（GSC実績+Googleサジェスト）で補充する。
       # 推定KWではなく「実際に検索されている語」を供給し続けるための工程。
       - name: KWキューの実データ補充
@@ -152,6 +164,16 @@ jobs:
           # 検索つきのAI（Gemini）へは1サイト8語まで聞く。キーが無ければ候補の抽出だけ行う
           python scripts/ai_kw_research.py --all --probe 8 --append 2>&1 | tail -12 || true
           python scripts/kw_status.py
+
+      - name: ラッコの控えを残す
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}-weekly
 
       # 既存記事どうしの検索意図の重複を検出（LLMが対処判断に使う）
       - name: カニバリゼーション検査

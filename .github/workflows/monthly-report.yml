@@ -129,6 +129,19 @@ jobs:
       # 毎週やると課金が伸びる。未着手が40本以上あるサイトは飛ばし、
       # 応答は30日キャッシュされるため、同じ起点への問い合わせは月1回しか課金されない。
       # RAKKO_API_KEY が無ければ何もしない（無料のサジェストだけの補充は週次が担う）
+      # ラッコの利用記録と応答の控えを、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）。
+      # 持ち越さないと月の上限（1,000）が1回分しか数えられず、30日キャッシュも効かずに毎回課金される
+      - name: ラッコの控えを戻す
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}
+          restore-keys: rakko-
+
       - name: 対策キーワードの在庫を組み直す（必要なサイトだけ）
         if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
         env:
@@ -152,6 +165,16 @@ jobs:
             mkdir -p automation/logs
             echo "要対応: ラッコキーワードのクレジットが尽きました（在庫の組み直しが途中）" >> automation/logs/findings.txt
           fi
+
+      - name: ラッコの控えを残す
+        if: always() && steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}-monthly
 
       # AI検索に本当に引用されているかを実測する（キーがあるエンジンだけ。無ければ飛ばす）。
       # 1サイト20語・月1回。試行錯誤で本番を叩かない
