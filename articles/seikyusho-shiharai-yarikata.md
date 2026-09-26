@@ -122,8 +122,6 @@ faq:
 
 それでも支払い業務の負担が減らない場合は、確認から証憑保存までを含めて経理BPOへ外注する方法もあります。費用の目安は、[経理アウトソーシングの費用相場内訳と抑え方](/blog/keiri-outsourcing-hiyou-souba/)で解説しています。
 
-支払い後の記帳・仕訳のやり方は、[銀行口座の記帳のやり方](/blog/ginko-kicho-yarikata/)もあわせてご確認ください。
-
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 請求書の支払いでやってはいけないNG対応

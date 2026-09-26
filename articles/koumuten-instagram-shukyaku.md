@@ -80,8 +80,6 @@ faq:
 
 工務店にインスタ集客が必要な理由は、無料で始められ、投稿がそのまま実績として資産になるからです。
 
-あわせて[クリニックM&A後の集患再建](/meo/clinic-ma-shukyaku-jirei/)もご覧ください。
-
 近い論点を[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)で扱っています。
 
 <figure><img src="/images/koumuten-instagram-shukyaku/riyu.png" alt="工務店にインスタ集客が必要な3つの理由: 無料で始められる、事例が資産になる、不安を解消できる" loading="lazy"><figcaption>工務店にインスタ集客が必要な3つの理由</figcaption></figure>

@@ -95,30 +95,30 @@
   "site": "corporate"
  },
  "monozukuri-hojokin-clinic": {
-  "at": "2026-09-20",
-  "pos": 13.0,
-  "imp": 95,
+  "at": "2026-09-26",
+  "pos": 13,
+  "imp": 96,
   "band": "11〜20位",
   "site": "subsidy"
  },
  "it-hojokin-kojinjigyonushi-kaikeisoft": {
-  "at": "2026-09-20",
-  "pos": 14.9,
-  "imp": 88,
+  "at": "2026-09-26",
+  "pos": 16.7,
+  "imp": 62,
   "band": "11〜20位",
   "site": "subsidy"
  },
  "monozukuri-hojokin-nougyou-souko": {
-  "at": "2026-09-20",
+  "at": "2026-09-26",
   "pos": 13.0,
   "imp": 22,
   "band": "11〜20位",
   "site": "subsidy"
  },
  "it-hojokin-osusume": {
-  "at": "2026-09-20",
-  "pos": 17.4,
-  "imp": 20,
+  "at": "2026-09-26",
+  "pos": 16.6,
+  "imp": 26,
   "band": "11〜20位",
   "site": "subsidy"
  },
@@ -311,9 +311,9 @@
   "site": "corporate"
  },
  "monozukuri-hojokin-unsougyou": {
-  "at": "2026-09-20",
-  "pos": 8.4,
-  "imp": 78,
+  "at": "2026-09-26",
+  "pos": 9.5,
+  "imp": 50,
   "band": "4〜10位",
   "site": "subsidy"
  },
@@ -332,52 +332,87 @@
   "site": "subsidy"
  },
  "kensetsugyou-denshishinsei-etsuran": {
-  "at": "2026-09-20",
-  "pos": 9.4,
-  "imp": 38,
+  "at": "2026-09-26",
+  "pos": 9.0,
+  "imp": 44,
   "band": "4〜10位",
   "site": "subsidy"
  },
  "jizokuka-hojokin-jidousha-seibi": {
-  "at": "2026-09-20",
-  "pos": 4.9,
-  "imp": 35,
+  "at": "2026-09-26",
+  "pos": 5,
+  "imp": 42,
   "band": "4〜10位",
   "site": "subsidy"
  },
  "jizokuka-hojokin-chusho-kigyo-taisho": {
-  "at": "2026-09-20",
-  "pos": 8.1,
-  "imp": 22,
+  "at": "2026-09-26",
+  "pos": 8,
+  "imp": 21,
   "band": "4〜10位",
   "site": "subsidy"
  },
  "kojinjigyonushi-kaigyoutodoke-denshishinsei": {
-  "at": "2026-09-20",
-  "pos": 36.4,
-  "imp": 69,
+  "at": "2026-09-26",
+  "pos": 35.3,
+  "imp": 95,
   "band": "21〜50位",
   "site": "subsidy"
  },
  "monozukuri-hojokin-biyoushitsu": {
-  "at": "2026-09-20",
-  "pos": 29.2,
-  "imp": 58,
+  "at": "2026-09-26",
+  "pos": 27.4,
+  "imp": 57,
   "band": "21〜50位",
   "site": "subsidy"
  },
  "jizokuka-hojokin-inshokuten-jirei": {
-  "at": "2026-09-20",
-  "pos": 42.1,
-  "imp": 40,
+  "at": "2026-09-26",
+  "pos": 47.2,
+  "imp": 30,
   "band": "21〜50位",
   "site": "subsidy"
  },
  "it-hojokin-clinic": {
-  "at": "2026-09-20",
-  "pos": 21.9,
-  "imp": 26,
+  "at": "2026-09-26",
+  "pos": 21.4,
+  "imp": 27,
   "band": "21〜50位",
+  "site": "subsidy"
+ },
+ "nougyou-shoki-hiyou": {
+  "at": "2026-09-26",
+  "pos": 5.4,
+  "imp": 42,
+  "band": "4〜10位",
+  "site": "subsidy"
+ },
+ "it-hojokin-gakushujuku": {
+  "at": "2026-09-26",
+  "pos": 4.9,
+  "imp": 23,
+  "band": "4〜10位",
+  "site": "subsidy"
+ },
+ "biyoushitsu-joseikin": {
+  "at": "2026-09-26",
+  "pos": 11.5,
+  "imp": 21,
+  "band": "11〜20位",
+  "site": "subsidy"
+ },
+ "nougyou-kikai-hojokin": {
+  "at": "2026-09-26",
+  "pos": 14.4,
+  "imp": 21,
+  "band": "11〜20位",
+  "site": "subsidy"
+ },
+ "egov-denshishinsei-kojinjigyonushi": {
+  "at": "2026-09-26",
+  "pos": 11.8,
+  "imp": 20,
+  "band": "11〜20位",
   "site": "subsidy"
  }
 }

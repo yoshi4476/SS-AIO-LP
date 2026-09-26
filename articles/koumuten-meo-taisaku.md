@@ -85,8 +85,6 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 
 工務店のMEO対策は、基本情報・カテゴリ・写真の土台整備と、口コミ・投稿の継続運用という5つの手順で進めます。
 
-関連して、[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)もあわせてご確認ください。
-
 <figure><img src="/images/koumuten-meo-taisaku/steps.png" alt="工務店のMEO対策 基本5ステップ: 基本情報の登録、カテゴリの設定、写真の充実、口コミの依頼、投稿の継続" loading="lazy"><figcaption>工務店のMEO対策 基本5ステップ。前半3つが土台整備、後半2つが継続運用です</figcaption></figure>
 
 ### 手順1: 基本情報をNAP統一で正確に登録する
