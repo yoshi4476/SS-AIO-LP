@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-26",
+  "date": "2026-09-27",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 13,
-      "suspect_taken": 12,
+      "judged": 12,
+      "suspect_taken": 11,
       "healthy": 1,
-      "too_thin": 53,
+      "too_thin": 62,
       "items": [
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
           "pos": 8.0,
-          "imp": 44,
+          "imp": 43,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -22,7 +22,7 @@
           "kw": "aio対策 キーワード選定",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
           "pos": 4.1,
-          "imp": 13,
+          "imp": 14,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -31,8 +31,8 @@
         {
           "kw": "llmo代理店になる方法",
           "url": "https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/",
-          "pos": 7.4,
-          "imp": 12,
+          "pos": 7.2,
+          "imp": 14,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -41,8 +41,8 @@
         {
           "kw": "meo アルゴリズム攻略",
           "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
-          "pos": 5.2,
-          "imp": 28,
+          "pos": 5.4,
+          "imp": 30,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -51,8 +51,8 @@
         {
           "kw": "meo診断",
           "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 6.6,
-          "imp": 35,
+          "pos": 6.7,
+          "imp": 37,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -61,8 +61,8 @@
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 6.9,
-          "imp": 58,
+          "pos": 7.0,
+          "imp": 55,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -81,8 +81,8 @@
         {
           "kw": "医療機関 meo",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 8.1,
-          "imp": 40,
+          "pos": 8.4,
+          "imp": 37,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -91,8 +91,8 @@
         {
           "kw": "医療機関のmeo対策",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 9,
-          "imp": 18,
+          "pos": 9.2,
+          "imp": 19,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -101,8 +101,8 @@
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 8.9,
-          "imp": 106,
+          "pos": 9.0,
+          "imp": 109,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -117,33 +117,43 @@
           "ctr": 0,
           "expected_ctr": 5.0,
           "ratio": 0.0
-        },
-        {
-          "kw": "税理士 ai 集客",
-          "url": "https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/",
-          "pos": 10.0,
-          "imp": 65,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 2.5,
-          "ratio": 0.0
         }
       ]
     },
     "corporate": {
-      "judged": 7,
-      "suspect_taken": 3,
+      "judged": 9,
+      "suspect_taken": 5,
       "healthy": 4,
       "too_thin": 45,
       "items": [
         {
-          "kw": "セブンセンシズ",
-          "url": "https://corp.7senses.co.jp/",
-          "pos": 2.6,
-          "imp": 40,
+          "kw": "3点照合",
+          "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
+          "pos": 6,
+          "imp": 11,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 11.0,
+          "expected_ctr": 5.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "ゆうちょ 記帳 やり方",
+          "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+          "pos": 6.9,
+          "imp": 17,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "セブンセンシズ",
+          "url": "https://corp.7senses.co.jp/",
+          "pos": 2.2,
+          "imp": 61,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 15.0,
           "ratio": 0.0
         },
         {
