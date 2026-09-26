@@ -1,6 +1,6 @@
 ---
 title: AIO対策の無料ツール6選｜計測から診断まで今日から使える
-description: AIO対策は、Search ConsoleやGA4、Googleのリッチリザルトテストなど無料ツール6つで今日から始められます。AI引用状況と構造化データを無料で計測・診断する具体的な手順を解説します。
+description: AIO対策の無料ツールは、Search Console・GA4・リッチリザルトテストなど6つで足ります。AI引用状況と構造化データを無料で計測・診断する手順を、今日から使える順に解説します。
 slug: aio-taisaku-muryou-tool
 keyword: aio対策 無料ツール
 category: aio
