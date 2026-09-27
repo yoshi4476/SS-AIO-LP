@@ -138,7 +138,9 @@ export async function onRequestPost({ request, env, waitUntil }) {
   const safe = checks.map((c) => ({ ...c, detail: esc(c.detail) }));
   // 同業平均のために記録する（業種・点数・紹介元と、サイトを特定できない形に変換した値だけ）。
   // 応答は待たせない。記録に失敗しても診断の結果はそのまま返す
-  if (env && env.GAS_WEBHOOK_URL && waitUntil) {
+  // 自社のサイトと例示用のドメインは数えない（同業の平均がゆがむ）
+  const own = /(^|\.)(7senses\.co\.jp|example\.(com|org|net|jp))$/i.test(new URL(page.finalUrl).hostname);
+  if (env && env.GAS_WEBHOOK_URL && waitUntil && !own) {
     const INDUSTRIES = ["クリニック・歯科医院", "不動産", "工務店・リフォーム", "士業・コンサル", "BtoB・IT", "店舗・飲食・美容", "その他"];
     const industry = INDUSTRIES.includes(body.industry) ? body.industry : "";
     const ref = /^[A-Za-z0-9_-]{1,40}$/.test(String(body.ref || "")) ? body.ref : "";
