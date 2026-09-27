@@ -19,7 +19,8 @@ export async function onRequestPost({ request, env }) {
   } catch (_) {
     return new Response("フォーム形式で送信してください。", { status: 400 });
   }
-  for (const [k, v] of fd) data[k] = String(v).slice(0, 2000);
+  // 直し方の一覧は長いので、そこだけ上限を広げる
+  for (const [k, v] of fd) data[k] = String(v).slice(0, k === "audit_fixes" ? 6000 : 2000);
 
   // ハニーポット（botはこの不可視フィールドを埋める）
   if (data._gotcha) return Response.redirect(new URL("/thanks/", request.url), 303);
@@ -45,9 +46,16 @@ export async function onRequestPost({ request, env }) {
     // LPヒーローと資料DLは本文欄が無いため「必須項目が入力されていません」で弾かれ、
     // 台帳に残っていなかった。種別を form_type から決め、本文が無ければ相談テーマか種別で補う
     const ft = String(data.form_type || "");
-    const type = ft.includes("資料") ? "download"
+    // サイト診断の結果（URL・点数・直し方）が付いていれば site_audit。
+    // これが無いと「無料診断」の汎用返信になり、画面で約束した直し方がメールに入らなかった
+    const type = data.audit_url ? "site_audit"
+      : ft.includes("資料") ? "download"
       : (ft.includes("診断") || ft.includes("結果送付")) ? "diagnosis" : "contact";
     const hub = { ...data, site: "ai-lab", type };
+    if (type === "site_audit") {
+      hub.audit = { url: data.audit_url, total: Number(data.audit_score), grade: data.audit_grade || "",
+                    fixes: data.audit_fixes || "" };
+    }
     if (!String(hub.message || "").trim()) hub.message = data.topic || ft || "（本文なし）";
     try {
       const gas = await fetch(env.GAS_WEBHOOK_URL, {

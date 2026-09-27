@@ -489,6 +489,8 @@ window.leadCapture = function (opts) {
     var fd = new FormData(form);
     fd.append("form_type", opts.formType);
     fd.append("message", opts.detail);
+    // 診断の結果（URL・点数・直し方）。受付側でサイト無料診断として扱い、自動返信に直し方を載せる
+    if (opts.extra) Object.keys(opts.extra).forEach(function (k) { fd.append(k, opts.extra[k]); });
     fetch("/api/lead", { method: "POST", body: fd })
       .then(function (r) {
         if (!r.ok) return r.text().then(function (t) { throw new Error(t); });

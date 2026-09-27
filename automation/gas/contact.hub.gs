@@ -152,8 +152,9 @@ function leadDetail_(type, d) {
   }
   if (type === 'site_audit' && d.audit) {
     const a = d.audit;
+    const n = a.fixes ? String(a.fixes).split('\n').filter(String).length : 0;
     return ['対象 ' + (a.url || ''), '総合 ' + (a.total || '') + '/100',
-            a.grade ? '判定 ' + a.grade : ''].filter(String).join(' / ');
+            a.grade ? '判定 ' + a.grade : '', n ? '未対応 ' + n + '項目' : ''].filter(String).join(' / ');
   }
   const known = ['type', 'site', 'name', 'company', 'email', 'tel', 'phone',
                  'message', 'body', 'referer', 'website', 'ts', 'formKey'];
@@ -250,7 +251,9 @@ function leadReply_(site, type, d) {
             '対象URL: ' + (a.url || ''),
             '総合スコア: ' + (a.total !== undefined ? a.total + ' / 100' : '算出中'),
             a.grade ? '判定: ' + a.grade : '', '',
-            '詳細な改善点は、担当より3営業日以内にご連絡します。'].filter(function (x) {
+            // 画面で「直し方をお送りします」と約束しているので、担当の連絡を待たせずに本文へ載せる
+            a.fixes ? '▼ 直す項目と直し方（点数の大きい順）\n' + String(a.fixes) : '', '',
+            '自社で直すのが難しい項目は、このメールにご返信ください。無料でご相談を承ります。'].filter(function (x) {
       return x !== '';
     }).join('\n');
   } else {

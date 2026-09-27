@@ -192,6 +192,10 @@
       b.disabled = true; m.textContent = "送信しています…";
       var fd = new FormData(f);
       fd.append("form_type", "LP実測診断の結果送付");
+      fd.append("audit_url", url);
+      fd.append("audit_score", d.score);
+      fd.append("audit_grade", d.grade);
+      fd.append("audit_fixes", ng.map(function (c) { return "・" + c.name + "（" + c.pts + "点）: " + c.advice; }).join("\n"));
       fd.append("message", "【サイト診断】" + url + " / " + d.score + "点 / " + d.grade +
         (ind.value ? " / 業種: " + ind.value : "") + " / 未対応: " + ng.map(function (c) { return c.name; }).join("・"));
       fetch("/api/lead", { method: "POST", body: fd })
