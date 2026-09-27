@@ -35,6 +35,10 @@ sys.path.insert(0, str(ROOT / "scripts"))
 OUT = ROOT / "data" / "datasets"
 MIN_N = 100          # 母数がこれ未満なら公開しない（割合を出す資格が無い）
 DAYS = 90            # 集計期間。短いと季節の癖が出る
+# 生成AI経由の流入は、この件数に届くまで公開しない（2026-09 に42件で「まだ少ない」と判断して非表示にした）。
+# 届けば毎週の自動更新で表示に戻る
+AI_MIN = 100
+HIDDEN = ROOT / "data" / "datasets_hidden"
 
 
 def is_client(site_id):
@@ -164,8 +168,9 @@ def ai_referral(days=DAYS):
                 if any(h in host for h in hosts):
                     tally[name] += int(r.metric_values[0].value)
     total = sum(tally.values())
-    if total < 10:
-        return None
+    if total < AI_MIN:
+        # 取れた上で少ないと分かったときだけ隠す（GA4が取れなかったときの None とは分ける）
+        return {"_hide": "ai-keiyu-ryunyu", "total": total}
     start, end = _spans(days)
     return {
         "slug": "ai-keiyu-ryunyu",
@@ -183,6 +188,35 @@ def ai_referral(days=DAYS):
                   "row_start": str(start)[:7], "row_end": str(end)[:7]}
                  for k, v in sorted(tally.items(), key=lambda x: -x[1])],
     }
+
+
+def hide_dataset(slug, reason):
+    """一次データを非公開にする（データは消さずに退避する）。ページ・llms.txt から外し、記事の材料からも外す。
+    件数が戻って作り直されると、data_intake が一次情報を登録し直して元に戻る"""
+    import shutil
+    p = OUT / f"{slug}.json"
+    if p.is_file():
+        HIDDEN.mkdir(parents=True, exist_ok=True)
+        p.replace(HIDDEN / p.name)
+        print(f"  退避しました: data/datasets_hidden/{p.name}")
+    page = ROOT / "site" / "data" / slug
+    if page.is_dir():
+        shutil.rmtree(page)
+        print(f"  ページを外しました: /data/{slug}/")
+    llms = ROOT / "site" / "llms.txt"
+    if llms.is_file():
+        t = llms.read_text(encoding="utf-8")
+        t2 = "\n".join(l for l in t.split("\n") if f"/data/{slug}/" not in l)
+        if t2 != t:
+            llms.write_text(t2, encoding="utf-8", newline="\n")
+    src = ROOT / "data" / "first_party_facts.json"
+    if src.is_file():
+        d = json.loads(src.read_text(encoding="utf-8"))
+        for f in d.get("facts", []):
+            if f.get("id") == f"dataset-{slug}" and f.get("sites"):
+                f["sites"], f["retired"] = [], reason
+                src.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                print("  記事の材料（一次情報）から外しました")
 
 
 def sentence_of(ds):
@@ -362,6 +396,11 @@ def main():
             continue
         if not ds:
             print(f"  {name}: 母数が足りないか、計測が取れないため作りません")
+            continue
+        if ds.get("_hide"):
+            print(f"  {name}: {ds['total']}件（{AI_MIN}件に届くまで非表示）")
+            if a.write:
+                hide_dataset(ds["_hide"], f"{date.today()} 件数が{AI_MIN}件に届くまで非表示（{ds['total']}件）")
             continue
         print(f"  {name}: {ds['title']}")
         for r in ds["rows"][:6]:

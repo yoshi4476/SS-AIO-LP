@@ -174,6 +174,15 @@ def build_body(days=28):
 </section>
 </main>''')
     body_ = "\n".join(h)
+    # 生成AI経由の流入は、件数が少ないうちは出さない（data_auto.AI_MIN。届けば自動で戻る）
+    try:
+        import data_auto
+        ai_min = data_auto.AI_MIN
+    except Exception:
+        ai_min = 100
+    if ai_sum < ai_min:
+        body_ = re.sub(r'<section class="section">\s*<h2>1\. 生成AI経由の流入（実数）</h2>.*?</section>\s*', "", body_, count=1, flags=re.S)
+        body_ = body_.replace("<h2>2. 検索順位ごとの実測クリック率</h2>", "<h2>1. 検索順位ごとの実測クリック率</h2>")
     try:
         import data_intake
         body_ = body_.replace('{datasets}', data_intake.datasets_html())

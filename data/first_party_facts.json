@@ -270,11 +270,7 @@
     },
     {
       "id": "dataset-ai-keiyu-ryunyu",
-      "sites": [
-        "ai-lab",
-        "corporate",
-        "subsidy"
-      ],
+      "sites": [],
       "topic": [
         "AIO・LLMO運用",
         "一次データ",
@@ -285,7 +281,8 @@
       "as_of": "2026-09",
       "denominator": 42,
       "period": "2026-06-23〜2026-09-20",
-      "verifiable": true
+      "verifiable": true,
+      "retired": "2026-09-28 件数が100件に届くまで非表示（42件）"
     },
     {
       "id": "dataset-aio-junni-madeno-tsukisuu",

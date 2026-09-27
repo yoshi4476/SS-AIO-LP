@@ -60,36 +60,20 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <h1>AI検索の実測データ</h1>
 <p class="lead">セブンセンシズが運営する3サイトで実際に計測した数字を、そのまま公開しています。
 推計値や業界平均ではありません。手で書き換えず、GA4とSearch Consoleから自動で更新しています。</p>
-<p class="freshness">集計期間: 2026-08-24〜2026-09-20（28日間）／対象: 自社運営3サイト・記事372本／最終更新: 2026-09-23</p>
+<p class="freshness">集計期間: 2026-08-29〜2026-09-25（28日間）／対象: 自社運営3サイト・記事387本／最終更新: 2026-09-28</p>
 </section>
 
 <section class="section">
-<h2>1. 生成AI経由の流入（実数）</h2>
-<p>AI検索から自社サイトに何人来ているかを、参照元ドメインで数えた実数です。
-<strong>母数は同じ期間の全セッション371件</strong>で、そのうちAI経由は42件
-（11.3%）でした。</p>
-<table><thead><tr><th>生成AI</th><th>セッション数</th><th>全体に占める割合</th></tr></thead><tbody>
-<tr><td>ChatGPT</td><td>37</td><td>9.97%</td></tr>
-<tr><td>Claude</td><td>3</td><td>0.81%</td></tr>
-<tr><td>Gemini</td><td>2</td><td>0.54%</td></tr>
-<tr><td>Perplexity</td><td>0</td><td>0.00%</td></tr>
-<tr><td>Copilot</td><td>0</td><td>0.00%</td></tr>
-</tbody></table>
-<p>母数が小さいため、割合は参考値です。実数をそのまま載せているのは、
-割合だけでは規模が分からず、比較に使えないためです。</p>
-</section>
-
-<section class="section">
-<h2>2. 検索順位ごとの実測クリック率</h2>
+<h2>1. 検索順位ごとの実測クリック率</h2>
 <p>自社3サイトの記事ページを、Search Consoleの平均掲載順位で分けて集計しました。
 <strong>一般に公開されているCTR表とは値が異なります</strong>。AI Overviewの表示や
 検索語の性質によって、同じ順位でもクリック率は変わります。</p>
 <table><thead><tr><th>順位帯</th><th>ページ数</th><th>表示回数</th><th>クリック</th><th>クリック率</th></tr></thead><tbody>
-<tr><td>1〜3位</td><td>20</td><td>124</td><td>5</td><td>4.03%</td></tr>
-<tr><td>4〜5位</td><td>49</td><td>587</td><td>28</td><td>4.77%</td></tr>
-<tr><td>6〜10位</td><td>96</td><td>2,064</td><td>30</td><td>1.45%</td></tr>
-<tr><td>11〜20位</td><td>75</td><td>1,901</td><td>18</td><td>0.95%</td></tr>
-<tr><td>21位以下</td><td>76</td><td>2,596</td><td>14</td><td>0.54%</td></tr>
+<tr><td>1〜3位</td><td>23</td><td>135</td><td>9</td><td>6.67%</td></tr>
+<tr><td>4〜5位</td><td>56</td><td>669</td><td>32</td><td>4.78%</td></tr>
+<tr><td>6〜10位</td><td>112</td><td>2,389</td><td>36</td><td>1.51%</td></tr>
+<tr><td>11〜20位</td><td>101</td><td>1,925</td><td>22</td><td>1.14%</td></tr>
+<tr><td>21位以下</td><td>89</td><td>2,674</td><td>15</td><td>0.56%</td></tr>
 </tbody></table>
 <p>ページ数が少ない帯の数値は揺れます。判断に使う場合は表示回数の欄も併せてご覧ください。</p>
 </section>
@@ -97,7 +81,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <!-- datasets:start -->
 <section class="section">
 <h2>自社の一次データ</h2>
-<ul><li><a href="/data/ai-keiyu-ryunyu/">生成AI経由の流入（90日で42セッション）</a><span style="color:#556;font-size:.9rem;">（母数42セッション・2026-06-23〜2026-09-20）</span></li><li><a href="/data/aio-junni-madeno-tsukisuu/">AIO運用を始めてから検索順位が上がるまでの月数</a><span style="color:#556;font-size:.9rem;">（母数10件・2026-05〜2026-08）</span></li><li><a href="/data/hojokin-saitaku-madeno-nissuu/">申請から採択までの日数</a><span style="color:#556;font-size:.9rem;">（母数25社・2025-04〜2026-03）</span></li><li><a href="/data/juni-naibu-link/">検索順位ごとの内部リンク本数（196本の集計）</a><span style="color:#556;font-size:.9rem;">（母数196本・2026-06-23〜2026-09-20）</span></li><li><a href="/data/keiri-bpo-getsuji-nissuu/">経理BPO導入前後の月次決算の所要日数</a><span style="color:#556;font-size:.9rem;">（母数10社・2024-04〜2026-08）</span></li><li><a href="/data/keizoku-ritsu-service/">運用サービス別の契約継続率（契約99件の集計）</a><span style="color:#556;font-size:.9rem;">（母数99件・2023-01〜2026-09）</span></li><li><a href="/data/kensaku-juni-ctr/">検索順位ごとの実測クリック率（表示7,015回の集計）</a><span style="color:#556;font-size:.9rem;">（母数7,015回（表示）・2026-06-23〜2026-09-20）</span></li><li><a href="/data/kiji-hyouji-madeno-nissuu/">記事を公開してから検索結果に出るまでの日数（372本の集計）</a><span style="color:#556;font-size:.9rem;">（母数372本・2026-06-23〜2026-09-20）</span></li><li><a href="/data/meo-kouka-madeno-tsukisuu/">MEO運用を始めてから順位が上がるまでの月数</a><span style="color:#556;font-size:.9rem;">（母数800店舗・2023-10〜2026-08）</span></li><li><a href="/data/meo-kuchikomi-zouka-gyoushu/">業種別の口コミ増加件数</a><span style="color:#556;font-size:.9rem;">（母数1,000店舗・2023-10〜2026-08）</span></li></ul>
+<ul><li><a href="/data/aio-junni-madeno-tsukisuu/">AIO運用を始めてから検索順位が上がるまでの月数</a><span style="color:#556;font-size:.9rem;">（母数10件・2026-05〜2026-08）</span></li><li><a href="/data/hojokin-saitaku-madeno-nissuu/">申請から採択までの日数</a><span style="color:#556;font-size:.9rem;">（母数25社・2025-04〜2026-03）</span></li><li><a href="/data/juni-naibu-link/">検索順位ごとの内部リンク本数（196本の集計）</a><span style="color:#556;font-size:.9rem;">（母数196本・2026-06-23〜2026-09-20）</span></li><li><a href="/data/keiri-bpo-getsuji-nissuu/">経理BPO導入前後の月次決算の所要日数</a><span style="color:#556;font-size:.9rem;">（母数10社・2024-04〜2026-08）</span></li><li><a href="/data/keizoku-ritsu-service/">運用サービス別の契約継続率（契約99件の集計）</a><span style="color:#556;font-size:.9rem;">（母数99件・2023-01〜2026-09）</span></li><li><a href="/data/kensaku-juni-ctr/">検索順位ごとの実測クリック率（表示7,015回の集計）</a><span style="color:#556;font-size:.9rem;">（母数7,015回（表示）・2026-06-23〜2026-09-20）</span></li><li><a href="/data/kiji-hyouji-madeno-nissuu/">記事を公開してから検索結果に出るまでの日数（372本の集計）</a><span style="color:#556;font-size:.9rem;">（母数372本・2026-06-23〜2026-09-20）</span></li><li><a href="/data/meo-kouka-madeno-tsukisuu/">MEO運用を始めてから順位が上がるまでの月数</a><span style="color:#556;font-size:.9rem;">（母数800店舗・2023-10〜2026-08）</span></li><li><a href="/data/meo-kuchikomi-zouka-gyoushu/">業種別の口コミ増加件数</a><span style="color:#556;font-size:.9rem;">（母数1,000店舗・2023-10〜2026-08）</span></li></ul>
 </section>
 <!-- datasets:end -->
 
@@ -107,7 +91,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 リンクなしの転載でも構いませんが、<strong>集計期間と母数は必ず添えてください</strong>。
 数字だけが独り歩きすると、読んだ方の判断を誤らせます。</p>
 <p>出典表記の例: セブンセンシズ株式会社「AI検索の実測データ」
-（https://ai.7senses.co.jp/data/、集計期間: 2026-08-24〜2026-09-20（28日間））</p>
+（https://ai.7senses.co.jp/data/、集計期間: 2026-08-29〜2026-09-25（28日間））</p>
 </section>
 </main>
 
