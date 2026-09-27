@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>サイトの技術チェック（無料）｜URL入力だけで12項目を採点</title>
-<meta name="description" content="URLを入力するだけで、サイトの技術面12項目を100点満点で自動チェック。タイトル・構造化データ・AIクローラー許可・llms.txtまで自動チェックし、改善アドバイスを表示します。">
+<title>サイトの技術チェック（無料）｜URL入力だけで14項目を採点</title>
+<meta name="description" content="URLを入力するだけで、サイトの技術面14項目を100点満点で自動チェック。AIクローラーが入れるか・noindex・タイトル・会社情報の記載まで、その場で直し方を表示します。">
 <link rel="canonical" href="https://ai.7senses.co.jp/site-audit/">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="サイトの技術チェック（無料）｜12項目を自動採点">
-<meta property="og:description" content="URL入力だけで、サイトの技術面12項目を自動チェック。">
+<meta property="og:title" content="サイトの技術チェック（無料）｜14項目を自動採点">
+<meta property="og:description" content="URL入力だけで、サイトの技術面14項目を自動チェック。">
 <meta property="og:url" content="https://ai.7senses.co.jp/site-audit/">
 <meta property="og:image" content="https://ai.7senses.co.jp/images/ogp-default.png">
 <meta property="og:site_name" content="AI集客ラボ">
@@ -86,7 +86,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <section class="hero" style="text-align:center;padding-bottom:1.5rem;">
   <span class="kicker">FREE SITE AUDIT</span>
   <h1>サイトの技術チェック</h1>
-  <p class="lead" style="margin-left:auto;margin-right:auto;">URLを入力するだけで、<strong>AI検索（AIO/LLMO）とSEOへの対応度を12項目・100点満点</strong>で自動採点。AIクローラー許可・構造化データ・llms.txtまで、専門会社が見るポイントをその場でチェックします。</p>
+  <p class="lead" style="margin-left:auto;margin-right:auto;">URLを入力するだけで、<strong>AIが入れるか・検索に出るか・内容を読み取れるかを14項目・100点満点</strong>で自動採点。AIクローラーの許可やCDNでの遮断、noindexまで、その場でチェックします。</p>
 </section>
 
 <section class="section" style="padding-top:1rem;">
@@ -106,7 +106,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <h2>このチェックでわかること</h2>
   </div>
   <div style="max-width:52em;">
-    <p><strong>サイトの技術チェックは、入力されたページを実際に取得し、AI検索とSEOの技術対応12項目を機械的に検査して100点満点で採点するツールです。</strong>検査項目には、タイトル・メタディスクリプションの適切さ、構造化データ（Schema）の有無、robots.txtでのAIクローラー許可、llms.txtの設置、OGP設定などが含まれます。いずれも、AIに引用されるため・検索で正しく評価されるための土台となる項目です。</p>
+    <p><strong>サイトの技術チェックは、入力されたページを実際に取得し、AI検索とSEOの技術対応14項目を機械的に検査して100点満点で採点するツールです。</strong>重く見ているのは、AIのクローラーが入れるか（robots.txtとCDNでの遮断）と、検索に出さない設定（noindex）になっていないかです。Googleが「効く」と明記しているのは、クロールできることと、その会社にしか書けない内容だからです。構造化データとllms.txtは、GoogleがAIに引用されるための必須条件ではないと明言しているため、配点を低くしています。</p>
     <p>85点以下だった場合は、改善余地がそのまま集客の伸びしろです。結果には項目ごとの合否が表示されるため、<strong>不合格項目を上から順に直すだけで対応が進みます</strong>。技術的な修正が難しい場合や、コンテンツ面（記事の構造・一次情報）まで含めた本格的な分析が必要な場合は、<a href="/lp/">無料の現状分析</a>をご利用ください。</p>
     <p>※ 本チェックは公開ページの機械検査であり、検索順位やAI引用の実績そのものを測定するものではありません。コンテンツ対応もあわせて確認したい方は<a href="/diagnosis/aio/">AI検索対応度チェック（30秒）</a>を、店舗のマップ対策は<a href="/diagnosis/meo/">MEO対応度チェック（30秒）</a>をどうぞ。チェック項目の意味から知りたい方は<a href="/aio/aio-shindan-yarikata/">AIO対応のチェックのやり方｜無料チェック8項目とツールの使い分け</a>もあわせてご覧ください。<br>監修: <a href="/author/haraguchi/">セブンセンシズ株式会社 代表取締役 原口優</a></p>
   </div>
@@ -192,7 +192,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       // 点数を見た直後に、結果の送付先だけを尋ねる（ページは移さない）
       if (window.leadCapture) {
         out.appendChild(window.leadCapture({
-          title: "12項目の判定結果を、メールで受け取る",
+          title: "14項目の判定結果を、メールで受け取る",
           sub: "項目ごとの合否と、直す順番をお送りします",
           formType: "サイトの技術チェックの結果送付",
           route: "site_audit",

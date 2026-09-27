@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AIO・LLMO・SEO・MEO集客支援｜AIに選ばれる集客をつくる</title>
-<meta name="description" content="AI Overview・ChatGPT時代の集客支援。AIO（AI検索最適化）・LLMO・SEO・MEOを一気通貫で運用し、「AIに引用される→指名で選ばれる」導線をつくります。無料の現状分析レポート付き。">
+<title>AI検索・SEO集客支援｜30秒の無料サイト診断つき</title>
+<meta name="description" content="URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で無料診断。AIO・LLMO・SEO・MEOを一社で運用し、AIと検索から問い合わせが来る状態をつくります。">
 <link rel="canonical" href="https://ai.7senses.co.jp/lp/">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="website">
@@ -24,8 +24,10 @@
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
 <link rel="stylesheet" href="/css/style.css?v=821067df">
 <link rel="stylesheet" href="/css/lp.css">
+<link rel="stylesheet" href="/css/lp-v2.css?v=1">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=b3e0700d"></script>
+<script defer src="/js/lp-scan.js?v=1"></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -66,6 +68,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     {"@type": "Question", "name": "効果が出るまでどのくらいかかりますか？", "acceptedAnswer": {"@type": "Answer", "text": "MEOは数週間〜3ヶ月、SEO/AIOは6〜8ヶ月が目安です。現状分析の結果をもとに個別の見通しをご提示します。"}},
     {"@type": "Question", "name": "どんな業種に対応していますか？", "acceptedAnswer": {"@type": "Answer", "text": "BtoB・SaaS、士業・コンサル・クリニック、不動産・住宅を中心に、店舗ビジネスまで全国対応しています。"}},
     {"@type": "Question", "name": "口コミを増やしてもらえますか？", "acceptedAnswer": {"@type": "Answer", "text": "規約違反となる代理投稿・購入は行いません。アカウント削除のリスクがあるためです。返信運用と正攻法の上位表示でご支援します。"}},
+    {"@type": "Question", "name": "無料のサイト診断では何がわかりますか？", "acceptedAnswer": {"@type": "Answer", "text": "URLを入れると、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を表示します。"}},
     {"@type": "Question", "name": "無料相談では何をしてもらえますか？", "acceptedAnswer": {"@type": "Answer", "text": "現状の検索順位・AI検索での見え方を分析したレポートをお渡しし、改善の優先順位をご説明します。"}}
    ]
   }
@@ -96,63 +99,55 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </header>
 
-<!-- ヒーロー（LP専用構成: 左=訴求 / 右=30秒申込みフォーム） -->
-<div class="hero-dark is-photo" data-area="ヒーロー" data-area-id="hero" style="min-height:auto;">
-  <div class="hero-photo-layer" aria-hidden="true"></div>
-  <div class="mv-grid-lines" aria-hidden="true"></div>
-  <div class="inner" style="padding-bottom:4rem;">
-    <div class="hero-grid" style="grid-template-columns:minmax(0,1.15fr) minmax(300px,460px);">
-      <div>
-        <span class="kicker kicker-en rise rise-1">AIO × LLMO × SEO × MEO — ONE TEAM</span>
-        <h1 class="kinetic" style="font-size:clamp(2rem,4.4vw,3.4rem);">GoogleにもChatGPTにも、<br><em>「おすすめ」される会社へ。</em></h1>
-        <p class="lead rise rise-3">検索順位だけの対策では、もう見込み客の半分にしか届きません。AIの回答に引用され、検索とマップで上位に表示され、<strong style="color:#fff;">最後は社名で選ばれる</strong>——その導線を、通算3,200店舗以上を支援してきた実務チームが設計・運用します。</p>
-        <div class="trust-row rise rise-4" style="margin-top:1.4rem;">
-          <span><strong style="color:#fff;">通算3,200店舗以上</strong>の運用実績</span>
-          <span>AIO・LLMO・SEO・MEOを一社で</span>
-          <span>正攻法のみ・規約違反な施策なし</span>
+<!-- ヒーロー（v2: URLを入れるだけの実測診断が主役。左=入力 / 右=計測盤） -->
+<section class="lx-hero" data-area="ヒーロー" data-area-id="hero" id="scan-start">
+  <div class="lx-wrap lx-hero-grid">
+    <div>
+      <ul class="lx-kicker"><li>無料</li><li>登録不要</li><li>30秒</li><li>営業電話なし</li></ul>
+      <h1 class="lx-h1">そのホームページ、<br>AIと検索に<br><em>「読まれて」</em>いますか？</h1>
+      <p class="lx-lead">AIの回答にも検索結果にも、<strong>読めないページは出てきません。</strong>URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で実測し、その場で点数と直し方を表示します。</p>
+      <p class="lx-again" id="lx-again"><span></span> <button type="button">もう一度測る</button></p>
+      <form class="lx-form" id="lx-scan-form" novalidate>
+        <label>ホームページのURL
+          <input type="url" id="lx-url" name="url" inputmode="url" placeholder="https://example.co.jp" autocomplete="url" required>
+        </label>
+        <div class="lx-row">
+          <label>業種（任意）
+            <select id="lx-industry" name="industry">
+              <option value="">選んでください</option>
+              <option>クリニック・歯科医院</option><option>不動産</option><option>工務店・リフォーム</option>
+              <option>士業・コンサル</option><option>BtoB・IT</option><option>店舗・飲食・美容</option><option>その他</option>
+            </select>
+          </label>
+          <div style="display:grid;align-items:end;"><button type="submit" class="lx-go" id="lx-go" data-cta="lp_scan_submit">30秒で診断する</button></div>
         </div>
-      </div>
-      <div class="rise rise-3">
-        <form class="form-panel hero-form" action="/api/lead" method="post" style="margin:0;box-shadow:0 30px 70px -20px rgba(2,10,30,.55);padding:1.6rem 1.5rem 1.3rem;border-radius:20px;">
-          <input type="hidden" name="form_type" value="無料相談（LPヒーロー）">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
-          <div class="hf-title">無料で、いまの見え方を診断する</div>
-          <div class="hf-sub">検索・マップ・AI検索の3つで、御社がいまどう見えているかを調べてご報告します。<strong>入力は30秒。2営業日以内にご返信し、営業電話はいたしません。</strong></div>
-          <label>お名前 <span class="req">必須</span>
-            <input type="text" name="name" required autocomplete="name">
-          </label>
-          <label>会社名・店舗名 <span class="req">必須</span>
-            <input type="text" name="company" required autocomplete="organization">
-          </label>
-          <label>メールアドレス <span class="req">必須</span>
-            <input type="email" name="email" required autocomplete="email">
-          </label>
-          <label class="consent">
-            <input type="checkbox" required>
-            <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する</span>
-          </label>
-          <button type="submit" class="btn btn-primary" data-cta="lp_hero_form_submit">無料の現状分析を受け取る <span class="arw">→</span></button>
-          <p class="hf-note">いただいた情報は診断とご連絡以外に使用しません。ご相談内容が固まっていなくても構いません。</p>
-        </form>
-      </div>
+        <p class="lx-err" id="lx-err" role="alert"></p>
+        <p class="lx-micro"><span>入力はURLだけ</span><span>結果はその場で表示</span><span>名前やメールは不要</span></p>
+      </form>
+      <p class="lx-alt">診断より先に話を聞きたい方は <a href="#form" data-cta="lp_hero_consult">無料相談フォーム</a> ／ お電話 <a href="tel:0643057547">06-4305-7547</a>（平日9:00〜20:00）</p>
+    </div>
+    <div class="lx-console" aria-label="この14項目を測ります">
+      <div class="lx-console-head"><b>この14項目を測ります</b><small>100点満点</small></div>
+      <div class="lx-group" data-group="AIが入れるか"><h3>AIが入れるか<span>0 / 26</span></h3><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーを拒否していない（robots.txt）</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーが入口で弾かれていない（CDN・WAF）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>常時SSL（HTTPS）</span><span class="pt">6点</span></li></ul></div><div class="lx-group" data-group="検索に出るか"><h3>検索に出るか<span>0 / 40</span></h3><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>検索に出さない設定（noindex）になっていない</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>タイトル（15〜45字）</span><span class="pt">10点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>説明文（メタディスクリプション・60〜160字）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>正規URLの指定（canonical）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>スマホ表示（viewport）</span><span class="pt">4点</span></li></ul></div><div class="lx-group" data-group="内容を読み取れるか"><h3>内容を読み取れるか<span>0 / 32</span></h3><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>見出しH1がページに1つ</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>会社情報（電話番号・所在地）の記載</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>構造化データ（JSON-LD）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>画像の代替テキスト（alt・80%以上）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>SNS・チャット共有時の表示（OGP）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>llms.txt（参考）</span><span class="pt">2点</span></li></ul></div>
+      <p class="lx-console-foot">URLを入れると、ここがその場で合否に変わります。</p>
     </div>
   </div>
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>AIO</span><span>LLMO</span><span>SEO</span><span>MEO</span><span>AI OVERVIEW</span><span>CHATGPT</span><span>PERPLEXITY</span><span>GEMINI</span><span>E-E-A-T</span><span>ZERO-CLICK</span>
-      <span>AIO</span><span>LLMO</span><span>SEO</span><span>MEO</span><span>AI OVERVIEW</span><span>CHATGPT</span><span>PERPLEXITY</span><span>GEMINI</span><span>E-E-A-T</span><span>ZERO-CLICK</span>
-    </div>
-  </div>
-  <svg class="hero-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 C 360 10, 1080 10, 1440 70 L1440 70 L0 70 Z" fill="#ffffff"/></svg>
+</section>
+
+<!-- 実績の帯（data/first_party_facts.json の検証済みの数字だけ。期間を添える） -->
+<div class="lx-proof" aria-label="実績">
+  <ul>
+    <li><span class="n">3,200<small>店舗以上</small></span><span class="l">MEO運用の実績</span><span class="s">店舗集客「G-ran」通算・2026年7月時点</span></li>
+    <li><span class="n">50<small>社以上</small></span><span class="l">導入を支援</span><span class="s">2020年3月の創業から2026年9月まで・のべ</span></li>
+    <li><span class="n">15<small>件中</small> 0<small>件</small></span><span class="l">AIO運用の3か月以内の解約</span><span class="s">2026年5月〜9月に契約したAIO運用</span></li>
+    <li><span class="n">74<small>件</small></span><span class="l">SEO運用のご契約</span><span class="s">2023年5月〜2026年9月</span></li>
+  </ul>
 </div>
 
-<div class="stat-band">
-  <div><div class="num"><span data-count="4">0</span><small>領域</small></div><div class="label">AIO・LLMO・SEO・MEOを一社で</div></div>
-  <div><div class="num"><span data-count="3200">0</span><small>店舗以上</small></div><div class="label">MEO運営実績・通算（店舗集客支援「G-ran」）</div></div>
-  <div><div class="num">無料</div><div class="label">現状分析レポート進呈</div></div>
-  <div><div class="num"><span data-count="2">0</span><small>営業日</small></div><div class="label">以内にご連絡・しつこい営業なし</div></div>
-</div>
-
+<!-- 診断の結果（lp-scan.js が描く） -->
+<section class="lx-result" id="scan" data-area="診断結果" data-area-id="scan" hidden>
+  <div class="lx-wrap" id="lx-res" aria-live="polite"></div>
+</section>
 
 <!-- 課題共感 -->
 <section class="section-full bg-deep after-stats" data-area="課題共感" data-area-id="problem">
@@ -174,135 +169,40 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 
 
-<!-- 動画と資料（課題に共感した直後に1区画へ統合。縦積み3連は読み飛ばされるため、
-     動画2本を横並び → 資料 → 相談、の順に圧縮。料金スライドは資料に含まれない） -->
-<section class="section" data-area="動画と資料" data-area-id="proposal">
-  <div class="section-head reveal" style="text-align:center;">
-    <span class="en">Movie &amp; Document</span>
-    <h2>動画と資料で、仕組みを先にご確認ください</h2>
-    <p class="sub" style="margin-left:auto;margin-right:auto;">実際の画面で、記事ができて公開されるまでをご覧いただけます。<strong>人が決めることと、機械に任せることの分担</strong>まで説明しています。</p>
-  </div>
-  <div class="reveal doc-duo">
-    <div class="media-card">
-      <p class="mc-label">MOVIE 01</p>
-      <p class="mc-title">10分で分かる、AIで集客する仕組み</p>
-      <p class="mc-sub">なぜ今AI検索なのか、市場の変化から。実際の制作画面つき</p>
-      <video controls preload="none" poster="/videos/aio-pr-poster.jpg" data-cta="lp_pr_video">
-        <source src="/videos/aio-pr.mp4" type="video/mp4">
-        お使いのブラウザでは動画を再生できません。
-      </video>
-    </div>
-    <div class="media-card">
-      <p class="mc-label">MOVIE 02</p>
-      <p class="mc-title">サービス資料を6分でご説明</p>
-      <p class="mc-sub">下の資料をスライドに沿って解説。お急ぎの方はこちらから</p>
-      <video controls preload="none" poster="/videos/doc-guide-poster.jpg" data-cta="lp_doc_video">
-        <source src="/videos/doc-guide.mp4" type="video/mp4">
-        お使いのブラウザでは動画を再生できません。
-      </video>
-    </div>
-  </div>
-  <div class="reveal media-card slide-viewer" data-total="15" style="max-width:1160px;margin:1.8rem auto 0;">
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem;">
-      <div>
-        <p class="mc-label">DOCUMENT</p>
-        <p class="mc-title">サービス資料（全15枚）</p>
-      </div>
-      <p style="font-size:.8rem;color:var(--muted);margin:0;">ボタンか矢印キーでめくれます</p>
-    </div>
-    <div class="sv-frame" style="position:relative;border-radius:12px;overflow:hidden;margin-top:.9rem;background:#fff;border:1px solid var(--line,#dbe3ec);">
-      <img class="sv-img" src="/images/proposal/p01.jpg" alt="サービス資料 1ページ目" style="display:block;width:100%;" width="1600" height="1131">
-      <button type="button" class="sv-prev" aria-label="前のページ" style="position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">‹</button>
-      <button type="button" class="sv-next" aria-label="次のページ" style="position:absolute;right:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">›</button>
-    </div>
-    <div style="display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:.7rem;">
-      <span class="sv-count" style="font-size:.85rem;color:var(--muted);">1 / 15</span>
-    </div>
-  </div>
-  <div class="reveal" style="text-align:center;margin-top:1.8rem;">
-    <a class="btn btn-primary" href="#form" data-cta="lp_proposal_form">この内容で相談してみる <span class="arw">→</span></a>
-    <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem;">料金は御社の状況に合わせてお見積りします。入力は3項目・30秒です。</p>
-  </div>
-</section>
-
-<!-- 無料診断ツール（マイクロコンバージョン: 課題を自覚した直後に配置） -->
-<section class="section" data-area="無料診断" data-area-id="tools">
-  <div class="section-head reveal" style="text-align:center;">
-    <span class="en">Free Check</span>
-    <h2>思い当たるなら、まず無料で「現在地」を確かめてください</h2>
-    <p class="sub" style="margin-left:auto;margin-right:auto;">相談の前に、2つの無料ツールで自社の状況を数字で把握できます。<strong>登録不要・その場で結果表示</strong>です。</p>
-  </div>
-  <div class="pillar-grid">
-    <a class="pillar cat-meo reveal" href="/diagnosis/meo/" data-cta="lp_tools_diagnosis_meo" style="text-decoration:none;display:block;">
-      <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M24 44s-15-13-15-25a15 15 0 1 1 30 0c0 12-15 25-15 25z"/><circle cx="24" cy="19" r="6"/></svg>
-      <span class="num">Tool 01 — 30秒・8問</span>
-      <h3>MEO診断</h3>
-      <p>Googleマップ集客の整備度を<strong>100点満点で採点</strong>。マップの3枠に入るために足りないものがわかります。店舗・クリニック・不動産の方に。</p>
-      <p style="margin-top:1rem;"><span class="btn btn-primary" style="padding:.7em 1.6em;font-size:.9rem;">MEOを診断する <span class="arw">→</span></span></p>
-    </a>
-    <a class="pillar cat-aio reveal reveal-d1" href="/diagnosis/aio/" data-cta="lp_tools_diagnosis_aio" style="text-decoration:none;display:block;">
-      <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="24" cy="20" r="11"/><path d="M24 9v-5M35 20h5M24 31v5M13 20H8"/><path d="M18 40h12M20 44h8"/></svg>
-      <span class="num">Tool 02 — 30秒・8問</span>
-      <h3>AIO診断</h3>
-      <p>AI検索（AI Overview・ChatGPT）への対応度を<strong>100点満点で採点</strong>。AIに引用されるために足りないものがわかります。BtoB・士業・メディア運用の方に。</p>
-      <p style="margin-top:1rem;"><span class="btn btn-primary" style="padding:.7em 1.6em;font-size:.9rem;">AIOを診断する <span class="arw">→</span></span></p>
-    </a>
-    <a class="pillar cat-seo reveal reveal-d2" href="/site-audit/" data-cta="lp_tools_audit" style="text-decoration:none;display:block;">
-      <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="8" y="8" width="32" height="26" rx="4"/><path d="M8 40h32M16 20l5 5 11-11"/></svg>
-      <span class="num">Tool 03 — URL入力だけ</span>
-      <h3>サイト無料採点</h3>
-      <p>URLを入れるだけで、サイトの技術対応を<strong>12項目・100点満点</strong>で自動採点。AIクローラー許可や構造化データまでチェックします。</p>
-      <p style="margin-top:1rem;"><span class="btn btn-primary" style="padding:.7em 1.6em;font-size:.9rem;">サイトを採点する <span class="arw">→</span></span></p>
-    </a>
-  </div>
-</section>
-
-<!-- 市場の変化 -->
-<section class="section" data-area="市場の変化" data-area-id="whynow" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(2rem,4vw,4.5rem);align-items:center;">
-  <div class="section-head reveal" style="margin-bottom:0;">
+<!-- 市場の変化（概念図ではなく、数えた数字で見せる） -->
+<section class="section" data-area="市場の変化" data-area-id="whynow">
+  <div class="section-head reveal">
     <span class="en">Why Now</span>
-    <h2>検索の入口が「10本の青いリンク」から「AIの回答」へ</h2>
-    <p class="sub">Googleは検索結果の最上部にAIによる回答（AI Overview）を表示するようになり、ユーザーはリンクをクリックする前に答えを得るようになりました。<strong>AIの回答に引用される企業</strong>と、<strong>その他大勢</strong>への二極化が始まっています。</p>
+    <h2>「質問」で検索する人ほど、先にAIの答えを読んでいます</h2>
+    <p class="sub">お客様がリンクを押す前に、検索結果の上でAIが答えを出す場面が増えました。<strong>選ばれるのは、AIが答えに使える事実が書かれていて、なおかつ上位にいる会社</strong>です。</p>
   </div>
-
-  <div class="chart-card reveal" style="margin:0;">
-    <div class="chart-title">検索からの集客経路の変化（概念図）</div>
-    <div class="chart-sub">従来: 検索結果のクリックが唯一の入口 → 現在: AI回答での引用が新しい入口に</div>
-    <svg viewBox="0 0 640 240" role="img" aria-label="集客経路の変化の概念図。従来は検索結果のクリックのみが入口だったが、現在はAI回答での引用が新しい入口として加わったことを示す図解。">
-      <text x="8" y="24" class="chart-value">従来</text>
-      <rect x="8" y="36" width="150" height="44" rx="8" fill="#52708f"/>
-      <text x="83" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">検索する</text>
-      <path d="M162 58 h36" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowlp)"/>
-      <rect x="202" y="36" width="150" height="44" rx="8" fill="#52708f"/>
-      <text x="277" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">結果をクリック</text>
-      <path d="M356 58 h36" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowlp)"/>
-      <rect x="396" y="36" width="150" height="44" rx="8" fill="#0b2447"/>
-      <text x="471" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">サイト訪問・問合せ</text>
-      <text x="8" y="132" class="chart-value">現在</text>
-      <rect x="8" y="144" width="150" height="44" rx="8" fill="#52708f"/>
-      <text x="83" y="170" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">AIに聞く</text>
-      <path d="M162 166 h36" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowlp)"/>
-      <rect x="202" y="144" width="150" height="44" rx="8" fill="#2563eb"/>
-      <text x="277" y="163" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">AIの回答で</text>
-      <text x="277" y="180" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">引用・紹介される</text>
-      <path d="M356 166 h36" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowlp)"/>
-      <rect x="396" y="144" width="150" height="44" rx="8" fill="#0b2447"/>
-      <text x="471" y="163" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">指名検索・</text>
-      <text x="471" y="180" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">相談・来店</text>
-      <text x="277" y="218" text-anchor="middle" class="chart-label">← ここで選ばれるかが分岐点（AIO・LLMO対策の領域） →</text>
-      <defs><marker id="arrowlp" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
-    </svg>
-    <div class="chart-source">※ 検索行動の変化を示す概念図（イメージ）</div>
+  <div class="lx-data-grid">
+    <div class="lx-data reveal">
+      <h3>AIの回答（AI Overview）が出た検索の割合</h3>
+      <p class="sub">5万5,393件の検索を調べた学術調査（2026年3〜4月）</p>
+      <div class="lx-hbar"><span>検索全体</span><div class="track"><div class="fill" style="width:13.7%"></div><span class="val" style="left:13.7%">13.7%</span></div></div>
+      <div class="lx-hbar hl"><span>質問形の検索</span><div class="track"><div class="fill" style="width:64.7%"></div><span class="val" style="left:64.7%">64.7%</span></div></div>
+      <p class="so">「◯◯市で高気密の家を建てる工務店は？」のような質問形は、<strong>3件に2件近くでAIが先に答えます。</strong></p>
+      <p class="src">出典: arXiv 2605.14021（2026年・55,393クエリ）</p>
+    </div>
+    <div class="lx-data reveal reveal-d1">
+      <h3>検索順位ごとのクリック率（当社の実測）</h3>
+      <p class="sub">当社の3サイト・2026年6月23日〜9月20日・表示7,015回</p>
+      <div class="lx-hbar hl"><span>1〜3位</span><div class="track"><div class="fill" style="width:85%"></div><span class="val" style="left:85%">6.28%</span></div></div>
+      <div class="lx-hbar"><span>4〜10位</span><div class="track"><div class="fill" style="width:13.8%"></div><span class="val" style="left:13.8%">1.02%</span></div></div>
+      <p class="so">同じ1ページ目でも、<strong>3位以内かどうかで約6倍</strong>違いました。「1ページ目に出ている」だけでは、問い合わせは増えません。</p>
+      <p class="src">出典: セブンセンシズ株式会社 一次データ「<a href="/data/kensaku-juni-ctr/">検索順位ごとの実測クリック率</a>」（Search Console の実測）</p>
+    </div>
   </div>
 </section>
 
 <div class="section" style="padding-top:0;padding-bottom:0;">
   <div class="lead-band reveal">
     <div class="lb-text">
-      <p class="lb-main">自社は今、どちら側にいるのか。<strong>検索・マップ・AI検索での「見え方」</strong>を無料でレポートします。</p>
-      <p class="lb-sub">入力30秒｜しつこい営業なし</p>
+      <p class="lb-main">自社のサイトは、AIに読める状態か。<strong>URLを入れるだけで30秒</strong>でわかります。</p>
+      <p class="lb-sub">登録不要｜名前もメールも要りません</p>
     </div>
-    <a class="btn btn-primary" href="#form" data-cta="lp_band_whynow" data-ab="band_cta" data-ab-b="うちの現在地を、無料で知る →">無料で現状分析を受ける <span class="arw">→</span></a>
+    <a class="btn btn-primary" href="#scan-start" data-cta="lp_band_whynow">URLだけで30秒診断する <span class="arw">→</span></a>
   </div>
 </div>
 
@@ -384,7 +284,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="lb-main">比較検討中の方も歓迎です。<strong>現状分析レポートは他社比較の判断材料</strong>にもなります。</p>
       <p class="lb-sub">お見積り後のお断りも遠慮なく</p>
     </div>
-    <a class="btn btn-primary" href="#form" data-cta="lp_band_compare" data-ab="band_cta" data-ab-b="うちの現在地を、無料で知る →">無料で現状分析を受ける <span class="arw">→</span></a>
+    <a class="btn btn-primary" href="#scan-start" data-cta="lp_band_compare">URLだけで30秒診断する <span class="arw">→</span></a>
   </div>
 </div>
 
@@ -507,9 +407,60 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="lb-main"><strong>業種・商圏に合わせた優先順位</strong>を、現状分析でご提案します。</p>
       <p class="lb-sub">お電話でも: <a href="tel:0643057547">06-4305-7547</a>（9:00〜20:00 / 土日祝休）</p>
     </div>
-    <a class="btn btn-primary" href="#form" data-cta="lp_band_industries" data-ab="band_cta" data-ab-b="うちの現在地を、無料で知る →">無料で現状分析を受ける <span class="arw">→</span></a>
+    <a class="btn btn-primary" href="#scan-start" data-cta="lp_band_industries">URLだけで30秒診断する <span class="arw">→</span></a>
   </div>
 </div>
+
+<!-- 動画と資料（課題に共感した直後に1区画へ統合。縦積み3連は読み飛ばされるため、
+     動画2本を横並び → 資料 → 相談、の順に圧縮。料金スライドは資料に含まれない） -->
+<section class="section" data-area="動画と資料" data-area-id="proposal">
+  <div class="section-head reveal" style="text-align:center;">
+    <span class="en">Movie &amp; Document</span>
+    <h2>動画と資料で、仕組みを先にご確認ください</h2>
+    <p class="sub" style="margin-left:auto;margin-right:auto;">実際の画面で、記事ができて公開されるまでをご覧いただけます。<strong>人が決めることと、機械に任せることの分担</strong>まで説明しています。</p>
+  </div>
+  <div class="reveal doc-duo">
+    <div class="media-card">
+      <p class="mc-label">MOVIE 01</p>
+      <p class="mc-title">10分で分かる、AIで集客する仕組み</p>
+      <p class="mc-sub">なぜ今AI検索なのか、市場の変化から。実際の制作画面つき</p>
+      <video controls preload="none" poster="/videos/aio-pr-poster.jpg" data-cta="lp_pr_video">
+        <source src="/videos/aio-pr.mp4" type="video/mp4">
+        お使いのブラウザでは動画を再生できません。
+      </video>
+    </div>
+    <div class="media-card">
+      <p class="mc-label">MOVIE 02</p>
+      <p class="mc-title">サービス資料を6分でご説明</p>
+      <p class="mc-sub">下の資料をスライドに沿って解説。お急ぎの方はこちらから</p>
+      <video controls preload="none" poster="/videos/doc-guide-poster.jpg" data-cta="lp_doc_video">
+        <source src="/videos/doc-guide.mp4" type="video/mp4">
+        お使いのブラウザでは動画を再生できません。
+      </video>
+    </div>
+  </div>
+  <div class="reveal media-card slide-viewer" data-total="15" style="max-width:1160px;margin:1.8rem auto 0;">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem;">
+      <div>
+        <p class="mc-label">DOCUMENT</p>
+        <p class="mc-title">サービス資料（全15枚）</p>
+      </div>
+      <p style="font-size:.8rem;color:var(--muted);margin:0;">ボタンか矢印キーでめくれます</p>
+    </div>
+    <div class="sv-frame" style="position:relative;border-radius:12px;overflow:hidden;margin-top:.9rem;background:#fff;border:1px solid var(--line,#dbe3ec);">
+      <img class="sv-img" src="/images/proposal/p01.jpg" alt="サービス資料 1ページ目" style="display:block;width:100%;" width="1600" height="1131">
+      <button type="button" class="sv-prev" aria-label="前のページ" style="position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">‹</button>
+      <button type="button" class="sv-next" aria-label="次のページ" style="position:absolute;right:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">›</button>
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:.7rem;">
+      <span class="sv-count" style="font-size:.85rem;color:var(--muted);">1 / 15</span>
+    </div>
+  </div>
+  <div class="reveal" style="text-align:center;margin-top:1.8rem;">
+    <a class="btn btn-primary" href="#form" data-cta="lp_proposal_form">この内容で相談してみる <span class="arw">→</span></a>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem;">料金は御社の状況に合わせてお見積りします。入力は3項目・30秒です。</p>
+  </div>
+</section>
 
 <!-- 動画 -->
 <section class="section" data-area="動画" data-area-id="movie" style="padding-top:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(2rem,4vw,4.5rem);align-items:center;">
@@ -538,7 +489,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <h2>ご相談から成果までの流れ</h2>
     </div>
     <ol class="flow-list">
-      <li class="reveal"><span class="step-title">無料相談（オンライン可）</span><p>現状の集客状況・お困りごとをヒアリングします。</p></li>
+      <li class="reveal"><span class="step-title">30秒のサイト診断（このページで）</span><p>URLを入れるだけで、AIが入れるか・検索に出るか・内容を読み取れるかを14項目で測ります。</p></li>
+      <li class="reveal"><span class="step-title">無料相談（オンライン可）</span><p>診断の結果と、現状の集客状況・お困りごとを伺います。</p></li>
       <li class="reveal"><span class="step-title">無料現状分析レポート</span><p>検索順位・マップ表示・AI検索での見え方を分析してお渡しします。</p></li>
       <li class="reveal"><span class="step-title">戦略設計のご提案</span><p>AIO・LLMO・SEO・MEOの優先順位と実行計画、お見積りをご提示します。</p></li>
       <li class="reveal"><span class="step-title">運用開始</span><p>コンテンツ制作・プロフィール最適化・構造化対応を実行します。</p></li>
@@ -594,6 +546,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <details><summary>どんな業種に対応していますか？</summary><p class="faq-a">BtoB・SaaS、士業・コンサル・クリニック、不動産・住宅を中心に、店舗ビジネスまで全国対応しています。</p></details>
     <details><summary>口コミを増やしてもらえますか？</summary><p class="faq-a">規約違反となる代理投稿・購入は行いません。アカウント削除のリスクがあるためです。返信運用と正攻法の上位表示でご支援します。</p></details>
     <details><summary>無料相談では何をしてもらえますか？</summary><p class="faq-a">現状の検索順位・AI検索での見え方を分析したレポートをお渡しし、改善の優先順位をご説明します。</p></details>
+    <details><summary>無料のサイト診断では何がわかりますか？</summary><p class="faq-a">URLを入れると、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を表示します。</p></details>
   </div>
 </section>
 </section>
@@ -603,7 +556,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="section-head reveal" style="text-align:center;">
     <span class="en">Free Consultation</span>
     <h2>無料相談・現状分析のお申し込み</h2>
-    <p class="sub" style="margin-left:auto;margin-right:auto;">2営業日以内に担当者からご連絡します。しつこい営業は行いません。</p>
+    <p class="sub" style="margin-left:auto;margin-right:auto;">2営業日以内に担当者からご連絡します。しつこい営業は行いません。上の診断を受けた方は、結果が下書きされています。</p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:start;max-width:1240px;margin:0 auto;">
   <!-- 左: おまかせパックの特典・提供内容 -->
@@ -718,8 +671,18 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </footer>
 
 <div class="sticky-cta">
-  <a class="btn btn-primary" href="#form" data-cta="lp_sticky_form">無料相談</a>
-  <a class="btn btn-ghost-light" href="/download/" data-cta="lp_sticky_dl">資料DL</a>
+  <a class="btn btn-primary" href="#scan-start" data-cta="lp_sticky_scan">30秒診断</a>
+  <a class="btn btn-ghost-light" href="#form" data-cta="lp_sticky_form">無料相談</a>
+</div>
+
+<!-- 離脱しかけたときの案内（PCのみ・1回だけ・まだ測っていない人だけ。lp-scan.js） -->
+<div class="lx-exit" id="lx-exit" hidden role="dialog" aria-modal="true" aria-labelledby="lx-exit-t">
+  <div class="lx-exit-box">
+    <button type="button" class="lx-exit-close" aria-label="閉じる">×</button>
+    <h2 id="lx-exit-t">お帰りの前に、30秒だけ</h2>
+    <p>URLを入れるだけで、御社のサイトがAIと検索に読める状態かを14項目で測ります。登録も営業電話もありません。</p>
+    <form><input type="url" placeholder="https://example.co.jp" aria-label="ホームページのURL" required><button type="submit" class="lx-go" data-cta="lp_exit_scan">診断する</button></form>
+  </div>
 </div>
 
 </body>

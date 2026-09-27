@@ -1,0 +1,249 @@
+/* LP v2 — URLを入れるだけの実測診断を主役にした構成（2026-09）
+ * 既存の style.css / lp.css の部品（料金・比較表・声・FAQ・フォーム）はそのまま使い、
+ * ここには新しい区画（計測盤・結果・実績の帯・実測データ・離脱時の案内）だけを置く。
+ * 色は意味で使う: 合格=緑 / 不合格=赤。それ以外はブランドの紺と青だけ。 */
+:root {
+  --lx-ink: #071a38;
+  --lx-navy: #0b2447;
+  --lx-blue: #2563eb;
+  --lx-sky: #eaf2fe;
+  --lx-paper: #f6f8fb;
+  --lx-ok: #12805c;
+  --lx-ok-bg: #e7f5ee;
+  --lx-ng: #c2362b;
+  --lx-ng-bg: #fcebea;
+  --lx-rule: #dfe6ef;
+  --lx-mute: #5b6b84;
+  --lx-num: "Outfit", "Segoe UI", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+}
+
+/* ---------- ヒーロー（左: 入力 / 右: 計測盤） ---------- */
+.lx-hero {
+  position: relative;
+  background:
+    radial-gradient(1200px 520px at 78% -10%, rgba(37, 99, 235, .38), transparent 60%),
+    linear-gradient(180deg, var(--lx-ink) 0%, #0a2250 100%);
+  color: #fff;
+  overflow: hidden;
+  padding: clamp(2.2rem, 5vw, 4.4rem) 0 clamp(2.4rem, 5vw, 4rem);
+}
+.lx-hero::before { /* 走査線。計測している感じだけを静かに出す */
+  content: "";
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px);
+  background-size: 100% 28px;
+  pointer-events: none;
+}
+.lx-wrap { position: relative; max-width: 1240px; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2rem); }
+.lx-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: clamp(1.6rem, 4vw, 3.6rem);
+  align-items: start;
+}
+@media (max-width: 920px) { .lx-hero-grid { grid-template-columns: 1fr; } }
+
+.lx-kicker {
+  display: inline-flex; flex-wrap: wrap; gap: .45rem;
+  margin: 0 0 1.1rem; padding: 0; list-style: none;
+}
+.lx-kicker li {
+  font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+  padding: .35em .9em; border-radius: 999px;
+  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .22);
+}
+.lx-h1 {
+  font-size: clamp(1.85rem, 3.9vw, 2.95rem);
+  line-height: 1.28; font-weight: 900; letter-spacing: .01em;
+  margin: 0 0 1rem; text-wrap: balance;
+}
+.lx-h1 em { font-style: normal; color: #8fb7ff; }
+.lx-lead { font-size: clamp(.98rem, 1.5vw, 1.08rem); line-height: 1.9; color: rgba(255, 255, 255, .86); max-width: 36em; margin: 0 0 1.5rem; }
+.lx-lead strong { color: #fff; background: none; }
+
+.lx-form {
+  background: #fff; color: var(--lx-ink);
+  border-radius: 18px; padding: clamp(1.1rem, 2.4vw, 1.5rem);
+  box-shadow: 0 28px 70px -24px rgba(0, 8, 30, .7);
+  display: grid; gap: .8rem;
+}
+.lx-form label { display: grid; gap: .35rem; font-size: .82rem; font-weight: 700; color: var(--lx-navy); }
+.lx-form input[type=url], .lx-form input[type=text], .lx-form select {
+  font: inherit; font-size: 1rem; font-weight: 500;
+  padding: .85em 1em; border: 2px solid var(--lx-rule); border-radius: 12px; background: var(--lx-paper);
+  color: var(--lx-ink); width: 100%; box-sizing: border-box;
+}
+.lx-form input:focus, .lx-form select:focus { outline: none; border-color: var(--lx-blue); background: #fff; box-shadow: 0 0 0 4px rgba(37, 99, 235, .15); }
+.lx-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+@media (max-width: 560px) { .lx-row { grid-template-columns: 1fr; } }
+.lx-go {
+  font: inherit; font-size: 1.08rem; font-weight: 900; letter-spacing: .04em;
+  border: 0; border-radius: 14px; padding: 1em 1.2em; cursor: pointer;
+  color: #fff; background: linear-gradient(120deg, var(--lx-blue), #1d4ed8);
+  box-shadow: 0 14px 28px -12px rgba(37, 99, 235, .8);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.lx-go:hover { transform: translateY(-1px); box-shadow: 0 18px 32px -12px rgba(37, 99, 235, .9); }
+.lx-go:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
+.lx-go[disabled] { opacity: .65; cursor: wait; transform: none; }
+.lx-micro { margin: 0; font-size: .78rem; color: var(--lx-mute); display: flex; flex-wrap: wrap; gap: .3rem 1rem; }
+.lx-micro span::before { content: "✓ "; color: var(--lx-ok); font-weight: 900; }
+.lx-alt { margin: .9rem 0 0; font-size: .86rem; color: rgba(255, 255, 255, .75); }
+.lx-alt a, body.lp-doc .lx-hero .lx-alt a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.lx-err { margin: 0; font-size: .86rem; color: var(--lx-ng); font-weight: 700; min-height: 1.2em; }
+.lx-again {
+  display: none; margin: 0 0 .9rem; padding: .7em 1em; border-radius: 12px;
+  background: rgba(255, 255, 255, .1); border: 1px dashed rgba(255, 255, 255, .35);
+  font-size: .86rem; color: #fff;
+}
+.lx-again button { font: inherit; font-weight: 700; color: #fff; background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 0; }
+
+/* 計測盤 */
+.lx-console {
+  background: rgba(3, 13, 34, .66); border: 1px solid rgba(143, 183, 255, .28);
+  border-radius: 20px; padding: clamp(1rem, 2.4vw, 1.4rem);
+  backdrop-filter: blur(6px);
+}
+.lx-console-head { display: flex; justify-content: space-between; align-items: baseline; gap: .6rem; margin-bottom: .8rem; }
+.lx-console-head b { font-size: .95rem; letter-spacing: .04em; }
+.lx-console-head small { font-size: .74rem; color: rgba(255, 255, 255, .6); }
+.lx-group { margin: 0 0 .7rem; }
+.lx-group:last-child { margin-bottom: 0; }
+.lx-group h3 {
+  margin: 0 0 .35rem; font-size: .76rem; font-weight: 700; letter-spacing: .12em;
+  color: #8fb7ff; display: flex; justify-content: space-between;
+}
+.lx-group h3 span { font-family: var(--lx-num); font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, .7); letter-spacing: 0; }
+.lx-group ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .28rem; }
+.lx-item {
+  display: grid; grid-template-columns: 1.3rem 1fr auto; align-items: center; gap: .5rem;
+  font-size: .84rem; line-height: 1.45; color: rgba(255, 255, 255, .88);
+  padding: .32em .55em; border-radius: 8px;
+  transition: background .3s ease, color .3s ease;
+}
+.lx-item .mk {
+  width: 1.1rem; height: 1.1rem; border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, .35);
+  display: inline-grid; place-items: center; font-size: .7rem; font-weight: 900;
+}
+.lx-item .pt { font-family: var(--lx-num); font-variant-numeric: tabular-nums; font-size: .74rem; color: rgba(255, 255, 255, .5); }
+.lx-item.is-scan { background: rgba(143, 183, 255, .12); }
+.lx-item.is-scan .mk { border-color: #8fb7ff; border-top-color: transparent; animation: lx-spin .8s linear infinite; }
+.lx-item.is-ok .mk { background: var(--lx-ok); border-color: var(--lx-ok); }
+.lx-item.is-ok .mk::before { content: "✓"; color: #fff; }
+.lx-item.is-ng { background: rgba(194, 54, 43, .22); color: #fff; }
+.lx-item.is-ng .mk { background: var(--lx-ng); border-color: var(--lx-ng); }
+.lx-item.is-ng .mk::before { content: "!"; color: #fff; }
+.lx-console-foot { margin: .8rem 0 0; font-size: .74rem; color: rgba(255, 255, 255, .55); }
+@keyframes lx-spin { to { transform: rotate(360deg); } }
+
+/* ---------- 実績の帯（数字は台帳の検証済みのものだけ） ---------- */
+.lx-proof { background: #fff; border-bottom: 1px solid var(--lx-rule); }
+.lx-proof ul {
+  list-style: none; margin: 0 auto; padding: clamp(1.2rem, 3vw, 1.8rem) clamp(1rem, 3vw, 2rem);
+  max-width: 1240px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem 2rem;
+}
+@media (max-width: 860px) { .lx-proof ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lx-proof li { display: grid; gap: .2rem; }
+.lx-proof .n { font-family: var(--lx-num); font-variant-numeric: tabular-nums; font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem); color: var(--lx-navy); line-height: 1.1; }
+.lx-proof .n small { font-size: .5em; font-weight: 700; margin-left: .15em; }
+.lx-proof .l { font-size: .82rem; font-weight: 700; color: var(--lx-ink); }
+.lx-proof .s { font-size: .72rem; color: var(--lx-mute); }
+
+/* ---------- 診断結果 ---------- */
+.lx-result { background: var(--lx-paper); padding: clamp(2rem, 5vw, 3.6rem) 0; scroll-margin-top: 80px; }
+.lx-result[hidden] { display: none !important; }
+.lx-res-top {
+  display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); align-items: center;
+  background: #fff; border-radius: 22px; padding: clamp(1.2rem, 3vw, 2rem);
+  box-shadow: 0 18px 50px -30px rgba(7, 26, 56, .45);
+}
+@media (max-width: 640px) { .lx-res-top { grid-template-columns: 1fr; text-align: center; } }
+.lx-ring { position: relative; width: 150px; height: 150px; margin: 0 auto; }
+.lx-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.lx-ring .v { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; text-align: center; }
+.lx-ring .v b { font-family: var(--lx-num); font-variant-numeric: tabular-nums; font-size: 2.6rem; line-height: 1; color: var(--lx-navy); display: block; }
+.lx-ring .v small { font-size: .74rem; color: var(--lx-mute); }
+.lx-res-grade { font-size: clamp(1.2rem, 2.4vw, 1.55rem); font-weight: 900; margin: 0 0 .35rem; color: var(--lx-ink); text-wrap: balance; }
+.lx-res-url { font-size: .82rem; color: var(--lx-mute); margin: 0 0 .9rem; word-break: break-all; }
+.lx-bars { display: grid; gap: .45rem; }
+.lx-bar { display: grid; grid-template-columns: 9.5em 1fr 3.6em; gap: .6rem; align-items: center; font-size: .82rem; font-weight: 700; color: var(--lx-ink); }
+@media (max-width: 480px) { .lx-bar { grid-template-columns: 7.5em 1fr 3.2em; font-size: .76rem; } }
+.lx-bar i { display: block; height: 10px; border-radius: 999px; background: var(--lx-rule); overflow: hidden; }
+.lx-bar i::after { content: ""; display: block; height: 100%; width: var(--w, 0%); background: var(--lx-blue); border-radius: 999px; transition: width .8s ease; }
+.lx-bar em { font-style: normal; font-family: var(--lx-num); font-variant-numeric: tabular-nums; color: var(--lx-mute); text-align: right; }
+
+.lx-alert {
+  margin: 1.2rem 0 0; padding: 1em 1.2em; border-radius: 14px;
+  background: var(--lx-ng-bg); border-left: 5px solid var(--lx-ng); color: #6b1d17; font-size: .92rem; line-height: 1.75;
+}
+.lx-alert strong { background: none; color: var(--lx-ng); }
+.lx-calm { margin: 1.2rem 0 0; padding: 1em 1.2em; border-radius: 14px; background: var(--lx-ok-bg); border-left: 5px solid var(--lx-ok); font-size: .92rem; line-height: 1.75; color: #0d4a35; }
+
+.lx-cols { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(1rem, 3vw, 2rem); margin-top: 1.4rem; align-items: start; }
+@media (max-width: 900px) { .lx-cols { grid-template-columns: 1fr; } }
+.lx-card { background: #fff; border-radius: 18px; padding: clamp(1.1rem, 2.6vw, 1.6rem); box-shadow: 0 12px 36px -26px rgba(7, 26, 56, .5); }
+.lx-card h3 { margin: 0 0 .7rem; font-size: 1.05rem; font-weight: 900; color: var(--lx-ink); }
+.lx-card .tag { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .08em; padding: .25em .8em; border-radius: 999px; margin-bottom: .6rem; }
+.tag-free { background: var(--lx-ok-bg); color: var(--lx-ok); }
+.tag-lock { background: var(--lx-sky); color: var(--lx-blue); }
+.lx-fix-now { border: 2px solid var(--lx-ok); }
+.lx-fix-now p { margin: .3rem 0; font-size: .93rem; line-height: 1.8; }
+.lx-fix-now .why { color: var(--lx-mute); font-size: .84rem; }
+.lx-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.lx-list li { display: grid; grid-template-columns: 1.3rem 1fr; gap: .55rem; font-size: .9rem; line-height: 1.6; }
+.lx-list li .mk { width: 1.15rem; height: 1.15rem; border-radius: 50%; display: grid; place-items: center; font-size: .68rem; font-weight: 900; color: #fff; margin-top: .2rem; }
+.lx-list li.ng .mk { background: var(--lx-ng); }
+.lx-list li.ok .mk { background: var(--lx-ok); }
+.lx-list li .ad { display: block; font-size: .84rem; color: var(--lx-mute); margin-top: .15rem; }
+.lx-locked .ad { filter: blur(4px); user-select: none; }
+.lx-gate { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--lx-rule); }
+.lx-gate form { display: grid; gap: .6rem; }
+.lx-gate input[type=text], .lx-gate input[type=email] {
+  font: inherit; padding: .8em .95em; border: 2px solid var(--lx-rule); border-radius: 11px; width: 100%; box-sizing: border-box;
+}
+.lx-gate input:focus { outline: none; border-color: var(--lx-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, .15); }
+.lx-gate .consent { font-size: .8rem; display: flex; gap: .5rem; align-items: flex-start; font-weight: 500; }
+.lx-gate .note { font-size: .76rem; color: var(--lx-mute); margin: 0; }
+.lx-gate .msg { font-size: .84rem; font-weight: 700; margin: 0; min-height: 1.2em; }
+.lx-share { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
+.lx-share button, .lx-share a {
+  font: inherit; font-size: .88rem; font-weight: 700; padding: .75em 1.2em; border-radius: 12px; cursor: pointer; text-decoration: none;
+  border: 2px solid var(--lx-navy); background: #fff; color: var(--lx-navy);
+}
+.lx-share a.primary { background: var(--lx-navy); color: #fff; }
+.lx-examples { margin: .9rem 0 0; padding: .9em 1.1em; border-radius: 12px; background: var(--lx-sky); font-size: .88rem; line-height: 1.75; }
+.lx-examples b { color: var(--lx-navy); }
+.lx-measured { font-size: .74rem; color: var(--lx-mute); margin: 1rem 0 0; }
+
+/* ---------- 実測データ（通説ではなく、数えた数字） ---------- */
+.lx-data-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2rem); }
+@media (max-width: 860px) { .lx-data-grid { grid-template-columns: 1fr; } }
+.lx-data { background: #fff; border: 1px solid var(--lx-rule); border-radius: 20px; padding: clamp(1.2rem, 3vw, 1.8rem); }
+.lx-data h3 { margin: 0 0 .3rem; font-size: 1.05rem; font-weight: 900; color: var(--lx-ink); }
+.lx-data .sub { margin: 0 0 1rem; font-size: .84rem; color: var(--lx-mute); }
+.lx-hbar { display: grid; grid-template-columns: 7.5em 1fr; gap: .6rem; align-items: center; margin: .55rem 0; font-size: .86rem; font-weight: 700; color: var(--lx-ink); }
+.lx-hbar .track { position: relative; height: 34px; background: var(--lx-paper); border-radius: 8px; }
+.lx-hbar .fill { position: absolute; inset: 0 auto 0 0; border-radius: 8px 4px 4px 8px; background: var(--lx-navy); }
+.lx-hbar.hl .fill { background: var(--lx-blue); }
+.lx-hbar .val { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--lx-num); font-variant-numeric: tabular-nums; font-weight: 800; font-size: .95rem; color: var(--lx-ink); padding-left: .5rem; }
+.lx-data .src { margin: .9rem 0 0; font-size: .72rem; color: var(--lx-mute); line-height: 1.6; }
+.lx-data .so { margin: .8rem 0 0; font-size: .9rem; line-height: 1.75; }
+
+/* ---------- 離脱しかけたときの案内（1回だけ） ---------- */
+.lx-exit {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center;
+  background: rgba(3, 13, 34, .55); padding: 1rem;
+}
+.lx-exit[hidden] { display: none !important; }
+.lx-exit-box { background: #fff; border-radius: 20px; max-width: 460px; width: 100%; padding: 1.6rem 1.5rem 1.3rem; position: relative; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .5); }
+.lx-exit-box h2 { margin: 0 0 .5rem; font-size: 1.3rem; font-weight: 900; color: var(--lx-ink); text-wrap: balance; }
+.lx-exit-box p { margin: 0 0 1rem; font-size: .9rem; line-height: 1.75; color: var(--lx-mute); }
+.lx-exit-box form { display: grid; gap: .6rem; }
+.lx-exit-box input { font: inherit; padding: .85em 1em; border: 2px solid var(--lx-rule); border-radius: 12px; }
+.lx-exit-close { position: absolute; top: .6rem; right: .7rem; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--lx-paper); cursor: pointer; font-size: 1.1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-item.is-scan .mk { animation: none; }
+  .lx-bar i::after, .lx-go { transition: none; }
+}
