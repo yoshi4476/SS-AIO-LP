@@ -259,7 +259,11 @@
   form.addEventListener("submit", function (e) { e.preventDefault(); run(input.value); });
 
   // 共有リンク（?check=）で来たら、そのURLで自動で測る
-  var q = new URLSearchParams(location.search).get("check");
+  var qs = new URLSearchParams(location.search);
+  var q = qs.get("check");
+  // 記事の診断欄から来たときは、記事の業種を選んだ状態にする（同業平均にも入る）
+  var qi = qs.get("ind");
+  if (qi && $$("option", ind).some(function (o) { return o.value === qi || o.textContent === qi; })) ind.value = qi;
   if (q) { input.value = q; run(q); }
 
   // 前回の結果がある人には、続きから

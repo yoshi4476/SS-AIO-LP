@@ -452,27 +452,60 @@ def insert_mid_cta(content, meta):
     """
     import re as _re
     heads = [m.start() for m in _re.finditer(r"<h2[ >]", content)]
-    if len(heads) < 5:
+    if len(heads) < 4:
         return content        # 見出しが少ない記事は末尾だけでよい
-    pos = heads[len(heads) // 2]
-    href, title, _ = DIAG_BANNERS.get(meta["category"], ("/lp/", "無料相談", ""))
-    cta = (f'<section class="cta cta-mid">'
-           f'<p class="cta-copy">ここまでの内容を、自社に当てはめて確認しませんか。</p>'
-           f'<a class="btn btn-primary" href="{href}" '
-           f'data-cta="article_mid_{meta["category"]}">{title} '
-           f'<span class="arw">→</span></a>'
-           f'<p class="cta-sub">読みながらでも1分で終わります</p></section>' + "\n")
-    return content[:pos] + cta + content[pos:]
+    # 2つ目の見出しの区切りの後。記事の半ばでは、そこまで読む前に離脱する読者に届かなかった
+    pos = heads[2]
+    return content[:pos] + scan_box(meta, "mid") + "\n" + content[pos:]
+
+
+# 記事の業種 → LPの業種欄の選択肢（診断を始めたときに業種が選ばれた状態にする。同業平均にも入る）
+LP_INDUSTRY = {"shika": "クリニック・歯科医院", "clinic": "クリニック・歯科医院", "seikotsuin": "クリニック・歯科医院",
+               "fudosan": "不動産", "koumuten": "工務店・リフォーム", "reform": "工務店・リフォーム",
+               "shigyou": "士業・コンサル", "btob": "BtoB・IT", "biyou": "店舗・飲食・美容", "inshokuten": "店舗・飲食・美容"}
+SCAN_HEAD = {"aio": "御社のサイトは、AIの回答に使われる状態ですか？",
+             "seo": "御社のサイトは、検索に出る設定になっていますか？",
+             "meo": "会社情報（電話番号・所在地）は、AIと検索に読める形ですか？",
+             "ai-marketing": "御社のサイトは、AIに読まれていますか？"}
+
+
+def scan_box(meta, where):
+    """記事の中の「URLを入れるだけの30秒診断」。入れるとLPで自動的に診断が始まる。
+
+    記事のボタンは「無料相談」「支援の詳細を見る」と、相談を決めた人向けの重い誘いしか無く、
+    記事を見た人のうちボタンを押したのは約9%だった（GA4・2026-09の28日）。読者の多くはまだ調べている段階なので、
+    その場で自社の現在地が分かる、軽い入口にする。見出しは記事の業種かテーマに合わせる。
+    """
+    try:
+        import industry_hub
+        inds = industry_hub.load()[0]
+        slug = industry_hub.detect(meta.get("title", ""), meta.get("keyword", ""), inds)
+        name = next((i["name"] for i in inds if i["slug"] == slug), "") if slug else ""
+    except Exception:
+        slug, name = None, ""
+    name = re.sub(r"（.*?）", "", name)
+    head = (f"{name}のサイトは、AIと検索に読まれていますか？" if name
+            else SCAN_HEAD.get(meta["category"], SCAN_HEAD["aio"]))
+    ind = LP_INDUSTRY.get(slug or "", "")
+    hidden = f'<input type="hidden" name="ind" value="{ind}">' if ind else ""
+    return (f'<aside class="scan-box scan-{where}" aria-label="30秒のサイト診断">'
+            f'<p class="sb-kicker">無料・登録不要・30秒</p>'
+            f'<p class="sb-head">{head}</p>'
+            f'<p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p>'
+            f'<form class="sb-form" action="/lp/" method="get">{hidden}'
+            f'<input type="hidden" name="src" value="article_{where}">'
+            f'<input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL">'
+            f'<button type="submit" class="btn btn-primary" data-cta="article_{where}_scan">30秒で診断する</button>'
+            f'</form></aside>')
 
 
 def diag_banner_html(meta):
-    href, title, desc = DIAG_BANNERS[meta["category"]]
-    return (f'<aside class="diag-banner"><div class="db-text">'
-            f'<span class="db-kicker">この記事のテーマで、自社の現在地を測る</span>'
-            f'<span class="db-title">{title}</span>'
-            f'<span class="db-desc">{desc}</span></div>'
-            f'<a class="btn btn-primary" href="{href}" data-cta="article_diag_{meta["category"]}">'
-            f'無料で診断する <span class="arw">→</span></a></aside>')
+    # 記事末もURLを入れる診断にする。MEOの記事は、マップ集客のチェックへの入口も残す
+    box = scan_box(meta, "bottom")
+    if meta["category"] == "meo":
+        box = box.replace("</form></aside>", '</form><p class="sb-alt">Googleマップの整備度を測るなら '
+                          '<a href="/diagnosis/meo/" data-cta="article_bottom_meo_quiz">マップ集客の整備度チェック（8問・30秒）</a></p></aside>')
+    return box
 
 
 def prev_next_html(prev_meta, next_meta):

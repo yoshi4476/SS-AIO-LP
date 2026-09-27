@@ -601,3 +601,32 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
     f.appendChild(i);
   }, true);
 })();
+
+/* 記事のスマホ固定ボタン（.scan-sticky）
+ * 1画面半ほど読み進めたら出し、記事末の診断欄やフッターが見えている間は引っ込める（同じ誘いを二重に見せない）。 */
+(function () {
+  var bar = document.querySelector(".scan-sticky");
+  if (!bar || !window.matchMedia || !matchMedia("(max-width: 760px)").matches) return;
+  bar.hidden = false;
+  var ends = document.querySelectorAll(".scan-bottom, .site-footer");
+  var near = false, seen = [];
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var i = seen.indexOf(e.target);
+        if (e.isIntersecting && i < 0) seen.push(e.target);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      near = seen.length > 0;
+      tick();
+    });
+    ends.forEach(function (el) { io.observe(el); });
+  }
+  function tick() {
+    // 割合で決めると、長い記事（スマホで2万px）ほど出るのが遅れる。1画面半を読み進めたら出す
+    var on = scrollY > innerHeight * 1.5 && !near;
+    bar.classList.toggle("is-on", on);
+  }
+  addEventListener("scroll", tick, { passive: true });
+  tick();
+})();

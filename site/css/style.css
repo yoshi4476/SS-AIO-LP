@@ -1509,3 +1509,20 @@ main.lab .cta-final h2 { color: #fff; }
   .map-pin::before { animation: none; opacity: .5; transform: scale(1.4); }
   .map-facade iframe { transition: none; }
 }
+
+/* 記事の中の「URLを入れるだけの30秒診断」（build.py の scan_box）と、スマホの固定ボタン */
+.scan-box { margin: 2.4rem 0; padding: 1.4rem 1.5rem 1.3rem; border-radius: 18px; background: linear-gradient(135deg, #071a38 0%, #0b2f66 100%); color: #fff; box-shadow: 0 18px 40px -24px rgba(7, 26, 56, .7); }
+.scan-box .sb-kicker { margin: 0 0 .35rem; font-size: .74rem; font-weight: 700; letter-spacing: .12em; color: #8fb7ff; }
+.scan-box .sb-head { margin: 0 0 .4rem; font-size: clamp(1.05rem, 2.2vw, 1.25rem); font-weight: 900; line-height: 1.5; color: #fff; text-wrap: balance; }
+.scan-box .sb-sub { margin: 0 0 .9rem; font-size: .86rem; line-height: 1.75; color: rgba(255, 255, 255, .82); }
+.scan-box .sb-form { display: flex; gap: .6rem; flex-wrap: wrap; }
+.scan-box .sb-form input[type=url] { flex: 1 1 16em; min-width: 0; font: inherit; font-size: 1rem; padding: .8em 1em; border: 2px solid transparent; border-radius: 12px; background: #fff; color: #10203a; }
+.scan-box .sb-form input[type=url]:focus { outline: none; border-color: #8fb7ff; box-shadow: 0 0 0 4px rgba(143, 183, 255, .3); }
+.scan-box .sb-form .btn { flex: 0 0 auto; white-space: nowrap; }
+.scan-box .sb-alt { margin: .8rem 0 0; font-size: .82rem; color: rgba(255, 255, 255, .8); }
+.scan-box .sb-alt a, .article-body .scan-box .sb-alt a { color: #fff; text-decoration: underline; }
+.scan-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; padding: .6rem .8rem calc(.6rem + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, .96); box-shadow: 0 -8px 24px -12px rgba(7, 26, 56, .35); transform: translateY(110%); transition: transform .3s ease; }
+.scan-sticky.is-on { transform: none; }
+.scan-sticky .btn { display: block; width: 100%; text-align: center; }
+@media (min-width: 761px) { .scan-sticky { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .scan-sticky { transition: none; } }
