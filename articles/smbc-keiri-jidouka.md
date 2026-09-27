@@ -85,7 +85,7 @@ AI-OCRは、freee会計やマネーフォワードクラウドなどのクラウ
 
 **例外処理や数値の妥当性チェックは、自動化しても人が担う領域として残ります。**この線引きを最初にしておかないと、自動化の範囲を過大に見積もってしまいます。
 
-近い論点を[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)で扱っています。
+近い論点を[請求書照合の自動化と導入4ステップ](/blog/seikyusho-shougou-jidoka/)で扱っています。
 
 <figure><img src="/images/smbc-keiri-jidouka/dekiru-dekinai.png" alt="自動化できる業務・人の判断が残る業務: 自動化できるのは定型的な仕訳・データ入力、請求書のOCR読み取り。人の判断が残るのは例外処理・イレギュラー対応、数値の妥当性チェック" loading="lazy"><figcaption>自動化できる業務・人の判断が残る業務</figcaption></figure>
 

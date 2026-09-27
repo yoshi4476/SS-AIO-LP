@@ -51,7 +51,7 @@ faq:
 
 あわせて[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)もご覧ください。
 
-実際の進め方は[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)で整理しています。
+発注書・納品書・請求書を突き合わせる進め方は、[3点照合（三点突合）を自動化する4ステップ](/blog/seikyusho-shougou-jidoka/)で整理しています。
 
 エクセルでの限界を感じたら、[請求書をAIで自動化する方法](/blog/seikyusho-jidoka-ai/)への切り替えも選択肢になります。
 

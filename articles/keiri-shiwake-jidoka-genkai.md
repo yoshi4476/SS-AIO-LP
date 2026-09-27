@@ -51,7 +51,7 @@ faq:
 
 関連する内容は、[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)で解説しています。
 
-あわせて[請求書照合の自動化｜3点照合の仕組みと導入4ステップ](/blog/seikyusho-shougou-jidoka/)もご覧ください。
+あわせて[請求書照合の自動化と導入4ステップ](/blog/seikyusho-shougou-jidoka/)もご覧ください。
 
 <div class="definition-box"><span class="term">仕訳の自動化とは</span>、取引データを勘定科目に振り分ける作業を、ルール設定と学習機能によってシステムに任せる仕組みを指します。==対応範囲は取引の定型度によって大きく変わり==、すべての仕訳が自動化されるわけではありません。</div>
 
