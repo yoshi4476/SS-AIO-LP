@@ -201,6 +201,13 @@ function leadNotify_(site, type, temp, d, referer) {
   if (body_(d.message)) lines.push('ご相談内容:', body_(d.message), '');
   const detail = leadDetail_(type, d);
   if (detail) lines.push('詳細: ' + detail, '');
+  // 既存のお客様からの連絡は、担当が一目で分かるようにする（ステップメールも送られない）
+  try {
+    const a = d.audit || {};
+    if (excluded_(excludeSet_(), d.email, a.url ? '対象 ' + a.url : '')) {
+      lines.unshift('※ 既存のお客様です（配信除外に登録あり。自動のご案内メールは送りません）', '');
+    }
+  } catch (e) {}
   lines.push('送信元: ' + (referer || '不明'),
              '台帳: ' + book_().getUrl());
 
@@ -314,6 +321,10 @@ function followUp() {
   if (last < 2) return;
   const vals = sh.getRange(2, 1, last - 1, FOLLOW_COL).getValues();
   const now = new Date();
+  // 既存のお客様には送らない。状態を「成約・契約中・既存客」にした行は、先に配信除外へ写す
+  const ex = excludeSet_();
+  const moved = syncClientExcludes_(vals, ex);
+  if (moved) console.log('配信除外に自動追加: ' + moved + '件');
   // 添える資料は AI集客ラボ（AIO）のものだけ。コーポレートや補助金の問い合わせに
   // AIOの動画を送ると、相談した内容と関係のない営業メールになる。
   // サイト列には表示名が入る（未登録ならIDのまま）ので、両方で見る
@@ -330,6 +341,7 @@ function followUp() {
     const email = String(r[6] || '');
     // 担当が対応を始めた（未対応でなくなった）行と、「停止」と返信があった行には送らない
     if (status !== '未対応' || !isEmail_(email)) continue;
+    if (excluded_(ex, email, r[9])) continue;
     // 診断の点数がある行は、点数帯ごとのステップメールで送る（1通で終わらせない）
     const score = scoreOf_(r[9]);
     if (score !== null) {
@@ -369,6 +381,92 @@ function followUp() {
  * 数字は data/first_party_facts.json に登録済みのものと、出典つきの調査の値だけを使う。
  */
 const STEP_DAYS = { low: [1, 4, 10], mid: [2, 7, 14], high: [3, 30] };
+
+/**
+ * 配信の除外（既存のお客様にステップメールや自動フォローを送らない）。
+ *
+ * 行の状態で止めるだけでは足りない。既存のお客様が自社サイトをもう一度診断すると、
+ * 新しい行が「未対応」でできて、案内が始まってしまう。そこで相手そのもので除外する。
+ * 除外に入るのは次の3つ。
+ *   1) 「配信除外」シートに書いたメールアドレスかドメイン（手で足す）
+ *   2) 台帳の状態を「成約」「契約中」「既存客」にした行のメールと、診断したサイトのドメイン（自動で足す）
+ *   3) 「サイト一覧」に登録した受託先のドメイン（自社の7senses.co.jpは除く）
+ * メールのドメインは、会社のドメインのときだけ使う（gmail.com などで除外すると他人まで止まる）。
+ */
+const CLIENT_STATUS = /成約|契約中|既存客/;
+const FREE_MAIL = /^(gmail\.com|googlemail\.com|yahoo\.co\.jp|ymail\.ne\.jp|icloud\.com|me\.com|outlook\.(com|jp)|hotmail\.(com|co\.jp)|live\.(com|jp)|docomo\.ne\.jp|ezweb\.ne\.jp|au\.com|softbank\.ne\.jp|i\.softbank\.jp|nifty\.com|biglobe\.ne\.jp|ocn\.ne\.jp|so-net\.ne\.jp)$/i;
+
+function excludeSheet_() {
+  const ss = book_();
+  let sh = ss.getSheetByName('配信除外');
+  if (!sh) {
+    sh = ss.insertSheet('配信除外');
+    sh.appendRow(['メールアドレスかドメイン', 'メモ', '追加日']);
+  }
+  return sh;
+}
+
+function normHost_(v) {
+  return String(v || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/[\/?#].*$/, '');
+}
+
+function excludeSet_() {
+  const set = { emails: {}, domains: {} };
+  const sh = excludeSheet_();
+  if (sh.getLastRow() >= 2) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 1).getValues().forEach(function (r) {
+      const v = String(r[0] || '').trim().toLowerCase();
+      if (!v) return;
+      if (v.indexOf('@') > 0) set.emails[v] = true; else set.domains[normHost_(v)] = true;
+    });
+  }
+  const site = book_().getSheetByName('サイト一覧');
+  if (site && site.getLastRow() >= 2) {
+    site.getRange(2, 3, site.getLastRow() - 1, 1).getValues().forEach(function (r) {
+      const d = normHost_(r[0]);
+      if (d && !/(^|\.)7senses\.co\.jp$/.test(d)) set.domains[d] = true;
+    });
+  }
+  return set;
+}
+
+/** ドメインの一致（sub.example.co.jp は example.co.jp の登録でも当たる） */
+function domainHit_(set, host) {
+  host = normHost_(host);
+  while (host && host.indexOf('.') > 0) {
+    if (set.domains[host]) return true;
+    host = host.slice(host.indexOf('.') + 1);
+  }
+  return false;
+}
+
+function excluded_(set, email, detail) {
+  email = String(email || '').trim().toLowerCase();
+  if (set.emails[email]) return true;
+  const ed = email.split('@')[1] || '';
+  if (ed && !FREE_MAIL.test(ed) && domainHit_(set, ed)) return true;
+  const url = (String(detail || '').match(/対象 (https?:\/\/\S+)/) || [])[1];
+  return !!(url && domainHit_(set, url));
+}
+
+/** 状態を「成約・契約中・既存客」にした行を、配信除外へ自動で写す（二重には足さない） */
+function syncClientExcludes_(vals, set) {
+  const sh = excludeSheet_();
+  const today = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd');
+  let added = 0;
+  vals.forEach(function (r) {
+    if (!CLIENT_STATUS.test(String(r[13] || ''))) return;
+    const email = String(r[6] || '').trim().toLowerCase();
+    const memo = '台帳の状態（' + String(r[13]) + '）から自動追加: ' + String(r[3] || '');
+    if (email && !set.emails[email]) { sh.appendRow([email, memo, today]); set.emails[email] = true; added++; }
+    const ed = email.split('@')[1] || '';
+    if (ed && !FREE_MAIL.test(ed) && !set.domains[ed]) { sh.appendRow([ed, memo, today]); set.domains[ed] = true; added++; }
+    const url = (String(r[9] || '').match(/対象 (https?:\/\/\S+)/) || [])[1];
+    const h = normHost_(url);
+    if (h && !set.domains[h]) { sh.appendRow([h, memo, today]); set.domains[h] = true; added++; }
+  });
+  return added;
+}
 
 /** 詳細欄から最新の点数を取り出す（「総合 54/100」）。無ければ null */
 function scoreOf_(detail) {
