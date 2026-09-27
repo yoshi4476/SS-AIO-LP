@@ -22,6 +22,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
 /* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/lp-v2.css?v=2">
 <link rel="stylesheet" href="/css/style.css?v=44a2a092">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=dbc2eda1"></script>
@@ -35,7 +36,9 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
    "url": "https://ai.7senses.co.jp/",
    "inLanguage": "ja",
    "description": "AIO・LLMO・SEO・MEOの実践メディア",
-   "publisher": {"@id": "https://ai.7senses.co.jp/#org"}
+   "publisher": {
+    "@id": "https://ai.7senses.co.jp/#org"
+   }
   },
   {
    "@type": "Organization",
@@ -43,12 +46,12 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
    "name": "セブンセンシズ株式会社",
    "url": "https://corp.7senses.co.jp/",
    "sameAs": [
-        "https://corp.7senses.co.jp/",
-        "https://lp.7senses.co.jp/",
-        "https://www.7senses.co.jp/",
-        "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
-        "https://alarmbox.jp/companyinfo/entities/3120001227825"
-      ],
+    "https://corp.7senses.co.jp/",
+    "https://lp.7senses.co.jp/",
+    "https://www.7senses.co.jp/",
+    "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+    "https://alarmbox.jp/companyinfo/entities/3120001227825"
+   ],
    "address": {
     "@type": "PostalAddress",
     "postalCode": "537-0003",
@@ -56,23 +59,29 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     "addressLocality": "大阪市東成区",
     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
    }
-  },
-  {
-   "@type": "DefinedTermSet",
-   "@id": "https://ai.7senses.co.jp/#glossary",
-   "name": "AI検索集客の基本用語",
-   "hasDefinedTerm": [
-    {"@type": "DefinedTerm", "name": "AIO", "alternateName": "AI Overview Optimization", "description": "Google検索のAIによる回答（AI Overview）に自社情報が引用されるよう最適化する施策です。"},
-    {"@type": "DefinedTerm", "name": "LLMO", "alternateName": "Large Language Model Optimization", "description": "ChatGPTやPerplexity等のAIチャットの回答で自社が引用・言及されるための最適化施策です。"},
-    {"@type": "DefinedTerm", "name": "SEO", "alternateName": "Search Engine Optimization", "description": "検索結果で上位表示されるための最適化施策。AI引用の前提条件となる土台です。"},
-    {"@type": "DefinedTerm", "name": "MEO", "alternateName": "Map Engine Optimization", "description": "Googleマップの検索結果で上位表示され、店舗が選ばれるための最適化施策です。"}
-   ]
   }
  ]
 }
 </script>
+<style>
+/* トップの新しい区画（業種のチップ・一次データのカード・最後の診断欄） */
+.ind-chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.ind-chip{display:inline-flex;align-items:center;padding:.75em 1.3em;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--text);font-weight:700;font-size:.95rem;text-decoration:none;transition:border-color .2s,color .2s}
+.ind-chip:hover{border-color:var(--blue);color:var(--blue)}
+.ind-chip.ind-all{background:var(--navy);border-color:var(--navy);color:#fff}
+.data-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:1rem}
+.data-card{display:grid;gap:.4rem;padding:1.2rem 1.3rem;border-radius:16px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--text);transition:transform .2s,box-shadow .2s}
+.data-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px -20px rgba(11,36,71,.5)}
+.data-card .dc-k{font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--blue)}
+.data-card .dc-t{font-weight:900;line-height:1.55}
+.data-card .dc-s{font-size:.78rem;color:var(--muted)}
+.top-final-scan{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;max-width:620px;margin:1.4rem auto .8rem}
+.top-final-scan input{flex:1 1 18em;min-width:0;font:inherit;font-size:1rem;padding:.85em 1em;border:2px solid transparent;border-radius:12px}
+.top-final-scan input:focus{outline:none;border-color:#8fb7ff}
+.lx-hero form.lx-form{max-width:560px}
+</style>
 </head>
-<body class="mv-page">
+<body class="home">
 
 <header class="site-header">
   <div class="inner">
@@ -95,66 +104,94 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </header>
 
-<!-- メインビジュアル: 写真は style.css の --mv-photo を指定すると背景に入る -->
-<div class="mv" data-area="メインビジュアル" data-area-id="mv">
-  <div class="mv-grid-lines" aria-hidden="true"></div>
-  <div class="mv-inner">
-    <div class="mv-copy">
-      <h1 class="mv-vert"><em><span class="tcy">AI</span>検索</em>に、<br>選ばれる集客へ。</h1>
-      <span class="mv-rule" aria-hidden="true"><i></i><span>Cited by AI</span></span>
+<!-- 冒頭（その場で自社を測れる入口が先。フォームはLPへ渡し、LPで自動的に診断が始まる） -->
+<section class="lx-hero" data-area="メインビジュアル" data-area-id="mv">
+  <div class="lx-wrap lx-hero-grid">
+    <div>
+      <ul class="lx-kicker"><li>AI集客ラボ</li><li>セブンセンシズ株式会社</li></ul>
+      <h1 class="lx-h1">AIと検索に、<br><em>選ばれる会社</em>へ。</h1>
+      <p class="lx-lead">お客様は、検索する前にAIに聞くようになりました。AIの答えに出てくるのは、<strong>読める状態のサイトに、その会社にしか無い事実が書いてある会社</strong>です。まず、御社のサイトがAIと検索に読まれているかを30秒で確かめてください。</p>
+      <form class="lx-form" action="/lp/" method="get">
+        <input type="hidden" name="src" value="top_hero">
+        <label>ホームページのURL
+          <input type="url" name="check" inputmode="url" placeholder="https://example.co.jp" autocomplete="url" required>
+        </label>
+        <button type="submit" class="lx-go" data-cta="top_hero_scan">30秒で無料診断する</button>
+        <p class="lx-micro"><span>入力はURLだけ</span><span>登録不要</span><span>営業電話なし</span></p>
+      </form>
+      <p class="lx-alt">話を聞いてから決めたい方は <a href="/lp/#form" data-cta="top_hero_consult">無料相談</a> ／ まず読みたい方は <a href="#latest" data-cta="top_hero_read">新着記事</a></p>
     </div>
-    <div class="mv-foot">
-      <div>
-        <p class="mv-lead">米国では検索の<strong>58.5%</strong>がクリックされずに終わります（SparkToro調査）。これからの集客は「検索順位」に加えて<strong>AIの回答に引用されるか</strong>で決まります。その実務を、集客支援の現場から発信します。</p>
-        <div class="mv-actions">
-          <a class="btn btn-primary" href="/lp/" data-cta="top_mv_lp">無料の現状分析を申し込む <span class="arw">→</span></a>
-          <a class="btn btn-ghost-light" href="/site-audit/" data-cta="top_mv_audit">サイトを無料で採点する</a>
-        </div>
-      </div>
-      <a class="mv-scroll" href="#figures"><b>↓</b>Scroll</a>
-    </div>
-  </div>
-</div>
-
-<!-- 実績の数字 -->
-<section class="flat-sec alt" id="figures">
-  <div class="section" style="padding-top:clamp(2.4rem,5vw,4rem);padding-bottom:clamp(2.4rem,5vw,4rem);">
-    <div class="figure-band">
-      <div><div class="num">3,200<small>店舗以上</small></div><div class="cap">MEO集客支援「G-ran」の通算運用実績。現場で見てきた数字だけを記事にします</div></div>
-      <div><div class="num">4<small>領域</small></div><div class="cap">AIO・LLMO・SEO・MEO。分断せず1つの戦略として設計します</div></div>
-      <div><div class="num">58.5<small>%</small></div><div class="cap">米国でクリックされずに終わる検索の割合（SparkToro調査）</div></div>
-      <div><div class="num">0<small>円</small></div><div class="cap">ご相談と現状分析レポート。しつこい営業はいたしません</div></div>
+    <div class="lx-console" aria-label="診断で測る14項目">
+      <div class="lx-console-head"><b>この14項目を測ります</b><small>100点満点</small></div>
+      <div class="lx-group"><h3>AIが入れるか<span>26点</span></h3><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーを拒否していない（robots.txt）</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーが入口で弾かれていない（CDN・WAF）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>常時SSL（HTTPS）</span><span class="pt">6点</span></li></ul></div><div class="lx-group"><h3>検索に出るか<span>40点</span></h3><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>検索に出さない設定（noindex）になっていない</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>タイトル（15〜45字）</span><span class="pt">10点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>説明文（メタディスクリプション・60〜160字）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>正規URLの指定（canonical）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>スマホ表示（viewport）</span><span class="pt">4点</span></li></ul></div><div class="lx-group"><h3>内容を読み取れるか<span>32点</span></h3><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>見出しH1がページに1つ</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>会社情報（電話番号・所在地）の記載</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>構造化データ（JSON-LD）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>画像の代替テキスト（alt・80%以上）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>SNS・チャット共有時の表示（OGP）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>llms.txt（参考）</span><span class="pt">2点</span></li></ul></div>
+      <p class="lx-console-foot">結果はその場で表示。直す順番と、今日できる修正も出ます。</p>
     </div>
   </div>
 </section>
 
-<!-- なぜ今か -->
-<section class="flat-sec" data-area="なぜ今か" data-area-id="whynow">
-  <div class="section" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:center;">
-    <div class="section-head reveal" style="margin-bottom:0;">
-      <span class="en">Vision</span>
-      <h2>検索は「探す」から<br>「AIに聞く」へ</h2>
-      <p class="sub">検索結果の最上部をAIの回答が占め、クリックせずに答えを得る行動が広がっています。これからの集客は「検索順位」に加えて「<strong>AIの回答に引用されるか</strong>」で決まります。</p>
+<!-- 実績の帯（data/first_party_facts.json の検証済みの数字だけ。期間を添える） -->
+<div class="lx-proof" aria-label="実績">
+  <ul>
+    <li><span class="n">3,200<small>店舗以上</small></span><span class="l">MEO運用の実績</span><span class="s">店舗集客「G-ran」通算・2026年7月時点</span></li>
+    <li><span class="n">50<small>社以上</small></span><span class="l">導入を支援</span><span class="s">2020年3月の創業から2026年9月まで・のべ</span></li>
+    <li><span class="n">15<small>件中</small> 0<small>件</small></span><span class="l">AIO運用の3か月以内の解約</span><span class="s">2026年5月〜9月に契約したAIO運用</span></li>
+    <li><span class="n">74<small>件</small></span><span class="l">SEO運用のご契約</span><span class="s">2023年5月〜2026年9月</span></li>
+  </ul>
+</div>
+
+<!-- 業種から探す（読者が自分の業種を選べば、その業種の記事と質問にまとめて届く） -->
+<section class="section" data-area="業種から探す" data-area-id="industry">
+  <div class="section-head reveal">
+    <span class="en">Industry</span>
+    <h2>業種から探す</h2>
+    <p class="sub">業種ごとに、AIや検索で聞かれている質問と、その答え方をまとめています。</p>
+  </div>
+  <div class="ind-chips reveal"><a class="ind-chip" href="/industry/shika/" data-cta="top_industry_shika">歯科医院</a><a class="ind-chip" href="/industry/seikotsuin/" data-cta="top_industry_seikotsuin">整骨院・接骨院</a><a class="ind-chip" href="/industry/clinic/" data-cta="top_industry_clinic">クリニック・医療機関</a><a class="ind-chip" href="/industry/fudosan/" data-cta="top_industry_fudosan">不動産</a><a class="ind-chip" href="/industry/koumuten/" data-cta="top_industry_koumuten">工務店・注文住宅</a><a class="ind-chip" href="/industry/shigyou/" data-cta="top_industry_shigyou">士業</a><a class="ind-chip" href="/industry/btob/" data-cta="top_industry_btob">BtoB・法人向けサービス</a><a class="ind-chip ind-all" href="/industry/" data-cta="top_industry_all">すべての業種 →</a></div>
+</section>
+
+<!-- 新着記事 -->
+<section class="section" id="latest" data-area="新着記事" data-area-id="latest">
+  <div class="section-head reveal">
+    <span class="en">Articles</span>
+    <h2>新着記事</h2>
+    <p class="sub">毎日更新しています。すべて、当社の運用の現場で確かめたことだけを書いています。</p>
+  </div>
+  <!-- 新着記事リスト: Phase 6（公開エージェント）が記事公開時にここへ <li> を追記する -->
+  <ul class="post-list">
+    <li class="cat-aio"><a href="/aio/koumuten-chumon-jutaku-aio/"><span class="thumb"><img src="/images/koumuten-chumon-jutaku-aio/eyecatch.png" alt="工務店・注文住宅のAIO対策｜AIに候補として挙がる4つの書き方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-25">2026.09.25</time><h3>工務店・注文住宅のAIO対策｜AIに候補として挙がる4つの書き方<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/zeirishi-houjin-aio/"><span class="thumb"><img src="/images/zeirishi-houjin-aio/eyecatch.png" alt="税理士法人のAIO対策とは？AI検索に引用される5つの準備のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-24">2026.09.24</time><h3>税理士法人のAIO対策とは？AI検索に引用される5つの準備<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-towa/"><span class="thumb"><img src="/images/aio-towa/eyecatch.png" alt="AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-24">2026.09.24</time><h3>AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-taisaku-gutairei/"><span class="thumb"><img src="/images/aio-taisaku-gutairei/eyecatch.png" alt="AIO対策の具体例｜構造別6パターンとNG集のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIO対策の具体例｜構造別6パターンとNG集<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-checker/"><span class="thumb"><img src="/images/aio-checker/eyecatch.png" alt="AIOチェッカーとは？表示と引用を見分ける使い方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIOチェッカーとは？表示と引用を見分ける使い方<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/osaka-meo-aio-kaisha/"><span class="thumb"><img src="/images/osaka-meo-aio-kaisha/eyecatch.png" alt="大阪でMEOとAIOを両方任せられる会社の選び方｜比較4基準のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-22">2026.09.22</time><h3>大阪でMEOとAIOを両方任せられる会社の選び方｜比較4基準<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul>
+  <div class="btn-row" style="justify-content:center;margin-top:2rem;">
+    <a class="btn btn-ghost" href="/blog/">すべての記事を見る <span class="arw">→</span></a>
+    <a class="btn btn-ghost" href="/glossary/">用語集を見る</a>
+  </div>
+</section>
+
+<!-- なぜ今か（概念図ではなく、数えた数字で見せる） -->
+<section class="section" data-area="なぜ今か" data-area-id="whynow">
+  <div class="section-head reveal">
+    <span class="en">Why Now</span>
+    <h2>「質問」で検索する人ほど、先にAIの答えを読んでいます</h2>
+    <p class="sub">お客様がリンクを押す前に、検索結果の上でAIが答えを出す場面が増えました。<strong>選ばれるのは、AIが答えに使える事実が書かれていて、なおかつ上位にいる会社</strong>です。</p>
+  </div>
+  <div class="lx-data-grid">
+    <div class="lx-data reveal">
+      <h3>AIの回答（AI Overview）が出た検索の割合</h3>
+      <p class="sub">5万5,393件の検索を調べた学術調査（2026年3〜4月）</p>
+      <div class="lx-hbar"><span>検索全体</span><div class="track"><div class="fill" style="width:13.7%"></div><span class="val" style="left:13.7%">13.7%</span></div></div>
+      <div class="lx-hbar hl"><span>質問形の検索</span><div class="track"><div class="fill" style="width:64.7%"></div><span class="val" style="left:64.7%">64.7%</span></div></div>
+      <p class="src">出典: arXiv 2605.14021（2026年・55,393クエリ）</p>
     </div>
-    <div class="chart-card reveal" style="margin:0;">
-      <div class="chart-title">「AIが答える検索」の広がりと、集客の分岐（概念図）</div>
-      <div class="chart-sub">従来のクリック流入が緩やかに減る一方、AI引用経由の認知・指名流入という新しい入口が立ち上がる</div>
-      <svg viewBox="0 0 640 260" role="img" aria-label="概念図。従来のクリック流入が緩やかに減少する一方、AI引用経由の流入が新たに立ち上がることを示す2本の折れ線。" class="line-draw">
-        <line x1="52" y1="210" x2="612" y2="210" stroke="#ddd3c2" stroke-width="1.5"/>
-        <line x1="52" y1="210" x2="52" y2="28" stroke="#ddd3c2" stroke-width="1.5"/>
-        <text x="46" y="46" text-anchor="end" class="chart-label">多</text>
-        <text x="46" y="206" text-anchor="end" class="chart-label">少</text>
-        <text x="60" y="232" class="chart-label">2023</text>
-        <text x="320" y="232" text-anchor="middle" class="chart-label">2025</text>
-        <text x="600" y="232" text-anchor="end" class="chart-label">2027（見通し）</text>
-        <path class="line" d="M52 70 C 200 76, 380 108, 612 150" fill="none" stroke="#0d9488" stroke-width="3" stroke-linecap="round"/>
-        <path class="line" d="M52 206 C 240 202, 400 168, 612 84" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="612" cy="150" r="5" fill="#0d9488"/>
-        <circle cx="612" cy="84" r="5" fill="#2563eb"/>
-        <text x="470" y="120" class="chart-value" fill="#0f766e">従来の検索クリック流入</text>
-        <text x="430" y="70" class="chart-value" fill="#1d4ed8">AI引用 → 認知・指名流入</text>
-      </svg>
-      <div class="chart-source">※ 検索行動の変化を示す概念図（イメージ）。自社サイトの実測はGSC生成AIレポート/GA4で計測できます</div>
+    <div class="lx-data reveal reveal-d1">
+      <h3>検索順位ごとのクリック率（当社の実測）</h3>
+      <p class="sub">当社の3サイト・2026年6月23日〜9月20日・表示7,015回</p>
+      <div class="lx-hbar hl"><span>1〜3位</span><div class="track"><div class="fill" style="width:85%"></div><span class="val" style="left:85%">6.28%</span></div></div>
+      <div class="lx-hbar"><span>4〜10位</span><div class="track"><div class="fill" style="width:13.8%"></div><span class="val" style="left:13.8%">1.02%</span></div></div>
+      <p class="src">出典: 当社の一次データ「<a href="/data/kensaku-juni-ctr/">検索順位ごとの実測クリック率</a>」</p>
     </div>
   </div>
 </section>
@@ -200,75 +237,18 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<!-- ここから明るい面。ダークが続くと読み疲れるため、読み物ゾーンは白地にする -->
-<div class="bg-white">
-<!-- 用語ミニ辞典（AIO対応: DefinedTermSet Schemaと対応） -->
-<section class="section">
-  <div class="section-head reveal">
-    <span class="en">Glossary</span>
-    <h2>30秒でわかる、AI検索集客の基本用語</h2>
-    <p class="sub">このメディアで頻出する4つの用語です。まずはここだけ押さえれば記事が読めます。</p>
-  </div>
-  <div class="term-grid">
-    <div class="term-tile cat-aio reveal">
-      <div class="abbr">AIO</div>
-      <span class="full">AI Overview Optimization</span>
-      <p><strong>AIOとは</strong>、Google検索のAIによる回答（AI Overview）に自社情報が引用されるよう最適化する施策です。</p>
+<!-- 自社の一次データ（他社の記事には無い、数えた数字） -->
+<section class="flat-sec alt" data-area="一次データ" data-area-id="data">
+  <div class="section">
+    <div class="section-head reveal">
+      <span class="en">Data</span>
+      <h2>当社が数えた数字を、そのまま公開しています</h2>
+      <p class="sub">AIが答えの根拠に選ぶのは、ほかに無い数字です。当社の運用で集計した数字を、母数と期間つきで公開しています。引用も自由です。</p>
     </div>
-    <div class="term-tile cat-ai reveal reveal-d1">
-      <div class="abbr">LLMO</div>
-      <span class="full">Large Language Model Optimization</span>
-      <p><strong>LLMOとは</strong>、ChatGPTやPerplexity等のAIチャットの回答で自社が引用・言及されるための最適化施策です。</p>
-    </div>
-    <div class="term-tile cat-seo reveal reveal-d2">
-      <div class="abbr">SEO</div>
-      <span class="full">Search Engine Optimization</span>
-      <p><strong>SEOとは</strong>、検索結果で上位表示されるための最適化施策です。AI引用の前提条件となる土台です。</p>
-    </div>
-    <div class="term-tile cat-meo reveal reveal-d3">
-      <div class="abbr">MEO</div>
-      <span class="full">Map Engine Optimization</span>
-      <p><strong>MEOとは</strong>、Googleマップの検索結果で上位表示され、店舗が選ばれるための最適化施策です。</p>
-    </div>
+    <div class="data-cards"><a class="data-card reveal" href="/data/aio-junni-madeno-tsukisuu/"><span class="dc-k">一次データ</span><span class="dc-t">AIO運用を始めてから検索順位が上がるまでの月数</span><span class="dc-s">2026-05〜2026-08・母数 10件</span></a><a class="data-card reveal" href="/data/kensaku-juni-ctr/"><span class="dc-k">一次データ</span><span class="dc-t">検索順位ごとの実測クリック率（表示7,015回の集計）</span><span class="dc-s">2026-06-23〜2026-09-20・母数 7,015回（表示）</span></a><a class="data-card reveal" href="/data/kiji-hyouji-madeno-nissuu/"><span class="dc-k">一次データ</span><span class="dc-t">記事を公開してから検索結果に出るまでの日数（372本の集計）</span><span class="dc-s">2026-06-23〜2026-09-20・母数 372本</span></a><a class="data-card reveal" href="/data/meo-kouka-madeno-tsukisuu/"><span class="dc-k">一次データ</span><span class="dc-t">MEO運用を始めてから順位が上がるまでの月数</span><span class="dc-s">2023-10〜2026-08・母数 800店舗</span></a></div>
+    <div class="btn-row" style="justify-content:center;margin-top:1.6rem;"><a class="btn btn-ghost" href="/data/" data-cta="top_data_all">一次データをすべて見る <span class="arw">→</span></a></div>
   </div>
 </section>
-
-<!-- 新着記事 -->
-<section class="section" style="padding-top:0;" data-area="新着記事" data-area-id="latest">
-  <div class="section-head reveal">
-    <span class="en">News</span>
-    <h2>新着記事</h2>
-  </div>
-  <!-- 新着記事リスト: Phase 6（公開エージェント）が記事公開時にここへ <li> を追記する -->
-  <ul class="post-list">
-    <li class="cat-aio"><a href="/aio/koumuten-chumon-jutaku-aio/"><span class="thumb"><img src="/images/koumuten-chumon-jutaku-aio/eyecatch.png" alt="工務店・注文住宅のAIO対策｜AIに候補として挙がる4つの書き方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-25">2026.09.25</time><h3>工務店・注文住宅のAIO対策｜AIに候補として挙がる4つの書き方<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/zeirishi-houjin-aio/"><span class="thumb"><img src="/images/zeirishi-houjin-aio/eyecatch.png" alt="税理士法人のAIO対策とは？AI検索に引用される5つの準備のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-24">2026.09.24</time><h3>税理士法人のAIO対策とは？AI検索に引用される5つの準備<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/aio-towa/"><span class="thumb"><img src="/images/aio-towa/eyecatch.png" alt="AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-24">2026.09.24</time><h3>AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/aio-taisaku-gutairei/"><span class="thumb"><img src="/images/aio-taisaku-gutairei/eyecatch.png" alt="AIO対策の具体例｜構造別6パターンとNG集のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIO対策の具体例｜構造別6パターンとNG集<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/aio-checker/"><span class="thumb"><img src="/images/aio-checker/eyecatch.png" alt="AIOチェッカーとは？表示と引用を見分ける使い方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIOチェッカーとは？表示と引用を見分ける使い方<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/osaka-meo-aio-kaisha/"><span class="thumb"><img src="/images/osaka-meo-aio-kaisha/eyecatch.png" alt="大阪でMEOとAIOを両方任せられる会社の選び方｜比較4基準のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-22">2026.09.22</time><h3>大阪でMEOとAIOを両方任せられる会社の選び方｜比較4基準<span class="tag">AIO・LLMO</span></h3></a></li>
-  </ul>
-  <div class="btn-row" style="justify-content:center;margin-top:2rem;">
-    <a class="btn btn-ghost" href="/blog/">すべての記事を見る <span class="arw">→</span></a>
-    <a class="btn btn-ghost" href="/glossary/">用語集を見る</a>
-  </div>
-</section>
-
-<!-- 活用3ステップ（CV導線: 記事→無料診断→無料相談） -->
-<section class="section" style="padding-top:0;">
-  <div class="section-head reveal">
-    <span class="en">How to Use</span>
-    <h2>このメディアの活用ステップ</h2>
-    <p class="sub">読んで終わりにせず、自社の集客改善につなげるための3ステップです。</p>
-  </div>
-  <ol class="flow-list" style="grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));">
-    <li class="reveal"><span class="step-title">記事で基本を押さえる</span><p>まずは<a href="/aio/">AIO・LLMO運用</a>のカテゴリから。用語と全体像がわかります。</p></li>
-    <li class="reveal reveal-d1"><span class="step-title">無料診断で現在地を知る</span><p><a href="/diagnosis/meo/">マップ集客の整備度チェック（30秒）</a>・<a href="/diagnosis/aio/">AI検索の対応度チェック（30秒）</a>（各30秒）と<a href="/site-audit/">サイト採点</a>で、自社の課題が数字でわかります。</p></li>
-    <li class="reveal reveal-d2"><span class="step-title">無料相談で優先順位を知る</span><p><a href="/lp/">無料相談</a>では現状分析レポートを添えて、着手順をご提案します。</p></li>
-  </ol>
-</section>
-</div>
-<!-- ここまで明るい面 -->
 
 <!-- 運営者・監修者 -->
 <section class="flat-sec alt" data-area="監修者" data-area-id="about">
@@ -296,12 +276,16 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<!-- 最終CTA -->
+<!-- 最後（診断と相談の2択。どちらも無料・営業電話なし） -->
 <section class="cta-final" data-area="CTA" data-area-id="cta">
   <h2>「AIに聞いたら、競合が出てきた」<br>——そうなる前に。</h2>
-  <p>いまの自社が、AI検索と地図検索でどう見えているか。現状分析レポートを無料でお渡ししています。</p>
-  <a class="btn btn-primary" href="/lp/" data-cta="top_bottom_lp">無料の現状分析を申し込む（30秒） <span class="arw">→</span></a>
-  <p class="note">入力は3項目・30秒です。2営業日以内にご返信し、営業電話はいたしません。</p>
+  <p>まずは御社のサイトを30秒で測ってください。話を聞きたい方は、無料相談で現状分析レポートをお渡しします。</p>
+  <form class="top-final-scan" action="/lp/" method="get">
+    <input type="hidden" name="src" value="top_bottom">
+    <input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL">
+    <button type="submit" class="btn btn-primary" data-cta="top_bottom_scan">30秒で診断する</button>
+  </form>
+  <p class="note"><a href="/lp/#form" data-cta="top_bottom_consult" style="color:inherit;text-decoration:underline;">無料相談を申し込む</a>（入力30秒・2営業日以内にご連絡・営業電話なし）／ <a href="/download/" style="color:inherit;text-decoration:underline;">資料をダウンロード</a></p>
 </section>
 
 <footer class="site-footer">
