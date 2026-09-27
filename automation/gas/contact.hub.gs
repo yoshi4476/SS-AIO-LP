@@ -140,6 +140,13 @@ function leadSave_(site, type, temp, d, referer) {
 
 /** 診断・監査の結果を1つの文字列にまとめる（列を増やさず後から読める形にする） */
 function leadDetail_(type, d) {
+  // パートナー経由（/lp/?ref=ID）なら、どの種別でも紹介元を先頭に書く
+  const base = leadDetailBase_(type, d);
+  const ref = clean_(d.ref);
+  return ref && base.indexOf('紹介元') < 0 ? ('紹介元 ' + ref + (base ? ' / ' + base : '')) : base;
+}
+
+function leadDetailBase_(type, d) {
   if (type === 'diagnosis' && d.diagnosis) {
     const g = d.diagnosis;
     const parts = [DIAG_KIND_LABELS[g.kind] || g.kind || '診断'];
@@ -157,7 +164,8 @@ function leadDetail_(type, d) {
             a.grade ? '判定 ' + a.grade : '', n ? '未対応 ' + n + '項目' : ''].filter(String).join(' / ');
   }
   const known = ['type', 'site', 'name', 'company', 'email', 'tel', 'phone',
-                 'message', 'body', 'referer', 'website', 'ts', 'formKey'];
+                 'message', 'body', 'referer', 'website', 'ts', 'formKey', 'ref',
+                 'audit_url', 'audit_score', 'audit_grade', 'audit_fixes'];
   return Object.keys(d)
     .filter(function (k) { return known.indexOf(k) < 0 && k.charAt(0) !== '_'; })
     .map(function (k) { return k + ': ' + JSON.stringify(d[k]); }).join(' / ');
@@ -320,8 +328,16 @@ function followUp() {
     const status = String(r[13] || '');
     const done = String(r[FOLLOW_COL - 1] || '');
     const email = String(r[6] || '');
+    // 担当が対応を始めた（未対応でなくなった）行と、「停止」と返信があった行には送らない
+    if (status !== '未対応' || !isEmail_(email)) continue;
+    // 診断の点数がある行は、点数帯ごとのステップメールで送る（1通で終わらせない）
+    const score = scoreOf_(r[9]);
+    if (score !== null) {
+      if (stepMail_(sh, i + 2, r, score, now)) sent++;
+      continue;
+    }
     const wait = FOLLOW_AFTER_DAYS[temp];
-    if (!wait || done || status !== '未対応' || !isEmail_(email)) continue;
+    if (!wait || done) continue;
     if ((now - at) / 86400000 < wait || (now - at) / 86400000 > wait + 7) continue;
     const name = String(r[4] || '') || 'ご担当者';
     const body = [name + ' 様', '',
@@ -342,6 +358,163 @@ function followUp() {
     }
   }
   console.log('フォロー送信: ' + sent + '件');
+}
+
+/**
+ * 診断の点数帯ごとのステップメール（followUp から呼ぶ）。
+ *
+ * 全員に同じ文面を送ると、点数が高い会社には押し売りに、低い会社には遠回りになる。
+ * 帯ごとに送る日と中身を変える。送ったら15列目に「stepN 日付」と書き、次の段へ進む。
+ * 担当が対応を始めた（状態が未対応でなくなった）行と、「停止」と返信があった行には送らない。
+ * 数字は data/first_party_facts.json に登録済みのものと、出典つきの調査の値だけを使う。
+ */
+const STEP_DAYS = { low: [1, 4, 10], mid: [2, 7, 14], high: [3, 30] };
+
+/** 詳細欄から最新の点数を取り出す（「総合 54/100」）。無ければ null */
+function scoreOf_(detail) {
+  const m = String(detail || '').match(/総合 (\d{1,3})\/100/g);
+  return m ? Number(m[m.length - 1].replace(/\D+/g, ' ').trim().split(' ')[0]) : null;
+}
+
+function stepMail_(sh, row, r, score, now) {
+  const band = score < 65 ? 'low' : score < 85 ? 'mid' : 'high';
+  const done = String(r[FOLLOW_COL - 1] || '');
+  // 以前の1通だけのフォローを送った行は、そこで終わっている
+  if (done && done.indexOf('step') !== 0) return false;
+  const k = done ? Number((done.match(/^step(\d+)/) || [0, 0])[1]) : 0;
+  const days = STEP_DAYS[band];
+  if (k >= days.length) return false;
+  const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+  const age = (now - at) / 86400000;
+  if (age < days[k] || age > days[k] + 7) return false;
+  // 前の1通から最低2日は空ける（1通目が遅れて出たとき、翌日すぐ2通目が出ないように）
+  const prev = (done.match(/(\d{4}-\d{2}-\d{2})/) || [])[1];
+  if (prev && (now - new Date(prev + 'T00:00:00+09:00')) / 86400000 < 2) return false;
+  const name = String(r[4] || '') || 'ご担当者';
+  const company = String(r[3] || '');
+  const url = (String(r[9] || '').match(/対象 (https?:\/\/\S+)/) || [])[1] || '';
+  const mail = stepText_(band, k, { name: name, company: company, score: score, url: url });
+  const foot = ['', '─────────────',
+    'このご案内が不要な場合は、このメールに「停止」とだけご返信ください。以降はお送りしません。', '',
+    'セブンセンシズ株式会社（AI集客ラボ）',
+    '〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902',
+    'TEL 06-4305-7547 / info.ai@7senses.co.jp', ''].join('\n');
+  try {
+    MailApp.sendEmail({ to: String(r[6]), subject: mail.subject, body: mail.body + foot,
+                        name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
+    sh.getRange(row, FOLLOW_COL).setValue('step' + (k + 1) + ' ' +
+      Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy-MM-dd') + ' ' + band);
+    return true;
+  } catch (e) {
+    console.error('ステップメールの送信に失敗: ' + e);
+    return false;
+  }
+}
+
+/** 帯（low/mid/high）と段（0始まり）ごとの件名と本文 */
+function stepText_(band, k, v) {
+  const who = (v.company ? v.company + ' ' : '') + v.name + ' 様';
+  const consult = ['30分のオンラインで、診断結果の読み方と直す順番をご説明します（無料・営業電話なし）。',
+    'ご都合の良い曜日と時間帯を、このメールにご返信ください。担当が合わせてご連絡します。'];
+  const facts = ['・店舗集客「G-ran」で、通算3,200店舗以上のマップ集客を運用してきました（2026年7月時点）',
+    '・2026年5月〜9月に契約したAIO運用15件のうち、3か月以内の解約は0件です',
+    '・2026年5月にAIO運用を始めた10件は、10件すべてが3か月以内に主要な検索語の平均順位が上がりました（2026年5月〜8月の集計・わずかな上昇も含みます）'];
+  const why = ['・「質問」の形で検索された場合、AIの回答（AI Overview）が出る割合は64.7%でした（全体では13.7%。arXiv 2605.14021・55,393件の調査）',
+    '・当社3サイトの実測では、1〜3位のクリック率は6.28%、4〜10位は1.02%でした（2026年6月23日〜9月20日・表示7,015回）'];
+  const T = {
+    low: [
+      { s: '【' + (v.company || '診断結果') + '】読まれない原因の直し方（' + v.score + '点）',
+        b: [who, '', '先日はサイト診断をご利用いただきありがとうございます。', '',
+            '御社のサイトは ' + v.score + '点でした。点数の大きい未対応の項目から直すと、少ない手間で点数が戻ります。',
+            '直す項目と直し方は、診断直後のメールに一覧でお送りしています。', '',
+            'ご自身で直すのが難しい項目があれば、そのままご相談ください。'].concat(consult) },
+      { s: '読めない状態のままだと、候補に入らない理由',
+        b: [who, '', 'AIの回答にも検索結果にも、読めないページは出てきません。数字で見ると、差ははっきりしています。', ''].concat(why)
+            .concat(['', '診断で見つかった項目を直すことが、最初の一歩です。'], consult) },
+      { s: '最後のご案内：直す順番のご相談について',
+        b: [who, '', 'サイト診断のご案内は、今回で最後です。', '', '当社の実績（数字は集計の期間つき）:'].concat(facts)
+            .concat(['', '料金は、現状を見たうえで必要な施策だけを組み合わせてお見積りします。ご契約前に費用はかかりません。'], consult) },
+    ],
+    mid: [
+      { s: '【' + (v.company || '診断結果') + '】あと一歩の項目と、その先の差（' + v.score + '点）',
+        b: [who, '', '先日はサイト診断をご利用いただきありがとうございます。', '',
+            '御社のサイトは ' + v.score + '点で、土台はあと一歩です。残りの項目を直したあとの差は、',
+            '「その会社にしか書けない事実」（料金の決まり方・対応エリア・実績の数字）が文字で書かれているかで付きます。', ''].concat(consult) },
+      { s: '当社の実績（集計の期間つき）',
+        b: [who, '', 'ご判断の材料として、当社の数字をお送りします。', ''].concat(facts).concat(['', ''], consult) },
+      { s: '最後のご案内：御社の場合の進め方',
+        b: [who, '', 'サイト診断のご案内は、今回で最後です。', '', ''].concat(why)
+            .concat(['', '御社の場合に何から手をつけるかを、30分でご説明できます。'], consult) },
+    ],
+    high: [
+      { s: '【' + (v.company || '診断結果') + '】土台は整っています（' + v.score + '点）',
+        b: [who, '', '先日はサイト診断をご利用いただきありがとうございます。', '',
+            '御社のサイトは ' + v.score + '点で、技術の土台は整っています。急いで何かを頼む必要はありません。', '',
+            'この先の差は、AIや検索が答えに使える「その会社にしか無い事実」で付きます。',
+            '当社は自社の実測データを公開しています。書き方の参考にどうぞ。', '  https://ai.7senses.co.jp/data/', '',
+            '気になったときは、いつでもこのメールにご返信ください。'] },
+      { s: '1か月たちました：もう一度測ってみませんか',
+        b: [who, '', 'サイト診断から1か月がたちました。ページを更新すると、点数も変わります。',
+            v.url ? 'このリンクから、同じURLで30秒で測り直せます。' : 'このページから、30秒で測り直せます。',
+            '  https://ai.7senses.co.jp/lp/' + (v.url ? '?check=' + encodeURIComponent(v.url) + '#scan' : ''), '',
+            'ご案内は今回で最後です。'] },
+    ],
+  };
+  const m = T[band][k];
+  return { subject: m.s, body: m.b.join('\n') };
+}
+
+/**
+ * 診断の記録（同業平均のため）。LPとサイトチェックの診断のたびに audit.js が送る。
+ * 残すのは業種・点数・紹介元と、サイトを特定できない形に変換した値（ハッシュ）だけ。
+ */
+function scanLog_(body) {
+  const ss = book_();
+  let sh = ss.getSheetByName('診断ログ');
+  if (!sh) {
+    sh = ss.insertSheet('診断ログ');
+    sh.appendRow(['日時', '業種', 'サイト（ハッシュ）', '点数', '紹介元']);
+  }
+  const score = Number(body.score);
+  if (!(score >= 0 && score <= 100)) return { ok: false, error: 'score' };
+  sh.appendRow([new Date(), clean_(body.industry).slice(0, 30), clean_(body.host).slice(0, 64), score,
+                clean_(body.ref).slice(0, 40)]);
+  return { ok: true };
+}
+
+/**
+ * 業種ごとの平均点（同じサイトは最新の1回だけ数える）。10社未満の業種は出さない。
+ * 公開の入口から呼ばれるので、返すのは集計値だけ（個々の行は返さない）。
+ */
+const BENCH_MIN = 10;
+function scanBench_() {
+  const sh = book_().getSheetByName('診断ログ');
+  if (!sh || sh.getLastRow() < 2) return { ok: true, industries: {}, since: '' };
+  const vals = sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues();
+  const latest = {};
+  let since = null;
+  vals.forEach(function (r) {
+    const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+    if (!since || at < since) since = at;
+    const key = String(r[2] || '');
+    if (!key) return;
+    if (!latest[key] || latest[key].at < at) latest[key] = { at: at, ind: String(r[1] || ''), score: Number(r[3]) };
+  });
+  const agg = {};
+  Object.keys(latest).forEach(function (k) {
+    const x = latest[k];
+    // 業種を選ばずに診断した分は、全体の平均にだけ数える
+    [x.ind, '全体'].filter(String).forEach(function (g) {
+      agg[g] = agg[g] || { n: 0, sum: 0 };
+      agg[g].n++; agg[g].sum += x.score;
+    });
+  });
+  const out = {};
+  Object.keys(agg).forEach(function (g) {
+    if (agg[g].n >= BENCH_MIN) out[g] = { n: agg[g].n, avg: Math.round(agg[g].sum / agg[g].n) };
+  });
+  return { ok: true, industries: out, min: BENCH_MIN,
+           since: since ? Utilities.formatDate(since, 'Asia/Tokyo', 'yyyy-MM-dd') : '' };
 }
 
 function installFollowUpTrigger() {

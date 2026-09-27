@@ -31,7 +31,7 @@ async function get(url, limit = 400000, ua = UA) {
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-export async function onRequestPost({ request }) {
+export async function onRequestPost({ request, env, waitUntil }) {
   let body;
   try {
     body = await request.json();
@@ -136,6 +136,21 @@ export async function onRequestPost({ request }) {
               : score >= 85 ? "A（土台は整っています）" : score >= 65 ? "B（あと一歩）"
               : score >= 45 ? "C（重要項目に抜けあり）" : "D（基礎から整備が必要）";
   const safe = checks.map((c) => ({ ...c, detail: esc(c.detail) }));
+  // 同業平均のために記録する（業種・点数・紹介元と、サイトを特定できない形に変換した値だけ）。
+  // 応答は待たせない。記録に失敗しても診断の結果はそのまま返す
+  if (env && env.GAS_WEBHOOK_URL && waitUntil) {
+    const INDUSTRIES = ["クリニック・歯科医院", "不動産", "工務店・リフォーム", "士業・コンサル", "BtoB・IT", "店舗・飲食・美容", "その他"];
+    const industry = INDUSTRIES.includes(body.industry) ? body.industry : "";
+    const ref = /^[A-Za-z0-9_-]{1,40}$/.test(String(body.ref || "")) ? body.ref : "";
+    waitUntil((async () => {
+      try {
+        const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("ss-bench:" + new URL(page.finalUrl).hostname));
+        const hostHash = [...new Uint8Array(digest)].slice(0, 16).map((b) => b.toString(16).padStart(2, "0")).join("");
+        await fetch(env.GAS_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "scan_log", secret: env.GAS_SHARED_SECRET || "", industry, host: hostHash, score, ref }) });
+      } catch (_) {}
+    })());
+  }
   return json({ url: esc(page.finalUrl), score, grade, critical, checks: safe, measured_at: new Date().toISOString() });
 }
 

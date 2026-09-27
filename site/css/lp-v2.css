@@ -247,3 +247,5 @@
   .lx-item.is-scan .mk { animation: none; }
   .lx-bar i::after, .lx-go { transition: none; }
 }
+.lx-bench { margin: .8rem 0 0; font-size: .86rem; font-weight: 700; color: var(--lx-navy); }
+.lx-bench:empty { display: none; }

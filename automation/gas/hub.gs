@@ -192,6 +192,8 @@ function doGet(e) {
       case 'next_kw':  return json_(nextKw_(p.site));
       case 'all_kw':   return json_({ ok: true, keywords: allKw_() });
       case 'kw_status': return json_(kwStatus_(p.site));
+      // 同業平均（集計値だけ。LPの診断結果に「同業の平均」を出すため /api/bench が呼ぶ）
+      case 'scan_bench': return json_(scanBench_());
       default:
         return json_({ ok: true, message: 'セブンセンシズ 自動化管制塔は正常に稼働しています' });
     }
@@ -241,6 +243,8 @@ function doPost(e) {
       // サイトの登録。setup_from_sheet.py が呼ぶ。
       // 手で書かせると、GA4のIDだけ空のままKPIが毎朝0で埋まる
       case 'register_site': return json_(registerSite_(body));
+      // 診断の記録（業種・点数・ハッシュ化したサイト・紹介元）。audit.js が合言葉つきで送る
+      case 'scan_log':    return json_(scanLog_(body));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
       default:            return json_(form_(body));

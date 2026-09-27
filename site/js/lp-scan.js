@@ -93,6 +93,18 @@
       requestAnimationFrame(function () { setTimeout(function () { i.style.setProperty("--w", (all ? got / all * 100 : 0) + "%"); }, 60); });
     });
     info.appendChild(bars);
+    // 同業の平均（10社分たまった業種だけ。たまる前は何も出さない）
+    var bench = el("p", "lx-bench");
+    info.appendChild(bench);
+    fetch("/api/bench").then(function (r) { return r.json(); }).then(function (b) {
+      var g = (b && b.industries) || {};
+      var hit = (industry && g[industry]) ? [industry, g[industry]] : (g["全体"] ? ["診断した全社", g["全体"]] : null);
+      if (!hit) return;
+      var diff = d.score - hit[1].avg;
+      bench.textContent = (hit[0] === "診断した全社" ? "診断した全社" : "同業（" + hit[0] + "）") + "の平均 " + hit[1].avg + "点（" +
+        hit[1].n + "社・" + (b.since || "").replace(/-/g, "/") + "以降の診断）。御社は" +
+        (diff === 0 ? "平均と同じです。" : "平均より" + Math.abs(diff) + "点" + (diff > 0 ? "高い" : "低い") + "です。");
+    }).catch(function () {});
     top.appendChild(ring); top.appendChild(info);
     box.appendChild(top);
 
@@ -227,7 +239,7 @@
     btn.disabled = true; btn.textContent = "計測しています…";
     startScan();
     ev("lp_scan_start");
-    fetch("/api/audit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: url }) })
+    fetch("/api/audit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: url, industry: ind.value, ref: window.ssRef ? window.ssRef() : "" }) })
       .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "診断できませんでした"); return j; }); })
       .then(function (d) {
         stopScan(); paint(d.checks || []);

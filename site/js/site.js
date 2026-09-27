@@ -571,3 +571,33 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
     if (e.key === "ArrowRight") { go(1); e.preventDefault(); }
   });
 });
+
+/* パートナー経由の紹介元（?ref=）
+ *
+ * 制作会社・士業・商工会議所などに /lp/?ref=<ID> を配る。来た人の紹介元を90日覚え、
+ * どのフォームから送っても ref として一緒に送る（台帳と通知メールに載る）。
+ * 最初に来た経路を優先する（あとから別の紹介で来ても上書きしない）。 */
+(function () {
+  var KEY = "ss_ref", DAYS = 90;
+  function read() {
+    try {
+      var v = JSON.parse(localStorage.getItem(KEY) || "null");
+      return v && Date.now() - v.at < DAYS * 864e5 ? v.ref : "";
+    } catch (e) { return ""; }
+  }
+  var q = (new URLSearchParams(location.search).get("ref") || "").trim();
+  if (/^[A-Za-z0-9_-]{1,40}$/.test(q) && !read()) {
+    try { localStorage.setItem(KEY, JSON.stringify({ ref: q, at: Date.now() })); } catch (e) {}
+  }
+  window.ssRef = read;
+  // 送信の直前（各フォームの処理より先）に、隠し項目として足す
+  document.addEventListener("submit", function (e) {
+    var f = e.target, r = read();
+    if (!r || !f || !f.querySelector || f.querySelector('input[name="ref"]')) return;
+    var act = f.getAttribute("action") || "";
+    if (act.indexOf("/api/lead") < 0 && !f.classList.contains("lc-form") && !(f.closest && f.closest(".lx-gate"))) return;
+    var i = document.createElement("input");
+    i.type = "hidden"; i.name = "ref"; i.value = r;
+    f.appendChild(i);
+  }, true);
+})();
