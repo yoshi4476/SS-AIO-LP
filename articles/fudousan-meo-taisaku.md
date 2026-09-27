@@ -90,7 +90,7 @@ MEOの業種を問わない基本手順は[MEO対策のやり方7ステップ](/
 
 不動産業のMEO対策は、基本情報・カテゴリの土台整備と、口コミ・投稿の継続運用の5手順で進めます。
 
-近い論点を[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)で扱っています。
+地図検索とあわせて自社サイトも整えるなら、[不動産のSEO対策](/seo/fudousan-seo-taisaku/)を同じ順で進めると重複作業が減ります。
 
 <figure><img src="/images/fudousan-meo-taisaku/steps.png" alt="不動産業MEO対策の5つの手順: 基本情報の登録、取扱物件に合わせたカテゴリ設定、オフィス写真とスタッフ紹介の充実、口コミの依頼と全件返信、投稿・情報更新の継続" loading="lazy"><figcaption>不動産業MEO対策の5つの手順。前半3つが土台整備、後半2つが継続運用です</figcaption></figure>
 
