@@ -207,10 +207,23 @@ def candidates(site=""):
             p["imp"] += h["imp"]
     stats = page_stats({p["site"] for p in pairs.values()})
     arts = {a["slug"]: a for a in CC.load_articles()}
+    # 勝ち負けは語ごとの順位ではなく、ページ全体の実績（クリック→表示）で決める。
+    # 語ごとの勝者を残す側にしていたため、1語だけ上にいる記事が「勝ち」になり、
+    # ページ全体では表示の多い側が消される向きになって、21組すべてが見送られていた（2026-09）。
+    # 同じ2本が向きを変えて2組に割れていたのも1組にまとめる（語を合算する）
+    merged = {}
+    for (sid, a, b), p in pairs.items():
+        m = merged.setdefault((sid, frozenset((a, b))), {"site": sid, "pair": (a, b), "kws": [], "imp": 0})
+        m["kws"] += p["kws"]
+        m["imp"] += p["imp"]
     out = []
-    for (sid, win, lose), p in pairs.items():
-        rev = pairs.get((sid, lose, win))
-        out.append(judge(p, stats, rev["imp"] if rev else 0, arts))
+    for (sid, _), m in merged.items():
+        a, b = m["pair"]
+        st = stats.get(sid) or {}
+        sa, sb = st.get(a, {"imp": 0, "clicks": 0}), st.get(b, {"imp": 0, "clicks": 0})
+        win, lose = (a, b) if (sa["clicks"], sa["imp"]) >= (sb["clicks"], sb["imp"]) else (b, a)
+        p = {"site": sid, "survivor": win, "loser": lose, "kws": m["kws"], "imp": m["imp"]}
+        out.append(judge(p, stats, 0, arts))
     return sorted(out, key=lambda p: (bool(p["skip"]), -p["imp"]))
 
 
