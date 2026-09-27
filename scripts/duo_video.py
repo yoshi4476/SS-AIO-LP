@@ -28,7 +28,11 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 SCRIPTS = ROOT / "data" / "duo_scripts"
 CHARS = ROOT / "assets" / "characters"
+# 並べ方は1920x1080の座標で書き、書き出しは2560x1440（1440p）。YouTube は1440p以上で上げると
+# 高画質の方式で処理する。1080pで上げると強く圧縮され、文字とキャラクターがぼやけた
 W, H, FPS = 1920, 1080, 24
+OW, OH = 2560, 1440
+KS = OW / W
 NAVY, INK, GOLD, OLIVE = (27, 42, 74), (20, 26, 38), (201, 160, 72), (86, 102, 64)
 RED, GREEN, MUTED = (196, 64, 60), (46, 125, 90), (100, 110, 130)
 VOICE = {"N": ("ja-JP-NanamiNeural", "+5%", "-1Hz"), "K": ("ja-JP-KeitaNeural", "+7%", "+0Hz")}
@@ -196,7 +200,9 @@ class Board:
     def get(self, st):
         k = json.dumps(st, ensure_ascii=False, sort_keys=True)
         if k not in self.cache:
-            self.cache[k] = self.draw(st)
+            # ボードは1080で描き、状態ごとに1回だけ高画質で1440へ拡大してためる（毎コマは拡大しない）
+            from PIL import Image
+            self.cache[k] = self.draw(st).resize((OW, OH), Image.LANCZOS)
         return self.cache[k], k
 
     def _card(self, im, box):
@@ -314,23 +320,25 @@ class Board:
 
 
 def _subtitle(VM, who, name, role, text, pop):
+    """字幕は書き出しの大きさ（1440p）で直接描く。いちばん読まれる文字なので拡大でぼかさない"""
     from PIL import Image, ImageDraw
-    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    k = lambda v: round(v * KS)
+    lay = Image.new("RGBA", (OW, OH), (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)
     c = COLOR[who]
-    d.rounded_rectangle([330, 830, 1590, 1040], 24, fill=(255, 255, 255, 242), outline=c + (255,), width=5)
-    fn, fr = VM.font(32), VM.font(22)
-    tw = d.textlength(name, font=fn) + d.textlength(role, font=fr) + 70
-    tx = 360 if who == "N" else 1560 - tw
-    ty = 798 + int(12 * (1 - pop))
-    d.rounded_rectangle([tx, ty, tx + tw, ty + 56], 16, fill=c + (255,))
-    d.text((tx + 22, ty + 28), name, font=fn, fill=(255, 255, 255), anchor="lm")
-    d.text((tx + 34 + d.textlength(name, font=fn), ty + 30), role, font=fr, fill=(230, 222, 190), anchor="lm")
-    f = VM.font(48)
-    ls = VM.wrap(d, text, f, 1180)[:2]
-    y0 = 935 - (len(ls) - 1) * 34
+    d.rounded_rectangle([k(330), k(830), k(1590), k(1040)], k(24), fill=(255, 255, 255, 242), outline=c + (255,), width=k(5))
+    fn, fr = VM.font(k(32)), VM.font(k(22))
+    tw = d.textlength(name, font=fn) + d.textlength(role, font=fr) + k(70)
+    tx = k(360) if who == "N" else k(1560) - tw
+    ty = k(798) + int(k(12) * (1 - pop))
+    d.rounded_rectangle([tx, ty, tx + tw, ty + k(56)], k(16), fill=c + (255,))
+    d.text((tx + k(22), ty + k(28)), name, font=fn, fill=(255, 255, 255), anchor="lm")
+    d.text((tx + k(34) + d.textlength(name, font=fn), ty + k(30)), role, font=fr, fill=(230, 222, 190), anchor="lm")
+    f = VM.font(k(48))
+    ls = VM.wrap(d, text, f, k(1180))[:2]
+    y0 = k(935) - (len(ls) - 1) * k(34)
     for i, ln in enumerate(ls):
-        d.text((960, y0 + i * 68), ln, font=f, fill=INK, anchor="mm")
+        d.text((k(960), y0 + i * k(68)), ln, font=f, fill=INK, anchor="mm")
     return lay
 
 
@@ -494,10 +502,12 @@ def make(sc, out_mp4):
             states.append(dict(cur))
         board = Board(sc.get("title", ""))
         sp, dim = _sprites()
-        pos = {"N": -60, "K": W - sp["K"][("open", "m0")].width + 90}
+        # キャラクターは高さ1200px（=900×4/3）の素材を1440pにそのまま置く（拡大しない）
+        pos = {"N": round(-60 * KS), "K": OW - sp["K"][("open", "m0")].width + round(90 * KS)}
         enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
-                                "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", str(td / "mix.wav"),
-                                "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
+                                "-s", f"{OW}x{OH}", "-r", str(FPS), "-i", "-", "-i", str(td / "mix.wav"),
+                                # animation は平らな塗りと線の多い絵に向く設定
+                                "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "medium", "-tune", "animation", "-crf", "17",
                                 "-c:a", "aac", "-b:a", "192k", "-shortest", str(out_mp4)], stdin=subprocess.PIPE)
         rng = random.Random(len(lines))
         blink = {"N": 1.2, "K": 2.0}
@@ -533,13 +543,8 @@ def make(sc, out_mp4):
                     end = starts[i] + len(a) / SR
                     nod = max(0, 1 - abs(t - (end - 0.25)) / 0.25) if who != k else 0
                     im, dy = dim[(k, eye[k], "m0")], br + 6 + 10 * math.sin(nod * math.pi / 2)
-                frame.paste(im, (pos[k], int(H - im.height + 40 + dy)), im)
-            z = 1 + 0.022 * min(1, max(0, local) / 6)
-            cx = W * (0.42 if who == "N" else 0.58)
-            cw, chh = W / z, H / z
-            x0 = min(max(0, cx - cw / 2), W - cw)
-            y0 = (H - chh) * 0.35
-            frame = frame.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + cw, y0 + chh))
+                frame.paste(im, (pos[k], int(OH - im.height + (40 + dy) * KS)), im)
+            # 話し手へ寄るカメラは入れない。毎コマ全体を拡大し直すと、文字もキャラクターもぼやけた
             if t >= LEAD - 0.1:
                 cs = chunks(text)
                 wts = [len(VM.read_text(c)) for c in cs]
