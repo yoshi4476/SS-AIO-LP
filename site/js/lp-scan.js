@@ -16,6 +16,9 @@
   var result = $("#scan");
   var KEY = "lx_scan_last";
   var ran = false;
+  // どこから診断に来たか（記事・トップ・コーポレート）。リードの記録に残し、効いている入口を分ける
+  var ENTRY = "";
+  try { ENTRY = (new URLSearchParams(location.search).get("src") || sessionStorage.getItem("lx_src") || "").replace(/[^\w-]/g, "").slice(0, 40); if (ENTRY) sessionStorage.setItem("lx_src", ENTRY); } catch (e) {}
 
   // 業種ごとに、見込み客がAIや検索に打ち込みそうな質問（例）。数字や事実は入れない
   var ASK = {
@@ -178,7 +181,7 @@
     // 下の相談フォームに、結果の要点を下書きしておく（書き直してもらってよい）
     var msg = $("#form textarea[name=message]");
     if (msg && !msg.value.trim()) {
-      msg.value = "【サイト診断の結果】" + url + " … " + d.score + "点" + (ng.length ? "（未対応: " + ng.slice(0, 4).map(function (c) { return c.name; }).join("・") + "）" : "") + (industry ? "／業種: " + industry : "");
+      msg.value = "【サイト診断の結果】" + url + " … " + d.score + "点" + (ng.length ? "（未対応: " + ng.slice(0, 4).map(function (c) { return c.name; }).join("・") + "）" : "") + (industry ? "／業種: " + industry : "") + (ENTRY ? "／入口: " + ENTRY : "");
     }
   }
 
@@ -209,7 +212,7 @@
       fd.append("audit_grade", d.grade);
       fd.append("audit_fixes", ng.map(function (c) { return "・" + c.name + "（" + c.pts + "点）: " + c.advice; }).join("\n"));
       fd.append("message", "【サイト診断】" + url + " / " + d.score + "点 / " + d.grade +
-        (ind.value ? " / 業種: " + ind.value : "") + " / 未対応: " + ng.map(function (c) { return c.name; }).join("・"));
+        (ind.value ? " / 業種: " + ind.value : "") + (ENTRY ? " / 入口: " + ENTRY : "") + " / 未対応: " + ng.map(function (c) { return c.name; }).join("・"));
       fetch("/api/lead", { method: "POST", body: fd })
         .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); })
         .then(function () {
@@ -220,7 +223,7 @@
           g.appendChild(ok);
           g.appendChild(el("p", "note", "自社で直すのが難しい項目は、そのまま無料相談でお手伝いします（2営業日以内にご連絡・営業電話なし）。"));
           if (window.trackLead) { window.trackLead("lead_form_submit", { lead_route: "lp_scan" }); window.trackLead("lead_capture", { lead_route: "lp_scan", form_type: "LP実測診断の結果送付" }); }
-          ev("lp_scan_unlock", { score: d.score });
+          ev("lp_scan_unlock", { score: d.score, scan_src: ENTRY });
         })
         .catch(function (x) {
           b.disabled = false;
@@ -238,7 +241,7 @@
     ran = true;
     btn.disabled = true; btn.textContent = "計測しています…";
     startScan();
-    ev("lp_scan_start");
+    ev("lp_scan_start", { scan_src: ENTRY });
     fetch("/api/audit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: url, industry: ind.value, ref: window.ssRef ? window.ssRef() : "" }) })
       .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "診断できませんでした"); return j; }); })
       .then(function (d) {
@@ -247,7 +250,7 @@
         result.hidden = false;
         setTimeout(function () { result.scrollIntoView({ behavior: "smooth", block: "start" }); }, 900);
         store({ url: url, score: d.score, at: Date.now() });
-        ev("lp_scan_complete", { score: d.score });
+        ev("lp_scan_complete", { score: d.score, scan_src: ENTRY });
       })
       .catch(function (x) {
         stopScan();
