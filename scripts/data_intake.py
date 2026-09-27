@@ -38,6 +38,10 @@ SHELL = SITE / "lab" / "index.html"
 SITE_URL = "https://ai.7senses.co.jp"
 ORG = "セブンセンシズ株式会社"
 START, END = "<!-- datasets:start -->", "<!-- datasets:end -->"
+# 一次データのページを公開するか。母数がまだ小さく、実測として読まれると誤解を生むため
+# 2026-09 に止めた（経営判断）。False の間はページを作らず、build.py がサイト中の /data/ への
+# リンクをテキストに変える。集計と一次情報の登録は続けるので、True に戻せば次のビルドで復活する
+PUBLIC = False
 # 3サイトぶんのカテゴリを載せる。ページ自体は AI集客ラボ の /data/ に作られるが、
 # 引用用の一文は一次情報として登録され、3サイトすべての記事から使われる。
 # AI集客ラボの4つしか無かったため、補助金・経理BPOのデータが登録できなかった
@@ -624,6 +628,8 @@ def apply(ds):
         except Exception:
             pass
     prev.write_text(json.dumps(ds, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if not PUBLIC:
+        return [f"data/datasets/{ds['slug']}.json"]
     out = SITE / "data" / ds["slug"]
     out.mkdir(parents=True, exist_ok=True)
     (out / "index.html").write_text(page_html(ds), encoding="utf-8", newline="\n")

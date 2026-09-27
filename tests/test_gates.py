@@ -2210,8 +2210,13 @@ def test_site_has_two_axes_and_no_orphans():
                 q.append(v)
     lost = [u for u in sorted(pages) if u not in depth and u != "/thanks/"]
     check("トップからたどり着けないページが無い", lost, [])
-    for u in ("/data/", "/industry/", "/download/"):
+    import data_intake
+    for u in (("/data/",) if data_intake.PUBLIC else ()) + ("/industry/", "/download/"):
         check(f"{u} に内部リンクがある", inbound[u] > 0, True)
+    if not data_intake.PUBLIC:
+        # 非公開の間は、ページも /data/ へのリンクも残っていないこと（残ると404になる）
+        check("一次データ非公開: ページが残っていない", sorted(u for u in pages if u.startswith("/data/")), [])
+        check("一次データ非公開: /data/ へのリンクが残っていない", sorted(u for u, v in links.items() if any(x.startswith("/data/") for x in v)), [])
     hubs = sorted(p.parent.name for p in (site / "industry").glob("*/index.html"))
     check("業種ハブが作られている", len(hubs) >= 5, True)
     check("業種ハブは一覧からたどれる", all(inbound[f"/industry/{h}/"] > 0 for h in hubs), True)

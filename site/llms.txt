@@ -142,7 +142,6 @@
 - [クリニック開業のやり方｜必要な6ステップと集患の始め方](https://ai.7senses.co.jp/ai-marketing/clinic-kaigyou-yarikata/): クリニック開業のやり方は、コンセプト設計から集患準備までの6ステップで進めます。MEOサービスG-ranで3,200店舗以上を支援した実務経験から、開業前に着手すべき集患の土台づくりと、資金・人材確保の相談先を解説します。
 - [クリニックの建築事例｜失敗しない5つの視点と坪単価](https://ai.7senses.co.jp/ai-marketing/clinic-kenchiku-jirei/): クリニックの建築事例は、立地・動線・駐車場・法規制の4点を着工前に確認すると失敗しません。MEO運用サービスG-ranで3,200店舗以上を支援してきた実務経験から、坪単価の目安と開院後のMEO対応まで解説します。
 - [AIOとSEOの違いとは？記事の書き方と評価指標を5つの視点で比較](https://ai.7senses.co.jp/aio/aio-to-seo-no-chigai/): AIOとSEOの違いは、記事の書き方・評価される仕組み・KPIの3点に表れます。定義の比較ではなく、執筆と計測で実務上どう変わるかを5つの視点とチェックリストで整理します。
-- [AI検索の実測データ](https://ai.7senses.co.jp/data/): 自社運営3サイトで計測した、生成AI経由の流入実数と検索順位ごとのクリック率。推計値ではなく実測。集計期間と母数を明記。出典明記のうえ引用可。
 - [整骨院がAI検索に表示されない5つの理由｜費用ページの直し方](https://ai.7senses.co.jp/aio/seikotsuin-hiyou-heikin/): 整骨院がAI検索に表示されない原因は、料金の書き方・施術範囲の曖昧さ・出典のなさなど5つに整理できます。ChatGPTやAI Overviewに引用される費用ページの条件と、直す順番を2026年9月時点で解説します。
 - [工務店のSNS集客とは？5媒体の選び方と続け方](https://ai.7senses.co.jp/ai-marketing/koumuten-sns-shukyaku/): 工務店のSNS集客とは、Instagram・LINE公式・YouTube等の複数媒体を目的別に使い分け、問い合わせにつなげる施策です。5媒体の向き不向きと無理なく続ける始め方を解説します。
 - [BtoB向けAIO対策会社の選び方｜比較5基準と費用相場](https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/): BtoB向けAIO対策会社の選び方を、比較すべき5つの基準と費用相場から解説します。内製かどうかの判断軸、依頼前に確認すべき実績確認ポイントもまとめました。
@@ -166,17 +165,7 @@
 - [AIO対策の相場は月3万〜30万円｜価格帯でできることの違い](https://ai.7senses.co.jp/aio/aio-taisaku-souba/): AIO対策の相場は、診断のみの単発依頼で月3万円台、構造改善から運用まで任せる契約で月10万〜30万円台が目安です。相場を決める4つの要因、価格帯別にできることの違い、依頼先タイプ別の相場、見積もり比較のチェックポイントを解説します。
 - [AIO対策の具体例｜構造別6パターンとNG集](https://ai.7senses.co.jp/aio/aio-taisaku-gutairei/): AIO対策の具体例として、冒頭の断言回答・1文結論・定義ブロック・比較表・FAQ・数値ファクトという6つの構造ごとに、そのまま使えるNG→OKの書き方を自社の実測データとあわせて解説します。
 - [工務店・注文住宅のAIO対策｜AIに候補として挙がる4つの書き方](https://ai.7senses.co.jp/aio/koumuten-chumon-jutaku-aio/): 工務店・注文住宅のAIO対策は、性能値・価格の決まり方・対応エリア・保証を数字で書くことが出発点です。AIが工務店を候補から外す原因、広告表示ルールとの両立、状況別の進め方と成果の測り方を解説します。
+- [AIOチェッカーとは？表示と引用を見分ける使い方](https://ai.7senses.co.jp/aio/aio-checker/): AIOチェッカーは、AI Overviewの表示と自社の引用を確かめる道具です。測るもの別の4種類、点数を信じすぎない理由、結果別に次にやることを自社の実測つきで解説します。
+- [AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](https://ai.7senses.co.jp/aio/aio-towa/): AIOとは、GoogleのAI Overview・AIモードで自社ページが引用される状態をつくる施策です。表示される検索の実測、Googleが公式に否定した5つの通説、効くと明記された3条件、成果の測り方を整理します。
+- [税理士法人のAIO対策とは？AI検索に引用される5つの準備](https://ai.7senses.co.jp/aio/zeirishi-houjin-aio/): 税理士法人のAIO対策は、所属税理士・拠点・得意業務をAIが取り違えない形で書くことから始まります。個人事務所との違い、引用される5つの準備、広告ルールとの両立、自社で進めるか外部に任せるかの判断基準を解説します。
 
-## 一次データ（自社で集計した実測値）
-- [運用サービス別の契約継続率（契約99件の集計）](https://ai.7senses.co.jp/data/keizoku-ritsu-service/): セブンセンシズが提供するSEO運用・AIO運用・経理BPOについて、契約後の一定期間内に解約しなかった割合を、契約一覧から集計しました。
-- [検索順位ごとの実測クリック率（表示7,015回の集計）](https://ai.7senses.co.jp/data/kensaku-juni-ctr/): セブンセンシズが運営する3サイトのSearch Consoleから、検索順位の帯ごとに表示回数とクリック数を集計しました。日本語・中小企業向けの実測値です。
-- [検索順位ごとの内部リンク本数（196本の集計）](https://ai.7senses.co.jp/data/juni-naibu-link/): 「上位の記事ほど内部リンクが多い」と言われますが、自社3サイトで実測すると必ずしもそうではありませんでした。順位帯ごとに、その記事が受けている内部リンクの中央値
-- [記事を公開してから検索結果に出るまでの日数（372本の集計）](https://ai.7senses.co.jp/data/kiji-hyouji-madeno-nissuu/): セブンセンシズが運営する3サイトの記事について、公開からの経過日数ごとに、Search Consoleで一度でも表示された記事の割合を集計しました。
-- [業種別の口コミ増加件数](https://ai.7senses.co.jp/data/meo-kuchikomi-zouka-gyoushu/): G-ranで運用した店舗について、運用開始前後の口コミ件数の変化を業種別に集計しました。
-- [MEO運用を始めてから順位が上がるまでの月数](https://ai.7senses.co.jp/data/meo-kouka-madeno-tsukisuu/): G-ranで12か月以上運用した800店舗について、主要キーワードの順位が運用開始時より上がった月を集計しました。
-- [申請から採択までの日数](https://ai.7senses.co.jp/data/hojokin-saitaku-madeno-nissuu/): 当社が2025年4月〜2026年3月に支援して採択された25社について、申請日から採択日までの日数を集計しました。
-- [経理BPO導入前後の月次決算の所要日数](https://ai.7senses.co.jp/data/keiri-bpo-getsuji-nissuu/): 経理BPOを導入した企業について、月次決算が締まるまでの日数を導入前後で比べました。
-- [AIO運用を始めてから検索順位が上がるまでの月数](https://ai.7senses.co.jp/data/aio-junni-madeno-tsukisuu/): AIO運用を開始した企業について、主要クエリの平均順位が運用開始時より上がった月を集計しました。
-- [AIOチェッカーとは？表示と引用を見分ける使い方](https://ai.7senses.co.jp/aio/aio-checker/): AI Overviewの表示と自社の引用を分けて確かめる方法と、結果別の次の一手
-- [AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](https://ai.7senses.co.jp/aio/aio-towa/): AIOの意味、AI Overviewが表示される検索の実測、Googleが公式に否定した5つの通説と効く3条件、成果の測り方を整理
-- [税理士法人のAIO対策とは？AI検索に引用される5つの準備](https://ai.7senses.co.jp/aio/zeirishi-houjin-aio/): 税理士法人がAIに引用されるための5つの準備、個人事務所との違い、広告ルールとの両立、進め方の判断基準

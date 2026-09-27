@@ -51,7 +51,8 @@ NAV_DEFAULT = [
     {"label": "AI集客", "url": "/ai-marketing/"},
     {"label": "業種から探す", "url": "/industry/"},
     {"label": "実装ラボ", "url": "/lab/"},
-    {"label": "AI導入補助金（独自メディア）", "url": "https://lp.7senses.co.jp/",
+    {"label": "サービス・料金", "url": "/lp/#service", "cta": "nav_service"},
+    {"label": "AI導入補助金", "url": "https://lp.7senses.co.jp/",
      "blank": True},
     {"label": "コーポレートサイト", "url": "https://corp.7senses.co.jp/", "blank": True},
     {"label": "無料相談", "url": "/lp/", "class": "nav-cta", "cta": "nav_consult"},
@@ -110,6 +111,8 @@ def _nav(key, fallback):
     items = got if isinstance(got, list) and got else fallback
     out = []
     for it in items:
+        if it["url"].startswith("/data/") and not _data_public():
+            continue
         cls = ' class="' + it["class"] + '"' if it.get("class") else ""
         tgt = ' target="_blank" rel="noopener"' if it.get("blank") else ""
         cta = ' data-cta="' + it["cta"] + '"' if it.get("cta") else ""
@@ -399,6 +402,8 @@ def post_tile(meta):
 
 def datasets_box(meta):
     """同じカテゴリの一次データへの枠。AIが引用するのは「そこにしか無い数字」なので、記事から必ず辿れるようにする"""
+    if not _data_public():
+        return ""
     try:
         import data_intake
         items = [d for d in data_intake.load_all() if meta["category"] in d.get("categories", [])][:3]
@@ -1009,6 +1014,46 @@ def build_feed(article_entries):
                   "  </entry>"]
     parts.append("</feed>")
     (SITE / "feed.xml").write_text("\n".join(parts) + "\n", encoding="utf-8")
+
+
+def _data_public():
+    try:
+        import data_intake
+        return data_intake.PUBLIC
+    except Exception:
+        return True
+
+
+def hide_data_pages():
+    """一次データを非公開にしている間（data_intake.PUBLIC=False）、ページを消し、
+    サイト中の /data/ へのリンクをテキストに変える。固定ページ・ハブ・記事のどこに書かれていても
+    404 にしないため、個別に直さず出力の最後でまとめて外す。reco.json はフォームが読むので残す"""
+    if _data_public():
+        return
+    import shutil
+    d = SITE / "data"
+    for p in (d.iterdir() if d.is_dir() else []):
+        if p.is_dir():
+            shutil.rmtree(p)
+        elif p.name != "reco.json":
+            p.unlink()
+    llms = SITE / "llms.txt"
+    if llms.is_file():
+        t = llms.read_text(encoding="utf-8")
+        u = re.sub(r"\n## 一次データ[^\n]*\n(?:(?!## )[^\n]*\n?)*", "\n", t)
+        u = "\n".join(l for l in u.split("\n") if f"{SITE_URL}/data/" not in l)
+        if u != t:
+            llms.write_text(u, encoding="utf-8", newline="\n")
+    link = re.compile(r'<a\s[^>]*href="(?:https://ai\.7senses\.co\.jp)?/data/(?!reco\.json)[^"]*"[^>]*>(.*?)</a>', re.S)
+    n = 0
+    for f in SITE.rglob("*.html"):
+        h = f.read_text(encoding="utf-8")
+        u = link.sub(r"\1", h)
+        if u != h:
+            f.write_text(u, encoding="utf-8", newline="\n")
+            n += 1
+    if n:
+        print(f"一次データ非公開: {n}ページの /data/ へのリンクをテキストにしました")
 
 
 def build_sitemap(article_entries):
@@ -1726,6 +1771,7 @@ def main():
     build_blog_index(all_metas)
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
+    hide_data_pages()
     build_sitemap(entries)
     save_body_hashes()
     build_feed(entries)

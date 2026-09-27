@@ -197,6 +197,10 @@ def main():
     ap.add_argument("--days", type=int, default=28)
     a = ap.parse_args()
 
+    import data_intake
+    if not data_intake.PUBLIC:
+        print("  一次データは非公開の設定です（data_intake.PUBLIC）。ページを作りません")
+        return 0
     body = build_body(a.days)
     if body is None:
         # 前回のページを残す。欠けたまま「3サイト」の実測として上書きしない

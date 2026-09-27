@@ -102,6 +102,9 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .brand .mark { font-family: var(--head); font-weight: 900; font-size: 1.2rem; color: var(--navy); line-height: 1.15; }
 .brand .by { display: block; font-family: var(--sans); font-weight: 500; font-size: .6rem; color: var(--muted); letter-spacing: .14em; }
 .global-nav { margin-left: auto; display: flex; gap: 1.5rem; align-items: center; }
+/* 項目が増えても折り返さない。入り切らない幅では詰め、さらに狭ければメニューボタンに畳む */
+.global-nav a { white-space: nowrap; }
+@media (max-width: 1480px) { .global-nav { gap: 1rem; } .global-nav a { font-size: .8rem; } .global-nav .nav-cta { padding: .6em 1.1em; } }
 .global-nav a { font-size: .86rem; font-weight: 600; text-decoration: none; color: var(--muted); padding: .3em 0; position: relative; transition: color .2s; }
 .global-nav a:not(.nav-cta):hover { color: var(--blue); }
 .global-nav a:not(.nav-cta)::after { content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: var(--blue); border-radius: 2px; transform: scaleX(0); transform-origin: right; transition: transform .3s var(--ease-out); }
@@ -121,7 +124,7 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .nav-open .nav-toggle span { background: transparent; }
 .nav-open .nav-toggle span::before { transform: translateX(-50%) translateY(6px) rotate(45deg); }
 .nav-open .nav-toggle span::after { transform: translateX(-50%) translateY(-6px) rotate(-45deg); }
-@media (max-width: 760px) {
+@media (max-width: 1260px) {
   .nav-toggle { display: block; }
   .global-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: #fff; border-bottom: 1px solid var(--line); box-shadow: var(--shadow-md); padding: .6rem 1.25rem 1.1rem; }
   .nav-open .global-nav { display: flex; }

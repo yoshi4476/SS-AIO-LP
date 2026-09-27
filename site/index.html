@@ -24,7 +24,7 @@
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
 <link rel="stylesheet" href="/css/lp-v2.css?v=2">
 <link rel="preload" as="image" href="/images/home/mv.webp" type="image/webp" fetchpriority="high">
-<link rel="stylesheet" href="/css/style.css?v=44a2a092">
+<link rel="stylesheet" href="/css/style.css?v=865fda39">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=dbc2eda1"></script>
 <script type="application/ld+json">
@@ -71,7 +71,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 .ind-chip:hover{border-color:var(--blue);color:var(--blue)}
 .ind-chip.ind-all{background:var(--navy);border-color:var(--navy);color:#fff}
 .data-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:1rem}
-.data-card{display:grid;gap:.4rem;padding:1.2rem 1.3rem;border-radius:16px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--text);transition:transform .2s,box-shadow .2s}
+.data-card{display:grid;align-content:start;gap:.4rem;padding:1.2rem 1.3rem;border-radius:16px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--text);transition:transform .2s,box-shadow .2s}
 .data-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px -20px rgba(11,36,71,.5)}
 .data-card .dc-k{font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--blue)}
 .data-card .dc-t{font-weight:900;line-height:1.55}
@@ -104,7 +104,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <a href="/ai-marketing/">AI集客</a>
       <a href="/industry/">業種から探す</a>
       <a href="/lab/">実装ラボ</a>
-      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金（独自メディア）</a>
+      <a href="/lp/#service" data-cta="nav_service">サービス・料金</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金</a>
       <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
       <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
     </nav>
@@ -185,20 +186,13 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <h2>「質問」で検索する人ほど、先にAIの答えを読んでいます</h2>
     <p class="sub">お客様がリンクを押す前に、検索結果の上でAIが答えを出す場面が増えました。<strong>選ばれるのは、AIが答えに使える事実が書かれていて、なおかつ上位にいる会社</strong>です。</p>
   </div>
-  <div class="lx-data-grid">
+  <div class="lx-data-grid" style="grid-template-columns:minmax(0,720px);justify-content:center;">
     <div class="lx-data reveal">
       <h3>AIの回答（AI Overview）が出た検索の割合</h3>
       <p class="sub">5万5,393件の検索を調べた学術調査（2026年3〜4月）</p>
       <div class="lx-hbar"><span>検索全体</span><div class="track"><div class="fill" style="width:13.7%"></div><span class="val" style="left:13.7%">13.7%</span></div></div>
       <div class="lx-hbar hl"><span>質問形の検索</span><div class="track"><div class="fill" style="width:64.7%"></div><span class="val" style="left:64.7%">64.7%</span></div></div>
       <p class="src">出典: arXiv 2605.14021（2026年・55,393クエリ）</p>
-    </div>
-    <div class="lx-data reveal reveal-d1">
-      <h3>検索順位ごとのクリック率（当社の実測）</h3>
-      <p class="sub">当社の3サイト・2026年6月23日〜9月20日・表示7,015回</p>
-      <div class="lx-hbar hl"><span>1〜3位</span><div class="track"><div class="fill" style="width:85%"></div><span class="val" style="left:85%">6.28%</span></div></div>
-      <div class="lx-hbar"><span>4〜10位</span><div class="track"><div class="fill" style="width:13.8%"></div><span class="val" style="left:13.8%">1.02%</span></div></div>
-      <p class="src">出典: 当社の一次データ「<a href="/data/kensaku-juni-ctr/">検索順位ごとの実測クリック率</a>」</p>
     </div>
   </div>
 </section>
@@ -244,16 +238,20 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<!-- 自社の一次データ（他社の記事には無い、数えた数字） -->
-<section class="flat-sec alt" data-area="一次データ" data-area-id="data">
-  <div class="section">
+<!-- サービス（記事を読んだ人が、何を頼めるのかへ進める入口） -->
+<section class="flat-sec alt" data-area="サービス" data-area-id="service">
+  <div class="section" style="padding-top:0;">
     <div class="section-head reveal">
-      <span class="en">Data</span>
-      <h2>当社が数えた数字を、そのまま公開しています</h2>
-      <p class="sub">AIが答えの根拠に選ぶのは、ほかに無い数字です。当社の運用で集計した数字を、母数と期間つきで公開しています。引用も自由です。</p>
+      <span class="en">Service</span>
+      <h2>記事に書いていることを、御社のサイトで行います</h2>
+      <p class="sub">AI集客ラボの記事は、当社が集客支援の現場で実際に行っている手順です。自社で進める時間が無い方は、そのまま当社にお任せいただけます。</p>
     </div>
-    <div class="data-cards"><a class="data-card reveal" href="/data/aio-junni-madeno-tsukisuu/"><span class="dc-k">一次データ</span><span class="dc-t">AIO運用を始めてから検索順位が上がるまでの月数</span><span class="dc-s">2026-05〜2026-08・母数 10件</span></a><a class="data-card reveal" href="/data/kensaku-juni-ctr/"><span class="dc-k">一次データ</span><span class="dc-t">検索順位ごとの実測クリック率（表示7,015回の集計）</span><span class="dc-s">2026-06-23〜2026-09-20・母数 7,015回（表示）</span></a><a class="data-card reveal" href="/data/kiji-hyouji-madeno-nissuu/"><span class="dc-k">一次データ</span><span class="dc-t">記事を公開してから検索結果に出るまでの日数（372本の集計）</span><span class="dc-s">2026-06-23〜2026-09-20・母数 372本</span></a><a class="data-card reveal" href="/data/meo-kouka-madeno-tsukisuu/"><span class="dc-k">一次データ</span><span class="dc-t">MEO運用を始めてから順位が上がるまでの月数</span><span class="dc-s">2023-10〜2026-08・母数 800店舗</span></a></div>
-    <div class="btn-row" style="justify-content:center;margin-top:1.6rem;"><a class="btn btn-ghost" href="/data/" data-cta="top_data_all">一次データをすべて見る <span class="arw">→</span></a></div>
+    <div class="data-cards">
+      <a class="data-card reveal" href="/lp/#price" data-cta="top_service_omakase"><span class="dc-k">いちばん人気</span><span class="dc-t">おまかせパック</span><span class="dc-s">オウンドメディア＋LPの構築・記事の毎日投稿・月次レポート・改善の実装まで一式。料金は個別お見積り</span></a>
+      <a class="data-card reveal" href="/lp/#price" data-cta="top_service_seo"><span class="dc-k">検索とAI検索</span><span class="dc-t">SEO＋AIO運用</span><span class="dc-s">既存サイトの改善から記事制作・分析まで。料金は個別お見積り</span></a>
+      <a class="data-card reveal" href="/lp/#price" data-cta="top_service_meo"><span class="dc-k">店舗のマップ集客</span><span class="dc-t">MEOスタンダード</span><span class="dc-s">口コミ返信・店舗情報の統一・月10〜14回の投稿・月次レポート。月額3万円</span></a>
+    </div>
+    <div class="btn-row" style="justify-content:center;margin-top:1.6rem;"><a class="btn btn-primary" href="/lp/" data-cta="top_service_lp">サービス内容と料金を見る <span class="arw">→</span></a></div>
   </div>
 </section>
 
@@ -307,7 +305,6 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <nav aria-label="フッターナビゲーション">
       <a href="/start/">はじめての方へ</a>
       <a href="/industry/">業種から探す</a>
-      <a href="/data/">実測データ（一次データ）</a>
       <a href="/download/">無料資料ダウンロード</a>
       <a href="/blog/">記事一覧</a>
       <a href="/glossary/">用語集</a>
