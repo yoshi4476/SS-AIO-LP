@@ -1,7 +1,57 @@
 {
-  "fetched": "2026-09-20",
+  "fetched": "2026-09-28",
   "sites": {
     "corporate": [
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-template-muryou",
+        "slug": "seikyusho-template-muryou",
+        "title": "請求書テンプレ無料の選び方｜入手先4種と使う前の確認6点"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-itaku",
+        "slug": "keiri-gyomu-itaku",
+        "title": "経理の業務委託は準委任か請負か｜契約の型と頼む前の確認5つ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+        "slug": "tekikaku-seikyusho-youken",
+        "title": "適格請求書の要件は6項目｜簡易インボイスとの違いと受領時の確認"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-tsukurikata",
+        "slug": "seikyusho-tsukurikata",
+        "title": "請求書の作り方｜テンプレート8要素と3ステップ【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
+        "slug": "seikyusho-kakikata-kojin",
+        "title": "請求書の書き方｜個人が押さえる基本6項目と源泉徴収【2026年】"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata",
+        "slug": "seikyusho-fuutou-kakikata",
+        "title": "請求書封筒の書き方｜宛名・在中表記・差出人の3つの基本"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-zeirishihou-ihan",
+        "slug": "kichodaiko-zeirishihou-ihan",
+        "title": "記帳代行は税理士法違反？3つの独占業務とNG事例"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-bpo-keiyakusho-kakunin",
+        "slug": "keiri-bpo-keiyakusho-kakunin",
+        "title": "経理BPOの契約書｜見落としやすい条項6つと確認手順"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-kichodaiko-bpo-chigai",
+        "slug": "keihi-seisan-kichodaiko-bpo-chigai",
+        "title": "経費精算｜記帳代行と経理BPOの違いを3つで比較"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-bpo-keiyakumae",
+        "slug": "getsuji-kessan-bpo-keiyakumae",
+        "title": "月次決算の経理BPO契約前に確認すべき5つのこと【2026年】"
+      },
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-keiri-bpo-shippai",
         "slug": "seikyusho-keiri-bpo-shippai",
@@ -80,7 +130,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
         "slug": "seikyusho-shougou-jidoka",
-        "title": "請求書照合の自動化｜3点照合の仕組みと導入4ステップ【2026年】"
+        "title": "請求書照合の自動化とは？3点照合で起きるミスと導入4ステップ"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai",
@@ -105,7 +155,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
         "slug": "tsucho-kicho-yarikata",
-        "title": "通帳だけで記帳するやり方｜摘要欄の読み方と仕訳3ステップ"
+        "title": "通帳の摘要欄はどう読む？記帳のやり方と仕訳3ステップ"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-check-koritsuka",
@@ -490,7 +540,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-marunage-dekiru-hani",
         "slug": "keiri-marunage-dekiru-hani",
-        "title": "経理の外注と丸投げの違い｜任せられる範囲と残す業務4つ"
+        "title": "経理の外注はどこまで丸投げできる？残す4業務と導入10社の実測"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
@@ -573,6 +623,61 @@
         "url": "https://lp.7senses.co.jp/blog/category/hojokin/",
         "slug": "hojokin",
         "title": "カテゴリ: 補助金の記事一覧"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/nougyou-shoki-hiyou-hojokin/",
+        "slug": "nougyou-shoki-hiyou-hojokin",
+        "title": "農業の初期費用は平均755万円｜費目別に使える補助金4つ"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/invoice-hojokin-kojinjigyonushi-itsumade/",
+        "slug": "invoice-hojokin-kojinjigyonushi-itsumade",
+        "title": "インボイス補助金は個人事業主いつまで？締切と税の特例期限"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/jidousha-seibi-hojokin-consul/",
+        "slug": "jidousha-seibi-hojokin-consul",
+        "title": "自動車整備の補助金コンサル選び｜避けるべき5つの契約と頼み方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-kensetsugyou-jirei/",
+        "slug": "it-hojokin-kensetsugyou-jirei",
+        "title": "IT導入補助金の建設業事例4社｜課題別のツールと効果"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/sogyo-shien-hojokin-kojinjigyonushi/",
+        "slug": "sogyo-shien-hojokin-kojinjigyonushi",
+        "title": "創業支援等事業者の補助金｜個人事業主は証明書で上限200万円"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/chusho-shoryokuka-toshi-hojokin/",
+        "slug": "chusho-shoryokuka-toshi-hojokin",
+        "title": "中小企業省力化投資補助金とは｜補助率と上限1億円の要件"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-hojokin-2026-kojinjigyonushi/",
+        "slug": "it-hojokin-2026-kojinjigyonushi",
+        "title": "IT導入補助金2026｜個人事業主の変更点と申請枠"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/nougyou-hojokin-sekai-hikaku/",
+        "slug": "nougyou-hojokin-sekai-hikaku",
+        "title": "農業の補助金を世界と比較｜日本の3つの違いと使い方"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/kourigyou-ai-hojokin-keihi/",
+        "slug": "kourigyou-ai-hojokin-keihi",
+        "title": "小売業のAI導入補助金｜レジ・POSに使える経費は上限20万円"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/gakushujuku-ai-hojokin-shinsei-susumekata/",
+        "slug": "gakushujuku-ai-hojokin-shinsei-susumekata",
+        "title": "学習塾はAI導入補助金の申請をどう進める？個人情報と繁忙期の壁【2026年】"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/shukuhakugyou-ai-hojokin-hojogaku-meyasu/",
+        "slug": "shukuhakugyou-ai-hojokin-hojogaku-meyasu",
+        "title": "宿泊業のAI導入補助金はいくら？契約額50万円が分かれ目"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/oroshiurigyou-ai-hojokin-ochiru-riyu/",
@@ -695,6 +800,11 @@
         "title": "建設業がAI導入補助金の対象になる条件｜5つの要件と確認の順番"
       },
       {
+        "url": "https://lp.7senses.co.jp/blog/tokyo-kensetsugyou-denshishinsei/",
+        "slug": "tokyo-kensetsugyou-denshishinsei",
+        "title": "建設業がAI導入補助金で不採択になる6つの理由と直し方"
+      },
+      {
         "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-pc-hojokin-hikaku/",
         "slug": "kojinjigyonushi-pc-hojokin-hikaku",
         "title": "個人事業主がパソコンを補助金で買う方法｜3制度を比較"
@@ -730,11 +840,6 @@
         "title": "ベンダー登録とは？IT導入補助金の確認方法と2つのリスク"
       },
       {
-        "url": "https://lp.7senses.co.jp/blog/tokyo-kensetsugyou-denshishinsei/",
-        "slug": "tokyo-kensetsugyou-denshishinsei",
-        "title": "東京都のJCIP電子申請｜楽天銀行が使えない支払いの注意点"
-      },
-      {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-shika-iin/",
         "slug": "it-hojokin-shika-iin",
         "title": "歯科医院のIT導入補助金｜対象4分野と医療機器の落とし穴"
@@ -767,7 +872,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
         "slug": "kensetsugyou-denshishinsei-etsuran",
-        "title": "建設業の電子申請システムを閲覧する2つの方法｜JCIPとCIICの違い"
+        "title": "建設業の電子申請を閲覧するには？JCIP電子閲覧システムとCIIC"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-system/",
@@ -787,7 +892,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/roudouhoken-nendokoshin-denshishinsei/",
         "slug": "roudouhoken-nendokoshin-denshishinsei",
-        "title": "労働保険の年度更新は電子申請が任意｜個人事業主2026年版"
+        "title": "社労士事務所のAI導入補助金｜労務ソフトは対象になるか"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-gbizid-shutoku/",
@@ -862,7 +967,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
         "slug": "monozukuri-hojokin-nougyou-souko",
-        "title": "農業の倉庫投資は建物費NG｜ものづくり補助金の対象は設備費"
+        "title": "農業用倉庫に補助金は使える？ものづくり補助金は設備費のみ"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-shukuhakugyou/",
@@ -932,7 +1037,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
         "slug": "monozukuri-hojokin-unsougyou",
-        "title": "ものづくり補助金は運送業も対象｜使える設備3分野と車両の線引き"
+        "title": "ものづくり補助金は運送業も使える？新事業進出枠とトラックの線引き"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kensetsugyou-jirei/",
@@ -1037,7 +1142,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
         "slug": "it-hojokin-kojinjigyonushi-kaikeisoft",
-        "title": "会計ソフトの補助金｜個人事業主が使える2つの枠と補助率"
+        "title": "会計ソフトの補助金｜IT導入補助金で個人事業主が使える2枠と補助率"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-pc/",

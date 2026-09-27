@@ -91,7 +91,7 @@ faq:
 **農業機械は対象外です。**ここが最も誤解される点です。
 
 
-関連する内容として[農業の倉庫投資は建物費NG](/blog/monozukuri-hojokin-nougyou-souko/)も公開しています。
+関連する内容として[農業用倉庫に補助金は使える？](/blog/monozukuri-hojokin-nougyou-souko/)も公開しています。
 
 <figure><img src="/images/nougyou-shoki-hiyou/seido-vs.png" alt="対象になるものとならないものの比較: 対象になるのは登録されたソフトの利用料・導入時の初期設定と研修・対象類型でのタブレット・交付決定後に発注したもの。対象にならないのはトラクター等の農業機械・ハウスや倉庫などの建物・自社で作った管理表・交付決定前の発注" loading="lazy"><figcaption>対象になる・ならない</figcaption></figure>
 
