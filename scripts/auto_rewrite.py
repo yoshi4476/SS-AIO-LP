@@ -80,6 +80,30 @@ def aio_items():
     return out
 
 
+def audit_items():
+    """別工程の採点（score_audit・今の基準）で一次性が80点を割った記事。
+
+    自己採点は全記事90点以上だが、別工程では2026-09に採点した4本すべてが一次性45〜66点だった。
+    直す手は aio と同じ（登録済みの一次情報の数字だけを足す。無い事実は書かせない）"""
+    try:
+        import rubric as R
+        d = json.loads((ROOT / "data" / "score_audit.json").read_text(encoding="utf-8"))
+        ver = R.VERSION
+    except Exception:
+        return []
+    out = []
+    for slug, r in d.items():
+        a = r.get("audit") or {}
+        o = (a.get("axes") or {}).get("originality")
+        if o is None or o >= 80 or a.get("version") != ver:
+            continue
+        if not (ROOT / "articles" / f"{slug}.md").is_file():
+            continue
+        out.append({"kind": "aio", "slug": slug, "site": site_of(slug),
+                    "why": f"別工程の採点で一次性{o}点（80点未満）・合計{a.get('total')}点"})
+    return sorted(out, key=lambda x: x["why"])
+
+
 def targets():
     """直すべき記事を、効く順に受け取る。
 
@@ -100,6 +124,8 @@ def targets():
         print(f"  （rank_rescue から取れません: {str(e)[:50]}）")
     seen0 = {x["slug"] for x in head}
     head = head + [x for x in aio_items() if x["slug"] not in seen0]
+    seen0 = {x["slug"] for x in head}
+    head = head + [x for x in audit_items() if x["slug"] not in seen0]
     try:
         import rank_up
         items = rank_up.human_items()
