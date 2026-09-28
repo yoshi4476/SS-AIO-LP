@@ -21,6 +21,10 @@ growth_guard は「落ちたか」を見る。ここは「増やした割に伸�
 どちらも「新しく書くより、既存記事の統合・書き直しに回す」合図。
 
   python scripts/content_yield.py
+  python scripts/content_yield.py --throttled <site>   # 本数を絞る週か（終了コード0=絞る）
+
+要対応になったサイトは data/yield_state.json に記録し、日次の執筆が1日2本→1本に絞る
+（pipeline-multi の2本目の枠を飛ばす）。次の週に条件を外れれば自動で戻る。14日より古い記録は使わない。
 出す印: YIELD_OK=yes|no（見つかったら no。検査が動かなかったときだけ終了コード1）
 """
 import re
@@ -39,6 +43,8 @@ GROW_MIN = 0.10
 OLD_DROP = 0.20
 MIN_PREV_IMP = 100
 LIMIT = 25000
+STATE = ROOT / "data" / "yield_state.json"
+STATE_DAYS = 14
 
 
 def _fm(p):
@@ -121,12 +127,27 @@ def judge(r):
     return bad
 
 
+def throttled(sid):
+    import json
+    try:
+        st = json.loads(STATE.read_text(encoding="utf-8")).get(sid) or {}
+    except Exception:
+        return False
+    fresh = st.get("date", "") >= (date.today() - timedelta(days=STATE_DAYS)).isoformat()
+    return bool(st.get("throttle")) and fresh
+
+
 def main():
+    import json
     import sites as S
+    if len(sys.argv) == 3 and sys.argv[1] == "--throttled":
+        on = throttled(sys.argv[2])
+        print(f"THROTTLE={'yes' if on else 'no'}")
+        return 0 if on else 1
     end = date.today() - timedelta(days=3)      # GSC の確定待ち
     arts = [a for a in (_fm(p) for p in (ROOT / "articles").glob("*.md")) if a and a["score"] >= 90]
     print(f"■ 記事を増やした分だけ伸びているか（{end - timedelta(days=27)}〜{end} と その前の28日）\n")
-    alerts, ran = [], 0
+    alerts, ran, state = [], 0, {}
     for sid, cfg in S.load_all().items():
         own = [a for a in arts if S.find_category_owner(a["category"]) == sid]
         if not own:
@@ -151,12 +172,17 @@ def main():
                   f" / クリックあり {r['clicked']}本（{r['clicked'] / r['mature']:.0%}）")
         b = judge(r)
         alerts += b
+        state[sid] = {"throttle": bool(b), "date": date.today().isoformat(), "reasons": [x[5:] for x in b]}
         for x in b:
             print("  " + x)
         print()
     if not ran:
         print("  どのサイトも GSC を読めませんでした")
         return 1
+    STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    for sid, st in state.items():
+        if st["throttle"]:
+            print(f"  → {sid}: 来週は新しい記事を1日1本に絞ります（統合・書き直しに回す）")
     print(f"YIELD_OK={'no' if alerts else 'yes'}")
     return 0
 

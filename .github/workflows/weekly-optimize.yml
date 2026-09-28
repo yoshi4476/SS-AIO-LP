@@ -621,6 +621,13 @@ jobs:
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
         run: |
           python scripts/findings.py || true
+          # content_yield の判定（本数を絞るサイト）を残す。日次の執筆がこれを読む
+          git add data/yield_state.json 2>/dev/null || true
+          git diff --cached --quiet || {
+            git commit -q -m "weekly: 記事本数の判定 $(date '+%Y-%m-%d')"
+            git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
+            git push -q || true
+          }
 
       # 検査（findings）の後に作る。要対応の一覧を「次にやること」に載せるため。
       # 前はここより前にあり、検査結果が出る前にレポートが確定していた

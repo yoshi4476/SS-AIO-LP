@@ -124,6 +124,14 @@ def check_volume(todo):
             print(f"  上限 {sid:10s} 今月 {month}/{MONTHLY_CAP}本 — 今月はこれ以上公開しません")
             continue
         want = min(DAILY_TARGET, left)
+        # 記事を増やした分が伸びていない週は1日1本（content_yield）。2本を目標にしたままだと
+        # 救済が「不足」とみなして、絞った1本を書き足してしまう
+        try:
+            import content_yield
+            if content_yield.throttled(sid):
+                want = min(want, 1)
+        except Exception:
+            pass
         due = min(want, _due_now(sid))      # いまの時刻で在るべき本数
         mark = "OK " if n >= due else "不足"
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"
@@ -562,7 +570,21 @@ def split_todo(todo):
     return now[:MAX_TODAY], now[MAX_TODAY:] + later
 
 
+def cap_left(sid):
+    """今月あと何本公開できるか（publish_flow と同じ数え方）"""
+    ym = today_iso()[:7]
+    n = sum(1 for a in articles_by_site().get(sid, [])
+            if a["date"][:7] == ym and _is_published(a, need_review=False))
+    return MONTHLY_CAP - n
+
+
 def main():
+    # 書く前に止める（日次の枠が呼ぶ）。publish_flow の上限は書き終えた後にしか効かず、
+    # 2026-09 は3サイトとも上限60を超えた（61・66・62本）
+    if len(sys.argv) == 3 and sys.argv[1] == "--cap-reached":
+        left = cap_left(sys.argv[2])
+        print(f"CAP_LEFT={left}")
+        return 0 if left <= 0 else 1
     fix_kw = "--fix-kw" in sys.argv
     todo = []
     print(f"===== 日次監査 {today_iso()} =====\n")
