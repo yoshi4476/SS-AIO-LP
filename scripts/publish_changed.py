@@ -21,6 +21,7 @@ import argparse
 import re
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -94,11 +95,18 @@ def main():
         ok = ng = 0
         miss = 0        # 続けて落ちた数。1本の失敗で残り全部を諦めない
         for i, slug in enumerate(targets, 1):
-            r = subprocess.run(
-                [sys.executable, str(ROOT / "scripts" / "publish.py"),
-                 "--site", sid, "--slug", slug, "--push"],
-                capture_output=True, text=True, encoding="utf-8",
-                errors="replace", cwd=ROOT)
+            # 配信先は push のたびに自分のビルドが書き戻すことがあり、続けて push すると
+            # 先に進まれて1本おきに落ちた（2026-09-28: 補助金47本中17本。単発では全部通った）。
+            # 落ちたら少し待って1回だけやり直す
+            for attempt in range(2):
+                r = subprocess.run(
+                    [sys.executable, str(ROOT / "scripts" / "publish.py"),
+                     "--site", sid, "--slug", slug, "--push"],
+                    capture_output=True, text=True, encoding="utf-8",
+                    errors="replace", cwd=ROOT)
+                if r.returncode == 0 or attempt:
+                    break
+                time.sleep(20)
             if r.returncode == 0:
                 ok += 1
                 miss = 0
