@@ -49,7 +49,7 @@ diagrams:
 
 **整骨院の集客成功事例は、1人院・多店舗展開・自由診療特化という業態の違いによって有効な打ち手が変わります。**
 
-関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
+関連する内容は[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)でも扱っています。
 
 関連して、[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)もあわせてご確認ください。
 
@@ -74,6 +74,8 @@ diagrams:
 ## 事例1: 1人整骨院が基本情報の整備だけで新規を増やした
 
 **院長1人の整骨院は、Googleビジネスプロフィールの基本情報を整えるだけでも新規来院が動き出します。**
+
+関連する内容として[整骨院のMEO対策とは？](/meo/seikotsuin-meo-taisaku/)も公開しています。
 
 <a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/24/index.html" target="_blank" rel="noopener">厚生労働省「衛生行政報告例」</a>によると、全国の柔道整復師施術所数は令和6年末時点で<strong>5万件超（50,924件）</strong>です。競争密度が高い中、1人院は広告予算をかけにくい分、無料で整備できるプロフィールの完成度が新規来院を大きく左右します。
 
@@ -133,8 +135,6 @@ diagrams:
 **失敗の多くは、規模に合わない施策の流用・保険と自由診療の混同案内・情報更新の停止という3パターンに集約されます。**
 
 関連する内容は、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)で解説しています。
-
-つまずきやすい点は[整骨院の集客イベント5選](/ai-marketing/seikotsuin-shukyaku-event/)でも扱っています。
 
 私たちの支援現場で相談を受ける失敗の多くは、施策そのものの質よりも自院の規模との不一致が原因です。ここでは特に相談の多い3つを紹介します。
 

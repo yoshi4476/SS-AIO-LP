@@ -51,23 +51,13 @@ faq:
 
 **宿泊業が使える補助金の入口は、デジタル化・AI導入補助金、新事業進出等補助金、持続化補助金の3つです。**それぞれ対象にする投資の規模と目的が異なります。
 
+関連する内容を先に押さえるなら、[農業用倉庫に補助金は使える？](/blog/monozukuri-hojokin-nougyou-souko/)が参考になります。
+
+関連する内容については、[ものづくり補助金はクリニックで使える？](/blog/monozukuri-hojokin-clinic/)にまとめています。
+
+費用の目安は[宿泊業のAI導入補助金はいくら？](/blog/shukuhakugyou-ai-hojokin-hojogaku-meyasu/)で整理しています。
+
 あわせて[精米ラインで売上2倍｜農業のものづくり補助金採択事例](/blog/monozukuri-hojokin-nougyou-jirei/)もご覧ください。
-
-関連する内容として[AI導入補助金2026](/blog/ai-hojokin-clinic-2026-schedule/)も公開しています。
-
-関連する内容として[事業再構築補助金で農業が使えたのは6次産業化](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)も公開しています。
-
-関連する内容は[ものづくり補助金は宿泊業で使える？](/blog/monozukuri-hojokin-shukuhakugyou/)で整理しています。
-
-あわせて[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)もご覧ください。
-
-あわせて[事業再構築補助金 クリニックは医療法人不可](/blog/jigyou-saikouchiku-clinic-jirei/)もご覧ください。
-
-関連する内容として[クリニックのIT導入補助金](/blog/it-hojokin-clinic/)も公開しています。
-
-関連する内容については、[ものづくり補助金は美容室で使える？](/blog/monozukuri-hojokin-biyoushitsu/)にまとめています。
-
-あわせて[農業機械補助金は4制度](/blog/nougyou-kikai-hojokin/)もご覧ください。
 
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026の通常枠ページ</a>によると、この制度はソフトウェア・クラウドサービスの導入費用を補助します。宿泊業ならPMSや予約システムが対象になりやすい分野です。
 

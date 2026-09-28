@@ -110,11 +110,11 @@ Google公式は、<a href="https://developers.google.com/search/docs/appearance/
 
 **診断は、順位確認→クローラー確認→構造確認→鮮度確認の順で進めます。**
 
+近い論点を[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)で扱っています。
+
 近い論点を[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)で扱っています。
 
 あわせて[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)もご覧ください。
-
-関連する内容として[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)も公開しています。
 
 <figure><img src="/images/aio-taisaku-hyouji-sarenai/shindan-flow.png" alt="表示されない原因を診断する4ステップ: 順位を確認、クローラーを確認、構造を確認、鮮度を確認" width="1200" height="400" loading="lazy"><figcaption>表示されない原因を診断する4ステップ（当メディア作成）</figcaption></figure>
 
@@ -181,7 +181,6 @@ AI Overviewの引用元は固定ではなく、Googleが再クロールするた
 <details><summary>順位が高いのに引用されない場合はどうすればいいですか？</summary><p class="faq-a">冒頭の断言回答・H2直下の1文結論・FAQ整備など抽出しやすい構造に直します。</p></details>
 
 <details><summary>自分だけで診断・改善できますか？</summary><p class="faq-a">順位やrobots.txtの基本確認は自社で可能です。構造化データの設計は専門支援が近道です。</p></details>
-
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
 

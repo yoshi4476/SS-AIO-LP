@@ -53,11 +53,13 @@ faq:
 
 不動産の集客方法とは、複数チャネルを組み合わせ、ポータル依存から抜け出す仕組みづくりです。
 
-関連する内容として[OB客紹介の仕組み化とは？](/ai-marketing/obkyaku-shoukai-shikumi/)も公開しています。
+関連する内容として[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)も公開しています。
 
-関連する内容として[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)も公開しています。
+あわせて[不動産SEO記事のライター選び方](/seo/fudousan-seo-kiji-writer/)もご覧ください。
 
-自社の反響がすでに落ち込んでいる場合は、[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)で原因の切り分けから確認するほうが近道です。
+関連する内容として[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)も公開しています。
+
+あわせて[AIO集客とは？向いている業種と始める3つの基準](/aio/aio-shukyaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">不動産の集客方法とは</span>、ポータルサイトへの掲載だけでなく、自社サイト・MEO・SNS・紹介・AI検索対応まで含めた複数チャネルを、会社の商圏や専門分野に合わせて組み合わせることを指します。掲載費を払うだけの受け身の集客ではありません。</div>
 
@@ -84,8 +86,6 @@ faq:
 ## 不動産の集客方法6つのチャネル
 
 不動産の集客方法は、ポータル・自社サイト・MEO・SNS・紹介・AI検索対応の6つに整理できます。
-
-あわせて[税理士の集客ができない原因5つと処方箋【2026年】](/ai-marketing/zeirishi-shukyaku-dekinai/)もご覧ください。
 
 <figure><img src="/images/fudousan-shukyaku-houhou/channels.png" alt="不動産の集客方法6つのチャネル: ポータルサイト、自社サイトSEO、MEO(地図検索)、SNS・ブログ、紹介の強化、AI検索対応" loading="lazy"><figcaption>不動産の集客方法6つのチャネル</figcaption></figure>
 

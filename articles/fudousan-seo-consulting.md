@@ -51,11 +51,13 @@ faq:
 
 不動産SEOコンサルティングとは、外注とは異なり、戦略設計と社内の内製化を支援する伴走型のサービスです。
 
+つまずきやすい点を先に押さえるなら、[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)が参考になります。
+
+関連する内容として[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)も公開しています。
+
 近い論点を[リフォームSEOとは？受注につながる5つの施策](/seo/reform-seo-taisaku/)で扱っています。
 
 関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
-
-前提となる考え方は[不動産SEOとは？反響を増やす5つの施策と始め方](/seo/fudousan-seo-taisaku/)で整理しています。
 
 <div class="definition-box"><span class="term">不動産SEOコンサルティングとは</span>、賃貸・売買仲介会社のサイトを診断し、検索意図に沿った戦略設計・優先順位づけ・社内体制づくりまでを伴走支援するサービスを指します。==記事の執筆や技術改善を代行する外注とは異なり、判断力そのものを社内に残すことを目的とします==。</div>
 

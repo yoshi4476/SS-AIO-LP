@@ -49,11 +49,11 @@ faq:
 
 **経理自動化ツールとは、記帳・経費精算・請求書・給与計算といった経理業務の一部を、ソフトウェアが自動または半自動で処理する仕組みの総称です。**
 
+関連する内容は[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)で整理しています。
+
 あわせて[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)もご覧ください。
 
 あわせて[エクセル経理の効率化のコツ7選](/blog/excel-keiri-koritsuka/)もご覧ください。
-
-近い論点を[経理の仕事を効率化する9つの方法](/blog/keiri-shigoto-koritsuka/)で扱っています。
 
 <div class="definition-box"><span class="term">経理自動化ツールとは</span>、入力・集計・承認といった経理業務の工程をシステム側に任せる仕組みを指します。==1つのツールが経理業務のすべてを自動化するわけではなく、機能ごとに得意分野が分かれている==点が、導入前に理解しておきたいポイントです。</div>
 
@@ -67,9 +67,7 @@ faq:
 
 経理自動化ツールは、記帳・経費精算・請求書・給与計算・ワークフロー承認という5つの機能に分類できます。
 
-近い論点を[請求書処理の効率化とは？進まない原因と5つの改善策](/blog/seikyusho-shori-koritsuka/)で扱っています。
-
-関連する内容として[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)も公開しています。
+関連する内容として[現金払いは否認の落とし穴？](/blog/gaichuuhi-seikyuusho-nashi/)も公開しています。
 
 <figure><img src="/images/keiri-jidoka-tool/bunrui.png" alt="経理自動化ツールの機能5分類: 記帳・仕訳ツール、経費精算ツール、請求書発行・受領ツール、給与計算ツール、ワークフロー承認ツール" loading="lazy"><figcaption>経理自動化ツールの機能5分類</figcaption></figure>
 

@@ -101,6 +101,8 @@ MEO運用サービス「G-ran」で、私たちは**通算3,200店舗以上**を
 
 **症状系クエリはYMYL領域として抑制されやすく、AIO単独では表示を狙いにくい領域です。**
 
+関連する内容として[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)も公開しています。
+
 「ぎっくり腰 対処法」「肩こり 原因」のような症状系クエリは、誤情報が健康被害につながりうるため、<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google公式のAI検索機能の説明</a>でも表示が慎重に扱われることが述べられています。同じ院のサイトでも、「地域名+整骨院」では表示され、症状クエリでは表示されないというケースは珍しくありません。
 
 | クエリの種類 | 例 | AI Overviewの出やすさ |
@@ -133,6 +135,8 @@ GPTBotやClaudeBotをrobots.txtで誤ってブロックしていると、症状�
 ## 整骨院が自院で気づける確認ポイント4つ
 
 **確認は、広告表現→口コミ・指名検索→クローラー→説明文の重複の順で行います。**
+
+あわせて[AIOのやり方｜5ステップの実践手順と失敗例](/aio/aio-yarikata/)もご覧ください。
 
 <figure><img src="/images/seikotsuin-aio-taisaku-shippai/check-flow.png" alt="整骨院がAIO対策の失敗に気づく4つの確認ポイント" width="1200" height="400" loading="lazy"><figcaption>整骨院がAIO対策の失敗に気づく4つの確認ポイント（当メディア作成）</figcaption></figure>
 

@@ -98,6 +98,8 @@ faq:
 
 AI-OCRは表記ゆれのある請求書も読み取れますが、誤読はゼロになりません。
 
+近い論点を[請求書封筒の書き方｜宛名・在中表記・差出人の3つの基本](/blog/seikyusho-fuutou-kakikata/)で扱っています。
+
 <div class="caution-box"><span class="box-title">注意: AIの提案を無確認で確定するのはNG</span><br>AI-OCRの読み取り結果や仕訳提案は、確率の高い候補を示しているだけです。<span class="txt-red">月次でサンプルを確認する運用を組み込まないと、誤りが決算直前まで残ります。</span></div>
 
 <figure><img src="/images/seikyusho-jidoka-ai/hikaku.png" alt="請求書自動化運用のNGとOK: NG例はAIの提案を無確認で仕訳確定・全取引先を一度に移行する・例外処理の担当を決めない・過去の請求書を整理せず導入、OK例は月次でサンプルを確認する・取引先を絞って試験運用する・例外は担当者を先に決める・過去データを整えてから導入" loading="lazy"><figcaption>請求書自動化運用のNGとOK</figcaption></figure>
@@ -163,7 +165,6 @@ AIで処理量を減らしても人手が足りない場合は、例外対応ま
 <details><summary>請求書自動化AIの費用相場はどれくらいですか？</summary><p class="faq-a">月額数千円〜数万円が目安で、会計ソフトとの連携可否が選定の分かれ目です。</p></details>
 <details><summary>導入しても人手不足が解消しない場合はどうすればいいですか？</summary><p class="faq-a">例外処理まで含めて任せられる経理BPOへの委託を組み合わせる方法があります。</p></details>
 </div>
-
 
 外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 

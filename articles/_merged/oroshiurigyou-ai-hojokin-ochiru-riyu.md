@@ -1,4 +1,6 @@
 ---
+merged_into: inshokuten-ai-hojokin-ochiru-riyu
+merged_at: 2026-09-28
 title: 卸売業のAI導入補助金｜審査で落ちる3つの盲点と対処法
 description: 卸売業がAI導入補助金の審査で落ちる理由を、中小企業者の要件誤認から受発注システムの説明不足、卸売業特有の数字不足まで、現場の相談で見えた3つの盲点から2026年9月時点の情報で解説します。
 slug: oroshiurigyou-ai-hojokin-ochiru-riyu

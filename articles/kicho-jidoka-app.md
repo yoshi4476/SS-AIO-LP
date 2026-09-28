@@ -59,6 +59,8 @@ faq:
 
 記帳自動化アプリは、銀行明細の自動取込・レシートのOCR読み取り・勘定科目の仕訳提案の3つが中心機能です。
 
+近い論点を[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)で扱っています。
+
 <figure><img src="/images/kicho-jidoka-app/dekiru.png" alt="記帳自動化アプリでできること3つ: 銀行明細の自動取込、レシートのOCR読み取り、勘定科目の仕訳提案" loading="lazy"><figcaption>記帳自動化アプリでできること3つ</figcaption></figure>
 
 第一に、銀行明細の自動取込です。契約した銀行口座やクレジットカードと連携し、入出金データを日次で自動的に取り込みます。

@@ -47,6 +47,8 @@ faq:
 
 クリニックのインスタ集客とは、院内の様子や医師・スタッフの人柄を発信し、来院前の不安を減らして予約につなげる取り組みです。
 
+関連する内容として[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)も公開しています。
+
 あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
 
 実際の進め方については、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)にまとめています。
@@ -134,8 +136,6 @@ faq:
 ## インスタ投稿と医療広告規制の線引き
 
 クリニックのインスタ投稿では、説明のない術前術後写真や治療の体験談が医療広告ガイドライン違反に当たります。
-
-近い論点を[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)で扱っています。
 
 <figure><img src="/images/clinic-instagram-yarikata/ngok.png" alt="医療広告ガイドラインのNG例とOK例: NG例は説明なしの術前術後写真・治療効果の体験談・断定表現、OK例は院内・スタッフの紹介・一般的な治療の選択肢説明・説明付きの症例掲載" loading="lazy"><figcaption>医療広告ガイドラインのNG例とOK例</figcaption></figure>
 

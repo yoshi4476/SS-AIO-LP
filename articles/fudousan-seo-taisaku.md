@@ -59,6 +59,8 @@ diagrams:
 
 **宅建業者が11年連続で増える中、検索で見つかる会社だけが新規の反響を得られます。**
 
+近い論点を[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)で扱っています。
+
 関連する内容として[飲食店の集客方法とは？](/ai-marketing/inshokuten-shukyaku-hoho/)も公開しています。
 
 あわせて[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)もご覧ください。
@@ -91,8 +93,6 @@ diagrams:
 ## 不動産SEOで成果を出す5つの施策
 
 成果を出す不動産SEOは、KW選定からE-E-A-Tの明示まで5つの施策を積み重ねて進めます。
-
-近い論点を[飲食店のMEO対策とは？](/meo/inshokuten-meo-taisaku/)で扱っています。
 
 <figure><img src="/images/fudousan-seo-taisaku/steps.png" alt="不動産SEOで成果を出す5つの施策: エリア×悩み語のロングテールでKW選定、物件ページに独自解説を追加、エリアガイド記事の継続発信、宅建士資格・取引実績でE-E-A-Tを明示、問い合わせ導線の設計" loading="lazy"><figcaption>不動産SEOで成果を出す5つの施策</figcaption></figure>
 

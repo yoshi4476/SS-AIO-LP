@@ -67,11 +67,15 @@ faq:
 
 **対象ツールは、予約管理・POSレジ会計・電子カルテ顧客管理の3分野に整理でき、優先順位をつけやすくなります。**電話対応と会計処理のどちらがボトルネックかによって、優先して導入すべきツールが変わります。
 
-関連する内容として[事業再構築補助金は法人成り後も続く？](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)も公開しています。
+あわせて[事業再構築補助金は個人事業主もいつまで？](/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/)もご覧ください。
 
-関連する内容として[事業再構築補助金は建設業も対象](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)も公開しています。
+関連する内容として[建設業のAI導入補助金｜必要書類10点と揃える順番](/blog/kanagawa-kensetsugyou-denshishinsei/)も公開しています。
 
-あわせて[事業再構築補助金 美容室の脱毛転換3事例](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)もご覧ください。
+関連する内容として[建設業の助成金4制度｜補助金との違いと使う順番](/blog/kensetsugyou-joseikin-hikaku/)も公開しています。
+
+近い論点を[建設業がAI導入補助金の対象になる条件](/blog/osaka-kensetsugyou-denshishinsei/)で扱っています。
+
+あわせて[事業再構築補助金は法人成り後も続く？](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)もご覧ください。
 
 <figure><img src="/images/it-hojokin-biyoushitsu/tool-categories.png" alt="美容室で対象になるITツール3分野: 予約管理システム、POSレジ・会計ソフト、電子カルテ・顧客管理" loading="lazy"><figcaption>美容室で対象になるITツール3分野</figcaption></figure>
 
@@ -111,10 +115,6 @@ faq:
 
 **通常枠は補助率1/2〜2/3・上限450万円、インボイス類型は補助率1/2〜4/5・上限350万円です。**枠によって対象ツールと補助率が変わるため、自社がどちらに当てはまるかを先に確認してください。
 
-近い論点を[事業再構築補助金の確定申告](/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/)で扱っています。
-
-関連する内容として[事業再構築補助金で個人事業主が出す事業化状況報告](/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/)も公開しています。
-
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">通常枠の補助率・補助上限額のページ</a>によると、<strong>1プロセス以上の導入で5万円以上150万円未満、4プロセス以上の導入で150万円以上450万円以下</strong>の補助額が設定されています。予約管理や電子カルテなどのクラウド利用料も、最大2年分がまとめて補助対象になります。
 
 例えばスタッフ5名の美容室が、予約管理システムと電子カルテを合わせて年間60万円で契約したとします。**要件を満たせば補助率1/2でも30万円、2/3なら約40万円が補助され、実質負担は20〜30万円程度**に収まる計算です。
@@ -138,10 +138,6 @@ faq:
 ## 一人サロン・個人事業主が申請するときの壁
 
 **一人サロンの個人事業主でも、GビズIDとSECURITY ACTIONの宣言があれば申請できます。**法人と申請要件そのものは変わりません。
-
-近い論点を[小規模事業者持続化補助金｜美容室の書き方4ステップ](/blog/jizokuka-hojokin-biyoushitsu-kakikata/)で扱っています。
-
-あわせて[建設業のAI導入補助金はいくら？](/blog/fukuoka-kensetsugyou-denshishinsei/)もご覧ください。
 
 <a href="https://it-shien.smrj.go.jp/applicant/flow/" target="_blank" rel="noopener">事務局が公開している申請手続きフロー</a>では、交付申請に「GビズIDプライム」と「SECURITY ACTION」の宣言が必須と案内されています。
 

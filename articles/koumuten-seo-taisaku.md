@@ -84,8 +84,6 @@ faq:
 
 あわせて[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)もご覧ください。
 
-関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
-
 <figure><img src="/images/koumuten-seo-taisaku/mistakes.png" alt="工務店のSEOで失敗しやすい3つの原因: 施工事例を数件しか載せていない、更新が半年以上止まっている、対応エリア・価格帯が曖昧" loading="lazy"><figcaption>工務店のSEOで失敗しやすい3つの原因</figcaption></figure>
 
 **原因1: 施工事例を数件しか載せていない。**竣工写真を数枚貼るだけでは、間取り・予算帯・工期といった施主が知りたい情報が伝わりません。事例が少ないと検索にも引っかかりにくく、比較検討の対象からも外れやすくなります。

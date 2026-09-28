@@ -40,13 +40,13 @@ diagrams:
 
 **不動産業のMEO対策とは、物件ではなく店舗そのものをGoogleマップで上位表示させる施策です。**
 
+関連する内容を先に押さえるなら、[不動産のAI検索対策](/aio/fudousan-ai-kensaku-taisaku/)が参考になります。
+
 近い論点を[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)で扱っています。
 
 前提となる考え方については、[不動産の集客代行とは？](/ai-marketing/fudousan-shukyaku-daikou/)にまとめています。
 
 前提となる考え方は[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)でも扱っています。
-
-あわせて[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">不動産業のMEO（Map Engine Optimization）とは</span>、「地名×不動産」「駅名×賃貸」などで検索されたとき、Googleマップの上位（特に目立つ上位3枠）に自社の店舗を表示させるための最適化のことです。物件検索サイトへの掲載とは別物で、あくまで「会社・店舗」の見え方を整える施策を指します。</div>
 

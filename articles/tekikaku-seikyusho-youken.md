@@ -42,6 +42,8 @@ faq:
 
 **適格請求書の要件は6項目で、区分記載請求書より登録番号・適用税率・消費税額の3点が増えています。**
 
+あわせて[請求書封筒の書き方｜宛名・在中表記・差出人の3つの基本](/blog/seikyusho-fuutou-kakikata/)もご覧ください。
+
 <div class="definition-box"><span class="term">適格請求書（インボイス）とは</span>、売手が買手に対して、正確な適用税率や消費税額を伝える書類です。==登録を受けた適格請求書発行事業者だけが交付できます。==</div>
 
 <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6625.htm" target="_blank" rel="noopener">国税庁のタックスアンサー「適格請求書等の記載事項」</a>では、次の6項目を定めています。
@@ -143,7 +145,6 @@ faq:
 3つ目は、制度開始前のテンプレートを使い続けることです。**消費税額の欄が無い様式は、それだけで要件を欠きます。**
 
 受領時の確認手順を効率よく回したい場合は、[請求書チェックの効率化｜確認項目6つと時短の3ステップ](https://corp.7senses.co.jp/blog/seikyusho-check-koritsuka/)が参考になります。
-
 
 経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 

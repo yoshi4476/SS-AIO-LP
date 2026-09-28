@@ -1,16 +1,14 @@
 {
-  "date": "2026-09-24",
-  "asked": 1,
+  "date": "2026-09-28",
+  "asked": 0,
   "items": [
     {
       "kw": "aio 導入 メリット 費用",
-      "imp": 22,
-      "pos": 19.7,
+      "imp": 26,
+      "pos": 18.1,
       "src": "gsc",
       "written": true,
-      "ai": {
-        "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-      },
+      "ai": null,
       "score": 8.4
     },
     {
@@ -24,17 +22,35 @@
     },
     {
       "kw": "aio対策 やってはいけない",
-      "imp": 8,
-      "pos": 17.5,
+      "imp": 9,
+      "pos": 17.7,
       "src": "gsc",
       "written": true,
       "ai": null,
       "score": 7.0
     },
     {
-      "kw": "saasの競合比較記事をllmo向けに作る時の注意点は？",
+      "kw": "aio対策会社で契約後にトラブルになりやすいポイントは？",
+      "imp": 7,
+      "pos": 9.9,
+      "src": "gsc",
+      "written": false,
+      "ai": null,
+      "score": 6.9
+    },
+    {
+      "kw": "aio 対策 費用",
+      "imp": 5,
+      "pos": 5.4,
+      "src": "gsc",
+      "written": true,
+      "ai": null,
+      "score": 6.8
+    },
+    {
+      "kw": "aio対策 失敗",
       "imp": 6,
-      "pos": 6.2,
+      "pos": 28.5,
       "src": "gsc",
       "written": false,
       "ai": null,
@@ -42,19 +58,19 @@
     },
     {
       "kw": "aio対策 失敗事例",
-      "imp": 9,
-      "pos": 46.8,
+      "imp": 10,
+      "pos": 42.2,
       "src": "gsc",
       "written": false,
       "ai": null,
       "score": 6.0
     },
     {
-      "kw": "aio対策 失敗",
+      "kw": "aio対策 相場",
       "imp": 5,
-      "pos": 33.6,
+      "pos": 8.4,
       "src": "gsc",
-      "written": false,
+      "written": true,
       "ai": null,
       "score": 5.8
     },
@@ -68,6 +84,15 @@
       "score": 5.5
     },
     {
+      "kw": "aio対策 キーワード選定",
+      "imp": 18,
+      "pos": 15.7,
+      "src": "gsc",
+      "written": true,
+      "ai": null,
+      "score": 5.3
+    },
+    {
       "kw": "aio対策 注意点",
       "imp": 18,
       "pos": 69.6,
@@ -77,9 +102,27 @@
       "score": 5.3
     },
     {
+      "kw": "aio やり方",
+      "imp": 12,
+      "pos": 15.1,
+      "src": "gsc",
+      "written": true,
+      "ai": null,
+      "score": 5.1
+    },
+    {
       "kw": "aioseo違い",
+      "imp": 8,
+      "pos": 58.4,
+      "src": "gsc",
+      "written": false,
+      "ai": null,
+      "score": 5.0
+    },
+    {
+      "kw": "aio 対策ツール",
       "imp": 6,
-      "pos": 60,
+      "pos": 13.5,
       "src": "gsc",
       "written": false,
       "ai": null,
@@ -104,13 +147,13 @@
       "score": 4.3
     },
     {
-      "kw": "aio対策 キーワード選定",
-      "imp": 11,
-      "pos": 23.2,
+      "kw": "llmo代理店になる方法",
+      "imp": 14,
+      "pos": 7.2,
       "src": "gsc",
-      "written": true,
+      "written": false,
       "ai": null,
-      "score": 4.1
+      "score": 4.2
     },
     {
       "kw": "btob向けllmo対策のおすすめ会社は？",
@@ -131,6 +174,15 @@
       "score": 3.8
     },
     {
+      "kw": "aio おすすめ",
+      "imp": 5,
+      "pos": 16.6,
+      "src": "gsc",
+      "written": false,
+      "ai": null,
+      "score": 3.8
+    },
+    {
       "kw": "aio 対策 方法",
       "imp": 5,
       "pos": 86.8,
@@ -141,19 +193,10 @@
     },
     {
       "kw": "aio対策 無料ツール",
-      "imp": 63,
-      "pos": 34.0,
+      "imp": 68,
+      "pos": 33.6,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 3.8
-    },
-    {
-      "kw": "llmo代理店になる方法",
-      "imp": 6,
-      "pos": 7.3,
-      "src": "gsc",
-      "written": false,
       "ai": null,
       "score": 3.8
     },
@@ -188,15 +231,6 @@
       "kw": "aio対策 引用される方法",
       "imp": 33,
       "pos": 51.7,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 3.5
-    },
-    {
-      "kw": "seo対策 士業",
-      "imp": 30,
-      "pos": 54.3,
       "src": "gsc",
       "written": false,
       "ai": null,
@@ -330,8 +364,8 @@
     },
     {
       "kw": "aio対策 faq",
-      "imp": 14,
-      "pos": 76.5,
+      "imp": 15,
+      "pos": 71.7,
       "src": "gsc",
       "written": true,
       "ai": null,
@@ -375,8 +409,26 @@
     },
     {
       "kw": "aio対策 内製",
-      "imp": 9,
-      "pos": 75.6,
+      "imp": 10,
+      "pos": 71.9,
+      "src": "gsc",
+      "written": false,
+      "ai": null,
+      "score": 3.0
+    },
+    {
+      "kw": "aio対策ツール おすすめ",
+      "imp": 8,
+      "pos": 6.9,
+      "src": "gsc",
+      "written": false,
+      "ai": null,
+      "score": 3.0
+    },
+    {
+      "kw": "googleマップで不動産店舗の露出を増やせるツールはありますか?",
+      "imp": 10,
+      "pos": 34.9,
       "src": "gsc",
       "written": false,
       "ai": null,
@@ -395,24 +447,6 @@
       "kw": "aio対策 成功事例",
       "imp": 6,
       "pos": 81.5,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 2.8
-    },
-    {
-      "kw": "aio対策ツール おすすめ",
-      "imp": 5,
-      "pos": 5,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 2.8
-    },
-    {
-      "kw": "googleマップで不動産店舗の露出を増やせるツールはありますか?",
-      "imp": 6,
-      "pos": 34.7,
       "src": "gsc",
       "written": false,
       "ai": null,

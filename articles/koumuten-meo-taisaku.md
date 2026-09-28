@@ -49,13 +49,13 @@ faq:
 
 工務店のMEO対策とは、Googleマップの検索結果で自社を上位（特に目立つ上位3枠）に表示させ、来場・問い合わせにつなげる施策です。
 
+前提となる考え方を先に押さえるなら、[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)が参考になります。
+
 関連する内容として[工務店・注文住宅のAIO対策](/aio/koumuten-chumon-jutaku-aio/)も公開しています。
 
 関連する内容として[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)も公開しています。
 
 前提となる考え方は[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で整理しています。
-
-あわせて[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">MEO（Map Engine Optimization）とは</span>、Googleマップの検索結果で自社の表示順位を高める取り組みのことです。「地域名×工務店」「地域名×注文住宅」のような検索で、通常の検索結果より上に表示される地図の3枠を狙います。</div>
 

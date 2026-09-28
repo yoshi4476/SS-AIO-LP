@@ -49,6 +49,8 @@ faq:
 
 **法人の記帳代行費用は、税理士事務所で顧問料込み月4万円前後、専門の記帳代行会社なら月6,000〜2万円が目安です。**
 
+あわせて[記帳代行は税理士法違反？3つの独占業務とNG事例](/blog/kichodaiko-zeirishihou-ihan/)もご覧ください。
+
 近い論点を[記帳代行とは？できる範囲と失敗しやすい3つの落とし穴](/blog/kichodaiko-toha/)で扱っています。
 
 <div class="definition-box"><span class="term">記帳代行とは</span>、仕訳入力や帳簿作成といった経理業務を社外の税理士事務所や専門会社に委託することです。==法人の場合は個人事業主と違い、消費税の課税区分や給与計算の有無で費用の組み立てが変わります。==</div>
@@ -140,8 +142,6 @@ TOKIUMが公開する<a href="https://www.keihi.com/column/46260/" target="_blan
 ## 記帳代行の費用を抑える3つの工夫（法人向け）
 
 **法人が記帳代行の費用を抑えるには、資本金・仕訳数を先に伝え、複数社を同条件で比較することが有効です。**
-
-実際の進め方を先に押さえるなら、[記帳代行のやり方｜依頼から完了までの5ステップ](/blog/kichodaiko-yarikata/)が参考になります。
 
 <figure><img src="/images/kichodaiko-houjin-hiyou-souba/tejun.png" alt="法人が記帳代行の費用を抑える4つの手順: 仕訳数を把握する、資本金区分を確認する、税理士か専門会社か選ぶ、複数社で見積もりを比較する" loading="lazy"><figcaption>法人が記帳代行の費用を抑える4つの手順</figcaption></figure>
 

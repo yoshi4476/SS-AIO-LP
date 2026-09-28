@@ -59,6 +59,10 @@ faq:
 
 **個人店の経理は、現金・在庫・スタッフの3点を先に決めておくと、繁忙期でも崩れにくくなります。**
 
+近い論点を[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)で扱っています。
+
+関連する内容として[個人経営の経理のやり方｜後回しにしない3つのコツ](/blog/kojin-keiei-keiri-yarikata/)も公開しています。
+
 関連する内容として[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)も公開しています。
 
 <figure><img src="/images/kojinten-keiri-yarikata/santen.png" alt="個人店の経理で先に固める3点: 現金はレジ締めと現金出納帳、在庫は棚卸しと売上原価、スタッフは給与と源泉徴収" loading="lazy"><figcaption>個人店の経理で先に固める3点</figcaption></figure>
@@ -96,16 +100,12 @@ faq:
 
 見落としやすいのが4行目です。店舗の家賃や水道光熱費は事業専用のため、按分の計算が要りません。自宅兼店舗の場合だけ按分が必要になります。**按分の手間が減る一方で、現金と在庫の管理という手間が増える。これが個人店の経理の実像です。**
 
-自宅開業に近い形で経理を回している方は、[個人事業主の経理のやり方](/blog/keiri-yarikata-kojin-jigyonushi/)もあわせて確認してください。
-
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 現金：レジ締めと現金出納帳を日次で回す4ステップ
 
 **個人店の現金管理は、閉店後にレジ締めを行い、その日のうちに現金出納帳へ記録する流れを毎日繰り返すのが基本です。**
 
-
-近い論点を[売掛金管理の方法とは？](/blog/urikakekin-kanri-houhou/)で扱っています。
 
 <figure><img src="/images/kojinten-keiri-yarikata/rejishime.png" alt="レジ締めを日次で回す4ステップ: 売上データを集計する、レジの現金を数える、差額の原因を確認する、現金出納帳に記録する" loading="lazy"><figcaption>レジ締めを日次で回す4ステップ</figcaption></figure>
 

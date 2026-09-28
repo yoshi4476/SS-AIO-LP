@@ -53,13 +53,13 @@ faq:
 
 AIO対策の導入とは、AI検索への最適化をツール単発の作業ではなく、社内で継続する仕組みに変えることです。
 
+選ぶときの基準は[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)で整理しています。
+
 前提となる考え方は[税理士法人のAIO対策とは？](/aio/zeirishi-houjin-aio/)で整理しています。
 
 前提となる考え方は[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)でも扱っています。
 
 関連する内容として[OB客紹介の仕組み化とは？](/ai-marketing/obkyaku-shoukai-shikumi/)も公開しています。
-
-近い論点を[歯科医院の閉院費用とは？](/meo/shika-heiin-hiyou/)で扱っています。
 
 <div class="definition-box"><span class="term">AIO対策の導入とは</span>、冒頭の断言回答やFAQ整備といった構造改善を1回きりで終わらせず、担当者・診断・計測をセットにして社内の業務フローに組み込む取り組みを指します。</div>
 

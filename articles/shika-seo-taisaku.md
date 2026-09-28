@@ -74,11 +74,13 @@ diagrams:
 
 **歯科医院SEOは、症状KWでのページ構成から自由診療の専門ページ強化、歯科用の構造化データ実装まで5段階で進めます。**
 
+あわせて[リフォームSEOとは？受注につながる5つの施策](/seo/reform-seo-taisaku/)もご覧ください。
+
+あわせて[歯科医院のAIO対策にかかる費用はいくら？内訳と相場](/aio/shika-aio-taisaku-hiyou/)もご覧ください。
+
 関連する内容として[整骨院の費用は保険でいくら？自己負担3割の目安と相場](/seo/seikotsuin-hiyou-hoken/)も公開しています。
 
 費用の目安は[歯科医院の開業費用は5000万円？内訳と抑え方](/meo/shika-kaigyou-hiyou/)で整理しています。
-
-実際の進め方は[整骨院のSEO対策とは？](/seo/seikotsuin-seo-taisaku/)でも扱っています。
 
 <figure><img src="/images/shika-seo-taisaku/steps.png" alt="歯科医院SEO基本5ステップ: 症状KWで構成、自由診療ページ強化、内部リンクで回遊、歯科用データ実装、ポータルと併用" loading="lazy"><figcaption>歯科医院SEO基本5ステップ。前半3つがコンテンツ整備、後半2つが技術・戦略面の対応です</figcaption></figure>
 
@@ -150,14 +152,11 @@ diagrams:
 
 <div class="cta-box"><p>自由診療ページの構成やチェック体制、無料で診断します。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
-
 検索エンジンが自社サイトを読めているかは、[サイトの技術チェック（無料・URL入力だけ）](/site-audit/)で確かめられます。登録なしで、その場で点数が表示されます。
 
 ## AI検索時代の歯科医院SEO
 
 **歯科医院SEOの積み重ねは、AI検索が歯科医院を紹介する際の情報源としても評価されます。**
-
-ChatGPTやAI Overviewに医院名が出ない場合は、[歯科医院がAI検索に出ない原因](/aio/shika-ai-kensaku-denai-genin/)を順に確かめてください。
 
 「矯正歯科 費用 比較」のようにAIチャットへ相談してから来院先を絞る患者さんが増え始めました。AIの回答に並ぶ情報は、症状ページや自由診療ページの記述内容そのものが素材になります。
 

@@ -75,12 +75,6 @@ diagrams:
 
 **無料セミナーは知識の提供が目的で、FC加盟型セミナーは契約への導線が組み込まれています。**
 
-近い論点を[クリニックDX事例5選](/ai-marketing/clinic-dx-jirei/)で扱っています。
-
-関連する内容として[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)も公開しています。
-
-近い論点を[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)で扱っています。
-
 <a href="https://www.jbn-support.jp/builder/business/seminar/" target="_blank" rel="noopener">JBN・全国工務店協会</a>のような業界団体は、動画運用による受注増加や人手不足対策といった実務テーマのセミナーを会員向けに開催しています。商工会議所や中小企業基盤整備機構（中小機構）も、経営全般を扱う無料セミナーを多く開いています。
 
 <a href="https://j-net21.smrj.go.jp/startup/manual/list1/1-3-2.html" target="_blank" rel="noopener">中小機構「J-Net21」</a>によると、市区町村が認定した創業支援セミナーでは、経営・財務・人材育成・販路開拓の4分野を無料で学べる回が多いと紹介されています。集客（販路開拓）はこの4分野の一部として扱われることも多く、公的機関系セミナーは費用を抑えて基礎を押さえたい会社に向いています。

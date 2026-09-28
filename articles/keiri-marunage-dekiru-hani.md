@@ -87,11 +87,11 @@ faq:
 
 丸投げできる業務は、記帳・請求書発行・支払処理・経費精算・給与計算・年末調整の6つです。
 
+あわせて[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)もご覧ください。
+
 あわせて[請求書テンプレ無料の選び方](/blog/seikyusho-template-muryou/)もご覧ください。
 
 実際の進め方を先に押さえるなら、[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)が参考になります。
-
-実際の進め方は[経理の残業を減らす7つの方法](/blog/keiri-zangyo-herasu/)で整理しています。
 
 <figure><img src="/images/keiri-marunage-dekiru-hani/gyomu.png" alt="丸投げできる経理業務6つ: 記帳入力、請求書発行、支払処理、経費精算、給与計算、年末調整" loading="lazy"><figcaption>丸投げできる経理業務6つ</figcaption></figure>
 

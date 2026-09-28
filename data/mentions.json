@@ -7,7 +7,7 @@
       "linked": true,
       "third": true,
       "added": "2026-09-23",
-      "last_checked": "2026-09-23",
+      "last_checked": "2026-09-28",
       "alive": false,
       "state": "unknown"
     }
@@ -23,6 +23,14 @@
     },
     {
       "at": "2026-09-23",
+      "third": 1,
+      "alive": 0,
+      "gone": 0,
+      "unknown": 1,
+      "linked": 1
+    },
+    {
+      "at": "2026-09-28",
       "third": 1,
       "alive": 0,
       "gone": 0,

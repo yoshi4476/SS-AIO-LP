@@ -81,6 +81,12 @@ faq:
 
 *経理代行と税理士*は対応範囲が異なり、開業期は両方の役割を整理してから依頼先を決める必要があります。
 
+関連する内容として[経理代行は個人事業主でも使える？](/blog/keiri-daiko-kojin-jigyonushi/)も公開しています。
+
+実際の例は[経理代行の失敗5パターン](/blog/keiri-daiko-shippai/)で整理しています。
+
+近い論点を[経理の外注はどこまで丸投げできる？](/blog/keiri-marunage-dekiru-hani/)で扱っています。
+
 選ぶときの基準は[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)で整理しています。
 
 <div class="definition-box"><span class="term">経理代行とは</span>、記帳・請求書の発行・入出金の管理・決算書の作成準備といった経理業務を、外部の専門会社に委託するサービスのことです。税理士資格が必要な申告書の作成・提出そのものは含まれません。</div>
@@ -102,8 +108,6 @@ faq:
 ## 経理代行はいつから頼むべきか
 
 経理代行を頼むタイミングは、依頼先の選定は開業前、記帳の依頼開始は開業1〜2か月目が目安です。
-
-近い論点を[個人事業主の帳簿の付け方](/blog/kojin-jigyonushi-choubo-tsukekata/)で扱っています。
 
 <figure><img src="/images/keiri-daiko-kaigyou/taimingu.png" alt="経理代行を頼むタイミング3ステップ: 開業前に業務範囲を決めておく、開業1〜2か月目に記帳を任せ始める、軌道に乗ったら範囲を見直す" loading="lazy"><figcaption>経理代行を頼むタイミング3ステップ</figcaption></figure>
 
@@ -149,10 +153,6 @@ faq:
 ## 開業期の経理代行の選び方3つのポイント
 
 開業期に経理代行を選ぶ際は、少額の取引数から契約できるか・税理士との連携実績があるか・使う予定の会計ソフトに対応しているかを確認してください。
-
-関連する内容は[記帳の経理代行を断られる理由6つ｜再依頼前の対処法](/blog/kichodaiko-kotowarareru-riyu/)でも扱っています。
-
-費用の目安は[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)で整理しています。
 
 <figure><img src="/images/keiri-daiko-kaigyou/erabikata.png" alt="開業期の経理代行の選び方3つのポイント: 少額の取引数から契約できるか、税理士との連携実績があるか、使う予定の会計ソフトに対応しているか" loading="lazy"><figcaption>開業期の経理代行の選び方3つのポイント</figcaption></figure>
 

@@ -67,6 +67,8 @@ faq:
 
 集客代行を検討すべきサインは、反響の横ばい・運用時間の不足・社内ノウハウの不在という3つに整理できます。
 
+あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
+
 <figure><img src="/images/fudousan-shukyaku-daikou/sign.png" alt="集客代行を検討すべき3つのサイン: 反響が横ばいで増えない、運用に割く時間が足りない、社内にノウハウが蓄積しない" loading="lazy"><figcaption>集客代行を検討すべき3つのサイン</figcaption></figure>
 
 **サイン1: 反響が横ばいで増えない。**ポータルへの掲載件数を増やしても反響数が変わらない状態が続くなら、ポータル依存の限界に達しているサインです。自社サイトやSNSといった別チャネルの手当てが必要になります。
@@ -78,8 +80,6 @@ faq:
 ## 不動産集客代行で任せられる5つの業務
 
 不動産集客代行で任せられる業務は、ポータル運用・自社サイト運用・SNS運用・広告運用・反響対応の5つに整理できます。
-
-近い論点を[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)で扱っています。
 
 <figure><img src="/images/fudousan-shukyaku-daikou/gyomu.png" alt="不動産集客代行で任せられる5つの業務: ポータル運用代行、自社サイト運用、SNS運用代行、広告運用代行、反響対応代行" loading="lazy"><figcaption>不動産集客代行で任せられる5つの業務</figcaption></figure>
 

@@ -171,7 +171,7 @@ AI経由の集客で自社がどこまで準備できているかは、[AI検索
 
 集客アイデアが定着しない美容室は、同時着手・効果測定なし・担当者任せの3つに共通点があります。
 
-関連する内容として[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)も公開しています。
+近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
 
 <figure><img src="/images/biyoushitsu-shukyaku-idea/teichaku.png" alt="定着する集客アイデア・続かない集客アイデア: 続かないアイデアは一度に3つ以上を同時に始める、効果測定をせず数か月続ける、担当者任せで仕組み化しない。定着するアイデアは1つずつ試して定着させる、数値で効果を確認する、予約システムに組み込み仕組み化する" loading="lazy"><figcaption>定着する集客アイデア・続かない集客アイデア</figcaption></figure>
 

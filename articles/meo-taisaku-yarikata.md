@@ -30,7 +30,7 @@ faq:
 
 MEO対策とは、Googleマップの検索結果で自店舗を上位に表示させ、来店につなげる施策です。
 
-近い論点を[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で扱っています。
+関連する内容は[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で整理しています。
 
 関連して、[税理士のブログ集客とは？書くべき5つの記事テーマ](/seo/zeirishi-blog-shukyaku/)もあわせてご確認ください。
 

@@ -152,7 +152,7 @@ MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきま�
 
 **開業時の広告予算は内覧会やチラシに偏りやすく、GoogleビジネスプロフィールなどのMEO予算が後回しになりがちです。**
 
-関連する内容として[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)も公開しています。
+近い論点を[歯科医院の集客方法とは？新患を増やす5つの基本施策](/ai-marketing/shika-iin-shukyaku/)で扱っています。
 
 <figure><img src="/images/shika-kaigyou-hiyou/missed-budget.png" alt="開業費用で見落としやすい3つの集客予算: Googleビジネスプロフィールの整備費、ホームページのAIO対応費、内覧会・オープン告知の広告費" loading="lazy"><figcaption>3つとも、開業前に手を付けられる項目です</figcaption></figure>
 

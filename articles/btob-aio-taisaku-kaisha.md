@@ -49,11 +49,11 @@ faq:
 
 BtoB向けAIO対策会社とは、AI Overviewや生成AI検索での引用獲得を、BtoB特有の検討プロセスに合わせて支援する会社です。
 
-近い論点を[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)で扱っています。
+あわせて[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)もご覧ください。
 
-費用の目安は[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)で整理しています。
+あわせて[歯科医院のAIO対策にかかる費用はいくら？内訳と相場](/aio/shika-aio-taisaku-hiyou/)もご覧ください。
 
-関連する内容は[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-muryou-tool/)でも扱っています。
+関連する内容として[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)も公開しています。
 
 <div class="definition-box"><span class="term">BtoB向けAIO対策会社とは</span>、単に構造化データを実装するだけでなく、比較表・FAQ・一次情報といった「引用されやすい構造」を、稟議や複数人の比較検討を経るBtoBの購買行動に合わせて設計できる会社を指します。BtoC向けの型をそのまま流用しても、決裁者に刺さる情報設計にはなりません。</div>
 

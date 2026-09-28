@@ -109,9 +109,9 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 中長期では、クラウド化・自動化・経理BPO・採用条件の見直しという4つの対策で、人手不足そのものを解消します。
 
-あわせて[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)もご覧ください。
+関連する内容として[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)も公開しています。
 
-近い論点を[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)で扱っています。
+あわせて[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)もご覧ください。
 
 | 対策 | 概要 | 効果が出るまでの目安 |
 |:--|:--|:--|

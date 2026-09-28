@@ -1,4 +1,6 @@
 ---
+merged_into: monozukuri-hojokin-biyoushitsu
+merged_at: 2026-09-28
 title: ものづくり補助金は小売業に使えない？対象になる投資の見極め方
 description: ものづくり補助金は小売業も対象ですが、審査で評価されるのは内装や什器ではなく在庫管理・自動発注などのデータ活用投資です。業態別の対象経費、中小企業者基準、IT導入補助金との違いを2026年8月時点の情報で解説します。
 slug: monozukuri-hojokin-kourigyou

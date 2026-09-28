@@ -68,6 +68,8 @@ faq:
 
 **整骨院で保険が使えるのは、骨折・脱臼・打撲・捻挫（肉離れを含む）の施術を受けた場合に限られます。**単なる肩こりや筋肉疲労は保険の対象外です。
 
+関連する内容として[クリニックM&A後の集患再建](/meo/clinic-ma-shukyaku-jirei/)も公開しています。
+
 関連する内容として[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)も公開しています。
 
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html" target="_blank" rel="noopener">厚生労働省の案内</a>によると、柔道整復師の施術で健康保険が使えるのは「骨折、脱臼、打撲及び捻挫（いわゆる肉ばなれを含む）の施術を受けた場合」です。骨折・脱臼については、緊急の場合を除き、あらかじめ医師の同意を得ることが条件になります。
@@ -120,8 +122,6 @@ faq:
 ## 整骨院の費用ページに必須の5項目｜検索とAI検索で選ばれる書き方
 
 **整骨院の費用ページには、保険適用の範囲・自己負担割合・自由診療の料金表・支払い方法・注意書きの5項目が欠かせません。**
-
-関連する内容として[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)も公開しています。
 
 <figure><img src="/images/seikotsuin-hiyou-hoken/page-items.png" alt="整骨院の費用ページに書くべき5項目: 保険適用の範囲を明記する、自己負担割合の目安を示す、自由診療の料金表を載せる、支払い方法を案内する、来院前の注意書きを添える" loading="lazy"><figcaption>整骨院の費用ページに書くべき5項目</figcaption></figure>
 

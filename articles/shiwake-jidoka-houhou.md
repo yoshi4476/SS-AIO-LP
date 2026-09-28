@@ -93,6 +93,10 @@ faq:
 
 仕訳の自動化は、現状の棚卸しからルールの見直しまで、4つの手順で進めると失敗しにくくなります。
 
+関連する内容として[請求書の三つ折りのやり方｜向きを間違えない3ステップ](/blog/seikyusho-mitsuori-yarikata/)も公開しています。
+
+関連する内容として[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)も公開しています。
+
 あわせて[請求書チェックの効率化](/blog/seikyusho-check-koritsuka/)もご覧ください。
 
 <figure><img src="/images/shiwake-jidoka-houhou/tejun.png" alt="仕訳自動化を始める4つの手順: 現状の仕訳を棚卸しする、自動化する範囲とツールを選ぶ、仕訳ルールを設定・学習させる、運用ルールとチェック体制を作る" loading="lazy"><figcaption>仕訳自動化を始める4つの手順</figcaption></figure>
@@ -109,13 +113,15 @@ faq:
 
 クラウド会計ソフトは、自社が使う銀行・カードとの連携数、価格帯、サポート体制の3点で比較して選びます。
 
-関連する内容として[freeeの経費精算のやり方](/blog/freee-keihi-seisan-yarikata/)も公開しています。
+あわせて[楽楽精算の経費精算のやり方](/blog/rakurakuseisan-keihi-seisan-yarikata/)もご覧ください。
 
-あわせて[月次決算とは？初心者向けの基本と進め方5ステップ](/blog/getsuji-kessan-nyumon/)もご覧ください。
+あわせて[経理のやり方とは？初心者向け5ステップ](/blog/keiri-yarikata-shoshinsha/)もご覧ください。
 
-あわせて[経理効率化セミナーの費用相場と選び方](/blog/keiri-koritsuka-seminar/)もご覧ください。
+近い論点を[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)で扱っています。
 
-関連する内容として[中小企業の経理効率化](/blog/chusho-keiri-koritsuka/)も公開しています。
+あわせて[経理効率化の本おすすめ6選｜選び方3ステップと失敗例](/blog/keiri-koritsuka-hon/)もご覧ください。
+
+関連する内容として[経理効率化セミナーの費用相場と選び方](/blog/keiri-koritsuka-seminar/)も公開しています。
 
 前述のMM総研の調査では、クラウド会計ソフトの事業者別シェアは**弥生が54.0%、freeeが25.1%、マネーフォワードが15.7%**でした。上位3社が9割以上を占めています。
 
@@ -132,18 +138,6 @@ faq:
 ## 自動化しても仕訳ミスが起きるケースとNG運用
 
 仕訳を自動化しても、確認を省略したり例外対応を決めずに放置したりすると、ミスは残ります。
-
-近い論点を[ATM入出金の記帳のやり方](/blog/atm-kicho-yarikata/)で扱っています。
-
-あわせて[経理AI自動化とは？できること5つと導入4ステップ](/blog/keiri-jidoka-ai/)もご覧ください。
-
-関連する内容として[記帳自動化アプリの選び方｜比較の基準3つと導入3手順](/blog/kicho-jidoka-app/)も公開しています。
-
-関連する内容として[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)も公開しています。
-
-あわせて[月次決算の経理BPO契約前に確認すべき5つのこと](/blog/getsuji-kessan-bpo-keiyakumae/)もご覧ください。
-
-関連する内容として[iPhoneで記帳を自動化する方法](/blog/iphone-kicho-jidoka/)も公開しています。
 
 <figure><img src="/images/shiwake-jidoka-houhou/hikaku.png" alt="仕訳自動化のNG運用とOK運用: NG例は自動仕訳の提案をすべて無確認で確定する・摘要のルールを決めずに運用を始める・例外処理の担当者を決めていない・導入後に一度もルールを見直さない、OK例は月次でサンプル確認してから確定する・摘要・勘定科目のルールを先に決める・例外は誰が判断するか決めておく・決算期や取引変化に合わせてルールを更新する" loading="lazy"><figcaption>仕訳自動化のNG運用とOK運用</figcaption></figure>
 

@@ -51,7 +51,7 @@ faq:
 
 あわせて[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)もご覧ください。
 
-関連する内容として[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)も公開しています。
+前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)でも扱っています。
 
 関連する内容は[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)で整理しています。
 
