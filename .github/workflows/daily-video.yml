@@ -51,6 +51,7 @@ jobs:
           fi
           claude --version || echo "::warning::claude が入らず、掛け合いの台本を作れません（スライド形式で出します）"
           python scripts/duo_video.py --selftest || echo "::warning::掛け合い台本の検査が壊れています"
+          python scripts/duo_short.py --selftest || echo "::warning::ショート台本の検査が壊れています"
       - name: 動画を作って上げる
         env:
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
@@ -59,8 +60,16 @@ jobs:
         run: |
           [ -n "$YOUTUBE_CLIENT_JSON" ] && printf '%s' "$YOUTUBE_CLIENT_JSON" > youtube-client.json
           [ -n "$YOUTUBE_TOKEN_JSON" ]  && printf '%s' "$YOUTUBE_TOKEN_JSON"  > youtube-token.json
-          python scripts/article_videos.py --write --limit 1 --days 7 2>&1 | tail -8 || true
+          python scripts/article_videos.py --write --limit 1 --days 7 --shorts 1 2>&1 | tail -10 || true
           rm -f youtube-client.json youtube-token.json
+      # TikTok は審査前だと自動投稿が非公開になるため、縦型の mp4 を成果物に残して手で上げる（30日保存）
+      - name: 縦型ショートを成果物に残す（TikTok 用）
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts-${{ github.run_id }}
+          path: automation/video/*.short.mp4
+          if-no-files-found: ignore
+          retention-days: 30
       - name: 記事に埋めてコミット
         env:
           GH_TOKEN: ${{ github.token }}
@@ -68,7 +77,7 @@ jobs:
           python scripts/build.py > /dev/null 2>&1 || echo "::warning::ビルドに失敗（動画の埋め込みは次のビルドで入ります）"
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add data/videos.json data/youtube_playlists.json site data/published.json data/body_hash.json data/yomi_dict.json data/yomi_issues.jsonl data/duo_scripts 2>/dev/null || true
+          git add data/videos.json data/youtube_playlists.json site data/published.json data/body_hash.json data/yomi_dict.json data/yomi_issues.jsonl data/duo_scripts data/duo_shorts 2>/dev/null || true
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
           git commit -q -m "記事動画: $(date '+%Y-%m-%d')"
           pushed=0

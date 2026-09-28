@@ -104,12 +104,42 @@ def note_token_missing():
         FINDINGS.write_text(t.rstrip("\n") + ("\n" if t else "") + line + "\n", encoding="utf-8")
 
 
+def shorts(ledger, limit, token, public):
+    """横型の動画がある記事から、ショートの無いものを新しい順に作る。
+    TikTok は審査前だと自動投稿が非公開になるため、mp4 を残すだけ（CI の成果物から手で上げる）"""
+    import duo_short as DS
+    import video_make as VM
+    import youtube_upload as YT
+    todo = sorted((k for k, v in ledger.items() if v.get("youtube") and not v.get("short")
+                   and (ROOT / "articles" / f"{k}.md").is_file()),
+                  key=lambda k: ledger[k].get("date", ""), reverse=True)[:limit]
+    made = 0
+    for slug in todo:
+        try:
+            sc = DS.load_script(slug) or DS.write_script(slug)
+            if not sc:
+                print(f"   × short {slug[:40]}: 台本が検査に通りませんでした")
+                continue
+            out = VM.OUT / f"{slug}.short.mp4"
+            sec = DS.make(sc, out)
+            rec = {"date": date.today().isoformat(), "sec": round(sec), "title": sc.get("title", "")}
+            if token:
+                rec["youtube"] = YT.upload(out, slug, public=public, quiet=True, short_title=sc.get("title", ""))
+            ledger[slug]["short"] = rec
+            made += 1
+            print(f"   ○ short {slug[:40]:<40} {sec:.0f}秒" + (f" → youtube.com/shorts/{rec['youtube']}" if token else ""))
+        except Exception as e:
+            print(f"   × short {slug[:40]}: {str(e)[:80]}")
+    return made
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--limit", type=int, default=1)
     ap.add_argument("--days", type=int, default=7)
     ap.add_argument("--public", action="store_true", default=True)
+    ap.add_argument("--shorts", type=int, default=1, help="縦型ショートを作る本数（動画のある記事から新しい順）")
     ap.add_argument("--reuse", action="store_true",
                     help="手元で書き出して確認済みの動画（台本より新しいもの）を作り直さずに上げる")
     a = ap.parse_args()
@@ -169,6 +199,7 @@ def main():
             print(f"   × {r['slug'][:40]:<40} {str(e)[:80]}")
         LEDGER.parent.mkdir(parents=True, exist_ok=True)
         LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+    made_s = shorts(ledger, a.shorts, token, a.public) if a.shorts else 0
     # 作り直しの判定で控えた基準（nums）も残す（動画を作らなかった回でも）
     LEDGER.parent.mkdir(parents=True, exist_ok=True)
     LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -176,6 +207,7 @@ def main():
         note_token_missing()
     print(f"VIDEOS_OK={'yes' if ok else 'no'}")
     print(f"VIDEOS_MADE={made}")
+    print(f"SHORTS_MADE={made_s}")
     print(f"YT_TOKEN={'yes' if token else 'missing'}")
     return 0
 

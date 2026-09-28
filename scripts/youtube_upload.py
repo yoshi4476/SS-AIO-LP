@@ -115,7 +115,9 @@ def describe(slug):
         ds = ROOT / "data" / "datasets" / f"{slug}.json"
         if ds.is_file():
             d = json.loads(ds.read_text(encoding="utf-8"))
-            url = f"https://ai.7senses.co.jp/data/{slug}/"
+            import data_intake
+            # 一次データを非公開にしている間は /data/ が404になるので、サイトの入口へ送る
+            url = f"https://ai.7senses.co.jp/data/{slug}/" if data_intake.PUBLIC else "https://ai.7senses.co.jp/"
             return (f'{d["sentence"]}\n\n'
                     f'▼ 集計の元データ（表・グラフ・CSV・構造化データ）\n{url}\n\n'
                     f'母数: {d["n"]:,}{d["n_unit"]}\n対象期間: {d["period"]}\n'
@@ -178,13 +180,18 @@ def _add_to_playlist(yt, vid, title):
     return name
 
 
-def upload(mp4, slug, public=False, quiet=False):
+def upload(mp4, slug, public=False, quiet=False, short_title=""):
+    """short_title を渡すと縦型ショートとして上げる（題に #Shorts、説明は短く、再生リストには入れない）"""
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload
     c = creds()
     if not c:
         raise SystemExit("youtube-token.json がありません。--auth を先に実行してください")
     desc, title, tags = describe(slug)
+    if short_title:
+        # ショートの説明欄のリンクは押せない前提。検索で来てもらう一文を先に置く
+        desc = "詳しくは「AI集客ラボ」で検索してください。\n\n" + desc
+        title = short_title[:88] + " #Shorts"
     # タイトルは100字まで。超えると API が弾く
     title = (title or slug)[:100]
     # チャプター（video_make が <動画>.chapters.txt に書く）。説明欄の時刻がそのまま章になる
@@ -213,7 +220,8 @@ def upload(mp4, slug, public=False, quiet=False):
             print(f"  [注意] 字幕を上げられませんでした（{str(e)[:70]}）。--auth をやり直すと権限が付きます")
     # 業種別の再生リストへ入れる（無ければ作る）。リストは「業種×集客」の言及の面になる
     try:
-        _add_to_playlist(yt, vid, title)
+        if not short_title:
+            _add_to_playlist(yt, vid, title)
     except Exception as e:
         print(f"  [注意] 再生リストに入れられませんでした（{str(e)[:70]}）")
     if not quiet:
