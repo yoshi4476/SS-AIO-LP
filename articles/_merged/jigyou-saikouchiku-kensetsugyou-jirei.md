@@ -1,4 +1,6 @@
 ---
+merged_into: jigyou-saikouchiku-biyoushitsu-jirei
+merged_at: 2026-09-28
 title: 事業再構築補助金は建設業も対象｜3つの事例と今の後継制度
 description: 建設業で事業再構築補助金を使った新分野展開・業態転換の事例と、2025年3月の公募終了後に使える後継制度、建設業許可との関係を2026年8月時点でまとめました。
 slug: jigyou-saikouchiku-kensetsugyou-jirei

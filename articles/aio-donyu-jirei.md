@@ -91,7 +91,7 @@ GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extendedは、それ
 
 計測を始める前は、順位が上がったという感覚だけで施策の良し悪しを判断していました。数値で確認する運用に変えてからは、どの記事のどの部分を直せば引用や表示が伸びるかを、感覚ではなく事実として議論できるようになりました。
 
-計測の型を先に固めたい場合は、[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)と[AIO対策の計測方法](/aio/aio-taisaku-keisoku-houhou/)を先に読んでおくと、自社での再現がしやすくなります。
+計測の型を先に固めたい場合は、[AIO効果測定レポートの雛形](/aio/aio-taisaku-keisoku-houhou/)と[AIO対策の計測方法](/aio/aio-taisaku-keisoku-houhou/)を先に読んでおくと、自社での再現がしやすくなります。
 
 <figure><img src="/images/aio-donyu-jirei/before-after.png" alt="AIO導入前後で変わったこと: 導入前は構造化データが未実装・llms.txtが未設置・クロール許可が未確認・引用状況を計測していない。導入後はBlogPosting・FAQPage・BreadcrumbListを直書き・llms.txtを継続的に追記・主要20種のクローラー許可を記録・GSC生成AIレポートを日次で確認" width="1200" height="675" loading="lazy"><figcaption>AIO導入前後で変わったこと（当メディア作成）</figcaption></figure>
 

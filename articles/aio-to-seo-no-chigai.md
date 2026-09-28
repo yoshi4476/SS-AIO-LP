@@ -99,7 +99,7 @@ SEOはGSCと順位ツールを、AIOはGSCの生成AIレポートとGA4のAI参�
 
 近い論点を[AI集客とは？無料で今日から始める5つの方法と落とし穴3つ](/ai-marketing/ai-kantan-shukyaku/)で扱っています。
 
-関連する内容は[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)で整理しています。
+関連する内容は[AIO効果測定レポートの雛形](/aio/aio-taisaku-keisoku-houhou/)で整理しています。
 
 SEOの計測はGoogle Search Consoleの検索パフォーマンスレポートと、順位計測ツールが中心です。AIOの計測はこれに加えて、<a href="https://support.google.com/webmasters/answer/16984139?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ</a>にある生成AIパフォーマンスレポートと、GA4のリファラー別セッションを見る必要があります。
 

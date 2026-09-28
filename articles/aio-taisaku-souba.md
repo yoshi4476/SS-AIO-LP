@@ -88,7 +88,7 @@ AIO対策の相場は、診断のみなら月3万円台、運用まで任せる�
 
 <figure><img src="/images/aio-taisaku-souba/price-range.png" alt="価格帯別にできることの違い: 月3万円未満は無料ツール中心の自己運用、月3万〜10万円台は診断+部分的な構造改善、月10万〜30万円台は構造改善+月次運用の一括代行、月30万円以上は複数サイトの一括運用" loading="lazy"><figcaption>価格帯別にできることの違い</figcaption></figure>
 
-**月3万円未満は、無料ツールを使った自己診断・自己運用が中心です**。Search ConsoleやGA4など無料ツールの使い方は[AIO対策の無料ツール6選](/aio/aio-taisaku-muryou-tool/)、安価なツールの比較は[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-yasui-tool/)で紹介しています。有料ツールに切り替える場合の相場観は、<a href="https://dolphinx.jp/pricing/aio" target="_blank" rel="noopener">国産ツールDolphinX AIO</a>が月3万円台、<a href="https://otterly.ai/pricing" target="_blank" rel="noopener">海外製Otterly.AI</a>が月25ドル前後からと、いずれも本記事の最安価格帯に収まります。ただし自己運用だけでは限界もあります。当サイトの実測では、「aio対策 無料ツール」という語で平均24.3位・33回表示されましたが、1ページ目に届くまではクリックがほとんど発生しませんでした。無料ツールは現状把握には有効でも、順位そのものを上げる作業は別に必要です。
+**月3万円未満は、無料ツールを使った自己診断・自己運用が中心です**。Search ConsoleやGA4など無料ツールの使い方は[AIO対策の無料ツール6選](/aio/aio-taisaku-muryou-tool/)、安価なツールの比較は[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-muryou-tool/)で紹介しています。有料ツールに切り替える場合の相場観は、<a href="https://dolphinx.jp/pricing/aio" target="_blank" rel="noopener">国産ツールDolphinX AIO</a>が月3万円台、<a href="https://otterly.ai/pricing" target="_blank" rel="noopener">海外製Otterly.AI</a>が月25ドル前後からと、いずれも本記事の最安価格帯に収まります。ただし自己運用だけでは限界もあります。当サイトの実測では、「aio対策 無料ツール」という語で平均24.3位・33回表示されましたが、1ページ目に届くまではクリックがほとんど発生しませんでした。無料ツールは現状把握には有効でも、順位そのものを上げる作業は別に必要です。
 
 **月3万〜10万円台は、診断に加えて特定ページの構造改善までを代行してもらえる価格帯です**。全ページではなく優先度の高いページに絞って依頼するため、費用を抑えながら効果を検証できます。
 

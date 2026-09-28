@@ -15,3 +15,7 @@
 # 主力（AIO）へ寄せる書き換えでカテゴリが変わった記事。
 # 旧URLを放置すると404になり、積み上げた評価も引き継げない。
 /seo/seikotsuin-hiyou-heikin/  /aio/seikotsuin-hiyou-heikin/  301
+# 統合（2026-09-28）: aio-taisaku-yasui-tool → aio-taisaku-muryou-tool
+/aio/aio-taisaku-yasui-tool/  /aio/aio-taisaku-muryou-tool/  301
+# 統合（2026-09-28）: aio-koka-sokutei-report-hinagata → aio-taisaku-keisoku-houhou
+/aio/aio-koka-sokutei-report-hinagata/  /aio/aio-taisaku-keisoku-houhou/  301

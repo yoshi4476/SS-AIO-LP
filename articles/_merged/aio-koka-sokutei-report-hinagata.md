@@ -1,4 +1,6 @@
 ---
+merged_into: aio-taisaku-keisoku-houhou
+merged_at: 2026-09-28
 title: AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方
 description: AIO効果測定レポートの雛形を紹介します。表示回数・引用ページ数・参照セッションなど入れるべき5つの指標と、週次・月次の運用手順、そのまま使える表形式のテンプレートを解説します。
 slug: aio-koka-sokutei-report-hinagata

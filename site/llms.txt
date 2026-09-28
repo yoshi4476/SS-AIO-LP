@@ -30,7 +30,7 @@
 - [AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/): 4施策の関係と着手順をまとめたピラー記事
 - [AIOコンサルティングとは？依頼の判断基準と費用の目安](https://ai.7senses.co.jp/aio/aio-taisaku-guide/): AI検索に引用されるための5つの実践手順を解説
 - [LLMO対策とは？ChatGPTに引用される7つの方法](https://ai.7senses.co.jp/aio/llmo-taisaku-hoho/): AIチャットに引用されるための7つの実践方法と計測のやり方
-- [AIO対策の無料ツール6選｜計測から診断まで今日から使える](https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/): AI引用状況・構造化データ・クローラー許可を無料で確認する6つのツールと使い方
+- [AIO対策の無料ツール6選｜計測・診断と安い有料ツールの選び方](https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/): AI引用状況・構造化データ・クローラー許可を無料で確認する6つのツールと使い方
 - [AI時代のSEO対策とは？中小企業がやるべき5つの基本](https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/): 検索上位とAI引用の両方を狙うSEOの基本を優先順位つきで解説
 - [MEO対策のやり方7ステップ｜マップ上位表示の手順](https://ai.7senses.co.jp/meo/meo-taisaku-yarikata/): Googleマップ上位表示までの手順を無料でできる範囲中心に解説
 - [Googleマップの口コミを増やす方法5選と返信のコツ](https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/): ポリシー違反にならない口コミの増やし方と返信の型を解説
@@ -113,7 +113,7 @@
 - [美容室の集客アイデア12選｜無料で今日から試せる施策](https://ai.7senses.co.jp/ai-marketing/biyoushitsu-shukyaku-idea/): 美容室の集客アイデアは、Googleマップ・口コミ・SNS・季節施策・予算施策の5系統から、無料でできることを優先して選ぶことです。3,200店舗の支援実績をもとに、今日から試せる12のアイデアと実行順序を解説します。
 - [AIO対策でAIに引用されるには？5つの実践ポイント](https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/): AIO対策でAIに引用される記事とは、検索10位以内の土台とクロール許可を満たしたうえで、抽出しやすい構造と出典付きの独自情報を備えた記事です。仕組みと5つの実践ポイントを解説します。
 - [AIO対策でやってはいけない5つのNG行動と正しい進め方](https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/): AIO対策でやってはいけないNG行動は、検索順位を無視したAIO単独狙い・クローラーの一括ブロック・機械的な量産・FAQとSchemaの不一致・CV導線の軽視という5つです。具体例と正しい進め方を解説します。
-- [AIO対策の計測方法｜見るべき5つの指標と週次の運用手順](https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/): AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。
+- [AIO対策の計測方法｜5つの指標とレポート雛形・週次運用](https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/): AIO対策の計測方法は、GSCの生成AIパフォーマンスレポートとGA4のAI参照元セッションを組み合わせ、表示回数・引用ページ・流入経路を月次で追う仕組みです。見るべき5つの指標と、今日から始める設定手順を解説します。
 - [飲食店の集客方法とは？グルメサイト依存から抜け出す5つの施策](https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/): 飲食店の集客方法は、Googleビジネスプロフィールを土台にグルメサイト・SNS・デリバリーアプリを役割分担させる進め方です。G-ranの3,200店舗超の支援実績から、業態別の重みづけと使い分けを解説します。
 - [LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](https://ai.7senses.co.jp/aio/llmo-shukyaku/): LLMO集客とは、AIチャットの引用を認知・指名検索・問い合わせにつなげる導線設計です。引用されても集客に繋がらない理由、比較表・FAQ・CTAの実装ポイント、GA4・GSCでの効果測定まで、自社サイトの実測データを交えて解説します。
 - [美容室のMEO対策とは？指名予約が増える6つの実践ポイント](https://ai.7senses.co.jp/meo/biyoushitsu-meo-taisaku/): 美容室のMEO対策とは、Googleマップでの表示情報を整え指名予約や新規来店につなげる取り組みです。全国27万店舗超が競う市場で、3,200店舗以上の支援実績から見えた6つの実践ポイントを解説します。
@@ -153,10 +153,8 @@
 - [AIO集客とは？向いている業種と始める3つの基準](https://ai.7senses.co.jp/aio/aio-shukyaku/): AIO集客とは、AIの回答内で自社の情報が引用され、問い合わせにつながる状態をつくる取り組みです。向いている業種の見分け方、始める前に確認する3条件を解説します。
 - [AIOのやり方｜5ステップの実践手順と失敗例](https://ai.7senses.co.jp/aio/aio-yarikata/): AIOのやり方は、クローラーの受け入れ整備→本文の断言型書き換え→数値ファクトの追加→FAQの整備→公開後の計測という5ステップです。自社サイトの実装データをもとに、つまずきやすい失敗例とあわせて手順を解説します。
 - [MEO会社の選び方｜LLMO対応の見極め3基準](https://ai.7senses.co.jp/aio/meo-kaisha-llmo-taiou/): MEO会社を選ぶ際にLLMO対応まで確認すべき理由と、見極めの3つの基準を解説します。MEO専業との違いや依頼前の確認ステップ、よくある失敗も紹介します。
-- [AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方](https://ai.7senses.co.jp/aio/aio-koka-sokutei-report-hinagata/): AIO効果測定レポートの雛形を紹介します。表示回数・引用ページ数・参照セッションなど入れるべき5つの指標と、週次・月次の運用手順、そのまま使える表形式のテンプレートを解説します。
 - [LLMO代理店募集の見分け方｜確認すべき5つの条件](https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/): LLMO代理店の募集情報は条件があいまいなまま契約すると業務範囲でトラブルになります。契約前に確認すべき5つの条件、始め方3ステップ、失敗しやすい3つの落とし穴を2026年9月時点の情報で解説します。
 - [LLMO店舗集客とは？MEOだけで足りない理由と5つの施策](https://ai.7senses.co.jp/aio/llmo-tenpo-shukyaku/): LLMO店舗集客とは、AI検索での引用を来店・予約につなげる店舗向けの取り組みです。MEO対策との違い、取り組むべき5つの施策、業種別の進め方、GA4・GSCでの効果測定までを、自社の運用実績とあわせて解説します。
-- [安いAIO対策ツールおすすめ6選｜無料〜月3万円台の価格帯を比較](https://ai.7senses.co.jp/aio/aio-taisaku-yasui-tool/): 安いAIO対策ツールは、無料のSearch Console・GA4から、海外製Otterly.AI Lite（月25ドル）、国産DolphinX AIOライト（月3万円）まで価格帯が分かれます。価格帯別の選び方を解説します。
 - [歯科医院がAI検索に出ない5つの原因｜医療広告ガイドラインとMEOの壁](https://ai.7senses.co.jp/aio/shika-ai-kensaku-denai-genin/): 歯科医院がChatGPTやAI Overviewに出ない主な原因は、医療広告ガイドラインによる表現制限とMEO情報の薄さです。YMYL領域特有の事情とセルフ診断の手順、対処の優先順位を解説します。
 - [歯科医院のAIO対策にかかる費用はいくら？内訳と相場【2026年】](https://ai.7senses.co.jp/aio/shika-aio-taisaku-hiyou/): 歯科医院のAIO対策費用は、内製と外部委託で大きく変わります。費用の内訳3項目、医療広告ガイドラインが費用に与える影響、安さだけで選ぶ失敗例、費用対効果の考え方まで相場と一緒に解説します。
 - [整骨院のAIO対策でやりがちな失敗5つ｜柔整広告制限と口コミ不足の壁](https://ai.7senses.co.jp/aio/seikotsuin-aio-taisaku-shippai/): 整骨院のAIO対策で最も多い失敗は、柔道整復師法の広告制限を超えた断定表現と、口コミ・指名検索を後回しにしたまま構造だけ整えることです。5つの失敗パターンと自院での確認手順を解説します。

@@ -1,4 +1,6 @@
 ---
+merged_into: aio-taisaku-muryou-tool
+merged_at: 2026-09-28
 title: 安いAIO対策ツールおすすめ6選｜無料〜月3万円台の価格帯を比較
 description: 安いAIO対策ツールは、無料のSearch Console・GA4から、海外製Otterly.AI Lite（月25ドル）、国産DolphinX AIOライト（月3万円）まで価格帯が分かれます。価格帯別の選び方を解説します。
 slug: aio-taisaku-yasui-tool

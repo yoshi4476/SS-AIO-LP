@@ -1,4 +1,6 @@
 ---
+merged_into: inshokuten-ai-hojokin-taisho-youken
+merged_at: 2026-09-28
 title: 動物病院はAI導入補助金の対象になるか｜医療法人になれない業種特有の2つの基準
 description: 動物病院がAI導入補助金を使えるかを、獣医業の日本標準産業分類上の位置づけと、医療法人になれず株式会社・個人事業主で開業する業種特性から解説。審査で弾かれる共通点も2026年9月時点の情報でまとめました。
 slug: doubutsu-byouin-ai-hojokin-taisho-youken

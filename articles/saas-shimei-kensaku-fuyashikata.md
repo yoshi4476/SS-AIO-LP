@@ -98,7 +98,7 @@ BtoB購買では営業接触前に候補企業のリストアップが完了し�
 
 あわせて[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)もご覧ください。
 
-あわせて[AIO効果測定レポートの雛形](/aio/aio-koka-sokutei-report-hinagata/)もご覧ください。
+あわせて[AIO効果測定レポートの雛形](/aio/aio-taisaku-keisoku-houhou/)もご覧ください。
 
 <figure><img src="/images/saas-shimei-kensaku-fuyashikata/methods.png" alt="SaaS指名検索を増やす5つの施策: 接触回数を増やすでSNS・広告で複数回接触する、第三者メディアに載るで比較サイト・業界メディアに掲載、比較で選ばれる情報を作るで導入事例とホワイトペーパー、AI引用の構造を整えるで比較表・FAQ・数値ファクト、指名検索を計測するでGSCのブランドクエリで追跡" loading="lazy"><figcaption>SaaS指名検索を増やす5つの施策</figcaption></figure>
 

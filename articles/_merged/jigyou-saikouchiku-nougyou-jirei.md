@@ -1,4 +1,6 @@
 ---
+merged_into: jigyou-saikouchiku-shukuhakugyou-jirei
+merged_at: 2026-09-28
 title: 事業再構築補助金で農業が使えたのは6次産業化｜対象外の境界線
 description: 事業再構築補助金は農業の6次産業化（加工・直売・新分野展開）で採択事例がありますが、単なる栽培拡大は対象外でした。2025年3月に受付を終えた制度の境界線と、今から使える後継制度の対象経費・上限額を2026年8月時点でまとめました。
 slug: jigyou-saikouchiku-nougyou-jirei
@@ -57,7 +59,7 @@ faq:
 
 宿泊業の事例は、[宿泊業のインバウンド投資を支えた事業再構築補助金](/blog/jigyou-saikouchiku-shukuhakugyou-jirei/)で紹介しています。
 
-建設業のケースは[事業再構築補助金は建設業も対象](/blog/jigyou-saikouchiku-kensetsugyou-jirei/)で解説しています。
+建設業のケースは[事業再構築補助金は建設業も対象](/blog/jigyou-saikouchiku-biyoushitsu-jirei/)で解説しています。
 
 <div class="definition-box"><span class="term">事業再構築補助金とは</span>、新型コロナウイルス対応の緊急経済対策として2021年に始まった制度です。事業転換や業態転換に伴う設備投資を、新市場開拓や新分野展開を条件に支援していました。</div>
 

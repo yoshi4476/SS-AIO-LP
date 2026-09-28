@@ -7,6 +7,13 @@
   <updated>2026-09-28T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>AIO対策の無料ツール6選｜計測・診断と安い有料ツールの選び方</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/</id>
+    <updated>2026-09-28T00:00:00+09:00</updated>
+    <summary>AIO対策の無料ツールは、Search Console・GA4・リッチリザルトテストなど6つで足ります。AI引用状況と構造化データを無料で診断する手順と、足りなくなったときの安い有料ツールの価格帯まで解説します。</summary>
+  </entry>
+  <entry>
     <title>病院・クリニックの口コミ返信｜違反になるNG表現と例文8つ</title>
     <link href="https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/"/>
     <id>https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/</id>
@@ -105,25 +112,11 @@
     <summary>歯科医院のAIO対策費用は、内製と外部委託で大きく変わります。費用の内訳3項目、医療広告ガイドラインが費用に与える影響、安さだけで選ぶ失敗例、費用対効果の考え方まで相場と一緒に解説します。</summary>
   </entry>
   <entry>
-    <title>安いAIO対策ツールおすすめ6選｜無料〜月3万円台の価格帯を比較</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-yasui-tool/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-taisaku-yasui-tool/</id>
-    <updated>2026-09-19T00:00:00+09:00</updated>
-    <summary>安いAIO対策ツールは、無料のSearch Console・GA4から、海外製Otterly.AI Lite（月25ドル）、国産DolphinX AIOライト（月3万円）まで価格帯が分かれます。価格帯別の選び方を解説します。</summary>
-  </entry>
-  <entry>
     <title>LLMO代理店募集の見分け方｜確認すべき5つの条件</title>
     <link href="https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/"/>
     <id>https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/</id>
     <updated>2026-09-19T00:00:00+09:00</updated>
     <summary>LLMO代理店の募集情報は条件があいまいなまま契約すると業務範囲でトラブルになります。契約前に確認すべき5つの条件、始め方3ステップ、失敗しやすい3つの落とし穴を2026年9月時点の情報で解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO効果測定レポートの雛形｜入れる5指標と週次運用の書き方</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-koka-sokutei-report-hinagata/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-koka-sokutei-report-hinagata/</id>
-    <updated>2026-09-18T00:00:00+09:00</updated>
-    <summary>AIO効果測定レポートの雛形を紹介します。表示回数・引用ページ数・参照セッションなど入れるべき5つの指標と、週次・月次の運用手順、そのまま使える表形式のテンプレートを解説します。</summary>
   </entry>
   <entry>
     <title>LLMO店舗集客とは？MEOだけで足りない理由と5つの施策</title>
@@ -145,5 +138,12 @@
     <id>https://ai.7senses.co.jp/aio/meo-kaisha-llmo-taiou/</id>
     <updated>2026-09-17T00:00:00+09:00</updated>
     <summary>MEO会社を選ぶ際にLLMO対応まで確認すべき理由と、見極めの3つの基準を解説します。MEO専業との違いや依頼前の確認ステップ、よくある失敗も紹介します。</summary>
+  </entry>
+  <entry>
+    <title>AI検索対応とは？公開前に済ませる7つの設定項目</title>
+    <link href="https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/"/>
+    <id>https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/</id>
+    <updated>2026-09-16T00:00:00+09:00</updated>
+    <summary>AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。</summary>
   </entry>
 </feed>

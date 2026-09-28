@@ -53,7 +53,7 @@ BtoB向けAIO対策会社とは、AI Overviewや生成AI検索での引用獲得
 
 費用の目安は[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)で整理しています。
 
-関連する内容は[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-yasui-tool/)でも扱っています。
+関連する内容は[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-muryou-tool/)でも扱っています。
 
 <div class="definition-box"><span class="term">BtoB向けAIO対策会社とは</span>、単に構造化データを実装するだけでなく、比較表・FAQ・一次情報といった「引用されやすい構造」を、稟議や複数人の比較検討を経るBtoBの購買行動に合わせて設計できる会社を指します。BtoC向けの型をそのまま流用しても、決裁者に刺さる情報設計にはなりません。</div>
 
