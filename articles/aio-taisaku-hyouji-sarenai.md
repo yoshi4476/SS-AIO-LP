@@ -116,8 +116,10 @@ Google公式は、<a href="https://developers.google.com/search/docs/appearance/
 近い論点を[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)で扱っています。
 
 近い論点を[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)で扱っています。
+
 =======
 関連する内容として[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)も公開しています。
+
 >>>>>>> Stashed changes
 
 あわせて[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)もご覧ください。

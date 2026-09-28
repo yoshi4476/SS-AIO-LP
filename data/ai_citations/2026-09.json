@@ -1,22 +1,42 @@
 {
-  "date": "2026-09-28",
+  "date": "2026-09-29",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 11,
-      "suspect_taken": 11,
-      "healthy": 0,
-      "too_thin": 61,
+      "judged": 13,
+      "suspect_taken": 12,
+      "healthy": 1,
+      "too_thin": 89,
       "items": [
         {
           "kw": "原口優",
           "url": "https://ai.7senses.co.jp/author/haraguchi/",
           "pos": 1.3,
-          "imp": 33,
+          "imp": 35,
           "clicks": 3,
-          "ctr": 9.09,
+          "ctr": 8.57,
           "expected_ctr": 28.0,
-          "ratio": 0.32
+          "ratio": 0.31
+        },
+        {
+          "kw": "aio やり方",
+          "url": "https://ai.7senses.co.jp/aio/aio-yarikata/",
+          "pos": 8,
+          "imp": 12,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "aio 導入 メリット 費用",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+          "pos": 9.4,
+          "imp": 12,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.0,
+          "ratio": 0.0
         },
         {
           "kw": "aio 診断",
@@ -32,10 +52,20 @@
           "kw": "aio対策 キーワード選定",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
           "pos": 4.1,
-          "imp": 14,
+          "imp": 16,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "aio対策 費用",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+          "pos": 5.2,
+          "imp": 14,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
           "ratio": 0.0
         },
         {
@@ -59,20 +89,10 @@
           "ratio": 0.0
         },
         {
-          "kw": "meo診断",
-          "url": "https://ai.7senses.co.jp/diagnosis/meo/",
-          "pos": 6.6,
-          "imp": 36,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 4.0,
-          "ratio": 0.0
-        },
-        {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 7.0,
-          "imp": 53,
+          "pos": 6.9,
+          "imp": 46,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -81,18 +101,8 @@
         {
           "kw": "医療機関 meo",
           "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 8.6,
-          "imp": 35,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 3.0,
-          "ratio": 0.0
-        },
-        {
-          "kw": "医療機関のmeo対策",
-          "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
           "pos": 9.8,
-          "imp": 16,
+          "imp": 33,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
@@ -101,8 +111,8 @@
         {
           "kw": "口コミ 返信 例文 医療",
           "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 9.1,
-          "imp": 106,
+          "pos": 9.2,
+          "imp": 102,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -124,7 +134,7 @@
       "judged": 9,
       "suspect_taken": 5,
       "healthy": 4,
-      "too_thin": 45,
+      "too_thin": 57,
       "items": [
         {
           "kw": "3点照合",
@@ -139,8 +149,8 @@
         {
           "kw": "ゆうちょ 記帳 やり方",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 6.9,
-          "imp": 17,
+          "pos": 7,
+          "imp": 21,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -149,21 +159,21 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 2.2,
-          "imp": 61,
+          "pos": 3.7,
+          "imp": 70,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 15.0,
+          "expected_ctr": 8.0,
           "ratio": 0.0
         },
         {
           "kw": "三点照合 自動化",
           "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
-          "pos": 4.5,
-          "imp": 10,
+          "pos": 4.6,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 8.0,
+          "expected_ctr": 7.0,
           "ratio": 0.0
         },
         {
@@ -179,11 +189,21 @@
       ]
     },
     "subsidy": {
-      "judged": 1,
-      "suspect_taken": 1,
+      "judged": 2,
+      "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 27,
+      "too_thin": 30,
       "items": [
+        {
+          "kw": "it導入補助金 個人事業主",
+          "url": "https://lp.7senses.co.jp/blog/it-hojokin-2026-kojinjigyonushi/",
+          "pos": 2.1,
+          "imp": 18,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 15.0,
+          "ratio": 0.0
+        },
         {
           "kw": "農業用倉庫 補助金 2026",
           "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
@@ -195,167 +215,6 @@
           "ratio": 0.0
         }
       ]
-    }
-  },
-  "measured": {
-    "date": "2026-09-28",
-    "engines": [
-      "Gemini"
-    ],
-    "sites": {
-      "ai-lab": {
-        "queries": 5,
-        "cited": 0,
-        "items": [
-          {
-            "kw": "口コミ 返信 例文 医療",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "口コミ返信 医療機関",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "税理士 ai 集客",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "カイロ meo",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "aio診断",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          }
-        ]
-      },
-      "corporate": {
-        "queries": 5,
-        "cited": 0,
-        "items": [
-          {
-            "kw": "経理代行",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "バックオフィス bpo",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "摘要欄 読み方",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "経理 外注 丸投げ",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "ゆうちょ 記帳 やり方",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          }
-        ]
-      },
-      "subsidy": {
-        "queries": 5,
-        "cited": 0,
-        "items": [
-          {
-            "kw": "エクセル 開発 補助金",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "ものづくり 商業 サービス生産性向上促進補助金 医療機器",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "ものづくり補助金 医療機器",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "新事業進出 ものづくり補助金 医療機器",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          },
-          {
-            "kw": "農業用倉庫 補助金 2026",
-            "engines": {
-              "Gemini": {
-                "error": "HTTP 429: 枠切れ。検索つきの呼び出しは無料枠では足りません｜{   \"error\": {     \"code\": 429,     \"message\""
-              }
-            },
-            "cited": false
-          }
-        ]
-      }
     }
   }
 }
