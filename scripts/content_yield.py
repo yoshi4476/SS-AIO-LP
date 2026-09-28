@@ -21,10 +21,11 @@ growth_guard は「落ちたか」を見る。ここは「増やした割に伸�
 どちらも「新しく書くより、既存記事の統合・書き直しに回す」合図。
 
   python scripts/content_yield.py
-  python scripts/content_yield.py --throttled <site>   # 本数を絞る週か（終了コード0=絞る）
+  python scripts/content_yield.py --any-flagged   # 統合を増やす週か（終了コード0=増やす）
 
-要対応になったサイトは data/yield_state.json に記録し、日次の執筆が1日2本→1本に絞る
-（pipeline-multi の2本目の枠を飛ばす）。次の週に条件を外れれば自動で戻る。14日より古い記録は使わない。
+要対応になったサイトは data/yield_state.json に記録し、週次の統合を2組→4組に増やす
+（食い合い・同型記事とも）。新しい記事の本数は減らさない（1日2本のまま。2026-09-28 方針）。
+次の週に条件を外れれば自動で戻る。14日より古い記録は使わない。
 出す印: YIELD_OK=yes|no（見つかったら no。検査が動かなかったときだけ終了コード1）
 """
 import re
@@ -127,22 +128,24 @@ def judge(r):
     return bad
 
 
-def throttled(sid):
+def flagged(sid=""):
+    """sid を渡せばそのサイト、空なら「どれか1つでも」"""
     import json
     try:
-        st = json.loads(STATE.read_text(encoding="utf-8")).get(sid) or {}
+        allst = json.loads(STATE.read_text(encoding="utf-8"))
     except Exception:
         return False
-    fresh = st.get("date", "") >= (date.today() - timedelta(days=STATE_DAYS)).isoformat()
-    return bool(st.get("throttle")) and fresh
+    since = (date.today() - timedelta(days=STATE_DAYS)).isoformat()
+    sts = [allst.get(sid) or {}] if sid else [v for v in allst.values() if isinstance(v, dict)]
+    return any((st.get("flagged") or st.get("throttle")) and st.get("date", "") >= since for st in sts)
 
 
 def main():
     import json
     import sites as S
-    if len(sys.argv) == 3 and sys.argv[1] == "--throttled":
-        on = throttled(sys.argv[2])
-        print(f"THROTTLE={'yes' if on else 'no'}")
+    if len(sys.argv) >= 2 and sys.argv[1] == "--any-flagged":
+        on = flagged(sys.argv[2] if len(sys.argv) == 3 else "")
+        print(f"FLAGGED={'yes' if on else 'no'}")
         return 0 if on else 1
     end = date.today() - timedelta(days=3)      # GSC の確定待ち
     arts = [a for a in (_fm(p) for p in (ROOT / "articles").glob("*.md")) if a and a["score"] >= 90]
@@ -172,7 +175,7 @@ def main():
                   f" / クリックあり {r['clicked']}本（{r['clicked'] / r['mature']:.0%}）")
         b = judge(r)
         alerts += b
-        state[sid] = {"throttle": bool(b), "date": date.today().isoformat(), "reasons": [x[5:] for x in b]}
+        state[sid] = {"flagged": bool(b), "date": date.today().isoformat(), "reasons": [x[5:] for x in b]}
         for x in b:
             print("  " + x)
         print()
@@ -181,8 +184,8 @@ def main():
         return 1
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     for sid, st in state.items():
-        if st["throttle"]:
-            print(f"  → {sid}: 来週は新しい記事を1日1本に絞ります（統合・書き直しに回す）")
+        if st["flagged"]:
+            print(f"  → {sid}: 来週は統合を週4組に増やします（新しい記事は1日2本のまま）")
     print(f"YIELD_OK={'no' if alerts else 'yes'}")
     return 0
 

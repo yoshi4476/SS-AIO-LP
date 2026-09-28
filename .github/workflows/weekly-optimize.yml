@@ -363,7 +363,9 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           if python scripts/auto_merge.py --selftest; then
-            python scripts/auto_merge.py --write --limit 2 --budget-min 20 || true
+            # 記事を増やした分が伸びていないサイトがある週は4組（content_yield。本数は減らさず統合で整える）
+            n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
+            python scripts/auto_merge.py --write --limit $n --budget-min 30 || true
           else
             echo "::error::統合の検算が効いていません。統合は行いません"
             python scripts/hub_client.py error_log merge \
@@ -380,7 +382,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           if python scripts/auto_merge.py --scaled --selftest; then
-            python scripts/auto_merge.py --scaled --write --limit 2 --budget-min 15 || true
+            n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
+            python scripts/auto_merge.py --scaled --write --limit $n --budget-min 25 || true
           else
             echo "::error::同型記事の統合の検算が効いていません。統合は行いません"
             python scripts/hub_client.py error_log merge \

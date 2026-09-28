@@ -124,14 +124,6 @@ def check_volume(todo):
             print(f"  上限 {sid:10s} 今月 {month}/{MONTHLY_CAP}本 — 今月はこれ以上公開しません")
             continue
         want = min(DAILY_TARGET, left)
-        # 記事を増やした分が伸びていない週は1日1本（content_yield）。2本を目標にしたままだと
-        # 救済が「不足」とみなして、絞った1本を書き足してしまう
-        try:
-            import content_yield
-            if content_yield.throttled(sid):
-                want = min(want, 1)
-        except Exception:
-            pass
         due = min(want, _due_now(sid))      # いまの時刻で在るべき本数
         mark = "OK " if n >= due else "不足"
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"

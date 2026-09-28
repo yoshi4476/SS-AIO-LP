@@ -563,6 +563,36 @@ function stepText_(band, k, v) {
 }
 
 /**
+ * 取りこぼした問い合わせを台帳へ戻す（合言葉つきの action でだけ呼ばれる）。
+ * 列は leadSave_ と同じ。メール・自動返信・フォローは一切しない（相手に今さら届かないように）。
+ * 同じメール・同じ受信日の行が既にあれば書かない（2回流しても重複しない）。
+ */
+function restoreLead_(body) {
+  const d = body.data || {};
+  const email = clean_(d.email).toLowerCase();
+  const at = new Date(body.received_at);
+  if (!email || isNaN(at.getTime())) return { ok: false, error: 'email と received_at が必要です' };
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  const day = Utilities.formatDate(at, 'Asia/Tokyo', 'yyyy-MM-dd');
+  if (last > 1) {
+    const vals = sh.getRange(2, 1, last - 1, 7).getValues();
+    for (const v of vals) {
+      if (String(v[6]).toLowerCase() === email && v[0] instanceof Date
+          && Utilities.formatDate(v[0], 'Asia/Tokyo', 'yyyy-MM-dd') === day) {
+        return { ok: true, skipped: 'already' };
+      }
+    }
+  }
+  const site = siteLabel_(body.site) || '（不明）';
+  sh.appendRow([
+    at, site, LEAD_TYPE_LABELS[body.type] || '無料相談', clean_(d.company), clean_(d.name), '',
+    email, clean_(d.tel), body_(d.message), clean_(body.note || ''), '', clean_(d.referer), 'WARM', '未対応',
+  ]);
+  return { ok: true, row: sh.getLastRow() };
+}
+
+/**
  * 診断の記録（同業平均のため）。LPとサイトチェックの診断のたびに audit.js が送る。
  * 残すのは業種・点数・紹介元と、サイトを特定できない形に変換した値（ハッシュ）だけ。
  */

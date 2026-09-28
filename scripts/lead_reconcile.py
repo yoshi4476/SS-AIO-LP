@@ -22,6 +22,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 EVENTS = ("form_submit", "lead_capture", "generate_lead")
+ACK_FILE = ROOT / "data" / "lead_reconcile_ack.json"
+try:
+    import json as _json
+    ACKED = _json.loads(ACK_FILE.read_text(encoding="utf-8"))
+except Exception:
+    ACKED = {}
 
 
 def ga4_by_day(prop, start, end):
@@ -93,7 +99,9 @@ def main():
         except Exception as e:
             print(f"  {sid}: GA4 を読めません（{str(e)[:60]}）")
             continue
-        miss = [d for d, n in sorted(ga.items()) if n > 0 and led[sid].get(d, 0) == 0]
+        # 調べて記録が見つからなかった日（ACK）は毎週くり返し知らせない
+        ack = set(ACKED.get(sid, {}))
+        miss = [d for d, n in sorted(ga.items()) if n > 0 and led[sid].get(d, 0) == 0 and d not in ack]
         print(f"  {cfg.get('name', sid)}: GA4 の送信 {sum(ga.values())}件（{len(ga)}日） / 台帳 {sum(led[sid].values())}行")
         for d in miss:
             bad.append(f"要対応: {cfg.get('name', sid)} — {d} に GA4 では送信{ga[d]}件あるのに台帳に行がありません"

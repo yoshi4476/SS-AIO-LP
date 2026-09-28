@@ -245,6 +245,9 @@ function doPost(e) {
       case 'register_site': return json_(registerSite_(body));
       // 診断の記録（業種・点数・ハッシュ化したサイト・紹介元）。audit.js が合言葉つきで送る
       case 'scan_log':    return json_(scanLog_(body));
+      // 取りこぼした問い合わせを台帳へ戻す（lead_reconcile で見つけ、送信履歴から復元した分）。
+      // メールは送らない。フォームの経路（form_）を通すと、今になって自動返信が相手に届く
+      case 'restore_lead': return json_(restoreLead_(body));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
       default:            return json_(form_(body));

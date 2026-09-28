@@ -139,19 +139,11 @@ jobs:
             i=$(( slot % N ))
             echo "枠$slot ÷ サイト数$N → $i 番目（${SITES[$i]}）"
             s="${SITES[$i]}"
-            # 記事を増やした分が伸びていないサイトは、2本目の枠を飛ばして1日1本にする。
-            # 判定は週次の content_yield（data/yield_state.json・14日で失効）。
-            # 2026-09 の実測で、前からある記事の表示が新記事に置き換わって約3割落ちていた
             # 月の上限（60本）に達したサイトは書かない。publish_flow の上限は書き終えた後に効くため、
             # 書き手が別の道で公開すると抜ける（2026-09 は3サイトとも超えた）
             if python scripts/daily_audit.py --cap-reached "$s" >/dev/null 2>&1; then
               echo "skip=yes" >> "$GITHUB_OUTPUT"
               echo "$s は今月の上限に達しています。新しい記事は書きません"
-              exit 0
-            fi
-            if [ "$slot" -ge "$N" ] && python scripts/content_yield.py --throttled "$s" >/dev/null 2>&1; then
-              echo "skip=yes" >> "$GITHUB_OUTPUT"
-              echo "$s は今週、新しい記事を1日1本に絞っています（content_yield の判定。統合・書き直しを優先）"
               exit 0
             fi
           fi
