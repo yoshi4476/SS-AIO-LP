@@ -341,7 +341,12 @@ def check(pair, before, before_warns, loser_text, snap):
         return f"タイトルに狙う語が入っていません（{kw}）"
 
     b = before[2]
-    new_nums = AR.numbers(after) - AR.numbers(b) - AR.numbers(loser_text)
+    # 日付の行（date:/modified:）は数えない。更新日が今日になるだけで「28」「09」が増えたと
+    # 見なされ、正しい統合まで全部戻していた（2026-09-28: 6組すべて）。
+    # 数え方は auto_rewrite と同じ fact_numbers にそろえる（どちらかの記事に既にある個数・日付の再掲は許す）
+    nodate = lambda s: re.sub(r"(?m)^(date|modified):.*$", "", s)
+    had = AR.numbers(nodate(b)) + AR.numbers(nodate(loser_text))
+    new_nums = AR.fact_numbers(AR.numbers(nodate(after)) - had, had)
     if new_nums:
         return f"2本のどちらにも無かった数字が増えました: {dict(list(new_nums.items())[:4])}"
     lost = AR.sources(b) - AR.sources(after)
@@ -356,7 +361,10 @@ def check(pair, before, before_warns, loser_text, snap):
     now = AR.warns(s)
     if len(now) > len(before_warns):
         return f"警告が増えました（{len(before_warns)} → {len(now)}）"
-    r = AR.sh([sys.executable, "scripts/kw_guard.py", kw, "--site", pair["site"], "--title", title], timeout=600)
+    # 残す記事と消す記事の両方を照合から外す。消す側はまだ検索の実績を持っているため、
+    # 外さないと「既に順位を持つページがある」で必ず止まった（統合の目的そのものなのに）
+    r = AR.sh([sys.executable, "scripts/kw_guard.py", kw, "--site", pair["site"], "--title", title,
+               "--exclude-slug", f"{s},{pair['loser']}"], timeout=600)
     if r.returncode:
         return f"既存記事と食い合います（kw_guard 終了コード{r.returncode}）"
     r = AR.sh([sys.executable, "scripts/build.py"], timeout=1800)

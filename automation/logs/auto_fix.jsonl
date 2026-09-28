@@ -860,3 +860,9 @@
 {"at": "2026-09-28 09:32", "by": "link_boost", "slug": "monozukuri-hojokin-kojinjigyonushi-1nin", "kind": "link", "ok": true, "note": "jigyou-saikouchiku-kojinjigyonushi-houjinnari から内部リンクを1本"}
 {"at": "2026-09-28 09:32", "by": "link_boost", "slug": "it-hojokin-nail-salon", "kind": "link", "ok": true, "note": "jizokuka-hojokin-biyoushitsu-kakikata から内部リンクを1本"}
 {"when": "2026-09-28T09:33:26.041137", "by": "auto_review", "slug": "(107記事)", "what": "言い回し41件を振り直し・242件を削除"}
+{"at": "2026-09-28 12:45", "by": "auto_merge", "slug": "aio-taisaku-muryou-tool", "kind": "merge", "loser": "aio-taisaku-yasui-tool", "ok": false, "note": "2本のどちらにも無かった数字が増えました: {'28': 1, '5': 1}"}
+{"at": "2026-09-28 12:49", "by": "auto_merge", "slug": "aio-taisaku-keisoku-houhou", "kind": "merge", "loser": "aio-koka-sokutei-report-hinagata", "ok": false, "note": "既存記事と食い合います（kw_guard 終了コード2）"}
+{"at": "2026-09-28 12:54", "by": "auto_merge", "slug": "jigyou-saikouchiku-biyoushitsu-jirei", "kind": "merge-scaled", "loser": "jigyou-saikouchiku-kensetsugyou-jirei", "ok": false, "note": "既存記事と食い合います（kw_guard 終了コード2）"}
+{"at": "2026-09-28 13:02", "by": "auto_merge", "slug": "jigyou-saikouchiku-shukuhakugyou-jirei", "kind": "merge-scaled", "loser": "jigyou-saikouchiku-nougyou-jirei", "ok": false, "note": "2本のどちらにも無かった数字が増えました: {'09': 1, '28': 1}"}
+{"at": "2026-09-28 13:07", "by": "auto_merge", "slug": "inshokuten-ai-hojokin-taisho-youken", "kind": "merge-scaled", "loser": "doubutsu-byouin-ai-hojokin-taisho-youken", "ok": false, "note": "2本のどちらにも無かった数字が増えました: {'28': 1}"}
+{"at": "2026-09-28 13:26", "by": "auto_merge", "slug": "inshokuten-ai-hojokin-taisho-youken", "kind": "merge-scaled", "loser": "kurininguten-ai-hojokin-taisho-youken", "ok": false, "note": "既存記事と食い合います（kw_guard 終了コード2）"}

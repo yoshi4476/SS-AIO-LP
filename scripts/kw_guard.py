@@ -137,8 +137,10 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
     実際、正当な新記事3本が全部この誤検出で止まり、その回の執筆が無駄になった。
     """
     arts = load_articles()
-    if exclude_slug:
-        arts = [a for a in arts if a["slug"] != exclude_slug]
+    # カンマ区切りで複数（統合の検算では、残す記事と消す記事の両方を外す）
+    ex = {s.strip() for s in str(exclude_slug or "").split(",") if s.strip()}
+    if ex:
+        arts = [a for a in arts if a["slug"] not in ex]
     if site_id:
         try:
             import sites as S
@@ -164,9 +166,9 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
 
     # ② GSCの実績。すでに順位を持っているページがあるか（最も確かな指標）
     own = owned(gsc_rows(site_id)) if (use_gsc and site_id) else []
-    if exclude_slug:
-        own = [o for o in own if f"/{exclude_slug}/" not in o["page"]
-               and not o["page"].rstrip("/").endswith("/" + exclude_slug)]
+    if ex:
+        own = [o for o in own if not any(f"/{e}/" in o["page"] or o["page"].rstrip("/").endswith("/" + e)
+                                         for e in ex)]
     for o in gsc_owner(kw, own)[:5]:
         level = max(level, 2)
         if o.get("own", True):
