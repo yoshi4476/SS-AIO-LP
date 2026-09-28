@@ -1,4 +1,604 @@
 {
+"https://ai.7senses.co.jp/": {
+"at": 1790583379.3442981,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/about/": {
+"at": 1790583410.4530613,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/ai-marketing/": {
+"at": 1790583404.1899545,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/": {
+"at": 1790583351.44543,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-dekinai/": {
+"at": 1790583366.9142718,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/": {
+"at": 1790583385.568098,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/zeirishi-houjin-aio/": {
+"at": 1790583345.316555,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/author/haraguchi/": {
+"at": 1790583467.4516025,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/blog/": {
+"at": 1790583435.453065,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/contact/": {
+"at": 1790583416.6034744,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/data/": {
+"at": 1790583493.1128607,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/diagnosis/": {
+"at": 1790583442.0865037,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/diagnosis/aio/": {
+"at": 1790583454.7301657,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/diagnosis/meo/": {
+"at": 1790583448.5435028,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/download/": {
+"at": 1790583422.8708415,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/editorial-policy/": {
+"at": 1790583480.6856825,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/": {
+"at": 1790583610.9950864,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/0c9d0f8970/": {
+"at": 1790583617.363397,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/0db85b633b/": {
+"at": 1790583639.877429,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/11143cc36d/": {
+"at": 1790583645.9942367,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/14bc44292f/": {
+"at": 1790583652.0840442,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/14def1bb5e/": {
+"at": 1790583658.3195975,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/165c653a39/": {
+"at": 1790583664.5615897,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/18249fa4fe/": {
+"at": 1790583670.6806104,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/1914394bee/": {
+"at": 1790583676.9608676,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/1960837379/": {
+"at": 1790583683.467776,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/19f4d36e8a/": {
+"at": 1790583689.6552756,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/1df2aeafa9/": {
+"at": 1790583711.1156957,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/1e7ae8842b/": {
+"at": 1790583717.2609289,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/1f00622b02/": {
+"at": 1790583723.369768,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/248a5f2e52/": {
+"at": 1790583730.1096373,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/249776b40a/": {
+"at": 1790583736.2572403,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/273926f184/": {
+"at": 1790583742.9746778,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/2c16c4201a/": {
+"at": 1790583749.3210788,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/2e30b03b43/": {
+"at": 1790583755.5950716,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/34469ab484/": {
+"at": 1790583761.7806437,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/34e96ce251/": {
+"at": 1790583767.9429376,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/356e1297cf/": {
+"at": 1790583774.3039494,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/360d5f9113/": {
+"at": 1790583781.4622962,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/36a55a7198/": {
+"at": 1790583787.6356652,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/36a9d22815/": {
+"at": 1790583794.0479693,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/39e4f3ee12/": {
+"at": 1790583800.6662605,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/3ad01200c2/": {
+"at": 1790583807.3358855,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/3cb4e58d77/": {
+"at": 1790583813.4758599,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/3fc9542726/": {
+"at": 1790583819.8039024,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/4044d00eee/": {
+"at": 1790583826.063329,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/40ca126433/": {
+"at": 1790583832.3072052,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/42cc865f76/": {
+"at": 1790583838.4352376,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/45417d7900/": {
+"at": 1790583844.5818806,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/4c6946f65e/": {
+"at": 1790583850.7022977,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/4d7a21ac02/": {
+"at": 1790583856.8977253,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/4dda6cd037/": {
+"at": 1790583863.0843046,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/50840955ad/": {
+"at": 1790583869.2088084,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/51b42ab3f1/": {
+"at": 1790583875.386505,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/524363e8ea/": {
+"at": 1790583881.5675855,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/52598eed7a/": {
+"at": 1790583887.9032092,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/52e2622ceb/": {
+"at": 1790583894.275872,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/540d1abc0b/": {
+"at": 1790583900.4134963,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/554db07af6/": {
+"at": 1790583907.6045732,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/58669e07ca/": {
+"at": 1790583913.746076,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/59d36ebb61/": {
+"at": 1790583920.2499154,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/59ded05012/": {
+"at": 1790583926.3679152,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/5cf9de791e/": {
+"at": 1790583932.777129,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/5faa588b93/": {
+"at": 1790583939.1502943,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/5fe69706b5/": {
+"at": 1790583945.6740112,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/6100da4f88/": {
+"at": 1790583951.91639,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/62239e6c0f/": {
+"at": 1790583958.2796493,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/642dcc26f0/": {
+"at": 1790583964.6202497,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/66233faaa1/": {
+"at": 1790583970.9624732,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/66afa7c7ea/": {
+"at": 1790583977.0957015,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/687f560bba/": {
+"at": 1790583983.2401092,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/68973c088d/": {
+"at": 1790583989.972873,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/6a3f18e6ee/": {
+"at": 1790583996.189122,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/709431cfc5/": {
+"at": 1790584002.304394,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/70db5a84c3/": {
+"at": 1790584008.6466806,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/727cd0f4eb/": {
+"at": 1790584014.8562243,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/7282c2a8ce/": {
+"at": 1790584021.2068896,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/789f627071/": {
+"at": 1790584027.92252,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/7badb9df45/": {
+"at": 1790584035.3724265,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/7ccdd9e19c/": {
+"at": 1790584041.938171,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/817bc2e394/": {
+"at": 1790584048.3925488,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/8190c7a434/": {
+"at": 1790584054.8244784,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/81e1a9144e/": {
+"at": 1790584061.252717,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/820ece2388/": {
+"at": 1790584067.8411345,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/8266e64eec/": {
+"at": 1790584074.4724226,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/8419cafafe/": {
+"at": 1790584080.7641497,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/8631bfd751/": {
+"at": 1790584086.9247384,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/8953728979/": {
+"at": 1790584093.0413601,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/8b8fd3ad6f/": {
+"at": 1790584099.169302,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/8e1e441819/": {
+"at": 1790584105.3438923,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/9401d740f8/": {
+"at": 1790584111.708776,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/94287dd01d/": {
+"at": 1790584118.0790782,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/96b3c9e3a0/": {
+"at": 1790584124.4200752,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/979d449d6b/": {
+"at": 1790584131.030959,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/983cec39b0/": {
+"at": 1790584137.4827182,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/996acf8dc4/": {
+"at": 1790584143.645624,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/9c36fc68e8/": {
+"at": 1790584149.852982,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/glossary/9cbca438e9/": {
+"at": 1790584155.9700286,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/": {
+"at": 1790583604.7878153,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/btob/": {
+"at": 1790583499.7737951,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/btob/faq/": {
+"at": 1790583505.9478984,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/clinic/": {
+"at": 1790583512.5429838,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/clinic/faq/": {
+"at": 1790583519.1856184,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/fudosan/": {
+"at": 1790583525.5613158,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/fudosan/faq/": {
+"at": 1790583532.2950928,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/koumuten/": {
+"at": 1790583538.8741863,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/koumuten/faq/": {
+"at": 1790583545.2257493,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/seikotsuin/": {
+"at": 1790583551.4321518,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/seikotsuin/faq/": {
+"at": 1790583557.6918306,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/shigyou/": {
+"at": 1790583564.036042,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/shigyou/faq/": {
+"at": 1790583570.460033,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/shika/": {
+"at": 1790583576.8063579,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/industry/shika/faq/": {
+"at": 1790583598.29809,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/lab/": {
+"at": 1790583486.9746437,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/lp/": {
+"at": 1790583429.1983826,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/meo/": {
+"at": 1790583397.9242954,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/seo/": {
+"at": 1790583391.7386615,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/": {
+"at": 1790583373.1350427,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/site-audit/": {
+"at": 1790583460.9730604,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/start/": {
+"at": 1790583473.5680122,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog": {
 "at": 1790270997.679109,
 "state": "送信して登録されました",
@@ -14,9 +614,29 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/chusho-keiri-koritsuka": {
+"at": 1790584183.371142,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/excel-keiri-koritsuka": {
+"at": 1790584176.6438885,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/freelance-keiri-hiyou-souba": {
+"at": 1790584209.910717,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/getsuji-kessan-bpo-keiyakumae": {
 "at": 1790271071.780212,
 "state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/getsuji-kessan-nyumon": {
+"at": 1790584203.2884238,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/keihi-seisan-kichodaiko-bpo-chigai": {
@@ -39,6 +659,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/keiri-daiko-kaigyou": {
+"at": 1790584241.238843,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/keiri-daiko-service": {
 "at": 1790271115.470187,
 "state": "送信して登録されました",
@@ -49,9 +674,44 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/keiri-gaichuu-hiyou-souba": {
+"at": 1790584234.968868,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/keiri-gaichuu-kojin": {
+"at": 1790584228.7839317,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template": {
+"at": 1790584222.4325712,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-gyomu-flowchart-kakikata": {
+"at": 1790584216.1540911,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
 "https://corp.7senses.co.jp/blog/keiri-gyomu-itaku": {
 "at": 1790271013.214793,
 "state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/keiri-gyomu-jidoka-jirei": {
+"at": 1790584170.36304,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/keiri-macro-jidoka": {
+"at": 1790584163.669194,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/keiri-shigoto-koritsuka": {
+"at": 1790584196.5950172,
+"state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/kichodaiko-jidoka": {
@@ -61,6 +721,11 @@
 },
 "https://corp.7senses.co.jp/blog/kichodaiko-kotowarareru-riyu": {
 "at": 1790271086.0888674,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-outsourcing": {
+"at": 1790584189.8062396,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
