@@ -67,7 +67,11 @@ faq:
 
 経理自動化ツールは、記帳・経費精算・請求書・給与計算・ワークフロー承認という5つの機能に分類できます。
 
+<<<<<<< Updated upstream
 関連する内容として[現金払いは否認の落とし穴？](/blog/gaichuuhi-seikyuusho-nashi/)も公開しています。
+=======
+関連する内容として[外注費に請求書がない場合の経費計上｜証憑3つで対応](/blog/gaichuuhi-seikyuusho-nashi/)も公開しています。
+>>>>>>> Stashed changes
 
 <figure><img src="/images/keiri-jidoka-tool/bunrui.png" alt="経理自動化ツールの機能5分類: 記帳・仕訳ツール、経費精算ツール、請求書発行・受領ツール、給与計算ツール、ワークフロー承認ツール" loading="lazy"><figcaption>経理自動化ツールの機能5分類</figcaption></figure>
 

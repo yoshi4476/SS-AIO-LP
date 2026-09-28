@@ -471,6 +471,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
           GBP_CLIENT_JSON: ${{ secrets.GBP_CLIENT_JSON }}
           GBP_TOKENS_JSON: ${{ secrets.GBP_TOKENS_JSON }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}

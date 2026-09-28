@@ -111,20 +111,20 @@ def judge(r):
     bad = []
     if r["mature"] >= MIN_MATURE and r["zero"] / r["mature"] > ZERO_MAX:
         bad.append(f"要対応: {r['name']} — 公開{MATURE_DAYS}日以上の{r['mature']}本のうち{r['zero']}本"
-                   f"（{r['zero'] / r['mature']:.0%}）が28日間表示ゼロ。新規より統合・書き直しを先に")
+                   f"（{r['zero'] / r['mature']:.0%}）が28日間表示ゼロ。統合・書き直しを優先（週次の統合を4組に増やします）")
     if r["n_prev"] and r["imp_prev"] >= MIN_PREV_IMP:
         g_n = r["n_now"] / r["n_prev"] - 1
         g_i = r["imp_now"] / r["imp_prev"] - 1
         if g_n >= GROW_MIN and g_i < g_n / 2:
             bad.append(f"要対応: {r['name']} — 記事は{g_n:+.0%}（{r['n_prev']}→{r['n_now']}本）なのに"
                        f"記事の表示は{g_i:+.0%}。1本あたり {r['imp_prev'] / r['n_prev']:.1f}→"
-                       f"{r['imp_now'] / r['n_now']:.1f}回。増やした分が伸びていません")
+                       f"{r['imp_now'] / r['n_now']:.1f}回。増やした分が伸びていません（週次の統合を4組に増やします）")
     if r["n_prev"] and r["old_prev"] >= MIN_PREV_IMP and r["n_now"] / r["n_prev"] - 1 >= GROW_MIN:
         g_o = r["old_now"] / r["old_prev"] - 1
         if g_o <= -OLD_DROP:
             bad.append(f"要対応: {r['name']} — 前からある{r['n_prev']}本の表示が{g_o:+.0%}"
                        f"（{r['old_prev']:,}→{r['old_now']:,}回）。新しい記事が既存の表示を置き換えているか、"
-                       f"評価が薄まっています。新規を減らし、食い合いの統合を先に")
+                       f"評価が薄まっています（週次の統合を4組に増やします）")
     return bad
 
 

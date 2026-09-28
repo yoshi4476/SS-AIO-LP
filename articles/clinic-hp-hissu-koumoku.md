@@ -50,17 +50,15 @@ faq:
 
 関連する内容として[整骨院の集客イベント5選](/ai-marketing/seikotsuin-shukyaku-event/)も公開しています。
 
+<<<<<<< Updated upstream
 あわせて[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)もご覧ください。
 
 あわせて[税理士の集客サイトとは？](/seo/zeirishi-shukyaku-site/)もご覧ください。
 
-実際の例は、[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)で解説しています。
-
-選ぶときの基準は、[クリニックの集客集患サポートとは？3つの型と選び方](/ai-marketing/clinic-shukyaku-shukan-support/)で解説しています。
-
-近い論点を[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)で扱っています。
-
 実際の例は[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)で整理しています。
+=======
+実際の例は、[クリニックの建築事例｜失敗しない5つの視点と坪単価](/ai-marketing/clinic-kenchiku-jirei/)で解説しています。
+>>>>>>> Stashed changes
 
 <div class="definition-box"><span class="term">クリニックホームページの必須項目とは</span>、次の6つの要素を指します。基本情報（住所・電話番号・診療時間）、診療科目・対応疾患、医師・スタッフ紹介、初診の流れ・予約導線、料金の目安、医療広告ガイドライン準拠の表現です。単にきれいなデザインを用意することではなく、==患者が不安なく予約ボタンを押せる情報設計==が本来の目的です。</div>
 

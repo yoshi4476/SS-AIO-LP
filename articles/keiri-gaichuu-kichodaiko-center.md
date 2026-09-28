@@ -104,7 +104,7 @@ faq:
 
 あわせて[記帳代行は税理士法違反？3つの独占業務とNG事例](/blog/kichodaiko-zeirishihou-ihan/)もご覧ください。
 
-あわせて[銀行口座の記帳のやり方](/blog/ginko-kicho-yarikata/)もご覧ください。
+近い論点を[銀行口座の記帳のやり方](/blog/ginko-kicho-yarikata/)で扱っています。
 
 <figure><img src="/images/keiri-gaichuu-kichodaiko-center/hani.png" alt="記帳代行センターに頼めない業務（税務書類の作成・税務代理・税務相談）と頼める業務（仕訳入力・データ登録・月次資料作成）の比較" loading="lazy"><figcaption>記帳代行センターに頼めない業務と頼める業務</figcaption></figure>
 

@@ -49,8 +49,6 @@ diagrams:
 
 前提となる考え方は、[AIO SEO対策とは？](/aio/aio-seo-taisaku/)で解説しています。
 
-前提となる考え方は[AIO SEO監査とは？](/aio/aio-seo-audit/)で整理しています。
-
 <figure><img src="/images/aio-seo-meo-chigai/sanshu.png" alt="AIO・SEO・MEOを一言でいうと示した図" loading="lazy"><figcaption>AIO・SEO・MEOを一言でいうと</figcaption></figure>
 
 | 項目 | AIO | SEO | MEO |

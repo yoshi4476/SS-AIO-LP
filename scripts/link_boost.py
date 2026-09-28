@@ -317,6 +317,10 @@ def main():
             if added >= cap:
                 break
             b = arts[src]
+            # 送り元がすでにリンクだけの段落を上限（auto_review.MAX_LINK_PARA）まで持っていれば足さない。
+            # 足すと見直しがすぐ外し、足しては消すを繰り返す（2026-09-28: 1記事16本まで積み上がった）
+            if len(ar.scan(b["path"])[2]) >= ar.MAX_LINK_PARA:
+                continue
             pos = pick_spot(b["body"], tw)
             if pos is None:
                 continue

@@ -111,7 +111,11 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 関連する内容として[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)も公開しています。
 
+<<<<<<< Updated upstream
 あわせて[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)もご覧ください。
+=======
+あわせて[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)もご覧ください。
+>>>>>>> Stashed changes
 
 | 対策 | 概要 | 効果が出るまでの目安 |
 |:--|:--|:--|

@@ -64,7 +64,11 @@ BtoBリード獲得の全体像における位置づけは[BtoBリード獲得�
 
 近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
 
+<<<<<<< Updated upstream
 あわせて[歯科医院の集客方法とは？新患を増やす5つの基本施策](/ai-marketing/shika-iin-shukyaku/)もご覧ください。
+=======
+関連する内容として[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)も公開しています。
+>>>>>>> Stashed changes
 
 当社は自社メディアで告知から申込までの導線を運用しています。**申込を増やす最短は集客チャネルを増やすことではなく、告知ページで「誰向けか」を絞ること**でした。
 

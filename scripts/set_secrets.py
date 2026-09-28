@@ -37,6 +37,8 @@ TO_GITHUB = {
     # Googleビジネスプロフィール（訪日客向けの地図の整備・口コミの返信案）。
     # GBP_TOKENS_JSON は {"<サイトID>": <gbp-token-<id>.json の中身>} の1つのJSON
     "GBP_CLIENT_JSON", "GBP_TOKENS_JSON",
+    # 表示速度の実測（cwv_check）。YOUTUBE_API_KEY のプロジェクトでは PageSpeed API が使えず、週次で測れなかった
+    "PAGESPEED_API_KEY",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。

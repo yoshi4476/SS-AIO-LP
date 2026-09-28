@@ -52,7 +52,7 @@ faq:
 
 **AIO診断とは、AI検索への引用されやすさを8つの視点で確認する作業です。ツールを使わなくても、ブラウザだけで無料でチェックできます。**
 
-近い論点を[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で扱っています。
+関連する内容として[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)も公開しています。
 
 近い論点を[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)で扱っています。
 

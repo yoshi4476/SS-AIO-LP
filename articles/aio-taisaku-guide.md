@@ -32,7 +32,12 @@ faq:
 
 AIOコンサルティングとは、**AIの回答に自社が引用されるための設計・実装・計測を、外部が一括で引き受ける支援**です。
 
+<<<<<<< Updated upstream
 近い論点を[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)で扱っています。
+=======
+
+あわせて[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)もご覧ください。
+>>>>>>> Stashed changes
 
 <div class="definition-box"><span class="term">AIOコンサルティングとは</span>、AIの回答文の中で自社の情報が引用元として採用されるよう設計し運用する支援のことです。対象はGoogle の AI Overview や ChatGPT・Perplexity などで、記事の構造・技術実装・一次情報の3面を扱います。</div>
 

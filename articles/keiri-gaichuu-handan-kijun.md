@@ -51,8 +51,6 @@ faq:
 
 近い論点を[管理部門の人手不足解決｜5つの選択肢と選び方](/blog/kanribumon-hitodebusoku-kaiketsu/)で扱っています。
 
-あわせて[経理の外注と丸投げの違い](/blog/keiri-marunage-dekiru-hani/)もご覧ください。
-
 <div class="definition-box"><span class="term">経理外注の判断基準とは</span>、経理業務を社内で抱え続けるリスクと、外部委託によるコスト・手離れのバランスを比較するための5つの視点のことです。==1つの基準だけで即断せず、複数を組み合わせて確認すると精度が上がります。==</div>
 
 <figure><img src="/images/keiri-gaichuu-handan-kijun/kijun.png" alt="経理外注の判断基準5つ: 業務量が増え続けているか、属人化・引き継ぎリスクがあるか、繁忙期と閑散期の差が大きいか、経理人材を採用できる見込みがあるか、コストが妥当な範囲か" loading="lazy"><figcaption>経理外注の判断基準5つ</figcaption></figure>
@@ -85,9 +83,15 @@ faq:
 
 経理担当者が1人しかいない体制は、退職や休職が起きた瞬間に業務が止まるリスクを抱えています。
 
+<<<<<<< Updated upstream
 関連する内容として[経理引き継ぎ資料とは？必須6点と作り方3ステップ](/blog/keiri-hikitsugi-shiryou/)も公開しています。
 
 近い論点を[経理の業務フローチャートの書き方](/blog/keiri-gyomu-flowchart-kakikata/)で扱っています。
+=======
+近い論点を[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)で扱っています。
+
+関連する内容として[経理の業務フローチャートの書き方](/blog/keiri-gyomu-flowchart-kakikata/)も公開しています。
+>>>>>>> Stashed changes
 
 私たちが中小企業のバックオフィス体制づくりを支援する中でも、**「担当者が急に辞めて、何がどこにあるか誰も分からなくなった」という相談**を受けることがあります。属人化した経理は、本人にしか分からない処理ルールが積み重なりやすく、引き継ぎ資料が整っていないケースがほとんどです。
 

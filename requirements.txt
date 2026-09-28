@@ -21,3 +21,5 @@ qrcode[pil]
 httplib2
 # GitHub Secrets の書き込みに使う暗号化（refresh_tokens）
 pynacl
+# GA4 を読む検査（data_sanity・lead_reconcile・daily_kpi）。無いと週次で「確認できません」になっていた
+google-analytics-data
