@@ -67,7 +67,7 @@ faq:
 
 関連する内容として[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)も公開しています。
 
-関連する内容として[飲食店の経理のやり方](/blog/inshokuten-keiri-yarikata/)も公開しています。
+あわせて[飲食店の経理のやり方](/blog/inshokuten-keiri-yarikata/)もご覧ください。
 
 <figure><img src="/images/kichodaiko-jidoka/dekiru.png" alt="自動化ツールで完結しやすいケース・外部の目が必要なケース: 現金・手書き証憑が多い、科目判断に迷う例外取引がある、担当者が確認する時間を取れない／証憑のほとんどがデータで届く、取引パターンが毎月ほぼ同じ、クラウド会計とAPI連携できる" loading="lazy"><figcaption>自動化ツールで完結しやすいケース・外部の目が必要なケース</figcaption></figure>
 

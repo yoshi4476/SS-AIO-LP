@@ -69,13 +69,7 @@ faq:
 
 あわせて[事業再構築補助金は個人事業主もいつまで？](/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/)もご覧ください。
 
-関連する内容として[建設業のAI導入補助金｜必要書類10点と揃える順番](/blog/kanagawa-kensetsugyou-denshishinsei/)も公開しています。
-
-関連する内容として[建設業の助成金4制度｜補助金との違いと使う順番](/blog/kensetsugyou-joseikin-hikaku/)も公開しています。
-
 近い論点を[建設業がAI導入補助金の対象になる条件](/blog/osaka-kensetsugyou-denshishinsei/)で扱っています。
-
-あわせて[事業再構築補助金は法人成り後も続く？](/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/)もご覧ください。
 
 <figure><img src="/images/it-hojokin-biyoushitsu/tool-categories.png" alt="美容室で対象になるITツール3分野: 予約管理システム、POSレジ・会計ソフト、電子カルテ・顧客管理" loading="lazy"><figcaption>美容室で対象になるITツール3分野</figcaption></figure>
 
@@ -158,6 +152,8 @@ faq:
 ## IT導入補助金と他制度（小規模事業者持続化補助金）との使い分け
 
 **ITツール導入中心ならIT導入補助金、店舗改装や販路開拓の広告費中心なら小規模事業者持続化補助金が向いています。**目的が異なるため、両方の対象経費が重ならないよう切り分ける必要があります。
+
+関連する内容を先に押さえるなら、[歯科医院のIT導入補助金](/blog/it-hojokin-shika-iin/)が参考になります。
 
 対象になる範囲は、[学習塾はIT導入補助金の対象？](/blog/it-hojokin-gakushujuku/)で解説しています。
 

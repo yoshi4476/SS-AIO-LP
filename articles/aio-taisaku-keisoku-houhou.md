@@ -77,6 +77,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
+実際の例を先に押さえるなら、[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)が参考になります。
+
 近い論点を[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)で扱っています。
 
 関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
@@ -257,7 +259,7 @@ AIの回答は同じ質問でも日によって変わります。1回の結果�
 
 計測の土台となるクロール許可の確認は[AIO対策なのに表示されない8つの原因](/aio/aio-taisaku-hyouji-sarenai/)、記事構造の直し方は[AIO対策でAIに引用されるには？5つの実践ポイント](/aio/aio-taisaku-ai-inyou-sareru/)にまとめています。
 
-無料で使える計測ツールの一覧は[AIO対策の無料ツール6選](/aio/aio-taisaku-muryou-tool/)を参考にしてください。
+無料で使える計測ツールの一覧はAIO対策の無料ツール6選を参考にしてください。
 
 AI検索への対応で抜けている箇所は、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録なしで、その場で点数が表示されます。
 

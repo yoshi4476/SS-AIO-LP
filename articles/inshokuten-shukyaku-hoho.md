@@ -59,6 +59,8 @@ diagrams:
 
 飲食店の集客が伸び悩む最大の理由は、**来店客が複数の情報源を使い分けている**ことです。MEOだけ・SNSだけを整備しても、届く客層は一部にとどまります。
 
+あわせて[美容室の集客アイデア12選｜無料で今日から試せる施策](/ai-marketing/biyoushitsu-shukyaku-idea/)もご覧ください。
+
 <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>によると、<strong>消費者の71%が地域の店を探す際に口コミを日常的に読み</strong>、口コミの確認先としては<strong>83%がGoogleを利用</strong>しています。さらに48%はAIが生成した口コミの要約も読むと回答しており、口コミはAI検索の素材にもなり始めています。
 
 | 情報源 | 参考にする割合 | 対応する施策 |

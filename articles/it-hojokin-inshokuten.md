@@ -53,8 +53,6 @@ faq:
 
 関連する内容については、[クリニックのIT導入補助金](/blog/it-hojokin-clinic/)にまとめています。
 
-選ぶときの基準は[IT導入補助金のおすすめの選び方](/blog/it-hojokin-osusume/)で整理しています。
-
 関連する内容については、[宿泊業のIT導入補助金は有利？](/blog/it-hojokin-shukuhakugyou/)にまとめています。
 
 つまずきやすい点を先に押さえるなら、[歯科医院のIT導入補助金](/blog/it-hojokin-shika-iin/)が参考になります。

@@ -107,6 +107,8 @@ faq:
 
 成功の土台は、KW設計・事例蓄積・運営者情報・MEO連動・更新頻度という5つの施策です。
 
+関連する内容は、[展示会後フォローで商談化率を上げる5つの施策](/ai-marketing/tenjikaigo-follow-hoho/)で解説しています。
+
 <figure><img src="/images/reform-seo-taisaku/steps.png" alt="リフォームSEOを成功させる5つの施策: KW設計で地域名×工事内容の検索語を洗い出す、施工事例を蓄積しbefore/after写真と数値を添える、運営者情報を明示し資格・実績・所在地を掲載する、MEOと連動しGoogleビジネスプロフィールと連携する、更新頻度を確保し料金・事例を月1回以上更新する" loading="lazy"><figcaption>リフォームSEOを成功させる5つの施策</figcaption></figure>
 
 ### 施策1: 地域名×工事内容でKWを設計する

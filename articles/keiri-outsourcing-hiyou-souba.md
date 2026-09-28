@@ -89,8 +89,6 @@ faq:
 
 近い論点を[記帳の経理代行を断られる理由6つ｜再依頼前の対処法](/blog/kichodaiko-kotowarareru-riyu/)で扱っています。
 
-あわせて[経理の業務フローチャートの書き方](/blog/keiri-gyomu-flowchart-kakikata/)もご覧ください。
-
 当社は補助金を使った会計ソフト導入を支援する立場から申し上げると、**外注費だけでなく、ツール代と社内の確認工数を足して比べないと判断を誤ります**。
 
 <figure><img src="/images/keiri-outsourcing-hiyou-souba/youin.png" alt="経理アウトソーシングの費用を左右する4つの要因: 仕訳・伝票の件数、委託する業務範囲の広さ、給与計算の対象人数、契約形態と稼働頻度" loading="lazy"><figcaption>経理アウトソーシングの費用を左右する4つの要因</figcaption></figure>

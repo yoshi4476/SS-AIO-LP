@@ -53,6 +53,8 @@ faq:
 
 AIO対策の導入とは、AI検索への最適化をツール単発の作業ではなく、社内で継続する仕組みに変えることです。
 
+関連する内容については、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)にまとめています。
+
 選ぶときの基準は[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)で整理しています。
 
 前提となる考え方は[税理士法人のAIO対策とは？](/aio/zeirishi-houjin-aio/)で整理しています。

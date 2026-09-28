@@ -1222,3 +1222,4 @@
 {"at": "2026-09-28 16:41", "by": "auto_merge", "slug": "it-hojokin-jidousha-seibi", "kind": "merge-scaled", "loser": "it-hojokin-seizougyou", "ok": false, "note": "2本のどちらにも無かった数字が増えました: {'47.7': 1, '47%': 1, '56.3%': 1}"}
 {"at": "2026-09-28 16:42", "by": "auto_merge", "slug": "inshokuten-ai-hojokin-ochiru-riyu", "kind": "merge-scaled", "loser": "oroshiurigyou-ai-hojokin-ochiru-riyu", "ok": true, "note": "統合しました（oroshiurigyou-ai-hojokin-ochiru-riyu → inshokuten-ai-hojokin-ochiru-riyu、本文 5615 → 8310字）"}
 {"when": "2026-09-28T16:42:58.281868", "by": "auto_review", "slug": "(32記事)", "what": "言い回し25件を振り直し・83件を削除"}
+{"when": "2026-09-28T16:43:40.808815", "by": "auto_review", "slug": "(13記事)", "what": "言い回し6件を振り直し・25件を削除"}
