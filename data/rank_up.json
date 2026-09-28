@@ -7,10 +7,10 @@
   "site": "ai-lab"
  },
  "aio-taisaku-muryou-tool": {
-  "at": "2026-09-20",
-  "pos": 16.9,
-  "imp": 168,
-  "site": "ai-lab"
+  "at": "2026-09-28",
+  "pos": 21.42528735632184,
+  "site": "ai-lab",
+  "by": "auto_merge"
  },
  "ai-kantan-shukyaku": {
   "at": "2026-09-20",
@@ -199,11 +199,10 @@
   "site": "ai-lab"
  },
  "aio-taisaku-keisoku-houhou": {
-  "at": "2026-09-20",
-  "pos": 33.4,
-  "imp": 39,
-  "band": "21〜50位",
-  "site": "ai-lab"
+  "at": "2026-09-28",
+  "pos": 29.23404255319149,
+  "site": "ai-lab",
+  "by": "auto_merge"
  },
  "reform-instagram-shukyaku": {
   "at": "2026-09-20",
@@ -414,5 +413,23 @@
   "imp": 20,
   "band": "11〜20位",
   "site": "subsidy"
+ },
+ "jigyou-saikouchiku-biyoushitsu-jirei": {
+  "at": "2026-09-28",
+  "pos": 47.0,
+  "site": "subsidy",
+  "by": "auto_merge"
+ },
+ "jigyou-saikouchiku-shukuhakugyou-jirei": {
+  "at": "2026-09-28",
+  "pos": 4.2,
+  "site": "subsidy",
+  "by": "auto_merge"
+ },
+ "inshokuten-ai-hojokin-taisho-youken": {
+  "at": "2026-09-28",
+  "pos": 4.625,
+  "site": "subsidy",
+  "by": "auto_merge"
  }
 }
