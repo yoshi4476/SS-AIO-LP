@@ -131,10 +131,9 @@
  },
  "shika-heiin-hiyou": {
   "at": "2026-09-28",
-  "pos": 5.7,
-  "imp": 50,
-  "band": "4〜10位",
-  "site": "ai-lab"
+  "pos": 6.3,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
  },
  "seikotsuin-hiyou-hoken": {
   "at": "2026-09-28",
