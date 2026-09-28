@@ -49,6 +49,8 @@ faq:
 
 経理の業務フロー見直しとは、記帳から支払いまでの手順を可視化し、無駄や属人化を解消する取り組みです。
 
+関連する内容として[経理のやり方とは？初心者向け5ステップ](/blog/keiri-yarikata-shoshinsha/)も公開しています。
+
 あわせて[月次決算とは？初心者向けの基本と進め方5ステップ](/blog/getsuji-kessan-nyumon/)もご覧ください。
 
 <div class="definition-box"><span class="term">経理の業務フロー見直しとは</span>、記帳・請求書処理・支払い・月次決算といった一連の作業を洗い出し、誰が・いつ・どの順番で行っているかを整理し直すことです。==目的は作業を減らすことではなく、担当者が変わっても同じ手順で回る状態をつくることにあります。==</div>
@@ -71,7 +73,7 @@ faq:
 
 経理の業務フローが乱れる原因は、手順の未文書化・複雑な承認経路・多い転記作業・属人的な進め方の4つです。
 
-関連する内容として[個人経営の経理のやり方｜後回しにしない3つのコツ](/blog/kojin-keiei-keiri-yarikata/)も公開しています。
+あわせて[個人経営の経理のやり方｜後回しにしない3つのコツ](/blog/kojin-keiei-keiri-yarikata/)もご覧ください。
 
 <figure><img src="/images/keiri-gyomu-flow-minaoshi/genin.png" alt="経理の業務フローが乱れる4つの原因: 手順が未文書化、承認経路が複雑、転記作業が多い、属人的な進め方" loading="lazy"><figcaption>経理の業務フローが乱れる4つの原因</figcaption></figure>
 
@@ -104,8 +106,6 @@ faq:
 ## 経理の業務フロー見直し3ステップ
 
 経理の業務フロー見直しは、可視化・課題特定・再設計という3ステップで進めます。
-
-実際の進め方は[経理の業務フローチャートの書き方](/blog/keiri-gyomu-flowchart-kakikata/)でも扱っています。
 
 <figure><img src="/images/keiri-gyomu-flow-minaoshi/step.png" alt="経理の業務フロー見直し3ステップ: 現状を可視化する、課題を特定する、フローを再設計する" loading="lazy"><figcaption>経理の業務フロー見直し3ステップ</figcaption></figure>
 

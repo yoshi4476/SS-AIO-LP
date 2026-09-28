@@ -103,6 +103,8 @@ faq:
 
 経理代行を頼むタイミングは、依頼先の選定は開業前、記帳の依頼開始は開業1〜2か月目が目安です。
 
+近い論点を[個人事業主の帳簿の付け方](/blog/kojin-jigyonushi-choubo-tsukekata/)で扱っています。
+
 <figure><img src="/images/keiri-daiko-kaigyou/taimingu.png" alt="経理代行を頼むタイミング3ステップ: 開業前に業務範囲を決めておく、開業1〜2か月目に記帳を任せ始める、軌道に乗ったら範囲を見直す" loading="lazy"><figcaption>経理代行を頼むタイミング3ステップ</figcaption></figure>
 
 1つ目は開業前です。この段階では契約する必要はなく、どこまで自分でやり、どこから任せるかの業務範囲を決めておくだけで十分です。**開業準備と並行して依頼先の候補を2〜3社リストアップしておくと、開業後の判断が早くなります。**
@@ -151,8 +153,6 @@ faq:
 関連する内容は[記帳の経理代行を断られる理由6つ｜再依頼前の対処法](/blog/kichodaiko-kotowarareru-riyu/)でも扱っています。
 
 費用の目安は[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)で整理しています。
-
-実際の例は、[経理代行の失敗5パターン](/blog/keiri-daiko-shippai/)で解説しています。
 
 <figure><img src="/images/keiri-daiko-kaigyou/erabikata.png" alt="開業期の経理代行の選び方3つのポイント: 少額の取引数から契約できるか、税理士との連携実績があるか、使う予定の会計ソフトに対応しているか" loading="lazy"><figcaption>開業期の経理代行の選び方3つのポイント</figcaption></figure>
 

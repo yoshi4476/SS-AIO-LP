@@ -49,6 +49,8 @@ faq:
 
 経理の仕事効率化とは、記帳・請求書発行・経費精算・支払い処理といった日々の業務にかかる時間を、工夫や仕組みの見直しで減らす取り組みです。
 
+関連する内容として[経理の残業を減らす7つの方法](/blog/keiri-zangyo-herasu/)も公開しています。
+
 <div class="definition-box"><span class="term">経理の仕事効率化とは</span>、担当者の作業時間を短縮しながら、ミスの少なさと月次決算のスピードを両立させる取り組みを指します。==個人の工夫からツール導入、外部委託まで手段の幅は広いです。==</div>
 
 Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-sansan.com/news/2024/0328_02.html" target="_blank" rel="noopener">「経理の人手不足に関する実態調査」</a>（経理担当者1,000名対象）があります。**経理の人手不足を感じている割合は50.1%、そのうち85.2%が「深刻」と回答**しています。人手が増えにくい以上、1人あたりの仕事を効率化する発想が欠かせません。
@@ -98,7 +100,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 関連する内容として[経理効率化の事例4選｜方法別のポイントと進め方](/blog/keiri-koritsuka-jirei/)も公開しています。
 
-関連する内容として[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)も公開しています。
+あわせて[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)もご覧ください。
 
 <figure><img src="/images/keiri-shigoto-koritsuka/tool3.png" alt="ツールで効率化できる3つの領域: クラウド会計による入力の自動化、経費精算システムによる申請・承認の効率化、RPA・AI-OCRによる転記の自動化" loading="lazy"><figcaption>ツールで効率化できる3つの領域</figcaption></figure>
 

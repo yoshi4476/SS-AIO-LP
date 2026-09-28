@@ -47,7 +47,13 @@ faq:
 
 **外注費は請求書がなくても、支払いの事実を示す証憑があれば経費計上できます。**法人税・所得税の計算上、請求書の保存は経費計上の絶対条件ではありません。
 
-あわせて[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)もご覧ください。
+あわせて[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)もご覧ください。
+
+あわせて[経理外注は個人（フリーランス）でも可能？](/blog/keiri-gaichuu-kojin/)もご覧ください。
+
+関連する内容として[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)も公開しています。
+
+関連する内容として[請求書の作り方｜テンプレート8要素と3ステップ](/blog/seikyusho-tsukurikata/)も公開しています。
 
 <div class="definition-box"><span class="term">経費計上に必要な証憑とは</span>、支払日・支払先・金額・内容が確認できる書類全般のことです。==請求書はその代表例にすぎず、振込明細書や出金伝票でも同じ役割を果たせます。==</div>
 
@@ -136,8 +142,6 @@ faq:
 ## 請求書なしで経費計上する際によくある失敗と税務調査リスク
 
 **請求書なしの経費計上でよくある失敗は、証憑を何も残さずに現金で支払ってしまうことです。**
-
-関連する内容として[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)も公開しています。
 
 <figure><img src="/images/gaichuuhi-seikyuusho-nashi/hikaku.png" alt="請求書なし対応のNGパターンとOKパターン: NGパターンは記録を残さず現金で払う・証憑なしで経費計上する・控除率を確認せず計算する、OKパターンは振込明細か出金伝票を残す・支払通知書を作成して送る・経過措置の控除率で計算する" loading="lazy"><figcaption>請求書なし対応のNGパターンとOKパターン</figcaption></figure>
 

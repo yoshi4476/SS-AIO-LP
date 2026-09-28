@@ -70,6 +70,7 @@ faq:
 
 請求書処理の実務フローは、記載要件の確認から証憑の保存まで4つのステップで構成されます。
 
+あわせて[適格請求書の要件は6項目](/blog/tekikaku-seikyusho-youken/)もご覧ください。
 
 <figure><img src="/images/invoice-seido-keiri-jitsumu/flow.png" alt="請求書処理の実務フロー4ステップ: 記載要件を確認する、登録番号を照合する、税率区分を仕訳に反映する、証憑を保存する" loading="lazy"><figcaption>請求書処理の実務フロー4ステップ</figcaption></figure>
 
@@ -132,8 +133,6 @@ faq:
 
 請求書等の保存期間は原則7年間で、紙とデータでは保存方法にも別のルールが関わります。
 
-
-あわせて[経理担当者の退職対応｜直後にやる5つのこと](/blog/keiri-tantousha-taishoku-taiou/)もご覧ください。
 
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6496.htm" target="_blank" rel="noopener">仕入税額控除の要件</a>によると、**帳簿及び請求書等は、受領した日の属する課税期間の末日の翌日から2か月を経過した日から7年間保存する**必要があります。6年目と7年目は、帳簿か請求書等のどちらか一方を保存すれば足ります。
 

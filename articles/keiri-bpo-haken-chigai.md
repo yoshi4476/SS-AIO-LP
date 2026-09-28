@@ -109,7 +109,7 @@ faq:
 
 前提となる考え方は[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)でも扱っています。
 
-関連する内容として[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)も公開しています。
+近い論点を[税理士の記帳代行報酬相場と経理BPO比較](/blog/zeirishi-houshu-kichodaiko-souba/)で扱っています。
 
 費用の目安を先に押さえるなら、[経費精算BPOとは？任せられる業務3つと費用相場](/blog/keihi-seisan-bpo/)が参考になります。
 

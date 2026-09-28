@@ -52,7 +52,7 @@ faq:
 
 近い論点を[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)で扱っています。
 
-関連する内容として[請求書を銀行振込で支払う手順](/blog/seikyusho-ginko-furikomi-yarikata/)も公開しています。
+あわせて[請求書を銀行振込で支払う手順](/blog/seikyusho-ginko-furikomi-yarikata/)もご覧ください。
 
 <div class="definition-box"><span class="term">経理効率化とは</span>、経理担当者の作業時間そのものを短縮し、月次決算のスピードとミスの少なさを両立させる取り組みを指します。==ツール導入だけでなく、業務フローの見直しも含みます。==</div>
 

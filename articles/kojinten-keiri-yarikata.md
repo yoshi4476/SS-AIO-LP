@@ -59,6 +59,8 @@ faq:
 
 **個人店の経理は、現金・在庫・スタッフの3点を先に決めておくと、繁忙期でも崩れにくくなります。**
 
+関連する内容として[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)も公開しています。
+
 <figure><img src="/images/kojinten-keiri-yarikata/santen.png" alt="個人店の経理で先に固める3点: 現金はレジ締めと現金出納帳、在庫は棚卸しと売上原価、スタッフは給与と源泉徴収" loading="lazy"><figcaption>個人店の経理で先に固める3点</figcaption></figure>
 
 <div class="definition-box"><span class="term">個人店とは</span>、法人ではなく個人事業として実店舗を運営している事業形態のことです。小売店・美容室・整体院・カフェなど、店舗で直接お客さまに商品やサービスを提供する業種が該当します。</div>

@@ -53,7 +53,7 @@ faq:
 
 経理の人手不足は、採用難・繁忙期の偏り・退職者の補充遅れ・属人化という4つの要因が重なって起こります。
 
-関連する内容として[経理担当者の退職対応｜直後にやる5つのこと](/blog/keiri-tantousha-taishoku-taiou/)も公開しています。
+近い論点を[経理担当者の退職対応｜直後にやる5つのこと](/blog/keiri-tantousha-taishoku-taiou/)で扱っています。
 
 <div class="definition-box"><span class="term">経理の人手不足とは</span>、必要な経理業務量に対して対応できる人員や時間が不足している状態を指します。==採用だけでなく、業務量そのものの見直しも対策の対象です。==</div>
 
@@ -111,7 +111,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 あわせて[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)もご覧ください。
 
-関連する内容として[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)も公開しています。
+近い論点を[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)で扱っています。
 
 | 対策 | 概要 | 効果が出るまでの目安 |
 |:--|:--|:--|

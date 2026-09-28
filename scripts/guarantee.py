@@ -151,9 +151,13 @@ def site_checks():
     rows.append(("IndexNow の鍵が置いてある", bool(idx),
                  idx[0].name if idx else "なし", "鍵ファイルを site/ に置く"))
 
-    ds = list((ROOT / "data" / "datasets").glob("*.json"))
-    rows.append(("一次データを公開している", len(ds) >= 3, f"{len(ds)}件",
-                 "python scripts/data_auto.py --write"))
+    # 公開を止めている間（data_intake.PUBLIC=False）は、集計のファイルがあっても公開ではない。
+    # 数えると「公開している」と誤って満点になる。止めているのは経営判断なので要因から外す
+    import data_intake
+    if data_intake.PUBLIC:
+        ds = list((ROOT / "data" / "datasets").glob("*.json"))
+        rows.append(("一次データを公開している", len(ds) >= 3, f"{len(ds)}件",
+                     "python scripts/data_auto.py --write"))
 
     led = ROOT / "data" / "published.json"
     rows.append(("公開の門が閉まっている", led.is_file(),

@@ -65,7 +65,7 @@ Pythonでの経理自動化には、集計・Excel生成・CSV整形・API連携
 
 あわせて[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)もご覧ください。
 
-関連する内容として[経理効率化の事例4選｜方法別のポイントと進め方](/blog/keiri-koritsuka-jirei/)も公開しています。
+近い論点を[経理効率化の事例4選｜方法別のポイントと進め方](/blog/keiri-koritsuka-jirei/)で扱っています。
 
 前提となる考え方は[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)で整理しています。
 
@@ -88,7 +88,6 @@ Pythonでの経理自動化には、集計・Excel生成・CSV整形・API連携
 ## Pythonとエクセルのマクロ・VBAとの違い
 
 Pythonとエクセルのマクロ・VBAは、処理速度・外部連携・学習のしやすさで比較すると違いが分かりやすくなります。
-
 
 | 比較項目 | Python | エクセルのマクロ・VBA |
 |:--|:--|:--|

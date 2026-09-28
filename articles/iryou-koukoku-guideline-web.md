@@ -46,6 +46,10 @@ diagrams:
 
 医療広告ガイドラインとは、医療法に基づき厚生労働省が定めた、医療機関の広告表現に関する指針です。
 
+近い論点を[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)で扱っています。
+
+関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
+
 あわせて[医療機関のMEO対策](/meo/iryou-meo-taisaku/)もご覧ください。
 
 関連する内容として[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)も公開しています。
@@ -84,7 +88,7 @@ Webサイト上の表現が医療広告として規制されるかどうかは�
 
 医療法6条の5第2項では、Webサイトを含む医療広告で禁止される表現を6つの類型に整理しています。
 
-実際の例については、[クリニックDX事例5選](/ai-marketing/clinic-dx-jirei/)にまとめています。
+関連する内容を先に押さえるなら、[クリニックM&A後の集患再建](/meo/clinic-ma-shukyaku-jirei/)が参考になります。
 
 <figure><img src="/images/iryou-koukoku-guideline-web/ng-types.png" alt="クリニックHPで禁止される6つの表現: 虚偽広告、比較優良広告、誇大広告、体験談広告、ビフォーアフター写真、公序良俗に反する広告" loading="lazy"><figcaption>医療法6条の5第2項が定める禁止広告の6類型</figcaption></figure>
 

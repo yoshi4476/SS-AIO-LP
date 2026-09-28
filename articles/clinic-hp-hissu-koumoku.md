@@ -44,7 +44,21 @@ faq:
 
 クリニックのホームページに必須の項目とは、患者が「受診してよいか」を判断するために必要な情報一式です。
 
-あわせて[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)もご覧ください。
+近い論点を[整骨院の費用は保険でいくら？自己負担3割の目安と相場](/seo/seikotsuin-hiyou-hoken/)で扱っています。
+
+関連する内容として[税理士のブログ集客とは？書くべき5つの記事テーマ](/seo/zeirishi-blog-shukyaku/)も公開しています。
+
+関連する内容として[整骨院の集客イベント5選](/ai-marketing/seikotsuin-shukyaku-event/)も公開しています。
+
+あわせて[整骨院のチラシ集客｜反応率を上げる5つの型と配布のコツ](/ai-marketing/seikotsuin-shukyaku-chirashi/)もご覧ください。
+
+あわせて[税理士の集客サイトとは？](/seo/zeirishi-shukyaku-site/)もご覧ください。
+
+実際の例は、[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)で解説しています。
+
+選ぶときの基準は、[クリニックの集客集患サポートとは？3つの型と選び方](/ai-marketing/clinic-shukyaku-shukan-support/)で解説しています。
+
+関連する内容として[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)も公開しています。
 
 実際の例は、[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)で解説しています。
 
@@ -59,6 +73,12 @@ faq:
 ## なぜ今、クリニックのホームページに必須項目の整備が欠かせないのか
 
 必須項目の整備が欠かせない理由は、患者の受診行動の変化と、AI検索による比較の一般化にあります。
+
+近い論点を[クリニックDX事例5選](/ai-marketing/clinic-dx-jirei/)で扱っています。
+
+あわせて[クリニック集客の設計図](/ai-marketing/clinic-shukyaku-sekkeizu/)もご覧ください。
+
+関連する内容として[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)も公開しています。
 
 第一に、初診の患者の多くがホームページで最終確認をしてから来院することです。地図アプリや口コミサイトで候補を絞った後、実際に予約するかどうかはホームページの情報量で決まります。ここで基本情報や診療科目が不足していると、比較段階で候補から外れてしまいます。
 

@@ -68,6 +68,8 @@ faq:
 
 **整骨院で保険が使えるのは、骨折・脱臼・打撲・捻挫（肉離れを含む）の施術を受けた場合に限られます。**単なる肩こりや筋肉疲労は保険の対象外です。
 
+関連する内容として[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)も公開しています。
+
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html" target="_blank" rel="noopener">厚生労働省の案内</a>によると、柔道整復師の施術で健康保険が使えるのは「骨折、脱臼、打撲及び捻挫（いわゆる肉ばなれを含む）の施術を受けた場合」です。骨折・脱臼については、緊急の場合を除き、あらかじめ医師の同意を得ることが条件になります。
 
 一方、「単なる肩こり、筋肉疲労などに対する施術は保険の対象になりません」とも明記されています。この症状で施術を受けた場合は、全額自己負担です。
@@ -162,8 +164,6 @@ faq:
 ## 整骨院の費用ページを更新するときの3ステップ
 
 **整骨院の費用ページは、料金表の見直し・注意書きの追記・公開日の更新という3ステップで定期的に手入れします。**
-
-費用の目安は[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)で整理しています。
 
 <figure><img src="/images/seikotsuin-hiyou-hoken/update-steps.png" alt="整骨院の費用ページを更新する3ステップ: 料金表の見直し、注意書きの追記、公開日の更新" loading="lazy"><figcaption>整骨院の費用ページを更新する3ステップ</figcaption></figure>
 

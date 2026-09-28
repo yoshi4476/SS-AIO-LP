@@ -47,6 +47,8 @@ faq:
 
 不動産の集客代行とは、反響を生むまでの集客業務を、社内で抱え込まず外部の専門会社に任せる選択肢です。
 
+近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
+
 実際の進め方については、[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)にまとめています。
 
 前提となる考え方は[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)で整理しています。

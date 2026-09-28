@@ -229,8 +229,6 @@ AI検索への対応で抜けている箇所は、[AI検索の対応度チェッ
 **導入は、診断・修正・計測の3ステップで進めると迷いません。**
 
 
-関連する内容として[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)も公開しています。
-
 <figure><img src="/images/aio-taisaku-muryou-tool/steps.png" alt="無料ツール導入3ステップ: 現状を無料診断、エラーを修正、毎月計測して改善" width="1200" height="400" loading="lazy"><figcaption>無料ツールでのAIO対策 導入3ステップ（当メディア作成）</figcaption></figure>
 
 ### ステップ1: 現状を把握する

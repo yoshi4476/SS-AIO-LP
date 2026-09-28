@@ -128,6 +128,8 @@ faq:
 
 記帳代行会社は、対応範囲の明確さ・セキュリティ体制・対応スピード・担当者の実務理解の4点で比較して選びます。
 
+関連する内容として[経理BPOの契約書｜見落としやすい条項6つと確認手順](/blog/keiri-bpo-keiyakusho-kakunin/)も公開しています。
+
 セキュリティ面の確認事項は、[経理代行のセキュリティ｜契約前に確認すべき5つのポイント](https://corp.7senses.co.jp/blog/keiri-daiko-security/)で詳しく整理しています。
 
 <figure><img src="/images/kichodaiko-outsourcing/erabikata.png" alt="記帳代行会社選びのNGとOK: NG例は対応範囲を確認せず契約する・セキュリティ体制を聞かない・入力ルールをすり合わせない・繁忙期の対応可否を確認しない、OK例は委託範囲を書面で明確にする・情報管理の体制を確認する・勘定科目のルールを事前共有する・繁忙期の対応枠を確認する" loading="lazy"><figcaption>記帳代行会社選びのNGとOK</figcaption></figure>

@@ -56,6 +56,10 @@ diagrams:
 
 美容皮膚科は比較検討期間が長く高単価なため、検討段階で接点を持てるMEOの影響が特に大きくなります。
 
+近い論点を[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)で扱っています。
+
+関連する内容として[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)も公開しています。
+
 第一に、**自由診療は保険診療より意思決定に時間がかかる**ことです。数万円から数十万円の施術を、保険の効かない自己負担で選ぶため、患者さんは複数院を比較してから予約します。この比較の場面で繰り返し検索されるのがGoogleマップです。
 
 第二に、口コミの影響力が保険診療以上に強いことです。<a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>（米国の消費者1,026人調査）が根拠です。**消費者の71%が地域の店や施設を探す際に口コミを日常的に読んでいます**。口コミの確認先としては**83%がGoogleを利用**しています。「失敗したくない」という心理が強い美容医療では、この傾向がさらに強まります。
@@ -151,10 +155,6 @@ diagrams:
 ## 美容皮膚科MEO対策 着手の3ステップ
 
 プロフィールの基本整備、施術メニュー登録、口コミ運用の順で着手すると迷わず進められます。
-
-前提となる考え方については、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)にまとめています。
-
-実際の進め方は、[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で解説しています。
 
 <figure><img src="/images/biyou-hifuka-meo/steps.png" alt="美容皮膚科MEO対策 着手の3ステップ: 基本整備でプロフィールとNAP統一、メニュー登録で施術名を網羅登録、口コミ運用で依頼と返信を継続" loading="lazy"><figcaption>美容皮膚科MEO対策 着手の3ステップ</figcaption></figure>
 

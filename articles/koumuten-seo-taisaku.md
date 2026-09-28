@@ -54,6 +54,8 @@ faq:
 
 工務店にSEOが必要な理由は、施主の情報収集行動の変化と、業界内の競争激化にあります。
 
+近い論点を[AIO集客とは？向いている業種と始める3つの基準](/aio/aio-shukyaku/)で扱っています。
+
 あわせて[工務店・注文住宅のAIO対策](/aio/koumuten-chumon-jutaku-aio/)もご覧ください。
 
 関連する内容として[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)も公開しています。
@@ -77,6 +79,12 @@ faq:
 ## 施工事例が検索で拾われない3つの原因
 
 工務店SEOの失敗は、施工事例の不足・更新の停滞・対応エリアの曖昧さの3つに集約されます。
+
+近い論点を[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)で扱っています。
+
+あわせて[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)もご覧ください。
+
+関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
 
 <figure><img src="/images/koumuten-seo-taisaku/mistakes.png" alt="工務店のSEOで失敗しやすい3つの原因: 施工事例を数件しか載せていない、更新が半年以上止まっている、対応エリア・価格帯が曖昧" loading="lazy"><figcaption>工務店のSEOで失敗しやすい3つの原因</figcaption></figure>
 
@@ -124,8 +132,6 @@ faq:
 ## 注文住宅・リフォーム・分譲で変わる打ち手
 
 優先すべき施策は、新築中心かリフォーム中心かで施主の検索行動が異なるため変わります。
-
-近い論点を[歯科医院の開業費用は5000万円？内訳と抑え方](/meo/shika-kaigyou-hiyou/)で扱っています。
 
 | 工務店のタイプ | 主な検索のされ方 | 優先すべき施策 |
 |:--|:--|:--|

@@ -55,6 +55,8 @@ diagrams:
 
 整骨院のMEO対策とは、柔道整復師という国家資格をGoogleマップ上で明示し、無資格の整体院と区別させる施策です。
 
+関連する内容として[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)も公開しています。
+
 直す接点は4つだけです。G-ranの運用で実際に手を入れている順に並べました。
 
 | 接点 | やること | 整体院との差 |
@@ -151,8 +153,6 @@ Googleビジネスプロフィールには、整骨院と紛らわしいカテ�
 ## 口コミ・投稿運用で柔整広告ガイドラインに配慮する
 
 整骨院の口コミ・投稿運用は、効能効果の断定表現と保険外メニューの誇張の2点に注意が必要です。
-
-関連して、[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)もあわせてご確認ください。
 
 <figure><img src="/images/seikotsuin-meo-taisaku/ng-ok.png" alt="整骨院MEOの資格表現NG・OK比較: NGは断定表現・金額言及・差別化なし、OKは事実表記・資格証掲載・保険適用範囲の案内" loading="lazy"><figcaption>整骨院MEOの資格表現 NG・OK比較</figcaption></figure>
 

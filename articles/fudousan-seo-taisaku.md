@@ -59,6 +59,8 @@ diagrams:
 
 **宅建業者が11年連続で増える中、検索で見つかる会社だけが新規の反響を得られます。**
 
+関連する内容として[飲食店の集客方法とは？](/ai-marketing/inshokuten-shukyaku-hoho/)も公開しています。
+
 あわせて[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)もご覧ください。
 
 <a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。供給過多の市場では、ポータルへの物件掲載だけで反響が入ってきた時代は終わりつつあります。
@@ -152,8 +154,6 @@ diagrams:
 ## 不動産SEOの始め方3ステップ
 
 不動産SEOは、現状分析・ページ整備・コラム発信の3ステップで始めます。
-
-費用の目安は[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)でも扱っています。
 
 ### ステップ1: 現状分析を1週間で終わらせる
 
