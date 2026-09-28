@@ -413,14 +413,10 @@ def fact_numbers(added, had):
     見ると、正しい書き換えまで差し戻されて一本も直せない（実測で2/3が該当）。
     止めたいのは、記事に無かった事実の数字が公開されることだけ。
     """
-    out = {}
-    for tok, n in added.items():
-        brand_new = tok not in had
-        figure = ("%" in tok or "％" in tok or "." in tok or "．" in tok
-                  or "," in tok or "，" in tok or len(tok) >= 4)
-        if brand_new or figure:
-            out[tok] = n
-    return out
+    # 記事に既にある数字を別の箇所で繰り返すのは、新しい事実ではない。
+    # 以前は「1,600」のような桁区切りの数字は既出でも回数が増えれば止めていたため、
+    # タイトルにある時給相場（1,600〜2,500円）を本文の答えに書いただけで差し戻した（2026-09-28）
+    return {tok: n for tok, n in added.items() if tok not in had}
 
 
 def sources(s):
