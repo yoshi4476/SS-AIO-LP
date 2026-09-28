@@ -109,6 +109,8 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 中長期では、クラウド化・自動化・経理BPO・採用条件の見直しという4つの対策で、人手不足そのものを解消します。
 
+関連する内容として[Notionで記帳を自動化する方法](/blog/notion-kicho-jidoka/)も公開しています。
+
 関連する内容として[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)も公開しています。
 
 <<<<<<< Updated upstream

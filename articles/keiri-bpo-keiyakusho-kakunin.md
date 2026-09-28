@@ -49,6 +49,8 @@ faq:
 
 経理BPOの契約書は、業務範囲・秘密保持・損害賠償・解約条件・料金改定・再委託の可否という6項目を軸に確認すると、抜け漏れを防ぎやすくなります。
 
+費用の目安は[経理BPOの料金の内訳｜3つの費目と見積書の見方](/blog/keiri-bpo-hiyou-uchiwake/)でも扱っています。
+
 <div class="definition-box"><span class="term">経理BPOの契約書確認とは</span>、見積もりや口頭説明の内容が、契約書の条文として実際に反映されているかを照合する作業のことです。==説明と条文が食い違っていても、契約後に効力を持つのは条文の側です。==</div>
 
 <figure><img src="/images/keiri-bpo-keiyakusho-kakunin/koumoku6.png" alt="経理BPOの契約書で確認すべき6つの項目: 業務範囲の記載、秘密保持・情報管理条項、損害賠償・免責の範囲、解約条件・最低利用期間、料金改定・追加費用の条件、再委託の可否" loading="lazy"><figcaption>経理BPOの契約書で確認すべき6つの項目</figcaption></figure>

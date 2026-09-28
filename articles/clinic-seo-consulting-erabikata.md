@@ -47,6 +47,10 @@ faq:
 
 **クリニックSEOコンサルティングは、KW設計・技術監査・ガイドライン準拠を一括で担う専門支援です。**
 
+近い論点を[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)で扱っています。
+
+関連する内容として[AIO SEO監査とは？](/aio/aio-seo-audit/)も公開しています。
+
 あわせて[リフォームSEOとは？受注につながる5つの施策](/seo/reform-seo-taisaku/)もご覧ください。
 
 費用の目安を先に押さえるなら、[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)が参考になります。

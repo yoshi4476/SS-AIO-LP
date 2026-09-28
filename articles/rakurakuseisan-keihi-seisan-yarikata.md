@@ -49,6 +49,8 @@ faq:
 
 **楽楽精算とは、株式会社ラクスが提供する経費精算に特化したクラウドシステムのことです。**領収書のスマホ撮影から承認、会計ソフトへの仕訳出力までを一連の流れで処理します。
 
+近い論点を[個人事業主の帳簿の付け方](/blog/kojin-jigyonushi-choubo-tsukekata/)で扱っています。
+
 あわせて[経費精算システムとは？](/blog/keihi-seisan-system-erabikata/)もご覧ください。
 
 <div class="definition-box"><span class="term">楽楽精算とは</span>、AI-OCRによる領収書の自動入力、申請ルールチェック、部門や金額に応じた承認ルート設定を組み合わせ、経費精算業務そのものを効率化するために作られた専門システムのことです。</div>
@@ -93,6 +95,10 @@ freeeの経費精算については、[freeeの経費精算のやり方｜申請
 ## 複数部門・複数拠点がある会社の承認ルート設計
 
 部門や拠点が複数ある会社では、部門ごとの承認者・金額による承認段階の分岐・承認者不在時の代理設定という3つを先に決めておく必要があります。
+
+関連する内容として[中小企業の経理効率化](/blog/chusho-keiri-koritsuka/)も公開しています。
+
+あわせて[経理の仕事を効率化する9つの方法](/blog/keiri-shigoto-koritsuka/)もご覧ください。
 
 <figure><img src="/images/rakurakuseisan-keihi-seisan-yarikata/shokisettei.png" alt="承認ルート設計で先に決めておく3つ: 部門ごとの承認者、金額による承認段階の分岐、承認者不在時の代理設定" loading="lazy"><figcaption>承認ルート設計で先に決めておく3つ</figcaption></figure>
 

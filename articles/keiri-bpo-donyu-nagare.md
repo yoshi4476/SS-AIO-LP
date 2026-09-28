@@ -47,6 +47,8 @@ faq:
 
 経理BPOの導入は、現状の棚卸しから本稼働まで大きく6つのステップで進みます。
 
+あわせて[経理効率化の本おすすめ6選｜選び方3ステップと失敗例](/blog/keiri-koritsuka-hon/)もご覧ください。
+
 関連する内容として[請求書チェックの効率化](/blog/seikyusho-check-koritsuka/)も公開しています。
 
 あわせて[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)もご覧ください。

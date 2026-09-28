@@ -76,6 +76,8 @@ AI OverviewはGooglebotが集めた検索結果を土台に生成されます。
 
 **AIO集客は、比較検討に時間がかかる業種ほど効果が出やすく、その場の衝動で決まる業種には向きません。**
 
+関連する内容として[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)も公開しています。
+
 <<<<<<< Updated upstream
 関連する内容として[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)も公開しています。
 =======

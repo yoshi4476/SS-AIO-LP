@@ -42,6 +42,10 @@ faq:
 
 **AIOはAI Overview Optimizationの略で、AI Overviewの引用元に選ばれるための最適化を指します。**
 
+関連する内容として[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)も公開しています。
+
+関連する内容として[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)も公開しています。
+
 AI Overviewは、Google検索の結果の上部にAIが作る要約です。要約の横や下には、根拠にしたページへのリンクが並びます。このリンク先に自社ページが入ることが、AIOの目的です。
 
 <div class="definition-box"><span class="term">AIO（AI Overview Optimization）とは</span>、GoogleのAI OverviewやAIモードの回答で、自社ページが出典として引用されるように内容と構造を整える施策です。</div>
@@ -67,6 +71,8 @@ AI Overviewは、Google検索の結果の上部にAIが作る要約です。要�
 ## AIOとSEO・LLMOの違い
 
 **AIOはGoogleのAI回答、LLMOはChatGPTなど他のAI、SEOは通常の検索順位が対象です。**
+
+近い論点を[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)で扱っています。
 
 3つは対立しません。AI OverviewはGoogleの通常の検索評価を土台にしているため、SEOで評価されたページが引用の候補になります。
 

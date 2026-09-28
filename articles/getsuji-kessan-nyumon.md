@@ -123,6 +123,12 @@ faq:
 
 初心者がつまずきやすいのは、締切の未周知、仕訳ルールの未統一、残高不一致の放置の3つです。
 
+あわせて[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)もご覧ください。
+
+あわせて[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)もご覧ください。
+
+関連する内容として[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)も公開しています。
+
 <figure><img src="/images/getsuji-kessan-nyumon/tsumazuki.png" alt="初心者がつまずきやすい3つのポイント: 証憑の締切を社内に周知していない、仕訳のルールが担当者任せになっている、残高の不一致を確認せず放置してしまう" loading="lazy"><figcaption>初心者がつまずきやすい3つのポイント</figcaption></figure>
 
 Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-sansan.com/news/2024/0328_02.html" target="_blank" rel="noopener">「経理の人手不足に関する実態調査」</a>（経理担当者1,000名対象）があります。この調査では、**経理の人手不足を感じている割合は50.1%、そのうち85.2%が「深刻」と回答**しています。人手が足りない状態で月次決算を担当すると、締切の周知や判断基準の整備にまで手が回らないのが実情です。

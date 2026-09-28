@@ -60,6 +60,8 @@ diagrams:
 
 **電話予約対応の基本は、受電・聞き取り・空き枠提示・復唱確定の4ステップに固定することです。**この順番さえ守れば、対応者による差はほとんど出ません。
 
+実際の例は[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)で整理しています。
+
 実際の進め方については、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)にまとめています。
 
 <figure><img src="/images/clinic-denwa-yoyaku-yarikata/flow.png" alt="電話予約対応の基本4ステップ: 電話を受ける、5項目を聞き取る、空き枠を提示する、復唱して確定する" width="1200" height="400" loading="lazy"><figcaption>電話予約対応の基本4ステップ（当メディア作成）</figcaption></figure>

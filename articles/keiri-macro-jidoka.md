@@ -63,6 +63,8 @@ faq:
 
 マクロで自動化しやすい経理業務は、転記・集計・チェック・突合・出力という、手順が毎回同じ定型作業です。
 
+近い論点を[請求書チェックの効率化](/blog/seikyusho-check-koritsuka/)で扱っています。
+
 関連する内容として[請求書照合の自動化とは？](/blog/seikyusho-shougou-jidoka/)も公開しています。
 
 <figure><img src="/images/keiri-macro-jidoka/gyomu.png" alt="マクロで自動化できる経理業務5つ: 請求書データの転記、月次集計表の作成、経費精算のチェック、支払データの突合、レポートの自動出力" loading="lazy"><figcaption>マクロで自動化できる経理業務5つ</figcaption></figure>
@@ -145,6 +147,8 @@ IPA（情報処理推進機構）は<a href="https://www.ipa.go.jp/security/emot
 ## マクロだけでは対応できない業務と次の選択肢
 
 マクロ自動化は転記や集計を効率化できますが、判断が必要な例外対応や大量データの外部連携までは対応しきれません。
+
+近い論点を[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)で扱っています。
 
 取引件数が数万行を超えて動作が重くなった場合や、複数のシステムをまたいでデータを連携したい場合は、マクロよりもPythonのような外部ツールが向いています。**エクセル内で完結する定型作業ならマクロ、複数システムをまたぐ処理ならPython**という使い分けは、[経理自動化はPythonで可能か？](/blog/keiri-jidoka-python/)で詳しく解説しています。
 

@@ -79,6 +79,8 @@ faq:
 
 小規模事業者の経理体制は、経営者兼務・パート活用・経理BPO併用の3パターンに大別でき、取引量と成長スピードで選び方が変わります。
 
+近い論点を[月次決算の経理BPO契約前に確認すべき5つのこと](/blog/getsuji-kessan-bpo-keiyakumae/)で扱っています。
+
 関連する内容として[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)も公開しています。
 
 関連する内容として[経理の外注と丸投げの違い](/blog/keiri-marunage-dekiru-hani/)も公開しています。

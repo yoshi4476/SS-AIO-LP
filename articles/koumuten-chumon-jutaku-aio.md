@@ -46,6 +46,8 @@ faq:
 
 **工務店のAIO対策とは、家づくりの質問にAIが答えるとき、自社の情報が根拠として使われる状態をつくることです。**
 
+近い論点を[不動産SEO記事のライター選び方](/seo/fudousan-seo-kiji-writer/)で扱っています。
+
 <div class="definition-box"><span class="term">AIO対策（AI Overview Optimization）とは</span>、GoogleのAI OverviewやChatGPTなどが回答を作るときに、自社サイトの情報が引用されるよう整える取り組みです。</div>
 
 工務店の場合、AIに聞かれる内容は性能・費用・地域の3つに集中します。施主は住宅展示場へ行く前に、下調べをAIで済ませ始めています。その下調べの答えに社名が出るかどうかで、来場の候補に入るかが決まります。
@@ -125,6 +127,8 @@ AIは画像の中の文字や雰囲気を、回答の根拠にしにくいもの
 ## 工務店の状況別：どこから手をつけるか
 
 **性能値を公開しているか・対応エリアが明記されているか・更新する人がいるかの3点で、始める順番が決まります。**
+
+あわせて[AIO SEO対策とは？](/aio/aio-seo-taisaku/)もご覧ください。
 
 <figure><img src="/images/koumuten-chumon-jutaku-aio/susumekata-flow.png" alt="工務店のAIO対策をどこから始めるか" width="1200" height="700" loading="lazy"><figcaption>工務店のAIO対策をどこから始めるか（当メディア作成）</figcaption></figure>
 
