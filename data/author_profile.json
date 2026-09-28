@@ -1,5 +1,5 @@
 {
- "date": "2026-09-24",
+ "date": "2026-09-28",
  "same_as": [
   "https://www.linkedin.com/in/yu-haraguchi",
   "https://note.com/yu_haraguchi",
@@ -7,11 +7,24 @@
   "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
  ],
  "mentions": [],
- "works": [],
+ "works": [
+  {
+   "kind": "動画",
+   "title": "koumuten-chumon-jutaku-aio",
+   "url": "https://www.youtube.com/watch?v=XG2aPmerFB0",
+   "date": "2026-09-27"
+  },
+  {
+   "kind": "動画",
+   "title": "zeirishi-houjin-aio",
+   "url": "https://www.youtube.com/watch?v=FzB21lfDeTs",
+   "date": "2026-09-27"
+  }
+ ],
  "credentials": [],
  "counts": {
-  "articles": 383,
-  "datasets": 10,
-  "videos": 0
+  "articles": 379,
+  "datasets": 12,
+  "videos": 2
  }
 }
