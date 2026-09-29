@@ -627,10 +627,13 @@ jobs:
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
         run: |
           python scripts/findings.py || true
-          # content_yield の判定（本数を絞るサイト）を残す。日次の執筆がこれを読む
-          git add data/yield_state.json 2>/dev/null || true
+          # 公開した後の結果（題の型のCTR・別工程の採点・本数の効き・戻された直し）から学び、
+          # 書く工程が読む台帳へ書き戻す。学びごとに1行で、毎週最新の数字に書き換え、根拠が消えたら退役
+          python scripts/learn.py --write 2>&1 | tail -8 || true
+          # content_yield の判定（統合を増やすサイト）と学びの台帳を残す。日次の執筆がこれを読む
+          git add data/yield_state.json data/lessons.jsonl 2>/dev/null || true
           git diff --cached --quiet || {
-            git commit -q -m "weekly: 記事本数の判定 $(date '+%Y-%m-%d')"
+            git commit -q -m "weekly: 記事本数の判定と結果からの学び $(date '+%Y-%m-%d')"
             git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
             git push -q || true
           }

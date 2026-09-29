@@ -94,7 +94,10 @@ def brief(site, limit=BRIEF_MAX, count=True):
     live = for_site(rows, site)
     # 失敗の学びを先に。同じ工程が並ばないよう、工程ごとに新しい順で拾う
     live.sort(key=lambda r: (r.get("kind") != "failure", r.get("at", "")), reverse=False)
-    live.sort(key=lambda r: (r.get("kind") != "failure", -_ord(r.get("at", ""))))
+    # 公開後の実測から学んだもの（learn.py・source=learn:*）を最優先にする。
+    # 書きながらの気づきより根拠が厚く、成功の学びだと失敗の後ろに回されて読まれなかった
+    live.sort(key=lambda r: (not str(r.get("source", "")).startswith("learn:"),
+                             r.get("kind") != "failure", -_ord(r.get("at", ""))))
     out, used, seen_phase = [], 0, {}
     for r in live:
         p = r.get("phase", "ops")
