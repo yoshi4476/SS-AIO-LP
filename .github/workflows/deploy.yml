@@ -26,6 +26,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          # 公開前の門: sitemapの404/noindex・git の衝突マーカーがあれば公開しない（seo_audit --gate）
+          python3 scripts/seo_audit.py --gate || { echo "::error::サイト監査の門で止めました（上の ::error:: を直す）"; exit 1; }
           npx --yes wrangler@4.121.0 pages project create ss-aio-lp --production-branch=master 2>/dev/null || echo "プロジェクトは作成済み"
           ok=""
           for i in 1 2 3; do

@@ -294,8 +294,25 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--limit", type=int, default=400)
     ap.add_argument("--external", action="store_true", help="外部リンク切れも見る（時間がかかる）")
+    ap.add_argument("--gate", action="store_true",
+                    help="デプロイ直前の門。致命的（sitemapの404/noindex/正規URLのずれ）と衝突マーカーがあれば終了コード2")
     a = ap.parse_args()
     bad = 0
+    if a.gate:
+        # 警告では止めない（記事の公開まで止まる）。検索から外れる・壊れた表示が出るものだけ止める
+        rows, _ = local()
+        fatal = [r for r in rows if r[0] == "致命的"]
+        conf = [str(p.relative_to(ROOT)) for p in list((ROOT / "articles").glob("*.md")) + list(SITE.rglob("*.html"))
+                if re.search(r"^(<<<<<<< |>>>>>>> )", p.read_text(encoding="utf-8", errors="replace"), re.M)]
+        for r in fatal:
+            print(f"::error::サイト監査の致命的: {r[1]} {r[2]} {r[3]}")
+        for c in conf[:10]:
+            print(f"::error::git の衝突マーカーが残っています: {c}")
+        warn = sum(1 for r in rows if r[0] == "警告")
+        if warn:
+            print(f"::warning::サイト監査の警告 {warn}件（公開は止めない。python scripts/seo_audit.py で確認）")
+        print(f"SEO_GATE={'ng' if fatal or conf else 'ok'}")
+        return 2 if fatal or conf else 0
     if not a.live:
         if not SITE.is_dir():
             print("site/ がありません")

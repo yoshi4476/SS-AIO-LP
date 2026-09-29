@@ -450,6 +450,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          # 公開前の門: sitemapの404/noindex・git の衝突マーカーがあれば公開しない（seo_audit --gate）
+          python3 scripts/seo_audit.py --gate || { echo "::error::サイト監査の門で止めました（上の ::error:: を直す）"; exit 1; }
           # 配信先のプロジェクト名。直書きだと別のサイトへ配りにいく
           proj=$(python -c "import json,pathlib;p=pathlib.Path('site.config.json');print(json.loads(p.read_text(encoding='utf-8')).get('cf_project','') if p.is_file() else '')")
           [ -z "$proj" ] && proj="${{ steps.site.outputs.id }}"

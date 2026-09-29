@@ -157,6 +157,16 @@ def ensure_clone(cfg, token):
         run(["git", "clone", "--depth", "1", "--branch", cfg["branch"], auth_url,
              str(dest)], env=env)
     else:
+        # 前の配信が途中で落ちて rebase / merge が残っていると、reset --hard では消えず、
+        # この後の rebase・push が全部失敗する。先に中断して作業状態を片付ける
+        g = dest / ".git"
+        if (g / "rebase-merge").exists() or (g / "rebase-apply").exists():
+            try_run(["git", "rebase", "--abort"], cwd=dest)
+            shutil.rmtree(g / "rebase-merge", ignore_errors=True)
+            shutil.rmtree(g / "rebase-apply", ignore_errors=True)
+            print("  配信先に途中の rebase が残っていたので中断しました")
+        if (g / "MERGE_HEAD").exists():
+            try_run(["git", "merge", "--abort"], cwd=dest)
         run(["git", "fetch", "--depth", "1", auth_url, cfg["branch"]], cwd=dest, env=env)
         run(["git", "reset", "--hard", "FETCH_HEAD"], cwd=dest)
     return dest
@@ -1010,6 +1020,9 @@ def main():
             print("  押せませんでした。配信先の変更を取り込んで、もう一度試します")
             if not (try_run(["git", "fetch", "origin"], cwd=dest, env=env)
                     and try_run(["git", "rebase", f"origin/{cfg['branch']}"], cwd=dest)):
+                # 取り込みに失敗したら必ず中断して元に戻す。途中のまま残すと、次の配信の
+                # rebase が「already a rebase-merge directory」で全部落ちた（2026-09-28〜29: 1本おきに失敗）
+                try_run(["git", "rebase", "--abort"], cwd=dest)
                 break
     raise SystemExit(
         "pushできません。次の順に確かめてください。\n"
