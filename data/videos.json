@@ -31,5 +31,27 @@
       "1rb4V2PLMdU"
     ],
     "youtube": "FzB21lfDeTs"
+  },
+  "aio-towa": {
+    "site": "ai-lab",
+    "date": "2026-09-29",
+    "sec": 319,
+    "mp4": "automation/video/aio-towa.mp4",
+    "nums": [
+      "10",
+      "13.7",
+      "3",
+      "4",
+      "5",
+      "64.7"
+    ],
+    "format": "duo",
+    "youtube": "fq33o4HNrE4",
+    "short": {
+      "date": "2026-09-29",
+      "sec": 46,
+      "title": "llms.txtを置けばAI検索対策になる？",
+      "youtube": "vZiyBjb78Cg"
+    }
   }
 }
