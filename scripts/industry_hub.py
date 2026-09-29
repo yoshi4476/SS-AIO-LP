@@ -161,7 +161,9 @@ def index_body(pairs, g):
     lis = "".join(
         f'<li><a href="{BASE}{i["slug"]}/"><strong>{_h.escape(i["name"])}</strong>'
         f'<span class="cnt">{len(v)}本</span></a>'
-        f'<span class="hub-lead">{_h.escape(i["lead"][:70])}…</span></li>' for i, v in pairs)
+        f'<span class="hub-lead">{_h.escape(i["lead"][:70])}…'
+        # 業種のよくある質問（/faq/）はハブからしかリンクされず、被リンク1本だった（Ahrefs 2026-09-29）
+        f' <a href="{BASE}{i["slug"]}/faq/">よくある質問</a></span></li>' for i, v in pairs)
     coming = [i for i in inds if 0 < len(g.get(i["slug"], [])) < mn]
     more = ""
     if coming:

@@ -230,8 +230,6 @@ faq:
 
 申請の流れ全体は[AI導入補助金の申請のやり方](/blog/ai-hojokin-shinsei-yarikata/)、対象になるツールの分野は[AI導入補助金の対象ツール6分野｜対象外との見分け方](/blog/ai-hojokin-taisho-tool/)で確認できます。
 
-実績報告の具体的な進め方は[AI導入補助金の実績報告の書き方](/blog/ai-hojokin-jissekihoukoku-kakikata/)で解説しています。
-
 <div style="text-align:center;margin:32px 0;"><a href="https://lp.7senses.co.jp/#contact" class="cta-button" target="_blank" rel="noopener">AI導入補助金の無料相談</a></div>
 
 **弊社は登録支援事業者として、飲食店や卸売業の対象要件の確認から事業計画書の作成、採択後の実績報告まで一貫して支援しています。**現場での相談実績をもとに、不採択になりやすいポイントを事前に洗い出せます。

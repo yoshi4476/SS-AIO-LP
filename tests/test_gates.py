@@ -2172,6 +2172,32 @@ def test_data_intake_publishes_only_grounded_numbers():
     check("intake_watch がデータシートを振り分ける", "data_intake" in (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8"), True)
 
 
+def test_site_audit_has_no_critical_or_warning():
+    """サイト監査（Ahrefs の Site Audit と同じ観点）で、致命的・警告が出ていないこと。
+
+    2026-09-29 の Ahrefs 監査で、sitemap の404・OGPの不完全169・説明文が短い174・題が短い31が出た。
+    どれも記事ではなく、ビルドが自動で作るページと固定ページの外枠が原因で、記事ごとの検査では
+    見ていなかった。外部の監査で知る前に、生成したHTMLそのものを毎回ここで止める。
+    """
+    print(chr(10) + "■ サイト監査（Ahrefs 相当）")
+    import seo_audit as SA
+    # 検出器が効くことを、壊れたページで先に確かめる（0件は「無い」ではなく「見つけられない」かもしれない）
+    bad = SA.page_facts('<html><head><title>短い</title><meta name="viewport"></head><body><img src="/a.png"></body></html>')
+    rows = SA.check({"/x/": bad}, {"/x/", "/gone/"}, inbound={"/x/": 0})
+    kinds = {k for _, k, _, _ in rows}
+    check("検出器: sitemap の開けないページを拾う", "sitemap のページが開けない" in kinds, True)
+    check("検出器: 題の短さ・説明文の欠け・OGP・H1・alt を拾う",
+          {"題が短すぎる", "説明文が無い", "OGPが不完全", "H1が1つでない", "alt の無い画像"} <= kinds, True)
+    rows, _ = SA.local()
+    serious = sorted({f"{s} {k}" for s, k, _, _ in rows if s != "お知らせ"})
+    check("手元の site/ に致命的・警告が無い", serious, [])
+    # git の衝突マーカーが原稿に残ると「=======」で直前の行が H1 になり、
+    # 「<<<<<<< Updated upstream」が見出しとして公開された（2026-09-29: 17本・3サイト）
+    conf = sorted(p.stem for p in (ROOT / "articles").glob("*.md")
+                  if re.search(r"^(<<<<<<< |>>>>>>> |=======\s*$)", p.read_text(encoding="utf-8"), re.M))
+    check("原稿に git の衝突マーカーが無い", conf, [])
+
+
 def test_site_has_two_axes_and_no_orphans():
     """手法だけでなく業種でも記事に行けること。入口ページが孤立していないこと。
 

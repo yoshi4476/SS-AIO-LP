@@ -124,7 +124,7 @@ faq:
 
 **費用ページで医療費控除に触れる場合、対象になる条件と対象外の例を分けて明記する必要があります。**
 
-近い論点を[クリニック集客の設計図](/ai-marketing/clinic-shukyaku-sekkeizu/)で扱っています。
+あわせて[クリニック集客の設計図](/ai-marketing/clinic-shukyaku-sekkeizu/)もご覧ください。
 
 <div class="caution-box"><span class="box-title">注意: 「対象になります」の一律表記はNG</span><br>症状や施術目的によって判定が分かれる制度です。院として断定的に「医療費控除の対象になります」と表記すると、後から患者さんとの認識にズレが生まれます。</div>
 

@@ -77,11 +77,36 @@ def related(rec, terms, k=4):
     scored = sorted(same, key=lambda r: -len(g0 & grams(r["term"].lower())))
     out = [r for r in scored if g0 & grams(r["term"].lower())][:k]
     if len(out) < k:
+        # 同じカテゴリに語が少ないと、互いに指し合うだけで被リンクが増えない。他のカテゴリからも語の近いものを足す
+        other = sorted((r for r in terms if r["id"] != rec["id"] and r not in out and r["category"] != rec["category"]),
+                       key=lambda r: -len(g0 & grams(r["term"].lower())))
+        out += [r for r in other if g0 & grams(r["term"].lower())][:k - len(out)]
+    if len(out) < k:
         order = [r["id"] for r in terms]
         i = order.index(rec["id"]) if rec["id"] in order else 0
         near = sorted(same, key=lambda r: abs(order.index(r["id"]) - i))
         out += [r for r in near if r not in out][:k - len(out)]
     return out
+
+
+def related_all(terms, k=4):
+    """全用語の関連を一度に決め、どの語もほかの語の関連に最低1回は入るようにする。
+    語が重ならない用語は誰の関連にも選ばれず、一覧からの1本だけが残った（19語）"""
+    rel = {r["id"]: related(r, terms, k) for r in terms}
+    pointed = {x["id"] for lst in rel.values() for x in lst}
+    by_id = {r["id"]: r for r in terms}
+    order = [r["id"] for r in terms]
+    for tid in order:
+        if tid in pointed:
+            continue
+        # 並びで隣の語（同じカテゴリを優先）の関連に足す
+        i = order.index(tid)
+        near = sorted((o for o in order if o != tid),
+                      key=lambda o: (by_id[o]["category"] != by_id[tid]["category"], abs(order.index(o) - i)))
+        if near:
+            rel[near[0]] = rel[near[0]] + [by_id[tid]]
+            pointed.add(tid)
+    return rel
 
 
 def term_html(rec, article_url, base="/glossary/", rel=()):

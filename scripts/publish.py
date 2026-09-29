@@ -901,6 +901,19 @@ def main():
     if not src.exists():
         raise SystemExit(f"記事が見つかりません: {src}")
     meta, body = parse_article(src)
+    # git の衝突マーカーが残った原稿は配信しない。「=======」が見出しとして描かれ、
+    # 「<<<<<<< Updated upstream」が H1 として公開されていた（2026-09-29: 17本）
+    if re.search(r"^(<<<<<<< |>>>>>>> |=======\s*$)", body, re.M):
+        raise SystemExit(f"{args.slug}: git の衝突マーカーが原稿に残っています。解いてから配信してください")
+    # 一次データを非公開にしている間は、AI集客ラボの /data/ へのリンクを文字に戻す。
+    # AI集客ラボのビルドは外しているが、配信先の記事には残り、404へ送っていた（2026-09-29: コーポレート4本）
+    try:
+        import data_intake
+        if not data_intake.PUBLIC:
+            body = re.sub(r"\[([^\]]+)\]\(https://ai\.7senses\.co\.jp/data/[^)]*\)", r"\1", body)
+            body = re.sub(r'<a\s[^>]*href="https://ai\.7senses\.co\.jp/data/[^"]*"[^>]*>(.*?)</a>', r"\1", body, flags=re.S)
+    except ImportError:
+        pass
 
     score = meta.get("score") or 0
     if not gate_ok(meta):

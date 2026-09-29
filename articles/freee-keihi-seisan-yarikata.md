@@ -55,7 +55,7 @@ faq:
 
 関連する内容として[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)も公開しています。
 
-関連する内容として[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)も公開しています。
+近い論点を[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)で扱っています。
 
 <div class="definition-box"><span class="term">freeeの経費精算とは</span>、レシートの撮影・ICカード連携などで経費情報を自動入力し、申請から承認、仕訳への反映までを一連の流れとして処理する機能のことです。個人事業主から複数人の会社まで、規模を問わず使えます。</div>
 

@@ -112,17 +112,9 @@ Google公式は、<a href="https://developers.google.com/search/docs/appearance/
 
 **診断は、順位確認→クローラー確認→構造確認→鮮度確認の順で進めます。**
 
-<<<<<<< Updated upstream
 近い論点を[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)で扱っています。
 
-近い論点を[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)で扱っています。
-
-=======
 関連する内容として[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)も公開しています。
-
->>>>>>> Stashed changes
-
-あわせて[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)もご覧ください。
 
 <figure><img src="/images/aio-taisaku-hyouji-sarenai/shindan-flow.png" alt="表示されない原因を診断する4ステップ: 順位を確認、クローラーを確認、構造を確認、鮮度を確認" width="1200" height="400" loading="lazy"><figcaption>表示されない原因を診断する4ステップ（当メディア作成）</figcaption></figure>
 
@@ -153,8 +145,6 @@ AI Overviewの引用元は固定ではなく、Googleが再クロールするた
 ## 業種別によくある「表示されない」パターン
 
 **業種によって、表示されない原因の傾向は異なります。**
-
-近い論点を[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)で扱っています。
 
 クリニック・士業などのYMYL領域に近い業種は、症状1（AI Overview自体が出にくい）に該当しやすく、通常のSEOと指名検索の強化が優先です。整骨院・美容室などの店舗集客業種は、症状2の独自性不足に該当しやすく、施術実績や来店データなど自社にしかない情報が不足しがちです。
 

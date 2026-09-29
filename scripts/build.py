@@ -64,6 +64,7 @@ FOOTER_NAV_DEFAULT = [
     {"label": "無料資料ダウンロード", "url": "/download/"},
     {"label": "記事一覧", "url": "/blog/"},
     {"label": "用語集", "url": "/glossary/"},
+    {"label": "比較表から探す", "url": "/compare/"},
     {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
     {"label": "AI検索の対応度チェック（30秒）", "url": "/diagnosis/aio/"},
     {"label": "サイトの技術チェック", "url": "/site-audit/"},
@@ -1101,6 +1102,9 @@ def build_sitemap(article_entries):
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for p in STATIC_PAGES:
+        # 一次データを非公開にしている間は /data/ が無い。載せたままだと sitemap に404が出る（Ahrefs 2026-09-29）
+        if p == "data/" and not _data_public():
+            continue
         lines.append(f"  <url><loc>{SITE_URL}/{p}</loc><lastmod>{today}</lastmod></url>")
     # 一次データのページ（data_intake.py が作る）。固定の一覧に無くても拾う
     for d in sorted((SITE / "data").glob("*/index.html")):
@@ -1247,7 +1251,11 @@ def page_shell(h1="記事一覧", desc=""):
         desc = (desc.rstrip("。") + "。" if desc else "") + \
             f"{SITE_NAME}（セブンセンシズ株式会社）が、集客支援の現場で確かめた内容をもとにまとめています。"
     # 題は種類ごとに補う。一律の付け足しは「記事一覧｜記事と実例のまとめ」のように不自然になった
-    title = h1
+    title = {"記事一覧": "記事一覧｜AIO・SEO・MEOの実践記事",
+             "用語集": "用語集｜AI検索と集客の用語をわかりやすく解説",
+             "業種から探す": "業種から探す｜クリニック・工務店・士業などの集客",
+             "比較表から探す": "比較表から探す｜料金・違い・選び方の一覧",
+             "テーマから探す": "テーマから探す｜集客の悩み別の記事まとめ"}.get(h1, h1)
     if len(title) > 18:                  # 長い題に足すと検索結果で切れる
         pass
     elif title.endswith("とは"):
@@ -1407,9 +1415,10 @@ def build_extra_pages(all_metas):
     # 用語集
     terms = GL.collect(sid, only)
     if len(terms) >= 10:
+        rel_all = GL.related_all(terms)
         for r in terms:
             page(f"glossary/{r['id']}", GL.term_html(r, f"{SITE_URL}/{r['category']}/{r['slug']}/",
-                                                     rel=GL.related(r, terms)),
+                                                     rel=rel_all[r["id"]]),
                  f"{r['term']}とは", f"{SITE_URL}/glossary/{r['id']}/", f"{r['term']}とは、{r['definition']}")
         page("glossary", GL.index_html(terms), "用語集", f"{SITE_URL}/glossary/",
              f"{SITE_NAME}の記事で定義した用語{len(terms)}語を1か所に集めた用語集です。")
@@ -1417,11 +1426,16 @@ def build_extra_pages(all_metas):
     # 比較表
     cats = CP.collect(sid, only)
     made = []
+    live_cats = [c for c, rows in cats.items() if len(rows) >= 3 and c in CATEGORIES]
     for cat, rows in cats.items():
-        if len(rows) < 3 or cat not in CATEGORIES:
+        if cat not in live_cats:
             continue
         name = CATEGORIES[cat][0]
-        page(f"compare/{cat}", CP.page_html(name, rows, lambda r, c=cat: f"{SITE_URL}/{c}/{r['slug']}/"),
+        # ほかのカテゴリの比較表へも結ぶ（一覧からしかリンクされず、被リンク1本だった。Ahrefs 2026-09-29）
+        sib = "".join(f'<li><a href="/compare/{c}/">{_html_escape(CATEGORIES[c][0])}の比較表</a></li>'
+                      for c in live_cats if c != cat)
+        sib = f'<div class="latest-block"><div class="cat-head"><h2>ほかの比較表</h2></div><ul class="hub-list">{sib}</ul></div>' if sib else ""
+        page(f"compare/{cat}", CP.page_html(name, rows, lambda r, c=cat: f"{SITE_URL}/{c}/{r['slug']}/") + sib,
              f"{name}の比較表", f"{SITE_URL}/compare/{cat}/",
              f"{name}の記事にある比較表{len(rows)}表を1か所に集めました。")
         made.append((cat, name, len(rows)))
@@ -1877,6 +1891,23 @@ def main():
                   + " / ".join(f"{n} 原稿{a}→出力{b}" for n, a, b in g))
     if not gaps:
         print("取りこぼし検査: 原稿に書いたものは全て出力に出ています")
+
+    # サイト監査（Ahrefs の Site Audit と同じ観点）を、記事以外のページも含めて出力に当てる。
+    # 記事ごとの検査だけでは、用語集・業種・固定ページの外枠の欠けを外部の監査で初めて知った（2026-09-29）
+    try:
+        import seo_audit
+        rows, _ = seo_audit.local()
+        from collections import Counter as _C
+        cnt = _C((sev, kind) for sev, kind, _p, _d in rows if sev != "お知らせ")
+        ex = {}
+        for sev, kind, p, d in rows:
+            ex.setdefault((sev, kind), f"{p}{'（' + d + '）' if d else ''}")
+        for (sev, kind), n in sorted(cnt.items()):
+            print(f"WARN: サイト監査 {sev} — {kind} {n}件（例: {ex[(sev, kind)]}）")
+        if not cnt:
+            print("サイト監査: 致命的・警告なし（Ahrefs 相当の観点）")
+    except Exception as e:
+        print(f"WARN: サイト監査を動かせません（{str(e)[:60]}）")
 
     # 公開できた記事を台帳に残す。次回からは、ここに無い記事が不合格なら止まる
     # 前回の台帳との和集合で残す。今回たまたま外れた記事（隔離・フロントマターの一時的な誤り）を

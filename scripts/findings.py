@@ -51,6 +51,9 @@ CHECKS = [
     # 台帳にも件数にも出ない（2026-09 に AI集客ラボで3日分が残っていなかった）
     ("問い合わせの取りこぼし（GA4と台帳）", "lead_reconcile.py",
      re.compile(r"^\s*要対応:")),
+    # Ahrefs の Site Audit と同じ観点を3サイトの本番に当てる（外部リンク切れ・乗っ取られたドメインへの転送も）
+    ("サイト監査（Ahrefs相当・3サイトの本番）", "seo_audit.py --live --all --external",
+     re.compile(r"^要対応:")),
     ("数字の信頼性", "data_sanity.py",
      re.compile(r"^\s*注意\s+(?!\d+件)\S")),
     ("ラッコキーワードの消費", "rakko.py",

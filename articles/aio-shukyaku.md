@@ -78,15 +78,6 @@ AI OverviewはGooglebotが集めた検索結果を土台に生成されます。
 
 関連する内容として[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)も公開しています。
 
-<<<<<<< Updated upstream
-関連する内容として[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)も公開しています。
-=======
-関連する内容として[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)も公開しています。
-
-あわせて[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)もご覧ください。
-
->>>>>>> Stashed changes
-
 AIは「どれを選ぶべきか迷っている人」の質問に答える場面で強く機能します。迷いが生まれやすい業種ほど、AIの回答に引用される機会が増えます。
 
 向いている業種の特徴は、次のようなものです。

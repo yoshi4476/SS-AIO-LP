@@ -77,21 +77,13 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
-<<<<<<< Updated upstream
 実際の例を先に押さえるなら、[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)が参考になります。
 
 近い論点を[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)で扱っています。
 
-=======
-あわせて[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)もご覧ください。
-
->>>>>>> Stashed changes
-
 関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
 
 つまずきやすい点を先に押さえるなら、[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)が参考になります。
-
-関連する内容については、[安いAIO対策ツールおすすめ6選](/aio/aio-taisaku-muryou-tool/)にまとめています。
 
 順位だけでなく、この5つを毎月並べて見ることで、記事のどこに手を入れるべきかが分かります。
 
@@ -120,8 +112,6 @@ Search Consoleの左メニューから開くと、通常の検索パフォーマ
 ## GA4でAI参照元セッションを計測する設定手順
 
 **GA4では、chatgpt.comなど主要AI検索サービスのリファラーを参照元として個別に確認します。**
-
-近い論点を[整骨院の集客イベント5選](/ai-marketing/seikotsuin-shukyaku-event/)で扱っています。
 
 手順は次の3ステップです。
 

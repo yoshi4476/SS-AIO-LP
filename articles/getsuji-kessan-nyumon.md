@@ -125,7 +125,7 @@ faq:
 
 あわせて[経理業務の自動化事例5つ](/blog/keiri-gyomu-jidoka-jirei/)もご覧ください。
 
-あわせて[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)もご覧ください。
+近い論点を[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)で扱っています。
 
 関連する内容として[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)も公開しています。
 
