@@ -213,21 +213,37 @@ def external(pages, cap=400):
 
     def base(host):
         # www. を外し、末尾2つ（co.jp などは3つ）で比べる
+        # twitter.com → x.com は同じ運営の名称変更。別サイトへの転送ではない
+        host = {"twitter.com": "x.com", "mobile.twitter.com": "x.com"}.get((host or "").lower().removeprefix("www."), host)
         parts = (host or "").lower().removeprefix("www.").split(".")
         return ".".join(parts[-3:] if len(parts) >= 3 and parts[-2] in ("co", "or", "go", "ne", "ac", "lg") else parts[-2:])
     out = []
     with cf.ThreadPoolExecutor(8) as ex:
-        for u, s, final in ex.map(st, urls):
-            # 403/429 は相手が機械のアクセスを断っているだけのことが多い（人が開けば見られる）。切れとは数えない
-            # 999 は LinkedIn が機械のアクセスを断るときの独自の値（人が開けば見られる）
-            if s in (404, 410) or (500 <= s < 999):
-                out.append(("警告", "外部リンク切れ", where[u], f"{s} {u[:80]}"))
-            # 別のドメインへ転送されるリンクは、ドメインが手放され第三者に取られていることがある。
-            # 実例: 医療機関ネットパトロールの旧ドメインがFXのサイトへ転送されていた（2026-09-29）
-            # 短縮URL（地図・SNSの共有リンク）は別ドメインへ転送するのが正しい動きなので外す
-            elif (s == 200 and base(urlparse(final).hostname) != base(urlparse(u).hostname)
-                  and base(urlparse(u).hostname) not in SHORTENERS):
-                out.append(("警告", "外部リンクが別のドメインへ転送", where[u], f"{u[:60]} → {final[:60]}"))
+        res = list(ex.map(st, urls))
+    # 404 はブラウザと同じ名乗りで1回だけ聞き直す。Google のヘルプは機械の名乗りに404を返し、
+    # 生きているページ18本を「リンク切れ」と数えた（2026-09-29）
+    BUA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                         "(KHTML, like Gecko) Chrome/126.0 Safari/537.36", "Accept-Language": "ja"}
+    for i, (u, s, final) in enumerate(res):
+        if s in (404, 410):
+            try:
+                r = urllib.request.urlopen(urllib.request.Request(u, headers=BUA), timeout=20)
+                res[i] = (u, r.status, r.geturl())
+            except urllib.error.HTTPError as e:
+                res[i] = (u, e.code, u)
+            except Exception:
+                pass
+    for u, s, final in res:
+        # 403/429 は相手が機械のアクセスを断っているだけのことが多い（人が開けば見られる）。切れとは数えない
+        # 999 は LinkedIn が機械のアクセスを断るときの独自の値（人が開けば見られる）
+        if s in (404, 410) or (500 <= s < 999):
+            out.append(("警告", "外部リンク切れ", where[u], f"{s} {u[:80]}"))
+        # 別のドメインへ転送されるリンクは、ドメインが手放され第三者に取られていることがある。
+        # 実例: 医療機関ネットパトロールの旧ドメインがFXのサイトへ転送されていた（2026-09-29）
+        # 短縮URL（地図・SNSの共有リンク）は別ドメインへ転送するのが正しい動きなので外す
+        elif (s == 200 and base(urlparse(final).hostname) != base(urlparse(u).hostname)
+              and base(urlparse(u).hostname) not in SHORTENERS):
+            out.append(("警告", "外部リンクが別のドメインへ転送", where[u], f"{u[:60]} → {final[:60]}"))
     return out
 
 
