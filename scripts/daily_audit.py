@@ -124,6 +124,13 @@ def check_volume(todo):
             print(f"  上限 {sid:10s} 今月 {month}/{MONTHLY_CAP}本 — 今月はこれ以上公開しません")
             continue
         want = min(DAILY_TARGET, left)
+        # 量産の兆候で本数を落とした週は、その本数を目標にする（pace.py）。
+        # 2本のままだと救済が「不足」とみなし、落とした分を書き足してしまう
+        try:
+            import pace
+            want = min(want, pace.quota(sid))
+        except Exception:
+            pass
         due = min(want, _due_now(sid))      # いまの時刻で在るべき本数
         mark = "OK " if n >= due else "不足"
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"

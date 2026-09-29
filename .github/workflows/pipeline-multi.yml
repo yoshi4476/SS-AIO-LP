@@ -146,6 +146,15 @@ jobs:
               echo "$s は今月の上限に達しています。新しい記事は書きません"
               exit 0
             fi
+            # 量産と見られている兆候（Google の大量生成の不正使用の定義にもとづく・週次の pace.py）で
+            # 1日の本数を 2/1/0 に自動で調整する。その日の何本目の枠か（0始まり）が本数以上なら書かない
+            rank=$(( slot / N ))
+            q=$(python scripts/pace.py --quota "$s" 2>/dev/null || echo 2)
+            if [ "$rank" -ge "$q" ]; then
+              echo "skip=yes" >> "$GITHUB_OUTPUT"
+              echo "$s は今週1日${q}本にしています（量産の兆候。python scripts/pace.py で理由を確認）"
+              exit 0
+            fi
           fi
           # 自前でビルドするサイトかどうか。デプロイと配信の分岐に使う
           own=$(python -c "import json;print(json.load(open('sites/$s.json',encoding='utf-8')).get('type')=='self-static')")

@@ -630,8 +630,10 @@ jobs:
           # 公開した後の結果（題の型のCTR・別工程の採点・本数の効き・戻された直し）から学び、
           # 書く工程が読む台帳へ書き戻す。学びごとに1行で、毎週最新の数字に書き換え、根拠が消えたら退役
           python scripts/learn.py --write 2>&1 | tail -8 || true
+          # 量産と見られている兆候（Google の大量生成の不正使用の定義にもとづく）から、来週の1日の本数を決める
+          python scripts/pace.py --write 2>&1 | tail -12 || true
           # content_yield の判定（統合を増やすサイト）と学びの台帳を残す。日次の執筆がこれを読む
-          git add data/yield_state.json data/lessons.jsonl 2>/dev/null || true
+          git add data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json 2>/dev/null || true
           git diff --cached --quiet || {
             git commit -q -m "weekly: 記事本数の判定と結果からの学び $(date '+%Y-%m-%d')"
             git pull --rebase -q origin "${GITHUB_REF_NAME}" || true

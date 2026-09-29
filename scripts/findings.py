@@ -54,6 +54,9 @@ CHECKS = [
     # Ahrefs の Site Audit と同じ観点を3サイトの本番に当てる（外部リンク切れ・乗っ取られたドメインへの転送も）
     ("サイト監査（Ahrefs相当・3サイトの本番）", "seo_audit.py --live --all --external",
      re.compile(r"^要対応:")),
+    # 量産と見られている兆候と1日の本数（落としたサイトは要対応として知らせる）
+    ("量産の兆候と本数（Google の大量生成の定義）", "pace.py",
+     re.compile(r"^\s*(要対応:|兆候:)")),
     ("数字の信頼性", "data_sanity.py",
      re.compile(r"^\s*注意\s+(?!\d+件)\S")),
     ("ラッコキーワードの消費", "rakko.py",

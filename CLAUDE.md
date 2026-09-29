@@ -205,6 +205,14 @@ python scripts/lessons.py --review         # 週次の棚卸し（多すぎ・�
     サイトを増やしたときに選ばれない社が出て、記事が1本も書かれないまま放置される
   - 31日ある月は2本/日で62本になるため、月末は自動で頭打ちになる
   - 同一ドメインへ短期に大量投入すると機械的な生成と見なされる risk があるため、上限は `scripts/daily_audit.py` の `MONTHLY_CAP` で強制する（配信の入口で止まる）
+  - **量産と見られた兆候が出たら、1日の本数を自動で 2→1→0 に落とす**（`scripts/pace.py`・週次で判定、日次の枠が読む）。
+    定義は Google のスパムポリシー「大量生成されたコンテンツの不正使用（Scaled content abuse）」
+    （https://developers.google.com/search/docs/essentials/spam-policies ）。兆候は URL検査API で測る:
+    公開14〜45日の記事の「Crawled/Discovered - currently not indexed」が50%超（70%超は0本）・
+    「Duplicate…」2本以上・直近30日の同型記事3組以上・サイト全体の表示20%以上の急落。兆候1〜2で1本、3以上で0本。
+    表示0の割合だけで判定しない（2026-09-29 実測: 表示0は51%でも、URL検査の未登録は28%だった）。
+    **手動による対策は Search Console API で読めない**。通知を受けたら `pace.py --manual <site> "<理由>"` で0本にし、
+    再審査が通ったら `--clear`。兆候が消えれば翌週から自動で2本に戻る。0本の間も統合・書き直しの週次は回る
 - AIO/GEO/LLMO対応（AI Overview・AIモードでの引用獲得率向上、AI経由流入の獲得）
 - ゼロクリック検索時代に備えた「引用される資産」と「指名検索・CV導線」の同時構築
 
