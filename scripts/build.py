@@ -1024,6 +1024,46 @@ def _data_public():
         return True
 
 
+def ensure_og():
+    """全ページの OGP をそろえる。固定ページ（会社概要・問い合わせ等）はHTMLを直書きしており、
+    og:description・og:image が無いページや、問い合わせのように OGP が1つも無いページがあった
+    （Ahrefs 2026-09-29: OGPが不完全169）。足すのはページ内の title・説明・canonical からだけ"""
+    import html as _h
+    n = 0
+    for f in SITE.rglob("*.html"):
+        h = f.read_text(encoding="utf-8", errors="replace")
+        if "</head>" not in h or 'content="noindex' in h:
+            continue
+        t = re.search(r"<title>(.*?)</title>", h, re.S)
+        d = re.search(r'<meta name="description" content="([^"]*)"', h)
+        c = re.search(r'<link rel="canonical" href="([^"]+)"', h)
+        add = []
+
+        def has(p):
+            return f'property="{p}"' in h or f'name="{p}"' in h
+        if t and not has("og:title"):
+            add.append(f'<meta property="og:title" content="{_h.escape(_h.unescape(t.group(1).strip()))}">')
+        if d and not has("og:description"):
+            add.append(f'<meta property="og:description" content="{d.group(1)}">')
+        if c and not has("og:url"):
+            add.append(f'<meta property="og:url" content="{c.group(1)}">')
+        if not has("og:type"):
+            add.append('<meta property="og:type" content="website">')
+        if not has("og:site_name"):
+            add.append(f'<meta property="og:site_name" content="{SITE_NAME}">')
+        if not has("og:locale"):
+            add.append('<meta property="og:locale" content="ja_JP">')
+        if not has("og:image"):
+            add.append(f'<meta property="og:image" content="{SITE_URL}/images/ogp-default.png">')
+        if not has("twitter:card"):
+            add.append('<meta name="twitter:card" content="summary_large_image">')
+        if add:
+            f.write_text(h.replace("</head>", "\n".join(add) + "\n</head>", 1), encoding="utf-8", newline="\n")
+            n += 1
+    if n:
+        print(f"OGP: {n}ページに足りないタグを足しました")
+
+
 def hide_data_pages():
     """一次データを非公開にしている間（data_intake.PUBLIC=False）、ページを消し、
     サイト中の /data/ へのリンクをテキストに変える。固定ページ・ハブ・記事のどこに書かれていても
@@ -1095,15 +1135,18 @@ BLOG_PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{h1}｜{site}</title>
+<title>{title}｜{site}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}/blog/">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="{h1}｜{site}">
+<meta property="og:title" content="{title}｜{site}">
+<meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}/blog/">
 <meta property="og:site_name" content="{site}">
+<meta property="og:image" content="{url}/images/ogp-default.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="/images/icon-192.png">
 <link rel="apple-touch-icon" href="/images/icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -1197,9 +1240,25 @@ def page_shell(h1="記事一覧", desc=""):
         desc = desc[:cut + 1] if cut >= 40 else desc[:120]
     desc = desc or (
         f"{SITE_NAME}の全記事一覧。AIO・LLMO・SEO・MEOの実践ノウハウを新着順に掲載しています。")
+    # 用語集・業種・テーマなどの外枠は、説明が短く（70字未満が30本）題も短い（20字未満が100本超）ため、
+    # 検索結果と共有時に何のページか伝わらなかった（Ahrefs 2026-09-29: 説明が短い174・題が短い31）。
+    # 足すのは運営者と中身の種類だけで、ページに無い事実は足さない
+    if len(desc) < 90:
+        desc = (desc.rstrip("。") + "。" if desc else "") + \
+            f"{SITE_NAME}（セブンセンシズ株式会社）が、集客支援の現場で確かめた内容をもとにまとめています。"
+    # 題は種類ごとに補う。一律の付け足しは「記事一覧｜記事と実例のまとめ」のように不自然になった
+    title = h1
+    if len(title) > 18:                  # 長い題に足すと検索結果で切れる
+        pass
+    elif title.endswith("とは"):
+        title += "？意味と要点をわかりやすく解説"
+    elif title.endswith("の集客"):
+        title += "｜MEO・AIO・SEOの記事と実例"
+    elif title.endswith("の記事"):
+        title += "まとめ｜集客の手順と実例"
     return dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
-                h1=_html_escape(h1), desc=_html_escape(desc), **_cta())
+                h1=_html_escape(h1), title=_html_escape(title), desc=_html_escape(desc), **_cta())
 
 
 def hub_json_ld(name, url, metas, desc=""):
@@ -1349,7 +1408,8 @@ def build_extra_pages(all_metas):
     terms = GL.collect(sid, only)
     if len(terms) >= 10:
         for r in terms:
-            page(f"glossary/{r['id']}", GL.term_html(r, f"{SITE_URL}/{r['category']}/{r['slug']}/"),
+            page(f"glossary/{r['id']}", GL.term_html(r, f"{SITE_URL}/{r['category']}/{r['slug']}/",
+                                                     rel=GL.related(r, terms)),
                  f"{r['term']}とは", f"{SITE_URL}/glossary/{r['id']}/", f"{r['term']}とは、{r['definition']}")
         page("glossary", GL.index_html(terms), "用語集", f"{SITE_URL}/glossary/",
              f"{SITE_NAME}の記事で定義した用語{len(terms)}語を1か所に集めた用語集です。")
@@ -1772,6 +1832,7 @@ def main():
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
     hide_data_pages()
+    ensure_og()
     build_sitemap(entries)
     save_body_hashes()
     build_feed(entries)

@@ -67,8 +67,28 @@ def collect(site_id, only=None):
     return sorted(out.values(), key=lambda r: r["term"])
 
 
-def term_html(rec, article_url, base="/glossary/"):
+def related(rec, terms, k=4):
+    """同じカテゴリの用語から、語の重なりが大きい順に k 個。重なりが無ければ並びの近いものを足す。
+
+    用語集の各ページは一覧からしかリンクされず、被リンク1本のページが149あった（Ahrefs 2026-09-29）"""
+    grams = lambda s: {s[i:i + 2] for i in range(len(s) - 1)} or {s}
+    g0 = grams(rec["term"].lower())
+    same = [r for r in terms if r["category"] == rec["category"] and r["id"] != rec["id"]]
+    scored = sorted(same, key=lambda r: -len(g0 & grams(r["term"].lower())))
+    out = [r for r in scored if g0 & grams(r["term"].lower())][:k]
+    if len(out) < k:
+        order = [r["id"] for r in terms]
+        i = order.index(rec["id"]) if rec["id"] in order else 0
+        near = sorted(same, key=lambda r: abs(order.index(r["id"]) - i))
+        out += [r for r in near if r not in out][:k - len(out)]
+    return out
+
+
+def term_html(rec, article_url, base="/glossary/", rel=()):
     """1用語のページの中身（外枠は build が包む）"""
+    rel_html = ("<h3>関連する用語</h3><ul class=\"hub-list\">" + "".join(
+        f'<li><a href="{base}{r["id"]}/"><strong>{_h.escape(r["term"])}</strong></a>'
+        f'<span class="hub-lead">{_h.escape(r["definition"][:50])}…</span></li>' for r in rel) + "</ul>") if rel else ""
     ld = {"@context": "https://schema.org", "@type": "DefinedTerm",
           "name": rec["term"], "description": rec["definition"],
           "url": f"{base}{rec['id']}/",
@@ -76,7 +96,7 @@ def term_html(rec, article_url, base="/glossary/"):
     return (f'<div class="latest-block" data-cat="new"><div class="cat-head"><h2>{_h.escape(rec["term"])}とは</h2></div>'
             f'<div class="definition-box"><span class="term">{_h.escape(rec["term"])}とは</span>、{_h.escape(rec["definition"])}</div>'
             f'<p class="hub-note">出典の記事: <a href="{article_url}">{_h.escape(rec["title"][:60])}</a>'
-            f'（{rec["date"]}時点の記述）</p>'
+            f'（{rec["date"]}時点の記述）</p>' + rel_html +
             f'<p class="hub-note"><a href="{base}">← 用語集へ</a></p></div>'
             '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
