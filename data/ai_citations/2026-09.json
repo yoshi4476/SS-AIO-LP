@@ -1,22 +1,22 @@
 {
-  "date": "2026-09-29",
+  "date": "2026-09-30",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 13,
       "suspect_taken": 12,
       "healthy": 1,
-      "too_thin": 89,
+      "too_thin": 106,
       "items": [
         {
           "kw": "原口優",
           "url": "https://ai.7senses.co.jp/author/haraguchi/",
           "pos": 1.3,
-          "imp": 35,
+          "imp": 36,
           "clicks": 3,
-          "ctr": 8.57,
+          "ctr": 8.33,
           "expected_ctr": 28.0,
-          "ratio": 0.31
+          "ratio": 0.3
         },
         {
           "kw": "aio やり方",
@@ -31,8 +31,8 @@
         {
           "kw": "aio 導入 メリット 費用",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
-          "pos": 9.4,
-          "imp": 12,
+          "pos": 9,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -52,7 +52,7 @@
           "kw": "aio対策 キーワード選定",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
           "pos": 4.1,
-          "imp": 16,
+          "imp": 18,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -61,8 +61,18 @@
         {
           "kw": "aio対策 費用",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
-          "pos": 5.2,
-          "imp": 14,
+          "pos": 5.3,
+          "imp": 19,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "llmo 代理店 募集",
+          "url": "https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/",
+          "pos": 4.6,
+          "imp": 10,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -91,31 +101,21 @@
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 6.9,
-          "imp": 46,
+          "pos": 7.0,
+          "imp": 36,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
           "ratio": 0.0
         },
         {
-          "kw": "医療機関 meo",
-          "url": "https://ai.7senses.co.jp/meo/iryou-meo-taisaku/",
-          "pos": 9.8,
-          "imp": 33,
+          "kw": "口コミ 返信 例文 医療",
+          "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
+          "pos": 9.5,
+          "imp": 98,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
-          "ratio": 0.0
-        },
-        {
-          "kw": "口コミ 返信 例文 医療",
-          "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 9.2,
-          "imp": 102,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
@@ -134,7 +134,7 @@
       "judged": 9,
       "suspect_taken": 5,
       "healthy": 4,
-      "too_thin": 57,
+      "too_thin": 59,
       "items": [
         {
           "kw": "3点照合",
@@ -149,8 +149,8 @@
         {
           "kw": "ゆうちょ 記帳 やり方",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 7,
-          "imp": 21,
+          "pos": 7.0,
+          "imp": 24,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -159,8 +159,8 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 3.7,
-          "imp": 70,
+          "pos": 4.2,
+          "imp": 74,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -170,7 +170,7 @@
           "kw": "三点照合 自動化",
           "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
           "pos": 4.6,
-          "imp": 12,
+          "imp": 14,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -179,11 +179,11 @@
         {
           "kw": "経理 派遣 時給 相場",
           "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
-          "pos": 8.6,
-          "imp": 15,
+          "pos": 8.1,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         }
       ]
@@ -192,13 +192,13 @@
       "judged": 2,
       "suspect_taken": 2,
       "healthy": 0,
-      "too_thin": 30,
+      "too_thin": 31,
       "items": [
         {
           "kw": "it導入補助金 個人事業主",
           "url": "https://lp.7senses.co.jp/blog/it-hojokin-2026-kojinjigyonushi/",
           "pos": 2.1,
-          "imp": 18,
+          "imp": 24,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 15.0,
