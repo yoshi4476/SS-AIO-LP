@@ -16,6 +16,7 @@ import argparse
 import json
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date
@@ -62,21 +63,37 @@ def _sa_token():
                 c = service_account.Credentials.from_service_account_file(str(sa), scopes=["openid"])
                 c.refresh(gr.Request())
                 _SA_TOKEN = c.token
-            except Exception:
+            except Exception as e:
+                print(f"   サービスアカウントで鍵を取れません: {str(e)[:120]}")
                 _SA_TOKEN = ""
     return _SA_TOKEN
 
 
 def measure(url, strategy="mobile"):
     params = {"url": url, "strategy": strategy, "category": "performance"}
-    headers = {}
+    # CI では 403 の理由が分からず「鍵を足してください」と誤った指示を出した。
+    # 経路を順に試し、落ちたら Google の返した理由をそのまま出す
+    routes = []
     if _sa_token():
-        headers["Authorization"] = f"Bearer {_sa_token()}"
-    elif _key():
-        params["key"] = _key()
-    q = urllib.parse.urlencode(params)
-    with urllib.request.urlopen(urllib.request.Request(f"{API}?{q}", headers=headers), timeout=120) as r:
-        d = json.loads(r.read().decode("utf-8"))
+        routes.append(("サービスアカウント", {}, {"Authorization": f"Bearer {_sa_token()}"}))
+    if _key():
+        routes.append(("APIキー", {"key": _key()}, {}))
+    routes.append(("鍵なし", {}, {}))
+    errs = []
+    for name, extra, headers in routes:
+        q = urllib.parse.urlencode({**params, **extra})
+        try:
+            with urllib.request.urlopen(urllib.request.Request(f"{API}?{q}", headers=headers), timeout=120) as r:
+                d = json.loads(r.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as e:
+            try:
+                msg = json.loads(e.read().decode("utf-8")).get("error", {}).get("message", "")
+            except Exception:
+                msg = ""
+            errs.append(f"{name}={e.code} {msg[:90]}")
+    else:
+        raise RuntimeError(" / ".join(errs))
     out = {"url": url, "strategy": strategy, "source": "lab"}
     field = (d.get("loadingExperience") or {}).get("metrics") or {}
     if field:
@@ -127,7 +144,7 @@ def main():
             try:
                 m = measure(url)
             except Exception as e:
-                print(f"   {sid}: 計測できません {url[:50]} ({str(e)[:60]})")
+                print(f"   {sid}: 計測できません {url[:50]} ({str(e)[:300]})")
                 continue
             rows.append({"date": date.today().isoformat(), "site": sid, **m})
             over = [k for k, lim in LIMITS.items() if m.get(k) is not None and m[k] > lim]
