@@ -53,5 +53,25 @@
       "title": "llms.txtを置けばAI検索対策になる？",
       "youtube": "vZiyBjb78Cg"
     }
+  },
+  "aio-checker": {
+    "site": "ai-lab",
+    "date": "2026-09-30",
+    "sec": 285,
+    "mp4": "automation/video/aio-checker.mp4",
+    "nums": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "format": "duo",
+    "youtube": "bmyfkTqAHBk",
+    "short": {
+      "date": "2026-09-30",
+      "sec": 45,
+      "title": "AIOチェッカーで満点なら引用される？",
+      "youtube": "nO0PtQZI_vI"
+    }
   }
 }
