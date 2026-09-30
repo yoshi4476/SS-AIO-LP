@@ -1,0 +1,240 @@
+{
+  "date": "2026-10-01",
+  "method": "GSCのCTR歪みからの推定",
+  "sites": {
+    "ai-lab": {
+      "judged": 14,
+      "suspect_taken": 13,
+      "healthy": 1,
+      "too_thin": 107,
+      "items": [
+        {
+          "kw": "原口優",
+          "url": "https://ai.7senses.co.jp/author/haraguchi/",
+          "pos": 1.4,
+          "imp": 39,
+          "clicks": 3,
+          "ctr": 7.69,
+          "expected_ctr": 28.0,
+          "ratio": 0.27
+        },
+        {
+          "kw": "aio やり方",
+          "url": "https://ai.7senses.co.jp/aio/aio-yarikata/",
+          "pos": 8,
+          "imp": 13,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "aio 導入 メリット 費用",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
+          "pos": 9,
+          "imp": 13,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "aio 診断",
+          "url": "https://ai.7senses.co.jp/diagnosis/aio/",
+          "pos": 8.0,
+          "imp": 42,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "aio対策 キーワード選定",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
+          "pos": 4.1,
+          "imp": 21,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 8.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "aio対策 費用",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+          "pos": 5.5,
+          "imp": 30,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 5.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "llmo 代理店 募集",
+          "url": "https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/",
+          "pos": 4.7,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "llmo 店舗集客",
+          "url": "https://ai.7senses.co.jp/glossary/ec29cde02a/",
+          "pos": 5.1,
+          "imp": 12,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "llmo代理店になる方法",
+          "url": "https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/",
+          "pos": 7.2,
+          "imp": 14,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "meo アルゴリズム攻略",
+          "url": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
+          "pos": 5.4,
+          "imp": 30,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "カイロ meo",
+          "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
+          "pos": 6.9,
+          "imp": 25,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "口コミ 返信 例文 医療",
+          "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
+          "pos": 9.7,
+          "imp": 89,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 2.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "歯科医院 閉院費用",
+          "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
+          "pos": 6.3,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 5.0,
+          "ratio": 0.0
+        }
+      ]
+    },
+    "corporate": {
+      "judged": 9,
+      "suspect_taken": 5,
+      "healthy": 4,
+      "too_thin": 60,
+      "items": [
+        {
+          "kw": "3点照合",
+          "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
+          "pos": 6,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 5.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "ゆうちょ 記帳 やり方",
+          "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+          "pos": 6.9,
+          "imp": 29,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "セブンセンシズ",
+          "url": "https://corp.7senses.co.jp/",
+          "pos": 4.5,
+          "imp": 78,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 8.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "三点照合 自動化",
+          "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
+          "pos": 4.6,
+          "imp": 14,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "経理 派遣 時給 相場",
+          "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
+          "pos": 8.2,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
+          "ratio": 0.0
+        }
+      ]
+    },
+    "subsidy": {
+      "judged": 3,
+      "suspect_taken": 3,
+      "healthy": 0,
+      "too_thin": 35,
+      "items": [
+        {
+          "kw": "it導入補助金 個人事業主",
+          "url": "https://lp.7senses.co.jp/blog/it-hojokin-2026-kojinjigyonushi/",
+          "pos": 2.0,
+          "imp": 34,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 15.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "ベンダー登録とは",
+          "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/",
+          "pos": 5.2,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "農業用倉庫 補助金 2026",
+          "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
+          "pos": 7.4,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        }
+      ]
+    }
+  }
+}
