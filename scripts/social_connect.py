@@ -107,7 +107,10 @@ def facebook(site, page_hint):
 
 def threads(site):
     d = load()
-    app = meta_app(d)
+    # Threads は Meta アプリ本体とは別の「Threads アプリシークレット」で交換する（本体のものでは通らない）
+    app = d.setdefault("_threads_app", {})
+    if not app.get("secret"):
+        app["secret"] = ask("Threads のアプリ", "Threads アプリシークレット（ユースケース → Threads API → 設定）")
     short = ask("Threads", "Threads のユーザートークン（アプリの「Threads API の利用」→ トークン生成）")
     if not short:
         raise SystemExit("入力が空のため中止しました")
