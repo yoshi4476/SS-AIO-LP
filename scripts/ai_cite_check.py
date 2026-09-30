@@ -141,7 +141,7 @@ def ask_claude(q):
     # ANTHROPIC_API_KEY は入れると記事の執筆が従量課金に切り替わるスイッチなので、計測は別の名前にする
     key = _env("CLAUDE_CITE_API_KEY")
     if not key:
-        return None
+        return ask_claude_cli(q)
     model = _env("ANTHROPIC_MODEL") or "claude-sonnet-5-5"
     d = _post("https://api.anthropic.com/v1/messages",
               {"model": model, "max_tokens": 1024,
@@ -158,6 +158,29 @@ def ask_claude(q):
             if isinstance(c, dict) and c.get("url"):
                 urls.append(c["url"])
     return urls
+
+
+def ask_claude_cli(q):
+    """鍵が無ければ Claude Code（サブスク）に検索させる。CI は CLAUDE_CODE_OAUTH_TOKEN で動く。
+    API の web_search と違い出典は構造で返らないので、使った出典を1行ずつ書かせて拾う"""
+    import shutil
+    import subprocess
+    import tempfile
+    exe = shutil.which("claude") or shutil.which("claude.cmd")
+    if not exe or (os.environ.get("GITHUB_ACTIONS") and not os.environ.get("CLAUDE_CODE_OAUTH_TOKEN")):
+        return None
+    prompt = (f"次の質問に、Web検索をして日本語で答えてください。\n質問: {q}\n\n"
+              "答えの最後に、検索で見て根拠にしたページのURLを全部、1行に1つずつ "
+              "`SOURCE: <URL>` の形で書いてください。")
+    with tempfile.TemporaryDirectory() as tmp:
+        # 質問は標準入力で渡す。Windows の claude.cmd は改行を含む引数を途中で切り、出典の指示が届かなかった
+        r = subprocess.run([exe, "-p", "--allowedTools", "WebSearch",
+                            "--model", _env("CLAUDE_CITE_MODEL") or "claude-sonnet-5-5"],
+                           input=prompt, cwd=tmp, capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=300)
+    if r.returncode != 0:
+        raise RuntimeError(f"claude -p が失敗しました: {(r.stderr or r.stdout)[:120]}")
+    return re.findall(r"SOURCE:\s*<?(https?://[^\s>]+)", r.stdout)
 
 
 def ask_grok(q):
@@ -210,7 +233,15 @@ def _cached(name, fn):
 
 
 def engines_available():
-    return {k: _cached(k, v) for k, v in ENGINES.items() if _env(ENGINE_KEYS[k])}
+    return {k: _cached(k, v) for k, v in ENGINES.items() if _env(ENGINE_KEYS[k]) or (k == "Claude" and _claude_cli_ready())}
+
+
+def _claude_cli_ready():
+    """鍵が無くても、サブスクの Claude Code が使えれば Claude も測る"""
+    import shutil
+    if not (shutil.which("claude") or shutil.which("claude.cmd")):
+        return False
+    return not os.environ.get("GITHUB_ACTIONS") or bool(os.environ.get("CLAUDE_CODE_OAUTH_TOKEN"))
 
 
 def queries_for(site_id, limit):

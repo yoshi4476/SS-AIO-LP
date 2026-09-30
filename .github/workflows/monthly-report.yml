@@ -185,7 +185,10 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
           CLAUDE_CITE_API_KEY: ${{ secrets.CLAUDE_CITE_API_KEY }}
+          # Claude は鍵が無ければサブスク（Claude Code）で聞く
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
+          npm install -g @anthropic-ai/claude-code || true
           out=$(python scripts/ai_cite_check.py); echo "$out"
           if echo "$out" | grep -q "AI_CITED="; then
             mkdir -p automation/logs
