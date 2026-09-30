@@ -39,6 +39,8 @@ TO_GITHUB = {
     "GBP_CLIENT_JSON", "GBP_TOKENS_JSON",
     # 表示速度の実測（cwv_check）。YOUTUBE_API_KEY のプロジェクトでは PageSpeed API が使えず、週次で測れなかった
     "PAGESPEED_API_KEY",
+    # AI検索の引用の実測（ai_cite_check）。鍵のあるAIだけに聞く
+    "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "XAI_API_KEY",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。
@@ -86,6 +88,12 @@ SLACK_WEBHOOK_URL=
 #   スタンダードプラン（月2,475円〜）以上でのみ発行できます
 #   消費の目安: 1社あたり約168クレジット/月（10社で1,680／枠3,000）
 RAKKO_API_KEY=
+
+# ── AI検索に引用されているかの実測（月1回・1サイト20語。あるものだけ使う）──
+# 発行: https://platform.openai.com/api-keys
+OPENAI_API_KEY=
+# 発行: https://www.perplexity.ai/settings/api
+PERPLEXITY_API_KEY=
 
 # ── 一次情報の収集 ──────────────────────────────────────────
 # 発行: https://console.cloud.google.com/apis/credentials
