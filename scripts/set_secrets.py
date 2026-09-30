@@ -40,7 +40,7 @@ TO_GITHUB = {
     # 表示速度の実測（cwv_check）。YOUTUBE_API_KEY のプロジェクトでは PageSpeed API が使えず、週次で測れなかった
     "PAGESPEED_API_KEY",
     # AI検索の引用の実測（ai_cite_check）。鍵のあるAIだけに聞く
-    "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "XAI_API_KEY",
+    "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "XAI_API_KEY", "CLAUDE_CITE_API_KEY",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。

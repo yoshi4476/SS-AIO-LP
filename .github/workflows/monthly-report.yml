@@ -184,6 +184,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          CLAUDE_CITE_API_KEY: ${{ secrets.CLAUDE_CITE_API_KEY }}
         run: |
           out=$(python scripts/ai_cite_check.py); echo "$out"
           if echo "$out" | grep -q "AI_CITED="; then

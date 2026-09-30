@@ -138,10 +138,11 @@ def ask_perplexity(q):
 
 def ask_claude(q):
     """Claude（Anthropic Messages API + web_search）。出典は web_search_result の url"""
-    key = _env("ANTHROPIC_API_KEY")
+    # ANTHROPIC_API_KEY は入れると記事の執筆が従量課金に切り替わるスイッチなので、計測は別の名前にする
+    key = _env("CLAUDE_CITE_API_KEY")
     if not key:
         return None
-    model = _env("ANTHROPIC_MODEL") or "claude-sonnet-4-5"
+    model = _env("ANTHROPIC_MODEL") or "claude-sonnet-5-5"
     d = _post("https://api.anthropic.com/v1/messages",
               {"model": model, "max_tokens": 1024,
                "tools": [{"type": "web_search_20250305", "name": "web_search", "max_uses": 3}],
@@ -176,7 +177,7 @@ def ask_grok(q):
 ENGINES = {"ChatGPT": ask_openai, "Gemini": ask_gemini, "Perplexity": ask_perplexity,
            "Claude": ask_claude, "Grok": ask_grok}
 ENGINE_KEYS = {"ChatGPT": "OPENAI_API_KEY", "Gemini": "GEMINI_API_KEY", "Perplexity": "PERPLEXITY_API_KEY",
-               "Claude": "ANTHROPIC_API_KEY", "Grok": "XAI_API_KEY"}
+               "Claude": "CLAUDE_CITE_API_KEY", "Grok": "XAI_API_KEY"}
 
 
 CACHE_DIR = ROOT / "data" / "ai_cache"
