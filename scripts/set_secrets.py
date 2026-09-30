@@ -166,7 +166,35 @@ def main():
     ap.add_argument("--init", action="store_true", help="雛形を作る")
     ap.add_argument("--apply", action="store_true", help=".env と GitHub Secrets を更新")
     ap.add_argument("--clean", action="store_true", help="控えのファイルを消す")
+    ap.add_argument("--sync-github", nargs="*", metavar="KEY",
+                    help="すでに .env にある値を GitHub Secrets へ写す（KEY を省くと GitHub 用の全部）")
     a = ap.parse_args()
+
+    if a.sync_github is not None:
+        # 値は .env にあるのに GitHub 側だけ無い、というときに secrets.local.txt へ書き直させない。
+        # 実例: PAGESPEED_API_KEY が .env にあるのに Secrets に無く、週次の速度計測が測れなかった
+        env = {}
+        for line in (ENVF.read_text(encoding="utf-8") if ENVF.is_file() else "").splitlines():
+            m = re.match(r"^\s*([A-Z0-9_]+)\s*=\s*(.*)$", line)
+            if m and not line.lstrip().startswith("#"):
+                env[m.group(1)] = m.group(2).strip().strip('"').strip("'")
+        keys = a.sync_github or sorted(TO_GITHUB)
+        vals = {k: env[k] for k in keys if env.get(k)}
+        missing = [k for k in keys if not env.get(k)]
+        if missing and a.sync_github:
+            print(f"   .env に値がありません: {', '.join(missing)}")
+        if not vals:
+            print(".env に写せる値がありません")
+            return 1
+        if not gh_ready():
+            print("gh にログインしていません。先に `gh auth login` を実行してください")
+            return 1
+        print(f"■ .env から GitHub Secrets へ写します: {len(vals)}件")
+        for k, v in vals.items():
+            print(f"   {k:<28}{mask(v)}")
+        ok, ng = set_github({k: v for k, v in vals.items() if k in TO_GITHUB})
+        print(f"\n   反映 {len(ok)}件" + (f" / 失敗 {len(ng)}件" if ng else ""))
+        return 0 if not ng else 1
 
     if a.init:
         if LOCAL.exists():
