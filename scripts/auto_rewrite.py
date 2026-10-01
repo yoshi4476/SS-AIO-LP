@@ -240,6 +240,48 @@ def desc_items(limit=4, days=28):
     return rows[:limit]
 
 
+def split_items(limit=4):
+    """同じ語に自社の2本が出ているが、主題が別で統合しない組（auto_merge が「主題が違う」で見送る組）。
+    弱い側の題と説明文を、その記事の狙う語へ寄せて付け分ける。共通の話題は相手の記事へ渡す"""
+    import auto_merge as AM
+    nz = lambda s: re.sub(r"[\s　]+", "", (s or "").lower())
+
+    def owns(slug, q):
+        t, k, _ = meta(slug)
+        return nz(q) in nz(k) or nz(q) in nz(t)
+
+    def retitled(slug):
+        # 28日以内に題を変えた記事は、効きが出るまで待つ（直した直後に逆側を直すと、どちらが効いたか分からない）
+        r = sh(["git", "log", "--since=28.days", "-p", "--format=", "--", f"articles/{slug}.md"], timeout=60)
+        return bool(re.search(r"^[-+]title:", r.stdout or "", re.M))
+
+    out, seen = [], set()
+    for p in AM.candidates():
+        if "主題が違う" not in (p.get("skip") or ""):
+            continue
+        shared = [k["kw"] for k in p["kws"]]
+        a, b = p["loser"], p["survivor"]
+        if not all((ROOT / "articles" / f"{s}.md").is_file() for s in (a, b)):
+            continue
+        if retitled(a) or retitled(b):
+            continue
+        # 共通の語をすでに狙っている側は持ち主。持っていない側を付け分ける（両方持っていれば見送る）
+        free = [s for s in (a, b) if not owns(s, shared[0])]
+        if not free:
+            continue
+        lose = a if a in free else free[0]
+        other = b if lose == a else a
+        if lose in seen:
+            continue
+        seen.add(lose)
+        out.append({"kind": "split", "slug": lose, "site": p["site"], "imp": p["imp"],
+                    "other": other, "other_title": meta(other)[0], "other_url": AM.url_of(p["site"], other),
+                    "shared": shared,
+                    "why": f"「{shared[0]}」で同じサイトの別記事と競り合い、互いの順位を下げている（主題は別なので統合しない）"})
+    out.sort(key=lambda x: -x["imp"])
+    return out[:limit]
+
+
 PROMPT = """articles/{slug}.md を直してください。この1ファイル以外は触らないでください。
 
 直す理由: {why}
@@ -256,6 +298,13 @@ PROMPT = """articles/{slug}.md を直してください。この1ファイル以
 直したら、変更点を1行で説明して終了してください。"""
 
 WHAT = {
+    "split": ("この記事と、同じサイトの別記事「{other_title}」（{other_url}）が、検索語「{shared}」で\n"
+              "同時に検索結果に出て、互いの順位を下げています。主題は別なので統合はしません。\n"
+              "この記事の title と description を、この記事の狙う語（keyword）の主題に寄せてください。\n"
+              "共通の語「{shared}」をタイトルの前半に置かないこと。15〜45字。keyword は必ず残すこと。\n"
+              "description は60〜160字で、狙う語を含め、タイトルで言っていないことを書く。\n"
+              "本文で共通の語の話題を詳しく扱っている段落があれば、要点1〜2文に縮め、\n"
+              "詳しくは [{other_title}]({other_url}) へ案内する1文を添えてください（新しい節は足さない）。"),
     "title": ("フロントマターの title・description と、H1相当の書き出しを\n"
               "見直してください。検索結果に出るのはタイトルと説明文の両方で、\n"
               "説明文だけを直しても、タイトルだけを直しても効きません。\n"
@@ -571,6 +620,9 @@ def run_one(item, write):
         _, fs = F.load_for(item.get("site") or site_of(slug))
         allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
         what = what.format(facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind == "split":
+        what = what.format(other_title=item["other_title"], other_url=item["other_url"],
+                           shared="」「".join(item["shared"][:3]))
     if kind == "desc":
         what = what.format(queries="\n".join(f"- {q}" for q in item.get("queries") or []))
     if kind == "title":
@@ -658,6 +710,12 @@ def run_one(item, write):
             p.write_bytes(raw)
             sh([sys.executable, "scripts/build.py"], timeout=1800)
             return False, ng
+    if not ng and kind == "split":
+        # 共通の語がまだタイトルの前半にそろって残っていれば、付け分けになっていない
+        t_now = meta(slug)[0]
+        toks = [w for w in re.split(r"[\s　]+", item["shared"][0].lower()) if w]
+        if toks and all(w in t_now[:max(len(t_now) // 2, 1)].lower() for w in toks):
+            ng = f"共通の語「{item['shared'][0]}」がタイトルの前半に残っています"
     after_text = p.read_text(encoding="utf-8-sig")
     LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
                   "after_title": meta(slug)[0], "after_description": _desc_of(after_text)}
@@ -771,6 +829,8 @@ def main():
         items = question_items(max(a.limit, 4))
     elif a.kind == "desc":
         items = desc_items(max(a.limit, 4))
+    elif a.kind == "split":
+        items = split_items(max(a.limit, 4))
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     print(f"■ 人の判断に回っていた直し: {len(items)}件"

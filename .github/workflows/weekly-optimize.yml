@@ -531,6 +531,9 @@ jobs:
           python scripts/auto_rewrite.py --write --kind question --limit $n --budget-min 12 2>&1 | tail -6 || true
           # 流入語が説明文の先頭に無い記事の説明文だけを直す（本文が1文字でも変われば戻す）
           python scripts/auto_rewrite.py --write --kind desc --limit $n --budget-min 8 2>&1 | tail -6 || true
+          # 同じ語で自社の2本が競り合うが主題は別（統合しない）組を、題の付け分けで直す。
+          # 公開・改題から28日たっていない記事は順位が落ち着くまで待つ
+          python scripts/auto_rewrite.py --write --kind split --limit $n --budget-min 10 2>&1 | tail -6 || true
 
       # 多言語の要約ページ（英語・中国語・韓国語）。**sites/<id>.json に languages を書いた社だけ**作る
       # （指示が無ければ何もしない）。AIが切り出す単位だけを訳し、数字が1つでも変われば捨てる
