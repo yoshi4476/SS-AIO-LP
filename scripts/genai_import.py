@@ -146,7 +146,8 @@ def main():
         n = to_int(r[i_imp])
         total += n
         if i_page >= 0 and i_page < len(r) and r[i_page].strip():
-            key = r[i_page].strip().rstrip("/").split("/")[-1] or r[i_page].strip()
+            # URLごと鍵にする。末尾のslugだけにすると別カテゴリの同名ページが1つに潰れる（0.1節）
+            key = re.sub(r"^https?://[^/]+", "", r[i_page].strip()).rstrip("/") + "/"
             pages[key] = pages.get(key, 0) + n
 
     store.setdefault(month, {})[a.site] = {
