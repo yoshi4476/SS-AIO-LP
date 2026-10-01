@@ -208,10 +208,14 @@ def insert_ok(before, after):
         if before.count(tag) != after.count(tag):
             return f"{tag} の数が変わった"
     # 表・箇条書き・見出しに直結していないか（空行が要る）
-    for m in re.finditer(r"^(.*\]\(/[^)]+/\)[^\n]*)\n(?=[|#]|\s*[-*] |\s*\d+\. )",
-                         after, re.M):
-        if m.group(1).strip():
-            return "挿し込んだ行が次の塊に直結している（前後に空行が要る）"
+    # 増えた分だけを見る。記事に元からある「リンクつきの箇条書きの次の行も箇条書き」まで数えていたため、
+    # ほぼ全部の挿し込みが見送られていた（2026-09-28 の週次で29件・押し上げのリンクが入らなかった）
+    # 行頭の空白は [ \t]*。\s* だと改行にも一致し、空行をはさんだ箇条書きまで「直結」と数えていた
+    glued = r"^(.*\]\(/[^)]+/\)[^\n]*)\n(?=[|#]|[ \t]*[-*] |[ \t]*\d+\. )"
+    def n_glued(s):
+        return sum(1 for m in re.finditer(glued, s, re.M) if m.group(1).strip())
+    if n_glued(after) > n_glued(before):
+        return "挿し込んだ行が次の塊に直結している（前後に空行が要る）"
     if len(after) <= len(before):
         return "本文が増えていない"
     return ""
