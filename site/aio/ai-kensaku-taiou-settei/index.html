@@ -345,6 +345,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h2 id="ai">AI検索対応とは？サイトに必要な状態を定義する</h2>
 <p><strong>AI検索対応とは、AIクローラーへの許可と、AIが読み取れる構造の両方が揃った状態を指します。</strong></p>
+<p>関連する内容として<a href="/aio/aio-taisaku-merit-hiyou/">AIO導入のメリット5つと費用相場</a>も公開しています。</p>
+<p>関連する内容として<a href="/aio/aio-shukyaku/">AIO集客とは？向いている業種と始める3つの基準</a>も公開しています。</p>
 <p>「順位は悪くないのに、AI検索にはまったく出てこない」という相談を受けることがあります。多くの場合、原因は本文の質ではなく、クローラーの許可漏れか、機械が読み取れる構造の不足のどちらかです。基礎知識は、<a href="/aio/aio-taisaku-ai-kensaku/">AI検索とは？AIO対策との違いと5種類の対応ポイント</a>で解説しています。</p>
 <div class="definition-box"><span class="term">AI検索対応</span>とは、ChatGPT検索・Perplexity・Google AI OverviewなどのAIクローラーにサイトへのアクセスを許可し、記事の内容を構造化データ・llms.txt・本文構造を通じて機械が読み取れる形で提供することを指します。</div>
 
@@ -394,6 +396,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form></aside>
 <h2 id="2-llmstxtai">設定2: llms.txtでサイト概要と実績をAIに渡す</h2>
 <p><strong>llms.txtは、サイトの概要と運営者情報をAIに直接渡すためのテキストファイルです。</strong></p>
+<p>あわせて<a href="/ai-marketing/obkyaku-shoukai-shikumi/">OB客紹介の仕組み化とは？</a>もご覧ください。</p>
 <p>llms.txtはサイトのルート直下にMarkdown形式で設置します。サイト概要、運営者情報、主要コンテンツへのリンクを簡潔にまとめておくと、AIがサイト全体の文脈を把握しやすくなります。</p>
 <p>私たちは自社サイトのllms.txtに、運営会社の実績と主要記事一覧を記載しています。当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。</p>
 <p>llms.txtの運営者情報には、抽象的な自己紹介ではなく確認できる実績を書くことが重要です。当社は2020年3月創業、大阪市東成区を拠点に店舗集客とAI活用を支援しています。MEO運用サービス「G-ran」では通算3,200店舗以上を運用してきました。こうした具体的な数字は、AIが運営者の信頼性を判断する材料にもなります。</p>
@@ -422,7 +425,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>私たちが自社サイトを運用する中でも、sitemap.xmlの更新を怠ると新規記事のインデックスが遅れる場面を何度も見てきました。<a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank" rel="noopener">Google公式のsitemap作成ガイド</a>にも、更新のたびにsitemapを最新化する重要性が書かれています。技術的な土台は地味な作業ですが、抜けると他の設定の効果が発揮されません。</p>
 <h2 id="gsc">設定後にログとGSCで反映を確認する手順</h2>
 <p><strong>設定後は、アクセスログとGSCで実際にクローラーが読みに来ているかを確認します。</strong></p>
-<p>関連する内容として<a href="/aio/aio-yarikata/">AIOのやり方｜5ステップの実践手順と失敗例</a>も公開しています。</p>
+<p>近い論点を<a href="/aio/aio-yarikata/">AIOのやり方｜5ステップの実践手順と失敗例</a>で扱っています。</p>
 <p>設定して終わりにせず、反映を確認する手順まで運用に組み込んでください。まずアクセスログでGPTBotやPerplexityBotのアクセスが記録されているかを確認します。次にGoogle Search Consoleの生成AIパフォーマンスレポートで、AI Overviewのインプレッションが発生しているかを見ます。</p>
 <p>当サイトの実測では、直近28日で291個の検索語からのべ2,171回表示され、7回のクリックがありました（自社サイトのSearch Console実測・2026年9月時点）。</p>
 <p>この数値も、設定の効果を継続的に確認するための一つの指標として使っています。対応状況を体系的にチェックしたい場合は、<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方｜無料チェック8項目とツールの使い分け</a>も参考になります。</p>

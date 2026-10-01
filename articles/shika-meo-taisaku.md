@@ -48,13 +48,13 @@ diagrams:
 
 **歯科医院のMEO対策とは、自由診療の専門性を追加カテゴリと院内写真で伝えるMEO運用のことです。**
 
+関連する内容は[医療機関のMEO対策](/meo/iryou-meo-taisaku/)で整理しています。
+
 あわせて[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)もご覧ください。
 
 前提となる考え方については、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)にまとめています。
 
 前提となる考え方は、[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)で解説しています。
-
-関連して、[クリニック開業のやり方](/ai-marketing/clinic-kaigyou-yarikata/)もあわせてご確認ください。
 
 <div class="definition-box"><span class="term">歯科医院のMEO（Map Engine Optimization）とは</span>、Googleマップの上位に自院を表示させるための最適化のことです。「地域名×歯医者」「駅名×矯正歯科」といった検索で、特に目立つ上位3枠へ入ることを狙います。保険診療の新患集客と、矯正・インプラント・審美歯科といった自由診療のブランディングを、同じプロフィール上で両立させる必要がある点が特徴です。</div>
 

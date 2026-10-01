@@ -84,11 +84,11 @@ AIO対策の相場は、診断のみなら月3万円台、運用まで任せる�
 
 価格帯が上がるほど、診断だけでなく構造改善や月次運用まで任せられる範囲が広がります。
 
+あわせて[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)もご覧ください。
+
+関連する内容として[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)も公開しています。
+
 あわせて[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)もご覧ください。
-
-あわせて[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)もご覧ください。
-
-関連する内容として[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)も公開しています。
 
 <figure><img src="/images/aio-taisaku-souba/price-range.png" alt="価格帯別にできることの違い: 月3万円未満は無料ツール中心の自己運用、月3万〜10万円台は診断+部分的な構造改善、月10万〜30万円台は構造改善+月次運用の一括代行、月30万円以上は複数サイトの一括運用" loading="lazy"><figcaption>価格帯別にできることの違い</figcaption></figure>
 

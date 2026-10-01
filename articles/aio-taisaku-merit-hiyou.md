@@ -49,6 +49,8 @@ faq:
 
 AIO対策導入の最大のメリットは、広告費なしでAI回答内に引用され続けられることです。
 
+近い論点を[AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](/aio/aio-towa/)で扱っています。
+
 選ぶときの基準を先に押さえるなら、[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)が参考になります。
 
 近い論点を[導入事例の書き方とは？成果につながる6ステップ](/ai-marketing/donyu-jirei-kakikata/)で扱っています。
@@ -135,8 +137,6 @@ AIの回答に自社サイトが載る準備ができているかは、[AI検索
 ## 費用を抑えて導入する3つの工夫
 
 費用を抑えるには、無料ツールの活用と対象ページの絞り込みが効果的です。
-
-あわせて[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)もご覧ください。
 
 <figure><img src="/images/aio-taisaku-merit-hiyou/osaeru.png" alt="費用を抑えて導入する3つの工夫: 無料ツールから始める、優先度の高いページに絞る、小さく試してから広げる" loading="lazy"><figcaption>費用を抑えて導入する3つの工夫</figcaption></figure>
 

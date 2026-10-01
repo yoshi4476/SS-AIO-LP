@@ -42,6 +42,10 @@ faq:
 
 **適格請求書の要件は6項目で、区分記載請求書より登録番号・適用税率・消費税額の3点が増えています。**
 
+近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
+
+近い論点を[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)で扱っています。
+
 あわせて[請求書封筒の書き方｜宛名・在中表記・差出人の3つの基本](/blog/seikyusho-fuutou-kakikata/)もご覧ください。
 
 <div class="definition-box"><span class="term">適格請求書（インボイス）とは</span>、売手が買手に対して、正確な適用税率や消費税額を伝える書類です。==登録を受けた適格請求書発行事業者だけが交付できます。==</div>
@@ -112,8 +116,6 @@ faq:
 
 **要件を欠いた請求書を受け取ったら、自社で書き足さず、発行者に修正した請求書を再交付してもらいます。**
 
-近い論点を[請求書の作り方｜テンプレート8要素と3ステップ](/blog/seikyusho-tsukurikata/)で扱っています。
-
 <figure><img src="/images/tekikaku-seikyusho-youken/jyuryo.png" alt="受け取った請求書の確認3ステップ: 登録番号を公表サイトで照合する、6項目の欠けを確認する、欠けがあれば再交付を依頼する" loading="lazy"><figcaption>受け取った請求書の確認3ステップ</figcaption></figure>
 
 登録番号は<a href="https://www.invoice-kohyo.nta.go.jp/" target="_blank" rel="noopener">国税庁の適格請求書発行事業者公表サイト</a>で照合できます。登録は取消や失効もあるため、取引開始時だけでなく定期的な照合が必要です。
@@ -139,8 +141,6 @@ faq:
 ## 適格請求書の要件確認でよくある失敗3つ
 
 **よくある失敗は、登録番号の照合を初回だけで終える・受け取った請求書を自社で直す・旧テンプレートを使い続けるの3つです。**
-
-関連する内容として[経理効率化セミナーの費用相場と選び方](/blog/keiri-koritsuka-seminar/)も公開しています。
 
 <div class="caution-box"><span class="box-title">注意: 受け取った請求書への書き足しはNG</span><br>登録番号や消費税額を受け取った側が手書きで補っても、要件を満たした書類にはなりません。<span class="txt-red">修正は必ず発行者に依頼してください。</span></div>
 

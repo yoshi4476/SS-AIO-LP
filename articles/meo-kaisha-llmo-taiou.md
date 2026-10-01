@@ -47,6 +47,8 @@ faq:
 
 MEO会社にとってのAI引用対応とは、Googleマップの順位対策だけでなく、ChatGPTやPerplexityなどのAIチャットの回答内で自社が引用されるように記事や情報を設計できることです。
 
+近い論点を[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)で扱っています。
+
 <div class="definition-box"><span class="term">AI引用対応（LLMO対応）とは</span>、構造化データ・一次情報・比較しやすい情報構造を整え、AIが回答を作る際の引用元として選ばれやすくする対策を指します。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Central</a>は、AI OverviewやAIモードへの表示に追加要件はなく、既存の検索SEOの評価がそのまま使われると明記しています。</div>
 
 MEO対策とLLMO対策は、狙う場所が違うだけで対立するものではありません。==MEOはGoogleマップでの表示順位、LLMOはAIチャットでの引用獲得を狙う施策です==。両方を担当できる会社であれば、店舗の情報整備を一本化できます。
@@ -58,6 +60,8 @@ MEO対策とLLMO対策は、狙う場所が違うだけで対立するもので�
 ## MEO会社に「AI引用対応」が求められ始めた理由
 
 MEO会社にAI引用対応が求められ始めた理由は、地図検索だけでなくAIチャットで店舗を比較する利用者が増えてきたためです。
+
+近い論点を[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)で扱っています。
 
 来店先を探すとき、以前はGoogleマップで直接検索する利用者が中心でした。今はAIチャットに「近くでMEOに強い会社は？」と聞いてから、候補を絞り込む使い方も広がっています。**MEO対策だけを続けていると、この入口を取りこぼします。**
 
@@ -71,7 +75,7 @@ MEO会社にAI引用対応が求められ始めた理由は、地図検索だけ
 
 AI引用に対応しているMEO会社を見極める基準は、構造化データの実装実績・一次情報の設計力・計測レポートの中身の3つです。順番に確認していきます。
 
-近い論点を[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)で扱っています。
+関連する内容として[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)も公開しています。
 
 選ぶときの基準は[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)でも扱っています。
 

@@ -51,9 +51,11 @@ faq:
 
 関連する内容として[歯科医院の集客方法とは？新患を増やす5つの基本施策](/ai-marketing/shika-iin-shukyaku/)も公開しています。
 
-近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
+選ぶときの基準は、[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)で解説しています。
 
-あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
+前提となる考え方は[AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](/aio/aio-towa/)で整理しています。
+
+あわせて[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)もご覧ください。
 
 <div class="definition-box"><span class="term">AIO集客とは</span>、Google の AI Overview や ChatGPT・Perplexity などの生成AIが検索意図に答える際、自社の情報を引用元として選ばせ、そこから指名検索・問い合わせ・来店につなげる集客の考え方です。</div>
 
@@ -75,8 +77,6 @@ AI OverviewはGooglebotが集めた検索結果を土台に生成されます。
 ## AIO集客が向いている業種・向いていない業種
 
 **AIO集客は、比較検討に時間がかかる業種ほど効果が出やすく、その場の衝動で決まる業種には向きません。**
-
-関連する内容として[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)も公開しています。
 
 AIは「どれを選ぶべきか迷っている人」の質問に答える場面で強く機能します。迷いが生まれやすい業種ほど、AIの回答に引用される機会が増えます。
 

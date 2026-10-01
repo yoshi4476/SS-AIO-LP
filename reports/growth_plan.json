@@ -9,5 +9,22 @@
   "multiple": 3.0,
   "months": 6,
   "target_month": "2027-02",
-  "checks": {}
+  "checks": {
+    "2026-09": {
+      "actual": {
+        "sessions": 540,
+        "clicks": 140,
+        "cv": 5,
+        "ai": 50
+      },
+      "path": {
+        "sessions": 339,
+        "clicks": 78,
+        "cv": 6,
+        "ai": 12
+      },
+      "ok": true,
+      "late": []
+    }
+  }
 }

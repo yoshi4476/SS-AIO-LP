@@ -45,9 +45,11 @@ diagrams:
 
 **3つの違いは、狙う検索結果の場所と、評価される情報の種類の組み合わせにあります。**表で並べると、混同していた部分が見えてきます。
 
-関連する内容として[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)も公開しています。
+選ぶときの基準は、[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)で解説しています。
 
-前提となる考え方は、[AIO SEO対策とは？](/aio/aio-seo-taisaku/)で解説しています。
+あわせて[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)もご覧ください。
+
+関連する内容として[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)も公開しています。
 
 <figure><img src="/images/aio-seo-meo-chigai/sanshu.png" alt="AIO・SEO・MEOを一言でいうと示した図" loading="lazy"><figcaption>AIO・SEO・MEOを一言でいうと</figcaption></figure>
 
@@ -63,8 +65,6 @@ diagrams:
 ## AIOを一言でいうと
 
 **AIOとは、AIが生成する回答文の中で、自社の情報が引用元として使われるようにする対策です。**新しいマークアップを追加する対策ではありません。
-
-前提となる考え方は[AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](/aio/aio-towa/)で整理しています。
 
 前提となる考え方は[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)でも扱っています。
 
@@ -153,7 +153,6 @@ MEOも同様です。関連性の評価にはページの情報量や網羅性�
 4つ目は、3つの対策を一度に外注してしまうことです。予算が限られているうちは、土台となるSEOだけを先に依頼し、MEOとAIOは自社で内製してみるという分け方も選べます。全部を一括で任せるかどうかは、後からでも判断できます。
 
 <div class="cta-box"><p>自社の体制でどこから手をつけるべきか、無料で一緒に整理しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
-
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録なしで、その場で点数が表示されます。
 

@@ -49,6 +49,8 @@ faq:
 
 経費精算BPOとは、立替経費のチェック・記帳という実務だけを外部に任せる委託形態です。
 
+選ぶときの基準については、[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)にまとめています。
+
 あわせて[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)もご覧ください。
 
 あわせて[経理BPOと人材派遣の違い5つ｜費用・契約形態を比較](/blog/keiri-bpo-haken-chigai/)もご覧ください。
@@ -123,8 +125,6 @@ faq:
 ## 経費精算BPO導入までの3ステップ
 
 経費精算BPOは、棚卸し・範囲の線引き・テスト運用の3ステップで導入すると失敗しにくくなります。
-
-選ぶときの基準は[経費精算システムとは？](/blog/keihi-seisan-system-erabikata/)でも扱っています。
 
 <figure><img src="/images/keihi-seisan-bpo/step.png" alt="経費精算BPO導入までの3ステップ: 現状の運用を棚卸しする、任せる範囲を線引きする、委託先とテスト運用する" loading="lazy"><figcaption>経費精算BPO導入までの3ステップ</figcaption></figure>
 

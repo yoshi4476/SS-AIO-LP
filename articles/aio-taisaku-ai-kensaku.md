@@ -43,13 +43,13 @@ faq:
 
 AI検索は生成AIが答える検索全般を指し、AIO対策はその回答に引用されるための最適化を意味します。
 
+近い論点を[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)で扱っています。
+
 関連する内容として[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)も公開しています。
 
 関連する内容については、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)にまとめています。
 
 関連する内容は[AIO対策でAIに引用されるには？5つの実践ポイント](/aio/aio-taisaku-ai-inyou-sareru/)でも扱っています。
-
-費用の目安を先に押さえるなら、[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)が参考になります。
 
 <div class="definition-box"><span class="term">AI検索とは</span>、Google AI OverviewやAIモード、ChatGPT検索、Perplexity、Geminiなど、生成AIが検索の場で直接回答を返す検索行動全般を指す総称です。</div>
 
@@ -184,7 +184,6 @@ AI検索対策で最も多い失敗は、プラットフォームの違いを無
 <details><summary>AI検索対策の効果はどう計測しますか？</summary><p class="faq-a">GSCの生成AIパフォーマンスレポートと、GA4のAI参照元セッションをプラットフォーム別に確認します。</p></details>
 <details><summary>中小企業でもAI検索対策は必要ですか？</summary><p class="faq-a">必要です。指名検索やCVに近いクエリほど、AI検索経由の比較検討に含まれやすくなっています。</p></details>
 </div>
-
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
 

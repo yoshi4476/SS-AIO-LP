@@ -79,6 +79,8 @@ faq:
 
 不動産SEO会社を選ぶ基準は、業界知識・YMYL理解・AIO対応・レポートの透明性・契約の柔軟性・データの引き渡しの6点に整理できます。
 
+関連する内容として[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)も公開しています。
+
 あわせて[相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](/ai-marketing/souba-kiji-tsukurikata/)もご覧ください。
 
 <figure><img src="/images/fudousan-seo-kaisha-erabikata/kijun.png" alt="不動産SEO会社を選ぶ6つの基準: 不動産業界の実務知識があるか、YMYL・ローカルSEOへの理解があるか、AIO・LLMO対応の実績があるか、レポートに透明性があるか、契約期間に柔軟性があるか、解約時にデータを引き渡すか" loading="lazy"><figcaption>不動産SEO会社を選ぶ6つの基準</figcaption></figure>
@@ -153,8 +155,6 @@ faq:
 内製と外注の判断は、専任担当者を置けるかどうかで決まります。
 
 関連する内容として[リフォームSEOとは？受注につながる5つの施策](/seo/reform-seo-taisaku/)も公開しています。
-
-近い論点を[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)で扱っています。
 
 社内にSEOの型を知る人材が1〜2名いる会社は、コンサル型の支援を受けながら内製を進める体制が費用対効果に優れています。一方、物件対応で執筆時間が取れない会社や、更新が止まって記事が資産にならない会社は、外注に切り替えたほうが早く成果につながります。
 

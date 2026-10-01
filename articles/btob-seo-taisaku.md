@@ -99,11 +99,11 @@ BtoB SEOの失敗は、内容の抽象度・更新頻度・比較情報の不足
 
 成功の土台は、KW選定・比較コンテンツ・専門コラム・E-E-A-Tの明示・商談前フォローという5つの施策の組み合わせ。
 
-あわせて[AIO SEO対策とは？](/aio/aio-seo-taisaku/)もご覧ください。
-
 あわせて[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)もご覧ください。
 
-一般キーワードでの露出が積み上がったあとは、[SaaS指名検索の増やし方｜AI時代に効く5つの施策](/aio/saas-shimei-kensaku-fuyashikata/)で指名検索を伸ばす段階に進みます。
+あわせて[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)もご覧ください。
+
+近い論点を[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)で扱っています。
 
 <figure><img src="/images/btob-seo-taisaku/steps.png" alt="BtoB SEOを成功させる5つの施策: KW選定で購買プロセス別に検索語を洗い出す、比較コンテンツを整備し導入事例・比較表を用意する、専門コラムを継続発信する、E-E-A-Tを明示し実績・監修者・数値を明記する、商談前フォローの導線を設計する" loading="lazy"><figcaption>BtoB SEOを成功させる5つの施策</figcaption></figure>
 

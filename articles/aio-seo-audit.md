@@ -49,6 +49,12 @@ faq:
 
 **AIO SEO監査とは、既存のSEO監査項目に、AI検索への引用しやすさを確認する視点を追加した点検作業です。**
 
+近い論点を[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)で扱っています。
+
+関連する内容として[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)も公開しています。
+
+あわせて[不動産SEO会社への外注は必要か？](/seo/fudousan-seo-kaisha-erabikata/)もご覧ください。
+
 前提となる考え方については、[AIO SEO対策とは？](/aio/aio-seo-taisaku/)にまとめています。
 
 <div class="definition-box"><span class="term">AIO SEO監査とは</span>、タイトル・メタ情報・表示速度といった従来のSEO監査項目に加え、AIクローラーの許可状況や構造化データ、書き出しの構造まで確認することです。</div>

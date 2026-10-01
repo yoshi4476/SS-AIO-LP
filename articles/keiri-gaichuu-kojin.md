@@ -49,6 +49,8 @@ faq:
 
 経理を個人に外注するとは、経理業務の一部を法人ではなくフリーランス個人へ直接委託することです。
 
+あわせて[経理の外注はどこまで丸投げできる？](/blog/keiri-marunage-dekiru-hani/)もご覧ください。
+
 近い論点を[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)で扱っています。
 
 実際の進め方は[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)で整理しています。
@@ -104,8 +106,6 @@ faq:
 ## 個人（フリーランス）の探し方3つの方法
 
 個人（フリーランス）の探し方は、クラウドソーシング・税理士・取引先からの紹介が中心です。
-
-費用の目安は[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)で整理しています。
 
 <figure><img src="/images/keiri-gaichuu-kojin/step.png" alt="個人への外注を始める3ステップ: クラウドソーシング等で候補を探す、業務委託契約・秘密保持契約を結ぶ、小さい業務量から依頼して様子を見る" loading="lazy"><figcaption>個人への外注を始める3ステップ</figcaption></figure>
 

@@ -143,7 +143,9 @@ Instagramにスタイル写真を投稿する習慣がある美容室は多い�
 
 美容室のMEO対策は、現状確認、基本情報整備、運用開始という3ステップで進めます。
 
-関連する内容は[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)で整理しています。
+前提となる考え方は、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)で解説しています。
+
+関連する内容は[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)でも扱っています。
 
 <figure><img src="/images/biyoushitsu-meo-taisaku/steps.png" alt="美容室のMEO対策を始める3ステップ: 現状確認で自店名と地域名で検索し表示状況を確認する、基本情報整備でNAP・カテゴリ・営業時間を統一する、運用開始で写真投稿と口コミ返信を月次で継続する" loading="lazy"><figcaption>美容室のMEO対策を始める3ステップ</figcaption></figure>
 
@@ -170,8 +172,6 @@ ChatGPTやGoogleのAI回答で店舗を紹介してもらう前提は、店舗�
 私たちも3つの自社メディアを運営し、記事からの問い合わせ導線を実際に運用しています。**直近28日間で326個の検索語からのべ2,352回表示された一方、クリックは7回でした。**表示されても選ばれなければ意味がない。ゼロクリック時代の厳しさを、自社の実測でも日々痛感しています。
 
 AIチャットでの引用対策の考え方は[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)で詳しく解説しています。口コミを増やす具体的な手順は[Googleマップの口コミを増やす方法5選と返信のコツ](/meo/kuchikomi-fuyasu-hoho/)が参考になります。
-
-新規とリピートを両立させる集客の全体像は[美容室の集客方法｜新規とリピートを両立する6つの取り組み](/ai-marketing/biyoushitsu-shukyaku-houhou/)でも解説しています。
 
 ## よくある質問
 

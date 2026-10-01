@@ -47,11 +47,11 @@ faq:
 
 **AIに引用されるとは、生成AIが回答を作る際に、特定のページを情報源として選び、内容や社名を回答文中に反映することです。**
 
+あわせて[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)もご覧ください。
+
 前提となる考え方は[税理士法人のAIO対策とは？](/aio/zeirishi-houjin-aio/)でも扱っています。
 
 費用の目安については、[AIO対策の相場は月3万〜30万円](/aio/aio-taisaku-souba/)にまとめています。
-
-つまずきやすい点を先に押さえるなら、[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)が参考になります。
 
 関連する内容は、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)で解説しています。
 
@@ -178,7 +178,6 @@ AI Overview・AIモードは通常のGooglebotのクロール結果を使うた�
 <details><summary>数値ファクトはどのくらいの数を入れればよいですか？</summary><p class="faq-a">出典と時点を明記した数値ファクトを、1記事に最低3箇所入れるのが目安です。</p></details>
 <details><summary>E-E-A-Tを整えるだけでAIに引用されますか？</summary><p class="faq-a">いいえ。E-E-A-Tは信頼性の裏付けであり、構造と独自情報がなければ引用されません。</p></details>
 </div>
-
 
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
 

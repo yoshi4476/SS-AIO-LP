@@ -43,11 +43,11 @@ diagrams:
 
 **両方に効く施策から始めるべき理由は、AI OverviewがSEOの評価をそのまま使うためです。**土台を分けて考えると、作業が二重になります。
 
+選ぶときの基準は[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)でも扱っています。
+
 関連する内容として[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)も公開しています。
 
 関連する内容として[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)も公開しています。
-
-近い論点を[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)で扱っています。
 
 実際の例は、[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)で解説しています。
 

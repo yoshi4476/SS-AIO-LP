@@ -119,6 +119,8 @@ faq:
 
 AI検索に引用されるには、結論を先に言い切り、数値と出典を明記した書き方が有効です。
 
+関連する内容として[AIO SEO監査とは？](/aio/aio-seo-audit/)も公開しています。
+
 <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=ja" target="_blank" rel="noopener">Google検索セントラルの「役立つコンテンツ」ガイド</a>も、読者の疑問に一次情報で具体的に答えることの重要性を挙げています。
 
 当社は自社サイトをAIO対策の実験場にしています。主要AIクローラー20種の許可と構造化データ・llms.txtの整備を実装したうえで、引用状況を日次で計測しています。この実装は税理士事務所のブログにもそのまま応用できます。

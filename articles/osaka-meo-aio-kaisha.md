@@ -136,7 +136,7 @@ MEO専業の会社は、Googleビジネスプロフィールの最適化や口�
 
 **依頼から成果確認までは、初回相談・設計実装・計測改善の3ステップで進みます。**順番を飛ばすと、何が効いたのか後から検証できなくなります。
 
-あわせて[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)もご覧ください。
+関連する内容として[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)も公開しています。
 
 <figure><img src="/images/osaka-meo-aio-kaisha/irai-3step.png" alt="依頼から成果確認までの3ステップを示した図" loading="lazy"><figcaption>依頼から成果確認までの3ステップ</figcaption></figure>
 

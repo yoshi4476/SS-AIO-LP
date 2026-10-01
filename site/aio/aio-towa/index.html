@@ -472,6 +472,15 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <li><strong>クロールできること</strong>: インデックス済みで、スニペット付きで表示できる状態</li>
 </ol>
 <p>店舗や中小企業にとって、1と2は「自社の現場にしか無い数字と事例」のことです。たとえば歯科医院なら「初診の問い合わせで多い質問」、工務店なら「見積もりから契約までの日数」がそれにあたります。<em>他社のページに書かれていない数字</em>ほど、AIが根拠に選ぶ理由になります。</p>
+<h3 id="google-ai-overviewaio">Google AI OverviewのAIO対策は既存ページの見直しから始める</h3>
+<p><strong>Google AI Overview向けのAIO対策は、新しい技術を足すより、既存ページを3条件に沿って見直すことです。</strong></p>
+<p>3条件を、手元のページで確かめる手順に置き換えると次のとおりです。</p>
+<ul>
+<li><strong>クロールできるか</strong>: Search ConsoleのURL検査で、インデックス済みかを確認する</li>
+<li><strong>独自の視点があるか</strong>: 冒頭に結論を置き、自社で試した結果を1つ書き添える</li>
+<li><strong>一般論に留まっていないか</strong>: 他社のページにも載っている説明を、自社の数字や事例に差し替える</li>
+</ul>
+<p>順番はクロールの確認が先です。インデックスされていないページは、内容がよくても引用の候補に入りません。llms.txtや専用スキーマの追加は、この見直しの代わりになりません。</p>
 <h2 id="aio">AIOの成果は表示回数とクリックを分けて測る</h2>
 <p><strong>AIOの成果はSearch Consoleの生成AIレポートで表示回数を、GA4でAI経由の訪問を別々に見ます。</strong></p>
 <p>生成AIパフォーマンスレポートは、2026年9月時点でAPIから取得できません。指標は表示回数だけで、クリック数は出ない仕様です。そのため、<strong>表示が増えてもクリックが増えない</strong>状態が普通に起きます。</p>
@@ -506,6 +515,11 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p class="source">出典: セブンセンシズ株式会社 自社3サイトのSearch Console実測（2026年6月23日〜9月20日）</p>
 
 <p>AIに引用されても、読者がクリックするとは限りません。<strong>社名やサービス名ごと引用される形を狙い、指名検索や問い合わせにつなげる</strong>設計が必要です。計測の手順は<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法</a>で解説しています。</p>
+<h3 id="ai-overviewsearch-consolega42">AI Overviewの計測はSearch ConsoleとGA4の2か所で見る</h3>
+<p><strong>AI Overviewの計測は、表示をSearch Console、訪問をGA4と、見る場所を分けて行います。</strong></p>
+<p>Search Consoleの生成AIパフォーマンスレポートでは、AI OverviewやAIモードでの表示回数を確認できます。APIから取れないため、画面で確認するか、CSVを書き出して記録してください。</p>
+<p>GA4では、ChatGPTやPerplexityなど他のAIから来た訪問を参照元で分けて見られます。AI Overviewからのクリックは、通常のGoogle検索の流入に含まれる点に注意してください。</p>
+<p>表示が増えたのに訪問が増えないときは、引用はされているがクリックされていない状態です。その場合は、社名やサービス名が回答の中で読まれる書き方に直してください。</p>
 <div class="cta-box"><p>自社のページがAI Overviewに引用される状態か、無料で確認しませんか。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
 <h2 id="aio_1">AIOに今取り組むべき会社・待ってよい会社</h2>

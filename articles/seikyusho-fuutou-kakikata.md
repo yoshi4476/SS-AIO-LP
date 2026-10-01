@@ -122,6 +122,8 @@ faq:
 
 発送枚数が多い会社では、封入封緘機の導入や、発送業務ごと外部へ任せる方法で負担を減らせます。
 
+あわせて[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)もご覧ください。
+
 近い論点を[請求書の作り方｜テンプレート8要素と3ステップ](/blog/seikyusho-tsukurikata/)で扱っています。
 
 当社は2023年1月から2026年8月までに、経理BPOを10社以上へ導入しており、そのうち2年以内に解約したのは1社（継続率90%）です。**請求書の発送業務は、封筒の書き方を統一するだけでも属人化を防げます。**
@@ -131,8 +133,6 @@ faq:
 発送業務を含めて経理業務全体を外部に任せる場合は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)で任せられる範囲を確認できます。請求書の三つ折りの手順は、[請求書の三つ折りのやり方｜向きを間違えない3ステップ](/blog/seikyusho-mitsuori-yarikata/)で解説しています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
-
-請求書の発行にかかる手数料相場は、[請求書発行の手数料相場｜依頼先別の料金と内訳](/blog/seikyusho-hakko-tesuryo-souba/)で解説しています。
 
 ## よくある質問
 

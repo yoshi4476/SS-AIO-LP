@@ -49,6 +49,8 @@ faq:
 
 工務店のWeb集客とは、ホームページを土台に、SEO・MEO・SNS・広告という4つの流入経路を段階的に重ねていく仕組みです。
 
+近い論点を[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)で扱っています。
+
 前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)で整理しています。
 
 選ぶときの基準を先に押さえるなら、[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)が参考になります。
@@ -68,8 +70,6 @@ faq:
 ## Web集客の5施策｜HP・SEO・MEO・SNS・広告の役割の違い
 
 5つの施策は役割が異なり、比較検討の受け皿になるのはホームページだけです。
-
-関連する内容として[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)も公開しています。
 
 <figure><img src="/images/koumuten-web-shukyaku/channels.png" alt="工務店のWeb集客 主要5施策: ホームページ、SEO対策、MEO対策、SNS(インスタ)、Web広告" loading="lazy"><figcaption>工務店のWeb集客 主要5施策</figcaption></figure>
 

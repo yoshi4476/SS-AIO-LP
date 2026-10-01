@@ -81,13 +81,13 @@ faq:
 
 *経理代行と税理士*は対応範囲が異なり、開業期は両方の役割を整理してから依頼先を決める必要があります。
 
+近い論点を[記帳代行は税理士法違反？3つの独占業務とNG事例](/blog/kichodaiko-zeirishihou-ihan/)で扱っています。
+
+近い論点を[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)で扱っています。
+
 関連する内容として[経理代行は個人事業主でも使える？](/blog/keiri-daiko-kojin-jigyonushi/)も公開しています。
 
 実際の例は[経理代行の失敗5パターン](/blog/keiri-daiko-shippai/)で整理しています。
-
-近い論点を[経理の外注はどこまで丸投げできる？](/blog/keiri-marunage-dekiru-hani/)で扱っています。
-
-選ぶときの基準は[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)で整理しています。
 
 <div class="definition-box"><span class="term">経理代行とは</span>、記帳・請求書の発行・入出金の管理・決算書の作成準備といった経理業務を、外部の専門会社に委託するサービスのことです。税理士資格が必要な申告書の作成・提出そのものは含まれません。</div>
 

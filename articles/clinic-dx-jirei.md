@@ -47,6 +47,8 @@ diagrams:
 
 **クリニックDXの事例は、受付から会計までの業務を5つの領域に分けると整理しやすくなります。**
 
+あわせて[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)もご覧ください。
+
 関連する内容として[クリニックM&A後の集患再建](/meo/clinic-ma-shukyaku-jirei/)も公開しています。
 
 関連する内容として[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)も公開しています。
@@ -134,8 +136,6 @@ diagrams:
 ## クリニックDXの事例でよくある失敗パターン3つ
 
 **DX事例の失敗の多くは、導入して終わりにする姿勢と、運用の定着不足が原因です。**
-
-実際の進め方は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)で整理しています。
 
 <figure><img src="/images/clinic-dx-jirei/ng-ok.png" alt="DX導入のNG・OKパターン比較: NGは導入して終わりにする・一部スタッフしか使えない・効果を測定しない。OKは業務フローごと見直す・全スタッフに操作を定着・月次で指標を確認" loading="lazy"><figcaption>DX導入のNG・OKパターン</figcaption></figure>
 
