@@ -39,14 +39,12 @@ COL_DATE = ("日付", "date")
 HOW = """  取り込み方（月1回・3サイトぶん。所要5分）
 
     1. Search Console を開き、対象のプロパティを選ぶ
-    2. 左メニューの「検索パフォーマンス」→ 上部のタブで「生成AI（Search）」
-    3. 期間を「先月」に合わせる
-    4. 右上の「エクスポート」→「CSV をダウンロード」→ ページ別の表を選ぶ
-    5. 落としたCSVを指定して取り込む
+    2. 左メニューの「生成AIのパフォーマンス」を開く（期間はそのままでよい）
+    3. 右上の「エクスポート」→「CSV をダウンロード」（ZIPのまま置いておく）
 
-       python scripts/genai_import.py <CSVのパス> --site ai-lab --month YYYY-MM
-       python scripts/genai_import.py <CSVのパス> --site corporate --month YYYY-MM
-       python scripts/genai_import.py <CSVのパス> --site subsidy --month YYYY-MM
+    ダウンロードフォルダは毎日自動で見ている（タスク「SS生成AIレポート取り込み」）。
+    どのサイトか・どの月かは中身から決まり、月ごとに分けて記録して git へ反映する。
+    手で取り込むなら: python scripts/genai_import.py --scan --push
 
   **APIからは取れません。** Search Console API の type は web/image/video/news/
   discover/googleNews だけで、aiOverview も aiMode もありません（2026-09時点）。
@@ -90,12 +88,134 @@ def to_int(s):
     return int(s) if s else 0
 
 
+def tables(path):
+    """CSV 1つ、または Search Console が出す ZIP（表ごとの CSV の束）を (名前, 見出し, 行) の列で返す"""
+    import zipfile
+    path = Path(path)
+    if path.suffix.lower() == ".zip":
+        out = []
+        with zipfile.ZipFile(path) as z:
+            for n in z.namelist():
+                if n.lower().endswith(".csv"):
+                    tmp = ROOT / "data" / ".genai_tmp.csv"
+                    tmp.write_bytes(z.read(n))
+                    try:
+                        out.append((n, *read_csv(tmp)))
+                    except SystemExit:
+                        pass
+                    finally:
+                        tmp.unlink(missing_ok=True)
+        return out
+    return [(path.name, *read_csv(path))]
+
+
+def detect_site(path, tabs):
+    """どのサイトのレポートか。ページのURL、なければファイル名のドメインで決める"""
+    import sites as S
+    doms = {sid: cfg["domain"].lower().replace("www.", "") for sid, cfg in S.load_all().items()}
+    seen = set()
+    for _, header, rows in tabs:
+        for r in rows[:200]:
+            for cell in r:
+                m = re.match(r"https?://(?:www\.)?([^/]+)", str(cell).strip())
+                if m:
+                    seen |= {sid for sid, d in doms.items() if d == m.group(1).lower()}
+    if not seen:
+        name = Path(path).name.lower()
+        seen = {sid for sid, d in doms.items() if d in name}
+    return seen.pop() if len(seen) == 1 else ""
+
+
+def by_month(tabs):
+    """日付の表があれば、月ごとの表示回数と、その月に何日ぶんあるか"""
+    import calendar
+    for _, header, rows in tabs:
+        low = [str(h).strip().lower().lstrip("﻿") for h in header]
+        i_d, i_i = pick(low, COL_DATE), pick(low, COL_IMP)
+        if i_d < 0 or i_i < 0:
+            continue
+        tot, days = {}, {}
+        for r in rows:
+            m = re.match(r"(\d{4})[-/](\d{1,2})[-/](\d{1,2})", str(r[i_d]).strip()) if i_d < len(r) else None
+            if not m or i_i >= len(r):
+                continue
+            ym = f"{m.group(1)}-{int(m.group(2)):02d}"
+            tot[ym] = tot.get(ym, 0) + to_int(r[i_i])
+            days[ym] = days.get(ym, 0) + 1
+        # 欠けの多い月は記録しない（期間の途中から始まる月・集計の遅れで末尾が欠ける月）。
+        # 3日までの欠けは Search Console の反映の遅れとして許す
+        full = {}
+        for ym, n in days.items():
+            y, mo = map(int, ym.split("-"))
+            if n >= calendar.monthrange(y, mo)[1] - 3:
+                full[ym] = tot[ym]
+        return full, sorted(days)
+    return None, []
+
+
+def page_table(tabs):
+    for _, header, rows in tabs:
+        low = [str(h).strip().lower().lstrip("﻿") for h in header]
+        i_p, i_i = pick(low, COL_PAGE), pick(low, COL_IMP)
+        if i_p >= 0 and i_i >= 0:
+            pages = {}
+            for r in rows:
+                if max(i_p, i_i) < len(r) and r[i_p].strip():
+                    key = re.sub(r"^https?://[^/]+", "", r[i_p].strip()).rstrip("/") + "/"
+                    pages[key] = pages.get(key, 0) + to_int(r[i_i])
+            return pages
+    return None
+
+
+def ingest(path, write=True, site="", month=""):
+    """落としたファイルを置くだけで取り込む。(取り込めたか, 説明) を返す。
+    期間を先月に合わせなくてよいよう、日付の表から月ごとに分ける。
+    日付の表が無いときだけ、従来どおりファイル全体を1か月ぶんとして扱う"""
+    tabs = tables(path)
+    if not tabs:
+        return False, f"{Path(path).name}: CSV が入っていません"
+    sid = site or detect_site(path, tabs)
+    if not sid:
+        return False, f"{Path(path).name}: どのサイトのレポートか分かりません（--site で指定してください）"
+    monthly, seen = by_month(tabs)
+    pages = page_table(tabs)
+    t = date.today()
+    last = f"{t.year if t.month > 1 else t.year - 1}-{(t.month - 1) or 12:02d}"
+    if monthly is None:
+        # 日付の表が無い: ファイル全体を1か月とみなす（期間を1か月に合わせて落とした前提）
+        if pages is None:
+            return False, f"{Path(path).name}: 表示回数の列が見つかりません"
+        monthly = {month or last: sum(pages.values())}
+        page_month = month or last
+    else:
+        if not monthly:
+            return False, (f"{Path(path).name}: 丸1か月ぶんそろった月がありません"
+                           f"（含まれる月: {', '.join(seen)}）")
+        # ページ別の表は期間全体の合計なので、期間が1か月のときだけその月に付ける
+        page_month = seen[0] if len(seen) == 1 else ""
+    if not write:
+        return True, f"{sid}: {', '.join(f'{m} {v:,}表示' for m, v in sorted(monthly.items()))}（--apply で記録）"
+    store = load()
+    for ym, v in monthly.items():
+        cur = store.setdefault(ym, {}).get(sid) or {}
+        store[ym][sid] = {"total": v,
+                          "pages": pages if (ym == page_month and pages) else cur.get("pages", {}),
+                          "imported": date.today().isoformat(), "source": Path(path).name}
+    STORE.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
+    note = "" if page_month else "（ページ別は期間が複数月のため記録せず）"
+    return True, f"{sid}: {', '.join(f'{m} {v:,}表示' for m, v in sorted(monthly.items()))} を記録{note}"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("csv", nargs="?", help="Search Console から落としたCSV")
     ap.add_argument("--site", default="", help="サイトID")
     ap.add_argument("--month", default="", help="対象月（YYYY-MM。省略で先月）")
+    ap.add_argument("--scan", action="store_true", help="ダウンロードフォルダに落ちたレポートを取り込む")
+    ap.add_argument("--push", action="store_true", help="取り込んだら git へ反映する（--scan と使う）")
     a = ap.parse_args()
+    if a.scan:
+        return scan(a.push)
 
     store = load()
     t = date.today()
@@ -125,43 +245,69 @@ def main():
             print("GENAI_OK=yes")
         return 0
 
-    if a.site not in site_ids():
+    if a.site and a.site not in site_ids():
         raise SystemExit(f"--site は {' / '.join(site_ids())} のどれかです")
-    # 取り込むのは先月ぶん（手順どおり「先月」で落とす）。今月を既定にすると、
-    # 上の未取込の検査が見る先月が永久に空いたまま「未取込」と出続ける
-    month = a.month or last
-    if not re.fullmatch(r"\d{4}-\d{2}", month):
+    if a.month and not re.fullmatch(r"\d{4}-\d{2}", a.month):
         raise SystemExit("--month は YYYY-MM で書いてください")
-
-    header, rows = read_csv(a.csv)
-    low = [str(h).strip().lower().lstrip("﻿") for h in header]
-    i_page, i_imp = pick(low, COL_PAGE), pick(low, COL_IMP)
-    if i_imp < 0:
-        raise SystemExit(f"表示回数の列が見つかりません（見出し: {header}）")
-
-    pages, total = {}, 0
-    for r in rows:
-        if i_imp >= len(r):
-            continue
-        n = to_int(r[i_imp])
-        total += n
-        if i_page >= 0 and i_page < len(r) and r[i_page].strip():
-            # URLごと鍵にする。末尾のslugだけにすると別カテゴリの同名ページが1つに潰れる（0.1節）
-            key = re.sub(r"^https?://[^/]+", "", r[i_page].strip()).rstrip("/") + "/"
-            pages[key] = pages.get(key, 0) + n
-
-    store.setdefault(month, {})[a.site] = {
-        "total": total, "pages": pages, "imported": date.today().isoformat(),
-        "source": Path(a.csv).name}
-    STORE.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
-
-    print(f"  {month} / {a.site}: {total:,}表示 を取り込みました（{len(pages)}ページ）")
-    if pages:
-        print("  表示の多いページ")
-        for k, v in sorted(pages.items(), key=lambda x: -x[1])[:5]:
-            print(f"      {v:>6,}  {k}")
+    ok, why = ingest(a.csv, True, a.site, a.month)
+    print(f"  {'○' if ok else '×'} {why}")
     print("  ※ このレポートは表示回数のみです。クリック数はGoogleが出していません")
-    print("GENAI_OK=yes")
+    print(f"GENAI_OK={'yes' if ok else 'no'}")
+    return 0
+
+
+# ダウンロードフォルダに落ちたレポートを拾う。人の作業を「ブラウザで落とす」だけにする
+DOWNLOADS = Path.home() / "Downloads"
+SEEN = ROOT / "automation" / "logs" / "genai_seen.json"
+AI_MARK = re.compile(r"生成\s*AI|AI\s*(Overview|モード|Mode|による概要)|generative|ai[-_ ]?(overview|mode)", re.I)
+
+
+def is_genai(path, tabs):
+    """生成AIのレポートか。ファイル名か、フィルタの表に印があるものだけ（他のCSVを誤って取り込まない）"""
+    if AI_MARK.search(Path(path).name):
+        return True
+    return any(AI_MARK.search(" ".join(map(str, h)) + " " + " ".join(" ".join(map(str, r)) for r in rows[:50]))
+               for n, h, rows in tabs if re.search(r"filter|フィルタ", n, re.I))
+
+
+def scan(push=False):
+    seen = json.loads(SEEN.read_text(encoding="utf-8")) if SEEN.is_file() else {}
+    cutoff = date.today().toordinal() - 60
+    got = []
+    for p in sorted(DOWNLOADS.glob("*")):
+        if p.suffix.lower() not in (".zip", ".csv") or not p.is_file():
+            continue
+        if date.fromtimestamp(p.stat().st_mtime).toordinal() < cutoff:
+            continue
+        sig = f"{p.name}|{p.stat().st_size}|{int(p.stat().st_mtime)}"
+        if sig in seen:
+            continue
+        try:
+            tabs = tables(p)
+        except Exception:
+            continue
+        if not detect_site(p, tabs):
+            continue
+        if not is_genai(p, tabs):
+            # 自サイトのURLを含むが生成AIの印が無い。形式が想定と違う可能性があるので名前だけ出す
+            print(f"  － 見送り（生成AIのレポートと確認できない）: {p.name}")
+            continue
+        ok, why = ingest(p)
+        print(f"  {'○' if ok else '×'} {why}")
+        seen[sig] = date.today().isoformat()
+        got.append(ok)
+    SEEN.parent.mkdir(parents=True, exist_ok=True)
+    SEEN.write_text(json.dumps(seen, ensure_ascii=False, indent=1), encoding="utf-8")
+    if not got:
+        print("  新しいレポートはありません")
+    if push and any(got):
+        import subprocess
+        run = lambda *c: subprocess.run(c, cwd=ROOT, capture_output=True, text=True)
+        run("git", "add", str(STORE.relative_to(ROOT)))
+        run("git", "commit", "-m", "生成AIレポートを取り込む（ダウンロードから自動）")
+        run("git", "pull", "--rebase", "--autostash")
+        r = run("git", "push")
+        print("  反映しました" if r.returncode == 0 else f"  反映できませんでした: {r.stderr[:120]}")
     return 0
 
 
