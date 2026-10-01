@@ -126,13 +126,20 @@ def ask_perplexity(q):
     key = _env("PERPLEXITY_API_KEY")
     if not key:
         return None
-    d = _post("https://api.perplexity.ai/chat/completions",
-              {"model": "sonar", "messages": [{"role": "user", "content": q}]},
+    # 2026-10 に旧 /chat/completions（sonar）は 403 になり、Agent API の /v1/responses へ移った。
+    # 出典は output の search_results に入る
+    d = _post("https://api.perplexity.ai/v1/responses",
+              {"preset": "fast", "input": q},
               {"Authorization": f"Bearer {key}"})
-    urls = list(d.get("citations") or [])
-    for s in d.get("search_results") or []:
-        if s.get("url"):
-            urls.append(s["url"])
+    urls = []
+    for o in d.get("output") or []:
+        for s in o.get("results") or []:
+            if s.get("url"):
+                urls.append(s["url"])
+        for c in o.get("content") or []:
+            for an in c.get("annotations") or []:
+                if an.get("url"):
+                    urls.append(an["url"])
     return urls
 
 
