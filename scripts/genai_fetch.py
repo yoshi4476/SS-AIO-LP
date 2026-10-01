@@ -34,12 +34,12 @@ def last_month():
 
 def browser(p, headless):
     PROFILE.mkdir(parents=True, exist_ok=True)
-    kw = dict(user_data_dir=str(PROFILE), headless=headless, accept_downloads=True,
+    OUT.mkdir(parents=True, exist_ok=True)
+    kw = dict(user_data_dir=str(PROFILE), headless=headless, accept_downloads=True, downloads_path=str(OUT),
               locale="ja-JP", args=["--disable-blink-features=AutomationControlled"])
-    try:
-        return p.chromium.launch_persistent_context(channel="chrome", **kw)
-    except Exception:
-        return p.chromium.launch_persistent_context(**kw)
+    # Chrome 本体（channel="chrome"）は 154 でダウンロードの完了直前に落ちた（2026-10-01）。
+    # Playwright 同梱の Chromium なら同じプロファイルのまま最後まで保存できる
+    return p.chromium.launch_persistent_context(**kw)
 
 
 def logged_in(page):
@@ -128,6 +128,7 @@ def main():
     ap.add_argument("--explore", action="store_true")
     ap.add_argument("--no-push", action="store_true")
     ap.add_argument("--headed", action="store_true", help="画面を出して動かす（調べ用）")
+    ap.add_argument("--month", default="", help="先月以外の月を取る（YYYY-MM。過去分の取り直し用）")
     a = ap.parse_args()
     if a.login:
         return login()
@@ -138,6 +139,9 @@ def main():
     import genai_import as G
     from playwright.sync_api import sync_playwright
     start, end = last_month()
+    if a.month:
+        start = date(int(a.month[:4]), int(a.month[5:7]), 1)
+        end = (start.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
     print(f"■ 生成AIレポートの取得 {start}〜{end}")
     # タスクは毎日動く。先月ぶんがそろっているサイトは開かない（そろうまで毎日やり直す形）
     have = G.load().get(f"{start:%Y-%m}", {})
