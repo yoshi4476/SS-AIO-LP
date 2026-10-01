@@ -8,6 +8,11 @@ on:
     - cron: "0 0 1 * *"     # 1日: 先月分の確定版＋在庫の組み直し＋改善の実行
     - cron: "0 0 15 * *"    # 15日: 当月の途中経過版だけ（遅れに2週間早く気づく）
   workflow_dispatch:
+    inputs:
+      resend_sites:
+        description: "各社のレポートだけ作り直して送る（グループ版・在庫・引用の実測・改善の実行はしない）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write  # 目標値（reports/targets.json）を保存するため
@@ -103,7 +108,7 @@ jobs:
 
       # 3サイトを1枚で見渡す経営向けのレポート。単体版とは役割が違うため別送する
       - name: グループ月次レポート生成・メール送付
-        if: steps.gate.outputs.ready == 'true'
+        if: steps.gate.outputs.ready == 'true' && !inputs.resend_sites
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -132,7 +137,7 @@ jobs:
       # ラッコの利用記録と応答の控えを、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）。
       # 持ち越さないと月の上限（1,000）が1回分しか数えられず、30日キャッシュも効かずに毎回課金される
       - name: ラッコの控えを戻す
-        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         uses: actions/cache/restore@v4
         with:
           path: |
@@ -143,7 +148,7 @@ jobs:
           restore-keys: rakko-
 
       - name: 対策キーワードの在庫を組み直す（必要なサイトだけ）
-        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         env:
           RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
           HUB_URL: ${{ secrets.HUB_URL }}
@@ -167,7 +172,7 @@ jobs:
           fi
 
       - name: ラッコの控えを残す
-        if: always() && steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        if: always() && steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         uses: actions/cache/save@v4
         with:
           path: |
@@ -179,7 +184,7 @@ jobs:
       # AI検索に本当に引用されているかを実測する（キーがあるエンジンだけ。無ければ飛ばす）。
       # 1サイト20語・月1回。試行錯誤で本番を叩かない
       - name: AI引用の実測
-        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -200,7 +205,7 @@ jobs:
       # 人にしかできない項目（計測の権限・LPの文言）だけをメールで知らせる
       # 3倍計画の道筋と先月の実績を突き合わせる。遅れは「要対応」として通知に載る
       - name: 3倍計画の進み
-        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         run: |
           mkdir -p automation/logs
           out=$(python scripts/growth_plan.py --check 2>&1) || true
@@ -209,7 +214,7 @@ jobs:
           echo "$out" | grep -q '^要対応' && echo "::warning::3倍計画から遅れています（通知に載せます）" || true
 
       - name: レポートの改善点を実行し、残りを人へ知らせる
-        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false'
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           HUB_URL: ${{ secrets.HUB_URL }}
