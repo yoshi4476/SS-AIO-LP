@@ -73,5 +73,26 @@
       "title": "AIOチェッカーで満点なら引用される？",
       "youtube": "nO0PtQZI_vI"
     }
+  },
+  "seikyusho-template-muryou": {
+    "site": "corporate",
+    "date": "2026-10-01",
+    "sec": 314,
+    "mp4": "automation/video/seikyusho-template-muryou.mp4",
+    "nums": [
+      "1",
+      "2026",
+      "4",
+      "6",
+      "9"
+    ],
+    "format": "duo",
+    "youtube": "1fr21n1Ngjk",
+    "short": {
+      "date": "2026-10-01",
+      "sec": 48,
+      "title": "無料の請求書テンプレ、そのまま使える？",
+      "youtube": "tDXNsAGfeYE"
+    }
   }
 }
