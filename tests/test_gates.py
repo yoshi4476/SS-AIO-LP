@@ -2205,6 +2205,28 @@ def test_site_audit_has_no_critical_or_warning():
     check("原稿に git の衝突マーカーが無い", conf, [])
 
 
+def test_monthly_cap_check_exit_code():
+    """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
+
+    main() の戻り値を捨てていたため常に 0（＝上限）を返し、2026-09-28〜10-03 は
+    CAP_LEFT=60 なのに全サイトで記事が1本も書かれなかった。印と終了コードが合うことを見る。
+    """
+    print(chr(10) + "■ 月の上限の判定")
+    for sid in ("ai-lab", "subsidy"):
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / "daily_audit.py"), "--cap-reached", sid],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace")
+        m = re.search(r"CAP_LEFT=(-?\d+)", r.stdout)
+        left = int(m.group(1)) if m else None
+        check(f"{sid}: 残り本数を出す", left is not None, True)
+        if left is not None:
+            check(f"{sid}: 終了コードが残り本数と合う（残り{left}本）", r.returncode, 0 if left <= 0 else 1)
+    r = subprocess.run([sys.executable, "-c",
+                        "import sys; sys.path.insert(0, 'scripts'); import daily_audit as D; D.MONTHLY_CAP = 0; "
+                        "sys.argv = ['x', '--cap-reached', 'ai-lab']; sys.exit(D.main())"],
+                       cwd=str(ROOT), capture_output=True, text=True)
+    check("上限に達したら 0 を返す", r.returncode, 0)
+
+
 def test_free_tools_live_under_one_roof():
     """無料ツールは /tools/ の下にそろい、どのツールからも一覧と他のツールへ行けること。
 
@@ -3360,6 +3382,7 @@ def main():
               test_data_intake_publishes_only_grounded_numbers,
               test_site_has_two_axes_and_no_orphans,
               test_free_tools_live_under_one_roof,
+              test_monthly_cap_check_exit_code,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,
