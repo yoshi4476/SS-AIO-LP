@@ -148,8 +148,12 @@ def research_link(ind):
 
 def lp_index():
     import industry_lp as IL
-    links = "／".join(f'<a href="/lp/{k}/" data-cta="industry_index_lp_{k}">{c["name"]}</a>' for k, c in IL.LPS.items())
-    return f'<p class="hub-note">業種別のサービス案内: {links}（そのほかの業種にも対応しています）</p>'
+    # 文字のリンクでは目立たず見つけにくかった（2026-10-02 ユーザー指摘）。ボタンにする
+    links = "".join(f'<a class="btn {"btn-primary" if i == 0 else "btn-ghost"}" href="/lp/{k}/" '
+                    f'data-cta="industry_index_lp_{k}">{c["name"]}のSEO・AI検索対策</a>'
+                    for i, (k, c) in enumerate(IL.LPS.items()))
+    return ('<div class="btn-row" style="gap:.7rem;flex-wrap:wrap;margin:1rem 0 .4rem;">' + links + '</div>'
+            '<p class="hub-note">そのほかの業種にも対応しています。</p>')
 
 
 def tool_link(ind):

@@ -249,3 +249,8 @@
 }
 .lx-bench { margin: .8rem 0 0; font-size: .86rem; font-weight: 700; color: var(--lx-navy); }
 .lx-bench:empty { display: none; }
+
+/* 業種別LPへの案内（トップ・LPの最初の画面）。2026-10-02 */
+.lx-ind{margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;font-size:.85rem;color:rgba(255,255,255,.82)}
+.lx-ind a{display:inline-flex;align-items:center;min-height:40px;padding:.4em 1.05em;border:1.5px solid rgba(255,255,255,.6);border-radius:999px;color:#fff;font-weight:700;text-decoration:none}
+.lx-ind a:hover,.lx-ind a:focus-visible{background:rgba(255,255,255,.14)}
