@@ -127,6 +127,22 @@ def faq_body(ind, metas, url_of, limit=60):
 TOOL_IND = {"clinic": "clinic", "shika": "dental", "seikotsuin": "seikotsu", "inshokuten": "food", "biyou": "beauty"}
 
 
+def lp_link(ind):
+    """業種別の LP への案内（医療・不動産・工務店）。まとめページから相談の入口へ飛べるようにする"""
+    import industry_lp as IL
+    k = IL.BY_HUB.get(ind.get("slug", ""))
+    if not k:
+        return ""
+    return (f'<p class="hub-note"><a class="btn btn-primary" href="/lp/{k}/" data-cta="hub_lp_{k}">'
+            f'{IL.LPS[k]["name"]}のSEO・AI検索対策（無料診断つき）</a></p>')
+
+
+def lp_index():
+    import industry_lp as IL
+    links = "／".join(f'<a href="/lp/{k}/" data-cta="industry_index_lp_{k}">{c["name"]}</a>' for k, c in IL.LPS.items())
+    return f'<p class="hub-note">業種別のサービス案内: {links}（そのほかの業種にも対応しています）</p>'
+
+
 def tool_link(ind):
     t = TOOL_IND.get(ind.get("slug", ""))
     if not t:
@@ -153,7 +169,7 @@ def hub_body(ind, metas, categories, post_tile):
     blocks = [f'<div class="latest-block" data-cat="new">'
               f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の記事</h2>'
               f'<span class="cnt">全{len(metas)}本</span></div>'
-              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}{tool_link(ind)}</div>']
+              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}{lp_link(ind)}{tool_link(ind)}</div>']
     for cat, (name, cls) in categories.items():
         part = [m for m in metas if m["category"] == cat]
         if not part:
@@ -184,9 +200,10 @@ def index_body(pairs, g):
                 f'いま準備中: {names}</p>')
     return ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>業種から探す</h2>'
             f'<span class="cnt">{len(pairs)}業種</span></div>'
-            '<p class="hub-lead">手法（AIO・SEO・MEO）ではなく、業種から探せる入口です。'
+            '<p class="hub-lead">手法（SEO・AIO・LLMO）ではなく、業種から探せる入口です。'
             '同じ業種の記事を、手法をまたいでまとめています。</p>'
-            f'<ul class="hub-list">{lis}</ul>{more}</div>')
+            + lp_index()
+            + f'<ul class="hub-list">{lis}</ul>{more}</div>')
 
 
 def main():

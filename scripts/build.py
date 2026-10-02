@@ -465,6 +465,28 @@ def insert_mid_cta(content, meta):
     return content[:pos] + scan_box(meta, "mid") + "\n" + content[pos:]
 
 
+def _hub_slug(meta):
+    try:
+        import industry_hub
+        return industry_hub.detect(meta.get("title", ""), meta.get("keyword", ""), industry_hub.load()[0]) or ""
+    except Exception:
+        return ""
+
+
+def lp_url(meta):
+    """記事の申し込みボタンの行き先。医療・不動産・工務店の記事はその業種の LP へ、ほかは全業種の LP へ"""
+    import industry_lp
+    return industry_lp.url_for(_hub_slug(meta))
+
+
+def lp_label(meta):
+    import industry_lp
+    k = industry_lp.BY_HUB.get(_hub_slug(meta))
+    if k:
+        return f'{industry_lp.LPS[k]["name"]}のSEO・AI検索対策を見る'
+    return "SEO・AIO・LLMO集客支援の詳細を見る"
+
+
 # 記事の業種 → 口コミ返信ツールの業種（選んだ状態で開く）
 TOOL_IND = {"clinic": "clinic", "shika": "dental", "seikotsuin": "seikotsu", "inshokuten": "food", "biyou": "beauty"}
 
@@ -826,6 +848,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
         "{{CONTENT}}": insert_mid_cta(insert_tool_box(_video_embed(content, meta), meta), meta),
+        "{{LP_URL}}": lp_url(meta),
+        "{{LP_LABEL}}": lp_label(meta),
         "{{RELATED}}": related,
         "{{DIAG_BANNER}}": diag_banner_html(meta),
         "{{PREVNEXT}}": prevnext,
@@ -1161,6 +1185,9 @@ def build_sitemap(article_entries):
             lines.append(f"  <url><loc>{SITE_URL}/industry/{d.parent.name}/faq/</loc><lastmod>{today}</lastmod></url>")
     if (SITE / "industry" / "index.html").is_file():
         lines.append(f"  <url><loc>{SITE_URL}/industry/</loc><lastmod>{today}</lastmod></url>")
+    # 業種別の LP（industry_lp.py が作る）
+    for d in sorted((SITE / "lp").glob("*/index.html")):
+        lines.append(f"  <url><loc>{SITE_URL}/lp/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
     # 用語集・比較表（build_extra_pages が作る）
     for top in ("glossary", "compare", "topics", "area"):
         if (SITE / top / "index.html").is_file():
@@ -1296,7 +1323,7 @@ def page_shell(h1="記事一覧", desc=""):
         desc = (desc.rstrip("。") + "。" if desc else "") + \
             f"{SITE_NAME}（セブンセンシズ株式会社）が、集客支援の現場で確かめた内容をもとにまとめています。"
     # 題は種類ごとに補う。一律の付け足しは「記事一覧｜記事と実例のまとめ」のように不自然になった
-    title = {"記事一覧": "記事一覧｜AIO・SEO・MEOの実践記事",
+    title = {"記事一覧": "記事一覧｜SEO・AIO・LLMOの実践記事",
              "用語集": "用語集｜AI検索と集客の用語をわかりやすく解説",
              "業種から探す": "業種から探す｜クリニック・工務店・士業などの集客",
              "比較表から探す": "比較表から探す｜料金・違い・選び方の一覧",
@@ -1306,7 +1333,7 @@ def page_shell(h1="記事一覧", desc=""):
     elif title.endswith("とは"):
         title += "？意味と要点をわかりやすく解説"
     elif title.endswith("の集客"):
-        title += "｜MEO・AIO・SEOの記事と実例"
+        title += "｜SEO・AIO・LLMOの記事と実例"
     elif title.endswith("の記事"):
         title += "まとめ｜集客の手順と実例"
     return dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
@@ -1340,6 +1367,38 @@ def hub_json_ld(name, url, metas, desc=""):
             + "</script>")
 
 
+def build_industry_lps(IH, pairs, g):
+    """業種別の LP（/lp/medical/ など）。記事一覧とよくある質問は、その業種の公開済み記事から毎回集める"""
+    import industry_lp as IL
+    live = {i["slug"]: i["name"] for i, _ in pairs}
+    for key, c in IL.LPS.items():
+        # LP は SEO・AI検索対策の案内。AIO・SEO の記事を先に並べる（建築事例・開業準備などの記事が先に出ていた）
+        metas = sorted((m for s in c["slugs"] for m in g.get(s, [])),
+                       key=lambda m: (m.get("category") in ("aio", "seo"), str(m.get("date", ""))), reverse=True)
+        c["hub_names"] = [(s, live[s]) for s in c["slugs"] if s in live]
+        # 1記事から1問ずつ（新しい記事の質問が並ぶと、医療の LP で整骨院の質問ばかりになった）
+        faq, seen = [], set()
+        for q, a, m in IH.faq_pairs(metas):
+            if m["slug"] not in seen:
+                seen.add(m["slug"])
+                faq.append((q, a, f"/{m['category']}/{m['slug']}/"))
+        # 集客・検索の質問を先に（患者向けの「費用は保険で全額か」などが混ざっていた）
+        faq.sort(key=lambda x: not re.search(r"AIO|SEO|LLMO|AI検索|AI|検索|集客|ホームページ|サイト|ポータル", x[0]))
+        out = SITE / "lp" / key / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        page = BLOG_PAGE.format(items=IL.body(key, metas, faq, post_tile, SITE_URL),
+                                **page_shell(c["h1"], c["desc"]))
+        page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/lp/{key}/")
+        # 外枠は記事一覧のもの。LP では一覧用の見出し・説明・検索欄・カテゴリの絞り込みを外す
+        # （絞り込みに「MEO運用」が出ていた。LP の説明は外枠の説明欄に置く）
+        page = page.replace('<span class="kicker">All Articles</span>', '<span class="kicker">Service</span>', 1)
+        page = re.sub(r'(<section class="hero">.*?<p class="lead">).*?(</p>)',
+                      lambda m: m.group(1) + _html_escape(c["desc"]) + m.group(2), page, count=1, flags=re.S)
+        page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+        page = page.replace("</head>", IL.json_ld(key, faq, SITE_URL, organization()) + "</head>", 1)
+        out.write_text(page, encoding="utf-8", newline="\n")
+
+
 def build_industry_hubs(all_metas):
     """業種ハブ（/industry/ と /industry/<slug>/）。記事が増えるほど厚くなる"""
     try:
@@ -1348,6 +1407,7 @@ def build_industry_hubs(all_metas):
         print(f"WARN: 業種ハブを作れません（{str(e)[:50]}）")
         return []
     pairs, g = IH.live(all_metas)
+    build_industry_lps(IH, pairs, g)
     made = []
     for ind, metas in pairs:
         out = SITE / "industry" / ind["slug"] / "index.html"
@@ -1379,12 +1439,12 @@ def build_industry_hubs(all_metas):
         out = SITE / "industry" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         page = BLOG_PAGE.format(items=IH.index_body(pairs, g), **page_shell(
-            "業種から探す", "業種ごとに、集客・MEO・AIO・SEOの記事をまとめています。"))
+            "業種から探す", "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。"))
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")
         flat = [m for _, ms in pairs for m in ms]
         page = page.replace("</head>", hub_json_ld(
             "業種から探す", f"{SITE_URL}/industry/", flat,
-            "業種ごとに、集客・MEO・AIO・SEOの記事をまとめています。") + "</head>", 1)
+            "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。") + "</head>", 1)
         out.write_text(page, encoding="utf-8", newline="\n")
     # llms.txt に業種の目次を出す。AIクローラーはここを読んで全体像を掴む
     lt = SITE / "llms.txt"
