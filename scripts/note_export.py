@@ -108,9 +108,14 @@ def write_long(art, url, md):
     why = []
     for _ in range(3):
         p = prompt if not why else prompt + "\n\n前回の原稿は次の理由で使えませんでした。直して書き直してください:\n- " + "\n- ".join(why)
-        with tempfile.TemporaryDirectory() as tmp:
-            r = subprocess.run([exe, "-p", *AR.model_args()], input=p, cwd=tmp,
-                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
+        # 1本の時間切れで全体を止めない（2026-10-02 に50本目の後で止まった）
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                r = subprocess.run([exe, "-p", *AR.model_args()], input=p, cwd=tmp,
+                                   capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
+        except subprocess.TimeoutExpired:
+            why = ["claude が10分で応答しませんでした"]
+            continue
         text = (r.stdout or "").strip()
         why = check(text, art, plain, url)
         if not why:
