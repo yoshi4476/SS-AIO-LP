@@ -1,0 +1,2827 @@
+{
+ "industry": "clinic",
+ "date": "2026-10-02",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "items": [
+  {
+   "q": "大阪 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "noriclinic.net",
+     "clinic",
+     2
+    ],
+    [
+     "doctorsfile.jp",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "koujimachi-naika.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "byoinnavi.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3,
+    "other": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "doctorsfile.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 2,
+    "clinic": 1,
+    "media": 1,
+    "other": 1,
+    "portal": 3,
+    "public": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "google.com",
+     "review",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "横浜 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "tokui-clinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "ykhm-cl.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "byoinnavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "public": 1,
+    "portal": 3,
+    "other": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "nobusawa-naika.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "仙台 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "google.com",
+     "review",
+     1
+    ],
+    [
+     "creaclinic.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "広島 内科 クリニック おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 2,
+    "clinic": 1,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "doctorsfile.jp",
+     "portal",
+     2
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "大阪 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "homemate-research.com",
+     "portal",
+     3
+    ],
+    [
+     "fdoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3,
+    "public": 1,
+    "media": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "tokyo-doctors.com",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "homemate-research.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "nagi-clinic.jp",
+     "clinic",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "other": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "rparksideclinic.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "札幌 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "clinic.mynavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "fdoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "yubt.net",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "kawai-clinic.net",
+     "clinic",
+     1
+    ],
+    [
+     "clinique-kyoto.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "神戸 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "fdoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "homemate-research.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "仙台 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "byoinnavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "広島 皮膚科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "google.com",
+     "review",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "健康診断 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "portal": 4,
+    "clinic": 3,
+    "public": 2,
+    "maker": 1,
+    "media": 2
+   },
+   "top": [
+    [
+     "sakurajyuji-healthcare.jp",
+     "clinic",
+     3
+    ],
+    [
+     "mrso.jp",
+     "portal",
+     3
+    ],
+    [
+     "hss.wellcoms.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "人間ドック 費用 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "maker": 2,
+    "public": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "mrso.jp",
+     "portal",
+     3
+    ],
+    [
+     "sakurajyuji-healthcare.jp",
+     "clinic",
+     3
+    ],
+    [
+     "taiyo-seimei.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "シミ取り 美容皮膚科 費用 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "kenbishin.net",
+     "clinic",
+     3
+    ],
+    [
+     "hoya-hifuka.com",
+     "clinic",
+     2
+    ],
+    [
+     "sk-clinic.net",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ピル 処方 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 1,
+    "media": 3,
+    "portal": 2
+   },
+   "top": [
+    [
+     "shiroko-clinic.com",
+     "clinic",
+     3
+    ],
+    [
+     "gyn-md.jp",
+     "clinic",
+     3
+    ],
+    [
+     "matono-womens.com",
+     "clinic",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "AGA 治療 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "portal": 3,
+    "clinic": 3,
+    "other": 1,
+    "media": 2
+   },
+   "top": [
+    [
+     "gincli.jp",
+     "clinic",
+     3
+    ],
+    [
+     "hiro-clinic.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "hanafusa-hifuka-beauty.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "インフルエンザ 予防接種 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "public": 2,
+    "clinic": 3,
+    "media": 3,
+    "portal": 3,
+    "maker": 2
+   },
+   "top": [
+    [
+     "fastdoctor.jp",
+     "portal",
+     3
+    ],
+    [
+     "oki.or.jp",
+     "clinic",
+     3
+    ],
+    [
+     "ubie.app",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "胃カメラ 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 2
+   },
+   "top": [
+    [
+     "osaka-endoscopy.jp",
+     "clinic",
+     3
+    ],
+    [
+     "aiplusclinic-tamaplaza.com",
+     "clinic",
+     2
+    ],
+    [
+     "tomihisa-clinic.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "大腸カメラ 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "kagami-clinic.jp",
+     "clinic",
+     4
+    ],
+    [
+     "maeda-cl.net",
+     "clinic",
+     2
+    ],
+    [
+     "onaka-oshiri.clinic",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "睡眠時無呼吸 検査 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "public": 1,
+    "portal": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "naishikyo.or.jp",
+     "clinic",
+     4
+    ],
+    [
+     "morishitaekimae.com",
+     "clinic",
+     2
+    ],
+    [
+     "ys-med.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "禁煙外来 費用 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 3,
+    "media": 2
+   },
+   "top": [
+    [
+     "solairo-clinic.com",
+     "clinic",
+     3
+    ],
+    [
+     "soujinkai.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kuroyanagi-iida.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ニキビ 治療 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "ic-clinic-ueno.com",
+     "clinic",
+     3
+    ],
+    [
+     "k-mesen.jp",
+     "clinic",
+     2
+    ],
+    [
+     "acne.ic-clinic-ueno.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "シミ取り 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 1,
+    "media": 2,
+    "other": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "kenbishin.net",
+     "clinic",
+     3
+    ],
+    [
+     "beauty-clinic.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "veriteclinic.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "胃カメラ 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "ningyocho-naishikyo-media.jp",
+     "clinic",
+     2
+    ],
+    [
+     "tenpakubashi-endoscope.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "wakoshi-naika.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "花粉症 注射 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "nagatomo-ent.jp",
+     "clinic",
+     3
+    ],
+    [
+     "shiozaki-naika.jp",
+     "clinic",
+     3
+    ],
+    [
+     "ys-med.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ED 治療 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 3,
+    "other": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "fit.clinic",
+     "clinic",
+     4
+    ],
+    [
+     "todokusuri.com",
+     "portal",
+     3
+    ],
+    [
+     "menshealth.d-clinicgroup.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "AGA 治療 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 3,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "hiro-clinic.or.jp",
+     "clinic",
+     3
+    ],
+    [
+     "clinicfor.life",
+     "clinic",
+     3
+    ],
+    [
+     "gmc.kumamoto.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "漢方 処方 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "media": 2,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "clinicfor.life",
+     "clinic",
+     3
+    ],
+    [
+     "online.konoka-clinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "toshinkai-portal.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "睡眠外来 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 3,
+    "portal": 2,
+    "public": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "anamne.com",
+     "media",
+     3
+    ],
+    [
+     "k-mesen.jp",
+     "clinic",
+     3
+    ],
+    [
+     "banno-clinic.biz",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "禁煙外来 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 3,
+    "video": 1,
+    "other": 2
+   },
+   "top": [
+    [
+     "e-kinen.jp",
+     "other",
+     2
+    ],
+    [
+     "ys-med.com",
+     "clinic",
+     2
+    ],
+    [
+     "kunichika-naika.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ピル 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "ladies-clinic-harajuku.com",
+     "clinic",
+     2
+    ],
+    [
+     "shiroko-clinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "zoey.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "内科 選び方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1,
+    "public": 1,
+    "media": 2,
+    "other": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "takasuna-naika.com",
+     "clinic",
+     2
+    ],
+    [
+     "b-leaf-clinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "morishima-clinic.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "かかりつけ医 選び方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "media": 2,
+    "other": 1,
+    "maker": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "kyoukaikenpo.or.jp",
+     "public",
+     2
+    ],
+    [
+     "kakarikata.mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "vertexaisearch.cloud.google.com",
+     "other",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "皮膚科 美容皮膚科 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "tcbskin.clinic",
+     "clinic",
+     2
+    ],
+    [
+     "mymeii.jp",
+     "clinic",
+     2
+    ],
+    [
+     "wclinic-osaka.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "胃カメラ 鎮静 クリニック 選び方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "public": 2
+   },
+   "top": [
+    [
+     "kanazawa-naisikyou.com",
+     "clinic",
+     3
+    ],
+    [
+     "naishikyo.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "tsurumi-naishikyo.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "オンライン診療 デメリット",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "nicoms.nicho.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "digikar.m3.com",
+     "media",
+     2
+    ],
+    [
+     "kameda.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "発熱外来 探し方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "media": 2,
+    "portal": 1,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "carenet.com",
+     "media",
+     1
+    ],
+    [
+     "city.sapporo.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "心療内科 精神科 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 1,
+    "media": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "luna-tokyo.clinic",
+     "clinic",
+     2
+    ],
+    [
+     "koshigaya-mentalclinic.jp",
+     "clinic",
+     2
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "クリニック 病院 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 1,
+    "portal": 2,
+    "maker": 2,
+    "media": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "mrso.jp",
+     "portal",
+     2
+    ],
+    [
+     "phchd.com",
+     "maker",
+     2
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "専門医 探し方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "clinic": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "joa.or.jp",
+     "public",
+     3
+    ],
+    [
+     "jspn.or.jp",
+     "public",
+     2
+    ],
+    [
+     "hospita.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "小児科 選び方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "public": 3,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "caps-clinic.jp",
+     "clinic",
+     3
+    ],
+    [
+     "child-clinic.or.jp",
+     "public",
+     3
+    ],
+    [
+     "nisisyounika.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "婦人科 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 1,
+    "media": 2,
+    "other": 1,
+    "portal": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "sofy.jp",
+     "maker",
+     2
+    ],
+    [
+     "hiro-clinic.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "coyoli.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "耳鼻科 子供 選び方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 1,
+    "video": 1,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "nishiogi-ent.com",
+     "clinic",
+     2
+    ],
+    [
+     "nagatomo-ent.jp",
+     "clinic",
+     2
+    ],
+    [
+     "umeoka-cl.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "整形外科 整骨院 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "public": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "shin-kokura.kkr.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "med-pro.jp",
+     "portal",
+     1
+    ],
+    [
+     "joa.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "眼科 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "other": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "nishiyaumenokieye.com",
+     "clinic",
+     2
+    ],
+    [
+     "mirueru.qlife.jp",
+     "portal",
+     2
+    ],
+    [
+     "eye-care-lab.com",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "人間ドック 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "public": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "mrso.jp",
+     "portal",
+     2
+    ],
+    [
+     "docknet.jp",
+     "portal",
+     2
+    ],
+    [
+     "nidc.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "発熱 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "ubie.app",
+     "media",
+     2
+    ],
+    [
+     "yakushido-k-clinic.com",
+     "clinic",
+     1
+    ],
+    [
+     "minato-family-clinic.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "頭痛 続く 何科",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 1,
+    "public": 1,
+    "media": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "yutoku-cl.jp",
+     "clinic",
+     3
+    ],
+    [
+     "hayashi-cl.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "leo-aoi.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "腹痛 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "other": 1,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "register.cgmh.org.tw",
+     "clinic",
+     1
+    ],
+    [
+     "saiseikai.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "tcpa.taiwan-pharma.org.tw",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "めまい 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "public": 1,
+    "media": 2,
+    "portal": 1,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "kamatanishiguchi-cli.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kompas.hosp.keio.ac.jp",
+     "public",
+     1
+    ],
+    [
+     "clinic-yasuda.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "動悸 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "doukinavi.jp",
+     "media",
+     2
+    ],
+    [
+     "healthcare.omron.co.jp",
+     "maker",
+     1
+    ],
+    [
+     "donoka.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "咳 止まらない 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 2,
+    "media": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "sokuyaku.jp",
+     "maker",
+     2
+    ],
+    [
+     "kamimutsukawa.com",
+     "clinic",
+     2
+    ],
+    [
+     "your-doctor.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "湿疹 かゆい 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "namikibashi.clinic",
+     "clinic",
+     2
+    ],
+    [
+     "hiro-clinic.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "hosp.asahi-u.ac.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "腰痛 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 1,
+    "wiki": 1,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "oogaki.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ubie.app",
+     "media",
+     2
+    ],
+    [
+     "clinic.adachikeiyu.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "不眠 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "fastdoctor.jp",
+     "portal",
+     2
+    ],
+    [
+     "ashitano.clinic",
+     "clinic",
+     2
+    ],
+    [
+     "mdf.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "胃もたれ 続く",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "osaka-endoscopy.jp",
+     "clinic",
+     2
+    ],
+    [
+     "fukitaclinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "wakoshi-naika.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "花粉症 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 2,
+    "wiki": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "brand.taisho.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "city.hachioji.tokyo.jp",
+     "public",
+     2
+    ],
+    [
+     "uchikara-clinic.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ニキビ 皮膚科 行くべき",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "media": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "takamiclinic.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "oogaki.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "じんましん 原因",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "public": 2,
+    "video": 1,
+    "clinic": 3,
+    "media": 1,
+    "portal": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "jsaweb.jp",
+     "public",
+     2
+    ],
+    [
+     "halujujo.clinic",
+     "clinic",
+     1
+    ],
+    [
+     "sokuyaku.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "喉の痛み 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "sokuyaku.jp",
+     "maker",
+     2
+    ],
+    [
+     "hibiyakawabata.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "cocoromi-cl.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "血圧 高い 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "gmc.kumamoto.jp",
+     "clinic",
+     2
+    ],
+    [
+     "e-medicaljapan.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "k-mesen.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "肩こり 頭痛 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "mcsg.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "ssp.co.jp",
+     "maker",
+     1
+    ],
+    [
+     "sbc-seikeigeka.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "目のかゆみ 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "public": 2,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "ic-clinic-ueno.com",
+     "clinic",
+     2
+    ],
+    [
+     "byoinnavi.jp",
+     "portal",
+     1
+    ],
+    [
+     "brand.taisho.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "膀胱炎 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 1,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "sokuyaku.jp",
+     "maker",
+     2
+    ],
+    [
+     "shinjyuku-ekimae-clinic.info",
+     "clinic",
+     2
+    ],
+    [
+     "ubie.app",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "生理痛 ひどい 何科",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "ubie.app",
+     "media",
+     2
+    ],
+    [
+     "smaluna.com",
+     "portal",
+     2
+    ],
+    [
+     "matsushita-cl.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "子供 発熱 受診 目安",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 2,
+    "maker": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "cocoromi-cl.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ebisukodomo.jp",
+     "clinic",
+     1
+    ],
+    [
+     "jpeds.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "物忘れ 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 2,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "mcsg.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "ubie.app",
+     "media",
+     2
+    ],
+    [
+     "tokyonishi-hp.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "しびれ 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "public": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "smartdock.jp",
+     "clinic",
+     2
+    ],
+    [
+     "oshimizu-clinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "medicalnote.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "耳鳴り 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "wiki": 1,
+    "public": 1,
+    "portal": 2,
+    "media": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "hirao-hp.jp",
+     "clinic",
+     1
+    ],
+    [
+     "ja.wikipedia.org",
+     "wiki",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "下痢 続く 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "other": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "yurin.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "saiseikai.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "hospita.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "動悸 息切れ 原因",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "wiki": 1,
+    "media": 1,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "healthcare.omron.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "cvi.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kcm-cl.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "クリニック 予約なし",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "sjk-nanairo.tokyo",
+     "clinic",
+     1
+    ],
+    [
+     "w-wellness.com",
+     "clinic",
+     1
+    ],
+    [
+     "yoshi-clinic.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "クリニック 土日 診療",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "ochanomizucardiology.com",
+     "clinic",
+     1
+    ],
+    [
+     "shimamura-clinic.jp",
+     "clinic",
+     1
+    ],
+    [
+     "mori-hifu.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "夜間 クリニック",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "portal": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "byoinnavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "m-life.jp",
+     "portal",
+     1
+    ],
+    [
+     "epark.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "初診 紹介状 必要か",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "med.jrc.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "alpskenpo.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "オンライン診療 やり方",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "portal": 2,
+    "clinic": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "sokuyaku.jp",
+     "maker",
+     2
+    ],
+    [
+     "amed.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "クリニック 口コミ 信用できるか",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 2,
+    "maker": 3,
+    "public": 1,
+    "media": 3,
+    "other": 2,
+    "video": 2
+   },
+   "top": [
+    [
+     "storepad.jp",
+     "media",
+     3
+    ],
+    [
+     "review-system.jp",
+     "maker",
+     2
+    ],
+    [
+     "president.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "セカンドオピニオン やり方",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "public": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "t-pec.jp",
+     "media",
+     2
+    ],
+    [
+     "sbi-medic.tokyo",
+     "clinic",
+     2
+    ],
+    [
+     "gan-portal.metro.tokyo.lg.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "診断書 もらい方",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 1,
+    "media": 1,
+    "portal": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "ncc.go.jp",
+     "public",
+     1
+    ],
+    [
+     "mentoa.excite.co.jp",
+     "media",
+     1
+    ],
+    [
+     "hospinfo.tokyo-med.ac.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "健康診断 再検査 どこで",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 1,
+    "portal": 2,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "mrso.jp",
+     "portal",
+     2
+    ],
+    [
+     "watanabe-iin.org",
+     "clinic",
+     1
+    ],
+    [
+     "sawayaka-saisei.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "予防接種 予約 方法",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 2,
+    "other": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "mrso.jp",
+     "portal",
+     1
+    ],
+    [
+     "uniconomori.com",
+     "clinic",
+     1
+    ],
+    [
+     "city.tomi.nagano.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "医療費控除 対象 クリニック",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "public": 3,
+    "video": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     3
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "keisan.nta.go.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "待ち時間 短い クリニック",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 1,
+    "portal": 2,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "revoclinic.jp",
+     "clinic",
+     1
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     1
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "クリニック 変える 紹介状",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 2,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "fujicl.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "clius.jp",
+     "maker",
+     1
+    ],
+    [
+     "uch-naika.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "女性医師 探し方",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "public": 2,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "joi-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "hospita.jp",
+     "portal",
+     2
+    ],
+    [
+     "byoinnavi.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "マイナ保険証 使えるクリニック",
+   "group": "受診のしかた",
+   "answered": 4,
+   "kinds": {
+    "clinic": 1,
+    "public": 3,
+    "other": 1,
+    "maker": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     3
+    ],
+    [
+     "kyoukaikenpo.or.jp",
+     "public",
+     2
+    ],
+    [
+     "services.digital.go.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "クリニック 電話 予約 取れない",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 1,
+    "maker": 2,
+    "public": 1,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "drjoy.co.jp",
+     "media",
+     2
+    ],
+    [
+     "d-bashifc.com",
+     "clinic",
+     1
+    ],
+    [
+     "ho.chiba-u.ac.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "往診 頼み方",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 2,
+    "media": 1,
+    "other": 1,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "fujicl.or.jp",
+     "clinic",
+     3
+    ],
+    [
+     "kyotoohara.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kids-doctor.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "訪問診療 とは",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 1,
+    "maker": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "kyoto-kyoritsu.org",
+     "clinic",
+     1
+    ],
+    [
+     "city.koshu.yamanashi.jp",
+     "public",
+     1
+    ],
+    [
+     "kakamigahara.gifu.med.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "かかりつけ医 必要か",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 2,
+    "public": 2,
+    "media": 2,
+    "maker": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "gemmed.ghc-j.com",
+     "clinic",
+     1
+    ],
+    [
+     "kyoukaikenpo.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "小児科 何歳まで",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 2,
+    "portal": 2,
+    "maker": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "bambi-clinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "med-pro.jp",
+     "portal",
+     2
+    ],
+    [
+     "ohara-clinic.net",
+     "clinic",
+     2
+    ]
+   ]
+  }
+ ]
+}

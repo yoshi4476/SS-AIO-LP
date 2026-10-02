@@ -2258,6 +2258,40 @@ def test_season_features():
     check("手元の実行では購読者へ送らない", 'os.environ.get("GITHUB_ACTIONS")' in src, True)
 
 
+def test_question_and_faq_pages():
+    """調査の質問集は調査の要約と同じ数字で、ご契約前のよくある質問は画面と構造化データが一致すること"""
+    print(chr(10) + "■ 質問集とよくある質問")
+    import json as _json
+    import html as _html
+    import question_pages as QP
+    site = ROOT / "site"
+    smap = (site / "sitemap.xml").read_text(encoding="utf-8")
+    for ind in QP.INDS:
+        d = QP.load(ind)
+        if not d:
+            check(f"{ind}: 質問ごとの集計がある", False, True)
+            continue
+        pa = _json.loads((ROOT / "data" / "research" / f"{ind}-summary.json").read_text(encoding="utf-8"))["per_answer"]
+        st = QP.group_stats(d)
+        diff = [(g, k) for g, c in st.items() for k in ("answers", "clinic", "portal") if c.get(k, 0) != pa.get(g, {}).get(k, 0)]
+        check(f"{ind}: 質問ごとの集計が調査の要約と一致する", diff, [])
+        check(f"{ind}: 質問集のページがある", (site / QP.url(ind).strip("/") / "index.html").is_file(), True)
+        check(f"{ind}: 調査の本文から質問集へ行ける",
+              f'href="{QP.url(ind)}"' in (site / "research" / f"{ind}-ai-sources" / "index.html").read_text(encoding="utf-8"), True)
+        check(f"{ind}: sitemap に質問集がある", QP.url(ind) in smap, True)
+    s = (site / "faq" / "index.html").read_text(encoding="utf-8")
+    faq = [x for x in (_json.loads(m) for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', s, re.S))
+           if x.get("@type") == "FAQPage"]
+    shown = [(_html.unescape(q), _html.unescape(re.sub(r"<[^>]+>", "", a)))
+             for q, a in re.findall(r'<details class="faq-item"><summary>(.*?)</summary><p>(.*?)</p></details>', s, re.S)]
+    data = [(e["name"], e["acceptedAnswer"]["text"]) for e in faq[0]["mainEntity"]] if len(faq) == 1 else []
+    check("よくある質問: 画面と構造化データが同じ", shown == data and len(data) >= 10, True)
+    facts = (ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8")
+    check("よくある質問: 実績の数字は登録済みの事実から（AIO 15件・10件）",
+          '"denominator": 15' in facts and "AIO運用を2026年5月に開始した10件" in facts, True)
+    check("よくある質問: フッターから行ける", 'href="/faq/"' in (site / "index.html").read_text(encoding="utf-8"), True)
+
+
 def test_monthly_cap_check_exit_code():
     """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
 
@@ -3437,6 +3471,7 @@ def main():
               test_free_tools_live_under_one_roof,
               test_monthly_cap_check_exit_code,
               test_season_features,
+              test_question_and_faq_pages,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,

@@ -80,6 +80,7 @@ FOOTER_NAV_DEFAULT = [
     {"label": "AI導入補助金サポート", "url": "https://lp.7senses.co.jp/", "blank": True},
     {"label": "コーポレートサイト", "url": "https://corp.7senses.co.jp/", "blank": True},
     {"label": "集客支援サービス", "url": "/lp/"},
+    {"label": "ご契約前のよくある質問", "url": "/faq/"},
     {"label": "お問い合わせ", "url": "/contact/"},
     {"label": "編集・訂正ポリシー", "url": "/editorial-policy/"},
     {"label": "プライバシーポリシー", "url": "/privacy/"},
@@ -207,7 +208,7 @@ CATEGORIES = {
 
 # privacy/tokushoho は noindex のため sitemap から除外（noindex×sitemap掲載の矛盾を防ぐ）
 # glossary/ は build_sitemap の生成ページのループが出す（ここにも書くと2回載る）
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "tools/", "tools/url-check/", "tools/ai-check/", "tools/aio-check/", "tools/kuchikomi-henshin/", "tools/meo-check/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "tools/", "faq/", "tools/url-check/", "tools/ai-check/", "tools/aio-check/", "tools/kuchikomi-henshin/", "tools/meo-check/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
 
 
 def jp_date(iso: str) -> str:
@@ -1214,6 +1215,8 @@ def build_sitemap(article_entries):
     # 業種別の調査レポート（industry_ai_sources.py の集計から作る）
     for d in sorted((SITE / "research").glob("*/index.html")):
         lines.append(f"  <url><loc>{SITE_URL}/research/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
+        if (d.parent / "questions" / "index.html").is_file():      # 調査の質問集
+            lines.append(f"  <url><loc>{SITE_URL}/research/{d.parent.name}/questions/</loc><lastmod>{today}</lastmod></url>")
     # 業種別の LP（industry_lp.py が作る）
     for d in sorted((SITE / "lp").glob("*/index.html")):
         lines.append(f"  <url><loc>{SITE_URL}/lp/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
@@ -1453,6 +1456,11 @@ def build_research_pages(all_metas=()):
                                     f'<ul class="post-list">\n{tiles}\n</ul></section>\n<section><h2>引用する場合</h2>', 1)
         except Exception as e:
             print(f"WARN: 調査ページの記事一覧を作れません（{str(e)[:50]}）")
+        try:
+            import question_pages as _QP
+            body = body.replace('<section><h2>引用する場合</h2>', _QP.link_html(ind) + '<section><h2>引用する場合</h2>', 1)
+        except Exception as e:
+            print(f"WARN: 質問集へのリンクを入れられません（{str(e)[:50]}）")
         out = SITE / "research" / f"{ind}-ai-sources" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
@@ -1469,6 +1477,44 @@ def build_research_pages(all_metas=()):
         out.write_text(page, encoding="utf-8", newline="\n")
         (out.parent / "data.csv").write_text(csv, encoding="utf-8-sig", newline="\n")
         made.append(ind)
+    return made
+
+
+def build_question_pages():
+    """業種別の「AIに聞かれている質問」集（/research/<業種>-ai-sources/questions/）。集計は question_pages.py"""
+    import industry_ai_sources as IAS
+    import industry_lp as _IL
+    import question_pages as QP
+    import html
+    made = []
+    for ind in QP.INDS:
+        if not QP.load(ind) or not IAS.headline(ind):
+            continue
+        title, desc, body = QP.body(ind)
+        u = QP.url(ind)
+        page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
+        page = page.replace(f"{SITE_URL}/blog/", SITE_URL + u)
+        page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+        name = IAS.headline(ind)["name"]
+        page = re.sub(r'<nav class="breadcrumb".*?</nav>', lambda m: (
+            '<nav class="breadcrumb" aria-label="パンくずリスト">\n  <ol>\n    <li><a href="/">ホーム</a></li>\n'
+            f'    <li><a href="/research/{ind}-ai-sources/">{name}の調査</a></li>\n'
+            '    <li aria-current="page">質問集</li>\n  </ol>\n</nav>'), page, count=1, flags=re.S)
+        page = re.sub(r'<section class="hero">.*?</section>', lambda m: (
+            '<section class="hero"><span class="kicker">AI Questions</span>'
+            f'<h1>{html.escape(title)}</h1><p class="lead">{html.escape(desc)}</p></section>'), page, count=1, flags=re.S)
+        page = re.sub(r'<section class="section">\s*<div class="cta reveal">.*?</section>\n?',
+                      lambda m: IAS.cta_band(ind), page, count=1, flags=re.S)
+        ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "ホーム", "item": SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": f"{name}の調査", "item": f"{SITE_URL}/research/{ind}-ai-sources/"},
+            {"@type": "ListItem", "position": 3, "name": "質問集", "item": SITE_URL + u}]}
+        page = page.replace("</head>", '<link rel="stylesheet" href="/css/lp-v2.css?v=3">' + _IL.STYLE
+                            + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script></head>", 1)
+        out = SITE / u.strip("/") / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(page, encoding="utf-8", newline="\n")
+        made.append(u)
     return made
 
 
@@ -2022,6 +2068,7 @@ def main():
     prune_orphan_articles(entries, unparsable)
     build_blog_index(all_metas)
     build_research_pages(all_metas)  # 先に作る（LP と業種ハブが、調査ページがあればリンクする）
+    build_question_pages()  # 調査の質問集（集計は data/research/<業種>-questions.json）
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
     import tools_catalog

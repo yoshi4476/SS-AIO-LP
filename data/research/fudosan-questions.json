@@ -1,0 +1,2890 @@
+{
+ "industry": "fudosan",
+ "date": "2026-10-02",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "items": [
+  {
+   "q": "大阪 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 3,
+    "video": 2,
+    "portal": 3,
+    "maker": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "housingbazar.jp",
+     "portal",
+     2
+    ],
+    [
+     "note.com",
+     "video",
+     2
+    ],
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "public": 1,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "housingbazar.jp",
+     "portal",
+     2
+    ],
+    [
+     "ieagent.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "public": 1,
+    "media": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     3
+    ],
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "ieagent.jp",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "福岡 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "maker": 3,
+    "other": 1,
+    "media": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "life.oricon.co.jp",
+     "media",
+     2
+    ],
+    [
+     "homeee.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 2,
+    "clinic": 3,
+    "portal": 3,
+    "maker": 2
+   },
+   "top": [
+    [
+     "town-life.jp",
+     "portal",
+     2
+    ],
+    [
+     "housingbazar.jp",
+     "portal",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "media": 3,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "maker": 3,
+    "public": 1,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "c21-rise.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "sumai-step.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "maker": 3,
+    "clinic": 3,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "town-life.jp",
+     "portal",
+     2
+    ],
+    [
+     "homeee.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "仙台 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "maker": 3,
+    "clinic": 3,
+    "portal": 3,
+    "media": 2
+   },
+   "top": [
+    [
+     "town-life.jp",
+     "portal",
+     3
+    ],
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "t-up-property.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "広島 不動産会社 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "media": 3,
+    "portal": 3,
+    "review": 2
+   },
+   "top": [
+    [
+     "iimon.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "town-life.jp",
+     "portal",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "大阪 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 3,
+    "media": 3,
+    "portal": 3,
+    "maker": 2,
+    "public": 2
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ],
+    [
+     "akiya-kaitoritai.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 4,
+    "public": 3,
+    "other": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     4
+    ],
+    [
+     "fkr.or.jp",
+     "public",
+     3
+    ],
+    [
+     "mecyes.co.jp",
+     "clinic",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 3,
+    "portal": 3,
+    "maker": 2,
+    "public": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ],
+    [
+     "ieul.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 3,
+    "portal": 3,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ],
+    [
+     "nakajitsu.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "maker": 1,
+    "clinic": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ],
+    [
+     "s-plushome.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 1,
+    "public": 1,
+    "portal": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ],
+    [
+     "iqrafudosan.com",
+     "portal",
+     2
+    ],
+    [
+     "ieul.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "maker": 1,
+    "portal": 3,
+    "public": 1
+   },
+   "top": [
+    [
+     "c21-rise.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "iqrafudosan.com",
+     "portal",
+     3
+    ],
+    [
+     "mecyes.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "public": 2,
+    "clinic": 2,
+    "portal": 3,
+    "maker": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ],
+    [
+     "fkr.or.jp",
+     "public",
+     2
+    ],
+    [
+     "mansion.theatres.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "仙台 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 3,
+    "portal": 3,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "iqrafudosan.com",
+     "portal",
+     3
+    ],
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "広島 不動産 売却 おすすめ 会社",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 3,
+    "portal": 3,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "sumai-step.com",
+     "portal",
+     3
+    ],
+    [
+     "ieul.jp",
+     "portal",
+     3
+    ],
+    [
+     "mecyes.co.jp",
+     "clinic",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "仲介手数料 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "public": 1,
+    "clinic": 3,
+    "other": 1,
+    "maker": 1,
+    "review": 1,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "facilo.jp",
+     "clinic",
+     2
+    ],
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "zennichi.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "不動産売却 費用 内訳",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "nomu.com",
+     "clinic",
+     2
+    ],
+    [
+     "f-p.jp",
+     "media",
+     2
+    ],
+    [
+     "gro-bels.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "家を売る 税金",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 1,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "stepon.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "home4u.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "マンション売却 費用",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "media": 1,
+    "review": 1
+   },
+   "top": [
+    [
+     "sumai-step.com",
+     "portal",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "ieul.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "土地 売却 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 2,
+    "media": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "livable.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "herbal-home.net",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "賃貸 初期費用 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "portal": 3,
+    "clinic": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "ur-net.go.jp",
+     "public",
+     2
+    ],
+    [
+     "mysurance.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "chintaistyle.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "引っ越し 初期費用 平均",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "public": 4,
+    "media": 2,
+    "maker": 3,
+    "clinic": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "ur-net.go.jp",
+     "public",
+     4
+    ],
+    [
+     "nipponexpress.com",
+     "maker",
+     3
+    ],
+    [
+     "kurashicostlab.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "家 査定 費用",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "sumaiz.jp",
+     "portal",
+     2
+    ],
+    [
+     "stepon.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "相続 不動産 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "portal": 3,
+    "maker": 3,
+    "public": 1,
+    "other": 1,
+    "video": 3,
+    "clinic": 2,
+    "media": 2
+   },
+   "top": [
+    [
+     "home4u.jp",
+     "portal",
+     2
+    ],
+    [
+     "meigi-henkou.jp",
+     "clinic",
+     2
+    ],
+    [
+     "chester-tax.com",
+     "video",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "住宅ローン 諸費用 目安",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "danshin-smile.cardif.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "smbc.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "mizuhobank.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "中古マンション 購入 諸費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "portal": 3,
+    "maker": 2,
+    "review": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "funds.jp",
+     "clinic",
+     3
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     3
+    ],
+    [
+     "furureno.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "固定資産税 計算",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "public": 3,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "smbc.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "soumu.go.jp",
+     "public",
+     2
+    ],
+    [
+     "jutaku-kouen.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "登記 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "portal": 3,
+    "maker": 3,
+    "clinic": 3,
+    "other": 1,
+    "public": 1,
+    "media": 2
+   },
+   "top": [
+    [
+     "sorajsc.com",
+     "clinic",
+     2
+    ],
+    [
+     "finance.recruit.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "空き家 売却 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 1,
+    "public": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "lvn.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "livable.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "sell.yeay.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "リースバック 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 1,
+    "maker": 2
+   },
+   "top": [
+    [
+     "wako-finance.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "re-estate.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "aiful.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "不動産 買取 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 2
+   },
+   "top": [
+    [
+     "starmica.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "gro-bels.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ieul.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "賃貸 更新料 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "media": 2,
+    "clinic": 3,
+    "portal": 3,
+    "maker": 3,
+    "public": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "house-besta.com",
+     "clinic",
+     2
+    ],
+    [
+     "ur-net.go.jp",
+     "public",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "管理会社 手数料 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 4,
+    "other": 1,
+    "public": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "n-create.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "hajime-kensetsu.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "家 解体 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 4,
+    "maker": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "kaitai-guide.net",
+     "portal",
+     2
+    ],
+    [
+     "crassone.jp",
+     "maker",
+     2
+    ],
+    [
+     "iejimai-annai.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "任意売却 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "public": 1,
+    "media": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "nini-baikyaku.biz",
+     "clinic",
+     2
+    ],
+    [
+     "century21-ninbai.jp",
+     "clinic",
+     2
+    ],
+    [
+     "iekon.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "不動産会社 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "public": 1,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "sumai-step.com",
+     "portal",
+     2
+    ],
+    [
+     "t23m-navi.jp",
+     "portal",
+     2
+    ],
+    [
+     "iimon.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "仲介 買取 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "rehouse.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "mercury-realestate.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "一括査定 デメリット",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "oricon.co.jp",
+     "media",
+     1
+    ],
+    [
+     "car-byebuy.com",
+     "portal",
+     1
+    ],
+    [
+     "carseven.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "専任媒介 一般媒介 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "video": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "lvn.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "t-estate-nagoya.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "slnet-baikyaku.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "大手 地元 不動産 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "video": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "eitoku-baikyaku.com",
+     "clinic",
+     2
+    ],
+    [
+     "aozora.life",
+     "clinic",
+     1
+    ],
+    [
+     "osaka-fudosan.info",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "賃貸 不動産屋 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "honnne.com",
+     "portal",
+     2
+    ],
+    [
+     "assist-management.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "oheyago.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "管理会社 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 2,
+    "review": 1,
+    "public": 1,
+    "media": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     1
+    ],
+    [
+     "landhousing.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "売却 時期 いつ",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "e-estate.jp",
+     "portal",
+     1
+    ],
+    [
+     "housebokan.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "juken-net.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "住み替え 進め方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "e-estate.jp",
+     "portal",
+     2
+    ],
+    [
+     "sell.yeay.jp",
+     "portal",
+     1
+    ],
+    [
+     "housingstage.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "中古 新築 どっち",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "video": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "note.com",
+     "video",
+     2
+    ],
+    [
+     "ieul.jp",
+     "portal",
+     2
+    ],
+    [
+     "alsok.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "マンション 戸建て どっち",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "r-plus-house.com",
+     "clinic",
+     1
+    ],
+    [
+     "usui-home.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "賃貸 持ち家 どっち",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "portal": 2,
+    "media": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "rehouse.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "moneycanvas.bk.mufg.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "リノベーション物件 注意点",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "maker": 1
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "mitsui-reform.com",
+     "clinic",
+     2
+    ],
+    [
+     "mplus-jh.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "不動産投資 始め方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "investor-k.com",
+     "media",
+     2
+    ],
+    [
+     "nomu.com",
+     "clinic",
+     2
+    ],
+    [
+     "hajime-kensetsu.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "相続した家 どうする",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 1,
+    "other": 1,
+    "maker": 1,
+    "public": 1,
+    "media": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "tenrusu.jp",
+     "clinic",
+     1
+    ],
+    [
+     "akiya.arshe-corp.com",
+     "clinic",
+     1
+    ],
+    [
+     "vs-group.jp",
+     "other",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "空き家 活用 方法",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "public": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "akisapo.jp",
+     "portal",
+     2
+    ],
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "土地活用 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "seiwa-stss.jp",
+     "clinic",
+     2
+    ],
+    [
+     "land.ieul.jp",
+     "portal",
+     2
+    ],
+    [
+     "sumaity.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "査定額 違う 理由",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "ieuri.com",
+     "portal",
+     2
+    ],
+    [
+     "note.com",
+     "video",
+     2
+    ],
+    [
+     "katix.co.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "不動産屋 信用できる 見分け方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "media": 3,
+    "portal": 3,
+    "video": 1
+   },
+   "top": [
+    [
+     "hatas-g.net",
+     "clinic",
+     2
+    ],
+    [
+     "honnne.com",
+     "portal",
+     2
+    ],
+    [
+     "houseclouver.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "おとり物件 見分け方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "portal": 3,
+    "media": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "freedom-x.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     3
+    ],
+    [
+     "sumaken.uniho.co.jp",
+     "clinic",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "家を売る 流れ",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "public": 1,
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "ieul.jp",
+     "portal",
+     2
+    ],
+    [
+     "fkr.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "賃貸 契約 流れ",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "public": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "ur-net.go.jp",
+     "public",
+     2
+    ],
+    [
+     "hankoya.com",
+     "maker",
+     1
+    ],
+    [
+     "chintaistyle.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "住宅購入 流れ",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "chibabank.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "重要事項説明 ポイント",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 1,
+    "media": 2,
+    "portal": 2,
+    "video": 1,
+    "clinic": 1,
+    "review": 1
+   },
+   "top": [
+    [
+     "mansionlibrary.jp",
+     "portal",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "manabu.orixbank.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "売買契約 キャンセル",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "media": 2,
+    "portal": 2,
+    "video": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "sumaity.com",
+     "portal",
+     2
+    ],
+    [
+     "asiro.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "a-lawoffice.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "敷金 返ってこない",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "public": 2,
+    "clinic": 2,
+    "portal": 1,
+    "media": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "ur-net.go.jp",
+     "public",
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "housecom.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "原状回復 トラブル",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "public": 2,
+    "other": 2,
+    "video": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "rcaa.or.jp",
+     "public",
+     1
+    ],
+    [
+     "chintaidx.com",
+     "video",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "退去費用 高い",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "other": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "vs-group.jp",
+     "other",
+     2
+    ],
+    [
+     "minami.law",
+     "clinic",
+     2
+    ],
+    [
+     "ace-sec.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "契約不適合責任 とは",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 2,
+    "public": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "businesslawyers.jp",
+     "portal",
+     2
+    ],
+    [
+     "komon-lawyer.jp",
+     "clinic",
+     2
+    ],
+    [
+     "j-net21.smrj.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "境界 トラブル",
+   "group": "手続き・トラブル",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 2,
+    "maker": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "smtrc.jp",
+     "maker",
+     2
+    ],
+    [
+     "usuioffice.info",
+     "clinic",
+     2
+    ],
+    [
+     "relo-fudosan.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "住宅ローン 審査 落ちた",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "finance.recruit.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "a-tm.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "gro-bels.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "売れない 家 理由",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "rehouse.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "issei-syoji.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "内覧 準備",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "portal": 2,
+    "review": 1
+   },
+   "top": [
+    [
+     "usui-home.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     1
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "値下げ タイミング",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 1,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "money-career.com",
+     "media",
+     2
+    ],
+    [
+     "re-guide.jp",
+     "portal",
+     1
+    ],
+    [
+     "ouchi-net.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "相続登記 義務化",
+   "group": "手続き・トラブル",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 2,
+    "maker": 1,
+    "other": 1,
+    "public": 2
+   },
+   "top": [
+    [
+     "moj.go.jp",
+     "public",
+     2
+    ],
+    [
+     "houmukyoku.moj.go.jp",
+     "public",
+     2
+    ],
+    [
+     "gov-online.go.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "空き家 特例",
+   "group": "手続き・トラブル",
+   "answered": 3,
+   "kinds": {
+    "clinic": 1,
+    "public": 3,
+    "other": 2,
+    "media": 2,
+    "portal": 2,
+    "video": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "vs-group.jp",
+     "other",
+     2
+    ],
+    [
+     "nta.go.jp",
+     "public",
+     2
+    ],
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "3000万円 控除 条件",
+   "group": "手続き・トラブル",
+   "answered": 3,
+   "kinds": {
+    "public": 2,
+    "media": 1,
+    "other": 2,
+    "clinic": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "mizuho-re.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "vs-group.jp",
+     "other",
+     2
+    ],
+    [
+     "haseko-chukai.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "住宅ローン控除 条件",
+   "group": "手続き・トラブル",
+   "answered": 3,
+   "kinds": {
+    "clinic": 2,
+    "maker": 3,
+    "public": 3,
+    "media": 2,
+    "other": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "nta.go.jp",
+     "public",
+     2
+    ],
+    [
+     "resonabank.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "賃貸 審査 落ちる",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "other": 2,
+    "portal": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "ieagent.jp",
+     "portal",
+     2
+    ],
+    [
+     "smooth.jp",
+     "portal",
+     2
+    ],
+    [
+     "bransmart.net",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "保証人 いない 賃貸",
+   "group": "手続き・トラブル",
+   "answered": 2,
+   "kinds": {
+    "public": 2,
+    "clinic": 2,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "ur-net.go.jp",
+     "public",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "1145.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "大阪 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 3,
+    "other": 2,
+    "media": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "home.osakagas.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "followind-nagayakaitori.com",
+     "clinic",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "maker": 1,
+    "clinic": 3,
+    "media": 3,
+    "portal": 2
+   },
+   "top": [
+    [
+     "hajime-kensetsu.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "correc.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "homemate.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "maker": 1,
+    "public": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "correc.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "nakajitsu.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "prtimes.jp",
+     "media",
+     1
+    ],
+    [
+     "sbiaruhi.co.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "札幌 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "other": 1,
+    "portal": 3,
+    "maker": 1,
+    "media": 2,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "sumaity.com",
+     "portal",
+     2
+    ],
+    [
+     "prtimes.jp",
+     "media",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 4,
+   "kinds": {
+    "public": 3,
+    "clinic": 4,
+    "video": 3,
+    "portal": 4,
+    "other": 2,
+    "media": 2
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     3
+    ],
+    [
+     "iju-sumu.city.yokohama.lg.jp",
+     "public",
+     3
+    ],
+    [
+     "re-days.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 2,
+    "portal": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "nakase-baikyaku.com",
+     "clinic",
+     2
+    ],
+    [
+     "correc.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "nlab.itmedia.co.jp",
+     "media",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "prtimes.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "仙台 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "media": 2,
+    "portal": 2,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "excite.co.jp",
+     "media",
+     1
+    ],
+    [
+     "prtimes.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "広島 住みやすい 街",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "portal": 3,
+    "maker": 1,
+    "media": 3,
+    "other": 2,
+    "video": 2,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     3
+    ],
+    [
+     "prtimes.jp",
+     "media",
+     3
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ファミリー 住みやすい 街 選び方",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "other": 1,
+    "portal": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "lettuceclub.net",
+     "media",
+     1
+    ],
+    [
+     "fudosanlab.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "駅近 デメリット",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "video": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "nissho-apn.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ohkuraya.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "note.com",
+     "video",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "ハザードマップ 見方",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "maker": 1,
+    "clinic": 1,
+    "public": 3,
+    "other": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "gsi.go.jp",
+     "public",
+     2
+    ],
+    [
+     "disaportal.gsi.go.jp",
+     "public",
+     2
+    ],
+    [
+     "chintai-assist.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "学区 調べ方",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 1,
+    "maker": 1,
+    "media": 2,
+    "other": 2,
+    "video": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "genjitsu-life.com",
+     "media",
+     1
+    ],
+    [
+     "livable.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "abicnet.com",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "新築マンション 買い時",
+   "group": "物件・街の探し方",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 2,
+    "portal": 3,
+    "maker": 1,
+    "other": 1,
+    "video": 2
+   },
+   "top": [
+    [
+     "flie.jp",
+     "portal",
+     2
+    ],
+    [
+     "note.com",
+     "video",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "中古戸建て 注意点",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "video": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "sakurajimusyo.com",
+     "maker",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "oh.openhouse-group.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "マンション 築年数 目安",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "public": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "home.osakagas.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "forest.toppan.com",
+     "maker",
+     2
+    ],
+    [
+     "smbc.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "賃貸 狙い目 時期",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "other": 1,
+    "media": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     3
+    ],
+    [
+     "renotta.jp",
+     "clinic",
+     2
+    ],
+    [
+     "phx-pm.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ペット可 賃貸 探し方",
+   "group": "物件・街の探し方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "video": 1,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "mfhl.mitsui-chintai.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "able.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "一人暮らし 家賃 目安",
+   "group": "物件・街の探し方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "portal": 2,
+    "clinic": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "ur-net.go.jp",
+     "public",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "smbc-card.com",
+     "maker",
+     1
+    ]
+   ]
+  }
+ ]
+}

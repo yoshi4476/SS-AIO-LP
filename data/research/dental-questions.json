@@ -1,0 +1,2743 @@
+{
+ "industry": "dental",
+ "date": "2026-10-02",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "items": [
+  {
+   "q": "大阪 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "portal": 3,
+    "public": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "jidv.org",
+     "portal",
+     2
+    ],
+    [
+     "clinic.mynavi.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 3,
+   "kinds": {
+    "clinic": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "shinjuku-dental.com",
+     "clinic",
+     1
+    ],
+    [
+     "ginzadental.net",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "portal": 4,
+    "maker": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     3
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 4,
+    "public": 1
+   },
+   "top": [
+    [
+     "clinic.mynavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "proreco.jp",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 1,
+    "portal": 4,
+    "other": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "fdoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "sapporo-st.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "横浜 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "teech.jp",
+     "portal",
+     3
+    ],
+    [
+     "dentist-yokohama.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "jidv.org",
+     "portal",
+     2
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "other": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "yobonohaishasan.com",
+     "clinic",
+     3
+    ],
+    [
+     "teech.jp",
+     "portal",
+     3
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "仙台 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     3
+    ],
+    [
+     "jidv.org",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "広島 歯医者 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "portal": 3,
+    "public": 2
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "family-dr.jp",
+     "portal",
+     2
+    ],
+    [
+     "proreco.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "大阪 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     3
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     2
+    ],
+    [
+     "starwhitening.net",
+     "clinic",
+     1
+    ],
+    [
+     "teigeki-dental.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 1,
+    "maker": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     2
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ],
+    [
+     "ootawa-dc.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "札幌 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 3,
+   "kinds": {
+    "clinic": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "sappro-dc.jp",
+     "clinic",
+     1
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     1
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "横浜 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "jidv.org",
+     "portal",
+     3
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "京都 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     3
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     2
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 1,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     2
+    ],
+    [
+     "caloo.jp",
+     "portal",
+     2
+    ],
+    [
+     "kamome-dental.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "仙台 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     3
+    ],
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     3
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "広島 歯科 評判 いい",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 1,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "medicaldoc.jp",
+     "portal",
+     3
+    ],
+    [
+     "proreco.jp",
+     "portal",
+     2
+    ],
+    [
+     "family-dr.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "インプラント 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 2,
+    "video": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "sparkle-implant.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kitaosaka-implant.com",
+     "clinic",
+     2
+    ],
+    [
+     "kurashicostlab.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯列矯正 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "stella-dc.net",
+     "clinic",
+     3
+    ],
+    [
+     "ym-sdc.com",
+     "clinic",
+     2
+    ],
+    [
+     "makuharishika.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "マウスピース矯正 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "kireilign.com",
+     "maker",
+     2
+    ],
+    [
+     "clearsmile.jp",
+     "maker",
+     2
+    ],
+    [
+     "yamanouchi-ortho.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ホワイトニング 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "sugano-shika.com",
+     "clinic",
+     2
+    ],
+    [
+     "tateba-dental.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "starwhitening.net",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "セラミック 詰め物 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 1,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "sbc-dental.com",
+     "clinic",
+     2
+    ],
+    [
+     "tokyo-shinbi.jp",
+     "clinic",
+     2
+    ],
+    [
+     "shika-tanaka.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "入れ歯 費用 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "seki-shika.com",
+     "clinic",
+     2
+    ],
+    [
+     "dent-suzuki.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "根管治療 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 1
+   },
+   "top": [
+    [
+     "setaden.com",
+     "clinic",
+     2
+    ],
+    [
+     "umeda.yasuoka-dental.net",
+     "clinic",
+     2
+    ],
+    [
+     "shinyurigaoka-dc.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "親知らず 抜歯 費用 相場",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "maker": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "onose-dentaloffice.com",
+     "clinic",
+     3
+    ],
+    [
+     "iga-dental.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯周病 治療 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "setaden.com",
+     "clinic",
+     3
+    ],
+    [
+     "samukawa-first-dc.com",
+     "clinic",
+     3
+    ],
+    [
+     "nagatadental.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "小児矯正 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "ccmiharadental.com",
+     "clinic",
+     2
+    ],
+    [
+     "makuharishika.com",
+     "clinic",
+     2
+    ],
+    [
+     "ochi-dental.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "インプラント 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "anshin-implant.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kawasato-do.jp",
+     "clinic",
+     2
+    ],
+    [
+     "dental-okuda.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯列矯正 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 1,
+    "video": 1,
+    "public": 1,
+    "maker": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "kariya.media.or.jp",
+     "clinic",
+     3
+    ],
+    [
+     "yamanouchi-ortho.com",
+     "clinic",
+     3
+    ],
+    [
+     "andelt.co.jp",
+     "clinic",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "ホワイトニング 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 1,
+    "clinic": 3,
+    "portal": 2
+   },
+   "top": [
+    [
+     "whiteessence.com",
+     "clinic",
+     3
+    ],
+    [
+     "funabori-garden-dc.com",
+     "clinic",
+     2
+    ],
+    [
+     "bc-dental.ekiten.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "セラミック 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "urban-kamiooka-dental-clinic.com",
+     "clinic",
+     3
+    ],
+    [
+     "nishikamata-dc.com",
+     "clinic",
+     2
+    ],
+    [
+     "doshida-family-dc.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "入れ歯 保険 適用 されるか",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "shika-tanaka.com",
+     "clinic",
+     2
+    ],
+    [
+     "andelt.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "simokita-dc.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "根管治療 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 2,
+    "maker": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "nagahama-shika.com",
+     "clinic",
+     2
+    ],
+    [
+     "aerasbio.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "dental-microscope.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "親知らず 抜歯 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 1,
+    "maker": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "parthenon-shika.jp",
+     "clinic",
+     3
+    ],
+    [
+     "a-clinic.dental",
+     "clinic",
+     3
+    ],
+    [
+     "bellshika-shinyuri.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯周病 治療 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 1
+   },
+   "top": [
+    [
+     "samukawa-first-dc.com",
+     "clinic",
+     3
+    ],
+    [
+     "hirosedori-dc.com",
+     "clinic",
+     2
+    ],
+    [
+     "sk-sekinishi.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "小児矯正 保険 適用 されるか",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 1,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "orthodontics-chijikoukanmae.com",
+     "clinic",
+     2
+    ],
+    [
+     "fujioka-dc.jp",
+     "clinic",
+     2
+    ],
+    [
+     "bc-dental.ekiten.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯のクリーニング 保険 適用 されるか",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 2
+   },
+   "top": [
+    [
+     "nagoya-dental-guide.jp",
+     "portal",
+     2
+    ],
+    [
+     "plum-d.jp",
+     "clinic",
+     2
+    ],
+    [
+     "takagi-dc.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 初診料 いくら",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "sakurashika.com",
+     "clinic",
+     4
+    ],
+    [
+     "mino-dental.jp",
+     "clinic",
+     2
+    ],
+    [
+     "araki-dc-funabashi.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "銀歯 白くする 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "media": 2,
+    "clinic": 3
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "shimokita-dental.jp",
+     "clinic",
+     3
+    ],
+    [
+     "heart-life-kdc.com",
+     "clinic",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "インプラント 1本 値段",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "implant.smile-dent.jp",
+     "clinic",
+     2
+    ],
+    [
+     "nakashima-dentalclinic.jp",
+     "clinic",
+     1
+    ],
+    [
+     "osaka-alps.japan-implant.info",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "部分矯正 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 2,
+    "maker": 2
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "asakusabashi-dental.com",
+     "clinic",
+     2
+    ],
+    [
+     "mejiro.gr.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ブリッジ 費用 保険",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "kutsui-dental.com",
+     "clinic",
+     3
+    ],
+    [
+     "stella-dc.net",
+     "clinic",
+     3
+    ],
+    [
+     "suminodo.yasuoka-dental.net",
+     "clinic",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "被せ物 種類 値段",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "lsc-leaf-hoshigaoka.jp",
+     "clinic",
+     1
+    ],
+    [
+     "nishikamata-dc.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "矯正 分割払い できる",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "oh-my-teeth.com",
+     "maker",
+     2
+    ],
+    [
+     "kireiha.com",
+     "clinic",
+     2
+    ],
+    [
+     "bubun-kyousei.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯科 医療費控除 対象",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 1,
+    "public": 3,
+    "clinic": 3,
+    "media": 1,
+    "other": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "keisan.nta.go.jp",
+     "public",
+     2
+    ],
+    [
+     "nagashimaclinic.com",
+     "clinic",
+     2
+    ],
+    [
+     "tokushinkai.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯のクリーニング 自費 違い",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2
+   },
+   "top": [
+    [
+     "tateba-dental.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "matsudo-dc.com",
+     "clinic",
+     1
+    ],
+    [
+     "nihonshika.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯科 ローン 使える",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "portal": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "jcb.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "cr.mufg.jp",
+     "maker",
+     3
+    ],
+    [
+     "wakoshi-dental.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "インプラント 失敗しない 歯医者の選び方",
+   "group": "治療の選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "public": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "takanawakai.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "sparkle-implant.jp",
+     "clinic",
+     2
+    ],
+    [
+     "shika-implant.org",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "矯正歯科 選び方",
+   "group": "治療の選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "portal": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "oh-my-teeth.com",
+     "maker",
+     2
+    ],
+    [
+     "hanaravi.jp",
+     "maker",
+     2
+    ],
+    [
+     "dentarge.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "ホワイトニング 歯科 エステ 違い",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "flamingo-dc.com",
+     "clinic",
+     3
+    ],
+    [
+     "lani.ciel-dental.com",
+     "clinic",
+     3
+    ],
+    [
+     "licca-implant-center.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "マウスピース矯正 デメリット",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "public": 1,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "hanaravi.jp",
+     "maker",
+     2
+    ],
+    [
+     "ohtani-dental.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kyousei-jiyugaoka.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "インプラント 入れ歯 ブリッジ 比較",
+   "group": "治療の選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "kinshicho-shika.com",
+     "clinic",
+     1
+    ],
+    [
+     "implant-fukuoka.jp",
+     "clinic",
+     1
+    ],
+    [
+     "sparkle-implant.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "セラミック 保険 違い",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 2
+   },
+   "top": [
+    [
+     "urban-kamiooka-dental-clinic.com",
+     "clinic",
+     3
+    ],
+    [
+     "satodentalclinic-ebis.jp",
+     "clinic",
+     2
+    ],
+    [
+     "bc-dental.ekiten.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "親知らず 抜くべきか",
+   "group": "治療の選び方",
+   "answered": 2,
+   "kinds": {
+    "public": 2,
+    "clinic": 2,
+    "video": 1,
+    "portal": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "dent-kng.or.jp",
+     "public",
+     2
+    ],
+    [
+     "jsoms.or.jp",
+     "public",
+     1
+    ],
+    [
+     "medicaldoc.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "根管治療 専門医 必要か",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 2,
+    "public": 2
+   },
+   "top": [
+    [
+     "takai-dc.jp",
+     "clinic",
+     2
+    ],
+    [
+     "miyoshi-dental.net",
+     "clinic",
+     2
+    ],
+    [
+     "clinic-ft.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯周病 治るのか",
+   "group": "治療の選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "daiichisankyo-hc.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "kompas.hosp.keio.ac.jp",
+     "public",
+     2
+    ],
+    [
+     "mizoi-dental.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "子供 矯正 何歳から",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "iida-dent.jp",
+     "clinic",
+     2
+    ],
+    [
+     "oh-my-teeth.com",
+     "maker",
+     2
+    ],
+    [
+     "fb-kyousei.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "審美歯科 とは",
+   "group": "治療の選び方",
+   "answered": 2,
+   "kinds": {
+    "wiki": 1,
+    "clinic": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "ja.wikipedia.org",
+     "wiki",
+     1
+    ],
+    [
+     "takedahp.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "asahi.ws",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "予防歯科 通う頻度",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 1
+   },
+   "top": [
+    [
+     "kdental.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "moriyamadc.com",
+     "clinic",
+     1
+    ],
+    [
+     "akasaka-ono-dc.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯科 セカンドオピニオン",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "hachiojid-c.com",
+     "clinic",
+     2
+    ],
+    [
+     "kdc-nirasaki.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "訪問歯科 とは",
+   "group": "治療の選び方",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "public": 3
+   },
+   "top": [
+    [
+     "houmonshika.org",
+     "public",
+     3
+    ],
+    [
+     "kaigo.alsok.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "dentis-cloud.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "口腔外科 とは 何をする",
+   "group": "治療の選び方",
+   "answered": 2,
+   "kinds": {
+    "wiki": 1,
+    "media": 1,
+    "clinic": 2,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "oms.yushinkaigroup.com",
+     "clinic",
+     2
+    ],
+    [
+     "ja.wikipedia.org",
+     "wiki",
+     1
+    ],
+    [
+     "tky.ndu.ac.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯が痛い 夜 どうする",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "daiju-dc.com",
+     "clinic",
+     2
+    ],
+    [
+     "matsumoto.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "yotsubashi-dc.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯茎から血が出る 原因",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "katou-dent.com",
+     "clinic",
+     3
+    ],
+    [
+     "tokyo-perio-yoshida-dc.com",
+     "clinic",
+     2
+    ],
+    [
+     "sakurashika-g.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "知覚過敏 治し方",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 2,
+    "portal": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "edaaoba-dental.com",
+     "clinic",
+     2
+    ],
+    [
+     "sakurashika.com",
+     "clinic",
+     2
+    ],
+    [
+     "kirarashika.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "口臭 歯医者 行くべき",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "public": 2,
+    "wiki": 1,
+    "clinic": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "jda.or.jp",
+     "public",
+     1
+    ],
+    [
+     "msdmanuals.com",
+     "wiki",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "銀歯 取れた どうする",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "yono-satomura-dc.com",
+     "clinic",
+     2
+    ],
+    [
+     "nakamura-dental-clinic.osaka.jp",
+     "clinic",
+     2
+    ],
+    [
+     "noble-dent.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯ぎしり マウスピース 歯医者",
+   "group": "症状",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "video": 1
+   },
+   "top": [
+    [
+     "hamadayama-shika.net",
+     "clinic",
+     2
+    ],
+    [
+     "brillerdentalclinic.jp",
+     "clinic",
+     2
+    ],
+    [
+     "dentistyokohamachinatown.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "顎関節症 何科",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "ginza-oralsurgery.com",
+     "clinic",
+     2
+    ],
+    [
+     "futamatagawa-dental.com",
+     "clinic",
+     2
+    ],
+    [
+     "medley.life",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "虫歯 放置 どうなる",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "inabe-haginodc.com",
+     "clinic",
+     2
+    ],
+    [
+     "fukuyama-dental.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kdc-nirasaki.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯が欠けた 応急処置",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 1,
+    "maker": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "araki-dc-funabashi.com",
+     "clinic",
+     2
+    ],
+    [
+     "rinku-hohoemi.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "親知らず 腫れた",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "public": 1,
+    "media": 1,
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "dent-kng.or.jp",
+     "public",
+     1
+    ],
+    [
+     "mamoru.denpre.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "nagoya-dental-guide.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯がしみる 原因",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "public": 2,
+    "clinic": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "nagoya-haisya.jp",
+     "portal",
+     3
+    ],
+    [
+     "dent-kng.or.jp",
+     "public",
+     2
+    ],
+    [
+     "ishimine-dental.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯茎 腫れ 膿",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "dental-microscope.jp",
+     "portal",
+     2
+    ],
+    [
+     "medley.life",
+     "media",
+     1
+    ],
+    [
+     "emasika.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "子供 歯 ぐらぐら",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2
+   },
+   "top": [
+    [
+     "precio-dental.com",
+     "clinic",
+     2
+    ],
+    [
+     "machida-shika.com",
+     "clinic",
+     2
+    ],
+    [
+     "kusube-dc.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "口内炎 歯医者 行くべきか",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 2,
+    "public": 1,
+    "media": 2,
+    "portal": 1,
+    "video": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "kawashima-shikaiin.com",
+     "clinic",
+     2
+    ],
+    [
+     "yasuoka-dental.net",
+     "clinic",
+     2
+    ],
+    [
+     "oizumi-miyake-dc.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "差し歯 取れた",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "ex-mdc.jp",
+     "clinic",
+     2
+    ],
+    [
+     "toyocho-shika.jp",
+     "clinic",
+     2
+    ],
+    [
+     "matsumoto.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯石 取り 頻度",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "shigei-dental-clinic.com",
+     "clinic",
+     3
+    ],
+    [
+     "amagasaki-appledc.jp",
+     "clinic",
+     2
+    ],
+    [
+     "yasumotoshika.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯の黄ばみ 原因",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "daiichisankyo-hc.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "wakamoto-pharm.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "period.tokyo",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "噛むと痛い 歯",
+   "group": "症状",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "yasudental.jp",
+     "clinic",
+     2
+    ],
+    [
+     "granteeth.jp",
+     "clinic",
+     1
+    ],
+    [
+     "shinsaibashi-clover.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "インプラント 痛み 術後",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "your-dent.net",
+     "clinic",
+     2
+    ],
+    [
+     "hayashi-shika.net",
+     "clinic",
+     2
+    ],
+    [
+     "kasahara-dental.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "抜歯後 ドライソケット",
+   "group": "症状",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 1,
+    "wiki": 1,
+    "video": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "sodental.jp",
+     "clinic",
+     2
+    ],
+    [
+     "hirakawa-dc.info",
+     "clinic",
+     2
+    ],
+    [
+     "kondoh-shika.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "いい歯医者 見分け方",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     2
+    ],
+    [
+     "nagatadental.com",
+     "clinic",
+     2
+    ],
+    [
+     "andelt.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 変えたい 途中",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "sekokai-umeda.com",
+     "clinic",
+     3
+    ],
+    [
+     "fujishiro-dental.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 予約 取りやすい",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "video": 1,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "andelt.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "dent-hasegawa.com",
+     "clinic",
+     2
+    ],
+    [
+     "shibuya-shinbi.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 土日 診療",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 1,
+    "public": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "takatori-dental.com",
+     "clinic",
+     1
+    ],
+    [
+     "k-olive-dc.com",
+     "clinic",
+     1
+    ],
+    [
+     "araishikaclinic.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 怖い 痛くない",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "dc-pure.com",
+     "clinic",
+     1
+    ],
+    [
+     "8214.jp",
+     "clinic",
+     1
+    ],
+    [
+     "katomami-dc.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 初診 何をする",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "public": 1,
+    "portal": 2,
+    "other": 1,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "araki-dc-kaijin.com",
+     "clinic",
+     2
+    ],
+    [
+     "kdu.ac.jp",
+     "public",
+     1
+    ],
+    [
+     "sekiguchi-dental.net",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯科 自費 保険 違い",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "column.drma.or.jp",
+     "media",
+     2
+    ],
+    [
+     "shinjuku-louvre-dental.com",
+     "clinic",
+     2
+    ],
+    [
+     "ne.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 口コミ 信用できるか",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 1,
+    "other": 1,
+    "media": 2,
+    "portal": 2,
+    "video": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "jidv.org",
+     "portal",
+     2
+    ],
+    [
+     "new.paipibat.com",
+     "other",
+     1
+    ],
+    [
+     "tsushima-dc.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 説明 しない",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 2,
+    "video": 1,
+    "other": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "yamaura-dc.jp",
+     "clinic",
+     3
+    ],
+    [
+     "usui-dc.com",
+     "clinic",
+     2
+    ],
+    [
+     "kitagawado.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 削りすぎ",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "video": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "senjinkai-polaris.com",
+     "clinic",
+     2
+    ],
+    [
+     "urayasu-aokishika.jp",
+     "clinic",
+     2
+    ],
+    [
+     "daiju-dc.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 何ヶ月ごと 検診",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "public": 1,
+    "portal": 1,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "cochrane.org",
+     "public",
+     1
+    ],
+    [
+     "miyazono-dc.com",
+     "clinic",
+     1
+    ],
+    [
+     "yamaura-dc.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "女性 歯科医師 探し方",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "portal": 3,
+    "public": 2
+   },
+   "top": [
+    [
+     "haisha-yoyaku.jp",
+     "portal",
+     2
+    ],
+    [
+     "shika-town.com",
+     "portal",
+     2
+    ],
+    [
+     "epark.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯科 夜間 救急",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "yokoshi.net",
+     "public",
+     3
+    ],
+    [
+     "oda.or.jp",
+     "public",
+     3
+    ],
+    [
+     "at-shika.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 治療 長い なぜ",
+   "group": "受診のしかた",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "okuda-dental.jp",
+     "clinic",
+     2
+    ],
+    [
+     "nagoyashika-nagoya.jp",
+     "clinic",
+     2
+    ],
+    [
+     "sqrie.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "歯医者 転院 紹介状",
+   "group": "受診のしかた",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "portal": 2,
+    "clinic": 2,
+    "media": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "kenporen.com",
+     "public",
+     2
+    ],
+    [
+     "jpao.jp",
+     "public",
+     2
+    ],
+    [
+     "andelt.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2861 @@
+{
+ "industry": "shigyou",
+ "date": "2026-10-02",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "items": [
+  {
+   "q": "大阪 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 1,
+    "video": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "biz.ne.jp",
+     "portal",
+     3
+    ],
+    [
+     "zeirishi-navi.jp",
+     "portal",
+     2
+    ],
+    [
+     "meetsmore.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "other": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "meetsmore.com",
+     "portal",
+     3
+    ],
+    [
+     "zeirishi-navi.jp",
+     "portal",
+     2
+    ],
+    [
+     "tax.mitsukaru-pro.co.jp",
+     "other",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3,
+    "other": 1,
+    "media": 2
+   },
+   "top": [
+    [
+     "zeiri4.com",
+     "portal",
+     3
+    ],
+    [
+     "search-advisors.freee.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "meetsmore.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "video": 2,
+    "portal": 4,
+    "media": 3
+   },
+   "top": [
+    [
+     "digi-mado.jp",
+     "media",
+     3
+    ],
+    [
+     "collabonet.org",
+     "portal",
+     2
+    ],
+    [
+     "zeirishi-best.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "portal": 4,
+    "other": 1,
+    "clinic": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "all-senmonka.jp",
+     "portal",
+     3
+    ],
+    [
+     "zeiri4.com",
+     "portal",
+     3
+    ],
+    [
+     "collabonet.org",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 3,
+   "kinds": {
+    "review": 1,
+    "portal": 2,
+    "clinic": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "meetsmore.com",
+     "portal",
+     2
+    ],
+    [
+     "all-senmonka.jp",
+     "portal",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 2,
+    "video": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "biz.ne.jp",
+     "portal",
+     3
+    ],
+    [
+     "zeiri4.com",
+     "portal",
+     3
+    ],
+    [
+     "search-advisors.freee.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 2,
+    "portal": 4,
+    "clinic": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "zeiri4.com",
+     "portal",
+     3
+    ],
+    [
+     "meetsmore.com",
+     "portal",
+     3
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "仙台 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "portal": 4,
+    "clinic": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "minnano-zeirishi.jp",
+     "portal",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ],
+    [
+     "e-zeirishi.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "広島 税理士 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "zeirishic.com",
+     "portal",
+     2
+    ],
+    [
+     "zeirishi-best.com",
+     "portal",
+     2
+    ],
+    [
+     "collabonet.org",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "大阪 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "other": 1,
+    "portal": 3,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "souzoku.or.jp",
+     "portal",
+     2
+    ],
+    [
+     "tsugunavi.funaisoken.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "i-sozoku.com",
+     "portal",
+     3
+    ],
+    [
+     "meigi-henkou.jp",
+     "clinic",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "i-sozoku.com",
+     "portal",
+     3
+    ],
+    [
+     "imitsu.jp",
+     "portal",
+     2
+    ],
+    [
+     "noa-souzoku.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "福岡 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "fukuoka-isansouzoku.com",
+     "clinic",
+     3
+    ],
+    [
+     "fukuoka-shihousyoshi.jp",
+     "clinic",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 3,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "i-sozoku.com",
+     "portal",
+     3
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ],
+    [
+     "sapporo-sozoku.info",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 2,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "biz.ne.jp",
+     "portal",
+     3
+    ],
+    [
+     "souzoku-yokohama.net",
+     "clinic",
+     2
+    ],
+    [
+     "hazuki-law.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "biz.ne.jp",
+     "portal",
+     3
+    ],
+    [
+     "i-sozoku.com",
+     "portal",
+     3
+    ],
+    [
+     "zehitomo.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 2,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "tsugunavi.funaisoken.co.jp",
+     "portal",
+     3
+    ],
+    [
+     "i-sozoku.com",
+     "portal",
+     3
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "仙台 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 3,
+   "kinds": {
+    "review": 1,
+    "portal": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "google.com",
+     "review",
+     1
+    ],
+    [
+     "i-sozoku.com",
+     "portal",
+     1
+    ],
+    [
+     "sihoushosi.net",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "広島 司法書士 相続 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 2,
+    "other": 1,
+    "portal": 3,
+    "public": 1
+   },
+   "top": [
+    [
+     "souzoku-i.com",
+     "clinic",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ],
+    [
+     "i-sozoku.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "税理士 顧問料 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 4,
+    "video": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "isj-tax.or.jp",
+     "clinic",
+     3
+    ],
+    [
+     "osakacpa.com",
+     "clinic",
+     2
+    ],
+    [
+     "ht-tax.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "確定申告 税理士 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "video": 3,
+    "portal": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "all-senmonka.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "記帳代行 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 4,
+    "maker": 3,
+    "public": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "crowdworks.jp",
+     "portal",
+     3
+    ],
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "keihi.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "会社設立 司法書士 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "video": 1,
+    "maker": 1,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "vs-group.jp",
+     "clinic",
+     3
+    ],
+    [
+     "sovagroup.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "相続税申告 税理士 報酬",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "video": 3,
+    "portal": 3,
+    "other": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "souzoku-zei.jp",
+     "clinic",
+     3
+    ],
+    [
+     "zeirishi.souzoku-pro.info",
+     "portal",
+     2
+    ],
+    [
+     "atomfirm.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "相続登記 司法書士 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 1,
+    "video": 3,
+    "other": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "tomorrowstax.com",
+     "video",
+     2
+    ],
+    [
+     "meigi-henkou.jp",
+     "clinic",
+     2
+    ],
+    [
+     "souzoku-sp.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "社労士 顧問料 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 1,
+    "public": 3,
+    "portal": 2,
+    "other": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "chukidan.jp",
+     "public",
+     3
+    ],
+    [
+     "sato-group-sr.jp",
+     "clinic",
+     2
+    ],
+    [
+     "goal4864.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "就業規則 作成 費用",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 2,
+    "other": 2,
+    "video": 2
+   },
+   "top": [
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     2
+    ],
+    [
+     "note.com",
+     "video",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "助成金 申請 社労士 報酬",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 4,
+    "portal": 3,
+    "other": 1,
+    "video": 2
+   },
+   "top": [
+    [
+     "sogyotecho.jp",
+     "media",
+     3
+    ],
+    [
+     "joseikin-cloud.jp",
+     "portal",
+     3
+    ],
+    [
+     "crexgroup.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "行政書士 許可申請 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 1,
+    "other": 1,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "crowdworks.jp",
+     "portal",
+     2
+    ],
+    [
+     "fukunaga-tomoko.com",
+     "clinic",
+     1
+    ],
+    [
+     "gyosei.twentyfive.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "建設業許可 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "public": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "rm-ls.com",
+     "clinic",
+     2
+    ],
+    [
+     "office-tree.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kensetsu-kyoka.rootteam.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "ビザ申請 行政書士 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "public": 1,
+    "other": 1,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "samurai-law.com",
+     "clinic",
+     3
+    ],
+    [
+     "moneplanning.com",
+     "clinic",
+     2
+    ],
+    [
+     "yamazakiam-gyosei.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "弁護士 相談料 相場",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "financeinjapan.com",
+     "media",
+     2
+    ],
+    [
+     "legal.asiro.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "mikata-ins.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "離婚 弁護士 費用",
+   "group": "費用",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "bennavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "daylight-law.jp",
+     "clinic",
+     2
+    ],
+    [
+     "avance-lg.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "遺言書 作成 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "other": 1,
+    "video": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "daylight-law.jp",
+     "clinic",
+     3
+    ],
+    [
+     "chester-tax.com",
+     "video",
+     2
+    ],
+    [
+     "legal-jp.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "家族信託 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "portal": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "kokorono.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "go.sbisec.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "daylight-law.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "会社 解散 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "biz.moneyforward.com",
+     "maker",
+     3
+    ],
+    [
+     "vs-group.jp",
+     "clinic",
+     2
+    ],
+    [
+     "hitodeki.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "決算 税理士 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "portal": 3,
+    "clinic": 3,
+    "maker": 2,
+    "media": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "isj-tax.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "marunagekanri.com",
+     "maker",
+     2
+    ],
+    [
+     "sovagroup.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "年末調整 代行 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "portal": 3,
+    "public": 2,
+    "media": 2
+   },
+   "top": [
+    [
+     "freee.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "biz.ne.jp",
+     "portal",
+     3
+    ],
+    [
+     "aspicjapan.org",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "給与計算 代行 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "maker": 3,
+    "public": 1,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "persol-bd.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "asahi-nagoya.com",
+     "clinic",
+     2
+    ],
+    [
+     "leadbrain.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "税理士 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "video": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "ht-tax.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "keycrea.jp",
+     "clinic",
+     2
+    ],
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "税理士 変える タイミング",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "koyano-cpa.gr.jp",
+     "clinic",
+     2
+    ],
+    [
+     "honors.jp",
+     "clinic",
+     1
+    ],
+    [
+     "tokyo-consulting.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "社労士 選び方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 3,
+    "other": 1,
+    "portal": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "taxlabor.com",
+     "clinic",
+     2
+    ],
+    [
+     "next-sfa.jp",
+     "media",
+     2
+    ],
+    [
+     "biz.hrbase.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "行政書士 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "honors.jp",
+     "clinic",
+     2
+    ],
+    [
+     "iij-office.com",
+     "clinic",
+     2
+    ],
+    [
+     "next-sfa.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "弁護士 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "legal.asiro.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "bennavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "bengo4.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "司法書士 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 1,
+    "other": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "meigi-henkou.jp",
+     "clinic",
+     2
+    ],
+    [
+     "fujisawa-legal.jp",
+     "clinic",
+     2
+    ],
+    [
+     "goworkship.com",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "税理士 会計士 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "portal": 2,
+    "maker": 2,
+    "public": 2,
+    "other": 1,
+    "video": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "obs-sendai.ac.jp",
+     "public",
+     2
+    ],
+    [
+     "agsc.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "roberthalf.com",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "司法書士 行政書士 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "media": 2,
+    "other": 1,
+    "portal": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "lec-jp.com",
+     "maker",
+     2
+    ],
+    [
+     "shikaku-square.com",
+     "media",
+     2
+    ],
+    [
+     "agaroot.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "社労士 必要か",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 2,
+    "other": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "chukidan.jp",
+     "public",
+     2
+    ],
+    [
+     "alc.co.jp",
+     "maker",
+     1
+    ],
+    [
+     "bpsr.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "顧問税理士 必要か",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "portal": 2,
+    "other": 2
+   },
+   "top": [
+    [
+     "tax-front.jp",
+     "clinic",
+     2
+    ],
+    [
+     "netbk.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "tax.mitsukaru-pro.co.jp",
+     "other",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "相続 誰に相談",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 1,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "aoilaw.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "bk.mufg.jp",
+     "maker",
+     1
+    ],
+    [
+     "ht-tax.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "会社設立 誰に頼む",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "vs-group.jp",
+     "clinic",
+     2
+    ],
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "オンライン 税理士 デメリット",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "maker": 1,
+    "clinic": 3,
+    "portal": 2
+   },
+   "top": [
+    [
+     "koyano-cpa.gr.jp",
+     "clinic",
+     3
+    ],
+    [
+     "ht-tax.or.jp",
+     "clinic",
+     3
+    ],
+    [
+     "ishiguro-tax.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "女性 税理士 探し方",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "public": 2,
+    "wiki": 1,
+    "maker": 2,
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "accnt.jp",
+     "portal",
+     2
+    ],
+    [
+     "jozeiren.com",
+     "public",
+     1
+    ],
+    [
+     "ja.wikipedia.org",
+     "wiki",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "相続 弁護士 税理士 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "public": 1,
+    "clinic": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "all-senmonka.jp",
+     "portal",
+     2
+    ],
+    [
+     "koyano-cpa.gr.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ht-tax.or.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "労務トラブル 相談先",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "public": 2,
+    "clinic": 1,
+    "maker": 1,
+    "other": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "jsite.mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "check-roudou.mhlw.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "許認可 自分で できるか",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "video": 1,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "genai-ai.co.jp",
+     "maker",
+     1
+    ],
+    [
+     "office-nagaoka.jp",
+     "clinic",
+     1
+    ],
+    [
+     "takami-gs.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "記帳代行 税理士 違い",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "media": 3,
+    "portal": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "vws-biz.com",
+     "clinic",
+     3
+    ],
+    [
+     "kanbei.jp",
+     "media",
+     2
+    ],
+    [
+     "kaikeiplus.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "税理士 紹介サービス 使うべきか",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "media": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "boater.jp",
+     "media",
+     2
+    ],
+    [
+     "zeirishic.com",
+     "portal",
+     2
+    ],
+    [
+     "marunagekanri.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "社労士 顧問 なし 大丈夫か",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "steady-sr.com",
+     "clinic",
+     2
+    ],
+    [
+     "office-iwamoto.jp",
+     "clinic",
+     2
+    ],
+    [
+     "sharoushi-pro.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "確定申告 やり方",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "media": 2,
+    "portal": 2,
+    "video": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "agsc.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "nta.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "インボイス 登録 必要か",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "public": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     3
+    ],
+    [
+     "gov-online.go.jp",
+     "public",
+     2
+    ],
+    [
+     "sun-soleil.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "電子帳簿保存法 対応",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "clinic": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     2
+    ],
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "canon.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "相続税 申告 期限",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "clinic": 3,
+    "other": 1,
+    "portal": 2,
+    "video": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     3
+    ],
+    [
+     "shiruporuto.jp",
+     "public",
+     2
+    ],
+    [
+     "keisan.nta.go.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "相続放棄 手続き",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "portal": 2,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "courts.go.jp",
+     "public",
+     2
+    ],
+    [
+     "resonabank.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "ace-law.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "遺産分割 揉めた",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "office-tree.jp",
+     "clinic",
+     2
+    ],
+    [
+     "prtimes.jp",
+     "media",
+     2
+    ],
+    [
+     "yui-lo.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "会社設立 流れ",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "media": 3,
+    "public": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "biz.moneyforward.com",
+     "maker",
+     3
+    ],
+    [
+     "smbc.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "canaeru.usen.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "法人成り タイミング",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "video": 2,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "freee.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "koyano-cpa.gr.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kokoro.tax",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "社会保険 加入 義務",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "public": 3,
+    "clinic": 2,
+    "other": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "bowgl.com",
+     "maker",
+     2
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "未払い残業代 請求された",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "avance-lg.com",
+     "clinic",
+     2
+    ],
+    [
+     "darwin.law",
+     "clinic",
+     2
+    ],
+    [
+     "kigyobengo.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "労働基準監督署 調査",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 2,
+    "public": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "jsite.mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "partners.en-japan.com",
+     "portal",
+     1
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "就業規則 作成 義務",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "public": 2,
+    "portal": 1,
+    "maker": 1,
+    "clinic": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "jsite.mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "hataraku.metro.tokyo.lg.jp",
+     "public",
+     1
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "建設業許可 要件",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "clinic": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "www8.cao.go.jp",
+     "public",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "古物商許可 取り方",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "public": 3,
+    "clinic": 3,
+    "video": 1
+   },
+   "top": [
+    [
+     "keishicho.metro.tokyo.lg.jp",
+     "public",
+     3
+    ],
+    [
+     "stores.fun",
+     "maker",
+     2
+    ],
+    [
+     "pref.nagano.lg.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "在留資格 変更 手続き",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 3,
+    "other": 1,
+    "media": 1,
+    "portal": 3,
+    "video": 1
+   },
+   "top": [
+    [
+     "global-saponet.mgl.mynavi.jp",
+     "portal",
+     3
+    ],
+    [
+     "moj.go.jp",
+     "public",
+     2
+    ],
+    [
+     "aidemglobal.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "税務調査 来た",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "public": 1,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "yg-tax.net",
+     "clinic",
+     2
+    ],
+    [
+     "on-tax.or.jp",
+     "clinic",
+     1
+    ],
+    [
+     "business.ntt-west.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "延滞税 計算",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "public": 3,
+    "clinic": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     3
+    ],
+    [
+     "ht-tax.or.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ayusawa-partners.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "資金繰り 相談先",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "public": 3,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "dreamgate.gr.jp",
+     "public",
+     3
+    ],
+    [
+     "mirasapo-plus.go.jp",
+     "public",
+     3
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "事業承継 進め方",
+   "group": "手続き・悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "other": 1,
+    "public": 3,
+    "portal": 1
+   },
+   "top": [
+    [
+     "ma-cp.com",
+     "clinic",
+     3
+    ],
+    [
+     "chusho.meti.go.jp",
+     "public",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "小規模 M&A 相談先",
+   "group": "手続き・悩み",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "public": 2,
+    "media": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "ma-navigator.com",
+     "portal",
+     2
+    ],
+    [
+     "catalog.monex.co.jp",
+     "media",
+     2
+    ],
+    [
+     "chusho.meti.go.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "相続税 基礎控除",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 2,
+    "other": 1,
+    "public": 2,
+    "media": 2,
+    "portal": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "taxlawyer328.jp",
+     "clinic",
+     2
+    ],
+    [
+     "nta.go.jp",
+     "public",
+     2
+    ],
+    [
+     "resonabank.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "贈与税 非課税",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 2,
+    "public": 3,
+    "media": 2,
+    "other": 1,
+    "video": 2
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     3
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "clearthlife.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "小規模宅地等の特例",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "clinic": 3,
+    "video": 1,
+    "other": 1,
+    "maker": 1,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     3
+    ],
+    [
+     "keisan.nta.go.jp",
+     "public",
+     2
+    ],
+    [
+     "fuji-sogo.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "青色申告 メリット",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 1,
+    "other": 1,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     1
+    ],
+    [
+     "bk.mufg.jp",
+     "maker",
+     1
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "経費 認められる 範囲",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "portal": 2,
+    "clinic": 1,
+    "public": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "jcb.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "減価償却 とは",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "wiki": 1,
+    "media": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "obc.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "ja.wikipedia.org",
+     "wiki",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "消費税 免税事業者",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "public": 3,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "nta.go.jp",
+     "public",
+     3
+    ],
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "fp-soken.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "社会保険 扶養 範囲",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 1,
+    "media": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "jp.adp.com",
+     "maker",
+     1
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "育児休業 給付金",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "video": 1,
+    "other": 1,
+    "maker": 2,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     3
+    ],
+    [
+     "jsite.mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "siaa.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "雇用保険 加入条件",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "public": 3,
+    "clinic": 3,
+    "portal": 2,
+    "other": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "jsite.mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "jtuc-rengo.or.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "36協定 とは",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "clinic": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "businesslawyers.jp",
+     "portal",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ],
+    [
+     "jeed.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "最低賃金 2026",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "media": 3,
+    "public": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "hrm-co.jp",
+     "maker",
+     2
+    ],
+    [
+     "nalevi.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "kito-sr.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "パート 有給 日数",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "public": 2,
+    "clinic": 3,
+    "portal": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "jsite.mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "mag.smarthr.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "労災 申請 方法",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 1,
+    "clinic": 2,
+    "portal": 1
+   },
+   "top": [
+    [
+     "daylight-law.jp",
+     "clinic",
+     2
+    ],
+    [
+     "jp-life.japanpost.jp",
+     "maker",
+     2
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "遺言 種類",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "wiki": 1,
+    "portal": 1,
+    "public": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "koshonin.gr.jp",
+     "public",
+     2
+    ],
+    [
+     "kondo-fp.jp",
+     "clinic",
+     1
+    ],
+    [
+     "ja.wikipedia.org",
+     "wiki",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "成年後見 とは",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "wiki": 1,
+    "clinic": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "guardianship.mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "moj.go.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "家族信託 とは",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "wiki": 1,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "orixbank.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "daylight-law.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ht-tax.or.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "相続登記 義務化",
+   "group": "制度・ルール",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 2,
+    "maker": 1,
+    "other": 1,
+    "public": 2
+   },
+   "top": [
+    [
+     "moj.go.jp",
+     "public",
+     2
+    ],
+    [
+     "houmukyoku.moj.go.jp",
+     "public",
+     2
+    ],
+    [
+     "gov-online.go.jp",
+     "public",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "補助金 申請 誰に頼む",
+   "group": "制度・ルール",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 2,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "note.com",
+     "video",
+     2
+    ],
+    [
+     "so-labo.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "minnano-joseikin.com",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "役員報酬 決め方",
+   "group": "制度・ルール",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "media": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "yayoi-kk.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "freee.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "biz.moneyforward.com",
+     "maker",
+     2
+    ]
+   ]
+  }
+ ]
+}

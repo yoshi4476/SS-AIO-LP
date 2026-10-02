@@ -1593,3 +1593,33 @@ main.lab .cta-final h2 { color: #fff; }
 .season-arts { margin: 0 0 1rem; padding-left: 1.2rem; line-height: 1.9; }
 .season-btns { display: flex; flex-wrap: wrap; gap: .6rem; }
 @media (max-width: 600px) { .season-btns .btn { flex: 1 1 100%; text-align: center; } }
+/* 質問集（question_pages.py） */
+.qa-intro, .qa-group, .qa-cta { max-width: 1100px; margin: 0 auto 2rem; }
+.qa-intro p { line-height: 1.9; }
+.qa-how { font-size: .88rem; color: var(--muted); }
+.qa-toc { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.qa-toc a { padding: .35em .9em; border: 1px solid var(--sky-2); border-radius: 999px; background: var(--sky); color: var(--navy); font-size: .85rem; font-weight: 600; text-decoration: none; }
+.qa-group h2 { font-size: 1.25rem; color: var(--navy); border-left: 4px solid var(--blue); padding-left: .6rem; }
+.qa-lead { line-height: 1.9; }
+.qa-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: .7rem; }
+.qa-item { border: 1px solid var(--line); border-radius: 12px; padding: .8rem 1rem; background: #fff; min-width: 0; }
+.qa-q { margin: 0 0 .4rem; font-weight: 700; color: var(--navy); }
+.qa-chips { margin: 0 0 .35rem; display: flex; flex-wrap: wrap; gap: .3rem; }
+.qa-chip { font-size: .75rem; padding: .15em .55em; border-radius: 999px; background: var(--bg-alt); color: var(--text); }
+.qa-chip.qa-clinic { background: #e7f6ee; color: #0f6a3d; font-weight: 700; }
+.qa-chip.qa-portal { background: #fff4e5; color: #8a5a00; }
+.qa-top { margin: 0; font-size: .78rem; color: var(--muted); overflow-wrap: anywhere; }
+.qa-cta { text-align: center; background: var(--sky); border-radius: var(--radius); padding: 1.6rem; }
+.qa-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
+/* ご契約前のよくある質問（faq_page.py） */
+.faq-toc { justify-content: center; }
+.faq-wrap { max-width: 860px; margin: 0 auto; padding: 0 var(--gutter); }
+.faq-sec { margin: 0 0 2rem; }
+.faq-sec h2 { font-size: 1.2rem; color: var(--navy); border-left: 4px solid var(--blue); padding-left: .6rem; }
+.faq-item { border: 1px solid var(--line); border-radius: 12px; background: #fff; margin: 0 0 .6rem; }
+.faq-item summary { cursor: pointer; padding: .9rem 1rem; font-weight: 700; color: var(--navy); list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before { content: "Q"; color: var(--blue); font-weight: 800; margin-right: .6rem; }
+.faq-item[open] summary { border-bottom: 1px solid var(--line); }
+.faq-item p { margin: 0; padding: .9rem 1rem 1rem; line-height: 1.9; }
+.faq-cta { margin: 1rem auto 2.5rem; max-width: 860px; }

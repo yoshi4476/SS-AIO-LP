@@ -1,0 +1,2861 @@
+{
+ "industry": "koumuten",
+ "date": "2026-10-02",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "items": [
+  {
+   "q": "大阪 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 3,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "fudonavi.jp",
+     "portal",
+     2
+    ],
+    [
+     "houzz.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "video": 1,
+    "portal": 3,
+    "media": 2
+   },
+   "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "med-com.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 3,
+    "portal": 3,
+    "review": 1
+   },
+   "top": [
+    [
+     "howto-custom-home.jp",
+     "media",
+     3
+    ],
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "福岡 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "ridounoie-buildernv.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "portal": 3,
+    "media": 3
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "howto-custom-home.jp",
+     "media",
+     2
+    ],
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "review": 1,
+    "media": 3,
+    "portal": 3,
+    "video": 1
+   },
+   "top": [
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "team-onizuka.com",
+     "clinic",
+     2
+    ],
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "media": 3,
+    "portal": 3
+   },
+   "top": [
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "mochiie.com",
+     "portal",
+     2
+    ],
+    [
+     "varesearch.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 3,
+    "portal": 3,
+    "review": 1
+   },
+   "top": [
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     3
+    ],
+    [
+     "school.stephouse.jp",
+     "portal",
+     2
+    ],
+    [
+     "kurabel.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "仙台 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 3,
+    "media": 3,
+    "public": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "saigasekkei.com",
+     "clinic",
+     3
+    ],
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "fudonavi.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "広島 工務店 おすすめ",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 4,
+    "portal": 4,
+    "other": 1,
+    "review": 1
+   },
+   "top": [
+    [
+     "realestate.news.mynavi.jp",
+     "media",
+     3
+    ],
+    [
+     "auka.jp",
+     "portal",
+     3
+    ],
+    [
+     "crexgroup.com",
+     "media",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "大阪 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 3,
+    "public": 1,
+    "portal": 4,
+    "maker": 1
+   },
+   "top": [
+    [
+     "refo-sumu.jp",
+     "portal",
+     4
+    ],
+    [
+     "osaka-reform.com",
+     "clinic",
+     3
+    ],
+    [
+     "hapisumu.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "東京 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 1,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "homepro.jp",
+     "portal",
+     2
+    ],
+    [
+     "hapisumu.jp",
+     "portal",
+     2
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "名古屋 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "media": 1,
+    "portal": 3,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     3
+    ],
+    [
+     "refo-sumu.jp",
+     "portal",
+     3
+    ],
+    [
+     "hapisumu.jp",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "福岡 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 3,
+   "kinds": {
+    "review": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "hapisumu.jp",
+     "portal",
+     2
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "札幌 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     3
+    ],
+    [
+     "homepro.jp",
+     "portal",
+     3
+    ],
+    [
+     "refo-sumu.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "横浜 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "review": 1,
+    "clinic": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     3
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "miyako-reform.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "京都 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "miyako-reform.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "reform-guide.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "神戸 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 3,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "refo-sumu.jp",
+     "portal",
+     3
+    ],
+    [
+     "miyako-reform.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "仙台 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 1,
+    "media": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     3
+    ],
+    [
+     "refonavi.or.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "広島 リフォーム会社 評判",
+   "group": "地域で探す",
+   "answered": 4,
+   "kinds": {
+    "clinic": 2,
+    "review": 1,
+    "portal": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "refo-sumu.jp",
+     "portal",
+     3
+    ],
+    [
+     "reform.totate.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "注文住宅 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "portal": 4,
+    "clinic": 3,
+    "public": 1,
+    "maker": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "house.home4u.jp",
+     "portal",
+     3
+    ],
+    [
+     "homes.panasonic.com",
+     "clinic",
+     3
+    ],
+    [
+     "toyotahome.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "工務店 坪単価 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "media": 3,
+    "portal": 3,
+    "clinic": 3,
+    "public": 2
+   },
+   "top": [
+    [
+     "mitsumori-bank.com",
+     "portal",
+     2
+    ],
+    [
+     "taisei-hs.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "mochiie.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "平屋 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "video": 2,
+    "portal": 4,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "dfar.jp",
+     "clinic",
+     3
+    ],
+    [
+     "house.home4u.jp",
+     "portal",
+     3
+    ],
+    [
+     "yamadahomes.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "二世帯住宅 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "video": 1,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "yamadahomes.jp",
+     "clinic",
+     3
+    ],
+    [
+     "house.home4u.jp",
+     "portal",
+     3
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     3
+    ]
+   ]
+  },
+  {
+   "q": "外壁塗装 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "maker": 1,
+    "portal": 4,
+    "clinic": 2,
+    "video": 1,
+    "media": 2
+   },
+   "top": [
+    [
+     "nuri-kae.jp",
+     "portal",
+     3
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "yuzu-tosou.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "屋根 リフォーム 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 2,
+    "maker": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "yaneiroha.com",
+     "media",
+     1
+    ],
+    [
+     "besthome-tosou.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "キッチン リフォーム 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "media": 2,
+    "video": 1,
+    "maker": 3,
+    "clinic": 3,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "sunrefre.jp",
+     "maker",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "浴室 リフォーム 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "video": 1,
+    "maker": 1,
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "youtube.com",
+     "video",
+     1
+    ],
+    [
+     "kakaku.com",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "トイレ リフォーム 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "media": 2,
+    "video": 1,
+    "clinic": 2,
+    "portal": 3,
+    "maker": 1
+   },
+   "top": [
+    [
+     "lixil-reformshop.jp",
+     "clinic",
+     2
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "kurashi-pro.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "フルリノベーション 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "portal": 3,
+    "maker": 2,
+    "public": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "zerorenovation.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "furureno.jp",
+     "portal",
+     2
+    ],
+    [
+     "forest.toppan.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "耐震 リフォーム 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "video": 2,
+    "maker": 2,
+    "public": 1,
+    "portal": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "youtube.com",
+     "video",
+     2
+    ],
+    [
+     "kakaku.com",
+     "portal",
+     2
+    ],
+    [
+     "reform-guide.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "断熱 リフォーム 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "portal": 4,
+    "clinic": 3,
+    "maker": 2,
+    "media": 3,
+    "other": 1
+   },
+   "top": [
+    [
+     "hapisumu.jp",
+     "portal",
+     3
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "reform-guide.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "建て替え 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "portal": 3,
+    "media": 2
+   },
+   "top": [
+    [
+     "house.home4u.jp",
+     "portal",
+     2
+    ],
+    [
+     "kinoedesign.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "furureno.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "外構 費用 相場",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "public": 3,
+    "video": 1,
+    "portal": 4,
+    "clinic": 3,
+    "maker": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "okayama-taikyo.or.jp",
+     "public",
+     3
+    ],
+    [
+     "gaikouexterior-partners.jp",
+     "portal",
+     3
+    ],
+    [
+     "exterior-simulator.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "太陽光発電 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "media": 2,
+    "other": 1,
+    "portal": 3
+   },
+   "top": [
+    [
+     "home.osakagas.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "eco-hatsu.com",
+     "portal",
+     2
+    ],
+    [
+     "solar-partners.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "注文住宅 諸費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "media": 1,
+    "portal": 3,
+    "maker": 2
+   },
+   "top": [
+    [
+     "yamadahomes.jp",
+     "clinic",
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "mitsuihome.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "地盤改良 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "media": 1,
+    "video": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "inakalife.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "norq.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "r-plus-house.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "木造 解体 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "video": 2,
+    "portal": 4,
+    "maker": 1
+   },
+   "top": [
+    [
+     "ripro1.com",
+     "clinic",
+     2
+    ],
+    [
+     "kaitai-ibaraki.com",
+     "clinic",
+     2
+    ],
+    [
+     "myhom.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "水回り リフォーム 費用",
+   "group": "費用",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 3,
+    "video": 1,
+    "portal": 4,
+    "maker": 3
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "forest.toppan.com",
+     "maker",
+     3
+    ],
+    [
+     "usui-home.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "床 張り替え 費用",
+   "group": "費用",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "other": 1,
+    "portal": 3,
+    "maker": 2
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "renoco.jp",
+     "portal",
+     2
+    ],
+    [
+     "forest.toppan.com",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "工務店 ハウスメーカー 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "suumocounter.jp",
+     "portal",
+     2
+    ],
+    [
+     "life.oricon.co.jp",
+     "media",
+     1
+    ],
+    [
+     "abc-housing.asahi.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "工務店 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "sakurajimusyo.com",
+     "maker",
+     2
+    ],
+    [
+     "school.stephouse.jp",
+     "portal",
+     2
+    ],
+    [
+     "house.home4u.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "リフォーム会社 選び方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "public": 1,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "refonavi.or.jp",
+     "portal",
+     2
+    ],
+    [
+     "news.mynavi.jp",
+     "media",
+     2
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "設計事務所 工務店 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "video": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "kawazoe-architects.com",
+     "clinic",
+     2
+    ],
+    [
+     "touwa-corp.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "crexgroup.com",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "相見積もり 注意点",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "media": 2,
+    "other": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "kaonavi.jp",
+     "maker",
+     2
+    ],
+    [
+     "bod-grp.com",
+     "maker",
+     2
+    ],
+    [
+     "leaner.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "高気密高断熱 工務店 見分け方",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "video": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "bucchake-housing.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "actie.jp",
+     "clinic",
+     1
+    ],
+    [
+     "smifulhome.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "ZEH とは",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 2,
+    "clinic": 2,
+    "portal": 1,
+    "wiki": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "env.go.jp",
+     "public",
+     2
+    ],
+    [
+     "enecho.meti.go.jp",
+     "public",
+     1
+    ],
+    [
+     "pref.nara.lg.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "長期優良住宅 メリット",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "public": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "esakihome.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "taiseijyutaku.com",
+     "clinic",
+     2
+    ],
+    [
+     "nihonhouse-hd.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "耐震等級3 必要か",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "mitsuihome.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "house.home4u.jp",
+     "portal",
+     2
+    ],
+    [
+     "marukyo-net.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "断熱等級 とは",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 2,
+    "public": 1,
+    "media": 3,
+    "other": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "standard-project.net",
+     "media",
+     2
+    ],
+    [
+     "ms-as.jp",
+     "clinic",
+     2
+    ],
+    [
+     "zaijubiz.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "木造 鉄骨 どっち",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "video": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "homes.panasonic.com",
+     "clinic",
+     2
+    ],
+    [
+     "vertex-c.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "hajime-kensetsu.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "平屋 二階建て どっち",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "homes.panasonic.com",
+     "clinic",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "abc-housing.asahi.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "建売 注文住宅 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "hajime-kensetsu.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "homes.panasonic.com",
+     "clinic",
+     1
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "リフォーム 建て替え どっち",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "fujitakensetsu.jp",
+     "clinic",
+     2
+    ],
+    [
+     "kurashi-pro.jp",
+     "media",
+     1
+    ],
+    [
+     "crexgroup.com",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "リノベーション リフォーム 違い",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "resonabank.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "sumai.panasonic.jp",
+     "maker",
+     2
+    ],
+    [
+     "zerorenovation.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "工務店 倒産 リスク",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 2,
+    "other": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "metaexpo.jp",
+     "media",
+     2
+    ],
+    [
+     "asitis.ibaraki.jp",
+     "clinic",
+     2
+    ],
+    [
+     "concrew.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "完成見学会 チェックポイント",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "video": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "yuyuhome.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "sbs-mhc.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "kurashi-pro.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "モデルハウス 見るべき点",
+   "group": "選び方",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "video": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "iwakura-home.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "replan.ne.jp",
+     "media",
+     1
+    ],
+    [
+     "growing.hosoda.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "工務店 アフターサービス 比較",
+   "group": "選び方",
+   "answered": 4,
+   "kinds": {
+    "media": 4,
+    "portal": 4,
+    "clinic": 3,
+    "maker": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "megulie.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "mitsumori-bank.com",
+     "portal",
+     2
+    ],
+    [
+     "santodomingocc.com",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "住宅 保証 期間",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 3,
+    "other": 1,
+    "portal": 3,
+    "maker": 1,
+    "media": 2
+   },
+   "top": [
+    [
+     "shintoa-tosou.jp",
+     "clinic",
+     2
+    ],
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "re-guide.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "注文住宅 流れ",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "yasunari.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "家づくり 何から",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 1,
+    "media": 1,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "asahi-kasei.co.jp",
+     "maker",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "土地探し 工務店",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "build.hosoda.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "住宅ローン いつ 申し込む",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 2,
+    "other": 1,
+    "portal": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "jibunbank.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "netbk.co.jp",
+     "maker",
+     3
+    ],
+    [
+     "mogecheck.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "間取り 失敗",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
+    [
+     "mochiie.com",
+     "portal",
+     2
+    ],
+    [
+     "allabout.co.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "注文住宅 後悔",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "video": 1,
+    "maker": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "prtimes.jp",
+     "media",
+     2
+    ],
+    [
+     "ishinhome.co.jp",
+     "clinic",
+     1
+    ],
+    [
+     "news.mynavi.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "リフォーム トラブル",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "hikari-kensetsu.jp",
+     "clinic",
+     2
+    ],
+    [
+     "reform-guide.jp",
+     "portal",
+     2
+    ],
+    [
+     "zeenb.astecpaints.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "追加費用 トラブル 工事",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 3,
+    "other": 2,
+    "portal": 2,
+    "media": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "accelserve-legal.com",
+     "clinic",
+     2
+    ],
+    [
+     "vbest.jp",
+     "other",
+     2
+    ],
+    [
+     "naito-csc.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "工期 遅れる",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "maker": 2,
+    "public": 2,
+    "media": 2,
+    "portal": 2,
+    "video": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "lp.kanna4u.com",
+     "maker",
+     2
+    ],
+    [
+     "kuraemon.com",
+     "maker",
+     2
+    ],
+    [
+     "naito-csc.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "欠陥住宅 見分け方",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "wiki": 1,
+    "media": 2,
+    "clinic": 2,
+    "portal": 2,
+    "maker": 1,
+    "public": 1
+   },
+   "top": [
+    [
+     "mitsumori-bank.com",
+     "portal",
+     2
+    ],
+    [
+     "bigcompany.jp",
+     "media",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "新築 雨漏り",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "public": 3,
+    "media": 2,
+    "other": 3,
+    "clinic": 3,
+    "portal": 2,
+    "maker": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "vbest.jp",
+     "other",
+     3
+    ],
+    [
+     "sharing-tech.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "zennichi.or.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "リフォーム 補助金",
+   "group": "進め方・トラブル",
+   "answered": 4,
+   "kinds": {
+    "maker": 4,
+    "media": 2,
+    "other": 2,
+    "clinic": 3,
+    "portal": 3,
+    "public": 3,
+    "video": 1
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     3
+    ],
+    [
+     "jutaku-shoene2026.mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "ykkap.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "住宅 補助金 2026",
+   "group": "進め方・トラブル",
+   "answered": 4,
+   "kinds": {
+    "public": 4,
+    "media": 3,
+    "clinic": 2,
+    "maker": 3,
+    "portal": 3,
+    "video": 1
+   },
+   "top": [
+    [
+     "jutaku-shoene2026.mlit.go.jp",
+     "public",
+     3
+    ],
+    [
+     "odakyuhousing.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "外壁塗装 時期",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3,
+    "media": 1,
+    "video": 1
+   },
+   "top": [
+    [
+     "nuri-kae.jp",
+     "portal",
+     3
+    ],
+    [
+     "all-reform.polus.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "tosouyasan13.net",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "リフォーム 契約 注意点",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "public": 2,
+    "media": 2,
+    "portal": 2,
+    "maker": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "kakaku.com",
+     "portal",
+     2
+    ],
+    [
+     "crexgroup.com",
+     "media",
+     2
+    ],
+    [
+     "housingbazar.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "工事 近所 挨拶",
+   "group": "進め方・トラブル",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 1,
+    "portal": 2,
+    "video": 1
+   },
+   "top": [
+    [
+     "craft-bank.com",
+     "clinic",
+     2
+    ],
+    [
+     "yanerepair.jp",
+     "clinic",
+     2
+    ],
+    [
+     "media.suke-dachi.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "地鎮祭 必要か",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "media": 3,
+    "portal": 2,
+    "other": 1
+   },
+   "top": [
+    [
+     "haseko-sumai.com",
+     "maker",
+     3
+    ],
+    [
+     "ishidacs.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "showa-hc.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "引き渡し チェック",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "maker": 2,
+    "media": 3,
+    "portal": 3,
+    "video": 2
+   },
+   "top": [
+    [
+     "anest.net",
+     "media",
+     2
+    ],
+    [
+     "sakurajimusyo.com",
+     "maker",
+     2
+    ],
+    [
+     "healthy-home.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "新築 定期点検 内容",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "media": 2,
+    "public": 1
+   },
+   "top": [
+    [
+     "johnsonhome.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "crexgroup.com",
+     "media",
+     2
+    ],
+    [
+     "tacthome.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "リフォーム ローン",
+   "group": "進め方・トラブル",
+   "answered": 3,
+   "kinds": {
+    "clinic": 2,
+    "portal": 3,
+    "maker": 3,
+    "public": 2,
+    "other": 1,
+    "video": 1,
+    "media": 2
+   },
+   "top": [
+    [
+     "mogecheck.jp",
+     "portal",
+     2
+    ],
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "家 寒い 対策",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "nitori-net.jp",
+     "maker",
+     1
+    ],
+    [
+     "amemiya.co.jp",
+     "maker",
+     1
+    ],
+    [
+     "nuri-kae.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "結露 対策",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 1,
+    "video": 1,
+    "portal": 2,
+    "clinic": 1
+   },
+   "top": [
+    [
+     "curama.jp",
+     "portal",
+     2
+    ],
+    [
+     "panasonic.jp",
+     "maker",
+     2
+    ],
+    [
+     "asahiglassplaza.net",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "家 カビ 原因",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "curama.jp",
+     "portal",
+     2
+    ],
+    [
+     "taskle.jp",
+     "portal",
+     1
+    ],
+    [
+     "eidaihouse.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "床 きしむ 原因",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "media": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "10-1.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "amemiya.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "hdc.asahi.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "雨漏り 修理 どこに頼む",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "portal": 2,
+    "maker": 1,
+    "other": 1
+   },
+   "top": [
+    [
+     "rhythmpaint.jp",
+     "clinic",
+     2
+    ],
+    [
+     "safely.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "kk-bless.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "シロアリ 対策",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "public": 1,
+    "portal": 2,
+    "media": 1
+   },
+   "top": [
+    [
+     "duskin.jp",
+     "maker",
+     2
+    ],
+    [
+     "rescue.epark.jp",
+     "portal",
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "外壁 ひび割れ",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "video": 1,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "nuri-kae.jp",
+     "portal",
+     2
+    ],
+    [
+     "housing-box.co.jp",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "窓 断熱 方法",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "public": 1,
+    "video": 1,
+    "portal": 2,
+    "clinic": 1,
+    "media": 1
+   },
+   "top": [
+    [
+     "ykkap.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "sls.co.jp",
+     "maker",
+     1
+    ],
+    [
+     "kenzai-navi.com",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "家 暑い 対策",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 2,
+    "clinic": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ],
+    [
+     "ykkap.co.jp",
+     "maker",
+     1
+    ],
+    [
+     "idaiko.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "防音 リフォーム",
+   "group": "住まいの悩み",
+   "answered": 3,
+   "kinds": {
+    "clinic": 2,
+    "media": 3,
+    "portal": 3,
+    "maker": 2
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "hifumi-reform.com",
+     "clinic",
+     1
+    ],
+    [
+     "standard-project.net",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "バリアフリー リフォーム",
+   "group": "住まいの悩み",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "public": 3,
+    "other": 1,
+    "media": 2,
+    "portal": 3
+   },
+   "top": [
+    [
+     "ism-reform.com",
+     "clinic",
+     2
+    ],
+    [
+     "furureno.jp",
+     "portal",
+     2
+    ],
+    [
+     "kakaku.com",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "収納 増やす リフォーム",
+   "group": "住まいの悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 2,
+    "clinic": 3,
+    "portal": 3,
+    "media": 1
+   },
+   "top": [
+    [
+     "riperun.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "reform-guide.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "耐震診断 古い家",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "public": 2,
+    "clinic": 1,
+    "portal": 1
+   },
+   "top": [
+    [
+     "taishin.metro.tokyo.lg.jp",
+     "public",
+     2
+    ],
+    [
+     "mlit.go.jp",
+     "public",
+     1
+    ],
+    [
+     "city.nagano.nagano.jp",
+     "public",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "給湯器 交換 時期",
+   "group": "住まいの悩み",
+   "answered": 3,
+   "kinds": {
+    "maker": 3,
+    "clinic": 3,
+    "portal": 3,
+    "video": 1
+   },
+   "top": [
+    [
+     "qracian.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "ac.daikin.co.jp",
+     "maker",
+     2
+    ],
+    [
+     "home.tokyo-gas.co.jp",
+     "maker",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "屋根 修理 業者 選び方",
+   "group": "住まいの悩み",
+   "answered": 3,
+   "kinds": {
+    "clinic": 3,
+    "video": 1,
+    "portal": 3,
+    "media": 2
+   },
+   "top": [
+    [
+     "gaiheki-madoguchi.com",
+     "portal",
+     2
+    ],
+    [
+     "uchinobankin.jp",
+     "clinic",
+     2
+    ],
+    [
+     "yuko-navi.com",
+     "portal",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "空き家 リフォーム",
+   "group": "住まいの悩み",
+   "answered": 3,
+   "kinds": {
+    "portal": 3,
+    "public": 3,
+    "media": 3,
+    "other": 1,
+    "video": 1,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "akiya-katsuyou.net",
+     "media",
+     2
+    ],
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "akisapo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "古民家 リノベーション",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 2,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "crexgroup.com",
+     "media",
+     2
+    ],
+    [
+     "hikari-kensetsu.jp",
+     "clinic",
+     1
+    ],
+    [
+     "news.mynavi.jp",
+     "media",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "狭小住宅 間取り",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "maker": 1,
+    "clinic": 2,
+    "media": 2,
+    "portal": 2
+   },
+   "top": [
+    [
+     "hng.ne.jp",
+     "media",
+     2
+    ],
+    [
+     "toyotahome.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "hiyamakenkou.com",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "ガレージハウス 費用",
+   "group": "住まいの悩み",
+   "answered": 4,
+   "kinds": {
+    "clinic": 4,
+    "media": 2,
+    "public": 1,
+    "portal": 2
+   },
+   "top": [
+    [
+     "wishhome-corp.co.jp",
+     "clinic",
+     3
+    ],
+    [
+     "homes.panasonic.com",
+     "clinic",
+     3
+    ],
+    [
+     "toyotahome.co.jp",
+     "clinic",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "中古住宅 リフォーム 注意点",
+   "group": "住まいの悩み",
+   "answered": 2,
+   "kinds": {
+    "clinic": 2,
+    "media": 1,
+    "video": 1,
+    "portal": 2,
+    "maker": 1
+   },
+   "top": [
+    [
+     "rehome-navi.com",
+     "portal",
+     2
+    ],
+    [
+     "homes.co.jp",
+     "portal",
+     1
+    ],
+    [
+     "allabout.co.jp",
+     "media",
+     1
+    ]
+   ]
+  }
+ ]
+}
