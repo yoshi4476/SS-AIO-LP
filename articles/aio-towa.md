@@ -6,7 +6,7 @@ keyword: aioとは
 category: aio
 date: 2026-09-24
 modified: 2026-09-24
-eyecatch: /images/aio-towa/eyecatch.png
+eyecatch: /images/aio-towa/eyecatch-main.jpg
 depth: quick
 score: 90
 diagrams:
