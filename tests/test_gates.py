@@ -2369,6 +2369,10 @@ def test_industry_thumbnails_follow_rules():
     check("AI検索と関係ない記事には当てない（インスタ集客）",
           IT.apply({**base, "category": "ai-marketing", "title": "クリニックのインスタ集客のやり方", "keyword": "クリニック instagram"}),
           "/images/x/eyecatch.png")
+    check("同じ業種の別枚は数字の付いたものだけ（美容クリニックはクリニックの別枚にしない）",
+          any("biyou" in f for f in IT.variants("clinic")), False)
+    check("同じ記事にはいつも同じ1枚",
+          IT.apply({**base, "title": "士業のAIO対策", "keyword": ""}) == IT.apply({**base, "title": "士業のAIO対策", "keyword": ""}), True)
     check("手で選んだアイキャッチは触らない",
           IT.apply({**base, "eyecatch": "/images/x/eyecatch-main.jpg", "title": "歯科医院のAIO対策", "keyword": ""}),
           "/images/x/eyecatch-main.jpg")

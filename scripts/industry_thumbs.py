@@ -69,6 +69,17 @@ def apply(meta):
     if cur and cur != f"/images/{meta.get('slug')}/eyecatch.png":
         return cur                                   # 手で選んだ画像はそのまま
     k = key_for(meta)
-    if k and (DIR / f"aio-{k}.jpg").is_file():
-        return f"/images/thumbs/aio-{k}.jpg"
+    files = variants(k) if k else []
+    if files:
+        # 同じ業種に複数枚あれば、記事ごとに決まった1枚（slug から決める。ビルドのたびに変わらない）。
+        # 一覧で同じ画像ばかり並ぶのを減らす
+        import hashlib
+        i = int(hashlib.md5(str(meta.get("slug", "")).encode("utf-8")).hexdigest(), 16) % len(files)
+        return f"/images/thumbs/{files[i]}"
     return cur
+
+
+def variants(k):
+    """aio-<鍵>.jpg と aio-<鍵>-2.jpg, -3.jpg …（数字だけ。aio-clinic-biyou は clinic の別枚に数えない）"""
+    rx = re.compile(rf"^aio-{re.escape(k)}(-\d+)?\.jpg$")
+    return sorted(p.name for p in DIR.glob(f"aio-{k}*.jpg") if rx.match(p.name))
