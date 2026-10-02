@@ -287,6 +287,21 @@ function leadReply_(site, type, d) {
         '印をつけ終えたら、AIに御社がどう紹介されているかも確かめてみてください（無料）。',
         '  https://ai.7senses.co.jp/tools/ai-check/', '',
         '何から直せばよいかのご相談は、このメールにご返信ください。無料で承ります。']).join('\n');
+  } else if (String(d.form_type || '').indexOf('AI紹介チェック') >= 0) {
+    // 相談ではないので「担当よりご連絡します」とは書かない（約束していない連絡を待たせない）
+    const msg = String(d.message || '');
+    const failed = msg.indexOf('チェック未実行') === 0;
+    subject = failed ? 'AI紹介チェックを受け付けました' : '【結果】AIにどう紹介されているか無料チェック';
+    body = [name + ' 様', '', '「AIにどう紹介されているか無料チェック」をご利用いただきありがとうございます。', '']
+      .concat(failed
+        ? (msg.indexOf('quota') >= 0 ? ['今月の受付数に達していたため、チェックが完了していません。結果は担当からメールでお送りします。']
+                                     : ['AIへの問い合わせが完了しませんでした。時間をおいて、もう一度お試しください。',
+                                        '  https://ai.7senses.co.jp/tools/ai-check/'])
+        : ['▼ 結果', msg.split('\n')[0].replace(/^AI紹介チェック: /, ''), '',
+           '質問ごとの出典は、チェックした画面に表示しています。',
+           '出典に入るための直し方は、業種別のチェックリスト（PDF・無料）にまとめています。',
+           '  https://ai.7senses.co.jp/download/'])
+      .concat(['', '詳しく調べたい場合は、このメールにご返信ください。']).join('\n');
   } else {
     body = [name + ' 様', '', 'お問い合わせいただきありがとうございます。',
             '内容を確認のうえ、3営業日以内に担当よりご連絡します。', '',
@@ -346,6 +361,7 @@ function followUp() {
   // サイト列には表示名が入る（未登録ならIDのまま）ので、両方で見る
   const aiLab = { 'ai-lab': true };
   aiLab[siteLabel_('ai-lab')] = true;
+  const tool = toolFollowCtx_(vals);
   let sent = 0;
   for (let i = 0; i < vals.length; i++) {
     const r = vals[i];
@@ -358,6 +374,13 @@ function followUp() {
     // 担当が対応を始めた（未対応でなくなった）行と、「停止」と返信があった行には送らない
     if (status !== '未対応' || !isEmail_(email)) continue;
     if (excluded_(ex, email, r[9])) continue;
+    // AI紹介チェックと資料ダウンロードは相談ではない。「お問い合わせ…行き違い」の文面は送らず、
+    // 道具ごとの後追い（数日後に1通だけ）に回す
+    const kind = toolKind_(r);
+    if (kind) {
+      if (toolFollow_(sh, i + 2, r, kind, now, tool)) sent++;
+      continue;
+    }
     // 診断の点数がある行は、点数帯ごとのステップメールで送る（1通で終わらせない）
     const score = scoreOf_(r[9]);
     if (score !== null) {
@@ -386,6 +409,132 @@ function followUp() {
     }
   }
   console.log('フォロー送信: ' + sent + '件');
+}
+
+/**
+ * 無料ツールの後追い（followUp から呼ぶ。1人に1種類1通だけ）。
+ *   aicheck:   AI紹介チェックで、どの回も出典に御社サイトが入らなかった人へ3日後
+ *   checklist: チェックリストを受け取った人へ7日後
+ * 相談・サイト診断を送ってきた人には送らない（担当が直接やり取りする）。
+ * 本文に数字は入れない（入れるなら調査ページの値を人が確かめてから）。
+ */
+const TOOL_FOLLOW_DAYS = { aicheck: 3, checklist: 7 };
+const CHECKLIST_LP = { dental: 'medical', clinic: 'medical', fudosan: 'fudosan', koumuten: 'koumuten', shigyou: 'shigyou' };
+const CHECKLIST_LABEL = { dental: '歯科医院版', clinic: 'クリニック版', fudosan: '不動産会社版',
+                          koumuten: '工務店・リフォーム会社版', shigyou: '士業事務所版' };
+const AI_CHECK_WORD_KEY = { '歯医者': 'dental', 'クリニック': 'clinic', '不動産会社': 'fudosan', '工務店': 'koumuten',
+  'リフォーム会社': 'koumuten', '税理士': 'shigyou', '社労士': 'shigyou', '行政書士': 'shigyou', '司法書士': 'shigyou', '弁護士': 'shigyou' };
+
+function toolKind_(r) {
+  if (/AI紹介チェック/.test(String(r[9] || '') + String(r[8] || ''))) return 'aicheck';
+  if (String(r[2] || '') === LEAD_TYPE_LABELS.download) {
+    // 2026-10-02 より前の資料ダウンロードは別の資料。チェックリストの後追いは送らず、従来のフォローに任せる
+    return /checklist: "(dental|clinic|fudosan|koumuten|shigyou)"/.test(String(r[9] || '')) ? 'checklist' : '';
+  }
+  return '';
+}
+
+/** 送るかの判断に使う材料を、台帳とAI紹介チェックのシートから1回だけ集める */
+function toolFollowCtx_(vals) {
+  const ctx = { contacted: {}, done: {}, ai: {} };
+  vals.forEach(function (r) {
+    const email = String(r[6] || '').trim().toLowerCase();
+    if (!email) return;
+    const type = String(r[2] || '');
+    if (type === LEAD_TYPE_LABELS.contact || type === LEAD_TYPE_LABELS.site_audit
+        || /再送信\((無料相談|サイト無料診断)\)/.test(String(r[9] || ''))) ctx.contacted[email] = true;
+    const f = String(r[FOLLOW_COL - 1] || '').match(/^(aicheck|checklist) /);
+    if (f) ctx.done[f[1] + ' ' + email] = true;
+  });
+  const sh = book_().getSheetByName('AI紹介チェック');
+  if (sh && sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 7).getValues().forEach(function (r) {
+      const email = String(r[1] || '').trim().toLowerCase();
+      if (!email) return;
+      const a = ctx.ai[email] || { cited: 0, word: '' };
+      a.cited = Math.max(a.cited, Number(r[5]) || 0);
+      a.word = String(r[3] || '') || a.word;
+      ctx.ai[email] = a;
+    });
+  }
+  return ctx;
+}
+
+function toolFollow_(sh, row, r, kind, now, ctx) {
+  const email = String(r[6] || '').trim().toLowerCase();
+  if (String(r[FOLLOW_COL - 1] || '') || ctx.contacted[email] || ctx.done[kind + ' ' + email]) return false;
+  // チェックが最後まで動いた記録（AI紹介チェックのシート）がある人だけ。1回でも出典に入っていれば送らない
+  if (kind === 'aicheck' && (!ctx.ai[email] || ctx.ai[email].cited > 0)) return false;
+  const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+  const age = (now - at) / 86400000;
+  const wait = TOOL_FOLLOW_DAYS[kind];
+  if (age < wait || age > wait + 7) return false;
+  const name = String(r[4] || '') || 'ご担当者';
+  const who = (String(r[3] || '') ? String(r[3]) + ' ' : '') + name + ' 様';
+  const mail = kind === 'aicheck' ? aiCheckFollowText_(who, r, ctx.ai[email]) : checklistFollowText_(who, r);
+  const foot = ['', '─────────────',
+    'このご案内が不要な場合は、このメールに「停止」とだけご返信ください。以降はお送りしません。', '',
+    'セブンセンシズ株式会社（AI集客ラボ）',
+    '〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902',
+    'TEL 06-4305-7547 / info.ai@7senses.co.jp', ''].join('\n');
+  try {
+    MailApp.sendEmail({ to: email, subject: mail.subject, body: mail.body + foot,
+                        name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
+    sh.getRange(row, FOLLOW_COL).setValue(kind + ' ' + Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy-MM-dd'));
+    ctx.done[kind + ' ' + email] = true;
+    return true;
+  } catch (e) {
+    console.error('ツールの後追いの送信に失敗: ' + e);
+    return false;
+  }
+}
+
+function aiCheckFollowText_(who, r, a) {
+  const key = AI_CHECK_WORD_KEY[a.word] || '';
+  // サイトのURLを入れずに調べた人は、出典に入ったかを判定できていない
+  const noSite = /サイト: 未入力/.test(String(r[8] || ''));
+  return { subject: 'AIの答えの出典に入るための3つの手順', body: [who, '',
+    '先日は「AIにどう紹介されているか無料チェック」をご利用いただきありがとうございます。',
+    noSite ? 'サイトのURLが未入力だったため、出典に御社のサイトが入ったかは判定できていません。'
+           : '3つの質問のどれでも、AIの答えの出典に御社のサイトは入っていませんでした。',
+    '出典に入るために、まず次の3つを確かめてください。', '',
+    '1. AIが御社のサイトを読めるか確かめる',
+    '   robots.txt やCDNの設定でAIのクローラーを止めていると、内容が良くても出典に使われません。',
+    '   URLを入れるだけの30秒診断（無料）で確かめられます。',
+    '   https://ai.7senses.co.jp/lp/' + (key ? CHECKLIST_LP[key] + '/' : '') + '#scan-start', '',
+    '2. 御社にしか無い事実を、文字で書く',
+    '   料金の決まり方・対応エリア・実績の数（集計の期間つき）・よくある質問への答えです。',
+    '   AIが根拠に選ぶのは、他のサイトに無い事実です。画像の中の文字は読まれません。', '',
+    '3. 予約・比較サイトの掲載情報を最新にする',
+    '   「地域名＋業種 おすすめ」のような探す質問では、AIは予約・比較サイトも出典にします。',
+    '   営業時間・料金・住所が古いと、その情報がそのまま答えに出ます。', '',
+    '項目ごとに印をつけて確かめられるチェックリスト（PDF）もお送りできます。',
+    '  https://ai.7senses.co.jp/download/' + (key ? '?ind=' + key : ''), '',
+    'ご自身で進めるのが難しい場合は、このメールにご返信ください。ご相談は無料です。'].join('\n') };
+}
+
+function checklistFollowText_(who, r) {
+  const key = (String(r[9] || '').match(/checklist: "(\w+)"/) || [])[1] || '';
+  const lp = 'https://ai.7senses.co.jp/lp/' + (CHECKLIST_LP[key] ? CHECKLIST_LP[key] + '/' : '');
+  return { subject: 'チェックリストで印がつかなかった項目の直し方', body: [who, '',
+    '先日はAI検索対策チェックリスト' + (CHECKLIST_LABEL[key] ? '（' + CHECKLIST_LABEL[key] + '）' : '') + 'をお受け取りいただきありがとうございます。',
+    '印がつかなかった項目の直し方を、章ごとにまとめました。', '',
+    '■ 1. AIと検索に読まれる状態か',
+    '・robots.txt に GPTBot などを拒否する行があれば消します。Cloudflare などを使っている場合は、AIクローラーを止める設定も確かめます。',
+    '・公開したいページに noindex が残っていれば外します。',
+    '・電話番号・所在地が画像の中にしか無ければ、文字で書き直します。',
+    '・この章の項目は、URLを入れるだけの30秒診断（無料）でまとめて確かめられます。', '  ' + lp + '#scan-start', '',
+    '■ 2.「探される」場面',
+    '・社名・住所・電話番号の書き方を1つに決め、自社サイトと掲載サイトのすべてで揃えます。',
+    '・掲載サイトの営業時間・料金・写真は、月に1回見直す日を決めておくと古くなりません。', '',
+    '■ 3.「調べられる」場面',
+    '・印がつかなかったテーマは、1テーマ1ページで書きます。冒頭の1〜2文で質問に答え、費用は幅と条件をつけて書きます。', '',
+    '■ 4. 事実と書き方',
+    '・実績の数字には、集計の期間と母数をつけます（「2025年4月〜2026年3月の42件」のように）。',
+    '・ページに監修者・執筆者の名前と資格を載せ、更新日を表示します。', '',
+    'AIに御社が今どう紹介されているかも、無料で確かめられます。',
+    '  https://ai.7senses.co.jp/tools/ai-check/', '',
+    'どこから直すか迷う場合は、このメールにご返信ください。ご相談は無料です。'].join('\n') };
 }
 
 /**

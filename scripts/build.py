@@ -489,6 +489,19 @@ def lp_url(meta):
     return industry_lp.url_for(_hub_slug(meta))
 
 
+def sticky(meta):
+    """スマホの固定ボタン（url, data-cta, 文言）。チェックリストがある業種の記事は、その業種のチェックリストへ。
+    業種の記事を読む人は「自社で何を直すか」を探しているので、URLを入れる診断より受け取りやすい"""
+    try:
+        import industry_ai_sources as IAS
+        cl = IAS.RESEARCH_TO_CHECKLIST.get(IAS.HUB_TO_RESEARCH.get(_hub_slug(meta), ""), "")
+    except Exception:
+        cl = ""
+    if cl:
+        return f"/download/?ind={cl}", f"article_sticky_checklist_{cl}", "チェックリストを受け取る（無料）"
+    return "/lp/#scan-start", "article_sticky_scan", "自社サイトを30秒で診断する"
+
+
 def lp_label(meta):
     import industry_lp
     k = industry_lp.BY_HUB.get(_hub_slug(meta))
@@ -860,6 +873,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{CONTENT}}": insert_mid_cta(insert_tool_box(_video_embed(content, meta), meta), meta) + _research_box(meta),
         "{{LP_URL}}": lp_url(meta),
         "{{LP_LABEL}}": lp_label(meta),
+        **dict(zip(("{{STICKY_URL}}", "{{STICKY_CTA}}", "{{STICKY_LABEL}}"), sticky(meta))),
         "{{RELATED}}": related,
         "{{DIAG_BANNER}}": diag_banner_html(meta),
         "{{PREVNEXT}}": prevnext,

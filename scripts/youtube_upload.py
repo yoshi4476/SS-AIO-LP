@@ -107,6 +107,55 @@ def users():
     return 0
 
 
+def tools_block(a):
+    """説明欄の「無料で確かめる」。AI紹介チェックと、業種が分かればその業種のチェックリスト"""
+    lines = ["▼ 無料で確かめる", "・AIに御社がどう紹介されているか（無料チェック）", "https://ai.7senses.co.jp/tools/ai-check/"]
+    try:
+        import industry_hub as IH
+        import industry_ai_sources as IAS
+        hub = IH.detect(a.get("title", ""), a.get("keyword", ""), IH.load()[0])
+        r = IAS.HUB_TO_RESEARCH.get(hub or "")
+        cl = IAS.RESEARCH_TO_CHECKLIST.get(r or "")
+        if cl:
+            name = IAS.QUESTIONS[r]["name"]
+            lines += [f"・AI検索対策チェックリスト（{name}版・PDF）", f"https://ai.7senses.co.jp/download/?ind={cl}"]
+    except Exception:
+        pass
+    return "\n".join(lines) + "\n\n"
+
+
+def update_descriptions():
+    """すでに上げた動画の説明欄を、いまの describe() で書き直す（ショートは題に #Shorts を残す）"""
+    import article_videos as AV
+    from googleapiclient.discovery import build
+    c = creds()
+    if not c:
+        raise SystemExit("youtube-token.json がありません")
+    yt = build("youtube", "v3", credentials=c, cache_discovery=False)
+    led = AV.load()
+    n = 0
+    for slug, v in led.items():
+        for vid in [v.get("youtube"), (v.get("short") or {}).get("youtube")]:
+            if not vid:
+                continue
+            desc, _, _ = describe(slug)
+            if not desc:
+                continue
+            cur = yt.videos().list(part="snippet", id=vid).execute().get("items", [])
+            if not cur:
+                continue
+            sn = cur[0]["snippet"]
+            if "/tools/ai-check/" in sn.get("description", ""):
+                continue
+            body = {"id": vid, "snippet": {"title": sn["title"], "categoryId": sn.get("categoryId", "27"),
+                                           "description": desc[:4900], "tags": sn.get("tags", [])}}
+            yt.videos().update(part="snippet", body=body).execute()
+            n += 1
+            print(f"  説明欄を更新: {vid} {sn['title'][:30]}")
+    print(f"YT_DESC_UPDATED={n}")
+    return 0
+
+
 def describe(slug):
     """概要欄。**記事URLを必ず先頭に置く**（指名検索とサイトへの導線）"""
     import social_post as SP
@@ -129,7 +178,7 @@ def describe(slug):
     url = f'https://{cfg.get("domain", "")}/{pre}/{slug}/'
     body = "\n".join(f"・{x}" for x in a["leads"][:5])
     desc = (f'{a["desc"]}\n\n▼ 記事はこちら\n{url}\n\n'
-            f'{body}\n\nセブンセンシズ株式会社\nhttps://{cfg.get("domain", "")}/')
+            f'{body}\n\n{tools_block(a)}セブンセンシズ株式会社\nhttps://{cfg.get("domain", "")}/')
     tags = [t for t in (cfg.get("x_tags") or [])]
     return desc, a["title"], tags
 
@@ -258,7 +307,10 @@ def main():
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--users", action="store_true", help="許可したアカウントの累計（上限100の手前で知らせる）")
     ap.add_argument("--public", action="store_true", help="全体公開で上げる")
+    ap.add_argument("--update-desc", action="store_true", help="上げ済みの動画の説明欄を今の内容に書き直す")
     a = ap.parse_args()
+    if a.update_desc:
+        return update_descriptions()
 
     if a.auth:
         return auth()

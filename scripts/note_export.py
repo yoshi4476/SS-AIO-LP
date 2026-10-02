@@ -188,6 +188,10 @@ def main():
                     print(f"  × {art['slug']}: 短い版にしました（{'／'.join(why)[:80]}）")
             long_n += kind == "読み物"
             print(f"  {i:>3}/{len(rows)} {kind} {art['slug']}", flush=True)
+        # 末尾に「無料で確かめる」（AI紹介チェックと、業種が分かればその業種のチェックリスト）。
+        # 本文は書き直さず足すだけ（Claude を呼ばない）。説明欄と同じ文面を youtube_upload から使う
+        import youtube_upload as YU
+        text = text.rstrip("\n") + "\n\n" + YU.tools_block(art).rstrip("\n") + "\n"
         (OUT / name).write_text(text, encoding="utf-8")
         index.append(f"{i}\t{n}\t{kind}\t{art['title']}\t{name}")
     (OUT / "一覧.tsv").write_text("\n".join(index) + "\n", encoding="utf-8-sig")
