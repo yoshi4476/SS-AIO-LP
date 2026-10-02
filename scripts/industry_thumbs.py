@@ -29,7 +29,22 @@ KEYS = {
     "btob-system": "システム開発のAIO対策",
     "btob-consulting": "経営戦略・コンサルティングのAIO対策",
     "inshoku": "飲食店のAIO対策",
+    "salon": "美容室・サロンのAIO対策",
+    "reform": "リフォーム・外壁塗装のAIO対策",
+    "hotel": "ホテル・旅館のAIO対策",
+    "fitness": "フィットネス・ジムのAIO対策",
+    "school": "スクール・教育サービスのAIO対策",
+    "ec": "EC・ネットショップのAIO対策",
 }
+# 業種ページ（industry_hub）の無い業種は、題・狙う語の言葉で決める（上から順に見る）
+WORDS = [
+    ("reform", r"リフォーム|外壁|塗装"),
+    ("salon", r"美容室|美容院|ヘアサロン|サロン"),
+    ("hotel", r"ホテル|旅館|宿泊"),
+    ("fitness", r"フィットネス|ジム|パーソナルトレーニング"),
+    ("school", r"学習塾|塾|スクール|教室|予備校"),
+    ("ec", r"EC|ネットショップ|通販"),
+]
 AIO_THEME = re.compile(r"AIO|AI検索|LLMO|AI ?Overview|AIに(選|引用|紹介|出)", re.I)
 _DEFS = None
 
@@ -52,6 +67,9 @@ def key_for(meta):
         return ""
     if "飲食" in title or "飲食" in kw:
         return "inshoku"
+    for k, rx in WORDS:
+        if re.search(rx, title + " " + kw) and variants(k):
+            return k
     hub = _hub(title, kw)
     if hub == "clinic" and "美容" in title:
         return "clinic-biyou"
