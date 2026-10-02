@@ -284,7 +284,10 @@ def classify(raw):
             known[d] = c if c in CATS else "other"
         OUT.mkdir(parents=True, exist_ok=True)
         CLASS_FILE.write_text(json.dumps(known, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
-    return lambda d, u="": rule_class(d, u) or known.get(d, "other")
+    # 業種ごとの上書き（"<業種>|<ドメイン>"）を先に見る。同じサイトでも業種で種類が変わる
+    # （士業グループは士業の調査では士業事務所、不動産の調査では「その他」）
+    ind = raw.get("industry", "")
+    return lambda d, u="": rule_class(d, u) or known.get(f"{ind}|{d}") or known.get(d, "other")
 
 
 def summarize(raw, cls):
@@ -324,7 +327,8 @@ def per_answer(raw):
     """もう1つの数え方: 回答ごとに『その種類を1つでも出典にしたか』（出典のある回答だけ）。
     出典の件数で数えると、出典を多く付ける AI（Claude 10件/回答）の重みが大きくなるため、両方を載せる"""
     known = json.loads(CLASS_FILE.read_text(encoding="utf-8")) if CLASS_FILE.is_file() else {}
-    cls = lambda d, u="": rule_class(d, u) or known.get(d, "other")
+    ind = raw.get("industry", "")
+    cls = lambda d, u="": rule_class(d, u) or known.get(f"{ind}|{d}") or known.get(d, "other")
     ans, hit = Counter(), defaultdict(Counter)
     for q, by in raw["answers"].items():
         g = by.get("group", "")

@@ -1,0 +1,244 @@
+{
+ "total": {
+  "clinic": 897,
+  "portal": 521,
+  "video": 54,
+  "media": 126,
+  "other": 51,
+  "review": 12,
+  "public": 214,
+  "maker": 312,
+  "wiki": 7
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "clinic": 83,
+   "video": 3,
+   "portal": 11,
+   "review": 11,
+   "media": 2
+  },
+  "Gemini": {
+   "portal": 94,
+   "video": 11,
+   "media": 11,
+   "clinic": 161,
+   "other": 28,
+   "maker": 47,
+   "public": 43,
+   "wiki": 1
+  },
+  "Perplexity": {
+   "portal": 197,
+   "other": 14,
+   "media": 43,
+   "clinic": 227,
+   "video": 21,
+   "maker": 141,
+   "public": 105,
+   "wiki": 6
+  },
+  "Claude": {
+   "portal": 219,
+   "media": 70,
+   "clinic": 426,
+   "review": 1,
+   "public": 66,
+   "video": 19,
+   "maker": 124,
+   "other": 9
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 122,
+   "portal": 277,
+   "video": 5,
+   "media": 7,
+   "other": 15,
+   "review": 12,
+   "public": 1
+  },
+  "費用": {
+   "clinic": 302,
+   "portal": 92,
+   "video": 23,
+   "media": 25,
+   "maker": 52,
+   "other": 11,
+   "public": 11
+  },
+  "選び方": {
+   "clinic": 208,
+   "portal": 89,
+   "video": 9,
+   "maker": 44,
+   "media": 27,
+   "other": 12,
+   "public": 24,
+   "wiki": 1
+  },
+  "手続き・悩み": {
+   "portal": 28,
+   "public": 102,
+   "maker": 92,
+   "video": 8,
+   "media": 26,
+   "clinic": 146,
+   "other": 6
+  },
+  "制度・ルール": {
+   "clinic": 119,
+   "public": 76,
+   "other": 7,
+   "maker": 124,
+   "media": 41,
+   "portal": 35,
+   "video": 9,
+   "wiki": 6
+  }
+ },
+ "answered": {
+  "ChatGPT": 36,
+  "Gemini": 58,
+  "Perplexity": 100,
+  "Claude": 100
+ },
+ "has_clinic": {
+  "ChatGPT": 23,
+  "Gemini": 50,
+  "Claude": 92,
+  "Perplexity": 69
+ },
+ "sources": {
+  "ChatGPT": 110,
+  "Gemini": 396,
+  "Perplexity": 754,
+  "Claude": 934
+ },
+ "portal_top": [
+  [
+   "biz.ne.jp",
+   57
+  ],
+  [
+   "all-senmonka.jp",
+   36
+  ],
+  [
+   "meetsmore.com",
+   31
+  ],
+  [
+   "i-sozoku.com",
+   29
+  ],
+  [
+   "zeiri4.com",
+   28
+  ],
+  [
+   "imitsu.jp",
+   19
+  ],
+  [
+   "search-advisors.freee.co.jp",
+   18
+  ],
+  [
+   "sovagroup.co.jp",
+   18
+  ],
+  [
+   "collabonet.org",
+   13
+  ],
+  [
+   "zehitomo.com",
+   13
+  ]
+ ],
+ "industry": "shigyou",
+ "name": "士業",
+ "date": "2026-10-02",
+ "questions": 100,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "groups": {
+  "地域で探す": 20,
+  "費用": 20,
+  "選び方": 20,
+  "手続き・悩み": 20,
+  "制度・ルール": 20
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 294,
+   "clinic": 234,
+   "video": 48,
+   "portal": 179,
+   "other": 49,
+   "media": 90,
+   "review": 12,
+   "public": 98,
+   "maker": 133,
+   "wiki": 5
+  },
+  "地域で探す": {
+   "answers": 78,
+   "clinic": 41,
+   "video": 5,
+   "portal": 61,
+   "other": 15,
+   "media": 7,
+   "review": 12,
+   "public": 1
+  },
+  "費用": {
+   "answers": 71,
+   "portal": 44,
+   "clinic": 70,
+   "video": 20,
+   "media": 20,
+   "maker": 29,
+   "other": 11,
+   "public": 11
+  },
+  "選び方": {
+   "answers": 44,
+   "video": 8,
+   "maker": 27,
+   "portal": 34,
+   "clinic": 40,
+   "media": 20,
+   "other": 10,
+   "public": 11,
+   "wiki": 1
+  },
+  "手続き・悩み": {
+   "answers": 49,
+   "maker": 39,
+   "portal": 20,
+   "media": 17,
+   "public": 40,
+   "video": 7,
+   "clinic": 43,
+   "other": 6
+  },
+  "制度・ルール": {
+   "answers": 52,
+   "maker": 38,
+   "other": 7,
+   "clinic": 40,
+   "public": 35,
+   "media": 26,
+   "portal": 20,
+   "video": 8,
+   "wiki": 4
+  }
+ }
+}
