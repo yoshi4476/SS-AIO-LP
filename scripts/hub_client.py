@@ -169,15 +169,28 @@ def next_kw(site):
     # いちばん高い語を、台帳の並び順に埋もれさせない
     aiq = _ai_targets(site)
     kw0 = str(got["keyword"])
-    if _norm(kw0) in aiq and (not pat or re.search(pat, kw0.lower())):
+    # 打ち出しから外したテーマ（sites/<id>.json の drop_kw）の語は書かない。
+    # 2026-10-02 に AI集客ラボは MEO を打ち出さず SEO・AIO・LLMO に絞ると決めた
+    drop = _drop_pattern(site)
+    if _norm(kw0) in aiq and (not pat or re.search(pat, kw0.lower())) \
+            and not (drop and re.search(drop, kw0.lower())):
         return got
     try:
         rows = all_kw()
     except Exception:
-        return got
+        return None if drop and re.search(drop, kw0.lower()) else got
     todo = [r for r in rows or []
             if r.get("site") == site and str(r.get("status", "")).strip() == "未着手"
-            and str(r.get("keyword", ""))]
+            and str(r.get("keyword", ""))
+            and not (drop and re.search(drop, str(r.get("keyword", "")).lower()))]
+    if drop and re.search(drop, kw0.lower()):
+        if not todo:
+            return None
+        r0 = todo[0]
+        got = dict(got)
+        got.update({"keyword": str(r0["keyword"]), "aim": r0.get("aim", ""),
+                    "category": r0.get("category", ""), "picked_by": "打ち出し外の語を飛ばした"})
+        kw0 = got["keyword"]
 
     def pick(rule, why):
         for r in todo:
@@ -213,6 +226,17 @@ def next_kw(site):
         if hit:
             return hit
     return got                           # 主力の語が尽きていれば、あるものを書く
+
+
+def _drop_pattern(site):
+    """sites/<id>.json の drop_kw（打ち出しから外した語）を1つの正規表現にする。無ければ空"""
+    import re
+    try:
+        cfg = json.loads((ROOT / "sites" / f"{site}.json").read_text(encoding="utf-8"))
+    except Exception:
+        return ""
+    words = [w for w in cfg.get("drop_kw") or [] if w]
+    return "|".join(re.escape(w.lower()) for w in words)
 
 
 def _norm(s):

@@ -47,7 +47,6 @@ TEMPLATE = ROOT / "templates" / "article.html"
 NAV_DEFAULT = [
     {"label": "AIO・LLMO", "url": "/aio/"},
     {"label": "SEO運用", "url": "/seo/"},
-    {"label": "MEO運用", "url": "/meo/"},
     {"label": "AI集客", "url": "/ai-marketing/"},
     {"label": "業種から探す", "url": "/industry/"},
     {"label": "実装ラボ", "url": "/lab/"},
@@ -88,7 +87,7 @@ FOOTER_NAV_DEFAULT = [
 CTA_DEFAULT = {
     "cta_copy": "読んで終わりにせず、自社の集客改善につなげませんか？",
     "cta_url": "/lp/",
-    "cta_label": "AIO・LLMO・SEO・MEO集客支援の無料相談へ",
+    "cta_label": "SEO・AIO・LLMO集客支援の無料相談へ",
     "cta_sub": "現状分析レポートを無料でお渡ししています",
 }
 
@@ -1233,7 +1232,7 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 <section class="hero">
   <span class="kicker">All Articles</span>
   <h1>{h1}</h1>
-  <p class="lead">AIO・LLMO・SEO・MEOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。</p>
+  <p class="lead">SEO・AIO・LLMOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。</p>
 </section>
 
 <section class="section" style="padding-top:1rem;">
@@ -1289,7 +1288,7 @@ def page_shell(h1="記事一覧", desc=""):
         cut = desc[:120].rfind("。")
         desc = desc[:cut + 1] if cut >= 40 else desc[:120]
     desc = desc or (
-        f"{SITE_NAME}の全記事一覧。AIO・LLMO・SEO・MEOの実践ノウハウを新着順に掲載しています。")
+        f"{SITE_NAME}の全記事一覧。医療・不動産・工務店を中心に、SEO・AIO・LLMOの実践ノウハウを新着順に掲載しています。")
     # 用語集・業種・テーマなどの外枠は、説明が短く（70字未満が30本）題も短い（20字未満が100本超）ため、
     # 検索結果と共有時に何のページか伝わらなかった（Ahrefs 2026-09-29: 説明が短い174・題が短い31）。
     # 足すのは運営者と中身の種類だけで、ページに無い事実は足さない

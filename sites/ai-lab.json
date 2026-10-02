@@ -8,11 +8,12 @@
   "articles_dir": "articles",
   "ga4_property_id": "547346579",
   "kw_plan": "docs/industry-pillar-plan.md",
-  "theme": "AI検索時代の集客（AIO・LLMO・SEO・MEO）",
-  "audience": "AI検索で集客したい店舗・中小企業の経営者。特にクリニック・歯科・不動産・リフォーム・工務店など、月1件の成約で集客支援の費用が回収できる業種。他業種の記事も書くが、主力はこの5業種",
+  "theme": "AI検索時代の集客（SEO・AIO・LLMO）",
+  "audience": "AI検索とSEOで集客したい中小企業の経営者。主力は医療（クリニック・歯科医院・整骨院）・不動産・工務店・リフォーム（月1件の成約で集客支援の費用が回収できる業種）。そのほかの業種にも対応する",
   "avoid": [
     "補助金の申請手続き（lp.7senses.co.jp の担当領域）",
-    "人材採用・労務・オペレーション（corp.7senses.co.jp の担当領域）"
+    "人材採用・労務・オペレーション（corp.7senses.co.jp の担当領域）",
+    "MEO（Googleマップ・ビジネスプロフィール）を主題にした記事（2026-10-02 に打ち出しから外した）"
   ],
   "owns": [
     "AIO",
@@ -66,15 +67,13 @@
       "AI 問い合わせ 増えない",
       "SEO 順位 上がらない",
       "被リンク 増やし方",
-      "SEO 外注 選び方",
-      "MEO対策 失敗",
-      "口コミ 返信 NG"
+      "SEO 外注 選び方"
     ],
     "core": [
-      "集客",
-      "MEO",
       "AIO",
-      "SEO"
+      "LLMO",
+      "SEO",
+      "AI検索"
     ],
     "priority": [
       "クリニック",
@@ -89,20 +88,20 @@
   "cta": {
     "label": "AI検索対策の無料相談",
     "url": "/lp/",
-    "note": "AIO・SEO・MEOの現状分析を無料で行います"
+    "note": "SEO・AIO・LLMOの現状分析を無料で行います"
   },
   "x_tags": [
     "AIO対策",
     "AI検索"
   ],
   "category_mix": {
-    "aio": 45,
+    "aio": 50,
+    "seo": 25,
     "ai-marketing": 25,
-    "seo": 20,
-    "meo": 10,
-    "_note": "AIOが主力。他は主力へ送るための周辺。MEOはG-ranの実績があるが、差別化の余地と検索需要の伸びはAIO側にある"
+    "meo": 0,
+    "_note": "2026-10-02 方針変更: MEOは打ち出さず、SEO・AIO・LLMOに絞る。MEOの既存記事は残すが新しくは書かない"
   },
-  "main_offer": "AIO・LLMO運用代行（AI検索で引用される状態をつくる）",
+  "main_offer": "SEO・AIO・LLMO運用代行（検索とAI検索の両方で選ばれる状態をつくる）",
   "main_category": "aio",
   "priority": 1,
   "youtube": {
@@ -116,5 +115,16 @@
     "facebook_page": "",
     "threads": "",
     "linkedin": ""
-  }
+  },
+  "drop_kw": [
+    "meo",
+    "ｍｅｏ",
+    "googleマップ",
+    "グーグルマップ",
+    "マップ集客",
+    "マップ順位",
+    "ビジネスプロフィール",
+    "gbp"
+  ],
+  "_drop_kw_note": "打ち出しから外したテーマ。hub_client.next_kw がこの語を含むKWを飛ばす（2026-10-02）"
 }
