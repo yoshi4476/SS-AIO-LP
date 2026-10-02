@@ -118,6 +118,8 @@ Googleは公式ヘルプで、<a href="https://support.google.com/business/answe
 
 **業種によって刺さる言葉は違いますが、感謝→具体的な言及→案内、の骨組みは共通です。**
 
+業種と口コミの種類を選んで返信案をその場で作るなら、[口コミ返信文の作成ツール（無料）](/tools/kuchikomi-henshin/)も使えます。
+
 
 あわせて[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
 

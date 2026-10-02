@@ -473,8 +473,8 @@ window.leadCapture = function (opts) {
     '<label>お名前 <input type="text" name="name" required autocomplete="name"></label>' +
     '<label>会社名・店舗名 <input type="text" name="company" required autocomplete="organization"></label>' +
     '<label>メールアドレス <input type="email" name="email" required autocomplete="email"></label>' +
-    '<button type="submit" class="btn btn-primary">診断結果を受け取る</button>' +
-    '<p class="lc-note">送るのは診断結果とその読み方だけです。' +
+    '<button type="submit" class="btn btn-primary">' + (opts.button || '診断結果を受け取る') + '</button>' +
+    '<p class="lc-note">' + (opts.note || '送るのは診断結果とその読み方だけです。') +
     '<a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信してください。</p>' +
     '<p class="lc-msg" role="status" aria-live="polite"></p></form>';
 
@@ -499,9 +499,9 @@ window.leadCapture = function (opts) {
           window.trackLead("lead_form_submit", { lead_route: opts.route });
           window.trackLead("lead_capture", { lead_route: opts.route, form_type: opts.formType });
         }
-        form.innerHTML =
-          '<p class="lc-done"><strong>お送りしました。</strong>' +
-          '数分で届かない場合は迷惑メールをご確認ください。</p>';
+        form.innerHTML = opts.done ||
+          ('<p class="lc-done"><strong>お送りしました。</strong>' +
+           '数分で届かない場合は迷惑メールをご確認ください。</p>');
       })
       .catch(function (err) {
         btn.disabled = false;

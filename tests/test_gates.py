@@ -3008,6 +3008,11 @@ def test_detectors_do_not_misread_neighbors():
     check("link_boost: 空行をはさんだ挿し込みは通す", LB.insert_ok(before, good), "")
     check("link_boost: 表に直結する挿し込みは止める", bool(LB.insert_ok(before, bad)), True)
 
+    # 口コミ返信ツールの返信文は <pre> で出す。サイト共通の pre（紺地）を打ち消さないと紺地に紺文字で読めない
+    tool = (ROOT / "site" / "tools" / "kuchikomi-henshin" / "index.html").read_text(encoding="utf-8")
+    check("口コミ返信ツール: 返信文の pre が共通の紺地を打ち消している",
+          bool(re.search(r"\.kt \.kt-text\{[^}]*background:#fff", tool)), True)
+
     import lead_reconcile as LR
     check("問い合わせ照合: トップの診断入力は数えない", LR.count_rows([("20260928", "form_submit", "/", 1)]), {})
     check("問い合わせ照合: 記事内の診断入力は数えない",
