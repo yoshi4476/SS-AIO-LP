@@ -13,7 +13,13 @@
       "pMse2psyJyw",
       "FkAqZuU0eAw"
     ],
-    "youtube": "XG2aPmerFB0"
+    "youtube": "XG2aPmerFB0",
+    "short": {
+      "date": "2026-10-02",
+      "sec": 42,
+      "title": "工務店がAIに出てこないのはなぜ?",
+      "youtube": "UujGzTKfyoA"
+    }
   },
   "zeirishi-houjin-aio": {
     "site": "ai-lab",
@@ -94,5 +100,29 @@
       "title": "無料の請求書テンプレ、そのまま使える？",
       "youtube": "tDXNsAGfeYE"
     }
+  },
+  "nougyou-shoki-hiyou-hojokin": {
+    "site": "subsidy",
+    "date": "2026-10-02",
+    "sec": 371,
+    "mp4": "automation/video/nougyou-shoki-hiyou-hojokin.mp4",
+    "nums": [
+      "1",
+      "1,000",
+      "1,136",
+      "10",
+      "194",
+      "2",
+      "2026",
+      "350",
+      "4",
+      "431",
+      "500",
+      "561",
+      "755",
+      "9"
+    ],
+    "format": "duo",
+    "youtube": "gUyQ2SMAhZ8"
   }
 }
