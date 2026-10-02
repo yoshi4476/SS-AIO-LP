@@ -161,8 +161,10 @@ def link_html(ind):
     d = load(ind)
     if not d:
         return ""
+    rank = (' 地域で探す質問の出典の月ごとの順位は、<a href="/research/ranking/" data-cta="research_ranking">ランキング</a>で見られます。'
+            if (ROOT / "data" / "research" / "ranking").is_dir() and any((ROOT / "data" / "research" / "ranking").glob("*.json")) else "")
     return (f'<section><h2>質問ごとの出典</h2><p>{len(d["items"])}問それぞれについて、どの種類のサイトが出典になったかを'
-            f'<a href="{url(ind)}" data-cta="research_{ind}_questions">質問集</a>にまとめています。</p></section>\n')
+            f'<a href="{url(ind)}" data-cta="research_{ind}_questions">質問集</a>にまとめています。{rank}</p></section>\n')
 
 
 def add_kws():

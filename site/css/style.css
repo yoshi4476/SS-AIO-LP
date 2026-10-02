@@ -1623,3 +1623,13 @@ main.lab .cta-final h2 { color: #fff; }
 .faq-item[open] summary { border-bottom: 1px solid var(--line); }
 .faq-item p { margin: 0; padding: .9rem 1rem 1rem; line-height: 1.9; }
 .faq-cta { margin: 1rem auto 2.5rem; max-width: 860px; }
+/* AIが出典にするサイトのランキング（ai_ranking.py） */
+.rk-sec { max-width: 1000px; margin: 0 auto 2.2rem; }
+.rk-sec h2 { font-size: 1.25rem; color: var(--navy); border-left: 4px solid var(--blue); padding-left: .6rem; }
+.rk-wrap { overflow-x: auto; }
+.rk { width: 100%; border-collapse: collapse; font-size: .92rem; font-variant-numeric: tabular-nums; }
+.rk th, .rk td { padding: .55rem .6rem; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+.rk th { background: var(--sky); color: var(--navy); font-size: .82rem; }
+.rk .rk-n { font-weight: 800; color: var(--blue); width: 3em; }
+.rk .rk-d { font-weight: 700; color: var(--navy); }
+.rk .rk-c, .rk .rk-m { text-align: right; }

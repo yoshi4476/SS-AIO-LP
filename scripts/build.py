@@ -1520,6 +1520,36 @@ def build_question_pages():
     return made
 
 
+def build_ranking_page():
+    """AIが出典にするサイトの月次ランキング（/research/ranking/）。集計は ai_ranking.py"""
+    import ai_ranking as AR
+    import industry_lp as _IL
+    import html
+    got = AR.body()
+    if not got:
+        return None
+    title, desc, body = got
+    u = "/research/ranking/"
+    page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
+    page = page.replace(f"{SITE_URL}/blog/", SITE_URL + u)
+    page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+    page = re.sub(r'<nav class="breadcrumb".*?</nav>', lambda m: (
+        '<nav class="breadcrumb" aria-label="パンくずリスト">\n  <ol>\n    <li><a href="/">ホーム</a></li>\n'
+        '    <li aria-current="page">AIが出典にするサイトのランキング</li>\n  </ol>\n</nav>'), page, count=1, flags=re.S)
+    page = re.sub(r'<section class="hero">.*?</section>', lambda m: (
+        '<section class="hero"><span class="kicker">Monthly Ranking</span>'
+        f'<h1>{html.escape(title)}</h1><p class="lead">{html.escape(desc)}</p></section>'), page, count=1, flags=re.S)
+    ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "ホーム", "item": SITE_URL + "/"},
+        {"@type": "ListItem", "position": 2, "name": "AIが出典にするサイトのランキング", "item": SITE_URL + u}]}
+    page = page.replace("</head>", '<link rel="stylesheet" href="/css/lp-v2.css?v=3">' + _IL.STYLE
+                        + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script></head>", 1)
+    out = SITE / "research" / "ranking" / "index.html"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(page, encoding="utf-8", newline="\n")
+    return u
+
+
 def build_industry_hubs(all_metas):
     """業種ハブ（/industry/ と /industry/<slug>/）。記事が増えるほど厚くなる"""
     try:
@@ -2071,6 +2101,7 @@ def main():
     build_blog_index(all_metas)
     build_research_pages(all_metas)  # 先に作る（LP と業種ハブが、調査ページがあればリンクする）
     build_question_pages()  # 調査の質問集（集計は data/research/<業種>-questions.json）
+    build_ranking_page()  # AIが出典にするサイトの月次ランキング（data/research/ranking/<年-月>.json）
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
     import tools_catalog

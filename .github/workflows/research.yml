@@ -1,0 +1,94 @@
+name: Research Refresh
+
+# 調査の更新。
+#  - 毎月1日 10:00 JST: AIが出典にするサイトのランキング（Gemini・無料枠・約100回）
+#  - 1・4・7・10月の1日 11:00 JST: 業種別の調査（5業種×100問×4つのAI）を調べ直す。
+#    ChatGPT と Perplexity が従量課金で1回 約17ドル（2026-10-03 原口さん了承）。見積もりが上限を超えたら調べない
+on:
+  schedule:
+    - cron: "0 1 1 * *"
+    - cron: "0 2 1 1,4,7,10 *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "ranking=月次ランキング / full=調査の調べ直し / estimate=見積もりだけ"
+        type: choice
+        options: [estimate, ranking, full]
+        default: estimate
+
+permissions:
+  contents: write
+
+concurrency:
+  group: research
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      TZ: Asia/Tokyo
+      HUB_URL: ${{ secrets.HUB_URL }}
+      HUB_SECRET: ${{ secrets.HUB_SECRET }}
+      MODE: ${{ inputs.mode || (github.event.schedule == '0 2 1 1,4,7,10 *' && 'full') || 'ranking' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: |
+          python -m pip install --quiet --upgrade pip
+          pip install --quiet -r requirements.txt
+          if [ "$MODE" = "full" ]; then
+            python -m playwright install --with-deps chromium
+            npm install -g @anthropic-ai/claude-code
+          fi
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+
+      - name: 調べる
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          RESEARCH_USD_CAP: "25"
+        run: |
+          mkdir -p automation/logs
+          case "$MODE" in
+            estimate) out=$(python scripts/research_refresh.py --estimate 2>&1) ;;
+            ranking)  out=$(python scripts/ai_ranking.py 2>&1) ;;
+            full)     out=$(python scripts/research_refresh.py 2>&1; python scripts/ai_ranking.py 2>&1) ;;
+          esac
+          echo "$out" | tail -40
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+
+      - name: ページを作り直して公開する
+        if: env.MODE != 'estimate'
+        run: |
+          python scripts/build.py
+          python tests/test_gates.py || { echo "::error::門が通らないため公開しません"; exit 1; }
+          git add data/research site
+          git diff --cached --quiet && { echo "変更なし"; exit 0; }
+          git commit -q -m "research: ${MODE} $(date '+%Y-%m-%d')"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || { git rebase --abort; exit 1; }
+          git push
+
+      - name: 知らせる
+        if: always()
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          if [ -s automation/logs/findings.txt ]; then
+            python scripts/notify_slack.py "📊 調査の更新（${MODE}）で要対応があります
+          $(head -8 automation/logs/findings.txt)" || true
+          elif [ "${{ job.status }}" != "success" ]; then
+            python scripts/notify_slack.py "🚨 調査の更新（${MODE}）: ${{ job.status }}" || true
+          fi

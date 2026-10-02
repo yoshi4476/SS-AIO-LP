@@ -2337,6 +2337,25 @@ def test_lead_context_and_recheck_consent():
     check("毎日の回で測り直しを走らせる", "scripts/ai_recheck.py" in wf, True)
 
 
+def test_research_refresh_and_ranking():
+    """調査の調べ直しは費用の上限内でだけ動き、手で確かめた出典の種類を使うこと。ランキングは途中の数字を公開しないこと"""
+    print(chr(10) + "■ 調査の更新とランキング")
+    import research_refresh as RR
+    n, usd = RR.estimate()
+    check(f"調査の見積もりが上限（25ドル）の内側（{n}問・{usd:.1f}ドル）", usd <= 25, True)
+    r = subprocess.run(["git", "check-ignore", "-q", "data/research/source_class.json"], cwd=str(ROOT))
+    check("手で確かめた出典の種類はコミットする（CI で直しが消えない）", r.returncode != 0, True)
+    wf = (ROOT / ".github" / "workflows" / "research.yml").read_text(encoding="utf-8")
+    check("四半期と毎月の回がある", '"0 2 1 1,4,7,10 *"' in wf and '"0 1 1 * *"' in wf, True)
+    check("門が通らなければ公開しない", "python tests/test_gates.py ||" in wf, True)
+    import ai_ranking as AK
+    check("ランキングは出典つきの答えが足りない月を残さない", AK.MIN_ANSWERED >= 15, True)
+    if AK.months():
+        got = AK.body()
+        check("ランキングのページを作れる", bool(got) and "rk-sec" in got[2], True)
+        check("ランキングのページがある", (ROOT / "site" / "research" / "ranking" / "index.html").is_file(), True)
+
+
 def test_monthly_cap_check_exit_code():
     """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
 
@@ -3519,6 +3538,7 @@ def main():
               test_question_and_faq_pages,
               test_outcome_watch_counts_what_was_made,
               test_lead_context_and_recheck_consent,
+              test_research_refresh_and_ranking,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,
