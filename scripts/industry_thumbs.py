@@ -24,6 +24,7 @@ KEYS = {
     "seikotsuin": "整骨院・接骨院のAIO対策",
     "fudosan": "不動産のAIO対策",
     "koumuten": "工務店・注文住宅のAIO対策",
+    "shigyou": "士業の集客・顧客獲得のAIO対策",
     "btob": "BtoBのAIO対策",
     "btob-system": "システム開発のAIO対策",
     "btob-consulting": "経営戦略・コンサルティングのAIO対策",
