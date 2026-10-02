@@ -3013,6 +3013,9 @@ def test_detectors_do_not_misread_neighbors():
     check("口コミ返信ツール: 返信文の pre が共通の紺地を打ち消している",
           bool(re.search(r"\.kt \.kt-text\{[^}]*background:#fff", tool)), True)
 
+    # 紺地の枠に共通の btn-ghost（紺文字）を置くと見えない。記事末の調査の案内で起きた（2026-10-02）
+    css = (ROOT / "site" / "css" / "style.css").read_text(encoding="utf-8")
+    check("記事末の調査の案内: 紺地のボタンを白文字にしている", ".research-box .btn-ghost{" in css, True)
     # 構造化データの同じ項目の重複は、普通の読み込みでは黙って消える。Google は構造化データごと無効にする
     import seo_audit as SA
     dup = '<script type="application/ld+json">{"@type":"Organization","address":{"a":1},"address":{"a":1}}</script>'

@@ -205,7 +205,8 @@ def data_section(key, c):
             f'<p class="ilp-n">{_e(big)}</p><p>{_e(cap)}</p></div>'
             f'<div class="ilp-card ilp-stat"><p class="ilp-k">{_e(label)}｜{_e(T["other_short"])}の質問</p>'
             f'<p class="ilp-n">{hl["oa"]}%</p><p>の回答が{_e(T["owner_site"])}を1つ以上出典にしていた</p>'
-            f'<p class="ilp-src"><a href="/research/{r}-ai-sources/" data-cta="lp_{key}_research_{r}">調査の詳細（{hl["questions"]}問×4つのAI・{hl["date"]}）</a></p></div>')
+            f'<p class="ilp-src"><a href="/research/{r}-ai-sources/" data-cta="lp_{key}_research_{r}">調査の詳細（{hl["questions"]}問×4つのAI・{hl["date"]}）</a>'
+            f'　<a href="/download/?ind={IAS.RESEARCH_TO_CHECKLIST.get(r, "")}" data-cta="lp_{key}_checklist_{r}">チェックリスト（PDF）</a></p></div>')
     if not cards:
         return ""
     return ('<section class="ilp-data"><span class="ilp-eb">Data</span><h2>データで見る：AIは何を出典に答えているか</h2>'

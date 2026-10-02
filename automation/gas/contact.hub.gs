@@ -271,6 +271,22 @@ function leadReply_(site, type, d) {
             '自社で直すのが難しい項目は、このメールにご返信ください。無料でご相談を承ります。'].filter(function (x) {
       return x !== '';
     }).join('\n');
+  } else if (type === 'download') {
+    // 資料ダウンロード。ページで「メールでダウンロードリンクをお送りします」と約束している。
+    // 以前は普通の問い合わせと同じ文面で、リンクが入っていなかった（2026-10-02 修正）
+    const CL = { dental: '歯科医院版', clinic: 'クリニック版', fudosan: '不動産会社版',
+                 koumuten: '工務店・リフォーム会社版', shigyou: '士業事務所版' };
+    const key = CL[String(d.checklist || '')] ? String(d.checklist) : '';
+    const links = (key ? [key] : Object.keys(CL)).map(function (k) {
+      return '・AI検索対策チェックリスト（' + CL[k] + '）\n  https://ai.7senses.co.jp/download/checklist-' + k + '.pdf';
+    });
+    subject = '【資料】AI検索対策チェックリストをお送りします';
+    body = [name + ' 様', '', '資料をご請求いただきありがとうございます。',
+            '下のリンクから、チェックリスト（PDF）をダウンロードしてください。', '']
+      .concat(links).concat(['',
+        '印をつけ終えたら、AIに御社がどう紹介されているかも確かめてみてください（無料）。',
+        '  https://ai.7senses.co.jp/tools/ai-check/', '',
+        '何から直せばよいかのご相談は、このメールにご返信ください。無料で承ります。']).join('\n');
   } else {
     body = [name + ' 様', '', 'お問い合わせいただきありがとうございます。',
             '内容を確認のうえ、3営業日以内に担当よりご連絡します。', '',

@@ -474,6 +474,15 @@ def _hub_slug(meta):
         return ""
 
 
+def _research_box(meta):
+    """業種が分かる記事の末尾に、その業種の調査とチェックリストへの案内を置く（調査が無い業種は空）"""
+    try:
+        import industry_ai_sources as IAS
+        return "\n" + IAS.research_box(_hub_slug(meta))
+    except Exception:
+        return ""
+
+
 def lp_url(meta):
     """記事の申し込みボタンの行き先。医療・不動産・工務店の記事はその業種の LP へ、ほかは全業種の LP へ"""
     import industry_lp
@@ -848,7 +857,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
-        "{{CONTENT}}": insert_mid_cta(insert_tool_box(_video_embed(content, meta), meta), meta),
+        "{{CONTENT}}": insert_mid_cta(insert_tool_box(_video_embed(content, meta), meta), meta) + _research_box(meta),
         "{{LP_URL}}": lp_url(meta),
         "{{LP_LABEL}}": lp_label(meta),
         "{{RELATED}}": related,
@@ -1405,7 +1414,7 @@ def build_industry_lps(IH, pairs, g):
         out.write_text(page, encoding="utf-8", newline="\n")
 
 
-def build_research_pages():
+def build_research_pages(all_metas=()):
     """業種別の調査レポート（/research/<業種>-ai-sources/）。数字は data/research の集計ファイルからだけ作る"""
     import industry_ai_sources as IAS
     made = []
@@ -1414,6 +1423,20 @@ def build_research_pages():
         if ind not in IAS.QUESTIONS or "per_answer" not in json.loads(f.read_text(encoding="utf-8")):
             continue
         title, desc, body, ld, csv = IAS.render(ind)
+        # この業種の記事（調査 → 記事の入口）。AIO・SEO の記事を先に
+        try:
+            import industry_hub as _IH
+            g = _IH.group(list(all_metas))
+            hubs = [h for h, r in IAS.HUB_TO_RESEARCH.items() if r == ind]
+            ms = sorted((m for h in hubs for m in g.get(h, [])),
+                        key=lambda m: (m.get("category") in ("aio", "seo"), str(m.get("date", ""))), reverse=True)[:6]
+            if ms:
+                tiles = "\n".join(post_tile(m) for m in ms)
+                body = body.replace('<section><h2>引用する場合</h2>',
+                                    '<section><span class="ilp-eb">Articles</span><h2>この業種の記事</h2>'
+                                    f'<ul class="post-list">\n{tiles}\n</ul></section>\n<section><h2>引用する場合</h2>', 1)
+        except Exception as e:
+            print(f"WARN: 調査ページの記事一覧を作れません（{str(e)[:50]}）")
         out = SITE / "research" / f"{ind}-ai-sources" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
@@ -1982,7 +2005,7 @@ def main():
     sync_llms(entries)
     prune_orphan_articles(entries, unparsable)
     build_blog_index(all_metas)
-    build_research_pages()          # 先に作る（LP と業種ハブが、調査ページがあればリンクする）
+    build_research_pages(all_metas)  # 先に作る（LP と業種ハブが、調査ページがあればリンクする）
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
     hide_data_pages()

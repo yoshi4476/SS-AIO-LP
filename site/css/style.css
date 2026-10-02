@@ -1529,3 +1529,7 @@ main.lab .cta-final h2 { color: #fff; }
 .scan-sticky .btn { display: block; width: 100%; text-align: center; }
 @media (min-width: 761px) { .scan-sticky { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { .scan-sticky { transition: none; } }
+
+/* 記事末の調査の案内（紺地）。共通の btn-ghost は紺文字で見えなくなる（2026-10-02） */
+.research-box .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff;background:transparent}
+.research-box .btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff}

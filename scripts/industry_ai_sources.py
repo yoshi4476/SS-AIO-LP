@@ -356,6 +356,33 @@ ENGINE_NOTE = {"ChatGPT": "gpt-4.1-mini＋Web検索", "Gemini": "Gemini Flash＋
                "Claude": "Claude Sonnet＋Web検索"}
 
 
+# 業種ハブ（data/industries.json の slug）→ 調査。記事・業種ハブ・提案書・調査ページがここを見る
+HUB_TO_RESEARCH = {"shika": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
+                   "reform": "koumuten", "shigyou": "shigyou"}
+# 調査 → チェックリスト（checklist_make.py の業種）
+RESEARCH_TO_CHECKLIST = {"dental": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
+                         "shigyou": "shigyou"}
+
+
+def research_box(hub_slug):
+    """記事の末尾に置く「この業種の調査」の案内。調査が無い業種は空"""
+    import html as H
+    r = HUB_TO_RESEARCH.get(hub_slug or "")
+    hl = headline(r) if r else None
+    if not hl:
+        return ""
+    T = hl["T"]
+    cl = RESEARCH_TO_CHECKLIST.get(r, "")
+    return ('<aside class="scan-box research-box" aria-label="この業種の調査">'
+            f'<p class="sb-kicker">調査レポート・{hl["date"][:4]}年{int(hl["date"][5:7])}月</p>'
+            f'<p class="sb-head">{H.escape(T["other_short"])}の質問では、回答の{hl["oa"]}%が{H.escape(T["owner_site"])}を出典にしていました</p>'
+            f'<p class="sb-sub">{H.escape(hl["name"])}に関する{hl["questions"]}問を ChatGPT・Gemini・Claude・Perplexity に聞き、'
+            f'AIが何を出典に答えているかを数えた調査です。</p>'
+            f'<p><a class="btn btn-primary" href="/research/{r}-ai-sources/" data-cta="article_research_{r}">調査の結果を見る</a> '
+            + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else "")
+            + '</p></aside>')
+
+
 def headline(ind):
     """調査の要点の数字。調査ページ・業種別LP・提案書はここだけから数字を取る（食い違いを起こさない）。
     集計ファイルが無ければ None"""
@@ -401,6 +428,7 @@ def hero(ind):
             f'<p class="lx-lead">{H.escape(T["asker"])}が実際に調べそうな{hl["questions"]}問を、ChatGPT・Gemini・Claude・Perplexity の4つに聞き、'
             f'回答の出典になったサイトの種類を数えました。</p>'
             f'<p class="lx-alt">集計データ: <a href="/research/{ind}-ai-sources/data.csv" download>CSVをダウンロード</a>'
+            f' ／ <a href="/download/?ind={RESEARCH_TO_CHECKLIST.get(ind, "")}" data-cta="research_hero_checklist_{ind}">チェックリスト（PDF）を受け取る</a>'
             f' ／ {H.escape(T["owner"])}向けの対策: <a href="/lp/{T["lp"]}/" data-cta="research_hero_lp_{T["lp"]}">{H.escape(T["lp_name"])}</a></p>'
             f'</div><div class="lx-console ilp-console" aria-label="調査の要点">'
             f'<div class="lx-console-head"><b>要点</b><small>{hl["questions"]}問×4つのAI・{hl["date"]}</small></div>'

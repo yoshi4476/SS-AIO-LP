@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>無料資料ダウンロード｜AI集客ラボ（セブンセンシズ株式会社）</title>
-<meta name="description" content="AIO・SEO・MEO対策の無料資料ダウンロード。AI検索時代の集客チェックリストを、メールアドレスの入力だけでお届けします。営業電話はしません。">
+<meta name="description" content="業種別のAI検索対策チェックリスト（歯科医院・クリニック・不動産会社・工務店リフォーム・士業事務所）を無料でダウンロード。AIに聞いた調査の数字つきで、メールアドレスの入力だけでお届けします。営業電話はしません。">
 <link rel="canonical" href="https://ai.7senses.co.jp/download/">
 <link rel="icon" type="image/png" href="/images/icon-192.png">
 <link rel="apple-touch-icon" href="/images/icon-180.png">
@@ -13,7 +13,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
 /* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
-<link rel="stylesheet" href="/css/style.css?v=865fda39">
+<link rel="stylesheet" href="/css/style.css?v=516f01e7">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=48a2f344"></script>
 <script type="application/ld+json">
@@ -27,7 +27,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 }
 </script>
 <meta property="og:title" content="無料資料ダウンロード｜AI集客ラボ（セブンセンシズ株式会社）">
-<meta property="og:description" content="AIO・SEO・MEO対策の無料資料ダウンロード。AI検索時代の集客チェックリストを、メールアドレスの入力だけでお届けします。営業電話はしません。">
+<meta property="og:description" content="業種別のAI検索対策チェックリスト（歯科医院・クリニック・不動産会社・工務店リフォーム・士業事務所）を無料でダウンロード。AIに聞いた調査の数字つきで、メールアドレスの入力だけでお届けします。営業電話はしません。">
 <meta property="og:url" content="https://ai.7senses.co.jp/download/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI集客ラボ">
@@ -69,12 +69,11 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div>
     <span class="kicker">DOWNLOAD</span>
     <h1>無料資料ダウンロード</h1>
-    <p class="lead">AI検索時代の集客対策をまとめた資料を無料でお届けします。フォーム送信後、メールでダウンロードリンクをお送りします。</p>
-    <!-- TODO: 資料タイトル・表紙画像を確定後に差し替え（例:「AIO対策チェックリスト30項目」） -->
+    <p class="lead">業種別の「AI検索対策チェックリスト」を無料でお届けします。フォーム送信後、選んだ業種のチェックリスト（PDF）のダウンロードリンクをメールでお送りします。</p>
     <ul style="margin:1.2rem 0 0;padding:0;list-style:none;display:grid;gap:.5em;font-size:.92rem;">
-      <li>✓ AIO・LLMO・SEO・MEOの<strong>着手順がわかる全体地図</strong></li>
-      <li>✓ 自社でできる<strong>チェックリスト形式</strong>ですぐ使える</li>
-      <li>✓ 通算3,200店舗以上の運用実績にもとづく<strong>実務ベースの内容</strong></li>
+      <li>✓ 歯科医院・クリニック・不動産会社・工務店リフォーム・士業事務所の<strong>5業種別</strong></li>
+      <li>✓ AIに聞いた調査（100問×4つのAI）の<strong>数字つき</strong>で、何から直すかがわかる</li>
+      <li>✓ <strong>印をつけるだけ</strong>で使えるチェックリスト形式（約25項目）</li>
       <li>✓ しつこい営業の電話は行いません</li>
     </ul>
   </div>
@@ -86,7 +85,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <section class="section">
   <!-- TODO: フォーム送信先の設定（contact/index.html と同じ方式で統一） -->
   <form class="form-panel" action="/api/lead" method="post">
-    <input type="hidden" name="form_type" value="資料ダウンロード">
+    <input type="hidden" name="form_type" value="資料ダウンロード（AI検索対策チェックリスト）">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
     <label>お名前 <span class="req">必須</span>
       <input type="text" name="name" required autocomplete="name">
@@ -97,11 +96,20 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <label>メールアドレス <span class="req">必須</span>
       <input type="email" name="email" required autocomplete="email">
     </label>
+    <label>受け取るチェックリスト <span class="req">必須</span>
+      <select name="checklist" required>
+        <option value="dental">歯科医院版</option>
+        <option value="clinic">クリニック版</option>
+        <option value="fudosan">不動産会社版</option>
+        <option value="koumuten">工務店・リフォーム会社版</option>
+        <option value="shigyou">士業事務所版</option>
+      </select>
+    </label>
     <label style="display:flex;gap:.7em;align-items:flex-start;font-weight:500;cursor:pointer;">
       <input type="checkbox" required style="width:auto;margin-top:.55em;accent-color:var(--blue);">
       <span style="font-size:.84rem;"><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する<span class="req">必須</span></span>
     </label>
-    <button type="submit" class="btn btn-primary">資料を無料で受け取る</button>
+    <button type="submit" class="btn btn-primary" data-cta="download_checklist">チェックリストを無料で受け取る</button>
     <p class="form-note">いただいた情報は資料送付とご案内の目的以外には使用しません。</p>
   </form>
 </section>
@@ -145,5 +153,9 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </footer>
 
+<script>
+(function(){try{var k=new URLSearchParams(location.search).get("ind");var s=document.querySelector('select[name=checklist]');
+if(k&&s&&s.querySelector('option[value="'+k+'"]'))s.value=k;}catch(e){}})();
+</script>
 </body>
 </html>
