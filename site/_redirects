@@ -22,3 +22,11 @@
 
 # 無料診断の一覧は /tools/（無料ツール）にまとめた（2026-10-03）
 /diagnosis/  /tools/  301
+# 無料ツールのURLを /tools/ の下にそろえた（2026-10-03）。古いURLの評価と外部からのリンクを引き継ぐ
+/site-audit/  /tools/url-check/  301
+/site-audit  /tools/url-check/  301
+/diagnosis/aio/  /tools/aio-check/  301
+/diagnosis/aio  /tools/aio-check/  301
+/diagnosis/meo/  /tools/meo-check/  301
+/diagnosis/meo  /tools/meo-check/  301
+/diagnosis  /tools/  301

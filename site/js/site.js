@@ -15,7 +15,7 @@
       var bar = document.createElement('div');
       bar.className = 'hdr-tools';
       bar.innerHTML = '<a href="/tools/" data-cta="hdr_tools">無料ツール</a>'
-        + '<a href="/site-audit/" data-cta="hdr_tools_url">URL診断</a>'
+        + '<a href="/tools/url-check/" data-cta="hdr_tools_url">URL診断</a>'
         + '<a href="/tools/ai-check/" data-cta="hdr_tools_ai">AI診断</a>';
       header.appendChild(bar);
     }

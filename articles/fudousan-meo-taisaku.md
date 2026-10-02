@@ -184,7 +184,7 @@ AI検索対策の全体像は[AIO対策の5つの手順](/aio/aio-taisaku-guide/
 <details><summary>MEOとSUUMOなどの掲載、どちらを優先すべきですか？</summary><p class="faq-a">両方必要です。役割が異なるため、片方だけでは機会を取りこぼします。</p></details>
 </div>
 
-自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/tools/meo-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

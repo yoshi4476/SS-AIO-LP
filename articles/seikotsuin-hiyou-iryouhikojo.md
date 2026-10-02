@@ -135,7 +135,7 @@ MEO・口コミ対策とあわせて費用の透明性を高める取り組み�
 <div style="text-align:center;margin:32px 0;"><a href="https://ai.7senses.co.jp/lp/" class="cta-button" target="_blank" rel="noopener">AI検索対策の無料相談</a></div>
 
 
-検索エンジンが自社サイトを読めているかは、[サイトの技術チェック（無料・URL入力だけ）](/site-audit/)で見られます。登録は要らず、結果はその場で出ます。
+検索エンジンが自社サイトを読めているかは、[サイトの技術チェック（無料・URL入力だけ）](/tools/url-check/)で見られます。登録は要らず、結果はその場で出ます。
 
 ## 医療費控除に関するよくある失敗例
 

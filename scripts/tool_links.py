@@ -29,13 +29,13 @@ TALK_TAIL = "からご相談いただけます。ご契約を前提としたご�
 
 # カテゴリ → (リンク先, アンカー, 導入の一文, 文末)
 OFFER = {
-    "meo": ("/diagnosis/meo/", "マップ集客の整備度チェック（無料・30秒）",
+    "meo": ("/tools/meo-check/", "マップ集客の整備度チェック（無料・30秒）",
             "いまの自店舗がどこでつまずいているかは、", TOOL_TAIL),
-    "aio": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）",
+    "aio": ("/tools/aio-check/", "AI検索の対応度チェック（無料・30秒）",
             "自社サイトがAI検索にどこまで対応できているかは、", TOOL_TAIL),
-    "seo": ("/site-audit/", "サイトの技術チェック（無料・URL入力だけ）",
+    "seo": ("/tools/url-check/", "サイトの技術チェック（無料・URL入力だけ）",
             "自社サイトの技術面が基準を満たしているかは、", TOOL_TAIL),
-    "ai-marketing": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）",
+    "ai-marketing": ("/tools/aio-check/", "AI検索の対応度チェック（無料・30秒）",
                      "自社がAI検索からどう見えているかは、", TOOL_TAIL),
     # 補助金サイトはトップに4つの診断をまとめて置いている
     "hojokin": ("/#diagnosis", "3分の適性診断（無料・8問）",

@@ -176,7 +176,7 @@ AI時代を見据えた追加の対策は3つです。第一に、ビジネス�
 <details><summary>悪い口コミは削除できますか？</summary><p class="faq-a">ポリシー違反がない限り削除は困難です。事実に基づく丁寧な返信で、閲覧者への印象を整えるのが現実的です。</p></details>
 </div>
 
-自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/tools/meo-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

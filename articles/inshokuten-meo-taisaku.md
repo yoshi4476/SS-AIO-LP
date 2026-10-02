@@ -182,7 +182,7 @@ AIO対策の始め方全般は[AIO対策とは？AI検索に引用される5つ�
 <details><summary>口コミ返信の文面は毎回変えたほうがいいですか？</summary><p class="faq-a">変えたほうがよいです。同一文面の使い回しは、かえって不誠実な印象を与えます。</p></details>
 </div>
 
-自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/tools/meo-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

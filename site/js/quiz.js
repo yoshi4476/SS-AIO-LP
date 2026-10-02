@@ -57,11 +57,11 @@
         '<a class="btn btn-primary" href="/lp/#form" data-cta="diagnosis_' + cfg.type + '_nudge_lp" style="font-size:1.02rem;">無料相談で改善プランをもらう <span class="arw">→</span></a>' +
         '<div style="font-size:.75rem;color:rgba(255,255,255,.65);margin-top:.7rem;">お電話でも: 06-4305-7547（9:00〜20:00 / 土日祝休）</div></div>';
       btns = '<div class="btn-row" style="justify-content:center;">' +
-        '<a class="btn btn-ghost" href="' + (cfg.crossUrl || "/site-audit/") + '" data-cta="diagnosis_' + cfg.type + '_cross">' + (cfg.crossLabel || "サイトの点数も診断する") + "</a></div>";
+        '<a class="btn btn-ghost" href="' + (cfg.crossUrl || "/tools/url-check/") + '" data-cta="diagnosis_' + cfg.type + '_cross">' + (cfg.crossLabel || "サイトの点数も診断する") + "</a></div>";
     } else {
       btns = '<div class="btn-row" style="justify-content:center;">' +
         '<a class="btn btn-primary" href="/lp/#form" data-cta="diagnosis_' + cfg.type + '_result_lp">さらに伸ばす施策を無料相談する <span class="arw">→</span></a>' +
-        '<a class="btn btn-ghost" href="' + (cfg.crossUrl || "/site-audit/") + '" data-cta="diagnosis_' + cfg.type + '_cross">' + (cfg.crossLabel || "サイトの点数も診断する") + "</a></div>";
+        '<a class="btn btn-ghost" href="' + (cfg.crossUrl || "/tools/url-check/") + '" data-cta="diagnosis_' + cfg.type + '_cross">' + (cfg.crossLabel || "サイトの点数も診断する") + "</a></div>";
     }
 
     body.innerHTML =

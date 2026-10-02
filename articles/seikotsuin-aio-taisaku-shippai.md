@@ -148,7 +148,7 @@ GPTBotやClaudeBotをrobots.txtで誤ってブロックしていると、症状�
 
 <figure><img src="/images/seikotsuin-aio-taisaku-shippai/check4.png" alt="整骨院のAIO対策チェックリスト4項目" width="1200" height="700" loading="lazy"><figcaption>整骨院のAIO対策チェックリスト4項目（当メディア作成）</figcaption></figure>
 
-より詳しい手順と無料ツールは[AIO診断のやり方](/aio/aio-shindan-yarikata/)にまとめています。自院サイトの対応度は[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)でも確認できます。
+より詳しい手順と無料ツールは[AIO診断のやり方](/aio/aio-shindan-yarikata/)にまとめています。自院サイトの対応度は[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)でも確認できます。
 
 ## それでも改善しない場合に見直すポイント
 

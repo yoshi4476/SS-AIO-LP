@@ -148,8 +148,8 @@ def targets(site_id, all_urls):
         st, body, _ = fetch(base + "/sitemap.xml")
         return re.findall(r"<loc>([^<]+)</loc>", body) if st == 200 else []
     # 主要ページ。人が最も見る場所と、CVに関わる場所を優先する
-    paths = ["/", "/lp/", "/contact/", "/about/", "/diagnosis/aio/",
-             "/diagnosis/meo/", "/site-audit/", "/blog/"]
+    paths = ["/", "/lp/", "/contact/", "/about/", "/tools/aio-check/",
+             "/tools/meo-check/", "/tools/url-check/", "/blog/"]
     st, body, _ = fetch(base + "/sitemap.xml")
     locs = re.findall(r"<loc>([^<]+)</loc>", body) if st == 200 else []
     arts = [u for u in locs if u.count("/") >= 4][:5]     # 記事も数本見る

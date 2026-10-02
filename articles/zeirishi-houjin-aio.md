@@ -169,7 +169,7 @@ AIO運用を2026年5月に開始した当社の10件では、6件が1か月以�
 
 AI経由の流入は、GA4の参照元で確かめます。当社3サイトでも、まだ量の小さい経路です。そのため、**指名検索の増え方もあわせて見てください。**
 
-計測の具体的な手順は、[AIO対策の効果を測る方法](/aio/aio-taisaku-keisoku-houhou/)で解説しています。自法人の現状は、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。
+計測の具体的な手順は、[AIO対策の効果を測る方法](/aio/aio-taisaku-keisoku-houhou/)で解説しています。自法人の現状は、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

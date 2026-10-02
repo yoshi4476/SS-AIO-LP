@@ -97,7 +97,7 @@ faq:
 
 このうち<span class="txt-red">クローラー許可の項目だけは、他の6項目と重みが違います。</span>ここが塞がれていると、残り6項目をどれだけ整えてもAIはページ自体を読めません。監査ではまずこの項目から確認してください。
 
-構造化データの構文チェックは<a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">リッチリザルトテスト</a>でも代用できます。AIクローラーの許可範囲は<a href="https://platform.openai.com/docs/gptbot" target="_blank" rel="noopener">OpenAIの公式ドキュメント</a>でGPTBotの仕様を確認しておくと、robots.txtの記述ミスに気づきやすくなります。7項目を1つずつ手作業で確認する時間が取れない場合は、[サイトの技術チェック（無料）](/site-audit/)にURLを入れるだけでも、クローラー許可と構造化データの合否は分かります。手軽な一次スクリーニング。
+構造化データの構文チェックは<a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">リッチリザルトテスト</a>でも代用できます。AIクローラーの許可範囲は<a href="https://platform.openai.com/docs/gptbot" target="_blank" rel="noopener">OpenAIの公式ドキュメント</a>でGPTBotの仕様を確認しておくと、robots.txtの記述ミスに気づきやすくなります。7項目を1つずつ手作業で確認する時間が取れない場合は、[サイトの技術チェック（無料）](/tools/url-check/)にURLを入れるだけでも、クローラー許可と構造化データの合否は分かります。手軽な一次スクリーニング。
 
 ## 監査の進め方｜社内で完結させる4つの手順
 
@@ -177,7 +177,7 @@ faq:
 <div class="cta-box"><p>監査結果を見ながら、次に何を直すべきか一緒に整理しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 
 
-AI検索への対応で抜けている箇所は、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で見られます。登録は要らず、結果はその場で出ます。
+AI検索への対応で抜けている箇所は、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で見られます。登録は要らず、結果はその場で出ます。
 
 ## よくある質問
 

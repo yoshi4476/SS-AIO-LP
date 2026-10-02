@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>サイトの技術チェック（無料）｜URL入力だけで14項目を採点</title>
+<title>URL診断（無料）｜URLを入れるだけでサイトの14項目を採点</title>
 <meta name="description" content="URLを入力するだけで、サイトの技術面14項目を100点満点で自動チェック。AIクローラーが入れるか・noindex・タイトル・会社情報の記載まで、その場で直し方を表示します。">
-<link rel="canonical" href="https://ai.7senses.co.jp/site-audit/">
+<link rel="canonical" href="https://ai.7senses.co.jp/tools/url-check/">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="サイトの技術チェック（無料）｜14項目を自動採点">
+<meta property="og:title" content="URL診断（無料）｜サイトの14項目を自動採点">
 <meta property="og:description" content="URL入力だけで、サイトの技術面14項目を自動チェック。">
-<meta property="og:url" content="https://ai.7senses.co.jp/site-audit/">
+<meta property="og:url" content="https://ai.7senses.co.jp/tools/url-check/">
 <meta property="og:image" content="https://ai.7senses.co.jp/images/ogp-default.png">
 <meta property="og:site_name" content="AI集客ラボ">
 <link rel="icon" type="image/png" href="/images/icon-192.png">
@@ -20,9 +20,9 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
 /* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
-<link rel="stylesheet" href="/css/style.css?v=965c8a4c">
+<link rel="stylesheet" href="/css/style.css?v=e8ff0728">
 <script>document.documentElement.classList.add('js');</script>
-<script defer src="/js/site.js?v=1fa647e7"></script>
+<script defer src="/js/site.js?v=6a45be24"></script>
 <style>
 .audit-panel { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.5rem, 3vw, 2.6rem); max-width: 820px; margin: 0 auto; box-shadow: var(--shadow-lg); }
 .audit-form { display: flex; gap: .8rem; flex-wrap: wrap; }
@@ -42,13 +42,53 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 .check-row .ad { color: #b45309; font-size: .84rem; margin-top: .15em; }
 .loading { text-align: center; color: var(--muted); padding: 2rem 0; }
 </style>
-<script type="application/ld+json">
+<script type="application/ld+json" data-tools-ld>
 {
  "@context": "https://schema.org",
- "@type": "BreadcrumbList",
- "itemListElement": [
-  {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://ai.7senses.co.jp/"},
-  {"@type": "ListItem", "position": 2, "name": "サイトの技術チェック", "item": "https://ai.7senses.co.jp/site-audit/"}
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "無料ツール",
+     "item": "https://ai.7senses.co.jp/tools/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "URL診断",
+     "item": "https://ai.7senses.co.jp/tools/url-check/"
+    }
+   ]
+  },
+  {
+   "@type": "WebApplication",
+   "name": "URL診断（サイトの14項目を採点）",
+   "url": "https://ai.7senses.co.jp/tools/url-check/",
+   "applicationCategory": "BusinessApplication",
+   "operatingSystem": "Any",
+   "inLanguage": "ja",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+   },
+   "description": "URLを入れるだけで、AIのクローラーが入れるか・検索に出るか・内容を読み取れるかを14項目・100点満点で採点し、直す順番と直し方を表示します。",
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "url": "https://corp.7senses.co.jp/"
+   }
+  }
  ]
 }
 </script>
@@ -81,13 +121,14 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <nav class="breadcrumb" aria-label="パンくずリスト">
   <ol>
     <li><a href="/">ホーム</a></li>
-    <li aria-current="page">サイトの技術チェック</li>
+    <li><a href="/tools/">無料ツール</a></li>
+    <li aria-current="page">URL診断</li>
   </ol>
 </nav>
 
 <section class="hero" style="text-align:center;padding-bottom:1.5rem;">
   <span class="kicker">FREE SITE AUDIT</span>
-  <h1>サイトの技術チェック</h1>
+  <h1>URL診断（サイトの技術チェック）</h1>
   <p class="lead" style="margin-left:auto;margin-right:auto;">URLを入力するだけで、<strong>AIが入れるか・検索に出るか・内容を読み取れるかを14項目・100点満点</strong>で自動採点。AIクローラーの許可やCDNでの遮断、noindexまで、その場でチェックします。</p>
 </section>
 
@@ -110,9 +151,19 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div style="max-width:52em;">
     <p><strong>サイトの技術チェックは、入力されたページを実際に取得し、AI検索とSEOの技術対応14項目を機械的に検査して100点満点で採点するツールです。</strong>重く見ているのは、AIのクローラーが入れるか（robots.txtとCDNでの遮断）と、検索に出さない設定（noindex）になっていないかです。Googleが「効く」と明記しているのは、クロールできることと、その会社にしか書けない内容だからです。構造化データとllms.txtは、GoogleがAIに引用されるための必須条件ではないと明言しているため、配点を低くしています。</p>
     <p>85点以下だった場合は、改善余地がそのまま集客の伸びしろです。結果には項目ごとの合否が表示されるため、<strong>不合格項目を上から順に直すだけで対応が進みます</strong>。技術的な修正が難しい場合や、コンテンツ面（記事の構造・一次情報）まで含めた本格的な分析が必要な場合は、<a href="/lp/">無料の現状分析</a>をご利用ください。</p>
-    <p>※ 本チェックは公開ページの機械検査であり、検索順位やAI引用の実績そのものを測定するものではありません。コンテンツ対応もあわせて確認したい方は<a href="/diagnosis/aio/">AI検索対応度チェック（30秒）</a>を、店舗のマップ対策は<a href="/diagnosis/meo/">MEO対応度チェック（30秒）</a>をどうぞ。チェック項目の意味から知りたい方は<a href="/aio/aio-shindan-yarikata/">AIO対応のチェックのやり方｜無料チェック8項目とツールの使い分け</a>もあわせてご覧ください。<br>監修: <a href="/author/haraguchi/">セブンセンシズ株式会社 代表取締役 原口優</a></p>
+    <p>※ 本チェックは公開ページの機械検査であり、検索順位やAI引用の実績そのものを測定するものではありません。コンテンツ対応もあわせて確認したい方は<a href="/tools/aio-check/">AI検索対応度チェック（30秒）</a>を、店舗のマップ対策は<a href="/tools/meo-check/">MEO対応度チェック（30秒）</a>をどうぞ。チェック項目の意味から知りたい方は<a href="/aio/aio-shindan-yarikata/">AIO対応のチェックのやり方｜無料チェック8項目とツールの使い分け</a>もあわせてご覧ください。<br>監修: <a href="/author/haraguchi/">セブンセンシズ株式会社 代表取締役 原口優</a></p>
   </div>
 </section>
+
+<!-- tools:others -->
+<section class="tools-more tools-others" aria-label="ほかの無料ツール">
+  <h2>ほかの無料ツール</h2>
+  <div class="tools-grp"><h3>AIでの見え方を調べる</h3><div class="tools-sub"><a href="/tools/ai-check/" data-cta="tools_other_ai-check"><b>AI診断<small>AIにどう紹介されているか</small></b><span>地域と業種を入れると、AIに「地域名＋業種 おすすめ」など3つの質問をして、答えの出典に御社のサイトが入っているか、回答に社名が出るかを表示します。</span><em>1回3問・1メールアドレス3回まで</em></a><a href="/tools/aio-check/" data-cta="tools_other_aio-check"><b>AI検索の対応度チェック<small>8つの質問で採点</small></b><span>8つの質問に答えると、AI検索に引用されるために足りないものを100点満点で表示します。</span><em>8問・約30秒</em></a></div></div>
+  <div class="tools-grp"><h3>対策の準備に使う</h3><div class="tools-sub"><a href="/download/" data-cta="tools_other_checklist"><b>AI検索対策チェックリスト<small>業種別PDF</small></b><span>歯科医院・クリニック・不動産会社・工務店・士業事務所の5業種。印をつけながら、自社で直すところを確かめられます。</span><em>5業種</em></a><a href="/tools/kuchikomi-henshin/" data-cta="tools_other_kuchikomi-henshin"><b>口コミ返信文の作成ツール<small>返信案を3つ作る</small></b><span>業種と口コミの種類を選ぶと、そのまま使える返信案を3つ作ります。医療は医療広告ガイドラインにふれない書き方にそろえます。</span><em>業種と口コミの種類を選ぶだけ</em></a></div></div>
+  <div class="tools-grp"><h3>地図（Googleマップ）</h3><div class="tools-sub"><a href="/tools/meo-check/" data-cta="tools_other_meo-check"><b>マップ集客の整備度チェック<small>8つの質問で採点</small></b><span>8つの質問に答えると、Googleビジネスプロフィールの整備度を100点満点で採点します。</span><em>8問・約30秒</em></a></div></div>
+  <p class="tools-consult"><a href="/tools/" data-cta="tools_other_all">無料ツールの一覧へ</a> ／ 結果の読み方や、何から直すかのご相談は <a href="/lp/#form" data-cta="tools_other_consult">無料相談</a></p>
+</section>
+<!-- /tools:others -->
 
 <footer class="site-footer">
   <div class="inner">
@@ -131,11 +182,11 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <a href="/glossary/">用語集</a>
       <a href="/compare/">比較表から探す</a>
       <a href="/tools/">無料ツール一覧</a>
-      <a href="/site-audit/">URL診断（サイトの14項目を採点）</a>
+      <a href="/tools/url-check/">URL診断（サイトの14項目を採点）</a>
       <a href="/tools/ai-check/">AI診断（AIにどう紹介されているか）</a>
-      <a href="/diagnosis/aio/">AI検索の対応度チェック（30秒）</a>
+      <a href="/tools/aio-check/">AI検索の対応度チェック（30秒）</a>
       <a href="/tools/kuchikomi-henshin/">口コミ返信文の作成ツール</a>
-      <a href="/diagnosis/meo/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/tools/meo-check/">マップ集客の整備度チェック（30秒）</a>
       <a href="/aio/">AIO・LLMO運用</a>
       <a href="/seo/">SEO運用</a>
       <a href="/meo/">MEO運用</a>

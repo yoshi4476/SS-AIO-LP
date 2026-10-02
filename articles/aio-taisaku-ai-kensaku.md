@@ -185,7 +185,7 @@ AI検索対策で最も多い失敗は、プラットフォームの違いを無
 <details><summary>中小企業でもAI検索対策は必要ですか？</summary><p class="faq-a">必要です。指名検索やCVに近いクエリほど、AI検索経由の比較検討に含まれやすくなっています。</p></details>
 </div>
 
-自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
+自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

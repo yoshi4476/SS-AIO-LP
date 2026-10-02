@@ -182,7 +182,7 @@ AI Overviewの引用元は固定ではなく、Googleが再クロールするた
 
 <details><summary>自分だけで診断・改善できますか？</summary><p class="faq-a">順位やrobots.txtの基本確認は自社で可能です。構造化データの設計は専門支援が近道です。</p></details>
 
-自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
+自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

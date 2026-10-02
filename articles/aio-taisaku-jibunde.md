@@ -156,7 +156,7 @@ BtoB・SaaSは競合比較記事の独自性を出しにくく、自分で書く
 <details><summary>自分で対策しても順位が変わらない場合はどうすればよいですか？</summary><p class="faq-a">構造だけでなく検索順位そのものに問題がないか、通常のSEO観点で見直してください。</p></details>
 </div>
 
-自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/diagnosis/aio/)で確かめられます。登録は不要です。
+自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

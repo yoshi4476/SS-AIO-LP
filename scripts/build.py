@@ -66,11 +66,11 @@ FOOTER_NAV_DEFAULT = [
     {"label": "用語集", "url": "/glossary/"},
     {"label": "比較表から探す", "url": "/compare/"},
     {"label": "無料ツール一覧", "url": "/tools/"},
-    {"label": "URL診断（サイトの14項目を採点）", "url": "/site-audit/"},
+    {"label": "URL診断（サイトの14項目を採点）", "url": "/tools/url-check/"},
     {"label": "AI診断（AIにどう紹介されているか）", "url": "/tools/ai-check/"},
-    {"label": "AI検索の対応度チェック（30秒）", "url": "/diagnosis/aio/"},
+    {"label": "AI検索の対応度チェック（30秒）", "url": "/tools/aio-check/"},
     {"label": "口コミ返信文の作成ツール", "url": "/tools/kuchikomi-henshin/"},
-    {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
+    {"label": "マップ集客の整備度チェック（30秒）", "url": "/tools/meo-check/"},
     {"label": "AIO・LLMO運用", "url": "/aio/"},
     {"label": "SEO運用", "url": "/seo/"},
     {"label": "MEO運用", "url": "/meo/"},
@@ -207,7 +207,7 @@ CATEGORIES = {
 
 # privacy/tokushoho は noindex のため sitemap から除外（noindex×sitemap掲載の矛盾を防ぐ）
 # glossary/ は build_sitemap の生成ページのループが出す（ここにも書くと2回載る）
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "tools/", "diagnosis/meo/", "diagnosis/aio/", "tools/kuchikomi-henshin/", "tools/ai-check/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "tools/", "tools/url-check/", "tools/ai-check/", "tools/aio-check/", "tools/kuchikomi-henshin/", "tools/meo-check/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
 
 
 def jp_date(iso: str) -> str:
@@ -443,10 +443,10 @@ def related_html(meta, all_metas):
 
 # カテゴリ連動の記事末診断バナー（読者→診断→85点以下は無料相談へ、のリード導線）
 DIAG_BANNERS = {
-    "meo": ("/diagnosis/meo/", "マップ集客の整備度チェック（無料・30秒）", "8つの質問で、Googleマップ集客の整備度を100点満点で採点します。"),
-    "aio": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
-    "seo": ("/site-audit/", "サイト無料採点（URL入力だけ）", "AIが入れるか・検索に出るか・読み取れるかを14項目・100点満点で自動チェックします。"),
-    "ai-marketing": ("/diagnosis/aio/", "AI検索の対応度チェック（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
+    "meo": ("/tools/meo-check/", "マップ集客の整備度チェック（無料・30秒）", "8つの質問で、Googleマップ集客の整備度を100点満点で採点します。"),
+    "aio": ("/tools/aio-check/", "AI検索の対応度チェック（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
+    "seo": ("/tools/url-check/", "サイト無料採点（URL入力だけ）", "AIが入れるか・検索に出るか・読み取れるかを14項目・100点満点で自動チェックします。"),
+    "ai-marketing": ("/tools/aio-check/", "AI検索の対応度チェック（無料・30秒）", "AI検索に引用される準備ができているかを100点満点で採点します。"),
 }
 
 
@@ -602,7 +602,7 @@ def diag_banner_html(meta):
     box = scan_box(meta, "bottom")
     if meta["category"] == "meo":
         box = box.replace("</form></aside>", '</form><p class="sb-alt">Googleマップの整備度を測るなら '
-                          '<a href="/diagnosis/meo/" data-cta="article_bottom_meo_quiz">マップ集客の整備度チェック（8問・30秒）</a></p></aside>')
+                          '<a href="/tools/meo-check/" data-cta="article_bottom_meo_quiz">マップ集客の整備度チェック（8問・30秒）</a></p></aside>')
     return box
 
 
@@ -778,7 +778,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     # リード導線チェック。読んで納得した人の行き先が無いと、記事はそこで終わる。
     # 実際、コーポレートは88本中75本に行き先が無く、記事からの反応がゼロだった。
     # 自己診断・サイト診断・問い合わせのどれか1つは必ず本文に置く。
-    if not re.search(r"/diagnosis/|/site-audit/|#diagnosis|/contact|/lp/", content):
+    if not re.search(r"/diagnosis/|/tools/|/site-audit/|#diagnosis|/contact|/lp/", content):
         QUALITY_ISSUES.setdefault(meta["slug"], []).append("リード導線なし")
         print(f"WARN: リード導線なし: {meta['slug']} には無料診断・問い合わせのリンクが"
               f"ありません（python scripts/tool_links.py --write で入ります）")
@@ -2024,6 +2024,8 @@ def main():
     build_research_pages(all_metas)  # 先に作る（LP と業種ハブが、調査ページがあればリンクする）
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
+    import tools_catalog
+    tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から
     hide_data_pages()
     ensure_og()
     build_sitemap(entries)

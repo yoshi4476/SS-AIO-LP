@@ -180,7 +180,7 @@ diagrams:
 <details><summary>低評価の口コミにはどう返信すればいいですか？</summary><p class="faq-a">感情的な反論を避け、受け止め・改善の事実・感謝の3要素だけで簡潔に返信します。</p></details>
 </div>
 
-自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/tools/meo-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

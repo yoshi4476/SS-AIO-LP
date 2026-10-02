@@ -86,7 +86,7 @@ function form_(body) {
 /** リードの温度。診断とサイト診断は、自社の情報を差し出しているので高く見る */
 // 流入経路で温度を1段上げる。料金・サービス・診断・費用系の記事から来た人は、
 // 「相談」と書いていなくても導入を検討している
-const LEAD_HOT_PATHS = /\/lp\b|\/service|\/diagnosis|\/price|\/plan|hiyou|souba|daikou|gaichuu|contact/i;
+const LEAD_HOT_PATHS = /\/lp\b|\/service|\/diagnosis|\/tools\/|\/price|\/plan|hiyou|souba|daikou|gaichuu|contact/i;
 
 function leadTemp_(type, message, d, referer) {
   if (type === 'diagnosis' || type === 'site_audit') return 'HOT';

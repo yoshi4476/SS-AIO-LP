@@ -31,6 +31,10 @@ def check(name, got, want):
     print(f"  {'OK' if ok else 'NG'}  {name}" + ("" if ok else f"  （得た {got!r} / 期待 {want!r}）"))
     if not ok:
         FAIL.append(name)
+        # pytest で走らせたときも NG を落とす。記録するだけだと pytest は「passed」と出し、
+        # 通っていない門を通ったと読み違えた（2026-10-03）
+        if "pytest" in sys.modules:
+            raise AssertionError(f"{name}: 得た {got!r} / 期待 {want!r}")
 
 
 # ── 1. 狙う語の判定 ──────────────────────────────
@@ -264,7 +268,7 @@ def test_every_article_has_a_lead_path():
     実際コーポレートは88本中75本に行き先が無く、記事からの反応がゼロだった。
     新しい記事が増えるたびに漏れるため、機械で見張る。
     """
-    lead = re.compile(r"/diagnosis/|/site-audit/|#diagnosis|/contact|/lp/")
+    lead = re.compile(r"/diagnosis/|/tools/|/site-audit/|#diagnosis|/contact|/lp/")
     missing = []
     for f in sorted((ROOT / "articles").glob("*.md")):
         body = f.read_text(encoding="utf-8", errors="replace").split("---", 2)[-1]
@@ -2201,6 +2205,40 @@ def test_site_audit_has_no_critical_or_warning():
     check("原稿に git の衝突マーカーが無い", conf, [])
 
 
+def test_free_tools_live_under_one_roof():
+    """無料ツールは /tools/ の下にそろい、どのツールからも一覧と他のツールへ行けること。
+
+    以前は /site-audit/・/diagnosis/aio/・/tools/ai-check/ とURLも名前もばらばらで、
+    同じツールがページによって別の名前で呼ばれていた（2026-10-03 に /tools/ へ統一）。
+    """
+    print(chr(10) + "■ 無料ツールの構成")
+    import json as _json
+    import tools_catalog as TC
+    site = ROOT / "site"
+    idx = (site / "tools" / "index.html").read_text(encoding="utf-8")
+    foot = (site / "index.html").read_text(encoding="utf-8")
+    for t in TC.TOOLS:
+        check(f"一覧に載っている: {t['name']}", f'href="{t["url"]}"' in idx, True)
+        check(f"フッターから行ける: {t['name']}", f'href="{t["url"]}"' in foot, True)
+        if t.get("page") is False:
+            continue
+        check(f"/tools/ の下にある: {t['name']}", t["url"].startswith("/tools/"), True)
+        p = site / t["url"].strip("/") / "index.html"
+        s = p.read_text(encoding="utf-8")
+        check(f"パンくずが 無料ツール を通る: {t['name']}", '<li><a href="/tools/">無料ツール</a></li>' in s, True)
+        check(f"ほかの無料ツールへ行ける: {t['name']}", "<!-- tools:others -->" in s, True)
+        lds = re.findall(r'<script type="application/ld\+json" data-tools-ld>(.*?)</script>', s, re.S)
+        types = [g["@type"] for g in _json.loads(lds[0])["@graph"]] if len(lds) == 1 else []
+        check(f"構造化データ（パンくず＋ツール）: {t['name']}", types, ["BreadcrumbList", "WebApplication"])
+    red = (site / "_redirects").read_text(encoding="utf-8")
+    for old, new in (("/site-audit/", "/tools/url-check/"), ("/diagnosis/aio/", "/tools/aio-check/"),
+                     ("/diagnosis/meo/", "/tools/meo-check/"), ("/diagnosis/", "/tools/")):
+        check(f"古いURLを転送する: {old}", re.search(rf"^{re.escape(old)}\s+{re.escape(new)}\s+301", red, re.M) is not None, True)
+    left = sorted({p.relative_to(site).as_posix() for p in site.rglob("*.html")
+                   if re.search(r'href="(/site-audit|/diagnosis/(aio|meo))', p.read_text(encoding="utf-8"))})
+    check("古いツールURLへの内部リンクが残っていない", left[:5], [])
+
+
 def test_site_has_two_axes_and_no_orphans():
     """手法だけでなく業種でも記事に行けること。入口ページが孤立していないこと。
 
@@ -3321,6 +3359,7 @@ def main():
               test_aio_rewrites_and_citation_measurement,
               test_data_intake_publishes_only_grounded_numbers,
               test_site_has_two_axes_and_no_orphans,
+              test_free_tools_live_under_one_roof,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,

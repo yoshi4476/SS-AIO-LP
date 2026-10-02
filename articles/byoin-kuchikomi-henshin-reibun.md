@@ -261,7 +261,7 @@ diagrams:
 <details><summary>歯科医院で自由診療の料金を書かれた口コミにはどう返信しますか？</summary><p class="faq-a">返信に金額を書かないでください。料金の説明は医療広告ガイドラインの規制対象になるため、窓口へ案内する一文で受け止めます。</p></details>
 </div>
 
-自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/diagnosis/meo/)で確かめられます。登録は不要です。
+自院のマップ集客がいまどの状態かは、[MEO診断（無料・30秒）](/tools/meo-check/)で確かめられます。登録は不要です。
 
 <div class="cta-box"><p>AIO・SEO・MEOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 
