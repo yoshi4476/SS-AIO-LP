@@ -43,8 +43,20 @@ def ga4_by_day(prop, start, end):
         dimension_filter=FilterExpression(filter=Filter(field_name="eventName",
                                                         in_list_filter=Filter.InListFilter(values=list(EVENTS)))),
         limit=5000))
-    return count_rows([(r.dimension_values[0].value, r.dimension_values[1].value,
-                        r.dimension_values[2].value, int(r.metric_values[0].value)) for r in rep.rows])
+    rows = [(r.dimension_values[0].value, r.dimension_values[1].value,
+             r.dimension_values[2].value, int(r.metric_values[0].value)) for r in rep.rows]
+    ga4_by_day.rows = rows          # 取りこぼした日に「どのページの送信か」を出すため残す
+    return count_rows(rows)
+
+
+def pages_on(rows, day):
+    """その日の問い合わせの送信が、どのページから来たか（件数つき）"""
+    key = day.replace("-", "")
+    c = collections.Counter()
+    for d, ev, path, n in rows:
+        if d == key and is_lead(ev, path):
+            c[path or "(不明)"] += n
+    return "・".join(f"{p}（{n}）" for p, n in c.most_common(5))
 
 
 def is_lead(ev, path):
@@ -142,8 +154,10 @@ def main():
         miss = [d for d, n in sorted(ga.items()) if n > 0 and led[sid].get(d, 0) == 0 and d not in ack]
         print(f"  {cfg.get('name', sid)}: GA4 の送信 {sum(ga.values())}件（{len(ga)}日） / 台帳 {sum(led[sid].values())}行")
         for d in miss:
+            src = pages_on(getattr(ga4_by_day, "rows", []), d)
             bad.append(f"要対応: {cfg.get('name', sid)} — {d} に GA4 では送信{ga[d]}件あるのに台帳に行がありません"
-                       "（メールにだけ届いた可能性。info.ai の受信箱を確認し、台帳に書き足す）")
+                       + (f"（送信したページ: {src}）" if src else "")
+                       + "（メールにだけ届いた可能性。info.ai の受信箱を確認し、台帳に書き足す）")
             print("  " + bad[-1])
     if led.get("?"):
         print(f"  サイト名を判定できない行 {sum(led['?'].values())}件")

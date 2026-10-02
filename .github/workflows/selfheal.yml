@@ -86,6 +86,31 @@ jobs:
           $(echo "$out" | grep '^要対応' | head -5)" || true
           fi
 
+      # 結果の見張り: 「動いたか」ではなく「出来たか」。2026-09-28〜10-03 は記事の枠が毎回「成功」なのに
+      # 3サイトとも1本も書かれず、誰も気づかなかった。前日の記事の本数・公開・動画・ニュースレター・問い合わせを数える
+      - name: 結果の見張り（記事・公開・動画・ニュースレター・問い合わせ）
+        if: github.event_name != 'workflow_run'
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          GH_TOKEN: ${{ github.token }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          mkdir -p automation/logs
+          [ -n "$SA_JSON" ] && printf '%s' "$SA_JSON" > indexing-service-account.json
+          out=$(python scripts/outcome_watch.py 2>&1) || true
+          echo "$out" | tail -20
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          if echo "$out" | grep -q '^要対応'; then
+            python scripts/notify_slack.py "🚨 結果の見張りで要対応があります（実行は成功でも、出来ていないもの）
+          $(echo "$out" | grep '^要対応' | head -8)" || true
+          fi
+          rm -f indexing-service-account.json
+
       # 何が壊れているかを先に確定させる。ここで問題が無ければ何もしない。
       - name: いま壊れているものの確認
         id: diag

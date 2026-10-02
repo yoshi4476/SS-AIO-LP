@@ -2292,6 +2292,25 @@ def test_question_and_faq_pages():
     check("よくある質問: フッターから行ける", 'href="/faq/"' in (site / "index.html").read_text(encoding="utf-8"), True)
 
 
+def test_outcome_watch_counts_what_was_made():
+    """結果の見張りは「出来た数」で判定する。記事が0本だった 2026-10-02 を要対応にし、
+    上限を超えていた月末の 9/24（コーポレート）には書くはずの本数を0とみなす"""
+    print(chr(10) + "■ 結果の見張り")
+    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "outcome_watch.py"), "--day", "2026-10-02", "--no-net"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300)
+    check("記事が0本の日を要対応にする", "WATCH_OK=no" in r.stdout and r.stdout.count("の記事が 0/") >= 3, True)
+    import daily_audit as D
+    import outcome_watch as OW
+    from datetime import date as _d
+    arts = D.articles_by_site().get("corporate", [])
+    check("月の上限を超えた後は、書くはずの本数を0とみなす（9/24 コーポレート）",
+          OW.expected_articles("corporate", arts, _d(2026, 9, 24)), 0)
+    wf = (ROOT / ".github" / "workflows" / "selfheal.yml").read_text(encoding="utf-8")
+    check("毎晩の自動修復の回で呼ぶ", "scripts/outcome_watch.py" in wf, True)
+    wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次で検査の検査を走らせる", "scripts/gate_selftest.py" in wk, True)
+
+
 def test_monthly_cap_check_exit_code():
     """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
 
@@ -3472,6 +3491,7 @@ def main():
               test_monthly_cap_check_exit_code,
               test_season_features,
               test_question_and_faq_pages,
+              test_outcome_watch_counts_what_was_made,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,

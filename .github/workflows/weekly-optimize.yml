@@ -629,6 +629,15 @@ jobs:
             echo "要対応: 判断が要る学びが多すぎます（機械検査に変えるか退役させてください）" >> automation/logs/findings.txt
           fi
 
+      # 検査の検査: 既知の壊れ方を1つずつ入れ、門が止めるかを確かめる（入れた変更は必ず戻す）。
+      # 門が黙って壊れていると、通っていない品質を「通った」と読み違える（2026-10-03 に pytest で起きた）
+      - name: 門が止めるかの点検
+        run: |
+          mkdir -p automation/logs
+          out=$(python scripts/gate_selftest.py 2>&1) || true
+          echo "$out" | tail -10
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+
       - name: 見つかったものを集めて知らせる
         env:
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
