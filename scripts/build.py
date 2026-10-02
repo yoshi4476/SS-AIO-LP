@@ -1394,11 +1394,13 @@ def build_industry_lps(IH, pairs, g):
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/lp/{key}/")
         # 外枠は記事一覧のもの。LP では一覧用の見出し・説明・検索欄・カテゴリの絞り込みを外す
         # （絞り込みに「MEO運用」が出ていた。LP の説明は外枠の説明欄に置く）
-        page = page.replace('<span class="kicker">All Articles</span>', '<span class="kicker">Service</span>', 1)
-        page = re.sub(r'(<section class="hero">.*?<p class="lead">).*?(</p>)',
-                      lambda m: m.group(1) + _html_escape(c["desc"]) + m.group(2), page, count=1, flags=re.S)
+        # 最初の画面はトップと同じ作り（lx-hero）にする。外枠の白い見出しでは LP に見えなかった（2026-10-02）
+        page = re.sub(r'<section class="hero">.*?</section>', lambda m: IL.hero(key, c), page, count=1, flags=re.S)
+        # LP には本文に相談の帯がある。外枠の「読んで終わりにせず…」まで出すと帯が2つ並ぶ
+        page = re.sub(r'<section class="section">\s*<div class="cta reveal">.*?</section>\n?', "", page, count=1, flags=re.S)
         page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
-        page = page.replace("</head>", IL.json_ld(key, faq, SITE_URL, organization()) + "</head>", 1)
+        page = page.replace("</head>", '<link rel="stylesheet" href="/css/lp-v2.css?v=3">'
+                            + IL.json_ld(key, faq, SITE_URL, organization()) + "</head>", 1)
         out.write_text(page, encoding="utf-8", newline="\n")
 
 
@@ -1415,10 +1417,13 @@ def build_research_pages():
         out.parent.mkdir(parents=True, exist_ok=True)
         page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/research/{ind}-ai-sources/")
-        page = page.replace('<span class="kicker">All Articles</span>', '<span class="kicker">Research</span>', 1)
-        page = re.sub(r'(<section class="hero">.*?<p class="lead">).*?(</p>)',
-                      lambda m: m.group(1) + _html_escape(desc) + m.group(2), page, count=1, flags=re.S)
+        # 最初の画面はトップ・業種別LPと同じ作り。末尾の帯はその業種のLPと30秒診断へ
+        page = re.sub(r'<section class="hero">.*?</section>', lambda m: IAS.hero(ind), page, count=1, flags=re.S)
         page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+        page = re.sub(r'<section class="section">\s*<div class="cta reveal">.*?</section>\n?',
+                      lambda m: IAS.cta_band(ind), page, count=1, flags=re.S)
+        import industry_lp as _IL
+        page = page.replace("</head>", '<link rel="stylesheet" href="/css/lp-v2.css?v=3">' + _IL.STYLE + "</head>", 1)
         page = page.replace("</head>", '<script type="application/ld+json">'
                             + json.dumps(ld, ensure_ascii=False) + "</script></head>", 1)
         out.write_text(page, encoding="utf-8", newline="\n")

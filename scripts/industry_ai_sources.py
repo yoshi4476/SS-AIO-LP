@@ -146,6 +146,35 @@ QUESTIONS["koumuten"] = {
     },
 }
 
+QUESTIONS["shigyou"] = {
+    "name": "士業",
+    "text": {"owner": "士業事務所", "owner_site": "士業事務所の公式サイト", "portal": "比較・紹介サイト",
+             "public_label": "公的機関・士業団体", "public_ex": "官公庁・自治体・各士業会",
+             "find_ex": "「大阪 税理士 おすすめ」", "other_groups": "費用・選び方・手続き・制度",
+             "other_short": "費用・手続き・制度など", "self_page": "事務所の解説ページ",
+             "advice": "相談テーマごとの費用・手続き・制度を、事務所のサイトで分かりやすく説明しておくこと",
+             "lp": "shigyou", "lp_name": "士業事務所のSEO・AI検索対策", "asker": "相談先を探す人"},
+    "groups": {
+        "地域で探す": [f"{c} 税理士 おすすめ" for c in CITIES] + [f"{c} 司法書士 相続 評判" for c in CITIES],
+        "費用": ["税理士 顧問料 相場", "確定申告 税理士 費用", "記帳代行 費用", "会社設立 司法書士 費用", "相続税申告 税理士 報酬",
+               "相続登記 司法書士 費用", "社労士 顧問料 相場", "就業規則 作成 費用", "助成金 申請 社労士 報酬", "行政書士 許可申請 費用",
+               "建設業許可 費用", "ビザ申請 行政書士 費用", "弁護士 相談料 相場", "離婚 弁護士 費用", "遺言書 作成 費用",
+               "家族信託 費用", "会社 解散 費用", "決算 税理士 費用 相場", "年末調整 代行 費用", "給与計算 代行 費用"],
+        "選び方": ["税理士 選び方", "税理士 変える タイミング", "社労士 選び方", "行政書士 選び方", "弁護士 選び方", "司法書士 選び方",
+                 "税理士 会計士 違い", "司法書士 行政書士 違い", "社労士 必要か", "顧問税理士 必要か", "相続 誰に相談", "会社設立 誰に頼む",
+                 "オンライン 税理士 デメリット", "女性 税理士 探し方", "相続 弁護士 税理士 違い", "労務トラブル 相談先",
+                 "許認可 自分で できるか", "記帳代行 税理士 違い", "税理士 紹介サービス 使うべきか", "社労士 顧問 なし 大丈夫か"],
+        "手続き・悩み": ["確定申告 やり方", "インボイス 登録 必要か", "電子帳簿保存法 対応", "相続税 申告 期限", "相続放棄 手続き",
+                     "遺産分割 揉めた", "会社設立 流れ", "法人成り タイミング", "社会保険 加入 義務", "未払い残業代 請求された",
+                     "労働基準監督署 調査", "就業規則 作成 義務", "建設業許可 要件", "古物商許可 取り方", "在留資格 変更 手続き",
+                     "税務調査 来た", "延滞税 計算", "資金繰り 相談先", "事業承継 進め方", "小規模 M&A 相談先"],
+        "制度・ルール": ["相続税 基礎控除", "贈与税 非課税", "小規模宅地等の特例", "青色申告 メリット", "経費 認められる 範囲",
+                     "減価償却 とは", "消費税 免税事業者", "社会保険 扶養 範囲", "育児休業 給付金", "雇用保険 加入条件",
+                     "36協定 とは", "最低賃金 2026", "パート 有給 日数", "労災 申請 方法", "遺言 種類", "成年後見 とは",
+                     "家族信託 とは", "相続登記 義務化", "補助金 申請 誰に頼む", "役員報酬 決め方"],
+    },
+}
+
 CATS = {
     "portal": "予約・比較ポータル",
     "clinic": "医院・クリニックの公式サイト",
@@ -165,7 +194,7 @@ RULES = [
     (r"epark|haisha-yoyaku|caloo|byoinnavi|doctorsfile|qlife|scuel|shika-town|ha-channel|minnano-shika|"
      r"dentalbook|shika-navi|denternet|hospita|medicaldoc|fdoc|mrso|ishachoku|okbiz|"
      r"(^|\.)suumo\.jp$|(^|\.)homes\.co\.jp$|(^|\.)athome\.co\.jp$|(^|\.)ieul\.jp$|(^|\.)home4u\.jp$|"
-     r"sumai-step|rehome-navi|homepro\.jp|nuri-kae|reform-guide", "portal"),
+     r"sumai-step|rehome-navi|homepro\.jp|nuri-kae|reform-guide|zeiri4\.com|bengo4\.com", "portal"),
     (r"google\.(com|co\.jp)/maps|maps\.google|maps\.app\.goo\.gl|tabelog|minkou|minkuru", "review"),
     (r"youtube\.com|youtu\.be|tiktok\.com|instagram\.com|x\.com|twitter\.com|facebook\.com|note\.com|ameblo\.jp", "video"),
     (r"wikipedia\.org", "wiki"),
@@ -323,6 +352,71 @@ ENGINE_NOTE = {"ChatGPT": "gpt-4.1-mini＋Web検索", "Gemini": "Gemini Flash＋
                "Claude": "Claude Sonnet＋Web検索"}
 
 
+def headline(ind):
+    """調査の要点の数字。調査ページ・業種別LP・提案書はここだけから数字を取る（食い違いを起こさない）。
+    集計ファイルが無ければ None"""
+    f = OUT / f"{ind}-summary.json"
+    if not f.is_file():
+        return None
+    s = json.loads(f.read_text(encoding="utf-8"))
+    if "per_answer" not in s:
+        return None
+    pa, loc = s["per_answer"], "地域で探す"
+    T = {**TEXT["dental"], **QUESTIONS[ind].get("text", {})}
+    pct = lambda c, k: round(c.get(k, 0) / max(sum(c.values()), 1) * 100, 1)
+    apct = lambda key, k: round(pa[key].get(k, 0) / max(pa[key]["answers"], 1) * 100, 1)
+    other = [g for g in s["by_group"] if g != loc]
+    lp, lc = pct(s["by_group"][loc], "portal"), pct(s["by_group"][loc], "clinic")
+    ap, ac = apct(loc, "portal"), apct(loc, "clinic")
+    oc = round(sum(s["by_group"][g].get("clinic", 0) for g in other)
+               / max(sum(sum(s["by_group"][g].values()) for g in other), 1) * 100, 1)
+    oa = round(sum(pa[g].get("clinic", 0) for g in other) / max(sum(pa[g]["answers"] for g in other), 1) * 100, 1)
+    # 「どちらが多い」は2通りの数え方で向きがそろい、件数で5ポイント以上の差があるときだけ言う
+    verdict = ("portal" if lp - lc >= 5 and ap > ac else "owner" if lc - lp >= 5 and ac > ap else "even")
+    return {"ind": ind, "name": s["name"], "date": s["date"], "questions": s["questions"], "T": T,
+            "lp": lp, "lc": lc, "ap": ap, "ac": ac, "oc": oc, "oa": oa, "verdict": verdict,
+            "url": f"https://ai.7senses.co.jp/research/{ind}-ai-sources/"}
+
+
+def hero(ind):
+    """調査ページの最初の画面（トップ・業種別LPと同じ lx-hero）。数字は headline() からだけ取る"""
+    import html as H
+    hl = headline(ind)
+    T = hl["T"]
+    if hl["verdict"] == "portal":
+        first = (f'{hl["lp"]}%', f'{T["owner"]}を探す質問で、出典が{T["portal"]}だった割合（{T["owner_site"]}は{hl["lc"]}%）')
+    elif hl["verdict"] == "owner":
+        first = (f'{hl["lc"]}%', f'{T["owner"]}を探す質問で、出典が{T["owner_site"]}だった割合（{T["portal"]}は{hl["lp"]}%）')
+    else:
+        first = (f'{hl["lp"]}%／{hl["lc"]}%', f'{T["owner"]}を探す質問で、出典になった{T["portal"]}と{T["owner_site"]}の割合（ほぼ同じ）')
+    y, m = hl["date"][:4], int(hl["date"][5:7])
+    return (f'<section class="lx-hero ilp-hero" data-area="メインビジュアル" data-area-id="mv">'
+            f'<div class="lx-wrap lx-hero-grid"><div>'
+            f'<ul class="lx-kicker"><li>調査レポート</li><li>{y}年{m}月</li></ul>'
+            f'<h1 class="lx-h1">{H.escape(hl["name"])}の質問に、<br><em>AIは何を出典に答えるか</em></h1>'
+            f'<p class="lx-lead">{H.escape(T["asker"])}が実際に調べそうな{hl["questions"]}問を、ChatGPT・Gemini・Claude・Perplexity の4つに聞き、'
+            f'回答の出典になったサイトの種類を数えました。</p>'
+            f'<p class="lx-alt">集計データ: <a href="/research/{ind}-ai-sources/data.csv" download>CSVをダウンロード</a>'
+            f' ／ {H.escape(T["owner"])}向けの対策: <a href="/lp/{T["lp"]}/" data-cta="research_hero_lp_{T["lp"]}">{H.escape(T["lp_name"])}</a></p>'
+            f'</div><div class="lx-console ilp-console" aria-label="調査の要点">'
+            f'<div class="lx-console-head"><b>要点</b><small>{hl["questions"]}問×4つのAI・{hl["date"]}</small></div>'
+            f'<div class="lx-stat"><b>{H.escape(first[0])}</b><span>{H.escape(first[1])}</span></div>'
+            f'<div class="lx-stat"><b>{hl["oa"]}%</b><span>{H.escape(T["other_short"])}を調べる質問で、回答が{H.escape(T["owner_site"])}を1つ以上出典にしていた割合</span></div>'
+            f'</div></div></section>')
+
+
+def cta_band(ind):
+    """ページ末の帯。その業種の LP と30秒診断へ"""
+    hl = headline(ind)
+    T = hl["T"]
+    return ('<section class="section"><div class="ilp-band" style="max-width:1120px;margin:0 auto">'
+            f'<h2>{T["owner"]}のサイトは、AIと検索に読まれていますか？</h2>'
+            '<p>URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを30秒で診断します。</p>'
+            '<div class="btns">'
+            f'<a class="btn btn-primary" href="/lp/{T["lp"]}/#scan-start" data-cta="research_band_scan_{ind}">30秒で無料診断する</a>'
+            f'<a class="btn btn-ghost" href="/lp/{T["lp"]}/" data-cta="research_band_lp_{ind}">{T["lp_name"]}を見る</a></div></div></section>')
+
+
 def render(ind):
     """公開ページの中身（HTML）と構造化データ。数字は集計ファイルからだけ取る（手で書かない）"""
     import html as H
@@ -351,21 +445,18 @@ def render(ind):
         f"<td>{round(s['sources'][e] / max(s['answered'][e], 1), 1)}</td><td>{pct(c, 'clinic')}%</td><td>{pct(c, 'portal')}%</td></tr>"
         for e, c in s["by_engine"].items())
     portals = "、".join(H.escape(d) for d, _ in s["portal_top"][:6])
-    lc, lp = pct(s["by_group"][loc], "clinic"), pct(s["by_group"][loc], "portal")
-    other = {g: c for g, c in s["by_group"].items() if g != loc}
-    oc = round(sum(c.get("clinic", 0) for c in other.values()) / max(sum(sum(c.values()) for c in other.values()), 1) * 100, 1)
+    hl = headline(ind)
+    lc, lp, oc = hl["lc"], hl["lp"], hl["oc"]
     y, m = s["date"][:4], int(s["date"][5:7])
     # 解釈は数字で分岐する（決め打ちにすると、業種によってデータと違う解釈が載る）。
     # 出典の件数と回答ごとの2通りで向きがそろい、差がはっきりあるときだけ「どちらが多い」と書く
     # （不動産は件数でポータル39.2%＞公式36.5%、回答ごとでは公式81.2%＞ポータル76.2%と逆になった）
-    ap, ac = apct(loc, "portal"), apct(loc, "clinic")
-    oth_g = [g for g in s["by_group"] if g != loc]
-    oa = round(sum(pa[g].get("clinic", 0) for g in oth_g) / max(sum(pa[g]["answers"] for g in oth_g), 1) * 100, 1)
+    ap, ac, oa = hl["ap"], hl["ac"], hl["oa"]
     nums = f"出典の件数では{T['portal']}{lp}%・{T['owner_site']}{lc}%、回答ごとでは{T['portal']}を出典にした回答が{ap}%・{T['owner_site']}が{ac}%"
-    if lp - lc >= 5 and ap > ac:
+    if hl["verdict"] == "portal":
         find_txt = (f"<b>「探される」場面では、{T['portal']}がAIの出典になりやすい結果でした。</b>地域名で{T['owner']}を探す質問では、{nums}でした。"
                     f"{T['portal']}の掲載情報を最新に保つことが、AIの答えに名前が出る前提になります。")
-    elif lc - lp >= 5 and ac > ap:
+    elif hl["verdict"] == "owner":
         find_txt = (f"<b>「探される」場面でも、{T['owner_site']}がAIの出典になっていました。</b>地域名で{T['owner']}を探す質問では、{nums}でした。")
     else:
         find_txt = (f"<b>「探される」場面では、{T['portal']}と{T['owner_site']}がほぼ同じくらい使われていました。</b>地域名で{T['owner']}を探す質問では、{nums}でした。"

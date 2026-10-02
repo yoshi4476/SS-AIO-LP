@@ -140,7 +140,7 @@ def lp_link(ind):
 def research_link(ind):
     """業種の調査レポートがあれば案内する（歯科: /research/dental-ai-sources/）"""
     r = {"shika": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
-         "reform": "koumuten"}.get(ind.get("slug", ""))
+         "reform": "koumuten", "shigyou": "shigyou"}.get(ind.get("slug", ""))
     if not r or not (Path(__file__).resolve().parent.parent / "site" / "research" / f"{r}-ai-sources" / "index.html").is_file():
         return ""
     return (f'<p class="hub-note"><a href="/research/{r}-ai-sources/" data-cta="hub_research_{r}">'

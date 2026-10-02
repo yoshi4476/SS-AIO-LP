@@ -71,30 +71,109 @@ LPS = {
             ("毎月の数字で確かめる", "検索とAI経由の訪問、資料請求・見学会予約の数を毎月測り、次に直す点をお伝えします。"),
         ],
     },
+    "shigyou": {
+        "name": "士業事務所",
+        "h1": "士業事務所のSEO・AI検索対策",
+        "desc": "税理士・社労士・行政書士・司法書士・弁護士などの士業事務所向けのSEO・AIO・LLMO対策。専門分野が伝わる解説と事務所の事実を、検索とAIの答えに選ばれる形に整えます。30秒の無料サイト診断つき。",
+        "slugs": ["shigyou"],
+        "research": [("shigyou", "士業")],
+        "scan_ind": "士業・コンサル",
+        "pains": [
+            ("解説を書いても埋もれる", "相続・労務・許認可などの解説を載せても、大手の情報サイトや比較サイトの下に表示される。"),
+            ("比較・紹介サイトが上に並ぶ", "「地域名 税理士」などで調べられても、紹介サイトや比較サイトが先に表示される。"),
+            ("AIの答えに事務所名が出ない", "相談先をAIに聞かれても、事務所の名前や専門分野が出てこない。"),
+            ("広告の決まりで書き方に迷う", "各士業会の広告に関する規程があり、実績や他の事務所との比べ方をどこまで書けるか迷う。"),
+        ],
+        "fixes": [
+            ("相談テーマごとの解説記事（SEO）", "相続・会社設立・労務・許認可など、相談する人が調べる疑問に答える記事を、事務所の専門分野に沿って作ります。"),
+            ("事務所の事実をAIが読める形に（AIO・LLMO）", "資格者・専門分野・対応エリア・料金の考え方など、その事務所にしか無い事実を、検索とAIが読み取れる形に整えます。"),
+            ("サイトの技術面を整える", "AIのクローラーが入れるか、検索に出る設定か、構造化データが正しいかを点検して直します。"),
+            ("毎月の数字で確かめる", "検索とAI経由の訪問、相談予約・問い合わせの数を毎月測り、次に直す点をお伝えします。"),
+        ],
+    },
 }
 
 # 記事・ハブの業種（industry_hub の slug）→ LP
 BY_HUB = {s: k for k, v in LPS.items() for s in v["slugs"]}
 
 STYLE = """<style>
-.ilp{max-width:1080px;margin:0 auto;display:grid;gap:2.6rem}
-.ilp h2{font-size:clamp(1.25rem,2.4vw,1.6rem);margin:0 0 1rem}
-.ilp-lead{font-size:1.02rem;line-height:1.95;margin:0}
-.ilp-scan{background:linear-gradient(135deg,#0b2447,#123a72);color:#fff;border-radius:22px;padding:clamp(1.4rem,3vw,2.2rem)}
-.ilp-scan p{color:rgba(255,255,255,.88);margin:.3rem 0 1rem}
-.ilp-scan form{display:flex;gap:.6rem;flex-wrap:wrap}
-.ilp-scan input[type=url]{flex:1 1 260px;font:inherit;padding:.85em 1em;border-radius:12px;border:0}
+.ilp{max-width:1120px;margin:0 auto;display:grid;gap:3.4rem}
+.ilp-eb{display:block;font-family:var(--en);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.35rem}
+.ilp h2{font-size:clamp(1.3rem,2.5vw,1.75rem);margin:0 0 1.1rem;line-height:1.45;text-wrap:balance}
 .ilp-cards{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
-.ilp-card{border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.25rem;background:#fff}
-.ilp-card h3{font-size:1.02rem;margin:0 0 .45rem}
+.ilp-card{border:1px solid var(--line);border-radius:18px;padding:1.25rem 1.3rem;background:#fff;box-shadow:var(--shadow-sm)}
+.ilp-card h3{font-size:1.02rem;margin:0 0 .5rem;line-height:1.5}
 .ilp-card p{margin:0;font-size:.93rem;line-height:1.85;color:var(--muted)}
-.ilp-fix .ilp-card{background:var(--bg-alt)}
-.ilp-proof{font-size:.92rem;color:var(--muted);margin:0}
-.ilp-cta{text-align:center;display:grid;gap:.8rem;justify-items:center}
-.ilp-faq details{border-bottom:1px solid var(--line);padding:.9rem 0}
-.ilp-faq summary{font-weight:700;cursor:pointer}
+.ilp-pain .ilp-card{border-top:4px solid #d9932b}
+.ilp-fix .ilp-card{border-top:4px solid var(--blue);background:var(--bg-alt)}
+.ilp-data{background:linear-gradient(135deg,#0b2447,#123a72);border-radius:26px;padding:clamp(1.5rem,3.4vw,2.6rem);color:#fff}
+.ilp-data .ilp-eb{color:#8fb7ff}
+.ilp-data h2{color:#fff}
+.ilp-data .ilp-proof{color:rgba(255,255,255,.78)}
+.ilp-data .ilp-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);box-shadow:none}
+.ilp-stat .ilp-k{font-size:.8rem;color:rgba(255,255,255,.72);font-weight:700;margin:0 0 .35rem}
+.ilp-stat .ilp-n{font-size:clamp(2rem,3.8vw,2.7rem);font-weight:800;color:#fff;margin:0;line-height:1.15;font-variant-numeric:tabular-nums}
+.ilp-stat p{color:rgba(255,255,255,.86)}
+.ilp-stat .ilp-src{margin-top:.7rem;font-size:.82rem}
+.ilp-stat .ilp-src a{color:#8fb7ff}
+.ilp-proof{font-size:.9rem;color:var(--muted);margin:0}
+.ilp-band{background:var(--navy-deep);color:#fff;border-radius:26px;padding:clamp(1.6rem,3.6vw,2.6rem);display:grid;gap:1rem;justify-items:center;text-align:center}
+.ilp-band h2{color:#fff;margin:0}
+.ilp-band p{margin:0;color:rgba(255,255,255,.8)}
+.ilp-band .btns{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+.ilp-band .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
+.ilp-faq details{border-bottom:1px solid var(--line);padding:1rem 0}
+.ilp-faq summary{font-weight:700;cursor:pointer;list-style-position:outside}
+.ilp-faq details p{margin:.6rem 0 0;color:var(--muted);line-height:1.85}
 .ilp-more{margin-top:1rem}
+.ilp-console .lx-stat{padding:.9rem 0;border-top:1px solid rgba(255,255,255,.14)}
+.ilp-console .lx-stat:first-of-type{border-top:0;padding-top:.2rem}
+.ilp-console .lx-stat b{display:block;font-size:2.3rem;line-height:1.1;font-variant-numeric:tabular-nums;color:#fff}
+.ilp-console .lx-stat span{font-size:.86rem;color:rgba(255,255,255,.82);line-height:1.7}
+.ilp-hero .lx-h1{font-size:clamp(1.9rem,4.4vw,3.1rem)}
+@media (prefers-reduced-motion:reduce){.ilp *{transition:none!important}}
 </style>"""
+
+
+def hero(key, c):
+    """最初の画面。トップと同じ lx-hero の作り（左: 見出しと30秒診断、右: 調査の要点の数字）"""
+    import industry_ai_sources as IAS
+    stats = ""
+    for r, label in c.get("research") or []:
+        hl = IAS.headline(r)
+        if not hl:
+            continue
+        T = hl["T"]
+        if hl["verdict"] == "portal":
+            first = (f'{hl["lp"]}%', f'{T["owner"]}を探す質問で、AIの出典が{T["portal"]}だった割合（{T["owner_site"]}は{hl["lc"]}%）')
+        elif hl["verdict"] == "owner":
+            first = (f'{hl["lc"]}%', f'{T["owner"]}を探す質問で、AIの出典が{T["owner_site"]}だった割合')
+        else:
+            first = (f'{hl["lp"]}%／{hl["lc"]}%', f'{T["owner"]}を探す質問で、AIの出典になった{T["portal"]}と{T["owner_site"]}の割合（ほぼ同じ）')
+        stats = (f'<div class="lx-console ilp-console" aria-label="調査の要点"><div class="lx-console-head"><b>AIは何を出典に答えるか</b>'
+                 f'<small>{_e(label)}・{hl["questions"]}問×4つのAI</small></div>'
+                 f'<div class="lx-stat"><b>{_e(first[0])}</b><span>{_e(first[1])}</span></div>'
+                 f'<div class="lx-stat"><b>{hl["oa"]}%</b><span>{_e(T["other_short"])}を調べる質問で、回答が{_e(T["owner_site"])}を1つ以上出典にしていた割合</span></div>'
+                 f'<p class="lx-console-foot"><a href="/research/{r}-ai-sources/" style="color:#8fb7ff" data-cta="lp_{key}_hero_research">調査の詳細を見る（{hl["date"]}）</a></p></div>')
+        break
+    if not stats:
+        items = "".join(f'<li class="lx-item"><span class="mk" aria-hidden="true"></span><span>{_e(t)}</span></li>' for t, _ in c["fixes"])
+        stats = (f'<div class="lx-console ilp-console"><div class="lx-console-head"><b>セブンセンシズが行うこと</b></div>'
+                 f'<div class="lx-group"><ul>{items}</ul></div></div>')
+    name = c["h1"].replace("のSEO・AI検索対策", "")
+    return (f'<section class="lx-hero ilp-hero" data-area="メインビジュアル" data-area-id="mv">'
+            f'<div class="lx-wrap lx-hero-grid"><div>'
+            f'<ul class="lx-kicker"><li>SEO・AIO・LLMO対策</li><li>{_e(c["name"])}向け</li></ul>'
+            f'<h1 class="lx-h1">{_e(name)}の<br><em>SEO・AI検索対策</em></h1>'
+            f'<p class="lx-lead">{_e(c["desc"].split("。")[1] if c["desc"].count("。") > 1 else c["desc"])}。まず、御社のサイトがAIと検索に読まれているかを30秒で確かめてください。</p>'
+            f'<form class="lx-form" id="scan-start" action="/lp/" method="get">'
+            f'<input type="hidden" name="ind" value="{_e(c["scan_ind"])}"><input type="hidden" name="src" value="lp_{key}">'
+            f'<label>ホームページのURL<input type="url" name="check" inputmode="url" placeholder="https://example.co.jp" autocomplete="url" required></label>'
+            f'<button type="submit" class="lx-go" data-cta="lp_{key}_scan">30秒で無料診断する</button>'
+            f'<p class="lx-micro"><span>入力はURLだけ</span><span>登録不要</span><span>営業電話なし</span></p></form>'
+            f'<p class="lx-alt">話を聞いてから決めたい方は <a href="/lp/#form" data-cta="lp_{key}_hero_consult">無料相談</a>'
+            f' ／ サービス内容と料金は <a href="/lp/#service">こちら</a></p>'
+            f'</div>{stats}</div></section>')
 
 
 def url_for(hub_slug):
@@ -104,6 +183,35 @@ def url_for(hub_slug):
 
 def _e(s):
     return html.escape(str(s or ""), quote=True)
+
+
+def data_section(key, c):
+    """調査（industry_ai_sources）の要点の数字。数字は headline() からだけ取る（調査ページと同じ値）"""
+    import industry_ai_sources as IAS
+    cards = []
+    for r, label in c.get("research") or []:
+        hl = IAS.headline(r)
+        if not hl:
+            continue
+        T = hl["T"]
+        if hl["verdict"] == "portal":
+            big, cap = f'{hl["lp"]}%', f'が{T["portal"]}（{T["owner_site"]}は{hl["lc"]}%）'
+        elif hl["verdict"] == "owner":
+            big, cap = f'{hl["lc"]}%', f'が{T["owner_site"]}（{T["portal"]}は{hl["lp"]}%）'
+        else:
+            big, cap = f'{hl["lp"]}%／{hl["lc"]}%', f'{T["portal"]}と{T["owner_site"]}がほぼ同じ'
+        cards.append(
+            f'<div class="ilp-card ilp-stat"><p class="ilp-k">{_e(label)}｜{_e(T["owner"])}を探す質問の出典</p>'
+            f'<p class="ilp-n">{_e(big)}</p><p>{_e(cap)}</p></div>'
+            f'<div class="ilp-card ilp-stat"><p class="ilp-k">{_e(label)}｜{_e(T["other_short"])}の質問</p>'
+            f'<p class="ilp-n">{hl["oa"]}%</p><p>の回答が{_e(T["owner_site"])}を1つ以上出典にしていた</p>'
+            f'<p class="ilp-src"><a href="/research/{r}-ai-sources/" data-cta="lp_{key}_research_{r}">調査の詳細（{hl["questions"]}問×4つのAI・{hl["date"]}）</a></p></div>')
+    if not cards:
+        return ""
+    return ('<section class="ilp-data"><span class="ilp-eb">Data</span><h2>データで見る：AIは何を出典に答えているか</h2>'
+            '<p class="ilp-proof" style="margin:0 0 1rem">当社が、実際に調べられそうな質問を ChatGPT・Gemini・Claude・Perplexity に聞き、'
+            '回答の出典になったサイトを種類ごとに数えた結果です。</p>'
+            f'<div class="ilp-cards">{"".join(cards)}</div></section>')
 
 
 def body(key, metas, faq_pairs, post_tile, site_url):
@@ -121,25 +229,21 @@ def body(key, metas, faq_pairs, post_tile, site_url):
             f'<input type="hidden" name="ind" value="{_e(c["scan_ind"])}"><input type="hidden" name="src" value="lp_{key}">'
             '<input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL">'
             f'<button type="submit" class="btn btn-primary" data-cta="lp_{key}_scan">30秒で診断する</button></form></section>')
-    out = [STYLE, '<div class="ilp">', scan,
-           f'<section><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
-           f'<section class="ilp-fix"><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
+    out = [STYLE, '<div class="ilp">',
+           f'<section class="ilp-pain"><span class="ilp-eb">Problems</span><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
+           data_section(key, c),
+           f'<section class="ilp-fix"><span class="ilp-eb">Solution</span><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
            '<p class="ilp-proof" style="margin-top:1rem">集客支援の実務: 店舗集客「G-ran」で通算3,200店舗以上（2026年7月時点）の運用に携わってきました。'
            'ここに挙げた業種のほかにも対応しています。</p></section>',
-           '<section class="ilp-cta"><a class="btn btn-primary" href="/lp/#form" '
-           f'data-cta="lp_{key}_consult">無料で相談する（現状分析つき）</a>'
-           '<p class="ilp-proof">サービス内容と料金は<a href="/lp/#service">サービス・料金</a>をご覧ください。</p></section>']
-    site = Path(__file__).resolve().parent.parent / "site" / "research"
-    for r, label in c.get("research") or []:
-        if (site / f"{r}-ai-sources" / "index.html").is_file():
-            out.append(f'<section class="ilp-card" style="background:var(--sky)"><h3>調査: {label}の質問に、AIは何を出典に答えているか</h3>'
-                       f'<p>実際に調べられそうな100問を4つのAIに聞き、回答の出典になったサイトの種類を集計しました。'
-                       f'<a href="/research/{r}-ai-sources/" data-cta="lp_{key}_research_{r}">調査の結果を見る</a></p></section>')
+           '<section class="ilp-band"><h2>まずは、今の状態を知るところから</h2>'
+           '<p>現状分析は無料です。30秒の診断だけでも、直す順番が分かります。</p><div class="btns">'
+           f'<a class="btn btn-primary" href="/lp/#form" data-cta="lp_{key}_consult">無料で相談する（現状分析つき）</a>'
+           f'<a class="btn btn-ghost" href="#scan-start" data-cta="lp_{key}_band_scan">30秒で診断する</a></div></section>']
     if tiles:
-        out.append(f'<section><h2>{_e(c["name"])}の集客に役立つ記事</h2><ul class="post-list">\n{tiles}\n</ul>'
+        out.append(f'<section><span class="ilp-eb">Articles</span><h2>{_e(c["name"])}の集客に役立つ記事</h2><ul class="post-list">\n{tiles}\n</ul>'
                    + (f'<p class="ilp-more">業種別のまとめ: {hubs}</p>' if hubs else "") + '</section>')
     if faq:
-        out.append(f'<section class="ilp-faq"><h2>よくある質問</h2>{faq}</section>')
+        out.append(f'<section class="ilp-faq"><span class="ilp-eb">FAQ</span><h2>よくある質問</h2>{faq}</section>')
     out.append('</div>')
     return "\n".join(out)
 
