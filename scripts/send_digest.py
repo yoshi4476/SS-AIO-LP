@@ -29,6 +29,7 @@ SITE = sites.load(sites.primary())
 SITE_URL = f"https://{SITE['domain']}"
 SITE_NAME = "AI集客ラボ"
 DAYS = 8  # 直近何日分の記事を載せるか
+from season_feature import FOOT  # noqa: E402  発行者・所在地・配信停止（特定電子メール法の表示）
 
 
 def load_env():
@@ -61,7 +62,7 @@ def recent_articles():
     return sorted(items, key=lambda m: str(m["date"]), reverse=True)
 
 
-def digest_html(items):
+def digest_html(items, season=""):
     rows = "".join(
         f'<tr><td style="padding:14px 0;border-bottom:1px solid #e5e7eb;">'
         f'<a href="{sites.article_url(SITE, m)}" '
@@ -71,23 +72,26 @@ def digest_html(items):
     today = date.today()
     return f"""<div style="font-family:sans-serif;max-width:600px;margin:auto;padding:24px;">
 <h1 style="font-size:20px;color:#0b2447;">{SITE_NAME} 週刊ダイジェスト</h1>
-<p style="font-size:14px;color:#334;">今週公開したAI集客（AIO・LLMO・SEO・MEO）の実践記事をお届けします。（{today.year}年{today.month}月{today.day}日号）</p>
-<table style="width:100%;border-collapse:collapse;">{rows}</table>
+<p style="font-size:14px;color:#334;">今週公開したAI集客（SEO・AIO・LLMO）の実践記事をお届けします。（{today.year}年{today.month}月{today.day}日号）</p>
+{season}<table style="width:100%;border-collapse:collapse;">{rows}</table>
 <p style="margin-top:24px;"><a href="{SITE_URL}/lp/" style="display:inline-block;background:#2563eb;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">無料の現状分析を申し込む</a></p>
-<p style="font-size:11px;color:#889;margin-top:24px;">発行: セブンセンシズ株式会社（{SITE_NAME}）<br>
-配信停止は {{{{{{RESEND_UNSUBSCRIBE_URL}}}}}} から行えます。</p>
+<p style="font-size:11px;color:#889;margin-top:24px;">{FOOT}</p>
 </div>"""
 
 
 def main():
     load_env()
     items = recent_articles()
-    if not items:
-        print("直近の新着記事がないため配信をスキップします")
+    # 今週始まった「今の時期の特集」（season_feature）。始まった週は件名にも出す
+    import season_feature
+    season = season_feature.newsletter()
+    if not items and not season:
+        print("直近の新着記事も今週始まる特集もないため配信をスキップします")
         return
-    html = digest_html(items)
+    html = digest_html(items, season[1] if season else "")
     today = date.today()
-    subject = f"【{SITE_NAME}】今週のAI集客まとめ（{today.month}/{today.day}号・{len(items)}本）"
+    subject = (f"【{SITE_NAME}】{season[0]}（{today.month}/{today.day}号）" if season
+               else f"【{SITE_NAME}】今週のAI集客まとめ（{today.month}/{today.day}号・{len(items)}本）")
 
     if "--demo" in sys.argv:
         out = ROOT / "reports" / "digest-preview.html"

@@ -1583,3 +1583,13 @@ main.lab .cta-final h2 { color: #fff; }
 .tools-sub b small { display: block; font-weight: 600; font-size: .78rem; color: var(--blue); margin-top: .1rem; }
 .tools-sub em { font-style: normal; font-size: .75rem; color: var(--navy); background: var(--sky); align-self: flex-start; padding: .15em .6em; border-radius: 999px; }
 .tools-others { border-top: 1px solid var(--line); margin-top: 2rem; padding-top: 2rem; }
+/* 今の時期の特集（season_feature.py が出す・1ページ1つ） */
+.season-box { padding: 1.6rem var(--gutter); }
+.season-in { max-width: 1180px; margin: 0 auto; background: linear-gradient(135deg, #fff8ec, #fffdf8); border: 1.5px solid #f3d9a4; border-radius: var(--radius); padding: 1.5rem 1.6rem; }
+.season-kicker { margin: 0 0 .5rem; font-size: .85rem; font-weight: 700; color: #8a5a00; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.season-kicker span { background: #b45309; color: #fff; padding: .2em .7em; border-radius: 999px; font-size: .78rem; }
+.season-in h2 { font-size: clamp(1.15rem, 2.6vw, 1.45rem); color: var(--navy); margin: 0 0 .5rem; line-height: 1.5; }
+.season-lead { margin: 0 0 .8rem; line-height: 1.9; color: var(--text); }
+.season-arts { margin: 0 0 1rem; padding-left: 1.2rem; line-height: 1.9; }
+.season-btns { display: flex; flex-wrap: wrap; gap: .6rem; }
+@media (max-width: 600px) { .season-btns .btn { flex: 1 1 100%; text-align: center; } }

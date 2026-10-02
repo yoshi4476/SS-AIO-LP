@@ -5,6 +5,8 @@ name: Weekly Newsletter Digest
 on:
   schedule:
     - cron: "0 0 * * 1"
+    # 毎日 8:30 JST: Google の検索の更新（検索ステータスの発表）を見て、コアアップデートなら購読者へ知らせる
+    - cron: "30 23 * * *"
   workflow_dispatch:
     inputs:
       demo:
@@ -28,7 +30,18 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml
+      - name: Google の検索の更新を知らせる（毎日）
+        if: github.event.schedule == '30 23 * * *'
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: python scripts/season_feature.py --events --send || echo "::warning::検索の更新を確かめられませんでした（次の日にもう一度見ます）"
+
       - name: ダイジェスト配信
+        if: github.event.schedule != '30 23 * * *'
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
@@ -41,7 +54,7 @@ jobs:
           fi
 
       - name: 運用通知（Slack→メール自動フォールバック）
-        if: always()
+        if: always() && github.event.schedule != '30 23 * * *'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

@@ -2026,6 +2026,8 @@ def main():
     build_extra_pages(all_metas)
     import tools_catalog
     tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から
+    import season_feature
+    season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）
     hide_data_pages()
     ensure_og()
     build_sitemap(entries)

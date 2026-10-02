@@ -163,6 +163,8 @@ jobs:
           # AI検索で答えが出る語（質問形）を、GSCの実績とサジェストから毎週さがして台帳へ積む。
           # 検索つきのAI（Gemini）へは1サイト8語まで聞く。キーが無ければ候補の抽出だけ行う
           python scripts/ai_kw_research.py --all --probe 8 --append 2>&1 | tail -12 || true
+          # 業種ごとの「今の時期の特集」の語（data/season_calendar.json・期間中だけ・食い合い審査を通った語）
+          python scripts/season_feature.py --kw 2>&1 | tail -6 || true
           python scripts/kw_status.py
 
       - name: ラッコの控えを残す

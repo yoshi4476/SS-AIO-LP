@@ -2205,6 +2205,59 @@ def test_site_audit_has_no_critical_or_warning():
     check("原稿に git の衝突マーカーが無い", conf, [])
 
 
+def test_season_features():
+    """業種ごとの「今の時期の特集」: 暦が正しく読め、期間・始まりの週・年をまたぐ期間・Google の更新の判定が合うこと"""
+    print(chr(10) + "■ 今の時期の特集")
+    from datetime import date as _d, datetime as _dt, timedelta as _td, timezone as _tz
+    import season_feature as SF
+    es = SF.load()
+    site = ROOT / "site"
+    bad = []
+    for e in es:
+        for a, b in e["windows"]:
+            for x in (a, b):
+                try:
+                    _d(2024, *map(int, x.split("-")))
+                except Exception:
+                    bad.append(f"{e['id']} の日付 {x}")
+        for k in e["lps"]:
+            if k != "*" and not (site / "lp" / k / "index.html").is_file():
+                bad.append(f"{e['id']} の業種LP {k}")
+        for k in e["hubs"]:
+            if k != "*" and not (site / "industry" / k / "index.html").is_file():
+                bad.append(f"{e['id']} の業種ページ {k}")
+        if e.get("checklist") and not (site / "download" / f"checklist-{e['checklist']}.pdf").is_file():
+            bad.append(f"{e['id']} のチェックリスト {e['checklist']}")
+    check("暦の日付・行き先が実在する", bad, [])
+    ids = lambda xs: [x["id"] for x in xs]
+    check("10/5（月）の週刊は不動産の特集で始まる", ids(SF.started(_d(2026, 10, 5))), ["fudosan-busy"])
+    check("翌週は同じ特集を繰り返さない", ids(SF.started(_d(2026, 10, 12))), [])
+    check("通年の特集は「始まった」に入らない", "kaigyou" in ids(SF.started(_d(2026, 1, 3))), False)
+    check("歯と口の健康週間の期間中は歯科の特集", "dental-week" in ids(SF.active(_d(2026, 6, 5))), True)
+    check("年をまたぐ期間（1/10は来年度予算）", "budget" in ids(SF.active(_d(2027, 1, 10))), True)
+    check("期間外は出さない（7/1に不動産の特集は無い）", "fudosan-busy" in ids(SF.active(_d(2026, 7, 1))), False)
+    check("トップは全業種向けの特集だけ（12/5は予算）", (SF.pick("top", "", _d(2026, 12, 5)) or {}).get("id"), "budget")
+    check("業種LPは業種の特集を先に出す（10/3の不動産LP）", (SF.pick("lp", "fudosan", _d(2026, 10, 3)) or {}).get("id"), "fudosan-busy")
+    marks = [p.relative_to(site).as_posix() for p in list((site / "lp").glob("*/index.html")) + list((site / "industry").glob("*/index.html"))
+             if "<!-- season -->" not in p.read_text(encoding="utf-8")]
+    check("業種LP・業種ページに特集の枠がある", marks, [])
+    now = _dt(2026, 10, 3, 0, 0, tzinfo=_tz.utc)
+    sample = [{"service_name": "Ranking", "begin": "2026-10-02T16:00:00+00:00", "external_desc": "October 2026 core update", "uri": "incidents/a"},
+              {"service_name": "Ranking", "begin": "2026-09-24T16:15:00+00:00", "external_desc": "September 2026 spam update", "uri": "incidents/b"},
+              {"service_name": "Crawling", "begin": "2026-10-02T18:00:00+00:00", "external_desc": "crawl issue", "uri": "incidents/c"}]
+    ups = SF.ranking_updates(now=now, data=sample)
+    check("直近の順位の更新だけ拾う（古い・クロールは除く）", [(u["desc"], u["core"]) for u in ups], [("October 2026 core update", True)])
+    subj, body = SF.update_mail(ups[0])
+    check("更新のお知らせに公式の発表・配信停止・発行者がある",
+          all(x in body for x in ("status.search.google.com/incidents/a", "{{{RESEND_UNSUBSCRIBE_URL}}}", "〒537-0003")), True)
+    import send_digest as SD
+    h = SD.digest_html([], "<p>特集</p>")
+    check("週刊ニュースレターに特集・配信停止・発行者の所在地がある",
+          all(x in h for x in ("<p>特集</p>", "{{{RESEND_UNSUBSCRIBE_URL}}}", "〒537-0003")), True)
+    src = (ROOT / "scripts" / "season_feature.py").read_text(encoding="utf-8")
+    check("手元の実行では購読者へ送らない", 'os.environ.get("GITHUB_ACTIONS")' in src, True)
+
+
 def test_monthly_cap_check_exit_code():
     """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
 
@@ -3383,6 +3436,7 @@ def main():
               test_site_has_two_axes_and_no_orphans,
               test_free_tools_live_under_one_roof,
               test_monthly_cap_check_exit_code,
+              test_season_features,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,
