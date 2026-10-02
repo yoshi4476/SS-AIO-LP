@@ -37,6 +37,26 @@ def load():
     return json.loads(LEDGER.read_text(encoding="utf-8")) if LEDGER.is_file() else {}
 
 
+_CFG = {}
+
+
+def focus(row):
+    """動画にする優先度。打ち出しから外したテーマ（drop_kw・配分0のカテゴリ）は None（作らない）。
+    主力の業種（kw_seeds.priority）が題にあれば +2、主力のカテゴリなら +1"""
+    import sites as S
+    if not _CFG:
+        _CFG.update(S.load_all())
+    cfg = _CFG.get(row.get("site", ""), {})
+    title = (row.get("title") or "").lower()
+    if any(w and w.lower() in title for w in cfg.get("drop_kw") or []):
+        return None
+    if (cfg.get("category_mix") or {}).get(row.get("category", "")) == 0:
+        return None
+    pri = (cfg.get("kw_seeds") or {}).get("priority") or []
+    return (2 if any(w in (row.get("title") or "") for w in pri) else 0) + \
+           (1 if row.get("category") == cfg.get("main_category") else 0)
+
+
 def candidates(days, limit):
     """直近 days 日に公開した score>=90 の記事で、まだ動画にしていないもの（新しい順）"""
     import sites as S
@@ -58,8 +78,12 @@ def candidates(days, limit):
         sid = S.find_category_owner(g("category")) or ""
         if not sid:
             continue
-        rows.append({"slug": p.stem, "site": sid, "title": g("title"), "date": g("date")})
-    rows.sort(key=lambda r: r["date"], reverse=True)
+        row = {"slug": p.stem, "site": sid, "title": g("title"), "date": g("date"), "category": g("category")}
+        if focus(row) is None:
+            continue
+        rows.append(row)
+    # 打ち出しの業種・主力の分野を先に（見られて社名が出る動画を優先する）。同じなら新しい順
+    rows.sort(key=lambda r: (focus(r), r["date"]), reverse=True)
     # サイトを回して選ぶ（1サイトに偏らせない）
     out, by = [], {}
     for r in rows:
@@ -110,9 +134,19 @@ def shorts(ledger, limit, token, public):
     import duo_short as DS
     import video_make as VM
     import youtube_upload as YT
-    todo = sorted((k for k, v in ledger.items() if v.get("youtube") and not v.get("short")
-                   and (ROOT / "articles" / f"{k}.md").is_file()),
-                  key=lambda k: ledger[k].get("date", ""), reverse=True)[:limit]
+    import sites as S
+
+    def meta(k):
+        t = (ROOT / "articles" / f"{k}.md").read_text(encoding="utf-8-sig")[:2000]
+        g = lambda f: (re.search(rf"^{f}:\s*(.+)$", t, re.M) or [None, ""])[1].strip().strip('"')
+        cat = g("category")
+        return {"slug": k, "title": g("title"), "category": cat, "site": S.find_category_owner(cat) or ""}
+    pool = [meta(k) for k, v in ledger.items() if v.get("youtube") and not v.get("short")
+            and (ROOT / "articles" / f"{k}.md").is_file()]
+    # 打ち出しから外したテーマは作らない。主力の業種・分野を先に、同じなら新しい順
+    pool = [m for m in pool if focus(m) is not None]
+    todo = [m["slug"] for m in sorted(pool, key=lambda m: (focus(m), ledger[m["slug"]].get("date", "")),
+                                      reverse=True)][:limit]
     made = 0
     for slug in todo:
         try:
