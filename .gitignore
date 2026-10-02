@@ -72,3 +72,5 @@ data/reviews/
 # 社ごとのSNSの鍵（social_connect.py の控え。GitHub では SOCIAL_TOKENS_JSON）
 social-tokens.json
 automation/note/
+data/research/*-raw.json
+data/research/source_class.json

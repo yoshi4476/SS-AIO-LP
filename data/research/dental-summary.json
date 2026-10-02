@@ -1,0 +1,239 @@
+{
+ "total": {
+  "review": 5,
+  "clinic": 1695,
+  "portal": 437,
+  "public": 105,
+  "maker": 102,
+  "other": 20,
+  "media": 55,
+  "video": 14,
+  "wiki": 4
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "review": 5,
+   "clinic": 85,
+   "portal": 5,
+   "media": 2,
+   "video": 1,
+   "public": 4
+  },
+  "Gemini": {
+   "clinic": 363,
+   "portal": 90,
+   "maker": 16,
+   "other": 11,
+   "video": 2,
+   "public": 9,
+   "media": 2
+  },
+  "Perplexity": {
+   "portal": 185,
+   "public": 43,
+   "clinic": 519,
+   "maker": 45,
+   "media": 27,
+   "video": 10,
+   "other": 8,
+   "wiki": 4
+  },
+  "Claude": {
+   "portal": 157,
+   "clinic": 728,
+   "public": 49,
+   "media": 24,
+   "maker": 41,
+   "other": 1,
+   "video": 1
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "review": 5,
+   "clinic": 83,
+   "portal": 285,
+   "public": 5,
+   "maker": 3,
+   "other": 9
+  },
+  "費用": {
+   "clinic": 682,
+   "media": 19,
+   "video": 3,
+   "portal": 54,
+   "maker": 62,
+   "other": 3,
+   "public": 8
+  },
+  "治療の選び方": {
+   "clinic": 325,
+   "media": 5,
+   "portal": 18,
+   "public": 29,
+   "maker": 19,
+   "video": 1,
+   "wiki": 2
+  },
+  "症状": {
+   "clinic": 402,
+   "portal": 36,
+   "maker": 14,
+   "public": 15,
+   "media": 17,
+   "wiki": 2,
+   "video": 3,
+   "other": 1
+  },
+  "受診のしかた": {
+   "portal": 44,
+   "clinic": 203,
+   "video": 7,
+   "media": 14,
+   "public": 48,
+   "other": 7,
+   "maker": 4
+  }
+ },
+ "answered": {
+  "ChatGPT": 37,
+  "Gemini": 68,
+  "Perplexity": 100,
+  "Claude": 100
+ },
+ "has_clinic": {
+  "Gemini": 62,
+  "ChatGPT": 31,
+  "Claude": 78,
+  "Perplexity": 78
+ },
+ "sources": {
+  "ChatGPT": 102,
+  "Gemini": 493,
+  "Perplexity": 841,
+  "Claude": 1001
+ },
+ "portal_top": [
+  [
+   "medicaldoc.jp",
+   58
+  ],
+  [
+   "jidv.org",
+   44
+  ],
+  [
+   "haisha-yoyaku.jp",
+   39
+  ],
+  [
+   "caloo.jp",
+   30
+  ],
+  [
+   "clinic.mynavi.jp",
+   19
+  ],
+  [
+   "haisha-doc.com",
+   18
+  ],
+  [
+   "bc-dental.ekiten.jp",
+   17
+  ],
+  [
+   "fdoc.jp",
+   14
+  ],
+  [
+   "teech.jp",
+   13
+  ],
+  [
+   "epark.jp",
+   12
+  ]
+ ],
+ "industry": "dental",
+ "name": "歯科",
+ "date": "2026-10-02",
+ "questions": 100,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "groups": {
+  "地域で探す": 20,
+  "費用": 30,
+  "治療の選び方": 15,
+  "症状": 20,
+  "受診のしかた": 15
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 305,
+   "review": 5,
+   "clinic": 249,
+   "portal": 159,
+   "public": 51,
+   "maker": 58,
+   "other": 18,
+   "media": 43,
+   "video": 14,
+   "wiki": 4
+  },
+  "地域で探す": {
+   "answers": 78,
+   "review": 5,
+   "clinic": 30,
+   "portal": 61,
+   "public": 5,
+   "maker": 3,
+   "other": 9
+  },
+  "費用": {
+   "answers": 103,
+   "clinic": 102,
+   "media": 15,
+   "video": 3,
+   "portal": 38,
+   "maker": 29,
+   "other": 3,
+   "public": 6
+  },
+  "治療の選び方": {
+   "answers": 38,
+   "clinic": 38,
+   "media": 5,
+   "portal": 16,
+   "public": 17,
+   "maker": 13,
+   "video": 1,
+   "wiki": 2
+  },
+  "症状": {
+   "answers": 50,
+   "clinic": 50,
+   "portal": 23,
+   "maker": 10,
+   "public": 9,
+   "media": 12,
+   "wiki": 2,
+   "video": 3,
+   "other": 1
+  },
+  "受診のしかた": {
+   "answers": 36,
+   "clinic": 29,
+   "video": 7,
+   "portal": 21,
+   "media": 11,
+   "public": 14,
+   "other": 5,
+   "maker": 3
+  }
+ }
+}

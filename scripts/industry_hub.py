@@ -137,6 +137,15 @@ def lp_link(ind):
             f'{IL.LPS[k]["name"]}のSEO・AI検索対策（無料診断つき）</a></p>')
 
 
+def research_link(ind):
+    """業種の調査レポートがあれば案内する（歯科: /research/dental-ai-sources/）"""
+    r = {"shika": "dental"}.get(ind.get("slug", ""))
+    if not r or not (Path(__file__).resolve().parent.parent / "site" / "research" / f"{r}-ai-sources" / "index.html").is_file():
+        return ""
+    return (f'<p class="hub-note"><a href="/research/{r}-ai-sources/" data-cta="hub_research_{r}">'
+            f'調査: {ind["name"]}の質問に、AIは何を出典に答えているか</a></p>')
+
+
 def lp_index():
     import industry_lp as IL
     links = "／".join(f'<a href="/lp/{k}/" data-cta="industry_index_lp_{k}">{c["name"]}</a>' for k, c in IL.LPS.items())
@@ -169,7 +178,7 @@ def hub_body(ind, metas, categories, post_tile):
     blocks = [f'<div class="latest-block" data-cat="new">'
               f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の記事</h2>'
               f'<span class="cnt">全{len(metas)}本</span></div>'
-              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}{lp_link(ind)}{tool_link(ind)}</div>']
+              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}{lp_link(ind)}{research_link(ind)}{tool_link(ind)}</div>']
     for cat, (name, cls) in categories.items():
         part = [m for m in metas if m["category"] == cat]
         if not part:

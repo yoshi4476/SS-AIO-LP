@@ -8,6 +8,7 @@
 """
 import html
 import json
+from pathlib import Path
 
 LPS = {
     "medical": {
@@ -15,6 +16,7 @@ LPS = {
         "h1": "クリニック・歯科医院のSEO・AI検索対策",
         "desc": "クリニック・歯科医院・整骨院向けのSEO・AIO・LLMO対策。医療広告ガイドラインにふれない書き方で、検索とAIの答えに選ばれるサイトをつくります。30秒の無料サイト診断つき。",
         "slugs": ["clinic", "shika", "seikotsuin"],
+        "research": "dental",
         "scan_ind": "クリニック・歯科医院",
         "pains": [
             ("何を書けばよいか分からない", "医療広告ガイドラインで体験談・比較・効果の保証が使えず、ホームページに載せる内容に迷う。"),
@@ -125,6 +127,11 @@ def body(key, metas, faq_pairs, post_tile, site_url):
            '<section class="ilp-cta"><a class="btn btn-primary" href="/lp/#form" '
            f'data-cta="lp_{key}_consult">無料で相談する（現状分析つき）</a>'
            '<p class="ilp-proof">サービス内容と料金は<a href="/lp/#service">サービス・料金</a>をご覧ください。</p></section>']
+    r = c.get("research")
+    if r and (Path(__file__).resolve().parent.parent / "site" / "research" / f"{r}-ai-sources" / "index.html").is_file():
+        out.append(f'<section class="ilp-card" style="background:var(--sky)"><h3>調査: 歯科の質問に、AIは何を出典に答えているか</h3>'
+                   f'<p>患者が調べそうな100問を4つのAIに聞き、回答の出典になったサイトの種類を集計しました。'
+                   f'<a href="/research/{r}-ai-sources/" data-cta="lp_{key}_research">調査の結果を見る</a></p></section>')
     if tiles:
         out.append(f'<section><h2>{_e(c["name"])}の集客に役立つ記事</h2><ul class="post-list">\n{tiles}\n</ul>'
                    + (f'<p class="ilp-more">業種別のまとめ: {hubs}</p>' if hubs else "") + '</section>')

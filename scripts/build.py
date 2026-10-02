@@ -1185,6 +1185,9 @@ def build_sitemap(article_entries):
             lines.append(f"  <url><loc>{SITE_URL}/industry/{d.parent.name}/faq/</loc><lastmod>{today}</lastmod></url>")
     if (SITE / "industry" / "index.html").is_file():
         lines.append(f"  <url><loc>{SITE_URL}/industry/</loc><lastmod>{today}</lastmod></url>")
+    # 業種別の調査レポート（industry_ai_sources.py の集計から作る）
+    for d in sorted((SITE / "research").glob("*/index.html")):
+        lines.append(f"  <url><loc>{SITE_URL}/research/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
     # 業種別の LP（industry_lp.py が作る）
     for d in sorted((SITE / "lp").glob("*/index.html")):
         lines.append(f"  <url><loc>{SITE_URL}/lp/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
@@ -1397,6 +1400,31 @@ def build_industry_lps(IH, pairs, g):
         page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
         page = page.replace("</head>", IL.json_ld(key, faq, SITE_URL, organization()) + "</head>", 1)
         out.write_text(page, encoding="utf-8", newline="\n")
+
+
+def build_research_pages():
+    """業種別の調査レポート（/research/<業種>-ai-sources/）。数字は data/research の集計ファイルからだけ作る"""
+    import industry_ai_sources as IAS
+    made = []
+    for f in sorted((ROOT / "data" / "research").glob("*-summary.json")):
+        ind = f.name[:-len("-summary.json")]
+        if ind not in IAS.QUESTIONS or "per_answer" not in json.loads(f.read_text(encoding="utf-8")):
+            continue
+        title, desc, body, ld, csv = IAS.render(ind)
+        out = SITE / "research" / f"{ind}-ai-sources" / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
+        page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/research/{ind}-ai-sources/")
+        page = page.replace('<span class="kicker">All Articles</span>', '<span class="kicker">Research</span>', 1)
+        page = re.sub(r'(<section class="hero">.*?<p class="lead">).*?(</p>)',
+                      lambda m: m.group(1) + _html_escape(desc) + m.group(2), page, count=1, flags=re.S)
+        page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+        page = page.replace("</head>", '<script type="application/ld+json">'
+                            + json.dumps(ld, ensure_ascii=False) + "</script></head>", 1)
+        out.write_text(page, encoding="utf-8", newline="\n")
+        (out.parent / "data.csv").write_text(csv, encoding="utf-8-sig", newline="\n")
+        made.append(ind)
+    return made
 
 
 def build_industry_hubs(all_metas):
@@ -1948,6 +1976,7 @@ def main():
     sync_llms(entries)
     prune_orphan_articles(entries, unparsable)
     build_blog_index(all_metas)
+    build_research_pages()          # 先に作る（LP と業種ハブが、調査ページがあればリンクする）
     build_industry_hubs(all_metas)
     build_extra_pages(all_metas)
     hide_data_pages()
