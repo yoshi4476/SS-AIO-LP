@@ -2,11 +2,11 @@
  "total": {
   "review": 5,
   "clinic": 1695,
-  "portal": 437,
+  "portal": 436,
   "public": 105,
-  "maker": 102,
-  "other": 20,
-  "media": 55,
+  "maker": 104,
+  "other": 21,
+  "media": 53,
   "video": 14,
   "wiki": 4
  },
@@ -32,19 +32,19 @@
    "portal": 185,
    "public": 43,
    "clinic": 519,
-   "maker": 45,
-   "media": 27,
+   "maker": 46,
+   "media": 26,
    "video": 10,
    "other": 8,
    "wiki": 4
   },
   "Claude": {
-   "portal": 157,
+   "portal": 156,
    "clinic": 728,
    "public": 49,
-   "media": 24,
-   "maker": 41,
-   "other": 1,
+   "media": 23,
+   "maker": 42,
+   "other": 2,
    "video": 1
   }
  },
@@ -59,10 +59,10 @@
   },
   "費用": {
    "clinic": 682,
-   "media": 19,
+   "media": 18,
    "video": 3,
    "portal": 54,
-   "maker": 62,
+   "maker": 63,
    "other": 3,
    "public": 8
   },
@@ -78,21 +78,21 @@
   "症状": {
    "clinic": 402,
    "portal": 36,
-   "maker": 14,
+   "maker": 16,
    "public": 15,
-   "media": 17,
+   "media": 15,
    "wiki": 2,
    "video": 3,
    "other": 1
   },
   "受診のしかた": {
-   "portal": 44,
+   "portal": 43,
    "clinic": 203,
    "video": 7,
-   "media": 14,
+   "media": 15,
    "public": 48,
-   "other": 7,
-   "maker": 4
+   "other": 8,
+   "maker": 3
   }
  },
  "answered": {
@@ -180,7 +180,7 @@
    "portal": 159,
    "public": 51,
    "maker": 58,
-   "other": 18,
+   "other": 19,
    "media": 43,
    "video": 14,
    "wiki": 4
@@ -197,7 +197,7 @@
   "費用": {
    "answers": 103,
    "clinic": 102,
-   "media": 15,
+   "media": 14,
    "video": 3,
    "portal": 38,
    "maker": 29,
@@ -206,10 +206,10 @@
   },
   "治療の選び方": {
    "answers": 38,
-   "clinic": 38,
-   "media": 5,
-   "portal": 16,
    "public": 17,
+   "clinic": 38,
+   "portal": 16,
+   "media": 5,
    "maker": 13,
    "video": 1,
    "wiki": 2
@@ -218,7 +218,7 @@
    "answers": 50,
    "clinic": 50,
    "portal": 23,
-   "maker": 10,
+   "maker": 11,
    "public": 9,
    "media": 12,
    "wiki": 2,
@@ -230,10 +230,10 @@
    "clinic": 29,
    "video": 7,
    "portal": 21,
-   "media": 11,
+   "media": 12,
    "public": 14,
-   "other": 5,
-   "maker": 3
+   "other": 6,
+   "maker": 2
   }
  }
 }

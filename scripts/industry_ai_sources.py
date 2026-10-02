@@ -57,6 +57,95 @@ QUESTIONS = {
     },
 }
 
+QUESTIONS["clinic"] = {
+    "name": "クリニック",
+    "text": {"owner": "クリニック", "owner_site": "医院・クリニックの公式サイト", "portal": "予約・比較ポータル",
+             "public_label": "公的機関・学会", "public_ex": "官公庁・大学・学会・医師会",
+             "find_ex": "「大阪 内科 クリニック おすすめ」", "other_groups": "費用・選び方・症状・受診のしかた",
+             "other_short": "費用・症状・受診など", "self_page": "自院の解説ページ",
+             "advice": "診療内容・費用・受診の目安を、自院のサイトで分かりやすく説明しておくこと",
+             "lp": "medical", "lp_name": "クリニック・歯科医院のSEO・AI検索対策", "asker": "患者"},
+    "groups": {
+        "地域で探す": [f"{c} 内科 クリニック おすすめ" for c in CITIES] + [f"{c} 皮膚科 評判 いい" for c in CITIES],
+        "費用": [f"{t} 費用 相場" for t in ("健康診断", "人間ドック", "シミ取り 美容皮膚科", "ピル 処方", "AGA 治療",
+                                          "インフルエンザ 予防接種", "胃カメラ", "大腸カメラ", "睡眠時無呼吸 検査", "禁煙外来")]
+                + [f"{t} 保険 適用 されるか" for t in ("ニキビ 治療", "シミ取り", "胃カメラ", "花粉症 注射", "ED 治療",
+                                                   "AGA 治療", "漢方 処方", "睡眠外来", "禁煙外来", "ピル")],
+        "選び方": ["内科 選び方", "かかりつけ医 選び方", "皮膚科 美容皮膚科 違い", "胃カメラ 鎮静 クリニック 選び方",
+                 "オンライン診療 デメリット", "発熱外来 探し方", "心療内科 精神科 違い", "クリニック 病院 違い",
+                 "専門医 探し方", "小児科 選び方", "婦人科 選び方", "耳鼻科 子供 選び方", "整形外科 整骨院 違い",
+                 "眼科 選び方", "人間ドック 選び方"],
+        "症状": ["発熱 何科", "頭痛 続く 何科", "腹痛 何科", "めまい 何科", "動悸 何科", "咳 止まらない 何科",
+               "湿疹 かゆい 何科", "腰痛 何科", "不眠 何科", "胃もたれ 続く", "花粉症 何科", "ニキビ 皮膚科 行くべき",
+               "じんましん 原因", "喉の痛み 何科", "血圧 高い 何科", "肩こり 頭痛 何科", "目のかゆみ 何科",
+               "膀胱炎 何科", "生理痛 ひどい 何科", "子供 発熱 受診 目安", "物忘れ 何科", "しびれ 何科", "耳鳴り 何科",
+               "下痢 続く 何科", "動悸 息切れ 原因"],
+        "受診のしかた": ["クリニック 予約なし", "クリニック 土日 診療", "夜間 クリニック", "初診 紹介状 必要か",
+                     "オンライン診療 やり方", "クリニック 口コミ 信用できるか", "セカンドオピニオン やり方", "診断書 もらい方",
+                     "健康診断 再検査 どこで", "予防接種 予約 方法", "医療費控除 対象 クリニック", "待ち時間 短い クリニック",
+                     "クリニック 変える 紹介状", "女性医師 探し方", "マイナ保険証 使えるクリニック", "クリニック 電話 予約 取れない",
+                     "往診 頼み方", "訪問診療 とは", "かかりつけ医 必要か", "小児科 何歳まで"],
+    },
+}
+QUESTIONS["fudosan"] = {
+    "name": "不動産",
+    "text": {"owner": "不動産会社", "owner_site": "不動産会社の公式サイト", "portal": "不動産ポータル・比較サイト",
+             "public_label": "公的機関・業界団体", "public_ex": "官公庁・自治体・業界団体",
+             "find_ex": "「大阪 不動産会社 おすすめ」", "other_groups": "費用・選び方・手続き・物件探し",
+             "other_short": "費用・手続き・物件探しなど", "self_page": "自社の解説ページ",
+             "advice": "売却・購入・賃貸の費用や手続きを、自社のサイトで分かりやすく説明しておくこと",
+             "lp": "fudosan", "lp_name": "不動産会社のSEO・AI検索対策", "asker": "住まいを探す人・売りたい人"},
+    "groups": {
+        "地域で探す": [f"{c} 不動産会社 おすすめ" for c in CITIES] + [f"{c} 不動産 売却 おすすめ 会社" for c in CITIES],
+        "費用": ["仲介手数料 相場", "不動産売却 費用 内訳", "家を売る 税金", "マンション売却 費用", "土地 売却 費用",
+               "賃貸 初期費用 相場", "引っ越し 初期費用 平均", "家 査定 費用", "相続 不動産 費用", "住宅ローン 諸費用 目安",
+               "中古マンション 購入 諸費用", "固定資産税 計算", "登記 費用 相場", "空き家 売却 費用", "リースバック 相場",
+               "不動産 買取 相場", "賃貸 更新料 相場", "管理会社 手数料 相場", "家 解体 費用", "任意売却 費用"],
+        "選び方": ["不動産会社 選び方", "仲介 買取 違い", "一括査定 デメリット", "専任媒介 一般媒介 違い",
+                 "大手 地元 不動産 違い", "賃貸 不動産屋 選び方", "管理会社 選び方", "売却 時期 いつ", "住み替え 進め方",
+                 "中古 新築 どっち", "マンション 戸建て どっち", "賃貸 持ち家 どっち", "リノベーション物件 注意点",
+                 "不動産投資 始め方", "相続した家 どうする", "空き家 活用 方法", "土地活用 選び方", "査定額 違う 理由",
+                 "不動産屋 信用できる 見分け方", "おとり物件 見分け方"],
+        "手続き・トラブル": ["家を売る 流れ", "賃貸 契約 流れ", "住宅購入 流れ", "重要事項説明 ポイント", "売買契約 キャンセル",
+                       "敷金 返ってこない", "原状回復 トラブル", "退去費用 高い", "契約不適合責任 とは", "境界 トラブル",
+                       "住宅ローン 審査 落ちた", "売れない 家 理由", "内覧 準備", "値下げ タイミング", "相続登記 義務化",
+                       "空き家 特例", "3000万円 控除 条件", "住宅ローン控除 条件", "賃貸 審査 落ちる", "保証人 いない 賃貸"],
+        "物件・街の探し方": [f"{c} 住みやすい 街" for c in CITIES]
+                     + ["ファミリー 住みやすい 街 選び方", "駅近 デメリット", "ハザードマップ 見方", "学区 調べ方",
+                        "新築マンション 買い時", "中古戸建て 注意点", "マンション 築年数 目安", "賃貸 狙い目 時期",
+                        "ペット可 賃貸 探し方", "一人暮らし 家賃 目安"],
+    },
+}
+QUESTIONS["koumuten"] = {
+    "name": "工務店・リフォーム",
+    "text": {"owner": "工務店・リフォーム会社", "owner_site": "住宅会社・リフォーム会社の公式サイト",
+             "portal": "住宅の比較・資料請求サイト", "public_label": "公的機関・業界団体", "public_ex": "官公庁・自治体・業界団体",
+             "find_ex": "「大阪 工務店 おすすめ」", "other_groups": "費用・選び方・進め方・住まいの悩み",
+             "other_short": "費用・家づくり・住まいの悩みなど", "self_page": "自社の解説ページ",
+             "advice": "費用の考え方・工法・施工事例を、自社のサイトで分かりやすく説明しておくこと",
+             "lp": "koumuten", "lp_name": "工務店・リフォーム会社のSEO・AI検索対策", "asker": "家を建てたい人・直したい人"},
+    "groups": {
+        "地域で探す": [f"{c} 工務店 おすすめ" for c in CITIES] + [f"{c} リフォーム会社 評判" for c in CITIES],
+        "費用": ["注文住宅 費用 相場", "工務店 坪単価 相場", "平屋 費用", "二世帯住宅 費用", "外壁塗装 費用 相場",
+               "屋根 リフォーム 費用", "キッチン リフォーム 費用", "浴室 リフォーム 費用", "トイレ リフォーム 費用",
+               "フルリノベーション 費用", "耐震 リフォーム 費用", "断熱 リフォーム 費用", "建て替え 費用", "外構 費用 相場",
+               "太陽光発電 費用", "注文住宅 諸費用", "地盤改良 費用", "木造 解体 費用", "水回り リフォーム 費用", "床 張り替え 費用"],
+        "選び方": ["工務店 ハウスメーカー 違い", "工務店 選び方", "リフォーム会社 選び方", "設計事務所 工務店 違い",
+                 "相見積もり 注意点", "高気密高断熱 工務店 見分け方", "ZEH とは", "長期優良住宅 メリット", "耐震等級3 必要か",
+                 "断熱等級 とは", "木造 鉄骨 どっち", "平屋 二階建て どっち", "建売 注文住宅 違い", "リフォーム 建て替え どっち",
+                 "リノベーション リフォーム 違い", "工務店 倒産 リスク", "完成見学会 チェックポイント", "モデルハウス 見るべき点",
+                 "工務店 アフターサービス 比較", "住宅 保証 期間"],
+        "進め方・トラブル": ["注文住宅 流れ", "家づくり 何から", "土地探し 工務店", "住宅ローン いつ 申し込む", "間取り 失敗",
+                       "注文住宅 後悔", "リフォーム トラブル", "追加費用 トラブル 工事", "工期 遅れる", "欠陥住宅 見分け方",
+                       "新築 雨漏り", "リフォーム 補助金", "住宅 補助金 2026", "外壁塗装 時期", "リフォーム 契約 注意点",
+                       "工事 近所 挨拶", "地鎮祭 必要か", "引き渡し チェック", "新築 定期点検 内容", "リフォーム ローン"],
+        "住まいの悩み": ["家 寒い 対策", "結露 対策", "家 カビ 原因", "床 きしむ 原因", "雨漏り 修理 どこに頼む",
+                     "シロアリ 対策", "外壁 ひび割れ", "窓 断熱 方法", "家 暑い 対策", "防音 リフォーム", "バリアフリー リフォーム",
+                     "収納 増やす リフォーム", "耐震診断 古い家", "給湯器 交換 時期", "屋根 修理 業者 選び方",
+                     "空き家 リフォーム", "古民家 リノベーション", "狭小住宅 間取り", "ガレージハウス 費用", "中古住宅 リフォーム 注意点"],
+    },
+}
+
 CATS = {
     "portal": "予約・比較ポータル",
     "clinic": "医院・クリニックの公式サイト",
@@ -74,7 +163,9 @@ RULES = [
     (r"(^|\.)go\.jp$|(^|\.)lg\.jp$|(^|\.)ac\.jp$|(^|\.)jda\.or\.jp$|(^|\.)perio\.jp$|(^|\.)kokuhoken\.or\.jp$|"
      r"who\.int$|nih\.gov$", "public"),
     (r"epark|haisha-yoyaku|caloo|byoinnavi|doctorsfile|qlife|scuel|shika-town|ha-channel|minnano-shika|"
-     r"dentalbook|shika-navi|denternet|hospita|medicaldoc|fdoc|mrso|ishachoku|okbiz", "portal"),
+     r"dentalbook|shika-navi|denternet|hospita|medicaldoc|fdoc|mrso|ishachoku|okbiz|"
+     r"(^|\.)suumo\.jp$|(^|\.)homes\.co\.jp$|(^|\.)athome\.co\.jp$|(^|\.)ieul\.jp$|(^|\.)home4u\.jp$|"
+     r"sumai-step|rehome-navi|homepro\.jp|nuri-kae|reform-guide", "portal"),
     (r"google\.(com|co\.jp)/maps|maps\.google|maps\.app\.goo\.gl|tabelog|minkou|minkuru", "review"),
     (r"youtube\.com|youtu\.be|tiktok\.com|instagram\.com|x\.com|twitter\.com|facebook\.com|note\.com|ameblo\.jp", "video"),
     (r"wikipedia\.org", "wiki"),
@@ -150,9 +241,9 @@ def classify(raw):
         lines = "\n".join(f"{d}\t{samples[d][:120]}" for d in todo)
         prompt = ("次のドメイン（タブの後ろは実際に出典になったURLの例）を、サイトの種類に分けてください。\n"
                   "種類は次のキーのどれか1つ: " + ", ".join(f"{k}={v}" for k, v in CATS.items()) + "\n"
-                  "歯科医院・クリニック・病院が自院について書いているサイトは clinic。複数の医院を比べる・予約を受ける・"
-                  "医院を紹介するサイトは portal。医療法人の医院は .or.jp でも clinic（公的機関ではない）。"
-                  "学会・歯科医師会・官公庁・大学だけが public。分からなければ other。\n"
+                  "医院・クリニック・病院・不動産会社・工務店・リフォーム会社など、事業者が自社について書いているサイトは clinic。複数の事業者を比べる・予約や査定や資料請求を受ける・"
+                  "事業者を紹介するサイトは portal。医療法人の医院は .or.jp でも clinic（公的機関ではない）。住宅設備や建材のメーカーは maker。"
+                  "学会・医師会・歯科医師会・業界団体・官公庁・自治体・大学だけが public。分からなければ other。\n"
                   "出力は JSON のオブジェクト1つだけ（{\"ドメイン\": \"キー\", ...}）。説明は書かない。\n\n" + lines)
         with tempfile.TemporaryDirectory() as tmp:
             r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt, cwd=tmp,
@@ -219,6 +310,15 @@ def per_answer(raw):
     return {k: {"answers": ans[k], **dict(hit[k])} for k in ans}
 
 
+TEXT = {"dental": {
+    "owner": "医院", "owner_site": "医院・クリニックの公式サイト", "portal": "予約・比較ポータル",
+    "public_label": "公的機関・学会", "public_ex": "官公庁・大学・学会・歯科医師会",
+    "find_ex": "「大阪 歯医者 おすすめ」", "other_groups": "費用・治療の選び方・症状・受診のしかた",
+    "other_short": "費用・治療・症状など", "self_page": "自院の解説ページ",
+    "advice": "費用の考え方や治療の選び方を、自院のサイトで分かりやすく説明しておくこと",
+    "lp": "medical", "lp_name": "クリニック・歯科医院のSEO・AI検索対策", "asker": "患者"}}
+
+
 ENGINE_NOTE = {"ChatGPT": "gpt-4.1-mini＋Web検索", "Gemini": "Gemini Flash＋Google検索", "Perplexity": "Agent API（fast）",
                "Claude": "Claude Sonnet＋Web検索"}
 
@@ -234,10 +334,12 @@ def render(ind):
     pct = lambda c, k: round(c.get(k, 0) / max(sum(c.values()), 1) * 100, 1)
     apct = lambda key, k: round(pa[key].get(k, 0) / max(pa[key]["answers"], 1) * 100, 1)
     loc = "地域で探す"
+    T = {**TEXT["dental"], **QUESTIONS[ind].get("text", {})}
+    LAB = {**CATS, "clinic": T["owner_site"], "portal": T["portal"], "public": T["public_label"]}
 
     def bars(c):
         rows = sorted(((k, pct(c, k)) for k in CATS if c.get(k)), key=lambda x: -x[1])
-        return "".join(f'<div class="rs-bar"><span class="rs-l">{CATS[k]}</span>'
+        return "".join(f'<div class="rs-bar"><span class="rs-l">{LAB[k]}</span>'
                        f'<span class="rs-t"><span style="width:{v}%"></span></span><span class="rs-v">{v}%</span></div>'
                        for k, v in rows)
     grp_rows = "".join(
@@ -253,9 +355,29 @@ def render(ind):
     other = {g: c for g, c in s["by_group"].items() if g != loc}
     oc = round(sum(c.get("clinic", 0) for c in other.values()) / max(sum(sum(c.values()) for c in other.values()), 1) * 100, 1)
     y, m = s["date"][:4], int(s["date"][5:7])
+    # 解釈は数字で分岐する（決め打ちにすると、業種によってデータと違う解釈が載る）。
+    # 出典の件数と回答ごとの2通りで向きがそろい、差がはっきりあるときだけ「どちらが多い」と書く
+    # （不動産は件数でポータル39.2%＞公式36.5%、回答ごとでは公式81.2%＞ポータル76.2%と逆になった）
+    ap, ac = apct(loc, "portal"), apct(loc, "clinic")
+    oth_g = [g for g in s["by_group"] if g != loc]
+    oa = round(sum(pa[g].get("clinic", 0) for g in oth_g) / max(sum(pa[g]["answers"] for g in oth_g), 1) * 100, 1)
+    nums = f"出典の件数では{T['portal']}{lp}%・{T['owner_site']}{lc}%、回答ごとでは{T['portal']}を出典にした回答が{ap}%・{T['owner_site']}が{ac}%"
+    if lp - lc >= 5 and ap > ac:
+        find_txt = (f"<b>「探される」場面では、{T['portal']}がAIの出典になりやすい結果でした。</b>地域名で{T['owner']}を探す質問では、{nums}でした。"
+                    f"{T['portal']}の掲載情報を最新に保つことが、AIの答えに名前が出る前提になります。")
+    elif lc - lp >= 5 and ac > ap:
+        find_txt = (f"<b>「探される」場面でも、{T['owner_site']}がAIの出典になっていました。</b>地域名で{T['owner']}を探す質問では、{nums}でした。")
+    else:
+        find_txt = (f"<b>「探される」場面では、{T['portal']}と{T['owner_site']}がほぼ同じくらい使われていました。</b>地域名で{T['owner']}を探す質問では、{nums}でした。"
+                    f"どちらか一方ではなく、両方の情報を整えておくことが前提になります。")
+    seek_txt = (f"<b>「調べられる」場面では、{T['self_page']}がAIの出典になっています。</b>{T['other_short']}の質問では、出典の件数の{oc}%が{T['owner_site']}で、"
+                f"回答の{oa}%が{T['owner_site']}を1つ以上出典にしていました。{T['advice']}が、AIに選ばれる近道です。"
+                if oa >= 70 else
+                f"<b>「調べられる」場面では、{T['owner_site']}は出典の件数の{oc}%、回答の{oa}%にとどまりました。</b>どの種類のサイトが使われたかは、上の表をご覧ください。")
+    # 事実だけを並べる（「一方、」でつなぐと、対照的でない業種でも対照的に読める）
     cite = (f"セブンセンシズ株式会社の調査（{y}年{m}月、{name}に関する{s['questions']}問を4つのAIに質問）では、"
-            f"「地域名＋{name} おすすめ」のような医院を探す質問の出典は{lp}%が予約・比較ポータルで、医院の公式サイトは{lc}%でした。"
-            f"一方、費用・治療・症状などを調べる質問では、出典の{oc}%が医院の公式サイトでした。")
+            f"{T['find_ex']}のような{T['owner']}を探す質問の出典は、{lp}%が{T['portal']}、{lc}%が{T['owner_site']}でした。"
+            f"{T['other_short']}を調べる質問では、出典の{oc}%が{T['owner_site']}で、回答の{oa}%が{T['owner_site']}を1つ以上出典にしていました。")
     groups_q = "".join(f"<li><b>{H.escape(g)}</b>（{len(qs)}問）: {H.escape('／'.join(qs[:4]))} など</li>"
                        for g, qs in QUESTIONS[ind]["groups"].items())
     body = f"""<style>
@@ -277,37 +399,37 @@ def render(ind):
 </style>
 <div class="rs">
 <section class="rs-key"><h2>この調査で分かったこと</h2><ul>
-<li><b>医院を探す質問</b>（「大阪 歯医者 おすすめ」など）では、AIの出典の<b>{lp}%が予約・比較ポータル</b>で、医院の公式サイトは{lc}%でした。</li>
-<li><b>費用・治療の選び方・症状・受診のしかたを調べる質問</b>では、出典の<b>{oc}%が医院の公式サイト</b>（解説のページ）でした。</li>
+<li><b>{T['owner']}を探す質問</b>（{T['find_ex']}など）では、AIの出典の件数の<b>{lp}%が{T['portal']}</b>、{lc}%が{T['owner_site']}でした（回答ごとに見ると、{T['portal']}を出典にした回答が{ap}%、{T['owner_site']}を出典にした回答が{ac}%）。</li>
+<li><b>{T['other_groups']}を調べる質問</b>では、出典の件数の<b>{oc}%が{T['owner_site']}</b>で、回答の<b>{oa}%</b>が{T['owner_site']}を1つ以上出典にしていました。</li>
 <li>1回答あたりの出典の数はAIによって違い、多いもので{max(round(s['sources'][e] / max(s['answered'][e], 1), 1) for e in s['answered'])}件、少ないもので{min(round(s['sources'][e] / max(s['answered'][e], 1), 1) for e in s['answered'])}件でした。</li>
 </ul></section>
 <section><h2>AIの回答の出典は、どんなサイトか（全体）</h2>
 <p>出典として示されたサイトを種類ごとに数えました（1つの回答で同じサイトは1回）。出典の合計は{tot:,}件です。</p>
 {bars(s["total"])}
-<p style="font-size:.88rem;color:var(--muted)">別の数え方（回答ごとに、その種類を1つでも出典にしたか）では、医院の公式サイトを出典にした回答が{apct('全体', 'clinic')}%、予約・比較ポータルを出典にした回答が{apct('全体', 'portal')}%でした（出典のある{pa['全体']['answers']}回答）。</p>
+<p style="font-size:.88rem;color:var(--muted)">別の数え方（回答ごとに、その種類を1つでも出典にしたか）では、{T['owner_site']}を出典にした回答が{apct('全体', 'clinic')}%、{T['portal']}を出典にした回答が{apct('全体', 'portal')}%でした（出典のある{pa['全体']['answers']}回答）。</p>
 </section>
 <section><h2>質問の種類ごとの違い</h2>
-<div class="rs-tbl"><table><thead><tr><th>質問の種類</th><th>質問数</th><th>医院の公式サイト<br><small>出典の割合</small></th><th>ポータル<br><small>出典の割合</small></th><th>公的機関・学会<br><small>出典の割合</small></th><th>医院を出典にした<br><small>回答の割合</small></th><th>ポータルを出典にした<br><small>回答の割合</small></th></tr></thead>
+<div class="rs-tbl"><table><thead><tr><th>質問の種類</th><th>質問数</th><th>{T['owner_site']}<br><small>出典の割合</small></th><th>{T['portal']}<br><small>出典の割合</small></th><th>{T['public_label']}<br><small>出典の割合</small></th><th>{T['owner']}のサイトを出典にした<br><small>回答の割合</small></th><th>{T['portal']}を出典にした<br><small>回答の割合</small></th></tr></thead>
 <tbody>{grp_rows}</tbody></table></div>
-<p>医院を探す質問の出典に多かったポータルは、{portals} などです。</p>
+<p>{T['owner']}を探す質問の出典に多かった{T['portal']}は、{portals} などです。</p>
 </section>
 <section><h2>AIごとの違い</h2>
-<div class="rs-tbl"><table><thead><tr><th>AI</th><th>出典つきで答えた質問</th><th>1回答あたりの出典数</th><th>医院の公式サイト</th><th>ポータル</th></tr></thead>
+<div class="rs-tbl"><table><thead><tr><th>AI</th><th>出典つきで答えた質問</th><th>1回答あたりの出典数</th><th>{T['owner_site']}</th><th>{T['portal']}</th></tr></thead>
 <tbody>{eng_rows}</tbody></table></div>
 <p style="font-size:.88rem;color:var(--muted)">APIで質問したため、Webを検索するかどうかはAIが質問ごとに決めます。出典を付けずに答えた回答は数えていません。アプリやブラウザで使うAIとは、結果が異なる場合があります。</p>
 </section>
-<section><h2>{H.escape(name)}の医院にとっての意味</h2>
-<p><b>「探される」場面では、ポータルと口コミがAIの出典になります。</b>地域名で医院を探す人への答えには、医院の公式サイトよりも予約・比較サイトが多く使われていました。ポータルの掲載情報を最新に保つことが、AIの答えに名前が出る前提になります。</p>
-<p><b>「調べられる」場面では、自院の解説ページがAIの出典になります。</b>費用・治療・症状の質問では、ほとんどの回答が医院の公式サイトを出典にしていました。費用の考え方や治療の選び方を、自院のサイトで分かりやすく説明しておくことが、AIに選ばれる近道です。</p>
-<p>当社は、医療機関のSEO・AI検索対策を行っています。<a href="/lp/medical/" data-cta="research_lp_medical">クリニック・歯科医院のSEO・AI検索対策</a>をご覧ください。</p>
+<section><h2>{T['owner']}にとっての意味</h2>
+<p>{find_txt}</p>
+<p>{seek_txt}</p>
+<p>当社は、{T['owner']}のSEO・AI検索対策を行っています。<a href="/lp/{T['lp']}/" data-cta="research_lp_{T['lp']}">{T['lp_name']}</a>をご覧ください。</p>
 </section>
 <section><h2>引用する場合</h2><p class="rs-cite">{H.escape(cite)}</p>
 <p style="font-size:.88rem">集計データ（CSV）: <a href="/research/{ind}-ai-sources/data.csv" download>ダウンロード</a></p></section>
 <section><h2>調査の方法</h2><ul>
 <li>調査日: {s['date']}　質問数: {s['questions']}問　AI: {'・'.join(s['engines'])}</li>
-<li>質問は患者が実際に調べそうな言い回しで、5つの種類に分けて固定しました。</li>
+<li>質問は{T['asker']}が実際に調べそうな言い回しで、{len(QUESTIONS[ind]['groups'])}つの種類に分けて固定しました。</li>
 </ul><ul>{groups_q}</ul>
-<p>出典のサイトの種類は、サイト名と内容から分けました（官公庁・大学・学会・歯科医師会は「公的機関・学会」、医院が自院について書いたサイトは「医院の公式サイト」、複数の医院を紹介・比較・予約するサイトは「予約・比較ポータル」）。件数の多い出典はサイトの題名と照らし合わせて確かめました。個別の医院名は公開していません。AIの回答は日によって変わるため、この結果は調査日時点のものです。</p>
+<p>出典のサイトの種類は、サイト名と内容から分けました（{T['public_ex']}は「{T['public_label']}」、{T['owner']}が自社について書いたサイトは「{T['owner_site']}」、複数の{T['owner']}を紹介・比較・予約するサイトは「{T['portal']}」）。件数の多い出典はサイトの題名と照らし合わせて確かめました。個別の事業者名は公開していません。AIの回答は日によって変わるため、この結果は調査日時点のものです。</p>
 </section>
 </div>"""
     ld = {"@context": "https://schema.org", "@type": "Dataset",
@@ -321,7 +443,7 @@ def render(ind):
     for g, c in [("全体", s["total"])] + list(s["by_group"].items()) + [(f"AI:{e}", c) for e, c in s["by_engine"].items()]:
         for k in CATS:
             if c.get(k):
-                csv.append(f"{g},{CATS[k]},{c[k]},{pct(c, k)}")
+                csv.append(f"{g},{LAB[k]},{c[k]},{pct(c, k)}")
     title = f"{name}の質問にAIは何を出典に答えるか｜{s['questions']}問×4つのAIの調査"
     desc = cite
     return title, desc, body, ld, "\n".join(csv) + "\n"

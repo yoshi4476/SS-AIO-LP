@@ -1,0 +1,250 @@
+{
+ "total": {
+  "clinic": 991,
+  "media": 301,
+  "portal": 776,
+  "video": 43,
+  "review": 11,
+  "public": 91,
+  "other": 28,
+  "maker": 242,
+  "wiki": 2
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "clinic": 64,
+   "portal": 16,
+   "review": 6,
+   "media": 13,
+   "public": 3,
+   "video": 8,
+   "maker": 3,
+   "other": 1
+  },
+  "Perplexity": {
+   "media": 103,
+   "portal": 292,
+   "clinic": 247,
+   "public": 40,
+   "maker": 117,
+   "video": 23,
+   "other": 3,
+   "wiki": 1
+  },
+  "Claude": {
+   "media": 138,
+   "portal": 336,
+   "clinic": 494,
+   "review": 3,
+   "maker": 91,
+   "public": 31,
+   "other": 9,
+   "wiki": 1,
+   "video": 1
+  },
+  "Gemini": {
+   "clinic": 186,
+   "portal": 132,
+   "video": 11,
+   "media": 47,
+   "review": 2,
+   "other": 15,
+   "maker": 31,
+   "public": 17
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 110,
+   "media": 98,
+   "portal": 270,
+   "video": 2,
+   "review": 11,
+   "public": 2,
+   "other": 1,
+   "maker": 1
+  },
+  "費用": {
+   "portal": 183,
+   "clinic": 234,
+   "public": 9,
+   "maker": 57,
+   "media": 50,
+   "video": 14,
+   "other": 5
+  },
+  "選び方": {
+   "media": 50,
+   "clinic": 219,
+   "maker": 50,
+   "portal": 85,
+   "public": 12,
+   "video": 7,
+   "other": 7,
+   "wiki": 1
+  },
+  "進め方・トラブル": {
+   "clinic": 210,
+   "portal": 124,
+   "media": 66,
+   "maker": 63,
+   "video": 13,
+   "other": 12,
+   "public": 39,
+   "wiki": 1
+  },
+  "住まいの悩み": {
+   "maker": 71,
+   "portal": 114,
+   "clinic": 218,
+   "media": 37,
+   "public": 29,
+   "video": 7,
+   "other": 3
+  }
+ },
+ "answered": {
+  "ChatGPT": 37,
+  "Perplexity": 100,
+  "Claude": 100,
+  "Gemini": 58
+ },
+ "has_clinic": {
+  "ChatGPT": 20,
+  "Perplexity": 77,
+  "Gemini": 52,
+  "Claude": 90
+ },
+ "sources": {
+  "ChatGPT": 114,
+  "Perplexity": 826,
+  "Claude": 1104,
+  "Gemini": 441
+ },
+ "portal_top": [
+  [
+   "suumo.jp",
+   85
+  ],
+  [
+   "rehome-navi.com",
+   73
+  ],
+  [
+   "homes.co.jp",
+   40
+  ],
+  [
+   "reform-guide.jp",
+   34
+  ],
+  [
+   "athome.co.jp",
+   33
+  ],
+  [
+   "hapisumu.jp",
+   31
+  ],
+  [
+   "homepro.jp",
+   30
+  ],
+  [
+   "house.home4u.jp",
+   30
+  ],
+  [
+   "refo-sumu.jp",
+   22
+  ],
+  [
+   "andreform.jp",
+   15
+  ]
+ ],
+ "industry": "koumuten",
+ "name": "工務店・リフォーム",
+ "date": "2026-10-02",
+ "questions": 100,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "groups": {
+  "地域で探す": 20,
+  "費用": 20,
+  "選び方": 20,
+  "進め方・トラブル": 20,
+  "住まいの悩み": 20
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 295,
+   "clinic": 239,
+   "portal": 245,
+   "media": 158,
+   "video": 43,
+   "review": 11,
+   "public": 53,
+   "other": 27,
+   "maker": 114,
+   "wiki": 2
+  },
+  "地域で探す": {
+   "answers": 78,
+   "clinic": 47,
+   "portal": 59,
+   "media": 41,
+   "video": 2,
+   "review": 11,
+   "public": 2,
+   "other": 1,
+   "maker": 1
+  },
+  "費用": {
+   "answers": 72,
+   "portal": 64,
+   "clinic": 61,
+   "public": 8,
+   "maker": 31,
+   "media": 29,
+   "video": 14,
+   "other": 5
+  },
+  "選び方": {
+   "answers": 45,
+   "clinic": 44,
+   "maker": 25,
+   "portal": 35,
+   "media": 27,
+   "public": 9,
+   "video": 7,
+   "other": 6,
+   "wiki": 1
+  },
+  "進め方・トラブル": {
+   "answers": 52,
+   "media": 36,
+   "portal": 43,
+   "clinic": 44,
+   "maker": 30,
+   "video": 13,
+   "other": 12,
+   "public": 22,
+   "wiki": 1
+  },
+  "住まいの悩み": {
+   "answers": 48,
+   "clinic": 43,
+   "media": 25,
+   "portal": 44,
+   "maker": 27,
+   "video": 7,
+   "public": 12,
+   "other": 3
+  }
+ }
+}

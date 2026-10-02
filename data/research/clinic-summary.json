@@ -1,0 +1,241 @@
+{
+ "total": {
+  "clinic": 1140,
+  "portal": 451,
+  "other": 38,
+  "maker": 133,
+  "media": 178,
+  "review": 7,
+  "public": 216,
+  "video": 12,
+  "wiki": 4
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "clinic": 99,
+   "review": 5,
+   "portal": 4,
+   "public": 1
+  },
+  "Gemini": {
+   "clinic": 265,
+   "portal": 77,
+   "other": 23,
+   "maker": 13,
+   "media": 17,
+   "public": 39,
+   "review": 1,
+   "video": 5
+  },
+  "Perplexity": {
+   "portal": 207,
+   "review": 1,
+   "public": 109,
+   "clinic": 343,
+   "maker": 56,
+   "media": 75,
+   "other": 14,
+   "video": 4,
+   "wiki": 4
+  },
+  "Claude": {
+   "portal": 163,
+   "clinic": 433,
+   "media": 86,
+   "maker": 64,
+   "public": 67,
+   "video": 3,
+   "other": 1
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 152,
+   "portal": 242,
+   "other": 16,
+   "maker": 1,
+   "media": 6,
+   "review": 7,
+   "public": 3
+  },
+  "費用": {
+   "portal": 45,
+   "clinic": 413,
+   "public": 24,
+   "maker": 12,
+   "media": 42,
+   "other": 7,
+   "video": 1
+  },
+  "選び方": {
+   "clinic": 155,
+   "media": 41,
+   "portal": 42,
+   "other": 6,
+   "public": 61,
+   "video": 4,
+   "maker": 27
+  },
+  "症状": {
+   "clinic": 282,
+   "media": 54,
+   "portal": 60,
+   "maker": 38,
+   "public": 34,
+   "video": 3,
+   "other": 4,
+   "wiki": 4
+  },
+  "受診のしかた": {
+   "clinic": 138,
+   "public": 94,
+   "portal": 62,
+   "media": 35,
+   "maker": 55,
+   "video": 4,
+   "other": 5
+  }
+ },
+ "answered": {
+  "ChatGPT": 34,
+  "Gemini": 59,
+  "Perplexity": 100,
+  "Claude": 100
+ },
+ "has_clinic": {
+  "ChatGPT": 26,
+  "Gemini": 55,
+  "Claude": 79,
+  "Perplexity": 71
+ },
+ "sources": {
+  "ChatGPT": 109,
+  "Gemini": 440,
+  "Perplexity": 813,
+  "Claude": 817
+ },
+ "portal_top": [
+  [
+   "medicaldoc.jp",
+   56
+  ],
+  [
+   "fdoc.jp",
+   44
+  ],
+  [
+   "caloo.jp",
+   38
+  ],
+  [
+   "byoinnavi.jp",
+   27
+  ],
+  [
+   "doctorsfile.jp",
+   23
+  ],
+  [
+   "mrso.jp",
+   18
+  ],
+  [
+   "homemate-research.com",
+   16
+  ],
+  [
+   "fastdoctor.jp",
+   16
+  ],
+  [
+   "hospita.jp",
+   14
+  ],
+  [
+   "epark.jp",
+   14
+  ]
+ ],
+ "industry": "clinic",
+ "name": "クリニック",
+ "date": "2026-10-02",
+ "questions": 100,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "groups": {
+  "地域で探す": 20,
+  "費用": 20,
+  "選び方": 15,
+  "症状": 25,
+  "受診のしかた": 20
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 293,
+   "clinic": 231,
+   "portal": 184,
+   "other": 37,
+   "maker": 78,
+   "media": 105,
+   "review": 7,
+   "public": 91,
+   "video": 12,
+   "wiki": 4
+  },
+  "地域で探す": {
+   "answers": 80,
+   "clinic": 41,
+   "portal": 60,
+   "other": 16,
+   "maker": 1,
+   "media": 6,
+   "review": 7,
+   "public": 3
+  },
+  "費用": {
+   "answers": 72,
+   "portal": 35,
+   "public": 17,
+   "clinic": 69,
+   "maker": 12,
+   "media": 23,
+   "other": 7,
+   "video": 1
+  },
+  "選び方": {
+   "answers": 37,
+   "other": 5,
+   "video": 4,
+   "clinic": 31,
+   "portal": 23,
+   "media": 22,
+   "public": 20,
+   "maker": 12
+  },
+  "症状": {
+   "answers": 55,
+   "portal": 37,
+   "media": 35,
+   "clinic": 55,
+   "maker": 29,
+   "public": 20,
+   "video": 3,
+   "other": 4,
+   "wiki": 4
+  },
+  "受診のしかた": {
+   "answers": 49,
+   "clinic": 35,
+   "public": 31,
+   "media": 19,
+   "portal": 29,
+   "maker": 24,
+   "other": 5,
+   "video": 4
+  }
+ }
+}

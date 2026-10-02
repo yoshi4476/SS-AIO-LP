@@ -1,0 +1,247 @@
+{
+ "total": {
+  "clinic": 949,
+  "portal": 724,
+  "media": 253,
+  "video": 36,
+  "maker": 203,
+  "public": 117,
+  "other": 44,
+  "review": 19
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "clinic": 51,
+   "review": 10,
+   "portal": 8,
+   "media": 5,
+   "public": 2,
+   "other": 1,
+   "video": 1
+  },
+  "Gemini": {
+   "portal": 87,
+   "media": 24,
+   "video": 8,
+   "clinic": 155,
+   "maker": 42,
+   "public": 28,
+   "other": 23
+  },
+  "Perplexity": {
+   "media": 100,
+   "maker": 93,
+   "clinic": 241,
+   "portal": 317,
+   "review": 5,
+   "public": 43,
+   "video": 17,
+   "other": 9
+  },
+  "Claude": {
+   "media": 124,
+   "maker": 68,
+   "video": 10,
+   "portal": 312,
+   "public": 44,
+   "clinic": 502,
+   "other": 11,
+   "review": 4
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 190,
+   "portal": 204,
+   "media": 53,
+   "video": 2,
+   "maker": 41,
+   "public": 14,
+   "other": 4,
+   "review": 13
+  },
+  "費用": {
+   "public": 25,
+   "other": 7,
+   "clinic": 226,
+   "portal": 152,
+   "review": 3,
+   "maker": 65,
+   "media": 27,
+   "video": 5
+  },
+  "選び方": {
+   "maker": 20,
+   "public": 8,
+   "portal": 142,
+   "media": 44,
+   "clinic": 229,
+   "video": 11,
+   "other": 4,
+   "review": 1
+  },
+  "手続き・トラブル": {
+   "portal": 99,
+   "public": 45,
+   "clinic": 162,
+   "maker": 47,
+   "media": 39,
+   "video": 6,
+   "review": 2,
+   "other": 14
+  },
+  "物件・街の探し方": {
+   "other": 15,
+   "clinic": 142,
+   "portal": 127,
+   "maker": 30,
+   "media": 90,
+   "public": 25,
+   "video": 12
+  }
+ },
+ "answered": {
+  "ChatGPT": 31,
+  "Gemini": 54,
+  "Perplexity": 100,
+  "Claude": 100
+ },
+ "has_clinic": {
+  "ChatGPT": 17,
+  "Gemini": 51,
+  "Perplexity": 86,
+  "Claude": 97
+ },
+ "sources": {
+  "ChatGPT": 78,
+  "Gemini": 367,
+  "Perplexity": 825,
+  "Claude": 1075
+ },
+ "portal_top": [
+  [
+   "homes.co.jp",
+   90
+  ],
+  [
+   "suumo.jp",
+   56
+  ],
+  [
+   "sumai-step.com",
+   55
+  ],
+  [
+   "athome.co.jp",
+   34
+  ],
+  [
+   "iqrafudosan.com",
+   33
+  ],
+  [
+   "ieagent.jp",
+   30
+  ],
+  [
+   "ieul.jp",
+   29
+  ],
+  [
+   "home4u.jp",
+   24
+  ],
+  [
+   "town-life.jp",
+   14
+  ],
+  [
+   "housingbazar.jp",
+   13
+  ]
+ ],
+ "industry": "fudosan",
+ "name": "不動産",
+ "date": "2026-10-02",
+ "questions": 100,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "groups": {
+  "地域で探す": 20,
+  "費用": 20,
+  "選び方": 20,
+  "手続き・トラブル": 20,
+  "物件・街の探し方": 20
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 285,
+   "clinic": 251,
+   "media": 144,
+   "portal": 227,
+   "video": 34,
+   "maker": 125,
+   "public": 79,
+   "other": 42,
+   "review": 19
+  },
+  "地域で探す": {
+   "answers": 80,
+   "clinic": 65,
+   "media": 32,
+   "portal": 61,
+   "video": 2,
+   "maker": 41,
+   "public": 14,
+   "other": 3,
+   "review": 13
+  },
+  "費用": {
+   "answers": 62,
+   "other": 7,
+   "public": 19,
+   "clinic": 56,
+   "portal": 46,
+   "review": 3,
+   "maker": 29,
+   "media": 22,
+   "video": 4
+  },
+  "選び方": {
+   "answers": 43,
+   "public": 7,
+   "media": 26,
+   "maker": 12,
+   "clinic": 43,
+   "portal": 41,
+   "video": 11,
+   "other": 4,
+   "review": 1
+  },
+  "手続き・トラブル": {
+   "answers": 46,
+   "public": 25,
+   "clinic": 41,
+   "portal": 35,
+   "media": 26,
+   "maker": 23,
+   "video": 6,
+   "review": 2,
+   "other": 13
+  },
+  "物件・街の探し方": {
+   "answers": 54,
+   "media": 38,
+   "other": 15,
+   "maker": 20,
+   "clinic": 46,
+   "portal": 44,
+   "public": 14,
+   "video": 11
+  }
+ }
+}
