@@ -40,6 +40,18 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: python scripts/season_feature.py --events --send || echo "::warning::検索の更新を確かめられませんでした（次の日にもう一度見ます）"
 
+      # AI診断で「1か月後の結果を受け取る」に印をつけた人だけ、28〜40日後に同じ3問で測り直して送る（1回だけ）
+      - name: AI診断の1か月後の測り直し（毎日）
+        if: github.event.schedule == '30 23 * * *'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          LEAD_TO_EMAIL: ${{ secrets.LEAD_TO_EMAIL }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: python scripts/ai_recheck.py || echo "::warning::AI診断の測り直しが動きませんでした（明日もう一度）"
+
       - name: ダイジェスト配信
         if: github.event.schedule != '30 23 * * *'
         env:

@@ -791,7 +791,48 @@ function aiCheckSheet_() {
     sh = ss.insertSheet('AI紹介チェック');
     sh.appendRow(['日時', 'メール', '会社名', '業種', '地域', '出典に御社サイト', '回答に社名']);
   }
+  // 翌月の測り直し（2026-10-03 追加）。既存のシートには見出しだけ足す
+  if (String(sh.getRange(1, 8).getValue() || '') === '') {
+    sh.getRange(1, 8, 1, 3).setValues([['サイト', '翌月の測り直し', '測り直し済み']]);
+  }
   return sh;
+}
+
+/**
+ * 翌月の測り直し（AI診断で「来月の結果を受け取る」に印をつけた人だけ）。
+ * 28〜40日前のチェックのうち、まだ測り直していない行。同じメールは最新の1行だけ。
+ * 配信除外（「停止」の返信・既存のお客様）は返さない。測り直しはこのシートに行を足さない（3回の上限に数えない）。
+ */
+function aiRecheckList_() {
+  const sh = aiCheckSheet_();
+  if (sh.getLastRow() < 2) return { ok: true, items: [] };
+  const vals = sh.getRange(2, 1, sh.getLastRow() - 1, 10).getValues();
+  const now = new Date(), ex = excludeSet_(), latest = {};
+  vals.forEach(function (r, i) {
+    const email = String(r[1] || '').trim().toLowerCase();
+    if (!email) return;
+    const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+    if (!latest[email] || latest[email].at < at) latest[email] = { at: at, i: i, r: r };
+  });
+  const items = [];
+  Object.keys(latest).forEach(function (email) {
+    const x = latest[email], r = x.r;
+    const age = (now - x.at) / 86400000;
+    if (String(r[8]) !== '希望' || String(r[9] || '') || age < 28 || age > 40) return;
+    if (excluded_(ex, email, '')) return;
+    items.push({ row: x.i + 2, email: email, company: String(r[2] || ''), word: String(r[3] || ''),
+                 area: String(r[4] || ''), cited: Number(r[5]) || 0, mentioned: Number(r[6]) || 0,
+                 site: String(r[7] || ''), at: Utilities.formatDate(x.at, 'Asia/Tokyo', 'yyyy-MM-dd') });
+  });
+  return { ok: true, items: items };
+}
+
+function aiRecheckDone_(body) {
+  const row = Number(body.row);
+  if (!(row >= 2)) return { ok: false, error: 'row' };
+  aiCheckSheet_().getRange(row, 10).setValue(Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + ' '
+    + clean_(body.result || '').slice(0, 60));
+  return { ok: true };
 }
 
 function aiCheckQuota_(body) {
@@ -814,7 +855,8 @@ function aiCheckQuota_(body) {
 
 function aiCheckLog_(body) {
   aiCheckSheet_().appendRow([new Date(), clean_(body.email).toLowerCase(), clean_(body.company).slice(0, 80),
-    clean_(body.word).slice(0, 20), clean_(body.area).slice(0, 40), Number(body.cited) || 0, Number(body.mentioned) || 0]);
+    clean_(body.word).slice(0, 20), clean_(body.area).slice(0, 40), Number(body.cited) || 0, Number(body.mentioned) || 0,
+    String(body.site || '').replace(/[\r\n\s]+/g, '').slice(0, 200), body.recheck ? '希望' : '', '']);
   return { ok: true };
 }
 

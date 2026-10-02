@@ -181,6 +181,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
         <label>お名前<input name="name" required autocomplete="name"></label>
         <label>メールアドレス<input name="email" type="email" required autocomplete="email"></label>
       </div>
+      <label class="ac-recheck" style="display:flex;gap:.6em;align-items:flex-start;font-weight:500;cursor:pointer;margin:.4rem 0 .2rem;">
+        <input type="checkbox" name="recheck" value="1" style="width:auto;margin-top:.45em;accent-color:var(--blue);">
+        <span>1か月後に同じ条件で測り直した結果を、メールで受け取る（無料・1回だけ）</span>
+      </label>
       <p class="note">結果はこの画面に出ます。入力いただいた連絡先には、結果の読み方をご案内することがあります。<a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信してください。</p>
       <ul class="ac-rules">
         <li>無料でお使いいただけます（AIへの問い合わせは月5,000回までです。上限に達した月は受付を止めます）</li>

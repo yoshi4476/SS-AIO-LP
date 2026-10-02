@@ -251,6 +251,8 @@ function doPost(e) {
       // AI紹介チェックの回数（メールごと3回・月の全体の上限）と記録。functions/api/ai-check.js が合言葉つきで呼ぶ
       case 'ai_check_quota': return json_(aiCheckQuota_(body));
       case 'ai_check_log':   return json_(aiCheckLog_(body));
+      case 'ai_recheck_list': return json_(aiRecheckList_());
+      case 'ai_recheck_done': return json_(aiRecheckDone_(body));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
       default:            return json_(form_(body));

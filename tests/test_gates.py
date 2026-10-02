@@ -2311,6 +2311,32 @@ def test_outcome_watch_counts_what_was_made():
     check("週次で検査の検査を走らせる", "scripts/gate_selftest.py" in wk, True)
 
 
+def test_lead_context_and_recheck_consent():
+    """相談の直前に見たページを送信に添えること。AI診断の測り直しは本人が印をつけた人にだけ、1回だけ送ること"""
+    print(chr(10) + "■ 相談の直前のページと、AI診断の測り直し")
+    site = ROOT / "site"
+    js = (site / "js" / "site.js").read_text(encoding="utf-8")
+    check("直前に見たページを送信に添える", 'i.name = "pages"' in js and "ss_pages" in js, True)
+    form = (site / "tools" / "ai-check" / "index.html").read_text(encoding="utf-8")
+    box = re.search(r'<input type="checkbox" name="recheck"[^>]*>', form)
+    check("測り直しの印は、最初は付いていない（同意した人だけ）", bool(box) and "checked" not in box.group(0), True)
+    check("AI診断の送信もページを添える", "data-pages" in form, True)
+    fn = (ROOT / "functions" / "api" / "ai-check.js").read_text(encoding="utf-8")
+    check("AI診断の台帳に、ページと測り直しの希望を渡す", "pages" in fn and 'recheck: v("recheck", 2) === "1"' in fn, True)
+    gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
+    body = gs[gs.find("function aiRecheckList_"):gs.find("function aiRecheckDone_")]
+    check("測り直しは希望・未実施・28〜40日・配信除外を見る",
+          all(x in body for x in ("'希望'", "String(r[9] || '')", "age < 28", "age > 40", "excluded_(")), True)
+    import ai_recheck as AR
+    _, html, _ = AR.mail({"company": "x", "at": "2026-09-01", "area": "a", "word": "w", "site": "", "cited": 0, "mentioned": 0},
+                         [{"q": "q", "hosts": [], "cited": False, "mentioned": False}] * 3)
+    check("測り直しのメールに停止の方法と発行者の所在地がある", "「停止」" in html and "〒537-0003" in html, True)
+    src = (ROOT / "scripts" / "ai_recheck.py").read_text(encoding="utf-8")
+    check("手元の実行では本人に送らない", 'os.environ.get("GITHUB_ACTIONS")' in src, True)
+    wf = (ROOT / ".github" / "workflows" / "digest.yml").read_text(encoding="utf-8")
+    check("毎日の回で測り直しを走らせる", "scripts/ai_recheck.py" in wf, True)
+
+
 def test_monthly_cap_check_exit_code():
     """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
 
@@ -3492,6 +3518,7 @@ def main():
               test_season_features,
               test_question_and_faq_pages,
               test_outcome_watch_counts_what_was_made,
+              test_lead_context_and_recheck_consent,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,

@@ -96,7 +96,8 @@ export async function onRequestPost({ request, env }) {
   const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
   const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`;
   await record(env, request, { ind, area, company, site, name, email, word, pages, summary });
-  await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned });
+  // 翌月の測り直しは、本人が印をつけたときだけ（同意のない配信はしない）
+  await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, recheck: v("recheck", 2) === "1" });
   const used = quota && quota.ok ? quota.used + 1 : null;
   return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "", used, perEmail: 3 });
 }
