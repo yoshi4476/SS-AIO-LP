@@ -117,7 +117,9 @@ def tools_block(a):
         r = IAS.HUB_TO_RESEARCH.get(hub or "")
         cl = IAS.RESEARCH_TO_CHECKLIST.get(r or "")
         if cl:
-            name = IAS.QUESTIONS[r]["name"]
+            import checklist_make as CM
+            # PDF の題・受け取りページの選択肢と同じ名前にする（「歯科版」と「歯科医院版」が混ざらないように）
+            name = CM.INDUSTRIES[cl]["label"]
             lines += [f"・AI検索対策チェックリスト（{name}版・PDF）", f"https://ai.7senses.co.jp/download/?ind={cl}"]
     except Exception:
         pass
