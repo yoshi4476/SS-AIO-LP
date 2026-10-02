@@ -53,10 +53,17 @@ def page_facts(h):
     c = re.search(r'<link rel="canonical" href="([^"]+)"', h)
     body = re.sub(r"<script.*?</script>|<style.*?</style>", "", h, flags=re.S)
     import json as _json
-    ld_err = 0
-    for blk in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
+    ld_err, ld_dup = 0, []
+
+    def _nodup(pairs):
+        # 同じオブジェクトに同じ項目が2回あると、普通の読み込みは黙って片方を捨てる。
+        # Google は「一意のプロパティが重複しています」で構造化データごと無効にする（補助金サイト 2026-10-02）
+        ks = [k for k, _ in pairs]
+        ld_dup.extend(k for k in set(ks) if ks.count(k) > 1)
+        return dict(pairs)
+    for blk in re.findall(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', h, re.S):
         try:
-            _json.loads(blk)
+            _json.loads(blk, object_pairs_hook=_nodup)
         except Exception:
             ld_err += 1
     text = re.sub(r"<[^>]+>", "", re.sub(r"<(header|footer|nav)\b.*?</\1>", "", body, flags=re.S))
@@ -67,6 +74,7 @@ def page_facts(h):
         "viewport": 'name="viewport"' in h,
         "lang": bool(re.search(r"<html[^>]*\blang=", h)),
         "ld_err": ld_err,
+        "ld_dup": sorted(set(ld_dup)),
         "nofollow_int": len(re.findall(r'<a [^>]*href="/[^"]*"[^>]*rel="[^"]*nofollow', body)),
         "http_mixed": len(re.findall(r'(?:src|href)="http://', h)),
         "text_len": len(re.sub(r"\s+", "", _h.unescape(text))),
@@ -128,6 +136,8 @@ def check(pages, sitemap, redirects=(), inbound=None):
             out.append(("警告", "題か説明文のタグが複数", p, f"title{f['n_title']}・description{f['n_desc']}"))
         if not f.get("viewport", True) or not f.get("lang", True):
             out.append(("警告", "viewport か lang の指定が無い", p, ""))
+        if f.get("ld_dup"):
+            out.append(("致命的", "構造化データの同じ項目が重複している（Googleが無効にする）", p, "・".join(f["ld_dup"])))
         if f.get("ld_err"):
             out.append(("警告", "構造化データが壊れている", p, f"{f['ld_err']}件"))
         if f.get("http_mixed"):

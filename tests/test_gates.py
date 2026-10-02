@@ -3013,6 +3013,11 @@ def test_detectors_do_not_misread_neighbors():
     check("口コミ返信ツール: 返信文の pre が共通の紺地を打ち消している",
           bool(re.search(r"\.kt \.kt-text\{[^}]*background:#fff", tool)), True)
 
+    # 構造化データの同じ項目の重複は、普通の読み込みでは黙って消える。Google は構造化データごと無効にする
+    import seo_audit as SA
+    dup = '<script type="application/ld+json">{"@type":"Organization","address":{"a":1},"address":{"a":1}}</script>'
+    check("サイト監査: JSON-LD の同じ項目の重複を見つける", SA.page_facts(dup)["ld_dup"], ["address"])
+
     import lead_reconcile as LR
     check("問い合わせ照合: トップの診断入力は数えない", LR.count_rows([("20260928", "form_submit", "/", 1)]), {})
     check("問い合わせ照合: 記事内の診断入力は数えない",
