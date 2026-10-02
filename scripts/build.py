@@ -1035,7 +1035,9 @@ def stamp_assets():
     for rel in ("css/style.css", "js/site.js"):
         f = SITE / rel
         if f.exists():
-            ver[rel] = hashlib.md5(f.read_bytes()).hexdigest()[:8]
+            # 改行コードをそろえてから測る。Windows の作業コピー（CRLF）と CI（LF）で版番号が変わり、
+            # 中身が同じでも全ページ（300本超）に差分と衝突が出ていた
+            ver[rel] = hashlib.md5(f.read_bytes().replace(b"\r\n", b"\n")).hexdigest()[:8]
     if not ver:
         return 0
     n = 0
