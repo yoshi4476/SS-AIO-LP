@@ -612,6 +612,28 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
   }, true);
 })();
 
+/* 相談の直前に見たページ
+ * 同じ訪問の中で見たページ（直近6つ）を覚え、問い合わせ・資料請求・AI診断の送信に隠し項目 pages として足す。
+ * 台帳に残り、商談の準備と「問い合わせにつながる記事」の判断に使う。送るのはページの場所だけ（個人の情報は含まない）。 */
+(function () {
+  var KEY = "ss_pages", MAX = 6;
+  var list = [];
+  try { list = JSON.parse(sessionStorage.getItem(KEY) || "[]"); } catch (e) {}
+  if (list[list.length - 1] !== location.pathname) list.push(location.pathname);
+  list = list.slice(-MAX);
+  try { sessionStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {}
+  document.addEventListener("submit", function (e) {
+    var f = e.target;
+    if (!f || !f.querySelector || f.querySelector('input[name="pages"]')) return;
+    var act = f.getAttribute("action") || "";
+    if (act.indexOf("/api/lead") < 0 && !f.hasAttribute("data-pages") && !f.classList.contains("lc-form")
+        && !(f.closest && f.closest(".lx-gate"))) return;
+    var i = document.createElement("input");
+    i.type = "hidden"; i.name = "pages"; i.value = list.join(" → ").slice(0, 400);
+    f.appendChild(i);
+  }, true);
+})();
+
 /* 記事のスマホ固定ボタン（.scan-sticky）
  * 1画面半ほど読み進めたら出し、記事末の診断欄やフッターが見えている間は引っ込める（同じ誘いを二重に見せない）。 */
 (function () {

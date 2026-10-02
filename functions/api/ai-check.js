@@ -51,7 +51,7 @@ export async function onRequestPost({ request, env }) {
   const v = (k, n = 200) => String(d[k] || "").trim().slice(0, n);
   if (v("_gotcha")) return Response.json({ ok: false, error: "送信できませんでした。" }, { status: 400 });
   const ind = v("industry", 20), area = v("area", 40), company = v("company", 80), site = v("site", 300);
-  const name = v("name", 60), email = v("email", 200);
+  const name = v("name", 60), email = v("email", 200), pages = v("pages", 400);
   const word = WORDS[ind] || v("word", 20);
   if (!word || !area || !company || !name || !email) {
     return Response.json({ ok: false, error: "未入力の項目があります。" }, { status: 400 });
@@ -90,12 +90,12 @@ export async function onRequestPost({ request, env }) {
       : "AIへの問い合わせに失敗しました。時間をおいてもう一度お試しください。";
     results = null;
     // 受け付けた連絡先は残し、結果は人が送る
-    await record(env, request, { ind, area, company, site, name, email, word, summary: "チェック未実行（" + e.message + "）" });
+    await record(env, request, { ind, area, company, site, name, email, word, pages, summary: "チェック未実行（" + e.message + "）" });
     return Response.json({ ok: false, error: msg }, { status: 503 });
   }
   const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
   const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`;
-  await record(env, request, { ind, area, company, site, name, email, word, summary });
+  await record(env, request, { ind, area, company, site, name, email, word, pages, summary });
   await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned });
   const used = quota && quota.ok ? quota.used + 1 : null;
   return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "", used, perEmail: 3 });
@@ -114,7 +114,7 @@ async function hub(env, body) {
 
 async function record(env, request, x) {
   if (!env.GAS_WEBHOOK_URL) return;
-  const data = { name: x.name, company: x.company, email: x.email, form_type: "AI紹介チェック（診断）",
+  const data = { name: x.name, company: x.company, email: x.email, form_type: "AI紹介チェック（診断）", pages: x.pages || "",
     message: `${x.summary}\n業種: ${x.word}／地域: ${x.area}／サイト: ${x.site || "未入力"}` };
   try {
     await fetch(env.GAS_WEBHOOK_URL, {
