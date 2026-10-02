@@ -19,3 +19,6 @@
 /aio/aio-taisaku-yasui-tool/  /aio/aio-taisaku-muryou-tool/  301
 # 統合（2026-09-28）: aio-koka-sokutei-report-hinagata → aio-taisaku-keisoku-houhou
 /aio/aio-koka-sokutei-report-hinagata/  /aio/aio-taisaku-keisoku-houhou/  301
+
+# 無料診断の一覧は /tools/（無料ツール）にまとめた（2026-10-03）
+/diagnosis/  /tools/  301

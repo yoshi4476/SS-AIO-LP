@@ -54,6 +54,7 @@ NAV_DEFAULT = [
     {"label": "AI導入補助金", "url": "https://lp.7senses.co.jp/",
      "blank": True},
     {"label": "コーポレートサイト", "url": "https://corp.7senses.co.jp/", "blank": True},
+    {"label": "無料ツール", "url": "/tools/", "class": "nav-tool", "cta": "nav_tools"},
     {"label": "無料相談", "url": "/lp/", "class": "nav-cta", "cta": "nav_consult"},
 ]
 FOOTER_NAV_DEFAULT = [
@@ -64,11 +65,12 @@ FOOTER_NAV_DEFAULT = [
     {"label": "記事一覧", "url": "/blog/"},
     {"label": "用語集", "url": "/glossary/"},
     {"label": "比較表から探す", "url": "/compare/"},
-    {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
+    {"label": "無料ツール一覧", "url": "/tools/"},
+    {"label": "URL診断（サイトの14項目を採点）", "url": "/site-audit/"},
+    {"label": "AI診断（AIにどう紹介されているか）", "url": "/tools/ai-check/"},
     {"label": "AI検索の対応度チェック（30秒）", "url": "/diagnosis/aio/"},
-    {"label": "サイトの技術チェック", "url": "/site-audit/"},
-    {"label": "AIにどう紹介されているか無料チェック", "url": "/tools/ai-check/"},
     {"label": "口コミ返信文の作成ツール", "url": "/tools/kuchikomi-henshin/"},
+    {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
     {"label": "AIO・LLMO運用", "url": "/aio/"},
     {"label": "SEO運用", "url": "/seo/"},
     {"label": "MEO運用", "url": "/meo/"},
@@ -205,7 +207,7 @@ CATEGORIES = {
 
 # privacy/tokushoho は noindex のため sitemap から除外（noindex×sitemap掲載の矛盾を防ぐ）
 # glossary/ は build_sitemap の生成ページのループが出す（ここにも書くと2回載る）
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "tools/kuchikomi-henshin/", "tools/ai-check/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "tools/", "diagnosis/meo/", "diagnosis/aio/", "tools/kuchikomi-henshin/", "tools/ai-check/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
 
 
 def jp_date(iso: str) -> str:

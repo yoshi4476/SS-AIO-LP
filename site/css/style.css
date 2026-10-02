@@ -1533,3 +1533,46 @@ main.lab .cta-final h2 { color: #fff; }
 /* 記事末の調査の案内（紺地）。共通の btn-ghost は紺文字で見えなくなる（2026-10-02） */
 .research-box .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff;background:transparent}
 .research-box .btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+
+/* ---------- 無料ツール（/tools/・ヘッダー） ---------- */
+.global-nav .nav-tool { color: var(--blue); border: 1.5px solid var(--blue); border-radius: 10px; padding: .55em 1.1em; font-weight: 700; }
+.global-nav .nav-tool::after { display: none; }
+.global-nav .nav-tool:hover { background: var(--sky); }
+.hdr-tools { display: none; }
+@media (max-width: 1260px) {
+  .global-nav .nav-tool { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: .8em .2em; }
+  /* 帯は JS が後から足す。場所を先に取っておき、ページが下へずれないようにする（CLS） */
+  .site-header:has(.nav-tool) { padding-bottom: 40px; }
+  .hdr-tools { display: flex; justify-content: center; align-items: center; gap: .4rem; position: absolute; left: 0; right: 0; bottom: 0; height: 40px; padding: 0 var(--gutter); background: var(--sky); border-top: 1px solid var(--line); }
+  .hdr-tools a { font-size: .8rem; font-weight: 700; color: var(--blue); text-decoration: none; padding: .3em .8em; border-radius: 999px; background: #fff; border: 1px solid var(--sky-2); white-space: nowrap; }
+  .hdr-tools a:first-child { background: var(--blue); color: #fff; border-color: var(--blue); }
+}
+.tools-head { max-width: 980px; margin: 0 auto; padding: 2.2rem var(--gutter) 1rem; text-align: center; }
+.tools-head h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin: .3em 0 .4em; color: var(--navy); }
+.tools-head .lead { color: var(--text); line-height: 1.9; margin: 0 auto; max-width: 42em; }
+.tools-main { max-width: 1180px; margin: 0 auto; padding: 1rem var(--gutter) 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1.4rem; }
+.tool-card { display: flex; flex-direction: column; gap: .8rem; padding: 1.8rem 1.6rem; border: 1.5px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow-md); color: var(--text); text-decoration: none; transition: border-color .2s, transform .2s var(--ease-out); }
+.tool-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+.tool-card .tool-tag { align-self: flex-start; background: var(--navy); color: #fff; font-weight: 800; font-size: 1rem; padding: .35em .9em; border-radius: 8px; letter-spacing: .04em; }
+.tool-card h2, .tool-card h3 { font-size: 1.25rem; line-height: 1.55; margin: 0; color: var(--navy); }
+.tool-card p { margin: 0; line-height: 1.85; font-size: .95rem; }
+.tool-spec { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.tool-spec li { background: var(--sky); color: var(--navy); font-size: .8rem; font-weight: 600; padding: .25em .7em; border-radius: 999px; }
+.tool-card .btn { margin-top: auto; align-self: flex-start; }
+.tools-which, .tools-more { max-width: 1180px; margin: 0 auto; padding: 1.4rem var(--gutter); }
+.tools-which h2, .tools-more h2 { font-size: 1.2rem; color: var(--navy); margin: 0 0 .9rem; }
+.tools-which dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
+.tools-which dl > div { background: var(--bg-alt); border-radius: 12px; padding: 1rem 1.2rem; }
+.tools-which dt { font-weight: 700; margin-bottom: .3rem; }
+.tools-which dd { margin: 0; line-height: 1.8; font-size: .92rem; }
+.tools-sub { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: .9rem; }
+.tools-sub a { display: flex; flex-direction: column; gap: .35rem; padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--text); }
+.tools-sub a:hover { border-color: var(--blue); }
+.tools-sub b { color: var(--navy); }
+.tools-sub span { font-size: .85rem; color: var(--muted); line-height: 1.7; }
+.tools-consult { text-align: center; margin: 1.6rem 0 2rem; font-size: .92rem; }
+/* トップの無料ツールの帯 */
+.top-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 1.2rem; max-width: 1180px; margin: 0 auto; }
+@media (prefers-reduced-motion: reduce) { .tool-card { transition: none; } }
+.tools-head .kicker { color: var(--blue); border-color: var(--sky-2); background: var(--sky); }
+.tools-head .kicker::before { background: var(--blue); box-shadow: none; }

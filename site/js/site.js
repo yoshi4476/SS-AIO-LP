@@ -9,6 +9,16 @@
   var toggle = document.querySelector('.nav-toggle');
   var header = document.querySelector('.site-header');
   if (toggle && header) {
+    // メニューを畳む幅でも無料ツールが見えるよう、ヘッダーの下に細い帯を出す（CSSで広い幅では隠す）。
+    // ロゴの横にボタンを並べると、スマホでロゴの文字が3行に折れた（2026-10-03）
+    if (header.querySelector('.global-nav .nav-tool') && !header.querySelector('.hdr-tools')) {
+      var bar = document.createElement('div');
+      bar.className = 'hdr-tools';
+      bar.innerHTML = '<a href="/tools/" data-cta="hdr_tools">無料ツール</a>'
+        + '<a href="/site-audit/" data-cta="hdr_tools_url">URL診断</a>'
+        + '<a href="/tools/ai-check/" data-cta="hdr_tools_ai">AI診断</a>';
+      header.appendChild(bar);
+    }
     toggle.addEventListener('click', function () {
       var open = header.classList.toggle('nav-open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
