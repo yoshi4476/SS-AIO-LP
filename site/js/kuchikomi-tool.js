@@ -127,6 +127,11 @@
   var form = root.querySelector("form");
   var out = root.querySelector(".kt-out");
   var shownLead = false;
+  // 記事から来たときは、その記事の業種を選んだ状態で開く（?ind=dental など）
+  try {
+    var qi = new URLSearchParams(location.search).get("ind");
+    if (qi && IND[qi]) form.ind.value = qi;
+  } catch (e) {}
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();

@@ -123,6 +123,18 @@ def faq_body(ind, metas, url_of, limit=60):
     return html, ld
 
 
+# 口コミが集客を左右する業種 → 口コミ返信ツールの業種
+TOOL_IND = {"clinic": "clinic", "shika": "dental", "seikotsuin": "seikotsu", "inshokuten": "food", "biyou": "beauty"}
+
+
+def tool_link(ind):
+    t = TOOL_IND.get(ind.get("slug", ""))
+    if not t:
+        return ""
+    return (f'<p class="hub-note"><a href="/tools/kuchikomi-henshin/?ind={t}" data-cta="hub_tool_kuchikomi">'
+            f'口コミへの返信案をその場で作る（無料ツール・登録不要）</a></p>')
+
+
 def hub_body(ind, metas, categories, post_tile):
     """業種ハブの中身。手法ごとに区切る（読者は自分に必要な手法から入る）"""
     import html as _h
@@ -141,7 +153,7 @@ def hub_body(ind, metas, categories, post_tile):
     blocks = [f'<div class="latest-block" data-cat="new">'
               f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の記事</h2>'
               f'<span class="cnt">全{len(metas)}本</span></div>'
-              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}</div>']
+              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}{tool_link(ind)}</div>']
     for cat, (name, cls) in categories.items():
         part = [m for m in metas if m["category"] == cat]
         if not part:

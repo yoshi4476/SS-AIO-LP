@@ -466,6 +466,51 @@ def insert_mid_cta(content, meta):
     return content[:pos] + scan_box(meta, "mid") + "\n" + content[pos:]
 
 
+# 記事の業種 → 口コミ返信ツールの業種（選んだ状態で開く）
+TOOL_IND = {"clinic": "clinic", "shika": "dental", "seikotsuin": "seikotsu", "inshokuten": "food", "biyou": "beauty"}
+
+
+def tool_box(meta):
+    """口コミ返信ツールへの案内。口コミの話をしている章の終わりに置く（読者が返信に困っている場面）"""
+    ind = ""
+    try:
+        import industry_hub
+        inds = industry_hub.load()[0]
+        ind = TOOL_IND.get(industry_hub.detect(meta.get("title", ""), meta.get("keyword", ""), inds) or "", "")
+    except Exception:
+        pass
+    q = f"?ind={ind}" if ind else ""
+    med = ("病院・歯科・整骨院は、守秘義務と医療広告ガイドラインにふれない書き方にそろえます。"
+           if ind in ("clinic", "dental", "seikotsu") else "")
+    return ('<aside class="scan-box tool-box" aria-label="口コミ返信文の作成ツール">'
+            '<p class="sb-kicker">無料・登録不要</p>'
+            '<p class="sb-head">口コミへの返信、文面に迷っていませんか？</p>'
+            f'<p class="sb-sub">業種と口コミの種類を選ぶだけで、そのまま使える返信案を3つ作ります。{med}</p>'
+            f'<p><a class="btn btn-primary" href="/tools/kuchikomi-henshin/{q}" data-cta="article_tool_kuchikomi">返信案を作る（無料）</a></p>'
+            '</aside>')
+
+
+def insert_tool_box(content, meta):
+    """本文で口コミを扱っている記事に、口コミ返信ツールへの案内を1つ置く。
+    置くのは、見出しに「口コミ」がある最初の章の終わり（次の見出しの手前）。
+    途中の診断（heads[2]）と同じ位置になるときは、その次の見出しの手前にずらす"""
+    import re as _re
+    plain = _re.sub(r"<[^>]+>", "", content)
+    if len(_re.findall(r"口コミ|クチコミ", plain)) < 3:
+        return content
+    heads = [(m.start(), _re.sub(r"<[^>]+>", "", m.group(1))) for m in _re.finditer(r"<h2[^>]*>(.*?)</h2>", content, _re.S)]
+    idx = next((i for i, (_, t) in enumerate(heads) if _re.search(r"口コミ|クチコミ", t)), None)
+    if idx is None:
+        return content
+    nxt = [p for i, (p, t) in enumerate(heads) if i > idx and not _re.search(r"よくある質問|まとめ", t)]
+    if len(heads) >= 4 and nxt and nxt[0] == heads[2][0]:
+        nxt = nxt[1:]
+    if not nxt:
+        return content
+    pos = nxt[0]
+    return content[:pos] + tool_box(meta) + "\n" + content[pos:]
+
+
 # 記事の業種 → LPの業種欄の選択肢（診断を始めたときに業種が選ばれた状態にする。同業平均にも入る）
 LP_INDUSTRY = {"shika": "クリニック・歯科医院", "clinic": "クリニック・歯科医院", "seikotsuin": "クリニック・歯科医院",
                "fudosan": "不動産", "koumuten": "工務店・リフォーム", "reform": "工務店・リフォーム",
@@ -781,7 +826,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
-        "{{CONTENT}}": insert_mid_cta(_video_embed(content, meta), meta),
+        "{{CONTENT}}": insert_mid_cta(insert_tool_box(_video_embed(content, meta), meta), meta),
         "{{RELATED}}": related,
         "{{DIAG_BANNER}}": diag_banner_html(meta),
         "{{PREVNEXT}}": prevnext,
