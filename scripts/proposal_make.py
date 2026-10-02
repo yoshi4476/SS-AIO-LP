@@ -62,6 +62,10 @@ def industry_facts(name):
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
         if not title or not sc or int(sc.group(1)) < 90:
             continue
+        # 提案書は AI集客ラボの SEO・AIO の提案。補助金サイト（IT導入補助金）や MEO の記事は載せない
+        cat = re.search(r"^category:\s*(\S+)", fm, re.M)
+        if not cat or cat.group(1) not in ("aio", "seo", "ai-marketing"):
+            continue
         if IH.detect(title.group(1), kw.group(1) if kw else "", inds) == ind["slug"]:
             # FAQ の「- q:」はフロントマターにある。本文には <details> しか無く、本文を探すと必ず空になる
             faq = [q.strip().strip('"') for q in re.findall(r"^\s*- q:\s*(.+)$", fm, re.M)]
@@ -81,7 +85,34 @@ def industry_page(ind):
     titles = "".join(f"<li>{_h.escape(t)}</li>" for t in ind["titles"])
     qs = "".join(f"<li>{_h.escape(q)}</li>" for q in ind["questions"])
     hub = (f'<p class="note">業種の入口: {ind["hub_url"]}（よくある質問のまとめも同じ場所）</p>' if ind["hub_url"] else "")
-    return (f'<div class="two"><div><h3>{_h.escape(ind["name"])}向けに、すでに公開している記事（{ind["n"]}本）</h3>'
+    # 自社調査（AIは何を出典に答えるか）の要点。数字は調査ページと同じ headline() から取る
+    research = ""
+    try:
+        import industry_ai_sources as IAS
+        r = {"shika": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
+             "reform": "koumuten", "shigyou": "shigyou"}.get(ind["slug"])
+        hl = IAS.headline(r) if r else None
+        if hl:
+            T = hl["T"]
+            if hl["verdict"] == "portal":
+                a = (f'{hl["lp"]}%', f'{T["owner"]}を探す質問で、AIの出典が{T["portal"]}だった割合（{T["owner_site"]}は{hl["lc"]}%）')
+            elif hl["verdict"] == "owner":
+                a = (f'{hl["lc"]}%', f'{T["owner"]}を探す質問で、AIの出典が{T["owner_site"]}だった割合')
+            else:
+                a = (f'{hl["lp"]}%／{hl["lc"]}%', f'{T["owner"]}を探す質問で、出典になった{T["portal"]}と{T["owner_site"]}（ほぼ同じ）')
+            research = (f'<div class="rs-box"><h3>自社調査: {_h.escape(hl["name"])}の質問に、AIは何を出典に答えるか'
+                        f'（{hl["questions"]}問×4つのAI・{hl["date"]}）</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm">'
+                        f'<div><p class="rs-n">{_h.escape(a[0])}</p><p>{_h.escape(a[1])}</p></div>'
+                        f'<div><p class="rs-n">{hl["oa"]}%</p><p>{_h.escape(T["other_short"])}を調べる質問で、回答が{_h.escape(T["owner_site"])}を1つ以上出典にしていた割合</p></div>'
+                        f'</div><p class="note">詳細: {hl["url"]}</p></div>')
+    except Exception:
+        research = ""
+    if research:
+        # 調査の欄を足すと1ページに収まらない（905px／794px）。記事と質問の数を減らす
+        titles = "".join(f"<li>{_h.escape(t)}</li>" for t in ind["titles"][:4])
+        qs = "".join(f"<li>{_h.escape(q)}</li>" for q in ind["questions"][:3])
+        hub = ""                     # 調査の欄に詳細のURLがあり、入口の注記まで載せると溢れる
+    return (research + f'<div class="two"><div><h3>{_h.escape(ind["name"])}向けに、すでに公開している記事（{ind["n"]}本）</h3>'
             f'<ul class="list">{titles}</ul></div>'
             f'<div><h3>{_h.escape(ind["name"])}の方がよく調べている質問</h3><ul class="list">{qs}</ul></div></div>{hub}')
 
@@ -953,6 +984,11 @@ td b{{color:{NAVY}}}
 .note{{margin-top:5mm;font-size:8pt;line-height:1.85;color:{MUTED};
  background:{CREAM};padding:4.4mm 5.4mm;border-radius:6px}}
 .note b{{color:{GOLD}}}
+.rs-box{{margin:0 0 4mm;padding:3.6mm 5mm;border:1px solid {LINE};border-left:3px solid {GOLD};border-radius:6px;background:{BG}}}
+.rs-box h3{{margin:0 0 2mm;font-size:9.5pt}}
+.rs-box .rs-n{{margin:0;font-size:20pt;font-weight:800;color:{NAVY};font-variant-numeric:tabular-nums;line-height:1.2}}
+.rs-box p{{margin:0;font-size:8.5pt;line-height:1.7}}
+.rs-box .note{{margin-top:2mm;padding:0;background:none}}
 .note.stop{{background:{STOPBG}}}
 .note.stop b{{color:{STOP}}}
 
