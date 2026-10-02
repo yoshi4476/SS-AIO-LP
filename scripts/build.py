@@ -67,6 +67,7 @@ FOOTER_NAV_DEFAULT = [
     {"label": "マップ集客の整備度チェック（30秒）", "url": "/diagnosis/meo/"},
     {"label": "AI検索の対応度チェック（30秒）", "url": "/diagnosis/aio/"},
     {"label": "サイトの技術チェック", "url": "/site-audit/"},
+    {"label": "AIにどう紹介されているか無料チェック", "url": "/tools/ai-check/"},
     {"label": "口コミ返信文の作成ツール", "url": "/tools/kuchikomi-henshin/"},
     {"label": "AIO・LLMO運用", "url": "/aio/"},
     {"label": "SEO運用", "url": "/seo/"},
@@ -204,7 +205,7 @@ CATEGORIES = {
 
 # privacy/tokushoho は noindex のため sitemap から除外（noindex×sitemap掲載の矛盾を防ぐ）
 # glossary/ は build_sitemap の生成ページのループが出す（ここにも書くと2回載る）
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "tools/kuchikomi-henshin/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "diagnosis/", "diagnosis/meo/", "diagnosis/aio/", "tools/kuchikomi-henshin/", "tools/ai-check/", "site-audit/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
 
 
 def jp_date(iso: str) -> str:

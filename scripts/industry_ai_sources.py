@@ -418,6 +418,7 @@ def cta_band(ind):
             '<p>URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを30秒で診断します。</p>'
             '<div class="btns">'
             f'<a class="btn btn-primary" href="/lp/{T["lp"]}/#scan-start" data-cta="research_band_scan_{ind}">30秒で無料診断する</a>'
+            f'<a class="btn btn-ghost" href="/tools/ai-check/" data-cta="research_band_aicheck_{ind}">自社がAIにどう紹介されているか確かめる</a>'
             f'<a class="btn btn-ghost" href="/lp/{T["lp"]}/" data-cta="research_band_lp_{ind}">{T["lp_name"]}を見る</a></div></div></section>')
 
 

@@ -1,0 +1,104 @@
+/**
+ * 「AIにどう紹介されているか」無料チェック（/tools/ai-check/ から呼ぶ）
+ *
+ * 地域と業種で3問を Gemini（Google検索つき）に聞き、答えの出典に御社のサイトが入っているか、
+ * 回答に社名が出ているか、代わりに何が出典になっているかを返す。
+ * 連絡先は既存の問い合わせと同じ管制塔（GAS）の台帳に記録する。
+ *
+ * 0円を守る: GEMINI_API_KEY は無料枠の鍵（超えると 429 で止まり、課金されない）。1回に聞くのは3問だけ。
+ * 必要な環境変数: GEMINI_API_KEY（必須）、GEMINI_MODEL（任意）、GAS_WEBHOOK_URL / GAS_SHARED_SECRET（台帳）
+ */
+const WORDS = {
+  dental: "歯医者", clinic: "クリニック", fudosan: "不動産会社", koumuten: "工務店", reform: "リフォーム会社",
+  zeirishi: "税理士", sharoushi: "社労士", gyousei: "行政書士", shihou: "司法書士", bengoshi: "弁護士",
+};
+const LP = { dental: "medical", clinic: "medical", fudosan: "fudosan", koumuten: "koumuten", reform: "koumuten",
+  zeirishi: "shigyou", sharoushi: "shigyou", gyousei: "shigyou", shihou: "shigyou", bengoshi: "shigyou" };
+// 予約・比較・紹介のサイト（調査 industry_ai_sources.py で多かったもの）
+const PORTAL = /epark|tokyo-doctors|iqrafudosan|ieagent|ielove|town-life|chintai|homemate|eheya|yeay|ieuri|mansion-navi|t23m-navi|sumaity|haisha-yoyaku|caloo|byoinnavi|doctorsfile|qlife|medicaldoc|fdoc\.jp|hospita|clinic\.mynavi|jidv|haisha-doc|ekiten|teech|proreco|shika-pro|mrso|suumo|homes\.co\.jp|athome|ieul|home4u|sumai-step|rehome-navi|homepro|nuri-kae|reform-guide|hapisumu|meetsmore|zehitomo|biz\.ne\.jp|imitsu|zeiri4|bengo4|minnano-zeirishi|i-sozoku|all-senmonka|tabelog|hotpepper|retty/;
+
+const norm = (s) => String(s || "").toLowerCase().replace(/[\s　・（）()「」]/g, "");
+const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, "").toLowerCase(); } catch (_) { return ""; } };
+
+async function realHost(uri, title) {
+  // Gemini の出典は中継アドレス。題がドメインならそれを使い、違えば行き先を1回だけ見る
+  if (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(String(title || "").trim())) return String(title).trim().toLowerCase().replace(/^www\./, "");
+  try {
+    const r = await fetch(uri, { method: "HEAD", redirect: "manual" });
+    return host(r.headers.get("location") || uri);
+  } catch (_) { return host(uri); }
+}
+
+async function ask(env, q) {
+  const model = env.GEMINI_MODEL || "gemini-3.6-flash";
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ contents: [{ parts: [{ text: q }] }], tools: [{ google_search: {} }] }),
+  });
+  if (r.status === 429) throw new Error("quota");
+  if (!r.ok) throw new Error("http" + r.status);
+  const d = await r.json();
+  const c = (d.candidates || [])[0] || {};
+  const text = ((c.content || {}).parts || []).map((p) => p.text || "").join("");
+  const chunks = ((c.groundingMetadata || {}).groundingChunks || []).map((x) => x.web || {}).filter((w) => w.uri);
+  const hosts = [...new Set(await Promise.all(chunks.slice(0, 12).map((w) => realHost(w.uri, w.title))))].filter(Boolean);
+  return { text, hosts };
+}
+
+export async function onRequestPost({ request, env }) {
+  let d;
+  try { d = await request.json(); } catch (_) { return Response.json({ ok: false, error: "送信の形式が正しくありません。" }, { status: 400 }); }
+  const v = (k, n = 200) => String(d[k] || "").trim().slice(0, n);
+  if (v("_gotcha")) return Response.json({ ok: false, error: "送信できませんでした。" }, { status: 400 });
+  const ind = v("industry", 20), area = v("area", 40), company = v("company", 80), site = v("site", 300);
+  const name = v("name", 60), email = v("email", 200);
+  const word = WORDS[ind] || v("word", 20);
+  if (!word || !area || !company || !name || !email) {
+    return Response.json({ ok: false, error: "未入力の項目があります。" }, { status: 400 });
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return Response.json({ ok: false, error: "メールアドレスの形式が正しくありません。" }, { status: 400 });
+  }
+  if (!env.GEMINI_API_KEY) {
+    return Response.json({ ok: false, error: "ただいまチェックを受け付けていません。06-4305-7547 までお電話ください。" }, { status: 503 });
+  }
+  const own = host(/^https?:\/\//.test(site) ? site : "https://" + site);
+  const qs = [`${area} ${word} おすすめ`, `${area} ${word} 評判 いい`, `${area} ${word} 人気`];
+  let results;
+  try {
+    results = await Promise.all(qs.map(async (q) => {
+      const a = await ask(env, q);
+      return {
+        q,
+        cited: Boolean(own) && a.hosts.some((h) => h === own || h.endsWith("." + own)),
+        mentioned: norm(a.text).includes(norm(company)),
+        sources: a.hosts.slice(0, 8).map((h) => ({ host: h, portal: PORTAL.test(h), own: Boolean(own) && (h === own || h.endsWith("." + own)) })),
+      };
+    }));
+  } catch (e) {
+    const msg = String(e.message) === "quota"
+      ? "今月の無料チェックの受付数に達しました。結果は担当者からメールでお送りします。"
+      : "AIへの問い合わせに失敗しました。時間をおいてもう一度お試しください。";
+    results = null;
+    // 受け付けた連絡先は残し、結果は人が送る
+    await record(env, request, { ind, area, company, site, name, email, word, summary: "チェック未実行（" + e.message + "）" });
+    return Response.json({ ok: false, error: msg }, { status: 503 });
+  }
+  const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
+  const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`;
+  await record(env, request, { ind, area, company, site, name, email, word, summary });
+  return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "" });
+}
+
+async function record(env, request, x) {
+  if (!env.GAS_WEBHOOK_URL) return;
+  const data = { name: x.name, company: x.company, email: x.email, form_type: "AI紹介チェック（診断）",
+    message: `${x.summary}\n業種: ${x.word}／地域: ${x.area}／サイト: ${x.site || "未入力"}` };
+  try {
+    await fetch(env.GAS_WEBHOOK_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", site: "ai-lab",
+        data: { ...data, site: "ai-lab", type: "diagnosis" }, referer: request.headers.get("referer") || "不明" }),
+    });
+  } catch (_) { /* 台帳に書けなくても結果は返す */ }
+}

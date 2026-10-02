@@ -74,3 +74,4 @@ social-tokens.json
 automation/note/
 data/research/*-raw.json
 data/research/source_class.json
+.dev.vars

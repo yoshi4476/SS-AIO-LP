@@ -238,7 +238,8 @@ def body(key, metas, faq_pairs, post_tile, site_url):
            '<section class="ilp-band"><h2>まずは、今の状態を知るところから</h2>'
            '<p>現状分析は無料です。30秒の診断だけでも、直す順番が分かります。</p><div class="btns">'
            f'<a class="btn btn-primary" href="/lp/#form" data-cta="lp_{key}_consult">無料で相談する（現状分析つき）</a>'
-           f'<a class="btn btn-ghost" href="#scan-start" data-cta="lp_{key}_band_scan">30秒で診断する</a></div></section>']
+           f'<a class="btn btn-ghost" href="#scan-start" data-cta="lp_{key}_band_scan">30秒で診断する</a>'
+           f'<a class="btn btn-ghost" href="/tools/ai-check/" data-cta="lp_{key}_band_aicheck">AIにどう紹介されているか確かめる</a></div></section>']
     if tiles:
         out.append(f'<section><span class="ilp-eb">Articles</span><h2>{_e(c["name"])}の集客に役立つ記事</h2><ul class="post-list">\n{tiles}\n</ul>'
                    + (f'<p class="ilp-more">業種別のまとめ: {hubs}</p>' if hubs else "") + '</section>')
