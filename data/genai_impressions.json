@@ -105,8 +105,8 @@
         "/services/ai-consulting/": 1,
         "/services/ai-subsidy/": 1
       },
-      "imported": "2026-10-01",
-      "source": "https___corp.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01.zip"
+      "imported": "2026-10-02",
+      "source": "https___corp.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01 (1).zip"
     },
     "subsidy": {
       "total": 218,
@@ -168,8 +168,8 @@
         "/blog/shakaihoken-denshishinsei-gimuka-chusho/": 1,
         "/blog/tokyo-kensetsugyou-denshishinsei/": 1
       },
-      "imported": "2026-10-01",
-      "source": "https___lp.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01.zip"
+      "imported": "2026-10-02",
+      "source": "https___lp.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01 (1).zip"
     }
   },
   "2026-08": {
@@ -202,8 +202,8 @@
         "/seo/iryou-koukoku-guideline-web/": 1,
         "/seo/reform-seo-taisaku/": 1
       },
-      "imported": "2026-10-01",
-      "source": "https___ai.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01.zip"
+      "imported": "2026-10-02",
+      "source": "https___ai.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01 (1).zip"
     },
     "corporate": {
       "total": 8,
@@ -215,7 +215,7 @@
         "/blog/keiri-jikyu-souba/": 1,
         "/news/blog-open/": 1
       },
-      "imported": "2026-10-01",
+      "imported": "2026-10-02",
       "source": "https___corp.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01.zip"
     },
     "subsidy": {
@@ -264,7 +264,7 @@
         "/service/hojokin/": 1,
         "/youkou/": 1
       },
-      "imported": "2026-10-01",
+      "imported": "2026-10-02",
       "source": "https___lp.7senses.co.jp_-Performance-on-Search-Generative-AI-Features-2026-10-01.zip"
     }
   }
