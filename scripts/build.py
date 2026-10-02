@@ -250,6 +250,11 @@ def parse_article(path: Path):
         raise ValueError(f"{path.name}: category は {list(CATEGORIES)} のいずれか")
     meta.setdefault("modified", meta["date"])
     _modified_guard(meta, m.group(2))
+    # AI検索の対策の記事は、業種の「◯◯のAIO対策」の画像をファイル名で引いてサムネイルにする（industry_thumbs.py）
+    import industry_thumbs
+    meta["eyecatch"] = industry_thumbs.apply(meta) or meta.get("eyecatch")
+    if not meta["eyecatch"]:
+        meta.pop("eyecatch")
     return meta, m.group(2)
 
 

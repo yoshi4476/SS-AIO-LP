@@ -2356,6 +2356,24 @@ def test_research_refresh_and_ranking():
         check("ランキングのページがある", (ROOT / "site" / "research" / "ranking" / "index.html").is_file(), True)
 
 
+def test_industry_thumbnails_follow_rules():
+    """業種のサムネイルはファイル名で引き、AI検索の対策の記事にだけ、自動生成のアイキャッチの代わりに当てる"""
+    print(chr(10) + "■ 業種別サムネイル")
+    import industry_thumbs as IT
+    miss = [k for k in IT.KEYS if not (IT.DIR / f"aio-{k}.jpg").is_file()]
+    check("一覧の鍵ごとに画像がある", miss, [])
+    base = {"slug": "x", "category": "aio", "eyecatch": "/images/x/eyecatch.png"}
+    check("歯科のAIO記事には歯科の画像", IT.apply({**base, "title": "歯科医院のAIO対策とは？", "keyword": "歯科 aio"}),
+          "/images/thumbs/aio-shika.jpg")
+    check("美容クリニックは美容の画像", IT.key_for({**base, "title": "美容クリニックのAI検索対策", "keyword": ""}), "clinic-biyou")
+    check("AI検索と関係ない記事には当てない（インスタ集客）",
+          IT.apply({**base, "category": "ai-marketing", "title": "クリニックのインスタ集客のやり方", "keyword": "クリニック instagram"}),
+          "/images/x/eyecatch.png")
+    check("手で選んだアイキャッチは触らない",
+          IT.apply({**base, "eyecatch": "/images/x/eyecatch-main.jpg", "title": "歯科医院のAIO対策", "keyword": ""}),
+          "/images/x/eyecatch-main.jpg")
+
+
 def test_monthly_cap_check_exit_code():
     """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
 
@@ -3539,6 +3557,7 @@ def main():
               test_outcome_watch_counts_what_was_made,
               test_lead_context_and_recheck_consent,
               test_research_refresh_and_ranking,
+              test_industry_thumbnails_follow_rules,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,
