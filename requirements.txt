@@ -23,3 +23,4 @@ httplib2
 pynacl
 # GA4 を読む検査（data_sanity・lead_reconcile・daily_kpi）。無いと週次で「確認できません」になっていた
 google-analytics-data
+numpy

@@ -1,0 +1,5 @@
+# 記事動画（daily-video.yml）だけが使う部品。重いので requirements.txt に入れない
+edge-tts
+faster-whisper
+fugashi
+unidic-lite

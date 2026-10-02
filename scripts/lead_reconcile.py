@@ -38,15 +38,50 @@ def ga4_by_day(prop, start, end):
     creds = gcreds.load(ROOT / "indexing-service-account.json", ["https://www.googleapis.com/auth/analytics.readonly"])
     rep = BetaAnalyticsDataClient(credentials=creds).run_report(RunReportRequest(
         property=f"properties/{prop}", date_ranges=[DateRange(start_date=start.isoformat(), end_date=end.isoformat())],
-        dimensions=[Dimension(name="date"), Dimension(name="eventName")], metrics=[Metric(name="eventCount")],
+        dimensions=[Dimension(name="date"), Dimension(name="eventName"), Dimension(name="pagePath")],
+        metrics=[Metric(name="eventCount")],
         dimension_filter=FilterExpression(filter=Filter(field_name="eventName",
                                                         in_list_filter=Filter.InListFilter(values=list(EVENTS)))),
-        limit=1000))
-    per = collections.defaultdict(dict)
-    for r in rep.rows:
-        d, ev = r.dimension_values[0].value, r.dimension_values[1].value
-        per[f"{d[:4]}-{d[4:6]}-{d[6:]}"][ev] = int(r.metric_values[0].value)
-    return {d: max(v.values()) for d, v in per.items()}
+        limit=5000))
+    return count_rows([(r.dimension_values[0].value, r.dimension_values[1].value,
+                        r.dimension_values[2].value, int(r.metric_values[0].value)) for r in rep.rows])
+
+
+def is_lead(ev, path):
+    """問い合わせとして数える送信か。
+    form_submit は GA4 がページ上のどのフォームでも出す。トップや記事の「30秒のサイト診断」
+    （URLを入れて /lp/ へ飛ぶだけ）も form_submit になり、2026-10-02 に診断の入力2件を
+    「台帳に無い問い合わせ」と誤って報告した。form_submit は問い合わせページのものだけ数える"""
+    if ev in ("lead_capture", "generate_lead"):
+        return True
+    return ev == "form_submit" and "/contact" in (path or "")
+
+
+def count_rows(rows):
+    """(date, eventName, pagePath, count) から日ごとの件数。
+    同じ送信で form_submit と lead_capture が両方出るので、足さずに多い方を取る"""
+    per = collections.defaultdict(lambda: collections.Counter())
+    for d, ev, path, n in rows:
+        if is_lead(ev, path):
+            per[f"{d[:4]}-{d[4:6]}-{d[6:]}"][ev] += n
+    return {d: max(v.values()) for d, v in per.items() if v}
+
+
+def selftest():
+    """実際に誤った例で、数え方を確かめる"""
+    cases = [
+        ([("20260928", "form_submit", "/", 1)], {}),                                        # トップの診断入力
+        ([("20260930", "form_submit", "/ai-marketing/fudousan-hankyou-konai/", 1)], {}),    # 記事内の診断入力
+        ([("20260904", "form_submit", "/contact/", 2), ("20260904", "lead_capture", "/contact/", 1)],
+         {"2026-09-04": 2}),                                                                # 問い合わせ（足さない）
+        ([("20260909", "generate_lead", "/contact", 1)], {"2026-09-09": 1}),
+        ([("20260918", "lead_capture", "/diagnosis/meo/", 1)], {"2026-09-18": 1}),           # 診断結果の送付依頼
+    ]
+    bad = [(rows, want, count_rows(rows)) for rows, want in cases if count_rows(rows) != want]
+    for rows, want, got in bad:
+        print(f"  NG {rows} → {got}（正しくは {want}）")
+    print(f"LEAD_SELFTEST={'ok' if not bad else 'ng'}")
+    return 0 if not bad else 1
 
 
 def ledger_by_site(start):
@@ -78,7 +113,10 @@ def ledger_by_site(start):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=28)
+    ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
+    if a.selftest:
+        return selftest()
     import sites as S
     end = date.today() - timedelta(days=1)
     start = end - timedelta(days=a.days - 1)

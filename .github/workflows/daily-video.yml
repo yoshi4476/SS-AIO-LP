@@ -42,7 +42,7 @@ jobs:
           command -v ffmpeg > /dev/null || echo "::warning::ffmpeg が入らず、記事動画を作れません"
           pip install --quiet -r requirements.txt edge-tts
           # 作った声を聞き直して読み違いを直す（入らなくても動画づくりは止めない）
-          pip install --quiet faster-whisper fugashi unidic-lite || echo "::warning::読みの聞き直しが入らず、読み違いを検査できません"
+          pip install --quiet -r requirements-video.txt || echo "::warning::読みの聞き直しが入らず、読み違いを検査できません"
           python scripts/yomi_guard.py --selftest || echo "::warning::読みの検査が壊れています（読み違いを見逃します）"
           # 掛け合いの台本を書かせる（動かなければスライド形式に落ちる）
           npm install -g @anthropic-ai/claude-code > /dev/null 2>&1 || true

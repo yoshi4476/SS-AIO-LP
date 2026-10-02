@@ -880,7 +880,10 @@ def test_import_has_no_side_effects():
     import importlib.metadata
     dist_map = importlib.metadata.packages_distributions()
     req_names = set()
-    for line in (ROOT / "requirements.txt").read_text(encoding="utf-8").splitlines():
+    # 動画だけが使う重い部品は requirements-video.txt（daily-video.yml が入れる）
+    req_text = "\n".join((ROOT / f).read_text(encoding="utf-8") for f in ("requirements.txt", "requirements-video.txt")
+                         if (ROOT / f).is_file())
+    for line in req_text.splitlines():
         line = line.strip()
         if line and not line.startswith("#"):
             req_names.add(re.split(r"[<>=\[]", line)[0].strip().lower().replace("_", "-"))
@@ -2984,6 +2987,36 @@ def test_no_control_characters_anywhere():
     print(f"  OK  制御文字なし（スクリプト・生成HTMLとも）／壊れた画像を検出できる")
 
 
+def test_detectors_do_not_misread_neighbors():
+    """検出器が「似た別のもの」を拾わないか。2026-10-01〜02 に3回、検出器の誤りを事実として報告した。
+
+    1. 月次レポートの照合が「AI経由セッション」の前月比を全体の「セッション」と混同し、3社とも送れなかった
+    2. link_boost の検算が \\s* で空行をまたぎ、空行のある箇条書きまで「直結」と数え、押し上げのリンクが29件入らなかった
+    3. 問い合わせの照合が、トップ・記事の「30秒のサイト診断」（URLを入れて /lp/ へ飛ぶだけ）を問い合わせと数えた
+    """
+    import re as _re
+    import report_audit as RA_
+    text = "セッション111（前月比+35%）。AI経由セッション 2 前月比 -31%"
+    got = set(_re.findall(r"(?<!経由)セッション[^。<]{0,40}?([+\-]\d+)%", text))
+    src = (ROOT / "scripts" / "report_audit.py").read_text(encoding="utf-8")
+    check("照合: AI経由セッションを全体のセッションと数えない", "(?<!経由)" in src and got == {"+35"}, True)
+
+    import link_boost as LB
+    before = "本文です。\n\n- [A](/a/)\n- [B](/b/)\n\n| x |\n|--|\n"
+    good = before.replace("本文です。", "本文です。\n\n関連して、[C](/c/)も参考にしてください。")
+    bad = before.replace("\n\n| x |", "\n関連して、[C](/c/)も。\n| x |")
+    check("link_boost: 空行をはさんだ挿し込みは通す", LB.insert_ok(before, good), "")
+    check("link_boost: 表に直結する挿し込みは止める", bool(LB.insert_ok(before, bad)), True)
+
+    import lead_reconcile as LR
+    check("問い合わせ照合: トップの診断入力は数えない", LR.count_rows([("20260928", "form_submit", "/", 1)]), {})
+    check("問い合わせ照合: 記事内の診断入力は数えない",
+          LR.count_rows([("20260930", "form_submit", "/ai-marketing/x/", 1)]), {})
+    check("問い合わせ照合: 問い合わせページの送信は数え、同時に出る印は足さない",
+          LR.count_rows([("20260904", "form_submit", "/contact/", 2), ("20260904", "lead_capture", "/contact/", 1)]),
+          {"2026-09-04": 2})
+
+
 def test_report_actions_close_the_loop():
     """レポートの改善点は、機械が当てて・見直して・残りだけ人へ届く形になっているか。
 
@@ -3289,7 +3322,8 @@ def main():
               test_rules_are_validated_against_outcomes,
               test_score_is_audited_and_cta_is_enforced,
               test_no_control_characters_anywhere,
-              test_report_actions_close_the_loop):
+              test_report_actions_close_the_loop,
+              test_detectors_do_not_misread_neighbors):
         try:
             t()
         except Exception as e:
