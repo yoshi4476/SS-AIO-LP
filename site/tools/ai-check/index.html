@@ -73,6 +73,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <div class="lx-stat"><b>出典</b><span>AIが答えの根拠にしたサイトに、御社のサイトが入っているか</span></div>
     <div class="lx-stat"><b>社名</b><span>AIの答えの文章に、御社の名前が出ているか</span></div>
     <div class="lx-stat"><b>競合</b><span>代わりに、どの予約・比較サイトが出典になっているか</span></div>
+    <p class="lx-console-foot">無料・1回3問・メールアドレスごとに3回まで</p>
   </div></div>
 </section>
 
@@ -86,6 +87,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 .ac .row{display:grid;gap:1rem;grid-template-columns:1fr 1fr}
 @media (max-width:640px){.ac .row{grid-template-columns:1fr}}
 .ac .note{font-size:.8rem;color:var(--muted);margin:0}
+.ac-rules{margin:0;padding:.9rem 1rem .9rem 2rem;background:var(--bg-alt);border:1px solid var(--line);border-radius:14px;font-size:.86rem;line-height:1.85}
 .ac-out{margin-top:1.4rem;display:grid;gap:1rem}
 .ac-wait,.ac-err{margin:0;padding:1rem;border-radius:14px;background:var(--sky)}
 .ac-err{background:#fdecec}
@@ -135,6 +137,12 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
         <label>メールアドレス<input name="email" type="email" required autocomplete="email"></label>
       </div>
       <p class="note">結果はこの画面に出ます。入力いただいた連絡先には、結果の読み方をご案内することがあります。<a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信してください。</p>
+      <ul class="ac-rules">
+        <li>無料でお使いいただけます（AIへの問い合わせは、月5,000回までの無料枠で運用しています。上限に達した月は受付を止めます）</li>
+        <li>1回のチェックでAIに聞く質問は3問です</li>
+        <li>チェックは1つのメールアドレスにつき3回までです</li>
+        <li>詳しく調べたい場合（ChatGPT・Claude を含める、質問を増やす、競合と比べる など）は、<a href="/lp/#form" data-cta="ai_check_rules_consult">お問い合わせ</a>ください</li>
+      </ul>
       <button type="submit" class="btn btn-primary" data-cta="ai_check_submit">AIに聞いて確かめる（無料）</button>
     </form>
     <div class="ac-out" aria-live="polite"></div>
@@ -146,6 +154,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <h2>このチェックについて</h2>
     <p><strong>このチェックは、Google検索を使って答えるAI（Gemini）に、地域と業種の質問を3つ聞き、答えの出典と文章に御社が出てくるかを確かめる無料のツールです。</strong>質問は「〔地域〕〔業種〕 おすすめ」「〔地域〕〔業種〕 評判 いい」「〔地域〕〔業種〕 人気」の3つです。</p>
     <p>社名は、入力いただいた表記と同じ書き方で回答に出たときに「あり」とします（「〇〇歯科」と「〇〇デンタル」のような言い換えは数えません）。出典は、入力いただいた公式サイトのドメインで判定します。</p>
+    <p>このチェックは、AIへの問い合わせを月5,000回までの無料枠で運用しています。1回のチェックで聞く質問は3問、チェックは1つのメールアドレスにつき3回までです。<strong>ChatGPT・Claude を含めた確認や、質問を増やした詳しい調査をご希望の場合は、<a href="/lp/#form">お問い合わせ</a>ください。</strong></p>
     <p>AIの答えは日によって変わります。1回の結果で良し悪しを決めず、傾向を知る目安としてお使いください。ChatGPT・Claude・Perplexity を含めた業種ごとの傾向は、<a href="/research/dental-ai-sources/">歯科</a>・<a href="/research/clinic-ai-sources/">クリニック</a>・<a href="/research/fudosan-ai-sources/">不動産</a>・<a href="/research/koumuten-ai-sources/">工務店・リフォーム</a>・<a href="/research/shigyou-ai-sources/">士業</a>の調査にまとめています。<br>監修: <a href="/author/haraguchi/">セブンセンシズ株式会社 代表取締役 原口優</a></p>
   </div>
 </section>

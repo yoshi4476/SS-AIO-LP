@@ -611,6 +611,49 @@ function scanLog_(body) {
 }
 
 /**
+ * AI紹介チェック（ai.7senses.co.jp/tools/ai-check/）の回数制限と記録。
+ * 問い合わせ台帳は同じメールの送信を1行にまとめるため、回数は数えられない。専用のシートに1回1行で残す。
+ * メールアドレスごとに累計3回まで。月の全体の上限は、Gemini の無料枠（月5,000回の検索つき回答）を
+ * 記事の自動処理と分け合うため 1,300回（＝3問×1,300＝3,900回）にとどめる。
+ */
+const AI_CHECK_PER_EMAIL = 3;
+const AI_CHECK_MONTH_CAP = 1300;
+
+function aiCheckSheet_() {
+  const ss = book_();
+  let sh = ss.getSheetByName('AI紹介チェック');
+  if (!sh) {
+    sh = ss.insertSheet('AI紹介チェック');
+    sh.appendRow(['日時', 'メール', '会社名', '業種', '地域', '出典に御社サイト', '回答に社名']);
+  }
+  return sh;
+}
+
+function aiCheckQuota_(body) {
+  const email = clean_(body.email).toLowerCase();
+  if (!email) return { ok: false, error: 'email' };
+  const sh = aiCheckSheet_();
+  let used = 0, month = 0;
+  const now = new Date();
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues().forEach(function (r) {
+      const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+      if (String(r[1]).toLowerCase() === email) used++;
+      if (at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth()) month++;
+    });
+  }
+  return { ok: true, used: used, perEmail: AI_CHECK_PER_EMAIL, month: month,
+           allowed: used < AI_CHECK_PER_EMAIL && month < AI_CHECK_MONTH_CAP,
+           reason: used >= AI_CHECK_PER_EMAIL ? 'email' : (month >= AI_CHECK_MONTH_CAP ? 'month' : '') };
+}
+
+function aiCheckLog_(body) {
+  aiCheckSheet_().appendRow([new Date(), clean_(body.email).toLowerCase(), clean_(body.company).slice(0, 80),
+    clean_(body.word).slice(0, 20), clean_(body.area).slice(0, 40), Number(body.cited) || 0, Number(body.mentioned) || 0]);
+  return { ok: true };
+}
+
+/**
  * 業種ごとの平均点（同じサイトは最新の1回だけ数える）。10社未満の業種は出さない。
  * 公開の入口から呼ばれるので、返すのは集計値だけ（個々の行は返さない）。
  */

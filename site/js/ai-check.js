@@ -23,14 +23,23 @@
       .then(function (r) { return r.json(); })
       .then(function (d) {
         btn.disabled = false;
-        if (!d.ok) { out.innerHTML = '<p class="ac-err" role="alert">' + esc(d.error || "チェックできませんでした。") + "</p>"; return; }
+        if (!d.ok) {
+          var more = d.limit
+            ? '<div class="ac-next"><div class="btns"><a class="btn btn-primary" href="/lp/#form" data-cta="ai_check_limit_consult">詳しく調べたい方はお問い合わせ（無料）</a>' +
+              '<a class="btn btn-ghost" href="/contact/" data-cta="ai_check_limit_contact">お問い合わせフォーム</a></div></div>'
+            : "";
+          if (d.limit) ev("ai_check_limit", { reason: d.limit });
+          out.innerHTML = '<p class="ac-err" role="alert">' + esc(d.error || "チェックできませんでした。") + "</p>" + more;
+          return;
+        }
         if (window.trackLead) window.trackLead("lead_capture", { lead_route: "ai_check", form_type: "AI紹介チェック" });
         ev("ai_check_done", { industry: data.industry, cited: d.cited, mentioned: d.mentioned });
         var head = d.cited || d.mentioned
           ? "3問中" + d.cited + "問で、AIの答えの出典に御社のサイトが入っていました。"
           : "3問とも、AIの答えに御社のサイトも社名も出てきませんでした。";
         var html = '<div class="ac-sum"><p class="ac-big">' + esc(head) + "</p>" +
-          '<p>回答に社名が出た質問は3問中' + d.mentioned + "問でした。AIの答えは日によって変わるため、これは今日の1回の結果です。</p></div>";
+          '<p>回答に社名が出た質問は3問中' + d.mentioned + "問でした。AIの答えは日によって変わるため、これは今日の1回の結果です。</p>" +
+          (d.used ? "<p>このメールアドレスでのチェック: " + d.used + "回目（" + (d.perEmail || 3) + "回まで）</p>" : "") + "</div>";
         d.results.forEach(function (r) {
           var src = r.sources.map(function (s) {
             return '<li class="' + (s.own ? "own" : s.portal ? "portal" : "") + '">' + esc(s.host) +
@@ -43,7 +52,7 @@
         });
         var lp = d.lp ? '<a class="btn btn-ghost" href="/lp/' + d.lp + '/" data-cta="ai_check_lp_' + d.lp + '">' + esc(LPNAME[d.lp] || "") + "のSEO・AI検索対策を見る</a>" : "";
         html += '<div class="ac-next"><p><b>AIの答えに出るには、「調べられる質問」に答えるページと、会社の事実をAIが読める形に整えることが近道です。</b>' +
-          "結果をもとに、何から直せばよいかを無料でお伝えします。</p><div class=\"btns\">" +
+          "結果をもとに、何から直せばよいかを無料でお伝えします。ChatGPT・Claude なども含めて詳しく調べたい場合は、お問い合わせください。</p><div class=\"btns\">" +
           '<a class="btn btn-primary" href="/lp/#form" data-cta="ai_check_consult">この結果について無料で相談する</a>' + lp + "</div></div>";
         out.innerHTML = html;
         var h = out.querySelector(".ac-big");

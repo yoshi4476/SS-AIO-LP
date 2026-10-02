@@ -62,6 +62,15 @@ export async function onRequestPost({ request, env }) {
   if (!env.GEMINI_API_KEY) {
     return Response.json({ ok: false, error: "ただいまチェックを受け付けていません。06-4305-7547 までお電話ください。" }, { status: 503 });
   }
+  // 回数の上限（メールごと累計3回・月の全体の上限）。AIに聞く前に確かめる。台帳に届かないときは止めない
+  // （鍵は無料枠なので、超えても429で止まり課金されない）
+  const quota = await hub(env, { action: "ai_check_quota", email });
+  if (quota && quota.ok && !quota.allowed) {
+    const error = quota.reason === "email"
+      ? `このメールアドレスでは${quota.perEmail || 3}回調べました。詳しく調べたい場合は、お問い合わせください。`
+      : "今月の無料チェックの受付数に達しました。詳しく調べたい場合は、お問い合わせください。";
+    return Response.json({ ok: false, limit: quota.reason, error }, { status: 429 });
+  }
   const own = host(/^https?:\/\//.test(site) ? site : "https://" + site);
   const qs = [`${area} ${word} おすすめ`, `${area} ${word} 評判 いい`, `${area} ${word} 人気`];
   let results;
@@ -87,7 +96,20 @@ export async function onRequestPost({ request, env }) {
   const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
   const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`;
   await record(env, request, { ind, area, company, site, name, email, word, summary });
-  return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "" });
+  await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned });
+  const used = quota && quota.ok ? quota.used + 1 : null;
+  return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "", used, perEmail: 3 });
+}
+
+async function hub(env, body) {
+  if (!env.GAS_WEBHOOK_URL) return null;
+  try {
+    const r = await fetch(env.GAS_WEBHOOK_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...body, secret: env.GAS_SHARED_SECRET || "" }),
+    });
+    return await r.json().catch(() => null);
+  } catch (_) { return null; }
 }
 
 async function record(env, request, x) {

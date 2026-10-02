@@ -248,6 +248,9 @@ function doPost(e) {
       // 取りこぼした問い合わせを台帳へ戻す（lead_reconcile で見つけ、送信履歴から復元した分）。
       // メールは送らない。フォームの経路（form_）を通すと、今になって自動返信が相手に届く
       case 'restore_lead': return json_(restoreLead_(body));
+      // AI紹介チェックの回数（メールごと3回・月の全体の上限）と記録。functions/api/ai-check.js が合言葉つきで呼ぶ
+      case 'ai_check_quota': return json_(aiCheckQuota_(body));
+      case 'ai_check_log':   return json_(aiCheckLog_(body));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
       default:            return json_(form_(body));
