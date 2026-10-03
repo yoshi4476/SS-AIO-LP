@@ -90,7 +90,7 @@ def make_thumbnail(src: Path, dest: Path, size=(1200, 630)):
     left, top = (im.width - tw) // 2, (im.height - th) // 2
     im = im.crop((left, top, left + tw, top + th))
     dest.parent.mkdir(parents=True, exist_ok=True)
-    im.save(dest, "WEBP", quality=82, method=6)
+    im.save(dest, "WEBP", quality=70, method=6)
     return dest
 
 
