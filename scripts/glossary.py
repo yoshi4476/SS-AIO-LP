@@ -126,26 +126,44 @@ def term_html(rec, article_url, base="/glossary/", rel=()):
             '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
 
-def index_html(terms, base="/glossary/"):
-    lis = "".join(f'<li><a href="{base}{r["id"]}/"><strong>{_h.escape(r["term"])}</strong></a>'
-                  f'<span class="hub-lead">{_h.escape(r["definition"][:60])}…</span></li>' for r in terms)
-    ld = {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "用語集", "url": base,
-          "hasDefinedTerm": [{"@type": "DefinedTerm", "name": r["term"], "url": f"{base}{r['id']}/"} for r in terms[:200]]}
+def index_html(terms, base="/glossary/", site_url="", rel_all=None):
+    """用語集の1ページ（全語の定義を見出しつきで並べる）。
+    1語1ページだと定義の数行だけのページが142本になり、90日でクリック0・1ページあたりの表示は記事の約12分の1だった。
+    各語は見出しに目印（id）を付け、旧URL（/glossary/<id>/）は _redirects でここの該当箇所へ送る"""
+    rel_all = rel_all or {}
+    toc = "".join(f'<a href="#{r["id"]}">{_h.escape(r["term"])}</a>' for r in terms)
+    secs = []
+    for r in terms:
+        rel = rel_all.get(r["id"], ())
+        rel_html = ('<p class="gl-rel">関連する用語: ' + "、".join(
+            f'<a href="#{x["id"]}">{_h.escape(x["term"])}</a>' for x in rel) + '</p>') if rel else ""
+        secs.append(f'<section class="gl-term" id="{r["id"]}"><h3>{_h.escape(r["term"])}とは</h3>'
+                    f'<div class="definition-box"><span class="term">{_h.escape(r["term"])}とは</span>、{_h.escape(r["definition"])}</div>'
+                    f'<p class="hub-note">出典の記事: <a href="/{r["category"]}/{r["slug"]}/">{_h.escape(r["title"][:60])}</a>'
+                    f'（{r["date"]}時点の記述）</p>{rel_html}</section>')
+    ld = {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "用語集", "url": f"{site_url}{base}",
+          "hasDefinedTerm": [{"@type": "DefinedTerm", "name": r["term"], "description": r["definition"],
+                              "url": f"{site_url}{base}#{r['id']}"} for r in terms]}
     return (f'<div class="latest-block" data-cat="new"><div class="cat-head"><h2>用語集</h2>'
             f'<span class="cnt">{len(terms)}語</span></div>'
             '<p class="hub-lead">記事の中で定義した用語を1か所に集めています。定義は各記事に書いたものと同じで、'
             '出典の記事から詳しい使い方へ進めます。</p>'
-            f'<ul class="hub-list">{lis}</ul></div>'
+            f'<nav class="gl-toc" aria-label="用語の目次">{toc}</nav>{"".join(secs)}</div>'
             '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
 
+def redirects(terms, base="/glossary/"):
+    """旧URL（1語1ページ）から、まとめたページの該当箇所への転送"""
+    return [f"{base}{r['id']}/  {base}#{r['id']}  301" for r in terms]
+
+
 def link_terms(content, terms_by_term, base="/glossary/", self_slug=""):
-    """記事本文の定義ブロックの用語を用語集へリンクする（内部リンクが機械で増える）"""
+    """記事本文の定義ブロックの用語を用語集の該当箇所へリンクする（内部リンクが機械で増える）"""
     def repl(m):
         term = re.sub(r"(とは|の定義)$", "", _plain(m.group(1))).strip()
         rec = terms_by_term.get(term)
         if not rec or rec["slug"] == self_slug:
             return m.group(0)
-        return (f'<div class="definition-box"><span class="term"><a href="{base}{rec["id"]}/">'
+        return (f'<div class="definition-box"><span class="term"><a href="{base}#{rec["id"]}">'
                 f'{m.group(1)}</a></span>{m.group(2)}</div>')
     return BOX.sub(repl, content)

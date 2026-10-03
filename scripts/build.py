@@ -1712,13 +1712,15 @@ def build_extra_pages(all_metas):
     terms = GL.collect(sid, only)
     if len(terms) >= 10:
         rel_all = GL.related_all(terms)
-        for r in terms:
-            page(f"glossary/{r['id']}", GL.term_html(r, f"{SITE_URL}/{r['category']}/{r['slug']}/",
-                                                     rel=rel_all[r["id"]]),
-                 f"{r['term']}とは", f"{SITE_URL}/glossary/{r['id']}/", f"{r['term']}とは、{r['definition']}")
-        page("glossary", GL.index_html(terms), "用語集", f"{SITE_URL}/glossary/",
-             f"{SITE_NAME}の記事で定義した用語{len(terms)}語を1か所に集めた用語集です。")
-        print(f"用語集: {len(terms)}語")
+        # 1語1ページはやめ、1ページにまとめる（旧URLは _redirects で該当箇所へ送る）
+        page("glossary", GL.index_html(terms, site_url=SITE_URL, rel_all=rel_all), "用語集", f"{SITE_URL}/glossary/",
+             f"{SITE_NAME}の記事で定義した用語{len(terms)}語の意味を、1ページにまとめた用語集です。")
+        rd = SITE / "_redirects"
+        cur = rd.read_text(encoding="utf-8") if rd.is_file() else ""
+        cur = re.sub(r"\n# 用語集（1語1ページ → 1ページ）.*?# /用語集\n", "\n", cur, flags=re.S)
+        rd.write_text(cur.rstrip("\n") + "\n\n# 用語集（1語1ページ → 1ページ）。旧URLはまとめたページの該当箇所へ\n"
+                      + "\n".join(GL.redirects(terms)) + "\n# /用語集\n", encoding="utf-8", newline="\n")
+        print(f"用語集: {len(terms)}語（1ページ）")
     # 比較表
     cats = CP.collect(sid, only)
     made = []

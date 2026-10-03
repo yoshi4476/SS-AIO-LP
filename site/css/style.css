@@ -1770,3 +1770,11 @@ section.tool-hero ~ section .quiz-panel { margin-left: 0; }
 @media (max-width: 560px) { .rb-bars li { grid-template-columns: minmax(0, 1fr) 3.4em; } .rb-bar { grid-column: 1 / -1; order: 3; } }
 
 .social-links a[data-net="x"]:hover, .social-links a[data-net="x"]:focus-visible { background: #000; }
+
+/* 用語集を1ページに（2026-10-03） */
+.gl-toc { display: flex; flex-wrap: wrap; gap: .35rem .5rem; margin: 1.2rem 0 1.6rem; padding: 1rem; background: var(--bg-alt); border-radius: 14px; }
+.gl-toc a { font-size: .82rem; padding: .25em .7em; border-radius: 999px; background: #fff; border: 1px solid var(--line); text-decoration: none; color: var(--blue-deep); }
+.gl-term { padding: 1.4rem 0; border-top: 1px solid var(--line); scroll-margin-top: 96px; }
+.gl-term h3 { margin: 0 0 .7rem; font-size: 1.12rem; }
+.gl-term .definition-box { margin: 0 0 .5rem; }
+.gl-rel { font-size: .84rem; color: var(--muted); margin: .4rem 0 0; }
