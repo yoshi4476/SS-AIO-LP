@@ -207,8 +207,8 @@ llms.txt と sitemap に載り、同じカテゴリの記事末に「自社の�
 
 | 媒体 | つなぎ方（先方のアカウントで1回だけ許可） | CI の鍵 |
 |:--|:--|:--|
-| YouTube | `python scripts/youtube_upload.py --auth --site <id>` → `youtube-token-<id>.json` | Secret `YOUTUBE_TOKENS_JSON`（`{"<id>": {...}}`） |
-| Facebook・Instagram・Threads・LinkedIn | `python scripts/social_connect.py --site <id> --facebook` など | Secret `SOCIAL_TOKENS_JSON` の `<id>` |
+| YouTube | `python scripts/youtube_upload.py --auth --site <id>` → `youtube-token-<id>.json` | Secret `YOUTUBE_TOKENS_JSON`（`{"<id>": {...}}`。許可した時点で自動で登録される） |
+| Facebook・Instagram・Threads・LinkedIn | `python scripts/social_connect.py --site <id> --facebook` など | Secret `SOCIAL_TOKENS_JSON` の `<id>`（つないだ時点で自動で登録される） |
 
 つなぐまで、その社の記事は動画を作らず、SNS にも投稿しない。動画の名乗りと締めは `sites/<id>.json` の社名とドメインになる。
 

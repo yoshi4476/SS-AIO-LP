@@ -95,7 +95,14 @@ def auth(site=None):
     tp.write_text(c.to_json(), encoding="utf-8")
     print(f"  {tp.name} を作りました（以降はブラウザ不要）")
     if is_client(site):
-        print(f"  CI で使うには GitHub Secrets の YOUTUBE_TOKENS_JSON に \"{site}\" の鍵として足してください")
+        # 全クライアントの鍵を1つにまとめて GitHub に入れる（SNS の SOCIAL_TOKENS_JSON と同じ。手で登録させない）
+        import subprocess
+        allk = {p.stem.replace("youtube-token-", ""): json.loads(p.read_text(encoding="utf-8-sig"))
+                for p in ROOT.glob("youtube-token-*.json")}
+        r = subprocess.run(["gh", "secret", "set", "YOUTUBE_TOKENS_JSON"], cwd=ROOT,
+                           input=json.dumps(allk), text=True, encoding="utf-8", capture_output=True)
+        print(f"  GitHub の YOUTUBE_TOKENS_JSON に登録しました（{len(allk)}社）" if r.returncode == 0 else
+              f"  GitHub に登録できませんでした（gh auth login を確認）: {r.stderr.strip()[:120]}")
     try:
         from googleapiclient.discovery import build
         yt = build("youtube", "v3", credentials=c, cache_discovery=False)
