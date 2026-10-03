@@ -262,3 +262,30 @@
 .lx-hero::before { z-index: 1; }
 .lx-hero > .lx-wrap { z-index: 2; }
 @media (prefers-reduced-motion: reduce) { .lx-hero-video { display: none; } }
+
+/* トップのヒーロー（2026-10-03）: 入力欄と14項目の計測盤を、最初の画面にすべて収める。
+   URL入力とボタンを横一列に、計測盤の行を詰める。LP（/lp/）の形は変えない */
+.lx-hero--top { padding: clamp(1.2rem, 3vh, 2.2rem) 0 clamp(1.2rem, 3vh, 2rem); }
+.lx-hero--top .lx-hero-grid { align-items: center; gap: clamp(1.4rem, 3vw, 3rem); }
+.lx-hero--top .lx-kicker { margin-bottom: .7rem; }
+.lx-hero--top .lx-kicker li { font-size: .74rem; padding: .28em .85em; }
+.lx-hero--top .lx-h1 { font-size: clamp(1.8rem, 3.3vw, 2.7rem); margin-bottom: .6rem; line-height: 1.24; }
+.lx-hero--top .lx-lead { font-size: clamp(.92rem, 1.25vw, 1rem); line-height: 1.75; margin-bottom: 1rem; }
+.lx-hero--top .lx-form { grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .55rem .6rem; padding: 1rem 1.1rem; }
+.lx-hero--top .lx-form label { gap: .25rem; }
+.lx-hero--top .lx-form input[type=url] { padding: .72em .9em; }
+.lx-hero--top .lx-go { padding: .82em 1.3em; font-size: 1rem; white-space: nowrap; }
+.lx-hero--top .lx-micro { grid-column: 1 / -1; }
+.lx-hero--top .lx-alt { margin-top: .7rem; font-size: .82rem; }
+.lx-hero--top .lx-ind { margin-top: .55rem; gap: .35rem; font-size: .8rem; }
+.lx-hero--top .lx-ind a { min-height: 32px; padding: .2em .8em; font-size: .78rem; border-width: 1px; }
+.lx-hero--top .lx-console { padding: .9rem 1.1rem; }
+.lx-hero--top .lx-console-head { margin-bottom: .45rem; }
+.lx-hero--top .lx-group { margin-bottom: .4rem; }
+.lx-hero--top .lx-group h3 { margin-bottom: .15rem; }
+.lx-hero--top .lx-group ul { gap: .05rem; }
+.lx-hero--top .lx-item { font-size: .8rem; line-height: 1.35; padding: .2em .5em; }
+.lx-hero--top .lx-console-foot { margin-top: .45rem; }
+@media (max-width: 560px) {
+  .lx-hero--top .lx-form { grid-template-columns: 1fr; }
+}
