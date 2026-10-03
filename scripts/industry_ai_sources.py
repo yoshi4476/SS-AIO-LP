@@ -368,7 +368,8 @@ ENGINE_NOTE = {"ChatGPT": "gpt-4.1-mini＋Web検索", "Gemini": "Gemini Flash＋
 HUB_TO_RESEARCH = {"shika": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
                    "reform": "koumuten", "shigyou": "shigyou",
                    # research_extra.py で広げた業種（集計が無いうちは headline が None なので案内は出ない）
-                   "seikotsuin": "seikotsuin", "biyou": "biyou", "inshokuten": "inshoku", "btob": "saas"}
+                   "seikotsuin": "seikotsuin", "biyou": "biyou", "inshokuten": "inshoku", "btob": "saas",
+                   "kensetsu": "kensetsu", "shukuhaku": "hotel"}
 # 調査 → チェックリスト（checklist_make.py の業種）
 RESEARCH_TO_CHECKLIST = {"dental": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
                          "shigyou": "shigyou"}

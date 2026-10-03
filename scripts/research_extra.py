@@ -98,9 +98,10 @@ def draft():
             continue
         prompt = (f"業種「{name}」（事業者は{owner}、聞く人は{asker}。よく聞かれる話題の例: {hint}）について、"
                   f"お客様がAIや検索で聞きそうな質問の組を作ります。\n" + SCHEMA_NOTE)
+        fb = ""
         for _ in range(3):
             with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
-                r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt, cwd=tmp,
+                r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt + fb, cwd=tmp,
                                    capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
             m = re.search(r"\{.*\}", r.stdout or "", re.S)
             try:
@@ -116,6 +117,9 @@ def draft():
                 print(f"OK {slug} {name}", flush=True)
                 break
             print(f"やり直し {slug}: {why}", flush=True)
+            # 同じ指示を繰り返すと同じ所で落ちる（2026-10-03: 「30代」「50人規模」で5業種が3回とも落ちた）
+            fb = (f"\n\n前回の出力は「{why}」で使えませんでした。年齢・人数・金額・回数などの数字（2桁以上）を"
+                  "質問に入れず、「若い世代」「少人数」のような言葉に置き換えて、全体を出し直してください。")
         else:
             print(f"NG {slug}", flush=True)
 
