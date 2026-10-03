@@ -872,7 +872,6 @@
 {"at": "2026-09-28 13:54", "by": "auto_merge", "slug": "jigyou-saikouchiku-shukuhakugyou-jirei", "kind": "merge-scaled", "loser": "jigyou-saikouchiku-nougyou-jirei", "ok": true, "note": "統合しました（jigyou-saikouchiku-nougyou-jirei → jigyou-saikouchiku-shukuhakugyou-jirei、本文 5482 → 8504字）"}
 {"at": "2026-09-28 13:59", "by": "auto_merge", "slug": "inshokuten-ai-hojokin-taisho-youken", "kind": "merge-scaled", "loser": "doubutsu-byouin-ai-hojokin-taisho-youken", "ok": true, "note": "統合しました（doubutsu-byouin-ai-hojokin-taisho-youken → inshokuten-ai-hojokin-taisho-youken、本文 5809 → 7805字）"}
 {"at": "2026-09-28 14:04", "by": "auto_merge", "slug": "inshokuten-ai-hojokin-taisho-youken", "kind": "merge-scaled", "loser": "kurininguten-ai-hojokin-taisho-youken", "ok": false, "note": "警告が増えました（0 → 1）"}
-<<<<<<< Updated upstream
 {"at": "2026-09-28 16:10", "by": "link_boost", "slug": "clinic-kenchiku-jirei", "kind": "link", "ok": true, "note": "seikotsuin-shukyaku-event から内部リンクを1本"}
 {"at": "2026-09-28 16:10", "by": "link_boost", "slug": "clinic-kenchiku-jirei", "kind": "link", "ok": true, "note": "iryou-koukoku-guideline-web から内部リンクを1本"}
 {"at": "2026-09-28 16:10", "by": "link_boost", "slug": "aio-seo-audit", "kind": "link", "ok": true, "note": "koumuten-seo-taisaku から内部リンクを1本"}
@@ -1231,12 +1230,10 @@
 {"at": "2026-09-28 17:05", "by": "fact_cite", "slug": "aio-taisaku-muryou-tool", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
 {"at": "2026-09-28 17:05", "by": "fact_cite", "slug": "ai-shukyaku-guide", "kind": "cite", "ok": true, "note": "実測の参考として、2023年5月から2026年9月までにSEO運用を74件、2026年5月からAIO運用を15件ご契約い"}
 {"at": "2026-09-28 17:05", "by": "fact_cite", "slug": "aio-donyu-jirei", "kind": "cite", "ok": true, "note": "実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20"}
-=======
 {"when": "2026-09-28T20:30:06.244182", "by": "auto_review", "slug": "(25記事)", "what": "言い回し17件を振り直し・67件を削除"}
 {"when": "2026-09-28T20:30:35.919823", "by": "auto_review", "slug": "(11記事)", "what": "言い回し7件を振り直し・22件を削除"}
 {"when": "2026-09-28T20:31:06.178171", "by": "auto_review", "slug": "(6記事)", "what": "言い回し2件を振り直し・8件を削除"}
 {"when": "2026-09-28T20:31:24.578415", "by": "auto_review", "slug": "(3記事)", "what": "言い回し2件を振り直し・1件を削除"}
->>>>>>> Stashed changes
 {"when": "2026-09-28T20:37:53.149222", "by": "auto_review", "slug": "(21記事)", "what": "言い回し3件を振り直し・31件を削除"}
 {"when": "2026-09-28T20:40:25.145956", "by": "auto_review", "slug": "(6記事)", "what": "言い回し2件を振り直し・6件を削除"}
 {"when": "2026-09-28T20:40:46.456526", "by": "auto_review", "slug": "(4記事)", "what": "言い回し1件を振り直し・3件を削除"}
@@ -1496,3 +1493,49 @@
 {"when": "2026-09-28T22:22:41.870128", "by": "auto_review", "slug": "(15記事)", "what": "言い回し8件を振り直し・3件を削除"}
 {"when": "2026-09-29T21:58:29.256826", "by": "auto_review", "slug": "(22記事)", "what": "言い回し6件を振り直し・23件を削除"}
 {"when": "2026-09-29T21:58:48.614530", "by": "auto_review", "slug": "(3記事)", "what": "言い回し3件を振り直し・0件を削除"}
+{"at": "2026-10-02 08:11", "by": "link_boost", "slug": "llmo-tenpo-shukyaku", "kind": "link_rescue", "ok": true, "note": "shigyou-seo-taisaku から内部リンクを1本"}
+{"at": "2026-10-02 08:11", "by": "link_boost", "slug": "koumuten-sns-shukyaku", "kind": "link_rescue", "ok": true, "note": "shigyou-seo-taisaku から内部リンクを1本"}
+{"at": "2026-10-02 08:11", "by": "link_boost", "slug": "aio-yarikata", "kind": "link", "ok": true, "note": "aio-checker から内部リンクを1本"}
+{"at": "2026-10-02 08:11", "by": "link_boost", "slug": "koumuten-chumon-jutaku-aio", "kind": "link", "ok": true, "note": "shigyou-seo-taisaku から内部リンクを1本"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "zeirishi-houjin-aio", "kind": "cite", "ok": true, "note": "実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-seo-audit", "kind": "cite", "ok": true, "note": "実測の参考として、2023年5月から2026年9月までにSEO運用を74件、2026年5月からAIO運用を15件ご契約い"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-seo-meo-chigai", "kind": "cite", "ok": true, "note": "実測の参考として、2023年5月から2026年9月までにSEO運用を74件、2026年5月からAIO運用を15件ご契約い"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-seo-taisaku", "kind": "cite", "ok": true, "note": "実測の参考として、2023年5月から2026年9月までにSEO運用を74件、2026年5月からAIO運用を15件ご契約い"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-taisaku-ai-inyou-sareru", "kind": "cite", "ok": true, "note": "実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-taisaku-ai-kensaku", "kind": "cite", "ok": true, "note": "実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-to-seo-no-chigai", "kind": "cite", "ok": true, "note": "実測の参考として、2023年5月から2026年9月までにSEO運用を74件、2026年5月からAIO運用を15件ご契約い"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "clinic-ai-kensaku-taisaku", "kind": "cite", "ok": true, "note": "実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "clinic-shukyaku-sekkeizu", "kind": "cite", "ok": true, "note": "実測の参考として、2023年5月から2026年9月までにSEO運用を74件、2026年5月からAIO運用を15件ご契約い"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "llmo-taisaku-hoho", "kind": "cite", "ok": true, "note": "実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-checker", "kind": "cite", "ok": true, "note": "実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-erabareru-kiji-kakikata", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-taisaku-chuiten", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-taisaku-donyu-hoho", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-taisaku-faq", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-taisaku-hyouji-sarenai", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "aio-taisaku-jibunde", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "inshokuten-meo-taisaku", "kind": "cite", "ok": true, "note": "実測の参考として、MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました（出典: 自社実績）。"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "llmo-tenpo-shukyaku", "kind": "cite", "ok": true, "note": "実測の参考として、MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました（出典: 自社実績）。"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "whitepaper-tsukurikata", "kind": "cite", "ok": true, "note": "実測の参考として、当社は3つの自社メディアを運営し、記事からの問い合わせ導線を実際に運用しています（出典: 自社の運用）"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "biyou-hifuka-meo", "kind": "cite", "ok": true, "note": "実測の参考として、MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました（出典: 自社実績）。"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "biyoushitsu-meo-taisaku", "kind": "cite", "ok": true, "note": "実測の参考として、MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました（出典: 自社実績）。"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "btob-cvr-kaizen", "kind": "cite", "ok": true, "note": "実測の参考として、当社は3つの自社メディアを運営し、記事からの問い合わせ導線を実際に運用しています（出典: 自社の運用）"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "btob-lead-kakutoku-hoho", "kind": "cite", "ok": true, "note": "実測の参考として、当社は3つの自社メディアを運営し、記事からの問い合わせ導線を実際に運用しています（出典: 自社の運用）"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "clinic-meo-taisaku", "kind": "cite", "ok": true, "note": "実測の参考として、MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました（出典: 自社実績）。"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "fudousan-meo-taisaku", "kind": "cite", "ok": true, "note": "実測の参考として、MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました（出典: 自社実績）。"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "saas-shimei-kensaku-fuyashikata", "kind": "cite", "ok": true, "note": "実測の参考として、当社は3つの自社メディアを運営し、記事からの問い合わせ導線を実際に運用しています（出典: 自社の運用）"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "backoffice-bpo-toha", "kind": "cite", "ok": true, "note": "実測の参考として、2023年1月から2026年8月までに、経理BPOを10社以上へ導入しています（出典: 自社の支援実績"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "keiri-bpo-donyu-nagare", "kind": "cite", "ok": true, "note": "実測の参考として、2023年1月から2026年8月までに、経理BPOを10社以上へ導入しています（出典: 自社の支援実績"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "getsuji-kessan-bpo-keiyakumae", "kind": "cite", "ok": true, "note": "実測の参考として、2023年1月から2026年8月までに、経理BPOを10社以上へ導入しています（出典: 自社の支援実績"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "kanri-kaikei-jikyu-souba", "kind": "cite", "ok": true, "note": "実測の参考として、2023年1月から2026年8月までに、経理BPOを10社以上へ導入しています（出典: 自社の支援実績"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "keihi-seisan-kichodaiko-bpo-chigai", "kind": "cite", "ok": true, "note": "実測の参考として、2023年1月から2026年8月までに、経理BPOを10社以上へ導入しています（出典: 自社の支援実績"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "keiri-bpo-erabikata", "kind": "cite", "ok": true, "note": "実測の参考として、2023年1月から2026年8月までに、経理BPOを10社以上へ導入しています（出典: 自社の支援実績"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "keiri-marunage-dekiru-hani", "kind": "cite", "ok": true, "note": "実測の参考として、経理BPOを導入した10社の集計では、月次決算が締まるまでの日数が中央値で15日から7日に短縮しました"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "keiri-gyomu-itaku", "kind": "cite", "ok": true, "note": "実測の参考として、2023年1月から2026年8月までに契約した経理BPO10社のうち、2年以内に解約したのは1社です（"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "ai-donyu-hiyou-soba", "kind": "cite", "ok": true, "note": "実測の参考として、2020年3月の創業から2026年9月までに、のべ50社以上の導入を支援しました（出典: 自社実績）。"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "ai-hojokin-ai-katsuyo-jirei", "kind": "cite", "ok": true, "note": "実測の参考として、2025年4月〜2026年3月に申請を支援した30社のうち25社が採択されました（採択率83.3%）（"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "ai-hojokin-shinsei-shippai-yokuaru", "kind": "cite", "ok": true, "note": "実測の参考として、2025年4月〜2026年3月に申請を支援した30社のうち25社が採択されました（採択率83.3%）（"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "ai-hojokin-shinsei-yarikata", "kind": "cite", "ok": true, "note": "実測の参考として、2025年4月〜2026年3月に申請を支援した30社のうち25社が採択されました（採択率83.3%）（"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "gakushujuku-ai-hojokin-shinsei-susumekata", "kind": "cite", "ok": true, "note": "実測の参考として、2025年4月〜2026年3月に申請を支援した30社のうち25社が採択されました（採択率83.3%）（"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "inshokuten-ai-hojokin-shinsei-susumekata", "kind": "cite", "ok": true, "note": "実測の参考として、2025年4月〜2026年3月に申請を支援した30社のうち25社が採択されました（採択率83.3%）（"}
+{"at": "2026-10-03 16:44", "by": "fact_cite", "slug": "jizokuka-hojokin-kojinjigyonushi-saitakuritsu", "kind": "cite", "ok": true, "note": "実測の参考として、2025年4月〜2026年3月に申請を支援した30社のうち25社が採択されました（採択率83.3%）（"}
