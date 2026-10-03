@@ -42,7 +42,8 @@ def creds():
     from google.auth.transport.requests import Request
     if not TOKEN.is_file():
         return None
-    c = Credentials.from_authorized_user_file(str(TOKEN), SCOPES)
+    # BOM 付きで保存された鍵でも読めるように、ファイル名ではなく中身で渡す（BOM で Google の認証が全滅した前例がある）
+    c = Credentials.from_authorized_user_info(json.loads(TOKEN.read_text(encoding="utf-8-sig")), SCOPES)
     if c and c.expired and c.refresh_token:
         c.refresh(Request())
         TOKEN.write_text(c.to_json(), encoding="utf-8")
@@ -126,6 +127,29 @@ def tools_block(a):
     return "\n".join(lines) + "\n\n"
 
 
+def full_description(slug, short=False, chapters=None):
+    """概要欄の完成形。アップロードと書き直しの両方がここを通る（別々に組むと片方だけ古くなる）。
+    リンクは畳まれた状態でも見える先頭の行に置く。要約の下にあると「もっと見る」を押さないと出てこない（2026-10-03）"""
+    desc, title, tags = describe(slug)
+    if not desc:
+        return desc, title, tags
+    if short:
+        import duo_video as DV
+        br = DV.brand(DV.article(slug))
+        head = [f"詳しくは「{br['search']}」で検索してください。"]
+        lp = ROOT / "data" / "videos.json"
+        long_id = (json.loads(lp.read_text(encoding="utf-8")).get(slug) or {}).get("youtube") if lp.is_file() else None
+        if long_id:
+            # ショートを見た人を本編へ送る（ショートの説明欄は押せる場合がある。押せなくても題で探せる）
+            head.append(f"▶ 本編の動画（くわしい解説）\nhttps://youtu.be/{long_id}")
+        desc = "\n".join(head) + "\n\n" + desc
+    ch = Path(chapters) if chapters else None
+    if not short and ch and ch.is_file() and ch.read_text(encoding="utf-8").strip():
+        # チャプター（<動画>.chapters.txt）。説明欄の時刻がそのまま章になる
+        desc = desc.rstrip() + "\n\n▼ チャプター\n" + ch.read_text(encoding="utf-8").strip() + "\n"
+    return desc[:4900], title, tags
+
+
 def update_descriptions():
     """すでに上げた動画の説明欄を、いまの describe() で書き直す（ショートは題に #Shorts を残す）"""
     import article_videos as AV
@@ -137,17 +161,17 @@ def update_descriptions():
     led = AV.load()
     n = 0
     for slug, v in led.items():
-        for vid in [v.get("youtube"), (v.get("short") or {}).get("youtube")]:
+        for vid, short in ((v.get("youtube"), False), ((v.get("short") or {}).get("youtube"), True)):
             if not vid:
                 continue
-            desc, _, _ = describe(slug)
+            desc, _, _ = full_description(slug, short=short, chapters=ROOT / "automation" / "video" / f"{slug}.chapters.txt")
             if not desc:
                 continue
             cur = yt.videos().list(part="snippet", id=vid).execute().get("items", [])
             if not cur:
                 continue
             sn = cur[0]["snippet"]
-            if "/tools/ai-check/" in sn.get("description", ""):
+            if sn.get("description", "").strip() == desc.strip():
                 continue
             body = {"id": vid, "snippet": {"title": sn["title"], "categoryId": sn.get("categoryId", "27"),
                                            "description": desc[:4900], "tags": sn.get("tags", [])}}
@@ -176,10 +200,10 @@ def describe(slug):
                     f'セブンセンシズ株式会社\nhttps://ai.7senses.co.jp/'), d["title"], []
         return "", slug, []
     sid, cfg = SP.site_of(a["category"])
-    pre = (cfg.get("url_prefix") or f'/{a["category"]}').strip("/")
-    url = f'https://{cfg.get("domain", "")}/{pre}/{slug}/'
+    import sites as S
+    url = S.article_url(cfg, {"slug": slug, "category": a["category"]})
     body = "\n".join(f"・{x}" for x in a["leads"][:5])
-    desc = (f'{a["desc"]}\n\n▼ 記事はこちら\n{url}\n\n'
+    desc = (f'▼ 記事はこちら\n{url}\n\n{a["desc"]}\n\n'
             f'{body}\n\n{tools_block(a) if sid == "ai-lab" else ""}セブンセンシズ株式会社\nhttps://{cfg.get("domain", "")}/')
     tags = [t for t in (cfg.get("x_tags") or [])]
     return desc, a["title"], tags
@@ -255,19 +279,11 @@ def upload(mp4, slug, public=False, quiet=False, short_title=""):
     # そのまま表示される（2026-10-03: ショートはすべて字幕なしで上がっていた）
     if not Path(mp4).with_suffix(".srt").is_file():
         raise RuntimeError(f"字幕ファイル {Path(mp4).with_suffix('.srt').name} がありません。上げません")
-    desc, title, tags = describe(slug)
+    desc, title, tags = full_description(slug, short=bool(short_title), chapters=Path(mp4).with_suffix(".chapters.txt"))
     if short_title:
-        # ショートの説明欄のリンクは押せない前提。検索で来てもらう一文を先に置く
-        import duo_video as DV
-        br = DV.brand(DV.article(slug))
-        desc = f"詳しくは「{br['search']}」で検索してください。\n\n" + desc
         title = short_title[:88] + " #Shorts"
     # タイトルは100字まで。超えると API が弾く
     title = (title or slug)[:100]
-    # チャプター（video_make が <動画>.chapters.txt に書く）。説明欄の時刻がそのまま章になる
-    ch = Path(mp4).with_suffix(".chapters.txt")
-    if ch.is_file() and ch.read_text(encoding="utf-8").strip():
-        desc = desc.rstrip() + "\n\n▼ チャプター\n" + ch.read_text(encoding="utf-8").strip() + "\n"
     body = {"snippet": {"title": title, "description": desc[:4900],
                         "tags": tags[:10], "categoryId": CATEGORY_HOWTO,
                         "defaultLanguage": "ja", "defaultAudioLanguage": "ja"},

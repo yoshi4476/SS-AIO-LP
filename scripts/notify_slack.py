@@ -94,7 +94,8 @@ def main():
     if slack:
         req = urllib.request.Request(
             slack, data=json.dumps({"text": text}).encode("utf-8"),
-            headers={"Content-Type": "application/json"})
+            headers={"Content-Type": "application/json",
+                     "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"})
         with urllib.request.urlopen(req) as r:
             print("Slack通知:", r.status)
         return

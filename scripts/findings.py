@@ -26,6 +26,12 @@ TIMEOUT = 900
 # 読むだけの検査だけを入れる。書き換える工程を入れると週次で二重に走る。
 # 明細の書き方が検査ごとに違うため、拾う形をここで明示する
 CHECKS = [
+    # 過去の誤りの棚卸し（2026-10-03・85件）から作った本番の確認。門（tests/gates_history_*.py）では見られない配信先・外部の状態
+    ("過去の誤りの再発（配信・画像・転送・robots・llms.txt）", "history_checks_a.py", re.compile(r"^要対応:|^\s+×")),
+    ("過去の誤りの再発（動画の説明欄・取り下げた旧URL）", "history_checks_b.py", re.compile(r"^要対応:|^\s+×")),
+    ("過去の誤りの再発（レポートの数字・公開本数の照合）", "history_checks_c.py", re.compile(r"^要対応:|^\s+×")),
+    ("過去の誤りの再発（鍵の配布・外部APIの生死・配信先の依存）", "history_checks_d.py", re.compile(r"^要対応:|^\s+×")),
+    ("YouTube の公開動画（重複・字幕なし・台帳漏れ）", "youtube_upload.py --audit", re.compile(r"^\s{2}(自前の字幕|台帳に無い|同じ題)")),
     ("AIO基盤（robots・llms.txt・構造化データ）", "aio_check.py",
      re.compile(r"未記載:|不足:|取得できません|記事が載っていません")),
     ("量産の指紋（同型記事・定型文・長さの偏り）", "scaled_guard.py",
@@ -116,6 +122,8 @@ CHECKS = [
 # 「問題あり」を表す印。検査ごとに語尾が違うため、値の側で見る
 BAD = re.compile(r"(?:[A-Z_]+_OK=no|LIVE_CHECK=ng|KW_GATE=block|RAKKO_MONTH=over)")
 GOOD = re.compile(r"(?:[A-Z_]+_OK=yes|LIVE_CHECK=ok|KW_GATE=ok|RAKKO_MONTH=ok)")
+# 取れずに確かめられなかった印。終了コード0でも「問題なし」に数えない
+UNKNOWN = re.compile(r"[A-Z_]+_OK=unknown|GROWTH_DROP=unknown")
 
 
 def run(script):
@@ -144,6 +152,8 @@ def judge(text, rc):
     """
     if BAD.search(text):
         return "要対応"
+    if UNKNOWN.search(text):
+        return "動かせず"
     if GOOD.search(text):
         return "問題なし"
     if rc in (124, 127):

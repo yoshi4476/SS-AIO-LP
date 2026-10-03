@@ -9,7 +9,13 @@
  *   LEAD_FROM_EMAIL     … 送信元（ドメイン認証済みアドレス）
  */
 export async function onRequestPost({ request, env }) {
-  const fd = await request.formData();
+  // フォーム以外の本文で例外になると Cloudflare の生の500が返る（2026-09-02 に lead.js で起きたのと同じ穴）
+  let fd;
+  try {
+    fd = await request.formData();
+  } catch (_) {
+    return new Response("フォーム形式で送信してください。", { status: 400 });
+  }
   const email = String(fd.get("email") || "").slice(0, 320).trim();
   const gotcha = String(fd.get("_gotcha") || "");
 

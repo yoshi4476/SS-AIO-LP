@@ -235,6 +235,20 @@ def rewrite(slug, paras, head):
     return edits
 
 
+_LINK_TARGET = None
+
+
+def link_slugs(text):
+    """本文が張っている内部リンク先の slug の集合。相対・自ドメインの絶対URL・末尾スラッシュ無しを同じ1本と数える。
+    相対だけを数えて、絶対URLで書く corporate・subsidy を「リンク0本」と誤判定した（2026-08-17 / 09-15）"""
+    global _LINK_TARGET
+    if _LINK_TARGET is None:
+        import sites as S
+        doms = "|".join(re.escape(c["domain"]) for c in S.load_all().values())
+        _LINK_TARGET = re.compile(rf"\]\((?:https?://(?:{doms}))?/(?:[^)\s#?]*/)?([a-z0-9-]+)/?(?:[?#][^)\s]*)?\)")
+    return set(_LINK_TARGET.findall(text))
+
+
 def inbound_count(paths=None):
     """記事ごとの被リンク本数。外してよいかの判断に使う"""
     texts = {p.stem: io.open(p, encoding="utf-8-sig").read()

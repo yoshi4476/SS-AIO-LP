@@ -209,6 +209,8 @@ BRAND_TERMS = ("セブンセンシズ", "セブンセンシス", "7senses", "sev
 
 def is_brand_query(low):
     """指名検索。既に上位表示されており、記事を書く対象ではない"""
+    # 呼び出し側が小文字にし忘れても漏らさない。大文字の「G-RAN」が素通りした形の誤り（2026-08-26）を繰り返さない
+    low = str(low).casefold()
     return any(t in low for t in BRAND_TERMS)
 
 

@@ -201,6 +201,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
           CLAUDE_CITE_API_KEY: ${{ secrets.CLAUDE_CITE_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           # Claude は鍵が無ければサブスク（Claude Code）で聞く
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |

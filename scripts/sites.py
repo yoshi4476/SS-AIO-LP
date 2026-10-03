@@ -33,6 +33,13 @@ def primary():
     return next(iter(all_), "")
 
 
+def own_ids():
+    """運用会社が自分で運営しているサイトのID（受託のクライアントは data/clients/<id>/ がある）。
+    ('ai-lab', 'corporate', 'subsidy') と直書きすると、移植先では存在しないサイトを回して
+    毎朝0のまま空振りした（2026-08-24）。クライアントを混ぜると自社の数字が他社の記事に出る"""
+    return [sid for sid in load_all() if not (ROOT / "data" / "clients" / sid).is_dir()]
+
+
 def load(site_id):
     all_ = load_all()
     if site_id not in all_:
@@ -43,9 +50,10 @@ def load(site_id):
 def article_url(cfg, meta):
     """公開後のURLを組み立てる"""
     prefix = cfg.get("url_prefix")
-    if prefix:
-        return f"https://{cfg['domain']}{prefix}/{meta['slug']}/"
-    return f"https://{cfg['domain']}/{meta['category']}/{meta['slug']}/"
+    url = (f"https://{cfg['domain']}{prefix}/{meta['slug']}/" if prefix
+           else f"https://{cfg['domain']}/{meta['category']}/{meta['slug']}/")
+    # Next.js の配信先（コーポレート）は末尾スラッシュ無しが正。付けると毎回308の転送が1回挟まる（2026-10-03）
+    return url if cfg.get("trailing_slash", True) else url.rstrip("/")
 
 
 def category_name(cfg, slug):

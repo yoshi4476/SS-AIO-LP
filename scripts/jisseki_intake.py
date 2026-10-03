@@ -25,12 +25,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+import sites as S  # noqa: E402
 IN = ROOT / "intake"
 SHEET = IN / "実績記入シート.xlsx"
 VOICES = ROOT / "data" / "voices.json"
 ABOUT = ROOT / "site" / "about" / "index.html"
 LP = ROOT / "site" / "lp" / "index.html"
-SITES = ("ai-lab", "corporate", "subsidy")
 START, END = "<!-- voices:start -->", "<!-- voices:end -->"
 
 RULES = [
@@ -195,7 +195,7 @@ def review(got):
                 claim = f"{s}〜{e}に契約した{n}社のうち{m}社が継続しています"
                 warn.append(f"継続率: 母数が{n}社のため割合にせず実数で載せます")
             facts.append({"id": f"keizoku-{today.replace('-', '')}",
-                          "sites": _sites(k.get("掲載サイト"), SITES),
+                          "sites": _sites(k.get("掲載サイト"), S.own_ids()),
                           "topic": ["継続率", "支援実績", "顧客満足"], "claim": claim,
                           "source": "自社の契約実績", "as_of": today, "denominator": n,
                           "period": f"{s}〜{e}", "verifiable": True, "_pending": "継続率"})

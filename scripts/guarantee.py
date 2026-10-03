@@ -75,10 +75,11 @@ def article_checks(arts):
 
 
 def inbound_counts(arts):
+    from auto_review import link_slugs
     n = defaultdict(int)
     for a in arts.values():
-        for u in set(re.findall(r"\]\((/[^)]+/)\)", a["body"])):
-            n[u.rstrip("/").split("/")[-1]] += 1
+        for s in link_slugs(a["body"]):
+            n[s] += 1
     return n
 
 
@@ -174,7 +175,8 @@ def coverage_gaps():
     except Exception:
         return []
     out = []
-    for sid in ("ai-lab", "corporate", "subsidy"):
+    import sites as _S
+    for sid in _S.own_ids():
         try:
             cells, inds, cs, arts, _ = CV.matrix(sid)
         except Exception:

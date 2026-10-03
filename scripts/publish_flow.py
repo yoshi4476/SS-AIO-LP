@@ -60,10 +60,15 @@ def finish_approved(site_id, slug, push, since=None):
         raise SystemExit(f"{slug} は監修の記録が無いため、公開後の手順を行いません")
     if not publish.gate_ok(meta):
         raise SystemExit(f"{slug} は公開の基準（score・観点の足切り）を通っていません")
+    # main と同じく、build が出力しなかった記事を『公開済み』にしない（2026-09-25）
+    if cfg["type"] == "self-static" and not (ROOT / "site" / meta["category"] / slug / "index.html").is_file():
+        raise SystemExit(f"{slug} は build が出力していません（公開済みにしません）")
     url = sites_mod.article_url(cfg, meta)
-    # 二重に記録しない。記録は行を足すだけなので、2回呼ぶと公開本数を二重に数える
+    # 二重に記録しない。記録は行を足すだけなので、2回呼ぶと公開本数を二重に数える。
+    # 台帳を読めなかったのを「未記録」と読むと二重に足すため strict で読む（読めなければ止まる）
     if any(r.get("site") == site_id and str(r.get("url") or "").rstrip("/") == url.rstrip("/")
-           and str(r.get("status") or "").strip() == "公開済み" for r in hub_client.all_kw()):
+           and str(r.get("status") or "").strip() == "公開済み"
+           for r in (hub_client.all_kw(strict=True) if hub_client.enabled() else [])):
         print(f"{slug} は管制塔で既に公開済みです（何もしません）")
         return
     finish(site_id, slug, cfg, meta, body, push, since)

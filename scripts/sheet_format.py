@@ -47,9 +47,8 @@ def _sheet_id():
 
 def _api(sid):
     from google.auth.transport.requests import Request
-    from google.oauth2 import service_account
-    c = service_account.Credentials.from_service_account_file(
-        str(SA), scopes=["https://www.googleapis.com/auth/spreadsheets"])
+    import gcreds
+    c = gcreds.load(SA, ["https://www.googleapis.com/auth/spreadsheets"])
     c.refresh(Request())
     h = {"Authorization": "Bearer " + c.token}
     base = "https://sheets.googleapis.com/v4/spreadsheets/" + sid

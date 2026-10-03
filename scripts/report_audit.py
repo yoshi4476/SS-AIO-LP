@@ -180,6 +180,8 @@ def main():
     ap.add_argument("pdf")
     ap.add_argument("--month", required=True)
     ap.add_argument("--through")
+    # どの社の PDF かを渡す。値は monthly_report が import 時に sys.argv から読む（無いと AI集客ラボで照合する）
+    ap.add_argument("--site")
     a = ap.parse_args()
     try:
         ok, _ = audit(a.pdf, a.month, a.through)

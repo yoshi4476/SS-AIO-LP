@@ -86,10 +86,11 @@ def kw_band(kw):
 
 
 def inbound(arts):
+    from auto_review import link_slugs
     n = defaultdict(int)
     for a in arts.values():
-        for u in set(re.findall(r"\]\((/[^)]+/)\)", a["body"])):
-            n[u.rstrip("/").split("/")[-1]] += 1
+        for s in link_slugs(a["body"]):
+            n[s] += 1
     return n
 
 

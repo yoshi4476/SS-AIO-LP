@@ -88,13 +88,18 @@ def month_spent(month=None):
     total = 0.0
     if not SPEND_LOG.exists():
         return 0.0
+    rows = []
     for ln in SPEND_LOG.read_text(encoding="utf-8").splitlines():
         try:
-            r = json.loads(ln)
-            if str(r.get("at", "")).startswith(month):
-                total += float(r.get("credit") or 0)
+            rows.append(json.loads(ln))
         except Exception:
             continue
+    # 門の検査が偽の通信で書いた記録（/v1/x と同じ秒の記録）は数えない。
+    # 2026-10-03 まで検査が本物の台帳に書いており、手元で600行以上積まれていた
+    fake = {r.get("at") for r in rows if r.get("path") == "/v1/x"}
+    for r in rows:
+        if str(r.get("at", "")).startswith(month) and r.get("at") not in fake:
+            total += float(r.get("credit") or 0)
     return total
 
 

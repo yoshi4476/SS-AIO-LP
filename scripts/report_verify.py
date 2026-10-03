@@ -146,6 +146,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--month", required=True, help="YYYY-MM")
     ap.add_argument("--through", help="YYYY-MM-DD（当月の途中まで）")
+    # どの社を検算するか。値は monthly_report が import 時に sys.argv から読む（無いと AI集客ラボで検算する）
+    ap.add_argument("--site")
     a = ap.parse_args()
     try:
         check(a.month, a.through)

@@ -258,6 +258,9 @@ def check_growth(todo):
     except Exception as e:
         print(f"  GSCから取得できません（{str(e)[:60]}）")
         return
+    if growth_guard.LAST_UNKNOWN and not alerts:
+        todo.append(f"TODO: {', '.join(growth_guard.LAST_UNKNOWN)} の表示の推移を GSC から確かめられませんでした"
+                    "（下落なしではありません）")
     for sid, di, lost, worse, pages in alerts or []:
         todo.append(f"TODO: {sid} の表示が前の期間より{abs(di) * 100:.0f}%落ちた。"
                     f"消えた語{lost}語・順位が下がった語{worse}語。"

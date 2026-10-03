@@ -8,6 +8,7 @@
   "content_dir": "src/content/blog",
   "images_dir": "public/images/blog",
   "url_prefix": "/blog",
+  "trailing_slash": false,
   "ga4_property_id": "547741583",
   "kw_plan": "docs/kw-corporate.md",
   "theme": "経理BPO（経理アウトソーシング）とバックオフィス業務の効率化",

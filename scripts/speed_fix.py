@@ -200,7 +200,9 @@ def leftovers(base):
             bad.append((p, "日本語Webフォント"))
         if re.search(r'<link href="https://fonts\.googleapis\.com/[^"]*" rel="stylesheet">', t):
             bad.append((p, "描画を止めるフォントCSS"))
-        if '<script async src="https://www.googletagmanager.com/gtag/js' in t:
+        # 属性の順に頼らない。async が src の前にある形だけを見ると、src が先・async 無しの
+        # タグを見逃す（逆に「async は src の後」と決めつけて同期読み込みと誤報したこともある。2026-09-19）
+        if re.search(r'<script\b[^>]*\bsrc="https://www\.googletagmanager\.com/gtag/js', t):
             bad.append((p, "先に読む計測タグ"))
     return bad
 

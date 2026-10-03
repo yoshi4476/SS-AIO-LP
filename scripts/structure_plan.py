@@ -153,7 +153,8 @@ def main():
     ap.add_argument("--site", default="")
     ap.add_argument("--html", action="store_true")
     a = ap.parse_args()
-    sites = [a.site] if a.site else ["ai-lab", "corporate", "subsidy"]
+    import sites as S
+    sites = [a.site] if a.site else S.own_ids()
     if a.html:
         print(as_html(sites))
         return 0

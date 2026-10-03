@@ -29,6 +29,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 # この割合を超えて落ちたら警告する。数件の増減で騒がないための下限
 DROP = 0.05
 MIN_IMP = 30
+LAST_UNKNOWN = []   # 直前の main() で比べられなかったサイト（呼び出し側が「下落なし」と読まないため）
 
 
 def spans(days, month):
@@ -80,7 +81,7 @@ def main():
     sc = G.client()
 
     print(f"■ {now[0]}〜{now[1]}  と  {prev[0]}〜{prev[1]} の比較\n")
-    alerts = []
+    alerts, unknown = [], []
     for sid, cfg in S.load_all().items():
         # 内訳（どの語が消えたか）には語が要るので query+page で取る。
         # ただし合計はこれで数えない — query次元は検索数の少ない語を返さないため、
@@ -90,6 +91,7 @@ def main():
         tn, tp = totals(sc, cfg["domain"], now), totals(sc, cfg["domain"], prev)
         if tn is None or tp is None:
             print(f"  {cfg['name']}: 合計が確かめられないため比較しません\n")
+            unknown.append(sid)
             continue
         (ai, ac), (bi, bc) = tn, tp
         if not ai and not bi:
@@ -144,7 +146,12 @@ def main():
         alerts.append((sid, di, len(lost), len(worse), [u for u, _ in top]))
         print()
 
-    print("GROWTH_DROP=" + ("yes" if alerts else "no"))
+    # 取れなかったサイトがあるのに no と出すと「下落なし」と読まれる（GSC が落ちた週も no だった）
+    print("GROWTH_DROP=" + ("yes" if alerts else "unknown" if unknown else "no"))
+    if unknown and not alerts:
+        print(f"  確かめられなかったサイト: {', '.join(unknown)}")
+    global LAST_UNKNOWN
+    LAST_UNKNOWN = unknown
     if alerts:
         print("\n  次に見るところ")
         print("   1. 消えたページが200を返すか（404・noindex・配信漏れ）")

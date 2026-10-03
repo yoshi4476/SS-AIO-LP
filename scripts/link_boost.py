@@ -29,7 +29,7 @@ import auto_review as ar  # noqa: E402
 import cannibal_check as cc  # noqa: E402
 import link_new as ln  # noqa: E402
 
-LINK = re.compile(r"\]\((?:https?://[^/)]+)?(/[a-z0-9-]+/([a-z0-9-]+)/)\)")
+LINK = re.compile(r"\]\((?:https?://[^/)]+)?(/[a-z0-9-]+/([a-z0-9-]+)/?)\)")
 # しきい値。実測に合わせる。90日間で一度も検索結果に出ていない88本は
 # 被リンクの平均が3.7〜4.6本、出ている記事は5.9〜8.8本だった。
 # 2本以下だけを拾っていては、出ていない記事のほとんどに届かない。
@@ -241,6 +241,16 @@ def _page1(site):
     return out
 
 
+def linkable(slug, arts, recs=None):
+    """送り先にしてよい記事か（監修の記録があり、公開の門を通る）。
+    監修待ち・足切りの記事は公開されないので、張ると別リポジトリの社では404になる（2026-09-25）"""
+    import editorial_review
+    import publish
+    if not editorial_review.reviewed(slug, recs):
+        return False
+    return publish.gate_ok(publish.read_meta(arts[slug]["path"]) or {})
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -262,30 +272,19 @@ def main():
         if not poor:
             print(f"   --only の記事が見つかりません: {only}")
         else:
-            # 監修待ち・足切りの記事は公開されない。そこへ既存記事から張ると、
-            # 別リポジトリの社では配信済みの記事から404へ飛ぶ
-            import editorial_review
-            import publish
-            if not editorial_review.reviewed(only):
-                print(f"   {only} は監修の記録が無い（未公開）ため、リンクを張りません")
-                poor = []
-            elif not publish.gate_ok(publish.read_meta(arts[only]["path"]) or {}):
-                print(f"   {only} は公開の基準（score・観点の足切り）を通っていないため、リンクを張りません")
+            if not linkable(only, arts):
+                print(f"   {only} は監修の記録が無いか公開の基準（score・観点の足切り）を通っていない（未公開）ため、リンクを張りません")
                 poor = []
     elif rescue:
-        tg = rescue_targets(site, arts, cnt)
+        tg = [t for t in rescue_targets(site, arts, cnt) if linkable(t[0], arts)]
         poor = [s for s, _, _, _ in tg]
         print(f"■ {site}: 11〜30位で止まり、被リンクが{RESCUE_FLOOR}本未満 {len(poor)}記事")
         for s, pos, imp, n in tg:
             print(f"     {pos:>5.1f}位 表示{imp:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
     else:
-        # 監修待ち・品質の門を通らない記事へは張らない。別リポジトリの社では、
-        # 書き換えた既存記事が週次で配信され、公開前の記事への404リンクになる
         import editorial_review
-        import publish as _P
         _recs = editorial_review.load()
-        poor = [s for s, n in cnt.items() if n <= LOW and editorial_review.reviewed(s, _recs)
-                and _P.gate_ok(_P.read_meta(arts[s]["path"]) or {})]
+        poor = [s for s, n in cnt.items() if n <= LOW and linkable(s, arts, _recs)]
         poor.sort(key=lambda s: cnt[s])
         print(f"■ {site}: {len(arts)}記事 / 被リンク{LOW}本以下 {len(poor)}記事")
     import sites as S

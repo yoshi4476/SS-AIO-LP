@@ -77,6 +77,16 @@ def site_cfg():
     return _s.load(SITE_ID)
 
 
+def cat_names():
+    """カテゴリのスラッグ → 表示名。AI集客ラボの4つだけを書いていたため、
+    コーポレート・補助金の月次では「keiri-bpo」「hojokin」がそのまま表に出た（2026-08 の月次）"""
+    names = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
+    for c in _sites_mod.load_all().values():
+        for slug, name in (c.get("categories") or {}).items():
+            names.setdefault(slug, name)
+    return names
+
+
 def ga4_property():
     """GA4プロパティIDを数値だけに正規化する（GA4 APIは数値以外を受け付けない）
 
@@ -968,7 +978,8 @@ def audit_site(d):
         path = _re.sub(r"^https?://[^/]+", "", _sites.article_url(
             _sites.load(SITE_ID), {"slug": x["slug"], "category": x["cat"],
                                    "date": x["date"]}))
-        g = pages.get(path)
+        # 末尾スラッシュの有無で GSC の行と記事のURLが食い違うと、記事の検索データを取り逃がす（0.1節）
+        g = pages.get(path) or pages.get(path.rstrip("/")) or pages.get(path.rstrip("/") + "/")
         issues = []
         # 検索データにもとづく指示
         if g and g["pos"] > 10 and g["imp"] >= 50:
@@ -1011,7 +1022,7 @@ def audit_site(d):
     # --- サイト全体（構造・導線・カテゴリ） ---
     site_rows = []
     thin = [(c, len(v)) for c, v in by_cat.items() if len(v) <= 2]
-    cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
+    cat_jp = cat_names()
     for c, n in sorted(thin, key=lambda x: x[1]):
         site_rows.append({"target": f'カテゴリ「{cat_jp.get(c, c)}」', "where": "記事クラスター",
                           "now": f"記事{n}本のみ（クラスターが薄くトピック権威が立たない）",
@@ -1921,7 +1932,7 @@ def _imp_facts():
         f["mentions"] = f["mention_linked"] = 0
     try:
         d = _j.loads((ROOT / "data" / "backlinks.json").read_text(encoding="utf-8"))
-        f["backlinks"] = sum(len(d.get(s) or []) for s in ("ai-lab", "corporate", "subsidy"))
+        f["backlinks"] = sum(len(d.get(s) or []) for s in _sites_mod.own_ids())
         f["bl_todo"] = len(d.get("_candidates") or [])
     except Exception:
         f["backlinks"], f["bl_todo"] = 0, 0
@@ -2309,7 +2320,7 @@ def render(d, a):
         f'<tr><td>{x["target"]}</td><td style="white-space:nowrap">{x["kind"]}</td>'
         f'<td>{x["now"]}</td><td>{x["fix"]}</td></tr>' for x in a["lp_plan"])
     assets = a["assets"]
-    cat_jp = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集客・活用"}
+    cat_jp = cat_names()
     cat_pairs = [(cat_jp.get(c, c), n) for c, n in assets["cats"]]
     frows = "".join(f'<tr><td><span class="pri pri-{f["pri"]}">{f["pri"]}</span></td><td>{f["area"]}</td>'
                     f'<td>{f["now"]}</td><td>{f["fix"]}</td></tr>' for f in a["fixes"])
@@ -2637,7 +2648,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <h3 style="margin-top:14px">サイト資産サマリー（累計ストック）</h3>
 <div class="hl-cards">
   <div class="hl"><div class="k">{plain("公開記事ストック")}</div><div class="v">{assets["count"]}本</div><div class="s">品質90点以上のみ</div></div>
-  <div class="hl"><div class="k">{plain("平均品質スコア")}</div><div class="v">{assets["avg_score"]}点</div><div class="s">6観点採点/100点</div></div>
+  <div class="hl"><div class="k">{plain("平均品質スコア")}</div><div class="v">{assets["avg_score"]}点</div><div class="s">品質採点/100点</div></div>
   <div class="hl"><div class="k">{plain("平均文字数")}</div><div class="v">{assets["avg_len"]:,}字</div><div class="s">基準5,000字以上</div></div>
 </div>
 <h3 style="margin-top:14px">カテゴリ別の記事構成</h3>

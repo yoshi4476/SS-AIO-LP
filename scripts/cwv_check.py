@@ -58,9 +58,9 @@ def _sa_token():
         sa = ROOT / "indexing-service-account.json"
         if sa.is_file():
             try:
-                from google.oauth2 import service_account
+                import gcreds
                 import google.auth.transport.requests as gr
-                c = service_account.Credentials.from_service_account_file(str(sa), scopes=["openid"])
+                c = gcreds.load(sa, ["openid"])
                 c.refresh(gr.Request())
                 _SA_TOKEN = c.token
             except Exception as e:

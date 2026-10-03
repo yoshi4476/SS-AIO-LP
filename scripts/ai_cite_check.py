@@ -48,8 +48,10 @@ def _env(key):
 
 
 def _post(url, body, headers, timeout=TIMEOUT):
+    # Cloudflare 配下のAPIは Python の既定の UA を弾く（2026-07-28 Resend で error 1010）
     req = urllib.request.Request(url, data=json.dumps(body).encode("utf-8"),
-                                 headers={"Content-Type": "application/json", **headers})
+                                 headers={"Content-Type": "application/json",
+                                          "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)", **headers})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
             return json.loads(r.read().decode("utf-8"))

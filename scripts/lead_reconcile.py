@@ -138,7 +138,7 @@ def main():
         print(f"台帳を読めません（{str(e)[:80]}）")
         return 1
     print(f"■ フォーム送信（GA4）と問い合わせ台帳（{start}〜{end}）\n")
-    bad = []
+    bad, unread = [], []
     for sid, cfg in S.load_all().items():
         prop = cfg.get("ga4_property_id")
         # 自前の台帳を持つサイト（補助金の form-endpoint.gs など）は管制塔と突き合わせない
@@ -148,6 +148,7 @@ def main():
             ga = ga4_by_day(str(prop), start, end)
         except Exception as e:
             print(f"  {sid}: GA4 を読めません（{str(e)[:60]}）")
+            unread.append(sid)
             continue
         # 調べて記録が見つからなかった日（ACK）は毎週くり返し知らせない
         ack = set(ACKED.get(sid, {}))
@@ -161,6 +162,11 @@ def main():
             print("  " + bad[-1])
     if led.get("?"):
         print(f"  サイト名を判定できない行 {sum(led['?'].values())}件")
+    if unread and not bad:
+        # 読めなかったサイトを「食い違いなし」に数えない（GA4 が落ちた日も LEADS_OK=yes と出ていた）
+        print(f"照合できなかったサイト: {', '.join(unread)}")
+        print("LEADS_OK=unknown")
+        return 1
     print(f"LEADS_OK={'no' if bad else 'yes'}")
     return 0
 

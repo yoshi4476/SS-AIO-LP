@@ -1757,8 +1757,10 @@ def test_kw_plan_keeps_only_buyers():
     rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT = flaky, (lambda: "k"), (0, 0, 0)
     # 本物のキャッシュに触らない（前回のテストの応答が残っていると呼び出し回数が0になる）
     import tempfile, pathlib
-    saved_cache = rakko.CACHE_DIR
+    saved_cache, saved_log = rakko.CACHE_DIR, rakko.SPEND_LOG
     rakko.CACHE_DIR = pathlib.Path(tempfile.mkdtemp())
+    # 本物の利用台帳にも書かない。偽の消費が月の合計に積まれ、CI のキャッシュにも持ち越されていた（2026-10-03）
+    rakko.SPEND_LOG = pathlib.Path(tempfile.mkdtemp()) / "spend.jsonl"
     try:
         r = rakko.call("/v1/x", {"a": 1})
         check("5xx は待ってやり直す", (r or {}).get("data"), {"ok": 1})
@@ -1790,7 +1792,7 @@ def test_kw_plan_keeps_only_buyers():
     finally:
         rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT = saved
         rakko.CONSUMED, rakko.BUDGET = 0.0, None
-        rakko.CACHE_DIR = saved_cache
+        rakko.CACHE_DIR, rakko.SPEND_LOG = saved_cache, saved_log
 
     # 管制塔の一時的な404も待ってやり直す。取り下げ直後の追加で当たると未着手が0件で残る
     import hub_client
@@ -3581,6 +3583,19 @@ def test_report_actions_close_the_loop():
     check("win_patterns: 引用実績が無ければ同じ業種の上位記事の型", callable(getattr(WP, "ranked_for", None)), True)
 
 
+def history_tests():
+    """tests/gates_history_*.py の test_ 関数（過去の誤りの棚卸しから作った門）。
+    各モジュールは check を `from test_gates import check` で使う"""
+    import importlib
+    sys.path.insert(0, str(ROOT / "tests"))
+    sys.modules.setdefault("test_gates", sys.modules[__name__])
+    out = []
+    for p in sorted((ROOT / "tests").glob("gates_history_*.py")):
+        m = importlib.import_module(p.stem)
+        out += [getattr(m, n) for n in dir(m) if n.startswith("test_") and callable(getattr(m, n))]
+    return out
+
+
 def main():
     for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
@@ -3662,7 +3677,7 @@ def main():
               test_no_control_characters_anywhere,
               test_report_actions_close_the_loop,
               test_detectors_do_not_misread_neighbors,
-              test_lessons_2026_10_03):
+              test_lessons_2026_10_03, *history_tests()):
         try:
             t()
         except Exception as e:

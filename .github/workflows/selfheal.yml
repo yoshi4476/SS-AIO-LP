@@ -260,7 +260,16 @@ jobs:
             done
             python scripts/report_digest.py --email || true
           fi
-          python scripts/group_report.py --email $through || true
+          # グループ版も同じ。元の run で送り終えていれば出し直さない（10-01 に再送でグループ版を二重に送った）。
+          # 照合で止めた回も success になるが、その回は「要対応」で人に届いている
+          gsent=$(gh api "repos/${{ github.repository }}/actions/runs/$RUN_ID/jobs" \
+            --jq '[.jobs[].steps[]? | select(.name == "グループ月次レポート生成・メール送付" and .conclusion == "success")] | length' \
+            2>/dev/null || echo 0)
+          if [ "${gsent:-0}" -gt 0 ] 2>/dev/null; then
+            echo "グループ版は元の run で送り終えています。再発行は飛ばします"
+          else
+            python scripts/group_report.py --email $through || true
+          fi
           rm -f indexing-service-account.json .env
 
       - name: 結果の通知

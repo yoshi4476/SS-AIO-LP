@@ -68,7 +68,15 @@ def show_brief(site_id):
         print()
         print(f"■ 執筆材料の形式が不正です（{f.name}）")
         return
+    # 1つの欄の型違い（文字列のはずが配列など）で案内全体を止めない（2026-09-15: brief.json 1本で記事づくりが止まった）
+    try:
+        _show(b)
+    except Exception as e:
+        print(f"\n■ 執筆材料の一部を読めませんでした（{f.name}: {type(e).__name__}: {e}）")
+        print("  ファイルの欄の形を直してください")
 
+
+def _show(b):
     def block(title, rows):
         rows = [(k, v) for k, v in rows if v]
         if not rows:

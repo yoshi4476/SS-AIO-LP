@@ -45,12 +45,16 @@ def gsc_rows(site_id):
     ラボ側で同じ語を狙う記事を書いてしまった。
     自社どうしの食い合いは、ドメインをまたいでも同じように起きる。
     """
+    # 取れなかったことを残す。空の結果だけ返すと「順位を持つページなし＝着手可」と読まれ、
+    # GSC が落ちていた日に食い合いの語を通していた（2026-09-25 の点検で発見）
+    gsc_rows.failed = ""
     try:
         import gcreds
         import sites as S
         from googleapiclient.discovery import build as gbuild
         from datetime import date, timedelta
-    except Exception:
+    except Exception as e:
+        gsc_rows.failed = f"部品を読み込めません（{type(e).__name__}）"
         return []
     try:
         sc = gbuild("searchconsole", "v1", credentials=gcreds.load(
@@ -60,6 +64,7 @@ def gsc_rows(site_id):
         all_conf = S.load_all()
     except Exception as e:
         print(f"   （GSC照合はスキップ: {type(e).__name__}）")
+        gsc_rows.failed = f"GSC に接続できません（{type(e).__name__}）"
         return []
     rows = []
     for sid, conf in all_conf.items():
@@ -71,8 +76,10 @@ def gsc_rows(site_id):
                 siteUrl="https://" + dom + "/", body={
                     "startDate": str(end - timedelta(days=90)), "endDate": str(end),
                     "dimensions": ["query", "page"], "rowLimit": 5000}).execute().get("rows", [])
-        except Exception:
-            continue          # 権限の無いプロパティは黙って飛ばす
+        except Exception as e:
+            if sid == site_id:
+                gsc_rows.failed = f"{dom} の実績を取れません（{type(e).__name__}）"
+            continue          # 他サイトの権限の無いプロパティは黙って飛ばす
         for x in r:
             x["_site"] = sid
             x["_own"] = (sid == site_id)
@@ -166,6 +173,11 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
 
     # ② GSCの実績。すでに順位を持っているページがあるか（最も確かな指標）
     own = owned(gsc_rows(site_id)) if (use_gsc and site_id) else []
+    if use_gsc and site_id and getattr(gsc_rows, "failed", ""):
+        level = max(level, 1)
+        reasons.append(("要確認", f"GSCの実績を照合できませんでした: {gsc_rows.failed}",
+                        "照合できないことは、食い合いが無いことではありません。"
+                        "GSC を確かめてから審査し直してください（オフラインなら --no-gsc を明示）"))
     if ex:
         own = [o for o in own if not any(f"/{e}/" in o["page"] or o["page"].rstrip("/").endswith("/" + e)
                                          for e in ex)]

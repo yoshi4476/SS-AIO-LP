@@ -1,10 +1,11 @@
 /**
  * サイト診断API（Cloudflare Pages Functions）
- * POST { url } → 対象ページ・robots.txt・llms.txt を取得し、13項目・100点満点で採点して返す。
+ * POST { url } → 対象ページ・robots.txt・llms.txt を取得し、14項目・100点満点で採点して返す。
  *
  * 項目と配点は、2026-09 時点で一次情報で確かめたことに合わせる（CLAUDE.md 0.3節）。
  * - Google は AI 最適化ガイドで「llms.txt は使わない」「構造化データは AI 引用の必須条件ではない」と明言している。
  *   以前はこの2つを AI 引用の加点として大きく数えていたため、配点を下げて説明も事実に直した
+ * - 配点の合計は100点にそろえる（2026-10-03 まで98点満点のまま「100点満点」と表示していた）
  * - 効くと明記されているのは「クロールできること」。AI のクローラーが入れるか（robots.txt と CDN の遮断）と、
  *   検索に出さない設定（noindex）を重く見る
  *
@@ -95,7 +96,7 @@ export async function onRequestPost({ request, env, waitUntil }) {
       ok: robots.ok ? aiBlocked.length === 0 : true,
       detail: aiBlocked.length ? `拒否中: ${aiBlocked.join(", ")}` : (robots.ok ? "主要なAIのクローラーを許可" : "robots.txtなし（既定で許可）"),
       advice: "robots.txt で拒否しているクローラーの Disallow を外してください。拒否されたAIは、ページの中身を読めないため回答に使えません" },
-    { group: "AIが入れるか", name: "AIのクローラーが入口で弾かれていない（CDN・WAF）", pts: 8, ok: !cdnBlocked,
+    { group: "AIが入れるか", name: "AIのクローラーが入口で弾かれていない（CDN・WAF）", pts: 10, ok: !cdnBlocked,
       detail: cdnBlocked ? `GPTBotを名乗るアクセスがHTTP ${asBot.status}で拒否されました` : "拒否されませんでした",
       advice: "Cloudflare等の「AIボットをブロック」設定を確認してください。AIのクローラーを既定で止める設定のCDNがあります" },
     { group: "AIが入れるか", name: "常時SSL（HTTPS）", pts: 6, ok: page.finalUrl.startsWith("https://"), detail: "",

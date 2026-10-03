@@ -159,8 +159,14 @@ def enqueue_gaps(items, budget=6):
         return 0
     if not HC.enabled():
         return 0
+    # 読めなかった台帳を「空」と読むと、既にある語まで積み直す（strict で読み、読めなければ積まない）
+    try:
+        rows = HC.all_kw(strict=True)
+    except Exception as e:
+        print(f"  台帳を読めないため、語を積みません（{str(e)[:60]}）")
+        return 0
     have = {re.sub(r"[\s　]", "", str(k.get("keyword", k) if isinstance(k, dict) else k)).lower()
-            for k in HC.all_kw()}
+            for k in rows}
     n = 0
     for it in items:
         if it["kind"] != "article_new" or n >= budget:

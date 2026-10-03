@@ -43,6 +43,11 @@ def _link_patterns():
     return internal_re, domains
 
 
+def internal_links(body):
+    """内部リンク先の集合。相対・絶対URL・末尾スラッシュ無し・#付きは同じ1本"""
+    return {u.split("#")[0].rstrip("/") for u in _link_patterns()[0].findall(body)}
+
+
 def run(slug):
     """1本を採点して checks を返す。CLI からも、全体の集計からも使う"""
     p = ROOT / "articles" / f"{slug}.md"
@@ -117,8 +122,8 @@ def run(slug):
     add("本文FAQとfrontmatter数が一致", body_faq == len(faq), f"本文{body_faq} / meta{len(faq)}")
 
     # --- リンク ---
-    internal_re, own_domains = _link_patterns()
-    internal = set(internal_re.findall(body))
+    own_domains = _link_patterns()[1]
+    internal = internal_links(body)
     add("内部リンク3本以上", len(internal) >= 3, f"{len(internal)}本")
     external = set(re.findall(r'href="(https?://[^"]+)"', body))
     external = {u for u in external if not any(d in u for d in own_domains) and "x.com" not in u}

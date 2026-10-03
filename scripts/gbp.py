@@ -48,7 +48,8 @@ def creds(site):
     p = token_path(site)
     if not p.is_file():
         return None
-    c = Credentials.from_authorized_user_file(str(p), SCOPES)
+    # 鍵ファイルは BOM 付きになることがあり、*_file 系の読み込みは BOM で落ちる（2026-08-01 月次が全滅）
+    c = Credentials.from_authorized_user_info(json.loads(p.read_text(encoding="utf-8-sig")), SCOPES)
     if not c.valid and c.refresh_token:
         c.refresh(Request())
         p.write_text(c.to_json(), encoding="utf-8")
@@ -59,7 +60,7 @@ def auth(site):
     from google_auth_oauthlib.flow import InstalledAppFlow
     if not CLIENT.is_file():
         raise SystemExit("gbp-client.json がありません（Google Cloud の OAuth クライアント・デスクトップ型）")
-    c = InstalledAppFlow.from_client_secrets_file(str(CLIENT), SCOPES).run_local_server(port=0)
+    c = InstalledAppFlow.from_client_config(json.loads(CLIENT.read_text(encoding="utf-8-sig")), SCOPES).run_local_server(port=0)
     token_path(site).write_text(c.to_json(), encoding="utf-8")
     print(f"  {token_path(site).name} を作りました（コミットされません）")
 

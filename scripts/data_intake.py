@@ -674,7 +674,8 @@ def apply(ds):
     try:
         import add_fact
         d = add_fact.load(); fid = f"dataset-{ds['slug']}"
-        fact = {"id": fid, "sites": ["ai-lab", "corporate", "subsidy"],
+        import sites as _S
+        fact = {"id": fid, "sites": _S.own_ids(),
                 "topic": [CATS.get(c, c) for c in ds["categories"]] + ["一次データ", "実測"],
                 "claim": ds["sentence"], "source": f"{ORG} 一次データ「{ds['title']}」 {SITE_URL}/data/{ds['slug']}/",
                 "as_of": ds["modified"][:7], "denominator": ds["n"], "period": ds["period"], "verifiable": True}

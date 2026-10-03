@@ -468,6 +468,46 @@ def fact_numbers(added, had):
     return {tok: n for tok, n in added.items() if tok not in had}
 
 
+def new_fact_numbers(before, after, allowed=""):
+    """書き換えで増えた、記事にも許可した一次情報にも無い数字"""
+    # 許可した一次情報の数字は、何回使ってもよい。回数で引くと、同じ事実を
+    # 2箇所に書いただけで差し戻される（実測で4本が「3,200」で落ちた）
+    added = numbers(after) - numbers(before)
+    for tok in set(numbers(allowed or "")):
+        added.pop(tok, None)
+    return fact_numbers(added, numbers(before) + numbers(allowed or ""))
+
+
+def heads_cover_terms(heads, terms):
+    """足した語が見出しに入ったか。rank_rescue が「足りない」と判定したのと同じ物差しで見る。
+
+    素の部分一致で見ていたため、rank_rescue が「足りている」とみなす書き方
+    （「aiocr」に対する「AI-OCR」、「tool」に対する「AIOツール」）で節を足しても
+    差し戻し、その記事は何度直しても通らなかった（2026-09-23 に同じ穴を rank_rescue 側だけ塞いでいた）"""
+    from rank_rescue import norm, _covered_by_kana
+    hay = norm(" ".join(heads))
+    return any(norm(x) in hay or _covered_by_kana(x, hay) for x in terms)
+
+
+def false_alarms():
+    """通すべき書き換えを差し戻す穴。返すのは差し戻してしまった例の名前（空なら健全）。
+
+    selftest は「止めるべき例」しか試しておらず、正しい書き換えを止める誤検出は
+    記事が永久に直せない形でしか表に出なかった（2026-09-23〜28 に5種類）"""
+    base = "title: 時給1,500円の経理代行\n本文。3つの手順と2026年の制度。3,200店舗が導入。\n"
+    cases = [
+        ("桁区切りの既出数字を本文で繰り返す",
+         not new_fact_numbers(base, base + "相場は1,500円です。\n")),
+        ("同じ事実を2回目に書く",
+         not new_fact_numbers(base, base + "3,200店舗の例です。\n3,200店舗では\n", "3,200店舗")),
+        ("既出の個数「3」が1回増えるだけ", not new_fact_numbers(base, base + "3つの観点で見ます。\n")),
+        ("英語表記の語を日本語の見出しで扱う", heads_cover_terms(["AIOツールの選び方"], ["tool"])),
+        ("ハイフンつきの AI-OCR を見出しで扱う", heads_cover_terms(["AI-OCRで請求書を読む"], ["aiocr"])),
+        ("題の助詞違い", title_covers_kw("中小企業の助成金とは？申請の流れ", "中小企業助成金")),
+    ]
+    return [name for name, ok in cases if not ok]
+
+
 def sources(s):
     return set(re.findall(r'href="(https?://[^"]+)"', s))
 
@@ -508,13 +548,7 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
         return f"タイトルに狙う語が入っていません（{kw}）"
 
     b = before[2]
-    # 許可した一次情報の数字は、何回使ってもよい。回数で引くと、同じ事実を
-    # 2箇所に書いただけで差し戻される（実測で4本が「3,200」で落ちた）
-    ok_tokens = set(numbers(allowed or ""))
-    added = numbers(after) - numbers(b)
-    for tok in ok_tokens:
-        added.pop(tok, None)
-    new_nums = fact_numbers(added, numbers(b) + numbers(allowed or ""))
+    new_nums = new_fact_numbers(b, after, allowed)
     if new_nums:
         return f"本文に無かった数字が増えました: {dict(list(new_nums.items())[:4])}"
     lost = sources(b) - sources(after)
@@ -537,8 +571,7 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     if terms:
         # 「足した」と言いながら見出しが変わっていないものを通さない。
         # 本文にちりばめるだけの直し方では順位は動かない
-        heads = " ".join(re.findall(r"^#{2,4}\s*(.+)$", after, re.M)).lower()
-        if not any(x.lower() in heads for x in terms):
+        if not heads_cover_terms(re.findall(r"^#{2,4}\s*(.+)$", after, re.M), terms):
             return "狙った語が見出しに入っていません（" + "/".join(terms[:3]) + "）"
         if len(after) < len(b) * 0.98:
             return f"本文が減りました（{len(b)}→{len(after)}字）。足す直しのはずです"
@@ -590,6 +623,42 @@ def _desc_of(text):
     return m.group(1).strip().strip('"') if m else ""
 
 
+TITLE_LOCK_DAYS = 28   # rewrite_rollback.DAYS と同じ。この間に題を変えると効いたか判定できない
+
+
+def title_changes(log=None):
+    """台帳から「タイトルを実際に変えた」記録を (slug, 日付) で返す"""
+    out = []
+    f = Path(log) if log else LOG
+    if not f.is_file():
+        return out
+    for line in f.read_text(encoding="utf-8").splitlines():
+        try:
+            d = json.loads(line)
+        except ValueError:
+            continue
+        if not (d.get("ok") and d.get("before_title")):
+            continue
+        after = d.get("after_title")
+        changed = (after != d["before_title"]) if after is not None \
+            else (d.get("kind") == "title" and str(d.get("note", "")).startswith("直しました"))
+        if changed:
+            out.append((d.get("slug", ""), str(d.get("at", ""))[:10]))
+    return out
+
+
+def title_locked(slug, today=None, log=None):
+    """判定期間中なら、その題を変えた日を返す（空なら変えてよい）。
+
+    09-25 に auto_rewrite が変えた seikyusho-shougou-jidoka の題を 09-27 に手で変え直し、
+    rewrite_rollback が効いたかを判定できなくなった（取り消して戻した）"""
+    from datetime import date, timedelta
+    today = today or date.today()
+    since = str(today - timedelta(days=TITLE_LOCK_DAYS))
+    hits = [at for s, at in title_changes(log) if s == slug and at >= since]
+    return max(hits) if hits else ""
+
+
 def note(slug, kind, ok, why):
     LOG.parent.mkdir(parents=True, exist_ok=True)
     with LOG.open("a", encoding="utf-8") as f:
@@ -609,6 +678,8 @@ def run_one(item, write):
             return False, "claude が見つかりません（npm install -g @anthropic-ai/claude-code）"
     if not write:
         return True, "（確認のみ）"
+    if kind == "title" and title_locked(slug):
+        return False, f"{title_locked(slug)} に変えたタイトルの判定期間中のため見送ります"
 
     # 戻すときは HEAD ではなくこの時点の中身へ。同じ週次で先に当てた未コミットの直しを消さない
     raw = p.read_bytes()
@@ -716,6 +787,10 @@ def run_one(item, write):
         toks = [w for w in re.split(r"[\s　]+", item["shared"][0].lower()) if w]
         if toks and all(w in t_now[:max(len(t_now) // 2, 1)].lower() for w in toks):
             ng = f"共通の語「{item['shared'][0]}」がタイトルの前半に残っています"
+    if not ng and meta(slug)[0] != before[0]:
+        lk = title_locked(slug)
+        if lk:
+            ng = f"{lk} に変えたタイトルの判定期間（{TITLE_LOCK_DAYS}日）中です"
     after_text = p.read_text(encoding="utf-8-sig")
     LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
                   "after_title": meta(slug)[0], "after_description": _desc_of(after_text)}
@@ -734,6 +809,11 @@ def selftest():
     最後は必ず元のバイト列に戻す。
     """
     import auto_improve  # 対象の取り方まで含めて試す
+    wrong = false_alarms()
+    for name in wrong:
+        print(f"  NG  通すべき書き換えを差し戻します: {name}")
+    if wrong:
+        return 1
     items = targets()
     if not items:
         print("  対象がないため、記事を1本選んで試します")

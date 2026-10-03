@@ -41,6 +41,11 @@ TO_GITHUB = {
     "PAGESPEED_API_KEY",
     # AI検索の引用の実測（ai_cite_check）。鍵のあるAIだけに聞く
     "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "XAI_API_KEY", "CLAUDE_CITE_API_KEY",
+    # ワークフローが使うのにここに無かった鍵。.env だけにあり CI で空のまま動いていた（2026-10-03 門で照合）
+    "ANTHROPIC_API_KEY", "CODEX_AUTH_JSON", "GA4_PROPERTY_ID", "SPREADSHEET_ID", "GH_SECRET_TOKEN",
+    "X_BEARER_TOKEN", "FB_PAGE_ID", "FB_PAGE_TOKEN", "IG_USER_ID", "THREADS_TOKEN", "THREADS_USER_ID",
+    "LINKEDIN_TOKEN", "LINKEDIN_REFRESH_TOKEN", "LINKEDIN_CLIENT_ID", "LINKEDIN_CLIENT_SECRET",
+    "LINKEDIN_ORG_ID", "LINKEDIN_PERSON_ID",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。

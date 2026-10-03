@@ -398,9 +398,10 @@ body.lp-doc .hero-dark h1 em {
 }
 body.lp-doc .hero-dark .lead { color: rgba(240,244,250,.92); }
 body.lp-doc .hero-dark .lead strong { color: #fff !important; background: none; }
-body.lp-doc .trust-row { color: rgba(255,255,255,.88); }
-body.lp-doc .trust-row strong { color: #fff !important; background: none; }
-body.lp-doc .trust-row span::before { background: rgba(255,255,255,.22); color: #fff; }
+/* 白文字は暗いヒーローの中だけ。全体に効かせていたため、明るいカードの「通算3,200店舗以上」が白地に白で読めなかった（2026-10-03） */
+body.lp-doc .hero-dark .trust-row { color: rgba(255,255,255,.88); }
+body.lp-doc .hero-dark .trust-row strong { color: #fff !important; background: none; }
+body.lp-doc .hero-dark .trust-row span::before { background: rgba(255,255,255,.22); color: #fff; }
 body.lp-doc .kicker {
   color: #fff;
   border-color: rgba(255,255,255,.45);

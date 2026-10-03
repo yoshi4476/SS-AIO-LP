@@ -67,7 +67,7 @@ def ask(q):
     body = json.dumps({"contents": [{"parts": [{"text": q}]}], "tools": [{"google_search": {}}]}).encode()
     req = urllib.request.Request(
         f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
-        data=body, headers={"Content-Type": "application/json"}, method="POST")
+        data=body, headers={"Content-Type": "application/json", **UA}, method="POST")
     with urllib.request.urlopen(req, timeout=90) as r:
         d = json.load(r)
     c = (d.get("candidates") or [{}])[0]

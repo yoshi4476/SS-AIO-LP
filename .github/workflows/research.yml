@@ -82,6 +82,7 @@ jobs:
       - name: 知らせる
         if: always()
         env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
