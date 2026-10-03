@@ -185,25 +185,56 @@ def subscription_engines():
     import shutil
     if shutil.which("codex") or shutil.which("codex.cmd"):
         out["ChatGPT"] = _cached("ChatGPT-sub", ask_chatgpt_codex)
-    # Gemini の検索つき回答は無料枠では使えない（公式の料金表: Free Tier は "Not available"。2026-10-04 確認）。
-    # 課金の設定されたプロジェクトでだけ動き、文字の料金が最初からかかる。「課金APIを使わない聞き方」には入れない。
-    # 使うと決めたときだけ GEMINI_PAID_OK=1 で足す
-    if _env("GEMINI_API_KEY") and _env("GEMINI_PAID_OK") == "1":
-        out["Gemini"] = _cached("Gemini", ask_gemini)
+    # Gemini は入れない。検索つき回答は無料枠では使えず（公式の料金表: Free Tier は "Not available"。2026-10-04 確認）、
+    # 月5,000回までの検索料0円は AI診断と自動処理で分け合う。この聞き方を使う業種調査（月約1,700問）は量が多すぎる
     if _claude_cli_ready():
         out["Claude"] = _cached("Claude-sub", ask_claude_cli)
     return out
 
 
+GEMINI = {"usage": None, "local": 0}
+GEMINI_PER_CALL = 10        # 1回の質問で行われうる検索の見込み。残りがこれ未満なら呼ばない
+
+
+def gemini_budget_ok():
+    """月の検索回数の残りがあるか（管制塔の台帳で AI診断と合わせて数える）。台帳に届かなければ呼ばない"""
+    if not _env("GEMINI_API_KEY") or _env("GEMINI_OFF") == "1":
+        return False
+    if GEMINI["usage"] is None:
+        try:
+            import hub_client
+            u = hub_client._post({"action": "gemini_usage"}) or {}
+        except Exception:
+            u = {}
+        GEMINI["usage"] = u if u.get("ok") else {}
+    u = GEMINI["usage"]
+    if not u:
+        return False
+    n = GEMINI["local"] + GEMINI_PER_CALL
+    return u["batch"] + n <= u["batchCap"] and u["total"] + n <= u["monthCap"]
+
+
+def gemini_note(searches):
+    """実際に行われた検索の回数を台帳に残す（料金は検索1回ごと。1つの質問で何回も検索されうる）"""
+    GEMINI["local"] += searches
+    try:
+        import hub_client
+        hub_client._post({"action": "gemini_log", "job": Path(sys.argv[0]).stem, "searches": searches})
+    except Exception:
+        pass
+
+
 def ask_gemini(q):
     key = _env("GEMINI_API_KEY")
-    if not key:
+    if not key or not gemini_budget_ok():
         return None
     # モデル名は変わる。gemini-2.5-flash は新規利用が止まり404になった（2026-09-23）。
     # 環境変数で差し替えられるようにして、次に変わったとき直さずに済ませる
     model = _env("GEMINI_MODEL") or "gemini-3.6-flash"
     d = _post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
               {"contents": [{"parts": [{"text": q}]}], "tools": [{"google_search": {}}]}, {})
+    gemini_note(max(1, sum(len((c.get("groundingMetadata") or {}).get("webSearchQueries") or [])
+                           for c in d.get("candidates", []))))
     TEXT[("ask_gemini", q)] = "".join(pt.get("text", "") for c in d.get("candidates", [])
                                       for pt in ((c.get("content") or {}).get("parts") or []))
     urls = []
@@ -349,7 +380,7 @@ def _cached(name, fn):
 def engines_available():
     return {k: _cached(k, v) for k, v in ENGINES.items()
             if (_env(ENGINE_KEYS[k]) or (k == "Claude" and _claude_cli_ready()))
-            and (k != "Gemini" or _env("GEMINI_PAID_OK") == "1")}     # 検索つきは有料（subscription_engines の注記）
+            and (k != "Gemini" or gemini_budget_ok())}     # 検索つきは有料。月の検索回数の残りがあるときだけ
 
 
 def _claude_cli_ready():

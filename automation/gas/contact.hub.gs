@@ -844,6 +844,48 @@ function aiRecheckDone_(body) {
   return { ok: true };
 }
 
+/**
+ * 記事の自動処理（語の調査・引用の実測・測り直し）が Gemini で行った検索の回数。
+ * AI診断と同じ「月5,000回まで検索料0円」を分け合うため、両方をここで数える（2026-10-04）。
+ * 自動処理は月 GEMINI_BATCH_MONTH まで。残りを AI診断に回す。
+ */
+const GEMINI_BATCH_MONTH = 2000;
+
+function geminiSheet_() {
+  const ss = book_();
+  let sh = ss.getSheetByName('Gemini利用');
+  if (!sh) {
+    sh = ss.insertSheet('Gemini利用');
+    sh.appendRow(['日時', '工程', '検索回数']);
+  }
+  return sh;
+}
+
+function geminiBatchSearches_() {
+  const sh = geminiSheet_();
+  const now = new Date();
+  let n = 0;
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 3).getValues().forEach(function (r) {
+      const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+      if (at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth()) n += Number(r[2]) || 0;
+    });
+  }
+  return n;
+}
+
+function geminiUsage_() {
+  const batch = geminiBatchSearches_();
+  const diag = aiCheckQuota_({ email: '_usage_', ip: '' }).searches;
+  return { ok: true, batch: batch, diagnosis: diag, total: batch + diag,
+           batchCap: GEMINI_BATCH_MONTH, monthCap: AI_CHECK_MONTH_SEARCHES };
+}
+
+function geminiLog_(body) {
+  geminiSheet_().appendRow([new Date(), clean_(body.job).slice(0, 40), Number(body.searches) || 0]);
+  return { ok: true };
+}
+
 function aiCheckQuota_(body) {
   const email = clean_(body.email).toLowerCase();
   if (!email) return { ok: false, error: 'email' };
@@ -864,7 +906,7 @@ function aiCheckQuota_(body) {
   }
   const reason = used >= AI_CHECK_PER_EMAIL ? 'email'
     : (ipToday >= AI_CHECK_PER_IP_DAY ? 'ip'
-    : (searches + AI_CHECK_MAX_SEARCHES_PER_CHECK > AI_CHECK_MONTH_SEARCHES ? 'month' : ''));
+    : (searches + geminiBatchSearches_() + AI_CHECK_MAX_SEARCHES_PER_CHECK > AI_CHECK_MONTH_SEARCHES ? 'month' : ''));
   return { ok: true, used: used, perEmail: AI_CHECK_PER_EMAIL, perIpDay: AI_CHECK_PER_IP_DAY,
            searches: searches, allowed: !reason, reason: reason };
 }

@@ -62,8 +62,9 @@ class NoAnswer(Exception):
 
 
 def ask(q):
-    # 検索つきの Gemini は有料（無料枠では使えない）。使うと決めるまで呼ばない（ai_cite_check と同じ決まり）
-    if os.environ.get("GEMINI_PAID_OK") != "1":
+    # 検索つきの Gemini は有料（無料枠では使えない）。月の検索回数を AI診断と分け合い、残りが無ければ呼ばない
+    import ai_cite_check as AC
+    if not AC.gemini_budget_ok():
         raise NoAnswer(q)
     key = os.environ.get("GEMINI_API_KEY", "")
     model = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
@@ -74,6 +75,7 @@ def ask(q):
     with urllib.request.urlopen(req, timeout=90) as r:
         d = json.load(r)
     c = (d.get("candidates") or [{}])[0]
+    AC.gemini_note(max(1, len((c.get("groundingMetadata") or {}).get("webSearchQueries") or [])))
     text = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []))
     if not text.strip():
         # 答えが返らなかった質問を「出典なし・社名なし」と数えると、測れていないのに 0/3 と送ってしまう（Codex の点検で指摘）

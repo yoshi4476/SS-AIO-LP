@@ -250,6 +250,8 @@ function doPost(e) {
       case 'restore_lead': return json_(restoreLead_(body));
       // AI紹介チェックの回数（メールごと3回・月の全体の上限）と記録。functions/api/ai-check.js が合言葉つきで呼ぶ
       case 'ai_check_quota': return json_(aiCheckQuota_(body));
+      case 'gemini_usage':   return json_(geminiUsage_());
+      case 'gemini_log':     return json_(geminiLog_(body));
       case 'ai_check_log':   return json_(aiCheckLog_(body));
       case 'ai_recheck_list': return json_(aiRecheckList_());
       case 'ai_recheck_done': return json_(aiRecheckDone_(body));

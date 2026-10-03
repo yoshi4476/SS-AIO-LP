@@ -178,3 +178,16 @@ def test_ai_check_cannot_be_abused():
     check("AI診断: ロボットよけの確認がある", "turnstile/v0/siteverify" in js, True)
     check("AI診断: 同じ回線から1日2回・月の検索5,000回", ("AI_CHECK_PER_IP_DAY = 2" in gs, "AI_CHECK_MONTH_SEARCHES = 5000" in gs),
           (True, True))
+
+
+def test_gemini_is_metered_by_searches():
+    """検索つきの Gemini は無料枠で使えない。呼ぶ前に台帳で月の検索回数の残りを確かめ、呼んだら実際の検索回数を残す。
+    量の多い業種調査（月約1,700問）が使う「課金しない聞き方」には入れない（2026-10-04: 4日で約1,800問・¥5,000の請求）"""
+    src = (ROOT / "scripts" / "ai_cite_check.py").read_text(encoding="utf-8")
+    ask = src.split("def ask_gemini(q):", 1)[1].split("\ndef ", 1)[0]
+    sub = src.split("def subscription_engines():", 1)[1].split("\ndef ", 1)[0]
+    check("Gemini: 呼ぶ前に残りを確かめる", "gemini_budget_ok()" in ask, True)
+    check("Gemini: 実際の検索回数を残す", "webSearchQueries" in ask and "gemini_note(" in ask, True)
+    check("Gemini: 業種調査の聞き方（subscription_engines）に入れない", "ask_gemini" in sub, False)
+    rc = (ROOT / "scripts" / "ai_recheck.py").read_text(encoding="utf-8")
+    check("Gemini: 1か月後の測り直しも同じ台帳で数える", "gemini_budget_ok()" in rc and "gemini_note(" in rc, True)
