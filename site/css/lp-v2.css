@@ -254,3 +254,11 @@
 .lx-ind{margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;font-size:.85rem;color:rgba(255,255,255,.82)}
 .lx-ind a{display:inline-flex;align-items:center;min-height:40px;padding:.4em 1.05em;border:1.5px solid rgba(255,255,255,.6);border-radius:999px;color:#fff;font-weight:700;text-decoration:none}
 .lx-ind a:hover,.lx-ind a:focus-visible{background:rgba(255,255,255,.14)}
+
+/* ヒーローの背景動画（2026-10-03）。紺の地に薄く敷き、左の入力欄の側をより暗くして読みやすさを保つ */
+.lx-hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; z-index: 0; pointer-events: none; }
+.lx-hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(8, 26, 60, .78) 0%, rgba(8, 26, 60, .45) 55%, rgba(8, 26, 60, .25) 100%), linear-gradient(180deg, transparent 60%, rgba(8, 26, 60, .6) 100%); }
+.lx-hero::before { z-index: 1; }
+.lx-hero > .lx-wrap { z-index: 2; }
+@media (prefers-reduced-motion: reduce) { .lx-hero-video { display: none; } }
