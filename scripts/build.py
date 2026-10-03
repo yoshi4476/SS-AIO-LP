@@ -603,16 +603,23 @@ def scan_box(meta, where):
             f'<input type="hidden" name="src" value="article_{where}">'
             f'<input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL">'
             f'<button type="submit" class="btn btn-primary" data-cta="article_{where}_scan">30秒で診断する</button>'
-            f'</form></aside>')
+            f'</form>{_alt_entry(meta, where)}</aside>')
+
+
+def _alt_entry(meta, where):
+    """URLを入れる診断の下に、記事の内容に合ったもう1つの入口を置く。
+    記事を見た人がボタンを押す割合は5.5%（2026-10 の28日）。URLを入れるのは手間が大きいので、
+    地域と業種を選ぶだけの AI診断（メールで結果も残る）か、マップのチェックを並べる"""
+    if meta["category"] == "meo":
+        return ('<p class="sb-alt">Googleマップの整備度を測るなら '
+                f'<a href="/tools/meo-check/" data-cta="article_{where}_meo_quiz">マップ集客の整備度チェック（8問・30秒）</a></p>')
+    return ('<p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら '
+            f'<a href="/tools/ai-check/" data-cta="article_{where}_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p>')
 
 
 def diag_banner_html(meta):
-    # 記事末もURLを入れる診断にする。MEOの記事は、マップ集客のチェックへの入口も残す
-    box = scan_box(meta, "bottom")
-    if meta["category"] == "meo":
-        box = box.replace("</form></aside>", '</form><p class="sb-alt">Googleマップの整備度を測るなら '
-                          '<a href="/tools/meo-check/" data-cta="article_bottom_meo_quiz">マップ集客の整備度チェック（8問・30秒）</a></p></aside>')
-    return box
+    # 記事末もURLを入れる診断にする。内容に合ったもう1つの入口は scan_box が付ける
+    return scan_box(meta, "bottom")
 
 
 def prev_next_html(prev_meta, next_meta):

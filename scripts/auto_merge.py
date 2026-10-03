@@ -605,7 +605,26 @@ def main():
     ap.add_argument("--selftest", action="store_true", help="検算が効くかを本番の記事で確かめる")
     ap.add_argument("--scaled", action="store_true",
                     help=f"業種を入れ替えただけの同型の組（scaled_guard・重なり{SCALED_MIN_SIM:.0%}%以上）を統合する")
+    ap.add_argument("--pair", nargs=2, metavar=("LOSER", "SURVIVOR"),
+                    help="人が決めた組を統合する（GSCに出る前の同じ主題の2本など）。統合と検算は同じ")
     a = ap.parse_args()
+    if a.pair:
+        # 検索に出る前の記事は GSC の実績が無く、候補の抽出（同じ語が2つ以上）に乗らない。
+        # 同じ主題の2本が両方とも表示0のまま並ぶのを、人が組を決めて統合する（2026-10-04: 経理外注／経理アウトソーシング）
+        import scaled_guard as SG
+        l, s = a.pair
+        arts = SG.corpus()
+        sim = SG.jaccard(arts[l]["grams"], arts[s]["grams"]) if l in arts and s in arts else 0.0
+        pair = {"kind": "scaled", "loser": l, "survivor": s, "sim": sim, "site": AR.site_of(s),
+                "loser_stat": {}, "survivor_stat": {}, "skip": ""}
+        if AR.site_of(l) != pair["site"]:
+            print("別のサイトの記事どうしは統合しません")
+            return 1
+        good, why = run_one(pair, a.write)
+        print(f"  {'○' if good else '×'} {l} → {s}: {why}")
+        if a.write:
+            note(pair, good, why)
+        return 0 if good else 1
     if a.selftest:
         print("■ 統合の検算の自己診断" + ("（同型の組）" if a.scaled else "") + "\n")
         return selftest(a.scaled)
