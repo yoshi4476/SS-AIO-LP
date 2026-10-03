@@ -261,7 +261,7 @@ html.js .rise-5 { animation-delay: .6s; }
 .section { max-width: var(--max-wide); margin: 0 auto; padding: clamp(3rem, 6.5vw, 6rem) var(--gutter); }
 .section-full { padding: clamp(3rem, 6.5vw, 6rem) 0; }
 .section-head { margin-bottom: 2.8rem; }
-.section-head .en { font-family: var(--en); font-size: .8rem; letter-spacing: .34em; color: var(--blue); font-weight: 600; text-transform: uppercase; }
+.section-head .en { display: flex; width: fit-content; font-family: var(--en); font-size: .8rem; letter-spacing: .34em; color: var(--blue); font-weight: 600; text-transform: uppercase; }
 .section-head h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; margin: .3em 0 0; }
 .section-head .sub { color: var(--muted); margin-top: .9em; max-width: 46em; }
 .bg-deep { background: var(--bg-alt); }
@@ -1712,7 +1712,7 @@ section.hero:has(> .tool-hero-ph) { position: relative; isolation: isolate; over
   -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%); }
 .tool-hero-ph img { width: 100%; height: 100%; object-fit: cover; opacity: .16; }
-.enrich { max-width: 1180px; margin: 0 auto; padding: clamp(2.2rem, 5vw, 3.6rem) clamp(1rem, 3vw, 2rem) 0; }
+.enrich { max-width: var(--max-wide); margin: 0 auto; padding: clamp(2.2rem, 5vw, 3.6rem) var(--gutter) 0; }
 .enrich h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 0 0 .4rem; }
 .enrich .en { font-size: .72rem; letter-spacing: .2em; color: var(--blue); font-weight: 700; text-transform: uppercase; }
 .enrich-block { margin: 0 0 clamp(2.4rem, 5vw, 3.4rem); }
@@ -1749,3 +1749,7 @@ section.hero:has(> .tool-hero-ph) { position: relative; isolation: isolate; over
   a.more, a.prod-link, .ind-lps a { display: inline-flex; align-items: center; min-height: 40px; }
   .site-footer li { margin: 0; }
 }
+
+/* ツールページは冒頭も入力欄も左端をそろえる（2026-10-03） */
+section.tool-hero ~ section .audit-panel,
+section.tool-hero ~ section .quiz-panel { margin-left: 0; }

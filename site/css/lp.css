@@ -33,7 +33,9 @@ body.lp-doc .section-head .en {
   color: var(--gold);
   letter-spacing: .3em;
   font-weight: 600;
-  display: inline-flex;
+  /* 1行を占める（見出しと同じ行に並ぶと、短い見出しだけ右に寄って見えた） */
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 1em;
 }

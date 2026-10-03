@@ -133,7 +133,7 @@ section.hero:has(> .tool-hero-ph) { position: relative; isolation: isolate; over
   -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%); }
 .tool-hero-ph img { width: 100%; height: 100%; object-fit: cover; opacity: .16; }
-.enrich { max-width: 1180px; margin: 0 auto; padding: clamp(2.2rem, 5vw, 3.6rem) clamp(1rem, 3vw, 2rem) 0; }
+.enrich { max-width: var(--max-wide); margin: 0 auto; padding: clamp(2.2rem, 5vw, 3.6rem) var(--gutter) 0; }
 .enrich h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 0 0 .4rem; }
 .enrich .en { font-size: .72rem; letter-spacing: .2em; color: var(--blue); font-weight: 700; text-transform: uppercase; }
 .enrich-block { margin: 0 0 clamp(2.4rem, 5vw, 3.4rem); }
@@ -219,6 +219,9 @@ def apply(site: Path):
         # ヒーローの写真（明るいヒーローは薄く敷く。暗いヒーローは動画の場所に写真を置く）
         s = re.sub(r'<div class="tool-hero-ph" aria-hidden="true">.*?</div>', "", s, flags=re.S)
         s = re.sub(r'<img class="lx-hero-video lx-hero-still"[^>]*>', "", s)
+        # 冒頭も左寄せにする（冒頭だけ中央で、下の区画が左だとページの中で寄せ方がばらついて見えた）
+        s = re.sub(r'<section class="hero" style="text-align:center;', '<section class="hero tool-hero" style="', s, count=1)
+        s = s.replace('<p class="lead" style="margin-left:auto;margin-right:auto;">', '<p class="lead">', 1)
         if d.get("dark"):
             s = re.sub(r'(<section class="lx-hero[^"]*"[^>]*>)',
                        lambda m: m.group(1) + f'<img class="lx-hero-video lx-hero-still" src="{d["hero"]}" alt="{d.get('hero_alt', '利用場面')}のイメージ" aria-hidden="true">', s, count=1)
