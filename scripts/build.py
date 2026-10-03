@@ -487,7 +487,7 @@ def _research_box(meta):
     """業種が分かる記事の末尾に、その業種の調査とチェックリストへの案内を置く（調査が無い業種は空）"""
     try:
         import industry_ai_sources as IAS
-        return "\n" + IAS.research_box(_hub_slug(meta))
+        return "\n" + IAS.research_box(_hub_slug(meta), str(meta.get("title", "")))
     except Exception:
         return ""
 

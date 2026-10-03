@@ -364,8 +364,48 @@ RESEARCH_TO_CHECKLIST = {"dental": "dental", "clinic": "clinic", "fudosan": "fud
                          "shigyou": "shigyou"}
 
 
-def research_box(hub_slug):
-    """記事の末尾に置く「この業種の調査」の案内。調査が無い業種は空"""
+# 記事の題名から、調査のどの種類の質問に当たるかを決める（上から順に見る）。
+# 当たれば、その種類の質問だけの内訳を記事に出す（業種全体の同じ数字を全記事に出すより、そのページにしか無い中身になる）
+GROUP_RX = [
+    (r"費用|相場|料金|いくら|価格|坪単価|報酬|見積", ("費用",)),
+    (r"地域|近く|おすすめ|評判|MEO|マップ|口コミ|地図", ("地域で探す",)),
+    (r"選び方|会社|比較|依頼|外注|コンサル|代行|ライター", ("選び方", "治療の選び方")),
+    (r"症状|痛み|治療|インプラント|矯正", ("症状", "治療の選び方")),
+    (r"受診|予約|初診|電話|オンライン診療", ("受診のしかた",)),
+    (r"制度|ルール|規制|ガイドライン|法|税", ("制度・ルール",)),
+    (r"手続き|トラブル|契約|反響|失敗|見学|施工事例|進め方", ("手続き・トラブル", "進め方・トラブル", "手続き・悩み")),
+    (r"物件|街|土地|住まい|リフォーム|断熱|間取り", ("物件・街の探し方", "住まいの悩み")),
+]
+
+
+def group_for(ind, title):
+    """題名に当たる質問の種類（調査にその種類が無ければ None）"""
+    f = OUT / f"{ind}-summary.json"
+    if not f.is_file():
+        return None
+    groups = json.loads(f.read_text(encoding="utf-8")).get("by_group", {})
+    for rx, names in GROUP_RX:
+        if re.search(rx, title or ""):
+            for n in names:
+                if n in groups:
+                    return n
+    return None
+
+
+def group_breakdown(ind, group):
+    """その種類の質問で、回答のうち各種類のサイトを出典に含んだ割合（多い順）。数は集計ファイルからだけ"""
+    s = json.loads((OUT / f"{ind}-summary.json").read_text(encoding="utf-8"))
+    pa = s.get("per_answer", {}).get(group)
+    if not pa or not pa.get("answers"):
+        return None
+    n = pa["answers"]
+    rows = sorted(((round(pa.get(k, 0) / n * 100, 1), k) for k in CATS if pa.get(k)), reverse=True)
+    return {"answers": n, "questions": len(QUESTIONS[ind]["groups"].get(group, [])), "rows": rows}
+
+
+def research_box(hub_slug, title=""):
+    """記事の末尾に置く「この業種の調査」の案内。題名から質問の種類が分かれば、その種類だけの内訳を出す。
+    調査が無い業種は空"""
     import html as H
     r = HUB_TO_RESEARCH.get(hub_slug or "")
     hl = headline(r) if r else None
@@ -373,6 +413,22 @@ def research_box(hub_slug):
         return ""
     T = hl["T"]
     cl = RESEARCH_TO_CHECKLIST.get(r, "")
+    g = group_for(r, title)
+    gb = group_breakdown(r, g) if g else None
+    if gb:
+        own = next((p for p, k in gb["rows"] if k == "clinic"), 0.0)
+        label = lambda k: T["owner_site"] if k == "clinic" else (T["portal"] if k == "portal" else CATS[k])
+        bars = "".join(f'<li><span class="rb-l">{H.escape(label(k))}</span><span class="rb-bar"><i style="width:{min(p, 100)}%"></i></span>'
+                       f'<span class="rb-v">{p}%</span></li>' for p, k in gb["rows"][:5])
+        return ('<aside class="scan-box research-box" aria-label="この業種の調査">'
+                f'<p class="sb-kicker">当社の調査・{hl["date"][:4]}年{int(hl["date"][5:7])}月・{H.escape(hl["name"])}の「{H.escape(g)}」の質問</p>'
+                f'<p class="sb-head">{H.escape(T.get("asker", "お客様"))}が「{H.escape(g)}」をAIに聞いたとき、回答の{own}%が{H.escape(T["owner_site"])}を出典に含んでいました</p>'
+                f'<ul class="rb-bars">{bars}</ul>'
+                f'<p class="sb-sub">「{H.escape(g)}」に当たる{gb["questions"]}問を ChatGPT・Gemini・Claude・Perplexity に聞き、'
+                f'得られた{gb["answers"]}件の回答で、それぞれの種類のサイトを出典に含んだ回答の割合です（1つの回答が複数の種類を含むため、合計は100%になりません）。</p>'
+                f'<p><a class="btn btn-primary" href="/research/{r}-ai-sources/" data-cta="article_research_{r}">調査の結果を見る</a> '
+                + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else "")
+                + '</p></aside>')
     return ('<aside class="scan-box research-box" aria-label="この業種の調査">'
             f'<p class="sb-kicker">調査レポート・{hl["date"][:4]}年{int(hl["date"][5:7])}月</p>'
             f'<p class="sb-head">{H.escape(T["other_short"])}の質問では、回答の{hl["oa"]}%が{H.escape(T["owner_site"])}を出典にしていました</p>'
