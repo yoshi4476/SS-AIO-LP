@@ -1,0 +1,141 @@
+{
+ "slug": "ai-hojokin-kyoto-shinsei-daiko",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "AI導入補助金の申請代行を京都で頼む前に 2026年最新・費用と選び方",
+  "AI導入補助金 京都以外の業者に申請代行を頼んでも問題ありませんか？",
+  "AI導入補助金 京都で申請代行を頼む費用の相場はどれくらいですか？"
+ ],
+ "answers": {
+  "AI導入補助金の申請代行を京都で頼む前に 2026年最新・費用と選び方": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/about",
+     "https://it-shien.smrj.go.jp/schedule/",
+     "https://piocal.jp/services/subsidy/",
+     "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/antifraud",
+     "https://kyotoyorozu.go.jp/",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000349674.html",
+     "https://it-shien.smrj.go.jp/applicant/measures/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/subsidycost/",
+     "https://helptech.jp/ai-subsidy",
+     "https://advertisingplanet.co.jp/media/2026/10/01/digitalization-ai-subsidy-support-provider/",
+     "https://nocode-sol.co.jp/blog/kyoto-ai-subsidy-guide/",
+     "https://nocoderi.co.jp/2025/04/03/kyoto-ai-subsidy-guide/",
+     "https://japan-finance.jp/subsidy/1745/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
+     "https://www.inankl.co.jp/it-subsidy",
+     "https://physical-ai-hojokin.jp/articles/physical-ai-daikou-yasui/",
+     "https://nozaki-gyousei-office.com/kyoto-syouryokuka/",
+     "https://hojyokin-concierge.com/media/2025/10/01/it-dounyu-hojyokin-simulation",
+     "https://carearc.co.jp/blog/2955/",
+     "https://k-supporterz.jp/26_Kyoto/it.html",
+     "https://kyoto-bien-etre.co.jp/blog/ai-budget.html",
+     "https://note.com/transtep/n/n9e47fe07b325"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
+     "https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/",
+     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
+     "https://office-tree.jp/blog/subsidy/subsidy-application-success-fee-only/",
+     "https://financing.web-matching.com/compensation-rates-for-grant-application-services",
+     "https://carearc.co.jp/blog/2913/",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://hojyokin-portal.jp/columns/degital_ai_tujyo",
+     "https://aimeikan.malna.co.jp/columns/ai-hojokin-fusei-taisaku",
+     "https://hojyokin-concierge.com/media/2025/10/24/it-dounyu-hojyokin-shinseidaikou"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金 京都以外の業者に申請代行を頼んでも問題ありませんか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/antifraud/",
+     "https://it-shien.smrj.go.jp/search/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://trise-c.jp/blog/application-for-it-introduction-subsidy/",
+     "https://trise-c.jp/blog/subsidy-application-agency/",
+     "https://so-labo.co.jp/hojyokin/it-hojyo/basic/457/",
+     "https://bcompany.co.jp/service/b-top/column/grants/ithojokin-daikou/",
+     "https://it-shien.smrj.go.jp/",
+     "https://it-shien.smrj.go.jp/search/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_it_vendor_list.pdf",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金 京都で申請代行を頼む費用の相場はどれくらいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/subsidycost/",
+     "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
+     "https://leadbrain.co.jp/service/subsidies-grants/",
+     "https://it-shien.smrj.go.jp/about"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
+     "https://nocode-sol.co.jp/blog/kyoto-ai-subsidy-guide/",
+     "https://mono-support.com/corona/%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E4%BB%A3%E8%A1%8C%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E3%81%AF%EF%BC%9F%E8%A3%9C%E5%8A%A9%E9%87%91%E5%85%A8%E8%88%AC%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B/",
+     "https://catalog.monex.co.jp/article/?p=28598",
+     "https://document.bizpit-kk.com/know-how/subsidy-agency-fee-guide-garage/",
+     "https://office-tree.jp/blog/subsidy/subsidy-application-success-fee-only/",
+     "https://faclog.jp/magazine/it-introduction-subsidy-application-agency/",
+     "https://nozaki-gyousei-office.com/kyoto-syouryokuka/",
+     "https://inu-llc.co.jp/monohojo-success-fee/",
+     "https://kyoto-bien-etre.co.jp/blog/ai-budget.html",
+     "https://local-mp.co.jp/media/columns/subsidy-application-support-guide/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://trise-c.jp/blog/substitute-application-for-subsidies/",
+     "https://local-mp.co.jp/media/columns/subsidy-application-support-guide/",
+     "https://hojokin-shinsei-daikou.jp/area/kyoto/kyoto-city/",
+     "https://carearc.co.jp/blog/2913/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/subsidycost/",
+     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
+     "https://samurai-law.com/hojokin/it10/",
+     "https://financing.web-matching.com/compensation-rates-for-grant-application-services"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

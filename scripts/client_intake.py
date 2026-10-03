@@ -834,6 +834,10 @@ def review(got, cfg):
     # 存在しないURLを指す。推測で埋めず、書いてもらう
     if cfg.get("type") in TYPES and cfg["type"] != "self-static" and not cfg.get("url_prefix"):
         ng.append("記事URLの接頭辞が空です（記事が /blog/xxx/ に出るなら /blog と書いてください）")
+    # ZIP は最後に先方がサーバーへ置く作業が残る。FTP の接続情報を1回もらえば、記事もサイトの変更も全自動になる
+    if cfg.get("type") == "zip":
+        warn.append("形式が zip です。記事・サイト変更のたびに先方がファイルを置く作業が残ります。"
+                    "サーバーの FTP 接続情報を1回いただければ ftp にでき、先方の作業は無くなります")
     _, bad = languages(got.get("languages"))
     if bad:
         warn.append(f"多言語の指定で読めない語があります: {' / '.join(bad)}"

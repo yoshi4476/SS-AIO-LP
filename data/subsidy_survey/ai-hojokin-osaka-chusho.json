@@ -1,0 +1,160 @@
+{
+ "slug": "ai-hojokin-osaka-chusho",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "中小企業のAI導入補助金 大阪の申請サポートと採択の進め方",
+  "大阪の中小企業ですが、AI導入補助金はうちの規模でも申請できますか？",
+  "AI導入補助金 申請から着金までどのくらいで、経営者側は何を準備すればいいですか？"
+ ],
+ "answers": {
+  "中小企業のAI導入補助金 大阪の申請サポートと採択の進め方": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/about/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/schedule/",
+     "https://osaka-profit.com/about/",
+     "https://www.obda.or.jp/jigyo/obdx.html",
+     "https://www.yorozu-osaka.jp/about-us/",
+     "https://www.yorozu-osaka.jp/faq/",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/applicant/measures/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://nocoderi.co.jp/2025/04/03/osaka-ai-subsidy-guide/",
+     "https://wheat-biz.com/ai-dx/osaka-dx-shien-hojokin-dx/",
+     "https://hojokin-agent.jp/purpose/equipment-it/osaka",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETDgVYv6zyNKyqpxiZlfBGRbcMtYSYIHbZic6cYkqbKH4k0gxo0E8E1lkY_pgmSCNtZtZ7FM0ppq08IcFvW3XIsZO1YWptMpE2nId0a5GF8vYVIttghhY5mo2I20qDi3wgZGNTZh43AxoUvPPX_4_dIFcEKgA5doEFxg==",
+     "https://k-supporterz.jp/27_Osaka/it.html",
+     "https://www.city.osaka.lg.jp/keizaisenryaku/page/0000685495.html",
+     "https://hojokin-agent.jp/purpose/dx/osaka",
+     "https://www.osaka.cci.or.jp/pj/a/J01030000015.html",
+     "https://www.youtube.com/watch?v=Amk_SQVWbQo",
+     "https://yamashita-sougou.tkcnf.com/tkc-it-hojo"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://it-shien.smrj.go.jp/about/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-osaka-2026/",
+     "https://mono-support.com/blog/2026-oosaka-hojokin/",
+     "https://liftbaseinc.com/column/ai-subsidies-sme",
+     "https://hojokin-dx.com/articles/osaka-prefecture-dx-ai-subsidy-2026/",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://www.cloudsign.jp/journal/it-hojokin-guide-2025/",
+     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/dejitarl-hojyokin-new/",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://ai-ok.jp/ai-subsidy-2026-sme-application-guide/",
+     "https://gel-banana.jp/labs/chusho-kigyo-it-hojokin",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://biz-recipe.jp/subsidies-list/osaka/",
+     "https://hojokin-agent.jp/purpose/dx/osaka",
+     "https://obdx.jp/",
+     "https://wheat-biz.com/ai-dx/osaka-dx-shien-hojokin-dx/",
+     "https://hojokin-dx.com/articles/osaka-prefecture-dx-subsidy-2026/"
+    ],
+    "error": ""
+   }
+  },
+  "大阪の中小企業ですが、AI導入補助金はうちの規模でも申請できますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/subsidy",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://www.city.osaka.lg.jp/keizaisenryaku/page/0000678364.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://nocoderi.co.jp/2025/04/03/osaka-ai-subsidy-guide/",
+     "https://ottele.net-links.co.jp/column/2025/05/89143/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFZQi1YD1JY3cd_e92COPt9oL2eL8uku20H4mUClviRHLaF1UWnaIwXfA8thIuCuHiIcxVvmsnf5r4_OdVBk36veZr2kAGViERa2zNJVv0lW4cR90Z0MosBCxu5t3TLBihv3ePzGA==",
+     "https://www.z-sup.com/it-ubsidy/target-audience.html",
+     "https://hojyokin-portal.jp/subsidies/73535",
+     "https://digital-ai-hojokin.jp/articles/osaka-ai-hojokin-2026/",
+     "https://www.youtube.com/watch?v=Amk_SQVWbQo",
+     "https://www.city.osaka.lg.jp/keizaisenryaku/page/0000685495.html",
+     "https://hojokin-agent.jp/purpose/equipment-it/osaka"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-osaka-2026/",
+     "https://www.pull-net.jp/digital-ai-subsidy-2026/checklist/",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金 申請から着金までどのくらいで、経営者側は何を準備すればいいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://it-shien.smrj.go.jp/schedule",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/news/40041",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://leadbrain.co.jp/contents/lb/8690/",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://hojokin-dx.com/articles/ai-subsidy-application-to-payment-timeline-2026/",
+     "https://www.pull-net.jp/digital-ai-subsidy-2026/payment/",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://so-labo.co.jp/hojyokin/it-hojyo/basic/649/",
+     "https://www.robotpayment.co.jp/blog/billing-business/18804/",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/degital_ai_schedule",
+     "https://it-shien.smrj.go.jp/schedule/",
+     "https://www.pull-net.jp/digital-ai-subsidy-2026/payment/",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://leadbrain.co.jp/contents/lb/8690/",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://hojokin-agent.jp/guide/it-hojo/schedule",
+     "https://carearc.co.jp/blog/2936/",
+     "https://dextre.app/ja/it-introduction-subsidy/28209/",
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://www.smartmat.io/column/subsidy/8137",
+     "https://j-aix.or.jp/journal/25/",
+     "https://www.anshin.co.jp/information/781",
+     "https://a-x.inc/blog/ai-2026-5/",
+     "https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

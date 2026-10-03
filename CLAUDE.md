@@ -248,6 +248,25 @@ python scripts/add_fact.py --add <file.json>      # 通れば登録
 `ftp`/`zip` の見た目は `data/clients/<id>/template.html` があればそれ、無ければ `templates/external_article.html`。
 配信した記事の一覧（関連記事に使う）は `data/clients/<id>/delivered.json`。
 
+**サイトの構成（ナビ・トップ・固定ページ・CSS・メニュー・配色）も、どの形式でも管制塔から変える**（先方は何もしない）:
+
+```bash
+python scripts/site_change.py --site <id> --pull       # 先方のサイトを .publish-work/<id>-site/ へ取る（控えを残す）
+python scripts/site_change.py --site <id> --diff       # 変える内容を見る
+python scripts/site_change.py --site <id> --push       # 変えた分だけ反映（先方が取った後に変えたものがあれば止まる）
+python scripts/site_change.py --site <id> --rollback   # 直前の反映の前へ戻す
+```
+
+| 形式 | 変えられる範囲 |
+|:--|:--|
+| Git の社 | 全部（配信先リポジトリへ push） |
+| `ftp` | 全部（変えたファイルだけ上げる。WordPress 本体・アップロード画像・5MB超は取らない） |
+| `wordpress` | 固定ページ・メニュー・ナビ・テンプレート・テンプレートパーツ・配色（ブロックテーマ）・サイト設定。PHP のテーマは触れない（その場合は FTP の接続情報をもらう）。メニュー・設定は管理者権限のユーザーが要る |
+| `zip` | ZIP と手順書を先方へメール（先方の作業が残るので、登録時に ftp を勧める警告が出る） |
+
+作業場所の git は必ずその場所の `.git` を名指しする（壊れた `.git` から親の管制塔リポジトリへさかのぼり、
+本体へ4,821件を誤コミットした。門 `test_site_change_stays_in_its_own_repo_and_wp_roundtrip` が止める）。
+
 **WordPress納品での品質ゲート**
 
 静的サイトは「基準に届かない記事はファイルごと生成されない」ため物理的に公開できない。WordPressはデータベースに入るため、公開ステータスへの遷移を先方側で止める必要がある。

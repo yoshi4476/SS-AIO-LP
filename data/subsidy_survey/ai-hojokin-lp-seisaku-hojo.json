@@ -1,0 +1,152 @@
+{
+ "slug": "ai-hojokin-lp-seisaku-hojo",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "AI導入補助金でLP制作は補助対象？2026年最新の条件と流れ",
+  "LP制作だけを依頼したいのですが、AI導入補助金の対象になりますか？",
+  "AI導入補助金でLP制作を含めた場合、補助額と自己負担はどのくらいですか？"
+ ],
+ "answers": {
+  "AI導入補助金でLP制作は補助対象？2026年最新の条件と流れ": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/about",
+     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/applicant/measures/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://it-shien.smrj.go.jp/schedule/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.dt-media.jp/column/web-system-ai-subsidy-2026",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6cc0v3I2VMQsH-iQile12q5VVKy5xIGSHl1IVDfQuXIDQusx5X8Xkq08rn7eQn6L6-bsUD6aYy_HMEfF9BbcmeoZ1NpkhwO4Uk6-BLnnBOuqVTDnoLvKZ1J5jjb5N3aBWaxhRnrFBmBcya0L45nBju_cjIlwHlY2bgA==",
+     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
+     "https://it-shien.smrj.go.jp/",
+     "https://alank.jp/news/ai-subsidy-2026-2/",
+     "https://prtimes.jp/main/html/rd/p/000000211.000051151.html",
+     "https://nortiqlab.com/subsidy",
+     "https://coosy.co.jp/blog/web-funding/",
+     "https://fun-create.co.jp/post-221/",
+     "https://fun-create.co.jp/post-221/",
+     "https://bizrobot.jp/it-subsidy/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
+     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
+     "https://adfactoryhearts.com/hp-subsidy-2026/",
+     "https://moveq.co.jp/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%B6%E4%BD%9C%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%BE%E3%81%A8%E3%82%81%EF%BD%9C2026%E5%B9%B4%E5%BA%A6/",
+     "https://leon-strategy.com/hp",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://www.digital-reclame.co.jp/blog/digital-ai-subsidy-guide-2026/",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo"
+    ],
+    "error": ""
+   }
+  },
+  "LP制作だけを依頼したいのですが、AI導入補助金の対象になりますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://grill.co.jp/marketing-log/17199/",
+     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
+     "https://grill.co.jp/marketing-log/17199/",
+     "https://nxpg.net/blog/tech/?p=17433",
+     "https://bizrobot.jp/it-subsidy/",
+     "https://fun-create.co.jp/post-221/",
+     "https://fun-create.co.jp/post-221/",
+     "https://imitsu.jp/list/hp-design/it-subsidy/",
+     "https://ok-design.co.jp/blog/3613/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://web-kanji.com/posts/homepage-subsidy",
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
+     "https://adfactoryhearts.com/hp-subsidy-2026/",
+     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
+     "https://peaksmarketing.co.jp/column/5419/",
+     "https://leon-strategy.com/hp",
+     "https://so-labo.co.jp/hojyokin/it-hojo/basic/334/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_manual_it_tool.pdf",
+     "https://soichiro.co.jp/it-hojo/",
+     "https://web-kanji.com/posts/landing-page-subsidy",
+     "https://hojokin-agent.jp/guide/it-hojo/tools",
+     "https://m-assets.com/lp/subsidy/blog/it-subsidy-2026-guide"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金でLP制作を含めた場合、補助額と自己負担はどのくらいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://grill.co.jp/marketing-log/17199/",
+     "https://fun-create.co.jp/digital-ai-hojokin-homepage-2026/",
+     "https://techt-ai.com/column/homepage-seisaku-hojokin",
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://fun-create.co.jp/post-221/",
+     "https://www.e-kishow.com/website/website-blog/reiwa-8-s-subsidy/",
+     "https://kotoan-ai.com/blog/jizokuka-hojokin-homepage",
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGnDFv0_DsYrSvo9I7BGEhAzfKk6u-rBBTjSEM8bhqme7foavkgsgwLVHdHfXzhhZVwdwx5EWp9_VxFhvMe6aN7sCKAld63G2VYp4c3NjgRvakzI1Dql6TEMKD9izaDnkeoayF0vDY4FWkIJwFmfnhlr978yrH79pCY",
+     "https://hojokin-agent.jp/guide/it-hojo/amount",
+     "https://grill.co.jp/marketing-log/17199/",
+     "https://webup.jp/info/subsidy-support/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
+     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
+     "https://bluemonkey.jp/media/column/web-hojyo/",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

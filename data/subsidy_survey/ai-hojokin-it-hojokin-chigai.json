@@ -1,0 +1,134 @@
+{
+ "slug": "ai-hojokin-it-hojokin-chigai",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "AI導入補助金とIT導入補助金の違いは?結論は同じ制度",
+  "なぜ「AI導入補助金」と呼ばれるようになったのか?",
+  "AI導入補助金とIT導入補助金は併用できますか?"
+ ],
+ "answers": {
+  "AI導入補助金とIT導入補助金の違いは?結論は同じ制度": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://mirasapo-plus.go.jp/infomation/32666/",
+     "https://it-shien.smrj.go.jp/news/40013"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=zel0HOZykI4",
+     "https://www.youtube.com/watch?v=HqdEuXnfBQ0",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
+     "https://it-shien.smrj.go.jp/about/",
+     "https://ainaiseika.com/subsidy/it-hojo-vs-digital-hojo/",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://sokuresu.ai/column/digital-ai-subsidy-2026",
+     "https://nakamura-tax.net/blog/subsidy/digital-ai-hojokin/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://sorimachi.co.jp/column/recommendation/20260408_01/",
+     "https://www.obc.co.jp/360/list/post498",
+     "https://note.com/loyal_takin6498/n/n0e7a198d4ed3",
+     "https://ukiyo.co.jp/media/it-subsidy/",
+     "https://tecn.apice-tec.co.jp/hojo-it-diff/",
+     "https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/",
+     "https://qiita.com/DnD-inc/items/6be206e73d913856a23d",
+     "https://it-shien.smrj.go.jp/news/40013",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
+     "https://arimura-cpa.com/column/it-dounyu-hojokin/",
+     "https://www.josis365.com/blog/digital-ai-subsidy-2026-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "なぜ「AI導入補助金」と呼ばれるようになったのか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/news/40013",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://mirasapo-plus.go.jp/infomation/32666/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ukiyo.co.jp/media/it-subsidy/",
+     "https://note.com/chusho_yosuke/n/ne5c29d3e6c7a",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF2f2PDmkwnTfOAgGBRqa-GvQUtBssJOz8HCyZSVMP_y_oOsl2xHEffj-7owhg4gLSIokFS2V4-3u6doNku-saRaCQVxUTSJsvyUWEqOvqsDkHLWFzGWC23Oue8Z-IKna6axpK_d5eT5Qai3lqSuZIJCmIXJnPGJ85l",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://www.abkss.jp/blog/hojo-001"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/news/40013",
+     "https://it-shien.smrj.go.jp/",
+     "https://mirasapo-plus.go.jp/infomation/31537/",
+     "https://mirasapo-plus.go.jp/infomation/32666/",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://uravation.com/media/ai-digital-subsidy-guide-2026/",
+     "https://qiita.com/DnD-inc/items/6be206e73d913856a23d"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金とIT導入補助金は併用できますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://listing-partners.com/gbiz/gbiz_column/itdonyuhojokin-monozukurihojokin-heiyo/",
+     "https://result-hojyokin.com/dejitarukaaidounyuuhojyokinnyokuarusitumonn/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFEhlizdQW0y1tUpXYNtsg4OAdpl7xa2oasGPCLiqVEWJEiBkXh_p29-PzaEcM_Th6Vpch44ZcR709BMwtg8qGYz425R6VExGdvYUL3KKhnLBEUINq1FVH1gK_1kaHvrrVr_PF-uNDM-uF6XD3Vyus7bYwW4j-h-vsubg==",
+     "https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei",
+     "https://hojokin-kanji.com/posts/business-restructuring-subsidy-it",
+     "https://biz.moneyforward.com/ai/basic/6599/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.ricoh.co.jp/solutions/special-theme/it-subsidy",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_fukusu.pdf",
+     "https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei",
+     "https://www.aidma-hd.jp/ai/ai-subsidy/",
+     "https://compass.ordentier-corp.co.jp/subsidies-grants/subsidy-duplicate-receipt-check-coordination/",
+     "https://nocoderi.co.jp/2025/04/03/ai%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AF%E8%A4%87%E6%95%B0%E4%BD%B5%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8B%EF%BC%9F%E5%88%B6%E5%BA%A6%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A8%E6%B3%A8%E6%84%8F%E7%82%B9/",
+     "https://shouryokuka-hojokin.jp/articles/hojokin-heiyou-guide/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

@@ -304,6 +304,10 @@ WHAT = {
                 "指摘を1つずつ直してください。守ること:\n"
                 "- 一次性: 使ってよい数字は下の登録済みの一次情報だけ。無ければ数字は足さず、現場での判断の順番・\n"
                 "  失敗しやすい点・確かめ方を具体的に書く。自社の採択率や支援社数は書かない\n"
+                "- 母数と時期の無い自社の事例・実績・お客様の声（「当社支援事例」「当社支援実績」など）は削る。\n"
+                "  採点で毎回減点される原因で、確かめられない話は信頼を落とす。下の調査の数字に置き換える\n"
+                "- 登録済みの一次情報に「当社調べ」の調査があれば、その文をそのまま（数字を変えずに）2か所までに使い、\n"
+                "  読者が次に何を確かめればよいかの根拠にする\n"
                 "- 抽出性: 冒頭の2文で結論を言い切る。各H2の直後は、その節の答えを1文で言い切る\n"
                 "- 決定支援: 読者が次に何をするか決められるよう、判断の基準か手順か比較表を1つ以上置く\n"
                 "- 制度名・金額・締切は本文にあるものだけを使い、新しく足さない\n"
@@ -570,7 +574,9 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
 
     now = warns(slug)
     if len(now) > len(before_warns):
-        return f"警告が増えました（{len(before_warns)} → {len(now)}）"
+        # 何の警告かを返す。件数だけでは、やり直しのときに直す場所が分からない
+        new = [w for w in now if w not in before_warns]
+        return f"警告が増えました（{len(before_warns)} → {len(now)}）: " + " / ".join(new)[:400]
 
     # --exclude-slug を必ず渡す。渡さないと、その記事自身が食い合い相手として
     # 数えられ、順位を持つ記事のリライトは100%差し戻される。
@@ -707,6 +713,8 @@ def run_one(item, write):
     if kind == "quality":
         import facts as F
         _, fs = F.load_for(item.get("site") or site_of(slug))
+        # 記事ごとの調査（subsidy_survey など）は呼び出し側が extra_facts で渡す
+        fs = list(fs) + list(item.get("extra_facts") or [])
         allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
         what = what.format(weak=item.get("why", "")[:1500],
                            facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")

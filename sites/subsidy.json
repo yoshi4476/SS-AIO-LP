@@ -148,5 +148,10 @@
     "linkedin": ""
   },
   "lead_hub": false,
-  "_comment_lead_hub": "問い合わせは自前のGAS（form-endpoint.gs）の台帳に入る。管制塔の「問い合わせ」とは突き合わせない（lead_reconcile）"
+  "_comment_lead_hub": "問い合わせは自前のGAS（form-endpoint.gs）の台帳に入る。管制塔の「問い合わせ」とは突き合わせない（lead_reconcile）",
+  "facts_allow": [
+    "subsidy-vendor",
+    "founded",
+    "dataset-keiri-*"
+  ]
 }

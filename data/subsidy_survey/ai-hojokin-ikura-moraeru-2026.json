@@ -1,0 +1,125 @@
+{
+ "slug": "ai-hojokin-ikura-moraeru-2026",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "AI導入補助金2026はいくらもらえる?上限350万円と対象を解説",
+  "AI導入補助金(正式名称: AI導入補助金)は最大いくらまでもらえますか?",
+  "AI導入補助金 補助金は申請すれば必ずもらえますか?"
+ ],
+ "answers": {
+  "AI導入補助金2026はいくらもらえる?上限350万円と対象を解説": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_invoice/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy",
+     "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
+     "https://it-shien.smrj.go.jp/applicant/flow/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETptBw5dGRK9Sgv_UnnLD6H4Xi2wjR46ooQZHaDNW4MBcdu4tM6fxf_g-PsLSyuthntpVpB8LLC-IsgKNwjje8z6x0-SwkVV144njGXLPUzuUoOKtwS5SsXifP_77CYTykF1SzcRL_8BgUMzLjwUAv0OD8vjt5ohtG",
+     "https://www.obc.co.jp/360/list/post498",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://it-shien.smrj.go.jp/news/40013",
+     "https://gxo.co.jp/column/digital-ai-subsidy-2026-guide",
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://ironbird.jp/2026_dx_ai_support_menu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://www.smartmat.io/column/subsidy/8137",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://somurix.co.jp/lp/digital-ai-subsidy-2026-guide/",
+     "https://www.digital-reclame.co.jp/blog/ai-subsidy-2026-guide/",
+     "https://jitsumu-guide.com/it-subsidy-2026-guide/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://altrobo.co.jp/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96%E3%83%BBai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BD%9C%E8%A3%9C%E5%8A%A9%E9%A1%8D/",
+     "https://financeinjapan.com/finance/0a926180-e348-44c8-8f9b-e7fc8652ef56",
+     "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/dejitarl-hojyokin-new/",
+     "https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/",
+     "https://www.digital-reclame.co.jp/blog/digital-ai-adoption-subsidy-2026-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金(正式名称: AI導入補助金)は最大いくらまでもらえますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://mirasapo-plus.go.jp/subsidy/ithojo/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_multiple_companies/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3ehOwr7zbdoIMUQWU2POoR6GHihuZWKEAfgAiL83zm__xwE7DvP2tMKu_Z3NsuJeOt2judoNtsN_MTDxbjwKI67ro5VO_S5qFQO6EXto5pFMa5Q0A3jF-vrVJfEAFJzZHMRhuxuTp0IZU9SPJtk5SPWKSKlCt6uf0iA==",
+     "https://www.asasimple.jp/it-hojyokin-2026/",
+     "https://www.busicom.co.jp/misekatsu/all/subsidy/digitalai_hojokin_b",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://www.youtube.com/watch?v=Au1Eb0paMnI",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3ehOwr7zbdoIMUQWU2POoR6GHihuZWKEAfgAiL83zm__xwE7DvP2tMKu_Z3NsuJeOt2judoNtsN_MTDxbjwKI67ro5VO_S5qFQO6EXto5pFMa5Q0A3jF-vrVJfEAFJzZHMRhuxuTp0IZU9SPJtk5SPWKSKlCt6uf0iA=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://uravation.com/media/ai-digital-subsidy-guide-2026/",
+     "https://www.btncon.com/blog/digital-ai-subsidy-2026",
+     "https://sorimachi.co.jp/column/recommendation/20260408_01/",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://qiita.com/DnD-inc/items/6be206e73d913856a23d",
+     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金 補助金は申請すれば必ずもらえますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
+     "https://leadbrain.co.jp/contents/lb/8739/",
+     "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

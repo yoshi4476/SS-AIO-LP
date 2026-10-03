@@ -37,7 +37,8 @@ def own_data_facts(site_id):
     # 立ち上げ期に「クリック0回」を記事へ書くと、読者には実力が無いと映る。
     # 嘘は書かないが、弱い数字をわざわざ公表する必要もない。
     out = []
-    if clicks >= 10 or top10 >= 3:
+    # 「クリック0回」を記事に書かせない（順位だけ条件にしていたため、補助金サイトで出ていた）
+    if clicks >= 10:
         out.append({
             "id": "own-gsc",
             "claim": f"当サイトの実測では、直近28日で{len(rows)}個の検索語から"
@@ -162,7 +163,18 @@ def load_for(site_id):
     data = read(SRC) if SRC.is_file() else {"facts": []}
     if data is None:
         return {"facts": []}, []
-    return data, [f for f in data.get("facts", []) if site_id in f.get("sites", [])]
+    got = [f for f in data.get("facts", []) if site_id in f.get("sites", [])]
+    # 使ってよい一次情報をサイト側で絞る（facts_allow）。一次データは公開のたびに全サイトへ
+    # 登録されるため、補助金サイトの記事に MEO の店舗数や「のべ50社を支援」（支援社数は載せない方針）が
+    # 入り、採点でも「主題と関係ない数字」と減点されていた（2026-10-04）
+    try:
+        import fnmatch
+        allow = json.loads((ROOT / "sites" / f"{site_id}.json").read_text(encoding="utf-8")).get("facts_allow")
+    except (OSError, ValueError):
+        allow = None
+    if allow is not None:
+        got = [f for f in got if any(fnmatch.fnmatch(f.get("id", ""), p) for p in allow)]
+    return data, got
 
 
 def main():

@@ -1,0 +1,143 @@
+{
+ "slug": "ai-hojokin-nagoya-support",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "AI導入補助金 名古屋のサポート先の選び方採択率・費用・流れを解説",
+  "AI導入補助金のサポートは、名古屋にオフィスがない会社 (大阪など) に依頼しても大丈夫ですか?",
+  "名古屋でAI導入補助金のサポート費用の相場は?成功報酬とは何ですか?"
+ ],
+ "answers": {
+  "AI導入補助金 名古屋のサポート先の選び方採択率・費用・流れを解説": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://www.nipc.or.jp/digitalgrants/",
+     "https://pit-n.nagoya-cci.or.jp/advice/",
+     "https://it-shien.smrj.go.jp/search/",
+     "https://it-shien.smrj.go.jp/download/grantdecision_list/",
+     "https://it-shien.smrj.go.jp/applicant/measures/",
+     "https://spiral-corp.com/subsidy/subsidy-it/",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ai-keiei.co.jp/subsidy/",
+     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
+     "https://hojokin-agent.jp/purpose/equipment-it/aichi",
+     "https://fois-web.com/columns/6723/",
+     "https://dx-hojo.aibsc.jp/",
+     "https://dx-hojo.aibsc.jp/",
+     "https://www.city.nagoya.jp/jigyou/sangyou/1026356/1026468/1026469.html",
+     "https://www.nagoya-cci.or.jp/shikin/nagoyashi.digital.html",
+     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
+     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
+     "https://ms-shop.net/ai-dx/",
+     "https://mono-support.com/blog/2026-hojokin-nagoya/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
+     "https://digital-ai-hojokin.jp/articles/aichi-ai-hojokin-2026/",
+     "https://promotize.jp/blog/ai-guide/aichi-ai-dounyuu-shien/",
+     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://seisansei.smrj.go.jp/subsidy_info/it_subsidy.html",
+     "https://www.obc.co.jp/360/list/post372"
+    ],
+    "error": ""
+   }
+  },
+  "AI導入補助金のサポートは、名古屋にオフィスがない会社 (大阪など) に依頼しても大丈夫ですか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/search/",
+     "https://it-shien.smrj.go.jp/itvendor/about/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/about/",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://samurai-law.com/hojokinsupport/",
+     "https://spiral-corp.com/post-415/",
+     "https://www.shigyo.co.jp/senmon/jigyousha_hojokin/it_kouhusinnsei_support.html",
+     "https://office-ozk.com/hojokin/it-hojokin/it-hojokin-jigyosya/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋でAI導入補助金のサポート費用の相場は?成功報酬とは何ですか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://hosoe-tax.com/news/column/column_zeimu/article/20250605-2/",
+     "https://it-shien.smrj.go.jp/",
+     "https://www.azuma-gyosei.net/area/nagoya.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
+     "https://office-tree.jp/blog/subsidy/subsidy-application-success-fee-only/",
+     "https://spiral-corp.com/subsidy/subsidy-it/",
+     "https://note.com/carearc/n/n518429789036",
+     "https://www.rivewell.jp/ithojo/",
+     "https://kitazawaoffice.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E3%83%97%E3%83%A9%E3%82%B6%E5%90%8D%E5%8F%A4%E5%B1%8B/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGYhc1C7f9XpI92IpEl3UE_FPK2ALTagl1quqmQVv9oe3v6opHYvxkiHk2M6Oq3cPz80gJQGRRYtICj30ckcu00_txQUGaEKo8jOrDPqOsLuNHVIcgXSkQqnUQqKYpsMuttPJBQizb4nkXgmbi1W8PkFg==",
+     "https://iwamoto-it.co.jp/subsidy/digital-ai.php",
+     "https://faclog.jp/magazine/it-introduction-subsidy-application-agency/",
+     "https://www.rex-consul.com/post/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91",
+     "https://www.meihou-gkn.com/%E8%A3%BD%E5%93%81%E7%B4%B9%E4%BB%8B/%EF%BD%89%EF%BD%94%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://colorfulbox.co.jp/subsidy",
+     "https://spiral-corp.com/post-415/",
+     "https://physical-ai-hojokin.jp/articles/physical-ai-daikou-hiyou/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://digital-ai-hojokin.jp/articles/aichi-ai-hojokin-2026/",
+     "https://central-ax.co.jp/nagoya-ai/",
+     "https://promotize.jp/blog/ai-guide/aichi-ai-dounyuu-shien/",
+     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
+     "https://advertisingplanet.co.jp/media/2026/09/26/sme-ai-adoption-support-guide/",
+     "https://liftbaseinc.com/column/ai-subsidies-sme",
+     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
+     "https://site.kzclassllc.com/blog/ai-agent-cost-and-subsidy/",
+     "https://dstmp.shachihata.co.jp/column/0420230926/",
+     "https://weeva.co.jp/news/subsidy-agency-fees/",
+     "https://bcompany.co.jp/service/b-top/column/grants/ithojokin-sinsei/",
+     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
+     "https://hojokin-kanji.com/posts/it-introduction-subsidy-application-agency",
+     "https://mono-support.com/corona/%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E4%BB%A3%E8%A1%8C%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E3%81%AF%EF%BC%9F%E8%A3%9C%E5%8A%A9%E9%87%91%E5%85%A8%E8%88%AC%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B/",
+     "https://financing.web-matching.com/compensation-rates-for-grant-application-services",
+     "https://carearc.co.jp/blog/2913/",
+     "https://support03.com/category4/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

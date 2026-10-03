@@ -56,17 +56,28 @@ def rewrite_all():
     合格したら点数を書いて articles/ に置く（配信は呼び出し側で）。不合格なら _legacy に戻す"""
     import auto_rewrite as AR
     import score_audit as SA
+    import subsidy_survey as SV
     log = json.loads(LOG.read_text(encoding="utf-8"))
+    only = [a for a in sys.argv[1:] if not a.startswith("--")]
     for p in sorted(LEGACY.glob("*.md")):
         rec = log.get(p.stem)
-        if not rec or rec.get("pass") or p.stem in MERGE:
+        if not rec or rec.get("pass") or p.stem in MERGE or (only and p.stem not in only):
             continue
         dst = ROOT / "articles" / p.name
         dst.write_text(convert(p, rec["axes"]), encoding="utf-8")
-        ok, msg = AR.run_one({"kind": "quality", "slug": p.stem, "site": "subsidy", "why": rec.get("reason", "")}, True)
+        # 補助金サイトに書ける自社の数字は、AIへの聞き取り調査（subsidy_survey）だけ
+        extra = SV.claims(p.stem)
+        why = rec.get("reason", "")
+        # 検算に落ちたら、落ちた理由（どの警告か）を伝えてもう1回だけ直させる
+        for attempt in range(2):
+            ok, msg = AR.run_one({"kind": "quality", "slug": p.stem, "site": "subsidy", "why": why,
+                                  "extra_facts": extra}, True)
+            if ok:
+                break
+            why = f"{rec.get('reason', '')}\n\n前回の書き直しは検算で戻されました。次を必ず避けてください: {msg}"
         if not ok:
             dst.unlink()
-            print(f"× {p.stem}: 書き直しが検算で止まりました（{str(msg)[:60]}）", flush=True)
+            print(f"× {p.stem}: 書き直しが検算で止まりました（{str(msg)[:120]}）", flush=True)
             continue
         res, err = SA.audit_one(p.stem, dst)
         if res and res.get("ok"):

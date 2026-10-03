@@ -172,6 +172,55 @@ class Remote:
             return None
         return buf.getvalue()
 
+    def walk(self, rel="", skip=()):
+        """相手のサーバーのファイルを (相対パス, 大きさ) で全部返す。skip に当たるフォルダは潜らない"""
+        out, stack = [], [rel.strip("/")]
+        while stack:
+            cur = stack.pop()
+            if any(cur == s or cur.startswith(s + "/") for s in skip):
+                continue
+            path = f"{self.root}/{cur}".rstrip("/") or "/"
+            if self.proto == "sftp":
+                import stat
+                for e in self.s.listdir_attr(path):
+                    sub = f"{cur}/{e.filename}".strip("/")
+                    if stat.S_ISDIR(e.st_mode):
+                        stack.append(sub)
+                    else:
+                        out.append((sub, e.st_size))
+                continue
+            try:
+                entries = list(self.f.mlsd(path, facts=["type", "size"]))
+            except ftplib.error_perm:
+                entries = None
+            if entries is None:
+                # MLSD の無い古いサーバー: 名前だけ取り、入れればフォルダとみなす
+                entries = []
+                for full in self.f.nlst(path):
+                    name = full.rsplit("/", 1)[-1]
+                    try:
+                        self.f.cwd(f"{path}/{name}")
+                        entries.append((name, {"type": "dir"}))
+                    except ftplib.error_perm:
+                        entries.append((name, {"type": "file", "size": "0"}))
+            for name, fact in entries:
+                if name in (".", "..") or fact.get("type") in ("cdir", "pdir"):
+                    continue
+                sub = f"{cur}/{name}".strip("/")
+                if fact.get("type") == "dir":
+                    stack.append(sub)
+                else:
+                    out.append((sub, int(fact.get("size") or 0)))
+        return out
+
+    def delete(self, rel):
+        path = f"{self.root}/{rel}"
+        try:
+            self.s.remove(path) if self.proto == "sftp" else self.f.delete(path)
+            return True
+        except (OSError, ftplib.error_perm):
+            return False
+
     def rmtree(self, rel):
         """フォルダごと消す。消したファイル数を返す（無ければ0）"""
         path = f"{self.root}/{rel}".rstrip("/")
