@@ -104,7 +104,11 @@ def check_leads(bad):
         out = subprocess.run([sys.executable, str(ROOT / "scripts" / "lead_reconcile.py"), "--days", "3"],
                              capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300)
     except Exception as e:
-        print(f"  問い合わせ: 突き合わせが動きません（{str(e)[:40]}）")
+        bad.append(f"要対応: 問い合わせの突き合わせが動きませんでした（{str(e)[:60]}）")
+        return
+    # 動かなかったのに「食い違いなし」と出さない（Codex の点検で指摘）。LEADS_OK の印が無ければ照合できていない
+    if out.returncode != 0 or "LEADS_OK=" not in out.stdout:
+        bad.append(f"要対応: 問い合わせの突き合わせが途中で止まりました（{(out.stdout + out.stderr).strip()[-80:]}）")
         return
     lines = [l.strip() for l in out.stdout.splitlines() if l.strip().startswith("要対応")]
     print(f"  問い合わせ: {'食い違いあり' if lines else '食い違いなし'}")

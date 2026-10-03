@@ -45,8 +45,10 @@ def main():
     base = {fn for _, _, _, fn, _ in PLANTS}
     broken_before = [fn for fn in sorted(base) if run_gate(fn)]
     if broken_before:
-        print(f"壊す前から落ちている門があります: {broken_before}（先にそちらを直す）")
-        return 1
+        # 「要対応」の行にしないと、週次の通知に載らない（Codex の点検で指摘）
+        print(f"要対応: 壊す前から落ちている門があります: {', '.join(broken_before)}（先にそちらを直す）")
+        print("GATE_SELFTEST_OK=no")
+        return 0
     for rel, old, new, fn, what in PLANTS:
         p = ROOT / rel
         orig = p.read_bytes()

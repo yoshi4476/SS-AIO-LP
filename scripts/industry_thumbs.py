@@ -153,6 +153,8 @@ def apply_share_images(site: Path, site_url: str):
         url = f"{site_url}/images/thumbs/{files[0]}"
         s = p.read_text(encoding="utf-8")
         new = _re.sub(r'(<meta property="og:image" content=")[^"]*(")', lambda m: m.group(1) + url + m.group(2), s, count=1)
+        # すでに twitter:image があるページも、同じ画像に差し替える（X だけ古い画像が残らないように。Codex の点検で指摘）
+        new = _re.sub(r'(<meta name="twitter:image" content=")[^"]*(")', lambda m: m.group(1) + url + m.group(2), new, count=1)
         if 'name="twitter:image"' not in new:
             new = new.replace("</head>", f'<meta name="twitter:image" content="{url}">\n</head>', 1)
         if new != s:

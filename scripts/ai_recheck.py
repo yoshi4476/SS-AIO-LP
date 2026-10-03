@@ -57,6 +57,10 @@ def real_host(uri, title):
         return host(uri)
 
 
+class NoAnswer(Exception):
+    """AI が答えを返さなかった（測れなかった）"""
+
+
 def ask(q):
     key = os.environ.get("GEMINI_API_KEY", "")
     model = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
@@ -68,6 +72,9 @@ def ask(q):
         d = json.load(r)
     c = (d.get("candidates") or [{}])[0]
     text = "".join(p.get("text", "") for p in (c.get("content") or {}).get("parts", []))
+    if not text.strip():
+        # 答えが返らなかった質問を「出典なし・社名なし」と数えると、測れていないのに 0/3 と送ってしまう（Codex の点検で指摘）
+        raise NoAnswer(q)
     chunks = [x.get("web") or {} for x in (c.get("groundingMetadata") or {}).get("groundingChunks", [])]
     hosts = []
     for w in chunks[:12]:
@@ -152,11 +159,25 @@ def main():
         except urllib.error.HTTPError as e:
             print(f"  Gemini が止まりました（{e.code}）。残りは明日に回します")
             break
+        except NoAnswer as e:
+            print(f"  {it['company']}: 答えが返らない質問がありました（{e}）。明日もう一度測ります")
+            continue
         subject, html, summary = mail(it, res)
         print(f"  {it['company']}: {summary}")
         if not live:
             continue                                    # 手元では本人に送らない（CLAUDE.md 8.7）
-        send(it["email"], subject, html)
+        # 先に「送った」と記録してから送る。送った後の記録に失敗すると、翌日も対象になり同じ人に2通届く
+        # （Codex の点検で指摘）。記録できなければ送らない
+        done = HC._post({"action": "ai_recheck_done", "row": it["row"], "result": "送信中 " + summary}) or {}
+        if not done.get("ok"):
+            print(f"要対応: AI診断の測り直し — 送信済みの記録ができないため {it['company']} に送っていません（明日もう一度）")
+            continue
+        try:
+            send(it["email"], subject, html)
+        except Exception as e:
+            HC._post({"action": "ai_recheck_done", "row": it["row"], "result": "送信失敗 " + str(e)[:40]})
+            print(f"要対応: AI診断の測り直しのメールを送れませんでした（{it['company']}・{str(e)[:60]}）。再送はしません")
+            continue
         HC._post({"action": "ai_recheck_done", "row": it["row"], "result": summary})
         sent += 1
     print(f"RECHECK_SENT={sent}")

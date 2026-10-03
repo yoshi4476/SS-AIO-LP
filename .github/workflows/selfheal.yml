@@ -102,7 +102,11 @@ jobs:
         run: |
           mkdir -p automation/logs
           [ -n "$SA_JSON" ] && printf '%s' "$SA_JSON" > indexing-service-account.json
-          out=$(python scripts/outcome_watch.py 2>&1) || true
+          # 見張り自体が途中で落ちたら、それも知らせる（何も出ないと「問題なし」に見える。Codex の点検で指摘）
+          out=$(python scripts/outcome_watch.py 2>&1) || out="$out
+          要対応: 結果の見張りが途中で止まりました（$(echo "$out" | tail -1 | cut -c1-120)）"
+          echo "$out" | grep -q 'WATCH_OK=' || out="$out
+          要対応: 結果の見張りが最後まで動いていません"
           echo "$out" | tail -20
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           if echo "$out" | grep -q '^要対応'; then
@@ -120,8 +124,9 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           bad=0
-          python tests/test_gates.py || bad=1
+          # 記事のページは Git に置かない（公開の前に作る）。検査は作った後に走らせる
           python scripts/build.py    || bad=1
+          python tests/test_gates.py || bad=1
           echo "broken=$bad" >> "$GITHUB_OUTPUT"
           if [ "$bad" = "0" ]; then
             echo "検査はすべて通っています。修復は不要です"
@@ -145,8 +150,9 @@ jobs:
         id: verify
         run: |
           ok=1
-          python tests/test_gates.py || ok=0
+          # 記事のページは Git に置かない（公開の前に作る）。検査は作った後に走らせる
           python scripts/build.py    || ok=0
+          python tests/test_gates.py || ok=0
           echo "ok=$ok" >> "$GITHUB_OUTPUT"
           if [ "$ok" = "0" ]; then
             echo "::error::修復後も検査が通りません。変更を捨てます"
