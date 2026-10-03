@@ -241,6 +241,6 @@ def test_ai_answer_pages_for_three_sites():
     b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
     check("AI集客ラボ: build.py が調査ページを作る", '_RS.data("ai-lab"' in b, True)
     wf = (ROOT / ".github" / "workflows" / "industry-research.yml").read_text(encoding="utf-8")
-    check("毎月: AI集客ラボ・コーポレートを調べ、コーポレートへ配信する",
+    check("3か月ごと: AI集客ラボ・コーポレートを調べ、コーポレートへ配信する",
           ("--site ai-lab" in wf, "--site corporate" in wf, "research_publish.py --site corporate --push" in wf), (True, True, True))
     check("コーポレートのページの雛形がある", (ROOT / "templates" / "corporate_research_page.tsx").is_file(), True)

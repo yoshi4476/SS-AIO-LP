@@ -1,4 +1,4 @@
-# 業種別のAI調査（サブスクと無料枠だけ: ChatGPT は Codex、Claude は Claude Code、Gemini は無料枠）
+# 業種別のAI調査と、記事の問いをAIに聞いた調査（3か月に1回。ChatGPT は Codex、Claude は Claude Code、Gemini は月の上限の中で）
 # 2026-10-04 まで手元のパソコンで回しており、電源が切れると止まった。CI に移す。
 # 未完了の業種と、ChatGPT の回答が足りない業種（利用上限で取れなかった分）だけを回す。
 # 利用上限に当たったら research_run.py が明けるまで待つ。答えは data/ai_cache をキャッシュで持ち越す。
@@ -6,7 +6,7 @@ name: 業種調査
 
 on:
   schedule:
-    - cron: "0 18 1 * *"   # 毎月2日 03:00 JST
+    - cron: "0 18 1 1,4,7,10 *"   # 3か月に1回（1・4・7・10月の2日 03:00 JST）。答えは月ごとに大きく変わらず、ChatGPT の利用上限と Gemini の料金を食うため（2026-10-04）
   workflow_dispatch:
 
 concurrency:
