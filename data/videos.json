@@ -1,128 +1,158 @@
 {
-  "koumuten-chumon-jutaku-aio": {
-    "site": "ai-lab",
-    "date": "2026-09-27",
-    "sec": 352,
-    "mp4": "automation/video/koumuten-chumon-jutaku-aio.mp4",
-    "nums": [
-      "3",
-      "4"
-    ],
-    "format": "duo",
-    "retired": [
-      "pMse2psyJyw",
-      "FkAqZuU0eAw"
-    ],
-    "youtube": "XG2aPmerFB0",
-    "short": {
-      "date": "2026-10-02",
-      "sec": 42,
-      "title": "工務店がAIに出てこないのはなぜ?",
-      "youtube": "UujGzTKfyoA"
-    }
-  },
-  "zeirishi-houjin-aio": {
-    "site": "ai-lab",
-    "date": "2026-09-27",
-    "sec": 299,
-    "mp4": "automation/video/zeirishi-houjin-aio.mp4",
-    "nums": [
-      "1",
-      "3",
-      "5"
-    ],
-    "format": "duo",
-    "retired": [
-      "DmzW2_zEYYM",
-      "1rb4V2PLMdU"
-    ],
-    "youtube": "FzB21lfDeTs"
-  },
-  "aio-towa": {
-    "site": "ai-lab",
-    "date": "2026-09-29",
-    "sec": 319,
-    "mp4": "automation/video/aio-towa.mp4",
-    "nums": [
-      "10",
-      "13.7",
-      "3",
-      "4",
-      "5",
-      "64.7"
-    ],
-    "format": "duo",
-    "youtube": "fq33o4HNrE4",
-    "short": {
-      "date": "2026-09-29",
-      "sec": 46,
-      "title": "llms.txtを置けばAI検索対策になる？",
-      "youtube": "vZiyBjb78Cg"
-    }
-  },
-  "aio-checker": {
-    "site": "ai-lab",
-    "date": "2026-09-30",
-    "sec": 285,
-    "mp4": "automation/video/aio-checker.mp4",
-    "nums": [
-      "1",
-      "2",
-      "3",
-      "4"
-    ],
-    "format": "duo",
-    "youtube": "bmyfkTqAHBk",
-    "short": {
-      "date": "2026-09-30",
-      "sec": 45,
-      "title": "AIOチェッカーで満点なら引用される？",
-      "youtube": "nO0PtQZI_vI"
-    }
-  },
-  "seikyusho-template-muryou": {
-    "site": "corporate",
-    "date": "2026-10-01",
-    "sec": 314,
-    "mp4": "automation/video/seikyusho-template-muryou.mp4",
-    "nums": [
-      "1",
-      "2026",
-      "4",
-      "6",
-      "9"
-    ],
-    "format": "duo",
-    "youtube": "1fr21n1Ngjk",
-    "short": {
-      "date": "2026-10-01",
-      "sec": 48,
-      "title": "無料の請求書テンプレ、そのまま使える？",
-      "youtube": "tDXNsAGfeYE"
-    }
-  },
-  "nougyou-shoki-hiyou-hojokin": {
-    "site": "subsidy",
-    "date": "2026-10-02",
-    "sec": 371,
-    "mp4": "automation/video/nougyou-shoki-hiyou-hojokin.mp4",
-    "nums": [
-      "1",
-      "1,000",
-      "1,136",
-      "10",
-      "194",
-      "2",
-      "2026",
-      "350",
-      "4",
-      "431",
-      "500",
-      "561",
-      "755",
-      "9"
-    ],
-    "format": "duo",
-    "youtube": "gUyQ2SMAhZ8"
+ "koumuten-chumon-jutaku-aio": {
+  "site": "ai-lab",
+  "date": "2026-10-03",
+  "sec": 351,
+  "mp4": "automation/video/koumuten-chumon-jutaku-aio.mp4",
+  "nums": [
+   "3",
+   "4"
+  ],
+  "format": "duo",
+  "retired": [
+   "pMse2psyJyw",
+   "FkAqZuU0eAw",
+   "XG2aPmerFB0"
+  ],
+  "youtube": "iAEBBf0WoxY",
+  "short": {
+   "date": "2026-10-03",
+   "sec": 35,
+   "title": "工務店の社名がAIに出ないのはなぜ？",
+   "youtube": "RN6_XHKQmWg",
+   "retired": [
+    "UujGzTKfyoA"
+   ]
   }
+ },
+ "zeirishi-houjin-aio": {
+  "site": "ai-lab",
+  "date": "2026-10-03",
+  "sec": 299,
+  "mp4": "automation/video/zeirishi-houjin-aio.mp4",
+  "nums": [
+   "1",
+   "3",
+   "5"
+  ],
+  "format": "duo",
+  "retired": [
+   "DmzW2_zEYYM",
+   "1rb4V2PLMdU",
+   "FzB21lfDeTs"
+  ],
+  "youtube": "OlH4PQHc4F4"
+ },
+ "aio-towa": {
+  "site": "ai-lab",
+  "date": "2026-10-03",
+  "sec": 319,
+  "mp4": "automation/video/aio-towa.mp4",
+  "nums": [
+   "10",
+   "13.7",
+   "3",
+   "4",
+   "5",
+   "64.7"
+  ],
+  "format": "duo",
+  "youtube": "nSRNr6klTZM",
+  "short": {
+   "date": "2026-10-03",
+   "sec": 42,
+   "title": "AIOは何から始める？効く3条件",
+   "youtube": "gxtIYcbIXkY",
+   "retired": [
+    "vZiyBjb78Cg",
+    "koffj2Y5G60"
+   ]
+  },
+  "retired": [
+   "zhgMOj4UkJ0",
+   "rXVB1Nrhnsc",
+   "fq33o4HNrE4"
+  ]
+ },
+ "aio-checker": {
+  "site": "ai-lab",
+  "date": "2026-10-03",
+  "sec": 285,
+  "mp4": "automation/video/aio-checker.mp4",
+  "nums": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "format": "duo",
+  "youtube": "4_wtV9p1d7Y",
+  "short": {
+   "date": "2026-09-30",
+   "sec": 45,
+   "title": "AIOチェッカーで満点なら引用される？",
+   "youtube": "nO0PtQZI_vI"
+  },
+  "retired": [
+   "bmyfkTqAHBk"
+  ]
+ },
+ "seikyusho-template-muryou": {
+  "site": "corporate",
+  "date": "2026-10-03",
+  "sec": 314,
+  "mp4": "automation/video/seikyusho-template-muryou.mp4",
+  "nums": [
+   "1",
+   "2026",
+   "4",
+   "6",
+   "9"
+  ],
+  "format": "duo",
+  "youtube": "oV87orjtRXY",
+  "short": {
+   "date": "2026-10-01",
+   "sec": 48,
+   "title": "無料の請求書テンプレ、そのまま使える？",
+   "youtube": "tDXNsAGfeYE"
+  },
+  "retired": [
+   "1fr21n1Ngjk",
+   "XfKh6nJHJ24"
+  ]
+ },
+ "nougyou-shoki-hiyou-hojokin": {
+  "site": "subsidy",
+  "date": "2026-10-03",
+  "sec": 371,
+  "mp4": "automation/video/nougyou-shoki-hiyou-hojokin.mp4",
+  "nums": [
+   "1",
+   "1,000",
+   "1,136",
+   "10",
+   "194",
+   "2",
+   "2026",
+   "350",
+   "4",
+   "431",
+   "500",
+   "561",
+   "755",
+   "9"
+  ],
+  "format": "duo",
+  "youtube": "XR42uoRLpOs",
+  "short": {
+   "youtube": "qVW7xnlLBI8",
+   "sec": 42,
+   "date": "2026-10-03",
+   "title": "農業を始める初期費用はいくら？補助金は？"
+  },
+  "retired": [
+   "gUyQ2SMAhZ8"
+  ]
+ }
 }
