@@ -106,6 +106,49 @@ def ask_openai(q):
     return urls
 
 
+LIMITS = ROOT / "data" / "ai_cache" / "_limits.json"
+
+
+class UsageLimit(RuntimeError):
+    """サブスクの利用上限。until（datetime）まで呼んでも失敗する"""
+    def __init__(self, engine, until):
+        super().__init__(f"{engine} は利用上限です（{until:%m-%d %H:%M} まで）")
+        self.engine, self.until = engine, until
+
+
+def limit_until(engine):
+    """記録された上限の終わり（過ぎていれば None）"""
+    from datetime import datetime
+    try:
+        t = datetime.fromisoformat(json.loads(LIMITS.read_text(encoding="utf-8"))[engine])
+        return t if t > datetime.now() else None
+    except Exception:
+        return None
+
+
+def _note_limit(engine, text):
+    """「try again at 2:53 AM」から再開時刻を読み、記録する。読めなければ1時間後とする
+    （2026-10-03: 上限に気づかず50問ずつ失敗し続け、17業種の ChatGPT の回答が0件のまま完了扱いになった）"""
+    from datetime import datetime, timedelta
+    now = datetime.now()
+    until = now + timedelta(hours=1)
+    m = re.search(r"try again at (\d{1,2}):(\d{2})\s*(AM|PM)", text or "", re.I)
+    if m:
+        h = int(m.group(1)) % 12 + (12 if m.group(3).upper() == "PM" else 0)
+        until = now.replace(hour=h, minute=int(m.group(2)), second=0, microsecond=0)
+        if until <= now:
+            until += timedelta(days=1)
+    until += timedelta(minutes=5)
+    try:
+        d = json.loads(LIMITS.read_text(encoding="utf-8")) if LIMITS.is_file() else {}
+    except Exception:
+        d = {}
+    d[engine] = until.isoformat(timespec="minutes")
+    LIMITS.parent.mkdir(parents=True, exist_ok=True)
+    LIMITS.write_text(json.dumps(d), encoding="utf-8")
+    return until
+
+
 def ask_chatgpt_codex(q):
     """ChatGPT のサブスク（Codex CLI の Web検索）で聞く。課金APIは使わない。
     出典は構造で返らないので、参照したURLを1行ずつ書かせて拾う（本文中のリンクも拾う）"""
@@ -115,6 +158,9 @@ def ask_chatgpt_codex(q):
     exe = shutil.which("codex") or shutil.which("codex.cmd")
     if not exe:
         return None
+    until = limit_until("ChatGPT")
+    if until:
+        raise UsageLimit("ChatGPT", until)
     prompt = (f"次の質問に、Web検索をして日本語で答えてください。\n質問: {q}\n\n"
               "答えの最後に、検索で見て根拠にしたページのURLを全部、1行に1つずつ `SOURCE: <URL>` の形で書いてください。")
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
@@ -123,7 +169,10 @@ def ask_chatgpt_codex(q):
                             "-c", 'model_reasoning_effort="low"', "-"], input=prompt, cwd=tmp, capture_output=True,
                            text=True, encoding="utf-8", errors="replace", timeout=420)
     if r.returncode != 0:
-        raise RuntimeError(f"codex exec が失敗しました: {(r.stderr or r.stdout)[-160:]}")
+        err = (r.stderr or r.stdout or "")
+        if "usage limit" in err.lower():
+            raise UsageLimit("ChatGPT", _note_limit("ChatGPT", err))
+        raise RuntimeError(f"codex exec が失敗しました: {err[-160:]}")
     out = r.stdout or ""
     urls = re.findall(r"SOURCE:\s*<?(https?://[^\s>)]+)", out) or re.findall(r"\]\((https?://[^)\s]+)\)", out)
     return list(dict.fromkeys(urls))

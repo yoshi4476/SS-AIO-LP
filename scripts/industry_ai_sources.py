@@ -423,11 +423,27 @@ def _lpu(T):
     return f"/lp/{T['lp']}/" if T.get("lp") else "/lp/"
 
 
+def research_for_title(title):
+    """業種のまとめページが無い業種（ジム・動物病院など）は、題名の業種名で調査を選ぶ。
+    調査は29業種あるのに、まとめページのある13業種の記事からしかつながっていなかった（2026-10-04）"""
+    if not title:
+        return None
+    try:
+        import research_extra as RX
+    except Exception:
+        return None
+    for slug, name, owner, *_ in RX.INDUSTRIES:
+        words = {w for w in re.split(r"[・（）()]", f"{name}・{owner}") if len(w) >= 2 and w not in ("業者", "サロン", "お客様")}
+        if any(w in title for w in words) and (ROOT / "data" / "research" / f"{slug}-summary.json").is_file():
+            return slug
+    return None
+
+
 def research_box(hub_slug, title=""):
     """記事の末尾に置く「この業種の調査」の案内。題名から質問の種類が分かれば、その種類だけの内訳を出す。
     調査が無い業種は空"""
     import html as H
-    r = HUB_TO_RESEARCH.get(hub_slug or "")
+    r = HUB_TO_RESEARCH.get(hub_slug or "") or research_for_title(title)
     hl = headline(r) if r else None
     if not hl:
         return ""

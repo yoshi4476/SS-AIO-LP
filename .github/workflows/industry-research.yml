@@ -1,0 +1,83 @@
+# 業種別のAI調査（サブスクと無料枠だけ: ChatGPT は Codex、Claude は Claude Code、Gemini は無料枠）
+# 2026-10-04 まで手元のパソコンで回しており、電源が切れると止まった。CI に移す。
+# 未完了の業種と、ChatGPT の回答が足りない業種（利用上限で取れなかった分）だけを回す。
+# 利用上限に当たったら research_run.py が明けるまで待つ。答えは data/ai_cache をキャッシュで持ち越す。
+name: 業種調査
+
+on:
+  schedule:
+    - cron: "0 18 1 * *"   # 毎月2日 03:00 JST
+  workflow_dispatch:
+
+concurrency:
+  group: industry-research
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 依存インストール
+        run: |
+          python -m pip install --quiet -r requirements.txt
+          npm i -g @openai/codex @anthropic-ai/claude-code >/dev/null 2>&1
+
+      - name: AIの答えを前回から持ち越す
+        uses: actions/cache@v4
+        with:
+          path: data/ai_cache
+          key: ai-cache-${{ github.run_id }}
+          restore-keys: ai-cache-
+
+      - name: Codex にログインする
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          if [ -z "$CODEX_AUTH_JSON" ]; then echo "::warning::CODEX_AUTH_JSON 未登録（ChatGPT は聞かずに進む）"; exit 0; fi
+          mkdir -p ~/.codex
+          printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
+          chmod 600 ~/.codex/auth.json
+          codex login status || true
+
+      - name: 調べる（未完了・ChatGPT が足りない業種だけ）
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          python scripts/research_extra.py --draft 2>&1 | tail -5 || true
+          python scripts/research_run.py --minutes 290 2>&1 | grep -vE "^\s+[0-9]+/[0-9]+$" | tail -40
+
+      - name: 片付け
+        if: always()
+        run: rm -f ~/.codex/auth.json
+
+      - name: サイトに反映して公開
+        env:
+          PYTHONIOENCODING: utf-8
+        run: |
+          python scripts/build.py > /dev/null
+          python tests/test_gates.py > /tmp/gates.log 2>&1 || { tail -20 /tmp/gates.log; echo "::error::門が通らないため公開しません"; exit 1; }
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          for p in data/research site; do if [ -e "$p" ]; then git add "$p"; fi; done
+          git diff --cached --quiet && { echo "変更なし"; exit 0; }
+          git commit -q -m "業種調査の更新 $(date '+%Y-%m-%d')"
+          for i in 1 2 3; do
+            if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep 5
+          done
+          echo "::error::push できませんでした"; exit 1
