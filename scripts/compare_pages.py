@@ -90,4 +90,18 @@ def index_html(cat_pages, base="/compare/"):
                   for slug, name, n in cat_pages)
     return ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>比較表から探す</h2></div>'
             '<p class="hub-lead">「何と何がどう違うか」「いくらかかるか」を、記事の表だけを集めて見比べられる入口です。</p>'
-            f'<ul class="hub-list">{lis}</ul></div>')
+            '<figure class="lab-band"><img src="/images/shelf/cost-1.webp" alt="費用の見積もりを見比べる経営者のイメージ" '
+            'width="1600" height="900" loading="lazy" decoding="async"><figcaption>※ 写真はイメージです</figcaption></figure>'
+            f'<ul class="hub-list">{lis}</ul>'
+            '<div class="enrich-block" style="margin-top:2.4rem"><h2>比較表の読み方</h2>'
+            '<ol class="enrich-steps">'
+            '<li><b>カテゴリを選ぶ</b><span>AIO・LLMO、SEO、MEO、AI集客の4つから、知りたい分野の比較表を開きます。</span></li>'
+            '<li><b>表の前提を確かめる</b><span>表は各記事にあるものと同じです。数字の根拠と前提は、表の下の出典の記事に書いています。</span></li>'
+            '<li><b>記事で詳しく読む</b><span>気になった表は出典の記事を開くと、表の前後に選び方や注意点が書いてあります。</span></li>'
+            '</ol></div>'
+            '<div class="enrich-block enrich-faq"><h2>よくある質問</h2>'
+            '<details><summary>表の金額はそのまま見積もりになりますか？</summary><p>なりません。各記事の時点での目安です。'
+            '自社の場合の費用は、無料相談で現状を伺ってからお伝えします。</p></details>'
+            '<details><summary>表はいつの情報ですか？</summary><p>出典の記事に書いた時点の情報です。各表の下に、出典の記事と時点を載せています。</p></details>'
+            '<details><summary>自社に合うものを選ぶには？</summary><p>まずURL診断で自社サイトの現在地を確かめると、どの比較から読めばよいかが決まります。'
+            '<a href="/tools/url-check/">URL診断（無料）</a></p></details></div></div>')

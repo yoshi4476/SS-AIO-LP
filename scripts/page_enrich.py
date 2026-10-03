@@ -126,6 +126,26 @@ DOWNLOAD = {
              ("/research/shigyou-ai-sources/", "調査: 士業")],
 }
 
+CONTACT = {
+    "side": ("/images/scenes/faq.webp", "オンラインで相談に答える担当者"),
+    "steps": [("フォームを送る", "ご相談内容を選び、わかる範囲で詳細を書いて送信します。「まだ相談レベル」でもかまいません。"),
+              ("2営業日以内にご連絡", "集客支援の実務者が、内容を確かめたうえでご連絡します。"),
+              ("現状分析レポートをもとに話す", "御社のサイトの現状を分析したレポートをお渡しし、何から直すかを一緒に決めます。")],
+    "learn": [("サイトがAIと検索に読まれているか", "AIのクローラーが入れるか、検索に出る設定か、内容を読み取れるか。"),
+              ("どこから直すか", "効きの大きいところから、直す順番をお伝えします。"),
+              ("自社でできること・任せること", "社内でできる修正と、任せたほうが早いことを分けてお伝えします。"),
+              ("費用の目安", "ご依頼いただく場合の進め方と費用の目安をお伝えします。")],
+    "who": ["AIに聞いても自社の名前が出てこない方",
+            "検索からの問い合わせが減ってきた方",
+            "何から手を付ければよいか、まず整理したい方"],
+    "faq": [("相談だけでもよいですか？", "はい。「まだ相談レベル」でもお気軽にどうぞ。ご依頼いただくかは、お話を聞いてから決めてください。"),
+            ("誰が対応しますか？", "外注の営業担当ではなく、集客支援の実務者がヒアリングから対応します。"),
+            ("返事はいつ来ますか？", "2営業日以内に担当者からご連絡します。"),
+            ("先に自分で確かめる方法はありますか？", "URL診断やAI診断などの無料ツールで、その場で現在地を確かめられます。")],
+    "more": [("/tools/url-check/", "URL診断（14項目）"), ("/tools/ai-check/", "AI診断（AIにどう紹介されているか）"),
+             ("/download/", "業種別チェックリスト（PDF）"), ("/lp/", "サービスと料金")],
+}
+
 CSS = """
 /* 無料ツール・資料ダウンロードの肉付け（page_enrich.py・2026-10-03） */
 section.hero:has(> .tool-hero-ph) { position: relative; isolation: isolate; overflow: hidden; }
@@ -245,6 +265,16 @@ def apply(site: Path):
                           + '" alt="' + DOWNLOAD["side"][1] + 'のイメージ" width="1600" height="900" loading="lazy" decoding="async"></figure>\n  <!-- TODO: フォーム送信先の設定', 1)
         block = _blocks({**DOWNLOAD, "side": ("/images/shelf/subsidy-docs-1.webp", "資料を見ながら次の手を決める経営者")}, DOWNLOAD["more"])
         s = _put(s, block, r"<footer")
+        if s != s0:
+            p.write_text(s, encoding="utf-8", newline="")
+            n += 1
+    p = site / "contact" / "index.html"
+    if p.is_file():
+        s = p.read_text(encoding="utf-8")
+        s0 = s
+        s = _put(s, _blocks(CONTACT, CONTACT["more"]).replace("<h2>使い方は3ステップ</h2>", "<h2>ご相談の流れ</h2>")
+                 .replace("<h2>結果でわかること</h2>", "<h2>ご相談でわかること</h2>")
+                 .replace("<h2>あわせて読む・使う</h2>", "<h2>先に自分で確かめる</h2>"), r"<footer")
         if s != s0:
             p.write_text(s, encoding="utf-8", newline="")
             n += 1
