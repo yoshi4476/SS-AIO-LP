@@ -73,13 +73,21 @@ def questions(slug):
     # 質問形が足りない記事は、本文の見出し（目次・FAQ・事例・まとめ・相談の節を除く）を問いにする
     plain = [re.sub(r"[*_`]", "", h).strip() for h in re.findall(r"^##\s+(.+)$", t, re.M)
              if not re.search(r"目次|要点|よくある質問|FAQ|事例|まとめ|相談|お問い合わせ", h)]
-    for q in heads + faqs + plain:
+    # 「はい・いいえ」で答える問いを先に聞く。「いくら」「どのくらい」は答えの割れ方を数えられず、
+    # 本題の数字にならなかった（2026-10-04: 4本で0件）
+    yn = re.compile(r"(ますか|ませんか|ですか|できますか|なりますか|でしょうか)[?？]?$")
+    # 当社への相談を聞く問い（「集客も相談できますか」）は AI に聞いても答えようがないので外す
+    cands = [q for q in heads + faqs if not re.search(r"集客|MEO|AIO|AI検索対策", q)]
+    wh = re.compile(r"いくら|どのくらい|どれくらい|どんな|どの|いつ|何|どう|どれ|どこ|なぜ")   # 疑問詞のある問いは「はい・いいえ」にならない
+    is_yn = lambda q: bool(yn.search(q.strip(" 　"))) and not wh.search(q)
+    cands = [q for q in cands if is_yn(q)] + [q for q in cands if not is_yn(q)]
+    for q in cands + plain:
         q = re.sub(r"\s*\{#[^}]*\}", "", q).strip(" 　")
         if "AI導入補助金" not in q and "IT導入補助金" not in q:
             q = f"AI導入補助金 {q}"
         if q not in qs and len(q) <= 60:
             qs.append(q)
-        if len(qs) >= 3:
+        if len(qs) >= 4:
             break
     return qs
 
@@ -109,7 +117,7 @@ def survey(slug):
     return rec
 
 
-LABELS = {"yes": "対象になる（できる）", "cond": "条件による", "no": "対象外（できない）", "none": "問いに直接答えていない"}
+LABELS = {"yes": "はい（対象になる・できる）", "cond": "条件による", "no": "いいえ（対象外・できない）", "none": "問いに直接答えていない"}
 
 
 def _read_once(items):
