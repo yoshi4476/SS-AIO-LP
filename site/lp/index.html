@@ -425,7 +425,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="mc-label">MOVIE 01</p>
       <p class="mc-title">10分で分かる、AIで集客する仕組み</p>
       <p class="mc-sub">なぜ今AI検索なのか、市場の変化から。実際の制作画面つき</p>
-      <video controls preload="none" poster="/videos/aio-pr-poster.jpg" data-cta="lp_pr_video">
+      <video controls preload="none" data-poster="/videos/aio-pr-poster.jpg" data-cta="lp_pr_video">
         <source src="/videos/aio-pr.mp4" type="video/mp4">
         お使いのブラウザでは動画を再生できません。
       </video>
@@ -434,7 +434,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="mc-label">MOVIE 02</p>
       <p class="mc-title">サービス資料を6分でご説明</p>
       <p class="mc-sub">下の資料をスライドに沿って解説。お急ぎの方はこちらから</p>
-      <video controls preload="none" poster="/videos/doc-guide-poster.jpg" data-cta="lp_doc_video">
+      <video controls preload="none" data-poster="/videos/doc-guide-poster.jpg" data-cta="lp_doc_video">
         <source src="/videos/doc-guide.mp4" type="video/mp4">
         お使いのブラウザでは動画を再生できません。
       </video>
@@ -449,7 +449,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p style="font-size:.8rem;color:var(--muted);margin:0;">ボタンか矢印キーでめくれます</p>
     </div>
     <div class="sv-frame" style="position:relative;border-radius:12px;overflow:hidden;margin-top:.9rem;background:#fff;border:1px solid var(--line,#dbe3ec);">
-      <img class="sv-img" src="/images/proposal/p01.jpg" alt="サービス資料 1ページ目" style="display:block;width:100%;" width="1600" height="1131">
+      <img class="sv-img" loading="lazy" decoding="async" src="/images/proposal/p01.jpg" alt="サービス資料 1ページ目" style="display:block;width:100%;" width="1600" height="1131">
       <button type="button" class="sv-prev" aria-label="前のページ" style="position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">‹</button>
       <button type="button" class="sv-next" aria-label="次のページ" style="position:absolute;right:.6rem;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(7,26,56,.72);color:#fff;font-size:1.2rem;cursor:pointer;">›</button>
     </div>
@@ -676,5 +676,6 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </div>
 
+<script>(function(){var vs=document.querySelectorAll("video[data-poster]");if(!("IntersectionObserver" in window)){vs.forEach(function(v){v.poster=v.dataset.poster});return;}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.poster=e.target.dataset.poster;io.unobserve(e.target);}});},{rootMargin:"600px"});vs.forEach(function(v){io.observe(v)});})();</script>
 </body>
 </html>
