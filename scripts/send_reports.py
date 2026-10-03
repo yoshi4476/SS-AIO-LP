@@ -79,8 +79,9 @@ def main():
     if not SRC.is_dir():
         print(f"{SRC} がありません")
         return 1
-    monthly = sorted(p for p in SRC.iterdir() if p.name.startswith("月次"))
-    weekly = sorted(p for p in SRC.iterdir() if p.name.startswith("週次"))
+    # 添付は PDF だけ。HTML のまま送って受け取り側で文字化けした（2026-09-14）
+    monthly = sorted(p for p in SRC.iterdir() if p.name.startswith("月次") and p.suffix.lower() == ".pdf")
+    weekly = sorted(p for p in SRC.iterdir() if p.name.startswith("週次") and p.suffix.lower() == ".pdf")
     if not (monthly or weekly):
         print("送るファイルがありません")
         return 1

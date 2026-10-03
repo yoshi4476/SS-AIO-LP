@@ -48,8 +48,50 @@ def convert(p, axes=None):
     return "\n".join(out) + "\n---\n" + body
 
 
+MERGE = {"ai-hojokin-hitsuyo-shorui-kojin", "ai-hojokin-kourigyou-katsuyou"}   # 点が低すぎるので統合する
+
+
+def rewrite_all():
+    """不合格だった記事を、採点者の指摘に沿って書き直し（検算つき）、原稿を読ませて採点し直す。
+    合格したら点数を書いて articles/ に置く（配信は呼び出し側で）。不合格なら _legacy に戻す"""
+    import auto_rewrite as AR
+    import score_audit as SA
+    log = json.loads(LOG.read_text(encoding="utf-8"))
+    for p in sorted(LEGACY.glob("*.md")):
+        rec = log.get(p.stem)
+        if not rec or rec.get("pass") or p.stem in MERGE:
+            continue
+        dst = ROOT / "articles" / p.name
+        dst.write_text(convert(p, rec["axes"]), encoding="utf-8")
+        ok, msg = AR.run_one({"kind": "quality", "slug": p.stem, "site": "subsidy", "why": rec.get("reason", "")}, True)
+        if not ok:
+            dst.unlink()
+            print(f"× {p.stem}: 書き直しが検算で止まりました（{str(msg)[:60]}）", flush=True)
+            continue
+        res, err = SA.audit_one(p.stem, dst)
+        if res and res.get("ok"):
+            s = dst.read_text(encoding="utf-8")
+            s = re.sub(r"^score:.*$", f"score: {round(sum(res['axes'].values()) / 3)}", s, count=1, flags=re.M)
+            s = re.sub(r"^score_breakdown:.*$", "score_breakdown: {" + ", ".join(f"{k}: {v}" for k, v in res["axes"].items()) + "}",
+                       s, count=1, flags=re.M)
+            dst.write_text(s, encoding="utf-8")
+            p.unlink()
+            log[p.stem] = {"axes": res["axes"], "pass": True, "rewritten": True}
+            print(f"○ {p.stem}: {res['axes']}", flush=True)
+        else:
+            # 書き直した版を _legacy の控えにして、次の回でさらに直せるようにする
+            p.write_text(dst.read_text(encoding="utf-8"), encoding="utf-8")
+            dst.unlink()
+            if res:
+                log[p.stem] = {"axes": res["axes"], "pass": False, "reason": res.get("reason", "")[:600], "rewritten": True}
+            print(f"△ {p.stem}: 書き直し後も不合格 {res and res['axes']}", flush=True)
+        LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
 def main():
     import score_audit as SA
+    if "--rewrite" in sys.argv:
+        return rewrite_all()
     dry = "--dry" in sys.argv
     log = json.loads(LOG.read_text(encoding="utf-8")) if LOG.is_file() else {}
     for p in sorted(LEGACY.glob("*.md")):

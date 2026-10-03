@@ -93,13 +93,38 @@ def wrap_title(d, title, max_width, base_size=64, min_size=40):
         # 2行分割: 中央に最も近い区切り文字で割る
         seps = [m.start() for m in re.finditer(r"[、。・｜|？! ？!／/」』）)]", title)]
         cut = min(seps, key=lambda i: abs(i - len(title) // 2)) + 1 if seps else len(title) // 2
+        cut = safe_cut(title, cut)
         lines = [title[:cut].strip(), title[cut:].strip()]
         if all(d.textlength(x, font=f) <= max_width for x in lines if x):
             return [x for x in lines if x], f
     # 最終手段: 最小サイズで強制2分割
     f = font(min_size)
-    cut = len(title) // 2
-    return [title[:cut], title[cut:]], f
+    cut = safe_cut(title, len(title) // 2)
+    return [x for x in (title[:cut].strip(), title[cut:].strip()) if x], f
+
+
+WORD_CH = re.compile(r"[A-Za-z0-9.,%]")
+
+
+def safe_cut(title, cut):
+    """英数字のかたまり（AI Overview・4.6% など）の途中で行を割らない。
+
+    中央で強制的に割ると「AI / Overview」「4 / 6%」のように語が切れていた（2026-09-23 aio-towa）"""
+    n = len(title)
+    # 「AI Overview」のように空白でつながった英語の複合語も1語として扱う
+    word = [bool(WORD_CH.match(ch)) or (ch == " " and 0 < j < n - 1 and bool(WORD_CH.match(title[j - 1]))
+                                         and bool(WORD_CH.match(title[j + 1])))
+            for j, ch in enumerate(title)]
+
+    def ok(i):
+        return 0 < i < n and not (word[i - 1] and word[i])
+    if ok(cut):
+        return cut
+    for k in range(1, n):
+        for c in (cut - k, cut + k):
+            if ok(c):
+                return c
+    return cut
 
 
 def parse_frontmatter(slug):

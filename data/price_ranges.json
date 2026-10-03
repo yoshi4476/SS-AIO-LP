@@ -1,0 +1,14 @@
+{
+  "as_of": "2026年10月",
+  "label": "2026年10月時点の当社の見立て",
+  "unit": "月額",
+  "note": "AIO・SEO・LLMO対策の相場はここだけを正とする。当社の価格（月20万円）は書かない・匂わせない。外部委託の月額は数十万円より下に書かない",
+  "services": ["aio", "seo", "llmo"],
+  "ranges": [
+    {"id": "inhouse_tools", "label": "内製＋有料ツール", "range": "月数万〜数十万円"},
+    {"id": "outsource_partial", "label": "外部委託（部分支援）", "range": "月数十万円〜"},
+    {"id": "outsource_full", "label": "外部委託（運用まで一括）", "range": "月数十万〜数百万円"}
+  ],
+  "outsource_min_yen": 200000,
+  "own_price_yen": 200000
+}

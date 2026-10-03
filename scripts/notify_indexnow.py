@@ -12,6 +12,7 @@
 import json
 import re
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -64,6 +65,15 @@ def key_ok(domain, key):
         return False
 
 
+def by_host(urls):
+    """URL をドメインごとに束ねる（IndexNow は1回の送信で1つの host しか受け付けない）"""
+    out = {}
+    for u in urls:
+        p = urllib.parse.urlsplit(u.strip())
+        out.setdefault(f"{p.scheme or 'https'}://{p.netloc}", []).append(u.strip())
+    return out
+
+
 def notify(urls, key, site_url):
     payload = json.dumps({"host": site_url.split("//", 1)[-1].strip("/"), "key": key,
                           "keyLocation": f"{site_url}/{key}.txt",
@@ -83,8 +93,11 @@ def main(argv=None):
     if not key:
         raise SystemExit("INDEXNOW_KEY が未設定です（.env または site/{KEY}.txt を設置してください）")
     if argv:
-        status = notify(argv, key, env.get("SITE_URL", "https://ai.7senses.co.jp").strip())
-        print(f"IndexNow通知: {len(argv)}件 → HTTP {status}")
+        # host は URL のドメインから決める。SITE_URL 固定だと、補助金サイトの URL を
+        # host=ai.7senses.co.jp で送って HTTP 422 になっていた（2026-09-26）
+        for site_url, urls in by_host(argv).items():
+            status = notify(urls, key, site_url)
+            print(f"IndexNow通知: {site_url} {len(urls)}件 → HTTP {status}")
         return 0
     sys.path.insert(0, str(ROOT / "scripts"))
     import sites as S

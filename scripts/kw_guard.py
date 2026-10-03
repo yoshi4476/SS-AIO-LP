@@ -160,8 +160,12 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
     for _score, a, kind in kw_conflicts(kw, arts):
         if kind == "完全一致":
             level = max(level, 2)
+            # 題名まで同じなら、保存したばかりの自記事を拾っている可能性が高い。
+            # 自記事を相手に「着手禁止」と読み、正当な記事を捨てたことがある（2026-09-06 / 09-23）
+            self_hint = (f"（題名も同じです。書いた直後の自記事なら --exclude-slug {a['slug']} を付けて読み直す）"
+                         if title and dice(title, a.get("title", "")) >= 0.95 else "")
             reasons.append(("禁止", f"狙う語が既存記事と完全一致: {a['slug']}（{a['kw']}）",
-                            "同じ語を2記事で狙うと順位が割れます。既存記事を書き足してください"))
+                            "同じ語を2記事で狙うと順位が割れます。既存記事を書き足してください" + self_hint))
         else:
             # ピラーとクラスターの関係なら成立する。ただし広い側が
             # 狭い側の中身まで書くと食い合うため、書き分けの確認は要る

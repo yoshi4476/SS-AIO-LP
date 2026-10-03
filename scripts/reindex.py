@@ -13,7 +13,8 @@ notify_indexing.py は ai-lab 専用（URLが固定）で、コーポレート�
 使い方:
     python scripts/reindex.py                # 3サイトぶん確認して通知
     python scripts/reindex.py --site corporate
-    python scripts/reindex.py --dry          # 通知せず一覧だけ出す
+    python scripts/reindex.py --dry          # 通知せず一覧だけ出す（検査の結果は data/index_cache.json に残る）
+    python scripts/reindex.py --from-cache   # 検査せず、直近の --dry の結果から未登録だけを通知する
 """
 import re
 import sys
@@ -139,6 +140,10 @@ def main():
     if not SA.is_file():
         raise SystemExit("indexing-service-account.json がありません")
 
+    if "--from-cache" in a:
+        _from_cache(svc("indexing", "v3", PUBLISH), only)
+        return
+
     sc = svc("searchconsole", "v1", READ)
     idx = None if dry else svc("indexing", "v3", PUBLISH)
     budget = float(a[a.index("--budget-min") + 1]) if "--budget-min" in a else BUDGET_MIN
@@ -171,40 +176,63 @@ def _loop(sc, idx, only, dry, deadline, cache):
         if not ng:
             print("    すべて登録済み")
             continue
+        _publish(idx, d, ng, dry)
 
-        # 旧ドメインが正規ページに選ばれているものは、通知しても直らない。
-        # 送り先の設定を変える必要があるため、分けて出す。
-        dup = [(u, c) for u, c in ng if "重複" in c]
-        todo = [(u, c) for u, c in ng if "重複" not in c]
-        for u, c in todo:
-            print(f"    {u.replace(f'https://{d}', ''):<46} {c[:30]}")
-        if dry:
-            for u, c in dup:
-                print(f"    [通知しても直りません] {u.replace(f'https://{d}', '')}")
+
+# 週次は検査（--dry）を並行ジョブで先に済ませ、通知だけを最後に行う。
+# 通知を先に送ると、Indexing API の1日200件をこの再通知が使い切り、
+# その日に直した記事の通知（notify_indexing）が落ちるため、通知の順番は変えない
+FROM_CACHE_HOURS = 6
+
+
+def _from_cache(idx, only):
+    cache, cutoff = _cache(), time.time() - FROM_CACHE_HOURS * 3600
+    for sid, cfg in sites_mod.load_all().items():
+        if only and sid != only:
             continue
+        d = cfg["domain"]
+        ng = [(u, r.get("state") or "—") for u, r in sorted(cache.items())
+              if u.startswith(f"https://{d}/") and r.get("at", 0) >= cutoff and r.get("verdict") != "PASS"]
+        print(f"■ {cfg['name']}  直近{FROM_CACHE_HOURS}時間の検査結果から / 未登録 {len(ng)}件")
+        if ng:
+            _publish(idx, d, ng, False)
 
-        ok = fail = 0
-        for u, _ in todo:
-            try:
-                idx.urlNotifications().publish(
-                    body={"url": u, "type": "URL_UPDATED"}).execute()
-                ok += 1
-            except Exception as e:
-                fail += 1
-                if fail == 1:
-                    print(f"    Indexing API が使えません: {str(e)[:110]}")
-            time.sleep(0.2)
-        print(f"    通知: 成功 {ok}件 / 失敗 {fail}件")
 
-        # sitemap 再送信（クロールのきっかけを作る）
-        try:
-            svc("searchconsole", "v1", WRITE).sitemaps().submit(
-                siteUrl=site_url, feedpath=f"https://{d}/sitemap.xml").execute()
-            print("    sitemap を再送信しました")
-        except Exception as e:
-            print(f"    sitemap 再送信に失敗: {str(e)[:90]}")
+def _publish(idx, d, ng, dry):
+    site_url = f"https://{d}/"
+    # 旧ドメインが正規ページに選ばれているものは、通知しても直らない。
+    # 送り先の設定を変える必要があるため、分けて出す。
+    dup = [(u, c) for u, c in ng if "重複" in c]
+    todo = [(u, c) for u, c in ng if "重複" not in c]
+    for u, c in todo:
+        print(f"    {u.replace(f'https://{d}', ''):<46} {c[:30]}")
+    if dry:
         for u, c in dup:
-            print(f"    [別ドメインが正規に選ばれています] {u.replace(f'https://{d}', '')}")
+            print(f"    [通知しても直りません] {u.replace(f'https://{d}', '')}")
+        return
+
+    ok = fail = 0
+    for u, _ in todo:
+        try:
+            idx.urlNotifications().publish(
+                body={"url": u, "type": "URL_UPDATED"}).execute()
+            ok += 1
+        except Exception as e:
+            fail += 1
+            if fail == 1:
+                print(f"    Indexing API が使えません: {str(e)[:110]}")
+        time.sleep(0.2)
+    print(f"    通知: 成功 {ok}件 / 失敗 {fail}件")
+
+    # sitemap 再送信（クロールのきっかけを作る）
+    try:
+        svc("searchconsole", "v1", WRITE).sitemaps().submit(
+            siteUrl=site_url, feedpath=f"https://{d}/sitemap.xml").execute()
+        print("    sitemap を再送信しました")
+    except Exception as e:
+        print(f"    sitemap 再送信に失敗: {str(e)[:90]}")
+    for u, c in dup:
+        print(f"    [別ドメインが正規に選ばれています] {u.replace(f'https://{d}', '')}")
 
 
 if __name__ == "__main__":

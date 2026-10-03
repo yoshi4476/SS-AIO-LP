@@ -76,6 +76,28 @@ def fit_font(d, text, max_width, base=26, minimum=16):
     return font(minimum)
 
 
+def flow_lines(d, step, max_width):
+    """フロー型の1項目を、箱に収まる行に分ける。
+
+    縮小の下限（16pt）でも収まらない行は、文字単位で折り返す。以前は下限で諦めて
+    そのまま描き、隣の箱の文字と重なって読めなかった（2026-08-07 / 08-21）"""
+    lines = step.split("|")
+    tf = min((fit_font(d, ln, max_width) for ln in lines), key=lambda f: f.size)
+    if all(d.textlength(ln, font=tf) <= max_width for ln in lines):
+        return lines, tf
+    out = []
+    for ln in lines:
+        cur = ""
+        for ch in ln:
+            if cur and d.textlength(cur + ch, font=tf) > max_width:
+                out.append(cur)
+                cur = ch
+            else:
+                cur += ch
+        out.append(cur)
+    return out, tf
+
+
 def save_png(img, slug, name):
     out = ROOT / "site" / "images" / slug / f"{name}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -115,11 +137,11 @@ def draw_flow(slug, name, title, steps):
         d.rounded_rectangle([x, top, x + bw, top + 8], radius=4, fill=BLUE)
         d.ellipse([x + bw / 2 - 22, top + 26, x + bw / 2 + 22, top + 70], fill=SKY)
         d.text((x + bw / 2, top + 48), str(i + 1), font=nf, fill=BLUE, anchor="mm")
-        lines = step.split("|")
-        tf = min((fit_font(d, ln, bw - 28) for ln in lines), key=lambda f: f.size)
-        y0 = top + 118 - (len(lines) - 1) * 19
+        lines, tf = flow_lines(d, step, bw - 28)
+        lh = 38 if len(lines) <= 2 else min(38, int(tf.size * 1.45))   # 折り返した分だけ詰める
+        y0 = top + 118 - (len(lines) - 1) * lh / 2
         for j, line in enumerate(lines):
-            d.text((x + bw / 2, y0 + j * 38), line, font=tf, fill=NAVY, anchor="mm")
+            d.text((x + bw / 2, y0 + j * lh), line, font=tf, fill=NAVY, anchor="mm")
         if i < n - 1:
             ax = x + bw + gap / 2
             d.polygon([(ax - 9, top + bh / 2 - 12), (ax + 9, top + bh / 2), (ax - 9, top + bh / 2 + 12)], fill=BLUE)
@@ -135,6 +157,9 @@ def draw_list(slug, name, title, items):
     row_h, top = 74, 120
     H = top + n * row_h + 60
     img, d = canvas(H, title)
+    # 「ラベル|説明」の「|」で段を分けるのは flow・vs だけ。list では「|」がそのまま
+    # 描かれていた（2026-09-23 sogyo-shien-hojokin-kojinjigyonushi で4項目すべて）
+    items = [str(it).replace("|", "：") for it in items]
     for i, item in enumerate(items):
         y = top + i * row_h
         d.rounded_rectangle([60, y, W - 60, y + row_h - 14], radius=12,

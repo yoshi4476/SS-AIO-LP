@@ -298,6 +298,17 @@ PROMPT = """articles/{slug}.md を直してください。この1ファイル以
 直したら、変更点を1行で説明して終了してください。"""
 
 WHAT = {
+    # 採点（3観点）で基準に届かなかった記事を、採点者の指摘に沿って直す（旧形式の記事の移行で使う）
+    "quality": ("この記事は品質の採点で基準（一次性・抽出性・決定支援の各80点以上、平均90点以上）に届きませんでした。\n"
+                "採点者の指摘は次のとおりです:\n{weak}\n\n"
+                "指摘を1つずつ直してください。守ること:\n"
+                "- 一次性: 使ってよい数字は下の登録済みの一次情報だけ。無ければ数字は足さず、現場での判断の順番・\n"
+                "  失敗しやすい点・確かめ方を具体的に書く。自社の採択率や支援社数は書かない\n"
+                "- 抽出性: 冒頭の2文で結論を言い切る。各H2の直後は、その節の答えを1文で言い切る\n"
+                "- 決定支援: 読者が次に何をするか決められるよう、判断の基準か手順か比較表を1つ以上置く\n"
+                "- 制度名・金額・締切は本文にあるものだけを使い、新しく足さない\n"
+                "- title・keyword・slug・category は変えない。FAQ はフロントマターと本文の両方を同じ文にする\n"
+                "登録済みの一次情報:\n{facts}"),
     "split": ("この記事と、同じサイトの別記事「{other_title}」（{other_url}）が、検索語「{shared}」で\n"
               "同時に検索結果に出て、互いの順位を下げています。主題は別なので統合はしません。\n"
               "この記事の title と description を、この記事の狙う語（keyword）の主題に寄せてください。\n"
@@ -693,6 +704,12 @@ def run_one(item, write):
         _, fs = F.load_for(item.get("site") or site_of(slug))
         allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
         what = what.format(facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind == "quality":
+        import facts as F
+        _, fs = F.load_for(item.get("site") or site_of(slug))
+        allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
+        what = what.format(weak=item.get("why", "")[:1500],
+                           facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
     if kind == "split":
         what = what.format(other_title=item["other_title"], other_url=item["other_url"],
                            shared="」「".join(item["shared"][:3]))

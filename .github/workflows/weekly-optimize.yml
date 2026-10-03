@@ -22,6 +22,286 @@ env:
   TZ: Asia/Tokyo
 
 jobs:
+  # ── 並行ジョブ（2026-10-04）──────────────────────────────────────────
+  # 記事（articles/）を書き換える工程と、コミットする工程は optimize に順番どおり残す。
+  # ここに出したのは「記事に触らず、後ろの工程が同じ実行の中で結果を読まない」ものだけ。
+  # 書き出すファイルは optimize と重ならない（重なると rebase で衝突する）。
+  # 並行ジョブの失敗で週次全体を落とさない（push できなければ注意を出して終える）
+
+  # KWキューの補充（管制塔の台帳・ラッコ・Gemini）。記事は読むだけで書かない。
+  # 書き出すのは docs/ai-kw-*.md・data/ai_kw/・data/ai_cache/・KW計画の追記だけで、
+  # optimize が読むのは中盤の pull の後（実測・共起語の工程）なので、先に終わっていれば同じ結果になる
+  kw-refill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      HUB_URL: ${{ secrets.HUB_URL }}
+      HUB_SECRET: ${{ secrets.HUB_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: pip install -r requirements.txt
+
+      - name: サービスアカウントの鍵を置く
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          mkdir -p automation/logs
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          else
+            echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です（GSC/GA4 を使う工程は空振りします）"
+          fi
+
+      # ラッコの利用記録と応答の控えを、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）。
+      # 持ち越さないと月の上限（1,000）が1回分しか数えられず、30日キャッシュも効かずに毎回課金される
+      - name: ラッコの控えを戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}
+          restore-keys: rakko-
+
+      # KWキューを実データ（GSC実績+Googleサジェスト）で補充する。
+      # 推定KWではなく「実際に検索されている語」を供給し続けるための工程。
+      - name: KWキューの実データ補充
+        env:
+          # 未設定なら無料のサジェストだけで動く（キー待ちで止めない）。
+          # ここへ渡し忘れると、手元では効いているのにCIだけ効かない
+          RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # 1サイトの失敗で全体を止めたくないが、黙って0件のまま進むと在庫が枯れる。
+          # 結果を必ず表示し、追記できなかったサイトは管制塔のエラーログへ残す。
+          for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
+            echo "--- $s のKW補充 ---"
+            if out=$(python scripts/kw_discover.py --site "$s" --append 2>&1); then
+              echo "$out" | tail -3
+              echo "$out" | grep -q "件を追記しました"                 || python scripts/hub_client.py error_log kw "$s: 週次補充で新規KWを追記できませんでした（在庫が枯れる前に手当てが必要）" || true
+            else
+              echo "$out" | tail -5
+              python scripts/hub_client.py error_log kw "$s: 週次補充が失敗しました" || true
+            fi
+            # クレジット切れは実行ログの奥に埋もれる。補充が細る原因に
+            # 気づけないため、注釈と通知に回す（記事作成自体は止まらない）。
+            # 通知本文は optimize が組むので、成果物で渡す（下の「要対応を渡す」）
+            if echo "$out" | grep -q "RAKKO_CREDIT=out"; then
+              echo "::warning::ラッコキーワードのクレジットが尽きました（無料のサジェストだけで継続中）"
+              echo "要対応: ラッコキーワードのクレジットが尽きました（候補の質が落ちます）" >> automation/logs/findings.txt
+            fi
+          done
+          # AI検索で答えが出る語（質問形）を、GSCの実績とサジェストから毎週さがして台帳へ積む。
+          # 検索つきのAI（Gemini）へは1サイト8語まで聞く。キーが無ければ候補の抽出だけ行う
+          python scripts/ai_kw_research.py --all --probe 8 --append 2>&1 | tail -12 || true
+          # 業種ごとの「今の時期の特集」の語（data/season_calendar.json・期間中だけ・食い合い審査を通った語）
+          python scripts/season_feature.py --kw 2>&1 | tail -6 || true
+          python scripts/kw_status.py
+
+      - name: ラッコの控えを残す
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}-weekly
+
+      # 鍵・ラッコの控えは .gitignore 済みなので git add -A に入らない
+      - name: 補充の記録を正本へ保存
+        run: |
+          rm -f indexing-service-account.json
+          git add -A
+          git diff --cached --quiet && { echo "変更なし"; exit 0; }
+          git commit -q -m "weekly: KWの補充とAI検索の語の記録 $(date '+%Y-%m-%d')"
+          for i in 1 2 3; do
+            if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then exit 0; fi
+            git rebase --abort 2>/dev/null || true     # 途中の rebase を残すと、次の再試行も必ず失敗する
+            sleep 5
+          done
+          echo "::warning::KW補充の記録を push できませんでした（台帳への追記は済んでいます）"
+
+      - name: 要対応を渡す
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kw-findings
+          path: automation/logs/findings.txt
+          if-no-files-found: ignore
+          retention-days: 3
+
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json
+
+  # 未登録ページの検査（URL検査API・15分）。ここでは通知しない（--dry）。
+  # 通知は optimize の最後に、この結果を使って行う（--from-cache）。先に通知すると Indexing API の
+  # 1日200件をこの再通知が使い、その日に直した記事の通知（notify_indexing）が落ちる
+  index-inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      HUB_URL: ${{ secrets.HUB_URL }}
+      HUB_SECRET: ${{ secrets.HUB_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: pip install -r requirements.txt
+
+      - name: 登録されていないページを検査する
+        timeout-minutes: 20
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$SA_JSON" ]; then echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"; exit 0; fi
+          printf '%s' "$SA_JSON" > indexing-service-account.json
+          chmod 600 indexing-service-account.json
+          python scripts/reindex.py --dry --budget-min 15 || true
+          rm -f indexing-service-account.json
+
+      - name: 検査の結果を渡す
+        uses: actions/upload-artifact@v4
+        with:
+          name: index-cache
+          path: data/index_cache.json
+          if-no-files-found: ignore
+          retention-days: 3
+
+      # 登録済みと確かめたURLの記録を残す（次の週はそこを検査しない）
+      - name: 検査の記録を正本へ保存
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          for p in data/index_cache.json; do if [ -e "$p" ]; then git add "$p"; fi; done
+          git diff --cached --quiet && { echo "変更なし"; exit 0; }
+          git commit -q -m "weekly: インデックス検査の記録 $(date '+%Y-%m-%d')"
+          for i in 1 2 3; do
+            if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep 5
+          done
+          echo "::warning::インデックス検査の記録を push できませんでした（通知は optimize が成果物から行います）"
+
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json
+
+  # 読むだけの検査（結果はログ・注釈・管制塔のエラーログに出るだけで、ファイルを書かない）。
+  # どれも live の GSC/GA4/本番サイトか、原稿を読むだけなので、記事の直しを待つ理由が無い
+  reports:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HUB_URL: ${{ secrets.HUB_URL }}
+      HUB_SECRET: ${{ secrets.HUB_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: pip install -r requirements.txt
+
+      - name: サービスアカウントの鍵を置く
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          else
+            echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です（GSC/GA4 を使う工程は空振りします）"
+          fi
+
+      # 既存記事どうしの検索意図の重複を検出（LLMが対処判断に使う）
+      - name: カニバリゼーション検査
+        run: python scripts/cannibal_check.py
+
+      # 落ちたときに気づく仕組み。合計だけ見ても何を直せばいいか分からないので、
+      # 消えた語と順位が下がった語に分解して出す
+      - name: 表示・クリックが落ちていないかの確認
+        run: |
+          python scripts/growth_guard.py || true
+
+      # 書く前の類似度では見つからない食い合い。似ていない記事どうしでも、
+      # 同じ語で自社ページが並べばどれも上がらないため、実績で見る
+      - name: 同じ検索語での自社ページの食い合い（GSC実績）
+        run: |
+          python scripts/cannibal_check.py --serp || true
+
+      # 実行時間の無料枠を使い切ると全自動運転が無言で止まるため事前に警告する
+      - name: Actions実行時間の残枠チェック
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: python scripts/actions_budget.py || true
+
+      # 打った手が効いたかを、触っていない記事と比べて判定する。
+      # サイト全体が伸びている時期は、何をしても「効いた」に見えるため
+      - name: 打った手の効き（対照群と比較）
+        run: |
+          python scripts/effect_ab.py || true
+
+      # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
+      # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
+      - name: 盤面の空きを出す（業種 × 手法）
+        run: |
+          for s in ai-lab corporate subsidy; do
+            python scripts/coverage.py --site "$s" || true
+            python scripts/coverage.py --site "$s" --gaps 8 || true
+          done
+
+      - name: CTA文言のA/B結果
+        run: python scripts/ab_result.py || true
+
+      - name: リード導線のどこで落ちているか
+        run: |
+          out=$(python scripts/funnel.py) || true
+          echo "$out"
+          echo "$out" | grep -q "最も落ちている段階"             && echo "::warning::リード導線に落ち込みがあります。ログを確認してください" || true
+
+      - name: 生成エンジンから読める状態かの検査（GEO）
+        run: |
+          out=$(python scripts/geo_check.py) || true
+          echo "$out"
+          if ! echo "$out" | grep -q "GEO_OK=yes"; then
+            echo "::warning::生成エンジン向けの状態に欠けがあります"
+            python scripts/hub_client.py error_log geo               "$(echo "$out" | grep -A6 'GEO_OK=no' | head -6)" || true
+          fi
+
+      - name: 2ページ目で止まっている記事の洗い出し
+        run: |
+          if [ -f indexing-service-account.json ]; then
+            python scripts/rewrite_list.py --top 12 || true
+          fi
+
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json
+
   optimize:
     runs-on: ubuntu-latest
     # 60分では足りず、2026-09-21 は再通知の工程で打ち切られ、コミットも配信も走らなかった。
@@ -131,87 +411,20 @@ jobs:
           out=$(python scripts/gsc_check.py 2>&1) || true; echo "$out"
           echo "$out" | grep -q "GSC_OK=yes"             || python scripts/hub_client.py error_log gsc "GSCの検索データを取得できないサイトがあります（補充がサジェスト頼りになります）" || true
 
-      # ラッコの利用記録と応答の控えを、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）。
-      # 持ち越さないと月の上限（1,000）が1回分しか数えられず、30日キャッシュも効かずに毎回課金される
-      - name: ラッコの控えを戻す
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            data/rakko_cache
-            data/rakko_volume.json
-            data/rakko_spend.jsonl
-          key: rakko-${{ github.run_id }}
-          restore-keys: rakko-
-
-      # KWキューを実データ（GSC実績+Googleサジェスト）で補充する。
-      # 推定KWではなく「実際に検索されている語」を供給し続けるための工程。
-      - name: KWキューの実データ補充
+      # 品質スコアは書いた本人が付けている。別工程で採点し直して差を見る。
+      # 毎週4本ずつ。全部を採点し直すと時間がかかりすぎる。
+      # 原稿を読むだけ（書くのは data/score_audit.json だけ）なので、このあとの
+      # 内部リンク・導線の工程と並べて裏で走らせ、結果を読む「判断が当たっているか」の前で待つ。
+      # この間に claude を呼ぶ工程は無い（同時に2つの claude を走らせない）
+      - name: 品質スコアを別工程で採点し直す（裏で開始）
         env:
-          # 未設定なら無料のサジェストだけで動く（キー待ちで止めない）。
-          # ここへ渡し忘れると、手元では効いているのにCIだけ効かない
-          RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          # 1サイトの失敗で全体を止めたくないが、黙って0件のまま進むと在庫が枯れる。
-          # 結果を必ず表示し、追記できなかったサイトは管制塔のエラーログへ残す。
-          for s in $(ls sites/*.json | xargs -n1 basename | sed "s/\.json$//" | grep -v "^sample$" | sort); do
-            echo "--- $s のKW補充 ---"
-            if out=$(python scripts/kw_discover.py --site "$s" --append 2>&1); then
-              echo "$out" | tail -3
-              echo "$out" | grep -q "件を追記しました"                 || python scripts/hub_client.py error_log kw "$s: 週次補充で新規KWを追記できませんでした（在庫が枯れる前に手当てが必要）" || true
-            else
-              echo "$out" | tail -5
-              python scripts/hub_client.py error_log kw "$s: 週次補充が失敗しました" || true
-            fi
-            # クレジット切れは実行ログの奥に埋もれる。補充が細る原因に
-            # 気づけないため、注釈と通知に回す（記事作成自体は止まらない）
-            if echo "$out" | grep -q "RAKKO_CREDIT=out"; then
-              echo "::warning::ラッコキーワードのクレジットが尽きました（無料のサジェストだけで継続中）"
-              mkdir -p automation/logs
-              echo "要対応: ラッコキーワードのクレジットが尽きました（候補の質が落ちます）" >> automation/logs/findings.txt
-            fi
-          done
-          # AI検索で答えが出る語（質問形）を、GSCの実績とサジェストから毎週さがして台帳へ積む。
-          # 検索つきのAI（Gemini）へは1サイト8語まで聞く。キーが無ければ候補の抽出だけ行う
-          python scripts/ai_kw_research.py --all --probe 8 --append 2>&1 | tail -12 || true
-          # 業種ごとの「今の時期の特集」の語（data/season_calendar.json・期間中だけ・食い合い審査を通った語）
-          python scripts/season_feature.py --kw 2>&1 | tail -6 || true
-          python scripts/kw_status.py
-
-      - name: ラッコの控えを残す
-        if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            data/rakko_cache
-            data/rakko_volume.json
-            data/rakko_spend.jsonl
-          key: rakko-${{ github.run_id }}-weekly
-
-      # 既存記事どうしの検索意図の重複を検出（LLMが対処判断に使う）
-      - name: カニバリゼーション検査
-        run: python scripts/cannibal_check.py
-
-      # 落ちたときに気づく仕組み。合計だけ見ても何を直せばいいか分からないので、
-      # 消えた語と順位が下がった語に分解して出す
-      - name: 表示・クリックが落ちていないかの確認
-        run: |
-          python scripts/growth_guard.py || true
-
-      # 書く前の類似度では見つからない食い合い。似ていない記事どうしでも、
-      # 同じ語で自社ページが並べばどれも上がらないため、実績で見る
-      - name: 同じ検索語での自社ページの食い合い（GSC実績）
-        run: |
-          python scripts/cannibal_check.py --serp || true
-
-      # 実行時間の無料枠を使い切ると全自動運転が無言で止まるため事前に警告する
-      - name: Actions実行時間の残枠チェック
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
-          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
-        run: python scripts/actions_budget.py || true
+          mkdir -p /tmp/score_audit
+          setsid nohup bash -c 'python scripts/score_audit.py --limit 4 > /tmp/score_audit/log.txt 2>&1; echo $? > /tmp/score_audit/done' > /dev/null 2>&1 &
+          echo $! > /tmp/score_audit/pid
+          echo "採点し直しを裏で始めました（pid $(cat /tmp/score_audit/pid)）"
 
       - name: 内部リンクの補充（被リンクの少ない記事へ）
         run: |
@@ -252,8 +465,6 @@ jobs:
         run: |
           python scripts/data_auto.py --write || true
 
-      # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
-      # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
       # 計測が2通りで一致しているかを先に確かめる。食い違ったまま先へ進むと、
       # 誤った数字の上に次の判断が乗る（CLAUDE.md 0.1）
       - name: 計測の照合を確かめる
@@ -266,13 +477,17 @@ jobs:
       - name: CTAの本数を揃える
         run: python scripts/cta_fill.py --write || true
 
-      # 品質スコアは書いた本人が付けている。別工程で採点し直して差を見る。
-      # 毎週4本ずつ。全部を採点し直すと時間がかかりすぎる
-      - name: 品質スコアを別工程で採点し直す
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/score_audit.py --limit 4 || true
+      # 裏で始めた採点し直しの終わりを待つ。この後の validate_rules・auto_rewrite が
+      # data/score_audit.json を読むため、ここより後へは持ち越さない（20分で打ち切る）
+      - name: 品質スコアの採点し直しを待つ
+        run: |
+          for i in $(seq 1 120); do [ -f /tmp/score_audit/done ] && break; sleep 10; done
+          tail -30 /tmp/score_audit/log.txt 2>/dev/null || true
+          if [ ! -f /tmp/score_audit/done ]; then
+            echo "::warning::採点し直しが20分で終わらないため止めます（今週は前回の採点を使います）"
+            pid=$(cat /tmp/score_audit/pid 2>/dev/null)
+            [ -n "$pid" ] && kill -- -"$pid" 2>/dev/null || true
+          fi
 
       # 使っている判断（点数・語の性質・内部リンクの下限）が、実際の成果を
       # 言い当てているかを確かめる。当たっていない判断で選び続けると、
@@ -281,24 +496,11 @@ jobs:
         run: |
           python scripts/validate_rules.py || true
 
-      # 打った手が効いたかを、触っていない記事と比べて判定する。
-      # サイト全体が伸びている時期は、何をしても「効いた」に見えるため
-      - name: 打った手の効き（対照群と比較）
-        run: |
-          python scripts/effect_ab.py || true
-
       # 順位そのものは保証できない。保証できるのは「順位を決める要因のうち
       # こちら側にあるものを毎回100%満たすこと」。その達成率を毎週出す
       - name: こちら側で決まる要因の達成率
         run: |
           python scripts/guarantee.py || true
-
-      - name: 盤面の空きを出す（業種 × 手法）
-        run: |
-          for s in ai-lab corporate subsidy; do
-            python scripts/coverage.py --site "$s" || true
-            python scripts/coverage.py --site "$s" --gaps 8 || true
-          done
 
       # あと少しで1ページ目に届く記事は、放っておいても上がらない。
       # 被リンクが足りないまま何ヶ月も止まるので、毎週そこを埋める
@@ -429,30 +631,6 @@ jobs:
       - name: 段落の切れ目の崩れを直す
         run: python scripts/fix_block_breaks.py --write || true
 
-      - name: CTA文言のA/B結果
-        run: python scripts/ab_result.py || true
-
-      - name: リード導線のどこで落ちているか
-        run: |
-          out=$(python scripts/funnel.py) || true
-          echo "$out"
-          echo "$out" | grep -q "最も落ちている段階"             && echo "::warning::リード導線に落ち込みがあります。ログを確認してください" || true
-
-      - name: 生成エンジンから読める状態かの検査（GEO）
-        run: |
-          out=$(python scripts/geo_check.py) || true
-          echo "$out"
-          if ! echo "$out" | grep -q "GEO_OK=yes"; then
-            echo "::warning::生成エンジン向けの状態に欠けがあります"
-            python scripts/hub_client.py error_log geo               "$(echo "$out" | grep -A6 'GEO_OK=no' | head -6)" || true
-          fi
-
-      - name: 2ページ目で止まっている記事の洗い出し
-        run: |
-          if [ -f indexing-service-account.json ]; then
-            python scripts/rewrite_list.py --top 12 || true
-          fi
-
       - name: 直した記事が基準を割っていないか
         run: |
           # 機械の直しでも品質は落とさない。割っていれば週次を落とす
@@ -496,6 +674,8 @@ jobs:
           GBP_TOKENS_JSON: ${{ secrets.GBP_TOKENS_JSON }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
           mkdir -p automation/logs
           # GSC を使う実測（型・共起語・リッチ・並び替え・国別・季節）はサービスアカウントの鍵が要る
@@ -560,6 +740,8 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # --publish は配信先リポジトリへ push する。無いと訳しても届かない
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
           n=10; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=5
           python scripts/i18n.py --all --write --publish --limit $n --budget-min 25 2>&1 | tail -8 || true
@@ -570,6 +752,8 @@ jobs:
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
           python scripts/rewrite_rollback.py --write 2>&1 | tail -8 || true
           python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
@@ -593,8 +777,15 @@ jobs:
             echo "変更なし — コミットをスキップ"
           else
             git commit -m "weekly-optimize: auto $(date '+%Y-%m-%d')" || true
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
-            git push
+            # 並行ジョブ（kw-refill・index-inspect）も正本へ push するため、pull と push の間に
+            # 割り込まれても落ちないよう再試行する（触るファイルは重ならない）
+            pushed=0
+            for i in 1 2 3; do
+              if git pull --rebase origin "${GITHUB_REF_NAME}" && git push; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true     # 途中の rebase を残すと、次の再試行も必ず失敗する
+              sleep 5
+            done
+            [ "$pushed" = 1 ] || { echo "::error::週次の直しを push できませんでした"; exit 1; }
           fi
 
       # 直した記事は他サイトへ配信しないと本番に反映されない。週次の最初に記録した
@@ -603,6 +794,8 @@ jobs:
       - name: 直した記事を他サイトへ配信
         env:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
           python scripts/publish_changed.py --all --since "$BASE_SHA" --push || true
           # 統合で消した記事は配信先にも残っている。外して 301 で送らないと2本が出続ける
@@ -656,6 +849,33 @@ jobs:
           echo "$out" | tail -10
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
 
+      # findings.py はラッコの消費（rakko.py --check）も見る。KWの補充は並行ジョブ（kw-refill）が
+      # 済ませて控えを残しているので、ここで最新の控えを戻す（前方一致で一番新しいものが戻る）
+      - name: ラッコの控えを戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}-weekly
+          restore-keys: rakko-
+
+      # 並行ジョブ（kw-refill）が見つけた要対応（ラッコのクレジット切れ）を通知本文へ足す
+      - name: KW補充の要対応を受け取る
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: kw-findings
+          path: /tmp/kw-findings
+
+      - name: KW補充の要対応を通知本文へ足す
+        run: |
+          mkdir -p automation/logs
+          if [ -f /tmp/kw-findings/findings.txt ]; then
+            cat /tmp/kw-findings/findings.txt >> automation/logs/findings.txt
+          fi
+
       - name: 見つかったものを集めて知らせる
         env:
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
@@ -693,15 +913,30 @@ jobs:
       # 当日更新分を通知するだけでは、過去に登録されなかったページが
       # 放置され続ける。実測で、公開30日以上たっても28日間まったく表示されない
       # ページが19件あった（コーポレートは sitemap の40%が表示ゼロ）。
-      # 登録状況を1URLずつ確認し、落ちているものだけを再通知する
-      # 1URLずつの検査は全件だと30分を超え、ジョブの上限（60分）で通知工程ごと止まった。
-      # スクリプト側で15分、工程側で20分の上限を置き、超えても後の工程は動かす
+      # 登録状況を1URLずつ確認し、落ちているものだけを再通知する。
+      # 1URLずつの検査（15分）は並行ジョブ index-inspect が先に済ませている。ここでは
+      # その結果から通知だけを行い、本日更新分の通知（上）より後という順番は変えない。
+      # 結果が受け取れなかったときだけ、従来どおりここで検査から行う（15分の上限つき）
+      - name: 並行で済ませた検査の結果を受け取る
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: index-cache
+          path: /tmp/index-cache
+
       - name: 登録されていないページを拾って再通知
         timeout-minutes: 20
         run: |
           if [ -f indexing-service-account.json ]; then
-            python scripts/reindex.py --budget-min 15 || true
-            # 登録済みと確かめたURLの記録を残す（次の週はそこを検査しない）
+            if [ -f /tmp/index-cache/index_cache.json ]; then
+              cp /tmp/index-cache/index_cache.json data/index_cache.json
+              python scripts/reindex.py --from-cache || true
+            else
+              echo "::warning::並行の検査結果を受け取れなかったため、ここで検査から行います"
+              python scripts/reindex.py --budget-min 15 || true
+            fi
+            # 登録済みと確かめたURLの記録を残す（次の週はそこを検査しない。
+            # 並行ジョブが同じ内容を push 済みなら、rebase で同じ変更として落ちる）
             for p in data/index_cache.json; do if [ -e "$p" ]; then git add "$p"; fi; done
             git diff --cached --quiet || {
               git commit -q -m "weekly: インデックス検査の記録 $(date '+%Y-%m-%d')"
