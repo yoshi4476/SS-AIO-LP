@@ -42,7 +42,7 @@ MAX_CHARS = 330                # 声にして45秒前後
 PROMPT = """あなたはYouTubeショート・TikTok の構成作家です。下の記事だけを材料に、縦型ショート（40秒前後）の2人の掛け合い台本をJSONで書いてください。
 
 登場人物:
-- N（ナナ）: AI集客ラボの解説役。丁寧語で、短く言い切る。
+- N（ナナ）: {brand}の解説役。丁寧語で、短く言い切る。
 - K（聞き手）: この記事の読者と同じ立場の経営者。素朴に聞き、驚き、納得する。
 
 守ること:
@@ -50,11 +50,12 @@ PROMPT = """あなたはYouTubeショート・TikTok の構成作家です。下
 2. 扱う答えは1つだけ。記事の中で、読者がいちばん知りたい問いを1つ選ぶ。
 3. 最初のセリフは K の問い。見た人が「自分のことだ」と思う質問にする（25字以内）。
 4. 1セリフ45字以内。合計8〜12セリフ、全セリフの合計で300字以内。
-5. 途中で N が一度「AI集客ラボ」と名乗る（例:「AI集客ラボで調べたら」は不可。記事に書いてある事実だけを言う）。
-6. 最後の N のセリフは「詳しくは『AI集客ラボ』で検索してください。」
+5. 2つ目のセリフは N で、「{brand}のナナです。」で始め、そのまま答えに入る。ほかの所では名乗らない。
+6. 最後の N のセリフは「詳しくは『{search}』で検索してください。」
 7. 記事の文をそのまま読まない。話し言葉にする。
 8. 当社の運用実績・実測の数字（件数・順位・クリック率など）は使わない。母数が小さく、短い動画では条件まで伝えきれないため。
 9. 「いちばん」「最も」「必ず」「絶対」のような順位・断定は、記事がそう書いているときだけ使う。
+10. 「6つ」「3点」のように数を言うなら、その数の項目をすべてボードに出す。出しきれないなら数を言わず「主な点」と言う。
 
 ボード（画面上の板）: 各セリフに "board" を付けると、そのセリフから切り替わる。
 - {{"type":"hook","title":"問い（24字以内）"}}                        … 最初のセリフに必ず付ける
@@ -106,8 +107,35 @@ def validate(sc, art):
         ng.append("最初のセリフに hook が無い")
     if lines and (lines[-1].get("board") or {}).get("type") != "end":
         ng.append("最後のセリフに end が無い")
-    if lines and "AI集客ラボ" not in "".join(l.get("text", "") for l in lines if l.get("who") == "N"):
-        ng.append("N が「AI集客ラボ」と言っていない")
+    br = DV.brand(art)
+    first_n = next((l.get("text", "") for l in lines if l.get("who") == "N"), "")
+    if not first_n.startswith(f"{br['name']}のナナです"):
+        ng.append(f"最初の N のセリフが「{br['name']}のナナです。」で始まっていない")
+    if lines and f"『{br['search']}』" not in lines[-1].get("text", ""):
+        ng.append(f"最後のセリフで『{br['search']}』の検索を案内していない")
+    return ng + DV.brand_ng(sc, art) + count_ng(sc)
+
+
+COUNT = re.compile(r"(\d+)\s*(?:つ|点|個|項目|ステップ)(?!目)")
+
+
+def count_ng(sc):
+    """言った数と、画面に出す項目の数が合っているか。
+    実例: 「使う前に6つの点を確かめて」と言い、ボードには5点しか出さずに終わった（2026-10-03）"""
+    lines = sc.get("lines") or []
+    shown = 0
+    for l in lines:
+        b = l.get("board") or {}
+        # 「6点を確認」のように数を告げるだけの板は項目に数えない
+        own = COUNT.search(" ".join(str(b.get(k, "")) for k in ("title", "head", "text")))
+        shown += len(b.get("items") or []) if b.get("type") == "points" else int(b.get("type") in ("quote", "vs", "number") and not own)
+    ng = []
+    for i, l in enumerate(lines):
+        b = l.get("board") or {}
+        said = l.get("text", "") + " ".join(str(b.get(k, "")) for k in ("title", "head", "text"))
+        for m in COUNT.finditer(said):
+            if int(m.group(1)) > shown and "うち" not in said:
+                ng.append(f"{i}: 「{m.group(0)}」と言うが、画面に出す項目は{shown}つ。数をそろえるか、数を言わない")
     return ng
 
 
@@ -117,7 +145,7 @@ def write_script(slug, tries=3):
     fb = ""
     for k in range(tries):
         r = AR.sh([AR.claude_bin(), "-p", "--max-turns", "1", *AR.model_args()], timeout=600,
-                  stdin_text=PROMPT.format(article=art["text"][:14000]) + fb)
+                  stdin_text=PROMPT.format(article=art["text"][:14000], brand=DV.brand(art)["name"], search=DV.brand(art)["search"]) + fb)
         m = re.search(r"\{.*\}", (r.stdout or ""), re.S)
         try:
             sc = json.loads(m.group(0)) if m else None
@@ -131,6 +159,7 @@ def write_script(slug, tries=3):
             SCRIPTS.mkdir(parents=True, exist_ok=True)
             sc["slug"] = slug
             (SCRIPTS / f"{slug}.json").write_text(json.dumps(sc, ensure_ascii=False, indent=1), encoding="utf-8")
+            sc["brand"] = DV.brand(art)
             return sc
         print(f"   台本 {k + 1}回目 不合格: {' / '.join(ng[:4])}")
         fb = "\n\n前回の台本は次の理由で不合格でした。直して全体を出し直してください:\n- " + "\n- ".join(ng[:12])
@@ -142,7 +171,9 @@ def load_script(slug):
     if not p.is_file():
         return None
     sc = json.loads(p.read_text(encoding="utf-8"))
-    return sc if not validate(sc, DV.article(slug)) else None
+    art = DV.article(slug)
+    sc["brand"] = DV.brand(art)
+    return sc if not validate(sc, art) else None
 
 
 # ---------- 絵 ----------
@@ -167,7 +198,12 @@ def _lines(d, VM, txt, f, width, maxl):
     out, cur = [], ""
     for ch in txt:
         if d.textlength(cur + ch, font=f) > width:
-            cut = max((i + 1 for i, c in enumerate(cur[:-1]) if c in "のにてがをはと、・："), default=0)
+            # 読点で切れるならそこで切る。助詞の「の」でも「その・この」の「の」では切らない
+            # （実例: 「テンプレ、その／まま使える？」）
+            cut = max((i + 1 for i, c in enumerate(cur[:-1]) if c == "、"), default=0)
+            if cut < len(cur) * 0.4:
+                cut = max((i + 1 for i, c in enumerate(cur[:-1]) if c in "にてがをはと・："
+                           or (c == "の" and not (i and cur[i - 1] in "そこあど"))), default=0)
             if cut < len(cur) * 0.5:
                 # 助詞で切れないときは、文字の種類が変わる所で切る（「Google／ビジネスプロフィール」。
                 # 幅で切ると「プロフ／ィール」のように語が割れた）
@@ -193,6 +229,7 @@ class Board:
     def __init__(self, sc):
         import video_make as VM
         self.VM, self.sc, self.base, self.cache = VM, sc, _backdrop(), {}
+        self.br = sc.get("brand") or DV.BRANDS["ai-lab"]
         self.hook = next((l["board"].get("title", "") for l in sc["lines"] if (l.get("board") or {}).get("type") == "hook"), sc.get("title", ""))
 
     def get(self, st):
@@ -207,7 +244,7 @@ class Board:
         im = self.base.copy()
         d = ImageDraw.Draw(im)
         # 上: 問いを出し続ける（途中から見た人にも何の話か分かる）
-        d.text((60, 150), "AI集客ラボ", font=FB(34), fill=NAVY, anchor="lm")
+        d.text((60, 150), self.br["name"], font=FB(34), fill=NAVY, anchor="lm")
         d.line([(60, 190), (200, 190)], fill=GOLD, width=5)
         f = VM.fit(d, self.hook, TXT_W, 78, 50)
         ls = _lines(d, VM, self.hook, f, TXT_W, 3)
@@ -234,8 +271,9 @@ class Board:
         if t == "end":
             d.text((CX, y0 + 150), "続きは記事で", font=FB(84), fill=NAVY, anchor="mm")
             d.rounded_rectangle([x0 + 80, y0 + 270, x1 - 80, y0 + 400], 60, fill=GOLD)
-            d.text((CX, y0 + 335), "「AI集客ラボ」で検索", font=FB(56), fill=(255, 255, 255), anchor="mm")
-            d.text((CX, y0 + 470), "ai.7senses.co.jp", font=FR(40), fill=MUTED, anchor="mm")
+            q = f"「{self.br['search']}」で検索"
+            d.text((CX, y0 + 335), q, font=VM.fit(d, q, 660, 56, 36), fill=(255, 255, 255), anchor="mm")
+            d.text((CX, y0 + 470), self.br["url"], font=FR(40), fill=MUTED, anchor="mm")
             return im
         d.rounded_rectangle([x0, y0, x1, y0 + 120], 30, fill=NAVY)
         d.rectangle([x0, y0 + 80, x1, y0 + 120], fill=NAVY)
@@ -286,7 +324,7 @@ def _subtitle(VM, who, name, role, text):
     d.text((tx + 22, y0 - 4), name, font=fn, fill=(255, 255, 255), anchor="lm")
     d.text((tx + 34 + d.textlength(name, font=fn), y0 - 2), role, font=fr, fill=(230, 222, 190), anchor="lm")
     f = VM.font(52)
-    ls = _lines(d, VM, text, f, 800, 2)
+    ls = DV.balanced_lines(d, text, f, 800)
     for i, ln in enumerate(ls):
         d.text((CX, (y0 + y1) / 2 + 8 + (i - (len(ls) - 1) / 2) * 72), ln, font=f, fill=INK, anchor="mm")
     return lay
@@ -298,9 +336,9 @@ def make(sc, out_mp4):
     import video_make as VM
     lines = sc["lines"]
     names = {"N": "ナナ", "K": "ケンタ"}
-    roles = {"N": "AI集客ラボ", "K": sc.get("listener_role") or "経営者"}
+    roles = {"N": (sc.get("brand") or DV.BRANDS["ai-lab"])["name"], "K": sc.get("listener_role") or "経営者"}
     SR = 24000
-    with tempfile.TemporaryDirectory() as td:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as td:
         td = Path(td)
         waves = []
         for i, ln in enumerate(lines):
@@ -357,7 +395,7 @@ def make(sc, out_mp4):
                                 "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", str(td / "mix.wav"),
                                 "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "medium", "-tune", "animation", "-crf", "18",
                                 "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(out_mp4)],
-                               stdin=subprocess.PIPE)
+                               stdin=subprocess.PIPE, stderr=open(td / "enc.log", "w", encoding="utf-8", errors="ignore"))
         rng = random.Random(len(lines))
         blink = {"N": 1.0, "K": 1.8}
         li, prev_key, fade_from, fade_t0, sub_cache = -1, None, None, 0.0, {}
@@ -401,9 +439,19 @@ def make(sc, out_mp4):
             if sk not in sub_cache:
                 sub_cache[sk] = _subtitle(VM, who, names[who], roles[who], cs[ci])
             frame.paste(sub_cache[sk], (0, 0), sub_cache[sk])
-            enc.stdin.write(frame.tobytes())
+            try:
+                enc.stdin.write(frame.tobytes())
+            except BrokenPipeError:
+                # ffmpeg が先に落ちると「Broken pipe」しか残らず、原因が分からなかった（2026-10-03）
+                enc.wait()
+                raise RuntimeError("ffmpeg が止まりました: " + (td / "enc.log").read_text(encoding="utf-8", errors="ignore")[-400:])
         enc.stdin.close()
         enc.wait()
+        # 字幕（youtube_upload が <動画>.srt を上げる）。無いと YouTube の自動字幕が出て、
+        # 「[音楽]」や聞き違い（請求書テンプレ→請求書店）がそのまま表示されていた（2026-10-03）
+        srt = [f"{i + 1}\n{VM._fmt_srt(s)} --> {VM._fmt_srt(s + len(a) / SR)}\n{ln['text']}\n"
+               for i, (ln, s, a) in enumerate(zip(lines, starts, waves))]
+        Path(out_mp4).with_suffix(".srt").write_text("\n".join(srt), encoding="utf-8")
     return total
 
 
@@ -411,11 +459,16 @@ def selftest():
     art = {"text": "延床32坪で断熱等級6。AI集客ラボ。"}
     good = {"title": "工務店はAIに何と聞かれる？", "listener_role": "工務店 経営",
             "lines": [{"who": "K", "text": "AIに聞かれる？", "board": {"type": "hook", "title": "問い"}}]
-            + [{"who": "N", "text": "AI集客ラボです。延床32坪です。"}] * 7
+            + [{"who": "N", "text": "AI集客ラボのナナです。延床32坪です。"}] * 7
             + [{"who": "N", "text": "詳しくは『AI集客ラボ』で検索してください。", "board": {"type": "end"}}]}
     bad = json.loads(json.dumps(good))
     bad["lines"][2]["text"] = "問い合わせが3倍になりました。"
-    ok = not validate(good, art) and any("「3」" in x for x in validate(bad, art))
+    many = json.loads(json.dumps(good))
+    many["lines"][2]["text"] = "確かめる点は6つあります。"
+    other = json.loads(json.dumps(good))
+    other["lines"][1]["text"] = "セブンセンシズのナナです。"
+    ok = (not validate(good, art) and any("「3」" in x for x in validate(bad, art))
+          and any("6つ" in x for x in validate(many, art)) and any("ナナです" in x for x in validate(other, art)))
     print("SHORT_SELFTEST=" + ("ok" if ok else "ng"))
     return 0 if ok else 1
 

@@ -117,7 +117,14 @@ def hear(path, beam=5):
         _model = WhisperModel(MODEL, device="cpu", compute_type="int8")
     # ひらがなで書き起こさせる。数字や漢字で書かれると、どう読んだかが消える
     # （「さんじゅうふたつぼ」が「32つぼ」と書かれ、読み違いを見逃した）
-    segs, _ = _model.transcribe(str(path), language="ja", beam_size=beam, vad_filter=False,
+    # 音声は ffmpeg で読んで配列で渡す。faster-whisper 内部の PyAV は版が上がると引数が合わず
+    # （metadata_errors）、2026-10-03 には聞き直しが全件「飛ばしました」になっていた
+    import subprocess
+    import numpy as np
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(path), "-f", "s16le", "-ac", "1", "-ar", "16000", "-"],
+                         capture_output=True, check=True).stdout
+    audio = np.frombuffer(raw, np.int16).astype(np.float32) / 32768.0
+    segs, _ = _model.transcribe(audio, language="ja", beam_size=beam, vad_filter=False,
                                 initial_prompt="ひらがなで、きこえたとおりに かきおこします。")
     return "".join(s.text for s in segs)
 

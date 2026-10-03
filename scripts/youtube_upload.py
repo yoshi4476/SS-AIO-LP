@@ -180,7 +180,7 @@ def describe(slug):
     url = f'https://{cfg.get("domain", "")}/{pre}/{slug}/'
     body = "\n".join(f"・{x}" for x in a["leads"][:5])
     desc = (f'{a["desc"]}\n\n▼ 記事はこちら\n{url}\n\n'
-            f'{body}\n\n{tools_block(a)}セブンセンシズ株式会社\nhttps://{cfg.get("domain", "")}/')
+            f'{body}\n\n{tools_block(a) if sid == "ai-lab" else ""}セブンセンシズ株式会社\nhttps://{cfg.get("domain", "")}/')
     tags = [t for t in (cfg.get("x_tags") or [])]
     return desc, a["title"], tags
 
@@ -231,6 +231,19 @@ def _add_to_playlist(yt, vid, title):
     return name
 
 
+def existing(yt, title, n=50):
+    """直近 n 本のうち、題が同じで非公開でない動画の id"""
+    up = yt.channels().list(part="contentDetails", mine=True).execute()["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    ids = [i["contentDetails"]["videoId"] for i in
+           yt.playlistItems().list(part="contentDetails", playlistId=up, maxResults=n).execute().get("items", [])]
+    if not ids:
+        return None
+    for v in yt.videos().list(part="snippet,status", id=",".join(ids)).execute().get("items", []):
+        if v["snippet"]["title"] == title and v["status"]["privacyStatus"] != "private":
+            return v["id"]
+    return None
+
+
 def upload(mp4, slug, public=False, quiet=False, short_title=""):
     """short_title を渡すと縦型ショートとして上げる（題に #Shorts、説明は短く、再生リストには入れない）"""
     from googleapiclient.discovery import build
@@ -238,10 +251,16 @@ def upload(mp4, slug, public=False, quiet=False, short_title=""):
     c = creds()
     if not c:
         raise SystemExit("youtube-token.json がありません。--auth を先に実行してください")
+    # 字幕の無い動画は上げない。YouTube の自動字幕が出て「[音楽]」や聞き違いが
+    # そのまま表示される（2026-10-03: ショートはすべて字幕なしで上がっていた）
+    if not Path(mp4).with_suffix(".srt").is_file():
+        raise RuntimeError(f"字幕ファイル {Path(mp4).with_suffix('.srt').name} がありません。上げません")
     desc, title, tags = describe(slug)
     if short_title:
         # ショートの説明欄のリンクは押せない前提。検索で来てもらう一文を先に置く
-        desc = "詳しくは「AI集客ラボ」で検索してください。\n\n" + desc
+        import duo_video as DV
+        br = DV.brand(DV.article(slug))
+        desc = f"詳しくは「{br['search']}」で検索してください。\n\n" + desc
         title = short_title[:88] + " #Shorts"
     # タイトルは100字まで。超えると API が弾く
     title = (title or slug)[:100]
@@ -255,6 +274,12 @@ def upload(mp4, slug, public=False, quiet=False, short_title=""):
             "status": {"privacyStatus": "public" if public else "unlisted",
                        "selfDeclaredMadeForKids": False}}
     yt = build("youtube", "v3", credentials=c)
+    # 台帳の記録が漏れると、同じ動画を翌日また上げる（2026-09-27〜29 に同じ動画が3本公開された）。
+    # 台帳に頼らず、チャンネルに同じ題の公開中の動画があればそれを返す
+    dup = existing(yt, title)
+    if dup:
+        print(f"  同じ題の動画がすでにあります（{dup}）。上げ直しません")
+        return dup
     media = MediaFileUpload(str(mp4), chunksize=-1, resumable=True, mimetype="video/mp4")
     req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
     res = req.execute()
@@ -341,6 +366,47 @@ def update_thumbnails():
     print(f"YT_THUMBS_SET={n}")
 
 
+def audit():
+    """チャンネルの公開中の動画を点検する（週次）。同じ題が2本以上・自前の字幕が無い・台帳に無い。
+    2026-10-03: 同じ動画が3本公開され、ショートは全本が自動字幕（[音楽]・聞き違い）のままだった"""
+    from googleapiclient.discovery import build
+    c = creds()
+    if not c:
+        print("YT_AUDIT_OK=unknown（鍵がありません）")
+        return 1
+    yt = build("youtube", "v3", credentials=c)
+    up = yt.channels().list(part="contentDetails", mine=True).execute()["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    ids, tok = [], None
+    while True:
+        r = yt.playlistItems().list(part="contentDetails", playlistId=up, maxResults=50, pageToken=tok).execute()
+        ids += [i["contentDetails"]["videoId"] for i in r["items"]]
+        tok = r.get("nextPageToken")
+        if not tok:
+            break
+    lp = ROOT / "data" / "videos.json"
+    led = json.loads(lp.read_text(encoding="utf-8")) if lp.is_file() else {}
+    known = {x for v in led.values() if isinstance(v, dict) for x in (v.get("youtube"), (v.get("short") or {}).get("youtube"))}
+    pub, bad = [], []
+    for i in range(0, len(ids), 50):
+        for v in yt.videos().list(part="snippet,status", id=",".join(ids[i:i + 50])).execute().get("items", []):
+            if v["status"]["privacyStatus"] == "public":
+                pub.append((v["id"], v["snippet"]["title"]))
+    seen = {}
+    for vid, title in pub:
+        seen.setdefault(title, []).append(vid)
+        kinds = {x["snippet"]["trackKind"] for x in yt.captions().list(part="snippet", videoId=vid).execute().get("items", [])}
+        if "standard" not in kinds:
+            bad.append(f"自前の字幕が無い（自動字幕が出る）: {vid} {title[:40]}")
+        if vid not in known:
+            bad.append(f"台帳に無い公開動画: {vid} {title[:40]}")
+    bad += [f"同じ題が{len(v)}本公開: {', '.join(v)} {t[:40]}" for t, v in seen.items() if len(v) > 1]
+    for b in bad:
+        print("  " + b)
+    print(f"公開 {len(pub)}本を点検")
+    print("YT_AUDIT_OK=" + ("no" if bad else "yes"))
+    return 0
+
+
 def check():
     ok = True
     for p, why in ((CLIENT, "OAuthクライアント"), (TOKEN, "アクセス用の鍵")):
@@ -367,11 +433,14 @@ def main():
     ap.add_argument("--slug", help="記事か一次データのslug（概要欄に使う）")
     ap.add_argument("--auth", action="store_true")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--audit", action="store_true", help="公開中の動画の重複・字幕・台帳漏れを点検する")
     ap.add_argument("--users", action="store_true", help="許可したアカウントの累計（上限100の手前で知らせる）")
     ap.add_argument("--public", action="store_true", help="全体公開で上げる")
     ap.add_argument("--update-desc", action="store_true", help="上げ済みの動画の説明欄を今の内容に書き直す")
     ap.add_argument("--update-thumbs", action="store_true", help="上げ済みの動画のサムネイルを記事の業種・テーマの画像にそろえる")
     a = ap.parse_args()
+    if a.audit:
+        return audit()
     if a.update_desc:
         return update_descriptions()
     if a.update_thumbs:

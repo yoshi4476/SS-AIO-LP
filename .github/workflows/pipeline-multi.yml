@@ -578,7 +578,7 @@ jobs:
           done
           # finish が既存記事に足したリンクを残す。コミット工程はこの前に終わっているため、
           # ここで入れないとランナーと一緒に消え、翌日の publish_gap が元の版で配信し直す
-          git add articles data/published.json data/body_hash.json 2>/dev/null || true
+          for p in articles data/published.json data/body_hash.json; do if [ -e "$p" ]; then git add "$p"; fi; done
           if ! git diff --cached --quiet; then
             git commit -q -m "公開の後の手順: 既存記事から新記事へのリンク"
             pushed=0

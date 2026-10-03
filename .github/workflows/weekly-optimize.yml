@@ -485,6 +485,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # ai_cite_check は鍵のあるAIだけに聞く。ここに無いと週次では Gemini しか測れない（2026-10-03）
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          CLAUDE_CITE_API_KEY: ${{ secrets.CLAUDE_CITE_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
           GBP_CLIENT_JSON: ${{ secrets.GBP_CLIENT_JSON }}
@@ -662,7 +667,7 @@ jobs:
           # 量産と見られている兆候（Google の大量生成の不正使用の定義にもとづく）から、来週の1日の本数を決める
           python scripts/pace.py --write 2>&1 | tail -12 || true
           # content_yield の判定（統合を増やすサイト）と学びの台帳を残す。日次の執筆がこれを読む
-          git add data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json 2>/dev/null || true
+          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet || {
             git commit -q -m "weekly: 記事本数の判定と結果からの学び $(date '+%Y-%m-%d')"
             git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
@@ -697,7 +702,7 @@ jobs:
           if [ -f indexing-service-account.json ]; then
             python scripts/reindex.py --budget-min 15 || true
             # 登録済みと確かめたURLの記録を残す（次の週はそこを検査しない）
-            git add data/index_cache.json 2>/dev/null || true
+            for p in data/index_cache.json; do if [ -e "$p" ]; then git add "$p"; fi; done
             git diff --cached --quiet || {
               git commit -q -m "weekly: インデックス検査の記録 $(date '+%Y-%m-%d')"
               git pull --rebase -q origin "${GITHUB_REF_NAME}" || true

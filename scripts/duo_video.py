@@ -37,12 +37,33 @@ NAVY, INK, GOLD, OLIVE = (27, 42, 74), (20, 26, 38), (201, 160, 72), (86, 102, 6
 RED, GREEN, MUTED = (196, 64, 60), (46, 125, 90), (100, 110, 130)
 VOICE = {"N": ("ja-JP-NanamiNeural", "+5%", "-1Hz"), "K": ("ja-JP-KeitaNeural", "+7%", "+0Hz")}
 COLOR = {"N": NAVY, "K": OLIVE}
+# サイトごとの名乗り。経理・補助金の記事の動画まで「AI集客ラボ」と名乗り、
+# 締めで「AI集客ラボで検索」と別サイトへ送っていた（2026-10-03）
+BRANDS = {
+    "ai-lab": {"name": "AI集客ラボ", "search": "AI集客ラボ", "url": "ai.7senses.co.jp"},
+    "corporate": {"name": "セブンセンシズ", "search": "セブンセンシズ", "url": "corp.7senses.co.jp"},
+    "subsidy": {"name": "セブンセンシズ", "search": "セブンセンシズ 補助金", "url": "lp.7senses.co.jp"},
+}
+
+
+def brand(art):
+    import sites as S
+    return BRANDS.get(S.find_category_owner(art.get("category", "")) or "ai-lab", BRANDS["ai-lab"])
+
+
+def brand_ng(sc, art):
+    """ほかのサイトの名前で名乗っていないか"""
+    b = brand(art)["name"]
+    said = "".join(l.get("text", "") for l in sc.get("lines") or [])
+    return [f"このサイトの名前は「{b}」。「{o}」と言っている" for o in {x["name"] for x in BRANDS.values()} if o != b and o in said]
+
+
 BOARD_TYPES = {"cover", "chapter", "points", "number", "compare", "quote", "vs", "step", "end"}
 
 PROMPT = """あなたはYouTubeの解説動画の構成作家です。下の記事だけを材料に、2人の掛け合いの台本をJSONで書いてください。
 
 登場人物:
-- N（ナナ）: AI集客ラボの解説役。丁寧語で、要点を短く言い切る。
+- N（ナナ）: {brand}の解説役。丁寧語で、要点を短く言い切る。名乗るときは「{brand}のナナです」。
 - K（聞き手）: この記事の読者と同じ立場の経営者。自分の会社の事情として素朴に聞き、驚き、納得する。
 
 守ること:
@@ -129,7 +150,7 @@ def validate(sc, art):
         ng.append("最初のセリフに cover が無い")
     if lines and (lines[-1].get("board") or {}).get("type") != "end":
         ng.append("最後のセリフに end が無い")
-    return ng
+    return ng + brand_ng(sc, art)
 
 
 def write_script(slug, tries=3):
@@ -138,7 +159,7 @@ def write_script(slug, tries=3):
     art = article(slug)
     fb = ""
     for k in range(tries):
-        prompt = PROMPT.format(article=art["text"][:14000]) + fb
+        prompt = PROMPT.format(article=art["text"][:14000], brand=brand(art)["name"]) + fb
         r = AR.sh([AR.claude_bin(), "-p", "--max-turns", "1", *AR.model_args()], timeout=900, stdin_text=prompt)
         raw = (r.stdout or "").strip()
         m = re.search(r"\{.*\}", raw, re.S)
@@ -154,6 +175,7 @@ def write_script(slug, tries=3):
             SCRIPTS.mkdir(parents=True, exist_ok=True)
             sc["slug"], sc["title"] = slug, art["title"]
             (SCRIPTS / f"{slug}.json").write_text(json.dumps(sc, ensure_ascii=False, indent=1), encoding="utf-8")
+            sc["brand"] = brand(art)
             return sc
         print(f"   台本 {k + 1}回目 不合格: {' / '.join(ng[:4])}")
         fb = "\n\n前回の台本は次の理由で不合格でした。直して全体を出し直してください:\n- " + "\n- ".join(ng[:12])
@@ -191,9 +213,9 @@ def _backdrop():
 
 
 class Board:
-    def __init__(self, title):
+    def __init__(self, title, br=None):
         import video_make as VM
-        self.VM, self.title = VM, title
+        self.VM, self.title, self.br = VM, title, br or BRANDS["ai-lab"]
         self.base = _backdrop()
         self.cache = {}
 
@@ -218,7 +240,7 @@ class Board:
         VM, FB, FR = self.VM, self.VM.font, self.VM.font_regular
         im = self.base.copy()
         d = ImageDraw.Draw(im)
-        d.text((W - 40, 36), "AI集客ラボ", font=FB(26), fill=NAVY, anchor="rm")
+        d.text((W - 40, 36), self.br["name"], font=FB(26), fill=NAVY, anchor="rm")
         t = st.get("type", "cover")
         X0, X1, Y0, Y1 = 470, 1450, 60, 700
 
@@ -335,11 +357,57 @@ def _subtitle(VM, who, name, role, text, pop):
     d.text((tx + k(22), ty + k(28)), name, font=fn, fill=(255, 255, 255), anchor="lm")
     d.text((tx + k(34) + d.textlength(name, font=fn), ty + k(30)), role, font=fr, fill=(230, 222, 190), anchor="lm")
     f = VM.font(k(48))
-    ls = VM.wrap(d, text, f, k(1180))[:2]
+    ls = balanced_lines(d, text, f, k(1180))
     y0 = k(935) - (len(ls) - 1) * k(34)
     for i, ln in enumerate(ls):
         d.text((k(960), y0 + i * k(68)), ln, font=f, fill=INK, anchor="mm")
     return lay
+
+
+_TAGGER = None
+
+
+def _breaks(text):
+    """切ってよい位置と、その切れ目の悪さ。語の切れ目は形態素で取る
+    （文字の種類で推すと「整えや／すい」のように語の途中で切れた）"""
+    global _TAGGER
+    try:
+        if _TAGGER is None:
+            import fugashi
+            _TAGGER = fugashi.Tagger()
+        toks = [(w.surface, w.feature.pos1) for w in _TAGGER(text)]
+    except Exception:
+        return [(i + 1, 0) for i, c in enumerate(text[:-1]) if c in "、。！？"]
+    out, pos = [], 0
+    for (s, p), (_, q) in zip(toks, toks[1:]):
+        pos += len(s)
+        # 後ろに付く語（助詞・助動詞・接尾辞・記号）の前では切らない
+        if q in ("助詞", "助動詞", "接尾辞", "補助記号") or p == "接頭辞":
+            continue
+        out.append((pos, 0 if p == "補助記号" else 0.1 if p == "助詞" else 0.35))
+    return out
+
+
+def balanced_lines(d, text, f, width, maxl=2):
+    """字幕を2行に分けるとき、2行の幅がなるべく等しくなる語の切れ目で切る。
+    入るところまで詰めて折ると「計算は手作業で／す。」のように1〜2文字だけ落ちた（2026-10-03）"""
+    if d.textlength(text, font=f) <= width:
+        return [text]
+    best = None
+    for i, pen in _breaks(text):
+        a, b = text[:i], text[i:]
+        if b[0] in "」』）、。！？ー" or a[-1] in "「『（":
+            continue
+        wa, wb = d.textlength(a, font=f), d.textlength(b, font=f)
+        if max(wa, wb) > width:
+            continue
+        score = abs(wa - wb) / width + pen
+        if best is None or score < best[0]:
+            best = (score, [a, b])
+    if best:
+        return best[1]
+    import video_make as VM
+    return VM.wrap(d, text, f, width)[:maxl]
 
 
 def chunks(text, limit=44):
@@ -439,9 +507,9 @@ def make(sc, out_mp4):
     import video_make as VM
     lines = sc["lines"]
     names = {"N": "ナナ", "K": "ケンタ"}
-    roles = {"N": "AI集客ラボ 解説", "K": sc.get("listener_role") or "経営者"}
+    roles = {"N": (sc.get("brand") or BRANDS["ai-lab"])["name"] + " 解説", "K": sc.get("listener_role") or "経営者"}
     SR = 24000
-    with tempfile.TemporaryDirectory() as td:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as td:
         td = Path(td)
         waves = []
         for i, ln in enumerate(lines):
@@ -500,7 +568,7 @@ def make(sc, out_mp4):
             if bd:
                 cur = dict(cur, **bd) if bd.keys() <= {"show"} else dict(bd)
             states.append(dict(cur))
-        board = Board(sc.get("title", ""))
+        board = Board(sc.get("title", ""), sc.get("brand") or BRANDS["ai-lab"])
         sp, dim = _sprites()
         # キャラクターは高さ1200px（=900×4/3）の素材を1440pにそのまま置く（拡大しない）
         pos = {"N": round(-60 * KS), "K": OW - sp["K"][("open", "m0")].width + round(90 * KS)}
@@ -508,7 +576,7 @@ def make(sc, out_mp4):
                                 "-s", f"{OW}x{OH}", "-r", str(FPS), "-i", "-", "-i", str(td / "mix.wav"),
                                 # animation は平らな塗りと線の多い絵に向く設定
                                 "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "medium", "-tune", "animation", "-crf", "17",
-                                "-c:a", "aac", "-b:a", "192k", "-shortest", str(out_mp4)], stdin=subprocess.PIPE)
+                                "-c:a", "aac", "-b:a", "192k", "-shortest", str(out_mp4)], stdin=subprocess.PIPE, stderr=open(td / "enc.log", "w", encoding="utf-8", errors="ignore"))
         rng = random.Random(len(lines))
         blink = {"N": 1.2, "K": 2.0}
         li, prev_key, fade_from, fade_t0, sub_cache = -1, None, None, 0.0, {}
@@ -561,7 +629,12 @@ def make(sc, out_mp4):
                         sub_cache.clear()
                     sub_cache[sk] = _subtitle(VM, who, names[who], roles[who], cs[ci], pop)
                 frame.paste(sub_cache[sk], (0, 0), sub_cache[sk])
-            enc.stdin.write(frame.tobytes())
+            try:
+                enc.stdin.write(frame.tobytes())
+            except BrokenPipeError:
+                # ffmpeg が先に落ちると「Broken pipe」しか残らず、原因が分からなかった（2026-10-03）
+                enc.wait()
+                raise RuntimeError("ffmpeg が止まりました: " + (td / "enc.log").read_text(encoding="utf-8", errors="ignore")[-400:])
         enc.stdin.close()
         enc.wait()
         # YouTube の字幕とチャプター（youtube_upload が読む）
@@ -583,7 +656,9 @@ def load_script(slug):
     if not p.is_file():
         return None
     sc = json.loads(p.read_text(encoding="utf-8"))
-    return sc if not validate(sc, article(slug)) else None
+    art = article(slug)
+    sc["brand"] = brand(art)
+    return sc if not validate(sc, art) else None
 
 
 def ready():

@@ -88,7 +88,7 @@ jobs:
           python scripts/build.py > /dev/null 2>&1 || echo "::warning::ビルドに失敗（動画の埋め込みは次のビルドで入ります）"
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          git add data/videos.json data/youtube_playlists.json site data/published.json data/body_hash.json data/yomi_dict.json data/yomi_issues.jsonl data/duo_scripts data/duo_shorts 2>/dev/null || true
+          for p in data/videos.json data/youtube_playlists.json site data/published.json data/body_hash.json data/yomi_dict.json data/yomi_issues.jsonl data/duo_scripts data/duo_shorts; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
           git commit -q -m "記事動画: $(date '+%Y-%m-%d')"
           pushed=0
