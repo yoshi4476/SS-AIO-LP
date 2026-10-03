@@ -44,16 +44,21 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TURNSTILE_SITEKEY: ${{ secrets.TURNSTILE_SITEKEY }}
+          TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
         run: |
           # 公開前の門: sitemapの404/noindex・git の衝突マーカーがあれば公開しない（seo_audit --gate）
           python3 scripts/seo_audit.py --gate || { echo "::error::サイト監査の門で止めました（上の ::error:: を直す）"; exit 1; }
           npx --yes wrangler@4.121.0 pages project create ss-aio-lp --production-branch=master 2>/dev/null || echo "プロジェクトは作成済み"
-          # AI紹介チェック（functions/api/ai-check.js）が使う Gemini の鍵（無料枠の鍵。超えると429で止まり課金されない）
-          if [ -n "$GEMINI_API_KEY" ]; then
-            printf '%s' "$GEMINI_API_KEY" | npx --yes wrangler@4.121.0 pages secret put GEMINI_API_KEY --project-name=ss-aio-lp > /dev/null 2>&1 \
-              && echo "GEMINI_API_KEY を Cloudflare に設定しました" \
-              || echo "::warning::GEMINI_API_KEY を Cloudflare に設定できませんでした（AI紹介チェックが動きません）"
-          fi
+          # AI紹介チェック（functions/api/ai-check.js）が使う鍵。Gemini の検索つき回答は有料（無料枠では使えない）なので、
+          # 回数の上限（月の検索5,000回・同じ回線1日2回）と、ロボットよけ（Turnstile）の鍵を一緒に入れる
+          for k in GEMINI_API_KEY TURNSTILE_SITEKEY TURNSTILE_SECRET; do
+            val="${!k}"
+            [ -z "$val" ] && continue
+            printf '%s' "$val" | npx --yes wrangler@4.121.0 pages secret put "$k" --project-name=ss-aio-lp > /dev/null 2>&1 \
+              && echo "$k を Cloudflare に設定しました" \
+              || echo "::warning::$k を Cloudflare に設定できませんでした（AI紹介チェックが動かないか、ロボットよけが効きません）"
+          done
           ok=""
           for i in 1 2 3; do
             npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && { ok=1; break; }

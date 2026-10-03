@@ -48,6 +48,8 @@ TO_GITHUB = {
     "LINKEDIN_ORG_ID", "LINKEDIN_PERSON_ID",
     # Git を使わない配信先（レンタルサーバーの FTP・WordPress）の接続情報。全社分を1つの JSON で持つ
     "FTP_CREDENTIALS_JSON", "WP_CREDENTIALS_JSON",
+    # AI診断のロボットよけ（Cloudflare Turnstile）。deploy.yml が Cloudflare Pages に入れる
+    "TURNSTILE_SITEKEY", "TURNSTILE_SECRET",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。
