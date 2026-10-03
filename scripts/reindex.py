@@ -93,25 +93,42 @@ def rotated(urls, per_site):
     return (urls[k:] + urls[:k])[:per_site]
 
 
+WORKERS = 5   # 1件ずつ順に聞くと週次で15分かかっていた。URL検査APIの枠は1分600件なので5本並べても余裕がある
+
+
 def unindexed(sc, urls, site_url, deadline=None, cache=None):
-    out = []
-    for i, u in enumerate(urls, 1):
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    local = threading.local()
+
+    def one(u):
         if deadline and time.time() > deadline:
-            print(f"    時間の上限に達したため、残り{len(urls) - i + 1}件は次回に回します")
-            break
+            return u, None, "skip"
+        # API の client はスレッドをまたいで使えないので、スレッドごとに作る
+        if not hasattr(local, "sc"):
+            local.sc = svc("searchconsole", "v1", READ)
         try:
-            r = sc.urlInspection().index().inspect(
-                body={"inspectionUrl": u, "siteUrl": site_url,
-                      "languageCode": "ja"}).execute()
-            s = r.get("inspectionResult", {}).get("indexStatusResult", {})
+            r = local.sc.urlInspection().index().inspect(
+                body={"inspectionUrl": u, "siteUrl": site_url, "languageCode": "ja"}).execute()
+            return u, r.get("inspectionResult", {}).get("indexStatusResult", {}), ""
+        except Exception as e:
+            return u, None, str(e)[:50]
+
+    out, skipped = [], 0
+    with ThreadPoolExecutor(WORKERS) as ex:
+        for u, s, err in ex.map(one, urls):
+            if err == "skip":
+                skipped += 1
+                continue
+            if err:
+                print(f"    検査に失敗: {u[-40:]} {err}")
+                continue
             if cache is not None:
                 cache[u] = {"verdict": s.get("verdict", ""), "state": s.get("coverageState", ""), "at": time.time()}
             if s.get("verdict") != "PASS":
                 out.append((u, s.get("coverageState", "—")))
-        except Exception as e:
-            print(f"    検査に失敗: {u[-40:]} {str(e)[:50]}")
-        if i % 20 == 0:
-            time.sleep(1)
+    if skipped:
+        print(f"    時間の上限に達したため、残り{skipped}件は次回に回します")
     return out
 
 
