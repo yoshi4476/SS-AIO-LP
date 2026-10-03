@@ -1,0 +1,16 @@
+source,target,regex,code
+/,https://corp.7senses.co.jp/,0,301
+/company/,https://corp.7senses.co.jp/company,0,301
+/contact/,https://corp.7senses.co.jp/contact,0,301
+/contact/confirm/,https://corp.7senses.co.jp/contact,0,301
+/contact/thank/,https://corp.7senses.co.jp/contact,0,301
+/g-ran/,https://corp.7senses.co.jp/services/meo,0,301
+/blog/,https://corp.7senses.co.jp/news,0,301
+^/blog/.*,https://corp.7senses.co.jp/news,1,301
+/hello-world/,https://corp.7senses.co.jp/news,0,301
+^/category/.*,https://corp.7senses.co.jp/news,1,301
+/mowing/,https://corp.7senses.co.jp/,0,301
+/landscaping/,https://corp.7senses.co.jp/,0,301
+/pest-control/,https://corp.7senses.co.jp/,0,301
+/unwanted-items/,https://corp.7senses.co.jp/,0,301
+"^/(?!wp-admin|wp-login|wp-json|wp-content|wp-includes|wp-cron|xmlrpc).+",https://corp.7senses.co.jp/,1,301
