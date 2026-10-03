@@ -106,6 +106,8 @@ STYLE = """<style>
 .ilp-card p{margin:0;font-size:.93rem;line-height:1.85;color:var(--muted)}
 .ilp-pain .ilp-card{border-top:4px solid #d9932b}
 .ilp-fix .ilp-card{border-top:4px solid var(--blue);background:var(--bg-alt)}
+.ilp-photo-card{overflow:hidden;padding-top:0}
+.ilp-photo-card img{display:block;width:calc(100% + 2.6rem);max-width:none;margin:0 -1.3rem 1rem;aspect-ratio:16/9;object-fit:cover}
 .ilp-data{background:linear-gradient(135deg,#0b2447,#123a72);border-radius:26px;padding:clamp(1.5rem,3.4vw,2.6rem);color:#fff}
 .ilp-data .ilp-eb{color:#8fb7ff}
 .ilp-data h2{color:#fff}
@@ -218,7 +220,12 @@ def data_section(key, c):
 def body(key, metas, faq_pairs, post_tile, site_url):
     c = LPS[key]
     pains = "".join(f'<div class="ilp-card"><h3>{_e(t)}</h3><p>{_e(d)}</p></div>' for t, d in c["pains"])
-    fixes = "".join(f'<div class="ilp-card"><h3>{_e(t)}</h3><p>{_e(d)}</p></div>' for t, d in c["fixes"])
+    # 4枚は どの業種も SEO → AIO・LLMO → 技術面 → 毎月の数字 の順。その場面の写真（イメージ）を頭に置く
+    photos = ["svc-seo", "svc-aio", "svc-tech", "svc-report"]
+    fixes = "".join(
+        (f'<div class="ilp-card ilp-photo-card"><img src="/images/home/{photos[i]}.webp" alt="{_e(t)}のイメージ" width="1600" height="900" loading="lazy">'
+         if i < len(photos) else '<div class="ilp-card">')
+        + f'<h3>{_e(t)}</h3><p>{_e(d)}</p></div>' for i, (t, d) in enumerate(c["fixes"]))
     hubs = "・".join(f'<a href="/industry/{s}/">{_e(n)}</a>' for s, n in c.get("hub_names", []))
     tiles = "\n".join(post_tile(m) for m in metas[:6])
     faq = "".join(f'<details><summary>{_e(q)}</summary><p>{_e(a)}</p>'
