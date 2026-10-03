@@ -9,6 +9,7 @@
     python scripts/migrate_legacy.py --dry      # 採点せず、直した頭の情報だけ見る
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -99,8 +100,67 @@ def rewrite_all():
         LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
+def rewrite_parallel(slugs, workers):
+    """記事ごとに別の作業場所（git worktree）を作り、書き直しと採点を同時に回す。
+
+    1本の書き直し＋採点は約12分で、ほぼ全部が AI の応答待ち（ビルドは17秒）。検算は
+    「その1本以外が変わっていないか」をリポジトリ全体で見るため、同じ作業場所で並べると
+    互いの変更を「別の記事まで変わった」と数えて止まる。作業場所を分ければ、検算も採点も
+    1本ずつのときと同じものがそのまま通る（精度は変えずに、待ち時間だけを重ねる）"""
+    import shutil
+    import subprocess
+    from concurrent.futures import ThreadPoolExecutor
+    work = ROOT / ".publish-work"
+    log = json.loads(LOG.read_text(encoding="utf-8"))
+
+    def one(slug):
+        w = work / f"wt-{slug}"
+        subprocess.run(["git", "worktree", "remove", "--force", str(w)], cwd=ROOT, capture_output=True)
+        r = subprocess.run(["git", "worktree", "add", "--detach", str(w), "HEAD"], cwd=ROOT, capture_output=True,
+                           text=True, encoding="utf-8", errors="replace")
+        if r.returncode:
+            return slug, f"× {slug}: 作業場所を作れません（{r.stderr[-120:]}）"
+        try:
+            # コミットしていない入力（書き直し途中の控え・採点の台帳）を作業場所へ写す
+            for rel in (f"articles/_legacy/{slug}.md", "data/legacy_scores.json", f"data/subsidy_survey/{slug}.json"):
+                if (ROOT / rel).is_file():
+                    shutil.copy2(ROOT / rel, w / rel)
+            r = subprocess.run([sys.executable, "scripts/migrate_legacy.py", "--rewrite", slug], cwd=w,
+                               capture_output=True, text=True, encoding="utf-8", errors="replace",
+                               env=dict(os.environ, PYTHONIOENCODING="utf-8"), timeout=3600)
+            got = json.loads((w / "data" / "legacy_scores.json").read_text(encoding="utf-8")).get(slug)
+            # 結果だけを本体へ戻す（合格なら articles/ に置き _legacy から外す。不合格なら書き直した控えを残す）
+            art, leg = w / "articles" / f"{slug}.md", w / "articles" / "_legacy" / f"{slug}.md"
+            if art.is_file():
+                shutil.copy2(art, ROOT / "articles" / art.name)
+            if leg.is_file():
+                shutil.copy2(leg, ROOT / "articles" / "_legacy" / leg.name)
+            elif (ROOT / "articles" / "_legacy" / f"{slug}.md").is_file():
+                (ROOT / "articles" / "_legacy" / f"{slug}.md").unlink()
+            line = (r.stdout.strip().splitlines() or [f"? {slug}: 出力なし {r.stderr[-200:]}"])[-1]
+            return slug, (line, got)
+        finally:
+            subprocess.run(["git", "worktree", "remove", "--force", str(w)], cwd=ROOT, capture_output=True)
+
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        for slug, res in ex.map(one, slugs):
+            if isinstance(res, str):
+                print(res, flush=True)
+                continue
+            line, got = res
+            if got:
+                log[slug] = got
+                LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+            print(line, flush=True)
+
+
 def main():
     import score_audit as SA
+    if "--rewrite" in sys.argv and "--parallel" in sys.argv:
+        i = sys.argv.index("--parallel")
+        n = int(sys.argv[i + 1]) if i + 1 < len(sys.argv) and sys.argv[i + 1].isdigit() else 4
+        slugs = [a for a in sys.argv[1:] if not a.startswith("--") and not a.isdigit()]
+        return rewrite_parallel(slugs, n)
     if "--rewrite" in sys.argv:
         return rewrite_all()
     dry = "--dry" in sys.argv

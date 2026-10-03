@@ -61,7 +61,10 @@ def questions(slug):
     t = article(slug)
     title = (re.search(r"^title:\s*\"?(.+?)\"?\s*$", t, re.M) or [0, slug])[1]
     # 題名の【2026年版】などは外し、｜の後ろも主題の一部として残す（前だけだと「AI導入補助金2026」しか残らない題がある）
-    main = re.sub(r"\s+", " ", re.sub(r"【[^】]*】|\[[^\]]*\]", "", title).replace("｜", " ").replace("|", " ")).strip(" 　?？\"")[:45]
+    main = re.sub(r"\s+", " ", re.sub(r"【[^】]*】|\[[^\]]*\]", " ", title).replace("｜", " ").replace("|", " ")).strip(" 　\"")
+    # 題名が問いの形なら、問いの部分だけを聞く（「…は対象?対象範囲と注意点を解説」→「…は対象?」）
+    m = re.search(r"^(.+?[?？])", main)
+    main = (m.group(1) if m else main.strip("?？"))[:45]
     qs = [main]
     heads = [re.sub(r"[*_`]", "", h).strip() for h in re.findall(r"^#{2,3}\s+(.+[?？])\s*$", t, re.M)]
     faqs = re.findall(r"^\s*-?\s*q:\s*\"?(.+?)\"?\s*$", t, re.M)
@@ -83,6 +86,7 @@ def questions(slug):
 
 def survey(slug):
     import ai_cite_check as AC
+    AC.NEED_TEXT = True        # 「何と答えたか」を数えるので、本文の無い古いキャッシュは使わない
     eng = AC.subscription_engines()
     qs = questions(slug)
     tasks = [(q, n) for q in qs for n in eng]
@@ -90,17 +94,65 @@ def survey(slug):
     def one(t):
         q, n = t
         try:
-            return q, n, eng[n](q) or [], ""
+            urls = eng[n](q) or []
+            return q, n, urls, AC.answer_text(eng[n], q), ""
         except Exception as e:
-            return q, n, [], str(e)[:160]
+            return q, n, [], "", str(e)[:160]
     ans = {}
     with ThreadPoolExecutor(max_workers=6) as ex:
-        for q, n, urls, err in ex.map(one, tasks):
-            ans.setdefault(q, {})[n] = {"urls": urls, "error": err}
+        for q, n, urls, text, err in ex.map(one, tasks):
+            ans.setdefault(q, {})[n] = {"urls": urls, "text": text, "error": err}
     rec = {"slug": slug, "date": date.today().isoformat(), "engines": sorted(eng), "questions": qs, "answers": ans}
+    rec["stance"] = classify(rec)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"{slug}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
     return rec
+
+
+LABELS = {"yes": "対象になる（できる）", "cond": "条件による", "no": "対象外（できない）", "none": "問いに直接答えていない"}
+
+
+def _read_once(items):
+    """AI の答えを、問いへの結論で読み分ける（claude に1回読ませる）。根拠の一文も返させる"""
+    import subprocess
+    import tempfile
+    import auto_rewrite as AR
+    body = "\n\n".join(f"### {i}\n問い: {q}\n答え:\n{t[:2500]}" for i, (q, t) in items.items())
+    prompt = ("次はそれぞれ、ある問いに対する AI の答えです。各答えの結論を、問いに対して次のどれか1つに分けてください。\n"
+              "yes=対象になる・できる と言い切っている / cond=条件しだい・ケースによる としている / "
+              "no=対象外・できない と言い切っている / none=問いに直接答えていない（問いが『はい・いいえ』で答える形でない場合も none）。\n"
+              "迷ったら cond ではなく、答えの最初の結論の文で決める。各答えから、その判断の根拠になる一文をそのまま抜き出す。\n"
+              "出力は JSON のオブジェクト1つだけ: {\"<番号>\": {\"label\": \"yes|cond|no|none\", \"quote\": \"<そのままの一文>\"}}\n\n" + body)
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
+        r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt, cwd=tmp,
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=900)
+    m = re.search(r"\{.*\}", r.stdout or "", re.S)
+    try:
+        return json.loads(m.group(0)) if m else {}
+    except ValueError:
+        return {}
+
+
+def classify(rec):
+    """答えを2回独立に読み分け、2回が一致したものだけを採る（一致しないものは split として数えない）。
+    根拠の一文が答えの本文に本当にあるかも確かめる（無ければ split）"""
+    items, where = {}, {}
+    for q, by in rec["answers"].items():
+        for name, r in by.items():
+            if r.get("text") and not r.get("error"):
+                i = str(len(items) + 1)
+                items[i], where[i] = (q, r["text"]), (q, name)
+    if not items:
+        return {}
+    a, b = _read_once(items), _read_once(items)
+    norm = lambda s: re.sub(r"\s+", "", s or "")
+    out = {}
+    for i, (q, name) in where.items():
+        la, lb = (a.get(i) or {}).get("label"), (b.get(i) or {}).get("label")
+        quote = (a.get(i) or {}).get("quote", "")
+        ok = la == lb and la in LABELS and norm(quote)[:20] in norm(items[i][1])
+        out.setdefault(q, {})[name] = {"label": la if ok else "split", "quote": quote if ok else ""}
+    return out
 
 
 def tally(rec):
@@ -136,7 +188,22 @@ def claims(slug):
     who = "・".join(t["engines"])
     q0 = rec["questions"][0]
     total = sum(t["sources"].values())
-    out = [{
+    out = []
+    # 本題の問いに、AI が何と答えたか（はい・いいえで答える問いだけ。読み分けが2回一致した答えだけ数える）
+    for k, (q, by) in enumerate((rec.get("stance") or {}).items(), 1):
+        c = {lb: sum(1 for v in by.values() if v["label"] == lb) for lb in ("yes", "cond", "no", "none", "split")}
+        decided = c["yes"] + c["cond"] + c["no"]
+        if decided < 2 or c["none"] > decided:
+            continue                      # 問いが「はい・いいえ」の形でない、または読み分けが割れすぎた
+        names = "・".join(sorted(by))
+        parts = "、".join(f"「{LABELS[lb]}」が{c[lb]}回答" for lb in ("yes", "cond", "no") if c[lb])
+        rest = c["none"] + c["split"]
+        out.append({
+            "id": f"survey-{slug}-q{k}",
+            "claim": (f"当社が{y}年{m}月に{names}へ「{q}」と聞いたところ、{parts}でした"
+                      + (f"（ほか{rest}回答は結論が読み取れず除外）" if rest else "") + "（当社調べ）"),
+            "source": "セブンセンシズ株式会社によるAIへの聞き取り調査", "as_of": rec["date"][:7]})
+    out += [{
         "id": f"survey-{slug}-1",
         "claim": (f"当社が{y}年{m}月に{who}の{len(t['engines'])}つのAIへ「{q0}」など{len(rec['questions'])}問を聞いたところ、"
                   f"出典つきで答えた{t['answers']}回答のうち、公的機関（go.jp など）のページを根拠に挙げたのは"
