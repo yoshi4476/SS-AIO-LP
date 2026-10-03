@@ -20,6 +20,7 @@ description: AI検索（Google AI Overview・AIモード・ChatGPT・Perplexity�
 
 **AI Overview の表示率**は全体13.7%、**質問形のクエリでは64.7%**。引用ドメインの約30%は1ページ目に出ていない（順位と別の選び方がある）。
 
+AIO・LLMO・GEO・AEO の用語の違いと、プラットフォーム（AI Overview・Gemini・ChatGPT・Perplexity・Claude）ごとに重視されるシグナルは [references/terms.md](references/terms.md)。
 数字の出典と、自社データの検証結果（品質スコアは順位と逆・記事の長さは成果を分けない 等）は [references/facts-2026.md](references/facts-2026.md)。提案書や記事に数字を書くときは必ずそこから引き、出典URLを添える。
 
 ## 判断の手順
