@@ -2373,6 +2373,15 @@ def test_industry_thumbnails_follow_rules():
           any("biyou" in f for f in IT.variants("clinic")), False)
     check("同じ記事にはいつも同じ1枚",
           IT.apply({**base, "title": "士業のAIO対策", "keyword": ""}) == IT.apply({**base, "title": "士業のAIO対策", "keyword": ""}), True)
+    check("業種の無いAIO記事はテーマの画像（費用）",
+          IT.apply({**base, "title": "AIO対策の相場は月3万〜30万円", "keyword": "aio 相場"}), "/images/thumbs/theme-cost.jpg")
+    check("表示は WebP・共有画像は JPEG", (IT.shown("/images/thumbs/aio-shika.jpg"), IT.shown("/images/x/eyecatch.png")),
+          ("/images/thumbs/aio-shika.webp", "/images/x/eyecatch.png"))
+    lp = (ROOT / "site" / "lp" / "fudosan" / "index.html").read_text(encoding="utf-8")
+    check("業種LPの共有画像は業種の画像", 'og:image" content="https://ai.7senses.co.jp/images/thumbs/aio-fudosan.jpg"' in lp, True)
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("記事の枠は0分ちょうどに置かない（GitHub の実行が1〜3時間遅れる）",
+          re.findall(r'^\s*- cron:\s*"(?:0|30) ', wf, re.M), [])
     check("手で選んだアイキャッチは触らない",
           IT.apply({**base, "eyecatch": "/images/x/eyecatch-main.jpg", "title": "歯科医院のAIO対策", "keyword": ""}),
           "/images/x/eyecatch-main.jpg")

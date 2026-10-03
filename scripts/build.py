@@ -34,6 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import md2html
 import entities  # noqa: E402
 import render_check  # noqa: E402
+import industry_thumbs  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
@@ -403,7 +404,7 @@ def post_tile(meta):
     cat_name, cat_class = CATEGORIES[meta["category"]]
     thumb = ""
     if meta.get("eyecatch"):
-        thumb = (f'<span class="thumb"><img src="{meta["eyecatch"]}" '
+        thumb = (f'<span class="thumb"><img src="{industry_thumbs.shown(meta["eyecatch"])}" '
                  f'alt="{meta["title"]}のアイキャッチ画像" width="1200" height="675" loading="lazy"></span>')
     return (f'    <li class="{cat_class}"><a href="/{meta["category"]}/{meta["slug"]}/">{thumb}'
             f'<time datetime="{meta["date"]}">{str(meta["date"]).replace("-", ".")}</time>'
@@ -849,7 +850,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     eyecatch = ""
     if meta.get("eyecatch"):
         # アイキャッチは最初に見える最大の要素（LCP）。優先して読む
-        eyecatch = (f'<figure class="article-eyecatch"><img src="{meta["eyecatch"]}" '
+        eyecatch = (f'<figure class="article-eyecatch"><img src="{industry_thumbs.shown(meta["eyecatch"])}" '
                     f'alt="{meta["title"]}" width="1200" height="675" fetchpriority="high" decoding="async"></figure>')
     # 本文の画像は画面に入るまで読まない（モバイルで1.5MB超を先に運んでいた）
     content = re.sub(r'<img src="(/images/[^"]+)"(?![^>]*\bloading=)', r'<img src="\1" loading="lazy" decoding="async"', content)
@@ -2113,6 +2114,7 @@ def main():
     tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から
     import season_feature
     season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）
+    industry_thumbs.apply_share_images(SITE, SITE_URL)  # 業種LP・業種ページの共有画像を業種の画像に
     hide_data_pages()
     ensure_og()
     build_sitemap(entries)

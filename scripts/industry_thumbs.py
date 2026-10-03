@@ -94,10 +94,68 @@ def apply(meta):
         import hashlib
         i = int(hashlib.md5(str(meta.get("slug", "")).encode("utf-8")).hexdigest(), 16) % len(files)
         return f"/images/thumbs/{files[i]}"
+    t = theme_for(meta)
+    if t and (DIR / f"theme-{t}.jpg").is_file():
+        return f"/images/thumbs/theme-{t}.jpg"
     return cur
+
+
+# 業種の決まらない AI検索の対策の記事は、テーマの画像（費用・注意点・違い…）を題の言葉で当てる。上から順に見る
+THEMES = [
+    ("cost", r"費用|相場|いくら|料金"),
+    ("caution", r"失敗|注意|NG|落とし穴|表示されない|出ない|原因"),
+    ("choose", r"選び方|会社|外注|コンサル|ライター"),
+    ("diff", r"違い|使い分け|比較"),
+    ("llmo", r"LLMO|ChatGPT"),
+    ("seo", r"SEO"),
+    ("howto", r""),
+]
+
+
+def theme_for(meta):
+    title, kw = str(meta.get("title", "")), str(meta.get("keyword", ""))
+    if meta.get("category") != "aio" and not AIO_THEME.search(title + " " + kw):
+        return ""
+    if re.search(r"AIO|AI検索|LLMO", title):
+        title = title.replace("SEO", "")               # AIOとSEOの両方を扱う記事は SEO のテーマにしない
+    return next(k for k, rx in THEMES if re.search(rx, title))
+
+
+def shown(url):
+    """ページに表示する画像。業種・テーマの画像は同じ名前の WebP があればそちら（約4割軽い）。共有画像は JPEG のまま"""
+    if url and url.startswith("/images/thumbs/") and url.endswith(".jpg"):
+        w = url[:-4] + ".webp"
+        if (ROOT / "site" / w.lstrip("/")).is_file():
+            return w
+    return url
 
 
 def variants(k):
     """aio-<鍵>.jpg と aio-<鍵>-2.jpg, -3.jpg …（数字だけ。aio-clinic-biyou は clinic の別枚に数えない）"""
     rx = re.compile(rf"^aio-{re.escape(k)}(-\d+)?\.jpg$")
     return sorted(p.name for p in DIR.glob(f"aio-{k}*.jpg") if rx.match(p.name))
+
+
+# 業種LP（site/lp/<名前>/）と業種ページ（site/industry/<slug>/）の共有画像を、その業種の画像にする。
+# 共通の画像のままだと、LINE や X で「不動産のAIO対策」のページを共有しても、どの業種の話か伝わらない
+LP_KEY = {"medical": "clinic", "fudosan": "fudosan", "koumuten": "koumuten", "shigyou": "shigyou"}
+
+
+def apply_share_images(site: Path, site_url: str):
+    import re as _re
+    jobs = [(site / "lp" / k / "index.html", v) for k, v in LP_KEY.items()]
+    jobs += [(p, p.parent.name) for p in (site / "industry").glob("*/index.html")]
+    n = 0
+    for p, key in jobs:
+        files = variants(key)
+        if not p.is_file() or not files:
+            continue
+        url = f"{site_url}/images/thumbs/{files[0]}"
+        s = p.read_text(encoding="utf-8")
+        new = _re.sub(r'(<meta property="og:image" content=")[^"]*(")', lambda m: m.group(1) + url + m.group(2), s, count=1)
+        if 'name="twitter:image"' not in new:
+            new = new.replace("</head>", f'<meta name="twitter:image" content="{url}">\n</head>', 1)
+        if new != s:
+            p.write_text(new, encoding="utf-8", newline="")
+            n += 1
+    return n
