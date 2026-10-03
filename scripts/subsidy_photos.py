@@ -73,13 +73,19 @@ def _insert_after(html, anchor_rx, key, block):
 
 
 def _shelf(repo, key, slug=""):
-    import photo_shelf
-    fs = photo_shelf.files(key)
+    import hashlib
+    try:
+        import photo_shelf
+        fs = photo_shelf.files(key)
+    except ImportError:
+        # 補助金サイトのデプロイ工程（tools/photos.py として複製）では、配信先にある写真から選ぶ
+        photo_shelf = None
+        fs = sorted(p.name for p in (repo / "images" / "shelf").glob(f"{key}-*.webp")
+                    if re.fullmatch(rf"{re.escape(key)}-\d+\.webp", p.name))
     if not fs:
         return ""
-    import hashlib
     f = fs[int(hashlib.md5(slug.encode("utf-8")).hexdigest(), 16) % len(fs)]
-    return photo_shelf.copy_to(repo, f"/images/shelf/{f}")
+    return photo_shelf.copy_to(repo, f"/images/shelf/{f}") if photo_shelf else f"/images/shelf/{f}"
 
 
 def decorate(repo: Path, rel: str, html: str) -> str:

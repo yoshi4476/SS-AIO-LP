@@ -640,6 +640,10 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     if (dest / "assets" / "img" / "hero-owner.webp").is_file():
         try:
             import subsidy_photos
+            # 配信先のデプロイ工程が一覧を作り直した直後にも同じ処理を走らせるため、本体を tools/photos.py に複製しておく
+            if (dest / "tools").is_dir():
+                shutil.copy2(Path(subsidy_photos.__file__), dest / "tools" / "photos.py")
+                written.append(dest / "tools" / "photos.py")
             for p in (page, dest / "blog" / "index.html"):
                 if p.is_file():
                     subsidy_photos.decorate_file(dest, p)
