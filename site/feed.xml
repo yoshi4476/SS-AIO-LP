@@ -7,6 +7,13 @@
   <updated>2026-10-03T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>外壁塗装のAIO対策｜AIに候補から外される業者の5つの共通点</title>
+    <link href="https://ai.7senses.co.jp/aio/gaiheki-tosou-aio-taisaku/"/>
+    <id>https://ai.7senses.co.jp/aio/gaiheki-tosou-aio-taisaku/</id>
+    <updated>2026-10-03T00:00:00+09:00</updated>
+    <summary>外壁塗装のAIO対策は、見積もりの内訳・使う塗料・施工事例の条件・保証を、確かめられる形でサイトに書くことから始まります。AIが塗装業者を候補から外す5つの原因と、一括見積もりサイト頼みの会社が取る順番を解説します。</summary>
+  </entry>
+  <entry>
     <title>AIO対策の無料ツール6選｜計測・診断と安い有料ツールの選び方</title>
     <link href="https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/"/>
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/meo-kaisha-llmo-taiou/</id>
     <updated>2026-09-17T00:00:00+09:00</updated>
     <summary>MEO会社を選ぶ際にLLMO対応まで確認すべき理由と、見極めの3つの基準を解説します。MEO専業との違いや依頼前の確認ステップ、よくある失敗も紹介します。</summary>
-  </entry>
-  <entry>
-    <title>AI検索対応とは？公開前に済ませる7つの設定項目</title>
-    <link href="https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/"/>
-    <id>https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/</id>
-    <updated>2026-09-16T00:00:00+09:00</updated>
-    <summary>AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。</summary>
   </entry>
 </feed>

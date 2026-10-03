@@ -77,6 +77,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
+関連する内容については、[外壁塗装のAIO対策](/aio/gaiheki-tosou-aio-taisaku/)にまとめています。
+
 実際の例を先に押さえるなら、[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)が参考になります。
 
 近い論点を[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)で扱っています。

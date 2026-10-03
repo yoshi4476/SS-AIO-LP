@@ -14,6 +14,7 @@
 - [クリニック・医療機関の集客](https://ai.7senses.co.jp/industry/clinic/): 患者はいま、検索とAI検索で受診先や症状を調べています。（21本）
 - [不動産の集客](https://ai.7senses.co.jp/industry/fudosan/): 不動産は物件ポータルが検索の上位を占め、自社サイトが同じ土俵で戦っても届きません。（12本）
 - [工務店・注文住宅の集客](https://ai.7senses.co.jp/industry/koumuten/): 注文住宅は検討期間が長く、その間に何度も検索されます。（10本）
+- [リフォーム・外壁塗装の集客](https://ai.7senses.co.jp/industry/reform/): リフォーム・外壁塗装は、一括見積もりサイトに顧客を取られやすい領域です。（5本）
 - [士業（税理士・社労士ほか）の集客](https://ai.7senses.co.jp/industry/shigyou/): 士業は、相談される前に比較されます。（7本）
 - [BtoB・法人向けサービスの集客](https://ai.7senses.co.jp/industry/btob/): BtoBは検討期間が長く、担当者・決裁者・現場と読む人が変わります。（6本）
 
@@ -166,4 +167,5 @@
 - [AIOチェッカーとは？表示と引用を見分ける使い方](https://ai.7senses.co.jp/aio/aio-checker/): AIOチェッカーは、AI Overviewの表示と自社の引用を確かめる道具です。測るもの別の4種類、点数を信じすぎない理由、結果別に次にやることを自社の実測つきで解説します。
 - [AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](https://ai.7senses.co.jp/aio/aio-towa/): AIOとは、GoogleのAI Overview・AIモードで自社ページが引用される状態をつくる施策です。表示される検索の実測、Googleが公式に否定した5つの通説、効くと明記された3条件、成果の測り方を整理します。
 - [税理士法人のAIO対策とは？AI検索に引用される5つの準備](https://ai.7senses.co.jp/aio/zeirishi-houjin-aio/): 税理士法人のAIO対策は、所属税理士・拠点・得意業務をAIが取り違えない形で書くことから始まります。個人事務所との違い、引用される5つの準備、広告ルールとの両立、自社で進めるか外部に任せるかの判断基準を解説します。
+- [外壁塗装のAIO対策｜AIに候補から外される業者の5つの共通点](https://ai.7senses.co.jp/aio/gaiheki-tosou-aio-taisaku/): 外壁塗装のAIO対策は、見積もりの内訳・使う塗料・施工事例の条件・保証を、確かめられる形でサイトに書くことから始まります。AIが塗装業者を候補から外す5つの原因と、一括見積もりサイト頼みの会社が取る順番を解説します。
 
