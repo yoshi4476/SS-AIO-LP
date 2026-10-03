@@ -62,6 +62,9 @@ class NoAnswer(Exception):
 
 
 def ask(q):
+    # 検索つきの Gemini は有料（無料枠では使えない）。使うと決めるまで呼ばない（ai_cite_check と同じ決まり）
+    if os.environ.get("GEMINI_PAID_OK") != "1":
+        raise NoAnswer(q)
     key = os.environ.get("GEMINI_API_KEY", "")
     model = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
     body = json.dumps({"contents": [{"parts": [{"text": q}]}], "tools": [{"google_search": {}}]}).encode()

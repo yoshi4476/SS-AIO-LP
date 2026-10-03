@@ -185,7 +185,10 @@ def subscription_engines():
     import shutil
     if shutil.which("codex") or shutil.which("codex.cmd"):
         out["ChatGPT"] = _cached("ChatGPT-sub", ask_chatgpt_codex)
-    if _env("GEMINI_API_KEY"):
+    # Gemini の検索つき回答は無料枠では使えない（公式の料金表: Free Tier は "Not available"。2026-10-04 確認）。
+    # 課金の設定されたプロジェクトでだけ動き、文字の料金が最初からかかる。「課金APIを使わない聞き方」には入れない。
+    # 使うと決めたときだけ GEMINI_PAID_OK=1 で足す
+    if _env("GEMINI_API_KEY") and _env("GEMINI_PAID_OK") == "1":
         out["Gemini"] = _cached("Gemini", ask_gemini)
     if _claude_cli_ready():
         out["Claude"] = _cached("Claude-sub", ask_claude_cli)
@@ -344,7 +347,9 @@ def _cached(name, fn):
 
 
 def engines_available():
-    return {k: _cached(k, v) for k, v in ENGINES.items() if _env(ENGINE_KEYS[k]) or (k == "Claude" and _claude_cli_ready())}
+    return {k: _cached(k, v) for k, v in ENGINES.items()
+            if (_env(ENGINE_KEYS[k]) or (k == "Claude" and _claude_cli_ready()))
+            and (k != "Gemini" or _env("GEMINI_PAID_OK") == "1")}     # 検索つきは有料（subscription_engines の注記）
 
 
 def _claude_cli_ready():
