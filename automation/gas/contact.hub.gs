@@ -778,11 +778,16 @@ function scanLog_(body) {
 /**
  * AI紹介チェック（ai.7senses.co.jp/tools/ai-check/）の回数制限と記録。
  * 問い合わせ台帳は同じメールの送信を1行にまとめるため、回数は数えられない。専用のシートに1回1行で残す。
- * メールアドレスごとに累計3回まで。月の全体の上限は、Gemini の無料枠（月5,000回の検索つき回答）を
- * 記事の自動処理と分け合うため 1,300回（＝3問×1,300＝3,900回）にとどめる。
+ * メールアドレスごとに累計3回まで。架空のアドレスを変えれば何度でも申し込めるため、
+ * 同じ回線（IPアドレス）からは1日2回まで。
+ * 月の上限は、実際に行われた検索の回数で 5,000回。検索つきの Gemini は無料枠では使えず
+ * （公式の料金表: Free Tier は Not available。2026-10-04 確認）、有料プランの「月5,000回まで検索料0円」に収める。
+ * 1回の質問で検索が何回も行われるため、質問の数ではなく検索の回数で数える。
  */
 const AI_CHECK_PER_EMAIL = 3;
-const AI_CHECK_MONTH_CAP = 1300;
+const AI_CHECK_PER_IP_DAY = 2;
+const AI_CHECK_MONTH_SEARCHES = 5000;
+const AI_CHECK_MAX_SEARCHES_PER_CHECK = 15;   // 1回の診断で行われうる検索の上限の見込み。残りがこれ未満なら受け付けない
 
 function aiCheckSheet_() {
   const ss = book_();
@@ -794,6 +799,10 @@ function aiCheckSheet_() {
   // 翌月の測り直し（2026-10-03 追加）。既存のシートには見出しだけ足す
   if (String(sh.getRange(1, 8).getValue() || '') === '') {
     sh.getRange(1, 8, 1, 3).setValues([['サイト', '翌月の測り直し', '測り直し済み']]);
+  }
+  // 回線ごとの回数と、実際の検索回数（2026-10-04 追加）
+  if (String(sh.getRange(1, 11).getValue() || '') === '') {
+    sh.getRange(1, 11, 1, 2).setValues([['IPアドレス', '検索回数']]);
   }
   return sh;
 }
@@ -838,25 +847,33 @@ function aiRecheckDone_(body) {
 function aiCheckQuota_(body) {
   const email = clean_(body.email).toLowerCase();
   if (!email) return { ok: false, error: 'email' };
+  const ip = clean_(body.ip);
   const sh = aiCheckSheet_();
-  let used = 0, month = 0;
+  let used = 0, ipToday = 0, searches = 0;
   const now = new Date();
+  const today = Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy-MM-dd');
   if (sh.getLastRow() > 1) {
-    sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues().forEach(function (r) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 12).getValues().forEach(function (r) {
       const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
       if (String(r[1]).toLowerCase() === email) used++;
-      if (at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth()) month++;
+      if (ip && String(r[10]) === ip && Utilities.formatDate(at, 'Asia/Tokyo', 'yyyy-MM-dd') === today) ipToday++;
+      // 検索回数の列が無い古い行は、1回3問×最大の見込みで数える（少なく数えて上限を越えないように）
+      if (at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth())
+        searches += r[11] === '' || r[11] === null ? AI_CHECK_MAX_SEARCHES_PER_CHECK : Number(r[11]) || 0;
     });
   }
-  return { ok: true, used: used, perEmail: AI_CHECK_PER_EMAIL, month: month,
-           allowed: used < AI_CHECK_PER_EMAIL && month < AI_CHECK_MONTH_CAP,
-           reason: used >= AI_CHECK_PER_EMAIL ? 'email' : (month >= AI_CHECK_MONTH_CAP ? 'month' : '') };
+  const reason = used >= AI_CHECK_PER_EMAIL ? 'email'
+    : (ipToday >= AI_CHECK_PER_IP_DAY ? 'ip'
+    : (searches + AI_CHECK_MAX_SEARCHES_PER_CHECK > AI_CHECK_MONTH_SEARCHES ? 'month' : ''));
+  return { ok: true, used: used, perEmail: AI_CHECK_PER_EMAIL, perIpDay: AI_CHECK_PER_IP_DAY,
+           searches: searches, allowed: !reason, reason: reason };
 }
 
 function aiCheckLog_(body) {
   aiCheckSheet_().appendRow([new Date(), clean_(body.email).toLowerCase(), clean_(body.company).slice(0, 80),
     clean_(body.word).slice(0, 20), clean_(body.area).slice(0, 40), Number(body.cited) || 0, Number(body.mentioned) || 0,
-    String(body.site || '').replace(/[\r\n\s]+/g, '').slice(0, 200), body.recheck ? '希望' : '', '']);
+    String(body.site || '').replace(/[\r\n\s]+/g, '').slice(0, 200), body.recheck ? '希望' : '', '',
+    clean_(body.ip).slice(0, 64), Number(body.searches) || 0]);
   return { ok: true };
 }
 

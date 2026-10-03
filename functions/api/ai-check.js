@@ -5,8 +5,12 @@
  * 回答に社名が出ているか、代わりに何が出典になっているかを返す。
  * 連絡先は既存の問い合わせと同じ管制塔（GAS）の台帳に記録する。
  *
- * 0円を守る: GEMINI_API_KEY は無料枠の鍵（超えると 429 で止まり、課金されない）。1回に聞くのは3問だけ。
- * 必要な環境変数: GEMINI_API_KEY（必須）、GEMINI_MODEL（任意）、GAS_WEBHOOK_URL / GAS_SHARED_SECRET（台帳）
+ * 費用: 検索つきの Gemini は無料枠では使えない（公式の料金表で確認・2026-10-04）。有料プランの
+ * 「月5,000回まで検索料0円」に収めるため、実際に行われた検索の回数を台帳に残し、月5,000回で受付を止める。
+ * 架空のメールアドレスでの連続申し込みを止めるため、同じ回線（IP）からは1日2回まで、ロボットよけ（Turnstile）を通す。
+ * 台帳に届かないときは受け付けない（上限が効かないまま AI を呼ばない）。
+ * 必要な環境変数: GEMINI_API_KEY（必須）、GEMINI_MODEL（任意）、GAS_WEBHOOK_URL / GAS_SHARED_SECRET（台帳・必須）、
+ *   TURNSTILE_SITEKEY / TURNSTILE_SECRET（ロボットよけ。両方そろうと有効）
  */
 const WORDS = {
   dental: "歯医者", clinic: "クリニック", fudosan: "不動産会社", koumuten: "工務店", reform: "リフォーム会社",
@@ -42,7 +46,9 @@ async function ask(env, q) {
   const text = ((c.content || {}).parts || []).map((p) => p.text || "").join("");
   const chunks = ((c.groundingMetadata || {}).groundingChunks || []).map((x) => x.web || {}).filter((w) => w.uri);
   const hosts = [...new Set(await Promise.all(chunks.slice(0, 12).map((w) => realHost(w.uri, w.title))))].filter(Boolean);
-  return { text, hosts };
+  // 料金は「実際に行われた検索」1回ごと（1つの質問で何回も検索されうる）。台帳に残して月の上限に使う
+  const searches = Math.max(1, ((c.groundingMetadata || {}).webSearchQueries || []).length);
+  return { text, hosts, searches };
 }
 
 export async function onRequestPost({ request, env }) {
@@ -59,16 +65,38 @@ export async function onRequestPost({ request, env }) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ ok: false, error: "メールアドレスの形式が正しくありません。" }, { status: 400 });
   }
-  if (!env.GEMINI_API_KEY) {
-    return Response.json({ ok: false, error: "ただいまチェックを受け付けていません。06-4305-7547 までお電話ください。" }, { status: 503 });
+  const closed = "ただいまチェックを受け付けていません。06-4305-7547 までお電話ください。";
+  if (!env.GEMINI_API_KEY || !env.GAS_WEBHOOK_URL) {
+    return Response.json({ ok: false, error: closed }, { status: 503 });
   }
-  // 回数の上限（メールごと累計3回・月の全体の上限）。AIに聞く前に確かめる。台帳に届かないときは止めない
-  // （鍵は無料枠なので、超えても429で止まり課金されない）
-  const quota = await hub(env, { action: "ai_check_quota", email });
-  if (quota && quota.ok && !quota.allowed) {
+  const ip = request.headers.get("CF-Connecting-IP") || "";
+  // ロボットよけ（鍵が両方そろっているときだけ。そろう前はページにも出さない）
+  if (env.TURNSTILE_SECRET && env.TURNSTILE_SITEKEY) {
+    const form = new FormData();
+    form.append("secret", env.TURNSTILE_SECRET);
+    form.append("response", v("cf-turnstile-response", 4096));
+    if (ip) form.append("remoteip", ip);
+    let human = false;
+    try {
+      const t = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form });
+      human = Boolean((await t.json()).success);
+    } catch (_) { human = false; }
+    if (!human) {
+      return Response.json({ ok: false, error: "ロボットでないことの確認ができませんでした。ページを読み込み直して、もう一度お試しください。" }, { status: 403 });
+    }
+  }
+  // 回数の上限（メールごと累計3回・同じ回線から1日2回・月の検索5,000回）。AIに聞く前に確かめる。
+  // 台帳に届かないときは受け付けない（上限が効かないまま有料の AI を呼ばない）
+  const quota = await hub(env, { action: "ai_check_quota", email, ip });
+  if (!quota || !quota.ok) {
+    return Response.json({ ok: false, error: closed }, { status: 503 });
+  }
+  if (!quota.allowed) {
     const error = quota.reason === "email"
       ? `このメールアドレスでは${quota.perEmail || 3}回調べました。詳しく調べたい場合は、お問い合わせください。`
-      : "今月の無料チェックの受付数に達しました。詳しく調べたい場合は、お問い合わせください。";
+      : quota.reason === "ip"
+        ? `同じ回線からのチェックは1日${quota.perIpDay || 2}回までです。明日もう一度お試しいただくか、お問い合わせください。`
+        : "今月の無料チェックの受付数に達しました。詳しく調べたい場合は、お問い合わせください。";
     return Response.json({ ok: false, limit: quota.reason, error }, { status: 429 });
   }
   const own = host(/^https?:\/\//.test(site) ? site : "https://" + site);
@@ -78,7 +106,7 @@ export async function onRequestPost({ request, env }) {
     results = await Promise.all(qs.map(async (q) => {
       const a = await ask(env, q);
       return {
-        q,
+        q, searches: a.searches,
         cited: Boolean(own) && a.hosts.some((h) => h === own || h.endsWith("." + own)),
         mentioned: norm(a.text).includes(norm(company)),
         sources: a.hosts.slice(0, 8).map((h) => ({ host: h, portal: PORTAL.test(h), own: Boolean(own) && (h === own || h.endsWith("." + own)) })),
@@ -97,9 +125,17 @@ export async function onRequestPost({ request, env }) {
   const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`;
   await record(env, request, { ind, area, company, site, name, email, word, pages, summary });
   // 翌月の測り直しは、本人が印をつけたときだけ（同意のない配信はしない）
-  await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, recheck: v("recheck", 2) === "1" });
-  const used = quota && quota.ok ? quota.used + 1 : null;
+  const searches = results.reduce((n, r) => n + (r.searches || 1), 0);
+  await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, ip, searches,
+    recheck: v("recheck", 2) === "1" });
+  results.forEach((r) => { delete r.searches; });
+  const used = quota.used + 1;
   return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "", used, perEmail: 3 });
+}
+
+// ページがロボットよけを出すかどうか（公開してよいサイトキーだけ返す）
+export async function onRequestGet({ env }) {
+  return Response.json({ turnstile: env.TURNSTILE_SECRET && env.TURNSTILE_SITEKEY ? env.TURNSTILE_SITEKEY : "" });
 }
 
 async function hub(env, body) {

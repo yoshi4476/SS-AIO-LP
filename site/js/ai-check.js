@@ -11,6 +11,20 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var LPNAME = { medical: "クリニック・歯科医院", fudosan: "不動産会社", koumuten: "工務店・リフォーム会社", shigyou: "士業事務所" };
 
+  // ロボットよけ（Cloudflare Turnstile）。サイトキーが設定されているときだけ、送信ボタンの上に出す
+  fetch("/api/ai-check").then(function (r) { return r.json(); }).then(function (c) {
+    if (!c || !c.turnstile) return;
+    var box = document.createElement("div");
+    box.className = "cf-turnstile";
+    box.setAttribute("data-sitekey", c.turnstile);
+    box.style.margin = "12px 0";
+    btn.parentNode.insertBefore(box, btn);
+    var s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    s.async = true;
+    document.head.appendChild(s);
+  }).catch(function () {});
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -23,6 +37,7 @@
       .then(function (r) { return r.json(); })
       .then(function (d) {
         btn.disabled = false;
+        try { if (window.turnstile) window.turnstile.reset(); } catch (x) {}   // 確認は1回きり。次の送信のためにやり直す
         if (!d.ok) {
           var more = d.limit
             ? '<div class="ac-next"><div class="btns"><a class="btn btn-primary" href="/lp/#form" data-cta="ai_check_limit_consult">詳しく調べたい方はお問い合わせ（無料）</a>' +
@@ -60,6 +75,7 @@
       })
       .catch(function () {
         btn.disabled = false;
+        try { if (window.turnstile) window.turnstile.reset(); } catch (x) {}   // 確認は1回きり。次の送信のためにやり直す
         out.innerHTML = '<p class="ac-err" role="alert">通信に失敗しました。時間をおいてもう一度お試しください。</p>';
       });
   });

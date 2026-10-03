@@ -165,3 +165,16 @@ def test_site_change_stays_in_its_own_repo_and_wp_roundtrip():
                   (True, "先方が管理画面で直した"))
         finally:
             C._wp, C._wp_routes, C.mirror = orig, orig_routes, orig_mirror
+
+
+def test_ai_check_cannot_be_abused():
+    """サイトの AI診断は、架空のメールアドレスで何度でも申し込め、台帳に届かないと上限が効かなかった。
+    検索つきの Gemini は有料（無料枠では使えない）なので、回線ごとの回数・月の検索回数・ロボットよけを必ず通す（2026-10-04）"""
+    js = (ROOT / "functions" / "api" / "ai-check.js").read_text(encoding="utf-8")
+    gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
+    check("AI診断: 台帳に届かないときは受け付けない", "if (!quota || !quota.ok)" in js, True)
+    check("AI診断: 回線（IP）を台帳に渡す", "CF-Connecting-IP" in js and "ip })" in js, True)
+    check("AI診断: 実際の検索回数を数えて残す", "webSearchQueries" in js and "searches," in js, True)
+    check("AI診断: ロボットよけの確認がある", "turnstile/v0/siteverify" in js, True)
+    check("AI診断: 同じ回線から1日2回・月の検索5,000回", ("AI_CHECK_PER_IP_DAY = 2" in gs, "AI_CHECK_MONTH_SEARCHES = 5000" in gs),
+          (True, True))
