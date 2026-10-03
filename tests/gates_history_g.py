@@ -191,3 +191,15 @@ def test_gemini_is_metered_by_searches():
     check("Gemini: 業種調査の聞き方（subscription_engines）に入れない", "ask_gemini" in sub, False)
     rc = (ROOT / "scripts" / "ai_recheck.py").read_text(encoding="utf-8")
     check("Gemini: 1か月後の測り直しも同じ台帳で数える", "gemini_budget_ok()" in rc and "gemini_note(" in rc, True)
+
+
+def test_rewrite_targets_measurable_and_parallel_keeps_checks():
+    """週次の書き直しは、順位とクリックで効いたかを測れる記事に使う（採点だけを理由にした書き直しは入れない）。
+    並列は案を書かせるところだけで、当てて検算するのは1本ずつ（run_one(edited=…)）"""
+    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    tg = src.split("def targets():", 1)[1].split("\ndef ", 1)[0]
+    check("書き直しの対象に採点だけの記事（audit_items）を入れない", "audit_items()" in tg, False)
+    ro = src.split("def run_one(item, write, edited=None):", 1)[1].split("\ndef ", 1)[0]
+    check("並列の案も、当てた後に同じ検算（check）を通す", "edited" in ro and "check(slug" in ro, True)
+    fn = (ROOT / "scripts" / "funnel.py").read_text(encoding="utf-8")
+    check("ファネルの送信は問い合わせの数え方（lead_reconcile）に揃える", "LR.ga4_by_day" in fn, True)

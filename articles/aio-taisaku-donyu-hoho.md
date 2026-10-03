@@ -61,10 +61,6 @@ AIO対策の導入とは、AI検索への最適化をツール単発の作業で
 
 近い論点を[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)で扱っています。
 
-近い論点を[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)で扱っています。
-
-関連する内容については、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)にまとめています。
-
 前提となる考え方は[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)でも扱っています。
 
 <div class="definition-box"><span class="term">AIO対策の導入とは</span>、冒頭の断言回答やFAQ整備といった構造改善を1回きりで終わらせず、担当者・診断・計測をセットにして社内の業務フローに組み込む取り組みを指します。</div>

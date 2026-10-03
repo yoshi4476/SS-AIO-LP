@@ -568,7 +568,7 @@ jobs:
           # 2026-09-28 は15本を試して9本直し6本は検算で戻した（15分）。待ちが50件あり、
           # 11〜20位の記事を1ページ目へ上げるのが最大の伸びしろのため本数を上げた（2026-10-02）
           N=$(ls sites/*.json | grep -vc sample); n=$(( N * 8 )); [ "$n" -lt 24 ] && n=24
-          python scripts/auto_rewrite.py --write --limit $n --budget-min 40 || true
+          python scripts/auto_rewrite.py --write --limit $n --budget-min 40 --parallel 3 || true
 
       # 同じ語に自社の2本が出ている組は、差別化ではなく統合する（第8.1章）。
       # 負けた側の中身を勝った側へ claude に足させ、検算に通ったものだけ 301 で送る。

@@ -41,14 +41,14 @@ LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 TITLE_MIN, TITLE_MAX = 15, 45
 
 
-def sh(args, timeout=1800, stdin_text=None):
+def sh(args, timeout=1800, stdin_text=None, cwd=None):
     """外部コマンドを動かす。stdin_text を渡すと標準入力から流し込む。
 
     **複数行の文字列を引数で渡してはいけない。** Windows では claude が
     claude.CMD（バッチ）に解決されるため、最初の改行で切れる。実測で、
     引数で渡した複数行は1行目しか届かず、書き換えが24本続けて空振りした。
     """
-    return subprocess.run(args, cwd=ROOT, capture_output=True, text=True,
+    return subprocess.run(args, cwd=cwd or ROOT, capture_output=True, text=True,
                           encoding="utf-8", errors="ignore", timeout=timeout,
                           input=stdin_text)
 
@@ -124,8 +124,10 @@ def targets():
         print(f"  （rank_rescue から取れません: {str(e)[:50]}）")
     seen0 = {x["slug"] for x in head}
     head = head + [x for x in aio_items() if x["slug"] not in seen0]
-    seen0 = {x["slug"] for x in head}
-    head = head + [x for x in audit_items() if x["slug"] not in seen0]
+    # 採点（一次性）だけを理由にした書き直しは週次の対象にしない（audit_items は残すが、ここでは使わない）。
+    # 自社データでは点数と順位が揃わず（91〜93点が96点以上より上。公開日数を揃えても同じ・2026-10-04）、
+    # 一次性は登録済みのデータが無いと書き直しても上がらなかった（補助金の旧記事12本で確認）。
+    # 書き直しの時間は、順位とクリックで効いたかを測れる記事に使う。公開の条件（90点・各80点）は変えない
     try:
         import rank_up
         items = rank_up.human_items()
@@ -686,23 +688,9 @@ def note(slug, kind, ok, why):
                             "ok": ok, "note": why, **LAST.pop(slug, {})}, ensure_ascii=False) + "\n")
 
 
-def run_one(item, write):
+def build_prompt(item):
+    """書き直しの指示と、増えてよい数字（allowed）。記事の今の状態には依存しない（並列で先に作れる）"""
     slug, kind = item["slug"], item["kind"]
-    p = ROOT / "articles" / f"{slug}.md"
-    if not p.is_file():
-        return False, "記事がありません"
-    if write:
-        import shutil
-        if not (shutil.which("claude") or shutil.which("claude.cmd")):
-            return False, "claude が見つかりません（npm install -g @anthropic-ai/claude-code）"
-    if not write:
-        return True, "（確認のみ）"
-    if kind == "title" and title_locked(slug):
-        return False, f"{title_locked(slug)} に変えたタイトルの判定期間中のため見送ります"
-
-    # 戻すときは HEAD ではなくこの時点の中身へ。同じ週次で先に当てた未コミットの直しを消さない
-    raw = p.read_bytes()
-    before, before_warns, snap = meta(slug), warns(slug), snapshot()
     allowed = ""
     what = WHAT[kind]
     if kind == "aio":
@@ -750,19 +738,71 @@ def run_one(item, write):
         what = what.format(ym=ym)
         allowed = f"{t.tm_year} {t.tm_mon} {t.tm_mon:02d} {t.tm_mday:02d} {t.tm_mday}"
     prompt = PROMPT.format(slug=slug, why=item["why"], what=what)
+    return prompt, allowed
+
+
+def draft_all(items, workers):
+    """各記事の書き直し案を、記事のコピー（一時フォルダ）で同時に書かせる。
+
+    1本の書き直しのほぼ全部は AI の応答待ち。指示は「この1ファイルだけを直す」なので、コピーの上で
+    書かせても中身は同じになる。当てて検算するのは呼び出し側（run_one(edited=…)）で1本ずつ行う"""
+    import tempfile
+    from concurrent.futures import ThreadPoolExecutor
+    exe = claude_bin()
+
+    def one(item):
+        src = ROOT / "articles" / f"{item['slug']}.md"
+        if not src.is_file():
+            return None
+        prompt, _ = build_prompt(item)
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
+            dst = Path(tmp) / "articles" / src.name
+            dst.parent.mkdir(parents=True)
+            dst.write_bytes(src.read_bytes())
+            sh([exe, "-p", "--max-turns", "40", *model_args(), "--allowedTools", "Read,Edit",
+                "--settings", PERM], timeout=1800, stdin_text=prompt, cwd=tmp)
+            return dst.read_text(encoding="utf-8-sig")
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        return list(ex.map(one, items))
+
+
+def run_one(item, write, edited=None):
+    slug, kind = item["slug"], item["kind"]
+    p = ROOT / "articles" / f"{slug}.md"
+    if not p.is_file():
+        return False, "記事がありません"
+    if write:
+        import shutil
+        if not (shutil.which("claude") or shutil.which("claude.cmd")):
+            return False, "claude が見つかりません（npm install -g @anthropic-ai/claude-code）"
+    if not write:
+        return True, "（確認のみ）"
+    if kind == "title" and title_locked(slug):
+        return False, f"{title_locked(slug)} に変えたタイトルの判定期間中のため見送ります"
+
+    # 戻すときは HEAD ではなくこの時点の中身へ。同じ週次で先に当てた未コミットの直しを消さない
+    raw = p.read_bytes()
+    before, before_warns, snap = meta(slug), warns(slug), snapshot()
+    prompt, allowed = build_prompt(item)
     # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
     # この工程がやるのは1ファイルの書き換えだけで、コマンド実行も外部通信も要らない
-    exe = claude_bin()
-    # --permission-mode acceptEdits が無いと、Edit は「承認待ち」で止まり、
-    # 何も書き換わらないまま「変更なし」で終わる。実際 16本連続で空振りし、
-    # 手で1本動かして初めて「権限の許可が必要です」と出ているのが分かった。
-    # 道具は Read,Edit に絞ったままなので、できるのは1ファイルの書き換えだけ。
-    # 悪い書き換えは check() が見つけて直前の中身へ戻す
-    # プロンプトは stdin で渡す（引数だと1行目しか届かない）
-    r = sh([exe, "-p", "--max-turns", "40",
-            *model_args(),
-            "--allowedTools", "Read,Edit",
-            "--settings", PERM], timeout=1800, stdin_text=prompt)
+    if edited is not None:
+        # 並列で先に書かせた案（draft_all）。当てた後の検算は1本ずつのときと同じ
+        if edited != before[2]:
+            p.write_text(edited, encoding="utf-8", newline="")
+        r = subprocess.CompletedProcess([], 0, "", "")
+    else:
+        exe = claude_bin()
+        # --permission-mode acceptEdits が無いと、Edit は「承認待ち」で止まり、
+        # 何も書き換わらないまま「変更なし」で終わる。実際 16本連続で空振りし、
+        # 手で1本動かして初めて「権限の許可が必要です」と出ているのが分かった。
+        # 道具は Read,Edit に絞ったままなので、できるのは1ファイルの書き換えだけ。
+        # 悪い書き換えは check() が見つけて直前の中身へ戻す
+        # プロンプトは stdin で渡す（引数だと1行目しか届かない）
+        r = sh([exe, "-p", "--max-turns", "40",
+                *model_args(),
+                "--allowedTools", "Read,Edit",
+                "--settings", PERM], timeout=1800, stdin_text=prompt)
     if r.returncode and not p.read_text(encoding="utf-8-sig") != before[2]:
         return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
 
@@ -917,6 +957,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--limit", type=int, default=3, help="1回に直す本数")
+    ap.add_argument("--parallel", type=int, default=0, help="書き直し案を同時に書かせる本数（検算は1本ずつ）")
     # 1本あたり最大30分かかる。本数だけ増やすとCIの時間上限で途中終了し、
     # 直した分がcommitされずに捨てられる。残り時間を見て、次を始めない
     ap.add_argument("--budget-min", type=int, default=0,
@@ -954,13 +995,15 @@ def main():
 
     ok = ng = 0
     started = time.time()
-    for x in items[:a.limit]:
+    todo = items[:a.limit]
+    drafts = draft_all(todo, a.parallel) if a.parallel > 1 and a.write else [None] * len(todo)
+    for x, edited in zip(todo, drafts):
         used = (time.time() - started) / 60
         if a.budget_min and used >= a.budget_min:
             print(f"\n  {used:.0f}分使ったので、ここで止めます"
                   f"（残りは次回。上限{a.budget_min}分）")
             break
-        good, why = run_one(x, True)
+        good, why = run_one(x, True, edited=edited) if edited is not None else run_one(x, True)
         print(f"  {'○' if good else '×'} [{x['kind']}] {x['slug'][:34]:<34} {why[:56]}")
         note(x["slug"], x["kind"], good, why)
         if good and why.startswith("直しました"):

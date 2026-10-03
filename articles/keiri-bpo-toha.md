@@ -54,8 +54,6 @@ faq:
 
 近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
 
-あわせて[給与計算の外注費用はいくら？人数別シミュレーション](/blog/kyuyokeisan-gaichuu-hiyou-souba/)もご覧ください。
-
 <div class="definition-box"><span class="term">経理BPOとは</span>、Business Process Outsourcingの略で、経理業務の一部または全体を、業務フロー・体制の設計まで含めて外部の専門会社に委託する仕組みを指します。==「今の作業をそのまま渡す」だけでなく、非効率な部分の整理まで任せられる==点が、従来の記帳代行との大きな違いです。</div>
 
 矢野経済研究所が2025年11月26日に公表した<a href="https://www.yano.co.jp/press-release/show/press_id/3973" target="_blank" rel="noopener">「BPO市場に関する調査結果」</a>によると、**国内のBPO市場規模は2024年度で5兆786億5,000万円（前年度比4.0%増）**まで拡大しました。経理・人事・総務などの間接部門業務を含む非IT系BPO市場も1兆9,566億5,000万円（同1.0%増）に達しています。ノンコア業務を外部リソースに任せる動きは経理分野にも着実に広がっています。

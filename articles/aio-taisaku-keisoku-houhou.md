@@ -85,8 +85,6 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
 
-つまずきやすい点を先に押さえるなら、[整骨院のAIO対策でやりがちな失敗5つ](/aio/seikotsuin-aio-taisaku-shippai/)が参考になります。
-
 順位だけでなく、この5つを毎月並べて見ることで、記事のどこに手を入れるべきかが分かります。
 
 | 指標 | 何が分かるか | 主な確認先 |

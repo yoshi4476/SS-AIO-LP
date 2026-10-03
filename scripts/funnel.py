@@ -34,7 +34,7 @@ STEPS = [
     ("記事を見た", ("page_view",)),
     ("CTAを押した", ("cta_click", "diagnosis_click", "contact_intent")),
     ("フォームを開いた", ("form_start",)),
-    ("送信した", ("form_submit", "lead_form_submit")),
+    ("送信した", ("lead_capture", "generate_lead", "form_submit")),   # 実際の数は lead_reconcile.is_lead で数える（main）
 ]
 
 # 送信の中身。問い合わせと購読を同じ箱に入れると、商談につながる数が分からない。
@@ -115,8 +115,18 @@ def main():
             continue
         print(f"\n■ {c.get('name', site)}（直近{a.days}日）")
         prev = None
+        # 「送信した」は問い合わせの数え方を1つにそろえる（lead_reconcile.is_lead）。以前はサイト全体の form_submit を
+        # 足しており、30秒診断のURL入力まで送信に数え、コーポレートは記録の無い名前を見て0と出していた（2026-10-04）
+        import lead_reconcile as LR
+        from datetime import date, timedelta
+        try:
+            sent = sum(LR.ga4_by_day(prop, date.today() - timedelta(days=a.days), date.today() - timedelta(days=1)).values())
+        except Exception:
+            sent = None
         for label, names in STEPS:
             n = sum(ev.get(x, 0) for x in names)
+            if label == "送信した" and sent is not None:
+                n = sent
             if prev is None:
                 rate = ""
             elif prev == 0:

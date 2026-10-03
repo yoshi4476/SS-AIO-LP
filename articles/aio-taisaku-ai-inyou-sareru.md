@@ -55,8 +55,6 @@ faq:
 
 前提となる考え方は[税理士法人のAIO対策とは？](/aio/zeirishi-houjin-aio/)でも扱っています。
 
-費用の目安については、[AIO対策の相場は月数十万〜数百万円](/aio/aio-taisaku-souba/)にまとめています。
-
 関連する内容は、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)で解説しています。
 
 <div class="definition-box"><span class="term">AIO対策でAIに引用されるとは</span>、ChatGPTやGoogleのAI Overviewなどの生成AIが、回答を組み立てる際に特定のWebページを根拠として採用し、その内容や運営者名を回答に含めることを指します。</div>
