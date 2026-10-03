@@ -416,7 +416,9 @@ def claude_bin():
 # **版が古いと 400 で落ちる**（実測: 2.1.218 は claude-opus-5-5 を
 # 「version 2.1.280 or newer is required」で拒否した）。手元とCIで版が違うため、
 # 名前を決め打ちにせず、版を見て切り替える
-MODELS = [("claude-opus-5-5", (2, 1, 280)), ("claude-opus-5", (0, 0, 0))]
+# 定型の直し・台本・下書きは Sonnet で足りる（結果は検算・門が止める）。Opus は使用量が大きく、
+# サブスクの枠を早く使い切っていた（2026-10-03 ユーザーの指示で切り替え）。記事の執筆（pipeline-multi）は別に指定する
+MODELS = [("claude-sonnet-5-5", (2, 1, 280)), ("claude-sonnet-5", (0, 0, 0))]
 
 
 def cli_version():
