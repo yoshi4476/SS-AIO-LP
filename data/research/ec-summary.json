@@ -1,0 +1,208 @@
+{
+ "total": {
+  "other": 16,
+  "public": 60,
+  "media": 152,
+  "review": 3,
+  "portal": 95,
+  "clinic": 123,
+  "video": 13,
+  "maker": 165
+ },
+ "by_engine": {
+  "Gemini": {
+   "other": 13,
+   "public": 12,
+   "media": 33,
+   "review": 1,
+   "clinic": 52,
+   "portal": 25,
+   "video": 4,
+   "maker": 42
+  },
+  "Claude": {
+   "portal": 70,
+   "clinic": 71,
+   "public": 48,
+   "media": 119,
+   "review": 2,
+   "maker": 123,
+   "video": 9,
+   "other": 3
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "other": 5,
+   "public": 6,
+   "media": 26,
+   "review": 3,
+   "portal": 57,
+   "clinic": 46
+  },
+  "送料・配送": {
+   "video": 5,
+   "clinic": 25,
+   "maker": 47,
+   "media": 34,
+   "portal": 6,
+   "public": 1,
+   "other": 2
+  },
+  "返品・交換": {
+   "public": 31,
+   "maker": 39,
+   "media": 28,
+   "clinic": 24,
+   "other": 7,
+   "portal": 1,
+   "video": 3
+  },
+  "ギフト": {
+   "portal": 27,
+   "media": 27,
+   "clinic": 17,
+   "video": 1,
+   "maker": 36,
+   "other": 2
+  },
+  "口コミ・評判": {
+   "media": 37,
+   "clinic": 11,
+   "public": 22,
+   "maker": 43,
+   "video": 4,
+   "portal": 4
+  }
+ },
+ "answered": {
+  "Gemini": 24,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Claude": 35,
+  "Gemini": 17
+ },
+ "sources": {
+  "Gemini": 182,
+  "Claude": 445
+ },
+ "portal_top": [
+  [
+   "otoriyose.net",
+   6
+  ],
+  [
+   "search.rakuten.co.jp",
+   6
+  ],
+  [
+   "giftmall.co.jp",
+   5
+  ],
+  [
+   "tabiiro.jp",
+   4
+  ],
+  [
+   "shopping.jtb.co.jp",
+   4
+  ],
+  [
+   "rakuten.co.jp",
+   4
+  ],
+  [
+   "giftful.jp",
+   4
+  ],
+  [
+   "my-best.com",
+   3
+  ],
+  [
+   "search.kakaku.com",
+   3
+  ],
+  [
+   "store.asoview.com",
+   3
+  ]
+ ],
+ "industry": "ec",
+ "name": "ネットショップ（EC）",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "送料・配送": 10,
+  "返品・交換": 10,
+  "ギフト": 10,
+  "口コミ・評判": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 74,
+   "review": 2,
+   "media": 59,
+   "other": 16,
+   "public": 25,
+   "portal": 37,
+   "clinic": 52,
+   "video": 13,
+   "maker": 49
+  },
+  "地域で探す": {
+   "answers": 19,
+   "review": 2,
+   "media": 13,
+   "other": 5,
+   "public": 5,
+   "portal": 18,
+   "clinic": 13
+  },
+  "送料・配送": {
+   "answers": 14,
+   "portal": 5,
+   "clinic": 9,
+   "video": 5,
+   "media": 13,
+   "maker": 14,
+   "public": 1,
+   "other": 2
+  },
+  "返品・交換": {
+   "answers": 16,
+   "maker": 13,
+   "clinic": 13,
+   "media": 12,
+   "public": 12,
+   "other": 7,
+   "portal": 1,
+   "video": 3
+  },
+  "ギフト": {
+   "answers": 13,
+   "portal": 10,
+   "clinic": 10,
+   "media": 9,
+   "video": 1,
+   "maker": 11,
+   "other": 2
+  },
+  "口コミ・評判": {
+   "answers": 12,
+   "maker": 11,
+   "clinic": 7,
+   "media": 12,
+   "public": 7,
+   "portal": 3,
+   "video": 4
+  }
+ }
+}

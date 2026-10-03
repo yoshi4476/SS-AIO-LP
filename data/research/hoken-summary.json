@@ -1,0 +1,224 @@
+{
+ "total": {
+  "media": 175,
+  "portal": 234,
+  "clinic": 122,
+  "maker": 204,
+  "other": 15,
+  "video": 6,
+  "review": 1,
+  "public": 101,
+  "wiki": 1
+ },
+ "by_engine": {
+  "Gemini": {
+   "media": 47,
+   "portal": 81,
+   "clinic": 41,
+   "maker": 56,
+   "other": 13,
+   "video": 3,
+   "public": 14
+  },
+  "Claude": {
+   "portal": 144,
+   "clinic": 79,
+   "media": 122,
+   "review": 1,
+   "maker": 114,
+   "public": 18,
+   "video": 3,
+   "wiki": 1,
+   "other": 2
+  },
+  "ChatGPT": {
+   "public": 69,
+   "maker": 34,
+   "clinic": 2,
+   "portal": 9,
+   "media": 6
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "media": 26,
+   "portal": 97,
+   "clinic": 23,
+   "maker": 5,
+   "other": 5,
+   "video": 1,
+   "review": 1
+  },
+  "費用": {
+   "public": 13,
+   "maker": 50,
+   "portal": 38,
+   "other": 4,
+   "media": 44,
+   "clinic": 16,
+   "video": 1
+  },
+  "選び方": {
+   "public": 23,
+   "maker": 23,
+   "clinic": 31,
+   "media": 44,
+   "portal": 36,
+   "wiki": 1,
+   "video": 2
+  },
+  "見直し": {
+   "maker": 53,
+   "public": 29,
+   "clinic": 32,
+   "other": 3,
+   "media": 40,
+   "portal": 44,
+   "video": 2
+  },
+  "事故手続き": {
+   "public": 36,
+   "maker": 73,
+   "media": 21,
+   "clinic": 20,
+   "portal": 19,
+   "other": 3
+  }
+ },
+ "answered": {
+  "Gemini": 33,
+  "Claude": 50,
+  "ChatGPT": 40
+ },
+ "has_clinic": {
+  "Gemini": 22,
+  "Claude": 36,
+  "ChatGPT": 2
+ },
+ "sources": {
+  "Gemini": 255,
+  "Claude": 484,
+  "ChatGPT": 120
+ },
+ "portal_top": [
+  [
+   "hoken-all.co.jp",
+   21
+  ],
+  [
+   "hoken-minaoshi-lab.jp",
+   20
+  ],
+  [
+   "hokende.com",
+   17
+  ],
+  [
+   "hoken.niaeru.com",
+   16
+  ],
+  [
+   "e-hoken110.com",
+   15
+  ],
+  [
+   "portal.premium-yutaiclub.jp",
+   14
+  ],
+  [
+   "hoken.kakaku.com",
+   13
+  ],
+  [
+   "kessin.or.jp",
+   10
+  ],
+  [
+   "hoken-room.jp",
+   9
+  ],
+  [
+   "navinavi-hoken.com",
+   8
+  ]
+ ],
+ "industry": "hoken",
+ "name": "保険代理店",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用": 10,
+  "選び方": 10,
+  "見直し": 10,
+  "事故手続き": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 123,
+   "portal": 73,
+   "media": 77,
+   "clinic": 60,
+   "maker": 77,
+   "other": 13,
+   "video": 6,
+   "review": 1,
+   "public": 50,
+   "wiki": 1
+  },
+  "地域で探す": {
+   "answers": 20,
+   "portal": 20,
+   "media": 16,
+   "clinic": 14,
+   "maker": 5,
+   "other": 3,
+   "video": 1,
+   "review": 1
+  },
+  "費用": {
+   "answers": 28,
+   "maker": 23,
+   "public": 10,
+   "portal": 17,
+   "other": 4,
+   "clinic": 11,
+   "media": 18,
+   "video": 1
+  },
+  "選び方": {
+   "answers": 24,
+   "public": 12,
+   "media": 16,
+   "maker": 11,
+   "clinic": 12,
+   "portal": 15,
+   "wiki": 1,
+   "video": 2
+  },
+  "見直し": {
+   "answers": 25,
+   "maker": 16,
+   "public": 13,
+   "portal": 13,
+   "other": 3,
+   "clinic": 13,
+   "media": 15,
+   "video": 2
+  },
+  "事故手続き": {
+   "answers": 26,
+   "maker": 22,
+   "public": 15,
+   "portal": 8,
+   "media": 12,
+   "clinic": 10,
+   "other": 3
+  }
+ }
+}

@@ -1,0 +1,202 @@
+{
+ "total": {
+  "clinic": 445,
+  "portal": 83,
+  "media": 114,
+  "maker": 12,
+  "other": 9,
+  "video": 11,
+  "public": 11
+ },
+ "by_engine": {
+  "Gemini": {
+   "clinic": 128,
+   "portal": 26,
+   "media": 23,
+   "maker": 5,
+   "other": 7,
+   "video": 4,
+   "public": 1
+  },
+  "Claude": {
+   "media": 91,
+   "clinic": 317,
+   "portal": 57,
+   "public": 10,
+   "video": 7,
+   "other": 2,
+   "maker": 7
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 93,
+   "portal": 41,
+   "media": 33,
+   "maker": 1,
+   "other": 4,
+   "video": 2,
+   "public": 1
+  },
+  "費用": {
+   "portal": 18,
+   "clinic": 74,
+   "media": 23,
+   "other": 1,
+   "public": 4,
+   "video": 1
+  },
+  "選び方": {
+   "clinic": 78,
+   "media": 18,
+   "portal": 13,
+   "video": 4,
+   "maker": 7,
+   "other": 2,
+   "public": 4
+  },
+  "ダイエット": {
+   "clinic": 117,
+   "media": 23,
+   "portal": 5,
+   "maker": 4,
+   "video": 1
+  },
+  "運動初心者の悩み": {
+   "portal": 6,
+   "video": 3,
+   "media": 17,
+   "clinic": 83,
+   "public": 2,
+   "other": 2
+  }
+ },
+ "answered": {
+  "Gemini": 25,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Gemini": 25,
+  "Claude": 49
+ },
+ "sources": {
+  "Gemini": 194,
+  "Claude": 491
+ },
+ "portal_top": [
+  [
+   "fitpalette.lotte.co.jp",
+   16
+  ],
+  [
+   "pas0na.com",
+   9
+  ],
+  [
+   "fitmap.jp",
+   9
+  ],
+  [
+   "body-make.jp",
+   7
+  ],
+  [
+   "personalgym.co.jp",
+   5
+  ],
+  [
+   "gymlife.jp",
+   5
+  ],
+  [
+   "cani.jp",
+   4
+  ],
+  [
+   "my-best.com",
+   3
+  ],
+  [
+   "gyms.jp",
+   3
+  ],
+  [
+   "beauty.hotpepper.jp",
+   2
+  ]
+ ],
+ "industry": "fitness",
+ "name": "フィットネス・ジム",
+ "date": "2026-10-04",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用": 10,
+  "選び方": 10,
+  "ダイエット": 10,
+  "運動初心者の悩み": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 75,
+   "portal": 43,
+   "maker": 9,
+   "other": 9,
+   "clinic": 74,
+   "media": 58,
+   "video": 11,
+   "public": 4
+  },
+  "地域で探す": {
+   "answers": 20,
+   "portal": 17,
+   "maker": 1,
+   "other": 4,
+   "clinic": 20,
+   "media": 15,
+   "video": 2,
+   "public": 1
+  },
+  "費用": {
+   "answers": 15,
+   "portal": 11,
+   "clinic": 14,
+   "media": 13,
+   "other": 1,
+   "public": 1,
+   "video": 1
+  },
+  "選び方": {
+   "answers": 13,
+   "portal": 7,
+   "video": 4,
+   "media": 10,
+   "clinic": 13,
+   "other": 2,
+   "maker": 5,
+   "public": 1
+  },
+  "ダイエット": {
+   "answers": 16,
+   "media": 11,
+   "clinic": 16,
+   "portal": 4,
+   "maker": 3,
+   "video": 1
+  },
+  "運動初心者の悩み": {
+   "answers": 11,
+   "portal": 4,
+   "media": 9,
+   "clinic": 11,
+   "video": 3,
+   "public": 1,
+   "other": 2
+  }
+ }
+}

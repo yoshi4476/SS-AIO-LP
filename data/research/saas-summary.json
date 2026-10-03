@@ -1,0 +1,206 @@
+{
+ "total": {
+  "portal": 146,
+  "public": 38,
+  "maker": 101,
+  "other": 24,
+  "clinic": 115,
+  "media": 349,
+  "video": 20
+ },
+ "by_engine": {
+  "Gemini": {
+   "portal": 35,
+   "public": 23,
+   "maker": 36,
+   "other": 22,
+   "clinic": 53,
+   "media": 102,
+   "video": 13
+  },
+  "Claude": {
+   "media": 247,
+   "public": 15,
+   "portal": 111,
+   "clinic": 62,
+   "maker": 65,
+   "video": 7,
+   "other": 2
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "portal": 46,
+   "public": 25,
+   "maker": 15,
+   "other": 7,
+   "clinic": 74,
+   "media": 27,
+   "video": 4
+  },
+  "料金・費用を調べる": {
+   "portal": 25,
+   "other": 8,
+   "maker": 19,
+   "media": 96,
+   "clinic": 18,
+   "video": 4
+  },
+  "選び方を調べる": {
+   "media": 69,
+   "maker": 26,
+   "portal": 16,
+   "public": 6,
+   "clinic": 8,
+   "video": 5,
+   "other": 2
+  },
+  "製品やサービスを比べる": {
+   "other": 6,
+   "public": 7,
+   "maker": 23,
+   "portal": 49,
+   "media": 77,
+   "video": 4,
+   "clinic": 11
+  },
+  "導入や運用の悩みを調べる": {
+   "media": 80,
+   "maker": 18,
+   "portal": 10,
+   "other": 1,
+   "clinic": 4,
+   "video": 3
+  }
+ },
+ "answered": {
+  "Gemini": 34,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Gemini": 18,
+  "Claude": 26
+ },
+ "sources": {
+  "Gemini": 284,
+  "Claude": 509
+ },
+ "portal_top": [
+  [
+   "it-trend.jp",
+   19
+  ],
+  [
+   "boxil.jp",
+   14
+  ],
+  [
+   "biz.ne.jp",
+   10
+  ],
+  [
+   "meetsmore.com",
+   10
+  ],
+  [
+   "saas.imitsu.jp",
+   9
+  ],
+  [
+   "itreview.jp",
+   9
+  ],
+  [
+   "system-kanji.com",
+   7
+  ],
+  [
+   "kigyolog.com",
+   6
+  ],
+  [
+   "freeconsul.co.jp",
+   4
+  ],
+  [
+   "imitsu.jp",
+   3
+  ]
+ ],
+ "industry": "saas",
+ "name": "IT・SaaS",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "料金・費用を調べる": 10,
+  "選び方を調べる": 10,
+  "製品やサービスを比べる": 10,
+  "導入や運用の悩みを調べる": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 84,
+   "public": 22,
+   "clinic": 44,
+   "portal": 57,
+   "other": 21,
+   "maker": 54,
+   "media": 78,
+   "video": 18
+  },
+  "地域で探す": {
+   "answers": 20,
+   "public": 10,
+   "clinic": 19,
+   "portal": 18,
+   "other": 5,
+   "maker": 9,
+   "media": 16,
+   "video": 4
+  },
+  "料金・費用を調べる": {
+   "answers": 18,
+   "other": 7,
+   "maker": 11,
+   "portal": 11,
+   "media": 17,
+   "clinic": 11,
+   "video": 3
+  },
+  "選び方を調べる": {
+   "answers": 15,
+   "maker": 12,
+   "media": 15,
+   "public": 5,
+   "clinic": 5,
+   "portal": 7,
+   "other": 2,
+   "video": 4
+  },
+  "製品やサービスを比べる": {
+   "answers": 17,
+   "other": 6,
+   "public": 7,
+   "maker": 14,
+   "portal": 15,
+   "media": 16,
+   "clinic": 6,
+   "video": 4
+  },
+  "導入や運用の悩みを調べる": {
+   "answers": 14,
+   "maker": 8,
+   "other": 1,
+   "media": 14,
+   "portal": 6,
+   "clinic": 3,
+   "video": 3
+  }
+ }
+}

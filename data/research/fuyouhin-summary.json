@@ -1,0 +1,211 @@
+{
+ "total": {
+  "portal": 180,
+  "other": 14,
+  "clinic": 506,
+  "media": 53,
+  "public": 49,
+  "video": 11,
+  "maker": 18,
+  "wiki": 1
+ },
+ "by_engine": {
+  "Gemini": {
+   "portal": 45,
+   "other": 7,
+   "public": 13,
+   "clinic": 183,
+   "media": 9,
+   "video": 4,
+   "maker": 9
+  },
+  "Claude": {
+   "portal": 135,
+   "clinic": 323,
+   "media": 44,
+   "video": 7,
+   "public": 36,
+   "maker": 9,
+   "other": 7,
+   "wiki": 1
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "portal": 65,
+   "other": 4,
+   "clinic": 88,
+   "media": 17,
+   "public": 6,
+   "video": 2
+  },
+  "料金・費用の相場": {
+   "clinic": 112,
+   "portal": 40,
+   "maker": 9,
+   "media": 10,
+   "other": 2,
+   "public": 6,
+   "video": 1
+  },
+  "業者の選び方": {
+   "portal": 34,
+   "public": 32,
+   "clinic": 92,
+   "other": 4,
+   "media": 7,
+   "maker": 1,
+   "wiki": 1
+  },
+  "遺品整理の進め方": {
+   "portal": 26,
+   "clinic": 110,
+   "maker": 7,
+   "other": 2,
+   "media": 6,
+   "video": 4,
+   "public": 1
+  },
+  "買取と処分の判断": {
+   "clinic": 104,
+   "media": 13,
+   "video": 4,
+   "portal": 15,
+   "public": 4,
+   "other": 2,
+   "maker": 1
+  }
+ },
+ "answered": {
+  "Gemini": 33,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Claude": 49,
+  "Gemini": 30
+ },
+ "sources": {
+  "Gemini": 270,
+  "Claude": 562
+ },
+ "portal_top": [
+  [
+   "m-ihinseiri.jp",
+   29
+  ],
+  [
+   "fuyouhin-soudansho.com",
+   12
+  ],
+  [
+   "curama.jp",
+   10
+  ],
+  [
+   "sodaigomi-center.com",
+   9
+  ],
+  [
+   "meetsmore.com",
+   8
+  ],
+  [
+   "sodaigomi-kaishu.com",
+   8
+  ],
+  [
+   "rescue.epark.jp",
+   7
+  ],
+  [
+   "katazukedou.com",
+   6
+  ],
+  [
+   "my-best.com",
+   5
+  ],
+  [
+   "ecopit-huyouhin.com",
+   5
+  ]
+ ],
+ "industry": "fuyouhin",
+ "name": "不用品回収・遺品整理",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "料金・費用の相場": 10,
+  "業者の選び方": 10,
+  "遺品整理の進め方": 10,
+  "買取と処分の判断": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 83,
+   "other": 14,
+   "portal": 66,
+   "clinic": 79,
+   "media": 38,
+   "public": 21,
+   "video": 11,
+   "maker": 14,
+   "wiki": 1
+  },
+  "地域で探す": {
+   "answers": 20,
+   "other": 4,
+   "portal": 18,
+   "clinic": 18,
+   "media": 11,
+   "public": 6,
+   "video": 2
+  },
+  "料金・費用の相場": {
+   "answers": 19,
+   "clinic": 17,
+   "portal": 17,
+   "maker": 6,
+   "media": 8,
+   "other": 2,
+   "public": 2,
+   "video": 1
+  },
+  "業者の選び方": {
+   "answers": 15,
+   "clinic": 15,
+   "public": 10,
+   "portal": 11,
+   "other": 4,
+   "media": 5,
+   "maker": 1,
+   "wiki": 1
+  },
+  "遺品整理の進め方": {
+   "answers": 14,
+   "clinic": 14,
+   "maker": 6,
+   "portal": 9,
+   "other": 2,
+   "media": 4,
+   "video": 4,
+   "public": 1
+  },
+  "買取と処分の判断": {
+   "answers": 15,
+   "media": 10,
+   "portal": 11,
+   "video": 4,
+   "public": 2,
+   "clinic": 15,
+   "other": 2,
+   "maker": 1
+  }
+ }
+}

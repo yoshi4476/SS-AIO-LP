@@ -1,0 +1,187 @@
+{
+ "total": {
+  "clinic": 477,
+  "other": 13,
+  "portal": 106,
+  "media": 61,
+  "maker": 17,
+  "video": 8,
+  "public": 4
+ },
+ "by_engine": {
+  "Gemini": {
+   "clinic": 189,
+   "other": 10,
+   "portal": 17,
+   "media": 25,
+   "maker": 5,
+   "video": 8,
+   "public": 1
+  },
+  "Claude": {
+   "clinic": 288,
+   "portal": 89,
+   "media": 36,
+   "other": 3,
+   "maker": 12,
+   "public": 3
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 107,
+   "other": 7,
+   "portal": 41,
+   "media": 8
+  },
+  "七五三・成人式の撮影": {
+   "clinic": 128,
+   "portal": 11,
+   "media": 12,
+   "maker": 1
+  },
+  "家族写真・記念写真の撮影": {
+   "clinic": 87,
+   "media": 8,
+   "portal": 25,
+   "other": 1
+  },
+  "料金・プラン": {
+   "clinic": 71,
+   "portal": 16,
+   "media": 16,
+   "video": 5,
+   "other": 3
+  },
+  "データ納品・アルバム仕上げ": {
+   "media": 17,
+   "clinic": 84,
+   "video": 3,
+   "portal": 13,
+   "maker": 16,
+   "public": 4,
+   "other": 2
+  }
+ },
+ "answered": {
+  "Gemini": 36,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Gemini": 36,
+  "Claude": 50
+ },
+ "sources": {
+  "Gemini": 255,
+  "Claude": 431
+ },
+ "portal_top": [
+  [
+   "photoru.jp",
+   14
+  ],
+  [
+   "meetsmore.com",
+   14
+  ],
+  [
+   "fotowa.com",
+   10
+  ],
+  [
+   "lovegraph.me",
+   7
+  ],
+  [
+   "photo-navi.jp",
+   7
+  ],
+  [
+   "photorait.net",
+   6
+  ],
+  [
+   "curama.jp",
+   6
+  ],
+  [
+   "my-best.com",
+   4
+  ],
+  [
+   "photo-studio-inailife.com",
+   4
+  ],
+  [
+   "our-photo.co",
+   4
+  ]
+ ],
+ "industry": "shashin",
+ "name": "写真館・フォトスタジオ",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "七五三・成人式の撮影": 10,
+  "家族写真・記念写真の撮影": 10,
+  "料金・プラン": 10,
+  "データ納品・アルバム仕上げ": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 86,
+   "other": 12,
+   "clinic": 86,
+   "portal": 52,
+   "media": 44,
+   "maker": 8,
+   "video": 7,
+   "public": 3
+  },
+  "地域で探す": {
+   "answers": 20,
+   "other": 6,
+   "clinic": 20,
+   "portal": 14,
+   "media": 7
+  },
+  "七五三・成人式の撮影": {
+   "answers": 18,
+   "portal": 9,
+   "clinic": 18,
+   "media": 9,
+   "maker": 1
+  },
+  "家族写真・記念写真の撮影": {
+   "answers": 15,
+   "clinic": 15,
+   "media": 6,
+   "portal": 10,
+   "other": 1
+  },
+  "料金・プラン": {
+   "answers": 16,
+   "portal": 10,
+   "clinic": 16,
+   "video": 4,
+   "media": 11,
+   "other": 3
+  },
+  "データ納品・アルバム仕上げ": {
+   "answers": 17,
+   "video": 3,
+   "media": 11,
+   "clinic": 17,
+   "portal": 9,
+   "maker": 7,
+   "public": 3,
+   "other": 2
+  }
+ }
+}

@@ -1,0 +1,212 @@
+{
+ "total": {
+  "media": 170,
+  "portal": 138,
+  "clinic": 295,
+  "maker": 52,
+  "other": 9,
+  "public": 15,
+  "video": 6,
+  "review": 5
+ },
+ "by_engine": {
+  "Gemini": {
+   "media": 39,
+   "portal": 56,
+   "clinic": 91,
+   "maker": 19,
+   "other": 7,
+   "public": 10,
+   "video": 5,
+   "review": 2
+  },
+  "Claude": {
+   "media": 131,
+   "portal": 82,
+   "clinic": 204,
+   "maker": 33,
+   "public": 5,
+   "other": 2,
+   "review": 3,
+   "video": 1
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "media": 19,
+   "portal": 48,
+   "clinic": 51,
+   "maker": 4,
+   "other": 1,
+   "public": 2
+  },
+  "車検": {
+   "maker": 15,
+   "clinic": 75,
+   "public": 5,
+   "portal": 28,
+   "media": 29,
+   "other": 3,
+   "video": 1
+  },
+  "オイル交換": {
+   "clinic": 47,
+   "portal": 16,
+   "maker": 22,
+   "other": 2,
+   "media": 50,
+   "review": 5,
+   "video": 2,
+   "public": 4
+  },
+  "修理": {
+   "media": 30,
+   "portal": 30,
+   "clinic": 68,
+   "maker": 10,
+   "public": 2,
+   "video": 3,
+   "other": 1
+  },
+  "中古車": {
+   "clinic": 54,
+   "media": 42,
+   "portal": 16,
+   "public": 2,
+   "other": 2,
+   "maker": 1
+  }
+ },
+ "answered": {
+  "Gemini": 32,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Gemini": 29,
+  "Claude": 50
+ },
+ "sources": {
+  "Gemini": 229,
+  "Claude": 461
+ },
+ "portal_top": [
+  [
+   "goo-net.com",
+   31
+  ],
+  [
+   "car.rakuten.co.jp",
+   14
+  ],
+  [
+   "jms-car.com",
+   12
+  ],
+  [
+   "carcon.co.jp",
+   11
+  ],
+  [
+   "meetsmore.com",
+   8
+  ],
+  [
+   "navikuru.jp",
+   7
+  ],
+  [
+   "takakuureru.com",
+   5
+  ],
+  [
+   "applenet.co.jp",
+   4
+  ],
+  [
+   "shapro.net",
+   3
+  ],
+  [
+   "hayataro.com",
+   3
+  ]
+ ],
+ "industry": "jidousha",
+ "name": "自動車整備・販売",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "車検": 10,
+  "オイル交換": 10,
+  "修理": 10,
+  "中古車": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 82,
+   "media": 64,
+   "clinic": 79,
+   "portal": 68,
+   "other": 9,
+   "maker": 30,
+   "public": 14,
+   "video": 4,
+   "review": 4
+  },
+  "地域で探す": {
+   "answers": 19,
+   "media": 10,
+   "clinic": 18,
+   "portal": 18,
+   "other": 1,
+   "maker": 4,
+   "public": 2
+  },
+  "車検": {
+   "answers": 17,
+   "public": 5,
+   "maker": 9,
+   "clinic": 17,
+   "portal": 14,
+   "media": 12,
+   "other": 3,
+   "video": 1
+  },
+  "オイル交換": {
+   "answers": 17,
+   "review": 4,
+   "other": 2,
+   "media": 15,
+   "maker": 10,
+   "clinic": 15,
+   "portal": 12,
+   "public": 3,
+   "video": 1
+  },
+  "修理": {
+   "answers": 16,
+   "media": 14,
+   "clinic": 16,
+   "portal": 14,
+   "maker": 6,
+   "public": 2,
+   "video": 2,
+   "other": 1
+  },
+  "中古車": {
+   "answers": 13,
+   "media": 13,
+   "clinic": 13,
+   "portal": 10,
+   "public": 2,
+   "other": 2,
+   "maker": 1
+  }
+ }
+}

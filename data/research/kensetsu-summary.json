@@ -1,0 +1,208 @@
+{
+ "total": {
+  "video": 24,
+  "portal": 216,
+  "clinic": 471,
+  "media": 47,
+  "maker": 58,
+  "public": 28,
+  "other": 18
+ },
+ "by_engine": {
+  "Gemini": {
+   "video": 14,
+   "portal": 68,
+   "clinic": 192,
+   "maker": 26,
+   "public": 10,
+   "other": 13,
+   "media": 16
+  },
+  "Claude": {
+   "portal": 148,
+   "video": 10,
+   "clinic": 279,
+   "media": 31,
+   "public": 18,
+   "maker": 32,
+   "other": 5
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "video": 7,
+   "portal": 54,
+   "clinic": 85,
+   "media": 6,
+   "maker": 3,
+   "public": 7,
+   "other": 2
+  },
+  "外構・エクステリアの費用や選び方": {
+   "portal": 40,
+   "clinic": 99,
+   "media": 20,
+   "public": 1,
+   "maker": 8,
+   "other": 3,
+   "video": 7
+  },
+  "解体工事の費用や選び方": {
+   "portal": 57,
+   "clinic": 118,
+   "video": 2,
+   "maker": 6,
+   "public": 5,
+   "media": 3
+  },
+  "電気工事の費用や選び方": {
+   "clinic": 82,
+   "portal": 43,
+   "video": 7,
+   "media": 7,
+   "maker": 19,
+   "public": 11,
+   "other": 5
+  },
+  "空調（エアコン）工事の費用や選び方": {
+   "clinic": 87,
+   "other": 8,
+   "maker": 22,
+   "video": 1,
+   "portal": 22,
+   "public": 4,
+   "media": 11
+  }
+ },
+ "answered": {
+  "Gemini": 43,
+  "Claude": 49
+ },
+ "has_clinic": {
+  "Claude": 48,
+  "Gemini": 41
+ },
+ "sources": {
+  "Gemini": 339,
+  "Claude": 523
+ },
+ "portal_top": [
+  [
+   "meetsmore.com",
+   17
+  ],
+  [
+   "rehome-navi.com",
+   15
+  ],
+  [
+   "kaitai-guide.net",
+   11
+  ],
+  [
+   "hapisumu.jp",
+   6
+  ],
+  [
+   "genba-mado.com",
+   6
+  ],
+  [
+   "exterior-connect.com",
+   6
+  ],
+  [
+   "gaikouexterior-partners.jp",
+   6
+  ],
+  [
+   "suumo.jp",
+   6
+  ],
+  [
+   "curama.jp",
+   6
+  ],
+  [
+   "imitsu.jp",
+   5
+  ]
+ ],
+ "industry": "kensetsu",
+ "name": "建設・設備工事",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "外構・エクステリアの費用や選び方": 10,
+  "解体工事の費用や選び方": 10,
+  "電気工事の費用や選び方": 10,
+  "空調（エアコン）工事の費用や選び方": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 92,
+   "video": 21,
+   "portal": 74,
+   "media": 35,
+   "clinic": 89,
+   "maker": 39,
+   "public": 16,
+   "other": 17
+  },
+  "地域で探す": {
+   "answers": 19,
+   "video": 4,
+   "portal": 19,
+   "media": 5,
+   "clinic": 17,
+   "maker": 3,
+   "public": 5,
+   "other": 2
+  },
+  "外構・エクステリアの費用や選び方": {
+   "answers": 18,
+   "portal": 15,
+   "clinic": 18,
+   "media": 12,
+   "public": 1,
+   "maker": 7,
+   "other": 3,
+   "video": 7
+  },
+  "解体工事の費用や選び方": {
+   "answers": 18,
+   "portal": 16,
+   "clinic": 18,
+   "video": 2,
+   "maker": 6,
+   "public": 2,
+   "media": 2
+  },
+  "電気工事の費用や選び方": {
+   "answers": 19,
+   "video": 7,
+   "portal": 16,
+   "media": 6,
+   "clinic": 18,
+   "public": 4,
+   "maker": 10,
+   "other": 4
+  },
+  "空調（エアコン）工事の費用や選び方": {
+   "answers": 18,
+   "maker": 13,
+   "clinic": 18,
+   "other": 8,
+   "video": 1,
+   "portal": 8,
+   "public": 4,
+   "media": 10
+  }
+ }
+}

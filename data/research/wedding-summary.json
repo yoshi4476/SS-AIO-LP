@@ -1,0 +1,208 @@
+{
+ "total": {
+  "clinic": 316,
+  "portal": 298,
+  "media": 172,
+  "other": 48,
+  "maker": 8,
+  "video": 10,
+  "public": 13
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "clinic": 54,
+   "portal": 53,
+   "media": 9,
+   "maker": 3,
+   "public": 9,
+   "other": 1,
+   "video": 2
+  },
+  "Gemini": {
+   "portal": 78,
+   "media": 61,
+   "other": 19,
+   "clinic": 100,
+   "maker": 1,
+   "video": 5,
+   "public": 2
+  },
+  "Claude": {
+   "portal": 167,
+   "media": 102,
+   "other": 28,
+   "clinic": 162,
+   "video": 3,
+   "maker": 4,
+   "public": 2
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 62,
+   "portal": 55,
+   "media": 46,
+   "other": 17
+  },
+  "費用・料金": {
+   "portal": 69,
+   "clinic": 53,
+   "other": 12,
+   "media": 43,
+   "maker": 6,
+   "video": 4
+  },
+  "式場の選び方": {
+   "portal": 59,
+   "public": 6,
+   "clinic": 57,
+   "media": 35,
+   "other": 5,
+   "video": 2
+  },
+  "式のスタイル・少人数婚とフォト": {
+   "portal": 65,
+   "clinic": 95,
+   "media": 17,
+   "other": 7,
+   "maker": 2,
+   "video": 1
+  },
+  "見学・持ち込み・契約前の不安": {
+   "portal": 50,
+   "media": 31,
+   "clinic": 49,
+   "public": 7,
+   "other": 7,
+   "video": 3
+  }
+ },
+ "answered": {
+  "ChatGPT": 50,
+  "Gemini": 38,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "ChatGPT": 21,
+  "Gemini": 29,
+  "Claude": 42
+ },
+ "sources": {
+  "ChatGPT": 131,
+  "Gemini": 266,
+  "Claude": 468
+ },
+ "portal_top": [
+  [
+   "zexy.net",
+   77
+  ],
+  [
+   "wedding.mynavi.jp",
+   46
+  ],
+  [
+   "weddingpark.net",
+   25
+  ],
+  [
+   "fam-wedding.com",
+   11
+  ],
+  [
+   "smakon.jp",
+   10
+  ],
+  [
+   "photorait.net",
+   9
+  ],
+  [
+   "rakukon.com",
+   6
+  ],
+  [
+   "bridal-esthe.com",
+   6
+  ],
+  [
+   "petitwedding.com",
+   5
+  ],
+  [
+   "bridal-hoken.jp",
+   5
+  ]
+ ],
+ "industry": "wedding",
+ "name": "結婚式場",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用・料金": 10,
+  "式場の選び方": 10,
+  "式のスタイル・少人数婚とフォト": 10,
+  "見学・持ち込み・契約前の不安": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 138,
+   "clinic": 92,
+   "portal": 124,
+   "media": 84,
+   "other": 41,
+   "maker": 6,
+   "video": 9,
+   "public": 9
+  },
+  "地域で探す": {
+   "answers": 30,
+   "clinic": 17,
+   "portal": 24,
+   "media": 20,
+   "other": 14
+  },
+  "費用・料金": {
+   "answers": 29,
+   "portal": 29,
+   "other": 10,
+   "maker": 4,
+   "clinic": 17,
+   "media": 19,
+   "video": 3
+  },
+  "式場の選び方": {
+   "answers": 26,
+   "portal": 25,
+   "public": 4,
+   "media": 16,
+   "clinic": 15,
+   "other": 4,
+   "video": 2
+  },
+  "式のスタイル・少人数婚とフォト": {
+   "answers": 28,
+   "portal": 26,
+   "clinic": 23,
+   "media": 14,
+   "other": 7,
+   "maker": 2,
+   "video": 1
+  },
+  "見学・持ち込み・契約前の不安": {
+   "answers": 25,
+   "portal": 20,
+   "media": 15,
+   "clinic": 20,
+   "public": 5,
+   "other": 6,
+   "video": 3
+  }
+ }
+}

@@ -2270,6 +2270,10 @@ def test_lessons_2026_10_03():
     check("記事に自社の補助金の採択の実績が無い", claims, [])
     facts = json.loads((ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8"))["facts"]
     check("一次情報の台帳に自社の採択の実績が無い", [f["id"] for f in facts if own.search(f.get("claim", ""))], [])
+    # 11. 調査ページに「4つのAIに聞いた」と固定で書き、ChatGPT が上限で0件の業種でも4つと表示していた
+    fixed_engines = [p.name for p in (ROOT / "scripts").glob("*.py")
+                     if "ChatGPT・Gemini・Claude・Perplexity" in p.read_text(encoding="utf-8", errors="ignore")]
+    check("聞いたAIの名前を固定の文で書かない（回答が取れたAIだけを並べる）", fixed_engines, [])
     # 10. クライアントの動画・SNS は先方のアカウントにだけ上げる（当社の鍵に落とさない）
     import tempfile
     import youtube_upload as YU

@@ -1,0 +1,205 @@
+{
+ "total": {
+  "maker": 57,
+  "other": 27,
+  "media": 113,
+  "portal": 236,
+  "clinic": 312,
+  "public": 23,
+  "video": 4,
+  "wiki": 1
+ },
+ "by_engine": {
+  "Gemini": {
+   "maker": 22,
+   "other": 25,
+   "media": 39,
+   "portal": 79,
+   "clinic": 115,
+   "public": 12,
+   "video": 3
+  },
+  "Claude": {
+   "maker": 35,
+   "portal": 157,
+   "media": 74,
+   "clinic": 197,
+   "video": 1,
+   "other": 2,
+   "public": 11,
+   "wiki": 1
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "maker": 3,
+   "other": 10,
+   "media": 22,
+   "portal": 77,
+   "clinic": 50
+  },
+  "エアコン掃除": {
+   "maker": 25,
+   "portal": 37,
+   "other": 3,
+   "clinic": 55,
+   "media": 18,
+   "public": 1
+  },
+  "家事代行": {
+   "other": 7,
+   "clinic": 81,
+   "media": 17,
+   "portal": 33,
+   "maker": 3,
+   "video": 3
+  },
+  "料金と定期契約": {
+   "other": 4,
+   "portal": 40,
+   "clinic": 64,
+   "maker": 16,
+   "media": 19,
+   "public": 7
+  },
+  "口コミと業者選び": {
+   "media": 37,
+   "clinic": 62,
+   "maker": 10,
+   "portal": 49,
+   "other": 3,
+   "video": 1,
+   "public": 15,
+   "wiki": 1
+  }
+ },
+ "answered": {
+  "Gemini": 41,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Gemini": 39,
+  "Claude": 46
+ },
+ "sources": {
+  "Gemini": 295,
+  "Claude": 478
+ },
+ "portal_top": [
+  [
+   "meetsmore.com",
+   21
+  ],
+  [
+   "curama.jp",
+   21
+  ],
+  [
+   "yourmystar.jp",
+   17
+  ],
+  [
+   "kajitaku.com",
+   17
+  ],
+  [
+   "ouchipro.com",
+   12
+  ],
+  [
+   "kurashi.kakaku.com",
+   10
+  ],
+  [
+   "my-best.com",
+   9
+  ],
+  [
+   "housekeeping-cafe.com",
+   9
+  ],
+  [
+   "selectra.jp",
+   9
+  ],
+  [
+   "lifehugger.jp",
+   7
+  ]
+ ],
+ "industry": "kaji",
+ "name": "家事代行・ハウスクリーニング",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "エアコン掃除": 10,
+  "家事代行": 10,
+  "料金と定期契約": 10,
+  "口コミと業者選び": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 91,
+   "portal": 82,
+   "other": 27,
+   "media": 63,
+   "maker": 39,
+   "clinic": 85,
+   "public": 11,
+   "video": 4,
+   "wiki": 1
+  },
+  "地域で探す": {
+   "answers": 20,
+   "portal": 20,
+   "other": 10,
+   "media": 14,
+   "maker": 3,
+   "clinic": 19
+  },
+  "エアコン掃除": {
+   "answers": 18,
+   "clinic": 17,
+   "other": 3,
+   "portal": 15,
+   "maker": 12,
+   "media": 12,
+   "public": 1
+  },
+  "家事代行": {
+   "answers": 18,
+   "clinic": 18,
+   "other": 7,
+   "media": 13,
+   "portal": 16,
+   "maker": 3,
+   "video": 3
+  },
+  "料金と定期契約": {
+   "answers": 18,
+   "clinic": 16,
+   "maker": 15,
+   "portal": 15,
+   "other": 4,
+   "media": 10,
+   "public": 3
+  },
+  "口コミと業者選び": {
+   "answers": 17,
+   "clinic": 15,
+   "portal": 16,
+   "maker": 6,
+   "media": 14,
+   "other": 3,
+   "video": 1,
+   "public": 7,
+   "wiki": 1
+  }
+ }
+}

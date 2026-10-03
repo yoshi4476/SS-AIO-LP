@@ -216,7 +216,7 @@ def data_section(key, c):
     if not cards:
         return ""
     return ('<section class="ilp-data"><span class="ilp-eb">Data</span><h2>データで見る：AIは何を出典に答えているか</h2>'
-            '<p class="ilp-proof" style="margin:0 0 1rem">当社が、実際に調べられそうな質問を ChatGPT・Gemini・Claude・Perplexity に聞き、'
+            '<p class="ilp-proof" style="margin:0 0 1rem">当社が、実際に調べられそうな質問を ChatGPT・Gemini・Claude などのAIに聞き、'
             '回答の出典になったサイトを種類ごとに数えた結果です。</p>'
             f'<div class="ilp-cards">{"".join(cards)}</div></section>')
 

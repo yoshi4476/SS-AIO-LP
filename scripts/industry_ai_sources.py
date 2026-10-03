@@ -444,7 +444,7 @@ def research_box(hub_slug, title=""):
                 f'<p class="sb-kicker">当社の調査・{hl["date"][:4]}年{int(hl["date"][5:7])}月・{H.escape(hl["name"])}の「{H.escape(g)}」の質問</p>'
                 f'<p class="sb-head">{H.escape(T.get("asker", "お客様"))}が「{H.escape(g)}」をAIに聞いたとき、回答の{own}%が{H.escape(T["owner_site"])}を出典に含んでいました</p>'
                 f'<ul class="rb-bars">{bars}</ul>'
-                f'<p class="sb-sub">「{H.escape(g)}」に当たる{gb["questions"]}問を ChatGPT・Gemini・Claude・Perplexity に聞き、'
+                f'<p class="sb-sub">「{H.escape(g)}」に当たる{gb["questions"]}問を {hl["engines_text"]} に聞き、'
                 f'得られた{gb["answers"]}件の回答で、それぞれの種類のサイトを出典に含んだ回答の割合です（1つの回答が複数の種類を含むため、合計は100%になりません）。</p>'
                 f'<p><a class="btn btn-primary" href="/research/{r}-ai-sources/" data-cta="article_research_{r}">調査の結果を見る</a> '
                 + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else "")
@@ -452,7 +452,7 @@ def research_box(hub_slug, title=""):
     return ('<aside class="scan-box research-box" aria-label="この業種の調査">'
             f'<p class="sb-kicker">調査レポート・{hl["date"][:4]}年{int(hl["date"][5:7])}月</p>'
             f'<p class="sb-head">{H.escape(T["other_short"])}の質問では、回答の{hl["oa"]}%が{H.escape(T["owner_site"])}を出典にしていました</p>'
-            f'<p class="sb-sub">{H.escape(hl["name"])}に関する{hl["questions"]}問を ChatGPT・Gemini・Claude・Perplexity に聞き、'
+            f'<p class="sb-sub">{H.escape(hl["name"])}に関する{hl["questions"]}問を {hl["engines_text"]} に聞き、'
             f'AIが何を出典に答えているかを数えた調査です。</p>'
             f'<p><a class="btn btn-primary" href="/research/{r}-ai-sources/" data-cta="article_research_{r}">調査の結果を見る</a> '
             + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else "")
@@ -480,7 +480,11 @@ def headline(ind):
     oa = round(sum(pa[g].get("clinic", 0) for g in other) / max(sum(pa[g]["answers"] for g in other), 1) * 100, 1)
     # 「どちらが多い」は2通りの数え方で向きがそろい、件数で5ポイント以上の差があるときだけ言う
     verdict = ("portal" if lp - lc >= 5 and ap > ac else "owner" if lc - lp >= 5 and ac > ap else "even")
+    # 実際に回答が取れたAIだけを並べる。固定の文で「4つに聞いた」と書くと、ChatGPT が上限で
+    # 0件だった業種でも4つに聞いたことになっていた（2026-10-04）
+    got = [e for e in ("ChatGPT", "Gemini", "Claude", "Perplexity") if (s.get("answered") or {}).get(e)]
     return {"ind": ind, "name": s["name"], "date": s["date"], "questions": s["questions"], "T": T,
+            "engines_text": "・".join(got), "n_engines": len(got),
             "lp": lp, "lc": lc, "ap": ap, "ac": ac, "oc": oc, "oa": oa, "verdict": verdict,
             "url": f"https://ai.7senses.co.jp/research/{ind}-ai-sources/"}
 
@@ -501,7 +505,7 @@ def hero(ind):
             f'<div class="lx-wrap lx-hero-grid"><div>'
             f'<ul class="lx-kicker"><li>調査レポート</li><li>{y}年{m}月</li></ul>'
             f'<h1 class="lx-h1">{H.escape(hl["name"])}の質問に、<br><em>AIは何を出典に答えるか</em></h1>'
-            f'<p class="lx-lead">{H.escape(T["asker"])}が実際に調べそうな{hl["questions"]}問を、ChatGPT・Gemini・Claude・Perplexity の4つに聞き、'
+            f'<p class="lx-lead">{H.escape(T["asker"])}が実際に調べそうな{hl["questions"]}問を、{hl["engines_text"]} の{hl["n_engines"]}つに聞き、'
             f'回答の出典になったサイトの種類を数えました。</p>'
             f'<p class="lx-alt">集計データ: <a href="/research/{ind}-ai-sources/data.csv" download>CSVをダウンロード</a>'
             f' ／ <a href="/download/?ind={RESEARCH_TO_CHECKLIST.get(ind, "")}" data-cta="research_hero_checklist_{ind}">チェックリスト（PDF）を受け取る</a>'

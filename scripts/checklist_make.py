@@ -91,7 +91,7 @@ li{{display:flex;gap:2.4mm;align-items:flex-start}}
 <p class="sub">セブンセンシズ株式会社（AI集客ラボ）・{hl['date'][:4]}年{int(hl['date'][5:7])}月版 ／ 当てはまるものに印をつけてください</p>
 <div class="data"><div><b>{e(first[0])}</b><p>{e(first[1])}</p></div>
 <div><b>{hl['oa']}%</b><p>{e(T['other_short'])}を調べる質問で、回答が{e(T['owner_site'])}を1つ以上出典にしていた割合</p></div>
-<p class="src">出典: セブンセンシズ株式会社の調査（{hl['questions']}問を ChatGPT・Gemini・Claude・Perplexity に質問・{hl['date']}）{hl['url']}</p></div>
+<p class="src">出典: セブンセンシズ株式会社の調査（{hl['questions']}問を {hl['engines_text']} に質問・{hl['date']}）{hl['url']}</p></div>
 <h2>1. AIと検索に読まれる状態か</h2><p class="why">ここが欠けると、内容が良くてもAIの答えに使われません。</p><ul>{box(TECH)}</ul>
 <h2>2.「探される」場面（{e(T['owner'])}を探す人）</h2><p class="why">探す質問では、AIは{e(T['portal'])}も出典にします。掲載情報の古さはそのまま答えに出ます。</p><ul>{box(find)}</ul>
 <h2 class="cut">3.「調べられる」場面（自社の解説ページ）</h2><p class="why">費用・手続きなどを調べる質問では、AIは{e(T['owner_site'])}を出典にしていました。次のテーマに答えるページがあるかを確かめてください。</p><ul>{box(seek)}</ul>

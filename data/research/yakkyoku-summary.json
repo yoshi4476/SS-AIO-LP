@@ -1,0 +1,215 @@
+{
+ "total": {
+  "media": 142,
+  "other": 15,
+  "video": 22,
+  "portal": 82,
+  "public": 107,
+  "clinic": 174,
+  "maker": 75,
+  "review": 1
+ },
+ "by_engine": {
+  "Gemini": {
+   "media": 45,
+   "other": 13,
+   "video": 14,
+   "portal": 32,
+   "public": 50,
+   "clinic": 63,
+   "maker": 28
+  },
+  "Claude": {
+   "media": 97,
+   "public": 57,
+   "clinic": 111,
+   "review": 1,
+   "portal": 50,
+   "maker": 47,
+   "video": 8,
+   "other": 2
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "media": 17,
+   "other": 7,
+   "video": 3,
+   "portal": 22,
+   "public": 34,
+   "clinic": 48,
+   "maker": 2,
+   "review": 1
+  },
+  "費用": {
+   "clinic": 29,
+   "portal": 13,
+   "maker": 19,
+   "public": 20,
+   "media": 53,
+   "video": 6,
+   "other": 1
+  },
+  "選び方": {
+   "portal": 30,
+   "clinic": 36,
+   "maker": 18,
+   "media": 22,
+   "other": 2,
+   "video": 2,
+   "public": 14
+  },
+  "処方箋とオンライン服薬指導": {
+   "portal": 14,
+   "media": 26,
+   "clinic": 34,
+   "public": 12,
+   "maker": 18,
+   "video": 2,
+   "other": 2
+  },
+  "ジェネリックと在庫": {
+   "media": 24,
+   "public": 27,
+   "other": 3,
+   "clinic": 27,
+   "maker": 18,
+   "video": 9,
+   "portal": 3
+  }
+ },
+ "answered": {
+  "Gemini": 36,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Gemini": 25,
+  "Claude": 37
+ },
+ "sources": {
+  "Gemini": 245,
+  "Claude": 373
+ },
+ "portal_top": [
+  [
+   "psft.co.jp",
+   19
+  ],
+  [
+   "todokusuri.com",
+   11
+  ],
+  [
+   "pharmacy.healthcare.rakuten.co.jp",
+   5
+  ],
+  [
+   "pharma.mynavi.jp",
+   5
+  ],
+  [
+   "kaigo.homes.co.jp",
+   5
+  ],
+  [
+   "epark.jp",
+   4
+  ],
+  [
+   "yaku-job.com",
+   4
+  ],
+  [
+   "38-8931.com",
+   3
+  ],
+  [
+   "okusuritecho.epark.jp",
+   3
+  ],
+  [
+   "melmo-app.com",
+   2
+  ]
+ ],
+ "industry": "yakkyoku",
+ "name": "薬局",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用": 10,
+  "選び方": 10,
+  "処方箋とオンライン服薬指導": 10,
+  "ジェネリックと在庫": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 86,
+   "public": 51,
+   "other": 14,
+   "video": 21,
+   "portal": 45,
+   "media": 66,
+   "clinic": 62,
+   "maker": 47,
+   "review": 1
+  },
+  "地域で探す": {
+   "answers": 19,
+   "public": 13,
+   "other": 6,
+   "video": 3,
+   "portal": 11,
+   "media": 13,
+   "clinic": 13,
+   "maker": 2,
+   "review": 1
+  },
+  "費用": {
+   "answers": 20,
+   "portal": 9,
+   "public": 9,
+   "clinic": 11,
+   "maker": 14,
+   "media": 17,
+   "video": 6,
+   "other": 1
+  },
+  "選び方": {
+   "answers": 16,
+   "portal": 14,
+   "clinic": 13,
+   "maker": 10,
+   "media": 10,
+   "other": 2,
+   "video": 2,
+   "public": 9
+  },
+  "処方箋とオンライン服薬指導": {
+   "answers": 14,
+   "portal": 9,
+   "media": 13,
+   "clinic": 11,
+   "maker": 10,
+   "public": 8,
+   "other": 2,
+   "video": 2
+  },
+  "ジェネリックと在庫": {
+   "answers": 17,
+   "media": 13,
+   "public": 12,
+   "maker": 11,
+   "clinic": 14,
+   "other": 3,
+   "video": 8,
+   "portal": 2
+  }
+ }
+}

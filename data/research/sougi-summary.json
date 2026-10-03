@@ -1,0 +1,217 @@
+{
+ "total": {
+  "clinic": 437,
+  "portal": 298,
+  "public": 83,
+  "media": 37,
+  "video": 9,
+  "other": 31,
+  "maker": 16
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "clinic": 61,
+   "portal": 22,
+   "public": 68,
+   "media": 6,
+   "other": 4,
+   "maker": 2
+  },
+  "Gemini": {
+   "portal": 97,
+   "clinic": 133,
+   "other": 17,
+   "public": 6,
+   "media": 5,
+   "video": 2,
+   "maker": 5
+  },
+  "Claude": {
+   "portal": 179,
+   "clinic": 243,
+   "media": 26,
+   "video": 7,
+   "public": 9,
+   "other": 10,
+   "maker": 9
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "clinic": 69,
+   "portal": 97,
+   "public": 9,
+   "media": 1,
+   "video": 1,
+   "other": 3
+  },
+  "費用の相場": {
+   "media": 16,
+   "clinic": 85,
+   "public": 21,
+   "portal": 57,
+   "video": 4,
+   "other": 6,
+   "maker": 3
+  },
+  "葬儀の形式の選び方": {
+   "portal": 45,
+   "clinic": 117,
+   "other": 3,
+   "media": 7,
+   "public": 18,
+   "video": 1
+  },
+  "手続きと段取り": {
+   "clinic": 91,
+   "public": 33,
+   "portal": 43,
+   "maker": 9,
+   "other": 12,
+   "media": 3,
+   "video": 1
+  },
+  "マナーとお布施": {
+   "clinic": 75,
+   "portal": 56,
+   "maker": 4,
+   "other": 7,
+   "media": 10,
+   "public": 2,
+   "video": 2
+  }
+ },
+ "answered": {
+  "ChatGPT": 50,
+  "Gemini": 36,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "ChatGPT": 33,
+  "Gemini": 32,
+  "Claude": 49
+ },
+ "sources": {
+  "ChatGPT": 163,
+  "Gemini": 265,
+  "Claude": 483
+ },
+ "portal_top": [
+  [
+   "e-sogi.com",
+   50
+  ],
+  [
+   "osohshiki.jp",
+   48
+  ],
+  [
+   "aeonlife.jp",
+   19
+  ],
+  [
+   "sougi-korekara.com",
+   19
+  ],
+  [
+   "ansinsougi.jp",
+   18
+  ],
+  [
+   "soogi.jp",
+   18
+  ],
+  [
+   "takusel.info",
+   15
+  ],
+  [
+   "yoriso.com",
+   11
+  ],
+  [
+   "cerema.co.jp",
+   11
+  ],
+  [
+   "moshimo.net",
+   11
+  ]
+ ],
+ "industry": "sougi",
+ "name": "葬儀社",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用の相場": 10,
+  "葬儀の形式の選び方": 10,
+  "手続きと段取り": 10,
+  "マナーとお布施": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 136,
+   "clinic": 114,
+   "portal": 101,
+   "public": 35,
+   "media": 31,
+   "video": 8,
+   "other": 24,
+   "maker": 11
+  },
+  "地域で探す": {
+   "answers": 29,
+   "clinic": 23,
+   "portal": 26,
+   "public": 7,
+   "media": 1,
+   "video": 1,
+   "other": 3
+  },
+  "費用の相場": {
+   "answers": 28,
+   "media": 12,
+   "public": 8,
+   "clinic": 22,
+   "video": 3,
+   "portal": 19,
+   "other": 5,
+   "maker": 2
+  },
+  "葬儀の形式の選び方": {
+   "answers": 26,
+   "portal": 18,
+   "media": 7,
+   "other": 3,
+   "clinic": 22,
+   "public": 8,
+   "video": 1
+  },
+  "手続きと段取り": {
+   "answers": 26,
+   "public": 10,
+   "clinic": 23,
+   "portal": 17,
+   "maker": 5,
+   "other": 7,
+   "media": 3,
+   "video": 1
+  },
+  "マナーとお布施": {
+   "answers": 27,
+   "clinic": 24,
+   "portal": 21,
+   "maker": 4,
+   "other": 6,
+   "media": 8,
+   "public": 2,
+   "video": 2
+  }
+ }
+}
