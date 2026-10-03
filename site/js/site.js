@@ -220,8 +220,10 @@
     }
     // 記事本文のCTAは cta-button / cta-box を使う。ここを入れ忘れると
     // 記事からの反応が1件も記録されず、導線が効いているか判断できなくなる
+    // data-cta を付けた文字リンク（記事の診断の下の「AI診断」など）も数える。ボタンの形のものだけを
+    // 数えていたため、足した入口が効いたかを測れなかった（2026-10-04）
     if (a.classList && (a.classList.contains('btn') || a.classList.contains('nav-cta') ||
-                        a.classList.contains('cta-button'))) {
+                        a.classList.contains('cta-button') || a.hasAttribute('data-cta'))) {
       var id = a.getAttribute('data-cta') || slugId((a.textContent || '').trim());
       var params = { cta_id: id, page_path: location.pathname };
       var abv = a.getAttribute('data-ab-variant');

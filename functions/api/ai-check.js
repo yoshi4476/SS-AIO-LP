@@ -122,12 +122,17 @@ export async function onRequestPost({ request, env }) {
     return Response.json({ ok: false, error: msg }, { status: 503 });
   }
   const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
-  const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`;
+  // 何に負けているかが分かるよう、出典に多く使われたサイト（御社以外）の上位3つも結果メールに載せる（F2）
+  const freq = {};
+  results.forEach((r) => r.sources.forEach((s) => { if (!s.own) freq[s.host] = (freq[s.host] || 0) + 1; }));
+  const top = Object.keys(freq).sort((a, b) => freq[b] - freq[a]).slice(0, 3);
+  const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`
+    + (top.length ? `\n主な出典: ${top.join("、")}` : "");
   await record(env, request, { ind, area, company, site, name, email, word, pages, summary });
   // 翌月の測り直しは、本人が印をつけたときだけ（同意のない配信はしない）
   const searches = results.reduce((n, r) => n + (r.searches || 1), 0);
   await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, ip, searches,
-    recheck: v("recheck", 2) === "1" });
+    recheck: v("recheck", 2) === "1", optin: v("optin", 2) === "1" });
   results.forEach((r) => { delete r.searches; });
   const used = quota.used + 1;
   return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "", used, perEmail: 3 });

@@ -297,10 +297,12 @@ function leadReply_(site, type, d) {
         ? (msg.indexOf('quota') >= 0 ? ['今月の受付数に達していたため、チェックが完了していません。結果は担当からメールでお送りします。']
                                      : ['AIへの問い合わせが完了しませんでした。時間をおいて、もう一度お試しください。',
                                         '  https://ai.7senses.co.jp/tools/ai-check/'])
-        : ['▼ 結果', msg.split('\n')[0].replace(/^AI紹介チェック: /, ''), '',
-           '質問ごとの出典は、チェックした画面に表示しています。',
+        : ['▼ 結果', msg.split('\n')[0].replace(/^AI紹介チェック: /, '')]
+            .concat((msg.match(/^主な出典: .+$/m) || []).map(function (x) {
+              return x + '（御社の代わりに、AIがこれらのサイトを根拠にしています）'; }))
+            .concat(['', '質問ごとの出典は、チェックした画面に表示しています。',
            '出典に入るための直し方は、業種別のチェックリスト（PDF・無料）にまとめています。',
-           '  https://ai.7senses.co.jp/download/'])
+           '  https://ai.7senses.co.jp/download/?utm_source=email&utm_medium=email&utm_campaign=aicheck_result']))
       .concat(['', '詳しく調べたい場合は、このメールにご返信ください。']).join('\n');
   } else {
     body = [name + ' 様', '', 'お問い合わせいただきありがとうございます。',
@@ -448,12 +450,14 @@ function toolFollowCtx_(vals) {
   });
   const sh = book_().getSheetByName('AI紹介チェック');
   if (sh && sh.getLastRow() > 1) {
-    sh.getRange(2, 1, sh.getLastRow() - 1, 7).getValues().forEach(function (r) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 13).getValues().forEach(function (r) {
       const email = String(r[1] || '').trim().toLowerCase();
       if (!email) return;
-      const a = ctx.ai[email] || { cited: 0, word: '' };
+      const a = ctx.ai[email] || { cited: 0, word: '', optin: null };
       a.cited = Math.max(a.cited, Number(r[5]) || 0);
       a.word = String(r[3] || '') || a.word;
+      // 13列目が空の行は、同意の欄を足す前の申し込み（従来どおり0問の人だけに送る）
+      if (String(r[12] || '')) a.optin = a.optin === true || String(r[12]) === '希望';
       ctx.ai[email] = a;
     });
   }
@@ -464,14 +468,21 @@ function toolFollow_(sh, row, r, kind, now, ctx) {
   const email = String(r[6] || '').trim().toLowerCase();
   if (String(r[FOLLOW_COL - 1] || '') || ctx.contacted[email] || ctx.done[kind + ' ' + email]) return false;
   // チェックが最後まで動いた記録（AI紹介チェックのシート）がある人だけ。1回でも出典に入っていれば送らない
-  if (kind === 'aicheck' && (!ctx.ai[email] || ctx.ai[email].cited > 0)) return false;
+  const ai = ctx.ai[email];
+  if (kind === 'aicheck') {
+    if (!ai || ai.cited >= 3) return false;
+    if (ai.optin === false) return false;                         // 受け取らないを選んだ人には送らない
+    if (ai.optin === null && ai.cited > 0) return false;          // 同意の欄の前の申し込みは、従来どおり0問の人だけ
+  }
   const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
   const age = (now - at) / 86400000;
   const wait = TOOL_FOLLOW_DAYS[kind];
   if (age < wait || age > wait + 7) return false;
   const name = String(r[4] || '') || 'ご担当者';
   const who = (String(r[3] || '') ? String(r[3]) + ' ' : '') + name + ' 様';
-  const mail = kind === 'aicheck' ? aiCheckFollowText_(who, r, ctx.ai[email]) : checklistFollowText_(who, r);
+  const mail = kind === 'aicheck'
+    ? (ai.cited > 0 ? aiCheckPartialText_(who, ai) : aiCheckFollowText_(who, r, ai))
+    : checklistFollowText_(who, r);
   const foot = ['', '─────────────',
     'このご案内が不要な場合は、このメールに「停止」とだけご返信ください。以降はお送りしません。', '',
     'セブンセンシズ株式会社（AI集客ラボ）',
@@ -489,6 +500,19 @@ function toolFollow_(sh, row, r, kind, now, ctx) {
   }
 }
 
+/** 1〜2問で出典に入った人へ。残りの質問で入らない理由を確かめる順番（数字は書かない） */
+function aiCheckPartialText_(who, a) {
+  return { subject: '出典に入った質問と、入らなかった質問の差', body: [who, '',
+    '先日は「AIにどう紹介されているか無料チェック」をご利用いただきありがとうございます。',
+    '3つの質問のうち' + a.cited + 'つで、AIの答えの出典に御社のサイトが入っていました。', '',
+    '入らなかった質問は、次の順に確かめると差が見つかります。',
+    '1. その質問の言い回し（「おすすめ」「評判」など）に答えるページが、御社のサイトにあるか',
+    '2. 出典になったほかのサイトが書いていて、御社のページに無い事実（料金・対応地域・実績など）は何か',
+    '3. 会社の情報（社名・所在地・電話番号）が、ページの中で文章としても書かれているか', '',
+    'どの質問で差が出ているか、無料でお調べします。このメールにご返信いただくか、こちらからご相談ください。',
+    '  https://ai.7senses.co.jp/lp/?utm_source=email&utm_medium=email&utm_campaign=aicheck_day3#form'].join('\n') };
+}
+
 function aiCheckFollowText_(who, r, a) {
   const key = AI_CHECK_WORD_KEY[a.word] || '';
   // サイトのURLを入れずに調べた人は、出典に入ったかを判定できていない
@@ -501,7 +525,7 @@ function aiCheckFollowText_(who, r, a) {
     '1. AIが御社のサイトを読めるか確かめる',
     '   robots.txt やCDNの設定でAIのクローラーを止めていると、内容が良くても出典に使われません。',
     '   URLを入れるだけの30秒診断（無料）で確かめられます。',
-    '   https://ai.7senses.co.jp/lp/' + (key ? CHECKLIST_LP[key] + '/' : '') + '#scan-start', '',
+    '   https://ai.7senses.co.jp/lp/' + (key ? CHECKLIST_LP[key] + '/' : '') + '?utm_source=email&utm_medium=email&utm_campaign=aicheck_day3#scan-start', '',
     '2. 御社にしか無い事実を、文字で書く',
     '   料金の決まり方・対応エリア・実績の数（集計の期間つき）・よくある質問への答えです。',
     '   AIが根拠に選ぶのは、他のサイトに無い事実です。画像の中の文字は読まれません。', '',
@@ -509,7 +533,7 @@ function aiCheckFollowText_(who, r, a) {
     '   「地域名＋業種 おすすめ」のような探す質問では、AIは予約・比較サイトも出典にします。',
     '   営業時間・料金・住所が古いと、その情報がそのまま答えに出ます。', '',
     '項目ごとに印をつけて確かめられるチェックリスト（PDF）もお送りできます。',
-    '  https://ai.7senses.co.jp/download/' + (key ? '?ind=' + key : ''), '',
+    '  https://ai.7senses.co.jp/download/?utm_source=email&utm_medium=email&utm_campaign=aicheck_day3' + (key ? '&ind=' + key : ''), '',
     'ご自身で進めるのが難しい場合は、このメールにご返信ください。ご相談は無料です。'].join('\n') };
 }
 
@@ -804,6 +828,10 @@ function aiCheckSheet_() {
   if (String(sh.getRange(1, 11).getValue() || '') === '') {
     sh.getRange(1, 11, 1, 2).setValues([['IPアドレス', '検索回数']]);
   }
+  // 改善のご案内（3日後のメール）を受け取るか。特定電子メール法の同意として、本人が選んだ人にだけ送る（2026-10-04 追加）
+  if (String(sh.getRange(1, 13).getValue() || '') === '') {
+    sh.getRange(1, 13).setValue('改善のご案内');
+  }
   return sh;
 }
 
@@ -881,6 +909,49 @@ function geminiUsage_() {
            batchCap: GEMINI_BATCH_MONTH, monthCap: AI_CHECK_MONTH_SEARCHES };
 }
 
+/**
+ * AI診断の段階ごとの数（週次の aicheck_funnel が読む）。GA4 では人をまたいで追えない
+ * 「診断した人のうち、あとで相談に来た人」を、台帳のメールアドレスで突き合わせる（F5・2026-10-04）
+ */
+function aiCheckStats_(body) {
+  const days = Number(body.days) || 28;
+  const since = new Date(Date.now() - days * 86400000);
+  const sh = aiCheckSheet_();
+  const first = {};
+  const out = { ok: true, days: days, checks: 0, people: 0, cited0: 0, cited12: 0, cited3: 0, optin: 0, consult: 0 };
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 13).getValues().forEach(function (r) {
+      const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+      if (at < since) return;
+      out.checks++;
+      const email = String(r[1] || '').trim().toLowerCase();
+      if (!email || first[email]) return;
+      first[email] = at;
+      const c = Number(r[5]) || 0;
+      if (c === 0) out.cited0++; else if (c < 3) out.cited12++; else out.cited3++;
+      if (String(r[12]) === '希望') out.optin++;
+    });
+  }
+  out.people = Object.keys(first).length;
+  const led = book_().getSheetByName('問い合わせ');
+  if (led && led.getLastRow() > 1) {
+    const seen = {};
+    // 台帳は同じメールの送信を1行にまとめる。診断の後の相談は、診断の行に「再送信(無料相談)」と追記される
+    led.getRange(2, 1, led.getLastRow() - 1, 10).getValues().forEach(function (r) {
+      const email = String(r[6] || '').trim().toLowerCase();
+      const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+      if (!first[email] || seen[email]) return;
+      const type = String(r[2] || '');
+      const later = /再送信\((無料相談|サイト無料診断)\)/.test(String(r[9] || ''));
+      if (later || (at >= first[email] && (type === LEAD_TYPE_LABELS.contact || type === LEAD_TYPE_LABELS.site_audit))) {
+        seen[email] = true;
+        out.consult++;
+      }
+    });
+  }
+  return out;
+}
+
 function geminiLog_(body) {
   geminiSheet_().appendRow([new Date(), clean_(body.job).slice(0, 40), Number(body.searches) || 0]);
   return { ok: true };
@@ -915,7 +986,7 @@ function aiCheckLog_(body) {
   aiCheckSheet_().appendRow([new Date(), clean_(body.email).toLowerCase(), clean_(body.company).slice(0, 80),
     clean_(body.word).slice(0, 20), clean_(body.area).slice(0, 40), Number(body.cited) || 0, Number(body.mentioned) || 0,
     String(body.site || '').replace(/[\r\n\s]+/g, '').slice(0, 200), body.recheck ? '希望' : '', '',
-    clean_(body.ip).slice(0, 64), Number(body.searches) || 0]);
+    clean_(body.ip).slice(0, 64), Number(body.searches) || 0, body.optin ? '希望' : 'なし']);
   return { ok: true };
 }
 

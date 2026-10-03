@@ -10,6 +10,14 @@
   function ev(n, p) { try { if (window.gtag) window.gtag("event", n, p || {}); } catch (e) {} }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var LPNAME = { medical: "クリニック・歯科医院", fudosan: "不動産会社", koumuten: "工務店・リフォーム会社", shigyou: "士業事務所" };
+  // 業種 → 業種別チェックリスト（/download/?ind=）
+  var CHECKLIST = { dental: "dental", clinic: "clinic", fudosan: "fudosan", koumuten: "koumuten", reform: "koumuten",
+    zeirishi: "shigyou", sharoushi: "shigyou", gyousei: "shigyou", shihou: "shigyou", bengoshi: "shigyou" };
+  // 結果画面の次の一歩を押したか（段階ごとの数を週次で出すため。F5）
+  out.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a[data-next]") : null;
+    if (a) ev("ai_check_next", { step: a.getAttribute("data-next") });
+  });
 
   // ロボットよけ（Cloudflare Turnstile）。サイトキーが設定されているときだけ、送信ボタンの上に出す
   fetch("/api/ai-check").then(function (r) { return r.json(); }).then(function (c) {
@@ -66,9 +74,26 @@
             '<p class="ac-l">AIが出典にしたサイト</p><ul class="ac-src">' + src + "</ul></div>";
         });
         var lp = d.lp ? '<a class="btn btn-ghost" href="/lp/' + d.lp + '/" data-cta="ai_check_lp_' + d.lp + '">' + esc(LPNAME[d.lp] || "") + "のSEO・AI検索対策を見る</a>" : "";
-        html += '<div class="ac-next"><p><b>AIの答えに出るには、「調べられる質問」に答えるページと、会社の事実をAIが読める形に整えることが近道です。</b>' +
-          "結果をもとに、何から直せばよいかを無料でお伝えします。ChatGPT・Claude なども含めて詳しく調べたい場合は、お問い合わせください。</p><div class=\"btns\">" +
-          '<a class="btn btn-primary" href="/lp/#form" data-cta="ai_check_consult">この結果について無料で相談する</a>' + lp + "</div></div>";
+        // 結果に合わせて次の一歩を変える（0問: 直す順番 / 1〜2問: 残りを取る相談 / 3問: 競合との比較）。
+        // 同じボタンを全員に出していたが、出典に入っていない人と全部入っている人では、次にやることが違う
+        var ck = CHECKLIST[data.industry] || "";
+        var step, nextHtml;
+        if (!d.cited) {
+          step = "fix_order";
+          nextHtml = "<p><b>まず、AIが御社を出典に選べる状態かを確かめる順番があります。</b>業種別のチェックリスト（無料・PDF）に、直す順に並べています。</p><div class=\"btns\">" +
+            '<a class="btn btn-primary" data-next="' + step + '" href="/download/' + (ck ? "?ind=" + ck : "") + '" data-cta="ai_check_next_checklist">直す順番のチェックリストを受け取る</a>' +
+            '<a class="btn btn-ghost" data-next="' + step + '_consult" href="/lp/?src=ai_check_0#form" data-cta="ai_check_next_consult0">何から直すか無料で相談する</a></div>';
+        } else if (d.cited < 3) {
+          step = "partial";
+          nextHtml = "<p><b>3問中" + d.cited + "問で出典に入っています。残りの質問で出典に入らない理由は、質問ごとに違います。</b>出典に入った質問と入らなかった質問の差を、無料でお伝えします。</p><div class=\"btns\">" +
+            '<a class="btn btn-primary" data-next="' + step + '" href="/lp/?src=ai_check_partial#form" data-cta="ai_check_next_partial">残りの質問で出典に入る方法を相談する（無料）</a>' + lp + "</div>";
+        } else {
+          step = "all";
+          nextHtml = "<p><b>3問とも出典に入っています。</b>次は、同じ地域の競合と比べて、ChatGPT・Claude を含めたほかのAIでも同じように出ているかを確かめる段階です。</p><div class=\"btns\">" +
+            '<a class="btn btn-primary" data-next="' + step + '" href="/lp/?src=ai_check_all#form" data-cta="ai_check_next_compare">競合との比較を無料で依頼する</a>' + lp + "</div>";
+        }
+        ev("ai_check_next_shown", { step: step });
+        html += '<div class="ac-next">' + nextHtml + "</div>";
         out.innerHTML = html;
         var h = out.querySelector(".ac-big");
         if (h) { h.setAttribute("tabindex", "-1"); h.focus(); }

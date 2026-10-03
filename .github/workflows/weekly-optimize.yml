@@ -283,6 +283,16 @@ jobs:
           echo "$out"
           echo "$out" | grep -q "最も落ちている段階"             && echo "::warning::リード導線に落ち込みがあります。ログを確認してください" || true
 
+      # AI診断の段階ごとの数（入口→診断→結果→次の一歩→メールから戻った→相談）。どこで落ちているかを毎週見る
+      - name: AI診断の段階ごとの数
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          out=$(python scripts/aicheck_funnel.py) || true
+          echo "$out"
+          echo "$out" | grep -q "AICHECK_FUNNEL_OK=no" && echo "::warning::AI診断で、ページは見られているのに診断を始めた人がいません" || true
+
       - name: 生成エンジンから読める状態かの検査（GEO）
         run: |
           out=$(python scripts/geo_check.py) || true

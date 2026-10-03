@@ -203,3 +203,19 @@ def test_rewrite_targets_measurable_and_parallel_keeps_checks():
     check("並列の案も、当てた後に同じ検算（check）を通す", "edited" in ro and "check(slug" in ro, True)
     fn = (ROOT / "scripts" / "funnel.py").read_text(encoding="utf-8")
     check("ファネルの送信は問い合わせの数え方（lead_reconcile）に揃える", "LR.ga4_by_day" in fn, True)
+
+
+def test_ai_check_funnel_is_wired():
+    """AI診断のファネル（F1〜F5）: 結果に合わせた次の一歩・出典の上位をメールに・同意した人だけ3日後・
+    文字リンクも計測・段階ごとの数を週次で出す（2026-10-04）"""
+    js = (ROOT / "site" / "js" / "ai-check.js").read_text(encoding="utf-8")
+    fn = (ROOT / "functions" / "api" / "ai-check.js").read_text(encoding="utf-8")
+    gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
+    sj = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
+    page = (ROOT / "site" / "tools" / "ai-check" / "index.html").read_text(encoding="utf-8")
+    check("F1: 結果に合わせて次の一歩を変える（0問・1〜2問・3問）", all(x in js for x in ('"fix_order"', '"partial"', '"all"')), True)
+    check("F2: 出典の上位を結果メールに載せる", "主な出典" in fn and "主な出典" in gs, True)
+    check("F3: 改善のご案内は本人が選んだ人だけ（チェック欄と台帳の列）", 'name="optin"' in page and "ai.optin === false" in gs, True)
+    check("F5: data-cta の文字リンクも計測する", "hasAttribute('data-cta')" in sj, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("F5: 段階ごとの数を週次で出す", "aicheck_funnel.py" in wf, True)

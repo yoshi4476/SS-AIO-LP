@@ -185,7 +185,11 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
         <input type="checkbox" name="recheck" value="1" style="width:auto;margin-top:.45em;accent-color:var(--blue);">
         <span>1か月後に同じ条件で測り直した結果を、メールで受け取る（無料・1回だけ）</span>
       </label>
-      <p class="note">結果はこの画面に出ます。入力いただいた連絡先には、結果の読み方をご案内することがあります。<a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信してください。</p>
+      <label class="ac-recheck" style="display:flex;gap:.6em;align-items:flex-start;font-weight:500;cursor:pointer;margin:.2rem 0 .2rem;">
+        <input type="checkbox" name="optin" value="1" style="width:auto;margin-top:.45em;accent-color:var(--blue);">
+        <span>AIの答えの出典に入るための改善のご案内を、メールで受け取る（無料・いつでも停止できます）</span>
+      </label>
+      <p class="note">結果はこの画面に出ます。結果は入力いただいたメールにもお送りします。改善のご案内は、上で受け取るを選んだ方にだけお送りします。<a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信してください。</p>
       <ul class="ac-rules">
         <li>無料でお使いいただけます（AIの検索は全体で月5,000回までです。上限に達した月は受付を止めます）</li>
         <li>1回のチェックでAIに聞く質問は3問です</li>
@@ -210,7 +214,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<script defer src="/js/ai-check.js?v=20261004"></script>
+<script defer src="/js/ai-check.js?v=20261004b"></script>
 
 <!-- tools:others -->
 <section class="tools-more tools-others" aria-label="ほかの無料ツール">

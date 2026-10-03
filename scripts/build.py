@@ -510,6 +510,10 @@ def sticky(meta):
         cl = ""
     if cl:
         return f"/download/?ind={cl}", f"article_sticky_checklist_{cl}", "チェックリストを受け取る（無料）"
+    # AIO・AI検索の記事を読む人は「AIに自社が出るか」を知りたい。URLを入れる診断より、
+    # 地域と業種を選ぶだけの AI診断のほうが答えに直結する（F4・2026-10-04）
+    if meta.get("category") in ("aio", "ai-marketing"):
+        return "/tools/ai-check/", "article_sticky_ai_check", "AIに御社が出るか無料で確かめる"
     return "/lp/#scan-start", "article_sticky_scan", "自社サイトを30秒で診断する"
 
 
