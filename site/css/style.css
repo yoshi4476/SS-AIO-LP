@@ -1742,3 +1742,10 @@ section.hero:has(> .tool-hero-ph) { position: relative; isolation: isolate; over
 @media (max-width: 860px) { .dl-grid { grid-template-columns: minmax(0, 1fr); } }
 .dl-grid > figure { margin: 0; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-md); }
 .dl-grid > figure img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+
+/* 指で押す端末のリンクの高さ（2026-10-03）。フッターとパンくずの文字リンクが16〜20pxで押しにくかった */
+@media (pointer: coarse) {
+  .site-footer nav > a, .site-footer li > a, .breadcrumb a { display: inline-block; padding: .55rem 0; min-height: 36px; }
+  a.more, a.prod-link, .ind-lps a { display: inline-flex; align-items: center; min-height: 40px; }
+  .site-footer li { margin: 0; }
+}

@@ -38,6 +38,7 @@ CSS = """<style id="ph-css">
 .ph-band{margin:18px 0 22px;border-radius:16px;overflow:hidden}
 .ph-band img{display:block;width:100%;height:auto;aspect-ratio:21/9;object-fit:cover}
 .ph-band figcaption{font-size:11px;color:#8a8f99;margin-top:6px}
+@media(pointer:coarse){.crumb a,footer li>a,footer nav a{display:inline-block;padding:9px 0}}
 </style>"""
 
 # 紺のヒーローに敷く写真（ページの場所 → 在庫の名前）
@@ -91,10 +92,10 @@ def decorate(repo: Path, rel: str, html: str) -> str:
 
     if rel in DARK:
         html = _insert_after(html, r'<div class="hero">', "hero",
-                             f'<div class="hero-ph" aria-hidden="true">{img(DARK[rel], eager=True)}</div>')
+                             f'<div class="hero-ph" aria-hidden="true">{img(DARK[rel], "このページの内容に関わる場面のイメージ", eager=True)}</div>')
     if rel == "index.html":
         html = _insert_after(html, r'<section class="hero" id="hero">', "hero",
-                             f'<div class="hero-ph-light" aria-hidden="true">{img("/assets/img/hero-owner.webp", eager=True)}</div>')
+                             f'<div class="hero-ph-light" aria-hidden="true">{img("/assets/img/hero-owner.webp", "新しい管理システムを入れたタブレットを持つ経営者のイメージ", eager=True)}</div>')
         # 「対象になるか確認」: 中央の細い列 → 左に写真
         html = html.replace('<section id="fit" style="padding:64px 0 56px">\n  <div class="wrap rev" style="text-align:center">',
                             '<section id="fit" style="padding:64px 0 56px">\n  <div class="wrap rev ph-grid" style="text-align:center">')
@@ -110,22 +111,58 @@ def decorate(repo: Path, rel: str, html: str) -> str:
         src = _shelf(repo, INDUSTRY[m.group(1)], m.group(1))
         if src:
             html = _insert_after(html, r'<p class="lead">.*?</p>', "band",
-                                 f'<figure class="ph-band">{img(src)}<figcaption>※ 写真はイメージです</figcaption></figure>')
+                                 f'<figure class="ph-band">{img(src, "この業種の現場のイメージ")}<figcaption>※ 写真はイメージです</figcaption></figure>')
     if rel in ("blog/index.html", "industry/index.html"):
         html = _insert_after(html, r'<p class="lead">.*?</p>', "band",
-                             f'<figure class="ph-band">{img("/assets/img/meeting-jp.webp")}<figcaption>※ 写真はイメージです</figcaption></figure>')
+                             f'<figure class="ph-band">{img("/assets/img/meeting-jp.webp", "補助金の申請を打ち合わせる様子のイメージ")}<figcaption>※ 写真はイメージです</figcaption></figure>')
     m = re.match(r"blog/([a-z0-9-]+)/index\.html$", rel)
     if m and (repo / "images" / "blog" / m.group(1) / "thumbnail.webp").is_file():
         html = _insert_after(html, r'<div class="meta">.*?</div>', "eye",
-                             f'<figure class="ph-band">{img(f"/images/blog/{m.group(1)}/thumbnail.webp", eager=True)}'
+                             f'<figure class="ph-band">{img(f"/images/blog/{m.group(1)}/thumbnail.webp", "記事の内容に関わる場面のイメージ", eager=True)}'
                              f'<figcaption>※ 写真はイメージです</figcaption></figure>')
     return html
+
+
+STOCK_ALT = {"factory": "工場の現場", "renovation": "店舗の改装工事", "warehouse": "倉庫の作業", "documents": "申請書類を書く手元",
+             "paperwork": "書類を整理する担当者", "calculator": "費用を計算する経営者", "meeting": "打ち合わせの様子"}
+_TITLES = {}
+
+
+def _title_of(repo: Path, slug: str) -> str:
+    if slug not in _TITLES:
+        f = repo / "blog" / slug / "index.html"
+        t = ""
+        if f.is_file():
+            m = re.search(r"<title>(.*?)</title>", f.read_text(encoding="utf-8"), re.S)
+            t = re.split(r"[｜|]", m.group(1))[0].strip() if m else ""
+        _TITLES[slug] = t
+    return _TITLES[slug]
+
+
+def fill_alts(repo: Path, html: str) -> str:
+    """alt が空の画像に説明を入れる（一覧カードのサムネイルは記事の題名、在庫写真は写真の中身）"""
+    import html as _h
+
+    def one(m):
+        tag = m.group(0)
+        src = re.search(r'src="([^"]+)"', tag)
+        if not src:
+            return tag
+        u = src.group(1)
+        b = re.match(r"/images/blog/([a-z0-9-]+)/thumbnail\.webp", u)
+        if b and _title_of(repo, b.group(1)):
+            alt = f"{_title_of(repo, b.group(1))}のイメージ"
+        else:
+            k = next((v for k, v in STOCK_ALT.items() if f"/{k}" in u), "")
+            alt = f"{k}のイメージ" if k else ""
+        return tag.replace('alt=""', f'alt="{_h.escape(alt)}"', 1) if alt else tag
+    return re.sub(r'<img\b[^>]*\balt=""[^>]*>', one, html)
 
 
 def decorate_file(repo: Path, page: Path):
     rel = page.relative_to(repo).as_posix()
     s = page.read_text(encoding="utf-8")
-    t = decorate(repo, rel, s)
+    t = fill_alts(repo, decorate(repo, rel, s))
     if t != s:
         page.write_text(t, encoding="utf-8", newline="\n")
         return True
