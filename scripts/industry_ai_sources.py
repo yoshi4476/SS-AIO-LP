@@ -282,7 +282,7 @@ def classify(raw):
                   "事業者を紹介するサイトは portal。医療法人の医院は .or.jp でも clinic（公的機関ではない）。住宅設備や建材のメーカーは maker。"
                   "学会・医師会・歯科医師会・業界団体・官公庁・自治体・大学だけが public。分からなければ other。\n"
                   "出力は JSON のオブジェクト1つだけ（{\"ドメイン\": \"キー\", ...}）。説明は書かない。\n\n" + lines)
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
             r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt, cwd=tmp,
                                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=900)
         m = re.search(r"\{.*\}", r.stdout or "", re.S)

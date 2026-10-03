@@ -90,7 +90,7 @@ def draft():
         prompt = (f"業種「{name}」（事業者は{owner}、聞く人は{asker}。よく聞かれる話題の例: {hint}）について、"
                   f"お客様がAIや検索で聞きそうな質問の組を作ります。\n" + SCHEMA_NOTE)
         for _ in range(3):
-            with tempfile.TemporaryDirectory() as tmp:
+            with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
                 r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt, cwd=tmp,
                                    capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
             m = re.search(r"\{.*\}", r.stdout or "", re.S)

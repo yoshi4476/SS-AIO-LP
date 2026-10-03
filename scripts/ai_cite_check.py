@@ -115,7 +115,7 @@ def ask_chatgpt_codex(q):
         return None
     prompt = (f"次の質問に、Web検索をして日本語で答えてください。\n質問: {q}\n\n"
               "答えの最後に、検索で見て根拠にしたページのURLを全部、1行に1つずつ `SOURCE: <URL>` の形で書いてください。")
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         # 指示は標準入力で渡す（Windows の codex.cmd は引数の改行で切れる）
         r = subprocess.run([exe, "--search", "exec", "--skip-git-repo-check", "--ephemeral", "-s", "read-only",
                             "-c", 'model_reasoning_effort="low"', "-"], input=prompt, cwd=tmp, capture_output=True,
@@ -215,7 +215,7 @@ def ask_claude_cli(q):
     prompt = (f"次の質問に、Web検索をして日本語で答えてください。\n質問: {q}\n\n"
               "答えの最後に、検索で見て根拠にしたページのURLを全部、1行に1つずつ "
               "`SOURCE: <URL>` の形で書いてください。")
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         # 質問は標準入力で渡す。Windows の claude.cmd は改行を含む引数を途中で切り、出典の指示が届かなかった
         r = subprocess.run([exe, "-p", "--allowedTools", "WebSearch",
                             "--model", _env("CLAUDE_CITE_MODEL") or "claude-sonnet-5-5"],
