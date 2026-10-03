@@ -1753,3 +1753,10 @@ section.hero:has(> .tool-hero-ph) { position: relative; isolation: isolate; over
 /* ツールページは冒頭も入力欄も左端をそろえる（2026-10-03） */
 section.tool-hero ~ section .audit-panel,
 section.tool-hero ~ section .quiz-panel { margin-left: 0; }
+
+/* 業種別のよくある質問: 種類ごとの見出しと目次（2026-10-03） */
+.faq-groups { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0 .4rem; }
+.faq-groups a { display: inline-flex; align-items: center; gap: .45em; min-height: 40px; padding: .35em 1em; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-weight: 700; font-size: .88rem; text-decoration: none; color: var(--blue-deep); }
+.faq-groups a span { font-size: .74rem; color: var(--muted); font-weight: 600; }
+.faq-groups a:hover { border-color: var(--blue); }
+.faq-group { margin: 2.2rem 0 .8rem; font-size: 1.15rem; padding-left: .7rem; border-left: 4px solid var(--blue); scroll-margin-top: 96px; }

@@ -98,6 +98,20 @@ def faq_pairs(metas):
     return out
 
 
+FAQ_GROUPS = [
+    ("cost", "費用・料金", r"費用|料金|相場|いくら|価格|円|予算|資金"),
+    ("time", "期間・頻度の目安", r"期間|いつ|どれくらい|どのくらい|何か月|何ヶ月|直後|後に|頻度|タイミング|目安|すぐに"),
+    ("cause", "原因・つまずき", r"なぜ|原因|理由|出ない|表示されない|伸びない|来ない|落ち|失敗|攻撃"),
+    ("caution", "注意点・規制", r"注意|NG|違反|ガイドライン|規制|リスク|してはいけない|大丈夫|体験談|気をつけ|見分け|問題ありません"),
+    ("first", "最初にやること", r"最初|まず|真っ先|着手|どこから|何をすべき|重視|確認すべき"),
+    ("howto", "やり方・進め方", r"やり方|方法|手順|進め方|どう|どのよう|始め|ステップ|書き方|選び方|何を書け|何を聞け|基準|コツ|何に使う"),
+    ("diff", "違い・比較", r"違い|比較|どちら|使い分け|同じ"),
+    ("need", "必要か・できるか", r"必須|必要|十分|できますか|可能|よいですか|いいですか|べきですか|効果があります|影響|残ります|不要|られますか|されますか|なりますか|価値があります|意味はあります|されませんか|選ばれますか"),
+    ("about", "意味・事例", r"とは|何をしてくれ|どんな|事例|どこで"),
+    ("other", "そのほかの質問", r""),
+]
+
+
 def faq_body(ind, metas, url_of, limit=60):
     """業種×よくある質問のページ。質問形のクエリは AI Overview 表示率が64.7%で、
     記事を1本も書かずに質問の面を増やせる。答えは各記事の FAQ そのまま
@@ -106,16 +120,24 @@ def faq_body(ind, metas, url_of, limit=60):
     pairs = faq_pairs(metas)[:limit]
     if len(pairs) < 5:
         return None
-    items = "\n".join(
-        f'<details class="faq-item"><summary>{_h.escape(q)}</summary>'
-        f'<div class="a"><p>{_h.escape(a)}</p>'
-        f'<p class="src"><a href="{url_of(m)}">→ {_h.escape(str(m.get("title", ""))[:48])}</a></p></div></details>'
-        for q, a, m in pairs)
+    def one(q, a, m):
+        return (f'<details class="faq-item"><summary>{_h.escape(q)}</summary>'
+                f'<div class="a"><p>{_h.escape(a)}</p>'
+                f'<p class="src"><a href="{url_of(m)}">→ {_h.escape(str(m.get("title", ""))[:48])}</a></p></div></details>')
+    # 質問の種類ごとに見出しで分ける（最大60問が1列に並び、探しにくかった）。質問文の語で決め、上から順に見る
+    groups = []
+    for gid, name, rx in FAQ_GROUPS:
+        hit = [x for x in pairs if x not in [y for _, _, ys in groups for y in ys] and re.search(rx, x[0])]
+        if hit:
+            groups.append((gid, name, hit))
+    nav = "".join(f'<a href="#q-{gid}">{_h.escape(name)}<span>{len(hit)}</span></a>' for gid, name, hit in groups)
+    body = "".join(f'<h3 class="faq-group" id="q-{gid}">{_h.escape(name)}</h3>'
+                   f'<div class="faq-list">{"".join(one(*x) for x in hit)}</div>' for gid, name, hit in groups)
     html = (f'<div class="latest-block" data-cat="new"><div class="cat-head">'
             f'<h2>{_h.escape(ind["name"])}のよくある質問</h2><span class="cnt">{len(pairs)}問</span></div>'
             f'<p class="hub-lead">{_h.escape(ind["name"])}の記事{len(metas)}本から、よくある質問と答えを1か所に集めました。'
             f'答えは各記事に書いたものと同じです。詳しい根拠は記事本文をご覧ください。</p>'
-            f'<div class="faq-list">{items}</div>'
+            f'<nav class="faq-groups" aria-label="質問の種類">{nav}</nav>{body}'
             f'<p class="hub-note"><a href="{BASE}{ind["slug"]}/">← {_h.escape(ind["name"])}の記事一覧へ</a></p></div>')
     ld = {"@context": "https://schema.org", "@type": "FAQPage",
           "mainEntity": [{"@type": "Question", "name": q,
