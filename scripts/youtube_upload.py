@@ -37,30 +37,52 @@ SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 CATEGORY_HOWTO = "27"        # 「教育」。解説動画はここに入れる
 
 
-def creds():
+def is_client(site):
+    """受託のクライアントか（data/clients/<id> がある社）。自社3サイトは同じチャンネルに上げる"""
+    return bool(site) and (ROOT / "data" / "clients" / site).is_dir()
+
+
+def token_path(site=None):
+    """その社のチャンネルの鍵。クライアントは youtube-token-<id>.json（CI では YOUTUBE_TOKENS_JSON から書き出す）。
+    クライアントの動画を当社のチャンネルに上げないため、クライアントは共通の鍵に落とさない"""
+    return ROOT / f"youtube-token-{site}.json" if is_client(site) else TOKEN
+
+
+def site_of(slug):
+    try:
+        import duo_video as DV
+        import sites as S
+        return S.find_category_owner(DV.article(slug)["category"])
+    except Exception:
+        return None
+
+
+def creds(site=None):
     from google.oauth2.credentials import Credentials
     from google.auth.transport.requests import Request
-    if not TOKEN.is_file():
+    tp = token_path(site)
+    if not tp.is_file():
         return None
     # BOM 付きで保存された鍵でも読めるように、ファイル名ではなく中身で渡す（BOM で Google の認証が全滅した前例がある）
-    c = Credentials.from_authorized_user_info(json.loads(TOKEN.read_text(encoding="utf-8-sig")), SCOPES)
+    c = Credentials.from_authorized_user_info(json.loads(tp.read_text(encoding="utf-8-sig")), SCOPES)
     if c and c.expired and c.refresh_token:
         c.refresh(Request())
-        TOKEN.write_text(c.to_json(), encoding="utf-8")
+        tp.write_text(c.to_json(), encoding="utf-8")
     return c
 
 
-def set_privacy(vid, status):
+def set_privacy(vid, status, site=None):
     """公開範囲だけを変える（消さない。記事と食い違った古い動画を限定公開に下げるのに使う）"""
     from googleapiclient.discovery import build
-    c = creds()
+    c = creds(site)
     if not c:
         raise SystemExit("youtube-token.json がありません")
     yt = build("youtube", "v3", credentials=c, cache_discovery=False)
     yt.videos().update(part="status", body={"id": vid, "status": {"privacyStatus": status}}).execute()
 
 
-def auth():
+def auth(site=None):
+    """チャンネルの持ち主のアカウントで1回だけ許可する。クライアントは --site <id> を付け、先方に許可してもらう"""
     from google_auth_oauthlib.flow import InstalledAppFlow
     if not CLIENT.is_file():
         print(f"  {CLIENT.name} がありません。")
@@ -69,8 +91,11 @@ def auth():
         return 1
     flow = InstalledAppFlow.from_client_secrets_file(str(CLIENT), SCOPES)
     c = flow.run_local_server(port=0)
-    TOKEN.write_text(c.to_json(), encoding="utf-8")
-    print(f"  {TOKEN.name} を作りました（以降はブラウザ不要）")
+    tp = token_path(site)
+    tp.write_text(c.to_json(), encoding="utf-8")
+    print(f"  {tp.name} を作りました（以降はブラウザ不要）")
+    if is_client(site):
+        print(f"  CI で使うには GitHub Secrets の YOUTUBE_TOKENS_JSON に \"{site}\" の鍵として足してください")
     try:
         from googleapiclient.discovery import build
         yt = build("youtube", "v3", credentials=c, cache_discovery=False)
@@ -272,8 +297,12 @@ def upload(mp4, slug, public=False, quiet=False, short_title="", replacing=()):
     """short_title を渡すと縦型ショートとして上げる（題に #Shorts、説明は短く、再生リストには入れない）"""
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload
-    c = creds()
+    site = site_of(slug)
+    c = creds(site)
     if not c:
+        if is_client(site):
+            # 当社のチャンネルに上げる事故を防ぐ。先方のチャンネルを接続するまで上げない
+            raise RuntimeError(f"{site} の YouTube チャンネルが未接続です（youtube_upload.py --auth --site {site}）")
         raise SystemExit("youtube-token.json がありません。--auth を先に実行してください")
     # 字幕の無い動画は上げない。YouTube の自動字幕が出て「[音楽]」や聞き違いが
     # そのまま表示される（2026-10-03: ショートはすべて字幕なしで上がっていた）
@@ -448,6 +477,7 @@ def main():
     ap.add_argument("mp4", nargs="?")
     ap.add_argument("--slug", help="記事か一次データのslug（概要欄に使う）")
     ap.add_argument("--auth", action="store_true")
+    ap.add_argument("--site", help="--auth の対象の社（クライアントのチャンネルをつなぐとき）")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--audit", action="store_true", help="公開中の動画の重複・字幕・台帳漏れを点検する")
     ap.add_argument("--users", action="store_true", help="許可したアカウントの累計（上限100の手前で知らせる）")
@@ -463,7 +493,7 @@ def main():
         return update_thumbnails()
 
     if a.auth:
-        return auth()
+        return auth(a.site)
     if a.users:
         return users()
     if a.check or not a.mp4:

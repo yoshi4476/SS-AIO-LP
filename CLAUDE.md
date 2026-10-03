@@ -203,6 +203,15 @@ llms.txt と sitemap に載り、同じカテゴリの記事末に「自社の�
 
 **受託運用での分離**: クライアントの記事に運用会社の実績を書くと事実と違う記事になる。`data/clients/<id>/facts.json` がある場合、`facts.py` はそちらだけを使い、自社の一次情報を混ぜない。
 
+**動画とSNSは先方のアカウントにだけ上げる**（当社のアカウントに落とさない。門が確かめる）:
+
+| 媒体 | つなぎ方（先方のアカウントで1回だけ許可） | CI の鍵 |
+|:--|:--|:--|
+| YouTube | `python scripts/youtube_upload.py --auth --site <id>` → `youtube-token-<id>.json` | Secret `YOUTUBE_TOKENS_JSON`（`{"<id>": {...}}`） |
+| Facebook・Instagram・Threads・LinkedIn | `python scripts/social_connect.py --site <id> --facebook` など | Secret `SOCIAL_TOKENS_JSON` の `<id>` |
+
+つなぐまで、その社の記事は動画を作らず、SNS にも投稿しない。動画の名乗りと締めは `sites/<id>.json` の社名とドメインになる。
+
 JSONを直接書く場合は `client_add.py`（既存クライアントの設定変更など）。
 
 **一次情報の追加**: `scripts/add_fact.py` で登録する。JSONを手で書かない。

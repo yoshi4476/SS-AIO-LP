@@ -33,7 +33,7 @@ TO_GITHUB = {
     "YOUTUBE_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN", "GCP_SERVICE_ACCOUNT_JSON",
     "RAKKO_API_KEY",
     # AI検索の語の調査（ai_kw_research / ai_cite_check）と記事動画の投稿（article_videos）
-    "GEMINI_API_KEY", "YOUTUBE_CLIENT_JSON", "YOUTUBE_TOKEN_JSON",
+    "GEMINI_API_KEY", "YOUTUBE_CLIENT_JSON", "YOUTUBE_TOKEN_JSON", "YOUTUBE_TOKENS_JSON",
     # Googleビジネスプロフィール（訪日客向けの地図の整備・口コミの返信案）。
     # GBP_TOKENS_JSON は {"<サイトID>": <gbp-token-<id>.json の中身>} の1つのJSON
     "GBP_CLIENT_JSON", "GBP_TOKENS_JSON",

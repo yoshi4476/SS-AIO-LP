@@ -48,7 +48,13 @@ BRANDS = {
 
 def brand(art):
     import sites as S
-    return BRANDS.get(S.find_category_owner(art.get("category", "")) or "ai-lab", BRANDS["ai-lab"])
+    sid = S.find_category_owner(art.get("category", "")) or "ai-lab"
+    if sid in BRANDS:
+        return BRANDS[sid]
+    # 受託のクライアントは、その社の名前とサイトで名乗る（当社の名前を出さない）
+    cfg = S.load(sid)
+    name = cfg.get("brand") or cfg.get("name") or sid
+    return {"name": name, "search": name, "url": cfg.get("domain", "")}
 
 
 def brand_ng(sc, art):

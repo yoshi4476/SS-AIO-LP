@@ -162,7 +162,7 @@ def test_hist_video_subtitles():
     try:
         (tmp / "x.mp4").write_bytes(b"")
         old = YU.creds
-        YU.creds = lambda: object()
+        YU.creds = lambda *a, **k: object()
         try:
             YU.upload(tmp / "x.mp4", "no-such-slug")
             refused = False

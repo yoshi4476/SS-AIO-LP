@@ -145,6 +145,7 @@ def shorts(ledger, limit, token, public):
             and (ROOT / "articles" / f"{k}.md").is_file()]
     # 打ち出しから外したテーマは作らない。主力の業種・分野を先に、同じなら新しい順
     pool = [m for m in pool if focus(m) is not None]
+    pool = [m for m in pool if not YT.is_client(m["site"]) or YT.token_path(m["site"]).is_file()]
     todo = [m["slug"] for m in sorted(pool, key=lambda m: (focus(m), ledger[m["slug"]].get("date", "")),
                                       reverse=True)][:limit]
     made = 0
@@ -197,6 +198,11 @@ def main():
     rows = [{"slug": s, "site": ledger[s].get("site") or "", "title": s, "date": "", "redo": True}
             for s in redo][:a.limit]
     rows += candidates(a.days, a.limit - len(rows)) if len(rows) < a.limit else []
+    # 受託のクライアントは、先方のチャンネルを接続した社だけ作る（作っても上げ先が無い。当社のチャンネルには上げない）
+    skip = [r["slug"] for r in rows if YT.is_client(r["site"]) and not YT.token_path(r["site"]).is_file()]
+    if skip:
+        print(f"   チャンネル未接続のクライアントの記事を飛ばしました: {len(skip)}本")
+        rows = [r for r in rows if r["slug"] not in skip]
     print(f"■ 記事動画: 今回 {len(rows)}本（作り直し {len(redo)}本待ち・直近{a.days}日の未作成） / "
           f"YouTubeの鍵 {'あり' if token else '無し'}")
     for r in rows:

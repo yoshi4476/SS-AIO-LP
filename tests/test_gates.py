@@ -2270,6 +2270,21 @@ def test_lessons_2026_10_03():
     check("記事に自社の補助金の採択の実績が無い", claims, [])
     facts = json.loads((ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8"))["facts"]
     check("一次情報の台帳に自社の採択の実績が無い", [f["id"] for f in facts if own.search(f.get("claim", ""))], [])
+    # 10. クライアントの動画・SNS は先方のアカウントにだけ上げる（当社の鍵に落とさない）
+    import tempfile
+    import youtube_upload as YU
+    cdir = ROOT / "data" / "clients" / "zz-gate-client"
+    made = not cdir.exists()
+    cdir.mkdir(parents=True, exist_ok=True)
+    try:
+        check("クライアントは当社の YouTube の鍵を使わない", YU.token_path("zz-gate-client") != YU.TOKEN, True)
+        check("クライアントの鍵が無ければ上げない", YU.creds("zz-gate-client"), None)
+        import post_social as PS
+        check("クライアントの SNS は当社の鍵に落とさない", PS.pick({"FB_PAGE_TOKEN": "x"}, "FB_PAGE_TOKEN", "zz-gate-client"), "")
+    finally:
+        if made:
+            cdir.rmdir()
+    check("クライアントの鍵ファイルはコミットされない", "youtube-token-*.json" in (ROOT / ".gitignore").read_text(encoding="utf-8"), True)
     # 9. 配信の処理が配信先を reset --hard し、手元でコミット前だった修正を消した
     pub = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
     i_dirty, i_reset = pub.find('"status", "--porcelain"'), pub.find('"reset", "--hard", "FETCH_HEAD"')
