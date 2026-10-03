@@ -70,7 +70,8 @@ def site_config(site_id):
         "intents": seeds.get("intents", []),
         "own_terms": own,
         "domain_terms": own + GENERIC_TERMS,
-        "ng_terms": BASE_NG + other,
+        # サイト固有の除外語（受付の終わった制度など。sites/<id>.json の ng_terms）
+        "ng_terms": BASE_NG + other + tuple(t.lower() for t in cfg.get("ng_terms", [])),
     }
 
 

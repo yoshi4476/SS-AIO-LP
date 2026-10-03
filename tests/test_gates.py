@@ -2205,6 +2205,65 @@ def test_site_audit_has_no_critical_or_warning():
     check("原稿に git の衝突マーカーが無い", conf, [])
 
 
+def glued_headings(text):
+    """見出しの直前に空行が無い行（Markdown では前の段落に吸われ、見出しにならない）"""
+    lines, fence, out = text.split("\n"), False, []
+    for i, l in enumerate(lines[1:], 1):
+        if l.startswith("```"):
+            fence = not fence
+        if not fence and re.match(r"#{2,4} ", l) and lines[i - 1].strip() and not lines[i - 1].startswith("---"):
+            out.append(l[:40])
+    return out
+
+
+RETIRED_PROGRAMS = {"事業再構築補助金": "2026-10-03"}  # 新規公募は第13回（2025-03）で終了
+
+
+def test_lessons_2026_10_03():
+    """2026-10-03 のセッションで起きた誤りを、次は機械が止める形にしたもの"""
+    print(chr(10) + "■ 2026-10-03 の学び")
+    # 1. 一次情報の差し込みが次の見出しの前の空行を消し、42本で見出しが段落に吸われた
+    check("検出器: 空行の無い見出しを拾う", glued_headings("本文です。\n## 見出し"), ["## 見出し"])
+    check("検出器: 空行のある見出し・コードの中は拾わない",
+          glued_headings("本文です。\n\n## 見出し\n```\nx\n## コメント\n```"), [])
+    glued = sorted(p.stem for p in (ROOT / "articles").glob("*.md") if glued_headings(p.read_text(encoding="utf-8")))
+    check("原稿の見出しの前に空行がある", glued, [])
+    # 2. 退避の取り込みで、自動修正の台帳（jsonl）に衝突の印が入っていた。原稿だけ見ていても防げない
+    rx = re.compile(r"^(<<<<<<< |>>>>>>> )", re.M)
+    check("検出器: 衝突の印を拾う", bool(rx.search('{"a":1}\n<<<<<<< Updated upstream\n')), True)
+    marked = sorted(str(p.relative_to(ROOT)) for d in ("data", "automation/logs", "sites")
+                    for p in (ROOT / d).rglob("*.json*") if p.is_file() and rx.search(p.read_text(encoding="utf-8", errors="ignore")))
+    check("台帳・設定に git の衝突の印が無い", marked, [])
+    # 3. lp-v2.css だけ固定の ?v=3 で、直しても7日間キャッシュが残った
+    stale = sorted({m for f in ("index.html", "lp/index.html") if (ROOT / "site" / f).is_file()
+                    for m in re.findall(r'href="(/css/[^"?]+\.css(?:\?v=[^"]*)?)"', (ROOT / "site" / f).read_text(encoding="utf-8"))
+                    if not re.search(r"\?v=[0-9a-f]{6,}$", m)})
+    check("CSS の読み込みに中身のハッシュが付いている", stale, [])
+    # 4. ヒーローの動画を読み込み時から流し、モバイルの LCP が5秒になった。最初に出すのは静止画（優先）
+    for f in ("index.html", "lp/index.html"):
+        h = (ROOT / "site" / f).read_text(encoding="utf-8") if (ROOT / "site" / f).is_file() else ""
+        still = re.search(r'<img[^>]*lx-hero-still[^>]*>', h)
+        check(f"{f}: ヒーローは優先の静止画から出す", bool(still and 'fetchpriority="high"' in still.group(0)), True)
+        check(f"{f}: ヒーロー動画は読み込み時に取りに行かない",
+              [v for v in re.findall(r"<video[^>]*>", h) if "lx-hero-video" in v and 'preload="none"' not in v], [])
+    # 5. 受付の終わった制度を狙う語にしない（ユーザーの指摘で判明: ものづくりは統合、事業再構築は終了）
+    import sites as S
+    retired = []
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8")
+        cat = re.search(r"^category:\s*(\S+)", t, re.M)
+        kw = re.search(r"^keyword:\s*(.+)$", t, re.M)
+        date = re.search(r"^date:\s*(\S+)", t, re.M)
+        if not (cat and kw and date) or S.find_category_owner(cat.group(1)) != "subsidy":
+            continue
+        retired += [p.stem for name, since in RETIRED_PROGRAMS.items()
+                    if name in kw.group(1) and date.group(1).strip('"') >= since]
+    check("受付の終わった制度を新しく狙っていない", sorted(retired), [])
+    # 6. Windows で一時フォルダの後片付けが「使用中」で失敗し、業種調査が途中で止まった
+    check("業種調査は一時フォルダの後片付けで止まらない",
+          "ignore_cleanup_errors" in (ROOT / "scripts" / "industry_ai_sources.py").read_text(encoding="utf-8"), True)
+
+
 def test_season_features():
     """業種ごとの「今の時期の特集」: 暦が正しく読め、期間・始まりの週・年をまたぐ期間・Google の更新の判定が合うこと"""
     print(chr(10) + "■ 今の時期の特集")
@@ -3602,7 +3661,8 @@ def main():
               test_score_is_audited_and_cta_is_enforced,
               test_no_control_characters_anywhere,
               test_report_actions_close_the_loop,
-              test_detectors_do_not_misread_neighbors):
+              test_detectors_do_not_misread_neighbors,
+              test_lessons_2026_10_03):
         try:
             t()
         except Exception as e:
