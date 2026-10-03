@@ -25,7 +25,9 @@ SA = ROOT / "indexing-service-account.json"
 AI_DOMAINS = {
     # AI経由の流入は参照元ドメインでしか見分けられない。ここに無いサービスは
     # 「Referral」に埋もれてAI流入として数えられないため、主要どころを網羅する
-    "chatgpt": ["chatgpt.com", "chat.openai.com", "openai.com"],
+    # ChatGPT の検索結果のリンクは utm_source=openai を付けるため、参照元が「openai」（ドメインなし）になる。
+    # 「openai.com」だけを探していて、直近28日でコーポレート14件・補助金4件を数え漏らしていた（2026-10-04）
+    "chatgpt": ["chatgpt.com", "chat.openai.com", "openai"],
     "perplexity": ["perplexity.ai"],
     "gemini": ["gemini.google.com", "bard.google.com"],
     "copilot": ["copilot.microsoft.com", "bing.com/chat", "edgeservices.bing.com"],

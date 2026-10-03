@@ -244,3 +244,12 @@ def test_ai_answer_pages_for_three_sites():
     check("3か月ごと: AI集客ラボ・コーポレートを調べ、コーポレートへ配信する",
           ("--site ai-lab" in wf, "--site corporate" in wf, "research_publish.py --site corporate --push" in wf), (True, True, True))
     check("コーポレートのページの雛形がある", (ROOT / "templates" / "corporate_research_page.tsx").is_file(), True)
+
+
+def test_ai_referral_sources_are_counted():
+    """AI経由の流入の判定（daily_kpi.ai_label）。ChatGPT の検索結果からは参照元が「openai」（ドメインなし）で来る。
+    GA4 のチャネル名は「AI Assistant」（単数）で、「AI Assistants」で数えて0件と誤報した（2026-10-04）"""
+    import daily_kpi as K
+    check("AI流入: 紛らわしい参照元",
+          [K.ai_label(s) for s in ("openai", "chatgpt.com", "gemini.google.com", "google", "(direct)")],
+          ["ChatGPT", "ChatGPT", "Gemini", None, None])
