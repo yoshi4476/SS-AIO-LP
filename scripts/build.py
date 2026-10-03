@@ -1038,7 +1038,9 @@ def stamp_assets():
     """
     import hashlib
     ver = {}
-    for rel in ("css/style.css", "js/site.js"):
+    # css/ は全部（lp-v2.css が「?v=3」の固定番号で、トップのヒーローを直しても7日間古い見た目のままだった）
+    rels = sorted(f"css/{p.name}" for p in (SITE / "css").glob("*.css")) + ["js/site.js"]
+    for rel in rels:
         f = SITE / rel
         if f.exists():
             # 改行コードをそろえてから測る。Windows の作業コピー（CRLF）と CI（LF）で版番号が変わり、
