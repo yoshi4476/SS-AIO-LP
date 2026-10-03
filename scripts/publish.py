@@ -646,17 +646,19 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # 補助金サイトは記事の冒頭と一覧の見出し下に写真を置く（subsidy_photos。何度呼んでも同じ）。
     # サムネイルを作った後に呼ぶ（記事の冒頭はそのサムネイルを出す）
     if (dest / "assets" / "img" / "hero-owner.webp").is_file():
-        try:
-            import subsidy_photos
-            # 配信先のデプロイ工程が一覧を作り直した直後にも同じ処理を走らせるため、本体を tools/photos.py に複製しておく
-            if (dest / "tools").is_dir():
-                shutil.copy2(Path(subsidy_photos.__file__), dest / "tools" / "photos.py")
-                written.append(dest / "tools" / "photos.py")
-            for p in (page, dest / "blog" / "index.html"):
-                if p.is_file():
-                    subsidy_photos.decorate_file(dest, p)
-        except Exception as e:
-            print(f"  写真の配置をスキップ: {e}")
+        # 一覧・制度別・業種別のページ、記事途中の案内、写真は管制塔で作って届ける。
+        # 以前は補助金サイトの CI（tools/）が作っていたが、2つの仕組みが同じページを書き換えて
+        # 食い違ったため、管制塔に一本化した（2026-10-03）
+        env = dict(os.environ, SUBSIDY_ROOT=str(dest), PYTHONIOENCODING="utf-8")
+        for script in ("subsidy/pages.py", "subsidy_cta.py"):
+            r = subprocess.run([sys.executable, str(ROOT / "scripts" / script)], env=env,
+                               capture_output=True, text=True, encoding="utf-8", errors="replace")
+            if r.returncode:
+                print(f"  {script} が失敗: {(r.stderr or r.stdout)[-200:]}")
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / "subsidy_photos.py"), str(dest)], env=env,
+                           capture_output=True, text=True, encoding="utf-8", errors="replace")
+        if r.returncode:
+            print(f"  写真の配置が失敗: {(r.stderr or r.stdout)[-200:]}")
 
     # アイキャッチと本文図解も配信先へ複製する。
     # 本文は /images/<slug>/… を参照しているのに複製していなかったため、
@@ -739,14 +741,8 @@ def _update_external_index(dest: Path, cfg, meta):
         if new != t:
             lt.write_text(new, encoding="utf-8", newline="\n")
             touched.append(lt)
-    # 業種ハブの定義を配信先へ写す。配信先の一覧生成（tools/gen_blog_pages.py）が
-    # これを読んで /industry/<slug>/ を作る。定義は本リポジトリを唯一の正とする
-    ind_src = Path(__file__).resolve().parent.parent / "data" / "industries.json"
-    ind_dst = dest / "blog-system" / "data" / "industries.json"
-    if ind_src.is_file() and ind_dst.parent.is_dir() and (
-            not ind_dst.is_file() or ind_dst.read_bytes() != ind_src.read_bytes()):
-        shutil.copy2(ind_src, ind_dst)
-        touched.append(ind_dst)
+    # 業種の定義は配信先へ写さない。一覧づくり（scripts/subsidy_pages.py）が本リポジトリの定義を直接読む。
+    # 写しを持つと、古い写しで建設業などのページが更新されなくなった（2026-10-03）
     return touched
 
 
