@@ -275,10 +275,70 @@ def upload(mp4, slug, public=False, quiet=False, short_title=""):
             _add_to_playlist(yt, vid, title)
     except Exception as e:
         print(f"  [注意] 再生リストに入れられませんでした（{str(e)[:70]}）")
+    # サムネイルは記事と同じ業種・テーマの画像（サイト・note・YouTube で見た目をそろえる）。ショートは縦型なので付けない
+    if not short_title:
+        set_thumbnail(yt, vid, slug)
     if not quiet:
         print(f"  上げました: https://www.youtube.com/watch?v={vid}")
         print(f"  公開設定: {'全体公開' if public else '限定公開（確認してから公開に変えてください）'}")
     return vid
+
+
+def thumb_for(slug):
+    """記事に付く業種・テーマの画像（site/images/thumbs/）を 1280×720 の JPEG にして返す。無ければ None"""
+    import tempfile
+    import build
+    from PIL import Image
+    p = ROOT / "articles" / f"{slug}.md"
+    if not p.is_file():
+        return None
+    try:
+        meta, _ = build.parse_article(p)
+    except ValueError:
+        return None                                # 他サイト（コーポレート・補助金）の記事
+    e = str(meta.get("eyecatch", ""))
+    # 業種・テーマの画像か、手で選んだ画像だけ。自動で描いたアイキャッチ（eyecatch.png）は動画の場面より弱い
+    if not e or e.endswith("/eyecatch.png") or not (ROOT / "site" / e.lstrip("/")).is_file():
+        return None
+    im = Image.open(ROOT / "site" / e.lstrip("/")).convert("RGB")
+    w, h = im.size
+    th = round(w * 9 / 16)                         # 16:9 に切りそろえる（上下を少しだけ落とす）
+    if th < h:
+        top = (h - th) // 2
+        im = im.crop((0, top, w, top + th))
+    out = Path(tempfile.gettempdir()) / f"yt-thumb-{slug}.jpg"
+    im.resize((1280, 720), Image.LANCZOS).save(out, "JPEG", quality=88, optimize=True)   # 上限 2MB
+    return out
+
+
+def set_thumbnail(yt, vid, slug):
+    from googleapiclient.http import MediaFileUpload
+    try:
+        f = thumb_for(slug)
+        if not f:
+            return False
+        yt.thumbnails().set(videoId=vid, media_body=MediaFileUpload(str(f), mimetype="image/jpeg")).execute()
+        print(f"  サムネイル: {f.name}")
+        return True
+    except Exception as e:
+        # 独自サムネイルは電話番号の確認が済んだチャンネルだけ。権限の古い鍵でも 403 になる
+        print(f"  [注意] サムネイルを設定できませんでした（{str(e)[:90]}）")
+        return False
+
+
+def update_thumbnails():
+    """上げ済みの動画（ショート以外）のサムネイルを、記事の業種・テーマの画像にそろえる"""
+    from googleapiclient.discovery import build as gbuild
+    c = creds()
+    if not c:
+        raise SystemExit("youtube-token.json がありません")
+    yt = gbuild("youtube", "v3", credentials=c)
+    vids = json.loads((ROOT / "data" / "videos.json").read_text(encoding="utf-8"))
+    n = 0
+    for slug, v in vids.items():
+        if isinstance(v, dict) and v.get("youtube"):          # 横型の本編（ショートは v["short"] に別で持つ）
+            n += set_thumbnail(yt, v["youtube"], slug)
+    print(f"YT_THUMBS_SET={n}")
 
 
 def check():
@@ -310,9 +370,12 @@ def main():
     ap.add_argument("--users", action="store_true", help="許可したアカウントの累計（上限100の手前で知らせる）")
     ap.add_argument("--public", action="store_true", help="全体公開で上げる")
     ap.add_argument("--update-desc", action="store_true", help="上げ済みの動画の説明欄を今の内容に書き直す")
+    ap.add_argument("--update-thumbs", action="store_true", help="上げ済みの動画のサムネイルを記事の業種・テーマの画像にそろえる")
     a = ap.parse_args()
     if a.update_desc:
         return update_descriptions()
+    if a.update_thumbs:
+        return update_thumbnails()
 
     if a.auth:
         return auth()
