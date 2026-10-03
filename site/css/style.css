@@ -1638,3 +1638,41 @@ main.lab .cta-final h2 { color: #fff; }
 .scene-band img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; border-radius: 24px; box-shadow: var(--shadow-lg); }
 @media (max-width: 720px) { .scene-band img { aspect-ratio: 16 / 10; border-radius: 16px; } }
 .scene-band figcaption { position: absolute; left: calc(var(--gutter) + 1.4rem); bottom: 1.2rem; color: #fff; font-weight: 700; text-shadow: 0 2px 12px rgba(7, 26, 56, .6); }
+
+/* トップの写真（2026-10-03） */
+.tool-card .tool-photo { display: block; margin: -1.8rem -1.6rem .4rem; overflow: hidden; border-radius: var(--radius) var(--radius) 0 0; }
+.tool-card .tool-photo img { display: block; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; transition: transform .8s var(--ease-out); }
+.tool-card:hover .tool-photo img { transform: scale(1.04); }
+.ind-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; max-width: 1180px; margin: 0 auto; }
+@media (max-width: 900px) { .ind-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ind-card { position: relative; display: block; overflow: hidden; border-radius: 16px; aspect-ratio: 4 / 3; background: var(--navy); color: #fff; text-decoration: none; box-shadow: var(--shadow-md); }
+.ind-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out); }
+.ind-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7, 26, 56, .82) 0%, rgba(7, 26, 56, .1) 55%, transparent 100%); }
+.ind-card span { position: absolute; left: 1rem; right: 1rem; bottom: .9rem; z-index: 1; font-weight: 700; font-size: .98rem; line-height: 1.4; }
+.ind-card:hover img { transform: scale(1.06); }
+.ind-card-all { display: flex; align-items: center; justify-content: center; background: linear-gradient(140deg, #0b2447, #1d4ed8); }
+.ind-card-all::after { display: none; }
+.ind-card-all span { position: static; text-align: center; }
+.ind-lps { text-align: center; margin: 1.4rem 0 0; font-size: .9rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.2rem; }
+.ind-lps a { color: var(--blue); font-weight: 700; }
+.whynow-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.6rem; max-width: 1100px; margin: 0 auto; align-items: stretch; }
+@media (max-width: 860px) { .whynow-grid { grid-template-columns: minmax(0, 1fr); } }
+.whynow-photo { margin: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
+.whynow-photo img { display: block; width: 100%; height: 100%; min-height: 260px; object-fit: cover; }
+.service-split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 1.6rem; align-items: center; }
+@media (max-width: 900px) { .service-split { grid-template-columns: minmax(0, 1fr); } }
+.service-photo { margin: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
+.service-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.service-split .data-cards { grid-template-columns: minmax(0, 1fr); }
+.flat-sec .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) { .flat-sec .work-grid { grid-template-columns: minmax(0, 1fr); } }
+.cta-photo { background: linear-gradient(100deg, rgba(7, 26, 56, .94) 0%, rgba(11, 36, 71, .82) 45%, rgba(11, 36, 71, .55) 100%), url("/images/home/cta.webp") center / cover no-repeat; }
+/* Codex の点検（2026-10-03）: 余白とつり合いの調整 */
+section[data-area-id="industry"] { padding-bottom: clamp(1.6rem, 3vw, 3rem); }
+section[data-area-id="latest"] { padding-top: clamp(1.6rem, 3vw, 3rem); }
+section[data-area-id="category"] .work-thumb { aspect-ratio: 16 / 8; }
+section[data-area-id="service"] { padding-bottom: clamp(1rem, 2vw, 2rem); }
+section[data-area-id="about"] .section { padding-top: clamp(2rem, 4vw, 3.6rem); }
+.service-split .data-card { padding-top: 1.1rem; padding-bottom: 1.1rem; }
+.service-split .data-card .dc-t { font-size: 1.2em; }
+.service-split .data-card .dc-s { font-size: 1.08em; line-height: 1.8; }
