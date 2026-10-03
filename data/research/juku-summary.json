@@ -1,0 +1,202 @@
+{
+ "total": {
+  "portal": 268,
+  "media": 82,
+  "clinic": 263,
+  "other": 4,
+  "maker": 26,
+  "public": 9,
+  "video": 14
+ },
+ "by_engine": {
+  "Gemini": {
+   "portal": 82,
+   "media": 28,
+   "clinic": 86,
+   "other": 3,
+   "maker": 12,
+   "public": 4,
+   "video": 7
+  },
+  "Claude": {
+   "portal": 186,
+   "media": 54,
+   "clinic": 177,
+   "maker": 14,
+   "public": 5,
+   "other": 1,
+   "video": 7
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "portal": 73,
+   "media": 19,
+   "clinic": 30,
+   "other": 1,
+   "maker": 1,
+   "public": 2
+  },
+  "費用": {
+   "media": 14,
+   "portal": 73,
+   "clinic": 44,
+   "maker": 8,
+   "video": 3,
+   "other": 2,
+   "public": 2
+  },
+  "選び方": {
+   "portal": 43,
+   "clinic": 44,
+   "maker": 2,
+   "media": 19,
+   "other": 1,
+   "video": 3
+  },
+  "受験・成績の悩み": {
+   "clinic": 71,
+   "video": 5,
+   "media": 15,
+   "maker": 7,
+   "portal": 28,
+   "public": 1
+  },
+  "オンライン・英会話の悩み": {
+   "maker": 8,
+   "portal": 51,
+   "clinic": 74,
+   "media": 15,
+   "public": 4,
+   "video": 3
+  }
+ },
+ "answered": {
+  "Gemini": 28,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Gemini": 26,
+  "Claude": 44
+ },
+ "sources": {
+  "Gemini": 222,
+  "Claude": 444
+ },
+ "portal_top": [
+  [
+   "bestjuku.com",
+   39
+  ],
+  [
+   "juku.ameba.jp",
+   29
+  ],
+  [
+   "jukushiru.com",
+   29
+  ],
+  [
+   "jyukumado.jp",
+   19
+  ],
+  [
+   "study-search.jp",
+   12
+  ],
+  [
+   "jyukunavi.jp",
+   11
+  ],
+  [
+   "coeteco.jp",
+   11
+  ],
+  [
+   "edusuppo.com",
+   7
+  ],
+  [
+   "englishhub.jp",
+   5
+  ],
+  [
+   "manaviism.com",
+   4
+  ]
+ ],
+ "industry": "juku",
+ "name": "学習塾・スクール",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用": 10,
+  "選び方": 10,
+  "受験・成績の悩み": 10,
+  "オンライン・英会話の悩み": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 78,
+   "media": 45,
+   "portal": 72,
+   "clinic": 70,
+   "other": 4,
+   "maker": 18,
+   "public": 8,
+   "video": 12
+  },
+  "地域で探す": {
+   "answers": 19,
+   "media": 12,
+   "portal": 19,
+   "clinic": 12,
+   "other": 1,
+   "maker": 1,
+   "public": 2
+  },
+  "費用": {
+   "answers": 19,
+   "media": 10,
+   "portal": 19,
+   "clinic": 18,
+   "maker": 6,
+   "video": 2,
+   "other": 2,
+   "public": 1
+  },
+  "選び方": {
+   "answers": 13,
+   "portal": 12,
+   "clinic": 13,
+   "maker": 2,
+   "media": 8,
+   "other": 1,
+   "video": 2
+  },
+  "受験・成績の悩み": {
+   "answers": 11,
+   "media": 8,
+   "video": 5,
+   "clinic": 11,
+   "maker": 6,
+   "portal": 9,
+   "public": 1
+  },
+  "オンライン・英会話の悩み": {
+   "answers": 16,
+   "maker": 3,
+   "portal": 13,
+   "clinic": 16,
+   "media": 7,
+   "public": 4,
+   "video": 3
+  }
+ }
+}

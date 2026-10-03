@@ -1,0 +1,218 @@
+{
+ "total": {
+  "other": 15,
+  "portal": 177,
+  "review": 14,
+  "media": 160,
+  "public": 114,
+  "video": 14,
+  "clinic": 207,
+  "maker": 76
+ },
+ "by_engine": {
+  "Gemini": {
+   "other": 9,
+   "portal": 52,
+   "media": 55,
+   "video": 9,
+   "review": 5,
+   "public": 52,
+   "clinic": 71,
+   "maker": 25
+  },
+  "Claude": {
+   "portal": 125,
+   "review": 9,
+   "media": 105,
+   "public": 62,
+   "clinic": 136,
+   "other": 6,
+   "maker": 51,
+   "video": 5
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "other": 5,
+   "portal": 55,
+   "review": 12,
+   "media": 17,
+   "public": 28,
+   "video": 3,
+   "clinic": 24,
+   "maker": 2
+  },
+  "費用": {
+   "portal": 32,
+   "clinic": 39,
+   "maker": 19,
+   "media": 44,
+   "video": 1,
+   "review": 1,
+   "public": 15,
+   "other": 4
+  },
+  "選び方": {
+   "portal": 41,
+   "clinic": 54,
+   "media": 25,
+   "maker": 11,
+   "public": 1,
+   "video": 5
+  },
+  "要介護認定": {
+   "public": 43,
+   "media": 36,
+   "clinic": 37,
+   "video": 3,
+   "portal": 24,
+   "other": 1,
+   "maker": 16,
+   "review": 1
+  },
+  "家族の悩み": {
+   "media": 38,
+   "clinic": 53,
+   "maker": 28,
+   "portal": 25,
+   "public": 27,
+   "other": 5,
+   "video": 2
+  }
+ },
+ "answered": {
+  "Gemini": 40,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "Claude": 39,
+  "Gemini": 32
+ },
+ "sources": {
+  "Gemini": 278,
+  "Claude": 499
+ },
+ "portal_top": [
+  [
+   "kaigo.homes.co.jp",
+   33
+  ],
+  [
+   "e-nursingcare.com",
+   22
+  ],
+  [
+   "sykz.co.jp",
+   19
+  ],
+  [
+   "heartpage.jp",
+   17
+  ],
+  [
+   "sagasix.jp",
+   10
+  ],
+  [
+   "i.ansinkaigo.jp",
+   9
+  ],
+  [
+   "my-kaigo-home.com",
+   7
+  ],
+  [
+   "medicaldoc.jp",
+   6
+  ],
+  [
+   "seniorhome-mado.com",
+   6
+  ],
+  [
+   "homemate-s.com",
+   5
+  ]
+ ],
+ "industry": "kaigo",
+ "name": "介護事業所",
+ "date": "2026-10-03",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用": 10,
+  "選び方": 10,
+  "要介護認定": 10,
+  "家族の悩み": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 90,
+   "portal": 73,
+   "other": 14,
+   "media": 74,
+   "review": 12,
+   "public": 47,
+   "video": 14,
+   "clinic": 71,
+   "maker": 43
+  },
+  "地域で探す": {
+   "answers": 19,
+   "portal": 19,
+   "other": 5,
+   "media": 11,
+   "review": 10,
+   "public": 14,
+   "video": 3,
+   "clinic": 10,
+   "maker": 2
+  },
+  "費用": {
+   "answers": 20,
+   "clinic": 15,
+   "portal": 14,
+   "media": 17,
+   "maker": 13,
+   "video": 1,
+   "review": 1,
+   "public": 6,
+   "other": 4
+  },
+  "選び方": {
+   "answers": 13,
+   "clinic": 13,
+   "portal": 13,
+   "video": 5,
+   "public": 1,
+   "media": 10,
+   "maker": 8
+  },
+  "要介護認定": {
+   "answers": 20,
+   "video": 3,
+   "public": 15,
+   "clinic": 19,
+   "media": 19,
+   "portal": 17,
+   "maker": 9,
+   "other": 1,
+   "review": 1
+  },
+  "家族の悩み": {
+   "answers": 18,
+   "clinic": 14,
+   "media": 17,
+   "maker": 11,
+   "portal": 10,
+   "public": 11,
+   "other": 4,
+   "video": 2
+  }
+ }
+}
