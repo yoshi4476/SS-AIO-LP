@@ -196,12 +196,28 @@ def hub_body(ind, metas, categories, post_tile):
     return "\n".join(blocks)
 
 
+def _card_photo(ind):
+    """業種カードの写真。業種の現場写真（images/scenes/<slug>.webp）を先に、無ければ写真の棚から業種名で選ぶ"""
+    if (ROOT / "site" / "images" / "scenes" / f'{ind["slug"]}.webp').is_file():
+        return f'/images/scenes/{ind["slug"]}.webp'
+    try:
+        import photo_shelf
+        _, url = photo_shelf.pick(ind["name"], "", ind["slug"])
+        if url:
+            return url[:-4] + ".webp"
+    except Exception:
+        pass
+    return "/images/scenes/btob.webp"
+
+
 def index_body(pairs, g):
     """/industry/ の一覧。どの業種に何本あるかを先に見せる"""
     import html as _h
     inds, mn = load()
     lis = "".join(
-        f'<li><a href="{BASE}{i["slug"]}/"><strong>{_h.escape(i["name"])}</strong>'
+        f'<li class="hub-card"><a class="hub-ph" href="{BASE}{i["slug"]}/" tabindex="-1" aria-hidden="true">'
+        f'<img src="{_card_photo(i)}" alt="{_h.escape(i["name"])}の現場のイメージ" width="1600" height="900" loading="lazy" decoding="async"></a>'
+        f'<a href="{BASE}{i["slug"]}/"><strong>{_h.escape(i["name"])}</strong>'
         f'<span class="cnt">{len(v)}本</span></a>'
         f'<span class="hub-lead">{_h.escape(i["lead"][:70])}…'
         # 業種のよくある質問（/faq/）はハブからしかリンクされず、被リンク1本だった（Ahrefs 2026-09-29）

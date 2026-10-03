@@ -2119,6 +2119,8 @@ def main():
     build_extra_pages(all_metas)
     import tools_catalog
     tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から
+    import page_enrich
+    page_enrich.apply(SITE)  # 無料ツール・資料ダウンロードに写真・使い方・わかること・FAQ・次に読む記事
     import season_feature
     season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）
     industry_thumbs.apply_share_images(SITE, SITE_URL)  # 業種LP・業種ページの共有画像を業種の画像に

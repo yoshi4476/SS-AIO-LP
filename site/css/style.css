@@ -1682,3 +1682,63 @@ section[data-area-id="about"] .section { padding-top: clamp(2rem, 4vw, 3.6rem); 
 .pillar-photo { display: block; margin: 0 -1.8rem 1.1rem; overflow: hidden; }
 .pillar-photo img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .8s var(--ease-out); }
 .pillar:hover .pillar-photo img { transform: scale(1.05); }
+
+/* 業種一覧のカードに業種の写真（2026-10-03） */
+.hub-list li.hub-card { padding: 0 0 1rem; overflow: hidden; }
+.hub-list li.hub-card > a:not(.hub-ph) { padding: .9rem 1.1rem 0; }
+.hub-list li.hub-card .hub-lead { display: block; padding: 0 1.1rem; }
+.hub-list .hub-ph { display: block; overflow: hidden; }
+.hub-list .hub-ph img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .8s var(--ease-out); }
+.hub-list li.hub-card:hover .hub-ph img { transform: scale(1.05); }
+
+/* 実装ラボの写真（2026-10-03） */
+.lab-hero { position: relative; overflow: hidden; }
+.lab-hero-ph { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 35%, rgba(0,0,0,.85) 75%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, transparent 35%, rgba(0,0,0,.85) 75%, #000 100%); }
+.lab-hero-ph img { width: 100%; height: 100%; object-fit: cover; opacity: .45; }
+.lab-hero-inner { z-index: 1; }
+.prod-card.prod-has-photo { overflow: hidden; }
+.prod-card .prod-photo { display: block; margin: -1.7rem -1.7rem 1.1rem; overflow: hidden; }
+.prod-card .prod-photo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.lab-band { margin: 1rem 0 1.4rem; border-radius: 16px; overflow: hidden; }
+.lab-band img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 8; object-fit: cover; }
+.lab-band figcaption { font-size: .72rem; color: var(--muted); margin-top: .35rem; }
+@media (max-width: 640px) { .lab-hero-ph img { opacity: .22; } .lab-band img { aspect-ratio: 16 / 9; } }
+
+/* 無料ツール・資料ダウンロードの肉付け（page_enrich.py・2026-10-03） */
+section.hero:has(> .tool-hero-ph) { position: relative; isolation: isolate; overflow: hidden; }
+.tool-hero-ph { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%); }
+.tool-hero-ph img { width: 100%; height: 100%; object-fit: cover; opacity: .16; }
+.enrich { max-width: 1180px; margin: 0 auto; padding: clamp(2.2rem, 5vw, 3.6rem) clamp(1rem, 3vw, 2rem) 0; }
+.enrich h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 0 0 .4rem; }
+.enrich .en { font-size: .72rem; letter-spacing: .2em; color: var(--blue); font-weight: 700; text-transform: uppercase; }
+.enrich-block { margin: 0 0 clamp(2.4rem, 5vw, 3.4rem); }
+.enrich-steps { list-style: none; counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 1rem; margin: 1.2rem 0 0; padding: 0; }
+.enrich-steps li { counter-increment: s; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1.3rem 1.3rem 1.2rem; box-shadow: var(--shadow-sm); }
+.enrich-steps li::before { content: "STEP " counter(s); display: block; font-size: .72rem; font-weight: 800; letter-spacing: .14em; color: var(--blue); margin-bottom: .4rem; }
+.enrich-steps b { display: block; font-size: 1.02rem; margin-bottom: .35rem; }
+.enrich-steps span { font-size: .88rem; color: var(--muted); line-height: 1.85; }
+.enrich-learn { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.6rem; align-items: center; margin-top: 1.2rem; }
+@media (max-width: 860px) { .enrich-learn { grid-template-columns: minmax(0, 1fr); } }
+.enrich-learn figure { margin: 0; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-md); }
+.enrich-learn figure img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.enrich-learn dl { margin: 0; display: grid; gap: .8rem; }
+.enrich-learn dl div { background: var(--bg-alt); border-radius: 14px; padding: 1rem 1.15rem; }
+.enrich-learn dt { font-weight: 800; margin-bottom: .25rem; }
+.enrich-learn dd { margin: 0; font-size: .88rem; color: var(--muted); line-height: 1.85; }
+.enrich-who { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: .8rem; list-style: none; padding: 0; margin: 1.1rem 0 0; }
+.enrich-who li { border-left: 4px solid var(--blue); background: #fff; border-radius: 0 12px 12px 0; padding: .9rem 1.1rem; font-size: .92rem; font-weight: 700; box-shadow: var(--shadow-sm); }
+.enrich-faq details { border-bottom: 1px solid var(--line); padding: 1rem 0; }
+.enrich-faq summary { font-weight: 700; cursor: pointer; }
+.enrich-faq details p { margin: .6rem 0 0; color: var(--muted); line-height: 1.85; }
+.enrich-more { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.enrich-more a { display: inline-flex; align-items: center; padding: .55em 1.1em; border: 1.5px solid var(--line); border-radius: 999px; font-weight: 700; font-size: .88rem; text-decoration: none; color: var(--blue-deep); background: #fff; }
+.enrich-more a:hover { border-color: var(--blue); }
+.enrich-note { font-size: .74rem; color: var(--muted); margin: .5rem 0 0; }
+.dl-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 2.4rem; align-items: center; }
+@media (max-width: 860px) { .dl-grid { grid-template-columns: minmax(0, 1fr); } }
+.dl-grid > figure { margin: 0; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-md); }
+.dl-grid > figure img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
