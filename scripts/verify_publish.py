@@ -124,7 +124,11 @@ def verify(site_id, slug, since_iso=None, build_timeout=BUILD_TIMEOUT, live_time
     since = since_iso or datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
     msgs = []
-    if cfg["type"] != "self-static":
+    # ZIP は先方が上げるまで公開されない。待っても確かめられないので、作れたことだけ返す
+    if cfg["type"] == "zip":
+        return True, ["ZIP を作りました（公開は先方が上げた後）"]
+    # FTP は上げた時点で公開される（相手のビルドが無い）
+    if cfg["type"] not in ("self-static", "ftp"):
         ok, m = wait_build(cfg["repo"], cfg["branch"], since, build_timeout)
         msgs.append(m)
         if not ok:

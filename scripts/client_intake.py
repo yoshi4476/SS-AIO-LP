@@ -54,7 +54,8 @@ FIELDS = [
     ("branch", "ブランチ", "通常は main", "main", False),
     ("type", "サイトの形式",
      "WordPressをお使いなら wordpress。当社で新規構築するなら self-static。"
-     "既存の静的サイトへ配信する場合は external-html / external-md / nextjs-json",
+     "既存の静的サイトへ配信する場合は external-html / external-md / nextjs-json。"
+     "Git を使わないレンタルサーバー（FTP で上げているサイト）なら ftp、自分で上げたい先方には zip",
      "wordpress", True),
     ("url_prefix", "記事URLの接頭辞",
      "記事が /blog/xxx/ に出るなら /blog。自社構築（self-static）以外は必ず記入", "/blog", False),
@@ -288,6 +289,22 @@ WRITING = [
     ("asset.sns", "運用中のSNS", "改行区切り", "X: @example\nInstagram: example", False),
     ("asset.gbp", "Googleビジネスプロフィール",
      "登録済み / 未登録。店舗がある場合は重要です", "登録済み", False),
+    # 動画・SNS は先方のアカウントにだけ上げる（当社のアカウントには上げない）。
+    # 鍵やパスワードはシートに書かない。先方に当社を「管理者」に追加してもらい、許可の手続きは当社が行う
+    ("#channels", "16. 動画・SNSの投稿先",
+     "記事を動画・SNSでも届けます。先方のアカウントに、当社を管理者として追加していただきます"
+     "（パスワードはこのシートに書かないでください）。", "", False),
+    ("channels.youtube", "YouTubeチャンネル", "チャンネルのURL。無ければ空欄（当社で作成をご相談）",
+     "https://www.youtube.com/@example", False),
+    ("channels.video", "動画を上げるか", "要 / 不要", "要", False),
+    ("channels.facebook", "Facebookページ", "URL。無ければ空欄", "https://www.facebook.com/example", False),
+    ("channels.instagram", "Instagram", "URLか@アカウント名", "@example", False),
+    ("channels.threads", "Threads", "@アカウント名（Instagramでのログインの許可が1回必要です）", "@example", False),
+    ("channels.linkedin", "LinkedIn会社ページ", "URL", "https://www.linkedin.com/company/example", False),
+    ("channels.x", "X（旧Twitter）", "@アカウント名", "@example", False),
+    ("channels.contact", "許可の手続きの担当者", "氏名とメールアドレス（管理者の追加をお願いする方）",
+     "山田 太郎 / taro@example.co.jp", False),
+    ("channels.admin_added", "当社を管理者に追加済みか", "済 / 未（記入時点）", "未", False),
 ]
 
 
@@ -518,7 +535,7 @@ def make_sheet(path=SHEET, industry=""):
         ws.cell(row=r, column=6, value=key)
         r += 1
 
-    dv = DataValidation(type="list", formula1='"wordpress,self-static,external-md,external-html,nextjs-json"')
+    dv = DataValidation(type="list", formula1='"wordpress,self-static,external-md,external-html,nextjs-json,ftp,zip"')
     ws.add_data_validation(dv)
     for row in range(SAMPLE_ROW, r):
         if ws.cell(row=row, column=6).value == "type":
@@ -598,6 +615,9 @@ def to_config(got):
         "main_category": got.get("main_category", ""),
         "cta": {"label": got.get("cta.label", ""), "url": got.get("cta.url", ""),
                 "note": got.get("cta.note", "")},
+        # 動画・SNSの投稿先（鍵は持たない。接続は youtube_upload --auth / social_connect で当社が行う）
+        "channels": {k: got.get(f"channels.{k}", "") for k in
+                     ("youtube", "video", "facebook", "instagram", "threads", "linkedin", "x", "contact", "admin_added")},
     }
     # 接頭辞は既定を補わない。空のまま "/blog" を入れると、実際の記事URLと違う
     # URLが sitemap・内部リンク・通知に出る。自社構築は カテゴリ/slug で組むので持たせない
@@ -808,7 +828,7 @@ def review(got, cfg):
         ng.append(f"サイトの形式が不正です（{' / '.join(TYPES)}）")
     # wordpress は REST API で投稿するのでリポジトリは要らない（client_add と同じ条件）。
     # ここで止めると、repo 欄を空にした WordPress の社がいつまでも登録できない
-    if cfg.get("type") not in ("self-static", "wordpress") and not cfg.get("repo"):
+    if cfg.get("type") not in ("self-static", "wordpress", "ftp", "zip") and not cfg.get("repo"):
         ng.append("配信先リポジトリが空です（自社構築以外は書き込み先が要ります）")
     # 以前は空欄に "/blog" を補っていた。実際の記事URLが違えば、sitemap も通知も
     # 存在しないURLを指す。推測で埋めず、書いてもらう

@@ -76,3 +76,7 @@ automation/note/
 data/research/*-raw.json
 # 出典のドメインの種類（手で確かめた直しを含む）はコミットする。CI で調べ直すとき、直しが消えて数字が変わらないように
 .dev.vars
+
+# FTP の接続情報・ZIP 納品物（先方の資格情報と納品物は公開リポジトリに置かない）
+ftp-credentials.json
+deliveries/

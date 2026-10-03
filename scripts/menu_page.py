@@ -246,6 +246,21 @@ def build(site, push=False, write=True):
         r = subprocess.run(["git", "push", f"https://x-access-token@github.com/{cfg['repo']}.git", f"HEAD:{cfg['branch']}"],
                            cwd=dest, env=publish.git_auth(tok), capture_output=True, text=True)
         print(f"   配信: {'OK' if r.returncode == 0 else 'NG'}")
+    elif push and cfg.get("type") in ("ftp", "zip"):
+        import deliver_files as DF
+        files = [p for p in out.rglob("*") if p.is_file() and not p.name.startswith("qr-")]
+        items = [(p, f"menu/{p.relative_to(out).as_posix()}") for p in files]
+        if cfg["type"] == "ftp":
+            DF._ftp_upload(DF.credentials(cfg), items)
+            print(f"   配信: {cfg['domain']}/menu/ へ {len(items)} ファイル")
+        else:
+            import zipfile
+            z = ROOT / "deliveries" / cfg["id"] / "menu.zip"
+            z.parent.mkdir(parents=True, exist_ok=True)
+            with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as zf:
+                for p, rel in items:
+                    zf.write(p, rel)
+            print(f"   ZIP: {z}")
     elif push:
         print(f"   {cfg.get('type')} への自動配置は未対応。{out} のファイルを先方のサイトに置いてください")
     return len(have)

@@ -46,6 +46,8 @@ TO_GITHUB = {
     "X_BEARER_TOKEN", "FB_PAGE_ID", "FB_PAGE_TOKEN", "IG_USER_ID", "THREADS_TOKEN", "THREADS_USER_ID",
     "LINKEDIN_TOKEN", "LINKEDIN_REFRESH_TOKEN", "LINKEDIN_CLIENT_ID", "LINKEDIN_CLIENT_SECRET",
     "LINKEDIN_ORG_ID", "LINKEDIN_PERSON_ID",
+    # Git を使わない配信先（レンタルサーバーの FTP・WordPress）の接続情報。全社分を1つの JSON で持つ
+    "FTP_CREDENTIALS_JSON", "WP_CREDENTIALS_JSON",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。

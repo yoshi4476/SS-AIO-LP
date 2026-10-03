@@ -133,6 +133,24 @@ def main():
             for r in items:
                 print(f"  [{sid}] {r['from']} → {r['to']}（{r.get('reason', '')}）")
             continue
+        # Git を使わない配信先（FTP・ZIP）は相手のサーバーを直接直す
+        import deliver_files
+        if cfg.get("type") in deliver_files.TYPES:
+            if deliver_files.retract(cfg, items, True):
+                for r in items:
+                    r["done_at"] = date.today().isoformat()
+                print(f"  [{sid}] 取り下げ完了（{cfg['type']}）")
+            continue
+        # WordPress は記事を下書きに戻す（公開から外す）。転送はプラグインが要るので人に知らせる
+        if cfg.get("type") == "wordpress":
+            for r in items:
+                found = publish._wp_call(cfg, f"posts?slug={r['slug']}&status=publish&_fields=id")
+                for p in found if isinstance(found, list) else []:
+                    publish._wp_call(cfg, f"posts/{p['id']}", {"status": "draft"})
+                r["done_at"] = date.today().isoformat()
+                r["note"] = f"下書きに戻した。転送 {r['from']} → {r['to']} は Redirection プラグインで設定が要る"
+                print(f"  [{sid}] {r['slug']}: 下書きに戻しました（転送は管理画面で: {r['from']} → {r['to']}）")
+            continue
         dest = publish.ensure_clone(cfg, publish._push_token())
         for r in items:
             touched = apply(r, cfg, dest)

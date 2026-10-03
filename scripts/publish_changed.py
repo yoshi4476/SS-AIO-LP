@@ -84,7 +84,7 @@ def main():
         targets = changed_by_git(sid, a.since) if a.since else site_articles(sid)
         if a.limit:
             targets = targets[:a.limit]
-        print(f"■ {cfg['name']}（{cfg['repo']}）: 対象 {len(targets)}本")
+        print(f"■ {cfg['name']}（{cfg.get('repo') or cfg['type']}）: 対象 {len(targets)}本")
         if not a.push:
             for s in targets[:12]:
                 print(f"     {s}")

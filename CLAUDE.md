@@ -238,6 +238,15 @@ python scripts/add_fact.py --add <file.json>      # 通れば登録
 | `self-static` | 本リポジトリの静的サイト | build.py がビルド対象から除外。**ファイルが存在しない** |
 | `external-md` / `external-html` / `nextjs-json` | 別リポジトリの静的サイト | publish.py が90点未満を配信しない |
 | `wordpress` | WordPress（REST API） | **先方の mu-plugin が公開を止める**（下記） |
+| `ftp` | Gitを使わないレンタルサーバー（FTPS既定 / FTP / SFTP） | publish.py が90点未満を上げない（`deliver_files.py`） |
+| `zip` | 先方が自分で上げる（`deliveries/<id>/` にZIP） | 同上。公開の照合（publish_gap）からは外す |
+
+**どの形式でも、記事・書き直しの再配信・動画・SNSはすべて管制塔のCIから出る**（先方にGitも作業も要らない）。
+接続情報は社ごとの Secret を並べず、全社分を1つのJSONで持つ: `FTP_CREDENTIALS_JSON`
+（`{"<id>": {"protocol":"ftps","host":"…","user":"…","password":"…","root":"/public_html"}}`、手元は `ftp-credentials.json`）・
+`WP_CREDENTIALS_JSON`（`{"<id>": {"user":"…","password":"<アプリケーションパスワード>"}}`）。
+`ftp`/`zip` の見た目は `data/clients/<id>/template.html` があればそれ、無ければ `templates/external_article.html`。
+配信した記事の一覧（関連記事に使う）は `data/clients/<id>/delivered.json`。
 
 **WordPress納品での品質ゲート**
 

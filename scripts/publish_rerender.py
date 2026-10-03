@@ -31,6 +31,22 @@ def main():
     ap.add_argument("--no-sync", action="store_true", help="配信先を最新へ戻さず、手元の状態の上で描く")
     a = ap.parse_args()
     cfg = S.load(a.site)
+    import deliver_files as DF
+    if cfg["type"] in DF.TYPES:
+        # FTP・ZIP は配信済みの一覧（delivered.json）の記事だけを、1回の接続・1つの ZIP で描き直す
+        base, scfg, written = DF.stage(cfg), DF.stage_cfg(cfg), []
+        done = set(DF.load_index(cfg))
+        for md in sorted((ROOT / "articles").glob("*.md")):
+            if md.stem not in done:
+                continue
+            meta, body = publish.parse_article(md)
+            if not publish.gate_ok(meta):
+                continue
+            w, _ = publish.write_external_html(scfg, base, meta, body, md)
+            written += w + [publish.stamp_manifest(cfg, base, meta, md)]
+        print(f"描き直し {len(done)}本（{cfg['type']}）")
+        DF.deliver_batch(cfg, written, base, a.push, "描き直し")
+        return
     if cfg["type"] != "external-html":
         raise SystemExit(f"{a.site} は {cfg['type']}。この道具は external-html だけを扱います")
     token = publish._push_token()

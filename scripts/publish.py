@@ -31,6 +31,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import md2html  # noqa: E402
+import deliver_files  # noqa: E402
 import render_check  # noqa: E402
 import sites as sites_mod  # noqa: E402
 
@@ -643,6 +644,10 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     shutil.copy2(src, md)
 
     written = [page, md] + _update_external_index(dest, cfg, meta)
+    # 訳のページも書いたものとして返す（FTP・ZIP は返したものだけを届けるため、漏れると訳が公開されない）
+    if extra:
+        pre = (cfg.get("url_prefix") or "/blog").strip("/")
+        written += [dest / lg / pre / meta["slug"] for lg in extra["langs"]]
     # 補助金サイトは記事の冒頭と一覧の見出し下に写真を置く（subsidy_photos。何度呼んでも同じ）。
     # サムネイルを作った後に呼ぶ（記事の冒頭はそのサムネイルを出す）
     if (dest / "assets" / "img" / "hero-owner.webp").is_file():
@@ -769,6 +774,14 @@ def _wp_auth(cfg):
                     user = line.split("=", 1)[1].strip().strip('"')
                 elif line.startswith(f"WP_APP_PASSWORD_{sid}="):
                     pw = line.split("=", 1)[1].strip().strip('"')
+    if not (user and pw):
+        # CI では社ごとの名前を workflow に並べられないため、全社分を1つの Secret で渡す
+        # （WP_CREDENTIALS_JSON = {"<site id>": {"user": "...", "password": "..."}}）
+        try:
+            c = json.loads(os.environ.get("WP_CREDENTIALS_JSON") or "{}").get(cfg["id"]) or {}
+            user, pw = c.get("user", ""), c.get("password", "")
+        except ValueError:
+            pass
     if not (user and pw):
         raise SystemExit(
             f"WordPressの接続情報がありません。.env に次の2行を足してください:\n"
@@ -925,6 +938,8 @@ def _delivered(cfg, meta):
     if cfg["type"] == "wordpress":
         found = _wp_call(cfg, f"posts?slug={slug}&status=publish&per_page=1&_fields=id")
         return bool(isinstance(found, list) and found), None
+    if cfg["type"] in deliver_files.TYPES:
+        return slug in deliver_files.load_index(cfg), None
     dest = ensure_clone(cfg, _push_token())
     where = {"nextjs-json": dest / cfg["content_dir"] / f"{slug}.json",
              "external-md": dest / cfg["content_dir"] / f"{slug}.md",
@@ -998,6 +1013,16 @@ def main():
     if cfg["type"] == "wordpress":
         ok = write_wordpress(cfg, meta, body, src, push=args.push)
         raise SystemExit(0 if ok else 1)
+
+    # Git を使わない配信先（レンタルサーバーの FTP・ZIP 納品）も、書き出しは external-html と同じ
+    if cfg["type"] in deliver_files.TYPES:
+        base = deliver_files.stage(cfg)
+        written, chars = write_external_html(deliver_files.stage_cfg(cfg), base, meta, body, src)
+        written.append(stamp_manifest(cfg, base, meta, src))
+        print(f"配信先: {cfg['name']}（{cfg['type']}）/ 本文: {chars:,}字 / score {score}")
+        print(f"  公開URL（予定）: {sites_mod.article_url(cfg, meta)}")
+        deliver_files.deliver(cfg, meta, written, base, args.push)
+        return
 
     token = _push_token()
     dest = dest or ensure_clone(cfg, token)

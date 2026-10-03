@@ -194,6 +194,9 @@ def main():
     total_gap = 0
     for site, slugs in sorted(mine.items()):
         c = conf[site]
+        # ZIP 納品は先方が上げるまで公開されない。差を「未配信」と数えると毎日同じ ZIP を作り直す
+        if c.get("type") == "zip":
+            continue
         live = (live_slugs_wp(c["domain"]) if c.get("type") == "wordpress"
                 else live_slugs(c["domain"]))
         if live is None:

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}｜{{SITE_NAME}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="{{ORIGIN}}{{PREFIX}}/{{SLUG}}/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:url" content="{{ORIGIN}}{{PREFIX}}/{{SLUG}}/">
+<meta property="og:site_name" content="{{SITE_NAME}}">
+<meta property="og:image" content="">
+<!-- 先方のサイトの見た目に合わせた雛形があれば data/clients/<id>/template.html に置く（こちらは汎用） -->
+<style>
+:root{--ink:#1d2433;--muted:#5b6474;--line:#e3e7ee;--accent:#1f4fa3;--bg:#fff;--panel:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Yu Gothic UI","Noto Sans CJK JP",sans-serif;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+header.site{border-bottom:1px solid var(--line)}header.site .wrap{padding:14px 16px}header.site a{color:var(--ink);font-weight:700;text-decoration:none}
+h1{font-size:1.6rem;line-height:1.5;margin:24px 0 8px}h2{font-size:1.3rem;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}h3{font-size:1.1rem;margin:28px 0 8px}
+.meta{color:var(--muted);font-size:.85rem}.lead{background:var(--panel);border-radius:10px;padding:16px;margin:20px 0}
+.toc{background:var(--panel);border-radius:10px;padding:12px 20px;margin:20px 0}.toc ol{margin:6px 0;padding-left:1.2em}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:8px;text-align:left}
+img{max-width:100%;height:auto}a{color:var(--accent)}
+.faq details{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0}.faq summary{font-weight:700;cursor:pointer}
+.cta{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin:36px 0;text-align:center}
+.related li{margin:4px 0}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"{{TITLE}}","description":"{{DESCRIPTION}}",
+ "datePublished":"{{DATE_ISO}}","dateModified":"{{DATE_MOD_ISO}}","mainEntityOfPage":"{{ORIGIN}}{{PREFIX}}/{{SLUG}}/",
+ "publisher":{"@type":"Organization","name":"{{SITE_NAME}}","url":"{{ORIGIN}}/"},"about":{{ABOUT_JSONLD}},"mentions":{{MENTIONS_JSONLD}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{{FAQ_JSONLD}}
+]}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a href="{{ORIGIN}}/">{{SITE_NAME}}</a></div></header>
+<main class="wrap">
+  <p class="meta">{{CATEGORY}}・{{DATE_JP}}更新・約{{READ_MIN}}分</p>
+  <h1>{{TITLE}}</h1>
+  <div class="lead"><p>{{LEAD_DANGEN}}</p><p class="meta">この記事は{{TARGET}}向けです（{{DATE_YM}}時点の情報）</p></div>
+  <nav class="toc" aria-label="目次"><strong>目次</strong><ol>{{TOC_ITEMS}}</ol></nav>
+  <article>{{BODY}}</article>
+  <section class="faq"><h2>よくある質問</h2>
+{{FAQ_HTML}}
+  </section>
+  <div class="cta"><p><strong>{{CTA_TITLE}}</strong></p><p>{{CTA_DESC}}</p></div>
+  <section class="related"><h2>関連する記事</h2><ul>{{RELATED_LINKS}}</ul></section>
+</main>
+</body>
+</html>
