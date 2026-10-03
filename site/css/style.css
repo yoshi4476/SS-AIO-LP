@@ -1768,3 +1768,5 @@ section.tool-hero ~ section .quiz-panel { margin-left: 0; }
 .rb-bar i { display: block; height: 100%; background: #8fb7ff; border-radius: 999px; }
 .rb-v { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
 @media (max-width: 560px) { .rb-bars li { grid-template-columns: minmax(0, 1fr) 3.4em; } .rb-bar { grid-column: 1 / -1; order: 3; } }
+
+.social-links a[data-net="x"]:hover, .social-links a[data-net="x"]:focus-visible { background: #000; }
