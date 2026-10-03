@@ -50,6 +50,17 @@ jobs:
         run: pip install -r requirements.txt
       # 記録しただけでは公開されない。自サイトは build で HTML を作ってデプロイを起動し、
       # 配信先は publish_gap が監修済みの未配信分を送る
+      # 記事のページ・sitemap・feed を Git から外す準備（2026-10-03）。このあとの工程が手元のページを読むので、
+      # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
+      - name: 原稿からページを作る
+        run: |
+          python scripts/build.py > /tmp/prebuild.log 2>&1 && tail -2 /tmp/prebuild.log || {
+            tail -20 /tmp/prebuild.log
+            echo "::warning::原稿からページを作れませんでした（このあとの工程は古いページを読みます）"
+            mkdir -p automation/logs
+            echo "要対応: 原稿からページを作れませんでした（$GITHUB_WORKFLOW）" >> automation/logs/findings.txt
+          }
+
       - name: 公開（自サイトのビルドと、配信先への送り出し）
         env:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}

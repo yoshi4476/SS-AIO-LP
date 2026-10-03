@@ -64,6 +64,17 @@ jobs:
           pip install playwright google-analytics-data google-api-python-client google-auth
           python -m playwright install --with-deps chromium
 
+      # 記事のページ・sitemap・feed を Git から外す準備（2026-10-03）。このあとの工程が手元のページを読むので、
+      # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
+      - name: 原稿からページを作る
+        run: |
+          python scripts/build.py > /tmp/prebuild.log 2>&1 && tail -2 /tmp/prebuild.log || {
+            tail -20 /tmp/prebuild.log
+            echo "::warning::原稿からページを作れませんでした（このあとの工程は古いページを読みます）"
+            mkdir -p automation/logs
+            echo "要対応: 原稿からページを作れませんでした（$GITHUB_WORKFLOW）" >> automation/logs/findings.txt
+          }
+
       - name: 認証情報の配置
         if: steps.gate.outputs.ready == 'true'
         env:

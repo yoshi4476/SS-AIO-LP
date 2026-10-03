@@ -2387,6 +2387,18 @@ def test_industry_thumbnails_follow_rules():
           "/images/x/eyecatch-main.jpg")
 
 
+def test_workflows_build_pages_before_reading_them():
+    """記事のページを Git から外す準備: 手元のページを読む工程があるワークフローは、最初に原稿から作る"""
+    print(chr(10) + "■ ワークフローが最初にページを作る")
+    wf = ROOT / ".github" / "workflows"
+    need = ["weekly-optimize.yml", "monthly-report.yml", "pipeline-multi.yml", "pipeline.yml",
+            "selfheal.yml", "daily-video.yml", "approve-review.yml"]
+    miss = [n for n in need if "- name: 原稿からページを作る" not in (wf / n).read_text(encoding="utf-8")]
+    check("手元のページを読むワークフローは、最初に原稿から作る", miss, [])
+    sh = (wf / "selfheal.yml").read_text(encoding="utf-8")
+    check("自動修復は作り直してから門を通す", sh.index("python scripts/build.py    || bad=1") < sh.index("python tests/test_gates.py || bad=1"), True)
+
+
 def test_monthly_cap_check_exit_code():
     """日次の枠は daily_audit.py --cap-reached の終了コードだけで「書くか」を決める。
 
@@ -3571,6 +3583,7 @@ def main():
               test_lead_context_and_recheck_consent,
               test_research_refresh_and_ranking,
               test_industry_thumbnails_follow_rules,
+              test_workflows_build_pages_before_reading_them,
               test_search_engines_are_told_about_all_sites,
               test_lessons_are_learned_and_pruned,
               test_totals_never_come_from_a_dimensioned_query,

@@ -52,6 +52,17 @@ jobs:
           claude --version || echo "::warning::claude が入らず、掛け合いの台本を作れません（スライド形式で出します）"
           python scripts/duo_video.py --selftest || echo "::warning::掛け合い台本の検査が壊れています"
           python scripts/duo_short.py --selftest || echo "::warning::ショート台本の検査が壊れています"
+      # 記事のページ・sitemap・feed を Git から外す準備（2026-10-03）。このあとの工程が手元のページを読むので、
+      # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
+      - name: 原稿からページを作る
+        run: |
+          python scripts/build.py > /tmp/prebuild.log 2>&1 && tail -2 /tmp/prebuild.log || {
+            tail -20 /tmp/prebuild.log
+            echo "::warning::原稿からページを作れませんでした（このあとの工程は古いページを読みます）"
+            mkdir -p automation/logs
+            echo "要対応: 原稿からページを作れませんでした（$GITHUB_WORKFLOW）" >> automation/logs/findings.txt
+          }
+
       - name: 動画を作って上げる
         env:
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
