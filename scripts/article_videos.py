@@ -164,6 +164,11 @@ def shorts(ledger, limit, token, public):
             print(f"   ○ short {slug[:40]:<40} {sec:.0f}秒" + (f" → youtube.com/shorts/{rec['youtube']}" if token else ""))
         except Exception as e:
             print(f"   × short {slug[:40]}: {str(e)[:80]}")
+            if "uploadLimitExceeded" in str(e):
+                # 1日のアップロード上限（API は手動より厳しい。2026-10-03 は約10本で当たった）。
+                # 続けても作っては失敗するだけなので、この回はやめる。翌日の回で続きから上がる
+                print("   要対応: YouTube の1日のアップロード上限に達しました。翌日の回で続きを上げます")
+                break
     return made
 
 
@@ -218,19 +223,26 @@ def main():
             rec = {"site": r["site"], "date": date.today().isoformat(),
                    "sec": round(sec), "mp4": str(out.relative_to(ROOT)).replace("\\", "/"),
                    "nums": _nums(script), "format": fmt}
-            if r.get("redo") and old.get("youtube"):
-                # 消すと再生数と埋め込みが失われる。限定公開に下げて、新しい動画に差し替える
-                YT.set_privacy(old["youtube"], "unlisted")
+            replacing = [old["youtube"]] if r.get("redo") and old.get("youtube") else []
+            if token:
+                rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True, replacing=replacing)
+            if replacing:
+                # 消すと再生数と埋め込みが失われる。限定公開に下げて、新しい動画に差し替える。
+                # 下げるのは新しい版が上がった後（先に下げると、上限で上がらなかった日に動画が無くなる。2026-10-03）
+                if token:
+                    YT.set_privacy(old["youtube"], "unlisted")
                 rec["retired"] = old.get("retired", []) + [old["youtube"]]
                 rec["site"] = old.get("site", rec["site"])
-            if token:
-                rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True)
             ledger[r["slug"]] = rec
             made += 1
             print(f"   ○ {r['slug'][:40]:<40} {sec:.0f}秒 {fmt}" + (f" → youtu.be/{rec['youtube']}" if token else ""))
         except Exception as e:
             ok = False
             print(f"   × {r['slug'][:40]:<40} {str(e)[:80]}")
+            if "uploadLimitExceeded" in str(e):
+                print("   要対応: YouTube の1日のアップロード上限に達しました。翌日の回で続きを上げます")
+                a.shorts = 0   # 同じ回のショートも上がらない
+                break
         LEDGER.parent.mkdir(parents=True, exist_ok=True)
         LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
     made_s = shorts(ledger, a.shorts, token, a.public) if a.shorts else 0

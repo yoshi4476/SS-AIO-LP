@@ -255,20 +255,20 @@ def _add_to_playlist(yt, vid, title):
     return name
 
 
-def existing(yt, title, n=50):
-    """直近 n 本のうち、題が同じで非公開でない動画の id"""
+def existing(yt, title, n=50, skip=()):
+    """直近 n 本のうち、題が同じで非公開でない動画の id（skip は差し替え中の古い版。上げてから下げるため）"""
     up = yt.channels().list(part="contentDetails", mine=True).execute()["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
     ids = [i["contentDetails"]["videoId"] for i in
            yt.playlistItems().list(part="contentDetails", playlistId=up, maxResults=n).execute().get("items", [])]
     if not ids:
         return None
     for v in yt.videos().list(part="snippet,status", id=",".join(ids)).execute().get("items", []):
-        if v["snippet"]["title"] == title and v["status"]["privacyStatus"] != "private":
+        if v["snippet"]["title"] == title and v["status"]["privacyStatus"] != "private" and v["id"] not in skip:
             return v["id"]
     return None
 
 
-def upload(mp4, slug, public=False, quiet=False, short_title=""):
+def upload(mp4, slug, public=False, quiet=False, short_title="", replacing=()):
     """short_title を渡すと縦型ショートとして上げる（題に #Shorts、説明は短く、再生リストには入れない）"""
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload
@@ -292,7 +292,7 @@ def upload(mp4, slug, public=False, quiet=False, short_title=""):
     yt = build("youtube", "v3", credentials=c)
     # 台帳の記録が漏れると、同じ動画を翌日また上げる（2026-09-27〜29 に同じ動画が3本公開された）。
     # 台帳に頼らず、チャンネルに同じ題の公開中の動画があればそれを返す
-    dup = existing(yt, title)
+    dup = existing(yt, title, skip=set(replacing))
     if dup:
         print(f"  同じ題の動画がすでにあります（{dup}）。上げ直しません")
         return dup

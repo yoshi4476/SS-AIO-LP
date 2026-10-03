@@ -2261,6 +2261,11 @@ def test_lessons_2026_10_03():
         retired += [p.stem for name, since in RETIRED_PROGRAMS.items()
                     if name in kw.group(1) and date.group(1).strip('"') >= since]
     check("受付の終わった制度を新しく狙っていない", sorted(retired), [])
+    # 7. 動画の差し替えで古い版を先に下げ、上限（uploadLimitExceeded）で新しい版が上がらず動画が無くなった
+    av = (ROOT / "scripts" / "article_videos.py").read_text(encoding="utf-8")
+    up, down = av.find("YT.upload(out, r[\"slug\"]"), av.find("YT.set_privacy(old[\"youtube\"]")
+    check("動画の差し替えは、新しい版を上げてから古い版を下げる", 0 <= up < down, True)
+    check("差し替え中の古い版は、同じ題の重複の確認から外す", "replacing=replacing" in av, True)
     # 6. Windows で一時フォルダの後片付けが「使用中」で失敗し、業種調査が途中で止まった
     check("業種調査は一時フォルダの後片付けで止まらない",
           "ignore_cleanup_errors" in (ROOT / "scripts" / "industry_ai_sources.py").read_text(encoding="utf-8"), True)
