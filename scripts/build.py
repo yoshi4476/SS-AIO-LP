@@ -2115,6 +2115,7 @@ def main():
     import season_feature
     season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）
     industry_thumbs.apply_share_images(SITE, SITE_URL)  # 業種LP・業種ページの共有画像を業種の画像に
+    industry_thumbs.apply_scene_bands(SITE)  # 業種・調査・ツール・よくある質問の冒頭の下に現場の写真
     hide_data_pages()
     ensure_og()
     build_sitemap(entries)

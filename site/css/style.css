@@ -1633,3 +1633,8 @@ main.lab .cta-final h2 { color: #fff; }
 .rk .rk-n { font-weight: 800; color: var(--blue); width: 3em; }
 .rk .rk-d { font-weight: 700; color: var(--navy); }
 .rk .rk-c, .rk .rk-m { text-align: right; }
+/* 現場の写真（industry_thumbs.apply_scene_bands） */
+.scene-band { position: relative; max-width: 1180px; margin: 1.6rem auto 2.4rem; padding: 0 var(--gutter); }
+.scene-band img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; border-radius: 24px; box-shadow: var(--shadow-lg); }
+@media (max-width: 720px) { .scene-band img { aspect-ratio: 16 / 10; border-radius: 16px; } }
+.scene-band figcaption { position: absolute; left: calc(var(--gutter) + 1.4rem); bottom: 1.2rem; color: #fff; font-weight: 700; text-shadow: 0 2px 12px rgba(7, 26, 56, .6); }

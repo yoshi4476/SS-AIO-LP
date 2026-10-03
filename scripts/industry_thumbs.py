@@ -136,9 +136,70 @@ def variants(k):
     return sorted(p.name for p in DIR.glob(f"aio-{k}*.jpg") if rx.match(p.name))
 
 
+# 現場の写真（site/images/scenes/<鍵>.webp）。業種ページ・業種LP・調査・ツール・よくある質問の冒頭の下に、
+# その業種や話題の場面を1枚置く。文字だけの面が続くと、どの業種の話かが一目で分からない。
+SCENE_ALT = {
+    "shika": "歯科医院の診療室で、歯科医師が患者を診る様子",
+    "clinic": "明るい診察室で、医師が患者と話す様子",
+    "seikotsuin": "整骨院で、施術者が患者の肩を施術する様子",
+    "fudosan": "不動産会社の担当者が、マンションの前でお客様に説明する様子",
+    "koumuten": "完成した木の家の前に立つ工務店の担当者と施主",
+    "shigyou": "書棚のある事務所で、士業の専門家が相談に応じる様子",
+    "btob": "ガラス張りの会議室で、商談がまとまり握手する様子",
+    "tools": "ノートパソコンでサイトの分析を確かめる経営者",
+    "faq": "オンラインで相談に答える担当者",
+    "research": "複数の画面でデータを読み解く分析担当",
+}
+SCENE_OF = {"medical": "clinic", "reform": "koumuten"}   # 業種LP の名前・業種ページの slug → 写真の鍵
+
+
+def scene_band(key, caption=""):
+    """冒頭の下に置く横長の写真。写真が無ければ空"""
+    import html as _h
+    k = SCENE_OF.get(key, key)
+    if not (ROOT / "site" / "images" / "scenes" / f"{k}.webp").is_file():
+        return ""
+    cap = f'<figcaption>{_h.escape(caption)}</figcaption>' if caption else ""
+    return (f'<figure class="scene-band"><img src="/images/scenes/{k}.webp" alt="{_h.escape(SCENE_ALT.get(k, ""))}" '
+            f'width="1600" height="900" loading="lazy" decoding="async">{cap}</figure>')
+
+
 # 業種LP（site/lp/<名前>/）と業種ページ（site/industry/<slug>/）の共有画像を、その業種の画像にする。
 # 共通の画像のままだと、LINE や X で「不動産のAIO対策」のページを共有しても、どの業種の話か伝わらない
 LP_KEY = {"medical": "clinic", "fudosan": "fudosan", "koumuten": "koumuten", "shigyou": "shigyou"}
+
+
+def apply_scene_bands(site: Path):
+    """業種ページ・業種LP・調査・質問集・ツール・よくある質問の、最初の区画の直後に写真を1枚置く（何度呼んでも同じ）"""
+    import re as _re
+    R2K = {"dental": "shika", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten", "shigyou": "shigyou"}
+    jobs = [(p, p.parent.name) for p in (site / "industry").glob("*/index.html")]
+    jobs += [(site / "lp" / k / "index.html", k) for k in LP_KEY]
+    for r, k in R2K.items():
+        jobs += [(site / "research" / f"{r}-ai-sources" / "index.html", k),
+                 (site / "research" / f"{r}-ai-sources" / "questions" / "index.html", "research")]
+    jobs += [(site / "research" / "ranking" / "index.html", "research"),
+             (site / "tools" / "index.html", "tools"), (site / "faq" / "index.html", "faq")]
+    n = 0
+    for p, key in jobs:
+        band = scene_band(key)
+        if not p.is_file() or not band:
+            continue
+        s = p.read_text(encoding="utf-8")
+        s0 = s
+        s = _re.sub(r"\n?<!-- scene -->.*?<!-- /scene -->\n?", "", s, flags=_re.S)   # 前後の改行ごと外す（作り直しで空行が増えない）
+        m = _re.search(r'<section class="(?:lx-hero|hero|tools-head)[^"]*"', s)
+        if not m:
+            continue
+        end = s.find("</section>", m.end())
+        if end < 0:
+            continue
+        end += len("</section>")
+        s = s[:end] + f"\n<!-- scene -->{band}<!-- /scene -->\n" + s[end:]
+        if s != s0:
+            p.write_text(s, encoding="utf-8", newline="")
+            n += 1
+    return n
 
 
 def apply_share_images(site: Path, site_url: str):
