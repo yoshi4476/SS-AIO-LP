@@ -2270,6 +2270,10 @@ def test_lessons_2026_10_03():
     check("記事に自社の補助金の採択の実績が無い", claims, [])
     facts = json.loads((ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8"))["facts"]
     check("一次情報の台帳に自社の採択の実績が無い", [f["id"] for f in facts if own.search(f.get("claim", ""))], [])
+    # 9. 配信の処理が配信先を reset --hard し、手元でコミット前だった修正を消した
+    pub = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
+    i_dirty, i_reset = pub.find('"status", "--porcelain"'), pub.find('"reset", "--hard", "FETCH_HEAD"')
+    check("配信は、配信先にコミットしていない変更があれば reset の前に止める", 0 <= i_dirty < i_reset, True)
     # 7. 動画の差し替えで古い版を先に下げ、上限（uploadLimitExceeded）で新しい版が上がらず動画が無くなった
     av = (ROOT / "scripts" / "article_videos.py").read_text(encoding="utf-8")
     up, down = av.find("YT.upload(out, r[\"slug\"]"), av.find("YT.set_privacy(old[\"youtube\"]")

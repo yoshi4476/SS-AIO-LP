@@ -167,6 +167,14 @@ def ensure_clone(cfg, token):
             print("  配信先に途中の rebase が残っていたので中断しました")
         if (g / "MERGE_HEAD").exists():
             try_run(["git", "merge", "--abort"], cwd=dest)
+        # 手元で配信先を直接直していると、この reset で黙って消える（2026-10-03: 補助金サイトの
+        # トップ・運営者情報・記事の雛形の修正を、コミット前に配信し直して失った）。手元では止めて知らせる
+        if not os.environ.get("GITHUB_ACTIONS"):
+            dirty = subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], cwd=dest,
+                                   capture_output=True, text=True, encoding="utf-8").stdout.strip()
+            if dirty:
+                raise SystemExit(f"配信先 {dest} にコミットしていない変更があります。先にコミットするか、"
+                                 f"要らなければ git -C \"{dest}\" checkout -- . で戻してから配信してください:\n{dirty[:600]}")
         run(["git", "fetch", "--depth", "1", auth_url, cfg["branch"]], cwd=dest, env=env)
         run(["git", "reset", "--hard", "FETCH_HEAD"], cwd=dest)
     return dest
