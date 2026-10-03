@@ -175,6 +175,13 @@ QUESTIONS["shigyou"] = {
     },
 }
 
+# 歯科・クリニック・不動産・工務店・士業のほかの業種（research_extra.py が下書きした質問の組）
+try:
+    import research_extra as _RX
+    QUESTIONS.update({k: v for k, v in _RX.load().items() if k not in QUESTIONS})
+except Exception:
+    pass
+
 CATS = {
     "portal": "予約・比較ポータル",
     "clinic": "医院・クリニックの公式サイト",
@@ -229,9 +236,10 @@ def estimate(n):
     return usd
 
 
-def ask_all(ind, workers=6):
+def ask_all(ind, workers=6, sub=False):
     import ai_cite_check as AC
-    eng = AC.engines_available()
+    # sub=True は課金APIを使わない（ChatGPT・Claude はサブスク、Gemini は無料枠）
+    eng = AC.subscription_engines() if sub else AC.engines_available()
     qs = questions(ind)
     tasks = [(g, q, name) for g, q in qs for name in eng]
     res = defaultdict(dict)
@@ -358,7 +366,9 @@ ENGINE_NOTE = {"ChatGPT": "gpt-4.1-mini＋Web検索", "Gemini": "Gemini Flash＋
 
 # 業種ハブ（data/industries.json の slug）→ 調査。記事・業種ハブ・提案書・調査ページがここを見る
 HUB_TO_RESEARCH = {"shika": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
-                   "reform": "koumuten", "shigyou": "shigyou"}
+                   "reform": "koumuten", "shigyou": "shigyou",
+                   # research_extra.py で広げた業種（集計が無いうちは headline が None なので案内は出ない）
+                   "seikotsuin": "seikotsuin", "biyou": "biyou", "inshokuten": "inshoku", "btob": "saas"}
 # 調査 → チェックリスト（checklist_make.py の業種）
 RESEARCH_TO_CHECKLIST = {"dental": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten",
                          "shigyou": "shigyou"}
@@ -389,6 +399,10 @@ def group_for(ind, title):
             for n in names:
                 if n in groups:
                     return n
+                # 業種によって種類の名前が「費用・保険」のように変わる
+                hit = next((g for g in groups if g.startswith(n.split("・")[0])), None)
+                if hit:
+                    return hit
     return None
 
 
@@ -401,6 +415,11 @@ def group_breakdown(ind, group):
     n = pa["answers"]
     rows = sorted(((round(pa.get(k, 0) / n * 100, 1), k) for k in CATS if pa.get(k)), reverse=True)
     return {"answers": n, "questions": len(QUESTIONS[ind]["groups"].get(group, [])), "rows": rows}
+
+
+def _lpu(T):
+    """業種別のLPがある業種はそのLP、無い業種は全業種のLP"""
+    return f"/lp/{T['lp']}/" if T.get("lp") else "/lp/"
 
 
 def research_box(hub_slug, title=""):
@@ -485,7 +504,7 @@ def hero(ind):
             f'回答の出典になったサイトの種類を数えました。</p>'
             f'<p class="lx-alt">集計データ: <a href="/research/{ind}-ai-sources/data.csv" download>CSVをダウンロード</a>'
             f' ／ <a href="/download/?ind={RESEARCH_TO_CHECKLIST.get(ind, "")}" data-cta="research_hero_checklist_{ind}">チェックリスト（PDF）を受け取る</a>'
-            f' ／ {H.escape(T["owner"])}向けの対策: <a href="/lp/{T["lp"]}/" data-cta="research_hero_lp_{T["lp"]}">{H.escape(T["lp_name"])}</a></p>'
+            f' ／ {H.escape(T["owner"])}向けの対策: <a href="{_lpu(T)}" data-cta="research_hero_lp_{T["lp"]}">{H.escape(T["lp_name"])}</a></p>'
             f'</div><div class="lx-console ilp-console" aria-label="調査の要点">'
             f'<div class="lx-console-head"><b>要点</b><small>{hl["questions"]}問×4つのAI・{hl["date"]}</small></div>'
             f'<div class="lx-stat"><b>{H.escape(first[0])}</b><span>{H.escape(first[1])}</span></div>'
@@ -501,9 +520,9 @@ def cta_band(ind):
             f'<h2>{T["owner"]}のサイトは、AIと検索に読まれていますか？</h2>'
             '<p>URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを30秒で診断します。</p>'
             '<div class="btns">'
-            f'<a class="btn btn-primary" href="/lp/{T["lp"]}/#scan-start" data-cta="research_band_scan_{ind}">30秒で無料診断する</a>'
+            f'<a class="btn btn-primary" href="{_lpu(T)}#scan-start" data-cta="research_band_scan_{ind}">30秒で無料診断する</a>'
             f'<a class="btn btn-ghost" href="/tools/ai-check/" data-cta="research_band_aicheck_{ind}">自社がAIにどう紹介されているか確かめる</a>'
-            f'<a class="btn btn-ghost" href="/lp/{T["lp"]}/" data-cta="research_band_lp_{ind}">{T["lp_name"]}を見る</a></div></div></section>')
+            f'<a class="btn btn-ghost" href="{_lpu(T)}" data-cta="research_band_lp_{ind}">{T["lp_name"]}を見る</a></div></div></section>')
 
 
 def render(ind):
@@ -634,9 +653,11 @@ def main():
     ap.add_argument("--industry", default="dental", choices=sorted(QUESTIONS))
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--classify", action="store_true")
+    ap.add_argument("--sub", action="store_true", help="課金APIを使わず、サブスクと無料枠だけで聞く")
     a = ap.parse_args()
     qs = questions(a.industry)
-    print(f"■ {QUESTIONS[a.industry]['name']}: 質問{len(qs)}問 / 見積もり 約${estimate(len(qs)):.1f}（Claudeはサブスク・Geminiは無料枠）")
+    cost = "課金なし（ChatGPT・Claude はサブスク、Gemini は無料枠）" if a.sub else f"見積もり 約${estimate(len(qs)):.1f}（Claudeはサブスク・Geminiは無料枠）"
+    print(f"■ {QUESTIONS[a.industry]['name']}: 質問{len(qs)}問 / {cost}")
     for g, items in QUESTIONS[a.industry]["groups"].items():
         print(f"   {g}: {len(items)}問")
     if a.dry_run:
@@ -647,7 +668,7 @@ def main():
         raw = json.loads(raw_path.read_text(encoding="utf-8"))
     else:
         t0 = time.time()
-        raw = ask_all(a.industry)
+        raw = ask_all(a.industry, sub=a.sub)
         raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"  聞き終わりました（{(time.time() - t0) / 60:.0f}分）")
     cls = classify(raw)

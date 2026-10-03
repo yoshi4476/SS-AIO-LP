@@ -62,6 +62,7 @@ FOOTER_NAV_DEFAULT = [
     {"label": "はじめての方へ", "url": "/start/"},
     {"label": "業種から探す", "url": "/industry/"},
     {"label": "実測データ（一次データ）", "url": "/data/"},
+    {"label": "業種別のAI調査", "url": "/research/"},
     {"label": "無料資料ダウンロード", "url": "/download/"},
     {"label": "記事一覧", "url": "/blog/"},
     {"label": "用語集", "url": "/glossary/"},
@@ -209,7 +210,7 @@ CATEGORIES = {
 
 # privacy/tokushoho は noindex のため sitemap から除外（noindex×sitemap掲載の矛盾を防ぐ）
 # glossary/ は build_sitemap の生成ページのループが出す（ここにも書くと2回載る）
-STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "tools/", "faq/", "tools/url-check/", "tools/ai-check/", "tools/aio-check/", "tools/kuchikomi-henshin/", "tools/meo-check/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/"]
+STATIC_PAGES = ["", "aio/", "seo/", "meo/", "ai-marketing/", "about/", "contact/", "download/", "lp/", "blog/", "tools/", "faq/", "tools/url-check/", "tools/ai-check/", "tools/aio-check/", "tools/kuchikomi-henshin/", "tools/meo-check/", "author/haraguchi/", "start/", "editorial-policy/", "lab/", "data/", "research/"]
 
 
 def jp_date(iso: str) -> str:
@@ -1492,6 +1493,31 @@ def build_research_pages(all_metas=()):
         out.write_text(page, encoding="utf-8", newline="\n")
         (out.parent / "data.csv").write_text(csv, encoding="utf-8-sig", newline="\n")
         made.append(ind)
+    if made:
+        # 全業種の調査の一覧（/research/）。業種ごとの要点の数字は headline() からだけ取る
+        import html as _h
+        rows = []
+        for ind in made:
+            hl = IAS.headline(ind)
+            if not hl:
+                continue
+            T = hl["T"]
+            rows.append(f'<li><a href="/research/{ind}-ai-sources/"><strong>{_h.escape(hl["name"])}</strong>'
+                        f'<span class="cnt">{hl["questions"]}問・{hl["date"][:7].replace("-", "年")}月</span></a>'
+                        f'<span class="hub-lead">「地域で探す」の質問では、出典の{hl["lp"]}%が{_h.escape(T["portal"])}、'
+                        f'{hl["lc"]}%が{_h.escape(T["owner_site"])}。{_h.escape(T["other_short"])}の質問では、'
+                        f'回答の{hl["oa"]}%が{_h.escape(T["owner_site"])}を出典にしていました。</span></li>')
+        body = ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>業種別のAI調査</h2>'
+                f'<span class="cnt">{len(rows)}業種</span></div>'
+                '<p class="hub-lead">業種ごとに、お客様がAIに聞きそうな質問を ChatGPT・Gemini・Claude などに聞き、'
+                'AIが何を出典に答えているかを数えた当社の調査です。数字は各業種の調査ページに、集計の方法と元のデータ（CSV）と一緒に載せています。</p>'
+                f'<ul class="hub-list">{"".join(rows)}</ul></div>')
+        page = BLOG_PAGE.format(items=body, **page_shell(
+            "業種別のAI調査", "業種ごとに、AIが何を出典に答えているかを数えた当社の調査の一覧です。"))
+        page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/research/")
+        page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+        (SITE / "research").mkdir(parents=True, exist_ok=True)
+        (SITE / "research" / "index.html").write_text(page, encoding="utf-8", newline="\n")
     return made
 
 

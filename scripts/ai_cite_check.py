@@ -104,6 +104,42 @@ def ask_openai(q):
     return urls
 
 
+def ask_chatgpt_codex(q):
+    """ChatGPT のサブスク（Codex CLI の Web検索）で聞く。課金APIは使わない。
+    出典は構造で返らないので、参照したURLを1行ずつ書かせて拾う（本文中のリンクも拾う）"""
+    import shutil
+    import subprocess
+    import tempfile
+    exe = shutil.which("codex") or shutil.which("codex.cmd")
+    if not exe:
+        return None
+    prompt = (f"次の質問に、Web検索をして日本語で答えてください。\n質問: {q}\n\n"
+              "答えの最後に、検索で見て根拠にしたページのURLを全部、1行に1つずつ `SOURCE: <URL>` の形で書いてください。")
+    with tempfile.TemporaryDirectory() as tmp:
+        # 指示は標準入力で渡す（Windows の codex.cmd は引数の改行で切れる）
+        r = subprocess.run([exe, "--search", "exec", "--skip-git-repo-check", "--ephemeral", "-s", "read-only",
+                            "-c", 'model_reasoning_effort="low"', "-"], input=prompt, cwd=tmp, capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=420)
+    if r.returncode != 0:
+        raise RuntimeError(f"codex exec が失敗しました: {(r.stderr or r.stdout)[-160:]}")
+    out = r.stdout or ""
+    urls = re.findall(r"SOURCE:\s*<?(https?://[^\s>)]+)", out) or re.findall(r"\]\((https?://[^)\s]+)\)", out)
+    return list(dict.fromkeys(urls))
+
+
+def subscription_engines():
+    """課金APIを使わない聞き方: ChatGPT（サブスクの Codex）・Gemini（無料枠のAPIキー）・Claude（サブスクの Claude Code）"""
+    out = {}
+    import shutil
+    if shutil.which("codex") or shutil.which("codex.cmd"):
+        out["ChatGPT"] = _cached("ChatGPT-sub", ask_chatgpt_codex)
+    if _env("GEMINI_API_KEY"):
+        out["Gemini"] = _cached("Gemini", ask_gemini)
+    if _claude_cli_ready():
+        out["Claude"] = _cached("Claude-sub", ask_claude_cli)
+    return out
+
+
 def ask_gemini(q):
     key = _env("GEMINI_API_KEY")
     if not key:

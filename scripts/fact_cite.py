@@ -92,7 +92,8 @@ def insert(slug, fact, saved=None):
     src = fact.get("source") or "自社の実測"
     sentence = f"{MARK}、{fact['claim'].rstrip('。')}（出典: {src}）。"
     new_seg = paras[0] + "\n\n" + sentence + ("\n\n" + paras[1] if len(paras) > 1 else "")
-    new_body = body[:start] + "\n\n" + new_seg.strip("\n") + "\n" + body[start + len(seg):]
+    # 次の見出しの前の空行を残す（"\n" 1つだと、区間の最後が表のとき表と見出しがつながって崩れた）
+    new_body = body[:start] + "\n\n" + new_seg.strip("\n") + "\n\n" + body[start + len(seg):].lstrip("\n")
     if _counts(new_body) != _counts(body):
         return False, "段落・表・見出しの数が変わる"
     nums_before = set(re.findall(r"\d[\d,.]*", body))
