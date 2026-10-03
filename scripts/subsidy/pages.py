@@ -453,6 +453,75 @@ if seido_pairs:
         f'  <ul class="filters" style="list-style:none">{lis}</ul>'), encoding="utf-8")
     print(f"生成: seido/index.html ({len(seido_pairs)}制度)")
 
+# ---- AIへの聞き取り調査（/research/ai-hojokin/）。一覧の枠ではなく、読み物の枠で出す ----
+def research_shell(url_path, title, desc, h1, lead, body, crumb_leaf, jsonld_extra=""):
+    return f'''<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{DOMAIN}{url_path}">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{DOMAIN}{url_path}">
+<meta property="og:image" content="{DOMAIN}/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" type="image/png" href="/favicon.png">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@graph": [
+    {{ "@type": "WebPage", "url": "{DOMAIN}{url_path}", "name": "{title}",
+      "publisher": {{ "@type": "Organization", "@id": "{DOMAIN}/#org", "name": "セブンセンシズ株式会社" }} }},
+    {{ "@type": "BreadcrumbList", "itemListElement": [
+      {{ "@type": "ListItem", "position": 1, "name": "ホーム", "item": "{DOMAIN}/" }},
+      {{ "@type": "ListItem", "position": 2, "name": "{crumb_leaf}" }} ] }}{jsonld_extra}
+  ]
+}}
+</script>
+<style>{STYLE}
+table{{border-collapse:collapse;width:100%;font-size:.92rem}}th,td{{border:1px solid #e3e7ee;padding:8px;text-align:left;vertical-align:top}}
+thead th{{background:#f6f8fb}}small{{color:#5b6474}}</style>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-MXQQM8DJTS');
+window.addEventListener('load',function(){{setTimeout(function(){{var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MXQQM8DJTS';document.head.appendChild(s);}},1200);}});</script>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="/"><img src="/assets/img/logo-h.webp" alt="SEVEN SENSES セブンセンシズ株式会社" width="372" height="148"></a>
+    <a class="cta" href="/#contact">無料で相談する</a>
+  </div>
+</header>
+<main>
+<div class="main-col">
+  <nav class="crumb" aria-label="パンくず"><a href="/">ホーム</a> › {crumb_leaf}</nav>
+  <p class="kicker">調査 — 当社調べ</p>
+  <h1>{h1}</h1>
+  <p class="lead">{lead}</p>
+{body}
+{AUTHOR}
+</div>
+{SIDEBAR}
+</main>
+{FOOTER}
+</body>
+</html>
+'''
+
+
+research_done = None
+try:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import research as _RS
+    research_done = _RS.build(ROOT, DOMAIN, research_shell)
+    print(f"生成: {research_done[0]}" if research_done else "AIへの聞き取り調査: 材料が足りないのでページを作らない")
+except Exception as e:
+    print(f"AIへの聞き取り調査のページを作れませんでした: {e}")
+
 # ---- sitemap.xml ----
 STATIC = [("/", "2026-07-21", "1.0"), ("/blog/", "2026-07-21", "0.8"),
           ("/service/hojokin/", "2026-07-21", "0.9"), ("/service/dev/", "2026-07-21", "0.8"),
@@ -474,6 +543,8 @@ if hub_pairs:
         urls.append(f"  <url>\n    <loc>{DOMAIN}/industry/{i['slug']}/</loc>\n    <lastmod>{v[0]['date']}</lastmod>\n    <priority>0.6</priority>\n  </url>")
         if i["slug"] in hub_faqs:
             urls.append(f"  <url>\n    <loc>{DOMAIN}/industry/{i['slug']}/faq/</loc>\n    <lastmod>{v[0]['date']}</lastmod>\n    <priority>0.6</priority>\n  </url>")
+if research_done:
+    urls.append(f"  <url>\n    <loc>{DOMAIN}{research_done[0]}</loc>\n    <lastmod>{research_done[1]}</lastmod>\n    <priority>0.7</priority>\n  </url>")
 if seido_pairs:
     urls.append(f"  <url>\n    <loc>{DOMAIN}/seido/</loc>\n    <lastmod>{arts[0]['date']}</lastmod>\n    <priority>0.6</priority>\n  </url>")
     for s, _, v in seido_pairs:
@@ -488,6 +559,8 @@ if llms_path.is_file():
     lines = ["", "## ブログ記事(全記事・新しい順)", ""]
     for a in arts:
         lines.append(f"- [{a['title']}]({DOMAIN}/blog/{a['slug']}/): {a['desc'][:70]}")
+    if research_done:
+        lines += ["", "## 当社の調査", "", research_done[2]]
     lines += ["",
               "## 記事カテゴリ",
               "",

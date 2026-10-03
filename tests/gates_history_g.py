@@ -219,3 +219,13 @@ def test_ai_check_funnel_is_wired():
     check("F5: data-cta の文字リンクも計測する", "hasAttribute('data-cta')" in sj, True)
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("F5: 段階ごとの数を週次で出す", "aicheck_funnel.py" in wf, True)
+
+
+def test_subsidy_research_page_does_not_judge_answers():
+    """補助金サイトの AI 聞き取り調査のページは「AIが何と答えたか」の記録。当社が正誤を判定しない
+    （公式の要件と違う判断を当社の見解として広めない）。調べ方・日付・CSV を必ず載せる（2026-10-04）"""
+    src = (ROOT / "scripts" / "subsidy" / "research.py").read_text(encoding="utf-8")
+    check("調査ページ: 正誤を判定しないと明記する", "正しいかを判定していません" in src, True)
+    check("調査ページ: 調べ方と限界・CSV を載せる", "調べ方と限界" in src and "data.csv" in src, True)
+    pg = (ROOT / "scripts" / "subsidy" / "pages.py").read_text(encoding="utf-8")
+    check("調査ページ: サイトマップと llms.txt に載せる", pg.count("research_done") >= 4, True)
