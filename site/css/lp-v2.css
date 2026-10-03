@@ -289,3 +289,7 @@
 @media (max-width: 560px) {
   .lx-hero--top .lx-form { grid-template-columns: 1fr; }
 }
+
+/* 待ち受けの静止画は動きを控える設定でも出す（動画だけ止める） */
+.lx-hero-still { transition: opacity .8s; }
+@media (prefers-reduced-motion: reduce) { .lx-hero-video.lx-hero-still { display: block; } }
