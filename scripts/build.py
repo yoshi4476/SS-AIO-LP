@@ -1297,9 +1297,9 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 </nav>
 
 <section class="hero">
-  <span class="kicker">All Articles</span>
+  <span class="kicker">{kicker}</span>
   <h1>{h1}</h1>
-  <p class="lead">SEO・AIO・LLMOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。</p>
+  <p class="lead">{lead}</p>
 </section>
 
 <section class="section" style="padding-top:1rem;">
@@ -1351,6 +1351,10 @@ def page_shell(h1="記事一覧", desc=""):
     どのページも見出しが「記事一覧」になる
     """
     desc = re.sub(r"\s+", " ", str(desc or "")).strip()
+    # 見出しの下に出す説明。業種・用語・質問集のページでも「記事一覧」の説明文が出ていたので、渡された説明を出す
+    lead = desc or "SEO・AIO・LLMOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。"
+    kicker = ("FAQ" if "よくある質問" in h1 else "Glossary" if h1 == "用語集" or h1.endswith("とは")
+              else "Industry" if h1.endswith("の集客") or h1 == "業種から探す" else "All Articles")
     if len(desc) > 120:                  # 文の途中で切らない（120字以内の最後の「。」まで）
         cut = desc[:120].rfind("。")
         desc = desc[:cut + 1] if cut >= 40 else desc[:120]
@@ -1378,7 +1382,8 @@ def page_shell(h1="記事一覧", desc=""):
         title += "まとめ｜集客の手順と実例"
     return dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
-                h1=_html_escape(h1), title=_html_escape(title), desc=_html_escape(desc), **_cta())
+                h1=_html_escape(h1), title=_html_escape(title), desc=_html_escape(desc),
+                lead=_html_escape(lead), kicker=kicker, **_cta())
 
 
 def hub_json_ld(name, url, metas, desc=""):
@@ -2116,6 +2121,7 @@ def main():
     season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）
     industry_thumbs.apply_share_images(SITE, SITE_URL)  # 業種LP・業種ページの共有画像を業種の画像に
     industry_thumbs.apply_scene_bands(SITE)  # 業種・調査・ツール・よくある質問の冒頭の下に現場の写真
+    industry_thumbs.apply_shelf_bands(SITE)  # 用語集・テーマ・比較表の見出しの下に、写真の棚から内容に合う写真
     hide_data_pages()
     ensure_og()
     build_sitemap(entries)

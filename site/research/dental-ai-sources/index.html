@@ -54,6 +54,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 .ilp-band .btns{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
 .ilp-band .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
 .ilp-faq details{border-bottom:1px solid var(--line);padding:1rem 0}
+.ilp-faq-grid{display:grid;gap:1.6rem}
+@media(min-width:900px){.ilp-faq-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.4rem;align-items:start}.ilp-faq-ph{position:sticky;top:96px}}
+.ilp-faq-ph{margin:0;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-md)}
+.ilp-faq-ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
 .ilp-faq summary{font-weight:700;cursor:pointer;list-style-position:outside}
 .ilp-faq details p{margin:.6rem 0 0;color:var(--muted);line-height:1.85}
 .ilp-more{margin-top:1rem}
@@ -146,10 +150,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <section><span class="ilp-eb">Articles</span><h2>この業種の記事</h2><ul class="post-list">
     <li class="cat-aio"><a href="/aio/shika-ai-kensaku-denai-genin/"><span class="thumb"><img src="/images/thumbs/aio-shika.webp" alt="歯科医院がAI検索に出ない5つの原因｜医療広告ガイドラインとMEOの壁のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-20">2026.09.20</time><h3>歯科医院がAI検索に出ない5つの原因｜医療広告ガイドラインとMEOの壁<span class="tag">AIO・LLMO</span></h3></a></li>
     <li class="cat-aio"><a href="/aio/shika-aio-taisaku-hiyou/"><span class="thumb"><img src="/images/thumbs/aio-shika.webp" alt="歯科医院のAIO対策にかかる費用はいくら？内訳と相場【2026年】のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-20">2026.09.20</time><h3>歯科医院のAIO対策にかかる費用はいくら？内訳と相場【2026年】<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-seo"><a href="/seo/shika-seo-taisaku/"><span class="thumb"><img src="/images/shika-seo-taisaku/eyecatch.png" alt="歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-18">2026.08.18</time><h3>歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ<span class="tag">SEO</span></h3></a></li>
-    <li class="cat-meo"><a href="/meo/shika-reform-hiyou/"><span class="thumb"><img src="/images/shika-reform-hiyou/eyecatch.png" alt="歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-10">2026.09.10</time><h3>歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応<span class="tag">MEO</span></h3></a></li>
-    <li class="cat-meo"><a href="/meo/shika-heiin-hiyou/"><span class="thumb"><img src="/images/shika-heiin-hiyou/eyecatch.png" alt="歯科医院の閉院費用とは？相場と見落としがちな3つの後始末のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-09">2026.09.09</time><h3>歯科医院の閉院費用とは？相場と見落としがちな3つの後始末<span class="tag">MEO</span></h3></a></li>
-    <li class="cat-meo"><a href="/meo/shika-kaigyou-hiyou/"><span class="thumb"><img src="/images/shika-kaigyou-hiyou/eyecatch.png" alt="歯科医院の開業費用は5000万円？内訳と抑え方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-09">2026.09.09</time><h3>歯科医院の開業費用は5000万円？内訳と抑え方<span class="tag">MEO</span></h3></a></li>
+    <li class="cat-seo"><a href="/seo/shika-seo-taisaku/"><span class="thumb"><img src="/images/shelf/dental-1.webp" alt="歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-18">2026.08.18</time><h3>歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ<span class="tag">SEO</span></h3></a></li>
+    <li class="cat-meo"><a href="/meo/shika-reform-hiyou/"><span class="thumb"><img src="/images/shelf/dental-2.webp" alt="歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-10">2026.09.10</time><h3>歯科医院のリフォーム費用とは？坪単価30万〜100万円と休診中のMEO対応<span class="tag">MEO</span></h3></a></li>
+    <li class="cat-meo"><a href="/meo/shika-heiin-hiyou/"><span class="thumb"><img src="/images/shelf/dental-2.webp" alt="歯科医院の閉院費用とは？相場と見落としがちな3つの後始末のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-09">2026.09.09</time><h3>歯科医院の閉院費用とは？相場と見落としがちな3つの後始末<span class="tag">MEO</span></h3></a></li>
+    <li class="cat-meo"><a href="/meo/shika-kaigyou-hiyou/"><span class="thumb"><img src="/images/shelf/dental-2.webp" alt="歯科医院の開業費用は5000万円？内訳と抑え方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-09">2026.09.09</time><h3>歯科医院の開業費用は5000万円？内訳と抑え方<span class="tag">MEO</span></h3></a></li>
 </ul></section>
 <section><h2>質問ごとの出典</h2><p>100問それぞれについて、どの種類のサイトが出典になったかを<a href="/research/dental-ai-sources/questions/" data-cta="research_dental_questions">質問集</a>にまとめています。 地域で探す質問の出典の月ごとの順位は、<a href="/research/ranking/" data-cta="research_ranking">ランキング</a>で見られます。</p></section>
 <section><h2>引用する場合</h2><p class="rs-cite">セブンセンシズ株式会社の調査（2026年10月、歯科に関する100問を4つのAIに質問）では、「大阪 歯医者 おすすめ」のような医院を探す質問の出典は、73.1%が予約・比較ポータル、21.3%が医院・クリニックの公式サイトでした。費用・治療・症状などを調べる質問では、出典の78.7%が医院・クリニックの公式サイトで、回答の96.5%が医院・クリニックの公式サイトを1つ以上出典にしていました。</p>

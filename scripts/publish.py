@@ -235,6 +235,15 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     }
     if meta.get("eyecatch"):
         out["eyecatch"] = meta["eyecatch"]
+    # 一覧・記事の頭に出す写真（写真の棚から内容に合う1枚）。共有画像の eyecatch は文字のカードのまま
+    try:
+        import photo_shelf
+        _, url = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), meta["slug"])
+        photo = photo_shelf.copy_to(dest / "public", url) if url else ""
+        if photo:
+            out["photo"] = photo
+    except Exception as e:
+        print(f"  写真の棚をスキップ: {e}")
     # 多言語の要約（指示のある社だけ）。Next.js 側はこの translations を読んで /en/… を出す
     # （表示の実装は配信先のアプリ側。無ければ JSON に載っているだけで害は無い）
     langs = [l for l in (cfg.get("languages") or []) if l in ("en", "zh", "ko")]
@@ -593,8 +602,14 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     thumb_url = None
     try:
         import pick_photo
-        lib = dest / "assets" / "img"
-        name, src_img, sc = pick_photo.pick(meta["title"], body, lib)
+        import photo_shelf
+        # まず3サイト共通の写真の棚から（業種・作業ごとに複数枚）。棚が空のときだけ配信先の在庫写真に戻る
+        name, url = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), meta["slug"])
+        src_img = photo_shelf.DIR / f"{Path(url).stem}.webp" if url else None
+        sc = "棚"
+        if not (src_img and src_img.is_file()):
+            lib = dest / "assets" / "img"
+            name, src_img, sc = pick_photo.pick(meta["title"], body, lib)
         if src_img:
             t = dest / "images" / "blog" / meta["slug"] / "thumbnail.webp"
             pick_photo.make_thumbnail(src_img, t)
@@ -620,6 +635,16 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     shutil.copy2(src, md)
 
     written = [page, md] + _update_external_index(dest, cfg, meta)
+    # 補助金サイトは記事の冒頭と一覧の見出し下に写真を置く（subsidy_photos。何度呼んでも同じ）。
+    # サムネイルを作った後に呼ぶ（記事の冒頭はそのサムネイルを出す）
+    if (dest / "assets" / "img" / "hero-owner.webp").is_file():
+        try:
+            import subsidy_photos
+            for p in (page, dest / "blog" / "index.html"):
+                if p.is_file():
+                    subsidy_photos.decorate_file(dest, p)
+        except Exception as e:
+            print(f"  写真の配置をスキップ: {e}")
 
     # アイキャッチと本文図解も配信先へ複製する。
     # 本文は /images/<slug>/… を参照しているのに複製していなかったため、

@@ -54,6 +54,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 .ilp-band .btns{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
 .ilp-band .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
 .ilp-faq details{border-bottom:1px solid var(--line);padding:1rem 0}
+.ilp-faq-grid{display:grid;gap:1.6rem}
+@media(min-width:900px){.ilp-faq-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.4rem;align-items:start}.ilp-faq-ph{position:sticky;top:96px}}
+.ilp-faq-ph{margin:0;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-md)}
+.ilp-faq-ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
 .ilp-faq summary{font-weight:700;cursor:pointer;list-style-position:outside}
 .ilp-faq details p{margin:.6rem 0 0;color:var(--muted);line-height:1.85}
 .ilp-more{margin-top:1rem}
@@ -145,10 +149,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 <section><span class="ilp-eb">Articles</span><h2>この業種の記事</h2><ul class="post-list">
     <li class="cat-aio"><a href="/aio/fudousan-llmo-taisaku/"><span class="thumb"><img src="/images/thumbs/aio-fudosan.webp" alt="不動産のLLMO対策とは？AIに選ばれる5つの条件のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-16">2026.09.16</time><h3>不動産のLLMO対策とは？AIに選ばれる5つの条件<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-seo"><a href="/seo/fudousan-seo-consulting/"><span class="thumb"><img src="/images/fudousan-seo-consulting/eyecatch.png" alt="不動産SEOコンサルティングとは？外注との違いと費用相場のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-01">2026.09.01</time><h3>不動産SEOコンサルティングとは？外注との違いと費用相場<span class="tag">SEO</span></h3></a></li>
-    <li class="cat-seo"><a href="/seo/fudousan-seo-kaisha-erabikata/"><span class="thumb"><img src="/images/fudousan-seo-kaisha-erabikata/eyecatch.png" alt="不動産SEO会社への外注は必要か？費用相場と6つの判断軸のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-01">2026.09.01</time><h3>不動産SEO会社への外注は必要か？費用相場と6つの判断軸<span class="tag">SEO</span></h3></a></li>
-    <li class="cat-seo"><a href="/seo/fudousan-seo-kiji-writer/"><span class="thumb"><img src="/images/fudousan-seo-kiji-writer/eyecatch.png" alt="不動産SEO記事のライター選び方｜失敗しない5つの基準のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-31">2026.08.31</time><h3>不動産SEO記事のライター選び方｜失敗しない5つの基準<span class="tag">SEO</span></h3></a></li>
-    <li class="cat-seo"><a href="/seo/fudousan-seo-taisaku/"><span class="thumb"><img src="/images/fudousan-seo-taisaku/eyecatch.png" alt="不動産SEOとは？反響を増やす5つの施策と始め方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-29">2026.08.29</time><h3>不動産SEOとは？反響を増やす5つの施策と始め方<span class="tag">SEO</span></h3></a></li>
+    <li class="cat-seo"><a href="/seo/fudousan-seo-consulting/"><span class="thumb"><img src="/images/shelf/fudosan-1.webp" alt="不動産SEOコンサルティングとは？外注との違いと費用相場のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-01">2026.09.01</time><h3>不動産SEOコンサルティングとは？外注との違いと費用相場<span class="tag">SEO</span></h3></a></li>
+    <li class="cat-seo"><a href="/seo/fudousan-seo-kaisha-erabikata/"><span class="thumb"><img src="/images/shelf/fudosan-3.webp" alt="不動産SEO会社への外注は必要か？費用相場と6つの判断軸のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-01">2026.09.01</time><h3>不動産SEO会社への外注は必要か？費用相場と6つの判断軸<span class="tag">SEO</span></h3></a></li>
+    <li class="cat-seo"><a href="/seo/fudousan-seo-kiji-writer/"><span class="thumb"><img src="/images/shelf/fudosan-3.webp" alt="不動産SEO記事のライター選び方｜失敗しない5つの基準のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-31">2026.08.31</time><h3>不動産SEO記事のライター選び方｜失敗しない5つの基準<span class="tag">SEO</span></h3></a></li>
+    <li class="cat-seo"><a href="/seo/fudousan-seo-taisaku/"><span class="thumb"><img src="/images/shelf/fudosan-1.webp" alt="不動産SEOとは？反響を増やす5つの施策と始め方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-29">2026.08.29</time><h3>不動産SEOとは？反響を増やす5つの施策と始め方<span class="tag">SEO</span></h3></a></li>
     <li class="cat-aio"><a href="/aio/fudousan-ai-kensaku-taisaku/"><span class="thumb"><img src="/images/thumbs/aio-fudosan.webp" alt="不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-08">2026.08.08</time><h3>不動産のAI検索対策｜AI Overviewで選ばれる4つの実践ステップ<span class="tag">AIO・LLMO</span></h3></a></li>
 </ul></section>
 <section><h2>質問ごとの出典</h2><p>100問それぞれについて、どの種類のサイトが出典になったかを<a href="/research/fudosan-ai-sources/questions/" data-cta="research_fudosan_questions">質問集</a>にまとめています。 地域で探す質問の出典の月ごとの順位は、<a href="/research/ranking/" data-cta="research_ranking">ランキング</a>で見られます。</p></section>

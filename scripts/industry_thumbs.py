@@ -97,6 +97,14 @@ def apply(meta):
     t = theme_for(meta)
     if t and (DIR / f"theme-{t}.jpg").is_file():
         return f"/images/thumbs/theme-{t}.jpg"
+    # 業種・テーマの画像が無い記事は、文字だけのアイキャッチをやめて「写真の棚」から内容に合う写真を当てる
+    try:
+        import photo_shelf
+        _, url = photo_shelf.pick(meta.get("title", ""), meta.get("keyword", ""), meta.get("slug", ""))
+        if url and photo_shelf.path_of(url).is_file():
+            return url
+    except Exception:
+        pass
     return cur
 
 
@@ -123,7 +131,7 @@ def theme_for(meta):
 
 def shown(url):
     """ページに表示する画像。業種・テーマの画像は同じ名前の WebP があればそちら（約4割軽い）。共有画像は JPEG のまま"""
-    if url and url.startswith("/images/thumbs/") and url.endswith(".jpg"):
+    if url and url.startswith(("/images/thumbs/", "/images/shelf/")) and url.endswith(".jpg"):
         w = url[:-4] + ".webp"
         if (ROOT / "site" / w.lstrip("/")).is_file():
             return w
@@ -174,6 +182,7 @@ def apply_scene_bands(site: Path):
     import re as _re
     R2K = {"dental": "shika", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten", "shigyou": "shigyou"}
     jobs = [(p, p.parent.name) for p in (site / "industry").glob("*/index.html")]
+    jobs += [(p, p.parent.parent.name) for p in (site / "industry").glob("*/faq/index.html")]   # 業種の質問集にも同じ業種の写真
     jobs += [(site / "lp" / k / "index.html", k) for k in LP_KEY]
     for r, k in R2K.items():
         jobs += [(site / "research" / f"{r}-ai-sources" / "index.html", k),
@@ -220,5 +229,44 @@ def apply_share_images(site: Path, site_url: str):
             new = new.replace("</head>", f'<meta name="twitter:image" content="{url}">\n</head>', 1)
         if new != s:
             p.write_text(new, encoding="utf-8", newline="")
+            n += 1
+    return n
+
+
+def apply_shelf_bands(site: Path):
+    """用語集の各語・テーマ・比較表のページに、写真の棚から内容に合う1枚を見出しの下に置く（何度呼んでも同じ）。
+    文字だけのページが続き、定義の下が大きく空いていたため"""
+    import html as _h
+    import re as _re
+    try:
+        import photo_shelf
+    except Exception:
+        return 0
+    n = 0
+    pages = list((site / "glossary").glob("*/index.html")) + list((site / "topics").glob("*/index.html"))         + list((site / "compare").glob("*/index.html"))
+    for p in pages:
+        s = p.read_text(encoding="utf-8")
+        m = _re.search(r"<h1>(.*?)</h1>", s, _re.S)
+        if not m:
+            continue
+        title = _re.sub(r"<[^>]+>", "", m.group(1))
+        k, url = photo_shelf.pick(title, "", p.parent.name)
+        if not url or not photo_shelf.path_of(url).is_file():
+            continue
+        src = shown(url)
+        band = (f'<figure class="scene-band"><img src="{src}" alt="{_h.escape(title)}のイメージ" width="1600" height="900" '
+                f'loading="lazy" decoding="async"><figcaption>※ 写真はイメージです</figcaption></figure>')
+        s0 = s
+        s = _re.sub(r"\n?<!-- shelf -->.*?<!-- /shelf -->\n?", "", s, flags=_re.S)
+        h = _re.search(r'<section class="hero"[^>]*>', s)
+        if not h:
+            continue
+        end = s.find("</section>", h.end())
+        if end < 0:
+            continue
+        end += len("</section>")
+        s = s[:end] + f"\n<!-- shelf -->{band}<!-- /shelf -->\n" + s[end:]
+        if s != s0:
+            p.write_text(s, encoding="utf-8", newline="")
             n += 1
     return n

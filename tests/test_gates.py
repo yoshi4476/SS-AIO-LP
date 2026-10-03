@@ -2366,9 +2366,12 @@ def test_industry_thumbnails_follow_rules():
     check("歯科のAIO記事には歯科の画像", IT.apply({**base, "title": "歯科医院のAIO対策とは？", "keyword": "歯科 aio"}),
           "/images/thumbs/aio-shika.jpg")
     check("美容クリニックは美容の画像", IT.key_for({**base, "title": "美容クリニックのAI検索対策", "keyword": ""}), "clinic-biyou")
-    check("AI検索と関係ない記事には当てない（インスタ集客）",
-          IT.apply({**base, "category": "ai-marketing", "title": "クリニックのインスタ集客のやり方", "keyword": "クリニック instagram"}),
-          "/images/x/eyecatch.png")
+    # 「◯◯のAIO対策」と書かれた画像は AI検索の記事だけ。それ以外の記事は文字の無い写真の棚から当てる
+    got = IT.apply({**base, "category": "ai-marketing", "title": "クリニックのインスタ集客のやり方", "keyword": "クリニック instagram"})
+    check("AI検索と関係ない記事には「AIO対策」の画像を当てない（インスタ集客）",
+          str(got).startswith("/images/thumbs/"), False)
+    check("AI検索と関係ない記事は写真の棚から（業種が分かればその業種）",
+          str(got).startswith("/images/shelf/clinic-"), True)
     check("同じ業種の別枚は数字の付いたものだけ（美容クリニックはクリニックの別枚にしない）",
           any("biyou" in f for f in IT.variants("clinic")), False)
     check("同じ記事にはいつも同じ1枚",

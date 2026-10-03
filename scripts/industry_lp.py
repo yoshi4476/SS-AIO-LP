@@ -125,6 +125,10 @@ STYLE = """<style>
 .ilp-band .btns{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
 .ilp-band .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
 .ilp-faq details{border-bottom:1px solid var(--line);padding:1rem 0}
+.ilp-faq-grid{display:grid;gap:1.6rem}
+@media(min-width:900px){.ilp-faq-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.4rem;align-items:start}.ilp-faq-ph{position:sticky;top:96px}}
+.ilp-faq-ph{margin:0;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-md)}
+.ilp-faq-ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
 .ilp-faq summary{font-weight:700;cursor:pointer;list-style-position:outside}
 .ilp-faq details p{margin:.6rem 0 0;color:var(--muted);line-height:1.85}
 .ilp-more{margin-top:1rem}
@@ -252,7 +256,11 @@ def body(key, metas, faq_pairs, post_tile, site_url):
         out.append(f'<section><span class="ilp-eb">Articles</span><h2>{_e(c["name"])}の集客に役立つ記事</h2><ul class="post-list">\n{tiles}\n</ul>'
                    + (f'<p class="ilp-more">業種別のまとめ: {hubs}</p>' if hubs else "") + '</section>')
     if faq:
-        out.append(f'<section class="ilp-faq"><span class="ilp-eb">FAQ</span><h2>よくある質問</h2>{faq}</section>')
+        # 質問の列だけだと右が空くので、相談に答える場面の写真（イメージ）を右に置く
+        out.append(f'<section class="ilp-faq"><span class="ilp-eb">FAQ</span><h2>よくある質問</h2>'
+                   f'<div class="ilp-faq-grid"><div>{faq}</div><figure class="ilp-faq-ph">'
+                   f'<img src="/images/scenes/faq.webp" alt="オンラインで相談に答える担当者のイメージ" width="1600" height="900" loading="lazy">'
+                   f'</figure></div></section>')
     out.append('</div>')
     return "\n".join(out)
 
