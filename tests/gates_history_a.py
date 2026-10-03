@@ -695,7 +695,10 @@ def test_hist_no_retired_scoring_claims():
     llms = [v for n, v in pts.items() if "llms" in n.lower()]
     check("診断: 配点表を読めた（検出器が働いている）", len(pts) >= 8, True)
     check("診断: llms.txt の配点は最小（Google が読まないと明言）", bool(llms) and max(llms) <= min(pts.values()), True)
-    check("診断: 合計100点", sum(pts.values()), 100)
+    # 配点の合計が100点でないなら、返す得点を100点満点に換算していること（2026-10-03: 98点のまま換算する方針）
+    scaled = bool(re.search(r"\*\s*100\s*/\s*maxPts", js))
+    check("診断: 合計100点、または100点満点に換算している", sum(pts.values()) == 100 or scaled, True)
+    check("検出器: 換算の無い98点満点を拾う", sum([98]) == 100 or bool(re.search(r"\*\s*100\s*/\s*maxPts", "const score = raw;")), False)
 
 
 # ── 83. 公開フォームの API が壊れた入力に 4xx を返す（2026-09-02 / 09-05）──────────
