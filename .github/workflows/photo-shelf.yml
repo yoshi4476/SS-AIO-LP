@@ -1,0 +1,63 @@
+name: Photo Shelf
+
+# 記事サムネイルの「写真の棚」に、足りない業種・作業の写真を足す（週1回）。
+# 作るのは ChatGPT のサブスク（Codex CLI の画像生成）で、課金APIは使わない。
+# ログイン情報は Secrets の CODEX_AUTH_JSON（手元の ~/.codex/auth.json）。
+on:
+  schedule:
+    - cron: "17 2 * * 1"   # 月曜 11:17 JST
+  workflow_dispatch:
+
+concurrency:
+  group: photo-shelf
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  shelf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 依存インストール
+        run: |
+          pip install -q pillow pyyaml
+          npm i -g @openai/codex >/dev/null 2>&1
+
+      - name: Codex にログインする
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          if [ -z "$CODEX_AUTH_JSON" ]; then echo "::warning::CODEX_AUTH_JSON 未登録"; exit 1; fi
+          mkdir -p ~/.codex
+          printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
+          chmod 600 ~/.codex/auth.json
+          codex login status
+
+      - name: 棚の点検と、足りない写真を作る
+        run: |
+          python scripts/photo_shelf.py --check | tail -3
+          timeout 45m python scripts/photo_shelf.py --generate --limit 20 || true
+          python -c "import sys;sys.path.insert(0,'scripts');import photo_shelf as p;p.ensure_jpg()"
+
+      - name: 片付け
+        if: always()
+        run: rm -f ~/.codex/auth.json
+
+      - name: コミット
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          git add site/images/shelf
+          if git diff --cached --quiet; then echo "足す写真なし"; exit 0; fi
+          git commit -m "写真の棚: 足りない写真を追加 $(date '+%Y-%m-%d')"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push

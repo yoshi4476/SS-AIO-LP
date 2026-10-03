@@ -575,20 +575,7 @@ jobs:
 
       # 記事動画は daily-video.yml が毎日1本ずつ上げる（週にまとめて上げると量産に見えるため移した）
 
-      # 記事サムネイルの写真の棚に、足りない業種・作業の写真を足す。作るのは ChatGPT のサブスク（Codex CLI）で、
-      # 課金APIは使わない。ログイン情報（~/.codex/auth.json）を Secrets に登録した場合だけ動く。未登録なら手元で
-      # python scripts/photo_shelf.py --generate を実行する（棚の不足は週次の「要対応」に出る）
-      - name: 記事サムネイルの写真を棚に足す（ChatGPT のサブスク）
-        env:
-          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
-        run: |
-          if [ -z "$CODEX_AUTH_JSON" ]; then echo "CODEX_AUTH_JSON 未登録 — 写真の追加は手元で行う"; exit 0; fi
-          npm i -g @openai/codex >/dev/null 2>&1 || { echo "::warning::Codex CLI を入れられませんでした"; exit 0; }
-          mkdir -p ~/.codex
-          printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
-          chmod 600 ~/.codex/auth.json
-          timeout 40m python scripts/photo_shelf.py --generate --limit 20 || true
-          rm -f ~/.codex/auth.json
+      # 記事サムネイルの写真の棚に足りない写真を足すのは photo-shelf.yml（月曜 11:17）。ここでは行わない
 
       - name: 最終ビルドとコミット
         run: |
