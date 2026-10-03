@@ -55,7 +55,7 @@ faq:
 
 前提となる考え方は[税理士法人のAIO対策とは？](/aio/zeirishi-houjin-aio/)でも扱っています。
 
-費用の目安については、[AIO対策の相場は月3万〜30万円](/aio/aio-taisaku-souba/)にまとめています。
+費用の目安については、[AIO対策の相場は月数十万〜数百万円](/aio/aio-taisaku-souba/)にまとめています。
 
 関連する内容は、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)で解説しています。
 

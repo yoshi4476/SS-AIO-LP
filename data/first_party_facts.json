@@ -135,26 +135,6 @@
       "verifiable": true
     },
     {
-      "id": "subsidy-saitaku-2025",
-      "sites": [
-        "subsidy",
-        "corporate"
-      ],
-      "topic": [
-        "補助金",
-        "採択率",
-        "申請支援",
-        "IT導入補助金",
-        "AI導入補助金"
-      ],
-      "claim": "2025年4月〜2026年3月に申請を支援した30社のうち25社が採択されました（採択率83.3%）",
-      "source": "自社の申請支援実績",
-      "as_of": "2026-09",
-      "denominator": 30,
-      "period": "2025-04〜2026-03",
-      "verifiable": true
-    },
-    {
       "id": "shien-50",
       "sites": [
         "corporate",
@@ -301,25 +281,6 @@
       "as_of": "2026-09",
       "denominator": 10,
       "period": "2026-05〜2026-08",
-      "verifiable": true
-    },
-    {
-      "id": "dataset-hojokin-saitaku-madeno-nissuu",
-      "sites": [
-        "ai-lab",
-        "corporate",
-        "subsidy"
-      ],
-      "topic": [
-        "AI導入補助金",
-        "一次データ",
-        "実測"
-      ],
-      "claim": "2025年4月〜2026年3月に当社が支援して採択された25社は、全社が申請から31〜60日で採択されました。",
-      "source": "セブンセンシズ株式会社 一次データ「申請から採択までの日数」 https://ai.7senses.co.jp/data/hojokin-saitaku-madeno-nissuu/",
-      "as_of": "2026-09",
-      "denominator": 25,
-      "period": "2025-04〜2026-03",
       "verifiable": true
     },
     {

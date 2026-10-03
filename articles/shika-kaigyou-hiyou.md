@@ -97,7 +97,7 @@ MEO運用サービス「G-ran」で通算3,200店舗以上を運用してきま�
 
 実際の進め方は[歯科医院の集客方法とは？新患を増やす5つの基本施策](/ai-marketing/shika-iin-shukyaku/)で整理しています。
 
-関連する内容として[AIO対策の相場は月3万〜30万円](/aio/aio-taisaku-souba/)も公開しています。
+関連する内容として[AIO対策の相場は月数十万〜数百万円](/aio/aio-taisaku-souba/)も公開しています。
 
 費用の目安は[歯科医院のAIO対策にかかる費用はいくら？内訳と相場](/aio/shika-aio-taisaku-hiyou/)でも扱っています。
 

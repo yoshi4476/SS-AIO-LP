@@ -14,6 +14,7 @@
      相殺し、</content> が公開HTMLに残った
   4. 採点とビルドで文字数の数え方が違い、同じ記事が5,251字と4,922字になった
 """
+import json
 import os
 import re
 import subprocess
@@ -2261,6 +2262,14 @@ def test_lessons_2026_10_03():
         retired += [p.stem for name, since in RETIRED_PROGRAMS.items()
                     if name in kw.group(1) and date.group(1).strip('"') >= since]
     check("受付の終わった制度を新しく狙っていない", sorted(retired), [])
+    # 8. 補助金の申請支援の実績（自社の採択率・支援社数）は載せない方針（2026-10-03 ユーザー指示）
+    own = re.compile(r"採択通過率|(当社|弊社|私たち)[^。\n]{0,40}採択率|支援した[^。\n]{0,20}社のうち[^。\n]{0,10}社が採択|採択された\d+社|申請支援\d+社")
+    check("検出器: 自社の採択の実績を拾う", bool(own.search("2025年に支援した30社のうち25社が採択されました")), True)
+    check("検出器: 公的な採択の数は拾わない", bool(own.search("第19回は申請16,576件・採択7,819件でした")), False)
+    claims = sorted(p.stem for p in (ROOT / "articles").glob("*.md") if own.search(p.read_text(encoding="utf-8")))
+    check("記事に自社の補助金の採択の実績が無い", claims, [])
+    facts = json.loads((ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8"))["facts"]
+    check("一次情報の台帳に自社の採択の実績が無い", [f["id"] for f in facts if own.search(f.get("claim", ""))], [])
     # 7. 動画の差し替えで古い版を先に下げ、上限（uploadLimitExceeded）で新しい版が上がらず動画が無くなった
     av = (ROOT / "scripts" / "article_videos.py").read_text(encoding="utf-8")
     up, down = av.find("YT.upload(out, r[\"slug\"]"), av.find("YT.set_privacy(old[\"youtube\"]")
