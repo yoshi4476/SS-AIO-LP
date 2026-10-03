@@ -323,7 +323,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="article-layout">
     <aside class="article-side">
       <div class="side-sticky">
-        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#llmoaio">LLMO対策とは？AIOとの違い</a></li><li><a href="#llmo">なぜ今LLMO対策が必要なのか</a></li><li><a href="#ai">データで見るAIチャット利用の現状</a></li><li><a href="#chatgpt7">ChatGPTに引用される7つの方法</a></li><li><a href="#_1">プラットフォーム別の攻略ポイント</a></li><li><a href="#llmstxt">llms.txtの書き方（実例つき）</a></li><li><a href="#llmo_1">LLMO対策の効果測定のやり方</a></li><li><a href="#_2">よくある失敗と対処法</a></li><li><a href="#_3">社名を正しく認識させるエンティティ整備</a></li><li><a href="#llmo3">外部露出でLLMOを加速する3つの打ち手</a></li><li><a href="#llmo10">LLMO対策チェックリスト10項目</a></li><li><a href="#_4">よくある質問</a></li><li><a href="#llmoai">まとめ: LLMOは「AIに読ませて、答えさせる」設計</a></li></ol></nav>
+        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#llmoaio">LLMO対策とは？AIOとの違い</a></li><li><a href="#ai">データで見るAIチャット利用の現状</a></li><li><a href="#chatgpt7">ChatGPTに引用される7つの方法</a></li><li><a href="#_1">プラットフォーム別の攻略ポイント</a></li><li><a href="#llmstxt">llms.txtの書き方（実例つき）</a></li><li><a href="#llmo">LLMO対策の効果測定のやり方</a></li><li><a href="#_2">よくある失敗と対処法</a></li><li><a href="#_3">社名を正しく認識させるエンティティ整備</a></li><li><a href="#llmo3">外部露出でLLMOを加速する3つの打ち手</a></li><li><a href="#llmo10">LLMO対策チェックリスト10項目</a></li><li><a href="#_4">よくある質問</a></li><li><a href="#llmoai">まとめ: LLMOは「AIに読ませて、答えさせる」設計</a></li></ol></nav>
         <div class="side-cta">
           <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
           <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
@@ -344,6 +344,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h2 id="llmoaio">LLMO対策とは？AIOとの違い</h2>
 <p>LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先として選ばれるための最適化施策です。</p>
+<p>実測の参考として、当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（出典: 自社サイトの実装）。</p>
 <p>前提となる考え方は、<a href="/aio/btob-llmo-taisaku/">BtoBのLLMO対策とは？</a>で解説しています。</p>
 <p>対象になる範囲を先に押さえるなら、<a href="/aio/llmo-dairiten-boshu/">LLMO代理店募集の見分け方｜確認すべき5つの条件</a>が参考になります。</p>
 <p>選ぶときの基準については、<a href="/aio/meo-kaisha-llmo-taiou/">MEO会社の選び方｜LLMO対応の見極め3基準</a>にまとめています。</p>
@@ -380,15 +381,18 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <td style="text-align: left;">断言型の回答・出典明記・構造化</td>
 <td style="text-align: left;">同左</td>
 </tr>
+<tr>
+<td style="text-align: left;">## なぜ今LLMO対策が必要なのか</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
 </tbody>
 </table></div>
-<h2 id="llmo">なぜ今LLMO対策が必要なのか</h2>
 <p>購買前の情報収集が「検索」から「AIへの質問」に移りつつあり、AIの回答に出ない会社は比較の土俵に乗れなくなるためです。</p>
 <p>当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。<strong>実装して分かったのは、対応の効果は表示回数から先に現れ、クリックはそのあとに続くという順序</strong>です（2026年8月時点・Search Console実測）。</p>
 <p>私たちが集客支援の現場でよく聞くようになったのが、「新規のお客様に『ChatGPTで見つけた』と言われた」という話です。逆に言えば、AIが自社を知らなければ、その入口からの新規客はゼロのままです。</p>
 <div class="caution-box"><span class="box-title">注意: AIボットのブロックはNG</span><br>セキュリティ設定やWAFがGPTBot・PerplexityBot等を拒否していると、どれだけ良い記事を書いてもAIは読めません。LLMO対策の前に、まずrobots.txtとサーバー設定の確認が必要です。</div>
 
-<aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form></aside>
 <h2 id="ai">データで見るAIチャット利用の現状</h2>
 <p>日本のAIチャット利用はまだ3割未満で、だからこそLLMO対策は「先に動いた企業が独占しやすい」市場です。</p>
 <p><a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。中国の81.2%、米国の68.8%と比べれば低いものの、前年調査から明確に増加しており、方向は一方通行です。企業側でも、AI活用の方針を定めている日本企業は49.7%と半数に達しています。</p>
@@ -420,6 +424,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </tbody>
 </table></div>
 <p>利用率26.7%を「まだ少ない」と読むか、「4人に1人がもう使っている」と読むか。私たちは後者です。特に情報感度の高い経営者・担当者ほど先にAIで調べ始めており、BtoBでは体感的な影響がすでに出ています。</p>
+<aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form></aside>
 <h2 id="chatgpt7">ChatGPTに引用される7つの方法</h2>
 <p>7つの方法は「読める状態にする→答えやすい形にする→選ばれる理由を作る」の3段階に分かれます。</p>
 <figure><img src="/images/llmo-taisaku-hoho/steps.png" alt="LLMO対策の3段階: AIが読める状態にする、答えやすい形にする、選ばれる理由をつくる" width="1200" height="400" loading="lazy"><figcaption>LLMO対策の3段階（当メディア作成）</figcaption></figure>
@@ -486,7 +491,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 - [ページタイトル](URL): 1行の説明
 </code></pre>
 <p>ポイントは2つあります。第一に、説明文は人間向けの宣伝文ではなく、AIが分類しやすい事実ベースで書くこと。第二に、記事を公開するたびに追記し、実際のサイト構成と一致させ続けることです。当サイトのllms.txtも、この形式で全記事を自動追記しています。</p>
-<h2 id="llmo_1">LLMO対策の効果測定のやり方</h2>
+<h2 id="llmo">LLMO対策の効果測定のやり方</h2>
 <p>効果測定は、GA4でAIサービスからの参照流入を月次で定点観測するのが基本です。</p>
 <p>GA4の参照元レポートで <code>chatgpt.com</code> <code>perplexity.ai</code> <code>gemini.google.com</code> などをまとめて「AI経由」として集計します。あわせて月に一度、主要な質問（例:「地域名+業種+おすすめ」）を実際にAIへ投げ、自社が回答に出るかを目視で確認すると変化に気づけます。詳しい手順はAIO対策の5つの手順でも解説しています。</p>
 <h2 id="_2">よくある失敗と対処法</h2>

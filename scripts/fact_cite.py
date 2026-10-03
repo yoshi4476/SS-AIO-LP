@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 MIN_OVERLAP = 2
 MARK = "実測の参考として"
+PER_FACT = 6     # 1つの一次情報を入れる記事の上限（1サイトあたり）
 
 
 def _tokens(s):
@@ -55,9 +56,12 @@ def candidates(site_id):
         if MARK in body or "セブンセンシズ株式会社が" in body:
             continue
         key = _tokens(g("title") + " " + g("keyword"))
+        head = (g("title") + " " + g("keyword")).lower()
         best, score = None, 0
         for f in fs:
-            n = len(key & _tokens(f["claim"]))
+            # 文面の語の重なりに、一次情報の「話題」が題名・狙う語に出てくる数を足す
+            # （文面だけだと「AI導入補助金の申請…」と「申請を支援した30社…」が1語しか重ならず、補助金サイトは候補0本だった）
+            n = len(key & _tokens(f["claim"])) + sum(1 for tp in f.get("topic", []) if len(tp) >= 2 and tp.lower() in head)
             if n > score:
                 best, score = f, n
         if best and score >= MIN_OVERLAP:
@@ -112,6 +116,23 @@ def main():
     rows = []
     for sid in ([a.site] if a.site else list(S.load_all())):
         rows += candidates(sid)
+    # 同じ一次情報を入れる記事は1サイト PER_FACT 本まで。同じ一文がサイト中に並ぶと、それ自体が量産の指紋になる
+    # （既に入っている本数も数える）。上限に達した一次情報の記事は、次に重なりの大きい別の一次情報へ回さず見送る
+    used = {}
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        if MARK in t:
+            for r in rows:
+                if r["fact"]["claim"][:40] in t:
+                    used[(r["site"], r["fact"]["claim"])] = used.get((r["site"], r["fact"]["claim"]), 0) + 1
+                    break
+    kept = []
+    for r in rows:
+        k = (r["site"], r["fact"]["claim"])
+        if used.get(k, 0) < PER_FACT:
+            used[k] = used.get(k, 0) + 1
+            kept.append(r)
+    rows = kept
     print(f"■ 一次情報を引用として入れられる記事: {len(rows)}本")
     for r in rows[:10]:
         print(f"   [{r['site']:<9}] {r['slug'][:36]:<36} ← {r['fact']['claim'][:50]}（重なり{r['overlap']}）")
