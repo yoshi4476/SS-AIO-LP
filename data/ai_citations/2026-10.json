@@ -1,10 +1,10 @@
 {
-  "date": "2026-10-03",
+  "date": "2026-10-04",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 16,
-      "suspect_taken": 15,
+      "judged": 15,
+      "suspect_taken": 14,
       "healthy": 1,
       "too_thin": 115,
       "items": [
@@ -51,8 +51,8 @@
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 7.3,
-          "imp": 40,
+          "pos": 7.2,
+          "imp": 39,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -131,21 +131,11 @@
         {
           "kw": "カイロ meo",
           "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 6.6,
-          "imp": 15,
+          "pos": 6.4,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 4.0,
-          "ratio": 0.0
-        },
-        {
-          "kw": "口コミ 返信 例文 医療",
-          "url": "https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/",
-          "pos": 9.9,
-          "imp": 71,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 2.5,
+          "expected_ctr": 5.0,
           "ratio": 0.0
         },
         {
@@ -164,7 +154,7 @@
       "judged": 9,
       "suspect_taken": 5,
       "healthy": 4,
-      "too_thin": 59,
+      "too_thin": 60,
       "items": [
         {
           "kw": "3点照合",
@@ -189,8 +179,8 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 4.9,
-          "imp": 81,
+          "pos": 4.8,
+          "imp": 80,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -219,8 +209,8 @@
       ]
     },
     "subsidy": {
-      "judged": 3,
-      "suspect_taken": 3,
+      "judged": 2,
+      "suspect_taken": 2,
       "healthy": 0,
       "too_thin": 36,
       "items": [
@@ -242,16 +232,6 @@
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
-          "ratio": 0.0
-        },
-        {
-          "kw": "農業用倉庫 補助金 2026",
-          "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
-          "pos": 7.2,
-          "imp": 10,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 4.0,
           "ratio": 0.0
         }
       ]
