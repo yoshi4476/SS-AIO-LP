@@ -1505,6 +1505,27 @@ def build_research_pages(all_metas=()):
         out.write_text(page, encoding="utf-8", newline="\n")
         (out.parent / "data.csv").write_text(csv, encoding="utf-8-sig", newline="\n")
         made.append(ind)
+    # 記事の問いをAIに聞いた調査（/research/ai-answers/）。材料（data/ai_survey/ai-lab）が足りなければ作らない
+    answers = None
+    try:
+        sys.path.insert(0, str(ROOT / "scripts" / "subsidy"))
+        import research as _RS
+        answers = _RS.data("ai-lab", SITE_URL)
+        if answers:
+            body = (f'<div class="latest-block"><div class="cat-head"><h1>{_RS.html.escape(answers["h1"])}</h1></div>'
+                    f'<p class="hub-lead">{_RS.html.escape(answers["lead"])}</p>{_RS.html_body(answers)}</div>')
+            page = BLOG_PAGE.format(items=body, **page_shell(answers["title"], answers["description"]))
+            page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}{answers['url']}")
+            page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+            page = page.replace("</head>", '<script type="application/ld+json">'
+                                + json.dumps({"@context": "https://schema.org", **_RS.dataset_ld(answers)}, ensure_ascii=False)
+                                + "</script></head>", 1)
+            out = SITE / answers["url"].strip("/") / "index.html"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(page, encoding="utf-8", newline="\n")
+            (out.parent / "data.csv").write_text(_RS.csv_text(answers), encoding="utf-8", newline="\n")
+    except Exception as e:
+        print(f"WARN: AIに聞いた調査のページを作れません（{str(e)[:60]}）")
     if made:
         # 全業種の調査の一覧（/research/）。業種ごとの要点の数字は headline() からだけ取る
         import html as _h
@@ -1524,6 +1545,11 @@ def build_research_pages(all_metas=()):
                 '<p class="hub-lead">業種ごとに、お客様がAIに聞きそうな質問を ChatGPT・Gemini・Claude などに聞き、'
                 'AIが何を出典に答えているかを数えた当社の調査です。数字は各業種の調査ページに、集計の方法と元のデータ（CSV）と一緒に載せています。</p>'
                 f'<ul class="hub-list">{"".join(rows)}</ul></div>')
+        if answers:
+            body += ('<div class="latest-block"><div class="cat-head"><h2>記事の問いをAIに聞いた調査</h2></div>'
+                     f'<ul class="hub-list"><li><a href="{answers["url"]}"><strong>{_h.escape(answers["title"])}</strong>'
+                     f'<span class="cnt">{len(answers["rows"])}問・{answers["lastmod"][:7].replace("-", "年")}月</span></a>'
+                     f'<span class="hub-lead">{_h.escape(answers["description"])}</span></li></ul></div>')
         page = BLOG_PAGE.format(items=body, **page_shell(
             "業種別のAI調査", "業種ごとに、AIが何を出典に答えているかを数えた当社の調査の一覧です。"))
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/research/")

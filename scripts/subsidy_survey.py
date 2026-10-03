@@ -23,7 +23,33 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-OUT = ROOT / "data" / "subsidy_survey"
+OUT = ROOT / "data" / "subsidy_survey"          # 補助金サイト（最初に作った置き場。記事の書き直しが読む）
+OUT_OTHER = ROOT / "data" / "ai_survey"         # AI集客ラボ・コーポレート（data/ai_survey/<site>/<slug>.json）
+# サイトごとの決まり。問いに主語が無いとき頭に付ける語と、AIに聞いても答えようがない問い（当社への相談など）
+RULES = {
+    "subsidy": {"prefix": "AI導入補助金", "has": r"AI導入補助金|IT導入補助金", "skip": r"集客|MEO|AIO|AI検索対策"},
+    "ai-lab": {"prefix": "", "has": "", "skip": r"当社|弊社|御社|相談|依頼|見積"},
+    "corporate": {"prefix": "", "has": "", "skip": r"当社|弊社|御社|相談|依頼|見積"},
+}
+
+
+def site_of(slug):
+    import auto_rewrite as AR
+    try:
+        return AR.site_of(slug)
+    except Exception:
+        return "subsidy"          # _legacy の旧記事は補助金サイト
+
+
+def out_dir(site):
+    return OUT if site == "subsidy" else OUT_OTHER / site
+
+
+def path_of(slug):
+    for p in [OUT / f"{slug}.json"] + sorted(OUT_OTHER.glob(f"*/{slug}.json")):
+        if p.is_file():
+            return p
+    return OUT / f"{slug}.json"
 # どれもドメインの末尾で判定する。部分一致にすると hojokin-dx.com が「x.com（SNS）」に数えられた（2026-10-04）
 PUBLIC = re.compile(r"(^|\.)(go\.jp|lg\.jp|ac\.jp|monodukuri-hojo\.jp)$")
 MEDIA = re.compile(r"(^|\.)(yahoo\.co\.jp|nikkei\.com|asahi\.com|yomiuri\.co\.jp|mainichi\.jp|nhk\.or\.jp|wikipedia\.org|"
@@ -56,9 +82,11 @@ def article(slug):
     raise SystemExit(f"記事がありません: {slug}")
 
 
-def questions(slug):
-    """読者が AI に打ちそうな問い3つ。題名の主題と、本文の質問形の見出し・FAQ から取る（作文しない）"""
+def questions(slug, site=None):
+    """読者が AI に打ちそうな問い（最大4つ）。題名の主題と、本文の質問形の見出し・FAQ から取る（作文しない）"""
     t = article(slug)
+    rule = RULES.get(site or site_of(slug), RULES["ai-lab"])
+    kw = (re.search(r"^keyword:\s*\"?(.+?)\"?\s*$", t, re.M) or [0, ""])[1].strip()
     title = (re.search(r"^title:\s*\"?(.+?)\"?\s*$", t, re.M) or [0, slug])[1]
     # 題名の【2026年版】などは外し、｜の後ろも主題の一部として残す（前だけだと「AI導入補助金2026」しか残らない題がある）
     main = re.sub(r"\s+", " ", re.sub(r"【[^】]*】|\[[^\]]*\]", " ", title).replace("｜", " ").replace("|", " ")).strip(" 　\"")
@@ -77,14 +105,16 @@ def questions(slug):
     # 本題の数字にならなかった（2026-10-04: 4本で0件）
     yn = re.compile(r"(ますか|ませんか|ですか|できますか|なりますか|でしょうか)[?？]?$")
     # 当社への相談を聞く問い（「集客も相談できますか」）は AI に聞いても答えようがないので外す
-    cands = [q for q in heads + faqs if not re.search(r"集客|MEO|AIO|AI検索対策", q)]
+    cands = [q for q in heads + faqs if not re.search(rule["skip"], q)]
     wh = re.compile(r"いくら|どのくらい|どれくらい|どんな|どの|いつ|何|どう|どれ|どこ|なぜ")   # 疑問詞のある問いは「はい・いいえ」にならない
     is_yn = lambda q: bool(yn.search(q.strip(" 　"))) and not wh.search(q)
     cands = [q for q in cands if is_yn(q)] + [q for q in cands if not is_yn(q)]
     for q in cands + plain:
         q = re.sub(r"\s*\{#[^}]*\}", "", q).strip(" 　")
-        if "AI導入補助金" not in q and "IT導入補助金" not in q:
-            q = f"AI導入補助金 {q}"
+        if rule["prefix"] and not re.search(rule["has"], q):
+            q = f"{rule['prefix']} {q}"
+        elif not rule["prefix"] and kw and kw.split()[0] not in q:
+            q = f"{kw.split()[0]} {q}"       # 「自分でできますか?」だけでは何の問いか分からない
         if q not in qs and len(q) <= 60:
             qs.append(q)
         if len(qs) >= 4:
@@ -92,11 +122,16 @@ def questions(slug):
     return qs
 
 
-def survey(slug):
+def survey(slug, site=None):
     import ai_cite_check as AC
+    site = site or site_of(slug)
     AC.NEED_TEXT = True        # 「何と答えたか」を数えるので、本文の無い古いキャッシュは使わない
     eng = AC.subscription_engines()
-    qs = questions(slug)
+    # Gemini も聞く。答えは30日キャッシュから先に使い（追加の料金なし）、新しく聞く分だけ
+    # 月の検索回数の上限の中で呼ぶ（ask_gemini が残りを確かめ、無ければ呼ばない）
+    if AC._env("GEMINI_API_KEY"):
+        eng["Gemini"] = AC._cached("Gemini", AC.ask_gemini)
+    qs = questions(slug, site)
     tasks = [(q, n) for q in qs for n in eng]
 
     def one(t):
@@ -110,10 +145,10 @@ def survey(slug):
     with ThreadPoolExecutor(max_workers=6) as ex:
         for q, n, urls, text, err in ex.map(one, tasks):
             ans.setdefault(q, {})[n] = {"urls": urls, "text": text, "error": err}
-    rec = {"slug": slug, "date": date.today().isoformat(), "engines": sorted(eng), "questions": qs, "answers": ans}
+    rec = {"slug": slug, "site": site, "date": date.today().isoformat(), "engines": sorted(eng), "questions": qs, "answers": ans}
     rec["stance"] = classify(rec)
-    OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / f"{slug}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+    out_dir(site).mkdir(parents=True, exist_ok=True)
+    (out_dir(site) / f"{slug}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
     return rec
 
 
@@ -185,7 +220,7 @@ def tally(rec):
 
 def claims(slug):
     """記事に書ける文（数字は集計そのもの。言い回しは固定し、機械が作文しない）"""
-    p = OUT / f"{slug}.json"
+    p = path_of(slug)
     if not p.is_file():
         return []
     rec = json.loads(p.read_text(encoding="utf-8"))
@@ -227,8 +262,31 @@ def claims(slug):
     return out
 
 
+def pick(site, n=12):
+    """調べる記事を選ぶ。検索での表示が多い順に、「はい・いいえ」で答える問いを持つ記事だけ"""
+    import validate_rules as V
+    perf = V.perf()
+    yn = re.compile(r"(ますか|ませんか|ですか|できますか|なりますか|でしょうか)[?？]?$")
+    out = []
+    for slug in sorted(perf, key=lambda s: -perf[s][0]):
+        if not (ROOT / "articles" / f"{slug}.md").is_file() or site_of(slug) != site:
+            continue
+        if any(yn.search(q) for q in questions(slug, site)[1:]):
+            out.append(slug)
+        if len(out) >= n:
+            break
+    return out
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if "--site" in sys.argv:
+        # python scripts/subsidy_survey.py --site ai-lab [本数]   … 表示の多い記事から選んで調べる
+        i = sys.argv.index("--site")
+        site = sys.argv[i + 1]
+        n = int(sys.argv[i + 2]) if len(sys.argv) > i + 2 and sys.argv[i + 2].isdigit() else 12
+        args = pick(site, n)
+        print(f"{site}: {len(args)}本を調べます: {', '.join(args)}", flush=True)
     if "--facts" in sys.argv:
         for s in args:
             for c in claims(s):

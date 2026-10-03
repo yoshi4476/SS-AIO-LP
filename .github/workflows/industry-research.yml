@@ -55,10 +55,16 @@ jobs:
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Gemini は月の検索回数を管制塔の台帳で数える（残りが無ければ呼ばない）
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
           PYTHONIOENCODING: utf-8
         run: |
           python scripts/research_extra.py --draft 2>&1 | tail -5 || true
           python scripts/research_run.py --minutes 290 2>&1 | grep -vE "^\s+[0-9]+/[0-9]+$" | tail -40
+          # 記事の問いをAIに聞いた調査（AI集客ラボ・コーポレート・補助金の旧記事）。答えは30日キャッシュ
+          python scripts/subsidy_survey.py --site ai-lab 12 2>&1 | tail -3 || true
+          python scripts/subsidy_survey.py --site corporate 12 2>&1 | tail -3 || true
 
       - name: 片付け
         if: always()
@@ -67,12 +73,13 @@ jobs:
       - name: サイトに反映して公開
         env:
           PYTHONIOENCODING: utf-8
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
         run: |
           python scripts/build.py > /dev/null
           python tests/test_gates.py > /tmp/gates.log 2>&1 || { tail -20 /tmp/gates.log; echo "::error::門が通らないため公開しません"; exit 1; }
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          for p in data/research site; do if [ -e "$p" ]; then git add "$p"; fi; done
+          for p in data/research data/ai_survey data/subsidy_survey site; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
           git commit -q -m "業種調査の更新 $(date '+%Y-%m-%d')"
           for i in 1 2 3; do
@@ -81,3 +88,10 @@ jobs:
             sleep 5
           done
           echo "::error::push できませんでした"; exit 1
+
+      # コーポレート（Next.js・別リポジトリ）の調査ページは、中身を配信先に置いて push する
+      - name: コーポレートの調査ページを配信
+        env:
+          PYTHONIOENCODING: utf-8
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+        run: python scripts/research_publish.py --site corporate --push 2>&1 | tail -3 || echo "::warning::コーポレートの調査ページを配信できませんでした"
