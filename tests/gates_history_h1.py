@@ -139,3 +139,20 @@ def test_inquiry_forms_carry_contact_preferences():
             continue
         s = p.read_text(encoding="utf-8")
         check(f"{name}: 2項目がある", ("contact_way" in s, "contact_when" in s), (True, True))
+
+
+def test_sticky_button_ab_is_counted_per_test():
+    print("\n■ 診断ボタンの比べ試し: 試験ごとの名前で数え、記事CTAの試験と混ぜない")
+    import build as B
+    import ab_result as AB
+    check("ai_check の固定ボタンに B案が付く", 'data-ab="sticky_ai"' in B.sticky_ab({"category": "aio"}), True)
+    check("チェックリストの固定ボタンには付けない（試験しない）", "article_sticky_checklist" in str(B.STICKY_AB), False)
+    tpl = (ROOT / "templates" / "article.html").read_text(encoding="utf-8")
+    check("記事テンプレートが B案の属性を差し込む", "{{STICKY_AB}}" in tpl, True)
+    js = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
+    check("site.js: 試験名入りの表示・押下を送る",
+          ("'ab_impression_' + key + '_' + v" in js, "'cta_click_' + abk + '_' + abv" in js), (True, True))
+    names = [t[0] for t in AB.tests()]
+    check("ab_result: 記事CTAと固定ボタンを別々に判定する", names[0] == "記事CTA" and len(names) >= 3, True)
+    for _k, (key, b) in B.STICKY_AB.items():
+        check(f"B案に所要時間・結果の約束を書かない: {key}", any(w in b for w in ("秒", "必ず", "確実")), False)

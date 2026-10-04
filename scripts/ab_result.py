@@ -43,12 +43,17 @@ def pull(prop, days):
         dimensions=[Dimension(name="eventName")],
         metrics=[Metric(name="eventCount")], limit=300))
     for x in r.rows:
-        name, n = x.dimension_values[0].value, int(x.metric_values[0].value)
-        for ev in ("ab_impression", "cta_click"):
-            for v in ("a", "b"):
-                if name == f"{ev}_{v}":
-                    out[(ev, v)] = out.get((ev, v), 0) + n
+        out[x.dimension_values[0].value] = int(x.metric_values[0].value)
     return out
+
+
+def tests():
+    """試験の一覧（名前, 表示の出来事, 押下の出来事の頭）。記事CTAは試験名の無い古い名前のまま"""
+    import build as B
+    t = [("記事CTA", "ab_impression_", "cta_click_")]
+    for key, _b in sorted(set(B.STICKY_AB.values())):
+        t.append((f"固定ボタン {key}", f"ab_impression_{key}_", f"cta_click_{key}_"))
+    return t
 
 
 def main():
@@ -66,26 +71,27 @@ def main():
         except Exception as e:
             print(f"■ {c.get('name', site)}: 取得できません（{str(e)[:70]}）")
             continue
-        imp_a, imp_b = d.get(("ab_impression", "a"), 0), d.get(("ab_impression", "b"), 0)
-        clk_a, clk_b = d.get(("cta_click", "a"), 0), d.get(("cta_click", "b"), 0)
-        if not (imp_a or imp_b):
-            print(f"■ {c.get('name', site)}: この期間のA/B表示がありません")
-            continue
-        ra = clk_a / imp_a * 100 if imp_a else 0
-        rb = clk_b / imp_b * 100 if imp_b else 0
         print(f"\n■ {c.get('name', site)}（直近{a.days}日）")
-        print(f"   A案  表示{imp_a:5,}  クリック{clk_a:4,}  {ra:5.2f}%")
-        print(f"   B案  表示{imp_b:5,}  クリック{clk_b:4,}  {rb:5.2f}%")
-        if imp_a + imp_b < MIN_SAMPLE:
-            print(f"   → まだ判定しません（合計表示 {imp_a + imp_b} 件。"
-                  f"{MIN_SAMPLE}件を超えてから読みます）")
-        elif abs(ra - rb) < max(ra, rb) * 0.2:
-            print("   → 差が小さく、どちらとも言えません")
-        else:
-            win = "B案" if rb > ra else "A案"
-            print(f"   → いまのところ {win} が優勢です。"
-                  "もう1週同じ傾向なら、勝った文言に寄せます")
+        for name, imp, clk in tests():
+            judge(name, d.get(imp + "a", 0), d.get(imp + "b", 0), d.get(clk + "a", 0), d.get(clk + "b", 0))
     return 0
+
+
+def judge(name, imp_a, imp_b, clk_a, clk_b):
+    if not (imp_a or imp_b):
+        print(f"   {name}: この期間の表示がありません")
+        return
+    ra = clk_a / imp_a * 100 if imp_a else 0
+    rb = clk_b / imp_b * 100 if imp_b else 0
+    print(f"   {name}")
+    print(f"     A案  表示{imp_a:5,}  クリック{clk_a:4,}  {ra:5.2f}%")
+    print(f"     B案  表示{imp_b:5,}  クリック{clk_b:4,}  {rb:5.2f}%")
+    if imp_a + imp_b < MIN_SAMPLE:
+        print(f"     → まだ判定しません（合計表示 {imp_a + imp_b} 件。{MIN_SAMPLE}件を超えてから読みます）")
+    elif abs(ra - rb) < max(ra, rb) * 0.2:
+        print("     → 差が小さく、どちらとも言えません")
+    else:
+        print(f"     → いまのところ {'B案' if rb > ra else 'A案'} が優勢です。もう1週同じ傾向なら、勝った文言に寄せます")
 
 
 if __name__ == "__main__":

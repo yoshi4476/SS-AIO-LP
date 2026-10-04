@@ -517,6 +517,19 @@ def sticky(meta):
     return "/lp/#scan-start", "article_sticky_scan", "自社サイトを30秒で診断する"
 
 
+# 固定の診断ボタンの B案（site.js が半々で差し替え、ab_result.py が試験ごとに数える）。
+# どちらも「何が分かるか」を言う形。約束できない所要時間や結果は書かない
+STICKY_AB = {
+    "article_sticky_ai_check": ("sticky_ai", "ChatGPTやGeminiに御社が出るか見る（無料）"),
+    "article_sticky_scan": ("sticky_scan", "自社サイトの直す所を無料で調べる"),
+}
+
+
+def sticky_ab(meta):
+    key = STICKY_AB.get(sticky(meta)[1])
+    return f' data-ab="{key[0]}" data-ab-b="{key[1]}"' if key else ""
+
+
 def lp_label(meta):
     import industry_lp
     k = industry_lp.BY_HUB.get(_hub_slug(meta))
@@ -896,6 +909,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{LP_URL}}": lp_url(meta),
         "{{LP_LABEL}}": lp_label(meta),
         **dict(zip(("{{STICKY_URL}}", "{{STICKY_CTA}}", "{{STICKY_LABEL}}"), sticky(meta))),
+        "{{STICKY_AB}}": sticky_ab(meta),
         "{{RELATED}}": related,
         "{{DIAG_BANNER}}": diag_banner_html(meta),
         "{{PREVNEXT}}": prevnext,
