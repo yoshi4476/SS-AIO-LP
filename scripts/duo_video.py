@@ -614,71 +614,73 @@ def make(sc, out_mp4):
         sp, dim = _sprites()
         # キャラクターは高さ1200px（=900×4/3）の素材を1440pにそのまま置く（拡大しない）
         pos = {"N": round(-60 * KS), "K": OW - sp["K"][("open", "m0")].width + round(90 * KS)}
-        enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
-                                "-s", f"{OW}x{OH}", "-r", str(FPS), "-i", "-", "-i", str(td / "mix.wav"),
-                                # animation は平らな塗りと線の多い絵に向く設定
-                                "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "medium", "-tune", "animation", "-crf", "17",
-                                "-c:a", "aac", "-b:a", "192k", "-shortest", str(out_mp4)], stdin=subprocess.PIPE, stderr=open(td / "enc.log", "w", encoding="utf-8", errors="ignore"))
-        rng = random.Random(len(lines))
-        blink = {"N": 1.2, "K": 2.0}
-        li, prev_key, fade_from, fade_t0, sub_cache = -1, None, None, 0.0, {}
-        for f in range(int(total * FPS)):
-            t = f / FPS
-            while li + 1 < len(lines) and t >= starts[li + 1] - 0.05:
-                li += 1
-            i = max(li, 0)
-            who, text, a = lines[i]["who"], lines[i]["text"], waves[i]
-            local = t - starts[i]
-            speaking = 0 <= local < len(a) / SR
-            v = envs[i][int(local * FPS)] if speaking and int(local * FPS) < len(envs[i]) else 0
-            bimg, key = board.get(states[i])
-            if key != prev_key:
-                fade_from, fade_t0, prev_key = board.cache.get(prev_key) if prev_key else None, t, key
-            p = (t - fade_t0) / 0.35
-            frame = Image.blend(fade_from, bimg, min(1, p)) if (fade_from is not None and p < 1) else bimg.copy()
-            eye = {}
-            for k in ("N", "K"):
-                dt = t - blink[k]
-                if dt < 0 or dt >= 0.15:
-                    eye[k] = "open"
-                    if dt >= 0.15:
-                        blink[k] = t + rng.uniform(2.0, 5.5)
-                else:
-                    eye[k] = "closed" if 0.05 <= dt < 0.10 else "half"
-            for k in ("N", "K"):
-                br = math.sin(t * 2 * math.pi / (3.6 if k == "N" else 4.2)) * 3
-                if k == who and t >= LEAD:
-                    im, dy = sp[k][(eye[k], mouth(v))], br - 5
-                else:
-                    end = starts[i] + len(a) / SR
-                    nod = max(0, 1 - abs(t - (end - 0.25)) / 0.25) if who != k else 0
-                    im, dy = dim[(k, eye[k], "m0")], br + 6 + 10 * math.sin(nod * math.pi / 2)
-                frame.paste(im, (pos[k], int(OH - im.height + (40 + dy) * KS)), im)
-            # 話し手へ寄るカメラは入れない。毎コマ全体を拡大し直すと、文字もキャラクターもぼやけた
-            if t >= LEAD - 0.1:
-                cs = chunks(text)
-                wts = [len(VM.read_text(c)) for c in cs]
-                pos_ = max(0, local) / max(0.1, len(a) / SR) * sum(wts)
-                ci, acc = 0, 0
-                for ci, wv in enumerate(wts):
-                    acc += wv
-                    if pos_ < acc:
-                        break
-                pop = round(min(1, max(0, local + 0.05) / 0.2), 1)
-                sk = (who, cs[ci], pop)
-                if sk not in sub_cache:
-                    if len(sub_cache) > 60:
-                        sub_cache.clear()
-                    sub_cache[sk] = _subtitle(VM, who, names[who], roles[who], cs[ci], pop)
-                frame.paste(sub_cache[sk], (0, 0), sub_cache[sk])
-            try:
-                enc.stdin.write(frame.tobytes())
-            except BrokenPipeError:
-                # ffmpeg が先に落ちると「Broken pipe」しか残らず、原因が分からなかった（2026-10-03）
-                enc.wait()
-                raise RuntimeError("ffmpeg が止まりました: " + (td / "enc.log").read_text(encoding="utf-8", errors="ignore")[-400:])
-        enc.stdin.close()
-        enc.wait()
+        # 書き出しのログは閉じてから読む（開いたままだと Windows で消せず、ハンドルも残る）
+        with open(td / "enc.log", "w", encoding="utf-8", errors="ignore") as elog:
+            enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
+                                    "-s", f"{OW}x{OH}", "-r", str(FPS), "-i", "-", "-i", str(td / "mix.wav"),
+                                    # animation は平らな塗りと線の多い絵に向く設定
+                                    "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "medium", "-tune", "animation", "-crf", "17",
+                                    "-c:a", "aac", "-b:a", "192k", "-shortest", str(out_mp4)], stdin=subprocess.PIPE, stderr=elog)
+            rng = random.Random(len(lines))
+            blink = {"N": 1.2, "K": 2.0}
+            li, prev_key, fade_from, fade_t0, sub_cache = -1, None, None, 0.0, {}
+            for f in range(int(total * FPS)):
+                t = f / FPS
+                while li + 1 < len(lines) and t >= starts[li + 1] - 0.05:
+                    li += 1
+                i = max(li, 0)
+                who, text, a = lines[i]["who"], lines[i]["text"], waves[i]
+                local = t - starts[i]
+                speaking = 0 <= local < len(a) / SR
+                v = envs[i][int(local * FPS)] if speaking and int(local * FPS) < len(envs[i]) else 0
+                bimg, key = board.get(states[i])
+                if key != prev_key:
+                    fade_from, fade_t0, prev_key = board.cache.get(prev_key) if prev_key else None, t, key
+                p = (t - fade_t0) / 0.35
+                frame = Image.blend(fade_from, bimg, min(1, p)) if (fade_from is not None and p < 1) else bimg.copy()
+                eye = {}
+                for k in ("N", "K"):
+                    dt = t - blink[k]
+                    if dt < 0 or dt >= 0.15:
+                        eye[k] = "open"
+                        if dt >= 0.15:
+                            blink[k] = t + rng.uniform(2.0, 5.5)
+                    else:
+                        eye[k] = "closed" if 0.05 <= dt < 0.10 else "half"
+                for k in ("N", "K"):
+                    br = math.sin(t * 2 * math.pi / (3.6 if k == "N" else 4.2)) * 3
+                    if k == who and t >= LEAD:
+                        im, dy = sp[k][(eye[k], mouth(v))], br - 5
+                    else:
+                        end = starts[i] + len(a) / SR
+                        nod = max(0, 1 - abs(t - (end - 0.25)) / 0.25) if who != k else 0
+                        im, dy = dim[(k, eye[k], "m0")], br + 6 + 10 * math.sin(nod * math.pi / 2)
+                    frame.paste(im, (pos[k], int(OH - im.height + (40 + dy) * KS)), im)
+                # 話し手へ寄るカメラは入れない。毎コマ全体を拡大し直すと、文字もキャラクターもぼやけた
+                if t >= LEAD - 0.1:
+                    cs = chunks(text)
+                    wts = [len(VM.read_text(c)) for c in cs]
+                    pos_ = max(0, local) / max(0.1, len(a) / SR) * sum(wts)
+                    ci, acc = 0, 0
+                    for ci, wv in enumerate(wts):
+                        acc += wv
+                        if pos_ < acc:
+                            break
+                    pop = round(min(1, max(0, local + 0.05) / 0.2), 1)
+                    sk = (who, cs[ci], pop)
+                    if sk not in sub_cache:
+                        if len(sub_cache) > 60:
+                            sub_cache.clear()
+                        sub_cache[sk] = _subtitle(VM, who, names[who], roles[who], cs[ci], pop)
+                    frame.paste(sub_cache[sk], (0, 0), sub_cache[sk])
+                try:
+                    enc.stdin.write(frame.tobytes())
+                except BrokenPipeError:
+                    # ffmpeg が先に落ちると「Broken pipe」しか残らず、原因が分からなかった（2026-10-03）
+                    enc.wait()
+                    raise RuntimeError("ffmpeg が止まりました: " + (td / "enc.log").read_text(encoding="utf-8", errors="ignore")[-400:])
+            enc.stdin.close()
+            enc.wait()
         # YouTube の字幕とチャプター（youtube_upload が読む）
         srt, chaps = [], []
         for i, ln in enumerate(lines):

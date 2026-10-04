@@ -97,9 +97,13 @@ def measure(a, domain, engines):
     row, ok = {}, False
     for name, fn in engines.items():
         try:
-            urls = fn(a["keyword"]) or []
+            urls = fn(a["keyword"])
         except Exception as e:
             row[name] = {"error": str(e)[:80]}
+            continue
+        if urls is None:
+            # None は「聞けなかった」（Gemini の予算切れなど）。空の出典と同じに扱うと「引用なし」で確定する
+            row[name] = {"error": "聞けませんでした"}
             continue
         ok = True
         mine = ours(urls, domain)

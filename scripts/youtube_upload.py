@@ -81,6 +81,38 @@ def set_privacy(vid, status, site=None):
     yt.videos().update(part="status", body={"id": vid, "status": {"privacyStatus": status}}).execute()
 
 
+# Secret に鍵を入れた社の一覧（鍵そのものは書かない）。Secret の中身は読めないので、ここで覚えておく
+CONNECTED = ROOT / "data" / "youtube_connected.json"
+
+
+def expected_clients(root=ROOT):
+    """Secret に鍵があるはずの社: 前に登録した社と、sites/*.json に YouTube チャンネルを書いたクライアント"""
+    ids = set()
+    man = root / "data" / "youtube_connected.json"
+    if man.is_file():
+        ids |= set(json.loads(man.read_text(encoding="utf-8")).get("sites", []))
+    for p in (root / "sites").glob("*.json"):
+        try:
+            cfg = json.loads(p.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        if (root / "data" / "clients" / p.stem).is_dir() and (cfg.get("channels") or {}).get("youtube"):
+            ids.add(p.stem)
+    return ids
+
+
+def tokens_bundle(root=ROOT):
+    """Secret に入れる全社分の鍵と、手元に鍵ファイルが無い既存の社"""
+    allk = {p.stem.replace("youtube-token-", ""): json.loads(p.read_text(encoding="utf-8-sig"))
+            for p in root.glob("youtube-token-*.json")}
+    return allk, sorted(expected_clients(root) - set(allk))
+
+
+def save_connected(allk):
+    CONNECTED.parent.mkdir(parents=True, exist_ok=True)
+    CONNECTED.write_text(json.dumps({"sites": sorted(allk)}, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
 def auth(site=None):
     """チャンネルの持ち主のアカウントで1回だけ許可する。クライアントは --site <id> を付け、先方に許可してもらう"""
     from google_auth_oauthlib.flow import InstalledAppFlow
@@ -97,12 +129,18 @@ def auth(site=None):
     if is_client(site):
         # 全クライアントの鍵を1つにまとめて GitHub に入れる（SNS の SOCIAL_TOKENS_JSON と同じ。手で登録させない）
         import subprocess
-        allk = {p.stem.replace("youtube-token-", ""): json.loads(p.read_text(encoding="utf-8-sig"))
-                for p in ROOT.glob("youtube-token-*.json")}
-        r = subprocess.run(["gh", "secret", "set", "YOUTUBE_TOKENS_JSON"], cwd=ROOT,
-                           input=json.dumps(allk), text=True, encoding="utf-8", capture_output=True)
-        print(f"  GitHub の YOUTUBE_TOKENS_JSON に登録しました（{len(allk)}社）" if r.returncode == 0 else
-              f"  GitHub に登録できませんでした（gh auth login を確認）: {r.stderr.strip()[:120]}")
+        allk, missing = tokens_bundle()
+        if missing:
+            # Secret は丸ごと置き換わる。手元に鍵の無い社を外して上書きすると、その社の動画が上がらなくなる
+            print(f"  GitHub の YOUTUBE_TOKENS_JSON は書き換えませんでした: 手元に鍵が無い社があります"
+                  f"（{', '.join(missing)}）。youtube-token-<id>.json を全社分そろえてからやり直してください")
+        else:
+            r = subprocess.run(["gh", "secret", "set", "YOUTUBE_TOKENS_JSON"], cwd=ROOT,
+                               input=json.dumps(allk), text=True, encoding="utf-8", capture_output=True)
+            if r.returncode == 0:
+                save_connected(allk)
+            print(f"  GitHub の YOUTUBE_TOKENS_JSON に登録しました（{len(allk)}社）" if r.returncode == 0 else
+                  f"  GitHub に登録できませんでした（gh auth login を確認）: {r.stderr.strip()[:120]}")
     try:
         from googleapiclient.discovery import build
         yt = build("youtube", "v3", credentials=c, cache_discovery=False)

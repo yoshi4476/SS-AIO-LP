@@ -527,7 +527,6 @@ def draft_all(pairs, workers):
     コピーの上で書かせても中身は同じになる。当てて検算するのは run_one(draft=…) が1組ずつ行う。
     返すのは組ごとの {"base": 書かせたときの survivor, "loser": 同じく loser, "text": 書いた後の survivor}"""
     import tempfile
-    from concurrent.futures import ThreadPoolExecutor
 
     def one(pair):
         s, l = pair["survivor"], pair["loser"]
@@ -542,8 +541,7 @@ def draft_all(pairs, workers):
             _claude(prompt, cwd=tmp)
             return {"base": base, "loser": lt,
                     "text": (Path(tmp) / "articles" / f"{s}.md").read_text(encoding="utf-8-sig")}
-    with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
-        return list(ex.map(one, pairs))
+    return AR.map_each(one, pairs, workers)
 
 
 def run_one(pair, write, draft=None):
@@ -718,10 +716,12 @@ def main():
             if not {p["loser"], p["survivor"]} & seen:
                 seen |= {p["loser"], p["survivor"]}
                 batch.append(p)
+        batch = batch[: AR.draft_quota(len(batch), a.parallel, a.budget_min, per_min=40)]
         drafts = {id(p): d for p, d in zip(batch, draft_all(batch, a.parallel))}
     for p in todo:
         used = (time.time() - started) / 60
-        if a.budget_min and used >= a.budget_min:
+        # 書き終えた統合案は AI を待たずに当てられるので、予算を過ぎても捨てない
+        if a.budget_min and used >= a.budget_min and not drafts.get(id(p)):
             print(f"\n  {used:.0f}分使ったので、ここで止めます（残りは次回）")
             break
         if p["loser"] in gone:

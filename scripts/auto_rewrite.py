@@ -818,13 +818,36 @@ def build_prompt(item):
     return prompt, allowed
 
 
+def draft_quota(n, workers, budget_min, per_min):
+    """先に下書きさせる本数。下書きは予算の計測より前に走るので、全件を書かせると
+    当てる段階で予算が尽きて0本で終わる。予算に収まる回数（最低1回・最大2回）分だけ書かせる"""
+    if not budget_min:
+        return n
+    rounds = max(1, min(2, budget_min // per_min))
+    return min(n, max(1, workers) * rounds)
+
+
+def map_each(fn, items, workers):
+    """1本ずつ例外を受け止めて並列に回す。ex.map をそのまま list にすると、
+    1本の TimeoutExpired で他の本の結果まで全部失う"""
+    from concurrent.futures import ThreadPoolExecutor
+
+    def safe(x):
+        try:
+            return fn(x)
+        except Exception as e:  # noqa: BLE001  1本の失敗で他の下書きを捨てない
+            print(f"  下書きに失敗: {type(e).__name__} {str(e)[:60]}", file=sys.stderr)
+            return None
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
+        return list(ex.map(safe, items))
+
+
 def draft_all(items, workers):
     """各記事の書き直し案を、記事のコピー（一時フォルダ）で同時に書かせる。
 
     1本の書き直しのほぼ全部は AI の応答待ち。指示は「この1ファイルだけを直す」なので、コピーの上で
     書かせても中身は同じになる。当てて検算するのは呼び出し側（run_one(edited=…)）で1本ずつ行う"""
     import tempfile
-    from concurrent.futures import ThreadPoolExecutor
     exe = claude_bin()
 
     def one(item):
@@ -839,8 +862,7 @@ def draft_all(items, workers):
             sh([exe, "-p", "--max-turns", "40", *model_args(), "--allowedTools", "Read,Edit",
                 "--settings", PERM], timeout=1800, stdin_text=prompt, cwd=tmp)
             return dst.read_text(encoding="utf-8-sig")
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        return list(ex.map(one, items))
+    return map_each(one, items, workers)
 
 
 def run_one(item, write, edited=None):
@@ -1085,10 +1107,14 @@ def main():
     ok = ng = 0
     started = time.time()
     todo = items[:a.limit]
-    drafts = draft_all(todo, a.parallel) if a.parallel > 1 and a.write else [None] * len(todo)
+    drafts = [None] * len(todo)
+    if a.parallel > 1:
+        k = draft_quota(len(todo), a.parallel, a.budget_min, per_min=30)
+        drafts[:k] = draft_all(todo[:k], a.parallel)
     for x, edited in zip(todo, drafts):
         used = (time.time() - started) / 60
-        if a.budget_min and used >= a.budget_min:
+        # 書き終えた下書きは AI を待たずに当てられるので、予算を過ぎても捨てない
+        if a.budget_min and used >= a.budget_min and edited is None:
             print(f"\n  {used:.0f}分使ったので、ここで止めます"
                   f"（残りは次回。上限{a.budget_min}分）")
             break

@@ -291,9 +291,10 @@ def _publish(idx, d, ng, dry):
                 print(f"    Indexing API が使えません: {str(e)[:110]}")
         time.sleep(0.2)
     print(f"    通知: 成功 {ok}件 / 失敗 {fail}件")
-    done |= _indexnow([u for u, _ in todo])
+    _indexnow([u for u, _ in todo])
     _left[0] -= len(todo)
-    # 送れたURLだけ日付を残す（失敗したものは次の週にもう一度送る）
+    # Indexing API に送れたURLだけ日付を残す。IndexNow だけ通ったURLまで残すと、
+    # Google への再送が見送り期間のあいだ止まる（失敗したものは次の週にもう一度送る）
     sent.update({u: today for u in done})
     SENT.parent.mkdir(exist_ok=True)
     SENT.write_text(json.dumps(sent, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")

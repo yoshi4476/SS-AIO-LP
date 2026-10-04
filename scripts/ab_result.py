@@ -41,10 +41,22 @@ def pull(prop, days):
         property="properties/" + str(prop),
         date_ranges=[DateRange(start_date=f"{days}daysAgo", end_date="yesterday")],
         dimensions=[Dimension(name="eventName")],
-        metrics=[Metric(name="eventCount")], limit=300))
+        metrics=[Metric(name="eventCount")], dimension_filter=event_filter(), limit=1000))
     for x in r.rows:
         out[x.dimension_values[0].value] = int(x.metric_values[0].value)
     return out
+
+
+PREFIXES = ("ab_impression_", "cta_click_")
+
+
+def event_filter():
+    """A/B の出来事だけに絞る。全イベント名を上限つきで取ると、名前が増えたときに ab_impression_* を取りこぼす"""
+    from google.analytics.data_v1beta.types import Filter, FilterExpression, FilterExpressionList
+    return FilterExpression(or_group=FilterExpressionList(expressions=[
+        FilterExpression(filter=Filter(field_name="eventName", string_filter=Filter.StringFilter(
+            match_type=Filter.StringFilter.MatchType.BEGINS_WITH, value=p)))
+        for p in PREFIXES]))
 
 
 def tests():
