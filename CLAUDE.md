@@ -1301,6 +1301,8 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | `auto_rewrite.py --kind question`（週次2本） | H2に質問形が無い記事の見出し2〜3本を質問形にする（質問形H2ありの記事は4.2位上） | 本数・順番が変わったら通さない |
 | `cwv_check.py`（週次） | PageSpeed API で3サイトのトップ＋記事1本の LCP/INP/CLS を実測 | 429/403 は鍵・API有効化の問題として知らせ、`CWV_OK=unknown` にする（速度が悪いとは言わない） |
 | `index_status.py`（週次） | URL検査APIで未登録ページを理由つきで出す | 1日2,000URLの枠内 |
+| `reindex.py --from-cache`（週次） | 「検出/クロール済み - インデックス未登録」「Google に未認識」のURLを Indexing API と IndexNow へ再送 | 送った日を `data/index_resend.json` に残し14日は送り直さない。1回100件まで（同じ日の notify_indexing と合わせて1日200件に収める）。重複・noindex・404 は通知では直らないので送らない |
+| `ci_rerun.py`（selfheal の rerun） | 記事動画・業種調査・調査の更新・写真の棚・監修の記録・デプロイが落ちたら、ログの末尾で一時的（ネットワーク・429・5xx・タイムアウト）か読み、そうなら1回だけ再実行 | 同じ run は1回まで（run_attempt 2 以上はしない）。中身の誤り（門・404になる・鍵・例外・依存の版）と読めない失敗は再実行せず知らせる。後の run があるデプロイは再実行しない。記事・週次・月次・ニュースレターは二重に書く・送るので対象外（heal が受け持つ） |
 | `brand_spelling.py --fix`（週次） | 社名・サービス名の表記ゆれを原稿で揃え、HTMLの残りを数える | 正規表記そのものに一致する検出式を書かない（4,989件を誤検出した） |
 | `cert_check.py` + `token_check.py`（日次・selfheal） | 証明書の残日数・sitemap の404率・配信用トークンの期限 | 要対応は同じ枠でメール |
 | `actions_budget` → 間引き（週次） | 残枠が75%を超えたら動画・書き換えの本数を半分にする | 枠切れは「何も起きない」形で現れる |

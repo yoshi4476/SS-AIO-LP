@@ -38,6 +38,19 @@ def check(name, got, want):
             raise AssertionError(f"{name}: 得た {got!r} / 期待 {want!r}")
 
 
+_AST = {}
+
+
+def ast_nodes(src):
+    """(木, 全ノードの一覧)。門ごとに全スクリプトを構文解析し直すと、234本×8回で約20秒かかっていた。
+    原稿の文字列ごとに1回だけ解析して使い回す（同じ文字列なら同じ木。木は読むだけで書き換えない）"""
+    import ast
+    if src not in _AST:
+        tree = ast.parse(src)
+        _AST[src] = (tree, list(ast.walk(tree)))
+    return _AST[src]
+
+
 # ── 1. 狙う語の判定 ──────────────────────────────
 def test_kw_conflicts():
     from cannibal_check import kw_conflicts, norm_kw
@@ -846,7 +859,7 @@ def test_import_has_no_side_effects():
     ng = []
     for p in sorted((ROOT / "scripts").glob("*.py")):
         src = p.read_text(encoding="utf-8", errors="replace")
-        tree = ast.parse(src)
+        tree = ast_nodes(src)[0]
         has_main = any(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
                        and n.name == "main" for n in tree.body)
         if has_main and '__name__ == "__main__"' not in src \
@@ -895,8 +908,7 @@ def test_import_has_no_side_effects():
     local_modules = {p.stem for p in (ROOT / "scripts").glob("*.py")}
     missing_req = []
     for p in sorted((ROOT / "scripts").glob("*.py")):
-        tree = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
-        for n in ast.walk(tree):
+        for n in ast_nodes(p.read_text(encoding="utf-8", errors="replace"))[1]:
             mods = []
             if isinstance(n, ast.Import):
                 mods = [a.name.split(".")[0] for a in n.names]
@@ -2821,6 +2833,7 @@ def test_publish_gate_actually_blocks():
         + "---" + NL + NL
         + "## 短すぎる見出し" + NL + NL
         + "基準に届かない短い本文です。" + NL)
+    clean = False
     try:
         md.write_text(body, encoding="utf-8", newline="")
         env = dict(os.environ, PYTHONIOENCODING="utf-8")
@@ -2832,6 +2845,13 @@ def test_publish_gate_actually_blocks():
         html = list((ROOT / "site").glob(f"*/{slug}/index.html"))
         smap = (ROOT / "site" / "sitemap.xml").read_text(encoding="utf-8")
         broke = [l for l in out.splitlines() if "リンク切れ" in l and slug in l]
+        # 止めた記事は一覧・関連から外して描き直されている（build.py の late_blocked）ので、
+        # 出力のどこにも slug が無ければ、その回のビルドがそのまま通常のビルドと同じ結果になる。
+        # そのときは後片付けのビルド（約30秒）を省く
+        leftover = [n for n in ("sitemap.xml", "feed.xml", "llms.txt")
+                    if (ROOT / "site" / n).is_file()
+                    and slug in (ROOT / "site" / n).read_text(encoding="utf-8", errors="replace")]
+        clean = r.returncode == 0 and blocked and not html and not leftover
         if not blocked:
             print("  NG  品質検査に落ちた新規記事が BLOCKED になりません")
             FAIL.append("publish_gate_blocks")
@@ -2850,10 +2870,11 @@ def test_publish_gate_actually_blocks():
         md.unlink(missing_ok=True)
         for d in (ROOT / "site").glob(f"*/{slug}"):
             shutil.rmtree(d, ignore_errors=True)
-        subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT,
-                       env=dict(os.environ, PYTHONIOENCODING="utf-8"),
-                       capture_output=True, text=True, encoding="utf-8",
-                       errors="replace", timeout=1800)
+        if not clean:
+            subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT,
+                           env=dict(os.environ, PYTHONIOENCODING="utf-8"),
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=1800)
 
 
 def test_coverage_matrix_shows_gaps():

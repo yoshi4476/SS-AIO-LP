@@ -12,7 +12,9 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\user\Desktop\システム開発\SSオウンドメディア（AIO）")
+# 手元の絶対パスで書くと、別の作業コピー（worktree）から門が読み込んだときに本体の scripts/ が
+# 先に入り、門が古いモジュールを読んで誤って落ちた（2026-10-04）
+ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 OLD = '''          <LabelText text="会社名・店舗名" required />

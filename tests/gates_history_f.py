@@ -26,20 +26,29 @@ def warn(label, items):
         print(f"  WARN  {label}: {len(items)}件  " + " / ".join(items[:8]))
 
 
+_FM = {}
+
+
 def articles():
-    """(slug, frontmatter, body)。フロントマターの壊れた原稿は飛ばす（別の門が止める）"""
+    """(slug, frontmatter, body)。フロントマターの壊れた原稿は飛ばす（別の門が止める）
+
+    5つの門が約400本のフロントマターを YAML で読み直していた（約20秒）。
+    フロントマターの文字列が同じなら前の読みを使い、渡すのは写し（門どうしで書き換えが漏れない）"""
+    import copy
     out = []
     for p in sorted(ARTICLES.glob("*.md")):
         t = p.read_text(encoding="utf-8-sig")
         m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
         if not m:
             continue
-        try:
-            fm = yaml.safe_load(m.group(1)) or {}
-        except yaml.YAMLError:
-            continue
+        if m.group(1) not in _FM:
+            try:
+                _FM[m.group(1)] = yaml.safe_load(m.group(1)) or {}
+            except yaml.YAMLError:
+                _FM[m.group(1)] = None
+        fm = _FM[m.group(1)]
         if isinstance(fm, dict):
-            out.append((p.stem, fm, m.group(2)))
+            out.append((p.stem, copy.deepcopy(fm), m.group(2)))
     return out
 
 

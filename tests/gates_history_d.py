@@ -18,7 +18,7 @@ from pathlib import Path
 
 import yaml
 
-from test_gates import check, ROOT
+from test_gates import check, ROOT, ast_nodes
 
 WF = ROOT / ".github" / "workflows"
 SCRIPTS = ROOT / "scripts"
@@ -32,11 +32,19 @@ def warn(label, items):
         print(f"  WARN  {label}: {len(items)}件  " + " / ".join(items[:8]))
 
 
+_WF = {}
+
+
 def workflows():
+    """9つの門が同じ12本を YAML で読み直していた（約4秒）。中身が同じなら前の読みを使う。
+    読んだ辞書を書き換える門があっても他へ漏れないよう、渡すのは写し"""
+    import copy
     out = []
     for p in sorted(WF.glob("*.yml")):
         t = p.read_text(encoding="utf-8")
-        out.append((p.name, yaml.safe_load(t) or {}, t))
+        if _WF.get(p.name, (None,))[0] != t:
+            _WF[p.name] = (t, yaml.safe_load(t) or {})
+        out.append((p.name, copy.deepcopy(_WF[p.name][1]), t))
     return out
 
 
@@ -91,7 +99,7 @@ def node_run(src, js):
 def rollback_offenders(src):
     """HEAD へ戻す git 呼び出し（作業コピーの未コミットの直しを巻き込む）。別の作業コピー（cwd=dest）は除く"""
     out = []
-    for n in ast.walk(ast.parse(src)):
+    for n in ast_nodes(src)[1]:
         if not isinstance(n, ast.Call):
             continue
         cwd = next((k.value for k in n.keywords if k.arg == "cwd"), None)
@@ -692,7 +700,7 @@ def test_hist_ps1_has_bom():
 
 # ══ 37. 鍵JSONの BOM で Google API の認証が全滅（2026-07-27 / 08-01）════════════════
 def bom_unsafe_loads(src):
-    return [n.lineno for n in ast.walk(ast.parse(src)) if isinstance(n, ast.Call)
+    return [n.lineno for n in ast_nodes(src)[1] if isinstance(n, ast.Call)
             and isinstance(n.func, ast.Attribute) and n.func.attr == "from_service_account_file"]
 
 
@@ -716,7 +724,7 @@ def test_hist_credentials_read_bom_safe():
             parsed = True        # BOM は読めた（鍵として不完全なだけ）
         check("gcreds.load は BOM 付きの鍵を読める", parsed, True)
     warn("OAuth の鍵を *_file で読む（BOM で落ちる。youtube_upload は担当外のため保留）",
-         [f"{p.name}:{n.lineno}" for p, t in scripts() for n in ast.walk(ast.parse(t))
+         [f"{p.name}:{n.lineno}" for p, t in scripts() for n in ast_nodes(t)[1]
           if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
           and n.func.attr in ("from_authorized_user_file", "from_client_secrets_file")])
 
@@ -725,7 +733,7 @@ def test_hist_credentials_read_bom_safe():
 def site_enumerations(src, ids):
     """2つ以上のサイトIDを並べた tuple/list/set（全サイトを回すつもりの直書き）"""
     out = []
-    for n in ast.walk(ast.parse(src)):
+    for n in ast_nodes(src)[1]:
         if isinstance(n, (ast.List, ast.Tuple, ast.Set)) and len(set(str_elems(n)) & ids) >= 2:
             out.append(n.lineno)
     return out
@@ -878,7 +886,7 @@ CF_HOSTS = ("api.resend.com", "api.openai.com", "api.perplexity.ai", "api.x.ai",
 
 def requests_without_ua(src):
     out = []
-    for n in ast.walk(ast.parse(src)):
+    for n in ast_nodes(src)[1]:
         if not (isinstance(n, ast.Call) and getattr(n.func, "attr", getattr(n.func, "id", "")) == "Request" and n.args):
             continue
         seg = ast.get_source_segment(src, n) or ""
@@ -913,7 +921,7 @@ AGENT_NAMES = {"claude", "codex", "claude.cmd", "codex.cmd"}
 
 def agent_call_problems(src):
     out = []
-    for n in ast.walk(ast.parse(src)):
+    for n in ast_nodes(src)[1]:
         if not isinstance(n, ast.Call) or not n.args or not isinstance(n.args[0], ast.List) or not n.args[0].elts:
             continue
         elts = n.args[0].elts

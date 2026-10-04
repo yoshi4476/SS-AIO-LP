@@ -13,7 +13,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\user\Desktop\システム開発\SSオウンドメディア（AIO）")
+# 手元の絶対パスにしない（別の作業コピーから読み込むと本体の scripts/ が先に入る。corporate_form_relax と同じ）
+ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 HUB_BLOCK = '''
