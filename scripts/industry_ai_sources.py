@@ -475,6 +475,11 @@ def research_box(hub_slug, title=""):
             + '</p></aside>')
 
 
+def n_engines(s):
+    """実際に回答が取れたAIの数（題・引用文で「4つ」と固定にしていた。ChatGPT が上限で0件の業種でも4つと書いていた）"""
+    return sum(1 for e in ("ChatGPT", "Gemini", "Claude", "Perplexity") if (s.get("answered") or {}).get(e))
+
+
 def headline(ind):
     """調査の要点の数字。調査ページ・業種別LP・提案書はここだけから数字を取る（食い違いを起こさない）。
     集計ファイルが無ければ None"""
@@ -527,7 +532,7 @@ def hero(ind):
             f' ／ <a href="/download/?ind={RESEARCH_TO_CHECKLIST.get(ind, "")}" data-cta="research_hero_checklist_{ind}">チェックリスト（PDF）を受け取る</a>'
             f' ／ {H.escape(T["owner"])}向けの対策: <a href="{_lpu(T)}" data-cta="research_hero_lp_{T["lp"]}">{H.escape(T["lp_name"])}</a></p>'
             f'</div><div class="lx-console ilp-console" aria-label="調査の要点">'
-            f'<div class="lx-console-head"><b>要点</b><small>{hl["questions"]}問×4つのAI・{hl["date"]}</small></div>'
+            f'<div class="lx-console-head"><b>要点</b><small>{hl["questions"]}問×{hl["n_engines"]}つのAI・{hl["date"]}</small></div>'
             f'<div class="lx-stat"><b>{H.escape(first[0])}</b><span>{H.escape(first[1])}</span></div>'
             f'<div class="lx-stat"><b>{hl["oa"]}%</b><span>{H.escape(T["other_short"])}を調べる質問で、回答が{H.escape(T["owner_site"])}を1つ以上出典にしていた割合</span></div>'
             f'</div></div></section>')
@@ -595,7 +600,7 @@ def render(ind):
                 if oa >= 70 else
                 f"<b>「調べられる」場面では、{T['owner_site']}は出典の件数の{oc}%、回答の{oa}%にとどまりました。</b>どの種類のサイトが使われたかは、上の表をご覧ください。")
     # 事実だけを並べる（「一方、」でつなぐと、対照的でない業種でも対照的に読める）
-    cite = (f"セブンセンシズ株式会社の調査（{y}年{m}月、{name}に関する{s['questions']}問を4つのAIに質問）では、"
+    cite = (f"セブンセンシズ株式会社の調査（{y}年{m}月、{name}に関する{s['questions']}問を{n_engines(s)}つのAIに質問）では、"
             f"{T['find_ex']}のような{T['owner']}を探す質問の出典は、{lp}%が{T['portal']}、{lc}%が{T['owner_site']}でした。"
             f"{T['other_short']}を調べる質問では、出典の{oc}%が{T['owner_site']}で、回答の{oa}%が{T['owner_site']}を1つ以上出典にしていました。")
     groups_q = "".join(f"<li><b>{H.escape(g)}</b>（{len(qs)}問）: {H.escape('／'.join(qs[:4]))} など</li>"
@@ -664,7 +669,7 @@ def render(ind):
         for k in CATS:
             if c.get(k):
                 csv.append(f"{g},{LAB[k]},{c[k]},{pct(c, k)}")
-    title = f"{name}の質問にAIは何を出典に答えるか｜{s['questions']}問×4つのAIの調査"
+    title = f"{name}の質問にAIは何を出典に答えるか｜{s['questions']}問×{n_engines(s)}つのAIの調査"
     desc = cite
     return title, desc, body, ld, "\n".join(csv) + "\n"
 

@@ -79,6 +79,14 @@ def run():
     return out
 
 
+def _study(ind):
+    """業種調査の「何つのAI・何問」。固定の文にすると、AIが上限で答えなかった回に実際と食い違う"""
+    import industry_ai_sources as IAS
+    p = ROOT / "data" / "research" / f"{ind}-summary.json"
+    s = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
+    return f"{IAS.n_engines(s)}つのAI・{s.get('questions', 0)}問" if s else "業種別の調査"
+
+
 def body():
     """ランキングのページ（最新の月・前月との比較）。月が無ければ None"""
     import html
@@ -112,7 +120,7 @@ def body():
                     '何問の出典になったかの順です。</p>'
                     '<div class="rk-wrap"><table class="rk"><thead><tr><th>順位</th><th>サイト</th><th>種類</th><th>出典になった質問</th><th>前月</th></tr></thead>'
                     f'<tbody>{"".join(rows)}</tbody></table></div>'
-                    f'<p class="qa-how"><a href="/research/{ind}-ai-sources/">{E(name)}の調査（4つのAI・100問）</a> ／ '
+                    f'<p class="qa-how"><a href="/research/{ind}-ai-sources/">{E(name)}の調査（{_study(ind)}）</a> ／ '
                     f'<a href="{QP.url(ind)}">質問ごとの出典</a></p></section>')
     hist = "・".join(f'{x[:4]}年{int(x[5:])}月' for x in ms)
     intro = ('<section class="qa-intro"><p class="qa-how">毎月1日に、業種ごとの「地域で探す」質問を Gemini（Google検索つき）に聞き、'

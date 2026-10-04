@@ -226,3 +226,13 @@ def test_corporate_aio_page_shows_survey_from_the_same_numbers():
     check("見出しの「何業種中いくつ」をデータから数える", "portalWins" in tsx and "出典の中心" not in tsx, True)
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("週次で最新の数字に揃える", "research_publish.py --push" in wf, True)
+
+
+def test_research_pages_count_only_engines_that_answered():
+    print("\n■ 業種調査のページ: 「何つのAIに聞いたか」は実際に答えたAIの数で書く（固定の「4つ」にしない）")
+    import industry_ai_sources as IAS
+    check("答えたAIだけを数える", IAS.n_engines({"answered": {"ChatGPT": 0, "Claude": 50, "Gemini": 3}}), 2)
+    for f in ("industry_ai_sources.py", "ai_ranking.py"):
+        src = (ROOT / "scripts" / f).read_text(encoding="utf-8")
+        body = src.split('"""', 2)[2] if src.lstrip().startswith(("# -*-", '"""')) and '"""' in src else src
+        check(f"{f}: ページに出す文に「4つのAI」を固定で書いていない", "4つのAI" in body, False)
