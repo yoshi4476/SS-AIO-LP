@@ -30,6 +30,16 @@ def field(fm, k):
     return m.group(1).strip().strip('"') if m else ""
 
 
+def legacy_keyword(title):
+    """題名から狙う語を取る。【2026年最新】などの飾りと、｜・？の後ろ（説明の部分）は外す。
+    ｜の無い題では題名まるごとが狙う語になり、食い合いの検査と「題に狙う語が入るか」の検算が崩れた"""
+    t = re.sub(r"【[^】]*】", " ", title)
+    t = re.split(r"[｜|]", t)[0]
+    m = re.match(r"^(.+?[?？])", t)
+    t = m.group(1) if m else t
+    return re.sub(r"\s+", " ", t).strip(" 　?？\"")[:40]
+
+
 def convert(p, axes=None):
     fm, body = split(p.read_text(encoding="utf-8"))
     title = field(fm, "title")
@@ -38,7 +48,7 @@ def convert(p, axes=None):
         f"title: {title}",
         f"description: {field(fm, 'description')}",
         f"slug: {p.stem}",
-        f"keyword: {re.split(r'[｜|]', title)[0].strip()}",
+        f"keyword: {legacy_keyword(title)}",
         "category: hojokin",
         f"date: {field(fm, 'date')}",
         f"modified: {field(fm, 'date')}",
@@ -123,6 +133,11 @@ def rewrite_parallel(slugs, workers):
         try:
             # コミットしていない入力（書き直し途中の控え・採点の台帳）を作業場所へ写す
             for rel in (f"articles/_legacy/{slug}.md", "data/legacy_scores.json", f"data/subsidy_survey/{slug}.json"):
+                if (ROOT / rel).is_file():
+                    shutil.copy2(ROOT / rel, w / rel)
+            # Git で管理していない鍵（Search Console・管制塔）も写す。無いと食い合いの検査（kw_guard）が
+            # GSC を読めずに止まり、12本中8本が「食い合う」で戻された（2026-10-04）。作業場所ごと消すので残らない
+            for rel in ("indexing-service-account.json", ".env"):
                 if (ROOT / rel).is_file():
                     shutil.copy2(ROOT / rel, w / rel)
             r = subprocess.run([sys.executable, "scripts/migrate_legacy.py", "--rewrite", slug], cwd=w,
