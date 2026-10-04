@@ -75,11 +75,12 @@ function form_(body) {
     return { ok: true, probe: true };
   }
 
-  // 営業メールは記録だけして、担当への通知と送り主への自動返信を出さない
+  // 営業メールらしい送信は、送り主への自動返信だけを止める。担当への通知は「営業の可能性」の印を付けて出す。
+  // 「弊社サービス」「業務提携」は本物の相談にも入りうるので、通知まで止めると問い合わせを見落とす（最後は人が判断する）
   const sales = type === 'contact' && isSales_(body_(d.message));
   const temp = sales ? '営業' : leadTemp_(type, d.message, d, body.referer || d.referer || '');
   const row = leadSave_(site, type, temp, d, body.referer || d.referer || '');
-  const silent = sales || body.silent === true || body.silent === 'true';
+  const silent = body.silent === true || body.silent === 'true';
   // 記録は済んでいる。メールで失敗しても、送信者にはエラーを返さない。
   // ここで例外を投げると、問い合わせが届いていないと誤解される。
   const warn = [];
@@ -89,10 +90,12 @@ function form_(body) {
     } catch (err) {
       warn.push('通知メール: ' + err);
     }
-    try {
-      leadReply_(site, type, d);
-    } catch (err) {
-      warn.push('自動返信: ' + err);
+    if (!sales) {
+      try {
+        leadReply_(site, type, d);
+      } catch (err) {
+        warn.push('自動返信: ' + err);
+      }
     }
   }
   if (warn.length) {
@@ -216,7 +219,7 @@ function body_(s) {
 
 /** 社内向けの通知。温度を件名に出して、見た瞬間に優先度が分かるようにする */
 function leadNotify_(site, type, temp, d, referer) {
-  const tag = { HOT: '🔥【HOT】', WARM: '🌤【WARM】', COOL: '❄️【COOL】' }[temp] || '';
+  const tag = { HOT: '🔥【HOT】', WARM: '🌤【WARM】', COOL: '❄️【COOL】', '営業': '📮【営業の可能性・要確認】' }[temp] || '';
   const label = LEAD_TYPE_LABELS[type] || type;
   const lines = ['サイト: ' + site, '種別: ' + label, '温度: ' + temp, '',
                  '会社・店舗: ' + clean_(d.company), 'お名前: ' + clean_(d.name),

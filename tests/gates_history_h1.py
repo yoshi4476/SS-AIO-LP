@@ -35,8 +35,11 @@ def test_sales_inquiries_are_kept_but_silent():
     check("form_: 疎通確認の後・記録の前に営業を判定する", 0 <= i_probe < i_sales < i_save, True)
     check("form_: 通知より前に営業を判定する", 0 <= i_sales < i_notify, True)
     check("form_: 営業なら温度を「営業」にする", "sales ? '営業'" in form, True)
-    check("form_: 営業なら通知と自動返信を止める（silent に含める）",
-          bool(re.search(r"const silent = sales \|\|", form)), True)
+    # 通知まで止めると、「弊社サービス」「業務提携」を含む本物の相談を見落とす。通知は印つきで出し、自動返信だけ止める
+    check("form_: 営業らしい送信も担当には通知し、自動返信だけ止める",
+          (bool(re.search(r"const silent = sales \|\|", form)), "if (!sales)" in form and "leadReply_" in form.split("if (!sales)", 1)[1][:200]),
+          (False, True))
+    check("通知: 営業らしい送信に「要確認」の印を付ける", "営業の可能性・要確認" in src, True)
     follow = src.split("function followUp() {", 1)[1].split("\nfunction ", 1)[0]
     check("followUp: 営業の行に送らない", "temp === '営業'" in follow, True)
     tool = src.split("function toolFollow_(", 1)[1].split("\nfunction ", 1)[0]
