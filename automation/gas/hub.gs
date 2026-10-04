@@ -777,6 +777,50 @@ function authorizeMail() {
   console.log('テストメールを ' + NOTIFY_TO + ' へ送りました。届いていれば承認は完了です。');
 }
 
+/**
+ * 配信除外を管理しやすい形に整え、診断ログのテスト行を消す（何度呼んでも同じ結果になる）。
+ * 判定に使うのは1列目だけ。B列より右は人が並べ替え・絞り込みに使う管理用の欄。
+ * 診断ログは 2026-09-28 5:20〜5:21 のテスト2行（紹介元 partner-test01 を含む）だけを、中身で確かめて消す。
+ */
+function tidyExclude_() {
+  const out = [];
+  const ss = book_();
+  const sh = excludeSheet_();
+  const head = sh.getRange(1, 1, 1, EXCLUDE_HEAD.length).getValues()[0];
+  if (head.join('|') !== EXCLUDE_HEAD.join('|')) {
+    // 旧い3列（メール/メモ/追加日）の行があれば、新しい6列の位置へ移す
+    const n = sh.getLastRow() - 1;
+    if (n > 0 && String(head[1]) === 'メモ') {
+      const old = sh.getRange(2, 1, n, 3).getValues();
+      sh.getRange(2, 1, n, 6).clearContent();
+      sh.getRange(2, 1, n, 6).setValues(old.map(function (r) { return [r[0], '', '', r[1], r[2], '手入力']; }));
+    }
+    sh.getRange(1, 1, 1, EXCLUDE_HEAD.length).setValues([EXCLUDE_HEAD]);
+    out.push('配信除外の列を6列にしました');
+  }
+  sh.setFrozenRows(1);
+  sh.getRange(1, 1, 1, EXCLUDE_HEAD.length).setFontWeight('bold').setBackground('#0b2447').setFontColor('#ffffff');
+  [260, 200, 110, 320, 100, 120].forEach(function (w, i) { sh.setColumnWidth(i + 1, w); });
+  sh.getRange(2, 3, 998, 1).setDataValidation(SpreadsheetApp.newDataValidation()
+    .requireValueInList(['既存客', '取引先', '営業お断り', '配信停止', 'テスト'], true).setAllowInvalid(true).build());
+  sh.getRange(1, 1).setNote('ここに書いたメールアドレス（例: taro@example.co.jp）かドメイン（例: example.co.jp）には、'
+    + 'ステップメール・自動フォロー・測り直しのメールを送りません。問い合わせの通知は届きます。\n'
+    + '判定に使うのはこの列だけです。B列より右は管理用（並べ替え・絞り込みに使えます）。\n'
+    + 'gmail.com などのフリーメールはドメインで書かず、メールアドレスで書いてください（他の人まで止まるため）。\n'
+    + '問い合わせシートの「対応状況」を「既存客」「契約中」「成約」にした人は、自動でここに追加されます。');
+  if (!sh.getFilter()) sh.getRange(1, 1, Math.max(sh.getLastRow(), 2), EXCLUDE_HEAD.length).createFilter();
+  out.push('配信除外の書式・選択肢・説明を整えました');
+
+  const dg = ss.getSheetByName('診断ログ');
+  if (dg && dg.getLastRow() >= 3) {
+    const v = dg.getRange(2, 1, 2, 5).getDisplayValues();
+    const isTest = v[0][0].indexOf('2026/09/28 5:20') === 0 && v[1][0].indexOf('2026/09/28 5:21') === 0 && v[1][4] === 'partner-test01';
+    if (isTest) { dg.deleteRows(2, 2); out.push('診断ログのテスト2行を削除しました'); }
+    else out.push('診断ログ: テスト行は見つかりません（削除済み）');
+  }
+  return out.join(' / ');
+}
+
 // ============================================================
 // 保守（合言葉つきで外から呼ぶ）
 // ============================================================
@@ -788,6 +832,7 @@ function admin_(task) {
     case 'dashboard': return { ok: true, result: refreshDashboard() };
     case 'setup':     setup(); return { ok: true, result: 'タブを整えました' };
     case 'clean_kpi': return { ok: true, result: cleanKpi_() };
+    case 'tidy_exclude': return { ok: true, result: tidyExclude_() };
     default:
       return { ok: false, error: '不明なtask: ' + task
                + '（format / triggers / kpi / dashboard / setup）' };

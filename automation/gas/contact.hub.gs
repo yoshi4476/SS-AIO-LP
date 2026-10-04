@@ -623,10 +623,13 @@ function excludeSheet_() {
   let sh = ss.getSheetByName('配信除外');
   if (!sh) {
     sh = ss.insertSheet('配信除外');
-    sh.appendRow(['メールアドレスかドメイン', 'メモ', '追加日']);
+    sh.appendRow(EXCLUDE_HEAD);
   }
   return sh;
 }
+
+// 判定に使うのは1列目だけ。2列目以降は人が一覧を管理するための欄（会社名・区分で並べ替え・絞り込みできる）
+const EXCLUDE_HEAD = ['メールアドレスかドメイン', '会社名', '区分', 'メモ', '追加日', '追加元'];
 
 function normHost_(v) {
   return String(v || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/[\/?#].*$/, '');
@@ -679,13 +682,15 @@ function syncClientExcludes_(vals, set) {
   vals.forEach(function (r) {
     if (!CLIENT_STATUS.test(String(r[13] || ''))) return;
     const email = String(r[6] || '').trim().toLowerCase();
-    const memo = '台帳の状態（' + String(r[13]) + '）から自動追加: ' + String(r[3] || '');
-    if (email && !set.emails[email]) { sh.appendRow([email, memo, today]); set.emails[email] = true; added++; }
+    const company = String(r[3] || '');
+    const memo = '問い合わせの状態「' + String(r[13]) + '」';
+    const put = function (v) { sh.appendRow([v, company, '既存客', memo, today, '台帳から自動']); added++; };
+    if (email && !set.emails[email]) { put(email); set.emails[email] = true; }
     const ed = email.split('@')[1] || '';
-    if (ed && !FREE_MAIL.test(ed) && !set.domains[ed]) { sh.appendRow([ed, memo, today]); set.domains[ed] = true; added++; }
+    if (ed && !FREE_MAIL.test(ed) && !set.domains[ed]) { put(ed); set.domains[ed] = true; }
     const url = (String(r[9] || '').match(/対象 (https?:\/\/\S+)/) || [])[1];
     const h = normHost_(url);
-    if (h && !set.domains[h]) { sh.appendRow([h, memo, today]); set.domains[h] = true; added++; }
+    if (h && !set.domains[h]) { put(h); set.domains[h] = true; }
   });
   return added;
 }
