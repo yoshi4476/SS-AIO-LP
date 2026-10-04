@@ -436,6 +436,29 @@ def _lead_by_landing(ga, prop, date_ranges):
     return {r.dimension_values[0].value: int(r.metric_values[0].value) for r in rep.rows}
 
 
+def ai_out_of_organic(ga, prop, start, end, channels):
+    """GA4 が「Organic Search」に入れたAI経由（ChatGPT の検索結果リンクは参照元 openai / organic）を
+    「AI Assistant」へ移す。自然検索にAI経由が混ざると、自然検索の伸びを実際より大きく見せる
+    （2026-10 の28日でコーポレート16・補助金4セッション）。分類は daily_kpi.ai_label の1か所"""
+    from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, RunReportRequest
+    import daily_kpi as _dk
+    try:
+        rep = ga.run_report(RunReportRequest(
+            property=prop, date_ranges=[DateRange(start_date=start, end_date=end)],
+            dimensions=[Dimension(name="sessionDefaultChannelGroup"), Dimension(name="sessionSource")],
+            metrics=[Metric(name="sessions")]))
+    except Exception:
+        return channels
+    moved = sum(int(r.metric_values[0].value) for r in rep.rows
+                if r.dimension_values[0].value == "Organic Search" and _dk.ai_label(r.dimension_values[1].value))
+    if not moved:
+        return channels
+    d = dict(channels)
+    d["Organic Search"] = d.get("Organic Search", 0) - moved
+    d["AI Assistant"] = d.get("AI Assistant", 0) + moved
+    return sorted(((k, v) for k, v in d.items() if v > 0), key=lambda x: -x[1])
+
+
 def fetch_real():
     """GA4/GSC/Sheetsから実データ取得。未設定なら例外に設定手順を含める"""
     try:
@@ -624,7 +647,7 @@ def fetch_real():
             return sorted(pairs, key=lambda x: -x[1])
         except Exception:
             return []
-    data["channels"] = ga_dist("sessionDefaultChannelGroup")
+    data["channels"] = ai_out_of_organic(ga, prop, f"{labels[-1]}-01", cur_end, ga_dist("sessionDefaultChannelGroup"))
     data["devices"] = ga_dist("deviceCategory")
 
     cur_m = labels[-1]
@@ -2662,7 +2685,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <div class="sheet">
 <div class="sec"><span class="no">06</span><h2>流入構造分析</h2><div class="gold"></div></div>
 <h3>チャネル別セッション（当月）</h3>
-{dist_bars(d.get("channels", []), "#2563eb", {"Organic Search": "自然検索", "Direct": "直接流入", "Referral": "参照サイト", "Organic Social": "SNS", "Email": "メール", "Unassigned": "未分類", "Paid Search": "有料検索", "Cross-network": "クロスネットワーク"})}
+{dist_bars(d.get("channels", []), "#2563eb", {"Organic Search": "自然検索", "Direct": "直接流入", "Referral": "参照サイト", "Organic Social": "SNS", "Email": "メール", "Unassigned": "未分類", "Paid Search": "有料検索", "Cross-network": "クロスネットワーク", "AI Assistant": "AI経由"})}
 <h3 style="margin-top:12px">デバイス別セッション（当月）</h3>
 {dist_bars(d.get("devices", []), "#7b83eb", {"mobile": "スマートフォン", "desktop": "PC", "tablet": "タブレット"})}
 <h3 style="margin-top:12px">日別クリック推移（当月・Search Console）</h3>

@@ -252,3 +252,27 @@ def test_research_refill_keeps_existing_answers_and_runs_in_ci():
     wf = (ROOT / ".github" / "workflows" / "research-refill.yml").read_text(encoding="utf-8")
     check("CI: 毎日回し、更新されたログイン情報を Secrets に戻し、公開を起動する",
           ("cron:" in wf, "gh secret set CODEX_AUTH_JSON" in wf, "gh workflow run deploy.yml" in wf), (True, True, True))
+
+
+def test_ai_visits_are_not_counted_as_organic():
+    print("\n■ 月次レポート: ChatGPT 経由（openai / organic）を自然検索から外してAI経由に数える")
+    import daily_kpi as D
+    import monthly_report as M
+    check("openai は ChatGPT", D.ai_label("openai"), "ChatGPT")
+    check("パーソルの社内AIチャットはAI経由（2026-10-05 判断）", D.ai_label("chassu.chat-assistant.persol-group.co.jp"), "その他AI")
+    check("google は AI ではない", D.ai_label("google"), None)
+
+    class R:
+        def __init__(self, ch, src, n):
+            self.dimension_values = [type("V", (), {"value": ch}), type("V", (), {"value": src})]
+            self.metric_values = [type("V", (), {"value": str(n)})]
+
+    class GA:
+        def run_report(self, req):
+            return type("Rep", (), {"rows": [R("Organic Search", "google", 128), R("Organic Search", "openai", 10)]})
+    got = M.ai_out_of_organic(GA(), "p", "2026-09-01", "2026-09-30", [("Organic Search", 138), ("AI Assistant", 27)])
+    check("自然検索から引き、AI経由に足す", dict(got), {"Organic Search": 128, "AI Assistant": 37})
+    for wf in ("research-refill.yml", "photo-shelf.yml", "industry-research.yml"):
+        s = (ROOT / ".github" / "workflows" / wf).read_text(encoding="utf-8")
+        check(f"{wf}: Codex を使う工程は同じ順番待ちで、更新されたログイン情報を戻す",
+              ("group: industry-research" in s, "gh secret set CODEX_AUTH_JSON" in s), (True, True))

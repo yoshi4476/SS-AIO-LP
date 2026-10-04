@@ -8,12 +8,15 @@ on:
     - cron: "17 2 * * 1"   # 月曜 11:17 JST
   workflow_dispatch:
 
+# Codex（同じログイン情報）を使う工程は1つずつ回す。同時に動くと、片方がログイン情報を更新して
+# もう片方の手元の情報が無効になる（業種調査・業種調査の聞き足しと同じ group）
 concurrency:
-  group: photo-shelf
+  group: industry-research
   cancel-in-progress: false
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   shelf:
@@ -40,6 +43,7 @@ jobs:
           mkdir -p ~/.codex
           printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
           chmod 600 ~/.codex/auth.json
+          sha256sum ~/.codex/auth.json | cut -c1-64 > /tmp/auth.before
           codex login status
 
       - name: 棚の点検と、足りない写真を作る
@@ -48,9 +52,19 @@ jobs:
           timeout 45m python scripts/photo_shelf.py --generate --limit 20 || true
           python -c "import sys;sys.path.insert(0,'scripts');import photo_shelf as p;p.ensure_jpg()"
 
+      - name: 更新されたログイン情報を Secrets に戻す
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRET_TOKEN }}
+        run: |
+          [ -f ~/.codex/auth.json ] && [ -f /tmp/auth.before ] || exit 0
+          [ "$(sha256sum ~/.codex/auth.json | cut -c1-64)" = "$(cat /tmp/auth.before)" ] && exit 0
+          if [ -z "$GH_TOKEN" ]; then echo "::warning::GH_SECRET_TOKEN が無く、更新されたログイン情報を戻せません"; exit 0; fi
+          gh secret set CODEX_AUTH_JSON --repo "$GITHUB_REPOSITORY" < ~/.codex/auth.json && echo "ログイン情報を更新しました"
+
       - name: 片付け
         if: always()
-        run: rm -f ~/.codex/auth.json
+        run: rm -f ~/.codex/auth.json /tmp/auth.before
 
       - name: コミット
         run: |

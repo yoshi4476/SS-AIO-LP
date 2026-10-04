@@ -75,12 +75,12 @@ def test_measurement_mismatch_detectors():
             ("(direct) / (none)", 95)]
     check("自然検索の内訳: Google / ほかの検索 / 自然検索に入ったAI", D.organic_split(rows), (79, 66, 16))
 
-    srcs = [("chassu.chat-assistant.persol-group.co.jp", 1), ("openai", 17), ("chatgpt.com", 27),
+    srcs = [("helpdesk.chat-assistant.example-corp.jp", 1), ("openai", 17), ("chatgpt.com", 27),
             ("gemini.google.com", 2), ("perplexity.ai", 1), ("google", 79), ("bing", 46), ("yahoo", 18),
             ("duckduckgo", 2), ("note.com", 2), ("cp.onamae.ne.jp", 3), ("chatwork.com", 4),
             ("shinsaibashi-lab-sample.pages.dev", 1), ("kimitsu-kanko.jp", 1), ("(direct)", 95), ("(not set)", 2)]
     check("AIらしいのに数えていない参照元だけを拾う（chatwork・日本語のドメイン・検索エンジンは拾わない）",
-          D.ai_unclassified(srcs), [("chassu.chat-assistant.persol-group.co.jp", 1)])
+          D.ai_unclassified(srcs), [("helpdesk.chat-assistant.example-corp.jp", 1)])
 
     ch = [("Organic Search", 161), ("Direct", 95), ("AI Assistant", 28), ("Referral", 5)]
     check("GA4 のチャネル名は単数の「AI Assistant」で数える", D.ai_channel_gap(ch, srcs)[0], 28)

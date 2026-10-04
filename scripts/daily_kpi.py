@@ -33,7 +33,8 @@ AI_DOMAINS = {
     "copilot": ["copilot.microsoft.com", "bing.com/chat", "edgeservices.bing.com"],
     "claude": ["claude.ai", "anthropic.com"],
     "grok": ["grok.com", "x.ai", "grok.x.com"],
-    "その他AI": ["you.com", "poe.com", "felo.ai", "genspark.ai",
+    # chat-assistant.persol-group.co.jp はパーソルの社内向けAIチャット（2026-10-05 運用者の判断でAI経由に数える）
+    "その他AI": ["you.com", "poe.com", "felo.ai", "genspark.ai", "chat-assistant.persol-group.co.jp",
                  "chat.mistral.ai", "phind.com", "kagi.com", "duckduckgo.com/aichat",
                  "meta.ai", "iask.ai", "andisearch.com", "deepseek.com", "chat.qwen.ai",
                  "notebooklm.google", "aistudio.google.com", "search.brave.com/summarizer"],

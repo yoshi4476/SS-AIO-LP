@@ -49,6 +49,7 @@ jobs:
           mkdir -p ~/.codex
           printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
           chmod 600 ~/.codex/auth.json
+          sha256sum ~/.codex/auth.json | cut -c1-64 > /tmp/auth.before
           codex login status || true
 
       - name: 調べる（未完了・ChatGPT が足りない業種だけ）
@@ -68,9 +69,19 @@ jobs:
             python scripts/subsidy_survey.py --site "$s" 12 2>&1 | tail -3 || true
           done
 
+      - name: 更新されたログイン情報を Secrets に戻す
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRET_TOKEN }}
+        run: |
+          [ -f ~/.codex/auth.json ] && [ -f /tmp/auth.before ] || exit 0
+          [ "$(sha256sum ~/.codex/auth.json | cut -c1-64)" = "$(cat /tmp/auth.before)" ] && exit 0
+          if [ -z "$GH_TOKEN" ]; then echo "::warning::GH_SECRET_TOKEN が無く、更新されたログイン情報を戻せません"; exit 0; fi
+          gh secret set CODEX_AUTH_JSON --repo "$GITHUB_REPOSITORY" < ~/.codex/auth.json && echo "ログイン情報を更新しました"
+
       - name: 片付け
         if: always()
-        run: rm -f ~/.codex/auth.json
+        run: rm -f ~/.codex/auth.json /tmp/auth.before
 
       - name: サイトに反映して公開
         env:
