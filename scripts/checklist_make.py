@@ -112,6 +112,14 @@ INDUSTRIES = {
 }
 
 
+import json as _json
+# 外部に頼む場合の相場は data/price_ranges.json だけを正とする（当社の料金は書かない・匂わせない）
+PRICE = _json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
+WHO = {"inhouse_tools": "社内にWebの担当者がいて、毎月の見直しの時間が取れる",
+       "outsource_partial": "設定やページづくりの一部だけを任せ、運用は社内で続けたい",
+       "outsource_full": "調査・ページづくり・掲載情報の整備・毎月の報告まで、まとめて任せたい"}
+
+
 def page(key):
     import industry_ai_sources as IAS
     c = INDUSTRIES[key]
@@ -191,6 +199,19 @@ li{{display:flex;gap:2.4mm;align-items:flex-start;break-inside:avoid}}
 .how b,.fix b{{color:#2563eb;font-weight:700;margin-right:1mm}}
 .fix b{{color:#0b7a4b}}
 ol.order{{margin:0;padding-left:5mm;font-size:8.8pt}}
+.tag{{float:right;font-size:7.4pt;font-weight:500;color:#5b6b84;background:#eef3fb;border-radius:1mm;padding:.4mm 1.6mm;margin-top:.6mm}}
+.page{{break-before:page}}
+.pit li{{display:block;padding-left:4mm;text-indent:-4mm;font-size:8.8pt}}
+table.mk{{width:100%;border-collapse:collapse;font-size:8.6pt;margin:1mm 0 2mm}}
+table.mk th,table.mk td{{border:.25mm solid #d9e2ef;padding:1.6mm 2.2mm;text-align:left;vertical-align:top}}
+table.mk thead th{{background:#eef3fb}}
+.steps{{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:1mm 0 2mm}}
+.steps div{{border:.3mm solid #d9e2ef;border-radius:2mm;padding:2.5mm;font-size:8.2pt;line-height:1.55}}
+.steps b{{display:block;color:#2563eb;font-size:8.8pt;margin-bottom:.8mm}}
+.ask{{background:#0b2447;color:#fff;border-radius:3mm;padding:4.5mm 5mm;margin-top:4mm}}
+.ask h3{{margin:0 0 1.5mm;font-size:12pt}}
+.ask p{{margin:.8mm 0;font-size:8.8pt;color:rgba(255,255,255,.92)}}
+.ask .big{{font-size:10.5pt;font-weight:700;color:#fff;margin-top:2mm}}
 .foot{{margin-top:6mm;border-top:.3mm solid #e3eaf3;padding-top:3mm;font-size:8.4pt;color:#5b6b84}}
 .foot b{{color:#0b2447}}
 </style></head><body>
@@ -201,17 +222,47 @@ ol.order{{margin:0;padding-left:5mm;font-size:8.8pt}}
 <p class="src">出典: セブンセンシズ株式会社の調査（{hl['questions']}問を {hl['engines_text']} に質問・{hl['date']}）{hl['url']}</p></div>
 <div class="use"><b>使い方</b>　各項目の「確かめ方」で今の状態を見て、当てはまれば□に印をつけます。当てはまらない項目は「直し方」を、
 上から順に進めてください。1〜2は数日で直せる設定の項目、3〜4はページづくりの項目です。全部で{len(TECH) + len(find) + len(seek) + len(facts) + len(measure)}項目あります。</div>
-<h2>1. AIと検索に読まれる状態か（{len(TECH)}項目）</h2><p class="why">ここが欠けると、内容が良くてもAIの答えに使われません。まず最初に確かめてください。</p><ul>{box(TECH)}</ul>
-<h2>2.「探される」場面（{e(T['owner'])}を探す人・{len(find)}項目）</h2><p class="why">探す質問では、AIは{e(T['portal'])}も出典にします。掲載情報の古さは、そのまま答えに出ます。</p><ul>{box(find)}</ul>
-<h2>3.「調べられる」場面（自社の解説ページ・{len(seek)}項目）</h2><p class="why">費用・手続きなどを調べる質問では、AIは{e(T['owner_site'])}を出典にしていました。次のテーマに答えるページがあるかを確かめてください。</p><ul>{box(seek)}</ul>
-<h2>4. 事実と書き方（{len(facts)}項目）</h2><p class="why">AIが根拠に選ぶのは、そこにしか無い事実です。業種の決まりにふれる書き方は、AIの答えにも載りません。</p><ul>{box(facts)}</ul>
-<h2>5. 効果を測る（{len(measure)}項目）</h2><p class="why">直したかどうかではなく、表示・訪問・問い合わせが増えたかで判断します。</p><ul>{box(measure)}</ul>
+<h2>1. AIと検索に読まれる状態か（{len(TECH)}項目）<span class="tag">確かめる: 自分で ／ 直す: 制作会社・サーバーの作業</span></h2><p class="why">ここが欠けると、内容が良くてもAIの答えに使われません。まず最初に確かめてください。</p><ul>{box(TECH)}</ul>
+<h2>2.「探される」場面（{e(T['owner'])}を探す人・{len(find)}項目）<span class="tag">自分でできる ／ 続けるのが難しい</span></h2><p class="why">探す質問では、AIは{e(T['portal'])}も出典にします。掲載情報の古さは、そのまま答えに出ます。</p><ul>{box(find)}</ul>
+<h2>3.「調べられる」場面（自社の解説ページ・{len(seek)}項目）<span class="tag">文章・構成・決まりの知識が要る</span></h2><p class="why">費用・手続きなどを調べる質問では、AIは{e(T['owner_site'])}を出典にしていました。次のテーマに答えるページがあるかを確かめてください。</p><ul>{box(seek)}</ul>
+<h2>4. 事実と書き方（{len(facts)}項目）<span class="tag">業種の決まりの確認が要る</span></h2><p class="why">AIが根拠に選ぶのは、そこにしか無い事実です。業種の決まりにふれる書き方は、AIの答えにも載りません。</p><ul>{box(facts)}</ul>
+<h2>5. 効果を測る（{len(measure)}項目）<span class="tag">最初の設定が要る</span></h2><p class="why">直したかどうかではなく、表示・訪問・問い合わせが増えたかで判断します。</p><ul>{box(measure)}</ul>
 <h2>6. どこから手を付けるか</h2>
 <ol class="order"><li>1の設定の項目（クローラー・noindex・SSL）を先に直す。ここが欠けていると、ほかの項目の効果が出ません。</li>
 <li>2の掲載情報と Googleビジネスプロフィールを最新にする。</li>
 <li>3のテーマのうち、問い合わせにつながる「費用」「流れ」から1ページずつ作る。</li>
 <li>4の決まりにふれる表現を消し、事実を期間と母数つきで足す。</li>
 <li>5の数字を月に1回見て、増えたページの書き方を、ほかのページにも広げる。</li></ol>
+<div class="page"></div>
+<h2>7. よくあるつまずき</h2><p class="why">項目そのものより、続け方でつまずくことが多くあります。</p>
+<ul class="pit">
+<li>・設定を直しても、AIの答えや検索の順位に表れるまでには数か月単位の時間がかかり、途中で手が止まる。</li>
+<li>・解説ページを増やしたが、地域名や業種名だけを入れ替えた同じ形のページになり、かえって評価を下げる。</li>
+<li>・{e(c['label'])}の決まりにふれる表現が残ったまま、ページを広げてしまう。</li>
+<li>・{e(T['portal'])}や Googleビジネスプロフィールの情報が、気づかないうちに古くなる。</li>
+<li>・数字を見ていないので、どのページが問い合わせにつながったのか分からず、次に何をすればよいか決められない。</li>
+<li>・担当者が本業と兼ねていて、月に1回の見直しが続かない。</li>
+</ul>
+<h2>8. 自社で進めるか、任せるか</h2>
+<table class="mk"><thead><tr><th>やり方</th><th>向いている場合</th><th>費用の目安（{e(PRICE['label'])}）</th></tr></thead><tbody>
+{"".join(f"<tr><th>{e(r['label'])}</th><td>{e(WHO[r['id']])}</td><td>{e(r['range'])}</td></tr>" for r in PRICE['ranges'])}
+</tbody></table>
+<p class="why">自社で進める場合も、担当者の時間がかかります。1〜2の設定だけを自社で直し、3〜5を任せる分け方もできます。
+当社の料金は、無料相談で御社の状況（今の印の数・ページの数・地域）をうかがってからご案内します。</p>
+<h2>9. 当社に任せた場合の進め方</h2>
+<div class="steps">
+<div><b>1. 無料相談</b>このチェックリストの結果をもとに、どこから直すと効果が大きいかを一緒に決めます。</div>
+<div><b>2. 調査</b>御社と同じ地域の{e(T['owner'])}が、ChatGPT・Gemini などのAIにどう紹介されているかを調べます。</div>
+<div><b>3. 改善</b>設定の修正、{e(c['label'])}の決まりにふれない解説ページづくり、掲載情報の整備を進めます。</div>
+<div><b>4. 毎月の報告</b>検索の表示・AIからの訪問・問い合わせの数を毎月お届けし、次の打ち手を決めます。</div>
+</div>
+<div class="ask"><h3>このチェックリストで、印がつかなかった項目はいくつありましたか</h3>
+<p>印がつかなかった項目が5つ以上あれば、AIの答えに選ばれるための土台が欠けています。どれから直すかで、効果が出るまでの時間が変わります。</p>
+<p>無料相談では、次の3つをお伝えします。</p>
+<p>・印がつかなかった項目のうち、効果が大きい順の3つと、その直し方<br>
+・同じ地域の{e(T['owner'])}が、AIにどう紹介されているか<br>
+・必要な作業と期間の目安、お見積り（ご依頼いただくかは、そのあとでお決めください）</p>
+<p class="big">ご相談: https://ai.7senses.co.jp/lp/{c['lp']}/ ／ TEL 06-4305-7547（平日9:00〜20:00）</p></div>
 <div class="foot"><b>確かめる（無料）</b><br>
 ・AIにどう紹介されているか無料チェック: https://ai.7senses.co.jp/tools/ai-check/<br>
 ・サイトが読まれているかの30秒診断: https://ai.7senses.co.jp/lp/{c['lp']}/<br>
