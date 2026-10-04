@@ -193,10 +193,12 @@ def verify(before, after, edits):
     return ""
 
 
-def run(write, limit=0):
+def run(write, limit=0, only=""):
     touched = total = 0
     shown = 0
     for p in sorted((ROOT / "articles").glob("*.md")):
+        if only and p.stem != only:
+            continue
         t = io.open(p, encoding="utf-8-sig").read()
         if not re.search(r"^score:\s*(9[0-9]|100)\s*$", t, re.M):
             continue
@@ -227,9 +229,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--limit", type=int, default=0, help="表示する記事数")
+    # auto_rewrite が書き直した1本だけを直す（他の記事を触ると検算の「別の記事まで変わった」で止まる）
+    ap.add_argument("--only", default="", help="この slug の記事だけを対象にする")
     a = ap.parse_args()
     print(f"■ {LONG}字を超える1文を、意味が壊れない形だけで分ける\n")
-    n, t = run(a.write, a.limit)
+    n, t = run(a.write, a.limit, a.only)
     print(f"\n  {n}本 / {t}箇所"
           + ("を分けました" if a.write else "が対象です（--write で実行）"))
     if a.write and n:

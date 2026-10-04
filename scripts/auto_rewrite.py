@@ -603,6 +603,28 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     return ""
 
 
+def mechanically_fixable(new_warns):
+    """増えた警告が、機械で分けられる長さの警告（長文・長い段落）だけか。
+
+    書き直しで1文・1段落が伸びただけで、正しい書き直しまで戻していた。分け方は
+    split_sentences / split_paragraphs が意味の壊れない形に限って決めているので任せられる。
+    名前の欄だけで判定する（明細の欄に「長文」が出る別の警告を拾わない）"""
+    def fixable(w):
+        name = (w.split(" | ") + [""])[1]
+        return ("長文" in name and "100字超" in name) or "段落が200字以内" in name
+    return bool(new_warns) and all(fixable(w) for w in new_warns)
+
+
+def fix_mechanical(slug, before_warns):
+    """増えた警告が長さだけなら、その1本だけを分けて True を返す（他の記事は触らない）"""
+    new = [w for w in warns(slug) if w not in before_warns]
+    if not mechanically_fixable(new):
+        return False
+    sh([sys.executable, "scripts/split_sentences.py", "--only", slug, "--write"], timeout=300)
+    sh([sys.executable, "scripts/split_paragraphs.py", slug, "--write"], timeout=300)
+    return True
+
+
 def site_of(slug):
     import sites as S
     t = (ROOT / "articles" / f"{slug}.md").read_text(encoding="utf-8-sig")
@@ -820,6 +842,10 @@ def run_one(item, write, edited=None):
 
     ng = check(slug, before, before_warns, snap, allowed,
                item.get("terms") or ())
+    if ng.startswith("警告が増えました") and fix_mechanical(slug, before_warns):
+        # 長さの警告は分ける道具が決まった形で直せる。他の検算は1つも緩めず、もう1回だけ通す
+        ng = check(slug, before, before_warns, snap, allowed,
+                   item.get("terms") or ())
     if not ng and kind == "desc":
         # 説明文だけの直し。本文・タイトルが1文字でも変わっていたら通さない
         strip = lambda t: re.sub(r"^description:.*$", "", t, count=1, flags=re.M)

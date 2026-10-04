@@ -118,55 +118,37 @@ def rewrite_parallel(slugs, workers):
     互いの変更を「別の記事まで変わった」と数えて止まる。作業場所を分ければ、検算も採点も
     1本ずつのときと同じものがそのまま通る（精度は変えずに、待ち時間だけを重ねる）"""
     import shutil
-    import subprocess
-    from concurrent.futures import ThreadPoolExecutor
-    work = ROOT / ".publish-work"
+    import worktree_pool as WP
     log = json.loads(LOG.read_text(encoding="utf-8"))
 
-    def one(slug):
-        w = work / f"wt-{slug}"
-        subprocess.run(["git", "worktree", "remove", "--force", str(w)], cwd=ROOT, capture_output=True)
-        r = subprocess.run(["git", "worktree", "add", "--detach", str(w), "HEAD"], cwd=ROOT, capture_output=True,
-                           text=True, encoding="utf-8", errors="replace")
-        if r.returncode:
-            return slug, f"× {slug}: 作業場所を作れません（{r.stderr[-120:]}）"
-        try:
-            # コミットしていない入力（書き直し途中の控え・採点の台帳）を作業場所へ写す
-            for rel in (f"articles/_legacy/{slug}.md", "data/legacy_scores.json", f"data/subsidy_survey/{slug}.json"):
-                if (ROOT / rel).is_file():
-                    shutil.copy2(ROOT / rel, w / rel)
-            # Git で管理していない鍵（Search Console・管制塔）も写す。無いと食い合いの検査（kw_guard）が
-            # GSC を読めずに止まり、12本中8本が「食い合う」で戻された（2026-10-04）。作業場所ごと消すので残らない
-            for rel in ("indexing-service-account.json", ".env"):
-                if (ROOT / rel).is_file():
-                    shutil.copy2(ROOT / rel, w / rel)
-            r = subprocess.run([sys.executable, "scripts/migrate_legacy.py", "--rewrite", slug], cwd=w,
-                               capture_output=True, text=True, encoding="utf-8", errors="replace",
-                               env=dict(os.environ, PYTHONIOENCODING="utf-8"), timeout=3600)
-            got = json.loads((w / "data" / "legacy_scores.json").read_text(encoding="utf-8")).get(slug)
-            # 結果だけを本体へ戻す（合格なら articles/ に置き _legacy から外す。不合格なら書き直した控えを残す）
-            art, leg = w / "articles" / f"{slug}.md", w / "articles" / "_legacy" / f"{slug}.md"
-            if art.is_file():
-                shutil.copy2(art, ROOT / "articles" / art.name)
-            if leg.is_file():
-                shutil.copy2(leg, ROOT / "articles" / "_legacy" / leg.name)
-            elif (ROOT / "articles" / "_legacy" / f"{slug}.md").is_file():
-                (ROOT / "articles" / "_legacy" / f"{slug}.md").unlink()
-            line = (r.stdout.strip().splitlines() or [f"? {slug}: 出力なし {r.stderr[-200:]}"])[-1]
-            return slug, (line, got)
-        finally:
-            subprocess.run(["git", "worktree", "remove", "--force", str(w)], cwd=ROOT, capture_output=True)
+    def outputs(slug, w, r):
+        got = json.loads((w / "data" / "legacy_scores.json").read_text(encoding="utf-8")).get(slug)
+        # 結果だけを本体へ戻す（合格なら articles/ に置き _legacy から外す。不合格なら書き直した控えを残す）
+        art, leg = w / "articles" / f"{slug}.md", w / "articles" / "_legacy" / f"{slug}.md"
+        if art.is_file():
+            shutil.copy2(art, ROOT / "articles" / art.name)
+        if leg.is_file():
+            shutil.copy2(leg, ROOT / "articles" / "_legacy" / leg.name)
+        elif (ROOT / "articles" / "_legacy" / f"{slug}.md").is_file():
+            (ROOT / "articles" / "_legacy" / f"{slug}.md").unlink()
+        return (r.stdout.strip().splitlines() or [f"? {slug}: 出力なし {r.stderr[-200:]}"])[-1], got
 
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        for slug, res in ex.map(one, slugs):
-            if isinstance(res, str):
-                print(res, flush=True)
-                continue
-            line, got = res
-            if got:
-                log[slug] = got
-                LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
-            print(line, flush=True)
+    def on_result(slug, err, res):
+        if err:
+            print(f"× {slug}: {err}", flush=True)
+            return
+        line, got = res
+        if got:
+            log[slug] = got
+            LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(line, flush=True)
+
+    # コミットしていない入力（書き直し途中の控え・採点の台帳）を作業場所へ写す。鍵は部品が写す
+    WP.run_in_worktrees(
+        slugs, lambda slug: [sys.executable, "scripts/migrate_legacy.py", "--rewrite", slug],
+        inputs=lambda slug: (f"articles/_legacy/{slug}.md", "data/legacy_scores.json",
+                             f"data/subsidy_survey/{slug}.json"),
+        outputs=outputs, workers=workers, on_result=on_result)
 
 
 def main():
