@@ -3,70 +3,64 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
   "AI導入補助金2026年最新版 対象ツールの定義と選び方ガイド",
   "AI導入補助金における対象ツールの定義",
-  "AI導入補助金 具体的にどんなツールが対象になるのか？"
+  "AI導入補助金 具体的にどんなツールが対象になるのか？",
+  "AI導入補助金 ツール選びで見落としやすい3つの視点"
  ],
  "answers": {
   "AI導入補助金2026年最新版 対象ツールの定義と選び方ガイド": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
      "https://it-shien.smrj.go.jp/about",
      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
-     "https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/04/13152251/it2026_koubo_denshi.pdf",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/security/",
-     "https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html",
      "https://it-shien.smrj.go.jp/search/",
-     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
      "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
-     "https://it-shien.smrj.go.jp/news/40184"
+     "https://it-shien.smrj.go.jp/applicant/flow/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHq3bvvP8v4lqjD38Oe2Agyqab3O-C2IUsAMsQw37NQbBjSnB9DM0YXUTbYNzXWYnfv7QmT32BjX3IWzWE1v-nxIZczIu99ygWkuybMSvV8VgYY7JP7jYrldxIO9SbpT6CfPTsblfKlSLInhcDdN7Yj_CfKVvg8tW5NgQ==",
-     "https://www.jfc.go.jp/n/finance/keiei/support-plus/detail/materials.html?id=477",
-     "https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/",
-     "https://www.sme-support.co.jp/column/p8120/",
-     "https://shotaro-tanaka.com/article/ai_2026/",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHq3bvvP8v4lqjD38Oe2Agyqab3O-C2IUsAMsQw37NQbBjSnB9DM0YXUTbYNzXWYnfv7QmT32BjX3IWzWE1v-nxIZczIu99ygWkuybMSvV8VgYY7JP7jYrldxIO9SbpT6CfPTsblfKlSLInhcDdN7Yj_CfKVvg8tW5NgQ==",
-     "https://it-shien.smrj.go.jp/search/",
-     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
-     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/it-dounyuhojyokin-soft/"
-    ],
+    "text": "**2026年の「AI導入補助金」の正式名称は「デジタル化・AI導入補助金2026」です。対象ツール選びで重要なのは、AI搭載の有無よりも、2026年の登録状況、申請枠の要件、自社業務への効果です。**\n\n2026年10月4日時点で確認した公式情報をもとに説明します。\n\n**制度と対象ツールの定義**\n\nこの制度は、旧「IT導入補助金」から名称を変更したもので、中小企業・小規模事業者等による、AIを含むITツールの導入を支援します。AI専用の制度ではなく、会計・販売・在庫管理などのソフトウェアも対象になり得ます。[中小企業庁の公募案内](https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html)\n\n原則として、対象となるのは**事務局の審査を受け、登録されたITツール**です。申請者は登録された「IT導入支援事業者」と組んで申請します。ただし、複数者連携デジタル化・AI導入枠は扱いが異なります。[公式制度概要](https://it-shien.smrj.go.jp/about)\n\nしたがって、「AIサービスを契約すれば補助される」「有名な生成AIなら対象になる」とは判断できません。購入予定の製品・プラン・提供事業者について、2026年の登録内容を確認する必要があります。\n\n**通常枠では、業務機能とツールの組み合わせが重要**\n\n通常枠では、次のような業務プロセスを少なくとも1種類持つソフトウェアの導入が必要です。\n\n| 業務の分類 | 導入を検討する用途の例 |\n|---|---|\n| 顧客対応・販売支援 | 問い合わせ対応、顧客・商談管理 |\n| 決済・債権債務・資金回収管理 | 請求・入金管理 |\n| 供給・在庫・物流 | 在庫管理、発注・物流管理 |\n| 会計・財務・経営 | 記帳、財務・経営管理 |\n| 総務・人事・給与など | 人事管理、給与計算、教育訓練 |\n| 業種固有のプロセス | 業種に特化した管理業務 |\n\n上表は検討用途の例であり、個々の製品の対象認定を示すものではありません。**汎用・自動化・分析ツールのみの申請は不可**で、業務プロセスを持つソフトウェアとの組み合わせが必要です。[通常枠の要件](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n補助対象には、ソフトウェア購入費、クラウド利用料（最大2年分）、登録された関連オプションや導入・活用支援、研修、保守サポートなどが含まれます。通常枠の補助額は、1プロセス以上で5万円以上150万円未満、4プロセス以上で150万円以上450万円以下。補助率は原則1/2以内で、所定の最低賃金に関する条件を満たす場合は2/3以内です。[通常枠の補助内容](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n**対象ツールの選び方**\n\n以下は、制度要件を踏まえた実務上の選定方法です。\n\n1. **解決する業務を決める**  \n   「AIを使いたい」から始めず、「請求書入力に月何時間かかるか」「問い合わせ対応のどこが遅いか」を整理します。\n\n2. **用途に合う申請枠を選ぶ**  \n   業務全般の効率化は通常枠、インボイス対応の会計・受発注・決済はインボイス対応類型、商流での受発注システム導入は電子取引類型、セキュリティ対策はセキュリティ対策推進枠が検討先です。[申請枠の概要](https://it-shien.smrj.go.jp/about)\n\n3. **2026年の登録状況を確認する**  \n   公式のITツール検索で製品名・事業者名・申請枠を調べ、支援事業者にITツール番号、対象プラン、対象経費を確認します。検索にはオプション・役務が表示されず、移行登録の更新途中で製品が表示されない場合もあります。[公式ITツール検索](https://it-shien.smrj.go.jp/search/)\n\n4. **自社のデータで試す**  \n   AIの回答・読取精度だけでなく、修正にかかる時間、既存システムとの連携、現場での使いやすさも比較します。機密情報の保存先や学習利用、アクセス権限も確認します。\n\n5. **補助終了後まで含めて費用を比べる**  \n   初期費用、利用人数、従量料金、更新料、データ移行費を含めて比較します。削減できる時間と、確認・修正作業を含む運用負担を並べると判断しやすくなります。\n\n6. **導入後の支援まで確認する**  \n   申請支援に加え、設定、研修、問い合わせ対応、実績・効果報告をどこまで支援するか、見積書で確認します。\n\n**申請前に押さえる点**\n\n通常枠では、申請代行費、消費税、無償提供されるもの、申請時に利用金額が定められないものなどは補助対象外です。AIの従量課金についても、申請する費用を確定できるか確認してください。[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\nまた、**原則として発注・契約・支払いは交付決定後**です。事前着手の特例を利用する場合は、その対象・条件を個別に確認する必要があります。[交付決定後の手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n申請準備では、GビズIDプライムの取得とSECURITY ACTIONの宣言も必要です。ツール登録だけで採択が保証されるわけではないため、業務改善の計画と申請要件を支援事業者と確認して進めてください。[申請手続き](https://it-shien.smrj.go.jp/applicant/flow/)\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/search/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://sogyotecho.jp/digital-ai-hojyokin/",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
      "https://www.uchida-it.co.jp/info/2026it/",
      "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
      "https://j-aix.or.jp/journal/25/",
      "https://aixis.jp/articles/ai-subsidy-tool-guide",
+     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/",
      "https://hojokin-hub.ai/guides/ai-subsidy-guide",
      "https://www.y-aikawa-office.com/digital-ai-hojokin-2026/",
      "https://www.btncon.com/blog/digital-ai-subsidy-2026",
      "https://mirasapo-plus.go.jp/subsidy/ithojo/",
-     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
      "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf",
      "https://it-shien.smrj.go.jp/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf",
+     "https://kikaicatalog.com/blog/digital_it_2026/",
      "https://igunal.com/digital-ai-subsidy-r8-vendor-guide/",
      "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
      "https://hojyokin-portal.jp/columns/degital_ai_tujyo",
-     "https://hojyokin-portal.jp/columns/degital_ai_invoice",
-     "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/",
-     "https://www.sme-support.co.jp/column/p8120/",
-     "https://www.josis365.com/blog/digital-ai-subsidy-2026-guide/"
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://www.hs-kaikei.com/blog/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96-ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E3%81%AE%E9%80%9A%E5%B8%B8%E6%9E%A0%E3%81%A8%E3%81%AF%E5%AF%BE%E8%B1%A1%E7%B5%8C%E8%B2%BB-%E8%A3%9C%E5%8A%A9%E9%A1%8D-%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%81%A6%E3%82%8B%E4%BC%9A%E7%A4%BE%E3%82%92%E6%95%B4%E7%90%86",
+     "https://www.digital-reclame.co.jp/blog/digital-ai-subsidy-guide-2026/",
+     "https://www.digital-reclame.co.jp/blog/digital-ai-adoption-subsidy-2026-guide/",
+     "https://hojyokin-portal.jp/columns/itdonyu_soft_summary",
+     "https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/",
+     "https://digital-ai-hojokin.jp/articles/chatgpt-ai-hojokin/",
+     "https://mono-support.com/blog/generative-ai-subsidy-2026/",
+     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/",
+     "https://arkjpn.net/column/column-7723/",
+     "https://carearc.co.jp/blog/7642/",
+     "https://leon-strategy.com/ai_hojokin"
     ],
+    "text": "# デジタル化・AI導入補助金2026(旧IT導入補助金)対象ツールの定義と選び方\n\n「AI導入補助金」という名称の独立制度はありません。実体は **デジタル化・AI導入補助金2026**(旧IT導入補助金)です。公式ページと解説記事の検索結果をもとにまとめました。WebFetch が許可されなかったため、ページ本文は読めていません。公式資料(公募要領・ITツール登録要領)の原文は未確認です。数値は検索結果のスニペットと解説記事の内容に基づくので、申請前に公式で確認してください。\n\n## 1. 対象ツールの定義\n\n- **登録済みツールだけが対象です。** IT導入支援事業者が事務局に登録し、審査を通過して公式サイトに公開されたITツールに限られます。市販ソフトでも未登録なら対象外です。\n- **AI搭載ツールの位置づけ。** 機械学習・自然言語処理・画像認識などで、データの分析・予測や業務の自動化に寄与するソフトやサービスを指します。\n- **生成AIだから対象、とはなりません。** 支援事業者が「AI機能を有するツール」として登録したものに限られます。\n- **2026年からの新ルール。** ITツール登録時に「生成AI機能を有するか」「生成AI以外のAI技術を有するか」の申告が必須になりました。検索画面にもアイコン等で表示されます。\n- **メーカーとの直接契約は対象外です。** ChatGPT を例にすると、OpenAI と直接契約した料金は後から補助対象にできません。登録済みプランを支援事業者経由で導入する必要があります。\n- **交付決定前の契約・支払いは対象外です。**\n\n## 2. 制度の概要(解説記事ベース)\n\n- **申請枠は4つ。** 通常枠、インボイス枠、セキュリティ対策推進枠、複数者連携デジタル化・AI導入枠です。\n- **通常枠の補助率。** 1/2以内が基本です。従業員のうち賃上げ要件などを満たす場合は2/3以内に引き上がります。\n- **通常枠の補助上限。** 業務プロセス数で決まります。1プロセス以上で5万円以上150万円未満、4プロセス以上で150万円以上450万円以下です。\n- **インボイス枠。** 会計・受発注・決済などのインボイス対応ソフトとハードウェアが対象で、補助率は最大4/5です。\n- **対象経費。** ソフトウェア購入費とクラウド利用料(最大2年分)が対象です。導入コンサル、設定・研修、保守サポートも対象に含まれます。ソフトウェアは必須です。\n- **公募スケジュール。** 申請受付は2026年3月30日〜10月30日と記載されています。今日は2026年10月4日なので締切が近いです。申請枠ごとに締切が異なる可能性があります。\n\n## 3. 選び方ガイド\n\n1. **課題を先に決める。** 「補助金が出るから導入する」ではなく、業務課題と ROI を明確にしてからツールを選びます。採択にも導入後の成果にも効きます。\n2. **公式サイトで検索する。** 公式のITツール検索で、AI機能付きの絞り込みを使って登録済みか確認します。\n3. **ツールと支援事業者の組み合わせを確認する。** 支援事業者が2026年度ポータルで「認定ITツール」として登録していなければ、その事業者経由の申請は対象外です。\n4. **枠を決める。** 会計・受発注・決済ならインボイス枠、セキュリティならセキュリティ対策推進枠、それ以外は通常枠が基本です。\n5. **業務プロセス数を確認する。** 通常枠は対象ツールがカバーするプロセス数で上限額が変わります。\n6. **導入手順を守る。** 交付決定通知が出る前に契約・支払いをしないでください。\n\n## 4. 注意点\n\n- 解説記事には採択率が約30%台と44%の2通りの数字があります。出典と集計期間が違う可能性があるので、断定は避けます。\n- 制度の細部(枠ごとの締切、要件)は公募要領とITツール登録要領で最終確認してください。\n\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://j-aix.or.jp/journal/25/\nSOURCE: https://aixis.jp/articles/ai-subsidy-tool-guide\nSOURCE: https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\nSOURCE: https://www.y-aikawa-office.com/digital-ai-hojokin-2026/\nSOURCE: https://www.btncon.com/blog/digital-ai-subsidy-2026\nSOURCE: https://mirasapo-plus.go.jp/subsidy/ithojo/\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf\nSOURCE: https://kikaicatalog.com/blog/digital_it_2026/\nSOURCE: https://igunal.com/digital-ai-subsidy-r8-vendor-guide/\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_tujyo\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide\nSOURCE: https://www.hs-kaikei.com/blog/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96-ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E3%81%AE%E9%80%9A%E5%B8%B8%E6%9E%A0%E3%81%A8%E3%81%AF%E5%AF%BE%E8%B1%A1%E7%B5%8C%E8%B2%BB-%E8%A3%9C%E5%8A%A9%E9%A1%8D-%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%81%A6%E3%82%8B%E4%BC%9A%E7%A4%BE%E3%82%92%E6%95%B4%E7%90%86\nSOURCE: https://www.digital-reclame.co.jp/blog/digital-ai-subsidy-guide-2026/\nSOURCE: https://www.digital-reclame.co.jp/blog/digital-ai-adoption-subsidy-2026-guide/\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_soft_summary\nSOURCE: https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/\nSOURCE: https://digital-ai-hojokin.jp/articles/chatgpt-ai-hojokin/\nSOURCE: https://mono-support.com/blog/generative-ai-subsidy-2026/\nSOURCE: https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/\nSOURCE: https://arkjpn.net/column/column-7723/\nSOURCE: https://carearc.co.jp/blog/7642/\nSOURCE: https://leon-strategy.com/ai_hojokin\n",
     "error": ""
    }
   },
@@ -74,87 +68,132 @@
    "ChatGPT": {
     "urls": [
      "https://it-shien.smrj.go.jp/about",
-     "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
+     "https://digiwith.smrj.go.jp/cocoapp/info/feature/it-hojokin2026.php",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEaYd0zEopejNSI5Q2RIkMZ2HBvO2Rnly84rO_ihdJhrKISVHB5f4iU3FBvuGVeM1kJlqP-wv_kFeCoVWwMp1lPE2Gy2ugj3S1uwWdsPVzQEbURy5y7SZ4mXDODYtbJg3vMUzLhoiJWZF6gq2pxQGD7v7QaixG6VQtj-g==",
-     "https://listing-partners.com/gbiz/gbiz_column/digitalka-aidounyuuhojyokin/",
-     "https://it-shien.smrj.go.jp/about/",
-     "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
-     "https://it-shien.smrj.go.jp/about/"
-    ],
+    "text": "2026年の「デジタル化・AI導入補助金」（旧IT導入補助金）における対象ツールは、**業務効率化や生産性向上に役立つ、事務局の審査を受けて登録・公開されたITツール（ソフトウェア、サービス等）**です。原則として、登録された「IT導入支援事業者」と組んで導入・申請します。なお、複数者連携デジタル化・AI導入枠は、この登録・申請の仕組みの例外です。[公式制度概要](https://it-shien.smrj.go.jp/about)\n\n**AI機能があること自体が、補助対象の条件ではありません。** 2026年はソフトウェアの定義に「AIを含む」と明記されましたが、AI非搭載の業務ソフトも対象です。逆に、AI搭載製品であっても、登録や申請枠の要件を満たさなければ対象になりません。[中小機構の制度解説](https://digiwith.smrj.go.jp/cocoapp/info/feature/it-hojokin2026.php)、[通常枠公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\n通常枠では、対象は次の3分類です。\n\n| 分類 | 対象の内容 |\n|---|---|\n| ソフトウェア | 販売・顧客管理、在庫・物流、会計、人事・給与などの業務ソフト。クラウド利用料は最大2年分 |\n| オプション | 機能拡張、データ連携ツール、セキュリティ |\n| 役務 | 導入・活用コンサルティング、設定、研修、保守サポートなど |\n\n通常枠では、指定された業務プロセスを1種類以上持つソフトウェアの導入が必須で、**汎用・自動化・分析ツールだけの申請はできません**。したがって、具体的なAIツールについては「登録済みか」「どの業務プロセスに該当するか」「利用する申請枠に適合するか」を確認する必要があります。[公式・通常枠](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://digiwith.smrj.go.jp/cocoapp/info/feature/it-hojokin2026.php\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_manual_it_tool.pdf",
+     "https://it-shien.smrj.go.jp/about/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf",
      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
      "https://sogyotecho.jp/digital-ai-hojyokin/",
-     "https://sorimachi.co.jp/column/recommendation/20260408_01/",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/",
      "https://www.y-aikawa-office.com/digital-ai-hojokin-2026/",
-     "https://www.btncon.com/blog/digital-ai-subsidy-2026",
-     "https://qiita.com/DnD-inc/items/6be206e73d913856a23d",
-     "https://www.busicom.co.jp/misekatsu/all/subsidy/digitalai_hojokin_b",
-     "https://listing-partners.com/gbiz_column/digitalka-aidounyuuhojyokin/",
-     "https://www.enetmercury.com/it-hojo-kin-ai-tool-scope-documents-joushisu/"
+     "https://hojyokin-portal.jp/columns/itdonyu_soft_summary",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/"
     ],
+    "text": "**結論**: デジタル化・AI導入補助金（旧IT導入補助金）の「対象ツール」は、事務局の事前審査を受けて補助金サイトに登録・公開されたITツール（ソフトウェア、クラウドサービス等）だけです。\n\n- **事前登録制**: 登録・公開されていないツールは対象外です。対象ツールは公式サイトのITツール・IT導入支援事業者検索で確認できます。\n- **ソフトウェアの要件**: 「大分類Ⅰ ソフトウェア」は、ITツール登録要領で定義された業務プロセスまたは汎用プロセスのうち、1つ以上に該当する機能を持つものが登録対象です。\n- **AIの扱い（2026年度〜）**: 名称に「AI」が加わり、「生成AI」または「生成AI以外のAI技術」の機能を搭載したソフトウェアも、上記プロセスを備えていれば登録できます。\n- **AIツール表示**: AIツールとして絞り込み検索できるのは、IT導入支援事業者が「AI機能あり」として申請したものに限られます。\n\n**注意点**:\n- 公式ページ（制度概要・登録要領PDF）は、WebFetch の権限が付与されていないため本文を読めませんでした。上記は検索結果の要約に基づいており、登録要領の条文までは確認していません。\n- 申請前に、登録要領と公式のツール検索で、対象になるかを必ず確認してください。\n\nSOURCE: https://it-shien.smrj.go.jp/about/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://www.y-aikawa-office.com/digital-ai-hojokin-2026/\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_soft_summary\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/\n",
     "error": ""
    }
   },
   "AI導入補助金 具体的にどんなツールが対象になるのか？": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/about/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/search/tooldetail/?it_tool_numbering=DL04-0016406",
-     "https://it-shien.smrj.go.jp/search/tooldetail/?it_tool_numbering=DL06-0077446",
+     "https://it-shien.smrj.go.jp/about",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
      "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
      "https://it-shien.smrj.go.jp/search/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://www.youtube.com/watch?v=zel0HOZykI4",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHn1d1y_fk-SIibwK2KIJUCqfQbVYZO9eQorWW8BKatdanxKkvkEcAWXKebFAfX9vVwhYtt_M4Ajz7K6_Q__5VRuJHNMjkI5OIMBsfG0trpDVVOqDlQ74y-AqAybC0O75hRgDcFxqAC4O9QgTC3",
-     "https://mirasapo-plus.go.jp/hint/32651/",
-     "https://www.youtube.com/watch?v=skeqnBrZmww",
-     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/it-dounyuhojyokin-soft/",
-     "https://www.busicom.co.jp/misekatsu/all/subsidy/digitalai_hojokin_b",
-     "https://ittoollist.com/ittools/"
-    ],
+    "text": "国の「**デジタル化・AI導入補助金2026（旧：IT導入補助金）**」について答えると、対象は**業務の効率化に使う、事務局に登録されたソフトウェア・サービス**です。AI搭載ツールも対象ですが、AI機能のない会計ソフトや在庫管理システムなども対象になります。[公式の制度概要](https://it-shien.smrj.go.jp/about)\n\n具体的には、次のようなツールが対象候補です。以下は用途の例で、個々の商品が対象になるかは登録状況の確認が必要です。\n\n| 分野 | 具体的なツール・使い方の例 |\n|---|---|\n| 顧客対応・営業 | 顧客管理（CRM）、営業支援（SFA）、顧客の問い合わせに回答するAIチャットボット |\n| 会計・経理 | 会計ソフト、経費精算、請求書管理、AIによる仕訳・請求書データ入力 |\n| 受発注・決済 | 受発注システム、販売管理、POSレジのソフトウェア |\n| 在庫・物流 | 在庫管理、倉庫管理、需要予測を使った発注支援 |\n| 人事・労務 | 勤怠管理、給与計算、人事管理 |\n| 業種に特化した業務 | 製造業の生産管理など、その業種の業務を効率化するシステム |\n| 自動化・分析 | RPA、AI-OCR、データ分析ツール。ただし、汎用ツールは組み合わせ条件に注意 |\n\n通常枠では、こうした業務分野に対応するソフトウェアが対象となり、生成AIやその他のAI技術を搭載したソフトウェアも登録できます。[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)、[ITツールの登録条件](https://it-shien.smrj.go.jp/itvendor/procedure/ittool/)\n\n**特に注意したいのは、「AIツールなら何でも補助される」わけではない点です。**\n\n- **未登録の商品は申請できません。** 販売会社が登録された「IT導入支援事業者」で、導入する商品も登録されている必要があります。※複数者連携枠は別扱いです。\n- **汎用の自動化・分析ツールだけでは、通常枠に申請できない場合があります。** 「汎用プロセス」のみのツールは、会計・販売管理などの業務プロセスを持つツールと組み合わせる必要があります。\n- **パソコンやタブレットは通常枠の対象ではありません。** インボイス対応類型では、対象ソフトと併せて導入する必要最低限の機器が対象になり得ます。[制度概要](https://it-shien.smrj.go.jp/about)、[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)、[ITツールの登録条件](https://it-shien.smrj.go.jp/itvendor/procedure/ittool/)\n\nソフトの購入費だけでなく、通常枠では**サブスクリプション利用料の最大2年分**や、条件を満たす導入設定・研修・保守なども対象です。[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\n検討中の商品がある場合は、[公式のITツール検索](https://it-shien.smrj.go.jp/search/)で商品名・販売会社を調べ、販売会社に「2026年度のITツール登録番号と、申請できる枠・組み合わせ」を確認すると判断しやすくなります。\n\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/itvendor/procedure/ittool/\nSOURCE: https://it-shien.smrj.go.jp/search/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
      "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://www.ntt.com/bizon/it-subsidy.html",
-     "https://www.ricoh.co.jp/solutions/special-theme/it-subsidy",
-     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
-     "https://j-aix.or.jp/journal/25/",
-     "https://www.sme-support.co.jp/column/p8120/",
-     "https://ds-b.jp/dsmagazine/subsidy-ai-tools/",
-     "https://www.aidma-hd.jp/ai/ai-subsidy/",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://sogyotecho.jp/chatgpt-hojyokin/",
-     "https://pro-one-cloud.com/column/ai-grant/",
-     "https://www.icloud.co.jp/article/ai-subsidy-training.html",
-     "https://hojoguide.jp/guides/ai-subsidy-complete-guide",
-     "https://momo-gpt.com/column/hojokinjoseikin/",
-     "https://saku-mirai.com/digital-ai-hojokin-ai/"
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://www.itec.daikin.co.jp/SS/digital-ai-hojo-2026.html",
+     "https://j-aix.or.jp/journal/25/",
+     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/",
+     "https://www.y-aikawa-office.com/digital-ai-hojokin-2026/",
+     "https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/",
+     "https://qiita.com/DnD-inc/items/6be206e73d913856a23d",
+     "https://it-shien.smrj.go.jp/pdf/it2026_manual_it_tool.pdf",
+     "https://g1info.jp/2025/02/27/it-hojokin-ittool-registration/",
+     "https://sorimachi.co.jp/column/recommendation/20260408_01/",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf",
+     "https://hojokin-agent.jp/guide/it-hojo/tools",
+     "https://igunal.com/it2025-consulting-ittool/",
+     "https://igunal.com/digital-ai-subsidy-r8-vendor-guide/"
     ],
+    "text": "**結論:** 対象は、事務局の審査を受けて公式サイトに登録された「ITツール」だけです。AI専用のツールに限りません。2026年度から名称が「デジタル化・AI導入補助金」に変わり（旧IT導入補助金）、生成AIなどAI搭載ソフトも登録できるようになりました。\n\n**対象になるツールの例（検索結果の要約）**\n- **AI・業務効率化系:** 生成AI活用システム、AI搭載の自動見積作成システム、チャットボット（顧客対応AI）、RPA、AIを使ったデータ分析ツール\n- **バックオフィス系:** 会計ソフト（freee会計、弥生会計Nextなど）、給与計算、勤怠管理、受発注管理\n- **フロントオフィス系:** 顧客管理（CRM）、営業支援（SFA）、POSレジ、ECサイト構築、予約管理\n- **その他:** CADソフトも対象として紹介されていました（Daikinのページ）。\n\n**区分と注意点**\n- 申請には「大分類Ⅰ ソフトウェア」か「大分類Ⅴ サイバーセキュリティお助け隊サービス」のどちらかが必須です。\n- 「Ⅱ オプション」「Ⅲ 役務」「Ⅳ ハードウェア」は、単独では申請できません。\n- AI機能付きソフトは、業務プロセスを備えたものが登録対象です。生成AIだけでなく、生成AI以外のAI技術を使ったものも含みます。\n- ChatGPTなどを個別に契約するだけでは対象にならず、登録済みツールを選ぶ必要があります。この点は検索結果に直接の記載がなく、制度の仕組みからの推測です。\n- 対象かどうかは、公式サイトの「ITツール・IT導入支援事業者検索」で確認できます。AI機能付きでの絞り込みにも対応しています。\n\n**制限事項:** 補助額・補助率・締切は検索結果の要約で確認しきれていません。中小企業庁の概要PDFを開こうとしましたが、WebFetchの権限が未許可で読めませんでした。申請前に公式資料で確認してください。\n\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://www.itec.daikin.co.jp/SS/digital-ai-hojo-2026.html\nSOURCE: https://j-aix.or.jp/journal/25/\nSOURCE: https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/\nSOURCE: https://www.y-aikawa-office.com/digital-ai-hojokin-2026/\nSOURCE: https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/\nSOURCE: https://qiita.com/DnD-inc/items/6be206e73d913856a23d\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_manual_it_tool.pdf\nSOURCE: https://g1info.jp/2025/02/27/it-hojokin-ittool-registration/\nSOURCE: https://sorimachi.co.jp/column/recommendation/20260408_01/\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf\nSOURCE: https://hojokin-agent.jp/guide/it-hojo/tools\nSOURCE: https://igunal.com/it2025-consulting-ittool/\nSOURCE: https://igunal.com/digital-ai-subsidy-r8-vendor-guide/\n",
     "error": ""
+   }
+  },
+  "AI導入補助金 ツール選びで見落としやすい3つの視点": {
+   "ChatGPT": {
+    "urls": [
+     "https://mirasapo-plus.go.jp/hint/32651/",
+     "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/"
+    ],
+    "text": "「AI導入補助金」は、ここでは国の**「デジタル化・AI導入補助金2026」**を指します。公式情報を踏まえると、ツール選びで見落としやすい視点は次の3つです。\n\n1. **AI機能の有無より、自社の業務がどれだけ改善するか**\n   \n   「文章を生成できる」「予測できる」といった機能だけでは、導入効果は判断できません。例えば問い合わせ対応なら、回答作成だけでなく、情報検索や人による確認まで含めて時間が減るかを確認しましょう。比較時には「月何時間削減できるか」「ミスがどれだけ減るか」を決め、実際の業務で試すのが有効です。中小企業庁も、まず課題を把握し、その課題に対応したツールを比較する手順を勧めています。[中小企業庁の解説](https://mirasapo-plus.go.jp/hint/32651/)\n\n2. **製品の魅力と、補助対象になる条件を分けて確認する**\n   \n   AI搭載製品なら何でも対象になるわけではありません。事務局に登録されたITツールを、登録済みのIT導入支援事業者と申請する必要があります。また、通常枠では、業務プロセスを1種類以上持つソフトウェアが必要で、汎用プロセスだけでは申請できません。候補製品について、**登録内容・対象枠・見積もりに含まれる対象経費**を事業者に確認しましょう。[ITツールの登録要件](https://it-shien.smrj.go.jp/itvendor/procedure/ittool/)、[通常枠の要件](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n3. **補助後の費用と、現場で使い続けられる支援体制を見る**\n   \n   クラウド利用料は最大2年分が補助対象ですが、その後の利用料も含めて導入判断が必要です。比較では、更新料金、利用者追加費用、データ連携費用、研修・保守の範囲を確認しましょう。AIについては、入力データの扱いや出力を確認する担当者も決めておくと、運用を具体化できます。公式解説でも、価格・機能に加えて、支援事業者の実績や導入後のサポートを確認するよう勧めています。[中小企業庁の解説](https://mirasapo-plus.go.jp/hint/32651/)\n\nSOURCE: https://mirasapo-plus.go.jp/hint/32651/\nSOURCE: https://it-shien.smrj.go.jp/itvendor/procedure/ittool/\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://aixis.jp/articles/ai-subsidy-tool-guide",
+     "https://aixis.jp/articles/ai-subsidy",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/",
+     "https://article.ejinzai.jp/column/2026-digital-ai-subsidy/",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://www.josis365.com/blog/digital-ai-subsidy-2026-guide/",
+     "https://www.generativeai.tokyo/media/digital-ai-subsidy-2026-guide/",
+     "https://hojokin-dx.com/articles/it-introduction-subsidy-2026-complete-guide/",
+     "https://uravation.com/media/ai-digital-subsidy-guide-2026/"
+    ],
+    "text": "**見落としやすい3つの視点**\n\n1. **「補助金対象かどうか」を先に確認していない**\n   - 対象は、補助金HPの「ITツール検索」に登録されたツールだけです。申請はIT導入支援事業者との共同で行い、単独ではできません。\n   - 補助金が使えるかどうかでツールを選ぶと、自社の課題に最適なツールが未登録で、次善のものを選ぶことになりかねません。\n   - AI機能がないソフトでも対象になることがあります。パソコンやタブレットの単体購入は対象外で、ソフトとのセット導入が必要です。\n\n2. **自社の課題とツール機能が合っていない**\n   - 「話題だから」「ベンダーに勧められたから」で選ぶと、実際の業務フローに合いません。\n   - 課題や導入目的が曖昧だと、審査で不採択になる可能性も高まります。\n   - 生成AIは社内文書や顧客データを外部に送ることが多いので、セキュリティとデータ管理の確認も必要です。\n\n3. **お金とスケジュールの落とし穴**\n   - 交付決定前の契約・発注・支払いは補助対象外です。補助金は後払いなので、資金繰りも見ておく必要があります。\n   - 補助率が高く見えても、自己負担は残ります。例えば補助率2/3で300万円のツールなら、100万円は自己負担です。\n   - ベンダー調整は、申請締切の1〜2か月前には始めるのが安全です。\n\nなお、3つの視点という括りは私が検索結果を整理したものです。今回はWebFetchの権限がなく、記事の本文までは読めていません。そのため内容は検索結果の要約に基づいています。\n\nSOURCE: https://aixis.jp/articles/ai-subsidy-tool-guide\nSOURCE: https://aixis.jp/articles/ai-subsidy\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/\nSOURCE: https://article.ejinzai.jp/column/2026-digital-ai-subsidy/\nSOURCE: https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://www.josis365.com/blog/digital-ai-subsidy-2026-guide/\nSOURCE: https://www.generativeai.tokyo/media/digital-ai-subsidy-2026-guide/\nSOURCE: https://hojokin-dx.com/articles/it-introduction-subsidy-2026-complete-guide/\nSOURCE: https://uravation.com/media/ai-digital-subsidy-guide-2026/\n",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金2026年最新版 対象ツールの定義と選び方ガイド": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "AI導入補助金における対象ツールの定義": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**結論**: デジタル化・AI導入補助金（旧IT導入補助金）の「対象ツール」は、事務局の事前審査を受けて補助金サイトに登録・公開されたITツール（ソフトウェア、クラウドサービス等）だけです。"
+   }
+  },
+  "AI導入補助金 具体的にどんなツールが対象になるのか？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "AI導入補助金 ツール選びで見落としやすい3つの視点": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "AI搭載製品なら何でも対象になるわけではありません。事務局に登録されたITツールを、登録済みのIT導入支援事業者と申請する必要があります。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**見落としやすい3つの視点**"
    }
   }
  }

@@ -3,153 +3,185 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
   "AI導入補助金の会計ソフト対象条件 2026年版 選び方と申請手順",
   "今使っている会計ソフトの月額利用料(サブスク)は、AI導入補助金の対象になりますか?",
-  "AI導入補助金 会計ソフトと受発注システムを同時に導入する場合も補助の対象になりますか?"
+  "AI導入補助金 会計ソフトと受発注システムを同時に導入する場合も補助の対象になりますか?",
+  "無料の会計ソフトはAI導入補助金の対象になりますか?"
  ],
  "answers": {
   "AI導入補助金の会計ソフト対象条件 2026年版 選び方と申請手順": {
    "ChatGPT": {
     "urls": [
      "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
-     "https://it-shien.smrj.go.jp/about",
      "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_invoice.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/simulator/?tab=tab2",
      "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
      "https://it-shien.smrj.go.jp/search/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
      "https://it-shien.smrj.go.jp/applicant/measures/",
      "https://it-shien.smrj.go.jp/applicant/flow/",
      "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
      "https://it-shien.smrj.go.jp/schedule/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://wheat-biz.com/acc/keiri-daiko-it-hojokin-2026/",
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/it-dounyuhojyokin-kaikeisoft/",
-     "https://www.jfc.go.jp/n/finance/keiei/support-plus/detail/materials.html?id=477",
-     "https://www.onamae.com/business/article/18143/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
-     "https://www.jfc.go.jp/n/finance/keiei/support-plus/detail/materials.html?id=477",
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://hojyokin-concierge.com/media/2025/12/25/kaikeisoft_hojyokin",
-     "https://note.com/joyous_shrew6274/n/nfe70962c9db5",
-     "https://so-labo.co.jp/hojyokin/it-hojyo/basic/691/",
-     "https://www.obc.co.jp/360/list/post372",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEqVD9GYLPS4ZsvWef6D6s8dgqDdCNeVDI06PGGhO4lXnMRI2VJ1UbgwKFbpu2WtQcsuWt6GWyjr_4o9GO1z_fZ1j1YW3j_N817Sit_Rs0mWkVVKn-W40sJsyO83EFT2xHyU72w-IWWvzVDBZgZM2RrjTzhPXTOwvaCIw=="
-    ],
+    "text": "2026年の正式名称は**「デジタル化・AI導入補助金2026」**です。旧IT導入補助金から名称が変わりました。会計ソフトを導入するなら、まず**インボイス枠（インボイス対応類型）**を検討します。AI機能の搭載は、この枠の必須条件ではありません。[中小企業庁の案内](https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html)、[インボイス枠の公式説明](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/)\n\n**会計ソフトが対象になる条件**\n\n主な条件は次のとおりです。\n\n- 申請者が、国内で事業を行う中小企業・小規模事業者等に該当すること。個人事業主も対象になり得ます。\n- ソフトがインボイス制度に対応し、「会計・受発注・決済」のうち1機能以上を持つこと。\n- 事務局に登録されたITツールを、登録されたIT導入支援事業者から導入すること。\n- 申請者自身も、公募要領の申請要件・対象外事業者の条件を満たすこと。\n\n「有名な会計ソフトだから対象」とは限りません。**購入するプランと販売事業者の組み合わせが2026年の登録対象か**を確認してください。[公式FAQ](https://it-shien.smrj.go.jp/pdf/it2026_faq_invoice.pdf)、[補助金シミュレーターの対象経費説明](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/simulator/?tab=tab2)\n\n補助額と補助率は以下のとおりです。金額は購入価格ではなく、補助金額です。\n\n| 導入内容 | 補助上限 | 補助率 |\n|---|---:|---|\n| 会計など1機能のみ | 50万円 | 中小企業3/4以内、小規模事業者4/5以内 |\n| 会計・受発注・決済のうち2機能以上 | 350万円 | 補助額50万円以下の部分は上記、50万円超の部分は2/3以内 |\n| ソフトの利用に必要なPC・タブレット等 | 10万円 | 1/2以内 |\n\nPCだけの申請はできません。ソフト購入費、クラウド利用料は最大2年分、登録された導入設定・研修なども対象になります。消費税や補助金の申請代行費は対象外です。[インボイス枠の公式説明](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/)、[公式シミュレーター](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/simulator/?tab=tab2)、[公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf)\n\n**選び方**\n\n実務上は、次の順で比べると選びやすくなります。\n\n1. **登録を確認する**：ITツール番号、対象プラン、申請枠、販売する支援事業者を確認する。\n2. **経理業務との相性を見る**：銀行・カード連携、仕訳自動化、請求書管理、税理士との共有、既存データの移行を試す。\n3. **総費用を比べる**：初期費用、対象期間の利用料、導入支援費、補助終了後の更新料金を含める。\n4. **支援範囲を確認する**：申請だけでなく、導入・実績報告・導入後の問い合わせ対応まで確認する。\n\n登録確認には[公式ITツール検索](https://it-shien.smrj.go.jp/search/)を使えます。上記の比較項目は、業務に合う製品を選ぶための実務上の提案です。\n\n会計以外の業務も広く改善する場合は、通常枠も比較対象です。通常枠は原則1/2以内、一定の最低賃金要件を満たす場合は2/3以内。補助額は1プロセス以上で5万円以上150万円未満、4プロセス以上で150万円以上450万円以下です。**会計ソフト単体で450万円まで補助されるという意味ではありません。**[通常枠の公式説明](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n**申請手順**\n\n1. **事前準備**：公募要領で対象条件を確認し、GビズIDプライムを取得。SECURITY ACTIONの一つ星または二つ星を自己宣言します。[事前手続き](https://it-shien.smrj.go.jp/applicant/measures/)\n2. **製品・事業者を選ぶ**：登録された支援事業者と見積もりを作り、導入目的と事業計画を整理します。\n3. **電子申請**：支援事業者から申請マイページへの招待を受け、情報・必要書類を登録。支援事業者がツール情報等を入力し、申請者が最終確認・宣誓・提出します。[申請フロー](https://it-shien.smrj.go.jp/applicant/flow/)\n4. **交付決定後に購入する**：会計ソフトの発注・契約・支払いは交付決定後に行います。申請を提出しただけで契約すると補助を受けられません。\n5. **実績報告・受給**：導入・支払い・利用開始を済ませ、契約や支払い等の証拠書類を提出。確定額を確認・承認し、補助金交付を受けます。その後の効果報告も必要です。**補助金は後払いなので、購入代金を先に用意します。**[交付決定後の手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n2026年10月4日時点で公表されているインボイス対応類型の6次締切は、**2026年10月30日17時**です。交付決定は12月10日、実績報告期限は2027年5月31日の予定です。申請前に最新の日程を再確認してください。[公式スケジュール](https://it-shien.smrj.go.jp/schedule/)\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_invoice.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/simulator/?tab=tab2\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf\nSOURCE: https://it-shien.smrj.go.jp/search/\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/applicant/measures/\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/schedule/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://suehirotax.jp/blog/12729",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://hojyokin-portal.jp/columns/degital_ai_schedule",
      "https://hojyokin-portal.jp/columns/it_accounting_5softs",
-     "https://www.sme-support.co.jp/column/p8120/",
-     "https://www.y-aikawa-office.com/digital-ai-hojokin-2026/",
-     "https://www.digital-reclame.co.jp/blog/ai-subsidy-2026-guide/",
-     "https://www.digital-reclame.co.jp/blog/digital-ai-adoption-subsidy-2026-guide/",
-     "https://biz.service.ntt-east.co.jp/columns/it_subsidy_eligible_software/",
-     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
      "https://leapal.jp/blog/it-cloud/it-subsidy-accounting-software-2026/",
-     "https://hojokin-agent.jp/guide/it-hojo/tools",
-     "https://carearc.co.jp/blog/3871/",
-     "https://jitsumu-guide.com/it-subsidy-2026-guide/",
-     "https://m-assets.com/lp/subsidy/blog/it-subsidy-2026-guide"
+     "https://carearc.co.jp/blog/3871/"
     ],
+    "text": "「AI導入補助金」は、2026年度から名称が変わった**「デジタル化・AI導入補助金2026」**(旧IT導入補助金)のことだと判断して回答します。\n\nなお、公式ページの本文は取得できませんでした(WebFetch の権限が未付与)。以下は検索結果の要約に基づくので、金額や締切は公募要領で最終確認してください。\n\n## 会計ソフトの対象条件\n- **登録済みツールだけが対象です。** 事務局に登録された「IT導入支援事業者」が提供するITツールに限ります。市販品や公式サイトからの直接購入は対象外です。\n- **使える枠は2つです。**\n  - 通常枠:会計・財務・経営の業務プロセスに該当します。補助率は1/2以内で、5万円〜450万円です。\n  - インボイス枠(インボイス対応類型):クラウド会計や受発注・決済ソフトが対象です。補助率は50万円以下の部分で3/4以内(小規模事業者は4/5)、50万円超の部分は2/3以内です。上限は350万円です。\n- **対象経費**は、ソフト購入費とクラウド利用料(最大2年分)です。導入関連費(保守・マニュアル作成・活用支援)も含まれます。\n- **交付決定前の契約・発注・支払いは補助対象外です。**\n\n## 選び方\n1. 公式サイトの「ITツール検索」で、候補の会計ソフトが登録済みか確認します。\n2. 会計中心ならインボイス枠、補助率が高いのでまずこちらを検討します。請求書や受発注まで含めて幅広く導入するなら通常枠です。\n3. ツールと一緒に、申請を代行するIT導入支援事業者も選びます。申請は事業者との共同作業になるためです。\n4. クラウド利用料は最大2年分が対象なので、2年間の総額で比較します。\n\n## 申請手順\n1. **GビズIDプライムを取得します。** 発行に約2週間かかるため、早めに着手します。\n2. みらデジ経営チェックを実施します(通常枠では必須)。\n3. ツールとIT導入支援事業者を選びます。\n4. 事業者から「申請マイページ」の招待を受け、申請者情報の入力と書類添付をします。事業者が導入ツールと事業計画値を入力します。\n5. 内容を最終確認し、宣誓して事務局へ提出します。\n6. **交付決定を受けます。**\n7. 交付決定後に契約・発注・導入・支払いを行い、期間内に完了させます。\n8. 実績報告をします。\n\n## 直近の締切\n- 5次締切は9/29で、すでに終了しています。\n- **6次締切は2026年10月30日(金)17:00です。** GビズID取得の期間を考えると、今日(10/4)から動けばギリギリ間に合う日程です。\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_schedule\nSOURCE: https://hojyokin-portal.jp/columns/it_accounting_5softs\nSOURCE: https://leapal.jp/blog/it-cloud/it-subsidy-accounting-software-2026/\nSOURCE: https://carearc.co.jp/blog/3871/\n",
     "error": ""
    }
   },
   "今使っている会計ソフトの月額利用料(サブスク)は、AI導入補助金の対象になりますか?": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
-     "https://it-shien.smrj.go.jp/about"
-    ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://ittoollist.com/",
-     "https://airregi.jp/finance/art-0008/",
-     "https://www.kiyama-cpa.com/it-introduction-subsidy-addition-ineligible/",
-     "https://wheat-biz.com/acc/keiri-daiko-it-hojokin-2026/",
      "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
-     "https://www.epsilon.jp/uriagekoujoiinkai/sellfield/it_hojo.html",
-     "https://www.okanozei.com/tkc-it-hojo",
-     "https://gerbera.co.jp/blog/p04/d18/theme-16091/"
+     "https://it-shien.smrj.go.jp/about",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf"
     ],
+    "text": "**今使っている会計ソフトの月額利用料を、そのまま補助してもらうことは原則できません。** ただし、会計ソフトのサブスク料金という費用の種類自体は、補助対象になり得ます。\n\nここでは、国の「デジタル化・AI導入補助金2026」を指すものとして回答します。\n\n- **すでに契約・利用しているソフトの継続料金**：交付決定前に発注・契約・支払い等をしたものは対象外です。このため、現在の契約に基づく月額料金を、後から補助対象にすることは原則できません。[公式の手続き案内](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n- **補助金を使って新たに導入する会計ソフトの料金**：事務局に登録された対象ソフトで、登録された「IT導入支援事業者」と申請し、交付決定後に契約・導入するなどの条件を満たせば、対象になり得ます。[公式の制度概要](https://it-shien.smrj.go.jp/about)\n- **対象となる期間**：インボイス枠（インボイス対応類型）では、対象会計ソフトの月額・年額料金は**最大2年分**が補助対象です。インボイス制度に対応していることなどが必要で、料金全額が補助されるわけではありません。[公式公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf)\n\n現在のソフトから別のソフトへの乗り換えや、プラン変更を考えている場合は、契約する前に提供会社の補助金窓口へ、具体的な導入内容が対象になるか確認してください。単なる継続・更新で対象になるとは判断できません。\n\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
-     "https://shotaro-tanaka.com/article/ai_2026/",
-     "https://leapal.jp/blog/it-cloud/it-subsidy-accounting-software-2026/",
-     "https://www.anshin.co.jp/information/781",
-     "https://hojyokin-concierge.com/media/2025/12/25/kaikeisoft_hojyokin",
-     "https://ax.gsgs.co.jp/hojokin-cloud-subscription/",
-     "https://www.hs-kaikei.com/blog/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96-ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E3%81%AE%E9%80%9A%E5%B8%B8%E6%9E%A0%E3%81%A8%E3%81%AF%E5%AF%BE%E8%B1%A1%E7%B5%8C%E8%B2%BB-%E8%A3%9C%E5%8A%A9%E9%A1%8D-%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BC%9A%E7%A4%BE%E3%82%92%E6%95%B4%E7%90%86",
-     "https://arkjpn.net/column/column-7723/",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://sorimachi.co.jp/column/recommendation/20260408_01/",
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://suehirotax.jp/blog/12729",
      "https://hojyokin-portal.jp/columns/it_accounting_5softs",
+     "https://suehirotax.jp/blog/12729",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
+     "https://pca.jp/area_top/itdonyu/index.html",
+     "https://shotaro-tanaka.com/article/ai_2026/",
      "https://www.sme-support.co.jp/column/p8120/",
-     "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/",
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/dejitarl-hojyokin-new/",
-     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://leapal.jp/blog/it-cloud/it-subsidy-accounting-software-2026/",
      "https://www.y-aikawa-office.com/digital-ai-hojokin-2026/",
-     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
-     "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/"
+     "https://www.hs-kaikei.com/blog/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96-ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E3%81%AE%E9%80%9A%E5%B8%B8%E6%9E%A0%E3%81%A8%E3%81%AF%E5%AF%BE%E8%B1%A1%E7%B5%8C%E8%B2%BB-%E8%A3%9C%E5%8A%A9%E9%A1%8D-%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BC%9A%E7%A4%BE%E3%82%92%E6%95%B4%E7%90%86",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://hojyokin-portal.jp/columns/itdonyu_soft_summary",
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://hojokin-agent.jp/guide/it-hojo/tools",
+     "https://ax.gsgs.co.jp/digital-ai-hojokin-2026-invoice-framework-guide/",
+     "https://ax.gsgs.co.jp/hojokin-cloud-subscription/",
+     "https://carearc.co.jp/blog/3871/"
     ],
+    "text": "**結論:** 補助金の対象になる可能性はありますが、今使っている契約のままでは対象外とみられます。ただし、この「既存契約は対象外」という点は、今回の検索では確認できていません。\n\n名称は2026年度から「デジタル化・AI導入補助金」(旧IT導入補助金)になっています。検索結果から分かったのは次の点です。\n\n- **サブスク費用:** クラウド利用料は補助対象経費に含まれ、最大2年分が対象です。\n- **会計ソフトの申請枠:** 「通常枠」の対象になり得ます。会計・財務・経営管理の業務プロセスを持つソフトが対象です。「インボイス枠(インボイス対応類型)」の対象にもなり得ます。この枠では、会計・受発注・決済のうち1機能以上を持つ登録ソフトが条件です。\n- **どの会計ソフトでもよいわけではありません。** 次の3つが必要です。\n  1. そのソフトが2026年度の「登録ITツール」であること。\n  2. 登録された「IT導入支援事業者」を通じて申請すること。\n  3. 対象の業務プロセスを満たしていること。\n- **既存契約:** 検索結果には、既に契約・利用中のサブスクが対象かどうかを明記したものがありませんでした。従来のIT導入補助金は、交付決定前に契約・支払いをしたものを対象外としていました。今回も同様の可能性が高いですが、未確認です。\n\n**次にやること:** 今使っている会計ソフトの名前を、ITツール検索で登録済みかどうか確認してください。そのうえで、そのソフトを扱うIT導入支援事業者に、既存契約の扱いを問い合わせてください。\n\nなお、中小企業庁の公式PDFは取得許可が下りず、中身を直接確認できませんでした。上の内容は検索結果の要約と解説記事に基づきます。最終判断は公式の公募要領で確認してください。\n\nSOURCE: https://hojyokin-portal.jp/columns/it_accounting_5softs\nSOURCE: https://suehirotax.jp/blog/12729\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://pca.jp/area_top/itdonyu/index.html\nSOURCE: https://shotaro-tanaka.com/article/ai_2026/\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://leapal.jp/blog/it-cloud/it-subsidy-accounting-software-2026/\nSOURCE: https://www.y-aikawa-office.com/digital-ai-hojokin-2026/\nSOURCE: https://www.hs-kaikei.com/blog/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96-ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E3%81%AE%E9%80%9A%E5%B8%B8%E6%9E%A0%E3%81%A8%E3%81%AF%E5%AF%BE%E8%B1%A1%E7%B5%8C%E8%B2%BB-%E8%A3%9C%E5%8A%A9%E9%A1%8D-%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BC%9A%E7%A4%BE%E3%82%92%E6%95%B4%E7%90%86\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_soft_summary\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://hojokin-agent.jp/guide/it-hojo/tools\nSOURCE: https://ax.gsgs.co.jp/digital-ai-hojokin-2026-invoice-framework-guide/\nSOURCE: https://ax.gsgs.co.jp/hojokin-cloud-subscription/\nSOURCE: https://carearc.co.jp/blog/3871/\n",
     "error": ""
    }
   },
   "AI導入補助金 会計ソフトと受発注システムを同時に導入する場合も補助の対象になりますか?": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/"
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://it-shien.smrj.go.jp/smartregistersystem/",
-     "https://gxo.co.jp/column/order-system-subsidy-application-guide",
-     "https://ittoollist.com/ittools/",
-     "https://hksllc.co.jp/hojokinkatsuyo/scheme-it",
-     "https://hojokin-agent.jp/guide/it-hojo/frame",
-     "https://www.f-crm.jp/posregi_it_subsidy.html",
-     "https://vasemgt.com/blog/it-subsidy-business-efficiency/",
-     "https://joseikin-compass.com/it-subsidy-multiple-business-collaboration-20260930/"
-    ],
+    "text": "**はい、要件を満たせば、会計ソフトと受発注システムを同時に導入する場合も補助対象になります。**\n\n2026年の「デジタル化・AI導入補助金」の**インボイス枠（インボイス対応類型）**では、インボイス制度に対応した会計・受発注・決済ソフトの導入を支援しています。会計と受発注を組み合わせ、登録上「2機能以上」の要件を満たす場合、ソフトウェア・導入関連費の補助上限は**合計350万円**です。各ソフトに350万円ずつ支給されるわけではありません。[公式の制度説明](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/)\n\n主な条件は次のとおりです。\n\n- 導入するソフトが、事務局に事前登録された補助対象のITツールであること。\n- インボイス制度への対応など、申請枠の機能要件を満たすこと。\n- 交付決定後に購入すること。交付決定前に購入したITツールは対象外です。[公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf)\n\n補助率は、**補助額50万円以下の部分が中小企業は3/4以内、小規模事業者は4/5以内、50万円を超える部分が2/3以内**です。導入予定の2製品が対象として登録されているか、会計・受発注の2機能として申請できるかを、IT導入支援事業者に確認してください。[公式の制度説明](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/)\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://www.smartmat.io/column/subsidy/8137",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
+     "https://it-shien.smrj.go.jp/about/",
      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://ax.gsgs.co.jp/digital-ai-hojokin-2026-invoice-framework-guide/",
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://www.freee.co.jp/kb/kb-accounting/it-shien/",
      "https://www.obc.co.jp/hojo",
-     "https://hojyokin-portal.jp/columns/degital_ai_tujyo",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary"
+     "https://hojoguide.jp/guides/it-dounyuu-hojokin-2026"
     ],
+    "text": "**結論: 対象になります。** 会計ソフトと受発注システムの同時導入は補助対象です。ただし、公式ページを直接読む手段が許可されず、検索結果の要約で確認した内容です。申請前に公式サイトか IT導入支援事業者で最終確認してください。\n\n「AI導入補助金」は、現在の「デジタル化・AI導入補助金2026」(旧IT導入補助金)を指すものとして回答します。\n\n- **インボイス枠(インボイス対応類型):** 会計・受発注・決済ソフトとPC・ハードウェア等が対象です。ソフトはインボイス対応で、会計・受発注・決済の機能を1種類以上持つことが要件です。\n- **上限額:** ソフトウェア・導入関連費は、1機能なら50万円まで、2機能以上なら350万円までです。会計と受発注の2機能をそろえれば、上限が高い側になります。\n- **補助率:** 50万円以下の部分は最大4/5、50万円超の部分は2/3以内です。\n- **通常枠:** 複数ソフトを連携させる場合は、上限450万円のB類型が候補になります。補助率は1/2以内(条件により2/3以内)です。この点は二次情報のみで裏取りできていません。\n- **注意点:** 補助対象になるのは、事務局に登録された IT導入支援事業者のITツールだけです。同じITツールを複数の枠で重複申請することはできません。\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/\nSOURCE: https://it-shien.smrj.go.jp/about/\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://ax.gsgs.co.jp/digital-ai-hojokin-2026-invoice-framework-guide/\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://www.freee.co.jp/kb/kb-accounting/it-shien/\nSOURCE: https://www.obc.co.jp/hojo\nSOURCE: https://hojoguide.jp/guides/it-dounyuu-hojokin-2026\n",
     "error": ""
+   }
+  },
+  "無料の会計ソフトはAI導入補助金の対象になりますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/about",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
+     "https://it-shien.smrj.go.jp/antifraud"
+    ],
+    "text": "**完全無料の会計ソフトを使うだけでは、原則として補助金は受け取れません。** 2026年の「デジタル化・AI導入補助金（旧：IT導入補助金）」は、ソフトウェア購入費やクラウド利用料などの導入経費を補助する制度です。無料で費用が発生しない部分には、補助する経費がありません。[公式の制度概要](https://it-shien.smrj.go.jp/about)、[公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf)に基づく判断です。\n\n一方、**無料版から有料プランへ移行する場合は、その有料部分が対象になる可能性があります。** 事務局に登録されたITツール・プランであること、登録されたIT導入支援事業者と申請することなどが必要です。インボイス枠では、インボイス制度に対応した会計ソフトなどが対象になります。[公式の制度概要](https://it-shien.smrj.go.jp/about)、[公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf)\n\nなお、「補助金とキャッシュバックで実質無料」という販売方法は、通常の無料ソフトとは別の話で、事務局が不正行為として注意を呼びかけています。[公式の注意喚起](https://it-shien.smrj.go.jp/antifraud)\n\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf\nSOURCE: https://it-shien.smrj.go.jp/antifraud\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.obc.co.jp/hojo",
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://www.uchida.co.jp/system/info/it-hojo/",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
+     "https://hojyokin-portal.jp/columns/it_accounting_5softs",
+     "https://leapal.jp/blog/it-cloud/it-subsidy-accounting-software-2026/",
+     "https://ezark-tax-accounting.com/it-donyu-hojokin-2026-guide/",
+     "https://carearc.co.jp/blog/2096/",
+     "https://www.freee.co.jp/solution/it-hojokin/",
+     "https://hojyokin-portal.jp/columns/itdonyu_soft_summary",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://suehirotax.jp/blog/12729",
+     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/ai-hojo-2026/",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://canon.jp/biz/solution/smb/list/theme/subsidy/it-shien",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://ittoollist.com/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/"
+    ],
+    "text": "**結論:** 無料の会計ソフトは、基本的に対象になりません。ただし、検索結果に「無料プランは対象外」と明記したページはありませんでした。以下は、補助金の仕組みから導かれる判断です。\n\n**理由**\n- 補助対象は、事務局に登録されたIT導入支援事業者が提供する、登録済みITツールの導入費用だけです。未登録のソフトは、市販品でも対象外です。\n- 補助額は5万円〜150万円で、下限があります。費用が0円の無料プランでは、補助する経費自体が発生しません。\n- 2026年度は、会計ソフト・受発注ソフト・決済ソフトに対象が絞られました。クラウド利用料は2年分がまとめて補助されます。\n- 会計ソフトの対象として、freee会計、マネーフォワードクラウド会計、弥生会計、ジョブカン会計、PCAクラウド会計などが挙げられています。いずれも有料プランを前提とするものです。\n- 既に使っているツールの更新ライセンスも対象外です。交付決定前に発注・契約した分も対象外です。\n\n**実務上の注意**\n- 補助を使うなら、登録済みの有料プランをIT導入支援事業者経由で申請する形になります。\n- 導入予定のソフトとプランが、2026年度の登録ITツールかどうかは必ず確認してください。最終確認は、補助金事務局か申請を担当するIT導入支援事業者に取ってください。\n\n**確認できなかった点:** 中小企業庁の概要PDFなどは、ページ取得の許可が得られず本文を読めていません。上記は検索結果の要約に基づきます。\n\nSOURCE: https://www.obc.co.jp/hojo\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://www.uchida.co.jp/system/info/it-hojo/\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://hojyokin-portal.jp/columns/it_accounting_5softs\nSOURCE: https://leapal.jp/blog/it-cloud/it-subsidy-accounting-software-2026/\nSOURCE: https://ezark-tax-accounting.com/it-donyu-hojokin-2026-guide/\nSOURCE: https://carearc.co.jp/blog/2096/\nSOURCE: https://www.freee.co.jp/solution/it-hojokin/\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_soft_summary\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://suehirotax.jp/blog/12729\nSOURCE: https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/ai-hojo-2026/\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://canon.jp/biz/solution/smb/list/theme/subsidy/it-shien\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/\nSOURCE: https://www.ntt.com/bizon/it-subsidy.html\nSOURCE: https://ittoollist.com/\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/\n",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金の会計ソフト対象条件 2026年版 選び方と申請手順": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "今使っている会計ソフトの月額利用料(サブスク)は、AI導入補助金の対象になりますか?": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "**今使っている会計ソフトの月額利用料を、そのまま補助してもらうことは原則できません。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "**結論:** 補助金の対象になる可能性はありますが、今使っている契約のままでは対象外とみられます。ただし、この「既存契約は対象外」という点は、今回の検索では確認できていません。"
+   }
+  },
+  "AI導入補助金 会計ソフトと受発注システムを同時に導入する場合も補助の対象になりますか?": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい、要件を満たせば、会計ソフトと受発注システムを同時に導入する場合も補助対象になります。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**結論: 対象になります。** 会計ソフトと受発注システムの同時導入は補助対象です。"
+   }
+  },
+  "無料の会計ソフトはAI導入補助金の対象になりますか?": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "**完全無料の会計ソフトを使うだけでは、原則として補助金は受け取れません。**"
+   },
+   "Claude": {
+    "label": "no",
+    "quote": "**結論:** 無料の会計ソフトは、基本的に対象になりません。"
    }
   }
  }

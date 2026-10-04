@@ -3,61 +3,52 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
-  "AI導入補助金 名古屋のサポート先の選び方採択率・費用・流れを解説",
+  "AI導入補助金 名古屋のサポート先の選び方 採択率・費用・流れを解説",
   "AI導入補助金のサポートは、名古屋にオフィスがない会社 (大阪など) に依頼しても大丈夫ですか?",
+  "AI導入補助金 不採択だった場合、名古屋の事業者でも再申請はできますか?",
   "名古屋でAI導入補助金のサポート費用の相場は?成功報酬とは何ですか?"
  ],
  "answers": {
-  "AI導入補助金 名古屋のサポート先の選び方採択率・費用・流れを解説": {
+  "AI導入補助金 名古屋のサポート先の選び方 採択率・費用・流れを解説": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/",
+     "https://mirasapo-plus.go.jp/infomation/33237/",
      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://www.nipc.or.jp/digitalgrants/",
-     "https://pit-n.nagoya-cci.or.jp/advice/",
-     "https://it-shien.smrj.go.jp/search/",
-     "https://it-shien.smrj.go.jp/download/grantdecision_list/",
-     "https://it-shien.smrj.go.jp/applicant/measures/",
-     "https://spiral-corp.com/subsidy/subsidy-it/",
-     "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/"
-    ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://ai-keiei.co.jp/subsidy/",
-     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
-     "https://hojokin-agent.jp/purpose/equipment-it/aichi",
-     "https://fois-web.com/columns/6723/",
-     "https://dx-hojo.aibsc.jp/",
-     "https://dx-hojo.aibsc.jp/",
-     "https://www.city.nagoya.jp/jigyou/sangyou/1026356/1026468/1026469.html",
      "https://www.nagoya-cci.or.jp/shikin/nagoyashi.digital.html",
-     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
-     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
-     "https://ms-shop.net/ai-dx/",
-     "https://mono-support.com/blog/2026-hojokin-nagoya/"
+     "https://www.pref.aichi.jp/press-release/aichi-pref-iot/digital-madoguti2026.html",
+     "https://www.aibsc.jp/support/256/",
+     "https://dxpiaward.nagoya-cci.or.jp/specialist-solutions/",
+     "https://it-shien.smrj.go.jp/download/grantdecision_list",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://it-shien.smrj.go.jp/search/"
     ],
+    "text": "名古屋でAI導入補助金のサポート先を選ぶなら、**無料の公的窓口で導入目的を整理し、登録IT導入支援事業者を複数比較する**進め方がおすすめです。採択率だけで決めず、費用の総額と、導入後まで対応する範囲を確認しましょう。\n\n以下は、2026年10月4日時点で確認した情報です。\n\n**利用する制度を確認する**\n\n国の制度は「デジタル化・AI導入補助金2026」です。旧IT導入補助金から名称が変わりました。通常枠では、ソフトウェアやクラウド利用料、導入設定・研修などが対象となり、補助率は原則1/2以内、一定の条件では2/3以内です。補助額は、業務プロセス数に応じて5万円以上150万円未満、または150万円以上450万円以下となります。\n\nAIという名前が付いたサービスでも、自動的に対象になるわけではありません。対象となる登録ITツールか、申請枠の機能要件に合うかを確認してください。[通常枠の公式説明](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n名古屋市には別制度の「中小企業デジタル活用支援補助金」もあります。ただし、2026年度の掲載募集期間は4月15日～6月1日で、すでに終了しています。国の制度と募集時期・要件を混同しないようにしましょう。[名古屋商工会議所の案内](https://www.nagoya-cci.or.jp/shikin/nagoyashi.digital.html)\n\n**名古屋で最初に相談できる窓口**\n\n| 相談先 | 向いている相談 | 費用 |\n|---|---|---|\n| あいちデジタル技術活用相談窓口 | 業務改善、ツール選定、ITサービス提供者の紹介 | 無料 |\n| 愛知県よろず支援拠点 | 経営課題の整理、導入目的や資金計画の相談 | 無料 |\n| 名古屋商工会議所 | IT化、事業計画、税務・労務を含む専門家相談 | 専門相談は無料 |\n\nあいちデジタル技術活用相談窓口は、名駅のウインクあいちに設置され、対面・オンラインなどで相談できます。よろず支援拠点は事前予約制です。これらは相談窓口なので、申請書の作成や導入作業をどこまで支援するかは個別に確認してください。[愛知県の窓口案内](https://www.pref.aichi.jp/press-release/aichi-pref-iot/digital-madoguti2026.html)、[愛知県よろず支援拠点](https://www.aibsc.jp/support/256/)、[名古屋商工会議所の専門相談案内](https://dxpiaward.nagoya-cci.or.jp/specialist-solutions/)\n\n**採択率は「年度・枠・件数」をセットで見る**\n\n公式の申請数・交付決定数から計算すると、2026年度の実績は次のとおりです。\n\n| 締切回 | 通常枠 | インボイス枠・インボイス対応類型 |\n|---|---:|---:|\n| 1次 | 43.9％（891／2,028件） | 46.9％（2,027／4,324件） |\n| 2次 | 43.6％（819／1,879件） | 55.3％（2,096／3,790件） |\n| 3次 | 42.2％（807／1,913件） | 44.7％（1,781／3,982件） |\n\nこれは**全国の交付決定数÷申請数**で算出した参考値です。名古屋限定、AIツール限定、特定の支援会社の実績ではありません。[公式の交付決定事業者一覧](https://it-shien.smrj.go.jp/download/grantdecision_list)\n\n支援会社が「採択率90％」などと表示している場合は、次を確認すると比較しやすくなります。\n\n- 何年度・どの申請枠の実績か。\n- 採択件数と申請件数は何件か。\n- 再申請を含めているか、集計から除外した案件があるか。\n- 自社と同じ業種・規模・導入内容の支援実績があるか。\n\n高い採択率も、今回の採択を保証するものではありません。\n\n**費用は申請支援料と導入費を分けて比較する**\n\n今回確認した公的資料からは、名古屋の民間申請支援料について、一律の相場は確認できませんでした。見積もりでは、以下を分けてもらうのが実務的です。\n\n| 費用項目 | 確認する内容 |\n|---|---|\n| 着手金・申請支援料 | 不採択でも支払うか |\n| 成功報酬 | 定額か割合か、計算の基準額、支払時期 |\n| ツール導入費 | ライセンス、設定、データ移行、研修の内訳 |\n| 継続費用 | 月額料金、保守料、補助対象期間後の料金 |\n| 追加対応費 | 差戻し修正、再申請、実績報告の料金 |\n\n通常枠では導入・活用コンサルティングなども対象経費として示されていますが、**申請支援料まで補助されると決めつけず、登録内容と対象経費を確認**してください。[通常枠の対象経費](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n例えば、税抜200万円が全額対象経費となり、補助率1/2が適用される場合、補助額は100万円です。ただし、入金前に導入費を支払う資金が必要で、対象外の支援料や消費税などは別途考慮します。[公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)、[交付決定後の手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n**相談から入金までの流れ**\n\n1. **課題を整理する**  \n   「問い合わせ対応を月何時間減らすか」など、導入目的を具体化します。\n2. **支援事業者とツールを選ぶ**  \n   公式検索で登録状況を確認し、機能・見積もり・支援範囲を比較します。\n3. **申請準備をする**  \n   GビズIDプライムの取得、SECURITY ACTION宣言、必要書類の準備を進めます。\n4. **共同で申請する**  \n   IT導入支援事業者と事業計画を作成し、申請者が内容を最終確認して提出します。\n5. **交付決定後に契約・導入・支払いを行う**\n6. **実績報告、補助額の確定、入金へ進む**  \n   その後の効果報告なども、支援範囲に含まれるか確認します。\n\n申請準備と交付決定後の手続きは、公式フローに沿って進めてください。[申請フロー](https://it-shien.smrj.go.jp/applicant/flow/)、[交付決定後の手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n支援先を絞る際は、**登録状況・同業種の実績・料金の明確さ・実績報告までの対応・導入後の運用支援**の5点を比較すると判断しやすくなります。名古屋に拠点があるかに加え、訪問対応、担当者の返信速度、既存システムとの連携も確認しましょう。登録事業者とツールは、[公式検索](https://it-shien.smrj.go.jp/search/)で確認できます。\n\nSOURCE: https://mirasapo-plus.go.jp/infomation/33237/\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://www.nagoya-cci.or.jp/shikin/nagoyashi.digital.html\nSOURCE: https://www.pref.aichi.jp/press-release/aichi-pref-iot/digital-madoguti2026.html\nSOURCE: https://www.aibsc.jp/support/256/\nSOURCE: https://dxpiaward.nagoya-cci.or.jp/specialist-solutions/\nSOURCE: https://it-shien.smrj.go.jp/download/grantdecision_list\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/search/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/",
+     "https://promotize.jp/blog/ai-guide/aichi-ai-dounyuu-shien/",
+     "https://digital-ai-hojokin.jp/articles/aichi-ai-hojokin-2026/",
+     "https://digital-ai-hojokin.jp/articles/ai-hojokin-2026-kanzen-guide/",
+     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
+     "https://spiral-corp.com/post-806/",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
      "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
-     "https://digital-ai-hojokin.jp/articles/aichi-ai-hojokin-2026/",
-     "https://promotize.jp/blog/ai-guide/aichi-ai-dounyuu-shien/",
-     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
-     "https://www.sme-support.co.jp/column/p8120/",
-     "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://seisansei.smrj.go.jp/subsidy_info/it_subsidy.html",
-     "https://www.obc.co.jp/360/list/post372"
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
+     "https://www.tokyo-kst.jp/service112.html",
+     "https://carearc.co.jp/blog/2913/"
     ],
+    "text": "## 結論\n\n名古屋に限定した制度はなく、全国共通の「デジタル化・AI導入補助金2026」(旧IT導入補助金)を、事務局登録の IT導入支援事業者 と共同申請します。サポート先は、**自社のツールを登録していて、同業種・同規模の採択実績があり、費用体系が明確な事業者**を選んでください。なお WebFetch が許可されず、以下は検索結果の要約に基づきます。原典の確認が必要です。\n\n## 1. 採択率\n- 2026年第3次締切(9/2公表)は、通常枠 42.19%、インボイス枠 44.73%、セキュリティ対策推進枠 72.22% です。全体では約44%とする記事もあります。\n- 「採択率100%」をうたう事業者もありますが、自社申請分を含む制度全体の数字ではありません。実績の母数と対象枠を確認してください。\n- 愛知県のものづくり補助金の採択率は47〜54%程度です。製造業が多く競争が激しい地域とされますが、これは別制度の数字で、本制度の名古屋の採択率は確認できませんでした。\n\n## 2. 費用\n- **補助額・補助率**: 資料により上限が異なります(350万円とするもの、最大450万円とするもの)。補助率は小規模事業者で3/4〜4/5、中小企業で2/3(50万円以下の部分)などです。枠ごとに違うため、中小企業庁の概要資料で確認してください。\n- **支援事業者への費用の相場**: 着手金は5〜10万円程度、成功報酬は交付決定額の10〜30%程度です。実例として、着手金3万円+交付決定時15万円という料金設定もあります。\n- 「補助金対象外の費用」「ツール代に上乗せされる手数料」「不採択時の返金の有無」を見積段階で確認してください。\n\n## 3. サポート先の選び方\n1. 導入したいITツール・AIツールを登録・取り扱っている。\n2. 同業種・同規模の採択実績がある。\n3. 申請書類の作成を一括でサポートしてくれる。\n4. 費用体系が透明で、説明が明確。\n5. 名古屋の事業者なら、対面相談や、愛知・名古屋市の補助金との併用提案ができるかも比較材料になります。\n\n## 4. 申請の流れ\n1. 制度の理解\n2. GビズIDプライムの取得とSECURITY ACTION宣言\n3. IT導入支援事業者とITツールの選定\n4. 支援事業者との共同での交付申請(第三者の代理申請は不可)\n5. 審査・交付決定\n6. ITツールの発注・契約・支払い(交付決定後)\n7. 事業実績報告\n8. 補助金額の確定・交付\n\n2026年度は「AI活用」が審査の柱になった点が特徴です。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/\nSOURCE: https://promotize.jp/blog/ai-guide/aichi-ai-dounyuu-shien/\nSOURCE: https://digital-ai-hojokin.jp/articles/aichi-ai-hojokin-2026/\nSOURCE: https://digital-ai-hojokin.jp/articles/ai-hojokin-2026-kanzen-guide/\nSOURCE: https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin\nSOURCE: https://spiral-corp.com/post-806/\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_saitaku\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://www.tokyo-kst.jp/service112.html\nSOURCE: https://carearc.co.jp/blog/2913/\n",
     "error": ""
    }
   },
@@ -68,75 +59,120 @@
      "https://it-shien.smrj.go.jp/search/",
      "https://it-shien.smrj.go.jp/itvendor/about/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [],
+    "text": "**はい。国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」であれば、名古屋にオフィスがない大阪などの会社にも依頼できます。** 公式の事業者選定案内では、申請者と同じ地域にオフィスがあることは条件として示されておらず、自社の課題に合うIT導入支援事業者・ITツールを選ぶ仕組みです。公式検索にも「対応希望エリア」の項目があります。[公式の申請フロー](https://it-shien.smrj.go.jp/applicant/flow/)、[公式の事業者検索](https://it-shien.smrj.go.jp/search/)\n\n依頼前には、所在地よりも次の点を確認してください。\n\n- **登録の有無**：申請を共同で進める会社が、当該年度の「IT導入支援事業者」として登録されているか。別のコンサル会社に相談する場合は、実際に共同申請を担当する登録事業者を確認しましょう。\n- **対象ツールと対応地域**：導入予定のツールが登録されており、名古屋の事業所への導入・サポートに対応できるか。\n- **支援範囲と料金**：申請支援に加え、導入後の問い合わせ、実績報告などをどこまで支援するか。訪問が必要な場合の交通費も確認すると安心です。\n\n公式には、IT導入支援事業者の役割として、ツールの提案・導入・アフターサポートや補助事業の問い合わせ対応が定められています。[IT導入支援事業者の役割](https://it-shien.smrj.go.jp/itvendor/about/)\n\nなお、**名古屋市や愛知県独自の補助金を指している場合は、その制度の公募要領を別途確認する必要があります。** 上記は国の補助金についての回答です。\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/search/\nSOURCE: https://it-shien.smrj.go.jp/itvendor/about/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
      "https://it-shien.smrj.go.jp/about/",
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
      "https://www.ntt.com/bizon/it-subsidy.html",
-     "https://samurai-law.com/hojokinsupport/",
-     "https://spiral-corp.com/post-415/",
-     "https://www.shigyo.co.jp/senmon/jigyousha_hojokin/it_kouhusinnsei_support.html",
-     "https://office-ozk.com/hojokin/it-hojokin/it-hojokin-jigyosya/"
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://carearc.co.jp/blog/2955/",
+     "https://mirasapo-plus.go.jp/supporter/certification/",
+     "https://trise-c.jp/blog/grant-support/"
     ],
+    "text": "**結論: 大阪など名古屋にオフィスがない会社に頼んでも、基本的に問題ありません。**\n\n- **申請がすべてオンライン**: 申請はすべてオンラインで、事業者が申請マイページを開設し、GビズIDプライムでログインして進めます。入力項目は申請者側と支援事業者側に分かれています。事業者が所在地にいる必要はありません。\n- **オンライン相談が一般的**: 補助金の申請支援は、事務所に行かなくてもWeb会議などで対応できます。静岡県からオンラインで全国対応している認定支援機関の例もありました。\n- **支援事業者の役割は場所に関係しない**: 支援事業者は事務局に認定された事業者で、ITツールの提供、申請書類の作成サポート、ツール選定、導入後のフォロー、実績報告の支援までを行います。名古屋拠点であることは要件ではありません。\n\n**注意点**\n- **対応エリアは必ず確認する**: 「全国対応」「オンライン対応」と明記されているか、依頼前に確認してください。\n- **訪問が必要な場面があるか確認する**: 機器の設置や現地での操作研修など、導入するツールによっては訪問が要るかもしれません。\n- **公式の登録を確認する**: 依頼先がIT導入支援事業者として事務局に登録されているかと、導入したいツールが登録済みかを、公式サイトで確認してください。\n\n**検索でわかったことの限界**: 公式ページ本文までは取得できず、検索結果の要約に基づいています。「所在地による制限がない」とは、公式資料に明記があったわけではありません。申請がオンライン完結で、遠方の事業者から依頼する例もあることからの判断です。\n\nSOURCE: https://it-shien.smrj.go.jp/about/\nSOURCE: https://www.ntt.com/bizon/it-subsidy.html\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://carearc.co.jp/blog/2955/\nSOURCE: https://mirasapo-plus.go.jp/supporter/certification/\nSOURCE: https://trise-c.jp/blog/grant-support/\n",
+    "error": ""
+   }
+  },
+  "AI導入補助金 不採択だった場合、名古屋の事業者でも再申請はできますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/schedule/"
+    ],
+    "text": "**はい、名古屋の事業者でも再申請できます。** ご質問が国の「デジタル化・AI導入補助金2026」を指す場合、通常枠の公募要領には、**不採択となった場合は次回以降の締切りまでに交付申請が可能**と明記されています。名古屋の事業者も、申請要件を満たせば同じルールが適用されます。[公式公募要領（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\n再申請では、次の点を確認してください。\n\n- **不採択の結果が出てから申請すること。** 同じ通常枠に、同時に複数の交付申請はできません。\n- **申請内容を見直すこと。** IT導入支援事業者と、書類の不備、経営課題と導入ツールの適合性、生産性向上の計画などを確認してください。再申請しても採択が保証されるわけではありません。[公式公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n- **次の公募締切を確認すること。** 2026年10月4日時点で、公式サイトに掲載されている通常枠の次の締切は、**2026年10月30日（金）17時**です。[公式スケジュール](https://it-shien.smrj.go.jp/schedule/)\n\nなお、名古屋市独自の補助金など、別の制度を指している場合は、その制度の再申請ルールを確認する必要があります。\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/schedule/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei",
+     "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://www.obc.co.jp/360/list/post498",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://hojokin-hub.ai/guides/ai-subsidy-guide",
+     "https://www.btncon.com/blog/digital-ai-subsidy-2026",
+     "https://so-labo.co.jp/hojyokin/it-hojo/basic/911/",
+     "https://www.freee.co.jp/kb/kb-accounting/it-shien/",
+     "https://leadbrain.co.jp/contents/lb/8739/",
+     "https://planbase.co.jp/column/it-rejection/",
+     "https://d-spport.jp/ithojo-reapplication/",
+     "https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/",
+     "https://carearc.co.jp/blog/2936/"
+    ],
+    "text": "**結論:再申請できます。名古屋の事業者であることが理由で制限される、という記載は見つかりませんでした。**\n\n名古屋に限らず、不採択でも次回以降の公募に何度でも再申請できます。回数制限やペナルティはありません。\n\n名古屋・愛知県に限った条件(対象地域の限定など)は、今回の検索結果では確認できませんでした。ただし、制度が「デジタル化・AI導入補助金」(旧IT導入補助金)に変わった点や、地域条件の有無は公式の公募要領で確認してください。\n\n注意点:\n- **過去に採択歴がある場合**: 2022〜2025年に採択を受けた事業者が再度申請するときは、賃上げ要件(物価安定目標2%+1.5%以上)が追加されています。\n- **不採択の理由は開示されません**: 公募要領と交付申請の手引きを見直し、事業計画を改善してから再申請するのがよいです。\n- **過去の導入ソフトとの重複**: 2024年・2025年の交付決定を受けたソフトとプロセスが重複すると減点され、完全に一致すると不採択になります。\n- **参考の採択率**: 2026年の第3次締切は全体で44.0%、通常枠で42.19%でした。\n\n今回は WebFetch の許可が得られず、各ページの本文は開けていません。上の内容は検索結果の要約にもとづいています。要約からは、どの記述がどのページ由来かまでは特定できないため、以下には検索で見つかったページを全部載せています。\n\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_saitaku\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://www.obc.co.jp/360/list/post498\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\nSOURCE: https://www.btncon.com/blog/digital-ai-subsidy-2026\nSOURCE: https://so-labo.co.jp/hojyokin/it-hojo/basic/911/\nSOURCE: https://www.freee.co.jp/kb/kb-accounting/it-shien/\nSOURCE: https://leadbrain.co.jp/contents/lb/8739/\nSOURCE: https://planbase.co.jp/column/it-rejection/\nSOURCE: https://d-spport.jp/ithojo-reapplication/\nSOURCE: https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/\nSOURCE: https://carearc.co.jp/blog/2936/\n",
     "error": ""
    }
   },
   "名古屋でAI導入補助金のサポート費用の相場は?成功報酬とは何ですか?": {
    "ChatGPT": {
     "urls": [
-     "https://hosoe-tax.com/news/column/column_zeimu/article/20250605-2/",
-     "https://it-shien.smrj.go.jp/",
-     "https://www.azuma-gyosei.net/area/nagoya.html"
-    ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
-     "https://office-tree.jp/blog/subsidy/subsidy-application-success-fee-only/",
-     "https://spiral-corp.com/subsidy/subsidy-it/",
-     "https://note.com/carearc/n/n518429789036",
-     "https://www.rivewell.jp/ithojo/",
-     "https://kitazawaoffice.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E3%83%97%E3%83%A9%E3%82%B6%E5%90%8D%E5%8F%A4%E5%B1%8B/",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGYhc1C7f9XpI92IpEl3UE_FPK2ALTagl1quqmQVv9oe3v6opHYvxkiHk2M6Oq3cPz80gJQGRRYtICj30ckcu00_txQUGaEKo8jOrDPqOsLuNHVIcgXSkQqnUQqKYpsMuttPJBQizb4nkXgmbi1W8PkFg==",
+     "https://it-shien.smrj.go.jp/about",
+     "https://www.azuma-gyosei.net/area/nagoya.html",
      "https://iwamoto-it.co.jp/subsidy/digital-ai.php",
-     "https://faclog.jp/magazine/it-introduction-subsidy-application-agency/",
-     "https://www.rex-consul.com/post/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91",
-     "https://www.meihou-gkn.com/%E8%A3%BD%E5%93%81%E7%B4%B9%E4%BB%8B/%EF%BD%89%EF%BD%94%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
-     "https://colorfulbox.co.jp/subsidy",
-     "https://spiral-corp.com/post-415/",
-     "https://physical-ai-hojokin.jp/articles/physical-ai-daikou-hiyou/"
+     "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/"
     ],
+    "text": "名古屋でAI導入補助金の申請サポートを依頼する場合、**「着手金5万円程度〜＋成功報酬として補助金額の10〜15％」が、公開料金から見た目安**です。ただし、名古屋全体の平均を示す統計ではなく、名古屋対応の事業者の料金例に基づきます。\n\nここでは、国の「デジタル化・AI導入補助金2026」の申請支援費用として説明します。この制度は、登録されたIT導入支援事業者と連携して申請します。[制度の公式説明](https://it-shien.smrj.go.jp/about)\n\n| 料金体系・公開例 | 費用の目安（税別） |\n|---|---|\n| 名古屋・愛知対応の東亮介行政書士事務所 | IT導入補助金：着手金5万円〜＋採択額の10〜15％ |\n| 岩本ITコンサルティング | 申請支援：着手金なし、採択時に1件12万円。実績報告・効果報告は各1回2万円 |\n\n前者は大阪拠点で名古屋にも対応する事務所、後者は主にITベンダー・販売店向けのサービスです。依頼する立場や支援範囲によって料金が変わります。[東亮介事務所の料金](https://www.azuma-gyosei.net/area/nagoya.html)、[岩本ITコンサルティングの料金](https://iwamoto-it.co.jp/subsidy/digital-ai.php)\n\n全国的な参考として、申請支援会社の調査では「着手金＋成功報酬10〜20％」という目安も示されています。[セブンセンシズの解説](https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/)\n\n**成功報酬とは、契約で決めた成果が出たときに支払う料金**です。例えば「採択額の10％」なら、補助金100万円の採択で成功報酬10万円。着手金5万円が別にある契約なら、合計15万円＋消費税になります。\n\n注意したいのは、**「成功」が補助金の入金を意味するとは限らない**ことです。岩本ITコンサルティングの例では、採択結果が出た時点で報酬を請求します。「完全成功報酬」は通常、着手金がなく、不採択なら申請支援の報酬が発生しない方式です。[成功報酬と請求時期の説明](https://iwamoto-it.co.jp/subsidy/digital-ai.php)\n\n見積もりでは、次の点を確認すると総額を比較しやすくなります。\n\n- 成功報酬は「採択額」「実際の受給額」のどちらを基準にするか\n- 支払いは採択時か、補助金入金後か\n- 最低報酬、消費税、実績報告・効果報告の追加料金があるか\n- 不採択の場合、着手金が返金されるか\n\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://www.azuma-gyosei.net/area/nagoya.html\nSOURCE: https://iwamoto-it.co.jp/subsidy/digital-ai.php\nSOURCE: https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
      "https://digital-ai-hojokin.jp/articles/aichi-ai-hojokin-2026/",
      "https://central-ax.co.jp/nagoya-ai/",
-     "https://promotize.jp/blog/ai-guide/aichi-ai-dounyuu-shien/",
-     "https://unigain.co.jp/resources/nagoya-ai-donyu-hojokin",
-     "https://advertisingplanet.co.jp/media/2026/09/26/sme-ai-adoption-support-guide/",
-     "https://liftbaseinc.com/column/ai-subsidies-sme",
-     "https://www.plus-impact.co/ai-training/media/joseikin-aichi",
-     "https://site.kzclassllc.com/blog/ai-agent-cost-and-subsidy/",
-     "https://dstmp.shachihata.co.jp/column/0420230926/",
-     "https://weeva.co.jp/news/subsidy-agency-fees/",
-     "https://bcompany.co.jp/service/b-top/column/grants/ithojokin-sinsei/",
-     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
-     "https://hojokin-kanji.com/posts/it-introduction-subsidy-application-agency",
-     "https://mono-support.com/corona/%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E4%BB%A3%E8%A1%8C%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E3%81%AF%EF%BC%9F%E8%A3%9C%E5%8A%A9%E9%87%91%E5%85%A8%E8%88%AC%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B/",
+     "https://ichidokiri.co.jp/column/manufacturing_subsidy_successfee/",
+     "https://strategy-tax.jp/column/subsidy-application-agency/",
      "https://financing.web-matching.com/compensation-rates-for-grant-application-services",
-     "https://carearc.co.jp/blog/2913/",
-     "https://support03.com/category4/"
+     "https://www.min-kei.jp/basics_successfee/",
+     "https://trise-c.jp/blog/application-agency-for-business-restructuring-subsidy/"
     ],
+    "text": "**相場の結論**: 名古屋に限った相場表は見つかりませんでした。全国的な補助金申請代行の相場が名古屋でもそのまま目安になります。\n\n## サポート費用の相場\n- **着手金**: 0〜15万円が一般的です。5〜30万円とする情報もあります。\n- **成功報酬**: 採択額(補助額)の10〜15%前後が中心で、5〜20%と幅を持たせた情報もあります。\n- **料金体系は3タイプ**:\n  - 完全成功報酬型: 採択額の10〜20%のみで、不採択なら無料です。\n  - 着手金固定型: 10〜30万円を一括で払い、不採択でも費用がかかります。\n  - ハイブリッド型: 着手金5〜15万円に成功報酬5〜10%を足します。\n- **補助金別の目安**: ものづくり補助金は約15%、事業再構築補助金は10〜20%です。IT導入補助金は交付決定額の10%(税別)で、効果報告まで含めると15%(税別)という例があります。\n- **名古屋のAI実装支援会社の例**: 生成AI研修が25万円/人、AI受託開発が50万円〜です。これは補助金申請代行ではなく、AI導入支援そのものの価格です。\n\n## 成功報酬とは\n補助金が採択されたときだけ、受け取る補助額の一定割合を支援会社に支払う仕組みです。不採択なら報酬は不要か、着手金だけで済みます。\n\n注意点は次のとおりです。\n- 割合は「採択額」と「交付決定額」のどちらに掛けるか、契約で確認してください。\n- 下限額が設定されている場合があります。\n- 採択後の実績報告などが報酬に含まれるか、別料金かも確認してください。\n- 補助金は後払いなので、報酬の支払い時期も確認しておくと安心です。\n\n## 名古屋・愛知で使える制度の例\n検索結果の記事に出ていた内容です。公式の公募要領は未確認なので、申請前に各窓口で確認してください。\n- 愛知県中小企業DX推進補助金: 最大300万円(補助率1/2)\n- あいちものづくりAI化補助: 最大800万円(補助率1/2〜2/3)\n- 名古屋市中小企業デジタル化助成: 最大150万円(補助率1/2)\n\nなお、上の数字は検索結果の要約で確認したもので、各ページの本文までは読んでいません。\n\nSOURCE: https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/\nSOURCE: https://digital-ai-hojokin.jp/articles/aichi-ai-hojokin-2026/\nSOURCE: https://central-ax.co.jp/nagoya-ai/\nSOURCE: https://ichidokiri.co.jp/column/manufacturing_subsidy_successfee/\nSOURCE: https://strategy-tax.jp/column/subsidy-application-agency/\nSOURCE: https://financing.web-matching.com/compensation-rates-for-grant-application-services\nSOURCE: https://www.min-kei.jp/basics_successfee/\nSOURCE: https://trise-c.jp/blog/application-agency-for-business-restructuring-subsidy/\n",
     "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金 名古屋のサポート先の選び方 採択率・費用・流れを解説": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "サポート先は、**自社のツールを登録していて、同業種・同規模の採択実績があり、費用体系が明確な事業者**を選んでください。"
+   }
+  },
+  "AI導入補助金のサポートは、名古屋にオフィスがない会社 (大阪など) に依頼しても大丈夫ですか?": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい。国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」であれば、名古屋にオフィスがない大阪などの会社にも依頼できます。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**結論: 大阪など名古屋にオフィスがない会社に頼んでも、基本的に問題ありません。**"
+   }
+  },
+  "AI導入補助金 不採択だった場合、名古屋の事業者でも再申請はできますか?": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい、名古屋の事業者でも再申請できます。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**結論:再申請できます。名古屋の事業者であることが理由で制限される、という記載は見つかりませんでした。**"
+   }
+  },
+  "名古屋でAI導入補助金のサポート費用の相場は?成功報酬とは何ですか?": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "名古屋でAI導入補助金の申請サポートを依頼する場合、**「着手金5万円程度〜＋成功報酬として補助金額の10〜15％」が、公開料金から見た目安**です。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**相場の結論**: 名古屋に限った相場表は見つかりませんでした。全国的な補助金申請代行の相場が名古屋でもそのまま目安になります。"
    }
   }
  }

@@ -3,154 +3,184 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
-  "AI導入補助金 神戸の申請サポート完全ガイド採択率と流れ",
+  "AI導入補助金 神戸の申請サポート完全ガイド 採択率と流れ",
+  "AI導入補助金 神戸の会社ですが、大阪の会社に申請サポートを頼んでも問題ありませんか？",
   "AI導入補助金 対象・補助額・申請から着金までの流れは？",
-  "AI導入補助金 神戸の会社ですが、大阪の会社に申請サポートを頼んでも問題ありませんか？"
+  "AI導入補助金はいくらまで補助され、着金までどのくらいかかりますか？"
  ],
  "answers": {
-  "AI導入補助金 神戸の申請サポート完全ガイド採択率と流れ": {
+  "AI導入補助金 神戸の申請サポート完全ガイド 採択率と流れ": {
    "ChatGPT": {
     "urls": [
      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/schedule/",
-     "https://www.city.kobe.lg.jp/a93457/2026dxsystem.html",
-     "https://www.city.kobe.lg.jp/a93457/business/sangyoshinko/shokogyo/venture/monodukuri/toshisokushin/08tosisokushinjosei.html",
-     "https://www.city.kobe.lg.jp/a93457/2026dxjinzai.html",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://mirasapo-plus.go.jp/infomation/33237/",
-     "https://kobe-ipc.or.jp/kobe-dxotasuketai",
+     "https://www.city.kobe.lg.jp/a93457/132637692746.html",
+     "https://it-shien.smrj.go.jp/download/grantdecision_list/",
+     "https://kobe-dxotasuketai.jp/about/",
      "https://www.kobe-cci.or.jp/support/senmonka/",
      "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/applicant/measures/",
-     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/"
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://it-shien.smrj.go.jp/schedule/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://nocoderi.co.jp/2025/04/03/kobe-ai-subsidy-guide/",
-     "https://igunal.com/digital-ai-subsidy-acceptance-rate/",
-     "https://hojokin-dx.com/articles/hyogo-kobe-dx-ai-subsidy-5-hikaku-2026/",
-     "https://physical-ai-hojokin.jp/articles/hyogo-ai-hojokin-2026/",
-     "https://hojokin-agent.jp/purpose/dx/hyogo",
-     "https://nocoderi.co.jp/2025/04/03/kobe-ai-subsidy-guide/",
-     "https://www.city.kobe.lg.jp/a93457/2026dxsystem.html",
-     "https://www.city.kobe.lg.jp/a93457/2026dxjinzai.html",
-     "https://hojokin-agent.jp/guide/it-hojo/saitaku",
-     "https://tokyo-legaloffice.com/funding/",
-     "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://leadbrain.co.jp/contents/lb/8690/",
-     "https://g1info.jp/2026/07/08/it-hojokin-adoption-2026/"
-    ],
+    "text": "神戸でAI導入の補助金を申請するなら、まず検討したいのは国の**「デジタル化・AI導入補助金2026」**と、市の**「神戸市中小企業DX推進支援補助金」**です。申請支援は、導入内容の相談を地域の支援窓口で行い、国の補助金申請を登録済みのIT導入支援事業者と進める形が基本です。\n\n以下は、**2026年10月4日時点で確認できた公式情報**を中心にしたガイドです。\n\n**1．神戸で使える主な制度**\n\n| 制度 | 補助額・補助率 | 主な条件・状況 |\n|---|---|---|\n| 国：デジタル化・AI導入補助金2026・通常枠 | 5万円～450万円。原則1/2以内、一定の最低賃金に関する条件を満たす場合は2/3以内 | 業務に合ったITツールを導入する中小企業・小規模事業者向け |\n| 神戸市：DX推進支援補助金・システム導入事業 | 通常枠は上限100万円、DXモデル事業枠は上限250万円。いずれも1/2以内 | 市内中小企業で、DXお助け隊の伴走支援を複数回受けることなどが条件。2026年度の公募期間は8月7日まで |\n| 神戸市：同補助金・DX人材育成事業 | 上限30万円、1/2以内 | DX関連の研修・講座などが対象。DXお助け隊のヒアリングが必要。公募期間は2027年1月29日まで |\n\n国の通常枠は、補助額150万円未満では1業務プロセス以上、150万円以上では4業務プロセス以上が必要です。市のシステム導入事業は公表された募集期間を過ぎているため、追加募集の有無を問い合わせてください。[国の通常枠](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)、[神戸市の公募案内](https://www.city.kobe.lg.jp/a93457/132637692746.html)\n\n**「AIを使う」という理由だけでは対象になりません。** 国の通常枠では、対象として登録されたITツールと、その業務機能を確認する必要があります。汎用・自動化・分析ツールだけでの申請はできないため、生成AIサービスの月額料金も、対象になると決めつけず登録内容を確認しましょう。ソフトウェア購入費、クラウド利用料最大2年分、一定の導入設定・研修などが対象です。[通常枠の対象・機能要件](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n**2．採択率はどのくらいか**\n\n事務局が公表した2026年度通常枠の申請数・交付決定数から計算すると、次のとおりです。\n\n| 公募回 | 申請数 | 交付決定数 | 採択率 |\n|---|---:|---:|---:|\n| 1次 | 2,028件 | 891件 | 43.9％ |\n| 2次 | 1,879件 | 819件 | 43.6％ |\n| 3次 | 1,913件 | 807件 | 42.2％ |\n| 1～3次合計 | 5,820件 | 2,517件 | **43.2％** |\n\n採択率は「交付決定数÷申請数」で算出し、小数第1位に丸めています。**全国の通常枠の実績であり、神戸限定・AIツール限定の採択率ではありません。** 確認した公式資料では、神戸限定の採択率は確認できませんでした。[事務局の交付決定実績](https://it-shien.smrj.go.jp/download/grantdecision_list/)\n\n支援会社が「採択率90％以上」などを掲げている場合は、対象年度・申請枠・申請件数・不採択案件を含めた集計かを確認してください。支援会社の実績と制度全体の採択率は分けて判断する必要があります。\n\n**3．神戸で申請サポートを受ける窓口**\n\n- **神戸市中小企業DXお助け隊**  \n  現状のヒアリング、経営課題の整理、ITツール選定、AI活用、導入後の運用まで伴走支援を行います。市のDX補助金を検討する場合にも、早めに相談する窓口です。[支援内容・相談の流れ](https://kobe-dxotasuketai.jp/about/)\n\n- **神戸商工会議所**  \n  中小企業診断士などによる無料の専門相談があります。事前予約制で、経営課題や計画の相談に活用できます。補助金の書類作成や申請支援まで対応するかは、予約時に確認してください。[無料専門相談](https://www.kobe-cci.or.jp/support/senmonka/)\n\n- **登録済みのIT導入支援事業者**  \n  国の補助金では、ITツールの選定と事業計画の作成を共同で進める相手です。申請者自身が最後に内容を確認し、宣誓・提出します。[公式の申請フロー](https://it-shien.smrj.go.jp/applicant/flow/)\n\n有料サポートを選ぶ際は、**着手金・成功報酬・不採択時の扱い・実績報告の支援範囲・導入後の保守費用**を見積書で確認しましょう。採択保証よりも、業務への適合性と導入後までの対応を重視するのが実務的です。\n\n**4．申請から入金・報告までの流れ**\n\n国の通常枠では、次の順序で進めます。\n\n1. **課題と導入目的を整理する**  \n   「問い合わせ対応の時間を減らす」「受注入力を効率化する」など、対象業務と改善目標を明確にします。\n\n2. **GビズIDプライムとSECURITY ACTIONを準備する**  \n   公式案内では、GビズIDプライムの発行はおおむね2週間、SECURITY ACTIONの宣言済アカウントID発行はおおむね2～3日が目安です。\n\n3. **IT導入支援事業者と対象ツールを選ぶ**  \n   見積もり、機能、登録状況、運用方法を確認し、事業計画を共同作成します。\n\n4. **申請マイページで交付申請する**  \n   申請者が基本情報・必要書類を入力し、支援事業者がツール情報などを入力。申請者が最終確認して提出します。[申請前の準備・手続き](https://it-shien.smrj.go.jp/applicant/flow/)\n\n5. **交付決定後に発注・契約・支払いを行う**  \n   **交付決定前の発注・契約・支払いは補助対象になりません。**\n\n6. **導入・運用を開始し、実績報告を提出する**  \n   契約、納品、支払いなどを証明する書類を提出します。\n\n7. **確定した補助金額を確認・承認し、交付を受ける**  \n   支払いと実績報告が先になるため、導入費用を立て替える資金を用意します。その後も所定の効果報告が必要です。[交付決定後の手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n現在、公式ページに掲載されている通常枠6次の締切は、**2026年10月30日17時**、交付決定予定日は**12月10日**です。事業実施・実績報告の期限は**2027年5月31日17時予定**です。[公式スケジュール](https://it-shien.smrj.go.jp/schedule/)\n\n**5．申請の質を高めるために準備すること**\n\n以下は、申請準備の実務上の提案です。\n\n- **改善効果を数字で示す**：現在の作業時間、件数、人件費などを記録する。\n- **AIと課題の関係を説明する**：どの機能が、どの工程を、どのように改善するかを書く。\n- **運用体制を決める**：担当者、研修、AI出力の確認方法を具体化する。\n- **要件と書類の整合性を確認する**：見積もり、対象経費、事業計画、賃上げ要件などを照合する。\n- **補助後の費用まで比較する**：利用料、更新費、保守費を含めて導入効果を判断する。\n\n神戸で初めて取り組むなら、**DXお助け隊で課題を整理し、登録IT導入支援事業者に対象ツールと見積もりを確認する**ところから始めると、制度選びと申請準備を進めやすくなります。\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://www.city.kobe.lg.jp/a93457/132637692746.html\nSOURCE: https://it-shien.smrj.go.jp/download/grantdecision_list/\nSOURCE: https://kobe-dxotasuketai.jp/about/\nSOURCE: https://www.kobe-cci.or.jp/support/senmonka/\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/schedule/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
      "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
-     "https://www.sme-support.co.jp/column/p8120/",
      "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/",
-     "https://www.spreadoffice.com/subsidy/it2026/",
-     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
-     "https://it-shien.smrj.go.jp/about/",
-     "https://www.city.kobe.lg.jp/a93457/2026dxsystem.html",
-     "https://fro-con.com/blog/hyogo-dx-hojo-2026/"
-    ],
-    "error": ""
-   }
-  },
-  "AI導入補助金 対象・補助額・申請から着金までの流れは？": {
-   "ChatGPT": {
-    "urls": [
-     "https://mirasapo-plus.go.jp/subsidy/ithojo/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/security/",
-     "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/"
-    ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/",
-     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/",
-     "https://www.youtube.com/watch?v=Au1Eb0paMnI",
-     "https://www.ntt.com/bizon/it-subsidy.html",
-     "https://www.youtube.com/watch?v=xcFM5_0Xhj0",
-     "https://www.youtube.com/watch?v=GA7Sel4pnHs",
-     "https://www.obc.co.jp/360/list/post372",
-     "https://www.obc.co.jp/360/list/post372",
-     "https://it-shien.smrj.go.jp/applicant/flow/"
-    ],
-    "error": ""
-   },
-   "Claude": {
-    "urls": [
-     "https://sogyotecho.jp/digital-ai-hojyokin/",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
-     "https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/",
+     "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
+     "https://soichiro.co.jp/homepage-subsidy/saitaku2026/",
      "https://www.sme-support.co.jp/column/p8120/",
-     "https://with-ai.jp/blog/ai-subsidy-2026-guide.html",
-     "https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/",
-     "https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/",
-     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
-     "https://article.ejinzai.jp/column/2026-digital-ai-subsidy/",
-     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
-     "https://www.uchida.co.jp/system/info/it-hojo/",
      "https://www.spreadoffice.com/subsidy/it2026/",
-     "https://www.btncon.com/blog/digital-ai-subsidy-2026",
-     "https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/",
-     "https://hojokin-dx.com/articles/digital-ai-hojokin-4jishibatsu-roadmap-2026/",
-     "https://www.systems.nakashima.co.jp/contents/news/2026digital_ai_hojokin.html",
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
-     "https://it-shien.smrj.go.jp/applicant/flow/"
+     "https://hojokin-hub.ai/guides/ai-subsidy-guide",
+     "https://www.stg.kips.iamjava.work/blog0037/",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://gxo.co.jp/column/digital-ai-subsidy-2026-acceptance-rate-drop-countermeasures",
+     "https://leadbrain.co.jp/contents/lb/8739/",
+     "https://hojoguide.jp/guides/it-dounyuu-hojokin-2026",
+     "https://m-assets.com/lp/subsidy/blog/it-subsidy-2026-guide",
+     "https://www.city.kobe.lg.jp/a93457/2025dxhojo.html",
+     "https://www.city.kobe.lg.jp/a93457/2026dxsystem.html",
+     "https://www.city.kobe.lg.jp/a93584/smartcity/saisentangijutu_reiwasannendojigyou.html",
+     "https://hojyokin-portal.jp/subsidies/11638",
+     "https://www.shien-nethg.jp/shienkikan/8/",
+     "https://fro-con.com/blog/hyogo-dx-hojo-2026/",
+     "https://biz.stayway.jp/hojyo_detail/hojyo_area/72/1190/",
+     "https://nocoderi.co.jp/2025/04/03/%E3%80%90%E7%A5%9E%E6%88%B8%E5%B8%82%E5%AF%BE%E5%BF%9C%E3%80%91ai%E5%B0%8E%E5%85%A5%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%BE%E3%81%A8%E3%82%812025/",
+     "https://hojokin-dx.com/articles/hyogo-prefecture-dx-subsidy-2026/"
     ],
+    "text": "**結論**: 「AI導入補助金」は国の **デジタル化・AI導入補助金**(2026年度から旧IT導入補助金が改称)を指すのが一般的です。全体の採択率は約44%、神戸市内の事業者は市独自のDX補助も併用候補になります。\n\n## 採択率(2026年度 1〜3次)\n- 全体: 申請5,913者に対し交付決定2,601者で **43.99%**。\n- 次別: 1次46.3%、2次51.5%、3次44.0%。\n- 枠別: 通常枠42.19%、インボイス枠44.73%、セキュリティ対策推進枠72.22%。\n- 通常枠は3回続けて40%台前半で、半数以上が不採択です。\n\n## 補助額・補助率\n- 上限は1者あたり最大450万円です。\n- 補助率は基本1/2です。小規模事業者は賃上げ等の要件を満たすと最大4/5になります。\n\n## 申請の流れ\n1. ITツールの選定と支援事業者(パートナー)の決定\n2. gBizIDプライムの取得とSECURITY ACTION宣言(申請前に必須)\n3. 交付申請\n4. 交付決定\n5. ITツールの導入と支払い\n6. 事業実績報告と補助金交付\n\n2026年度の公募は3/30開始で、1次締切は5/12、交付決定は6/18でした。入金までの目安は8〜12か月です。\n\n## 神戸市の関連制度\n- **神戸市中小企業DX推進支援補助制度【システム導入事業】**: 上限100万円または250万円、補助率1/2です。\n- **DX人材育成事業**: 上限30万円、補助率1/2です。\n- 申請は「e-KOBE」からオンラインで行います。\n- 対象は神戸市内に事業所があり、市税の滞納・未申告がない中小企業です。\n- 国の補助金と併用できるかは、検索結果だけでは確認できませんでした。公式ページで確認してください。\n\n## 注意点\n- 「神戸の申請サポート完全ガイド」という題名の単一ページは見つかりませんでした。上記は国の制度と神戸市制度の公開情報を組み合わせたものです。\n- 神戸の申請サポート事業者個別の実績や料金は確認できていません。\n- 公募回や締切は変わるため、最新の公募要領で確認してください。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_saitaku\nSOURCE: https://soichiro.co.jp/homepage-subsidy/saitaku2026/\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\nSOURCE: https://www.stg.kips.iamjava.work/blog0037/\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://gxo.co.jp/column/digital-ai-subsidy-2026-acceptance-rate-drop-countermeasures\nSOURCE: https://leadbrain.co.jp/contents/lb/8739/\nSOURCE: https://hojoguide.jp/guides/it-dounyuu-hojokin-2026\nSOURCE: https://m-assets.com/lp/subsidy/blog/it-subsidy-2026-guide\nSOURCE: https://www.city.kobe.lg.jp/a93457/2025dxhojo.html\nSOURCE: https://www.city.kobe.lg.jp/a93457/2026dxsystem.html\nSOURCE: https://www.city.kobe.lg.jp/a93584/smartcity/saisentangijutu_reiwasannendojigyou.html\nSOURCE: https://hojyokin-portal.jp/subsidies/11638\nSOURCE: https://www.shien-nethg.jp/shienkikan/8/\nSOURCE: https://fro-con.com/blog/hyogo-dx-hojo-2026/\nSOURCE: https://biz.stayway.jp/hojyo_detail/hojyo_area/72/1190/\nSOURCE: https://nocoderi.co.jp/2025/04/03/%E3%80%90%E7%A5%9E%E6%88%B8%E5%B8%82%E5%AF%BE%E5%BF%9C%E3%80%91ai%E5%B0%8E%E5%85%A5%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%BE%E3%81%A8%E3%82%812025/\nSOURCE: https://hojokin-dx.com/articles/hyogo-prefecture-dx-subsidy-2026/\n",
     "error": ""
    }
   },
   "AI導入補助金 神戸の会社ですが、大阪の会社に申請サポートを頼んでも問題ありませんか？": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/search/"
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/search/",
+     "https://it-shien.smrj.go.jp/antifraud"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://hojokin-agent.jp/audience/sole-proprietor/hyogo",
-     "https://kamiyugyousei.com/kobe-city-hyogo-prefecture-subsidy-application-support/",
-     "https://www.shigyo.co.jp/search_post/business-subsidy/it/koufusinsei/",
-     "https://fujisakij-law.com/%E5%B0%8F%E8%A6%8F%E6%A8%A1%E4%BA%8B%E6%A5%AD%E8%80%85%E6%8C%81%E7%B6%9A%E5%8C%96%E8%A3%9C%E5%8A%A9%E9%87%91/%E7%A5%9E%E6%88%B8%E5%B8%82-%E5%B0%8F%E8%A6%8F%E6%A8%A1%E4%BA%8B%E6%A5%AD%E8%80%85%E6%8C%81%E7%B6%9A%E5%8C%96%E8%A3%9C%E5%8A%A9%E9%87%91-%E7%94%B3%E8%AB%8B%E4%BB%A3%E8%A1%8C/",
-     "https://ichikala.com/news/2022/11/16/it-hojo-faq-20221118/",
-     "https://bcompany.co.jp/service/b-top/column/grants/ithojokin-sinsei/",
-     "https://mono-support.com/saikouchiku/hyougo-2/"
-    ],
+    "text": "**はい。国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」のことなら、神戸の会社が大阪の会社に申請サポートを頼むことは、原則として問題ありません。** 確認した公募要領には、申請者と支援会社が同じ府県に所在するという条件はありません。公式検索も、支援会社の所在地ではなく「対応希望エリア」で探す仕組みになっています。これは公式資料からの判断です。[公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)、[公式検索](https://it-shien.smrj.go.jp/search/)\n\n依頼前には、次の点を確認してください。\n\n- **登録と対応地域**：補助金を使ったITツール導入のパートナーとなる会社が、2026年度の「IT導入支援事業者」に登録され、兵庫県・神戸市に対応しているか。単なる申請コンサル会社なら、別途どの登録事業者と手続きを進めるのか確認してください。\n- **対象ツール**：導入予定のAIツールが補助対象として登録されているか。登録事業者と登録ツールは公式検索で確認できます。[公式検索](https://it-shien.smrj.go.jp/search/)\n- **申請操作**：サポートを受けても、GビズIDなどを相手に共有して申請手続きを丸投げしないでください。事務局は、ID共有による代理操作を不正行為として挙げています。[事務局の注意事項](https://it-shien.smrj.go.jp/antifraud)\n\nなお、**神戸市・兵庫県独自のAI導入補助金を指している場合は、その制度の公募要領で別途確認が必要です。** 国の制度については、依頼先が大阪にあること自体は支障になりません。\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/search/\nSOURCE: https://it-shien.smrj.go.jp/antifraud\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://it-shien.smrj.go.jp/search/",
-     "https://mirasapo-plus.go.jp/subsidy/ithojo/",
      "https://sogyotecho.jp/digital-ai-hojyokin/",
-     "https://www.tokyo-kst.jp/service112.html",
-     "https://listing-partners.com/gbiz/ithojokin/",
-     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo"
+     "https://it-shien.smrj.go.jp/about/",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://g1info.jp/itvendorsupport/",
+     "https://support.horieconsul.com/service/ithojokin/",
+     "https://carearc.co.jp/blog/2913/",
+     "https://consulting.m41.jp/service/ithojokin/"
     ],
+    "text": "**結論: 問題ありません。** 検索した範囲では、会社の所在地と支援事業者の所在地を揃える必要があるという記載は見つかりませんでした。実際に全国対応でオンライン完結のサポート事業者が多数あります。\n\n- **制度上の要件:** 申請は、事務局に登録された「IT導入支援事業者」とパートナーを組んで行う必要があります。導入できるのは、ITツール検索に登録・公開されているツールだけです。事業者単独での交付申請はできません。\n- **地域の扱い:** 神戸の会社が大阪の事業者を選べるかどうかを直接定めた記載は、検索結果にはありませんでした。「禁止」とも「許可」とも明記されていない状態です。\n- **実態:** 「全国対応」「北海道から沖縄まで対応」と掲げ、打合せや申請入力のサポートを Zoom・電話・メールで行う事業者が複数あります。大阪と神戸は近いので、対面での打合せも現実的です。\n\n依頼前に次の2点を確認してください。\n\n1. **相手が登録済みのIT導入支援事業者か。** 申請サポートだけを行うコンサルは、導入したいITツールの登録事業者とは別の場合があります。その場合は、ツールを扱う登録事業者と申請サポートの担当を整理する必要があります。\n2. **最新の公募要領。** 公式ページ(it-shien.smrj.go.jp)の取得は今回の環境で許可されず、公募要領の本文は確認できていません。地域制限や申請サポート費用の扱いは、公募要領か事務局への問い合わせで最終確認してください。\n\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://it-shien.smrj.go.jp/about/\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://g1info.jp/itvendorsupport/\nSOURCE: https://support.horieconsul.com/service/ithojokin/\nSOURCE: https://carearc.co.jp/blog/2913/\nSOURCE: https://consulting.m41.jp/service/ithojokin/\n",
     "error": ""
+   }
+  },
+  "AI導入補助金 対象・補助額・申請から着金までの流れは？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://it-shien.smrj.go.jp/applicant/subsidy",
+     "https://it-shien.smrj.go.jp/about",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
+     "https://it-shien.smrj.go.jp/applicant/flow/",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://it-shien.smrj.go.jp/schedule/"
+    ],
+    "text": "**国の「デジタル化・AI導入補助金2026」（旧IT導入補助金）では、中小企業・個人事業主などのAIを含むITツール導入を支援します。通常枠は最大450万円。補助金は、導入費用を支払い、実績報告・審査を終えてから受け取る後払いです。** 以下は2026年10月4日時点の公式情報です。[中小企業庁の案内](https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html)\n\n**対象となる事業者・費用**\n\n日本国内で事業を営む中小企業・小規模事業者などが対象で、個人事業主も含まれます。企業規模の基準は業種によって異なり、例えば製造業は「資本金3億円以下、または従業員300人以下」、小売業は「資本金5,000万円以下、または従業員50人以下」です。[対象者の基準](https://it-shien.smrj.go.jp/applicant/subsidy)\n\n対象は、原則として**事務局に登録されたITツール**です。登録された「IT導入支援事業者」と組んで申請します。AI製品なら何でも対象になるわけではありません。[制度概要](https://it-shien.smrj.go.jp/about)\n\n通常枠では、ソフトウェア購入費、クラウド利用料最大2年分、導入設定・研修・コンサルティング・保守などが対象です。汎用の自動化・分析ツールだけの申請はできず、所定の業務プロセスを持つソフトウェアが必要です。消費税や補助金申請代行費は対象外です。[通常枠](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)、[公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\n**補助額はいくら？**\n\n| 主な申請枠 | 補助額 | 補助率・条件 |\n|---|---:|---|\n| 通常枠：1業務プロセス以上 | 5万円以上150万円未満 | 原則1/2以内。最低賃金に関する所定の条件を満たす場合は2/3以内 |\n| 通常枠：4業務プロセス以上 | 150万～450万円 | 同上。賃上げ目標が必須 |\n| インボイス枠・インボイス対応類型 | ソフトウェア等は最大350万円 | 補助額50万円以下の部分は3/4以内、小規模事業者は4/5以内。50万円超の部分は2/3以内 |\n\n通常枠の「プロセス」は、販売支援、在庫・物流、会計、人事・給与などの業務機能を指します。インボイス枠は会計・受発注・決済ソフトが対象で、補助額50万円超には2機能以上が必要です。対象ソフトと一緒に導入するPC・タブレット等は最大10万円、レジ・券売機等は最大20万円、補助率はいずれも1/2以内です。[通常枠](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)、[通常枠公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)、[インボイス枠](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/)\n\n例えば、通常枠で税抜100万円の経費がすべて対象となり、補助率1/2なら補助額は50万円です。まず導入費用全額を支払う資金を用意する必要があります。\n\n**申請から着金までの流れ**\n\n1. **事前準備**  \n   GビズIDプライムを取得し、SECURITY ACTIONの一つ星または二つ星を宣言します。公式案内の所要期間は、それぞれおおむね2週間、2～3日です。\n2. **支援事業者・登録ツールを選ぶ**  \n   見積もりを取り、導入する機能・費用・事業計画を決めます。\n3. **交付申請する**  \n   支援事業者と申請を作成し、申請者本人が申請マイページで確認・提出します。\n4. **審査・交付決定を待つ**  \n   申請すれば必ず採択されるわけではありません。\n5. **交付決定後に発注・契約・導入・支払いを行う**  \n   **交付決定前の発注・契約・支払いは補助対象になりません。**\n6. **実績報告を提出する**  \n   契約・納品・支払いを確認できる証拠書類を提出します。報告時にはツールの利用・運用も開始している必要があります。\n7. **確定した補助金額を確認・承認し、入金を受ける**  \n   申請マイページで承認します。承認しないと補助金は交付されません。\n\nこの流れは、[申請手続き](https://it-shien.smrj.go.jp/applicant/flow/)と[交付決定後の手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)に示されています。入金後も、所定の効果報告が必要です。\n\n**着金まで何か月かかる？**\n\n一律の着金日は示されていません。申請回の交付決定日、導入・支払いを終える時期、実績報告の審査・修正状況によって変わります。\n\n例えば通常枠の6次公募は、**2026年10月30日17時締切 → 12月10日交付決定予定 → 2027年5月31日17時までに事業実施・実績報告**という日程です。5月31日は着金日ではありません。実績報告後の審査と承認を経て入金となるため、その間の立替資金を確保しておくことが大切です。[公式スケジュール](https://it-shien.smrj.go.jp/schedule/)\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/schedule/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://with-ai.jp/blog/ai-subsidy-2026-guide.html",
+     "https://altrobo.co.jp/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96%E3%83%BBai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BD%9C%E8%A3%9C%E5%8A%A9%E9%A1%8D/",
+     "https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/",
+     "https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/",
+     "https://www.digital-reclame.co.jp/blog/ai-subsidy-2026-guide/",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://soichiro.co.jp/homepage-subsidy/it-2026-schedule/",
+     "https://sogyotecho.jp/digital-ai-hojyokin/"
+    ],
+    "text": "「AI導入補助金」という名前の独立した制度はなく、2026年は旧IT導入補助金が「デジタル化・AI導入補助金」に改称されて、その中でAIツールが補助対象になっています。WebFetch の権限がなく、各ページの本文は確認できませんでした。以下は検索結果の要約だけに基づくので、正確な数字や締切は公式サイトで確認してください。\n\n**対象**\n- 日本国内で事業を営む中小企業・小規模事業者です。個人事業主、医療法人、社会福祉法人なども含まれます。\n- 補助対象は、事務局に登録された IT ツール(AI ツール含む)の導入費用です。\n\n**補助額・補助率**\n- **通常枠**: 1プロセス以上で5万円以上150万円未満、4プロセス以上で150万円以上450万円以下です。補助率は原則1/2以内で、要件を満たせば2/3以内です。\n- **インボイス枠(インボイス対応類型)**\n  - ツール費用が50万円以下の部分は3/4以内で、小規模事業者は4/5以内です。\n  - 50万円超〜350万円以下の部分は2/3以内です。\n  - PC・タブレット等は10万円まで、レジ・券売機等は20万円までです。\n- **セキュリティ対策推進枠**: 5万〜150万円です。\n- **複数社連携枠**: 基盤導入経費は1構成員あたり最大350万円で、補助上限額は3,000万円です。\n\n**申請から着金までの流れ**\n1. **事前準備**: 導入するツールを選び、IT導入支援事業者に相談します。gBizID プライムを取得し(1〜2週間程度かかります)、SECURITY ACTION を宣言します。\n2. **交付申請**: 事業計画や必要書類を電子申請システムから提出します。\n3. **採択・交付決定**: 交付決定通知が届きます。この通知より前に発注・契約・支払をすると補助対象外になりやすいため、通知を待ってからツールを導入します。この点は検索結果の記載ではなく、制度一般の知識に基づきます。\n4. **ツールの導入・運用開始**: 導入し、支払いを済ませます。\n5. **事業実績報告**: マイページに必要書類を提出します。\n6. **補助金額の確定**: 事務局が報告を承認し、補助金額を決定します。\n7. **補助金交付(着金)**: 実績報告から約2か月後です。\n\n**スケジュール例(通常枠)**: 1次締切は2026年5月12日、交付決定は2026年6月18日、事業実績報告期限は2026年12月25日です。今日は2026年10月4日なので、この回はすでに締切を過ぎています。次回の公募日程は、公式サイトで確認してください。\n\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide\nSOURCE: https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://with-ai.jp/blog/ai-subsidy-2026-guide.html\nSOURCE: https://altrobo.co.jp/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96%E3%83%BBai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BD%9C%E8%A3%9C%E5%8A%A9%E9%A1%8D/\nSOURCE: https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/\nSOURCE: https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/\nSOURCE: https://www.digital-reclame.co.jp/blog/ai-subsidy-2026-guide/\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.ntt.com/bizon/it-subsidy.html\nSOURCE: https://soichiro.co.jp/homepage-subsidy/it-2026-schedule/\n\n注: 1行目の `sogyotecho.jp` の URL は、検索結果に出た `https://sogyotecho.jp/digital-ai-hojyokin/` の綴りを誤って書いています。正しくは次の URL です。\n\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\n\n(正しい綴りは `hojyokin` ではなく、検索結果どおり `https://sogyotecho.jp/digital-ai-hojyokin/` ではなく **`https://sogyotecho.jp/digital-ai-hojyokin/`** です。)\n",
+    "error": ""
+   }
+  },
+  "AI導入補助金はいくらまで補助され、着金までどのくらいかかりますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
+     "https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://it-shien.smrj.go.jp/schedule/"
+    ],
+    "text": "国の**「デジタル化・AI導入補助金2026」（旧IT導入補助金）**について回答します。\n\n**一般的な企業のAIツール導入では、通常枠で最大450万円です。** 補助率は原則1/2、一定の最低賃金に関する要件を満たす場合は2/3以内。ただし、対象となる業務プロセスが1～3つの場合は150万円未満、4つ以上の場合に450万円まで申請できます。[通常枠の公式情報](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n別枠では、インボイス対応ソフトなどが最大350万円。複数事業者が共同で導入する枠では、ITツール・ハードウェアに最大3,000万円、事務費・専門家費に最大200万円の補助があります。共同導入枠の上限は、1社単独の上限ではありません。[インボイス枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf)、[中小企業庁の共同導入枠の説明](https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html)\n\n**着金までの期間は一律ではなく、補助金は後払いです。** 「交付決定 → 導入・代金の支払い → 実績報告 → 検査・補助金額の確定 → 承認」を経て交付されるため、導入費用はいったん自社で支払う必要があります。確認した公式ページには、申請から着金までの固定日数は示されていません。[交付決定後の公式手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n例えば、通常枠の**2026年10月30日締切分は、交付決定が12月10日予定**で、締切から約6週間。その後に導入・支払い・実績報告・検査が続きます。実績報告期限は2027年5月31日予定ですが、これは入金日ではありません。資金計画では、交付決定までの約6週間に、導入と報告審査にかかる期間を加えて考える必要があります。[公式スケジュール](https://it-shien.smrj.go.jp/schedule/)\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf\nSOURCE: https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://it-shien.smrj.go.jp/schedule/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/degital_ai_tujyo",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://hojyokin-portal.jp/columns/degital_ai_schedule",
+     "https://www.pull-net.jp/digital-ai-subsidy-2026/payment/"
+    ],
+    "text": "**結論:** 「AI導入補助金」は、旧IT導入補助金の後継「デジタル化・AI導入補助金2026」のことだと解釈しました。補助額は通常枠で最大450万円です。着金は、事業実績報告から約1.5〜2.5か月後が目安です。\n\n**補助額・補助率**\n- 通常枠は、1プロセス以上で5万円以上150万円未満、4プロセス以上で150万円以上450万円以下です。\n- 補助率は原則1/2以内で、要件を満たせば2/3以内になります。\n- 小規模事業者などが要件を満たすと、最大4/5まで上がるとする解説もあります。\n- 枠によって条件が異なります（インボイス枠など）。\n\n**着金までの流れと期間**\n1. 申請の締切から交付決定まで、約5〜6週間です（例: 1次は5/12締切で6/18交付決定）。\n2. 交付決定後に、ITツールの契約・発注・納品・支払いを行います。交付決定前の発注は対象外です。事業実施期間は交付決定から約6か月です。\n3. 事業実績報告を提出します（5次締切分は2027年4月30日期限）。\n4. 報告から着金までは約1.5〜2.5か月です。検査結果の確認・承認後、約1か月で事務局から口座へ直接振り込まれます。\n\n交付決定から着金までは、最短でも半年以上かかると見ておくのが安全です。補助金は後払いなので、導入費用は先に自己資金で立て替える必要があります。\n\n**注意点**\n- 中小企業庁の公式資料と入金時期の解説ページは、取得が許可されず本文を確認できませんでした。数字は検索結果の要約と民間解説サイトに基づいています。\n- 2回目の検索結果の要約には「450 million yen」という誤訳がありました。他の複数の解説では「450万円」で一致しているので、450万円としています。\n- 申請前に、最新の公募要領で枠ごとの上限と補助率を確認してください。\n\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_tujyo\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_schedule\nSOURCE: https://www.pull-net.jp/digital-ai-subsidy-2026/payment/\n",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金 神戸の申請サポート完全ガイド 採択率と流れ": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "**「AIを使う」という理由だけでは対象になりません。** 国の通常枠では、対象として登録されたITツールと、その業務機能を確認する必要があります。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "「神戸の申請サポート完全ガイド」という題名の単一ページは見つかりませんでした。上記は国の制度と神戸市制度の公開情報を組み合わせたものです。"
+   }
+  },
+  "AI導入補助金 神戸の会社ですが、大阪の会社に申請サポートを頼んでも問題ありませんか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい。国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」のことなら、神戸の会社が大阪の会社に申請サポートを頼むことは、原則として問題ありません。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**結論: 問題ありません。** 検索した範囲では、会社の所在地と支援事業者の所在地を揃える必要があるという記載は見つかりませんでした。"
+   }
+  },
+  "AI導入補助金 対象・補助額・申請から着金までの流れは？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "**国の「デジタル化・AI導入補助金2026」（旧IT導入補助金）では、中小企業・個人事業主などのAIを含むITツール導入を支援します。通常枠は最大450万円。補助金は、導入費用を支払い、実績報告・審査を終えてから受け取る後払いです。**"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "「AI導入補助金」という名前の独立した制度はなく、2026年は旧IT導入補助金が「デジタル化・AI導入補助金」に改称されて、その中でAIツールが補助対象になっています。"
+   }
+  },
+  "AI導入補助金はいくらまで補助され、着金までどのくらいかかりますか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "**一般的な企業のAIツール導入では、通常枠で最大450万円です。** 補助率は原則1/2、一定の最低賃金に関する要件を満たす場合は2/3以内。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**結論:** 「AI導入補助金」は、旧IT導入補助金の後継「デジタル化・AI導入補助金2026」のことだと解釈しました。補助額は通常枠で最大450万円です。着金は、事業実績報告から約1.5〜2.5か月後が目安です。"
    }
   }
  }

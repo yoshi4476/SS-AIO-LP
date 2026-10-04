@@ -3,86 +3,75 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
-  "2026年 AI導入補助金でホームページ制作は対象?対象範囲と注意点を解説",
+  "2026年 AI導入補助金でホームページ制作は対象?",
   "AI導入補助金 コーポレートサイトのリニューアルだけでも対象になりますか?",
-  "AI導入補助金 保守費やドメイン費は補助対象になりますか?"
+  "AI導入補助金 保守費やドメイン費は補助対象になりますか?",
+  "AI導入補助金 個人事業主でも申請できますか?"
  ],
  "answers": {
-  "2026年 AI導入補助金でホームページ制作は対象?対象範囲と注意点を解説": {
+  "2026年 AI導入補助金でホームページ制作は対象?": {
    "ChatGPT": {
     "urls": [
-     "https://mirasapo-plus.go.jp/infomation/31537/",
      "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/applicant/flow/"
+     "https://it-shien.smrj.go.jp/about"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://alank.jp/news/ai-subsidy-2026-2/",
-     "https://www.dt-media.jp/column/web-system-ai-subsidy-2026",
-     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://soichiro.co.jp/it-hojo/",
-     "https://grill.co.jp/marketing-log/17199/",
-     "https://moveq.co.jp/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%B6%E4%BD%9C%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%BE%E3%81%A8%E3%82%81%EF%BD%9C2026%E5%B9%B4%E5%BA%A6/",
-     "https://coosy.co.jp/blog/web-funding/",
-     "https://hojokin-agent.jp/purpose/website",
-     "https://hojyokin-concierge.com/media/2024/01/04/itdounyuhojyokin_hp_sakusei_hiyou",
-     "https://www.ab-net.co.jp/hojyokin/"
-    ],
+    "text": "**2026年の「デジタル化・AI導入補助金」では、ホームページ制作は補助対象外です。ECサイト制作も対象外です。**\n\n公式の「2026 通常枠 よくあるご質問」では、「ホームページ制作は補助対象ですか」に対し、**「ホームページ制作（ECサイト制作含む。）は補助対象外です」**と明記されています。[公式FAQ（質問5）](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\n対象になるのは、業務の生産性向上に役立つ、**事務局に登録されたITツールの導入費用**です。ソフトウェアやクラウドサービス、その導入に伴う支援費用などが該当します。ホームページ制作とITツール導入をセットで提案された場合も、制作費まで対象になるとは判断せず、登録ツールと補助対象経費の内訳を確認してください。[公式FAQ（質問3・4）](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)、[公式制度概要](https://it-shien.smrj.go.jp/about)\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/about\n",
     "error": ""
    },
    "Claude": {
     "urls": [
      "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://www.uchida-it.co.jp/info/2026it/",
      "https://coosy.co.jp/blog/web-funding/",
+     "https://soichiro.co.jp/homepage-subsidy/it-2026-schedule/",
      "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://mihata.jp/column/subsidy-ai-chatbot-booking-system",
-     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
      "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://hojokin-agent.jp/purpose/website",
      "https://adfactoryhearts.com/hp-subsidy-2026/",
-     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
-     "https://www.digital-reclame.co.jp/blog/homepage-production-subsidy-2026/",
-     "https://soichiro.co.jp/it-hojo/"
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://www.smartmat.io/column/subsidy/8137",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/"
     ],
+    "text": "**結論: 単体のホームページ制作は対象外です。** ただし、業務プロセスを担うITツール機能を持つサイトは、そのツール部分に限り対象になる可能性があります。\n\n- **対象外の理由**: 制度名は2026年から「デジタル化・AI導入補助金」(旧IT導入補助金)に変わりました。目的は業務プロセスのデジタル化・生産性向上です。情報発信が主目的のコーポレートサイトやECサイトは、この趣旨に合わないとされています。\n- **対象になりうる例**: 予約システム、受発注システム、在庫管理、AIチャットボット、業務システム連携、EC機能などを備えたサイトです。ただし補助されるのは、事務局に登録されたITツールの導入費(ソフトウェア購入費、クラウド利用料最大2年分、導入関連費)です。サイト制作費そのものは含まれません。\n- **申請の条件**: 依頼先がIT導入支援事業者として登録されている必要があります。\n- **代替策**: 純粋なホームページ制作には、小規模事業者持続化補助金など別の制度を検討する余地があります。\n\n**確認状況**: 公式資料(中小企業庁の概要PDF、公募要領PDF)は、アクセス権限の都合で中身を直接読めていません。上記は、民間サイトの解説記事にある共通した記述に基づいています。申請前に、公募要領と支援事業者への確認をお願いします。\n\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://coosy.co.jp/blog/web-funding/\nSOURCE: https://soichiro.co.jp/homepage-subsidy/it-2026-schedule/\nSOURCE: https://dg-index.jp/blog/digital-ai-subsidy-homepage/\nSOURCE: https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/\nSOURCE: https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/\nSOURCE: https://hojokin-agent.jp/purpose/website\nSOURCE: https://adfactoryhearts.com/hp-subsidy-2026/\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://www.smartmat.io/column/subsidy/8137\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/\n",
     "error": ""
    }
   },
   "AI導入補助金 コーポレートサイトのリニューアルだけでも対象になりますか?": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf"
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/about"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://nortiqlab.com/subsidy",
-     "https://mihata.jp/column/subsidy-website-eligibility-2026",
-     "https://fun-create.co.jp/post-221/",
-     "https://hojokin-agent.jp/purpose/website",
-     "https://coosy.co.jp/blog/web-funding/",
-     "https://rweb-c.com/blog/website-renewal-subsidy-kansai/"
-    ],
+    "text": "**コーポレートサイトのリニューアルだけでは、対象になりません。** 国の「デジタル化・AI導入補助金2026（旧IT導入補助金）」を指す場合、公式FAQに「ホームページ制作（ECサイト制作含む。）は補助対象外です」と明記されています。会社案内サイトのデザイン変更やページの作り直しだけの費用は、この対象外に当たります。[公式FAQ（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\nこの補助金が支援するのは、**業務効率化や生産性向上につながる、事務局に登録されたITツールの導入**です。サイト改修と併せてITツールを導入する場合も、そのツールが登録済みで申請要件を満たすかを確認する必要があり、サイト制作費まで対象になるわけではありません。[公式制度概要](https://it-shien.smrj.go.jp/about)、[公式FAQ（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/about\n",
     "error": ""
    },
    "Claude": {
     "urls": [
+     "https://it-shien.smrj.go.jp/",
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://coosy.co.jp/blog/web-funding/",
+     "https://next-engine.net/ec-blog/subsidy-for-ec-website/",
+     "https://office-tree.jp/blog/subsidy/homepage-seisaku-hojokin-taisho-keihi/",
      "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
      "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
-     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
      "https://adfactoryhearts.com/hp-subsidy-2026/",
-     "https://coosy.co.jp/blog/web-funding/",
-     "https://it-shien.smrj.go.jp/"
+     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://goleadgrid.com/blog/website-subsidy",
+     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://mihata.jp/column/subsidy-ai-chatbot-booking-system",
+     "https://www.digital-reclame.co.jp/blog/homepage-production-subsidy-2026/"
     ],
+    "text": "**コーポレートサイトのリニューアルだけでは、原則として対象になりません。**\n\n- **理由**: 制度名は「デジタル化・AI導入補助金」(旧IT導入補助金)です。目的は業務プロセスのデジタル化と生産性向上なので、会社案内やサービス紹介のような情報発信・広告宣伝が目的のサイトは趣旨に合いません。デザイン、コーディング、CMS構築だけの制作・リニューアル費用も対象外です。\n- **例外**: 予約、受発注、EC機能、AIチャットボット、業務システム連携など、業務プロセスを担うITツールを導入する場合は申請できる可能性があります。\n- **例外でも残る制限**: 補助されるのはそのITツール部分だけです。ホームページ自体の制作費は対象外です。\n- **対応**: サイト単体のリニューアルは、別の補助金を探すのが現実的です。ツール導入を伴う場合も、公式サイトと IT導入支援事業者で、そのツールが登録済みかと、費用のどこまでが対象かを確認してください。\n\n公式ページ(it-shien.smrj.go.jp)を直接開いて確認する試みは、WebFetchの権限が許可されず失敗しました。上記は検索結果の要約と、制作会社・解説サイトの記事に基づいています。公式の公募要領で最終確認することをおすすめします。\n\nSOURCE: https://it-shien.smrj.go.jp/\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://coosy.co.jp/blog/web-funding/\nSOURCE: https://next-engine.net/ec-blog/subsidy-for-ec-website/\nSOURCE: https://office-tree.jp/blog/subsidy/homepage-seisaku-hojokin-taisho-keihi/\nSOURCE: https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/\nSOURCE: https://dg-index.jp/blog/digital-ai-subsidy-homepage/\nSOURCE: https://adfactoryhearts.com/hp-subsidy-2026/\nSOURCE: https://adfactoryhearts.com/it-donyu-hojyokin-homepage/\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://goleadgrid.com/blog/website-subsidy\nSOURCE: https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/\nSOURCE: https://mihata.jp/column/subsidy-ai-chatbot-booking-system\nSOURCE: https://www.digital-reclame.co.jp/blog/homepage-production-subsidy-2026/\n",
     "error": ""
    }
   },
@@ -90,38 +79,94 @@
    "ChatGPT": {
     "urls": [
      "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
-     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/"
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://it-shien.smrj.go.jp/about"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://naganogunmacreators.jp/guide/subsidy-non-eligible-expenses/",
-     "https://overx.co.jp/media/digital-ai-subsidy-eligible-costs/",
-     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
-     "https://bestplanner.co.jp/ithojyokin-service-support/",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFaRqHqlb5iAX3FdjNkZHvaQndouckZJ-J0r_5wUVl9qCPzxsK6_PoFV6ji1cjovl6kzxIP1jmQDgfa6mqAYRS9s6tZqFihDEmqHKm06Ps7OI2EW2Q2MXSrw7QIhjgOWVxbKNS4USeGA4vIfvejg4JEbkWNqto=",
-     "https://toln.co.jp/category10/",
-     "https://note.com/transtep/n/n9e47fe07b325"
-    ],
+    "text": "国の「デジタル化・AI導入補助金2026」を指す場合、**保守費は条件付きで対象、ドメイン費は単独では原則対象外**です。\n\n- **保守費**：補助対象として導入するソフトウェアの保守サポート費は対象になります。公式サイトでは「大分類Ⅰソフトウェアの保守費用全般」が対象とされています。ただし、事務局に登録・承認されたITツールとして申請する必要があり、保守費なら何でも対象になるわけではありません。[公式：ITツールの登録申請](https://it-shien.smrj.go.jp/itvendor/procedure/ittool/)\n- **ドメイン費**：ホームページ用のドメイン取得費などは、一般に対象外とされています。ただし、確認した公式資料にはドメイン費を名指しした説明がないため、登録済みクラウドサービスの料金に含まれる場合などは、IT導入支援事業者や事務局への確認が必要です。[ドメイン費についての解説](https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/)、[公式：制度概要](https://it-shien.smrj.go.jp/about)\n\n見積書では、**ソフトウェア代・保守費・ドメイン費を分けて記載**してもらい、申請できる範囲を確認すると確実です。\n\nSOURCE: https://it-shien.smrj.go.jp/itvendor/procedure/ittool/\nSOURCE: https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/\nSOURCE: https://it-shien.smrj.go.jp/about\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
      "https://sogyotecho.jp/digital-ai-hojyokin/",
      "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
-     "https://www.smartmat.io/column/subsidy/8137",
      "https://www.obc.co.jp/360/list/post498",
+     "https://www.smartmat.io/column/subsidy/8137",
+     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
+     "https://www.ricoh.co.jp/solutions/special-theme/it-subsidy",
      "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
-     "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/",
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
-     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
-     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/"
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/"
     ],
+    "text": "**結論:** 保守費は条件付きで補助対象になる可能性が高いです。ドメイン費は、確認できた範囲では対象と明記されたものが見つからず、対象外の可能性が高いです。\n\n- **保守費:** 複数の解説ページで「保守サポートに係る費用」は導入関連費として対象と書かれていました。導入後の活用支援や保守・サポートも対象に含まれるとのことです。\n- **ドメイン費:** 対象とも対象外とも明記した記述は見つかりませんでした。対象経費は「ソフトウェア購入費、クラウド利用料(最大2年分)、導入関連費、保守サポート」などに限られ、ドメイン取得費は含まれていません。\n- **注意点:** 補助対象は、事務局に登録されたITツールの費用に限られます。保守費も、登録ツールに付随するものでなければ対象になりません。\n\n**確認の限界:** 公式の中小企業庁資料と公募要領(通常枠)は、取得の許可が得られず本文を開けませんでした。上の内容は検索結果に表示された要約と解説ページに基づきます。申請前に、公募要領の補助対象経費の章か、ITツールを登録したIT導入支援事業者への確認をお勧めします。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://www.obc.co.jp/360/list/post498\nSOURCE: https://www.smartmat.io/column/subsidy/8137\nSOURCE: https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/\nSOURCE: https://www.ricoh.co.jp/solutions/special-theme/it-subsidy\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/\n",
     "error": ""
+   }
+  },
+  "AI導入補助金 個人事業主でも申請できますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/subsidy",
+     "https://it-shien.smrj.go.jp/about",
+     "https://it-shien.smrj.go.jp/applicant/measures/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_invoice.pdf"
+    ],
+    "text": "**はい、個人事業主でも申請できます。** 国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」では、個人事業主も対象に含まれています。ただし、業種ごとの従業員規模など、申請要件を満たす必要があります。[公式の対象者案内](https://it-shien.smrj.go.jp/applicant/subsidy)\n\n申請に向けて、主に次の準備が必要です。\n\n- **対象ツールを確認する**：事務局に登録されたITツールが対象です。AIサービスなら何でも補助されるわけではなく、登録された「IT導入支援事業者」と一緒に申請します。[制度概要](https://it-shien.smrj.go.jp/about)\n- **アカウント等を準備する**：「GビズIDプライム」の取得と「SECURITY ACTION」の宣言が必要です。[申請前の手続き](https://it-shien.smrj.go.jp/applicant/measures/)\n- **必要書類をそろえる**：本人確認書類、所得税の納税証明書、確定申告書の控え、青色申告決算書または収支内訳書などが必要です。申請枠の公募要領で確認してください。[公式FAQ（インボイス対応類型）](https://it-shien.smrj.go.jp/pdf/it2026_faq_invoice.pdf)\n\n**個人事業主であることだけを理由に対象外にはなりませんが、申請すれば必ず採択されるわけではありません。** まず、導入したいツールが補助対象に登録されているか、提供事業者に確認すると進めやすいです。\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://it-shien.smrj.go.jp/applicant/measures/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_invoice.pdf\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/itdonyu_kojinjigyonushi_summary",
+     "https://carearc.co.jp/blog/3567/",
+     "https://genai-ai.co.jp/ai-kanri/blog/cc-digital-ai-hojokin/",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
+    ],
+    "text": "**結論: 申請できます。** デジタル化・AI導入補助金(旧IT導入補助金)は、中小企業・小規模事業者の要件を満たす個人事業主も対象です。\n\n検索結果から分かった主な条件は次のとおりです。\n- **事業実態**: 国内で開業届を出して事業を営んでいること。\n- **開業年数**: 開業1年未満だと申請できない場合があるという記述があります。\n- **補助率**: 小規模事業者は最大4/5です。例として、50万円の会計ソフトなら自己負担は10万円とされています。\n- **事前準備**: gBizIDプライムの取得と、SECURITY ACTIONの自己宣言が必要です。\n- **必要書類**: 確定申告書、青色申告決算書または収支内訳書、所得税の納税証明書、本人確認書類(運転免許証など)、住民票または運転経歴証明書です。\n- **法人番号**: 個人事業主は法人番号の代わりに生年月日を申請します。\n\n**未確認の点:** 公式の公募要領PDFを開こうとしましたが、WebFetchの権限が付与されておらず読めませんでした。上記は検索結果の要約と民間解説ページに基づいています。開業年数の制限や補助率の細かい条件は、公式の[事務局ポータル](https://it-shien.smrj.go.jp/)で最新の公募要領を確認してください。\n\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_kojinjigyonushi_summary\nSOURCE: https://carearc.co.jp/blog/3567/\nSOURCE: https://genai-ai.co.jp/ai-kanri/blog/cc-digital-ai-hojokin/\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\n",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "2026年 AI導入補助金でホームページ制作は対象?": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "**2026年の「デジタル化・AI導入補助金」では、ホームページ制作は補助対象外です。ECサイト制作も対象外です。**"
+   },
+   "Claude": {
+    "label": "no",
+    "quote": "**結論: 単体のホームページ制作は対象外です。**"
+   }
+  },
+  "AI導入補助金 コーポレートサイトのリニューアルだけでも対象になりますか?": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "**コーポレートサイトのリニューアルだけでは、対象になりません。**"
+   },
+   "Claude": {
+    "label": "no",
+    "quote": "**コーポレートサイトのリニューアルだけでは、原則として対象になりません。**"
+   }
+  },
+  "AI導入補助金 保守費やドメイン費は補助対象になりますか?": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "国の「デジタル化・AI導入補助金2026」を指す場合、**保守費は条件付きで対象、ドメイン費は単独では原則対象外**です。"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "**結論:** 保守費は条件付きで補助対象になる可能性が高いです。ドメイン費は、確認できた範囲では対象と明記されたものが見つからず、対象外の可能性が高いです。"
+   }
+  },
+  "AI導入補助金 個人事業主でも申請できますか?": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい、個人事業主でも申請できます。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**結論: 申請できます。**"
    }
   }
  }

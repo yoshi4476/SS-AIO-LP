@@ -3,35 +3,22 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
-  "AI導入補助金とIT導入補助金の違いは?結論は同じ制度",
-  "なぜ「AI導入補助金」と呼ばれるようになったのか?",
-  "AI導入補助金とIT導入補助金は併用できますか?"
+  "AI導入補助金とIT導入補助金の違いは?",
+  "AI導入補助金とIT導入補助金は併用できますか?",
+  "「AI導入補助金」で検索して出てくる情報は信用してよいですか?",
+  "AI導入補助金 不採択になった場合、翌年度の再申請はできますか?"
  ],
  "answers": {
-  "AI導入補助金とIT導入補助金の違いは?結論は同じ制度": {
+  "AI導入補助金とIT導入補助金の違いは?": {
    "ChatGPT": {
     "urls": [
      "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
-     "https://mirasapo-plus.go.jp/infomation/32666/",
-     "https://it-shien.smrj.go.jp/news/40013"
+     "https://it-shien.smrj.go.jp/about/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://www.youtube.com/watch?v=zel0HOZykI4",
-     "https://www.youtube.com/watch?v=HqdEuXnfBQ0",
-     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
-     "https://it-shien.smrj.go.jp/about/",
-     "https://ainaiseika.com/subsidy/it-hojo-vs-digital-hojo/",
-     "https://www.spreadoffice.com/subsidy/it2026/",
-     "https://sokuresu.ai/column/digital-ai-subsidy-2026",
-     "https://nakamura-tax.net/blog/subsidy/digital-ai-hojokin/"
-    ],
+    "text": "**国の「デジタル化・AI導入補助金」を指しているなら、IT導入補助金を引き継いだ制度です。** 中小企業庁は、令和7年度補正予算事業から「IT導入補助金」を「デジタル化・AI導入補助金」に名称変更したと説明しています。2026年の正式名称はこちらです。[中小企業庁の公表](https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html)\n\n| 比較項目 | IT導入補助金 | デジタル化・AI導入補助金 |\n|---|---|---|\n| 名称の位置づけ | 従来の名称 | 2026年の名称 |\n| 主な目的 | ITツール導入による業務効率化・生産性向上 | 同じ目的を引き継ぎ、AIを含むITツールの導入を支援 |\n| 対象の考え方 | ソフトウェアやサービス等の導入 | AIだけでなく、会計・受発注・決済・在庫管理などのITツールも対象 |\n\n名称に「AI」が入っていても、**AIの導入が必須というわけではありません。** 現行制度には通常枠、インボイス枠、セキュリティ対策推進枠、複数者連携デジタル化・AI導入枠があります。[公式の制度概要](https://it-shien.smrj.go.jp/about/)\n\nまた、**AIサービスなら何でも補助されるわけではありません。** 原則として、事務局に登録されたITツールを選び、登録された「IT導入支援事業者」と組んで申請します。複数者連携枠には例外があります。補助額・補助率・条件は申請枠や年度によって確認する必要があります。[公式の制度概要](https://it-shien.smrj.go.jp/about/)\n\nなお、「AI導入補助金」という呼び方が自治体独自の制度を指している場合は別制度なので、自治体名や正式名称を確認してください。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://it-shien.smrj.go.jp/about/\n",
     "error": ""
    },
    "Claude": {
@@ -39,95 +26,145 @@
      "https://sogyotecho.jp/digital-ai-hojyokin/",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
      "https://sorimachi.co.jp/column/recommendation/20260408_01/",
-     "https://www.obc.co.jp/360/list/post498",
+     "https://www.ntt.com/bizon/it-subsidy.html",
      "https://note.com/loyal_takin6498/n/n0e7a198d4ed3",
      "https://ukiyo.co.jp/media/it-subsidy/",
      "https://tecn.apice-tec.co.jp/hojo-it-diff/",
      "https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/",
      "https://qiita.com/DnD-inc/items/6be206e73d913856a23d",
-     "https://it-shien.smrj.go.jp/news/40013",
-     "https://www.ntt.com/bizon/it-subsidy.html",
-     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
-     "https://arimura-cpa.com/column/it-dounyu-hojokin/",
-     "https://www.josis365.com/blog/digital-ai-subsidy-2026-guide/"
-    ],
-    "error": ""
-   }
-  },
-  "なぜ「AI導入補助金」と呼ばれるようになったのか?": {
-   "ChatGPT": {
-    "urls": [
-     "https://it-shien.smrj.go.jp/news/40013",
-     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
-     "https://mirasapo-plus.go.jp/infomation/32666/"
-    ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://ukiyo.co.jp/media/it-subsidy/",
-     "https://note.com/chusho_yosuke/n/ne5c29d3e6c7a",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF2f2PDmkwnTfOAgGBRqa-GvQUtBssJOz8HCyZSVMP_y_oOsl2xHEffj-7owhg4gLSIokFS2V4-3u6doNku-saRaCQVxUTSJsvyUWEqOvqsDkHLWFzGWC23Oue8Z-IKna6axpK_d5eT5Qai3lqSuZIJCmIXJnPGJ85l",
-     "https://www.spreadoffice.com/subsidy/it2026/",
-     "https://www.abkss.jp/blog/hojo-001"
-    ],
-    "error": ""
-   },
-   "Claude": {
-    "urls": [
-     "https://it-shien.smrj.go.jp/news/40013",
-     "https://it-shien.smrj.go.jp/",
-     "https://mirasapo-plus.go.jp/infomation/31537/",
-     "https://mirasapo-plus.go.jp/infomation/32666/",
+     "https://www.issoh.co.jp/column/details/13781/",
+     "https://it-shien.smrj.go.jp/about/",
+     "https://www.aidma-hd.jp/ai/ai-subsidy/",
      "https://www.uchida-it.co.jp/info/2026it/",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://sogyotecho.jp/digital-ai-hojyokin/",
-     "https://www.ntt.com/bizon/it-subsidy.html",
-     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
-     "https://www.spreadoffice.com/subsidy/it2026/",
-     "https://uravation.com/media/ai-digital-subsidy-guide-2026/",
-     "https://qiita.com/DnD-inc/items/6be206e73d913856a23d"
+     "https://www.anshin.co.jp/information/781",
+     "https://hojokin-hub.ai/guides/ai-subsidy-guide",
+     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/",
+     "https://www.btncon.com/blog/digital-ai-subsidy-2026"
     ],
+    "text": "**結論:** 「AI導入補助金」は別の制度ではありません。2026年度に「IT導入補助金」が改称された「デジタル化・AI導入補助金2026」の通称です。ただし、公式ページの取得は権限エラーで失敗しました。以下は検索結果の要約だけが根拠で、公式情報では確認できていません。\n\n**違い(旧IT導入補助金 → デジタル化・AI導入補助金)**\n- **方針:** 旧制度は業務システム全般のデジタル化を広く支援していました。新制度は「AIを活用した生産性向上」を重点支援する方向です。\n- **対象ツールの定義:** 旧制度は「広範な業務ソフト」でした。新制度は「AI機能を搭載したツール」と再定義され、生成AIを使ったシステムも明確に対象になりました。\n- **ツール検索:** 事務局の「ITツール検索」で、AI機能を持つツールにAI表示が付き、絞り込みもできます。\n- **枠組みは同じ:** 申請枠、補助率、補助額の基本は、IT導入補助金2025と変わらないとされています。\n\n**制度の中身(検索結果の要約)**\n- **対象:** 中小企業・小規模事業者が、事務局に登録済みのITツールを導入する費用です。\n- **通常枠:** 上限は最大450万円、補助率は1/2です。最低賃金に近い水準で雇用する従業員が一定割合以上いる場合は、2/3以内に上がります。\n- **インボイス枠:** 会計・受発注・決済ソフトとハードウェアが対象で、補助率は最大4/5です。\n- **セキュリティ対策推進枠:** サイバーセキュリティ対策が対象です。\n\n枠ごとの上限額や公募スケジュールは、公式サイトで確認してください。\n\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://sorimachi.co.jp/column/recommendation/20260408_01/\nSOURCE: https://www.ntt.com/bizon/it-subsidy.html\nSOURCE: https://note.com/loyal_takin6498/n/n0e7a198d4ed3\nSOURCE: https://ukiyo.co.jp/media/it-subsidy/\nSOURCE: https://tecn.apice-tec.co.jp/hojo-it-diff/\nSOURCE: https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/\nSOURCE: https://qiita.com/DnD-inc/items/6be206e73d913856a23d\nSOURCE: https://www.issoh.co.jp/column/details/13781/\nSOURCE: https://it-shien.smrj.go.jp/about/\nSOURCE: https://www.aidma-hd.jp/ai/ai-subsidy/\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://www.anshin.co.jp/information/781\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\nSOURCE: https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/\nSOURCE: https://www.btncon.com/blog/digital-ai-subsidy-2026\n",
     "error": ""
    }
   },
   "AI導入補助金とIT導入補助金は併用できますか?": {
    "ChatGPT": {
     "urls": [
-     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
-     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf"
+     "https://it-shien.smrj.go.jp/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://listing-partners.com/gbiz/gbiz_column/itdonyuhojokin-monozukurihojokin-heiyo/",
-     "https://result-hojyokin.com/dejitarukaaidounyuuhojyokinnyokuarusitumonn/",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFEhlizdQW0y1tUpXYNtsg4OAdpl7xa2oasGPCLiqVEWJEiBkXh_p29-PzaEcM_Th6Vpch44ZcR709BMwtg8qGYz425R6VExGdvYUL3KKhnLBEUINq1FVH1gK_1kaHvrrVr_PF-uNDM-uF6XD3Vyus7bYwW4j-h-vsubg==",
-     "https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei",
-     "https://hojokin-kanji.com/posts/business-restructuring-subsidy-it",
-     "https://biz.moneyforward.com/ai/basic/6599/"
-    ],
+    "text": "**国の「デジタル化・AI導入補助金」を指す場合、IT導入補助金とは別制度として併用するものではありません。** IT導入補助金が2026年から名称を変更した制度だからです。[公式サイト](https://it-shien.smrj.go.jp/)\n\nただし、次のケースは区別する必要があります。\n\n- **同じ導入費用への二重受給：できません。** 同じソフトウェア代や利用料などに、重複して補助金を受けることはできません。[公式FAQ（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n- **過去にIT導入補助金を利用し、2026年に別の導入を申請：条件付きで可能です。** 過去の受給者も申請対象になり得ますが、申請枠ごとの制限や追加要件があります。[2026年公募要領（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n- **自治体などの別の「AI導入補助金」との併用：個別確認が必要です。** 国の公式FAQでは、補助対象となる事業内容・ソフトウェア・経費などが重複しない場合は申請可能とされています。ただし、相手の制度でも併用が認められている必要があります。[公式FAQ（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\nつまり、**「AI導入補助金」の正式名称と実施主体を確認することが先決**です。国の2026年制度なら旧IT導入補助金と同じ制度、自治体独自の制度なら双方の公募要領で判断します。\n\nSOURCE: https://it-shien.smrj.go.jp/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://www.ricoh.co.jp/solutions/special-theme/it-subsidy",
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html",
      "https://sogyotecho.jp/ithojyo-wakariyasuku/",
      "https://sogyotecho.jp/digital-ai-hojyokin/",
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/",
+     "https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://mirasapo-plus.go.jp/infomation/31537/",
      "https://it-shien.smrj.go.jp/pdf/it2026_koubo_fukusu.pdf",
-     "https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei",
-     "https://www.aidma-hd.jp/ai/ai-subsidy/",
-     "https://compass.ordentier-corp.co.jp/subsidies-grants/subsidy-duplicate-receipt-check-coordination/",
-     "https://nocoderi.co.jp/2025/04/03/ai%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AF%E8%A4%87%E6%95%B0%E4%BD%B5%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8B%EF%BC%9F%E5%88%B6%E5%BA%A6%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A8%E6%B3%A8%E6%84%8F%E7%82%B9/",
-     "https://shouryokuka-hojokin.jp/articles/hojokin-heiyou-guide/"
+     "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/",
+     "https://hojokin-hub.ai/guides/ai-subsidy-guide"
     ],
+    "text": "**結論: 「AI導入補助金」という別制度はなく、2026年度からIT導入補助金が「デジタル化・AI導入補助金」に名称変更されたものです。両者は同じ制度なので、併用の問いは成立しません。**\n\n- 2024・2025年度に交付決定を受けたIT導入補助金は、同じプロセスのソフトウェアを今回また申請すると、重複の程度に応じて減点されます。完全一致の場合は不採択です。\n- 他の補助金(ものづくり補助金、小規模事業者持続化補助金など)との併用は、同一の事業・経費を重複して申請できない、というのが原則です。対象経費が重複しなければ併用できる場合があります。たとえばハードウェアをものづくり補助金、ソフトウェアをデジタル化・AI導入補助金で申請する、という分け方です。\n- 実際に併用できるかは、併用したい制度側の公募要領でも確認が必要です。\n\n公式の公募要領PDFは、WebFetchの権限が未許可で本文を読めませんでした。上記は検索結果の要約と解説記事に基づくので、申請前に最新の公募要領と事務局への確認をお勧めします。\n\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://mirasapo-plus.go.jp/infomation/31537/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_fukusu.pdf\nSOURCE: https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\n",
     "error": ""
+   }
+  },
+  "「AI導入補助金」で検索して出てくる情報は信用してよいですか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://it-shien.smrj.go.jp/about",
+     "https://mirasapo-plus.go.jp/subsidy/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_manual_kofu.pdf",
+     "https://aiosoken.com/insights/ai-subsidy-complete-guide/"
+    ],
+    "text": "**制度自体は実在しますが、「AI導入補助金」の検索結果を一律に信用するのは避け、公式情報と照合してください。** 検索上位にあることだけでは、内容の正確さや最新性は保証されません。\n\nまず、2026年には正式に「デジタル化・AI導入補助金」があります。中小企業庁は、旧「IT導入補助金」から名称を変更したと説明しています。「AI導入補助金」という言葉だけで、架空の制度だと判断するのも適切ではありません。[中小企業庁の公募案内](https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html)\n\n信用できるかは、次の点で見分けるとよいです。\n\n- **正式名称と対象年度が明記されているか。** 古い制度の条件を、2026年にも適用できるように説明していないか確認します。\n- **公式の対象条件と一致しているか。** 原則として、事務局に登録されたITツールを、登録されたIT導入支援事業者と組んで導入する仕組みです。「AIなら何でも補助対象」とは言えません。[公式の制度概要](https://it-shien.smrj.go.jp/about)\n- **最大額だけでなく、自社に適用される申請枠・補助率・対象経費・締切まで説明しているか。** 公募が終了している場合もあるため、中小企業庁の案内も公式サイトで詳細を確認するよう求めています。[ミラサポplusの案内](https://mirasapo-plus.go.jp/subsidy/)\n- **「必ずもらえる」「自己負担をキャッシュバックでゼロにできる」といった勧誘がないか。** 特に、購入代金を払い戻して自己負担を実質的に無償化する行為は、公式資料で不正として説明されています。[公式の交付申請の手引き](https://it-shien.smrj.go.jp/pdf/it2026_manual_kofu.pdf)\n\n実際、検索では民間企業の「AI導入補助金 完全ガイド」なども見つかりました。民間の解説がすべて誤りという意味ではありませんが、販売・相談への案内を含むページは、制度の最終的な根拠にはせず、公式資料で裏付けを取るのが妥当です。[検索で確認した民間の解説例](https://aiosoken.com/insights/ai-subsidy-complete-guide/)\n\n**申請や契約を判断するときは、中小企業庁のページから公式事務局へ進み、最新の公募要領と照合するのが確実です。** 今回の確認だけで、個々の検索結果すべての信用性を保証することはできません。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://mirasapo-plus.go.jp/subsidy/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_manual_kofu.pdf\nSOURCE: https://aiosoken.com/insights/ai-subsidy-complete-guide/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/",
+     "https://it-shien.smrj.go.jp/antifraud/",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://hojyokin-portal.jp/columns/it_fusei",
+     "https://aixis.jp/articles/ai-subsidy"
+    ],
+    "text": "**結論:全部を信用するのは危険です。** 公式サイトの情報は信頼できますが、民間の記事や業者の広告は、検索結果に混じる質の低いものや詐欺的な勧誘を見分ける必要があります。\n\n**1. 「AI導入補助金」という名前の制度は公式にはありません**\n- 中小企業庁の公式制度は「デジタル化・AI導入補助金2026」です。旧「IT導入補助金」が2026年度に改称されたものです。\n- 「AI導入補助金」は通称として使われているだけです。検索結果にはこの名前でIT導入補助金以外の複数の制度をまとめた記事も混ざっています。\n- 一次情報は、中小企業庁の公募要領ページと、事務局(`it-shien.smrj.go.jp`)の公式サイトで確認してください。\n\n**2. 民間サイトは補助金額や採択率などの数字を必ず公式と照合してください**\n- 検索上位の多くは、申請代行業者やITツール販売業者、メディアの記事です。集客目的の記事が多く、更新の古さや誇張が混じりえます。\n- 補助率、上限額、締切、申請要件は公式の公募要領で確認してください。\n\n**3. 詐欺・不正の勧誘に注意**\n事務局は、次のような勧誘を不正行為(犯罪)として注意喚起しています。\n- 「実質無料」「実質0円」で導入できる\n- 自己負担分は後でキャッシュバックする\n- 紹介料やコンサル料として支払うので、実質負担はない\n- GビズIDを預けてもらえれば、申請は全部代行する\n\n不正が発覚すると、交付決定の取消しと補助金の返還請求の対象になります。支援事業者の登録取消しも出ています。\n\n**4. 確認のしかた**\n- 契約前に、事務局のコールセンター(0570-666-376)か、顧問税理士・中小企業診断士に相談する\n- 相手が登録された「IT導入支援事業者」かどうかを、公式サイトで確認する\n- GビズIDやパスワードは他人に渡さない\n\nSOURCE: https://it-shien.smrj.go.jp/\nSOURCE: https://it-shien.smrj.go.jp/antifraud/\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://hojyokin-portal.jp/columns/it_fusei\nSOURCE: https://aixis.jp/articles/ai-subsidy\n",
+    "error": ""
+   }
+  },
+  "AI導入補助金 不採択になった場合、翌年度の再申請はできますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf"
+    ],
+    "text": "**原則として、翌年度も申請できます。ただし、翌年度に公募があり、その年度の申請要件を満たすことが条件です。**\n\n国の「デジタル化・AI導入補助金」（旧IT導入補助金）を指す場合、2026年の通常枠の公募要領では、**不採択となった場合は、同じ年度の次回以降の締切でも再申請できる**と明記されています。不採択になったことだけで、再申請が禁止されるわけではありません。[公式公募要領（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\nこの規定から、翌年度も要件を満たせば申請できると考えられます。ただし、2026年の規定が翌年度の申請を保証するものではないため、翌年度の公募要領で対象事業者・対象ツール・申請条件を確認してください。また、公式FAQにある「過去の交付決定」に関する制限は、単に不採択だった場合とは区別されます。[公式FAQ（通常枠）](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\n※自治体独自の「AI導入補助金」を指す場合は、その制度の公募要領によって扱いが異なります。\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei",
+     "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://www.obc.co.jp/360/list/post498",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://hojokin-hub.ai/guides/ai-subsidy-guide",
+     "https://www.btncon.com/blog/digital-ai-subsidy-2026",
+     "https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/",
+     "https://hojyokin-portal.jp/columns/degital_ai_schedule",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://article.ejinzai.jp/column/2026-digital-ai-subsidy/",
+     "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/"
+    ],
+    "text": "**結論:再申請はできます。** 不採択に対するペナルティや回数制限は、確認できた範囲ではありません。\n\n**根拠(検索結果の要約)**\n- 制度名は2026年度から「デジタル化・AI導入補助金」(旧IT導入補助金)です。不採択でも次の公募回に再申請でき、回数制限はないとされています。\n- 同年度内でも、次回以降の締切で再申請できます。ただし、提出済みの交付申請は結果公表まで取り下げられません。同時に複数の交付申請を出すこともできません。\n- 採択・不採択を問わず、審査内容や不採択理由は開示されません。公募要領と手引きを読み直して自分で原因を分析する必要があります。\n- 翌年度の申請も可能です。ただし公募要領は毎年変わるため、翌年度の要件は新しい公募要領で確認が必要です。\n\n**2回目以降の申請で注意すべき点**\n- 過去に交付決定を受けた事業者は、交付決定日から12ヵ月以上経過していれば申請できます。\n- 2026年度から、過去に採択された事業者には賃上げ要件が追加されました(「物価安定目標2%+1.5%以上」)。\n- IT導入補助金2024・2025で交付決定済みのソフトとプロセスが重複する場合は減点されます。完全に一致する場合は不採択です。\n\n**注意点**\n- 上記は検索結果の要約で、公式の公募要領PDFは取得できませんでした(WebFetchの権限が未許可のため)。\n- 賃上げ要件や減点条件は、特に不採択ではなく採択済みの事業者向けの内容です。\n- 申請前に公式の公募要領で最終確認してください。\n\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_saitaku\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://www.obc.co.jp/360/list/post498\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\nSOURCE: https://www.btncon.com/blog/digital-ai-subsidy-2026\nSOURCE: https://wheat-biz.com/ai-dx/it-hojokin-2026-dx-guide/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_schedule\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://article.ejinzai.jp/column/2026-digital-ai-subsidy/\nSOURCE: https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/\n",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金とIT導入補助金の違いは?": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "**国の「デジタル化・AI導入補助金」を指しているなら、IT導入補助金を引き継いだ制度です。**"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "「AI導入補助金」は別の制度ではありません。2026年度に「IT導入補助金」が改称された「デジタル化・AI導入補助金2026」の通称です。"
+   }
+  },
+  "AI導入補助金とIT導入補助金は併用できますか?": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "no",
+    "quote": "両者は同じ制度なので、併用の問いは成立しません。"
+   }
+  },
+  "「AI導入補助金」で検索して出てくる情報は信用してよいですか?": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "**制度自体は実在しますが、「AI導入補助金」の検索結果を一律に信用するのは避け、公式情報と照合してください。**"
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "AI導入補助金 不採択になった場合、翌年度の再申請はできますか?": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "**原則として、翌年度も申請できます。ただし、翌年度に公募があり、その年度の申請要件を満たすことが条件です。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**結論:再申請はできます。** 不採択に対するペナルティや回数制限は、確認できた範囲ではありません。"
    }
   }
  }

@@ -3,108 +3,72 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
-  "AI導入補助金でLP制作は補助対象？2026年最新の条件と流れ",
+  "AI導入補助金でLP制作は補助対象？",
   "LP制作だけを依頼したいのですが、AI導入補助金の対象になりますか？",
-  "AI導入補助金でLP制作を含めた場合、補助額と自己負担はどのくらいですか？"
+  "AI導入補助金でLP制作を含めた場合、補助額と自己負担はどのくらいですか？",
+  "AI導入補助金 どんなLPだと対象になりやすいですか？"
  ],
  "answers": {
-  "AI導入補助金でLP制作は補助対象？2026年最新の条件と流れ": {
+  "AI導入補助金でLP制作は補助対象？": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/about",
-     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_tool.pdf",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/applicant/measures/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
-     "https://it-shien.smrj.go.jp/schedule/"
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/about"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://www.dt-media.jp/column/web-system-ai-subsidy-2026",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6cc0v3I2VMQsH-iQile12q5VVKy5xIGSHl1IVDfQuXIDQusx5X8Xkq08rn7eQn6L6-bsUD6aYy_HMEfF9BbcmeoZ1NpkhwO4Uk6-BLnnBOuqVTDnoLvKZ1J5jjb5N3aBWaxhRnrFBmBcya0L45nBju_cjIlwHlY2bgA==",
-     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://it-shien.smrj.go.jp/",
-     "https://alank.jp/news/ai-subsidy-2026-2/",
-     "https://prtimes.jp/main/html/rd/p/000000211.000051151.html",
-     "https://nortiqlab.com/subsidy",
-     "https://coosy.co.jp/blog/web-funding/",
-     "https://fun-create.co.jp/post-221/",
-     "https://fun-create.co.jp/post-221/",
-     "https://bizrobot.jp/it-subsidy/"
-    ],
+    "text": "**LP（ランディングページ）の制作費は、補助対象外と考えてください。** ここでは、国の「デジタル化・AI導入補助金2026」を指すものとして回答します。\n\n公式FAQ（通常枠）では、「ホームページ制作（ECサイト制作含む。）は補助対象外です」と明記されています。LP自体の記載はありませんが、商品紹介や集客を目的としたLP制作は、このホームページ制作に当たると判断できます。[公式FAQ](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\n補助対象になるのは、事務局に事前登録されたITツールの導入費用です。**AIを使ってLPを作るだけで、制作費が対象になるわけではありません。** AIツール等の導入費とLP制作費は、別に判断する必要があります。[制度概要](https://it-shien.smrj.go.jp/about)\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/about\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
-     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
-     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
-     "https://adfactoryhearts.com/hp-subsidy-2026/",
-     "https://moveq.co.jp/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%B6%E4%BD%9C%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%BE%E3%81%A8%E3%82%81%EF%BD%9C2026%E5%B9%B4%E5%BA%A6/",
-     "https://leon-strategy.com/hp",
      "https://www.uchida-it.co.jp/info/2026it/",
      "https://sogyotecho.jp/ithojyo-wakariyasuku/",
-     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
+     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://moveq.co.jp/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%B6%E4%BD%9C%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%BE%E3%81%A8%E3%82%81%EF%BD%9C2026%E5%B9%B4%E5%BA%A6/",
+     "https://adfactoryhearts.com/hp-subsidy-2026/",
+     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
+     "https://leon-strategy.com/hp",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
      "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
-     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://web-kanji.com/posts/homepage-subsidy",
      "https://www.sme-support.co.jp/column/p8120/",
-     "https://www.digital-reclame.co.jp/blog/digital-ai-subsidy-guide-2026/",
-     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo"
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/"
     ],
+    "text": "**結論: LP制作単体は補助対象外です。**\n\n- 「デジタル化・AI導入補助金2026」(旧IT導入補助金)では、広告宣伝を目的としたホームページやLPの制作は対象外です。ECサイト制作も対象外です。\n- 補助対象は、事務局に登録されたITツールのソフトウェア購入費、クラウド利用料(最大2年分)、導入支援費・保守費、PCやタブレットなどです。\n- 例外として、予約・受発注システム、AIチャットボット、業務システム連携、EC機能などを搭載する場合は、その**ITツール部分だけ**が申請できる可能性があります。この場合でもサイト自体の制作費は対象外です。\n- 検索結果にLPを名指しした記述はありませんでした。LPも広告宣伝目的と見なされるため対象外と判断しています。この点は私の推測です。\n- 公式の公募要領は取得できなかったので、確認できていません。申請前に公募要領か事務局に確認してください。\n- LPやホームページを補助金で作りたい場合は、小規模事業者持続化補助金など別制度が候補です。今回の検索では詳細を確認していません。\n\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://dg-index.jp/blog/digital-ai-subsidy-homepage/\nSOURCE: https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/\nSOURCE: https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/\nSOURCE: https://moveq.co.jp/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%B6%E4%BD%9C%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%BE%E3%81%A8%E3%82%81%EF%BD%9C2026%E5%B9%B4%E5%BA%A6/\nSOURCE: https://adfactoryhearts.com/hp-subsidy-2026/\nSOURCE: https://adfactoryhearts.com/it-donyu-hojyokin-homepage/\nSOURCE: https://leon-strategy.com/hp\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://web-kanji.com/posts/homepage-subsidy\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/\n",
     "error": ""
    }
   },
   "LP制作だけを依頼したいのですが、AI導入補助金の対象になりますか？": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf"
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/about"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://grill.co.jp/marketing-log/17199/",
-     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://grill.co.jp/marketing-log/17199/",
-     "https://nxpg.net/blog/tech/?p=17433",
-     "https://bizrobot.jp/it-subsidy/",
-     "https://fun-create.co.jp/post-221/",
-     "https://fun-create.co.jp/post-221/",
-     "https://imitsu.jp/list/hp-design/it-subsidy/",
-     "https://ok-design.co.jp/blog/3613/"
-    ],
+    "text": "**LP（ランディングページ）制作だけの依頼は、国の「デジタル化・AI導入補助金2026」では補助対象外です。**\n\n公式FAQには「ホームページ制作（ECサイト制作含む。）は補助対象外です」と明記されています。商品紹介や集客を目的とするLPの制作も、このホームページ制作に当たるため対象外と判断できます。[公式FAQ](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\nこの補助金が支援するのは、事務局に登録された、生産性向上に役立つITツールの導入です。**制作時にAIを使うだけで、LP制作費が対象になるわけではありません。** ITツールの導入も検討する場合は、LP制作費とは分けて対象経費を確認してください。[制度概要](https://it-shien.smrj.go.jp/about)\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/about\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
-     "https://web-kanji.com/posts/homepage-subsidy",
      "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
-     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
      "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
-     "https://adfactoryhearts.com/hp-subsidy-2026/",
+     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
      "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
-     "https://peaksmarketing.co.jp/column/5419/",
+     "https://coosy.co.jp/blog/web-funding/",
+     "https://mihata.jp/column/subsidy-ai-chatbot-booking-system",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
      "https://leon-strategy.com/hp",
-     "https://so-labo.co.jp/hojyokin/it-hojo/basic/334/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_manual_it_tool.pdf",
-     "https://soichiro.co.jp/it-hojo/",
-     "https://web-kanji.com/posts/landing-page-subsidy",
-     "https://hojokin-agent.jp/guide/it-hojo/tools",
-     "https://m-assets.com/lp/subsidy/blog/it-subsidy-2026-guide"
+     "https://hojokin.tagiru.co.jp/column/ai-donyu-hojokin",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf"
     ],
+    "text": "**結論: LP制作だけの依頼は対象外です。**\n\n「AI導入補助金」は、2026年度に「デジタル化・AI導入補助金」(旧IT導入補助金) になった制度のことだと解釈して調べました。\n\n- **対象外の理由**: この補助金の対象は、事務局に登録されたITツール(ソフトウェア、クラウド利用料、導入支援費など)です。LPやホームページの制作費は、ECサイトを含めて対象外とされています。\n- **例外的に対象になりうるケース**: 予約システム、受発注システム、AIチャットボット、EC機能などを備えたサイトは、申請できる可能性があります。ただし次の3条件が必要です。\n  1. 登録ITツールであること\n  2. 業務プロセス要件を満たすこと\n  3. 制作費と切り分けること\n  \n  デザインやコーディングだけのLP制作は、この例外にも当てはまりません。\n- **代替案**: 小規模事業者持続化補助金は、Webサイト構築が対象経費に含まれるとする記事があります。自治体独自の補助金も候補です。\n- **注意点**: 交付決定通知の前に発注・契約すると、補助対象外になるおそれがあります。\n\n公式の公募要領(PDF)は、WebFetch の権限がなく開けませんでした。上の内容は民間の解説記事と検索結果の要約に基づいています。申請前に公募要領か事務局に確認してください。\n\nSOURCE: https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/\nSOURCE: https://dg-index.jp/blog/digital-ai-subsidy-homepage/\nSOURCE: https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/\nSOURCE: https://adfactoryhearts.com/it-donyu-hojyokin-homepage/\nSOURCE: https://coosy.co.jp/blog/web-funding/\nSOURCE: https://mihata.jp/column/subsidy-ai-chatbot-booking-system\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://leon-strategy.com/hp\nSOURCE: https://hojokin.tagiru.co.jp/column/ai-donyu-hojokin\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\n",
     "error": ""
    }
   },
@@ -112,40 +76,114 @@
    "ChatGPT": {
     "urls": [
      "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal",
+     "https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/03/05162722/it2026_koubo_tsujyo.pdf"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://grill.co.jp/marketing-log/17199/",
-     "https://fun-create.co.jp/digital-ai-hojokin-homepage-2026/",
-     "https://techt-ai.com/column/homepage-seisaku-hojokin",
-     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
-     "https://fun-create.co.jp/post-221/",
-     "https://www.e-kishow.com/website/website-blog/reiwa-8-s-subsidy/",
-     "https://kotoan-ai.com/blog/jizokuka-hojokin-homepage",
-     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGnDFv0_DsYrSvo9I7BGEhAzfKk6u-rBBTjSEM8bhqme7foavkgsgwLVHdHfXzhhZVwdwx5EWp9_VxFhvMe6aN7sCKAld63G2VYp4c3NjgRvakzI1Dql6TEMKD9izaDnkeoayF0vDY4FWkIJwFmfnhlr978yrH79pCY",
-     "https://hojokin-agent.jp/guide/it-hojo/amount",
-     "https://grill.co.jp/marketing-log/17199/",
-     "https://webup.jp/info/subsidy-support/"
-    ],
+    "text": "「AI導入補助金」が国の**デジタル化・AI導入補助金2026**を指す場合、**LP（ランディングページ）制作費は補助対象外なので、LP部分の補助額は0円、自己負担は全額です。** 公式FAQでは、ホームページ制作（ECサイト制作を含む）を対象外としています。[公式FAQ](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\nAIツール導入とLP制作をセットで発注する場合も、補助額は対象となるITツール等の経費で計算します。通常枠の補助率は原則 **1/2以内**、一定の最低賃金に関する要件を満たす場合は **2/3以内**です。補助額は、業務プロセスが1つ以上なら5万円以上150万円未満、4つ以上なら150万円以上450万円以下です。[通常枠の公式案内](https://it-shien.smrj.go.jp/applicant/subsidy/normal)\n\n例えば、**補助対象のAIツール導入費100万円＋LP制作費30万円＝合計130万円（税抜）**の場合、上限等にかからず採択されたとすると、計算例は次のとおりです。\n\n| 適用される補助率 | 補助額 | 自己負担合計 |\n|---|---:|---:|\n| 1/2 | 50万円 | 80万円 |\n| 2/3 | 約66.7万円 | 約63.3万円 |\n\nつまり、**自己負担＝AIツール等の対象経費−補助額＋LP制作費**です。上の例は税抜で、消費税は別途負担になります。見積書では、LP制作費と補助対象のITツール費を分けて確認してください。\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal\nSOURCE: https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/03/05162722/it2026_koubo_tsujyo.pdf\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
      "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://gxo.co.jp/column/subsidy-ai-agent-development-application-strategy",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://somurix.co.jp/lp/digital-ai-subsidy-2026-guide/",
+     "https://www.anshin.co.jp/information/781",
+     "https://uravation.com/media/ai-digital-subsidy-guide-2026/",
+     "https://www.btncon.com/blog/digital-ai-subsidy-2026",
+     "https://www.ricoh.co.jp/solutions/special-theme/it-subsidy",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://coosy.co.jp/blog/web-funding/",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
      "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
      "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://adfactoryhearts.com/hp-subsidy-2026/",
      "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/",
-     "https://bluemonkey.jp/media/column/web-hojyo/",
-     "https://sogyotecho.jp/ithojyo-wakariyasuku/"
+     "https://leon-strategy.com/hp",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://hojokin-agent.jp/purpose/website",
+     "https://www.digital-reclame.co.jp/blog/homepage-production-subsidy-2026/"
     ],
+    "text": "**LP制作そのものは補助対象外なので、LP制作費への補助額は0円で、自己負担は全額（100%）です。** 検索結果の要約に基づく回答で、公式PDFは開けておらず、LP制作の扱いを公式資料で直接確認できていません。申請前にIT導入支援事業者か事務局に確認してください。\n\n**対象外の理由**\n- 広告宣伝が目的のホームページやLPは対象外です。ECサイト制作も同様です。\n- 制度が「業務効率化・生産性向上のためのITツール導入」を支援するもので、事務局に登録されたITツールだけが対象になります。\n\n**補助対象になり得るケース**\n- LPに予約管理、受発注、決済連携、AIチャットボットなど業務システムの機能が付く場合です。\n- その場合も補助されるのは登録ITツール部分だけで、デザインやコーディングなどLP/HP自体の制作費は対象外です。\n- 制作会社がIT導入支援事業者として登録済みで、そのツールが登録されている必要があります。\n\n**対象部分の補助額と自己負担（2026年版、通常枠）**\n- 補助額は1者あたり最大450万円です。業務プロセスが1〜3つなら5万円〜150万円、4つ以上なら150万円〜450万円です。\n- 補助率は原則1/2以内です。賃上げなどの要件を満たすと2/3以内に上がります。小規模事業者はさらに優遇される場合があります。\n- 記事によっては、ITツール3/4・4/5以内、PC等1/2以内、その他経費2/3以内という区分も紹介されています。補助率は類型や事業者規模で異なります。\n- 自己負担は補助率1/2なら対象経費の1/2、2/3なら1/3です。例として、対象経費100万円で補助50万円・自己負担50万円（補助率1/2の場合）となります。\n- LP部分の制作費は補助されないため、その分は別途全額自己負担です。\n\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide\nSOURCE: https://gxo.co.jp/column/subsidy-ai-agent-development-application-strategy\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://somurix.co.jp/lp/digital-ai-subsidy-2026-guide/\nSOURCE: https://www.anshin.co.jp/information/781\nSOURCE: https://uravation.com/media/ai-digital-subsidy-guide-2026/\nSOURCE: https://www.btncon.com/blog/digital-ai-subsidy-2026\nSOURCE: https://www.ricoh.co.jp/solutions/special-theme/it-subsidy\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://coosy.co.jp/blog/web-funding/\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://dg-index.jp/blog/digital-ai-subsidy-homepage/\nSOURCE: https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/\nSOURCE: https://adfactoryhearts.com/hp-subsidy-2026/\nSOURCE: https://adfactoryhearts.com/it-donyu-hojyokin-homepage/\nSOURCE: https://leon-strategy.com/hp\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://hojokin-agent.jp/purpose/website\nSOURCE: https://www.digital-reclame.co.jp/blog/homepage-production-subsidy-2026/\n",
     "error": ""
+   }
+  },
+  "AI導入補助金 どんなLPだと対象になりやすいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
+    ],
+    "text": "「AI導入補助金」が国の**デジタル化・AI導入補助金2026（旧IT導入補助金）**を指し、LP＝ランディングページとして回答します。\n\n**結論は、LP制作そのものは対象外です。** 公式FAQでは、ホームページ制作はECサイト制作も含めて補助対象外と明記されています。AIで制作したり、AIチャットを付けたりすれば、LP制作費が対象になるという制度ではありません。[公式FAQ](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n\n対象を検討するなら、LPの見た目よりも、**LPから受けた問い合わせ・予約などを処理する業務用ITツールの導入**がポイントになります。通常枠では、登録済みのITツールで、顧客対応・販売支援などの業務プロセスを持つソフトウェアが対象です。[通常枠の要件](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n例えば、次のように整理できます。対象候補はあくまでツール側で、個別の登録内容の確認が必要です。\n\n| やりたいこと | 対象を検討する経費 |\n|---|---|\n| 商品紹介・集客用LPを作る | LP制作費は対象外 |\n| LPの問い合わせを顧客管理システムに自動登録する | 登録済み顧客管理ツールや、対象となる連携機能の導入費 |\n| LPからの予約を受け、予約・顧客情報を一元管理する | 登録済み予約管理ツールの導入費 |\n| AIで問い合わせ対応を省力化する | 登録済み顧客対応ツール等の導入費。AI搭載だけでは対象と判断できない |\n\n実際に進める際は、次の3点を先に確認するとよいです。\n\n- **提供会社とツールが登録されているか。** 対象は、登録されたIT導入支援事業者が提供する、登録済みITツールの導入費です。[公式FAQ](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)\n- **何の業務を効率化するか。** 「問い合わせの転記」「予約調整」「顧客情報の検索」など、現状の作業と導入後の改善を具体化します。これは制度の生産性向上という目的を踏まえた実務上の整理です。[通常枠](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n- **LP制作費とツール導入費を見積もりで分けられるか。** 通常枠の対象経費にはソフトウェア購入費、クラウド利用料、所定の導入支援費などが含まれますが、対象外のLP制作費を混ぜて申請することはできません。[通常枠・公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\nしたがって、制作会社には「補助金対応LPですか？」よりも、**「登録済みのどのITツールを導入し、見積もりのどの項目が補助対象ですか？」**と確認するのが具体的です。対象経費であることと、審査で採択されることは別です。\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/",
+     "https://dg-index.jp/blog/digital-ai-subsidy-homepage/",
+     "https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/",
+     "https://leon-strategy.com/hp",
+     "https://office-tree.jp/blog/subsidy/homepage-seisaku-hojokin-taisho-keihi/",
+     "https://web.bridge-net.jp/blog/39773/",
+     "https://web-kanji.com/posts/homepage-subsidy",
+     "https://adfactoryhearts.com/hp-subsidy-2026/",
+     "https://www.digital-reclame.co.jp/blog/homepage-production-subsidy-2026/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
+     "https://sogyotecho.jp/ithojyo-wakariyasuku/",
+     "https://it-shien.smrj.go.jp/about/",
+     "https://hojokin-agent.jp/guide/it-hojo/tools",
+     "https://mihata.jp/column/subsidy-ai-chatbot-booking-system",
+     "https://adfactoryhearts.com/it-donyu-hojyokin-homepage/"
+    ],
+    "text": "**結論:** 「デジタル化・AI導入補助金」(旧IT導入補助金)では、情報発信が目的のLPやホームページは原則対象外です。対象になりやすいのは、AIチャットボットや予約・受発注・EC・業務システム連携といった「登録済みITツール」の機能が組み込まれたものです。なお、詳細ページの取得は権限未許可で失敗したため、以下は検索結果の要約だけに基づいています。\n\n**対象になりやすいLP/サイトの条件**\n- **業務効率化・生産性向上が目的**: 制度の趣旨に合うことが前提です。集客や情報発信だけが目的だと外れます。\n- **ITツールの機能を搭載している**: AIチャットボット、予約システム、受発注システム、EC機能、業務システム連携などです。\n- **補助されるのはITツール部分だけ**: ホームページ自体の制作費は対象外です。\n- **事務局に登録済みのツールである**: 対象は事前審査を経て補助金HPに公開されたツールです。公式のツール検索で確認してください。2026年度からは生成AI等のAI機能を搭載したソフトも登録できます。\n- **期間内に運用に至ること**: LPについては、期間内に運用に至らないものは対象外とされています。\n\n**ホームページ・LP制作そのものが目的の場合**\n- 小規模事業者持続化補助金の「ウェブサイト関連費」が使えます。上限は30万円(税込)です。\n- この制度の詳細な条件は、今回は確認できていません。\n\n**注意点:** 出典は主に制作会社などの解説記事です。申請前に、公式サイトと担当のIT導入支援事業者に確認してください。\n\nSOURCE: https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-homepage/\nSOURCE: https://dg-index.jp/blog/digital-ai-subsidy-homepage/\nSOURCE: https://anote.co.jp/cms/digital-ai-subsidy-2026-homepage/\nSOURCE: https://leon-strategy.com/hp\nSOURCE: https://office-tree.jp/blog/subsidy/homepage-seisaku-hojokin-taisho-keihi/\nSOURCE: https://web.bridge-net.jp/blog/39773/\nSOURCE: https://web-kanji.com/posts/homepage-subsidy\nSOURCE: https://adfactoryhearts.com/hp-subsidy-2026/\nSOURCE: https://www.digital-reclame.co.jp/blog/homepage-production-subsidy-2026/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://sogyotecho.jp/ithojyo-wakariyasuku/\nSOURCE: https://it-shien.smrj.go.jp/about/\nSOURCE: https://hojokin-agent.jp/guide/it-hojo/tools\nSOURCE: https://mihata.jp/column/subsidy-ai-chatbot-booking-system\nSOURCE: https://adfactoryhearts.com/it-donyu-hojyokin-homepage/\n",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金でLP制作は補助対象？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "LP制作だけを依頼したいのですが、AI導入補助金の対象になりますか？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "AI導入補助金でLP制作を含めた場合、補助額と自己負担はどのくらいですか？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "AI導入補助金 どんなLPだと対象になりやすいですか？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
    }
   }
  }

@@ -3,98 +3,48 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
-  "AI導入補助金2026はいくらもらえる?上限350万円と対象を解説",
-  "AI導入補助金(正式名称: AI導入補助金)は最大いくらまでもらえますか?",
-  "AI導入補助金 補助金は申請すれば必ずもらえますか?"
+  "AI導入補助金2026はいくらもらえる?",
+  "AI導入補助金 補助金は申請すれば必ずもらえますか?",
+  "AI導入補助金 個人事業主や小規模な会社でも対象になりますか?",
+  "AI導入補助金(正式名称: AI導入補助金)は最大いくらまでもらえますか?"
  ],
  "answers": {
-  "AI導入補助金2026はいくらもらえる?上限350万円と対象を解説": {
+  "AI導入補助金2026はいくらもらえる?": {
    "ChatGPT": {
     "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbase/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_invoice/",
      "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
-     "https://it-shien.smrj.go.jp/applicant/subsidy",
-     "https://it-shien.smrj.go.jp/itvendor/procedure/ittool/",
-     "https://it-shien.smrj.go.jp/applicant/flow/"
+     "https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/04/13152251/it2026_koubo_denshi.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/security/",
+     "https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/04/13152338/it2026_koubo_fukusu.pdf",
+     "https://it-shien.smrj.go.jp/about/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETptBw5dGRK9Sgv_UnnLD6H4Xi2wjR46ooQZHaDNW4MBcdu4tM6fxf_g-PsLSyuthntpVpB8LLC-IsgKNwjje8z6x0-SwkVV144njGXLPUzuUoOKtwS5SsXifP_77CYTykF1SzcRL_8BgUMzLjwUAv0OD8vjt5ohtG",
-     "https://www.obc.co.jp/360/list/post498",
-     "https://www.otsuka-shokai.co.jp/erpnavi/topics/law-amendment/it-hojo/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://www.uchida-it.co.jp/info/2026it/",
-     "https://it-shien.smrj.go.jp/news/40013",
-     "https://gxo.co.jp/column/digital-ai-subsidy-2026-guide",
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://ironbird.jp/2026_dx_ai_support_menu/"
-    ],
+    "text": "**AI導入補助金2026は、通常枠なら5万～450万円、補助率は原則1/2以内です。** 正式名称は「デジタル化・AI導入補助金2026」で、旧「IT導入補助金」に当たります。[中小企業庁の案内](https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html)\n\nもらえる金額は、申請する枠と導入するツールによって変わります。\n\n| 申請枠 | 補助額 | 補助率 |\n|---|---:|---|\n| 通常枠 | **5万～450万円** | 原則1/2以内。最低賃金に関する要件を満たす場合は2/3以内 |\n| インボイス枠・インボイス対応類型 | ソフト等は**最大350万円** | 補助額50万円以下の部分は3/4以内、小規模事業者は4/5以内。50万円超の部分は2/3以内 |\n| インボイス枠・電子取引類型 | **最大350万円** | 中小企業・小規模事業者等は2/3以内、その他の事業者等は1/2以内 |\n| セキュリティ対策推進枠 | **5万～150万円** | 中小企業は1/2以内、小規模事業者は2/3以内 |\n\n出典：[通常枠](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)、[インボイス対応類型の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf)、[電子取引類型の公募要領](https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/04/13152251/it2026_koubo_denshi.pdf)、[セキュリティ対策推進枠](https://it-shien.smrj.go.jp/applicant/subsidy/security/)。\n\n通常枠で**150万円以上を申請するには、4種類以上の業務プロセスを備えたITツールが必要**です。1種類以上なら、補助額は5万円以上150万円未満となります。例えば、補助対象経費が100万円で補助率1/2なら、補助額は50万円です。[通常枠の条件](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\nまた、複数事業者が連携する特別な枠では、ITツール・ハードウェア等に**最大3,000万円**、事務費・専門家費等に別途最大200万円の補助があります。これはグループでの取り組みに対する上限です。[複数者連携枠の公募要領](https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/04/13152338/it2026_koubo_fukusu.pdf)\n\n**上限額が一律にもらえるわけではありません。** 実際の補助額は対象経費と補助率で決まり、通常枠などでは事務局に登録されたITツールを選ぶ必要があります。[制度概要](https://it-shien.smrj.go.jp/about/)\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf\nSOURCE: https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/04/13152251/it2026_koubo_denshi.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/security/\nSOURCE: https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/04/13152338/it2026_koubo_fukusu.pdf\nSOURCE: https://it-shien.smrj.go.jp/about/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://sogyotecho.jp/digital-ai-hojyokin/",
-     "https://www.smartmat.io/column/subsidy/8137",
      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
-     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
-     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
-     "https://www.sme-support.co.jp/column/p8120/",
-     "https://somurix.co.jp/lp/digital-ai-subsidy-2026-guide/",
-     "https://www.digital-reclame.co.jp/blog/ai-subsidy-2026-guide/",
-     "https://jitsumu-guide.com/it-subsidy-2026-guide/",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://altrobo.co.jp/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96%E3%83%BBai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BD%9C%E8%A3%9C%E5%8A%A9%E9%A1%8D/",
-     "https://financeinjapan.com/finance/0a926180-e348-44c8-8f9b-e7fc8652ef56",
-     "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/",
-     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
-     "https://www.ntt.com/bizon/it-subsidy.html",
-     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/dejitarl-hojyokin-new/",
-     "https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/",
-     "https://www.digital-reclame.co.jp/blog/digital-ai-adoption-subsidy-2026-guide/"
-    ],
-    "error": ""
-   }
-  },
-  "AI導入補助金(正式名称: AI導入補助金)は最大いくらまでもらえますか?": {
-   "ChatGPT": {
-    "urls": [
-     "https://mirasapo-plus.go.jp/subsidy/ithojo/",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_multiple_companies/"
-    ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3ehOwr7zbdoIMUQWU2POoR6GHihuZWKEAfgAiL83zm__xwE7DvP2tMKu_Z3NsuJeOt2judoNtsN_MTDxbjwKI67ro5VO_S5qFQO6EXto5pFMa5Q0A3jF-vrVJfEAFJzZHMRhuxuTp0IZU9SPJtk5SPWKSKlCt6uf0iA==",
-     "https://www.asasimple.jp/it-hojyokin-2026/",
-     "https://www.busicom.co.jp/misekatsu/all/subsidy/digitalai_hojokin_b",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://www.youtube.com/watch?v=Au1Eb0paMnI",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3ehOwr7zbdoIMUQWU2POoR6GHihuZWKEAfgAiL83zm__xwE7DvP2tMKu_Z3NsuJeOt2judoNtsN_MTDxbjwKI67ro5VO_S5qFQO6EXto5pFMa5Q0A3jF-vrVJfEAFJzZHMRhuxuTp0IZU9SPJtk5SPWKSKlCt6uf0iA=="
-    ],
-    "error": ""
-   },
-   "Claude": {
-    "urls": [
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.oro.com/zac/other/it-hojo2026.html",
      "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
      "https://uravation.com/media/ai-digital-subsidy-guide-2026/",
+     "https://hojokin-hub.ai/guides/ai-subsidy-guide",
+     "https://ai-japan-index.com/ai-subsidy-finder/",
      "https://www.btncon.com/blog/digital-ai-subsidy-2026",
-     "https://sorimachi.co.jp/column/recommendation/20260408_01/",
-     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
-     "https://qiita.com/DnD-inc/items/6be206e73d913856a23d",
-     "https://smartcontents.co.jp/articles/hokyokin/ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE%E8%B1%A1%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%A1%8D%E3%83%BB%E7%94%B3%E8%AB%8B%E6%96%B9%E6%B3%95%E3%82%92%E3%82%8F%E3%81%8B/"
+     "https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/",
+     "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/",
+     "https://hojyokin-portal.jp/columns/degital_ai_tujyo",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://altrobo.co.jp/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96%E3%83%BBai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BD%9C%E8%A3%9C%E5%8A%A9%E9%A1%8D/",
+     "https://www.hs-kaikei.com/blog/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96-ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E3%81%AE%E9%80%9A%E5%B8%B8%E6%9E%A0%E3%81%A8%E3%81%AF%E5%AF%BE%E8%B1%A1%E7%B5%8C%E8%B2%BB-%E8%A3%9C%E5%8A%A9%E9%A1%8D-%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BC%9A%E7%A4%BE%E3%82%92%E6%95%B4%E7%90%86",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/"
     ],
+    "text": "最大450万円です(通常枠・業務プロセス4つ以上のITツール導入時)。公式PDFは取得できず未確認で、検索結果の要約と解説サイトに基づく情報です。申請前に公募要領で確認してください。\n\n制度の正式名称は「デジタル化・AI導入補助金2026」(旧IT導入補助金)です。\n\n**通常枠の補助額と補助率**\n- 業務プロセス1〜3つのITツール: 5万円〜150万円未満、補助率1/2以内\n- 業務プロセス4つ以上のITツール: 150万円〜450万円以下、補助率1/2以内\n- 賃上げ・最低賃金近傍などの要件を満たすと、補助率は2/3以内に上がります。\n- 小規模事業者は、条件次第で最大4/5以内になる場合があります。\n- 下限額の設定は特にありません。\n- 費用の全額が出るわけではなく、自己負担が残ります。\n\nインボイス枠など他の枠については、今回の検索では詳しく確認できていません。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.oro.com/zac/other/it-hojo2026.html\nSOURCE: https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide\nSOURCE: https://uravation.com/media/ai-digital-subsidy-guide-2026/\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\nSOURCE: https://ai-japan-index.com/ai-subsidy-finder/\nSOURCE: https://www.btncon.com/blog/digital-ai-subsidy-2026\nSOURCE: https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/\nSOURCE: https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_tujyo\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://altrobo.co.jp/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96%E3%83%BBai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BD%9C%E8%A3%9C%E5%8A%A9%E9%A1%8D/\nSOURCE: https://www.hs-kaikei.com/blog/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%8C%96-ai%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E3%81%AE%E9%80%9A%E5%B8%B8%E6%9E%A0%E3%81%A8%E3%81%AF%E5%AF%BE%E8%B1%A1%E7%B5%8C%E8%B2%BB-%E8%A3%9C%E5%8A%A9%E9%A1%8D-%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BC%9A%E7%A4%BE%E3%82%92%E6%95%B4%E7%90%86\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/\n",
     "error": ""
    }
   },
@@ -104,21 +54,117 @@
      "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html",
      "https://it-shien.smrj.go.jp/aftergrantdecision/measures/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [],
+    "text": "**いいえ、申請すれば必ずもらえるわけではありません。**\n\n国の「デジタル化・AI導入補助金2026」の場合、申請後に審査があり、不採択になることがあります。実際に2026年の1次締切分では、**6,440者の申請に対し、採択は2,982者**でした。[中小企業庁の採択結果](https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html)\n\nまた、**採択・交付決定を受けても、受給にはその後の手続きが必要**です。交付決定後にITツールを発注・契約・支払いし、導入後に実績報告を行い、確定した補助金額を確認・承認します。交付決定前に発注・契約・支払いをした場合や、適正な事業実施・実績報告ができなかった場合は、補助金を受け取れません。[公式の手続き案内](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\nつまり、申請だけで受給が確約される制度ではなく、審査を通過し、交付条件と必要な手続きを満たす必要があります。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
      "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
-     "https://leadbrain.co.jp/contents/lb/8739/",
-     "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/"
+     "https://hojyokin-portal.jp/columns/degital_ai_schedule",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html"
     ],
+    "text": "**いいえ、申請しても必ずもらえるわけではありません。** 審査があり、採択されなければ補助金は受けられません。\n\n- **採択率:** 2026年の「デジタル化・AI導入補助金」(旧IT導入補助金)の採択率は、1次締切分が46.3%、2次が51.5%、3次が44.0%でした。3次の内訳は、通常枠42.19%、インボイス枠44.73%、セキュリティ対策推進枠72.22%です。通常枠は3回連続で40%台前半で、半数以上が不採択になっています。\n- **採択率の低下:** 1次締切分の通常枠は、2025年が50.7%、2026年が43.9%と下がっています。\n- **不採択理由:** 採択・不採択にかかわらず、審査内容や不採択理由は開示しないと明記されています。\n- **注意:** 採択されても、補助金が出るのは事業実施後です。交付決定を受けてから導入・支払いを行う必要があります。この点は今回の検索結果では直接確認できていないため、公募要領で確認してください。\n\n数字は検索結果の要約に基づいています。公式の公募要領と採択結果は経済産業省・中小企業庁のページで確認してください。\n\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_saitaku\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_schedule\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260618001.html\n",
     "error": ""
+   }
+  },
+  "AI導入補助金 個人事業主や小規模な会社でも対象になりますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://it-shien.smrj.go.jp/applicant/subsidy",
+     "https://it-shien.smrj.go.jp/about"
+    ],
+    "text": "**はい、個人事業主や小規模な会社も対象になります。** 国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」は、中小企業・小規模事業者を対象とし、個人事業主も明記されています。[中小企業庁の案内](https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html)、[公式の対象者一覧](https://it-shien.smrj.go.jp/applicant/subsidy)\n\n「小規模事業者」の目安は、常時使用する従業員数が次の範囲にある事業者です。\n\n- 商業・サービス業（宿泊業・娯楽業を除く）：**5人以下**\n- 宿泊業・娯楽業：**20人以下**\n- 製造業その他：**20人以下**\n\nこの人数を超えても、業種別の中小企業の基準を満たせば対象になり得ます。[公式の対象者一覧](https://it-shien.smrj.go.jp/applicant/subsidy)\n\nただし、**対象者に該当するだけで、必ず補助金を受けられるわけではありません。** 申請要件を満たしたうえで、事務局に登録されたITツールを選び、登録済みの「IT導入支援事業者」と共同で申請する必要があります。AIサービスなら何でも対象になるわけではないため、導入したいツールの登録状況を確認してください。[公式の制度概要](https://it-shien.smrj.go.jp/about)\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy\nSOURCE: https://it-shien.smrj.go.jp/about\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/itdonyu_kojinjigyonushi_summary",
+     "https://squareup.com/jp/ja/townsquare/what-is-it-hojo",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.spreadoffice.com/subsidy/it2026/",
+     "https://robotshare.jp/news/digital-ai-subsidy-guide-2026",
+     "https://liftbaseinc.com/column/ai-subsidies-sme",
+     "https://carearc.co.jp/blog/3567/",
+     "https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/",
+     "https://www.digital-reclame.co.jp/blog/ai-subsidy-2026-guide/",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://www.uchida.co.jp/system/info/it-hojo/",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://mirasapo-plus.go.jp/infomation/31537/",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://note.com/shinsei_mikata/n/n93a094e8d3d5",
+     "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/dejitarl-hojyokin-new/"
+    ],
+    "text": "はい、対象になります。個人事業主も小規模事業者も申請できます。「AI導入補助金」は、2026年からは「デジタル化・AI導入補助金」(旧IT導入補助金)という名称です。\n\n- **対象者**: AIを含むITツールの導入で労働生産性を上げたい中小企業・小規模事業者です。法人でも個人でも申請でき、法人は「みなし大企業」でないことが条件です。\n- **個人事業主**: 国内で開業届を出して事業を営んでいれば申請できます。\n- **小規模事業者の優遇**: 補助率は通常枠で1/2〜4/5です。50万円以下の部分は3/4以内で、小規模事業者は4/5以内になります。50万円超の部分は2/3以内です。補助額は5万〜450万円です。\n- **小規模事業者の目安(従業員数)**:\n  - 商業・サービス業(宿泊業・娯楽業を除く)は5人以下です。\n  - 宿泊業・娯楽業は20人以下です。\n  - 製造業その他は20人以下です。\n- **中小企業の範囲**:\n  - 製造・建設・運輸業は資本金3億円以下または従業員300人以下です。\n  - 卸売業は資本金1億円以下または従業員100人以下です。\n  - その他の業種は資本金5千万円以下または従業員100人以下です。\n\n注意点が2つあります。\n\n- 公式ページ(中小企業庁の公募要領)は取得を許可されず、本文を直接確認できていません。上記は検索結果の要約と民間解説サイトに基づくので、申請前に公募要領で最新の要件と締切を確認してください。\n- 締切は通常枠で1次5/12、2次6/15、3次7/21、4次8/25予定との情報があります。現在は2026年10月なので、すでに終わった回があるかもしれません。次回の公募時期も公式サイトで確認してください。\n\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_kojinjigyonushi_summary\nSOURCE: https://squareup.com/jp/ja/townsquare/what-is-it-hojo\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.spreadoffice.com/subsidy/it2026/\nSOURCE: https://robotshare.jp/news/digital-ai-subsidy-guide-2026\nSOURCE: https://liftbaseinc.com/column/ai-subsidies-sme\nSOURCE: https://carearc.co.jp/blog/3567/\nSOURCE: https://www.digital-reclame.co.jp/blog/ai-adoption-subsidy-2026-guide/\nSOURCE: https://www.digital-reclame.co.jp/blog/ai-subsidy-2026-guide/\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://www.uchida.co.jp/system/info/it-hojo/\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://mirasapo-plus.go.jp/infomation/31537/\nSOURCE: https://www.ntt.com/bizon/it-subsidy.html\nSOURCE: https://note.com/shinsei_mikata/n/n93a094e8d3d5\nSOURCE: https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/dejitarl-hojyokin-new/\n",
+    "error": ""
+   }
+  },
+  "AI導入補助金(正式名称: AI導入補助金)は最大いくらまでもらえますか?": {
+   "ChatGPT": {
+    "urls": [
+     "https://mirasapo-plus.go.jp/subsidy/ithojo/",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_multiple_companies/"
+    ],
+    "text": "**通常枠では最大450万円です。** ただし、検索で確認できた国の制度の正式名称は「AI導入補助金」ではなく、**「デジタル化・AI導入補助金2026」**（旧：IT導入補助金）です。[中小企業庁の案内](https://mirasapo-plus.go.jp/subsidy/ithojo/)\n\n複数の事業者が連携する「複数者連携デジタル化・AI導入枠」まで含める場合は、グループ全体で導入・分析経費が最大3,000万円、事務費・専門家費等が最大200万円で、**合計最大3,200万円**となります。[公式の補助上限額](https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_multiple_companies/)\n\nSOURCE: https://mirasapo-plus.go.jp/subsidy/ithojo/\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/digitalbased_multiple_companies/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+     "https://uravation.com/media/ai-digital-subsidy-guide-2026/",
+     "https://www.btncon.com/blog/digital-ai-subsidy-2026",
+     "https://www.y-aikawa-office.com/digital-ai-hojokin-2026/",
+     "https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://liftbaseinc.com/column/ai-subsidies-sme"
+    ],
+    "text": "**最大450万円**です(2026年版の通常枠、補助率は原則1/2。要件を満たすと最大2/3)。\n\n- **名称の補足:** 現在の正式名称は「デジタル化・AI導入補助金」で、旧「IT導入補助金」です。\n- **上限額:** 1〜3プロセスのITツール導入なら5万〜150万円未満です。4プロセス以上なら150万〜450万円以下です。\n- **対象経費:** ソフトウェア購入費、クラウド利用料(最大2年分)、導入コンサル・設定・研修・保守費などです。\n- **別制度:** AI関連では、中小企業省力化投資補助金(最大1億円)や新事業進出補助金(最大9,000万円)もあります。ただしこれらは別の制度です。\n\n注意点として、WebFetch が許可されず、各ページの本文は確認できませんでした。上記は検索結果の要約に基づいています。他の申請枠(インボイス枠など)の上限額は確認していません。申請前に公式の公募要領で確認してください。\n\nSOURCE: https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide\nSOURCE: https://uravation.com/media/ai-digital-subsidy-guide-2026/\nSOURCE: https://www.btncon.com/blog/digital-ai-subsidy-2026\nSOURCE: https://www.y-aikawa-office.com/digital-ai-hojokin-2026/\nSOURCE: https://ai-revolution.co.jp/media/ai-subsidy-guide-2026/\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://liftbaseinc.com/column/ai-subsidies-sme\n",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金2026はいくらもらえる?": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "もらえる金額は、申請する枠と導入するツールによって変わります。"
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "AI導入補助金 補助金は申請すれば必ずもらえますか?": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "**いいえ、申請すれば必ずもらえるわけではありません。**"
+   },
+   "Claude": {
+    "label": "no",
+    "quote": "**いいえ、申請しても必ずもらえるわけではありません。** 審査があり、採択されなければ補助金は受けられません。"
+   }
+  },
+  "AI導入補助金 個人事業主や小規模な会社でも対象になりますか?": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい、個人事業主や小規模な会社も対象になります。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "はい、対象になります。個人事業主も小規模事業者も申請できます。"
+   }
+  },
+  "AI導入補助金(正式名称: AI導入補助金)は最大いくらまでもらえますか?": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "**通常枠では最大450万円です。** ただし、検索で確認できた国の制度の正式名称は「AI導入補助金」ではなく、**「デジタル化・AI導入補助金2026」**（旧：IT導入補助金）です。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**最大450万円**です(2026年版の通常枠、補助率は原則1/2。要件を満たすと最大2/3)。"
    }
   }
  }

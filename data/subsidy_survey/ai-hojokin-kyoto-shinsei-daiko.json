@@ -3,69 +3,63 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
   "AI導入補助金の申請代行を京都で頼む前に 2026年最新・費用と選び方",
   "AI導入補助金 京都以外の業者に申請代行を頼んでも問題ありませんか？",
+  "AI導入補助金 京都府や京都市に独自の補助制度はありますか？",
   "AI導入補助金 京都で申請代行を頼む費用の相場はどれくらいですか？"
  ],
  "answers": {
   "AI導入補助金の申請代行を京都で頼む前に 2026年最新・費用と選び方": {
    "ChatGPT": {
     "urls": [
+     "https://it-shien.smrj.go.jp/",
      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://it-shien.smrj.go.jp/about",
-     "https://it-shien.smrj.go.jp/schedule/",
-     "https://piocal.jp/services/subsidy/",
-     "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf",
      "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/antifraud",
-     "https://kyotoyorozu.go.jp/",
-     "https://www.city.kyoto.lg.jp/sankan/page/0000349674.html",
-     "https://it-shien.smrj.go.jp/applicant/measures/"
+     "https://it-shien.smrj.go.jp/applicant/measures/",
+     "https://it-shien.smrj.go.jp/aftergrantdecision/measures/",
+     "https://hojokin-shinsei-daikou.jp/subsidy/it-hojo/",
+     "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
+     "https://shiomi-gyosei.com/補助金・助成金について/hojokin-daikou/",
+     "https://kyotoyorozu.go.jp/contact",
+     "https://www.kyo.or.jp/kyoto/management/digitalsupport_index.html"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/subsidycost/",
-     "https://helptech.jp/ai-subsidy",
-     "https://advertisingplanet.co.jp/media/2026/10/01/digitalization-ai-subsidy-support-provider/",
-     "https://nocode-sol.co.jp/blog/kyoto-ai-subsidy-guide/",
-     "https://nocoderi.co.jp/2025/04/03/kyoto-ai-subsidy-guide/",
-     "https://japan-finance.jp/subsidy/1745/",
-     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
-     "https://www.inankl.co.jp/it-subsidy",
-     "https://physical-ai-hojokin.jp/articles/physical-ai-daikou-yasui/",
-     "https://nozaki-gyousei-office.com/kyoto-syouryokuka/",
-     "https://hojyokin-concierge.com/media/2025/10/01/it-dounyu-hojyokin-simulation",
-     "https://carearc.co.jp/blog/2955/",
-     "https://k-supporterz.jp/26_Kyoto/it.html",
-     "https://kyoto-bien-etre.co.jp/blog/ai-budget.html",
-     "https://note.com/transtep/n/n9e47fe07b325"
-    ],
+    "text": "**京都でAI導入補助金の申請支援を頼むなら、まず登録されたIT導入支援事業者に支援内容と費用を確認し、そのうえで有料の申請サポートを比較するのがおすすめです。** 着手金だけでなく、成功報酬・実績報告まで含めた総額で判断してください。\n\n以下は、**2026年10月4日時点**で確認した情報です。\n\n**2026年の制度と申請期限**\n\n正式名称は「デジタル化・AI導入補助金2026」です。旧IT導入補助金に当たり、京都の事業者も利用できる国の制度です。「AI」と名前に付いていても、任意のAIサービスがすべて対象になるわけではなく、導入するITツールと支援事業者の確認が必要です。[補助金公式サイト](https://it-shien.smrj.go.jp/)、[公式申請フロー](https://it-shien.smrj.go.jp/applicant/flow/)\n\n通常枠の主な条件は次のとおりです。\n\n| 項目 | 2026年の内容 |\n|---|---|\n| 補助率 | 原則1/2以内。所定の最低賃金要件を満たす場合は2/3以内 |\n| 補助額 | 1プロセス以上：5万円以上150万円未満／4プロセス以上：150万円以上450万円以下 |\n| 主な対象経費 | ソフトウェア購入費、クラウド利用料最大2年分、導入設定・研修など |\n| 第6次締切 | 2026年10月30日（金）17時 |\n| 交付決定 | 2026年12月10日（木）予定 |\n\n汎用的な自動化・分析ツールだけでは通常枠の対象になりません。自社の業務に合う登録ツールで申請できるか、契約前に確認しましょう。[通常枠の公式案内](https://it-shien.smrj.go.jp/applicant/subsidy/normal/)\n\n**申請代行・サポートの費用はいくらか**\n\n公的な統一料金はありません。民間の公開情報でも、成功報酬の説明は「5～10％」「10～20％」と幅があります。これらは各社の掲載情報であり、京都全体の相場を示す統計ではありません。[申請代行ナビの料金説明](https://hojokin-shinsei-daikou.jp/subsidy/it-hojo/)、[セブンセンシズの費用解説](https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/)\n\n京都の具体的な公開例として、行政書士潮海事務所は次の料金を掲載しています。\n\n| 費用項目 | 公開料金 |\n|---|---|\n| 着手金 | 77,000円（税込） |\n| 成功報酬 | 採択額の10％＋税、最低165,000円 |\n| 実績報告 | 55,000円 |\n\n同ページでは、不採択なら成功報酬は発生しない一方、着手金は申請の有無にかかわらず発生すると説明しています。料金は案件により変動するため、個別見積もりが必要です。これは比較用の一例であり、業者の推奨順位ではありません。[同事務所の料金表](https://shiomi-gyosei.com/補助金・助成金について/hojokin-daikou/)\n\nこの料金表で最低成功報酬が適用され、実績報告まで依頼する場合、合計は**297,000円**です。少額の補助金では支援費用の負担が大きくなるため、最低報酬の確認が欠かせません。\n\n**京都で依頼先を選ぶときの確認点**\n\n1. **登録事業者・登録ツールを確認する**  \n   公式制度ではIT導入支援事業者と共同で交付申請を作成します。外部の専門家に依頼する場合も、実際の登録事業者との役割分担を確認してください。[公式申請フロー](https://it-shien.smrj.go.jp/applicant/flow/)\n\n2. **入金までの総額を書面で出してもらう**  \n   着手金、成功報酬の計算基準と最低額、消費税、実績報告、修正対応、再申請の料金を比較します。「成功」が交付決定時なのか、補助金入金時なのかも契約で明確にしましょう。\n\n3. **採択後の支援範囲を確認する**  \n   実績報告や効果報告まで誰が担当するかを確認します。実績報告が適切に完了しなければ、補助金を受け取れない場合があります。[交付決定後の公式手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n4. **同じ制度・同じ業種の経験を見る**  \n   実績を聞く際は、支援年度、申請枠、件数、支援範囲を確認すると比較しやすくなります。京都で対面相談が必要なら、訪問対応や交通費も見積もりに含めてもらいましょう。\n\n5. **導入後の費用対効果まで説明してもらう**  \n   補助額だけでなく、削減できる作業時間、更新料、保守費、既存システムとの連携を確認します。補助金がなくても使いたいツールか、という視点が役立ちます。\n\n**「全部お任せ」の範囲にも注意してください。** 公式フローでは、申請者自身が最終確認・宣誓・提出を行います。また、通常の手続きではITツールの発注・契約・支払いは交付決定後です。申請支援の契約と、ITツールの購入契約を区別して進めましょう。[公式申請フロー](https://it-shien.smrj.go.jp/applicant/flow/)、[交付決定後の公式手続き](https://it-shien.smrj.go.jp/aftergrantdecision/measures/)\n\n**有料契約の前に使える京都の相談先**\n\n- **京都府よろず支援拠点**：専門家への相談は何度でも無料。IT導入・業務効率化などの相談は、生産性向上支援センターへ案内されています。[相談予約ページ](https://kyotoyorozu.go.jp/contact)\n- **京都商工会議所**：IT導入に向けた課題整理、専門相談、ツール導入支援の窓口があります。[デジタル化支援ページ](https://www.kyo.or.jp/kyoto/management/digitalsupport_index.html)\n\n相談窓口と申請代行は支援範囲が異なるため、予約時に確認してください。\n\n10月30日の通常枠締切を目指すなら、GビズIDプライムとSECURITY ACTIONの準備も早めに進めましょう。公式案内では、発行までの目安をそれぞれ約2週間、約2～3日としています。[申請前に必要な手続き](https://it-shien.smrj.go.jp/applicant/measures/)\n\nSOURCE: https://it-shien.smrj.go.jp/\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/applicant/measures/\nSOURCE: https://it-shien.smrj.go.jp/aftergrantdecision/measures/\nSOURCE: https://hojokin-shinsei-daikou.jp/subsidy/it-hojo/\nSOURCE: https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/\nSOURCE: https://shiomi-gyosei.com/補助金・助成金について/hojokin-daikou/\nSOURCE: https://kyotoyorozu.go.jp/contact\nSOURCE: https://www.kyo.or.jp/kyoto/management/digitalsupport_index.html\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
-     "https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/",
-     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/",
-     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
-     "https://office-tree.jp/blog/subsidy/subsidy-application-success-fee-only/",
-     "https://financing.web-matching.com/compensation-rates-for-grant-application-services",
-     "https://carearc.co.jp/blog/2913/",
-     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://hojyokin-portal.jp/columns/ai-agent-hojyo",
      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
+     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
+     "https://www.rivewell.jp/ithojo/",
+     "https://advertisingplanet.co.jp/media/2026/09/26/sme-ai-adoption-support-guide/",
+     "https://uravation.com/media/ai-introduction-cost-guide-2026/",
+     "https://carearc.co.jp/blog/2913/",
+     "https://ai-donyuu-db.com/ai-hojokin-shinsei-daikou/",
+     "https://www.mimosa.gr.jp/pca/it-hojo.html",
+     "https://trise-c.jp/blog/substitute-application-for-subsidies/",
+     "https://trise-c.jp/blog/application-for-it-introduction-subsidy/",
+     "https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/",
+     "https://drama.co.jp/news/seo/9867/",
+     "https://binxai.co.jp/blog/generative-ai-adoption-support-company-kyoto-kansai-2026",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/column-3/",
+     "https://mirasapo-plus.go.jp/infomation/31537/",
+     "https://uchida.or.jp/8798/",
+     "https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html",
      "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://hojyokin-portal.jp/columns/degital_ai_tujyo",
-     "https://aimeikan.malna.co.jp/columns/ai-hojokin-fusei-taisaku",
-     "https://hojyokin-concierge.com/media/2025/10/24/it-dounyu-hojyokin-shinseidaikou"
+     "https://hojyokin-portal.jp/columns/degital_ai_schedule",
+     "https://seisansei.smrj.go.jp/subsidy_guide/subsidy_info/it_subsidy.html",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://listing-partners.com/gbiz/gbiz_column/digital-ai-hojokin/",
+     "https://hojokin-dx.com/articles/digital-ai-hojokin-4jishibatsu-roadmap-2026/",
+     "https://it-shien.smrj.go.jp/"
     ],
+    "text": "**結論:** 「AI導入補助金」の実体は「デジタル化・AI導入補助金2026」(旧IT導入補助金)です。この補助金は丸投げ型の申請代行ができない制度なので、依頼するなら「代行」ではなく「申請サポート」として費用と役割分担を確認してください。WebFetch が許可されなかったため、以下は検索結果の要約だけが根拠です。各ページの本文は確認していません。\n\n## 制度の要点\n- 通常枠は補助率1/2・上限450万円です。インボイス枠は3/4〜4/5・上限350万円、セキュリティ枠は1/2・上限100万円、複数社連携枠は3/4・上限3,000万円とされています。\n- IT導入支援事業者と申請者が共同で電子申請する仕組みで、第三者への丸投げは認められていません。\n- 補助対象は、IT導入支援事業者が登録し審査を通過したITツールだけです。\n- 締切は複数回あります。検索結果には「次の締切は9月29日」という記載と「6次締切10月30日・7次締切12月1日」という記載があり、食い違っています。必ず公式サイトで最新日程を確認してください。\n\n## 費用相場\n- 申請代行全般の相場は、着手金0〜15万円、成功報酬が採択額の5〜15%程度です。\n- 行政書士やコンサルへの依頼は、着手金3〜8万円+成功報酬10〜15%という例があります。\n- 別の記事では、着手金5〜10万円、成功報酬10〜30%という幅も出ています。\n- 「着手金0円・成功報酬8〜15%・不採択なら報酬無料」という料金体系のサービスもあります。\n- 成功報酬は採択額ベースか交付額ベースか、また上限があるかを見積もり時に確認してください。\n\n## 選び方のチェックポイント\n1. **制度の理解:** 「全部代行します」と言う業者は制度上おかしいので注意してください。役割分担(事業計画づくり、ITツール選定、書類整備)を具体的に説明できるかを見ます。\n2. **実績:** この補助金のサポート実績を確認します。資格があっても補助金に強いとは限りません。\n3. **資格:** 事業計画や経営面の相談には中小企業診断士が向いています。書類作成には行政書士という選択肢もあります。\n4. **ITツールの出どころ:** 導入するツールは登録済みでなければなりません。紹介された業者が自社の販売ツールに誘導していないかも見てください。\n5. **料金の明確さ:** 着手金、成功報酬、不採択時の扱い、交付申請や実績報告までの対応範囲を書面で確認します。\n6. **相談しやすさ:** 京都なら対面や近隣で対応できる事業者が連絡を取りやすい、という観点も判断材料になります。\n\n## 京都での無料・低コストの窓口\n京都市産業観光局、京都商工会議所、京都府よろず支援拠点、京都市・京都府内の認定支援機関が、AI補助金申請の無料または低コストの相談先として挙げられています。有料業者に頼む前に、まずここで相談するのが堅実です。\n\nSOURCE: https://hojyokin-portal.jp/columns/ai-agent-hojyo\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/\nSOURCE: https://www.rivewell.jp/ithojo/\nSOURCE: https://advertisingplanet.co.jp/media/2026/09/26/sme-ai-adoption-support-guide/\nSOURCE: https://uravation.com/media/ai-introduction-cost-guide-2026/\nSOURCE: https://carearc.co.jp/blog/2913/\nSOURCE: https://ai-donyuu-db.com/ai-hojokin-shinsei-daikou/\nSOURCE: https://www.mimosa.gr.jp/pca/it-hojo.html\nSOURCE: https://trise-c.jp/blog/substitute-application-for-subsidies/\nSOURCE: https://trise-c.jp/blog/application-for-it-introduction-subsidy/\nSOURCE: https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/\nSOURCE: https://drama.co.jp/news/seo/9867/\nSOURCE: https://binxai.co.jp/blog/generative-ai-adoption-support-company-kyoto-kansai-2026\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/column-3/\nSOURCE: https://mirasapo-plus.go.jp/infomation/31537/\nSOURCE: https://uchida.or.jp/8798/\nSOURCE: https://www.chusho.meti.go.jp/shogyo/shogyo/hojyokin/it.html\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_schedule\nSOURCE: https://seisansei.smrj.go.jp/subsidy_guide/subsidy_info/it_subsidy.html\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://listing-partners.com/gbiz/gbiz_column/digital-ai-hojokin/\nSOURCE: https://hojokin-dx.com/articles/digital-ai-hojokin-4jishibatsu-roadmap-2026/\nSOURCE: https://it-shien.smrj.go.jp/\n",
     "error": ""
    }
   },
@@ -73,68 +67,126 @@
    "ChatGPT": {
     "urls": [
      "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/antifraud/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf",
      "https://it-shien.smrj.go.jp/search/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [],
+    "text": "**国の「デジタル化・AI導入補助金2026（旧IT導入補助金）」のことであれば、京都以外の業者に申請支援を頼んでも、所在地だけを理由に問題になることはありません。** 公式の案内では、自社の課題に合うIT導入支援事業者とツールを選ぶ仕組みで、京都府内の業者に限定する条件は示されていません。[公式の申請手順](https://it-shien.smrj.go.jp/applicant/flow/)\n\nただし、「申請代行」の内容には注意が必要です。\n\n- **登録事業者・登録ツールを確認する。** 補助対象は、事務局に登録されたIT導入支援事業者が提供する登録済みITツールです。府外の業者でも、京都への対応可否と登録状況を確認してください。[公式FAQ](https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf)、[公式検索ページ](https://it-shien.smrj.go.jp/search/)\n- **申請を完全に丸投げする前提では依頼しない。** 公式手順では、IT導入支援事業者と共同で申請を作成し、申請者が最終確認・宣誓・提出を行います。「代行」がどこまでの支援を指すのか、契約前に確認してください。[公式の申請手順](https://it-shien.smrj.go.jp/applicant/flow/)\n\nつまり、**京都に対応できる登録事業者かどうかと、申請支援の範囲が重要です。** なお、京都府・京都市独自のAI関連補助金を指している場合は別制度なので、その公募要領で確認する必要があります。\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/flow/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_faq_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/search/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/",
      "https://trise-c.jp/blog/application-for-it-introduction-subsidy/",
-     "https://trise-c.jp/blog/subsidy-application-agency/",
-     "https://so-labo.co.jp/hojyokin/it-hojyo/basic/457/",
-     "https://bcompany.co.jp/service/b-top/column/grants/ithojokin-daikou/",
-     "https://it-shien.smrj.go.jp/",
-     "https://it-shien.smrj.go.jp/search/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_it_vendor_list.pdf",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf"
+     "https://carearc.co.jp/blog/2913/",
+     "https://www.rivewell.jp/ithojo/",
+     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
+     "https://digital-ai-hojokin.jp/articles/kyoto-city-ai-hojokin-2026/",
+     "https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/",
+     "https://hojokin-dx.com/articles/kyoto-prefecture-dx-subsidy-2026/"
     ],
+    "text": "**結論: 京都以外の業者でも、一般的には問題ない可能性が高いですが、検索結果に「問題ない」と明記したページはなく、公式要領の本文は確認できていません。** ページ取得の許可が得られず、検索結果の要約だけで答えています。\n\n- **国の補助金(デジタル化・AI導入補助金)**: 検索結果では、所在地による業者の制限は確認できませんでした。オンラインで全国対応している申請サポート会社もあります。\n- **「申請代行」の注意点**: 検索結果によると、申請を外部に丸投げする代行や、GビズIDプライムを預けての代理申請は認められていません。役割分担をしてサポートを受ける形は可能とされています。業者の所在地より、この点のほうが重要です。\n- **京都市・京都府の独自制度**: 京都市の制度には「主たる事業所が京都市内」という条件があるようです。これは補助を受ける側(あなたの会社)の条件であり、業者の所在地ではないと思われます。ただし、この点は私の推測です。\n\n**確認をおすすめすること**\n1. 公募要領の最新版(下記1つ目)で、業者の要件と代理申請の扱いを確認する。\n2. 国の補助金の場合、依頼先が「IT導入支援事業者」として登録済みか確認する。\n3. 京都の独自制度の場合、京都市産業観光局や京都商工会議所に、県外業者の関与が可能か直接問い合わせる。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://office-tree.jp/blog/subsidy/it-digital-ai-subsidy-service/\nSOURCE: https://trise-c.jp/blog/application-for-it-introduction-subsidy/\nSOURCE: https://carearc.co.jp/blog/2913/\nSOURCE: https://www.rivewell.jp/ithojo/\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/\nSOURCE: https://digital-ai-hojokin.jp/articles/kyoto-city-ai-hojokin-2026/\nSOURCE: https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/\nSOURCE: https://hojokin-dx.com/articles/kyoto-prefecture-dx-subsidy-2026/\n",
+    "error": ""
+   }
+  },
+  "AI導入補助金 京都府や京都市に独自の補助制度はありますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.ki21.jp/subsidy/r08_ai_monodukuri/",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000355702.html",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000349674.html",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000352558.html",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000357741.html"
+    ],
+    "text": "**はい。京都府・京都市には、AI活用を支援する独自の補助制度があります。** ただし、AI製品の開発、導入前の実証、業務用ITツールの導入など、制度によって対象が異なります。2026年10月4日時点で確認できた主な制度は以下のとおりです。\n\n| 自治体・制度 | 対象・用途 | 補助率・上限 | 令和8年度の募集状況 |\n|---|---|---|---|\n| **京都府：ものづくり産業AI活用支援事業** | 府内に事業拠点を持つ中小企業・スタートアップによる、AI技術を活用した製品・サービスの開発。府AIサポートチームの伴走支援が条件 | **1/2以内・500万円** | 9月25日締切 |\n| **京都市：AI・ロボティクス導入支援PoC補助金** | 市内の中小企業等による、AI・IoT・ロボットの本格導入前の試作・概念実証。ソフトウェア購入費、システム構築費等を支援 | **2/3以内・200万円** | 7月31日締切 |\n| **京都市：デジタル化推進プロジェクト** | 市内の中小企業等による、専門家と策定した計画に基づくITシステム導入。AI専用の制度ではなく、導入内容の適合確認が必要 | 導入枠：**4/5以内・40万円**／展開枠：**2/3以内・100万円** | 5月29日締切 |\n| **京都市：DXモデル構築プロジェクト** | 市内の中小企業等のDX戦略策定と、その戦略に基づくITツール等の導入。DX認定制度への申請等が条件 | **1/2以内・300万円**。導入経費の補助は令和9年度 | 6月12日締切 |\n\n出典：[京都産業21の募集案内](https://www.ki21.jp/subsidy/r08_ai_monodukuri/)、京都市の[PoC補助金](https://www.city.kyoto.lg.jp/sankan/page/0000355702.html)、[デジタル化推進プロジェクト](https://www.city.kyoto.lg.jp/sankan/page/0000349674.html)、[DXモデル構築プロジェクト](https://www.city.kyoto.lg.jp/sankan/page/0000352558.html)。\n\n**現時点では、上記の補助金の募集期限はいずれも過ぎています。** 一方、京都市では「AI・ロボティクス等導入検討伴走支援事業」の募集期間が**9月1日～11月30日**とされています。補助金ではありませんが、専門家が最大6回訪問し、課題整理や導入方法の検討を無料で支援します。30件に達すると早期終了するため、受付状況の確認が必要です。[京都市の募集案内](https://www.city.kyoto.lg.jp/sankan/page/0000357741.html)\n\n既製のAIツールを業務に導入したい場合は、市のデジタル化・DX支援について対象経費を確認し、AIを使った製品やサービスを開発したい場合は、府のものづくり産業AI活用支援事業を確認するとよいでしょう。\n\nSOURCE: https://www.ki21.jp/subsidy/r08_ai_monodukuri/\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000355702.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000349674.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000352558.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000357741.html\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ki21.jp/subsidy/r08_ai_monodukuri/",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000355702.html",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000349674.html",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000352558.html",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000353241.html",
+     "https://www.city.kyoto.lg.jp/sankan/page/0000324843.html",
+     "https://www.city.kyoto.lg.jp/sankan/cmsfiles/contents/0000268/268990/R8hojokinitiran.pdf",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://digital-ai-hojokin.jp/articles/kyoto-city-ai-hojokin-2026/",
+     "https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/",
+     "https://hojokin-dx.com/articles/kyoto-prefecture-dx-subsidy-2026/",
+     "https://financeinjapan.com/finance/d881605b-7be4-4826-b1bd-35fe9a758ab9"
+    ],
+    "text": "**あります。** 京都府と京都市のどちらにも、国の「デジタル化・AI導入補助金2026」とは別に、AI・DX関連の独自補助制度があります。ただし令和8年度分の募集期間は、現時点（2026年10月）ではすでに終了しています。\n\n**京都府**\n- **ものづくり産業AI活用支援事業**\n  - 内容は、AIを使った製品・サービス開発の支援です。専門家の伴走支援を受けたうえで、試作やサービス基盤の開発費を補助します。\n  - 補助率は1/2以内、上限は500万円です。\n  - 対象は府内に拠点がある中小企業とスタートアップです。\n  - 令和8年度の募集は8/14〜9/25で、すでに終了しています。\n\n**京都市**\n- **AI・ロボティクス導入支援PoC補助金**\n  - 補助率は2/3以内、上限は200万円です。\n  - 採択予定は5社で、募集は7/3〜7/31でした。すでに終了しています。\n- **京都市デジタル化推進プロジェクト／DXモデル構築プロジェクト**\n  - 令和8年度の募集ページがあります。\n  - 金額は民間サイトの要約どおりで、公式ページでは確認できていません。\n- **グローバル展開支援中堅企業創出プロジェクト**\n  - 京都市内の製造業向けに、DX戦略づくりからITツール導入までを約2年間支援します。\n  - 2年目は上限500万円・補助率1/2以内とされています。この金額も民間サイトの要約によるものです。\n\n**確認できていない点**\n- 公式ページを直接開いて読むことはできませんでした（WebFetchの権限がありませんでした）。ここまでの内容は、検索結果に表示された公式ページの要約が根拠です。\n- 京都市のデジタル化・DX関連の上限額と補助率は、民間サイトの要約どおりで公式の確認が取れていません。\n- 民間サイトは、「京都府中小企業経営基盤強化推進事業費補助金」などの制度も挙げていました。こちらも公式ページでは確認していないため、本文では扱っていません。\n- 申請前に、各公式ページで最新の募集要項を確認してください。令和9年度の募集は、例年どおりなら春以降に開始される見込みですが、未確認です。\n\nSOURCE: https://www.ki21.jp/subsidy/r08_ai_monodukuri/\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000355702.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000349674.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000352558.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000353241.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/page/0000324843.html\nSOURCE: https://www.city.kyoto.lg.jp/sankan/cmsfiles/contents/0000268/268990/R8hojokinitiran.pdf\nSOURCE: https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html\nSOURCE: https://digital-ai-hojokin.jp/articles/kyoto-city-ai-hojokin-2026/\nSOURCE: https://digital-ai-hojokin.jp/articles/kyoto-ai-hojokin-2026/\nSOURCE: https://hojokin-dx.com/articles/kyoto-prefecture-dx-subsidy-2026/\nSOURCE: https://financeinjapan.com/finance/d881605b-7be4-4826-b1bd-35fe9a758ab9\n",
     "error": ""
    }
   },
   "AI導入補助金 京都で申請代行を頼む費用の相場はどれくらいですか？": {
    "ChatGPT": {
     "urls": [
-     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/subsidycost/",
-     "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
-     "https://leadbrain.co.jp/service/subsidies-grants/",
-     "https://it-shien.smrj.go.jp/about"
+     "https://digital-ai-hojokin.jp/shinsei-daikou/",
+     "https://shiomi-gyosei.com/fees/",
+     "https://it-shien.smrj.go.jp/about/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/aiitsub2026-2/",
-     "https://nocode-sol.co.jp/blog/kyoto-ai-subsidy-guide/",
-     "https://mono-support.com/corona/%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E4%BB%A3%E8%A1%8C%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E3%81%AF%EF%BC%9F%E8%A3%9C%E5%8A%A9%E9%87%91%E5%85%A8%E8%88%AC%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B/",
-     "https://catalog.monex.co.jp/article/?p=28598",
-     "https://document.bizpit-kk.com/know-how/subsidy-agency-fee-guide-garage/",
-     "https://office-tree.jp/blog/subsidy/subsidy-application-success-fee-only/",
-     "https://faclog.jp/magazine/it-introduction-subsidy-application-agency/",
-     "https://nozaki-gyousei-office.com/kyoto-syouryokuka/",
-     "https://inu-llc.co.jp/monohojo-success-fee/",
-     "https://kyoto-bien-etre.co.jp/blog/ai-budget.html",
-     "https://local-mp.co.jp/media/columns/subsidy-application-support-guide/"
-    ],
+    "text": "京都で「AI導入補助金」の申請支援を頼むなら、**着手金3万〜10万円＋成功報酬として採択額の5〜15％程度**を見積もり比較の目安にできます。ただし、京都だけの平均料金を示す統計ではなく、公開されている相場情報と地元事務所の料金から判断した目安です。[申請支援の費用相場](https://digital-ai-hojokin.jp/shinsei-daikou/)\n\nここでは、国の「デジタル化・AI導入補助金2026」を想定しています。京都府・京都市独自の補助金を使う場合は、別の見積もりになります。\n\n**京都の具体的な料金例**として、行政書士潮海事務所は次の金額を公開しています。[同事務所の料金表](https://shiomi-gyosei.com/fees/)\n\n| 項目 | 公開料金 |\n|---|---:|\n| 着手金 | 77,000円（税込） |\n| 成功報酬 | 採択額の10％＋税、最低165,000円 |\n| 採択後の実績報告 | 別途55,000円 |\n\nこの料金で計算すると、補助金100万円が採択された場合は**申請支援だけで24万2,000円、実績報告込みで29万7,000円**。300万円なら、実績報告込みで46万2,000円です。最低成功報酬があるため、補助額が小さい場合も単純に「10％」では計算できません。\n\n依頼前には、**税込総額・最低報酬・実績報告の追加料金・不採択時の負担**をそろえて比較してください。また、この制度は登録されたIT導入支援事業者と組んで申請する仕組みなので、導入予定のAIツール提供会社に、申請サポートの範囲と費用を確認するのがよいでしょう。[補助金事務局の制度概要](https://it-shien.smrj.go.jp/about/)\n\nSOURCE: https://digital-ai-hojokin.jp/shinsei-daikou/\nSOURCE: https://shiomi-gyosei.com/fees/\nSOURCE: https://it-shien.smrj.go.jp/about/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
      "https://trise-c.jp/blog/substitute-application-for-subsidies/",
      "https://local-mp.co.jp/media/columns/subsidy-application-support-guide/",
+     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
      "https://hojokin-shinsei-daikou.jp/area/kyoto/kyoto-city/",
      "https://carearc.co.jp/blog/2913/",
+     "https://financeinjapan.com/knowledge/4erjrGgbIKKZrAYwAQ6rVX",
      "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/subsidycost/",
-     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
-     "https://samurai-law.com/hojokin/it10/",
-     "https://financing.web-matching.com/compensation-rates-for-grant-application-services"
+     "https://weeva.co.jp/news/subsidy-agency-fees/",
+     "https://financing.web-matching.com/compensation-rates-for-grant-application-services",
+     "https://bcompany.co.jp/service/b-top/column/grants/ithojokin-sinsei/"
     ],
+    "text": "京都に限った相場データはなく、全国的な相場と同水準と考えて問題ありません。目安は「着手金 0〜15万円 + 成功報酬 補助額の5〜15%」です。\n\n| 項目 | 相場 |\n|---|---|\n| 着手金 | 0〜15万円 (5〜10万円とする情報もあります) |\n| 成功報酬 | 採択・交付決定額の約10〜15% (幅は5〜30%) |\n| 成功報酬のみの場合 | 補助額の15〜25% |\n| IT導入補助金 (通常枠) の総額目安 | 約15〜27万円 |\n| 京都市での代行費用の目安 | 10〜60万円 (案件の規模・難易度で変動) |\n\n- **対象の呼び名**: 「AI導入補助金」は、現在は「デジタル化・AI導入補助金」(旧IT導入補助金) を指します。\n- **京都の専門家**: 京都市には行政書士、中小企業診断士、補助金コンサルタントが多数います。\n- **料金の幅**: 料金体系は事務所ごとに差が大きいので、2〜3社から見積もりを取るのが確実です。\n- **申請者本人の手続き**: 申請自体は原則として申請者本人が行います。IT導入支援事業者や専門家は、その支援をする立場です。\n- **注意点**: 検索結果は各社サイトの記載をまとめたものです。補助額の上限や枠は年度ごとに変わるので、最新の公募要領で確認してください。\n\nSOURCE: https://trise-c.jp/blog/substitute-application-for-subsidies/\nSOURCE: https://local-mp.co.jp/media/columns/subsidy-application-support-guide/\nSOURCE: https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/\nSOURCE: https://hojokin-shinsei-daikou.jp/area/kyoto/kyoto-city/\nSOURCE: https://carearc.co.jp/blog/2913/\nSOURCE: https://financeinjapan.com/knowledge/4erjrGgbIKKZrAYwAQ6rVX\nSOURCE: https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/subsidycost/\nSOURCE: https://weeva.co.jp/news/subsidy-agency-fees/\nSOURCE: https://financing.web-matching.com/compensation-rates-for-grant-application-services\nSOURCE: https://bcompany.co.jp/service/b-top/column/grants/ithojokin-sinsei/\n",
     "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金の申請代行を京都で頼む前に 2026年最新・費用と選び方": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "**京都でAI導入補助金の申請支援を頼むなら、まず登録されたIT導入支援事業者に支援内容と費用を確認し、そのうえで有料の申請サポートを比較するのがおすすめです。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "「AI導入補助金」の実体は「デジタル化・AI導入補助金2026」(旧IT導入補助金)です。この補助金は丸投げ型の申請代行ができない制度なので、依頼するなら「代行」ではなく「申請サポート」として費用と役割分担を確認してください。"
+   }
+  },
+  "AI導入補助金 京都以外の業者に申請代行を頼んでも問題ありませんか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**国の「デジタル化・AI導入補助金2026（旧IT導入補助金）」のことであれば、京都以外の業者に申請支援を頼んでも、所在地だけを理由に問題になることはありません。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "**結論: 京都以外の業者でも、一般的には問題ない可能性が高いですが、検索結果に「問題ない」と明記したページはなく、公式要領の本文は確認できていません。**"
+   }
+  },
+  "AI導入補助金 京都府や京都市に独自の補助制度はありますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい。京都府・京都市には、AI活用を支援する独自の補助制度があります。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**あります。** 京都府と京都市のどちらにも、国の「デジタル化・AI導入補助金2026」とは別に、AI・DX関連の独自補助制度があります。"
+   }
+  },
+  "AI導入補助金 京都で申請代行を頼む費用の相場はどれくらいですか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "京都で「AI導入補助金」の申請支援を頼むなら、**着手金3万〜10万円＋成功報酬として採択額の5〜15％程度**を見積もり比較の目安にできます。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "京都に限った相場データはなく、全国的な相場と同水準と考えて問題ありません。目安は「着手金 0〜15万円 + 成功報酬 補助額の5〜15%」です。"
    }
   }
  }

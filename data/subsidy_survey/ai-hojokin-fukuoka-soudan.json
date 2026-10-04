@@ -3,133 +3,171 @@
  "date": "2026-10-04",
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "questions": [
   "AI導入補助金 福岡の相談窓口2026 採択率を上げる無料相談の使い方",
   "AI導入補助金 福岡の会社ですが、大阪のサポート会社に遠隔で相談・依頼しても大丈夫ですか？",
+  "AI導入補助金 不採択だった場合、福岡からでも再申請はできますか？",
   "AI導入補助金の相談は無料でできますか？費用はいつ発生しますか？"
  ],
  "answers": {
   "AI導入補助金 福岡の相談窓口2026 採択率を上げる無料相談の使い方": {
    "ChatGPT": {
     "urls": [
-     "https://it-shien.smrj.go.jp/about",
-     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-     "https://www.pref.fukuoka.lg.jp/press-release/subsidy-concierge.html",
-     "https://www.joho-fukuoka.or.jp/concierge.html",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
      "https://yorozu-fukuoka.go.jp/",
      "https://yorozu-fukuoka.go.jp/flow/",
-     "https://www.fukunet.or.jp/keieisodan/digital-tool/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_addition_list.pdf",
-     "https://it-shien.smrj.go.jp/applicant/flow/"
-    ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://ai-kikou.or.jp/fukuoka-ai-subsidy/",
-     "https://gxo.co.jp/column/fukuoka-it-subsidy-support-company",
-     "https://fukuokastartax.com/blog/%E7%A6%8F%E5%B2%A1%E7%9C%8C%E3%82%88%E3%82%8D%E3%81%9A%E6%94%AF%E6%8F%B4%E6%8B%A0%E7%82%B9%E3%81%AF%E3%80%8C%E4%BD%95%E5%BA%A6%E3%81%A7%E3%82%82%E7%84%A1%E6%96%99%E3%80%8D%E3%81%A7%E7%9B%B8%E8%AB%87/",
-     "https://hojokin-agent.jp/purpose/equipment-it/fukuoka",
      "https://www.pref.fukuoka.lg.jp/press-release/kasegu-center-open.html",
-     "https://hojokin-agent.jp/purpose/equipment-it/fukuoka",
-     "https://ai-navi-agent.jp/articles/explainer-fukuoka-dx-sodan",
-     "https://www.salesdock.jp/blog/fukuoka-ai-adoption-failure-avoidance",
-     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFFHcnZnzAV_yh2RVusveJUPq9yWKVqFh-lC_D1CIO3IGUPn3l22EXt_JN_t67VOC99GERGnxYl1Sntc2Kgvet7fxwP4BRRTvb6WAly8B6Nzj7wl-VkFAxTGNM6tSCOWLMhGsowYNHmvOy_Glk=",
-     "https://note.com/sotry/n/n6b1b641060b9",
-     "https://ai-kikou.or.jp/fukuoka-ai-support/",
-     "https://leadbrain.co.jp/contents/lb/8739/",
-     "https://hojokin-shinsei.co.jp/meti-subsidy/it-subsidy/it-hojokin-saitakuritu/",
-     "https://wheat-biz.com/ai-dx/fukuoka-dx-it-hojokin-dx/",
-     "https://www.facebook.com/yorozufukuoka/posts/-107%E6%B0%B4%E7%84%A1%E6%96%99%E5%80%8B%E5%88%A5%E7%9B%B8%E8%AB%87%E4%BC%9A%E3%82%92%E9%96%8B%E5%82%AC%E3%81%97%E3%81%BE%E3%81%99%E8%A3%9C%E5%8A%A9%E9%87%91%E3%82%92%E6%B4%BB%E7%94%A8%E3%81%97%E3%81%9F%E3%81%84%E3%81%91%E3%81%A9%E4%BD%95%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8C%E3%81%B0%E3%81%84%E3%81%84%E7%B5%8C%E5%96%B6%E9%9D%A9%E6%96%B0%E8%A8%88%E7%94%BB%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E8%87%AA%E7%A4%BE%E3%81%AE%E7%B5%8C%E5%96%B6%E6%88%A6%E7%95%A5%E3%82%92%E6%95%B4%E7%90%86%E3%81%97%E3%81%9F%E3%81%84%E3%81%9D%E3%82%93%E3%81%AA%E7%B5%8C%E5%96%B6%E3%81%AE%E3%81%8A%E6%82%A9%E3%81%BF%E3%82%92%E5%B0%82%E9%96%80%E5%AE%B6%E3%81%AB/1719416690184597/",
-     "https://keiriplus.jp/tips/it_dounyuhojyokin_4point/",
-     "https://nocoderi.co.jp/2025/04/03/fukuoka-ai-education-subsidies/"
+     "https://it-sodan.smrj.go.jp/index.html",
+     "https://it-shien.smrj.go.jp/",
+     "https://seisansei.smrj.go.jp/news/20260618.html"
     ],
+    "text": "福岡で2026年のAI導入補助金を検討するなら、**まず「福岡県よろず支援拠点」で申請方針を整理し、ITの専門相談でツールと導入効果を確認する**のが有効です。無料相談には、計画の改善だけでなく、条件を満たすと審査の加点につながるものもあります。\n\n以下は2026年10月4日時点で確認した情報です。\n\n**対象となる補助金は？**\n\n国の正式名称は「デジタル化・AI導入補助金2026」です。AIを含むITツールの導入を支援しますが、**AIサービスなら何でも対象になるわけではありません**。事務局に登録されたITツールを、登録IT導入支援事業者と連携して申請します。[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\n**福岡で使える相談窓口**\n\n| 窓口 | 相談内容・使いどころ | 申込方法 |\n|---|---|---|\n| 福岡県よろず支援拠点 | 補助金選び、事業計画、資金繰り、IT活用をまとめて相談 | **092-622-7809**に電話予約。対面・オンライン対応 |\n| 福岡県中小企業“稼ぐ力”応援センター | DX、業務効率化、コスト削減など。導入すべき業務が決まっていない段階にも適する | **092-292-8890**、メール **info@f-seisanseikojo.jp** |\n| 中小機構「IT経営サポートセンター」 | IT専門家による課題整理、ツール選び、導入・活用方法の相談 | Web予約。**1回60分の無料オンライン相談**で福岡から利用可能 |\n| 補助金事務局 | 申請要件や手続きの確認 | **0570-666-376**／IP電話等 **050-3133-3272**。平日9:30〜17:30、通話料あり |\n\nよろず支援拠点は無料ですが、現在は**1事業者につき月4件まで**の予約制限があります。予約後、相談日までに個別相談申込票を送信します。[よろず支援拠点](https://yorozu-fukuoka.go.jp/)、[利用の流れ](https://yorozu-fukuoka.go.jp/flow/)\n\n“稼ぐ力”応援センターも無料で、一部回数制限があります。[福岡県の案内](https://www.pref.fukuoka.lg.jp/press-release/kasegu-center-open.html)。IT経営サポートセンターの予約は[公式サイト](https://it-sodan.smrj.go.jp/index.html)、事務局の連絡先は[補助金公式サイト](https://it-shien.smrj.go.jp/)で確認できます。\n\n**採択を目指す無料相談の使い方**\n\n次の順で相談すると、申請準備を具体的に進められます。これは公募要領と各窓口の支援内容を踏まえた実務上の提案です。\n\n1. **初回は「AIを買いたい」より「改善したい業務」を伝える**  \n   例えば「請求書入力に月40時間かかる」「問い合わせ対応で残業が発生する」と説明します。決算書、従業員数、業務の流れ、現在の作業時間、候補ツールの資料・見積書を持参すると、相談が進みやすくなります。よろず支援拠点は2026年度、決算書を使った事業全体の把握と課題設定を重視しています。[よろず支援拠点](https://yorozu-fukuoka.go.jp/)\n\n2. **2回目は、導入効果と費用の根拠を確認する**  \n   「月40時間を15時間に減らす」などの目標を置き、実現できる機能、運用担当者、導入後の費用を相談します。削減時間は見込みであることを明示し、試用結果や実測値で裏付けると、計画の説得力が増します。\n\n3. **無料相談による加点の条件を先に確認する**  \n   通常枠では、第6回公募から「IT経営サポートセンター」の利用が加点対象です。主な条件は、**2026年8月1日以降の利用申込、申請日以前の利用、申請締切日の前月末までの利用**です。申込時の事業者情報にも指定があります。  \n   「IT戦略ナビwith」と両方を利用しても、この項目の加点は一方のみです。**福岡の無料窓口に相談しただけで、自動的にこの加点が付くわけではありません。**[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\n4. **提出前に、要件と数字の整合性を点検する**  \n   支援事業者と一緒に、登録ツールの対象範囲、見積内容、過去の補助金利用、賃上げ計画などを確認します。相談時は「申請条件を満たすか」「計画の数字に無理がないか」「使える加点は何か」の3点を依頼すると明確です。\n\n予約時には、次のように伝えるとよいでしょう。\n\n> 「デジタル化・AI導入補助金2026を検討しています。〇〇業務の時間を減らしたいので、対象制度、導入効果、申請要件と加点条件を相談したいです。」\n\n**採択率はどのくらい？**\n\n公式に公表された**2026年第1次締切の全国実績**では、通常枠は申請2,028者に対し採択891者で、計算すると**約43.9％**です。これは福岡県の採択率でも、2026年全体の採択率でもありません。[中小機構の採択結果](https://seisansei.smrj.go.jp/news/20260618.html)\n\n無料相談によって採択率が何ポイント上がるかは、今回確認した公式資料では示されていません。相談は、**対象外の申請や計画の不整合を減らし、条件を満たす加点を確実に活用するため**に使うのが適切です。\n\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://yorozu-fukuoka.go.jp/\nSOURCE: https://yorozu-fukuoka.go.jp/flow/\nSOURCE: https://www.pref.fukuoka.lg.jp/press-release/kasegu-center-open.html\nSOURCE: https://it-sodan.smrj.go.jp/index.html\nSOURCE: https://it-shien.smrj.go.jp/\nSOURCE: https://seisansei.smrj.go.jp/news/20260618.html\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://note.com/sotry/n/n6b1b641060b9",
      "https://fyve.co.jp/web/blog/fukuoka-dx-ai-subsidy-portal-2026",
+     "https://note.com/sotry/n/n6b1b641060b9",
      "https://fyve.co.jp/ai-advisor/articles/fukuoka-ai-subsidy-guide-2026",
+     "https://fyve.co.jp/ai-advisor/articles/fukuoka-manufacturing-ai-subsidy",
      "https://physical-ai-hojokin.jp/articles/fukuoka-ai-hojokin-2026/",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://hojyokin-portal.jp/columns/degital_ai_saitaku",
-     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://physical-ai-hojokin.jp/articles/fukuoka-ai-dounyu-jokyo/",
+     "https://hojoguide.jp/guides/fukuoka-ai-subsidy-guide",
+     "https://www.salesdock.jp/blog/fukuoka-ai-adoption-failure-avoidance",
+     "https://wheat-biz.com/ai-dx/fukuoka-dx-it-hojokin-dx/",
+     "https://fukuoka-ai-lab.com/",
      "https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/",
-     "https://plannersvalue.com/column/digital-ai-subsidy-2026"
+     "https://gxo.co.jp/column/it-subsidy-2026-second-half-guide",
+     "https://gxo.co.jp/column/it-subsidy-application-writing-tips",
+     "https://leadbrain.co.jp/contents/lb/8739/",
+     "https://hojoguide.jp/guides/it-hojo-2026-guide",
+     "https://hojoguide.jp/guides/it-dounyuu-hojokin-2026",
+     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/",
+     "https://hojokin-agent.jp/guide/it-hojo/saitaku",
+     "https://dextre.app/ja/it-introduction-subsidy/28209/"
     ],
+    "text": "**結論:** 福岡では、公的な無料窓口(DX推進センター、よろず支援拠点、商工会議所)で計画を固めてから、実績のあるIT導入支援事業者に申請書を見てもらう流れが、採択率を上げる近道です。以下は検索結果のスニペットに基づく内容で、ページ本文までは確認できていません(WebFetch が未許可のため)。\n\n## 福岡の無料相談窓口(2026年)\n- **福岡県中小企業DX推進センター**\n  - 福岡県委託事業で、専門アドバイザー19名による回数無制限の伴走支援が無料です。\n  - DX個別相談、補助金活用の方針相談、申請書のブラッシュアップ、導入後の運用相談に対応します。\n- **福岡県よろず支援拠点 生産性向上支援センター**\n  - 2026年4月開設の国設置の無料経営相談所です。人手不足、省力化、業務効率化、AI活用などを相談できます。\n  - DX推進センターと同フロア(博多区吉塚の福岡県中小企業振興センタービル5階)にあり、相互に連携しています。\n- **福岡商工会議所(Fukunet)・北九州商工会議所・福岡県中小企業振興センター**\n  - 認定経営革新等支援機関で、入口として相談しやすい窓口です。\n\n## 採択率を上げる無料相談の使い方\n1. **申請前の早い段階で相談する。** 加点項目(賃上げ計画、セキュリティ対策など)の要件は準備に時間がかかります。経験豊富な支援事業者に早めに助言をもらうことが推奨されています。\n2. **課題を数字のビフォーアフターで書く。** 例は「月末の請求処理3日 → 導入後は半日」です。「効率化したい」だけでは審査員に伝わりません。\n3. **書きかけの申請書を窓口に読んでもらう。** わかりにくい箇所を指摘してもらうだけでも完成度が上がります。\n4. **採択実績のあるIT導入支援事業者を選ぶ。** この補助金は支援事業者との共同申請が前提で、事業者の質が採択率を左右するとされています。公的窓口で方針を固めてから事業者を選ぶと、営業トークに流されにくくなります。\n5. **経営課題に直結するツールを選ぶ。** 労働生産性向上の根拠となる事業計画が必要です。\n\n## 注意点\n- 制度名は「デジタル化・AI導入補助金(旧IT導入補助金)」とされています。公募回、締切、対象要件、補助率は公式サイトで最新を確認してください。\n- 記事タイトルには「採択率は43.8%まで急落」とありますが、本文は未確認です。枠ごとの正確な数値は公式の採択結果で確認が必要です。\n- 上記の窓口情報は民間の解説記事によるものです。利用前に各機関の公式サイトで受付方法を確認してください。\n\nSOURCE: https://fyve.co.jp/web/blog/fukuoka-dx-ai-subsidy-portal-2026\nSOURCE: https://note.com/sotry/n/n6b1b641060b9\nSOURCE: https://fyve.co.jp/ai-advisor/articles/fukuoka-ai-subsidy-guide-2026\nSOURCE: https://fyve.co.jp/ai-advisor/articles/fukuoka-manufacturing-ai-subsidy\nSOURCE: https://physical-ai-hojokin.jp/articles/fukuoka-ai-hojokin-2026/\nSOURCE: https://physical-ai-hojokin.jp/articles/fukuoka-ai-dounyu-jokyo/\nSOURCE: https://hojoguide.jp/guides/fukuoka-ai-subsidy-guide\nSOURCE: https://www.salesdock.jp/blog/fukuoka-ai-adoption-failure-avoidance\nSOURCE: https://wheat-biz.com/ai-dx/fukuoka-dx-it-hojokin-dx/\nSOURCE: https://fukuoka-ai-lab.com/\nSOURCE: https://service.biztex.co.jp/dx-hacker/it-dx-column/digital-ai-subsidy/\nSOURCE: https://gxo.co.jp/column/it-subsidy-2026-second-half-guide\nSOURCE: https://gxo.co.jp/column/it-subsidy-application-writing-tips\nSOURCE: https://leadbrain.co.jp/contents/lb/8739/\nSOURCE: https://hojoguide.jp/guides/it-hojo-2026-guide\nSOURCE: https://hojoguide.jp/guides/it-dounyuu-hojokin-2026\nSOURCE: https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/\nSOURCE: https://hojokin-agent.jp/guide/it-hojo/saitaku\nSOURCE: https://dextre.app/ja/it-introduction-subsidy/28209/\n",
     "error": ""
    }
   },
   "AI導入補助金 福岡の会社ですが、大阪のサポート会社に遠隔で相談・依頼しても大丈夫ですか？": {
    "ChatGPT": {
     "urls": [
+     "https://it-shien.smrj.go.jp/search/businessdetail",
      "https://it-shien.smrj.go.jp/about",
-     "https://it-shien.smrj.go.jp/applicant/flow/",
-     "https://it-shien.smrj.go.jp/search/"
+     "https://it-shien.smrj.go.jp/antifraud"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [],
+    "text": "**はい。国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」のことなら、福岡の会社が大阪のサポート会社に遠隔で相談・依頼することは、基本的に可能です。**\n\n公式サイトでは、支援事業者の「本店・営業所所在地」と「対応エリア」を別に扱っています。このため、**同じ県の会社に依頼する必要はなく、福岡への対応が可能かどうかが判断のポイント**です。ただし、遠隔でどこまで対応できるかは、依頼先に確認してください。[公式の事業者情報](https://it-shien.smrj.go.jp/search/businessdetail)\n\n依頼前には、次の点を確認すると安心です。\n\n- **登録された事業者・ツールか**：通常枠などでは、事務局に登録された「IT導入支援事業者」と組み、登録済みのITツールを導入する必要があります。相談先がコンサル会社の場合は、実際にどの登録事業者と申請するのか確認してください。[制度概要](https://it-shien.smrj.go.jp/about)\n- **福岡へのサポート範囲**：オンライン相談だけでなく、導入設定・操作説明・実績報告まで対応できるか、訪問が必要な場合の追加費用も確認してください。\n- **申請を丸投げしないこと**：相談や申請支援は受けられますが、GビズIDなどを渡して自社の申請操作を代行させる行為は、公式に不正とされています。[不正行為に関する注意事項](https://it-shien.smrj.go.jp/antifraud)\n\nなお、福岡県や市町村独自のAI関連補助金を指している場合は、別の条件がある可能性があるため、その制度の公募要領で確認が必要です。\n\nSOURCE: https://it-shien.smrj.go.jp/search/businessdetail\nSOURCE: https://it-shien.smrj.go.jp/about\nSOURCE: https://it-shien.smrj.go.jp/antifraud\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://it-shien.smrj.go.jp/about/",
-     "https://it-shien.smrj.go.jp/news/40013",
-     "https://it-shien.smrj.go.jp/itvendor/about/",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
-     "https://it-shien.smrj.go.jp/pdf/it2026_touroku_it_jigyosha.pdf",
-     "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary",
-     "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/",
-     "https://carearc.co.jp/blog/2955/"
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+     "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://www.tokyo-kst.jp/service112.html",
+     "https://mirasapo-plus.go.jp/subsidy/ithojo/",
+     "https://hojyokin-portal.jp/subsidies/71664"
     ],
+    "text": "**結論: 大丈夫です。ただし、大阪の会社が「IT導入支援事業者」として事務局に登録されていることが条件です。**\n\n- **申請の仕組み:** デジタル化・AI導入補助金2026（旧IT導入補助金）は、事務局に登録されたIT導入支援事業者と共同で申請します。ツールも事前登録済みのものから選びます。\n- **所在地の制限:** 今回の検索では、支援事業者と申請者が同じ地域でなければならないという記載は見つかりませんでした。\n- **遠隔対応:** 支援事業者側の案内には、メール・電話・オンライン面談で地域を問わず対応するという記載がありました。専門家がオンラインで伴走支援する事例もあります。\n\n**注意点**\n- 大阪の会社が単なるコンサル会社で、支援事業者として未登録なら、共同申請者にはなれません。申請前に、事務局サイトの登録事業者一覧か本人への確認で、登録の有無と、導入したいツールが登録済みかを確かめてください。\n- 福岡県独自のAI関連補助金（例: AIデバイス関連製品開発支援事業）は国の制度とは別で、条件も別です。\n\n**確認の限界:** 公式ページ本体は取得が許可されず開けませんでした。上記は検索結果の要約に基づいています。「所在地制限なし」は明記を確認できていないという意味なので、最終確認は公式の問い合わせ窓口か公募要領で行ってください。\n\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/normal/\nSOURCE: https://www.ntt.com/bizon/it-subsidy.html\nSOURCE: https://www.tokyo-kst.jp/service112.html\nSOURCE: https://mirasapo-plus.go.jp/subsidy/ithojo/\nSOURCE: https://hojyokin-portal.jp/subsidies/71664\n",
+    "error": ""
+   }
+  },
+  "AI導入補助金 不採択だった場合、福岡からでも再申請はできますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://it-shien.smrj.go.jp/applicant/subsidy/",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://it-shien.smrj.go.jp/pdf/it2026_manual_kofu.pdf",
+     "https://it-shien.smrj.go.jp/schedule/"
+    ],
+    "text": "**はい、福岡からでも再申請できます。** 国の「デジタル化・AI導入補助金2026（旧IT導入補助金）」を指す場合、福岡県の事業者も対象要件を満たせば申請できます。通常枠の公募要領には、**不採択となった場合は、次回以降の締切までに再申請できる**と明記されています。[申請対象者](https://it-shien.smrj.go.jp/applicant/subsidy/)・[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n\n再申請では、次の点を確認してください。\n\n- **不採択後の手続き：** 以前の申請マイページで不採択通知を確認し、必要に応じて「GビズID連携解除」「交付申請を破棄する」を行います。申請を破棄しないと再申請できない場合があります。[公式申請マニュアル](https://it-shien.smrj.go.jp/pdf/it2026_manual_kofu.pdf)\n- **内容の見直し：** IT導入支援事業者と、書類の不足、経営課題と導入ツールの対応、生産性向上の計画などを確認してから再提出するとよいでしょう。再申請でも審査があります。[通常枠の公募要領](https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf)\n- **締切：** 募集期間内である必要があります。申請する枠の最新日程を確認してください。[公式スケジュール](https://it-shien.smrj.go.jp/schedule/)\n\nなお、福岡県・福岡市などの独自のAI関連補助金を指している場合は、再申請の条件が異なります。\n\nSOURCE: https://it-shien.smrj.go.jp/applicant/subsidy/\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf\nSOURCE: https://it-shien.smrj.go.jp/pdf/it2026_manual_kofu.pdf\nSOURCE: https://it-shien.smrj.go.jp/schedule/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei",
+     "https://d-spport.jp/ithojo-reapplication/",
+     "https://support03.com/category6/category39/entry12.html",
+     "https://www.sme-support.co.jp/column/p8120/",
+     "https://carearc.co.jp/blog/2936/"
+    ],
+    "text": "**結論: 再申請できます。福岡であることが不利になる、または申請できなくなるという記載は、検索結果には見当たりませんでした。**\n\n「AI導入補助金」は、2026年からIT導入補助金の後継になった「デジタル化・AI導入補助金」のことだと解釈して調べました。別の補助金のことでしたら教えてください。\n\n- **再申請の可否**: 不採択でも、次の締切回に再申請できます。申請回数の上限はなく、前回不採択だったことで制限されることもありません。\n- **締切**: 2026年度は第5次(9/29)と第6次(10/30)が残っているとの情報です。今日は2026-10-04なので、第5次は過ぎ、第6次の10/30が次の機会になる可能性があります。ただし、これは検索結果の要約に書かれていた日付です。公式の公募要領で確認してください。\n- **2026年度の新要件**: 過去に採択を受けた事業者には、賃上げ要件などが追加されています。同一枠で再申請する場合は「交付決定日から12ヶ月経過」などの条件もあります。審査で減点になることもあるとのことです。不採択だった場合は交付決定を受けていないので、これらは主に採択済みの事業者に関わる話と思われます。\n- **地域**: 福岡であることを理由にした制限は、見つかった範囲では確認できませんでした。この制度は全国の中小企業・小規模事業者が対象のはずですが、これは私の背景知識で、今回の検索で確認したものではありません。\n\n**制約**: ページ本文は取得できず(WebFetchの権限が付与されていません)、検索結果の要約だけを根拠にしています。申請前に、公式サイトの公募要領とIT導入支援事業者への確認をお勧めします。不採択の指摘点や弱点を洗い出してから再申請するのが定石です。\n\nSOURCE: https://hojyokin-portal.jp/columns/itdonyu_2nd_shinsei\nSOURCE: https://d-spport.jp/ithojo-reapplication/\nSOURCE: https://support03.com/category6/category39/entry12.html\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://carearc.co.jp/blog/2936/\n",
     "error": ""
    }
   },
   "AI導入補助金の相談は無料でできますか？費用はいつ発生しますか？": {
    "ChatGPT": {
     "urls": [
-     "https://digital-ai-hojokin.jp/consultation/",
-     "https://nakagyousei.com/subsidy/it/",
-     "https://leadbrain.co.jp/price/",
-     "https://it-shien.smrj.go.jp/contact/"
+     "https://digital-ai-hojokin.jp/consultation/"
     ],
-    "error": ""
-   },
-   "Gemini": {
-    "urls": [
-     "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-musho-soudan-2026/",
-     "https://digital-ai-hojokin.jp/consultation/",
-     "https://aidollargame.com/articles/hojokin-ai-soudan-2026.html",
-     "https://www.sme-support.co.jp/column/p8120/",
-     "https://colorfulbox.co.jp/subsidy",
-     "https://so-labo.co.jp/hojyokin/it-hojyo/basic/649/",
-     "https://www.inankl.co.jp/it-subsidy",
-     "https://helptech.jp/ai-subsidy",
-     "https://squareup.com/jp/ja/townsquare/what-is-it-hojo",
-     "https://leadbrain.co.jp/contents/lb/8690/"
-    ],
+    "text": "はい、無料で相談できます。例えば「AI導入補助金ナビ」では、**初回相談・補助金診断は完全無料で、申請代行を依頼する場合のみ費用が発生する**と案内されています。[AI導入補助金ナビの無料相談ページ](https://digital-ai-hojokin.jp/consultation/)\n\nただし、これは同サービスの条件です。具体的な料金や支払い時期はこのページには記載されていないため、申請代行を依頼する前に、見積もりと契約条件を確認してください。\n\nSOURCE: https://digital-ai-hojokin.jp/consultation/\n",
     "error": ""
    },
    "Claude": {
     "urls": [
-     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+     "https://www.ricoh.co.jp/solutions/special-theme/it-subsidy",
+     "https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo",
+     "https://sogyotecho.jp/digital-ai-hojyokin/",
+     "https://hojyokin-portal.jp/columns/degital_ai_summary",
+     "https://www.sme-support.co.jp/column/p8120/",
      "https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-musho-soudan-2026/",
-     "https://digital-ai-hojokin.jp/articles/hojokin-shinsei-daikou-hiyou/",
-     "https://digital-ai-hojokin.jp/articles/hojokin-consul/",
-     "https://mirasapo-plus.go.jp/infomation/32009/",
+     "https://digital-ai-hojokin.jp/articles/ai-hojokin-2026-kanzen-guide/",
+     "https://aixis.jp/articles/ai-subsidy",
+     "https://hojokin-hub.ai/guides/ai-subsidy-guide",
+     "https://www.uchida-it.co.jp/info/2026it/",
+     "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
      "https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html",
-     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_fukusu.pdf",
-     "https://soichiro.co.jp/homepage-subsidy/it_hojo2026-overview/",
-     "https://hojyokin-portal.jp/columns/degital_ai_summary"
+     "https://www.ntt.com/bizon/it-subsidy.html",
+     "https://www.oro.com/zac/other/it-hojo2026.html",
+     "https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/"
     ],
+    "text": "**結論:** 相談は無料でできる窓口が多くあります。費用は、ツール導入の契約・支払いをするときと、有料の申請代行を頼んだときに発生します。補助金は後払いです。\n\n**相談の費用**\n- よろず支援拠点、商工会議所・商工会、中小機構などの公的機関は無料で相談できます。\n- 認定経営革新等支援機関は、初回相談が無料のところが多いです。\n- IT導入支援事業者は、交付申請から報告まで無料で支援すると明記しているところがあります(富士フイルムなど)。\n\n**費用が発生するタイミング**\n1. **交付決定後に契約・発注・支払いをします。** 交付決定前に契約・発注・支払いをした経費は補助対象外です。順番を守る必要があります。\n2. **ツール費用は先に自己負担で全額支払います。** 事業完了報告と審査が終わってから補助金が振り込まれます(後払い)。\n3. **有料の代行サービスを頼んだ場合は別途費用がかかります。** 無料相談と有料の申請代行を分けて提示する事業者もあります。ただし、手数料の具体的な仕組み(着手金や成功報酬)は、今回の検索では確認できていません。契約前に見積もりで確認してください。\n\n**注意点**\n- 交付後に生産性や賃上げの目標を報告する義務があります。未達の場合は補助金の返還を求められることがあります。\n- 制度名は「デジタル化・AI導入補助金2026」(旧IT導入補助金)です。2026年3月30日から交付申請の受付が始まっています。\n- 中小企業庁の公式PDFとページ本文の取得は、権限の問題で読めていません。上記は検索結果の要約に基づくため、最終確認は公式資料でお願いします。\n\nSOURCE: https://www.ricoh.co.jp/solutions/special-theme/it-subsidy\nSOURCE: https://www.fujifilm.com/fb/ja/solutions/wide-variety/it-hojo\nSOURCE: https://sogyotecho.jp/digital-ai-hojyokin/\nSOURCE: https://hojyokin-portal.jp/columns/degital_ai_summary\nSOURCE: https://www.sme-support.co.jp/column/p8120/\nSOURCE: https://digital-ai-hojokin.jp/articles/digital-ai-hojokin-musho-soudan-2026/\nSOURCE: https://digital-ai-hojokin.jp/articles/ai-hojokin-2026-kanzen-guide/\nSOURCE: https://aixis.jp/articles/ai-subsidy\nSOURCE: https://hojokin-hub.ai/guides/ai-subsidy-guide\nSOURCE: https://www.uchida-it.co.jp/info/2026it/\nSOURCE: https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf\nSOURCE: https://www.pay-easy.jp/knowledge/2026/04/it-sien2026.html\nSOURCE: https://www.ntt.com/bizon/it-subsidy.html\nSOURCE: https://www.oro.com/zac/other/it-hojo2026.html\nSOURCE: https://r-subsidy.reload.co.jp/guides/guide-digital-ai-hojo-2026-howto/\n",
     "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AI導入補助金 福岡の相談窓口2026 採択率を上げる無料相談の使い方": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**結論:** 福岡では、公的な無料窓口(DX推進センター、よろず支援拠点、商工会議所)で計画を固めてから、実績のあるIT導入支援事業者に申請書を見てもらう流れが、採択率を上げる近道です。"
+   }
+  },
+  "AI導入補助金 福岡の会社ですが、大阪のサポート会社に遠隔で相談・依頼しても大丈夫ですか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい。国の「デジタル化・AI導入補助金2026（旧：IT導入補助金）」のことなら、福岡の会社が大阪のサポート会社に遠隔で相談・依頼することは、基本的に可能です。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "**結論: 大丈夫です。ただし、大阪の会社が「IT導入支援事業者」として事務局に登録されていることが条件です。**"
+   }
+  },
+  "AI導入補助金 不採択だった場合、福岡からでも再申請はできますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい、福岡からでも再申請できます。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**結論: 再申請できます。福岡であることが不利になる、または申請できなくなるという記載は、検索結果には見当たりませんでした。**"
+   }
+  },
+  "AI導入補助金の相談は無料でできますか？費用はいつ発生しますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "はい、無料で相談できます。"
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
    }
   }
  }
