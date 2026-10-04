@@ -1,114 +1,94 @@
 {
  "total": {
-  "portal": 186,
-  "media": 259,
-  "video": 33,
-  "review": 4,
-  "clinic": 73,
-  "public": 13,
-  "other": 13,
-  "maker": 43
+  "clinic": 71,
+  "video": 17,
+  "portal": 143,
+  "media": 176,
+  "public": 12,
+  "review": 5,
+  "maker": 24
  },
  "by_engine": {
-  "Gemini": {
-   "portal": 49,
-   "media": 85,
-   "video": 16,
-   "clinic": 18,
-   "public": 9,
-   "other": 13,
-   "review": 1,
-   "maker": 20
+  "ChatGPT": {
+   "clinic": 20,
+   "public": 7,
+   "portal": 3
   },
   "Claude": {
    "video": 17,
-   "portal": 137,
-   "media": 174,
-   "review": 3,
-   "clinic": 55,
-   "maker": 23,
-   "public": 4
+   "portal": 140,
+   "media": 176,
+   "review": 5,
+   "clinic": 51,
+   "maker": 24,
+   "public": 5
   }
  },
  "by_group": {
   "地域で探す": {
-   "portal": 71,
-   "media": 41,
-   "video": 8,
+   "clinic": 23,
+   "video": 4,
+   "portal": 54,
+   "media": 24,
+   "public": 7,
    "review": 2,
-   "clinic": 11,
-   "public": 1,
-   "other": 3,
    "maker": 1
   },
   "費用・料金": {
-   "media": 64,
-   "other": 4,
-   "portal": 17,
-   "video": 7,
-   "maker": 9,
-   "clinic": 10,
-   "public": 4
+   "portal": 13,
+   "media": 41,
+   "public": 2,
+   "video": 5,
+   "maker": 3,
+   "clinic": 8
   },
   "選び方・比較": {
-   "clinic": 20,
-   "media": 45,
-   "video": 8,
-   "other": 1,
-   "portal": 24,
-   "maker": 9,
-   "review": 2,
-   "public": 1
+   "clinic": 16,
+   "media": 35,
+   "video": 6,
+   "portal": 22,
+   "maker": 8,
+   "review": 2
   },
   "家族旅行・同行者の悩み": {
-   "media": 43,
-   "video": 8,
-   "portal": 49,
-   "other": 2,
-   "clinic": 20,
-   "maker": 6,
-   "public": 7
+   "portal": 36,
+   "media": 26,
+   "video": 2,
+   "maker": 3,
+   "clinic": 15,
+   "public": 3,
+   "review": 1
   },
   "キャンセル・予約の不安": {
-   "video": 2,
-   "media": 66,
-   "maker": 18,
-   "portal": 25,
-   "other": 3,
-   "clinic": 12
+   "maker": 9,
+   "media": 50,
+   "portal": 18,
+   "clinic": 9
   }
  },
  "answered": {
-  "Gemini": 30,
+  "ChatGPT": 7,
   "Claude": 50
  },
  "has_clinic": {
-  "Claude": 29,
-  "Gemini": 15
+  "ChatGPT": 7,
+  "Claude": 26
  },
  "sources": {
-  "Gemini": 211,
-  "Claude": 413
+  "ChatGPT": 30,
+  "Claude": 418
  },
  "portal_top": [
   [
-   "jalan.net",
-   18
-  ],
-  [
    "ikyu.com",
-   18
+   14
   ],
   [
-   "jtb.co.jp",
-   13
-  ],
-  [
-   "travel.rakuten.co.jp",
+   "jalan.net",
    11
   ],
   [
-   "jp.trip.com",
+   "jtb.co.jp",
    9
   ],
   [
@@ -116,30 +96,37 @@
    7
   ],
   [
-   "knt.co.jp",
+   "travel.rakuten.co.jp",
    6
   ],
   [
-   "onsen.nifty.com",
-   6
+   "knt.co.jp",
+   5
+  ],
+  [
+   "jp.trip.com",
+   5
   ],
   [
    "my-best.com",
    5
   ],
   [
-   "travel.gpoint.co.jp",
+   "onsen.nifty.com",
+   5
+  ],
+  [
+   "yukoyuko.net",
    5
   ]
  ],
  "industry": "hotel",
  "name": "ホテル・旅館",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
-  "Claude",
-  "Gemini"
+  "Claude"
  ],
  "groups": {
   "地域で探す": 10,
@@ -150,66 +137,59 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 80,
-   "portal": 66,
-   "media": 74,
-   "video": 26,
-   "review": 4,
-   "clinic": 44,
-   "public": 9,
-   "other": 13,
-   "maker": 22
+   "answers": 57,
+   "clinic": 33,
+   "video": 15,
+   "portal": 44,
+   "media": 45,
+   "public": 8,
+   "review": 5,
+   "maker": 16
   },
   "地域で探す": {
-   "answers": 19,
-   "portal": 18,
-   "media": 19,
-   "video": 5,
-   "review": 2,
+   "answers": 17,
    "clinic": 10,
-   "public": 1,
-   "other": 3,
+   "video": 3,
+   "portal": 11,
+   "media": 9,
+   "public": 3,
+   "review": 2,
    "maker": 1
   },
   "費用・料金": {
-   "answers": 17,
-   "video": 7,
-   "media": 17,
-   "portal": 12,
-   "other": 4,
-   "maker": 4,
-   "clinic": 5,
-   "public": 2
+   "answers": 10,
+   "public": 2,
+   "maker": 2,
+   "video": 5,
+   "media": 10,
+   "portal": 8,
+   "clinic": 3
   },
   "選び方・比較": {
-   "answers": 13,
-   "video": 7,
-   "media": 13,
-   "clinic": 10,
-   "other": 1,
-   "portal": 9,
-   "maker": 5,
-   "review": 2,
-   "public": 1
+   "answers": 10,
+   "video": 5,
+   "clinic": 8,
+   "media": 10,
+   "portal": 8,
+   "maker": 4,
+   "review": 2
   },
   "家族旅行・同行者の悩み": {
-   "answers": 16,
-   "video": 5,
-   "media": 12,
-   "portal": 14,
-   "other": 2,
-   "clinic": 9,
-   "public": 5,
-   "maker": 3
+   "answers": 10,
+   "clinic": 5,
+   "maker": 3,
+   "video": 2,
+   "media": 7,
+   "portal": 9,
+   "public": 3,
+   "review": 1
   },
   "キャンセル・予約の不安": {
-   "answers": 15,
-   "media": 13,
-   "portal": 13,
-   "video": 2,
-   "other": 3,
-   "maker": 9,
-   "clinic": 10
+   "answers": 10,
+   "media": 9,
+   "maker": 6,
+   "portal": 8,
+   "clinic": 7
   }
  }
 }

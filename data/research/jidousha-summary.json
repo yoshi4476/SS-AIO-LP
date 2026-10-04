@@ -133,7 +133,7 @@
  ],
  "industry": "jidousha",
  "name": "自動車整備・販売",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -150,29 +150,29 @@
  "per_answer": {
   "全体": {
    "answers": 82,
-   "media": 64,
    "clinic": 79,
+   "media": 64,
    "portal": 68,
-   "other": 9,
    "maker": 30,
+   "other": 9,
    "public": 14,
    "video": 4,
    "review": 4
   },
   "地域で探す": {
    "answers": 19,
-   "media": 10,
    "clinic": 18,
+   "media": 10,
    "portal": 18,
-   "other": 1,
    "maker": 4,
+   "other": 1,
    "public": 2
   },
   "車検": {
    "answers": 17,
+   "clinic": 17,
    "public": 5,
    "maker": 9,
-   "clinic": 17,
    "portal": 14,
    "media": 12,
    "other": 3,
@@ -180,19 +180,19 @@
   },
   "オイル交換": {
    "answers": 17,
-   "review": 4,
-   "other": 2,
-   "media": 15,
-   "maker": 10,
-   "clinic": 15,
    "portal": 12,
-   "public": 3,
-   "video": 1
+   "review": 4,
+   "media": 15,
+   "other": 2,
+   "clinic": 15,
+   "maker": 10,
+   "video": 1,
+   "public": 3
   },
   "修理": {
    "answers": 16,
-   "media": 14,
    "clinic": 16,
+   "media": 14,
    "portal": 14,
    "maker": 6,
    "public": 2,
@@ -201,8 +201,8 @@
   },
   "中古車": {
    "answers": 13,
-   "media": 13,
    "clinic": 13,
+   "media": 13,
    "portal": 10,
    "public": 2,
    "other": 2,

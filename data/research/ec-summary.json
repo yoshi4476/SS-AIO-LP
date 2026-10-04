@@ -1,15 +1,23 @@
 {
  "total": {
-  "other": 16,
-  "public": 60,
-  "media": 152,
+  "maker": 240,
+  "portal": 112,
+  "other": 17,
+  "public": 108,
+  "media": 155,
   "review": 3,
-  "portal": 95,
-  "clinic": 123,
-  "video": 13,
-  "maker": 165
+  "clinic": 140,
+  "video": 13
  },
  "by_engine": {
+  "ChatGPT": {
+   "maker": 75,
+   "portal": 17,
+   "clinic": 17,
+   "public": 48,
+   "media": 3,
+   "other": 1
+  },
   "Gemini": {
    "other": 13,
    "public": 12,
@@ -33,25 +41,26 @@
  },
  "by_group": {
   "地域で探す": {
+   "maker": 26,
+   "portal": 66,
    "other": 5,
-   "public": 6,
-   "media": 26,
+   "public": 8,
+   "media": 27,
    "review": 3,
-   "portal": 57,
-   "clinic": 46
+   "clinic": 54
   },
   "送料・配送": {
+   "maker": 69,
+   "public": 5,
+   "clinic": 33,
    "video": 5,
-   "clinic": 25,
-   "maker": 47,
    "media": 34,
    "portal": 6,
-   "public": 1,
-   "other": 2
+   "other": 3
   },
   "返品・交換": {
-   "public": 31,
-   "maker": 39,
+   "public": 51,
+   "maker": 48,
    "media": 28,
    "clinic": 24,
    "other": 7,
@@ -59,31 +68,35 @@
    "video": 3
   },
   "ギフト": {
-   "portal": 27,
-   "media": 27,
-   "clinic": 17,
+   "maker": 54,
+   "portal": 34,
+   "public": 1,
+   "media": 28,
+   "clinic": 18,
    "video": 1,
-   "maker": 36,
    "other": 2
   },
   "口コミ・評判": {
-   "media": 37,
+   "public": 43,
+   "media": 38,
    "clinic": 11,
-   "public": 22,
    "maker": 43,
    "video": 4,
-   "portal": 4
+   "portal": 5
   }
  },
  "answered": {
+  "ChatGPT": 50,
   "Gemini": 24,
   "Claude": 50
  },
  "has_clinic": {
   "Claude": 35,
+  "ChatGPT": 14,
   "Gemini": 17
  },
  "sources": {
+  "ChatGPT": 161,
   "Gemini": 182,
   "Claude": 445
  },
@@ -97,6 +110,10 @@
    6
   ],
   [
+   "rakuten.co.jp",
+   5
+  ],
+  [
    "giftmall.co.jp",
    5
   ],
@@ -106,10 +123,6 @@
   ],
   [
    "shopping.jtb.co.jp",
-   4
-  ],
-  [
-   "rakuten.co.jp",
    4
   ],
   [
@@ -125,13 +138,13 @@
    3
   ],
   [
-   "store.asoview.com",
+   "shop.keionet.com",
    3
   ]
  ],
  "industry": "ec",
  "name": "ネットショップ（EC）",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -147,62 +160,64 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 74,
+   "answers": 124,
+   "portal": 51,
+   "maker": 82,
+   "media": 62,
+   "public": 50,
    "review": 2,
-   "media": 59,
-   "other": 16,
-   "public": 25,
-   "portal": 37,
-   "clinic": 52,
-   "video": 13,
-   "maker": 49
+   "other": 17,
+   "clinic": 66,
+   "video": 13
   },
   "地域で探す": {
-   "answers": 19,
+   "answers": 29,
+   "portal": 25,
+   "maker": 8,
+   "media": 14,
+   "public": 7,
    "review": 2,
-   "media": 13,
    "other": 5,
-   "public": 5,
-   "portal": 18,
-   "clinic": 13
+   "clinic": 19
   },
   "送料・配送": {
-   "answers": 14,
-   "portal": 5,
-   "clinic": 9,
+   "answers": 24,
+   "public": 4,
+   "clinic": 16,
+   "maker": 24,
    "video": 5,
+   "portal": 5,
    "media": 13,
-   "maker": 14,
-   "public": 1,
-   "other": 2
+   "other": 3
   },
   "返品・交換": {
-   "answers": 16,
-   "maker": 13,
-   "clinic": 13,
+   "answers": 26,
+   "public": 22,
+   "maker": 19,
    "media": 12,
-   "public": 12,
+   "clinic": 13,
    "other": 7,
-   "portal": 1,
-   "video": 3
+   "video": 3,
+   "portal": 1
   },
   "ギフト": {
-   "answers": 13,
-   "portal": 10,
-   "clinic": 10,
-   "media": 9,
+   "answers": 23,
+   "portal": 16,
+   "maker": 20,
+   "public": 1,
    "video": 1,
-   "maker": 11,
+   "media": 10,
+   "clinic": 11,
    "other": 2
   },
   "口コミ・評判": {
-   "answers": 12,
-   "maker": 11,
+   "answers": 22,
+   "public": 16,
+   "media": 13,
    "clinic": 7,
-   "media": 12,
-   "public": 7,
-   "portal": 3,
-   "video": 4
+   "maker": 11,
+   "video": 4,
+   "portal": 4
   }
  }
 }

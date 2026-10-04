@@ -119,7 +119,7 @@
  ],
  "industry": "shashin",
  "name": "写真館・フォトスタジオ",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -138,8 +138,8 @@
    "answers": 86,
    "other": 12,
    "clinic": 86,
-   "portal": 52,
    "media": 44,
+   "portal": 52,
    "maker": 8,
    "video": 7,
    "public": 3
@@ -148,13 +148,13 @@
    "answers": 20,
    "other": 6,
    "clinic": 20,
-   "portal": 14,
-   "media": 7
+   "media": 7,
+   "portal": 14
   },
   "七五三・成人式の撮影": {
    "answers": 18,
-   "portal": 9,
    "clinic": 18,
+   "portal": 9,
    "media": 9,
    "maker": 1
   },
@@ -167,17 +167,17 @@
   },
   "料金・プラン": {
    "answers": 16,
-   "portal": 10,
    "clinic": 16,
-   "video": 4,
+   "portal": 10,
    "media": 11,
+   "video": 4,
    "other": 3
   },
   "データ納品・アルバム仕上げ": {
    "answers": 17,
-   "video": 3,
    "media": 11,
    "clinic": 17,
+   "video": 3,
    "portal": 9,
    "maker": 7,
    "public": 3,

@@ -132,7 +132,7 @@
  ],
  "industry": "fuyouhin",
  "name": "不用品回収・遺品整理",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -149,10 +149,10 @@
  "per_answer": {
   "全体": {
    "answers": 83,
-   "other": 14,
    "portal": 66,
-   "clinic": 79,
+   "other": 14,
    "media": 38,
+   "clinic": 79,
    "public": 21,
    "video": 11,
    "maker": 14,
@@ -160,10 +160,10 @@
   },
   "地域で探す": {
    "answers": 20,
-   "other": 4,
    "portal": 18,
-   "clinic": 18,
+   "other": 4,
    "media": 11,
+   "clinic": 18,
    "public": 6,
    "video": 2
   },
@@ -173,8 +173,8 @@
    "portal": 17,
    "maker": 6,
    "media": 8,
-   "other": 2,
    "public": 2,
+   "other": 2,
    "video": 1
   },
   "業者の選び方": {
@@ -190,21 +190,21 @@
   "遺品整理の進め方": {
    "answers": 14,
    "clinic": 14,
-   "maker": 6,
    "portal": 9,
+   "maker": 6,
    "other": 2,
-   "media": 4,
    "video": 4,
+   "media": 4,
    "public": 1
   },
   "買取と処分の判断": {
    "answers": 15,
-   "media": 10,
-   "portal": 11,
-   "video": 4,
-   "public": 2,
    "clinic": 15,
+   "public": 2,
+   "portal": 11,
    "other": 2,
+   "video": 4,
+   "media": 10,
    "maker": 1
   }
  }

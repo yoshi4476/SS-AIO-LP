@@ -134,7 +134,7 @@
  ],
  "industry": "yakkyoku",
  "name": "薬局",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -151,40 +151,40 @@
  "per_answer": {
   "全体": {
    "answers": 86,
-   "public": 51,
+   "media": 66,
    "other": 14,
    "video": 21,
+   "public": 51,
    "portal": 45,
-   "media": 66,
    "clinic": 62,
    "maker": 47,
    "review": 1
   },
   "地域で探す": {
    "answers": 19,
-   "public": 13,
+   "media": 13,
    "other": 6,
    "video": 3,
+   "public": 13,
    "portal": 11,
-   "media": 13,
    "clinic": 13,
    "maker": 2,
    "review": 1
   },
   "費用": {
    "answers": 20,
-   "portal": 9,
-   "public": 9,
    "clinic": 11,
+   "public": 9,
    "maker": 14,
+   "portal": 9,
    "media": 17,
    "video": 6,
    "other": 1
   },
   "選び方": {
    "answers": 16,
-   "portal": 14,
    "clinic": 13,
+   "portal": 14,
    "maker": 10,
    "media": 10,
    "other": 2,
@@ -193,20 +193,20 @@
   },
   "処方箋とオンライン服薬指導": {
    "answers": 14,
-   "portal": 9,
-   "media": 13,
    "clinic": 11,
-   "maker": 10,
+   "media": 13,
+   "portal": 9,
    "public": 8,
+   "maker": 10,
    "other": 2,
    "video": 2
   },
   "ジェネリックと在庫": {
    "answers": 17,
-   "media": 13,
    "public": 12,
-   "maker": 11,
+   "media": 13,
    "clinic": 14,
+   "maker": 11,
    "other": 3,
    "video": 8,
    "portal": 2

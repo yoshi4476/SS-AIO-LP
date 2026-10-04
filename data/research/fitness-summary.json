@@ -144,9 +144,9 @@
  "per_answer": {
   "全体": {
    "answers": 75,
-   "portal": 43,
    "maker": 9,
    "other": 9,
+   "portal": 43,
    "clinic": 74,
    "media": 58,
    "video": 11,
@@ -154,9 +154,9 @@
   },
   "地域で探す": {
    "answers": 20,
-   "portal": 17,
    "maker": 1,
    "other": 4,
+   "portal": 17,
    "clinic": 20,
    "media": 15,
    "video": 2,
@@ -164,8 +164,8 @@
   },
   "費用": {
    "answers": 15,
-   "portal": 11,
    "clinic": 14,
+   "portal": 11,
    "media": 13,
    "other": 1,
    "public": 1,
@@ -173,28 +173,28 @@
   },
   "選び方": {
    "answers": 13,
-   "portal": 7,
    "video": 4,
-   "media": 10,
+   "portal": 7,
    "clinic": 13,
-   "other": 2,
+   "media": 10,
    "maker": 5,
+   "other": 2,
    "public": 1
   },
   "ダイエット": {
    "answers": 16,
-   "media": 11,
    "clinic": 16,
+   "media": 11,
    "portal": 4,
    "maker": 3,
    "video": 1
   },
   "運動初心者の悩み": {
    "answers": 11,
-   "portal": 4,
+   "video": 3,
    "media": 9,
    "clinic": 11,
-   "video": 3,
+   "portal": 4,
    "public": 1,
    "other": 2
   }

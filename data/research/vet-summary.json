@@ -130,7 +130,7 @@
  ],
  "industry": "vet",
  "name": "動物病院",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -147,20 +147,20 @@
  "per_answer": {
   "全体": {
    "answers": 88,
-   "clinic": 79,
-   "portal": 47,
    "media": 57,
+   "clinic": 79,
    "other": 22,
+   "portal": 47,
    "public": 27,
    "maker": 35,
    "video": 11
   },
   "地域で探す": {
    "answers": 20,
-   "clinic": 18,
-   "portal": 15,
    "media": 7,
+   "clinic": 18,
    "other": 7,
+   "portal": 15,
    "public": 6,
    "maker": 4,
    "video": 2
@@ -171,8 +171,8 @@
    "maker": 8,
    "media": 16,
    "portal": 9,
-   "public": 1,
    "other": 4,
+   "public": 1,
    "video": 2
   },
   "選び方": {
@@ -188,17 +188,17 @@
   "予防とワクチン": {
    "answers": 18,
    "clinic": 15,
-   "maker": 7,
    "portal": 5,
+   "maker": 7,
    "media": 10,
-   "public": 9,
-   "other": 4
+   "other": 4,
+   "public": 9
   },
   "夜間救急と急な体調不良": {
    "answers": 17,
+   "media": 12,
    "clinic": 17,
    "maker": 12,
-   "media": 12,
    "other": 4,
    "portal": 10,
    "video": 2,

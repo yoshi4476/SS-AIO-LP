@@ -129,7 +129,7 @@
  ],
  "industry": "saas",
  "name": "IT・SaaS",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -146,29 +146,29 @@
  "per_answer": {
   "全体": {
    "answers": 84,
-   "public": 22,
-   "clinic": 44,
-   "portal": 57,
-   "other": 21,
    "maker": 54,
+   "public": 22,
+   "portal": 57,
+   "clinic": 44,
+   "other": 21,
    "media": 78,
    "video": 18
   },
   "地域で探す": {
    "answers": 20,
-   "public": 10,
-   "clinic": 19,
-   "portal": 18,
-   "other": 5,
    "maker": 9,
+   "public": 10,
+   "portal": 18,
+   "clinic": 19,
+   "other": 5,
    "media": 16,
    "video": 4
   },
   "料金・費用を調べる": {
    "answers": 18,
-   "other": 7,
-   "maker": 11,
    "portal": 11,
+   "maker": 11,
+   "other": 7,
    "media": 17,
    "clinic": 11,
    "video": 3
@@ -178,27 +178,27 @@
    "maker": 12,
    "media": 15,
    "public": 5,
-   "clinic": 5,
    "portal": 7,
+   "clinic": 5,
    "other": 2,
    "video": 4
   },
   "製品やサービスを比べる": {
    "answers": 17,
+   "portal": 15,
+   "maker": 14,
    "other": 6,
    "public": 7,
-   "maker": 14,
-   "portal": 15,
    "media": 16,
    "clinic": 6,
    "video": 4
   },
   "導入や運用の悩みを調べる": {
    "answers": 14,
-   "maker": 8,
-   "other": 1,
-   "media": 14,
    "portal": 6,
+   "maker": 8,
+   "media": 14,
+   "other": 1,
    "clinic": 3,
    "video": 3
   }

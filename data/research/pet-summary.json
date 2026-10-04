@@ -127,7 +127,7 @@
  ],
  "industry": "pet",
  "name": "ペットサロン・ペットホテル",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -144,9 +144,9 @@
  "per_answer": {
   "全体": {
    "answers": 86,
-   "media": 70,
-   "portal": 61,
    "clinic": 79,
+   "portal": 61,
+   "media": 70,
    "maker": 8,
    "other": 12,
    "video": 6,
@@ -154,16 +154,16 @@
   },
   "地域で探す": {
    "answers": 20,
-   "media": 12,
-   "portal": 16,
    "clinic": 14,
+   "portal": 16,
+   "media": 12,
    "maker": 2,
    "other": 2
   },
   "トリミング": {
    "answers": 14,
-   "media": 13,
    "clinic": 14,
+   "media": 13,
    "portal": 5,
    "other": 1,
    "maker": 2,
@@ -171,9 +171,9 @@
   },
   "ペットホテル": {
    "answers": 16,
-   "media": 14,
-   "portal": 15,
    "clinic": 16,
+   "portal": 15,
+   "media": 14,
    "maker": 1,
    "public": 1,
    "other": 1,
@@ -181,19 +181,19 @@
   },
   "犬種別・サイズ別": {
    "answers": 18,
-   "other": 4,
    "clinic": 18,
    "media": 17,
+   "other": 4,
    "portal": 11,
    "video": 2,
    "maker": 1
   },
   "予約・利用の悩み": {
    "answers": 18,
-   "other": 4,
-   "maker": 2,
    "clinic": 17,
    "portal": 14,
+   "other": 4,
+   "maker": 2,
    "media": 14,
    "video": 2,
    "public": 1

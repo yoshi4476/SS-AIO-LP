@@ -1,23 +1,30 @@
 {
  "total": {
-  "portal": 118,
-  "media": 41,
-  "other": 29,
-  "clinic": 407,
+  "clinic": 466,
+  "portal": 134,
+  "media": 45,
+  "other": 30,
   "video": 10,
-  "maker": 25,
-  "public": 48,
+  "public": 98,
+  "maker": 30,
   "review": 1
  },
  "by_engine": {
+  "ChatGPT": {
+   "clinic": 58,
+   "portal": 16,
+   "media": 4,
+   "public": 46,
+   "maker": 5
+  },
   "Gemini": {
    "portal": 39,
    "media": 10,
-   "other": 14,
-   "clinic": 137,
+   "other": 15,
+   "clinic": 138,
    "video": 6,
    "maker": 3,
-   "public": 9
+   "public": 13
   },
   "Claude": {
    "clinic": 270,
@@ -32,68 +39,76 @@
  },
  "by_group": {
   "地域で探す": {
-   "portal": 59,
-   "media": 6,
-   "other": 3,
-   "clinic": 39
+   "clinic": 53,
+   "portal": 69,
+   "media": 8,
+   "other": 3
   },
   "脱毛": {
-   "portal": 25,
-   "clinic": 109,
+   "clinic": 126,
+   "portal": 27,
    "video": 3,
    "media": 4,
+   "public": 13,
    "other": 1,
-   "maker": 1,
-   "public": 3
+   "maker": 1
   },
   "フェイシャル": {
-   "clinic": 135,
+   "media": 5,
+   "maker": 4,
+   "clinic": 146,
    "other": 2,
-   "portal": 11,
-   "media": 4,
-   "maker": 2,
-   "video": 1,
-   "public": 1
+   "portal": 13,
+   "public": 16,
+   "video": 1
   },
   "ジェルネイル": {
-   "clinic": 85,
-   "media": 23,
-   "maker": 15,
-   "portal": 13,
+   "clinic": 98,
+   "media": 24,
+   "maker": 17,
+   "portal": 14,
+   "public": 8,
    "video": 4,
    "review": 1,
    "other": 2
   },
   "料金・回数": {
-   "clinic": 39,
-   "portal": 10,
+   "clinic": 43,
+   "portal": 11,
    "media": 4,
+   "maker": 8,
+   "public": 61,
    "video": 2,
-   "public": 44,
-   "maker": 7,
-   "other": 21
+   "other": 22
   }
  },
  "answered": {
-  "Gemini": 33,
+  "ChatGPT": 47,
+  "Gemini": 34,
   "Claude": 50
  },
  "has_clinic": {
-  "Gemini": 30,
+  "ChatGPT": 32,
+  "Gemini": 31,
   "Claude": 44
  },
  "sources": {
-  "Gemini": 218,
+  "ChatGPT": 129,
+  "Gemini": 224,
   "Claude": 461
  },
  "portal_top": [
   [
    "beauty.hotpepper.jp",
-   23
+   30
   ],
   [
    "beauty.rakuten.co.jp",
-   9
+   10
+  ],
+  [
+   "stlassh.com",
+   8
   ],
   [
    "flalu.com",
@@ -112,10 +127,6 @@
    5
   ],
   [
-   "stlassh.com",
-   4
-  ],
-  [
    "my-best.com",
    4
   ],
@@ -124,13 +135,13 @@
    4
   ],
   [
-   "datsumo-navi.jp",
+   "beauty-park.jp",
    4
   ]
  ],
  "industry": "esthe",
  "name": "エステ・ネイルサロン",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -146,62 +157,63 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 83,
-   "portal": 52,
-   "clinic": 74,
-   "media": 30,
-   "other": 18,
+   "answers": 131,
+   "portal": 66,
+   "clinic": 107,
+   "media": 34,
+   "other": 19,
    "video": 10,
-   "maker": 17,
-   "public": 13,
+   "public": 38,
+   "maker": 21,
    "review": 1
   },
   "地域で探す": {
-   "answers": 18,
-   "portal": 18,
-   "clinic": 16,
-   "media": 5,
+   "answers": 28,
+   "portal": 26,
+   "clinic": 24,
+   "media": 7,
    "other": 3
   },
   "脱毛": {
-   "answers": 15,
-   "portal": 10,
-   "clinic": 14,
+   "answers": 25,
+   "clinic": 22,
    "video": 3,
+   "portal": 12,
    "media": 4,
+   "public": 7,
    "other": 1,
-   "maker": 1,
-   "public": 1
+   "maker": 1
   },
   "フェイシャル": {
-   "answers": 17,
-   "clinic": 17,
+   "answers": 27,
+   "media": 5,
+   "maker": 3,
+   "clinic": 23,
    "other": 2,
-   "portal": 9,
-   "maker": 2,
-   "media": 4,
-   "video": 1,
-   "public": 1
+   "portal": 11,
+   "public": 8,
+   "video": 1
   },
   "ジェルネイル": {
-   "answers": 17,
-   "clinic": 17,
-   "maker": 7,
-   "media": 13,
-   "portal": 10,
+   "answers": 27,
+   "clinic": 24,
+   "media": 14,
+   "maker": 9,
+   "portal": 11,
+   "public": 6,
    "video": 4,
    "review": 1,
    "other": 2
   },
   "料金・回数": {
-   "answers": 16,
-   "portal": 5,
-   "clinic": 10,
+   "answers": 24,
+   "clinic": 14,
+   "portal": 6,
    "media": 4,
+   "public": 17,
+   "maker": 8,
    "video": 2,
-   "maker": 7,
-   "public": 11,
-   "other": 10
+   "other": 11
   }
  }
 }

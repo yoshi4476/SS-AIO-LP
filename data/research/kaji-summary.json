@@ -129,7 +129,7 @@
  ],
  "industry": "kaji",
  "name": "家事代行・ハウスクリーニング",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -146,10 +146,10 @@
  "per_answer": {
   "全体": {
    "answers": 91,
-   "portal": 82,
-   "other": 27,
-   "media": 63,
    "maker": 39,
+   "other": 27,
+   "portal": 82,
+   "media": 63,
    "clinic": 85,
    "public": 11,
    "video": 4,
@@ -157,26 +157,26 @@
   },
   "地域で探す": {
    "answers": 20,
-   "portal": 20,
-   "other": 10,
-   "media": 14,
    "maker": 3,
+   "other": 10,
+   "portal": 20,
+   "media": 14,
    "clinic": 19
   },
   "エアコン掃除": {
    "answers": 18,
    "clinic": 17,
+   "maker": 12,
    "other": 3,
    "portal": 15,
-   "maker": 12,
    "media": 12,
    "public": 1
   },
   "家事代行": {
    "answers": 18,
    "clinic": 18,
-   "other": 7,
    "media": 13,
+   "other": 7,
    "portal": 16,
    "maker": 3,
    "video": 3
@@ -185,17 +185,17 @@
    "answers": 18,
    "clinic": 16,
    "maker": 15,
-   "portal": 15,
    "other": 4,
+   "portal": 15,
    "media": 10,
    "public": 3
   },
   "口コミと業者選び": {
    "answers": 17,
    "clinic": 15,
-   "portal": 16,
    "maker": 6,
    "media": 14,
+   "portal": 16,
    "other": 3,
    "video": 1,
    "public": 7,

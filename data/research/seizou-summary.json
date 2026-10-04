@@ -121,7 +121,7 @@
  ],
  "industry": "seizou",
  "name": "製造業（受託加工）",
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -139,9 +139,9 @@
   "全体": {
    "answers": 81,
    "maker": 81,
+   "portal": 50,
    "public": 13,
    "other": 10,
-   "portal": 50,
    "media": 28,
    "video": 2,
    "clinic": 4
@@ -149,16 +149,16 @@
   "地域で探す": {
    "answers": 20,
    "maker": 20,
+   "portal": 14,
    "public": 11,
    "other": 7,
-   "portal": 14,
    "media": 2
   },
   "費用・見積": {
    "answers": 17,
    "maker": 17,
-   "media": 10,
    "portal": 7,
+   "media": 10,
    "video": 1,
    "other": 1
   },
@@ -173,11 +173,11 @@
   "納期・ロット": {
    "answers": 16,
    "maker": 16,
-   "media": 6,
    "portal": 9,
+   "media": 6,
    "clinic": 2,
-   "public": 1,
-   "video": 1
+   "video": 1,
+   "public": 1
   },
   "材質・図面・品質": {
    "answers": 14,
