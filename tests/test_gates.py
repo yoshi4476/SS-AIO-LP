@@ -3383,6 +3383,10 @@ def test_detectors_do_not_misread_neighbors():
     check("問い合わせ照合: 問い合わせページの送信は数え、同時に出る印は足さない",
           LR.count_rows([("20260904", "form_submit", "/contact/", 2), ("20260904", "lead_capture", "/contact/", 1)]),
           {"2026-09-04": 2})
+    import live_check as LC_
+    page = ('<form class="lx-form" action="/lp/" method="get"><input name="url"></form>'
+            '<form class="form-panel" action="/api/lead" method="post"></form>')
+    check("本番巡回: 診断欄（GETで /lp/ へ移るだけ）に POST を送らない", LC_.post_actions(page), ["/api/lead"])
 
 
 def test_report_actions_close_the_loop():

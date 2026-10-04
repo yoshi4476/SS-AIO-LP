@@ -87,6 +87,17 @@ def tag_balance(html):
     return bad + [f"<{t}> が閉じられていない" for t in stack]
 
 
+def post_actions(html):
+    """POST で送るフォームの送信先だけ。method="get" の診断欄（URLを入れて /lp/?url= へ移るだけ）に
+    POST を送ると 405 が返り、生きている入口を「応答しない」と報告していた（2026-10-04）"""
+    acts = set()
+    for tag in re.findall(r"<form\b[^>]*>", html, re.I):
+        m = re.search(r'action="([^"]+)"', tag)
+        if m and re.search(r'method="post"', tag, re.I):
+            acts.add(m.group(1))
+    return sorted(acts)
+
+
 def check_page(url, html, status, final):
     out = []
     if status != 200:
@@ -121,7 +132,7 @@ def check_page(url, html, status, final):
     # GETで確かめてはいけない。受け口は onRequestPost だけを持つため、
     # GETは404を返す。生きている受け口を「無い」と誤って報告することになる。
     base = re.match(r"(https?://[^/]+)", url).group(1)
-    for act in sorted(set(re.findall(r'<form[^>]+action="([^"]+)"', html))):
+    for act in post_actions(html):
         if not act.startswith("/"):
             continue
         # 必須項目を空で送る。受け口が生きていれば入力エラー（400）が返り、
