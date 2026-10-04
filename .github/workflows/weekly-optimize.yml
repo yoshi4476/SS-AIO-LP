@@ -972,7 +972,8 @@ jobs:
             fi
             # 登録済みと確かめたURLの記録を残す（次の週はそこを検査しない。
             # 並行ジョブが同じ内容を push 済みなら、rebase で同じ変更として落ちる）
-            for p in data/index_cache.json; do if [ -e "$p" ]; then git add "$p"; fi; done
+            # 送った日（index_resend.json）も残す。残さないと14日の間隔が効かず、毎週同じURLを送る
+            for p in data/index_cache.json data/index_resend.json; do if [ -e "$p" ]; then git add "$p"; fi; done
             git diff --cached --quiet || {
               git commit -q -m "weekly: インデックス検査の記録 $(date '+%Y-%m-%d')"
               git pull --rebase -q origin "${GITHUB_REF_NAME}" || true

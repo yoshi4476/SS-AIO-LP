@@ -7,7 +7,8 @@ notify_indexing.py は ai-lab 専用（URLが固定）で、コーポレート�
 
 やること:
   1. URL検査APIで、sitemapの各URLが登録されているか確認
-  2. 未登録のURLを Indexing API で通知
+  2. 未登録（検出/クロール済み - インデックス未登録・Google に未認識）のURLを
+     Indexing API と IndexNow で通知。送った日を data/index_resend.json に残し、14日は送り直さない
   3. sitemap 自体も再送信（クロールのきっかけを増やす）
 
 使い方:
@@ -198,31 +199,104 @@ def _from_cache(idx, only):
             _publish(idx, d, ng, False)
 
 
+# 再送するのは「見つけたが登録していない（検出/クロール済み - インデックス未登録）」と
+# 「Google に知られていない」だけ。重複・noindex・404・転送は通知しても直らず、1日200件の枠を食うだけ。
+# 状態名は検査の言語（ja / en-US）で変わるので両方で見る
+RESEND_STATES = ("インデックス未登録", "currently not indexed",
+                 "Google に認識されていません", "unknown to Google")
+RESEND_DAYS = 14     # 毎週同じURLを送り続けない。送っても登録されないURLは中身の問題で、通知では直らない
+RESEND_MAX = 100     # 1回の上限。同じ日の notify_indexing（本日更新分）と合わせて Indexing API の1日200件に収める
+SENT = ROOT / "data" / "index_resend.json"
+
+
+def resend_plan(ng, sent, today, left=RESEND_MAX):
+    """[(url, 状態)] を「送る / 最近送った / 通知では直らない」に分ける。sent は {url: 'YYYY-MM-DD'}"""
+    from datetime import date, timedelta
+    cut = (date.fromisoformat(today) - timedelta(days=RESEND_DAYS)).isoformat()
+    go, recent, other = [], [], []
+    for u, c in ng:
+        if not any(s in c for s in RESEND_STATES):
+            other.append((u, c))
+        elif sent.get(u, "") > cut:
+            recent.append((u, c))
+        elif len(go) < left:
+            go.append((u, c))
+    return go, recent, other
+
+
+def _sent():
+    import json
+    try:
+        return json.loads(SENT.read_text(encoding="utf-8")) if SENT.is_file() else {}
+    except Exception:
+        return {}
+
+
+def _indexnow(urls):
+    """IndexNow（Bing・Copilot 系）にも同じURLを送る。鍵が配信されていないドメインは拒否されるので先に確かめる"""
+    import notify_indexnow as NI
+    key = NI.find_key(NI.load_env())
+    if not key or not urls:
+        return set()
+    ok = set()
+    for host, us in NI.by_host(urls).items():
+        if not NI.key_ok(host.split("//", 1)[-1], key):
+            print(f"    IndexNow: {host} に鍵ファイルが無いため送りません")
+            continue
+        try:
+            print(f"    IndexNow: {len(us)}件 → HTTP {NI.notify(us, key, host)}")
+            ok.update(us)
+        except Exception as e:
+            print(f"    IndexNow に失敗: {str(e)[:80]}")
+    return ok
+
+
+_left = [RESEND_MAX]
+
+
 def _publish(idx, d, ng, dry):
+    import json
+    from datetime import date
     site_url = f"https://{d}/"
+    sent, today = _sent(), date.today().isoformat()
+    todo, recent, other = resend_plan(ng, sent, today, _left[0])
     # 旧ドメインが正規ページに選ばれているものは、通知しても直らない。
     # 送り先の設定を変える必要があるため、分けて出す。
-    dup = [(u, c) for u, c in ng if "重複" in c]
-    todo = [(u, c) for u, c in ng if "重複" not in c]
+    dup = [(u, c) for u, c in other if "重複" in c or "Duplicate" in c]
     for u, c in todo:
         print(f"    {u.replace(f'https://{d}', ''):<46} {c[:30]}")
+    if recent:
+        print(f"    {RESEND_DAYS}日以内に送ったため見送り: {len(recent)}件")
+    for u, c in other:
+        if (u, c) not in dup:
+            print(f"    [通知では直りません] {u.replace(f'https://{d}', ''):<40} {c[:30]}")
     if dry:
         for u, c in dup:
             print(f"    [通知しても直りません] {u.replace(f'https://{d}', '')}")
         return
+    if not todo:
+        return
 
     ok = fail = 0
+    done = set()
     for u, _ in todo:
         try:
             idx.urlNotifications().publish(
                 body={"url": u, "type": "URL_UPDATED"}).execute()
             ok += 1
+            done.add(u)
         except Exception as e:
             fail += 1
             if fail == 1:
                 print(f"    Indexing API が使えません: {str(e)[:110]}")
         time.sleep(0.2)
     print(f"    通知: 成功 {ok}件 / 失敗 {fail}件")
+    done |= _indexnow([u for u, _ in todo])
+    _left[0] -= len(todo)
+    # 送れたURLだけ日付を残す（失敗したものは次の週にもう一度送る）
+    sent.update({u: today for u in done})
+    SENT.parent.mkdir(exist_ok=True)
+    SENT.write_text(json.dumps(sent, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
 
     # sitemap 再送信（クロールのきっかけを作る）
     try:
