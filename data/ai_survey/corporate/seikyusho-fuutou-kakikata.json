@@ -1,0 +1,223 @@
+{
+ "slug": "seikyusho-fuutou-kakikata",
+ "site": "corporate",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "請求書封筒の書き方 宛名・在中表記・差出人の3つの基本",
+  "請求書封筒書き方 請求書在中はスタンプでないといけませんか？",
+  "請求書封筒書き方 請求書封筒の宛名はどんな順番で書きますか？",
+  "請求書封筒書き方 請求書在中はどこに書けばいいですか？"
+ ],
+ "answers": {
+  "請求書封筒の書き方 宛名・在中表記・差出人の3つの基本": {
+   "ChatGPT": {
+    "urls": [
+     "https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata",
+     "https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-how-to-insert-an-envelope/",
+     "https://media.invoice.ne.jp/column/invoice-tips/invoice-envelope-insertion-direction.html"
+    ],
+    "text": "請求書の封筒は、**表面に「宛名」と「請求書在中」、裏面に「差出人」**を書くのが基本です。\n\n**1．宛名：会社名→部署名→担当者名の順に書く**\n\n表面に郵便番号・住所を書き、中央に会社名、部署名、担当者名を記載します。会社名は「（株）」などと省略せず、正式名称で書きましょう。敬称は次のように使い分け、**「御中」と「様」は併用しません**。\n\n- 会社・部署宛て：`株式会社○○　経理部 御中`\n- 担当者宛て：`株式会社○○　経理部　山田太郎 様`\n- 名前が不明の場合：`株式会社○○　経理部　ご担当者様`\n\n宛名は黒字で、住所や建物名に漏れがないように記載します。[参考：セブンセンシズ](https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata)、[弥生](https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-how-to-insert-an-envelope/)\n\n**2．在中表記：「請求書在中」を表面の隅に書く**\n\n中身が請求書だと分かるように、縦書きなら表面の左下、横書きなら右下に「請求書在中」と記載します。手書き・スタンプ・印刷のいずれでも構いません。青字で四角い枠を付けると目立ちます。\n\n文字色に厳密な決まりはありません。資料によって赤字も認められていますが、迷ったら青字を選ぶとよいでしょう。宛名や窓付き封筒の窓と重ならない位置に配置します。[参考：セブンセンシズ](https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata)、[弥生](https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-how-to-insert-an-envelope/)、[請求ABC](https://media.invoice.ne.jp/column/invoice-tips/invoice-envelope-insertion-direction.html)\n\n**3．差出人：裏面に郵便番号・住所・会社名・担当者名を書く**\n\n誰から届いたか分かり、配達できなかった場合に返送できるよう、差出人情報を記載します。表面の宛名より小さめの文字で書くと整います。\n\n- 裏面中央に継ぎ目がある封筒：継ぎ目の右側に郵便番号・住所、左側に会社名・担当者名\n- 継ぎ目がない封筒：裏面の左下にまとめて記載\n\n発送日を添えると、いつ送った書類かも伝わります。[参考：請求ABC](https://media.invoice.ne.jp/column/invoice-tips/invoice-envelope-insertion-direction.html)、[弥生](https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-how-to-insert-an-envelope/)\n\nSOURCE: https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata\nSOURCE: https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-how-to-insert-an-envelope/\nSOURCE: https://media.invoice.ne.jp/column/invoice-tips/invoice-envelope-insertion-direction.html\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.infomart.co.jp/seikyu/column/invoice-post",
+     "https://in.jobcan.ne.jp/knowledge/23665/",
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed/",
+     "https://go.invoy.jp/how-to-invoice/%E8%AB%8B%E6%B1%82%E6%9B%B8%E3%81%AE%E9%80%81%E4%BB%98%E3%81%AB%E3%80%8C%E8%AB%8B%E6%B1%82%E6%9B%B8%E5%9C%A8%E4%B8%AD%E3%80%8D%E3%81%AF%E5%BF%85%E8%A6%81%EF%BC%9F%E8%A8%98%E8%BC%89%E6%96%B9%E6%B3%95/",
+     "https://www.templex.jp/articles/seikyusho-fuutou",
+     "https://www.templex.jp/articles/fuutou-sashidashinin",
+     "https://s-flow.net/column/invoice-included/",
+     "https://tokyofuto.com/tips/822/",
+     "https://bill-one.com/knowledge/invoice-envelope/",
+     "https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-attach/"
+    ],
+    "text": "請求書封筒の基本は、表面に宛名と「請求書在中」、裏面に差出人と日付を書くことです。「請求書在中」の色だけは、検索結果の間で食い違っていました。\n\n## 3つの基本\n\n**1. 宛名(表面)**\n- 白無地の封筒を使います。A4の請求書を三つ折りにするなら長形3号(120×235mm)が定番です。\n- 郵便番号は右上に算用数字で書きます。住所は都道府県名から省略せず、ビル名や階数まで正確に書きます。\n- 会社や部署など組織宛ては「御中」、個人宛ては「様」を付けます。担当者名を書くときは「様」だけにします。「御中」と「様」を重ねると二重敬称になります。\n\n**2. 「請求書在中」(表面)**\n- 縦書きの封筒では左下、横書きでは右下に書きます。手書きでもスタンプでもかまいません。\n- 色は、検索結果で2通りの説明がありました。\n  - 1つ目の検索結果は「赤字」としています。\n  - 2つ目の検索結果は「赤は簡易書留と混同されるおそれがあるので避け、青が無難」としています。\n  - 原典ページを開いて確認しようとしましたが、権限が付与されず取得できませんでした。そのため、どちらが正しいかは確認できていません。迷う場合は青のスタンプなら無難です。\n\n**3. 差出人(裏面)**\n- 縦書きでは裏面の左下、横書きでは右下に、住所・会社名・氏名を書きます。ある解説は「中央より左側」と書いており、位置の表現にばらつきがあります。\n- 発送日は裏面の左上に書きます。\n- 宛名と差出人は黒インクで書きます。\n\n## 注意\n今回は検索結果の要約だけで回答しており、各ページの本文は確認していません。角印の押し方についても、検索結果に直接の記載はありませんでした。\n\nSOURCE: https://www.infomart.co.jp/seikyu/column/invoice-post\nSOURCE: https://in.jobcan.ne.jp/knowledge/23665/\nSOURCE: https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed/\nSOURCE: https://go.invoy.jp/how-to-invoice/%E8%AB%8B%E6%B1%82%E6%9B%B8%E3%81%AE%E9%80%81%E4%BB%98%E3%81%AB%E3%80%8C%E8%AB%8B%E6%B1%82%E6%9B%B8%E5%9C%A8%E4%B8%AD%E3%80%8D%E3%81%AF%E5%BF%85%E8%A6%81%EF%BC%9F%E8%A8%98%E8%BC%89%E6%96%B9%E6%B3%95/\nSOURCE: https://www.templex.jp/articles/seikyusho-fuutou\nSOURCE: https://www.templex.jp/articles/fuutou-sashidashinin\nSOURCE: https://s-flow.net/column/invoice-included/\nSOURCE: https://tokyofuto.com/tips/822/\nSOURCE: https://bill-one.com/knowledge/invoice-envelope/\nSOURCE: https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-attach/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "請求書を封筒で郵送する際の「宛名」「在中表記」「差出人」の3つの基本マナーと書き方について解説します。\n\n---\n\n### 1. 宛名（表面・中央）の基本\n\n宛名は封筒の顔となる重要な部分です。間違いのないよう正確に記載します。\n\n* **住所の記載**\n  * 都道府県名やマンション・ビル名、階数を省略せずに正しく書きます。\n  * 縦書き封筒の場合は数字を「漢数字（一、二、三）」で、横書き封筒の場合は「アラビア数字（1、2、3）」で書くのが一般的です。\n* **会社名・部署名**\n  * （株）などの略称は使わず、「株式会社」「合同会社」と正しく記載します。\n* **敬称の使い分け（「御中」と「様」）**\n  * **会社・部署宛て**：「**御中**」を使います。（例：〇〇株式会社 御中、〇〇株式会社 経理部 御中）\n  * **個人（担当者）宛て**：「**様**」を使います。（例：〇〇株式会社 経理部 〇〇様）\n  * ※「〇〇株式会社御中 〇〇様」のように**「御中」と「様」を二重で使わない**よう注意しましょう。\n\n---\n\n### 2. 在中表記（表面・左下）の基本\n\n封筒の中身が重要書類であることを一目で伝えるための表記です。\n\n* **記載内容**\n  * 一般的には「**請求書在中**」と記載します。（インボイスであることを強調したい場合は「適格請求書在中」や「インボイス在中」と書く場合もあります）\n* **記載する位置**\n  * 縦書き封筒：**表面の左下**\n  * 横書き封筒：**表面の右下**\n* **色と囲み線**\n  * **青または赤の文字**で書き、**四角い枠**で囲むのが一般的です（スタンプを使うのが便利です）。\n  * 取引先が他のDM（ダイレクトメール）と混ぜて捨ててしまったり、開封が遅れたりするのを防ぐ役割があります。\n\n---\n\n### 3. 差出人（裏面・左下）の基本\n\n万が一届かなかった場合の返送先であり、送信元を証明するために必ず記載します。\n\n* **記載項目**\n  * 郵便番号、住所、会社名（屋号）、氏名、電話番号\n* **記載する位置**\n  * 封筒裏面の**中央継ぎ目の左側**（または下部中央〜左寄り）に記載します。\n* **封かん（封字）のマナー**\n  * 請求書を入れて糊付けをした後、フタと本体の境目（中央）に「**〆**」や「**封**」などの封字を黒いペンで書きます。\n  * これは「途中で誰も開封していません」という証明になります。\n\n---\n\n### 配置イメージ（縦書き・長形3号封筒の場合）\n\n```text\n【表面】\n+------------------------------------+\n| 〒100-0000                         |\n|  東  〇                            |\n|  京  〇  株  〇                    |\n|  都  丁  式  〇                    |\n|  〇  目  会  営  〇  様            |\n|  〇  〇  社  業  〇                |\n|  区  番      部  〇                |\n|      地                            |\n|                                    |\n| [請求書在中]                       |\n+------------------------------------+\n\n【裏面】\n+------------------------------------+\n|                ( 〆 )              |\n|               +------+             |\n|               |      |             |\n|                                    |\n|         〒100-1111                 |\n|          〇〇県〇〇市1-2-3         |\n|          株式会社〇〇              |\n|          担当：〇〇 〇〇           |\n|          TEL: 03-0000-0000         |\n+------------------------------------+\n```\n\n### その他のチェックポイント\n* **封筒のサイズ**：A4サイズの請求書を三つ折りにして送る場合は**「長形3号（長3）」**の封筒が標準的です。\n* **同封物**：請求書を封筒に入れる際は、挨拶や請求内容を添えた**「送付状（添え状）」**を一番上に重ねて封入するのが丁寧なマナーとされています。",
+    "error": ""
+   }
+  },
+  "請求書封筒書き方 請求書在中はスタンプでないといけませんか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-attach/"
+    ],
+    "text": "**いいえ、「請求書在中」はスタンプでなくても大丈夫です。手書きでも、封筒に印刷しても問題ありません。** スタンプは、書く手間を減らすための方法です。[弥生の公式解説](https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-attach/)\n\n手書きする場合は、次のようにすると見やすくなります。\n\n- **縦書きの封筒**：表面の左下に、縦書きで「請求書在中」\n- **横書きの封筒**：表面の右下に、横書きで「請求書在中」\n- **色・囲み方**：色に厳密な決まりはありませんが、青色で書き、定規で四角い枠を付けると目立ちます。[書き方・位置の解説](https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-attach/)\n\nスタンプを持っていなければ、上記の方法で丁寧に手書きすれば十分です。\n\nSOURCE: https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-attach/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-included/",
+     "https://bakuraku.jp/knowledge/knowledge-invoice/article_2/",
+     "https://biz.moneyforward.com/invoice/basic/49922/",
+     "https://media.invoice.ne.jp/column/invoice-tips/Invoice_enclosed.html",
+     "https://bill-one.com/knowledge/invoice-enclosed/",
+     "https://hcm-jinjer.com/blog/keihiseisan/receipt-present/",
+     "https://dm.nexway.co.jp/blog/27",
+     "https://media.invoice.ne.jp/column/invoice-tips/invoice-enclosed.html",
+     "https://www.wingarc.com/chohyo-navi/invoice-envelope.html",
+     "https://www.rakurakumeisai.jp/column/invoice/200401.php",
+     "https://www.keihi.com/column/24868/",
+     "https://www.inkart.jp/blog/envelope-printing_invoice-enclosed/",
+     "https://mailmate.jp/ja/blog/invoices-can-be-handwritten"
+    ],
+    "text": "「請求書在中」はスタンプでなくても構いません。手書きでもスタンプでもどちらでも問題ありません。\n\n- **法的義務はありません。** 郵便法や信書便法で義務づけられた表記ではなく、ビジネスマナーとして定着した慣習です。\n- **手書きでもマナー違反にはなりません。** 読みやすい楷書で丁寧に書けば、かえって心がこもっていると受け取られることもあります。定規で枠線を引くのも推奨されています。\n- **使い分けの目安:**\n  - 月数件程度なら手書きが現実的で、個人事業主や小規模企業では一般的です。\n  - 発送件数が多い、手書きに自信がない場合は、スタンプや事前印刷が効率的です。書式も統一できます。\n- **記載位置:**\n  - 縦書き封筒は表面の左下に書きます。\n  - 横書き封筒は表面の右下に書きます。\n  - 長形3号封筒(A4三つ折り用)なら、宛名の下に2〜3cmほど余白を取り、横書きで書くと目立ちます。\n\nなお、色や枠の書き方など細かい点は各ページで説明されていますが、今回は詳しく確認していません。\n\nSOURCE: https://www.freee.co.jp/kb/kb-invoice/invoice-included/\nSOURCE: https://bakuraku.jp/knowledge/knowledge-invoice/article_2/\nSOURCE: https://biz.moneyforward.com/invoice/basic/49922/\nSOURCE: https://media.invoice.ne.jp/column/invoice-tips/Invoice_enclosed.html\nSOURCE: https://bill-one.com/knowledge/invoice-enclosed/\nSOURCE: https://hcm-jinjer.com/blog/keihiseisan/receipt-present/\nSOURCE: https://dm.nexway.co.jp/blog/27\nSOURCE: https://media.invoice.ne.jp/column/invoice-tips/invoice-enclosed.html\nSOURCE: https://www.wingarc.com/chohyo-navi/invoice-envelope.html\nSOURCE: https://www.rakurakumeisai.jp/column/invoice/200401.php\nSOURCE: https://www.keihi.com/column/24868/\nSOURCE: https://www.inkart.jp/blog/envelope-printing_invoice-enclosed/\nSOURCE: https://mailmate.jp/ja/blog/invoices-can-be-handwritten\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-attach/",
+     "https://www.makeleaps.com/resources/articles/invoice-enclosed/",
+     "https://in.jobcan.ne.jp/knowledge/23665/",
+     "https://dm.nexway.co.jp/blog/27",
+     "https://www.rakus.co.jp/rakurakucloud/meisai/column/invoice/200401.php",
+     "https://www.kaunet.com/kaunet/column/000285.html",
+     "https://www.futo-tatujin.com/blog/?p=1273",
+     "https://media.invoice.ne.jp/column/invoice-tips/Invoice_manual.html",
+     "https://bill-one.com/knowledge/invoice-enclosed/",
+     "https://dm.nexway.co.jp/blog/27",
+     "https://genai-ai.co.jp/ai-kanri/blog/cc-zaichu-hyoki/"
+    ],
+    "text": "結論から言うと、**「請求書在中」はスタンプでなくても問題ありません**。手書きやパソコンでの直接印刷、シールの貼り付けでもマナー上まったく差し支えありません。\n\n---\n\n### なぜ「請求書在中」と書くの？\n企業には毎日多くのダイレクトメールや各種書類が届きます。「請求書在中」と記載しておくことで、**相手が開封する前に「重要な請求書が入っている」と一目で判断でき、誤廃棄や確認・支払いの遅れを防ぐ**ことができます。\n\n---\n\n### 方法別のポイントとマナー\n\n#### 1. 手書きで書く場合\n件数が少ない場合などは手書きで十分対応可能です。\n* **色**：**青色**または**赤色**（青色が一般的ですが、赤色でも問題ありません）。\n* **枠線**：文字の周りを**四角い枠線で囲む**と目立ちやすくなります。\n* **筆記具**：油性ボールペンやサインペンを使用（水性ペンや消せるペン、鉛筆はNG）。\n\n#### 2. 印刷やシールを使う場合\n* 封筒のテンプレートを使って「請求書在中」もまとめて印刷したり、市販の「請求書在中シール」を貼るのもおすすめです。\n\n#### 3. スタンプを使うメリット（使われる理由）\n* 発送枚数が多い場合、作業時間を短縮できる。\n* 手書きの書き損じを防ぎ、誰が書いてもきれい・丁寧に見える。\n\n---\n\n### 封筒への書き方・記載位置の基本\n\n#### 【表面の配置】\n* **縦書き封筒（長形3号など）**\n  * **位置**：表面の**左下**に縦書きで記載します。\n* **横書き封筒**\n  * **位置**：表面の**右下**（または左下）に横書きで記載します。\n\n#### 【宛名と敬称の注意点】\n* 会社名や部署宛て：「◯◯株式会社 御中」または「◯◯部 御中」\n* 担当者宛て：「◯◯株式会社 〇〇部 〇〇様」\n  * ※「御中」と「様」を併用しないよう注意（例：×◯◯株式会社御中 〇〇様）\n\n#### 【裏面の記載】\n* 自社の「郵便番号・住所・会社名・担当者名」を記載します。\n* 封を閉じた後は、結び目に「〆」などの封字を書くのがマナーです。",
+    "error": ""
+   }
+  },
+  "請求書封筒書き方 請求書封筒の宛名はどんな順番で書きますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://biz.moneyforward.com/invoice/basic/61152/",
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed"
+    ],
+    "text": "請求書を送る封筒は、**郵便番号 → 住所 → 会社名 → 部署名 → 役職名（ある場合）→ 担当者名＋敬称**の順で書きます。会社名は「（株）」などと略さず、正式名称を記載します。[マネーフォワードの解説](https://biz.moneyforward.com/invoice/basic/61152/)\n\n例えば、担当者宛てなら次のように書きます。\n\n```text\n〒123-4567\n東京都○○区○○1-2-3 ○○ビル5階\n株式会社○○\n経理部\n部長 山田太郎 様\n```\n\n敬称は、**個人宛てなら「様」、会社・部署宛てなら「御中」**です。部署宛ての場合は「株式会社○○ 経理部 御中」とし、担当者名を書く場合は部署名に「御中」を付けません。「御中」と「様」は併用しないのが基本です。[freeeの解説](https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed)\n\nSOURCE: https://biz.moneyforward.com/invoice/basic/61152/\nSOURCE: https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.infomart.co.jp/seikyu/column/invoice-post",
+     "https://biz.moneyforward.com/invoice/basic/58361/",
+     "https://www.manegy.com/news/detail/15186/",
+     "https://dm.nexway.co.jp/blog/16",
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed/",
+     "https://www.makeleaps.com/resources/articles/invoice-envelope/",
+     "https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-recipient/",
+     "https://tokyofuto.com/tips/822/"
+    ],
+    "text": "請求書封筒の宛名は、次の順番で書きます。\n\n1. **郵便番号**: 右上に算用数字で書きます。\n2. **住所**: 都道府県名から省略せずに書きます。\n3. **会社名**: 「(株)」と略さず、「株式会社」と正式名称で書きます。\n4. **部署名・役職名・担当者名**: 会社名の次に、この順で書きます。\n\n敬称は宛先によって使い分けます。会社や部署など組織宛ては「御中」、個人宛ては「様」です。\n\nそのほか、表面の左下に赤字で「請求書在中」と書くのが一般的です。裏面には、中央より左側に差出人の住所・会社名・氏名を書き、左上に郵送日を書きます。\n\nこの回答は検索結果の要約に基づいていて、各ページ本文までは開いていません。\n\nSOURCE: https://www.infomart.co.jp/seikyu/column/invoice-post\nSOURCE: https://biz.moneyforward.com/invoice/basic/58361/\nSOURCE: https://www.manegy.com/news/detail/15186/\nSOURCE: https://dm.nexway.co.jp/blog/16\nSOURCE: https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed/\nSOURCE: https://www.makeleaps.com/resources/articles/invoice-envelope/\nSOURCE: https://www.yayoi-kk.co.jp/seikyusho/oyakudachi/invoice-recipient/\nSOURCE: https://tokyofuto.com/tips/822/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://in.jobcan.ne.jp/knowledge/23665/",
+     "https://www.insatsu-ichiba.co.jp/blog/post/1881",
+     "https://biz.moneyforward.com/invoice/basic/49916/",
+     "https://www.manegy.com/news/detail/15186/",
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed/"
+    ],
+    "text": "請求書を入れる封筒の宛名は、**「郵便番号」「住所」「会社名」「部署名」「役職名」「担当者氏名＋敬称」**の順番で記載します。\n\n縦書き・横書きでの具体的な順番と配置、注意すべきポイントを分かりやすく解説します。\n\n---\n\n### 宛名に書く要素の順番\n\n1. **郵便番号**\n2. **住所**（都道府県・市区町村・番地・ビル名や階数まで正確に）\n3. **会社名（法人格）**（「株式会社」などは省略せず正確に）\n4. **部署名**（経理部、営業部など）\n5. **役職名**（部長、課長など）\n6. **担当者氏名 ＋ 敬称**（「様」など）\n\n---\n\n### 1. 縦書き（和封筒など）の場合の配置順\n\n縦書きは**右から左へ**向かって配置します。\n\n* **右端**：郵便番号（枠があれば枠内に、枠がなければ右上に「〒123-4567」）\n* **右側**：住所（郵便番号より1文字分下げて書き始め、漢数字を使用するのが一般的）\n* **中央やや右**：会社名（住所よりさらに少し下げ、住所より少し大きめの文字で記載）\n* **中央の左寄り**：部署名・役職名\n* **中央（一番目立つ位置）**：担当者氏名 ＋ **敬称（様）**（全体の文字の中で一番大きく書く）\n* **左下**：添え字として**「請求書在中」**と記載（青や赤のスタンプ、または手書きで四角く囲む）\n\n---\n\n### 2. 横書き（洋封筒など）の場合の配置順\n\n横書きは**上から下へ**向かって配置します。\n\n* **1行目（左上）**：郵便番号（「〒123-4567」）\n* **2行目**：住所（算用数字「1-2-3」を使用するのが一般的）\n* **3行目**：会社名（住所の1文字目と揃えて書く）\n* **4行目**：部署名・役職名\n* **5行目（中央寄りに大きく）**：担当者氏名 ＋ **敬称（様）**\n* **右下（または左下）**：**「請求書在中」**と記載\n\n---\n\n### 宛先のパターンと「敬称」の使い分け\n\n送る相手によって、一番最後の敬称（御中 / 様）を使い分ける必要があります。\n\n| 宛先のパターン | 書き方の例 | 敬称 |\n| :--- | :--- | :--- |\n| **担当者が分かっている場合** | 〇〇株式会社 営業部 部長 〇〇 太郎 **様** | **様** |\n| **部署宛て（担当者名が不明）** | 〇〇株式会社 経理部 **御中** | **御中** |\n| **担当者名が不明な場合** | 〇〇株式会社 経理ご担当者 **様** | **様** |\n| **会社宛て** | 〇〇株式会社 **御中** | **御中** |\n\n※**「御中」と「様」の二重使用（例：〇〇株式会社 御中 〇〇様）はNG**です。どちらか一方のみを使用してください。\n\n---\n\n### 書き方のマナー・ポイント\n\n* **「（株）」のように略さない**\n  「（株）」や「（有）」と略すのはマナー違反です。必ず「株式会社」「有限会社」と正式名称で書きましょう。前株・後株も間違いがないか確認します。\n* **ビル名や階数は省略しない**\n  郵送事故や不達を防ぐため、ビル名や階数は省略せず正しく書きます。\n* **「請求書在中」の記載位置**\n  一目で請求書と判別できるようにするために「請求書在中」と記載します。縦書きなら**左下**、横書きなら**右下（または左下）**に書くのが一般的です。",
+    "error": ""
+   }
+  },
+  "請求書封筒書き方 請求書在中はどこに書けばいいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed",
+     "https://www.makeleaps.jp/resources/articles/invoice-enclosed/"
+    ],
+    "text": "「請求書在中」は、**封筒の表面（宛名を書く面）の下の隅**に書くのが一般的です。\n\n- **宛名が縦書きの場合：左下に縦書き**\n- **宛名が横書きの場合：右下に横書き**\n\n宛名と重ならないよう、余白に見やすく記載してください。[freeeの解説](https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed)\n\n手書きでもスタンプでも構いません。手書きなら、文字を四角い枠で囲むと目立ち、請求書が入っていることが伝わりやすくなります。[MakeLeapsの解説](https://www.makeleaps.jp/resources/articles/invoice-enclosed/)\n\nSOURCE: https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed\nSOURCE: https://www.makeleaps.jp/resources/articles/invoice-enclosed/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-included/",
+     "https://bakuraku.jp/knowledge/knowledge-invoice/article_2/",
+     "https://bill-one.com/knowledge/invoice-enclosed/",
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed/",
+     "https://media.invoice.ne.jp/column/invoice-tips/Invoice_manual.html",
+     "https://www.keihi.com/column/24868/",
+     "https://go.invoy.jp/how-to-invoice/%E8%AB%8B%E6%B1%82%E6%9B%B8%E3%81%AE%E9%80%81%E4%BB%98%E3%81%AB%E3%80%8C%E8%AB%8B%E6%B1%82%E6%9B%B8%E5%9C%A8%E4%B8%AD%E3%80%8D%E3%81%AF%E5%BF%85%E8%A6%81%EF%BC%9F%E8%A8%98%E8%BC%89%E6%96%B9%E6%B3%95/",
+     "https://s-flow.net/column/invoice-included/",
+     "https://nani-kore.net/archives/5538.html"
+    ],
+    "text": "「請求書在中」は、封筒の表面の宛名の近くに書きます。\n\n- **縦書き封筒**: 表面の左下に書きます。\n- **横書き封筒**: 表面の右下に書きます。\n- **色と見た目**: 青系の色で、読みやすく書くのが無難です。文字を長方形の枠で囲むと丁寧な印象になります。\n- **書き方**: 手書きでもスタンプでも構いません。「請求書在中」と印字済みの市販封筒を使う方法もあります。\n- **法的義務**: 記載する義務はありません。ただ、受付担当者が開封前に請求書だと分かるため、ビジネスマナーとして定着しています。\n\nこの内容は検索結果の要約にもとづいています。ページ本文の取得は権限がなく拒否されたので、各ページの全文は確認していません。\n\nSOURCE: https://www.freee.co.jp/kb/kb-invoice/invoice-included/\nSOURCE: https://bakuraku.jp/knowledge/knowledge-invoice/article_2/\nSOURCE: https://bill-one.com/knowledge/invoice-enclosed/\nSOURCE: https://www.freee.co.jp/kb/kb-invoice/invoice-enclosed/\nSOURCE: https://media.invoice.ne.jp/column/invoice-tips/Invoice_manual.html\nSOURCE: https://www.keihi.com/column/24868/\nSOURCE: https://go.invoy.jp/how-to-invoice/%E8%AB%8B%E6%B1%82%E6%9B%B8%E3%81%AE%E9%80%81%E4%BB%98%E3%81%AB%E3%80%8C%E8%AB%8B%E6%B1%82%E6%9B%B8%E5%9C%A8%E4%B8%AD%E3%80%8D%E3%81%AF%E5%BF%85%E8%A6%81%EF%BC%9F%E8%A8%98%E8%BC%89%E6%96%B9%E6%B3%95/\nSOURCE: https://s-flow.net/column/invoice-included/\nSOURCE: https://nani-kore.net/archives/5538.html\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://bill-one.com/knowledge/invoice-enclosed/",
+     "https://www.freee.co.jp/kb/kb-invoice/invoice-included/",
+     "https://go.invoy.jp/how-to-invoice/%E8%AB%8B%E6%B1%82%E6%9B%B8%E3%81%AE%E9%80%81%E4%BB%98%E3%81%AB%E3%80%8C%E8%AB%8B%E6%B1%82%E6%9B%B8%E5%9C%A8%E4%B8%AD%E3%80%8D%E3%81%AF%E5%BF%85%E8%A6%81%EF%BC%9F%E8%A8%98%E8%BC%89%E6%96%B9%E6%B3%95/",
+     "https://kaizen-penguin.com/invoice-envelope/"
+    ],
+    "text": "「請求書在中」は、**封筒の向き（縦書きか横書きか）**によって書く位置が異なります。\n\n---\n\n### 1. 記載する位置\n\n* **縦書き封筒（長形封筒など）の場合**\n  * **表面の左下**に縦書きで記載します。\n  * 切手（右上）の対角線上、宛名よりも下に配置する形になります。\n\n* **横書き封筒（洋封筒など）の場合**\n  * **表面の右下**に横書きで記載します。\n  * 切手（左上）の反対側、宛名の下付近になります。\n\n※宛名や住所の文字と重ならないよう、少し離した位置に書いてください。\n\n---\n\n### 2. 書き方・装飾のマナー\n\n* **色**：**青（紺）** または **赤** が一般的です。\n  * 黒字でもマナー違反ではありませんが、他の文字に紛れないよう目立つ色（特にビジネスでは落ち着いた青・紺）がよく使われます。\n* **枠線**：文字の周りを四角い枠線で囲むと、より目立ちやすくなります。\n* **記入方法**：手書きのほか、市販のスタンプ（判子）や印刷でも問題ありません。\n\n---\n\n### 補足：なぜ書くのか？\n「請求書在中」と記載しておくことで、相手企業の担当者が他の郵便物（DMなど）と混ぜてしまったり、開封が遅れて入金遅延が発生したりするのを防ぐ役割があります。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "請求書封筒の書き方 宛名・在中表記・差出人の3つの基本": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "請求書の封筒は、**表面に「宛名」と「請求書在中」、裏面に「差出人」**を書くのが基本です。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "請求書封筒の基本は、表面に宛名と「請求書在中」、裏面に差出人と日付を書くことです。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "請求書を封筒で郵送する際の「宛名」「在中表記」「差出人」の3つの基本マナーと書き方について解説します。"
+   }
+  },
+  "請求書封筒書き方 請求書在中はスタンプでないといけませんか？": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "**いいえ、「請求書在中」はスタンプでなくても大丈夫です。手書きでも、封筒に印刷しても問題ありません。**"
+   },
+   "Claude": {
+    "label": "no",
+    "quote": "「請求書在中」はスタンプでなくても構いません。手書きでもスタンプでもどちらでも問題ありません。"
+   },
+   "Gemini": {
+    "label": "no",
+    "quote": "結論から言うと、**「請求書在中」はスタンプでなくても問題ありません**。"
+   }
+  },
+  "請求書封筒書き方 請求書封筒の宛名はどんな順番で書きますか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "請求書を送る封筒は、**郵便番号 → 住所 → 会社名 → 部署名 → 役職名（ある場合）→ 担当者名＋敬称**の順で書きます。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "請求書封筒の宛名は、次の順番で書きます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "請求書を入れる封筒の宛名は、**「郵便番号」「住所」「会社名」「部署名」「役職名」「担当者氏名＋敬称」**の順番で記載します。"
+   }
+  },
+  "請求書封筒書き方 請求書在中はどこに書けばいいですか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "「請求書在中」は、**封筒の表面（宛名を書く面）の下の隅**に書くのが一般的です。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "「請求書在中」は、封筒の表面の宛名の近くに書きます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "「請求書在中」は、**封筒の向き（縦書きか横書きか）**によって書く位置が異なります。"
+   }
+  }
+ }
+}

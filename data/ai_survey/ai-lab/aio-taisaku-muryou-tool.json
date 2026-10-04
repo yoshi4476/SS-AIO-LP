@@ -1,0 +1,239 @@
+{
+ "slug": "aio-taisaku-muryou-tool",
+ "site": "ai-lab",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "AIO対策の無料ツール6選 計測・診断と安い有料ツールの選び方",
+  "aio対策 AIO対策は無料ツールだけでできますか？",
+  "aio対策 構造化データのエラーは無料で確認できますか？",
+  "aio対策 無料のAIOツールで定点観測まで自動化できますか？"
+ ],
+ "answers": {
+  "AIO対策の無料ツール6選 計測・診断と安い有料ツールの選び方": {
+   "ChatGPT": {
+    "urls": [
+     "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+     "https://developers.google.com/search/docs/appearance/ai-features?hl=ja",
+     "https://support.google.com/analytics/answer/12923437?co=GENIE.Platform%3DDesktop&hl=en",
+     "https://developers.google.com/search/docs/appearance/structured-data",
+     "https://schema.org/docs/validator.html",
+     "https://support.google.com/webmasters/answer/6062598?hl=en-EN",
+     "https://otterly.ai/pricing",
+     "https://rankscale.ai/pricing"
+    ],
+    "text": "**AIO対策は、無料ツールで「AIでの言及・引用」「サイトへの流入」「技術的な問題」を確認し、継続計測の手間が増えたら有料化する進め方がおすすめです。** ここではAIOを、GoogleのAIによる概要や生成AI検索で、自社の情報が見つかりやすくなるための取り組みとして扱います。\n\nGoogleは、AIによる概要・AIモードへの掲載に特別な最適化や専用の構造化データは不要と説明しています。まずは通常のSEO、クロール可能な状態、信頼できる情報を整えることが基本です。[Google公式ガイド](https://developers.google.com/search/docs/appearance/ai-features?hl=ja)\n\n無料で使える計測・診断ツール6選は、次のとおりです。なお、6番はSearch Console内の機能です。\n\n| ツール・方法 | 確認できること | 使い方と限界 |\n|---|---|---|\n| **1. Google Search Console** | 検索での表示・クリック、インデックス登録状況 | 重要ページの検索実績とURL検査を確認。AIによる概要・AIモードの実績は「ウェブ」の全体データに含まれるため、その数字だけでAI引用回数を判断しない |\n| **2. Google Analytics 4（GA4）** | AIサービスからの流入と、その後の問い合わせ・購入 | 「トラフィック獲得」のセッション参照元／メディアを確認。参照元を識別できる流入が対象で、クリックされない引用は計測できない |\n| **3. AIチャットへの直接質問** | 自社名の言及、自社URLの引用、競合の紹介状況 | Gemini・Perplexityなどの無料利用枠で顧客の質問を試す。同じ質問でも回答が変わるため、日時・質問文・引用URLを記録する |\n| **4. Googleリッチリザルトテスト** | Googleのリッチリザルトに関係する構造化データの問題 | URLやコードを入力して検証。AIから引用されやすいかを採点するツールではない |\n| **5. Schema Markup Validator** | Schema.orgの構造化データと構文エラー | Google固有の表示要件とは別に、Schema.org全般を検証する |\n| **6. Search Consoleのrobots.txtレポート** | Googleが取得したrobots.txtの状態、取得時刻、警告・エラー | 意図しないクロール制限を調べる入口。各AIクローラーの実際のアクセス状況は、設定内容やサーバーログも確認する必要がある |\n\n検索実績とGA4の計測範囲は[GoogleのAI機能ガイド](https://developers.google.com/search/docs/appearance/ai-features?hl=ja)、[GA4公式ヘルプ](https://support.google.com/analytics/answer/12923437?co=GENIE.Platform%3DDesktop&hl=en)、構造化データ検証の違いは[Google公式説明](https://developers.google.com/search/docs/appearance/structured-data)、[Schema.org公式説明](https://schema.org/docs/validator.html)、robots.txtの機能は[Search Console公式ヘルプ](https://support.google.com/webmasters/answer/6062598?hl=en-EN)で確認できます。AIへの直接質問は、[無料ツールの解説記事](https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/)でも紹介されています。\n\n**安い有料ツールは、月額だけでなく「必要な質問を、必要なAIで、何回計測できるか」で選びます。** 2026年10月4日の確認時点で、少数の質問を継続監視する候補は次のとおりです。\n\n| 候補 | 公式ページの料金・条件 | 選ぶ際のポイント |\n|---|---|---|\n| **OtterlyAI Lite** | 月額29米ドル、15プロンプト、日次計測 | ChatGPT・Google AI Overviews・Perplexity・Copilotが対象。Gemini・AI Mode・Claudeは追加料金なので、対象AI込みの総額で比較する |\n| **Rankscale Pro** | 月額99米ドル、月1,200クレジット、最大4,800回答 | 多数の質問や複数ブランドを扱う場合の候補。AIごとの消費量と計測頻度から必要クレジットを見積もる |\n\n料金・条件の根拠は[OtterlyAI公式料金ページ](https://otterly.ai/pricing)、[Rankscale公式料金ページ](https://rankscale.ai/pricing)です。為替・税・追加機能・契約期間によって支払額は変わります。\n\n選定時には、次の5点を確認してください。\n\n- **対象AI**：Google AI OverviewsとAI Modeは別に確認する。\n- **日本語・地域設定**：日本の顧客が使う質問で試せるか。\n- **計測上限**：質問数だけでなく、AI数・実行頻度による消費量を見る。\n- **引用の根拠**：スコアに加え、回答本文と引用URLを保存できるか。\n- **契約条件**：追加料金、最低契約期間、解約条件を確認する。\n\n最初は、重要な顧客質問を10件ほど決めて定期的に記録し、GA4で流入・問い合わせを追う運用を提案します。その作業にかかる人件費がツール料金を上回る、または競合比較や日次監視が必要になった段階で、有料プランを試すと判断しやすくなります。\n\nSOURCE: https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/\nSOURCE: https://developers.google.com/search/docs/appearance/ai-features?hl=ja\nSOURCE: https://support.google.com/analytics/answer/12923437?co=GENIE.Platform%3DDesktop&hl=en\nSOURCE: https://developers.google.com/search/docs/appearance/structured-data\nSOURCE: https://schema.org/docs/validator.html\nSOURCE: https://support.google.com/webmasters/answer/6062598?hl=en-EN\nSOURCE: https://otterly.ai/pricing\nSOURCE: https://rankscale.ai/pricing\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jinrai.co.jp/blog/2026/04/06/aio-taisaku-tools/",
+     "https://revimy.jp/columns/aio-tools-comparison",
+     "https://leadcreation.co.jp/blog/aio-tool",
+     "https://mediareach.co.jp/blog/llmo-tool",
+     "https://0120.co.jp/blog/aio-164/",
+     "https://apex-japan-aio.co.jp/aio-tools/",
+     "https://ai.7senses.co.jp/aio/aio-taisaku-yasui-tool/",
+     "https://uravation.com/llmo/aio-taisaku-tools/",
+     "https://ai-search.techsuite.co.jp/4136/",
+     "https://inhouse-plus.jp/aio-llmo-report/",
+     "https://prtimes.jp/main/html/rd/p/000000017.000131000.html",
+     "https://brevia.jp/llmo-taisaku-tool/",
+     "https://white-link.com/sem-plus/ai-check-tool/",
+     "https://oproduct.ai/articles/8353561",
+     "https://unomas.jp/ai-checker/",
+     "https://piececompany.com/llmosindan/",
+     "https://aiosoken.com/news/aio-shindan-release/",
+     "https://bizaidea.com/press-release/69642/",
+     "https://0120.co.jp/blog/aio-63/",
+     "https://ai-search.techsuite.co.jp/4645/",
+     "https://ai-search.techsuite.co.jp/13461/",
+     "https://dolphinx.jp/column/aio-tools-comparison",
+     "https://jinrai.co.jp/blog/2026/08/07/otterly-ai-review-pricing/",
+     "https://dolphinx.jp/aio",
+     "https://dolphinx.jp/aio/pricing",
+     "https://rebranding.co.jp/media/aio-tools-comparison/",
+     "https://aiotaisaku.com/aio/aio_tools/"
+    ],
+    "text": "AIO対策の無料ツールは、検索結果の記述から次の6種類にまとめられます。ページ本文は取得できず、検索結果の要約だけで書いています。このまとめ方は私の整理で、特定の記事の「6選」と一致するとは限りません。\n\n## 無料ツール6選\n\n| # | ツール | 分かること |\n|---|---|---|\n| 1 | Google Search Console | AI生成の会話型クエリでの表示 |\n| 2 | GA4 | AI検索経由の流入数 |\n| 3 | Google Rich Results Test | 構造化データのテストとリッチリザルト対象の判定 |\n| 4 | 生成AI言及チェッカー | 3つのAIでの自社の言及状況 |\n| 5 | 主要4AIへの手動プロンプトチェック | 対策クエリで実際にどう見えるか |\n| 6 | URL入力型の診断ツール(Lチェック、トリニアスのLLMO診断、LLMOチェッカー/AIOチェッカー、AIO総研のAIO診断など) | 引用されやすい状態かのスコア診断。Lチェックは80項目 |\n\n- **計測・診断の分担:** 1〜5が計測、6が診断です。\n- **カバー範囲:** 1〜3と5の組み合わせで、店舗AIOの90%は計測・改善できるとされています(出典記事の主張)。\n- **限界:** 「表示された」ことは分かっても、「AIの回答に実際に引用されたか」は判別できません。\n- **手動チェックの上限:** 1〜2店舗で月1回なら無料ツールで足ります。作業は月3時間程度です。ただし、1回で見られるクエリは5〜10個が限界です。\n\n## 安い有料ツールの選び方\n\n**有料に進む目安**\n- 多店舗運用になったとき。\n- 手動管理に月3時間以上かかるようになったとき。\n\n**入門価格帯**\n- **Otterly.AI Lite(海外製):** 月25ドルです。ChatGPT、Google AI Overview、Perplexity、Copilotの4エンジンを日次計測します。15プロンプトで、月1,000件のGEO監査と無制限のチーム招待が付きます。\n- **DolphinX AIOライト(国産):** 月30,000円(税別)で、日次20プロンプトが目安です。日次の競合・引用監視に向くとされています。\n- **月額10万円クラス:** 6つのAI媒体で言及率・推奨順位・引用元を毎月計測する月額10万円のサービスもあります。\n\n**選ぶときのポイント**\n1. **対応AIを確認する:** 4エンジンは基本対象でも、Google AI Mode、Gemini、Claudeは追加料金になる場合があります。\n2. **総額で比較する:** 入口価格ではなく、必要なAIをすべて有効化したときの総額を見ます。\n3. **用途で選ぶ:** 海外ツールを低価格で試すならOtterly、国産で日次の競合・引用監視をするならDolphinXが向きます。\n4. **まず無料で始める:** 手動チェックで限界を感じてから有料に移ります。\n\nSOURCE: https://jinrai.co.jp/blog/2026/04/06/aio-taisaku-tools/\nSOURCE: https://revimy.jp/columns/aio-tools-comparison\nSOURCE: https://leadcreation.co.jp/blog/aio-tool\nSOURCE: https://mediareach.co.jp/blog/llmo-tool\nSOURCE: https://0120.co.jp/blog/aio-164/\nSOURCE: https://apex-japan-aio.co.jp/aio-tools/\nSOURCE: https://ai.7senses.co.jp/aio/aio-taisaku-yasui-tool/\nSOURCE: https://uravation.com/llmo/aio-taisaku-tools/\nSOURCE: https://ai-search.techsuite.co.jp/4136/\nSOURCE: https://inhouse-plus.jp/aio-llmo-report/\nSOURCE: https://prtimes.jp/main/html/rd/p/000000017.000131000.html\nSOURCE: https://brevia.jp/llmo-taisaku-tool/\nSOURCE: https://white-link.com/sem-plus/ai-check-tool/\nSOURCE: https://oproduct.ai/articles/8353561\nSOURCE: https://unomas.jp/ai-checker/\nSOURCE: https://piececompany.com/llmosindan/\nSOURCE: https://aiosoken.com/news/aio-shindan-release/\nSOURCE: https://bizaidea.com/press-release/69642/\nSOURCE: https://0120.co.jp/blog/aio-63/\nSOURCE: https://ai-search.techsuite.co.jp/4645/\nSOURCE: https://ai-search.techsuite.co.jp/13461/\nSOURCE: https://dolphinx.jp/column/aio-tools-comparison\nSOURCE: https://jinrai.co.jp/blog/2026/08/07/otterly-ai-review-pricing/\nSOURCE: https://dolphinx.jp/aio\nSOURCE: https://dolphinx.jp/aio/pricing\nSOURCE: https://rebranding.co.jp/media/aio-tools-comparison/\nSOURCE: https://aiotaisaku.com/aio/aio_tools/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "**AIO対策（AI Optimization / AI検索最適化）**とは、Googleの「AI Overviews（旧SGE）」や「ChatGPT」「Perplexity」などのAI検索ツール・生成AIにおいて、自社サイトの情報が参照・引用されやすくするための施策のことです。GEO（Generative Engine Optimization）と呼ばれることもあります。\n\n従来のSEO対策に加え、AI時代における自社サイトの露出を高めるためには、**「AIに正しく評価・引用されているか」の計測・診断**が不可欠です。\n\n本記事では、**今すぐ使える無料のAIO対策・計測診断ツール6選**と、自社に合った**安くてコスパの良い有料ツールの選び方**を分かりやすく解説します。\n\n---\n\n## 1. AIO対策に使えるおすすめの無料ツール6選\n\nAIO対策では、「AIにクロール・理解されているか」「実際にAI回答内で引用されているか」「AIからの流入があるか」を計測・診断する必要があります。\n\n### ① Google Search Console（AI Overviewの表示・傾向分析）\n* **役割：** Google検索における自社ページの露出・インプレッション計測\n* **特徴：**\n  * Googleの「AI Overviews（AIによる概要）」からの表示回数やクリック数の動向を分析できます。\n  * どのキーワードでインプレッションが発生しているかを把握し、AI回答に露出している可能性があるページを特定できます。\n\n### ② Bing Webmaster Tools（Microsoft Copilot / Bing AI対策）\n* **役割：** BingおよびCopilot（旧Bing Chat）からのインデックス・引用診断\n* **特徴：**\n  * Microsoftの生成AI（Copilot）はBingのインデックスデータを利用しています。\n  * サイトのインデックス状況や、Copilotで参照されやすい構造化データ・エラーの有無を無料でチェックできます。\n\n### ③ Google Analytics 4（GA4）（AIツールからの流入計測）\n* **役割：** ChatGPTやPerplexityなどAIサービスからの直接流入トラフィック計測\n* **特徴：**\n  * 「集客 ＞ ユーザー獲得（参照元/メディア）」画面で、`chatgpt.com` や `perplexity.ai` などからのリファラー（流入）を計測できます。\n  * どのAIサービスからどれくらいのアクセスがあり、コンバージョンにつながっているかを診断できます。\n\n### ④ 生成AI本体（ChatGPT / Perplexity / Claude）での手動プロンプト診断\n* **役割：** 実際のAI回答内での「自社サイト・自社ブランドの引用状況」チェック\n* **特徴：**\n  * 業界の主要キーワードや「〇〇のおすすめ」などのプロンプト（指示文）を入力し、**自社の記事やサービス名が引用・言及されるか**を直接確認します。\n  * 競合他社がどのように引用されているかも一目で分かります。\n\n### ⑤ Google リッチリザルト テスト（構造化データの診断）\n* **役割：** AIクローラーがコンテンツを正しく解釈できるかどうかの診断\n* **特徴：**\n  * AIO対策では、AIが情報を構造的に理解できる「構造化データ（Schema.org）」の設定が重要です。\n  * URLを入力するだけで、FAQ、記事データ、商品情報などが正しくマークアップされているかを無料で検証できます。\n\n### ⑥ PageSpeed Insights（サイト構造・ユーザー体験の診断）\n* **役割：** ページの読み込み速度とCore Web Vitalsの診断\n* **特徴：**\n  * AIクローラーは、表示速度が速く構造がクリアなWebサイトを好んで巡回・参照します。\n  * ページの技術的なパフォーマンスを測定し、AIクローラーが評価しやすい環境が整っているかを診断できます。\n\n---\n\n## 2. 無料ツールを活用したAIO計測・診断のポイント\n\n無料ツールを使って効率的にAIO対策を進める際は、以下の3つの指標（KPI）に注目して診断を行いましょう。\n\n1. **ブランド・記事の引用・言及シェア（Share of Voice）**\n   * ChatGPTやPerplexity等で自社名や記事リンクがどれくらい引用されているかを定期チェックする。\n2. **AI検索からの流入数（Referral Traffic）**\n   * GA4で「AIからの流入」の推移を追い、SEO流入とは別軸でトラフィックの変化を観測する。\n3. **コンテンツの信頼性・E-E-A-T指標の確認**\n   * 著者情報、一次情報、構造化データが整っているかを「リッチリザルトテスト」や目視で確認する。\n\n---\n\n## 3. 安い有料AIO/SEOツールの選び方（コスパ重視）\n\n無料ツール（手動診断・アクセス解析）だけでは、「AI表示順位の常時モニタリング」や「大量のキーワード分析」に限界が来ることがあります。その場合は有料ツールの導入を検討しましょう。\n\nコストを抑えつつ（月額数千円〜1万円台程度）、高い効果を得るための選び方のポイントは以下の通りです。\n\n### ポイント①：「AI Overview / AI検索トラッキング機能」が含まれているか\n従来のSEO順位（1〜10位など）だけでなく、**「AI Overviews枠に自社サイトが掲載されているか」を自動計測できるツール**を選びましょう。\n* **例：** SE Ranking、Semrush、Ahrefs などの主要SEOツールは、AI Overviewの表示有無や引用URLを検出する機能を順次拡充しています。\n\n### ポイント②：スモールプラン・初期費用無料のツールを選ぶ\n最初から月額数万円〜十数万円の大手代理店向けツールを契約する必要はありません。\n* **SE Ranking（エスイーランキング）：** 月額数千円台から利用可能で、AI Overview掲載状況の自動トラッキングや競合分析のコスパが非常に高いツールです。\n* **特定のAI表示診断SaaS（新興GEOツール）：** 無料トライアル（7〜14日間）が用意されているものを活用し、実際に欲しいデータが取れるか試してから契約するのがおすすめです。\n\n### ポイント③：競合他社の引用元・参照ドメインが分析できるか\n自社がAIに掲載されない原因を調べるため、**「競合サイトがどのWebメディアやデータベースから引用されてAIに表示されているか」**を分析できる機能があると、対策案（被リンク獲得や掲載依頼など）が明確になります。\n\n---\n\n## 4. 無料から有料へのステップアップ手順\n\n1. **STEP 1（無料）：**\n   「GA4」でAI流入があるか確認し、「ChatGPT / Perplexity」に手動で自社関連キーワードを入力して引用状況を診断。\n2. **STEP 2（無料）：**\n   「Search Console」と「リッチリザルトテスト」で、AIクローラーに親和性の高いサイト構造（構造化データなど）を作る。\n3. **STEP 3（安価な有料ツールの導入）：**\n   毎日の手動確認が負担になってきたら、月額5,000円〜15,000円程度のコスパの良いSEO/AIOツール（例：SE Rankingなど）を導入し、順位・引用の自動計測に移行する。\n\n---\n\n## まとめ\n\nAIO対策（AI検索最適化）は、まず**「Google Search Console」「GA4」「ChatGPT/Perplexity手動チェック」などの無料ツール**で現状を把握・診断することからスタートできます。\n\n日々のモニタリングや大量のキーワード計測が必要になった段階で、**AI表示追跡機能がついた月額数千円〜1万円台のコスパが良い有料ツール**へ移行していくのが最も賢い選び方です。まずは無料ツールを使い、自社サイトがAIにどう評価されているか確認してみましょう。",
+    "error": ""
+   }
+  },
+  "aio対策 AIO対策は無料ツールだけでできますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+     "https://support.google.com/webmasters/answer/9128668?hl=ja",
+     "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports?hl=en"
+    ],
+    "text": "**はい、基本的なAIO対策は無料ツールだけでできます。** ここでは、GoogleのAIによる概要（AI Overviews）などに、自社サイトが参照・掲載されやすくなるための対策として説明します。\n\nGoogle公式では、AI検索でも従来のSEOの基本が有効とされています。専用の有料ツールや、AI向けの特殊なマークアップは必須ではありません。[Google公式ガイド](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)\n\n無料で始めるなら、次の方法が実用的です。\n\n| 取り組み | 使用する無料ツール・方法 |\n|---|---|\n| ページがGoogleに登録されているか、技術的な問題がないか確認 | Google Search Console |\n| AI検索での表示状況を確認 | Search Consoleの生成AIパフォーマンスレポート（利用可能な場合） |\n| 狙う質問でAIの概要や参照元を確認 | Google検索を手動で確認し、表計算に記録 |\n| 記事の品質を改善 | 自社の実体験・調査・事例を追加し、見出しや説明を整理 |\n\nSearch Consoleは無料サービスです。また、GoogleはAI検索向けの専用レポートを案内しています。[Search Consoleの概要](https://support.google.com/webmasters/answer/9128668?hl=ja)、[生成AIレポートの発表](https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports?hl=en)\n\nただし、**無料なのはツールの利用料で、記事制作や修正には時間・人件費がかかります。** 多数の質問や競合サイトを継続的に確認する場合は、作業効率を高めるために有料ツールを検討するとよいでしょう。これは運用上の判断であり、掲載の条件ではありません。\n\nまずは重要なページに絞って、確認・改善・計測を繰り返す方法で十分始められます。なお、対策を実施してもAI検索への掲載は保証されません。[Google公式ガイド](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)\n\nSOURCE: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide\nSOURCE: https://support.google.com/webmasters/answer/9128668?hl=ja\nSOURCE: https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports?hl=en\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://note.com/aiosearch/n/n56ea233f2525",
+     "https://revimy.jp/columns/aio-tools-comparison",
+     "https://0120.co.jp/blog/aio-164/",
+     "https://uomi-ai-lab.boy.jp/2026/06/15/aio-measures-tools/",
+     "https://ai-search.techsuite.co.jp/qa/aio-tools/",
+     "https://aiogeoscan.com/",
+     "https://coosy.co.jp/blog/structured-data/",
+     "https://www.aura-office.co.jp/blog/structured/"
+    ],
+    "text": "**結論: 小規模なサイトや店舗なら、無料ツールだけで始められるし、計測まで回せます。ただし、サイト数や記事数が増えたり、原因診断まで求めたりする場合は有料ツールか専門家が必要になります。**\n\n**無料でできること**\n- **現状把握:** Google Search Console と Bing Webmaster Tools で、インデックスや検索パフォーマンスを確認できます。\n- **構造化データの検証:** Google のリッチリザルトテストに URL かコードを貼ると、エラー箇所と修正案が出ます。\n- **AI での表示確認:** ChatGPT、Gemini、Perplexity、Google の AI 概要で自分のブランドや店名を検索し、言及されているかを手動で記録します。無料の「生成AI言及チェッカー」も使えます。\n- **目安:** 1〜2店舗で月1回の計測なら、無料ツールで足りる、継続しても月3時間程度、とする情報があります。\n\n**無料では難しいこと**\n- 構造化データの実装、記事や FAQ の設計、継続的な改善は、ツールが無料でも手間がかかります。\n- 引用されない原因の的確な診断、優先順位づけ、全体設計は、無料ツールだけでは難しいとされています。\n- 複数サイトや多数のキーワード、複数の AI を継続的に自動計測する場合は、有料ツールのほうが現実的です。\n\nなお、上記は検索結果の要約をもとにした内容です。各ページ本文までは開いて確認していません。\n\nSOURCE: https://note.com/aiosearch/n/n56ea233f2525\nSOURCE: https://revimy.jp/columns/aio-tools-comparison\nSOURCE: https://0120.co.jp/blog/aio-164/\nSOURCE: https://uomi-ai-lab.boy.jp/2026/06/15/aio-measures-tools/\nSOURCE: https://ai-search.techsuite.co.jp/qa/aio-tools/\nSOURCE: https://aiogeoscan.com/\nSOURCE: https://coosy.co.jp/blog/structured-data/\nSOURCE: https://www.aura-office.co.jp/blog/structured/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "結論から申し上げますと、**AIO対策（AI Overview/GEO対策）は無料ツールだけで十分に対応可能**です。\n\n有料の分析ツールも登場し始めていますが、AIO対策の本質は**「AIが理解しやすい高品質な構造化コンテンツを作成し、信頼できる一次情報を提供すること」**にあるため、無料のツールや公式機能だけで主要な対策プロセス（リサーチ・作成・検証）を完結できます。\n\n以下に、AIO対策を無料ツールだけで進めるための**おすすめツール**と**具体的な活用方法**をまとめました。\n\n---\n\n### 1. 無料で使えるAIO対策ツール一覧（役割別）\n\n#### ① AIでの引用状況・見え方の確認（動作検証）\nAIが自社サイトや競合をどのように引用しているか調べるツールです。\n* **Google検索（AI Overviews）**: 実際のGoogle検索結果でどのような概要・引用元が表示されているか確認します。\n* **ChatGPT（無料版） / Claude（無料版）**: ターゲットキーワードで質問し、自社ブランドやWebサイトが参照されているかテストします。\n* **Perplexity（無料版）**: 検索に特化したAIツールです。どのようなサイトがソース（情報源）として引用されやすいかを分析するのに便利です。\n\n#### ② ユーザーの質問・検索意図のリサーチ\nAIに提示される「質問（プロンプト）」やユーザーの悩みを集めるツールです。\n* **Google Search Console（公式・無料）**: 実際にユーザーがどのような検索キーワードで自社サイトに流入しているかを分析できます。\n* **Google検索（関連する質問 / 他の人はこちらも検索）**: 検索結果に表示される「他の人はこちらも質問」などは、AIが回答のベースとする典型的なQ&Aの宝庫です。\n* **Google Trend / キーワードプランナー**: トレンドや検索ボリュームの確認に使用します。\n\n#### ③ コンテンツの構造化・技術的検証\nAIがサイト構造や意味を正しく理解できるようにするためのツールです。\n* **Google リッチリザルト テスト（無料）**: 構造化データ（Schema.orgなど）が正しく実装されているかを検証できます。\n* **無料のSchema Data Generator（例: Merkle Schema Markup Generator等）**: FAQや記事の構造化データをコード知識なしで生成できます。\n\n#### ④ コンテンツ作成・要約・フォーマット補助\n* **ChatGPT / Gemini / Claude**: 作成した記事を読み込ませ、「この記事の要点を3行で要約して」「表形式に整理して」「FAQ形式に変換して」といった指示を与えることで、AIが読み取りやすいテキスト構成に推敲できます。\n\n---\n\n### 2. 無料ツールを活用した「AIO対策の5ステップ」\n\n無料ツールだけを使ってAIO対策を実行する具体的な手順です。\n\n1. **質問（プロンプト）の抽出**\n   * Google Search ConsoleやGoogle検索の「関連する質問」から、ターゲット層がAIに問いかけそうな**「具体的な質問・疑問」**をピックアップします。\n2. **現在のAI回答の調査**\n   * ピックアップした質問を「Perplexity」や「ChatGPT」「Google検索」に入力し、現在どのような回答が生成され、どのサイトが引用されているか観察します。\n3. **直感的にわかりやすい回答の作成**\n   * 記事の冒頭に**「結論（要約）」**を配置します。\n   * ChatGPT等を利用して、**箇条書き・表（テーブル）・FAQ形式**を活用した整理された文章を作成します。\n4. **構造化データの設定**\n   * 無料のSchema生成ツールで「FAQPage」などの構造化データを作成し、サイトに埋め込みます。「リッチリザルト テスト」でエラーがないか確認します。\n5. **E-E-A-T（信頼性・専門性）の補強**\n   * 著者情報や一次情報（独自の調査結果、体験談、専門家の監修）を明記し、AIが「信頼できる情報源」と判断しやすい状態を作ります。\n\n---\n\n### 3. 有料ツールとの違い・制限事項\n\n無料ツールだけでも対策自体は完璧に行えますが、有料ツールとの差は以下の点にあります。\n\n* **自動化と大量チェック**: 有料ツール（SMRushやAIO専用計測ツールなど）は、数百個のキーワードでのAI引用状況を自動追跡できます。無料ツールは1つずつ手動で検索・確認する必要があります。\n* **大規模サイトの管理**: 記事数が数百〜数千ある大規模メディアの場合、手動での確認には限界があります。\n\n**【結論】**\n個人ブログや中小規模のWebサイト、特定ジャンルの事業サイトであれば、**Google公式ツール（Search Console / リッチリザルトテスト）**と**各AIサービス（ChatGPT / Perplexity / Gemini）の無料版**を組み合わせるだけで、十分に効果的なAIO対策が可能です。まずは手動での検証・コンテンツ最適化から始めてみることをおすすめします。",
+    "error": ""
+   }
+  },
+  "aio対策 構造化データのエラーは無料で確認できますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://search.google.com/test/rich-results",
+     "https://validator.schema.org/",
+     "https://support.google.com/webmasters/answer/7445569?hl=ja",
+     "https://schema.org/docs/validator.html",
+     "https://developers.google.com/search/docs/appearance/ai-features?hl=ja"
+    ],
+    "text": "はい、**構造化データのエラーは無料で確認できます。** AIO対策でチェックする場合も、まずは次の2つで確認できます。\n\n| 無料ツール | 確認できる内容 |\n|---|---|\n| [Google リッチリザルト テスト](https://search.google.com/test/rich-results) | Googleのリッチリザルトに対応する構造化データのエラーや警告 |\n| [Schema Markup Validator](https://validator.schema.org/) | Schema.orgに基づく構造化データ全般と、記述の構文ミス |\n\nどちらも**ページのURL、またはコードを入力して検査**できます。リッチリザルト テストでは、結果のエラー・警告を開くと詳細を確認できます。修正後に再テストしてください。[Googleの使い方ガイド](https://support.google.com/webmasters/answer/7445569?hl=ja)、[Schema.orgの説明](https://schema.org/docs/validator.html)\n\nただし、**エラーを解消すればAIの回答に掲載される、という保証はありません。** Googleは、AIによる概要やAIモード向けに特別な構造化データを追加する必要はなく、実装する場合はページに表示される内容と一致させるよう案内しています。[Google公式ガイド](https://developers.google.com/search/docs/appearance/ai-features?hl=ja)\n\nSOURCE: https://search.google.com/test/rich-results\nSOURCE: https://validator.schema.org/\nSOURCE: https://support.google.com/webmasters/answer/7445569?hl=ja\nSOURCE: https://schema.org/docs/validator.html\nSOURCE: https://developers.google.com/search/docs/appearance/ai-features?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://simplique.jp/about-rich-results-test/",
+     "https://support.google.com/webmasters/answer/9166415?hl=ja",
+     "https://search.google.com/test/rich-results?hl=ja",
+     "https://ai-search.techsuite.co.jp/10547/",
+     "https://0120.co.jp/blog/aio-108/",
+     "https://crevia-ts.com/archives/1059",
+     "https://gmotech.jp/semlabo/seo/blog/structuralization-data-error/"
+    ],
+    "text": "はい、無料で確認できます。会員登録も不要です。\n\n- **リッチリザルト テスト**: Google提供のツールです。公開ページのURLかコードを入力すると、構造化データのエラーと警告、生成されるリッチリザルトを確認できます。\n- **Schema Markup Validator** (validator.schema.org): Google固有の要件ではなく、schema.org仕様に沿っているかを検証します。リッチリザルト テストと併用するのが標準的な使い方です。\n- **Google Search Console**: 無料です。「拡張」セクションのリッチリザルト レポートで、サイト全体のエラーを継続して監視できます。構文エラーで解析できなかったデータは「解析できない構造化データ」レポートに出ます。\n- **JSONLint**: JSONの構文ミスを先に潰すのに使えます。\n\nAIO対策の確認手順は、次の流れが紹介されています。\n\n1. リッチリザルト テストでエラーと警告を確認します。\n2. Schema Markup Validatorで仕様準拠を再確認します。\n3. 公開後はSearch Consoleで監視します。\n\n構造化データのエラーが無いことと、AI Overviewに引用されることは別問題です。ツールで確認できるのは構文と仕様の適合までで、AIOでの引用までは保証されません。\n\nなお、Schema Markup Validator と JSONLint は、検索結果の要約に名前が出ていただけです。公式ページ自体は開いて確認していません。\n\nSOURCE: https://simplique.jp/about-rich-results-test/\nSOURCE: https://support.google.com/webmasters/answer/9166415?hl=ja\nSOURCE: https://search.google.com/test/rich-results?hl=ja\nSOURCE: https://ai-search.techsuite.co.jp/10547/\nSOURCE: https://0120.co.jp/blog/aio-108/\nSOURCE: https://crevia-ts.com/archives/1059\nSOURCE: https://gmotech.jp/semlabo/seo/blog/structuralization-data-error/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "結論から申し上げますと、**構造化データのエラーは完全無料で確認できます。** \n\nGoogleなどの公式ツールや標準ツールが提供されており、特別な有料ソフトを使わなくても簡単にエラーの有無や修正ポイントをチェックすることが可能です。\n\n---\n\n### 構造化データのエラーを無料で確認できるおすすめツール3選\n\n#### 1. Google リッチリザルト テスト（推奨）\nGoogleが公式に提供している無料ツールです。ページがGoogleのリッチリザルト（検索結果の装飾表示）に対応しているか、エラーがないかを検証できます。\n* **特徴:** URLを入力するか、コード（JSON-LDなど）を直接貼り付けるだけで即座に検証できます。\n* **わかること:** 致命的な「エラー」、改善が望ましい「警告」、Googleが認識できた構造化データの種類。\n* **利用方法:** ブラウザで「リッチリザルト テスト」と検索してアクセスできます。\n\n#### 2. Schema マークアップ検証ツール（Schema Markup Validator）\nSchema.orgが提供している公式の検証ツールです（旧・Google構造化データテストツール）。\n* **特徴:** Googleのリッチリザルト対象外の記述も含め、Schema.orgの仕様に沿って正しくコードが書かれているかを純粋にチェックできます。\n* **用途:** リッチリザルト テストでエラーが出ない場合でも、構文（文法）自体に間違いがないか確認したい時に便利です。\n\n#### 3. Google Search Console（サーチコンソール）\nウェブサイトの所有者であれば、サイト全体の構造化データエラーを自動で一覧監視できます。\n* **特徴:** サイト内の全ページを定期的に巡回し、「拡張」レポート配下に構造化データごとのエラー数・警告数・正常数を集計してくれます。\n* **用途:** 単一ページのチェックではなく、サイト全体でエラーが発生していないか一括で確認・管理したい場合に必須のツールです。\n\n---\n\n### AIO（AI検索最適化）における構造化データの重要性\n\nAIO（AI Optimization：AI OverviewsやChatGPT、PerplexityなどのAI検索への最適化）において、構造化データのエラーをなくすことは**極めて重要**です。\n\n1. **AIに対する正確な情報伝達**\n   AI（LLM）はテキストを文脈から理解しますが、構造化データ（JSON-LDなど）があることで「著者」「発行日」「商品価格」「Q&A」などの意味（エンティティ）を誤解なく一発で正確に把握できます。\n2. **ハルシネーション（誤情報の生成）の防止**\n   構造化データにエラーがあると、AIが情報を誤読したり、無視したりする原因になります。エラーを解消して正しいデータを渡すことで、AIの回答ソース（参照元）として採用されやすくなります。\n3. **E-E-A-T（信頼性）の証明**\n   `Person`（著者）や`Organization`（運営組織）などの構造化データを正しく設定しておくと、AIが「誰が発信している信頼できる情報か」を認識しやすくなります。\n\n---\n\n### 無料確認・修正の基本手順\n\n1. **ページ単位のチェック**：作成したページのURL（またはコード）を「**リッチリザルト テスト**」に入力する。\n2. **エラー内容の確認**：赤色で表示される「必須フィールドの不足」や「型の不一致」を確認する。\n3. **コードの修正**：指摘された不足項目（例：`author` や `datePublished` など）をコードに追加する。\n4. **再テスト**：再度ツールに通してエラーが消えたことを確認する。\n5. **サイト全体の監視**：Google Search Consoleで定期的にエラーが増えていないかチェックする。\n\nまずは自社サイトの主要なページ（記事ページや商品ページなど）のURLを**リッチリザルト テスト**に入力して確認してみることをおすすめします。",
+    "error": ""
+   }
+  },
+  "aio対策 無料のAIOツールで定点観測まで自動化できますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://rankbits.com/pricing",
+     "https://llmmetrix.com/pricing"
+    ],
+    "text": "**はい、無料のAIOツールでも、限られた質問数・頻度なら定点観測まで自動化できます。** ただし、「無料で一度診断できる」ことと、「同じ質問を定期的に自動計測できる」ことは別です。無料プランのスケジュール実行と履歴保存の条件を確認してください。\n\n公式ページで確認できた例は次のとおりです。\n\n| ツール | 無料で自動化できる範囲 | 主な制限 |\n|---|---|---|\n| RankBits | 1ブランド・5質問・5エンジン／検索ソースを7日ごとに自動計測 | 月100回答まで。エクスポートは対象外 |\n| LLM Metrix | 1ドメイン・3質問・固定の4モデルを週次で継続計測。定期レポートも利用可能 | 履歴保存は7日間。CSV出力は可能 |\n\nいずれも期間限定の体験版ではなく、継続利用できる無料プランとして案内されています。上記は公式仕様の確認であり、実機での動作検証ではありません。  \n出典：[RankBitsの料金・機能](https://rankbits.com/pricing)、[LLM Metrixの料金・機能](https://llmmetrix.com/pricing)\n\n**AIOを「GoogleのAI Overviews対策」の意味で使っている場合は、観測対象にも注意が必要です。** ChatGPTなどでのブランド言及を追えるツールでも、無料枠でGoogleのAI Overviewsを計測できるとは限りません。RankBitsも、サービス全体ではAI Overviewsに対応していますが、料金ページでは無料枠の5エンジンの内訳が明示されていません。[RankBits公式](https://rankbits.com/pricing)\n\n始めるなら、重要な質問を3〜5個に絞り、言語・地域・質問文を固定して週次計測する運用が現実的です。自社への言及や引用URLを確認し、履歴の保存期間が短い場合は定期的に書き出します。**少数の質問を週次で追う用途は無料でも可能ですが、毎日・多数の質問・長期履歴まで求めると、有料プランの検討が必要になります。** 両サービスとも、日次計測や対象数の拡張は有料プランに設定されています。[RankBits](https://rankbits.com/pricing)、[LLM Metrix](https://llmmetrix.com/pricing)\n\nSOURCE: https://rankbits.com/pricing\nSOURCE: https://llmmetrix.com/pricing\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jinrai.co.jp/blog/2026/08/17/ai-overviews-monitoring/",
+     "https://jinrai.co.jp/blog/2026/04/06/aio-taisaku-tools/",
+     "https://leadcreation.co.jp/blog/aio-tool",
+     "https://revimy.jp/columns/aio-tools-comparison",
+     "https://unomas.jp/ai-checker-tool-comparison/",
+     "https://www.bring-flower.com/blog/ai-overviews-tracking-tools/",
+     "https://uravation.com/llmo/aio-taisaku-tools/",
+     "https://white-link.com/sem-plus/ai-check-tool/",
+     "https://aiseo-llmo.com/articles/ai-overview-tools-comparison-2026",
+     "https://www.aidma-hd.jp/ai/llmo-tool/",
+     "https://brevia.jp/llmo-taisaku-tool/",
+     "https://mediareach.co.jp/blog/llmo-tool",
+     "https://jinrai.co.jp/blog/2026/03/18/ai-inyou-joukyou-check/",
+     "https://www.aimention.jp/",
+     "https://llm-insight.com/guides/best-llmo-tools-2026/",
+     "https://llmolab.ai/"
+    ],
+    "text": "部分的にできます。ただし、無料枠の範囲内に限られます。以下は検索結果の要約に基づく内容で、ページ本文までは確認できていません。\n\n**自動化できる範囲(無料)**\n- **Google Search Console**: 2026年6月にAI Overviewsの計測が追加されました。確認できるのは表示回数・ページ・国・デバイス・日付の5指標で、クリック数、CTR、クエリは含まれません。自動で蓄積される定点観測に近い形ですが、「自社が引用されたか」を見るだけです。\n- **AKARUMI(フリープラン月額0円)**: 最大25プロンプトを1日1回実行できます。複数のLLMに一括で実行し、回答を自動保存して時系列で追跡できます。無料で定点観測まで自動化できる例です。\n- **AIMention、LLMOラボ**: 無料プランがあります。LLMOラボは3サイトまで分析できます。定期実行や履歴の仕様は検索結果から確認できていません。\n- **BringRitera(リテラ)**: 無料プランがあり、AI Overviewsの計測に国内で初めて対応したとされています。\n\n**自動化が難しい範囲**\n- AIOチェッカー、生成AI言及チェッカー、Rich Results Testなどは単発診断で、定期実行はできません。\n- 無料枠はプロンプト数、頻度、対応AI、サイト数に上限があります。\n- AI Overviewsのスナップショットを毎日保存して変化を追う機能は、SEOmonitorなどの有料ツールで確認できた例です。\n\n**おすすめの構成**\nSearch Consoleで表示回数を継続的に見て、AKARUMIなどの無料プランで主要キーワードを日次実行する形です。キーワード数が25を超える場合や、AI Overviewsのスナップショットを網羅的に取る場合は有料プランが必要になります。無料プランの条件は変わりやすいので、導入前に各公式ページで確認してください。\n\nSOURCE: https://jinrai.co.jp/blog/2026/08/17/ai-overviews-monitoring/\nSOURCE: https://jinrai.co.jp/blog/2026/04/06/aio-taisaku-tools/\nSOURCE: https://leadcreation.co.jp/blog/aio-tool\nSOURCE: https://revimy.jp/columns/aio-tools-comparison\nSOURCE: https://unomas.jp/ai-checker-tool-comparison/\nSOURCE: https://www.bring-flower.com/blog/ai-overviews-tracking-tools/\nSOURCE: https://uravation.com/llmo/aio-taisaku-tools/\nSOURCE: https://white-link.com/sem-plus/ai-check-tool/\nSOURCE: https://aiseo-llmo.com/articles/ai-overview-tools-comparison-2026\nSOURCE: https://www.aidma-hd.jp/ai/llmo-tool/\nSOURCE: https://brevia.jp/llmo-taisaku-tool/\nSOURCE: https://mediareach.co.jp/blog/llmo-tool\nSOURCE: https://jinrai.co.jp/blog/2026/03/18/ai-inyou-joukyou-check/\nSOURCE: https://www.aimention.jp/\nSOURCE: https://llm-insight.com/guides/best-llmo-tools-2026/\nSOURCE: https://llmolab.ai/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://jinrai.co.jp/en/blog/2026/04/06/aio-taisaku-tools/",
+     "https://optyino.ai/note/geo-tools",
+     "https://white-link.com/sem-plus/ai-check-tool/",
+     "https://aiogeoscan.com/",
+     "https://www.gyro-n.com/seo/aio/",
+     "https://www.pascaljp.com/blog/?p=12516",
+     "https://note.com/saitohtm/n/n084fd3226e04",
+     "https://geoaiotracker.com/",
+     "https://aiotaisaku.com/aio/aio_tools/",
+     "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/"
+    ],
+    "text": "結論から申し上げますと、**完全無料で「定点観測（定期的なプロンプト実行・順位や言及の自動トラッキング）」まで全自動化できる既存のAIO（LLMO/GEO）ツールは、2026年現在ほぼ存在しません**。\n\n現在提供されているAIO（AI検索最適化）ツールの多くは、AIの回答取得やスクレイピングにサーバー費用やAPI利用コストが発生するため、**「定点観測の自動化」は有料プラン（月額数千円〜数万円〜）の機能として提供されているのが一般的**です。\n\nただし、**「無料の分析ツールを組み合わせる」**または**「APIを用いて簡易的な仕組みを自作する」**ことで、実質無料（または極めて低予算）で定点観測を自動化・半自動化する方法は存在します。\n\n---\n\n### 1. 無料AIOツールの現状と限界\n\n現在提供されている「無料のAIOツール」の多くは、以下のような仕様・制限になっています。\n\n* **スポット診断ツール（完全無料）**: \n  1回ごとにURLやキーワードを入力して「今AIに引用されているか」「構造化データに問題はないか」をその場で手動チェックするツール（例：*生成AI言及チェッカー* や *AIOGeoScanの無料診断* など）。\n* **フリープラン・無料トライアル付きツール**:\n  機能限定や期間限定（7日〜3ヶ月等）で自動計測を試せるものの、継続的な全自動モニタリングには有料プランへの移行が必要。\n\n---\n\n### 2. 「無料」で定点観測を自動化・代替する3つのアプローチ\n\nツール単体での自動化は難しくても、以下の代替手法を使うことで、費用をかけずに定点観測の仕組みを作ることができます。\n\n#### ① GA4（Google アナリティクス 4）で「AI経由のアクセス」を自動計測（完全無料）\n最も手軽で実用的な自動化手法です。\n* **やり方**:\n  GA4の「カスタムチャネルグループ」を設定し、参照元（Referrer）が `chatgpt.com` `perplexity.ai` `gemini.google.com` `claude.ai` などからのトラフィックを自動分類します。\n* **定点観測の自動化**:\n  Looker Studio（旧Googleデータポータル）と接続してダッシュボード化すれば、「どのAI検索エンジンから、どのページに、どれくらい流入しているか」の推移を**完全自動で定期確認**できます。\n\n#### ② GAS（Google Apps Script）＋ AI API で自作スクリプト（ほぼ無料）\nプログラムの知識が少し必要ですが、最も精度の高い定点観測を自動化できます。\n* **やり方**:\n  1. 無料で使える Google Apps Script (GAS) を用意。\n  2. 定期実行（タイマー機能で毎週月曜日の朝など）を設定。\n  3. OpenAI API や Perplexity API を呼び出し、「〇〇のおすすめサービスは？」などのプロンプトを自動送信。\n  4. 返ってきた回答内に自社サイトのドメインやブランド名が含まれているかを判定し、Googleスプレッドシートに保存＆Slackやメールに通知。\n* **費用**: GAS自体は無料。API利用料のみ（数十クエリ程度なら月数十円レベル）発生しますが、実質ほぼ無料で自動運用が可能です。\n\n#### ③ Ahrefs Webmaster Tools 等の無料SEOツールの活用（完全無料）\n* 自社サイトの所有権を認証すれば無料で使えるツール（Ahrefs Webmaster Tools等）を活用し、AI検索エンジンやAI概要（AI Overviews）からのリンク・引用データの変動を定期追跡します。\n\n---\n\n### 3. 有料ツールの自動化を検討すべきタイミング\n\n手動や自作での運用に限界を感じた場合、有料のAIOモニタリングツール（例：*Otterly.AI*、*GYRO-n SEO*、*GEO AIO TRACKER*、*GEO Hack Suite*など）を導入する目安は以下の通りです。\n\n1. **追跡したいプロンプト（キーワード）が10〜20件以上**に増えた\n2. **ChatGPT、Gemini、Perplexity、Google AI Overviewsなど複数AIでの横断比較**を全自動化したい\n3. **競合他社との引用シェア（AI Share of Voice）の推移**をグラフでレポート出力したい\n4. 定点観測に毎月数時間以上の人件費がかかっている（月額3,000円〜3万円程度のツールを導入した方が安上がりになる）\n\n---\n\n### まとめ\n\n* **「完全無料ツールだけで放置して全自動トラッキング」は不可能**。\n* まずは **GA4での「AI流入の自動モニタリング」** を構築しつつ、**月1回の無料ツール等での手動スポットチェック** から始めるのがおすすめです。\n* さらに一歩進んで自動化したい場合は、**GASを用いた自作仕組み化（ほぼ無料）** か **低価格な有料AIOツール（月額数千円〜）の導入** を検討するのが現実的です。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AIO対策の無料ツール6選 計測・診断と安い有料ツールの選び方": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "AIO対策は、無料ツールで「AIでの言及・引用」「サイトへの流入」「技術的な問題」を確認し、継続計測の手間が増えたら有料化する進め方がおすすめです。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "AIO対策の無料ツールは、検索結果の記述から次の6種類にまとめられます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "本記事では、**今すぐ使える無料のAIO対策・計測診断ツール6選**と、自社に合った**安くてコスパの良い有料ツールの選び方**を分かりやすく解説します。"
+   }
+  },
+  "aio対策 AIO対策は無料ツールだけでできますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい、基本的なAIO対策は無料ツールだけでできます。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "**結論: 小規模なサイトや店舗なら、無料ツールだけで始められるし、計測まで回せます。ただし、サイト数や記事数が増えたり、原因診断まで求めたりする場合は有料ツールか専門家が必要になります。**"
+   },
+   "Gemini": {
+    "label": "yes",
+    "quote": "結論から申し上げますと、**AIO対策（AI Overview/GEO対策）は無料ツールだけで十分に対応可能**です。"
+   }
+  },
+  "aio対策 構造化データのエラーは無料で確認できますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "はい、**構造化データのエラーは無料で確認できます。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "はい、無料で確認できます。会員登録も不要です。"
+   },
+   "Gemini": {
+    "label": "yes",
+    "quote": "結論から申し上げますと、**構造化データのエラーは完全無料で確認できます。**"
+   }
+  },
+  "aio対策 無料のAIOツールで定点観測まで自動化できますか？": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "**はい、無料のAIOツールでも、限られた質問数・頻度なら定点観測まで自動化できます。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "部分的にできます。ただし、無料枠の範囲内に限られます。"
+   },
+   "Gemini": {
+    "label": "no",
+    "quote": "結論から申し上げますと、**完全無料で「定点観測（定期的なプロンプト実行・順位や言及の自動トラッキング）」まで全自動化できる既存のAIO（LLMO/GEO）ツールは、2026年現在ほぼ存在しません**。"
+   }
+  }
+ }
+}

@@ -1552,8 +1552,11 @@ def build_research_pages(all_metas=()):
     # 記事の問いをAIに聞いた調査（/research/ai-answers/）。材料（data/ai_survey/ai-lab）が足りなければ作らない
     answers = None
     try:
-        sys.path.insert(0, str(ROOT / "scripts" / "subsidy"))
-        import research as _RS
+        # scripts/research.py（Phase 2 の収集）と同じ名前なので、場所を指定して読む（先に読まれていると取り違える）
+        import importlib.util as _ilu
+        _spec = _ilu.spec_from_file_location("subsidy_research", ROOT / "scripts" / "subsidy" / "research.py")
+        _RS = _ilu.module_from_spec(_spec)
+        _spec.loader.exec_module(_RS)
         answers = _RS.data("ai-lab", SITE_URL)
         if answers:
             # 見出し1はページの枠（page_shell）が題名で出す。ここでも h1 にすると1ページに2つになる

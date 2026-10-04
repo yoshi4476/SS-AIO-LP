@@ -1,0 +1,218 @@
+{
+ "slug": "googlemap-kuchikomi-henshin",
+ "site": "ai-lab",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "口コミ返信テンプレート集 星評価別の例文とAI活用術",
+  "googleマップ 低評価の口コミにも返信すべきですか？",
+  "googleマップ 返信にテンプレートをそのまま使ってもいいですか？",
+  "googleマップ AIで返信文を作っても規約違反になりませんか？"
+ ],
+ "answers": {
+  "口コミ返信テンプレート集 星評価別の例文とAI活用術": {
+   "ChatGPT": {
+    "urls": [
+     "https://support.google.com/business/answer/3474122?hl=ja",
+     "https://localreview.localbiz.jp/"
+    ],
+    "text": "口コミ返信は、**「お礼＋口コミの具体的な内容＋必要な対応」**を基本にすると書きやすくなります。星評価は目安にして、本文に書かれた満足点や不満点に合わせて調整しましょう。\n\nGoogleも、返信を簡潔・丁寧にし、低評価には事実確認や必要な謝罪を行い、個人情報を公開しないよう案内しています。[Google公式ガイド](https://support.google.com/business/answer/3474122?hl=ja)\n\n以下の例文は、これらの指針を踏まえて作成したオリジナルです。［ ］を実際の内容に置き換えて使えます。\n\n**星評価別の返信テンプレート**\n\n| 評価 | 返信の重点 | 例文 |\n|---|---|---|\n| ★★★★★ | 感謝と満足点への言及 | このたびはご利用いただき、ありがとうございます。［料理／接客／サービス］を気に入っていただけたとのこと、大変うれしく思います。またお会いできることを楽しみにしております。 |\n| ★★★★☆ | 感謝と改善点への対応 | ご利用と温かいお言葉をありがとうございます。［満足した点］をお褒めいただき、励みになります。［指摘された点］についても確認し、より快適にご利用いただけるよう努めます。 |\n| ★★★☆☆ | 良かった点と不満点の両方 | ご利用と率直なご感想をありがとうございます。［良かった点］を評価いただく一方、［不満点］ではご期待に添えず申し訳ございません。いただいたご意見を踏まえ、［実施予定の対応］に取り組みます。 |\n| ★★☆☆☆ | 具体的な謝罪と対応 | このたびは［待ち時間／接客など］により、ご不快な思いをおかけし申し訳ございません。［確認済みの事実］を確認いたしました。今後は［実施する改善策］を行い、再発防止に努めます。 |\n| ★☆☆☆☆ | 気持ちへの配慮と事実確認 | このたびのご利用で、ご不快な思いをされたとのこと、申し訳ございません。ご指摘の内容について詳しく確認したく、お手数ですが［公式問い合わせ窓口］までご連絡いただけますでしょうか。担当者が状況を伺い、対応いたします。 |\n\n**改善策や「確認した」という記述は、実際に行った場合だけ使ってください。** 未確認の場合は「ご指摘の内容を確認いたします」と書き換えます。星が高くても苦情が含まれる場合は、その内容への対応を優先します。\n\n**コメントなし・星だけの評価への返信**\n\n内容を推測せず、短くまとめます。\n\n- 高評価：「このたびはご利用と高い評価をいただき、ありがとうございます。またのご利用をお待ちしております。」\n- 低評価：「評価をお寄せいただき、ありがとうございます。ご利用時にお気づきの点がございましたら、［公式問い合わせ窓口］までお知らせいただけますと幸いです。」\n\n**AIで下書きを作る方法**\n\nAIには、口コミ本文だけでなく、業種・星評価・確認済みの事実・対応方針を渡すと、返信の条件を明確にできます。実際の口コミ返信AIサービスにも、業種、評価、文体、長さ、返信方針を指定する仕組みがあります。[LocalReview公式サイト](https://localreview.localbiz.jp/)\n\n次の指示文を使えます。\n\n```text\nあなたは［業種］の店舗担当者です。\n以下の口コミへの返信案を、日本語で2案作成してください。\n\n星評価：［1～5］\n口コミ本文：［個人情報を除いた本文］\n確認済みの事実：［事実／未確認］\n実施済み・実施予定の対応：［内容／未定］\n文体：丁寧で自然\n長さ：100～180字程度\n\n条件：\n・口コミの具体的な内容に触れる\n・記載のない事実、改善策、返金の約束を作らない\n・未確認の出来事を事実として断定しない\n・反論、個人攻撃、過度な宣伝を避ける\n・情報が不足している場合は、確認事項を別に示す\n```\n\n運用は、**個人情報を除く→AIで下書き→担当者が事実と表現を確認→投稿**の順がおすすめです。LocalReviewも、個人情報を入力せず、生成文を確認してから投稿するよう注意事項を掲載しています。[利用上の注意](https://localreview.localbiz.jp/)\n\n**返信で避けたいこと**\n\n- 全員に同じ文章を貼る：口コミの具体的な内容を一つ入れると、読んだことが伝わります。\n- 未確認の責任や対応を断定する：必要な謝罪と、確認できている事実を分けて書きます。\n- 公開返信で顧客の情報を明かす：詳しい確認は公式窓口で行います。\n- 評価変更や削除の見返りに割引を提示する：Googleでは禁止されています。[Google公式ガイド](https://support.google.com/business/answer/3474122?hl=ja)\n\nSOURCE: https://support.google.com/business/answer/3474122?hl=ja\nSOURCE: https://localreview.localbiz.jp/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sungrove.co.jp/google-reviews/",
+     "https://embedsocial.jp/blog/google-review-response-templates/",
+     "https://kobot.jp/kobot_lab/attracting-customers/google-bad-review-template/",
+     "https://freesquare.co.jp/media/meo/kuchikomi-reply/",
+     "https://www.sogo-ad.jp/blog/meo-review-reply-template/",
+     "https://0120.co.jp/blog/shobai-ai-05/",
+     "https://www.kuchikomi-ai.jp/blog/chatgpt-review-reply",
+     "https://horiemon.ai/school/column/ai-kuchikomi-henshin/",
+     "https://www.aiship.jp/ec-column/chatgpt",
+     "https://solvers-lab.com/column/generative-ai/kuchikomi-reply/"
+    ],
+    "text": "ページ本文の取得(WebFetch)は権限が付与されず使えなかったため、以下は検索結果の要約に基づきます。詳細な例文は各ページで確認してください。\n\n## 星評価別の返信テンプレート\n\n**星4〜5(高評価)**\n- 入れる要素は「感謝」「口コミ内容への言及」「再来店を促す言葉」の3点です。\n- 例: 「〇〇様 星5個の評価、誠にありがとうございます。当店のサービスにご満足いただけたようで、大変嬉しく思います。また次のご来店を心よりお待ちいたしております。」\n\n**星3〜4(中立)**\n- 貴重な意見として感謝を伝える形が紹介されていました。\n\n**星だけでコメントなし**\n- 「投稿への感謝」「評価への言及」「締めの言葉」の3つを書きます。\n- 高評価の例: 「口コミ投稿とご来店いただきありがとうございます。スタッフ一同またのご来店を心よりお待ちしております。」\n\n**星1〜2(低評価)**\n- 星だけの低評価の例: 「このたびはご来店いただきありがとうございます。また、評価をいただき感謝いたします。今後のサービス向上のため、もしご意見やご不満などございましたらお聞かせいただけると幸いです」\n- コメント付きの低評価は、検索結果の要約には具体例がありませんでした。業種別テンプレートは「コボットLAB」「0120.co.jp」のページで紹介されているようです。\n\n## AI活用術\n\n- **基本の流れ**: ChatGPTやGeminiに「口コミ本文」「お店の情報」「返信方針」の3点を渡して下書きを作らせ、最後は必ず人が確認してから投稿します。\n- **文体を合わせる**: 先に自分で5〜10件の返信を手書きし、その文体をAIに学習させると自店らしくなります。\n- **プロンプト例(鍼灸院)**: 「以下の口コミに対して、鍼灸院のオーナーとして丁寧で温かみのある返信文を作成してください。長期間通ってくださっていることへの感謝も含めて、150文字程度でお願いします」\n- **字数や文脈の指定**: ECレビュー向けには「200文字以内で丁寧に感謝を込めて」といった指定も紹介されています。\n- **投稿前のチェック項目**: 文字数、感情への寄り添い表現、改善対応の意志表明の3点です。\n\nSOURCE: https://www.sungrove.co.jp/google-reviews/\nSOURCE: https://embedsocial.jp/blog/google-review-response-templates/\nSOURCE: https://kobot.jp/kobot_lab/attracting-customers/google-bad-review-template/\nSOURCE: https://freesquare.co.jp/media/meo/kuchikomi-reply/\nSOURCE: https://www.sogo-ad.jp/blog/meo-review-reply-template/\nSOURCE: https://0120.co.jp/blog/shobai-ai-05/\nSOURCE: https://www.kuchikomi-ai.jp/blog/chatgpt-review-reply\nSOURCE: https://horiemon.ai/school/column/ai-kuchikomi-henshin/\nSOURCE: https://www.aiship.jp/ec-column/chatgpt\nSOURCE: https://solvers-lab.com/column/generative-ai/kuchikomi-reply/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "Googleマップ、ホットペッパー、ECサイト（Amazon・楽天など）の口コミ返信は、**既存顧客のロイヤリティ向上**だけでなく、**新規顧客の獲得（MEO対策・信頼獲得）**に直結する非常に重要な業務です。\n\n本記事では、**星1〜星5の評価別テンプレート例文**と、作業効率を10倍にしつつ質の高い返信を作る**AI（ChatGPT等）の活用プロンプト**をまとめて解説します。\n\n---\n\n## 口コミ返信の基本鉄則（4つのルール）\n\n1. **24〜48時間以内に返信する**（スピード感が誠実さを伝える）\n2. **必ず感謝から始める**（星1であっても、時間を割いて投稿してくれたことに感謝する）\n3. **コピペ感を減らす**（投稿者が書いた具体的な言葉やエピソードを文章に入れる）\n4. **感情的に反論しない**（理不尽な内容でも、第三者が見ていることを意識して冷静に対応する）\n\n---\n\n## 【星評価別】口コミ返信テンプレート集\n\n※`[ ]` の部分は店舗やサービスの内容に合わせて書き換えてご使用ください。\n\n---\n\n### ★★★★★（星5：大満足・大絶賛）\n**ポイント：** 感謝を全力で伝え、また来たくなる「プラスαの一言（おすすめ商品や新情報）」を添えます。\n\n#### 例文（飲食店・サロン・サービス業全般）\n> **件名/冒頭：** `[お客様名]` 様\n>\n> この度は、`[店舗名]` をご利用いただき、誠にありがとうございます！\n> また、大変嬉しい高評価と温かいコメントをお寄せいただき、スタッフ一同とても励みになっております。\n>\n> 特に `[口コミにあった具体例：例「パスタの味」や「接客」など]` についてお褒めいただき、光栄です。\n> `[店舗名]` では、季節ごとに新しい `[メニュー/サービス]` もご用意しておりますので、次回お越しの際もぜひ楽しみになさってください。\n>\n> `[お客様名]` 様のまたのご来店を、心よりお待ちしております。\n\n---\n\n### ★★★★☆（星4：概ね満足・少しの改善要望）\n**ポイント：** 満足していただいたお礼に加え、指摘された「惜しかった点」への真摯な受け止めと改善の意思を示します。\n\n#### 例文（ホテル・店舗・ECサイトなど）\n> **件名/冒頭：** `[お客様名]` 様\n>\n> この度は `[店舗名/商品名]` をご利用いただき、誠にありがとうございます。また、お忙しいところ貴重なご感想をご投稿いただき重ねて御礼申し上げます。\n>\n> `[褒められた点]` にご満足いただけたとのこと、大変嬉しく拝見いたしました。\n> 一方で、`[指摘された点：例「待ち時間」や「説明のわかりにくさ」]` に関しまして、ご不便をおかけし申し訳ございませんでした。\n>\n> いただいたご意見をスタッフ間で共有し、`[具体的な改善案：例「混雑時のご案内方法の見直し」]` に努めてまいります。\n>\n> 今後ともより快適にご利用いただけるよう改善してまいりますので、またのご利用を心よりお待ちしております。\n\n---\n\n### ★★★☆☆（星3：普通・可もなく不可もなく）\n**ポイント：** 利用への感謝とともに、次回は★5をもらえるような提案や一歩踏み込んだ魅力をアピールします。\n\n#### 例文（一般店舗・サービス）\n> **件名/冒頭：** `[お客様名]` 様\n>\n> この度は `[店舗名]` へご来店いただき、誠にありがとうございます。\n>\n> ご満足いただける点があった一方で、`[不満点や物足りなかった点]` については十分な期待にお応えできず、悔しい限りです。\n>\n> 当店では `[おすすめの別のメニュー/利用方法/時間帯など]` もご好評いただいておりますので、もしよろしければ次回お試しいいただけますと幸いです。\n>\n> 次回お越しの際には、より感動していただけるサービスを提供できるよう精進してまいります。またのご来店を心よりお待ちしております。\n\n---\n\n### ★★☆☆☆（星2：不満・一部トラブル）\n**ポイント：** 期待を裏切ってしまったことへの真摯な謝罪と、原因の特定・再発防止策を明確に伝えます。\n\n#### 例文（接客・設備などの不備）\n> **件名/冒頭：** `[お客様名]` 様\n>\n> この度は `[店舗名]` をご利用いただいたにもかかわらず、`[不満の原因：例「接客対応」「清掃の不備」]` によりご不快な思いをさせてしまい、誠に申し訳ございませんでした。\n>\n> せっかくお越しいただいたお客様のお気持ちを裏切る結果となり、深く反省しております。\n>\n> いただきましたご指摘を真摯に受け止め、`[具体的な対策：例「全スタッフへの接客研修の再徹底」「清掃チェックリストの運用強化」]` を即座に実施いたしました。\n>\n> 誠に勝手ではございますが、また挽回の機会をいただけますと幸いです。貴重なご意見をいただき、ありがとうございました。\n\n---\n\n### ★☆☆☆☆（星1：重度なクレーム・深刻なトラブル）\n**ポイント：** 言い訳をせず、全面的に謝罪します。感情的な反論はNG。必要に応じて個別対応（メールや電話）窓口を案内します。\n\n#### 例文（重大な不備・クレーム対応）\n> **件名/冒頭：** `[お客様名]` 様\n>\n> この度は `[店舗名]` をご利用いただきましたのに、`[問題の内容]` により、多大なご迷惑とご不快な思いをおかけしましたことを、心より深くお詫び申し上げます。\n>\n> 本来であればお客様に心地よい時間を提供するべきところ、今回のような不手際が生じてしまったこと、重く受け止めております。\n>\n> 今回の事態につきましては、`[対応策：例「該当スタッフへの厳重注意および業務プロセスの全面見直し」]` を行い、二度とこのようなことがないよう徹底いたします。\n>\n> もし差し支えございませんでしたら、詳細のご確認と直接のお詫びをさせていただきたく存じますので、大変お手数ですが `[連絡先メールアドレスまたは電話番号]` までご連絡いただけますと幸いに存じます。\n>\n> 貴重なお時間を割いてのご指摘、誠にありがとうございました。\n\n---\n\n## AI（ChatGPT等）を活用した口コミ返信術\n\nAIを使えば、**1件あたり30秒〜1分で高品質な返信を作成**できます。特に感情的になりがちな「星1〜2の低評価」への返信も、AIを通すことで客観的かつ丁寧なビジネス文章に仕上がります。\n\n### AI活用プロンプト例（指示文）\n\n以下のテキストをコピーしてChatGPTやClaude等に入力してください。\n\n#### ① 基本の自動生成プロンプト\n\n```markdown\n# 目的\nお客様からの口コミに対する返信文を作成してください。\n\n# 店舗情報\n- 店舗名: [カフェ〇〇]\n- 業種: [カフェ・軽食]\n\n# 口コミ情報\n- 星評価: [★4]\n- 口コミ本文:\n「コーヒーはすごく美味しかったけど、混んでいて提供までに15分くらいかかったのが少し気になりました。でも店員の笑顔は素敵でした。」\n\n# 制約条件\n- 丁寧で誠実な日本のビジネス文体（敬語）にすること。\n- 口コミ内の良かった点（コーヒーの味、笑顔）に感謝を伝えること。\n- 口コミ内の悪かった点（待ち時間）に対して謝罪と今後の改善策（オペレーションの見直し等）を入れること。\n- 文字数は200文字〜300文字程度にすること。\n```\n\n#### ② 大量処理用プロンプト（要約して返信案を3つ出す）\n\n```markdown\n以下の口コミに対して、返信案を【パターンA：親しみやすい】【パターンB：丁寧・フォーマル】【パターンC：簡潔】の3パターン作成してください。\n\n口コミ：[ここに口コミ本文を貼り付け]\n評価：[★3]\n```\n\n---\n\n## AIを使う際の注意点（チェックリスト）\n\n1. **ファクトチェック（事実確認）をする**\n   * AIが勝手に「次回使える10%OFFクーポンを差し上げます」など、**存在しないサービスや嘘の約束を追加していないか**必ず確認してください。\n2. **個人情報（PII）の入力に注意する**\n   * 口コミ内に本名や電話番号が含まれている場合、AIへの入力時には伏字（〇〇様など）にしてください。\n3. **最後は人間が感情を乗せて微調整する**\n   * 完全なAI任せ（コピペ）は、読んだ人に「定型文だな」と見抜かれます。語尾や一言の添え書きで温かみをプラスしましょう。",
+    "error": ""
+   }
+  },
+  "googleマップ 低評価の口コミにも返信すべきですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://support.google.com/business/answer/3474122",
+     "https://support.google.com/business/answer/3474050?hl=ja",
+     "https://support.google.com/business/answer/4596773?hl=ja"
+    ],
+    "text": "**はい、Googleマップの低評価の口コミにも、基本的には返信することをおすすめします。** Googleも、否定的な口コミに建設的に返信し、指摘された問題に対応することを推奨しています。[Google公式の返信ガイド](https://support.google.com/business/answer/3474122)\n\n返信は公開されるため、投稿者だけでなく、来店を検討する人にも対応姿勢が伝わります。評価の変更は保証されませんが、顧客の意見を尊重していることを示せます。[Google公式ヘルプ](https://support.google.com/business/answer/3474050?hl=ja)\n\n返信するときは、次の点を意識するとよいでしょう。\n\n- **冷静に、短く、具体的に書く。** 感情的な反論や投稿者への攻撃は避けます。\n- **事実を確認し、落ち度があれば謝罪する。** 未確認の内容まで認めず、必要な説明を丁寧に添えます。\n- **改善策や次の対応を伝える。** 実際にできることを書き、複雑な案件は電話やメールでの連絡を案内します。\n- **個人情報を公開しない。** 来店履歴や連絡先などを返信に書かないようにします。\n\nこれらはGoogleの公式案内にも沿った対応です。[Google公式の返信ガイド](https://support.google.com/business/answer/3474122)\n\n例えば、待ち時間についての指摘を確認できた場合は、次のように返信できます。\n\n> ご意見をお寄せいただきありがとうございます。お待たせしてしまい、申し訳ございません。混雑時のご案内方法を見直し、待ち時間の目安をお伝えできるよう改善いたします。\n\nただし、**スパムなど、Googleのポリシー違反が疑われる口コミは報告を検討してください。** 低評価であることや、内容が気に入らないことだけでは削除対象になりません。[Google公式の報告ガイド](https://support.google.com/business/answer/4596773?hl=ja)\n\nSOURCE: https://support.google.com/business/answer/3474122\nSOURCE: https://support.google.com/business/answer/3474050?hl=ja\nSOURCE: https://support.google.com/business/answer/4596773?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gyro-n.com/seo/hack/low-rating-review/",
+     "https://coomil.co.jp/column/googlemap-bad-review/",
+     "https://www.chaco-web.com/blog/review-responce/",
+     "https://simple-alpha.com/news/3760.html",
+     "https://www.sogo-ad.jp/blog/meo-review-reply-template/",
+     "https://asantech.co.jp/blog/google-review/turn_negatives_into_positives/",
+     "https://webriche.co.jp/blog/google-maps-badreviews/",
+     "https://marklis.com/googlemap-bad-review-recovery/",
+     "https://support.google.com/business/community-guide/318603570/how-to-effectively-respond-to-google-reviews-tips-and-best-practices?hl=en",
+     "https://www.socialpilot.co/reviews/blogs/how-to-respond-to-negative-google-reviews",
+     "https://wiserreview.com/blog/how-to-respond-to-google-reviews/",
+     "https://semrush.com/blog/how-to-deal-with-negative-review-attack"
+    ],
+    "text": "**はい、低評価の口コミにも返信すべきです。** 返信は投稿者本人だけでなく、これから来店を検討する人にも読まれます。誠実に対応していると、お店への信頼が高まります。\n\n**返信のポイント**\n- **スピード**: 24〜48時間以内を目安にします。早いほど火消しになり、問題を重く受け止めている姿勢も伝わります。\n- **トーン**: 感情的になったり、事実関係を公開の場で言い争ったりしてはいけません。たとえ相手が間違っていても、防御的な返信は印象を悪くします。\n- **内容**:\n  1. 指摘を受け止め、一部でも非があれば率直に謝罪する。\n  2. 改善策や対応を示す。\n  3. 詳細は電話やメールなど、公開されない場での対話に誘導する。\n- **個人情報**: 投稿者のプライバシーに関わる情報は書かないでください。\n- **テンプレート**: 同じ文面のコピペは避けます。Googleのガイドラインも同一返信に注意を促しています。個別の事情に合わせて書きます。\n\n**例外**\n明らかな事実無根、なりすまし、ポリシー違反の口コミは、返信で争わず、Googleに報告して削除申請します。\n\n今回の検索では、各ページの本文は開かず、検索結果の要約だけで判断しました。\n\nSOURCE: https://www.gyro-n.com/seo/hack/low-rating-review/\nSOURCE: https://coomil.co.jp/column/googlemap-bad-review/\nSOURCE: https://www.chaco-web.com/blog/review-responce/\nSOURCE: https://simple-alpha.com/news/3760.html\nSOURCE: https://www.sogo-ad.jp/blog/meo-review-reply-template/\nSOURCE: https://asantech.co.jp/blog/google-review/turn_negatives_into_positives/\nSOURCE: https://webriche.co.jp/blog/google-maps-badreviews/\nSOURCE: https://marklis.com/googlemap-bad-review-recovery/\nSOURCE: https://support.google.com/business/community-guide/318603570/how-to-effectively-respond-to-google-reviews-tips-and-best-practices?hl=en\nSOURCE: https://www.socialpilot.co/reviews/blogs/how-to-respond-to-negative-google-reviews\nSOURCE: https://wiserreview.com/blog/how-to-respond-to-google-reviews/\nSOURCE: https://semrush.com/blog/how-to-deal-with-negative-review-attack\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "結論からお伝えすると、**基本的には低評価の口コミにも返信すべき**です。\n\n低評価や批判的な口コミへの返信は、投稿した本人だけでなく、**「これからそのお店を利用しようとしている他のユーザー（第三者）」が必ず見ている**ためです。\n\n以下に、返信すべき理由や具体的な返信のポイント、例外的な対処法をまとめました。\n\n---\n\n### 低評価の口コミにも返信すべき3つの理由\n\n1. **第三者（未来の顧客）からの信頼を獲得できる**\n   多くのユーザーは、低評価の口コミそのものよりも「それに対して店舗がどう対応しているか」を見ています。誠意を持って冷静に対応している姿勢を示すことで、「しっかりしたお店だ」「トラブルがあっても安心できる」という好印象を与えることができます。\n\n2. **Google（MEO）からの評価につながる**\n   Googleビジネスプロフィールでは、口コミへの返信などのアクティブな運用を行うことが推奨されています。すべての口コミに丁寧に対応することは、検索順位（MEO対策）にも良い影響を与えます。\n\n3. **誤解の解釈やサービス改善の機会になる**\n   真摯にお詫びと改善策を伝えることで、投稿者が評価を上げてくれたり、ファンに変わったりすることもあります。また、顧客の生の声として業務改善に活かすことができます。\n\n---\n\n### 返信するときの重要なポイント\n\n低評価に返信する場合は、**「感情的にならないこと」**が最も重要です。以下の手順・注意点を意識して作成しましょう。\n\n#### 1. 感謝とお悔やみ（お詫び）を伝える\n不快な思いをさせたことに対するお詫びと、貴重な意見をくれたことへの感謝を伝えます。\n*   **例：**「この度はご来店いただき、誠にありがとうございました。また、ご期待に沿うサービスを提供できず、不快な思いをさせてしまい大変申し訳ございませんでした。」\n\n#### 2. 事実を受け止め、改善姿勢を示す\n批判内容を謙虚に受け止め、どのように改善するかを伝えます。\n*   **例：**「ご指摘いただいたスタッフの対応につきましては、全スタッフで共有し、接客マナーの再徹底に努めてまいります。」\n\n#### 3. 事実と異なる場合は「冷静・客観的」に説明する\n理不尽な内容や事実誤認がある場合でも、相手を攻撃せず冷静に事実を伝えます。\n*   **例：**「〇〇の件につきまして、当日の状況を確認いたしましたところ〜〜〜という経緯でございました。ご説明が不足しており誤解を招いてしまい誠に申し訳ございません。」\n\n#### 4. 詳細なやり取りは個別に誘導する\nコメント欄で不毛な議論を続けるのは避け、メールや電話などの個別窓口を案内します。\n*   **例：**「よろしければ詳細を確認し適切に対応させていただきたく存じますので、恐れ入りますが問い合わせフォーム（URL）またはお電話にてご連絡いただけますと幸いです。」\n\n---\n\n### 返信すべきではない例外的なケース\n\n以下のような口コミの場合は、返信せずに**Googleへ削除リクエスト（ポリシー違反の報告）**を行うことを検討してください。\n\n*   **完全な事実無根・嫌がらせ・競合他社によるサクラ投稿**\n*   **個人名やプライバシーを侵害する記載がある**\n*   **暴言、誹謗中傷、公序良俗に反する言葉遣い**\n\n※返信してしまうと「店舗側がその投稿を認識してやり取りを認めた」とみなされ、削除申請が通りにくくなる場合があります。あきらかにガイドライン違反のものは、まずGoogleに違反報告を行いましょう。\n\n---\n\n### まとめ\n\n低評価がつくと落ち込んだり反論したくなったりするものですが、**「返信は未来の客に見せるもの」**と割り切り、誠意とプロ意識を持った丁寧な対応を心がけることが、結果的に店舗の評判を守ることにつながります。",
+    "error": ""
+   }
+  },
+  "googleマップ 返信にテンプレートをそのまま使ってもいいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://support.google.com/business/answer/3474050?hl=ja",
+     "https://support.google.com/contributionpolicy/answer/7400114?hl=ja"
+    ],
+    "text": "Google マップの口コミへの返信なら、**テンプレートを下書きに使うのはよいですが、同じ文章をそのまま何度も貼り付けるのは避けましょう。**\n\n確認した公式案内には、テンプレートの使用自体を一律に禁止する記載はありません。ただし、Google は返信をコンテンツポリシーに照らして審査します。また、ポリシーでは「同じコンテンツを複数回投稿すること」を禁止しています。そのため、同文の返信を繰り返しても問題ないとは言い切れません。[返信の公式案内](https://support.google.com/business/answer/3474050?hl=ja)、[コンテンツポリシー](https://support.google.com/contributionpolicy/answer/7400114?hl=ja)\n\n実務上は、**お礼などの基本部分は共通にして、口コミの具体的な内容に触れる一文を加える**とよいでしょう。例えば、料理を褒められた場合は次のようにします。\n\n> ご来店と口コミをありがとうございます。パスタを気に入っていただけてうれしく思います。またのご来店をお待ちしております。\n\n苦情への返信では、定型のお礼だけで済ませず、指摘された内容への回答や、確認・対応することを状況に合わせて書くのがおすすめです。\n\nSOURCE: https://support.google.com/business/answer/3474050?hl=ja\nSOURCE: https://support.google.com/contributionpolicy/answer/7400114?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://embedsocial.jp/blog/google-review-response-templates/",
+     "https://tokon.co.jp/news/info/10513/",
+     "https://marcyu.substack.com/p/20264googleng",
+     "https://go-local.jp/2026/02/1380/",
+     "https://gmotech.jp/semlabo/meo/blog/google-business-profile-review/",
+     "https://meo.omotenashi.com/mybusiness-edit-item-review/",
+     "https://assist-centering.co.jp/media/detail/reply-to-reviews-tips-examples-templates-google/"
+    ],
+    "text": "**結論: 規約違反ではありませんが、テンプレートをそのまま使うのはおすすめしません。** 一言でも、そのお客様の口コミ内容に触れた文を足してください。\n\n- **規約面**: 検索した範囲では、返信のテンプレート使用そのものを禁じる記述は見つかりませんでした。Googleは2026年4月17日にクチコミ関連のポリシーを更新しましたが、これは事業者がスタッフ名入りの口コミを求めることやノルマを設けることの禁止が中心でした。\n- **印象面**: 定型文だけの返信は「ちゃんと読んでいない」と受け取られやすいと複数のサイトが指摘しています。\n- **おすすめの使い方**:\n  - 土台としてテンプレートやAIの下書きを使い、口コミごとに具体的な内容(商品名、来店のきっかけ、褒められた点など)を1文以上足す。\n  - 長文や連投はスパム判定の恐れがあるため、短く具体的にまとめる。\n  - 口コミ投稿者の名前や個人情報を返信にそのまま書くのは控える。\n\nここまでの内容は検索結果の要約をもとにしており、各ページを個別に開いて確認したわけではありません。また、Google公式ヘルプで返信のテンプレート利用について直接触れた箇所は確認できていません。\n\nSOURCE: https://embedsocial.jp/blog/google-review-response-templates/\nSOURCE: https://tokon.co.jp/news/info/10513/\nSOURCE: https://marcyu.substack.com/p/20264googleng\nSOURCE: https://go-local.jp/2026/02/1380/\nSOURCE: https://gmotech.jp/semlabo/meo/blog/google-business-profile-review/\nSOURCE: https://meo.omotenashi.com/mybusiness-edit-item-review/\nSOURCE: https://assist-centering.co.jp/media/detail/reply-to-reviews-tips-examples-templates-google/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "結論から申し上げますと、**テンプレートを「全く同じ文章のまま（丸コピペ）」で返信し続けるのは避けたほうが良い**です。\n\nただし、**「テンプレートをベースにして、1〜2文だけ個別の内容を付け加えて返信する」という方法であれば非常に効果的でおすすめ**です。\n\nそのまま使うのが良くない理由と、効率的かつ好印象を与えるテンプレートの活用方法を解説します。\n\n---\n\n### なぜ「そのまま（コピペ）」は避けたほうがいいのか？\n\n#### 1. 他のユーザーから「コピペ（不誠実）」に見えてしまう\nGoogleマップの口コミと返信は、投稿した本人だけでなく**「これからお店を探す第三者」も見ています**。\nすべての口コミに対して全く同じ返信が並んでいると、「自動返信かな？」「お客さんの意見をちゃんと読んでいないな」と無機質で不誠実な印象を与えてしまいます。\n\n#### 2. 低評価（クレーム）に定型文で返すと炎上リスクがある\n特に★1〜2などの厳しい口コミに対して定型文で返信すると、「反省していない」「適当にあしらわれた」と投稿者の怒りを増幅させ、トラブルが大きくなるリスクがあります。\n\n#### 3. 口コミに書いてくれた具体的な内容を無視することになる\n投稿者が「〇〇という料理が美味しかった」「〇〇さんの接客が良かった」と具体的に書いてくれた場合、定型文だとその嬉しさや感謝が伝わりません。\n\n---\n\n### おすすめの運用方法：テンプレート＋「ワンポイントカスタマイズ」\n\n時間短縮のためにテンプレートを使うのは素晴らしい運用方法です。以下の構成で**「真ん中の1〜2文だけ」を毎回変える**ようにすると、作業時間を抑えつつ誠実な印象を与えられます。\n\n#### 基本の返信構成\n1. **挨拶・感謝（定型文）**\n2. **口コミ内容への具体的な言及（ここだけ変える！）**\n3. **締めの挨拶・再来店のお願い（定型文）**\n\n---\n\n### 返信例（カスタマイズのイメージ）\n\n#### 【良い評価（★4〜5）の場合】\n> **（定型文）** 〇〇様、この度は当店をご利用いただき、また嬉しい口コミをありがとうございます！\n>\n> **（個別アレンジ）** **「〇〇（具体的に褒められたメニューやサービス）」をお気に召していただけて大変光栄です。季節限定のメニューも好評ですので、ぜひ次回お試しください。**\n>\n> **（定型文）** またのご来店をスタッフ一同、心よりお待ちしております。\n\n#### 【悪い評価（★1〜2）の場合】\n> **（定型文）** 〇〇様、この度は当店をご利用いただき誠にありがとうございました。\n>\n> **（個別アレンジ）** **せっかくご来店いただいたにも関わらず、「〇〇（具体的に指摘された点：例：お料理の提供時間）」に関しましてご不快な思いをさせてしまい、大変申し訳ございませんでした。**\n>\n> **（定型文）** いただいたご意見を真摯に受け止め、スタッフの教育およびサービス改善に努めてまいります。貴重なご指摘をいただき、感謝申し上げます。\n\n---\n\n### まとめ\n\n*   **完全な丸コピペ：** ✕（不誠実に見えるため非推奨）\n*   **テンプレート＋1文アレンジ：** 〇（最も効率的で好印象）\n\n「返信のベース（型）」としてテンプレートを活用し、**相手のお名前（アカウント名）**と**口コミで触れられている具体的な内容**を1つだけ文中に盛り込むようにしてみてください。それだけで見違えるほど親しみやすく、信頼されるお店の印象になります。",
+    "error": ""
+   }
+  },
+  "googleマップ AIで返信文を作っても規約違反になりませんか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://support.google.com/business/answer/3474050?hl=ja",
+     "https://support.google.com/business/answer/7400114?hl=ja",
+     "https://developers.google.com/my-business/content/policies"
+    ],
+    "text": "**お店側がGoogleマップの口コミへの返信文をAIで作ること自体は、直ちに規約違反になるとは考えられません。** 確認したGoogle公式ポリシーには、AIによる返信文の作成を一律に禁止する記載はありません。ただし、これはポリシーからの判断であり、GoogleがすべてのAI返信を承認すると保証しているわけではありません。返信はコンテンツポリシーに基づいて審査されます。[公式の返信ガイド](https://support.google.com/business/answer/3474050?hl=ja)\n\nAIで作った文でも、次のような内容は違反になり得ます。\n\n- 実際には行っていない対応や、商品・サービスについての虚偽の説明\n- 顧客への中傷、脅迫、根拠のない非難\n- 本人の同意のない個人情報の公開\n- 「口コミを削除すれば割引します」など、特典と引き換えに口コミの変更・削除を求める内容\n\nこれらはGoogleの[禁止コンテンツのポリシー](https://support.google.com/business/answer/7400114?hl=ja)で禁止されています。\n\n**実務上は、AIに下書きを作らせ、店舗の担当者が事実と表現を確認してから投稿する使い方が適切です。** なお、外部ツールで自動投稿まで行う場合は別の確認が必要です。Google Business Profile APIのポリシーでは、ユーザーの事前の具体的かつ明示的な同意なしに、口コミ返信などを自動実行することを禁止しています。[APIポリシー](https://developers.google.com/my-business/content/policies)\n\nSOURCE: https://support.google.com/business/answer/3474050?hl=ja\nSOURCE: https://support.google.com/business/answer/7400114?hl=ja\nSOURCE: https://developers.google.com/my-business/content/policies\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://marcyu.substack.com/p/20264googleng",
+     "https://github.com/ManatoYamashita/fw-line-meo/issues/179",
+     "https://dxmagazine.jp/news/2615ko4589/",
+     "https://haseshout.hatenablog.com/entry/2026/02/17/191231",
+     "https://blog.rocks-c.com/2026/07/29/google-review-reply-ai/",
+     "https://go-local.jp/2026/02/1398/",
+     "https://libera-inc.jp/googlemap-review-countermeasure/",
+     "https://www.seo-research.co.jp/googlemap-review-stema-2026-risk/",
+     "https://go-local.jp/2026/01/1252/",
+     "https://honichi.com/news/2026/06/23/gbp-gemini/",
+     "https://support.google.com/business/answer/17142585?hl=ja&co=GENIE.Platform%3DDesktop",
+     "https://www.suzukikenichi.com/blog/gemini-can-now-manage-google-business-profiles-helping-with-review-responses-and-performance-analysis/",
+     "https://note.smash.ne.jp/n/ned6bc69ce389?gs=59e7162e9194",
+     "https://media.tokyo.jp/seo/gemini-meo/",
+     "https://keieiax.jp/blog/google-business-profile/",
+     "https://asantech.co.jp/blog/google-businessprofile/gbp-ai-reply-test/",
+     "https://boostx-inc.com/blog/ai-google-business-profile-review-reply-meo/",
+     "https://asantech.co.jp/blog/google-review/gbp-ai-reply-test/"
+    ],
+    "text": "**結論:** 返信文をAIで作成すること自体は、規約違反になりません。Google自身がGeminiで口コミ返信の下書きを作れる機能を提供しています。\n\n**根拠(検索結果から確認できた範囲)**\n- 2026年6月、GoogleビジネスプロフィールとGeminiが連携しました。口コミへの返信や投稿の作成を、Geminiとの会話形式で行えます。\n- 利用条件は、Geminiウェブアプリ(gemini.google.com)から使うことです。そのうえで、認証済みビジネスプロフィールのオーナーまたは管理者であること、個人のGoogleアカウントでログインすること、18歳以上でアクティビティの保存がオンになっていることが必要です。\n- 2026年4月のGoogleのポリシー改定で禁止されたのは、「評価の操作」に当たる行為です。特定の内容を含むクチコミを依頼すること、クチコミ獲得のノルマを設けること、などが該当します。この改定が規制しているのは、返信文の作成方法ではなく、口コミの内容や集め方です。\n- 一方、AIでクチコミ(投稿)を量産することは、規約違反やステマとして問題視されています。返信文の作成とは別の話です。\n\n**運用上の注意**\n- AIの文面をそのまま自動公開せず、「下書き」として使い、人が確認して投稿するのが安全です。低評価、医療・美容系、個人情報を含む口コミでは特に注意が必要です。\n- 口コミ本文の個人情報は削ってからAIに渡してください。\n- 返信文で「スタッフ名を書いて」などの特定の内容を口コミ投稿者に求めると、評価の操作に当たる恐れがあります。\n\n**確認できなかった点:** WebFetch の権限が許可されず、Google公式ヘルプやブログの本文は開けませんでした。上記は検索結果の要約に基づいています。ポリシー本文の細部は公式ページで確認してください。\n\nSOURCE: https://marcyu.substack.com/p/20264googleng\nSOURCE: https://github.com/ManatoYamashita/fw-line-meo/issues/179\nSOURCE: https://dxmagazine.jp/news/2615ko4589/\nSOURCE: https://haseshout.hatenablog.com/entry/2026/02/17/191231\nSOURCE: https://blog.rocks-c.com/2026/07/29/google-review-reply-ai/\nSOURCE: https://go-local.jp/2026/02/1398/\nSOURCE: https://libera-inc.jp/googlemap-review-countermeasure/\nSOURCE: https://www.seo-research.co.jp/googlemap-review-stema-2026-risk/\nSOURCE: https://go-local.jp/2026/01/1252/\nSOURCE: https://honichi.com/news/2026/06/23/gbp-gemini/\nSOURCE: https://support.google.com/business/answer/17142585?hl=ja&co=GENIE.Platform%3DDesktop\nSOURCE: https://www.suzukikenichi.com/blog/gemini-can-now-manage-google-business-profiles-helping-with-review-responses-and-performance-analysis/\nSOURCE: https://note.smash.ne.jp/n/ned6bc69ce389?gs=59e7162e9194\nSOURCE: https://media.tokyo.jp/seo/gemini-meo/\nSOURCE: https://keieiax.jp/blog/google-business-profile/\nSOURCE: https://asantech.co.jp/blog/google-businessprofile/gbp-ai-reply-test/\nSOURCE: https://boostx-inc.com/blog/ai-google-business-profile-review-reply-meo/\nSOURCE: https://asantech.co.jp/blog/google-review/gbp-ai-reply-test/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFijpexIG4iR-sPi945zuFp4ItAybqR2MENWGstSgeCfouWSSTG3q3lBbBCTj0bMJ2oT1yfDjGBFvygy36lwalQWJSEENu41oRGnBb_TjcdOUBYcU_T9ErDfcHPBcekP0UvHTV5pVPmScWcVw8RERk6OsBoKRNDhtCmRlBAGs4BfrgdffCxZn_Kawknv-SoY_K58rJSUMhriTkaCbStkZm2_RXr9N355ljRBsScJBPZFTZ044RSAJ4ZdRtXZ30Lahd32_9z7NBRi1OVliNgCT4EG7O0aC4OytnD8DJ_rb8lVGchm1D9VVdwm-CrYbyFNi1H2lf21vM8ThCXrUavWdtNWgNM4hvIk2TmB92hEIRjE3awLUzqEBjWy-P2N7Xw9yE1Un4kHPhR0YSj0Fl2ttMfUtnn0bKo5tYg1Wzb5ag1_r2Pns9vPjmKKbkVXJOMEBkhC5f_g0-HIrGfDXkP0iyTaeQwdLQovTKYPHJ3wvhrMiW3e5lkok9L9Jgb8KNyrz2k5fTPgd4rbWSeBcyVpBnueietRBDMPxLJchVVcoaqsJI0eapJSb_TtZfysywtABnK2ciw_T15p9WPNMT1kvxpZ28HlmVPsQ1v1qw45QzuX7y5Ta2Rddk-Mv-VdCCgK4sXg_h2be4QKTj4hZpC-XCnQy1DiNH9pwLS3EkyYDjVBzvVNbUYpVFxIb4oUd4hehqHHVMT7MIe-Jod7ihMXLfkug==",
+     "https://asantech.co.jp/blog/google-businessprofile/gbp-ai-reply-test/",
+     "https://blog-clkaigyo.com/ai-introductory-guide/google-maps-review-management-ai-utilization",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEdGsJgLjRjz7l9ok_1sHjkRCFFiLnu0-QU-q7Q09N_uq8fW1_UoQSRY-EKvAYsFbFRzdX0_ihNTjQ5FVu_yI1Om4yOvVtFRr_8QyXmK_MBwmSeAJ-OtibldE2i1UY31ALisCnADiFCWdEtxC97jEQDrw==",
+     "https://www.frog-businesssupporter.com/post/meo-review",
+     "https://boostx-inc.com/blog/ai-google-business-profile-review-reply-meo/",
+     "https://brandgard.jp/magazine/brandguard_ai_review_reply_guide.html",
+     "https://www.curioinc.jp/cases/google-review-reply/"
+    ],
+    "text": "**結論から言うと、Googleマップ（Googleビジネスプロフィール）のクチコミへの「返信文」をAIで作って使用すること自体は、Googleの規約違反（ポリシー違反）にはなりません。**\n\nGoogle公式もビジネスプロフィール等の管理機能においてAIの活用を推進しており、返信文の作成にAI（ChatGPTやGeminiなど）を活用することは問題ありません。\n\nただし、運用方法によっては**規約違反やトラブルにつながるリスク**があるため、以下のポイントに注意が必要です。\n\n---\n\n### 注意すべき3つのリスクと注意点\n\n#### 1. 「口コミを投稿すること」と「返信すること」の混同に注意\n* **返信文をAIで作る（OK）：** 店舗オーナーがお客様へのお礼や対応としてAI文面を使う行為は問題ありません。\n* **AIで口コミ（評価）自体を捏造して投稿する（アウト）：** サクラ行為や第三者を装ってAIで高評価レビューを自作自演する行為は、Googleの「虚偽のエンゲージメント」ポリシー違反となり、アカウント停止等のペナルティ対象となります。また景品表示法（ステルスマーケティング規制）違反にも問われます。\n\n#### 2. 定型文の大量連投による「スパム判定」リスク\nAIが生成した汎用的で全く同じような返信文を、短時間で大量に連続投稿すると、Googleのスパム検知システムに「自動化されたスパム行為」と判定されるリスクがあります。また、お客様側からも「コピペで返信されている」と見抜かれ、印象が悪くなる可能性があります。\n\n#### 3. AIによる「嘘・誤った情報（ハルシネーション）」の含み\nAIは存在しないサービスや誤った店舗ルール、事実と異なる内容を自然な文章で作成してしまうことがあります。確認せずにそのまま送信してしまうと、お客様とのトラブルに発展する恐れがあります。\n\n---\n\n### 安全かつ効果的にAI返信を使うコツ\n\n* **AIは「下書き作成」として使う**\n  AIに完全に任せ切りにするのではなく、生成された文面を**店舗スタッフが必ず確認・微調整してから送信する**運用が推奨されます。\n* **お客様が書いてくれた具体名を取り入れる**\n  「〇〇をご注文いただきありがとうございます」「スタッフの〇〇へのお褒めも励みになります」など、お客様の口コミ内容に合わせた一言を書き加えると、温かみがありGoogleからの評価にも繋がる自然な返信になります。\n* **低評価（クレーム）の返信は特に人の目を入れる**\n  ネガティブな口コミに対してAIの文面をそのまま使うと、冷たい・誠意がないと感じられることがあります。状況確認を行った上で、人間の手で誠実な文章に調整することが大切です。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "口コミ返信テンプレート集 星評価別の例文とAI活用術": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "口コミ返信は、**「お礼＋口コミの具体的な内容＋必要な対応」**を基本にすると書きやすくなります。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "ページ本文の取得(WebFetch)は権限が付与されず使えなかったため、以下は検索結果の要約に基づきます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "Googleマップ、ホットペッパー、ECサイト（Amazon・楽天など）の口コミ返信は、**既存顧客のロイヤリティ向上**だけでなく、**新規顧客の獲得（MEO対策・信頼獲得）**に直結する非常に重要な業務です。"
+   }
+  },
+  "googleマップ 低評価の口コミにも返信すべきですか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい、Googleマップの低評価の口コミにも、基本的には返信することをおすすめします。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**はい、低評価の口コミにも返信すべきです。**"
+   },
+   "Gemini": {
+    "label": "yes",
+    "quote": "結論からお伝えすると、**基本的には低評価の口コミにも返信すべき**です。"
+   }
+  },
+  "googleマップ 返信にテンプレートをそのまま使ってもいいですか？": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "Google マップの口コミへの返信なら、**テンプレートを下書きに使うのはよいですが、同じ文章をそのまま何度も貼り付けるのは避けましょう。**"
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   },
+   "Gemini": {
+    "label": "no",
+    "quote": "結論から申し上げますと、**テンプレートを「全く同じ文章のまま（丸コピペ）」で返信し続けるのは避けたほうが良い**です。"
+   }
+  },
+  "googleマップ AIで返信文を作っても規約違反になりませんか？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   },
+   "Gemini": {
+    "label": "split",
+    "quote": ""
+   }
+  }
+ }
+}

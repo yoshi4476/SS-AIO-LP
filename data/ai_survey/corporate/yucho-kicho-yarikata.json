@@ -1,0 +1,222 @@
+{
+ "slug": "yucho-kicho-yarikata",
+ "site": "corporate",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "記帳のやり方に迷うゆうちょ口座 送金と振込の見分け方",
+  "電気代や家賃の自動払込はどう記帳する？",
+  "ゆうちょの記帳のやり方は？",
+  "記帳 ゆうちょの「送金」と「振込」の違いは何ですか？"
+ ],
+ "answers": {
+  "記帳のやり方に迷うゆうちょ口座 送金と振込の見分け方": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.jp-bank.japanpost.jp/kojin/sokin/koza/kj_sk_kz_furikae.html",
+     "https://www.jp-bank.japanpost.jp/hojin/smart/bizdirect/pdf/bizdirect_hsk_04.pdf",
+     "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042"
+    ],
+    "text": "ゆうちょ口座の「送金」と「振込」は、**相手がゆうちょ銀行か、他の金融機関か**で見分けるのが基本です。ただし、帳簿の勘定科目は、お金が動いた目的で決めます。\n\n| 確認する点 | 送金 | 振込 |\n|---|---|---|\n| 相手の口座 | ゆうちょ銀行 | 他の金融機関 |\n| 主な取扱い | 電信振替 | 他行との振込 |\n| 明細の表示例 | 送金・電信振替 | 振込・振込受入・振込払出 |\n\nゆうちょ銀行の公式情報でも、電信振替はゆうちょ口座間の送金、振込は他の金融機関との送金として区別されています。表示は通帳や利用サービスによって異なります。[電信振替の公式案内](https://www.jp-bank.japanpost.jp/kojin/sokin/koza/kj_sk_kz_furikae.html)、[公式の明細表示一覧](https://www.jp-bank.japanpost.jp/hojin/smart/bizdirect/pdf/bizdirect_hsk_04.pdf)\n\n**帳簿に記帳するときは、次の順番で確認してください。**\n\n1. 通帳・アプリで、入金か出金かを確認する。\n2. 相手先名、日付、金額を請求書や領収書と照合する。\n3. 売上代金の回収、経費の支払い、自分の口座間の移動など、取引の目的に応じて仕訳する。\n\n例えば、すでに売掛金として計上した代金3万円が入金された場合は、「送金」「振込」のどちらでも、通常は `借方：普通預金 30,000円／貸方：売掛金 30,000円` です。**表示だけで売上や経費を判断しないこと**が大切です。[質問と同題の記事の仕訳説明](https://corp.7senses.co.jp/blog/yucho-kicho-yarikata)\n\nまた、通帳に「合算」とある場合は、内訳を確認してから仕訳します。公式FAQによると、未記帳明細が30行を超えると合算され、直近5つの合算分で合算日から1年以内なら、窓口で「通帳未記入金内訳書」を無料発行できます。通帳と本人確認書類を持参してください。[ゆうちょ銀行の公式FAQ](https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042)\n\nSOURCE: https://www.jp-bank.japanpost.jp/kojin/sokin/koza/kj_sk_kz_furikae.html\nSOURCE: https://www.jp-bank.japanpost.jp/hojin/smart/bizdirect/pdf/bizdirect_hsk_04.pdf\nSOURCE: https://corp.7senses.co.jp/blog/yucho-kicho-yarikata\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13292792593",
+     "https://www.jp-bank.japanpost.jp/hojin/smart/bizdirect/pdf/bizdirect_hsk_04.pdf",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=836",
+     "https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kj_sk_fm_furikomi.html",
+     "https://www.jp-bank.japanpost.jp/kojin/sokin/koza/kj_sk_kz_furikomi_inj.html",
+     "https://goiryoku.com/sokin/",
+     "https://wakuwaku-jyoho.com/24530.html",
+     "https://www.chigai-shirabe.com/soukin-furikomi-chigai-yucho/",
+     "https://kotokurabe.com/transfer-money/",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=10171",
+     "https://www.keihi.com/column/5712/",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=49"
+    ],
+    "text": "ゆうちょの通帳では、記帳の表記が「送金」ならゆうちょ口座間の送金(電信振替)、「振込」なら他の金融機関からの振込、と見分けられます。\n\n- **送金(電信振替)**: ゆうちょ口座同士のやり取りです。窓口・ATM・ゆうちょダイレクトからの送金は、通帳に「送金」と表示されます。日付、取扱店、金額、送金した人の名義が印字されます。\n- **振込**: ゆうちょの外、つまり他行口座とのやり取りです。他行から入金された場合は「振込」と表示され、名義は半角カタカナ表記になります。\n- **払込**: 現金をゆうちょ口座に送る場合は、「払込」と呼ばれる別の扱いです。\n- **記号番号と店名・口座番号**: 同じ口座でも、ゆうちょ口座間では「記号番号」を使い、他行から受け取る場合は「振込用の店名・預金種目・口座番号」を使います。他行から振り込んでもらうときは、後者を相手に伝えてください。\n- **会計処理**: 入金から振込手数料が引かれていた場合は、差し引かれた手数料を「支払手数料」として処理するのが一般的です。\n\n**注意**: ゆうちょ銀行の公式ページや解説ページ本文は、権限の都合で開けませんでした。上の内容は検索結果の要約に基づいています。摘要欄の細かい表記(「ﾌﾘｺﾐ」の出方など)は、公式の「振込用の店名・預金種目・口座番号の通帳への記載例」のページで確認してください。\n\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13292792593\nSOURCE: https://www.jp-bank.japanpost.jp/hojin/smart/bizdirect/pdf/bizdirect_hsk_04.pdf\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=836\nSOURCE: https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kj_sk_fm_furikomi.html\nSOURCE: https://www.jp-bank.japanpost.jp/kojin/sokin/koza/kj_sk_kz_furikomi_inj.html\nSOURCE: https://goiryoku.com/sokin/\nSOURCE: https://wakuwaku-jyoho.com/24530.html\nSOURCE: https://www.chigai-shirabe.com/soukin-furikomi-chigai-yucho/\nSOURCE: https://kotokurabe.com/transfer-money/\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=10171\nSOURCE: https://www.keihi.com/column/5712/\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=49\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1292314927",
+     "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14104185929",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11239591491",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14297255574"
+    ],
+    "text": "ゆうちょ銀行の通帳や明細に印字される**「送金」**と**「振込」**は、**「お金の移動元（または移動先）が『ゆうちょ銀行同士』か『他の銀行』か」**によって区別されています。\n\n会計上の記帳（帳簿付け）や取引先の特定を行う際の見分け方と、実際の記帳手順をわかりやすく整理しました。\n\n---\n\n### 1. 「送金」と「振込」の印字の違い・見分け方\n\n| 項目 | **「送金」** | **「振込」** |\n| :--- | :--- | :--- |\n| **主な意味** | **ゆうちょ銀行の口座同士**でのお金のやりとり | **他行（三菱UFJ・三井住友・楽天銀行など）**とのやりとり |\n| **システムの仕組み** | ゆうちょ銀行独自の振替システム | 全国銀行データ通信システム（全銀システム）経由 |\n| **通帳の相手名表記** | **漢字**（またはカナ）で表示されることが多い | **カタカナ**で表示されることが多い |\n| **主な取引パターン** | ・ゆうちょダイレクトやATMでの電信振替<br>・同口座間での送金 | ・他行口座からの振込入金<br>・他行口座への振込送金 |\n\n※窓口等で現金を使って直接ゆうちょ口座へ入金した場合は、**「電信払込」**などと表示されることもあります。\n※クレジットカードや公共料金などの口座引落は**「自払（自動払込）」**と表示されます。\n\n---\n\n### 2. 会計帳簿（記帳）への反映手順\n\n会計ソフトや複式簿記で記帳する場合、「送金」か「振込」か自体で勘定科目が変わるわけではありません（いずれも「普通預金」や「当座預金」からの入出金となります）。\n\n重要なのは**「誰からの入金／誰への支払いか」を特定すること**です。\n\n#### 記帳の4手順：\n1. **摘要欄の印字を確認**\n   * 「送金」なら相手もゆうちょ口座、「振込」なら他行口座と判断します。\n2. **入金・出金金額と「相手先名」を確認**\n   * 入金なら請求金額や売上帳、出金なら請求書や領収書と突き合わせます。\n3. **勘定科目を決定して記帳**\n   * **売上等の回収（入金）**：`（借方）普通預金 / （貸方）売掛金`（または売上）\n   * **経費等の支払い（出金）**：`（借方）買掛金（または各経費科目） / （貸方）普通預金`\n4. **振込手数料の確認**\n   * 支払い時にこちらで振込手数料を負担した場合は、差額を「支払手数料」として計上します。\n\n---\n\n### 3. 記帳の際によくある疑問と注意点\n\n#### ① 通帳に「合算」と印字されて明細が分からない場合\n長期間通帳記入をしていないと、複数の取引が**「合算」**として1行にまとめられてしまいます。\n* **対処法**：ゆうちょダイレクトの「WEB明細」を確認するか、ゆうちょ銀行窓口で「未記帳分内訳明細」の発行を請求してください。\n\n#### ② 相手先名が途中で切れている・カタカナでわかりにくい場合\n他行からの「振込」は文字数制限やカタカナ表記により、法人名や個人名が判別しにくいことがあります。\n* **対処法**：同額の「請求書」や「注文履歴」と金額を照合し、突き合わせを行います。\n\n#### ③ 個人事業主がプライベートで使った・入金した場合\n* **事業用口座から個人の口座へ資金を戻した・引き出した（出金）**：`事業主貸`\n* **個人のお金を事業用ゆうちょ口座に入金した（入金）**：`事業主借`",
+    "error": ""
+   }
+  },
+  "電気代や家賃の自動払込はどう記帳する？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.jcb.co.jp/corporate/special/electricity_expenses.html",
+     "https://www.freee.co.jp/kb/kb-journal/electric-bill/"
+    ],
+    "text": "事業の帳簿では、**自動払込で支払った費用を借方、引き落とされた「普通預金」を貸方**に記帳します。支払時に経費計上する場合の例は次のとおりです。[JCBの仕訳解説](https://www.jcb.co.jp/corporate/special/electricity_expenses.html)\n\n| 支払いの内容 | 借方 | 貸方 |\n|---|---|---|\n| 電気代8,000円 | 水道光熱費 8,000円 | 普通預金 8,000円 |\n| 家賃70,000円 | 地代家賃 70,000円 | 普通預金 70,000円 |\n\n**すでに未払金として計上している場合**は、引き落とし時に「未払金／普通預金」として処理し、経費を二重に計上しないようにします。[freeeの仕訳解説](https://www.freee.co.jp/kb/kb-journal/electric-bill/)\n\nまた、個人事業主が自宅兼事務所の費用を事業用口座から払う場合は、事業で使った分だけを経費にし、私生活の分は「事業主貸」に分けます。[JCBの家事按分・仕訳解説](https://www.jcb.co.jp/corporate/special/electricity_expenses.html)\n\nSOURCE: https://www.jcb.co.jp/corporate/special/electricity_expenses.html\nSOURCE: https://www.freee.co.jp/kb/kb-journal/electric-bill/\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.freee.co.jp/kb/kb-journal/electric-bill/",
+     "https://www.freee.co.jp/kb/kb-journal/rent-individual/",
+     "https://www.yayoi-kk.co.jp/shinkoku/oyakudachi/jidaiyachin/",
+     "https://navi.freee.co.jp/scenes/119",
+     "https://www.zeiri4.com/c_1032/c_1035/q_15178/"
+    ],
+    "text": "自動払込の記帳は、**どの口座から引き落とされるか**と、**事業専用か自宅兼用か**で決まります。\n\n## 1. 事業専用の口座・事業専用の物件\n- 家賃8万円: 借方「地代家賃」80,000 / 貸方「普通預金」80,000\n- 電気代は「水道光熱費」で同様に処理します。\n- 家賃や共益費に光熱費が含まれていて分けられない場合は「地代家賃」にします。\n\n## 2. 事業用口座から引き落とされ、自宅兼用の場合(家事按分)\n面積や使用時間などの割合で、事業分と私用分に分けます。\n- 電気代8,000円で事業用30%の場合: 借方「水道光熱費」2,400 + 「事業主貸」5,600 / 貸方「普通預金」8,000\n- 家賃も同じ形で、事務所分を「地代家賃」、自宅分を「事業主貸」にします。\n\n## 3. 個人(生活費)口座から引き落とされる場合\n経費になる事業分だけを記帳します。\n- 借方「水道光熱費」(事業分) / 貸方「事業主借」\n\n## 記帳のコツ\n- 按分の割合は継続して使い、根拠(面積比など)を残しておきます。\n- 会計ソフトに口座を連携すれば引き落としが自動で取り込まれます。按分は科目と金額の設定が必要です。\n- 法人の場合は事業主貸・事業主借がなく、役員貸付金などで処理します。ここまでは個人事業主の前提で、法人の処理は確認していません。\n\nSOURCE: https://www.freee.co.jp/kb/kb-journal/electric-bill/\nSOURCE: https://www.freee.co.jp/kb/kb-journal/rent-individual/\nSOURCE: https://www.yayoi-kk.co.jp/shinkoku/oyakudachi/jidaiyachin/\nSOURCE: https://navi.freee.co.jp/scenes/119\nSOURCE: https://www.zeiri4.com/c_1032/c_1035/q_15178/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "電気代や家賃などが銀行口座から**自動払込（口座振替・引き落とし）**された場合の記帳方法について、基本的な手順と注意点を解説します。\n\n---\n\n### 1. 基本的な記帳方法（事業用口座からの引き落とし）\n\n実際の**口座引き落とし日**を取引日として記帳します。\n\n#### ① 電気代の場合（勘定科目：水道光熱費）\n* **借方**：水道光熱費　10,000円 ／ **貸方**：普通預金　10,000円\n\n#### ② 家賃の場合（勘定科目：地代家賃）\n* **借方**：地代家賃　100,000円 ／ **貸方**：普通預金　100,000円\n\n---\n\n### 2. 個人事業主の場合の特殊なケース\n\n#### パターンA：プライベート口座から引き落とされた場合\n事業用の口座ではなく個人名義の口座から引き落とされた場合は、貸方を「**事業主借**」とします。\n\n* **仕訳例（家賃10万円の場合）**\n  * 借方：地代家賃　100,000円 ／ 貸方：事業主借　100,000円\n\n#### パターンB：自宅兼事務所で「家事按分」が必要な場合\n自宅の一部を仕事に使っている場合は、事業として使用している割合（家賃なら面積比、電気代なら時間やコンセント数比など）だけを経費に計上します。\n\n**【毎月按分して記帳する場合（例：事業割合50%・電気代1万円）】**\n* **事業用口座から引き落とし：**\n  * 借方：水道光熱費　5,000円 ／ 貸方：普通預金　10,000円\n  * 借方：事業主貸　　5,000円 ／\n* **プライベート口座から引き落とし：**\n  * 借方：水道光熱費　5,000円 ／ 貸方：事業主借　5,000円\n\n※会計ソフトを使う場合は、**毎月は全額で記帳しておき、年末の決算整理時にソフトの「家事按分機能」でまとめて一括調整する**方法が簡単でおすすめです。\n\n---\n\n### 3. 日付とタイミグの注意点（決算時の処理）\n\n日々の記帳は「口座引き落とし日」で行って問題ありませんが、年末（決算期）には以下の点に注意してください。\n\n* **家賃が前払い（翌月分を当月引き落とし）の場合**\n  12月に引き落とされる家賃が「翌年1月分」である場合、厳密には当期の経費ではなく翌期の経費（前払費用）となります。ただし、毎年同じ条件で支払い続けている場合は、実務上そのまま当期の経費として処理すること（継続適用）が認められるケースが一般的です。\n* **電気代などの未払い分**\n  12月に使用した電気代が「翌年1月」に引き落とされる場合、厳密な発生主義に基づき、決算時に「未払金」として当期の経費に計上する処理を行うことがあります（決算整理仕訳）。\n\n---\n\n### 4. 保存しておくべき書類（証憑）\n\n自動払込は手元に「領収書」が残りませんが、以下の書類を帳簿の裏付けとして保管しておきます。\n\n1. **銀行通帳の記帳履歴またはWeb明細**（引き落としの事実を証明）\n2. **検針票・ご利用明細のWeb画面**（電気代の内容・消費税額等の証明）\n3. **賃貸借契約書**（家賃の金額や支払条件の証明）\n\n※消費税の仕入税額控除（インボイス制度）を受ける場合は、電力会社の検針票（登録番号が記載されたもの）や、登録番号が記載された賃貸借契約書＋口座振替の履歴をあわせて保存しておく必要があります。",
+    "error": ""
+   }
+  },
+  "ゆうちょの記帳のやり方は？": {
+   "ChatGPT": {
+    "urls": [
+     "https://otayoripost.net/ryokin/yutyo/atm/yutyokityou.html",
+     "https://www.jp-bank.japanpost.jp/kojin/access/atm/kj_acs_atm_goriyo.html",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=807"
+    ],
+    "text": "ゆうちょの通帳への記帳は、**通帳を持って、郵便局やゆうちょ銀行の通帳対応ATMで行えます。**\n\n1. ATM画面の「通帳記入」（機種によっては「通帳記帳・通帳繰越」）を押します。\n2. 通帳の**最後に印字されたページ**を開き、画面や挿入口の案内に従って入れます。\n3. 未記帳の取引が印字されるまで待ちます。記帳だけなら、キャッシュカードや暗証番号の入力は不要です。\n4. 出てきた通帳を受け取れば完了です。詳しい操作は[記帳手順の解説ページ](https://otayoripost.net/ryokin/yutyo/atm/yutyokityou.html)で確認できます。\n\n**記帳の手数料は無料**です。ファミリーマートなどにある小型のゆうちょATMでは記帳できません。また、利用時間は設置場所によって異なります。[ゆうちょ銀行の公式案内](https://www.jp-bank.japanpost.jp/kojin/access/atm/kj_acs_atm_goriyo.html)\n\n通帳がいっぱいになった場合は、通帳繰越対応ATMか、ゆうちょ銀行・郵便局の貯金窓口で新しい通帳に繰り越せます。[ゆうちょ銀行の公式FAQ](https://faq.jp-bank.japanpost.jp/faq_detail.html?id=807)\n\nSOURCE: https://otayoripost.net/ryokin/yutyo/atm/yutyokityou.html\nSOURCE: https://www.jp-bank.japanpost.jp/kojin/access/atm/kj_acs_atm_goriyo.html\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=807\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://nomad-saving.com/90746/",
+     "https://otayoripost.net/ryokin/yutyo/atm/yutyokityou.html",
+     "https://otayoripost.net/ryokin/yutyo/atm/atmkurikoshi.html",
+     "https://www.youtube.com/shorts/tJqJ0N67quo",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1239230352"
+    ],
+    "text": "ゆうちょ銀行のATMで、通帳だけで記帳できます。キャッシュカードは不要です。\n\n**手順(ATM)**\n1. ATM画面で「通帳記入」を押す。\n2. 最後に記帳したページを開き、そのページが上になる向きで通帳を入れる。\n3. 通帳が入ったら「通常貯金」を選ぶ。\n4. 未記帳の入出金が自動で印字されるので、終わるまで待つ。\n\n**ポイント**\n- 手数料は曜日・時間にかかわらず無料です。\n- 暗証番号の入力は不要です。\n\nWebFetchの許可が出ず、各ページの本文は確認できていません。上の内容は検索結果に出た要約が根拠で、記帳できない場合の対処(繰越など)やコンビニATMでの対応状況は未確認です。繰越・合計記入など詳細は、下記の otayoripost の記事で扱われているようです。\n\nSOURCE: https://nomad-saving.com/90746/\nSOURCE: https://otayoripost.net/ryokin/yutyo/atm/yutyokityou.html\nSOURCE: https://otayoripost.net/ryokin/yutyo/atm/atmkurikoshi.html\nSOURCE: https://www.youtube.com/shorts/tJqJ0N67quo\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1239230352\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1239230352",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=807",
+     "https://nomad-saving.com/90746/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13310987558",
+     "https://www.youtube.com/watch?v=YiN0Ao5WXPc",
+     "https://allabout.co.jp/gm/gc/417388/",
+     "https://www.jp-bank.japanpost.jp/kojin/access/atm/kj_acs_atm_index.html"
+    ],
+    "text": "ゆうちょ銀行の通帳記入（記帳）は、**ゆうちょ銀行・郵便局のATM** または **窓口** で行えます。\n\n一番簡単で一般的な **ATMでのやり方** を中心に解説します。\n\n---\n\n### 1. ATMでの記帳やり方（おすすめ）\n\n**必要なもの：** ゆうちょ銀行の通帳のみ（キャッシュカードや暗証番号は不要です）\n\n1. **ATMの前に立つ**\n   画面左側のメニューにある**「通帳記入」**を押します。（※ボタンを押さずに通帳をそのまま入れても自動で認識される場合もあります）\n2. **通帳を開いて入れる**\n   通帳の**最後に印字されているページの次のページ（または一番新しい空白ページ）**を開き、通帳挿入口に入れます。\n3. **印字が終わったら受け取る**\n   自動で機械が読み取り、記帳が始まります。終了すると「ピピピ」と音が鳴って通帳が戻ってきます。\n\n---\n\n### 2. 窓口での記帳やり方\n\n**必要なもの：** ゆうちょ銀行の通帳\n\n* 郵便局またはゆうちょ銀行の「貯金窓口」に通帳を出し、**「記帳をお願いします」**と伝えるだけで対応してもらえます。\n\n---\n\n### 知っておくと便利な注意点・ポイント\n\n* **コンビニのATMでは記帳できない**\n  コンビニ（セブン-イレブン、ローソン、ファミリーマート等）に設置されているATMでは、通帳記入はできません。必ず**郵便局やゆうちょ銀行店舗内のATM**をご利用ください。\n* **通帳がいっぱい（満了）になった場合**\n  * 窓口に持っていくと、無料で新しい通帳に繰り越し（発行）してもらえます。\n  * 一部の対応しているゆうちょATM（「通帳繰越」のシールや表示がある台）でも、自動で新しい通帳へ繰り越しが可能です。\n* **未記帳の取引が多い場合（合算印字）**\n  未記入の取引が**30行**を超えると、1件ずつの明細ではなく「○件 合計○○円」とまとめて印字されます。\n  ※合算された詳細な内訳が必要な場合は、窓口で「通帳未記入金内訳書」を無料で発行してもらうことができます。\n* **通帳が入らない・戻ってくる場合**\n  通帳の磁気が弱まっている可能性があります。窓口に持っていけば、その場で磁気を修復してもらえます。\n\n※紙の通帳を使わずにスマホで明細を確認したい場合は、公式の**「ゆうちょ通帳アプリ」**を利用するのも便利です。",
+    "error": ""
+   }
+  },
+  "記帳 ゆうちょの「送金」と「振込」の違いは何ですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=11007",
+     "https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kj_sk_fm_furikomi.html"
+    ],
+    "text": "通帳に記帳される「送金」と「振込」は、基本的に**相手の口座がゆうちょ銀行か、他の銀行か**という違いです。\n\n| 表記 | 意味 |\n|---|---|\n| **送金** | ゆうちょ銀行の口座同士でのお金のやり取り。口座間で送るサービスの正式名称は「電信振替」です。 |\n| **振込** | ゆうちょ銀行と他の金融機関の口座との間でのお金のやり取り。 |\n\n例えば、入金の明細なら、ゆうちょ口座から受け取ったお金が「送金」、他行の口座から受け取ったお金が「振込」という見分け方になります。[通帳の表記の解説](https://corp.7senses.co.jp/blog/yucho-kicho-yarikata)、[ゆうちょ銀行の公式案内](https://faq.jp-bank.japanpost.jp/faq_detail.html?id=11007)\n\nなお、一般的な言葉としての「送金」は、お金を送る行為全体を指すため、**「振込」も送金の一種**です。ゆうちょの公式サイトでも、他行との振込を「送金」と総称しています。[ゆうちょ銀行の公式案内](https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kj_sk_fm_furikomi.html)\n\nSOURCE: https://corp.7senses.co.jp/blog/yucho-kicho-yarikata\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=11007\nSOURCE: https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kj_sk_fm_furikomi.html\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13292792593",
+     "https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kj_sk_fm_furikomi.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12304681297",
+     "http://yubin.2-d.jp/c1/09.html",
+     "http://www.yubin.2-d.jp/c1/52.html",
+     "https://goiryoku.com/sokin/",
+     "https://wakuwaku-jyoho.com/24530.html",
+     "https://kotokurabe.com/transfer-money/",
+     "https://www.chigai-shirabe.com/soukin-furikomi-chigai-yucho/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13168414963",
+     "https://www.jp-bank.japanpost.jp/kojin/sokin/koza/kj_sk_kz_index.html",
+     "https://faq.jp-bank.japanpost.jp/faq_list.html?category=68",
+     "https://money-lifehack.com/bank/3041",
+     "https://yubin.2-d.jp/c2/21.html",
+     "https://kotoba-hikidashi.com/soukin-furikomi-chigai/",
+     "https://www.e-coop.co.jp/index/readme_postinfo.htm",
+     "https://xn--n8j9do164a.net/archives/2020.html"
+    ],
+    "text": "ゆうちょ銀行では、「送金」は送金全般を指す広い言葉で、「振込」は他の金融機関の口座あての送金を指す言葉として使われています。\n\n- **送金**: お金を相手に送る行為の総称です。ゆうちょ口座から他人のゆうちょ口座へ送る場合は「電信振替」と呼ばれます。ゆうちょダイレクトやゆうちょ通帳アプリなら、月5回まで手数料が無料です。\n- **振込**: ゆうちょ口座から他の金融機関の口座へ送る場合の呼び名です。\n- **払込み**: 現金を相手のゆうちょ口座へ送る場合の呼び名です（通常払込みと電信払込みがあります）。\n\nつまり、ゆうちょ口座どうしは「送金（電信振替）」、他行あては「振込」と区別されます。\n\n記帳については、検索結果に「ゆうちょ口座からの送金は漢字、他行などからの振込はカタカナで摘要欄に表示されることがある」という説明がありました。ただし出典は個人サイトや Yahoo!知恵袋の類いで、公式の説明は確認できていません。\n\n公式ページ（ゆうちょ銀行）は取得を試みましたが、WebFetch の権限が許可されず本文を確認できませんでした。以上は検索結果の要約に基づく内容です。\n\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13292792593\nSOURCE: https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kj_sk_fm_furikomi.html\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12304681297\nSOURCE: http://yubin.2-d.jp/c1/09.html\nSOURCE: http://www.yubin.2-d.jp/c1/52.html\nSOURCE: https://goiryoku.com/sokin/\nSOURCE: https://wakuwaku-jyoho.com/24530.html\nSOURCE: https://kotokurabe.com/transfer-money/\nSOURCE: https://www.chigai-shirabe.com/soukin-furikomi-chigai-yucho/\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13168414963\nSOURCE: https://www.jp-bank.japanpost.jp/kojin/sokin/koza/kj_sk_kz_index.html\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_list.html?category=68\nSOURCE: https://money-lifehack.com/bank/3041\nSOURCE: https://yubin.2-d.jp/c2/21.html\nSOURCE: https://kotoba-hikidashi.com/soukin-furikomi-chigai/\nSOURCE: https://www.e-coop.co.jp/index/readme_postinfo.htm\nSOURCE: https://xn--n8j9do164a.net/archives/2020.html\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1292314927",
+     "https://kotokurabe.com/transfer-money/",
+     "https://oriki.cart.fc2.com/userpage?id=80365"
+    ],
+    "text": "ゆうちょ銀行の通帳を記帳した際に表示される**「送金」**と**「振込」**は、**やり取りをした相手の金融機関（ゆうちょ銀行同士か、他の銀行か）**によって区別されています。\n\n---\n\n### 1. 「送金」とは\n* **相手先：ゆうちょ銀行の口座**\n* **内容：** **ゆうちょ銀行の口座同士**でお金のやり取り（入出金）が行われた場合に記帳されます。\n* **主なケース：**\n  * 他人のゆうちょ口座から、自分のゆうちょ口座にお金が送られてきた場合\n  * 自分のゆうちょ口座から、他人のゆうちょ口座へお金を送った場合（電信振替など）\n\n---\n\n### 2. 「振込」とは\n* **相手先：ゆうちょ銀行以外の他金融機関（三菱UFJ銀行、三井住友銀行、楽天銀行、信用金庫など）**\n* **内容：** **ゆうちょ銀行と他の金融機関との間**でお金のやり取りが行われた場合に記帳されます。\n* **主なケース：**\n  * 他の銀行口座から、自分のゆうちょ口座に入金（振込）があった場合\n  * 自分のゆうちょ口座から、他の銀行口座へお金を振り込んだ場合\n\n---\n\n### まとめ（見分け方のポイント）\n\n| 通帳の印字 | 相手の口座 | 意味・内容 |\n| :--- | :--- | :--- |\n| **送金** | **ゆうちょ銀行** | ゆうちょ口座同士の移動（電信振替など） |\n| **振込** | **他の金融機関** | 他行（メガバンク、ネット銀行など）との移動 |\n\n※ゆうちょ銀行のサービス上の定義としても、お金を送る行為全般を「送金」と総称し、そのうち他行あての手続きを特に「振込」と呼んでいます。通帳を記帳した際も同様に、相手がゆうちょ銀行か他行かで印字が分かれています。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "記帳のやり方に迷うゆうちょ口座 送金と振込の見分け方": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   },
+   "Gemini": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "電気代や家賃の自動払込はどう記帳する？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "事業の帳簿では、**自動払込で支払った費用を借方、引き落とされた「普通預金」を貸方**に記帳します。"
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "電気代や家賃などが銀行口座から**自動払込（口座振替・引き落とし）**された場合の記帳方法について、基本的な手順と注意点を解説します。"
+   }
+  },
+  "ゆうちょの記帳のやり方は？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "ゆうちょの通帳への記帳は、**通帳を持って、郵便局やゆうちょ銀行の通帳対応ATMで行えます。**"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "ゆうちょ銀行のATMで、通帳だけで記帳できます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "ゆうちょ銀行の通帳記入（記帳）は、**ゆうちょ銀行・郵便局のATM** または **窓口** で行えます。"
+   }
+  },
+  "記帳 ゆうちょの「送金」と「振込」の違いは何ですか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "通帳に記帳される「送金」と「振込」は、基本的に**相手の口座がゆうちょ銀行か、他の銀行か**という違いです。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "ゆうちょ銀行では、「送金」は送金全般を指す広い言葉で、「振込」は他の金融機関の口座あての送金を指す言葉として使われています。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "ゆうちょ銀行の通帳を記帳した際に表示される**「送金」**と**「振込」**は、**やり取りをした相手の金融機関（ゆうちょ銀行同士か、他の銀行か）**によって区別されています。"
+   }
+  }
+ }
+}

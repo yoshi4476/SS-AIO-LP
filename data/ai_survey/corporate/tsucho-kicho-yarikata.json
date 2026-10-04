@@ -1,0 +1,215 @@
+{
+ "slug": "tsucho-kicho-yarikata",
+ "site": "corporate",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "半年放置はNG？",
+  "通帳を紛失した場合、記帳した内容は失われますか？",
+  "通帳だけで記帳するやり方の基本を教えてください。",
+  "通帳の記帳を数か月放置するとどうなりますか？"
+ ],
+ "answers": {
+  "半年放置はNG？": {
+   "ChatGPT": {
+    "urls": [
+     "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+     "https://www.smbc.co.jp/kojin/yokin/other/kicho.html"
+    ],
+    "text": "検索で質問と一致する記事が見つかったため、**通帳を半年間記帳せずに放置すること**について答えます。\n\n**半年放置は避けたほうがよいですが、半年で一律に問題が起きるわけではありません。** 銀行によっては、未記帳の取引がまとめて記載され、通帳で個別の入出金を確認できなくなります。\n\n例えば三井住友銀行では、**未記帳期間が6か月以上、かつ未記帳明細が100件以上**の普通預金口座が「おまとめ記入」の対象です。入金・出金それぞれの合計額だけが記載されます。まとめられた個別明細は、取引店に依頼すれば無料で発行してもらえます。[三井住友銀行の案内](https://www.smbc.co.jp/kojin/yokin/other/kicho.html)\n\n月1回など定期的に記帳する習慣をつけ、すでに半年放置している場合は早めに記帳して取引内容を確認するとよいでしょう。\n\nSOURCE: https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata\nSOURCE: https://www.smbc.co.jp/kojin/yokin/other/kicho.html\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://glass-d.com/glassstyle/trivia/2565",
+     "https://www.carseven.co.jp/magazine/news/9646/",
+     "https://bike.katix.co.jp/articles/135",
+     "https://bestcarweb.jp/feature/column/118622",
+     "https://k-oshiro.com/2026/04/14/bike-long-term-storage-guide/"
+    ],
+    "text": "「半年放置はNG？」は対象が書かれていないので、検索で最も多くヒットした「車・バイクの半年放置」として答えます。別の対象(恋愛、ゲームなど)なら教えてください。ページ本文は権限の都合で開けず、根拠は検索結果の要約だけです。\n\n**結論: 車は半年放置が非推奨です。バイクは準備をしていれば半年以上いけますが、準備なしだと1か月が限界です。**\n\n- **ガソリン**: 空気に触れて酸化し、3か月〜半年で変質が始まります。半年超だと燃料系統のトラブルにつながる可能性があります。\n- **タイヤ**: 動かさないと接地面の一点に荷重がかかり続け、変形します。\n- **エアコン**: 強い悪臭が出ることがあります。\n- **バイク**: 長期保管の準備をしていれば半年以上、していなければ1か月が目安です。\n\nSOURCE: https://glass-d.com/glassstyle/trivia/2565\nSOURCE: https://www.carseven.co.jp/magazine/news/9646/\nSOURCE: https://bike.katix.co.jp/articles/135\nSOURCE: https://bestcarweb.jp/feature/column/118622\nSOURCE: https://k-oshiro.com/2026/04/14/bike-long-term-storage-guide/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "「半年放置」がNGかどうかは、**何（対象物や状況）を放置しているか**によって大きく異なります。\n\n具体的に何についてお困りでしょうか？\n代表的なジャンルごとの「半年放置のリスク」をまとめましたので、参考にしてみてください。\n\n---\n\n### 1. 車・バイク（ほぼNG ⚠️）\n* **リスク:** \n  * バッテリーが完全に上がってしまう（充電不能・交換が必要になることも）\n  * ガソリンの劣化や、エンジンオイルの劣化・沈殿\n  * タイヤの空気が抜ける・一箇所に負荷がかかって変形する（フラットスポット）\n* **対策:** 定期的にエンジンをかけたり、走行させることが推奨されます。\n\n### 2. スマホ・PC・モバイルバッテリー（NG ⚠️）\n* **リスク:** \n  * リチウムイオンバッテリーが「過放電（残量0%のまま放置）」状態になり、バッテリー自体が壊れて充電できなくなる\n* **対策:** 保管する場合は、**充電量を50%程度**にして電源を切り、涼しい場所で保管するのがベストです。\n\n### 3. 開封済みの化粧品・スキンケア（NG ⚠️）\n* **リスク:** \n  * 空気中の雑菌が繁殖したり、成分が酸化・分離して肌トラブル（ニキビ、かぶれ）の原因になる\n  * 特に「リキッドファンデーション」「マスカラ」「美容液」は劣化が早い（開封後の使用期限は3〜6ヶ月程度が目安）\n* **対策:** 変色・変臭がある場合は使用を控えましょう。\n\n### 4. 髪（ヘアカラー・カット）（NG寄り ⚠️）\n* **リスク:** \n  * カラー（染毛）の場合：根本が伸びて大きな「プリン状態」になり、境目が目立つ\n  * カットの場合：毛量が膨らむ、毛先が傷んでまとまらなくなる、スタイルが崩れる\n* **目安:** 綺麗な状態を保つならカラーは1〜2ヶ月、カットは2〜3ヶ月程度が推奨されます。\n\n### 5. コンタクトレンズ（開封済み液体・ケア用品）（絶対NG 🚫）\n* **リスク:** \n  * 保存液の中の雑菌・カビが増殖し、失明や重度の眼病につながる恐れがある\n* **対策:** 長期保存用のハードレンズなどを除き、ソフトレンズのつけ置き放置は非常に危険です。\n\n### 6. 銀行口座・ポイント・サブスク（注意 💡）\n* **リスク:** \n  * 銀行口座：半年では休眠口座になりませんが、未利用口座管理手数料がかかる場合がある\n  * ポイント：有効期限が切れて失効している可能性がある\n  * サブスク：使っていないのに固定費を払い続けている状態（無駄遣い）\n\n---\n\nもし上記の中に該当するものがあれば、または**全く別のもの（楽器、水槽、空き家、人間関係など）**であれば、具体的にお知らせいただければ詳しく対処法をお答えします！",
+    "error": ""
+   }
+  },
+  "通帳を紛失した場合、記帳した内容は失われますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://help.iyobank.co.jp/通帳を紛失した口座の取引明細（異動明細表）-5fbf910f67779f001c2f62a8",
+     "https://www.bk.mufg.jp/tsukau/tetsuduki/torihikisuiihyo/index.html",
+     "https://www.bk.mufg.jp/tsukau/tetsuduki/bankbook/loss/index.html"
+    ],
+    "text": "**通帳を紛失しても、銀行が保管している取引履歴が消えるわけではありません。** 記帳済みの内容を確認したい場合は、銀行に取引明細の発行を依頼できます。伊予銀行も、通帳を紛失した口座の取引明細は発行可能と案内しています。[伊予銀行の公式FAQ](https://help.iyobank.co.jp/通帳を紛失した口座の取引明細（異動明細表）-5fbf910f67779f001c2f62a8)\n\nただし、**通帳を再発行すれば、以前の記帳内容がすべて復元されるとは限りません。** 過去の履歴が必要な場合は、再発行とは別に明細の発行について確認してください。確認できる期間や手数料には条件があり、例えば三菱ＵＦＪ銀行の取引推移表は最長10年分が対象です。[三菱ＵＦＪ銀行の案内](https://www.bk.mufg.jp/tsukau/tetsuduki/torihikisuiihyo/index.html)\n\n紛失に気づいたら、まず銀行に連絡して通帳の利用停止を行い、再発行を手続きしてください。[紛失時の公式案内](https://www.bk.mufg.jp/tsukau/tetsuduki/bankbook/loss/index.html)\n\nSOURCE: https://help.iyobank.co.jp/通帳を紛失した口座の取引明細（異動明細表）-5fbf910f67779f001c2f62a8\nSOURCE: https://www.bk.mufg.jp/tsukau/tetsuduki/torihikisuiihyo/index.html\nSOURCE: https://www.bk.mufg.jp/tsukau/tetsuduki/bankbook/loss/index.html\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hokuyobank.co.jp/info/guide/trouble/loss.html",
+     "https://faq.smtb.jp/faq/show/2532?site_domain=default",
+     "https://www.keiyobank.co.jp/support/lost/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1478861609",
+     "https://www.chibabank.co.jp/kojin/conference/trouble/book/",
+     "https://www.bk.mufg.jp/tsukau/tetsuduki/bankbook/loss/index.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12286496117",
+     "https://hirogin.zendesk.com/hc/ja/articles/10519026684697-%E9%80%9A%E5%B8%B3-%E8%A8%BC%E6%9B%B8%E3%82%92%E7%B4%9B%E5%A4%B1%E3%81%97%E3%81%9F%E6%99%82%E3%81%AF",
+     "https://faq.ncbank.co.jp/1405/",
+     "https://www.smbc.co.jp/kojin/otetsuduki/saihakko/card/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14279365944",
+     "https://faq.smtb.jp/faq/show/2533?category_id=295&site_domain=default",
+     "https://faq01.bk.mufg.jp/faq/show/17?site_domain=default",
+     "https://sagabank.zendesk.com/hc/ja/articles/4591375646735-%E9%80%9A%E5%B8%B3%E7%B9%B0%E8%B6%8A%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AE%E9%80%9A%E5%B8%B3%E3%82%92%E5%A4%B1%E3%81%8F%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%9D%E3%81%AE%E6%9C%9F%E9%96%93%E3%81%AE%E6%98%8E%E7%B4%B0%E3%81%8C%E3%81%BB%E3%81%97%E3%81%84%E3%81%AE%E3%81%A7%E3%81%99%E3%81%8C-%E7%99%BA%E8%A1%8C%E3%81%97%E3%81%A6%E3%82%82%E3%82%89%E3%81%86%E3%81%93%E3%81%A8%E3%81%AF%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B",
+     "https://kokorono.co.jp/oyatoko/column/46/",
+     "https://kurihara-office.com/161004passbook-commission"
+    ],
+    "text": "通帳を紛失しても、銀行側の取引記録は残ります。ただし、再発行した通帳に過去の記帳分は印字されません。\n\n- **銀行側の記録**: 取引履歴はシステムに保存されています。紛失した通帳に印字されていた過去分は、窓口で「取引明細表」の発行を申請すれば確認できます（最短2～3営業日、枚数に応じた手数料あり）。\n- **再発行後の通帳**: 未記帳分は印字されますが、それ以前の取引を通帳へ記帳し直すことは原則できません。\n- **古い記録**: 10年を超えた取引明細は、銀行側でも消去されて参照できない場合があります。\n- **再発行の手続き**: 以前の通帳は無効になります。お届け印と本人確認書類が必要で、手数料は銀行によって異なります。検索結果にあった例は1冊1,100円で、新しい通帳が届くまで約1週間～10日です。\n- **紛失直後**: アプリまたは電話で、すぐに利用停止の届け出をしてください。\n\nなお、WebFetch が許可されなかったため、各ページの本文は確認していません。上記は検索結果の要約に基づいており、手数料や日数は銀行ごとに異なります。詳細は利用中の銀行に確認してください。\n\nSOURCE: https://www.hokuyobank.co.jp/info/guide/trouble/loss.html\nSOURCE: https://faq.smtb.jp/faq/show/2532?site_domain=default\nSOURCE: https://www.keiyobank.co.jp/support/lost/\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1478861609\nSOURCE: https://www.chibabank.co.jp/kojin/conference/trouble/book/\nSOURCE: https://www.bk.mufg.jp/tsukau/tetsuduki/bankbook/loss/index.html\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12286496117\nSOURCE: https://hirogin.zendesk.com/hc/ja/articles/10519026684697-%E9%80%9A%E5%B8%B3-%E8%A8%BC%E6%9B%B8%E3%82%92%E7%B4%9B%E5%A4%B1%E3%81%97%E3%81%9F%E6%99%82%E3%81%AF\nSOURCE: https://faq.ncbank.co.jp/1405/\nSOURCE: https://www.smbc.co.jp/kojin/otetsuduki/saihakko/card/\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14279365944\nSOURCE: https://faq.smtb.jp/faq/show/2533?category_id=295&site_domain=default\nSOURCE: https://faq01.bk.mufg.jp/faq/show/17?site_domain=default\nSOURCE: https://sagabank.zendesk.com/hc/ja/articles/4591375646735-%E9%80%9A%E5%B8%B3%E7%B9%B0%E8%B6%8A%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AE%E9%80%9A%E5%B8%B3%E3%82%92%E5%A4%B1%E3%81%8F%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%9D%E3%81%AE%E6%9C%9F%E9%96%93%E3%81%AE%E6%98%8E%E7%B4%B0%E3%81%8C%E3%81%BB%E3%81%97%E3%81%84%E3%81%AE%E3%81%A7%E3%81%99%E3%81%8C-%E7%99%BA%E8%A1%8C%E3%81%97%E3%81%A6%E3%82%82%E3%82%89%E3%81%86%E3%81%93%E3%81%A8%E3%81%AF%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B\nSOURCE: https://kokorono.co.jp/oyatoko/column/46/\nSOURCE: https://kurihara-office.com/161004passbook-commission\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14279365944",
+     "https://kokorono.co.jp/oyatoko/column/46/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1478861609",
+     "https://kurihara-office.com/161004passbook-commission",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=802",
+     "https://www.jfmbk.org/faq/trouble/detail_003.html"
+    ],
+    "text": "結論から申し上げますと、銀行（金融機関）のシステム内にデータとして残っているため、**取引内容そのものが失われるわけではありません**。\n\nただし、通帳の「再発行」手続きを行った際、新しい通帳にどのような内容が記載されるかについては注意が必要です。\n\n---\n\n### 1. 再発行された新しい通帳に印字される内容\n通帳を再発行しても、**過去に旧通帳へ記帳済みだった明細が新しい通帳に全件印字されるわけではありません**。\n新しい通帳に記帳されるのは、基本的に以下の内容のみとなります。\n\n* **前通帳からの繰越金額（合算残高）**\n* **通帳を無くしていた期間に発生した「未記帳」の取引**\n\nつまり、旧通帳に印字されていた過去の履歴を新通帳でそのまま復元することはできません。\n\n---\n\n### 2. 過去の記帳内容を確認したい場合の対処法\n\n紛失した通帳に書かれていた過去の取引明細が必要な場合は、以下の方法で確認できます。\n\n#### ① 銀行窓口で「取引明細書（取引履歴）」を発行してもらう\n銀行の窓口で申請することで、過去の入出金履歴が印字された「取引明細書（取引履歴証明書）」を発行してもらえます。\n* **期間：** 金融機関によりますが、過去数年〜10年程度まで遡って確認可能です。\n* **手数料：** 証明書の発行には、所定の手数料（数百円〜数千円程度）がかかるのが一般的です。\n* **必要書類：** 本人確認書類（マイナンバーカードや運転免許証等）、お届け印など\n\n#### ② インターネットバンキング（アプリ等）を利用する\n該当口座のインターネットバンキングや公式アプリを利用していれば、画面上で過去の入出金明細を確認・ダウンロード（PDFやCSV）できる場合があります（閲覧可能期間は銀行により異なります）。\n\n---\n\n### 3. 通帳を紛失した際にまず行うこと\n\n通帳の紛失に気づいた場合は、速やかに以下の対応を行ってください。\n\n1. **銀行へ連絡して利用停止する**\n   * 第三者による不正な引き出しを防ぐため、専用のコールセンターや窓口へ直ちに連絡し、通帳の利用をストップさせます。\n2. **警察へ届出を出す**\n   * 屋外での紛失や盗難の疑いがある場合は、交番や警察署に遺失届（または被害届）を提出します。\n3. **通帳の再発行手続きを行う**\n   * 本人確認書類・お届け印などを持参し、窓口やWebにて再発行（手数料がかかる場合があります）の手続きを行います。",
+    "error": ""
+   }
+  },
+  "通帳だけで記帳するやり方の基本を教えてください。": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.kawashin.co.jp/local/pdf/atm_onseiannai.pdf",
+     "https://faq01.bk.mufg.jp/faq/show/286?site_domain=default",
+     "https://www.juroku.co.jp/tenpo/atm/juroku_atm/guide/kurikoshi.html",
+     "https://www.shinkin.co.jp/chunan/guide/data/qa_03_02.pdf"
+    ],
+    "text": "**記帳だけなら、通常は通帳だけでできます。キャッシュカードや暗証番号は不要です。** 基本は、通帳を発行した銀行の「通帳記入」に対応したATMを使います。[川崎信用金庫の操作案内](https://www.kawashin.co.jp/local/pdf/atm_onseiannai.pdf)\n\n1. **ATM画面で「通帳記入」「通帳記帳」を選びます。** 表示や操作の順番は機種によって異なるので、画面の案内に従ってください。\n2. **通帳の最後に印字されているページを開きます。** 挿入口の図や矢印に合わせて、通帳を入れます。\n3. **印字が終わるまで待ちます。** まだ記帳されていない入出金などが印字されます。\n4. **戻ってきた通帳を受け取り、内容を確認します。** 持ち帰り忘れに注意してください。[川崎信用金庫の操作案内](https://www.kawashin.co.jp/local/pdf/atm_onseiannai.pdf)\n\n注意点は次のとおりです。\n\n- **コンビニATMや他行ATMでは記帳できないことが多いです。** 例えば三菱UFJ銀行は、自行の対応ATMでのみ記帳できます。利用時間も銀行・口座の種類・設置場所によって異なります。[三菱UFJ銀行の案内](https://faq01.bk.mufg.jp/faq/show/286?site_domain=default)\n- **通帳のページがいっぱいになったら「通帳繰越」が必要です。** 対応ATMで新しい通帳を発行するか、窓口で手続きします。[十六銀行の案内](https://www.juroku.co.jp/tenpo/atm/juroku_atm/guide/kurikoshi.html)\n- **読み取りエラーが出たら、窓口で相談してください。** 通帳の磁気不良の場合、カードを使った修復ができる機種もありますが、通帳だけなら営業時間中に窓口へ持参する案内があります。[中南信用金庫の案内](https://www.shinkin.co.jp/chunan/guide/data/qa_03_02.pdf)\n\nSOURCE: https://www.kawashin.co.jp/local/pdf/atm_onseiannai.pdf\nSOURCE: https://faq01.bk.mufg.jp/faq/show/286?site_domain=default\nSOURCE: https://www.juroku.co.jp/tenpo/atm/juroku_atm/guide/kurikoshi.html\nSOURCE: https://www.shinkin.co.jp/chunan/guide/data/qa_03_02.pdf\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://nomad-saving.com/90746/",
+     "https://otayoripost.net/ryokin/yutyo/atm/yutyokityou.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1217342957",
+     "https://syokutyu-arekore.com/entry2167.html",
+     "https://newstriviajpn.com/archives/2346.html",
+     "https://www.faq.mizuhobank.co.jp/faq/show/111?site_domain=default"
+    ],
+    "text": "通帳だけで記帳するには、ATMの「通帳記入」を選び、通帳を入れるだけです。ゆうちょ銀行のATMでは、キャッシュカードも暗証番号も不要です。\n\n**基本の手順(ATM)**\n1. ATMの画面で「通帳記入(通帳ご記帳)」を選ぶ。\n2. 最後に印字されたページを開いて、通帳挿入口に入れる。\n3. 未記帳の入出金がまとめて印字される。ページ送りはATMが自動で行う。\n4. 終わったら通帳を取り出す。\n\n**注意点**\n- 記帳できるのは、通帳を発行した銀行のATMだけです。たとえばみずほ銀行の通帳は、みずほ銀行のATMでのみ記帳できます。支店はどこでも大丈夫です。\n- 窓口でも記帳できます。\n- 金融機関ごとに対応が違うため、細かい条件はご利用の銀行に確認してください。\n- 検索結果の要約を根拠にしており、各ページの全文は開いていません。\n\nSOURCE: https://nomad-saving.com/90746/\nSOURCE: https://otayoripost.net/ryokin/yutyo/atm/yutyokityou.html\nSOURCE: https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1217342957\nSOURCE: https://syokutyu-arekore.com/entry2167.html\nSOURCE: https://newstriviajpn.com/archives/2346.html\nSOURCE: https://www.faq.mizuhobank.co.jp/faq/show/111?site_domain=default\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "通帳のみを使ってATMで記帳（通帳記入）をする基本的なやり方と、注意点について分かりやすく解説します。\n\n---\n\n### 通帳記帳の基本手順（簡単5ステップ）\n\n記帳には**キャッシュカードや暗証番号（暗証番号の入力）は不要**です。通帳だけを持ってATMへ行けば完了します。\n\n1. **該当する銀行（金融機関）のATMに行く**\n   * **注意:** 原則として、**通帳を発行した銀行のATM**である必要があります（例：みずほ銀行の通帳なら、みずほ銀行のATM）。コンビニATMや他行のATMでは基本的に記帳できません。\n\n2. **画面で「通帳記入」を選ぶ**\n   * ATMの画面に「通帳記入」「通帳記帳」などのボタンがありますので、そこをタッチします。\n   * ※一部のATMでは、ボタンを押さず直接通帳を差し込んでも自動で処理が始まるタイプもあります。\n\n3. **通帳を開いて挿入口に入れる**\n   * **一番最近印字されたページ（次に印字されるはずのページ）を開いた状態**で、指定された向き（画面や挿入口にイラストで表示されています）で通帳挿入口に入れます。\n   * ※最新のATMでは、閉じ閉じたまま差し込んでも自動でページをめくってくれる機種や、向きを自動判別してくれる機種も増えています。迷ったら画面の指示に従いましょう。\n\n4. **記帳が終わるのを待つ**\n   * 「カタカタ」と印字音がして、数秒〜数十秒で記帳が完了します。\n   * 未記帳の取引（お給料の振り込みや引き落としなど）がたくさんある場合は、ページが自動でめくられて複数ページに印字されるため、少し時間がかかることがあります。\n\n5. **通帳を受け取る**\n   * 記帳が終わると、ポーンという音とともに通帳が押し出されてきます。取り忘れのないように受け取ってください。\n\n---\n\n### 知っておくと便利なポイントと注意点\n\n* **暗証番号は不要**\n  * 記帳は「取引履歴の印字（確認）」だけを行う操作なので、セキュリティ上の暗証番号入力は求められません。\n* **ページの最後の行まで埋まった場合（通帳繰越）**\n  * 最後のページまで印字がいっぱいになると、ATMによってはそのまま**「通帳繰越（新しい通帳への自動切り替え）」**を行ってくれる場合があります。対応していないATMの場合は、窓口で新しい通帳に交換してもらう必要があります。\n* **利用できる時間帯に注意**\n  * お金の引き出しや預け入れは土日祝・夜間でもできるATMが多いですが、**記帳機能は利用時間帯が限られている**場合があります（例：夜間や休日は記帳不可など）。ATMコーナーの案内板や銀行のWebサイトで利用時間を確認しておくと安心です。\n* **長期間記帳していない場合**\n  * 半年〜数年間など、長期間記帳をしないと、取引履歴が1行（例：「合算 ○件」など）にまとめられてしまう場合があります。細かい履歴を残したい場合は、定期的に記帳するのがおすすめです。",
+    "error": ""
+   }
+  },
+  "通帳の記帳を数か月放置するとどうなりますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.smbc.co.jp/kojin/yokin/other/kicho.html",
+     "https://www.bk.mufg.jp/sp/tsukau/atm_con/atm/btm_btm_02.html",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042"
+    ],
+    "text": "数か月記帳しなくても、通常はそれだけで預金が消えたり、口座が使えなくなったりすることはありません。ただし、**未記帳の取引が「合算」「合計記帳」としてまとめられ、通帳では個々の入出金の内容が分からなくなる場合があります。** 条件は銀行によって異なります。\n\n| 銀行 | 明細がまとめられる条件 |\n|---|---|\n| 三井住友銀行 | 未記帳期間が6か月以上、かつ未記帳明細が100件以上。入金・出金それぞれの合計額が記帳されます。[公式案内](https://www.smbc.co.jp/kojin/yokin/other/kicho.html) |\n| 三菱UFJ銀行 | 3月末または9月末時点で未記帳明細が10件以上あり、5月または11月の第3土曜日の前日まで未記帳の状態が続くと、合計して記帳されます。[公式案内](https://www.bk.mufg.jp/sp/tsukau/atm_con/atm/btm_btm_02.html) |\n| ゆうちょ銀行 | 未記帳明細が30行を超えると「合算」されます。放置した月数より、明細の行数が基準です。[公式FAQ](https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042) |\n\n**すでにまとめられていても、内訳を取り寄せられる場合があります。** 三井住友銀行は取引店で無料発行できます。ゆうちょ銀行は、合算日から1年以内の直近5つの合算分について、窓口で無料発行できます。上記の各公式ページで案内されています。\n\nまずはATMなどで記帳し、「合算」等があれば銀行に内訳を確認してください。給与振込や引き落としが多い口座では、月に1回程度を目安に記帳すると、明細を確認しやすくなります。\n\nSOURCE: https://www.smbc.co.jp/kojin/yokin/other/kicho.html\nSOURCE: https://www.bk.mufg.jp/sp/tsukau/atm_con/atm/btm_btm_02.html\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://allabout.co.jp/gm/gc/417388/",
+     "https://www.mizuhobank.co.jp/oshirase/tsucho_kicho.html",
+     "https://www.smbc.co.jp/kojin/yokin/other/kicho.html",
+     "https://www.bk.mufg.jp/tsukau/tetsuduki/bankbook/kichou/index.html",
+     "https://www.bk.mufg.jp/info/changing_handling_of_paper_passbooks/pop_suspension_of_use.html",
+     "https://faq01.bk.mufg.jp/faq/show/5939?site_domain=default",
+     "https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042",
+     "https://ryugin-faq.dga.jp/faq_detail.html?id=1121",
+     "https://financial-field.com/living/entry-198526"
+    ],
+    "text": "数か月放置しただけで大きな問題になることはまず少ないですが、長く放置すると次の3つが起きます。\n\n- **合算記帳**: 未記帳が一定の件数や期間を超えると、次の記帳時に入出金の内訳が出ず、合計額だけがまとめて印字されます。\n  - みずほ: 未記帳が100件以上の場合に対象\n  - 三井住友: 6か月以上かつ100件以上の場合に対象\n  - 三菱UFJ: 3月と9月の月末時点で未記帳が一定件数以上あると、5月と11月にまとめて記帳\n  - ゆうちょ: 未記帳が30行を超えると「合算」と印字\n  - 一部の地銀: 2か月以上かつ50件以上など、条件が緩い銀行もあります\n- **内訳の確認に手間がかかる**: 合算されても、窓口で内訳書を発行してもらえば確認できます。ゆうちょは直近5つの合算分(合算日から1年以内)を無料で発行できます。ただし、誰にいくら払ったか、どこから入金されたかを後から追うのは面倒になります。\n- **紙通帳の利用停止**: 三菱UFJなど、長期間未記帳の通帳をATMで使えなくする銀行もあります。この場合は窓口での手続きが必要です。\n\n数か月程度で、取引が少なければ通常どおり記帳できる銀行が多いです。ただ、条件は銀行ごとに違います。内訳を残したいなら、こまめに記帳するかネットバンキングの明細を保存しておくのが確実です。\n\nSOURCE: https://allabout.co.jp/gm/gc/417388/\nSOURCE: https://www.mizuhobank.co.jp/oshirase/tsucho_kicho.html\nSOURCE: https://www.smbc.co.jp/kojin/yokin/other/kicho.html\nSOURCE: https://www.bk.mufg.jp/tsukau/tetsuduki/bankbook/kichou/index.html\nSOURCE: https://www.bk.mufg.jp/info/changing_handling_of_paper_passbooks/pop_suspension_of_use.html\nSOURCE: https://faq01.bk.mufg.jp/faq/show/5939?site_domain=default\nSOURCE: https://faq.jp-bank.japanpost.jp/faq_detail.html?id=2042\nSOURCE: https://ryugin-faq.dga.jp/faq_detail.html?id=1121\nSOURCE: https://financial-field.com/living/entry-198526\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFOhDmhT829ZGCCCmNNto2F6m72_J7TbxuzAHFUHSA0G7-4ONGSko7NAfFdfvLZmM4wDMNUbjEl5DpgrZrhIsXKwi2kU8WSfMlkZO8MpkyWnMFUxc4NlIIC5WzNQsa2ia7ZuMLhB4h88oKF4SZ8EIVv2w==",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmExBWdH2Xw0YRvnMa_fUXFQTOK5viQCTPmYOoCQqLcAsp22nJRvSRFPR_H-E-luIoaJIV7JUZ3etQyL-1FlPssxCk4T7vVrQmMKtl5qPbTcB-guIBCyFF0tTrujLqdqgYOjQA",
+     "https://ryugin-faq.dga.jp/faq_detail.html?id=1121",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF8UJeXfbZYBbT6EQmrVbBZU0CyCj3xhBF9_ZBsGft5atCGR-rz3T_VGFm8XkiOX58wzzO8vJ6d_p9QXJC5hIL1ni6Yc5xKCcRISGJcDwm6VGg8Q_ACtQzwjOowK5XDfRtH7f6k2nj4Xl2CPzzu",
+     "https://www.iyobank.co.jp/notices/others/osirase16.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEREI2-KdZmSoxxydorDncqKdOTnkQBbsEH8QtyTdRX0R9YP9PuObkWG70L8gJ6qxYNq3jP84SGUKcc9t8otUeityYxjbMaCmWuCXP1re4BF-hRfp72k5gBDKKD2QL6Graj32rsDqeRMhvvhJfTb3Jg",
+     "https://www.bk.mufg.jp/info/changing_handling_of_paper_passbooks/pop_suspension_of_use.html"
+    ],
+    "text": "必要な情報が揃いました。\n\n【回答の構成】\n通帳の記帳を数か月〜長期放置した場合に起こることと注意点、対処法を分かりやすく整理して回答します。\n\n1. **「合算記帳（一括記帳）」が行われる（もっとも一般的な影響）**\n   - 未記帳の件数が一定以上（例：30〜100件など）または一定期間（数か月〜1年など）を超えると、過去の取引が1行1行印刷されず、「おまとめ」「合算 〇件 〇〇円」のようにまとめて1行で印字されます。\n   - 理由：通帳のページ数を浪費しないため、またはATM等での印字時間を短縮するため。\n\n2. **個別の明細が通帳で確認できなくなる**\n   - 合算されてしまうと、「誰から振り込まれたか」「どこで引き落とされたか」といった細かい履歴が通帳上では分からなくなります。\n   - 確定申告や家計簿の確認、給与や公共料金の引き落とし確認などで困ることがあります。\n\n3. **ATMで通帳が使えなくなる（長期放置・銀行による）**\n   - 三菱UFJ銀行などの一部の銀行では、2年以上記帳がないと紙の通帳が一時的に利用停止状態になり、窓口で解除や記帳の手続きが必要になる場合があります。\n\n4. **口座自体のお金や口座権利はどうなる？**\n   - **お金が消えるわけではありません。** 単に記帳の表記がまとまるだけで、口座の残高や入出金自体は正常に行われています。\n   - ※ただし、取引（入出金）自体が2年以上ないと「未利用口座管理手数料」が発生したり、10年以上放置すると「休眠預金」として扱われることがあります（※単に記帳を放置しただけでキャッシュカードで入出金している場合は問題ありません）。\n\n5. **合算された明細を確認したい場合の対処法**\n   - **ネットバンキングの利用：** 過去の明細を画面上で確認・ダウンロード（期間制限あり）。\n   - **窓口での取引明細発行：** 銀行の窓口で「取引明細書（取引履歴）」を発行してもらう（※数千円程度の手数料がかかる場合あり）。\n\n6. **今後の対策**\n   - 定期的に記帳する（数ヶ月に1回程度）。\n   - Web通帳（通帳レス・アプリ管理）に切り替える（紙の通帳が不要になり、いつでもスマホで過去明細を確認可能）。\n\n以上のポイントを、読みやすく順序立てて解説します。通帳の記帳を数か月放置した場合、**口座のお金や口座自体が無くなることはありません**が、主に以下のようなこと・影響が発生します。\n\n---\n\n### 1. 取引がまとめて印字される（合算記帳・一括記帳）\n多くの金融機関では、未記帳の取引が**「一定の件数（例：30〜100件）」**や**「一定の期間（例：2か月〜1年）」**を超えると、1件ずつの明細ではなく**「合算 〇件 〇〇〇円」「おまとめ」**のように1行にまとめて印字されます。\n\n* **困るポイント：** \n  「どこからいくら振り込まれたか」「何の引き落としがあったか」といった細かい内訳が通帳上で確認できなくなります。\n* **影響が出る場面：**\n  確定申告、家計簿の計算、給与振り込みや公共料金の引き落とし確認など。\n\n---\n\n### 2. 2年以上放置すると通帳が一時利用停止になることも\n銀行によっては、最後の記帳から長期間（例：2年以上など）記帳を行っていない場合、防犯や口座管理の観点から**紙の通帳が一時的に利用停止**になることがあります。\n※この場合、ATMに通帳を入れてもエラーになり、窓口での手続き（本人確認や記帳再開手続き）が必要になります。\n\n---\n\n### 3. 合算された過去の明細を確認したい場合\nもし合算記帳されてしまい、細かい内訳を知りたい場合は、以下の方法で確認できます。\n\n1. **インターネットバンキング（アプリ）で確認する**\n   * スマホアプリやWeb上でログインすれば、過去の明細を確認できます（ただし、閲覧できる過去の期間には制限がある場合があります）。\n2. **銀行窓口で「取引明細書」を発行してもらう**\n   * 通帳・届出印・本人確認書類を持参して窓口で申請すれば、詳細な取引履歴を発行してもらえます（※金融機関や期間によって数百円〜数千円程度の手数料がかかる場合があります）。\n\n---\n\n### まとめ・対策\n* **口座・残高への影響：** キャッシュカードなどで入出金をしていれば、記帳を放置しても残高や口座自体には影響ありません。\n* **対策：** \n  * 取引件数が多い場合は、**1〜2ヶ月に1回程度**ATMで記帳する。\n  * 明細管理の手間を減らしたい場合は、紙の通帳から**「Web通帳（通帳レス口座）」**へ変更する（アプリでいつでも明細を確認できるようになります）。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "半年放置はNG？": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "**半年放置は避けたほうがよいですが、半年で一律に問題が起きるわけではありません。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "**結論: 車は半年放置が非推奨です。バイクは準備をしていれば半年以上いけますが、準備なしだと1か月が限界です。**"
+   },
+   "Gemini": {
+    "label": "cond",
+    "quote": "「半年放置」がNGかどうかは、**何（対象物や状況）を放置しているか**によって大きく異なります。"
+   }
+  },
+  "通帳を紛失した場合、記帳した内容は失われますか？": {
+   "ChatGPT": {
+    "label": "no",
+    "quote": "**通帳を紛失しても、銀行が保管している取引履歴が消えるわけではありません。**"
+   },
+   "Claude": {
+    "label": "no",
+    "quote": "通帳を紛失しても、銀行側の取引記録は残ります。"
+   },
+   "Gemini": {
+    "label": "no",
+    "quote": "結論から申し上げますと、銀行（金融機関）のシステム内にデータとして残っているため、**取引内容そのものが失われるわけではありません**。"
+   }
+  },
+  "通帳だけで記帳するやり方の基本を教えてください。": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   },
+   "Gemini": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "通帳の記帳を数か月放置するとどうなりますか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "数か月記帳しなくても、通常はそれだけで預金が消えたり、口座が使えなくなったりすることはありません。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "数か月放置しただけで大きな問題になることはまず少ないですが、長く放置すると次の3つが起きます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "通帳の記帳を数か月放置した場合、**口座のお金や口座自体が無くなることはありません**が、主に以下のようなこと・影響が発生します。"
+   }
+  }
+ }
+}

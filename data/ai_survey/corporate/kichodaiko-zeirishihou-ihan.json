@@ -1,0 +1,219 @@
+{
+ "slug": "kichodaiko-zeirishihou-ihan",
+ "site": "corporate",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "記帳代行は税理士法違反？",
+  "記帳代行 税理士法違反が発覚すると誰が罰せられますか？",
+  "記帳代行 税理士だけができる独占業務とは何ですか？",
+  "記帳代行が税理士法違反になるのはどのようなときですか？"
+ ],
+ "answers": {
+  "記帳代行は税理士法違反？": {
+   "ChatGPT": {
+    "urls": [],
+    "text": "",
+    "error": "ChatGPT は利用上限です（10-04 13:13 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://group-hop.com/knowledge/case9",
+     "https://note.com/takeokazeirishi/n/nafe942b433d5",
+     "https://studying.jp/zeirishi/about-more/occupational-licensing.html",
+     "https://dontaku.jp/column/2314",
+     "https://www.bizup.co.jp/column/management/s65.php",
+     "https://012cloud.jp/article/receiptagency-license",
+     "https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation",
+     "https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/",
+     "https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/",
+     "https://marugotoinc.jp/blog/keiri-kicho-iho/",
+     "https://accounting.cast-er.com/tips/is-accounting-services-a-violation-of-the-tax-accountant-act/",
+     "https://b-pos.jp/j022/",
+     "https://cyber-crew.jp/column/column-3560/",
+     "https://www.kanri-pro.com/blog/accounting-outsourcing-illegal",
+     "https://bizx.chatwork.com/outsourcing-accounting/tax-accountant-violation/"
+    ],
+    "text": "**結論: 記帳代行そのものは税理士法違反ではありません。** ただし、税務判断を伴う作業まで無資格で行うと違反になります。\n\n- **違反にならない例**: 領収書・請求書の整理、会計ソフトへの仕訳入力、試算表・総勘定元帳・仕訳帳の作成、給与計算、請求書発行の代行。これらは税理士法2条1項の「税理士業務」に当たらず、事実を記録する作業なので、無資格でも可能です。\n- **違反になる例**: 税務相談、税務書類(申告書など)の作成、税務代理(税務署への提出代行など)。資産計上すべきかの判断や、税額を算出して申告書を作る行為も含まれます。\n- **罰則**: 無資格でこれらを行うと、無償でも「2年以下の懲役または100万円以下の罰金」の対象になります。\n\n**注意点**: 検索結果の多くは税理士法人や経理代行会社などの解説記事で、検索結果の要約だけを根拠にしました。国税庁や条文などの一次情報は確認していません。実際の業務範囲に迷う場合は、税理士に確認してください。\n\nSOURCE: https://group-hop.com/knowledge/case9\nSOURCE: https://note.com/takeokazeirishi/n/nafe942b433d5\nSOURCE: https://studying.jp/zeirishi/about-more/occupational-licensing.html\nSOURCE: https://dontaku.jp/column/2314\nSOURCE: https://www.bizup.co.jp/column/management/s65.php\nSOURCE: https://012cloud.jp/article/receiptagency-license\nSOURCE: https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation\nSOURCE: https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/\nSOURCE: https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/\nSOURCE: https://marugotoinc.jp/blog/keiri-kicho-iho/\nSOURCE: https://accounting.cast-er.com/tips/is-accounting-services-a-violation-of-the-tax-accountant-act/\nSOURCE: https://b-pos.jp/j022/\nSOURCE: https://cyber-crew.jp/column/column-3560/\nSOURCE: https://www.kanri-pro.com/blog/accounting-outsourcing-illegal\nSOURCE: https://bizx.chatwork.com/outsourcing-accounting/tax-accountant-violation/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation",
+     "https://bizneko.jp/column/certified-public-accountants-act/",
+     "https://kaikeiplus.jp/topic/zeirishi/zeiriwork/8604/",
+     "https://marunagekanri.com/accounting/info_keiri_1008/",
+     "https://note.com/takeokazeirishi/n/nafe942b433d5",
+     "https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/"
+    ],
+    "text": "結論から言うと、**単なる「記帳代行（帳簿の作成や会計ソフトへの入力業務）」そのものは、税理士法違反にはなりません。** 税理士の資格を持たない一般企業やフリーランスであっても、合法的に記帳代行サービスを行うことができます。\n\nただし、記帳代行の範囲を超えて**税理士の独占業務に踏み込んだ場合**は、税理士法違反（無資格での税理士業務禁止）となります。\n\n---\n\n### 1. 記帳代行が違反にならない理由\n税理士法によって「税理士しか行ってはならない」と定められている**独占業務**は以下の3つです。\n\n1. **税務代理**：納税者に代わって確定申告や税務調査対応を行うこと\n2. **税務書類の作成**：確定申告書や青色申告決算書などの税務書類を作成すること\n3. **税務相談**：具体的な税金の計算方法や節税対策、税務上の判断について相談・アドバイスに応じること\n\n領収書や請求書、通帳の履歴などをもとに「仕訳帳」や「総勘定元帳」などの**帳簿を作成・入力する作業（記帳代行）**は、上記の独占業務には含まれません。そのため、資格がなくても請け負うことが可能です。\n\n---\n\n### 2. 税理士法違反になってしまうケース\n無資格の記帳代行業者が以下のような業務まで行うと、税理士法違反（刑事罰の対象）となります。\n\n* **確定申告書や青色申告決算書などの作成を行う**\n  * 帳簿の入力だけでなく、税務署へ提出する申告書や決算書まで作成・印刷してしまうと「税務書類の作成」に当たります。\n* **節税アドバイスや税務上のアドバイスを行う**\n  * 「この費用は経費に落とせます」「こう処理すれば節税になります」といった指導や相談に乗ると「税務相談」に該当します。\n* **税務上の判断を独断で行って記帳する**\n  * 判断が分かれる経理処理（例：家事按分の割合や売上・経費の計上時期の税務判断など）を、業者が自ら判断して処理することは違法・グレーゾーンとなります。\n* **提携税理士の「名義貸し」を利用して申告まで一括受注する**\n  * 無資格業者が申告書まで実質的に作成し、提携している税理士の名前や判子だけ借りて提出するスキームは違法です。\n\n---\n\n### 3. 依頼する際・利用する際の注意点\n\n* **申告手続きは自分で行うか、税理士に依頼する必要がある**\n  * 記帳代行業者に頼んだ場合、業者から受け取るのは「帳簿データ」や「試算表」までです。それをもとにした確定申告書の作成・提出は、**ご自身で行うか、別途税理士に依頼する**必要があります。\n* **「格安で確定申告まで丸投げOK」を謳う無資格業者に注意**\n  * 税理士が正しく関与していないにもかかわらず「申告まで全部やります」と宣伝している業者は、違法業者（無資格営業）の可能性が高いため注意が必要です。\n\nまとめると、**「帳簿作成の代行」のみであれば違法性はありません。** しかし、税務相談や申告書類の作成といった税理士業務まで行う・任せる場合には税理士資格が必要となります。",
+    "error": ""
+   }
+  },
+  "記帳代行 税理士法違反が発覚すると誰が罰せられますか？": {
+   "ChatGPT": {
+    "urls": [],
+    "text": "",
+    "error": "ChatGPT は利用上限です（10-04 13:13 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.all-senmonka.jp/guide/97164/",
+     "https://studying.jp/zeirishi/about-more/occupational-licensing.html",
+     "https://b-pos.jp/j022/",
+     "https://cyber-crew.jp/column/column-3560/",
+     "https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation",
+     "https://bizneko.jp/column/certified-public-accountants-act/",
+     "https://www.kanri-pro.com/blog/accounting-outsourcing-illegal",
+     "https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/",
+     "https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/",
+     "https://group-hop.com/knowledge/case9",
+     "https://tax.mitsukaru-pro.co.jp/zeirishi/335",
+     "https://zeirishic.com/content/unqualified-taxaccountant.html",
+     "https://go.taxita.com/column/accounting059/",
+     "https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/06.htm",
+     "https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/07.htm",
+     "https://www.hikari-tax.com/column/accounting/6397.html",
+     "https://myhoumu.jp/zeimu42/"
+    ],
+    "text": "**結論:** 罰せられるのは、無資格で税理士業務を行った本人です。従業員が行った場合は、その従業員に加えて雇用主(法人を含む)も罰金の対象になります(両罰規定)。依頼した側への罰則は、検索した範囲では確認できませんでした。\n\n- **前提:** 記帳代行(帳簿作成の代行)自体は税理士法違反ではありません。違反になるのは、税務代理・税務書類(申告書など)の作成・税務相談を、無資格者が有償で行った場合です。\n- **行為者本人:** 2年以下の懲役(拘禁刑とする記事もあります)または100万円以下の罰金です(税理士法第59条)。\n- **雇用主・法人:** 税理士法第63条の両罰規定により、使用人などが違反した場合、使用者にも100万円以下の罰金が科されます。\n- **依頼した企業:** 罰則の対象は違反行為をした無資格者とされています。ただし依頼側にも、申告ミスによる追徴課税や税務調査に対応できないといったリスクがあるとの記述がありました。\n\n罰則の内容は検索結果の要約に基づきます。WebFetch の許可が得られなかったため、ページ本文や条文そのものは確認していません。正確な条文は国税庁のページや e-Gov で確認してください。\n\nSOURCE: https://www.all-senmonka.jp/guide/97164/\nSOURCE: https://studying.jp/zeirishi/about-more/occupational-licensing.html\nSOURCE: https://b-pos.jp/j022/\nSOURCE: https://cyber-crew.jp/column/column-3560/\nSOURCE: https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation\nSOURCE: https://bizneko.jp/column/certified-public-accountants-act/\nSOURCE: https://www.kanri-pro.com/blog/accounting-outsourcing-illegal\nSOURCE: https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/\nSOURCE: https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/\nSOURCE: https://group-hop.com/knowledge/case9\nSOURCE: https://tax.mitsukaru-pro.co.jp/zeirishi/335\nSOURCE: https://zeirishic.com/content/unqualified-taxaccountant.html\nSOURCE: https://go.taxita.com/column/accounting059/\nSOURCE: https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/06.htm\nSOURCE: https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/07.htm\nSOURCE: https://www.hikari-tax.com/column/accounting/6397.html\nSOURCE: https://myhoumu.jp/zeimu42/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://marunagekanri.com/accounting/info_keiri_1008/",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/osirase/9204.htm",
+     "https://go.taxita.com/column/accounting059/",
+     "https://taxlabor.com/fake-tax-accountant-law-reform/",
+     "https://bizneko.jp/column/certified-public-accountants-act/",
+     "https://www.hikari-tax.com/column/accounting/6397.html",
+     "https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/06.htm",
+     "https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/",
+     "https://taxlabor.com/name-lending-compliance/",
+     "https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation",
+     "https://marugotoinc.jp/blog/keiri-kicho-iho/"
+    ],
+    "text": "記帳代行において税理士法違反が発覚した場合、**直接刑事罰などの法令上の処罰を受けるのは「無資格で税理士業務を行った業者（無資格者）」**です。\n\nただし、**依頼した企業や個人事業主（顧客）も、税務上の重い不利益や追徴課税の責任を直接負う**ことになります。\n\n対象ごとのペナルティとリスクは以下の通りです。\n\n---\n\n### 1. 違法な業務を行った「無資格業者・行為者」\n税理士資格を持たないにもかかわらず、記帳代行の範囲を超えて「確定申告書の作成」や「個別具体的な税務相談」などを行った業者が対象となります。\n\n* **違反内容**：税理士法第52条（非税理士の税理士業務の禁止）違反\n* **罰則**：**2年以下の懲役 または 100万円以下の罰金**（税理士法第59条第1項第4号）\n* **法人の場合**：行為者個人だけでなく、その法人に対しても罰金刑が科される「両罰規定」が適用されます。\n\n### 2. 名義を貸していた「提携税理士」（関与があった場合）\n無資格業者の裏で、名前だけを貸して形式的に申告書を作成・提出させていた税理士がいた場合に適用されます。\n\n* **違反内容**：税理士法第37条の2（名義貸しの禁止）違反\n* **処分**：財務省・国税庁から**懲戒処分（業務停止や税理士業務の禁止＝資格剥奪）**を受けます。\n\n### 3. 業務を依頼していた「顧客（企業・個人事業主）」\n「無資格業者に依頼したこと」自体で、依頼者が税理士法上の刑事罰（懲役や罰金）を直接受ける可能性は原則として低いですが、**税金や法律面で非常に大きな不利益・リスク**を負います。\n\n1. **過少申告加算税・重加算税・延滞税の負担**\n   無資格者が作成した不適切な申告により税額が間違っていた場合、税務調査で指摘を受け、追加の税金やペナルティ（加算税・延滞税）を支払わなければならないのは**納税者本人（依頼者）**です。業者側がその損害を補償してくれる保証はありません。\n2. **申告やり直しの手間と費用**\n   無資格者による申告が適法でないと判断された場合、過去にさかのぼって決算や申告をすべてやり直さなければならないリスクがあります。\n3. **脱税の共犯（刑事罰）に問われるリスク**\n   無資格業者と結託して意図的な所得隠しや不当な節税（脱税）を行っていた場合、依頼主本人も**脱税罪（国税犯則取締法・各税法違反）**として刑事処罰の対象となります。\n\n---\n\n### 補足：記帳代行の「セーフ」と「アウト」の境目\n単に領収書や通帳のデータをもとに会計ソフトへ入力する**「記帳代行」そのものは違法ではありません**。\n\n* **セーフ（資格不要）**：領収書整理、会計ソフトへの記帳・データ入力、試算表の作成\n* **アウト（税理士法違反）**：確定申告書・決算書の作成、税金に関する個別具体的なアドバイス・相談、税務署への代理提出\n\n### まとめ\n税理士法違反で警察や当局から刑事罰を受けるのは**無資格業者**ですが、「無資格者に任せていた結果、間違った申告になり損害を受ける」のは**依頼者本人**です。\n記帳代行を依頼する場合は、単なる記帳作業のみを任せるか、申告まで含める場合は必ず「税理士事務所」または「税理士と適法に提携・分業している事業者」を選ぶことが重要です。",
+    "error": ""
+   }
+  },
+  "記帳代行 税理士だけができる独占業務とは何ですか？": {
+   "ChatGPT": {
+    "urls": [],
+    "text": "",
+    "error": "ChatGPT は利用上限です（10-04 13:13 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://studying.jp/zeirishi/about-more/occupational-licensing.html",
+     "https://adv.freee.co.jp/column/preparation/exclusive-service",
+     "https://www.bizup.co.jp/column/management/s65.php",
+     "https://tax.mitsukaru-pro.co.jp/zeirishi/335",
+     "https://cyber-crew.jp/column/column-3560/",
+     "https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation",
+     "https://freeway-keiri.com/blog/view/924",
+     "https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/",
+     "https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/"
+    ],
+    "text": "**結論:** 記帳代行そのものは税理士の独占業務ではなく、無資格でも行えます。税理士だけができる独占業務は、税理士法に基づく次の3つです。\n\n1. **税務代理**: 納税者に代わって税務署などへの手続きを行うことです。申告や不服申立てなどの代理が含まれます。\n2. **税務書類の作成**: 納税者本人が作るべき申告書や申請書などを代わりに作成することです。\n3. **税務相談**: 個別具体的な税務判断を伴う相談に応じることです。\n\n**記帳代行との境界**\n- 領収書や請求書を会計ソフトに入力する作業は、非独占業務です。\n- 申告書の作成や、税務判断を伴う処理まで踏み込むと、独占業務に当たります。\n- 税理士でない人が独占業務を行うと税理士法違反で、2年以下の懲役または100万円以下の罰金の対象になります。\n\n**確認の限界**\n- 記事本文を開く WebFetch の権限が許可されず、各ページは開けていません。上の内容は、検索結果の要約だけに基づきます。\n- 税理士法の条文番号や罰則の細部は、財務省や国税庁、日本税理士会連合会などの一次情報で確認することをおすすめします。\n\nSOURCE: https://studying.jp/zeirishi/about-more/occupational-licensing.html\nSOURCE: https://adv.freee.co.jp/column/preparation/exclusive-service\nSOURCE: https://www.bizup.co.jp/column/management/s65.php\nSOURCE: https://tax.mitsukaru-pro.co.jp/zeirishi/335\nSOURCE: https://cyber-crew.jp/column/column-3560/\nSOURCE: https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation\nSOURCE: https://freeway-keiri.com/blog/view/924\nSOURCE: https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/\nSOURCE: https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "結論からお伝えすると、**「記帳代行（日々の帳簿付けや仕訳の入力）」そのものは、税理士の独占業務ではありません。** 民間の記帳代行業者や無資格者でも行うことができます。\n\nしかし、記帳代行の流れで行われる**「確定申告書の作成」「税務署への提出（代理）」「具体的な税金のアドバイス（税務相談）」**は、**税理士だけに認められている「3大独占業務」**です。\n\n以下に、税理士の独占業務の内容と、記帳代行における税理士と民間業者の境界線を分かりやすく解説します。\n\n---\n\n### 税理士だけに認められている「3つの独占業務」（税理士法第2条）\n\n有償・無償を問わず、税理士（または税理士法人）以外の者が以下の3つの業務を行うことは法律（税理士法第52条）で禁止されています。\n\n#### 1. 税務代理（ぜいむだいり）\n* 納税者に代わって、税務署へ確定申告や青色申告などの「申告・申請」を行うこと。\n* 税務調査が入った際に、納税者の立ち合いや代理人として交渉すること。\n\n#### 2. 税務書類の作成（ぜいむしょるいのさくせい）\n* 確定申告書、青色申告決算書、相続税申告書など、**税務署に提出する書類を作成すること**。\n* ※会計ソフトに入力して試算表や決算書（貸借対照表・損益計算書）を作る作業は独占業務ではありませんが、そこから「税金計算のための申告書」を作る作業は税理士の独占業務です。\n\n#### 3. 税務相談（ぜいむそうだん）\n* 個別の事情に応じて、「税金がいくらになるか」「この費用は経費に落ちるか」「どんな節税対策があるか」といった**税金に関する具体的な判断や相談に乗ること**。\n\n---\n\n### 記帳代行における「できること・できないこと」の違い\n\n記帳代行を依頼する場合、税理士と民間業者（非税理士）では任せられる範囲が大きく異なります。\n\n| 業務内容 | 民間の記帳代行業者（無資格者） | 税理士（または提携税理士のいる会社） |\n| :--- | :---: | :---: |\n| 領収書・通帳のデータ入力 | **〇** できる | **〇** できる |\n| 試算表・決算書（B/S・P/L）の作成 | **〇** できる | **〇** できる |\n| 「この費用は経費になりますか？」等の個別相談 | **× できない**（違法） | **〇** できる |\n| 節税対策の提案・アドバイス | **× できない**（違法） | **〇** できる |\n| 確定申告書の作成・計算 | **× できない**（違法） | **〇** できる |\n| 確定申告書の代理提出 | **× できない**（違法） | **〇** できる |\n| 税務調査の立ち合い | **× できない**（違法） | **〇** できる |\n\n---\n\n### 注意点：無資格の記帳代行業者による「非税理士行為」\n\n民間の記帳代行業者の中には、格安で記帳を請け負う一方で、**違法に確定申告書の作成や税務アドバイスまで行っているケース（非税理士行為）**が存在します。\n\nもし無資格業者に確定申告書の作成まで頼んでしまうと、業者側が罰せられるだけでなく、依頼者側も**後から税務署から申告の不備やミスを指摘され、追徴課税（ペナルティ）を受けるリスク**があります。\n\n### まとめ\n\n* **記帳（帳簿作成）だけ**であれば、民間の代行業者でも問題ありません。\n* **「税金の相談もしたい」「確定申告まで丸投げしたい」**という場合は、必ず**税理士**に依頼する必要があります。",
+    "error": ""
+   }
+  },
+  "記帳代行が税理士法違反になるのはどのようなときですか？": {
+   "ChatGPT": {
+    "urls": [],
+    "text": "",
+    "error": "ChatGPT は利用上限です（10-04 13:13 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.all-senmonka.jp/guide/97164/",
+     "https://marugotoinc.jp/blog/keiri-kicho-iho/",
+     "https://group-hop.com/knowledge/case9",
+     "https://b-pos.jp/j022/",
+     "https://cyber-crew.jp/column/column-3560/",
+     "https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation",
+     "https://bizneko.jp/column/certified-public-accountants-act/",
+     "https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/",
+     "https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/",
+     "https://ja.wikibooks.org/wiki/%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E7%AC%AC52%E6%9D%A1",
+     "https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/index.htm",
+     "https://www.keisan.nta.go.jp/r7yokuaru_sp/cat1/scid2530.html",
+     "https://accounting.cast-er.com/tips/is-accounting-services-a-violation-of-the-tax-accountant-act/",
+     "https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/02.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/osirase/9204.htm",
+     "https://furukawa-firm.co.jp/occupationallicensing/",
+     "https://www.taxaccounting-shien.com/faq/f/13"
+    ],
+    "text": "記帳代行そのものは税理士法違反になりません。無資格者が税理士の独占業務に踏み込んだときに違反になります。\n\n**違反にならない範囲**\n- 領収書や請求書の整理\n- 会計ソフトへの仕訳入力\n- 帳簿(総勘定元帳・仕訳帳)の記帳\n- 試算表の作成\n- 給与計算などの、税務判断を伴わない事務処理\n\n会計帳簿の記帳代行は、税理士業務には含まれないと解釈されています。\n\n**違反になる場合**\n税理士法第52条は、税理士または税理士法人でない者が税理士業務を行うことを禁じています。次の3つが対象です。\n1. **税務書類の作成**: 確定申告書、法人税・消費税の申告書などを作成すること。\n2. **税務代理**: 税務署への申告や、税務調査での立ち会い・交渉を依頼者の代理で行うこと。\n3. **税務相談**: 具体的な節税方法の助言など、税額の計算に関わる相談に応じること。\n\n記帳代行の業者でも、帳簿作成のついでに申告書まで作ったり、節税の助言をしたりすれば違反になります。報酬を受け取らない無償の場合でも、違反は成立します。\n\n**罰則**\n2年以下の拘禁刑または100万円以下の罰金です。\n\nなお、国税庁のページ(税理士制度のQ&A)は取得を試みましたが、権限の都合で本文を読めませんでした。上記は検索結果の抜粋に基づいており、国税庁の本文は未確認です。\n\nSOURCE: https://www.all-senmonka.jp/guide/97164/\nSOURCE: https://marugotoinc.jp/blog/keiri-kicho-iho/\nSOURCE: https://group-hop.com/knowledge/case9\nSOURCE: https://b-pos.jp/j022/\nSOURCE: https://cyber-crew.jp/column/column-3560/\nSOURCE: https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation\nSOURCE: https://bizneko.jp/column/certified-public-accountants-act/\nSOURCE: https://bricks-outsourcing.com/column/%E7%B5%8C%E7%90%86%E4%BB%A3%E8%A1%8C%E3%81%AF%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E9%81%95%E5%8F%8D%E3%81%AB%E3%81%AA%E3%82%8B%EF%BC%9F%E9%81%95%E6%B3%95%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC/\nSOURCE: https://sovagroup.co.jp/media_article/tax-qualification-for-bookkeeping/\nSOURCE: https://ja.wikibooks.org/wiki/%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E7%AC%AC52%E6%9D%A1\nSOURCE: https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/index.htm\nSOURCE: https://www.keisan.nta.go.jp/r7yokuaru_sp/cat1/scid2530.html\nSOURCE: https://accounting.cast-er.com/tips/is-accounting-services-a-violation-of-the-tax-accountant-act/\nSOURCE: https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/02.htm\nSOURCE: https://www.nta.go.jp/taxes/shiraberu/taxanswer/osirase/9204.htm\nSOURCE: https://furukawa-firm.co.jp/occupationallicensing/\nSOURCE: https://www.taxaccounting-shien.com/faq/f/13\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vws-biz.com/column/kicho-daikou-tax-accounting-law-violation",
+     "https://go.taxita.com/column/accounting059/",
+     "https://dontaku.jp/column/2314",
+     "https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/06.htm",
+     "https://bizneko.jp/column/certified-public-accountants-act/",
+     "https://accounting.cast-er.com/tips/is-accounting-services-a-violation-of-the-tax-accountant-act/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1156527466",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11309494596",
+     "https://marunagekanri.com/accounting/info_keiri_1008/"
+    ],
+    "text": "**記帳代行そのもの**（領収書や請求書などを預かり、仕訳を行って帳簿や試算表を作成する業務）は、税理士資格を持たない事業者でも行える合法的な作業です。\n\nしかし、記帳代行の範囲を超えて**「税理士の独占業務（税理士法第2条）」**や**「税務上の判断」**に踏み込んだ場合、税理士法違反（無資格での税理士業務の提供：同法第52条）となります。\n\nどのようなときに税理士法違反になるのか、具体的なケースは以下の通りです。\n\n---\n\n### 税理士法違反になる主な5つのケース\n\n#### 1. 確定申告書や税務書類を作成したとき（税務書類の作成）\n記帳にとどまらず、税務署へ提出するための以下の書類を作成した場合は違反になります。\n* 確定申告書（所得税・法人税・消費税など）\n* 青色申告決算書・収支内訳書\n* 年末調整関連の書類、法定調書\n* 税務署へ提出する各種届出書\n\n#### 2. 税務署への申告代理や税務調査の対応をしたとき（税務代理）\n納税者に代わって税理士業務を代行・代理した場合です。\n* 作成した申告書を代わりに税務署へ提出する（代理送信や持ち込み）\n* 税務署からの問い合わせ対応や、税務調査への立ち会いを代行する\n\n#### 3. 個別・具体的な税務相談に乗ったりアドバイスをしたとき（税務相談）\n一般的な税金の仕組みや法律の説明であれば問題ありませんが、依頼者の個別具体的な状況に対して判断・助言をすると違反になります。\n* 「この支出は経費として落ちるか？」という質問に具体的な可否を答える\n* 「どうすれば節税できるか？」といった節税対策の提案・アドバイスをする\n* 納税額の計算結果や、どの申告方法を選択すべきかの指導をする\n\n#### 4. 主体となって「税務上の判断」を行ったとき\n単に依頼者が指定した勘定科目や方針に従ってソフトへ入力するのではなく、無資格の記帳代行業者側が主導して税務判断を行った場合は違反とみなされるリスクが高まります。\n* 減価償却の税務上の特例の適用判断\n* 消費税の課税・非課税・不課税の高度な税務判断\n* 決算時における税務調整（加算・減算処理）を無資格で行うこと\n\n#### 5. 「名義貸し」による不適切な連携をしたとき\n記帳代行会社が申告書を作成し、提携している税理士の「名前と名義（印鑑）」だけを借りて提出するケースです。\n* この行為は、無資格業者側だけでなく、名義を貸した税理士も厳格な処分（懲戒処分や刑事罰）の対象となります。\n\n---\n\n### 違反した場合の罰則と依頼側のリスク\n\n* **サービス提供者（無資格業者）の罰則**  \n  税理士法第59条により、**「2年以下の懲役または100万円以下の罰金」**などの厳しい刑事罰が科されます。\n\n* **利用・依頼した企業・事業者側のリスク**  \n  依頼者側に刑事罰が科されることは基本的にありませんが、無資格者による誤った税務処理によって**追徴課税（過少申告加算税や延滞税など）が発生した場合、その金銭的・法律的責任はすべて事業者本人が負う**ことになります。また、税務調査が入った際にも代行業者は代理人として立ち会えません。\n\n### まとめ・境界線の目安\n* **セーフ（誰でも可能）**：領収書等の整理、依頼者の指定に基づく仕訳・会計ソフトへの入力、試算表や総勘定元帳の作成\n* **アウト（税理士のみ可能）**：確定申告書等の作成、税務署への代理提出、具体的な節税相談・税務判断の肩代わり\n\n無資格の記帳代行業者に依頼する際は、「どこまでが記帳代行（事務処理）で、どこからが税理士業務なのか」を明確にし、確定申告や税務相談については必ず税理士（または税理士法人）と連携をとるか直接契約することが推奨されます。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "記帳代行は税理士法違反？": {
+   "Claude": {
+    "label": "no",
+    "quote": "**結論: 記帳代行そのものは税理士法違反ではありません。**"
+   },
+   "Gemini": {
+    "label": "no",
+    "quote": "結論から言うと、**単なる「記帳代行（帳簿の作成や会計ソフトへの入力業務）」そのものは、税理士法違反にはなりません。**"
+   }
+  },
+  "記帳代行 税理士法違反が発覚すると誰が罰せられますか？": {
+   "Claude": {
+    "label": "none",
+    "quote": "**結論:** 罰せられるのは、無資格で税理士業務を行った本人です。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "記帳代行において税理士法違反が発覚した場合、**直接刑事罰などの法令上の処罰を受けるのは「無資格で税理士業務を行った業者（無資格者）」**です。"
+   }
+  },
+  "記帳代行 税理士だけができる独占業務とは何ですか？": {
+   "Claude": {
+    "label": "none",
+    "quote": "**結論:** 記帳代行そのものは税理士の独占業務ではなく、無資格でも行えます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "結論からお伝えすると、**「記帳代行（日々の帳簿付けや仕訳の入力）」そのものは、税理士の独占業務ではありません。**"
+   }
+  },
+  "記帳代行が税理士法違反になるのはどのようなときですか？": {
+   "Claude": {
+    "label": "split",
+    "quote": ""
+   },
+   "Gemini": {
+    "label": "split",
+    "quote": ""
+   }
+  }
+ }
+}

@@ -1,0 +1,234 @@
+{
+ "slug": "seikotsuin-meo-taisaku",
+ "site": "ai-lab",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "整骨院のMEO対策とは？",
+  "整骨院と接骨院はGoogleビジネスプロフィールで同じカテゴリを使えますか？",
+  "整骨院 メインカテゴリを間違えて登録した場合、あとから変更できますか？",
+  "整骨院のMEO対策でも柔整広告ガイドラインは適用されますか？"
+ ],
+ "answers": {
+  "整骨院のMEO対策とは？": {
+   "ChatGPT": {
+    "urls": [
+     "https://meo-jp.com/2026/07/14/seitai-seikotsuin-gbp-katsuyou/",
+     "https://support.google.com/business/answer/7091?hl=ja",
+     "https://support.google.com/business/answer/7400114?hl=ja"
+    ],
+    "text": "**整骨院のMEO対策とは、「〇〇駅 整骨院」「近くの整骨院」などの検索で、GoogleマップやGoogle検索の地域向け検索結果に自院が表示されやすくなるよう、情報を整える取り組みです。** MEOは「Map Engine Optimization」の略で、主にGoogleビジネスプロフィールを活用し、電話・予約・来院につなげることを目指します。[整骨院のMEO対策の解説](https://meo-jp.com/2026/07/14/seitai-seikotsuin-gbp-katsuyou/)\n\n具体的には、次の対策を行います。\n\n- **基本情報を正確に登録する：** オーナー確認を済ませ、院名・住所・電話番号・営業時間・業種を設定し、休診日なども更新します。\n- **院の様子を写真で伝える：** 外観・入口・院内などを掲載し、初めて来院する人が場所や雰囲気を確認できるようにします。\n- **口コミに丁寧に対応する：** 実際に利用した人の口コミを集め、寄せられた意見に返信します。\n\nこれらは、Googleが案内しているローカル検索の改善方法に沿った対策です。[Google公式ヘルプ](https://support.google.com/business/answer/7091?hl=ja)\n\n表示順位は主に、**検索内容との「関連性」、検索者からの「距離」、院の「知名度」**によって決まります。そのため、情報を充実させても、すべての場所・検索条件で上位になるとは限りません。Googleに料金を払って自然検索の順位を上げることもできません。[Google公式ヘルプ](https://support.google.com/business/answer/7091?hl=ja)\n\nまた、**口コミ投稿と引き換えに割引や無料施術を提供すること、架空の口コミを投稿することは禁止**されています。整骨院のMEOでは、正確な情報と実際の利用者の評価を積み重ねることが基本です。[Googleのコンテンツポリシー](https://support.google.com/business/answer/7400114?hl=ja)\n\nSOURCE: https://meo-jp.com/2026/07/14/seitai-seikotsuin-gbp-katsuyou/\nSOURCE: https://support.google.com/business/answer/7091?hl=ja\nSOURCE: https://support.google.com/business/answer/7400114?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://aidaim.co.jp/seikotuin/",
+     "https://www.funaisoken.co.jp/solution/chiropractic-meo_606",
+     "https://www.core-re.jp/media/seikotsuin/a71",
+     "https://clinic-yell.jp/2026/08/05/meo/",
+     "https://www.jusei-kaigyou.com/%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AE%E9%9B%86%E5%AE%A2%E3%81%A7%E8%B6%85%E9%87%8D%E8%A6%81%E3%81%AA%E3%80%8Cmeo%E5%AF%BE%E7%AD%96%E3%80%8D%E3%81%A8%E3%81%AF%EF%BC%9F%E9%9B%86%E5%AE%A2%E3%81%AE/",
+     "https://ripicle.com/osteopath/column/1357/",
+     "https://to-realize.jp/meo/seitai/",
+     "https://meo.tryhatch.co.jp/meo/manipulative-meo",
+     "https://www.gyro-n.com/seo/hack/massage_meo/",
+     "https://clius.jp/mag/2023/02/23/about-meo-for-chiropractic-clinics/",
+     "https://funai-healthcare.funaisoken.co.jp/blogs/column/column-6861",
+     "https://kbcompany.jp/blog/seo-meo/130/",
+     "https://www.mm-laboratory.com/blog/c363",
+     "https://www.mm-laboratory.com/blog/c417",
+     "https://deepxi.net/column/co-45/"
+    ],
+    "text": "**整骨院のMEO対策**とは、Googleマップ上の検索結果で自院を上位に表示させ、来院につなげる施策です。MEOは Map Engine Optimization の略です。\n\n- **狙い**: 「地名 整骨院」「腰痛 近く」などで検索すると、地図付きで上位3院だけが出る「ローカルパック」が表示されます。この3枠に入ることが目標です。\n- **順位の決まり方**: Googleは「関連性」「距離」「視認性（知名度）」の3要素を主な基準にしています。\n- **前提**: Googleビジネスプロフィール（旧Googleマイビジネス）への登録が必須です。登録も利用も無料です。\n- **メリット**: 「今まさに探している」「すぐ行きたい」層に届くので、来院につながりやすい施策です。\n\n**主な具体策**\n1. **キーワード設計**: 「地名＋整骨院」や、症状を含めた検索語を意識します。\n2. **プロフィールの充実**: 営業時間、URL、予約リンク、カテゴリ、紹介文、メニュー、写真・動画などを漏れなく入力します。\n3. **口コミの獲得と返信**: 口コミを集め、すべてに早く丁寧に返信します。月5件で年60件が目安です。\n4. **定期的な投稿**: ブログやSNSの更新と合わせて、プロフィールでも発信を続けます。\n\n検索結果の要約をもとにまとめたもので、各ページ本文までは開いていません。順位や集客への効果をうたう事例は、各社の主張です。\n\nSOURCE: https://aidaim.co.jp/seikotuin/\nSOURCE: https://www.funaisoken.co.jp/solution/chiropractic-meo_606\nSOURCE: https://www.core-re.jp/media/seikotsuin/a71\nSOURCE: https://clinic-yell.jp/2026/08/05/meo/\nSOURCE: https://www.jusei-kaigyou.com/%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AE%E9%9B%86%E5%AE%A2%E3%81%A7%E8%B6%85%E9%87%8D%E8%A6%81%E3%81%AA%E3%80%8Cmeo%E5%AF%BE%E7%AD%96%E3%80%8D%E3%81%A8%E3%81%AF%EF%BC%9F%E9%9B%86%E5%AE%A2%E3%81%AE/\nSOURCE: https://ripicle.com/osteopath/column/1357/\nSOURCE: https://to-realize.jp/meo/seitai/\nSOURCE: https://meo.tryhatch.co.jp/meo/manipulative-meo\nSOURCE: https://www.gyro-n.com/seo/hack/massage_meo/\nSOURCE: https://clius.jp/mag/2023/02/23/about-meo-for-chiropractic-clinics/\nSOURCE: https://funai-healthcare.funaisoken.co.jp/blogs/column/column-6861\nSOURCE: https://kbcompany.jp/blog/seo-meo/130/\nSOURCE: https://www.mm-laboratory.com/blog/c363\nSOURCE: https://www.mm-laboratory.com/blog/c417\nSOURCE: https://deepxi.net/column/co-45/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "整骨院（接骨院）における**MEO対策（Map Engine Optimization：マップ検索エンジン最適化）**とは、GoogleマップやGoogle検索の「地図枠（ローカルパック）」において、自院の情報（Googleビジネスプロフィール）を上位に表示させ、来院につなげるための集客施策のことです。\n\n例えば、ユーザーが「〇〇駅 整骨院」「近くの整骨院」「肩こり 整体 〇〇区」などで検索した際に、画面上部の地図エリアに自院を表示させることを目指します。\n\n---\n\n### なぜ整骨院にMEO対策が重要なのか？（メリット）\n\n1. **ターゲット層（ローカル需要）と完全に一致する**\n   整骨院を探す患者様は「通いやすい近所」「今すぐ行ける場所」を探しています。地域性に特化した検索に強いため、即効性と角度の高い集客が期待できます。\n2. **ポータルサイトや通常のSEOより目立つ**\n   Google検索では、通常のウェブ検索結果（ポータルサイトやホームページ）よりも**上に地図枠が表示**されます。スマホ画面で一番目立つ位置に表示されるため、クリック率が非常に高いです。\n3. **集客コスト（広告費）を大幅に抑えられる**\n   Googleビジネスプロフィールの登録・運用自体は**無料**です。ポータルサイトへの掲載料やリスティング広告費を抑えつつ、継続的な集客効果を得ることができます。\n4. **口コミによる「安心感・信頼感」を与えられる**\n   来院を迷っている患者様にとって、実際のユーザーの口コミ評価（星の数やコメント）は最大の決め手になります。\n\n---\n\n### 整骨院が取り組むべき具体策（実践ステップ）\n\n#### 1. Googleビジネスプロフィールの基本情報を充実させる\n* **カテゴリ設定**：「整骨院」「接骨院」「整体院」など、自院に最も適したメインカテゴリを設定します。\n* **NAP（名前・住所・電話番号）の統一**：ビジネス名・住所・電話番号は、自社ホームページやSNS、ポータルサイトなどの表記と**完全に一致**させます（全角・半角や「1-2-3」と「1丁目2番3号」の違いなどにも注意）。\n* **詳細情報の設定**：営業時間、駐車場のアリ・ナシ、支払い方法（キャッシュレス対応など）、公式HPへのURLを正しく登録します。\n\n#### 2. 写真・動画をたくさん掲載する\n患者様は「どんな院なのか」「どんな人が施術するのか」という不安を持っています。\n* **掲載すべき写真**：外観（建物・看板）、内観（待合室・施術ベッド）、スタッフの笑顔の顔写真、施術風景、駐車場の様子など。\n* 清潔感と安心感が伝わる高画質な写真を定期的に追加しましょう。\n\n#### 3. 口コミ（レビュー）を集めて丁寧に返信する\n* **口コミの集め方**：施術後に満足度の高い患者様へ直接声かけをしたり、院内に案内POPやQRコードを設置して投稿をお願いします。\n* **誠実な返信**：良い口コミはもちろん、万が一ネガティブな口コミがついた場合でも、感謝と真摯な対応の姿勢を示す返信をすることが、閲覧している他の見込み患者様への信頼に繋がります。\n\n#### 4. 「最新情報（投稿機能）」を定期的に更新する\n* 臨時休業や年末年始の営業案内\n* 季節の健康トピックス（例：「寒さによる腰痛の予防法」「梅雨時期の頭痛対策」など）\n* 新しい施術メニューや設備導入のお知らせ\n  週に1回程度の更新を続けることで、Googleから「活発に営業している信頼できる店舗」と評価されやすくなります。\n\n---\n\n### 整骨院のMEO対策で「注意すべきポイント」\n\n1. **ビジネス名に不要なキーワードを詰め込まない（ガイドライン違反）**\n   * ✕ 不可：「〇〇整骨院【肩こり・腰痛専門・駅徒歩1分】」\n   * 〇 正しい：「〇〇整骨院」\n   ※店舗名以外のキーワードを強引に含めると、Googleからペナルティ（アカウント停止・削除）を受けるリスクがあります。\n\n2. **対価（割引など）を支払って口コミを依頼しない**\n   * 「口コミを書いてくれたら500円オフ」「次回10％割引」といった施策はGoogleのガイドライン違反となります。アカウント停止の原因になるため絶対に行わないでください。\n\n3. **医療広告ガイドライン・柔道整復師法の遵守**\n   * ビジネスプロフィールの説明文や投稿機能において、「絶対治る」「最高峰の技術」「痛みが消える」などの誇大表現・ビフォーアフターの過剰なアピールは広告規制に抵触する恐れがあります。適切な表現（「改善を目指す」「和らげる」など）に留めましょう。\n\n---\n\n### まとめ\n\n整骨院におけるMEO対策は、**「見つけやすさ（正確な情報）」**と**「安心感（写真・口コミ・最新情報）」**を患者様に届けるための取り組みです。\n\nまずは**Googleビジネスプロフィールの情報を正しく最新の状態にし、院内の写真を充実させ、患者様から自然な口コミを集めていくこと**から始めてみてください。",
+    "error": ""
+   }
+  },
+  "整骨院と接骨院はGoogleビジネスプロフィールで同じカテゴリを使えますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.shadan-nissei.or.jp/kakarikata/how-to-use/judoseifukushi/",
+     "https://www.zenjukyo.gr.jp/wp/wp-content/uploads/2025/03/google_business_profile.pdf",
+     "https://support.google.com/business/answer/7249669?hl=ja"
+    ],
+    "text": "**はい。柔道整復を主な業務とする整骨院と接骨院は、Googleビジネスプロフィールで同じ「接骨院」カテゴリを使えます。**\n\n日本柔道整復師会は、整骨院・接骨院は名称が異なるだけで、いずれも柔道整復師が施術を行う同じ種類の施術所と説明しています。[日本柔道整復師会](https://www.shadan-nissei.or.jp/kakarikata/how-to-use/judoseifukushi/)\n\nまた、全国柔道整復師統合協議会の登録手順には、「整骨院というカテゴリがないため、接骨院と入力してください」と明記されています。したがって、**院名が「○○整骨院」でも、カテゴリは「接骨院」で問題ありません**。[登録手順（PDF）](https://www.zenjukyo.gr.jp/wp/wp-content/uploads/2025/03/google_business_profile.pdf)\n\nGoogle公式ヘルプも、実際の事業内容に最も近いカテゴリを、表示される候補から選ぶよう案内しています。設定時は「プロフィールを編集」→「業種」で「接骨院」を入力し、候補から選択してください。[Google公式ヘルプ](https://support.google.com/business/answer/7249669?hl=ja)\n\nSOURCE: https://www.shadan-nissei.or.jp/kakarikata/how-to-use/judoseifukushi/\nSOURCE: https://www.zenjukyo.gr.jp/wp/wp-content/uploads/2025/03/google_business_profile.pdf\nSOURCE: https://support.google.com/business/answer/7249669?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gyro-n.com/seo/hack/massage_meo/",
+     "https://funai-healthcare.funaisoken.co.jp/blogs/column/column074",
+     "https://funai-healthcare.funaisoken.co.jp/blogs/column/column-6861",
+     "https://clinic-yell.jp/2026/06/19/googlemap/",
+     "https://white-link.com/sem-plus/google-business-profile-category/",
+     "https://www.mm-laboratory.com/blog/243",
+     "https://www.honepage.com/blog/knowledge/732",
+     "https://deepxi.net/column/co-45/",
+     "https://haward-joyman.com/aimeo/2025/10/16/google%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%97%E3%83%AD%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E9%81%B8%E5%AE%9A%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4/",
+     "https://support.google.com/business/answer/7249669?hl=ja",
+     "https://revimy.jp/columns/google-business-profile-category-list",
+     "https://meo.omotenashi.com/mybusiness_category/",
+     "https://www.meo-times.com/registration/registration-category/",
+     "https://jp.can-ly.com/column/gpb/category-merit/"
+    ],
+    "text": "はい、同じカテゴリで登録できます。Googleビジネスプロフィールには「接骨院」というカテゴリはありますが、「整骨院」という独立したカテゴリは見当たらないとされています。そのため整骨院も「接骨院」を選べば問題ありません。\n\n- **メインカテゴリ:** 1つしか選べず、検索順位に影響します。整骨院でも「接骨院」を選ぶのが一般的で、MEO対策の解説でもそう推奨されています。\n- **追加カテゴリ:** 最大9つまで設定できます。整体など、実際に提供している施術に合わせて足します。\n- **院名の表記:** カテゴリは同じでも、院名には「整骨院」「接骨院」など実際の名称を明記してください。\n- **競合の確認:** 「地域名 + 接骨院」でGoogleマップを検索し、上位の院のメインカテゴリを見ると参考になります。\n\n注意点として、「整骨院にカテゴリがない」という記述は、MEO対策会社の解説記事の要約をもとにしています。Googleの公式ヘルプのカテゴリ一覧では確認していません。ページ本文の取得が許可されず、記事の原文でも裏取りできていません。実際の管理画面でカテゴリを検索して確認してください。\n\nSOURCE: https://www.gyro-n.com/seo/hack/massage_meo/\nSOURCE: https://funai-healthcare.funaisoken.co.jp/blogs/column/column074\nSOURCE: https://funai-healthcare.funaisoken.co.jp/blogs/column/column-6861\nSOURCE: https://clinic-yell.jp/2026/06/19/googlemap/\nSOURCE: https://white-link.com/sem-plus/google-business-profile-category/\nSOURCE: https://www.mm-laboratory.com/blog/243\nSOURCE: https://www.honepage.com/blog/knowledge/732\nSOURCE: https://deepxi.net/column/co-45/\nSOURCE: https://haward-joyman.com/aimeo/2025/10/16/google%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%97%E3%83%AD%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E9%81%B8%E5%AE%9A%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4/\nSOURCE: https://support.google.com/business/answer/7249669?hl=ja\nSOURCE: https://revimy.jp/columns/google-business-profile-category-list\nSOURCE: https://meo.omotenashi.com/mybusiness_category/\nSOURCE: https://www.meo-times.com/registration/registration-category/\nSOURCE: https://jp.can-ly.com/column/gpb/category-merit/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://funai-healthcare.funaisoken.co.jp/blogs/column/column074",
+     "https://local-base.net/meo/gbp/setup/primary-category/",
+     "https://ai-bouz.com/seikotsuin-meo/",
+     "https://zenkoku-iryo.com/column/collection/osteopathic-meo",
+     "https://locaop.jp/media/meo/meo-category-checktool/",
+     "https://temotopage.com/%E6%95%B4%E9%AA%A8%E9%99%A2google%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%97%E3%83%AD%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB.html",
+     "https://devo.jp/seolaboratory/103748/",
+     "https://www.terra-design.co.jp/blog/gbp-category-senshouhou-gyoushu-betsu/",
+     "https://ai-bouz.com/seikotsuin-meo/"
+    ],
+    "text": "**はい、同じカテゴリを使えます。**\n\n整骨院と接骨院はどちらも国家資格である「柔道整復師」による施術所であるため、Googleビジネスプロフィール上でも同じ業種カテゴリを選択して運用することが可能です。\n\n設定や運用のポイントは以下の通りです。\n\n---\n\n### 1. 使用するカテゴリについて\n* **ビジネスカテゴリ名**：Googleビジネスプロフィールでは、主に**「接骨院」**というカテゴリが用意されており、整骨院であっても「接骨院」を選択・共有するのが一般的です。（※システムのアップデートにより「整骨院」が直接選択できる場合もありますが、実質的な扱いは同じです）\n\n### 2. 検索結果（MEO/ローカルSEO）への影響\n* Googleの検索アルゴリズムは「整骨院」と「接骨院」を強く関連付けて（ほぼ同義語として）処理しています。\n* そのため、メインカテゴリに「接骨院」を設定していても、ユーザーが「〇〇駅 整骨院」「〇〇市 整骨院」と検索した際に問題なく検索結果に表示されます。\n\n### 3. 設定時の注意点とコツ\n* **ビジネス名（店舗名）**：検索キーワードを無理に詰め込まず、保健所の開設届や店舗の看板にある正式名称（例：「〇〇整骨院」「△△接骨院」）をそのまま入力してください。\n* **追加（サブ）カテゴリの活用**：もし院内で鍼灸や整体、リハビリ等の施術も行っている場合は、サブカテゴリとして「鍼灸院」「整体院」などを設定しておくと、より幅広い検索に対応できるようになります。",
+    "error": ""
+   }
+  },
+  "整骨院 メインカテゴリを間違えて登録した場合、あとから変更できますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://support.google.com/business/answer/7249669?hl=ja"
+    ],
+    "text": "はい、**Googleビジネスプロフィールのメインカテゴリは、登録後でも変更できます。** 整骨院で誤ったカテゴリを登録した場合も、あとから修正できます。[Google公式ヘルプ](https://support.google.com/business/answer/7249669?hl=ja)\n\n変更手順は次のとおりです。\n\n1. 管理するビジネスプロフィールを開く。\n2. 「プロフィールを編集」→「業種」の編集アイコンを選ぶ。\n3. 「メインカテゴリ」に適切なカテゴリを入力し、表示された候補から選ぶ。\n4. 「保存」を押す。\n\nカテゴリは、院の主な事業内容に最も合うものを選んでください。なお、**カテゴリを変更すると、オーナー確認を再度求められる場合があります。** [Google公式ヘルプ](https://support.google.com/business/answer/7249669?hl=ja)\n\nSOURCE: https://support.google.com/business/answer/7249669?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://support.google.com/business/answer/3039617?hl=ja",
+     "https://support.google.com/business/answer/7249669?hl=ja",
+     "https://www.gyro-n.com/seo/hack/gbp_category/",
+     "https://kbcompany.jp/blog/google/231/",
+     "https://www.meo-times.com/registration/registration-category/"
+    ],
+    "text": "はい、あとから変更できます。\n\n- **変更方法**: Googleビジネスプロフィールの管理画面で「プロフィールを編集」を開き、「業種」の横にある編集アイコンを選びます。「メインカテゴリ」欄にカテゴリを入力し、表示された候補から選んで保存します。\n- **管理画面に入れない場合**: 該当のプロフィールを検索し、「情報の修正を提案」から「カテゴリ」で正しいものを選ぶ方法もあります。\n- **注意点**: カテゴリを追加・編集するとき、オーナー確認を再度求められることがあります。\n\n公式ヘルプのページ本文は取得できず、確認できたのは検索結果の要約までです。画面の表記や再確認の条件は、公式ヘルプで最新の内容を確認してください。\n\nSOURCE: https://support.google.com/business/answer/3039617?hl=ja\nSOURCE: https://support.google.com/business/answer/7249669?hl=ja\nSOURCE: https://www.gyro-n.com/seo/hack/gbp_category/\nSOURCE: https://kbcompany.jp/blog/google/231/\nSOURCE: https://www.meo-times.com/registration/registration-category/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://nake.co.jp/seikotsuin-seitaiin-meo",
+     "https://shamoji.co.jp/harepage-tenpo/media/guide/gbp-category-erabikata/",
+     "https://ai-bouz.com/seikotsuin-meo/",
+     "https://www.funaisoken.co.jp/solution/clinic_attracting-customers_706_S032",
+     "https://www.kfukfu.com/column/osteopathic-clinic-meo",
+     "https://www.gyro-n.com/seo/hack/massage_meo/"
+    ],
+    "text": "**はい、メインカテゴリはあとからいつでも変更できます。**\n\n整骨院の集客で最も重要となる「Googleビジネスプロフィール（旧Googleマイビジネス）」をはじめ、ポータルサイト（エキテンなど）でも後からの変更・修正が可能です。\n\n---\n\n### Googleビジネスプロフィールでの変更手順\n\nパソコンやスマートフォンのGoogle検索・Googleマップから、数分で簡単に変更できます。\n\n1. **管理画面を開く**\n   * オーナー登録済みのGoogleアカウントにログインした状態で、Google検索で「マイビジネス」または自院の店舗名を検索します。\n2. **編集画面へ進む**\n   * 表示された管理パネルから **「プロフィールの編集」** を選択します。\n3. **カテゴリの修正**\n   * 「ビジネス情報」内の **「ビジネスカテゴリ」**（または業種）を選択します。\n   * **「メインカテゴリ」** を正しい項目（例：「整骨院」「接骨院」「整体院」「鍼灸院」など）に変更します。\n4. **保存する**\n   * 「保存」をクリックすれば変更完了です。\n\n---\n\n### カテゴリ変更時の注意点・ポイント\n\n#### 1. メインカテゴリと「追加カテゴリ」を使い分ける\n整骨院で整体や鍼灸も行っている場合、一番メインとしたいもの（例：整骨院）を「メインカテゴリ」にし、その他の提供サービス（例：整体院、鍼灸院など）は **「追加カテゴリ（サブカテゴリ）」** に登録するのがおすすめです。\n\n#### 2. 検索順位（MEO）が一時的に変わる可能性がある\nメインカテゴリは、Googleマップで「地域名 ＋ ○○」と検索された際の表示順位に最も大きく影響します。変更すると、一時的に検索結果の表示や順位が変動することがあります。\n\n#### 3. 再審査や確認が入る場合がある\n大幅な変更を行った場合、Google側による審査が入ったり、まれにオーナー確認（コード入力や動画による確認など）を再度求められたりすることがあります。\n\n---\n\n### その他のポータルサイト（エキテン・HP等）の場合\n* **エキテンやホットペッパーなど：** 管理画面の店舗情報編集ページから業種変更が可能です。サイトによっては事務局による確認・審査が入るため、反映まで1〜3日程度かかる場合があります。",
+    "error": ""
+   }
+  },
+  "整骨院のMEO対策でも柔整広告ガイドラインは適用されますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/10800000/001412674.pdf",
+     "https://www.city.fukuoka.lg.jp/hofuku/hokensho/iyakumu/imu/documents/ahakiguideline.pdf",
+     "https://www.city.fukuoka.lg.jp/hofuku/hokensho/iyakumu/imu/sejutsushotoukoukoku.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/newpage_48702.html"
+    ],
+    "text": "**はい。整骨院のMEO対策でも「あはき・柔整広告ガイドライン」を踏まえる必要があります。ただし、Googleマップへの掲載やMEO対策が、すべて一律に柔道整復師法の広告規制対象になるわけではありません。**「法律上の広告に該当するか」と「ネット上の情報として適切か」を分けて判断します。[厚生労働省のガイドライン（Ⅱ・Ⅵ）](https://www.mhlw.go.jp/content/10800000/001412674.pdf)\n\n広告に該当するかは、次の３要件をすべて満たすかで判断されます。\n\n- **誘引性**：利用者を施術所へ誘引する意図がある。\n- **特定性**：施術者や施術所を特定できる。\n- **認知性**：一般の人が認知できる状態にある。\n\n一方、利用者が自ら検索して閲覧するウェブサイト等は、原則として広告とは見なされません。**通常のGoogleビジネスプロフィールについても、掲載内容や表示方法を踏まえた個別判断が必要です。**これはガイドラインの一般原則からの整理であり、「MEOはすべて広告」「無料掲載なら対象外」と断定することはできません。[ガイドライン（Ⅱの１・６、Ⅵの１）](https://www.mhlw.go.jp/content/10800000/001412674.pdf)\n\nMEOで特に注意する点は、次のとおりです。\n\n| 施策・表示 | 考え方 |\n|---|---|\n| 名称・住所・電話番号・施術時間などの整備 | これらは広告可能事項に含まれます。正確に掲載することが基本です。 |\n| Google等へ料金を払うスポンサー表示 | ３要件を満たす場合、広告規制の対象になります。広告と一体となったリンク先も対象になり得ます。 |\n| MEO業者への運用代行料 | 支払いだけで「検索サイトへ料金を払って上位表示する広告」と同じ扱いになるとはいえません。実際の施策で判断します。 |\n| 口コミ | 利用者の自発的な投稿は通常広告とは見なされませんが、院の依頼や謝礼に基づく体験談は広告として扱われ得ます。 |\n| 「絶対に治る」「地域No.1」などの表示 | 広告に該当しないネット情報でも、虚偽・誇大・比較優良等の表現は掲載すべきでないとされています。 |\n\n以上は、ガイドラインの広告可能事項、体験談、インターネット情報に関する規定に基づく整理です。[ガイドライン（Ⅱの６、Ⅲ、Ⅵ）](https://www.mhlw.go.jp/content/10800000/001412674.pdf)\n\nしたがって、**MEOではプロフィールの説明文・投稿・写真内の文言・口コミ施策まで確認する必要があります。**広告に該当する場合は、効果を誇張しないだけでなく、広告可能事項の範囲を守る必要があります。具体的な掲載内容の判断は、院の所在地を管轄する自治体の広告相談窓口へ確認できます。[福岡市の広告規制案内](https://www.city.fukuoka.lg.jp/hofuku/hokensho/iyakumu/imu/sejutsushotoukoukoku.html)、[厚生労働省の相談先案内](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/newpage_48702.html)\n\nSOURCE: https://www.mhlw.go.jp/content/10800000/001412674.pdf\nSOURCE: https://www.city.fukuoka.lg.jp/hofuku/hokensho/iyakumu/imu/documents/ahakiguideline.pdf\nSOURCE: https://www.city.fukuoka.lg.jp/hofuku/hokensho/iyakumu/imu/sejutsushotoukoukoku.html\nSOURCE: https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/newpage_48702.html\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://funai-healthcare.funaisoken.co.jp/blogs/column/column099",
+     "https://www.jusei-news.com/news/11851/",
+     "https://www.jusei-news.com/news/11701/",
+     "https://www.zenjukyo.gr.jp/news/koukoku_guideline_2025/",
+     "https://www.city.itabashi.tokyo.jp/kenko/eisei/1015896/1016031/1058381.html",
+     "https://www.artra-s.com/news/detail.php?seq=232",
+     "https://www.yakkihou-writing.net/column/qa/",
+     "https://support.google.com/business/answer/3474122?hl=ja"
+    ],
+    "text": "**適用されます。** Googleビジネスプロフィール(GBP)の投稿・説明文・写真・Q&Aなど、院側が発信する内容は、あはき・柔整広告ガイドライン(令和7年2月18日付、厚労省)の対象になり得ます。\n\n- **広告に当たるかの基準**: ①利用者を呼び込む意図がある(誘引性)、②施術所や施術者が特定できる(特定性)、③誰もが見られる(認知性)。GBPで院名を出して特徴をアピールすれば、3つとも満たします。ホームページやSNSでも、公開範囲を限定していなければ広告とみなされます。\n- **GBPを対象と明記する解説**: 検索で見つかったMEO業者の解説記事に、GBPも広告規制の対象という記述がありました。ただし、厚労省のガイドライン本文でGBPに言及した箇所は確認できていません。公的資料での裏取りはできていません。WebFetchの許可が得られなかったためです。\n- **口コミ**: 患者が自発的に書いた口コミは、基本的に広告に当たらないとされています。ただし、院が依頼して書かせた口コミや、口コミを装った宣伝は、ステルスマーケティングとして禁止です。\n- **禁止される表現の例**: 他院より優良だと謳う比較広告、厚労省や都道府県知事の認可・認定・指定を思わせる表記などです。\n- **広告可能な事項**: 施術者である旨と氏名、住所、業務の種類、施術所の名称・電話番号・所在地、施術日・施術時間など、限定されています。\n- **GBP側の規約**: 口コミ投稿と引き換えに割引や無料サービスを提供することは、Google側でも禁止です。\n\n実際の文言は、所轄の保健所(自治体)にも確認すると確実です。\n\nSOURCE: https://funai-healthcare.funaisoken.co.jp/blogs/column/column099\nSOURCE: https://www.jusei-news.com/news/11851/\nSOURCE: https://www.jusei-news.com/news/11701/\nSOURCE: https://www.zenjukyo.gr.jp/news/koukoku_guideline_2025/\nSOURCE: https://www.city.itabashi.tokyo.jp/kenko/eisei/1015896/1016031/1058381.html\nSOURCE: https://www.artra-s.com/news/detail.php?seq=232\nSOURCE: https://www.yakkihou-writing.net/column/qa/\nSOURCE: https://support.google.com/business/answer/3474122?hl=ja\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sekkotsukaigyo.musashinomedical.com/?p=5089",
+     "https://seikotsulab.jp/keiei/chiropractic-clinic-ad-regulations-20260711/",
+     "https://nake.co.jp/seikotsuin-seitaiin-ad-rules",
+     "https://www.three-count.jp/advice/clinic_web_attracting_customers/",
+     "https://meo.lamp-co.com/media/chiropractic-marketing/",
+     "https://www.mhlw.go.jp/content/10800000/001469478.pdf",
+     "https://www.mhlw.go.jp/content/10800000/001274652.pdf",
+     "https://rehasaku.net/media/attractingcustomers/456/",
+     "https://joypal.jp/osteopathic-college-advertise/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGkwlPTPOrXui2cyZms40ubUveXQCmLBQerd8vgkb4DGSR0dpX5dIZ4E8Leu26rnhm0F4SLYE8U6zvMNyi8Kb50Ei4Xr2VZYXQB7AJH7fhC_8WJggu_N7joqDJY3k99DHyw2htXwJtmh5vPdg6NrOSoEljaPxePa4EijmPr7rIjgcLYf-OMMH9uSH36OHz6xyQESG-iNRu8Ntb5srK2vNi7bCU_6gKaZUI5VaV0_um3_VuIqBqveI2Pv8kGeOMojfMuAHs4-zwjqbwkmS1G286vzia6KEtsql3Lfy4_zlne5osACCkJb_kgZp6xbRkTaCNiu13_R9jSYD1QqDbVd1zcTa3Ww9mcAdPpe2QAwkUqv0meSMPO2cQVuupB1G3Mzcw_N5Gy5DFVYqecqXe6y_2Qv6g6BGg_8gBbfSZHk53T08du1hrjqCxdk3KpNXIbcck6VRA_Btxv_uqH_yYtJwrgRp8LyU-5VXKVn5O49fn3Gzyd_XOKG49HbWeJhFoWN8fMEuoYCqEOjV999qyFeyEOdzqBGdaYRNXtK8umLQ_VU-4ShCPMR1Mb1yZpZU32UY2f2m56GKUmuS1eBXDFX8PkTqQ6AtX6teTOCqjotpQP2PF_StCZZb8Ca7U=",
+     "https://funai-healthcare.funaisoken.co.jp/blogs/column/8168"
+    ],
+    "text": "**はい、整骨院・接骨院のMEO対策（Googleビジネスプロフィールの運用など）においても「柔道整復師法」および厚生労働省の「あはき・柔整広告ガイドライン」が適用されます。**\n\nホームページ（公式Webサイト）は「ユーザーが能動的に情報を探して訪問する場」として原則規制対象外とされる場合がありますが、**Googleマップや検索結果上に不特定多数に向けて表示されるGoogleビジネスプロフィールの情報や投稿は「広告」に該当する**と解釈・運用されます。\n\n---\n\n### 1. なぜMEO対策が広告規制の対象になるのか？\n\n法律やガイドライン上、以下の3要素を満たすものは「広告」として扱われます。\n\n1. **誘引性**（患者を集めようとする意図がある）\n2. **特定性**（特定の施術所名や施術者名が特定できる）\n3. **認知性**（一般人が認識できる状態にある）\n\nGoogleマップやGoogle検索に表示される店舗情報・最新情報投稿・写真・ビジネス名などは、これら3条件をすべて満たすため、規制の対象となります。\n\n---\n\n### 2. MEO対策で特に注意すべき具体例\n\nMEO対策を行う際、ガイドライン違反（保健所からの行政指導や罰則の対象）およびGoogleのポリシー違反になりやすいポイントは以下の通りです。\n\n#### ① ビジネス名（店舗名）の記載\n* **NG例**: `〇〇整骨院【腰痛専門・肩こり改善・〇〇駅徒歩1分】`\n* **解説**: ビジネス名にSEOキーワードや「〇〇専門」「改善」といった効果効能を詰め込むことは、Googleのガイドライン違反（アカウント停止リスク）になるだけでなく、法律上認められていない事項の広告（柔道整復師法第24条）にも抵触します。原則として「正式な届出名称」のみを記載します。\n\n#### ② ビジネスの説明文・投稿（最新情報）での表現\n* **NG表現**:\n  * **効果効能・症例の保証**: 「絶対に治る」「腰痛が劇的に改善」「根本改善」\n  * **疾患名・症状の提示**: 「肩こり専門」「坐骨神経痛治療」\n  * **比較優良・誇大表現**: 「地域No.1」「最高峰の施術技術」「どこに行っても治らなかった方へ」\n  * **医療誤認**: 「治療」「診断」「診察」\n* **OK表現の基本**: 柔道整復師の氏名、施術所の名称・所在地・電話番号、施術時間、予約制の有無、駐車場の有無など、「法的に広告が認められている限定的な事項」を中心に掲載します。\n\n#### ③ 保険に関する表現\n* **NG例**: 「各種保険取扱」「保険適用できます」\n* **OK例**: 「骨折・脱臼の患部施術については医師の同意が必要です」（※正しく条件を記載する必要あり）\n\n#### ④ クチコミへの「返信」\n患者様から「腰痛が治りました！」というクチコミが入ること自体は患者様の個人的な感想ですが、**院側が返信で「当院の技術なら腰痛は改善します」「〇〇専門で対応しています」と効果効能を強調したり誘導したりする表現**を書くと、院側の広告表現とみなされ違反になるリスクがあります。\n\n---\n\n### まとめ\n\n整骨院のMEO対策では、以下の**二重のルール**を守ることが不可欠です。\n\n1. **厚生労働省・保健所のルール（柔整広告ガイドライン）**：違法な表現・誇大広告・専門表記を避ける\n2. **Googleのルール（ビジネスプロフィールガイドライン）**：ビジネス名へのキーワード詰め込みやスパム行為を避ける\n\n行政指導による看板・記載修正のリスクや、Googleアカウントの停止（BAN）を防ぐためにも、ガイドラインに沿った正しい情報発信を行いましょう。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "整骨院のMEO対策とは？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "**整骨院のMEO対策とは、「〇〇駅 整骨院」「近くの整骨院」などの検索で、GoogleマップやGoogle検索の地域向け検索結果に自院が表示されやすくなるよう、情報を整える取り組みです。**"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**整骨院のMEO対策**とは、Googleマップ上の検索結果で自院を上位に表示させ、来院につなげる施策です。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "整骨院（接骨院）における**MEO対策（Map Engine Optimization：マップ検索エンジン最適化）**とは、GoogleマップやGoogle検索の「地図枠（ローカルパック）」において、自院の情報（Googleビジネスプロフィール）を上位に表示させ、来院につなげるための集客施策のことです。"
+   }
+  },
+  "整骨院と接骨院はGoogleビジネスプロフィールで同じカテゴリを使えますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "**はい。柔道整復を主な業務とする整骨院と接骨院は、Googleビジネスプロフィールで同じ「接骨院」カテゴリを使えます。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "はい、同じカテゴリで登録できます。"
+   },
+   "Gemini": {
+    "label": "yes",
+    "quote": "**はい、同じカテゴリを使えます。**"
+   }
+  },
+  "整骨院 メインカテゴリを間違えて登録した場合、あとから変更できますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "はい、**Googleビジネスプロフィールのメインカテゴリは、登録後でも変更できます。**"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "はい、あとから変更できます。"
+   },
+   "Gemini": {
+    "label": "yes",
+    "quote": "**はい、メインカテゴリはあとからいつでも変更できます。**"
+   }
+  },
+  "整骨院のMEO対策でも柔整広告ガイドラインは適用されますか？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "**適用されます。**"
+   },
+   "Gemini": {
+    "label": "yes",
+    "quote": "**はい、整骨院・接骨院のMEO対策（Googleビジネスプロフィールの運用など）においても「柔道整復師法」および厚生労働省の「あはき・柔整広告ガイドライン」が適用されます。**"
+   }
+  }
+ }
+}

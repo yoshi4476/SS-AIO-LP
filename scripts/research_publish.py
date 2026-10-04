@@ -20,9 +20,13 @@ SITEMAP_LINE = ('    { url: `${site.url}/research/ai-answers`, lastModified: now
 
 
 def main():
+    import importlib.util
     import publish
-    import research as RS
     import sites as S
+    # scripts/research.py（Phase 2 の収集）と同じ名前。publish が先に読むと取り違えるので、場所を指定して読む
+    spec = importlib.util.spec_from_file_location("subsidy_research", ROOT / "scripts" / "subsidy" / "research.py")
+    RS = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(RS)
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", default="corporate")
     ap.add_argument("--push", action="store_true")

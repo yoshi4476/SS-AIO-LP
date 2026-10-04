@@ -1,0 +1,233 @@
+{
+ "slug": "chumon-jutaku-seo-taisaku",
+ "site": "ai-lab",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "注文住宅SEO対策とは？",
+  "注文住宅 ポータルサイトへの掲載はやめるべきですか？",
+  "注文住宅SEOとAIO対策はどちらを優先すべきですか？",
+  "注文住宅SEO対策は何から始めればいいですか？"
+ ],
+ "answers": {
+  "注文住宅SEO対策とは？": {
+   "ChatGPT": {
+    "urls": [
+     "https://service.cominka.co.jp/home-builder-guide/",
+     "https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja",
+     "https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=ja"
+    ],
+    "text": "**注文住宅SEO対策とは、工務店や住宅会社のWebサイトを、注文住宅を検討している人が検索で見つけやすくし、資料請求・見学予約・問い合わせにつなげる取り組みです。** SEOは「検索エンジン最適化」を意味します。例えば「横浜市 注文住宅」「平屋 施工事例」「注文住宅 費用」といった検索に対応するページを整えます。[工務店SEOの解説](https://service.cominka.co.jp/home-builder-guide/)\n\n主な対策は、次のとおりです。\n\n- **地域と自社の強みに合うキーワードを選ぶ**  \n  「地域名＋注文住宅」「地域名＋平屋」など、施工エリアや得意な住宅に関連する検索を意識します。\n- **施工事例を充実させる**  \n  写真だけでなく、建築地域、間取り、広さ、設計の工夫、施主の要望などを掲載し、住宅会社を比較する材料を提供します。\n- **家づくりの疑問に答える記事を作る**  \n  費用、土地選び、住宅性能、家づくりの流れなどを、自社の経験に基づいて具体的に説明します。記事から関連する施工事例や相談ページへ案内することも大切です。[工務店SEOの解説](https://service.cominka.co.jp/home-builder-guide/)\n- **サイトを検索エンジンが理解しやすくする**  \n  ページ内容を正確に表すタイトル・見出し、わかりやすい内部リンク、画像の説明文などを整え、検索結果に表示されることを妨げる問題がないか確認します。[Google公式SEOガイド](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja)\n\n重要なのは、**キーワードを詰め込むことより、家を建てたい人が安心して比較・相談できる情報を提供すること**です。Googleも、独自性があり、有用で信頼できるコンテンツを重視しています。[Googleのコンテンツ作成指針](https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=ja)\n\n効果は検索順位やアクセス数に加え、資料請求・見学予約・問い合わせの件数で確認します。上位表示は保証されず、変更の反映に数週間から数か月かかる場合もあるため、継続的な改善が必要です。[Google公式SEOガイド](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja)\n\nSOURCE: https://service.cominka.co.jp/home-builder-guide/\nSOURCE: https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja\nSOURCE: https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://stock-sun.com/column/construction-company-seo/",
+     "https://stock-sun.com/column/custom-home-seo/",
+     "https://nexer.co.jp/blog/chumon-jutaku-seo",
+     "https://www.lany.co.jp/blog/custom-home-seo",
+     "https://media-growth.co.jp/seo-engineering-firm/",
+     "https://webma.xscore.co.jp/study/construction-company-seo/",
+     "https://www.protea-inc.co.jp/sub-media/custom-built-house-seo/",
+     "https://thinktion.net/blog/home-builder-seo/",
+     "https://tsunagaru-nara.com/seo/home-builder-seo/",
+     "https://www.centered.co.jp/blog/seo-tactics-reform/",
+     "https://ds-b.jp/dsmagazine/builders-website-seo-keywords/",
+     "https://www.shopowner-support.net/attracting_customers/construction/builders/seo/",
+     "https://grannet.co.jp/column/constructioncompany-seo",
+     "https://www.base-net.co.jp/blog/engineering-firm-seo/",
+     "https://seo-taisacu.jp/blog/builder/",
+     "https://www.ntttp-dlead.com/homepage-sakusei-blog/web-syuukyaku/seo-taisaku-kiso-chisiki/komuten-seo.html",
+     "https://genji-group.com/blog0009/",
+     "https://www.archrise-works.com/blog/webmarketing/%E5%B7%A5%E5%8B%99%E5%BA%97%E3%81%AEseo%E5%AF%BE%E7%AD%96%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E5%9C%B0%E5%9F%9F%E3%81%A7%E9%9B%86%E5%AE%A2%E3%82%92%E5%A2%97%E3%82%84%E3%81%99/"
+    ],
+    "text": "**注文住宅SEO対策とは、「地域名＋注文住宅」のような見込み客が実際に検索するキーワードで、自社サイトを検索結果の上位に表示させ、問い合わせや来場予約につなげる施策です。** 工務店やハウスメーカーが、検索から自社を必要としている人へ直接アプローチするために行います。\n\n**主な施策**\n- **キーワード選定**: 「地域名＋注文住宅」「地域名＋工務店」など、市区町村を含む組み合わせが最重要です。\n- **コンテンツ作成**: 見込み客が知りたい情報を丁寧に解説するページを作ります。\n- **施工事例ページの充実**: 地域名・建築スタイル・使用素材・工法などの言葉を自然に盛り込みます。施工事例は信頼性が高く、評価されやすいコンテンツです。\n- **サイト構造の整備**: タイトルや見出しに地域名と施工内容を入れ、検索エンジンが理解しやすい構造にします。\n- **ローカルSEO・MEO**: Googleマップやローカルパック（地図付き検索結果）に表示されるよう、Googleビジネスプロフィールなどを最適化します。\n\n**メリットと効果が出る目安**\n- 注文住宅を検討中のユーザーを中心に、継続的に集客できます。利益率の改善にもつながるとされています。\n- 定期的に見直しながら進めると、効果を実感できるまでに3か月〜半年程度かかるのが一般的です。\n\nなお、取得できたのは検索結果の要約までで、各ページの本文は開いていません。詳細な手順や事例は、下記ページを直接確認してください。\n\nSOURCE: https://stock-sun.com/column/construction-company-seo/\nSOURCE: https://stock-sun.com/column/custom-home-seo/\nSOURCE: https://nexer.co.jp/blog/chumon-jutaku-seo\nSOURCE: https://www.lany.co.jp/blog/custom-home-seo\nSOURCE: https://media-growth.co.jp/seo-engineering-firm/\nSOURCE: https://webma.xscore.co.jp/study/construction-company-seo/\nSOURCE: https://www.protea-inc.co.jp/sub-media/custom-built-house-seo/\nSOURCE: https://thinktion.net/blog/home-builder-seo/\nSOURCE: https://tsunagaru-nara.com/seo/home-builder-seo/\nSOURCE: https://www.centered.co.jp/blog/seo-tactics-reform/\nSOURCE: https://ds-b.jp/dsmagazine/builders-website-seo-keywords/\nSOURCE: https://www.shopowner-support.net/attracting_customers/construction/builders/seo/\nSOURCE: https://grannet.co.jp/column/constructioncompany-seo\nSOURCE: https://www.base-net.co.jp/blog/engineering-firm-seo/\nSOURCE: https://seo-taisacu.jp/blog/builder/\nSOURCE: https://www.ntttp-dlead.com/homepage-sakusei-blog/web-syuukyaku/seo-taisaku-kiso-chisiki/komuten-seo.html\nSOURCE: https://genji-group.com/blog0009/\nSOURCE: https://www.archrise-works.com/blog/webmarketing/%E5%B7%A5%E5%8B%99%E5%BA%97%E3%81%AEseo%E5%AF%BE%E7%AD%96%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E5%9C%B0%E5%9F%9F%E3%81%A7%E9%9B%86%E5%AE%A2%E3%82%92%E5%A2%97%E3%82%84%E3%81%99/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.lany.co.jp/blog/custom-home-seo",
+     "https://media-growth.co.jp/seo-engineering-firm/",
+     "https://leosophia.co.jp/marketing/custom-home-seo/",
+     "https://mediareach.co.jp/blog/seo-home-builder",
+     "https://grill.co.jp/marketing-log/5255/",
+     "https://mirai-style.net/column/39426/",
+     "https://thinktion.net/blog/home-builder-seo/"
+    ],
+    "text": "**注文住宅SEO対策**とは、工務店やハウスメーカー、設計事務所などの住宅建築会社が、検索エンジン（GoogleやYahoo!など）で「自社のWebサイトを上位表示させ、家づくりを検討している見込み客を集客する施策」のことです。\n\n注文住宅は人生で最も高額な買い物のひとつであるため、検討者は契約に至るまでにインターネットで念入りに情報収集を行います。そのため、適切なSEO対策を行い、検索のタイミングで自社サイトを見つけてもらうことが集客成功の大きな鍵となります。\n\n---\n\n### なぜ注文住宅業界でSEO対策が重要なのか？\n\n1. **強い「地域性（ローカル需要）」がある**\n   注文住宅は「自分が家を建てたいエリア」で対応できる会社を探すため、「〇〇市 注文住宅」「〇〇県 工務店」といった地域名を含めた検索が盛んに行われます。\n2. **検討期間が長く、検索キーワードが多様**\n   「土地探し」「坪単価」「間取り」「断熱性能」「失敗例」など、検討段階（初期〜契約直前）に応じた多様な検索行動に対応する必要があります。\n3. **広告費の削減と「Web上の資産」化**\n   Web広告（リスティング広告）は競合が多く単価が高騰しがちです。SEO対策によって上位表示を獲得できれば、広告費をかけずに安定して反響（資料請求・見学会予約）を得られる資産になります。\n\n---\n\n### 狙うべき主な検索キーワードの分類\n\n注文住宅のSEO対策では、ターゲットの検討段階に合わせたキーワード設計が重要です。\n\n* **① エリア系キーワード（最も成約に近い）**\n  * 例：「〇〇市 注文住宅」「〇〇県 工務店 おすすめ」「〇〇市 設計事務所」\n  * **目的**：実際にその地域で建てたいと考えている見込み客を直接集客する。\n* **② ニーズ・条件系キーワード**\n  * 例：「平屋 注文住宅 費用」「高気密高断熱 埼玉」「中庭のある家 間取り」\n  * **目的**：特定のこだわりやデザインを求めているユーザーを取り込む。\n* **③ ノウハウ・悩み系キーワード**\n  * 例：「注文住宅 坪単価 相場」「土地探し 手順」「注文住宅 失敗談」\n  * **目的**：家づくりを検討し始めたばかりの層にアプローチし、自社のファン（潜在客）にする。\n\n---\n\n### 注文住宅SEO対策で成功するための重要ポイント\n\n#### 1. 「施工事例」ページのSEO最適化（テキスト化）\n多くの住宅会社が写真を並べるだけで終わらせていますが、検索エンジンは「画像内の文字」を直接理解できません。\n写真に加えて、以下のテキスト情報を詳しく記載することが強力なSEO対策になります。\n* 建築エリア、延床面積・坪数\n* 間取り、費用感（坪単価や概算予算）\n* 構造・性能数値（耐震等級、UA値・C値など）\n* 施主の要望とそれに対する提案・こだわりポイント\n\n#### 2. E-E-A-T（専門性・経験・信頼性）の担保\nGoogleは住宅や金融などの高額・ライフイベントに関する分野（YMYL）で、信頼性を極めて重視します。\n* 一級建築士やスタッフのプロフィール・顔写真の掲載\n* 建築性能や保証内容に関する専門的かつ正確な解説\n* 実際の施工プロセスや施主インタビュー（リアルな体験談）\n\n#### 3. MEO（Googleマップ対策・ローカルSEO）との連携\n「地域名＋注文住宅」で検索した際、検索結果の最上部にGoogleマップが表示されます。\nGoogleビジネスプロフィールを登録・最適化し、口コミの獲得や店舗情報の更新を行うことで、SEOと同時にマップからの集客（MEO）も強化できます。\n\n#### 4. コンバージョン（問い合わせ・見学会予約）への導線設計\nアクセス数（PV）を増やすだけでなく、サイトを訪れたユーザーが「モデルハウスに行ってみたい」「資料を取り寄せたい」と思える導線（CTA）を各記事内に分かりやすく配置することが重要です。\n\n---\n\n### まとめ\n\n注文住宅のSEO対策は、単なる「検索順位を上げる技術」ではなく、**「家を建てたい顧客の悩みやこだわりに対し、プロとして適切な情報や施工実績を届けるマーケティング活動」**です。\n\n自社の強み（デザイン、性能、価格帯、地域密着など）と顧客の検索ニーズをマッチさせることで、大手ハウスメーカーに依存せず地域で選ばれる集客基盤を作ることができます。",
+    "error": ""
+   }
+  },
+  "注文住宅 ポータルサイトへの掲載はやめるべきですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://iezukuri-business.homes.jp/column/marketing-00135",
+     "https://iezukuri-business.homes.jp/column/know-how-00139"
+    ],
+    "text": "**工務店・住宅会社の集客についてなら、注文住宅ポータルサイトへの掲載を一律にやめる必要はありません。成約につながる費用と営業負担を確認し、採算の悪い掲載から縮小するのが妥当です。** 以下は、検索で確認した情報を踏まえた判断の提案です。\n\n掲載料の高さや資料請求件数だけでは判断できません。注文住宅ポータルには掲載課金・反響課金・成約課金があり、問い合わせが増えても、来場や契約につながらなければ費用対効果は悪化します。[料金体系と費用対効果の解説](https://iezukuri-business.homes.jp/column/marketing-00135)\n\n判断基準は、次のように整理できます。\n\n| 状況 | 判断の目安 |\n|---|---|\n| 成約獲得費用が自社の許容範囲内で、利益が残る | 継続する |\n| 問い合わせはあるが、接触・来場につながらない | 営業対応を改善して再評価する |\n| 対応を改善しても採算が合わず、他の集客手段の方が効率的 | 縮小・停止する |\n| ポータルが主要な集客源で、代替手段が育っていない | 段階的に掲載を減らす |\n\nまず、自社の通常の検討・成約期間を含む実績で、次を計算してください。\n\n**成約獲得費用＝掲載料・追加課金・制作費・追客にかかった人件費などの合計÷成約件数**\n\nこれを１棟あたりの粗利益や、自社サイト・紹介など他経路の成約獲得費用と比較します。他経路にも広告費や運用費を含め、同じ条件で比べることが大切です。成約に至っていない商談も確認し、直近の問い合わせだけで結論を出さないようにします。\n\nまた、**「反響の質が悪い」と判断する前に、初回対応の遅れがないか確認する価値があります。** LIFULL HOME’Sの掲載企業事例では、担当者の割り振りや資料送付を改善し、接触率が34％から60％に上がったと報告されています。ただし、運営会社が紹介する個別事例であり、同じ成果を保証するものではありません。[接触率の改善事例](https://iezukuri-business.homes.jp/column/know-how-00139)\n\n現時点で自社の実績が不明なら、即解約よりも、媒体別の成約と費用を把握し、掲載内容・対応体制を改善したうえで更新時に判断することを勧めます。撤退する場合も、自社サイトの施工事例や見学会予約、紹介などから必要な商談数を確保できるか確認してから進めるのが現実的です。\n\nSOURCE: https://iezukuri-business.homes.jp/column/marketing-00135\nSOURCE: https://iezukuri-business.homes.jp/column/know-how-00139\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.shopowner-support.net/attracting_customers/construction/builders/komuten/",
+     "https://www.shopowner-support.net/attracting_customers/construction/housebuilder/customhousesbuilder/",
+     "https://grill.co.jp/marketing-log/4009/",
+     "https://dtoac.com/blog/20140703/8831",
+     "https://ecohousing-project.com/topics/%E3%80%90%E5%B7%A5%E5%8B%99%E5%BA%97%E9%9B%86%E5%AE%A2%E3%80%91%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%AB%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AF%E6%9C%AC%E5%BD%93%E3%81%AB%E8%B2%BB%E7%94%A8%E5%AF%BE%E5%8A%B9/",
+     "https://makehouse.co.jp/labo/knowhow-attracting-customers/construction-company-portal-site/",
+     "https://malna.co.jp/blog/home-builder-marketing/",
+     "https://winkmark.co.jp/builder-own-leadgen-success/",
+     "https://koumuten.marketing/portalsite/",
+     "https://www.virtual-house-navi.com/marketing/portal-site.html"
+    ],
+    "text": "**結論: 一律にやめるべきではありません。** 反響から成約までの費用が計画内に収まっているなら続け、そうでないなら縮小または撤退します。検索で確認できたのは検索結果の要約までで、ページ本文は取得できませんでした(WebFetchの権限が未付与)。\n\n**やめる方向に傾く理由**\n- 2024〜2025年以降、「以前はポータルだけで反響が取れていたが、費用対効果が落ちた」という声が増えています。背景は、ポータル上の競合増加と、Google検索・SNS広告経由の問い合わせ比率の上昇です。\n- 費用が高い割に競合との差別化が難しく、自社情報が埋もれやすい点が弱みです。最終的なコスパは自社集客より悪くなる、とする記事もあります。\n\n**続ける価値がある場合**\n- 反響から面談・契約までが計画の費用内に収まり、目標を達成できているなら問題ありません。料金が高くても、問い合わせ単価が許容範囲なら妥当です。\n- 自社サイトのSEOが育つまでの補完策としては有効です。専門知識がなくても掲載でき、運営会社が集客してくれます。\n\n**判断のしかた**\n1. ポータル別に、問い合わせ数、来場数、成約数、成約1件あたりの集客費用を出します。\n2. 成約単価が自社集客(SEO・広告・SNS)より明らかに高いなら、縮小か撤退を検討します。\n3. 撤退する場合は、いきなりゼロにせず、自社サイトの強化と並行して段階的に減らす方が安全です。これは私の推奨で、出典に明記された手順ではありません。\n\nSOURCE: https://www.shopowner-support.net/attracting_customers/construction/builders/komuten/\nSOURCE: https://www.shopowner-support.net/attracting_customers/construction/housebuilder/customhousesbuilder/\nSOURCE: https://grill.co.jp/marketing-log/4009/\nSOURCE: https://dtoac.com/blog/20140703/8831\nSOURCE: https://ecohousing-project.com/topics/%E3%80%90%E5%B7%A5%E5%8B%99%E5%BA%97%E9%9B%86%E5%AE%A2%E3%80%91%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%AB%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AF%E6%9C%AC%E5%BD%93%E3%81%AB%E8%B2%BB%E7%94%A8%E5%AF%BE%E5%8A%B9/\nSOURCE: https://makehouse.co.jp/labo/knowhow-attracting-customers/construction-company-portal-site/\nSOURCE: https://malna.co.jp/blog/home-builder-marketing/\nSOURCE: https://winkmark.co.jp/builder-own-leadgen-success/\nSOURCE: https://koumuten.marketing/portalsite/\nSOURCE: https://www.virtual-house-navi.com/marketing/portal-site.html\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://penguin2.jp/column/owned-media/",
+     "https://obi-replace.netlify.app/column-14",
+     "https://ecohousing-project.com/topics/%E3%80%90%E5%B7%A5%E5%8B%99%E5%BA%97%E9%9B%86%E5%AE%A2%E3%80%91%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%AB%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AF%E6%9C%AC%E5%BD%93%E3%81%AB%E8%B2%BB%E7%94%A8%E5%AF%BE%E5%8A%B9/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMlLhYXL7zJsNrqyskH0Jvpr5x8l0gIzrsJuYRwiNFiC5QQ0-W54LSceImyyH8I6jh4LQpXIvc_vuOLkfNukQ0FY_x2iFp7ihrsTJ90-qAFEtLYUVJennbqnW0ohBXbW74MQ3L4Q==",
+     "https://blog.nb-a.jp/website-building/construction-company-portal-exit-own-site-seo-renovation-2026/",
+     "https://www.shopowner-support.net/attracting_customers/construction/builders/komuten/",
+     "https://reiro.co.jp/blog/real-estate-branding/",
+     "https://note.com/fmikata/n/nc927b7cb6a48"
+    ],
+    "text": "注文住宅事業において、「ポータルサイト（SUUMO、LIFULL HOME'S、持ち家計画、タウンライフなど）への掲載をやめるべきか」は、多くの工務店やハウスメーカーが直面している重要な課題です。\n\n結論から言うと、**「すぐにすべてをやめる」のではなく、自社の成約データと自社集客力を分析した上で、段階的に依存度を下げる（あるいは活用方法を見直す）**のが最も現実的でリスクの低い判断です。\n\n---\n\n### 1. なぜ「脱ポータル」を検討する企業が増えているのか？\n\nポータルサイト依存には、以下のような構造的な課題があります。\n\n* **価格競争・比較疲れに巻き込まれやすい：** 他社と同列に並べられるため、「坪単価」や「価格」での比較になりやすく、自社のデザイン・性能・こだわりなどの価値が伝わりにくい。\n* **見込み客の熱量が低い（歩留まりの悪化）：** 「一括資料請求」で気軽に請求したユーザーが多く、追客（TEL・メール）しても連絡がつかないケースが多い。\n* **掲載費・成果報酬コストの高騰：** 反響単価（CPL）や契約単価（CPA）が年々上昇し、利益率を圧迫する。\n* **対応コスト（人件費）の増大：** 契約に繋がりにくい大量のリードに対応するため、営業担当者の負担が増える。\n\n---\n\n### 2. 「やめるべき会社」と「続けるべき会社」の判断基準\n\n自社がどちらに該当するかで判断が分かれます。\n\n#### 【やめる（または枠を大幅縮小する）べき会社】\n1. **ポータル経由の契約率（歩留まり）が極端に低い**\n   * 例：年間数百万の掲載費を払って資料請求が100件来ても、契約が0〜1件程度にとどまっている。\n2. **デザイン・性能・ストーリーが自社の強みである**\n   * ポータルの定型フォーマットでは自社の魅力を表現しきれず、スペック勝負で負けてしまう。\n3. **自社集客（SNS・Web・紹介）の土台が既にできている**\n   * Instagram、YouTube、自社SEO、Googleビジネスプロフィール（MEO）、OB紹介などで安定して相談・見学会予約を獲得できている。\n\n#### 【続ける（または改善を優先する）べき会社】\n1. **自社の集客チャネル（Webサイト・SNS）がまだ育っていない**\n   * ポータルをやめると、新規の見込み客流入がゼロになってしまうリスクがある。\n2. **インサイドセールスや即時追客の体制が整っている**\n   * 資料請求後5分以内に連絡を取るなど、スピード感を持った追客でポータル経由でも高い契約率を維持できている。\n3. **明確な「コスパ」や「標準仕様のわかりやすさ」という強みがある**\n   * 一目で他社と比較して選ばれる強み（例：「〇〇万円で叶う標準装備」など）を持っている。\n\n---\n\n### 3. 脱ポータル・依存度を下げるための4ステップ\n\nいきなりポータルを全解約すると集客が急減するリスクがあるため、以下の手順で進めるのが推奨されます。\n\n#### Step 1: 媒体ごとのCPA（顧客獲得単価）と契約率の可視化\n掲載しているポータルごとに以下を算出します。\n* **資料請求1件あたりのコスト（CPL）**\n* **来場1件あたりのコスト**\n* **契約1件あたりのコスト（CPA）**\n※契約率が低く、CPAが見合っていないポータルは真っ先に解約・縮小の候補になります。\n\n#### Step 2: 営業追客フローの改善（歩留まりチェック）\n反響の質だけでなく、「営業の追客方法」に問題がないか確認します。\n* 問い合わせから初動までの時間\n* 資料送付後のアプローチ内容\n追客フローを改善しても成約率が上がらない場合、そのポータルの客層が自社に合っていない証拠です。\n\n#### Step 3: 自社集客チャネル（オウンドメディア）の強化\nポータルの予算を少しずつ自社集客へシフトします。\n* **Instagram / YouTube / TikTok:** ルームツアー動画や施工事例を発信し、ファン層（指名客）を獲得する。\n* **自社Webサイト・SEO/MEO:** 「地域名＋工務店」「地域名＋注文住宅」での検索対策、施工事例やお客様の声の充実。\n* **イベント開催:** 構造見学会や完成見学会など、実際に足を運んでもらう体験型イベントのWeb広告運用。\n\n#### Step 4: ポータルサイトの「位置づけ」変更\nポータルサイトを「契約を狙うメインの集客源」から、**「認知拡大と自社サイトへの導線（補助ツール）」**へと位置づけを変えます。\nポータル上で興味を持ったユーザーを自社サイトやSNSに誘導し、そこで深いブランド体験（ファン化）を提供して問い合わせにつなげる設計にします。\n\n---\n\n### まとめ\n\n「ポータルサイトをやめるべきか？」の答えは、**「ポータルに頼らなくても集客できる自社チャネルを作り、成果の低いポータルから順次撤退していく」**のが正解です。\n\nまずは、過去1〜2年の**「ポータル別の契約率・CPA」**を算出し、コストに見合っていない媒体の縮小・解約から始めてみてはいかがでしょうか。",
+    "error": ""
+   }
+  },
+  "注文住宅SEOとAIO対策はどちらを優先すべきですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+     "https://developers.google.com/search/docs/appearance/ai-features?hl=ja",
+     "https://support.google.com/business/answer/7091?hl=ja"
+    ],
+    "text": "**注文住宅の集客では、基本的にSEOを優先し、AIO対策をその中に組み込むのがおすすめです。** ここではAIO対策を、Googleの「AIによる概要」などのAI検索で、自社の情報が参照・紹介されるための取り組みとして説明します。\n\nGoogleは、AI検索でもSEOの基本施策が有効であり、独自のAI向けファイルや特別な構造化データは不要と説明しています。つまり、SEOとAIOを別々に進めるより、**検索にもAIにも役立つサイトを整える**ことが合理的です。[Google公式ガイド](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)\n\n注文住宅向けの具体的な優先順位は、次のように考えます。これは公式情報を踏まえた実務上の提案です。\n\n| 優先順位 | 取り組み | 具体例 |\n|---|---|---|\n| 1 | 地域・相談につながるSEO | 「○○市 注文住宅」を意識し、対応地域、施工事例、費用、見学会情報を充実させる |\n| 2 | 地域検索の整備 | Googleビジネスプロフィールの住所・営業時間・写真などを更新する |\n| 3 | SEOとAIOに共通する情報強化 | 実際の施工費用、住宅性能の測定値、設計の工夫、施主の体験を掲載する |\n| 4 | AI検索での露出確認と改善 | 自社が引用・紹介される質問を確認し、不足する情報を補う |\n\n地域検索を重視する根拠として、Googleはローカル検索の順位を主に「関連性・距離・知名度」で決めると説明しています。施工エリアで顧客を獲得したい住宅会社では、サイトとビジネスプロフィールの整備を優先する理由になります。[Googleビジネスプロフィール公式ヘルプ](https://support.google.com/business/answer/7091?hl=ja)\n\nAIOを意識したコンテンツも、一般的な住宅知識の量産より、**自社しか出せない実例**を優先してください。例えば「30坪の施工事例について、建物価格・付帯工事・含まれない費用・価格時点まで示す」と、検討者が判断しやすくなります。Googleも、独自の経験や専門性に基づく有用な内容を推奨しています。ただし、掲載してもAIでの引用は保証されません。[Google公式ガイド](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)、[AI機能とウェブサイト](https://developers.google.com/search/docs/appearance/ai-features?hl=ja)\n\n**すでに地域検索から安定して問い合わせを獲得できている会社なら、AIOの検証に割く比重を増やす**とよいでしょう。成果は順位や引用回数だけでなく、資料請求・見学予約・商談につながったかで判断してください。注文住宅業界全体に共通する「SEOとAIOの最適な予算比率」は、今回確認した公式資料からは断定できません。\n\nSOURCE: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide\nSOURCE: https://developers.google.com/search/docs/appearance/ai-features?hl=ja\nSOURCE: https://support.google.com/business/answer/7091?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://stock-sun.com/column/construction-company-seo/",
+     "https://www.lany.co.jp/blog/custom-home-seo",
+     "https://www.sakurasaku-marketing.co.jp/labo/blogs/house-maker-seo",
+     "https://construction.acsport.net/column/useful/4083/",
+     "https://www.leadplus.co.jp/blog/aio-llmo-geo-seo-comparison",
+     "https://jinrai.co.jp/blog/2026/04/17/llmo-aio-geo-seo-chigai/",
+     "https://bluemonkey.jp/media/column/aio/"
+    ],
+    "text": "**結論: まずSEOを優先し、AIO対策はその上乗せとして同時に進めるのが妥当です。**\n\n- **SEOが土台になります。** 検索結果では、SEOが土台で、その内側にAIO・GEO・LLMOが派生する構造だと説明されています。AIOはSEOと約50%重複するともされています。\n- **Googleの見解もSEOを軸にしています。** 検索結果の要約によると、Googleは「AI検索への対策(GEOやAEO)は特別なことではなく、従来のSEOそのもの」と明言したとのことです。ただし、この発言の一次ソースは確認していません。\n- **注文住宅では地域名キーワードが最優先です。** 「地域名＋注文住宅」や「地名＋耐震/断熱/自然素材＋注文住宅」といったキーワードで上位を狙うのが基本で、これは短期で成果を出しやすい領域とされています。\n- **AIOでは、AIが会社を正しく理解できる情報の整備が要点です。** 「どの地域で、どんな家づくりが得意か」が伝わるように、次の情報を載せます。\n  - 会社情報\n  - 建設業許可\n  - 担当者・人物情報\n  - 主力工事\n  - 施工事例の説明\n\n  これらはSEOの質も同時に上げるので、二重投資にはなりません。\n- **両者のゴールは違います。** SEOの成功基準は検索順位と流入、AIOの基準はAI回答への引用・言及です。\n\n**進め方の目安**\n1. 地域キーワードでの上位表示と、施工事例ページの充実(SEO)。\n2. 会社情報・人物・実績の明確化と構造化(AIO兼用)。\n3. AI回答での引用状況を確認しながら、Q&Aなどの引用されやすい形式を追加。\n\nなお、ここで確認できたのは検索結果の要約までで、各ページの本文は開いていません。個別の数値(「50%重複」など)は元記事での確認をお勧めします。\n\nSOURCE: https://stock-sun.com/column/construction-company-seo/\nSOURCE: https://www.lany.co.jp/blog/custom-home-seo\nSOURCE: https://www.sakurasaku-marketing.co.jp/labo/blogs/house-maker-seo\nSOURCE: https://construction.acsport.net/column/useful/4083/\nSOURCE: https://www.leadplus.co.jp/blog/aio-llmo-geo-seo-comparison\nSOURCE: https://jinrai.co.jp/blog/2026/04/17/llmo-aio-geo-seo-chigai/\nSOURCE: https://bluemonkey.jp/media/column/aio/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "結論から申し上げますと、注文住宅業界においては**「SEO対策（特にローカルSEO/MEO）」を土台・優先としつつ、その延長線上として「AIO対策（AI検索最適化）」を取り入れていく**アプローチが最も効果的です。\n\nどちらか一方を選ぶ「対立関係」ではなく、**「SEOでしっかりとした評価と土台を作り、それをAIにも正しく認識させる（AIO）」**という関係性にあります。\n\n理由と、具体的な取り組み方の優先順位を分かりやすく解説します。\n\n---\n\n### 1. なぜSEO（ローカルSEO含む）を優先すべきなのか？\n\n#### ① AI（AIO）はSEOで評価された高品質な情報を参照する\nChatGPTやGoogle Gemini、PerplexityなどのAI検索エンジンは、独自に判断しているわけではなく、**「検索エンジンで上位表示されているサイト」や「Web上で信頼性・専門性が高いと評価されている一次情報」を参照して回答を作成**します。\nつまり、SEO対策（特にGoogleからの評価）ができていないサイトは、そもそもAIの参照元（ソース）として選ばれません。\n\n#### ② 注文住宅は「ビジュアル」と「直接の信頼」が不可欠\n注文住宅は人生で最も高い買い物の一つであり、ユーザーは「テキストの要約」だけで工務店やハウスメーカーを決めません。\n最終的には**自社Webサイトで「施工事例の画像・動画」「間取り・坪単価」「見学会・イベント情報」「保証内容」などを確認し、来場予約や資料請求（CV）**を行います。自社サイトへの集客口となるSEO（自然検索）を無視することはできません。\n\n#### ③ 「地域名 × 注文住宅」のローカルSEO（MEO）が契約に直結する\n注文住宅は施工エリアが限られる「超ローカルビジネス」です。「〇〇市 注文住宅」「〇〇県 工務店 評判」といった検索キーワードや、Googleマップ検索（MEO）からの集客は即効性・成約率ともに高いため、最優先で固める必要があります。\n\n---\n\n### 2. AIO対策を同時に意識すべき理由\n\n一方で、ユーザーの検索行動は確実に変化しています。\n例えば、「〇〇市で坪単価60万円以下、高気密・高断熱が得意な工務店を教えて」といった**複雑な条件指定や比較検討をAIに質問するユーザー**が増えています。\n\nAI時代において、自社が選ばれるためには、SEOで順位を上げるだけでなく**「自社の強みや特徴がAIに正しく解釈されているか」**というAIOの視点が欠かせません。\n\n---\n\n### 3. 具体的にどう進めるべきか？（実践ロードマップ）\n\nSEO対策を強化することが、そのまま強力なAIO対策になります。以下のステップで進めるのがおすすめです。\n\n#### 【優先度：高】Step 1：ローカルSEO・MEOと基礎コンテンツの整備\n*   **Googleビジネスプロフィールの最適化:** 店舗情報、写真、属性、口コミの収集・返信を徹底する（MEO対策）。\n*   **施工エリア・価格帯の明確化:** 「施工対応エリア」「坪単価の目安・価格帯」「標準仕様（断熱等級、耐震等級など）」をテキストで分かりやすく記載する。\n\n#### 【優先度：高】Step 2：E-E-A-T（専門性・経験・権威性・信頼性）の強化\n*   **一次情報（オリジナルコンテンツ）の掲載:**\n    *   実際に建てた「施主様のインタビュー・口コミ」\n    *   建築士やインテリアコーディネーターなど「プロ（著者）のプロフィールと顔写真」\n    *   実際の施工プロセス（写真付き解説）\n*   ※AIは「誰が発信しているか」「実際の体験談に基づいているか」を強く重視します。\n\n#### 【優先度：中】Step 3：AIO（AI検索）を意識した情報構造化\n*   **FAQ（よくある質問）ページの充実:** 「高気密・高断熱の基準は？」「アフター保証は何年？」など、ユーザーがAIに聞きそうな質問と回答をQ&A形式で整理する。\n*   **表組みやリストの活用:** 自社の強みや保証内容、料金体系をテキストの表や箇条書きで記述する（AIが構造を理解しやすくなります）。\n*   **サイテーション（外部での言及）の獲得:** ポータルサイト、地域のポータルメディア、SNS、ブログなどで自社名やブランド名が取り上げられる機会を増やす。\n\n---\n\n### まとめ\n\n*   **優先順位:** **SEO（＋MEO） ＞ AIO**\n*   **考え方:** 「SEOを愚直に行い、E-E-A-Tを高めたサイト作りをすることが、結果的に最強のAIO対策になる」\n\nまずは自社サイトの「地域キーワードでのSEO/MEO」と「自社の強み（価格・性能・デザイン）の明確化」から着手することをおすすめします。",
+    "error": ""
+   }
+  },
+  "注文住宅SEO対策は何から始めればいいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja",
+     "https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=ja",
+     "https://support.google.com/business/answer/7091?hl=ja"
+    ],
+    "text": "注文住宅のSEO対策は、**「施工対応エリアと自社の強みを決めること」と「サイトの現状確認」から始める**のがおすすめです。Googleの公式資料を注文住宅の集客に当てはめると、次の順番で進められます。\n\n1. **狙う地域・お客様を絞る**  \n   「○○市で平屋を建てたい人」「○○市で高断熱住宅を検討する人」など、商圏と得意分野を整理します。「○○市 注文住宅」「○○市 平屋 費用」といった検索語句を候補にし、実際の検索結果で、どんな情報が求められているか確認しましょう。これは、検索する人に役立つ内容を作るというGoogleの基本方針を、注文住宅向けに具体化した提案です。[Google公式SEOガイド](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja)\n\n2. **Search Consoleで現状を確認する**  \n   サイトを登録し、主要ページが検索対象として登録されているか、どんな検索語句で表示・クリックされているかを確認します。検索に表示されない問題があるなら、記事を増やす前に解消します。[Search Consoleの使い方](https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=ja)\n\n3. **施工事例・費用・強みのページを充実させる**  \n   最初は、自社の実績を具体的に説明できるページを優先しましょう。施工事例には、写真に加えて地域、延床面積、間取り、施主の要望、設計の工夫を掲載します。費用を載せる場合は、建築時期や含まれる工事の範囲も明記すると、検討者が判断しやすくなります。ページのタイトルも内容が伝わる表現にします。[Google公式SEOガイド](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja)\n\n4. **Googleビジネスプロフィールを整える**  \n   オーナー確認を行い、住所・電話番号・営業時間・写真を正確に登録します。口コミにも返信しましょう。Googleは、地域の検索結果を主に「関連性・距離・知名度」で判断すると説明しています。[ローカル検索順位の改善について](https://support.google.com/business/answer/7091?hl=ja)\n\n5. **問い合わせにつながったかを測る**  \n   施工事例や費用ページから、相談予約・見学会予約へ進める導線を用意します。成果は検索順位だけでなく、自然検索経由の問い合わせ数や商談数で判断するのがおすすめです。\n\n**まず今週は、Search Consoleの確認と、主力地域向けのページ・代表的な施工事例の改善から着手してください。** 改善の反映には数週間から数か月かかる場合があるため、結果を見ながら継続的に調整します。[Google公式SEOガイド](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja)\n\nSOURCE: https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ja\nSOURCE: https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=ja\nSOURCE: https://support.google.com/business/answer/7091?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://stock-sun.com/column/construction-company-seo/",
+     "https://nexer.co.jp/blog/chumon-jutaku-seo",
+     "https://www.sakurasaku-marketing.co.jp/labo/blogs/house-maker-seo",
+     "https://media-growth.co.jp/seo-engineering-firm/",
+     "https://note.com/seotaizen/n/na6ab27d73d00",
+     "https://seo-nagoya.net/seo/mame/2200.html",
+     "https://thinktion.net/blog/home-builder-seo/",
+     "http://bakuyasu.techsuite.co.jp/30634/",
+     "https://tsunagaru-nara.com/seo/home-builder-seo/",
+     "https://www.centered.co.jp/blog/seo-tactics-reform/",
+     "https://www.shopowner-support.net/attracting_customers/construction/builders/seo/",
+     "https://gicp.co.jp/manegementnote/seo/construction-company-seo/",
+     "https://koumuten.marketing/seo-introduction/",
+     "https://seo-taisacu.jp/blog/builder/",
+     "https://mediareach.co.jp/blog/seo-home-builder",
+     "https://nex-t-planning.co.jp/seo-constructioncompany/",
+     "https://genji-group.com/blog0009/",
+     "https://www.archrise-works.com/blog/webmarketing/%E5%B7%A5%E5%8B%99%E5%BA%97%E3%81%AEseo%E5%AF%BE%E7%AD%96%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E5%9C%B0%E5%9F%9F%E3%81%A7%E9%9B%86%E5%AE%A2%E3%82%92%E5%A2%97%E3%82%84%E3%81%99/"
+    ],
+    "text": "**結論: まず「地域名＋注文住宅／工務店」のキーワードを決め、次に施工事例ページとGoogleビジネスプロフィールを整えるのが最初の一歩です。**\n\n## 始める順番\n\n1. **キーワード選定**\n   - 基本は「○○市 注文住宅」「○○市 工務店」のような地域名との組み合わせです。\n   - 「坪単価」「価格」「口コミ・評判」を足したものや、デザイン系・ニーズ系の語も候補になります。\n2. **内部対策（サイトの土台）**\n   - ホームページに施工エリア（地域名）を明記します。\n   - タイトルや見出しにキーワードを入れます。\n3. **施工事例ページの充実**（成果に直結しやすい部分です）\n   - 「地名×特徴×写真」の3要素を意識します。\n   - 写真だけで終わらせず、間取りの工夫、建築テーマ、施主の声を文章でも書きます。\n   - 定期的に更新します。\n4. **ローカル対策（Googleビジネスプロフィール）**\n   - 住所・電話番号・営業時間を正確に入れます。\n   - 定期的に投稿し、口コミには丁寧に返信します。\n5. **新規コンテンツと外部対策**\n   - 費用、土地探し、間取りなど、検討者が調べる疑問に答える記事を追加します。\n   - その後に外部対策（被リンクなど）へ進みます。\n\n注: 本文は検索結果の要約をもとにしています。各ページの本文全体は開いて確認していません。\n\nSOURCE: https://stock-sun.com/column/construction-company-seo/\nSOURCE: https://nexer.co.jp/blog/chumon-jutaku-seo\nSOURCE: https://www.sakurasaku-marketing.co.jp/labo/blogs/house-maker-seo\nSOURCE: https://media-growth.co.jp/seo-engineering-firm/\nSOURCE: https://note.com/seotaizen/n/na6ab27d73d00\nSOURCE: https://seo-nagoya.net/seo/mame/2200.html\nSOURCE: https://thinktion.net/blog/home-builder-seo/\nSOURCE: http://bakuyasu.techsuite.co.jp/30634/\nSOURCE: https://tsunagaru-nara.com/seo/home-builder-seo/\nSOURCE: https://www.centered.co.jp/blog/seo-tactics-reform/\nSOURCE: https://www.shopowner-support.net/attracting_customers/construction/builders/seo/\nSOURCE: https://gicp.co.jp/manegementnote/seo/construction-company-seo/\nSOURCE: https://koumuten.marketing/seo-introduction/\nSOURCE: https://seo-taisacu.jp/blog/builder/\nSOURCE: https://mediareach.co.jp/blog/seo-home-builder\nSOURCE: https://nex-t-planning.co.jp/seo-constructioncompany/\nSOURCE: https://genji-group.com/blog0009/\nSOURCE: https://www.archrise-works.com/blog/webmarketing/%E5%B7%A5%E5%8B%99%E5%BA%97%E3%81%AEseo%E5%AF%BE%E7%AD%96%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E5%9C%B0%E5%9F%9F%E3%81%A7%E9%9B%86%E5%AE%A2%E3%82%92%E5%A2%97%E3%82%84%E3%81%99/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "注文住宅のSEO対策を始める場合、**「ターゲットエリアの決定」「購買意欲の高いキーワードの選定」「施工事例ページの充実」「Googleビジネスプロフィール（MEO対策）」**の4つから着手するのが最も効果的です。\n\n注文住宅は単価が高く、施工エリアが限られる「地域密着型ビジネス」であるため、一般的な情報ブログのような大規模なアクセスを狙うよりも、**「自社の施工エリアで家を建てたい人」をピンポイントで集客すること**が成功の鍵となります。\n\n以下に、何から始めるべきかの具体的な5ステップを解説します。\n\n---\n\n### Step 1: ターゲットエリアと「検索キーワード」の選定\nまずは、どのような検索キーワードで上位表示を目指すかを決めます。検索キーワードは主に以下の3つの層に分けられます。\n\n1. **地域キーワード（最優先・コンバージョンに直結）**\n   * 例：`[地域名] 注文住宅`、`[地域名] 工務店`、`[地域名] ハウスメーカー`\n   * このキーワードで探しているユーザーは、契約・相談の意欲が非常に高いです。\n2. **条件・こだわりキーワード（高意欲層）**\n   * 例：`[地域名] 注文住宅 平屋`、`[地域名] 高気密高断熱 工務店`、`[地域名] 注文住宅 2000万円台`\n3. **ノウハウ・悩み解決キーワード（潜在層・認知拡大）**\n   * 例：`注文住宅 土地探し コツ`、`平屋 メリット デメリット`、`注文住宅 住宅ローン 流れ`\n\nまずは**「1. 地域キーワード」**と**「2. 条件キーワード」**で自社サイトがしっかり表示されることを目指しましょう。\n\n---\n\n### Step 2: Googleビジネスプロフィール（MEO対策）の設定\n注文住宅のSEOでは、検索結果の上に表示される「Googleマップ枠」の対策（MEO＝Map Engine Optimization）が非常に重要です。\n\n* **Googleビジネスプロフィールに登録・掲載**する\n* 住所、営業時間、対応エリア、電話番号を正確に記載する\n* 施工事例の写真や見学会の情報を定期的に投稿する\n* **施主様からの口コミ（レビュー）を集める**（高評価の口コミは強力な集客ツールになります）\n\nローカルSEO（地域検索）とMEOは密接に連動しているため、Webサイトの改善と並行して必ず行いましょう。\n\n---\n\n### Step 3: 「施工事例」ページのSEO強化\n注文住宅を検討するユーザーがWebサイト内で**最も長く見るのが「施工事例」ページ**です。しかし、多くの工務店・ハウスメーカーでは「写真のみ」の掲載になってしまっています。\n\n施工事例ページをSEOに強くするためには、以下のような**テキスト情報**をしっかり記載してください。\n\n* **ページの基本情報：** 建築エリア（〇〇市〇〇区）、延床面積、間取り、建築費用の目安（坪単価など）\n* **こだわりポイント：** 「施主様の要望」「設計の工夫」「採用した素材・設備」\n* **検索キーワードの盛り込み：** タイトルや本文に「〇〇市の北欧風平屋住宅」「〇〇市で建てた自然素材の家」などのキーワードを含める\n\n写真に加えて詳しい解説テキストを掲載することで、Googleから「質の高いコンテンツ」と評価されやすくなり、検索上位表示に繋がります。\n\n---\n\n### Step 4: 検討層向けの「ブログ・コラム記事」の作成\n自社の強みや、家づくりを検討しているユーザーの疑問に答える記事を作成します。\n\n* **記事のテーマ例：**\n  * 「〇〇市で注文住宅を建てる際の坪単価相場と費用内訳」\n  * 「失敗しない土地探しのポイント（〇〇エリア編）」\n  * 「高気密・高断熱住宅のメリットと、我が社の断熱性能（UA値・C値）について」\n* **専門性・信頼性（E-E-A-T）の担保：**\n  * 設計士や現場監督、インテリアコーディネーターなど**「プロの視点・実体験」**を交えて書くことで、Googleからの評価が高まります。\n\n---\n\n### Step 5: お問い合わせ（資料請求・来場予約）への導線整備\nSEOでアクセスが増えても、お問い合わせに繋がらなければ意味がありません。\n\n* **スマホ対応（レスポンシブデザイン）：** 注文住宅の検索はスマホからの閲覧が7〜8割以上を占めます。スマホで見やすいレイアウトになっているか確認しましょう。\n* **明確なCTA（行動喚起）の設置：** 各ページの下部やサイドバーに「完成見学会の予約」「無料相談・資料請求」「モデルハウス来場」のボタンを分かりやすく配置します。\n\n---\n\n### まとめ：最初に取り組むべきロードマップ\n\n1. **まずGoogleビジネスプロフィールの設定・更新を行う**（即効性あり）\n2. **主要ページ（トップページ・会社概要）のタイトルに「地域名＋注文住宅・工務店」を入れる**\n3. **施工事例ページに写真だけでなく「エリア・こだわり・間取りなどのテキスト」を追記する**\n4. **月に2〜4本程度、地域や家づくりの悩みに答えるコラム記事を投稿していく**\n\n注文住宅のSEOは効果が出るまで3ヶ月〜半年ほどかかりますが、一度上位表示されれば、長期的に質の高い見込み客を自動で集めてくれる強力な資産になります。まずは**「地域名」×「自社の強み」**を整理することから始めてみてください。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "注文住宅SEO対策とは？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "**注文住宅SEO対策とは、工務店や住宅会社のWebサイトを、注文住宅を検討している人が検索で見つけやすくし、資料請求・見学予約・問い合わせにつなげる取り組みです。**"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**注文住宅SEO対策とは、「地域名＋注文住宅」のような見込み客が実際に検索するキーワードで、自社サイトを検索結果の上位に表示させ、問い合わせや来場予約につなげる施策です。**"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "**注文住宅SEO対策**とは、工務店やハウスメーカー、設計事務所などの住宅建築会社が、検索エンジン（GoogleやYahoo!など）で「自社のWebサイトを上位表示させ、家づくりを検討している見込み客を集客する施策」のことです。"
+   }
+  },
+  "注文住宅 ポータルサイトへの掲載はやめるべきですか？": {
+   "ChatGPT": {
+    "label": "cond",
+    "quote": "**工務店・住宅会社の集客についてなら、注文住宅ポータルサイトへの掲載を一律にやめる必要はありません。成約につながる費用と営業負担を確認し、採算の悪い掲載から縮小するのが妥当です。**"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "**結論: 一律にやめるべきではありません。** 反響から成約までの費用が計画内に収まっているなら続け、そうでないなら縮小または撤退します。"
+   },
+   "Gemini": {
+    "label": "cond",
+    "quote": "結論から言うと、**「すぐにすべてをやめる」のではなく、自社の成約データと自社集客力を分析した上で、段階的に依存度を下げる（あるいは活用方法を見直す）**のが最も現実的でリスクの低い判断です。"
+   }
+  },
+  "注文住宅SEOとAIO対策はどちらを優先すべきですか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "**注文住宅の集客では、基本的にSEOを優先し、AIO対策をその中に組み込むのがおすすめです。**"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**結論: まずSEOを優先し、AIO対策はその上乗せとして同時に進めるのが妥当です。**"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "結論から申し上げますと、注文住宅業界においては**「SEO対策（特にローカルSEO/MEO）」を土台・優先としつつ、その延長線上として「AIO対策（AI検索最適化）」を取り入れていく**アプローチが最も効果的です。"
+   }
+  },
+  "注文住宅SEO対策は何から始めればいいですか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "注文住宅のSEO対策は、**「施工対応エリアと自社の強みを決めること」と「サイトの現状確認」から始める**のがおすすめです。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "**結論: まず「地域名＋注文住宅／工務店」のキーワードを決め、次に施工事例ページとGoogleビジネスプロフィールを整えるのが最初の一歩です。**"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "注文住宅のSEO対策を始める場合、**「ターゲットエリアの決定」「購買意欲の高いキーワードの選定」「施工事例ページの充実」「Googleビジネスプロフィール（MEO対策）」**の4つから着手するのが最も効果的です。"
+   }
+  }
+ }
+}

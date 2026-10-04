@@ -1,0 +1,240 @@
+{
+ "slug": "seikyusho-jidoka-ai",
+ "site": "corporate",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "請求書のAI自動化 4つの工程とOCR精度の限界",
+  "請求書 電子帳簿保存法とAI-OCRの導入は関係がありますか？",
+  "請求書処理はAIでどこまで自動化できますか？",
+  "請求書 AI-OCRの読み取り精度はどれくらいですか？"
+ ],
+ "answers": {
+  "請求書のAI自動化 4つの工程とOCR精度の限界": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.ricoh.co.jp/special/ricoh-invoice-received-service",
+     "https://docs.aws.amazon.com/textract/latest/dg/textract-best-practices.html",
+     "https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/document-intelligence/transparency-note"
+    ],
+    "text": "**請求書のAI自動化は「受領→読み取り→確認・承認→会計・支払連携」の4工程で整理できます。OCRは入力を減らせますが、読み取り結果の正しさや支払いの妥当性まで保証するものではありません。**\n\n以下は、受け取った請求書を処理する業務について、各社の公開情報をもとに整理したものです。\n\n| 工程 | 自動化する内容 | 確認が必要な点 |\n|---|---|---|\n| ① 受領・取り込み | 紙をスキャンし、PDFなどとまとめてシステムに取り込む | ページの欠落、読みづらい画像 |\n| ② OCR・項目抽出 | 文字を読み取り、取引先名・請求日・金額・明細などをデータ化する | 誤読、抽出漏れ、項目の取り違え |\n| ③ 確認・承認 | 読み取り結果を確認・修正し、承認フローに回す | 金額や取引内容の妥当性、例外への対応 |\n| ④ 会計・支払連携 | 仕訳データや振込データを作成し、会計・銀行システムへ連携する | 勘定科目、振込先、支払承認 |\n\nリコーの公式サービスでも、取り込み、OCR、確認・修正・確定、データ出力、会計・銀行連携という流れが示されています。上表では、データ出力とシステム連携を1工程にまとめています。[リコー公式](https://www.ricoh.co.jp/special/ricoh-invoice-received-service)\n\n**OCR精度の限界は、主に次の4点です。**\n\n- **画像や帳票の条件に左右される。** 低画質、読みにくい手書き、文字の回転、複雑な表などでは誤読や抽出漏れが起こります。AWSも、結合セルや不規則な表では結果が不安定になると説明しています。[AWS公式ドキュメント](https://docs.aws.amazon.com/textract/latest/dg/textract-best-practices.html)\n- **「精度99％」と「請求書の99％が完全に正しい」は別。** 精度には文字・単語・項目・書類単位などの評価方法があります。Microsoftは、書類中の1文字だけの誤りでも、それが支払金額なら請求書全体の評価に影響すると説明しています。[Microsoft公式](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/document-intelligence/transparency-note)\n- **公表精度は測定条件付き。** 例えばリコーの「98.87％」は、260社分の請求書データを使った独自評価です。自社の請求書でも同じ精度になる保証とは扱えません。同社は、人がOCR結果を確認・補正するサービスも提供しています。[リコー公式](https://www.ricoh.co.jp/special/ricoh-invoice-received-service)\n- **信頼度スコアは正解の保証ではない。** AIの推定値なので、実際の請求書で精度を測り、自動処理に回す条件と人が確認する条件を決める必要があります。Microsoftも、実務を代表するデータで試験し、確認のしきい値を設定するよう推奨しています。[Microsoft公式](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/document-intelligence/transparency-note)\n\n実務上は、**OCRの精度だけで判断せず、金額の整合性や発注・納品情報との照合を組み合わせ、低信頼度や不一致のある請求書を人に回す設計**が適切です。導入効果も、読み取り精度に加えて「人の確認が必要な割合」「確認時間」「重要項目の誤り」で評価すると判断しやすくなります。\n\nSOURCE: https://www.ricoh.co.jp/special/ricoh-invoice-received-service\nSOURCE: https://docs.aws.amazon.com/textract/latest/dg/textract-best-practices.html\nSOURCE: https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/document-intelligence/transparency-note\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gxo.co.jp/column/ai-ocr-invoice-automation-guide-sme-2026",
+     "https://jblog.tradeshift.com/20260512/",
+     "https://www.ai-souken.com/article/invoice-ai-automation-guide",
+     "https://www.infomart.co.jp/seikyu/column/ai-ocr_merit",
+     "https://bill-one.com/knowledge/ai-invoice-processing/",
+     "https://valuup.jp/blog/ai-invoice-automation/"
+    ],
+    "text": "**結論**: 請求書のAI自動化は「①データ化 → ②照合 → ③仕訳 → ④承認・支払」の4工程で説明されることが多いです。ただしAI-OCRが担うのは主に①だけで、読取精度は100%にならないため、人の確認工程を残す設計が前提です。\n\n**注意**: ページ本文の取得（WebFetch）が許可されず、検索結果の要約だけで回答しています。「4つの工程」の区切り方は、検索結果の要約に基づく一例です。ページごとに分け方が違う可能性があり、各ページ本文での裏取りはできていません。\n\n## 4つの工程\n1. **データ化（読取）**: AI-OCRが金額・日付・取引先名・品目などを自動抽出します。\n2. **照合**: 発注データや契約条件との整合性をチェックします。\n3. **仕訳**: 過去の仕訳パターンからAIが勘定科目を推定します。\n4. **承認・支払**: 承認フローを経て、会計ソフトや銀行APIへ連携します。\n\n## OCR精度の限界\n- **精度の目安**: 活字は99%前後、手書きやFAXは85〜92%が現実的とされます。\n  - 別の記事では、2026年の主要製品は活字日本語で99%超、楷書手書きで90〜95%、崩し字で80〜85%とされています。\n- **誤認識が増えるケース**:\n  - 手書き文字、かすれ、FAXのゆがみ\n  - 押印・印影と文字の重なり\n  - 取引先独自の複雑なレイアウト\n  - 複数ページにまたがる明細\n- **レイアウト認識**: 精度は90%前後が現実的とされます。\n- **自動化できない範囲**: AI-OCRは入力作業を効率化しますが、請求内容の確認、発注・納品との照合、承認、差異確認、支払判断までは自動化できません。\n- **設計上の考え方**: AI-OCRは「手入力をなくす道具」ではなく、「人が確認する範囲を絞り込む道具」です。\n- **99.9%をうたうサービス**: AI単体ではなく、システムと人の確認を組み合わせた数値です。\n\nSOURCE: https://gxo.co.jp/column/ai-ocr-invoice-automation-guide-sme-2026\nSOURCE: https://jblog.tradeshift.com/20260512/\nSOURCE: https://www.ai-souken.com/article/invoice-ai-automation-guide\nSOURCE: https://www.infomart.co.jp/seikyu/column/ai-ocr_merit\nSOURCE: https://bill-one.com/knowledge/ai-invoice-processing/\nSOURCE: https://valuup.jp/blog/ai-invoice-automation/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://foodtravel.jp/aidevpro/blog/ai-invoice-processing/",
+     "https://ecu.co.jp/forward-deployed-engineer/media/paper-handwritten-ocr-conditions/",
+     "https://airead.ai/articles/ai-ocr-unusable-data/",
+     "https://cloud.watch.impress.co.jp/docs/news/2078120.html",
+     "https://wheat-biz.com/ai-dx/ai-invoice-ocr-dx/",
+     "https://www.fastaccounting.jp/blog/%E8%AB%8B%E6%B1%82%E6%9B%B8%E5%8F%97%E9%A0%98%E6%A5%AD%E5%8B%99%E3%81%AE%E8%AA%B2%E9%A1%8C%E3%82%92%E8%A7%A3%E6%B1%BAai-ocr%E6%90%AD%E8%BC%89%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A7/",
+     "https://foodtravel.jp/aidevpro/blog/ai-invoice-processing/",
+     "https://note.com/ilujapan/n/ne324155706fb",
+     "https://uravation.com/media/invoice-processing-ai-automation-2026/",
+     "https://note.com/ripla_business/n/nf43eab2c384d",
+     "https://tagiru.co.jp/column/keiri-ai-yusenjun/",
+     "https://genai-ai.co.jp/ai-kanri/blog/cc-seikyusho-hakko-ai/",
+     "https://genai-ai.co.jp/ai-kanri/blog/cc-shohyo-ocr-ai/",
+     "https://media.tcdigital.jp/ai-knowledge-flow/articles/ai-ocr-implementation-operational-design/",
+     "https://line-works.com/paperon/column/ai-ocr-accuracy/",
+     "https://uravation.com/media/invoice-processing-ai-automation-2026/"
+    ],
+    "text": "請求書のAI自動化における**「4つの工程」**と、避けては通れない**「OCR精度の限界」**について解説します。\n\n---\n\n## 1. 請求書AI自動化の「4つの工程」\n\n請求書受領から会計連携・支払までの業務は、AIを活用することで以下の4つのステップに整理・自動化されます。\n\n```\n【受領・データ化】 ➔ 【照合・不備チェック】 ➔ 【仕訳・起票】 ➔ 【承認・出力・保存】\n```\n\n### ① 受領・データ化（AI-OCRによる読み取り）\n* **内容**: メール添付のPDFやスキャンした紙の請求書から、AI-OCRを用いて取引先名・発行日・支払期日・請求金額・明細・インボイス登録番号などの主要項目を自動抽出・データ化します。\n* **AIの役割**: 取引先ごとにレイアウトが異なる非定型フォーマットであっても、項目位置を意味的に解釈して項目を特定・構造化します。\n\n### ② 照合・不備チェック（3点照合・適正確認）\n* **内容**: 発注書（PO）・納品書・請求書のデータ内容を比較する「3点照合（突合せ）」を行い、数量・単価・金額のズレがないかを確認します。また、インボイス登録番号の有効性や消費税計算（端数処理）の検証も行います。\n* **AIの役割**: 人間が目視で行っていた突き合わせ作業のうち、「完全一致・差異なし」の案件を一次通過させ、不一致（値引き・送料・粒度の違いなど）がある部分だけを一覧化して人間に提示します。\n\n### ③ 仕訳・起票（勘定科目・税区分の自動判定）\n* **内容**: 請求内容や過去の取引履歴をもとに、勘定科目（通信費、外注費など）、部門、税区分（課税10%/8%/非課税）を判別し、仕訳データを自動生成（自動起票）します。\n* **AIの役割**: 「同じ取引先でも品目によって勘定科目が変わる」といったケースに対し、過去データや文脈から適切な科目を推論・サジェストします。\n\n### ④ 承認・会計連携・保存（ワークフローと電帳法対応）\n* **内容**: 社内の承認ルート（上長確認等）へ自動回覧し、承認後に会計ソフトへのデータ連携や振込用データ（全銀フォーマット/FBデータ）を作成します。同時に、電子帳簿保存法（電帳法）の要件に準拠した形式で保存します。\n* **AIの役割**: 異常値（通常より高額な請求など）の検知や、条件を満たした定常取引の自動承認を行います。\n\n---\n\n## 2. OCR精度の「限界」と実務上の課題\n\n最新のAI-OCRは読み取り精度が飛躍的に向上していますが（カタログスペックで95〜99%程度）、実務では**「精度100%」は原理的に不可能です**。現場で発生する限界は主に以下の4点です。\n\n### (1) 物理的ノイズ・手書き文字の壁\n* **画像品質の劣化**: FAX送信によるかすれ・ノイズ、スキャン時の傾き・影、雨濡れや裏写りがある場合、認識率は大きく低下します。\n* **手書き・クセ字**: 癖の強い手書き文字（特に数字の「1」と「7」、「0」と「6」など）や枠線・社印と被った文字は、AIであっても人間の鑑識眼と同等以上の誤読リスクが残ります。\n\n### (2) 「読める」と「使える」の壁（表記揺れ・マスタ不一致）\n* **社内マスタとのズレ**: OCRで請求書上の「株式会社〇〇」を正確に読めても、社内システムの取引先マスタが「（株）〇〇」や略称で登録されている場合、一致せずシステム上でエラーになります。\n* **品目表記の揺れ**: 発注書に「PC」、請求書に「ノートパソコン」と書かれていた場合、純粋な文字読み取り（OCR）だけでは同一商品であるかを判断できません。\n\n### (3) 非定型・複雑なレイアウトの限界\n* **明細の粒度違い**: 発注時は「1式」だったものが、請求書では「詳細5行」に分解されているようなケースでは、どの行がどの発注に対応するかの解釈が難しくなります。\n* **「自信満々の誤読」**: 近年のAIは文字を文脈補正する能力が高い一方、AIが「高確率で正解」と判断しながら間違える（確信度が高い誤読）ケースがあり、人間が見落としやすくなるリスクを生みます。\n\n### (4) 責任帰属と確認工程の不可避性\n* 会計・税法上の誤り（税額計算ミスや架空請求の見落とし）が発生した際、AIに法的責任は問えません。そのため、最終的な確認・判断の責任は必ず「人」に残ります。\n\n---\n\n## 3. 限界を前提とした自動化の設計ポイント\n\nOCRの限界を踏まえ、業務自動化を成功させるためには以下の考え方が重要です。\n\n1. **「精度100%」を目指さず、「手直しの最小化」を目指す**\n   すべての読み取りを全自動化するのではなく、「AIは一次チェックと下書き（サジェスト）を担当し、人間は差分や低確信度の箇所だけを点検する」という分業設計にします。\n2. **LLM（大規模言語モデル）やマルチモーダルAIとの連携（IDP化）**\n   単なるOCR（文字起こし）にとどまらず、生成AI・LLMと連携させることで、「りんご」と「林檎」のような**意味的な同義語解釈**や**マスタデータとの揺れ吸収**を行わせ、データとして使える状態（IDP：Intelligent Document Processing）に補正させます。",
+    "error": ""
+   }
+  },
+  "請求書 電子帳簿保存法とAI-OCRの導入は関係がありますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/pdf/0024005-113_r602.pdf",
+     "https://corp.moneyforward.com/news/release/service/20211129_mf_press-3/",
+     "https://www.nta.go.jp/taxes/sake/hambai/moderutekisuto/pdf/r06_07_01.pdf",
+     "https://www.nta.go.jp/about/introduction/torikumi/week/dennsityoubo.htm"
+    ],
+    "text": "はい、関係があります。**AI-OCRは、請求書の電子帳簿保存法対応を効率化する手段です。ただし、導入は法律上の義務ではなく、AI-OCRだけで法対応が完了するわけでもありません。**\n\nAI-OCRは、請求書の画像やPDFから日付・金額・取引先などを読み取り、データ入力を支援します。電子帳簿保存法では、原則として「日付・金額・取引先」で検索できるように保存する必要があるため、その情報を登録する手間を減らすのに役立ちます。国税庁は手入力による検索項目の登録も認めており、OCR自体は必須ではありません。[国税庁のQ&A](https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/pdf/0024005-113_r602.pdf)、[AI-OCRによる請求書入力の例](https://corp.moneyforward.com/news/release/service/20211129_mf_press-3/)\n\n請求書の受け取り方によって、対応は次のように異なります。\n\n| 受け取り方 | 電子帳簿保存法との関係 | AI-OCRの役割 |\n|---|---|---|\n| 紙で受領 | 紙のまま保存できます。紙に代えて画像データで保存する場合は、スキャナ保存の要件を満たす必要があります。 | スキャン画像から検索項目などを読み取る |\n| メール添付PDFなどで受領 | 電子取引に該当し、電子データの保存が必要です。印刷した紙だけの保存では足りません。 | PDFなどから検索項目や会計入力用の情報を読み取る |\n\nこの区別は、国税庁の[スキャナ保存の案内](https://www.nta.go.jp/taxes/sake/hambai/moderutekisuto/pdf/r06_07_01.pdf)と[電子帳簿保存の説明](https://www.nta.go.jp/about/introduction/torikumi/week/dennsityoubo.htm)で確認できます。\n\n導入時には、**読み取り機能に加えて、請求書データそのものの保存、改ざん防止、表示・出力、検索などの要件を満たせるか**を確認してください。スキャナ保存では入力期限や画像品質などの要件もあります。読み取った文字や金額だけを保存しても、請求書の保存に代えることはできません。なお、電子取引の検索要件には一定条件で免除される場合があります。[国税庁のQ&A](https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/pdf/0024005-113_r602.pdf)、[国税庁の電子帳簿保存の説明](https://www.nta.go.jp/about/introduction/torikumi/week/dennsityoubo.htm)\n\nSOURCE: https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/pdf/0024005-113_r602.pdf\nSOURCE: https://corp.moneyforward.com/news/release/service/20211129_mf_press-3/\nSOURCE: https://www.nta.go.jp/taxes/sake/hambai/moderutekisuto/pdf/r06_07_01.pdf\nSOURCE: https://www.nta.go.jp/about/introduction/torikumi/week/dennsityoubo.htm\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://aismiley.co.jp/ai_news/denshichobo/",
+     "https://note.com/itso_/n/n4b9c9c7cb838",
+     "https://m-assets.com/lp/ai-advisor/blog/ai-electronic-bookkeeping-ocr",
+     "https://www.yayoi-kk.co.jp/kaikei/oyakudachi/denshichobohozonho-01/",
+     "https://www.smartocr.jp/ocr-lab/?p=1045",
+     "https://media.invoice.ne.jp/column/invoice-tips/invoice-scanning.html"
+    ],
+    "text": "**関係はありますが、直接の義務ではありません。** AI-OCRは電子帳簿保存法(電帳法)に対応するための手段の一つにすぎず、導入しただけでは対応は完了しません。\n\n- **電帳法の義務:** 電子取引データ保存は2024年1月から全事業者に義務です。PDFなどで受け取った請求書は、電子データのまま保存する必要があります。スキャナ保存と電子帳簿等保存は任意です。\n- **AI-OCRが役立つ場面:** 主に、紙の請求書をスキャンして保存するスキャナ保存の場面です。請求書から日付・取引金額・取引先を読み取り、検索項目(検索要件は現在この3項目)の入力を自動化できます。\n- **AI-OCRだけでは足りない点:** 保存方法に応じた改ざん防止(タイムスタンプなど)、見読可能性の確保、保存期間、社内の運用ルールは別に整える必要があります。\n- **法律が求めること:** 電帳法は保存と検索の要件を定めるもので、OCRの利用は求めていません。OCRは入力の効率化の技術という位置づけです。\n\n検索結果の要約から整理した内容で、各ページの本文までは確認していません。実際の対応時は国税庁の資料や税理士に確認してください。\n\nSOURCE: https://aismiley.co.jp/ai_news/denshichobo/\nSOURCE: https://note.com/itso_/n/n4b9c9c7cb838\nSOURCE: https://m-assets.com/lp/ai-advisor/blog/ai-electronic-bookkeeping-ocr\nSOURCE: https://www.yayoi-kk.co.jp/kaikei/oyakudachi/denshichobohozonho-01/\nSOURCE: https://www.smartocr.jp/ocr-lab/?p=1045\nSOURCE: https://media.invoice.ne.jp/column/invoice-tips/invoice-scanning.html\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.pfu.ricoh.com/fi/digitarakuru/tips/tips-0011.html",
+     "https://www.ibis.ne.jp/it-book/20241016-benefits-and-uses-of-ai-ocr/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrLNUSlgDRAK0rq3_LlmWT9mEXjabTv3FN51JHAs8kV52nCSKpuTaBEY5O6di9j0MI0ZYY6wigu4AfzPEv3yIbRGhU95kcYdvMdpzgXQ5rCBzrPkGv3JotCPTXrnrbXr6fmpOM-7qXeBpOWMVuB7Jz582w2rb0uNU=",
+     "https://aijimy.com/dx/dencho-search/",
+     "https://www.hammock.jp/dxocr/landing/denchohou.html",
+     "https://note.com/zeirishi/n/nd88f2eb0efb6",
+     "https://www.hitachi-solutions.co.jp/katsubun/dencyouhou/column/col12.html",
+     "https://it.impress.co.jp/articles/-/24090",
+     "https://note.com/ultimatepotato/n/n0b9f562253ac",
+     "https://www.hammock.jp/defact/media/electronic-book-preservation-law.html"
+    ],
+    "text": "請求書の**電子帳簿保存法（電帳法）**と**AI-OCRの導入**には、**直接の法的義務はありませんが、実務上において「電帳法の保存要件をクリアしつつ業務効率化を進める」ために非常に深い関係（高い相乗効果）があります。**\n\nなぜ両者が深く関係しているのか、主な理由は以下の3点です。\n\n---\n\n### 1. 電帳法の「検索要件」を自動でクリアできる\n電帳法（スキャナ保存や電子取引データの保存）では、保存したデータを以下の3項目で検索できるようにすることが義務付けられています。\n\n* **取引年月日**\n* **取引金額**\n* **取引先名称**\n\n**AI-OCRを使わない場合**、受け取った請求書データ（PDF等）のファイル名を「`20261004_100000_〇〇商事.pdf`」のように手作業で変更するか、Excelなどで手入力して索引簿を作成する必要があります。  \n**AI-OCRを導入した場合**、AIが請求書内の「日付・金額・取引先」を自動で読み取り・抽出するため、手入力をほとんど行うことなく検索要件を満たした状態で保存できます。\n\n---\n\n### 2. 紙請求書・領収書を「スキャナ保存」する際の手間を削減できる\n紙で受領した請求書をスキャンやスマホ撮影によって電子保存（スキャナ保存）する場合、データ化や会計ソフトへの仕訳入力作業が発生します。\nAI-OCRを活用すれば、紙からデータ化する際の手入力工数を削減し、入力ミスやチェック漏れを防ぐことができます。\n\n---\n\n### 3. インボイス制度（適格請求書）対応の負担軽減にもなる\nAI-OCRは請求書に記載された**「適格請求書発行事業者の登録番号（T+13桁の番号）」**や**「適用税率別の金額」**なども同時に読み取ることができます。\n国税庁のデータベースと照合して「正当なインボイスか」を自動チェックするシステム等と連携させることで、電帳法だけでなくインボイス対応の確認業務も大幅に省力化できます。\n\n---\n\n### 導入時の補足・注意点\n\n* **単体での導入ではなくシステム連携が一般的**  \n  AI-OCRの単体ツールを導入するよりも、**「電帳法に対応した会計ソフトや請求書受領・文書管理システム（※AI-OCR機能が標準搭載されているもの）」**を導入するのが一般的です。\n* **目視による確認プロセスは必要**  \n  AI-OCRの認識精度は非常に高くなっていますが、100%ではないため（掠れた文字や手書きなど）、最後の人による目視チェックや修正作業のフローは残す必要があります。\n\n### まとめ\n電帳法への対応自体は、ファイル名の手作業書き換えやExcelでの管理など「手作業」でも法律上は可能です。\nしかし、取引件数が多い企業では手動対応による業務負荷（二重管理や工数増加）が課題となるため、**電帳法対応の自動化ツールとしてAI-OCRがセットで検討・導入される関係性にあります**。",
+    "error": ""
+   }
+  },
+  "請求書処理はAIでどこまで自動化できますか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://docs.oracle.com/en/cloud/saas/financials/25d/fappp/intelligent-document-recognition.html",
+     "https://learn.microsoft.com/en-us/ai-builder/prebuilt-invoice-processing",
+     "https://docs.oracle.com/en/cloud/saas/procurement/26b/oapro/match-approval-level-options.html",
+     "https://learn.microsoft.com/en-us/dynamics365/finance/accounts-payable/auto-vendr-invc-process",
+     "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/tokusetsu/pdf/0024011-003_01.pdf"
+    ],
+    "text": "**請求書処理は、受領・読み取り・データ登録・照合・承認への回付まで広く自動化できます。条件が整った請求書は、人が触らずに支払い工程へ進めることも可能です。** ただし、AIの読み取りだけで完結するわけではなく、会計システム、照合ルール、承認フローとの連携が必要です。[Oracleの公式説明](https://docs.oracle.com/en/cloud/saas/financials/25d/fappp/intelligent-document-recognition.html)\n\n| 工程 | 自動化できる範囲と条件 |\n|---|---|\n| 受領・取り込み | メール添付の請求書を取り込み、会計システムに登録する処理を自動化できます。 |\n| 読み取り・入力 | PDFや画像から、取引先、請求番号、日付、金額、税額、支払期限、明細などを抽出できます。日本語対応のモデルもあります。 |\n| 照合・検証 | 発注書・入荷記録・請求書を照合できます。数量などが許容差内で一致するかをルールで判定します。 |\n| 承認・会計処理 | 照合済みの請求書を承認フローへ自動回付したり、計上前の検証を実行したりできます。自動承認まで進める範囲は社内規程と設定次第です。 |\n| 支払い | 承認・検証後の支払い工程まで連携できます。実際の送金を自動化するには、支払システムとの連携と権限設定が必要です。 |\n\nこれらの機能は、[Microsoftの読み取り仕様](https://learn.microsoft.com/en-us/ai-builder/prebuilt-invoice-processing)、[Oracleの照合仕様](https://docs.oracle.com/en/cloud/saas/procurement/26b/oapro/match-approval-level-options.html)、[Microsoftの処理自動化仕様](https://learn.microsoft.com/en-us/dynamics365/finance/accounts-payable/auto-vendr-invc-process)で確認できます。\n\n**現実的なのは「正常な請求書は自動処理し、例外だけ人が確認する」運用です。** 読み取りが不確か、項目が欠けている、発注・入荷情報と一致しない場合には、確認や修正が残ります。公式資料でも、不完全な請求書の修正や、処理失敗後の人による確認が想定されています。[Oracle](https://docs.oracle.com/en/cloud/saas/financials/25d/fappp/intelligent-document-recognition.html)、[Microsoft](https://learn.microsoft.com/en-us/dynamics365/finance/accounts-payable/auto-vendr-invc-process)\n\n導入時は、まず読み取りと入力を自動化し、実際の請求書で精度を確認してから、照合・承認・支払いへ広げる方法が妥当です。これは上記の機能と制約を踏まえた実務上の提案です。「何％自動化できるか」は一律に決められないため、**人の修正なしで完了した割合、誤りの割合、1件あたりの処理時間**で評価すると判断しやすくなります。\n\nまた、日本では電子取引で受け取った請求書データの電子保存が必要です。AIで抽出した項目の保存に加え、受領した電子データを保存し、原則として改ざん防止・表示・検索の要件に対応する設計が必要です。検索要件の免除や猶予措置もあります。[国税庁の説明](https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/tokusetsu/pdf/0024011-003_01.pdf)\n\nSOURCE: https://docs.oracle.com/en/cloud/saas/financials/25d/fappp/intelligent-document-recognition.html\nSOURCE: https://learn.microsoft.com/en-us/ai-builder/prebuilt-invoice-processing\nSOURCE: https://docs.oracle.com/en/cloud/saas/procurement/26b/oapro/match-approval-level-options.html\nSOURCE: https://learn.microsoft.com/en-us/dynamics365/finance/accounts-payable/auto-vendr-invc-process\nSOURCE: https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/tokusetsu/pdf/0024011-003_01.pdf\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jblog.tradeshift.com/20260512/**",
+     "https://www.ai-souken.com/article/invoice-ai-automation-guide**",
+     "https://wheat-biz.com/ai-dx/ai-invoice-ocr-dx/**",
+     "https://valuup.jp/blog/ai-invoice-automation/**",
+     "https://genai-ai.co.jp/ai-kanri/blog/cc-seikyusho-shori-ai/**",
+     "https://stealthagents.com/research/ai-invoice-processing-automation-statistics-2026**",
+     "https://beancount.io/blog/2026/05/11/accounts-payable-automation-2026-ai-invoice-capture-three-way-match-touchless-approvals-cut-costs-eliminate-duplicate-payments-guide**",
+     "https://www.extend.ai/resources/automated-invoice-processing-guide**",
+     "https://jblog.tradeshift.com/20260512/",
+     "https://www.ai-souken.com/article/invoice-ai-automation-guide",
+     "https://wheat-biz.com/ai-dx/ai-invoice-ocr-dx/",
+     "https://valuup.jp/blog/ai-invoice-automation/",
+     "https://genai-ai.co.jp/ai-kanri/blog/cc-seikyusho-shori-ai/",
+     "https://stealthagents.com/research/ai-invoice-processing-automation-statistics-2026",
+     "https://beancount.io/blog/2026/05/11/accounts-payable-automation-2026-ai-invoice-capture-three-way-match-touchless-approvals-cut-costs-eliminate-duplicate-payments-guide",
+     "https://www.extend.ai/resources/automated-invoice-processing-guide"
+    ],
+    "text": "請求書処理は、読み取りから仕訳起票、承認ルート選定、三者照合まではAIでほぼ自動化できます。最終承認や例外対応、支払の最終判断には人が残ります。この回答は検索結果の要約をもとにしており、ページ本文の取得は権限がなく行えませんでした。\n\n**自動化できる範囲**\n- **読み取り・入力**: AI-OCRで紙やPDFの請求書から取引先名・金額・日付・登録番号を読み取れます。\n- **仕訳**: 読み取り結果から仕訳を自動生成し、会計ソフトへ入力する処理が実用段階です。\n- **承認ルート**: 金額や部門に応じてAIが承認ルートを選び、承認依頼を送ります。\n- **照合**: 請求書・発注書・納品書の三者照合を自動で行い、差異がある場合だけ人に通知する運用が可能です。\n- **エージェント化**: 照合から承認通知、会計連携まで一気通貫でAIに任せるサービスも増えています。\n\n**精度と効果の目安(海外の調査・事例ベース)**\n- 項目単位の抽出精度は、既存取引先の請求書で95〜98%程度、構造化された請求書では99%超をうたう製品もあります。\n- 人手を介さない処理(タッチレス)の割合は、全体平均で約25%、上位企業で35%以上です。発注プロセスが整った中堅企業では70〜85%、先進事例では90%超という報告もあります。\n- 1件あたりの処理コストは、12〜18ドルから2〜4ドルに下がった例があり、投資回収は中堅企業の中央値で約8か月とされています。\n- これらの数字はベンダー系の記事が中心で、条件が揃った場合の値です。そのまま自社に当てはめるのは避けてください。\n\n**限界・人が残る部分**\n- AI-OCRは「入力の自動化」であり、請求内容が購買ルールや契約条件に照らして妥当かの判断は、別の業務プロセスやシステム連携が必要です。\n- 自動化率を左右するのは発注データとの突合です。発注プロセスが未整備だと、タッチレス率は上がりません。\n- 照合で差異が出た例外案件は人が対応します。\n\n**SOURCE: https://jblog.tradeshift.com/20260512/**\n**SOURCE: https://www.ai-souken.com/article/invoice-ai-automation-guide**\n**SOURCE: https://wheat-biz.com/ai-dx/ai-invoice-ocr-dx/**\n**SOURCE: https://valuup.jp/blog/ai-invoice-automation/**\n**SOURCE: https://genai-ai.co.jp/ai-kanri/blog/cc-seikyusho-shori-ai/**\n**SOURCE: https://stealthagents.com/research/ai-invoice-processing-automation-statistics-2026**\n**SOURCE: https://beancount.io/blog/2026/05/11/accounts-payable-automation-2026-ai-invoice-capture-three-way-match-touchless-approvals-cut-costs-eliminate-duplicate-payments-guide**\n**SOURCE: https://www.extend.ai/resources/automated-invoice-processing-guide**\n\nSOURCE: https://jblog.tradeshift.com/20260512/\nSOURCE: https://www.ai-souken.com/article/invoice-ai-automation-guide\nSOURCE: https://wheat-biz.com/ai-dx/ai-invoice-ocr-dx/\nSOURCE: https://valuup.jp/blog/ai-invoice-automation/\nSOURCE: https://genai-ai.co.jp/ai-kanri/blog/cc-seikyusho-shori-ai/\nSOURCE: https://stealthagents.com/research/ai-invoice-processing-automation-statistics-2026\nSOURCE: https://beancount.io/blog/2026/05/11/accounts-payable-automation-2026-ai-invoice-capture-three-way-match-touchless-approvals-cut-costs-eliminate-duplicate-payments-guide\nSOURCE: https://www.extend.ai/resources/automated-invoice-processing-guide\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "請求書処理は、AI（AI-OCRや機械学習）と周辺システム（RPAやAPI連携）を組み合わせることで、**「受領」から「支払データの作成・会計ソフトへの反映」までのプロセスの約70〜90%を自動化（タッチレス化）**することが可能です。\n\n具体的に「どの業務をどこまで自動化できるのか」を、プロセスごとに詳しく解説します。\n\n---\n\n### 1. 請求書処理プロセスの自動化範囲\n\n#### ① 受領・取得（自動化率：ほぼ100%）\n* **自動化できること：**\n  * メールに添付されたPDF請求書の自動ダウンロード・システム取り込み\n  * Webサービス（マイページ等）からの請求書PDFの自動ログイン＆ダウンロード（RPA連携）\n  * 郵送された紙の請求書のスキャン・自動アップロード\n\n#### ② データ化・内容読み取り（自動化率：95〜99%）\n* **自動化できること（AI-OCR）：**\n  * 日付、取引先名、請求金額、振込先口座、支払期日などの自動抽出\n  * 明細（品名、数量、単価）の自動読み取り\n  * **インボイス制度対応**：適格請求書発行事業者の「登録番号」を読み取り、国税庁のデータベースと自動照合（有効性の確認）\n* **人の手が必要な場合：**\n  * 手書き文字、印影と重なった文字、画像の解像度が極端に低い場合の修正・確認\n\n#### ③ 照合・チェック（自動化率：80〜90%）\n* **自動化できること：**\n  * **二者・三者照合**：社内の発注書（PO）や納品書データと請求書データの自動付け合わせ\n  * **異常・重複検知**：同一請求書の重複アップロード、過去の取引金額と乖離がある場合のアラート出し\n* **人の手が必要な場合：**\n  * 発注内容と請求内容の「金額・数量の不一致」があった場合の理由確認・取引先への問い合わせ\n\n#### ④ 仕訳・勘定科目の割り振り（自動化率：80〜90%）\n* **自動化できること：**\n  * 過去の取引履歴や学習データをもとに、AIが「勘定科目」や「補助科目」「部門コード」を推測・自動付与\n  * 定期的な請求（家賃、通信費など）の完全自動仕訳\n* **人の手が必要な場合：**\n  * 初めて取引する企業からの請求書や、今までにないイレギュラーな費用の判定\n\n#### ⑤ 承認フロー・ワークフロー（自動化率：50〜80%）\n* **自動化できること：**\n  * 金額や部署、取引先に応じて、適切な承認者へ自動回覧・通知\n* **人の手が必要な場合：**\n  * **最終承認（決裁）**：不正防止や法的責任の観点から、人間が内容を確認して承認ボタンを押す必要があります。\n\n#### ⑥ 支払データ作成・振込（自動化率：80〜100%）\n* **自動化できること：**\n  * 承認されたデータからFB（ファームバンキング）データ（全銀フォーマット）を自動生成\n  * ネットバンキング（API連携）への自動データ転送\n* **人の手が必要な場合：**\n  * 最終的な送金実行ボタンの押下（セキュリティ上の観点から人間が行うのが一般的）\n\n#### ⑦ 保存・管理（自動化率：100%）\n* **自動化できること：**\n  * 電子帳簿保存法（電帳法）の要件（取引先・日付・金額での検索機能など）を満たした形での自動保存・アーカイブ\n\n---\n\n### 2. 「完全自動化（タッチレス）」ができる条件\n\nAIによる完全無人処理（人間が一切確認しない状態）を実現できるのは、以下のような**「エラーがない標準的な取引」**です。\n\n* **条件：**\n  1. PDFや電子請求書（デジタルデータ）で届いている\n  2. 発注書・納品書と請求書の金額・数量が完全に一致している\n  3. 継続的な取引先であり、勘定科目のルールが定まっている\n\nこの条件を満たす請求書に関しては、**受領から支払データ作成まで「タッチレス（全自動）」**で処理可能です。\n\n---\n\n### 3. 現時点で「AIにはできず、人間が行うべき業務」\n\nどれほどAIが進歩しても、以下の業務は人間が担当する必要があります。\n\n1. **例外・エラー対応**\n   * 発注金額と請求金額が異なる場合の取引先・社内担当者への確認\n   * AIの読み取り精度が低い・疑わしい箇所の目視確認\n2. **不正・異常の最終判定**\n   * 架空請求や二重払いのリスクに対する最終チェック\n3. **意思決定と法的責任**\n   * 高額決済の承認、支払猶予や交渉などの判断\n\n---\n\n### まとめ：導入によるインパクト\n\nAIを活用することで、従来の請求書処理にかかっていた**作業時間やコストを約70〜80%削滅**することができます。\n\n* **従来：** 「手入力 ➔ 目視チェック ➔ 電卓で手計算 ➔ 承認回覧 ➔ 手動仕訳 ➔ FBデータ作成」\n* **AI導入後：** 「システムが自動処理 ➔ **人間はアラートが出たもの・最終承認のみチェック**」\n\nこのように、「作業」はAIに任せ、人間は「確認・判断・例外対応」に集中するのが現在のAI自動化のベストプラクティスです。",
+    "error": ""
+   }
+  },
+  "請求書 AI-OCRの読み取り精度はどれくらいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://www.ricoh.co.jp/service/cloud-ocr/column/aiocr-digitalization",
+     "https://invox.jp/deepwork-ocr-chigai",
+     "https://invox.jp/deepwork-detaka-koumoku"
+    ],
+    "text": "**請求書AI-OCRの精度は、製品や帳票の状態、評価方法によって異なり、一律に「何％」とはいえません。** 公表例では約99％の認識精度がありますが、人の確認を含む精度と区別する必要があります。\n\n| 公表例 | 精度 | 数値の意味・条件 |\n|---|---:|---|\n| リコーのAI-OCR | 98.87％ | 260社分の請求書データによる自社評価。2022年8月末時点の値です。 |\n| invoxのAIによるレイアウト認識 | 90％前後 | 請求書のどこにどの情報があるかを推定する精度。文字認識とは別の指標です。 |\n| invoxのオペレータ確認あり | 99.9％以上 | AI-OCRの結果を人が確認・補正した後のデータ化精度。標準項目が保証対象です。 |\n\n出典：[リコーの公式解説](https://www.ricoh.co.jp/service/cloud-ocr/column/aiocr-digitalization)、[invoxの仕組み](https://invox.jp/deepwork-ocr-chigai)、[invoxの保証対象項目](https://invox.jp/deepwork-detaka-koumoku)。\n\n**「精度99％」でも、請求書100枚のうち99枚が全項目正しい、という意味とは限りません。** 文字・項目・帳票のどの単位で評価した数値なのか、人の補正を含むのかを確認してください。上記の数値も指標が異なるため、直接比較できません。\n\n実際の読み取りでは、かすれ、にじみ、罫線と文字の重なりなどが難しさにつながります。リコーも人による確認・修正が必要と説明しています。導入時は自社の請求書で試し、**請求金額・振込先・税額などの項目別の正答率と、修正にかかる時間**を確認するのが実用的です。[リコーの公式解説](https://www.ricoh.co.jp/service/cloud-ocr/column/aiocr-digitalization)\n\nSOURCE: https://www.ricoh.co.jp/service/cloud-ocr/column/aiocr-digitalization\nSOURCE: https://invox.jp/deepwork-ocr-chigai\nSOURCE: https://invox.jp/deepwork-detaka-koumoku\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.infomart.co.jp/seikyu/column/ai-ocr_merit",
+     "https://www.ricoh.co.jp/special/ricoh-invoice-received-service",
+     "https://gxo.co.jp/column/ai-ocr-invoice-automation-guide-sme-2026",
+     "https://www.generativeai.tokyo/media/ai-ocr-tool-comparison-corporate-2026/",
+     "https://uravation.com/media/ai-ocr-tools-comparison-2026/",
+     "https://www.optimax.co.jp/ai-information/ai-ocr-comparison/",
+     "https://aitip.jp/ai-ocr-accuracy/",
+     "https://catalog.monex.co.jp/article/?p=57842",
+     "https://www.optim.co.jp/optim-contract/blog/what_is_ai-ocr/"
+    ],
+    "text": "**結論:** 活字の請求書なら読み取り精度は99%前後が目安です。手書きやFAX、不鮮明な帳票では85〜92%程度が現実的です。\n\n- **ベンダー公称値:** 最新のAI-OCRは正読率97〜99%以上が主流です。リコーの受領請求書サービスは98.87%、DX Suiteは実データ平均99.6%、Tegaki(手書き特化)は約99%と公称しています。\n- **実測値:** 同一帳票での検証では、ツールによる差が大きく、日本語認識精度は75〜96%でした。印刷請求書ではAI insideが96%で1位、手書きではTegakiが92%で1位でした。\n- **注意点:**\n  - 公称値は特定条件下の数字なので、そのまま比較しても意味がありません。\n  - 99%以上は、活字中心の定型帳票が前提です。\n  - AI単体で100%にはならず、人による確認・補正を併用して実用水準を保つのが一般的です。\n\n今回確認できたのは検索結果の要約までで、各ページの本文は開いていません。\n\nSOURCE: https://www.infomart.co.jp/seikyu/column/ai-ocr_merit\nSOURCE: https://www.ricoh.co.jp/special/ricoh-invoice-received-service\nSOURCE: https://gxo.co.jp/column/ai-ocr-invoice-automation-guide-sme-2026\nSOURCE: https://www.generativeai.tokyo/media/ai-ocr-tool-comparison-corporate-2026/\nSOURCE: https://uravation.com/media/ai-ocr-tools-comparison-2026/\nSOURCE: https://www.optimax.co.jp/ai-information/ai-ocr-comparison/\nSOURCE: https://aitip.jp/ai-ocr-accuracy/\nSOURCE: https://catalog.monex.co.jp/article/?p=57842\nSOURCE: https://www.optim.co.jp/optim-contract/blog/what_is_ai-ocr/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.smartocr.jp/solution/bills/",
+     "https://www.ricoh.co.jp/service/cloud-ocr/column/aiocr-digitalization",
+     "https://www.youtube.com/watch?v=EkYA7cwKpF0",
+     "https://www.onamae.com/business/article/24601/",
+     "https://line-works.com/paperon/column/ai-ocr-accuracy/",
+     "https://patpost.jp/article/aiocr/how-accurate-aiocr",
+     "https://ecu.co.jp/forward-deployed-engineer/media/paper-handwritten-ocr-conditions/"
+    ],
+    "text": "請求書用AI-OCRの読み取り精度は、一般的な**印刷文字（活字）の請求書であれば 95%〜99%以上** と非常に高い水準にあります。\n\n近年では生成AI（LLMや画像理解モデルVLM）を活用したAI-OCRも一般的になり、従来のOCRのように「読み取り位置をあらかじめ指定（事前設定）」しなくても、さまざまなフォーマットの請求書から「金額」「日付」「取引先名」「登録番号（インボイス）」などの必要項目を自動判別して高精度で抽出できるようになっています。\n\n---\n\n### 1. 条件別の精度目安\n\n| 条件・文字の種類 | 読み取り精度の目安 | 特徴・補足 |\n| :--- | :--- | :--- |\n| **活字（印刷された標準的な請求書）** | **95%〜99%以上** | PDFで届いた電子請求書や、綺麗にスキャンされた紙の請求書であれば非常に高精度です。 |\n| **手書き文字** | **80%〜90%程度** | 癖の強い字、筆圧が薄い字、枠線に重なっている文字などは誤読が発生しやすくなります。 |\n| **オペレーター確認（BPO）付きサービス** | **99.9%〜100%** | AIが読み取ったデータをオペレーター（人）が目視確認・補正するハイブリッド型サービスではほぼ100%の精度となります。 |\n\n---\n\n### 2. 「文字認識率」と「項目正答率」の違いに注意\n\n精度を見極める際は、以下の2つの評価指標を区別して考える必要があります。\n\n1. **文字認識率（1文字単位の精度）**\n   * 「1000文字中、何文字正しくテキスト化できたか」という指標。\n2. **項目正答率（実務単位の精度）**\n   * 「請求金額」「支払期日」「振込先」など、業務に必要な項目単位で正しく抽出できたかの割合。経理業務ではこの「項目正答率」が重視されます。\n\n---\n\n### 3. 読み取り精度に影響を与える要素\n\nAI-OCRであっても、以下の要因によって精度が落ちることがあります。\n\n* **解像度・画質**：解像度が低い画像（300dpi未満）や、斜めスキャン、歪み、影。\n* **ノイズ・干渉**：FAX送受信時のノイズ、折り目、印影（社印・担当者印）が金額や文字と被っているケース。\n* **複雑なレイアウト**：品目明細が複数ページにまたがっている、表組みの罫線と文字が接触しているケース。\n\n---\n\n### 4. 業務運用におけるポイント\n\n* **「100%」ではないため目視チェックは必須**\n  * 精度99%のツールであっても「100文字中1文字」「100項目中1項目」は誤認識の可能性があります。金額や振込先のミスは業務上リスクが高いため、AIが提示する「確信度（スコア）」が低い部分のみ人間が修正・確認する運用フローを設計するのが一般的です。\n* **前処理・画像ガイドの最適化**\n  * スキャン時の解像度を300dpi以上に保つことや、電子で受領したPDF請求書はそのままAI-OCRに投入（紙に印刷して再スキャンしない）することで、99%以上の高精度を維持しやすくなります。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "請求書のAI自動化 4つの工程とOCR精度の限界": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "請求書のAI自動化は「受領→読み取り→確認・承認→会計・支払連携」の4工程で整理できます。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "請求書のAI自動化は「①データ化 → ②照合 → ③仕訳 → ④承認・支払」の4工程で説明されることが多いです。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "請求書受領から会計連携・支払までの業務は、AIを活用することで以下の4つのステップに整理・自動化されます。"
+   }
+  },
+  "請求書 電子帳簿保存法とAI-OCRの導入は関係がありますか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "はい、関係があります。"
+   },
+   "Claude": {
+    "label": "yes",
+    "quote": "関係はありますが、直接の義務ではありません。"
+   },
+   "Gemini": {
+    "label": "yes",
+    "quote": "実務上において「電帳法の保存要件をクリアしつつ業務効率化を進める」ために非常に深い関係（高い相乗効果）があります。"
+   }
+  },
+  "請求書処理はAIでどこまで自動化できますか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "請求書処理は、受領・読み取り・データ登録・照合・承認への回付まで広く自動化できます。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "請求書処理は、読み取りから仕訳起票、承認ルート選定、三者照合まではAIでほぼ自動化できます。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "「受領」から「支払データの作成・会計ソフトへの反映」までのプロセスの約70〜90%を自動化"
+   }
+  },
+  "請求書 AI-OCRの読み取り精度はどれくらいですか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "請求書AI-OCRの精度は、製品や帳票の状態、評価方法によって異なり、一律に「何％」とはいえません。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "活字の請求書なら読み取り精度は99%前後が目安です。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "請求書用AI-OCRの読み取り精度は、一般的な"
+   }
+  }
+ }
+}

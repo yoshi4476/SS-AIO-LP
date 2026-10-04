@@ -1,0 +1,236 @@
+{
+ "slug": "aio-taisaku-keisoku-houhou",
+ "site": "ai-lab",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "questions": [
+  "AIO対策の計測方法 5つの指標とレポート雛形・週次運用",
+  "aio対策 レポートに入れる指標はいくつが適切ですか？",
+  "aio対策 レポートに引用の中身まで記録すべきですか？",
+  "aio対策 AIO対策の計測は何から始めればいいですか？"
+ ],
+ "answers": {
+  "AIO対策の計測方法 5つの指標とレポート雛形・週次運用": {
+   "ChatGPT": {
+    "urls": [
+     "https://support.google.com/webmasters/answer/16984139?hl=en-GB",
+     "https://support.google.com/analytics/answer/9756891?hl=en",
+     "https://developers.google.com/search/docs/appearance/ai-features",
+     "https://support.google.com/analytics/answer/15258820?hl=en"
+    ],
+    "text": "AIO対策は、**「AI回答での露出 → 自社の引用・言及 → サイト流入 → 成果」**の順に計測します。検索順位だけで判断せず、以下の5指標を週次で追うと、改善する場所が分かります。\n\nここでは、GoogleのAI Overviewsを主対象に、AI ModeやAIアシスタントからの流入も補助的に扱います。以下の指標・雛形・運用頻度は、公式資料を踏まえた実務上の提案です。\n\n**まず押さえる計測上の前提**\n\n2026年10月時点のGoogle公式ヘルプには、Search Consoleの「生成AIのパフォーマンス」レポートで、AI OverviewsとAI Modeの表示回数を確認できるとあります。ページ・国・デバイス・日付別に分析できますが、**これをAI Overviews単独の表示回数として扱わない**ことが大切です。[Google公式ヘルプ](https://support.google.com/webmasters/answer/16984139?hl=en-GB)\n\nまた、GA4の「AI Assistant」チャネルにはAIアシスタントからの訪問が分類されますが、GoogleのAI Overviews・AI Modeからの訪問は「Organic Search」に含まれます。したがって、**AI Assistantの数値だけではGoogleのAIO流入を計測できません**。[GA4のチャネル定義](https://support.google.com/analytics/answer/9756891?hl=en)\n\n**計測する5つの指標**\n\n| 指標 | 定義・計算方法 | 計測方法 | 判断に使うポイント |\n|---|---|---|---|\n| ① AI検索の表示回数 | Search Consoleの生成AIレポートの表示回数 | 全体と対象ページ別に週次集計 | AI検索での露出が増えているか |\n| ② 自社サイト引用率 | 自社URLが引用された観測回数 ÷ AIOが表示された観測回数 ×100 | 固定した検索語でAIOの引用リンクを確認 | AIOが出る検索で、自社が情報源に選ばれるか |\n| ③ ブランド言及率 | 自社名・商品名が回答本文に出た観測回数 ÷ AIOが表示された観測回数 ×100 | 回答本文を保存し、表記揺れも確認 | リンクの引用に加え、ブランドが認知される内容か |\n| ④ AI関連の流入セッション数 | AI Assistantのセッション数。対象ページのGoogle自然検索流入は別枠で集計 | GA4でセッションのチャネル・参照元・ランディングページを確認 | 露出が訪問につながっているか |\n| ⑤ 成果率 | 対象のキーイベントが発生したセッション数 ÷ 対象セッション数 ×100 | 問い合わせ・購入などをGA4で設定 | 訪問が事業成果につながっているか |\n\n⑤は**成果件数も併記**します。流入が少ない週は、成果率だけだと大きく変動するためです。Googleも、Search Consoleに加えてAnalyticsでコンバージョンやサイト滞在を確認することを案内しています。[Google Search Central](https://developers.google.com/search/docs/appearance/ai-features)\n\n②③は、サイト全体の実績ではなく、**固定した検索語の観測結果**です。たとえば100回観測し、AIOが60回、自社URLの引用が18回なら、引用率は18÷60＝30％です。AIO出現数「60／100」も補助情報として残すと、引用率の変化を解釈しやすくなります。\n\n**観測条件を固定する**\n\n最初は、重要な検索語を30～50件選ぶ運用がおすすめです。情報収集・比較検討・購入直前などの検索意図を含め、指名検索と非指名検索は分けます。\n\n毎週、国・言語・端末・ログイン状態・観測する曜日と時間帯をそろえ、次を記録します。\n\n```text\n観測日時｜検索語｜検索意図｜端末・地域｜AIOの有無\n自社URL引用の有無｜引用URL｜ブランド言及の有無\n主な競合の引用｜回答・画面の保存先\n```\n\nAIO非表示は引用率・言及率の分母から除き、観測失敗は欠測として記録します。分母が0なら「算出不可」です。回答やリンクは変動し、AIO自体が表示されない検索もあるため、同じ条件で継続観測します。[GoogleによるAI検索機能の説明](https://developers.google.com/search/docs/appearance/ai-features)\n\n**そのまま使える週次レポート雛形**\n\n```text\n対象期間：\n対象サイト／対象ページ：\n対象国・言語・端末：\n固定検索語数／観測成功数：\nデータ取得日：\n\n今週の結論：\n例）引用率は上昇。対象ページの流入は横ばい。\n    問い合わせ成果は母数が少ないため、4週推移で判断する。\n```\n\n| 指標 | 今週 | 前週 | 前週差 | 直近4週の傾向 | コメント |\n|---|---:|---:|---:|---|---|\n| AI検索の表示回数 | — | — | —％ | — | 対象ページ別の増減 |\n| 自社サイト引用率 | —％ | —％ | —pt | — | 引用数／AIO表示数も併記 |\n| ブランド言及率 | —％ | —％ | —pt | — | 言及内容・誤認の有無 |\n| AI関連流入セッション数 | — | — | —％ | — | AI AssistantとGoogle自然検索を別記 |\n| 成果率・成果件数 | —％／—件 | —％／—件 | —pt／—件 | — | 流入区分ごとに集計 |\n\n```text\n主な変化：\n・引用が増えた／減った検索語とURL：\n・競合が引用された内容：\n・流入や成果が変化したページ：\n\n実施した変更：\n・URL／変更内容／公開日：\n\n次週の施策：\n・対象URL／仮説／作業内容／担当／期限／評価する指標：\n\n計測上の注記：\n・欠測、暫定データ、検索語セット変更、計測設定変更など\n```\n\n率の差は「％」ではなく「ポイント（pt）」で表します。20％から25％なら「＋5pt」です。前週が0の件数は、増減率ではなく実数差を記載します。\n\n**週次運用の進め方**\n\n1. **週初め：集計する**  \n   前週のSearch Console・GA4を取得し、固定検索語を観測します。最新の暫定データを含む場合は注記します。Search Consoleの生成AIレポートの日付は太平洋時間なので、GA4との日次比較では時差にも注意します。[Google公式ヘルプ](https://support.google.com/webmasters/answer/16984139?hl=en-GB)\n\n2. **週中：変化の原因を絞る**  \n   「表示回数」「引用率」「流入」「成果」のどこが動いたかを確認します。引用が増えても流入が増えない場合と、流入が増えても成果が増えない場合では、改善対象が異なります。\n\n3. **週中～週末：優先ページを改善する**  \n   最初は1～3ページに絞り、回答に必要な説明、一次情報、比較条件、更新情報、内部リンクなどを改善します。Googleは、AIO掲載に特別なマークアップやAI専用ファイルは不要で、通常のSEOの基本が引き続き有効と説明しています。[Google Search Central](https://developers.google.com/search/docs/appearance/ai-features)\n\n4. **翌週以降：継続評価する**  \n   変更日を残し、前週差と直近4週の傾向を確認します。未改修の類似ページも比較すると、サイト全体の変動と施策による変化を見分けやすくなります。ただし、同時期に数値が改善しただけで施策の効果とは断定しません。\n\nGoogle自然検索流入はAIO以外も含むため、「AIOによる成果」として確定計上せず、**対象ページの参考指標**として報告します。また、参照元が取得できない訪問はDirectに分類され得るため、AI Assistant流入も把握できた範囲の数値です。[GA4のDirect流入の説明](https://support.google.com/analytics/answer/15258820?hl=en)\n\nSOURCE: https://support.google.com/webmasters/answer/16984139?hl=en-GB\nSOURCE: https://support.google.com/analytics/answer/9756891?hl=en\nSOURCE: https://developers.google.com/search/docs/appearance/ai-features\nSOURCE: https://support.google.com/analytics/answer/15258820?hl=en\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://inhouse-plus.jp/aio-llmo-report/",
+     "https://prtimes.jp/main/html/rd/p/000000211.000137731.html",
+     "https://hachinosu-seisaku.co.jp/column/seo/ai-overview-keisoku/",
+     "https://0120.co.jp/blog/aio-58/",
+     "https://pineal.co.jp/column/what-is-ai-overviews/",
+     "https://0120.co.jp/blog/aio-159/",
+     "https://llm-insight.com/article/ai-overviews/impact-measurement/",
+     "https://llm-insight.com/article/seo-reporting/ai-era-kpi/",
+     "https://ai-search.techsuite.co.jp/9253/",
+     "https://note.com/ganecchi/n/n5af455e9d7b7",
+     "https://www.bakuri.co.jp/aio-lab/measuring-llmo-effectiveness/",
+     "https://dmp.intimatemerger.com/media/posts/21244/llmo%E3%81%AEkpi%E3%81%AF%E4%BD%95%E3%82%92%E8%A6%8B%E3%82%8B%EF%BC%9F%E5%BC%95%E7%94%A8%E3%83%BB%E3%83%96%E3%83%A9%E3%83%B3%E3%83%89%E8%A8%80%E5%8F%8A%E3%83%BB%E6%8C%87%E5%90%8D%E6%A4%9C%E7%B4%A2/",
+     "https://akarumi.jp/knowledge/llmo-kpi/",
+     "https://ai-and-marketing.jp/blog-llmo-kpi.html",
+     "https://n-works.link/blog/llmo/methods-for-measuring-the-effectiveness-of-llmo",
+     "https://mesut.co.jp/llmo-kpi/",
+     "https://ai-search.techsuite.co.jp/qa/llmo-measurement/",
+     "https://www.adcal-inc.com/column/llmo_seo_meo/llmo-kpi/",
+     "https://coomil.co.jp/column/llmo-aio-measurement/",
+     "https://0120.co.jp/blog/aio-103/",
+     "https://apex-japan-aio.co.jp/aio-keisoku/",
+     "https://0120.co.jp/blog/aio-98/",
+     "https://0120.co.jp/blog/aio-66/",
+     "https://ai-search.techsuite.co.jp/7912/"
+    ],
+    "text": "**AIO対策の計測は、5指標を週次で同じ問いに対して測り、月次で意思決定するのが基本線です。** 本文のページ取得は権限が拒否されたため、以下は検索結果の要約だけに基づいています。各ページの本文は未確認で、5指標の具体的な定義や雛形の細部は私の整理を含みます。\n\n## 5つの指標\n複数の解説で挙がる共通の5指標は次のとおりです。これは LLMO 向けの整理で、AIO にも流用できます。\n\n| # | 指標 | 内容 |\n|---|---|---|\n| 1 | 引用率 | 引用された回数 ÷ 投入した総クエリ数 × 100。AIO の引用元リストに自社 URL が出るかを見る |\n| 2 | ブランド言及率 | 回答本文に自社名が出る割合。引用(URL掲載)とは分けて測る |\n| 3 | Share of Voice | 競合と比べた露出の占有率 |\n| 4 | AI経由流入 | GA4 で chat.openai.com や perplexity.aiなどの Referrer を確認 |\n| 5 | 指名検索数 | Search Console などで見るブランド名検索の増減 |\n\n別系統として、AIO 出現率(対象キーワードで AIO が表示された割合)、ブランド言及率、引用ソース構造(参照ドメイン・URL の分布)の3指標を最小セットとする整理もあります。上の5指標を「露出 → 信頼 → 成果」の3層に並べる考え方も紹介されています。\n\n## レポート雛形\n- 計測対象は、キーワード別・媒体別(AIO、AI モード、ChatGPT、Gemini、Perplexity など)です。\n- 記録表の列は、日付、媒体、質問、言及の有無、言及順、文脈、競合の言及状況を推奨する解説があります。\n- 集計は、サイト名・ブランド名ごとの出現数、言及率、平均順位です。\n- 構成は次の順にするとまとまります。\n  1. 今月のサマリー\n  2. 5指標の推移(前月比・競合比)\n  3. 引用元の分析\n  4. 流入・指名検索\n  5. 課題と次月の施策\n- 回答の原文データ(CSV)を添付すると、後から二次分析できます。\n\n## 週次運用の例\n- **週次:** 固定の質問セット(例: 約40問)を毎回同じ条件で投入します。引用 URL、言及、競合を記録します。\n- **週次:** GA4 で AI 経由流入を確認します。\n- **月次:** 週次データを集計し、直す順番を決めて施策に反映します。\n- 計測頻度は月1回が標準とされています。グロースプランでは週次で実施している例もあります。\n- 推奨頻度は指標により異なり、AIO 出現率と引用 URL は週次という解説があります。\n- 言及率や SoV は日次または週次で確認するという解説もあります。\n- 同じ問い・同じ日・同じ手順で測らないと比較できません。\n\nSOURCE: https://inhouse-plus.jp/aio-llmo-report/\nSOURCE: https://prtimes.jp/main/html/rd/p/000000211.000137731.html\nSOURCE: https://hachinosu-seisaku.co.jp/column/seo/ai-overview-keisoku/\nSOURCE: https://0120.co.jp/blog/aio-58/\nSOURCE: https://pineal.co.jp/column/what-is-ai-overviews/\nSOURCE: https://0120.co.jp/blog/aio-159/\nSOURCE: https://llm-insight.com/article/ai-overviews/impact-measurement/\nSOURCE: https://llm-insight.com/article/seo-reporting/ai-era-kpi/\nSOURCE: https://ai-search.techsuite.co.jp/9253/\nSOURCE: https://note.com/ganecchi/n/n5af455e9d7b7\nSOURCE: https://www.bakuri.co.jp/aio-lab/measuring-llmo-effectiveness/\nSOURCE: https://dmp.intimatemerger.com/media/posts/21244/llmo%E3%81%AEkpi%E3%81%AF%E4%BD%95%E3%82%92%E8%A6%8B%E3%82%8B%EF%BC%9F%E5%BC%95%E7%94%A8%E3%83%BB%E3%83%96%E3%83%A9%E3%83%B3%E3%83%89%E8%A8%80%E5%8F%8A%E3%83%BB%E6%8C%87%E5%90%8D%E6%A4%9C%E7%B4%A2/\nSOURCE: https://akarumi.jp/knowledge/llmo-kpi/\nSOURCE: https://ai-and-marketing.jp/blog-llmo-kpi.html\nSOURCE: https://n-works.link/blog/llmo/methods-for-measuring-the-effectiveness-of-llmo\nSOURCE: https://mesut.co.jp/llmo-kpi/\nSOURCE: https://ai-search.techsuite.co.jp/qa/llmo-measurement/\nSOURCE: https://www.adcal-inc.com/column/llmo_seo_meo/llmo-kpi/\nSOURCE: https://coomil.co.jp/column/llmo-aio-measurement/\nSOURCE: https://0120.co.jp/blog/aio-103/\nSOURCE: https://apex-japan-aio.co.jp/aio-keisoku/\nSOURCE: https://0120.co.jp/blog/aio-98/\nSOURCE: https://0120.co.jp/blog/aio-66/\nSOURCE: https://ai-search.techsuite.co.jp/7912/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/seo_tips/n/na14198b7a0aa",
+     "https://www.koukoku.jp/service/suketto/marketer/seo/%E7%94%9F%E6%88%90ai%E6%A4%9C%E7%B4%A2%E3%81%8B%E3%82%89%E3%81%AE%E6%B5%81%E5%85%A5%E3%82%92ga4%E3%81%A7%E8%A8%88%E6%B8%AC%E3%81%97aio%E6%96%BD%E7%AD%96%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%82%92%E6%A4%9C/",
+     "https://acedirection.co.jp/aio-articles/seo%E3%81%A8aio-geo%E3%81%AE%E9%81%95%E3%81%84%E3%82%925%E5%88%86%E3%81%A7%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E3%80%90%E6%AF%94%E8%BC%83%E8%A1%A8%E4%BB%98%E3%81%8D%E3%80%91/",
+     "https://sugoyoku.com/blog/a4-ai-ryunyu-keisoku/",
+     "https://www.bring-flower.com/blog/ai-overviews-tracking-tools/",
+     "https://three-dots.co.jp/llmo/ai-overview-measurement/",
+     "https://hachinosu-seisaku.co.jp/column/seo/ai-overview-keisoku/",
+     "https://www.seedinc.jp/column/aio/aio/",
+     "https://gmotech.jp/semlabo/seo/blog/ga4-ai-traffic/",
+     "https://www.rakubo.co.jp/2026/10/02/ga4-ai-traffic-measurement-20261002/",
+     "https://ai-search.techsuite.co.jp/9229/",
+     "https://prtimes.jp/main/html/rd/p/000000171.000118298.html",
+     "https://0120.co.jp/blog/aio-25/",
+     "https://jp.linkshare.com/knowledge/column/how-to-get-featured-in-aio"
+    ],
+    "text": "AIO（AI Overviews / AI最適化・GEO）対策の成果を正しく可視化し、PDCAサイクルを回すための**「5つの計測指標」「レポート雛形」「週次運用プロセス」**を解説します。\n\n---\n\n## 1. AIO対策の主要計測指標 5選\n\n従来のSEOが「検索順位と流入数」を重視するのに対し、AIO対策では**「AI回答内での引用状況」「ブランド認知（ゼロクリック含む）」「流入ユーザーの質」**を追う必要があります。\n\n| 指標名 | 概要・定義 | 主な計測手法・ツール |\n| :--- | :--- | :--- |\n| **① AI表示率（AI Coverage Rate）** | 対策キーワード群の中で、Google検索時にAI Overviews（生成AI回答）が出現する割合。 | ・専用ツール（BringRitera, Gyro-n, SE Ranking, Keywordmap等） |\n| **② 引用・言及率（Citation & Mention Rate）** | AI回答の中で、自社サイトのURLが**参照リンク（ソース）として掲載された割合**、または**テキスト内でブランド名が言及された割合**。 | ・AIO計測ツール<br>・LLMモニタリングツール |\n| **③ 引用ポジション（Citation Rank）** | AI回答のリンクカード（カルーセル等）の**何番目に自社が掲載されているか**。ファーストビュー（スクロールなし）に入っているかが重要。 | ・AIO計測ツール<br>・定点での目視確認 |\n| **④ AIチャネル別流入数（AI Referral Traffic）** | AI Overviews、ChatGPT、Perplexity、Geminiなどの**AIチャネルを経由したWebサイト訪問数**。 | ・GA4（カスタムチャネルグループ/参照元分析）<br>・Google Search Console（推測補完） |\n| **⑤ AI経由CV数・CVR（AI Conversions）** | AIチャネル経由ユーザーの**コンバージョン数およびCVR（成約率）**。AI回答で事前理解が進んでいるため、通常の検索よりCVRが高くなる傾向がある。 | ・GA4（探索レポート・セグメント分析） |\n\n> **GA4での流入計測の補足**  \n> ChatGPT（`chatgpt.com`）やPerplexity（`perplexity.ai`）などの対話型AIからの流入はGA4で参照元（Referral / AI Assistant）として取得可能です。一方、GoogleのAI Overviews経由のクリックは一部 `google / organic`（通常検索）に混同して計測される仕様があるため、**Search Consoleの表示回数・クリック数**や**AIO表示ツール**と組み合わせて成果を判断します。\n\n---\n\n## 2. AIO対策 レポート雛形（実務用テンプレート）\n\n週次・月次の社内共有やクライアント報告でそのまま使えるMarkdown形式のレポート骨子です。スプレッドシートやNotion等に移して活用できます。\n\n### 【雛形1】全体サマリー・KPI進捗レポート（週次・月次共有用）\n\n```markdown\n# 【AIO対策】週次運用レポート（対象期間：202X/XX/XX 〜 202X/XX/XX）\n\n## 1. 今週の全体ハイライト\n- **AI引用率**: 前週比 +X.X%（対策記事〇〇の引用獲得が寄与）\n- **AI参照流入**: 前週比 +X%（Perplexity/ChatGPTからの指名検索・流入が増加）\n- **主な動き**: トピック「〇〇」に関するAI Overviewsの出力フォーマットがリスト型から要約型へ変化。\n\n## 2. 主要5指標（KPI）進捗\n| 指標 | 今週実績 | 前週実績 | 前月比 | 目標（KGI/KPI） | 評価 |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **① AI表示率**（対象100KW） | 42.0% | 40.0% | +5.0% | 50.0% | 🟡 |\n| **② 自社引用率**（対象100KW）| 18.0% | 15.0% | +4.0% | 25.0% | 🟢 |\n| **③ 引用平均ポジション** | 2.4位 | 3.1位 | +0.7位 | 3.0位以内 | 🟢 |\n| **④ AIチャネル流入数** | 1,200 uu | 1,050 uu | +15% | 1,500 uu | 🟡 |\n| **⑤ AI経由CV数（CVR）** | 18件(1.5%)| 12件(1.1%) | +6件 | 20件 | 🟢 |\n\n## 3. チャネル別AI流入内訳（GA4データ）\n- **Google AI Overviews（推定）**: 約 XXX セッション\n- **ChatGPT**: XXX セッション（CV: X件）\n- **Perplexity**: XXX セッション（CV: X件）\n- **その他（Claude/Gemini等）**: XX セッション\n```\n\n---\n\n### 【雛形2】対策キーワード別・モニタリングシート（現場運用用）\n\n```markdown\n## 4. 重要対策キーワード別モニタリング\n| キーワード | 月間検索Vol | AI表示 | 自社引用 | 引用順位 | 引用URL / 対策ページ | 課題・今週の対策アクション |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| AIO対策 計測方法 | 1,600 | 有 | **引用中** | 1位 | /blog/aio-metrics | 構造化データの追加でポジション維持 |\n| GEO 対策ツール | 2,400 | 有 | **非引用** | - | /service/geo-tool | 競合A社が引用中。ファクト・表データの拡充リライト実施 |\n| LLM マーケティング | 880 | 無 | **-** | - | /blog/llm-marketing| AI Overviews未発生。通常のSEO順位維持を優先 |\n```\n\n---\n\n## 3. AIO対策の週次運用アクションプラン\n\nAIO（AI Overviews）はAIモデルの更新や検索結果の変動によって引用元が頻繁に変わります。以下の**週次PDCAサイクル（月〜金）**を標準運用として回すのが効果的です。\n\n```\n【月】データ取得・集計  ➔  【火】変動・要因分析  ➔  【水】改善案策定\n                                                    ↓\n【金】検証設定・記録    ←  【木】施策実行（要約・構造化）\n```\n\n### 【月曜日】データ取得＆定量モニタリング\n* **GA4確認**: 「セッションの参照元/メディア」およびカスタムチャネルで「AI流入」の集計。\n* **ツールデータ取得**: 定点追跡しているキーワード群の「AI表示有無」「自社引用有無」「引用順位」をcsv出力。\n\n### 【火曜日】変動・要因分析\n* **落選（引用外れ）の分析**: 引用が外れたKWについて、新しく引用された競合サイトを調査。\n  * *チェックポイント*: 「最新の数値データが引用されているか」「箇条書き・表形式で結論が明確か」「一次情報（独自データ）が含まれているか」\n* **AI回答フォーマットの確認**: テキストの要約形式・カルーセル画像・FAQ形式など、どのような形式でAIが要約しているかを確認。\n\n### 【水曜日】対策・リライト計画の策定（チャンク最適化）\n* **AIが好む構造（チャンク）へリライト設計**:\n  1. **結論ファースト（要約ブロック）**: H2/H3直下に50〜100文字程度の明確な定義・結論を記載。\n  2. **構造化データ（JSON-LD）の追加**: `FAQPage` や `Article` などのスキーマを実装。\n  3. **ファクト・一次情報の追記**: 統計数値、独自調査結果、専門家の監修（E-E-A-T）を補強。\n\n### 【木曜日】コンテンツ修正・実装\n* 該当ページのテキスト修正、HTMLタグの最適化。\n* **Google Search Console** から「URL検査 ➔ インデックス登録をリクエスト」を行い、クロールを促進。\n\n### 【金曜日】変更ログの記録・検証設定\n* 管理シートに「修正日」「修正内容（要約追加、表挿入など）」を記録。\n* 翌週月曜日以降にAI回答への反映状況（引用の復帰・順位上昇）を確認できるようにセット。\n\n---\n\n## まとめ：運用を成功させるポイント\n\n1. **「Zero-Click Search（クリックなし）」も成果として評価する**  \n   AI回答内で自社ブランドが引用・肯定的に言及されること自体が「指名検索の増加」や「ブランド想起」に繋がります。流入数だけでなく、**引用率（Share of Voice）**を重要KPIと捉えることが大切です。\n2. **SEO基盤とセットで運用する**  \n   AI Overviewsで引用されるソースの大部分（約90%以上）は、検索エンジンの上位ページ（オーガニック上位20位以内）から抽出されます。テクニカルなAIO施策だけでなく、ベースとなるSEO（検索上位表示・E-E-A-T）を怠らない運用設計にしましょう。",
+    "error": ""
+   }
+  },
+  "aio対策 レポートに入れる指標はいくつが適切ですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://0120.co.jp/blog/aio-103/",
+     "https://llm-insight.com/article/seo-reporting/ai-era-kpi/",
+     "https://developers.google.com/search/docs/appearance/ai-features?hl=ja"
+    ],
+    "text": "**AIO対策の月次レポートは、主要指標を5つ程度に絞るのがおすすめです。** 詳細分析を含めても5〜7項目を目安にすると、成果と次の施策を判断しやすくなります。実務資料でも「5つのKPI」「多すぎる場合は5〜7項目に絞る」という提案があります。ただし、これは公式の統一基準ではなく、運用上の目安です。[参考資料](https://0120.co.jp/blog/aio-103/)\n\nAI検索全般の対策を想定すると、私なら次の5つを選びます。\n\n| 指標 | 確認すること |\n|---|---|\n| ブランド言及率 | 対象の質問へのAI回答で、自社名が出る割合 |\n| 自社サイト引用率 | AI回答に自社ページが引用される割合 |\n| 競合との回答内シェア | 競合と比べて自社がどれだけ登場するか |\n| 計測できたAI経由流入数 | AIサービスからサイトへの訪問数 |\n| 計測できたAI経由の問い合わせ・購入件数 | ビジネス成果につながっているか |\n\n**開始直後は3指標でも十分です。** GoogleのAI Overviewsを中心に見るなら、「AIO出現率・自社の言及／引用率・引用URL構成」から始める方法が紹介されています。[レポート設計の参考](https://llm-insight.com/article/seo-reporting/ai-era-kpi/)\n\n指標数以上に大切なのは、**対象の質問・AIサービス・計測条件を固定し、前月比と推移、次の改善策を添えること**です。なお、Google公式では、AI OverviewsとAIモードの表示・クリックはSearch Consoleの「ウェブ」検索の合計に含まれると説明されています。通常検索を含む数値を、そのまま「AIOだけの成果」として扱わないようにしてください。[Google公式資料](https://developers.google.com/search/docs/appearance/ai-features?hl=ja)\n\nSOURCE: https://0120.co.jp/blog/aio-103/\nSOURCE: https://llm-insight.com/article/seo-reporting/ai-era-kpi/\nSOURCE: https://developers.google.com/search/docs/appearance/ai-features?hl=ja\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://0120.co.jp/blog/aio-103/",
+     "https://0120.co.jp/blog/aio-98/",
+     "https://ai-search.techsuite.co.jp/7912/",
+     "https://llm-insight.com/article/seo-reporting/ai-era-kpi/",
+     "https://cantik.co.jp/column-aio/aio%E3%81%AE%E5%8A%B9%E6%9E%9C%E6%B8%AC%E5%AE%9A%EF%BD%9Cai%E6%A4%9C%E7%B4%A2%E3%81%A7%E3%81%AE%E9%9C%B2%E5%87%BA%E3%82%92%E3%81%A9%E3%81%86%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/",
+     "https://news.mynavi.jp/techplus/article/llmo_guide-5/",
+     "https://www.bakuri.co.jp/aio-lab/measuring-llmo-effectiveness/",
+     "https://inhouse-plus.jp/aio-llmo-report/",
+     "https://coomil.co.jp/column/llmo-aio-measurement/",
+     "https://akarumi.jp/knowledge/llmo-kpi/"
+    ],
+    "text": "**結論: 月次レポートの中核指標は5つ前後が適切です。** 多くても7つまでで、経営層向けは3つに絞ります。\n\n検索結果で推奨数は分かれていました。\n\n- **3つ**: AI言及率、AI経由流入数、指名検索数を最初に追うべき指標とする解説があります。\n- **4つ**: 引用率、言及率、TOP3推奨率、TOP1推奨率を共通KPIとする例と、「露出→理解→流入→CV→事業成果」の評価軸を4つ(または5段階)で整理する例があります。\n- **5つ**: 「5つのKPIに絞るのが正解」とする記事があります。内訳は次のとおりです。\n  1. AI検索での被引用数\n  2. ブランド言及量\n  3. AI Overview経由のクリック(GSC)\n  4. 主要KWでのAIシェア\n  5. AIO起因のCV数(GA4)\n- **6〜7つ**: 6つのKPI、7つのKPIを挙げる記事もあります。これらは記事タイトルのみで、中身は確認していません。\n\n**実務上の目安**\n- 指標は「露出(引用・言及)→流入→CV」の流れに沿って各段階に1〜2個ずつ置くと、5つ前後に収まります。\n- 計測頻度は指標ごとに変えます。被引用数は日次の自動取得、AIリファラは週次、出現率・言及率・CVは月次が目安です。\n- 増やしすぎると、何を改善すべきかが見えにくくなります。\n\n出典は検索結果のスニペットに基づきます。各記事の本文までは読んでいません。\n\nSOURCE: https://0120.co.jp/blog/aio-103/\nSOURCE: https://0120.co.jp/blog/aio-98/\nSOURCE: https://ai-search.techsuite.co.jp/7912/\nSOURCE: https://llm-insight.com/article/seo-reporting/ai-era-kpi/\nSOURCE: https://cantik.co.jp/column-aio/aio%E3%81%AE%E5%8A%B9%E6%9E%9C%E6%B8%AC%E5%AE%9A%EF%BD%9Cai%E6%A4%9C%E7%B4%A2%E3%81%A7%E3%81%AE%E9%9C%B2%E5%87%BA%E3%82%92%E3%81%A9%E3%81%86%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/\nSOURCE: https://news.mynavi.jp/techplus/article/llmo_guide-5/\nSOURCE: https://www.bakuri.co.jp/aio-lab/measuring-llmo-effectiveness/\nSOURCE: https://inhouse-plus.jp/aio-llmo-report/\nSOURCE: https://coomil.co.jp/column/llmo-aio-measurement/\nSOURCE: https://akarumi.jp/knowledge/llmo-kpi/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "AIO対策（AI Optimization / GEO: Generative Engine Optimization）のレポートに入れる指標（KPI）の数は、**「3〜5個（多くても最大7個程度）」**が最も適切です。\n\n指標が多すぎると「結局何がうまくいっていて、次に何をすべきか」が分かりづらくなり、少なすぎるとAI対策特有の成果が見えにくくなります。\n\n以下の分類を参考に、報告相手や目的に合わせて**メイン指標3〜4個＋サブ指標1〜2個**で構成するのがベストです。\n\n---\n\n### おすすめの指標構成（計3〜5個の選び方）\n\n#### 1. メイン指標（成果を測る：必ず入れる3〜4個）\n\n*   **① AI引用・言及率（Citation / Mention Rate）**\n    *   **概要：** 狙っている主要キーワードで、AI（Google AI Overviews、ChatGPT、Perplexityなど）の回答内に自社サイト・ブランドが引用・表示されている割合。\n    *   **理由：** AIO対策の「露出効果」を測る最重要指標です。\n*   **② AI参照元トラフィック数（AI Referral Traffic）**\n    *   **概要：** AI Overviewsや各種AIツール（ChatGPT、Perplexity、Claudeなど）のリンク経由でサイトへ訪れたアクセス数（GA4の参照元などで集計）。\n    *   **理由：** 実際の集客貢献度を可視化するために不可欠です。\n*   **③ CV数 / CVR（コンバージョン率）**\n    *   **概要：** AI経由で流入したユーザーの成約・問い合わせ数および変換率。\n    *   **理由：** AI回答から訪問するユーザーは悩みが明確で購買意欲が高い傾向があるため、質の評価として重要です。\n*   **④ ブランド検索数（指名検索ボリューム）**\n    *   **概要：** 自社名やサービス名での検索数。\n    *   **理由：** AIの回答内でブランド名を見たユーザーが、後から直接検索して流入するケース（間接効果）を捉えるためです。\n\n---\n\n#### 2. サブ指標（改善施策を検討する：必要に応じて1〜2個追加）\n\n*   **⑤ 主要キーワードのSEO順位・表示回数**\n    *   **概要：** 従来の検索結果における自社ページの順位。\n    *   **理由：** AI Overview（Google）などは、従来の検索上位（1〜5位程度）のコンテンツから引用する傾向が強いため、前提条件のチェックとして活用します。\n*   **⑥ 検索結果のCTR（クリック率）**\n    *   **概要：** AI Overviewが表示されたキーワードでの自社ページのCTR変化。\n    *   **理由：** AIが表示されることでゼロクリック検索（検索結果で完結してアクセスされない現象）が起きているか、影響を分析するために見ます。\n\n---\n\n### 報告相手（対象者）別の絞り込み例\n\n| 報告先 | おすすめの指標（計3個前後） | ポイント |\n| :--- | :--- | :--- |\n| **経営陣・役員向け** | 1. AI経由のCV数<br>2. AI参照元トラフィック数<br>3. ブランド検索数の推移 | 細かい順位ではなく、**「ビジネス成果（売上・集客）にどう繋がっているか」**に絞る。 |\n| **現場・マーケチーム向け** | 1. AI引用・言及率<br>2. AI参照元トラフィック数<br>3. SEO上位獲得率<br>4. CTRの変化 | **「どのコンテンツをどう改善すべきか」**の施策判断に使える数値を入れる。 |\n\n---\n\n### AIOレポート作成時の注意点\n\n1.  **AIの回答は変動しやすいため「推移（トレンド）」で見る**\n    AIの生成結果はユーザーやタイミングによって揺らぎ（非決定性）があります。特定の日のデータだけでなく、**月次や週次での「引用率の平均トレンド」**で評価するのが適切です。\n2.  **従来のSEOレポートと混ぜすぎない**\n    従来のSEO指標（検索順位、全インプレッション等）をそのままAIOレポートに盛り込むと煩雑になります。「AIO施策によるインパクト」に特化させて数字を絞り込むことが成功のコツです。",
+    "error": ""
+   }
+  },
+  "aio対策 レポートに引用の中身まで記録すべきですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://developers.google.com/search/docs/appearance/ai-features?hl=ja",
+     "https://arxiv.org/abs/2605.14021"
+    ],
+    "text": "**はい。AIO対策のレポートには、引用元URLだけでなく「AIの回答でどう使われたか」まで記録することをおすすめします。** これはGoogleの必須要件という意味ではなく、改善と検証のための実務上の推奨です。\n\nGoogleのAIによる概要は、複数の情報源をもとに回答を組み立て、関連リンクを表示します。そのため、**リンクが掲載されたことと、自社の文章がそのまま引用されたことは区別**する必要があります。[Google公式の説明](https://developers.google.com/search/docs/appearance/ai-features?hl=ja)\n\n記録するなら、次の項目が実用的です。\n\n| 項目 | 記録する内容 |\n|---|---|\n| 検索条件 | 質問・キーワード、確認日時、地域、端末、ログイン状態 |\n| 引用元 | 掲載されたURL、ページ名 |\n| 回答の該当部分 | 自社情報に関連するAI回答の文章と前後の文脈 |\n| 元ページの該当部分 | 対応する文章。対応を確認できなければ「不明」と記録 |\n| 評価・証拠 | 直接引用／要約／リンクのみ、誤りの有無、スクリーンショット |\n\n内容まで残すと、**どの説明が採用されたか、意図と違う要約がないか、修正前後でどう変わったか**を比較できます。実際に、AI回答の主張と引用先ページの整合性を調べた研究でも、引用先で裏付けられない主張が確認されています。[AI Overviewsの測定研究](https://arxiv.org/abs/2605.14021)\n\n負担を抑えるなら、**レポート本文には引用数・主な変化・代表例を載せ、詳細な回答文や画像は別シートに保存**する運用で十分です。毎回すべてを長文で転載するより、重要な質問や変化があった回答を重点的に残すと扱いやすくなります。\n\nSOURCE: https://developers.google.com/search/docs/appearance/ai-features?hl=ja\nSOURCE: https://arxiv.org/abs/2605.14021\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://inhouse-plus.jp/aio-llmo-report/",
+     "https://kamuitracker.com/blog/archives/22756",
+     "https://0120.co.jp/blog/aio-58/",
+     "https://www.extage-marketing.co.jp/web-school/ai-overview-measurement/",
+     "https://cone-c-slide.com/liblog/llmo-tool/",
+     "https://mediareach.co.jp/blog/llmo-tool"
+    ],
+    "text": "**結論: 引用の全文までは不要です。ただし「引用元URL・引用された自社ページ・引用の有無」は必ず記録し、回答文の抜粋やスクリーンショットは主要クエリに絞って残すのがよいです。**\n\nWebFetch の権限がなく、ページ本文は読めませんでした。以下は検索結果の要約だけに基づいており、「全文は不要」は私の判断です。検索結果に、引用文の中身まで残すべきだと明記したものはありませんでした。\n\n- **記録する項目:** 検索結果では、AIOの出現有無、引用元ドメインの内訳、自社コンテンツが引用されたか、検索ボリュームが基本の計測項目でした。主要KPIは AI Overview の露出率と引用率です。\n- **引用元の内訳が重要な理由:** 自社が取るべき引用枠を誰が取っているかが分かります。第三者サイトへの掲載を狙う先のリストにもなります。\n- **回答の中身:** 定性的なモニタリングでは、回答に自社のURLや社名が出ているかを記録し、競合が出ているクエリも把握します。分析は「どのAIで・いつから・どのテーマで・競合と比べてどうか」に分解して行います。\n- **中身まで残す場合:** AIOの回答は同じクエリでも変動しやすいため、変化の要因を後から説明する必要が出ます。その場合は、重要クエリだけ回答テキストの要約か画面のスナップショットを保存してください。\n\nSOURCE: https://inhouse-plus.jp/aio-llmo-report/\nSOURCE: https://kamuitracker.com/blog/archives/22756\nSOURCE: https://0120.co.jp/blog/aio-58/\nSOURCE: https://www.extage-marketing.co.jp/web-school/ai-overview-measurement/\nSOURCE: https://cone-c-slide.com/liblog/llmo-tool/\nSOURCE: https://mediareach.co.jp/blog/llmo-tool\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.frank-pr.jp/llmo/column/what-is-geo",
+     "https://llm-insight.com/solutions/owned-media/",
+     "https://0120.co.jp/blog/aio-104/",
+     "https://www.saixaid.com/aio/article-09-ai-inyou-kakikata.html",
+     "https://note.com/cyber_forest/n/nb726f0d00b06",
+     "https://www.lita.co.jp/aio/aio_overviews.html",
+     "https://hachinosu-seisaku.co.jp/column/seo/ai-overview-keisoku/",
+     "https://akarumi.jp/knowledge/ai-overviews-optimization/",
+     "https://aeo-service.alivecast.co.jp/blog/ai-overview"
+    ],
+    "text": "結論から言うと、**「注力キーワード」や「コンテンツ改善（リライト・競合分析）」を行う場面においては、引用の中身（実際に生成・抜粋されたテキスト）まで記録すべき**です。\n\nただし、**すべてのキーワードで全観測の本文を毎回記録すると運用コストが膨大になるため、目的に応じて記録の深さを使い分けるのが実務的**です。\n\n---\n\n### なぜ引用の「中身（テキスト）」まで記録すべきなのか？\n\n単に「自社サイトのURLが引用されたか（Yes/No）」だけでなく、テキストの中身を記録・分析することで、以下のような大きなメリットが得られます。\n\n#### 1. AIが評価している「自社の強み・抜き出し箇所」がわかる\nAI検索（Google AI Overviews、ChatGPT Search、Perplexityなど）は、ページ丸ごとではなく**「一節・段落単位（Passage）」で情報を抜き出して要約**します。\n引用の中身を保存しておくことで、「冒頭の定義文が拾われた」「自社の独自アンケート数値が抜粋された」「FAQの回答文がそのまま使われた」など、**自社コンテンツのどの要素がAIに評価されたか**が特定できます。\n\n#### 2. 競合に負けている理由（改善策）が具体的に見えてくる\n自社が引用されず競合が引用されている場合、競合の「引用文の中身」を分析することで、\n* 自社に足りないファクト・データ（一次情報）は何か\n* AIが引用しやすい「書き方・文章構造（結論ファースト、数値表現など）」になっているか\nといった**具体的な改善・リライト方針**を立てることができます。\n\n#### 3. ハルシネーション（誤った引用・ネガティブな文脈）の監視\nAIが自社の情報を誤った解釈やネガティブな文脈で引用していないかをチェックする（レピュテーションリスクの監視）ためにも、中身の確認は重要です。\n\n---\n\n### 実務における「記録レベル」の使い分けガイドライン\n\n運用の再現性を保つために、以下のようにフェーズやキーワードの重要度によって記録範囲を分けることをおすすめします。\n\n| レポートの目的 | 監視対象のキーワード | 記録すべき項目 | 引用の中身の記録 |\n| :--- | :--- | :--- | :--- |\n| **全社・定常モニタリング**<br>（毎月の全体傾向把握） | サイト全体の対象ワード群（数十〜数百件） | ・引用の有無（Yes/No）<br>・引用されたURL（自社/競合）<br>・流入数・表示回数 | **不要（または自動ツールで簡易取得）** |\n| **注力・CV直結キーワード**<br>（事業インパクトが大きいワード） | 主要な指名系・比較・購買検討キーワード | ・引用有無、掲載順位<br>・**引用された生成文・自社抜粋文**<br>・併記された競合ソース | **【推奨】テキストで記録** |\n| **改善（リライト）フェーズ**<br>（勝率を上げたい記事の分析） | 改善対象の記事に関連するワード | ・競合が引用されている具体的なテキスト<br>・自社記事内の対応箇所・不足要素 | **【必須】引用内容を詳細比較** |\n\n---\n\n### レポート（記録シート）に残す際のおすすめ項目例\n\nもしExcelやSpreadsheet等で手動・半自動で記録する場合は、以下のフォーマットが扱いやすいです。\n\n1. **測定日 / AIサービス**（例: 2026/10/01、Google AI Overviews / ChatGPT Search）\n2. **対象クエリ（検索ワード）**\n3. **自社の引用有無**（あり / なし）\n4. **引用されたURL**\n5. **引用されたテキストの中身（スニペット・文脈）**\n6. **分析・気づき（メモ）**（例：「PREP法で書いた冒頭80文字が抽出された」「競合は○○の比較表から抽出されている」など）\n\n### まとめ\n「引用の中身」は、AIO/GEO対策における**最強の改善ヒント（答え合わせ）**になります。まずは**事業インパクトが大きい重要キーワード10〜20件程度に絞って、引用本文の記録・分析を始める**ことを推奨します。",
+    "error": ""
+   }
+  },
+  "aio対策 AIO対策の計測は何から始めればいいですか？": {
+   "ChatGPT": {
+    "urls": [
+     "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports?hl=en",
+     "https://developers.google.com/search/docs/appearance/ai-features"
+    ],
+    "text": "AIO対策の計測は、**「どの質問で自社がAI回答に掲載されているか」と「掲載されたページが成果につながっているか」の現状把握**から始めるのがおすすめです。ここでは、GoogleのAI Overviewsを中心に説明します。\n\n1. **計測対象の質問を決める**  \n   顧客が検索しそうな「〇〇とは」「〇〇の選び方」「〇〇と△△の違い」など、事業に直結する質問をまず10〜20個選びます。この件数は、無理なく継続するための実務上の目安です。\n\n2. **Search Consoleで掲載状況の基準値を記録する**  \n   Googleは2026年8月31日、生成AIのパフォーマンスレポートを全世界のサイトに展開したと公表しています。AI機能内の表示回数、掲載ページ、国、デバイス、日付別の推移を確認し、施策前の数値を保存しましょう。ただし、**生成AI機能全体の表示回数を、そのままAI Overviewsだけの掲載率と扱わない**ことが大切です。[Google公式発表](https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports?hl=en)\n\n3. **対象の質問を定点観測する**  \n   同じ地域・言語・端末条件で週1回など定期的に検索し、「AI Overviewsの表示有無」「自社名の言及」「自社URLの引用」「競合の引用」を記録します。自社名の言及と、リンク付きの引用は分けて集計してください。  \n   例えば、**自社引用率＝自社URLが引用された質問数÷観測した質問数**と定義すれば、同じ質問群で変化を比較できます。これは自社で設定する観測指標です。\n\n4. **GA4で問い合わせ・購入まで確認する**  \n   対象ページの流入、問い合わせ数、購入数、コンバージョン率を追います。Googleも、Search Consoleに加え、Analyticsでコンバージョンや滞在時間を確認する方法を案内しています。ただし、検索全体の流入・成果の変化だけで、AIO施策の効果と断定しないようにしましょう。[Google公式ドキュメント](https://developers.google.com/search/docs/appearance/ai-features)\n\nまずはスプレッドシートに、**「質問／観測日／AI回答の有無／自社の言及・引用／引用URL／対象ページの成果」**をまとめれば始められます。施策の実施日も残し、同じ条件・同じ期間で比較してください。\n\nSOURCE: https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports?hl=en\nSOURCE: https://developers.google.com/search/docs/appearance/ai-features\n",
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://koukoku.jp/service/suketto/marketer/seo/ai-overview%E5%BC%95%E7%94%A8%E3%82%92search-console%E3%81%A7%E8%A8%88%E6%B8%AC%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95",
+     "https://www.koukoku.jp/service/suketto/marketer/seo/%E7%94%9F%E6%88%90ai%E6%A4%9C%E7%B4%A2%E3%81%8B%E3%82%89%E3%81%AE%E6%B5%81%E5%85%A5%E3%82%92ga4%E3%81%A7%E8%A8%88%E6%B8%AC%E3%81%97aio%E6%96%BD%E7%AD%96%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%82%92%E6%A4%9C/",
+     "https://0120.co.jp/blog/aio-103/",
+     "https://0120.co.jp/blog/aio-63/",
+     "https://sugoyoku.com/blog/blog-4055/",
+     "https://jinrai.co.jp/blog/2026/04/06/aio-taisaku-yarikata/",
+     "https://jinrai.co.jp/blog/2026/03/18/ai-inyou-joukyou-check/",
+     "https://www.seedinc.jp/column/aio/aio-service-tool/"
+    ],
+    "text": "**結論: まず Search Console と GA4 で現状の基準値を取り、並行して主要クエリでの AI 回答の引用有無を手動で記録するところから始めるのが現実的です。専用ツールはそのあとで十分です。**\n\n**始め方（優先順）**\n1. **Search Console で基準値を取る。** 「検索パフォーマンス」でクリック、表示、CTR、順位を確認します。AI Overview 用のフィルターも使えます（ただし 2026年5月時点の記事では「対応中」の扱いです）。まず対策前の数値を記録します。\n2. **GA4 で AI 検索系の流入を見る。** 参照元で絞り込めるのは ChatGPT や Perplexity などです。Google の AI Overview 経由のクリックは通常の google / organic として記録されるため、GA4 だけでは分離できません。「インプレッションは増えたのにセッションは横ばい」というパターンを、間接的な根拠にします。\n3. **手動で引用状況をチェックする。** ChatGPT、Gemini、Perplexity、Google で、自社ブランド名や狙う業種キーワードを検索します。引用の有無と引用元 URL をスプレッドシートに記録します。\n4. **追うKPIは絞る。** 紹介されていた例は次の5つです。\n   - 被引用回数\n   - ブランド言及\n   - Search Console 上の AI Overview の表示・クリック\n   - 主要キーワードでの AI 回答内シェア\n   - AI 起因のCV\n5. **専用ツールは後回しにする。** 追跡キーワードが20個を超えて手作業が負担になった段階で検討します。候補は Peec AI、Profound、Otterly.ai、ZipTie.dev などです。それまでは Search Console、リッチリザルトテスト、Schema.org Validator の無料ツールで足ります。\n\nこれらは検索結果の要約から得た情報で、各ページ本文までは確認していません。Search Console の AI Overview フィルターなど仕様が変わりやすい部分は、公式ヘルプで最新状況を確認してください。\n\nSOURCE: https://koukoku.jp/service/suketto/marketer/seo/ai-overview%E5%BC%95%E7%94%A8%E3%82%92search-console%E3%81%A7%E8%A8%88%E6%B8%AC%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95\nSOURCE: https://www.koukoku.jp/service/suketto/marketer/seo/%E7%94%9F%E6%88%90ai%E6%A4%9C%E7%B4%A2%E3%81%8B%E3%82%89%E3%81%AE%E6%B5%81%E5%85%A5%E3%82%92ga4%E3%81%A7%E8%A8%88%E6%B8%AC%E3%81%97aio%E6%96%BD%E7%AD%96%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%82%92%E6%A4%9C/\nSOURCE: https://0120.co.jp/blog/aio-103/\nSOURCE: https://0120.co.jp/blog/aio-63/\nSOURCE: https://sugoyoku.com/blog/blog-4055/\nSOURCE: https://jinrai.co.jp/blog/2026/04/06/aio-taisaku-yarikata/\nSOURCE: https://jinrai.co.jp/blog/2026/03/18/ai-inyou-joukyou-check/\nSOURCE: https://www.seedinc.jp/column/aio/aio-service-tool/\n",
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "text": "AIO（AI Optimization / 生成AI最適化・AI Overview対策）の計測を始める際は、**「① 主要キーワード・AIツールにおける自社の露出（引用・言及）状況の把握」**と**「② GA4などでのAIツール経由のトラフィック可視化」**の2点からスタートするのが最も効果的です。\n\n具体的には、以下の**4つのステップ**で計測を進めることをおすすめします。\n\n---\n\n### Step 1: 計測対象となる「キーワード」と「ブランド名」の定義\nまずは何を計測するかを決めます。\n\n* **重要検索キーワード（10〜30件程度）：**\n  * ユーザーが解決したい悩み・課題系の検索キーワード（Informational Intent）\n  * 比較・検討系のキーワード（Commercial Intent）\n* **自社ブランド・サービス名：**\n  * 社名、製品名、サービス名（指名検索系）\n\n---\n\n### Step 2: AI回答内での「露出・引用状況」の定時観測\n定義したキーワードを使って、主要なAI検索・生成AIツールで実際に検索・質問を行い、**「自社サイトが引用されているか」「自社名が言及されているか」**を確認・記録（スプレッドシート等）します。\n\n* **観測対象となる主なプラットフォーム：**\n  * **Google AI Overviews（旧SGE）：** 検索結果上部のAI概要\n  * **Perplexity：** 検索型AI（引用元URLが明確に出るため計測しやすい）\n  * **ChatGPT（SearchGPT含む）：** Web検索機能を伴う回答\n  * **Copilot / Claude など**\n\n* **チェックする項目（指標）：**\n  1. **引用率（Citation Rate）：** 回答内の「ソース（参照リンク）」として自社URLが含まれているか\n  2. **言及（Mention）：** リンクがなくても、テキスト内に自社・サービス名が登場しているか\n  3. **文脈・情報精度（Sentiment / Accuracy）：** ポジティブ・ニュートラル・ネガティブのいずれの文脈か、誤った情報（ハルシネーション）が含まれていないか\n\n---\n\n### Step 3: GA4（Google アナリティクス）での「AIリファラー（参照元）」のトラフィック計測\n生成AIサービス（ChatGPTやPerplexity等）からの直接流入を把握するために、GA4で参照元（Referral）をチェック・セグメント化します。\n\n* **確認すべき主な参照元ドメイン（Referral）：**\n  * `chatgpt.com` / `chat.openai.com`\n  * `perplexity.ai`\n  * `copilot.microsoft.com`\n  * `claude.ai`\n\n> **注意点（Google AI Overviewsの扱い）：**  \n> GoogleのAI Overviews経由のクリックは、GA4上では通常の「`google / organic`（自然検索）」としてまとめられてしまい、現時点では明確に別扱いで分離計測されません。そのため、Step 4での補完が必要です。\n\n---\n\n### Step 4: Google Search Console（GSC）でのデータ補完\nGoogle検索におけるAI Overviewsの影響を測るため、Search Consoleで特定キーワードの挙動を追跡します。\n\n* **確認する変化（兆候）：**\n  * **表示回数（Impression）は増えているが、クリック率（CTR）が低下している：**  \n    → AI Overviewsが表示され、ユーザーが検索結果画面だけで解決した（ゼロクリック検索）可能性が高い。\n  * **特定の情報提供系記事のクリック数が減少している：**  \n    → AIの回答に自社サイトが引用されているか、あるいは競合が引用されているかを個別確認する。\n\n---\n\n### 今すぐ始められるアクションチェックリスト\n\n| 順番 | アクション | 作業内容 |\n| :--- | :--- | :--- |\n| **1** | **手動サンプルチェック** | 主要キーワード10個で「Google AI Overviews」と「Perplexity」を検索し、自社サイトが引用されているかスプレッドシートに記録する。 |\n| **2** | **GA4でリファラー確認** | GA4の「トラフィック獲得」レポートで、`perplexity` や `chatgpt` からの流入が過去数ヶ月で発生しているか確認する。 |\n| **3** | **GSCでの主要KWのCTR観察** | 自社サイトで流入の多かった情報系記事のCTR推移を確認する。 |\n\n手動での観測が規模的に難しくなってきた場合は、**AIO/GEO（Generative Engine Optimization）専門の計測ツール**（Profound、Otterly.ai、あるいは大手SEOツールのAI追跡機能など）の導入を検討するとスムーズです。",
+    "error": ""
+   }
+  }
+ },
+ "stance": {
+  "AIO対策の計測方法 5つの指標とレポート雛形・週次運用": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "検索順位だけで判断せず、以下の5指標を週次で追うと、改善する場所が分かります。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "AIO対策の計測は、5指標を週次で同じ問いに対して測り、月次で意思決定するのが基本線です。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "週次・月次の社内共有やクライアント報告でそのまま使えるMarkdown形式のレポート骨子です。"
+   }
+  },
+  "aio対策 レポートに入れる指標はいくつが適切ですか？": {
+   "ChatGPT": {
+    "label": "none",
+    "quote": "AIO対策の月次レポートは、主要指標を5つ程度に絞るのがおすすめです。"
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "結論: 月次レポートの中核指標は5つ前後が適切です。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "指標が多すぎると「結局何がうまくいっていて、次に何をすべきか」が分かりづらくなり、少なすぎるとAI対策特有の成果が見えにくくなります。"
+   }
+  },
+  "aio対策 レポートに引用の中身まで記録すべきですか？": {
+   "ChatGPT": {
+    "label": "yes",
+    "quote": "はい。AIO対策のレポートには、引用元URLだけでなく「AIの回答でどう使われたか」まで記録することをおすすめします。"
+   },
+   "Claude": {
+    "label": "cond",
+    "quote": "結論: 引用の全文までは不要です。ただし「引用元URL・引用された自社ページ・引用の有無」は必ず記録し、回答文の抜粋やスクリーンショットは主要クエリに絞って残すのがよいです。"
+   },
+   "Gemini": {
+    "label": "split",
+    "quote": ""
+   }
+  },
+  "aio対策 AIO対策の計測は何から始めればいいですか？": {
+   "ChatGPT": {
+    "label": "split",
+    "quote": ""
+   },
+   "Claude": {
+    "label": "none",
+    "quote": "結論: まず Search Console と GA4 で現状の基準値を取り、並行して主要クエリでの AI 回答の引用有無を手動で記録するところから始めるのが現実的です。"
+   },
+   "Gemini": {
+    "label": "none",
+    "quote": "まずは何を計測するかを決めます。"
+   }
+  }
+ }
+}
