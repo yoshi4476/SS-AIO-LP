@@ -253,6 +253,7 @@ function doPost(e) {
       case 'gemini_usage':   return json_(geminiUsage_());
       case 'gemini_log':     return json_(geminiLog_(body));
       case 'ai_check_stats': return json_(aiCheckStats_(body));
+      case 'probe_status':   return json_(probeStatus_());
       case 'ai_check_log':   return json_(aiCheckLog_(body));
       case 'ai_recheck_list': return json_(aiRecheckList_());
       case 'ai_recheck_done': return json_(aiRecheckDone_(body));

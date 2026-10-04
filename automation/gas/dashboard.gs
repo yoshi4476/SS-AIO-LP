@@ -152,7 +152,7 @@ function cleanInquiry_(body) {
   const width = sh.getLastColumn();
   const rows = sh.getRange(2, 1, last - 1, width).getValues();
   const MARK = ['接続テスト', '列テスト', '反映確認', '権限確認', '移行後確認',
-                'テスト株式会社', 'example.com', '対応不要'];
+                'テスト株式会社', 'example.com', '対応不要', 'pipeline-check.invalid'];
 
   const del = [];
   rows.forEach(function (r, i) {

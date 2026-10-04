@@ -253,3 +253,16 @@ def test_ai_referral_sources_are_counted():
     check("AI流入: 紛らわしい参照元",
           [K.ai_label(s) for s in ("openai", "chatgpt.com", "gemini.google.com", "google", "(direct)")],
           ["ChatGPT", "ChatGPT", "Gemini", None, None])
+
+
+def test_lead_probe_never_lands_in_ledger():
+    """週次の疎通確認（lead_probe）の送信は、管制塔が見分けて台帳・通知・自動返信に出さない。
+    見分けが台帳への保存より前にあること（後ろだと、テストのたびに担当へ通知が届く）。2026-10-04"""
+    gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
+    form = gs.split("function form_(body) {", 1)[1].split("\nfunction ", 1)[0]
+    i_probe, i_save = form.find("pipeline-check"), form.find("leadSave_(")
+    check("疎通確認: テストの送信を台帳への保存より前に見分ける", 0 <= i_probe < i_save, True)
+    db = (ROOT / "automation" / "gas" / "dashboard.gs").read_text(encoding="utf-8")
+    check("疎通確認: 紛れ込んだテストの行は台帳の掃除で消える", "pipeline-check.invalid" in db, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("疎通確認: 週次で回す", "lead_probe.py" in wf, True)

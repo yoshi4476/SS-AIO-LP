@@ -54,6 +54,13 @@ function form_(body) {
     return { ok: false, error: 'お名前をご入力ください。' };
   }
 
+  // 週次の疎通確認（lead_probe.py）。本物と同じ経路を通ったことだけを記録し、台帳にも通知にも出さない。
+  // 2026-09-18 に診断の送信2件が台帳にもメールにも残らず失われ、気づくまで10日かかった
+  if (/@pipeline-check\.invalid$/i.test(email)) {
+    probeSheet_().appendRow([new Date(), site, type, String(body.referer || d.referer || '').slice(0, 200)]);
+    return { ok: true, probe: true };
+  }
+
   const temp = leadTemp_(type, d.message, d, body.referer || d.referer || '');
   const row = leadSave_(site, type, temp, d, body.referer || d.referer || '');
   const silent = body.silent === true || body.silent === 'true';
@@ -950,6 +957,32 @@ function aiCheckStats_(body) {
     });
   }
   return out;
+}
+
+function probeSheet_() {
+  const ss = book_();
+  let sh = ss.getSheetByName('疎通確認');
+  if (!sh) {
+    sh = ss.insertSheet('疎通確認');
+    sh.appendRow(['日時', 'サイト', '種別', '送信元']);
+  }
+  return sh;
+}
+
+/** サイトごとの最後の疎通確認の日時（lead_probe.py が送った直後に読む） */
+function probeStatus_() {
+  const sh = probeSheet_();
+  const last = {};
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues().forEach(function (r) {
+      const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+      const k = String(r[1] || '');
+      if (!last[k] || last[k] < at) last[k] = at;
+    });
+  }
+  const out = {};
+  Object.keys(last).forEach(function (k) { out[k] = last[k].toISOString(); });
+  return { ok: true, last: out };
 }
 
 function geminiLog_(body) {
