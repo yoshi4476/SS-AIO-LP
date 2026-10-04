@@ -195,6 +195,21 @@ GOOD = re.compile(r"(?:[A-Z_]+_OK=yes|LIVE_CHECK=ok|KW_GATE=ok|RAKKO_MONTH=ok)")
 UNKNOWN = re.compile(r"[A-Z_]+_OK=unknown|GROWTH_DROP=unknown")
 
 
+# 判定はせず「情報:」の行だけを本文に添える。要対応にしないので、これだけでは通知は送られない。
+# 期間のある取り組み（集中モード）は、期間外に何も出さない側で終わらせる
+INFO = ["focus_report.py --line"]
+
+
+def info_lines():
+    out = []
+    for script in INFO:
+        if not (ROOT / "scripts" / script.split()[0]).exists():
+            continue
+        text, _ = run(script)
+        out += [l.strip() for l in text.splitlines() if l.startswith("情報:")]
+    return out
+
+
 def run(script):
     """検査を1本動かして、出力と終了コードを返す。落ちても例外にしない。"""
     try:
@@ -308,6 +323,7 @@ def main():
             lines.append("   " + d[:80])
     if not bad and not prev:
         lines.append("検査%d件すべて問題なし" % len(rows))
+    lines.extend(info_lines())
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     io.open(OUT, "w", encoding="utf-8", newline="\n").write("\n".join(lines) + "\n")

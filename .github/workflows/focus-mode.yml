@@ -1,0 +1,322 @@
+name: Focus Mode
+
+# 集中モード（運用者の決定・2026-10-05から4週間）。週次（Weekly Optimize）に上乗せして、
+# 4〜10位でクリックが取れていない記事の題と、11〜30位で需要のある問いに答えていない記事を直す。
+# 実測（GSC・2026-09-02〜09-29・3サイト合計）で表示の7割が4〜20位にあった。
+# 期限は data/focus_mode.json の until。過ぎた回はまとめを書いて自分を無効にし、何も直さない。
+# 週次の動き・本数・対象はこのワークフローでは変えない（終われば元の運用のまま）
+on:
+  schedule:
+    # 水曜・土曜 04:13 JST（= UTC 火・金 19:13）。記事の枠（JST 08:07〜03:37）の空いている時間で、
+    # 週次（月曜 10:23）とも重ならない。同じグループで待てるのは1件だけなので、
+    # 枠の run が並んでいない時間に始めないと、待機中の記事の run を取り消してしまう
+    - cron: "13 19 * * 2,5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write     # 期限後に gh workflow disable で自分を止める
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  # 期間の判定はグループの外で終える。期間外の run が article-pipeline に並ぶと、
+  # 待機中の記事・週次の run を取り消す（pipeline-multi.yml と同じ理由）
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      state: ${{ steps.st.outputs.state }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: st
+        run: |
+          s=$(python3 scripts/focus_report.py --status | sed -n 's/^FOCUS=//p')
+          echo "集中モード: $s"
+          echo "state=$s" >> "$GITHUB_OUTPUT"
+
+  # 期限を過ぎた回: 書き直しも内部リンクもせず、4週間のまとめを書いて自分を無効にする
+  stop:
+    needs: gate
+    if: needs.gate.outputs.state == 'expired'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: article-pipeline
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: pip install -r requirements.txt
+
+      - name: 4週間のまとめを書く
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          fi
+          python scripts/focus_report.py --final || true
+          rm -f indexing-service-account.json
+          for p in docs/focus-mode-result.md data/focus_mode.json; do if [ -e "$p" ]; then git add "$p"; fi; done
+          git diff --cached --quiet || {
+            git commit -q -m "focus-mode: 4週間のまとめ $(date '+%Y-%m-%d')"
+            for i in 1 2 3; do
+              if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep 5
+            done
+          }
+
+      - name: 集中モードを止める
+        run: gh workflow disable focus-mode.yml --repo "${{ github.repository }}"
+
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json
+
+  focus:
+    needs: gate
+    if: needs.gate.outputs.state == 'active'
+    runs-on: ubuntu-latest
+    # 週次と同じ上限。書き直しは --budget-min で自分を止め、下書きは一時フォルダで書かせるので、
+    # 途中で切られても原稿は書きかけにならない（切られた回はコミットしない）
+    timeout-minutes: 180
+    # 週次・記事の執筆と同じグループ。同じ原稿を同時に書き換えない
+    concurrency:
+      group: article-pipeline
+      cancel-in-progress: false
+    env:
+      HUB_URL: ${{ secrets.HUB_URL }}
+      HUB_SECRET: ${{ secrets.HUB_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
+          npm install -g @anthropic-ai/claude-code
+          # ネイティブバイナリが落ちてこないことがある（postinstallが走らない／
+          # optional依存が省かれる）。実行時まで気づけず、記事生成ごと落ちる。
+          # ここで動作を確かめ、駄目ならインストーラを直接叩き直す。
+          if ! claude --version >/dev/null 2>&1; then
+            echo "claude が動かないため postinstall をやり直します"
+            node "$(npm root -g)/@anthropic-ai/claude-code/install.cjs" || true
+          fi
+          claude --version
+
+      # このあとの工程が手元のページを読むので、先に原稿から作っておく（週次と同じ）
+      - name: 原稿からページを作る
+        run: |
+          mkdir -p automation/logs
+          rm -f automation/logs/findings.txt
+          python scripts/build.py > /tmp/prebuild.log 2>&1 && tail -2 /tmp/prebuild.log || {
+            tail -20 /tmp/prebuild.log
+            echo "::warning::原稿からページを作れませんでした（このあとの工程は古いページを読みます）"
+            echo "要対応: 原稿からページを作れませんでした（$GITHUB_WORKFLOW）" >> automation/logs/findings.txt
+          }
+
+      - name: Git識別情報の設定
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          mkdir -p automation/logs
+          # 配信の基点。最後にこの時点からの差分をまとめて他サイトへ配信する
+          base=$(git rev-parse HEAD)
+          echo "BASE_SHA=$base" >> "$GITHUB_ENV"
+          echo "配信の基点: $base"
+
+      # 鍵はジョブの最初に1回だけ置き、最後の後始末で消す（.gitignore 済み）
+      - name: サービスアカウントの鍵を置く（ジョブで1回）
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          else
+            echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です（GSC/GA4 を使う工程は空振りします）"
+          fi
+
+      # やってはいけない書き換えをこちらで当てて、検算が止めるかを見る（claude は呼ばない）。
+      # 止まらなければ書き直しを飛ばす
+      - name: 検算が効くか確かめる
+        id: guard
+        run: |
+          if python scripts/auto_rewrite.py --selftest; then
+            echo "ok=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=no" >> "$GITHUB_OUTPUT"
+            echo "::error::検算が効いていません。記事の書き換えは行いません"
+            python scripts/hub_client.py error_log rewrite \
+              "auto_rewrite の検算が効いていません（集中モードの書き換えは飛ばしました）" || true
+          fi
+
+      # 書き直しは最初の回だけ。selfheal の再実行（一時的な失敗のとき1回）では飛ばし、二重に直さない。
+      # 4〜10位でクリックが取れていない記事の題（rank_up の対象）。
+      # 直近7日に週次や前の回が手を付けた記事は外す（効いたかを分けて測れなくなる）。
+      # 5本を並列3で下書きさせる（budget 60分なら2巡で全部が一時フォルダで書かれ、原稿へは検算つきで1本ずつ当てる）
+      - name: 4〜10位の題を直す
+        if: steps.guard.outputs.ok == 'yes' && github.run_attempt == 1
+        timeout-minutes: 100
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          n=$(python -c "import json;print(json.load(open('data/focus_mode.json',encoding='utf-8'))['title_per_run'])")
+          python scripts/auto_rewrite.py --write --kind title --limit "$n" --skip-recent 7 --tag focus \
+            --parallel 3 --budget-min 60 || true
+
+      # 11〜30位で、需要のある問いに答える節が無い記事（rank_rescue の対象）
+      - name: 11〜30位の欠けた問いを足す
+        if: steps.guard.outputs.ok == 'yes' && github.run_attempt == 1
+        timeout-minutes: 60
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          n=$(python -c "import json;print(json.load(open('data/focus_mode.json',encoding='utf-8'))['stuck_per_run'])")
+          python scripts/auto_rewrite.py --write --kind stuck --limit "$n" --skip-recent 7 --tag focus \
+            --parallel 3 --budget-min 30 || true
+
+      # 11〜30位へは --rescue（週次と同じ上限）、4〜10位へは自分より上位の記事からだけ送る（--band）
+      - name: 内部リンクを寄せる（11〜30位・4〜10位）
+        run: |
+          for s in ai-lab corporate subsidy; do
+            python scripts/link_boost.py "$s" --rescue --write || true
+            python scripts/link_boost.py "$s" --band=4-10 --write || true
+          done
+
+      # 1本ずつの挿し込みは積み上がりを見られない。週次と同じ見直しを必ず通す
+      - name: 自動修正の見直し（積み上がりと言い回しの偏り）
+        run: python scripts/auto_review.py --fix || true
+
+      - name: 段落の切れ目の崩れを直す
+        run: python scripts/fix_block_breaks.py --write || true
+
+      - name: 効きを測る（開始前の28日と直近28日・順位帯ごと）
+        run: python scripts/focus_report.py --write || true
+
+      - name: 最終ビルドとコミット
+        run: |
+          python scripts/build.py
+          git add -A
+          # 介入の台帳。effect_ab・rewrite_rollback・focus_report が前後を比べる元
+          [ -f automation/logs/auto_fix.jsonl ] && git add -f automation/logs/auto_fix.jsonl
+          if git diff --cached --quiet; then
+            echo "変更なし — コミットをスキップ"
+          else
+            git commit -m "focus-mode: auto $(date '+%Y-%m-%d')" || true
+            pushed=0
+            for i in 1 2 3; do
+              if git pull --rebase origin "${GITHUB_REF_NAME}" && git push; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true     # 途中の rebase を残すと、次の再試行も必ず失敗する
+              sleep 5
+            done
+            [ "$pushed" = 1 ] || { echo "::error::集中モードの直しを push できませんでした"; exit 1; }
+          fi
+
+      # 直した記事は他サイトへ配信しないと本番に反映されない
+      - name: 直した記事を他サイトへ配信
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+        run: |
+          python scripts/publish_changed.py --all --since "$BASE_SHA" --push || true
+          git add -A
+          git diff --cached --quiet || {
+            git commit -q -m "focus-mode: 配信の記録 $(date '+%Y-%m-%d')"
+            git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
+            git push -q || echo "::warning::配信の記録を正本へ push できませんでした"
+          }
+
+      - name: Cloudflare Pagesへデプロイ
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          # 公開前の門: sitemapの404/noindex・git の衝突マーカーがあれば公開しない（seo_audit --gate）
+          python3 scripts/seo_audit.py --gate || { echo "::error::サイト監査の門で止めました（上の ::error:: を直す）"; exit 1; }
+          for i in 1 2 3; do
+            npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
+            echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
+            sleep 40
+          done
+          echo "::error::3回ともデプロイ失敗。次回のデプロイで反映される"
+          exit 1
+
+      - name: 更新URLをIndexNow通知
+        run: python scripts/notify_indexnow.py || true
+
+      - name: Google Indexing API即時登録（本日更新分）
+        run: |
+          if [ -f indexing-service-account.json ]; then
+            python scripts/notify_indexing.py || true
+          else
+            echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
+          fi
+
+      # 同じ日に同じURLを送らないための記録は、週次と同じキャッシュで持ち越す（コミットしない）
+      - name: Bing への送信記録を戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}
+          restore-keys: bing-submit-
+
+      - name: Bing Webmaster へ本日更新のURLを送る
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: |
+          mkdir -p automation/logs
+          for s in ai-lab corporate subsidy; do
+            out=$(python scripts/bing_webmaster.py --site "$s" 2>&1) || true
+            echo "$out" | tail -6
+            echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          done
+
+      - name: Bing への送信記録を残す
+        if: always() && hashFiles('data/bing_submit.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}-focus
+
+      # 知らせることがある回（要対応・失敗）だけ送る。うまくいった回は送らない（8.7）
+      - name: 運用通知（Slack→メール自動フォールバック）
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then icon="🔧"; else icon="🚨"; fi
+          found=""
+          if [ -f automation/logs/findings.txt ]; then found=$(cat automation/logs/findings.txt); fi
+          python scripts/notify_slack.py --routine "$icon 集中モード: ${{ job.status }}
+          $found
+          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json

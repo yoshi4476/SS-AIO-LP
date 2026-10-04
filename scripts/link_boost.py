@@ -156,6 +156,38 @@ def rescue_targets(site, arts, cnt):
     return out
 
 
+def parse_band(argv):
+    """--band=4-10 → (4.0, 10.0)。指定が無ければ None（既定の動きは変えない）"""
+    v = next((x.split("=", 1)[1] for x in argv if x.startswith("--band=")), "")
+    m = re.fullmatch(r"(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)", v)
+    if not m:
+        return None
+    lo, hi = float(m.group(1)), float(m.group(2))
+    return (lo, hi) if 0 < lo <= hi else None
+
+
+def band_targets(site, arts, cnt, lo, hi, pages=None):
+    """順位が lo〜hi 位で被リンクが下限に届かない記事と、各記事より上にいる記事の順位。
+
+    送り元を「その記事より上位の記事」に限るのは、評価を上から流すため。
+    下位の記事から足しても、4〜10位の記事を押し上げる力にならない"""
+    import rank_up
+    if pages is None:
+        import sites as S
+        pages = rank_up.fetch(S.load(site)["domain"])
+    pos = {}
+    for d in pages.values():
+        s = d["slug"]
+        if s in arts and (s not in pos or d["imp"] > pos[s][1]):
+            pos[s] = (d["pos"], d["imp"])
+    out = []
+    for s, (p, imp) in pos.items():
+        if lo - 0.5 < p <= hi + 0.5 and imp >= rank_up.MIN_IMP and cnt.get(s, 0) < RESCUE_FLOOR:
+            out.append((s, p, imp, cnt.get(s, 0)))
+    out.sort(key=lambda x: -(x[2] * max(0.0, hi + 1 - x[1])))
+    return out, {s: v[0] for s, v in pos.items()}
+
+
 def industry_of(text, site_id):
     """その記事が扱う業種。語が重ならない記事同士をつなぐ手がかりにする"""
     try:
@@ -258,6 +290,8 @@ def main():
     site = args[0]
     write = "--write" in sys.argv
     rescue = "--rescue" in sys.argv
+    band = parse_band(sys.argv)
+    ranks = {}
     arts = load(site)
     if not arts:
         raise SystemExit(f"{site} の記事が見つかりません")
@@ -275,6 +309,18 @@ def main():
             if not linkable(only, arts):
                 print(f"   {only} は監修の記録が無いか公開の基準（score・観点の足切り）を通っていない（未公開）ため、リンクを張りません")
                 poor = []
+    elif band:
+        try:
+            tg, ranks = band_targets(site, arts, cnt, *band)
+        except Exception as e:
+            # GSC が読めないときは0本で終える（順位の分からない記事へ「上位から」は送れない）
+            print(f"   {site}: 順位を取れないため見送ります（{str(e)[:60]}）")
+            tg = []
+        tg = [t for t in tg if linkable(t[0], arts)]
+        poor = [s for s, _, _, _ in tg]
+        print(f"■ {site}: {band[0]:g}〜{band[1]:g}位で被リンクが{RESCUE_FLOOR}本未満 {len(poor)}記事（送り元は上位の記事だけ）")
+        for s, pos, imp, n in tg:
+            print(f"     {pos:>5.1f}位 表示{imp:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
     elif rescue:
         tg = [t for t in rescue_targets(site, arts, cnt) if linkable(t[0], arts)]
         poor = [s for s, _, _, _ in tg]
@@ -299,6 +345,8 @@ def main():
         for src, b in arts.items():
             if src == tgt or f"/{tgt}/" in b["body"]:
                 continue
+            if band and not ranks.get(src, 999) < ranks.get(tgt, 0):
+                continue
             hit = sum(1 for w in tw if w in b["body"])
             # 短い語だけの一致は話題が近いとは限らない。言い当てる語を必ず含める
             key = distinctive(a)
@@ -315,7 +363,7 @@ def main():
         p1 = _page1(site)
         cands.sort(key=lambda x: (-x[0], -(x[2] in p1), -x[1]))
         added = 0
-        cap = RESCUE_ADD if rescue else ADD_PER
+        cap = RESCUE_ADD if rescue else ADD_PER   # --band は ADD_PER（週2回走るので1回は少なめ）
         for hit, _, src in cands:
             if added >= cap:
                 break
@@ -352,7 +400,7 @@ def main():
                 b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")
                 arts[src]["body"] = nb
                 # 候補を見るだけの実行で台帳に書くと、effect_ab が当てていない記事を介入群に数える
-                note(tgt, src, "link_rescue" if rescue else "link")
+                note(tgt, src, "link_band" if band else "link_rescue" if rescue else "link")
             added += 1
             done += 1
     print(f"\n   {'追加しました' if write else '候補'}: {done}本")

@@ -834,12 +834,42 @@ def title_locked(slug, today=None, log=None):
     return max(hits) if hits else ""
 
 
+TAG = ""      # --tag。集中モード（focus-mode.yml）の直しを対照群と分けて測るための印。既定は付けない
+
+
 def note(slug, kind, ok, why):
     LOG.parent.mkdir(parents=True, exist_ok=True)
+    rec = {"at": time.strftime("%Y-%m-%d %H:%M"),
+           "by": "auto_rewrite", "slug": slug, "kind": kind,
+           "ok": ok, "note": why, **LAST.pop(slug, {})}
+    if TAG:
+        rec["tag"] = TAG
     with LOG.open("a", encoding="utf-8") as f:
-        f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"),
-                            "by": "auto_rewrite", "slug": slug, "kind": kind,
-                            "ok": ok, "note": why, **LAST.pop(slug, {})}, ensure_ascii=False) + "\n")
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+
+def recently_touched(days, log=None, today=None):
+    """直近 days 日に auto_rewrite が手を付けた記事（直した・検算で戻した）。
+
+    集中モードは週次の上に乗るので、週次（月曜）が直した記事を水曜にまた直すと、
+    どちらが効いたか測れず、28日の判定（rewrite_rollback）も混ざる。戻した記事も外すのは、
+    同じ理由でまた戻る書き直しに時間を使わないため"""
+    from datetime import date, timedelta
+    if days <= 0:
+        return set()
+    f = Path(log) if log else LOG
+    if not f.is_file():
+        return set()
+    since = str((today or date.today()) - timedelta(days=days))
+    out = set()
+    for line in f.read_text(encoding="utf-8").splitlines():
+        try:
+            d = json.loads(line)
+        except ValueError:
+            continue
+        if d.get("by") == "auto_rewrite" and str(d.get("at", ""))[:10] >= since:
+            out.add(d.get("slug", ""))
+    return out
 
 
 def build_prompt(item):
@@ -1170,7 +1200,12 @@ def main():
     ap.add_argument("--selftest", action="store_true",
                     help="検算が効くかを本番の記事で確かめる（claudeは呼ばない）")
     ap.add_argument("--kind", default="", help="種別を絞る（fresh は鮮度更新だけを回す）")
+    ap.add_argument("--skip-recent", type=int, default=0,
+                    help="直近この日数に auto_rewrite が手を付けた記事を外す（0=外さない。集中モードが使う）")
+    ap.add_argument("--tag", default="", help="台帳に残す印（集中モードの直しを対照群と分けるため）")
     a = ap.parse_args()
+    global TAG
+    TAG = a.tag
 
     if a.selftest:
         print("■ 検算の自己診断（やってはいけない書き換えを当てて、止まるか見る）\n")
@@ -1190,6 +1225,14 @@ def main():
         items = compete_items(max(a.limit, 2))
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
+    if a.skip_recent:
+        busy = recently_touched(a.skip_recent)
+        # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う
+        busy |= {x["slug"] for x in items if x["kind"] == "title" and title_locked(x["slug"])}
+        held = [x["slug"] for x in items if x["slug"] in busy]
+        items = [x for x in items if x["slug"] not in busy]
+        if held:
+            print(f"  直近{a.skip_recent}日に手を付けた・題の判定期間中の{len(held)}本を外しました: {', '.join(held[:6])}")
     print(f"■ 人の判断に回っていた直し: {len(items)}件"
           + (f"（1回に{a.limit}本まで）\n" if a.write else "\n"))
     if not items:
