@@ -91,8 +91,13 @@ def data(site, domain):
     title = f"AIに{cfg['topic']}のことを聞くと答えは割れる｜{len(rows)}問の調査（当社調べ）"
     desc = (f"当社が{period}に{who}へ{cfg['topic']}の問いを{len(rows)}問聞いた結果。{split}問でAIどうしの結論が分かれました。"
             f"問いごとの答えと根拠、確かめ方をまとめています。")
-    return {"site": site, "url": cfg["url"], "title": title, "description": desc,
-            "h1": f"AIに{cfg['topic']}のことを聞くと、答えはどれくらい割れるか",
+    import research_cite as RC
+    h1 = f"AIに{cfg['topic']}のことを聞くと、答えはどれくらい割れるか"
+    # コーポレートは会社そのものなので社名だけ。他の2サイトは「社名（サイト名）」で、どのサイトの調査か分かるようにする
+    org = RC.org_label("" if site == "corporate" else S.load(site).get("name", ""))
+    cite = {"line": RC.cite_line(org, h1, max(dates), domain + cfg["url"]), "terms": RC.TERMS, "org": org}
+    return {"site": site, "url": cfg["url"], "title": title, "description": desc, "cite": cite,
+            "h1": h1,
             "lead": f"当社が{who}に{cfg['topic']}の問いを{len(rows)}問聞き、答えの結論と根拠にしたページを集計しました（当社調べ）。",
             "period": period, "engines": sorted(engines), "rows": rows, "split": split, "answers": n_ans,
             "sources": dict(src), "public_pct": src["public"] * 100 // total, "readout_html": cfg["readout"],
@@ -111,6 +116,9 @@ def csv_text(d):
 
 
 def html_body(d):
+    import sys
+    sys.path.insert(0, str(MAIN / "scripts"))
+    import research_cite as RC
     esc = lambda s: html.escape(str(s), quote=True)
     trs = []
     for r in d["rows"]:
@@ -137,6 +145,10 @@ def html_body(d):
   <p><a href="{d["url"]}data.csv" download>この表のデータ（CSV）</a>。引用するときは、調べた日とAIの名前を添えてください。</p>
   </section>
   <section>
+  <h2>引用する場合</h2>
+  {RC.box_html(d["cite"]["line"])}
+  </section>
+  <section>
   <h2>この結果の読み方</h2>
   {d["readout_html"]}
   </section>
@@ -157,7 +169,8 @@ def dataset_ld(d):
     return {"@type": "Dataset", "name": d["title"], "description": d["description"], "url": d["domain"] + d["url"],
             "temporalCoverage": d["period"].replace("〜", "/"),
             "distribution": {"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": d["domain"] + d["url"] + "data.csv"},
-            "creator": {"@type": "Organization", "name": "セブンセンシズ株式会社"}}
+            "usageInfo": d["domain"] + d["url"] + "#cite",
+            "creator": {"@type": "Organization", "name": "セブンセンシズ株式会社", "url": "https://corp.7senses.co.jp/"}}
 
 
 def build(root: Path, domain: str, shell, site="subsidy"):

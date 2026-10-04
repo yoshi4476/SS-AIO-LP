@@ -73,7 +73,11 @@ jobs:
         run: |
           python scripts/build.py
           python tests/test_gates.py || { echo "::error::門が通らないため公開しません"; exit 1; }
+          # 月次のお知らせの下書き（プレスリリース風・SNSの短文）。書いてキューに積むだけで、配信・送信はしない
+          python scripts/research_announce.py --write 2>&1 | tee automation/logs/announce.txt | tail -5 || true
+          grep '^要対応' automation/logs/announce.txt >> automation/logs/findings.txt || true
           git add data/research site
+          for p in docs/announcements data/social_queue.jsonl; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
           git commit -q -m "research: ${MODE} $(date '+%Y-%m-%d')"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || { git rebase --abort; exit 1; }

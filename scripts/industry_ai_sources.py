@@ -687,6 +687,16 @@ def render(ind):
     cite = (f"セブンセンシズ株式会社の調査（{y}年{m}月、{name}に関する{s['questions']}問を{n_engines(s)}つのAIに質問）では、"
             f"{T['find_ex']}のような{T['owner']}を探す質問の出典は、{lp}%が{T['portal']}、{lc}%が{T['owner_site']}でした。"
             f"{T['other_short']}を調べる質問では、出典の{oc}%が{T['owner_site']}で、回答の{oa}%が{T['owner_site']}を1つ以上出典にしていました。")
+    import research_cite as RC
+    page_url = hl["url"]
+    title_cite = f"{name}の質問に、AIは何を出典に答えるか"
+    spec = RC.industry_spec(hl)
+    w, h = RC.size(spec)
+    img = f"/research/{ind}-ai-sources/chart.png"
+    cite_box = RC.box_html(
+        RC.cite_line(RC.org_label(RC.LAB), title_cite, s["date"], page_url), cite,
+        (img, RC.embed_html(RC.LAB_URL + img, page_url, f"{title_cite}（{y}年{m}月の調査）",
+                            f"{RC.org_label(RC.LAB)}「{title_cite}」", w, h), f"{title_cite}の要点の図", w, h))
     groups_q = "".join(f"<li><b>{H.escape(g)}</b>（{len(qs)}問）: {H.escape('／'.join(qs[:4]))} など</li>"
                        for g, qs in QUESTIONS[ind]["groups"].items())
     body = f"""<style>
@@ -732,7 +742,7 @@ def render(ind):
 <p>{seek_txt}</p>
 <p>当社は、{T['owner']}のSEO・AI検索対策を行っています。<a href="/lp/{T['lp']}/" data-cta="research_lp_{T['lp']}">{T['lp_name']}</a>をご覧ください。</p>
 </section>
-<section><h2>引用する場合</h2><p class="rs-cite">{H.escape(cite)}</p>
+<section><h2>引用する場合</h2>{cite_box}
 <p style="font-size:.88rem">集計データ（CSV）: <a href="/research/{ind}-ai-sources/data.csv" download>ダウンロード</a></p></section>
 <section><h2>調査の方法</h2><ul>
 <li>調査日: {s['date']}　質問数: {s['questions']}問　AI: {'・'.join(s['engines'])}</li>
@@ -743,7 +753,8 @@ def render(ind):
 </div>"""
     ld = {"@context": "https://schema.org", "@type": "Dataset",
           "name": f"{name}に関する質問に、AIは何を出典にして答えているか（{y}年{m}月）",
-          "description": cite, "creator": {"@type": "Organization", "name": "セブンセンシズ株式会社", "url": "https://corp.7senses.co.jp/"},
+          "description": cite, "url": page_url, "usageInfo": RC.usage_url(page_url),
+          "creator": {"@type": "Organization", "name": "セブンセンシズ株式会社", "url": "https://corp.7senses.co.jp/"},
           "datePublished": s["date"], "variableMeasured": ["出典のサイトの種類", "出典の割合"],
           "distribution": {"@type": "DataDownload", "encodingFormat": "text/csv",
                            "contentUrl": f"https://ai.7senses.co.jp/research/{ind}-ai-sources/data.csv"},

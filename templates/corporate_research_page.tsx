@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CiteCopy from "@/components/CiteCopy";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMeta } from "@/lib/meta";
 import d from "@/content/research/ai-answers.json";
@@ -75,6 +76,16 @@ export default function AiAnswers() {
             <a href="/research/ai-answers/data.csv" download className="text-pulse underline">この表のデータ（CSV）</a>
             。引用するときは、調べた日とAIの名前を添えてください。
           </p>
+          <h2 className="mt-12 text-2xl font-black">引用する場合</h2>
+          <div id="cite" className="mt-4 max-w-3xl rounded-3xl border border-line bg-raise p-6 text-sm leading-8">
+            <h3 className="font-black">この調査を引用する方へ</h3>
+            <p className="mt-2">{d.cite.terms}</p>
+            <p className="mt-4 font-bold">そのまま貼れる出典の書き方</p>
+            <div className="mt-2 flex flex-wrap items-start gap-3">
+              <p className="flex-1 break-all rounded-2xl border border-line bg-white p-3">{d.cite.line}</p>
+              <CiteCopy text={d.cite.line} />
+            </div>
+          </div>
           <h2 className="mt-12 text-2xl font-black">この結果の読み方</h2>
           <div className="mt-4 max-w-3xl text-sm leading-8" dangerouslySetInnerHTML={{ __html: d.readout_html }} />
           <h2 className="mt-12 text-2xl font-black">調べ方と限界</h2>

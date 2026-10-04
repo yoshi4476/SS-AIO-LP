@@ -132,7 +132,29 @@ def body():
     title = f"AIが出典にするサイトのランキング（{y}年{int(m)}月）"
     desc = (f"歯科・クリニック・不動産・工務店・士業で、地域の事業者を探す質問にAI（Gemini）が出典にしたサイトを、"
             f"出典になった質問の数で並べました（{cur['date']}調べ・毎月更新）。")
-    return title, desc, intro + "".join(secs) + cta
+    import research_cite as RC
+    spec = chart_spec(cur)
+    w, h = RC.size(spec)
+    cite_box = ('<section class="rk-sec"><h2>引用する場合</h2>'
+                + RC.box_html(RC.cite_line(RC.org_label(RC.LAB), title, cur["date"], PAGE_URL), "",
+                              (IMG_PATH, RC.embed_html(RC.LAB_URL + IMG_PATH, PAGE_URL, f"{title}の各業種の1位",
+                                                       f"{RC.org_label(RC.LAB)}「{title}」", w, h),
+                               f"{title}の各業種の1位の図", w, h))
+                + '</section>')
+    return title, desc, intro + "".join(secs) + cite_box + cta
+
+
+PAGE_URL = "https://ai.7senses.co.jp/research/ranking/"
+IMG_PATH = "/research/ranking/chart.png"
+
+
+def chart_spec(cur=None):
+    """貼れる図の中身（最新の月）。数字は集計の n と answered のまま"""
+    import industry_ai_sources as IAS
+    cur = cur or load(months()[-1])
+    names = {ind: (IAS.headline(ind) or {}).get("name") or IAS.QUESTIONS[ind]["name"] for ind in cur["industries"]}
+    import research_cite as RC
+    return RC.ranking_spec(cur, names, PAGE_URL)
 
 
 def main():

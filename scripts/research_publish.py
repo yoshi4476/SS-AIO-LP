@@ -83,7 +83,7 @@ def main():
         return 0
     dest = publish.ensure_clone(cfg, publish._push_token())
     payload = {k: d[k] for k in ("title", "description", "h1", "lead", "period", "engines", "rows",
-                                 "split", "answers", "public_pct", "readout_html")}
+                                 "split", "answers", "public_pct", "readout_html", "cite")}
     payload["dataset"] = RS.dataset_ld(d)
     payload["dataset"]["distribution"]["contentUrl"] = f"https://{cfg['domain']}/research/ai-answers/data.csv"
     files = {
@@ -96,6 +96,8 @@ def main():
         p.write_text(text, encoding="utf-8", newline="\n")
     page.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "templates" / "corporate_research_page.tsx", page)
+    (dest / "src" / "components").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "templates" / "corporate_cite_copy.tsx", dest / "src" / "components" / "CiteCopy.tsx")
     sm = dest / "src" / "app" / "sitemap.ts"
     s = sm.read_text(encoding="utf-8")
     if "/research/ai-answers" not in s:

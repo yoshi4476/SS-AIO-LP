@@ -1564,6 +1564,10 @@ def build_research_pages(all_metas=()):
         page = page.replace("</head>", '<link rel="stylesheet" href="/css/lp-v2.css?v=3">' + _IL.STYLE + "</head>", 1)
         page = page.replace("</head>", '<script type="application/ld+json">'
                             + json.dumps(ld, ensure_ascii=False) + "</script></head>", 1)
+        # 貼れる図はビルドのたびに集計から描き直す（site/ の画像を手で置かない）。描けなければ図の枠を外す
+        import research_cite as _RC
+        if not _RC.write_png(_RC.industry_spec(IAS.headline(ind)), out.parent / "chart.png"):
+            page = _RC.strip_fig(page)
         out.write_text(page, encoding="utf-8", newline="\n")
         (out.parent / "data.csv").write_text(csv, encoding="utf-8-sig", newline="\n")
         made.append(ind)
@@ -1689,6 +1693,9 @@ def build_ranking_page():
                         + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script></head>", 1)
     out = SITE / "research" / "ranking" / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
+    import research_cite as _RC
+    if not _RC.write_png(AR.chart_spec(), out.parent / "chart.png"):
+        page = _RC.strip_fig(page)
     out.write_text(page, encoding="utf-8", newline="\n")
     return u
 
