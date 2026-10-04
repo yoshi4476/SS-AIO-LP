@@ -201,3 +201,17 @@ def test_medical_and_shigyou_articles_state_supervision_scope():
     for k, t in B.SCOPE_NOTE.items():
         check(f"医師・士業が監修したように書かない: {k}", any(w in t for w in ("医師監修", "医師が監修", "弁護士監修", "税理士監修")), False)
     check("業種の無い記事には付けない", B.scope_note({"category": "seo", "slug": "x", "title": "SEOの基本"}), "")
+
+
+def test_ai_split_answers_go_back_into_articles():
+    print("\n■ AIの答えが割れた問い: 調査の文をそのまま記事に入れ、新しい出典URLは足させない")
+    import auto_rewrite as AR
+    check("書き直しの種類 aisplit がある", "aisplit" in AR.WHAT, True)
+    check("外部URLは Markdown と HTML の両方を数える",
+          AR.ext_links('[a](https://x.go.jp/) <a href="https://y.jp/">b</a>'), {"https://x.go.jp/", "https://y.jp/"})
+    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    check("検算: 調査の文がそのまま入ったか・URLが増えていないか", ("調査の文がそのまま入っていません" in src, "出典のURLが増えました" in src), (True, True))
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次で回す", "--kind aisplit" in wf, True)
+    for x in AR.aisplit_items(50):
+        check(f"渡す文は「当社調べ」の固定の言い回し: {x['slug']}", x["claims"][0].endswith("（当社調べ）"), True)

@@ -174,6 +174,37 @@ def fresh_items(limit=4):
     return rows[:limit]
 
 
+def ext_links(s):
+    """本文の外部URL（HTMLの href と Markdown のリンクの両方）"""
+    return set(re.findall(r'href="(https?://[^"]+)"', s)) | set(re.findall(r"\]\((https?://[^)\s]+)\)", s))
+
+
+def aisplit_items(limit=2):
+    """AIに聞いた調査（data/ai_survey）で答えが割れた問いを持ち、まだその文が入っていない記事"""
+    import subsidy_survey as SV
+    rows = []
+    for f in sorted((ROOT / "data" / "ai_survey").glob("*/*.json")):
+        slug = f.stem
+        art = ROOT / "articles" / f"{slug}.md"
+        if not art.is_file():
+            continue
+        rec = json.loads(f.read_text(encoding="utf-8"))
+        split_qs = []
+        for q, by in (rec.get("stance") or {}).items():
+            labels = {v["label"] for v in by.values() if v.get("label") in ("yes", "cond", "no")}
+            if len(labels) >= 2:
+                split_qs.append(q)
+        if not split_qs:
+            continue
+        cl = [c["claim"] for c in SV.claims(slug) if any(f"「{q}」" in c["claim"] for q in split_qs)]
+        body = art.read_text(encoding="utf-8-sig")
+        if not cl or "と聞いたところ" in body:
+            continue                       # 書ける文が無い、または既に入っている
+        rows.append({"kind": "aisplit", "slug": slug, "site": site_of(slug), "claims": cl,
+                     "why": f"AIの答えが割れた問い {len(split_qs)}件（{split_qs[0][:30]}）"})
+    return rows[:limit]
+
+
 def question_items(limit=4):
     """H2に質問形が1本も無い公開記事（表示の多い順は取らず、古い順）"""
     rows = []
@@ -348,6 +379,14 @@ WHAT = {
              "   最も多いものを自然に含める。タイトルと同じ文言の繰り返しは避ける\n"
              "2. 本文・タイトル・keyword・他のフロントマターは1文字も変えない\n"
              "3. 本文に無い数字・事実を書かない"),
+    "aisplit": ("当社がこの記事の問いを ChatGPT・Claude・Gemini に聞いたところ、AIによって答えが割れました。\n"
+                "AIに聞いても答えが定まらない問いに、根拠つきで答えている記事は他にありません。そこを書き足します。\n"
+                "1. 冒頭の断言段落の直後（最初のH2より前）に、次の調査の文を**1文字も変えずに**そのまま1つ入れる:\n"
+                "{claims}\n"
+                "2. その直後に、なぜ答えが割れるのか（条件によって答えが変わる点）と、この記事としての答えを2〜4文で書く。\n"
+                "   答えの根拠は、**この記事にすでにある出典リンクと本文の内容だけ**を使う。新しいURLは足さない\n"
+                "   （AIが存在しないURLを作ることがあるため）。記事の中に根拠が無ければ、断言せず条件を分けて書く\n"
+                "3. 見出しは足さない。上の調査の文以外の数字は足さない。狙う語・タイトル・FAQは変えない"),
     "question": ("この記事のH2見出しは名詞句ばかりで、質問の形がありません。自社の実測で、H2の1〜3割が\n"
                  "質問形の記事は、質問形ゼロの記事より平均4.2位上にいます。AI Overview は質問形の\n"
                  "クエリで64.7%出ます。\n"
@@ -741,6 +780,9 @@ def build_prompt(item):
         allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
         what = what.format(weak=item.get("why", "")[:1500],
                            facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind == "aisplit":
+        allowed = "\n".join(item["claims"])
+        what = what.format(claims="\n".join(f"「{c}」" for c in item["claims"][:1]))
     if kind == "split":
         what = what.format(other_title=item["other_title"], other_url=item["other_url"],
                            shared="」「".join(item["shared"][:3]))
@@ -859,6 +901,12 @@ def run_one(item, write, edited=None):
         # 長さの警告は分ける道具が決まった形で直せる。他の検算は1つも緩めず、もう1回だけ通す
         ng = check(slug, before, before_warns, snap, allowed,
                    item.get("terms") or ())
+    if not ng and kind == "aisplit":
+        after_now = p.read_text(encoding="utf-8-sig")
+        if item["claims"][0] not in after_now:
+            ng = "調査の文がそのまま入っていません（言い換えると調査の数字と食い違う）"
+        elif ext_links(after_now) - ext_links(before[2]):
+            ng = "出典のURLが増えました（記事にあった出典だけで答えること）: " + str(sorted(ext_links(after_now) - ext_links(before[2]))[:2])
     if not ng and kind == "desc":
         # 説明文だけの直し。本文・タイトルが1文字でも変わっていたら通さない
         strip = lambda t: re.sub(r"^description:.*$", "", t, count=1, flags=re.M)
@@ -1016,6 +1064,8 @@ def main():
         items = question_items(max(a.limit, 4))
     elif a.kind == "desc":
         items = desc_items(max(a.limit, 4))
+    elif a.kind == "aisplit":
+        items = aisplit_items(max(a.limit, 2))
     elif a.kind == "split":
         items = split_items(max(a.limit, 4))
     else:

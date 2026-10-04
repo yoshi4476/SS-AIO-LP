@@ -753,6 +753,8 @@ jobs:
         run: |
           n=2; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=1
           python scripts/auto_rewrite.py --write --kind question --limit $n --budget-min 12 2>&1 | tail -6 || true
+          # AIに聞いた調査で答えが割れた問いを、記事の冒頭に調査の文のまま入れ、記事の出典だけで答える
+          python scripts/auto_rewrite.py --write --kind aisplit --limit $n --budget-min 12 2>&1 | tail -6 || true
           # 流入語が説明文の先頭に無い記事の説明文だけを直す（本文が1文字でも変われば戻す）
           python scripts/auto_rewrite.py --write --kind desc --limit $n --budget-min 8 2>&1 | tail -6 || true
           # 同じ語で自社の2本が競り合うが主題は別（統合しない）組を、題の付け分けで直す。
