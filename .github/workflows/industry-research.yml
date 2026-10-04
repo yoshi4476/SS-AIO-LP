@@ -79,11 +79,13 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
+          # 前回の回との差（出典の種類の割合・上位サイトの入れ替わり）を docs に残す。前回の値は git の履歴から取る
+          python scripts/research_diff.py 2>&1 | tail -15 || true
           python scripts/build.py > /dev/null
           python tests/test_gates.py > /tmp/gates.log 2>&1 || { tail -20 /tmp/gates.log; echo "::error::門が通らないため公開しません"; exit 1; }
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          for p in data/research data/ai_survey data/subsidy_survey site; do if [ -e "$p" ]; then git add "$p"; fi; done
+          for p in data/research data/ai_survey data/subsidy_survey docs/research-diff-*.md site; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
           git commit -q -m "業種調査の更新 $(date '+%Y-%m-%d')"
           for i in 1 2 3; do

@@ -716,6 +716,8 @@ jobs:
           # 未登録ページの検査は最後の「再通知」工程（reindex）が行う。ここで index_status を
           # 回すと同じURL検査を2回することになり、週次が上限に当たる原因になっていた
           python scripts/ai_cite_check.py --limit 5 2>&1 | tee -a /tmp/measure.txt | tail -4 || true
+          # 公開28〜40日の新記事の狙う語を、同じAI・同じキャッシュで1回だけ確かめる（引用0は情報。全件失敗だけ要対応）
+          python scripts/ai_followup.py --limit 8 2>&1 | tail -6 || true
           # 引用が取れた記事の型を、次の記事を書く指示へ渡す（引用実績が無ければ空のまま）
           python scripts/win_patterns.py 2>&1 | tail -4 || true
           # 著者の実在（sameAs・実績）を台帳から束ね、記事の Person と著者ページへ流す
