@@ -496,13 +496,24 @@ jobs:
       # 検索エンジンへの通知はデプロイの後に送る。以前は publish_flow の中（コミット・
       # デプロイより前）で送っており、まだ配信されていないURLを知らせて404を踏ませていた。
       # デプロイが落ちた回は、この工程も走らない（出ていないURLを知らせない）
+      # Bing への送信記録を前の回から戻す。戻さないと同じ日の2枠目が同じURLをもう一度送り、枠を食う
+      - name: Bing への送信記録を戻す
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.own == 'True'
+        uses: actions/cache/restore@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}
+          restore-keys: bing-submit-
+
       - name: 新しいURLを検索エンジンへ通知（自前ビルドのサイトのみ）
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.own == 'True'
         continue-on-error: true
         env:
           SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
         run: |
           python scripts/notify_indexnow.py || true
+          python scripts/bing_webmaster.py --site "${{ steps.site.outputs.id }}" || true
           if [ -n "$SA_JSON" ]; then
             printf '%s' "$SA_JSON" > indexing-service-account.json
             python scripts/notify_indexing.py --site "${{ steps.site.outputs.id }}" || true
@@ -510,6 +521,13 @@ jobs:
           else
             echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — Indexing API はスキップ"
           fi
+
+      - name: Bing への送信記録を残す
+        if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.own == 'True' && hashFiles('data/bing_submit.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}
 
       # ワークフローが成功しても、デプロイだけ落ちていることがある。
       # 実際、wrangler の依存パッケージの公開遅れでデプロイが3回とも失敗し、

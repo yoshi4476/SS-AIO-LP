@@ -235,7 +235,11 @@ jobs:
           exit 1
 
       - name: 新規URLをIndexNow通知
-        run: python scripts/notify_indexnow.py || true
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: |
+          python scripts/notify_indexnow.py || true
+          python scripts/bing_webmaster.py || true
 
       - name: Google Indexing API即時登録（本日公開分）
         env:

@@ -928,6 +928,24 @@ jobs:
             cat /tmp/kw-findings/findings.txt >> automation/logs/findings.txt
           fi
 
+      # Bing Webmaster へ sitemap と直近7日の更新URLを送る（3サイト＋お客様）。
+      # findings.py より前に置くのは、未登録・鍵の誤りの「要対応」を通知本文へ持ち越させるため
+      - name: Bing への送信記録を戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}
+          restore-keys: bing-submit-
+
+      - name: Bing Webmaster へ sitemap と更新URLを送る
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: |
+          mkdir -p automation/logs
+          out=$(python scripts/bing_webmaster.py --weekly 2>&1) || true
+          echo "$out" | tail -15
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+
       - name: 見つかったものを集めて知らせる
         env:
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
@@ -979,6 +997,8 @@ jobs:
 
       - name: 登録されていないページを拾って再通知
         timeout-minutes: 20
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}   # 再送のURLを Bing Webmaster にも送る
         run: |
           if [ -f indexing-service-account.json ]; then
             if [ -f /tmp/index-cache/index_cache.json ]; then
@@ -1000,6 +1020,13 @@ jobs:
           else
             echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
           fi
+
+      - name: Bing への送信記録を残す
+        if: always() && hashFiles('data/bing_submit.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}-weekly
 
       - name: 運用通知（Slack→メール自動フォールバック）
         if: always()

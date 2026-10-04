@@ -43,11 +43,12 @@ def sitemap_of(cfg):
         return []
 
 
-def todays_urls(cfg):
-    """本日公開・更新の記事URL。記事の site は原稿のカテゴリから決まる"""
+def todays_urls(cfg, days=1):
+    """本日（days>1 なら直近 days 日）公開・更新の記事URL。記事の site は原稿のカテゴリから決まる"""
     import sites as S
     import build
-    today = str(date.today())
+    from datetime import timedelta
+    dates = "|".join(str(date.today() - timedelta(days=i)) for i in range(max(1, days)))
     out = []
     for p in (ROOT / "articles").glob("*.md"):
         t = p.read_text(encoding="utf-8-sig")
@@ -55,7 +56,7 @@ def todays_urls(cfg):
         if not m:
             continue
         fm = m.group(1)
-        if not re.search(rf"^(date|dateModified|modified):\s*{today}\s*$", fm, re.M):
+        if not re.search(rf"^(date|dateModified|modified):\s*(?:{dates})\s*$", fm, re.M):
             continue
         cat = re.search(r"^category:\s*(\S+)", fm, re.M)
         if not cat or S.find_category_owner(cat.group(1)) != cfg["id"]:

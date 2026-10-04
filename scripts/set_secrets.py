@@ -39,6 +39,8 @@ TO_GITHUB = {
     "GBP_CLIENT_JSON", "GBP_TOKENS_JSON",
     # 表示速度の実測（cwv_check）。YOUTUBE_API_KEY のプロジェクトでは PageSpeed API が使えず、週次で測れなかった
     "PAGESPEED_API_KEY",
+    # Bing Webmaster への URL・sitemap 送信（bing_webmaster）。無ければ送らない
+    "BING_WEBMASTER_API_KEY",
     # AI検索の引用の実測（ai_cite_check）。鍵のあるAIだけに聞く
     "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "XAI_API_KEY", "CLAUDE_CITE_API_KEY",
     # ワークフローが使うのにここに無かった鍵。.env だけにあり CI で空のまま動いていた（2026-10-03 門で照合）
@@ -103,6 +105,10 @@ RAKKO_API_KEY=
 OPENAI_API_KEY=
 # 発行: https://www.perplexity.ai/settings/api
 PERPLEXITY_API_KEY=
+
+# ── Bing への URL・sitemap 送信（無ければ送らない）──
+# 発行: https://www.bing.com/webmasters → 右上の設定（歯車）→ API アクセス → API キー → 生成
+BING_WEBMASTER_API_KEY=
 
 # ── 一次情報の収集 ──────────────────────────────────────────
 # 発行: https://console.cloud.google.com/apis/credentials

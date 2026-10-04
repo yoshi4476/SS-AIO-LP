@@ -251,6 +251,16 @@ def _indexnow(urls):
     return ok
 
 
+def _bing(urls):
+    """Bing Webmaster にも同じURLを送る（鍵が無ければ何もしない）。sitemap は週次の --weekly が送る"""
+    import bing_webmaster as BW
+    try:
+        for r in BW.send_urls(urls):
+            print(f"    Bing Webmaster: {r['site']} {r['sent']}件 ({r['state']})")
+    except Exception as e:
+        print(f"    Bing Webmaster に失敗: {type(e).__name__}")
+
+
 _left = [RESEND_MAX]
 
 
@@ -292,6 +302,7 @@ def _publish(idx, d, ng, dry):
         time.sleep(0.2)
     print(f"    通知: 成功 {ok}件 / 失敗 {fail}件")
     _indexnow([u for u, _ in todo])
+    _bing([u for u, _ in todo])
     _left[0] -= len(todo)
     # Indexing API に送れたURLだけ日付を残す。IndexNow だけ通ったURLまで残すと、
     # Google への再送が見送り期間のあいだ止まる（失敗したものは次の週にもう一度送る）

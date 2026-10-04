@@ -48,6 +48,8 @@ data/clients/*/private.json
 data/rakko_cache/
 data/rakko_volume.json
 data/rakko_spend.jsonl
+# Bing への送信記録（同じ日に二度送らないため）。CI ではキャッシュで持ち越す
+data/bing_submit.json
 docs/kw-plan-*.dry.md
 
 # GSCから取り直せる派生キャッシュ（112KB・週次で全書き換え）

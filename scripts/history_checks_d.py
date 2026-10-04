@@ -32,7 +32,7 @@ UA = "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"
 # 無ければ使わない作りの鍵。無いことを要対応にはしない（入れると執筆が従量課金に切り替わる鍵もある）
 OPTIONAL = {"ANTHROPIC_API_KEY", "SLACK_WEBHOOK_URL", "CLAUDE_CITE_API_KEY", "XAI_API_KEY",
             "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "GBP_CLIENT_JSON", "GBP_TOKENS_JSON",
-            "CODEX_AUTH_JSON", "X_BEARER_TOKEN"}
+            "CODEX_AUTH_JSON", "X_BEARER_TOKEN", "BING_WEBMASTER_API_KEY"}
 SNS_PREFIX = ("FB_", "IG_", "LINKEDIN_", "THREADS_", "SOCIAL_TOKENS")
 
 
