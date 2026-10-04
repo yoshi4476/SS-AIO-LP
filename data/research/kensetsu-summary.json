@@ -147,8 +147,8 @@
  "per_answer": {
   "全体": {
    "answers": 93,
-   "video": 21,
    "portal": 75,
+   "video": 21,
    "media": 36,
    "clinic": 90,
    "maker": 39,
@@ -157,8 +157,8 @@
   },
   "地域で探す": {
    "answers": 19,
-   "video": 4,
    "portal": 19,
+   "video": 4,
    "media": 5,
    "clinic": 17,
    "maker": 3,
@@ -187,18 +187,18 @@
   "電気工事の費用や選び方": {
    "answers": 19,
    "media": 6,
+   "portal": 16,
    "video": 7,
    "clinic": 18,
-   "portal": 16,
-   "other": 4,
+   "public": 4,
    "maker": 10,
-   "public": 4
+   "other": 4
   },
   "空調（エアコン）工事の費用や選び方": {
    "answers": 19,
+   "maker": 13,
    "other": 9,
    "clinic": 19,
-   "maker": 13,
    "media": 11,
    "portal": 9,
    "video": 1,

@@ -151,8 +151,8 @@
  "per_answer": {
   "全体": {
    "answers": 85,
-   "media": 49,
    "portal": 73,
+   "media": 49,
    "clinic": 82,
    "review": 3,
    "other": 12,
@@ -162,8 +162,8 @@
   },
   "地域で探す": {
    "answers": 20,
-   "media": 11,
    "portal": 18,
+   "media": 11,
    "clinic": 18,
    "review": 3,
    "other": 7,
@@ -172,8 +172,8 @@
   },
   "引っ越し": {
    "answers": 15,
-   "clinic": 14,
    "portal": 15,
+   "clinic": 14,
    "maker": 9,
    "media": 10,
    "public": 4,
@@ -182,8 +182,8 @@
   },
   "チャーター便": {
    "answers": 16,
-   "clinic": 16,
    "portal": 13,
+   "clinic": 16,
    "public": 3,
    "video": 1,
    "media": 8,
@@ -192,18 +192,18 @@
   },
   "倉庫・保管": {
    "answers": 18,
-   "clinic": 18,
-   "portal": 17,
    "media": 10,
+   "portal": 17,
+   "clinic": 18,
    "maker": 7,
-   "public": 5,
    "other": 1,
+   "public": 5,
    "video": 1
   },
   "配送料金": {
    "answers": 16,
-   "clinic": 16,
    "portal": 10,
+   "clinic": 16,
    "maker": 11,
    "media": 10,
    "other": 1,

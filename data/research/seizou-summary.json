@@ -139,9 +139,9 @@
   "全体": {
    "answers": 81,
    "maker": 81,
+   "other": 10,
    "portal": 50,
    "public": 13,
-   "other": 10,
    "media": 28,
    "video": 2,
    "clinic": 4
@@ -149,9 +149,9 @@
   "地域で探す": {
    "answers": 20,
    "maker": 20,
+   "other": 7,
    "portal": 14,
    "public": 11,
-   "other": 7,
    "media": 2
   },
   "費用・見積": {
@@ -175,8 +175,8 @@
    "maker": 16,
    "portal": 9,
    "media": 6,
-   "video": 1,
    "clinic": 2,
+   "video": 1,
    "public": 1
   },
   "材質・図面・品質": {

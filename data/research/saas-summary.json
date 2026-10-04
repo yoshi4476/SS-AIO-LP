@@ -146,21 +146,21 @@
  "per_answer": {
   "全体": {
    "answers": 84,
-   "portal": 57,
    "other": 21,
+   "maker": 54,
    "public": 22,
    "clinic": 44,
-   "maker": 54,
+   "portal": 57,
    "media": 78,
    "video": 18
   },
   "地域で探す": {
    "answers": 20,
-   "portal": 18,
    "other": 5,
+   "maker": 9,
    "public": 10,
    "clinic": 19,
-   "maker": 9,
+   "portal": 18,
    "media": 16,
    "video": 4
   },
@@ -175,30 +175,30 @@
   },
   "選び方を調べる": {
    "answers": 15,
-   "media": 15,
    "maker": 12,
-   "portal": 7,
+   "media": 15,
    "public": 5,
    "clinic": 5,
-   "video": 4,
-   "other": 2
+   "portal": 7,
+   "other": 2,
+   "video": 4
   },
   "製品やサービスを比べる": {
    "answers": 17,
-   "maker": 14,
+   "public": 7,
    "portal": 15,
    "other": 6,
-   "public": 7,
+   "maker": 14,
    "media": 16,
-   "video": 4,
-   "clinic": 6
+   "clinic": 6,
+   "video": 4
   },
   "導入や運用の悩みを調べる": {
    "answers": 14,
    "portal": 6,
    "other": 1,
-   "media": 14,
    "maker": 8,
+   "media": 14,
    "clinic": 3,
    "video": 3
   }
