@@ -1494,7 +1494,14 @@ def build_research_pages(all_metas=()):
         page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/research/{ind}-ai-sources/")
         # 最初の画面はトップ・業種別LPと同じ作り。末尾の帯はその業種のLPと30秒診断へ
-        page = re.sub(r'<section class="hero">.*?</section>', lambda m: IAS.hero(ind), page, count=1, flags=re.S)
+        # 調査の数字を見た直後に「御社の地域では？」の入口を置く（末尾の帯だけだと、最後まで読んだ人にしか届かない）
+        _aic = {"dental": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten", "shigyou": "zeirishi"}.get(ind, "")
+        _entry = ('<section class="section" style="padding-top:0"><div style="max-width:1120px;margin:0 auto;padding:18px 22px;'
+                  'border:1px solid var(--line,#e3e7ee);border-radius:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">'
+                  '<p style="margin:0;font-weight:700">この調査は全国の質問です。御社の地域で、AIが何を出典にしているかを確かめませんか。</p>'
+                  f'<a class="btn btn-primary" href="/tools/ai-check/{"?ind=" + _aic if _aic else ""}" data-cta="research_top_aicheck_{ind}">'
+                  '御社の地域で確かめる（無料）</a></div></section>')
+        page = re.sub(r'<section class="hero">.*?</section>', lambda m: IAS.hero(ind) + _entry, page, count=1, flags=re.S)
         page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
         page = re.sub(r'<section class="section">\s*<div class="cta reveal">.*?</section>\n?',
                       lambda m: IAS.cta_band(ind), page, count=1, flags=re.S)

@@ -20,18 +20,33 @@
   });
 
   // ロボットよけ（Cloudflare Turnstile）。サイトキーが設定されているときだけ、送信ボタンの上に出す
-  fetch("/api/ai-check").then(function (r) { return r.json(); }).then(function (c) {
-    if (!c || !c.turnstile) return;
-    var box = document.createElement("div");
-    box.className = "cf-turnstile";
-    box.setAttribute("data-sitekey", c.turnstile);
-    box.style.margin = "12px 0";
-    btn.parentNode.insertBefore(box, btn);
-    var s = document.createElement("script");
-    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    s.async = true;
-    document.head.appendChild(s);
-  }).catch(function () {});
+  // 部品は約590KBあり、開いた時点で読むとスマホでページの表示が最大6秒かかった（2026-10-04 の計測）。
+  // 入力欄に触れたときに初めて読む（診断する人だけが読み込む）
+  // 調査ページなどから ?ind=<業種> で来たら、その業種を選んだ状態で開く
+  try {
+    var pre = new URLSearchParams(location.search).get("ind");
+    var sel = form.querySelector('select[name="industry"]');
+    if (pre && sel && sel.querySelector('option[value="' + pre.replace(/[^a-z]/g, "") + '"]')) sel.value = pre;
+  } catch (x) {}
+  var tsLoaded = false;
+  function loadTurnstile() {
+    if (tsLoaded) return;
+    tsLoaded = true;
+    fetch("/api/ai-check").then(function (r) { return r.json(); }).then(function (c) {
+      if (!c || !c.turnstile) return;
+      var box = document.createElement("div");
+      box.className = "cf-turnstile";
+      box.setAttribute("data-sitekey", c.turnstile);
+      box.style.margin = "12px 0";
+      btn.parentNode.insertBefore(box, btn);
+      var s = document.createElement("script");
+      s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      s.async = true;
+      document.head.appendChild(s);
+    }).catch(function () {});
+  }
+  form.addEventListener("focusin", loadTurnstile);
+  form.addEventListener("pointerdown", loadTurnstile);
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -82,7 +97,7 @@
           step = "fix_order";
           nextHtml = "<p><b>まず、AIが御社を出典に選べる状態かを確かめる順番があります。</b>業種別のチェックリスト（無料・PDF）に、直す順に並べています。</p><div class=\"btns\">" +
             '<a class="btn btn-primary" data-next="' + step + '" href="/download/' + (ck ? "?ind=" + ck : "") + '" data-cta="ai_check_next_checklist">直す順番のチェックリストを受け取る</a>' +
-            '<a class="btn btn-ghost" data-next="' + step + '_consult" href="/lp/?src=ai_check_0#form" data-cta="ai_check_next_consult0">何から直すか無料で相談する</a></div>';
+            '<a class="btn btn-ghost" data-next="' + step + '_consult" href="/lp/?src=ai_check_0#form" data-cta="ai_check_next_consult0">何から直すか無料で相談する</a>' + lp + "</div>";
         } else if (d.cited < 3) {
           step = "partial";
           nextHtml = "<p><b>3問中" + d.cited + "問で出典に入っています。残りの質問で出典に入らない理由は、質問ごとに違います。</b>出典に入った質問と入らなかった質問の差を、無料でお伝えします。</p><div class=\"btns\">" +
