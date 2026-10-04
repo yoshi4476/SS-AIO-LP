@@ -50,6 +50,11 @@ function form_(body) {
   // 本文の項目名はサイトごとに違う（コーポレートは detail）。message に寄せないと
   // 転送された問い合わせが「必須項目が入力されていません」で弾かれ、台帳に残らなかった
   if (!body_(d.message)) d.message = d.detail || d.body || d.topic || '';
+  // 任意の「希望の連絡方法」「相談したい時期」は列を増やさず本文の末尾に添える（3サイト共通・台帳の列ずれを起こさない）
+  const extra = [['希望の連絡方法', d.contact_way], ['相談したい時期', d.contact_when]]
+    .filter(function (p) { return clean_(p[1]); })
+    .map(function (p) { return '【' + p[0] + '】' + clean_(p[1]); });
+  if (extra.length) d.message = (body_(d.message) ? String(d.message) + '\n\n' : '') + extra.join('\n');
   const type = String(d.type || 'contact');
   const site = siteLabel_(body.site || d.site) || '（不明）';
   const name = clean_(d.name);

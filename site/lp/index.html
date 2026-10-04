@@ -609,6 +609,23 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <label>詳細（任意）
       <textarea name="message" rows="4" placeholder="現在の集客状況やお困りごとをご記入ください"></textarea>
     </label>
+    <label>希望の連絡方法（任意）
+      <select name="contact_way">
+        <option value="">指定なし</option>
+        <option>メール</option>
+        <option>電話</option>
+        <option>オンライン面談</option>
+      </select>
+    </label>
+    <label>相談したい時期（任意）
+      <select name="contact_when">
+        <option value="">指定なし</option>
+        <option>すぐに</option>
+        <option>1か月以内</option>
+        <option>3か月以内</option>
+        <option>情報収集中</option>
+      </select>
+    </label>
     <label style="display:flex;gap:.7em;align-items:flex-start;font-weight:500;cursor:pointer;">
       <input type="checkbox" required style="width:auto;margin-top:.55em;accent-color:var(--blue);">
       <span style="font-size:.84rem;"><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する<span class="req">必須</span></span>

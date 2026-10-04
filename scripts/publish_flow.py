@@ -145,6 +145,8 @@ def main():
 
     # 1. 画像（アイキャッチ・図解）
     run([PY, "scripts/make_images.py", slug], check=False)
+    # 図解のはみ出し・英語だけの段・欠けをその場で知らせる（止めない。週次の findings でも届く）
+    run([PY, "scripts/image_check.py", slug], check=False)
 
     # 2. 機械採点18項目（全PASSが公開条件）
     if run([PY, "scripts/score_check.py", slug], check=False) != 0:

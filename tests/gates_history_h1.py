@@ -119,3 +119,23 @@ def test_kw_guard_unknown_when_gsc_missing():
     gate = (ROOT / "scripts" / "kw_gate.py").read_text(encoding="utf-8")
     check("kw_gate: 判定不能で語を退避・記事を隔離しない",
           ("level < 2 or level == 3" in gate, "if level == 2:" in gate), (True, True))
+
+
+def test_inquiry_forms_carry_contact_preferences():
+    print("\n■ 問い合わせフォーム: 希望の連絡方法・相談したい時期（任意）を3サイトとも管制塔へ渡す")
+    src = GS.read_text(encoding="utf-8")
+    form = src.split("function form_(body) {", 1)[1].split("\nfunction ", 1)[0]
+    check("form_: 2項目を本文の末尾に添える（列を増やさない）",
+          ("d.contact_way" in form, "d.contact_when" in form), (True, True))
+    check("form_: 営業の判定より前に添える", form.find("d.contact_way") < form.find("isSales_("), True)
+    pages = {
+        "ai-lab LP": ROOT / "site" / "lp" / "index.html",
+        "ai-lab 問い合わせ": ROOT / "site" / "contact" / "index.html",
+        "補助金": ROOT / ".publish-work" / "subsidy" / "index.html",
+        "コーポレート": ROOT / ".publish-work" / "corporate" / "src" / "components" / "ContactForm.tsx",
+    }
+    for name, p in pages.items():
+        if not p.is_file():
+            continue
+        s = p.read_text(encoding="utf-8")
+        check(f"{name}: 2項目がある", ("contact_way" in s, "contact_when" in s), (True, True))
