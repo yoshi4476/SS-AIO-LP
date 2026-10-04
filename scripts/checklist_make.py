@@ -244,11 +244,11 @@ table.mk thead th{{background:#eef3fb}}
 <li>・担当者が本業と兼ねていて、月に1回の見直しが続かない。</li>
 </ul>
 <h2>8. 自社で進めるか、任せるか</h2>
-<table class="mk"><thead><tr><th>やり方</th><th>向いている場合</th><th>費用の目安（{e(PRICE['label'])}）</th></tr></thead><tbody>
-{"".join(f"<tr><th>{e(r['label'])}</th><td>{e(WHO[r['id']])}</td><td>{e(r['range'])}</td></tr>" for r in PRICE['ranges'])}
+<table class="mk"><thead><tr><th>やり方</th><th>向いている場合</th></tr></thead><tbody>
+{"".join(f"<tr><th>{e(r['label'])}</th><td>{e(WHO[r['id']])}</td></tr>" for r in PRICE['ranges'])}
 </tbody></table>
 <p class="why">自社で進める場合も、担当者の時間がかかります。1〜2の設定だけを自社で直し、3〜5を任せる分け方もできます。
-当社の料金は、無料相談で御社の状況（今の印の数・ページの数・地域）をうかがってからご案内します。</p>
+それぞれのやり方の費用の目安と当社の料金は、お問い合わせいただいた方に、御社の状況（今の印の数・ページの数・地域）をうかがってからお伝えします。</p>
 <h2>9. 当社に任せた場合の進め方</h2>
 <div class="steps">
 <div><b>1. 無料相談</b>このチェックリストの結果をもとに、どこから直すと効果が大きいかを一緒に決めます。</div>

@@ -266,3 +266,12 @@ def test_lead_probe_never_lands_in_ledger():
     check("疎通確認: 紛れ込んだテストの行は台帳の掃除で消える", "pipeline-check.invalid" in db, True)
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("疎通確認: 週次で回す", "lead_probe.py" in wf, True)
+
+
+def test_checklist_shows_no_prices():
+    """業種別チェックリスト（無料ツールを使った人へのPDF）に金額を書かない。費用は問い合わせた人にだけ伝える（2026-10-04）"""
+    import re as _re
+    import checklist_make as C
+    hits = {k: _re.findall(r"[0-9０-９,]+万|月数[万十百]|[0-9,]+円", _re.sub(r"<style.*?</style>", "", C.page(k), flags=_re.S))
+            for k in C.INDUSTRIES}
+    check("チェックリストに金額が無い", {k: v for k, v in hits.items() if v}, {})
