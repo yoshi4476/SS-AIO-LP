@@ -522,6 +522,16 @@ try:
 except Exception as e:
     print(f"AIへの聞き取り調査のページを作れませんでした: {e}")
 
+# 配信物の生成（tools/make_dist.py）が research/ を配信対象に入れていなければ足す。
+# 2026-10-04: sitemap に載せたのに PUBLIC_DIRS に無く、配信先のビルドが「404になる」で止まり続けた
+if research_done:
+    _md = ROOT / "tools" / "make_dist.py"
+    if _md.is_file():
+        _t = _md.read_text(encoding="utf-8")
+        _m = re.search(r"PUBLIC_DIRS\s*=\s*\[([^\]]*)\]", _t)
+        if _m and '"research"' not in _m.group(1):
+            _md.write_text(_t[:_m.end(1)] + ', "research"' + _t[_m.end(1):], encoding="utf-8", newline="\n")
+
 # ---- sitemap.xml ----
 STATIC = [("/", "2026-07-21", "1.0"), ("/blog/", "2026-07-21", "0.8"),
           ("/service/hojokin/", "2026-07-21", "0.9"), ("/service/dev/", "2026-07-21", "0.8"),
