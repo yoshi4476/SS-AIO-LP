@@ -501,6 +501,8 @@ def test_client_onboarding_is_one_sheet():
         "kw_seeds.industries": nl.join("業種%d" % i for i in range(25)),
         "kw_seeds.intents": nl.join("意図%d" % i for i in range(10)),
         "facts.1.as_of": "2026-09",
+        # 監修者は同意（可）とメールアドレスの形を見る（2026-10-05）
+        "supervisor.consent": "可", "supervisor.contact": "sato@example.jp",
     })
     cfg = ci.to_config(got)
     check("シートから設定が組み立つ", bool(cfg["main_offer"] and cfg["categories"]), True)
