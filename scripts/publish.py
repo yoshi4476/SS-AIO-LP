@@ -755,6 +755,9 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         out = out.replace("</head>", extra["hreflang"] + "\n</head>", 1)
 
     out = apply_credit(out, credit, sites_mod.article_url(cfg, meta), meta)
+    # 先方の雛形が robots を持たない・index,follow だけでも、見え方の指定を1つの meta にまとめて足す
+    import search_preview
+    out = search_preview.robots_tag(out)
     page = dest / page_dir(cfg) / meta["slug"] / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(out, encoding="utf-8", newline="\n")
@@ -841,6 +844,23 @@ def _public_file(dest: Path, name: str):
     return None
 
 
+def _media_xml(dest: Path, cfg, meta, url):
+    """記事の画像（アイキャッチ・図解）と埋め込んだ動画のサイトマップ行。書き出したページから拾う。
+    図解はこの時点でまだ配信先へ複製していないので、複製元（site/images/<slug>/）にあれば実在とみなす"""
+    import search_preview as SP
+    from urllib.parse import urlparse
+    f = dest / page_dir(cfg) / meta["slug"] / "index.html"
+    if not f.is_file():
+        return ""
+    page = f.read_text(encoding="utf-8")
+
+    def exists(p):
+        rel = p.lstrip("/")
+        return any(c.is_file() for c in (dest / rel, dest / "public" / rel, ROOT / "site" / rel))
+    o = urlparse(url)
+    return SP.media_lines(page, meta["slug"], f"{o.scheme}://{o.netloc}", exists)
+
+
 def _update_external_index(dest: Path, cfg, meta):
     """相手サイトのsitemap.xmlとllms.txtに新記事を足す（検出されないと公開の意味がない）"""
     touched = []
@@ -850,8 +870,9 @@ def _update_external_index(dest: Path, cfg, meta):
         t = sm.read_text(encoding="utf-8")
         if url not in t:
             entry = (f"  <url>\n    <loc>{url}</loc>\n"
-                     f"    <lastmod>{meta['date']}</lastmod>\n  </url>\n")
-            t = t.replace("</urlset>", entry + "</urlset>")
+                     f"    <lastmod>{meta['date']}</lastmod>\n" + _media_xml(dest, cfg, meta, url) + "  </url>\n")
+            import search_preview
+            t = search_preview.ensure_ns(t.replace("</urlset>", entry + "</urlset>"))
             sm.write_text(t, encoding="utf-8", newline="\n")
             touched.append(sm)
     lt = _public_file(dest, "llms.txt")

@@ -201,7 +201,7 @@ def page(url_path, title, desc, h1, lead, cards, current_cat, crumb_leaf, hub_ht
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{DOMAIN}{url_path}">
-<meta name="robots" content="index,follow">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -463,7 +463,7 @@ def research_shell(url_path, title, desc, h1, lead, body, crumb_leaf, jsonld_ext
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{DOMAIN}{url_path}">
-<meta name="robots" content="index,follow">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -544,9 +544,18 @@ for name, (slug, _, _) in CATS.items():
     cat_arts = [a for a in arts if a["cat"] == name]
     last = max((a["mod"] for a in cat_arts), default="2026-07-21")
     urls.append(f"  <url>\n    <loc>{DOMAIN}/blog/category/{slug}/</loc>\n    <lastmod>{last}</lastmod>\n    <priority>0.6</priority>\n  </url>")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import search_preview  # noqa: E402
+
+# 記事の画像（アイキャッチ・図解）と埋め込んだ動画も載せる。描いたページから拾い、実在する画像だけ
+n_img = n_vid = 0
 for a in arts:
     pr = "0.9" if a["slug"] == "ai-hojokin-guide-2026" else "0.7"
-    urls.append(f"  <url>\n    <loc>{DOMAIN}/blog/{a['slug']}/</loc>\n    <lastmod>{a['mod']}</lastmod>\n    <priority>{pr}</priority>\n  </url>")
+    _page = (ROOT / "blog" / a["slug"] / "index.html").read_text(encoding="utf-8")
+    _media = search_preview.media_lines(_page, a["slug"], DOMAIN, lambda p: (ROOT / p.lstrip("/")).is_file())
+    n_img += _media.count("<image:image>")
+    n_vid += _media.count("<video:video>")
+    urls.append(f"  <url>\n    <loc>{DOMAIN}/blog/{a['slug']}/</loc>\n    <lastmod>{a['mod']}</lastmod>\n    <priority>{pr}</priority>\n{_media}  </url>")
 if hub_pairs:
     urls.append(f"  <url>\n    <loc>{DOMAIN}/industry/</loc>\n    <lastmod>{arts[0]['date']}</lastmod>\n    <priority>0.6</priority>\n  </url>")
     for i, v in hub_pairs:
@@ -586,9 +595,11 @@ if llms_path.is_file():
 (ROOT / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n'
     "<!-- 自動生成: gen_blog_pages.py。lastmodは記事の公開/更新日のみ変更 -->\n"
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    + search_preview.urlset_open() + "\n"
     + "\n".join(urls) + "\n</urlset>\n", encoding="utf-8")
-print(f"生成: sitemap.xml ({len(urls)} URLs)")
+print(f"生成: sitemap.xml ({len(urls)} URLs・画像{n_img}・動画{n_vid})")
+# 手書きの固定ページも含めて、検索結果での見え方の指定をそろえる（noindex のページは触らない）
+print(f"robots の見え方の指定: {search_preview.apply_dir(ROOT)}ページ")
 print("done")
 
 

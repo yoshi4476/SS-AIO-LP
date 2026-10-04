@@ -26,7 +26,7 @@ import re
 import sys
 from datetime import date
 from pathlib import Path
-from urllib.parse import quote as urlquote
+from urllib.parse import quote as urlquote, urlparse
 
 import yaml
 
@@ -1273,8 +1273,8 @@ def hide_data_pages():
 
 def build_sitemap(article_entries):
     today = date.today().isoformat()
-    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
-             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    import search_preview as SP
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>', SP.urlset_open()]
     for p in STATIC_PAGES:
         # 一次データを非公開にしている間は /data/ が無い。載せたままだと sitemap に404が出る（Ahrefs 2026-09-29）
         if p == "data/" and not _data_public():
@@ -1310,8 +1310,15 @@ def build_sitemap(article_entries):
             lines.append(f"  <url><loc>{SITE_URL}/{lg}/</loc><lastmod>{today}</lastmod></url>")
         for d in sorted((SITE / lg).glob("*/*/index.html")):
             lines.append(f"  <url><loc>{SITE_URL}/{lg}/{d.parent.parent.name}/{d.parent.name}/</loc><lastmod>{today}</lastmod></url>")
+    # 記事の画像（アイキャッチ・図解）と埋め込んだ動画も載せる。描いたページから拾うので、
+    # 止めた記事・消えた画像・埋め込みの無い動画は載らない
+    def exists(p):
+        return (SITE / p.lstrip("/")).is_file()
     for meta, url in article_entries:
-        lines.append(f"  <url><loc>{url}</loc><lastmod>{meta['modified']}</lastmod></url>")
+        f = SITE / urlparse(url).path.strip("/") / "index.html"
+        page = f.read_text(encoding="utf-8") if f.is_file() else ""
+        lines.append(SP.url_xml(url, meta["modified"], SP.page_images(page, meta["slug"], SITE_URL, exists),
+                                SP.page_videos(page)))
     lines.append("</urlset>")
     (SITE / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -2267,6 +2274,10 @@ def main():
     industry_thumbs.apply_shelf_bands(SITE)  # 用語集・テーマ・比較表の見出しの下に、写真の棚から内容に合う写真
     hide_data_pages()
     ensure_og()
+    import search_preview
+    n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）
+    if n:
+        print(f"robots の見え方の指定: {n}ページ")
     build_sitemap(entries)
     save_body_hashes()
     build_feed(entries)

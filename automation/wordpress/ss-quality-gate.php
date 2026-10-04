@@ -225,3 +225,19 @@ add_action('manage_post_posts_custom_column', function ($col, $post_id) {
         printf('<strong style="color:%s">%d</strong>', $color, $score);
     }
 }, 10, 2);
+
+/*
+ * 検索結果での見え方: 抜粋・画像・動画のプレビューを大きく出してよいと Google に伝える。
+ * 根拠: https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+ * WordPress 5.7 以降は max-image-preview:large を本体が出すので、残りの2つを足す。
+ * noindex のページ（検索に出さない設定・下書きのプレビュー等）には足さない。
+ */
+add_filter('wp_robots', function ($robots) {
+    if (!empty($robots['noindex']) || !empty($robots['none'])) {
+        return $robots;
+    }
+    $robots['max-image-preview'] = 'large';
+    $robots['max-snippet'] = '-1';
+    $robots['max-video-preview'] = '-1';
+    return $robots;
+}, 20);
