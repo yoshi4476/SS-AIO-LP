@@ -63,8 +63,10 @@ jobs:
           python scripts/research_extra.py --draft 2>&1 | tail -5 || true
           python scripts/research_run.py --minutes 290 2>&1 | grep -vE "^\s+[0-9]+/[0-9]+$" | tail -40
           # 記事の問いをAIに聞いた調査（AI集客ラボ・コーポレート・補助金の旧記事）。答えは30日キャッシュ
-          python scripts/subsidy_survey.py --site ai-lab 12 2>&1 | tail -3 || true
-          python scripts/subsidy_survey.py --site corporate 12 2>&1 | tail -3 || true
+          # 対象は subsidy_survey.RULES から取る（サイトIDを直書きしない。補助金の旧記事は取り下げ済みなので外す）
+          for s in $(python -c "import sys; sys.path.insert(0, 'scripts'); import subsidy_survey as S; print(' '.join(k for k in S.RULES if k != 'subsidy'))"); do
+            python scripts/subsidy_survey.py --site "$s" 12 2>&1 | tail -3 || true
+          done
 
       - name: 片付け
         if: always()
@@ -74,6 +76,8 @@ jobs:
         env:
           PYTHONIOENCODING: utf-8
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
           python scripts/build.py > /dev/null
           python tests/test_gates.py > /tmp/gates.log 2>&1 || { tail -20 /tmp/gates.log; echo "::error::門が通らないため公開しません"; exit 1; }
@@ -94,4 +98,6 @@ jobs:
         env:
           PYTHONIOENCODING: utf-8
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-        run: python scripts/research_publish.py --site corporate --push 2>&1 | tail -3 || echo "::warning::コーポレートの調査ページを配信できませんでした"
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+        run: python scripts/research_publish.py --push 2>&1 | tail -3 || echo "::warning::コーポレートの調査ページを配信できませんでした"

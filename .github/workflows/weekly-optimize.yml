@@ -290,6 +290,8 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
           out=$(python scripts/lead_probe.py) || true
           echo "$out"

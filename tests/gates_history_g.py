@@ -234,15 +234,20 @@ def test_subsidy_research_page_does_not_judge_answers():
 def test_ai_answer_pages_for_three_sites():
     """「AIに聞いた調査」のページは3サイトとも同じ中身の作り（research.data）から出す。
     コーポレートは Next.js なので、中身（JSON）とページの雛形を管制塔から配信する（2026-10-04）"""
-    import importlib, sys as _s
-    _s.path.insert(0, str(ROOT / "scripts" / "subsidy"))
-    RS = importlib.import_module("research")
+    import importlib.util
+    import subsidy_survey as SV
+    # scripts/research.py（Phase 2 の収集）と同じ名前なので、場所を指定して読む（先に読まれていると取り違える）
+    spec = importlib.util.spec_from_file_location("subsidy_research", ROOT / "scripts" / "subsidy" / "research.py")
+    RS = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(RS)
     check("調査ページ: 3サイトの設定がある", sorted(RS.SITE), ["ai-lab", "corporate", "subsidy"])
     b = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
     check("AI集客ラボ: build.py が調査ページを作る", '_RS.data("ai-lab"' in b, True)
     wf = (ROOT / ".github" / "workflows" / "industry-research.yml").read_text(encoding="utf-8")
-    check("3か月ごと: AI集客ラボ・コーポレートを調べ、コーポレートへ配信する",
-          ("--site ai-lab" in wf, "--site corporate" in wf, "research_publish.py --site corporate --push" in wf), (True, True, True))
+    rp = (ROOT / "scripts" / "research_publish.py").read_text(encoding="utf-8")
+    check("3か月ごと: 調べる対象は RULES から取り（AI集客ラボ・コーポレートを含む）、コーポレートへ配信する",
+          ("S.RULES" in wf and {"ai-lab", "corporate"} <= set(SV.RULES), "research_publish.py --push" in wf,
+           'default="corporate"' in rp), (True, True, True))
     check("コーポレートのページの雛形がある", (ROOT / "templates" / "corporate_research_page.tsx").is_file(), True)
 
 

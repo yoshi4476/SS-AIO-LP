@@ -304,7 +304,8 @@ def _mail_zip(cfg, path: Path):
             "text": "サイトの更新ファイルをお送りします。添付の ZIP の「手順.txt」に沿って、サーバーへ置いてください。",
             "attachments": [{"filename": path.name, "content": base64.b64encode(path.read_bytes()).decode()}]}
     req = urllib.request.Request("https://api.resend.com/emails", data=json.dumps(body).encode(),
-                                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+                                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json",
+                                          "User-Agent": "ss-aio-pipeline/1.0"})   # 無いと Cloudflare が 1010 で弾く
     try:
         urllib.request.urlopen(req, timeout=60)
         return True

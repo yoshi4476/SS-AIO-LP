@@ -530,6 +530,28 @@ def sticky_ab(meta):
     return f' data-ab="{key[0]}" data-ab-b="{key[1]}"' if key else ""
 
 
+# 記事末の呼びかけ。一律の「プロに相談」は重いので、読んだ人が次に知りたいこと（自社がどう見えているか）に寄せる。
+# 結果や期間は約束しない
+CTA_COPY_IND = {
+    "medical": "患者さんがAIや検索で調べたとき、御院が候補に出ているか一緒に確かめませんか？",
+    "fudosan": "物件や売却の相談先を探す人に、御社が見つかっているか一緒に確かめませんか？",
+    "koumuten": "家づくり・リフォームの相談先を探す人に、御社が見つかっているか一緒に確かめませんか？",
+    "shigyou": "相談先を探す経営者に、御事務所が見つかっているか一緒に確かめませんか？",
+}
+CTA_COPY_CAT = {
+    "aio": "ChatGPTやAI Overviewが御社を出典に選んでいるか、一緒に確かめませんか？",
+    "seo": "御社のサイトで、どこを直せば検索に出やすくなるか一緒に整理しませんか？",
+    "meo": "地図検索で御社がどう見えているか、一緒に確かめませんか？",
+    "ai-marketing": "御社の集客のどこにAIを使うと手間が減るか、一緒に整理しませんか？",
+}
+
+
+def cta_copy(meta):
+    import industry_lp
+    k = industry_lp.BY_HUB.get(_hub_slug(meta))
+    return CTA_COPY_IND.get(k) or CTA_COPY_CAT.get(meta.get("category"), "AI検索時代の集客、プロに相談してみませんか？")
+
+
 def lp_label(meta):
     import industry_lp
     k = industry_lp.BY_HUB.get(_hub_slug(meta))
@@ -908,6 +930,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{CONTENT}}": insert_mid_cta(insert_tool_box(_video_embed(content, meta), meta), meta) + _research_box(meta),
         "{{LP_URL}}": lp_url(meta),
         "{{LP_LABEL}}": lp_label(meta),
+        "{{CTA_COPY}}": cta_copy(meta),
         **dict(zip(("{{STICKY_URL}}", "{{STICKY_CTA}}", "{{STICKY_LABEL}}"), sticky(meta))),
         "{{STICKY_AB}}": sticky_ab(meta),
         "{{RELATED}}": related,
@@ -1533,7 +1556,8 @@ def build_research_pages(all_metas=()):
         import research as _RS
         answers = _RS.data("ai-lab", SITE_URL)
         if answers:
-            body = (f'<div class="latest-block"><div class="cat-head"><h1>{_RS.html.escape(answers["h1"])}</h1></div>'
+            # 見出し1はページの枠（page_shell）が題名で出す。ここでも h1 にすると1ページに2つになる
+            body = (f'<div class="latest-block"><div class="cat-head"><h2>{_RS.html.escape(answers["h1"])}</h2></div>'
                     f'<p class="hub-lead">{_RS.html.escape(answers["lead"])}</p>{_RS.html_body(answers)}</div>')
             page = BLOG_PAGE.format(items=body, **page_shell(answers["title"], answers["description"]))
             page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}{answers['url']}")

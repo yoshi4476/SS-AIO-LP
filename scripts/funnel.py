@@ -34,7 +34,7 @@ STEPS = [
     ("記事を見た", ("page_view",)),
     ("CTAを押した", ("cta_click", "diagnosis_click", "contact_intent")),
     ("フォームを開いた", ("form_start",)),
-    ("送信した", ("lead_capture", "generate_lead", "form_submit")),   # 実際の数は lead_reconcile.is_lead で数える（main）
+    ("送信した", ("form_submit",)),   # 実際の数は lead_reconcile.is_lead で数える（main）。これは取れないときの代わり。同時に飛ぶ lead_capture は足さない
 ]
 
 # 送信の中身。問い合わせと購読を同じ箱に入れると、商談につながる数が分からない。

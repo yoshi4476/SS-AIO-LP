@@ -234,7 +234,7 @@
         // 試験が2つ以上あると名前の a/b だけでは混ざる。試験名入りの名前も送る（ab_result が試験ごとに数える）
         var abk = a.getAttribute('data-ab');
         if (abk === 'article_cta') ga('cta_click_' + abv, params);
-        else if (abk) ga('cta_click_' + abk + '_' + abv, params);
+        else if (abk) ga('cta_click_' + slugId(abk) + '_' + abv, params);
       }
       ga('cta_click', params);
       ga('cta_' + slugId(id), params);
@@ -268,7 +268,7 @@
     el.setAttribute('data-ab-variant', v);
     ga('ab_impression', { ab_key: key, ab_variant: v, page_path: location.pathname });
     if (key === 'article_cta') ga('ab_impression_' + v, { ab_key: key, page_path: location.pathname });
-    else ga('ab_impression_' + key + '_' + v, { ab_key: key, page_path: location.pathname });
+    else ga('ab_impression_' + slugId(key) + '_' + v, { ab_key: key, page_path: location.pathname });
   });
 
   // 記事の音声読み上げ（Web Speech API。非対応ブラウザではボタンを隠す）

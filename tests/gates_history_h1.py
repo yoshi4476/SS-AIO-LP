@@ -151,8 +151,41 @@ def test_sticky_button_ab_is_counted_per_test():
     check("記事テンプレートが B案の属性を差し込む", "{{STICKY_AB}}" in tpl, True)
     js = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
     check("site.js: 試験名入りの表示・押下を送る",
-          ("'ab_impression_' + key + '_' + v" in js, "'cta_click_' + abk + '_' + abv" in js), (True, True))
+          ("'ab_impression_' + slugId(key) + '_' + v" in js, "'cta_click_' + slugId(abk) + '_' + abv" in js), (True, True))
     names = [t[0] for t in AB.tests()]
     check("ab_result: 記事CTAと固定ボタンを別々に判定する", names[0] == "記事CTA" and len(names) >= 3, True)
     for _k, (key, b) in B.STICKY_AB.items():
         check(f"B案に所要時間・結果の約束を書かない: {key}", any(w in b for w in ("秒", "必ず", "確実")), False)
+
+
+def test_titles_and_closing_cta_follow_measured_patterns():
+    print("\n■ 記事: 飾りの年号を新しい題に入れない／記事末の呼びかけを業種・カテゴリに合わせる")
+    import score_check as SC
+    import build as B
+    for t, want in [("【2026年最新】AIO対策の手順", True), ("補助金2026年最新の締切", True),
+                    ("建設業の2024年問題をAIで埋める", False), ("外注費の請求書｜2026年の変更点", False)]:
+        check("飾りの年号の判定: " + t, bool(SC.DECOR_YEAR.search(t)), want)
+    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    check("タイトルの書き直しで飾りの年号を外す", "飾りの年号は外してください" in src, True)
+    tpl = (ROOT / "templates" / "article.html").read_text(encoding="utf-8")
+    check("記事末の呼びかけはテンプレートに直書きしない", "{{CTA_COPY}}" in tpl and "プロに相談してみませんか" not in tpl, True)
+    check("医療の記事は医療向けの呼びかけ", B.cta_copy({"category": "ai-marketing", "hub": "clinic"}) == B.CTA_COPY_IND["medical"]
+          or "御院" in B.cta_copy({"category": "ai-marketing", "title": "クリニックの集客", "slug": "clinic-x"}), True)
+    for k, v in {**B.CTA_COPY_IND, **B.CTA_COPY_CAT}.items():
+        check(f"呼びかけで結果・期間を約束しない: {k}", any(w in v for w in ("必ず", "確実", "保証", "か月で", "上位表示")), False)
+
+
+def test_subsidy_dist_ships_pages_we_link():
+    print("\n■ 補助金サイト: 管制塔が作って sitemap に載せるページを、配信対象（make_dist）にも入れる")
+    md = ROOT / ".publish-work" / "subsidy" / "tools" / "make_dist.py"
+    if not md.is_file():
+        return
+    # 2026-10-04: 調査ページを sitemap に載せたが research/ が配信対象に無く、配信前の検査が「404になる」で
+    # 約7時間・14回の配信を止めた（取り下げの301も届かなかった）
+    # 10-03 の /seido/ も同じ。フォルダ名を1つずつ見ると次の新しいフォルダで再発するので、sitemap の全フォルダを見る
+    m = re.search(r"PUBLIC_DIRS\s*=\s*\[(.*?)\]", md.read_text(encoding="utf-8"), re.S)
+    dirs = set(re.findall(r'"([^"]+)"', m.group(1))) if m else set()
+    sm = ROOT / ".publish-work" / "subsidy" / "sitemap.xml"
+    tops = {u.split("/")[3] for u in re.findall(r"<loc>(https?://[^<]+)</loc>", sm.read_text(encoding="utf-8"))
+            if len(u.split("/")) > 4} if sm.is_file() else set()
+    check("sitemap に載るフォルダはすべて配信対象（make_dist の PUBLIC_DIRS）にある", sorted(tops - dirs), [])

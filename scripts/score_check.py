@@ -48,6 +48,10 @@ def internal_links(body):
     return {u.split("#")[0].rstrip("/") for u in _link_patterns()[0].findall(body)}
 
 
+DECOR_YEAR = re.compile(r"【[^】]*20\d{2}[^】]*】|20\d{2}年?最新")
+DECOR_YEAR_FROM = "2026-10-05"
+
+
 def run(slug):
     """1本を採点して checks を返す。CLI からも、全体の集計からも使う"""
     p = ROOT / "articles" / f"{slug}.md"
@@ -112,6 +116,15 @@ def run(slug):
             if nxt.startswith(("| ", "|-", "- ", "* ", "<figure", "<div", "```", "#", "1. ")):
                 bad_lead.append(ln[3:])
     add("全H2直下がリード文（表・リスト直置きなし）", not bad_lead, "、".join(bad_lead[:3]))
+
+    # --- タイトル ---
+    # 飾りの年号（【2026年最新】【2026年】）は自社GSCの実測でクリック率が負けた型（title_patterns）。
+    # 「2024年問題」「2026年の変更点」のように中身として要る年は止めない。
+    # 既存の32本は auto_rewrite がタイトルを直すときに外す（一斉に変えると順位の揺れが読めない）。
+    # ここでは決まりを入れた日以降の記事だけを止める
+    if str(meta.get("date", "")) >= DECOR_YEAR_FROM:
+        deco = DECOR_YEAR.search(str(meta.get("title", "")))
+        add("タイトルに飾りの年号を入れない", not deco, deco.group(0) if deco else "")
 
     # --- FAQ ---
     faq = meta.get("faq") or []

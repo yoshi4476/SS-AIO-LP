@@ -3548,7 +3548,7 @@ def test_report_actions_close_the_loop():
     check("title_patterns: 表示300回未満の型は出さない", TPT.MIN_IMP, 300)
     check("auto_rewrite: 説明文だけの種別がある", "desc" in AR2.WHAT and "説明文以外が変わりました" in inspect.getsource(AR2.run_one), True)
     check("auto_rewrite: タイトルの型と共起語を指示に渡す",
-          "title_patterns" in inspect.getsource(AR2.run_one) and "cooccur" in inspect.getsource(AR2.run_one), True)
+          "title_patterns" in inspect.getsource(AR2.build_prompt) and "cooccur" in inspect.getsource(AR2.build_prompt), True)
     check("rich_check: searchAppearance は単独で取る", "['searchAppearance']" in inspect.getsource(RC.appearances).replace('"', "'"), True)
     check("build: 本文が同じなら dateModified を進めない", callable(getattr(B, "_modified_guard", None)) if (B := __import__("build")) else False, True)
     check("link_boost: 公開直後の1本だけに当てられる", "--only=" in inspect.getsource(__import__("link_boost").main), True)
