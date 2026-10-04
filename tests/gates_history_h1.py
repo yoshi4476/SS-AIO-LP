@@ -305,3 +305,18 @@ def test_articles_have_no_broken_inline_tags():
         if issues:
             bad.append(f"{p.stem}: {issues[0]}")
     check("全記事", bad, [])
+
+
+def test_intake_requires_client_supervisor():
+    print("\n■ ヒアリングシート: 記事の監修者（お客様ご本人）を必須で聞き、同意が無ければ登録しない")
+    import client_intake as C
+    keys = [f[0] for f in C.fields_for()]
+    check("監修者の章がある", all(k in keys for k in ("supervisor.name", "supervisor.qualification", "supervisor.consent", "supervisor.contact")), True)
+    ng, _ = C.review({}, {"id": "x", "type": "self-static"})
+    # FIELDS だけを見ていて、書き手・監修者の章の必須が効いていなかった（2026-10-05）
+    check("必須の判定が書き手・監修者の章まで効く", any("監修者のお名前" in n for n in ng), True)
+    got = {"supervisor.name": "佐藤 花子", "supervisor.consent": "未", "supervisor.contact": "sato@example.jp"}
+    ng, _ = C.review(got, {"id": "x", "type": "self-static"})
+    check("掲載の同意が「可」でなければ止める", any("掲載の同意" in n for n in ng), True)
+    sup = C.to_company(dict(got, **{"supervisor.consent": "可"}))["supervisor"]
+    check("確認の連絡先は会社情報（表示に使う側）に入れない", ("contact" in sup, sup["display"]), (False, True))

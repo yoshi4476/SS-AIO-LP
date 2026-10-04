@@ -258,8 +258,34 @@ WRITING = [
     ("author.credential", "保有資格・経歴",
      "改行区切り。専門性の裏づけになるもの",
      "日商簿記1級\n上場企業の経理部で10年\n中小企業の経理支援を通算120社", False),
-    ("author.supervisor", "監修者", "別の方が監修する場合のみ。資格も添えてください",
-     "佐藤 花子（税理士・登録番号00000）", False),
+
+    # 記事の監修者はお客様ご本人（2026-10-05 運用者の決定）。当社の名前を監修者として出さない。
+    # 名前・資格・同意が無いまま「監修」と表示すると事実と違う表示になるため、ここが埋まるまで登録を止める
+    ("#supervisor", "12-2. 記事の監修者",
+     "公開する記事には「監修」として、内容を確かめる方のお名前と資格を表示します"
+     "（医療・法律・お金の分野では特に、誰が確かめたかが信頼の根拠になります）。"
+     "実在の方で、掲載の同意をいただける方をお書きください。", "", False),
+    ("supervisor.name", "監修者のお名前", "記事に表示するお名前（フルネーム）", "佐藤 花子", True),
+    ("supervisor.title", "役職", "所属と役職", "さとう歯科クリニック 院長", True),
+    ("supervisor.qualification", "資格", "正式な名称で。複数あれば改行区切り",
+     "歯科医師\n日本口腔インプラント学会 専門医", True),
+    ("supervisor.registration", "登録番号", "医師・歯科医師・士業などの登録番号（公開してよい場合のみ）",
+     "歯科医籍登録 第000000号", False),
+    ("supervisor.career", "経歴", "改行区切り。専門性の裏づけになるもの",
+     "○○大学歯学部 卒業\n○○病院 口腔外科 勤務（10年）\n2018年 開院", False),
+    ("supervisor.scope", "監修する範囲", "どこまでを確かめるか（表示に使います）",
+     "診療内容・治療法・費用の説明", True),
+    ("supervisor.profile_url", "プロフィールページ", "自社サイトの院長紹介・スタッフ紹介のページ",
+     "https://example.jp/about/doctor/", False),
+    ("supervisor.same_as", "外部のプロフィール", "学会の名簿・SNS・取材記事など。改行区切り",
+     "https://www.example-gakkai.jp/member/000\nhttps://www.instagram.com/xxxx", False),
+    ("supervisor.photo", "顔写真", "「あり」なら別途お送りください（無くても掲載できます）", "あり", False),
+    ("supervisor.consent", "掲載の同意", "「可」と書いた場合だけ、お名前・資格を記事に表示します",
+     "可", True),
+    ("supervisor.review", "記事の確かめ方", "公開前に確かめる / 公開後に確かめる（修正があればご連絡）",
+     "公開後に確かめる", True),
+    ("supervisor.contact", "確認のご連絡先", "記事の確認依頼を送るメールアドレス",
+     "sato@example.jp", True),
 
     ("#tone", "13. 書き方のきまり",
      "文体や言い回しを揃えるための指定です。既存サイトがある場合は、"
@@ -743,6 +769,8 @@ def to_brief(got, industry=""):
         "service": pick("service"),
         "customer": pick("customer"),
         "author": pick("author"),
+        # 監修者の資格・範囲を書き手に渡す（範囲の外のことを「監修済み」のように書かせない）
+        "supervisor": {k: v for k, v in to_supervisor(got).items() if k != "contact"},
         "tone": pick("tone"),
         "compete": pick("compete"),
         "asset": pick("asset"),
@@ -776,8 +804,24 @@ def to_brief(got, industry=""):
     return brief
 
 
+def to_supervisor(got):
+    """記事の監修者（お客様ご本人）。表示・構造化データ（reviewedBy）に使う。
+    確認の連絡先は記事に出さないので、表示用の項目と分けて持つ"""
+    s = {k.split(".", 1)[1]: v for k, v in got.items() if k.startswith("supervisor.")}
+    if not s:
+        return {}
+    for k in ("qualification", "career", "same_as"):
+        if s.get(k):
+            s[k] = lines(s[k])
+    s["display"] = str(s.get("consent", "")).strip() == "可"
+    return s
+
+
 def to_company(got):
     out = {k.split(".", 1)[1]: v for k, v in got.items() if k.startswith("company.")}
+    sup = to_supervisor(got)
+    if sup:
+        out["supervisor"] = {k: v for k, v in sup.items() if k != "contact"}
     if out:
         out["_readme"] = ("この会社の正規表記。記事の著者情報・構造化データ・"
                           "レポートの宛名はすべてここを参照する。表記がぶれると"
@@ -817,10 +861,16 @@ def review(got, cfg):
     「あとで直せるもの」は警告、「直さないと回らないもの」は不備にする"""
     ng, warn = [], []
 
-    missing = [label for key, label, _, _, req in FIELDS
+    # シートに出す項目と同じ一覧で見る。FIELDS だけを見ていたため、書き手・監修者の章の必須が効いていなかった
+    missing = [label for key, label, _, _, req in fields_for()
                if req and not key.startswith("#") and not got.get(key)]
     for m in missing:
         ng.append(f"「{m}」が空です")
+    # 同意が「可」でない方を監修者として表示すると、事実と違う表示になる
+    if got.get("supervisor.name") and str(got.get("supervisor.consent", "")).strip() != "可":
+        ng.append("監修者の「掲載の同意」が「可」ではありません（同意をいただいてから登録します）")
+    if got.get("supervisor.contact") and "@" not in str(got["supervisor.contact"]):
+        ng.append("監修者の「確認のご連絡先」がメールアドレスになっていません")
 
     if cfg.get("id") and not re.fullmatch(r"[a-z][a-z0-9-]*", cfg["id"]):
         ng.append("サイトIDは英小文字とハイフンのみで書いてください")
