@@ -31,6 +31,12 @@ LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 MAX_LINK_PARA = 4
 # 同じ言い回しを1記事で使ってよい回数。3本目からは同じ型が目につく
 MAX_SAME_FORM = 2
+# 1記事が持つ内部リンク先の数。これ以上ある記事へ文中リンクを足さない。
+# 実測（2026-10-05・393本）で中央値7本・上位1/4が9本以上・最大18本
+MAX_INTERNAL_LINKS = 12
+# 文中リンク（link_boost --inline）の同じアンカーを使ってよい記事数。
+# 同じ語が多くの記事で同じ先へ飛ぶと、完全一致のアンカーを並べた形に見える
+MAX_SAME_ANCHOR = 5
 
 # リンクだけで成り立つ段落（本文の途中に置かれた関連記事への導線）。
 # ここを広く取ると本文を巻き込む。実際、最初の版は < を許したせいで
@@ -334,6 +340,36 @@ def fix(path, item, write, inb=None, floor=3, floors=None):
     return len(edits), len(dropped), ""
 
 
+ANCHOR = re.compile(r"\[([^\]\n]+)\]\((?:https?://[^)/\s]+)?/[^)\s]*\)")
+
+
+def anchor_use(paths=None):
+    """アンカーの文字列（小文字）ごとに、それを使っている記事の数"""
+    n = Counter()
+    for p in (paths or sorted((ROOT / "articles").glob("*.md"))):
+        n.update({a.lower() for a in ANCHOR.findall(io.open(p, encoding="utf-8-sig").read())})
+    return n
+
+
+def inline_anchor_bias(paths=None, log=None):
+    """文中リンクとして足したアンカーのうち、MAX_SAME_ANCHOR を超える記事で使われているもの。
+    どれが文中リンクかは本文から見分けられないので、台帳（link_boost の anchor）から拾う"""
+    f = Path(log) if log else LOG
+    mine = set()
+    if f.is_file():
+        for line in io.open(f, encoding="utf-8").read().splitlines():
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if r.get("by") == "link_boost" and r.get("kind") == "link_inline" and r.get("anchor"):
+                mine.add(r["anchor"].lower())
+    if not mine:
+        return {}
+    use = anchor_use(paths)
+    return {a: use[a] for a in sorted(mine) if use[a] > MAX_SAME_ANCHOR}
+
+
 def log_rows(n=40):
     if not LOG.is_file():
         return []
@@ -378,6 +414,11 @@ def main():
     for f, n in top:
         mark = "  ← 偏り" if n > total * MAX_SHARE else ""
         print("   %4d本 %4.1f%%  %s%s" % (n, n / max(total, 1) * 100, f[:42], mark))
+    bias = inline_anchor_bias(paths)
+    print("■ 文中リンクのアンカー（同じ文字列は%d記事まで）" % MAX_SAME_ANCHOR)
+    for k, v in list(bias.items())[:5]:
+        print("   %3d記事  %s  ← 偏り" % (v, k[:30]))
+    print("ANCHOR_OK=%s" % ("no" if bias else "yes"))
     print()
     print("■ 自動修正の見直し（%d記事を検査）\n" % len(paths))
     if not bad:

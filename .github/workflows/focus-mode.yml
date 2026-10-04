@@ -197,12 +197,14 @@ jobs:
           python scripts/auto_rewrite.py --write --kind stuck --limit "$n" --skip-recent 7 --tag focus \
             --parallel 3 --budget-min 30 || true
 
-      # 11〜30位へは --rescue（週次と同じ上限）、4〜10位へは自分より上位の記事からだけ送る（--band）
+      # 11〜30位へは --rescue（週次と同じ上限）、4〜10位へは自分より上位の記事からだけ送る（--band）。
+      # 4〜20位へは本文に既にある語句を囲む文中リンク（--inline）。リンクだけの段落は上限に当たった記事が多いため
       - name: 内部リンクを寄せる（11〜30位・4〜10位）
         run: |
           for s in ai-lab corporate subsidy; do
             python scripts/link_boost.py "$s" --rescue --write || true
             python scripts/link_boost.py "$s" --band=4-10 --write || true
+            python scripts/link_boost.py "$s" --band=4-20 --inline --write || true
           done
 
       # 1本ずつの挿し込みは積み上がりを見られない。週次と同じ見直しを必ず通す

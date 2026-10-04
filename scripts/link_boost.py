@@ -14,6 +14,11 @@ AI検索にも文脈ごと読まれる。
 使い方:
     python scripts/link_boost.py <site_id>            # 候補を出す
     python scripts/link_boost.py <site_id> --write    # 実際に足す
+    python scripts/link_boost.py <site_id> --band=4-20 --inline   # 文中リンク（集中モードだけが使う）
+
+--inline は段落を足さない。送り元の本文に既にある語句（送り先の狙う語・題の主要な語句）を
+[語](/url/) で囲むだけで、文字は1文字も変えない。リンクだけの段落は上限（4本）に
+当たった記事が多く、それ以上は足せないため。
 """
 import glob
 import io
@@ -28,6 +33,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import auto_review as ar  # noqa: E402
 import cannibal_check as cc  # noqa: E402
 import link_new as ln  # noqa: E402
+import shorten_anchors as sa  # noqa: E402
 
 LINK = re.compile(r"\]\((?:https?://[^/)]+)?(/[a-z0-9-]+/([a-z0-9-]+)/?)\)")
 # しきい値。実測に合わせる。90日間で一度も検索結果に出ていない88本は
@@ -204,21 +210,23 @@ def industry_of(text, site_id):
     return out
 
 
-def note(tgt, src, kind):
+def note(tgt, src, kind, anchor=None, log=None):
     """何をしたかを台帳に残す（CLAUDE.md 8.6 の決まり）。
 
     残さないと、あとで効果を測れない。実際 effect_ab は
     link_boost の記録が1件も無いため、内部リンクが効いたかを判定できなかった。
+    文中リンクはアンカーも残す（auto_review がサイト全体の偏りをこれで数える）。
     """
     import json
     import time
-    log = ROOT / "automation" / "logs" / "auto_fix.jsonl"
+    log = Path(log) if log else ROOT / "automation" / "logs" / "auto_fix.jsonl"
     log.parent.mkdir(parents=True, exist_ok=True)
+    row = {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "link_boost", "slug": tgt, "kind": kind,
+           "ok": True, "note": f"{src} から内部リンクを1本"}
+    if anchor:
+        row.update(src=src, anchor=anchor, note=f"{src} の本文の「{anchor}」を文中リンクに")
     with io.open(log, "a", encoding="utf-8", newline="") as f:
-        f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"),
-                            "by": "link_boost", "slug": tgt, "kind": kind,
-                            "ok": True, "note": f"{src} から内部リンクを1本"},
-                           ensure_ascii=False) + NL_CH)
+        f.write(json.dumps(row, ensure_ascii=False) + NL_CH)
 
 
 def insert_ok(before, after):
@@ -253,6 +261,138 @@ def insert_ok(before, after):
     return ""
 
 
+# --inline の上限。1回に1つの送り元へ足す文中リンクの本数
+INLINE_PER_SRC = 2
+# これより短い語句は話題を言い当てない（「経理代行」を全部リンクにすると、どこへ飛ぶか読めない）
+INLINE_MIN = 5
+_HTML_BLOCK = re.compile(r"<(div|details|figure|table|aside|section|ul|ol|blockquote)\b", re.I)
+_HTML_CLOSE = re.compile(r"</(div|details|figure|table|aside|section|ul|ol|blockquote)>", re.I)
+_LISTISH = re.compile(r"^[ \t]*(?:[-*+]|\d+\.)[ \t]|^[ \t]*[|>#!]", re.M)
+
+
+def anchor_phrases(a, others=()):
+    """送り先を言い当てる語句（長い順）。本文にそのまま現れたときだけアンカーにする。
+
+    狙う語の隣り合う語のうち、欠けるのが1語までのもの（「歯科医院 閉院 費用」→「閉院費用」
+    「歯科医院の閉院」…）と題の主部。2語だけを拾うと「病院 口コミ 返信 例文」から「口コミ返信」が
+    でき、一般のMEOの文脈から病院向けの記事へ飛ばしていた（2026-10-05 の dry）。
+    others（他の記事の題・狙う語）の2本以上に含まれる語句は外す。サイトでよく使う語で、
+    送り先を言い当てない。1本でも外すと、実測で ai-lab・corporate の候補が0本になった"""
+    out = set()
+    kw = a.get("kw", "").strip()
+    toks = [t for t in re.split(r"[\s　]+", kw) if t]
+    if len(toks) == 1:
+        out.add(toks[0])
+    span = max(2, len(toks) - 1)
+    for i in range(len(toks)):
+        for j in range(i + span, len(toks) + 1):
+            part = toks[i:j]
+            out |= {" ".join(part), "".join(part), "の".join(part)}
+    head = re.sub(r"[【\[][^】\]]*[】\]]", "", a.get("title", ""))
+    head = re.split(r"[｜|：:]", head)[0].strip()
+    out.add(head)
+    # 「◯◯とは？」の題は「◯◯」が本文に現れる形
+    out.add(re.sub(r"とは[？?]?.*$", "", head).strip())
+    others = [_norm_kw(o) for o in others]
+    ok = {p for p in out if INLINE_MIN <= len(p) <= sa.MAX and not re.search(r"[\[\]()<>*`=|#\n]", p)
+          and sum(1 for o in others if _norm_kw(p) in o) < 2}
+    return sorted(ok, key=lambda p: (-len(p), p))
+
+
+def inline_spots(body):
+    """文中リンクを置いてよい段落の (start, end)。
+
+    置かないもの: 冒頭（最初のH2より前＝断言段落・対象読者・鮮度）、見出し直下の1文結論、
+    まとめ・FAQの区画、見出し・表・箇条書き・引用・コード、行頭が < の枠とその中、
+    既にリンクやHTMLタグを含む段落（1段落に1本まで）"""
+    out = []
+    h2 = re.search(r"^## ", body, re.M)
+    if not h2:
+        return out
+    depth, fence, after_head, skip_sec = 0, False, False, False
+    for m in re.finditer(r"(?:^[ \t]*\S[^\n]*(?:\n|$))+", body, re.M):
+        blk = m.group(0).rstrip("\n")
+        s = blk.lstrip()
+        fences = len(re.findall(r"^[ \t]*```", blk, re.M))
+        if fence or fences:
+            fence = fence != (fences % 2 == 1)
+            continue
+        opens, closes = len(_HTML_BLOCK.findall(blk)), len(_HTML_CLOSE.findall(blk))
+        inside = depth > 0
+        depth = max(0, depth + opens - closes)
+        if s.startswith("#"):
+            if s.startswith("## "):
+                skip_sec = bool(ln.SKIP_H2.search(s.split("\n", 1)[0]))
+            after_head = "\n" not in blk     # 見出しに本文が直結していれば、その本文が1文結論
+            continue
+        # 図・表・枠は1文結論の席を埋めない（見出しの後で最初に来る地の文を1文結論とみなす）
+        if inside or s.startswith("<") or opens or _LISTISH.search(blk):
+            continue
+        if m.start() < h2.start():
+            continue
+        if after_head:
+            after_head = False
+            continue
+        if skip_sec or re.search(r"[<>\[\]`]", blk):
+            continue
+        out.append((m.start(), m.start() + len(blk)))
+    return out
+
+
+def _norm_kw(s):
+    return re.sub(r"[\s　]+", "", s or "").lower()
+
+
+def inline_link(body, phrases, url, own=""):
+    """本文にある語句を [語](url) で囲んだ本文と、囲んだ語句。置ける所が無ければ (None, None)。
+
+    own は送り元の狙う語。送り元の主題そのものを他の記事へ飛ばさない"""
+    own = _norm_kw(own)
+    spots = inline_spots(body)
+    for ph in phrases:
+        p = _norm_kw(ph)
+        if own and (p in own or own in p):
+            continue
+        for s, e in spots:
+            para = body[s:e]
+            for m in re.finditer(re.escape(ph), para, re.I):
+                if "\n" in m.group(0):
+                    continue
+                a0, a1 = s + m.start(), s + m.end()
+                # 英数字の語の途中では切らない（aio が aiox の一部になる）
+                if re.match(r"[A-Za-z0-9]", body[a0]) and a0 > 0 and re.match(r"[A-Za-z0-9]", body[a0 - 1]):
+                    continue
+                if re.match(r"[A-Za-z0-9]", body[a1 - 1]) and re.match(r"[A-Za-z0-9]", body[a1:a1 + 1] or " "):
+                    continue
+                anchor = body[a0:a1]
+                nb = body[:a0] + "[" + anchor + "](" + url + ")" + body[a1:]
+                if inline_ok(body, nb, url, anchor):
+                    continue
+                return nb, anchor
+    return None, None
+
+
+def unlink(after, url, anchor):
+    """足した文中リンクの記法だけを外す（文章が1文字も変わっていないことの検算に使う）"""
+    return after.replace("[" + anchor + "](" + url + ")", anchor, 1)
+
+
+def inline_ok(before, after, url, anchor):
+    """文中リンクの検算。崩れていれば理由を返す（空なら合格）"""
+    if unlink(after, url, anchor) != before:
+        return "リンクの記法を外すと元の本文に戻らない"
+    ng = ar.guard("", before, after, 0) or insert_ok(before, after)
+    if ng:
+        return ng
+    # 短い段落にリンクが入ると、見直し（auto_review --fix）が「リンクだけの段落」と読んで
+    # 段落ごと消す。消されるのは元からある本文なので、そう読まれる形には置かない
+    def n_para(s):
+        return sum(1 for m in ar.LINK_PARA.finditer(s) if not ar.KEEP.search(m.group(0)))
+    if n_para(after) != n_para(before):
+        return "リンクだけの段落と読まれる"
+    return ""
+
+
 _P1 = {}
 
 
@@ -283,6 +423,101 @@ def linkable(slug, arts, recs=None):
     return publish.gate_ok(publish.read_meta(arts[slug]["path"]) or {})
 
 
+def sources(site, tgt, arts, cnt, ranks=None):
+    """送り元の候補（近い順）。ranks を渡すと、送り先より上位の記事だけ"""
+    a = arts[tgt]
+    tw = words(a)
+    # 送り元候補: 同じ話題に触れていて、まだリンクしていない記事
+    cands = []
+    tgt_ind = industry_of(a["title"] + a["kw"], site)
+    for src, b in arts.items():
+        if src == tgt or f"/{tgt}/" in b["body"]:
+            continue
+        if ranks is not None and not ranks.get(src, 999) < ranks.get(tgt, 0):
+            continue
+        hit = sum(1 for w in tw if w in b["body"])
+        # 短い語だけの一致は話題が近いとは限らない。言い当てる語を必ず含める
+        key = distinctive(a)
+        if hit >= 2 and (not key or any(w in b["body"] for w in key)):
+            cands.append((hit, cnt[src], src))
+            continue
+        # 語が重ならなくても、同じ業種を扱う記事なら読者の次の行き先になる。
+        # これが無いと、語の重なりが無い記事は送り元が見つからず、
+        # 被リンクが下限に届かないまま止まる（実測23本）
+        if tgt_ind and tgt_ind & industry_of(b["title"] + b["kw"], site):
+            cands.append((1, cnt[src], src))
+    # 話題が近く、**検索1ページ目にいる記事**から先に送る（評価は上から流れる）。
+    # 同じ近さなら自身の被リンクが多い記事を優先する
+    p1 = _page1(site)
+    cands.sort(key=lambda x: (-x[0], -(x[2] in p1), -x[1]))
+    return cands
+
+
+def industry_terms(text, site_id):
+    """その文が扱う業種の語（名前・別名）"""
+    try:
+        import coverage as CV
+        inds = CV.industries(site_id)
+    except Exception:
+        return []
+    hay = _norm_kw(text)
+    return [w for i in inds for w in [i["name"]] + (i.get("synonyms") or []) if _norm_kw(w) and _norm_kw(w) in hay]
+
+
+def phrases_for(site, tgt, arts):
+    """送り先のアンカー候補。業種別の記事へは業種名を含む語句でだけ送る。
+    含めないと「AI導入補助金2026」がクリニック向けの記事へ飛んでいた（2026-10-05 の dry）"""
+    a = arts[tgt]
+    ph = anchor_phrases(a, [o["title"] + " " + o["kw"] for s, o in arts.items() if s != tgt])
+    terms = [_norm_kw(t) for t in industry_terms(a["kw"], site)]
+    if terms:
+        ph = [p for p in ph if any(t in _norm_kw(p) for t in terms)]
+    return ph
+
+
+def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None):
+    """送り先ごとに、上位の近い記事の本文にある語句を文中リンクにする。足した本数を返す。
+
+    上限: 送り先1本につき ADD_PER、送り元1本につき INLINE_PER_SRC、同じ送り先へは1記事1本、
+    アンカーは shorten_anchors.MAX 字まで、同じアンカーは auto_review.MAX_SAME_ANCHOR 記事まで"""
+    use = ar.anchor_use() if use is None else use
+    per_src = Counter()
+    done = 0
+    for tgt in poor:
+        a = arts[tgt]
+        phrases = phrases_for(site, tgt, arts)
+        if not phrases:
+            continue
+        url = f"{pre.rstrip('/')}/{tgt}/" if pre else f"/{a['cat']}/{tgt}/"
+        added = 0
+        for _, _, src in sources(site, tgt, arts, cnt, ranks):
+            if added >= ADD_PER:
+                break
+            b = arts[src]
+            if per_src[src] >= INLINE_PER_SRC or f"/{tgt}/" in b["body"]:
+                continue
+            if (len(ar.link_slugs(b["body"])) >= ar.MAX_INTERNAL_LINKS
+                    or len(ar.scan(b["path"])[2]) > ar.MAX_LINK_PARA):
+                continue
+            ok = [p for p in phrases if use[p.lower()] < ar.MAX_SAME_ANCHOR]
+            nb, anchor = inline_link(b["body"], ok, url, b.get("kw", ""))
+            if not nb or use[anchor.lower()] >= ar.MAX_SAME_ANCHOR:
+                continue
+            print(f"   {tgt[:34]:<36}← {src[:32]}「{anchor}」")
+            if write:
+                t = b["path"].read_text(encoding="utf-8-sig")
+                head = t.split("---", 2)[1]
+                b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")
+                note(tgt, src, "link_inline", anchor=anchor, log=log)
+            # 見るだけの実行でも本文を進める（同じ記事への上限を見込みに反映するため）
+            b["body"] = nb
+            use[anchor.lower()] += 1
+            per_src[src] += 1
+            added += 1
+            done += 1
+    return done
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -291,6 +526,11 @@ def main():
     write = "--write" in sys.argv
     rescue = "--rescue" in sys.argv
     band = parse_band(sys.argv)
+    # 文中リンクは集中モードの対象（4〜20位）へ、上位の記事からだけ送る
+    inline = "--inline" in sys.argv
+    if inline:
+        rescue = False
+        band = band or (4.0, 20.0)
     ranks = {}
     arts = load(site)
     if not arts:
@@ -336,32 +576,16 @@ def main():
     import sites as S
     pre = S.load(site).get("url_prefix")
     done = 0
+    if inline:
+        done = run_inline(site, arts, poor, cnt, ranks, pre, write)
+        print(f"\n   {'文中リンクを足しました' if write else '文中リンクの候補'}: {done}本")
+        if not write:
+            print("   実行するには --write を付けてください")
+        return
     for tgt in poor:
         a = arts[tgt]
         tw = words(a)
-        # 送り元候補: 同じ話題に触れていて、まだリンクしていない記事
-        cands = []
-        tgt_ind = industry_of(a["title"] + a["kw"], site)
-        for src, b in arts.items():
-            if src == tgt or f"/{tgt}/" in b["body"]:
-                continue
-            if band and not ranks.get(src, 999) < ranks.get(tgt, 0):
-                continue
-            hit = sum(1 for w in tw if w in b["body"])
-            # 短い語だけの一致は話題が近いとは限らない。言い当てる語を必ず含める
-            key = distinctive(a)
-            if hit >= 2 and (not key or any(w in b["body"] for w in key)):
-                cands.append((hit, cnt[src], src))
-                continue
-            # 語が重ならなくても、同じ業種を扱う記事なら読者の次の行き先になる。
-            # これが無いと、語の重なりが無い記事は送り元が見つからず、
-            # 被リンクが下限に届かないまま止まる（実測23本）
-            if tgt_ind and tgt_ind & industry_of(b["title"] + b["kw"], site):
-                cands.append((1, cnt[src], src))
-        # 話題が近く、**検索1ページ目にいる記事**から先に送る（評価は上から流れる）。
-        # 同じ近さなら自身の被リンクが多い記事を優先する
-        p1 = _page1(site)
-        cands.sort(key=lambda x: (-x[0], -(x[2] in p1), -x[1]))
+        cands = sources(site, tgt, arts, cnt, ranks if band else None)
         added = 0
         cap = RESCUE_ADD if rescue else ADD_PER   # --band は ADD_PER（週2回走るので1回は少なめ）
         for hit, _, src in cands:

@@ -162,7 +162,7 @@ def focus_edits(start, log=None):
             any_.add(d.get("slug", ""))
             if d.get("tag") == TAG:
                 mine.add(d.get("slug", ""))
-        if d.get("by") == "link_boost" and d.get("kind") == "link_band":
+        if d.get("by") == "link_boost" and d.get("kind") in ("link_band", "link_inline"):
             any_.add(d.get("slug", ""))
     return mine, any_
 
