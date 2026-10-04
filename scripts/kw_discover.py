@@ -162,13 +162,14 @@ def gsc_rising(site=None, days=28, min_imp=15, ratio=2.0):
     return out
 
 
-def suggest(q, source="web"):
+def suggest(q, source="web", strict=False):
     """サジェスト（認証不要・無料）
 
     source="web"     Google検索のサジェスト
     source="youtube" YouTube検索のサジェスト。動画で調べられる言葉は
                      「やり方」「手順」など手を動かす前の検索が多く、
                      Google検索とは並びが変わる。
+    strict=True      取れなかったときに例外を出す（「候補が無い」と「取れなかった」を分けたいとき）
     """
     ds = "yt" if source == "youtube" else ""
     u = ("https://suggestqueries.google.com/complete/search?client=firefox&hl=ja"
@@ -177,6 +178,8 @@ def suggest(q, source="web"):
         with urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=15) as r:
             return json.loads(r.read().decode("utf-8", "ignore"))[1]
     except Exception:
+        if strict:
+            raise
         return []
 
 

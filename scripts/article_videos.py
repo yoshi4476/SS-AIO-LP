@@ -14,6 +14,10 @@
 
 相関は因果ではない。効いたかは growth_plan / brand_search の指名検索で毎月見る。
 
+**通常の動画は、YouTube で検索されているテーマだけ**（yt_demand。2026-10-05 から）。
+ショートは毎日1本のまま。通常の動画を作らない記事はショートだけにし、本数は増やさない。
+題は YouTube のサジェストの検索語を先頭に置いた問いの形。上げ済みの動画は変えない。
+
   python scripts/article_videos.py                 # 何を作るかを見る
   python scripts/article_videos.py --write         # 作る（鍵があれば上げる）
   python scripts/article_videos.py --write --limit 3 --days 7
@@ -98,6 +102,26 @@ def candidates(days, limit):
             if by[sid] and len(out) < limit:
                 out.append(by[sid].pop(0))
     return out
+
+
+JUDGE_MAX = 5      # 通常の動画の枠のために、1回で判定する記事の数（サジェストは1記事5回まで・無料）
+
+
+def plan_long(cands, need, judge):
+    """通常の動画は、YouTube で検索されているテーマ（yt_demand.judge が make）だけ need 本まで。
+    実測（2026-10-05）で通常の動画は0〜1回しか見られず、ショートは183〜543回だった。
+    skip の記事はショートだけにする（その記事の判定は台帳に残す）。空いた枠で別のショートは作らない。
+    unknown（サジェストが取れなかった）は記録せず、翌日また判定する"""
+    make, skipped = [], []
+    for r in cands:
+        if len(make) >= need:
+            break
+        j = judge(r["slug"])
+        if j["decision"] == "make":
+            make.append(dict(r, yt=j))
+        elif j["decision"] == "skip":
+            skipped.append((r, j))
+    return make, skipped
 
 
 def _nums(script):
@@ -190,13 +214,15 @@ def shorts(ledger, limit, token, public):
         g = lambda f: (re.search(rf"^{f}:\s*(.+)$", t, re.M) or [None, ""])[1].strip().strip('"')
         cat = g("category")
         return {"slug": k, "title": g("title"), "category": cat, "site": S.find_category_owner(cat) or ""}
-    pool = [meta(k) for k, v in ledger.items() if v.get("youtube") and not v.get("short")
+    # 通常の動画がある記事と、YouTube で検索されていないため通常の動画を作らなかった記事（ショートだけ）
+    pool = [meta(k) for k, v in ledger.items()
+            if (v.get("youtube") or (v.get("long") or {}).get("decision") == "skip") and not v.get("short")
             and (ROOT / "articles" / f"{k}.md").is_file()]
     # 打ち出しから外したテーマは作らない。主力の業種・分野を先に、同じなら新しい順
     pool = [m for m in pool if focus(m) is not None]
     pool = [m for m in pool if not YT.is_client(m["site"]) or YT.token_path(m["site"]).is_file()]
-    todo = [m["slug"] for m in sorted(pool, key=lambda m: (focus(m), ledger[m["slug"]].get("date", "")),
-                                      reverse=True)][:limit]
+    when = lambda k: ledger[k].get("date") or (ledger[k].get("long") or {}).get("date", "")
+    todo = [m["slug"] for m in sorted(pool, key=lambda m: (focus(m), when(m["slug"])), reverse=True)][:limit]
     made = 0
     for slug in todo:
         try:
@@ -207,8 +233,13 @@ def shorts(ledger, limit, token, public):
             out = VM.OUT / f"{slug}.short.mp4"
             sec = DS.make(sc, out)
             rec = {"date": date.today().isoformat(), "sec": round(sec), "title": sc.get("title", "")}
+            # 同じ記事の通常の動画があれば、説明欄の先頭に続きとして置く（この印の付いたショートだけ）
+            lead = bool(ledger[slug].get("youtube"))
+            if lead:
+                rec["desc"] = YT.LEAD_LONG
             if token:
-                rec["youtube"] = YT.upload(out, slug, public=public, quiet=True, short_title=sc.get("title", ""))
+                rec["youtube"] = YT.upload(out, slug, public=public, quiet=True, short_title=sc.get("title", ""),
+                                           lead_long=lead)
             ledger[slug]["short"] = rec
             made += 1
             print(f"   ○ short {slug[:40]:<40} {sec:.0f}秒" + (f" → youtube.com/shorts/{rec['youtube']}" if token else ""))
@@ -248,7 +279,11 @@ def main():
                  and (ROOT / "articles" / f"{k}.md").is_file()]
     rows = [{"slug": s, "site": ledger[s].get("site") or "", "title": s, "date": "", "redo": True}
             for s in redo][:a.limit]
-    rows += candidates(a.days, a.limit - len(rows)) if len(rows) < a.limit else []
+    skipped = []
+    if len(rows) < a.limit:
+        import yt_demand as YD
+        made_rows, skipped = plan_long(candidates(a.days, JUDGE_MAX), a.limit - len(rows), YD.judge)
+        rows += made_rows
     # 受託のクライアントは、先方のチャンネルを接続した社だけ作る（作っても上げ先が無い。当社のチャンネルには上げない）
     skip = [r["slug"] for r in rows if YT.is_client(r["site"]) and not YT.token_path(r["site"]).is_file()]
     if skip:
@@ -263,10 +298,17 @@ def main():
     print(f"■ 記事動画: 今回 {len(rows)}本（作り直し {len(redo)}本待ち・直近{a.days}日の未作成） / "
           f"YouTubeの鍵 {'あり' if token else '無し'}")
     for r in rows:
-        print(f"   [{r['site']:<9}] {'作り直し' if r.get('redo') else r['date']} {r['title'][:44]}")
+        print(f"   [{r['site']:<9}] {'作り直し' if r.get('redo') else r['date']} {r['title'][:44]}"
+              + (f"\n               → 動画の題: {r['yt']['title']}" if r.get("yt") else ""))
+    for r, j in skipped:
+        print(f"   [{r['site']:<9}] 通常の動画なし（ショートだけ） {r['slug'][:40]}: {j['reason']}")
     if not a.write:
         print(f"YT_TOKEN={'yes' if token else 'missing'}")
         return 0
+    for r, j in skipped:
+        # 判定を残す（翌日また同じ記事を判定しない・ショートの対象にする）。top の date/youtube は付けない
+        # （付けると video_embed・outcome_watch が動画を上げた記事として数える）
+        ledger.setdefault(r["slug"], {"site": r["site"], "long": j})
     made, ok = 0, True
     for r in rows:
         try:
@@ -290,8 +332,11 @@ def main():
                    "sec": round(sec), "mp4": str(out.relative_to(ROOT)).replace("\\", "/"),
                    "nums": _nums(script), "format": fmt}
             replacing = [old["youtube"]] if r.get("redo") and old.get("youtube") else []
+            if r.get("yt"):
+                rec["long"] = r["yt"]
             if token:
-                rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True, replacing=replacing)
+                rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True, replacing=replacing,
+                                           title=(r.get("yt") or {}).get("title", ""))
             if replacing:
                 # 消すと再生数と埋め込みが失われる。限定公開に下げて、新しい動画に差し替える。
                 # 下げるのは新しい版が上がった後（先に下げると、上限で上がらなかった日に動画が無くなる。2026-10-03）

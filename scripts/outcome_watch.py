@@ -74,7 +74,9 @@ def check_video(day, bad):
     if not p.is_file():
         return
     vids = json.loads(p.read_text(encoding="utf-8"))
-    n = sum(1 for v in vids.values() if isinstance(v, dict) and v.get("date") == day.isoformat())
+    # 通常の動画は YouTube で検索されるテーマだけ作るので、ショートだけの日がある（yt_demand）
+    n = sum(1 for v in vids.values() if isinstance(v, dict)
+            for d in (v.get("date"), (v.get("short") or {}).get("date")) if d == day.isoformat())
     print(f"  動画: {n}本")
     if n == 0:
         bad.append(f"要対応: {day} に動画が1本も上がっていません（daily-video の実行記録を確かめる）")

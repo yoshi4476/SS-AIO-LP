@@ -197,9 +197,13 @@ def tools_block(a):
     return "\n".join(lines) + "\n\n"
 
 
-def full_description(slug, short=False, chapters=None):
+LEAD_LONG = "lead-long"     # 台帳のショートの desc にこの印があるものだけ、説明欄の先頭に通常の動画を置く
+
+
+def full_description(slug, short=False, chapters=None, lead_long=False):
     """概要欄の完成形。アップロードと書き直しの両方がここを通る（別々に組むと片方だけ古くなる）。
-    リンクは畳まれた状態でも見える先頭の行に置く。要約の下にあると「もっと見る」を押さないと出てこない（2026-10-03）"""
+    リンクは畳まれた状態でも見える先頭の行に置く。要約の下にあると「もっと見る」を押さないと出てこない（2026-10-03）。
+    lead_long はこれから上げるショートだけ（上げ済みのショートの説明欄は前の形のまま変えない）"""
     desc, title, tags = describe(slug)
     if not desc:
         return desc, title, tags
@@ -209,7 +213,11 @@ def full_description(slug, short=False, chapters=None):
         head = [f"詳しくは「{br['search']}」で検索してください。"]
         lp = ROOT / "data" / "videos.json"
         long_id = (json.loads(lp.read_text(encoding="utf-8")).get(slug) or {}).get("youtube") if lp.is_file() else None
-        if long_id:
+        if long_id and lead_long:
+            # ショートは見られて通常の動画は見られていなかった（2026-10-05）。続きをいちばん上に置く。
+            # 関連動画の欄・コメントの固定は API に項目が無く設定できない
+            head.insert(0, f"▶ 続きの解説（通常の動画）\nhttps://youtu.be/{long_id}")
+        elif long_id:
             # ショートを見た人を本編へ送る（ショートの説明欄は押せる場合がある。押せなくても題で探せる）
             head.append(f"▶ 本編の動画（くわしい解説）\nhttps://youtu.be/{long_id}")
         desc = "\n".join(head) + "\n\n" + desc
@@ -234,7 +242,8 @@ def update_descriptions():
         for vid, short in ((v.get("youtube"), False), ((v.get("short") or {}).get("youtube"), True)):
             if not vid:
                 continue
-            desc, _, _ = full_description(slug, short=short, chapters=ROOT / "automation" / "video" / f"{slug}.chapters.txt")
+            desc, _, _ = full_description(slug, short=short, chapters=ROOT / "automation" / "video" / f"{slug}.chapters.txt",
+                                          lead_long=short and (v.get("short") or {}).get("desc") == LEAD_LONG)
             if not desc:
                 continue
             cur = yt.videos().list(part="snippet", id=vid).execute().get("items", [])
@@ -341,8 +350,9 @@ def existing(yt, title, n=50, skip=()):
     return None
 
 
-def upload(mp4, slug, public=False, quiet=False, short_title="", replacing=()):
-    """short_title を渡すと縦型ショートとして上げる（題に #Shorts、説明は短く、再生リストには入れない）"""
+def upload(mp4, slug, public=False, quiet=False, short_title="", replacing=(), title="", lead_long=False):
+    """short_title を渡すと縦型ショートとして上げる（題に #Shorts、説明は短く、再生リストには入れない）。
+    title は通常の動画の題（yt_demand が YouTube の検索語から決めたもの。無ければ記事の題）"""
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload
     site = site_of(slug)
@@ -356,9 +366,9 @@ def upload(mp4, slug, public=False, quiet=False, short_title="", replacing=()):
     # そのまま表示される（2026-10-03: ショートはすべて字幕なしで上がっていた）
     if not Path(mp4).with_suffix(".srt").is_file():
         raise RuntimeError(f"字幕ファイル {Path(mp4).with_suffix('.srt').name} がありません。上げません")
-    desc, title, tags = full_description(slug, short=bool(short_title), chapters=Path(mp4).with_suffix(".chapters.txt"))
-    if short_title:
-        title = short_title[:88] + " #Shorts"
+    desc, art_title, tags = full_description(slug, short=bool(short_title), chapters=Path(mp4).with_suffix(".chapters.txt"),
+                                             lead_long=lead_long)
+    title = short_title[:88] + " #Shorts" if short_title else (title or art_title)
     # タイトルは100字まで。超えると API が弾く
     title = (title or slug)[:100]
     body = {"snippet": {"title": title, "description": desc[:4900],
