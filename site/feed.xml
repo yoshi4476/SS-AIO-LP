@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-10-03T00:00:00+09:00</updated>
+  <updated>2026-10-04T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>AIOサービス比較で外す5つの落とし穴｜4つの型の向き不向き</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-service-hikaku/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-service-hikaku/</id>
+    <updated>2026-10-04T00:00:00+09:00</updated>
+    <summary>AIOサービスは計測ツール・診断・記事制作代行・運用代行の4つの型に分かれ、比べるべきは料金より成果物です。型ごとの向き不向き、Googleが否定した施策を売るサービスの見分け方、契約前に聞く6つの質問を整理します。</summary>
+  </entry>
   <entry>
     <title>AIO導入のメリット5つと費用相場｜投資対効果の考え方</title>
     <link href="https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/llmo-tenpo-shukyaku/</id>
     <updated>2026-09-18T00:00:00+09:00</updated>
     <summary>LLMO店舗集客とは、AI検索での引用を来店・予約につなげる店舗向けの取り組みです。MEO対策との違い、取り組むべき5つの施策、業種別の進め方、GA4・GSCでの効果測定までを、自社の運用実績とあわせて解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIOのやり方｜5ステップの実践手順と失敗例</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-yarikata/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-yarikata/</id>
-    <updated>2026-09-17T00:00:00+09:00</updated>
-    <summary>AIOのやり方は、クローラーの受け入れ整備→本文の断言型書き換え→数値ファクトの追加→FAQの整備→公開後の計測という5ステップです。自社サイトの実装データをもとに、つまずきやすい失敗例とあわせて手順を解説します。</summary>
   </entry>
 </feed>

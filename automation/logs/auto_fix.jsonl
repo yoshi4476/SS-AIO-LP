@@ -1543,3 +1543,6 @@
 {"at": "2026-10-03 23:28", "by": "cta_fill", "slug": "ai-donyu-hojokin-jirei", "kind": "cta", "ok": true, "note": "CTAを2箇所目まで足した"}
 {"at": "2026-10-03 23:28", "by": "cta_fill", "slug": "ai-hojokin-futaitaku-riyu", "kind": "cta", "ok": true, "note": "CTAを2箇所目まで足した"}
 {"at": "2026-10-03 23:28", "by": "cta_fill", "slug": "keiri-zaimu-chigai", "kind": "cta", "ok": true, "note": "CTAを2箇所目まで足した"}
+{"at": "2026-10-04 11:40", "by": "link_boost", "slug": "aio-service-hikaku", "kind": "link_rescue", "ok": true, "note": "aio-taisaku-souba から内部リンクを1本"}
+{"at": "2026-10-04 11:40", "by": "link_boost", "slug": "aio-service-hikaku", "kind": "link_rescue", "ok": true, "note": "aio-checker から内部リンクを1本"}
+{"at": "2026-10-04 11:40", "by": "link_boost", "slug": "aio-service-hikaku", "kind": "link_rescue", "ok": true, "note": "gaiheki-tosou-aio-taisaku から内部リンクを1本"}
