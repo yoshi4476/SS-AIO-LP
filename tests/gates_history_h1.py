@@ -343,3 +343,10 @@ def test_research_runs_quarterly_and_refill_stops_itself():
     q = (ROOT / ".github" / "workflows" / "industry-research.yml").read_text(encoding="utf-8")
     check("3か月ごとの回: 欠けがあれば聞き足しを有効に戻す", "gh workflow enable research-refill.yml" in q, True)
     check("3か月ごとの回の予定は3か月おき", "1,4,7,10" in q, True)
+
+
+def test_deploy_build_has_japanese_font_for_charts():
+    print("\n■ 公開の作り直し: 調査ページの図を描く日本語フォントを入れる（無いと図だけ黙って外れる）")
+    wf = (ROOT / ".github" / "workflows" / "deploy.yml").read_text(encoding="utf-8")
+    check("deploy.yml が fonts-noto-cjk を入れてからビルドする",
+          0 <= wf.find("fonts-noto-cjk") < wf.find("python scripts/build.py"), True)

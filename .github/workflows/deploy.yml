@@ -35,6 +35,8 @@ jobs:
       - name: 原稿から作り直す
         run: |
           python -m pip install --quiet -r requirements.txt || true
+          # 調査ページの「貼れる図」は日本語フォントで描く。無いと図だけ外れて公開される（2026-10-05 に全ページで欠けていた）
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk > /dev/null 2>&1 || true
           python scripts/build.py > /tmp/build.log 2>&1 && echo "作り直しました" \
             || { tail -20 /tmp/build.log; git checkout -- site; echo "::warning::作り直しに失敗したため、コミット済みのページを公開します"; }
           tail -3 /tmp/build.log
