@@ -51,6 +51,39 @@ TECH = [
      "トップから料金・サービス・会社概要・問い合わせまで、何回クリックで届くかを数える",
      "メニューかトップの本文に、大事なページへのリンクを置く"),
 ]
+# TECH と同じ並び。（なぜ大事か, (優先度, 担当, 時間の目安)）。受け取った人が「やらないと何が起きるか」と
+# 「自分でやれるか」を項目ごとに判断できるようにする。根拠を示せない数字は書かない
+TECH_WHY = [
+    ("拒否されていると、AIはページを読めず、答えの出典に選べません。内容をどれだけ良くしても効きません。", ("最優先", "自分で確認・制作会社", "5分")),
+    ("管理画面に出ない所で弾かれていることがあり、気づかないまま「引用されない状態」が続きます。", ("最優先", "制作会社", "10分")),
+    ("https でないページは、ブラウザに「保護されていない」と出て、問い合わせの前に離れられます。", ("高", "制作会社", "10分")),
+    ("残っていると、そのページは検索にもAIの答えにも出ません。サイトを作り直した後に残りやすい設定です。", ("最優先", "自分で確認", "10分")),
+    ("新しいページや直したページを、検索エンジンに早く見つけてもらえます。", ("高", "自分で", "15分")),
+    ("検索結果とAIが、そのページが何の話かを最初に判断する所です。同じ題が並ぶと、どれを見せるか決められません。", ("高", "自分で・制作会社", "30分〜")),
+    ("見出しが主題を言っていないと、AIがページの要点を取り違えます。", ("中", "制作会社", "30分")),
+    ("画像の中の電話番号は、AIにも検索エンジンにも読まれにくく、問い合わせ先として紹介されません。", ("高", "制作会社", "15分")),
+    ("必須ではありませんが、会社名・住所・質問と答えを、機械が取り違えにくくなります。", ("中", "制作会社", "半日")),
+    ("表示が遅いと、スマホで探している人が読む前に離れます。", ("中", "制作会社", "半日〜")),
+    ("奥にあるページは、検索エンジンにもAIにも「大事なページ」だと伝わりにくくなります。", ("中", "制作会社", "30分")),
+]
+# 業種の決まりの2項目（rules）に共通の理由
+RULE_WHY = [("決まりにふれる表現は、指導の対象になるうえ、AIの答えにも載りにくくなります。", ("最優先", "自分で確認", "1時間")),
+            ("登録・許可の番号は、比べている人が信頼できる相手かを確かめる材料です。", ("高", "自分で", "15分"))]
+GLOSSARY = [
+    ("robots.txt", "サイトの入口に置く、「どのロボットに読ませるか」を決めるファイル。"),
+    ("クローラー", "ページを読みに来るロボット。GPTBot（ChatGPT）・ClaudeBot・Googlebot など。"),
+    ("noindex", "「このページを検索に出さない」という設定。公開したいページに付いていると、検索にもAIにも出ません。"),
+    ("サイトマップ", "サイトにあるページの一覧のファイル。検索エンジンに新しいページを知らせます。"),
+    ("title・description", "検索結果に出る題と説明文。ページごとに中身に合わせて書きます。"),
+    ("構造化データ", "会社名・住所・よくある質問などを、機械が読みやすい形で書いたもの。"),
+    ("LCP", "ページのいちばん大きな部分が表示されるまでの時間。2.5秒以内が目安（Google の基準）。"),
+    ("Search Console", "Google の無料の道具。どの言葉で何回表示され、何回クリックされたかが分かります。"),
+    ("Googleビジネスプロフィール", "Googleマップに出る会社・店の情報。営業時間・写真・口コミを管理します。"),
+    ("出典", "AIが答えの根拠として示すページ。ここに自社のページが入ることが、AI検索対策の目標です。"),
+]
+QUICK = [("robots.txt を開いて見る", "「https://自社のドメイン/robots.txt」をブラウザで開き、「Disallow: /」の行が無いかを見る（1-1）"),
+         ("Googleビジネスプロフィールを直す", "Googleマップで自社を検索し、営業時間・写真が今と合っているかを見る（2-2）"),
+         ("Search Console に登録する", "無料。登録した日から数字が溜まるので、早いほど比べられる期間が長くなります（5-1）")]
 INDUSTRIES = {
     "dental": {"label": "歯科医院", "research": "dental", "lp": "medical", "word": "歯医者",
                "topics": ["治療ごとの費用の目安と、保険が使えるかどうか", "治療法の選び方（インプラント・入れ歯・ブリッジの違い）",
@@ -165,9 +198,34 @@ def page(key):
                ("問い合わせ・予約が、どのページから来たかを分かるようにしている",
                 "問い合わせフォームの送信を、アクセス解析で数えているかを見る",
                 "送信をイベントとして数え、どのページから来たかを見る")]
+    def attach(rows, whys):
+        return [r + w for r, w in zip(rows, whys)] + list(rows[len(whys):])
+    find = attach(find, [
+        (f"探す質問でAIが出典にするのは{T['portal']}が多く、古い情報がそのまま答えに使われます。", ("最優先", "自分で", "30分")),
+        ("地図検索とAIの両方が参照します。営業時間の誤りは、来店・来院の取りこぼしに直結します。", ("最優先", "自分で", "15分")),
+        ("書き方がサイトごとに違うと、同じ会社だと判断されにくくなります。", ("高", "自分で", "30分")),
+        ("返信は、探している人が比べるときの判断材料になります。", ("中", "自分で", "毎週10分")),
+        ("今の位置を知らないと、直した後に効果があったかを比べられません。", ("高", "自分で", "5分"))])
+    seek = [r + ("このテーマの質問に答えるページが無いと、AIは他のサイトを出典にします。" if i == 0 else "",
+                 ("高" if i < 2 else "中", "自社で書く・制作会社", "1ページ半日"))
+            for i, r in enumerate(seek)]
+    facts = attach(facts, [
+        ("「多数の実績」は確かめようがありません。AIは数字と期間のある事実を根拠に選びます。", ("高", "自分で", "1時間")),
+        ("誰が書いたか分からないページは、医療・法律・お金の分野で特に信頼されにくくなります。", ("高", "自分で", "30分")),
+        ("古い料金・制度のまま答えに使われると、問い合わせ後の食い違いにつながります。", ("中", "自分で", "半年に1回"))] + RULE_WHY)
+    measure = attach(measure, [
+        ("数字が無いと、どの直しが効いたかが分からず、次の手を決められません。", ("高", "自分で", "15分")),
+        ("分けて見ないと、AIからの訪問の変化に気づけません。", ("中", "自分で", "15分")),
+        ("どのページが問い合わせを生んだかが分かると、増やすべきページが決まります。", ("高", "制作会社", "1時間"))])
+    ex = {
+        1: ("ページの題（title）", f"ホーム｜{c['label']}名", f"（地域名）の{c['label']}｜（主なサービス）の費用と流れ｜（社名）"),
+        2: ("社名・住所の書き方", "サイトAでは「㈱〇〇」、ポータルでは「株式会社〇〇 本店」", "すべてのサイトで、自社サイトと同じ「株式会社〇〇」に揃える"),
+        3: ("解説ページの組み立て", "あいさつ → 会社の紹介 → 最後に少しだけ本題", "最初に結論 → 理由 → 費用・手順 → よくある質問 → 相談の案内"),
+        4: ("実績の書き方", "多数の実績があります", "2025年4月〜2026年3月に（数）件をお手伝いしました（数えられる事実だけ）"),
+    }
     chapters = [
         ("AIと検索に読まれる状態か", "ここが欠けると、内容が良くてもAIの答えに使われません。最初に確かめてください。",
-         "確かめる: 自分で ／ 直す: 制作会社・サーバー", TECH),
+         "確かめる: 自分で ／ 直す: 制作会社・サーバー", [r + w for r, w in zip(TECH, TECH_WHY)]),
         (f"「探される」場面（{T['owner']}を探す人）", f"探す質問では、AIは{T['portal']}も出典にします。掲載情報の古さは、そのまま答えに出ます。",
          "自分でできる ／ 続けるのが難しい", find),
         ("「調べられる」場面（自社の解説ページ）", f"費用・手続きなどを調べる質問では、AIは{T['owner_site']}を出典にしていました。",
@@ -178,13 +236,29 @@ def page(key):
     ]
     total = sum(len(ch[3]) for ch in chapters)
 
+    PRI = {"最優先": "p1", "高": "p2", "中": "p3"}
+
     def items(n, rows):
         out = []
-        for i, (what, how, fix) in enumerate(rows, 1):
+        for i, r in enumerate(rows, 1):
+            what, how, fix = r[:3]
+            why = r[3] if len(r) > 3 else ""
+            pri, who, mins = r[4] if len(r) > 4 else ("", "", "")
+            tags = (f'<span class="tg {PRI.get(pri, "p3")}">{e(pri)}</span><span class="tg tw2">{e(who)}</span>'
+                    f'<span class="tg tt">目安 {e(mins)}</span>') if pri else ""
             out.append(f'<tr><td class="cb"><span class="b"></span></td><td class="no">{n}-{i}</td>'
-                       f'<td><p class="w">{e(what)}</p><div class="hf"><p><b class="h">確かめ方</b>{e(how)}</p>'
+                       f'<td><p class="w">{e(what)}</p><p class="tags">{tags}</p>'
+                       + (f'<p class="why"><b>なぜ大事か</b>{e(why)}</p>' if why else "")
+                       + f'<div class="hf"><p><b class="h">確かめ方</b>{e(how)}</p>'
                        f'<p><b class="f">直し方</b>{e(fix)}</p></div></td></tr>')
         return "".join(out)
+
+    def example(n):
+        if n not in ex:
+            return ""
+        k, ng, ok = ex[n]
+        return (f'<div class="ex"><p class="exh">見本: {e(k)}</p><div class="exg"><p class="ng"><b>NG</b>{e(ng)}</p>'
+                f'<p class="ok"><b>OK</b>{e(ok)}</p></div></div>')
 
     def bar(label, pct, color):
         return (f'<div class="bar"><span class="bl">{e(label)}</span><span class="bt"><span class="bf" style="width:{pct}%;background:{color}"></span></span>'
@@ -196,17 +270,36 @@ def page(key):
              + f'<p class="ct" style="margin-top:3mm">{e(T["other_short"])}を調べる質問で、{e(T["owner_site"])}を出典にした回答</p>'
              + bar("1つ以上を出典にした回答", oa, "#0b7a4b")
              + f'<p class="src">出典: セブンセンシズ株式会社の調査（{hl["questions"]}問を {e(hl["engines_text"])} に質問・{hl["date"]}）{hl["url"]}</p></div>')
-    toc = "".join(f'<tr><td class="tn">{i}</td><td>{e(ch[0])}</td><td class="tc">{len(ch[3])}項目</td><td class="tw">{e(ch[2])}</td></tr>'
+    toc = '<tr><td class="tn">0</td><td>はじめに（今日すぐできる3つ・印の見方・用語ミニ辞典）</td><td class="tc">—</td><td class="tw">3分</td></tr>'
+    toc += "".join(f'<tr><td class="tn">{i}</td><td>{e(ch[0])}</td><td class="tc">{len(ch[3])}項目</td><td class="tw">{e(ch[2])}</td></tr>'
                   for i, ch in enumerate(chapters, 1))
     toc += ('<tr><td class="tn">6</td><td>自己採点と、どこから手を付けるか</td><td class="tc">—</td><td class="tw">5分</td></tr>'
             '<tr><td class="tn">7</td><td>よくあるつまずき・自社で進めるか任せるか</td><td class="tc">—</td><td class="tw"></td></tr>')
+    # 章ごとに頁を改めると、短い章の頁の下半分が空く。1章だけ新しい頁から始め、あとは続けて流す
     body_ch = "".join(
-        f'<section class="ch"><div class="band"><span class="num">{i}</span><div><h2>{e(ch[0])}</h2>'
+        f'<section class="ch{" first" if i == 1 else ""}"><div class="band"><span class="num">{i}</span><div><h2>{e(ch[0])}</h2>'
         f'<p>{e(ch[1])}</p></div><span class="meta">{len(ch[3])}項目<br>{e(ch[2])}</span></div>'
-        f'<table class="it">{items(i, ch[3])}</table></section>'
+        f'{example(i)}<table class="it">{items(i, ch[3])}</table></section>'
         for i, ch in enumerate(chapters, 1))
     score = "".join(f'<tr><td>{i}. {e(ch[0])}</td><td class="tc">{len(ch[3])}</td><td class="fill"></td>'
                     f'<td class="tc">{(len(ch[3]) + 1) // 2}未満なら優先</td></tr>' for i, ch in enumerate(chapters, 1))
+    hi, mid = round(total * 0.8), round(total * 0.5)
+    verdict = (f'<table class="verdict"><tr><th>印の合計</th><th>今の段階</th><th>次にやること</th></tr>'
+               f'<tr><td class="tc">{hi}以上</td><td><b class="v1">土台は整っている</b></td><td>解説ページを増やし、毎月の数字で効いたページを伸ばす</td></tr>'
+               f'<tr><td class="tc">{mid}〜{hi - 1}</td><td><b class="v2">一部が欠けている</b></td><td>印の少ない章から。特に1章の欠けを先に埋める</td></tr>'
+               f'<tr><td class="tc">{mid - 1}以下</td><td><b class="v3">土台から整える段階</b></td><td>1章の設定と2章の掲載情報を先に。解説ページはその後</td></tr></table>')
+    quick = "".join(f'<div><b>{e(a)}</b>{e(b)}</div>' for a, b in QUICK)
+    gloss = "".join(f'<tr><th>{e(a)}</th><td>{e(b)}</td></tr>' for a, b in GLOSSARY)
+    intro = (f'<section class="intro"><div class="band"><span class="num">0</span><div><h2>はじめに</h2>'
+             f'<p>今日すぐできる3つと、印の見方・言葉の意味をまとめました。</p></div><span class="meta">所要 3分</span></div>'
+             f'<h3 class="sec">今日すぐできる3つ（どれも無料・30分以内）</h3><div class="quick">{quick}</div>'
+             '<h3 class="sec">項目の印の見方</h3><div class="legend">'
+             '<p><span class="tg p1">最優先</span>欠けていると、ほかの直しの効果が出ない項目</p>'
+             '<p><span class="tg p2">高</span>問い合わせ・信頼に直接かかわる項目</p>'
+             '<p><span class="tg p3">中</span>土台が整った後に進める項目</p>'
+             '<p><span class="tg tw2">自分で ／ 制作会社</span>誰が手を動かすか</p>'
+             '<p><span class="tg tt">目安</span>作業にかかる時間の目安</p></div>'
+             f'<h3 class="sec">用語ミニ辞典</h3><table class="gloss">{gloss}</table></section>')
     pits = ["設定を直しても、AIの答えや検索の順位に表れるまでには数か月単位の時間がかかり、途中で手が止まる",
             "解説ページを増やしたが、地域名や業種名だけを入れ替えた同じ形のページになり、かえって評価を下げる",
             f"{c['label']}の決まりにふれる表現が残ったまま、ページを広げてしまう",
@@ -218,7 +311,7 @@ def page(key):
 <style>
 @page{{size:A4;margin:12mm 13mm 13mm}}
 *{{box-sizing:border-box}}
-body{{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:#122036;font-size:9pt;line-height:1.65;margin:0}}
+body{{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:#122036;font-size:9.6pt;line-height:1.7;margin:0}}
 p{{margin:0}}
 .cover h1{{font-size:24pt;line-height:1.3;margin:0;color:#0b2447;letter-spacing:.01em}}
 .cover .kick{{display:inline-block;background:#2563eb;color:#fff;font-size:8.4pt;font-weight:700;border-radius:1mm;padding:.6mm 2.4mm;margin-bottom:3mm}}
@@ -240,7 +333,8 @@ table{{width:100%;border-collapse:collapse}}
 .tc{{width:20mm;text-align:center;white-space:nowrap}}
 .tw{{width:62mm;color:#5b6b84;font-size:8pt}}
 .use{{background:#f4f7fc;border-radius:2mm;padding:3mm 4mm;font-size:8.6pt;margin-top:4mm}}
-.ch{{break-before:page}}
+.ch{{margin-top:7mm}} .ch.first,.intro,.last{{break-before:page;margin-top:0}}
+.band{{break-after:avoid}} .ex{{break-inside:avoid;break-after:avoid}}
 .band{{display:grid;grid-template-columns:13mm 1fr 44mm;gap:3mm;align-items:center;background:#0b2447;color:#fff;border-radius:3mm;padding:3.5mm 4mm;margin-bottom:3mm}}
 .band .num{{font-size:22pt;font-weight:800;color:#93c5fd;text-align:center}}
 .band h2{{font-size:13pt;margin:0 0 .8mm}}
@@ -251,10 +345,16 @@ table{{width:100%;border-collapse:collapse}}
 .cb{{width:6mm}}
 .b{{display:block;width:3.8mm;height:3.8mm;border:.4mm solid #2563eb;border-radius:.7mm;margin-top:.6mm}}
 .no{{width:9mm;color:#2563eb;font-weight:800;font-size:8.4pt;padding-top:2.6mm!important}}
-.w{{font-weight:700;color:#0b2447;font-size:9.2pt;margin-bottom:1mm}}
+.w{{font-weight:700;color:#0b2447;font-size:10pt;margin-bottom:.8mm}}
+.tags{{margin:0 0 1.2mm}}
+.tg{{display:inline-block;font-size:7.4pt;font-weight:700;border-radius:4mm;padding:.2mm 2.2mm;margin-right:1.2mm;line-height:1.6}}
+.p1{{background:#fde2e1;color:#a4161a}} .p2{{background:#fff1d6;color:#8a4b00}} .p3{{background:#e8edf5;color:#3d4b63}}
+.tw2{{background:#e6f0ff;color:#1d4ed8}} .tt{{background:#eef7f1;color:#0b6b41}}
+.why{{font-size:8.8pt;color:#1f2d45;margin:0 0 1.4mm;line-height:1.6}}
+.why b{{color:#a4161a;margin-right:1.5mm;font-size:8pt}}
 .hf{{display:grid;grid-template-columns:1fr 1fr;gap:3mm}}
-.hf p{{font-size:7.9pt;color:#3d4b63;line-height:1.55;background:#f7f9fc;border-radius:1.2mm;padding:1.6mm 2mm}}
-.hf b{{display:block;font-size:7.4pt;margin-bottom:.4mm}}
+.hf p{{font-size:8.5pt;color:#24324a;line-height:1.6;background:#f3f6fb;border-radius:1.2mm;padding:1.8mm 2.2mm}}
+.hf b{{display:block;font-size:7.8pt;margin-bottom:.4mm}}
 .h{{color:#2563eb}} .f{{color:#0b7a4b}}
 .score td,.score th{{border:.25mm solid #d9e2ef;padding:2.2mm;font-size:8.8pt}}
 .score th{{background:#eef3fb;text-align:left}}
@@ -278,6 +378,22 @@ table{{width:100%;border-collapse:collapse}}
 .ask .big{{font-size:10.5pt;font-weight:700;color:#fff;margin-top:2.5mm}}
 .foot{{margin-top:5mm;border-top:.3mm solid #e3eaf3;padding-top:3mm;font-size:8pt;color:#5b6b84}}
 .foot b{{color:#0b2447}}
+.ex{{border:.3mm solid #d9e2ef;border-radius:2mm;padding:2.5mm 3mm;margin:0 0 3mm}}
+.exh{{font-weight:700;color:#0b2447;font-size:9pt;margin-bottom:1.5mm}}
+.exg{{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}}
+.exg p{{font-size:8.6pt;border-radius:1.2mm;padding:1.8mm 2.2mm;line-height:1.55}}
+.exg b{{display:inline-block;color:#fff;font-size:7.6pt;border-radius:.8mm;padding:0 1.6mm;margin-right:1.6mm}}
+.ng{{background:#fdf0ef}} .ng b{{background:#c2410c}} .ok{{background:#edf7f0}} .ok b{{background:#0b7a4b}}
+.quick{{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:0 0 5mm}}
+.quick div{{border-top:1mm solid #0b7a4b;background:#f2f9f4;padding:3mm;font-size:8.8pt;line-height:1.6}}
+.quick b{{display:block;color:#0b2447;font-size:9.8pt;margin-bottom:1mm}}
+.legend{{display:grid;grid-template-columns:1fr 1fr;gap:1.5mm 5mm;margin:0 0 5mm;font-size:8.8pt}}
+.legend .tg{{margin-right:2mm}}
+.gloss th,.gloss td{{border-bottom:.25mm solid #e3eaf3;padding:1.8mm 2mm;font-size:8.8pt;text-align:left;vertical-align:top}}
+.gloss th{{width:44mm;color:#0b2447;white-space:nowrap}}
+.verdict{{margin:4mm 0 2mm}} .verdict th,.verdict td{{border:.25mm solid #d9e2ef;padding:2mm;font-size:8.8pt;text-align:left}}
+.verdict th{{background:#eef3fb}}
+.v1{{color:#0b7a4b}} .v2{{color:#8a4b00}} .v3{{color:#a4161a}}
 </style></head><body>
 <section class="cover">
 <span class="kick">{e(c['label'])}版 ／ {hl['date'][:4]}年{int(hl['date'][5:7])}月版</span>
@@ -291,11 +407,13 @@ table{{width:100%;border-collapse:collapse}}
 <div class="use"><b>使い方</b>　1章から順に「確かめ方」で今の状態を見て、当てはまれば□に印をつけます。
 当てはまらない項目は「直し方」を参考に進めてください。印の数は6章の表に書き込みます。</div>
 </section>
+{intro}
 {body_ch}
-<section class="ch"><div class="band"><span class="num">6</span><div><h2>自己採点と、どこから手を付けるか</h2>
+<section class="ch last"><div class="band"><span class="num">6</span><div><h2>自己採点と、どこから手を付けるか</h2>
 <p>章ごとの印の数を書き込み、少ない章から手を付けます。</p></div><span class="meta">所要 5分</span></div>
 <table class="score"><thead><tr><th>章</th><th class="tc">項目数</th><th class="tc">印の数</th><th class="tc">目安</th></tr></thead><tbody>{score}
 <tr><th>合計</th><th class="tc">{total}</th><td class="fill"></td><td></td></tr></tbody></table>
+<h3 class="sec" style="margin-top:5mm">合計から分かる今の段階</h3>{verdict}
 <h3 class="sec" style="margin-top:5mm">進める順番</h3>
 <div class="flow"><div><b>1. 設定</b>クローラー・noindex・SSL</div><div><b>2. 掲載情報</b>ポータル・地図を最新に</div>
 <div><b>3. 解説ページ</b>「費用」「流れ」から</div><div><b>4. 事実と決まり</b>期間と母数をつける</div><div><b>5. 測る</b>月に1回、同じ日に</div></div>
@@ -303,7 +421,7 @@ table{{width:100%;border-collapse:collapse}}
 <h3 class="sec">よくあるつまずき</h3>
 <div class="pit">{"".join(f"<div>{e(x)}</div>" for x in pits)}</div>
 </section>
-<section class="ch"><div class="band"><span class="num">7</span><div><h2>自社で進めるか、任せるか</h2>
+<section class="ch last"><div class="band"><span class="num">7</span><div><h2>自社で進めるか、任せるか</h2>
 <p>1〜2の設定だけを自社で直し、3〜5を任せる分け方もできます。</p></div><span class="meta">判断の材料</span></div>
 <table class="who">{who}</table>
 <p class="note">自社で進める場合も、担当者の時間がかかります。費用の目安と当社の料金は、お問い合わせいただいた方に、御社の状況（今の印の数・ページの数・地域）をうかがってからお伝えします。</p>
