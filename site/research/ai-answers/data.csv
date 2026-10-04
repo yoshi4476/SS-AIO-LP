@@ -1,0 +1,61 @@
+﻿調べた日,問い,AI,結論,根拠の一文,記事
+2026-10-04,aiかんたん集客 AIかんたん集客に向いている業種はありますか？,ChatGPT,はい（対象になる・できる）,はい。飲食店、美容室・サロン、整体院、士業など、検索やSNSを通じて来店・相談につなげたい業種で活用しやすいと考えられます。,https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/
+2026-10-04,aiかんたん集客 AIかんたん集客に向いている業種はありますか？,Claude,結論が読み取れず,,https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/
+2026-10-04,aiかんたん集客 AIかんたん集客に向いている業種はありますか？,Gemini,はい（対象になる・できる）,「AIかんたん集客」（AIを活用したWeb集客ツールやノウハウ）は、「専門のマーケティング担当者がいない」「集客のための継続的な情報発信（ブログ・SNS・Googleマップなど）に時間やノウハウを割けない」という事業者にとって非常に相性が良,https://ai.7senses.co.jp/ai-marketing/ai-kantan-shukyaku/
+2026-10-04,aio対策 レポートに引用の中身まで記録すべきですか？,ChatGPT,はい（対象になる・できる）,はい。AIO対策のレポートには、引用元URLだけでなく「AIの回答でどう使われたか」まで記録することをおすすめします。,https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/
+2026-10-04,aio対策 レポートに引用の中身まで記録すべきですか？,Claude,条件による,結論: 引用の全文までは不要です。ただし「引用元URL・引用された自社ページ・引用の有無」は必ず記録し、回答文の抜粋やスクリーンショットは主要クエリに絞って残すのがよいです。,https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/
+2026-10-04,aio対策 レポートに引用の中身まで記録すべきですか？,Gemini,結論が読み取れず,,https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/
+2026-10-04,aio対策 AIO対策は無料ツールだけでできますか？,ChatGPT,はい（対象になる・できる）,はい、基本的なAIO対策は無料ツールだけでできます。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 AIO対策は無料ツールだけでできますか？,Claude,条件による,結論: 小規模なサイトや店舗なら、無料ツールだけで始められるし、計測まで回せます。ただし、サイト数や記事数が増えたり、原因診断まで求めたりする場合は有料ツールか専門家が必要になります。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 AIO対策は無料ツールだけでできますか？,Gemini,はい（対象になる・できる）,結論から申し上げますと、AIO対策（AI Overview/GEO対策）は無料ツールだけで十分に対応可能です。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 構造化データのエラーは無料で確認できますか？,ChatGPT,はい（対象になる・できる）,はい、構造化データのエラーは無料で確認できます。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 構造化データのエラーは無料で確認できますか？,Claude,はい（対象になる・できる）,はい、無料で確認できます。会員登録も不要です。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 構造化データのエラーは無料で確認できますか？,Gemini,はい（対象になる・できる）,結論から申し上げますと、構造化データのエラーは完全無料で確認できます。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 無料のAIOツールで定点観測まで自動化できますか？,ChatGPT,条件による,はい、無料のAIOツールでも、限られた質問数・頻度なら定点観測まで自動化できます。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 無料のAIOツールで定点観測まで自動化できますか？,Claude,条件による,部分的にできます。ただし、無料枠の範囲内に限られます。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,aio対策 無料のAIOツールで定点観測まで自動化できますか？,Gemini,いいえ（対象外・できない）,結論から申し上げますと、完全無料で「定点観測（定期的なプロンプト実行・順位や言及の自動トラッキング）」まで全自動化できる既存のAIO（LLMO/GEO）ツールは、2026年現在ほぼ存在しません。,https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/
+2026-10-04,病院 低評価の口コミは削除できますか？,ChatGPT,条件による,病院の低評価の口コミは、削除できる場合があります。,https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/
+2026-10-04,病院 低評価の口コミは削除できますか？,Claude,条件による,結論: 条件付きで削除できます。,https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/
+2026-10-04,病院 低評価の口コミは削除できますか？,Gemini,結論が読み取れず,,https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/
+2026-10-04,注文住宅 ポータルサイトへの掲載はやめるべきですか？,ChatGPT,条件による,工務店・住宅会社の集客についてなら、注文住宅ポータルサイトへの掲載を一律にやめる必要はありません。成約につながる費用と営業負担を確認し、採算の悪い掲載から縮小するのが妥当です。,https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/
+2026-10-04,注文住宅 ポータルサイトへの掲載はやめるべきですか？,Claude,条件による,結論: 一律にやめるべきではありません。 反響から成約までの費用が計画内に収まっているなら続け、そうでないなら縮小または撤退します。,https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/
+2026-10-04,注文住宅 ポータルサイトへの掲載はやめるべきですか？,Gemini,条件による,結論から言うと、「すぐにすべてをやめる」のではなく、自社の成約データと自社集客力を分析した上で、段階的に依存度を下げる（あるいは活用方法を見直す）のが最も現実的でリスクの低い判断です。,https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/
+2026-10-04,googleマップ 低評価の口コミにも返信すべきですか？,ChatGPT,はい（対象になる・できる）,はい、Googleマップの低評価の口コミにも、基本的には返信することをおすすめします。,https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/
+2026-10-04,googleマップ 低評価の口コミにも返信すべきですか？,Claude,はい（対象になる・できる）,はい、低評価の口コミにも返信すべきです。,https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/
+2026-10-04,googleマップ 低評価の口コミにも返信すべきですか？,Gemini,はい（対象になる・できる）,結論からお伝えすると、基本的には低評価の口コミにも返信すべきです。,https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/
+2026-10-04,googleマップ 返信にテンプレートをそのまま使ってもいいですか？,ChatGPT,いいえ（対象外・できない）,Google マップの口コミへの返信なら、テンプレートを下書きに使うのはよいですが、同じ文章をそのまま何度も貼り付けるのは避けましょう。,https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/
+2026-10-04,googleマップ 返信にテンプレートをそのまま使ってもいいですか？,Claude,結論が読み取れず,,https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/
+2026-10-04,googleマップ 返信にテンプレートをそのまま使ってもいいですか？,Gemini,いいえ（対象外・できない）,結論から申し上げますと、テンプレートを「全く同じ文章のまま（丸コピペ）」で返信し続けるのは避けたほうが良いです。,https://ai.7senses.co.jp/meo/googlemap-kuchikomi-henshin/
+2026-10-04,医療広告ガイドラインは施設形態によって内容が変わりますか？,ChatGPT,条件による,基本ルールは共通ですが、施設の種類によって、適用される規定や広告できる事項に違いがあります。,https://ai.7senses.co.jp/meo/iryou-meo-taisaku/
+2026-10-04,医療広告ガイドラインは施設形態によって内容が変わりますか？,Claude,条件による,医療広告ガイドライン自体は、病院・診療所・歯科診療所・助産所でほぼ共通のルールです。施設形態で内容が変わるのは、あん摩・マッサージ・指圧・はり・きゅう・柔道整復の「施術所」です。,https://ai.7senses.co.jp/meo/iryou-meo-taisaku/
+2026-10-04,医療広告ガイドラインは施設形態によって内容が変わりますか？,Gemini,条件による,結論から言うと、医療広告ガイドラインの「大枠の基本ルール（禁止事項など）」は全医療機関で共通ですが、施設形態（病院、診療所、歯科、助産所など）や提供する医療内容（保険診療／自由診療）によって「広告できる内容」や「実務上の注意点」が変わります,https://ai.7senses.co.jp/meo/iryou-meo-taisaku/
+2026-10-04,工務店のインスタ集客はフォロワーが少なくても効果がありますか？,ChatGPT,はい（対象になる・できる）,はい、工務店のインスタ集客は、フォロワーが少なくても効果を期待できます。,https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/
+2026-10-04,工務店のインスタ集客はフォロワーが少なくても効果がありますか？,Claude,はい（対象になる・できる）,結論: 効果はあります。ただし、フォロワー数より「商圏内の見込み客に届いているか」と「問い合わせ導線」で決まります。,https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/
+2026-10-04,工務店のインスタ集客はフォロワーが少なくても効果がありますか？,Gemini,はい（対象になる・できる）,結論から言うと、工務店のインスタ集客はフォロワーが少なくても十分に効果があります。,https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/
+2026-10-04,工務店 完成予想図をそのまま投稿しても問題ありませんか？,ChatGPT,条件による,SNS掲載を含む許可があり、その条件を守っていれば投稿できます。許可が不明なら、まず工務店に確認するのが確実です。,https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/
+2026-10-04,工務店 完成予想図をそのまま投稿しても問題ありませんか？,Claude,いいえ（対象外・できない）,結論:そのまま投稿するのはおすすめしません。,https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/
+2026-10-04,工務店 完成予想図をそのまま投稿しても問題ありませんか？,Gemini,いいえ（対象外・できない）,許可なく無断でそのままSNSやブログ等に投稿するのは避けたほうが無難です,https://ai.7senses.co.jp/ai-marketing/koumuten-instagram-shukyaku/
+2026-10-04,meo MEOのアルゴリズムは公開されていますか？,ChatGPT,いいえ（対象外・できない）,Googleマップの検索順位を改善する「MEO」を指す場合、順位を決めるアルゴリズムの詳細は公開されていません。ただし、主な評価要素は公開されています。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo MEOのアルゴリズムは公開されていますか？,Claude,いいえ（対象外・できない）,結論: いいえ、MEO（ローカル検索）のアルゴリズムそのものは公開されていません。 公開されているのは、順位を決める大きな考え方だけです。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo MEOのアルゴリズムは公開されていますか？,Gemini,いいえ（対象外・できない）,MEO（Map Engine Optimization / ローカルSEO）の完全なアルゴリズム（詳細な計算式や内部システム、各因子の正確な重み付けなど）は公開されていません。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo お金を払えばMEOの順位を上げられますか？,ChatGPT,いいえ（対象外・できない）,お金を払うだけで、MEO（Googleマップなどの通常の検索結果）の順位を上げることはできません。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo お金を払えばMEOの順位を上げられますか？,Claude,いいえ（対象外・できない）,MEOのオーガニック順位（地図枠の自然な順位）は、お金を払っても上げられません。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo お金を払えばMEOの順位を上げられますか？,Gemini,いいえ（対象外・できない）,結論から言うと、「Googleにお金を直接払って自然検索（MEO）の順位を買う」ことはできません。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo 口コミの件数と星評価だけでMEOの順位は決まりますか？,ChatGPT,いいえ（対象外・できない）,いいえ、口コミの件数と星評価だけでMEOの順位は決まりません。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo 口コミの件数と星評価だけでMEOの順位は決まりますか？,Claude,いいえ（対象外・できない）,結論: 決まりません。 口コミの件数と星評価は重要な要素ですが、順位を決める要素の一部にすぎません。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,meo 口コミの件数と星評価だけでMEOの順位は決まりますか？,Gemini,いいえ（対象外・できない）,結論から申し上げますと、口コミの件数と星評価（平均評価）だけでMEOの順位が決まるわけではありません。,https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/
+2026-10-04,整骨院と接骨院はGoogleビジネスプロフィールで同じカテゴリを使えますか？,ChatGPT,はい（対象になる・できる）,はい。柔道整復を主な業務とする整骨院と接骨院は、Googleビジネスプロフィールで同じ「接骨院」カテゴリを使えます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院と接骨院はGoogleビジネスプロフィールで同じカテゴリを使えますか？,Claude,はい（対象になる・できる）,はい、同じカテゴリで登録できます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院と接骨院はGoogleビジネスプロフィールで同じカテゴリを使えますか？,Gemini,はい（対象になる・できる）,はい、同じカテゴリを使えます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院 メインカテゴリを間違えて登録した場合、あとから変更できますか？,ChatGPT,はい（対象になる・できる）,はい、Googleビジネスプロフィールのメインカテゴリは、登録後でも変更できます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院 メインカテゴリを間違えて登録した場合、あとから変更できますか？,Claude,はい（対象になる・できる）,はい、あとから変更できます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院 メインカテゴリを間違えて登録した場合、あとから変更できますか？,Gemini,はい（対象になる・できる）,はい、メインカテゴリはあとからいつでも変更できます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院のMEO対策でも柔整広告ガイドラインは適用されますか？,ChatGPT,結論が読み取れず,,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院のMEO対策でも柔整広告ガイドラインは適用されますか？,Claude,はい（対象になる・できる）,適用されます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,整骨院のMEO対策でも柔整広告ガイドラインは適用されますか？,Gemini,はい（対象になる・できる）,はい、整骨院・接骨院のMEO対策（Googleビジネスプロフィールの運用など）においても「柔道整復師法」および厚生労働省の「あはき・柔整広告ガイドライン」が適用されます。,https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/
+2026-10-04,税理士 複数のチャネルを同時に始めても大丈夫ですか？,ChatGPT,条件による,複数を同時に始めることは可能ですが、人手や時間が限られるなら、まず注力するチャネルを1つに絞るのがおすすめです。,https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/
+2026-10-04,税理士 複数のチャネルを同時に始めても大丈夫ですか？,Claude,結論が読み取れず,,https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/
+2026-10-04,税理士 複数のチャネルを同時に始めても大丈夫ですか？,Gemini,いいえ（対象外・できない）,個人（または少人数の事務所）で運用する場合、複数のチャネルを同時に始めることはあまりおすすめできません。,https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/
+2026-10-04,税理士 紹介だけに頼る集客はもう通用しませんか？,ChatGPT,いいえ（対象外・できない）,紹介だけの集客が「もう通用しない」とは言えません。,https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/
+2026-10-04,税理士 紹介だけに頼る集客はもう通用しませんか？,Claude,いいえ（対象外・できない）,「通用しない」とまでは言えませんが、紹介だけに頼るのはリスクが高く、Webなど別の入口を足すのが主流です。,https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/
+2026-10-04,税理士 紹介だけに頼る集客はもう通用しませんか？,Gemini,結論が読み取れず,,https://ai.7senses.co.jp/ai-marketing/zeirishi-shukyaku-channel/
