@@ -121,26 +121,13 @@ WHO = {"inhouse_tools": "社内にWebの担当者がいて、毎月の見直し�
 
 
 def page(key):
+    """章ごとに頁を分けた、読みやすい版（表紙・目次・グラフ・章の帯・自己採点の表・進める順番の図・提案）。
+    数字は当社の調査（industry_ai_sources.headline）だけ。金額は載せない（問い合わせた方にだけ伝える）"""
     import industry_ai_sources as IAS
     c = INDUSTRIES[key]
     hl = IAS.headline(c["research"])
     e = html.escape
     T = hl["T"]
-    if hl["verdict"] == "portal":
-        first = f'{hl["lp"]}%', f'{T["owner"]}を探す質問で、AIの出典が{T["portal"]}だった割合（{T["owner_site"]}は{hl["lc"]}%）'
-    elif hl["verdict"] == "owner":
-        first = f'{hl["lc"]}%', f'{T["owner"]}を探す質問で、AIの出典が{T["owner_site"]}だった割合'
-    else:
-        first = f'{hl["lp"]}%／{hl["lc"]}%', f'{T["owner"]}を探す質問で、出典になった{T["portal"]}と{T["owner_site"]}（ほぼ同じ）'
-
-    def box(items):
-        out = []
-        for it in items:
-            what, how, fix = it if isinstance(it, tuple) else (it, "", "")
-            extra = ((f'<span class="how"><b>確かめ方</b> {e(how)}</span>' if how else "")
-                     + (f'<span class="fix"><b>直し方</b> {e(fix)}</span>' if fix else ""))
-            out.append(f'<li><span class="b"></span><span class="t">{e(what)}{extra}</span></li>')
-        return "".join(out)
     w = c["word"]
     seek = [(f"{t}を説明したページがある",
              f"AIに「{w} {t.split('（')[0]}」と聞き、自社のページが出典に出るかを見る",
@@ -178,96 +165,164 @@ def page(key):
                ("問い合わせ・予約が、どのページから来たかを分かるようにしている",
                 "問い合わせフォームの送信を、アクセス解析で数えているかを見る",
                 "送信をイベントとして数え、どのページから来たかを見る")]
+    chapters = [
+        ("AIと検索に読まれる状態か", "ここが欠けると、内容が良くてもAIの答えに使われません。最初に確かめてください。",
+         "確かめる: 自分で ／ 直す: 制作会社・サーバー", TECH),
+        (f"「探される」場面（{T['owner']}を探す人）", f"探す質問では、AIは{T['portal']}も出典にします。掲載情報の古さは、そのまま答えに出ます。",
+         "自分でできる ／ 続けるのが難しい", find),
+        ("「調べられる」場面（自社の解説ページ）", f"費用・手続きなどを調べる質問では、AIは{T['owner_site']}を出典にしていました。",
+         "文章・構成・決まりの知識が要る", seek),
+        ("事実と書き方", "AIが根拠に選ぶのは、そこにしか無い事実です。業種の決まりにふれる書き方は、AIの答えにも載りません。",
+         "業種の決まりの確認が要る", facts),
+        ("効果を測る", "直したかどうかではなく、表示・訪問・問い合わせが増えたかで判断します。", "最初の設定が要る", measure),
+    ]
+    total = sum(len(ch[3]) for ch in chapters)
+
+    def items(n, rows):
+        out = []
+        for i, (what, how, fix) in enumerate(rows, 1):
+            out.append(f'<tr><td class="cb"><span class="b"></span></td><td class="no">{n}-{i}</td>'
+                       f'<td><p class="w">{e(what)}</p><div class="hf"><p><b class="h">確かめ方</b>{e(how)}</p>'
+                       f'<p><b class="f">直し方</b>{e(fix)}</p></div></td></tr>')
+        return "".join(out)
+
+    def bar(label, pct, color):
+        return (f'<div class="bar"><span class="bl">{e(label)}</span><span class="bt"><span class="bf" style="width:{pct}%;background:{color}"></span></span>'
+                f'<span class="bv">{pct}%</span></div>')
+
+    lp, lc, oa = float(hl["lp"]), float(hl["lc"]), float(hl["oa"])
+    chart = (f'<div class="chart"><p class="ct">{e(T["owner"])}を探す質問で、AIが出典にしたサイト</p>'
+             + bar(T["portal"], lp, "#94a3b8") + bar(T["owner_site"], lc, "#2563eb")
+             + f'<p class="ct" style="margin-top:3mm">{e(T["other_short"])}を調べる質問で、{e(T["owner_site"])}を出典にした回答</p>'
+             + bar("1つ以上を出典にした回答", oa, "#0b7a4b")
+             + f'<p class="src">出典: セブンセンシズ株式会社の調査（{hl["questions"]}問を {e(hl["engines_text"])} に質問・{hl["date"]}）{hl["url"]}</p></div>')
+    toc = "".join(f'<tr><td class="tn">{i}</td><td>{e(ch[0])}</td><td class="tc">{len(ch[3])}項目</td><td class="tw">{e(ch[2])}</td></tr>'
+                  for i, ch in enumerate(chapters, 1))
+    toc += ('<tr><td class="tn">6</td><td>自己採点と、どこから手を付けるか</td><td class="tc">—</td><td class="tw">5分</td></tr>'
+            '<tr><td class="tn">7</td><td>よくあるつまずき・自社で進めるか任せるか</td><td class="tc">—</td><td class="tw"></td></tr>')
+    body_ch = "".join(
+        f'<section class="ch"><div class="band"><span class="num">{i}</span><div><h2>{e(ch[0])}</h2>'
+        f'<p>{e(ch[1])}</p></div><span class="meta">{len(ch[3])}項目<br>{e(ch[2])}</span></div>'
+        f'<table class="it">{items(i, ch[3])}</table></section>'
+        for i, ch in enumerate(chapters, 1))
+    score = "".join(f'<tr><td>{i}. {e(ch[0])}</td><td class="tc">{len(ch[3])}</td><td class="fill"></td>'
+                    f'<td class="tc">{(len(ch[3]) + 1) // 2}未満なら優先</td></tr>' for i, ch in enumerate(chapters, 1))
+    pits = ["設定を直しても、AIの答えや検索の順位に表れるまでには数か月単位の時間がかかり、途中で手が止まる",
+            "解説ページを増やしたが、地域名や業種名だけを入れ替えた同じ形のページになり、かえって評価を下げる",
+            f"{c['label']}の決まりにふれる表現が残ったまま、ページを広げてしまう",
+            f"{T['portal']}や Googleビジネスプロフィールの情報が、気づかないうちに古くなる",
+            "数字を見ていないので、どのページが問い合わせにつながったのか分からず、次の手を決められない",
+            "担当者が本業と兼ねていて、月に1回の見直しが続かない"]
+    who = "".join(f"<tr><th>{e(r['label'])}</th><td>{e(WHO[r['id']])}</td></tr>" for r in PRICE["ranges"])
     return f"""<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><title>AI検索対策チェックリスト｜{e(c['label'])}版</title>
 <style>
-@page{{size:A4;margin:13mm 14mm 13mm}}
-body{{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:#10203a;font-size:9.2pt;line-height:1.65;margin:0}}
-h1{{font-size:19pt;margin:0;color:#0b2447;letter-spacing:.02em}}
-.sub{{color:#5b6b84;font-size:8.6pt;margin:1mm 0 4mm}}
-.data{{background:#0b2447;color:#fff;border-radius:3mm;padding:4mm 5mm;display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-bottom:4mm}}
-.data b{{display:block;font-size:20pt;line-height:1.2}}
-.data p{{margin:0;font-size:8.4pt;color:rgba(255,255,255,.88)}}
-.data .src{{grid-column:1/-1;font-size:7.6pt;color:rgba(255,255,255,.7)}}
-.use{{background:#f3f6fb;border-radius:2mm;padding:3mm 4mm;font-size:8.6pt;margin-bottom:2mm}}
-h2{{font-size:11.5pt;margin:5mm 0 1.5mm;padding-left:2.5mm;border-left:1.2mm solid #2563eb;color:#0b2447;break-after:avoid}}
-.why{{margin:0 0 2mm;color:#5b6b84;font-size:8.6pt}}
-ul{{list-style:none;margin:0;padding:0;display:grid;gap:2mm}}
-li{{display:flex;gap:2.4mm;align-items:flex-start;break-inside:avoid}}
-.b{{flex:none;width:3.6mm;height:3.6mm;border:.35mm solid #2563eb;border-radius:.6mm;margin-top:.9mm}}
-.t{{display:block}}
-.how,.fix{{display:block;font-size:8pt;color:#4a5a73;line-height:1.55;margin-top:.4mm}}
-.how b,.fix b{{color:#2563eb;font-weight:700;margin-right:1mm}}
-.fix b{{color:#0b7a4b}}
-ol.order{{margin:0;padding-left:5mm;font-size:8.8pt}}
-.tag{{float:right;font-size:7.4pt;font-weight:500;color:#5b6b84;background:#eef3fb;border-radius:1mm;padding:.4mm 1.6mm;margin-top:.6mm}}
-.page{{break-before:page}}
-.pit li{{display:block;padding-left:4mm;text-indent:-4mm;font-size:8.8pt}}
-table.mk{{width:100%;border-collapse:collapse;font-size:8.6pt;margin:1mm 0 2mm}}
-table.mk th,table.mk td{{border:.25mm solid #d9e2ef;padding:1.6mm 2.2mm;text-align:left;vertical-align:top}}
-table.mk thead th{{background:#eef3fb}}
-.steps{{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:1mm 0 2mm}}
+@page{{size:A4;margin:12mm 13mm 13mm}}
+*{{box-sizing:border-box}}
+body{{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:#122036;font-size:9pt;line-height:1.65;margin:0}}
+p{{margin:0}}
+.cover h1{{font-size:24pt;line-height:1.3;margin:0;color:#0b2447;letter-spacing:.01em}}
+.cover .kick{{display:inline-block;background:#2563eb;color:#fff;font-size:8.4pt;font-weight:700;border-radius:1mm;padding:.6mm 2.4mm;margin-bottom:3mm}}
+.cover .sub{{color:#5b6b84;font-size:8.6pt;margin:2mm 0 5mm}}
+.learn{{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin-bottom:5mm}}
+.learn div{{border-top:1mm solid #2563eb;background:#f4f7fc;padding:3mm;font-size:8.6pt;line-height:1.55}}
+.learn b{{display:block;color:#0b2447;font-size:9.4pt;margin-bottom:1mm}}
+.chart{{background:#0b2447;color:#fff;border-radius:3mm;padding:4.5mm 5mm;margin-bottom:5mm}}
+.ct{{font-size:8.8pt;font-weight:700;margin-bottom:1.5mm}}
+.bar{{display:grid;grid-template-columns:42mm 1fr 14mm;align-items:center;gap:2mm;margin:1.2mm 0;font-size:8.2pt}}
+.bt{{height:4.2mm;background:rgba(255,255,255,.14);border-radius:1mm;overflow:hidden;display:block}}
+.bf{{display:block;height:100%}}
+.bv{{text-align:right;font-weight:700;font-size:9.4pt}}
+.src{{font-size:7.2pt;color:rgba(255,255,255,.7);margin-top:2.5mm}}
+h3.sec{{font-size:11pt;color:#0b2447;margin:0 0 2mm;padding-bottom:1mm;border-bottom:.3mm solid #d9e2ef}}
+table{{width:100%;border-collapse:collapse}}
+.toc td{{border-bottom:.25mm solid #e3eaf3;padding:1.8mm 1.5mm;font-size:9pt}}
+.toc .tn{{width:8mm;color:#2563eb;font-weight:800;font-size:11pt}}
+.tc{{width:20mm;text-align:center;white-space:nowrap}}
+.tw{{width:62mm;color:#5b6b84;font-size:8pt}}
+.use{{background:#f4f7fc;border-radius:2mm;padding:3mm 4mm;font-size:8.6pt;margin-top:4mm}}
+.ch{{break-before:page}}
+.band{{display:grid;grid-template-columns:13mm 1fr 44mm;gap:3mm;align-items:center;background:#0b2447;color:#fff;border-radius:3mm;padding:3.5mm 4mm;margin-bottom:3mm}}
+.band .num{{font-size:22pt;font-weight:800;color:#93c5fd;text-align:center}}
+.band h2{{font-size:13pt;margin:0 0 .8mm}}
+.band p{{font-size:8.4pt;color:rgba(255,255,255,.88)}}
+.band .meta{{font-size:7.8pt;color:#cfe0ff;text-align:right;line-height:1.5}}
+.it td{{border-bottom:.25mm solid #e3eaf3;padding:2.2mm 1.2mm;vertical-align:top}}
+.it tr{{break-inside:avoid}}
+.cb{{width:6mm}}
+.b{{display:block;width:3.8mm;height:3.8mm;border:.4mm solid #2563eb;border-radius:.7mm;margin-top:.6mm}}
+.no{{width:9mm;color:#2563eb;font-weight:800;font-size:8.4pt;padding-top:2.6mm!important}}
+.w{{font-weight:700;color:#0b2447;font-size:9.2pt;margin-bottom:1mm}}
+.hf{{display:grid;grid-template-columns:1fr 1fr;gap:3mm}}
+.hf p{{font-size:7.9pt;color:#3d4b63;line-height:1.55;background:#f7f9fc;border-radius:1.2mm;padding:1.6mm 2mm}}
+.hf b{{display:block;font-size:7.4pt;margin-bottom:.4mm}}
+.h{{color:#2563eb}} .f{{color:#0b7a4b}}
+.score td,.score th{{border:.25mm solid #d9e2ef;padding:2.2mm;font-size:8.8pt}}
+.score th{{background:#eef3fb;text-align:left}}
+.fill{{width:24mm;background:#fffdf3}}
+.flow{{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:2mm 0 5mm}}
+.flow div{{position:relative;background:#eef3fb;padding:3mm 2.5mm 3mm 4mm;font-size:8pt;line-height:1.5;clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%,8% 50%)}}
+.flow div:first-child{{clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%)}}
+.flow b{{display:block;color:#2563eb;font-size:8.6pt}}
+.pit{{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-bottom:4mm}}
+.pit div{{border-left:1mm solid #f59e0b;background:#fffbeb;padding:2mm 2.5mm;font-size:8.3pt;line-height:1.55}}
+.who th,.who td{{border:.25mm solid #d9e2ef;padding:2mm;font-size:8.6pt;text-align:left;vertical-align:top}}
+.who th{{width:42mm;background:#eef3fb}}
+.note{{font-size:8.4pt;color:#3d4b63;margin:2mm 0 4mm}}
+.steps{{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin:2mm 0 4mm}}
 .steps div{{border:.3mm solid #d9e2ef;border-radius:2mm;padding:2.5mm;font-size:8.2pt;line-height:1.55}}
-.steps b{{display:block;color:#2563eb;font-size:8.8pt;margin-bottom:.8mm}}
-.ask{{background:#0b2447;color:#fff;border-radius:3mm;padding:4.5mm 5mm;margin-top:4mm}}
-.ask h3{{margin:0 0 1.5mm;font-size:12pt}}
-.ask p{{margin:.8mm 0;font-size:8.8pt;color:rgba(255,255,255,.92)}}
-.ask .big{{font-size:10.5pt;font-weight:700;color:#fff;margin-top:2mm}}
-.foot{{margin-top:6mm;border-top:.3mm solid #e3eaf3;padding-top:3mm;font-size:8.4pt;color:#5b6b84}}
+.steps b{{display:block;color:#2563eb;font-size:9pt;margin-bottom:.8mm}}
+.ask{{background:#0b2447;color:#fff;border-radius:3mm;padding:5mm}}
+.ask h3{{margin:0 0 2mm;font-size:12.5pt}}
+.ask p{{margin:1mm 0;font-size:8.8pt;color:rgba(255,255,255,.92)}}
+.ask ul{{margin:1.5mm 0;padding-left:5mm;font-size:8.8pt}}
+.ask .big{{font-size:10.5pt;font-weight:700;color:#fff;margin-top:2.5mm}}
+.foot{{margin-top:5mm;border-top:.3mm solid #e3eaf3;padding-top:3mm;font-size:8pt;color:#5b6b84}}
 .foot b{{color:#0b2447}}
 </style></head><body>
-<h1>AI検索対策チェックリスト｜{e(c['label'])}版</h1>
-<p class="sub">セブンセンシズ株式会社（AI集客ラボ）・{hl['date'][:4]}年{int(hl['date'][5:7])}月版 ／ 当てはまるものに印をつけてください</p>
-<div class="data"><div><b>{e(first[0])}</b><p>{e(first[1])}</p></div>
-<div><b>{hl['oa']}%</b><p>{e(T['other_short'])}を調べる質問で、回答が{e(T['owner_site'])}を1つ以上出典にしていた割合</p></div>
-<p class="src">出典: セブンセンシズ株式会社の調査（{hl['questions']}問を {hl['engines_text']} に質問・{hl['date']}）{hl['url']}</p></div>
-<div class="use"><b>使い方</b>　各項目の「確かめ方」で今の状態を見て、当てはまれば□に印をつけます。当てはまらない項目は「直し方」を、
-上から順に進めてください。1〜2は数日で直せる設定の項目、3〜4はページづくりの項目です。全部で{len(TECH) + len(find) + len(seek) + len(facts) + len(measure)}項目あります。</div>
-<h2>1. AIと検索に読まれる状態か（{len(TECH)}項目）<span class="tag">確かめる: 自分で ／ 直す: 制作会社・サーバーの作業</span></h2><p class="why">ここが欠けると、内容が良くてもAIの答えに使われません。まず最初に確かめてください。</p><ul>{box(TECH)}</ul>
-<h2>2.「探される」場面（{e(T['owner'])}を探す人・{len(find)}項目）<span class="tag">自分でできる ／ 続けるのが難しい</span></h2><p class="why">探す質問では、AIは{e(T['portal'])}も出典にします。掲載情報の古さは、そのまま答えに出ます。</p><ul>{box(find)}</ul>
-<h2>3.「調べられる」場面（自社の解説ページ・{len(seek)}項目）<span class="tag">文章・構成・決まりの知識が要る</span></h2><p class="why">費用・手続きなどを調べる質問では、AIは{e(T['owner_site'])}を出典にしていました。次のテーマに答えるページがあるかを確かめてください。</p><ul>{box(seek)}</ul>
-<h2>4. 事実と書き方（{len(facts)}項目）<span class="tag">業種の決まりの確認が要る</span></h2><p class="why">AIが根拠に選ぶのは、そこにしか無い事実です。業種の決まりにふれる書き方は、AIの答えにも載りません。</p><ul>{box(facts)}</ul>
-<h2>5. 効果を測る（{len(measure)}項目）<span class="tag">最初の設定が要る</span></h2><p class="why">直したかどうかではなく、表示・訪問・問い合わせが増えたかで判断します。</p><ul>{box(measure)}</ul>
-<h2>6. どこから手を付けるか</h2>
-<ol class="order"><li>1の設定の項目（クローラー・noindex・SSL）を先に直す。ここが欠けていると、ほかの項目の効果が出ません。</li>
-<li>2の掲載情報と Googleビジネスプロフィールを最新にする。</li>
-<li>3のテーマのうち、問い合わせにつながる「費用」「流れ」から1ページずつ作る。</li>
-<li>4の決まりにふれる表現を消し、事実を期間と母数つきで足す。</li>
-<li>5の数字を月に1回見て、増えたページの書き方を、ほかのページにも広げる。</li></ol>
-<div class="page"></div>
-<h2>7. よくあるつまずき</h2><p class="why">項目そのものより、続け方でつまずくことが多くあります。</p>
-<ul class="pit">
-<li>・設定を直しても、AIの答えや検索の順位に表れるまでには数か月単位の時間がかかり、途中で手が止まる。</li>
-<li>・解説ページを増やしたが、地域名や業種名だけを入れ替えた同じ形のページになり、かえって評価を下げる。</li>
-<li>・{e(c['label'])}の決まりにふれる表現が残ったまま、ページを広げてしまう。</li>
-<li>・{e(T['portal'])}や Googleビジネスプロフィールの情報が、気づかないうちに古くなる。</li>
-<li>・数字を見ていないので、どのページが問い合わせにつながったのか分からず、次に何をすればよいか決められない。</li>
-<li>・担当者が本業と兼ねていて、月に1回の見直しが続かない。</li>
-</ul>
-<h2>8. 自社で進めるか、任せるか</h2>
-<table class="mk"><thead><tr><th>やり方</th><th>向いている場合</th></tr></thead><tbody>
-{"".join(f"<tr><th>{e(r['label'])}</th><td>{e(WHO[r['id']])}</td></tr>" for r in PRICE['ranges'])}
-</tbody></table>
-<p class="why">自社で進める場合も、担当者の時間がかかります。1〜2の設定だけを自社で直し、3〜5を任せる分け方もできます。
-それぞれのやり方の費用の目安と当社の料金は、お問い合わせいただいた方に、御社の状況（今の印の数・ページの数・地域）をうかがってからお伝えします。</p>
-<h2>9. 当社に任せた場合の進め方</h2>
+<section class="cover">
+<span class="kick">{e(c['label'])}版 ／ {hl['date'][:4]}年{int(hl['date'][5:7])}月版</span>
+<h1>AI検索対策チェックリスト<br>AIの答えに選ばれる{e(T['owner_site'])}にするための{total}項目</h1>
+<p class="sub">セブンセンシズ株式会社（AI集客ラボ）。当てはまるものに印をつけてください。各項目に「確かめ方」と「直し方」を付けています。</p>
+<div class="learn"><div><b>今の状態が分かる</b>{total}項目に印をつけるだけで、AIと検索に読まれる土台がどこまで整っているかが分かります。</div>
+<div><b>何から直すか分かる</b>章ごとの印の数から、先に手を付ける章が決まります（6章の自己採点の表）。</div>
+<div><b>自社でやるか決められる</b>自社でできる項目と、専門の作業が要る項目を分けて示しています。</div></div>
+{chart}
+<h3 class="sec">目次</h3><table class="toc">{toc}</table>
+<div class="use"><b>使い方</b>　1章から順に「確かめ方」で今の状態を見て、当てはまれば□に印をつけます。
+当てはまらない項目は「直し方」を参考に進めてください。印の数は6章の表に書き込みます。</div>
+</section>
+{body_ch}
+<section class="ch"><div class="band"><span class="num">6</span><div><h2>自己採点と、どこから手を付けるか</h2>
+<p>章ごとの印の数を書き込み、少ない章から手を付けます。</p></div><span class="meta">所要 5分</span></div>
+<table class="score"><thead><tr><th>章</th><th class="tc">項目数</th><th class="tc">印の数</th><th class="tc">目安</th></tr></thead><tbody>{score}
+<tr><th>合計</th><th class="tc">{total}</th><td class="fill"></td><td></td></tr></tbody></table>
+<h3 class="sec" style="margin-top:5mm">進める順番</h3>
+<div class="flow"><div><b>1. 設定</b>クローラー・noindex・SSL</div><div><b>2. 掲載情報</b>ポータル・地図を最新に</div>
+<div><b>3. 解説ページ</b>「費用」「流れ」から</div><div><b>4. 事実と決まり</b>期間と母数をつける</div><div><b>5. 測る</b>月に1回、同じ日に</div></div>
+<p class="note">1の設定が欠けていると、2〜5の効果が出ません。3の解説ページは、問い合わせにつながる「費用」「流れ」のテーマから1ページずつ作ります。</p>
+<h3 class="sec">よくあるつまずき</h3>
+<div class="pit">{"".join(f"<div>{e(x)}</div>" for x in pits)}</div>
+</section>
+<section class="ch"><div class="band"><span class="num">7</span><div><h2>自社で進めるか、任せるか</h2>
+<p>1〜2の設定だけを自社で直し、3〜5を任せる分け方もできます。</p></div><span class="meta">判断の材料</span></div>
+<table class="who">{who}</table>
+<p class="note">自社で進める場合も、担当者の時間がかかります。費用の目安と当社の料金は、お問い合わせいただいた方に、御社の状況（今の印の数・ページの数・地域）をうかがってからお伝えします。</p>
+<h3 class="sec">当社に任せた場合の進め方</h3>
 <div class="steps">
 <div><b>1. 無料相談</b>このチェックリストの結果をもとに、どこから直すと効果が大きいかを一緒に決めます。</div>
-<div><b>2. 調査</b>御社と同じ地域の{e(T['owner'])}が、ChatGPT・Gemini などのAIにどう紹介されているかを調べます。</div>
+<div><b>2. 調査</b>同じ地域の{e(T['owner'])}が、ChatGPT・Gemini などのAIにどう紹介されているかを調べます。</div>
 <div><b>3. 改善</b>設定の修正、{e(c['label'])}の決まりにふれない解説ページづくり、掲載情報の整備を進めます。</div>
-<div><b>4. 毎月の報告</b>検索の表示・AIからの訪問・問い合わせの数を毎月お届けし、次の打ち手を決めます。</div>
-</div>
-<div class="ask"><h3>このチェックリストで、印がつかなかった項目はいくつありましたか</h3>
+<div><b>4. 毎月の報告</b>検索の表示・AIからの訪問・問い合わせの数を毎月お届けし、次の打ち手を決めます。</div></div>
+<div class="ask"><h3>印がつかなかった項目は、いくつありましたか</h3>
 <p>印がつかなかった項目が5つ以上あれば、AIの答えに選ばれるための土台が欠けています。どれから直すかで、効果が出るまでの時間が変わります。</p>
 <p>無料相談では、次の3つをお伝えします。</p>
-<p>・印がつかなかった項目のうち、効果が大きい順の3つと、その直し方<br>
-・同じ地域の{e(T['owner'])}が、AIにどう紹介されているか<br>
-・必要な作業と期間の目安、お見積り（ご依頼いただくかは、そのあとでお決めください）</p>
+<ul><li>印がつかなかった項目のうち、効果が大きい順の3つと、その直し方</li>
+<li>同じ地域の{e(T['owner'])}が、AIにどう紹介されているか</li>
+<li>必要な作業と期間の目安、費用とお見積り（ご依頼いただくかは、そのあとでお決めください）</li></ul>
 <p class="big">ご相談: https://ai.7senses.co.jp/lp/{c['lp']}/ ／ TEL 06-4305-7547（平日9:00〜20:00）</p></div>
-<div class="foot"><b>確かめる（無料）</b><br>
-・AIにどう紹介されているか無料チェック: https://ai.7senses.co.jp/tools/ai-check/<br>
-・サイトが読まれているかの30秒診断: https://ai.7senses.co.jp/lp/{c['lp']}/<br>
-<b>相談する</b>: {e(T['lp_name'])} https://ai.7senses.co.jp/lp/{c['lp']}/ ／ TEL 06-4305-7547（平日9:00〜20:00）<br>
+<div class="foot"><b>確かめる（無料）</b>　AIにどう紹介されているか: https://ai.7senses.co.jp/tools/ai-check/ ／ サイトの30秒診断: https://ai.7senses.co.jp/lp/{c['lp']}/<br>
 セブンセンシズ株式会社 〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902</div>
+</section>
 </body></html>"""
 
 
