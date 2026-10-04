@@ -287,6 +287,16 @@ jobs:
           echo "$out"
           echo "$out" | grep -q "最も落ちている段階"             && echo "::warning::リード導線に落ち込みがあります。ログを確認してください" || true
 
+      # コーポレートの調査ページと AIO運用代行の業種別の表を、ラボの集計と同じ数字に揃える。
+      # 業種調査は ChatGPT の利用上限で数日かけて埋まるので、3か月ごとの回だけでは古い数字が残る（変わらなければ push しない）
+      - name: コーポレートの調査データを最新にする
+        env:
+          PYTHONIOENCODING: utf-8
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+        run: python scripts/research_publish.py --push 2>&1 | tail -3 || echo "::warning::コーポレートの調査データを配信できませんでした"
+
       # 問い合わせが3サイトから管制塔の台帳まで届くかを、本物と同じ経路で確かめる（テスト専用のアドレスで送り、台帳には入れない）。
       # 2026-09-18 に診断の送信2件が台帳にもメールにも残らず失われ、気づくまで10日かかった
       - name: 問い合わせの疎通確認

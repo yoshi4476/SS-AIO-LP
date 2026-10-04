@@ -215,3 +215,14 @@ def test_ai_split_answers_go_back_into_articles():
     check("週次で回す", "--kind aisplit" in wf, True)
     for x in AR.aisplit_items(50):
         check(f"渡す文は「当社調べ」の固定の言い回し: {x['slug']}", x["claims"][0].endswith("（当社調べ）"), True)
+
+
+def test_corporate_aio_page_shows_survey_from_the_same_numbers():
+    print("\n■ コーポレートのAIO運用代行: 業種別のAI出典調査の表を、ラボの集計そのものから作る")
+    src = (ROOT / "scripts" / "research_publish.py").read_text(encoding="utf-8")
+    check("数字は industry_ai_sources.headline から（手で書き写さない）", "IAS.headline(" in src and "def place_aio_data" in src, True)
+    tsx = (ROOT / "templates" / "corporate_aio_data.tsx").read_text(encoding="utf-8")
+    # 「ポータルが中心」と一律に書いて誤った（2026-10 の集計で29業種中16業種）。言える数をデータから数える
+    check("見出しの「何業種中いくつ」をデータから数える", "portalWins" in tsx and "出典の中心" not in tsx, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次で最新の数字に揃える", "research_publish.py --push" in wf, True)

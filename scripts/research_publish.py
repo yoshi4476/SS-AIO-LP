@@ -19,6 +19,49 @@ sys.path.insert(0, str(ROOT / "scripts" / "subsidy"))
 SITEMAP_LINE = ('    { url: `${site.url}/research/ai-answers`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },\n')
 
 
+LAB = "https://ai.7senses.co.jp"
+AIO_PAGE_IMPORT = 'import AioResearchData from "@/components/AioResearchData";\n'
+AIO_PAGE_SLOT = '      {service.slug === "aio" && <AioDetail />}\n'
+
+
+def place_aio_data(dest):
+    """AIO運用代行のページ（/services/aio）に、AI集客ラボの業種別調査（AIは何を出典に答えるか）の表を置く。
+    数字は industry_ai_sources.headline（ラボの調査ページと同じ集計）だけ。手で書き写さないので、
+    3か月ごとの調査のたびに同じ数字に揃う"""
+    import industry_ai_sources as IAS
+    rows = []
+    for p in sorted((ROOT / "data" / "research").glob("*-summary.json")):
+        try:
+            h = IAS.headline(p.name[:-len("-summary.json")])
+        except Exception:
+            continue
+        if h and h.get("questions"):
+            rows.append({"name": h["name"], "questions": int(h["questions"]), "lp": float(h["lp"]),
+                         "lc": float(h["lc"]), "oa": float(h["oa"]), "url": h["url"], "date": h["date"]})
+    if len(rows) < 5:
+        return 0
+    rows.sort(key=lambda r: (-r["questions"], r["name"]))
+    dates = sorted(r.pop("date") for r in rows)
+    payload = {"n_industries": len(rows), "total_questions": sum(r["questions"] for r in rows),
+               "period": f"{dates[0][:7].replace('-', '年', 1)}月" if dates[0][:7] == dates[-1][:7]
+               else f"{dates[0]}〜{dates[-1]}",
+               "index_url": f"{LAB}/research/", "ranking_url": f"{LAB}/research/ranking/", "rows": rows}
+    (dest / "src" / "content" / "research").mkdir(parents=True, exist_ok=True)
+    (dest / "src" / "content" / "research" / "aio-industries.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
+    shutil.copy2(ROOT / "templates" / "corporate_aio_data.tsx", dest / "src" / "components" / "AioResearchData.tsx")
+    sp = dest / "src" / "app" / "services" / "[slug]" / "page.tsx"
+    s = sp.read_text(encoding="utf-8")
+    if "<AioResearchData />" not in s:
+        if AIO_PAGE_SLOT not in s or 'import AioDetail from "@/components/AioDetail";\n' not in s:
+            raise SystemExit("services/[slug]/page.tsx の書式が変わっています（AioDetail の行が見つかりません）")
+        s = s.replace('import AioDetail from "@/components/AioDetail";\n',
+                      'import AioDetail from "@/components/AioDetail";\n' + AIO_PAGE_IMPORT, 1)
+        s = s.replace(AIO_PAGE_SLOT, AIO_PAGE_SLOT + '      {service.slug === "aio" && <AioResearchData />}\n', 1)
+        sp.write_text(s, encoding="utf-8", newline="\n")
+    return len(rows)
+
+
 def main():
     import importlib.util
     import publish
@@ -60,7 +103,9 @@ def main():
         if anchor not in s:
             raise SystemExit("sitemap.ts の書式が変わっています（/blog/theme の行が見つかりません）")
         sm.write_text(s.replace(anchor, SITEMAP_LINE + anchor, 1), encoding="utf-8", newline="\n")
-    print(f"置きました: {len(d['rows'])}問・{'・'.join(d['engines'])}（{d['period']}）")
+    aio = place_aio_data(dest)
+    print(f"置きました: {len(d['rows'])}問・{'・'.join(d['engines'])}（{d['period']}）"
+          + (f"／AIO運用代行のページに業種別調査 {aio}業種" if aio else ""))
     if not a.push:
         print("※ --push で配信先へ commit + push します")
         return 0
