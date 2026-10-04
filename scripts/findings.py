@@ -97,6 +97,10 @@ CHECKS = [
      re.compile(r"^要対応:")),
     ("監修待ちの記事", "editorial_review.py --pending",
      re.compile(r"^要対応:|^\s{2}- ")),
+    # 組の違う社（お客様どうし・お客様と自社）が同じ語を持った。弾かずに登録してあるので、
+    # 地域を見て両方使うか片方を外すかを運用者が決める（管制塔の「KW重複の確認」）
+    ("KW重複の確認（組の違う社が同じ語）", "hub_client.py overlaps",
+     re.compile(r"^要対応:|^\s{2}- ")),
     ("会社表記のゆれ（NAP）", "nap_check.py",
      re.compile(r"^\s{2}-\s")),
     ("内部リンクの積み上がり", "auto_review.py",

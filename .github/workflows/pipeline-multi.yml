@@ -435,8 +435,9 @@ jobs:
         run: |
           # 記録の無い記事は公開されない（HELD）。放置すると書いた記事が溜まるだけになるため、毎回知らせる
           mkdir -p automation/logs
-          python scripts/editorial_review.py --pending | tee /tmp/review.txt | tail -3 || true
-          grep '^要対応' /tmp/review.txt | sed 's/$/（GitHub の Actions →「監修の記録」から slug を入れて実行）/' >> automation/logs/findings.txt || true
+          # 公開前の確認を「要」にしたお客様の記事は、社ごとに原稿のURL・題・待っている日数と承認の手順を載せる
+          python scripts/editorial_review.py --notify --site "${{ steps.site.outputs.id }}" | tee /tmp/review.txt || true
+          cat /tmp/review.txt >> automation/logs/findings.txt || true
 
       - name: 自リポジトリの記事をコミット
         if: steps.site.outputs.skip != 'yes'

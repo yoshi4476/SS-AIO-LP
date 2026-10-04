@@ -96,6 +96,69 @@ def kw_status(site=""):
     return {"ok": True, "site": site or "all", "total": len(rs), "todo": c("未着手"), "doing": c("執筆中"), "done": c("公開済み")}
 
 
+OVERLAP_TAB = "KW重複の確認"   # 日時, 語, 社A, 地域A, 社B, 地域B, 状態, 備考（GAS の TABS と同じ列）
+OVERLAP_COLS = 8
+
+
+def _grp(ctx, site):
+    """GAS の kwGroup_ と同じ: ctx.groups が無ければ全社が1つの組（従来どおり弾く）。ctx に無い社はその社だけの組"""
+    g = (ctx or {}).get("groups")
+    if not g:
+        return ""
+    s = str(site)
+    return str(g[s]) if s in g else "?" + s
+
+
+def _same_group(ctx, a, b):
+    return _grp(ctx, a) == _grp(ctx, b)
+
+
+def _time(v):
+    """GAS の kwTime_ と同じ順序になる値。直接接続は日付をシリアル値で読む。読めなければいちばん古い扱い"""
+    if isinstance(v, (int, float)) and not isinstance(v, bool):
+        return float(v)
+    try:
+        d = datetime.strptime(str(v or "").strip()[:19], "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        try:
+            d = datetime.strptime(str(v or "").strip()[:10], "%Y-%m-%d")
+        except ValueError:
+            return float("-inf")
+    return (d - datetime(1899, 12, 30)).total_seconds() / 86400
+
+
+def note_overlap(keyword, first, second, ctx):
+    """GAS の noteOverlap_ と同じ: 組の違う社が同じ語を持った記録（同じ語・同じ2社は1行だけ）。社Aが先に登録した側"""
+    n = norm_kw(keyword)
+    pair = sorted([str(first), str(second)])
+    for r in _overlap_rows():
+        if norm_kw(r[1]) == n and sorted([str(r[2]), str(r[4])]) == pair:
+            return False
+    reg = (ctx or {}).get("regions") or {}
+    _append(OVERLAP_TAB, [_now(), keyword, first, reg.get(first, ""), second, reg.get(second, ""), "未確認",
+                          "社Aが先に登録。片方を外すときは retire_kw で外す側の語を対象外にする"])
+    return True
+
+
+def kw_overlaps():
+    return {"ok": True, "rows": [{"at": r[0], "keyword": r[1], "site_a": r[2], "region_a": r[3], "site_b": r[4],
+                                  "region_b": r[5], "status": str(r[6] or "").strip() or "未確認", "note": r[7]}
+                                 for r in _overlap_rows() if r[1]]}
+
+
+def _overlap_rows():
+    """タブがまだ無ければ作る（GAS は sheet_() が setup で作る。直接接続が先に書くと範囲の解釈で落ちるため）"""
+    have = {s["properties"]["title"] for s in _svc().get(spreadsheetId=sheet_id(),
+                                                         fields="sheets.properties.title").execute().get("sheets", [])}
+    if OVERLAP_TAB not in have:
+        _svc().batchUpdate(spreadsheetId=sheet_id(),
+                           body={"requests": [{"addSheet": {"properties": {"title": OVERLAP_TAB}}}]}).execute()
+        _svc().values().update(spreadsheetId=sheet_id(), range=f"'{OVERLAP_TAB}'!A1", valueInputOption="RAW",
+                               body={"values": [["日時", "語", "社A", "地域A", "社B", "地域B", "状態", "備考"]]}).execute()
+        return []
+    return rows(OVERLAP_TAB, OVERLAP_COLS)
+
+
 def _conflicts(site, keyword, rs, self_i):
     """GAS の kwConflict_ と同じ: 生きている行のうち、完全一致か前方の包含。(同じサイト, 他サイト)"""
     n = norm_kw(keyword)
@@ -131,19 +194,27 @@ def next_kw(site):
             "note": "未着手のKWはすべて既存記事と食い合います。台帳の補充が必要です"}
 
 
-def claim_kw(site, keyword):
+def claim_kw(site, keyword, ctx=None):
     rs = rows("KW台帳", KW_COLS)
     n = norm_kw(keyword)
     for i, r in enumerate(rs):
         if str(r[0]) != site or norm_kw(r[1]) != n:
             continue
-        dup = [{"site": x[0], "keyword": x[1], "status": str(x[2]).strip(), "url": x[9]}
-               for j, x in enumerate(rs) if j != i and norm_kw(x[1]) == n and str(x[2]).strip() not in ("対象外", "取り下げ")]
+        live = [x for j, x in enumerate(rs)
+                if j != i and norm_kw(x[1]) == n and str(x[2]).strip() not in ("対象外", "取り下げ")]
+        rec = lambda x: {"site": x[0], "keyword": x[1], "status": str(x[2]).strip(), "url": x[9]}
+        dup = [rec(x) for x in live if _same_group(ctx, x[0], site)]
         if dup:
             return {"ok": False, "error": "同じ語が台帳にすでにあります。書くと順位が割れます", "conflicts": dup}
+        other = [x for x in live if not _same_group(ctx, x[0], site)]
+        for x in other:
+            if _time(x[6]) <= _time(r[6]):
+                note_overlap(keyword, str(x[0]), site, ctx)
+            else:
+                note_overlap(keyword, site, str(x[0]), ctx)
         _set("KW台帳", i + 2, 3, "執筆中")
         _set("KW台帳", i + 2, 8, _now())
-        return {"ok": True}
+        return {"ok": True, "overlaps": [rec(x) for x in other]} if other else {"ok": True}
     return {"ok": False, "error": f"KWが見つかりません: {keyword}"}
 
 
@@ -176,22 +247,43 @@ def retire_kw(site, keywords, reason="", force=False):
     return {"ok": True, "retired": n}
 
 
-def add_kw(site, keywords):
-    """表記ゆれを吸収して重複を弾く（他サイトの生きている語も弾く）"""
-    live = {norm_kw(r["keyword"]) for r in all_kw() if r["status"] not in ("対象外", "取り下げ")}
-    added = []
+def add_kw(site, keywords, ctx=None):
+    """GAS の addKw_ と同じ: 表記ゆれを吸収して、同じ組（自社3サイト・同じお客様）の生きている語を弾く。
+    組の違う社が持つ語は入れたうえで「KW重複の確認」に残す"""
+    exist, other, outside = {}, {}, {}
+    for r in all_kw():
+        n = norm_kw(r["keyword"])
+        if not n or r["status"] in ("対象外", "取り下げ"):
+            continue
+        if str(r["site"]) == str(site):
+            exist[n] = r["keyword"]
+        elif _same_group(ctx, r["site"], site):
+            other[n] = r["site"]
+        else:
+            outside.setdefault(n, []).append(str(r["site"]))
+    added, skipped, crossed, overlaps = [], [], [], []
     for k0 in keywords or []:
         # GAS と同じく、語だけの文字列と {keyword, priority, category, aim, note} の両方を受ける
         # （kw_plan・seed_hub は優先度つきの辞書で渡す）
         kw = k0 if isinstance(k0, dict) else {"keyword": k0}
         k = norm_kw(kw.get("keyword"))
-        if not k or k in live:
+        if not k:
+            continue
+        if k in exist:
+            skipped.append({"keyword": kw["keyword"], "dup": exist[k]})
+            continue
+        if k in other:
+            crossed.append({"keyword": kw["keyword"], "site": other[k]})
             continue
         _append("KW台帳", [site, kw["keyword"], "未着手", kw.get("priority") or "B", kw.get("category") or "",
                           kw.get("aim") or "", _now(), "", "", "", kw.get("note") or ""])
-        live.add(k)
+        exist[k] = kw["keyword"]
         added.append(kw["keyword"])
-    return {"ok": True, "added": len(added), "keywords": added}
+        for s in dict.fromkeys(outside.get(k, [])):
+            note_overlap(kw["keyword"], s, site, ctx)
+            overlaps.append({"keyword": kw["keyword"], "site": s})
+    return {"ok": True, "added": len(added), "keywords": added, "skipped_dup": skipped,
+            "skipped_other_site": crossed, "overlaps": overlaps}
 
 
 # ── ログ ─────────────────────────────────────────────

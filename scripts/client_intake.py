@@ -144,6 +144,9 @@ FIELDS = [
     ("ga4_property_id", "GA4プロパティID", "数字のみ。管理画面 > 管理 > プロパティの詳細",
      "123456789", False),
     ("report_to", "レポートの送付先", "複数ある場合はカンマ区切り", "info@example.co.jp", False),
+    ("report_issuer", "月次レポートの発行者の表示",
+     "当社名を出す / お客様名だけ。「お客様名だけ」は表紙・巻末・フッターに当社名とURLを出さず、"
+     "御社の社名・住所・サイトだけを載せます（社内・取引先へそのまま回す場合）", "当社名を出す", False),
     ("gsc_ready", "Search Consoleの権限付与", "済 / 未 で記入。未の場合は導入時にご案内します",
      "未", False),
 
@@ -568,9 +571,13 @@ def make_sheet(path=SHEET, industry=""):
             dv.add(ws.cell(row=row, column=2))
     yn = DataValidation(type="list", formula1='"要,不要"')
     ws.add_data_validation(yn)
+    iss = DataValidation(type="list", formula1='"当社名を出す,お客様名だけ"')
+    ws.add_data_validation(iss)
     for row in range(SAMPLE_ROW, r):
         if ws.cell(row=row, column=6).value == "review_before_publish":
             yn.add(ws.cell(row=row, column=2))
+        if ws.cell(row=row, column=6).value == "report_issuer":
+            iss.add(ws.cell(row=row, column=2))
 
     ws.column_dimensions["A"].width = 26
     ws.column_dimensions["B"].width = 42
@@ -659,6 +666,8 @@ def to_config(got):
     mix = pairs(got.get("category_mix"), num=True)
     if mix:
         cfg["category_mix"] = mix
+    # 月次レポートの名義（monthly_report.issuer）。「お客様名だけ」以外は当社名義（既定）
+    cfg["report_issuer"] = "client" if "お客様" in (got.get("report_issuer") or "") else "operator"
     # 運用のきまり。既定と違うときだけ持たせる
     rule = {}
     if got.get("monthly_cap") and got["monthly_cap"] != "60":

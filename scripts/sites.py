@@ -5,6 +5,7 @@ sites/*.json を読み、どのサイトへ何を書くかの情報を提供す�
 サイトを増やすときは sites/ にJSONを1つ足すだけでよい。
 """
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -51,6 +52,37 @@ def group_of(site_id):
     if is_client(site_id):
         return [site_id]
     return own_ids()
+
+
+def group_key(site_id):
+    """group_of の組の名前（管制塔へ渡す）。自社は 'own'、お客様はその社のID"""
+    return site_id if is_client(site_id) else "own"
+
+
+PREF = re.compile(r"(北海道|東京都|(?:京都|大阪)府|[^\s　都道府県0-9０-９]{2,3}県)")
+
+
+def region_of(site_id):
+    """その社の地域。kw_seeds.regions（拠点）、無ければ会社の住所の都道府県。
+    KW台帳でお客様どうしが同じ語を持ったとき、地域が違えば両方使ってよいかを運用者が決める材料"""
+    cfg = load_all().get(site_id) or {}
+    regs = [r for r in (cfg.get("kw_seeds") or {}).get("regions") or [] if r]
+    if regs:
+        return "・".join(regs)
+    p = (ROOT / "data" / "clients" / site_id / "company.json" if is_client(site_id)
+         else ROOT / "data" / "company_profile.json")
+    try:
+        addr = json.loads(p.read_text(encoding="utf-8-sig")).get("address") or ""
+    except (OSError, ValueError):
+        return ""
+    m = PREF.search(addr)
+    return m.group(1) if m else ""
+
+
+def kw_context():
+    """KW台帳の重複判定に渡す組と地域（管制塔の GAS と hub_sheets が同じものを見る）"""
+    ids = list(load_all())
+    return {"groups": {s: group_key(s) for s in ids}, "regions": {s: region_of(s) for s in ids}}
 
 
 # お客様の記事に出てはいけない運用会社の名前・場所。監修者・著者・実績として混ざると事実と違う記事になる

@@ -85,13 +85,15 @@ def _direct(action, p):
         if action == "kw_status":
             return HS.kw_status(p.get("site", ""))
         if action == "claim_kw":
-            return HS.claim_kw(p.get("site", ""), p.get("keyword", ""))
+            return HS.claim_kw(p.get("site", ""), p.get("keyword", ""), p.get("ctx"))
         if action == "unclaim_kw":
             return HS.unclaim_kw(p.get("site", ""), p.get("keywords") or [])
         if action == "retire_kw":
             return HS.retire_kw(p.get("site", ""), p.get("keywords") or [], p.get("reason", ""), bool(p.get("force")))
         if action == "add_kw":
-            return HS.add_kw(p.get("site", ""), p.get("keywords") or [])
+            return HS.add_kw(p.get("site", ""), p.get("keywords") or [], p.get("ctx"))
+        if action == "kw_overlaps":
+            return HS.kw_overlaps()
         if action == "publish_log":
             return HS.publish_log(**{k: v for k, v in p.items() if k not in ("action", "secret")})
         if action == "error_log":
@@ -287,8 +289,17 @@ def status(site=""):
     return _get({"action": "kw_status", "site": site})
 
 
+def kw_context():
+    """重複を見る組と地域（sites.kw_context）。読めなければ None（管制塔は全社を1つの組として扱い、従来どおり弾く）"""
+    try:
+        import sites
+        return sites.kw_context()
+    except Exception:
+        return None
+
+
 def claim_kw(site, keyword):
-    return _post({"action": "claim_kw", "site": site, "keyword": keyword}) if enabled() else None
+    return _post({"action": "claim_kw", "site": site, "keyword": keyword, "ctx": kw_context()}) if enabled() else None
 
 
 def retire_kw(site, keywords, reason, force=False):
@@ -300,7 +311,41 @@ def retire_kw(site, keywords, reason, force=False):
 
 
 def add_kw(site, keywords):
-    return _post({"action": "add_kw", "site": site, "keywords": keywords}) if enabled() else None
+    """同じ組（自社3サイト・同じお客様）の語は弾き、組の違う社と重なった語は登録して「KW重複の確認」に残す"""
+    return _post({"action": "add_kw", "site": site, "keywords": keywords, "ctx": kw_context()}) if enabled() else None
+
+
+def kw_overlaps():
+    """「KW重複の確認」の行。古い管制塔（rows を返さない）は None"""
+    d = _get({"action": "kw_overlaps"})
+    return d.get("rows") if isinstance(d, dict) and isinstance(d.get("rows"), list) else None
+
+
+def overlaps_report():
+    """週次の findings が呼ぶ。未確認の重複を要対応として出す（見つかっても終了コードは0。印で知らせる）"""
+    if not enabled():
+        print("KW_OVERLAP_OK=unset（HUB_URL が未設定）")
+        return 0
+    try:
+        got = kw_overlaps()
+    except Exception as e:
+        print(f"  管制塔を読めません（{type(e).__name__}）")
+        print("KW_OVERLAP_OK=unknown")
+        return 0
+    if got is None:
+        print("  管制塔が「KW重複の確認」に対応していません（automation/gas/hub.gs を配布してください）")
+        print("KW_OVERLAP_OK=unknown")
+        return 0
+    todo = [r for r in got if str(r.get("status") or "").strip() in ("", "未確認")]
+    print(f"■ KW重複の確認（組の違う社が同じ語を持っている）: 未確認 {len(todo)}件 / 全{len(got)}件")
+    for r in todo[:30]:
+        print(f"  - 「{r.get('keyword')}」 {r.get('site_a')}（{r.get('region_a') or '地域不明'}・先に登録）"
+              f" ↔ {r.get('site_b')}（{r.get('region_b') or '地域不明'}）")
+    if todo:
+        print(f"要対応: 組の違う社が同じ語を持っています（未確認{len(todo)}件）。管制塔の「KW重複の確認」で"
+              "状態を「両方使う」か「片方を外す」にしてください")
+    print("KW_OVERLAP_OK=" + ("no" if todo else "yes"))
+    return 0
 
 
 def publish_log(**kw):
@@ -350,6 +395,8 @@ def rewrite_log(site, article, reason, summary, pos_before="", pos_after="", eff
 
 
 def main():
+    if sys.argv[1:2] == ["overlaps"]:
+        return overlaps_report()
     if not enabled():
         raise SystemExit("HUB_URL が未設定です（.env または環境変数に設定してください）")
     cmd = sys.argv[1] if len(sys.argv) > 1 else "status"

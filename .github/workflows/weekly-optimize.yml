@@ -931,6 +931,7 @@ jobs:
       - name: 見つかったものを集めて知らせる
         env:
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
+          HUB_URL: ${{ secrets.HUB_URL }}                         # 管制塔の「KW重複の確認」を読む（無いと unset で素通りする）
         run: |
           python scripts/findings.py || true
           # 公開した後の結果（題の型のCTR・別工程の採点・本数の効き・戻された直し）から学び、

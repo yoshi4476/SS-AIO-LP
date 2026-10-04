@@ -108,7 +108,8 @@ for (var i = 0; i < 40; i++) ROWS.push(['ai-lab', i < 20 ? '重複語' + (i%3) :
                                         '未着手','B','','','','','','','']);
 function kwRows_() { READS++; return ROWS; }
 """
-    js = harness + fn("normKw_") + fn("kwConflict_") + fn("nextKw_") + """
+    # 組の判定（kwGroup_ / sameGroup_）は kwConflict_ が使う。ctx を渡さない nextKw_ は全社を1つの組として見る
+    js = harness + fn("normKw_") + fn("kwGroup_") + fn("sameGroup_") + fn("kwConflict_") + fn("nextKw_") + """
 var r = nextKw_('ai-lab');
 console.log(JSON.stringify({reads: READS, kw: r.keyword,
                             skipped: (r.skipped_conflict||[]).length}));

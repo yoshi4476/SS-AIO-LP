@@ -41,6 +41,17 @@ def human_items():
     return out
 
 
+def issuer_label(site):
+    """お客様名義（report_issuer: client）のPDFだと分かる印。当社名の無いPDFを、当社の送り状で
+    お客様へ転送する前に気づけるようにする"""
+    try:
+        import sites as S
+        cfg = S.load_all().get(site) or {}
+        return "［お客様名義・当社名なし］" if S.is_client(site) and cfg.get("report_issuer") == "client" else ""
+    except Exception:
+        return ""
+
+
 def partial(r):
     """途中経過（--through）の号だと分かる印。月末の確定版と取り違えさせない"""
     t = r.get("through")
@@ -85,7 +96,7 @@ def main():
         size += len(b) * 4 // 3
         fn = f"{r['site']}-{r['ym']}{partial(r)}.pdf"
         attach.append({"filename": fn, "content": base64.b64encode(b).decode()})
-        lines.append(f"・{r['name']}（{fn}）")
+        lines.append(f"・{r['name']}（{fn}）{issuer_label(r['site'])}")
     body = "\n".join(lines)
     print(body)
     if "--email" not in sys.argv:

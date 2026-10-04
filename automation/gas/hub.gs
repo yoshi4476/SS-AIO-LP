@@ -91,6 +91,9 @@ const TABS = {
   'リライトログ': ['実施日', 'サイト', '記事', '理由', '変更概要', '前順位', '後順位', '効果'],
   'エラーログ': ['日時', 'サイト', '工程', 'エラー内容', '対応', '状態'],
   '設定': ['項目', '値', '説明'],
+  // 組の違う社（お客様どうし・お客様と自社）が同じ語を持った記録。弾かずに登録し、運用者が状態を決める
+  // 状態: 未確認 / 両方使う / 片方を外す（外すのは retire_kw の仕組みで行う）
+  'KW重複の確認': ['日時', '語', '社A', '地域A', '社B', '地域B', '状態', '備考'],
 };
 
 // ============================================================
@@ -192,6 +195,7 @@ function doGet(e) {
       case 'next_kw':  return json_(nextKw_(p.site));
       case 'all_kw':   return json_({ ok: true, keywords: allKw_() });
       case 'kw_status': return json_(kwStatus_(p.site));
+      case 'kw_overlaps': return json_(kwOverlaps_());
       // 同業平均（集計値だけ。LPの診断結果に「同業の平均」を出すため /api/bench が呼ぶ）
       case 'scan_bench': return json_(scanBench_());
       default:
@@ -219,15 +223,16 @@ function doPost(e) {
   }
   try {
     switch (body.action) {
-      case 'claim_kw':    return json_(claimKw_(body.site, body.keyword));
+      // ctx は記事工場が送る組と地域（sites.kw_context）。古い呼び出しは送らず、全社を1つの組として扱う
+      case 'claim_kw':    return json_(claimKw_(body.site, body.keyword, body.ctx));
       // 書く前の食い合い審査。記事工場が Phase 1 と Phase 3 の両方で呼ぶ
-      case 'kw_conflict': return json_(kwConflict_(body.site, body.keyword));
+      case 'kw_conflict': return json_(kwConflict_(body.site, body.keyword, null, null, body.ctx));
       case 'retire_kw':   return json_(retireKw_(body.site, body.keywords, body.reason, body.force));
       // 執筆中のまま記事が残らなかったKWを、未着手へ戻す。
       // ゲートの不具合で実行が途中で落ちると、KWだけが執筆中で取り残される
       case 'unclaim_kw':  return json_(unclaimKw_(body.site, body.keywords));
       case 'publish_log': return json_(publishLog_(body));
-      case 'add_kw':      return json_(addKw_(body.site, body.keywords || []));
+      case 'add_kw':      return json_(addKw_(body.site, body.keywords || [], body.ctx));
       case 'error_log':   return json_(errorLog_(body));
       case 'kpi_log':     return json_(kpiLog_(body));
       // 保守用の操作。エディタを開かなくても実行できるようにする
@@ -320,15 +325,70 @@ function normKw_(s) {
 }
 
 /**
+ * 重複を見る組。自社3サイトで1つ、お客様は1社で1つ（scripts/sites.py の group_key）。
+ * ctx.groups を送らない呼び出し（古い記事工場・手での実行）は全社を1つの組として扱い、従来どおり弾く。
+ * 台帳にあって ctx に無い社は、その社だけの組にする（hub_sheets._grp と同じ）
+ */
+function kwGroup_(ctx, site) {
+  const g = ctx && ctx.groups;
+  if (!g) return '';
+  const s = String(site);
+  return Object.prototype.hasOwnProperty.call(g, s) ? String(g[s]) : '?' + s;
+}
+
+function sameGroup_(ctx, a, b) {
+  return kwGroup_(ctx, a) === kwGroup_(ctx, b);
+}
+
+/** 登録日の比較用の値。読めなければ「いちばん古い」扱い（既にある行を先に登録した側とみなす） */
+function kwTime_(v) {
+  if (v instanceof Date) return v.getTime();
+  if (typeof v === 'number') return (v - 25569) * 86400000;
+  const t = Date.parse(String(v || '').replace(' ', 'T'));
+  return isNaN(t) ? -Infinity : t;
+}
+
+/**
+ * 組の違う社が同じ語を持ったことを「KW重複の確認」に残す（同じ語・同じ2社は1行だけ）。
+ * 社Aが先に登録した側。弾かないのは、地域が違えばお客様どうしで同じ語を使ってよい場合があるため。
+ * どちらかを外すかは運用者が決める
+ */
+function noteOverlap_(keyword, first, second, ctx) {
+  const sh = sheet_('KW重複の確認');
+  const n = normKw_(keyword);
+  const pair = [String(first), String(second)].sort().join('|');
+  if (sh.getLastRow() >= 2) {
+    const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
+    for (let i = 0; i < rows.length; i++) {
+      if (normKw_(rows[i][1]) === n && [String(rows[i][2]), String(rows[i][4])].sort().join('|') === pair) return false;
+    }
+  }
+  const reg = (ctx && ctx.regions) || {};
+  sh.appendRow([new Date(), keyword, first, reg[first] || '', second, reg[second] || '', '未確認',
+                '社Aが先に登録。片方を外すときは retire_kw で外す側の語を対象外にする']);
+  return true;
+}
+
+/** 「KW重複の確認」の行（週次の findings が未確認を要対応として知らせる） */
+function kwOverlaps_() {
+  const sh = sheet_('KW重複の確認');
+  if (sh.getLastRow() < 2) return { ok: true, rows: [] };
+  return { ok: true, rows: sh.getRange(2, 1, sh.getLastRow() - 1, 8).getValues().map(function (r) {
+    return { at: r[0], keyword: r[1], site_a: r[2], region_a: r[3], site_b: r[4], region_b: r[5],
+             status: String(r[6] || '').trim() || '未確認', note: r[7] || '' };
+  }) };
+}
+
+/**
  * その語が既存の台帳とぶつかっていないかを返す。
  *
  * 同一サイト内の重複は順位が割れる。サイトをまたぐ重複は担当領域の侵食で、
  * グループ全体で見ると同じ語を自社2サイトで奪い合うことになる。どちらも止める。
  */
-function kwConflict_(site, keyword, rows, selfRow) {
+function kwConflict_(site, keyword, rows, selfRow, ctx) {
   const n = normKw_(keyword);
   if (!n) return { ok: false, error: 'キーワードが空です' };
-  const same = [], cross = [];
+  const same = [], cross = [], otherGroup = [];
   // rows を渡せるようにしてある。渡さないと1件ごとに台帳を読み直すことになり、
   // 未着手が数百件あるとGASの実行時間の上限に当たる。
   // selfRow は「その語自身の台帳行」。台帳から取り出したKWを審査するときは、
@@ -343,10 +403,12 @@ function kwConflict_(site, keyword, rows, selfRow) {
       : (m.indexOf(n) === 0 || n.indexOf(m) === 0) ? '包含' : '';
     if (!hit) return;
     const rec = { site: r[0], keyword: r[1], status: st, url: r[9] || '', match: hit };
+    // 組の違う社とは食い合わない（別の会社のサイト）。止めずに other_group として返す
+    if (!sameGroup_(ctx, r[0], site)) { otherGroup.push(rec); return; }
     (String(r[0]) === String(site) ? same : cross).push(rec);
   });
   const level = same.length ? 2 : (cross.length ? 1 : 0);
-  return { ok: true, level: level, same_site: same, other_site: cross,
+  return { ok: true, level: level, same_site: same, other_site: cross, other_group: otherGroup,
            verdict: level === 2 ? '着手禁止（同じサイトに同じ語がある）'
              : level === 1 ? '要確認（他サイトが同じ語を持っている）' : '着手可' };
 }
@@ -433,27 +495,33 @@ function kwStatus_(site) {
  * ここが最後の砦。この先は本文を書く工程で、公開後に気づくと
  * 統合か削除しか残らない。既存記事と食い合う語は、ここで止める。
  */
-function claimKw_(site, keyword) {
+function claimKw_(site, keyword, ctx) {
   const sh = sheet_('KW台帳');
   const rows = kwRows_();
   const n = normKw_(keyword);
   for (let i = 0; i < rows.length; i++) {
     if (String(rows[i][0]) !== site || normKw_(rows[i][1]) !== n) continue;
-    // 自分の行を除いて、生きている同じ語がないか見る
-    const dup = [];
+    // 自分の行を除いて、生きている同じ語がないか見る。止めるのは同じ組の中だけ
+    const dup = [], other = [];
     rows.forEach(function (r, j) {
       if (j === i || normKw_(r[1]) !== n) return;
       const st = String(r[2]).trim();
       if (st === '対象外' || st === '取り下げ') return;
-      dup.push({ site: r[0], keyword: r[1], status: st, url: r[9] || '' });
+      const rec = { site: r[0], keyword: r[1], status: st, url: r[9] || '' };
+      if (sameGroup_(ctx, r[0], site)) dup.push(rec);
+      else other.push({ rec: rec, first: kwTime_(r[6]) <= kwTime_(rows[i][6]) });
     });
     if (dup.length) {
       return { ok: false, error: '同じ語が台帳にすでにあります。書くと順位が割れます',
                conflicts: dup };
     }
+    other.forEach(function (o) {
+      if (o.first) noteOverlap_(keyword, String(o.rec.site), site, ctx);
+      else noteOverlap_(keyword, site, String(o.rec.site), ctx);
+    });
     sh.getRange(i + 2, 3).setValue('執筆中');
     sh.getRange(i + 2, 8).setValue(new Date());
-    return { ok: true };
+    return other.length ? { ok: true, overlaps: other.map(function (o) { return o.rec; }) } : { ok: true };
   }
   return { ok: false, error: 'KWが見つかりません: ' + keyword };
 }
@@ -481,33 +549,40 @@ function unclaimKw_(site, keywords) {
 
 
 /** KWをまとめて追加（自動補充）。表記ゆれを吸収して重複を弾く */
-function addKw_(site, keywords) {
+function addKw_(site, keywords, ctx) {
   const sh = sheet_('KW台帳');
   // 文字列の完全一致では「aio 診断」と「aio診断」が両方通る。正規化して比べる。
-  const exist = {}, other = {};
+  // other は同じ組の他サイト、outside は組の違う社（語ごとに社の並び）
+  const exist = {}, other = {}, outside = {};
   kwRows_().forEach(function (r) {
     const st = String(r[2]).trim();
     if (st === '対象外' || st === '取り下げ') return;
     const n = normKw_(r[1]);
     if (!n) return;
     if (String(r[0]) === String(site)) exist[n] = r[1];
-    else other[n] = r[0];
+    else if (sameGroup_(ctx, r[0], site)) other[n] = r[0];
+    else (outside[n] = outside[n] || []).push(String(r[0]));
   });
   let added = 0;
-  const skipped = [], crossed = [];
+  const skipped = [], crossed = [], overlaps = [];
   keywords.forEach(function (k) {
     const kw = typeof k === 'string' ? { keyword: k } : k;
     const n = normKw_(kw.keyword);
     if (!n) return;
     if (exist[n]) { skipped.push({ keyword: kw.keyword, dup: exist[n] }); return; }
-    // 他サイトが持つ語は入れない。グループ内で同じ語を奪い合うことになる
+    // 同じ組の他サイトが持つ語は入れない。グループ内で同じ語を奪い合うことになる
     if (other[n]) { crossed.push({ keyword: kw.keyword, site: other[n] }); return; }
     sh.appendRow([site, kw.keyword, '未着手', kw.priority || 'B', kw.category || '',
                   kw.aim || '', new Date(), '', '', '', kw.note || '']);
     exist[n] = kw.keyword;
     added++;
+    // 組の違う社（別の会社）が持つ語は入れたうえで、運用者に知らせる
+    (outside[n] || []).filter(function (s, j, a) { return a.indexOf(s) === j; }).forEach(function (s) {
+      noteOverlap_(kw.keyword, s, site, ctx);
+      overlaps.push({ keyword: kw.keyword, site: s });
+    });
   });
-  return { ok: true, added: added, skipped_dup: skipped, skipped_other_site: crossed };
+  return { ok: true, added: added, skipped_dup: skipped, skipped_other_site: crossed, overlaps: overlaps };
 }
 
 /** 公開完了の記録（KW台帳と記事作成ログの両方を更新） */

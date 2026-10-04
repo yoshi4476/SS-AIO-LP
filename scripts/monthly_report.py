@@ -87,6 +87,39 @@ def addressee():
     return f"<b>{html.escape(name)} 御中</b><br>" if name else ""
 
 
+def issuer():
+    """表紙・裏表紙・フッターに出す発行者。
+
+    お客様の社で sites/<id>.json の report_issuer が "client" なら、当社の名前・住所・URL・ロゴを出さず
+    お客様の社名だけにする（お客様が社内や取引先にそのまま回すため）。既定と自社3サイトは当社名義
+    """
+    cfg = site_cfg()
+    if _sites_mod.is_client(SITE_ID) and cfg.get("report_issuer") == "client":
+        try:
+            c = json.loads((_sites_mod.ROOT / "data" / "clients" / SITE_ID / "company.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            c = {}
+        return {"operator": False, "name": c.get("name") or cfg["name"],
+                "address": c.get("address") or "", "tel": c.get("tel") or "",
+                "urls": f"https://{cfg['domain']}"}
+    return {"operator": True, "name": "セブンセンシズ株式会社",
+            "address": "〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902",
+            "tel": "06-4305-7547（9:00〜20:00 / 土日祝休）",
+            "urls": "https://ai.7senses.co.jp ｜ https://corp.7senses.co.jp"}
+
+
+def issuer_name_html():
+    # _main の中では html が本文の変数で上書きされているため、エスケープはここで行う
+    return html.escape(issuer()["name"])
+
+
+def issuer_leaks(page):
+    """お客様名義のレポートに残った当社の名前・URL（出たら PDF を作らない）"""
+    if issuer()["operator"]:
+        return []
+    return [m for m in _sites_mod.OPERATOR_MARKS if m in page]
+
+
 def cat_names():
     """カテゴリのスラッグ → 表示名。AI集客ラボの4つだけを書いていたため、
     コーポレート・補助金の月次では「keiri-bpo」「hojokin」がそのまま表に出た（2026-08 の月次）"""
@@ -2174,8 +2207,9 @@ def render(d, a):
 
     # 表紙ロゴ（白版）をbase64で埋め込み
     logo_b64 = ""
+    iss = issuer()
     lp = ROOT / "site" / "images" / "company" / "logo-white.png"
-    if lp.exists():
+    if lp.exists() and iss["operator"]:
         logo_b64 = f'<img class="cv-logo" src="data:image/png;base64,{base64.b64encode(lp.read_bytes()).decode()}">'
 
     def tile_q(label, value, sub):
@@ -2618,7 +2652,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
   </div>
   <div class="cv-meta">
     {addressee()}対象メディア: <b>{site_cfg()["name"]}</b>（https://{site_cfg()["domain"]}）<br>
-    発行: <b>セブンセンシズ株式会社</b>｜発行日: {date.today().isoformat()}｜作成: 自動集計+分析エンジン<br>
+    発行: <b>{html.escape(iss["name"])}</b>｜発行日: {date.today().isoformat()}｜作成: 自動集計+分析エンジン<br>
     本レポートの数値は Google Analytics 4 / Google Search Console / 運用ログの実測にもとづきます
   </div>
 </div>
@@ -3286,10 +3320,10 @@ AI経由参照は chatgpt.com・chat.openai.com・perplexity.ai・gemini.google.
 <!-- ページ10: 裏表紙 -->
 <div class="sheet back-cover">
   {logo_b64}
-  <div class="l">{site_cfg()["name"]}｜セブンセンシズ株式会社</div>
-  <div class="s">〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>
-  TEL 06-4305-7547（9:00〜20:00 / 土日祝休）<br>
-  https://ai.7senses.co.jp ｜ https://corp.7senses.co.jp<br><br>
+  <div class="l">{site_cfg()["name"]}｜{html.escape(iss["name"])}</div>
+  <div class="s">{html.escape(iss["address"]) + "<br>" if iss["address"] else ""}
+  {"TEL " + html.escape(iss["tel"]) + "<br>" if iss["tel"] else ""}
+  {iss["urls"]}<br><br>
   本レポートに関するご質問・追加分析のご要望はお気軽にお申し付けください。<br>
   次号は翌月1日に自動発行されます。</div>
 </div>
@@ -3331,6 +3365,10 @@ def _main():
     d = fetch_demo() if DEMO else fetch_real()
     a = analyze(d)
     html = render(d, a)
+    leak = issuer_leaks(html)
+    if leak:
+        raise SystemExit("お客様名義のレポートに当社の名前・URLが残っています（PDFは作りません）: "
+                         + " / ".join(leak))
 
     ym = d["months"][-1]["label"]
     # サイトごとに分ける。同じ場所へ書くと最後に走ったサイトだけが残る。
@@ -3397,7 +3435,7 @@ def _main():
                footer_template=(
                    '<div style="width:100%;font-size:7px;color:#8ba0bd;'
                    'padding:0 12mm;display:flex;justify-content:space-between;">'
-                   f'<span>{site_cfg()["name"]} 月次コンサルティングレポート ｜ セブンセンシズ株式会社</span>'
+                   f'<span>{site_cfg()["name"]} 月次コンサルティングレポート ｜ {issuer_name_html()}</span>'
                    '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>'),
                margin={"top": "0", "bottom": "10mm", "left": "0", "right": "0"})
         b.close()
