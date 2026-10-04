@@ -1,0 +1,243 @@
+{
+ "days": 28,
+ "kinds": {
+  "aio": {
+   "total": 13,
+   "judged": 0,
+   "pending": 13,
+   "low_imp": 0,
+   "verdict": "判定前"
+  },
+  "desc": {
+   "total": 1,
+   "judged": 0,
+   "pending": 1,
+   "low_imp": 0,
+   "verdict": "判定前"
+  },
+  "merge": {
+   "total": 2,
+   "judged": 0,
+   "pending": 2,
+   "low_imp": 0,
+   "verdict": "判定前"
+  },
+  "merge-scaled": {
+   "total": 5,
+   "judged": 0,
+   "pending": 5,
+   "low_imp": 0,
+   "verdict": "判定前"
+  },
+  "question": {
+   "total": 1,
+   "judged": 0,
+   "pending": 1,
+   "low_imp": 0,
+   "verdict": "判定前"
+  },
+  "stuck": {
+   "total": 3,
+   "judged": 0,
+   "pending": 3,
+   "low_imp": 0,
+   "verdict": "判定前"
+  },
+  "title": {
+   "total": 6,
+   "judged": 0,
+   "pending": 6,
+   "low_imp": 0,
+   "verdict": "判定前"
+  }
+ },
+ "items": [
+  {
+   "slug": "koumuten-instagram-shukyaku",
+   "at": "2026-09-23",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "meo-algorithm-kouryaku",
+   "at": "2026-09-24",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikotsuin-meo-taisaku",
+   "at": "2026-09-24",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-shougou-jidoka",
+   "at": "2026-09-25",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "monozukuri-hojokin-unsougyou",
+   "at": "2026-09-26",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "kensetsugyou-denshishinsei-etsuran",
+   "at": "2026-09-27",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "it-hojokin-kojinjigyonushi-kaikeisoft",
+   "at": "2026-09-28",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-muryou-tool",
+   "at": "2026-09-28",
+   "kind": "merge",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-keisoku-houhou",
+   "at": "2026-09-28",
+   "kind": "merge",
+   "status": "観測中"
+  },
+  {
+   "slug": "jigyou-saikouchiku-biyoushitsu-jirei",
+   "at": "2026-09-28",
+   "kind": "merge-scaled",
+   "status": "観測中"
+  },
+  {
+   "slug": "jigyou-saikouchiku-shukuhakugyou-jirei",
+   "at": "2026-09-28",
+   "kind": "merge-scaled",
+   "status": "観測中"
+  },
+  {
+   "slug": "inshokuten-ai-hojokin-taisho-youken",
+   "at": "2026-09-28",
+   "kind": "merge-scaled",
+   "status": "観測中"
+  },
+  {
+   "slug": "llmo-dairiten-boshu",
+   "at": "2026-09-28",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-excel-jidoka",
+   "at": "2026-09-28",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "meo-algorithm-kouryaku",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "iryou-meo-taisaku",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-shougou-jidoka",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "yucho-kicho-yarikata",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "monozukuri-hojokin-nougyou-souko",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "tsucho-kicho-yarikata",
+   "at": "2026-09-28",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "gaichuuhi-seikyuusho-nashi",
+   "at": "2026-09-28",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "monozukuri-hojokin-biyoushitsu",
+   "at": "2026-09-28",
+   "kind": "merge-scaled",
+   "status": "観測中"
+  },
+  {
+   "slug": "inshokuten-ai-hojokin-ochiru-riyu",
+   "at": "2026-09-28",
+   "kind": "merge-scaled",
+   "status": "観測中"
+  },
+  {
+   "slug": "saas-hikaku-kiji-taisaku",
+   "at": "2026-09-28",
+   "kind": "question",
+   "status": "観測中"
+  },
+  {
+   "slug": "meo-algorithm-kouryaku",
+   "at": "2026-09-28",
+   "kind": "desc",
+   "status": "観測中"
+  },
+  {
+   "slug": "meo-algorithm-kouryaku",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "iryou-meo-taisaku",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "shika-heiin-hiyou",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-shougou-jidoka",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "yucho-kicho-yarikata",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "monozukuri-hojokin-nougyou-souko",
+   "at": "2026-09-28",
+   "kind": "aio",
+   "status": "観測中"
+  }
+ ],
+ "generated": "2026-10-05"
+}

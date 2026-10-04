@@ -266,6 +266,8 @@ jobs:
       - name: 打った手の効き（対照群と比較）
         run: |
           python scripts/effect_ab.py || true
+          # 書き直し・統合の種類ごとの効き（前後28日・対照群比）。結果は data/rewrite_effect.json
+          python scripts/effect_ab.py --rewrites || true
 
       # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
@@ -608,7 +610,8 @@ jobs:
           if python scripts/auto_merge.py --selftest; then
             # 記事を増やした分が伸びていないサイトがある週は4組（content_yield。本数は減らさず統合で整える）
             n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
-            python scripts/auto_merge.py --write --limit $n --budget-min 30 || true
+            # 統合案は2組同時に書かせる（1組は最長40分の応答待ち）。当てて検算するのは1組ずつ
+            python scripts/auto_merge.py --write --limit $n --budget-min 30 --parallel 2 || true
           else
             echo "::error::統合の検算が効いていません。統合は行いません"
             python scripts/hub_client.py error_log merge \
@@ -626,7 +629,7 @@ jobs:
         run: |
           if python scripts/auto_merge.py --scaled --selftest; then
             n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
-            python scripts/auto_merge.py --scaled --write --limit $n --budget-min 25 || true
+            python scripts/auto_merge.py --scaled --write --limit $n --budget-min 25 --parallel 2 || true
           else
             echo "::error::同型記事の統合の検算が効いていません。統合は行いません"
             python scripts/hub_client.py error_log merge \
@@ -787,6 +790,8 @@ jobs:
         run: |
           python scripts/rewrite_rollback.py --write 2>&1 | tail -8 || true
           python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
+          # 書き直しを2回しても一次性が80点に届かない記事を、同じ手法・業種の近い記事へ（表示・クリックが少ないものだけ）
+          python scripts/retire_stale.py --quality --write --limit 1 --budget-min 15 2>&1 | tail -8 || true
           python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
           # 一次情報の1文を関係する記事へ（週3本）／離脱が最大の区画の手前に導線（固定ページ）
           python scripts/fact_cite.py --write --limit 3 2>&1 | tail -5 || true

@@ -86,6 +86,9 @@ def rewrite_all():
             if ok:
                 break
             why = f"{rec.get('reason', '')}\n\n前回の書き直しは検算で戻されました。次を必ず避けてください: {msg}"
+        # 書き直した回数を台帳に残す。2回しても一次性が届かなければ retire_stale --quality が統合へ回す
+        AR.note(p.stem, "quality", ok, msg)
+        tries = rec.get("attempts", 1 if rec.get("rewritten") else 0) + (1 if ok else 0)
         if not ok:
             dst.unlink()
             print(f"× {p.stem}: 書き直しが検算で止まりました（{str(msg)[:120]}）", flush=True)
@@ -98,14 +101,15 @@ def rewrite_all():
                        s, count=1, flags=re.M)
             dst.write_text(s, encoding="utf-8")
             p.unlink()
-            log[p.stem] = {"axes": res["axes"], "pass": True, "rewritten": True}
+            log[p.stem] = {"axes": res["axes"], "pass": True, "rewritten": True, "attempts": tries}
             print(f"○ {p.stem}: {res['axes']}", flush=True)
         else:
             # 書き直した版を _legacy の控えにして、次の回でさらに直せるようにする
             p.write_text(dst.read_text(encoding="utf-8"), encoding="utf-8")
             dst.unlink()
             if res:
-                log[p.stem] = {"axes": res["axes"], "pass": False, "reason": res.get("reason", "")[:600], "rewritten": True}
+                log[p.stem] = {"axes": res["axes"], "pass": False, "reason": res.get("reason", "")[:600], "rewritten": True,
+                               "attempts": tries}
             print(f"△ {p.stem}: 書き直し後も不合格 {res and res['axes']}", flush=True)
         LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
 

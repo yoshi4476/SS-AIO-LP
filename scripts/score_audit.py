@@ -190,7 +190,12 @@ def main():
         if not res:
             print(f"  {i:>2}. × {slug[:32]:<34} 採点できません（{err[:50]}）")
             continue
-        d[slug] = {"at": str(date.today()), "self": self_score, "audit": res}
+        # 前の採点を残す。上書きすると「書き直しても一次性が上がらない」が後から言えない（retire_stale --quality）
+        prev = d.get(slug) or {}
+        hist = list(prev.get("history") or [])
+        if (prev.get("audit") or {}).get("axes"):
+            hist.append({"at": prev.get("at", ""), "version": prev["audit"].get("version", ""), **prev["audit"]["axes"]})
+        d[slug] = {"at": str(date.today()), "self": self_score, "audit": res, **({"history": hist[-6:]} if hist else {})}
         ax = res["axes"]
         print(f"  {i:>2}. {slug[:32]:<34} 総合{res['total']:>3}/100"
               f"（一次性{ax['originality']} 抽出性{ax['extractability']}"

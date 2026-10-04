@@ -30,6 +30,7 @@
 
   python scripts/auto_merge.py                 # 候補を見る
   python scripts/auto_merge.py --write         # 統合する（既定2組）
+  python scripts/auto_merge.py --write --parallel 2   # 統合案を2組同時に書かせる（当てて検算するのは1組ずつ）
   python scripts/auto_merge.py --selftest      # 検算が効くか確かめる（claude は呼ばない）
 
 業種を入れ替えただけの同型記事（scaled_guard の組）も同じ処理で統合する（--scaled）。
@@ -45,6 +46,7 @@ import argparse
 import json
 import re
 import shutil
+import subprocess
 import sys
 import time
 from datetime import date
@@ -484,17 +486,16 @@ def note(pair, ok, why):
                             "ok": ok, "note": why}, ensure_ascii=False) + "\n")
 
 
-def run_one(pair, write):
+def build_prompt(pair, keyword):
+    """統合の指示。記事の今の中身には依存しない（並列で先に作れる）"""
     s, l = pair["survivor"], pair["loser"]
-    if not (is_article(s) and is_article(l)):
-        return False, "記事がありません"
-    if not write:
-        return True, "（確認のみ）"
-    raw = (ARTICLES / f"{s}.md").read_bytes()
-    before, before_warns, snap = AR.meta(s), AR.warns(s), AR.snapshot()
-    loser_text = fm(l)["text"]
     ls, ss = pair.get("loser_stat", {}), pair.get("survivor_stat", {})
-    if pair.get("kind") == "scaled":
+    extra = ""
+    if pair.get("reason"):
+        # 食い合い以外の理由で寄せる組（retire_stale の一次性が上がらない記事など）は、呼び出し側が理由を書く。
+        # 「同じ語で評価が割れている」と事実でない理由を渡さない
+        reason = pair["reason"]
+    elif pair.get("kind") == "scaled":
         reason = REASON_SCALED.format(
             survivor=s, loser=l, sim=round(pair["sim"] * 100),
             survivor_imp=ss.get("imp", 0), survivor_clicks=ss.get("clicks", 0),
@@ -505,17 +506,64 @@ def run_one(pair, write):
             survivor=s, loser=l, kws="「" + "」「".join(k["kw"] for k in pair["kws"][:4]) + "」",
             imp=pair["imp"], loser_pos=round(ls.get("pos", 0), 1), loser_clicks=ls.get("clicks", 0),
             survivor_pos=round(ss.get("pos", 0), 1))
-        extra = ""
-    prompt = PROMPT.format(survivor=s, loser=l, reason=reason, extra=extra,
-                           loser_url=url_of(pair["site"], l), keyword=before[1])
+    return PROMPT.format(survivor=s, loser=l, reason=reason, extra=extra,
+                         loser_url=url_of(pair["site"], l), keyword=keyword)
+
+
+def _claude(prompt, cwd=None):
     # 実行ファイルの解決と書き込み承認は auto_rewrite と揃える。
     # どちらが欠けても、統合は静かに「変更なし」で終わる
     # プロンプトは stdin で渡す（引数だと1行目しか届かない）
-    r = AR.sh([AR.claude_bin(), "-p", "--max-turns", "60",
-               *AR.model_args(),
-               "--allowedTools", "Read,Edit",
-               "--settings", AR.PERM], timeout=2400, stdin_text=prompt)
+    return AR.sh([AR.claude_bin(), "-p", "--max-turns", "60",
+                  *AR.model_args(),
+                  "--allowedTools", "Read,Edit",
+                  "--settings", AR.PERM], timeout=2400, stdin_text=prompt, cwd=cwd)
+
+
+def draft_all(pairs, workers):
+    """統合案を、2本の原稿のコピー（一時フォルダ）の上で同時に書かせる。
+
+    1組の統合はほぼ全部が AI の応答待ち（最長40分）。指示は「survivor の1ファイルだけを直す」なので、
+    コピーの上で書かせても中身は同じになる。当てて検算するのは run_one(draft=…) が1組ずつ行う。
+    返すのは組ごとの {"base": 書かせたときの survivor, "loser": 同じく loser, "text": 書いた後の survivor}"""
+    import tempfile
+    from concurrent.futures import ThreadPoolExecutor
+
+    def one(pair):
+        s, l = pair["survivor"], pair["loser"]
+        if not (is_article(s) and is_article(l)):
+            return None
+        base, lt = AR.meta(s)[2], fm(l)["text"]
+        prompt = build_prompt(pair, AR.meta(s)[1])
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
+            (Path(tmp) / "articles").mkdir()
+            for slug in (s, l):
+                (Path(tmp) / "articles" / f"{slug}.md").write_bytes((ARTICLES / f"{slug}.md").read_bytes())
+            _claude(prompt, cwd=tmp)
+            return {"base": base, "loser": lt,
+                    "text": (Path(tmp) / "articles" / f"{s}.md").read_text(encoding="utf-8-sig")}
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
+        return list(ex.map(one, pairs))
+
+
+def run_one(pair, write, draft=None):
+    s, l = pair["survivor"], pair["loser"]
+    if not (is_article(s) and is_article(l)):
+        return False, "記事がありません"
+    if not write:
+        return True, "（確認のみ）"
+    raw = (ARTICLES / f"{s}.md").read_bytes()
+    before, before_warns, snap = AR.meta(s), AR.warns(s), AR.snapshot()
+    loser_text = fm(l)["text"]
     p = ARTICLES / f"{s}.md"
+    # 先に書かせた案は、書かせたときと2本の中身が同じときだけ使う（同じ回で先に別の統合が
+    # 当たって中身が変わっていたら、古い中身への統合になるので書かせ直す）
+    if draft and draft["base"] == before[2] and draft["loser"] == loser_text:
+        if draft["text"] != before[2]:
+            p.write_text(draft["text"], encoding="utf-8", newline="")
+        r = subprocess.CompletedProcess([], 0, "", "")
+    else:
+        r = _claude(build_prompt(pair, before[1]))
     if r.returncode and p.read_text(encoding="utf-8-sig") == before[2]:
         return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
     if p.read_text(encoding="utf-8-sig") == before[2]:
@@ -602,6 +650,7 @@ def main():
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--limit", type=int, default=2, help="1回に統合する組数")
     ap.add_argument("--budget-min", type=int, default=0, help="この分数を超えたら次の組に着手しない（0=無制限）")
+    ap.add_argument("--parallel", type=int, default=0, help="統合案を同時に書かせる組数（検算は1組ずつ）")
     ap.add_argument("--selftest", action="store_true", help="検算が効くかを本番の記事で確かめる")
     ap.add_argument("--scaled", action="store_true",
                     help=f"業種を入れ替えただけの同型の組（scaled_guard・重なり{SCALED_MIN_SIM:.0%}%以上）を統合する")
@@ -660,7 +709,17 @@ def main():
     ok = ng = 0
     started = time.time()
     gone = {}                      # この回で吸収された記事 → 生き残り
-    for p in ready[: a.limit]:
+    todo = ready[: a.limit]
+    drafts = {}
+    if a.parallel > 1:
+        # 記事を共有する組は先に書かせない（前の統合で中身が変わるので、どのみち書かせ直しになる）
+        seen, batch = set(), []
+        for p in todo:
+            if not {p["loser"], p["survivor"]} & seen:
+                seen |= {p["loser"], p["survivor"]}
+                batch.append(p)
+        drafts = {id(p): d for p, d in zip(batch, draft_all(batch, a.parallel))}
+    for p in todo:
         used = (time.time() - started) / 60
         if a.budget_min and used >= a.budget_min:
             print(f"\n  {used:.0f}分使ったので、ここで止めます（残りは次回）")
@@ -675,7 +734,7 @@ def main():
             continue
         while p["survivor"] in gone:   # 生き残りが先に別の記事へ吸収されていたら、その先へ
             p["survivor"] = gone[p["survivor"]]
-        good, why = run_one(p, True)
+        good, why = run_one(p, True, draft=drafts.get(id(p)))
         if good:
             gone[p["loser"]] = p["survivor"]
         print(f"  {'○' if good else '×'} {p['loser'][:28]} → {p['survivor'][:28]}  {why[:60]}")

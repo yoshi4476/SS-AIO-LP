@@ -16,12 +16,16 @@
   2. 実ユーザーでない流入が混ざっていないか（国が取れない・1ページに集中）
   3. GA4とGSCの数字が食い違っていないか（片方だけ壊れていれば分かる）
   4. 指名検索を除いても同じ結論になるか（ブランド名で水増しされていないか）
+  5. AI流入の分類が漏れていないか（GA4 の「AI Assistant」と自前の分類を2通りで比べる・
+     AIらしいのに数えていない参照元・自然検索に入った openai）
+  6. 問い合わせが台帳にあるのに GA4 に送信が無い日（逆向きは lead_reconcile）・サイト不明の台帳の行
 
   python scripts/data_sanity.py            # 3サイトぶん確かめる
   python scripts/data_sanity.py --site ai-lab
 """
 import argparse
 import json
+import re
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -106,28 +110,126 @@ def total_clicks(sc, domain, start, end):
         return None
 
 
+def organic_split(rows):
+    """sessionSourceMedium の (値, セッション) → Google の自然検索 / ほかの検索エンジン / 自然検索に入ったAI。
+
+    GSC が数えるのは Google だけ。「/ organic」を全部足すと bing・yahoo と、ChatGPT の検索結果
+    （utm_source=openai で「openai / organic」になる）まで混ざる。実測（28日・2026-10-04）で
+    コーポレートは organic 161 のうち Google は 79、openai が16だった"""
+    import daily_kpi as K
+    g = other = ai = 0
+    for sm, n in rows:
+        src, _, med = sm.partition(" / ")
+        if med.strip() != "organic":
+            continue
+        if K.ai_label(src):
+            ai += n
+        elif src.strip() == "google":
+            g += n
+        else:
+            other += n
+    return g, other, ai
+
+
 def check_ga_vs_gsc(sid, cfg, prop, days, out):
-    """GA4の自然検索セッションと、GSCのクリック数が近いか。
+    """GA4の自然検索（Google）のセッションと、GSCのクリック数が近いか。
 
     片方だけが壊れていれば、ここで食い違いが出る。
     完全一致はしない（GA4はセッション・GSCはクリック）が、桁が違えば異常。
     """
     import gsc_detail as G
     rows = ga(prop, ["sessionSourceMedium"], ["sessions"], days)
-    organic = sum(int(x.metric_values[0].value) for x in rows
-                  if x.dimension_values[0].value.endswith("/ organic"))
+    g, other, ai = organic_split([(x.dimension_values[0].value, int(x.metric_values[0].value)) for x in rows])
+    if ai:
+        out.append(("注意", f"GA4の自然検索（organic）に AI 経由が{ai}セッション入っています"
+                            f"（openai / organic など）。GA4 のチャネル「Organic Search」にも入るので、"
+                            f"チャネルで数えた自然検索（月次レポートなど）にはAI経由が混ざっています"))
     sc = G.client()
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
     clicks = total_clicks(sc, cfg["domain"], start, end)
-    if clicks is None or (organic == 0 and clicks == 0):
-        return organic, clicks
-    big, small = max(organic, clicks), min(organic, clicks)
+    if clicks is None or (g == 0 and clicks == 0):
+        return g + other + ai, clicks
+    big, small = max(g, clicks), min(g, clicks)
     if small == 0 or big / max(1, small) >= 3:
-        out.append(("注意", f"GA4の自然検索 {organic}セッション と "
+        out.append(("注意", f"GA4の自然検索（Google）{g}セッション と "
                             f"GSCのクリック {clicks}回 が食い違っています"
                             f"（どちらかの計測が壊れている可能性）"))
-    return organic, clicks
+    return g + other + ai, clicks
+
+
+# AIらしい参照元の手がかり。daily_kpi.AI_DOMAINS に無いものがここに当たれば、分類が漏れている。
+# 1語で広く当てない（「chat」は chatwork、「kimi」は日本語のドメインにも出る）
+AI_HINT = re.compile(
+    r"chat-?gpt|openai|perplexity|gemini|bard\.|copilot|claude|anthropic|grok|deepseek|qwen|tongyi|"
+    r"doubao|kimi\.(?:ai|com|moonshot)|moonshot\.cn|mistral|phind|felo\.ai|genspark|metaso|yiyan\.|"
+    r"chatglm|zhipu|monica\.im|character\.ai|lmarena|notebooklm|aistudio|"
+    r"chat-?assistant|ai-?assistant|aichat|ai-chat|chatbot|(?:^|\.)chat\.[a-z]", re.I)
+
+
+def ai_unclassified(sources):
+    """(sessionSource, セッション) のうち、AIらしいのに daily_kpi.ai_label が拾わないもの"""
+    import daily_kpi as K
+    return [(s, n) for s, n in sources if AI_HINT.search(s or "") and not K.ai_label(s)]
+
+
+# GA4 の既定のチャネル名は「AI Assistant」（単数）。複数形で探して0件と誤報した（2026-10-04）。
+# 名前の揺れで0になるのを避けるため、どちらでも拾う
+AI_CHANNEL = re.compile(r"^ai assistants?$", re.I)
+
+
+def ai_channel_gap(channels, sources):
+    """GA4 が「AI Assistant」に分けたセッションと、自前の分類（daily_kpi.ai_label）の合計。
+    GA4 の方が多ければ、自前の分類が漏れている（2通りで数えて食い違いを見る）"""
+    import daily_kpi as K
+    ga_ai = sum(n for c, n in channels if AI_CHANNEL.match((c or "").strip()))
+    ours = sum(n for s, n in sources if K.ai_label(s))
+    return ga_ai, ours
+
+
+def check_ai_referrals(prop, days, out):
+    ch = [(x.dimension_values[0].value, int(x.metric_values[0].value))
+          for x in ga(prop, ["sessionDefaultChannelGroup"], ["sessions"], days)]
+    src = [(x.dimension_values[0].value, int(x.metric_values[0].value))
+           for x in ga(prop, ["sessionSource"], ["sessions"], days)]
+    ga_ai, ours = ai_channel_gap(ch, src)
+    if ga_ai > ours:
+        out.append(("注意", f"GA4 は AI Assistant に{ga_ai}セッション、自前の分類（daily_kpi.AI_DOMAINS）は"
+                            f"{ours}セッション。分類から漏れている参照元があります"))
+    miss = ai_unclassified(src)
+    if miss:
+        out.append(("注意", "AIらしい参照元が AI 流入に数えられていません: "
+                            + "、".join(f"{s}（{n}）" for s, n in miss[:5])
+                            + "。AIなら daily_kpi.AI_DOMAINS に足してください"))
+    return ga_ai, ours
+
+
+def lead_mismatch(ga_by_day, led_by_day, ack=()):
+    """GA4 の問い合わせ（lead_reconcile.is_lead で数えた日ごと）と台帳の行の食い違いのうち、
+    lead_reconcile が見ない向き＝**台帳にあるのに GA4 に送信が無い日**を返す。
+
+    GA4 の方が多い日（台帳への取りこぼし）は lead_reconcile が知らせる。台帳は同じ人の
+    24時間以内の再送信を1行にまとめるので、GA4 が多いこと自体は食い違いではない。
+    逆向きは、送信の計測が飛んでいない（タグの外れ・別の入口）か、手で足した行"""
+    return [d for d, n in sorted(led_by_day.items())
+            if n > 0 and not ga_by_day.get(d) and d not in set(ack)]
+
+
+def check_leads(sid, cfg, prop, days, ledger, out):
+    import lead_reconcile as L
+    if cfg.get("lead_hub") is False:
+        return None
+    if ledger is None:
+        out.append(("注意", "問い合わせの台帳を読めず、GA4 との照合をしていません"))
+        return None
+    end = date.today() - timedelta(days=1)
+    start = end - timedelta(days=days - 1)
+    gad = L.ga4_by_day(str(prop), start, end)
+    led = {d: n for d, n in ledger.get(sid, {}).items() if d >= start.isoformat()}
+    for d in lead_mismatch(gad, led, L.ACKED.get(sid, {})):
+        out.append(("注意", f"{d} の問い合わせは台帳に{led[d]}行あるのに、GA4 に送信の記録がありません"
+                            "（送信の計測が飛んでいないか。手で足した行なら問題なし）"))
+    return sum(gad.values()), sum(led.values())
 
 
 def check_brand_share(cfg, days, out):
@@ -168,6 +270,16 @@ def main():
 
     print("■ 数字を信じてよいかの確認\n")
     total_warn = 0
+    ledger = None
+    try:
+        import lead_reconcile as L
+        ledger = L.ledger_by_site(date.today() - timedelta(days=a.days))
+    except Exception as e:
+        print(f"  問い合わせの台帳を読めません（{str(e)[:60]}）\n")
+    if ledger and ledger.get("?"):
+        print(f"  注意 問い合わせの台帳にサイトを判定できない行が{sum(ledger['?'].values())}件あります"
+              "（サイト別の問い合わせ数から漏れます。台帳のサイト名を直してください）\n")
+        total_warn += 1
     for sid, cfg in S.load_all().items():
         if a.site and sid != a.site:
             continue
@@ -183,9 +295,13 @@ def main():
             tot, bad = check_invalid(prop, a.days, out)
             org, clicks = check_ga_vs_gsc(sid, cfg, prop, a.days, out)
             tc, bc = check_brand_share(cfg, a.days, out)
+            ga_ai, ours = check_ai_referrals(prop, a.days, out)
+            leads = check_leads(sid, cfg, prop, a.days, ledger, out)
             gsc = (f"GSCクリック{clicks}（うち指名{bc}）" if clicks is not None and bc is not None
                    else "GSCは取得できず確かめられません")
             print(f"     セッション{tot}（うち国不明{bad}）/ 自然検索{org} / {gsc}")
+            print(f"     AI流入: GA4のAI Assistant {ga_ai} / 自前の分類 {ours}"
+                  + (f" ／ 問い合わせ: GA4 {leads[0]}件・台帳 {leads[1]}行" if leads else ""))
             if clicks is None or bc is None:
                 # 確かめられなかった（計測の不一致を含む）ものを「崩れなし」と出さない
                 out.append(("注意", "GSCのクリック合計を確かめられず、GA4との照合と指名検索の割合を見ていません"))
