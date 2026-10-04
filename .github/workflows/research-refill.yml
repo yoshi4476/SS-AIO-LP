@@ -110,3 +110,17 @@ jobs:
             sleep 5
           done
           echo "::error::push できませんでした"; exit 1
+
+      # 聞き足しは、3か月ごとの調査の欠けをそろえるためだけに動く。そろったら自分を止める（運用者の決定 2026-10-05:
+      # 調査は3か月に1回）。次の3か月ごとの回（industry-research.yml）で欠けが出たときだけ、有効に戻される
+      - name: 全業種そろったら止める
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          left=$(python scripts/research_run.py --left)
+          echo "ChatGPT の答えが足りない業種: ${left}"
+          if [ "${left}" = "0" ]; then
+            gh workflow disable research-refill.yml --repo "$GITHUB_REPOSITORY" && echo "全業種そろったので、毎日の聞き足しを止めました（次は3か月ごとの調査のあと）"
+          fi

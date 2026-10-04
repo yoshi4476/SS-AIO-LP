@@ -16,9 +16,20 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 
+def industries():
+    """聞く業種の一覧（業種調査の質問がある全業種）。research_extra は後から足した業種の一覧だけで、
+    最初の5業種（クリニック・歯科・不動産・工務店・士業）が入っておらず、聞き直しの対象から漏れていた（2026-10-05）"""
+    import industry_ai_sources as IAS
+    import research_extra as RX
+    extra = {slug: name for slug, name, *_ in RX.INDUSTRIES if slug in RX.load()}
+    core = [(slug, q["name"]) for slug, q in IAS.QUESTIONS.items() if slug not in extra]
+    return core + list(extra.items())
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--minutes", type=int, default=110)
+    ap.add_argument("--left", action="store_true", help="まだ聞き終わっていない業種の数だけを出す（聞かない）")
     a = ap.parse_args()
     import research_extra as RX
     t0 = time.time()
@@ -34,6 +45,13 @@ def main():
         s = json.loads(p.read_text(encoding="utf-8"))
         return (s.get("answered") or {}).get("ChatGPT", 0) < s.get("questions", 50) / 2
 
+    targets = industries()
+    if a.left:
+        # 集計が無い業種と、ChatGPT の答えが足りない業種。0 なら毎日の聞き足しを止めてよい
+        print(sum(1 for slug, _ in targets
+                  if (not (ROOT / "data" / "research" / f"{slug}-summary.json").is_file() or thin(slug))))
+        return 0
+
     def wait_limit():
         """サブスクの利用上限が明けるまで待つ。時間内に明けなければ False（次の実行で続ける）"""
         until = AC.limit_until("ChatGPT")
@@ -45,9 +63,7 @@ def main():
         time.sleep(max(0, until.timestamp() - time.time()))
         return True
 
-    for slug, name, *_ in RX.INDUSTRIES:
-        if slug not in RX.load():
-            continue
+    for slug, name in targets:
         if (ROOT / "data" / "research" / f"{slug}-summary.json").is_file() and not thin(slug):
             continue
         if (time.time() - t0) / 60 > a.minutes - 20 or not wait_limit():   # 1業種に約15〜20分かかる
@@ -65,7 +81,7 @@ def main():
                            text=True, encoding="utf-8", errors="replace", env=env)
         if r.returncode == 0 and (ROOT / "data" / "research" / f"{slug}-summary.json").is_file():
             done.append(slug)
-    left = [s for s, *_ in RX.INDUSTRIES if thin(s)]
+    left = [s for s, _ in targets if thin(s)]
     print(f"RESEARCH_RUN=done 今回集計した業種: {done}" + (f" / ChatGPT が足りない業種: {left}" if left else ""))
     return 0
 

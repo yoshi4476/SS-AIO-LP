@@ -330,3 +330,16 @@ def test_selfheal_never_pushes_workflow_changes():
     check("変更案を成果物に残し、通知に書く", ("workflow-change" in wf, "ワークフローの変更案があります" in wf), (True, True))
     pr = (ROOT / "automation" / "selfheal_prompt.txt").read_text(encoding="utf-8")
     check("AIへの指示でワークフローを直してはいけない側に置く", pr.index(".github/workflows/") > pr.index("直してはいけない"), True)
+
+
+def test_research_runs_quarterly_and_refill_stops_itself():
+    print("\n■ 業種調査は3か月に1回。聞き足しはその回の欠けをそろえたら自分で止まる。全業種を対象にする")
+    import research_run as RR
+    import industry_ai_sources as IAS
+    # 最初の5業種（クリニック・歯科・不動産・工務店・士業）が聞き直しの対象から漏れていた（2026-10-05）
+    check("聞き直しの対象は質問のある全業種", {s for s, _ in RR.industries()}, set(IAS.QUESTIONS))
+    wf = (ROOT / ".github" / "workflows" / "research-refill.yml").read_text(encoding="utf-8")
+    check("聞き足し: そろったら自分を止める", "gh workflow disable research-refill.yml" in wf and "--left" in wf, True)
+    q = (ROOT / ".github" / "workflows" / "industry-research.yml").read_text(encoding="utf-8")
+    check("3か月ごとの回: 欠けがあれば聞き足しを有効に戻す", "gh workflow enable research-refill.yml" in q, True)
+    check("3か月ごとの回の予定は3か月おき", "1,4,7,10" in q, True)

@@ -119,3 +119,17 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: python scripts/research_publish.py --push 2>&1 | tail -3 || echo "::warning::コーポレートの調査ページを配信できませんでした"
+
+      # 調査は3か月に1回（運用者の決定 2026-10-05）。この回で ChatGPT の利用上限に当たって欠けた業種があれば、
+      # 毎日の聞き足し（research-refill.yml）を有効に戻して、この回の分をそろえる。そろえば聞き足しが自分で止まる
+      - name: 欠けがあれば聞き足しを有効にする
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONIOENCODING: utf-8
+        run: |
+          left=$(python scripts/research_run.py --left)
+          echo "ChatGPT の答えが足りない業種: ${left}"
+          if [ "${left}" != "0" ]; then
+            gh workflow enable research-refill.yml --repo "$GITHUB_REPOSITORY" && echo "欠けた ${left} 業種をそろえるまで、毎日の聞き足しを有効にしました"
+          fi
