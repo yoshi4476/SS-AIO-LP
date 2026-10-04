@@ -1,10 +1,10 @@
 {
-  "date": "2026-10-04",
+  "date": "2026-10-05",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 15,
-      "suspect_taken": 14,
+      "judged": 14,
+      "suspect_taken": 13,
       "healthy": 1,
       "too_thin": 115,
       "items": [
@@ -12,11 +12,11 @@
           "kw": "原口優",
           "url": "https://ai.7senses.co.jp/author/haraguchi/",
           "pos": 1.4,
-          "imp": 38,
+          "imp": 37,
           "clicks": 3,
-          "ctr": 7.89,
+          "ctr": 8.11,
           "expected_ctr": 28.0,
-          "ratio": 0.28
+          "ratio": 0.29
         },
         {
           "kw": "aio やり方",
@@ -51,8 +51,8 @@
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 7.2,
-          "imp": 39,
+          "pos": 6.6,
+          "imp": 34,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -129,16 +129,6 @@
           "ratio": 0.0
         },
         {
-          "kw": "カイロ meo",
-          "url": "https://ai.7senses.co.jp/meo/seikotsuin-meo-taisaku/",
-          "pos": 6.4,
-          "imp": 12,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 5.0,
-          "ratio": 0.0
-        },
-        {
           "kw": "歯科医院 閉院費用",
           "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
           "pos": 6.3,
@@ -154,7 +144,7 @@
       "judged": 9,
       "suspect_taken": 5,
       "healthy": 4,
-      "too_thin": 60,
+      "too_thin": 59,
       "items": [
         {
           "kw": "3点照合",
@@ -179,8 +169,8 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 4.8,
-          "imp": 80,
+          "pos": 4.9,
+          "imp": 78,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
