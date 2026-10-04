@@ -120,6 +120,50 @@ def stale(ledger):
     return out
 
 
+def research_due(ledger, per_week, today=None):
+    """今週まだ調査の動画を上げていなければ、次に動画にする調査（research_promo の出せる業種で、まだ動画の無いもの）。
+    調査はそこにしか無い数字なので言及の元になるが、1日の上限は記事動画と共有なので週 per_week 本まで"""
+    import research_promo as RP
+    if per_week <= 0:
+        return None
+    since = ((today or date.today()) - timedelta(days=6)).isoformat()
+    recent = [k for k, v in ledger.items() if k.startswith(RP.PREFIX) and (v.get("date") or "") >= since]
+    if len(recent) >= per_week:
+        return None
+    ng = RP.load_ledger().get("video_ng", {})
+    for ind in RP.industries():
+        if RP.PREFIX + ind not in ledger and ind not in ng:
+            return ind
+    return None
+
+
+def make_research(r, ledger, token, public):
+    """調査の掛け合い動画。台本が検査に通らなければ作らない（記事と違い、スライド形式に落とす元が無い）"""
+    import duo_video as DV
+    import video_make as VM
+    import youtube_upload as YT
+    sc = DV.load_script(r["slug"]) or DV.write_script(r["slug"])
+    if not sc:
+        print(f"   × {r['slug']}: 台本が検査に通りませんでした（作りません）")
+        # 翌日また同じ業種で claude を3回呼ばないよう、通らなかった業種は記録して次の業種へ回す
+        import research_promo as RP
+        led = RP.load_ledger()
+        led.setdefault("video_ng", {})[r["slug"][len(RP.PREFIX):]] = date.today().isoformat()
+        RP.LEDGER.write_text(json.dumps(led, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        return False
+    out = VM.OUT / f'{r["slug"]}.mp4'
+    out.parent.mkdir(parents=True, exist_ok=True)
+    sec = DV.make(sc, out)
+    rec = {"site": "ai-lab", "kind": "research", "date": date.today().isoformat(), "sec": round(sec),
+           "mp4": str(out.relative_to(ROOT)).replace("\\", "/"), "format": "duo", "url": r["url"]}
+    if token:
+        rec["youtube"] = YT.upload(out, r["slug"], public=public, quiet=True)
+    ledger[r["slug"]] = rec
+    LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"   ○ {r['slug'][:40]:<40} {sec:.0f}秒 duo（調査）" + (f" → youtu.be/{rec['youtube']}" if token else ""))
+    return True
+
+
 def note_token_missing():
     line = "要対応: YouTube の鍵（youtube-token.json）が無く、記事動画を作るだけで上げていません（初回だけ python scripts/youtube_upload.py --auth）"
     FINDINGS.parent.mkdir(parents=True, exist_ok=True)
@@ -180,6 +224,8 @@ def main():
     ap.add_argument("--days", type=int, default=7)
     ap.add_argument("--public", action="store_true", default=True)
     ap.add_argument("--shorts", type=int, default=1, help="縦型ショートを作る本数（動画のある記事から新しい順）")
+    ap.add_argument("--research", type=int, default=1,
+                    help="調査ページの動画を週に何本まで混ぜるか（記事動画の枠と置き換える。本数は増やさない）")
     ap.add_argument("--reuse", action="store_true",
                     help="手元で書き出して確認済みの動画（台本より新しいもの）を作り直さずに上げる")
     a = ap.parse_args()
@@ -203,6 +249,12 @@ def main():
     if skip:
         print(f"   チャンネル未接続のクライアントの記事を飛ばしました: {len(skip)}本")
         rows = [r for r in rows if r["slug"] not in skip]
+    ind = research_due(ledger, a.research) if a.limit > 0 and DV.ready() else None
+    if ind:
+        import research_promo as RP
+        hl = RP.headline(ind)
+        rows = rows[:a.limit - 1] + [{"slug": RP.PREFIX + ind, "site": "ai-lab", "title": RP.title(hl),
+                                      "date": "調査", "research": True, "url": hl["url"]}]
     print(f"■ 記事動画: 今回 {len(rows)}本（作り直し {len(redo)}本待ち・直近{a.days}日の未作成） / "
           f"YouTubeの鍵 {'あり' if token else '無し'}")
     for r in rows:
@@ -213,6 +265,9 @@ def main():
     made, ok = 0, True
     for r in rows:
         try:
+            if r.get("research"):
+                made += make_research(r, ledger, token, a.public)
+                continue
             script = VM.from_article(r["slug"])
             out = VM.OUT / f'{r["slug"]}.mp4'
             out.parent.mkdir(parents=True, exist_ok=True)

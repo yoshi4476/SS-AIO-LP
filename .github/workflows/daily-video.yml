@@ -74,7 +74,7 @@ jobs:
           [ -n "$YOUTUBE_CLIENT_JSON" ] && printf '%s' "$YOUTUBE_CLIENT_JSON" > youtube-client.json
           [ -n "$YOUTUBE_TOKEN_JSON" ]  && printf '%s' "$YOUTUBE_TOKEN_JSON"  > youtube-token.json
           [ -n "$YOUTUBE_TOKENS_JSON" ] && python -c 'import json,os;[open(f"youtube-token-{k}.json","w",encoding="utf-8").write(json.dumps(v)) for k,v in json.loads(os.environ["YOUTUBE_TOKENS_JSON"]).items()]'
-          python scripts/article_videos.py --write --limit 1 --days 7 --shorts 1 2>&1 | tail -10 || true
+          python scripts/article_videos.py --write --limit 1 --days 7 --shorts 1 --research 1 2>&1 | tail -10 || true
           rm -f youtube-client.json youtube-token.json youtube-token-*.json
       # TikTok は審査前だと自動投稿が非公開になるため、縦型の mp4 を成果物に残して手で上げる（30日保存）
       - name: 縦型ショートを成果物に残す（TikTok 用）
@@ -91,7 +91,7 @@ jobs:
           python scripts/build.py > /dev/null 2>&1 || echo "::warning::ビルドに失敗（動画の埋め込みは次のビルドで入ります）"
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          for p in data/videos.json data/youtube_playlists.json site data/published.json data/body_hash.json data/yomi_dict.json data/yomi_issues.jsonl data/duo_scripts data/duo_shorts; do if [ -e "$p" ]; then git add "$p"; fi; done
+          for p in data/videos.json data/research_promo.json data/youtube_playlists.json site data/published.json data/body_hash.json data/yomi_dict.json data/yomi_issues.jsonl data/duo_scripts data/duo_shorts; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
           git commit -q -m "記事動画: $(date '+%Y-%m-%d')"
           pushed=0

@@ -218,6 +218,9 @@ def describe(slug):
     """概要欄。**記事URLを必ず先頭に置く**（指名検索とサイトへの導線）"""
     import social_post as SP
     a = SP.article(slug)
+    if not a and slug.startswith("research-") and not (ROOT / "articles" / f"{slug}.md").is_file():
+        import research_promo as RP
+        return RP.describe(slug[len(RP.PREFIX):])
     if not a:
         ds = ROOT / "data" / "datasets" / f"{slug}.json"
         if ds.is_file():

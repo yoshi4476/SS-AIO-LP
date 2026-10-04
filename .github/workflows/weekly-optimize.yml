@@ -439,6 +439,11 @@ jobs:
           python scripts/social_connect.py --refresh 2>&1 | tee /tmp/social.txt || true
           grep '^要対応' /tmp/social.txt >> automation/logs/findings.txt || true
 
+      # 業種別の調査の数字を note の下書きに（言及の元になる社名とURLつき）。投稿は人が行う。
+      # claude も課金APIも呼ばない。ChatGPT の回答がそろった業種だけ・1業種1回
+      - name: 調査の数字を note の下書きに積む
+        run: python scripts/research_promo.py --note --limit 2 || true
+
       # GSCが読めているかを毎週確認する。ここが黙って落ちると補充が
       # サジェスト頼りになり、有限の候補を掘り尽くして在庫が枯れる。
       - name: Search Consoleの疎通確認

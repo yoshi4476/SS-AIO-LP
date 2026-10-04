@@ -61,6 +61,10 @@ def brand_ng(sc, art):
     """ほかのサイトの名前で名乗っていないか"""
     b = brand(art)["name"]
     said = "".join(l.get("text", "") for l in sc.get("lines") or [])
+    if art.get("research"):
+        # 調査は「セブンセンシズ株式会社（AI集客ラボ）の調査」と出どころを言わせる（言及の元になる社名）
+        import research_promo as RP
+        said = said.replace(RP.COMPANY, "").replace("セブンセンシズ株式会社", "")
     return [f"このサイトの名前は「{b}」。「{o}」と言っている" for o in {x["name"] for x in BRANDS.values()} if o != b and o in said]
 
 
@@ -99,10 +103,34 @@ PROMPT = """あなたはYouTubeの解説動画の構成作家です。下の記�
 {article}
 """
 
+# 調査ページ（research_promo）が元のとき。決まりは記事と同じで、材料の呼び名と章の数だけ変える
+RESEARCH_PROMPT = (PROMPT.replace("下の記事だけを材料に", "下の調査だけを材料に")
+                   .replace("この記事の読者と同じ立場の経営者", "この業種の経営者")
+                   .replace("記事に書いてあるもの", "調査に書いてあるもの")
+                   .replace("記事に無い数字", "調査に無い数字")
+                   .replace("記事の文をそのまま", "調査の文をそのまま")
+                   .replace("記事の主な見出しごとに章(5〜8章", "調査の要点ごとに章(3〜5章")
+                   .replace("合計36〜56セリフ", "合計32〜48セリフ")
+                   .replace("詳しくは記事にまとめています", "詳しくは調査ページにまとめています")
+                   .replace("記事にある数字", "調査にある数字")
+                   .replace("ボードの文字も記事にある", "ボードの文字も調査にある")
+                   .replace("--- 記事 ---", "--- 調査 ---")
+                   .replace("出力はJSONだけ", "調査について守ること:\n"
+                            "- 冒頭で「セブンセンシズ株式会社（AI集客ラボ）の調査」と出どころを言う。調査日・質問数・使ったAIは調査に書いてあるとおりに言う。\n"
+                            "- 結果の向きは業種ごとに違う。「業種を問わず」「ポータルが中心」のような一律の言い方をしない。"
+                            "この業種の数字から言えることだけを言う（どちらが多いと言えない業種では、多いと言わない）。\n"
+                            "- URLは読み上げない。\n\n出力はJSONだけ"))
+
 
 # ---------- 記事 ----------
 def article(slug):
     p = ROOT / "articles" / f"{slug}.md"
+    if slug.startswith("research-") and not p.is_file():
+        import research_promo as RP
+        src = RP.source(slug[len("research-"):])
+        if not src:
+            raise FileNotFoundError(f"{slug}: 出せる調査がありません（集計が無いか、ChatGPT の回答がそろっていない）")
+        return src
     t = p.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
     fm, body = m.group(1), m.group(2)
@@ -156,6 +184,10 @@ def validate(sc, art):
         ng.append("最初のセリフに cover が無い")
     if lines and (lines[-1].get("board") or {}).get("type") != "end":
         ng.append("最後のセリフに end が無い")
+    if art.get("research"):
+        import research_promo as RP
+        said = "\n".join(ln.get("text", "") + json.dumps(ln.get("board") or {}, ensure_ascii=False) for ln in lines)
+        ng += RP.uniform_ng(said, art["hl"])
     return ng + brand_ng(sc, art)
 
 
@@ -165,7 +197,8 @@ def write_script(slug, tries=3):
     art = article(slug)
     fb = ""
     for k in range(tries):
-        prompt = PROMPT.format(article=art["text"][:14000], brand=brand(art)["name"]) + fb
+        prompt = (RESEARCH_PROMPT if art.get("research") else PROMPT).format(
+            article=art["text"][:14000], brand=brand(art)["name"]) + fb
         r = AR.sh([AR.claude_bin(), "-p", "--max-turns", "1", *AR.model_args()], timeout=900, stdin_text=prompt)
         raw = (r.stdout or "").strip()
         m = re.search(r"\{.*\}", raw, re.S)
@@ -180,6 +213,8 @@ def write_script(slug, tries=3):
         if not ng:
             SCRIPTS.mkdir(parents=True, exist_ok=True)
             sc["slug"], sc["title"] = slug, art["title"]
+            if art.get("research"):
+                sc["kind"] = "research"
             (SCRIPTS / f"{slug}.json").write_text(json.dumps(sc, ensure_ascii=False, indent=1), encoding="utf-8")
             sc["brand"] = brand(art)
             return sc
@@ -219,9 +254,10 @@ def _backdrop():
 
 
 class Board:
-    def __init__(self, title, br=None):
+    def __init__(self, title, br=None, kind=""):
         import video_make as VM
         self.VM, self.title, self.br = VM, title, br or BRANDS["ai-lab"]
+        self.src = "調査" if kind == "research" else "記事"
         self.base = _backdrop()
         self.cache = {}
 
@@ -280,13 +316,13 @@ class Board:
                 d.text((960, 190), st.get("kicker", "")[:20], font=FB(42), fill=GOLD, anchor="mm")
                 center_lines(st.get("title") or self.title.split("｜")[0], 350, 76, 44, NAVY, gap=100, maxl=2)
                 d.line([(760, 480), (1160, 480)], fill=GOLD, width=4)
-                d.text((960, 540), "記事をもとに、2人で要点を話します", font=FR(30), fill=MUTED, anchor="mm")
+                d.text((960, 540), f"{self.src}をもとに、2人で要点を話します", font=FR(30), fill=MUTED, anchor="mm")
             elif t == "step":
                 d.text((960, 200), st.get("head", "今日できる一歩"), font=FB(40), fill=GOLD, anchor="mm")
                 for i, ln in enumerate((st.get("lines") or [])[:3]):
                     d.text((960, 300 + i * 84), ln, font=VM.fit(d, ln, 860, 52, 30), fill=NAVY, anchor="mm")
             else:
-                d.text((960, 230), "続きは記事で", font=FB(72), fill=NAVY, anchor="mm")
+                d.text((960, 230), "続きは調査ページで" if self.src == "調査" else "続きは記事で", font=FB(72), fill=NAVY, anchor="mm")
                 center_lines(self.title.split("｜")[0], 330, 40, 28, INK, maxl=1)
                 d.rounded_rectangle([700, 420, 1220, 500], 40, fill=GOLD)
                 d.text((960, 460), "概要欄のリンクから", font=FB(34), fill=(255, 255, 255), anchor="mm")
@@ -574,7 +610,7 @@ def make(sc, out_mp4):
             if bd:
                 cur = dict(cur, **bd) if bd.keys() <= {"show"} else dict(bd)
             states.append(dict(cur))
-        board = Board(sc.get("title", ""), sc.get("brand") or BRANDS["ai-lab"])
+        board = Board(sc.get("title", ""), sc.get("brand") or BRANDS["ai-lab"], sc.get("kind", ""))
         sp, dim = _sprites()
         # キャラクターは高さ1200px（=900×4/3）の素材を1440pにそのまま置く（拡大しない）
         pos = {"N": round(-60 * KS), "K": OW - sp["K"][("open", "m0")].width + round(90 * KS)}
@@ -682,6 +718,21 @@ def selftest():
     bad["lines"][3]["text"] = "導入企業の85%で成果が出ました。"
     ok = not validate(good, art) and any("85" in x for x in validate(bad, art))
     ok = ok and chunks("「断熱等級はいくつ必要？」みたいに、施主さんは聞きますよね。")[0].startswith("「断熱")
+    # 調査が元のときも同じ強さで捨てる（調査に無い数字・一律の言い方）
+    import research_promo as RP
+    inds = RP.industries()
+    if inds:
+        ra = article(RP.PREFIX + inds[0])
+        n0 = sorted(_nums(ra["text"]))[0]
+        rgood = json.loads(json.dumps(good))
+        rgood["lines"][1:35] = [{"who": "N", "text": f"{RP.COMPANY}の調査です。"}] + [{"who": "N", "text": f"調査では{n0}が出ています。"}] * 33
+        rbad = json.loads(json.dumps(rgood))
+        nb = next(str(k) for k in range(901, 9999) if str(k) not in set(_nums(ra["text"])))
+        rbad["lines"][3]["text"] = f"導入企業の{nb}社で成果が出ました。"
+        rtone = json.loads(json.dumps(rgood))
+        rtone["lines"][4]["text"] = "業種を問わず、ポータルが中心です。"
+        ok = ok and not validate(rgood, ra) and any(nb in x for x in validate(rbad, ra)) \
+            and any("一律" in x for x in validate(rtone, ra))
     print("DUO_SELFTEST=" + ("ok" if ok else "ng"))
     return 0 if ok else 1
 

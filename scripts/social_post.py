@@ -177,8 +177,10 @@ def to_md(rows):
            "貼ったら `python scripts/social_post.py --done <id>` で消してください。", ""]
     for r in rows:
         out += [f'## {r["title"]}', f'`{r["id"]}` ／ {r["site"]} ／ 作成 {r["made"]}', ""]
-        for k in ("x", "facebook", "threads", "linkedin"):
-            out += [f'### {k}', "```", r["posts"][k], "```", ""]
+        # 調査の下書き（research_promo）は note だけを持つ
+        for k in ("x", "facebook", "threads", "linkedin", "note"):
+            if k in r["posts"]:
+                out += [f'### {k}', "```", r["posts"][k], "```", ""]
     return "\n".join(out)
 
 
