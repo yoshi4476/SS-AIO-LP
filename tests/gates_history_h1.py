@@ -189,3 +189,15 @@ def test_subsidy_dist_ships_pages_we_link():
     tops = {u.split("/")[3] for u in re.findall(r"<loc>(https?://[^<]+)</loc>", sm.read_text(encoding="utf-8"))
             if len(u.split("/")) > 4} if sm.is_file() else set()
     check("sitemap に載るフォルダはすべて配信対象（make_dist の PUBLIC_DIRS）にある", sorted(tops - dirs), [])
+
+
+def test_medical_and_shigyou_articles_state_supervision_scope():
+    print("\n■ 医療・士業の記事: 医師・士業の監修者はいないので、監修の範囲（集客・Web施策）と公的な決まりの在りかを示す")
+    import build as B
+    tpl = (ROOT / "templates" / "article.html").read_text(encoding="utf-8")
+    check("著者欄が監修の範囲を書く", "監修（集客・Web施策）" in tpl and "{{SCOPE_NOTE}}" in tpl, True)
+    med = B.scope_note({"category": "ai-marketing", "hub": "clinic", "slug": "clinic-x", "title": "クリニックの集客"})
+    check("医療の記事は厚労省の医療広告規制へリンクする", B.MHLW_AD in B.SCOPE_NOTE["medical"], True)
+    for k, t in B.SCOPE_NOTE.items():
+        check(f"医師・士業が監修したように書かない: {k}", any(w in t for w in ("医師監修", "医師が監修", "弁護士監修", "税理士監修")), False)
+    check("業種の無い記事には付けない", B.scope_note({"category": "seo", "slug": "x", "title": "SEOの基本"}), "")

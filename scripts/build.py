@@ -546,6 +546,23 @@ CTA_COPY_CAT = {
 }
 
 
+# 医療・士業の記事に添える監修の範囲。医師・士業の監修者はいないので、いるように見せず、
+# 集客の解説であることと、従うべき公的な決まりの在りかを示す（2026-10-04 運用者の判断）
+MHLW_AD = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kokokukisei/index.html"
+SCOPE_NOTE = {
+    "medical": ('この記事は医療機関の集客・Web施策の解説で、診療内容の助言ではありません。'
+                f'広告の表現は<a href="{MHLW_AD}" target="_blank" rel="noopener">厚生労働省の医療広告規制</a>に従ってください。'),
+    "shigyou": ("この記事は士業事務所の集客・Web施策の解説で、法律・税務の判断の助言ではありません。"
+                "広告の表現は、所属する士業の会の広告に関する規程を確認してください。"),
+}
+
+
+def scope_note(meta):
+    import industry_lp
+    t = SCOPE_NOTE.get(industry_lp.BY_HUB.get(_hub_slug(meta)))
+    return f'<p class="scope-note">{t}</p>' if t else ""
+
+
 def cta_copy(meta):
     import industry_lp
     k = industry_lp.BY_HUB.get(_hub_slug(meta))
@@ -931,6 +948,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{LP_URL}}": lp_url(meta),
         "{{LP_LABEL}}": lp_label(meta),
         "{{CTA_COPY}}": cta_copy(meta),
+        "{{SCOPE_NOTE}}": scope_note(meta),
         **dict(zip(("{{STICKY_URL}}", "{{STICKY_CTA}}", "{{STICKY_LABEL}}"), sticky(meta))),
         "{{STICKY_AB}}": sticky_ab(meta),
         "{{RELATED}}": related,
