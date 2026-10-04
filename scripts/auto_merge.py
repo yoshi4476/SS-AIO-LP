@@ -366,7 +366,7 @@ def check(pair, before, before_warns, loser_text, snap):
     r = AR.sh([sys.executable, "scripts/kw_guard.py", kw, "--site", pair["site"], "--title", title,
                "--exclude-slug", f"{s},{pair['loser']}"], timeout=600)
     if r.returncode:
-        return f"既存記事と食い合います（kw_guard 終了コード{r.returncode}）"
+        return AR.guard_message(r.returncode)
     r = AR.sh([sys.executable, "scripts/build.py"], timeout=1800)
     if r.returncode or "BLOCKED" in (r.stdout or ""):
         return "ビルドが通りません"

@@ -134,7 +134,11 @@ def main():
             print(f"候補: 「{kw}」（{src}）")
             level, out = judge(kw, a.site)
             print("\n".join("   " + l for l in out.strip().splitlines()))
-            if level < 2:
+            # 3（判定不能）は GSC を読めなかっただけ。食い合いとして台帳から退避すると、
+            # 鍵が切れた日に未着手の語を次々と捨てる。従来（1として扱っていた頃）どおり進める
+            if level == 3:
+                print("   食い合いの検査が動きませんでした（鍵・通信を確認）。語だけの審査で進めます")
+            if level < 2 or level == 3:
                 print(f"\n次に書くKW: 「{kw}」")
                 print("KW_GATE=ok")
                 return 0
@@ -175,7 +179,10 @@ def main():
             level, out = judge(kw, a.site, exclude_slug=slug)
             print(f"■ {slug}（狙う語「{kw}」）")
             print("\n".join("   " + l for l in out.strip().splitlines()[-4:]))
-            if level >= 2:
+            # 3（判定不能）で隔離すると、GSC を読めない日に正当な記事まで公開から外れる
+            if level == 3:
+                print("   食い合いの検査が動きませんでした（鍵・通信を確認）。隔離はしません")
+            if level == 2:
                 ng.append((slug, kw))
         if not ng:
             print("\nKW_GATE=ok")

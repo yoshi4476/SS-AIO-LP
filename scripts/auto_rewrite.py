@@ -546,6 +546,17 @@ def changed_since(snap):
     return sorted(n for n in set(snap) | set(now) if snap.get(n) != now.get(n))
 
 
+def guard_message(rc):
+    """kw_guard の終了コードを差し戻しの理由にする。
+
+    3（判定不能）を「食い合います」と書くと、GSC の鍵や通信が原因なのに
+    記事の中身を疑って直しに行ってしまう。動かなかったことはそのまま書く。
+    """
+    if rc == 3:
+        return "食い合いの検査が動きませんでした（鍵・通信を確認）（kw_guard 終了コード3）"
+    return f"既存記事と食い合います（kw_guard 終了コード{rc}）"
+
+
 def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     """直した結果を検算する。通らない理由を返す（空なら合格）"""
     if snap is not None:
@@ -587,7 +598,7 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     r = sh([sys.executable, "scripts/kw_guard.py", kw, "--site",
             site_of(slug), "--title", title, "--exclude-slug", slug], timeout=600)
     if r.returncode:
-        return f"既存記事と食い合います（kw_guard 終了コード{r.returncode}）"
+        return guard_message(r.returncode)
 
     if terms:
         # 「足した」と言いながら見出しが変わっていないものを通さない。

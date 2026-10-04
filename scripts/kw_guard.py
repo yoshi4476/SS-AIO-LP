@@ -18,6 +18,7 @@
         --h2 "AIO診断とは" --h2 "診断でチェックする8つの視点"
 
 終了コード: 0=着手可 / 1=差別化が必要 / 2=着手禁止（既存記事に統合する）
+          3=判定不能（GSCを読めない。鍵・通信を確かめてから審査し直す）
 """
 import argparse
 import sys
@@ -35,6 +36,11 @@ TITLE_WARN = 0.55
 # 主題の重なり。実際に食い合った組で較正した（全ペアの上位2%が0.20前後）。
 # 文章の似かたは弱い指標なので、ここでは止めずに参考として出すだけにする
 TOPIC_NOTE = 0.20
+# GSC の鍵。テストで差し替えられるよう1か所に置く
+CRED = ROOT / "indexing-service-account.json"
+# 判定不能。GSC を読めない日に「要差別化（1）」を返すと、呼び出し側は
+# 「既存記事と食い合います」と読み、食い合っていない書き換えや統合を差し戻していた
+UNKNOWN = 3
 
 
 def gsc_rows(site_id):
@@ -56,9 +62,12 @@ def gsc_rows(site_id):
     except Exception as e:
         gsc_rows.failed = f"部品を読み込めません（{type(e).__name__}）"
         return []
+    if not Path(CRED).is_file():
+        gsc_rows.failed = f"鍵ファイルがありません（{Path(CRED).name}）"
+        return []
     try:
         sc = gbuild("searchconsole", "v1", credentials=gcreds.load(
-            ROOT / "indexing-service-account.json",
+            CRED,
             ["https://www.googleapis.com/auth/webmasters.readonly"]))
         end = date.today() - timedelta(days=3)
         all_conf = S.load_all()
@@ -232,6 +241,10 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
             if r >= TOPIC_NOTE:
                 reasons.append(("参考", f"主題が近い記事: {a['slug']}（重なり{r:.0%}）",
                                 f"{a['title'][:34]} / 共通の語: " + "・".join(shared)))
+    # GSC を読めなかったときは、確かな「着手禁止」以外は判定不能として返す。
+    # 照合できないことは、食い合いが無いことでも、食い合うことでもない
+    if use_gsc and site_id and getattr(gsc_rows, "failed", "") and level < 2:
+        level = UNKNOWN
     return level, reasons
 
 
@@ -254,7 +267,8 @@ def main():
     for tag, head, detail in reasons:
         print(f"   [{tag}] {head}\n           {detail}")
     verdict = {0: "着手可", 1: "要差別化（切り口をずらしてから書く）",
-               2: "着手禁止（既存記事を書き足す）"}[level]
+               2: "着手禁止（既存記事を書き足す）",
+               UNKNOWN: "判定不能（GSCを読めません）"}[level]
     print(f"\n   判定: {verdict}")
 
     # 食い合わなくても、検索結果で用が済む語は書いても読まれない。

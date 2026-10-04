@@ -25,6 +25,20 @@ const LEAD_TYPE_LABELS = {
 const DIAG_KIND_LABELS = { hojokin: 'AI補助金診断', meo: 'MEO集客診断', ai: 'AI活用診断' };
 // 同じメールから24時間以内の再送信は、新しい行を作らず既存行に追記する
 const LEAD_DUP_WINDOW_MS = 24 * 60 * 60 * 1000;
+// 問い合わせフォームから届く営業メール（イベント登壇・広告枠・業務提携の売り込み）。
+// 相談と同じ温度で通知すると担当の手が取られ、送り主に「3営業日以内にご連絡します」と
+// 約束した自動返信まで出てしまう。行は残す（誤判定でも後から読める）が、温度を「営業」にして
+// 通知・自動返信・フォローを止める。表記は送り主の定型文から採った
+const SALES_PATTERNS = [
+  /突然のご連絡(大変)?失礼(いた)?します/, /ご案内でご連絡/, /登壇/, /掲載のご案内/, /広告枠/,
+  /リード単価/, /提携のご提案/, /弊社サービス/, /営業代行/, /業務提携/, /SEO対策のご提案/,
+  /御社のサイトを拝見/,
+];
+
+function isSales_(text) {
+  const s = String(text || '');
+  return SALES_PATTERNS.some(function (re) { return re.test(s); });
+}
 
 /**
  * フォーム受付の入口。hub.gs の doPost から、action が無いときに呼ばれる。
@@ -61,9 +75,11 @@ function form_(body) {
     return { ok: true, probe: true };
   }
 
-  const temp = leadTemp_(type, d.message, d, body.referer || d.referer || '');
+  // 営業メールは記録だけして、担当への通知と送り主への自動返信を出さない
+  const sales = type === 'contact' && isSales_(body_(d.message));
+  const temp = sales ? '営業' : leadTemp_(type, d.message, d, body.referer || d.referer || '');
   const row = leadSave_(site, type, temp, d, body.referer || d.referer || '');
-  const silent = body.silent === true || body.silent === 'true';
+  const silent = sales || body.silent === true || body.silent === 'true';
   // 記録は済んでいる。メールで失敗しても、送信者にはエラーを返さない。
   // ここで例外を投げると、問い合わせが届いていないと誤解される。
   const warn = [];
@@ -382,6 +398,7 @@ function followUp() {
     const email = String(r[6] || '');
     // 担当が対応を始めた（未対応でなくなった）行と、「停止」と返信があった行には送らない
     if (status !== '未対応' || !isEmail_(email)) continue;
+    if (temp === '営業') continue;                 // 営業メールの送り主にフォローを送らない
     if (excluded_(ex, email, r[9])) continue;
     // AI紹介チェックと資料ダウンロードは相談ではない。「お問い合わせ…行き違い」の文面は送らず、
     // 道具ごとの後追い（数日後に1通だけ）に回す
@@ -474,6 +491,7 @@ function toolFollowCtx_(vals) {
 function toolFollow_(sh, row, r, kind, now, ctx) {
   const email = String(r[6] || '').trim().toLowerCase();
   if (String(r[FOLLOW_COL - 1] || '') || ctx.contacted[email] || ctx.done[kind + ' ' + email]) return false;
+  if (String(r[12] || '') === '営業') return false;
   // チェックが最後まで動いた記録（AI紹介チェックのシート）がある人だけ。1回でも出典に入っていれば送らない
   const ai = ctx.ai[email];
   if (kind === 'aicheck') {

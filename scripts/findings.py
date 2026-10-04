@@ -16,12 +16,64 @@ import io
 import re
 import subprocess
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "automation" / "logs" / "findings.txt"
 MAX_LINES = 6        # 1検査あたりの明細。多すぎると通知が読まれなくなる
 TIMEOUT = 900
+JST = timezone(timedelta(hours=9))
+# 持ち越す「要対応」の鮮度。週次の間隔（7日）に1日の余裕を足した長さ。
+# 2026-09-23 に書かれた findings.txt が手元に残り、取り込み済みの「2026-08 ぶんが未取込です」を
+# 10日後にも現在の問題として読ませてしまった。いつの記録かが書かれていなかったため
+STALE_DAYS = 8
+HEADER = re.compile(r"^# 生成: (\d{4}-\d{2}-\d{2} \d{2}:\d{2})")
+
+
+def written_at(path, header=True):
+    """findings.txt がいつの記録か。
+
+    header=True は先頭の「# 生成:」行（検査を回した時刻）、無ければ最終更新時刻。
+    header=False は最終更新時刻だけ（後の工程が追記した行の鮮度を見るとき）。
+    """
+    try:
+        if header:
+            m = HEADER.match(io.open(path, encoding="utf-8").readline())
+            if m:
+                return datetime.strptime(m.group(1), "%Y-%m-%d %H:%M").replace(tzinfo=JST)
+        return datetime.fromtimestamp(Path(path).stat().st_mtime, JST)
+    except OSError:
+        return None
+
+
+def carry_over(path, own, now=None):
+    """前の工程が書いた「要対応」を持ち越す。古いファイルの分は持ち越さない。
+
+    検査は毎回回し直すので、古いファイルに残った要対応は今の状態ではない。
+    最後に追記された時刻（最終更新）で見る。生成時刻で見ると、同じ回の後の工程が
+    足した行まで捨ててしまう。
+    """
+    if not Path(path).exists():
+        return [], ""
+    note = stale_note(written_at(path, header=False), now)
+    if note:
+        return [], note
+    prev = []
+    for l in io.open(path, encoding="utf-8").read().splitlines():
+        if l.startswith("要対応") and l not in own and l not in prev:
+            prev.append(l)
+    return prev, ""
+
+
+def stale_note(src, now=None, days=STALE_DAYS):
+    """記録が古ければ「（古い記録・YYYY-MM-DD 時点）」を返す。新しければ空文字。"""
+    if src is None:
+        return ""
+    now = now or datetime.now(JST)
+    if now - src <= timedelta(days=days):
+        return ""
+    return "（古い記録・%s 時点）" % src.astimezone(JST).strftime("%Y-%m-%d")
 
 # 読むだけの検査だけを入れる。書き換える工程を入れると週次で二重に走る。
 # 明細の書き方が検査ごとに違うため、拾う形をここで明示する
@@ -220,11 +272,16 @@ def main():
     # この検査自身が前回書いた行は持ち越さない（直っても残り続けるため）。
     # 先週分の持ち越しは、ワークフロー側がジョブの冒頭でファイルを消して防ぐ
     own = {"%s: %s" % (s, label) for label, _, _ in CHECKS for s in ("要対応", "動かせず")}
-    prev = []
-    if OUT.exists():
-        for l in io.open(OUT, encoding="utf-8").read().splitlines():
-            if l.startswith("要対応") and l not in own and l not in prev:
-                prev.append(l)
+    try:
+        prev, dropped = carry_over(OUT, own)
+    except Exception as e:      # 持ち越しに失敗しても、今回の結果は必ず書く
+        prev, dropped = [], ""
+        print("  前回の要対応を読めませんでした: %s" % e)
+    if dropped:
+        print("  前回のファイルは%sのため、要対応を持ち越しません" % dropped)
+    # いつ回した結果かを必ず先頭に書く。日付の無い記録は、古くても今の問題に見える
+    lines.append("# 生成: %s JST（この時点で検査を回し直した結果）"
+                 % datetime.now(JST).strftime("%Y-%m-%d %H:%M"))
     lines.extend(prev)
 
     # 通知に載せる本文。Slackが読める長さに収める
