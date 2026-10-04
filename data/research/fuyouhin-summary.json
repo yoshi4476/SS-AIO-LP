@@ -149,10 +149,10 @@
  "per_answer": {
   "全体": {
    "answers": 83,
-   "portal": 66,
    "other": 14,
-   "media": 38,
+   "portal": 66,
    "clinic": 79,
+   "media": 38,
    "public": 21,
    "video": 11,
    "maker": 14,
@@ -160,10 +160,10 @@
   },
   "地域で探す": {
    "answers": 20,
-   "portal": 18,
    "other": 4,
-   "media": 11,
+   "portal": 18,
    "clinic": 18,
+   "media": 11,
    "public": 6,
    "video": 2
   },
@@ -190,21 +190,21 @@
   "遺品整理の進め方": {
    "answers": 14,
    "clinic": 14,
-   "portal": 9,
    "maker": 6,
+   "portal": 9,
    "other": 2,
-   "video": 4,
    "media": 4,
+   "video": 4,
    "public": 1
   },
   "買取と処分の判断": {
    "answers": 15,
    "clinic": 15,
-   "public": 2,
-   "portal": 11,
    "other": 2,
-   "video": 4,
+   "portal": 11,
+   "public": 2,
    "media": 10,
+   "video": 4,
    "maker": 1
   }
  }

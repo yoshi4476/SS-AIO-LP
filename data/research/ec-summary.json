@@ -163,10 +163,10 @@
    "answers": 124,
    "portal": 51,
    "maker": 82,
-   "media": 62,
-   "public": 50,
    "review": 2,
+   "public": 50,
    "other": 17,
+   "media": 62,
    "clinic": 66,
    "video": 13
   },
@@ -174,50 +174,50 @@
    "answers": 29,
    "portal": 25,
    "maker": 8,
-   "media": 14,
-   "public": 7,
    "review": 2,
+   "public": 7,
    "other": 5,
+   "media": 14,
    "clinic": 19
   },
   "送料・配送": {
    "answers": 24,
-   "public": 4,
    "clinic": 16,
+   "public": 4,
    "maker": 24,
-   "video": 5,
    "portal": 5,
    "media": 13,
+   "video": 5,
    "other": 3
   },
   "返品・交換": {
    "answers": 26,
    "public": 22,
    "maker": 19,
-   "media": 12,
    "clinic": 13,
+   "media": 12,
    "other": 7,
-   "video": 3,
-   "portal": 1
+   "portal": 1,
+   "video": 3
   },
   "ギフト": {
    "answers": 23,
    "portal": 16,
-   "maker": 20,
    "public": 1,
+   "maker": 20,
+   "clinic": 11,
    "video": 1,
    "media": 10,
-   "clinic": 11,
    "other": 2
   },
   "口コミ・評判": {
    "answers": 22,
    "public": 16,
-   "media": 13,
    "clinic": 7,
    "maker": 11,
-   "video": 4,
-   "portal": 4
+   "media": 13,
+   "portal": 4,
+   "video": 4
   }
  }
 }

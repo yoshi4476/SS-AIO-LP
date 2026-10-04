@@ -1,0 +1,1864 @@
+{
+ "industry": "hoken",
+ "date": "2026-10-03",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 保険代理店 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://insurance-navi.jp/column/1110/",
+     "https://pro-hoken.jp/column/osaka-insurance-agency/",
+     "https://kessin.or.jp/hoken-portal/hoken-osaka/",
+     "https://www.hokende.com/consultation/shops/pref-osaka/osaka",
+     "https://hoken-all.co.jp/article-4585/",
+     "https://hoken.niaeru.com/shopbybrand/hokensoudanshop/osaka/",
+     "https://hoken-all.co.jp/article-4585/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/osaka",
+     "https://www.randcins.jp/hoken/consulting/osaka-2/",
+     "https://fpnavi.net/content/10113.html",
+     "https://money-career.com/article/3035",
+     "https://www.f-l-p.co.jp/shoplist/osaka/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hoken.niaeru.com/ranking/osaka/",
+     "https://hoken.niaeru.com/ranking/osaka/osaka/",
+     "https://www.hoken-minaoshi-lab.jp/article/osaka-insurance-consultation/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 保険 無料相談 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kessin.or.jp/hoken-portal/hoken-tokyo/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/tokyo",
+     "https://hoken-all.co.jp/article-12543/",
+     "https://hokenmadoguchi-ranking.com/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/hoken-free-recommend",
+     "https://money-career.com/article/1673",
+     "https://www.41fp.com/media/life-insuarance/hokensoudan-osusume/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hoken.niaeru.com/shop/tokyo/",
+     "https://www.hoken-anshinkan.jp/product/insurance-consultation/",
+     "https://hoken.niaeru.com/ranking/tokyo/metroarea/",
+     "https://kessin.or.jp/hoken-portal/hoken-tokyo/",
+     "https://insurance-navi.jp/column/6/",
+     "https://pro-hoken.jp/column/tokyo-insurance-agency/",
+     "https://www.hokenhyakka.com/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/tokyo",
+     "https://www.randcins.jp/hoken/consulting/shibuya/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 生命保険 見直し 相談": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kessin.or.jp/hoken-portal/nagoya-hoken/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/aichi/nagoya",
+     "https://www.hoken-minaoshi-lab.jp/article/insurance-consultation-nagoya/",
+     "https://www.tf-office.co.jp/shop/1592",
+     "https://hoken-all.co.jp/article-4666/",
+     "https://www.hoken-anshinkan.jp/shop/aichi/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hoken-minaoshi-lab.jp/shisya/s-nagoya.html",
+     "https://www.hokende.com/consultation/shops/pref-aichi",
+     "https://hoken.niaeru.com/shop/aichi/nagoya-naka-city/",
+     "https://hoken.niaeru.com/shop/aichi/nagoya/",
+     "https://hoken.niaeru.com/shop/aichi/",
+     "https://www.tf-office.co.jp/shop/1592",
+     "https://www.e-hoken110.com/shop/78.html",
+     "https://portal.premium-yutaiclub.jp/help/hoken/aichi/nagoya",
+     "https://www.randcins.jp/hoken/consulting/nagoya/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 自動車保険 代理店 比較": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pro-hoken.jp/column/fukuoka-insurance-agency/",
+     "https://globalshop-fukuoka.com/blog/3221/",
+     "https://kessin.or.jp/hoken-portal/fukuoka-hoken/",
+     "https://hoken-all.co.jp/article-4610/",
+     "https://kessin.or.jp/hoken-portal/fukuoka-hoken/",
+     "https://islandcity-aoba.jp/",
+     "https://with-hoken.co.jp/page/individual-auto-insurance/",
+     "https://myhoken.ne.jp/morihoken/",
+     "https://www.e-hoken110.com/reserve/fukuoka.html",
+     "https://www.hoken-minaoshi-lab.jp/article/fukuoka-insurance-consultation/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.fukuishimbun.co.jp/articles/-/2499854",
+     "https://www.hoken-clinic.com/detail/202/",
+     "https://www.e-hoken110.com/shop/148.html"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 保険相談 店舗 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hoken-all.co.jp/article-4629/",
+     "https://www.e-hoken110.com/city/city.html?city=011002",
+     "https://hoken-room.jp/seimei/14018",
+     "https://portal.premium-yutaiclub.jp/help/hoken/hokkaido",
+     "https://www.nanairolife.co.jp/hoken/sapporo-insurance-consultants/",
+     "https://www.hokende.com/consultation/shops/pref-hokkaido/sapporo",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFbJI_tg5okvWbFNi3uaqO4DPh8tz5CjOlxzqxbFpo7KadyzXMg6_MolVZpjHc-acvXWCSaTiWhctFglBRkdvu-7JfdR6HbAa85TjAB6pBCvr1J7gl1CsVb1JChiIhGuBc=",
+     "https://shop.hokennomadoguchi.com/hmg/spot/list?address=01",
+     "https://www.apiadome.com/shop_detail/533",
+     "https://www.f-l-p.co.jp/shoplist/hokkaido/sapporo-city-chuo/0125/",
+     "https://www.tokyu-dept.co.jp/sapporo/shop/detail.html?shopcode=2MONEYDOCTOR",
+     "https://www.fpp.jp/articles/base/detail_191.html",
+     "https://fp-moneydoctor.com/place/shop/hokkaido/sapporo/",
+     "https://fp-moneydoctor.com/place/shop/hokkaido/premier-sapporo/",
+     "https://www.hokepon.com/consult_booth/consult_booth_area/hokkaido-tohoku/hokkaido/",
+     "https://www.hokepon.com/consult_booth/hokkaido-tohoku/hokkaido/sapporo-shi-higashi-ku/665/",
+     "https://www.nanairolife.co.jp/hoken/sapporo-insurance-consultants/",
+     "https://hoken.niaeru.com/ranking/hokkaido/sapporo/",
+     "https://www.hokepon.com/consult_booth/hokkaido-tohoku/hokkaido/sapporo-shi-higashi-ku/666/",
+     "https://www.hokende.com/consultation/shops/pref-hokkaido/brand-29/shop-1832",
+     "https://www.hokende.com/consultation/shops/pref-hokkaido/brand-29/shop-1098",
+     "https://www.nanairolife.co.jp/hoken/hokensoudan-hokkaido/",
+     "https://kessin.or.jp/hoken-portal/sapporo-hoken/",
+     "https://www.hokepon.com/result/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hoken-minaoshi-lab.jp/article/sapporo-insurance-consultation/",
+     "https://www.hokende.com/consultation/shops/pref-hokkaido/sapporo",
+     "https://hoken.niaeru.com/ranking/hokkaido/sapporo/",
+     "https://hoken.niaeru.com/shopbyline/11112/sapporo/",
+     "https://hoken.niaeru.com/shop/hokkaido/sapporo/",
+     "https://www.hokepon.com/consult_booth/consult_booth_area/hokkaido-tohoku/hokkaido/",
+     "https://money-career.com/article/1917",
+     "https://hoken-room.jp/seimei/2136",
+     "https://smart-moneylife.jp/consulting/hokkaido-sapporo",
+     "https://www.e-hoken110.com/city/city.html?city=011002"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 保険 無料相談 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://portal.premium-yutaiclub.jp/help/hoken/kanagawa/yokohama/",
+     "https://hoken-all.co.jp/article-4697/",
+     "https://pro-hoken.jp/column/yokohama-insurance-agency/",
+     "https://hoken.niaeru.com/ranking/kanagawa/yokohama/",
+     "https://note.com/fp_okane/n/n40007ce42ca7",
+     "https://www.hoken-minaoshi-lab.jp/article/hoken_madoguchi_yokohama/",
+     "https://hoken-room.jp/seimei/2158"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hoken-room.jp/seimei/2158",
+     "https://shop.hokennomadoguchi.com/hmg/spot/detail?code=1488",
+     "https://hoken.niaeru.com/shop/kanagawa/yokohama/",
+     "https://hoken.niaeru.com/ranking/kanagawa/yokohama/",
+     "https://hoken.niaeru.com/shopbyline/27001/yokohama/",
+     "https://kessin.or.jp/hoken-portal/hoken-yokohama/",
+     "https://www.hokepon.com/consult_booth/kanto/kanagawa/yokohama-shi-kanagawa-ku/806/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/kanagawa/yokohama/",
+     "https://hoken-all.co.jp/article-4697/",
+     "https://minhyo.jp/hoken-buffet",
+     "https://www.hoken-minaoshi-lab.jp/article/hoken-no-madoguchi-reviews/",
+     "https://shop.hokennomadoguchi.com/hmg/spot/detail?code=91480",
+     "https://www.hoken-minaoshi-lab.jp/article/hoken_madoguchi_yokohama/",
+     "https://www.b-minded.com/article/hokenclinic-hyoban/",
+     "https://kuchiran.jp/money/ins_soudan.html",
+     "https://smart-moneylife.jp/consulting/hoken-clinic",
+     "https://hoken-all.co.jp/hoken/hoken-soudan-yokohama/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 保険代理店 乗り合い 相談": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://lifesalon.jp/shop/138.html",
+     "https://www.e-hoken110.com/shop/346.html",
+     "https://www.hokende.com/consultation/shops/pref-kyoto/kyoto",
+     "https://kessin.or.jp/hoken-portal/hoken-kyoto/",
+     "https://pro-hoken.jp/column/kyoto-insurance-agency/",
+     "https://hoken-all.co.jp/article-4641/",
+     "https://www.f-l-p.co.jp/shoplist/kyoto-fu/",
+     "https://hoken-all.co.jp/article-4641/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hoken-minaoshi-lab.jp/article/kyoto-insurance-consultation/",
+     "https://hoken-room.jp/seimei/2145",
+     "https://hoken.niaeru.com/shop/kyoto/kyoto/",
+     "https://hoken.niaeru.com/shop/kyoto/",
+     "https://lifesalon.jp/shop/138.html",
+     "https://pro-hoken.jp/column/kyoto-insurance-agency/",
+     "https://www.hoholine.com/area/kyoto",
+     "https://www.e-hoken110.com/shop/346.html",
+     "https://kyotowest.net/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 医療保険 相談 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hoken-minaoshi-lab.jp/article/hoken_madoguchi_kobe/",
+     "https://kessin.or.jp/hoken-portal/kobe-hoken/",
+     "https://www.hokende.com/consultation/shops/pref-hyogo/kobe",
+     "https://www.hokende.com/consultation/shops/pref-hyogo/brand-1/shop-172",
+     "https://hoken.niaeru.com/shopbyline/99648/sannomiya/",
+     "https://shop.hokennomadoguchi.com/hmg/spot/detail?code=2839",
+     "https://pro-hoken.jp/column/kobe-insurance-agency/",
+     "https://hoken-all.co.jp/article-4661/",
+     "https://kessin.or.jp/hoken-portal/kobe-hoken/",
+     "https://www.hokende.com/consultation/shopbyline/rail-11603/%E4%B8%89%E3%83%8E%E5%AE%AE",
+     "https://www.hoken-clinic.com/detail/621/",
+     "https://lifesalon.jp/shop/19.html",
+     "https://money-career.com/article/3056",
+     "https://hoken.niaeru.com/shop/hyogo/kobe/",
+     "https://hoken-eshop.com/shop/sannomiya_center/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hokende.com/consultation/shops/pref-hyogo/kobe",
+     "https://www.hokende.com/consultation/shops/pref-hyogo/city-28110",
+     "https://www.hoken-minaoshi-lab.jp/article/hoken_madoguchi_kobe/",
+     "https://hoken.niaeru.com/shopbyline/11603/kobe/",
+     "https://www.hokepon.com/consult_booth/consult_booth_area/tokai-kinki/hyogo/kobe-shi-chuo-ku/",
+     "https://lifesalon.jp/shop/19.html",
+     "https://www.e-hoken110.com/city/city.html?city=281000",
+     "https://hoken-all.co.jp/article-4661/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 保険見直し 無料 相談窓口": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://themallsendai.com/shop-guide/detail/?cd=000075",
+     "https://www.hoken-minaoshi-lab.jp/article/hoken_madoguchi_sendai/",
+     "https://hoken.niaeru.com/shop/miyagi/sendai-taihaku-city/detail-1015743/",
+     "https://morinomiyako-a.co.jp/",
+     "https://hoken-all.co.jp/article-4650/",
+     "https://www.f-l-p.co.jp/shoplist/miyagi/sendai-city-izumi/0419/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hokende.com/consultation/pref-miyagi/brand-1/shop-49",
+     "https://shop.hokennomadoguchi.com/hmg/spot/detail?code=0408",
+     "https://www.hoken-clinic.com/detail/319/",
+     "https://shop.hokennomadoguchi.com/hmg/spot/detail?code=0417",
+     "https://hoken.niaeru.com/shop/miyagi/sendai-aoba-city/",
+     "https://www.hokepon.com/consult_booth/hokkaido-tohoku/miyagi/sendai-shi-aoba-ku/681/",
+     "https://kessin.or.jp/hoken-portal/hoken-sendai/",
+     "https://morinomiyako-a.co.jp/",
+     "https://www.e-hoken110.com/shop/81.html"
+    ],
+    "error": ""
+   }
+  },
+  "広島 火災保険 代理店 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "codex exec が失敗しました: usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or tr"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pro-hoken.jp/column/hiroshima-insurance-agency/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/hiroshima",
+     "https://www.hoken-minaoshi-lab.jp/article/hoken_madoguchi_hiroshima/",
+     "https://hoken-all.co.jp/article-4689/",
+     "https://pro-hoken.jp/column/hiroshima-insurance-agency/",
+     "https://shop.hokennomadoguchi.com/hmg/spot/detail?code=93402",
+     "https://www.hoken-clinic.com/list/07/034/",
+     "https://hoken.niaeru.com/shopbyinsurance/kasai/hiroshima/",
+     "https://www.e-hoken110.com/city/city.html?city=341002",
+     "https://www.hands-insurance.com/",
+     "https://www.ne.hoken.ne.jp/",
+     "https://myhoken.ne.jp/kyouwasonpo/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/hiroshima"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hoken.niaeru.com/shopbyinsurance/kasai/hiroshima/",
+     "https://hoken.niaeru.com/shop/hiroshima/",
+     "https://hoken.niaeru.com/ranking/hiroshima/hiroshima/",
+     "https://www.e-hoken110.com/shop/89.html",
+     "https://hiroshima-fp.com/",
+     "https://www.hokepon.com/consult_booth/chugoku-shikoku/hiroshima/hiroshima-shi-nishi-ku/938/",
+     "https://www.nisshinfire.co.jp/agency/shop/hiroshima.html"
+    ],
+    "error": ""
+   }
+  },
+  "生命保険 保険料 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jili.or.jp/lifeplan/houseeconomy/847.html",
+     "https://www.fukoku-life.co.jp/plan/column/theme01/0009.html",
+     "https://www.jili.or.jp/knows_learns/q_a/life_insurance/127.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.meijiyasuda.co.jp/find2/light/knowledge/list/9.html",
+     "https://www.e-hoken110.com/hoken/life/premium_average.html",
+     "https://www.hokende.com/life-insurance/life/basic_info/select_insurance_premium",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEWsaeI_n2gSVJA06veHufkeREd300iyojF1pZYJPPq88olKkawFOzMXmWnvCXnoV7XLOWLGFpugcoevPokspDEjTaJVG3Tma7vcsSi-m5LPKWtBgNvOVdk-6Nj43i2Y3JjrMt7wKZu4LGsNTbh4PQLw7g24pU=",
+     "https://www.orixlife.co.jp/medical/premium.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jili.or.jp/research/report/chousa10th.html",
+     "https://www.jili.or.jp/research/report/zenkokujittai.html",
+     "https://www.jili.or.jp/press/2024/9770.html",
+     "https://jili.or.jp/lifeplan/houseeconomy/847.html",
+     "https://life.oricon.co.jp/rank-life-insurance/special/knowledge/market-price/",
+     "https://www.aflac.co.jp/soudan/guide/contents/base/monthlypremiums.html",
+     "https://hokencospa.jp/categories/medical/columns/average-monthly-premium",
+     "https://www.meijiyasuda.co.jp/find2/light/knowledge/list/9.html",
+     "https://www.rakuten-life.co.jp/learn/article/fee/",
+     "https://hoken.kakaku.com/gla/select/premium/",
+     "https://insure-check.com/life-insurance-cost/",
+     "https://hoken-all.co.jp/article-4938/",
+     "https://www.lifenet-seimei.co.jp/media/insurance-basics/insurance-premium/",
+     "https://tfp-group.co.jp/hoken-shindan/column/hoken-ryou-souba",
+     "https://www.hokepon.com/column/average-lifeinsurance-premiums/"
+    ],
+    "error": ""
+   }
+  },
+  "自動車保険 保険料 安くする方法": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.zurich.co.jp/car/useful/guide/cc-cheap-premium/",
+     "https://www.mitsui-direct.co.jp/car/compensation/other/age/",
+     "https://www.mitsui-direct.co.jp/car/guide/rates/",
+     "https://www.zurich.co.jp/car/compensation/duplicate/",
+     "https://www.sonysonpo.co.jp/auto/rates/arts002.html",
+     "https://www.sonysonpo.co.jp/auto/guide/agde318.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.insweb.co.jp/car/hokenryou/neage-2026.html",
+     "https://selectra.jp/car-insurance/ranking/cheap-beginner",
+     "https://kuruma-news.jp/insurance/howto/post/best_carinsurance_2026",
+     "https://selectra.jp/car-insurance/ranking/cheap",
+     "https://jidounten-lab.com/u_49770",
+     "https://nics-gp.co.jp/media/insurance/car-insurance-review/",
+     "https://toranochie.com/column/carinsurance-priceincrease/",
+     "https://kurashicostlab.com/guides/jidousha-hoken-souba-2026/",
+     "https://kurumahoken30.com/souba/"
+    ],
+    "error": ""
+   }
+  },
+  "医療保険 月額 いくらが妥当": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://neofirst.co.jp/information/kojin/column/FP065.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+     "https://www.kyoukaikenpo.or.jp/file/kensyusiryou20211101.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hokennomadoguchi.com/columns/seimei/iryo/premium/",
+     "https://au-hoken-navi.fp.au-financial.com/medical/article/036/",
+     "https://hoken.kakaku.com/gla/select/premium/",
+     "https://www.tmn-anshin.co.jp/solution/basic/medical-insurance-fee/",
+     "https://www.tmn-anshin.co.jp/solution/basic/medical-insurance-fee/",
+     "https://www.taiyo-seimei.co.jp/net_lineup/colum/medical/005.html",
+     "https://neofirst.co.jp/information/kojin/column/FP117.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tfp-group.co.jp/hoken-shindan/column/hoken-ryou-souba",
+     "https://neofirst.co.jp/information/kojin/column/FP117.html",
+     "https://www.hokennomadoguchi.com/columns/seimei/iryo/premium/",
+     "https://www.taiyo-seimei.co.jp/net_lineup/colum/medical/005.html",
+     "https://hokencospa.jp/categories/medical/columns/medical-insurance-premium",
+     "https://hoken-all.co.jp/article-5188/",
+     "https://www.orixlife.co.jp/medical/premium.html",
+     "https://www.dai-ichi-life.co.jp/promotion/first_step/basic/00042/index.html",
+     "https://hokencospa.jp/categories/medical/columns/admission-a-week"
+    ],
+    "error": ""
+   }
+  },
+  "保険相談 無料 なぜ": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.hokennomadoguchi.com/faq_detail.html?id=2",
+     "https://hoken-eshop.com/faq/",
+     "https://www.fsa.go.jp/common/law/guide/ins/02d.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hoken-minaoshi-lab.jp/article/insurance-consultation-free-trick/",
+     "https://faq.hokennomadoguchi.com/faq_detail.html?id=2",
+     "https://money-career.com/article/476",
+     "https://www.hoken-anshinkan.jp/column/detail/8",
+     "https://www.f-l-p.co.jp/question/",
+     "https://www.nanairolife.co.jp/hoken/how-free-insurance-consultations-work/",
+     "https://www.41fp.com/media/life-insuarance/hoken-no-madoguchi/",
+     "https://hoken-all.co.jp/article-9813/",
+     "https://www.randcins.jp/hoken/consulting/why-free/"
+    ],
+    "error": ""
+   }
+  },
+  "保険代理店 手数料 仕組み": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://sonpo-textbook.jp/2026/textbook/basic/56",
+     "https://www.fsa.go.jp/news/r7/hoken/20250704/02.pdf",
+     "https://www.fsa.go.jp/singi/sonpo/gijiroku/20240425.html",
+     "https://www.fsa.go.jp/common/law/guide/ins/02d.html",
+     "https://faq.hokennomadoguchi.com/faq_detail.html?id=2",
+     "https://soudanguide.sonpo.or.jp/basic/2_1.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.randcins.jp/recruit/compensation-system/",
+     "https://www.tokiomarine-nichido.co.jp/company/customer/management/pdf/commission.pdf",
+     "https://hoken.niaeru.com/glossary/490/",
+     "https://www.fukokushinrai.co.jp/company/activity/customer-centric/pdf/customer-centric_03_2024.pdf",
+     "https://catalog.monex.co.jp/article/?p=35215",
+     "https://www.fsa.go.jp/common/ronten/201709/05.pdf",
+     "https://www.orixlife.co.jp/about/fd-policy/concept.pdf",
+     "https://www.aflac.co.jp/static/info/agency_commission.pdf?20260507",
+     "https://www.ms-ins.com/company/aboutus/trust/pdf/quality_evaluation.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://catalog.monex.co.jp/article/?p=35215",
+     "https://www.randcins.jp/recruit/agency-commission/",
+     "https://www.dai-ichi-life.co.jp/dsr/customer_first/pdf/index_002.pdf",
+     "https://www.nikkei.com/article/DGXZQOUB16E6K0W5A410C2000000/",
+     "https://www.nikkei.com/article/DGXZQOUB167JV0W6A410C2000000/"
+    ],
+    "error": ""
+   }
+  },
+  "学資保険 払込総額 比較": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sonylife.co.jp/gakushi/voice/study/voice21.html",
+     "https://www.fukoku-life.co.jp/plan/tsubasa/modelplan/",
+     "https://www.sonylife.co.jp/gakushi/voice/study/voice10.html",
+     "https://www.sonylife.co.jp/gakushi/advantage/",
+     "https://www.meijiyasuda.co.jp/find2/light/list/tumitategakushi/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.navinavi-hoken.com/rankings/student",
+     "https://hoken.kakaku.com/gea/select/henrei/",
+     "https://moneiro.jp/media/article/educational-insurance-return-rate",
+     "https://portal.premium-yutaiclub.jp/help/hoken/student-insurance-recommended/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/student-insurance-recommended/",
+     "https://hoken.kakaku.com/gea/",
+     "https://www.fukoku-life.co.jp/plan/tsubasa/basic/trivia21/",
+     "https://www.hokende.com/life-insurance/education/simulation",
+     "https://www.hokende.com/life-insurance/education/simulation",
+     "https://money.it-trend.jp/articles/insurance/education/02-008"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://money.it-trend.jp/articles/insurance/education/02-008",
+     "https://www.hokende.com/life-insurance/education/simulation",
+     "https://moneiro.jp/media/article/educational-insurance-return-rate",
+     "https://konohoken.com/child-education/",
+     "https://hoken.kakaku.com/gea/",
+     "https://note.com/43soudan/n/nb9f707f57fff",
+     "https://smart-moneylife.jp/gakushi",
+     "https://portal.premium-yutaiclub.jp/help/hoken/student-insurance-recommended/",
+     "https://kyoikuhi.com/gakushi-hoken-hikaku/",
+     "https://baby-calendar.jp/magazine/8657",
+     "https://moneyfix.jp/protect/educational-insurance/",
+     "https://enz-inc.jp/finance/b-gakushihoken/"
+    ],
+    "error": ""
+   }
+  },
+  "火災保険 保険料 相場 戸建て": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://diamond-fudosan.jp/articles/-/1110737",
+     "https://faq.sonysonpo.co.jp/faq_detail.html?id=4173"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.zurich.co.jp/fire/guide/price-increase/",
+     "https://ins.minkabu.jp/columns/fire-insurance-quotes-for-detached-houses-241225",
+     "https://akiya-keisan.com/column/kasai-hoken-souba/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGEdwb1QSp_GXugrakEOMVKaFYibMKm6brZ9uz_kF5C3bpBQE6KQss8dw4hB0U-3Nhp9wq5qaHmQp5jioV7DqfA96_WOdKF3iwMPLsCVESq6Xym-tQQFp8yWUz8ap6NYtVZUw==",
+     "https://www.jihoken.co.jp/ieho/knowledge/marketprice/",
+     "https://life.oricon.co.jp/rank-fire-insurance/special/knowledge/market_price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://diamond-fudosan.jp/articles/-/1110737",
+     "https://www.sonysonpo.co.jp/fire/gde002.html",
+     "https://wismoney.jp/kasai/expert/chuko-soba/",
+     "https://ins.minkabu.jp/columns/fire-insurance-quotes-for-detached-houses-241225",
+     "https://ins.minkabu.jp/fire/consultant/house/t_structure",
+     "https://nics-gp.co.jp/media/insurance/fire-insurance-price-increase-2026/",
+     "https://www.jutapon.com/media/fire-insurance/marketprice/",
+     "https://the-room-tour.com/kasaihokensouba/",
+     "https://myhome1.xsrv.jp/money/fire-insurance-price/"
+    ],
+    "error": ""
+   }
+  },
+  "がん保険 保険料 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.lifenet-seimei.co.jp/product/cancer/",
+     "https://www.lifenet-seimei.co.jp/product/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://5month.or.jp/cancer-insurance/term-whole-life/cancer-insurance-premium-rates-by-age-gender/",
+     "https://www.hokennomadoguchi.com/columns/seimei/gan/age/",
+     "https://www.taiyo-seimei.co.jp/net_lineup/colum/cancer/001.html",
+     "https://www.fwdlife.co.jp/blog/protection/choosing-the-right-cancer-insurance-for-your-age/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hoken.kakaku.com/gca/",
+     "https://neofirst.co.jp/information/kojin/column/FP043.html",
+     "https://www.navinavi-hoken.com/articles/cancer-subscription",
+     "https://es-g.jp/money/19149/",
+     "https://konohoken.com/cancer/",
+     "https://money-career.com/article/2727",
+     "https://5month.or.jp/cancer-insurance/term-whole-life/cancer-insurance-premium-rates-by-age-gender/",
+     "https://insure-check.com/cancer-insurance-cost/",
+     "https://www.randcins.jp/hoken/cancer-insurance/market_price/"
+    ],
+    "error": ""
+   }
+  },
+  "保険 家計 割合 目安": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://hokencospa.jp/categories/medical/columns/insurance-poverty-solution",
+     "https://www.jili.or.jp/files/research/zenkokujittai/pdf/r6/2024sokuhou.pdf?lid=mm159"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.7-insurance.jp/column/026.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGgYdVi2F2ZordGdda0rSRA7a5Tkou0Nv_-NI34VPa3ckGUpETFQR7cQLTSsisxGzyus5e8_WBl6MojArhWmUQ5ak0AiegHcUwyDCk5UNdLi35beTYA1EohTFSEc2WrF_IkEq42YegelW9lGxPT",
+     "https://money-career.com/article/2478",
+     "https://www.dai-ichi-life.co.jp/promotion/first_step/choice/00005/index.html",
+     "https://hokenpedia.itcstg.jp/life/kakei-wariai/",
+     "https://www.7-insurance.jp/column/021.html",
+     "https://www.habitto.com/blogs/kakei-shishutsu-wariai-risou-ougonhi/",
+     "https://allabout.co.jp/gm/gc/433927/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tfp-group.co.jp/hoken-shindan/column/hoken-ryou-souba",
+     "https://www.meijiyasuda.co.jp/find2/light/knowledge/list/9.html",
+     "https://hoken-room.jp/seimei/5287",
+     "https://financial-field.com/insurance/entry-198818",
+     "https://hokenpedia.itcstg.jp/life/kakei-wariai/",
+     "https://www.hokende.com/life-insurance/life/basic_info/select_insurance_premium",
+     "https://www.rakuten-life.co.jp/learn/article/fee/",
+     "https://hoken-mammoth.com/leads/articles/17514/",
+     "https://nics-gp.co.jp/media/insurance/average-insurance-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "自動車保険 年齢 保険料 違い": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tokiomarine-nichido.co.jp/service/auto/total-assist/ryokin-keiyaku/setting.html",
+     "https://www.sbisonpo.co.jp/car/column/column43.html",
+     "https://soudanguide.sonpo.or.jp/car/q018.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.webcrew.co.jp:443/error/cookie.html",
+     "https://www.mitsui-direct.co.jp/car/guide/rates/age/",
+     "https://www.zurich.co.jp/car/useful/driver-age-condition/",
+     "https://www.e-design.net/ande/guide/column/age-limit/",
+     "https://hoken-all.co.jp/article-5535/",
+     "https://www.e-design.net/ande/guide/column/age-limit/",
+     "https://www.zurich.co.jp/car/useful/guide/cc-cost-average/",
+     "https://www.mitsui-direct.co.jp/car/guide/rates/driver_age/",
+     "https://www.insweb.co.jp/car/hokenryou/yasukunaru-nenrei.html",
+     "https://www.sompo-direct.co.jp/otona/oshiete/insurance/age-condition.html",
+     "https://www.sbisonpo.co.jp/car/column/column04.html",
+     "https://hoken.kakaku.com/kuruma_hoken/choice/u20.html",
+     "https://www.sbisonpo.co.jp/car/column/column73.html",
+     "https://www.insweb.co.jp/car/kisochishiki/kiso/hokenryou-heikin.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://selectra.jp/car-insurance/ranking/cheap-beginner",
+     "https://www.e-design.net/ande/guide/column/age-limit/",
+     "https://www.sompo-direct.co.jp/otona/oshiete/insurance/age-condition.html",
+     "https://www.mitsui-direct.co.jp/car/guide/rates/driver_age/",
+     "https://park.sompo-japan.co.jp/carmag/autoins/switch/column/as006.html",
+     "https://www.insweb.co.jp/car/kisochishiki/kiso/auto-age.html",
+     "https://jidounten-lab.com/u_49770",
+     "https://www.insweb.co.jp/car/hokenryou/yasukunaru-nenrei.html",
+     "https://hoken-all.co.jp/article-5535/"
+    ],
+    "error": ""
+   }
+  },
+  "保険代理店 選び方 ポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://jili.or.jp/tebiki/chapter1.html",
+     "https://www.seiho.or.jp/quality_result/contents/post_2.html",
+     "https://www.seiho.or.jp/quality_result/",
+     "https://www.seiho.or.jp/quality_result/qa/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tokiomarine-nichido.co.jp/service/agent-choice/",
+     "https://ttmgt.co.jp/insurance-agency-future-customer-guide/",
+     "https://www.i-hoken.info/article/insurance-agency-policy.html",
+     "https://www.hokennomadoguchi.com/columns/literacy/agent/",
+     "https://www.aoba-jiyuujizai.co.jp/agent",
+     "https://progress-bpo.co.jp/blog/insurance/insurance-agent-benefits/"
+    ],
+    "error": ""
+   }
+  },
+  "乗り合い代理店 専属 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sonpo.or.jp/exam/dairiten/about/index.html",
+     "https://soudanguide.sonpo.or.jp/basic/3_2.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.seiho.or.jp/quality_result/contents/post.html",
+     "https://www.e-hoken110.com/recruit/work/about.html",
+     "https://www.randcins.jp/recruit/difference/",
+     "https://catalog.monex.co.jp/article/?p=37103",
+     "https://www.ikeshin2014.co.jp/sp/news_new/detail/264/",
+     "https://www.hoken-minaoshi-lab.jp/article/insurance_company_agency/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kotobank.jp/word/%E4%B9%97%E5%90%88%E4%BB%A3%E7%90%86%E5%BA%97-597502",
+     "https://www.ikeshin2014.co.jp/sp/news_new/detail/264/",
+     "https://onward-mgt.co.jp/about/merit.html",
+     "https://miplan.co.jp/insurance_informatio/20211101/",
+     "https://dairitenboshu.com/column/detail/shared-agency",
+     "https://hokendairiten-system.jp/hokenyougo/%E4%B9%97%E5%90%88%E4%BB%A3%E7%90%86%E5%BA%97%EF%BC%88%E3%81%AE%E3%82%8A%E3%81%82%E3%81%84%E3%81%A0%E3%81%84%E3%82%8A%E3%81%A6%E3%82%93%EF%BC%89%E3%81%A8%E5%B0%82%E5%B1%9E%E4%BB%A3%E7%90%86%E5%BA%97/",
+     "https://kkcreate.co.jp/2025/08/21/%E5%B0%82%E5%B1%9E%E4%BB%A3%E7%90%86%E5%BA%97%E3%81%A8%E4%B9%97%E5%90%88%E4%BB%A3%E7%90%86%E5%BA%97-%E3%81%AE%E9%81%95%E3%81%84%E3%81%A8%E3%81%AF%EF%BC%9F/",
+     "https://jobs.honesty-g.com/job-change/%E4%B9%97%E5%90%88%E4%BB%A3%E7%90%86%E5%BA%97%E3%81%A8%E5%B0%82%E5%B1%9E%E4%BB%A3%E7%90%86%E5%BA%97%E3%82%92%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83%EF%BC%81%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%83%BB/",
+     "https://www.randcins.jp/recruit/difference/"
+    ],
+    "error": ""
+   }
+  },
+  "保険 比較 どこがいい": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.hokennomadoguchi.com/faq_detail.html?id=8",
+     "https://faq.hokennomadoguchi.com/faq_detail.html?id=7",
+     "https://www.hokende.com/",
+     "https://hoken.kakaku.com/kuruma_hoken/",
+     "https://www.insweb.co.jp/car/insweb",
+     "https://www.fsa.go.jp/common/law/guide/kinsa/kinsa06.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://lify.jp/ranking/",
+     "https://www.hokende.com/online",
+     "https://lify.jp/non-life/car/c-car/",
+     "https://lify.jp/",
+     "https://hoken.rakuten.co.jp/",
+     "https://hoken-select-lab.com/insurance-comparison-site-recommended/",
+     "https://insure-check.com/insurance-comparison-site-guide/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/hoken-free-recommend"
+    ],
+    "error": ""
+   }
+  },
+  "医療保険 選び方 比較": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+     "https://www.mhlw.go.jp/file/06-Seisakujouhou-12400000-Hokenkyoku/0000209861.pdf",
+     "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/",
+     "https://www.jili.or.jp/knows_learns/q_a/medical_security/429.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hokende.com/life-insurance/medical",
+     "https://jili.or.jp/knows_learns/q_a/medical_security/429.html",
+     "https://www.kurabel-hoken.jp/learn/medical-insurance/medical-ins-select/",
+     "https://hoken-select.net/iryo-hoken-ranking/",
+     "https://insure-check.com/medical-insurance-comparison/",
+     "https://hoken-all.co.jp/article-5114/",
+     "https://www.kyoukaikenpo.or.jp/faq/benefit/003/index.html",
+     "https://www.jp-life.japanpost.jp/column/medical/high-cost-medical-expense.html",
+     "https://www.jp-life.japanpost.jp/column/medical/hospitalization-fee-hoken.html",
+     "https://hoken.kakaku.com/gma/article/1303a.html",
+     "https://www.shiruporuto.jp/public/document/container/kogakuiryohi/"
+    ],
+    "error": ""
+   }
+  },
+  "生命保険 定期 終身 どっち": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jili.or.jp/knows_learns/kind/main/41.html",
+     "https://www.jili.or.jp/knows_learns/kind/main/37.html",
+     "https://www.jili.or.jp/knows_learns/q_a/life_insurance/8797.html",
+     "https://jili.or.jp/tebiki/chapter1.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://neofirst.co.jp/information/kojin/column/FP048.html",
+     "https://www.taiyo-seimei.co.jp/net_lineup/colum/basic/040.html",
+     "https://www.fukoku-life.co.jp/plan/column/theme01/0009.html",
+     "https://www.dai-ichi-life.co.jp/promotion/first_step/basic/00013/index.html",
+     "https://www.life8739.co.jp/product/teiki/column01",
+     "https://hokencospa.jp/categories/life/columns/term-insurance",
+     "https://www.i-sedai.com/contents/money/M0106.html",
+     "https://www.navinavi-hoken.com/articles/whole-life-term",
+     "https://www.hokepon.com/column/column-knowhow-005/",
+     "https://life.oricon.co.jp/rank-life-insurance/special/knowledge/term-vs-whole-life-insurance/",
+     "https://hokentimes.com/article/life/teiki/",
+     "https://hokensmile.com/column/term-whole-life-insurance/"
+    ],
+    "error": ""
+   }
+  },
+  "自動車保険 ネット 代理店型 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.axa-direct.co.jp/auto/guide/sales/",
+     "https://www.sonysonpo.co.jp/auto/guide/agde005.html",
+     "https://www.sonysonpo.co.jp/share/pdf/auto/shiryou_20260101.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://selectra.jp/car-insurance/company",
+     "https://www.e-design.net/ande/guide/column/direct/",
+     "https://car.motor-fan.jp/articles/10018733",
+     "https://www.axa-direct.co.jp/auto/guide/sales/",
+     "https://www.sompo-direct.co.jp/otona/oshiete/insurance/demerit.html",
+     "https://www.lineup-car.com/blog/21794.html",
+     "https://smart-moneylife.jp/car/online",
+     "https://ins.minkabu.jp/columns/what-internet-autoins-240311",
+     "https://caritems.net/car-insurance-net"
+    ],
+    "error": ""
+   }
+  },
+  "保険相談 おすすめ 窓口 比較": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hokennomadoguchi.com/",
+     "https://www.hoken-clinic.com/",
+     "https://www.hoken-clinic.com/feature/iqsystem/",
+     "https://www.hoken-clinic.com/lp/webconsult/",
+     "https://www.hokepon.com/special/start/",
+     "https://fp-moneydoctor.com/",
+     "https://fp-moneydoctor.com/place/shop/",
+     "https://www.jafp.or.jp/confer/",
+     "https://www.jafp.or.jp/shibu/tokyo/seikatsu/aboutfp/fee/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hoken-anshinkan.jp/product/insurance-consultation/",
+     "https://kurashi-tech.com/media/5273/",
+     "https://smart-moneylife.jp/consulting/ranking",
+     "https://zero-medi.com/hokensoudan-osusume/",
+     "https://www.hoken-chie-bukuro.net/hoken/soudan/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/hoken-free-recommend",
+     "https://www.randcins.jp/hoken/consulting/ranking-ten/",
+     "https://www.randcins.jp/hoken/consulting/window-ranking/",
+     "https://www.cocre-logo.com/blog/4952/"
+    ],
+    "error": ""
+   }
+  },
+  "保険 営業 信頼できる 見分け方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.fsa.go.jp/common/law/guide/ins/02d.html",
+     "https://www.kokusen.go.jp/soudan_topics/data/seiho.html",
+     "https://jili.or.jp/consumer_adviser/pdf/data.pdf",
+     "https://www.jili.or.jp/tebiki/pdf/tebiki.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://media.moneyforward.com/articles/8642",
+     "https://ichigo-consulting.co.jp/column/fp%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E4%BF%9D%E9%99%BA%E8%A9%90%E6%AC%BA%E3%81%AE%E8%A6%8B%E5%88%86%E3%81%91%E6%96%B9%EF%BC%81%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%8D%E3%81%9F%E3%81%84%E8%A9%90/",
+     "https://www.hoken-kachi.com/technique.php",
+     "https://futarigurashi-life.com/%E4%BF%A1%E9%A0%BC%E3%81%A7%E3%81%8D%E3%82%8B%E4%BF%9D%E9%99%BA%E5%96%B6%E6%A5%AD%E3%83%9E%E3%83%B3%E3%81%AF%E3%81%93%E3%81%86%E6%8E%A2%E3%81%9B%EF%BC%81%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA%E3%81%84/",
+     "https://saiyo.lifecc.co.jp/column/suitable-for-insurance-sales/",
+     "https://www.hoken-chie-bukuro.net/Qa/Post/6171"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.i-hoken.info/article/insurance-agency-policy.html",
+     "https://ttmgt.co.jp/insurance-agency-future-customer-guide/",
+     "https://www.behavior.co.jp/blog/insurance-business-act-2026",
+     "https://arrows-ins.com/blog/blog/595",
+     "https://at-next.jp/minaosu/insurance/672/",
+     "https://media.moneyforward.com/articles/8642",
+     "https://hoken-connect.jp/archives/374",
+     "https://note.com/tom519/n/nce3e4f6f7ff0",
+     "https://consaru.nhsig.co.jp/2021/11/16/645/",
+     "https://hoken-bridge.jp/i-teach-the-fact-of-the-life-insurance-business-and-the-making-certain-reliable-salesman/",
+     "https://hoken-teacher.jp/archives/2459",
+     "https://hoken-hatena.net/seimeihoken-eigyo-sinraidekinai/",
+     "https://mycity-info.com/insurance/hokensoudan/5166.html"
+    ],
+    "error": ""
+   }
+  },
+  "がん保険 選び方 必要性": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+     "https://ganjoho.jp/public/institution/backup/public_insurance.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/",
+     "https://www.jili.or.jp/knows_learns/kind/main/34.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hokennomadoguchi.com/columns/seimei/gan/need/",
+     "https://www.hokenmarket.net/carna/insurance/post494.html",
+     "https://www.tmn-anshin.co.jp/solution/basic/cancer-insurance-necessity/",
+     "https://www.fwdlife.co.jp/blog/protection/why-do-i-need-cancer-insurance-and-important-points-to-consider/",
+     "https://www.sbisonpo.co.jp/gan/select/SPcolumn/column27.html",
+     "https://www.zurichlife.co.jp/product/category_gan/column_list",
+     "https://www.orixlife.co.jp/guide/column/cancer_select.html",
+     "https://lify.jp/life/cancer/c-cancer/article-2755/",
+     "https://www.youtube.com/watch?v=HzUzb6Rcy38"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hoken-navi.docomo.ne.jp/life-ins/cancer/",
+     "https://my-best.com/217",
+     "https://www.hokende.com/life-insurance/cancer/ranking",
+     "https://hoken.kakaku.com/gca/",
+     "https://www.hokenmarket.net/cancer/",
+     "https://konohoken.com/cancer/",
+     "https://insure-check.com/cancer-insurance-guide/",
+     "https://portal.premium-yutaiclub.jp/help/hoken/cancer-insurance-recommendation/",
+     "https://hoken.support/cancer-insurance-complete-guide-2026/",
+     "https://neofirst.co.jp/information/kojin/column/FP080.html",
+     "https://www.hokennomadoguchi.com/columns/seimei/gan/need/",
+     "https://www.tmn-anshin.co.jp/solution/basic/cancer-insurance-necessity/",
+     "https://www.sbisonpo.co.jp/gan/select/SPcolumn/column19.html",
+     "https://hokencospa.jp/categories/cancer/columns/highcost-medical-expensebenefit-cancer",
+     "https://www.ganclass.jp/support/medical-cost/hight-cost",
+     "https://hoken.kakaku.com/gma/article/1303a.html",
+     "https://3i-partners.co.jp/cancer/about-cancer/medical-expenses-for-cancer/",
+     "https://www.ganchiryohi.com/insurance/125"
+    ],
+    "error": ""
+   }
+  },
+  "保険 ファイナンシャルプランナー 相談 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jafp.or.jp/confer/",
+     "https://www.hokennomadoguchi.com/",
+     "https://faq.hokennomadoguchi.com/faq_detail.html?category=20&id=110&page=1",
+     "https://www.jafp.or.jp/shibu/tokyo/seikatsu/aboutfp/fee/",
+     "https://www.jafp.or.jp/confer/kurashi_fp/tell/",
+     "https://www.jafp.or.jp/confer/fpsoudan/choose/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.moneypro.jp/columns/life/5839/",
+     "https://www.kurabel-hoken.jp/learn/insurance-knowledge/fp-consultation/",
+     "https://www.randcins.jp/hoken/consulting/paid/",
+     "https://www.nanairolife.co.jp/hoken/fp-consulting-osusume/",
+     "https://www.zurichlife.co.jp/product/column_list/other/007",
+     "https://www.hoken-chie-bukuro.net/Qa/Post/6171",
+     "https://www.hoken-minaoshi-lab.jp/article/fp_consultation/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://moneiro.jp/media/article/fp-consultant-fee",
+     "https://my-best.com/27073",
+     "https://okane-recipe.saisoncard.co.jp/column/bm-0007/",
+     "https://home.osakagas.co.jp/column/fp/fp-service/fp-recommend/",
+     "https://okane-recipe.saisoncard.co.jp/column/bm-0005/",
+     "https://cocozas.jp/coco-the-style/fp-yuryo-muryo/",
+     "https://ms101.jp/okanenokozuchi/how-to-find-good-fp/",
+     "https://www.nanairolife.co.jp/hoken/fp-consultation-cost/",
+     "https://www.nanairolife.co.jp/hoken/fp-consulting-osusume/",
+     "https://www.hoken-minaoshi-lab.jp/article/fp_consultation/",
+     "https://hoken-room.jp/seimei/4450",
+     "https://www.moneypro.jp/columns/life/4844/",
+     "https://www.hnaa.jp/faq/fp-search/",
+     "https://www.41fp.com/media/life-insuarance/osusumefpsoudan-muryou-yuryo/"
+    ],
+    "error": ""
+   }
+  },
+  "生命保険 見直し タイミング": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nissay.co.jp/kojin/minaoshi/timing/",
+     "https://www.jp-life.japanpost.jp/column/hoken/life-hoken-minaoshi.html",
+     "https://jili.or.jp/tebiki/chapter3.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.lifenet-seimei.co.jp/media/insurance-about/minaoshi/",
+     "https://www.kamakura-life.co.jp/monenavi/articles/hoken/minaoshi-timing/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHscuAX1jNlmvCFmd7YGCLbFgNOh-qMvvyQZULIAhZWc1DtZxIKiza64JSMRd_AyCYs6f28BlZz0aFq4qigr5aFPPK8dsTlLsKIaEW5WTunuJYxuA2nEebalbsATFXX4Ke8",
+     "https://www.7-insurance.jp/column/066.html",
+     "https://www.hokepon.com/minaoshi/scene/",
+     "https://www.iyobank.co.jp/sp/iyomemo/entry/20250318.html",
+     "https://hoken-eshop.com/column/review_of_insurance/",
+     "https://www.fp.au-financial.com/media/hoken/article-131.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nissay.co.jp/kojin/contents/article/0057/index.html",
+     "https://www.fukuishimbun.co.jp/articles/-/1431441",
+     "https://www.bk.mufg.jp/sonaeru/hoken/column/004/index.html",
+     "https://www.aeonbank.co.jp/column/insurance/minaoshi/timing/",
+     "https://www.hokennomadoguchi.com/columns/seimei/maintenance/",
+     "https://www.hoken-minaoshi-lab.jp/article/timing-for-reviewing-life-insurance/",
+     "https://www.navinavi-hoken.com/articles/review",
+     "https://a-gent.co.jp/magazine/life-insurance/what-review/",
+     "https://hoken-all.co.jp/article-4898/",
+     "https://www.sonylife.co.jp/media/manavi/16/",
+     "https://okane-kenko.jp/article/insurance/life/htc-life/life-insurance-review",
+     "https://tfp-group.co.jp/hoken-shindan/column/hoken-minaoshi-timing",
+     "https://www.homes.co.jp/cont/press/buy/buy_00700/",
+     "https://wismoney.jp/seimei/expert/insurance-review/"
+    ],
+    "error": ""
+   }
+  },
+  "保険 見直し 無料相談 しつこい": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/soudan_topics/data/seiho.html",
+     "https://www.hokepon.com/faq/2308/",
+     "https://www.hokepon.com/",
+     "https://www.caa.go.jp/policies/application/inquiry/",
+     "https://www.jili.or.jp/consul/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/mio_adviser_8888/n/n54629a6f9fc0",
+     "https://financial-t.com/column/2010",
+     "https://www.randcins.jp/hoken/consulting/minaoshi-phone/",
+     "https://money-career.com/article/471",
+     "https://altruloop.com/column/insurance-consultation-decline/",
+     "https://hoken-mammoth.com/leads/articles/16288/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.randcins.jp/hoken/consulting/refuse/",
+     "https://www.randcins.jp/hoken/consulting/minaoshi-kotowaru/",
+     "https://hoken-room.jp/seimei/2399",
+     "https://rakuya-k.co.jp/consult/decline/",
+     "https://www.fukurou-navi.com/fp-column/how-to-refuse-insurance-example-sentence/",
+     "https://note.com/mio_adviser_8888/n/n54629a6f9fc0",
+     "https://adviser-navi.co.jp/insurance/column/12499/",
+     "https://www.hoken-anshinkan.jp/product/hoken-minaoshi-lab-review/",
+     "https://smart-moneylife.jp/consulting/ranking"
+    ],
+    "error": ""
+   }
+  },
+  "保険 乗り換え 注意点": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://jili.or.jp/tebiki/chapter3.html",
+     "https://www.jili.or.jp/knows_learns/kind/main/34.html",
+     "https://www.fsa.go.jp/receipt/soudansitu/advice02.html",
+     "https://www.fsa.go.jp/ordinary/hokenkeiyaku/",
+     "https://jili.or.jp/consumer_adviser/pdf/data.pdf",
+     "https://soudanguide.sonpo.or.jp/car/q023.html",
+     "https://www.sonysonpo.co.jp/auto/guide/agde327.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hokennomadoguchi.com/columns/seimei/change/",
+     "https://www.tf-office.co.jp/magazine/life-insurance/35696/",
+     "https://www.faq.lifenet-seimei.co.jp/33015",
+     "https://hoken.rakuten.co.jp/medical/column/reconsider/",
+     "https://www.hokende.com/life-insurance/basic_info/conversion",
+     "https://www.hokenmarket.net/carna/insurance/post416.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHE8LB0Fwm6Y9DZaFBne7mFudgay-mkqQXCOg-a1O_n5NNKYgO6kyJk5juOqWPVyv75B1etOArNxS3YrCy1EvwqXTYYaDXr2zObulw7vFL2HbyHkRi0McSrmG3SM6e4FWf5uhce0J-_2_HVsv25b1mo3x4YbyRwPBeAfbVYtYFPNtBPwK0oB1capQ0=",
+     "https://www.mitsui-direct.co.jp/car/guide/change/notices/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-design.net/ande/guide/column/switch-point/",
+     "https://www.hokennomadoguchi.com/columns/songai/car/change/",
+     "https://hoken-navi.docomo.ne.jp/column-cmn/insurance/insurance14.html",
+     "https://www.sompo-direct.co.jp/otona/oshiete/insurance/change.html",
+     "https://park.sompo-japan.co.jp/carmag/autoins/switch/column/as008.html",
+     "https://ins.minkabu.jp/columns/car-insurance-change-221014",
+     "https://www.nanairolife.co.jp/hoken/insurance-switching/",
+     "https://www.41fp.com/media/life-insuarance/hokennonorikae-kimazui/",
+     "https://www.behavior.co.jp/blog/life-insurance-switch-2025-law"
+    ],
+    "error": ""
+   }
+  },
+  "自動車保険 見直し 等級 引き継ぎ": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ms-ins.com/personal/car/guide/tokyu/003.html",
+     "https://www.sbisonpo.co.jp/car/guide/grade-system/grade-system04.html",
+     "https://soudanguide.sonpo.or.jp/car/q023.html",
+     "https://www.sompo-direct.co.jp/shisan_modal/divide/mutual_aid.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.webcrew.co.jp:443/error/cookie.html",
+     "https://www.sbisonpo.co.jp/car/guide/grade-system/grade-system04.html",
+     "https://faq.mitsui-direct.co.jp/index.html?id=10033",
+     "https://www.e-design.net/faq/answer/63101b343efc72d98abdfa08/",
+     "https://au-hoken-navi.fp.au-financial.com/car/article/058/",
+     "https://www.zurich.co.jp/car/useful/guide/cc-insurance-grade-not-handover/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-design.net/ande/guide/column/switch-timing/",
+     "https://www.hoken.jal.co.jp/column/car/car-017.html",
+     "https://www.sbisonpo.co.jp/car/guide/grade-system/grade-system04.html",
+     "https://hoken-navi.docomo.ne.jp/dmg-ins/car/chishiki/case41.html",
+     "https://www.insweb.co.jp/car/kisochishiki/kiso/tokyu-hikitsugi.html",
+     "https://park.sompo-japan.co.jp/carmag/autoins/switch/column/as008.html",
+     "https://insurance.rakuten.co.jp/car/column/grade.html",
+     "https://carinsurance.jp/premium/car-insurance-toukyu-guide/",
+     "https://asovica.com/car-insurance-grade-carryover/",
+     "https://www.axa-direct.co.jp/auto/guide/easy_guide/09.html",
+     "https://www.zurich.co.jp/car/useful/hakidashi/",
+     "https://www.e-design.net/ande/guide/column/grade-transfer/",
+     "https://www.sompo-direct.co.jp/otona/oshiete/insurance/grade-inheritance.html",
+     "https://www.mitsui-direct.co.jp/car/guide/change/takeover_grade/08.html",
+     "https://nedan.ja-kyosai.or.jp/column/20221219_houseandcar_no3.html",
+     "https://www.insweb.co.jp/car/kisochishiki/kiso/norikae-chudan.html"
+    ],
+    "error": ""
+   }
+  },
+  "医療保険 見直し 必要ある": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+     "https://www.mhlw.go.jp/content/000333279.pdf",
+     "https://www.jili.or.jp/tebiki/chapter3.html?lid=mm446",
+     "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.all-senmonka.jp/moneyizm/money/314356/",
+     "https://www.hoken-minaoshi-lab.jp/article/2608social_security_system/",
+     "https://moneiro.jp/media/article/highcost-medical-expensebenefit-up",
+     "https://siaa.or.jp/column/181",
+     "https://www.hokeni.org/docs/2026022600033/",
+     "https://gemmed.ghc-j.com/?p=71792",
+     "https://www.yoku-mite.care/kougaku-ryoyohi-guide/",
+     "https://nics-gp.co.jp/media/insurance/high-cost-medical-care-revision-2026/",
+     "https://www.behavior.co.jp/blog/high-medical-expense-guide",
+     "https://www.fwdlife.co.jp/blog/protection/reviewing-medical-insurance/",
+     "https://www.fp.au-financial.com/media/hoken/article-129.html",
+     "https://ins.minkabu.jp/columns/reviewing-medical-insurance-240221",
+     "https://hoken.rakuten.co.jp/medical/column/reconsider/",
+     "https://konohoken.com/medical/article/6264/",
+     "https://insurance-navi.jp/column/811/",
+     "https://fp-moneydoctor.com/news/knowledge/3to40s_medical_insurance/",
+     "https://www.behavior.co.jp/blog/medical-insurance-start-guide"
+    ],
+    "error": ""
+   }
+  },
+  "結婚 保険 見直し": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jili.or.jp/knows_learns/q_a/life_insurance/127.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/high_cost_medical_expenses/index.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/",
+     "https://www.jili.or.jp/knows_learns/basic/continuance/95.html",
+     "https://jili.or.jp/tebiki/chapter3.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hoken-eshop.com/column/%E7%B5%90%E5%A9%9A%E5%BE%8C%E3%81%AB%E7%94%9F%E5%91%BD%E4%BF%9D%E9%99%BA%E3%82%92%E8%A6%8B%E7%9B%B4%E3%81%99%E3%81%A8%E3%81%8D%E3%81%AE3%E3%81%A4%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88/",
+     "https://www.hokennomadoguchi.com/columns/seimei/marriage/",
+     "https://www.navinavi-hoken.com/articles/marriage-insurance",
+     "https://ins.minkabu.jp/columns/medical-marriage-guide-251110",
+     "https://www.taiyo-seimei.co.jp/net_lineup/colum/basic/068.html",
+     "https://hokench.com/reservations/fp/ranking/marriage/",
+     "https://www.hokepon.com/minaoshi/scene/twoincomes/",
+     "https://brass.ne.jp/media/marriage-insurance/",
+     "https://ichigo-consulting.co.jp/column/review-of-insurance-202503/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://brass.ne.jp/media/marriage-insurance/",
+     "https://www.metlife.co.jp/products/diagnosis/marriage/",
+     "https://www.hoken-minaoshi-lab.jp/article/life-insurance-when-you-get-married/",
+     "https://www.hokepon.com/minaoshi/scene/twoincomes/",
+     "https://www.moneypro.jp/columns/others/3348/",
+     "https://ichigo-consulting.co.jp/column/review-of-insurance-202503/",
+     "https://fp-moneydoctor.com/news/knowledge/life_stage_marriage/",
+     "https://www.e-hoken110.com/hoken/lifestage/marriage.html",
+     "https://www.e-design.net/ande/guide/column/marriage/",
+     "https://okane-kenko.jp/article/insurance/life/htc-life/marriage",
+     "https://www.life8739.co.jp/product/teiki/column03",
+     "https://neofirst.co.jp/information/kojin/column/FP110.html",
+     "https://www.sbilife.co.jp/products/fpcolumn/lifestage/",
+     "https://lify.jp/insurance/basic/article-32186/",
+     "https://www.navinavi-hoken.com/articles/marriage-insurance",
+     "https://hoken.kakaku.com/select/couple/"
+    ],
+    "error": ""
+   }
+  },
+  "出産 後 保険 見直し": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jili.or.jp/files/school/yokoku/2025PDFkosodateBeginners.pdf",
+     "https://www.jili.or.jp/files/school/yokoku/kimitomirai2026tebiki.pdf",
+     "https://www.nenkin.go.jp/service/jukyu/seido/izokunenkin/jukyu-yoken/20150401-03.html",
+     "https://www.cfa.go.jp/policies/boshihoken/kodomoiryouhityousa-r7",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hoken-minaoshi-lab.jp/article/iroha012/",
+     "https://www.navinavi-hoken.com/pregnancy-insurance",
+     "https://hokench.com/reservations/fp/ranking/pregnancy/",
+     "https://www.niaeru.com/learn/medical-insurance/medical-ins-childbirth/",
+     "https://hoken.kakaku.com/select/birth/",
+     "https://a-gent.co.jp/magazine/review-insurance/gave-childbirth/",
+     "https://www.hokeneasy.com/post/lifestage2604",
+     "https://hoken-all.co.jp/article-5029/",
+     "https://hoken-all.co.jp/article-4898/",
+     "https://hojyokin-portal.jp/columns/shussan-teate",
+     "https://hojyokin-portal.jp/columns/shussan-mushouka",
+     "https://www.mhlw.go.jp/content/12401000/001584788.pdf",
+     "https://www.nikkei.com/article/DGXZQOUA133UN0T10C25A5000000/",
+     "https://news.yahoo.co.jp/articles/5e57f2a185d7812959affac39efb59f2e7d71e82",
+     "https://www.misao-ladies.jp/articles/birth-cost-comparison-2026/",
+     "https://www.sodaten.com/articles/shussan-hiyou-hoken-tekiyou-ichijikin-chigai",
+     "https://www.behavior.co.jp/blog/maternity-insurance-fp-guide",
+     "https://familynavi.jp/childbirth-costs/"
+    ],
+    "error": ""
+   }
+  },
+  "保険 解約 返戻金 損する": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.metlife.co.jp/answer/675187650d365f31fd934b3c/",
+     "https://www.jili.or.jp/knows_learns/q_a/life_insurance/153.html",
+     "https://faq.metlife.co.jp/answer/6751876b185a6f3660f306cc/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hokencospa.jp/categories/life/columns/cashvalue",
+     "https://www.navinavi-hoken.com/articles/cash-value",
+     "https://www.f-l-p.co.jp/knowledge/5081/",
+     "https://www.invest-concierge.com/posts/understand-insurance-surrender-value-before-canceling",
+     "https://www.e-hoken110.com/hoken/life/cancel.html",
+     "https://www.e-hoken110.com/hoken/life/cash-value.html",
+     "https://www.behavior.co.jp/blog/education-fund-insurance-cancel",
+     "https://ikigai.town/ja/columns/iryo/seimei-hoken-kaiyaku-henreikin.html",
+     "https://hoken-select-lab.com/insurance-surrender-value-guide/",
+     "https://www.aeonbank.co.jp/column/insurance/kaiyakuhenreikin/toha/",
+     "https://www.iyobank.co.jp/sp/iyomemo/entry/20240711.html",
+     "https://www.hokennomadoguchi.com/columns/seimei/penalty/",
+     "https://www.dai-ichi-life.co.jp/promotion/first_step/basic/00004/index.html",
+     "https://www.manulife.co.jp/ja/individual/about/insight/column/article/syushin_column04.html",
+     "https://hoken.zexy.net/money/kiso/maintenance01.html",
+     "https://hoken.kakaku.com/gla/select/save/",
+     "https://moneysalon.jp/glossary/kaiyaku-henreikin"
+    ],
+    "error": ""
+   }
+  },
+  "保険 保障 重複 確認": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://jili.or.jp/seikyutebiki/3situation.html",
+     "https://www.sonpo.or.jp/about/guideline/ev7otb0000000cjp-att/chofuku_betsu.pdf",
+     "https://soudanguide.sonpo.or.jp/home/q057.html",
+     "https://www.sonpo.or.jp/insurance/compensation/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.axa-direct.co.jp/auto/faq/service/q01/12.html",
+     "https://www.americanhome.co.jp/home/customers/duplication",
+     "https://www.e-design.net/ande/guide/setsuyaku/duplicate/",
+     "https://www.sonpo.or.jp/about/guideline/kyodoriyou/0011.html",
+     "https://www.sonpo.or.jp/about/guideline/ev7otb0000000cjp-att/chofuku_guideline.pdf",
+     "https://hokenpoint.jp/news/other/p3439/",
+     "https://hoken-mammoth.com/leads/articles/11182/",
+     "https://www.behavior.co.jp/blog/life-insurance-multiple-couple",
+     "https://hokentokutoku.com/insurance-overlap-check/"
+    ],
+    "error": ""
+   }
+  },
+  "定年前 保険 見直し": {
+   "group": "見直し",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jili.or.jp/knows_learns/q_a/life_insurance/127.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html",
+     "https://www.city.hachioji.tokyo.jp/question/003/p000625.html",
+     "https://jili.or.jp/tebiki/chapter3.html",
+     "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/001/index.html",
+     "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/002/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.iyobank.co.jp/sp/iyomemo/entry/20250318.html",
+     "https://www.nissay.co.jp/kojin/contents/article/0057/index.html",
+     "https://www.tmn-anshin.co.jp/solution/basic/maintenance/",
+     "https://www.jp-life.japanpost.jp/column/hoken/life-hoken-minaoshi.html",
+     "https://www.i-sedai.com/contents/money/M0133.html",
+     "https://insure-check.com/insurance-review-guide/",
+     "https://kurashicostlab.com/guides/hoken-minaoshi-timing-2026/",
+     "https://www.behavior.co.jp/blog/life-insurance-premium-2025-guide",
+     "https://www.behavior.co.jp/blog/life-insurance-deduction-guide",
+     "https://www.gaiainc.jp/private-fp/okane-kihon/4688/",
+     "https://okane-kenko.jp/article/insurance/life/htc-life/retirement",
+     "https://hokencospa.jp/feature-groups/stage-of-life/features/retirement-insurance",
+     "https://okane-kenko.jp/article/insurance/life/htc-life",
+     "https://www.hokepon.com/column/life-insurance-renewal-at-60-what-to-do/",
+     "https://konohoken.com/life/article/8697/",
+     "https://hoken-eshop.com/column/%E5%AE%9A%E5%B9%B4%E9%80%80%E8%81%B7%E3%82%92%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AE%E7%94%9F%E5%91%BD%E4%BF%9D%E9%99%BA%E3%81%AE%E8%A6%8B%E7%9B%B4%E3%81%97/",
+     "https://www.randcins.jp/hoken/consulting/minaoshi-retire/",
+     "https://hoken-all.co.jp/article-5003/"
+    ],
+    "error": ""
+   }
+  },
+  "自動車保険 事故 連絡 手順": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://soudanguide.sonpo.or.jp/car/q025.html",
+     "https://www.sonpo.or.jp/report/publish/bousai/koutuu/article/1/",
+     "https://www.sompo-japan.co.jp/covenanter/acontact/automobile/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://life.oricon.co.jp/rank_insurance/special/column/accident-response/",
+     "https://faq.sompo-japan.jp/thekuruma/faq_detail.html?id=207",
+     "https://atomfirm.com/media/31630",
+     "https://hoken-navi.docomo.ne.jp/dmg-ins/car/chishiki/case26.html",
+     "https://www.avance-lg.com/customer_contents/koutsujiko/insurer-flow/",
+     "https://www.adire.jp/lega_life_lab/kotsu/kotsu-hoken/column805/",
+     "https://www.koutsujiko.jp/columns/9436/",
+     "https://www.ko2jiko.com/faq/hoken-05/",
+     "https://www.ko2jiko.com/columns/columns-78/",
+     "https://www.bang.co.jp/cont/car-accident/"
+    ],
+    "error": ""
+   }
+  },
+  "保険金 請求 流れ": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://soudanguide.sonpo.or.jp/basic/5_1.html",
+     "https://www.aflac.co.jp/keiyaku/seikyu/flow.html",
+     "https://www.lifenet-seimei.co.jp/customer/payment/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.meijiyasuda.co.jp/contractor/claim/demand/pdf/demand_02.pdf",
+     "https://www.sonysonpo.co.jp/md/m_gde008.html",
+     "https://www.secom-sonpo.co.jp/tetsuzuki/hokenkin_shiharai_flow.html",
+     "https://www.tmn-anshin.co.jp/keiyaku/tetsuzuki/seikyu/",
+     "https://vs-group.jp/sozokuzei/insurance-claim/",
+     "https://www.aflac.co.jp/soudan/guide/contents/base/benefitprocedure.html",
+     "https://www.sompo-japan.co.jp/covenanter/acontact/support/medical_group/category1/contents1/",
+     "https://www.jp-life.japanpost.jp/customer/procedure/medical/index.html",
+     "https://nao-lawoffice.jp/hoken/columns/application/life-application/732/"
+    ],
+    "error": ""
+   }
+  },
+  "自動車保険 等級 事故 下がる": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sompo-direct.co.jp/otona/contractor/accident/points.html",
+     "https://www.sompo-japan.co.jp/kinsurance/automobile/thekuruma/cost/con1/?device=pc",
+     "https://jaf.or.jp/common/kuruma-qa/category-accident/subcategory-insurance/faq-c010"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.axa-direct.co.jp/auto/guide/grade_system_guide/grade_insurance.html",
+     "https://faq.sonysonpo.co.jp/faq_detail.html?id=9",
+     "https://adcc-faq.aioinissaydowa.co.jp/faq/show/2588?category_id=28&site_domain=default",
+     "https://www.sompo-direct.co.jp/otona/guide/grade/accident.html",
+     "https://www.goo-net.com/kaitori/kaitori-satei/zidousyahoken-gimon/6879/",
+     "https://www.sbisonpo.co.jp/car/guide/grade-system/grade-system02.html",
+     "https://www.ms-ins.com/personal/car/guide/tokyu/002.html",
+     "https://faq.sompo-japan.jp/navi/faq_detail.html?id=90121&pop=1",
+     "https://carinsurance.jp/premium/car-insurance-toukyu-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "保険金 支払われない ケース": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://jili.or.jp/seikyutebiki/2flow.html",
+     "https://www.jili.or.jp/knows_learns/basic/receipt.html",
+     "https://jili.or.jp/knows_learns/law/details.html",
+     "https://www.sonpo.or.jp/insurance/shizen/",
+     "https://soudanguide.sonpo.or.jp/car/q015.html",
+     "https://soudanguide.sonpo.or.jp/home/q062.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.nissen-life.co.jp/willnavi/learn_insurance/learn_knowledge/knowledges/knowledge39.html",
+     "https://www.jili.or.jp/knows_learns/q_a/life_insurance/165.html",
+     "https://www.rakuten-life.co.jp/learn/glossary/me01.html",
+     "https://media.moneyforward.com/articles/10130",
+     "https://www.rakuten-card.co.jp/minna-money/insurance/general_insurance/article_2010_00001/",
+     "https://www.prudential.co.jp/claims_examination/sickhurt_onetime/huka/huka02_02.html",
+     "https://soudanguide.sonpo.or.jp/basic/5_1_q4.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jili.or.jp/knows_learns/q_a/life_insurance/165.html",
+     "https://nao-lawoffice.jp/hoken/columns/benefits/life-benefits/741/",
+     "https://www.niaeru.com/learn/insurance-knowledge/ins-money-exemption/",
+     "https://www.zurich.co.jp/car/useful/guide/cc-obligation-disclose/",
+     "https://www.behavior.co.jp/blog/life-insurance-disclosure-breach",
+     "https://www.sonysonpo.co.jp/fire/fp026.html",
+     "https://kasai.insweb.co.jp/taishougai/",
+     "https://moneysalon.jp/blog/kasai-hoken-shiharawarenai",
+     "https://nao-lawoffice.jp/hoken/columns/problem-case/fire/505/"
+    ],
+    "error": ""
+   }
+  },
+  "火災保険 水漏れ 請求 方法": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://www.secom-sonpo.co.jp/tetsuzuki/hokenkin_shiharai_faq.html",
+     "https://www.sompo-japan.co.jp/covenanter/acontact/other/",
+     "https://www.sompo-japan.co.jp/covenanter/acontact/support/sumai/pop1/",
+     "https://www.sompo-japan.jp/kinsurance_d/habitation/sumai/sche/",
+     "https://faq.tokiomarine-nichido.co.jp/faq/show/5665"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.m-kogyo.co.jp/columns/plumbing-water-leak-insurance-claim",
+     "https://fire.bang.co.jp/cont/insurance-claim/",
+     "https://hapisumu.jp/category/insurance-reform/14232/",
+     "https://nao-lawoffice.jp/hoken/columns/insurance-accident/fire-insurance-accident/555/",
+     "https://www.ms-ins.com/contractor/emergency/kasai/documents.html",
+     "https://faq.sompo-japan.jp/sumai/faq_detail.html?id=80388",
+     "https://hoken.rakuten.co.jp/fire/column/application/",
+     "https://hoken-kyokasho.com/fire-insurance-wet",
+     "https://www.tokiomarine-nichido.co.jp/world/guide/casestudy/seikyuu.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tokiomarine-nichido.co.jp/world/guide/casestudy/shinsei.html",
+     "https://www.tokiomarine-nichido.co.jp/world/guide/casestudy/seikyuu.html",
+     "https://nao-lawoffice.jp/hoken/columns/compensation-details/fire-compensation-details/537/",
+     "https://nao-lawoffice.jp/hoken/columns/insurance-accident/fire-insurance-accident/555/",
+     "https://fire.hokenou.co.jp/fire-insurance-water-leak/",
+     "https://clearlife-net.com/column/water-leak/mizumore-kasaihoken-keinenrekka/",
+     "https://aksam.jp/column/kasaihoken-shinsei/",
+     "https://hoken-kyokasho.com/fire-insurance-wet",
+     "https://toiretumari-center.com/p_toilet/select/toilet-leak-fire-insurance/"
+    ],
+    "error": ""
+   }
+  },
+  "入院 給付金 請求 書類": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jili.or.jp/knows_learns/q_a/medical_security/419.html",
+     "https://www.dai-ichi-life.co.jp/contractor/claim/insurance/document.html",
+     "https://www.zurichlife.co.jp/faq/constructer/seikyu/Prepare_Submit/03"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.prudential.co.jp/contractor/process/seikyu/pdf/benefit.pdf",
+     "https://www.metlife.co.jp/customer/procedures/payment/medical_document/shorui/",
+     "https://www.fwdlife.co.jp/insurance-claim/required-documents.html",
+     "https://www.jp-life.japanpost.jp/customer/procedure/medical/index.html",
+     "https://faq.tmn-anshin.co.jp/faq_detail.html?id=8072",
+     "https://www.aflac.co.jp/keiyaku/seikyu/contents/insurance_claim.html",
+     "https://www.taiyo-seimei.co.jp/customer/procedure/injuries.html",
+     "https://www.daido-life.co.jp/c_keiyaku/procedure/hospitalization.html",
+     "https://sumitomolife.dga.jp/faq_detail.html?id=2001"
+    ],
+    "error": ""
+   }
+  },
+  "代理店 対応 悪い 相談先": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://www.gov-online.go.jp/tokusyu/hotline188/",
+     "https://www.sonpo.or.jp/about/efforts/adr/index.html",
+     "https://www.seiho.or.jp/contact/about/qanda/",
+     "https://www.tca.or.jp/consult/",
+     "https://www.houterasu.or.jp/site/soudanmadoguchi-houseido/index-2.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.soumu.go.jp/form/common/agencyinfo_form.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12238596892",
+     "https://tokyolpc.com/koutsujiko/page-510/page-721/",
+     "https://www.kokusen.go.jp/map/",
+     "https://www.docomo.ne.jp/support/inquiry/feedback/",
+     "https://telecom-user-report.soumu.go.jp/form",
+     "https://www.tca.or.jp/consult/",
+     "https://www.fnlia.gr.jp/complaint",
+     "https://www.sonpo.or.jp/soudan/index.html",
+     "https://www.sonpo.or.jp/soudan/index.html",
+     "https://www.seiho.or.jp/contact/about/",
+     "https://www.fsa.go.jp/user/hoken.html",
+     "https://www.fsa.go.jp/user/hoken.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://newswitch.jp/p/48373",
+     "https://www.sonpo.or.jp/soudan/index.html",
+     "https://www.fsa.go.jp/user/hoken.html",
+     "https://www.sonpo.or.jp/about/efforts/adr/index.html",
+     "https://bengo-line.com/post-11367/",
+     "https://www.gov-online.go.jp/article/201807/entry-8222.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen225.html",
+     "https://www.city.utsunomiya.lg.jp/kurashi/shohi/soudan/1004907.html"
+    ],
+    "error": ""
+   }
+  },
+  "保険 契約 クーリングオフ 方法": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://www.fsa.go.jp/receipt/soudansitu/advice02.html",
+     "https://soudanguide.sonpo.or.jp/basic/4_1_q3.html",
+     "https://www.kokusen.go.jp/soudan_now/data/coolingoff.html?vm=r"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.life-assist.jp/hoken-column/basic/article-569/",
+     "https://www.behavior.co.jp/blog/life-insurance-cooling-off",
+     "https://www.sonpo.or.jp/news/caution/hokengyouhou.html",
+     "https://www.nw-life.co.jp/contractor/procedure/cooling_off.html",
+     "https://www.i-hoken.com/column/cooling-off.html",
+     "https://www.tmn-anshin.co.jp/keiyaku/info/info013.html",
+     "https://www.sumitomolife.co.jp/contact/coolingoff.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://soudanguide.sonpo.or.jp/basic/4_1_q3.html",
+     "https://help.axa.co.jp/s/article/000001511",
+     "https://www.sumitomolife.co.jp/contact/coolingoff.html",
+     "https://www.fukoku-life.co.jp/contract/procedure/others/03.html",
+     "https://www.aioinissaydowa.co.jp/contact/cooling_off/",
+     "https://hokencospa.jp/categories/medical/columns/how-to-write-insurance-cooling-off",
+     "https://www.life-assist.jp/hoken-column/basic/article-569/",
+     "https://sumitomolife.dga.jp/faq_detail.html?id=238&category=8&page=1",
+     "https://www.bang.co.jp/cont/cooling-off/"
+    ],
+    "error": ""
+   }
+  },
+  "自動車保険 示談交渉 任せる": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://soudanguide.sonpo.or.jp/car/q010.html",
+     "https://www.sompo-japan.co.jp/kinsurance/automobile/thekuruma/respo/acci/",
+     "https://www.sbisonpo.co.jp/car/insurance/case/case01.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.oita-kotsujiko.com/jidandaikou/",
+     "https://www.adire.jp/lega_life_lab/kotsu/jidan/column747/",
+     "https://dprofessions.co.jp/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E5%BC%81%E8%AD%B7%E5%A3%AB/%E5%8A%A0%E5%AE%B3%E8%80%85%E5%81%B4/%E4%BF%9D%E9%99%BA%E4%BC%9A%E7%A4%BE%E3%81%AE%E7%A4%BA%E8%AB%87%E4%BB%A3%E8%A1%8C/%E4%BB%BB%E3%81%9B%E3%81%8D%E3%82%8A%E3%81%AE%E3%83%AA%E3%82%B9%E3%82%AF/",
+     "https://faq.sonysonpo.co.jp/faq_detail.html?id=587",
+     "https://faq.mitsui-direct.co.jp/index.html?id=10715",
+     "https://jiko-nego.com/baisyou/entry214.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGjODXv7g6lJf10RMIkMX2pwhNCrU9oNtXOB1YuRx0nnaRgENDCReaPuSU94kbhNn0JOCL31mBXQ3IJUNc3pRgJvBoFHxWjwNBKFJPgklB8poIPcHuJ5PeUMPzKoop6b9jV1jPsAEnPrZkYkdKe61gzfPGzbyL8oZNwJ9mvig==",
+     "https://faq-ins-saison.dga.jp/car_h/otona/faq_detail.html?id=1429"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.daylight-law.jp/accident/qa/faq6_18/",
+     "https://faq.sonysonpo.co.jp/faq_detail.html?id=107",
+     "https://faq.mitsui-direct.co.jp/index.html?id=10039",
+     "https://life.oricon.co.jp/rank_insurance/special/accident-response/settlement-negotiations/",
+     "https://atomfirm.com/media/125189",
+     "https://www.zurich.co.jp/car/useful/jidan/",
+     "https://adcc-faq.aioinissaydowa.co.jp/faq/show/275?category_id=31&site_domain=default",
+     "https://www.jikosos.net/basic/basic1/settlement-agency-service",
+     "https://jico-pro.com/columns/343/",
+     "https://response.jp/article/2020/08/22/337697.html",
+     "https://adcc-faq.aioinissaydowa.co.jp/faq/show/284?site_domain=default",
+     "https://faq.sompo-japan.jp/thekuruma/faq_detail.html?id=114",
+     "https://soudanguide.sonpo.or.jp/car/q010.html",
+     "https://www.koutsujiko.jp/columns/6312/",
+     "https://faq-ins-saison.dga.jp/car_h/otona/faq_detail.html?id=1429",
+     "https://www.ko2jiko.com/faq/bentoku-06/",
+     "https://carlife.tokyo/car-insurance-lawyer-coverage/"
+    ],
+    "error": ""
+   }
+  },
+  "保険会社 変更 手続き 代理店": {
+   "group": "事故手続き",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ms-ins.com/personal/car/guide/kiso/005.html",
+     "https://www.ms-ins.com/contractor/procedure/car/contract/confirm10.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/zidousyahoken-gimon/3371/",
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/zidousyahoken-gimon/3371/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12312827367",
+     "https://www.axa-direct.co.jp/auto/guide/transfer/",
+     "https://www.insweb.co.jp/car/kisochishiki/kiso/dairiten-henkou.html",
+     "https://www.ms-ins.com/contractor/procedure/car/contract/confirm10.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/kaitori/kaitori-satei/zidousyahoken-gimon/3371/",
+     "https://hoken-room.jp/seimei/7785",
+     "https://hoken.kakaku.com/kuruma_hoken/procedure/change.html",
+     "https://life.oricon.co.jp/rank_insurance/special/contract/change-of-agent/",
+     "https://www.insweb.co.jp/car/kisochishiki/kiso/dairiten-henkou.html",
+     "https://faq.sompo-japan.jp/sumai/faq_detail.html?id=11112507",
+     "https://faq.tokiomarine-nichido.co.jp/faq/show/4626?category_id=343&return_path=%2Fcategory%2Fshow%2F343%3Fpage%3D1&site_domain=default&sort=sort_access&sort_order=desc&site_domain=default",
+     "https://faq.anicom-sompo.co.jp/faq/show/3757?category_id=393&return_path=%2Fcategory%2Fshow%2F393%3Fpage%3D1&site_domain=default&sort=sort_adjust_value&sort_order=desc&site_domain=default",
+     "https://nayuta-hoken.co.jp/article/houjin-hoken-dairiten-henko/",
+     "https://faq-ins-saison.dga.jp/car_h/otona/faq_detail.html?id=16141",
+     "https://xn--t8jwa7e4gv51njzdd8o8h2fuhyalcq.com/agencychange/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

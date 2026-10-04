@@ -206,40 +206,40 @@
    "public": 19,
    "other": 7,
    "portal": 46,
-   "maker": 29,
    "review": 3,
+   "maker": 29,
    "media": 22,
    "video": 4
   },
   "選び方": {
    "answers": 43,
-   "maker": 12,
-   "clinic": 43,
-   "public": 7,
    "portal": 41,
    "media": 26,
+   "maker": 12,
+   "public": 7,
+   "clinic": 43,
    "video": 11,
    "other": 4,
    "review": 1
   },
   "手続き・トラブル": {
    "answers": 46,
+   "portal": 35,
    "clinic": 41,
    "public": 25,
-   "portal": 35,
-   "maker": 23,
    "media": 26,
+   "maker": 23,
    "video": 6,
    "review": 2,
    "other": 13
   },
   "物件・街の探し方": {
    "answers": 54,
-   "maker": 20,
    "other": 15,
-   "clinic": 46,
    "portal": 44,
    "media": 38,
+   "maker": 20,
+   "clinic": 46,
    "public": 14,
    "video": 11
   }

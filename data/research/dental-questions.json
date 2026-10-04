@@ -14,8 +14,8 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "clinic": 1,
     "portal": 3,
+    "clinic": 1,
     "public": 1
    },
    "top": [
@@ -95,8 +95,8 @@
    "group": "地域で探す",
    "answered": 4,
    "kinds": {
-    "clinic": 2,
     "portal": 4,
+    "clinic": 2,
     "public": 1
    },
    "top": [
@@ -122,8 +122,8 @@
    "group": "地域で探す",
    "answered": 4,
    "kinds": {
-    "clinic": 1,
     "portal": 4,
+    "clinic": 1,
     "other": 1
    },
    "top": [
@@ -177,8 +177,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -204,8 +204,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "portal": 3,
     "other": 1,
+    "portal": 3,
     "public": 1
    },
    "top": [
@@ -232,8 +232,8 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "clinic": 1,
-    "portal": 3
+    "portal": 3,
+    "clinic": 1
    },
    "top": [
     [
@@ -259,8 +259,8 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "clinic": 1,
     "portal": 3,
+    "clinic": 1,
     "public": 2
    },
    "top": [
@@ -445,9 +445,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
+    "other": 1,
     "maker": 1,
-    "portal": 3,
-    "other": 1
+    "portal": 3
    },
    "top": [
     [
@@ -500,9 +500,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "clinic": 1,
     "other": 1,
-    "portal": 3
+    "portal": 3,
+    "clinic": 1
    },
    "top": [
     [
@@ -554,8 +554,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "clinic": 4,
     "media": 2,
+    "clinic": 4,
     "video": 1,
     "portal": 2
    },
@@ -667,8 +667,8 @@
    "kinds": {
     "clinic": 4,
     "portal": 1,
-    "maker": 1,
-    "media": 1
+    "media": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -745,8 +745,8 @@
    "group": "費用",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
     "other": 1,
+    "clinic": 3,
     "maker": 1,
     "portal": 2
    },
@@ -827,8 +827,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "clinic": 4,
     "portal": 1,
+    "clinic": 4,
     "maker": 1
    },
    "top": [
@@ -937,8 +937,8 @@
    "group": "費用",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
-    "portal": 1
+    "portal": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -963,10 +963,10 @@
    "group": "費用",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
     "portal": 2,
-    "maker": 2,
-    "video": 1
+    "clinic": 3,
+    "video": 1,
+    "maker": 2
    },
    "top": [
     [
@@ -991,8 +991,8 @@
    "group": "費用",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
     "media": 1,
+    "clinic": 3,
     "maker": 1,
     "portal": 1
    },
@@ -1045,8 +1045,8 @@
    "group": "費用",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
     "public": 1,
+    "clinic": 3,
     "portal": 2,
     "maker": 1
    },
@@ -1073,8 +1073,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "clinic": 4,
-    "portal": 2
+    "portal": 2,
+    "clinic": 4
    },
    "top": [
     [
@@ -1100,8 +1100,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "maker": 2,
-    "media": 1
+    "media": 1,
+    "maker": 2
    },
    "top": [
     [
@@ -1341,10 +1341,10 @@
    "group": "費用",
    "answered": 3,
    "kinds": {
+    "other": 1,
     "maker": 3,
-    "clinic": 3,
     "portal": 1,
-    "other": 1
+    "clinic": 3
    },
    "top": [
     [
@@ -1369,10 +1369,10 @@
    "group": "治療の選び方",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "media": 1,
     "public": 2,
-    "portal": 2
+    "portal": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -1398,8 +1398,8 @@
    "answered": 2,
    "kinds": {
     "maker": 2,
-    "clinic": 2,
     "portal": 2,
+    "clinic": 2,
     "public": 1
    },
    "top": [
@@ -1453,9 +1453,9 @@
    "kinds": {
     "maker": 2,
     "clinic": 3,
-    "public": 1,
+    "portal": 1,
     "media": 2,
-    "portal": 1
+    "public": 1
    },
    "top": [
     [
@@ -1480,8 +1480,8 @@
    "group": "治療の選び方",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
-    "portal": 1
+    "portal": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -1532,10 +1532,10 @@
    "group": "治療の選び方",
    "answered": 2,
    "kinds": {
+    "portal": 1,
+    "video": 1,
     "public": 2,
     "clinic": 2,
-    "video": 1,
-    "portal": 1,
     "maker": 1
    },
    "top": [
@@ -1588,10 +1588,10 @@
    "group": "治療の選び方",
    "answered": 2,
    "kinds": {
+    "portal": 1,
     "maker": 2,
     "public": 2,
-    "clinic": 2,
-    "portal": 1
+    "clinic": 2
    },
    "top": [
     [
@@ -1617,8 +1617,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "maker": 2,
     "media": 1,
+    "maker": 2,
     "portal": 1
    },
    "top": [
@@ -1671,8 +1671,8 @@
    "group": "治療の選び方",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
-    "public": 1
+    "public": 1,
+    "clinic": 3
    },
    "top": [
     [
@@ -1698,8 +1698,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "public": 2,
-    "portal": 1
+    "portal": 1,
+    "public": 2
    },
    "top": [
     [
@@ -1725,8 +1725,8 @@
    "answered": 3,
    "kinds": {
     "maker": 3,
-    "clinic": 3,
-    "public": 3
+    "public": 3,
+    "clinic": 3
    },
    "top": [
     [
@@ -1751,10 +1751,10 @@
    "group": "治療の選び方",
    "answered": 2,
    "kinds": {
-    "wiki": 1,
     "media": 1,
-    "clinic": 2,
+    "wiki": 1,
     "public": 1,
+    "clinic": 2,
     "portal": 1
    },
    "top": [
@@ -1780,8 +1780,8 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
-    "portal": 2
+    "portal": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -1862,8 +1862,8 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "public": 2,
     "wiki": 1,
+    "public": 2,
     "clinic": 2,
     "media": 1,
     "portal": 1
@@ -1891,8 +1891,8 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
-    "portal": 1
+    "portal": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -1917,8 +1917,8 @@
    "group": "症状",
    "answered": 4,
    "kinds": {
-    "clinic": 4,
-    "video": 1
+    "video": 1,
+    "clinic": 4
    },
    "top": [
     [
@@ -1943,9 +1943,9 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "media": 1,
     "portal": 2,
+    "clinic": 2,
     "maker": 1
    },
    "top": [
@@ -1998,8 +1998,8 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "public": 1,
+    "clinic": 2,
     "maker": 1,
     "portal": 1
    },
@@ -2026,10 +2026,10 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "public": 1,
     "media": 1,
-    "clinic": 2,
-    "portal": 1
+    "portal": 1,
+    "public": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -2054,9 +2054,9 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
+    "portal": 3,
     "public": 2,
-    "clinic": 3,
-    "portal": 3
+    "clinic": 3
    },
    "top": [
     [
@@ -2081,9 +2081,9 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "media": 2,
-    "portal": 2
+    "portal": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -2135,10 +2135,10 @@
    "kinds": {
     "clinic": 3,
     "maker": 2,
-    "public": 1,
-    "media": 2,
     "portal": 1,
     "video": 1,
+    "media": 2,
+    "public": 1,
     "other": 1
    },
    "top": [
@@ -2164,9 +2164,9 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "media": 1,
-    "portal": 1
+    "portal": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -2218,10 +2218,10 @@
    "group": "症状",
    "answered": 2,
    "kinds": {
-    "maker": 2,
-    "clinic": 2,
     "media": 1,
-    "portal": 1
+    "maker": 2,
+    "portal": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -2300,8 +2300,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "maker": 1,
     "wiki": 1,
+    "maker": 1,
     "video": 1,
     "portal": 1
    },
@@ -2328,10 +2328,10 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "media": 2,
     "video": 1,
-    "portal": 2
+    "portal": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -2383,9 +2383,9 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "video": 1,
     "portal": 1,
+    "clinic": 2,
     "media": 1
    },
    "top": [
@@ -2411,8 +2411,8 @@
    "group": "受診のしかた",
    "answered": 3,
    "kinds": {
-    "clinic": 1,
     "public": 2,
+    "clinic": 1,
     "portal": 1
    },
    "top": [
@@ -2438,8 +2438,8 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
-    "video": 1
+    "video": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -2464,9 +2464,9 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
-    "public": 1,
-    "portal": 2,
     "other": 1,
+    "portal": 2,
+    "public": 1,
     "clinic": 2
    },
    "top": [
@@ -2492,10 +2492,10 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "media": 2,
     "video": 1,
-    "portal": 1
+    "portal": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -2520,11 +2520,11 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
+    "portal": 2,
     "clinic": 1,
     "other": 1,
-    "media": 2,
-    "portal": 2,
     "video": 1,
+    "media": 2,
     "maker": 1
    },
    "top": [
@@ -2551,9 +2551,9 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "portal": 2,
-    "video": 1,
     "other": 2,
+    "video": 1,
+    "portal": 2,
     "public": 1
    },
    "top": [
@@ -2579,10 +2579,10 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
+    "portal": 2,
+    "video": 1,
     "maker": 1,
     "clinic": 2,
-    "video": 1,
-    "portal": 2,
     "media": 1
    },
    "top": [
@@ -2608,8 +2608,8 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
-    "public": 1,
     "portal": 1,
+    "public": 1,
     "clinic": 2
    },
    "top": [
@@ -2661,8 +2661,8 @@
    "group": "受診のしかた",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
     "public": 3,
+    "clinic": 3,
     "portal": 1
    },
    "top": [
@@ -2688,9 +2688,9 @@
    "group": "受診のしかた",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
     "media": 2,
-    "other": 1
+    "other": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -2715,11 +2715,11 @@
    "group": "受診のしかた",
    "answered": 3,
    "kinds": {
-    "public": 3,
     "portal": 2,
-    "clinic": 2,
+    "public": 3,
     "media": 2,
-    "other": 1
+    "other": 1,
+    "clinic": 2
    },
    "top": [
     [

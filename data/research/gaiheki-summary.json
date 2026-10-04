@@ -3,8 +3,8 @@
   "clinic": 494,
   "other": 19,
   "video": 8,
-  "maker": 36,
-  "portal": 252,
+  "maker": 37,
+  "portal": 253,
   "public": 12,
   "media": 22,
   "wiki": 1
@@ -14,8 +14,8 @@
    "clinic": 12,
    "other": 1,
    "public": 1,
-   "portal": 3,
-   "maker": 2
+   "portal": 4,
+   "maker": 3
   },
   "Gemini": {
    "clinic": 149,
@@ -48,12 +48,12 @@
    "media": 9
   },
   "費用・相場": {
+   "portal": 61,
+   "maker": 10,
    "clinic": 89,
-   "portal": 60,
    "video": 1,
    "media": 7,
-   "other": 1,
-   "maker": 9
+   "other": 1
   },
   "業者の選び方": {
    "media": 6,
@@ -81,7 +81,7 @@
   }
  },
  "answered": {
-  "ChatGPT": 5,
+  "ChatGPT": 6,
   "Gemini": 33,
   "Claude": 50
  },
@@ -91,14 +91,14 @@
   "Claude": 49
  },
  "sources": {
-  "ChatGPT": 19,
+  "ChatGPT": 21,
   "Gemini": 258,
   "Claude": 567
  },
  "portal_top": [
   [
    "nuri-kae.jp",
-   32
+   33
   ],
   [
    "tosouyasan13.net",
@@ -155,60 +155,60 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 88,
-   "clinic": 87,
+   "answers": 89,
    "other": 10,
-   "portal": 79,
-   "maker": 25,
+   "clinic": 87,
+   "portal": 80,
    "video": 8,
+   "maker": 26,
    "public": 6,
    "media": 17,
    "wiki": 1
   },
   "地域で探す": {
    "answers": 25,
-   "clinic": 24,
    "other": 3,
+   "clinic": 24,
    "portal": 20,
-   "maker": 3,
    "video": 3,
+   "maker": 3,
    "public": 2,
    "media": 7
   },
   "費用・相場": {
-   "answers": 19,
-   "portal": 19,
-   "clinic": 19,
+   "answers": 20,
+   "maker": 7,
+   "portal": 20,
    "video": 1,
+   "clinic": 19,
    "media": 6,
-   "other": 1,
-   "maker": 6
+   "other": 1
   },
   "業者の選び方": {
    "answers": 14,
-   "portal": 13,
-   "clinic": 14,
    "media": 4,
+   "clinic": 14,
+   "portal": 13,
    "public": 4,
    "maker": 2,
    "video": 2,
-   "wiki": 1,
-   "other": 1
+   "other": 1,
+   "wiki": 1
   },
   "劣化・症状の悩み": {
    "answers": 15,
+   "other": 3,
    "portal": 14,
    "clinic": 15,
-   "other": 3,
    "maker": 5,
    "video": 1
   },
   "塗料・工事内容の悩み": {
    "answers": 15,
-   "portal": 13,
    "clinic": 15,
-   "maker": 9,
+   "portal": 13,
    "other": 2,
+   "maker": 9,
    "video": 1
   }
  }

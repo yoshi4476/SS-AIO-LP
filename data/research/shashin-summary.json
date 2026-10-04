@@ -136,8 +136,8 @@
  "per_answer": {
   "全体": {
    "answers": 86,
-   "other": 12,
    "clinic": 86,
+   "other": 12,
    "media": 44,
    "portal": 52,
    "maker": 8,
@@ -146,8 +146,8 @@
   },
   "地域で探す": {
    "answers": 20,
-   "other": 6,
    "clinic": 20,
+   "other": 6,
    "media": 7,
    "portal": 14
   },

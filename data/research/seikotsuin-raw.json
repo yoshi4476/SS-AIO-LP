@@ -1,0 +1,1704 @@
+{
+ "industry": "seikotsuin",
+ "date": "2026-10-03",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 整骨院 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://seitai.co.jp/store/osaka-umeda/",
+     "https://dress-shinsaibashi.com/",
+     "https://shitennouji.com/",
+     "https://yamade.e-chiryo.jp/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kabushikigaisya-rigakubody.co.jp/seitai/blog/god-hand-chiropractic-osaka/",
+     "https://www.seikotsuin-kobayashi.com/column/%E5%9B%9B%E5%8D%81%E8%82%A9%E4%BA%94%E5%8D%81%E8%82%A9/%E5%A4%A7%E9%98%AA%E3%81%A7%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E3%81%AE%E3%82%B4%E3%83%83%E3%83%89%E3%83%8F%E3%83%B3%E3%83%89%E3%81%AE%E3%81%84%E3%82%8B%E6%95%B4%E9%AA%A8%E9%99%A26%E9%81%B8%EF%BC%81/",
+     "https://medicaldoc.jp/o/recommend-o/osaka-st-orthopedic/",
+     "https://beauty.hotpepper.jp/genre/kgkw013/pre27/city27100001/",
+     "https://tenmatenroku-seikotsuin.com/",
+     "https://tsukamoto-seikotu.com/",
+     "https://beauty.hotpepper.jp/keyword/%E6%95%B4%E9%AA%A8%E9%99%A2%E3%80%80%E9%AA%A8%E7%9B%A4%E7%9F%AF%E6%AD%A3%E3%80%80%E5%A4%A7%E9%98%AA/",
+     "https://medicaldoc.jp/o/recommend-o/osaka-st-orthopedic/",
+     "https://karadarefre.jp/Search2/_find/genre:38/pref:32/area2:126443/",
+     "https://karadarefre.jp/Search2/_find/menu:11/pref:32/area2:126443/",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E3%81%AE%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%8A%E3%81%99%E3%81%99%E3%82%8111%E9%81%B8%EF%BC%81%E5%90%84%E9%99%A2%E3%81%AE%E7%89%B9%E5%BE%B4%E3%82%84/",
+     "https://epark.jp/sekkotsu-seitai/list/reg_27/cat_120200/review_ranking/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://medicaldoc.jp/o/recommend-o/osaka-st-orthopedic/",
+     "https://www.homemate-research.com/bc67/27100/ranking/access/",
+     "https://www.homemate-research.com/bc67/27/ranking/access/",
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre27/",
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre27/city27100001/",
+     "https://karadarefre.jp/Search2/_find/genre:15/pref:32/area2:126443/",
+     "https://kabushikigaisya-rigakubody.co.jp/seitai/blog/god-hand-chiropractic-osaka/",
+     "https://www.seikotsuin-kobayashi.com/column/%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E6%B4%BB%E6%B3%95/osakatop16/",
+     "https://yodogawajuso-seikotu.com/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 接骨院 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ekiten.jp/g0208/a13106/",
+     "https://www.ekiten.jp/g0208/a13114/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre13/",
+     "https://karadarefre.jp/Search2/_find/genre:15/pref:15/area2:3484/station:2776/",
+     "https://karadarefre.jp/Search2/_find/genre:15/pref:15/",
+     "https://www.homemate-research.com/bc67/13100/ranking/access/",
+     "https://www.homemate-research.com/bc67/13/ranking/access/",
+     "https://seikotsuin-navi.com/tokyo/",
+     "https://www.judo-ch.jp/sekkotsuinsrch/13/recommend/",
+     "https://www.homemate-research.com/bc67/13113/ranking/access/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 整骨院 夜遅くまで": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://tukinowa.com/top/access/",
+     "https://lp.tanpopo-s.com/lp/jikoseitai/",
+     "https://midoriku-kokoro.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://clinic.jiko24.jp/clinic/aichi/%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82/night/",
+     "https://tukinowa.com/",
+     "https://ueda-seikotuin.com/treatment/",
+     "https://recore.hitomio.co.jp/fushimi/",
+     "https://matsushita-sekkotsuin.com/",
+     "https://epark.jp/relaxation-esthe/list/reg_727/cat_110102/?condition_ids=103"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://medicaldoc.jp/o/recommend-o/nagoya-ct-orthopedic/",
+     "https://www.ekiten.jp/g0208/st6062/",
+     "https://seitainavi.jp/seitai_sekkotsu/2705",
+     "https://kojima-sekkotsu.com/",
+     "https://tanpopo-s.com/",
+     "https://shirakawa-bc.com/",
+     "https://aoba-g.com/sakae/",
+     "https://karadakobo.nagoya/",
+     "https://seitainavi.jp/seitai_sekkotsu/11430",
+     "https://www.ekiten.jp/g0208/st3581/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 整骨院 腰痛": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tenjin-biyousinkyu.com/",
+     "https://www.uchida-seikotsuin.jp/reservation/",
+     "https://nishijin-shibataseikotsuin.com/access/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://ssl.jssr.gr.jp/general/sick/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://fukuoka-yotsu.com/archives/8680",
+     "https://rokka-seikotsu.com/",
+     "https://ark-meinohama.com/blog/%E7%A6%8F%E5%B2%A1%E3%81%AE%E3%82%B4%E3%83%83%E3%83%89%E3%83%8F%E3%83%B3%E3%83%89%E6%95%B4%E4%BD%93%E9%99%A2%EF%BC%95%E9%81%B8%EF%BC%8B%E9%81%B8%E3%81%B6%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%80%9020/",
+     "https://karadarefre.jp/Search2/_find/symptom.LUMBAGO:1/pref:47/area2:126449/",
+     "https://momochi-seikotsuin.com/information/%E3%80%90%E6%B3%A8%E7%9B%AE%EF%BC%81%E3%80%91%E7%A6%8F%E5%B2%A1%E5%B8%82%E3%81%AE%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%A7%E8%85%B0%E7%97%9B%E6%94%B9%E5%96%84%EF%BC%81%E3%82%82%E3%81%86%E8%AB%A6",
+     "https://noma.optimal-web.co.jp/youtsu",
+     "https://noma.optimal-web.co.jp/youtsu",
+     "https://maeda-yakuin.net/",
+     "https://beauty.hotpepper.jp/genre/kgkw139/pre40/city40130001/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.judo-ch.jp/sekkotsuinsrch/40/40130/",
+     "https://karadarefre.jp/Search2/_find/genre:15/pref:47/area2:126449/",
+     "https://magokoro-seikotsu.jp/",
+     "https://honda-seikotsu.com/",
+     "https://karada-campus.com/fukuoka-seikotsu_72133/",
+     "https://www.sasakiseikotsuin.com/",
+     "https://fukuoka-seikotsuin.com/contents/back/",
+     "https://fukuoka.bs-medical.com/",
+     "https://maeda-yakuin.net/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 接骨院 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ekiten.jp/shop_6010701/",
+     "https://beauty.hotpepper.jp/kr/slnH000778716/review/?cstt=10",
+     "https://sapporo-seitai.net/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kabushikigaisya-rigakubody.co.jp/seitai/blog/god-hand-chiropractic-sapporo/",
+     "https://seitai.co.jp/area/sapporo/recommend/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEKz1wM7w7I29Nqk-cUo2oCXGpGB_tcWw2u2kw0N2ltKWvclKBlcGLUhs7YzCUtForC9NSkILIaANp4C8hYXRMEJ9ehyFRuUNLqNnbE0xPcOnN3WkliZUqHz-vXFs8df4S32RrPwTm9d880Jxbvwsa_IA==",
+     "https://horiq.com/",
+     "https://horiq.com/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEyv2JWF-rg2xK2ivNQQj9HOYd6IadR6BXUqZx_dbW2IoDZIAXosYhh4n5NEGcyz4ks0ZQJ1DYdLiPxQHFY54GhH2C-RruPnhlLxNe94euggtih3px2PZeqQ068gu05_tozdTuZ",
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre01/city01100001/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre01/city01100001/",
+     "https://karadarefre.jp/Search2/_find/genre:15/pref:8/area2:126431/",
+     "https://kabushikigaisya-rigakubody.co.jp/seitai/blog/god-hand-chiropractic-sapporo/",
+     "https://www.homemate-research.com/bc67/01102/ranking/access/",
+     "https://www.homemate-research.com/bc67/01100/ranking/access/",
+     "https://www.ekiten.jp/g0208/a01101/",
+     "https://karada-campus.com/sapporo-seitai_72051/",
+     "https://karada-campus.com/sapporo-sekkotsu-seikotsu_72054/",
+     "https://seitainavi.jp/seitai_sekkotsu/3709"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 整骨院 肩こり": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://yokohama-seikotsuin.jp/",
+     "https://aoba-g.com/yokohamanishiguchi/",
+     "https://aoba-g.com/yokohamanishiguchi/syoujou/katakori/",
+     "https://www.tsubasa-yokohama.com/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://seitai.co.jp/store/yokohama-west/symptoms/katakori/",
+     "https://yokohama-yanada.com/",
+     "https://karadarefre.jp/Search2/_find/symptom.STIFF_SHOULDERS:1/pref:16/area2:126435/",
+     "https://beauty.hotpepper.jp/genre/kgkw504/stc0290045/",
+     "https://motomachi1.com/",
+     "https://honegori-group.com/blog/yokohama-osteopathicclinic/",
+     "https://beauty.hotpepper.jp/keyword/%E6%95%B4%E4%BD%93%E3%80%80%E8%82%A9%E3%81%93%E3%82%8A%E3%80%80%E6%A8%AA%E6%B5%9C/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre14/city14100001/",
+     "https://karadarefre.jp/Search2/_find/symptom.STIFF_SHOULDERS:1/pref:16/area2:126435/",
+     "https://honegori-group.com/blog/yokohama-osteopathicclinic/",
+     "https://serenseikotsuin.com/katakori",
+     "https://olive-seikotsuin.com/katakori",
+     "http://www.mituzawaseikotuin.com/",
+     "https://gumyoji-seikotsuin.com/stiff-shoulder",
+     "https://y-minato.com/",
+     "https://aoba-g.com/yokohamanishiguchi/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 接骨院 駅近く": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://vitalkyoto.com/",
+     "https://harikouji.com/",
+     "https://karasuma9acp.cloud-line.com/first/",
+     "https://pluson-seikotsuin.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://harikouji.com/",
+     "https://harikouji.jimdofree.com/",
+     "https://hirakawa-g.jp/kyoto/honin/",
+     "https://kyoto-clinics.jp/c05_seitai/",
+     "https://greenseikotsu.com/",
+     "https://kobayashi-seikotu.com/",
+     "https://shugakuin.chiryouin.biz/",
+     "http://www.morita-kc.com/",
+     "https://beauty.hotpepper.jp/genre/kgkw504/stc2204735/",
+     "https://epark.jp/sekkotsu-seitai/list/reg_774/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ekiten.jp/g0208/st2815/",
+     "https://www.navitime.co.jp/around/category/poi?node=00001756&category=0503022",
+     "https://karadarefre.jp/Search2/_find/genre:15/pref:34/area2:126442/area4:4363/station:6445/",
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre26/city26100001/",
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre26/",
+     "https://beauty.hotpepper.jp/genre/kgkw504/pre26/city10400000/",
+     "https://vitalkyoto.com/",
+     "https://kyoto-seitai-puraidou.xyz/",
+     "https://imai-sekkotsuin.com/",
+     "https://karada-campus.com/kyoto-sekkotsu-seikotsu_86055/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 整骨院 交通事故": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://kobe-jiko-muchiuchi.com/way/",
+     "https://kobeokamoto-seikotsuin.com/service/",
+     "https://www.sumashin-seikotsu.com/",
+     "https://www.mlit.go.jp/jidosha/jibaiseki/accident/correspondence/index.html",
+     "https://www.mlit.go.jp/jidosha/jibaiseki/about/procedure/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.avance-lg.com/customer_contents/koutsujiko/seikotsuin/",
+     "https://clinic.jiko24.jp/clinic/hyogo/%E7%A5%9E%E6%88%B8%E5%B8%82/",
+     "https://www.seikotsuin-kai.jp/contents/accident/",
+     "https://clinic.jiko24.jp/surgery/hyogo/%E7%A5%9E%E6%88%B8%E5%B8%82/",
+     "https://clinic.jiko24.jp/surgery/hyogo/%E7%A5%9E%E6%88%B8%E5%B8%82/%E7%A5%9E%E6%88%B8%E5%B8%82%E5%85%B5%E5%BA%AB%E5%8C%BA/",
+     "https://koutuujiko-chiryou.com/clinic/clinic_area/kansai/hyogo/kobeshi-chuou-ku",
+     "https://kobe-chillax.com/",
+     "https://minna-mori.com/motomachi/muchiuchi.html",
+     "https://suma-shinkyu.com/accident/",
+     "https://oue-c-clinic.com/23219/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 整骨院 予約なし": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tamaki-seikotsu.jp/",
+     "https://www.koutsujiko-izuminomoriseikotsuin-sendai.com/",
+     "https://aer-saitou-seikotsuin.com/faq/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://genkiyagroup.net/izumichuou/",
+     "https://www.shhs.jp/",
+     "https://sasaki-bs.net/",
+     "https://open-sekkotuin.ivalue.space/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.shhs.jp/",
+     "https://www.horikawaseikotu.com/",
+     "https://joint-lab.jp/",
+     "https://matsumoto0310.com/",
+     "https://kanoseikotsuin.jp/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 接骨院 土日営業": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.backstage-hiroshima.com/osthe",
+     "https://hiroshima.bwmindeyo.com/yoyaku/",
+     "https://octo8.hiroshima.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://seitai.co.jp/store/hiroshima-south/",
+     "https://www.mns-group.co.jp/shops/zen_hiroshima/",
+     "https://octo8.hiroshima.jp/",
+     "https://octo8.hiroshima.jp/",
+     "https://panda-seitai.com/",
+     "https://kougo.chiryouin.biz/",
+     "https://kougo.chiryouin.biz/",
+     "https://imada-sekkotsuin.com/",
+     "https://332049.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://octo8.hiroshima.jp/",
+     "https://panda-seitai.com/",
+     "https://karada-campus.com/hiroshima-sekkotsu-seikotsu_72139/",
+     "https://epark.jp/sekkotsu-seitai/list/reg_942/cat_120200/",
+     "https://karadarefre.jp/Search2/_find/genre:15/pref:39/area2:126447/",
+     "https://www.judo-ch.jp/sekkotsuinsrch/34/recommend/",
+     "http://www.hiroju.jp/kensaku2/"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 料金 相場": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://kagetsusekkotsuin.com/price",
+     "https://tuda-seikotuin.com/price",
+     "https://www.shinkoiwa-cs.com/about/price/",
+     "https://www.asagaya-cs.com/about/price/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zenkoku-iryo.com/column/insurance/osteopathic-clinic-pricing",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://gejqy.crayonsite.info/p/2/",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://kamiitakitaguchi.com/seikotsuinnnoerabikata",
+     "https://kamiitakitaguchi.com/seikotsuinnnoerabikata",
+     "https://natural-seikotsuin.jp/blog/3770"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehasaku.net/magazine/clinic/price-quotes/",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://gyms.jp/lp/articles/seitai-seikotsu-in-hiyou",
+     "https://miyazawa-seikotsuin.com/seikotsuin-jihiryoukin-souba",
+     "https://honda-seikotsu.com/ryoukin/",
+     "https://gyms.jp/lp/articles/seitai-sekkotsu-in-ryokin",
+     "https://chunichi-sekkotsu.com/column/bdbabaec-ab3b-4a68-ad92-3453c5cc56ca",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://tanushimaru-seikotuin.com/how-much-is-the-market-price-for-treatment-at-the-osteopathic-clinic/",
+     "https://www.aiwairyo.com/seo/20240508.html",
+     "https://natural-seikotsuin.jp/blog/3770",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://chunichi-sekkotsu.com/column/bde37053-a45c-4bc6-bded-6f3af6828850",
+     "https://dream-sekkotsuin.com/2023/02/27/yotsu-price/",
+     "https://thankyou-recruit.com/knowledge/1902-2/"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 保険 使える 範囲": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/index.html",
+     "https://www.denkikenpo.or.jp/contents/boneset/boneset.html",
+     "https://www.daifuku-kenpo.or.jp/consultation/osteopathic.php",
+     "https://olc-kenpo.or.jp/injury/orthopedic.html",
+     "https://www.city.isesaki.lg.jp/soshiki/kensui/kokumin/kyuuhu/2373.html",
+     "https://www.morinaga-kenpo.or.jp/contents/boneset/boneset.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmp1arp65b6'"
+   }
+  },
+  "接骨院 初診料 いくら": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hyogojusei.or.jp/faq/",
+     "https://tsurumaru-sekkotsuin.com/first/",
+     "https://kouseikyoku.mhlw.go.jp/shikoku/000486885.pdf",
+     "https://karada-itami.com/ryokin",
+     "https://www.4211.jp/fee/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://thankyou-recruit.com/knowledge/1902-2/",
+     "https://www.healthlab.jp/archives/1694",
+     "https://jba-kyoukai.or.jp/blog/2517/",
+     "https://ichinazaka-seikotsuin-harikyu.com/column/detail/20260824141031/",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://natural-seikotsuin.jp/blog/3770",
+     "https://gejqy.crayonsite.info/p/2/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpijr7w_e4'"
+   }
+  },
+  "整骨院 自費 保険 違い": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/index.html",
+     "https://www.zenjukyo.gr.jp/hoken_jihi_heiyou_cautions/",
+     "https://www.smile-39.com/blog/knowledge/20210901005k/",
+     "https://www.morinaga-kenpo.or.jp/contents/boneset/boneset.html",
+     "https://www.jrc-kenpo.com/contents/boneset/boneset.html",
+     "https://www.denkikenpo.or.jp/contents/boneset/boneset.html",
+     "https://www.omron-kenpo.org/osteopathic/index.html",
+     "https://www.mhlw.go.jp/stf/shingi/2r9852000002mlhl.html"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 健康保険 使い方": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/shibu/kagoshima/public_relations/014/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpv100mch1'"
+   }
+  },
+  "接骨院 1回 料金 目安": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://kagetsusekkotsuin.com/price",
+     "https://o-izumi.org/price/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://thankyou-recruit.com/knowledge/1902-2/",
+     "https://zenkoku-iryo.com/column/insurance/osteopathic-clinic-pricing",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://www.iruka.co.jp/price/",
+     "http://www.splabo.jp/%E6%96%99%E9%87%91%E8%A1%A8-2/",
+     "https://thankyou-recruit.com/knowledge/1902-2/",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://natural-seikotsuin.jp/blog/3770",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://kamiitakitaguchi.com/seikotsuinnnoerabikata",
+     "https://fujisawaseitai.com/blog/chiropractic-cost-market-price/",
+     "https://amethyst.co.jp/culina_blog/price-comparison/",
+     "https://natural-seikotsuin.jp/blog/3770"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehasaku.net/magazine/clinic/price-quotes/",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://heartseikotsuin.com/course/",
+     "https://horikei-group.com/blog/2301/",
+     "http://towa-sekishiro.com/price/",
+     "https://chunichi-sekkotsu.com/column/fa1ed1f5-2d7b-44d2-8ad7-4aaf29c50bf9",
+     "https://honda-seikotsu.com/ryoukin/",
+     "https://gyms.jp/lp/articles/seitai-sekkotsu-in-ryokin",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://www.aiwairyo.com/seo/20240508.html",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://gyms.jp/lp/articles/seitai-seikotsu-in-hiyou",
+     "https://chunichi-sekkotsu.com/column/bde37053-a45c-4bc6-bded-6f3af6828850"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 通院 費用 月額": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://rehappy.co.jp/price/",
+     "https://kou-seikotuin.com/price",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://seikotsuin-sapiens.com/archives/6078",
+     "https://zenkoku-iryo.com/column/insurance/osteopathic-clinic-pricing"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehasaku.net/magazine/clinic/go-regularly/",
+     "https://rehasaku.net/magazine/clinic/price-quotes/",
+     "https://www.judo-ch.jp/seitaisrch/useful/22906_seitai_006/",
+     "https://ten0524.jp/column/42de77f4-bc28-4173-b4bd-53397a83b6ca",
+     "https://gyms.jp/lp/articles/seitai-seikotsu-in-hiyou",
+     "https://gyms.jp/lp/articles/seitai-sekkotsu-in-ryokin",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://therapistplanet.co.jp/column/osteopathic-clinic-fees/",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://horikei-group.com/blog/2301/",
+     "https://www.seikotsuin-kobayashi.com/hajimete-2/price/",
+     "https://honda-seikotsu.com/ryoukin/",
+     "https://honegori-group.com/price/",
+     "https://www.iruka.co.jp/price/"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 保険証 持ち物": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kyoukaikenpo.or.jp/lp/mynahokensho/",
+     "https://ayano-camus.com/first-visit-guide/",
+     "https://www.mugen-ss-group.com/start",
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpnjssg7u9'"
+   }
+  },
+  "接骨院 保険適用 ならない 場合": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/~/media/Files/tokyo/kouhou/2019noukoku/R0506.pdf",
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jrc-kenpo.com/contents/boneset/boneset.html",
+     "https://aira-seitai.com/blog/health-insurance-coverage/",
+     "https://athrun.co.jp/2023/03/28/%E6%95%B4%E9%AA%A8%E9%99%A2%E3%83%BB%E6%8E%A5%E9%AA%A8%E9%99%A2%E3%81%AB%E3%81%8B%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%89%E3%80%81%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%BA%E3%81%AE%E5%AF%BE%E8%B1%A1%E3%81%A8/",
+     "https://www.sckenpo.or.jp/consultation/osteopathic.php",
+     "https://www.morinaga-kenpo.or.jp/contents/boneset/boneset.html",
+     "https://www.denkikenpo.or.jp/contents/boneset/boneset.html",
+     "https://kartie-cloud.jp/media/022/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpt64pm0yg'"
+   }
+  },
+  "整骨院 回数券 料金": {
+   "group": "費用・保険",
+   "ChatGPT": {
+    "urls": [
+     "https://www.akatsuki-seikotsuin.net/price",
+     "https://zenin-seikotsuin.com/price",
+     "https://nagareboshi-seikotsu.com/free/chiryouhi",
+     "https://www.iruka.co.jp/price/",
+     "https://makino-sekkotsu.com/price",
+     "https://asahide-seikotsuin.com/fee"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gyms.jp/lp/articles/seitai-in-ryokin",
+     "https://sekkotsukaigyo.musashinomedical.com/?p=5374",
+     "https://www.iruka.co.jp/price/",
+     "https://thankyou-recruit.com/knowledge/1909-2/",
+     "https://kabushikigaisya-rigakubody.co.jp/seitai/blog/manipulative-coupon/",
+     "http://www.splabo.jp/%E6%96%99%E9%87%91%E8%A1%A8-2/",
+     "https://kuruin.com/couponticket_thought/",
+     "https://www.city.kawanishi.hyogo.jp/kurashi/shouhi_soudan/syohiseikatsu/1002380/1018185.html",
+     "https://www.city.kawasaki.jp/280/page/0000130164.html",
+     "https://amethyst.co.jp/culina_blog/price-comparison/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12310110027",
+     "https://kobe-consumer.smartkobe-portal.com/consultation/consultation-72/",
+     "https://www.city.kobe.lg.jp/a07153/kurashi/lifestyle/soudan/kaisuuken.html",
+     "https://joypal.jp/osteopathic-hospital-coupons/",
+     "https://legal.coconala.com/bbses/73016",
+     "https://joint-lab.jp/decline-coupon-ticket/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://leadership-consul.com/coupon",
+     "https://pr.onemorehand.jp/column/673701b4b560e3b86ee88d9c",
+     "https://aobadai-seikotsu.net/symptoms/post-2448/",
+     "https://honegori-group.com/price/",
+     "https://s-kizuna.info/fee/",
+     "https://www.iruka.co.jp/price/",
+     "https://yotsume-st.com/%E5%85%B1%E9%80%9A%E5%9B%9E%E6%95%B0%E5%88%B8/",
+     "https://www.aiwairyo.com/seo/20240319.html",
+     "https://joint-lab.jp/decline-coupon-ticket/"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 選び方 ポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2013_05.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmp507h769v'"
+   }
+  },
+  "接骨院 整体 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.minato.tokyo.jp/kyufu/kurashi/hoken/kenkohoken/k-kyufu/zyuusei.html",
+     "https://www.pref.osaka.lg.jp/o100020/iryo/sezyutusyo/sejyutu.html",
+     "https://www.mhlw.go.jp/stf/shingi/2r9852000002lamn-att/2r9852000002latt.pdf",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmplz_f4c42'"
+   }
+  },
+  "整骨院 良い先生 見分け方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://ahaki-juusei.mhlw.go.jp/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.joa.or.jp/public/sick/condition/lumbago.html",
+     "https://www.city.itoshima.lg.jp/consumer/010/050401/20230403110250.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://plusseikotsuin.com/seikotsuin-basic/8778.html",
+     "https://www.seikotsuin-kobayashi.com/column/%E5%9B%9B%E5%8D%81%E8%82%A9%E4%BA%94%E5%8D%81%E8%82%A9/how_osteopathic_clinic_choose/",
+     "https://rehasaku.net/magazine/clinic/how-to-distinguish/",
+     "https://tsukuroi-seitai.com/ii-sennsei-miwakekata/",
+     "https://oukadou.com/talking-to-oneself/good-healthcare-professionals/",
+     "https://ryoushin-seikotsu.com/yoisennseiwomiwakeruhouhou",
+     "https://www.aoinewton.com/news/good-therapist/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13270601703",
+     "https://rehasaku.net/magazine/clinic/how-to-distinguish/",
+     "https://plusseikotsuin.com/seikotsuin-basic/8778.html",
+     "https://curepro.jp/owned/seikotsuin-shinyou-dekinai/",
+     "https://www.aiwairyo.com/seo/20240520.html",
+     "https://www.aiwairyo.com/seo/20240501.html",
+     "https://www.judo-ch.jp/sekkotu_blog/0000-001/0155/",
+     "https://www.judo-ch.jp/sekkotsuin/point.shtml",
+     "https://curepro.jp/owned/honto-ni-ii-seitai/",
+     "https://takayama-seikotsuin.jp/health-tips/detail/20250906/",
+     "https://thankyou-recruit.com/knowledge/1906-2/",
+     "https://myuseikotsu.com/kubi/kubikori/clinic-selection-points/"
+    ],
+    "error": ""
+   }
+  },
+  "接骨院 初めて 何を聞かれる": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://ooishi-sekkotsuin.jp/first",
+     "https://genda-komatsu.com/first",
+     "https://www.yua-seikotsuin.com/2026/07/16/2245/",
+     "https://kuyakusyomae-as.com/blog/1327/",
+     "https://www.zenjukyo.gr.jp/monshin-checklist/",
+     "https://yebisu-sekkotsuin.jp/first-visit"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kusunoki-labo.com/news/%E6%8E%A5%E9%AA%A8%E9%99%A2%E3%83%BB%E6%95%B4%E4%BD%93%E9%99%A2%E3%81%AB%E5%88%9D%E3%82%81%E3%81%A6%E8%A1%8C%E3%81%8F%E3%81%A8%E3%81%8D%E3%81%AE%E6%B5%81%E3%82%8C%E3%81%A8%E6%BA%96%E5%82%99%E3%81%97/",
+     "https://mukai-nakamozu.com/post-5006/",
+     "https://rehasaku.net/media/receipt/4013/",
+     "https://www.zenjukyo.gr.jp/monshin-checklist/",
+     "http://hokazono-sinkyu-seikotuin.com/blog/post-1144"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehasaku.net/media/receipt/4013/",
+     "https://youtsu-pro.jp/clinic-guide/sekkotuin-hajimete/",
+     "https://nishikame-sansan.jp/column/3e3f82e6-92b5-49c5-bc20-ff8acc30062c",
+     "https://www.judo-ch.jp/sekkotsuin/sejutsu.shtml",
+     "https://poponoki.jp/healthblog/%E5%88%9D%E8%A8%BA%E3%81%A7%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%B3%AA%E5%95%8F%E3%81%BE%E3%81%A8%E3%82%81%EF%BD%9C%E6%96%99%E9%87%91%E3%83%BB%E4%BA%88%E7%B4%84%E3%83%BB%E6%8C%81%E3%81%A1%E7%89%A9/",
+     "https://www.aobaseikotuin.website/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E6%96%B9%E3%81%B8/%E6%96%BD%E8%A1%93%E3%81%AE%E6%B5%81%E3%82%8C/"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 柔道整復師 資格 確認": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/web/t_doc?dataId=80148000&dataType=0&pageNo=1",
+     "https://www.hokeniryo.metro.tokyo.lg.jp/iryo/shikaku/anmamassa-jisiatuharikyuujyuudou",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tb9868&dataType=1&pageNo=1",
+     "https://licenseif.mhlw.go.jp/search_isei/index.jsp"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://licenseif.mhlw.go.jp/search_iyaku/top.jsp",
+     "https://www.mhlw.go.jp/wp/seisaku/hyouka/dl/r01_jizenbunseki/zentai.pdf",
+     "https://www.zaijusei.com/introduction_2_toroku.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEO3dTU47S_F232d2Ih8JEJ6QPiqQg30qVzAjuF9c6lJama9NBbrfp1yt57t-NB69M3ZgEs1oGZgoWLn9BQhDAbqMrmCtSJAKxlIAhyukxI-g_RzqIT_lEBzgCOy0i1629QUjcs5VKlt4sRhHHzcQA=",
+     "https://www.zenjukyo.gr.jp/licence/",
+     "https://www.youtube.com/watch?v=5lQBS23mv84",
+     "https://www.artra-store.com/default/index/information/id/612/",
+     "https://www.osaka-jyusei.or.jp/news/for_member/2025/post_15296/",
+     "https://www.osaka-jyusei.or.jp/news/for_member/2025/post_15296/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpvbhwk2lh'"
+   }
+  },
+  "整骨院 通うべき 頻度": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://uedashi-seikotsuin.jp/blog/clinic-frequency-quitting/",
+     "https://www.kyoukaikenpo.or.jp/shibu/kagoshima/public_relations/014/",
+     "https://www.joa.or.jp/public/sick/condition/lumbago.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpwq8ugxwi'"
+   }
+  },
+  "接骨院 悪質 見分け方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/~/media/Files/chiba/migration/cat060/20120306-161453.pdf",
+     "https://www.kyoukaikenpo.or.jp/shibu/kagoshima/public_relations/014/",
+     "https://www.kokusen.go.jp/pdf/n-20200318_2.pdf",
+     "https://www.faq.kokusen.go.jp/category/show/110?site_domain=default"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://curepro.jp/owned/seikotsuin-shinyou-dekinai/",
+     "https://note.com/jazzy_coyote2487/n/n5ce699434ae8",
+     "https://www.m-sports.biz/blog/2018/12/post-51-655148.html",
+     "https://joypal.jp/osteopathic-hospital-coupons/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12310110027"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://fujifilm-kenpo.or.jp/tetsuzuki/index_byoukikega/juudouseifukushi/",
+     "https://www.tosyoku.org/jusei_seikyu/",
+     "https://curepro.jp/owned/seikotsuin-shinyou-dekinai/",
+     "https://www.aiwairyo.com/seo/20240520.html",
+     "https://www.aiwairyo.com/seo/20240501.html",
+     "https://www.omron-kenpo.org/osteopathic/index.html",
+     "https://www.tokyo-np.co.jp/article/298617"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 病院 どちらがいい": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joa.or.jp/public/sick/condition/lumbago.html",
+     "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/kokuho/iryo/jyudoseifuku.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=80148000&dataType=0&pageNo=1",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://fukuoka-seikotsuin.com/contents/hp-seikotsu-chigai/",
+     "https://gotokuji-seikeigeka.com/orthopedics-vs-osteopathy/5752/",
+     "https://nagisa-ortho.jp/blog/post-217/",
+     "https://shin-kokura.kkr.or.jp/information/column/20251128-01.html",
+     "https://seikei-tsujimoto-clinic.com/orthopedic-vs-seitai/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://shin-kokura.kkr.or.jp/information/column/20251128-01.html",
+     "https://nagisa-ortho.jp/blog/post-217/",
+     "http://hanamizuki-yukigaya.jp/16732427373444",
+     "https://minowasekkotsuin.com/column/20260406/",
+     "https://numaguchi--clinic.com/plasticsurgery_difference/",
+     "https://dai-seikei.com/topics/2024/04/30/what-is-the-difference-between-orthopedics-and-osteopathic-clinic/",
+     "https://tenroku-orthop.com/column/3139/",
+     "https://www.yamakawa-clinic-09.com/column/%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%81%A8%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://soga.mm-k.net/%E2%96%A0%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%81%A8%E6%8E%A5%E9%AA%A8%E9%99%A2%EF%BC%88%E6%95%B4%E9%AA%A8%E9%99%A2%EF%BC%89%E3%81%AE%E9%81%95%E3%81%84",
+     "https://gotokuji-seikeigeka.com/orthopedics-vs-osteopathy/5752/",
+     "https://takedaclinic.jp/2024/07/20/difference-between-orthopedics-and-osteopathic-clinic/",
+     "https://spr-cl.jp/%E6%95%B4%E4%BD%93%E3%83%BB%E6%8E%A5%E9%AA%A8%E9%99%A2%E3%81%AB%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%81%AE%E9%81%95%E3%81%84%E3%81%A8%E3%81%AF%EF%BC%9F",
+     "https://www.iwata-seikeiriumati.com/menu/bone-setter.html",
+     "https://kurumeseikotuin.com/home/difference/"
+    ],
+    "error": ""
+   }
+  },
+  "整骨院 口コミ 信頼できる": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://miura-seikotsuin.jp/archives/1775",
+     "https://zenkoku-iryo.com/column/knowledge/advertising_regulations",
+     "https://kitanoda-seikotsu.com/post-5821/",
+     "https://kumanomi-seikotu.com/blog/2042/",
+     "https://fujisawaseitai.com/case-blog/%E8%89%AF%E3%81%84%E6%95%B4%E4%BD%93%E9%99%A2%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E3%81%A8%E3%81%AF%EF%BC%9F%E3%80%90%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E6%96%B9%E3%81%A7%E3%82%82%E8%A6%8B%E5%88%86/",
+     "https://sakai-sekkotsu.com/archives/822",
+     "https://plusseikotsuin.com/seikotsuin-basic/8778.html",
+     "https://note.com/fun_staff/n/n438b25d784ca",
+     "https://butsuryokiki.jp/blog/blog-2277/",
+     "https://compliance-ad.jp/against/2023/%E9%A1%A7%E5%AE%A2%E3%81%AB%E3%82%88%E3%82%8B%E8%87%AA%E4%B8%BB%E7%9A%84%E3%81%AA%E6%8A%95%E7%A8%BF%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84%E3%80%8C%E5%8F%A3%E3%82%B3%E3%83%9F%E3%80%8D%E8%A9%95%E4%BE%A1/",
+     "https://rehasaku.net/magazine/clinic/how-to-distinguish/",
+     "https://yagihari.com/%E9%99%A2%E9%95%B7%E3%81%8B%E3%82%89/",
+     "https://kurumeseikotuin.com/home/discern/",
+     "https://comista-kuchikomi.com/column/seikotsuin-review-marketing"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpp3pbfq06'"
+   }
+  },
+  "接骨院 施術 流れ 初回": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://hongosekkotsuin.com/flow/",
+     "https://urayasu-as.com/blog/1224/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kusunoki-labo.com/news/%E6%8E%A5%E9%AA%A8%E9%99%A2%E3%83%BB%E6%95%B4%E4%BD%93%E9%99%A2%E3%81%AB%E5%88%9D%E3%82%81%E3%81%A6%E8%A1%8C%E3%81%8F%E3%81%A8%E3%81%8D%E3%81%AE%E6%B5%81%E3%82%8C%E3%81%A8%E6%BA%96%E5%82%99%E3%81%97/",
+     "https://mukai-nakamozu.com/post-5006/",
+     "https://youroad-kb.com/blog/2400/",
+     "https://shinkemigawa.chiryouin.biz/about/%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AE%E5%88%9D%E5%9B%9E%E4%BD%93%E9%A8%93%E3%81%A3%E3%81%A6%E3%81%A9%E3%82%93%E3%81%AA%E3%81%93%E3%81%A8%E3%82%92%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%82%8B%E3%81%AE.html",
+     "https://hattori-kyosei.jp/first/flow/",
+     "https://asunaro.tokyo/flow/",
+     "https://www.hinata-chiryoin.jp/blog-post/409614",
+     "https://natural-seikotsuin.jp/blog/3772"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmph7y61mj9'"
+   }
+  },
+  "肩こり 整骨院 通院 費用": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.shirasutokyo.com/price",
+     "https://www.tsukamoto-seikotsu.jp/cont11/main.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://horikei-group.com/blog/2301/",
+     "https://gyms.jp/lp/articles/seitai-seikotsu-in-hiyou",
+     "https://veleta-seikotsuin.com/blog_detail?actual_object_id=306",
+     "https://suzuran-758.com/insurance/",
+     "https://kinmaq.com/media/about-seitai/chiropractic-fee-market-price/",
+     "https://www.ai-medical.co.jp/store/menu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpey6j3qc0'"
+   }
+  },
+  "腰痛 整骨院 効果 回数": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nice.org.uk/guidance/NG59/chapter/recommendations",
+     "https://www.nhs.uk/conditions/back-pain/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kawachinagano-seikotsu.com/post-4241/",
+     "https://kumanomi-seikotu.com/blog/2030/",
+     "https://smile-shinkyu.com/2024/09/27/%E6%95%B4%E4%BD%93%E3%81%A7%E8%85%B0%E7%97%9B%E6%94%B9%E5%96%84%EF%BC%81%E6%96%BD%E8%A1%93%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%82%92%E9%AB%98%E3%82%81%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E9%80%9A%E9%99%A2/",
+     "https://mukai-nakamozu.com/post-5107/",
+     "https://miyazakieki-seitai.jp/blog/clinic-frequency-quitting/",
+     "https://miyazakieki-seitai.jp/blog/clinic-frequency-quitting/",
+     "https://yushin-seikotsuin.net/column/osteopathic-clinic-frequency/",
+     "https://hinataseitai.com/post-9367/",
+     "https://www.aandk-t-s.com/column/frequencyofvisits",
+     "https://fujisawa.seitai-ain.com/%E6%95%B4%E4%BD%93%E3%81%AB%E9%80%9A%E3%81%86%E9%A0%BB%E5%BA%A6%E3%81%A8%E3%81%AF/",
+     "https://ind.ohisama-seitai.jp/blog/7302/",
+     "https://hirakawa-g.jp/blog/orthopedic-clinic/frequency-stiff-shoulders-lumbago/",
+     "https://www.min-na-no-seikotsuin.com/post-4328/",
+     "https://www.mcsg.co.jp/kentatsu/disability/42609"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmp5zehqk_y'"
+   }
+  },
+  "ぎっくり腰 接骨院 すぐ行く": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joa.or.jp/public/sick/condition/acute_low_back.html",
+     "https://www.joa.or.jp/public/sick/condition/lumbago.html",
+     "https://www.nhs.uk/conditions/back-pain/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://fdoc.jp/byouki-scope/features/strainedback-clinic/",
+     "https://rehasaku.net/magazine/clinic/lumbago-placetogo/",
+     "https://www.sakuma-ebisu.jp/1024/",
+     "https://joint-lab.jp/lower-back-pain-selection/",
+     "https://www.kotoni-seikotsuin.com/column/1243",
+     "https://www.krm0730.net/blog/2432/",
+     "https://thankyou-recruit.com/knowledge/1919-2/",
+     "https://siseisapo.com/tight-waist-osteopathy/",
+     "https://yasuda-seikotsu.com/tight-waist-osteopath/",
+     "https://hosoki-seikotsuin.jp/blog/5311/",
+     "https://sendai-seitai.jp/blog/detail/20241217161112/",
+     "https://kiyoshigaoka-seikotsu.jp/strained/",
+     "https://nagatsuta-aobasekkotsuin.com/media/20250709-2586/",
+     "https://sukagawa-irodori-sekkotsuin.com/blog/5489/",
+     "https://www.yuasa-seikotsu.com/insurance",
+     "https://kumanomi-seikotu.com/blog/4572/",
+     "https://fuwari.online/symptoms/back_pain/post-732",
+     "https://www.kou-sekkotsu.com/blog/voice/koshi/%E6%8E%A5%E9%AA%A8%E9%99%A2%E3%81%A7%E3%81%AE%E8%85%B0%E7%97%9B%E6%B2%BB%E7%99%82%E3%80%81%E4%BF%9D%E9%99%BA%E3%81%AF%E4%BD%BF%E3%81%88%E3%82%8B%EF%BC%9F%E9%81%A9%E7%94%A8%E6%9D%A1%E4%BB%B6%E3%81%A8/"
+    ],
+    "error": ""
+   }
+  },
+  "寝違え 整骨院 保険 使える": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://nishikame-sansan.jp/column/5d7216d0-2973-4fd5-b7a5-5865f8f9138b",
+     "https://seikotsuin-gen.com/?p=15509",
+     "https://www.yagi-hanamaki.com/insurance/",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-insurance-coverage/",
+     "https://nishikame-sansan.jp/column/5d7216d0-2973-4fd5-b7a5-5865f8f9138b",
+     "https://aiai0363-next.co.jp/blog/post-3015/",
+     "https://machida-kanade.com/symptoms/post-2142/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmp3kjlsybm'"
+   }
+  },
+  "肩こり 慢性 整骨院 選び方": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joa.or.jp/public/sick/condition/stiffed_neck.html",
+     "https://shigoto.mhlw.go.jp/User/Occupation/Detail/173",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.faq.kokusen.go.jp/faq/show/482?site_domain=default",
+     "https://www.joa.or.jp/public/sick/condition/cervical_radiculopathy.html",
+     "https://www.joa.or.jp/public/sick/condition/frozen_shoulder.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://joint-lab.jp/seikotsu-seitai/",
+     "https://kawachinagano-seikotsu.com/post-4392/",
+     "https://zero-kitami.com/blog/2204/",
+     "https://www.marinote.com/20260818/",
+     "https://seikei-tsujimoto-clinic.com/orthopedic-vs-seitai/",
+     "https://yoyogiuehara-shinkyu.com/blog/differences-between-acupuncture-clinics-chiropractic-clinics-and-orthopedic-clinics/",
+     "https://horikei-group.com/blog/2276/",
+     "https://kabushikigaisya-rigakubody.co.jp/seitai/blog/stiff-shoulders-chiropractic-massage/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmp5x449pii'"
+   }
+  },
+  "腰痛 整骨院 整形外科 どっち": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joa.or.jp/public/sick/condition/lumbago.html",
+     "https://www.shadan-nissei.or.jp/kakarikata/how-to-use/judoseifukushi/",
+     "https://www.mhlw.go.jp/content/12400000/001567496.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpde5k3wxl'"
+   }
+  },
+  "捻挫 接骨院 治るまで 期間": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://saiwa.or.jp/higashiojima/足関節捻挫/",
+     "https://www.wakamatsu-sportsmed.com/blank-27",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.seikotsuin-kobayashi.com/column/%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E6%B4%BB%E6%B3%95/sprain_period_healing/",
+     "https://www.yamashita-seikei-rehabilitation.jp/sprain-ligament/",
+     "https://usearth.co.jp/case/case-24/",
+     "https://honegori-group.com/detailed-menu/ankle-sprai/",
+     "https://www.wftakasu.com/news/1234/",
+     "https://www.kawakamisekkotuin.com/menu/aftereffects/",
+     "https://www.2choseko.com/2020/12/14/3346/",
+     "http://seino-1987.jp/blog/seikotsu/1512.html",
+     "https://yamamotoseikotsu.co.jp/practice_nenza.php",
+     "https://shinkyuism.jp/nenza/",
+     "https://hakusan-nanohana-bs.com/asinonenza",
+     "https://hakusan-nanohana-bs.com/asinonenza",
+     "https://usearth.co.jp/case/case-24/",
+     "https://clinic.adachikeiyu.com/6958"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmprb9op8bk'"
+   }
+  },
+  "五十肩 整骨院 費用": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kiyota-group.com/menu/jihi/",
+     "https://iwaya-fbd.com/lp/page-1549/",
+     "https://www.mhlw.go.jp/content/12400000/001568891.pdf",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://katano-takumi.com/frozen-shoulder/insurance-coverage/",
+     "https://therapistplanet.co.jp/column/seikotsuin-insurance-coverage-shoulder-stiffness/",
+     "https://med-ark.com/symptomscat/post-2164/",
+     "https://suzuran-758.com/insurance/",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://veleta-seikotsuin.com/blog_detail?actual_object_id=306",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://musashikosugi-seikotsuin.com/contents/kata-2/",
+     "https://selfcareseitai.com/blog/frozen-shoulder-injection-cost/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehasaku.net/magazine/clinic/price-quotes/",
+     "https://therapistplanet.co.jp/column/osteopathic-clinic-shoulder-stiffness-fees/",
+     "https://www.himawari-seikotsuharikyu.com/3377/",
+     "https://www.seikotsuin-kobayashi.com/column/%E5%9B%9B%E5%8D%81%E8%82%A9%E4%BA%94%E5%8D%81%E8%82%A9/%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AE%E5%9B%9B%E5%8D%81%E8%82%A9-%E4%BA%94%E5%8D%81%E8%82%A9%E3%81%AE%E6%B2%BB%E7%99%82%E3%81%A8%E3%81%AF%EF%BC%9F%E5%8A%B9%E6%9E%9C%E3%82%84%E4%BF%9D%E9%99%BA%E9%81%A9/",
+     "https://katano-takumi.com/frozen-shoulder/insurance-coverage/",
+     "https://xn--p8j2a2f6cm1142fhu9cbfh.com/kenkoblog/%E4%BA%94%E5%8D%81%E8%82%A9%E3%81%AF%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%BA%E9%81%A9%E7%94%A8%E5%86%85%EF%BC%9F%E9%81%A9%E7%94%A8%E5%A4%96%EF%BC%9F/",
+     "https://run-hari.com/50kata.html",
+     "https://sugawaraseikotu.com/katabu/shijuukatagojuukata/",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://www.seikotsuin-kobayashi.com/hajimete-2/price/",
+     "https://gyms.jp/lp/articles/seitai-seikotsu-in-hiyou",
+     "https://yushin-seikotsuin.net/column/how-much-does-a-bone-setting-clinic-cost/",
+     "https://www.taichisinkyuseikotsuin.com/%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AE%E6%96%99%E9%87%91%E3%81%AF%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F/",
+     "https://tanushimaru-seikotuin.com/how-much-is-the-market-price-for-treatment-at-the-osteopathic-clinic/"
+    ],
+    "error": ""
+   }
+  },
+  "坐骨神経痛 整骨院 選び方": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joa.or.jp/public/pdf/joa_029.pdf",
+     "https://shigoto.mhlw.go.jp/User/Occupation/Detail/173",
+     "https://www.joa.or.jp/public/sick/condition/lumbago.html",
+     "https://www.nice.org.uk/guidance/NG59/chapter/recommendations",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.nhs.uk/conditions/sciatica/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://yorokobi358.com/blog/%E5%9D%90%E9%AA%A8%E7%A5%9E%E7%B5%8C%E7%97%9B%E3%81%AF%E7%97%85%E9%99%A2%E3%81%A8%E6%95%B4%E4%BD%93%E3%81%A9%E3%81%A3%E3%81%A1%E3%81%AB%E8%A1%8C%E3%81%8F%E3%81%B9%E3%81%8D%EF%BC%9F%E3%81%9D%E3%82%8C",
+     "https://minowasekkotsuin.com/column/20251024/",
+     "https://zero-ishikawadai.com/blog/1479/",
+     "https://www.sato-sekkotsuin.jp/sciatica-which-department/",
+     "https://leaf-kawasaki-arima.com/blog/1771/",
+     "https://www.futaba2005.co.jp/10878/",
+     "https://www.yosi-sisei-sports.com/post/zakotu-dokoheiku-344",
+     "https://aobadai-seikotsu.net/symptoms/post-2319/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpmp556wx4'"
+   }
+  },
+  "猫背 骨盤矯正 整骨院 料金": {
+   "group": "肩こり・腰痛などの悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://kushihikiseikotuin.jp/hajimete/",
+     "https://urawa-musashi.com/service/",
+     "https://saginomiyaseikotu.com/medical_information/price/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gyms.jp/lp/articles/seitai-seikotsu-in-hiyou",
+     "https://helloprimy.com/news/detail/20250124111942/",
+     "https://kinmaq.com/media/back-pelvis/hunchback-correction-chiropractic-price/",
+     "https://amethyst.co.jp/culina_blog/kotsuban_nedan/",
+     "https://www.seikotsuin-kobayashi.com/column/recommend/osteopathic-clinic-expensive/",
+     "https://kumanomi-seikotu.com/blog/6721/",
+     "https://www.iruka.co.jp/price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://miracu.net/diary/202112/2742/",
+     "https://plusseikotsuin.com/nekozekyosei/6001.html",
+     "https://www.higashinakano-wellness.net/blog/81538.html",
+     "https://kumanomi-seikotu.com/blog/6721/",
+     "https://www.judo-ch.jp/seitaisrch/useful/22906_seitai_006/",
+     "https://www.foryou-sisei.com/pricelist/",
+     "https://more-ropponmatsu.com/cost/",
+     "https://suzuran-758.com/insurance/",
+     "https://www.iruka.co.jp/menu/nekoze-kyosei/",
+     "https://www.momonohana-seikotsu-fukushima.com/menu/",
+     "https://heartseikotsuin.com/course/",
+     "https://gotanno-chuuou.com/nekoze/",
+     "https://beauty.hotpepper.jp/genre/kgkw138/pre13/",
+     "https://beauty.hotpepper.jp/genre/kgkw138/pre27/",
+     "https://beauty.hotpepper.jp/keyword/%E6%95%B4%E4%BD%93%E3%80%80%E9%AA%A8%E7%9B%A4%E7%9F%AF%E6%AD%A3%E3%80%80%E6%96%99%E9%87%91%E3%80%80%E7%9B%B8%E5%A0%B4/"
+    ],
+    "error": ""
+   }
+  },
+  "交通事故 整骨院 費用 自己負担": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.sompo-japan.jp/thekuruma/faq_detail.html?category=301&id=944&menu=300",
+     "https://www.ms-ins.com/pdf/contractor/emergency/car/jibaiseki_seikyu.pdf",
+     "https://www.mlit.go.jp/jidosha/anzen/04relief/jibai/payment.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/accident/index.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.ms-ins.com/personal/songai/guidance/jiko/kenko-hoken.html",
+     "https://www.mlit.go.jp/jidosha/jibaiseki/about/overview/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://taiyo-fukaya.com/blog/traffic-accident-cost-fukaya/",
+     "https://yokoo-seikotsuin.net/blog/1113/",
+     "https://sukagawa-irodori-sekkotsuin.com/blog/4980/",
+     "https://www.avance-lg.com/customer_contents/koutsujiko/seikotsuin/",
+     "https://www.hughesluce.com/isharyou/seikotsuin/",
+     "https://www.daylight-law.jp/accident/qa/qa361/",
+     "https://www.avance-lg.com/customer_contents/koutsujiko/isharyou-8400yen/",
+     "https://honegori-group.com/accident/",
+     "https://hibiki-law.or.jp/jiko/jidan/higaisha/32845/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ageomedicare.jp/blog/detail/20260515111643/",
+     "https://law-bright.com/kotuziko/knowledge/koutsujiko_seikotsuin/",
+     "https://oyama-seikei.gassankai.com/kotsujiko/koutsujiko-jikofutan/",
+     "https://youmeidou-seikotuin.com/2026/07/24/fukuokashiminamikuzyounannkukoutuuzikonosezyutuhiyouhazikofutannzeroenn/",
+     "https://www.ozoralaw.com/trouble/koutsuujiko/koutsuujiko02-02.html",
+     "https://biz.moneyforward.com/establish/basic/83684/",
+     "https://atomfirm.com/media/20589",
+     "https://www.ko2jiko.com/knowledge/kenkou/",
+     "https://linx-law.jp/jiko/qa-article/%E8%87%AA%E8%B3%A0%E8%B2%AC%E4%BF%9D%E9%99%BA120%E4%B8%87%E5%86%85%E8%A8%B3/",
+     "https://www.hughesluce.com/isharyou/seikotsuin/"
+    ],
+    "error": ""
+   }
+  },
+  "交通事故 接骨院 通院 保険": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mlit.go.jp/jidosha/jibaiseki/accident/nopolicyholder/index.html",
+     "https://faq.sompo-japan.jp/thekuruma/faq_detail.html?category=301&id=944&page=10",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/accident/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://muchiuchi.info/contents/isyaryou/",
+     "https://orthopedic.icu/accident-compensation/",
+     "https://www.daylight-law.jp/accident/qa/qa348/",
+     "https://www.hughesluce.com/isharyou/isyaryo_4200/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://atomfirm.com/media/38514",
+     "https://atomfirm.com/chiryo/255",
+     "https://hibiki-law.or.jp/jiko/isharyo/34037/",
+     "https://agoora.co.jp/jiko/knowledge/osteopathicclinic-trafiic-accident.html",
+     "https://www.kokoro-tokyo.com/qanda/koutsujiko/byouin-sekkotsuin-heiyou/",
+     "https://gracesports.jp/injury",
+     "https://law-bright.com/kotuziko/knowledge/koutsujiko_seikotsuin/",
+     "https://koutsujikopro.com/column/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E3%81%AE%E6%B2%BB%E7%99%82%E3%81%AB%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AF%E4%BD%BF%E3%81%88%E3%82%8B%EF%BC%9F%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%81%A8%E4%BD%B5/",
+     "https://karada-seikotu.com/traffic_accident/",
+     "https://medicalconsulting.co.jp/2024/03/07/not-go-to-bonesetter-for-accident/",
+     "https://mikata-ins.co.jp/lab/kotsujiko/042020",
+     "https://www.avance-lg.com/customer_contents/koutsujiko/seikotsuin/",
+     "https://personal-injury.jp/after-effect/posts/3775",
+     "https://clinic.jiko24.jp/jiko-info/treatment/koutsujiko_seikotsuin/",
+     "https://matsumura-legaloffice.jp/blog/2873",
+     "https://ikenaga-tanabe-law.com/column/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E5%BE%8C%E3%81%AE%E6%8E%A5%E9%AA%A8%E9%99%A2%EF%BC%88%E6%95%B4%E9%AA%A8%E9%99%A2%EF%BC%89%E9%80%9A%E9%99%A2%E3%80%81%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E5%BE%85/",
+     "https://www.hughesluce.com/koutsujiko-muchiuchi/seikei-geka/"
+    ],
+    "error": ""
+   }
+  },
+  "むち打ち 整骨院 選び方": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joa.or.jp/public/sick/condition/traumatic_cervical_syndrome.html",
+     "https://www.hokeniryo.metro.tokyo.lg.jp/iryo/shikaku/anmamassa-jisiatuharikyuujyuudou",
+     "https://www.mhlw.go.jp/bunya/iryouhoken/iryouhoken13/dl/171227-01.pdf",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/jyuudou/index.html",
+     "https://www.jstage.jst.go.jp/article/giiij/86/1/86_131/_article/-char/ja"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpdou9v595'"
+   }
+  },
+  "交通事故 整骨院 病院 併用": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mlit.go.jp/notice/noticedata/pdf/20230620/039_20230612__hosyou19.pdf",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=80148000&dataType=0&pageNo=1",
+     "https://www.kyoukaikenpo.or.jp/shibu/kyoto/assets/R7.6.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.daylight-law.jp/accident/qa/qa348/",
+     "https://atomfirm.com/media/38514",
+     "https://jiko.home-one.jp/isharyou/seikotsuin",
+     "https://agoora.co.jp/jiko/knowledge/osteopathicclinic-trafiic-accident.html",
+     "https://www.koutsujiko.jp/columns/5604/",
+     "https://hibiki-law.or.jp/jiko/isharyo/34037/",
+     "https://law-bright.com/kotuziko/knowledge/koutsujiko_seikotsuin/",
+     "https://www.ko2jiko.com/columns/columns-96/",
+     "https://www.p-keiwa.com/2859/",
+     "https://treatment.shizuoka.jp/heiin-seikei",
+     "https://clinic.jiko24.jp/jiko-info/procedure/orthopedics-to-osteopathics-letter/",
+     "https://shinagawa-oimachi-seikei.clinic/blog/accident-ortho-combined/",
+     "https://www.wisteria-g.com/blog/sekkotsu_seikei_douji/",
+     "https://kagetsusekkotsuin.com/information/8180",
+     "https://nishiogu-ra.clinic/blog/?p=346",
+     "https://kumanomi-seikotu.com/blog/6303/"
+    ],
+    "error": ""
+   }
+  },
+  "交通事故 接骨院 慰謝料 通院頻度": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://www.daylight-law.jp/accident/qa/qa348/",
+     "https://www.giroj.or.jp/cali_survey/standard.pdf",
+     "https://www.yokohama-jiko.jp/accident/consolation/lawyers.html",
+     "https://www.daylight-law.jp/accident/qa/qa466/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ippo-seikotsu.com/3027/",
+     "https://lawyers-high.jp/traffic-accident/1169/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEutWRUzu8NIZcVG1ZDWBxIwC_KBbh1DLrirrqsY3D4cRwgoH17EFcYKYniMqRSKoRlWOpL-5ZcMMxndiZRaROsS8M80ub_dA8DxuwQZy5tzTxfzAvjYz_FInmA8N2Tbb6RI_et2DgU2TFMgwQ5RJWolRy1ojToYzUls9Gj42B0Ekrw",
+     "https://medicalconsulting.co.jp/2023/04/07/frequency-of-osteopathic-visits/",
+     "https://kannouseikotuin.com/blog/accident-insurance-compensation-days/",
+     "https://kojima-sekkotsu.com/blog/3151/",
+     "https://hikari-maebashi.com/1915/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://atomfirm.com/media/29666",
+     "https://www.avance-lg.com/customer_contents/koutsujiko/isharyou-tuuindays/",
+     "https://www.daylight-law.jp/accident/qa/qa348/",
+     "https://hibiki-law.or.jp/jiko/isharyo/34037/",
+     "https://law-bright.com/kotuziko/knowledge/koutsujiko_seikotsuin/",
+     "https://yokohama-alg.com/traffic_accident/column_isyaryou/isharyo-seikotsuin/",
+     "https://muchiuchi.info/contents/isyaryou/",
+     "https://www.hughesluce.com/isharyou/seikotsuin/",
+     "https://jico-pro.com/columns/315/",
+     "https://vs-group.jp/lawyer/ko-tu-jiko/2162.html",
+     "https://rehasaku.net/magazine/clinic/trafficaccident-consolationmoney/",
+     "https://saitama-alg.com/traffic_accident/column_isyaryou/isyaryou-seikotsuin/",
+     "https://nukumori-sekkotsuin.com/jiko/kotsujikogonosekkotsuinhenotuuinkaisuunitsuite/",
+     "https://kannouseikotuin.com/blog/accident-insurance-compensation-days/",
+     "https://chiba-alg.com/traffic_accident/column_isharyou/koutsujiko-isharyo-seikotsuin/",
+     "https://www.hughesluce.com/koutsujiko-muchiuchi/whiplash_3months/",
+     "https://osaka-alg.com/traffic_accident/column_isyaryou/isyaryou-seikotsuin/"
+    ],
+    "error": ""
+   }
+  },
+  "追突事故 整骨院 いつから": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://fujitaiin.or.jp/kaisetsu/muchiuchi.html",
+     "https://www.ibaraki.med.or.jp/home/wp-content/uploads/934f7b5e7fbd3076f6bd440831598453-1.pdf",
+     "https://faq.sompo-japan.jp/thekuruma/faq_detail.html?category=301&id=944&menu=300"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.ma-ko-to.jp/jiko/traffic-accident/",
+     "https://law-bright.com/kotuziko/knowledge/tiryo/",
+     "https://kumanomi-seikotu.com/blog/6296/",
+     "https://tamapla.shinkyuseikotsu.com/blog/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E6%95%B4%E9%AA%A8%E9%99%A2/",
+     "https://karada-seikotu.com/column/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E5%BE%8C%E3%81%AB%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%B8%E9%80%9A%E9%99%A2%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BF%9D%E9%99%BA%E9%81%A9%E7%94%A8%E3%81%AE/",
+     "https://www.ai-medical.co.jp/store/ai-media/service/19640"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmp3wadpu9_'"
+   }
+  },
+  "交通事故 整骨院 健康保険 使える": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/",
+     "https://www.kyoukaikenpo.or.jp/benefit/accident/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://healing-hand.jp/2866-2/",
+     "https://www.zenjukyo.gr.jp/traffic-kenko-hoken/",
+     "https://juusei-support.com/insurance_legal/insurance-info/202507283813/",
+     "https://lawyers-high.jp/traffic-accident/1034/",
+     "https://www.tmn-kenpo.or.jp/contents/boneset/boneset.html",
+     "https://habilis-law.jp/15704994381393",
+     "https://www.daifuku-kenpo.or.jp/consultation/osteopathic.php",
+     "https://honegori-group.com/accident/",
+     "https://dprofessions.co.jp/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E5%BC%81%E8%AD%B7%E5%A3%AB/%E4%BF%9D%E9%99%BA%E9%87%91%E8%A9%90%E6%AC%BA/%E6%95%B4%E9%AA%A8%E9%99%A2%E9%80%9A%E9%99%A2%E4%B8%8D%E6%AD%A3%E6%89%B1%E3%81%84/%E4%B8%8D%E6%AD%A3%E6%B2%BB%E7%99%82%E3%81%AE%E5%88%A4%E6%96%AD%E5%9F%BA%E6%BA%96/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kyoukaikenpo.or.jp/benefit/accident/index.html",
+     "https://www.kenpo.gr.jp/nskenpo/contents/shikumi/kyufu/jiko/index.html",
+     "https://www.koutsujiko.jp/columns/8550/",
+     "https://www.zenjukyo.gr.jp/traffic-kenko-hoken/",
+     "https://joint-lab.com/insurance-company-non-acceptance/",
+     "https://www.sckenpo.or.jp/consultation/osteopathic.php"
+    ],
+    "error": ""
+   }
+  },
+  "むち打ち 接骨院 期間 目安": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://kasuga.hisashi-takashi.com/archives/2917.html",
+     "https://numaguchi--clinic.com/whiplash-treatment-period/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://shinagawa-oimachi-seikei.clinic/blog/whiplash-treatment-duration/",
+     "https://legalplus.jp/kotsujiko/knowledge/whiplash/outpatient-period/",
+     "https://n-osteopath.jp/whiplash-treatment-period/",
+     "https://kusayama-seikei.com/column/car-accident-whiplash-treatment-period/",
+     "https://jico-pro.com/columns/64/",
+     "https://clinic.jiko24.jp/jiko-info/treatment/jikotsuuinisyaryou/",
+     "https://ippo-seikotsu.com/3224/",
+     "https://kusayama-seikei.com/column/car-accident-whiplash-treatment-period/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [],
+    "error": "[WinError 32] プロセスはファイルにアクセスできません。別のプロセスが使用中です。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\tmpdr36o5uf'"
+   }
+  },
+  "交通事故 整骨院 手続き 流れ": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mlit.go.jp/jidosha/jibaiseki/accident/correspondence/index.html",
+     "https://shiga.med.or.jp/doctor/compensation/",
+     "https://www.kyoukaikenpo.or.jp/benefit/judo_therapist/",
+     "https://www.sonpo.or.jp/report/publish/bousai/koutuu/article/13/",
+     "https://i-ask139.dga.jp/jibaiseki/faq_detail.html?id=30662",
+     "https://www.mlit.go.jp/jidosha/jibaiseki/accident/injury/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.daylight-law.jp/accident/qa/qa277/",
+     "https://www.daylight-law.jp/accident/qa/qa348/",
+     "https://atomfirm.com/media/38514",
+     "https://www.adire.jp/lega_life_lab/kotsu/kotsu-songai/column1894/",
+     "https://smile-shinkyu.com/2026/05/30/traffic-accident-seikotsuin-transfer/",
+     "https://law-bright.com/kotuziko/knowledge/koutsujiko_seikotsuin/",
+     "https://www.ko2jiko.com/columns/columns-96/",
+     "https://dream-jiko.com/whiplash/t-accident-flow/",
+     "https://karada-seikotu.com/traffic_accident/",
+     "https://agoora.co.jp/jiko/knowledge/osteopathicclinic-trafiic-accident.html",
+     "https://stellalaw.jp/jiko/102/",
+     "https://koutsujikopro.com/column/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E3%81%AE%E6%B2%BB%E7%99%82%E3%81%AB%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AF%E4%BD%BF%E3%81%88%E3%82%8B%EF%BC%9F%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%81%A8%E4%BD%B5/",
+     "https://www.jikokaiketsu.com/tokusyu/index2.html",
+     "https://kagetsusekkotsuin.com/information/8180",
+     "https://joint-lab.com/insurance-company-non-acceptance/",
+     "https://odasakae.com/archives/5391.html"
+    ],
+    "error": ""
+   }
+  },
+  "交通事故 整骨院 初診 持ち物": {
+   "group": "交通事故のけが",
+   "ChatGPT": {
+    "urls": [
+     "https://jiko-chiryo.jp/beginner",
+     "https://heartfull-jiko.com/accident-seikotsuin-first-visit-memo-suita/",
+     "https://www.mhlw.go.jp/stf/shingi2/0000195191_00032.html",
+     "https://jcoa.gr.jp/wp-content/uploads/2023/06/iryousystem-20220722-2.pdf",
+     "https://www.kyoukaikenpo.or.jp/benefit/accident/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://lionheart-seikotsuin.com/blog/43259/",
+     "https://alaise-seikotsuin.com/blog/koutsuujiko-seikotsuin-shinsatsu-nagare",
+     "https://www.kss-in.com/traffic-accident-process/",
+     "https://heartfull-jiko.com/accident-seikotsuin-first-visit-memo-suita/",
+     "https://koshigaya-jiko.jp/post/post-3691",
+     "https://maeda-yakuin.net/jiko-kakarikata/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://atomfirm.com/media/38514",
+     "https://www.adire.jp/lega_life_lab/kotsu/kotsu-songai/column1894/",
+     "https://hibiki-law.or.jp/jiko/isharyo/34037/",
+     "https://agoora.co.jp/jiko/knowledge/osteopathicclinic-trafiic-accident.html",
+     "https://www.jikosos.net/basic/basic4/orthopedic",
+     "https://koutsujikopro.com/column/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E3%81%AE%E6%B2%BB%E7%99%82%E3%81%AB%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%AF%E4%BD%BF%E3%81%88%E3%82%8B%EF%BC%9F%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%81%A8%E4%BD%B5/",
+     "https://www.str-ito-chiryoin.com/2024/07/25/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E6%B2%BB%E7%99%82%E3%81%AF%E6%95%B4%E9%AA%A8%E9%99%A2%E3%81%A7%E3%81%AF%E3%83%80%E3%83%A1%EF%BC%9F%EF%BD%9C%E9%80%9A%E9%99%A2%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%BE/",
+     "https://kusunoki.work/traffic-accident",
+     "https://karada-seikotu.com/traffic_accident/",
+     "https://jiko.home-one.jp/isharyou/seikotsuin",
+     "https://www.avance-lg.com/customer_contents/koutsujiko/seikotsuin/",
+     "https://matsumura-legaloffice.jp/blog/2873",
+     "https://dream-jiko.com/whiplash/t-accident-flow/",
+     "https://joint-lab.com/traffic-accidents-orthopedic-clinic/",
+     "https://honzawamedical.com/news/ziko1/",
+     "https://kumanomi-seikotu.com/blog/6296/",
+     "https://www.hughesluce.com/isharyou/seikotsuin/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

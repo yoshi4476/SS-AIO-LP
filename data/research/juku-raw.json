@@ -1,0 +1,1859 @@
+{
+ "industry": "juku",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 個別指導塾 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaisei-group.co.jp/freestep/?classroom=osakaumeda",
+     "https://www.kobetsu.co.jp/feature/",
+     "https://www.kobetsu.co.jp/teacher/",
+     "https://www.kobetsu.co.jp/kansai/",
+     "https://www.kobekyo.com/lms/",
+     "https://www.meikogijuku.jp/",
+     "https://www.meikogijuku.jp/school/osaka/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bestjuku.com/ranking/osaka/addr-5_04_801/",
+     "https://www.jyukunavi.jp/kobeturank/271.html?grade_category=004",
+     "https://www.jyukunavi.jp/kobeturank/27.html?grade_category=004",
+     "https://www.jyukunavi.jp/kobeturank/27.html",
+     "https://www.jyukunavi.jp/kobeturank/271.html",
+     "https://www.jyukunavi.jp/kobeturank/27.html?grade_category=002",
+     "https://juku.ameba.jp/ranking/osaka/ct-osaka-osakashi-kitaku1/st-3400201/0000020000000000/",
+     "https://juku.ameba.jp/ranking/osaka/0000020000000000/",
+     "https://juku.ameba.jp/ranking/osaka/ct-osaka-osakashi/0000020000000000/",
+     "https://juku.ameba.jp/ranking/osaka/ct-osaka-higashiosakashi/0000020000000000/",
+     "https://terakoya.ameba.jp/juku/ranking/ct-osaka-osakashi/k-kobetsu/",
+     "https://terakoya.ameba.jp/juku/ranking/osaka/",
+     "https://studychain.jp/cat-one-to-many-individual/f-420/p-osaka/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jyukunavi.jp/kobeturank/27.html",
+     "https://coeteco.jp/juku/prefecture/oosaka/city/oosaka-shi-kita-ku/style/individual",
+     "https://diamond.jp/educate/list/personal_lesson/osakafu/",
+     "https://manab-juku.me/juku/univ-juken-kobetsu-osaka/",
+     "https://juku.ameba.jp/ranking/osaka/ct-osaka-osakashi-kitaku1/st-3400201/0000020000000000/",
+     "https://manaviism.com/umeda/umeda25/",
+     "https://bestjuku.com/ranking/osaka/addr-5_04_801/semi_private/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 中学受験 塾 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sapientica.com/sapix/principles/efficient/",
+     "https://www.waseda-ac.co.jp/elementary/course/",
+     "https://www.nichinoken.co.jp/",
+     "https://www.nichinoken.co.jp/learning/concept/05.html",
+     "https://www.yotsuyaotsuka.com/shikumi/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://resemom.jp/kyoiku/juku-junior-high-school/",
+     "https://my-best.com/31616",
+     "https://jukushiru.com/schools/prefecture/13/type/middle_school_entrance_exam",
+     "https://my-best.com/2583",
+     "https://bestjuku.com/article/4697/",
+     "https://www.jyukunavi.jp/ranking/chugaku/13.html",
+     "https://www.jyukunavi.jp/rank/13.html?grade_category=003",
+     "https://www.jyukunavi.jp/ranking/ikkan/13.html",
+     "https://smartrador.com/blog/%E5%8F%97%E9%A8%93%E6%83%85%E5%A0%B1/%E4%B8%AD%E5%AD%A6%E5%8F%97%E9%A8%93/%E9%96%A2%E6%9D%B1%E3%81%AE%E4%B8%AD%E5%AD%A6%E5%8F%97%E9%A8%93%E5%A1%BE%E3%82%92%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83%EF%BC%81%E5%90%84%E5%A1%BE%E3%81%AE%E7%89%B9%E5%BE%B4%E3%80%81%E8%B2%BB%E7%94%A8/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 高校受験 塾 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://juken.oricon.co.jp/rank-highschool/tokai/area/aichi.html",
+     "https://www.kawai-juku.ac.jp/wings/",
+     "https://www.kawai-juku.ac.jp/wings/tokai/juniorhigh/plan/",
+     "https://juken.oricon.co.jp/rank-highschool/tokai/company/sanaru-net/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://resemom.jp/kyoiku/juku-nagoya/",
+     "https://bestjuku.com/ranking/aichi/addr-4_09_015/high_exam/",
+     "https://www.jyukunavi.jp/ranking/shudan/231.html",
+     "https://juku.ameba.jp/ranking/aichi/ct-aichi-nagoyashi/0000000003000000/",
+     "https://www.iid.co.jp/contents-education/cramschool-nagoya/",
+     "https://www.jyukunavi.jp/kobeturank/231.html?grade_category=004",
+     "https://www.jyukunavi.jp/rank/231.html?grade_category=004",
+     "https://www.jyukunavi.jp/rank/231.html",
+     "https://bestjuku.com/ranking/aichi/addr-4_09_801/high_exam/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://resemom.jp/kyoiku/juku-nagoya/",
+     "https://www.jyukunavi.jp/hyouban/blist/9671.html?pref_cd=p23&l_place_cd=c231",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12235287322",
+     "https://sakura394.jp/diary/classroom/zisseki-hikaku2019",
+     "https://bestjuku.com/shingaku/highschool/aichi/D123210000018/review/",
+     "https://up-seiseki.jp/juku/wings-2/",
+     "https://bestjuku.com/juku/1487/class/76853/",
+     "https://juken.oricon.co.jp/rank-highschool/tokai/area/aichi.html",
+     "https://juku.ameba.jp/a000001233/",
+     "https://www.inter-edu.com/forum/read.php?1109,7148561",
+     "https://www.meishinken.co.jp/hs/briefing-2025/asahimeiwa-crosstalk",
+     "https://diamond.jp/educate/area/aichiken/ichinomiya_shi/meitetsuichinomiya/?page=2",
+     "https://ameblo.jp/maple201209/entry-12837003569.html",
+     "https://juku.ameba.jp/ranking/aichi/0000020000000000/",
+     "https://juku.ameba.jp/ranking/aichi/ct-aichi-nagoyashi/0000000003000000/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12119758522",
+     "https://bestjuku.com/ranking/aichi/addr-4_09_801/group/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11121405481"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 小学生 英会話 教室": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kids.ecc.jp/school/fukuoka/fukuokatenjin/",
+     "https://www.kids.ecc.jp/school/fukuoka/fukuokatenjin/cinfo/",
+     "https://www.kids.ecc.jp/school/fukuoka/momochi/",
+     "https://english-academy.seiha.com/classroom/913152/",
+     "https://www.berlitz.com/ja-jp/language-centers/hakata-station"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://resemom.jp/mitsukaru-eikaiwa/eikaiwa-school-kids-fukuoka/",
+     "https://nasse.com/kyusyu/fukuoka-eikaiwa-school/",
+     "https://www.willenglish.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://startoo.co/english/117742/",
+     "https://bestjuku.com/article/15222/",
+     "https://www.nova.co.jp/junior/schools/kyusyu_okinawa/fukuoka.html",
+     "https://www.eigo-mana.com/class-top/hakata/",
+     "https://www.eigo-mana.com/class-top/hakata/",
+     "https://kodomo-booster.com/articles/1021",
+     "https://resemom.jp/mitsukaru-eikaiwa/eikaiwa-school-kids-fukuoka/",
+     "https://hello-sensei.com/blog/%E7%A6%8F%E5%B2%A1%E5%8D%9A%E5%A4%9A%E3%81%AE%E8%8B%B1%E4%BC%9A%E8%A9%B1%E6%95%99%E5%AE%A4",
+     "https://english-academy.seiha.com/nearclass/fukuoka/",
+     "https://resemom.jp/mitsukaru-eikaiwa/eikaiwa-school-kids-fukuoka/",
+     "https://english-academy.seiha.com/nearclass/fukuoka/",
+     "https://www.jyukunavi.jp/ranking/kodomoeigo/40.html",
+     "https://www.nova.co.jp/junior/schools/kyusyu_okinawa/fukuoka.html"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 個別指導 中学生 塾": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kobekyo.com/around/hokkaido/sapporo/c/",
+     "https://www.meikogijuku.jp/school/hokkaido/sapporo-shi-nishi-ku/S3101/",
+     "https://www.shuei-yobiko.co.jp/school/?UC=C1225",
+     "https://www.shuei-yobiko.co.jp/lp_pas/",
+     "https://www.schoolie-net.jp/classrooms/detail/245/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://coeteco.jp/juku/prefecture/hokkaido/city/sapporo-shi-chuo-ku/grade/junior-high",
+     "https://jukushiru.com/schools/prefecture/1/city/1/lesson/personal",
+     "https://www.jyukunavi.jp/rank/011.html?grade_category=003",
+     "https://alpha-school.jp/",
+     "https://www.linden-sapporo.co.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://juku.ameba.jp/a000001229/",
+     "https://resemom.jp/kyoiku/juku-sapporo/",
+     "https://juku.ameba.jp/ranking/hokkaido/ct-hokkaido-sapporoshi/0000020000000000/",
+     "https://diamond.jp/educate/list/personal_lesson/hokkaido/sapporo_shi_kita_ku/sapporo1/",
+     "https://alpha-school.jp/",
+     "https://jukushiru.com/schools/prefecture/1/city/1/lesson/personal"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 オンライン塾 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sorajuku.jp/",
+     "https://www.sorajuku.jp/course/",
+     "https://www.try-online.jp/kobetsu/classes-detail/",
+     "https://www.try-online.jp/kobetsu/faq/",
+     "https://atamaplus-online.com/plans",
+     "https://yokohama-yobikou.jp/course/online_course",
+     "https://www.zkai.co.jp/juku/map/z-yokohama/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jukushiru.com/schools/prefecture/14/city/727/lesson/personal",
+     "https://jukushiru.com/schools/prefecture/14/city/736",
+     "https://jukushiru.com/schools/prefecture/14/station/3431",
+     "https://bestjuku.com/ranking/kanagawa/addr-3_07_801/",
+     "https://bestjuku.com/article/9434/",
+     "https://bestjuku.com/ranking/kanagawa/addr-3_07_003/station-1130105/",
+     "https://bestjuku.com/ranking/kanagawa/addr-3_07_801/home/",
+     "https://juku.ameba.jp/ranking/kanagawa/ct-kanagawa-yokohamashi/0000020000000000/",
+     "https://juku.ameba.jp/ranking/kanagawa/ct-kanagawa-yokohamashi/0000000003000000/",
+     "https://juku.ameba.jp/ranking/kanagawa/ct-kanagawa-yokohamashi/",
+     "https://juku.ameba.jp/ranking/kanagawa/ct-kanagawa-yokohamashi-nishiku/st-1130105/",
+     "https://terakoya.ameba.jp/juku/ranking/ct-kanagawa-yokohamashi/k-koukoujyuken/",
+     "https://terakoya.ameba.jp/juku/ranking/ct-kanagawa-yokohamashi/k-kobetsu/",
+     "https://kateikyoushi.kuraveil.jp/area/kanagawa/city_900",
+     "https://study-search.jp/columns/13",
+     "https://www.katekyohikaku.net/search/?s_place_cd=141"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.agaroot.jp/coaching/column/kanagawa/",
+     "https://coeteco.jp/articles/11108",
+     "https://bestjuku.com/ranking/kanagawa/addr-3_07_801/full_online/",
+     "https://bestjuku.com/ranking/kanagawa/addr-3_07_801/full_online/",
+     "https://www.zkai.co.jp/juku/map/z-yokohama/",
+     "https://www.jyukunavi.jp/special/online/?pref=14&city=14102",
+     "https://juku.ameba.jp/onlinejuku/ranking/0000020000000000/",
+     "https://juku.ameba.jp/onlinejuku/ranking/",
+     "https://yokohama-yobikou.jp/course/online_course"
+    ],
+    "error": ""
+   }
+  },
+  "京都 大学受験 予備校 比較": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kawai-juku.ac.jp/school/scl-top.php?displayType=1&ks=531&word=",
+     "https://www2.sundai.ac.jp/kousha/area-kyoto/",
+     "https://www2.sundai.ac.jp/kousha/area-kyoto/sch-kyotominami/",
+     "https://www.kenshinkan.net/school/kyoto/",
+     "https://www.toshin.com/es/map/2634.html",
+     "https://www.toshin.com/system/",
+     "https://www.takeda.tv/kyoto/",
+     "https://www.takeda.tv/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://diamond.jp/educate/articles/digest/400575/",
+     "https://diamond.jp/educate/juku-ranking/kokuritsudaigaku/kyoto-university/",
+     "https://bestjuku.com/article/4782/",
+     "https://diamond.jp/educate/articles/juku-hiyou/400187/?page=2",
+     "https://jukushiru.com/article/post-30870/",
+     "https://gokaku-oentai.com/column/thorough-comparison/",
+     "https://www.jyukunavi.jp/detail/5065.html",
+     "https://juku.ameba.jp/b00000046/s00025780/",
+     "https://juku.ameba.jp/b00000053/s00027129/",
+     "https://study-search.jp/columns/211",
+     "https://www.med-pass.net/yobikou/detail/140/",
+     "https://www.med-pass.net/yobikou/detail/844/",
+     "https://english-gakusyu.com/kyoto-university-cram-school/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yobikouranking.com/yobikos/school/2",
+     "https://nlab.itmedia.co.jp/research/articles/1063266/",
+     "https://readingmemo.com/archives/7801",
+     "https://re-studycafe.com/%E8%87%AA%E7%BF%92%E5%AE%A4%E3%83%BB%E5%A1%BE/%E9%AB%98%E6%A0%A1%E7%94%9F%E3%81%AE%E5%A1%BE%E9%81%B8%E3%81%B3%EF%BC%9A%E6%B2%B3%E5%90%88%E5%A1%BE%E3%80%81%E9%A7%BF%E5%8F%B0%E3%80%81%E6%9D%B1%E9%80%B2%E3%81%AE%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83/",
+     "https://takedajuku.tv/%E3%80%902025%E5%B9%B4%E5%BA%A6%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E3%80%80%E9%A7%BF%E5%8F%B0%E4%BA%88%E5%82%99%E6%A0%A1%E3%81%A8%E6%9D%B1%E9%80%B2%E3%83%8F%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%BC/",
+     "https://diamond.jp/educate/articles/daigakujuken/400004/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1158010106",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10325849245",
+     "https://bestjuku.com/article/5331/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 小学生 学習塾 通いやすい": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kobekyo.com/around/hyogo/okamoto/c/",
+     "https://axis-kobetsu.jp/schools/detail/code/2817",
+     "https://axis-kobetsu.jp/schools/detail/id/782",
+     "https://www.kobetsu.co.jp/school/detail/517/",
+     "https://www.kobetsu.co.jp/school/detail/526/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jukushiru.com/schools/prefecture/28/city/1297/grade/elementary",
+     "https://jukushiru.com/schools/prefecture/28/city/1297",
+     "https://bestjuku.com/ranking/hyogo/addr-5_05_008/station-1160315/",
+     "https://bestjuku.com/ranking/hyogo/addr-5_05_008/station-1160315/elementary/",
+     "https://bestjuku.com/ranking/hyogo/addr-5_05_801/",
+     "https://juku.ameba.jp/ranking/hyogo/ct-hyogo-kobeshi/0500000000000000/",
+     "https://juku.ameba.jp/ranking/hyogo/ct-hyogo-kobeshi-chuoku/st-1160315/0500000000000000/",
+     "https://juku.ameba.jp/ranking/hyogo/ct-hyogo-kobeshi/0000000002000000/",
+     "https://juku.ameba.jp/ranking/hyogo/ct-hyogo-kobeshi/",
+     "https://www.zkai.co.jp/juku/map/z-kobesannomiya/",
+     "https://studychain.jp/f-408/p-hyogo/c-28110/st-1160315/",
+     "https://diamond.jp/educate/area/hyogoken/kobe_shi_chuo_ku/",
+     "https://www.jyukunavi.jp/ranking/shudan/281.html?grade_category=002",
+     "https://www.jyukunavi.jp/rank/281.html?grade_category=002",
+     "https://www.jyukunavi.jp/rank/28110.html?grade_category=002"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://learningseeds.co.jp/",
+     "https://www.kyoiku-kukan-exe.jp/security/",
+     "https://startoo.co/learn/121966/",
+     "https://www.eishin-juku.com/qa/",
+     "https://xn--8pr038b9h2am7a.com/school/9433/",
+     "https://juku.ameba.jp/ranking/hyogo/ct-hyogo-kobeshi/0500000000000000/",
+     "https://diamond.jp/educate/area/hyogoken/kobe_shi_chuo_ku/",
+     "https://terakoyayuzu.jp/",
+     "https://www.kaishinkan.net/school/kobe/mikage/",
+     "https://diamond.jp/educate/area/hyogoken/kobe_shi_chuo_ku/",
+     "https://resemom.jp/kyoiku/juku-kobe/",
+     "https://www.navi-school.com/school/hyogo/kobe/",
+     "https://juku.ameba.jp/ranking/hyogo/ct-hyogo-kobeshi-chuoku/st-1160315/0500000000000000/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 集団指導 塾 中学生": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.asunarogakuin.jp/course/jhs02.html",
+     "https://www.asunarogakuin.jp/class",
+     "https://shin-pla.co.jp/course/sendai-plaza.php",
+     "https://shin-pla.co.jp/course/toppa.php"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bestjuku.com/ranking/miyagi/addr-2_03_801/junior_exam/",
+     "https://jukushiru.com/schools/prefecture/4/city/269",
+     "https://juku.ameba.jp/a000001220/",
+     "https://www.asunarogakuin.jp/",
+     "https://bestjuku.com/ranking/miyagi/addr-2_03_801/junior/",
+     "https://juku.ameba.jp/a000001221/",
+     "https://studychain.jp/cat-group-cram-school/f-311/p-miyagi/c-4101/st-1123143/",
+     "https://www.hinoki-sendai.com/",
+     "https://www.proudus.net/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://juku.ameba.jp/a000001221/",
+     "https://miyagi-ijuguide.pref.miyagi.jp/company/13353",
+     "https://shin-pla.co.jp/course/sendai-plaza.php",
+     "https://www.asunarogakuin.jp/course/jhs02.html",
+     "https://resemom.jp/kyoiku/juku-sendai/",
+     "https://studycoach.co.jp/column/37021/",
+     "https://juku.ameba.jp/a000001221/",
+     "https://www.jyukunavi.jp/ranking/shudan/041.html",
+     "https://www.jyukunavi.jp/ranking/shudan/041.html",
+     "https://www.hinoki-sendai.com/",
+     "https://www.jyukunavi.jp/ranking/shudan/041.html?grade=010"
+    ],
+    "error": ""
+   }
+  },
+  "広島 英語 塾 高校生": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://nakaharajuku.webu.jp/concept.html",
+     "https://www.ace-nice.com/koko/",
+     "https://ikedaenglishschool.jimdofree.com/",
+     "https://www.leon-english.com/schools/hiroshima-minami",
+     "https://www2.sundai.ac.jp/kousha/area-hiroshima/sch-hiroshima/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://englishhub.jp/school/hiroshima-matome/hiroshima",
+     "https://jukushiru.com/schools/prefecture/34/type/english_specialization",
+     "https://jukushiru.com/schools/prefecture/34/city/1494/grade/high/subject/english",
+     "https://jukushiru.com/schools/prefecture/34",
+     "https://juku.ameba.jp/ranking/hiroshima/ct-hiroshima-hiroshimashi/0023000000000000/",
+     "https://studychain.jp/cat-english-school/f-324/p-hiroshima/",
+     "https://studychain.jp/cat-english-school/p-hiroshima/",
+     "https://studychain.jp/cat-english-school/p-hiroshima/c-34101/",
+     "https://studychain.jp/cat-english-school/f-299/p-hiroshima/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://eiken-academy.com/class-2/hirosima/hirosima2/",
+     "https://www.ace-nice.com/koko/",
+     "https://hirodaiken.jp/course/english/",
+     "https://www.school-imanishi.com/123537.html",
+     "https://www.school-imanishi.com/24696.html",
+     "https://www.ace-nice.com/koko/",
+     "https://eiken-academy.com/class-2/hirosima/hiroshima-city/",
+     "https://juku.ameba.jp/b00000257/s00053731/",
+     "https://www.leon-english.com/",
+     "https://www.koushijuku.jp/",
+     "https://kobaeigo.sakura.ne.jp/wp/",
+     "https://nakaharajuku.webu.jp/concept.html",
+     "https://juku.ameba.jp/ranking/hiroshima/ct-hiroshima-hiroshimashi/0023000000000000/"
+    ],
+    "error": ""
+   }
+  },
+  "個別指導 月謝 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jyukunavi.jp/special/jyukumoney/kobetsu.html",
+     "https://www.meikogijuku.jp/school/tokyo/nakano-ku/S0522/",
+     "https://www.meikogijuku.jp/price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jyukumado.jp/column/23",
+     "https://bestjuku.com/article/8642/",
+     "https://bestjuku.com/article/3779/",
+     "https://bestjuku.com/article/3874/",
+     "https://study-search.jp/columns/31",
+     "https://e-cap.jp/price/",
+     "https://study-search.jp/columns/28",
+     "https://best-k.co.jp/column/%E5%A1%BE%E3%81%AE%E8%B2%BB%E7%94%A8%E3%81%AF%E3%81%A9%E3%81%AE%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E5%AD%A6%E5%B9%B4%E5%88%A5%E3%81%AE%E8%B2%BB%E7%94%A8%E3%82%84%E5%80%8B%E5%88%A5%E5%A1%BE%E3%83%BB/",
+     "https://school-plus.org/juku-price/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://diamond.jp/educate/articles/juku-hiyou/400202/",
+     "https://www.kobetsu-shidou.jp/hikaku/",
+     "https://jyukumado.jp/column/23",
+     "https://www.tokyo-eisai.com/column/210802/",
+     "https://bestjuku.com/article/8807/",
+     "https://www.kobekyo.com/column/individualjuku-price/",
+     "https://www.morijuku.com/column/51/"
+    ],
+    "error": ""
+   }
+  },
+  "学習塾 費用 年間 いくら": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mext.go.jp/content/20260116-mxt_chousa01-000039333_3.pdf",
+     "https://www.sakurashingaku.com/jyuku/money2026/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jyukumado.jp/column/6",
+     "https://www.joyobank.co.jp/column/education/cram_school_cost.html",
+     "https://bestjuku.com/article/8642/",
+     "https://jukushiru.com/article/post-0-282/",
+     "https://jukushiru.com/article/post-0-8/",
+     "https://www.shozemi.com/column/howto/17129/",
+     "https://juku.ameba.jp/a000003917/",
+     "https://school.js88.com/scl_jyuku/link/hiyou-chugaku",
+     "https://study-search.jp/columns/31",
+     "https://bestjuku.com/article/8807/",
+     "https://www.morijuku.com/column/4/",
+     "https://kateikyoushi.kuraveil.jp/juku/articles/grades/32",
+     "https://juku.ameba.jp/a000003503/",
+     "https://best-k.co.jp/column/%E5%A1%BE%E3%81%AE%E8%B2%BB%E7%94%A8%E3%81%AF%E3%81%A9%E3%81%AE%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E5%AD%A6%E5%B9%B4%E5%88%A5%E3%81%AE%E8%B2%BB%E7%94%A8%E3%82%84%E5%80%8B%E5%88%A5%E5%A1%BE%E3%83%BB/",
+     "https://jyukuyobi-navi.jp/column/704/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.morijuku.com/column/4/",
+     "https://kateikyoushi.kuraveil.jp/juku/articles/grades/32",
+     "https://www.shozemi.com/column/other/12237/",
+     "https://kobetsu-kai.com/column/2675/",
+     "https://jukushiru.com/article/post-0-8/"
+    ],
+    "error": ""
+   }
+  },
+  "中学受験 塾 費用 総額": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.zkai.co.jp/exam-navi/el/el-method/cl-13-01/",
+     "https://news.mynavi.jp/article/20260603-4536278/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jyukumado.jp/column/5",
+     "https://bestjuku.com/article/3773/",
+     "https://coeteco.jp/articles/11749",
+     "https://diamond.jp/educate/articles/juku-hiyou/73/",
+     "https://www.agaroot.jp/coaching/column/forp_jr-hs-entrance-exam-cost/",
+     "https://juku.ameba.jp/a000003540/",
+     "https://www.kame.co.jp/column/column000063-html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://lefy.jp/magazine/15897/",
+     "https://note.com/bias_for_action/n/neda8f3a0f07d",
+     "https://www.youtube.com/watch?v=ddAnyMwgQgw",
+     "https://www.agaroot.jp/coaching/column/forp_jr-hs-entrance-exam-cost/",
+     "https://bestjuku.com/article/3773/",
+     "https://benesse.jp/kosodate/202511/20251125-1.html",
+     "https://www.kobekyo.com/column/juniorhighexam-juku-price/"
+    ],
+    "error": ""
+   }
+  },
+  "集団塾 個別指導 料金 比較": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jyukunavi.jp/special/jyukumoney/chugaku/",
+     "https://www.jyukunavi.jp/special/jyukumoney/kobetsu.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bestjuku.com/article/8807/",
+     "https://bestjuku.com/article/3866/",
+     "https://bestjuku.com/article/3874/",
+     "https://bestjuku.com/article/3932/",
+     "https://study-search.jp/columns/28",
+     "https://study-search.jp/columns/43",
+     "https://study-search.jp/columns/31",
+     "https://study-search.jp/columns/146",
+     "https://juku.ameba.jp/a000003503/",
+     "https://gakkenonair.gakken.jp/column/group-individual-juku/",
+     "https://jukushiru.com/article/post-0-395/",
+     "https://tsubotajuku.com/blog/jh_price-comparison/",
+     "https://e-cap.jp/price/",
+     "https://deap.jp/blog/%E5%A1%BE%E3%81%AE%E5%80%8B%E5%88%A5%E6%8C%87%E5%B0%8E%E3%81%AF%E9%AB%98%E3%81%99%E3%81%8E%EF%BC%9F%E6%8C%87%E5%B0%8E%E5%BD%A2%E5%BC%8F%E3%81%94%E3%81%A8%E3%81%AE%E5%80%A4%E6%AE%B5%E3%83%BB%E4%BE%A1/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://deap.jp/blog/%E3%80%90%E8%B2%BB%E7%94%A8%E6%AF%94%E8%BC%83%E3%80%91%E5%80%8B%E5%88%A5%E6%8C%87%E5%B0%8E%E3%81%A8%E9%9B%86%E5%9B%A3%E5%A1%BE%E3%81%AE%E6%96%99%E9%87%91%E3%81%AE%E9%81%95%E3%81%84%E3%82%92%E5%BE%B9/",
+     "https://juku-hiyou-guide.com/kobetsu-vs-shudan/",
+     "https://diamond.jp/educate/articles/juku-hiyou/400199/",
+     "https://www.mebius-kobetsu.jp/education/kobetsu-jyuku/4144/",
+     "https://www.morijuku.com/column/4/",
+     "https://bestjuku.com/article/3780/",
+     "https://bardofficial.com/manabi/katekyo/kobetsu-juku/",
+     "https://jukushiru.com/article/post-0-395/"
+    ],
+    "error": ""
+   }
+  },
+  "塾 入塾金 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kobekyo.com/price/",
+     "https://leven.jp/nyujyuku",
+     "https://www.kawai-juku.ac.jp/meplo/pdf/meplo-fee-2026.pdf",
+     "https://www.cubic2.biz/fee",
+     "https://www.chishinkan.net/blank-2"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jyukumado.jp/column/5",
+     "https://bestjuku.com/article/3773/",
+     "https://diamond.jp/educate/articles/juku-hiyou/400199/",
+     "https://juku.ameba.jp/a000003541/",
+     "https://bestjuku.com/article/8642/",
+     "https://study-search.jp/columns/31",
+     "https://e-cap.jp/ranking/juku-hiyou-souba/",
+     "https://juku.ameba.jp/a000003917/",
+     "https://jukushiru.com/article/post-0-8/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://juku.ameba.jp/a000003917/",
+     "https://www.morijuku.com/column/4/",
+     "https://bestjuku.com/article/3780/",
+     "https://www.kobekyo.com/column/summerlessons-price/",
+     "https://diamond.jp/educate/articles/juku-hiyou/400202/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12322530647"
+    ],
+    "error": ""
+   }
+  },
+  "夏期講習 冬期講習 料金 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.k-wam.jp/wamken/wamken-60471/",
+     "https://www.edic.jp/column/article/21.html",
+     "https://www.morijuku.com/column/29/",
+     "https://www.kobekyo.com/column/winterlessons-price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bestjuku.com/article/3828/",
+     "https://bestjuku.com/article/4754/",
+     "https://bestjuku.com/article/3762/",
+     "https://bestjuku.com/article/3763/",
+     "https://juku.ameba.jp/a000011211/",
+     "https://juku.ameba.jp/a000011119/",
+     "https://juku.ameba.jp/a000011120/",
+     "https://juku.ameba.jp/a000011150/",
+     "https://study-search.jp/columns/745",
+     "https://study-search.jp/columns/31",
+     "https://jukushiru.com/article/post-32298/",
+     "https://www.morijuku.com/column/45/",
+     "https://www.shozemi.com/column/howto/23854/",
+     "https://edusuppo.com/juku-cost-summer/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kobekyo.com/column/summerlessons-price/",
+     "https://www.k-wam.jp/wamken/wamken-56970/",
+     "https://www.shozemi.com/column/howto/23854/",
+     "https://www.kobekyo.com/column/winterlessons-price/",
+     "https://study-search.jp/columns/279",
+     "https://www.morijuku.com/column/29/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14285279009",
+     "https://www.kobetsu-shidou.jp/hikaku/",
+     "https://www.re-juku.com/2025/10/2758/"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン家庭教師 料金 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://wam.onl/price/",
+     "https://wam.onl/high/price/",
+     "https://wam.onl/",
+     "https://study-search.jp/columns/1863",
+     "https://manalink.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://coeteco.jp/articles/11936",
+     "https://www.alc.co.jp/license/online-katei-kyoshi/yasui/",
+     "https://englishhub.jp/education/online-tutor-reasonable.html",
+     "https://study-search.jp/columns/92",
+     "https://online.tomonokai.net/souba/",
+     "https://www.benkyo.co.jp/blog/kateikyoushi_column/online/737.html",
+     "https://t-ch.co.jp/blog/online-katekyo-ryokin-hikaku/",
+     "https://k-arch-fukuoka.net/archives/8445",
+     "https://wam.onl/notes/notes-6798/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://t-ch.co.jp/blog/online-katekyo-ryokin-hikaku/",
+     "https://bestjuku.com/article/5595/",
+     "https://www.kobekyo.com/column/onlinetutor-price/",
+     "https://coeteco.jp/articles/11936",
+     "https://www.alc.co.jp/license/online-katei-kyoshi/yasui/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGxV0j0bhOYlnddv3Je3jMrjscdvy9xsIe9gHS85PoG_eMv8Dw3yE7bEtDys8Vy7--wy7oX5_QJ3E9cpUaPS8A3rIQXDg3vtRXPRjE9lj8lq5k4XkeBv1fi4OUX8Q7eU_97E6gGp3QgYQnB1Zq67SJxwughbxQ1VnnkSl64iko=",
+     "https://online.tomonokai.net/souba/"
+    ],
+    "error": ""
+   }
+  },
+  "子供 英会話 月謝 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://benesse-bestudio.com/courses/",
+     "https://eccjuniorbs.jp/ht772078/course/%E8%8B%B1%E8%AA%9E%E3%83%BB%E8%8B%B1%E4%BC%9A%E8%A9%B1-%E3%82%B3%E3%83%BC%E3%82%B9-%E5%B0%8F%E5%AD%A64%E3%83%BB5%E3%83%BB6%E5%B9%B4%E7%94%9F/?age=age4",
+     "https://www.qqeng.com/qqkids/pricelist"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://englishfactor.jp/media/englishschool/school-price/",
+     "https://www.eccjr.co.jp/price/",
+     "https://kids-english-online.com/kids-english-school-normal-price",
+     "https://global-english-academy.com/blog/hiyo-hikaku.html",
+     "https://www.tokyoenglishforchildren.com/fee.html",
+     "https://www.active-kids.net/price1.html",
+     "https://gaku-sim.com/articles/guide/kodomo-eikaiwa-hiyou-nenreibetsu/",
+     "https://reflet.site/fujisawa/2026/07/23/kodomo-eikaiwa-gessha/",
+     "https://www.man-abi.com/eikaiwa-std-cost/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFvutlMNJKk9vjJ4JXiLoW1TaV5wR0t9xnV3M8834bOea1p5jiMgYZilAQVUUdmMzMtfiAEib4ZTTVFewxFozO0wv6b8JSRjYmG17r3NUZug1FMJC3YbEfW8neWqvMV0LsLsCWLrIG-u9rJO3Q=",
+     "https://toraiz.jp/english-times/book/11954/",
+     "https://www.ib-english.com/eikaiwa-cost-checklist/",
+     "https://joynstar.com/online-school-english-compare/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZ4pe35zMNYWT0x5vyIk53h_h2u-88Ct9EOLLK6AlC3jGG4LKknhWJdJgYpjUfTb4jDNanwxJ4mEcUyGV7-iwzxmqRTI23spX3ycacJyu0S4oe5e4=",
+     "https://diamond.jp/educate/articles/english/400637/",
+     "https://ie-gaku.com/cheap-online-english/",
+     "https://www.global-crown.com/blog/online-english/kids-online-eikaiwa-price",
+     "https://ninja.weblio.jp/monthly-tuition-for-english-conversation-classes-for-children",
+     "https://www.eigo-love.jp/eikaiwa/kids-school/"
+    ],
+    "error": ""
+   }
+  },
+  "高校受験 塾代 平均": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mext.go.jp/content/20260116-mxt_chousa01-000039333_3.pdf",
+     "https://www.mext.go.jp/content/20260116-mxt_chousa01-000039333_1.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mext.go.jp/content/20260116-mxt_chousa01-000039333_3.pdf",
+     "https://www.mext.go.jp/content/20260116-mxt_chousa01-000026656_1.pdf",
+     "https://www.jili.or.jp/lifeplan/lifeevent/779.html",
+     "https://www.nomura.co.jp/fin-wing/column/study_expenses_for_junior_high/",
+     "https://www.aiful.co.jp/media/money-problems/column-0058.html",
+     "https://jyukumado.jp/column/6",
+     "https://bestjuku.com/article/3864/",
+     "https://bestjuku.com/article/3874/",
+     "https://www.shozemi.com/column/highexam/20314/",
+     "https://juku.ameba.jp/a000003544/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://bestjuku.com/article/3874/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGtUzj6p4lO6z2vKPFT5jf7T-RmqV558TamloSIXrWiwX76HkqoVs5zXEYhZnIVvp0nDx96qdY6ZXWv7unP7JRKd6VYR4R-qGCLW330Pie7ElIyGs9sLloMP-23lbKWa77Ei-dD1XnTLaclzx6XBhrs4w==",
+     "https://jukushiru.com/article/post-37464/",
+     "https://www.kobekyo.com/column/highschoolexam-juku-price/",
+     "https://juku.ameba.jp/a000003544/",
+     "https://benesse.jp/kyouiku/202206/20220622-2.html",
+     "https://zen-p.net/ts/s121.html"
+    ],
+    "error": ""
+   }
+  },
+  "塾 費用 安く抑える 方法": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jyukunavi.jp/special/jyukumoney/",
+     "https://juken.spring-online.jp/column/juku-hiyou-matome/",
+     "https://www.manavis.com/mana_magazine/high-school-student-cram-school-fees/",
+     "https://study-search.jp/columns/31",
+     "https://study-search.jp/amp/columns/28",
+     "https://www.city.osaka.lg.jp/kodomo/page/0000596583.html",
+     "https://www.fukushi.metro.tokyo.lg.jp/seikatsu/teisyotokusyataisaku/jukenseichallenge"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://juku.ameba.jp/a000010077/",
+     "https://bestjuku.com/article/8642/",
+     "https://e-cap.jp/ranking/juku-hiyou-souba/",
+     "https://study-search.jp/columns/31",
+     "https://www.shiodome-group.com/certification/koukou-jyuku-hiyou/",
+     "https://jyukuyobi-navi.jp/column/704/",
+     "https://bakamana.com/tutoring_fees/",
+     "https://online-juku-lab.com/juku-hiyou-gekkaku-heikin/",
+     "https://jyukusagasu.com/information/juku-cost-monthly-fee/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://juku.ameba.jp/a000010268/",
+     "https://zen-p.net/ts/s121.html",
+     "https://www.manatera.com/blog/cram-school-savings/",
+     "https://jukunashigo.com/reduce-cost",
+     "https://www.manatera.com/blog/cram-school-waste/",
+     "https://jukushiru.com/article/post-27445/",
+     "https://limo.media/articles/-/23546",
+     "https://juku.ameba.jp/a000010268/",
+     "https://kizuki.or.jp/blog/others/subsidy-cram-school/"
+    ],
+    "error": ""
+   }
+  },
+  "個別指導 集団指導 違い どっち": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.meikogijuku.jp/meiko-plus/study/20220222.html",
+     "https://www.jyukunavi.jp/special/difference/",
+     "https://www.shozemi.com/column/howto/24385/",
+     "https://jukushiru.com/article/post-0-395/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jyukumado.jp/column/102",
+     "https://www.edic.jp/column/article/48.html",
+     "https://bestjuku.com/article/3754/",
+     "https://www.shozemi.com/column/howto/24385/",
+     "https://juku.ameba.jp/a000003500/",
+     "https://www.jyukunavi.jp/special/difference/",
+     "https://createbase.jp/d-blog/group-individual/",
+     "https://www.kobekyo.com/column/individualjuku-groupjuku/",
+     "https://www.pharos21.net/column/kiminew/%E9%9B%86%E5%9B%A3%E6%8C%87%E5%B0%8E%E5%A1%BE%E3%81%A8%E5%80%8B%E5%88%A5%E6%8C%87%E5%B0%8E%E5%A1%BE%E3%81%A9%E3%81%A3%E3%81%A1%E3%81%AB%E9%80%9A%E3%81%86%EF%BC%9F%E3%81%9D%E3%82%8C%E3%81%9E%E3%82%8C/"
+    ],
+    "error": ""
+   }
+  },
+  "塾 選び方 中学生": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jyukunavi.jp/special/difference/",
+     "https://juku.ameba.jp/a000010384/",
+     "https://study-search.jp/columns/28",
+     "https://www.jyukunavi.jp/special/checksheet/checksheet.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://coeteco.jp/articles/14120",
+     "https://bestjuku.com/article/3772/",
+     "https://www.agaroot.jp/coaching/column/cram-school-junior-high-school-student/",
+     "https://jukushiru.com/article/post-20375/",
+     "https://jukushiru.com/article/post-0-315/",
+     "https://juku.ameba.jp/ranking/1200000000000000/",
+     "https://www.wasedazemi.com/column/learning/utsunomiya-jyuku-select-jh2/",
+     "https://www.shozemi.com/column/highexam/5615/",
+     "https://juku.ameba.jp/a000003545/"
+    ],
+    "error": ""
+   }
+  },
+  "塾 体験授業 チェックポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www2.sundai.ac.jp/column/yobiko/taiken-check/",
+     "https://manaviism.com/column/cram-school-trial-lesson-content/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jukushiru.com/article/post-32137/",
+     "https://manaviism.com/column/cram-school-trial-lesson-content/",
+     "https://juku.ameba.jp/a000003936/",
+     "https://smtjbb.com/2026/04/juju-checkpoint-3/",
+     "https://edusuppo.com/juku-taiken/",
+     "https://klc-seminar.com/blog/34647/",
+     "https://zerojuku-guide.jp/free-trial-lesson/",
+     "https://katekyo.mynavi.jp/juken/19845",
+     "https://jyukumado.jp/column/1",
+     "https://tcial.jp/library/point-of-trial/",
+     "https://jukushiru.com/article/post-32140/",
+     "https://manaviism.com/column/cram-school-trial-lesson-parents/",
+     "https://sansu-sugaku-will.com/%E5%AD%A6%E7%BF%92%E5%A1%BE%E3%81%AE%E4%BD%93%E9%A8%93%E6%8E%88%E6%A5%AD%E3%81%A7%E4%BD%95%E3%82%92%E8%81%9E%E3%81%91%E3%81%B0%E3%81%84%E3%81%84%EF%BC%9F%E8%B3%AA%E5%95%8F%E4%BE%8B%E3%81%A8%E5%AD%90/"
+    ],
+    "error": ""
+   }
+  },
+  "小学生 塾 いつから": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://sho.benesse.co.jp/column/kyouiku/260330-10.html",
+     "https://www.mebius-kobetsu.jp/primary-school/",
+     "https://www.kobetsu.co.jp/ebook/elementary-handbook.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://coeteco.jp/articles/12948",
+     "https://tcial.jp/library/since-junior/",
+     "https://www.edic.jp/column/article/81.html",
+     "https://jukushiru.com/article/post-0-283/",
+     "https://www.889100.com/column/column129.html",
+     "https://juku.ameba.jp/a000003539/",
+     "https://juku.brest.co.jp/15128/",
+     "https://www.school21.jp/column/for-kids/start-juku-timing/",
+     "https://terakoya.ameba.jp/juku/a000003539/",
+     "https://www.sougousingaku.co.jp/blog/cat/post-982.html",
+     "https://www.edic.jp/column/article/51.html",
+     "https://www.inter-edu.com/edunavi/exam/221005-01/",
+     "https://www.inter-edu.com/edunavi/exam/201028-02/",
+     "https://www.ss-1.net/magazine/2025/02/chuju-schedule.html",
+     "https://ejuku.org/035-juku-itu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://juku.brest.co.jp/15128/",
+     "https://www.889100.com/column/column129.html",
+     "https://www.school21.jp/column/for-kids/start-juku-timing/",
+     "https://juku.ameba.jp/a000003539/",
+     "https://jukushiru.com/article/post-0-283/",
+     "https://kids.gakken.co.jp/parents/education/230916/",
+     "https://www.edic.jp/column/article/51.html",
+     "https://jyukumado.jp/column/8",
+     "https://www.covez.jp/school/kanto/kanagawa/hadano/hadano/message/entry_35504.html"
+    ],
+    "error": ""
+   }
+  },
+  "塾 合わない サイン": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.889100.com/column/column093.html",
+     "https://yomeruba.com/plus/edu/kokugoryoku/entry-19698.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jyukumado.jp/column/80",
+     "https://jyukumado.jp/column/97",
+     "https://www.shozemi.com/column/howto/5868/",
+     "https://wakayama-jyuku.jp/blog/detail/20260520122413/",
+     "https://blog.terak.jp/entry/dekirukokijyun-jyuku",
+     "https://goalfreeesaka.jp/cram-school-teacher-not-suitable",
+     "https://www.studymethod-match.com/cram-school-select-point/mismatch.html",
+     "https://jyuku-online.com/blog/bs-jyukupoint/"
+    ],
+    "error": ""
+   }
+  },
+  "塾 先生 見極め方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.covez.jp/column/044.html",
+     "https://klc-seminar.com/blog/34647/",
+     "https://www.tomonokai.net/article/staff-blog/sb20260225/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://recruit.waseda-ac.co.jp/blog/7630",
+     "https://juku.careers/content/id/97",
+     "https://www.juku.st/info/entry/484",
+     "https://createbase.jp/blog/how-to-find-good-teacher/",
+     "https://www.mebius-kobetsu.jp/education/jyuku-point/3473/",
+     "https://kotozeni.com/juku-3597-match_with_teacher/",
+     "https://passing-notes.com/column/1601/",
+     "https://jukulog.jp/blog/guide-choose-taikenjugyo",
+     "https://jukushiru.com/article/post-32137/",
+     "https://jukushiru.com/article/post-0-315/",
+     "https://testea.net/entrance_exam/junior_high_school/post-35942/",
+     "https://smtjbb.com/2026/04/juju-checkpoint-3/"
+    ],
+    "error": ""
+   }
+  },
+  "塾 振替 対応 比較": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kobetsu.co.jp/schedule/",
+     "https://www.yoyogi-group.com/faq",
+     "https://julius.co.jp/faq/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bestjuku.com/article/5397/",
+     "https://jyukumado.jp/column/114",
+     "https://info-faq.trygroup.co.jp/category/show/133?site_domain=0000",
+     "https://jukushiru.com/article/post-0-395/",
+     "https://juku.ameba.jp/a000013621/",
+     "https://study-search.jp/columns/43",
+     "https://mana-brain.com/post-3665/",
+     "https://www.eisai.org/minamiasagaya/blogs/59024"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://jyukumado.jp/column/114",
+     "https://jukushiru.com/article/post-0-355/",
+     "https://www.meikogijuku.jp/meiko-plus/study/20220222.html",
+     "https://wakayama-jyuku.jp/blog/detail/20260522132443/",
+     "https://deap.jp/blog/%E5%80%8B%E5%88%A5%E6%8C%87%E5%B0%8E%E5%A1%BE%E3%81%AE%E6%8C%AF%E6%9B%BF%E3%81%AF%E3%81%A7%E3%81%8D%E3%82%8B%EF%BC%9F%E6%AC%A0%E5%B8%AD%E6%99%82%E3%81%AE%E5%AF%BE%E5%BF%9C%E3%81%A8%E3%81%AF/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12244978112",
+     "https://www.nobiru.jp/column/study-tips/cram-school-group-disadvantage.php",
+     "https://jyukumado.jp/column/114",
+     "https://web-juku-select.com/sorajuku-reschedule/",
+     "https://bestjuku.com/article/5397/",
+     "https://diamond.jp/educate/articles/juku-hiyou/161/?page=2",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14248809279",
+     "https://jukushiru.com/article/post-0-395/"
+    ],
+    "error": ""
+   }
+  },
+  "塾 合格実績 見方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://jja.or.jp/wp-content/uploads/2024/07/%E3%80%90%E5%A4%96%E9%83%A8%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%80%91%E5%90%88%E6%A0%BC%E5%AE%9F%E7%B8%BE%E5%9F%BA%E6%BA%96%E5%A4%89%E6%9B%B4.pdf",
+     "https://www.toudain.com/service/achievement/",
+     "https://logos.waseda-ac.co.jp/result/",
+     "https://www.nozomigakuen.co.jp/result/kangae/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://allabout.co.jp/gm/gc/442244/",
+     "https://resemom.jp/article/2024/07/01/77800.html",
+     "https://note.com/juken_sansu/n/nb6b27540c3c7",
+     "https://e-rikkyo.jp/column/4f088f23-aed2-4dee-8837-e61ff6dcaf25",
+     "https://mana-brain.com/jisseki/",
+     "https://tokushinkobetsu.com/2026/07/13/%E5%A4%A7%E6%89%8B%E4%BA%88%E5%82%99%E6%A0%A1%E3%81%8C%E7%99%BA%E8%A1%A8%E3%81%99%E3%82%8B%E3%80%8C%E5%90%88%E6%A0%BC%E8%80%85%E6%95%B0%E3%80%8D%E3%81%AE%E7%9C%9F%E5%AE%9F%EF%BD%9E%E5%B9%BD%E9%9C%8A/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://e-rikkyo.jp/column/4f088f23-aed2-4dee-8837-e61ff6dcaf25",
+     "https://sukyojuku.com/how-to-read-jisseki/",
+     "https://www.moneypost.jp/1244023",
+     "https://spec-coach.com/juku-yobiko-gokaku-jisseki-trust/",
+     "https://kuro-tubaki.hatenablog.com/entry/2021/02/25/041023",
+     "https://ameblo.jp/kouta07240724/entry-12872953313.html",
+     "https://masaonet.com/wp/2022/10/02/4333/",
+     "https://note.com/juken_sansu/n/nb6b27540c3c7",
+     "https://jyukusagasu.com/information/tips-for-evaluating-tutoring-results/"
+    ],
+    "error": ""
+   }
+  },
+  "子供に合う 塾 タイプ": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://benesse.jp/kyouiku/202104/20210427-3.html",
+     "https://axis-kobetsu.jp/columns/article/159307"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bestjuku.com/article/3766/",
+     "https://jyukumado.jp/column/72",
+     "https://jukushiru.com/article/post-0-395/",
+     "https://bestjuku.com/article/4813/",
+     "https://up-seiseki.jp/media/cram-school-group-or-individual/",
+     "https://kobetsu-can.com/column/3327.html",
+     "https://jyukumado.jp/column/21",
+     "https://jyukumado.jp/column/92"
+    ],
+    "error": ""
+   }
+  },
+  "塾 口コミ 信用できる": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jyukunavi.jp/hyouban/policy/",
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://deap.jp/blog/%E3%80%90%E5%8F%A3%E3%82%B3%E3%83%9F%E5%88%86%E6%9E%90%E3%80%91%E5%80%8B%E5%88%A5%E6%8C%87%E5%B0%8E%E5%A1%BE%E3%81%AE%E8%A9%95%E5%88%A4%E3%81%AE%E8%A6%8B%E6%96%B9%E3%81%A8%E6%B3%A8%E6%84%8F%E7%82%B9/",
+     "https://jyukusagasu.com/information/review-timing-important/",
+     "https://diamond.jp/articles/-/315957",
+     "https://bestjuku.com/shingaku/s-article/22011/",
+     "https://note.com/edu_papa88/n/nff891c9443d3",
+     "https://jyukusagasu.com/information/beware-site-risks/",
+     "https://kitsuke-blog.com/stealth/",
+     "https://www.broadcreation.com/blog/memo/386.html",
+     "https://my-best.com/1893"
+    ],
+    "error": ""
+   }
+  },
+  "中学受験 偏差値 伸びない": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://benesse.jp/juken/200903/20090310-1.html",
+     "https://czemi.benesse.ne.jp/open/nyushi/special/jukenqa/03/20170912_post_09.html",
+     "https://www.yotsuyaotsuka.com/net/info.php",
+     "https://www.yotsuyaotsuka.com/shikumi/hukushu_navi.php"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kame.co.jp/column/column000434-html",
+     "https://www.studyup.jp/contents/hensachi/up.html",
+     "https://note.com/susumujuku/n/nb969d579e2ec",
+     "https://note.com/juken_note/n/n283a001d408f",
+     "https://search-staff.com/chugaku-juken/contents/id/724",
+     "https://www.jukenblog.net/junior-high-school-entrance-exam-deviationscore-not-increase/",
+     "https://www.kobekyo.com/study-info/1591/",
+     "https://www.kobekyo.com/study-info/979/"
+    ],
+    "error": ""
+   }
+  },
+  "内申点 上げ方 中学生": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mext.go.jp/b_menu/hakusho/nc/1415169.htm",
+     "https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/qa/qa_test_test"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.agaroot.jp/coaching/column/all3/",
+     "https://www.agaroot.jp/coaching/column/forp_school-report/",
+     "https://axis-kobetsu.jp/columns/juni-report-score.html",
+     "https://bestjuku.com/shingaku/s-article/4732/",
+     "https://note.com/teach_app/n/n0faadd912583",
+     "https://www.yoyogi-group.com/column/jhs/tip_point",
+     "https://my-naishin.com/blog/how-to-raise-naishinten",
+     "https://www.daiichisemi.net/column/%E4%B8%AD%E5%AD%A6%E7%94%9F%E3%81%AE%E5%86%85%E7%94%B3%E7%82%B9%E3%81%AE%E4%B8%8A%E3%81%92%E6%96%B9%E3%81%A8%E3%81%AF%EF%BC%9F%E5%A4%A7%E4%BA%8B%E3%81%AA%E3%81%AE%E3%81%AF%E5%AE%9A%E6%9C%9F%E3%83%86/",
+     "https://www.eikoh.co.jp/koukoujuken/column/c2020/",
+     "https://www.zkai.co.jp/exam-navi/jr/jr-method/naishinten/",
+     "https://axis.onl/reports/tip-point/",
+     "https://www.todai-kojin.com/contents/202604-4/",
+     "https://www.u-master.net/column/entrance_exam/789/",
+     "https://jyuku-online.com/blog/jj-naisinten/"
+    ],
+    "error": ""
+   }
+  },
+  "定期テスト 点数 上がらない": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://journals.sagepub.com/stoken/rbtfl/Z10jaVH/60XQM/full",
+     "https://ies.ed.gov/use-work/awards/supporting-efficient-and-durable-student-learning",
+     "https://www.benesse.co.jp/zemi/media/article/kou_test/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.agaroot.jp/coaching/column/test-results/",
+     "https://gakuin.gakken.jp/column/42",
+     "https://manaviism.com/column/test-score-unable-to-get/",
+     "https://e-gakkou.jp/columns/detail/97",
+     "https://5-days.jp/officialblog/%E5%AE%9A%E6%9C%9F%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E7%82%B9%E6%95%B0%E3%81%8C%E4%BC%B8%E3%81%B3%E3%81%AA%E3%81%84%E3%81%A8%E6%82%A9%E3%81%BE%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E4%B8%AD/",
+     "https://write-tutoringschool.jp/blog/column/detail/20260401165329/",
+     "https://axis.onl/reports/50tenappu/",
+     "https://www.going-100ten.com/column/study/1359/",
+     "https://edusuppo.com/exam-score/",
+     "https://bestjuku.com/shingaku/s-article/4790/",
+     "https://www.wasedazemi.com/column/learning/juniorhighschool-routine-test/",
+     "https://ways-sch.jp/junior-high/61904",
+     "https://www.mebius-kobetsu.jp/education/study-advice/4203/",
+     "https://www.kobekyo.com/column/juniorhigh-regularexam/",
+     "https://readingmemo.com/archives/4820",
+     "https://esperanzaacademy11.com/chugakusei-teiki-test-taisaku/",
+     "https://manabiba-plus.com/1443/"
+    ],
+    "error": ""
+   }
+  },
+  "高校受験 いつから 対策": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://benesse.jp/juken/202202/20220222-2.html",
+     "https://chu.benesse.co.jp/column/juken/0001.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ysmedia.jp/specialties/23983/",
+     "https://jyukumado.jp/column/91",
+     "https://education.iid.co.jp/koukoujuken-juku-itsukara/",
+     "https://jukushiru.com/article/post-0-278/",
+     "https://www.morijuku.com/column/3/",
+     "https://www.shozemi.com/column/highexam/20009/",
+     "https://study-search.jp/columns/223",
+     "https://www.daiichisemi.net/column/%E9%AB%98%E6%A0%A1%E5%8F%97%E9%A8%93%E3%81%AE%E6%BA%96%E5%82%99%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%E4%BD%95%E3%82%92%E3%81%99%E3%81%B9%E3%81%8D%EF%BC%9F%E9%96%8B%E5%A7%8B%E6%99%82%E6%9C%9F/",
+     "https://zerojuku-guide.jp/since-when-did-you-study/"
+    ],
+    "error": ""
+   }
+  },
+  "大学受験 部活 両立 勉強法": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://kobetsu.sundai-net.jp/fukuoka/bukatsu-ryouritsu.html",
+     "https://www.keinet.ne.jp/learning/senior/advice/life/balance.html",
+     "https://www2.sundai.ac.jp/univ/tokyo-u/todaisei/topics9/",
+     "https://www2.sundai.ac.jp/univ/waseda-u/message-waseda/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://diamond.jp/educate/articles/symposium/400215/",
+     "https://diamond.jp/educate/articles/daigakujuken-sodanshitsu/400441/",
+     "https://www.keinet.ne.jp/learning/senior/advice/life/balance.html",
+     "https://www.manavis.com/manabeya/heya01_bukatsu.html",
+     "https://www.tomonokai.net/article/study/study-method/balancing-club-activities-and-study/",
+     "https://whiteacademy-ao.com/blog/daigaku-juken-bukatsu-ryoritsu/",
+     "https://www.toshin-nakameguro.com/post/2025/08/18/%E9%83%A8%E6%B4%BB%E3%81%A8%E5%8F%97%E9%A8%93%E3%82%92%E4%B8%A1%E7%AB%8B%E3%81%97%E3%81%A6%E6%9C%80%E5%BC%B7%E3%81%AE%E5%8F%97%E9%A8%93%E7%94%9F%E3%81%AB%E3%81%AA%E3%82%8B%E6%96%B9%E6%B3%95%E3%80%9C/",
+     "https://www2.sundai.ac.jp/column/howto/schedule-study/",
+     "https://www.yotsuyagakuin.com/benkyoho/useful_info/schedule/",
+     "https://www.takeda.tv/kuzuha/blog/post-229651/",
+     "https://manaviism.com/parents/article/3rd-grade/club-retirement-exam-student-ideal-routine/",
+     "https://note.com/nankanshidai/n/nbbfa689a2736",
+     "https://akamonlab.jp/entry_1129/"
+    ],
+    "error": ""
+   }
+  },
+  "苦手科目 克服 小学生": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://benesse.jp/kyouiku/special/lovelearning_20230425/",
+     "https://benesse.jp/kyouiku/202009/20200916-2.html",
+     "https://www.benesse.jp/kyouiku/202012/20201224-1.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.shinko-keirin.co.jp/shinko/pittarinavi/20210120-01/",
+     "https://www.meikogijuku.jp/meiko-plus/study/weak-subject.html",
+     "https://h-full.co.jp/fullstudy/study-weaksubject/",
+     "https://www.school21.jp/column/examination/beat-subjects/",
+     "https://best-k.co.jp/column/%E8%8B%A6%E6%89%8B%E7%A7%91%E7%9B%AE%E3%81%AB%E6%82%A9%E3%82%93%E3%81%A7%E3%81%84%E3%82%8B%EF%BC%9F%E8%8B%A6%E6%89%8B%E7%A7%91%E7%9B%AE%E3%82%92%E5%85%8B%E6%9C%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/",
+     "https://kurazemi-juku.com/school-news/school-news-22739/",
+     "https://chi-vi.com/how-to-overcome-weak-subjects-1434.html",
+     "https://www.sanaru.jp/education/q-%E8%8B%A6%E6%89%8B%E7%A7%91%E7%9B%AE%E3%81%AF%E3%81%A9%E3%81%86%E3%82%84%E3%81%A3%E3%81%9F%E3%82%89%E5%85%8B%E6%9C%8D%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B%EF%BC%9F/",
+     "https://www.seisekiup.net/course/elementary/weakness/"
+    ],
+    "error": ""
+   }
+  },
+  "塾 宿題 多すぎ 対処": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://kosodate.mynavi.jp/articles/25114",
+     "https://www.ss-1.net/success/faq_01_1/hama_01_005836.html",
+     "https://mocosta.jp/much-homework/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://katekyo.mynavi.jp/juken/35203",
+     "https://www.agaroot.jp/coaching/column/forp_homework-never-finished/",
+     "https://agaroot.co.jp/coaching/column/forp_homework-never-finished/",
+     "https://www.takeda.tv/column/post-75714/",
+     "https://note.com/sumairu_labo/n/nedacc6531577",
+     "https://ways-sch.jp/junior-high/47303",
+     "https://yobikou-hikaku.jp/a-lot-of-homework/",
+     "https://mocosta.jp/much-homework/",
+     "https://yuzupa.com/jikan-tansyuku/",
+     "https://kosodate.mynavi.jp/articles/36383",
+     "https://kosodate.mynavi.jp/articles/25114",
+     "https://gakkenonair.gakken.jp/column/cram-school-homework-many/",
+     "https://note.com/limber_takin8281/n/n33350c9bfbf3",
+     "https://www.studyup.jp/contents/kateigakushuu/homework.html",
+     "https://note.com/scopa_support/n/n75121952afb1",
+     "https://edusuppo.com/juku-homework/",
+     "https://tyugaku.net/jyuku/jyuku-syukudai.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=2VlPgV1tUEc",
+     "https://mocosta.jp/much-homework/",
+     "https://www.ss-1.net/success/faq_09_1/waseda_01_001889.html",
+     "https://jukushiru.com/article/post-0-321/",
+     "https://www.agaroot.jp/coaching/column/forp_homework-never-finished/",
+     "https://kitanojuku.jp/nayami/juku/shukudai-ooi.php"
+    ],
+    "error": ""
+   }
+  },
+  "受験直前 不安 保護者 できること": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/kokoro/parent/mental/ftf/ftf_02.html",
+     "https://www.mhlw.go.jp/kokoro/parent/mental/ftf/ftf_01.html",
+     "https://benesse.jp/juken/202512/20251224-1.html",
+     "https://benesse.jp/juken/202011/20201127-1.html",
+     "https://www.mhlw.go.jp/kokoro/parent/family/corresponds/corresponds_01.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://benesse.jp/juken/202302/20230202-1.html",
+     "https://manach.kyoshin.co.jp/585923/",
+     "https://kosodatemap.gakken.jp/life/family/98488/",
+     "https://jyukumado.jp/column/51",
+     "https://bestjuku.com/shingaku/s-article/36762/",
+     "https://note.com/makoto_stu/n/n2324091fe97f",
+     "https://study-support-beans.com/blog/anxiety_solution/",
+     "https://www.kossun.jp/%E5%8F%97%E9%A8%93%E3%81%8A%E5%BD%B9%E7%AB%8B%E3%81%A1%E6%83%85%E5%A0%B1/parental-mindset-for-handling-childs-exam-anxiety/",
+     "https://benesse.jp/juken/202101/20210109-1.html",
+     "https://www.meimon.jp/chokuzen_koekake/",
+     "https://senmonjuku.com/zyukenntyokuzenn/",
+     "https://jyukuerabi.com/column/3582"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://wam.hagunchu.jp/blog/column/16024/",
+     "https://knowledge.kinjo-gakuin.jp/n/ndafd85ac66e6?gs=11f9c02521253e016f1258c66410acda",
+     "https://koushin-jyuku.co.jp/column/1285/",
+     "https://jyukuerabi.com/column/9152",
+     "https://www.yotsuyagakuin.com/b_geneki/5-knowledge/",
+     "https://benesse.jp/kyouiku/202101/20210128-2.html",
+     "https://www.todaishimbun.org/cheering_examinees_20210102/",
+     "https://www.keinet.ne.jp/exam/tips/parent/communication/review.html"
+    ],
+    "error": ""
+   }
+  },
+  "授業についていけない 小学生 塾": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mext.go.jp/a_menu/shotou/tokubetu/material/1298167.htm",
+     "https://www.shozemi.com/elementary/kobetsu/",
+     "https://www.navi-school.com/course/primary.html",
+     "https://www.mext.go.jp/a_menu/shotou/tokubetu/mext_00023.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://manach.kyoshin.co.jp/601304/",
+     "https://jukushiru.com/article/post-0-346/",
+     "https://toyokeizai.net/articles/-/742777",
+     "https://www.morijuku.com/column/44/",
+     "https://www.889100.com/column/column138.html",
+     "https://kohgakusha-gakuen.com/column/14599-2",
+     "https://edusuppo.com/juku-catch-up/",
+     "https://bestjuku.com/shingaku/s-article/568/",
+     "https://bestjuku.com/article/9765/",
+     "https://e-gakkou.jp/columns/detail/83",
+     "https://kobetsu-can.com/column/3382.html",
+     "https://www.shozemi.com/column/method/5904/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://e-gakkou.jp/columns/detail/83",
+     "https://www.wasedazemi.com/column/learning/utsunomiya-jyuku-select-edu2/",
+     "https://deap.jp/blog/%E5%80%8B%E5%88%A5%E6%8C%87%E5%B0%8E%E5%A1%BE%E3%81%AF%E5%B0%8F%E5%AD%A6%E7%94%9F%E3%81%8B%E3%82%89%E5%BF%85%E8%A6%81%EF%BC%9F%E9%80%9A%E3%81%86%E3%81%B9%E3%81%8D%E5%88%A4%E6%96%AD%E5%9F%BA%E6%BA%96/",
+     "https://juku.ameba.jp/study/a000011892/",
+     "https://juku.ameba.jp/study/a000011892/",
+     "https://up-seiseki.jp/media/cramschool-elementary-school-student-struggle-with-studying/",
+     "https://www.kobekyo.com/column/developmental-juku-elementary/",
+     "https://coeteco.jp/articles/14263"
+    ],
+    "error": ""
+   }
+  },
+  "勉強 やる気 出ない 中学生": {
+   "group": "受験・成績の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://benesse.jp/kyouiku/202101/20210128-1.html",
+     "https://benesse.jp/kyouiku/202103/20210331-2.html",
+     "https://www.mhlw.go.jp/kokoro/youth/consultation/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.agaroot.jp/coaching/column/junior-high-student-feel-lazy/",
+     "https://www.edic.jp/column/article/57.html",
+     "https://bestjuku.com/shingaku/s-article/483/",
+     "https://bestjuku.com/shingaku/s-article/486/",
+     "https://bestjuku.com/shingaku/s-article/30291/",
+     "https://soushinkan.jp/%E4%B8%AD%E5%AD%A6%E7%94%9F%E3%81%8C%E5%8B%89%E5%BC%B7%E3%81%AB%E3%82%84%E3%82%8B%E6%B0%97%E3%82%92%E3%81%AA%E3%81%8F%E3%81%97%E3%81%9F%E3%81%A8%E3%81%8D%E3%80%81%E8%A6%AA%E3%81%8C%E4%BB%8A%E3%81%99/",
+     "https://www.aphex-group.com/blog/293/",
+     "https://kobetsu-can.com/column/3529.html",
+     "https://www.u-master.net/column/methods/3937/"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン塾 効果 ある": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.aeaweb.org/articles?id=10.1257/aer.20240401",
+     "https://nssa.stanford.edu/briefs/effects-virtual-tutoring-young-readers",
+     "https://cepr.harvard.edu/resource/report-randomized-controlled-trial-booknook-virtual-ela-tutoring-sy24-25"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.digital-knowledge.co.jp/archives/25060/",
+     "https://mtmo.jp/usa-online-education-learning-effect/",
+     "https://bestjuku.com/shingaku/s-article/49372/",
+     "https://www.edic.jp/column/article/54.html",
+     "https://bestjuku.com/article/3769/",
+     "https://note.com/teach_app/n/n50ec2132b0c2",
+     "https://picro.jp/media/iminai/",
+     "https://www.agaroot.jp/coaching/column/online-cram-school-meaningless/",
+     "https://jukushiru.com/article/post-31201/",
+     "https://juku.ameba.jp/onlinejuku/a000010264/",
+     "https://www.kobekyo.com/column/onlinetutoring-disadvantages/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.agaroot.jp/coaching/column/online-cram-school-meaningless/",
+     "https://bestjuku.com/article/3769/",
+     "https://juku.ameba.jp/onlinejuku/a000010264/",
+     "https://jukushiru.com/article/post-31351/",
+     "https://www.kobekyo.com/column/online-tutor-disadvantages/",
+     "https://kyouikukoubou.com/learning_method",
+     "https://www.sorajuku.jp/column/choice.html",
+     "https://www.kobekyo.com/column/onlinejuku-howtochoose/",
+     "https://info.eboard.jp/blog/20241128.html",
+     "https://jyukumado.jp/column/17",
+     "https://welcome.zenkyoken.com/online/column/online-merit/",
+     "https://mates-app.jp/aim/blog/management/250602_onlinejuku/",
+     "https://benesse.jp/kyouiku/202205/20220518-2.html",
+     "https://www.ss-1.net/magazine/2025/03/onlinejuku-nopoint.html"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン授業 集中できない 小学生": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://benesse.jp/kyouiku/202205/20220518-2.html",
+     "https://benesse.jp/kyouiku/202009/20200918-3.html",
+     "https://www.mext.go.jp/studxstyle/special/5.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.889100.com/column/column130.html",
+     "https://benesse.jp/kyouiku/202009/20200905-6.html",
+     "https://benesse.jp/kyouiku/202006/20200607-1.html",
+     "https://www.starjuku.com/faq/837/",
+     "https://www.shinko-keirin.co.jp/shinko/pittarinavi/20200401-01/",
+     "https://www.889100.com/column/column021.html",
+     "https://dekitus.johnan.jp/column/clm13.php"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://shouseijuku.com/news/%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E6%8E%88%E6%A5%AD%E3%81%A7%E9%9B%86%E4%B8%AD%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E5%AD%90%E3%81%AE7%E3%81%A4%E3%81%AE%E5%85%B1%E9%80%9A%E7%82%B9%EF%BD%9C/",
+     "https://www.889100.com/column/column130.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14248971829",
+     "https://welcome.zenkyoken.com/online/column/online-demerit-merit/",
+     "https://dekitus.johnan.jp/column/clm13.php",
+     "https://benesse.jp/kyouiku/202009/20200918-3.html",
+     "https://www.manatera.com/blog/online-individual-tutoring-elementary/",
+     "https://www.starjuku.com/faq/837/"
+    ],
+    "error": ""
+   }
+  },
+  "子供 英会話 いつから": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://api.repository.cam.ac.uk/server/api/core/bitstreams/106afaa9-8f41-439e-a096-c7b25a6c431d/content",
+     "https://learnenglishkids.britishcouncil.org/parents/helping-your-child/how-young-children-learn-english-another-language",
+     "https://learnenglishkids.britishcouncil.org/sites/kids/files/filefield_paths/parents-articles-how-to-start-teaching-kids-english-at-home-english-v2.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://coeteco.jp/articles/11789",
+     "https://online.ecc.co.jp/column/kids-method/",
+     "https://english.sanrio.co.jp/blog/archive/when-to-start-english-education/",
+     "https://nativecamp.net/blog/20240426-kids_english",
+     "https://prince-eibei.jp/prince/prince-11007/",
+     "https://kimini.online/blog/archives/3812",
+     "https://www.wil.co.jp/column/how-old-start-studying-english/",
+     "https://shi-geru-blog.com/when-children-should-start/",
+     "https://www.eigo-mana.com/basic-knowledge/timing.html",
+     "https://resemom.jp/article/2026/05/22/86151.html",
+     "https://edu.watch.impress.co.jp/docs/news/2086134.html",
+     "https://prtimes.jp/main/html/rd/p/000000865.000028894.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://eslclub.jp/blog/6199/",
+     "https://www.eikaiwa-wellbee.com/pages/blog/kodomo-eikaiwa-nansai-kara.html",
+     "https://benesse.jp/eigo/shinkatei/article/20220315-2.html",
+     "https://juken.oricon.co.jp/rank-kids-english/special/education/when-to-start/",
+     "https://www.aeonet.co.jp/column/post_76.html",
+     "https://cocoas-kids.com/post_column/%E5%AD%90%E3%81%A9%E3%82%82%E3%81%AE%E8%8B%B1%E8%AA%9E%E6%95%99%E8%82%B2%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8B%EF%BC%9F%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%82%84/",
+     "https://queensmarry.jp/no-cat/post-7272/",
+     "https://eigosapuri.jp/article/english-conversation-age/",
+     "https://cgkis.com/school-news/column-ja/english-learning-for-kids/",
+     "https://sukusuku-ep.com/pages/32/"
+    ],
+    "error": ""
+   }
+  },
+  "英検 対策 小学生 教室": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kids.ecc.jp/course/eiken.html",
+     "https://www.shane.co.jp/kids/eiken_trial/",
+     "https://www.eccjr.com/course/eiken.php",
+     "https://www.nova.co.jp/eiken_channel/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://picro.jp/media/eiken/",
+     "https://www.kids.ecc.jp/course/eiken.html",
+     "https://jyukumado.jp/column/194",
+     "https://studystudio.jp/contents/archives/62090",
+     "https://prorea.jp/english/columns/recommend-jyuku-elementary-school-eiken/",
+     "https://honkienglish.com/test/eiken_ele.html",
+     "https://www.junkosensei.com/",
+     "https://english-academy.seiha.com/eiken/",
+     "https://www.shirosaka-satomi.com/",
+     "https://eikaiwa.weblio.jp/ninja-eikaiwa/eigo-juku-syogakusei",
+     "https://englishhub.jp/kids/eiken-for-kids",
+     "https://jukushiru.com/article/post-19896/",
+     "https://bestjuku.com/article/3928/",
+     "https://www.shane.co.jp/kids/lesson/detail/eiken.html",
+     "https://bestjuku.com/article/6526/",
+     "https://www.miyamanavi.net/eiken-school-recommend/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://magna-eikaiwa.mintflag.com/column/eiken-preparation-online/",
+     "https://ninja.weblio.jp/eigo-juku-syogakusei",
+     "https://jyukumado.jp/column/194",
+     "https://brightchoice.jp/lessonandactivity/lessons/20250312001693",
+     "https://ouchi-schooling.com/eiken-shoogakusei-jyuku/",
+     "https://bestjuku.com/article/6526/",
+     "https://bestjuku.com/article/8047/",
+     "https://englishhub.jp/kids/eiken-for-kids",
+     "https://picro.jp/media/eiken/",
+     "https://www.youtube.com/watch?v=mr9ZTlaKPXU",
+     "https://actimethod.com/column/eigo-jyukuhikaku/",
+     "https://jukushiru.com/article/post-0-21/"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン英会話 子供 続かない": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.global-crown.com/blog/english-teaching/online-eikaiwa-tsudukanai-top5",
+     "https://learnenglishkids.britishcouncil.org/parents/helping-your-child/motivating-your-child",
+     "https://learnenglishkids.britishcouncil.org/parents/helping-your-child/practical-tips"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://online.ecc.co.jp/column/online-english-children-ineffective/",
+     "https://www.worldtalk.jp/blog/tsuzukanai-reason-online-eikaiwa-3steps/",
+     "https://www.global-crown.com/blog/english-teaching/online-eikaiwa-tsudukanai-top5",
+     "https://startoo.co/english/6553/",
+     "https://note.com/ai_kodomoeikaiwa/n/n5e3f78560ecd",
+     "https://ai-kodomoeikaiwa.jp/kids-online-english-no-effect/",
+     "https://ai-kodomoeikaiwa.jp/myguide/2025/08/28/kids-english-reluctant-solutions/",
+     "https://ai-kodomoeikaiwa.jp/myguide/2026/02/26/kids-online-english-quit-reasons/",
+     "https://www.globeenglish.com/gengo/online-english/english-conversation-child-no-effect/",
+     "https://www.glolea.com/ambassador/brightly-kodomoeikaiwa/kids-online-english-not-speaking.html",
+     "https://eikaiwa.weblio.jp/ninja-eikaiwa/onlinekids-get-bored",
+     "https://kimini.online/blog/archives/29655",
+     "https://www.harutasowaka.com/entry/2025/02/12/151543",
+     "https://www.qqeng.com/qqkids/english-column/kids20230307",
+     "https://aprill-english.com/column/846/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.global-crown.com/blog/english-teaching/online-eikaiwa-tsudukanai-top5",
+     "https://ouchi-schooling.com/whatmakes-onelinehard/",
+     "https://kimini.online/blog/archives/30473",
+     "https://www.cloudt.jp/column/online-english-tsudukanai-kids/",
+     "https://www.worldtalk.jp/blog/tsuzukanai-reason-online-eikaiwa-3steps/",
+     "https://eigoen.com/eikaiwa/free-talk/",
+     "https://www.glolea.com/ambassador/brightly-kodomoeikaiwa/kids-online-english-not-speaking.html",
+     "https://all-eikaiwa.com/online-eikaiwa-kodomo-kokanashi/"
+    ],
+    "error": ""
+   }
+  },
+  "タブレット学習 塾 違い": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://smile-zemi.jp/shogaku/lp/catalog/",
+     "https://www.kobetsu.co.jp/feature/",
+     "https://smile-zemi.jp/shogaku/apply/price.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kidshomestudy.com/tablet-cramschool/",
+     "https://coeteco.jp/articles/13021",
+     "https://www.risu-japan.com/guide/comparison/tablet-learning-pros-and-cons/",
+     "https://startoo.co/startoo/8124/",
+     "https://www.jiritsu-red.jp/column/23.html",
+     "https://ichigo-drill.jp/middle-school-tablet",
+     "https://edusuppo.com/advantages-of-tablet/",
+     "https://t-bitcampus.com/blog/juku-tablet/",
+     "https://plusni.com/tablet/knowledge/merit-demerit.html",
+     "https://coeteco.jp/articles/10924",
+     "https://resemom.jp/kyoiku/study-tablet-highschool/",
+     "https://coeteco.jp/articles/11122",
+     "https://www.risu-japan.com/guide/comparison/tablet-learning-vs-paper-learning/",
+     "https://www.risu-japan.com/guide/comparison/tablet-learning-price-comparison/",
+     "https://mirai-gakushuu.jp/media/gakushuujuku/post-643/",
+     "https://muranakablog.biz/tablet-middle-student/"
+    ],
+    "error": ""
+   }
+  },
+  "英語 話せない 中学生 対策": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mext.go.jp/content/20210531-mxt_kyoiku01-100002608_010.pdf",
+     "https://learnenglishteens.britishcouncil.org/skills/speaking",
+     "https://learnenglish.britishcouncil.org/english-levels/improve-your-english-level/five-tips-busy-learners-listening-speaking",
+     "https://learnenglishteens.britishcouncil.org/exams/speaking-exams/speaking-tips?page=0"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.morijuku.com/column/31/",
+     "https://www.yubisashi.com/article/hanasenai/",
+     "https://shiboudouki.jp/how-junior-high-school-students-can-become-able-to-speak-english/",
+     "https://kids-english-online.com/junior-high-dont-understand-english",
+     "https://edusuppo.com/bad-at-english-jhs/",
+     "https://magna-eikaiwa.mintflag.com/column/study-methods-for-junior-high-school-students-who-dont-understand-english-at-all/",
+     "https://nakabayashikumiko.com/speak-english-fluently/",
+     "https://jyuku-online.com/blog/bs-eigo/",
+     "https://aprill-english.com/column/1149/"
+    ],
+    "error": ""
+   }
+  },
+  "不登校 オンライン 学習 塾": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://tintle.net/",
+     "https://kizuki.or.jp/facility/online/",
+     "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1422155_00005.htm"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://picro.jp/media/academy/",
+     "https://coeteco.jp/articles/11643",
+     "https://picro.jp/media/futokoonline/",
+     "https://bestjuku.com/article/4674/",
+     "https://bestjuku.com/article/12141/",
+     "https://kidshomestudy.com/futoko-online-tutor/",
+     "https://juku.ameba.jp/onlinejuku/a000011775/",
+     "https://studychain.jp/media/futoko-online-juku/",
+     "https://juxeca.com/1565/",
+     "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1422155_00005.htm",
+     "https://www.shingaku-fs.jp/tsunaguba/column/attendance_system/syussekiatukai-kiji",
+     "https://www.shingaku-fs.jp/tsunaguba/column/attendance_system/free-school-syussekiatsukai",
+     "https://academy.nijin.co.jp/2026/07/24/futoko-shusseki-atsukai/",
+     "https://www.manatera.com/blog/school-refusal-attendance/",
+     "https://sabusuta.jp/column/shussekiatukai/",
+     "https://sabusuta.jp/column/truancy-online-classes/",
+     "https://www.cjgakuen.com/post/online-learning-attendance"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.shingaku-fs.jp/tsunaguba/column/study/top10_cramschools",
+     "https://juku.ameba.jp/onlinejuku/a000011775/",
+     "https://juxeca.com/1565/",
+     "https://bestjuku.com/article/12141/",
+     "https://jyukumado.jp/column/127",
+     "https://ichigo-drill.jp/truantchildren-tablet-learning",
+     "https://www.jukenpass.jp/archives/19127",
+     "https://www.kobekyo.com/column/hutoukou-online-tutoring/"
+    ],
+    "error": ""
+   }
+  },
+  "帰国子女 英語 維持 教室": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joes.or.jp/kojin/hoji",
+     "https://www.kikokushijoacademy.com/online_english_program_lp",
+     "https://www.amity.co.jp/course/homecoming.html",
+     "https://www.be-academy.com/returnee-class-hirakata/",
+     "https://www.joes.or.jp/kojin/hoji/abouthoji?ismodesmartphone=off"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://englishhub.jp/kids/lessons-for-returnees",
+     "https://www.amity.co.jp/course/homecoming.html",
+     "https://eslclub.jp/blog/4755/",
+     "https://www.joes.or.jp/kojin/hoji",
+     "https://www.us-lighthouse.com/study/kikokushijo/how-to-keep-and-improve-english-in-japan.html",
+     "https://lexis.co.jp/returnee-kikokushijyo-bilingual-classes/",
+     "https://kimini.online/blog/archives/28211",
+     "https://nissait.com/course/special/",
+     "https://earnesteigo.com/student04.html",
+     "https://eikaiwa.weblio.jp/ninja-eikaiwa/onlinekids-returneechildren",
+     "https://www.sma-world.com/world-english-online/returnees-online/",
+     "https://kodomoeigobu.co.jp/media/returnee/",
+     "https://www.sma-world.com/wte/infor/",
+     "https://prorea.jp/english/columns/recommend-online-returnee/",
+     "https://kikokulabo.jp/eigo-ohji/",
+     "https://effect.ne.jp/",
+     "https://www.miyamanavi.net/returnee/",
+     "https://kikokusei-mikata.com/column/einglish-cramschool/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kikokusei-mikata.com/column/einglish-cramschool/",
+     "https://www.active-kids.net/kikoku_school.html",
+     "https://brightchoice.jp/lessonandactivity/lessons/20260122001937",
+     "https://nisai-british-onlineschool.com/blog/international-school/keep-academic-english/",
+     "https://www.joes.or.jp/kojin/hoji",
+     "https://www.kikokushijoacademy.com/",
+     "https://www.joes.or.jp/kojin/hoji",
+     "https://hachiojisakura.com/returnee-school20-blog/",
+     "https://kikokusei-mikata.com/column/einglish-cramschool/",
+     "https://effect.ne.jp/",
+     "https://www.sma-world.com/world-english-online/returnees-online/",
+     "https://www.returnedkids.com/"
+    ],
+    "error": ""
+   }
+  },
+  "英会話 マンツーマン グループ 違い": {
+   "group": "オンライン・英会話の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.shane.co.jp/column/detail/id%3D38324",
+     "https://nativecamp.net/blog/20260925_english_trial_lesson",
+     "https://www.shane.co.jp/lesson/detail/group.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://juken.oricon.co.jp/rank_english/special/knowledge/private-group/",
+     "https://englishfactor.jp/media/learning/group-lessons/",
+     "https://englishhub.jp/school/ranking/privatelesson-ranking",
+     "https://human.sankei.co.jp/guide/column/one-to-one/",
+     "https://www.oneup.jp/media/theory/differences/",
+     "https://kimini.online/blog/archives/33088",
+     "https://www.nes-schools.com/group-lesson/",
+     "https://www.online.gymlish.com/%E8%8B%B1%E4%BC%9A%E8%A9%B1%E3%81%AE%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B3%E3%81%A3%E3%81%A6%E3%81%A9%E3%81%86%E3%81%AA%E3%81%AE%EF%BC%9F%E3%83%A1%E3%83%AA%E3%83%83/",
+     "https://whatever-free.net/q-a-16.html"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

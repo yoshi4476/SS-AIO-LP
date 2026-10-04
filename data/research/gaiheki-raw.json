@@ -1,0 +1,1753 @@
+{
+ "industry": "gaiheki",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 外壁塗装 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://d-taku.com/",
+     "https://www.my-painter.com/",
+     "https://companys.jp/",
+     "https://companys.jp/guarantee/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://smilesfactory.net/staffblog/%E5%A4%A7%E9%98%AA%E3%81%AE%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%80%81%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E5%9D%AA%E6%95%B0%E3%83%BB%E5%A1%97%E6%96%99/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_market_search_detail&region_code=27000",
+     "https://www.asahieito.co.jp/house/osaka-gaiheki-yane-tosou/",
+     "http://www.sunfine-tosou.jp/introduction/marketprice.html",
+     "https://www.youtube.com/watch?v=iEN7Y3LraqM",
+     "https://zeenb.astecpaints.jp/journal/vendor-list/osaka-111108",
+     "https://gaiheki.jp/area/osaka/",
+     "https://gaiheki-madoguchi.com/clients/prefectures/27",
+     "https://paipro.jp/column/area/kinki/osaka/osakahu/",
+     "https://www.nuri-kae.jp/column/construction-cost/431747/",
+     "https://www.nuri-kae.jp/column/contractors/431289/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://paipro.jp/column/area/kinki/osaka/osakahu/",
+     "https://www.nuri-kae.jp/column/contractors/431289/",
+     "https://seishindo35.com/gaihekitosou-navi/area/osaka/",
+     "https://www.etic.co.jp/feature/painting-company-in-osaka/",
+     "https://gaiso-reform.pro/areapage/sarea/kansai/osaka/",
+     "https://paint-go.com/shokunin/osaka/",
+     "https://gaimani.com/osaka-gyousya/",
+     "https://www.asahieito.co.jp/house/osaka-gaiheki-yane-tosou/",
+     "https://www.yanery.com/gaiheki-osaka-city/",
+     "https://curama.jp/exterior-painting/osaka/1/",
+     "https://meetsmore.com/services/outdoor-wall-painting/osaka/osaka",
+     "https://rehome-navi.com/osaka/categories/exterior-wall/shops",
+     "https://taskle.jp/media/articles/826",
+     "https://gaihekiguide.co.jp/osaka-exterior-wall-painting/",
+     "https://ys-meister.jp/22932",
+     "https://gaihekitosou-hotline.com/ranking-osaka/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 屋根工事 業者": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.u-roof.co.jp/",
+     "https://www.yaneyasan13.net/",
+     "https://www.aokibankin1963.com/service/",
+     "https://www.aym4.co.jp/reform/gaisou",
+     "https://www.touban.or.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://rehome-navi.com/tokyo/categories/roof/shops",
+     "https://saiyasu-syuuri.com/blog/136873/",
+     "https://www.yu-magokoro.com/archives/845",
+     "https://meetsmore.com/services/roof-changing/tokyo/reviews",
+     "https://www.zehitomo.com/home/reform/exterior/roofconstruction/tokyo/minato-ku"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yane.heteml.net/category/tokyo/",
+     "https://yanekabeya.com/tokyo/",
+     "https://www.yaneyasan13.net/",
+     "https://www.tmroof.com/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 外壁塗装 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tokaikougei.net/",
+     "https://glad-nagoya.jp/",
+     "https://www.nuri-kae.jp/company/405/review"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gaiheki.jp/area/aichi/nagoya/",
+     "https://gaiheki.jp/area/aichi/nagoya/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGW35kUegN_bujePFTFWSanDn84wPRUBStJzrxjiEiAFOpEOpQKWUmE1NqWHqg8Qrx2uCpZoYMP-chKcufQ8QMAcEJzYpBRtWDbrErJq2jpRLH6zy7JMv8=",
+     "https://gaiheki-madoguchi.com/clients/prefectures/23/cities/1234",
+     "https://www.biz.ne.jp/list/exterior-interior-construction/23_aichi/nagoyashi/",
+     "https://sotokabe.net/archives/11125",
+     "https://www.reform-guide.jp/topics/gaiheki-nagoyashi/",
+     "https://zeenb.astecpaints.jp/journal/vendor-list/nagoya-111137"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/exterior-painting/aichi/1/",
+     "https://seishindo35.com/gaihekitosou-navi/area/nagoya/",
+     "https://seishindo35.com/gaihekitosou-navi/area/nagoyanishi/",
+     "https://tosou-nagoya.com/blog/260418.html",
+     "https://www.tokaikougei.net/",
+     "https://gaimani.com/nagoya-gyousya/",
+     "https://media.bisenn.jp/gaihekitosou/aichi-gaihekitosou/nagoya-2/",
+     "https://www.yanery.com/wall-nagoya/",
+     "https://www.yanery.com/wall-aichi/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 屋根塗装 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nuri-kae.jp/company/3797/review",
+     "https://www.zehitomo.com/home/large-scale-work/paintings/roof-coating/fukuoka/fukuoka-shi",
+     "https://www.hotlines.shop/reform-roofpaint/fukuoka/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://yaneshuri-takumi.com/takumi/hukuoka/",
+     "https://paipro.jp/column/area/kyushu/fukuoka/fukuoka/",
+     "https://gaiso-reform.pro/areapage/sarea/kyusyu/fukuoka/",
+     "https://gaiheki.jp/area/fukuoka/",
+     "https://sotokabe.net/archives/11109",
+     "https://www.nuri-kae.jp/area/%E7%A6%8F%E5%B2%A1%E7%9C%8C/part/exterior_outer-wall",
+     "https://gaiheki-madoguchi.com/clients/prefectures/40",
+     "https://www.ribilo.com/paint/40"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://paipro.jp/column/area/kyushu/fukuoka/fukuokashi-minamiku/",
+     "https://rehome-navi.com/fukuoka/fukuokashi/categories/roof/shops",
+     "https://rehome-navi.com/fukuoka/categories/roof/shops",
+     "https://meetsmore.com/services/roof-painting/fukuoka/fukuoka",
+     "https://rehome-navi.com/fukuoka/fukuokashijounanku/categories/roof/shops",
+     "https://u-paint.jp/",
+     "https://www.nuri-kae.jp/column/contractors/431333/",
+     "https://www.ribilo.com/paint/40/40130",
+     "https://rehome-navi.com/fukuoka/categories/exterior-wall/shops",
+     "https://www.nuri-kae.jp/column/contractors/431330/",
+     "https://gaiso-pro.jp/fukuokashi/",
+     "https://double-home.co.jp/fukuokacity-no1/",
+     "https://gaiso-reform.pro/areapage/sarea/kyusyu/fukuoka/",
+     "https://www.yanery.com/wall-fukuoka/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 外壁塗装 寒冷地 業者": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kamiharako-toso.co.jp/",
+     "https://kizuki-sapporo.com/",
+     "https://www.sanwa-paint.jp/area/sapporo/",
+     "https://www.kmew.co.jp/shouhin/siding/feature/taitougai.html",
+     "https://ksd20-www.nipponpaint.co.jp/support/faq/8/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://renovation-r.co.jp/knowledge/wall-renovation/sapporo-exterior-remodeling",
+     "https://koyamapaint.com/blog/%E3%80%90%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%80%91%E5%87%8D%E5%AE%B3%E3%81%A8%E3%81%AF%E3%80%90%E6%9C%AD%E5%B9%8C%E3%81%AB%E3%81%8A%E4%BD%8F%E3%81%BE%E3%81%84%E3%81%AE%E6%96%B9%E5%BF%85%E8%A6%8B/",
+     "https://www.nissho-grp.co.jp/reform_column/%E6%9C%AD%E5%B9%8C%E3%82%A8%E3%83%AA%E3%82%A2%E3%81%A7%E3%81%AE%E5%A4%96%E5%A3%81%E3%83%AA%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E5%B7%A5%E4%BA%8B%E3%81%AA%E3%82%89%E3%81%8A%E3%81%BE%E3%81%8B%E3%81%9B/",
+     "https://renovation-r.co.jp/knowledge/wall-renovation/sapporo-exterior-remodeling",
+     "https://izm-paint.com/sapporo-siding-toso-interview",
+     "https://paipro.jp/column/area/tohoku/sapporo/",
+     "https://www.asahieito.co.jp/house/sapporo-gaiheki-yane-toso/",
+     "https://www.nagamochiplus.jp/blog/sapporo-exterior-wall-renovation-recommendation",
+     "https://gaiheki.jp/area/hokkaido/hokkaido-sapporo/",
+     "https://creast.jp/wall-painting/",
+     "https://creast.jp/staff-blog/9638/",
+     "https://www.asahieito.co.jp/house/sapporo-gaiheki-yane-toso/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://paipro.jp/column/exterior-painting/sapporo/",
+     "https://www.biz.ne.jp/list/exterior-interior-construction/01_hokkaido/sapporoshi/",
+     "https://seishindo35.com/gaihekitosou-navi/area/sapporo/",
+     "https://creast.jp/wall-painting",
+     "https://creast.jp/staff-blog/8556/",
+     "https://creast.jp/staff-blog/8991/",
+     "https://re-hokurei.com/exterior-frost-damage-inspection-sapporo/",
+     "https://gaiheki-tosou-hokkaido.com/blog/sapporo-tosou-gyousha-checklist/",
+     "https://gaiheki-tosou-hokkaido.com/blog/sapporo-tosou-tekiki-monthly/",
+     "https://gaiheki-tosou-hokkaido.com/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 屋根修理 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yanerepair.jp/blog/yokohama-roof-repair-cost-comparison-ranking-subsidy/",
+     "https://yane.heteml.net/category/kanagawa/yokohama/",
+     "https://kakerukoumuten.com/category/yokohama-yane/",
+     "https://yaneshuri-takumi.com/takumi/kanagawa/",
+     "https://yane.heteml.net/category/kanagawa/yokohama/",
+     "https://www.rhythmpaint.jp/column/yokohamashi-yanesyuri/",
+     "https://rescue.epark.jp/category/home-repair/roof-repair/area/Kanagawa/1117",
+     "https://yanerepair.jp/blog/yokohama-roof-repair-cost-comparison-ranking-subsidy/",
+     "https://yane.ipro-group.jp/meisters/all/kanagawa/yokohamashi",
+     "https://www.rhythmpaint.jp/column/yokohamashi-yanesyuri/",
+     "https://www.seikyo-home.jp/roof-yokohama/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yane.heteml.net/category/kanagawa/yokohama/",
+     "https://yokohama-gaiheki-yane-repair.com/area/a005/",
+     "https://www.rhythmpaint.jp/column/yokohamashi-yanesyuri/",
+     "https://www.yanerepair-search.com/",
+     "https://www.travelbook.co.jp/t-601/topic-81169/",
+     "https://ys-meister.jp/21840",
+     "https://yanerepair.jp/blog/yokohama-roof-repair-cost-guide/",
+     "https://yanerepair.jp/blog/yokohama-roof-repair-cost-guide-2/",
+     "https://yanerepair.jp/blog/yokohama-roof-reform-cost-selection-guide/",
+     "https://yanerepair.jp/blog/yokohama-roof-repair-cost-selection/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 外壁塗装 景観 業者": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.masaki-kensou.com/%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AF%E4%BA%AC%E9%83%BD%E5%B8%82%E3%81%AE%E3%80%90%E6%AD%A3%E6%9C%A8%E5%BB%BA%E8%A3%85%E3%80%91%E3%81%AB%E3%81%8A%E4%BB%BB%E3%81%9B%EF%BD%9E%E5%A4%96%E5%A3%81/",
+     "https://gaiheki-second-opinion.com/kyoto/",
+     "https://painthomes-kyoto.com/artdesign/",
+     "https://www.masaki-kensou.com/%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AF%E4%BA%AC%E9%83%BD%E5%B8%82%E3%81%AE%E3%80%90%E6%AD%A3%E6%9C%A8%E5%BB%BA%E8%A3%85%E3%80%91%E3%81%AB%E3%81%8A%E4%BB%BB%E3%81%9B%EF%BD%9E%E5%A4%96%E5%A3%81/",
+     "https://epec.co.jp/color/",
+     "https://www.reliableskills-exteriorpainting.net/list/",
+     "https://welbe-home.com/",
+     "https://paipro.jp/column/area/kinki/kyoto/kyotofu/",
+     "https://www.tosou-navi.jp/list/kyoto/",
+     "https://kurashi-kenchiku.com/kansai/area/kyoto/1368/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.city.kyoto.lg.jp/tokei/cmsfiles/contents/0000281/281281/dezainnkijyunn.pdf",
+     "https://www.ieuri.com/bible/tochi/23824/",
+     "https://dfar.jp/blog_and_column/kyoto-keikanzyourei2022010/",
+     "https://ouchi-navi.com/gaiheki/kyoto/kyoto/",
+     "https://welbe-home.com/knowledge/jourei",
+     "https://kyoto-yanereform.com/gaiheki-iro/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 屋根 葺き替え 業者": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yaneiroha.com/yane/hyogo/kobeshi/",
+     "https://www.zephan.co.jp/news/roofing-contractors-hyogo-prefecture/",
+     "https://erabinote.com/yane/kobe.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEs2w5HfH2oHtfq5rgnLYYSjKGHPGHJ0jIIUfnMIhV1bDjBJk5N0RNUBtB4v4R1hT3QB4Ws3LIdqtmpFifeGmwo6eKR6Pciw7gDEdaXTCesxd3ObGxW9-3L0s3ckHZ84d3e",
+     "https://yanekabeya.com/hyogo/kobe/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEI_741CbnX7WhIxRpKncevwIryuxWZ8U1Je-1wbbSzthCrcPm-dnvQEB7VCWQ2itg2zuoeUUWyg38WiXOd4-xe-askO1mUFCP_C1rkeIilfYlo_Hes6QRd2IQ4PmULlvUAZfkh6H41eYYimLP2Gy356c6S",
+     "https://shirakawa-kougeisha.com/blog/35774/",
+     "https://protimes-miki.com/blog1/52622/",
+     "https://refo-sumu.jp/subsidies/area/28/5015",
+     "https://www.nuri-kae.jp/subsidies/area/28/5015/part/exterior_outer-wall",
+     "https://maxreform-kobe.jp/column/20250724ito.html",
+     "https://www.reform-hashiken.jp/blog/reform-column/211014",
+     "https://www.kzc.jp/reform/guide/modtreepage01_326/",
+     "https://yane.heteml.net/category/hyogo/kobeshi/",
+     "https://maxreform-kobe.jp/blog/20230224_kurihara.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yane.heteml.net/category/hyogo/kobeshi/",
+     "https://yanekabeya.com/hyogo/kobe/",
+     "https://www.g-roof.jp/",
+     "https://kobeshi-amamori.com/",
+     "https://www.f-kobe-yane.com/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 外壁塗装 地元 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://reform-escort.com/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E3%80%91%E4%BB%99%E5%8F%B0%E5%B8%82%E3%81%AE%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E6%A5%AD%E8%80%85%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0top5%EF%BD%9C/",
+     "https://paipro.jp/column/area/tohoku/miyagiken/",
+     "https://gaiheki-madoguchi.com/clients/prefectures/4/cities/301",
+     "https://www.youtube.com/watch?v=N-NMzmV2dvI",
+     "https://reform-escort.com/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E3%80%91%E4%BB%99%E5%8F%B0%E5%B8%82%E3%81%AE%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E6%A5%AD%E8%80%85%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0top5%EF%BD%9C/",
+     "https://reform-escort.com/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E3%80%91%E4%BB%99%E5%8F%B0%E5%B8%82%E3%81%AE%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E6%A5%AD%E8%80%85%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0top5%EF%BD%9C/",
+     "https://www.ribilo.com/paint/4/4100",
+     "https://gaihekiplus.com/columns/sendai"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/outdoor-wall-painting/miyagi/sendai",
+     "https://www.nuri-kae.jp/area/%E5%AE%AE%E5%9F%8E%E7%9C%8C/5002/exterior_outer-wall",
+     "https://seishindo35.com/gaihekitosou-navi/area/sendai/",
+     "https://onizawapaint.co.jp/",
+     "https://gaimani.com/sendai-gyousya/",
+     "https://www.meiwa-nurikae.com/",
+     "https://sumai-smart.co.jp/miyagi-osusume/",
+     "https://gaimani.com/miyagi-gyousya/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 屋根塗装 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://gaiso-reform.pro/areapage/sarea/chugoku/hiroshima/",
+     "https://crown-paint.jp/hiroshima/",
+     "https://rehome-navi.com/hiroshima/categories/roof/shops",
+     "https://www.nuri-kae.jp/column/contractors/431316/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://paipro.jp/column/area/hitoshimaken/",
+     "https://yaneiroha.com/yane/hiroshima/",
+     "https://www.nuri-kae.jp/column/contractors/431316/",
+     "https://yaneiroha.com/feature/painting/hiroshima/hiroshimashi/",
+     "https://www.nuri-kae.jp/area/%E5%BA%83%E5%B3%B6%E7%9C%8C/5017/exterior_outer-wall",
+     "https://www.ribilo.com/paint/34/34100",
+     "https://gaiheki-kakekomi.com/home/hiroshima/",
+     "https://gaiheki-style.com/ft_roof/hiroshima/hiroshimashi_ct/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 費用 相場": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nuri-kae.jp/column/construction-method/722/?utm_source=openai",
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/incidental_part-69810?utm_source=openai",
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/incidental_part-69810?utm_source=openai"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yuzu-tosou.com/column/168437/",
+     "https://www.nuri-kae.jp/column/construction-cost/152/",
+     "https://rehome-navi.com/articles/2736",
+     "https://moriroofkensou.com/info/%E5%A1%97%E6%96%99%E3%81%AE%E8%B2%BB%E7%94%A8%E5%B7%AE%E3%82%92%E6%A4%9C%E8%A8%BC%EF%BC%81%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E3%82%B7%E3%83%AA%E3%82%B3%E3%83%B3/",
+     "https://www.takahashi-paint.com/blog/gaiheki-tosou/blog-11358/",
+     "https://sim-group.jp/2026/02/21/10812/",
+     "https://www.nuri-kae.jp/column/construction-cost/701/",
+     "https://www.youtube.com/watch?v=6Hulu_5qr6U"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/exterior-painting/magazine/2063/",
+     "https://aippearnet.com/jyutakuinfo/reform/gaihekitosou-souba/",
+     "https://www.yuzu-tosou.com/column/168437/",
+     "https://prtimes.jp/main/html/rd/p/000000041.000046700.html",
+     "https://sim-group.jp/2026/02/21/10812/",
+     "https://www.nurisen.jp/blog/2026/05/2026352.html",
+     "https://pronuri.com/articles/2238",
+     "https://www.lapin-paint.com/blog/1190.html",
+     "https://ouchi-kobou.com/blog/20260422-6728/"
+    ],
+    "error": ""
+   }
+  },
+  "屋根塗装 料金 目安": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nuri-kae.jp/column/construction-cost/107/",
+     "https://www.cjcoop.or.jp/column/roof/4604/",
+     "https://kuraberu-shokunin.jp/media/yane-souba-2025/",
+     "https://gaiheki-madoguchi.com/articles/1448",
+     "https://reform-cost-navi.com/%E5%B1%8B%E6%A0%B9%E5%A1%97%E8%A3%85%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B42026%E5%B9%B4%E7%89%88%EF%BD%9C%E5%A1%97%E6%96%99%E5%88%A5%E3%83%BB%E5%9D%AA%E6%95%B0%E5%88%A5%E3%81%AE%E7%B7%8F%E9%A1%8D/",
+     "https://pronuri.com/articles/2360"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 坪数別 費用": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://rehome-navi.com/articles/2736",
+     "https://www.kameda-tosou.com/blog/blog-521",
+     "https://www.setagayahome.co.jp/blog/2830/",
+     "https://reform.cainz.com/knowledge/wallpaint/4821"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/exterior-painting/magazine/2063/",
+     "https://gro-bels.co.jp/labo/exterior-painting-cost/",
+     "https://rehome-navi.com/articles/2736",
+     "https://aippearnet.com/jyutakuinfo/reform/gaihekitosou-souba/",
+     "https://sim-group.jp/2026/02/21/10812/",
+     "https://www.nuri-kae.jp/column/construction-cost/152/",
+     "https://pronuri.com/articles/2238",
+     "https://www.tosouyasan13.net/soubaomitsumori",
+     "https://ouchi-kobou.com/blog/20260422-6728/"
+    ],
+    "error": ""
+   }
+  },
+  "屋根葺き替え 費用 相場": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yanekabeya.com/yane-fukikae/",
+     "https://yane-matsuyama.com/reroofing-price",
+     "https://yane.reform-plus.jp/articles/post-32312/",
+     "https://www.nuri-kae.jp/column/construction-method/922/",
+     "https://tobeshinhome.com/column/16/",
+     "https://www.zephan.co.jp/news/roof-renovation-market-price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yanekabeya.com/price/",
+     "https://maxreform.jp/reroofing-price",
+     "https://yanekabeya.com/yane-fukikae/",
+     "https://www.yaneyasan13.net/reroofing-price",
+     "https://gaiheki-madoguchi.com/articles/1481",
+     "https://www.manaka-reform-chiba.com/column/yane-tosou/12670/",
+     "https://tobeshinhome.com/column/58/",
+     "https://yane.reform-plus.jp/articles/post-32022/",
+     "https://reform-cost-navi.com/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E3%80%91%E5%B1%8B%E6%A0%B9%E3%83%AA%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%EF%BD%9C%E8%91%BA%E3%81%8D%E6%9B%BF%E3%81%88/",
+     "https://kamisei.co.jp/news/54615",
+     "https://next-arch.jp/column/detail/20250707162624/",
+     "https://yanerepair.jp/blog/roof-replacement-cost-guide/",
+     "https://shizupaintpro.com/yanetubibetu/",
+     "https://sadakawara.com/blog/3770"
+    ],
+    "error": ""
+   }
+  },
+  "屋根カバー工法 費用 相場": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.setagayahome.co.jp/blog/4115/",
+     "https://tochigi-yane.com/blog/30899/",
+     "https://tobeshinhome.com/column/77/",
+     "https://rehome-navi.com/articles/489",
+     "https://www.homepal.jp/blog-roof/17506/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yanekabeya.com/price/",
+     "https://rehome-navi.com/articles/489",
+     "https://shine-paint.com/blog/kosumi/roof%E2%80%97cover%E2%80%97price%E2%80%972026.html",
+     "https://www.nuri-kae.jp/column/construction-method/710/",
+     "https://www.manaka-reform-chiba.com/column/yane-tosou/12676/",
+     "https://szk-biso.jp/blog/30065/",
+     "https://www.takahashi-paint.com/blog/yane-kouji/blog-16464/",
+     "https://shizupaintpro.com/yanetubibetu/",
+     "https://ouchi-kobou.com/blog/20260415-cover-kouhou"
+    ],
+    "error": ""
+   }
+  },
+  "足場代 相場 外壁塗装": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tosouyasan13.net/paint-scaffold",
+     "https://gaiheki-madoguchi.com/articles/1527",
+     "https://satoutokou.net/blo2/6891",
+     "https://build-art.co.jp/gaiheki/base/koutei/ashiba/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHO6rV8itxDuddtwjmkrjU2U9ffJEvUh72YPSuK7VyFLcFJk-qHVfhSqasHwu7HJ6Ife4isCZC9B6DohMPExWIowhWizUAnMVMytzKpYQSxtlBdTb_r1vL4s9fC_aAI_fAsdN_rAd1fuA==",
+     "https://www.nuri-kae.jp/column/construction-cost/152/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/exterior-painting/magazine/2063/",
+     "https://gro-bels.co.jp/labo/exterior-painting-cost/",
+     "https://www.k-skn.com/sokenpaint/column/149/",
+     "https://gaiheki-madoguchi.com/articles/1527",
+     "https://nurikae-station.com/blog/30851/",
+     "https://build-art.co.jp/gaiheki/base/koutei/ashiba/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_static&path=basic-knowledge%2Fprice-estimate.html",
+     "https://satoutokou.net/blo2/6891",
+     "https://www.tosouyasan13.net/paint-scaffold"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 助成金 いくらもらえる": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.gaiso.co/column/outerwall/detail/?sid=176",
+     "https://www.nuri-kae.jp/column/subsidies/146/",
+     "https://www.japanhousing.org/column/cost-exterior-paint-grant/",
+     "https://www.advance-rfd.co.jp/blog/niihama/blog-29999/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12306649077",
+     "https://gaiheki-madoguchi.com/articles/1319"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gro-bels.co.jp/labo/exterior-painting-subsidy/",
+     "https://www.nuri-kae.jp/column/subsidies/60385/",
+     "https://www.nuri-kae.jp/column/subsidies/9237/",
+     "https://gaiheki-style.com/column/reform/260324546465/",
+     "https://penki-mikata.com/mitsumori/column/gaiheki-tosou-hojyokin-2026/",
+     "https://www.tosouyasan13.net/wallpaint-subsidy",
+     "https://ohisamatosou.com/blog/44726/",
+     "https://www.asahieito.co.jp/house/exterior-painting-subsidy/",
+     "https://reform-hojo.jp/guide/hojyokin-gaiheki-tosou",
+     "https://www.reform-guide.jp/topics/gaiheki-hozyokin/",
+     "https://www.gaihekitosou-partners.jp/subsidy/tokyo",
+     "https://gaiheki-navi.jp/128/",
+     "https://www.japanhousing.org/column/cost-exterior-paint-grant/",
+     "https://tosou-hikaku.com/gaiheki-joseikin/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_static&path=basic-knowledge%2Fapply-subsidy.html",
+     "https://reform-hojo.jp/guide/osusume-gaiheki-tosou"
+    ],
+    "error": ""
+   }
+  },
+  "火災保険 外壁 屋根 修理 適用": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tokiomarine-nichido.co.jp/world/guide/casestudy/kasai.html",
+     "https://www.tosouyasan13.net/kasaihoken",
+     "https://www.zurich.co.jp/fire/guide/exterior-wall-painting/",
+     "https://kochi-kenso.jp/base/kasaihoken.html",
+     "https://www.fujiiseikawara.co.jp/blog/roof-repair/roof-insurance/",
+     "https://re-makehouse.com/blog/45364/",
+     "https://www.jutapon.com/media/fire-insurance/exterior/",
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/fire-insurance-11960"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.zurich.co.jp/fire/guide/roof-repair/",
+     "https://nao-lawoffice.jp/hoken/columns/compensation-details/fire-compensation-details/545/",
+     "https://zeenb.astecpaints.jp/journal/yanetosou/roofrepair-kasaihoken-105873",
+     "https://uedabk.jp/blog/yanesyuuri/yane-shuri-kasai-hoken.html",
+     "https://hokentimes.com/article/fireinsurance/roofrepaircost/",
+     "https://yanerepair.jp/blog/fire-insurance-roof-repair-guide-2/",
+     "https://moneysalon.jp/blog/kasai-hoken-gaiheki-tosou",
+     "https://machiyane-kagoshima.com/column/kasaihokenn-kakaku-2019102nari.html",
+     "https://gaiheki-style.com/column/reform/251125509444/",
+     "https://onayamidb.com/fire-insurance-benefits/roof-repair/",
+     "https://tobeshinhome.com/column/32/",
+     "https://www.tosouyasan13.net/kasaihoken",
+     "https://yamamotokun-tosou.com/yane-shuri-kasaihoken/",
+     "https://skroofworks.com/fire-insurance/",
+     "https://ys-meister.jp/1053"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 見積もり 内訳 見方": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://gaihekitosou-navi.com/guide/estimate-guide/",
+     "https://ace-paint.net/blog1/129096/",
+     "https://re-makehouse.com/blog/46158/",
+     "https://gaiheki-kakekomi.com/home/mitsumorisyoyomikata/",
+     "https://www.tosouyasan13.net/estimate",
+     "https://imagawa-paint.com/encyclopedia/cost/175/",
+     "https://zeenb.astecpaints.jp/journal/estimate/mitsumori-3232",
+     "https://satoutokou.net/blo2/4768"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gro-bels.co.jp/labo/exterior-painting-cost/",
+     "https://zeenb.astecpaints.jp/journal/estimate/mitsumori-3232",
+     "https://www.nuri-kae.jp/column/estimate/1554/",
+     "https://shintoa-tosou.jp/blog/external-wall-painting-estimate/",
+     "https://gaiheki-madoguchi.com/articles/2775",
+     "https://pronuri.com/articles/2238",
+     "https://kouya-paint.jp/blog/3812/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_static&path=basic-knowledge%2Fprice-estimate.html",
+     "https://www.takahashi-paint.com/blog/gaiheki-tosou/blog-18967/",
+     "https://curama.jp/exterior-painting/magazine/2058/",
+     "https://meetsmore.com/services/outdoor-wall-painting/media/92827",
+     "https://www.m-kensou.com/column/gaihekitosou/20230613rr/",
+     "https://www.house-make-tosou.jp/advice/wallpainting_quotation/",
+     "https://www.kayoshi.jp/blog/entry-687348/",
+     "https://penkio.com/column/good-example-estimate/",
+     "https://pronuri.com/articles/2266",
+     "https://mizuno-paint.osaka/gaiheki-estimate-items/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 ローン 支払い方法": {
+   "group": "費用・相場",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://gaiheki-second-opinion.com/columns/gaiheki-loan-bunkatsubarai/",
+     "https://gaisogiken.jp/blog/%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AF%E3%83%AD%E3%83%BC%E3%83%B3%E3%81%A8%E7%8F%BE%E9%87%91%E3%81%A9%E3%81%A3%E3%81%A1%E3%81%8C%E3%81%8A%E5%BE%97%EF%BC%9F%E3%83%97%E3%83%AD%E3%81%8C%E6%95%99/",
+     "https://painthomes.jp/article/3127/",
+     "https://yane.reform-plus.jp/articles/post-32411/",
+     "https://www.lead-home.jp/blog/entry-853134/",
+     "https://www.upremake.com/blog/gaiheki_knowledge/blog-19047/",
+     "https://www.jcb.co.jp/loancard/special/house_painting_loan.html",
+     "https://www.rhythmpaint.jp/column/gaihekitosou-roan/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jcb.co.jp/loancard/special/house_painting_loan.html",
+     "https://www.nuri-kae.jp/column/subsidies/145/",
+     "https://www.gaiheki110.com/gyousya/erabikata/pay.html",
+     "https://painthomes.jp/article/3127/",
+     "https://kawayoukensou.com/blog/45471/",
+     "https://www.setagayahome.co.jp/blog/2845/",
+     "https://www.upremake.com/blog/gaiheki_knowledge/blog-19047/",
+     "https://www.ikedatosou.com/advise/gaihekitosounobunkatubarai/",
+     "https://superreform.com/blog1/18411/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 業者 選び方": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://news.mynavi.jp/real-estate-assessment/33696",
+     "https://my-best.com/11516",
+     "https://www.benikomachi.jp/kurashi/exterior-painting",
+     "https://www.housing-box.co.jp/2604_05ka/",
+     "https://seishindo35.com/gaihekitosou-navi/area/zenkoku/",
+     "https://www.kayoshi.jp/708853blog/",
+     "https://pronuri.com/articles/2258",
+     "https://shintoakogyo.co.jp/column/posts/145979/",
+     "https://kensyo.top/column/detail/20260911180004/",
+     "https://www.nuri-kae.jp/column/contractors/106379/",
+     "https://www.housingbazar.jp/article/exterior-painting-contractor/",
+     "https://www.nuri-kae.jp/column/contractors/1257/",
+     "https://nuribe.jp/column/%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AE%E5%84%AA%E8%89%AF%E6%A5%AD%E8%80%85%E3%81%AE%E8%A6%8B%E5%88%86%E3%81%91%E6%96%B9%EF%BD%9C%E6%82%AA%E5%BE%B3%E3%83%AA%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/",
+     "https://www.japanhousing.org/column/bad-exterior-paint-contractor/",
+     "https://www.sotokabe.com/gaihekicolumn/archives/98/",
+     "https://kireiya.renovation-bc.com/gaiheki-tosou-gyosha-erabikata-akutoku-gyosha-mikiwamekata-2026/",
+     "https://ace-paint.net/blog1/108760/",
+     "https://standard-project.net/smarthouse/remodeling/exterior/contractor.html"
+    ],
+    "error": ""
+   }
+  },
+  "屋根工事 業者 失敗しない選び方": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hori-kougyo.com/blog/how-to-choose-a-roof-repair-contractor-checkpoints-to-avoid-mistakes/",
+     "https://www.sk-nw.com/nakamuraworks/blog__detail.php?id=2761",
+     "https://yane-miyaken.com/column/oyakudachi/p8037/",
+     "https://kikuchibankin.com/column/roof-repair-contractor-choice/",
+     "https://yanekabeya.com/flow/yane-gyosha/",
+     "https://yaneiroha.com/information/y_craftman/",
+     "https://www.yaneyasan13.net/blog/121310.html",
+     "https://www.fujiiseikawara.co.jp/blog/roof-repair/yanegyosha-point/",
+     "https://tobeshinhome.com/column/22/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20231011_1.html",
+     "https://www.biz.ne.jp/matome/2003141/",
+     "https://www.reform-guide.jp/topics/yanegyousya/",
+     "https://imagawa-roof.com/information/blog/staffblog/8030/",
+     "https://www.zephan.co.jp/news/roof_contractor_selection_guide/",
+     "https://www.uchinobankin.jp/column/yane-shuri-gyosha",
+     "https://tobeshinhome.com/column/12/",
+     "https://toyohomu-c.com/information/2764/",
+     "https://onayamidb.com/find-a-roof-repair-contractor/",
+     "https://machiyane-ageo.com/column/gyousyaerabi.html",
+     "https://zeenb.astecpaints.jp/journal/yanetosou/yane-tenkenshouhou-higaijirei-taishohou-98114",
+     "https://www.nihon-ibushikawara.co.jp/blog/%E5%B1%8B%E6%A0%B9%E3%81%AE%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/p21083/",
+     "https://yanemitumori.com/reform-scam.html",
+     "https://yanemitumori.com/dishonest.html",
+     "https://hi-oki.co.jp/2025/03/03/5243",
+     "https://matsudo-paint.com/info/202208191/",
+     "https://yuko-navi.com/roof-repair-fraud",
+     "https://yane-miyaken.com/column/oyakudachi/p8004/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 見積もり 比較 ポイント": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.homepro.jp/gaiheki/gaiheki-basic/0010pl",
+     "https://painthomes.jp/article/22539/",
+     "https://www.nuri-kae.jp/column/estimate/157/",
+     "https://shintoa-tosou.jp/blog/external-wall-painting-estimate/",
+     "https://paint-go.com/knowledge/price/12226/",
+     "https://painthomes-okayama.com/blog/36824/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_static&path=basic-knowledge%2Fprice-estimate.html",
+     "https://zeenb.astecpaints.jp/journal/estimate/square-meter-unitprice-55172",
+     "https://www.reform-guide.jp/topics/gaihekitosou-mitsumori/",
+     "https://www.nuri-kae.jp/column/construction-cost/12294/",
+     "https://www.etic.co.jp/feature/outerwall-paintingwork-estimate/",
+     "https://www.rhythmpaint.jp/column/gaihekitosou-mitsumori-chuiten/",
+     "https://www.japanhousing.org/column/caution-exterior-paint-estimate/",
+     "https://www.kayoshi.jp/blog/entry-687348/",
+     "https://www.tosouyasan13.net/estimate",
+     "https://www.tosouyasan13.net/estimate-price"
+    ],
+    "error": ""
+   }
+  },
+  "地元の塗装店 大手 違い": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gaiheki-concierge.com/article/local-or-major/",
+     "https://saitama.m-kensou.com/column/gyousya/20210617ns-4/",
+     "https://luxst-tosou.com/blog/20175/",
+     "https://shine-paint.com/shine_blog/chiba_shiroi/%E5%A1%97%E8%A3%85%E4%BC%9A%E7%A4%BE%E3%81%AE%E5%9C%B0%E5%9F%9F%E5%AF%86%E7%9D%80%E5%9E%8B%E3%81%A8%E5%A4%A7%E6%89%8B%E6%A5%AD%E8%80%85%E3%81%AE%E9%81%95%E3%81%84%E3%81%A8%E3%81%AF.html",
+     "https://www.irokotoba.net/post/%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AF%E3%81%A9%E3%81%93%E3%81%8C%E3%81%84%E3%81%84%E3%83%8F%E3%82%A6%E3%82%B9%E3%83%A1%E3%83%BC%E3%82%AB%E3%83%BC%E5%A4%A7%E6%89%8Bvs-%E5%9C%B0%E5%85%83%E5%A1%97%E8%A3%85%E5%B0%82%E9%96%80%E5%BA%97%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%82%92%E3%83%97%E3%83%AD%E3%81%8C%E5%BE%B9%E5%BA%95%E8%A7%A3%E8%AA%AC",
+     "https://s-innovation8.com/%E5%A1%97%E8%A3%85%E4%BC%9A%E7%A4%BE%E3%81%AF%E5%A4%A7%E6%89%8B%E3%83%BB%E5%9C%B0%E5%85%83%E6%A5%AD%E8%80%85%E3%81%A9%E3%81%A3%E3%81%A1%E3%81%8B%E3%81%84%E3%81%84%E2%9D%93%E5%A4%96%E5%A3%81%E5%A1%97/",
+     "https://www.my-painter.com/column/20240117chihi-otegyosha/"
+    ],
+    "error": ""
+   }
+  },
+  "塗装業者 口コミ 信頼できる見分け方": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nuri-kae.jp/column/contractors/106379/",
+     "https://www.yuko-community.co.jp/column/dishonest-businessman/",
+     "https://aichi-resin.jp/blog/detail/20260712/",
+     "https://www.ribilo.com/paint/",
+     "https://hitomi-tosou.com/column/detail/20260912123429",
+     "https://kireiya.renovation-bc.com/gaiheki-tosou-gyosha-erabikata-akutoku-gyosha-mikiwamekata-2026/",
+     "https://seishindo35.com/gaihekitosou-navi/area/zenkoku/",
+     "https://gaihekitosou-labo.com/choose/",
+     "https://www.yanery.com/wall-tokyo/",
+     "https://www.k-skn.com/sokenpaint/column/176/",
+     "https://gaiheki-kakekomi.com/home/google-map-review/",
+     "https://paint-go.com/knowledge/choice/1320/",
+     "https://www.takahashi-paint.com/blog/gaiheki-tosou/blog-16461/",
+     "https://www.tosouyasan13.net/eigyoutalk",
+     "https://ace-paint.net/blog1/108760/",
+     "https://www.gaiheki-tosou.shop/blog/column/?p=957"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 悪徳業者 見分け方": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.k-skn.com/sokenpaint/column/176/",
+     "https://www.japanhousing.org/column/bad-exterior-paint-contractor/",
+     "https://www.mastworks.jp/blog/728.html",
+     "https://www.sotokabe.com/gaihekicolumn/archives/98/",
+     "https://nurikae-station.com/blog/30670/",
+     "https://kireiya.renovation-bc.com/gaiheki-tosou-gyosha-erabikata-akutoku-gyosha-mikiwamekata-2026/",
+     "https://tsuji-kenso-pt.com/blog1/11266/",
+     "https://www.takahashi-paint.com/blog/gaiheki-tosou/blog-16461/",
+     "https://www.hamasho-paint.com/blog/1379.html",
+     "https://curama.jp/exterior-painting/magazine/2926/",
+     "https://www.my-painter.com/column/20230502kita-gaihekitosohomonhanbai/",
+     "https://gaiheki-concierge.com/article/wallpaint-bad-sales/",
+     "https://www.kodama-t.co.jp/gyousha/tenuki/",
+     "https://gaiheki-concierge.com/article/trouble-sales-talk/",
+     "https://yuko-navi.com/door-to-door-sales",
+     "https://www.ikedatosou.com/y_advise/gaihekitosou-gyousyaerabi-houmonhanbai-trouble/",
+     "https://painting.yu-shin1.com/column/post-2458/",
+     "https://yamamotokun-tosou.com/gaiheki-toso-houmon-hanbai/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 訪問営業 断り方": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gaiso.co/column/outerwall/detail/?sid=335",
+     "https://gaiheki.lvnmatch.jp/7728/",
+     "https://gaiso-pro.jp/gaihekitosou-houmonhanbai/",
+     "https://sotokabe.net/archives/342",
+     "https://pronuri.com/articles/2284",
+     "https://yuko-navi.com/how-to-refuse-door-to-door-sales-of-exterior-wall-painting",
+     "https://painting.yu-shin1.com/column/post-2458/",
+     "https://toso110.com/door-to-door-sales-how-to-refuse/",
+     "https://toyama-paint.com/blog/5147/",
+     "https://www.kokusen.go.jp/pdf/n-20231011_1.pdf",
+     "https://www.city.osaka.lg.jp/lnet/page/0000003394.html",
+     "https://www.gaihekitosou-partners.jp/contents-39269.html",
+     "https://kita-kensetsu.jp/question/cooling-off/",
+     "https://www.kodama-t.co.jp/gyousha/tenuki/",
+     "https://tobeshinhome.com/column/2155/",
+     "https://penki-mikata.com/mitsumori/column/cooling-off-guide-2025/",
+     "https://emilife.jp/%E7%B5%B6%E5%AF%BE%E3%81%AB%E5%8D%B3%E6%B1%BAng%EF%BC%81%E8%A8%AA%E5%95%8F%E8%B2%A9%E5%A3%B2%E6%A5%AD%E8%80%85%E6%92%83%E9%80%80%E6%B3%95%EF%BC%81/",
+     "https://at-muscat.com/painting-cooling-off/"
+    ],
+    "error": ""
+   }
+  },
+  "屋根修理 業者 相見積もり 何社": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yaneshuri-takumi.com/knowledge/choice/14406/",
+     "https://magokorotoso.com/%E7%9B%B8%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E3%81%AF%E4%BD%95%E7%A4%BE%E3%81%A8%E3%82%8B%E3%81%B9%E3%81%8D%EF%BC%9F%E6%A5%AD%E8%80%85%E9%81%B8%E3%81%B3%E3%81%AE%E6%AD%A3%E3%81%97%E3%81%84%E9%80%B2/",
+     "https://www.fujiiseikawara.co.jp/blog/roof-repair/aimitsumori/",
+     "https://www.youtube.com/watch?v=eZzPInLnF24",
+     "https://blog.male-shizuoka.jp/archives/588",
+     "https://moribankin.com/yanebaka-nikki/contract/phase-estimate/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.biz.ne.jp/matome/2003141/",
+     "https://kamisei.co.jp/news/55798",
+     "https://yanekabeya.com/flow/yane-gyosha/",
+     "https://www.uchinobankin.jp/column/aimitsumori-yane",
+     "https://gaiheki-concierge.com/article/roof-repair-mitsumori/",
+     "https://onayamidb.com/roof_repair/comparable-quotation/",
+     "https://yane-connect.com/",
+     "https://yane-miyaken.com/column/oyakudachi/p8037/",
+     "https://roof-repair-guild.com/recommend/"
+    ],
+    "error": ""
+   }
+  },
+  "塗装 保証 アフター 業者 選ぶ": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hijirikensou-kogyo.com/qa/%E3%80%90%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AE%E4%BF%9D%E8%A8%BC%E3%81%A8%E3%82%A2%E3%83%95%E3%82%BF%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%80%91%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84/",
+     "https://www.japantec.net/blog/60775/",
+     "https://yoshikawa-toso.com/news/after-sales-service/",
+     "https://protimes-utsunomiyatsuruta.com/blog1/blog-estimate/11454/",
+     "https://kansai-re.com/post_column/after-service/",
+     "https://www.kosei-gaiheki.jp/blog1/9250/",
+     "https://protimes.jp/journal/selecting/guarantee-service-81453",
+     "https://www.smilepaint.jp/blog/regular-inspection/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://news.mynavi.jp/real-estate-assessment/33696",
+     "https://www.nuri-kae.jp/column/contractors/106379/",
+     "https://www.reform-guide.jp/topics/tosou-gyousya/",
+     "https://seishindo35.com/gaihekitosou-navi/area/zenkoku/",
+     "https://www.japanhousing.org/column/tips-exterior-paint-contractor/",
+     "https://pronuri.com/articles/2258",
+     "https://yamamotokun-tosou.com/gaihekitosou-yuuryou-gyousya/",
+     "https://www.tosouyasan13.net/erabupoint",
+     "https://kensyo.top/column/detail/20260911180004/"
+    ],
+    "error": ""
+   }
+  },
+  "塗装職人 資格 確認 方法": {
+   "group": "業者の選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://anzeninfo.mhlw.go.jp/gino/contents/shoukai.html",
+     "https://gaiheki-madoguchi.com/articles/3888",
+     "https://www.gaiso.co/column/outerwall/detail/?sid=139",
+     "https://gaiheki-madoguchi.com/articles/3888",
+     "https://www.hataraku.metro.tokyo.lg.jp/monodukuri/sikaku/kentei/index.html",
+     "https://kochi-kenso.jp/base/license.html",
+     "https://yuko-navi.com/paint-qualification",
+     "https://www.javada.or.jp/jigyou/gino/giken.html",
+     "https://kochi-kenso.jp/base/license.html",
+     "https://mowmopaint.jp/blog/891/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.my-painter.com/column/20230530kita-gaihekitososikaku/",
+     "https://gaiheki-kakekomi.com/home/license/",
+     "https://www.cls-mystyle.jp/faq/01/76.html",
+     "https://kensetsu-sapo.com/construction-permission/know/painting/",
+     "https://yuko-navi.com/paint-qualification",
+     "https://kurikuri-kyoninka.com/kennsetugyou-tosou/",
+     "https://tsukunobi.com/columns/painting-qualification/",
+     "https://ueda-kensetsugyou.com/tosou-kouji-kensetsu/",
+     "https://kyoka-ken.com/%E5%A1%97%E8%A3%85%E5%B7%A5%E4%BA%8B%E6%A5%AD%E3%81%A7%E5%BB%BA%E8%A8%AD%E6%A5%AD%E8%A8%B1%E5%8F%AF%E3%80%80%EF%BC%93%E3%81%A4%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88/",
+     "https://ja.wikipedia.org/wiki/%E5%A1%97%E8%A3%85%E6%8A%80%E8%83%BD%E5%A3%AB",
+     "https://www.nittoso.or.jp/activities/registered-expert/",
+     "https://www.hataraku.metro.tokyo.lg.jp/monodukuri/sikaku/kentei/index.html",
+     "https://paintstaff.co.jp/gyosha-choice/certificate/",
+     "https://www.kensetsutax.com/14790166725416",
+     "https://shikaku-fan.net/000406/",
+     "https://paint.jp/technical/ginoukentei",
+     "https://tosouginoushi.com/tosouginoushi/",
+     "https://build-art.co.jp/gaiheki/gyousha/shikaku/",
+     "https://www.pref.hokkaido.lg.jp/kn/ksk/kenjohp/sinsa/meibo2.html",
+     "https://news.build-app.jp/article/40918/",
+     "https://kyoka-ok.com/category1/entry107.html",
+     "https://k-kensetu.kyo-ninka.jp/article/license/1788/",
+     "https://actam-tokyo.com/column/294739ce-3db0-4985-8c26-2185ec6ac681",
+     "https://kiminami-office.com/kensetsu/search/",
+     "https://kensetugyoukyoka-support.com/kensaku/",
+     "https://harulegal.net/%e5%bb%ba%e8%a8%ad%e6%a5%ad-%e8%a8%b1%e5%8f%af-%e6%a4%9c%e7%b4%a2/",
+     "https://www.kensetsushinsei.com/%E5%BB%BA%E8%A8%AD%E6%A5%AD%E8%A8%B1%E5%8F%AF%E6%A5%AD%E8%80%85%E3%81%AE%E6%8E%A2%E3%81%97%E6%96%B9/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁 チョーキング 塗り替え時期": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://nextpartner-tosou.jp/%E7%AF%89%E5%B9%B4%E6%95%B0%E5%88%A5%E3%83%81%E3%83%A7%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0%E5%AF%BE%E5%BF%9C%E3%82%AC%E3%82%A4%E3%83%89%E3%80%9C%E6%96%B0%E7%AF%89%E3%81%8B%E3%82%89%E7%AF%8915%E5%B9%B4/",
+     "https://www.tosouyasan13.net/choking",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE3SlsTSr-FnZt1hag7EjoddYKOyMMQBess94XueSsNjDr_thBIxtDFxMP0E-lL7U4SoDX4hL35j2h5pPsQJ9Av4xKlvsZ2uA_DOVX3ENJ59LrTiJ5qEkvY5Ek=",
+     "https://ota-nisshin.com/blog/20251204-1330/",
+     "http://www.kazuna-tosou.jp/category/1975007.html",
+     "https://www.takahashi-paint.com/blog/gaiheki-tosou/blog-19400/",
+     "https://ota-nisshin.com/blog/20251204-1330/",
+     "https://shinwa-reform.net/knowledge/timing/",
+     "https://www.tosouyasan12.net/blog/117048.html",
+     "https://www.homepal.jp/blog-roof/19280/",
+     "https://www.kosei-gaiheki.jp/blog1/9230/",
+     "https://imagawa-paint.com/encyclopedia/foundation/5326/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/exterior-painting/magazine/2907/",
+     "https://www.mr-produce.jp/mr-blog/66818/",
+     "https://gaiheki-kakekomi.com/home/chalking/",
+     "https://smilepaint.co.jp/info/blog-cho-kingu04/",
+     "https://pronuri.com/articles/2265",
+     "https://pronuri.com/articles/2300",
+     "https://www.tosouyasan13.net/choking",
+     "https://i-tec-jp.com/column/%E5%A4%96%E5%A3%81%E3%81%AE%E3%83%81%E3%83%A7%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0%E3%82%92%E7%99%BA%E8%A6%8B%E3%81%97%E3%81%9F%E3%82%89%EF%BC%9F%E6%89%8B%E3%81%AB%E7%B2%89%E3%81%8C%E4%BB%98%E3%81%8F/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_static&path=basic-knowledge%2Fintroduction.html"
+    ],
+    "error": ""
+   }
+  },
+  "外壁 ひび割れ 補修 放置": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/caulking-76778",
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/exterior-wall-crack-repair-52813",
+     "https://www.housing-box.co.jp/2604_02mo",
+     "https://www.skh-y.jp/column2",
+     "https://www.rhythmpaint.jp/column/gaihekihosyu-hibiware/",
+     "https://www.ichiami.com/column/repairing-cracks-in-exterior-walls/",
+     "https://www.tosouyasan12.net/blog/122141.html",
+     "https://kasamakikoumuten.com/blog/3165",
+     "https://roadrivers-k.com/blog/32320/"
+    ],
+    "error": ""
+   }
+  },
+  "屋根 雨漏り 原因 修理": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.web-soken.co.jp/reform-column/69277.php",
+     "https://www.kenzai-navi.com/sumairing/columns/75",
+     "https://kamisei.co.jp/news/85384",
+     "https://www.nuri-kae.jp/column/deterioration/955/",
+     "https://uedabk.jp/blog/amamori/kawara-yane-amamori.html",
+     "https://www.yaneyasan13.net/roof-leak",
+     "https://grasssara.jp/leaking/roof/",
+     "https://amepita.jp/roof_slate",
+     "https://minamamori.com/knowledge/emergency_measures/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁 カビ コケ 落とし方 塗装": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.osoujihonpo.com/guide/outerwall/251009-01/",
+     "https://kawai-tosou.co.jp/blog/26039/",
+     "https://www.nurikaekobo-utsunomiya.jp/blog/blog-23169033/",
+     "https://www.youtube.com/watch?v=G3c1C2VDiCk",
+     "https://www.monotaro.com/k/store/%E8%8B%94%20%E6%B4%97%E5%89%A4/",
+     "https://www.youtube.com/watch?v=NXxz8MAHKWs",
+     "https://leco-paint.jp/blog/1098/",
+     "https://www.yuzu-tosou.com/column/105510/",
+     "https://gaiheki-concierge.com/article/bio-kouatsu-washing/",
+     "https://zeenb.astecpaints.jp/journal/wash/bio-paint-107668"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osoujihonpo.com/guide/outerwall/251009-01/",
+     "https://www.k-skn.com/sokenpaint/column/143/",
+     "https://www.nuri-kae.jp/column/part/exterior_outer-wall/articles/694/",
+     "https://www.nuri-kae.jp/column/part/exterior_outer-wall/articles/24073/",
+     "https://sinsei-tec.com/archives/gaiheki-koke-kabi-mo-taisaku/",
+     "https://www.osoujikakumei.jp/outdoor-cleaning/wall-wash/",
+     "https://www.jpaintm.com/column/other_column/koatsu.html",
+     "https://www.imajuu.com/blog/p8446/"
+    ],
+    "error": ""
+   }
+  },
+  "屋根 瓦 ずれ 修理": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.okumaya.co.jp/blog/column/203599",
+     "https://hiroshima-roof.com/blog/3970/",
+     "https://machiyane-miyazaki.com/column/roof-tile-removal-cost.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGSqvUKJuSLndcfpDvYt5lw5JvD9PXxdNcRpyyW57w9KVJ25KghDAxmFw9ISlmN9SdD9A0SFxSVe3frYbh-ppxCZ0ITqyNIIuBvlM9TdB42GKfm2uc0ZKavuix2Ba1IuZI9",
+     "https://towa-safetyhome.com/blog/uncategorized/%E7%93%A6%E5%B1%8B%E6%A0%B9%E3%81%AE%E3%82%BA%E3%83%AC%E8%A3%9C%E4%BF%AE%E3%81%AF%E5%BF%85%E8%A6%81%EF%BC%9F%E6%94%BE%E7%BD%AE%E3%81%A7%E9%9B%A8%E6%BC%8F%E3%82%8A%E3%81%8C%E9%80%B2%E3%82%80%E6%84%8F/",
+     "https://machiyane-sakai.com/column/kawaraamamorimondaiten20180222.html",
+     "https://luxst.co.jp/knowledge/roof/kawara-cost",
+     "https://u-roof.jp/blog/18081/",
+     "https://www.kawarasho.jp/price/entry-38.html",
+     "https://yamamotokun-tosou.com/yanekawara-shuri-hiyo/",
+     "https://www.nuri-kae.jp/column/roof/1240/",
+     "https://kamisei.co.jp/news/55592"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kamisei.co.jp/news/55592",
+     "https://www.homepro.jp/yane/yane-sozai/2281la",
+     "https://iekoma.com/service/roof_tile_coking/",
+     "https://www.nuri-kae.jp/column/roof/1240/",
+     "https://u-roof.jp/blog/18081/",
+     "https://uedabk.jp/blog/yanesyuuri/kawara-zure-hiyou.html",
+     "https://luxst.co.jp/knowledge/roof/kawara-cost",
+     "https://doors-inc.co.jp/column/684/",
+     "https://machiyane-miyazaki.com/column/roof-tile-removal-cost.html",
+     "https://roofstyle.niscs.nipponsteel.com/archives/1641",
+     "https://www.risaburo.jp/blog/typhoon_tile_roof.html",
+     "https://amepita.jp/blog/102100.html",
+     "https://shukosha.co.jp/columns/repair/column215/",
+     "https://wadachi-kenchiku.com/y-shuuri/munegawara-zure/",
+     "https://www.yaneyasan.net/falling-tiles",
+     "https://minamamori.com/knowledge/insurance/",
+     "https://ripema.com/knowledge/cracksintileroof/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 時期 何年ごと": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tosouyasan13.net/wallpainting-life",
+     "https://www.tg-yokoene.com/cate-reform/11147/",
+     "https://www.homepal.jp/blog-roof/21225/",
+     "https://kamiyama-inc.co.jp/column/202504_4",
+     "https://www.katopen.jp/staffblog/34062.html",
+     "https://satotosou.jp/toryo/kinds/",
+     "https://nagaken296.com/blog/exterior-paint-lifespan-comparison-guide/",
+     "https://xn--rms9i4ix79n.jp.net/toryou-lifespan"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.k-skn.com/sokenpaint/column/1020/",
+     "https://www.nuri-kae.jp/column/deterioration/16307/",
+     "https://www.nuri-kae.jp/column/deterioration/161/",
+     "https://www.homepal.jp/blog-roof/19280/",
+     "https://www.homepal.jp/blog-roof/21225/",
+     "https://shintoa-tosou.jp/blog/exterior-wall-painting-every-10-years/",
+     "https://www.rhythmpaint.jp/column/gaihekitosou_nannengoto/",
+     "https://www.dainichi.co.jp/repair/explanation/painting.html",
+     "https://hifumi-reform.com/news/blog/2124",
+     "https://www.m-kensou.com/column/gaihekitosou/20221208rr/",
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/gaihekitosou-timing-432",
+     "https://paint-tom.com/knowledge/40731/",
+     "https://studiotetsu.co.jp/column/wall-repaint-season",
+     "https://pronuri.com/articles/2300",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_static&path=basic-knowledge%2Fintroduction.html",
+     "https://www.tosouyasan13.net/gaihekitosou-season",
+     "https://xn--rms9i4ix79n.jp.net/wallpaint-season",
+     "https://www.lvn.co.jp/exterior-wall/216/"
+    ],
+    "error": ""
+   }
+  },
+  "サイディング 反り 剥がれ 対処": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yuko-navi.com/siding-warpage",
+     "https://protimes-utsunomiyatsuruta.com/blog1/26096/",
+     "https://gaihekidou.com/blog/5129/",
+     "https://www.homepro.jp/gaiheki/gaiheki-faq/030",
+     "https://kiyoshi-web.co.jp/2020/11/1062/",
+     "https://shine-paint.com/blog/kosumi/siding-warp-paint-repair.html",
+     "https://gaiheki.bosui.net/rekka/siding-sori/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/outdoor-wall-painting/media/76172",
+     "https://www.homepro.jp/gaiheki/gaiheki-faq/030",
+     "https://gaiheki.lvnmatch.jp/7122/",
+     "https://matching.d-a.co.jp/column/siding-sori-uki/",
+     "https://yuko-navi.com/siding-warpage",
+     "https://e-housepaint.com/blog/detail/20230630210646/",
+     "https://wk-gaihekitosou.com/reform/s03/",
+     "https://www.tosouyasan13.net/sidinguki",
+     "https://xn--rms9i4ix79n.jp.net/siding-repair",
+     "https://hapisumu.jp/category/exteriorwall-reform/37540/",
+     "https://www.gaiso.co/column/outerwall/detail/?sid=239",
+     "https://www.skhouse.jp/reform-contents/13584.php",
+     "https://imagawa-paint.com/encyclopedia/foundation/4349/",
+     "https://takumi045.com/saidekasai/",
+     "https://hori-pen.com/column/post-7143/"
+    ],
+    "error": ""
+   }
+  },
+  "屋根 色あせ 塗り替え サイン": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rakuto-kk.jp/blog/45344/",
+     "https://www.minan.jp/blog/35342/",
+     "https://build-art.co.jp/gaiheki/rekka/chalking/",
+     "https://www.tec-art.jp/blog/post-890/",
+     "https://paint-go.com/knowledge/13878/",
+     "https://ota-nisshin.com/blog/20251217-1348/",
+     "https://www.yaneyasan.net/blog/133605.html",
+     "https://relife-hachioji.com/news/hachioji-roof-fading-moss-signs/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_static&path=basic-knowledge/roof-coating.html"
+    ],
+    "error": ""
+   }
+  },
+  "コーキング 劣化 打ち替え 時期": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehome-navi.com/articles/548",
+     "https://kiyosu-home.jp/column/coking-uchikae.html",
+     "https://howzlife.jp/archives/748",
+     "https://www.showa-hc.jp/blog/entry-810465/",
+     "https://nikkensosha.co.jp/column/detail/20230714163512/",
+     "https://mitsumado.com/column/192/",
+     "https://koushi-souken.com/column/caulking/10962/",
+     "https://www.gasliving-mie.com/blog/reformcolumn/gaiheki_ct_14/",
+     "https://takebi.net/column/uncategorized/11898/",
+     "https://sim-group.jp/2022/12/14/10436/",
+     "https://companys.jp/%E5%A4%96%E5%A3%81%E3%81%AE%E3%82%B7%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E6%89%93%E3%81%A1%E6%9B%BF%E3%81%88%E3%81%AF%E3%81%84%E3%81%A4%E5%BF%85%E8%A6%81%EF%BC%9F%E5%8A%A3%E5%8C%96%E3%82%B5%E3%82%A4/",
+     "https://www.repair-work.jp/%E5%A4%96%E5%A3%81%E3%82%B7%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E6%89%93%E3%81%A1%E6%9B%BF%E3%81%88%E6%99%82%E6%9C%9F%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8B/",
+     "https://doctor-homes.jp/topics/5533/",
+     "https://slife-paint.com/blog/17593/",
+     "https://ieyasupaint.com/blog/38192/",
+     "https://www.tosou-honpo.com/blog/1250.html",
+     "https://www.tosouyasan12.net/blog/116579.html"
+    ],
+    "error": ""
+   }
+  },
+  "ベランダ 防水 劣化 症状": {
+   "group": "劣化・症状の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://painthomes.jp/article/45026/",
+     "https://ishiikensou.com/2025/08/15/balcony-waterproofing/",
+     "https://www.bikou-tosou.com/16689/",
+     "https://xn--rms9i4i661d4ud435c.net/blog/81360.html",
+     "https://mitatsu-tosou.com/blog/30887/",
+     "https://yanemaru.com/home-report/veranda-damage/",
+     "https://painthomes-fuji.com/blog/21454/",
+     "https://painthomes-okayama.com/blog/36786/",
+     "https://ohisamatosou.com/blog/39659/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 塗料 種類 違い": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehome-navi.com/articles/341",
+     "https://reform-park.jp/knowledge/72258/",
+     "https://tochino.co.jp/article/2324",
+     "https://ivhome.jp/blog/5153/",
+     "https://nurikaesenmonkan.jp/gaihekitosou/toryou_syurui/",
+     "https://shinsia.jp/pages/10/detail=1/b_id=106/r_id=97",
+     "https://reformyasan.co.jp/blog/detail/20251031154122/",
+     "https://nagaken296.com/blog/exterior-paint-types-comparison-selection/",
+     "https://i-tec-jp.com/column/%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AB%E4%BD%BF%E3%81%86%E5%A1%97%E6%96%999%E7%A8%AE%E9%A1%9E%E3%81%AE%E7%89%B9%E5%BE%B4%E6%AF%94%E8%BC%83%EF%BC%81%E3%83%97%E3%83%AD%E3%81%8C%E6%95%99%E3%81%88/"
+    ],
+    "error": ""
+   }
+  },
+  "シリコン フッ素 無機 どれがいい": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.my-painter.com/column/20240118ue-tosotoryo/",
+     "https://www.nuri-kae.jp/column/paint/561/",
+     "https://painthomes.jp/article/39857/",
+     "https://tamura-toso.co.jp/blog/wall/p6493/",
+     "https://paint-tom.com/knowledge/47025/",
+     "https://hometechone.com/blog/11422/",
+     "https://yanemaru.com/home-report/muki-paint-osusume/",
+     "https://info-homies.com/column/10003",
+     "https://www.daiyoh-homes.com/post/%E3%80%90%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%80%91%E3%82%B7%E3%83%AA%E3%82%B3%E3%83%B3%E3%83%BB%E3%83%95%E3%83%83%E7%B4%A0%E3%83%BB%E7%84%A1%E6%A9%9F%E3%80%81%E3%81%A9%E3%82%8C%E3%82%92%E9%81%B8%E3%81%B6%EF%BC%9F%E5%A1%97%E6%96%99%E3%81%AE%E9%81%95%E3%81%84%E3%82%92%E6%AF%94%E8%BC%83%EF%BC%81"
+    ],
+    "error": ""
+   }
+  },
+  "遮熱塗料 効果 夏 暑さ": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVKhYTM16oxiQVjmwOly2A60Fgm8bSFGXgX1aoF4SoIeozl_9mD3NEKwvIWS_4azRUw4Bu2pgsLc9Mr12qcnwO1AwJsTQB8aYwN92P4u3hT1_KvMiK0ix7eyvgaWn_geG_",
+     "https://yane-osaka.com/column/190131column2.html",
+     "https://www.okikankou.co.jp/2026/05/29/blog20260601/",
+     "https://magazine.starpaint.jp/heat_shield_painting/",
+     "https://ishiikensou.com/2025/08/19/thermal-paint-data/",
+     "https://toukai-factory.com/1687/",
+     "https://usui-kenso.co.jp/blog/%E7%9C%9F%E5%A4%8F%E3%81%AE%E5%B1%8B%E6%A0%B9%E3%81%AF70%E2%84%83%E8%B6%85%E3%81%88%EF%BC%81%EF%BC%9F%E9%81%AE%E7%86%B1%E5%B1%8B%E6%A0%B9%E5%A1%97%E8%A3%85%E3%81%A7%E5%AE%A4%E5%86%85%E6%B8%A9%E5%BA%A6/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.space-up.jp/column/exterior/16671/",
+     "https://shanetuyasan.com/blog/yane/sha-netsu-toryou-yane.html",
+     "https://topheat.jp/columns/basic-knowledge/heat-blocking-paint/",
+     "https://pronuri.com/articles/2373",
+     "https://yane-osaka.com/column/190131column2.html",
+     "https://ieyasupaint.com/blog/36333/",
+     "https://www.cooltherm.com/column/8626/",
+     "https://www.cooltherm.com/cooltherm/eco/",
+     "https://dcolor.co.jp/blog/%E9%81%AE%E7%86%B1%E5%A1%97%E6%96%99%E3%81%A7%E6%9A%91%E3%81%95%E3%82%92%E5%92%8C%E3%82%89%E3%81%92%E3%82%8B/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 色選び 失敗 後悔": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://ace-paint.net/blog1/165674/",
+     "https://tobeshinhome.com/column/3442/",
+     "https://satoutokou.net/blo2/8095",
+     "https://www.gaiso-utsunomiya.co/staff_blog/detail/?sid=35836",
+     "https://www.k-skn.com/sokenpaint/column/1802/",
+     "https://yuko-navi.com/wall-color-failure",
+     "https://zeenb.astecpaints.jp/journal/color/gaihekitosou-iroerabi-taisaku-98939"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehome-navi.com/articles/3653",
+     "https://zeenb.astecpaints.jp/journal/color/gaihekitosou-iroerabi-taisaku-98939",
+     "https://painthomes.jp/article/21759/",
+     "https://gaiheki.lvnmatch.jp/3383/",
+     "https://paint-wall.com/blog/3406/",
+     "https://plj-tochigiutsunomiya.com/column-exterior-color-selection/",
+     "https://hanamaki-kenzou.com/%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AE%E3%80%8C%E8%89%B2%E9%81%B8%E3%81%B3%E3%80%8D%E3%81%A7%E5%A4%B1%E6%95%97%E3%81%99%E3%82%8B3%E5%A4%A7%E5%8E%9F%E5%9B%A0%E3%81%A8%E5%BE%8C%E6%82%94%E3%81%97/",
+     "https://www.home-makes.com/blog/exterior-painting-failures/",
+     "https://www.gaiheki-tosou.shop/blog/?p=3638",
+     "https://forest.toppan.com/refotoru/column/part/exterior-wall/article-2023-06-23-02/",
+     "https://aponline.jp/feature/color/16727/",
+     "https://zeenb.astecpaints.jp/journal/color/painting-color-48427",
+     "https://www.reform-guide.jp/topics/gaihekitosou-iro/",
+     "https://www.tochigi-gaiheki.com/blog/53300/",
+     "https://yamamotokun-tosou.com/gaiheki-menseki-kouka-color-choice-ymk/",
+     "https://www.tosouyasan13.net/tosou-iroerabi"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 工事期間 日数 目安": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.homepal.jp/blog-roof/21218/",
+     "https://komitosou.co.jp/media/detail/20250918/",
+     "https://pronuri.com/articles/2267",
+     "https://mitatsu-tosou.com/blog/31903/",
+     "https://www.ikedatosou.com/advise/gaihekitosougaowaranai/",
+     "https://www.narashino-kensou.com/column/2386/",
+     "https://xn--rms9i4i661d4ud435c.net/paint-period",
+     "https://saitamakensou.com/column/%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AF%E4%BD%95%E6%97%A5%E3%81%8B%E3%81%8B%E3%82%8B%EF%BC%9F%E5%90%84%E5%B7%A5%E7%A8%8B%E3%81%A8%E5%B7%A5%E4%BA%8B%E3%81%82%E3%81%9F%E3%82%8A%E3%81%AE%E6%97%A5/",
+     "https://marumi-bisou.com/cate-blog/gaihekitosou5hhh6kfd9/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 洗浄 下地処理 大事": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.my-painter.com/column/20240423chihi-koatsusenjo/",
+     "https://build-art.co.jp/gaiheki/base/koutei/shitaji/",
+     "https://shinsia.jp/pages/10/detail=1/b_id=106/r_id=121/",
+     "https://takamatsu-kizuna.design/blog/26076/",
+     "https://marusugi-k.com/20241106123616.php",
+     "https://ieyasupaint.com/blog/37445/",
+     "https://painting.yu-shin1.com/column/post-395/",
+     "https://reform-paint.com/blog/4447/",
+     "https://at-muscat.com/painting-high-pressure-cleaning-trouble/",
+     "https://www.k-skn.com/sokenpaint/column/152/",
+     "https://www.k-skn.com/sokenpaint/menu/sealing/",
+     "https://www.nuri-kae.jp/column/part/exterior_outer-wall/articles/1315/",
+     "https://www.nakayama-saiko.com/knowledge/under/clean",
+     "https://www.japantec.net/blog/62270/",
+     "https://shintoakogyo.co.jp/column/posts/145964/",
+     "https://www.tosouyasan13.net/clean",
+     "https://xn--rms9i4ix79n.jp.net/sealing-repair",
+     "https://xn--rms9i4ix79n.jp.net/clean-required"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 近隣挨拶 騒音 臭い": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/outdoor-wall-painting/media/90988",
+     "https://www.m-kensou.com/column/gaihekitosou/exteriorwall-greetings/",
+     "https://www.my-painter.com/column/20230912kita-gaihekitosokinrinaisatsu/",
+     "https://www.sotokabe.com/gaihekicolumn/archives/exterior-painting-noise-complaints/",
+     "https://yamamoto-kun.co.jp/gaiso/column/2998/",
+     "https://yanerepair.jp/blog/construction-neighbor-greeting-manners-guide/",
+     "https://www.manaka-reform-chiba.com/column/gaiheki-tosou/8863/",
+     "https://kireiya.renovation-bc.com/gaiheki-tosou-kinrin-hairyo-aisatsu-claim-taisaku-2026/",
+     "https://www.gaiheki-tosou.shop/blog/column/?p=773",
+     "https://luxst.co.jp/knowledge/wall/greeting",
+     "https://refre-v.jp/media/20250918/",
+     "https://painting.yu-shin1.com/column/post-2423/",
+     "https://yamamotokun-tosou.com/gaihekitoso-aisatsu-nashi/"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 梅雨 冬 施工 できる": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.gaiso-fujisawa.co/staff_blog/detail/?sid=36365",
+     "https://www.kabbanba.com/news/post-125/",
+     "https://mitatsu-tosou.com/blog/31714/",
+     "https://satoutokou.net/blo2/4095",
+     "https://www.hamasho-paint.com/winter-exterior-painting-pros-cons/",
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/paint-winter-75188",
+     "https://kansai-re.com/post_column/winter-painting/",
+     "https://www.youtube.com/watch?v=u2NEF1cSq7g"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/rainy-season_paint-63018",
+     "https://www.k-skn.com/sokenpaint/column/822/",
+     "https://www.my-painter.com/column/20210413kita-gaihekituyu/",
+     "https://gaiheki-madoguchi.com/articles/1950",
+     "https://gaiheki-madoguchi.com/articles/2558",
+     "https://fukushima-toso.com/blog/49191/",
+     "https://plj-tochigiutsunomiya.com/column-gaiheki-best-season-timing/",
+     "https://paint-wall.com/blog/14064/",
+     "https://mizuno-paint.osaka/paint-temprature-humidity/",
+     "https://nuribe.jp/column/%E5%86%AC%E3%81%A7%E3%82%82%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AF%E3%81%A7%E3%81%8D%E3%82%8B%EF%BC%9F%E6%B0%97%E6%B8%A95%E5%BA%A6%E4%BB%A5%E4%B8%8B%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9%E3%81%A8/",
+     "https://astecpaints.jp/movie/lesson/69",
+     "https://aibreform.com/%E5%86%AC%E5%A0%B4%E3%81%AE%E5%A4%96%E5%A3%81%E5%A1%97%E8%A3%85%E3%81%AF%E3%81%A7%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%EF%BC%81%E6%B0%97%E6%B8%A9%E3%81%A8%E6%B9%BF%E5%BA%A6%E3%81%AE%E5%BD%B1%E9%9F%BF/",
+     "https://paint-go.com/knowledge/timing/3822/",
+     "https://nuritatsu.com/blog/55096/",
+     "https://www.seven-chemical.co.jp/toryolab/toryolab_6.html",
+     "https://gaiheki-kakekomi.com/home/winter/"
+    ],
+    "error": ""
+   }
+  },
+  "屋根塗装 縁切り タスペーサー": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFx10PqVz4iBpthsnLg3_RN3ROvU5ShkRnOaSxXaqvg4Jei6M7DzhIaU9wLRcEPdMJq6IzWYPp5qNErq0QckzwnPHwGFwjabsjGESFf4SscEegyXel-wts4spsmdt96Lf1O8lRCXjsKmoT4RMrF",
+     "https://maxreform.jp/re-taspacer",
+     "https://satou-tosou.com/tuspacer/",
+     "https://www.taspacer.com/guide/taspacer-method/index.html",
+     "https://paintstaff.co.jp/mitsumori/taspacer/",
+     "https://paint-go.com/knowledge/6986/",
+     "https://nuru.co.jp/blog/post-230824/",
+     "https://hpaint.jp/blog/%E5%B1%8B%E6%A0%B9%E5%A1%97%E8%A3%85%E3%80%80q%E3%82%AB%E3%83%83%E3%82%BF%E3%83%BC%E3%81%AB%E3%82%88%E3%82%8B%E7%B8%81%E5%88%87%E3%82%8A%E3%80%81%E3%82%BF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B5%E3%83%BC/",
+     "https://www.kodama-t.co.jp/koutei/enkiri/",
+     "https://maxreform.jp/re-taspacer",
+     "https://www.yaneyasan14.net/blog/83051.html",
+     "https://kamisei.co.jp/news/83517",
+     "https://www.gaiso.co/column/roof/detail/?sid=112",
+     "https://www.nuri-kae.jp/column/construction-method/8604/",
+     "https://www.yaneyasan13.net/re-taspacer"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.yaneyasan13.net/blog/104578.html",
+     "https://www.nurisen.jp/pg639.html",
+     "https://www.kodama-t.co.jp/koutei/enkiri/",
+     "https://www.gaihekitosou-partners.jp/contents-33967.html",
+     "https://www.yaneyasan14.net/taspacer",
+     "https://www.yaneyasan.net/taspacer",
+     "https://wadachi-kenchiku.com/menu/yane-tosou/enkiri/",
+     "https://www.tosouyasan13.net/taspacer",
+     "https://yamatokensou.net/information/taspacer-roof-painting/",
+     "https://zeenb.astecpaints.jp/journal/yanetosou/taspacer-37842",
+     "https://www.yaneyasan13.net/taspacer",
+     "https://paint-go.com/knowledge/6986/",
+     "https://yane-niihamachuo.com/taspacer",
+     "https://xn--3kqz84af9af3v.net/taspacer",
+     "https://machiyane-kasukabe.com/taspacer",
+     "https://yane-matsuyama.com/taspacer"
+    ],
+    "error": ""
+   }
+  },
+  "外壁塗装 DIY 自分で 塗る リスク": {
+   "group": "塗料・工事内容の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://satoutokou.net/blo2/7271",
+     "https://rehome-kizuna.com/blog/1526.html",
+     "https://minori-paint.com/archives/2736",
+     "https://www.tosouyasan13.net/machigaidiy",
+     "https://se-wa-j.co.jp/blog/detail/183482",
+     "https://hikari-paint.co.jp/bese/diy/",
+     "https://imagawa-paint.com/encyclopedia/foundation/9129/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.k-skn.com/sokenpaint/column/1740/",
+     "https://www.m-kensou.com/column/gaihekitosou/20230602rr/",
+     "https://www.my-painter.com/column/20231205chihi-diy/",
+     "https://www.gaiheki110.com/kiso/diy.html",
+     "https://www.housecare.co.jp/column/exterior-painting/diy-gaiheki-painting-danger/",
+     "https://kjcoop.or.jp/column/exteriorwall-diy/",
+     "https://imagawa-paint.com/encyclopedia/foundation/9129/",
+     "https://painting.yu-shin1.com/column/post-544/",
+     "https://ichomepaint.com/blog1/16543/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

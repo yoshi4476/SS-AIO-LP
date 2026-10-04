@@ -1,0 +1,1604 @@
+{
+ "industry": "inshoku",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 ランチ おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mizuno-osaka.com/",
+     "https://www.indiancurry.jp/sambangai/",
+     "https://www.h-sanbangai.com/shop/detail/178",
+     "https://www.hokkyokusei.online/shoplist",
+     "https://www.harijyu.co.jp/shop-info/2177/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/restaurant/osaka/lunch/rankmood/",
+     "https://retty.me/theme/101042101/",
+     "https://restaurant.ikyu.com/s-spot3907/lunch/",
+     "https://tabelog.com/matome/25636/",
+     "https://restaurant.ikyu.com/s-0176/lunch/",
+     "https://www.nap-camp.com/mag/41173",
+     "https://osakalucci.jp/umeda-lunch",
+     "https://restaurant.ikyu.com/s-osaka/lunch/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 個室 居酒屋": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.banya-group.jp/shop/higashishinjuku/",
+     "https://shop.newtokyo.co.jp/hanarean/tokyo/",
+     "https://www.kadoya-hotel.co.jp/hatago/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/restaurant/tokyo/tavern/rankmood/",
+     "https://rtrp.jp/locations/229/categories/208/scenes/10/",
+     "https://retty.me/area/PRE13/PUR9/",
+     "https://www.hotpepper.jp/SA11/G001/dncLU0030/",
+     "https://www.hotpepper.jp/SA11/G001/dncLT0095/",
+     "https://restaurant.ikyu.com/area/tokyo/90007/sc0002/",
+     "https://restaurant.ikyu.com/area/tokyo/90007/t-scene3570",
+     "https://restaurant.ikyu.com/t/s5-%E5%80%8B%E5%AE%A4/g455-%E3%81%8A%E3%81%97%E3%82%83%E3%82%8C%E5%B1%85%E9%85%92%E5%B1%8B/tokyo/",
+     "https://restaurant.ikyu.com/t/s5-%E5%80%8B%E5%AE%A4/g455-%E3%81%8A%E3%81%97%E3%82%83%E3%82%8C%E5%B1%85%E9%85%92%E5%B1%8B/tokyo/011/0025/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://restaurant.ikyu.com/t/s5-%E5%80%8B%E5%AE%A4/g354-%E9%AB%98%E7%B4%9A%E5%B1%85%E9%85%92%E5%B1%8B/tokyo/",
+     "https://restaurant.ikyu.com/area/tokyo/90007/sc0002/",
+     "https://retty.me/area/PRE13/ARE15/SUB1501/PUR60/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGUVpuvh1mbHDyxpvN97eRk16xzU_ZrR8KTU6YBRFMoyYb8cwxUjJ08ZwrPY4SqCjBsW0-KT6eBvb7NH0sxjJMumUHSuAwt-nvOyqRJLAH4eaRqHV3-ncnOekDDkqY4qe_JGZeXZLDgwdB7-YrL8w=="
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 宴会 貸切": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://torikai-meieki-nishi.com/space/",
+     "https://neowadiningmirai.owst.jp/seats",
+     "https://www.shooters-nagoya.com/ja/party",
+     "https://www.theconderhouse.jp/",
+     "https://www.nagoyakankohotel.co.jp/banquet/plan/?category_id=1"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/restaurant/oninzu/aichi/nagoya-city/st25077/u30/",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLU0003/",
+     "https://www.e-kaijou.space/bounenkai/venue/search/aichi/?sd=70",
+     "https://kaijosearch.com/region/2/city/12",
+     "https://kaijosearch.com/tokai/70-person/nagoya-city/",
+     "https://kaijosearch.com/tokai/5000-price/nagoya-city/",
+     "https://gourmetplus.jp/guide/28371/",
+     "https://gourmetplus.jp/aichi/A10135/60people/",
+     "https://gourmetplus.jp/aichi/A10135/AD10440/S1534/20people/",
+     "https://www.tabemaro.jp/column/party/",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLT0097/",
+     "https://www.nagoyakankohotel.co.jp/banquet/plan/",
+     "https://restaurant.ikyu.com/t/s1418-%E8%B2%B8%E5%88%87%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC/aichi/001/0211/",
+     "https://30min.jp/gourmet/station/2202/%E5%A4%A7%E4%BA%BA%E6%95%B0"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gourmetplus.jp/guide/28371/",
+     "https://30min.jp/gourmet/station/2202/%E5%A4%A7%E4%BA%BA%E6%95%B0",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLT0095/U014/",
+     "https://restaurant.ikyu.com/t/s1418-%E8%B2%B8%E5%88%87%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC/aichi/001/0211/",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLU0004/U014/",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLU0001/",
+     "https://party-wedding.gnavi.co.jp/search/aichi/WAREAL4102/?features=projector",
+     "https://www.instabase.jp/aichi-nagoya/list/projector-restaurant",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLU0001/U025/",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLU0002/",
+     "https://wedding.kaijosearch.com/region/2/purpose/31/city/12",
+     "https://r.gnavi.co.jp/area/aream4102/banquethalls/kods00133/rs/",
+     "https://kaijosearch.com/region/2/building/3/city/12",
+     "https://wedding.kaijosearch.com/region/2/purpose/31/area/43",
+     "https://www.hotpepper.jp/SA33/Y200/X450/dncLU0002/U025/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 テイクアウト 人気": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.h-bt.jp/floor/shop45.html",
+     "https://www.jrhakatacity.com/floor/detail/?cd=000419",
+     "https://www.mentaiju.com/mentaiju?fid=9898",
+     "https://www.mentaiju.com/faq"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabelog.com/fukuoka/C40130/rstLst/cond10-04-00/",
+     "https://retty.me/area/PRE40/LCAT99/CAT906/",
+     "https://tabiiro.jp/gourmet/article/fukuoka-takeoutgourmet/",
+     "https://retty.me/area/PRE40/ARE132/LCAT99/CAT906/",
+     "https://retty.me/area/PRE40/LCAT99/CAT906/PUR46/",
+     "https://hitosara.com/scene/deli_to/FC1000/GB4/fukuoka/",
+     "https://aumo.jp/prefectures/40/scenes/24",
+     "https://www.navita.co.jp/special/detail/id=1507503",
+     "https://rurubu.jp/andmore/article/24428",
+     "https://tabelog.com/fukuoka/C40133/C106032/rstLst/lunch/cond10-04-00/",
+     "https://tabelog.com/fukuoka/C40133/C106032/rstLst/cond10-04-00/",
+     "https://4travel.jp/magazine/gourmet/000410",
+     "https://arne.media/en/gourmet/539465/",
+     "https://www.lemon8-app.com/uryo1113/7150635418168459782?region=jp",
+     "https://www.kyushu-card.co.jp/get_card_personal/magazine/nd/202102/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://lphub-fukuoka.com/%E7%A6%8F%E5%B2%A1%E3%83%BB%E5%A4%A9%E7%A5%9E%E3%80%9C%E5%8D%9A%E5%A4%9A%EF%BD%9C%E3%83%86%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%A6%E3%83%88%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%8A%E5%BA%97%E7%89%B9%E9%9B%86/",
+     "https://www.solariastage.com/shops/takeout/",
+     "https://fuku-machi.com/zukan/fukuoka-takeout",
+     "https://www.youtube.com/watch?v=cDYVcDk76x0",
+     "https://toyokara.com/",
+     "https://tabiiro.jp/gourmet/article/fukuoka-takeoutgourmet/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 ディナー 予約": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.matsuo1956.jp/shop/ekimae/",
+     "https://www.jrhotels.co.jp/tower/restaurant/skyj/",
+     "https://www.jrhotels.co.jp/tower/restaurant/mikuni/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://restaurant.ikyu.com/s-hokkaido/dinner/",
+     "https://johnny88.jp/gourmet-sapporo/",
+     "https://tabelog.com/matome/28410/",
+     "https://rtrp.jp/locations/1195/categories/208/scenes/9/",
+     "https://tabelog.com/keywords/%E3%83%87%E3%82%A3%E3%83%8A%E3%83%BC/hokkaido/A0101/kwdLst/RC/?sk=%E3%83%87%E3%82%A3%E3%83%8A%E3%83%BC&srchTg=2&sw=%E3%83%87%E3%82%A3%E3%83%8A%E3%83%BC",
+     "https://www.nap-camp.com/mag/55307",
+     "https://tabelog.com/keywords/%E3%83%87%E3%82%A3%E3%83%8A%E3%83%BC%E3%82%B3%E3%83%BC%E3%82%B9/hokkaido/C1100/kwdLst/",
+     "https://www.keioplaza-sapporo.co.jp/restaurants/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 食べ放題 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://yokohamadaihanten.owst.jp/",
+     "https://daihanten.owst.jp/",
+     "https://www.welcome.city.yokohama.jp/hottopics/hotelbuffet/",
+     "https://gyukaku-yokohamamovil-taiyouent.com/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.welcome.city.yokohama.jp/hottopics/hotelbuffet/",
+     "https://hamanear.com/yokohama-chinatown-tabehoudai-list/",
+     "https://tabelog.com/kanagawa/C14100/rstLst/cond02-00-00/yakiniku/",
+     "https://www.hotpepper.jp/SA12/Y135/dncLT0089/",
+     "https://www.asobo-yokohama.com/report/837/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://retty.me/theme/200249215/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFk2cU_tiJTt83cxXzV9exXelsDnKnVtfu4YARTiDwF4MRA3V9YZh2HW6UMGri-xFsm4L4cklLbroQG4bfG-4va8Ax_j85UwMgZ3_BJjYFjUFmmmV3eqZHUs9xxDVQhINTqXNBzn5TM8iWSq47XR-aqXCt3FIcnWahc6RPini1jJg==",
+     "https://www.welcome.city.yokohama.jp/gourmet/chinatown/page_02.php",
+     "https://www.youtube.com/watch?v=IzMLlNy9kP8",
+     "https://www.youtube.com/watch?v=TlOtMhPholE",
+     "https://restaurant.ikyu.com/t/g3032-%E3%83%96%E3%83%83%E3%83%95%E3%82%A7/kanagawa/",
+     "https://www.youtube.com/watch?v=GbZ-5a9W9zc",
+     "https://www.youtube.com/watch?v=AB1LwF9UDsE",
+     "https://ybht.co.jp/restaurant/cafe_tosca.php",
+     "http://www.yokohamadaihanten.com/menu/index.html",
+     "https://kocho.gorp.jp/",
+     "https://hamakore.yokohama/yokohama-chinatown-tabehoudai-list/",
+     "https://www.hotpepper.jp/top_party21/SA12/Y135/",
+     "https://www.hotpepper.jp/SA12/Y136/X274/dncLT0089/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 ランチ 個室": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://kizakura.co.jp/restaurant/shofurou/index.html",
+     "https://takeshigero-granviakyoto.jp/",
+     "https://sobasyubo-tokubee.com/",
+     "https://www.yagenbori.co.jp/shop/yagenbori/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://4travel.jp/magazine/gourmet/00159",
+     "https://hitosara.com/lunch/FC902/kyoto/",
+     "https://retty.me/theme/101042003/",
+     "https://www.ozmall.co.jp/restaurant/kyoto/lunch/private/",
+     "https://restaurant.ikyu.com/s-kyoto/lunch/",
+     "https://tabelog.com/kyoto/C26100/rstLst/lunch/cond07-00-00/",
+     "https://restaurant.ikyu.com/area/kyoto/03/sc0002/",
+     "https://restaurant.ikyu.com/area/kyoto/001/03/sc0002/",
+     "https://www.navitime.co.jp/category/0310006002/26/?tags=100017",
+     "https://www.hotpepper.jp/strJ003625110/",
+     "https://restaurant.ikyu.com/s-0102/lunch/",
+     "https://restaurant.ikyu.com/s-0097/lunch/",
+     "https://hitosara.com/lunch/ranking/kyoto/T26001/I14905/",
+     "https://r.gnavi.co.jp/area/aream3422/lunch/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 カフェ 子連れ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://cafe-mutter.com/cafe/",
+     "https://mysig2021.official.ec/",
+     "https://sowelu-kobe.com/cafe/",
+     "https://farm.bbsheep.jp/bb-sheep-coffee"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kobe-journal.com/archives/3769556976.html",
+     "https://iko-yo.net/facilities?city_ids%5B%5D=528008&genre_ids%5B%5D=43&prefecture_ids%5B%5D=28",
+     "https://rtrp.jp/locations/1663/categories/312/scenes/26/",
+     "https://iko-yo.net/facilities?city_ids%5B%5D=528001&prefecture_ids%5B%5D=28&tags%5B%5D=%E3%82%AD%E3%83%83%E3%82%BA%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9",
+     "https://iko-yo.net/facilities?genre_ids%5B%5D=43&prefecture_ids%5B%5D=28&tags%5B%5D=%E3%82%AD%E3%83%83%E3%82%BA%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9",
+     "https://rtrp.jp/locations/1802/categories/311/scenes/26/",
+     "https://comolib.com/area/kansai/hyogo/zone-28000200/cate-18000/subcate-18008?stroller_allowed=1"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEcNzyI-WaqPGYOt1TYfvajY9Tsnco6XsF3TN_5HzjbvPbRrZhhcwTkquiLZ2xj-P6hspt8ROA9gdY526FeQNFW8f99Seq0asx3kvH4dqkwpa0wxifD1lmAnobouqLpvZlEvrsnjYEoFzLnVDh6aesgPWDkZRsTg5DkXoOP9pb-6DOfi4EJrTBOPyyOJ1QTEDfz13sdfeF01af5zebGoX39d-6I1sL3zks9T7ieXZ_KfCoP8MczvB79Mr9m9z4aFUadx45_SoMYQuWkGGZb",
+     "https://kobe-journal.com/archives/3769556976.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHUjvuAw1HcztXeo_PXEk3HYbCxsT6yzH8vbDZdmZ0AFWSXLCT3U4NbpYahn1d5cTqXDPfdTDMw-7y9pEIAsgn4rygWNz6qx1-knA8C78o8Jis_kEjTOaHkS1lYtL8Qr8u24z9BVBpIP4x54DQ4cHcH2nKDv-H3wk-TWJrE4A==",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFhzANwyJ15P_kMNONmi7GWlB0gs7pSYwicqhquzAVmqFyQl712d-H4M1drXMMkMXNGDsxaxwfRr_p-5pO5oarPWPdRsn1y4NAuYF9SQsY2kJk0tEw=",
+     "https://tanosu.com/cafe/170897/",
+     "https://kisspress.jp/articles/63096/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 居酒屋 飲み放題": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://toridaruma.owst.jp/courses",
+     "https://www.guzuramozura.com/course.html",
+     "https://gocchosun.com/course/",
+     "https://kakoiya-sendai.com/course/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabelog.com/miyagi/C4100/rstLst/cond05-00-00/izakaya/",
+     "https://www.hotpepper.jp/SA53/Y550/dncLT0090/",
+     "https://retty.me/area/PRE04/ARE158/LCAT1/CAT350/PUR46/",
+     "https://www.hotpepper.jp/SA53/Y550/X551/G001/U002/",
+     "https://iroriyasendaiekimae.owst.jp/",
+     "https://haraheri.net/article/403/sendai_izakaya"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=IyuhA1S--Dc",
+     "https://ta9a400.gorp.jp/",
+     "https://nonbeeno-tawamure.com/archives/42024",
+     "https://r.gnavi.co.jp/area/aream6202/izakaya/kods00078/rs/",
+     "https://r.gnavi.co.jp/area/aream6202/izakaya/kods00078/rs/",
+     "https://www.hotpepper.jp/SA53/Y550/dncLT0091/",
+     "https://www.hotpepper.jp/SA53/Y550/dncLT0082/U004/",
+     "https://nonbeeno-tawamure.com/archives/42024",
+     "https://www.hotpepper.jp/SA53/Y550/dncLT0090/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 夜ご飯 安い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.saizeriya.co.jp/menu-popular/",
+     "https://shop.saizeriya.co.jp/sz_restaurant/spot/list/map?address=34101&search=address",
+     "https://tabelog.com/hiroshima/A3401/A340108/34000256/dtlmenu/",
+     "https://www.okonomi.co.jp/shop.html",
+     "https://fukuya-dept.co.jp/honten/floor/business?id=174"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hotpepper.jp/SA74/nw1/B010/",
+     "https://www.hotpepper.jp/SA74/nw1/B011/",
+     "https://rtrp.jp/locations/249/categories/248/scenes/15/",
+     "https://tabelog.com/hiroshima/C34101/rstLst/cond63-02-00/",
+     "https://retty.me/area/PRE34/ARE152/SUB56606/STAN3260/PUR46/",
+     "https://retty.me/area/PRE34/ARE152/LCAT13/CAT120/PUR46/",
+     "https://hitosara.com/RY126/GC0201/hiroshima/T34001/",
+     "https://tabelog.com/hiroshima/C34100/rstLst/cond05-02-00/okonomiyaki/",
+     "https://www.hotpepper.jp/SA74/Y600/G016/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFLpzbOFUKlXg5Vda7RWwxAHeswfyyPDthfvI9oXc3oDYA_fUDYMHyJKvRJmQ9nf4rYNEA1Py5XAQOZyvlxmfW3TopRuxSALX-efVk513QCWSQgbZY2kXSp2oUPdG8h4YV-A7PdrCr1FL_x884=",
+     "https://retty.me/area/PRE34/LCAT13/PUR46/",
+     "https://www.bm-peekaboo.com/gourmet/8-104/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG0ufzwv7TAs1RiwSiRxWDsM6-7vy_0t3rJLN5XExUwGouuaBVtxYmgd-560vQoMRrC-3VRvlaJGukd2VFSLvZ7At_fsiBHZmaVgD7dVxZr4Rbkj5W7C3cPe5jfx1U6AaxQH-g43sC1CnbwtLfhUqigM4DBROwgx39jDxecV65GuDChnbndv5WtK0ew9kpgxkJoyqct5aAoYdXJBfM_H5VOudRH6YtVkst1VI_F8zuh8A==",
+     "https://www.hotpepper.jp/SA74/nw1/B001/"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 予算 相場": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hotpepper.jp/ggs/wp-content/uploads/2026/04/ランチ260427.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hotpepper.jp/ggs/wp-content/uploads/2026/04/%E3%83%A9%E3%83%B3%E3%83%81260427.pdf",
+     "https://www.hotpepper.jp/ggs/research/article/column/20260410",
+     "https://prtimes.jp/main/html/rd/p/000000116.000056034.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hotpepper.jp/ggs/research/article/column/20260410",
+     "https://www.bizreach.jp/column/shiritai-11/",
+     "https://www.shashokudeli.com/post/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E3%80%91%E3%83%A9%E3%83%B3%E3%83%81%E4%BB%A3%E3%82%A4%E3%83%B3%E3%83%95%E3%83%AC%E3%81%AE%E5%AE%9F%E6%85%8B%E8%AA%BF%E6%9F%BB%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88-%E3%82%B5%E3%83%A9%E3%83%AA%E3%83%BC%E3%83%9E%E3%83%B3%E3%81%AE%E5%B9%B3%E5%9D%87%E6%98%BC%E9%A3%9F%E4%BB%A3%E3%81%AF%E9%81%8E%E5%8E%BB%E6%9C%80%E9%AB%98700%E5%86%86%E5%8F%B0%E3%81%B8%E3%80%82%E4%BC%81%E6%A5%AD%E3%81%8C%E4%BB%8A%E6%A4%9C%E8%A8%8E%E3%81%99%E3%81%B9%E3%81%8D%E3%80%8C%E7%AC%AC3%E3%81%AE%E8%B3%83%E4%B8%8A%E3%81%92%E3%80%8D%E3%81%A8%E3%81%AF%EF%BC%9F",
+     "https://www.zaikei.co.jp/article/20260318/847452.html",
+     "https://news.mynavi.jp/article/20250421-3207995/",
+     "https://edenred.jp/article/productivity/157/",
+     "https://www.shinko-jp.com/column/kaisyainranti/"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ お店 選び方": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://api-img.tanita.co.jp/files/user/news/pdf/2025/lunch_research.pdf",
+     "https://help.tabelog.com/%E3%80%8C%E3%82%A8%E3%83%AA%E3%82%A2%E3%83%BB%E9%A7%85%E3%80%8D%C3%97%E3%80%8C%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%80%8D%C3%97%E3%80%8C%E3%83%8D%E3%83%83%E3%83%88%E4%BA%88%E7%B4%84%E3%80%8D%20%E6%A4%9C%E7%B4%A2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-64ce834eee1c18001bdb9f28"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gaisyokulunch.blog.jp/archives/30635303.html",
+     "https://gochikuru.com/feature/lunch/businesslunch/preparation/",
+     "https://mise-repo.com/article/2026/02/24/enjoy-lunch-at-local-restaurants-top-recommendations-and-reviews/",
+     "https://www.lemon8-app.com/experience/%E3%82%89%E3%82%93%E3%81%A1-%E3%82%86%E3%81%A3%E3%81%8F%E3%82%8A%E8%A9%B1%E3%81%9B%E3%82%8B?region=jp",
+     "https://fresco-chichukai.jp/media/20260312/",
+     "https://shachirin.com/column/2025/12/14/%E3%83%A9%E3%83%B3%E3%83%81%E4%BA%BA%E6%B0%97%E3%81%AE%E3%81%8A%E5%BA%97%E9%81%B8%E3%81%B3%E6%96%B9%E3%81%A8%E9%AB%98%E8%A9%95%E4%BE%A1%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E3%83%A9%E3%83%B3%E3%82%AD-2/"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 一人 入りやすい": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://wb.kirinholdings.com/trend/research/report/pdf/report_vol66.pdf",
+     "https://ichiran.com/column/clmn-005039.html",
+     "https://store.yayoiken.com/b/yayoiken/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bimi.jorudan.co.jp/topics/90710.html",
+     "https://www.enjoytokyo.jp/theme/ranking/scn02/cat0105/",
+     "https://tabelog.com/osaka/C27100/rstLst/lunch/cond04-00-02/",
+     "https://www.ozmall.co.jp/restaurant/tokyo/lunch/1p/",
+     "https://tabelog.com/aichi/C23100/rstLst/lunch/cond04-00-02/",
+     "https://www.ozmall.co.jp/restaurant/lunch/1p/",
+     "https://www.ozmall.co.jp/restaurant/luxury/lunch/1p/",
+     "https://rtrp.jp/articles/74723/",
+     "https://shiblog.town/shibuya-sololunch/"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 子連れ 席": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://kidsna.com/magazine/article/mother-family-170829-00001449"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kidsna.com/magazine/article/mother-family-170829-00001449",
+     "https://babysaurus.jp/2026/06/30/post-8476/",
+     "https://nagoya.mypl.net/article/ko-lunch_higashi-chikusa-nagoya/6072",
+     "https://www.yohana.jp/lp/article_lunchwithkids",
+     "https://www.lemon8-app.com/experience/%E5%AD%90%E9%80%A3%E3%82%8C%E3%81%AB%E5%84%AA%E3%81%97%E3%81%84%E5%BA%A7%E6%95%B7%E5%B8%AD%E3%81%AE%E3%81%82%E3%82%8B%E3%82%89%E3%82%93%E3%81%A1%E5%BA%97%E3%81%8A%E3%81%99%E3%81%99%E3%82%81?region=jp",
+     "https://ginzagourmet.com/10000002-2/",
+     "https://fukuyama-note.com/fukuyama-lunch-kozure/",
+     "https://kyounoko.jp/article/kodzure-restaurant-erabikata-kanzen-guide",
+     "https://kyounoko.jp/article/koshitsu-kodzure-lunch"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 混雑 時間帯": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://r-reserve.com/column/restaurant-reserve-calltime/",
+     "https://e-shinzan.jp/column/detail/20260619180003/",
+     "https://hekkoro.com/2026/09/28/fujisawa-weekend-lunch-crowd-tips/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11110870661",
+     "https://sobakizuna.jp/column/7c3a5525-5198-4afd-a703-020842bd1dc2",
+     "https://media.bizmeshi.jp/articles/rapid-increase-in-lunch-refugees/",
+     "https://soleil-dining.jp/column/58805409-60dc-49fa-8c6a-5616c75a8e72"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMLMYYohHyXFYEAy2KhR29ptqlNM6eYf8JvYIQAHErYcnFd67L6PpcYdziAX-H1FpvE2vJOlKsvJmK_W1Yua4uxwzARvlpzlGTJHfeKUutIGYHsZUbOsVo1EiHVLTIMOf5JNCqnFMjzMZRGJS3mKYyQ3wWxOEe8zw0T9xmIpl5NK510lq4CO8XFpx7g1oN15vC1A6BLFKeDlZieXlRgUkH0RYm",
+     "https://tenshinokaraage.com/column/8bfff6b4-63ec-4446-8ab9-376932f35581",
+     "https://king.mineo.jp/reports/254304",
+     "https://business.aumo.jp/column/restaurant-waitingtime-improvement",
+     "https://note.com/sampoco315/n/nd9a05ae18528"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 平日 限定 メニュー": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://domdomhamburger.com/menu/menu_set/4805.html",
+     "https://www.yamaokaya.com/menus/yamaokaya/set/",
+     "https://www.dennys.jp/menu/hirudeni/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mcdonalds.co.jp/company/news/2026/0330a/",
+     "https://www.yakiniku-like.com/2026/01/14/yakiniku-lunch-renewal/",
+     "https://yurimaman.com/archives/75852",
+     "https://www.cocos-jpn.co.jp/news/2026/menu/0303-82439.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://saizeriyamenu.com/lunch/",
+     "https://ameblo.jp/neko-neko-nikodo/entry-12895843999.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQEvG3EK6rNfgzwwuZxWZFF5MY4H06Ib3OtHv-kjqX5Def6ktFO30R_KuUh2vX6gmSSDfLu-X74DNq3_4tlYa8kQ3yC47XjXSUx4O57k3Zj4EyzzHwHF3q_KWiJGKo91JP62tlCcX3uLrh-wB3-w==",
+     "https://diamond.jp/articles/-/372900",
+     "https://yurimaman.com/archives/86387",
+     "https://ichioshi.allabout.co.jp/articles/common/499907",
+     "https://www.walkerplus.com/article/1248614/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH_ztE3wS099mANGcA8IN_Jzy-TzXK5OlOSmG6FajnIkpImh-RGG1FHIRG1E5zs20fPzy1VqIfJTRvgkNFcnmMS8iYuV2QNTcWKvJsnpbtHRbUGlNqR6dtm5dLOJcMNhSf5ooOXtDNXtF6n2bc3JKgp0sgxqvHsm0_u8zLwgnvHxWJd5DBbR1kX6jZ7V6b5mwZkyxR8cASAlMPAZphKafP1Yne9r647iE9QC8JV-duAvh59_njxaNR_BlkKA5bBU-88Oc5NK9YAzgeO4uRihfr1w_-fKaY="
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 女子会 おしゃれ": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://omotesandria.com/table/",
+     "https://takenoan.com/lunch/",
+     "https://www.grandginza.com/grand47/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/joshikai/restaurant/lunch/",
+     "https://tabiiro.jp/gourmet/article/sapporo-joshikai-gourmet/",
+     "https://tabelog.com/matome/27006/",
+     "https://restaurant.ikyu.com/t/s21-%E5%A5%B3%E5%AD%90%E4%BC%9A/tokyo/lunch/",
+     "https://restaurant.ikyu.com/t/s21-%E5%A5%B3%E5%AD%90%E4%BC%9A/osaka/",
+     "https://restaurant.ikyu.com/t/s21-%E5%A5%B3%E5%AD%90%E4%BC%9A/tokyo/011/0025/lunch/",
+     "https://magazine.hitosara.com/article/4834/",
+     "https://chiba.mypl.net/article/gourmet_chiba/48363"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTQOoVmvQkOt9BvvgvhoYiMKNm_3k_0MmUqqzdeaSJL--i-pwekANELORjXq7C12tJ-W6p8Oh43Zp3JPcC8HpMFy3w2bJYsagSMKRCdn7Y7A0ziINAi-rWhzF-mp61CIiwKgAE05o9MQ==",
+     "https://restaurant.ikyu.com/lunch/joshikai/",
+     "https://tabiiro.jp/gourmet/article/yokohama-lunch/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFhfTb7rZ61NBYn5Onyk5EEBxd7yuodq6IvbzBDhRw8HGdp6YwGQ0FZSSlOXvI_N5dwVWzP5-iqJMiuBQz411L0ozg7OaRfj4dl_2NAa1ganAycC-e",
+     "https://retty.me/theme/100014606/"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 接待 個室": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.wakuta.com/lunch.html",
+     "https://tabelog.com/tokyo/rstLst/lunch/cond15-02-00/?station_id=6542"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabiiro.jp/premium_gourmet/article/ginza-settai-koshitsu/",
+     "https://tabelog.com/matome/26348/",
+     "https://restaurant.ikyu.com/t/s55-%E6%8E%A5%E5%BE%85/tokyo/lunch/",
+     "https://tabiiro.jp/premium_gourmet/article/tokyo-settai/",
+     "https://tabiiro.jp/premium_gourmet/kyoto/?search_s=3&sort=pricedesc",
+     "https://restaurant.ikyu.com/area/tokyo/03/t-scene372/",
+     "https://gourmet-calendar.com/articles/241",
+     "https://restaurant.ikyu.com/t/s55-%E6%8E%A5%E5%BE%85/tokyo/009/0022/",
+     "https://www.kiwamino.com/articles/selections/29930"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 食べ放題 料金": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.skylark.co.jp/syabuyo/menu/recommend/index.html",
+     "https://staminataro.jp/2026-4-24/",
+     "https://shinjuku-toho.kushi-ya.com/course/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gyukaku-tabehodai.jp/menu/lunch/menu-lunch-okigaru.php",
+     "https://gyushige-ko-mei.com/column/20260115/",
+     "https://acrius.co.jp/yuzuan-lunch/",
+     "https://www.hotpepper.jp/top_party38/SA11/U003/",
+     "https://www.lmaga.jp/feature/946722/",
+     "https://www.jalan.net/news/article/179582/",
+     "https://monjiro-lunch.com/sapporo-lunch-buffet/",
+     "https://www.tokupay.jp/entry/yakiniku-tabehodai-yasui"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.skylark.co.jp/syabuyo/menu/",
+     "https://lp.p.pia.jp/article/news/434482/index.html",
+     "https://yurimaman.com/archives/72031",
+     "https://www.yakiniku-king.jp/menu_all/lunch/",
+     "https://ameblo.jp/benfreedom4/entry-12868620499.html",
+     "https://lp.p.pia.jp/article/news/434981/index.html",
+     "https://mamagirl.jp/0000316092",
+     "https://www.sweets-paradise.jp/",
+     "https://www.sweets-paradise.jp/news/news_cat/2026/02/10/28456/"
+    ],
+    "error": ""
+   }
+  },
+  "ランチ 予約 必要 いつ": {
+   "group": "ランチ",
+   "ChatGPT": {
+    "urls": [
+     "https://r-reserve.com/column/restaurant-reserve-daysbefore/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11239404881",
+     "https://5penguins.fivestar-club.jp/japan/17022/",
+     "https://trndlog.hatenablog.com/entry/restaurant-reservation",
+     "https://r-reserve.com/column/restaurant-reserve-daysbefore/",
+     "https://iikotomikke.com/resutoran-yoyaku-denwa-jikan",
+     "https://koala811.com/restaurant-resernations/"
+    ],
+    "error": ""
+   }
+  },
+  "個室 居酒屋 料金 相場": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hotpepper.jp/SA11/G001/dncLU0007/U009/B008/cbf4001_cbt5000/",
+     "https://www.yamaya-shokudo.com/",
+     "https://tabelog.com/tokyo/A1302/A130202/13316143/",
+     "https://www.hotpepper.jp/strJ001232531/appearance/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://watafuku2021.com/blog/20260212/",
+     "https://www.waraukado-monnaka.jp/news/319",
+     "https://urayamashika-machida.com/blog/20250606-2743/",
+     "https://urayamashika-machida.com/blog/20250610-2791/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://torimusya.jp/media/20260218/",
+     "https://canaeru.usen.com/diy/operation/p245/",
+     "https://neo-emotion.jp/izakaya-average-budget/",
+     "https://www.hotpepper.jp/SA56/Y892/G001/dncLT0087/U004/",
+     "https://www.hotpepper.jp/SA56/Y892/dncLZ0030/U004/",
+     "https://con-cafe.jp/what-is-the-cover-charge-in-con-cafes",
+     "https://neo-emotion.jp/izakaya-seat-fee/",
+     "https://urayamashika-machida.com/blog/20250606-2743/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1338421868",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11196280176",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10267839680",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13285642138"
+    ],
+    "error": ""
+   }
+  },
+  "宴会 コース 費用 一人あたり": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://miraizaka.com/blog_list/6552/",
+     "https://kashikiri.bee8-shibuya.jp/posts/enkai-yosan-soba",
+     "https://aoyamaippin.com/course.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://miraizaka.com/blog_list/6552/",
+     "https://kintetsu-rs.com/magazine/2023_year-end-party/",
+     "https://kaijosearch.com/article/year-end-party-budget/",
+     "https://urayamashika-machida.com/blog/20250606-2743/",
+     "https://tenpos.online/kanji-daiko/column/art41",
+     "https://torimero.com/topics/10201/",
+     "https://time-sharing.jp/sharing/article-281",
+     "https://catering-selection.jp/blog/detail/67",
+     "https://hanakaruta.jp/news/951/",
+     "https://www.shibuyapikarie.com/shibuya-kashikiri-bounenkai-budget/",
+     "https://ginza-cruise.co.jp/ikebukuro/knowhow/4734/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://miraizaka.com/blog_list/6552/",
+     "https://miraizaka.com/blog_list/6552/",
+     "https://www.keihin-park.com/hpgen/HPB/entries/13484.html",
+     "https://www.ippachinishiki.com/izakaya-banquet-price.html",
+     "https://koronagirai.com/news/blog/531/",
+     "https://torimero.com/topics/3199/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11187585926",
+     "https://tenpos.online/kanji-daiko/column/art41",
+     "https://urayamashika-machida.com/blog/20250610-2790/",
+     "https://gourmetplus.jp/guide/61489/",
+     "https://time-sharing.jp/sharing/article-281",
+     "https://biz.moneyforward.com/restaurant/basic/3329/"
+    ],
+    "error": ""
+   }
+  },
+  "個室 選び方 ポイント": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://connect.pluginarts.com/business/restaurant/re04/",
+     "https://anny.gift/restaurant/contents/kaoawase/guide/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.office-com.jp/gimon/work-space/private_booth_home.html",
+     "https://www.lilycolor.co.jp/ss/column/54501/",
+     "https://it-trend.jp/work-booth/article/1119-5075",
+     "https://www.irischitose.co.jp/blog/column/office_centralizedbooth/",
+     "https://common-room.jp/news/77711/",
+     "https://sekarashika.jp/column/detail/20260106202424/",
+     "https://www.waraukado-monnaka.jp/news/354",
+     "https://torimusya-kawasaki.jp/column/0f374716-aea5-4911-ab77-67a59929bc8a",
+     "https://okayama-enishi.com/column/detail/20240607141004/"
+    ],
+    "error": ""
+   }
+  },
+  "宴会 幹事 お店 選び方": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://kasikiru.com/column/?p=2304",
+     "https://gourmetplus.jp/guide/61430/",
+     "https://gourmetplus.jp/guide/1432/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://torimero.com/topics/1376/",
+     "https://torimero.com/topics/2167/",
+     "https://ginza-cruise.co.jp/ikebukuro/knowhow/3568/",
+     "https://www.e-kaijou.space/blog/archives/7013/",
+     "https://kasikiru.com/column/?p=2676",
+     "https://www.symphony-cruise.co.jp/column/8126/",
+     "https://biz-food.com/column/5082",
+     "https://gourmetplus.jp/guide/1432/",
+     "https://www.namba-enkai.com/blog/column16/"
+    ],
+    "error": ""
+   }
+  },
+  "個室 何名から 貸切": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hotpepper.jp/strJ001119076/appearance/",
+     "https://il-cardinale-ginza.com/party/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hitosara.com/scene/FC1005/",
+     "https://tabelog.com/tokyo/C13123/rstLst/cond09-00-00/RC/",
+     "https://www.instabase.jp/tokyo/list/private",
+     "https://www.hotpepper.jp/SA23/dncLT0097/",
+     "https://www.hotpepper.jp/SA11/dncLU0001/",
+     "https://www.hotpepper.jp/SA11/dncLT0095/",
+     "https://r.gnavi.co.jp/area/tokyo/banquethalls/kods00066/rs/",
+     "https://r.gnavi.co.jp/area/jp/kods00066/rs/",
+     "https://www.shibuyapikarie.com/shibuya-kashikiri-shoninzu/"
+    ],
+    "error": ""
+   }
+  },
+  "歓送迎会 会場 予算": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://www.spring-note.com/welcome-farewell-party-fee/",
+     "https://kanji-kit.net/guide/kansougeikai-kaihi",
+     "https://www.spring-note.com/welcome-farewell-party-private-venue/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ginza-cruise.co.jp/ikebukuro/knowhow/4314/",
+     "https://kaijosearch.com/article/welcome-party-cost-guide/",
+     "https://kaijosearch.com/article/sobetsu-yosan/",
+     "https://magazine.partyhunter.jp/event/7348/",
+     "https://canjii.jp/articles/0nwhriks/",
+     "https://keisyakun.com/blog/welcome-farewell.html",
+     "https://e-kanji-san.com/magazine/articles/kankousoubetsukai-keisha/",
+     "https://jinzaii.or.jp/42565",
+     "https://toriumi24.com/910.html",
+     "https://www.spacemarket.com/topics/kansogei_2020/",
+     "https://hitosara.com/season/kansougeikai/howto_kangeikai/",
+     "https://www.vmg.co.jp/restaurants/magazine/kansougeikai/",
+     "https://time-sharing.jp/sharing/article-0002",
+     "https://www.essam.co.jp/hall/column/post_3234.html",
+     "https://kaijosearch.com/article/kangei-kanji/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://yakata-fune.jp/column/column224",
+     "https://ginza-cruise.co.jp/ikebukuro/knowhow/8865/",
+     "https://kaijosearch.com/article/welcome-party-cost-guide/",
+     "https://yotteba.co.jp/column_33/",
+     "https://biz-cruise.com/magazine/5485",
+     "https://biz-food.com/column/9851",
+     "https://www.otodoke-ristorante.com/blog/2234/",
+     "https://kasikiru.com/column/?p=2304"
+    ],
+    "error": ""
+   }
+  },
+  "忘年会 コース 飲み放題 費用": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://www.pasela.co.jp/shoplist/column/bounenkai/",
+     "https://www.hotpepper.jp/enkai/SA11/SD821/",
+     "https://sakaba-haisai-kitashinchi.com/course/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://torimero.com/topics/10201/",
+     "https://miraizaka.com/blog_list/6552/",
+     "https://time-sharing.jp/sharing/article-281",
+     "https://nomikai-calculator.pages.dev/",
+     "https://kaijosearch.com/article/year-end-party-budget/",
+     "https://hanakaruta.jp/news/951/",
+     "https://urayamashika-machida.com/blog/20250606-2743/",
+     "https://grows-net.com/column/inhouse-events/%E4%BC%81%E6%A5%AD%E5%BF%98%E5%B9%B4%E4%BC%9A%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%EF%BC%9F%E4%BA%BA%E6%95%B0%E5%88%A5%E4%BA%88%E7%AE%97%E3%81%A8%E3%82%B3%E3%82%B9%E3%83%88%E5%89%8A/",
+     "https://www.shibuyapikarie.com/shibuya-kashikiri-bounenkai-budget/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hanakaruta.jp/news/951/",
+     "https://torimero.com/topics/3199/",
+     "https://www.ippachinishiki.com/izakaya-banquet-price.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1010521545",
+     "https://urayamashika-machida.com/blog/20250610-2791/",
+     "https://urayamashika-machida.com/blog/20250610-2790/"
+    ],
+    "error": ""
+   }
+  },
+  "女子会 個室 おすすめ": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://shoku-hanamichi-hanare.tokyo/space",
+     "https://www.banya-group.jp/room/",
+     "https://www.andaztokyo.jp/restaurants/jp/thetavern-grill-lounge/private",
+     "https://www.stinc.co.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/joshikai/restaurant/dining/private/",
+     "https://hitosara.com/TC90/osaka/T27007/I15200/",
+     "https://hitosara.com/scene/jyoshikai/FC692/osaka/T27001/I17202/",
+     "https://rtrp.jp/locations/229/scenes/23/",
+     "https://restaurant.ikyu.com/area/osaka/t-scene2863/sc0002/",
+     "https://www.at-s.com/gourmet/ranking/area_ci7-kodawari29-scene21/",
+     "https://www.ozmall.co.jp/joshikai/restaurant/tokyo/area/ginza/dinner/private/",
+     "https://restaurant.ikyu.com/t/s21-%E5%A5%B3%E5%AD%90%E4%BC%9A/osaka/",
+     "https://hitosara.com/scene/jyoshikai/private/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hitosara.com/scene/jyoshikai/private/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF98kP5A7R9-yBLd2Y-GPiK7S6Y1iIht0p1j_Ptmb_aE5xz6GtRDEiYRYTvTF6N7ZPFd2v7zqRki4_IT3JeyYSAL7d8kjBDbuJ-pXKhr68L9g_0v0nIbTgtRAg-ygJmTAEOcJ29Db-GCmoM0F2LvJhtAA==",
+     "https://hitosara.com/scene/jyoshikai/private/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEmpDT64SUaydAZ8YGJ1n3v7arXsZj5BK_UNhv1PK9AQlYhExF2HVusxcJqLXmnqqWmXy4zS3knMtSRuk-fzZxPtacFWAtX6XTptLu3ddglfuVh1yWZOtDpAOX99w0s-sosZQz-kFacQ9SAeYO4zBxINqShH5773LUV2TYrZHBPjNP6AIGioYkJ4NbVmFBb5As8FIX_K6HBLYx5d611fhhQH8YBPfpcUTcF0tMAwMtMgmKNc7BiFD1OvKGqJg3i22mQtC5O66BeGU3x",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGc7jv7-oHqKlJZVxbbF9znn8j-bMpdsuqn5q2XPLDPxsM6wdO1Ys8VhnYGhr8Vt2A6tX2IhmIjYrUIcFz4AtsWDgR60pmJmqrdcZV2vdPzcgga7RPdBvfUo3K5tE10qiazos9dccmJhsYWBWK4uiyU4hF4gYZH78oOl1eDpXCwBCxEzLakbZJCyY_njEgSEEFZ4IiIFJUqJK6vVrDkN6h79imfWQS3fYTH_OH_4sdKu2shHZMSGIXc446hG7l1QZRSIA==",
+     "https://restaurant.ikyu.com/t-genre/",
+     "https://www.hotpepper.jp/SA11/dncLU0022/U004/",
+     "https://tokyo-calendar.jp/article/24799",
+     "https://www.spacemarket.com/topics/joshikai/",
+     "https://tabiiro.jp/theme/jyoshikai/"
+    ],
+    "error": ""
+   }
+  },
+  "顔合わせ 食事会 個室": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002105035/?inrlead=article_relatedArticle",
+     "https://zexy.net/article/app002106009/",
+     "https://zexy.net/article/app002101017/",
+     "https://zexy.net/article/app001911021/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/press/detail/post-37/",
+     "https://hoshinonaruki.jp/kaoawase/411/",
+     "https://www.ozmall.co.jp/restaurant/kaoawase/",
+     "https://zexy.net/article/app002106009/",
+     "https://hana-yume.net/howto/kaoawase-place/",
+     "https://www.mwed.jp/articles/10502/",
+     "https://wedding.mynavi.jp/contents/press/detail/post-194/",
+     "https://www.piary.jp/pre-wedding/preparation/2324.html",
+     "https://www.bridal-hoken.jp/%E3%81%93%E3%82%8C%E3%81%A7%E5%AE%89%E5%BF%83%E2%99%A1%E4%B8%A1%E5%AE%B6%E9%A1%94%E5%90%88%E3%82%8F%E3%81%9B%E9%A3%9F%E4%BA%8B%E4%BC%9A%E3%82%AC%E3%82%A4%E3%83%89%EF%BC%81/",
+     "https://www.ozmall.co.jp/restaurant/kaoawase/tokyo/chiyoda-city/st22828/private/",
+     "https://tabiiro.jp/premium_gourmet/article/tokyo-kaoawas/",
+     "https://www.ozmall.co.jp/restaurant/kaoawase/list/",
+     "https://www.ozmall.co.jp/restaurant/kaoawase/10p/",
+     "https://tabiiro.jp/premium_gourmet/article/osaka-kaoawase/",
+     "https://tabelog.com/matome/19233/",
+     "https://family.kaijosearch.com/article/yuinou/1388/"
+    ],
+    "error": ""
+   }
+  },
+  "会食 接待 お店 選び方": {
+   "group": "個室・宴会",
+   "ChatGPT": {
+    "urls": [
+     "https://joetsu-yasuda.com/news_cat/ginza/ginza-reception/",
+     "https://akasaka-tantei.com/column/180704/",
+     "https://www.tokyo-law.com/pdf/pickup/business_manner_qa.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/restaurant/settai/",
+     "https://fumikoda.jp/en/blogs/journal/180514-business-dinner",
+     "https://hoshinonaruki.jp/entertain/92/",
+     "https://onaji.me/entry/2025/03/07",
+     "https://www.kiwamino.com/articles/columns/28568",
+     "https://nikkei.gnavi.co.jp/article/0001/",
+     "https://r.gnavi.co.jp/business-dinner/article/0001/",
+     "https://olive-cac.jp/blog/best-secretary-guide-how-to-select-settai-restaurant/",
+     "https://agatajapan.com/tokyo/column/businessentertaining/",
+     "https://www.lifehacker.jp/article/170324_kewpie_yoitoki/",
+     "https://tabiiro.jp/premium_gourmet/article/tokyo-settai/",
+     "https://akasakaprince.com/en/column/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%A7%E3%82%82%E5%A4%A7%E4%B8%88%E5%A4%AB%EF%BC%81%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E4%BC%9A%E9%A3%9F%E3%81%AE%E5%BA%97%E9%81%B8%E3%81%B3%E3%81%AE%E3%82%B3",
+     "https://ginza-tomarigi.jp/blog/column/detail/20260302170003/"
+    ],
+    "error": ""
+   }
+  },
+  "予約 いつまで 必要": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.jtb.co.jp/faqs/f4892/",
+     "https://rental.timescar.jp/faq/reservation/188.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://faq-jp.jal.co.jp/ja/s/article/jdsp000000R0000000003440int",
+     "https://faq.jtb.co.jp/faqs/f4892/",
+     "https://www.faq.mizuhobank.co.jp/faq/show/7551?category_id=391&site_domain=default",
+     "https://www.eki-net.com/top/jrticket/guide/early/",
+     "https://otakara-shaken.com/useful/beginner/beginner20.html",
+     "https://jp.trip.com/guide/info/when-to-book-a-hotel.html",
+     "https://www.pokemon-cafe.jp/ja/cafe/news/260821_3462.html",
+     "https://www.camp-cabins.com/news/14333/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sanada-cl.com/column/when-deadline-birth-registration",
+     "https://www.jr-odekake.net/goyoyaku/e5489/reservation/",
+     "https://www.police.pref.chiba.jp/menkyoka/jizenyoyaku.html",
+     "https://castel.jp/p/6203",
+     "https://taiyounotou-expo70.jp/reserve/",
+     "https://faq.tokyodisneyresort.jp/answer/67eaa6555469793792a81272/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11314218121"
+    ],
+    "error": ""
+   }
+  },
+  "ネット予約 電話予約 違い": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://airregi.jp/magazine/guide/6936/",
+     "https://www.hotpepper.jp/yoyaku/guide/request/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://toreta.in/contents/dx/webyoyaku003/",
+     "https://airregi.jp/magazine/guide/6936/",
+     "https://www.tablecheck.com/ja/blog/onlinereservationimplementation/",
+     "https://www.riza-en.jp/column/about_online_reservation",
+     "https://stores.fun/magazine/articles/online-booking-guide",
+     "https://stores.fun/magazine/articles/hair-salon-reservation-system",
+     "https://rsvia.co.jp/column/beauty_salon_internet_reservation/",
+     "https://www.mot-net.com/blog/efficiency-of-operations/10823",
+     "https://totoco-net.com/blog/system/sy010/"
+    ],
+    "error": ""
+   }
+  },
+  "当日予約 できる お店": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://restaurant.ikyu.com/last-minutes",
+     "https://www.hotpepper.jp/",
+     "https://www.mail.hotpepper.jp/yoyaku/guide/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tol-app.jp/columns/501",
+     "https://www.joqr.co.jp/media/article/116853/",
+     "https://appllio.com/restaurant-booking-apps-recommended-matome",
+     "https://play.google.com/store/apps/details?id=com.kakaku.tabelog&hl=en_US",
+     "https://apps.apple.com/jp/app/%E9%A3%9F%E3%81%B9%E3%83%AD%E3%82%B0-%E3%81%8A%E3%81%84%E3%81%97%E3%81%84%E3%81%8A%E5%BA%97%E3%82%92%E8%A6%8B%E3%81%A4%E3%81%91%E3%81%A6%E4%BA%88%E7%B4%84%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%B0%E3%83%AB%E3%83%A1%E3%82%A2%E3%83%97%E3%83%AA/id763377066",
+     "https://apps.apple.com/jp/app/%E3%83%9B%E3%83%83%E3%83%88%E3%83%9A%E3%83%83%E3%83%91%E3%83%BC%E3%82%B0%E3%83%AB%E3%83%A1/id290033990",
+     "https://app-liv.jp/maps/all/0068/",
+     "https://dotapps.jp/hierarchies/QuwAWePZlaKNP0jD",
+     "https://lp.pecotter.jp/",
+     "https://www.rnb.co.jp/media/restaurant-reservation/",
+     "https://www.hotpepper.jp/reservation/",
+     "https://www.hotpepper.jp/",
+     "https://restaurant.ikyu.com/rsSpcl/sp/today_rest/start.htm",
+     "https://www.rere.jp/359774/",
+     "https://gourmet-calendar.com/",
+     "https://www.gnavi.co.jp/",
+     "https://epark.jp/gourmet/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://apps.apple.com/jp/app/%E9%A3%9F%E3%81%B9%E3%83%AD%E3%82%B0-%E3%81%8A%E3%81%84%E3%81%97%E3%81%84%E3%81%8A%E5%BA%97%E3%82%92%E8%A6%8B%E3%81%A4%E3%81%91%E3%81%A6%E4%BA%88%E7%B4%84%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%B0%E3%83%AB%E3%83%A1%E3%82%A2%E3%83%97%E3%83%AA/id763377066",
+     "https://apps.apple.com/jp/app/%E6%A5%BD%E5%A4%A9%E3%81%90%E3%82%8B%E3%81%AA%E3%81%B3/id311691979",
+     "https://play.google.com/store/apps/details?id=jp.co.recruit.mtl.android.hotpepper&hl=ja",
+     "https://www.hotpepper.jp/app/"
+    ],
+    "error": ""
+   }
+  },
+  "予約 キャンセル 料金": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20250318_1.html",
+     "https://www.faq.kokusen.go.jp/faq/show/1102?site_domain=default",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2019_12.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://frauddetection.cacco.co.jp/media/for-consumers/21646/",
+     "https://agent.tabiris.com/cancel.html",
+     "https://uou.jp/hotel-cancel-itsukara/",
+     "https://note.com/zono_suke/n/nb9fbf7555b65?hl=en",
+     "https://omotenashi.work/column/accommodation-industry/24218",
+     "https://crexgroup.com/ja/travel/accommodation/hotel-cancellation-fee-rules/",
+     "https://inthehotel.jp/magazine/hotelcancel/",
+     "https://omotenashi.work/column/accommodation-industry/10965",
+     "https://tabi-time.jp/general/travel-cancellation-fee-guide/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.riza-en.jp/column/cancellation_fee_market",
+     "https://squareup.com/jp/ja/townsquare/reservation-cancellations",
+     "https://payn.io/articles/no-show",
+     "https://hkt-law.jp/field_post/5624/",
+     "https://yamanaka-bengoshi.jp/2026/09/13/mudan-cancel-ryou-heikinteki-songai/",
+     "https://ohj.jp/no-show-cancellation/",
+     "https://law-bright.com/corporationlaw/articles/legal-cancellation-fee/",
+     "https://www.fukuoka-legal.jp/2025/10/24/%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E6%96%99%E9%87%91%E3%81%AE%E6%94%AF%E6%89%95%E7%BE%A9%E5%8B%99%E3%81%AF/",
+     "https://www.food-houmu.jp/receivables/cancellation-available/"
+    ],
+    "error": ""
+   }
+  },
+  "予約 席 指定 方法": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jreast.co.jp/ticketless/eki-net/",
+     "https://faq.jal.co.jp/app/answers/detail/a_id/30871/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.skymark.co.jp/ja/reservation/seat.html",
+     "https://www.solaseedair.jp/reservation/seat-selection/",
+     "https://www.jal.co.jp/ja-jp/my-booking-dom/seat-selection.html"
+    ],
+    "error": ""
+   }
+  },
+  "人気店 予約 取り方": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://omakase-japan.zendesk.com/hc/ja/articles/360039676891-キャンセル待ちはできますか-Cancellation-seat-notice",
+     "https://www.tablecheck.com/ja/join/about-us/press/waitinglist_08262026/",
+     "https://omakase.in/legal"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gourmet-travel-life.com/yoyaku-konnan-guide/",
+     "https://r-reserve.com/column/restaurant-reserve-daysbefore/",
+     "https://note.com/best_lifehack/n/ndc9fa5920bbe",
+     "https://www.lemon8-app.com/gourmet_zaibatsu/7176940832610697733?region=jp",
+     "https://nagoya-bites.com/features/hard-to-book.html",
+     "https://www.pricey.jp/web/articles/7321"
+    ],
+    "error": ""
+   }
+  },
+  "大人数 予約 費用 目安": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://mp-cube.net/party/",
+     "https://www.shibuyagardenhall.com/shibuya-kashikiri-nomihoudai/",
+     "https://tabelog.com/tokyo/A1314/A131403/13244663/party/279079391"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://canjii.jp/articles/0nwhriks/",
+     "https://www.tokyo.grandnikko.com/recommend/448/",
+     "https://kaijosearch.com/N/100-person/",
+     "https://www.ozmall.co.jp/restaurant/party/",
+     "https://nomikai-kanji.com/nomikai-kaihisouba/",
+     "https://torimero.com/topics/10201/",
+     "https://hanakaruta.jp/news/951/",
+     "https://urayamashika-machida.com/blog/20250606-2743/",
+     "https://miraizaka.com/blog_list/6552/",
+     "https://www.epark.jp/event/special/thanks_members/article/?id=20"
+    ],
+    "error": ""
+   }
+  },
+  "誕生日 サプライズ 予約": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ozmall.co.jp/birthday/restaurant/",
+     "https://anny.gift/stay/contents/birthday/",
+     "https://bridge-h.co.jp/surprise/form/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://anny.gift/oiwai-contents/guides/birthday/message-plate-free/",
+     "https://www.hapiba.com/restaurant-surprise",
+     "https://anny.gift/restaurant/contents/birthday/guide/",
+     "https://anny.gift/restaurant/contents/birthday/plate/",
+     "https://anny.gift/oiwai-contents/guides/birthday/surprise-complete/",
+     "https://anny.gift/oiwai-contents/guides/general/hotel-surprise-howto/",
+     "https://www.hibiyakadan.com/item/LIFESTYLE_Z_0086.html",
+     "https://waraukado-kondo.com/mofumofu/2026/06/19/birthday-plate-reservation-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "予約なし 待ち時間 目安": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://www.inaba-ganka.jp/faq/answer/",
+     "https://www.soka-city-hospital.jp/m08/qi.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13320496418",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12320679702",
+     "https://note.com/marimasada/n/n1dc49f37f462",
+     "https://www.kkday.com/ja/blog/135336/asia-japan-osakaexpo-pavilion-noreservation",
+     "https://sumitomoexpo.com/topics/non_reservation_entry/",
+     "https://salonkinoe.com/expo2025-matijikan/",
+     "https://motoryokoblog.com/?p=3000",
+     "https://motoryokoblog.com/?p=3888",
+     "https://heavensky-beauty.com/charme-media/post-143/",
+     "https://medisma.jp/column/reserve001/",
+     "https://kamiu.jp/biyoushhitu-yoyakunashi/",
+     "https://endearing.jp/column/c134bcb6-9663-42d9-8433-2df0882fb048"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.medicalforest.co.jp/blog/?p=1210",
+     "https://sun-platinum.com/blog/20250112/",
+     "https://midori-hp.or.jp/wp/nursing-outpatient-blog/web20240916/",
+     "https://k-mesen.jp/articles/category/online-clinic/see-a-doctor_2",
+     "https://on-med.jp/online/854/",
+     "https://www.solasto.co.jp/solastoonline/iryou/hospital-waiting-time/",
+     "https://infinity-mobius.com/news/14339/",
+     "https://hairsalon-you.net/column/20260418/",
+     "https://beauty-st.co.jp/media/noreservation/",
+     "https://relax-job.com/more/123967",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10108905460"
+    ],
+    "error": ""
+   }
+  },
+  "子連れ 予約 座敷 選び方": {
+   "group": "予約・席",
+   "ChatGPT": {
+    "urls": [
+     "https://r.gnavi.co.jp/special-feature/kids-friendly/",
+     "https://t-navi.city.taito.lg.jp/features/39",
+     "https://tazya-senbayashi.owst.jp/seats",
+     "https://ure.pia.co.jp/articles/-/574411"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kidsna.com/magazine/article/mother-family-170829-00001449",
+     "https://www.yohana.jp/lp/article_lunchwithkids",
+     "https://babysaurus.jp/2026/06/30/post-8476/",
+     "https://kyounoko.jp/article/kodzure-restaurant-erabikata-kanzen-guide",
+     "https://wamotolog.com/archives/4031",
+     "https://tatami-mikata.com/column/lunch-chiba/",
+     "https://tatami-mikata.com/column/lunch-saitama/"
+    ],
+    "error": ""
+   }
+  },
+  "テイクアウト 料金 相場": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hottomotto.com/contents/rank/menu_202604.html",
+     "https://www.osaka-ohsho.com/news/包材価格高騰による容器代のご負担について/",
+     "https://www.toko-kitchen.com/media/categories/お知らせ",
+     "https://naruhana.com/archives/503"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.inshokuten.com/foodist/article/5838/",
+     "https://insyoku-portal.jp/gyoutai/takeout/kyakutanka/",
+     "https://kitchencost.app/ja/blog/jp-restaurant-takeout-higher-than-dinein-container-cost-2026-740/",
+     "https://ordertake.jp/blog/takeout-menu-pricing-guide/",
+     "https://foodfun.jp/archives/13789",
+     "https://cookbiz.jp/soken/news/lunch_eigyo/",
+     "https://suehirotax.jp/blog/12172"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.i-tenpo.com/news/topic/10790",
+     "https://urbanlife.tokyo/post/39845/",
+     "https://pos-cube.com/inshoku-keiei/tenpo-unnei/restaurant-packaging-container-selection/",
+     "https://yamasaki.jp/archives/2056",
+     "https://www.y-itax.com/houjin/5927/shohizei-ichiritsu",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14280605284"
+    ],
+    "error": ""
+   }
+  },
+  "テイクアウト お店 選び方": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/takeout.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/syokuchu/01_00003.html",
+     "https://www.caa.go.jp/policies/policy/food_labeling/information/research/2025/assets/food_labeling_cms204_260501_01.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.benikomachi.jp/gourmet/food-deliverly",
+     "https://pantograph.co.jp/blog/others/takeout.html",
+     "https://res-star.com/archives/column/next-trend",
+     "https://www.temponw.com/oyakudachi/column_20260213_01/"
+    ],
+    "error": ""
+   }
+  },
+  "テイクアウト 予約 受け取り方法": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.joyfull.co.jp/takeout",
+     "https://takeout.kappasushi.jp/main/howtoorder",
+     "https://www.yoshinoya.com/service/bentou/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://news.mynavi.jp/article/20241226-2852787/",
+     "https://help.take-eats.jp/customer-help/articles/users-guide-takeout",
+     "https://takeout.skylark.co.jp/",
+     "https://www.yoshinoya.com/service/bentou/",
+     "https://takeout.epark.jp/guide",
+     "https://pantograph.co.jp/blog/others/takeout.html"
+    ],
+    "error": ""
+   }
+  },
+  "宅配 テイクアウト 違い 費用": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.uber.com/jp/ja/newsroom/pickup-upgrade-202504/",
+     "https://help.uber.com/ja-JP/ubereats/restaurants/article/service-fee?nodeId=b433826d-150b-4315-99fa-2f612050fb5d",
+     "https://help.uber.com/ja-JP/ubereats/stores/article/small-order-fee?nodeId=944ea20e-46cd-4879-b623-a1bd95d2c4af"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ordertake.jp/blog/takeout-vs-delivery-comparison/",
+     "https://goistech.co.jp/blog/delivery-commission-comparison-2026/",
+     "https://goistech.co.jp/blog/demaecan-commission-guide/",
+     "https://iideli.com/archives/8535",
+     "https://airregi.jp/magazine/guide/5816/",
+     "https://ashiyakaikei.com/consumption-tax-reduced-delivery/",
+     "https://foods-route.jp/content/eat-in-take-out-difference",
+     "https://aspit.jp/column/post_82/"
+    ],
+    "error": ""
+   }
+  },
+  "オードブル 注文 予算": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://1dish.jp/menu/one-person-budget",
+     "https://www.stylish-deli.jp/menu/?ca=40"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gochikuru.com/feature/3000catering/",
+     "https://www.kurumesi-bentou.com/special/catering/",
+     "https://www.chef-colle.com/1000/",
+     "https://note.com/yuki_nico002/n/n6d9a9be05a14",
+     "https://catering-selection.jp/blog/detail/101",
+     "https://1dish.jp/column/700/",
+     "https://catering-selection.jp/blog/detail/121?keyword=%E3%82%B1%E3%83%BC%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0",
+     "https://www.bondish-ordermade-catering.com/column/%E6%9D%B1%E4%BA%AC%E3%81%AE%E3%82%AA%E3%83%BC%E3%83%89%E3%83%96%E3%83%AB%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93/",
+     "https://www.kurumesi-bentou.com/osaka/horsdoeuvre/",
+     "https://gochikuru.com/catering/area/tokyo/",
+     "https://delivery.neodining-catering.com/",
+     "https://happy-aiaicatering.com/o-doburu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://quickdelistyle.com/column/009/",
+     "https://catering-selection.jp/blog/detail/100",
+     "https://catering-season.com/3026",
+     "https://catering-tokyo.jp/b-etc/8076.html",
+     "https://hcm-catering.com/blog/%E3%82%B1%E3%83%BC%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4%E3%82%92%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83%EF%BC%81%E4%BA%88/",
+     "https://yanagisawaya.co.jp/houji-shidashi/matsuyama-horsdoeuvre-10ninmae/",
+     "https://www.kurumesi-bentou.com/special/catering/",
+     "https://1dish.jp/column/700/"
+    ],
+    "error": ""
+   }
+  },
+  "弁当 大量注文 費用": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kurumesi-bentou.com/bakuten/",
+     "https://www.kurumesi-bentou.com/hajime/",
+     "https://shop.tsukuasa.com/collections/bento",
+     "https://www.hottomotto.com/event/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.watami-takushoku.co.jp/contents/blog_2023032313",
+     "https://www.ft.obentodeli.jp/tairyotyumon",
+     "https://gochikuru.com/feature/volume/",
+     "https://www.takuhai-ben.com/blog/2026/07/10-2.php",
+     "https://www.takuhai-ben.com/blog/2026/07/505000.php",
+     "https://www.takuhai-ben.com/blog/2025/05/100okok-38.php"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sakigake-s.co.jp/news/3051",
+     "https://www.hottomotto.com/event/",
+     "https://www.ft.obentodeli.jp/tairyotyumon",
+     "https://homedeliva.com/column/price-range-for-bento-boxes-for-memorial-services/",
+     "https://www.takuhai-ben.com/contents/2015/05/post-2.php",
+     "https://www.musashitokyo-ex.jp/web%E6%B3%A8%E6%96%87-%E4%BB%95%E5%87%BA%E3%81%97%E5%BC%81%E5%BD%93%E9%85%8D%E9%80%81%E6%96%99%E9%87%91%E8%A1%A8/",
+     "https://try-piece.jp/bento-haiso/",
+     "https://www.kurumesi-bentou.com/special/tairyo/"
+    ],
+    "error": ""
+   }
+  },
+  "アレルギー 対応 お店 選び方": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/efforts",
+     "https://www.food-allergy.jp/blog/allergy/meal/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.erca.go.jp/yobou/zensoku/allergy/recipe/knowledge/caution.html",
+     "https://www.gov-online.go.jp/tokusyu/allergy/",
+     "https://about.caneat.jp/column/20241017/",
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/assets/food_labeling_cms204_230324_04.pdf",
+     "https://nhkomorebi.com/food-service/",
+     "https://i-s-s-c.com/food-allergy-restaurant-cross-contact-questions/",
+     "https://about.caneat.jp/news/20210217/",
+     "https://prtimes.jp/main/html/rd/p/000000020.000046724.html",
+     "https://www.hokeniryo1.metro.tokyo.lg.jp/shokuhin/allergy/index.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://nhkomorebi.com/food-service/",
+     "https://foods-ch.infomart.co.jp/anzen/allergy/1517552827416",
+     "https://note.com/hinafood_gram/n/nb50dae8dd431",
+     "https://mhaccp.jp/haccp/post-306/",
+     "https://recipeoflife.jp/%E9%A3%9F%E5%93%81%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%AB%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/5387",
+     "https://www.hokeniryo1.metro.tokyo.lg.jp/shokuhin/allergy/index.html"
+    ],
+    "error": ""
+   }
+  },
+  "アレルギー 表示 確認 方法": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/assets/food_labeling_cms204_260401_02.pdf",
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/assets/food_labeling_cms204_210514_01.pdf",
+     "https://www.pref.yamanashi.jp/shokuhin-st/shokuhinhyouji/kurumi.html",
+     "https://www.food-allergy.jp/blog/allergy/label/",
+     "https://www.aussie-fan.co.jp/quality/column/post-478",
+     "https://shokuhin-choice.com/allergen-label-basics/",
+     "https://allergen-free.jp/column/cross-contamination/",
+     "https://anshinmama.com/archives/244",
+     "https://www.meiji.co.jp/meiji-shokuiku/food-allergy/display/02/",
+     "https://www.city.nagoya.jp/kenkofukushi/eisei/1014927/1014928/1014961/1014962.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.foodallergy.jp/2022-nutrition-dietary-guidelines/ndg2022-7/",
+     "https://www.hokeniryo1.metro.tokyo.lg.jp/shokuhin/hyouji/shokuhyouhou_kakou_allegy.html",
+     "https://www.jspaci.jp/guide2021/jgfa2021_17.html",
+     "https://www.city.fukuyama.hiroshima.jp/soshiki/seikatsueisei/169984.html",
+     "https://www.mhlw.go.jp/content/10900000/001546372.pdf",
+     "https://www.meiji.co.jp/meiji-shokuiku/food-allergy/display/01/",
+     "https://hyouji.maru-sin.net/display-allergen/",
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/",
+     "https://www.bfss.co.jp/media/column/allergy02",
+     "https://www.label-bank.co.jp/blog/allergy/202401allergy"
+    ],
+    "error": ""
+   }
+  },
+  "小麦 乳 アレルギー 外食": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.foodallergy.jp/care-guide2023/cg2023-8/",
+     "https://corp.skylark.co.jp/sustainability/social/customer/safe_and_secure/allergy.html",
+     "https://www.foodallergy.jp/tebiki/milk/",
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/assets/food_labeling_cms204_230324_02.pdf",
+     "https://takeout.skylark.co.jp/menu/BM81177?brand=BM",
+     "https://www.hokeniryo1.metro.tokyo.lg.jp/allergy/measure/judgment_home.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/assets/food_labeling_cms204_230324_04.pdf",
+     "https://www.erca.go.jp/yobou/zensoku/allergy/recipe/knowledge/processfood.html",
+     "https://www.hokeniryo1.metro.tokyo.lg.jp/shokuhin/hyouji/shokuhyouhou_kakou_allegy.html",
+     "https://nhkomorebi.com/food-service/",
+     "https://www.search-allergy.com/ja/JP/guide/wheat-allergy-eating-out",
+     "https://i-s-s-c.com/food-allergy-restaurant-cross-contact-questions/",
+     "https://www.cocos-jpn.co.jp/vision/allergen.html",
+     "https://www.gurutto-mama-kobe.com/detail/85/news/eatingout-22143.html"
+    ],
+    "error": ""
+   }
+  },
+  "ベジタリアン ヴィーガン 対応 外食": {
+   "group": "テイクアウト・アレルギー",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ichibanya.co.jp/menu/detail.html?id=1327",
+     "https://www.mos.jp/mori/sentaku/article_20211101/",
+     "https://visit-chiyoda.tokyo/app/spot/detail/910",
+     "https://www.happycow.net/search",
+     "https://www.gotokyo.org/book/list/6930/",
+     "https://www.gotokyo.org/book/wp-content/uploads/2026/03/AO2_2603_vege_low_JP.pdf",
+     "https://www.ichibanya.co.jp/menu/info.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://backup.vegeproject.org/en/en_tokyo_vegan_vegetarian_guide_2025-2026/",
+     "https://yuru-vege.com/en/gaisyoku-chain-en/",
+     "https://tokyoinsiderguide.com/2025/10/20/vegetarian-guide-japan-food/",
+     "https://rurubu.jp/andmore/article/14474",
+     "https://veganstart.jp/vegan_friendly_dining_out/",
+     "https://www.kagome.co.jp/foodservice/column/02/",
+     "https://futaba-dashi.com/blog/%E3%83%B4%E3%82%A3%E3%83%BC%E3%82%AC%E3%83%B3%E5%88%9D%E5%BF%83%E8%80%85%E5%BF%85%E8%A6%8B%EF%BC%81%E9%A3%9F%E3%81%B9%E3%82%89%E3%82%8C%E3%81%AA%E3%81%84%E3%82%82%E3%81%AE%E3%81%A8%E3%81%9D%E3%81%AE/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://yuru-vege.com/gaisyoku-chain/",
+     "https://sushivoyage.net/chain-restaurants-cafes-vegan-japan/",
+     "https://vegan-japan.com/vegan-chain-shop/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHAGWDg_XmmDJecTb5Z_4pRymF7J_I8X6c0rW-QAB1FLQ_0zlnFpvzmKtkp1UAAzt1PHVOnROYmTlm0meWN_6lqANvWc5V3vz7hMLcQ_F_G4Z7y6f_x5mzTukJQyzMMf7Uv5B1_lpf12GE4s3pFWEgwmXv_dlU=",
+     "https://vegegohan.com/vegetarian-restaurant-chain-recommend/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHxrkASZ9j5uwB9ZvbZzLojk2p7x9d_0yc9FbY4xqQlJjsFuIWKYQGMHcq39zhAESK1WEQMuRx_qCoBK3Dm-q5g1A_YIt-FMZDR5-N1MKGxich2bQ5HtigJWVKnN1RUhKxWJwFJ__JA2DUKvb9yzi5qOuV4BqIEGr8VR5lboNVpgsjelJfLQWwRxA==",
+     "https://fooddiversity.today/article_186128.html",
+     "https://play.google.com/store/apps/details?id=com.hcceg.veg.compassionfree&hl=ja",
+     "https://apps.apple.com/jp/app/happycow-vegan-food-near-you/id435871950",
+     "https://www.cotta.jp/tomorrow/",
+     "https://www.cotta.jp/tomorrow/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

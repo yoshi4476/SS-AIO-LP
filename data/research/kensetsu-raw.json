@@ -1,0 +1,1813 @@
+{
+ "industry": "kensetsu",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 外構工事 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.asunaro-ex.com/voice/osaka/",
+     "https://www.exteriya-ex.com/areas/osaka/",
+     "https://rehome-navi.com/osaka/categories/exterior/shops",
+     "https://garden-japan.com/column/osaka-exterior-contractors/",
+     "https://www.zehitomo.com/home/reform/exterior/home-exterior-construction/osaka"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehome-navi.com/osaka/categories/exterior/shops",
+     "https://www.correc.co.jp/reform/gaikou-osusume-osakashi/",
+     "https://www.exteriya-ex.com/areas/osaka/",
+     "https://garden-japan.com/column/osaka-exterior-contractors/",
+     "https://www.garden-plat.net/sp/address-osaka/",
+     "https://www.asunaro-ex.com/",
+     "https://www.quality-ex.com/areas/osaka-pref/",
+     "https://gaikou-hikaku.com/",
+     "https://www.quality-ex.com/areas/osaka-pref/osaka/",
+     "https://www.zehitomo.com/home/reform/exterior/home-exterior-construction/osaka",
+     "https://www.okamotogarden.co.jp/exterior-blog/howto_choice/",
+     "https://home-reform.jp/blog/1788/",
+     "https://renovemo.co.jp/media/gaiko-osakashi/",
+     "https://sakagami-web.jp/exterior-hikaku-oosaka"
+    ],
+    "error": ""
+   }
+  },
+  "東京 解体工事 業者": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://clean-kanto.com/blog/tokyo-demolition-cost-area-difference/",
+     "https://kuratomi-syoukai.com/archives/2840",
+     "https://anshin-kaitaikouji.com/column/t_election-of-demolition-contractor/",
+     "https://www.crassone.jp/tokyo",
+     "https://clean-kanto.com/blog/how-to-avoid-mistakes-5-key-points-for-choosing-a-demolition-contractor-in-tokyo/",
+     "https://reduction-t.com/column/column-482/",
+     "https://www.crassone.jp/price/tokyo",
+     "https://www.kaitai-guide.net/costprice/areacp/tokyo/",
+     "https://meetsmore.com/t/demolition/tokyo"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://renovemo.co.jp/media/kaitai-tokyo/",
+     "https://fudonavi.jp/kaitai/tokyo-ranking/",
+     "https://matoi0101.com/",
+     "https://ripro1.com/",
+     "https://www.kaitai-ueno.com/",
+     "https://touoh-kensetu.com/",
+     "https://metoree.com/categories/110141/area/tokyo/",
+     "https://insyuara-kaitai.com/media/tokyo-recomend/",
+     "https://n-techgroup.com/news/tokyo-kaitai-osusume/",
+     "https://www.zehitomo.com/home/large-scale-work/construction-large/demolitionwork-construction/blog/recommend-demolitionwork-construction-tokyo",
+     "https://realestate.news.mynavi.jp/kaitai-osusume/",
+     "https://www.toshiseibi.metro.tokyo.lg.jp/ryokuchi_keikan/shoshigen/recy/6",
+     "https://www.kaitai-guide.net/kaitaikoujigyousya/area/tokyo/",
+     "https://kaitaihiroba.com/tokyo/",
+     "https://www.cls-mystyle.jp/column/kaitaikoujigyoutouroku.html",
+     "https://m-kensetsu.com/kaitaikoujigyoutouroku/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 電気工事 会社": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://meetsmore.com/t/equipment-install/aichi/nagoya",
+     "https://imitsu.jp/list/electrical_work/aichi/",
+     "https://note.com/tasty_allium8443/n/n528c583510e2",
+     "https://www.e-kouji.com/",
+     "https://satsuki-dk.jp/",
+     "https://www.aikoso.jp/kumiinkigyoshokai/index",
+     "https://www.nnd-ew.com/",
+     "https://www.tdweb.co.jp/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQErqiukZgSgbBmeJgqTemX4QITIm3PqSMUvY2EUW2ODOcPpOsHACCb5Bl0OHj8CYIGcNPbm6rMkYAUHLDiKvhDNryUWA639TgG6OgOcj0ePH46gvO8IaRoU-qIwZ6Xmqg=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://imitsu.jp/list/electrical_work/aichi/nagoya-city",
+     "https://www.biz.ne.jp/matome/2002528/",
+     "https://yachiden.jp/",
+     "https://satsuki-dk.jp/",
+     "https://www.nnd-ew.com/",
+     "http://nagoya-denki.com/",
+     "https://www.e-kouji.com/",
+     "https://xn--3kq078aqvk3y5b.nagoya/",
+     "http://www.kyouwa-denki-kouji.com/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 エアコン工事 業者": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://xn--08j2fxcxa0d6wy18otram37a2kz.net/torituke/pref/?pref=fukuoka",
+     "https://www.seikatsu110.jp/service/electrical/et_air_conditioner/area/fukuoka/",
+     "https://www.naruhodo-fukuoka.com/airconpurchase",
+     "https://rivup.jp/info/%E3%80%902026%E5%B9%B4%E7%89%88%E3%80%91%E7%A6%8F%E5%B2%A1%E3%81%AE%E3%82%A8%E3%82%A2%E3%82%B3%E3%83%B3%E5%B7%A5%E4%BA%8B%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F.html",
+     "https://meetsmore.com/services/air-conditioner-installation/fukuoka",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFGouyXokOWpKvzCxDvnUlTrtSY2uU6VEe1-y2JYrM_OVhysgkfBI1z_W-fzZyXrq8iLxIwtiCzXmferVy5p6Qi0OIzbulFqG2KSKExVEe-zmcp6DOk1D7aPc0swXiij8-Z",
+     "https://www.sunrefre.jp/aircon/area/fukuoka/",
+     "https://s-tec-fukuoka.com/column/p56"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/air-conditioner-installation/fukuoka/fukuoka",
+     "https://www.ele-home.co.jp/place/kyushu_okinawa/fukuoka/",
+     "https://kogadenki-koji.jp/",
+     "https://akarikaden.jp/",
+     "https://mikasa-denki.com/",
+     "https://akiyoshi-denki.com/",
+     "https://ishikawadenki.net/",
+     "https://www.takara-m.net/",
+     "https://www.aircon-assist.net/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 外構 エクステリア 施工": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://planning-place.com/blog/%E9%9B%AA%E3%81%AB%E5%BC%B7%E3%81%8F%E3%80%81%E3%81%8A%E3%81%97%E3%82%83%E3%82%8C%E3%81%AA%E5%A4%96%E6%A7%8B%E3%81%B8%EF%BC%81%E6%9C%AD%E5%B9%8C%E5%B8%82%E3%81%A7%E4%BA%BA%E6%B0%97%E3%81%AE%E5%A4%96/",
+     "https://sumai-s.jp/column/snow-countermeasures_2603/",
+     "https://syokunin-koubou.com/carport/",
+     "https://www.jak-g.com/blog/reform_column/carport/",
+     "https://sunlifeshokai.com/",
+     "https://exterior.news.mynavi.jp/sapporo_nishi-exterior/",
+     "https://exterior.news.mynavi.jp/sapporo_minami-exterior/",
+     "https://iwill-company.co.jp/%E5%A4%96%E6%A7%8B/3295/",
+     "https://exterior.news.mynavi.jp/sapporo_minami-exterior/",
+     "https://noel-garden.jp/area2/sapporoshichuoku/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehome-navi.com/hokkaido/sapporoshi/categories/exterior/shops",
+     "https://www.houzz.jp/professionals/siding-and-exterior/c/%E5%8C%97%E6%B5%B7%E9%81%93-%E6%9C%AD%E5%B9%8C%E5%B8%82",
+     "https://renovemo.co.jp/media/gaiko-sapporo/",
+     "https://www.e-028.co.jp/",
+     "https://excel-sapporo.jp/gaikou/",
+     "https://do-ou.co.jp/",
+     "https://oniwakoji.com/?blogid=4&catid=18",
+     "https://www.maruyama-pl.co.jp/",
+     "https://www.gaiheki-tosou.shop/index.php?action=public_showcase_search_execute&address=%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 リフォーム 設備工事": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hapisumu.jp/subsidy/area/p-kanagawa/c-yokohama-shi-kanagawa-ku/",
+     "https://home-intelligence.jp/topics/blog/4615/",
+     "https://home-lifecreation.com/feature/%E3%83%AA%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E8%A3%9C%E5%8A%A9%E9%87%91/",
+     "https://www.asahid-r.com/toilet/toilet_blog/%E6%A8%AA%E6%B5%9C%E5%B8%82%E3%83%88%E3%82%A4%E3%83%AC%E8%A3%9C%E5%8A%A9%E9%87%91/",
+     "https://kakerukoumuten.com/kanagawa_yokohama_tax/",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/fukushi/annai/jutaku/jutaku-josei/josei.html",
+     "https://hapisumu.jp/subsidy/area/p-kanagawa/c-yokohama-shi/",
+     "https://rehome-navi.com/kanagawa/yokohamashi/supports",
+     "https://serara.jp/blog/26683/",
+     "https://www.ii-ie2.net/koumuten?pref=14,%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C&city=53,%E6%A8%AA%E6%B5%9C%E5%B8%82&search_type=location_area",
+     "https://refo-sumu.jp/column/part/interior_whole-house/articles/60172/",
+     "https://www.pref.kanagawa.jp/docs/zm4/ie-reform.html",
+     "https://kyodo.or.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rockedge.jp/blog/yokohama-kitchen-reform/",
+     "https://rockedge.jp/blog/yokohama-bathroom-reform/",
+     "https://www.okamura-home.co.jp/reform/column/202601_04/",
+     "https://andreform.jp/article/yokohama-hojokin",
+     "https://refo-sumu.jp/subsidies/area/14/5005",
+     "https://serara.jp/blog/26683/",
+     "https://www.kounan-hp.com/yokohama-subsidy/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 解体工事 費用": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://genba-mado.com/kaitai/kyoto/kyoto",
+     "https://shouei2012.com/archives/2561",
+     "https://www.kaitai-guide.net/costprice/areacp/kyoto/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.crassone.jp/price/kyoto/kyotoshi",
+     "https://kaitai-mado.jp/price/kyoto/",
+     "https://www.kaitai-guide.net/costprice/areacp/kyoto/kyotoshi/",
+     "https://www.kaitai-guide.net/costprice/areacp/kyoto/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 電気工事 業者 選び方": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gearmix.co.jp/blog/kobe-electrical-company/",
+     "https://web.pref.hyogo.lg.jp/sr12/pa19_000000019.html",
+     "https://www.zehitomo.com/home/repair-exchange-set/electrical/electrical-construction/hyogo/kobe-shi",
+     "https://meetsmore.com/t/equipment-install/hyogo/kobe",
+     "https://imitsu.jp/list/electrical_work/hyogo/kobe-city",
+     "https://imitsu.jp/list/electrical_work/hyogo/",
+     "https://kinki-ss.com/kobe-denki-kouji-koujyou/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 空調工事 会社": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://tsukulink.net/miyagi/category_9/category_84",
+     "https://meikou-kuuchou.com/",
+     "https://www.realize-sendai.com/business/",
+     "https://eight-inc.jp/air_conditioner/",
+     "https://asworks.jp/",
+     "https://meikou-kuuchou.com/",
+     "https://acetecno.jp/",
+     "https://www.uenosetsubi.co.jp/",
+     "https://naganohs.sakura.ne.jp/miyagi/",
+     "https://www.nabana-kuuchou.com/",
+     "https://www.ienakama.com/aircon/miyagi-ken-sendai-shi/",
+     "https://sendai-eacon.com/",
+     "https://www.createltd.net/",
+     "https://www.uchidakutyo.co.jp/",
+     "https://taishi-duct.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://baseconnect.in/companies/prefecture/3eff90d1-0bad-4fac-bce6-da9b939d7407/category/4ed95de2-1d52-40a3-b9f2-b917eaea799e",
+     "https://ts-reidan.jp/company/",
+     "https://www.uenosetsubi.co.jp/",
+     "https://kutyo-giko.jp/",
+     "https://zelus.jp/",
+     "https://www.nabana-kuuchou.com/",
+     "https://aks-sendai.com/",
+     "https://meikou-kuuchou.com/",
+     "https://www.simareikou.com/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 外構工事 見積": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://garden-japan.com/column/hiroshima-exterior-contractors/",
+     "https://www.asunaro-ex.com/areas/hiroshima/",
+     "https://exbiz.jp/japan/hiroshima-exterior/",
+     "https://endless-88.com/costquality/",
+     "https://www.garden.ne.jp/index.php?action=public_showcase_search_execute&address=%E5%BA%83%E5%B3%B6%E7%9C%8C&max_cost=50",
+     "https://www.garden.ne.jp/index.php?action=public_showcase_search_execute&address=%E5%BA%83%E5%B3%B6%E7%9C%8C&min_cost=150&max_cost=200",
+     "https://exterior.news.mynavi.jp/hiroshima_nishi-exterior/",
+     "https://www.gaikouya.co.jp/hiroshimaexterior/2889",
+     "https://rehome-navi.com/hiroshima/categories/exterior/shops",
+     "https://garden-japan.com/column/hiroshima-exterior-contractors/",
+     "https://meetsmore.com/t/exterior/hiroshima"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.maedahousing.co.jp/renomatome/flow/post_128.html",
+     "https://www.garden.ne.jp/index.php?action=public_showcase_search_execute&address=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82&max_cost=50",
+     "https://www.minorikensetsu.jp/blog/blog/210246",
+     "https://www.tanaken.co.jp/blog/details_216.html",
+     "https://blog.shotaka-kensetu.co.jp/order/exterior-cost/",
+     "https://garden-japan.com/column/hiroshima-exterior-contractors/",
+     "https://www.okayama-taikyo.or.jp/column/2919/",
+     "https://exterior-connect.com/hiroshima/",
+     "https://www.gaikoumitsumori.biz/hiroshima/"
+    ],
+    "error": ""
+   }
+  },
+  "外構工事 費用 相場": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.garterior.net/cost/",
+     "https://www.exterior-pro.jp/information/3176/",
+     "https://www.yyy-yamachi.com/myke/products/9969/",
+     "https://www.bowcs.co.jp/post/exterior-cost-guide/",
+     "https://www.garden.ne.jp/index.php?action=public_showcase_search_cost",
+     "https://www.tanaken.co.jp/blog/details_216.html",
+     "https://www.minorikensetsu.jp/blog/blog/210246"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gaikouexterior-partners.jp/contents/230",
+     "https://www.bowcs.co.jp/post/exterior-cost-guide/",
+     "https://www.minorikensetsu.jp/blog/blog/210246",
+     "https://iemori-blog.com/cost-of-exterior-construction/",
+     "https://exterior-simulator.com/cost-guide",
+     "https://vista.tokyo/blog/slug-b1cc7e6f2d7844e7e1c80d91c63ebeb3",
+     "https://myhome1.xsrv.jp/money/exterior-work-cost-price/",
+     "https://reform-hojo.jp/guide/exterior-reform-guide",
+     "https://www.okayama-taikyo.or.jp/column/2919/",
+     "https://house.home4u.jp/contents/budget-53-16941",
+     "https://gardenlabo.co.jp/blog/45361/",
+     "https://www.yyy-yamachi.com/myke/products/9969/",
+     "https://ibaraki-yorozu.com/services/gaiko/guide/souba/",
+     "https://www.tatsusho.com/blog/type/new/p5453/",
+     "https://soujuryokka.com/column/column-4-4a35ab"
+    ],
+    "error": ""
+   }
+  },
+  "外構工事 業者 選び方": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://springbd.net/exterior",
+     "https://www.okamotogarden.co.jp/exterior-blog/howto_choice/",
+     "https://www.tsukuba-garden.jp/column/202407_1y/",
+     "https://www.minorikensetsu.jp/blog/blog/194713",
+     "https://tokyo.gaikou-hikaku.com/",
+     "https://fujimino-gaikou.com/how-to-choose-a-supplier/",
+     "https://www.tatsusho.com/blog/choosing-exterior/p5109/",
+     "https://www.jak-g.com/blog/reform_column/exterior_ct_03/",
+     "https://exterior-connect.com/content/choose/",
+     "https://exterior.news.mynavi.jp/exterior-competitive-estimate/",
+     "https://exterior.news.mynavi.jp/exterior-contractor-how-to-choose/",
+     "https://assist-all.co.jp/architecture_construction_column/20250514-4446/",
+     "https://www.gaikouexterior-partners.jp/contents/587",
+     "https://www.gaikouexterior-partners.jp/contents/615/",
+     "https://builders8.com/doko_exterior/",
+     "https://the-room-tour.com/gaikoerabikata/",
+     "https://onayami000.com/exterior-mitsumori/"
+    ],
+    "error": ""
+   }
+  },
+  "カーポート 設置 費用": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.seikatsu-do.com/exterior/carport/marketprice.php",
+     "https://hapisumu.jp/category/exterior-reform/1512/",
+     "https://ouchi-shokunin.com/magazine/carport-installation-cost/",
+     "https://www.garden.ne.jp/index.php?action=public_category_search_cost&scate=1",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFzxwa0-2dV8QTCpnXUmB--gmzChninHdc1-WajWB6_5IH-8io9k3St9m8xMMKVgCjumk6b_Ff2YNYxpbOel7W6_FACAZW09R3MHDnqJ4Tea1xw3tkVVxBbfwuPtLtH83rzChT2BquWD4tpcvc1xQGRA==",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13325267808"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sakagami-web.jp/carport-cost-guide",
+     "https://www.housingbazar.jp/article/carport-installation-cost/",
+     "https://www.wooddeck-mitsumori.com/blog/carport/market-price",
+     "https://www.reform-guide.jp/topics/carport-hiyou/",
+     "https://k-garden.co.jp/carpoort-cost-newly-built/",
+     "https://www.ex-smilegarden.com/service/service_carport13/article/1309/",
+     "https://reformp.jp/reform/carport-installation/",
+     "https://horio-ex.com/blog/reform/expansion/p28700/",
+     "https://mumureform.net/sos/money/carport-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "駐車場 コンクリート 費用 目安": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://reform-cost-navi.com/chushajo-doma-concrete-hiyou/",
+     "https://exterior.news.mynavi.jp/parking-concrete-cost/",
+     "https://mk-planning-ex.com/ex/domakon-tanka.html",
+     "https://www.iesoto-lab.jp/blog/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%86%E3%83%AA%E3%82%A2%E3%81%8A%E5%BD%B9%E7%AB%8B%E3%81%A1%E6%83%85%E5%A0%B1/2317",
+     "https://exterior.news.mynavi.jp/parking-concrete-cost/",
+     "https://tomoekoken.com/blog/concrete/",
+     "https://soujuryokka.com/column/column-4-fd3085",
+     "https://soujuryokka.com/column/column-4-fd3085",
+     "https://reform.cainz.com/knowledge/parking/13211"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehome-navi.com/articles/3141",
+     "https://www.ypark.co.jp/contents/management/post-4587/",
+     "https://springbd.net/soilconcrete-budget",
+     "https://www.gaikouexterior-partners.jp/contents/2732",
+     "https://exterior.news.mynavi.jp/parking-concrete-cost/",
+     "https://soujuryokka.com/column/column-4-b0dc11",
+     "https://hiraishoji.com/blog/etc/65655/",
+     "https://www.tatsusho.com/blog/type/new/p5136/",
+     "https://niwart.com/blog/%E9%A7%90%E8%BB%8A%E5%A0%B4%E3%81%AE%E3%82%B3%E3%83%B3%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%88%E5%B7%A5%E4%BA%8B%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%EF%BC%9F/"
+    ],
+    "error": ""
+   }
+  },
+  "フェンス 設置 費用 相場": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://soujuryokka.com/column/column-4-53f101",
+     "https://www.famitei.co.jp/BLOG/Exinfo/blog.php/00081701",
+     "https://hiraishoji.com/blog/etc/91437/",
+     "https://komoguchikougyo.com/blog/79489",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHywugHwM5fMP-3xmlUuk28nDFAm-PPk4mvikGgVq2sv1KZUX1eTR3r9fWZGA1ot95hQyvGxnu-JIlhWmo2U2nri7o7vEKZMk8-mgGsoI6Tv2ZuVSpO64s3YPGAkyyQ2ty8fb_0k8Dg1pjy9AA=",
+     "https://www.youtube.com/watch?v=skmp9xOaaGU",
+     "https://exterior-exone.com/column/exterior-fence-guide/",
+     "https://hiraishoji.com/blog/etc/91437/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hapisumu.jp/category/exterior-reform/1520/",
+     "https://assist-all.co.jp/architecture_construction_column/20250514-4450/",
+     "https://exterior.news.mynavi.jp/exterior-fence-cost/",
+     "https://www.wooddeck-mitsumori.com/fence/contents/cheaper-blockwall-or-fence",
+     "https://www.wooddeck-mitsumori.com/fence/contents/f006",
+     "https://www.exterior-pro.jp/information/1801/",
+     "https://soujuryokka.com/column/column-4-53f101",
+     "https://life-land.biz/column/fence-cost/",
+     "https://gardendesign-aoki.com/blog/low-cost-exterior-fence/"
+    ],
+    "error": ""
+   }
+  },
+  "外構工事 見積 比較 ポイント": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.okamotogarden.co.jp/exterior-blog/budget2/",
+     "https://sotorie.com/blog/exterior-estimate-comparison/",
+     "https://felicia-garden.co.jp/260924-2/",
+     "https://www.rand1212.com/20260912-2/",
+     "https://www.youtube.com/watch?v=bCOWV_3VD2Y",
+     "https://takahashi-ex.co.jp/blog/20260912/",
+     "https://exterior.news.mynavi.jp/exterior-competitive-estimate/",
+     "https://noel-garden.jp/blog/%E5%A4%96%E6%A7%8B%E5%B7%A5%E4%BA%8B%E3%81%AE%E7%9B%B8%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E6%96%B9%E6%B3%95%EF%BD%9C%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E6%A5%AD%E8%80%85%E9%81%B8%E3%81%B3/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gaikouexterior-partners.jp/contents/230",
+     "https://assist-all.co.jp/architecture_construction_column/20250514-4447/",
+     "https://www.bowcs.co.jp/post/exterior-cost-guide/",
+     "https://www.gaikouexterior-partners.jp/contents/615/",
+     "https://www.gaikouexterior-partners.jp/contents/740",
+     "https://gaikonavi.com/category/estimate/",
+     "https://osharekoumuten.com/exterior/quote/",
+     "https://www.tatsusho.com/blog/type/new/p5117/",
+     "https://vista.tokyo/blog/slug-b1cc7e6f2d7844e7e1c80d91c63ebeb3"
+    ],
+    "error": ""
+   }
+  },
+  "庭 リフォーム 費用 抑える方法": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/remodel/rm_plan/garden_reform/",
+     "https://crexgroup.com/ja/reform/garden-reform/garden-reform-examples-cost-2/",
+     "https://www.lixil-reformshop.jp/column/article/garden_reform/",
+     "https://itp.ne.jp/kurashi-column/reform/article381/",
+     "https://www.reform-guide.jp/topics/niwakouji/",
+     "https://rescue.epark.jp/columns/home-repair/ekusuteria/2422",
+     "https://www.gaikouexterior-partners.jp/contents/4554",
+     "https://exterior-connect.com/column/8156/",
+     "https://www.familykobo-co.jp/family_school/garden/",
+     "https://forest.toppan.com/refotoru/column/part/garden/article-2024-02-28-79/",
+     "https://rescue.epark.jp/columns/home-repair/ekusuteria/2421",
+     "https://crexgroup.com/ja/reform/garden-reform/garden-reform-cost-examples/",
+     "https://2ndlabo.com/article/689/",
+     "https://crexgroup.com/ja/reform/garden-reform/garden-reform-examples-cost/",
+     "https://c-bate.com/media/2183/",
+     "https://iidasakan.com/column/2a78c32b-d1ee-48eb-b5ff-e832c4a12792/"
+    ],
+    "error": ""
+   }
+  },
+  "外構 後悔 しないために": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.bellwood-exterior.jp/blog/newes/209455",
+     "https://exterior-connect.com/column/8135/",
+     "https://www.teirakukan.com/blog/exterior/189069",
+     "https://shin-livingunion.co.jp/blog/trivia/p2555/",
+     "https://www.minorikensetsu.jp/blog/blog/214456",
+     "https://horikawa-cement.co.jp/column/19188/",
+     "https://watashino-iedukuri.com/exterior/exterior-regret/",
+     "https://www.twoby.com/topics/customhome-exteriormeasures/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmHsrq1oEQK-iwfIr91oxhPF9LzP3Hntb9pdZ4COhyCTf8Z4zazcPNq4ihh_H_0mLPz8O8Fby0vZm0vFixLS-QwXTZrkK_-l-UwBUeYN7Yqxwd0DmREGGwEw==",
+     "https://www.koken-network.jp/pro/2025-ex/",
+     "https://www.garden.ne.jp/index.php?action=public_movie_search_detail&movie_id=256",
+     "https://forest.toppan.com/refotoru/column/part/exterior-wall/article_2026_01_31_tp75/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG16rqMvGpa-_qWr05zX-jb6tCAV1-ZLS5YPxq6h_W30UDbsZKquf4-bPnpMFffjN3b2eVVT8dX47AFZpvf5doPfu8T7EJG9tenz1JsixGG2o8DL8_GfLV_lWTXTpbS3pUb5Vcci8bd4_l5xtzMK7G9KejhkNWnRvf36Jk="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://springbd.net/mistake-plan-5",
+     "https://ietatelog.jp/exterior/exterior-failure/",
+     "https://stage-toyama.jp/exterior-mistakes/",
+     "https://noel-garden.jp/blog/%E6%96%B0%E7%AF%89%E5%A4%96%E6%A7%8B%E3%81%A7%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%E3%81%AB%EF%BD%9C%E3%83%AA%E3%82%A2%E3%83%AB%E3%81%AA%E4%BD%93%E9%A8%93%E8%AB%87%E3%81%8B/",
+     "https://cfl-home.jp/column/exterior-construction-regrets/",
+     "https://horikawa-cement.co.jp/column/19188/",
+     "https://zous-exterior.com/blog/exterior-mistake/",
+     "https://ishikawa-ex.com/kiso/sinchikugaikousippai.html",
+     "https://creative-woodwork.co.jp/fudousan-katuyo/external-failure",
+     "https://noel-garden.jp/blog/bloglist/new-construction-exterior-regret-worst10-checklist/",
+     "https://springbd.net/9failure_cases",
+     "https://prtimes.jp/main/html/rd/p/000000035.000106954.html",
+     "https://noel-garden.jp/blog/bloglist/exterior-3year-regret-10-mistakes/",
+     "https://www.okamotogarden.co.jp/exterior-blog/order_exterior/",
+     "https://noel-garden.jp/blog/bloglist/gaiko-10years-regret-equipment-top10/",
+     "https://www.hiroto-inc.jp/blog/column/214834",
+     "https://www.garterior.net/gaiko-point/",
+     "https://sotorie.com/blog/exterior-regret/"
+    ],
+    "error": ""
+   }
+  },
+  "門扉 アプローチ 施工 費用": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://exterior.news.mynavi.jp/gate-installation-cost/",
+     "https://exterior-connect.com/column/5526/",
+     "https://reform.cainz.com/knowledge/gates/7442",
+     "https://exterior.news.mynavi.jp/gate-installation-cost/",
+     "https://rehome-navi.com/articles/530",
+     "https://rcode.jp/column/3697/",
+     "https://www.tatsusho.com/blog/exterior-areas/approach/p7753/",
+     "https://reform-market.com/gate/contents/gate-expenses",
+     "https://www.reform-guide.jp/topics/gaikoukouji-hiyou/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://suumo.jp/remodel/blog/entry/20220912/002",
+     "https://forest.toppan.com/refotoru/column/part/entrance/article_2024_10_31_168/",
+     "https://oniwa-madoguchi.com/exterior-landscaping/exterior/305/",
+     "https://rcode.jp/column/3697/",
+     "https://www.tatsusho.com/blog/exterior-areas/approach/p7753/",
+     "https://gumi-hayashi.com/blog/entrance-approach-materials-cost-guide/",
+     "https://exterior-exone.com/column/genkan-approach-guide/",
+     "https://reformp.jp/reform/%E7%8E%84%E9%96%A2%E3%82%A2%E3%83%97%E3%83%AD%E3%83%BC%E3%83%81%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%AB%E8%B2%BB%E7%94%A8%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E7%9B%B8%E5%A0%B4%E3%83%BB%E5%86%85/",
+     "https://fujimino-gaikou.com/approach-cost/",
+     "https://c-bate.com/media/922/"
+    ],
+    "error": ""
+   }
+  },
+  "外構工事 いつ 依頼 新築": {
+   "group": "外構・エクステリアの費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.and-garden.jp/blog/column/200214",
+     "https://exterior-connect.com/column/8118/",
+     "https://sotorie.com/blog/exterior-construction-schedule/",
+     "https://www.tatsusho.com/blog/type/new/p5415/",
+     "https://www.youtube.com/watch?v=buKADq485yA",
+     "https://www.kodate-plaza.jp/column/post_6643/",
+     "https://builders8.com/doko_exterior/",
+     "https://www.garterior.net/gaiko-timing/",
+     "https://www.youtube.com/watch?v=NqV9qHBn8fU"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gaikouexterior-partners.jp/contents/1186",
+     "https://ietatelog.jp/exterior/new-construction-exterior-timing/",
+     "https://sou-garden.jp/column/%E6%96%B0%E7%AF%89%E5%A4%96%E6%A7%8B%E5%B7%A5%E4%BA%8B%E4%BE%9D%E9%A0%BC%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%9F%E3%83%B3%E3%82%B0/",
+     "https://reiwa-kensetu.com/blog/59186/",
+     "https://www.jak-g.com/blog/reform_column/exterior_ct_05/",
+     "https://www.garterior.net/gaiko-timing/",
+     "https://www.morph-ex.com/archives/20006",
+     "https://www.komatukogyo.com/%E6%96%B0%E7%AF%89%E3%81%AE%E5%A4%96%E6%A7%8B%E5%B7%A5%E4%BA%8B%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AF%EF%BC%9F/",
+     "https://the-room-tour.com/gaikoitsu/",
+     "https://exterior.news.mynavi.jp/exterior-contractor-how-to-choose/",
+     "https://springbd.net/exterior-quotation",
+     "https://www.gaikouexterior-partners.jp/contents/5478",
+     "https://ns-souken.co.jp/column/202602-1i/",
+     "https://gardenlabo.co.jp/blog/44277/",
+     "https://www.tatsusho.com/blog/type/new/p5415/",
+     "https://www.simplehome-yamaka.com/column/details_60.html"
+    ],
+    "error": ""
+   }
+  },
+  "解体工事 費用 相場": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://suumo.jp/baikyaku/guide/entry/20251001/001",
+     "https://kaitai.saassist.co.jp/column/20260928/",
+     "https://kaitaihiroba.com/45/",
+     "https://active-okayama.com/blog/%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%A8%E6%90%8D%E3%82%92%E3%81%99%E3%82%8B%EF%BC%81%E8%A7%A3%E4%BD%93%E8%B2%BB%E7%94%A8-%E3%81%AE%E5%9D%AA%E5%8D%98%E4%BE%A1%E7%9B%AE%E5%AE%89%E3%81%A8%E7%B7%8F/",
+     "https://www.eco-j.co.jp/blog/1395.html/",
+     "https://www.kaitai-guide.net/costprice/",
+     "https://mirai-plan.net/cat-useful/838/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://soudan-kaitai.jp/cost/kaitai-hiyo-kouzoubetsu-tsubosubetsu/",
+     "https://land.ieul.jp/knowledge/demolition/house/102897/",
+     "https://iedukuri100.com/demolition-cost-per-tsubo/",
+     "https://mirai-plan.net/cat-useful/838/",
+     "https://genba-mado.com/kaitai",
+     "https://senndai-kaitaicenter.com/blog/2026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%EF%BD%9C%E8%A7%A3%E4%BD%93%E8%B2%BB%E7%94%A8%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E5%AE%89%E3%81%8F%E6%8A%91%E3%81%88%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE/",
+     "https://genba-mado.com/kaitai/market-price",
+     "https://www.genba-mado.com/kaitai/guide/steel-rc-demolition-cost",
+     "https://kaitai-pegasus.com/blog/260212"
+    ],
+    "error": ""
+   }
+  },
+  "木造住宅 解体 坪単価": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://land.home4u.jp/guide/land-usage-howto-104-13229",
+     "https://www.eco-j.co.jp/blog/1369.html/",
+     "https://ripro1.com/blog/slug-fa1fd17e4af68bf9575735951d5f44b8",
+     "https://www.youtube.com/watch?v=NhBBF6vN0qo",
+     "https://myhom.jp/story/demolition-cost",
+     "https://www.kaitai-guide.net/costprice/",
+     "https://www.youtube.com/watch?v=Meb-NYK7uUI",
+     "https://suumo.jp/baikyaku/guide/entry/20251001/001",
+     "https://www.youtube.com/watch?v=IVNQB0AKv_4"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://soudan-kaitai.jp/cost/kaitai-hiyo-kouzoubetsu-tsubosubetsu/",
+     "https://myhom.jp/story/demolition-cost",
+     "https://journal.sumnara.jp/sell/3491/",
+     "https://iedukuri100.com/demolition-cost-per-tsubo/",
+     "https://ripro1.com/blog/slug-fa1fd17e4af68bf9575735951d5f44b8",
+     "https://kaitai-ibaraki.com/mokuzojutaku-kaitaihisoba/",
+     "https://mirai-plan.net/cat-useful/838/",
+     "https://genba-mado.com/kaitai/market-price",
+     "https://sukkiri-kaitai.com/kaitai-hiyou/kaitaihiyo-mokuzo/",
+     "https://home4u-owners.jp/contents/construction-others-65-11623",
+     "https://www.shokukanken.com/asbestos/asbestos-demolition-cost/",
+     "https://kamiike-kaitai.com/news/kaitai-tankasouba/",
+     "https://active-okayama.com/blog/%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%A8%E6%90%8D%E3%82%92%E3%81%99%E3%82%8B%EF%BC%81%E8%A7%A3%E4%BD%93%E8%B2%BB%E7%94%A8-%E3%81%AE%E5%9D%AA%E5%8D%98%E4%BE%A1%E7%9B%AE%E5%AE%89%E3%81%A8%E7%B7%8F/",
+     "https://kamiike-kaitai.com/news/%E3%80%902025%E5%B9%B4%E6%9C%80%E6%96%B0%E3%80%91%E5%AE%B6%E3%81%AE%E8%A7%A3%E4%BD%93%E8%B2%BB%E7%94%A8%E8%A6%8B%E7%A9%8D%E3%82%8A%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89/",
+     "https://nest-kaitai.info/column/asbestos-removal-cost-estimation/",
+     "https://www.aokikogyo.com/dictionary/asbestos-price/"
+    ],
+    "error": ""
+   }
+  },
+  "解体工事 業者 選び方": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rehome-navi.com/articles/2562",
+     "https://www.clean-island.com/news/blog/demolition-contractor-selection-checklist-2026/",
+     "https://ripro1.com/blog/slug-ea0b8d234a70ff4c83b916e638b9c73c",
+     "https://www.kaitai-guide.net/kaitaikouji/erabikata/",
+     "https://kaitaihiroba.com/294/",
+     "https://kenshinsougyou.co.jp/column/how-to-choose-a-demolition-company/",
+     "https://ripro1.com/blog/slug-51d87918625c3a077e08644fbad87b8a",
+     "http://kaitai-sr.com/knowledge/info-1/",
+     "https://sukkiri-kaitai.com/susumekata/kaitaigyosha-erabikata/",
+     "https://www.crassone.jp/faq/12893",
+     "https://suumo.jp/baikyaku/guide/entry/kaitaigyosya",
+     "https://rehome-navi.com/articles/2763",
+     "https://www.kaitai-guide.net/kaitaikoujigyousya/how-to-distinguish/",
+     "https://www.clean-island.com/news/blog/how-to-choose-a-demolition-contractor-a-summary-of-how-to-identify-a-good-contractor/",
+     "https://umehana-sangyo.com/archives/1531",
+     "https://rex3.bz/column/1183/"
+    ],
+    "error": ""
+   }
+  },
+  "解体工事 見積 内訳": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaitai-miraizu.com/demolition-estimate-line-items/",
+     "https://office-tree.jp/blog/construction/kaitai-sekisan-haikibutsu-mitsumori/",
+     "https://nakamagumi.com/archives/2617",
+     "https://www.crassone.jp/media/9878",
+     "https://www.dai-tou.com/knowledge/n-5",
+     "https://anshin-kaitaikouji.com/column/demolition-estimate/",
+     "https://uconnect.jp/column/kaitai-koji-mitsumori/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.crassone.jp/media/14704",
+     "https://rehome-navi.com/articles/2717",
+     "https://uconnect.jp/column/kaitai-koji-mitsumori/",
+     "https://kaitai-mado.jp/base/kaitai-kaitaikoujinomitsumorishonouchiwakewosyoukai/",
+     "https://kamiike-kaitai.com/news/kaitaikouji_mitumori/",
+     "https://www.373kaitai.com/column/223p/",
+     "https://anshin-kaitaikouji.com/column/demolition-estimate/",
+     "https://www.dai-tou.com/knowledge/n-5",
+     "https://sukkiri-kaitai.com/susumekata/kaitai-mitsumorisho/",
+     "https://home4u-owners.jp/contents/construction-others-65-11623",
+     "https://iedukuri100.com/demolition-cost-per-tsubo/",
+     "https://soudan-kaitai.jp/cost/kaitai-hiyo-kouzoubetsu-tsubosubetsu/",
+     "https://www.kaitai-guide.net/costprice/tsubotanka-hiyou/",
+     "https://mirai-plan.net/cat-useful/838/",
+     "https://kaitai.hokuto7s.co.jp/blog/1825/",
+     "https://clean-kanto.com/blog/tokyo-demolition-cost-area-difference/",
+     "https://genba-mado.com/kaitai",
+     "https://kaitai-pegasus.com/blog/251024"
+    ],
+    "error": ""
+   }
+  },
+  "アスベスト 調査 解体 費用": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://asbestos-removal-japan.com/blog/asbestos-jokyo-hiyou-souba-2026/",
+     "https://suncrew.pro/archives/2437",
+     "https://miyako-bunseki.co.jp/2026latest-trends-costs/",
+     "https://asbestos-8910.com/asbestos-column/asbestos-survey-cost/",
+     "https://www.shokukanken.com/asbestos/asbestos-survey-cost/",
+     "https://tupr.co.jp/blog/asbest02/",
+     "https://www.labotec.co.jp/news/aszyokyo/",
+     "https://www.oono-as.jp/articles/archives/446",
+     "https://tupr.co.jp/blog/asbest04/",
+     "https://www.aokikogyo.com/dictionary/asbestos-price/",
+     "https://www.eco-j.co.jp/blog/388.html/",
+     "https://asbestos-hikaku.net/cost.html",
+     "https://alfred-lab.co.jp/column/asbestos-survey-cost/",
+     "https://www.labotec.co.jp/news/1698-2-3-2-2-2-2-2-2/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.cic-ct.co.jp/column/ishiwataall-column/ishiwataall-column-column32/",
+     "https://www.shokukanken.com/asbestos/asbestos-survey-cost/",
+     "https://www.shokukanken.com/asbestos/asbestos-demolition-cost/",
+     "https://www.nakazawa-r.jp/column/679/",
+     "https://kansei.co.jp/pages/78/detail=1/b_id=601/r_id=432/",
+     "https://wkcover.jp/column/asbestos_demolition_cost_market/",
+     "https://alfred-lab.co.jp/column/asbestos-survey-cost/",
+     "https://nakamagumi.com/archives/2631",
+     "https://xn--3kqvs447ab16b.com/asbestos-survey-cost/",
+     "https://www.crassone.jp/faq/13030",
+     "https://ieul.jp/column/articles/60955/",
+     "https://asbestos-research.jp/asbestos_level/",
+     "https://www.eco-j.co.jp/blog/388.html/",
+     "https://www.oono-as.jp/articles/archives/446",
+     "https://www.8910.co.jp/asbestos-column/asbestos-removal-cost/",
+     "https://ripro1.com/blog/slug-0620adf3b198260136903ffc24ab3a54",
+     "https://m-line.tokyo/column/6072/",
+     "https://asbestzero.com/dismantling/"
+    ],
+    "error": ""
+   }
+  },
+  "解体 補助金 自治体 申請": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.v-victory.com/column/column-3161/",
+     "https://www.showa-hc.jp/blog/entry-760367/",
+     "https://www.hirokikaku.jp/blog/column/vacant_house_demolition_subsidy",
+     "https://www.crassone.jp/faq/12759?__hstc=63323888.839d5c3dd51d6deee395fa20adacfc39.1735344000506.1735344000507.1735344000508.1&__hssc=63323888.1.1735344000509&__hsfp=38884120",
+     "https://www.akisapo.jp/column/25673/",
+     "https://hojokin.sunrise-kaitai.com/guides/before-application",
+     "https://kaitai-mado.jp/base/kaitai-conditions-for-receiving-a-grant/",
+     "https://funds.jp/sell-guide/vacant-house-demolition-cost-subsidy/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.repark.jp/parking_owner/column/article55.html",
+     "https://www.city.kobe.lg.jp/a92551/business/todokede/jutakutoshikyoku/building/work/roukyuakiyahojo.html",
+     "https://www.city.akita.lg.jp/kurashi/sumai/1007487/1041984.html",
+     "https://www.city.fukui.lg.jp/kurasi/jutaku/akiyataisaku/akiya_elimination.html",
+     "https://www.city.gyoda.lg.jp/soshiki/toshiseibibu/kenchiku_kaihatsu/akiyataisaku/1423.html",
+     "https://www.jutaku-hojokin.jp/feature/kaitai",
+     "https://reno-smile.com/media/grants-2026/",
+     "https://genba-mado.com/subsidy",
+     "https://kaitai.urashico2.com/2026-home-demolition-subsidy/"
+    ],
+    "error": ""
+   }
+  },
+  "家 解体 流れ 期間": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kamiike-kaitai.com/news/ie_kaitai_schedule/",
+     "https://kenshou-kaitai.com/blog/demolition-work-period/",
+     "https://www.crassone.jp/faq/12726",
+     "https://www.kaitai-support.com/beginnerskaitai/term_deadline.html",
+     "https://mirai-plan.net/cat-useful/846/",
+     "https://jimotokaitai.com/know_how/hituyounaniltusuu/",
+     "https://brainforest.jp/recipe/kaitai-2",
+     "https://nexus-deve.co.jp/blog/70/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kaitai-mado.jp/base/kaitai-koujinokikanhadorekurai/",
+     "https://kaitai-meijin.jp/blog/demolition-work-period-approximate",
+     "https://www.kaitai-support.com/beginnerskaitai/term_deadline.html",
+     "https://www.kaitai-miyagi.com/news/452505.html",
+     "https://fujiken2020.com/archives/1173",
+     "https://www.v-victory.com/column/column-2233/",
+     "https://creative-woodwork.co.jp/fudousan-katuyo/demolition-work-period",
+     "https://s-godai.net/demolition/flow/",
+     "https://kenshou-kaitai.com/blog/demolition-work-period/"
+    ],
+    "error": ""
+   }
+  },
+  "解体工事 追加費用 トラブル": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.clean-island.com/news/blog/demolition-cost-comprehensive-guide/",
+     "https://tsukunobi.com/columns/demolition-workadditional-costs",
+     "https://live-riche.co.jp/demolition-work-additional-cost/",
+     "https://gifukaitai.com/2026/04/22/company_additionalcost/",
+     "https://ecoclean-kaitai.com/blog/2573/",
+     "https://sapporo-yuushi.com/2026/03/09/%E8%A7%A3%E4%BD%93%E5%B7%A5%E4%BA%8B%E3%81%A7%E8%B5%B7%E3%81%93%E3%82%8A%E3%81%86%E3%82%8B%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%81%A8%E3%81%AF/",
+     "https://insyuara-kaitai.com/media/estimation-dispute/",
+     "https://www.kaitaikun.net/information/kaitai-additional-cost/",
+     "https://asbestos-hikaku.net/kaitai/troubleshooting/",
+     "https://www.kaitai-guide.net/kaitaikouji/tityuumaisetububutekyo/",
+     "https://re-pros.jp/blog/detail/20260127172331/",
+     "https://www.clean-island.com/news/blog/demolition-additional-cost-cases-and-solutions/",
+     "https://active-okayama.com/buried_underground/",
+     "https://kaitai-tatujin.com/%E8%A7%A3%E4%BD%93%E9%9B%86%E5%AE%A2/%E8%A7%A3%E4%BD%93%E5%B7%A5%E4%BA%8B%E3%81%AE%E8%BF%BD%E5%8A%A0%E8%B2%BB%E7%94%A8%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%92%E9%98%B2%E3%81%90%E4%BA%8B%E5%89%8D%E8%AA%AC%E6%98%8E%E3%81%A8%E5%A5%91",
+     "https://kaitai-sinwa.com/kaitai-tsuika-hiyou-case/",
+     "https://shyakariki.com/kaitai_trublemoura/"
+    ],
+    "error": ""
+   }
+  },
+  "空き家 解体 費用 目安": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.akisapo.jp/column/6592/",
+     "https://www.eco-j.co.jp/blog/1426.html/",
+     "https://www.kaitai-guide.net/costprice/",
+     "https://myhom.jp/story/demolition-cost",
+     "https://ripro1.com/blog/slug-fa1fd17e4af68bf9575735951d5f44b8",
+     "https://active-okayama.com/blog/%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%A8%E6%90%8D%E3%82%92%E3%81%99%E3%82%8B%EF%BC%81%E8%A7%A3%E4%BD%93%E8%B2%BB%E7%94%A8-%E3%81%AE%E5%9D%AA%E5%8D%98%E4%BE%A1%E7%9B%AE%E5%AE%89%E3%81%A8%E7%B7%8F/",
+     "https://kaitai.saassist.co.jp/column/20260928/",
+     "https://www.akiya-akichi.or.jp/knowledge/use/scrap/expensive/",
+     "https://www.nomu.com/seller/column/20260807_3.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.akisapo.jp/column/6592/",
+     "https://www.nomu.com/seller/column/20260807_3.html",
+     "https://home4u-owners.jp/contents/rebuilding-others-3-14679",
+     "https://wismoney.jp/kasai/expert/akiya-kaitai-souba/",
+     "https://soudan-kaitai.jp/cost/kaitai-hiyo-kouzoubetsu-tsubosubetsu/",
+     "https://iedukuri100.com/demolition-cost-per-tsubo/",
+     "https://urashico2.com/blog/demolition-cost-of-vacant-house/",
+     "https://ianswer.co.jp/found/vacant-house/vacant-house-demolition/",
+     "https://www.conovi.com/tips/home-demolition-cost-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "解体業者 悪徳 見分け方": {
+   "group": "解体工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.matsudynamic.com/column/767/",
+     "https://minna-kaitai.com/news/blog/akushitsu-gyosha-minuki/",
+     "https://kaitai-one-stop.com/archives/3374",
+     "https://diamond-fudosan.jp/articles/-/1112443",
+     "https://ishii-syouji.co.jp/%E6%82%AA%E5%BE%B3%E6%A5%AD%E8%80%85%E3%81%AB%E3%81%94%E6%B3%A8%E6%84%8F%E3%82%92%EF%BC%81%E3%80%90%E8%A6%8B%E6%A5%B5%E3%82%81%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%93%E3%81%A4%E3%83%BB%E3%82%88/",
+     "https://urashico2.com/blog/unscrupulous-dismantling-companys-method/",
+     "https://www.youtube.com/watch?v=acJI74JO5cY"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kaitai-guide.net/kaitaikoujigyousya/how-to-distinguish/",
+     "https://yarotto-kaitai.jp/article/3/",
+     "https://kaitai-tech.jp/corporation/how-to-choose/",
+     "https://nakamagumi.com/archives/2785",
+     "https://urashico2.com/blog/unscrupulous_trader/",
+     "https://kaitaihiroba.com/318/",
+     "https://www.hoei-dev.com/akutoku/",
+     "https://kaitai-miraizu.com/demolition-contractor-red-flags/",
+     "https://asbestos-hikaku.net/kaitai/7points/",
+     "https://kaitai-mado.jp/base/kaitai-huhoutouki-ihougyousya/",
+     "https://aminome.jp/kaitai_howtochoose/",
+     "https://kaitai.saassist.co.jp/column/2441220/",
+     "https://kaitai-otasuke.com/vice.html",
+     "https://sukkiri-kaitai.com/susumekata/kaitaigyosha-erabikata/",
+     "https://genba-mado.com/kaitai/guide/avoid-bad-contractors"
+    ],
+    "error": ""
+   }
+  },
+  "電気工事 費用 相場": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://eisindensetsu.com/blog/74209",
+     "https://rehome-navi.com/articles/3524",
+     "https://daidoudenki.co.jp/archive/price/index.html",
+     "https://hapisumu.jp/category/room-reform/17309/",
+     "https://note.com/super_quince9928/n/n2eac3270c8b4",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10320445890",
+     "https://tcas-link.net/menu/1037163",
+     "https://denki-koji.work/price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.biz.ne.jp/matome/2002522/",
+     "https://crowdworks.jp/times/know-how/12878/",
+     "https://imitsu.jp/cost/electrical_work/article",
+     "https://www.officecom.co.jp/oc-mg/column/design-330",
+     "https://note.com/super_quince9928/n/n2eac3270c8b4",
+     "https://rehome-navi.com/articles/3524",
+     "https://corder.co.jp/media/37",
+     "https://szk-biso.jp/column/31012/",
+     "https://naiso-tsukurite.com/blog/20260526-2030/"
+    ],
+    "error": ""
+   }
+  },
+  "電気工事 業者 選び方": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://biz.moneyforward.com/construction/basic/68235/",
+     "https://www.pref.fukuoka.lg.jp/contents/kouho48.html",
+     "https://www.systems.nakashima.co.jp/setsubi/takumi/densyou/column/categoires/knowledge/denki8/",
+     "https://aippearnet.com/column/row-subsidy/electricalcunstruction-registration/",
+     "https://taiyou-diy.hatenablog.com/entry/2025/03/23/071714",
+     "https://hitorioyakata.or.jp/blog/110",
+     "https://fstg.co.jp/blog/procedure/934/",
+     "https://tsukunobi.com/columns/electrical-contractor-registration/",
+     "https://kensetsukyoka-osaka.jp/kensetsukyoka/denki-syobo-kaitai/denki/"
+    ],
+    "error": ""
+   }
+  },
+  "コンセント 増設 費用": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://forest.toppan.com/refotoru/column/purpose/others/article_2025_11_30_tp53/",
+     "https://www.qracian.co.jp/column/electricity/14112/",
+     "https://jimoden.jp/outlet-expand/",
+     "https://hapisumu.jp/category/room-reform/17309/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10320445890"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://suumo.jp/remodel/blog/entry/20231211/001",
+     "https://forest.toppan.com/refotoru/column/purpose/others/article_2025_11_30_tp53/",
+     "https://hapisumu.jp/category/room-reform/17309/",
+     "https://rehome-navi.com/articles/242",
+     "https://safely.co.jp/ec/outlet-category/recommend/outlet-construction-cost/",
+     "https://curama.jp/socket/magazine/735/",
+     "https://shinofuji-service.jp/column/20260118/",
+     "https://progress-company.jp/blog/20250818/",
+     "https://www.isg-reform.jp/105/"
+    ],
+    "error": ""
+   }
+  },
+  "分電盤 交換 費用 目安": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.katsudensetsu.jp/blog/blog/194652",
+     "https://www.eneos-power.co.jp/article/basics-electricity/distribution-board-replace-cost/",
+     "https://naiso-tsukurite.com/blog/20260602-2044/",
+     "https://jimoden.jp/distribution-board-replacement/",
+     "https://terada-enterprise.co.jp/price/%E5%88%86%E9%9B%BB%E7%9B%A4%E4%BA%A4%E6%8F%9B%E3%80%80%E6%96%99%E9%87%91%E8%A1%A8",
+     "https://nisshindk.co.jp/distributionboard-constructioncosts/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kurashi.kakaku.com/magazine/20/",
+     "https://note.com/sgkanri_service/n/n3dd35a4143da",
+     "https://enechange.jp/articles/breaker-exchange-cost",
+     "https://ninoden.jp/breakercost/",
+     "https://nisshindk.co.jp/distributionboard-constructioncosts/",
+     "https://www.katsudensetsu.jp/blog/blog/194652",
+     "https://kyodo.or.jp/column/5335/",
+     "https://sr-denki.jp/column/%E6%9D%B1%E4%BA%AC%E9%9B%BB%E5%8A%9B%E3%81%AE%E5%88%86%E9%9B%BB%E7%9B%A4%E4%BA%A4%E6%8F%9B%E8%B2%BB%E7%94%A8%E3%81%AF%EF%BC%9F%E7%9B%B8%E5%A0%B4%E3%81%AE%E5%86%85%E8%A8%B3%E3%82%84%E6%B3%A8%E6%84%8F/",
+     "https://sr-denki.jp/column/%E5%88%86%E9%9B%BB%E7%9B%A4%E4%BA%A4%E6%8F%9B%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%82%92%E8%A7%A3%E8%AA%AC%EF%BC%81%E8%B2%BB%E7%94%A8%E5%86%85%E8%A8%B3%E3%81%8B%E3%82%89%E6%B3%A8%E6%84%8F%E7%82%B9%E3%81%BE/"
+    ],
+    "error": ""
+   }
+  },
+  "電気工事士 資格 確認 方法": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kenshoku-bank.com/column/9327/",
+     "https://www.kankyo.metro.tokyo.lg.jp/safety/license/electric/cat8650",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEk8_NZYq4rFY1UQzqER9tFF2ULgBiUqLWLNk39koFPHNkAGsS_eoVp4kN6Z8OiUAwzmdH9kyVUZesaW3ncftA9E-VXgtX2DJMuO30TZ27B95t1zXUj8csjUp-QuhLHp9mhCLJbCzzEf7mtZH0wtIf9LRyn2A==",
+     "https://www.shiken.or.jp/todoufuken.html",
+     "https://www.ishikari.pref.hokkaido.lg.jp/ss/srk/136874.html",
+     "https://moshikomi-shiken.jp/ecee/search/public/cert/",
+     "https://www.shiken.or.jp/shiken/issue/",
+     "https://www.shiken.or.jp/shiken/faq/faq07/000400.html",
+     "https://dokugaku-denko2.info/license-card-collection/",
+     "https://www.youtube.com/watch?v=fQpQbYOGYoQ"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.cic-ct.co.jp/column/denkikouji-column/denkikouji-column-column14/",
+     "https://koujishi.com/denkikouji/15/",
+     "https://www.kankyo.metro.tokyo.lg.jp/safety/license/electric/electric/",
+     "https://www.cic-ct.co.jp/column/denkikouji-column/denkikouji-column-column09/",
+     "https://www.pref.chiba.lg.jp/hoan/tetsuzuki/documents/04menjo-saikohu.pdf",
+     "https://www.pref.miyagi.jp/soshiki/syoubou/dennkikoujisimennjosaikouhu.html"
+    ],
+    "error": ""
+   }
+  },
+  "照明 取り付け 工事 料金": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://nakayamadenki.tokyo/archives/2175",
+     "https://axone.co.jp/digitalport/led-installation-cost-safety-comparison/",
+     "https://meetsmore.com/services/lighting-exchange/media/182658",
+     "https://www.askul.co.jp/f/special/product_column/ceilinglight/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQElhsadwT92t5GgLXAE5U-kvgNZBzDP95HIn01to8ejaSeGTrw-vm6ro4BtUB92bl5jMZI5Vmy0uQQSaeRPdJtVpbx0NKoKo74DN3Z-tdHpWT9_nUzkwDpNTG0xE7mdsQTPBNmF5W1MMDgAaw==",
+     "https://rehome-navi.com/articles/3524",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHvliByFON1b32YHQV66YX5QUwPeKMTlsuBOfZLXI6gHVUFZ4ipcMMW3hHk1BSdj10LtYbbv_Mza_ZBNXlCySRS8GXRh9DTjFYM6YnTWGWY2Xk=",
+     "https://www.rakuten.ne.jp/gold/tss-shop/syoumei-kouji.html",
+     "https://reform-market.com/electric-work/contents/expenses-lighting",
+     "https://www.motom-jp.com/2022/01/02/%E3%82%B7%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%A9%E3%82%A4%E3%83%88%E3%81%AE%E5%8F%96%E3%82%8A%E4%BB%98%E3%81%91%E5%B7%A5%E4%BA%8B%E3%80%80%E3%81%8B%E3%81%8B%E3%82%8B%E8%B2%BB%E7%94%A8%E3%81%AF/",
+     "https://reform.dcm-hc.co.jp/blogs/%E5%8F%96%E4%BB%98-%E4%BA%A4%E6%8F%9B/%E7%85%A7%E6%98%8E%E5%99%A8%E5%85%B7%E3%81%AE%E5%8F%96%E4%BB%98-%E4%BA%A4%E6%8F%9B",
+     "https://rescue.epark.jp/columns/denki/light/1725",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13268410783",
+     "https://www.irisohyama.co.jp/b2b/itrends/articles/6130/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sharing-tech.co.jp/denki/lighting-equipment-installation-cost/",
+     "https://safely.co.jp/ec/illumination-category/recommend/illumination-installation-market-price/",
+     "https://www.motom-jp.com/2022/01/02/%E3%82%B7%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%A9%E3%82%A4%E3%83%88%E3%81%AE%E5%8F%96%E3%82%8A%E4%BB%98%E3%81%91%E5%B7%A5%E4%BA%8B%E3%80%80%E3%81%8B%E3%81%8B%E3%82%8B%E8%B2%BB%E7%94%A8%E3%81%AF/",
+     "https://sr-denki.jp/column/%E7%85%A7%E6%98%8E%E5%99%A8%E5%85%B7%E4%BA%A4%E6%8F%9B%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E5%B7%A5%E4%BA%8B%E6%96%99%E9%87%91%E3%83%BB%E6%A5%AD%E8%80%85/",
+     "https://meetsmore.com/services/lighting-exchange/media/182658",
+     "https://kurashi.kakaku.com/magazine/22/",
+     "https://office110.jp/electric/knowledge/what/attachment/",
+     "https://haretara-i.com/price-information/electrical-work-services-price-information/lighting-equipment-price-information/",
+     "https://den-megu.com/home-lighting.html",
+     "https://denki-koji.work/electrical/light/",
+     "https://shigadenki.work/%E5%B7%A5%E4%BA%8B%E6%96%99%E9%87%91%E8%A1%A8/%E7%85%A7%E6%98%8E%E5%B7%A5%E4%BA%8B%E6%96%99%E9%87%91/",
+     "https://www.rakuten.ne.jp/gold/tss-shop/syoumei-kouji.html",
+     "https://denki.tss-shop.com/kouji_price_lighting/"
+    ],
+    "error": ""
+   }
+  },
+  "EV充電器 設置 工事 費用": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://ev2.nissan.co.jp/BLOG/877/",
+     "https://www.wecharge.com/column/011",
+     "https://www.haisya110.com/blog/2025/11/21/6426",
+     "https://www.haisya110.com/blog/2025/11/21/6426",
+     "https://reform.cainz.com/knowledge/common/9198",
+     "https://products.kanaden.co.jp/labo/EV/ballparkfigure/",
+     "https://www.nttev.com/column/ev_charging_equipment_cost/",
+     "https://evdays.tepco.co.jp/entry/2021/11/24/000024",
+     "https://www.greencharge.co.jp/useful/LZe2OVRE"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yourstand-ev.com/electric-vehicles-for-beginners/",
+     "https://www.taiyoko-kakaku.jp/archives/1117716.html",
+     "https://www.haisya110.com/blog/2025/11/21/6426",
+     "https://ev-charger-guide.com/ev-setchi-hiyo/",
+     "https://www.chargeclub.co.jp/standalone-house/index.html",
+     "https://blade-note.com/ev-home-charger-installation-cost-2026/",
+     "https://carjoho.com/articles/ev-jitaku-charge-cost/",
+     "https://www.nttev.com/column/ev_charging_equipment_cost/",
+     "https://ev-charger-guide.com/ev-jitaku-setchi/",
+     "https://hojyokin-portal.jp/columns/ev_jyudenhojyo",
+     "https://ev2.nissan.co.jp/BLOG/877/",
+     "https://www2.panasonic.biz/jp/energy/ouchiev/ev_navi/005/",
+     "https://www2.panasonic.biz/jp/energy/ouchiev/ev_navi/017/",
+     "https://ev-charge-enechange.jp/articles/004/",
+     "https://nhs.nito.co.jp/evstand/column/syuugou-2025-1",
+     "https://mij-c.com/column/6262",
+     "https://rexev.co.jp/column/column-9286/",
+     "https://evnion.com/subsidy/guide1"
+    ],
+    "error": ""
+   }
+  },
+  "電気工事 見積 注意点": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://seito-ef.co.jp/blog/questions-to-ask-before-estimate/",
+     "https://www.arumik.co.jp/blog/blog/193586",
+     "https://kasagi-denkou.com/archives/2182",
+     "https://kasagi-denkou.com/archives/2182",
+     "https://office110.jp/electric/knowledge/cost/estimate/",
+     "https://iezukuri-business.homes.jp/column/construction-00035"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.biz.ne.jp/matome/2002522/",
+     "https://sakumiru.jp/column/roumutanka",
+     "https://biz.moneyforward.com/invoice/basic/58217/",
+     "https://www.pluscad.jp/howto/729/",
+     "https://www.pluscad.jp/howto/6215/",
+     "https://office110.jp/electric/knowledge/cost/estimate/",
+     "https://den-up.jp/helpful-info/02/index.html",
+     "https://ikudenki.com/archives/1827",
+     "https://takebi.net/column/uncategorized/factory-electrical-work-cost-guide/",
+     "https://safely.co.jp/ec/other-category/recommend/electrician-service-estimate/",
+     "https://note.com/ren_pro/n/n1ae34e6a9bfb",
+     "https://cubicle-solutions.co.jp/knowledge/price/quotation-check-points/",
+     "https://www.arumik.co.jp/blog/blog/193586",
+     "https://tryagr.com/column/detail/20260119102841/",
+     "https://hls-t.com/column/detail/20251109190002/",
+     "https://electrical-portal.com/634/"
+    ],
+    "error": ""
+   }
+  },
+  "漏電 修理 業者 依頼": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://meetsmore.com/services/electric-leakage/media/98017",
+     "https://www.seikatsu110.jp/library/electrical/et_short_circuit/18983/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10268998245",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13116280968",
+     "https://pgservice1.tepco.co.jp/flow/",
+     "https://pgservice1.tepco.co.jp/flow/",
+     "https://meetsmore.com/services/electric-leakage/media/98017",
+     "https://sankou.ltd/archives/1830",
+     "https://rescue.epark.jp/columns/denki/rouden/1485",
+     "https://jimoden.jp/breaker-replacement/",
+     "https://iekoma.com/electrical/repair-eakage-of-electricity/",
+     "https://www.qracian.co.jp/electricity/",
+     "https://www.suidoukonsheruju.com/blogs/42y047gvltg"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/electric-leakage",
+     "https://meetsmore.com/services/electric-leakage/media/98017",
+     "https://iekoma.com/electrical/repair-eakage-of-electricity/",
+     "https://rescue.epark.jp/columns/denki/rouden/1485",
+     "https://www.seikatsu110.jp/library/electrical/et_short_circuit/18983/",
+     "https://yane-amamori-doctor.com/contents/roudengyousya/",
+     "https://pika-kuma.com/electric-leakage-repair-cost/",
+     "https://sankou.ltd/archives/1830"
+    ],
+    "error": ""
+   }
+  },
+  "配線工事 見積 内訳": {
+   "group": "電気工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://eisindensetsu.com/blog/74209",
+     "https://tomidenki.jp/blog/detail/20260226182246/",
+     "https://note.com/miya8438_/n/n98ce9e3d7449",
+     "https://ikudenki.com/archives/1827",
+     "https://www.hokushin-eba.jp/blog/column/187493",
+     "https://takebi.net/column/uncategorized/factory-electrical-work-cost-guide/",
+     "https://rehome-navi.com/articles/3524",
+     "https://office110.jp/electric/knowledge/cost/estimate/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://biz.moneyforward.com/invoice/basic/53504/",
+     "https://rakuoh.jp/contents/knowledge/direct-construction-cost-calculation.html",
+     "https://pro-one-cloud.com/column/direct-labour-costs/",
+     "https://aippearnet.com/jyutakuinfo/reform/denkihaisenkouji-souba/",
+     "https://imitsu.jp/cost/electrical_work/article",
+     "https://iezukuri-business.homes.jp/column/construction-00035",
+     "https://tsukunobi.com/columns/electrical-work-estimate",
+     "https://www.arumik.co.jp/blog/blog/193586",
+     "https://office110.jp/electric/knowledge/cost/estimate/",
+     "https://tryagr.com/column/detail/20260119102841/",
+     "https://hls-t.com/column/detail/20251109190002/",
+     "https://ikudenki.com/archives/1827"
+    ],
+    "error": ""
+   }
+  },
+  "エアコン 取り付け 工事費 相場": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://sun-air-1977.com/blog/71015",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmVd3ld_otcqO9HlOBQZT-ROeehqtKcGZU_vKKzPlKY9b85b3s7sjnm1X4eZjUkJdkJk3pu--GqWJNtqlJE85ExxRYN53aWfDAqc2ZKy3X2vsOXaoL4enzd4ilFZgIOkfTLc1ftf2LcIcXNdjIKaDWUwvpbywUlhP7XFVguVFbye0V",
+     "https://aircon-honpo.com/html/page1.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGP86bdgQIp2mj56tbKdeXDeV49TUQgKrrNqg2OPknsGsXsJQftcJJIDW1mWX-I757LXP74RNnCmfo5XJkJX62AXkFnLzNwr15Y9qwrTtUpP9114q7Lc_586u6PWoSSIhWr65c=",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHXASatB6Q08xdKABRBpzQXxKNVgnNNH272oP009vBowtQh53AnXRD_8tPWrNSp8TN5pqoMQCYLepSZ34dXyhyieYWAfn3ZCZEdYOHOsqC4LcAMRQ9xKMORSzkUx58Y7EGYv2Tb0IT0IzgEShv03z8nOV4fi9eatVIwVg==",
+     "https://aircon-honpo.com/html/page1.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHYM_BJtDxptpjqRNIqsHqbFS7XY5qirx_VeeFS_TLnarMJkS4HwOn95FvNHmS4QP0d7HZSXnlFfzS3ySz1oZIxGnyxQE8J6PmBUESyuRI0-iJaUdJEgUQPxUjTksQoavTRr3knPc0i6etJqWntqCunGx-1X0jtcH8d1YNlrXsg7yATUQ==",
+     "https://home.tokyo-gas.co.jp/column/air_conditioner/0182/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHYM_BJtDxptpjqRNIqsHqbFS7XY5qirx_VeeFS_TLnarMJkS4HwOn95FvNHmS4QP0d7HZSXnlFfzS3ySz1oZIxGnyxQE8J6PmBUESyuRI0-iJaUdJEgUQPxUjTksQoavTRr3knPc0i6etJqWntqCunGx-1X0jtcH8d1YNlrXsg7yATUQ==",
+     "https://home.tokyo-gas.co.jp/column/air_conditioner/0191/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/aircon-install/magazine/594/",
+     "https://aircon.pc-k.co.jp/aircon_install/aircon-installation-total-cost/",
+     "https://aircon-fukugyou.com/aircon-tanka-soba/",
+     "https://katsublo.com/aircon-install-electrical-cost/",
+     "https://aoyama-e.com/35008/fudosan-toushi-20260907-f89d/",
+     "https://www.chunichisetsubi.com/aircon-installation-cost/",
+     "https://xn--08j2fxcxa0d6wy18otram37a2kz.net/torituke/cost/",
+     "https://kurashicostlab.com/costs/aircon-toriketsuke/",
+     "https://urbankuukou.com/%E3%82%A8%E3%82%A2%E3%82%B3%E3%83%B3%E5%8F%96%E3%82%8A%E4%BB%98%E3%81%91%E8%B2%BB%E7%94%A8%E3%81%AE%E7%9B%B8%E5%A0%B42026%EF%BD%9C%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E6%A5%AD%E8%80%85/"
+    ],
+    "error": ""
+   }
+  },
+  "空調工事 業者 選び方": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=pUDJYy7NnEg",
+     "https://www.a1giken.com/post/%E7%A9%BA%E8%AA%BF%E5%B7%A5%E4%BA%8B%E6%A5%AD%E8%80%85%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9-%E7%A9%BA%E8%AA%BF%E5%B7%A5%E4%BA%8B%E6%A5%AD%E8%80%85%E6%AF%94%E8%BC%83%E3%81%A7%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E6%96%B9%E6%B3%95",
+     "https://fujifine1233.com/blog/109464",
+     "https://re-air.jp/blog/21736/",
+     "https://www.eiwashoko.co.jp/blog/column/174731",
+     "https://inplus-21.com/blog/451/",
+     "https://sun-air-1977.com/blog/78943"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.biz.ne.jp/matome/2008294/",
+     "https://meetsmore.com/services/air-conditioner-installation/media/85019",
+     "https://www.ac.daikin.co.jp/customercenter/useful/article/22",
+     "https://portal.town.hirono.iwate.jp/feature/feature-59861/",
+     "https://www.forum-net.jp/info_support/commentary/aircon_contractor_select/",
+     "https://www.yamaichiseikou.com/air-conditioning-equipment/",
+     "https://www.asahieito.co.jp/house/aircon-installation-ranking/",
+     "https://my-best.com/12041"
+    ],
+    "error": ""
+   }
+  },
+  "エアコン 設置 追加料金 内訳": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://sun-air-1977.com/blog/71015",
+     "https://www.ac.daikin.co.jp/customercenter/useful/article/22",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFW7CJV0ExfmzdFhZrjzykIRXgXl9G278XgmZuEXmAF42PYn0R8r6WbFgaJCtnF2hgx4VDn6bC-ER52ti8VMuCnhk9YCD7jOWWjfR0yQHDo44znR7PxzQZ5eN15kTcAYxb5sLxi2553brPeaS5hd0MutnJFxSkKgp5SlA==",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVjVdIl6XMkdi0bAAIBydq0wVmcCy61Nihe3QW3KdWArBAGe6PijfRqWuqEdkVPYgmMXcijCFe_iW8HCtd4Wdlk2eDQAjrC4A4mm-a5RZfLim7BMul8PNDE_YA3M-CsHwzfLXh7wdDx5zY45yk9o_oMp3rHajXZ7P1gCZxks3gfbC2wGA=",
+     "https://www.sofmap.com/ec/contents/aircon_kouji/index.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGfV8kr7DaXNKapdeoxznStCD5vCf9CdNAC9hxI1phLm6NFosSSi9W7fks0ZJNb6LE9BLE6mC5whDE8fWsJ-1AqHrgp-GWE6RPVT4z0_bU3SuVicK2xs5I9IOhYxiebLzGkMwYkzEtI_4rIxK8gGFr206NEY42LAAsy_TwQyXqIEDgJxg==",
+     "https://home.tokyo-gas.co.jp/column/air_conditioner/0182/",
+     "https://aircon-honpo.com/html/page1.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVjVdIl6XMkdi0bAAIBydq0wVmcCy61Nihe3QW3KdWArBAGe6PijfRqWuqEdkVPYgmMXcijCFe_iW8HCtd4Wdlk2eDQAjrC4A4mm-a5RZfLim7BMul8PNDE_YA3M-CsHwzfLXh7wdDx5zY45yk9o_oMp3rHajXZ7P1gCZxks3gfbC2wGA="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/aircon-install/magazine/594/",
+     "https://www.biccamera.com/bc/c/info/purchase/aircon_kouji.jsp",
+     "https://www.biccamera.com/bc/c/info/purchase/airconconstruction_pricelist.jsp",
+     "https://aircon-fukugyou.com/aircon-tanka-soba/",
+     "https://aoyama-e.com/35008/fudosan-toushi-20260907-f89d/",
+     "https://kurashicostlab.com/costs/aircon-toriketsuke/",
+     "https://airdepo.com/construction/",
+     "https://www.forum-net.jp/info_support/commentary/aircon_installation_cost_2f/",
+     "https://curama.jp/aircon-install/magazine/50/",
+     "https://meetsmore.com/services/air-conditioner-installation/media/83487",
+     "https://home.tokyo-gas.co.jp/column/air_conditioner/0191/",
+     "https://life-techs.jp/ac/ac-installation-expense.html",
+     "https://www.ele-home.co.jp/toritsuke-column/tuika-price/",
+     "https://xn--08j2fxcxa0d6wy18otram37a2kz.net/torituke/tuika/",
+     "https://xn--08j2fxcxa0d6wy18otram37a2kz.net/torituke/cost/"
+    ],
+    "error": ""
+   }
+  },
+  "業務用エアコン 入れ替え 費用": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://sfactoryinc.com/blog/71177",
+     "https://www.seikohd.com/industry-aircon-quotes/",
+     "https://kubota-setsubi.com/blog/76967",
+     "https://portal.town.hirono.iwate.jp/feature/feature-59861/",
+     "https://nippon-smes-project.com/magazine/column/220/",
+     "https://www.1981airconsohonten.jp/article/2022/11/%E6%A5%AD%E5%8B%99%E7%94%A8%E3%82%A8%E3%82%A2%E3%82%B3%E3%83%B3%E3%81%AE%E5%B7%A5%E4%BA%8B%E8%B2%BB%E8%BE%BC%E3%81%BF%E3%81%AE%E4%BE%A1%E6%A0%BC%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%A9%E3%81%AE%E3%81%8F/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/air-conditioner-installation/media/126644",
+     "https://www.irisohyama.co.jp/b2b/itrends/articles/6114/",
+     "https://curama.jp/commercial-aircon-install/magazine/2507/",
+     "https://rehome-navi.com/articles/1895",
+     "https://www.ac.daikin.co.jp/customercenter/useful/article/49",
+     "https://axone.co.jp/digitalport/commercial-ac-replacement-quote-guide/",
+     "https://www.acn-aircon.com/blog/column/20510.html",
+     "https://shin-kuu.co.jp/blog/commercial-air-conditioner-expensive",
+     "https://nippon-smes-project.com/magazine/column/220/",
+     "https://portal.town.hirono.iwate.jp/feature/feature-59861/",
+     "https://www.biz.ne.jp/matome/2004015/",
+     "https://www.1981airconsohonten.jp/article/2022/01/%E6%A5%AD%E5%8B%99%E7%94%A8%E3%82%A8%E3%82%A2%E3%82%B3%E3%83%B3%E3%81%AE%E5%B7%A5%E4%BA%8B%E8%B2%BB%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E9%AB%98%E3%81%8F%E3%81%AA%E3%82%8B/",
+     "https://www.airconwork.co.jp/contents/price.php",
+     "https://www.acn-aircon.com/blog/column/12938.html",
+     "https://axone.co.jp/digitalport/ceiling-cassette-ac-replacement-cost-guide/",
+     "https://sr-denki.jp/column/%E5%A4%A9%E3%82%AB%E3%82%BB%E3%82%A8%E3%82%A2%E3%82%B3%E3%83%B3%E3%81%AE%E5%B7%A5%E4%BA%8B%E8%B2%BB%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E8%B2%BB%E7%94%A8%E5%86%85%E8%A8%B3/",
+     "http://www.airconya.com/pac_praice",
+     "https://www.elepine.net/service/business.html"
+    ],
+    "error": ""
+   }
+  },
+  "エアコン 移設 工事 料金": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF5BNncaWWnBWUjOak6sQU1pO0noYY8lnhN4bmYn9CIM-0zZqbizx4OwpHW04SyMh29zF0E4BbawlWGERhhEkQW3_jzj-IJF_7tz233ty60ohdg9BkV0QrCFLMYZNOKAKC6vjEF",
+     "https://aircon-kaitoru.jp/column/p3864/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE_lIw260UeZLlCZ-fcXg4Ou_h3t4G2GQzBvsxSb_IUAcktCXJ8DkbgIgCZXYJDQpA2bh_o1LIisRkPBKSos8Li0iRDOJyts5ME6jS1NMghuDXW",
+     "https://sun-air-1977.com/blog/78965",
+     "https://daishin-house.net/other/eakonnbetunoheyani/",
+     "https://www.eneos-power.co.jp/article/moving/air-conditioner-moving/",
+     "https://www.ele-home.co.jp/isetsu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/aircon-install/magazine/594/",
+     "https://curama.jp/aircon-install/magazine/592/",
+     "https://life-techs.jp/ac/relocation-costs.html",
+     "https://elecon-kk.co.jp/aircon/price/",
+     "https://www.lifact-inc.jp/blog/air-conditioner/207839",
+     "https://aircon-fukugyou.com/aircon-tanka-soba/",
+     "https://www.forum-net.jp/info_support/commentary/eakon_moving/",
+     "https://xn--08j2fxcxa0d6wy18otram37a2kz.net/isetsu/",
+     "https://denri.com/blog/22346",
+     "https://meetsmore.com/services/air-conditioner-installation/media/223289",
+     "https://eneonedenki.net/topics/5227",
+     "https://www.ele-home.co.jp/isetsu/",
+     "https://hotlines.shop/install-aircon/article/448/",
+     "https://www.densho-at.jp/blog/air-conditioner/20240805-air-conditioner-moving-hiyo.html"
+    ],
+    "error": ""
+   }
+  },
+  "ダクト 空調 工事 費用 目安": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://sinme-duct.com/blog/71998",
+     "https://d-kojimakogyo.com/blog/69436",
+     "https://www.sakata-re.co.jp/blog/entry-599148/",
+     "https://www.stage-osaka.com/blog/entry-550197/",
+     "https://www.ductya.com/blog/post-112/",
+     "https://d-kojimakogyo.com/blog/69436",
+     "https://www.k-tenpo.com/column/238/",
+     "https://pro.fujioh.com/blog/662/",
+     "https://i-kuucyou.com/column/detail/20260501152822/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoal6nSTr6Zf1YZ8xeX3Okwq7jqanhsNKGW5Zwh812G2i-Xt1hQoBJ-vrgCwLHyCrL7K-qrjo3_3JC6xV9BvvNYbUKXnpaitm_sclAuIKr96MWXKXykC1xPCrc1FVpgw==",
+     "https://tenpo-naisoh.com/tenpo/setsubi/4720/",
+     "https://kohseki-tsopro.co.jp/category/column/1720/",
+     "https://sinme-duct.com/blog/71998",
+     "https://fujifine1233.com/blog/94007"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tenpo.so-labo.co.jp/interior/128/",
+     "https://godproperty.jp/kaitori/news/sale-manual/5550/",
+     "https://gaten.info/media/dakutokoji-toha/",
+     "https://oomoto-kogyo.jp/column/ductkouji-seikankouji/1832",
+     "https://hiratako-gyo.jp/column/518b419f-ac3e-44fd-bc2a-0cce49d8192c",
+     "https://kohseki-tsopro.co.jp/duct/",
+     "https://i-kuucyou.com/column/detail/20260501152822/",
+     "https://kohseki-tsopro.co.jp/category/column/861/",
+     "https://uptenpo.com/column/20251202-377/",
+     "https://uptenpo.com/column/20260126-405/",
+     "https://kenchikukensetsu.biz/media/?p=458"
+    ],
+    "error": ""
+   }
+  },
+  "エアコン 工事 見積 比較": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/aircon-install/magazine/594/",
+     "https://life-techs.jp/ac/column/air-conditioner-price.html",
+     "https://www.sunrefre.jp/aircon/price/",
+     "https://www.ksdenki.com/shop/pages/guide_delivery_construction_aircon_pop.aspx",
+     "https://aircon-fukugyou.com/aircon-tanka-soba/",
+     "https://katsublo.com/aircon-install-electrical-cost/",
+     "https://meetsmore.com/services/air-conditioner-installation/media/83487",
+     "https://www.sunrefre.jp/sumutano/air-conditioner/12345/",
+     "https://life-techs.jp/ac/ac-installation-expense.html",
+     "https://www.biccamera.com/bc/c/info/purchase/aircon_kouji.jsp",
+     "https://www.tamatamashop.jp/column/136/",
+     "https://air-ttoco.com/torituke/article/aircon-toritukecost.html",
+     "https://kaden-meikan.com/blog/aircon-install-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "新築 エアコン 設置 時期": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.iwakura-home.co.jp/info/kikaku/custom-built-homes-air-conditioners",
+     "https://optionkoji.com/useful_blog/new-house-air-conditioner-timing/",
+     "https://www.ohtori.net/k-blog/newly-built-air-conditioner/",
+     "https://media.ina-gr.com/ja/archives/column/new-home-aircon-installation-timing-guide",
+     "https://www.aeonhousing.com/blog/entry-713803/",
+     "https://housecode.jp/blog/timing/",
+     "https://meetsmore.com/services/air-conditioner-installation/media/212156",
+     "https://www.cleverlyhome.com/kurashi/item/14391/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12279511042",
+     "https://media.ina-gr.com/ja/archives/column/new-home-aircon-installation-timing-guide",
+     "https://www.livfree-option.jp/blog/option-works/223904"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/air-conditioner-installation/media/212156",
+     "https://life-techs.jp/ac/shinchiku.html",
+     "https://www.cleverlyhome.com/kurashi/item/14391/",
+     "https://optionkoji.com/useful_blog/air-conditioner-installation-timing/",
+     "https://life-techs.jp/column/delivery-to-moving.html",
+     "https://www.sumainomadoguchi-k.com/blog/entry-789245/",
+     "https://plastic-pallet.co.jp/aircon-buy-timing-2026-2027/",
+     "https://www.kaden-journal.com/aircon-ziki/"
+    ],
+    "error": ""
+   }
+  },
+  "エアコン 配管 延長 費用": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGs4ui-9EXzb9mAbgr2YjONl7f0ybVQxGk1kfv_GnpTE6YCBKKVerNzHPOnGPwML14pwkVwy8s71J-BfUoTpN-n62wLsweIet34bZRu7ClCsjdD_rBqNAcbm-tFnIfGO7xZplK7XQEd4V9f_zLa9enoKFV6MdJ8z4m8f6QrOanwc3nEPQ==",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10317636525",
+     "https://ac-system-as.com/colum/magazine-set/torituke-cost.html",
+     "https://nagoya-ac-design.com/eakon-koji/relation-koji/addcost.html",
+     "https://www.kojima.net/ec/guide/checkpoint/aircon-check.html",
+     "https://ac-genki.jp/5218/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEhWiHWI99OzUCd-LF4cHl8YHeOYA6RD_UAJBs8L_Yz5a4YTWHeWP8OYzTDgUY3gcOgtMSlgGCfpUq0nLx6nB8Lx2E6pAHdD_8Wn9156DlaEeadXheWzKQTcDw2UyKCKphqhYbNzUZhFhZKODk2mtePuHXW9YSZLSJJhqY4t3cE_5t_",
+     "https://reform.cainz.com/knowledge/air_conditioner/17885"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/aircon-install/magazine/594/",
+     "https://www.biccamera.com/bc/c/info/purchase/aircon_kouji.jsp",
+     "https://www.biccamera.com/bc/c/info/purchase/airconconstruction_pricelist.jsp",
+     "https://xn--08j2fxcxa0d6wy18otram37a2kz.net/torituke/cost/",
+     "https://www.ac-yossy.jp/html/page12.html",
+     "https://airconsul.jp/price/",
+     "https://air-ttoco.com/torituke/article/add-cost.html",
+     "https://ac-system-as.com/colum/magazine-set/torituke-cost.html",
+     "https://home.tokyo-gas.co.jp/column/air_conditioner/0191/",
+     "https://home.tokyo-gas.co.jp/column/air_conditioner/0182/",
+     "https://life-techs.jp/ac/ac-installation-expense.html",
+     "https://life-techs.jp/ac/ac-haikan-long-distance.html",
+     "https://xn--08j2fxcxa0d6wy18otram37a2kz.net/torituke/tuika/",
+     "https://estilink.app/blog/katei-eakon-koji-ryoukin-souba"
+    ],
+    "error": ""
+   }
+  },
+  "空調 設備 更新 補助金": {
+   "group": "空調（エアコン）工事の費用や選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.1981airconsohonten.jp/article/2025/01/subsidy/",
+     "https://airsolution.takeuchi-corp.com/blog/115",
+     "https://probel.jp/promaga/b/3003/",
+     "https://www.irisohyama.co.jp/b2b/itrends/articles/6740/",
+     "https://solution.hvac.panasonic.com/blog/arch/subsidy-of-the-air-conditioner-for-business-use",
+     "https://www.icom-giken.com/blog/netyuhojyo/",
+     "https://hojyokin-portal.jp/columns/kanki_kucho_matome"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/kanki_kucho_matome",
+     "https://hojyokin-portal.jp/columns/ac_hojyo_summary",
+     "https://www.pref.osaka.lg.jp/o120020/eneseisaku/sec/r08hojokin-pac.html",
+     "https://gandn.co.jp/column/1925/",
+     "https://airsolution.takeuchi-corp.com/blog/115"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

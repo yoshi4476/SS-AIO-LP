@@ -1,34 +1,34 @@
 {
  "total": {
-  "clinic": 414,
-  "portal": 134,
-  "media": 102,
-  "other": 9,
-  "maker": 77,
-  "public": 14,
-  "video": 11
+  "clinic": 418,
+  "portal": 141,
+  "media": 105,
+  "other": 8,
+  "maker": 66,
+  "public": 17,
+  "video": 12
  },
  "by_engine": {
   "ChatGPT": {
-   "clinic": 93,
-   "portal": 20,
-   "public": 11,
-   "media": 10,
-   "maker": 15,
+   "clinic": 91,
+   "portal": 22,
+   "media": 11,
+   "public": 14,
+   "maker": 8,
    "video": 1
   },
   "Gemini": {
-   "portal": 36,
-   "media": 30,
-   "other": 8,
-   "clinic": 84,
-   "maker": 21,
-   "video": 5
+   "portal": 42,
+   "media": 35,
+   "other": 7,
+   "clinic": 91,
+   "maker": 17,
+   "video": 6
   },
   "Claude": {
-   "portal": 78,
-   "media": 62,
-   "clinic": 237,
+   "portal": 77,
+   "media": 59,
+   "clinic": 236,
    "maker": 41,
    "video": 5,
    "public": 3,
@@ -37,70 +37,70 @@
  },
  "by_group": {
   "地域で探す": {
-   "clinic": 34,
-   "portal": 55,
-   "media": 9,
+   "clinic": 36,
+   "portal": 57,
+   "media": 11,
    "other": 2,
    "maker": 1
   },
   "カット・カラーの料金と選び方": {
-   "public": 4,
-   "media": 40,
    "clinic": 90,
-   "other": 2,
-   "maker": 20,
-   "portal": 20,
-   "video": 3
+   "media": 40,
+   "maker": 19,
+   "portal": 22,
+   "public": 3,
+   "video": 3,
+   "other": 1
   },
   "縮毛矯正・パーマの悩みと選び方": {
-   "clinic": 138,
-   "maker": 25,
+   "clinic": 134,
+   "maker": 20,
    "other": 4,
-   "media": 13,
-   "portal": 11,
-   "video": 4
+   "portal": 14,
+   "media": 15,
+   "video": 6,
+   "public": 4
   },
   "メンズ・ヘアケアの相談と費用": {
-   "clinic": 96,
+   "clinic": 97,
    "media": 10,
-   "maker": 14,
-   "portal": 18,
-   "public": 2,
-   "video": 2
+   "maker": 12,
+   "portal": 17,
+   "public": 4
   },
   "予約・トラブルの相談と費用": {
-   "portal": 30,
-   "clinic": 56,
-   "media": 30,
-   "public": 8,
-   "maker": 17,
-   "video": 2,
+   "portal": 31,
+   "clinic": 61,
+   "media": 29,
+   "public": 6,
+   "maker": 14,
+   "video": 3,
    "other": 1
   }
  },
  "answered": {
   "ChatGPT": 50,
-  "Gemini": 33,
+  "Gemini": 34,
   "Claude": 50
  },
  "has_clinic": {
-  "ChatGPT": 35,
+  "ChatGPT": 39,
   "Claude": 44,
-  "Gemini": 23
+  "Gemini": 26
  },
  "sources": {
-  "ChatGPT": 150,
-  "Gemini": 184,
-  "Claude": 427
+  "ChatGPT": 147,
+  "Gemini": 198,
+  "Claude": 422
  },
  "portal_top": [
   [
    "beauty.hotpepper.jp",
-   50
+   59
   ],
   [
    "beauty.rakuten.co.jp",
-   16
+   15
   ],
   [
    "minimodel.jp",
@@ -108,15 +108,11 @@
   ],
   [
    "beauty-park.jp",
-   7
-  ],
-  [
-   "hba.beauty.hotpepper.jp",
-   4
+   6
   ],
   [
    "jobvr.co.jp",
-   4
+   5
   ],
   [
    "relax-job.com",
@@ -128,10 +124,14 @@
   ],
   [
    "hairlog.jp",
-   2
+   3
   ],
   [
-   "riyou.jp",
+   "work.beauty.hotpepper.jp",
+   3
+  ],
+  [
+   "hba.beauty.hotpepper.jp",
    2
   ]
  ],
@@ -153,59 +153,59 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 133,
-   "clinic": 102,
-   "media": 59,
-   "portal": 74,
-   "other": 9,
-   "maker": 45,
-   "public": 10,
-   "video": 10
+   "answers": 134,
+   "clinic": 109,
+   "media": 62,
+   "portal": 80,
+   "other": 8,
+   "maker": 41,
+   "public": 11,
+   "video": 12
   },
   "地域で探す": {
-   "answers": 29,
-   "clinic": 16,
-   "media": 9,
-   "portal": 22,
+   "answers": 30,
+   "clinic": 18,
+   "media": 10,
+   "portal": 24,
    "other": 2,
    "maker": 1
   },
   "カット・カラーの料金と選び方": {
    "answers": 27,
    "media": 18,
-   "public": 3,
-   "clinic": 22,
-   "other": 2,
+   "clinic": 23,
    "maker": 12,
-   "portal": 12,
-   "video": 2
+   "portal": 14,
+   "public": 2,
+   "video": 3,
+   "other": 1
   },
   "縮毛矯正・パーマの悩みと選び方": {
    "answers": 27,
+   "maker": 15,
    "clinic": 26,
-   "maker": 17,
+   "media": 13,
    "other": 4,
-   "media": 11,
-   "portal": 10,
-   "video": 4
+   "portal": 13,
+   "video": 6,
+   "public": 2
   },
   "メンズ・ヘアケアの相談と費用": {
    "answers": 25,
-   "clinic": 21,
    "media": 7,
-   "maker": 9,
+   "clinic": 22,
    "portal": 13,
-   "public": 2,
-   "video": 2
+   "maker": 7,
+   "public": 2
   },
   "予約・トラブルの相談と費用": {
    "answers": 25,
-   "clinic": 17,
-   "portal": 17,
+   "portal": 16,
+   "clinic": 20,
    "media": 14,
    "public": 5,
    "maker": 6,
-   "video": 2,
+   "video": 3,
    "other": 1
   }
  }

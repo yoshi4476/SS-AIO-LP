@@ -158,10 +158,10 @@
  "per_answer": {
   "全体": {
    "answers": 131,
-   "portal": 66,
    "clinic": 107,
-   "media": 34,
+   "portal": 66,
    "other": 19,
+   "media": 34,
    "video": 10,
    "public": 38,
    "maker": 21,
@@ -169,10 +169,10 @@
   },
   "地域で探す": {
    "answers": 28,
-   "portal": 26,
    "clinic": 24,
-   "media": 7,
-   "other": 3
+   "portal": 26,
+   "other": 3,
+   "media": 7
   },
   "脱毛": {
    "answers": 25,
@@ -186,8 +186,8 @@
   },
   "フェイシャル": {
    "answers": 27,
-   "media": 5,
    "maker": 3,
+   "media": 5,
    "clinic": 23,
    "other": 2,
    "portal": 11,
@@ -197,8 +197,8 @@
   "ジェルネイル": {
    "answers": 27,
    "clinic": 24,
-   "media": 14,
    "maker": 9,
+   "media": 14,
    "portal": 11,
    "public": 6,
    "video": 4,
@@ -210,8 +210,8 @@
    "clinic": 14,
    "portal": 6,
    "media": 4,
-   "public": 17,
    "maker": 8,
+   "public": 17,
    "video": 2,
    "other": 11
   }

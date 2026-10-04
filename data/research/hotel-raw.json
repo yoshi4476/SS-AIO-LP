@@ -1,0 +1,1833 @@
+{
+ "industry": "hotel",
+ "date": "2026-10-05",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 ホテル おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hankyu-hotel.com/hotel/respire/osaka",
+     "https://www.hotel-royalclassic.jp/access",
+     "https://swissotelnankaiosaka.com/ja/",
+     "https://www.intergatehotels.jp/osaka-umeda/bath/",
+     "https://www.intergatehotels.jp/osaka-umeda/lounge/",
+     "https://icosaka.com/stay/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ameblo.jp/hellow-travel/entry-12976966300.html",
+     "https://www.knt.co.jp/travelguide/kokunai/170/",
+     "https://newt.net/jpn/osaka/mag-53615544603",
+     "https://www.agoda.com/ja-jp/city/osaka-jp.html",
+     "https://jp.trip.com/hot/articles/%E5%A4%A7%E9%98%AA%E6%96%B0%E8%A6%8F%E9%96%8B%E6%A5%AD%E3%83%9B%E3%83%86%E3%83%AB.html",
+     "https://www.expo2025.fun/blog/osaka-hotel-price-guide-2026/",
+     "https://travel.rakuten.co.jp/ranking/sales/osaka/",
+     "https://www.tokyohotel-syukucon.com/osakahotelranking.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tour.ne.jp/matome/articles/j1317/",
+     "https://clrs.co.jp/osaka-expo2025-new-luxury-hotels/",
+     "https://rlx.jp/ranking/kinki/osaka/",
+     "https://travel.jr-central.co.jp/plan/area/osaka/hotel_luxury/",
+     "https://www.jtb.co.jp/ranking/kokunai/osaka/",
+     "https://domhotel.airtrip.jp/pref/osaka/lp?campaign_code=LPCMS10027",
+     "https://travel.rakuten.co.jp/ranking/premium/osaka/",
+     "https://www.jalan.net/ranking/hotel/KEN_270000.html",
+     "https://www.knt.co.jp/travelguide/kokunai/170/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 旅館 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://hoshinoresorts.com/ja/hotels/hoshinoyatokyo/",
+     "https://visit-chiyoda.tokyo/app/spot/detail/322",
+     "https://www.uds-hotels.com/yuenbettei/daita/",
+     "https://www.uds-hotels.com/en/yuen/shinjuku/",
+     "https://www.gotokyo.org/jp/spot/232/index.html",
+     "https://www.okutama.gr.jp/site/hotspring/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/14554",
+     "https://www.jalan.net/ranking/ryokan/KEN_130000.html",
+     "https://rlx.jp/ranking/syutoken/tokyo/",
+     "https://www.ikyu.com/theme/a140000/",
+     "https://travel.yahoo.co.jp/tokyo/140000/?accommodation_types=INN",
+     "https://www.ozmall.co.jp/travel/stay/tokyo/hotel/list/",
+     "https://www.knt.co.jp/travelguide/kokunai/158/",
+     "https://travel.rakuten.co.jp/ranking/onsen/tokyo/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://visit-chiyoda.tokyo/app/spot/detail/322",
+     "https://precious.jp/articles/-/39488",
+     "https://www.timeout.jp/tokyo/ja/travel/best-birthday-hoshinoya-tokyo",
+     "https://www.youtube.com/watch?v=vhZ8zirH3Ek",
+     "https://guide.michelin.com/jp/ja/hotels-stays/tokyo/hoshinoya-tokyo-9171",
+     "https://travel.yahoo.co.jp/tokyo/140000/aca4096/si1d/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 ビジネスホテル 駅近": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.daiwaroynet.jp/nagoya-shinkansenguchi/",
+     "https://www.m-inn.com/hotels/",
+     "https://www.daiwaroynet.jp/nagoyaekimae/access/",
+     "https://www.m-inn.com/nagoya/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.rurubu.travel/business/area/japan/nagoya/nagoya-station",
+     "https://my-best.com/14446",
+     "https://www.ikyu.com/biz/station/ms3001501/",
+     "https://www.mapion.co.jp/phonebook/M05002/23100/ST25077/",
+     "https://www.ikyu.com/station/ms1141101/",
+     "https://travel.yahoo.co.jp/station/ms1141101/",
+     "https://www.rurubu.travel/area/japan/nagoya/nagoya-station",
+     "https://travel.yahoo.co.jp/station/ms1141101/?accommodation_types=BUSINESS",
+     "https://travel.gpoint.co.jp/daredoko/t4740/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://travel.yahoo.co.jp/station/ms1141101/?accommodation_types=BUSINESS",
+     "https://www.jalan.net/biz/230000/NO_101079/",
+     "https://travel.yahoo.co.jp/station/ms9951701/",
+     "https://www.trivago.jp/ja/oar/%E3%83%80%E3%82%A4%E3%83%AF%E3%83%AD%E3%82%A4%E3%83%8D%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%A4%AA%E9%96%A4%E9%80%9A%E5%8F%A3?search=100-5762474",
+     "https://www.ikyu.com/biz/station/ms1141101/",
+     "https://travel.jr-central.co.jp/plan/area/nagoya/hotel_ekimae/",
+     "https://www.jalan.net/kakuyasu/230000/STA_030350/?lpKbn=3",
+     "https://www.youtube.com/watch?v=KsoBQgaDDcQ",
+     "https://www.nta.co.jp/media/tripa/articles/feUBR",
+     "https://travel.rakuten.co.jp/share/batch/rrg_pg/pgenerator/hotel/id6/2524/index.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFvKJ0nHLeS4rtDwNmKPhiEWz8pgYxcSao9AS_FZjV0CpiySRa1lzOAN21uSLJmLnmfQmICanlDkpvgUJvvfDJc9WO390cw2jTvA5VwffkfyRWdFe1UECLWnd0yw6DboD2YBHOE",
+     "https://www.ikyu.com/tokai/23060311/aca4096/t601/",
+     "https://www.superhotel.co.jp/s_hotels/p_nagoya//",
+     "https://www.jalan.net/yad352472/",
+     "https://www.toyoko-inn.com/search/detail/00094/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 温泉 ホテル 人気": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jalan.net/ranking/onsen/SML_400505.html",
+     "https://travel.rakuten.co.jp/ranking/onsen/fukuoka/kurume_0007_0_0_0_0.html",
+     "https://www.tour.ne.jp/j_hotel/onsen/kyushu/fukuoka/",
+     "https://www.miyakohotels.ne.jp/hakata/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jtb.co.jp/ranking/kokunai/fukuoka/",
+     "https://onsen.nifty.com/ft-stay/fukuokashinai-onsen/",
+     "https://www.yukoyuko.net/onsen/ranking/all/L10/P40",
+     "https://www.ikyu.com/kyushu/350901/aca512/ranking/",
+     "https://www.ikyu.com/kyushu/pr40/ct40002000/t601/",
+     "https://rlx.jp/ranking/kyushu/fukuoka/",
+     "https://rtrp.jp/locations/255/categories/1004/",
+     "https://oyutabi.biglobe.ne.jp/400000-c019/",
+     "https://travel.rakuten.co.jp/ranking/onsen/fukuoka/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jalan.net/ranking/onsen/KEN_400000.html",
+     "https://www.tabirai.net/hotel/fukuoka/yadokurabe-fukuoka-spa/",
+     "https://travel.yahoo.co.jp/area/ma040002/aca512/ranking/",
+     "https://www.tabirai.net/hotel/fukuoka/yadokurabe-fukuoka-spa/",
+     "https://www.ikyu.com/area/ma040002/aca4096/",
+     "https://nlab.itmedia.co.jp/research/articles/4037398/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/4013004/feature/k_daiyokujo/",
+     "https://travel.rakuten.co.jp/share/batch/rrg_pg/pgenerator/hotel/id6/2367/index.html",
+     "https://nlab.itmedia.co.jp/research/articles/4037398/",
+     "https://www.crossroadfukuoka.jp/feature/fukuoka-onsen"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 ホテル 朝食 おいしい": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.vessel-hotel.jp/inn/sapporo/breakfast/",
+     "https://www.keioplaza-sapporo.co.jp/restaurants/breakfast.html",
+     "https://www.keioprelia.co.jp/sapporo/breakfast/",
+     "https://www.jrhotels.co.jp/tower/restaurant/skyj/breakfast.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabiiro.jp/yado/article/sapporo-choshoku-buffet-hotel/",
+     "https://johnny88.jp/breakfast-buffet-hotel-sapporo/",
+     "https://www.jalan.net/ranking/yado/LRG_010200.html",
+     "https://hokkaidoblog.gutabi.jp/sapporo-hotel-breakfast/",
+     "https://note.com/johnny_sapporo/n/n6cb89f6463d3",
+     "https://local-best.jp/jp/ho-jp/ho_morning_hokkaido_sapporo/",
+     "https://sasaru.media/article/weather/20260316_004/",
+     "https://aumo.jp/articles/25731",
+     "https://matcha-jp.com/jp/11430",
+     "https://hotelabest-sapporo.com/breakfast.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/johnny_sapporo/n/n6cb89f6463d3",
+     "https://www.tabirai.net/hotel/hokkaido/article/yadokurabe-sapporo-breakfast/",
+     "https://ameblo.jp/yado-erabi-guide/entry-12978652987.html",
+     "https://hoy.hatenablog.com/entry/2026/09/14/185407",
+     "https://johnny88.jp/breakfast-buffet-hotel-sapporo/",
+     "https://www.youtube.com/watch?v=8OBCaplkfmM",
+     "https://moula.jp/articles/life/entry-9187.html",
+     "https://www.youtube.com/watch?v=N8B9QLgvnQQ",
+     "https://singapore.jpdesk.net/%E6%9C%AD%E5%B9%8C-%E3%83%9B%E3%83%86%E3%83%AB-%E3%81%8A%E3%81%84%E3%81%97%E3%81%84-%E6%9C%9D%E9%A3%9F%E3%83%90%E3%82%A4%E3%82%AD%E3%83%B3%E3%82%B0/",
+     "https://travel.vodfan.com/entry/sapporo-breakfast-hotels",
+     "https://www.tabirai.net/hotel/hokkaido/article/yadokurabe-sapporo-salmonroe/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 ホテル 夜景 記念日": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://ybht.co.jp/stay/plan/stay0108.php",
+     "https://www.icyokohama-grand.com/stay/plan/ird_anniversary/",
+     "https://www.newotani-innyokohama.jp/stay/",
+     "https://thekahala.jp/yokohama/event/4154/",
+     "https://www.icyokohama-grand.com/",
+     "https://www.welcome.city.yokohama.jp/accessibility/hotel/details.php?hotel_id=15"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://icotto.jp/presses/19768",
+     "https://travel.yahoo.co.jp/kanto2/pr14/ct14001000/acr16777216/si1/",
+     "https://4travel.jp/magazine/hotel/00141",
+     "https://ontrip.jal.co.jp/kanto/17819662",
+     "https://ameblo.jp/tabi-note365/entry-12960420649.html",
+     "https://note.com/harunatravel/n/n58a603d31698",
+     "https://note.com/harunatravel/n/n17068b842b95",
+     "https://newt.net/jpn/kanagawa/mag-57815958707",
+     "https://yokohama-date-navi.com/yokohama-surprise-hotel/",
+     "https://skyticket.jp/guide/461154/",
+     "https://restaurant.ikyu.com/area/kanagawa/003/05/t-scene366/",
+     "https://www.ozmall.co.jp/travel/stay/article/41073/",
+     "https://www.ozmall.co.jp/travel/stay/kanagawa/hotel/kwd_24/list/",
+     "https://rlx.jp/journal/syutoken/kanagawa/162108",
+     "https://www.his-vacation.com/theme/select/yokohama/couple.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hamakore.yokohama/yokohama-royal-park-hotel-close-report/",
+     "https://www.mec.co.jp/news/detail/2025/03/31_mec250331_yrph",
+     "https://www.welcome.city.yokohama.jp/accessibility/hotel/details.php?hotel_id=15"
+    ],
+    "error": ""
+   }
+  },
+  "京都 旅館 老舗 風情": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://kyoto-irodoru.city.kyoto.lg.jp/nakagyo/tawaraya.html",
+     "https://www.hiiragiya.co.jp/about/",
+     "https://online.bunka.go.jp/db/heritages/detail/584046",
+     "https://www.sumiyaryokan.com/",
+     "https://ja.kyoto.travel/tourism/single-hotel01.php?category_id=13&search_flg=1&tourism_id=2310"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ikyu.com/concierge/45233",
+     "https://www.ikyu.com/concierge/4496",
+     "https://www.knt.co.jp/highclass/046/",
+     "https://travel.yahoo.co.jp/kyoto/pr26/ct26001000/t901/",
+     "https://www.knt.co.jp/travelguide/kokunai/153/",
+     "https://www.ikyu.com/concierge/116451",
+     "https://odekake.osakagas.co.jp/media/topic/kyoto-japanese-restaurant-and-inn/",
+     "https://tabichannel.com/article/108/kyoto_inn",
+     "https://blog.kanko.jp/kyoto-ryokan/shinise"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG8xn8D0cvrYauBuM7i2g4ovBnl1S7WpZCjOjfwtFV4Br6vmcUq1jTdVemk5xse3lCyeBLXRD2pdfEi9HlI3h_DoUuhipm2dQ6yc_QSamozyedSXVBJ",
+     "https://ja.wikipedia.org/wiki/%E4%BF%B5%E5%B1%8B%E6%97%85%E9%A4%A8",
+     "https://nlab.itmedia.co.jp/research/articles/3168225/",
+     "https://opac.ryukoku.ac.jp/iwjs0005opc/bdyview.do?bodyid=TD32228530&elmid=Body&fname=skk-np_054_016.pdf",
+     "https://www.hiiragiya.co.jp/company/",
+     "https://www.ikyu.com/concierge/104326",
+     "https://www.ikyu.com/00000284/story/66876",
+     "https://croissant-online.jp/life/256819/",
+     "https://www.knt.co.jp/travelguide/kokunai/153/",
+     "https://kyoto-hatoya.jp/column/spot/article-4338/",
+     "https://kigyo.city.kyoto.lg.jp/kyomachi/company/single/2233.php",
+     "https://www.jtb.co.jp/news/list/kokunai/kansai/kyoto/news_ap_k_anzai602_004"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 ホテル 海が見える": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kobe-orientalhotel.co.jp/view/",
+     "https://www.hotelsetre.com/maiko/stay/",
+     "https://maikovilla.co.jp/room/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jtb.co.jp/kokunai-hotel/list/28110/feature/oceanview/",
+     "https://travel.yahoo.co.jp/kansai/pr28/ct28001000/acr33554432/",
+     "https://www.hotelplazakobe.co.jp/",
+     "https://travel.yahoo.co.jp/spot/lm066581/acr33554432/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/hyogo/feature/ocean_view/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/2810015/feature/alloceanview/",
+     "https://icotto.jp/presses/9326",
+     "https://www.ikyu.com/kansai/320707/acr33554432/",
+     "https://travel.yahoo.co.jp/kansai/320707/acr33554432/si1/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ameblo.jp/japan-trip-guide/entry-12971506210.html",
+     "https://www.ikyu.com/kansai/pr28/ct28001000/t701/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF4IuZpWOH2eonadY-p7Uj38CmBprWjF3DJhnrcMDxT6Wa5EeCoUjaUZXtZr4klCnkDVglgEVNA9kIJHmzSceFgz0MZPbnxkEKD9tko2n3wOdeEkGE8eRH5LPpc2LD5",
+     "https://www.jalan.net/keyword/key0021284/",
+     "https://travel.rakuten.co.jp/share/batch/rrg_pg/pgenerator/hotel/id9/7599/index.html",
+     "https://www.ikyu.com/kansai/pr28/ct28001000/acr33554432/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 温泉旅館 日帰り 宿泊": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.zuiho.jp/day/",
+     "https://www.mitoya-group.co.jp/dayplan.html",
+     "https://www.mitoya-group.co.jp/",
+     "https://www.yunohara.co.jp/",
+     "https://www.yunohara.co.jp/reserve/?tripla_booking_widget_open=search&type=plan",
+     "https://ichinobo.com/sakunami/",
+     "https://ichinobo.com/sakunami/news/2477/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jalan.net/ranking/onsen/SML_040205.html",
+     "https://www.ikyu.com/theme/h040020/",
+     "https://www.ikyu.com/onsen/040020/si1/",
+     "https://travel.yahoo.co.jp/onsen/040020/",
+     "https://www.premiumoutlets.co.jp/column/sendaiizumi/495",
+     "https://www.ikyu.com/onsen/040020/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/0401/feature/k_onsen/",
+     "https://travel.rakuten.co.jp/yado/miyagi/akiu.html",
+     "https://www.yunohara.co.jp/",
+     "https://www.jalan.net/news/article/245508/",
+     "https://report.iko-yo.net/articles/12858",
+     "https://onsen.nifty.com/ft-cheap/sakunami-onsen/",
+     "https://hotel.his-j.com/search/?prefecture=4&area=31&direct=true",
+     "https://www.jtb.co.jp/kokunai-hotel/list/040104/",
+     "https://www.his-vacation.com/area/miyagi/0402/040205/?np=1&rn=1&sr=pop"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sakunami-spa.jp/",
+     "https://s-style.machico.mu/pickup/27114",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEWQci77MklXHz5eTbz2-mIhtLUy6qPu2Hgwv5s57JGoyw0GRsiHTQivTHrDqELYhJiY0ock2F1XCUpKBbxdZcmgajp35xjhD9j5_RC5iq1_NJeg0qP4bfODigCK2hxIWfLhaGSZQ==",
+     "https://www.zuiho.jp/day/",
+     "https://cocorotabi.com/akiu-onsen-daytrip-lunch-4choices/",
+     "https://reserve.489ban.net/client/sakan/0/plan/daytrip",
+     "https://www.akiugrand.com/day/",
+     "https://www.jalan.net/activity/tow_041040005/g2_77/",
+     "https://www.mitoya-group.co.jp/dayplan.html",
+     "https://ichinobo.com/sakunami/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 旅館 宮島 近く": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.iwaso.com/",
+     "https://www.kinsuikan.jp/",
+     "https://www.miyajima-arimoto.co.jp/",
+     "https://www.miyajima-arimoto.co.jp/rooms/",
+     "https://miyajima-yado.com/",
+     "https://www.sekitei.to/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/14452",
+     "https://www.jalan.net/onsen/OSN_50823/",
+     "https://www.ikyu.com/chugoku/33082002/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/340108/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/3401/",
+     "https://travel.yahoo.co.jp/theme/a33082002/",
+     "https://www.his-vacation.com/area/hiroshima/3409/?sr=pop",
+     "https://www.his-vacation.com/area/hiroshima/3409/?mc=3&kd=h_3%2Ch_2&sr=pop",
+     "https://search.travel.rakuten.co.jp/ds/hotellist/Japan-Hiroshima-Hatsukaichi-Miyajima_Isle-low",
+     "https://www.jtb.co.jp/kokunai-hotel/list/station/1161123/",
+     "https://yado.knt.co.jp/areamap/1100401300011/",
+     "https://travel.rakuten.co.jp/yado/traffic/hiroshima/00000000000000457453.html",
+     "https://search.travel.rakuten.co.jp/ds/hotellist/Japan-Hiroshima-Hatsukaichi-Miyajimaguchi-low",
+     "https://search.travel.rakuten.co.jp/ds/hotellist/Japan-Hiroshima-Hatsukaichi-Miyajimaguchi-review",
+     "https://search.travel.rakuten.co.jp/ds/hotellist/Japan-Hiroshima-Hatsukaichi-Miyajimaguchi",
+     "https://search.travel.rakuten.co.jp/ds/hotellist/Japan-Hiroshima-Hatsukaichi-Miyajimaguchi-high",
+     "https://www.hatsumimi.jp/hotel_area/miyajima_area/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jalan.net/340000/spt_34327ag2130013316/",
+     "https://travel.rakuten.co.jp/share/batch/rrg_pg/pgenerator/hotel/id276/theme2/index.html",
+     "https://www.booking.com/landmark/jp/itsukushima-shrine.ja.html",
+     "https://www.jtb.co.jp/kokunai-hotel/list/leisure/A4204320/",
+     "https://www.jalan.net/ranking/ryokan/LRG_340900.html",
+     "https://www.jalan.net/yad339430/",
+     "https://guide.michelin.com/jp/ja/hotels-stays/hatsukaichi/sekitei-3681",
+     "https://www.sekitei.to/",
+     "https://travel.yahoo.co.jp/00001481/",
+     "https://dive-hiroshima.com/explore/858/",
+     "https://www.gambo-ad.com/hotel/?ar=1&id=14"
+    ],
+    "error": ""
+   }
+  },
+  "旅館 宿泊費 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://ta5k.com/tools/travel/onsen-hotel-compare",
+     "https://kanemasaryokan.com/about/",
+     "https://www.mlit.go.jp/kankocho/ryokan/list_ja.html",
+     "https://www.spatio.jp/lodgment/charge/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.airtrip.jp/travel-column/7884",
+     "https://omotenashi.work/column/human-resources/15470",
+     "https://omotenashi.work/column/bits_of_knowledge/15391",
+     "https://omotenashi.work/column/human-resources/15391",
+     "https://www.tax.metro.tokyo.lg.jp/documents/d/tax/syukuhakuzei_ikenkoukan02-2",
+     "https://hotelbank.jp/trends/business-hotel-adr-2026-cost-performance/",
+     "https://note.com/harunatravel/n/n5d28224f4e9d",
+     "https://go.invoy.jp/how-to-invoice/%E5%AE%BF%E6%B3%8A%E8%B2%BB%E3%81%AE%E7%9B%B8%E5%A0%B4%E5%88%86%E6%9E%90%E3%81%8B%E3%82%89%E7%B5%8C%E8%B2%BB%E7%B2%BE%E7%AE%97%E3%81%BE%E3%81%A7%E3%80%82%E6%97%85%E8%B2%BB%E3%82%92%E8%B3%A2%E3%81%8F/",
+     "https://www.gakuseikyosan.com/media/?p=2560"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://omotenashi.work/column/human-resources/15470",
+     "https://tokai-camera.com/guide/ryokan-one-night-price/",
+     "https://tabiyomi.yomiuri-ryokou.co.jp/article/002416.html",
+     "https://asuparu.jp/%E6%B8%A9%E6%B3%89%E5%AE%BF%E6%B3%8A%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E9%81%93%E3%81%AE%E9%A7%85%E3%81%8F%E3%81%AB%E3%81%AE/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEOL-a9UtH2l_tk1nLZYhjNdE_lOusgx4H8oZfGXDfh7kFnelzTRfM4i7-AsM6Lkkk7B8kIqTB0NQ0ZWjKRAo8YpFToFuSQ__FegnDpMp19iMRgzdKv",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10206016170",
+     "https://www.airtrip.jp/travel-column/7884",
+     "https://www.plus1-one.co.jp/article/enquete/hotspring-trip-money/",
+     "https://ameblo.jp/japantourism/entry-12971703792.html",
+     "https://asuparu.jp/%E6%B8%A9%E6%B3%89%E5%AE%BF%E6%B3%8A%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E9%81%93%E3%81%AE%E9%A7%85%E3%81%8F%E3%81%AB%E3%81%AE/",
+     "https://u-u.co.jp/blog/japan_hot_spring_guide/postid_8636/"
+    ],
+    "error": ""
+   }
+  },
+  "温泉旅館 料金 目安": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://tripfolio.jp/article/toyama-onsen-ryokan-area-guide",
+     "https://ta5k.com/tools/travel/onsen-hotel-compare",
+     "https://www.jalan.net/theme/price/price_10000onsen.html",
+     "https://www.o-miya.com/price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.yukoyuko.net/special/t00040",
+     "https://news.yahoo.co.jp/articles/c2b925030071389f8a9e7db35d226d3c9f700e17",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10206016170",
+     "https://onsen-hotelguide.com/introduction/%E6%B8%A9%E6%B3%89%E5%AE%BF%E3%81%AE%E7%9B%B8%E5%A0%B4%E6%96%99%E9%87%91%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%E3%81%8C%E5%A6%A5%E5%BD%93%EF%BC%9F/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://asuparu.jp/%E6%B8%A9%E6%B3%89%E5%AE%BF%E6%B3%8A%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E9%81%93%E3%81%AE%E9%A7%85%E3%81%8F%E3%81%AB%E3%81%AE/",
+     "https://omotenashi.work/column/human-resources/15470",
+     "https://www.airtrip.jp/travel-column/7884",
+     "https://www.jtb.co.jp/kokunai-hotel/list/feature/RyokanHalfBoard/",
+     "https://www.jalan.net/theme/price/price_10000onsen.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10206016170",
+     "https://u-u.co.jp/blog/japan_hot_spring_guide/postid_8636/"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 宿泊料金 安い時期": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://travel.jr-central.co.jp/plan/tokushu/season/off/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://travel.jr-central.co.jp/plan/tokushu/season/off/",
+     "https://metroengines.jp/column/when-is-the-cheapest-time-to-book-a-hotel-and-how-to-reserve-affordably/",
+     "https://note.com/hoteldigitalexp/n/n15a0cfa5a1d3",
+     "https://omotenashi.work/column/accommodation-industry/34929",
+     "https://lumi-travel.com/hotel-best-season/",
+     "https://wonder-travel.net/know-how/blog-120.html",
+     "https://nks-kenko.com/hotelyoubi/",
+     "https://hotelbank.jp/lifestyle/city-hotel-definition-difference-price/"
+    ],
+    "error": ""
+   }
+  },
+  "連休 ホテル 料金 なぜ高い": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tourism.jp/glossary/dynamic-pricing/",
+     "https://www.tokyo.grandnikko.com/recommend/694/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.travel.co.jp/guide/howto/580/",
+     "https://metroengines.jp/column/when-is-the-cheapest-time-to-book-a-hotel-and-how-to-reserve-affordably/",
+     "https://atinn.jp/information/hotel-is-too-expensive/",
+     "https://hotelbank.jp/lifestyle/silver-week-2026-5days-hotel-price-guide/",
+     "https://financial-field.com/living/entry-325489",
+     "https://www.histrip.jp/feature/?p=738",
+     "https://nks-kenko.com/hotelyoubi/",
+     "https://lumi-travel.com/hotel-best-season/",
+     "https://kidsnomics.space/kidsnews/why-hotel-rates-are-so-high-these-days/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://toyokeizai.net/articles/-/99095?display=b",
+     "https://note.com/zono_suke/n/n66686836af61",
+     "https://yadomu.com/topics/column/dynamic-pricing/",
+     "https://www.andplus-rms.jp/column/hotel-room-rate-fluctuation-003/",
+     "https://chenn-tv.com/%E3%81%AA%E3%81%9Cgw%E3%81%AE%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AF%E9%AB%98%E3%81%84%E3%81%AE%EF%BC%9F%E4%BE%A1%E6%A0%BC%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A8%E4%BA%88%E7%B4%84%E3%81%AE%E3%82%B3/",
+     "https://note.com/machataro0806/n/n86fbd13655bd",
+     "https://www.andplus-rms.jp/column/dynamic-pricing-005/",
+     "https://relohotel-solutions.com/column/dynamic-pricing/"
+    ],
+    "error": ""
+   }
+  },
+  "旅館 夕食付き 素泊まり 料金 違い": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mlit.go.jp/kankocho/ryokan/list_ja.html",
+     "https://kanemasaryokan.com/about/",
+     "https://tohokan.net/room-rates/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://megu-blo.hatenablog.com/entry/2025/10/16/000000",
+     "https://ameblo.jp/ryutsucom/entry-12973219400.html",
+     "https://www.jtb.co.jp/kokunai-hotel/list/feature/sudomari/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/feature/dinner_p/",
+     "https://soryane-ze.com/1548.html",
+     "https://www.airtrip.jp/travel-column/7884",
+     "https://news.yahoo.co.jp/articles/c2b925030071389f8a9e7db35d226d3c9f700e17"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://asuparu.jp/%E6%B8%A9%E6%B3%89%E5%AE%BF%E6%B3%8A%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E9%81%93%E3%81%AE%E9%A7%85%E3%81%8F%E3%81%AB%E3%81%AE/",
+     "https://omotenashi.work/column/human-resources/15470",
+     "https://alfa-consulting.co.jp/separate-lodging-from-meals-1/",
+     "https://happy-trendy.com/sudomari-meals-24483",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13288656113"
+    ],
+    "error": ""
+   }
+  },
+  "露天風呂付き客室 料金 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jalan.net/yad358691/plan/plan01681257/",
+     "https://secure.planmaker.jp/sp/plan/index.php?PlanNo=66&YadoNo=57",
+     "https://www.seizanyamato.jp/plan/",
+     "https://www.jalan.net/yad301788/plan/plan03567355/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/travel/stay/onsen/kyakuro/feature/29595/",
+     "https://www.ozmall.co.jp/travel/stay/ryokan/kwd_19/list/38601/",
+     "https://www.itoenhotel.com/feature/rotentuki/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/feature/RyokanHalfBoard-rotenroom/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/feature/rotenroom/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/tokyo/feature/rotenroom/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/feature/rotenr_po/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1462030844",
+     "https://www.jalan.net/keyword/key0006800/",
+     "https://www.ikyu.com/onsen/000030/acr262144/si1/",
+     "https://travel.yahoo.co.jp/area/ma000000/acr262144/si1/"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 朝食 料金 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.fukuyamaplaza.com/restaurant/",
+     "https://www.hotelkeihan.co.jp/nagoya/breakfast/",
+     "https://cypress-garden.co.jp/images/morning2026.pdf",
+     "https://www.hotelkanazawa.co.jp/stay/breakfast/",
+     "https://www.grandvrio-hotelresort.com/ishigaki/restaurant/breakfast/",
+     "https://www.hotel-royalclassic.jp/restaurant/hafu"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hotelbank.jp/industry-trends/breakfast-premium-analysis-2026/",
+     "https://hotelbank.jp/trends/breakfast-price-hike-review-tracking-2026/",
+     "https://kawaraban.jp/accommodation/50731.html",
+     "https://yado-riki.com/reports/2528/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://yado-riki.com/reports/2528/",
+     "https://access-stay.com/2026/05/23/hotel-breakfast-why-expensive/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1360280858",
+     "https://www.jalan.net/news/article/222174/",
+     "https://lifehackinfo.net/is-hotel-breakfast-worth-it/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH9b5wNucck6SXKFy_rzqi68kOdOAiCshed5pA3k0-VJV9DKCW7vlKPfNd2gqnz2Eb3teNAgvyMKu_-66-SVYOXHYRvRUqazeXu-IhSvO91fvvYlC8Vq0_UBw1Xze9SySQv3Oo=",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGDkXSsNztl7Hs3W3oSceTDYSuSpogiCaRX0R9yTNxrVJ6YQaNfSO2qmREZ2TkUEoeYwqCodcPPAgOhr25_1Yqx3mN9YBVErmzBepZd9Bkb4lXCGToL14Pv4odIzzPYs2zFYrbDgPUGQyBcq9Q="
+    ],
+    "error": ""
+   }
+  },
+  "旅館 子供料金 いくらから": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mlit.go.jp/kankocho/ryokan/list_ja.html",
+     "https://tnky.jp/faq/",
+     "https://www.kifunosato.com/qa",
+     "https://www.yoshiike.org/faq/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hotelsmart.jp/hotel-child-fee/3813/",
+     "https://www.travel.co.jp/guide/howto/349/",
+     "https://facility.happy-note.com/column/cat1508/post-9.html",
+     "https://omotenashi.work/column/accommodation-industry/6042",
+     "https://yuruko-life.com/travel-kodomoryoukin-matome/",
+     "https://fpnavi.net/content/844.html",
+     "https://yokamonblog.com/hotel_child/",
+     "https://shoppiblog.com/childrens-room-rates/",
+     "https://ryoko-hikaku.net/method/2492/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hotelsmart.jp/hotel-child-fee/3813/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10279903770",
+     "https://facility.happy-note.com/column/cat1508/post-9.html",
+     "https://www.kasumi-kadoya.co.jp/blog/9535",
+     "https://omotenashi.work/column/accommodation-industry/6042",
+     "https://omotenashi.work/column/accommodation-industry/6042",
+     "https://yado-riki.com/knowledge/3266/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGILB7Fapz2XBIwmOsBlcnpY6p3heCY6tr6rWyUff89VlrlH9DnExS8fkf2xtHPBfdQFRNXPC6jWqBv_vld8Sl9HlOH-j3S6gVNc9VhDzeKr4rzLTxzRzb55CK809i5HeckNBoORfqq2lqUPaKjtM4e8iEBmE6oQCMZJLErCEIfOUzagAwnbYPjeFp6fZpk-roFPECE96deqRvGTrUdolMOLqxVtxzM1jaxcK5OGqCoikSkvEE9Ssiqt6kTdPi-oLOXD-NwfPOhvH82qaBBbC6CJyT5TngnJHv68LUr8gcFnKYtlxZ0vyur3LjziOHAO7_xNyRXgnoU7T1obMlaaCsDKMcOehrqhO9-rywGTfNiNt7ao3eJLqqJUnm2iCu9egQYeful"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 駐車場 料金 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.route-inn.co.jp/hotel_list/fukushima/index_hotel_id_254/parking/",
+     "https://www.toyoko-inn.com/search/detail/00072/",
+     "https://www.route-inn.co.jp/hotel_list/osaka/index_hotel_id_71/",
+     "https://www.apahotel.com/hotel/kansai/osaka/namba_ekihigashi/",
+     "https://www.newotani.co.jp/osaka/facility/parking/",
+     "https://www.imperialhotel.co.jp/tokyo/facility-access/parking",
+     "https://www.ark-hotel.co.jp/osaka/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.strings-group.jp/nagoya/news/news_16940/",
+     "https://castel.jp/p/4272",
+     "https://urayasu.brightonhotels.co.jp/faq/stay/parking.html",
+     "https://www.tokyodome-hotels.co.jp/facilities/parking/",
+     "https://ameblo.jp/d-ruka/entry-12938224881.html",
+     "https://www.alpico-plaza-hotel.jp/news/449/",
+     "https://haute-hotel.com/%E3%83%91%E3%83%AC%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E9%A7%90%E8%BB%8A%E5%A0%B4%E3%81%AE%E6%96%99%E9%87%91%E3%83%BB%E5%89%B2%E5%BC%95%E3%83%BB%E3%83%90%E3%83%AC%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%93/",
+     "https://www.apahotel.com/articles/business-hotel-parking/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFagg_JeHrslcu9I4U5CQGzIEQJHjdTMe6pVxWM0upqdW0HtBdewiFQy-8l6Hixf-o3HmH1Dpg_NBoVh3GSe-Su4OoV2ZTOBUqZqgA-QqEZOCifk20fUW9H7J_KjoYw1A-qZcuhD4I3sZgnoxSh1yk=",
+     "https://financial-field.com/living/entry-521750",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11256869416",
+     "https://sotetsu-hotels.com/column/23/"
+    ],
+    "error": ""
+   }
+  },
+  "旅館 入湯税 宿泊税 いくら": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mof.go.jp/tax_information/qanda008.html",
+     "https://www.my.metro.tokyo.lg.jp/w/008-20260630-260454292",
+     "https://www.city.kyoto.lg.jp/gyozai/page/0000249302.html",
+     "https://www.city.kyoto.lg.jp/gyozai/page/0000090273.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hotelbank.jp/industry-trends/lodging-tax-national-list-2026-rates-effective-burden/",
+     "https://www.rtg.jp/hotels/guide-info/tax-info.html",
+     "https://www.centurymarina.com/news/news202508_01.html",
+     "https://www.town.kusatsu.gunma.jp/www/contents/1566518201194/index.html",
+     "https://hotelbank.jp/industry-trends/onsen-bathing-tax-surcharge-2026-adr-ratio/",
+     "https://www.hotelsmart.jp/accommodation-tax/3566/",
+     "https://min-taxes.com/column/shukuhakuzei-zenkoku/",
+     "https://www.resort-lab.com/n/ncb189c17a10c?gs=882e86d8b6e3",
+     "https://miyako.com/lab/zei/2026-04-shukuhakuzei-matome/",
+     "https://hotelbank.jp/lifestyle/shukuhakuzei-ikura-ichiran-kyoto-2026/",
+     "https://tripla.io/media_column/accommodation-tax-guide/",
+     "https://yurutabi.blog/japan-accommodation-tax-2026-major-cities/",
+     "https://kmcs.co/zeimu/20260403-4552.html",
+     "https://miyako.com/lab/zei/kyoto-city-shukuhakuzei-2026-03-kaisei/",
+     "https://miyako.com/lab/zei/tokyo-shukuhakuzei/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://iace.co.jp/bts/useful/detail/accommodation_tax_japan.html",
+     "https://tripla.io/media_column/bathing-tax-guide/",
+     "https://onsen.nifty.com/onsen-matome/231130987610/",
+     "https://www.spa.or.jp/news/general/6132/",
+     "https://www.city.hikari.lg.jp/soshiki/1/zeimu/sonota/3291.html",
+     "https://www.anjuann.com/%E5%AE%BF%E6%B3%8A%E6%96%BD%E8%A8%AD%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/1623/",
+     "https://tripla.io/media_column/accommodation-tax-guide/",
+     "https://airhost.jp/resources/what-is-accommodation-tax",
+     "https://innto.jp/news/post-3120/",
+     "https://miyako.com/lab/zei/2026-04-shukuhakuzei-matome/",
+     "https://hokkaido-shukuhakuzei.pref.hokkaido.lg.jp/"
+    ],
+    "error": ""
+   }
+  },
+  "温泉旅館 選び方 初めて": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jalan.net/news/article/578310/",
+     "https://www.jalan.net/onsen/howto/exp_furo.html",
+     "https://www.jalan.net/jalan/doc/howto/01goriyou.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.itoyanagi.co.jp/news/165/",
+     "https://www.travelvoice.jp/20230914-154194",
+     "https://hotel-seifukan.co.jp/news/3381/",
+     "https://weibo.com/2/detail/comos:nitvprf5718283"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://samurai-sauna-magazine.com/ja/guides/onsen-ryokan-booking-checklist",
+     "https://note.com/kotone_yado/n/n7865b1e6ebe3",
+     "https://memomaru.com/202511212112/1184/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12283122832",
+     "https://samurai-sauna-magazine.com/ja/guides/beginner-friendly-onsen-town-guide",
+     "https://mania-log.com/2026/07/16/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E6%B8%A9%E6%B3%89%E6%97%85%E9%A4%A8%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E3%83%9E%E3%83%8A%E3%83%BC%E3%83%BB%E6%9C%8D/",
+     "https://dime.jp/genre/1649815/"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 旅館 違い どっち": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mlit.go.jp/kankocho/ryokan/list_ja-1.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000111008.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.airtrip.jp/travel-column/7857",
+     "https://www.teramoto.co.jp/columns/8323/",
+     "https://sotetsu-hotels.com/column/390/",
+     "https://housebirdjapans.com/column/1102",
+     "https://www.ken-c.jp/%E5%90%88%E6%B3%95%E6%B0%91%E6%B3%8A/%E6%97%85%E9%A4%A8%E3%81%8B%E7%B0%A1%E6%98%93%E5%AE%BF%E6%89%80%E3%81%8B/",
+     "https://hotel-biz.com/column21.html",
+     "https://www.homemate-research-hotel.com/useful/16806_hotel_007/",
+     "https://www.ryokan-maidashi.com/blog/1580/",
+     "https://9stay.net/column/446"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hamanoyu.co.jp/news/90/",
+     "https://sotetsu-hotels.com/column/390/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFByRCk3lhReK4kx6q4-dxeJLUT1vWh4Lcrp1CWev1oxCODvtRFttepXPct_LB8eQy3R3zJm216XBKh5hQXyR5lF-lT-nnY6xeTlSW1dJl_xHrp3Dkas9bIoJmNPQMHao4=",
+     "https://www.kasumi-kadoya.co.jp/blog/30997",
+     "https://otokunitomarou.com/bi-difhotelryokan/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10122406190"
+    ],
+    "error": ""
+   }
+  },
+  "旅館 口コミ 見方": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://travel.faq.rakuten.net/detail/000004323",
+     "https://www.jalan.net/yad357033/kuchikomi/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://fishand.tips/column/hotel-review-check/",
+     "https://www.utsunomiya-grandhotel.co.jp/review/",
+     "https://www.yamaonsen.com/entry/negative_review",
+     "https://www.knt.co.jp/yado/sp/kuchikomi/onsen/",
+     "https://www.tabitabilink.com/kuchikomi/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://fukusas.com/2026/06/30/1229/",
+     "https://fishand.tips/column/hotel-review-check/",
+     "https://note.com/layaynm0211/n/n4a72613627f4",
+     "https://switch-fukugyo.com/026.html",
+     "https://tripla.io/media_column/hotel-review-management/",
+     "http://futari-biyori.com/jyouzuna.html",
+     "https://fishand.tips/column/hotel-review-check/",
+     "https://horube.hatenablog.com/entry/2021/06/29/%E3%81%98%E3%82%83%E3%82%89%E3%82%93%E3%81%AE%E3%82%AF%E3%83%81%E3%82%B3%E3%83%9F%28%E3%83%9B%E3%83%86%E3%83%AB%E3%83%BB%E5%AE%BF%29%E3%82%92%E5%8F%82%E8%80%83%E3%81%AB%E3%81%99%E3%82%8B%E6%99%82"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 公式サイト 予約サイト どっちが得": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://www.toyoko-inn.com/campaign/web_exclusive/",
+     "https://travel.rakuten.co.jp/coupon/help.html",
+     "https://www.marriott.com/ja/loyalty/terms/default.mi"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.pricey.jp/web/articles/4525",
+     "https://otokunanavi.com/2026/05/01/official-site-booking-cheap-reason/",
+     "https://www.choice-hotels.jp/bestrate/",
+     "https://us-kouroen.com/blog/hotel-reservation-site-official-comparison/",
+     "https://kjshintani.com/?p=39428",
+     "https://archcorp.jp/columns/jalan-rakuten-travel-comparison/",
+     "https://www.dormyinnfun.com/reservation-site/"
+    ],
+    "error": ""
+   }
+  },
+  "温泉宿 泉質 選び方": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://www.spa.or.jp/onsen/501/",
+     "https://www.spa.or.jp/onsen/4046/",
+     "https://www.env.go.jp/nature/onsen/pdf/2-5_p_43.pdf",
+     "https://www.env.go.jp/nature/onsen/pdf/2-5_p_11.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.yukoyuko.net/onsen/sensitsu",
+     "https://www.ikyu.com/concierge/105359",
+     "https://discoverjapan-web.com/article/105254",
+     "https://yuru-to.net/kounou/",
+     "https://note.com/twinturbo/n/nf80a42900fc4",
+     "https://yuyuhakusho.hatenablog.jp/entry/hot-spring-senshitsu",
+     "https://crexgroup.com/ja/travel/niche/onsen-spring-quality-types-guide/",
+     "https://oyadokotobuki.com/810",
+     "https://salaryman-onsen.com/%E6%B8%A9%E6%B3%89%E3%81%AE%E6%B3%89%E8%B3%AA10%E7%A8%AE%E9%A1%9E%E3%82%92%E5%BE%B9%E5%BA%95%E8%A7%A3%E8%AA%AC%EF%BD%9C%E5%8A%B9%E8%83%BD%E3%83%BB%E3%83%AA%E3%82%B9%E3%82%AF%E3%83%BB%E8%87%AA%E5%88%86/",
+     "https://onsen.nifty.com/onsen-matome/250428942978/",
+     "https://www.hakonenavi.jp/feature/13515",
+     "https://www.jalan.net/news/article/695894/",
+     "https://onsenfudousan.com/cms/slog/entry/53",
+     "https://www.ryokan-news.com/articles/onsen-osusume-ranking-zenkoku-30",
+     "https://u-u.co.jp/blog/basic_knowledge_benefits/postid_8396/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kyushuonsen.com/%E6%B8%A9%E6%B3%89%E3%81%AE%E5%8A%B9%E8%83%BD%E3%81%AB%E3%82%88%E3%82%8B%E6%B8%A9%E6%B3%89%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BD%9C10%E7%A8%AE%E9%A1%9E%E3%81%AE%E6%B3%89%E8%B3%AA%E3%81%AE%E7%89%B9/",
+     "https://samurai-sauna-magazine.com/ja/guides/onsen-spring-types-for-beginners",
+     "https://onsen.nifty.com/onsen-matome/250428942978/",
+     "https://tenki.jp/suppl/grapefruit_j02/2021/11/13/30725.html",
+     "https://www.spa.or.jp/onsen/501/",
+     "https://kuraonline.jp/article/288",
+     "https://www.tabirai.net/hotel/column/onsen/",
+     "https://www.kakehashionsen.com/hotsprings-springquality-guide/",
+     "https://ikiikiyumeroman.com/news/spring_quality/"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 立地 駅近 選び方": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://www.marunouchi-hotel.co.jp/",
+     "https://www.marunouchi-hotel.co.jp/en/about/access/index.html",
+     "https://www.nanbuhotel.com/2026/08/20/kitakami-business-trip-hotel/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://innto.jp/column/post-1315/",
+     "https://access-stay.com/2026/04/21/pro-hotel-guide-booking-trends/",
+     "https://www.hotelmets.jp/contents/eki_chika.html",
+     "https://travel.jr-central.co.jp/plan/area/tokyo/hotel_ekimae/",
+     "https://note.com/gymhiroya/n/n8d05d2871ba0",
+     "https://advanced-knowledge-solutions.com/ekichikahotel/",
+     "https://alfa-consulting.co.jp/location-of-hotels-for-foreign-tourists/"
+    ],
+    "error": ""
+   }
+  },
+  "記念日 宿 選び方": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://reserve.489ban.net/client/mimatu/0/detail/852373",
+     "https://onyadonakada.com/plan",
+     "https://www.newotani.co.jp/tokyo/anniversary/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/travel/stay/hotel/kwd_24/list/",
+     "https://www.ozmall.co.jp/travel/stay/ryokan/kwd_24/list/",
+     "https://tabiiro.jp/yado/article/kantoukinkou-kinenbi/",
+     "https://tabiiro.jp/yado/theme/anniversary/",
+     "https://www.jalan.net/news/article/547624/",
+     "https://www.rurubu.travel/theme/couple/ranking/anniversary_ryokan/",
+     "https://www.rurubu.travel/theme/couple/ranking/anniversary_hotel/",
+     "https://oyutabi.biglobe.ne.jp/a003-d05c/",
+     "https://www.patisserie-flower.jp/blogs/anniversary/20230816",
+     "https://ameblo.jp/kinenbitabi/entry-12962299231.html",
+     "https://www.resort-glamping.com/article/article_051/",
+     "https://anny.gift/oiwai-contents/guides/anniversary/travel/",
+     "https://yufuin-luxury-villa-zakuro.com/anniversary02/",
+     "https://j-eps.net/anniversary-onsen-travel-guide/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://lumi-travel.com/hotel-anniversary/",
+     "https://akirichan.com/couple-anniversary-trip/",
+     "https://www.jalan.net/news/article/547624/",
+     "https://note.com/onna_oceanview/n/nf1906da10020",
+     "https://www.rurubu.travel/theme/couple/ranking/anniversary_hotel/",
+     "https://www.patisserie-flower.jp/blogs/anniversary/20230816",
+     "https://anny.gift/oiwai-contents/guides/anniversary/wedding-anniversary/",
+     "https://allabout.co.jp/gm/gc/473935/"
+    ],
+    "error": ""
+   }
+  },
+  "一人旅 宿 選び方": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://blog.telass.jp/blog/solo-travel-hotel-choice/",
+     "https://www.nta.co.jp/media/tripa/articles/s8aMp",
+     "https://hotel.travel.rakuten.co.jp/hotelinfo/plan/169587",
+     "https://www.jalan.net/news/article/333042/",
+     "https://hotel.travel.rakuten.co.jp/hotelinfo/plan/187993"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://first-cabin.jp/blog/solo-travel/hotel/",
+     "https://allabout.co.jp/gm/gc/469323/",
+     "https://news.yahoo.co.jp/expert/articles/69332be4db6cbeaa6770d5231ef6dfa86cb165e0",
+     "https://www.toretabi.jp/zipangclub/page/sodanshitsu220215.html",
+     "https://note.com/proper_roses9267/n/n114a2af44098",
+     "https://ameblo.jp/tour-cruise/entry-12960963114.html",
+     "https://note.com/tabiyado_guide/n/nb2c6cb0b4df3",
+     "https://hotel-seifukan.co.jp/news/3381/",
+     "https://tukinohotaru.com/column/e9409c6b-7bd6-468c-9abc-3c064357d00c",
+     "https://www.yukoyuko.net/special/t00083",
+     "https://www.nta.co.jp/hitori/",
+     "https://tabiiro.jp/yado/theme/hitoritabi/",
+     "https://www.ozmall.co.jp/travel/stay/hotel/kwd_28/list/",
+     "https://www.jre-travel.com/feature/hitoritabi/",
+     "https://www.jtb.co.jp/kokunai-hotel/list/feature/hitoritabi/",
+     "https://magazine.flaspo.jp/archives/1637"
+    ],
+    "error": ""
+   }
+  },
+  "旅館 部屋 種類 違い": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.jtb.co.jp/faqs/f4795/",
+     "https://www.teramoto.co.jp/columns/8323/",
+     "https://japan-onsenguide.com/theme/kyakushitsu-rotenburo/",
+     "https://otanisanso.co.jp/rooms/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.teramoto.co.jp/columns/8323/",
+     "https://customerhelp.jtb.co.jp/s/article/f4795",
+     "https://www.tsuruga.com/rooms/",
+     "https://www.gero-ogawaya.net/rooms/luxury/",
+     "https://omotenashi.work/column/work-in-accommodation/8316",
+     "https://omotenashi.com/jp/category/wamodern/",
+     "https://www.taishoya.com/taishoya/rooms/",
+     "https://www.anjuann.com/%E5%AE%89%E4%BD%8F%E5%BA%B5%E3%81%8B%E3%82%89%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B/2562/",
+     "https://www.homemate-research-hotel.com/useful/16822_hotel_023/"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 朝食 重視 選び方": {
+   "group": "選び方・比較",
+   "ChatGPT": {
+    "urls": [
+     "https://www.marinacity.com/hotel/stay/breakfast/",
+     "https://www.takayama-gh.com/dining/breakfast/",
+     "https://hotelnikko-tachikawatokyo.jp/restaurant/morning/",
+     "https://parkhoteltokyo.com/ja/dining/breakfast/",
+     "https://torifito.jp/hakatagion/restaurant"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://johnny88.jp/breakfast-buffet-hotel-sapporo/",
+     "https://www.ozmall.co.jp/travel/stay/article/44278/",
+     "https://www.ozmall.co.jp/travel/stay/hotel/kwd_2/list/",
+     "https://tripeditor.com/479661",
+     "https://www.tripadvisor.jp/Articles-lD2jZa6tB9KY-Best_breakfast_hotels.html",
+     "https://www.jtb.co.jp/kokunai-hotel/list/tokyo/feature/morn90h/",
+     "https://www.ikyu.com/tokyo/140000/t913/",
+     "https://hotelbank.jp/industry-trends/breakfast-premium-analysis-2026/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yadoken.net/archives/column/%EF%BC%9C%E3%83%9B%E3%83%86%E3%83%AB%E3%83%BB%E6%97%85%E9%A4%A8%EF%BC%9E%E6%9C%9D%E9%A3%9F%E3%82%92%E6%B4%BB%E7%94%A8%E3%81%97%E3%81%9F%E9%9B%86%E5%AE%A2%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2",
+     "https://www.skyscanner.jp/sttc/px/captcha-v2/index.html?url=L2hvdGVscy9hZHZpY2UvaG90ZWwtYnJlYWtmYXN0cy1ndWlkZT8=&uuid=e40c8ecb-bf0b-11f1-9424-8fbcedbcab79&vid=",
+     "https://www.smartmagazine.jp/howto/article/21377/",
+     "https://sotetsu-hotels.com/column/506/",
+     "https://family-hotel-guide.com/luxury-hotel-breakfast-comparison/",
+     "https://www.ogu.ac.jp/hic/report/07.html",
+     "https://travel.jr-central.co.jp/plan/area/tokyo/hotel_breakfast/",
+     "https://note.com/firm_quokka2602/n/n09dc3010e302"
+    ],
+    "error": ""
+   }
+  },
+  "子連れ 温泉旅館 赤ちゃん OK": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tachibanaya.jp/baby/",
+     "https://www.ichinoyu.co.jp/cp/page-996/",
+     "https://housyoutei.com/",
+     "https://www.fujilake.co.jp/baby/",
+     "https://www.hakone-hotelkowakien.jp/family.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jalan.net/news/article/75095/",
+     "https://oyutabi.biglobe.ne.jp/a039-d0fc/",
+     "https://oyutabi.biglobe.ne.jp/a039-d849/",
+     "https://oyutabi.biglobe.ne.jp/a039-d474/",
+     "https://oyutabi.biglobe.ne.jp/14b026-a039/",
+     "https://www.ikyu.com/onsen/000110/acp16/t307/",
+     "https://alyawmu.com/article/kanto-onsen/",
+     "https://facility.happy-note.com/yado-list-tag.html?tag=%E8%B5%A4%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8%E8%B2%B8%E5%88%87%E9%A2%A8%E5%91%82%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%8A%E5%AE%BF",
+     "https://commit.jp/media/recommended-hotsprings-forbabies/",
+     "https://www.jalan.net/news/article/315441/",
+     "https://iconia.co.jp/feature/articles/hot-springs-with-babies",
+     "https://onsen.nifty.com/onsen-matome/250701054226/",
+     "https://event.rakuten.co.jp/family/story/article/2021/baby-spa/",
+     "https://www.babypark.jp/column/when-is-it-ok-to-go-on-a-hot-spring-trip-with-baby/",
+     "https://k-view.jp/news/kanko/2321/",
+     "https://www.nakaya-ryokan.com/tourism/888.html",
+     "https://mamari.jp/2134"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://iconia.co.jp/feature/articles/hot-springs-with-babies",
+     "https://www.papatabilife.com/?p=52",
+     "https://facility.happy-note.com/yado-list-tag.html?tag=%E8%B5%A4%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8%E3%81%8A%E9%83%A8%E5%B1%8B%E9%A3%9F%E3%81%A7%E3%81%8D%E3%82%8B%E5%AE%BF",
+     "https://www.jalan.net/news/article/704965/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGNzlZl2x1yK4MeBN3Hfn-Zw1TCk9Sfu9d5XrjyUzxiOE3gr79QV7-yQjTEKbwhYCHLn0pcJHm-g_E59CdLRfDUnCDuLeCJ-ub0bHdNi1aMN5zpO0ZaJaV6RkH2hkku",
+     "https://facility.happy-note.com/",
+     "https://www.jalan.net/news/article/704965/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8zdvhSIKKKL4FZgX3GWjfGk7DJOGgyq2DpKPJeEAeNzPedj3O3JlfREgefjSb0cltM5hwO01y9LO5fIOTSVgDcM7RoW1_SspFRHcik8kj5LcB7EgEUarqRnwoKMIyhh-MlKFcMH6HDbdy7_RQe6PMvZosGUJaUq8=",
+     "https://www.ikyu.com/theme/t3978/",
+     "https://www.youtube.com/watch?v=nKpD8CMQaNg",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGuVS94-d-hkFq_Q9gl34iHKg0yz5NnuSBn0IAGoirH6lUJJbGDaiDaU3-9yfINPxI68cF6cLdU7Go6bm4rwlKF09z2rXJCFlBS5FR_xCaoHddoKJMmZLbjj3ir8fSsH8BIwFUYOnfcO2JnHI77ijTcoaB8CJEvbOFkl9gg"
+    ],
+    "error": ""
+   }
+  },
+  "家族旅行 ホテル 部屋 広い": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://mimaruhotels.com/ja/hotel/shinsaibashi-central/",
+     "https://www.hotelkanazawa.co.jp/stay/room/",
+     "https://iconia.co.jp/rooms-hotel-azumino-kogen-resort-nagano"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabiiro.jp/yado/theme/family/",
+     "https://www.jalan.net/news/article/361507/",
+     "https://jp.hotels.com/go/japan/best-family-hotels-japan",
+     "https://travel.gpoint.co.jp/daredoko/t655/",
+     "https://travel.gpoint.co.jp/daredoko/t11473/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://media.staytuned.asia/tokyo-hotel-6/",
+     "https://hotelista.jp/column/mister-m/1213233.html",
+     "https://mimaruhotels.com/ja/news/travel-tips-hotel-japan-family-11/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14190560039",
+     "https://www.jalan.net/news/article/618351/",
+     "https://mimaruhotels.com/ja/",
+     "https://mama.lovetabi.com/column/tokyo-mimaruhotel-akasaka/",
+     "https://livejapan.com/ja/in-tokyo/in-pref-tokyo/in-ikebukuro/article-a0005257/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFxNGf2xVUySA-M7o8AniOvtDHK4fRYxR1TZiueaPeudWHHmkrhRcQfkvkMqvud9i1KnvodWDnVgC_P0XbDtkklnFxEPTnDG2GFW2G6npt7iZGL-FBtztfpkEzgmQiDSVdDw5r7oehWfWI_TIDNYgd7GE93nERz1e2MbYQ5zW7DmCv26yek_133edfj9y1Owg==",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHI0OE231Dvj8OoNvL73BavBoCgBr38n6nn830RVzg-VtkxXm5VMRyAtaTmNyE-R2Xsg02o17ZyFEcvvf3Dpvi0mTZRSNsc-TZ5UXzB5SwOlsXGlXe0XQzDbAVf2DIoS4cXkZufPqcmcc6_vwf4LTt6nPJPVj-IjdAHbik9CNeblpUuujeGYXVb6yn676zYp8KjNOr9Cxjlu-ggAJZR"
+    ],
+    "error": ""
+   }
+  },
+  "祖父母 孫 旅行 宿 バリアフリー": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.pax-yoshino.com/faq/",
+     "https://www.accessible-iseshima.jp/html/lodging_detail.php?no=20181215224736",
+     "https://www.nagashima-onsen.co.jp/hotelnagashima/hotels/faq.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabiiro.jp/yado/theme/family/",
+     "https://veryweb.jp/life/608706/",
+     "https://article.his-j.com/kaigai/trivia/post-14683/",
+     "https://travel.gpoint.co.jp/daredoko/t2003/",
+     "https://rlx.jp/journal/zenkoku/173063",
+     "https://oyutabi.biglobe.ne.jp/t9175/",
+     "https://holidaytravel.blog/2026/04/22/%E7%A5%96%E7%88%B6%E6%AF%8Dx%E5%AD%AB%E3%81%AE%E4%B8%89%E4%B8%96%E4%BB%A3%E6%97%85%E8%A1%8C%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E3%83%9B%E3%83%86%E3%83%AB%E9%81%B8%E3%81%B3/",
+     "https://mom-reftrip.com/kansai-family-trip-onsen/",
+     "https://www.traver.as-uni-hey.com/familythree-generations-trip-pmsem-activity-memories/",
+     "https://barrierfree.t-life.co.jp/navi/1661/",
+     "https://www.ikyu.com/concierge/24105",
+     "https://my-best.com/17790",
+     "https://rlx.jp/journal/zenkoku/173075",
+     "https://travel.gpoint.co.jp/daredoko/t983/",
+     "https://oyutabi.biglobe.ne.jp/d81d/",
+     "https://travel.biglobe.ne.jp/hotel/theme/barrierfree/",
+     "http://the-ayumi.jp/2024/09/06/barrier-free_hotel_japanese-inn_30/",
+     "https://cocoyuco.jp/barrier-free-hot-spring/"
+    ],
+    "error": ""
+   }
+  },
+  "子供 温泉 何歳から": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://kateinoigaku.jp/qa/31",
+     "https://www.benesse.jp/kosodate/clinic/life/article7.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://onsen.nifty.com/onsen-matome/250701054226/",
+     "https://kids.rurubu.jp/article/147009/",
+     "https://www.hinatanoyu.com/column/3459/",
+     "https://czech.hatenablog.com/entry/2026/10/01/165433",
+     "https://event.rakuten.co.jp/family/story/article/2021/baby-spa/",
+     "https://kaiun-net.com/onsen/",
+     "https://kids-allies.com/column/entry-565.html",
+     "https://u-u.co.jp/blog/onsen_etiquette/postid_8590/",
+     "https://u-u.co.jp/blog/onsen_etiquette/postid_8572/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://onsen.nifty.com/onsen-matome/250701054226/",
+     "https://u-u.co.jp/blog/onsen_etiquette/postid_8190/",
+     "https://clip.8122.jp/45210/",
+     "https://k-view.jp/news/kanko/2321/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG3xUJzPa0DqmvpgEjrGhOMROqEU5XbOVikAGYSgF_dabIGf5cvrd_uRlR6Kp9_wUvg9VHEE2-Hm5lknaWYKrbFBo7WlVttE3HrAq4uBAgvBcixZH0_Ou_-lehyRhajY9DzanS8",
+     "https://www.nicebaby.co.jp/blogs/babycare/hotspring",
+     "https://pigeon.info/404.html",
+     "https://www.bathlier.com/media/survey/infants-hotspring/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14242951889",
+     "https://samurai-sauna-magazine.com/ja/guides/onsen-with-kids-basics",
+     "https://kids.rurubu.jp/article/147009/",
+     "https://www.pref.mie.lg.jp/SHOKUSEI/HP/p0015300022.htm",
+     "https://u-u.co.jp/blog/onsen_etiquette/postid_8590/"
+    ],
+    "error": ""
+   }
+  },
+  "家族風呂 貸切 予約方法": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hyotan-onsen.com/sp/onsen/family.html",
+     "https://www.sportsoasis.co.jp/coco/family-bath/",
+     "https://www.kaminoyu-onsen.com/query/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://namiha.jp/shisetsu/family/",
+     "https://yudokoro-honoka.jp/noda/family/",
+     "https://spa-sauna.jp/",
+     "https://www.city.shimada.shizuoka.jp/kanko-docs/kahsikirihuro.html",
+     "https://www.hyotan-onsen.com/sp/onsen/family.html",
+     "https://yuasobi.com/spots/hokuriku-koshinetsu/nagano/",
+     "https://yuasobi.com/",
+     "https://www.off-yu.com/"
+    ],
+    "error": ""
+   }
+  },
+  "ペット 同伴 宿 犬": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.regina-resorts.com/kyukaruizawa/faq/",
+     "https://www.hotelsoyokaze.com/pet/",
+     "https://kizuna-shuzenji.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/17653",
+     "https://www.hakonenavi.jp/feature/23292",
+     "https://tabiiro.jp/yado/theme/pet/",
+     "https://www.jtb.co.jp/kokunai/theme/pet/",
+     "https://www.ikyu.com/theme/t401/",
+     "https://www.rurubu.travel/theme/pet/",
+     "https://stayjapan.com/media/ja/pet-friendly-gw-summer-2026/",
+     "https://travel.gpoint.co.jp/daredoko/a00d/",
+     "https://kyuzitsu-inubu.com/theme/47486/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kyuzitsu-inubu.com/",
+     "https://petyado.com/",
+     "https://www.jtb.co.jp/kokunai/theme/pet/",
+     "https://prtimes.jp/main/html/rd/p/000000215.000030850.html",
+     "https://www.pet-inu-yado.com/",
+     "https://travel.rakuten.co.jp/pet/",
+     "https://www.jalan.net/theme/pet/",
+     "https://travel.yahoo.co.jp/area/ma000000/acr4096/t112/ranking/",
+     "https://kyuzitsu-inubu.com/features/97207/",
+     "https://wankonowa.com/column/1687/",
+     "https://myhomemarket.jp/magazine/30-dog-05-stay/index.html",
+     "https://hoshinoresorts.com/jp/categories/aiken/"
+    ],
+    "error": ""
+   }
+  },
+  "アレルギー 対応 朝食 ホテル": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.southernbeach-okinawa.com/restaurant/breakfast/",
+     "https://www.laforet.co.jp/shuzenji/faq/dining/",
+     "https://www.nikko-htb.co.jp/restaurant/allergies/",
+     "https://www.hotelmonterey.co.jp/allergy-policy/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.alivila.co.jp/information/news/14920/",
+     "https://www.caa.go.jp/policies/policy/food_labeling/other/review_meeting_004/pdf/syokuhin1297.pdf",
+     "https://www.rihga.co.jp/osaka/food-allegy-policy",
+     "https://www.epinard.jp/restaurant/low_calorie_allergen/",
+     "https://www.itoenhotel.com/allergy/",
+     "https://www.hankyu-hotel.com/group/pictogram",
+     "https://www.mtfuji-hotel.com/restaurants/allergy.html",
+     "https://shiraraso.co.jp/information/4776/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/ayu110/n/n3904c1194e03",
+     "https://dormy-hotels.com/information/allergy/",
+     "https://boccitabi.yokohama/allergy-hotel/",
+     "https://ameblo.jp/nonnuck/entry-12649183834.html",
+     "https://prtimes.jp/main/html/rd/p/000001111.000002504.html",
+     "https://note.com/ayu110/n/n3904c1194e03",
+     "https://note.com/taberugi/n/nf6b3d5efdd98"
+    ],
+    "error": ""
+   }
+  },
+  "子連れ 旅館 布団 ベッド どっち": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://tnky.jp/stay/kids_friendly/",
+     "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_041",
+     "https://www.cfa.go.jp/policies/boshihoken/kenkou/sids"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jalan.net/news/article/315441/",
+     "https://tripfolio.jp/article/japanese-style-ryokan-washitsu-guide",
+     "https://samnotes.net/find-hotels-for-family",
+     "https://facility.happy-note.com/column/cat1508/post-8.html",
+     "https://4travel.jp/magazine/hotel/00122"
+    ],
+    "error": ""
+   }
+  },
+  "車椅子 宿泊 部屋 相談": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://the-ayumi.jp/ja/articles/accommodation-call-the-hotel/",
+     "https://www.j-hotel.or.jp/barrierfree/",
+     "https://ikkel.or.jp/ja/about"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ikyu.com/concierge/24105",
+     "https://www.rihga.co.jp/tokyo/stay/universal-room",
+     "https://tabiiro.jp/yado/theme/universal_design/wheelchair/",
+     "https://tabiiro.jp/yado/theme/universal_design/",
+     "https://www.miyakohotels.ne.jp/hommachi/stay/barrier-free/",
+     "https://flat-travel.com/news/article/wheelchair-rental-hotel",
+     "https://sorou.jp/column/wheelchair-accessible-hotel-japan-guide-2026",
+     "https://accessibleroom.accessibletourism.tokyo/",
+     "https://www.j-hotel.or.jp/barrierfree/",
+     "https://barrierfree.t-life.co.jp/navi/1661/",
+     "https://unip-ut.jp/unip_blog/wheelchair-trip-hotel"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jtb.co.jp/universal-tourism/",
+     "https://www.his-barrierfree.com/",
+     "https://barrierfree.t-life.co.jp/",
+     "https://www.raqoo.jp/",
+     "https://ikkel.or.jp/organizations",
+     "https://ikkel.or.jp/organizations",
+     "https://www.barifuri.com/for-partners/advice/",
+     "https://www.akita-tourism.com/member/barifuri",
+     "https://kochi-tabi.jp/barrierfree_i.html"
+    ],
+    "error": ""
+   }
+  },
+  "夏休み 家族旅行 宿 いつまでに予約": {
+   "group": "家族旅行・同行者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://hotel-izukyu.co.jp/blog/columns/sirahama-natuasumi/",
+     "https://faq.jtb.co.jp/faqs/f4892/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.itoyanagi.co.jp/news/167/",
+     "https://www.tabi-otoku.com/natsuyasumi-hotel-yoyaku-urawaza-2026/",
+     "https://tabito-travel.com/blog/hotel-booking-best-timing/",
+     "https://g-azumino.com/hotel-yoyaku/",
+     "https://www.yukoyuko.net/special/t00201",
+     "https://www.knt.co.jp/yado/sp/summer/",
+     "https://www.hankyu-travel.com/summer/oyado/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kids-stay.com/blog/booking-timing-tips/",
+     "https://jp.trip.com/guide/info/when-to-book-a-hotel.html",
+     "https://ryokousuru.com/40/",
+     "https://note.com/hoteldigitalexp/n/nf9afd91913e3",
+     "https://www.itoyanagi.co.jp/news/167/",
+     "https://note.com/fats_mnh/n/nf6519f59f74e",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10121019660"
+    ],
+    "error": ""
+   }
+  },
+  "旅館 キャンセル料 いつから": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jalan.net/jalan/doc/howto/ryoukin.html",
+     "https://www.taishoukaku.com/info/3258/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://cacco.co.jp/frauddetection/media/for-consumers/21646/",
+     "https://tabicoffret.com/article/78808/",
+     "https://traveltechz.com/entry/hotelcancel",
+     "https://omotenashi.work/column/accommodation-industry/10965",
+     "https://crexgroup.com/ja/travel/accommodation/hotel-cancellation-fee-rules/",
+     "https://omotenashi.work/column/accommodation-industry/24218",
+     "https://ideco-ipo-nisa.com/28892",
+     "https://acozycottage.com/hoteru-kyannseru/",
+     "https://shifit.co.jp/moneyland/trouble/6533.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/harunatravel/n/ne59cceefddf0",
+     "https://www.yadoken.net/archives/column/hotel-cancellation-policy-guide",
+     "https://yoyakulab.net/investigation/cancellation_policy/",
+     "https://tabicoffret.com/article/78808/",
+     "https://payn.io/articles/hotel-cancellation-guide",
+     "https://omotenashi.work/column/accommodation-industry/24218",
+     "https://cacco.co.jp/frauddetection/media/for-consumers/21646/",
+     "https://jp.trip.com/guide/hotels/hotel-cancellation-fee.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14315327229",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHvZH2Pjf1h-BOkuBu4QL0RWAh0qvZfyXVZrLqELBZKUk5IwVqpVooNyT0q_X3C3Ov_JyHoNC-K2RHcK8gmEcfiXLia4lpTRaCPRAZJBJbUnsNcwk0Xy1LsAibRZR3kCifADEYblkY9S5nu3EvHHWE2Y4sc3GXlUEcLuNf6ugBU-wOmPfBUYUf2h22U1BpG9Nmm434PNdQHSW3I2xdFHxNOBekf0bw-_CLoCHiGHB-7pwZzJJvfHJFSHXIwIlBf8n-FftBVot5o03bJM8ZVLB_7I4fQxoLUNaVM5DDfRKlvmEv9zwrHdB3nM83cwHVpVfPnbPY0qSmJBVo1m9OG3vq0ne4q6Y42b6h2mrYGW_7N38wJQ8Sdjmu7YJMBYP8Xgl0N0mcYdd-7CLT9IJuMifmOyW35lrdWCZW0wLKsMqY3dmn6rMMtoARPkdmiVXRJiOhoTkwtZPQYCYOOhfCZ",
+     "https://www.mizukilaw.com/enterprise/corporate-growth-support/stay-cancel/",
+     "https://faq.jtb.co.jp/faqs/f4876/"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 直前 キャンセル 無料": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://secure.booking.com/faq.ja.html?aid=330843",
+     "https://www.toyoko-inn.com/eng/transaction/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabishitaku.jp/hotel-cancel-fee/",
+     "https://jp.trip.com/guide/hotels/hotel-cancellation-fee.html",
+     "https://uou.jp/hotel-cancel-itsukara/",
+     "https://inthehotel.jp/magazine/hotelcancel/",
+     "https://tabi-toku-lab.com/hotel-free/",
+     "https://tabitabi-biyori.com/article-005.html",
+     "https://feelinaline.net/hotel/hotel-cancellation-policy-guide/",
+     "https://www.jtrip.co.jp/usersguide/cancelnocharge/",
+     "https://www.apahotel.com/articles/cancel/",
+     "https://jp.trip.com/ask/travel-question/%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E7%84%A1%E6%96%99%E3%81%AE%E5%AE%BF%E6%B3%8A%E6%96%BD%E8%A8%AD%E3%82%92%E6%8E%A2%E3%81%99%E3%81%AB%E3%81%AF%E3%81%A9%E3%81%86%E3%81%99%E3%82%8C%E3%81%B0%E3%81%84%E3%81%84%E3%81%A7%E3%81%99%E3%81%8B.html",
+     "https://www.travelers-lifehack.com/hotel-free-cancellation-nonrefundable/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://jp.trip.com/guide/hotels/hotel-cancellation-fee.html",
+     "https://www.toyoko-inn.com/support/",
+     "https://omotenashi.work/column/accommodation-industry/24305",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEjBSs6ailSDXcRnZuZZHMjcGE_jDIh5SOttstvuLgwD34CkTxCT0WfEigHzAoMBUsBpahY62eJH-NA-qnCZbxjI6jS1CbxiybBuk1Uo6DuM92onVOtWcoiXQHqskLe3EVRdHiKkch4eUNuFthuczk3sFG6zFYRHHQP7SA3stpK0riuBKEyd-77WUbzilx1E6QHM96gTGzvqYD1dXG38UeFONWLWIdGgezkBV4Sx4SiX_7-XsKWS8RbqPmNPD876706WzB8NSSfvSOVkZs7WqziNE_zqmOZZUvVGqjJjWRe73z-fnHl3g6gDKHR4cbc3FKwnVF7I6OmyGmILbOkZHli8kFzT55bmlXakKjFo_fJxuxRVSxO9cLw7k6GsGSv9WnCcxtt620waE_Y1mCV6KsymjEtPY6y-QaBLsZQnRIEkq2s-l1nlQSVKkIUfYxKWAsPu3hQD58PJNsmgLz-zmXZCKdB39VUd_NrPk6IDO4JeLCTL3VPT23e7x1j0g43_dnwLM45lUfVKo_j6b_yRgRxhjW08PEJNSD7DqodEH0qBMYeCROaISG90xqbMRbW84mAkEJkj_Qsfn9Dx25S4NNnwfGGVbjnd1LfY189GqaTmFvWHpejd9UBO4EI3w=="
+    ],
+    "error": ""
+   }
+  },
+  "台風 宿泊 キャンセル 料金": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://travel.faq.rakuten.net/detail/000040384",
+     "https://lagent.jp/okinawanaha/news/1673/",
+     "https://travel.faq.rakuten.net/detail/000036152",
+     "https://travel.faq.rakuten.net/detail/000030374"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hotelbank.jp/lifestyle/toyoko-inn-typhoon-cancel-rules-2026/",
+     "https://money.smt.docomo.ne.jp/column-detail/1004176",
+     "https://summer.walkerplus.com/odekake/topics/article/1270212/",
+     "https://help-nta.nta.co.jp/hc/ja/articles/9270715738895--%E5%9B%BD%E5%86%85%E6%97%85%E8%A1%8C%E5%85%A8%E8%88%AC-%E6%82%AA%E5%A4%A9%E5%80%99%E3%82%84%E7%81%BD%E5%AE%B3%E3%81%AE%E5%BD%B1%E9%9F%BF%E3%81%A7%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E3%81%97%E3%81%9F%E3%81%84-%E5%8F%96%E6%B6%88%E6%96%99-%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E6%96%99-%E3%81%AF%E3%81%8B%E3%81%8B%E3%82%8A%E3%81%BE%E3%81%99%E3%81%8B",
+     "https://omotenashi.work/column/accommodation-industry/24277",
+     "https://ebe-channel.com/entry/16301/",
+     "https://luxuryhotelsjapan.com/typhoon-hotel-cancellation-fee-rakuten-travel/",
+     "https://kyomikyomi.com/tour_cancel_typhoon/",
+     "https://umegashima.site/blog/yunohana/5776/",
+     "https://news.yahoo.co.jp/articles/e7ff7bc5d4966a6be559acf2d0c81ffb845ff27f",
+     "https://news.yahoo.co.jp/expert/articles/5cec8d2661ed8cd94c0a850eadb9897a9abd1067",
+     "https://moneycanvas.bk.mufg.jp/know/column/5sOBJmvokC2GF3E/",
+     "https://bookingmethod.com/list/reservation/cancel/",
+     "https://advanced-knowledge-solutions.com/typhooncancel/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ebe-channel.com/entry/16402/",
+     "https://omotenashi.work/column/accommodation-industry/24277",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10283795645",
+     "https://www.access-trv.co.jp/2025-2462/",
+     "https://advanced-knowledge-solutions.com/typhooncancelnego/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGvzlOJ_BGFxzRhgCBASF8aCHTvcg5KzVn2dtq6ork_Zy6pILoaTUvvU6s2Qm30SimOlJIYfs-EDPNtN2K_zdw-usuhWEPAnGJK9HeRR7TiwnUD2FfARDhDBUzBY7Kq8Wo5Chk2i98Q9i_qXHbHb3vdg1wbxstHfsunVyc4l0JTBMlAURf1DSwP9YJUHC10CGUluPyMMVt5pvgFRRcHiORNs5ytvAvkp5bnuXGTXxHSb40MN9Wj6eOP_prCFjYb3itgpiQA-9UXhmnxR8-pFpShzNDdsj8PXbdSjVtzxom8kJhyw-j0fQMT53Bj",
+     "https://financial-field.com/living/entry-518717",
+     "https://travel.faq.rakuten.net/detail/000036152",
+     "https://hoshinoresorts.com/ja/sp/faq/changebookings/typhoon/26/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGtZ6Qs0FCa913T14amTk02JbGEmFykSHbX9UqpsMezM2Kv6u7EEQJcmYiFh8PtBij8rLa2T_0vUMOgAleO5cxfRTEn1iUvOJHy1ypQABvQyEvBaZItGRLJomj-KDdiM6Q5XlhYW-cxRX3iS-Waah9fHD_qoWc8cAW8MtOTC2v-PaOPvbXd9KC1KDTKje5sAvTFZBQMXbk_XNogAgq_TSico1N5dBzyhSe_ZyiPXgLtCj-OYc9tATghI935IuMWVcaH7wOytBq5lprYiTclNbRB5LgtP8nPu8cqtL5791zHZ_VuvS2rbwe8hSepXXktrICTOyYAHrqi8IsfJd9j5qSZDk-dlZtkKfK9uNoNFz8b8bn-n8r3fdokXi9vpmJ5H5BTx0wsQGvspPykQbGGdDEuykYiRtd7szeAkgn_beB4w4-lldPPS0ZOjKmyo8RgrT_5iCGCY9Wvvjyq6QNR1cj1MnW8B2c3tV6MQE5qkvXA9UyLNVJknn7SGb582BXL4ZK9JLxckzJ6xhvYEEHtF01j76XKhTEzy-idvfrOrcLbQ-bP9I2Sbi7RqpuZw34EOiumKvdANXttVGKWm5DT5Ip4kcwFR3zZZVsQHTKcac8ixE9W0svsjzUBijs_UQ=="
+    ],
+    "error": ""
+   }
+  },
+  "宿泊予約 日程変更 無料": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://travel.rakuten.co.jp/info/condition/domestic.html",
+     "https://www.jalan.net/jalan/doc/howto/03yoyaku.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.apahotel.com/customer/stay-services/207/",
+     "https://travel-smp.faq.rakuten.net/detail/000003545",
+     "https://travel.faq.rakuten.net/detail/000003545",
+     "https://faq.ikyu.com/app/answers/detail/a_id/1291/~/%E3%80%90%E5%9B%BD%E5%86%85%E5%AE%BF%E6%B3%8A%E3%80%91%E4%BA%88%E7%B4%84%E5%86%85%E5%AE%B9%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%9F%E3%81%84",
+     "https://inthehotel.jp/magazine/hotelcancel/",
+     "https://www.rocore.jp/hotel-cancellation-fee-not-charged-guide/",
+     "https://advanced-knowledge-solutions.com/hotelcancelpolicy/",
+     "https://feelinaline.net/hotel/hotel-cancellation-policy-guide/",
+     "https://travel-smp.faq.rakuten.net/detail/000004255",
+     "https://travel.faq.rakuten.net/detail/000004255",
+     "https://plaza.rakuten.co.jp/room10yu/diary/202604090008/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/harunatravel/n/n239a9d9d6472",
+     "https://note.com/zono_suke/n/n30292334d184",
+     "https://chottotokusuru.hatenablog.com/entry/2026/07/14/110100",
+     "https://travel.rakuten.co.jp/share/mobile/riyou/faq/q9.html",
+     "https://note.com/room10yu/n/n7c4f3edccdbc",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14307057784",
+     "https://travel-smp.faq.rakuten.net/detail/000003545",
+     "https://www.jalan.net/jalan/doc/howto/03yoyaku.html",
+     "https://note.com/zono_suke/n/nac2963a23d74",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13326421908",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13293301358",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10103655845",
+     "https://www.jalan.net/jalan/doc/howto/ryoukin.html"
+    ],
+    "error": ""
+   }
+  },
+  "チェックイン 遅れる 連絡": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://qa.jrtours.co.jp/faq/show/3492?site_domain=ex",
+     "https://www.toyoko-inn.com/support/faq/guide?lcl_id=ja",
+     "https://rakutenstay.zendesk.com/hc/ja/articles/9182920634255",
+     "https://www.mlit.go.jp/kankocho/ryokan/list_ja-5.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://aruvato.hatenablog.jp/entry/tyekkuinjikannniokureru",
+     "https://jp.trip.com/guide/hotels/%E3%83%9B%E3%83%86%E3%83%AB+%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%82%A4%E3%83%B3%E6%99%82%E9%96%93.html",
+     "https://omotenashi.work/column/accommodation-industry/29012",
+     "https://omotenashi.work/column/accommodation-industry/29271",
+     "https://crexgroup.com/ja/travel/accommodation/hotel-late-check-in-guide/",
+     "https://oshigoto-blog.com/hotel-checkin-late/",
+     "https://travel-enjoylife.com/hotel-check-in-delayed-by-an-hour/",
+     "https://grateful-blog.com/1012.html",
+     "https://charm-diary.com/2652.html"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 予約 直接 電話 メール どっち": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hotelkeihan.co.jp/yotsuya/contact/",
+     "https://business-yukuhashi.com/contact/",
+     "https://www.hennnahotel.com/haneda/faq/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14211677869",
+     "https://omotenashi.work/column/accommodation-industry/49936",
+     "https://www.odekake-noto.com/guide/hotel-denwa-yoyaku-iikata/",
+     "https://us-kouroen.com/blog/hotel-phone-reservation-guide/",
+     "https://kawashimablog.com/?p=21445",
+     "https://colourfuls.hatenablog.com/entry/2025/07/11/073000",
+     "https://hotelier-no-tamago.com/booking/"
+    ],
+    "error": ""
+   }
+  },
+  "無連絡 宿泊 キャンセル どうなる": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ooedoonsen.jp/terms/transaction/",
+     "https://www.hotelmonterey.co.jp/page/yakkan.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tripla.io/media_column/hotel-no-show-prevention/",
+     "https://bengoshihoken.jp/articles/p2399/",
+     "https://uou.jp/hotel-cancel-itsukara/",
+     "https://jp.trip.com/guide/hotels/hotel-cancellation-fee.html",
+     "https://www.dyn.co.jp/column/column-doc-728/",
+     "https://office.vbest.jp/columns/general_civil/g_damages/3761/",
+     "https://ex-hotemane.com/mudancxl/hotel/",
+     "https://saiken-pro.com/columns/129/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://payn.io/articles/no-show",
+     "https://www.hotelsmart.jp/no-show/3591/",
+     "https://tripla.io/media_column/hotel-no-show-prevention/",
+     "https://noshow.jp/cancel_31/",
+     "https://cacco.co.jp/frauddetection/media/knowhow/21631/",
+     "https://smslink.nexway.co.jp/column/43"
+    ],
+    "error": ""
+   }
+  },
+  "旅館 人数変更 できる": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.laforet.co.jp/gora/faq/booking/",
+     "https://travel.faq.rakuten.net/detail/000039951"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://faq.jtb.co.jp/faqs/f4880/",
+     "https://travel-smp.faq.rakuten.net/detail/000039951",
+     "https://travel.faq.rakuten.net/detail/000003545",
+     "https://haute-hotel.com/rakuten-travel-ninzu-henkou/",
+     "https://www.mwt.co.jp/myado/faq.html",
+     "https://www.kasumi-kadoya.co.jp/blog/15584",
+     "https://omotenashi.work/column/accommodation-industry/10965",
+     "https://inthehotel.jp/magazine/hotelcancel/",
+     "https://faq.ikyu.com/app/answers/detail/a_id/1291/~/%E3%80%90%E5%9B%BD%E5%86%85%E5%AE%BF%E6%B3%8A%E3%80%91%E4%BA%88%E7%B4%84%E5%86%85%E5%AE%B9%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%9F%E3%81%84"
+    ],
+    "error": ""
+   }
+  },
+  "宿 キャンセル 体調不良 対応": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://travel.rakuten.co.jp/share/yoyaku_mail/about_cancel.html",
+     "https://coyamaris.jp/?cat=1",
+     "https://www.jalan.net/jalan/doc/howto/ryoukin.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2019_12.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hotelbank.jp/lifestyle/covid-hotel-cancellation-fee-rules/",
+     "https://omotenashi.work/column/accommodation-industry/24252",
+     "https://omotenashi.work/column/accommodation-industry/28721",
+     "https://omotenashi.work/column/accommodation-industry/10965",
+     "https://inthehotel.jp/magazine/hotelcancel/",
+     "https://jp.trip.com/guide/stay/hotel-same-day-cancellation.html",
+     "https://www.rocore.jp/hotel-cancellation-fee-not-charged-guide/",
+     "https://cacco.co.jp/frauddetection/media/for-consumers/21646/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://jp.trip.com/guide/stay/hotel-same-day-cancellation.html",
+     "https://inthehotel.jp/magazine/hotelcancel/",
+     "https://omotenashi.work/column/accommodation-industry/24252",
+     "https://innto.jp/column/post-1374/",
+     "https://rinablog.org/hotel-cancel-charge/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11196860981",
+     "https://www.access-trv.co.jp/2025-2462/",
+     "https://jp.trip.com/guide/hotels/hotel-cancellation-fee.html",
+     "https://omotenashi.work/column/accommodation-industry/24252",
+     "https://note.com/mana2518/n/n4dd61d38f428",
+     "https://www.yadoken.net/archives/column/hotel-cancellation-policy-guide",
+     "https://www.yadoken.net/archives/column/hotel-cancellation-policy-guide"
+    ],
+    "error": ""
+   }
+  },
+  "ホテル 予約確認 メール 届かない": {
+   "group": "キャンセル・予約の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://travel.faq.rakuten.net/detail/000004306",
+     "https://travel-smp.faq.rakuten.net/detail/000004409",
+     "https://www.booking.com/customer-service.ja.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://faq.jtb.co.jp/faqs/f5625/",
+     "https://travel-smp.faq.rakuten.net/detail/000003718",
+     "https://faq.ikyu.com/app/answers/detail/a_id/136/~/%E3%80%90%E4%BA%88%E7%B4%84%E5%85%A8%E8%88%AC%E3%80%91%E4%BA%88%E7%B4%84%E5%AE%8C%E4%BA%86%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%8C%E5%B1%8A%E3%81%8B%E3%81%AA%E3%81%84%E3%81%AE%E3%81%A7%E3%81%99%E3%81%8C%EF%BC%9F",
+     "https://faq-tour.jal.co.jp/app/answers/detail/a_id/29970/~/%E4%BA%88%E7%B4%84%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%8C%E5%B1%8A%E3%81%8D%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82",
+     "https://faq.ana-x.co.jp/faq/dom/web/knowledge1701.html",
+     "https://www.hotelmonterey.co.jp/news/395b77b14da629b.html",
+     "https://www.route-inn.co.jp/faq/",
+     "https://studiohotel.jp/contact/mail/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

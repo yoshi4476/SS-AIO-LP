@@ -1,13 +1,13 @@
 {
  "total": {
-  "clinic": 145,
-  "portal": 124,
-  "media": 92,
-  "review": 28,
-  "video": 10,
-  "maker": 65,
-  "public": 25,
-  "other": 8
+  "clinic": 198,
+  "portal": 166,
+  "media": 130,
+  "review": 32,
+  "other": 22,
+  "video": 18,
+  "maker": 82,
+  "public": 35
  },
  "by_engine": {
   "ChatGPT": {
@@ -29,109 +29,123 @@
    "maker": 50,
    "public": 11,
    "other": 4
+  },
+  "Gemini": {
+   "portal": 42,
+   "review": 4,
+   "other": 14,
+   "media": 38,
+   "video": 8,
+   "clinic": 53,
+   "public": 10,
+   "maker": 17
   }
  },
  "by_group": {
   "地域で探す": {
-   "clinic": 37,
-   "portal": 30,
-   "media": 16,
-   "review": 17,
-   "video": 1,
+   "clinic": 42,
+   "portal": 48,
+   "media": 23,
+   "review": 20,
+   "other": 4,
+   "video": 4,
    "maker": 1,
-   "public": 2
+   "public": 3
   },
   "ランチ": {
-   "portal": 16,
-   "media": 28,
-   "maker": 4,
-   "review": 5,
-   "video": 3,
-   "clinic": 20,
-   "other": 1
+   "portal": 20,
+   "media": 39,
+   "maker": 8,
+   "review": 6,
+   "video": 6,
+   "clinic": 23,
+   "other": 5
   },
   "個室・宴会": {
-   "portal": 41,
-   "clinic": 44,
+   "portal": 54,
+   "clinic": 61,
    "review": 3,
-   "maker": 9,
+   "media": 17,
+   "maker": 10,
    "video": 1,
-   "other": 4,
-   "media": 11
+   "other": 5
   },
   "予約・席": {
-   "maker": 25,
-   "portal": 29,
-   "clinic": 15,
-   "media": 25,
+   "maker": 30,
+   "portal": 32,
+   "clinic": 27,
+   "public": 5,
+   "media": 31,
    "review": 2,
-   "other": 1,
-   "public": 3,
+   "other": 3,
    "video": 4
   },
   "テイクアウト・アレルギー": {
-   "clinic": 29,
-   "other": 2,
-   "media": 12,
-   "maker": 26,
-   "portal": 8,
-   "public": 20,
-   "video": 1,
+   "clinic": 45,
+   "other": 5,
+   "media": 20,
+   "maker": 33,
+   "portal": 12,
+   "video": 3,
+   "public": 27,
    "review": 1
   }
  },
  "answered": {
   "ChatGPT": 50,
-  "Claude": 50
+  "Claude": 50,
+  "Gemini": 27
  },
  "has_clinic": {
   "ChatGPT": 30,
-  "Claude": 30
+  "Claude": 30,
+  "Gemini": 16
  },
  "sources": {
   "ChatGPT": 142,
-  "Claude": 355
+  "Claude": 355,
+  "Gemini": 186
  },
  "portal_top": [
   [
    "hotpepper.jp",
-   16
+   24
   ],
   [
    "restaurant.ikyu.com",
-   10
+   15
+  ],
+  [
+   "tabiiro.jp",
+   8
+  ],
+  [
+   "kaijosearch.com",
+   7
+  ],
+  [
+   "hitosara.com",
+   7
   ],
   [
    "rtrp.jp",
    6
   ],
   [
-   "hitosara.com",
+   "r.gnavi.co.jp",
    6
   ],
   [
-   "kaijosearch.com",
+   "gourmetplus.jp",
    5
-  ],
-  [
-   "tabiiro.jp",
-   5
-  ],
-  [
-   "r.gnavi.co.jp",
-   4
   ],
   [
    "r-reserve.com",
    4
   ],
   [
-   "gourmetplus.jp",
-   3
-  ],
-  [
-   "gochikuru.com",
-   3
+   "time-sharing.jp",
+   4
   ]
  ],
  "industry": "inshoku",
@@ -140,7 +154,8 @@
  "questions": 50,
  "engines": [
   "ChatGPT",
-  "Claude"
+  "Claude",
+  "Gemini"
  ],
  "groups": {
   "地域で探す": 10,
@@ -151,66 +166,67 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 100,
-   "clinic": 60,
-   "portal": 57,
-   "review": 20,
-   "media": 41,
-   "maker": 30,
-   "video": 8,
-   "public": 12,
-   "other": 8
+   "answers": 127,
+   "portal": 76,
+   "clinic": 76,
+   "review": 24,
+   "media": 59,
+   "other": 18,
+   "video": 16,
+   "maker": 40,
+   "public": 16
   },
   "地域で探す": {
-   "answers": 20,
-   "clinic": 13,
-   "portal": 12,
-   "review": 9,
-   "media": 9,
+   "answers": 27,
+   "portal": 19,
+   "clinic": 16,
+   "review": 12,
+   "media": 14,
+   "other": 4,
+   "video": 4,
    "maker": 1,
-   "video": 1,
-   "public": 2
+   "public": 3
   },
   "ランチ": {
-   "answers": 20,
-   "portal": 11,
-   "media": 12,
-   "review": 5,
-   "maker": 3,
-   "video": 2,
-   "clinic": 10,
-   "other": 1
+   "answers": 25,
+   "portal": 13,
+   "media": 16,
+   "maker": 5,
+   "review": 6,
+   "clinic": 12,
+   "video": 5,
+   "other": 4
   },
   "個室・宴会": {
-   "answers": 20,
+   "answers": 25,
+   "clinic": 19,
    "review": 3,
-   "clinic": 15,
-   "portal": 15,
-   "maker": 5,
-   "video": 1,
-   "other": 4,
-   "media": 4
+   "portal": 19,
+   "media": 8,
+   "maker": 6,
+   "other": 5,
+   "video": 1
   },
   "予約・席": {
-   "answers": 20,
-   "maker": 11,
-   "clinic": 9,
-   "portal": 14,
-   "media": 9,
+   "answers": 24,
+   "maker": 14,
+   "clinic": 12,
+   "portal": 17,
+   "media": 12,
+   "public": 3,
+   "other": 2,
    "review": 2,
-   "other": 1,
-   "public": 2,
    "video": 3
   },
   "テイクアウト・アレルギー": {
-   "answers": 20,
-   "other": 2,
-   "clinic": 13,
-   "media": 7,
-   "portal": 5,
-   "maker": 10,
-   "public": 8,
-   "video": 1,
+   "answers": 26,
+   "other": 3,
+   "clinic": 17,
+   "maker": 14,
+   "media": 9,
+   "portal": 8,
+   "video": 3,
+   "public": 10,
    "review": 1
   }
  }

@@ -1,0 +1,1763 @@
+{
+ "industry": "ec",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 ネットショップ おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://shop-551horai.co.jp/shop/default.aspx",
+     "https://shop.patisserie-gokan.co.jp/",
+     "https://www.osaka-gift.com/",
+     "https://www.marufuna-onlineshop.net/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHFIOunEWGyMAjGcenhG-OsLjS3Im3vfQdvke7BwIdjkIGq2lkfZI8_LEQtMUZuaophkAJMthBPEQ3JwlFFZu7WnFMM2EY1mN0OrNwHbPbl5F4=",
+     "https://www.pref.osaka.lg.jp/o120110/ryutai/osaka_mon/oosakamonotoriyose_07.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEqfPd-RfE4z2IvLnslPwuwYmAoZIeVuvGjM2BA4nIPPZ29fy8dyY8CwnwYmjJqZKV3ukb9ECWhMeZWqOd3D-gItFM26cRbFeyt5zNuZGHHhpo9SMMkiVBzf8ojztJJkVcxdK0JsvEV28dOHBr9RMmVAcznQvAqdrlB8qgDe1ux4U09jd02aw==",
+     "https://web.hh-online.jp/hankyu-food/blog/sweets/detail/002793.html",
+     "https://magazine.tabelog.com/articles/148288",
+     "https://web-kanji.com/posts/ec-site-osaka",
+     "https://ecnomikata.com/ecnews/ec_construction/38991/",
+     "https://ec-kanji.com/posts/ec-site-production-osaka"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/31471",
+     "https://netsuper.rakuten.co.jp/ohsakaya/",
+     "https://www.naniwa-ya.com/",
+     "https://connect-osaka.shop/",
+     "https://tabiiro.jp/otoriyose/ranking/kinki/osaka/",
+     "https://www.pref.osaka.lg.jp/o120110/ryutai/osaka_mon/oosakamonotoriyose_07.html",
+     "https://shop.e-manno.com/",
+     "https://takaocoffee.shop/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 通販 ギフト 人気": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.daimaru-matsuzakaya.jp/Ranking?cate=otoriyose_sweets_tokyo",
+     "https://shop.ginza-akebono.co.jp/",
+     "https://ginza-sembikiya.jp/",
+     "https://www.jr-plus.co.jp/ranking/2026/04/000698/",
+     "https://www.tokyobanana.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGB9rH7RCCa-z4HLwGMn0H31pmkxTaZ9PZ0vTOzP6nnUujOiV4ymZ8hwJ1eikg-LC78o_w67a2RxwG8W_4oaOj-bHeL748aiiW6Tp7G3XeSGZD60FNmbShrQ9LwMm9YN_tI8bgnsORGPQ4AlO0=",
+     "https://sucreyshopping.jp/",
+     "https://www.rakuten.ne.jp/gold/kioskgift/hanagataya/",
+     "https://www.mistore.jp/shopping/feature/foods_f2/miyage_feature27_f.html",
+     "https://waitingroom.mall.jreast.co.jp/?c=jreastmall&e=shoppingwaiting2504&ver=javascript-4.2.2&cver=106&man=Shopping_Prod_AC_Product_detail&cid=ja-JP&l=Shopping%20Theme20250120&enqueuetoken=eyJ0eXAiOiJRVDEiLCJlbmMiOiJBRVMyNTYiLCJpc3MiOjE3OTEwMjk4MDMyOTcsImV4cCI6MTc5MTAzMDA0MzI5NywidGkiOiJlZGUzZWJjOS02NzgwLTQxZmUtYjBlNi0yYjcxZmE3NDY4ZjEiLCJjIjoianJlYXN0bWFsbCIsImUiOiJzaG9wcGluZ3dhaXRpbmcyNTA0IiwiaXAiOiI1OS4xMzIuMTUwLjE4MyJ9.156hE8jJ4wv8VVuoU_LFpA.mCkfFW-l2gslkNNefOjyasqVXatXAY_CmnFAyyvHPo0&t=https%3A%2F%2Fshopping.jreast.co.jp%2Ffeature%2FF000-10245%2Ftokyomiyage&kupver=cloudfront-4.2.3",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGB9rH7RCCa-z4HLwGMn0H31pmkxTaZ9PZ0vTOzP6nnUujOiV4ymZ8hwJ1eikg-LC78o_w67a2RxwG8W_4oaOj-bHeL748aiiW6Tp7G3XeSGZD60FNmbShrQ9LwMm9YN_tI8bgnsORGPQ4AlO0=",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmOEKC4-g9dRWCBfSVVDNJ_le4TRdAlyzf98NOKv_DLHOsfurb9vjCm5m0ADocLAPPBvcjeH-0f3ydk2L57vVb4LeuhW0KtyTFWh3wCdFtzWkHrm7JFgKhnSreBgk5Vu7yt9HhBERNBHwV2nLm4rpt",
+     "https://www.daimaru-matsuzakaya.jp/otoriyose/sweets/tokyo/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFu2QF5yqsfqvXGx8gb7T6n5CDPBAL7YFCic61Q978n5ljM_9d3jZ80oVQMWaDc9Z2yk-AauIhkZEHiC-pOOCnBWL-p4y1WWZUguibiHgC62e294tUGrRRkaizvLRf1yAQpPfwXvw9ULtExqSQND_2Q",
+     "https://haneda-shopping.jp/shop/",
+     "https://shopping.yahoo.co.jp/ranking/keyword/?p=%E6%9D%B1%E4%BA%AC+%E5%9C%9F%E7%94%A3"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rurubu.jp/andmore/article/25074",
+     "https://prtimes.jp/main/html/rd/p/000000084.000037893.html",
+     "https://www.tokyoeki-1bangai.co.jp/tokyogiftpalette/special3/?cd=000002",
+     "https://shopping.jtb.co.jp/list/tokyo-omiyage/?category_id=tokyo-omiyage&category_type=8",
+     "https://shopping.yahoo.co.jp/ranking/keyword/?p=%E6%9D%B1%E4%BA%AC+%E3%82%AE%E3%83%95%E3%83%88",
+     "https://www.funliday.com/posts/tokyostation-recommend-souvenir/",
+     "https://www.funliday.com/posts/2026-tokyo-eki-omiyage/",
+     "https://pick-navi.com/ranking/%E6%9D%B1%E4%BA%AC%20%E5%9C%9F%E7%94%A3"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 ネット通販 地元 名産": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://shop.aoyagiuirou.co.jp/",
+     "https://www.aoyagiuirou.co.jp/products/uirou_youkan/",
+     "https://www.aoyagiuirou.co.jp/products/tsumeawase/tsumeawase_aoyagi_uirou/aoyagi_uirou_set_5/",
+     "https://yamamotoya.co.jp/shop/list/",
+     "https://shop.yabaton.jp/",
+     "https://www.bankaku.co.jp/shop/default.aspx/",
+     "https://aichinow.pref.aichi.jp/souvenirs/detail/31/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://market.jr-central.co.jp/shop/e/enagoya/",
+     "https://store.meitetsu-shouten.jp/",
+     "https://store.meitetsu-shouten.jp/",
+     "https://market.jr-central.co.jp/shop/e/enagoya/",
+     "https://www.daimaru-matsuzakaya.jp/otoriyose/sweets/nagoya/",
+     "https://www.daimaru-matsuzakaya.jp/otoriyose/sweets/nagoya/",
+     "https://shop.jr-takashimaya.co.jp/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE1b4_IHey1ibo--DEfJZecpVDWqgXe1WvM6Nka8dcrDypQQ_DOQL9_6vFoeg84bLDcbfS365EhklvhM_nEpLH--OoMEwqENcJSfa_VTelYA1d5MhLTV-l-QhEgk8HVht9cF8O38mSfB7OWLV4=",
+     "https://shopping.yahoo.co.jp/ranking/keyword/?p=%E5%90%8D%E5%8F%A4%E5%B1%8B+%E3%81%8A%E5%9C%9F%E7%94%A3",
+     "https://nagoyafrance.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tabiiro.jp/otoriyose/ranking/tokai/aichi/",
+     "https://shopping.jtb.co.jp/list/nagoya-omiyage/?category_id=nagoya-omiyage&category_type=8",
+     "https://tabiiro.jp/otoriyose/all/?kwd=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%90%8D%E7%89%A9",
+     "https://tabiiro.jp/otoriyose/all/?kwd=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9C%9F%E7%94%A3",
+     "https://www.otoriyose.net/ranking/area/304",
+     "https://www.amazon.co.jp/%E5%90%8D%E5%8F%A4%E5%B1%8B-%E3%81%8A%E5%9C%9F%E7%94%A3-%E3%81%8A%E5%8F%96%E3%82%8A%E5%AF%84%E3%81%9B/s?k=%E5%90%8D%E5%8F%A4%E5%B1%8B+%E3%81%8A%E5%9C%9F%E7%94%A3+%E3%81%8A%E5%8F%96%E3%82%8A%E5%AF%84%E3%81%9B",
+     "https://pmall.gpoint.co.jp/g-ranking/ranking.php?themeid=645",
+     "https://www.rakuten.co.jp/miyage-chaya/",
+     "https://www.omiyagepark.com/",
+     "https://trustcellar.com/media/articles/91"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 通販 お取り寄せ おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.fukuya.com/lp/ajinomentaiko/",
+     "https://www.motsunabeya.com/",
+     "https://www.meigetsudo.co.jp/ic/torimon",
+     "https://kasanoya.raku-uru.jp/",
+     "https://dazaifu.org/introduce/shop346/",
+     "https://www.daimaru-matsuzakaya.jp/Item?prod=20J340465"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://shopping.jtb.co.jp/list/fukuoka-omiyage/?category_id=fukuoka-omiyage&category_type=8",
+     "https://tabiiro.jp/otoriyose/kyushu/fukuoka/",
+     "https://shopping.jtb.co.jp/search/fukuoka",
+     "https://www.otoriyose.net/ranking/category/9/area/329",
+     "https://www.otoriyose.net/ranking/gift/174/area/329",
+     "https://www.fukuoka-online.jp/column/fukuoka-tsuuhanomiyage/",
+     "https://www.yokamon.jp/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 ネットショップ 海産物 通販": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sato-suisan.co.jp/shop/",
+     "https://www.kitanogurume.co.jp/gurumebin/",
+     "https://www.jyogaishijyo.com/通信販売の紹介"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sato-suisan.co.jp/",
+     "https://www.jyogaishijyo.com/%E9%80%9A%E4%BF%A1%E8%B2%A9%E5%A3%B2%E3%81%AE%E7%B4%B9%E4%BB%8B",
+     "https://www.gyoren.net/",
+     "https://shop.rebun.jp/",
+     "https://www.sato-suisan.co.jp/",
+     "https://www.gyoren.net/cp/ranking-special",
+     "https://www.kitanogurume.com/",
+     "https://www.uedabussan.co.jp/www/shop/",
+     "https://kitakuro.net/",
+     "https://ec.notosuisan.co.jp/",
+     "https://marudaiss.official.ec/",
+     "https://shop.hachikyo.com/",
+     "https://shop.hachikyo.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.uedabussan.co.jp/",
+     "https://www.sato-suisan.co.jp/shop/",
+     "https://www.sato-suisan.co.jp/",
+     "https://kk-sugiyama.co.jp/",
+     "https://www.suisanbazar.co.jp/",
+     "https://shop.rebun.jp/",
+     "https://otaru-yumeichiba.shop/",
+     "https://www.shunnosachi.jp/",
+     "https://www.taberare.com/c/category/seafood"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 通販 スイーツ ギフト": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://harbour-world.jp/double_marron/",
+     "https://www.ariake-estore.com/shopbrand/ariake",
+     "https://mutekiro.net/products/renga-6-1001001",
+     "https://mutekiro.net/",
+     "https://www.yokohama-jyubankan.co.jp/sweets/",
+     "https://yokohama-jyubankan.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://yokohama001goods.org/product/product-category/sweets/",
+     "https://shopping.yahoo.co.jp/ranking/keyword/?p=%E6%A8%AA%E6%B5%9C+%E3%81%8A%E5%9C%9F%E7%94%A3+%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84",
+     "https://www.welcome.city.yokohama.jp/gift/",
+     "https://search.kakaku.com/%E6%A8%AA%E6%B5%9C%20%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84%20%E3%81%8A%E5%8F%96%E3%82%8A%E5%AF%84%E3%81%9B/",
+     "https://search.rakuten.co.jp/search/mall/%E6%A8%AA%E6%B5%9C%E3%81%8A%E5%8F%96%E3%82%8A%E5%AF%84%E3%81%9B%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.otoriyose.net/ranking/category/120",
+     "https://food.biglobe.ne.jp/prefectures_kanto_kanagawa/scene_souvenir/feature_longevity/",
+     "https://search.kakaku.com/%E6%A8%AA%E6%B5%9C%20%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84%20%E3%81%8A%E5%8F%96%E3%82%8A%E5%AF%84%E3%81%9B/",
+     "https://search.rakuten.co.jp/search/mall/%E6%A8%AA%E6%B5%9C+%E3%81%8A%E8%8F%93%E5%AD%90/",
+     "https://food.biglobe.ne.jp/rankings/12164/",
+     "https://food.biglobe.ne.jp/rankings/24549/",
+     "https://shopping.yahoo.co.jp/ranking/keyword/?p=%E6%A8%AA%E6%B5%9C+%E3%81%8A%E5%9C%9F%E7%94%A3+%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84",
+     "https://search.rakuten.co.jp/search/mall/%E6%A8%AA%E6%B5%9C%E9%A7%85/551167/",
+     "https://item.rakuten.co.jp/hakurankan/c/0000000261/?l2-id=item_SP_RelatedCategory"
+    ],
+    "error": ""
+   }
+  },
+  "京都 ネットショップ 和雑貨 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://kurochiku.co.jp/",
+     "https://kurochiku.shop-pro.jp/",
+     "https://www.eirakuya.jp/",
+     "https://www.sousou.co.jp/ja-na",
+     "https://ayanokoji.jp/index.html",
+     "https://www.kyoto-pocchiri.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.izawaya.co.jp/",
+     "https://www.kazurasei.co.jp/f/wakomono",
+     "https://www.kazurasei.co.jp/f/wakomono",
+     "https://caede-kyoto.com/%E4%BA%AC%E9%83%BD%E3%81%AE%E5%92%8C%E9%9B%91%E8%B2%A8%E3%82%92%E6%89%B1%E3%81%86%E3%81%8A%E3%82%B9%E3%82%B9%E3%83%A1%E3%81%AE%E9%80%9A%E8%B2%A9/",
+     "https://www.tatsumura.co.jp/blog/kyoto_wafu_zakka/",
+     "https://kyoto-iwaishop.shop-pro.jp/",
+     "https://kyoto-iwaishop.shop-pro.jp/",
+     "https://souda-kyoto.jp/blog/01399.html",
+     "https://search.rakuten.co.jp/search/mall/%E4%BA%AC%E9%83%BD+%E5%92%8C%E9%9B%91%E8%B2%A8+%E3%81%8A%E3%81%99%E3%81%99%E3%82%81/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://4travel.jp/magazine/shopping/00076",
+     "https://media.kepco.co.jp/town-and-life/17772522",
+     "https://www.tatsumura.co.jp/blog/kyoto_wafu_zakka/",
+     "https://www.mapple.net/article/37945/",
+     "https://rtrp.jp/articles/8138/",
+     "https://map.goo.ne.jp/search/address/26/genre/03008008/",
+     "https://search.rakuten.co.jp/search/mall/%E4%BA%AC%E9%83%BD+%E9%9B%91%E8%B2%A8/",
+     "https://search.rakuten.co.jp/search/mall/%E4%BA%AC%E9%83%BD+%E5%92%8C%E9%9B%91%E8%B2%A8+%E3%81%8A%E3%81%99%E3%81%99%E3%82%81/",
+     "https://mise-colle.com/article/2026/02/19/%E4%BA%AC%E9%83%BD%E3%81%AE%E3%81%8A%E5%9C%9F%E7%94%A3%E9%9B%91%E8%B2%A8%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E3%81%A8%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0%EF%BD%9C%E9%99%90/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 通販 洋菓子 お取り寄せ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.frantz.jp/c/pudding/pudding-02-04",
+     "https://www.konigs-krone.shop/shopdetail/000000000504/",
+     "https://shop.morozoff.co.jp/c/region/kobe"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.otoriyose.net/ranking/category/121",
+     "https://penheur.online/special/kobe-sweets-gift/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGqGB-Ue3ItB8oGpJXSb_9xqqcwHfXcYHZU0cuX-ZfaydlDC1tOccBQNPBiD-lgxLUckDEmyMkJ-IW8KaYgidUWyFOx0qjEHaO6ZnGIx9Yb6SpG4CdansOjReLpctlFNQ52ktR-1g-6qBeZULyCNkVUhzqgrXXY0A==",
+     "https://shop.tsumagari.co.jp/page/shop/list.php?gid=tsumeawase"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.daimaru-matsuzakaya.jp/otoriyose/sweets/kobe/?cand=otoriyose_001",
+     "https://www.otoriyose.net/ranking/category/121",
+     "https://www.frantz.jp/",
+     "https://www.daimaru-matsuzakaya.jp/otoriyose/sweets/kobe/?cand=otoriyose_001&pricefo=5",
+     "https://kinarino.jp/cat4/42596",
+     "https://search.rakuten.co.jp/search/mall/%E7%A5%9E%E6%88%B8+%E3%81%8A%E8%8F%93%E5%AD%90/",
+     "https://www.factoryshin.com/",
+     "https://www.cbland-kobe.com/",
+     "https://oisii-hyakkaten.com/blogs/article/sweets-to-order-kobe"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 ネット通販 名物 お土産": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sanzen.co.jp/product/haginotsuki/index.html",
+     "https://www.shop.sanzen.co.jp/shop/default.aspx",
+     "https://www.shop.sanzen.co.jp/shop/c/c1010_sgn/",
+     "https://www.kikusuian.com/smp/list.php?mcat=68841&type=class",
+     "https://www.abekama.co.jp/shop",
+     "https://www.ec-shop.kisuke.co.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ec.miyagibussan.or.jp/",
+     "https://www.kanezaki.co.jp/blog/?p=135",
+     "https://3tz.jp/miyagi/",
+     "https://fujisaki-online.jp/goods/list.html?cid=tohoku-03&pnum=1",
+     "https://www.nta.co.jp/media/tripa/articles/5NSPE",
+     "https://www.shop.sanzen.co.jp/shop/c/c07/",
+     "https://www.kikusuian.com/SHOP/59981/list.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEX08idHXMG_Yq7KR-cXtTJXpqNjyBfRtcJm2cFgqlYoCSEjpsNS-of0MYeMMOObyTYu9mswcBt9PhPbU4FXcmqh-etLxrV6Y8Omb5fa6iZyjtH6XA-XW86JzYRWAQ6MLOzNGlRipN-2U9NCRo=",
+     "https://search.kakaku.com/%E4%BB%99%E5%8F%B0%20%E3%81%8A%E5%8F%96%E3%82%8A%E5%AF%84%E3%81%9B%20%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84/",
+     "https://sotokoto-online.jp/uncategorized/4934",
+     "https://www.shiraken.co.jp/contents/premium",
+     "https://search.kakaku.com/%E4%BB%99%E5%8F%B0%20%E8%90%A9%E3%81%AE%E6%9C%88/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sentabi.jp/features/64",
+     "https://s-style.machico.mu/pickup/9546",
+     "https://shopping.jtb.co.jp/list/miyagi/?category_id_d=miyagi&category_type_d=3",
+     "https://search.rakuten.co.jp/search/mall/%E4%BB%99%E5%8F%B0+%E3%81%8A%E5%9C%9F%E7%94%A3/",
+     "https://shopping.yahoo.co.jp/search/%E4%BB%99%E5%8F%B0+%E3%81%8A%E5%9C%9F%E7%94%A3/0/",
+     "https://travel.rakuten.co.jp/mytrip/howto/sendai-souvenir",
+     "https://ec.miyagibussan.or.jp/",
+     "https://www.travel.co.jp/guide/matome/295/",
+     "https://nlab.itmedia.co.jp/research/articles/3908359/",
+     "https://japan-wanderer.com/sendai-souvenir/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 ネットショップ 特産品 通販": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://dive-hiroshima.com/feature/tsushin-hanbai/",
+     "https://shop.tau-hiroshima.jp/",
+     "https://shop.yumeplaza.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://dive-hiroshima.com/feature/tsushin-hanbai/",
+     "https://shop.tau-hiroshima.jp/",
+     "https://shop.yumeplaza.com/",
+     "https://shop.yumeplaza.com/?mode=srh&keyword=repeat&sort=n",
+     "https://jahiroshima.or.jp/onlineshop/",
+     "https://hiroshima-gift.co.jp/",
+     "https://www.rakuten.co.jp/oishii-hiroshima/",
+     "https://www.hgurume.jp/",
+     "https://nisikido.net/",
+     "https://www.wagamachi-tokusan.jp/list.php?c_id=158",
+     "https://tabiiro.jp/otoriyose/ranking/saninsanyo/hiroshima/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.47club.jp/collections/a0050004",
+     "https://shop.fukuya-dept.co.jp/sp.html?fkey=sp_hiro",
+     "https://www.ja-town.com/shop/c/c6301/",
+     "https://www.ja-town.com/shop/e/eJA7994/",
+     "https://www.wagamachi-tokusan.jp/product_list/page-1?m_product_category_id=43",
+     "https://www.wagamachi-tokusan.jp/product_list/page-1?m_product_category_id=2213",
+     "https://shop.yumeplaza.com/?mode=f30",
+     "https://hiroshima-gift.co.jp/",
+     "https://shop.yumeplaza.com/"
+    ],
+    "error": ""
+   }
+  },
+  "ネットショップ 送料 相場": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.uniqlo.com/articles/Knowledge/100001985/",
+     "https://www.muji.com/jp/notice/delivery_charge_cost.html",
+     "https://clickpost.jp/",
+     "https://www.kuronekoyamato.co.jp/ytc/info/info_250501_1.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/miraikyoso/n/ncfb0920e7c2e",
+     "https://finner.co.jp/media/ec-shipping-strategy-guide/",
+     "https://ideac.co.jp/column/net-shop-postage/",
+     "https://stores.fun/magazine/articles/online-shop-shipping-cost-guide",
+     "https://shop-pro.jp/yomyom-colorme/72615",
+     "https://ecnomikata.com/blog/47268/",
+     "https://stores.fun/magazine/articles/online-shop-shipping-cost-guide",
+     "https://baseu.jp/18517",
+     "https://www.lancers.jp/c/ec/ec-knowhow/1755/",
+     "https://stockcrew.co.jp/insights/ec-postage",
+     "https://stockcrew.co.jp/insights/ec-postage",
+     "https://blog.shipandco.com/ec-shipping-rate/",
+     "https://fukuoka-ecsite.co.jp/blog/ai/ec-site-shipping-cost-strategy/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.cyber-records.co.jp/ec-shippingfee-cost/",
+     "https://www.netshop7.com/unei/souryou-ichiritsu/",
+     "https://baseu.jp/18517",
+     "https://officialmag.stores.jp/entry/kaigyo/souryou-kimekata",
+     "https://www.marumotonet.jp/page/20220725",
+     "https://ideac.co.jp/column/net-shop-postage/",
+     "https://www.lancers.jp/c/ec/ec-knowhow/1755/",
+     "https://jp-news.mercari.com/contents/13194",
+     "https://stores.fun/magazine/articles/online-shop-shipping-cost-guide",
+     "https://note.com/miraikyoso/n/ncfb0920e7c2e",
+     "https://generalasahi.co.jp/cd/ec/column/free-shipping-threshold-optimize-average-order/",
+     "https://www.rakuten.co.jp/ec/start/howto_shippingcosts/"
+    ],
+    "error": ""
+   }
+  },
+  "送料無料 条件 いくらから": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://event.rakuten.co.jp/guide/freeshippingline/?scid=we_twt_upc2214"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://pulmo.jp/14219/",
+     "https://macaro-ni.jp/156857",
+     "https://event.rakuten.co.jp/guide/freeshippingline/",
+     "https://hubmedia.co.jp/ec/rakuten/rakuten-free-shipping-guide/",
+     "https://faq.uniqlo.com/articles/faq/100001985",
+     "https://faq.gu-global.com/articles/FAQ/100001895/",
+     "https://faq.uniqlo.com/articles/FAQ/100004118",
+     "https://www.tsuhannews.jp/news/detail/60622"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pulmo.jp/14219/",
+     "https://news.mynavi.jp/article/20230315-2626934/",
+     "https://note.com/totocom/n/nf37195cd2004",
+     "https://macaro-ni.jp/156857",
+     "https://lifestyle.assist-all.co.jp/amazon-free-shipping-rules-summary/",
+     "https://deepreview.hatenablog.com/entry/2026/05/18/171636"
+    ],
+    "error": ""
+   }
+  },
+  "通販 送料 安く抑える 方法": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://event.rakuten.co.jp/guide/freeshippingline/",
+     "https://www.post.japanpost.jp/service/send/domestic/delivery/clickpost/",
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/search/payment/discount/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pickgo.town/blog/send-package-cheap",
+     "https://jp-news.mercari.com/contents/1882",
+     "https://stores.fun/magazine/articles/online-shop-shipping-cost-guide",
+     "https://art-trading.co.jp/ec-management/ec-postage/",
+     "https://shop-pro.jp/yomyom-colorme/72615",
+     "https://jp-news.mercari.com/contents/6870",
+     "https://www.kamiyashouten.com/column/ec%E7%89%A9%E6%B5%81/souryouosaeru/",
+     "https://www.netshop7.com/unei/butsu/",
+     "https://app-tatsujin.com/yahoo-furima-shipping-options-2026-spring/",
+     "https://baseu.jp/18517",
+     "https://ul-logi.jp/blog/logistics/ec-delivery-fee/",
+     "https://minimalist-fudeko.com/avoid-free-shipping-traps/",
+     "https://nippon.jp/online-shopping-cost/",
+     "https://www.fulloutsourcing.jp/marketing-blog/shipping/",
+     "https://www.shigeta-ex.com/c-souryou-muryou/",
+     "https://www.marumotonet.jp/page/20220725"
+    ],
+    "error": ""
+   }
+  },
+  "ネット通販 配送日数 目安": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://www.askul.co.jp/guide/knowledge/delivery.html",
+     "https://faq.muji.com/--656d4e411c58e70026d3c3a2",
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/services/",
+     "https://www.faq.nitori-net.jp/question/01j61vs8v8g9r03jj0gy356w7b"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://faq.muji.com/%E3%81%8A%E5%B1%8A%E3%81%91%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E6%97%A5%E6%95%B0-656d4e411c58e70026d3c3a2",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1171521731",
+     "https://faq.matsukiyococokara-online.com/kb/article/%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%82%A2%E3%81%A7%E6%B3%A8%E6%96%87%E3%81%97%E3%81%9F%E5%95%86%E5%93%81%E3%81%8C%E5%B1%8A%E3%81%8F%E3%81%BE%E3%81%A7%E3%81%AE%E6%97%A5%E6%95%B0%E3%81%AE%E7%9B%AE%E5%AE%89%E3%81%8C%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82/",
+     "https://shop-pro.jp/yomyom-colorme/98309"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://faq.gu-global.com/articles/FAQ/100004737/",
+     "https://faq.muji.com/%E3%81%8A%E5%B1%8A%E3%81%91%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E6%97%A5%E6%95%B0-656d4e411c58e70026d3c3a2",
+     "https://support.nissen.co.jp/hc/ja/articles/4781029612702--%E8%B3%BC%E5%85%A5%E5%89%8D-%E5%95%86%E5%93%81%E3%81%AF%E4%BD%95%E6%97%A5%E3%81%A7%E5%B1%8A%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B"
+    ],
+    "error": ""
+   }
+  },
+  "お届け日 指定 できる 通販": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://www.aboutamazon.jp/news/activities-of-amazon-japan/amazon-japans-logistics-operation-innovation-for-customers-drivers-and-delivery-partners",
+     "https://www.faq.nitori-net.jp/question/01j2bp8c97kgxbj6e7ah42cx0t",
+     "https://customer.cainz.com/support/faq/0000000056/0000000081/000001381",
+     "https://www.bellcosme.com/Guide/Delivery"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pulmo.jp/15260/",
+     "https://news.mynavi.jp/article/20211117-2191233/",
+     "https://books.faq.rakuten.net/s/article/000016033",
+     "https://officialmag.stores.jp/entry/delivery_date_time",
+     "https://faq.stores.jp/hc/ja/articles/28064522852889--%E9%85%8D%E9%80%81%E6%97%A5%E6%8C%87%E5%AE%9A-%E9%85%8D%E9%80%81%E6%97%A5%E6%8C%87%E5%AE%9A%E3%81%AE%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84",
+     "https://help.shop-pro.jp/hc/ja/articles/1500003332442-%E3%81%8A%E5%B1%8A%E3%81%91%E6%97%A5%E6%99%82%E8%A8%AD%E5%AE%9A%E3%81%A8%E3%81%AF",
+     "https://www.graphic.jp/customer/faq/answer/100354",
+     "https://www.graphic.jp/customer/faq/answer/100118",
+     "https://support.kanademono.design/support/solutions/articles/64000264196-%E9%85%8D%E9%80%81%E6%97%A5%E3%81%AE%E6%8C%87%E5%AE%9A%E3%81%AF%E4%BD%95%E3%83%B6%E6%9C%88%E5%85%88%E3%81%BE%E3%81%A7%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B-",
+     "https://shop-list.com/svc/faq/FaqDetail/?inquiryCategoryId=2802"
+    ],
+    "error": ""
+   }
+  },
+  "通販 送料 地域別 違い": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kuronekoyamato.co.jp/ytc/search/estimate/ichiran.html",
+     "https://help.shopserve.jp/manual/066/",
+     "https://event.rakuten.co.jp/guide/freeshippingline/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10322255340",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13206617453",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1410217179",
+     "https://goro3net.hatenablog.com/entry/2025/04/13/000000",
+     "https://togetter.com/li/1332176",
+     "https://customer.cainz.com/support/faq/0000000056/0000000127/000001587",
+     "https://www.shopjapan.co.jp/guide/ship/",
+     "https://www.rakuten.ne.jp/gold/i-office1/info/template/d-price.html",
+     "https://awazuyan.buyshop.jp/items/69673147",
+     "https://www.harimonya.com/%E3%81%8A%E8%B2%B7%E7%89%A9%E3%82%AC%E3%82%A4%E3%83%89/%E5%8C%97%E6%B5%B7%E9%81%93-%E6%B2%96%E7%B8%84-%E9%9B%A2%E5%B3%B6%E5%90%91%E3%81%91%E5%B7%AE%E9%A1%8D%E9%80%81%E6%96%99/"
+    ],
+    "error": ""
+   }
+  },
+  "ネットショップ 選び方 送料 比較": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://ichiba.faq.rakuten.net/detail/000013788?From=Search",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://www.ccj.kokusen.go.jp/aksht_tuhn"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.benikomachi.jp/gourmet/netsuper",
+     "https://coetas.jp/shokuzaitakuhai/5104/",
+     "https://www.nokitishop.jp/column/netsuper-osusume/",
+     "https://qo-renrakukai.jp/magazine/net-supermarket/",
+     "https://tendo-turukame.com/gourmet/netsuper-osusume/",
+     "https://officialmag.stores.jp/entry/kaigyo/souryou-kimekata",
+     "https://stores.fun/magazine/articles/online-shop-shipping-cost-guide",
+     "https://www.marumotonet.jp/page/20220725",
+     "https://baseu.jp/18517",
+     "https://exidea.co.jp/blog/meal/net-super/free-shipping/",
+     "https://shop-pro.jp/yomyom-colorme/72615",
+     "https://www.fulloutsourcing.jp/marketing-blog/shipping/",
+     "https://ec.system-team.jp/news/shipping-cost/",
+     "https://ideac.co.jp/column/net-shop-postage/"
+    ],
+    "error": ""
+   }
+  },
+  "宅配便 通販 追跡 方法": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://ichiba.faq.rakuten.net/detail/000006957",
+     "https://toi.kuronekoyamato.co.jp/cgi-bin/tneko?vm=r",
+     "https://www.sagawa-exp.co.jp/contact/?vm=r",
+     "https://trackings.post.japanpost.jp/services/srv/search/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.post.japanpost.jp/receive/tracking/",
+     "https://www.sagawa-exp.co.jp/howto-search/",
+     "https://www.sagawa-exp.co.jp/send/howto-search.html",
+     "https://www.putiputi.jp/blog/column/2304_tracking/",
+     "https://www.aussie-fan.co.jp/food-logistics/dictionary/1141",
+     "https://3min-lib.com/yamato-home-delivery-trakking/",
+     "https://www.benricho.org/G_Gadgets/takuhai_search.html",
+     "https://keihaisou-tgrandir.com/media/20251112/"
+    ],
+    "error": ""
+   }
+  },
+  "注文 後 配送 遅い 理由": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://books.faq.rakuten.net/s/article/000015992?scid=su_7066",
+     "https://ichiba-smp.faq.rakuten.net/detail/000039192",
+     "https://faq-en.kuronekoyamato.co.jp/app/answers/detail/a_id/6356/~/the-status-of-my-parcel-shows-%E2%80%9Cout-for-delivery%E2%80%9D.-when-will-my-parcel-be",
+     "https://faq.kuronekoyamato.co.jp/app/answers/detail/a_id/3887/",
+     "https://ichiba.faq.rakuten.net/detail/000006854"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sellercentral.amazon.co.jp/seller-forums/discussions/t/176ebae4-3e80-4660-bb40-693b53ce7519",
+     "https://appllio.com/amazon-ship-delay-trouble-shooting",
+     "https://sumaholife-plus.jp/life/25778/",
+     "https://sumaholife-plus.jp/life/1113/",
+     "https://eresa.jp/en/column/amazon/amazon-delivery-lazy/",
+     "https://note.com/hukugyouotaku/n/nc5d9f225ce8a",
+     "https://lifestyle.assist-all.co.jp/amazon-delivery-delay-causes-solutions-examples/",
+     "https://www.tomucho.com/amazon-chuumon-zumi-susuma-nai-ugokanai/",
+     "https://kyolog.net/amazon-tien/"
+    ],
+    "error": ""
+   }
+  },
+  "通販 離島 送料 追加 費用": {
+   "group": "送料・配送",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sagawa-exp.co.jp/fare/faretable04.html?TARGET=new",
+     "https://www.aming.co.jp/f/ritouprice",
+     "https://www.post.japanpost.jp/question/565.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen509.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.aming.co.jp/f/ritouprice",
+     "https://www.rakuten.ne.jp/gold/american-street-style/transit.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1411751554",
+     "https://nyanlogwave.com/ritou-yamato-sagawa/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11301731891",
+     "https://www.post.japanpost.jp/question/565.html",
+     "https://heart-organic-plus.jp/backnumber.cgi?id=67",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEv5HTDQ77Y4N5ndGViOFZUbh3oWVHV_SSYDSTBCDZMvF1gOdV6pCVyQYJH4V7zxA2SqvbpLttK3wBscZuxnkk2SQJHkgAjuX6632x46GJp-ej1nIaax-2KRmsAfVfAC_pbVsez4sI-eCYsSAV8TJzBx-HUdOzgiQOa01PjG3HNScjyd-kk-ZG1lWEj-nZIrQ8dlBjsj8IncuChJFQxJUbuI5H6_rFKbaTgri7pcGm65nXY_EFmKJ5sl7l-LGdjv0s5n6FZd3Gy81RTpYqzxVUgAU9-uluGYlzlE4SVyOSpbcIGCzEcItv5wC-K38eeFynyOrr3wGnhCcYLwoeZxA96R2M4kL09yg4RhRU9iA3J3gDEybEW_88SdUHRcXprV02oDbGb0w1xdVbsxzWHImg=",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHbEB_tP7HMykHpqJMU_YhMT-IHcNkrjS5_YCb8NchL2qe4Y4EThvk11hy0biDWK9aTal3WB3jBkKmxjN5olPZdlUTxHtheI73dvJucQw8ccifJSZ-84CFzAUlLfCRzM5AAm5hQBy0hJfmN225Enl3FLJIAkRQO5cwFMM5zfKL0ZTFEUsXSLsbbcMWghufSbsMZMZnysekm7KwYzyeUR7w8MZyojXJZluPOQwEr9Es6MSQU88crlFG-unpc4z_y3K2YNR7js_e77bxtU-YIjlCGdeV8PL2dHTvn6227LA6qPB0X1Yw8C7dXCtaT2OeWwJkX97RTe2bgjdFFeqfIvyPU4_i7O9n0ODCMiGhKRMfqR7PIvg_Q9nan9GWl0ZOkUR3AMTSFbfW0Fpfqm0rO3XD6"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://shop.mizujin.co.jp/pages/ritou",
+     "https://www.future-shop.jp/function/delivery/Add-costs-to-remote-islands.html",
+     "https://www.autoway.co.jp/asp/photo/auction/page/isolate_charge/",
+     "https://www.shimbi.jp/items/78432043",
+     "https://shopping.geocities.jp/coyoli/soryo/20191014_soryo.html",
+     "https://itisueke.base.ec/items/60914132",
+     "https://teisan-shima-life.com/net-shopping-tip/",
+     "https://www.kinokoto.net/items/38618482",
+     "https://sumuu.base.shop/items/66960925"
+    ],
+    "error": ""
+   }
+  },
+  "ネット通販 返品 方法": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://www.cht.kokusen.go.jp/ja/faq/000015.html",
+     "https://ichiba.faq.rakuten.net/detail/000007019",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kyushu.meti.go.jp/seisaku/shohisya/oshirase/241023_1.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://recustomer.me/blog/period",
+     "https://financial-field.com/living/entry-174613",
+     "https://sonettique.com/2026/07/15/netshop-returns/",
+     "https://ecnavi.henpin.co/2025/06/14/post-1089/",
+     "https://office-h-yamazaki.com/archives/876",
+     "https://yokohama-city-news.com/blog/mailorder-coolingoff-return-rule/",
+     "https://dprofessions.co.jp/%E5%BC%81%E8%AD%B7%E5%A3%AB/%E6%B6%88%E8%B2%BB%E8%80%85%E8%A2%AB%E5%AE%B3/%E3%82%AF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%AA%E3%83%95/%E3%83%8D%E3%83%83%E3%83%88%E9%80%9A%E8%B2%A9%E3%81%AE%E3%82%AF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%AA%E3%83%95%E3%81%AE%E5%8F%AF%E5%90%A6/"
+    ],
+    "error": ""
+   }
+  },
+  "通販 返品 送料 負担 どっち": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_20.html",
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/center/kyoiku/web/kou03/documents/shidousho_h26_03.pdf",
+     "https://www.no-trouble.caa.go.jp/qa/advertising.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://logishift.net/glossary/%E8%BF%94%E5%93%81%E9%80%81%E6%96%99/",
+     "https://helpfeel.com/ya-man-faq/%E8%BF%94%E5%93%81%E6%99%82%E3%81%AE%E9%80%81%E6%96%99%E3%81%AF%E3%81%A9%E3%81%A1%E3%82%89%E3%81%8C%E8%B2%A0%E6%8B%85%E3%81%97%E3%81%BE%E3%81%99%E3%81%8B%EF%BC%9F-68955f5e200bf5f0b594d0f5",
+     "https://bakuage.co/column/return-shipping-cost/",
+     "https://news.mynavi.jp/article/20210309-1748212/",
+     "https://www.commercepick.com/archives/39040",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1010438740",
+     "https://kensei-law.jp/yourbestlawyer/case/post-5317/",
+     "https://squareup.com/jp/ja/townsquare/online-store-shipping-cost",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12119611587",
+     "https://netshop.impress.co.jp/node/11249",
+     "https://mbp-japan.com/tokyo/wakailaw/column/5234078/",
+     "https://logishift.net/glossary/%E8%BF%94%E5%93%81%E9%80%81%E6%96%99/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kyushu.meti.go.jp/seisaku/shohisya/oshirase/241023_1.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://www.no-trouble.caa.go.jp/pdf/20080601sp04.pdf",
+     "https://www.caa.go.jp/policies/policy/consumer_transaction/amendment/2012/pdf/130220legal_6.pdf",
+     "https://ecnavi.henpin.co/2025/09/21/post-1415/",
+     "https://logishift.net/glossary/%E8%BF%94%E5%93%81%E9%80%81%E6%96%99/"
+    ],
+    "error": ""
+   }
+  },
+  "ネットショップ 返品 期限 目安": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://www.biccamera.com/bc/c/info/support/bad.jsp",
+     "https://www.nissen.co.jp/userguide/a_cancel/?navi=foot_917_007",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_20.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://recustomer.me/blog/period",
+     "https://arekoreshop.com/lp/blog/009/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHR1_3ddTeIpgsreRPaVD1iaHnucNCBVedCYT7QS8XljilYFvQdeBC7OMUyoE92EkLz2hVTqDWAOM2RyE6-dUN9APQ450h7kYt_5mveVkTNn5eSNt6RczxbMczP6GLyVwLacUaG4IMMc1gfFsN82ZWWPbSWAaz3L7erAwM=",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://asahigodo.jp/legal-issue/%E9%80%9A%E4%BF%A1%E8%B2%A9%E5%A3%B2%E3%81%AE%E8%BF%94%E5%93%81%E6%A8%A9/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHbJ9ECJGxVE47xFObwNDI4cZsOeCETzeYgk_Ilbq2NUT_4fCBcZY84w2ymtP169jAYfthwt10Mjan_BJXWZSyhYOLNyB7a-3qWJxVNjo4t5hChorjlrXF8jtVOJfWIMmBBShyR",
+     "https://pathcrie.co.jp/column/detail.php?id=returns-accepted-251021",
+     "https://www.commerce-robo.com/column/20260407/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kigyobengo.com/blog/1678",
+     "https://www.no-trouble.caa.go.jp/case/mailorder/case01.html",
+     "https://kensei-law.jp/yourbestlawyer/case/post-5317/",
+     "https://sonettique.com/2026/07/15/netshop-returns/",
+     "https://recustomer.me/blog/period",
+     "https://ecnavi.henpin.co/2025/06/14/post-1089/",
+     "https://webtan.impress.co.jp/e/2009/11/03/6805"
+    ],
+    "error": ""
+   }
+  },
+  "届いた 商品 違う 交換 手続き": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://ichiba-smp.faq.rakuten.net/detail/000002933",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_20.html",
+     "https://www.caa.go.jp/policies/policy/consumer_education/public_awareness/teaching_material/material_010/assets/material_010_teacher_221013_0001.pdf",
+     "https://www.faq.kokusen.go.jp/faq/show/56?site_domain=default"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://support.yahoo-net.jp/SccPaypayfleamarket/s/article/H000011706",
+     "https://support.yahoo-net.jp/PccShopping/s/article/H000005955",
+     "https://help.jp.mercari.com/guide/articles/55/",
+     "https://studio-puff.jp/6609/",
+     "https://nonbirikimama.com/returns-and-exchanges-at-amazon/",
+     "https://koke-momo.net/amazon-exchange/"
+    ],
+    "error": ""
+   }
+  },
+  "通販 キャンセル いつまで できる": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://www.kokusen.go.jp/pdf_dl/wko/wko-202310.pdf",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/center/kyoiku/web/kou05/assets/data/kaisetsu_4_3.pdf",
+     "https://univis-law.com/glossary/return-policy/",
+     "https://www.no-trouble.caa.go.jp/case/mailorder/case01.html",
+     "https://www.kokusen.go.jp/wko/pdf/wko-202310_11.pdf",
+     "https://yanagisawa-lawoffice.com/specified-commercial-transactions-act-ec-display/",
+     "https://kensei-law.jp/yourbestlawyer/case/post-5317/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kokusen.go.jp/wko/pdf/wko-202310_11.pdf",
+     "https://contents.online.nojima.co.jp/guide/cancel/",
+     "https://www.bengo4.com/c_23/n_293/",
+     "https://www.kottolaw.com/column/000034.html",
+     "https://note.com/k_navi_support/n/ndead32dae917",
+     "https://www.saitama-bengoshi.com/oyakudachi/20230411-8/",
+     "https://www.kyushu.meti.go.jp/seisaku/shohisya/oshirase/241023_1.html",
+     "https://news.mynavi.jp/article/houritsumoney-9/",
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/center/kyoiku/web/kou05/assets/data/kaisetsu_4_3.pdf",
+     "https://www.no-trouble.caa.go.jp/case/mailorder/case01.html",
+     "https://noshow.jp/cancel_37/"
+    ],
+    "error": ""
+   }
+  },
+  "ネット通販 返金 いつ 振り込み": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://ichiba.faq.rakuten.net/detail/000030987",
+     "https://www.bichiku.metro.tokyo.lg.jp/ecqa/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.cr.mufg.jp/mycard/relief/20112/index.html",
+     "https://www.warau.jp/style/article/amazon-return-opened/",
+     "https://note.com/deal_magazine/n/nc215fe6eaa9e",
+     "https://jalcard.jal.co.jp/column/creditcard/refund2201/",
+     "https://www.lifecard.co.jp/media/knowledge/column-0018.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQExu3JS7cz1-CjD7h3j4qXeI9rA1we77JF_zusWWXDcfFj17Oa04pCvUNgYaEZ8d42wXxaQCJipNUhWfGuL3XUJ32UcoBQT5pc3TO6u-Zgf3LoN4sqAbyh8JO-MniQGbRd_ApytG907SHmS7rJ45HdL4ICQxfXgvGF_6FBtW8M=",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14323520249",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1452516924",
+     "https://www.jcb.co.jp/ordercard/special/refund.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmSBd3aC3gGQ2xxfvD4nEg3hUuiecOqa5kQ0MwuLu-tGH54pb3Ml9Vr3wO9lS-QG8-4c7HrP7GZmxJd3knNqrRC14DjFXp6O82gnsYLgpExgj89ed5-0-vBufXfKzZ7okuQK6ShMJQ3a_yzUtbiUzU8fdgWc2srg=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.cr.mufg.jp/mycard/relief/20112/index.html",
+     "https://pay-route.co.jp/article/2026/03/11/when-will-debit-card-refunds-return-explanation-of-delays-and-bank-guidelines/",
+     "https://faq.gu-global.com/articles/FAQ/1000006307/",
+     "https://j-faq.jcb.co.jp/faq/show/454?site_domain=default",
+     "https://help.jp.mercari.com/guide/articles/467/",
+     "https://help.7net.omni7.jp/hc/ja/articles/5471884916879-%E5%95%86%E5%93%81%E3%82%92%E8%BF%94%E5%93%81%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88-%E8%BF%94%E9%87%91%E6%99%82%E6%9C%9F%E3%82%92%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84",
+     "https://faq.smbc-gp.co.jp/s/article/F00630",
+     "https://norimono-jyoho.com/amazoncashback/",
+     "https://community.shopify.com/t/topic/375199",
+     "https://www.spool.co.jp/service/logi/fulfillment/refunds/",
+     "https://www.faq.nitori-net.jp/question/01j2bmhr5z6vjcd8j5pmcjzrdx",
+     "https://sellercentral.amazon.co.jp/seller-forums/discussions/t/657f98e96cb9cf3e254ee54e80e354d9",
+     "https://sellercentral-japan.amazon.com/seller-forums/discussions/t/657f98e96cb9cf3e254ee54e80e354d9",
+     "https://ichiba-smp.faq.rakuten.net/detail/000010451",
+     "https://buzztter.co.jp/urutike/amazon-repayment-gift-4709",
+     "https://giftgrace.jp/blog/article/354"
+    ],
+    "error": ""
+   }
+  },
+  "通販 返品 できない もの": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nissen.co.jp/userguide/a_cancel/",
+     "https://support.nissen.co.jp/hc/ja/articles/4781048736798?faqno=W0622&logid=912758155",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_20.html",
+     "https://www.caa.go.jp/policies/policy/consumer_education/public_awareness/teaching_material/material_010/assets/material_010_teacher_221013_0001.pdf",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://office-h-yamazaki.com/archives/876",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGPb3nNT7nMhKSU30GGTf25PzD02oXxNx4_CaF3wBkgzSZcH3NgrU9jdZnRwNIcQR9EYVonHmkGNs7jRDr9-TuIiAOj1VGrI_ZDMnwRnywpawfCsoFbX5DsE4ssefcXdubxLPRpGMYIkiEjs-bx8dPgfA==",
+     "https://okamoto-saiken.com/shouhisha-trouble/%E3%83%8D%E3%83%83%E3%83%88%E8%B2%A9%E5%A3%B2%E3%81%A7%E8%BF%94%E5%93%81%E4%B8%8D%E5%8F%AF%E3%81%AB%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AE%E8%A8%98%E8%BC%89%E3%81%AE%E4%BB%95%E6%96%B9/",
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/center/kyoiku/web/kou05/assets/data/kaisetsu_4_3.pdf",
+     "https://kensei-law.jp/yourbestlawyer/case/post-5317/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://mikata-ins.co.jp/lab/legal/022825/",
+     "https://www.city.ota.tokyo.jp/seikatsu/manabu/s_center/syouhisyasodan/kuringuohu.html",
+     "https://office.vbest.jp/columns/general_civil/g_lp_indi/6294/",
+     "https://plugy.jp/guides/egov-law-cooling-off",
+     "https://tetsuzuki-planner.jp/plan/cooling-off-guide",
+     "https://note.com/k_navi_support/n/ndead32dae917",
+     "https://enjin-classaction.com/column/detail/?columnId=626&category=scam",
+     "https://services.awaisora.com/2026/05/28/2feabbb9-ff8b-42f0-b55c-05711233fa83/",
+     "https://ec-genba-memo.com/articles/tsuhan-cooling-off/",
+     "https://www.city.chuo.lg.jp/a0012/syohisikatsu/20240118.html",
+     "https://www.no-trouble.caa.go.jp/case/mailorder/case01.html",
+     "https://jadma.or.jp/contents/blog/case_return",
+     "https://www.kyushu.meti.go.jp/seisaku/shohisya/oshirase/241023_1.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://shop-pro.jp/yomyom-colorme/64733",
+     "https://recustomer.me/blog/period",
+     "https://office-h-yamazaki.com/archives/876",
+     "https://sonettique.com/2026/07/15/netshop-returns/"
+    ],
+    "error": ""
+   }
+  },
+  "ネットショップ 選び方 返品 条件": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://www.ccj.kokusen.go.jp/aksht_kikk",
+     "https://www.no-trouble.caa.go.jp/what/mailorder/advertising.php",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_20.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/center/kyoiku/web/kou05/assets/data/kaisetsu_4_3.pdf",
+     "https://office-h-yamazaki.com/archives/876",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTlfIDeWjAJY1Cbc6qW2yn9TmKsaVwG1OYOiHjUVf8SEA27JXN7F-7hMRz0Iee7jVrQ40VX1EQP2_4nMzvDrT5vqQd3NYG3Ery2hdIOf7YgYA0Myd3l2xCy131J1nsUIpiyF7oiMB1xFlgAg==",
+     "https://univis-law.com/glossary/return-policy/",
+     "https://kensei-law.jp/yourbestlawyer/case/post-5317/",
+     "https://ecnetwork.jp/about/about_f/about_f5/shittoku14/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGgS6imx2ujGVKLZY70pTauK0rOEPluP8QEMsVjWd8aLhxwT0Q85fW_YnrD0VxxCs98xIYhVqSMUzl5z-mAG6lqj5G2I123OJX8FbKvZJJfoB6CJ2yP1NhqM7OvXEFI-z0zkMHaP14="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.no-trouble.caa.go.jp/case/mailorder/case01.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html",
+     "https://www.city.chuo.lg.jp/a0012/syohisikatsu/20240118.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://sonettique.com/2026/07/15/netshop-returns/",
+     "https://recustomer.me/blog/period"
+    ],
+    "error": ""
+   }
+  },
+  "通販 サイズ 合わない 交換 費用": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://faq.uniqlo.com/articles/Knowledge/100006221/",
+     "https://www.uniqlo.com/jp/ja/services/exchange/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://store.world.co.jp/help/wos/guide07.html",
+     "https://www.abc-mart.net/shop/pages/guide_order_return.aspx",
+     "https://sesto.jp/f/change",
+     "https://store.wacoal.jp/rf/guide/guide09.html",
+     "https://dreamvs.jp/pages/guide_returned",
+     "https://eczine.jp/article/detail/10113",
+     "https://www.caa.go.jp/policies/policy/consumer_transaction/amendment/2012/pdf/130220legal_6.pdf",
+     "https://ecnavi.henpin.co/2025/09/21/post-1415/"
+    ],
+    "error": ""
+   }
+  },
+  "ネット通販 不良品 対応 問い合わせ": {
+   "group": "返品・交換",
+   "ChatGPT": {
+    "urls": [
+     "https://www.no-trouble.caa.go.jp/qa/advertising.html",
+     "https://www.faq.kokusen.go.jp/faq/show/64?site_domain=default"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.faq.kokusen.go.jp/category/show/23?site_domain=default",
+     "https://www.faq.kokusen.go.jp/faq/show/939?site_domain=default",
+     "https://www.kokusen.go.jp/news/data/n-20250521_2.html",
+     "https://tokusengai.com/_ct/17383802",
+     "https://www.sofmap.com/contents/?id=service&sid=failure",
+     "https://www.akiba-r.com/guide/failure/"
+    ],
+    "error": ""
+   }
+  },
+  "ギフト ネット通販 選び方": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://shop.odakyu-dept.co.jp/ec/gift_column4",
+     "https://shop.keionet.com/cp.html?fkey=gift",
+     "https://www.kokusen.go.jp/news/data/n-20250820_1.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://store.asoview.com/blogs/article/gift",
+     "https://giftful.jp/features/533",
+     "https://digi-co.net/blog/digitalgift-present-recommendation/",
+     "https://digi-co.net/blog/online-gift/",
+     "https://www.mistore.jp/moodmark",
+     "https://shaddy.jp/seibo/manner/internet/",
+     "https://note.com/kaimononavi/n/n63672a18ebdf",
+     "https://www.apro-soken.co.jp/column/order/post-18.html"
+    ],
+    "error": ""
+   }
+  },
+  "プレゼント 通販 予算 相場": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://edepart.sogo-seibu.jp/feature/giftcolumn7",
+     "https://www.shop.post.japanpost.jp/shop/pages/tanjyobiiwai.aspx",
+     "https://www.takashimaya.co.jp/shopping/gift/story/present/FA19003/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.shop.post.japanpost.jp/shop/pages/gift_contents_50.aspx",
+     "https://giftmall.co.jp/AX9EUVdL",
+     "https://bloomeelife.com/presents/mothersday/mothersdayflowers/mothers-day-spending-statistics",
+     "https://giftful.jp/features/483",
+     "https://event.rakuten.co.jp/mother/guide/marketprice/",
+     "https://nigaoe-inc.jp/gratefulones/677",
+     "https://anatae.co.jp/blog/featured/christmas-present-budget",
+     "https://nigaoe.graphics.vc/magazine-blog/birthday-present-budget/",
+     "https://gift-pick.com/query-5175/"
+    ],
+    "error": ""
+   }
+  },
+  "誕生日 ギフト 通販 おすすめ": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://www.takashimaya.co.jp/shopping/gift/birthdaygift/",
+     "https://www.suzette-shop.jp/shop/e/ehcgiftch/",
+     "https://shiro-shiro.jp/ec/Facet?category_0=11ja1700000"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mistore.jp/moodmark/birthday/",
+     "https://tanp.jp/",
+     "https://took.jp/ranking/gift-birthday",
+     "https://www.otoriyose.net/ranking/gift/167"
+    ],
+    "error": ""
+   }
+  },
+  "ギフト ラッピング 無料 通販": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kao-kirei.com/ja/gift/",
+     "https://www.moriya-online.com/shop/e/e60/",
+     "https://www.rakuten.co.jp/goldenbear-store/contents/free_wrapping/",
+     "https://www.haruta-shoes.co.jp/guide/giftwrapping"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.inobun.com/view/item/000000024087",
+     "https://www.aming.co.jp/f/babigiftwrapping",
+     "https://mokumokuishi.com/?mode=f9",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG5Au7FNRraubDYLelaF7OWyg41505yL3k3_bscnue2ZbthKCZVWxnbkZvanodhRpohOmtjkn9PxvcO6-Zx4JP4Wrc04g2Omia2wocm-ingsydMzDeVL6VDyEd4LYedpc4lbjUng_BAcQKxJ46wnIbX9oaKL8WB",
+     "https://voi.0101.co.jp/voi/webshop/giftservice/",
+     "https://voi.0101.co.jp/voi/content/01/sp/guide/order/gift-service.html",
+     "https://www.cypris-online.jp/f/giftwrapping",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFLG6axEGZUItkPjkNQRGM6z9Qx9XJbzYJDzChaez1HQAsYYrmXT3aaktjVg_S9iaaayDRyQJD_V96SRoqFF6h_RmP26k30zbeqQKtVxIH0e9jnt3QK6alJvQp6mReeaSM6",
+     "https://store.fedeca.com/products/000001",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFDikmGE5gRKLrIoODobxoCsm14ErNy4ajSR8acvwg36cVBTwaDYOax_rI8iou7qPGt091E8hqkWLGjFXWNYWJkk2hX2pWjqEod-1DPQ82h1JPBfaMRx_hp5bD1qbF4vEhXvsnPXQ=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://giftmall.co.jp/",
+     "https://www.cypris-online.jp/f/giftwrapping",
+     "https://www.shuuemura.jp/gift-wrapping.html",
+     "https://www.dinos.co.jp/gift/wrapping_s/",
+     "https://www.giftplaza-online.com/wrapping"
+    ],
+    "error": ""
+   }
+  },
+  "贈り物 配送先 別 送り方": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://24.rakuten.co.jp/help/question14/",
+     "https://faq.muji.com/--656d4e421c58e70026d3c3c1",
+     "https://ichiba-smp.faq.rakuten.net/detail/000002939",
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/preparations/invoice/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://mini-mal.tokyo/pages/egift",
+     "https://www.ringbell.co.jp/ringbell/contents/atoraku/",
+     "https://linegift.line.me/blog/blog0003/",
+     "https://faq.stores.jp/hc/ja/articles/28065092154649--%E3%82%B5%E3%82%A4%E3%83%88%E8%A8%AD%E5%AE%9A-%E3%83%97%E3%83%AC%E3%82%BC%E3%83%B3%E3%83%88%E3%81%AA%E3%81%A9%E3%81%A7%E6%B3%A8%E6%96%87%E8%80%85%E3%81%A8%E3%81%AF%E5%88%A5%E3%81%AE%E9%85%8D%E9%80%81%E5%85%88%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84"
+    ],
+    "error": ""
+   }
+  },
+  "お中元 お歳暮 通販 費用 相場": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://shop.keionet.com/cp.html?fkey=sg_article_whatis",
+     "https://www.shop.post.japanpost.jp/column/oseibo/oseibo_cost.html",
+     "https://shop.odakyu-dept.co.jp/ec/chugen"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://web.hh-online.jp/hankyu-food/blog/lifestyle/detail/001243.html",
+     "https://www.shop.post.japanpost.jp/column/oseibo/oseibo_cost.html",
+     "https://event.rakuten.co.jp/ochugen/howto/marketprice/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2Z-4gcYYoqD9MxscoPttMAzl4n5YW45DG0wEqItNeSYF0sYz9dNc6yMW8LEOGwR0l4bCx8QK4o4zgj-hZ7SI1mtd0HZKts5TTlz-PH0KBylNvUlXrHYqBXKVXbUY5Hk-K",
+     "https://e-mono.jr-central.co.jp/column/ochugen/value.html",
+     "https://business.mistore.jp/magazine/article/2102"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://iyec.itoyokado.co.jp/shop/r/rA19103/",
+     "https://www.shop.post.japanpost.jp/column/oseibo/oseibo_cost.html",
+     "https://shaddy.jp/chugen/manner/marketprice/",
+     "https://shop.keionet.com/cp.html?fkey=sg_article_whatis",
+     "https://event.rakuten.co.jp/ochugen/howto/marketprice/",
+     "https://www.piary.jp/gift/articles/a0112-oseibosoba/",
+     "https://www.officegift.jp/manner/seasongift/rt_market.html",
+     "https://contextneo.jp/ryoukin/oseibo-otyugen-1081.html",
+     "https://www.hataraku-okashi.com/tellme/teach_3.html",
+     "https://giftmall.co.jp/AXm2WGxK",
+     "https://ec.jal.co.jp/shop/pages/oseibo5.aspx",
+     "https://es.aeon-hokkaido.jp/eshop/usefulinfo/detail?hny=2020102702",
+     "https://business.mistore.jp/magazine/article/2102",
+     "https://gift-shop.jp/oseibo/column/recommend/22559/",
+     "https://www.yokumoku.jp/pages/oseibo/"
+    ],
+    "error": ""
+   }
+  },
+  "内祝い ネット通販 選び方": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://www.takashimaya.co.jp/shopping/gift/kekkonuchiiwai/",
+     "https://www.takashimaya.co.jp/shopping/gift/story/syussanuchiiwai/FA19009/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://isetan.mistore.jp/moodmark/thankyou/",
+     "https://giftmall.co.jp/okaeshi/",
+     "https://my-best.com/4555",
+     "https://www.kubara.jp/gift/manner_uchiiwai/",
+     "https://knowledge.bellevie-inc.co.jp/b326/",
+     "https://mamab.jp/article/50625",
+     "https://www.piary.jp/gift/",
+     "https://bestpresent.jp/uchiiwai/",
+     "https://www.on-seven-days.com/f/gift_return",
+     "https://www.ringbell.co.jp/giftconcierge/142",
+     "https://shaddy.jp/uchiiwai/",
+     "https://ginza-sembikiya.jp/c/gift/family_celebration",
+     "https://store.asoview.com/blogs/article/uchiiwai-guide",
+     "https://www.takashimaya.co.jp/shopping/gift/kekkonuchiiwai/",
+     "https://knowledge.bellevie-inc.co.jp/b329/",
+     "https://pay-route.co.jp/article/2026/04/02/manners-of-giving-gift-cards-and-avoiding-rudeness/",
+     "https://event.rakuten.co.jp/gift/manner/uchiiwai/",
+     "https://web.hh-online.jp/hankyu-food/blog/lifestyle/detail/000798.html",
+     "https://anny.gift/oiwai-contents/guides/uchi-iwai/"
+    ],
+    "error": ""
+   }
+  },
+  "ギフト 相手 住所 不明 送れる": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://linegift.line.me/ja/feature/",
+     "https://linegift.line.me/ja/about/",
+     "https://giftee.co.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://giftful.jp/features/501",
+     "https://isetan.mistore.jp/moodmark/guide/guide_05_13.html",
+     "https://www.shop.post.japanpost.jp/shop/pages/about-social-gift.aspx",
+     "https://corp.rakuten.co.jp/news/press/2026/0501_01.html",
+     "https://finner.co.jp/media/rakuten-social-gift/",
+     "https://www.nojima.co.jp/support/koneta/178180/",
+     "https://www.it-tool-labo.top/line%E3%82%AE%E3%83%95%E3%83%88%E3%81%A7%E4%BD%8F%E6%89%80%E3%81%AF%E3%81%B0%E3%82%8C%E3%82%8B%EF%BC%9F%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A8%E5%AF%BE%E7%AD%96%E3%82%92%E8%AA%BF%E6%9F%BB%EF%BC%81/",
+     "https://fairycake.jp/blogs/journal/22082501"
+    ],
+    "error": ""
+   }
+  },
+  "結婚祝い 通販 人気 予算": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://www.piary.jp/iwai_bridal/for-friends/",
+     "https://www.takashimaya.co.jp/shopping/gift/kekkoniwai/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.shopnousaku.com/blog/2022/10/07/1646/",
+     "https://www.shop.post.japanpost.jp/shop/pages/gift_contents_105.aspx",
+     "https://presentersroom.jp/media/content011",
+     "https://bruno-onlineshop.com/ext/feature/ideaonline/gift_bridal/forfreind/",
+     "https://giftee.com/announcements/731",
+     "https://bruno-onlineshop.com/ext/feature/ideaonline/gift_bridal/forfreind/",
+     "https://www.mwed.jp/articles/11324/",
+     "https://www.shopnousaku.com/blog/2022/10/07/1646/",
+     "https://www.mistore.jp/moodmarkgift/7174"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mistore.jp/moodmarkgift/425",
+     "https://store.asoview.com/blogs/article/wedding-gift-guide",
+     "https://giftee.com/announcements/731",
+     "https://www.takashimaya.co.jp/shopping/gift/kekkoniwai/",
+     "https://my-best.com/867",
+     "https://my-best.com/26978",
+     "https://giftmall.co.jp/AXefgXWf",
+     "https://isetan.mistore.jp/moodmark/wedding/s010125/",
+     "https://bruno-onlineshop.com/ext/feature/ideaonline/gift_bridal/forfreind/",
+     "https://www.takashimaya.co.jp/shopping/gift/story/kekkoniwai/624785/",
+     "https://giftful.jp/features/1",
+     "https://my-best.com/14607",
+     "https://www.mwed.jp/articles/11324/",
+     "https://isetan.mistore.jp/moodmark/wedding/s010111/",
+     "https://www.tsunagu-uchiiwai.jp/wedding/",
+     "https://brapla.com/column/guest/de8a6f56-a085-44b6-aeab-73d0424c49c7"
+    ],
+    "error": ""
+   }
+  },
+  "ギフト 熨斗 対応 ネットショップ": {
+   "group": "ギフト",
+   "ChatGPT": {
+    "urls": [
+     "https://www.takashimaya.co.jp/shopping/help/guide05_01.html",
+     "https://faq.mistore.jp/faqs/668a32fe1a65c5957846f56b/",
+     "https://shaddy.jp/gs_front/app/contents/guide/flow01"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://shop-pro.jp/manual/gift_lst",
+     "https://unreact.jp/blog/shopify-app-noshi",
+     "https://ichiba.faq.rakuten.net/detail/000006755",
+     "https://ichiba-smp.faq.rakuten.net/detail/000010745",
+     "https://www.nakagawa-masashichi.jp/shop/pages/guide_gift.aspx",
+     "https://store.hasamiyaki.jp/blog/wrapping/",
+     "https://web-kanji.com/posts/shopify-compare",
+     "https://digital.toppan-colorer.co.jp/column/ecshopify-base-stores-20220324"
+    ],
+    "error": ""
+   }
+  },
+  "ネットショップ 口コミ 信頼できる 見分け方": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.moneypost.jp/760386",
+     "https://netshop.impress.co.jp/node/9981",
+     "https://www.trynow.jp/guide/amazon-sakura-review-miwakekata",
+     "https://arekoreshop.com/lp/blog/002/",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.kokusen.go.jp/soudan_now/data/online-shopping-scams.html",
+     "https://www.kokusen.go.jp/mimamori/kmj_mailmag/kmj-support147.html",
+     "https://www.ccj.kokusen.go.jp/aksht_tuhn",
+     "https://cacco.co.jp/frauddetection/media/fraud-access/12801/"
+    ],
+    "error": ""
+   }
+  },
+  "通販サイト 評判 調べ方": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/mouth.html",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.ccj.kokusen.go.jp/aksht_tuhn"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html",
+     "https://prtimes.jp/main/html/rd/p/000000061.000059806.html",
+     "https://www.optima-solutions.co.jp/support_article/scam-website-check/",
+     "https://arekoreshop.com/lp/blog/092/",
+     "https://anshin-security.docomo.ne.jp/security_news/site/column016.html",
+     "https://www.lanscope.jp/blogs/cyber_attack_cp_blog/20240322_19785/",
+     "https://jadma.or.jp/consumers/usage_fraud",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://www.pref.aichi.jp/police/anzen/cyber/soudan/shoppingsite.html",
+     "https://wakailaw.com/sagi/81"
+    ],
+    "error": ""
+   }
+  },
+  "ネット通販 レビュー やらせ 見分け方": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://consumer.ftc.gov/articles/how-evaluate-online-reviews",
+     "https://www.bbb.org/all/spot-a-scam/how-to-spot-a-fake-review",
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://netshop.impress.co.jp/node/9981",
+     "https://office-kanade.jp/blog?wgd=news-383&wgdo=date-DESC",
+     "https://arekoreshop.com/lp/blog/092/",
+     "https://www.cyber-records.co.jp/amazon-suspicious-review-reporting/",
+     "https://note.com/kazu_3734/n/n2634e19cb21f",
+     "https://www.rakuten.co.jp/power-sprt/contents/review-trustcheck/",
+     "https://gigazine.net/news/20260525-ai-spot-fake-review/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14277809854",
+     "https://www.matrixflow.net/case-study/189/",
+     "https://gaiheki-kakekomi.com/home/google-map-review/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://netshop.impress.co.jp/node/9981",
+     "https://securitynews.so-net.ne.jp/topics/sec_20139.html",
+     "https://note.com/jpride/n/n14e75dcd8300",
+     "https://office-kanade.jp/blog?wgd=news-383&wgdo=date-DESC",
+     "https://lornrider.com/2021/02/10/amazon-sakura-review-miwakekata/",
+     "https://otakupapa.net/amazon-review-check/",
+     "https://trade-king.biz/fake-review/",
+     "https://xn--h9jepie9n6a5394exeq51z.com/review-distinguish-14991",
+     "https://taikan-enta.info/amazon-miwakekata-kiyaku/",
+     "https://keiyaku-watch.jp/media/kisochishiki/stealthmarketing/",
+     "https://www.future-shop.jp/magazine/stealth-marketing",
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/",
+     "https://www.nichibenren.or.jp/ja/sme/topics/20231129.html",
+     "https://asantech.co.jp/blog/google-review/stealth-marketing/"
+    ],
+    "error": ""
+   }
+  },
+  "初めて 買う ショップ 安全 確認": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://anshin-security.docomo.ne.jp/security_news/site/column016.html",
+     "https://cacco.co.jp/frauddetection/media/fraud-access/12801/",
+     "https://cybersecurity-jp.com/contents/data-security/17712/",
+     "https://money.it-trend.jp/articles/trouble/fraud/01-0719",
+     "https://business.ntt-east.co.jp/column/bizdrive/spot-malicious-shopping-sites.html",
+     "https://www.aacd.gr.jp/consumer/akushitsu/net",
+     "https://www.optima-solutions.co.jp/support_article/scam-website-check/",
+     "https://maronssec.com/phishingsitecheck/",
+     "https://yasashii-cybersecurity.com/what-is-fake-shopping-site/",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.kokusen.go.jp/pdf/n-20230130_1.pdf",
+     "https://www.post.japanpost.jp/bizpost/column/sales_promotion12/commerce-law/",
+     "https://www.kokusen.go.jp/pdf/n-20250521_2_lf.pdf",
+     "https://www.gov-online.go.jp/article/202012/entry-9175.html",
+     "https://www.kokusen.go.jp/pdf/n-20240626_1.pdf",
+     "https://www.city.chuo.lg.jp/a0012/syohisikatsu/20250507.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://www.money-navi.net/netservice/online-shopping.html"
+    ],
+    "error": ""
+   }
+  },
+  "通販 詐欺サイト 見分け方": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/caution_033",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://www.kokusen.go.jp/soudan_now/data/online-shopping-scams.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.lanscope.jp/blogs/cyber_attack_cp_blog/20240322_19785/",
+     "https://anshin-security.docomo.ne.jp/security_news/site/column016.html",
+     "https://cacco.co.jp/frauddetection/media/fraud-access/12801/",
+     "https://business.ntt-east.co.jp/bizdrive/column/post_324.html",
+     "https://seikatsuclub-kyosai.coop/news/column/4720/",
+     "https://www.city.kobe.lg.jp/a07153/kurashi/lifestyle/soudan/nisesite.html",
+     "https://wakailaw.com/sagi/81",
+     "https://www.optima-solutions.co.jp/support_article/scam-website-check/",
+     "https://digitaldata-forensics.com/column/phishing-scam/37909/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html",
+     "https://www.itmedia.co.jp/news/articles/2606/17/news116.html",
+     "https://www.kokusen.go.jp/soudan_now/data/online-shopping-scams.html",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.kokusen.go.jp/pdf/n-20230130_1.pdf",
+     "https://www.pref.niigata.lg.jp/site/kenkei/cyber-nise-shopping.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/caution_033",
+     "https://www.secom.co.jp/anshinnavi/net_security/backnumber362.html",
+     "https://money.it-trend.jp/articles/trouble/fraud/01-0719"
+    ],
+    "error": ""
+   }
+  },
+  "ネットショップ 選び方 口コミ 比較": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/payment.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/mouth.html",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen471.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ja.wix.com/blog/2025/02/best-netshop-platforms/",
+     "https://stores.fun/magazine/articles/free-online-shop-services",
+     "https://www.easy-myshop.jp/column/ec-comparison/",
+     "https://stock-sun.com/column/netshop-osusume-2025/",
+     "https://www.logiless.com/blog/column/ec-service/",
+     "https://s-creates.com/column_post/ec-comparison/",
+     "https://www.ecbeing.net/contents/detail/s/624",
+     "https://www.crosswish.com/blog/45/",
+     "https://motomachi-commerce.co.jp/blogs/tips/shopify-makeshop-comparison",
+     "https://noside-ltd.co.jp/blog/shopify-comparison/",
+     "https://recustomer.me/blog/shopify-makemeshop-colorme",
+     "https://squareup.com/jp/ja/townsquare/comparison-of-recommended-services-for-opening-online-store"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.benikomachi.jp/gourmet/netsuper",
+     "https://ja.wix.com/blog/2025/02/best-netshop-platforms/",
+     "https://stock-sun.com/column/netshop-osusume-2025/",
+     "https://squareup.com/jp/ja/townsquare/comparison-of-recommended-services-for-opening-online-store",
+     "https://ecnomikata.com/ecnews/ec_construction/42167/",
+     "https://baseu.jp/17844",
+     "https://ec.minikuru.co.jp/post-970/",
+     "https://tools-online-system.com/netshop-recommend-compare/",
+     "https://arekoreshop.com/lp/blog/001/"
+    ],
+    "error": ""
+   }
+  },
+  "通販 評判 悪い 理由 確認": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/internet.html",
+     "https://www.ccj.kokusen.go.jp/aksht_kikk",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/pdf/consumer_policy_200430_0001.pdf",
+     "https://www.ccj.kokusen.go.jp/aksht_tuhn"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://minhyo.jp/fashion-tsuhan",
+     "https://minhyo.jp/net-tsuhan",
+     "https://business.ntt-east.co.jp/column/bizdrive/spot-malicious-shopping-sites.html",
+     "https://www.kokusen.go.jp/soudan_now/data/online-shopping-scams.html",
+     "https://wakailaw.com/sagi/81",
+     "https://koesiru.jp/ranking/7",
+     "https://prtimes.jp/main/html/rd/p/000000061.000059806.html",
+     "https://blog.smasell.jp/archives/13620",
+     "https://www.optima-solutions.co.jp/support_article/scam-website-check/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen515.html",
+     "https://anshin-security.docomo.ne.jp/security_news/site/column016.html",
+     "https://www.city.chikushino.fukuoka.jp/soshiki/7/26592.html",
+     "https://www.pref.nagano.lg.jp/police/anshin/cyber/akusitusite.html",
+     "https://jadma.or.jp/consumers/usage_fraud",
+     "https://digitaldata-forensics.com/column/phishing-scam/37909/"
+    ],
+    "error": ""
+   }
+  },
+  "ネット通販 会社情報 確認 ポイント": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.no-trouble.caa.go.jp/what/mailorder/advertising.php",
+     "https://www.kokusen.go.jp/news/data/n-20230130_1.html",
+     "https://www.ccj.kokusen.go.jp/aksht_tuhn"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.lac.co.jp/lacwatch/service/20250825_004456.html",
+     "https://www.lrm.jp/security_magazine/fake_site/",
+     "https://www.microsoft.com/ja-jp/area/biz/smb/column-fake-website",
+     "https://lastdripdesigns.com/news/52449/",
+     "https://www.lanscope.jp/blogs/cyber_attack_cp_blog/20240322_19785/",
+     "https://www.city.annaka.lg.jp/page/1555.html",
+     "https://www.optima-solutions.co.jp/support_article/scam-website-check/",
+     "https://rerise.shop/news/%E9%80%9A%E8%B2%A9%E8%A9%90%E6%AC%BA%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E8%A6%8B%E5%88%86%E3%81%91%E6%96%B9-%E5%AE%9F%E4%BE%8B%E7%B4%B9%E4%BB%8B-%E5%AF%BE%E5%87%A6%E6%B3%95-%E5%81%BD%E3%82%B5/",
+     "https://www.tomagamediary.com/entry/rare-fake-shop-warning-checklist"
+    ],
+    "error": ""
+   }
+  },
+  "レビュー 星 少ない 買う べき": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/internet/trouble/mouth.html",
+     "https://www.kokusen.go.jp/news/data/n-20240626_1.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14251211364",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11292478231",
+     "https://www.cmoa.jp/community/island/33276/",
+     "https://www.cmoa.jp/community/island/11575/",
+     "https://www.cmoa.jp/island/13866/",
+     "https://awa.newday-newlife.com/blog/stars/"
+    ],
+    "error": ""
+   }
+  },
+  "ショップ 口コミ 費用 高い 理由": {
+   "group": "口コミ・評判",
+   "ChatGPT": {
+    "urls": [
+     "https://shop-list.com/svc/faq/FaqDetail/?inquiryCategoryId=17243",
+     "https://minhyo.jp/shop-list"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ieagent.jp/blog/estate/apaman-228902",
+     "https://minhyo.jp/shop-list",
+     "https://stores.fun/magazine/articles/online-shop-review",
+     "https://storepad.jp/magazine/UghErCzh"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

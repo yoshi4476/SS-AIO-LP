@@ -147,9 +147,9 @@
  "per_answer": {
   "全体": {
    "answers": 88,
-   "media": 57,
    "clinic": 79,
    "other": 22,
+   "media": 57,
    "portal": 47,
    "public": 27,
    "maker": 35,
@@ -157,9 +157,9 @@
   },
   "地域で探す": {
    "answers": 20,
-   "media": 7,
    "clinic": 18,
    "other": 7,
+   "media": 7,
    "portal": 15,
    "public": 6,
    "maker": 4,
@@ -171,8 +171,8 @@
    "maker": 8,
    "media": 16,
    "portal": 9,
-   "other": 4,
    "public": 1,
+   "other": 4,
    "video": 2
   },
   "選び方": {
@@ -188,17 +188,17 @@
   "予防とワクチン": {
    "answers": 18,
    "clinic": 15,
-   "portal": 5,
    "maker": 7,
    "media": 10,
-   "other": 4,
-   "public": 9
+   "portal": 5,
+   "public": 9,
+   "other": 4
   },
   "夜間救急と急な体調不良": {
    "answers": 17,
-   "media": 12,
    "clinic": 17,
    "maker": 12,
+   "media": 12,
    "other": 4,
    "portal": 10,
    "video": 2,

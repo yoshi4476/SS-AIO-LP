@@ -179,10 +179,10 @@
   "全体": {
    "answers": 294,
    "clinic": 234,
-   "video": 48,
    "portal": 179,
-   "other": 49,
+   "video": 48,
    "media": 90,
+   "other": 49,
    "review": 12,
    "public": 98,
    "maker": 133,
@@ -191,17 +191,17 @@
   "地域で探す": {
    "answers": 78,
    "clinic": 41,
-   "video": 5,
    "portal": 61,
-   "other": 15,
+   "video": 5,
    "media": 7,
+   "other": 15,
    "review": 12,
    "public": 1
   },
   "費用": {
    "answers": 71,
-   "portal": 44,
    "clinic": 70,
+   "portal": 44,
    "video": 20,
    "media": 20,
    "maker": 29,
@@ -210,10 +210,10 @@
   },
   "選び方": {
    "answers": 44,
-   "video": 8,
    "maker": 27,
-   "portal": 34,
    "clinic": 40,
+   "portal": 34,
+   "video": 8,
    "media": 20,
    "other": 10,
    "public": 11,
@@ -221,23 +221,23 @@
   },
   "手続き・悩み": {
    "answers": 49,
-   "maker": 39,
-   "portal": 20,
-   "media": 17,
-   "public": 40,
    "video": 7,
+   "public": 40,
+   "maker": 39,
+   "media": 17,
+   "portal": 20,
    "clinic": 43,
    "other": 6
   },
   "制度・ルール": {
    "answers": 52,
    "maker": 38,
-   "other": 7,
-   "clinic": 40,
    "public": 35,
+   "clinic": 40,
+   "other": 7,
    "media": 26,
-   "portal": 20,
    "video": 8,
+   "portal": 20,
    "wiki": 4
   }
  }

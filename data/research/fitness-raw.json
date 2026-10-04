@@ -1,0 +1,1716 @@
+{
+ "industry": "fitness",
+ "date": "2026-10-05",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 パーソナルジム おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://exercisecoach.co.jp/store/links/",
+     "https://beyond-gym.com/gym/gym-osaka-umeda/",
+     "https://247-sports.jp/workout/gym/kinki/osaka/umeda.html",
+     "https://www.diet-undeux.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://melos.media/area_pickup/191836/",
+     "https://www.dm-s.co.jp/collect/personal-gym-osaka/",
+     "https://oceans.tokyo.jp/choice/fitness/osaka-gym-osusume",
+     "https://oceans.tokyo.jp/choice/fitness/osaka-parsonalgym-osusume",
+     "https://dunlopsportsclub.jp/articles/pref/osaka",
+     "https://body-make.jp/low-price-osaka/",
+     "https://pas0na.com/osaka/",
+     "https://www.kaatsu-omotesando.com/personalgym-osaka/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.space-gym.com/988/",
+     "https://salugia-gym.com/blog/personalgym/osaka-cheap-popular/",
+     "https://pas0na.com/osaka/",
+     "https://www.queen-eyes.com/mediainfo/609/",
+     "https://www.space-gym.com/988/",
+     "https://home.osakagas.co.jp/column/personal-gym/personal-gym-supplier/osaka/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG_198sl7OvuS6Zb3ufY08pN-P_w_l83-j0fA-w4n80ezzeEOLJ2-P1pW29nqFXuNpePJMTxeZDjj7LMJ2VFcUFtHwXELeC8K3TaSh0NjqPEHpkBOeWEHueeRc=",
+     "https://personalgym.co.jp/area-gym/personal-gym-osaka/",
+     "https://body-make.jp/osaka/",
+     "https://suzuran-758.com/fitness/osaka/",
+     "https://pas0na.com/osaka/lowprice2/",
+     "https://www.totoyase.com/%E3%80%90%E5%A4%A7%E9%98%AA%E3%81%A7%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E3%81%AE%E5%AE%89%E3%81%84%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B8%E3%83%A05%E9%81%B8%EF%BC%81%E3%80%91/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 女性専用ジム おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.curves.co.jp/faq/",
+     "https://www.curves.co.jp/search/kanto/tokyo/",
+     "https://furdi.jp/",
+     "https://furdi.jp/lp/umeyashiki/04/",
+     "https://www.outline-gym.com/",
+     "https://www.diet-undeux.jp/lp/all-split/",
+     "https://www.diet-undeux.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://oceans.tokyo.jp/choice/fitness/tokyo-gym-osusume",
+     "https://melos.media/area_pickup/268331/",
+     "https://online.tipness.co.jp/magazine/tokyo-personal-gym-woman-recommend/",
+     "https://body-make.jp/for-woman-ranking/",
+     "https://trejo-fitness.moo.jp/tokyo-womens-gym-female-trainer/",
+     "https://mermake.co.jp/blog/tokyo/",
+     "https://peach-gym.com/tokyo-personal-gym/",
+     "https://pas0na.com/tokyo/woman/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gymlife.jp/tokyo/tokyo-1/women-only",
+     "https://media.jreast.co.jp/articles/561",
+     "https://body-make.jp/tokyo/",
+     "https://personalgym-tokyo.com/tokyo-women-personal-gym/",
+     "https://salugia-gym.com/blog/personalgym/tokyo-women-only/",
+     "https://www.shapes-international.co.jp/media/fitness/tokyo/",
+     "https://media.jreast.co.jp/articles/561",
+     "https://magazine.gyym.jp/articles/5118"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 ジム 深夜 早朝 使える": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://maruei-galleria.jp/shop/702/",
+     "https://www.anytimefitness.co.jp/imaikeekimae/",
+     "https://www.anytimefitness.co.jp/kanayama/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.s-re.jp/nagoya-atsuta/24hours/",
+     "https://www.anytimefitness.co.jp/nagoyameiekiminami/",
+     "https://www.anytimefitness.co.jp/nagoyasakae/",
+     "https://joyfit.jp/taikodori/",
+     "https://www.worldplus-gym.com/shop/nagoya-chaya.html",
+     "https://www.anytimefitness.co.jp/lp-nagoya-city/",
+     "https://fitmap.jp/magazine/gym/24hour/79362/",
+     "https://exercisecoachjapan.jp/blog/gym-nagoya/",
+     "https://fitness.matomer.com/post/85",
+     "https://b-fitness.net/sakae-hikaku",
+     "https://oceans.tokyo.jp/choice/fitness/nagoya-gym-osusume",
+     "https://fitpalette.lotte.co.jp/area/s3555",
+     "https://fitpalette.lotte.co.jp/area/s3574/sports"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.s-re.jp/nagoya-atsuta/24hours/",
+     "https://b-fitness.net/nagoya-morning",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEzBzjOS2CqYzMkYzcxCJvGbG3nX9r9vWkpVDoiC9D825QpRa06sqfGhm2aVTOSM342SEsDDXAyBIo6DlmOFTR5Dysju0PBJDH6AIgCcOV0A53rqxLS0WNPkVSH8VBs9bzQw09Shbc=",
+     "https://life-designs.jp/webmagazine/fitness_nagoya/",
+     "https://fastgym24.tipness.co.jp/shop/SHP603/",
+     "https://urbanfit.jp/store/tsurumai/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 ダイエット ジム 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://beyond-tenjin.com/",
+     "https://map.yahoo.co.jp/v3/place/IGmFQSEG-eg/review",
+     "https://beauty.hotpepper.jp/kr/slnH000742171/review/",
+     "https://body-make.jp/247-workout-fukuoka/",
+     "https://247-workout.jp/gym/fukuoka/fukuokayakuintenjin",
+     "https://zerobody.jp/store/21027/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://nasse.com/kyusyu/fukuoka-personal-gym/",
+     "https://beauty.hotpepper.jp/keyword/%E3%82%B8%E3%83%A0%E3%80%80%E3%83%80%E3%82%A4%E3%82%A8%E3%83%83%E3%83%88%E3%80%80%E7%A6%8F%E5%B2%A1%E7%9C%8C/",
+     "https://body-make.jp/fukuoka/",
+     "https://dunlopsportsclub.jp/articles/pref/fukuoka",
+     "https://getfit.jp/gym/a-fukuoka",
+     "https://mermake.co.jp/blog/fukuoka/",
+     "https://pas0na.com/fukuoka/",
+     "https://www.forbes-24hfitness.com/column/personal-gym/fukuoka-personalgym-recommend/",
+     "https://www.kaatsu-omotesando.com/personalgym-fukuoka/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://personalgym.co.jp/area-gym/personal-gym-fukuoka/",
+     "https://suzuran-758.com/fitness/personal-gym-tenjin/",
+     "https://qool.jp/135806",
+     "https://www.forbes-24hfitness.com/column/personal-gym/fukuoka-personalgym-recommend/",
+     "https://the-personal-gym.com/blog/compare/fukuokashi-personalgym-matome/",
+     "https://note.com/flower_boy/n/n5f287f15d57e"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 ジム 初心者 通いやすい": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.s-re.jp/sapporo-hiragishi/lp/fit-taiken/",
+     "https://chocozap.jp/",
+     "https://chocozap.jp/studios/lp/city/011011",
+     "https://fit365-sapporo.jp/",
+     "https://fit365.jp/menu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://joyfit.jp/sapporoekikitaguchi/",
+     "https://oceans.tokyo.jp/choice/fitness/sapporo-gym-osusume",
+     "https://fitmap.jp/magazine/gym/24hour/105827/",
+     "https://yoga-fitness-enjoy.com/sapporo-24hours-fitness/",
+     "https://fitness.matomer.com/post/147",
+     "https://playful-style.net/gym-sapporo-24h/",
+     "https://exercisecoachjapan.jp/blog/gym-sapporo/",
+     "https://www.gendai-a.co.jp/fit/gym-sapporo/",
+     "https://cani.jp/fitness/sapporo-2"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://oceans.tokyo.jp/choice/fitness/sapporo-gym-osusume",
+     "https://exercisecoach.co.jp/media/fitness-sapporo/",
+     "https://www.ezobolic.jp/blogs/news/%E6%9C%AD%E5%B9%8C-%E5%A4%A7%E9%80%9A-%E5%87%BA%E5%BC%B5-%E6%97%85%E8%A1%8C%E3%81%AE%E7%AD%8B%E3%83%88%E3%83%AC%E3%82%92%E5%AE%8C%E7%92%A7%E3%81%AB-%E3%82%B8%E3%83%A0%E4%BB%98%E3%81%8D%E3%83%9B%E3%83%86%E3%83%AB-%E3%83%93%E3%82%B8%E3%82%BF%E3%83%BC%E3%82%B8%E3%83%A0%E3%81%A8-ezobolic-%E6%B4%BB%E7%94%A8%E3%82%AC%E3%82%A4%E3%83%89",
+     "https://follow-gym.com/%E3%82%B3%E3%83%A9%E3%83%A0/12022/",
+     "https://www.smartstudio.jp/column/blog/sapporogym",
+     "https://fitmethod.net/",
+     "https://fitmethod.net/",
+     "https://exercisecoach.co.jp/media/fitness-sapporo/",
+     "https://www.ezobolic.jp/blogs/news/%E6%9C%AD%E5%B9%8C-%E5%A4%A7%E9%80%9A-%E5%87%BA%E5%BC%B5-%E6%97%85%E8%A1%8C%E3%81%AE%E7%AD%8B%E3%83%88%E3%83%AC%E3%82%92%E5%AE%8C%E7%92%A7%E3%81%AB-%E3%82%B8%E3%83%A0%E4%BB%98%E3%81%8D%E3%83%9B%E3%83%86%E3%83%AB-%E3%83%93%E3%82%B8%E3%82%BF%E3%83%BC%E3%82%B8%E3%83%A0%E3%81%A8-ezobolic-%E6%B4%BB%E7%94%A8%E3%82%AC%E3%82%A4%E3%83%89",
+     "https://goodlifegym.jp/article/sapporo-gym/",
+     "https://oceans.tokyo.jp/choice/fitness/sapporo-gym-osusume",
+     "https://lamua-fit.com/media/archives/1328",
+     "https://note.com/personal_gyms/n/nb41ccdfa9531"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 パーソナルトレーニング 体験": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://element-gym.com/element-top/all/yokohama/",
+     "https://keysbit.jp/lp/",
+     "https://hangout-diet.com/",
+     "https://group-personal.the-person.com/lp/tipness-yokohama"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://exercisecoachjapan.jp/blog/personal-training-yokohama/",
+     "https://my-best.com/28242",
+     "https://aumo.jp/articles/1122622",
+     "https://www.gendai-a.co.jp/fit/personal-training-yokohama/",
+     "https://pas0na.com/yokohama/lowprice3/",
+     "https://cani.jp/personal-training/yokohama-4",
+     "https://qool.jp/135542",
+     "https://oceans.tokyo.jp/choice/fitness/yokohama-gym-osusume",
+     "https://fitpalette.lotte.co.jp/area/s1687/personal",
+     "https://zerobody.jp/articles/27498/",
+     "https://the-personal-gym.com/studio/yokohama/",
+     "https://pas0na.com/yokohama/",
+     "https://suzuran-758.com/fitness/personal-gym-yokohama/",
+     "https://trainees-supplement.com/personaltraininggym-yokohama/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://mfd.fitnessgym-mania.com/6942",
+     "https://gymlife.jp/kanagawa/yokohama/trial",
+     "https://goodlifegym.jp/article/yokohama-gym/",
+     "https://beyond-gym.com/gym/gym-yokohamanishi/",
+     "https://yokohama-beyond-gym.com/%E3%80%90%E7%84%A1%E6%96%99%E4%BD%93%E9%A8%93%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%B3%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E3%80%91/",
+     "https://applegym.jp/shop-cat/yokohama/",
+     "https://the-personal-gym.com/studio/yokohama/",
+     "https://wb-gym.com/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 女性専用ジム 安い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.bodies.jp/studio/laque/",
+     "https://www.bodies.jp/fee/",
+     "https://www.alpen-group.jp/fitness/aqf/",
+     "https://www.alpen-group.jp/fitness/aqf/shop/tanbabashi/",
+     "https://www.curves.co.jp/faq/",
+     "https://www.curves.co.jp/search/kansai/kyoto/",
+     "https://furdi.jp/studio/ujiogura/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://exercisecoachjapan.jp/blog/gym-kyoto/",
+     "https://oceans.tokyo.jp/choice/fitness/kyoto-parsonalgym-osusume",
+     "https://oceans.tokyo.jp/choice/fitness/kyoto-women-osusume",
+     "https://oceans.tokyo.jp/choice/fitness/kyoto-gym-osusume-2",
+     "https://zerobody.jp/articles/41648/",
+     "https://pas0na.com/area/kyoto/",
+     "https://www.anyone-space.com/media/recommend-gym-kyoto-kyotocity/",
+     "https://matomer.com/fitness/post/26",
+     "https://www.kaatsu-omotesando.com/personalgym-kyoto/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://furdi.jp/studio/ujiogura/",
+     "https://goodlifegym.jp/article/kyoto-gym/",
+     "https://takumee.jp/pgym/store1034",
+     "https://furdi.jp/studio/kyotokitayama/",
+     "https://gym.alpron.co.jp/kinki/kyotofu/kyotoshi/kitayama/furdi-kyotokitayama/",
+     "https://www.bodies.jp/studio-cat/515/",
+     "https://laque.jp/store/bodies",
+     "https://gymlife.jp/kyoto/gym/bodies-laque",
+     "https://port-fitness.jp/shop/525/",
+     "https://amazones.fit/storelist/kyotoichijyoji/",
+     "https://exercisecoach.co.jp/media/fitness-kyoto/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 ジム 駅近 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.cospa-wellness.co.jp/fitbase24/kobe/",
+     "https://www.cospa-wellness.co.jp/fitbase24/kobe/joining/",
+     "https://www.anytimefitness.co.jp/hyogoekimae/",
+     "https://www.alive-gym.com/",
+     "https://www.alive-gym.com/visit/",
+     "https://information.konamisportsclub.jp/ksc/003937/facility.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://oceans.tokyo.jp/choice/fitness/sannnomiya-gym-osusume",
+     "https://body-make.jp/kobe/",
+     "https://fitmap.jp/magazine/gym/group/163591/",
+     "https://gymlife.jp/hyogo/kobesannomiya",
+     "https://zerobody.jp/articles/30942/",
+     "https://www.asreet.com/hyogo/sannomiya",
+     "https://the-personal-gym.com/studio/sannnomiya/",
+     "https://tetraw.com/",
+     "https://kyoryuchi-fitness-studio.net/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gymlife.jp/hyogo/sannomiya",
+     "https://exercisecoach.co.jp/media/fitness-kobe/",
+     "https://fitpalette.lotte.co.jp/area/s5188",
+     "https://lifefit.tech/store/sannomiyaekimae/",
+     "https://exercisecoachjapan.jp/blog/gym-kobe/",
+     "https://fitplace.jp/gyms/kobeekimae/",
+     "https://fitmap.jp/magazine/gym/99493/",
+     "https://the-personal-gym.com/studio/sannnomiya/",
+     "https://www.flow-gym.co.jp/",
+     "https://fitplace.jp/gyms/personal-sannomiya/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 年中無休 ジム 比較": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://fit365.jp/sendaibansui/",
+     "https://joyfit.jp/sendaihigashiguchi/",
+     "https://joyfit.jp/sendaiarai/?type=guide",
+     "https://www.anytimefitness.co.jp/sendaimiyagino/",
+     "https://www.anytimefitness.co.jp/lp-sendai-city/",
+     "https://chocozap.jp/studios/lp/prefecture/04"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://oceans.tokyo.jp/choice/fitness/sendai-gym-osusume",
+     "https://www.smartstudio.jp/column/blog/sendai_gym",
+     "https://fitmap.jp/magazine/gym/36738/",
+     "https://fitmap.jp/magazine/gym/24hour/82744/",
+     "https://exercisecoach.co.jp/media/fitness-sendai/",
+     "https://cani.jp/fitness/sendai",
+     "https://yoga-fitness-enjoy.com/sendai-24hours-fitness/",
+     "https://unryudo.com/health-info/sendai-gim/",
+     "https://joyfit.jp/sendaihigashiguchi/",
+     "https://smartfit100.com/shop/sendaiichibanchou/",
+     "https://tokyo-fitness.jp/sendai-24h-4469/",
+     "https://fitness.matomer.com/post/150"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.smartstudio.jp/column/blog/sendai_gym",
+     "https://yoga-fitness-enjoy.com/sendai-24hours-fitness/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGnzFdDarn5373XlOsA7F_beFtcmynVozVwPy4LqHup57l5of4IaohxxhlyPM8Nc5E49ri9qSjUEmjdX_zYSUhxCTMHV4eKdXN18mljcpNk0hYZEq3OSfvOzg0=",
+     "https://fitplace.jp/gyms/sendai-tomizawa/",
+     "https://fitplace.jp/gyms/sendai-yamatomachi/",
+     "https://smartfit100.com/shop/sendaiichibanchou/",
+     "https://oceans.tokyo.jp/choice/fitness/sendai-gym-osusume",
+     "https://joyfit.jp/sendaihigashiguchi/price/",
+     "https://fitpeak.co/blogs/gym-guide/%E4%BB%99%E5%8F%B0%E5%B8%82%E6%B3%89%E5%8C%BA%E3%81%AE24%E6%99%82%E9%96%93%E3%82%B8%E3%83%A0%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E6%AF%94%E8%BC%83-2026%E5%B9%B49%E6%9C%88%E6%9C%80%E6%96%B0-%E5%AE%9F%E8%B3%AA%E6%9C%88%E9%A1%8D%E3%81%8C%E5%AE%89%E3%81%84%E9%A0%86",
+     "https://exercisecoachjapan.jp/blog/gym-sendai/",
+     "https://fitness.matomer.com/post/150",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZO8rV2cCNJ_j1SdidV5xguY6soiYXslQj4bEqRQ3Cskz5cQxceldD4JLJgcFeLyfg5sX_9J2ChTIl8O0a10otrUY3MltWNa_nvH3M7-zn3DelyR-ZMPxbbpJfhKX2F1ioToMlzw==",
+     "https://yoga-fitness-enjoy.com/sendai-24hours-fitness/",
+     "https://www.fit24.jp/shop/sendaiekihigashiguchi.html",
+     "https://fitpalette.lotte.co.jp/area/c4100",
+     "https://www.s-re.jp/sendai-miyamachi/admission/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 ジム プール付き おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.s-re.jp/hiroshima-higashisenda/facility/",
+     "https://www.s-re.jp/hiroshima-higashisenda/admission/",
+     "https://www.fitta.jp/hiroshima/",
+     "https://www.fitta.jp/hiroshima/plan.html",
+     "https://renaissance02.smart.optx.jp/hiroshima-midorii/welcome/",
+     "https://h-jigyoudan.or.jp/sports-center/center-guide/use-personal/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://exercisecoachjapan.jp/blog/gym-hiroshima/",
+     "https://www.central.co.jp/club/alpark/",
+     "https://hiroshima.hiltonjapan.co.jp/facilities/fitness-center",
+     "https://fitmap.jp/magazine/gym/69227/",
+     "https://www.fitta.jp/hiroshima/",
+     "https://www.asreet.com/hiroshima/cate_38",
+     "https://b-fitness.net/hiroshima-hikaku",
+     "https://cani.jp/fitness/hiroshima-2/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEkvMR3BLJY0fJNlQdtJ3SMO1EM-uXZ7oDkcDN5YBf8iAc1eepFFs6TikNJuzT6q6yNLzAL--VjLeztQ7MOgZAiJii8Fx4Perbsy91c-dE4uDVMX_Dk07o-xiZ6wdo=",
+     "https://www.s-re.jp/hiroshima-ballparktown/",
+     "https://zexis-net.jp/zexis_hiroshima/",
+     "https://www.central.co.jp/club/alpark/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHftYeL6bdBiuSHMfxGzQj2wYU8ctjhLB_X5S2tCPciFKLet-UyToexkwgtG3B8suyXDEiOdjCdbihRgIhCw_udlzYOrrWRhCADT2X_SJhhpX4sWDcyhAlQuRDxzYlTP7v0QlvZWijpTkmHETIrQv32LAM=",
+     "https://zexis-net.jp/zexis_hiroshima/",
+     "https://www.s-re.jp/hiroshima-midorii/",
+     "https://www.s-re.jp/hiroshima-ballparktown/program/pool/",
+     "https://www.fitta.jp/kogominami/",
+     "https://www.central.co.jp/club/alpark/",
+     "https://h-jigyoudan.or.jp/sports-center/fitness-plaza/fitness-pool/"
+    ],
+    "error": ""
+   }
+  },
+  "パーソナルジム 料金 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://basis-gym.jp/column/personal-gym-market-price/",
+     "https://247-sports.jp/workout/",
+     "https://beyond-gym.com/gym/gym-futakotamagawa/",
+     "https://www.rizap.jp/plan?ad=F&store_id=53",
+     "https://www.rizap.jp/plan/prime"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://body-make.jp/price/",
+     "https://blog.webscrap.net/gym/topic-29/",
+     "https://reglow-gym.jp/column/personal-gym-cost-2026",
+     "https://pas0na.com/basic/price/",
+     "https://reglow-gym.jp/column/gym-monthly-fee-average",
+     "https://reglow-gym.jp/column/personal-gym-cost-guide",
+     "https://habit-training.com/media/personal-gym-cheap-recommend/",
+     "https://salugia-gym.com/explaining-the-market-price-of-personal-gyms/",
+     "https://vady.jp/article/personal-gym-price-guide-2/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://personalgym.co.jp/personal-gym-price/",
+     "https://element-gym.com/column/training/personaltraining-subscription/",
+     "https://rita-style.co.jp/blog/market-rate/",
+     "https://beyond-gym.com/blog/personal-training-expensive/",
+     "https://www.rizap.jp/articles/entries/1696",
+     "https://www.space-gym.com/578/",
+     "https://fithive-gym.com/ja/blog/personal-gym-price-range/",
+     "https://concierge.diet/personal/expensive/",
+     "https://www.rizap.jp/articles/entries/1696",
+     "https://element-gym.com/column/training/personaltraining-low-price/",
+     "https://beyond-gym.com/blog/personal-training-expensive/",
+     "https://habit-training.com/media/personal-trainer-hourly-rate/",
+     "https://beyond-fujisawa.com/blog/2025/8619/",
+     "https://waple.jp/blog/personalgym-monthlyfee/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 月会費 安い 理由": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://chocozap.jp/info/112",
+     "https://dreamdouble-corp.com/fc_anytime.html",
+     "https://chocozap.jp/about"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gymcloud.jp/media/archives/2804",
+     "https://www.nas-club.co.jp/magazine/gym/gym-price/",
+     "https://www.ecofit24.com/column/fitness-gym-price-comparison-ecofit24/",
+     "https://reglow-gym.jp/column/gym-monthly-fee-average",
+     "https://hare-gym.com/2026/01/12/%E3%82%B8%E3%83%A0%E3%81%AE%E6%9C%88%E4%BC%9A%E8%B2%BB%E7%9B%B8%E5%A0%B4%E3%81%8C%E4%B8%B8%E3%82%8F%E3%81%8B%E3%82%8A%EF%BC%81%E3%82%B3%E3%82%B9%E3%83%91%E6%9C%80%E5%BC%B7%E3%82%B8%E3%83%A0%E3%82%92/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 入会金 かからない": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://chocozap.jp/price",
+     "https://fastgym24.tipness.co.jp/campaign/index.html?cp=recommend"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://en.gyym.jp/",
+     "https://joyfit.jp/hankyumikuniekimae/2026/09/01/8%E6%9C%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%B3%EF%BC%81%E3%80%90%E6%AE%8B%E3%82%8A30%E5%90%8D%E6%A7%98%EF%BC%81%E3%80%91/",
+     "https://www.outline-gym.com/media/chocozap-freeadmission-campaign/",
+     "https://fitwoman.jp/columns/article/how-to-search-personal-training-gyms-with-free-admission-fee",
+     "https://qool.jp/193601",
+     "https://gymmaga.com/gym-ranking-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "パーソナルトレーニング 費用 高い 理由": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://element-gym.com/column/training/personaltraining-low-price/",
+     "https://www.eight-base.com/post/eightbase34",
+     "https://www.rizap.jp/plan?ad=F&store_id=53"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://drtraining.jp/media/29264/",
+     "https://totalworkout.jp/twplus/473",
+     "https://kumapon.jp/personalgym/column/price.html",
+     "https://beyond-gym.com/blog/personal-training-expensive/",
+     "http://dee-gym.jp/column/personal-training/price-expensive/",
+     "https://zilch-ebina.com/trainerblog/personal-training-fee/",
+     "https://zilch-ebina.com/trainerblog/personal-gym-price/",
+     "https://fitness-sync.com/blog/posts/personal-gym-price-expensive",
+     "https://beauty-terrace.jp/column/personalgym-plan/",
+     "https://gym-finder.jp/articles/column/pricing/price-guide/",
+     "https://reglow-gym.jp/column/gym-monthly-fee-average",
+     "https://salugia-gym.com/explaining-the-market-price-of-personal-gyms/",
+     "https://dee-gym.jp/column/personal-training/personal-training-market-price/",
+     "https://fitlife-blog.com/fitness-tips/personal-training-price/",
+     "https://www.space-gym.com/578/",
+     "https://qool.jp/121461"
+    ],
+    "error": ""
+   }
+  },
+  "深夜営業 ジム 料金 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://chocozap.jp/price",
+     "https://fit365.jp/menu/",
+     "https://joyfit.jp/odai/price/",
+     "https://www.alltimefitness.jp/lp/",
+     "https://www.anytimefitness.co.jp/roppongi/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gymcloud.jp/media/archives/2804",
+     "https://www.ecofit24.com/column/fitness-gym-price-comparison-ecofit24/",
+     "https://www.ecofit24.com/column/fitness-gym-fee-average/",
+     "https://reglow-gym.jp/column/gym-monthly-fee-average",
+     "https://contextneo.jp/ryoukin/24gym-43397.html",
+     "https://www.fitplace-lab.com/24gym-ranking/",
+     "https://raysgym.jp/media/24hours-gym-lowprice/",
+     "https://bestone.allabout.co.jp/a19132/",
+     "https://kurabeta.jp/24hsportsgym/",
+     "https://ncollect.co.jp/choco/chocoany/",
+     "https://privategym88.jp/2025/02/25/anytime-chocozap-1/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gymcloud.jp/media/archives/2804",
+     "https://lp.s-re.jp/mm/",
+     "https://fitplace.jp/lp202211/",
+     "https://www.central.co.jp/lp/24h/",
+     "https://www.central.co.jp/lp/24h/",
+     "https://joyfit.jp/akajoy/",
+     "https://fitpalette.lotte.co.jp/post/SS11",
+     "https://tip.tipness.co.jp/shop_info/SHP051/plan/",
+     "https://my-best.com/4574",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFNAMCV5UoeQSWBpvXXyBlAYbxtJ93NbwCyXnvYDlFsCtocompBF2eqJMtBXdxBD2Wf0twVxkZj2pzPAzqWG43qq8TfiCPapTSrn9YkPzI_HeKld3BBPl7U9mtMQYAfNNElUz08Ge_YMFd_C6pf55Kd",
+     "https://gymcloud.jp/media/archives/2804"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 退会 解約金 かかる": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://chocozap.jp/price",
+     "https://www.fitness24.jp/2026autumn/lp/",
+     "https://www.pref.kyoto.jp/shohise/1294273032248.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gymcloud.jp/media/archives/6544",
+     "https://gymcloud.jp/media/archives/5992",
+     "https://gymcloud.jp/media/archives/5317",
+     "https://gymcloud.jp/media/archives/4752",
+     "https://gymcloud.jp/media/archives/4771",
+     "https://gymcloud.jp/media/archives/4232",
+     "https://gymcloud.jp/media/archives/5472",
+     "https://www.city.toshima.lg.jp/124/kurashi/shohi/shouhishapocket/2406190943.html",
+     "https://honsan-pochi.com/fastgym24-withdrawal/",
+     "https://www.no-trouble.caa.go.jp/qa/continuousservices.html",
+     "https://www.city.kashihara.nara.jp/kurashi_tetsuzuki/anshin_anzen/6/6/1/7455.html",
+     "https://www.yokohama-consumer.or.jp/consultation/casestudy/search/detail.html?consultation_id=124"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 学生 料金 割引": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.anytimefitness.co.jp/highschoolpass/",
+     "https://www.goldsgym.jp/shop/tachikawa-tokyo/news/5828/?shop=tachikawa-tokyo",
+     "https://www.goldsgym.jp/shop/yotsuya-tokyo/membership/",
+     "https://www.konami.com/sportsclub/plan/u-39/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://joyfit.jp/hanamaki/2026/03/30/%E5%AD%A6%E5%89%B2%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%B3/",
+     "https://joyfit.jp/kurokawa/2026/08/01/%E5%AD%A6%E6%A0%A1%E9%96%A2%E4%BF%82%E8%80%85%E5%89%B2%E3%80%81%E5%A7%8B%E3%82%81%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82/",
+     "https://www.media.zenhoren.jp/best-gyms-for-students/",
+     "https://fitpalette.lotte.co.jp/post/SS8",
+     "https://zerobody.jp/articles/632/",
+     "https://b-fitness.net/fukuoka-gym-student",
+     "https://progress-private-gym.com/media/20260312/",
+     "https://exeed-plus.com/personalgym-studentdiscount/",
+     "https://gym-sauna.tokyo/column/20260403-2/",
+     "https://b-fitness.net/tokyo-gym-student"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://personal-gym.diet/columns/%E5%AD%A6%E7%94%9F%E3%81%95%E3%82%93%E3%81%AB%E5%90%88%E3%81%A3%E3%81%9F%E3%82%B8%E3%83%A0%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E3%82%92%E5%BE%B9%E5%BA%95%E8%A7%A3%E8%AA%AC%EF%BC%81/",
+     "https://www.media.zenhoren.jp/best-gyms-for-students/",
+     "https://blog.goody-gym.jp/student-gym-lowprice/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13323687958",
+     "https://fitmap.jp/magazine/gym/recommend/63430/",
+     "https://harbor-gym.com/affordable-personal-gyms-for-students-comparison-guide-2026/",
+     "https://mottokinniku.jp/column/20260930/",
+     "https://www.iluty.jp/post/recommended-gyms-for-students"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 体験 無料 料金": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://fitplace.jp/personal-subsc/",
+     "https://www.s-re.jp/lp/fit-taiken/",
+     "https://www.konami.com/sportsclub/riyo/fitness/taiken/",
+     "https://www.s-re.jp/aeonmall-zama/lp/fit-taiken/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://fitpalette.lotte.co.jp/post/SS14",
+     "https://www.konami.com/sportsclub/riyo/fitness/taiken/",
+     "https://zerobody.jp/articles/374/",
+     "https://mfd.fitnessgym-mania.com/osaka-personaltraining-trial",
+     "https://mfd.fitnessgym-mania.com/6942",
+     "https://fitness365.jp/free.html",
+     "https://mfd.fitnessgym-mania.com/tokyo-personaltraining-trial",
+     "https://hours-space.jp/news/126"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://qool.jp/122477",
+     "https://lp.s-re.jp/taiken/",
+     "https://www.jexer.jp/fitness/trial.index.html",
+     "https://gym.alpron.co.jp/information/personal-gym-free-trial/",
+     "https://fitpalette.lotte.co.jp/post/SS14",
+     "https://fit365.jp/",
+     "https://www.fit24.jp/trial/",
+     "https://en.gyym.jp/"
+    ],
+    "error": ""
+   }
+  },
+  "パーソナル 食事指導 費用 追加": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.space-gym.com/about/",
+     "https://katagirijuku.jp/price",
+     "https://element-gym.com/element-top/all/otsuka/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://online.tipness.co.jp/magazine/lesson-513/",
+     "https://note.com/hidesharez/n/na94e5fe2f844",
+     "https://www.space-gym.com/637/",
+     "https://www.space-gym.com/578/",
+     "https://salugia-gym.com/blog/online-dietary-guidance/article-introducing-online-meal-guidance-services/",
+     "https://zerobody.jp/articles/417/",
+     "https://habit-training.com/media/personal-gym-cheap-recommend/",
+     "https://karareru.com/gym-cost-guide/",
+     "https://personalgym.co.jp/personal-gym-price/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://reglow-gym.jp/column/personal-gym-meal-guidance-cost",
+     "https://t-fitgroup.com/training/market-price-of-personal-training/",
+     "https://reglow-gym.jp/column/personal-gym-meal-guidance-cost",
+     "https://gymplanet-kouncho.com/meal-nutrition/",
+     "https://salugia-gym.com/blog/online-dietary-guidance/article-introducing-online-meal-guidance-services/",
+     "https://fithive-gym.com/ja/blog/personal-training-meal-plan/",
+     "https://fithive-gym.com/ja/blog/personal-training-meal-plan/",
+     "https://marutore.jp/column/gym/p5070/",
+     "https://rita-style.co.jp/blog/market-rate/",
+     "https://harbor-gym.com/compare-personal-training-costs-and-identify-best-value-plan/",
+     "https://progress-private-gym.com/media/20251124/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 初期費用 内訳": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.alltimefitness.jp/faq/",
+     "https://faq.konamisportsclub.jp/inquiries/4db5d5e9711fefef0027?page=3&q=%E3%80%90%E3%83%95%E3%82%A3%E3%83%83%E3%83%88%E3%83%8D%E3%82%B9%E3%80%91%E5%90%84%E7%A8%AE%E6%89%8B%E7%B6%9A%E3%81%8D&select_id=03f710236e0f&select_sid=4045453",
+     "https://chocozap.jp/price",
+     "https://www.konami.com/sportsclub/plan/startplan/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.worldplus-gym.com/price/",
+     "https://fitmap.jp/magazine/column/169878/",
+     "https://gyms.jp/lp/articles/gym24h-fitness-club-hiyou",
+     "https://reglow-gym.jp/column/personal-gym-cost-2026",
+     "https://vady.jp/article/personal-gym-price-guide/",
+     "https://coaching-by-web.com/cost/personal-gym-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 選び方 初心者": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://gymreview.jp/guide/how-to-choose-gym.html",
+     "https://www.s-re.jp/program/fitnessgate/",
+     "https://www.konami.com/sportsclub/riyo/fitness/taiken/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nas-club.co.jp/magazine/gym/gym-beginner/",
+     "https://www.nas-club.co.jp/magazine/gym/howto-choose-gym/",
+     "https://life.oricon.co.jp/rank_fitness/special/knowledge/gym-beginner-guide/",
+     "https://fitpalette.lotte.co.jp/post/SS3",
+     "https://note.com/dreamy_snake2740/n/nbf5d43b60dc5",
+     "https://elcsumfit.jp/how-to-choose-gyms-for-gym-beginners/",
+     "https://yutayutaka.com/yurutoregymselect/",
+     "https://gyms.jp/lp/articles/gym24h-gym-osusume",
+     "https://o-style.info/magazine/531/",
+     "https://oceans.tokyo.jp/choice/fitness/gym-beginner",
+     "https://www.cospa-wellness.co.jp/cospa/labo/training/10714.html",
+     "https://zoel.jp/column/exercise/select_gym/",
+     "https://tsudoiba-pg.com/training/gym-selection/",
+     "https://gym-sauna.tokyo/column/20250327-4/",
+     "https://sportsgym-fc.com/first-time/"
+    ],
+    "error": ""
+   }
+  },
+  "パーソナルジム 選び方 失敗しない": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_086/",
+     "https://nsca-japan.or.jp/certification/exam/nsca-cpt/",
+     "https://www.kokusen.go.jp/news/data/n-20240124_2.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://waple.jp/blog/personal-gym-choice-mistakes/",
+     "https://extremity.jp/20251030-2/",
+     "https://kumapon.jp/personalgym/column/choose.html",
+     "https://takumee.jp/pgym/magazine/training/02/",
+     "https://personalgym-realbody.com/personal-gym-selection/",
+     "https://musefit.co.jp/how-to-choose-personal-gym-without-failure/",
+     "https://coaching-by-web.com/cost/how-to-choose-gym/",
+     "https://realworkout.jp/column/personalgym/howtochoose/",
+     "https://furdi.jp/column/%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B8%E3%83%A0%E9%81%B8%E3%81%B3%E3%81%A7%E5%A4%B1%E6%95%97%E3%83%BB%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA%E3%81%845%E3%81%A4%E3%81%AE%E3%83%9D%E3%82%A4-218903/",
+     "https://wellpafitness.jp/blog/20260226-2842/",
+     "https://pts-bee.com/blog/i-often-make-mistakes/",
+     "https://follow-gym.com/%E3%82%B3%E3%83%A9%E3%83%A0/11921/",
+     "https://gym-reraise.com/blog/jim-select-20250226/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 通いやすい 立地 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.s-re.jp/magazine/fitness/05/",
+     "https://zoel.jp/column/exercise/select_gym/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nas-club.co.jp/magazine/gym/howto-choose-gym/",
+     "https://joyfit.jp/akajoy/health_knowledge/post04/",
+     "https://www.central.co.jp/catchup/fitness/colum_2606_2/",
+     "https://mermake.co.jp/blog/gym-location/",
+     "https://lfjonlineshop.jp/apps/note/?p=416",
+     "https://gym-sauna.tokyo/column/20250327-4/",
+     "https://hours-space.jp/news/101",
+     "https://personalgym-guide.com/introduction/%E8%87%AA%E5%AE%85%E8%BF%91%E3%81%8F%E3%81%AE%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B8%E3%83%A0%E3%81%AF%E3%81%A9%E3%81%93%E3%81%8C%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%EF%BC%9F/",
+     "https://www.jmta.site/personalgym-open-location"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.s-re.jp/magazine/fitness/05/",
+     "https://zoel.jp/column/exercise/select_gym/",
+     "https://hokusetsutrading.com/archives/1376",
+     "https://forza-gran.com/news/blog/4453/",
+     "https://hacogym.jp/fc/fccolumn/gym_location",
+     "https://www.beequick.jp/media/location/",
+     "https://mermake.co.jp/blog/gym-location/",
+     "https://www.ma-pmi-agent.co.jp/cmb/ma/column20260930.html",
+     "https://note.com/hiro_qol_hack/n/nef46de5c0392"
+    ],
+    "error": ""
+   }
+  },
+  "総合ジム 小型ジム 違い 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://oedaban.com/gymiko/24hgym_fitness-club/",
+     "https://www.s-re.jp/shakujiikoen/",
+     "https://www.anytimefitness.co.jp/",
+     "https://chocozap.jp/price"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sd-fit.jp/slit/health/gym-market/",
+     "https://vady.jp/article/gym-ranking-comparison-guide/",
+     "https://www.bodies.jp/contents/gym-types-comparison-diet/",
+     "https://zoel.jp/column/exercise/select_gym/",
+     "https://superbloom.jp/2023/03/difference-personalgym-fitnessgym/",
+     "https://tsudoiba-pg.com/training/gym-selection/",
+     "https://estyfitness.com/blog/post-8215.html",
+     "https://bestone.allabout.co.jp/a19132/",
+     "https://ykiblog.com/24%E6%99%82%E9%96%93%E5%96%B6%E6%A5%AD%E3%82%B8%E3%83%A0%E3%81%A8%E3%83%95%E3%82%A3%E3%83%83%E3%83%88%E3%83%8D%E3%82%B9%E3%82%AF%E3%83%A9%E3%83%96%E3%82%92%E6%AF%94%E8%BC%83%EF%BC%81%E3%80%90%E3%83%A1/"
+    ],
+    "error": ""
+   }
+  },
+  "パーソナル トレーナー 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://park.nsca-japan.or.jp/category-13/post-165/",
+     "https://nsca-japan.or.jp/certification/exam/",
+     "https://www.kokusen.go.jp/news/data/n-20220421_1.html",
+     "https://www.kokusen.go.jp/pdf/n-20240124_2.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20181011_1.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://247-sports.jp/workout/article/personalgym/777/",
+     "https://realworkout.jp/column/personalgym/howtochoose-trainer/",
+     "https://personalgym.co.jp/personal-trainer-selection/",
+     "https://jotst.com/trainerblog/personal-trainer-choice/",
+     "https://magazine.voicenote.jp/18947/",
+     "https://pas0na.com/basic/trainer/",
+     "https://fitonline.co.jp/blogs/all/how-to-choose-personal-trainer",
+     "https://plumegym.com/personaltrainer/",
+     "https://www.anzawa-bodymake.jp/14861198977460",
+     "https://follow-gym.com/%E3%82%B3%E3%83%A9%E3%83%A0/11921/",
+     "https://beautywellness-racine.com/journal/2434/",
+     "https://2ndpass.jp/column/select-trainer-license/"
+    ],
+    "error": ""
+   }
+  },
+  "女性専用ジム 選び方 安全": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.curves.co.jp/faq/",
+     "https://port-fitness.jp/faq/",
+     "https://www.fitme-gym.com/",
+     "https://womgym.jp/faq/",
+     "https://www.kokusen.go.jp/news/data/n-20220421_1.html",
+     "https://www.kokusen.go.jp/news/data/n-20240124_2.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/4510",
+     "https://my-best.com/26888",
+     "https://gymcloud.jp/media/archives/2656",
+     "https://fitpalette.lotte.co.jp/post/SS15",
+     "https://home.osakagas.co.jp/column/personal-gym/personal-gym-supplier/personal-gym-woman/",
+     "https://pas0na.com/basic/women/",
+     "https://sportsclub-life.jp/info/blog/3831/",
+     "https://cachie.jp/media/personal-gym/women-only/",
+     "https://deed-gym.com/personal_gym-woman_safety/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sportsclub-life.jp/info/blog/3831/",
+     "https://deed-gym.com/personal_gym-woman_safety/",
+     "https://gym-kaigyou.com/column/24h-gym-womens-safety/",
+     "https://gymcloud.jp/media/archives/2656",
+     "https://www.beequick.jp/media/24hour-gym-security/",
+     "https://glish.jp/column/detail/20251011224001/",
+     "https://fitpalette.lotte.co.jp/post/SS15",
+     "https://furdi.jp/column/gyn-female-only-4106/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 設備 チェックポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.alive-gym.com/2026/06/19/2266/",
+     "https://synergym.jp/fukuchiyama/post_news-blog/%E3%82%B7%E3%83%8A%E3%82%B8%E3%83%A0%E4%BA%AC%E9%83%BD%E7%A6%8F%E7%9F%A5%E5%B1%B1%E5%BA%97%E3%81%B8%E8%A6%8B%E5%AD%A6%E3%81%AB%E8%A1%8C%E3%81%93%E3%81%86%E2%99%AA/",
+     "https://www.myhealth-24h.com/kengaku/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://vady.jp/column/20bbcfec-55d8-4ef1-95cc-ddd00ba6ef14",
+     "https://furdi.jp/column/%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B8%E3%83%A0%E8%A6%8B%E5%AD%A6%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%887%E9%81%B8%EF%BC%81%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E9%81%B8-219256/",
+     "https://karadacospa.jp/article/guide/gym-nyuukai-mae-check",
+     "https://zoel.jp/column/exercise/select_gym/",
+     "https://gym-sauna.tokyo/column/20250327-4/",
+     "https://kintoreblog.com/gym-trial/",
+     "https://www.nishi.com/training/inspection",
+     "https://kaminashi.jp/media/equipment-inspection-checklist"
+    ],
+    "error": ""
+   }
+  },
+  "パーソナル 契約前 確認すること": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/pdf/n-20221221_6.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20240124_2.html",
+     "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_086/",
+     "https://www.kokusen.go.jp/news/data/n-20181011_1.html",
+     "https://www.kokusen.go.jp/pdf/n-20220421_1.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/sodan/kyusai/funsou230907.html",
+     "https://www.spt.metro.tokyo.lg.jp/tosei/hodohappyo/press/2023/09/07/07.html",
+     "https://www.city.ise.mie.jp/kurashi/soudan/syouhiseikatsu/1009790/1016552.html",
+     "https://www.kokusen.go.jp/pdf/n-20181011_1.pdf",
+     "https://reglow-gym.jp/column/personal-gym-cost-2026",
+     "https://reglow-gym.jp/column/personal-gym-cancellation-guide",
+     "https://rbdgym.com/personal-gym-contract-checklist/",
+     "https://d-fields.jp/topics/knowledge/20250628735.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://d-fields.jp/topics/knowledge/20250628735.html",
+     "https://basis-gym.jp/blog/uncategorized/16451/",
+     "https://www.peach-gym7.site/blog/p20260911-37/",
+     "https://reglow-gym.jp/blog/gym-pre-enrollment-checklist",
+     "https://the-personal-gym.com/blog/personal-gym/how-to-choose-a-personal-gym-without-regrets/",
+     "https://note.com/mazurenkojapan/n/ne6dae8853b9c",
+     "https://gym.eaglebase-gym.com/blog/personalgym-choice/",
+     "https://www.space-gym.com/544/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 体験 見るところ": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://kintoreblog.com/gym-trial/",
+     "https://www.kokusen.go.jp/news/data/n-20181011_1.html",
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/sodan/kinkyu/20240319.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://fitpalette.lotte.co.jp/post/SS14",
+     "https://furdi.jp/column/%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B8%E3%83%A0%E8%A6%8B%E5%AD%A6%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%887%E9%81%B8%EF%BC%81%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E9%81%B8-219256/",
+     "https://reglow-gym.jp/blog/gym-pre-enrollment-checklist",
+     "https://training-gym-lemon.com/2026/08/05/hiroshima-gym-tour-checklist/",
+     "https://www.tfc-fitness.com/cate_column/3626/",
+     "https://rbdgym.com/personal-gym-trial-7points/",
+     "https://world-wing.info/column2/gym-experience-checklist/",
+     "https://kintoreblog.com/gym-trial/",
+     "https://gym-finder.jp/checklist/",
+     "https://personalgym-realbody.com/personal-gym-selection/",
+     "https://hmyselect-aw3.com/jim-choice4/",
+     "https://beautywellness-racine.com/journal/2434/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 比較 マシン フリーウェイト 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://acewebcontent.azureedge.net/assets/education-resources/lifestyle/fitfacts/pdfs/fitfacts/itemid_289.pdf",
+     "https://pubmed.ncbi.nlm.nih.gov/37582807/",
+     "https://www.acefitness.org/continuing-education/certified/may-2019/7273/the-forgotten-benefits-of-machine-training/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://joyfit.jp/akajoy/health_knowledge/post52/",
+     "https://www.s-re.jp/magazine/health/139/",
+     "https://www.nike.com/jp/a/free-weight-vs-machine",
+     "https://hacogym.jp/training/freeweighttraining_bodymake",
+     "https://note.com/sotaro0923/n/nb4aed7617dd1",
+     "https://coolfitness.jp/articles/free-weight-vs-machine/",
+     "https://gym.eaglebase-gym.com/blog/freeweight-vol20/",
+     "https://willgym-chiba.com/blog/training/3582/",
+     "https://inakahu2men.com/machines_and_free_weights/"
+    ],
+    "error": ""
+   }
+  },
+  "ダイエット ジム 効果 いつから": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://www.cdc.gov/healthy-weight-growth/losing-weight/index.html",
+     "https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/strength-training/art-20046670",
+     "https://www.niddk.nih.gov/health-information/weight-management/adult-overweight-obesity/eating-physical-activity"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tokyo-fitness.jp/kintore-kouka-8728/",
+     "https://refinas.jp/wp/column/fitnessgym_diet_itsukara/",
+     "https://lib-gym.com/kintorede-daietokouka/",
+     "https://musefit.co.jp/when-to-see-results-gym/",
+     "https://verus-gym.com/column/period/",
+     "https://oyg.jp/news/when-woman-gym-diet-appear-effective",
+     "https://iroas-gym.com/blog/635/",
+     "https://rizz-ueda.com/archives/1075",
+     "https://kashikiri-fit.com/honbu-blog/%E3%83%95%E3%82%A3%E3%83%83%E3%83%88%E3%83%8D%E3%82%B9%E3%82%B8%E3%83%A0%E3%81%AB%E9%80%9A%E3%81%A3%E3%81%A6%E5%8A%B9%E6%9E%9C%E3%81%8C%E5%87%BA%E3%82%8B%E3%81%AE%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8B/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://fiteasy.jp/blog/%E3%83%95%E3%82%A3%E3%83%83%E3%83%88%E3%83%8D%E3%82%B9%E3%82%B8%E3%83%A0%E3%81%AB%E9%80%9A%E3%81%86%E3%81%AA%E3%82%89%E4%BD%95%E6%97%A5%EF%BC%9F%E3%83%80%E3%82%A4%E3%82%A8%E3%83%83%E3%83%88%E6%88%90/",
+     "https://oyg.jp/news/when-woman-gym-diet-appear-effective",
+     "https://rita-style.co.jp/blog/personal-kikan/",
+     "https://o-style.info/magazine/810/",
+     "https://www.rizap.jp/articles/entries/1685",
+     "https://redysgym.jp/info/diet/when-does-diet-start-to-work",
+     "https://247-sports.jp/workout/article/gym/9505/",
+     "https://www.central.co.jp/catchup/fitness/colum_2511_2/"
+    ],
+    "error": ""
+   }
+  },
+  "お腹 痩せ ジム メニュー": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://pubmed.ncbi.nlm.nih.gov/21804427/",
+     "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+     "https://www.cdc.gov/healthy-weight-growth/physical-activity/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://magazine.gyym.jp/articles/5135",
+     "https://smartlog.jp/197122",
+     "https://ultora.co.jp/shop/pages/bellyslimming-muscletraining",
+     "https://www.konami.com/sportsclub/fitness/machine/refreshing-belly-menu.html",
+     "https://www.central.co.jp/catchup/fitness/colum_2601_9/"
+    ],
+    "error": ""
+   }
+  },
+  "下半身 痩せ トレーニング ジム": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://www.acefitness.org/about-ace/press-room/press-releases/319/ace-lists-most-common-fitness-myths/",
+     "https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/strength-training/art-20046670",
+     "https://www.cdc.gov/healthy-weight-growth/physical-activity/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://magazine.gyym.jp/articles/5138",
+     "https://wellulu.com/moderate-exercise/31970/",
+     "https://www.rizap.jp/articles/entries/1553",
+     "https://drtraining.jp/media/28911/",
+     "https://www.s-re.jp/magazine/health/105/",
+     "https://www.konami.com/sportsclub/fitness/machine/refreshing-lower-body-menu.html",
+     "https://foneslife.com/healthcare-magazine/entry/2025/10/30/103000_01",
+     "https://www.central.co.jp/catchup/fitness/colum_2601_2/",
+     "https://www.central.co.jp/catchup/fitness/colum_2601_9/",
+     "https://www.s-re.jp/magazine/health/172/",
+     "https://gymcloud.jp/media/archives/2809",
+     "https://tjokayama.jp/life/aerobic-exercise-squat/",
+     "https://www.kyoritsu-biyo.com/column/slim/reduce_lower_body_fat/",
+     "https://www.pilates-ivy.jp/news/combustion_effect",
+     "https://t-balance-gym.com/fcul/squat-yusanso",
+     "https://wellnessclub.jp/column/2025-11-29-848/"
+    ],
+    "error": ""
+   }
+  },
+  "リバウンド しない ダイエット ジム": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://www.niddk.nih.gov/health-information/weight-management/choosing-a-safe-successful-weight-loss-program",
+     "https://www.niddk.nih.gov/health-information/weight-management/adult-overweight-obesity/eating-physical-activity"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/kr/slnH000762439/blog/bidA097572473.html",
+     "https://katagirijuku.jp/column/rebound",
+     "https://rita-style.co.jp/blog/rebound-gym-choice/",
+     "https://www.fitness-aim.com/blog/137",
+     "https://www.rakuten.co.jp/aequalis/contents/diet-rebound/",
+     "https://the-personal-gym.com/blog/kintore-workout/how-to-avoid-rebound-weight-gain-while-dieting/",
+     "https://oneclinic.jp/medical-column/diet/no-rebound",
+     "https://www.syn-gym.com/blog/diet-rebound",
+     "https://www.lifeprime-fitness.com/post/higashijujo-rebound-gym"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://white-life.jp/1609/",
+     "https://fitpalette.lotte.co.jp/post/SS2",
+     "https://www.s-re.jp/magazine/health/105/"
+    ],
+    "error": ""
+   }
+  },
+  "食事制限 なし ダイエット ジム": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://www.cdc.gov/healthy-weight-growth/physical-activity/",
+     "https://www.mhlw.go.jp/content/001194020.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://precious.jp/articles/-/28101",
+     "https://melos.media/wellness/166726/",
+     "https://wellulu.com/balanced-diet/27359/",
+     "https://basefood.co.jp/magazine/column/20637/",
+     "https://www.ktk.gr.jp/aequalis/no-restriction-diet/",
+     "https://levcli.jp/articles/female-medical-diet/531/",
+     "https://vitabrid.co.jp/columns/healthcare/shokujiseigennashi2507/",
+     "https://asfit.tokyo/diet-technic-97/",
+     "https://leading-tbc.com/information/2025/08/09/5278/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://the-personal-gym.com/blog/personal-training/roppongi-diet-no-restriction/",
+     "https://lib-gym.com/monita-syokuziseigennnasi-ksama/",
+     "https://247-sports.jp/workout/about/purpose/pp02/",
+     "https://asfit.tokyo/diet-technic-97/",
+     "https://www.central.co.jp/catchup/fitness/colum_2512_1/",
+     "https://media.bizento.com/diet/"
+    ],
+    "error": ""
+   }
+  },
+  "産後 ダイエット ジム": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://www.acog.org/womens-health/faqs/exercise-after-pregnancy",
+     "https://www.nhs.uk/baby/support-and-services/keeping-fit-and-healthy-with-a-baby/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gymcloud.jp/media/archives/3524",
+     "https://katagirijuku.jp/column/postpartum_diet",
+     "https://deed-gym.com/202407_002/",
+     "https://www.next-gym.com/column/6377/",
+     "https://mamatore.com/media/sango_personaltraining/",
+     "https://b-concept.tokyo/column/total/postpartum_training/",
+     "https://cloud-gym.com/archives/maternity/17873/",
+     "https://www.mich-fit.com/postpartum-personalgym/",
+     "https://beauty-terrace.jp/column/withchild/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://qool.jp/179789",
+     "https://pg.kireiclub.jp/26574/%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%E9%96%8B%E5%A7%8B%EF%BC%9F%E3%80%90%E7%94%A3%E5%BE%8C%E3%83%80%E3%82%A4%E3%82%A8%E3%83%83%E3%83%88%E3%80%91%E5%AD%90%E9%80%A3%E3%82%8Cok%E3%81%AA%E3%81%8A%E3%81%99/",
+     "https://waple.jp/blog/child-friendly-personal-gym/",
+     "https://mamatore.com/media/kodomotogym-fukuoka/",
+     "https://www.diet-undeux.jp/solution/childwith-diet/",
+     "https://kozure-gym.com/"
+    ],
+    "error": ""
+   }
+  },
+  "筋トレ 有酸素 順番 ダイエット": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://pmc.ncbi.nlm.nih.gov/articles/PMC5752732/",
+     "https://www.cdc.gov/healthy-weight-growth/physical-activity/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://online.tipness.co.jp/magazine/lesson-489/",
+     "https://www.worldplus-gym.com/training_labo/0007.html",
+     "https://www.ecofit24.com/column/cardio-strength-training-order/",
+     "https://wellnessclub.jp/column/2025-11-29-848/",
+     "https://www.pilates-ivy.jp/news/combustion_effect",
+     "https://issin.cc/blogs/article/diet-cardio-vs-strength-training-body-composition-2026",
+     "https://medicalgym-tryto.com/blog/%E3%80%8C%E7%AD%8B%E3%83%88%E3%83%AC%E3%81%A8%E6%9C%89%E9%85%B8%E7%B4%A0%E3%80%81%E3%81%A9%E3%81%A1%E3%82%89%E3%81%8C%E5%85%88%EF%BC%9F%E7%9B%AE%E7%9A%84%E5%88%A5%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B/",
+     "https://fitness-lespo.com/blog/%E6%9C%89%E9%85%B8%E7%B4%A0%E9%81%8B%E5%8B%95%E3%81%A8%E7%AD%8B%E3%83%88%E3%83%AC%E3%80%81%E3%81%A9%E3%81%A1%E3%82%89%E3%81%8C%E5%85%88%EF%BC%9F%E9%A0%86%E7%95%AA%E3%82%84%E3%81%8A%E3%81%99%E3%81%99/",
+     "https://media.bizento.com/cardio/",
+     "https://gymcloud.jp/media/archives/2809",
+     "https://www.yspc-ysmc.jp/ysmc/column/health-fitness/diet-theory-3.html",
+     "https://www.glico.com/jp/powerpro/training/entry29/",
+     "https://ailesplus.com/news/?p=59463",
+     "https://prtimes.jp/main/html/rd/p/000000049.000090464.html",
+     "https://www.itoman-s.com/kurume/sports-lesson/2024/06/57250/",
+     "https://mashiko-seikei.com/%E6%9C%89%E9%85%B8%E7%B4%A0%E9%81%8B%E5%8B%95%E3%81%A8%E7%84%A1%E9%85%B8%E7%B4%A0%E9%81%8B%E5%8B%95%E3%81%9D%E3%82%8C%E3%81%9E%E3%82%8C%E3%81%AE%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%81%AB"
+    ],
+    "error": ""
+   }
+  },
+  "ダイエット パーソナル 向いている人": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://drtraining.jp/media/14301/",
+     "https://realworkout.jp/column/personalgym/need-dietary-guidance/",
+     "https://test.kennet.mhlw.go.jp/information/information/exercise/s-00-002.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://247-workout.jp/article/personalgym/9510/",
+     "https://note.com/guest_iwasawa/n/n1fc06899c13d",
+     "https://renow.jp/articles/what-kind-of-person-is-suitable-for-personal-training-gym/",
+     "https://fitwoman.jp/columns/article/what-kind-of-person-is-suitable-for-personal-training-gym",
+     "https://gym.eaglebase-gym.com/5-characteristics-of-a-good-candidate-for-a-personal-gym/",
+     "https://www.syn-gym.com/blog/personal-gym-suitable-person",
+     "https://www.qualia-base.com/post/%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AB%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B46%E3%81%A4",
+     "https://qool.jp/195742",
+     "https://lime-gym.com/columns/298/",
+     "https://marutore.jp/column/gym/p1426/",
+     "https://eff-personal.jp/columns/hutomomo-yase-hosoku-3-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-12.html",
+     "https://zilch-ebina.com/trainerblog/suitable-for-personal-gym/",
+     "https://syna-j.com/the-difference-between/",
+     "https://lukegym.com/blog/%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB%E3%82%B8%E3%83%A0%E3%81%AB%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BA%BA%E3%83%BB%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%E4%BA%BA/"
+    ],
+    "error": ""
+   }
+  },
+  "体脂肪 減らす ジム 通う頻度": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://kennet.mhlw.go.jp/information/information/exercise/s-00-005.html",
+     "https://www.cdc.gov/healthy-weight-growth/physical-activity/",
+     "https://www.cdc.gov/physical-activity-basics/adding-adults/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://online.tipness.co.jp/magazine/lesson-524/",
+     "https://wellulu.com/moderate-exercise/fitness/4763/",
+     "https://www.rizap.jp/articles/entries/1555",
+     "https://loveledge.jp/guida/gym-frequency/",
+     "https://joyfit.jp/akajoy/health_knowledge/post23/",
+     "https://getfit.jp/howto/gymyaseru",
+     "https://blueearth.co.jp/my-body/blog/gym-lose-belly-fat-menu/",
+     "https://www.flow-mine.com/post/diet-workout-frequency",
+     "https://personal.rexer-group.com/blog/gym-how-many-times/",
+     "https://www.central.co.jp/catchup/fitness/colum_2601_9/",
+     "https://tarzanweb.jp/post-220546",
+     "https://www.s-re.jp/magazine/health/172/",
+     "https://soelu.com/articles/?p=3226",
+     "https://www.ecofit24.com/column/gym-frequency/",
+     "https://personal.rexer-group.com/blog/diet-aerobic-exercise/",
+     "https://personal.rexer-group.com/blog/aerobic-exercise-how-many-times-a-week/",
+     "https://foneslife.com/healthcare-magazine/entry/2025/09/28/103000_02"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://joyfit.jp/akajoy/health_knowledge/post23/",
+     "https://www.nazgym.com/blog/%E3%82%B8%E3%83%A0%E3%81%AF%E9%80%B1%E4%BD%95%E5%9B%9E%E9%80%9A%E3%81%88%E3%81%B0%E7%97%A9%E3%81%9B%E3%82%8B%EF%BC%9F/",
+     "https://www.central.co.jp/catchup/fitness/colum_2511_2/",
+     "https://www.nas-club.co.jp/magazine/gym/gym-howmany-times-aweek/",
+     "https://www.flow-mine.com/post/diet-workout-frequency",
+     "https://www.ecofit24.com/column/gym-frequency/",
+     "https://halmek.co.jp/beauty/c/bbody/14250"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 通うだけ 痩せる": {
+   "group": "ダイエット",
+   "ChatGPT": {
+    "urls": [
+     "https://www.cdc.gov/healthy-weight-growth/physical-activity/",
+     "https://www.cdc.gov/physical-activity-basics/benefits/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.rizap.jp/articles/entries/1709",
+     "https://www.rizap.jp/articles/entries/1555",
+     "https://www.nas-club.co.jp/magazine/gym/gym-diet/",
+     "https://gorilla.clinic/operation/physical/media/slim/muscle/002/",
+     "https://fitmap.jp/magazine/column/170032/",
+     "https://bodyarchi.com/article/004/",
+     "https://fit-core.com/weight-loss_gym/",
+     "https://semipersonal.aimhigh.jp/column/2026/04/id-4376/",
+     "https://kimitsu-iron.jp/find-gym/gym-syokuji/",
+     "https://www.rizap.jp/articles/entries/1683",
+     "https://247-sports.jp/workout/article/gym/9250/",
+     "https://waple.jp/blog/gym-yasenai/",
+     "https://chicken-gym.jp/column/gym-doesnt-lose-weight/",
+     "https://woot.fit/concerns/gym-not-losing-weight",
+     "https://b-concept.tokyo/column/total/lose_weight_reason/",
+     "https://www.toyo-sports-palace.net/fcblog/2025/06/07/%E3%82%B8%E3%83%A0%E3%81%A7%E7%97%A9%E3%81%9B%E3%82%8B%E4%BA%BA%E3%83%BB%E7%97%A9%E3%81%9B%E3%81%AA%E3%81%84%E4%BA%BA%E3%81%AE%E9%81%95%E3%81%84%E3%81%A8%E3%81%AF%EF%BC%9F/",
+     "https://beyond-shonandai.com/blog/2025/5197/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://247-sports.jp/workout/article/gym/464/",
+     "https://www.rizap.jp/articles/entries/1709",
+     "https://cherish-l.jp/personal-gym-diet-result/",
+     "https://www.rizap.jp/articles/entries/1555",
+     "https://www.nas-club.co.jp/magazine/gym/gym-diet/",
+     "https://www.s-re.jp/magazine/health/105/"
+    ],
+    "error": ""
+   }
+  },
+  "運動 苦手 ジム 通える": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.konami.com/sportsclub/beginner/navi/",
+     "https://tip.tipness.co.jp/static/start_guide/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://fitpalette.lotte.co.jp/post/SS28",
+     "https://note.com/yutonworkstyle/n/n9967b2b2caee",
+     "https://aumo.jp/articles/1456033",
+     "https://personalkoba2019.com/blog/29179/",
+     "https://macho-business.com/gym-beginner-2",
+     "https://beautywellness-racine.com/journal/3221/",
+     "https://okunotrainingseitaiin.com/symptomscat/gym-beginner/",
+     "https://uchigym.net/gym-anxiety/",
+     "https://cloud-gym.com/archives/training/14481/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 続かない 理由": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://prtimes.jp/main/html/rd/p/000000007.000018213.html",
+     "https://pmc.ncbi.nlm.nih.gov/articles/PMC9072266/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sd-fit.jp/slit/health/gym-doesnt-last/",
+     "https://www.rizap.jp/articles/entries/1680",
+     "https://www.bodies.jp/column/kiwako-hori/33463/",
+     "https://verus-gym.com/column/reasons-not-following/",
+     "https://gym-sauna.tokyo/column/20250331-14/",
+     "https://www.tfc-fitness.com/cate_column/3622/",
+     "https://kenkouya.net/%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E3%82%B8%E3%83%A0%E3%81%AE%E7%B6%99%E7%B6%9A%E7%8E%87%E5%90%91%E4%B8%8A%E3%82%92%E7%9B%AE%E6%8C%87%E3%81%97%E3%81%A6%E3%82%B8%E3%83%A0%E3%81%8C%E7%B6%9A%E3%81%8B/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 恥ずかしい 初心者 女性": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.rizap.jp/articles/entries/1706",
+     "https://www.s-re.jp/magazine/shittoku/30/",
+     "https://amazones.fit/column/post-5649/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://soelu.com/articles/?p=17776",
+     "https://www.rizap.jp/articles/entries/1706",
+     "https://katagirijuku.jp/column/beginner",
+     "https://fitpalette.lotte.co.jp/post/SS28",
+     "https://reset-fasting.jp/shop/information/gym-embarrassing-woman",
+     "https://amazones.fit/post-5649/",
+     "https://amazones.fit/column/post-5649/",
+     "https://gym-sauna.tokyo/column/20250319-6/",
+     "https://beautywellness-racine.com/journal/3221/",
+     "https://rehourgym.com/gym-syoshinsya-hazukashii/",
+     "https://trainees-supplement.com/gym-beginner/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 初めて 持ち物": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://faq-tipness.dga.jp/customer/faq_detail.html?id=10275",
+     "https://estyfitness.com/beginner",
+     "https://www.dspnet.co.jp/toyosu/fitness/faq/",
+     "https://www.central.co.jp/fitness/beginner/guide/",
+     "https://kurahiro.tepco.co.jp/recreation/16897/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://life.oricon.co.jp/rank_fitness/special/knowledge/gym-beginner-guide/",
+     "https://www.nas-club.co.jp/magazine/gym/gym-beginner/",
+     "https://www.rizap.jp/articles/entries/1671",
+     "https://joyfit.jp/akajoy/health_knowledge/post25/",
+     "https://saga.mypl.net/article/shop-ouen_saga/81926",
+     "https://gym.eaglebase-gym.com/blog/gym-belongings-beginner-woman/",
+     "https://gym-sauna.tokyo/column/20250325-5/",
+     "https://gymsagasu.com/column/fitness/29/gym-trial-checklist/",
+     "https://revive-sendai.com/weblog/item/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 通う頻度 目安": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/001195869.pdf",
+     "https://www.cdc.gov/physical-activity/media/pdfs/Physical_Activity_Guidelines_2nd_edition.pdf",
+     "https://www.cdc.gov/physical-activity-basics/adding-adults/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://oceans.tokyo.jp/choice/fitness/gym-frequency",
+     "https://online.tipness.co.jp/magazine/lesson-524/",
+     "https://www.central.co.jp/catchup/fitness/colum_2511_2/",
+     "https://www.s-re.jp/magazine/health/73/",
+     "https://www.ecofit24.com/column/gym-frequency/",
+     "https://forza-gran.com/news/blog/4912/",
+     "https://verus-gym.com/column/frequency/",
+     "https://personal.rexer-group.com/blog/gym-how-many-times/",
+     "https://rbdgym.com/workout-frequency-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "運動不足 解消 ジム": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/001194020.pdf?content_id=58"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://oceans.tokyo.jp/choice/fitness/gym-frequency",
+     "https://www.rizap.jp/articles/entries/1654",
+     "https://www.nas-club.co.jp/magazine/gym/gym-effect/",
+     "https://www.ecofit24.com/column/gym-frequency/",
+     "https://refinas.jp/wp/column/fitnessgym_twiceaweek/",
+     "https://verus-gym.com/column/period/",
+     "https://verus-gym.com/column/frequency/",
+     "https://triggerfitness24.com/blog/how-often-gym-beginner.html",
+     "https://hare-gym.com/2025/07/22/%E9%81%8B%E5%8B%95%E4%B8%8D%E8%B6%B3%E3%81%AE%E3%81%82%E3%81%AA%E3%81%9F%E3%81%B8%E3%80%82%E3%82%B8%E3%83%A0%E3%81%AF%E6%95%B7%E5%B1%85%E3%81%8C%E9%AB%98%E3%81%84%EF%BC%9F%E4%BD%95%E3%81%8B%E3%82%89/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム マシン 使い方 分からない": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.goldsgym.jp/support/",
+     "https://be-fit24.jp/how-to-use-machines/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.rizap.jp/articles/entries/1670",
+     "https://www.rizap.jp/articles/entries/1656",
+     "https://www.anytimefitness.co.jp/healthier-magazine/fitness/howtotraining-1/",
+     "https://tip.tipness.co.jp/concept/x2pceyug6xkeizhp.html",
+     "https://moov.ooo/article/5d53d062c59ca8749cacea20",
+     "https://restorna.jp/blog/personaltraining/p6626/",
+     "https://www.iluty.jp/post/machine-recommended-for-beginners",
+     "https://fitlife-blog.com/training-methods/gym-beginner-machine-guide/",
+     "https://gym-sauna.tokyo/column/20250331-3/"
+    ],
+    "error": ""
+   }
+  },
+  "腰痛 ジム 通っていい": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nhs.uk/conditions/back-pain/",
+     "https://www.guysandstthomas.nhs.uk/health-information/low-back-pain/physiotherapy-and-exercises",
+     "https://www.joa.or.jp/public/sick/condition/lumbago.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yotsu-doctor.zenplace.co.jp/media/treatment_list/1599/",
+     "https://oogaki.or.jp/orthopedic-surgery/trunk-diseases/low-back-pain-exercise-core-training/",
+     "https://www.fit-axis.com/backache-gym-training-reason/",
+     "https://www.access-gym.com/post/1069",
+     "https://hare-gym.com/2025/10/13/%E8%85%B0%E7%97%9B%E6%94%B9%E5%96%84%E3%81%AB%E5%8A%B9%E3%81%8F%EF%BC%81%E3%82%B8%E3%83%A0%E3%81%A7%E3%81%AE%E7%AD%8B%E3%83%88%E3%83%AC%E3%81%A7%E5%8A%87%E7%9A%84%E3%81%AB%E5%A4%89%E3%82%8F%E3%82%8B/",
+     "https://gym-sauna.tokyo/column/20251008-2/",
+     "https://hours-space.jp/news/234",
+     "https://izunoyama-seikotsuin.com/post/post-1761",
+     "https://lionheart-seikotsuin.com/blog/23147/",
+     "https://www.mayado.jp/library/backache/muscle-training.html",
+     "https://www.carenet.com/news/general/carenet/48021",
+     "https://seitai.co.jp/symptoms/youtsu/yattewaikenai-kintore/",
+     "https://medical.nikkeibp.co.jp/leaf/all/series/guideline/202205/575072.html",
+     "https://www.mhlw.go.jp/content/11121000/000342082.pdf",
+     "https://carenetv.carenet.com/series.php?series_id=426",
+     "https://lowbackpain.jp/Guidelines-low-back-pain-practice",
+     "https://lowbackpain.jp/lower-back-pain-comprehensive-guide",
+     "https://mutsumi-cl.jp/column/1506/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 忙しい 続け方": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/001194020.pdf",
+     "https://www.nhs.uk/better-health/get-active/how-to-be-more-active/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.rizap.jp/articles/entries/1725",
+     "https://www.rizap.jp/articles/entries/1680",
+     "https://www.ecofit24.com/column/busy-worker-24h-gym-30min/",
+     "https://www.sd-fit.jp/slit/health/gym-doesnt-last/",
+     "https://www.bodies.jp/column/kiwako-hori/33463/",
+     "https://tu-domani.co.jp/column/df4fb202-7b4f-4aaa-bdba-f7632abe8730",
+     "https://amazones.fit/post-5355/",
+     "https://k-mu.me/busy/",
+     "https://gym-sauna.tokyo/column/20250331-14/",
+     "https://www.nas-club.co.jp/magazine/gym/gym-every-day/",
+     "https://note.com/omu_fitness/n/n642009c0c811",
+     "https://note.com/ginza_elite_life/n/n52d5eab7b5d9",
+     "https://247-sports.jp/workout/article/gym/9514/",
+     "https://lfjonlineshop.jp/apps/note/?p=1581",
+     "https://www.shinshinkenkou.com/blog/12240",
+     "https://progress-private-gym.com/media/20251218/",
+     "https://yusgym.jp/blog/20260302-12767/"
+    ],
+    "error": ""
+   }
+  },
+  "ジム 三日坊主 対策": {
+   "group": "運動初心者の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://cdc.gov/healthy-weight-growth/physical-activity/getting-started.html",
+     "https://www.cdc.gov/physical-activity-basics/overcoming-barriers/",
+     "https://www.cdc.gov/physical-activity-basics/adding-adults/index.html",
+     "https://www.cdc.gov/diabetes/prevention-type-2/building-a-healthy-habit.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://allabout.co.jp/gm/gc/458683/",
+     "https://tarzanweb.jp/post-181960",
+     "https://note.com/kensuke_sports/n/ne817f0e0e4e2",
+     "https://bbank.jp/blog/president/20200226-2/",
+     "https://www.ishokudogen.com/blog/undousyuukan/",
+     "https://www.next-gym.com/column/11487/",
+     "https://tryce.fit/2026/01/11/three-days-psychology/",
+     "https://www.access-gym.com/post/1341",
+     "https://yusgym.jp/blog/20250428-11552/",
+     "https://fitpalette.lotte.co.jp/post/SS30",
+     "https://drtraining.jp/media/29896/",
+     "https://www.rizap.jp/articles/entries/1680",
+     "https://www.s-re.jp/magazine/fitness/08/",
+     "https://www.s-re.jp/magazine/fitness/09/",
+     "https://www.worldplus-gym.com/training_labo/0003.html",
+     "https://verus-gym.com/column/reasons-not-following/",
+     "https://yusgym.jp/blog/20251025-12286/",
+     "https://gyms.jp/lp/articles/retention-gym-motivation"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://tokyo-fitness-navi.com/gym-continue-tips/",
+     "https://lfjonlineshop.jp/apps/note/?p=925",
+     "https://fitnessgym.tokyo/2024/09/17/%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%82%92%E7%BF%92%E6%85%A3%E5%8C%96%E3%81%97%E3%82%88%E3%81%86%EF%BC%81/",
+     "https://melos.media/training/29508/",
+     "https://tarzanweb.jp/post-282292"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

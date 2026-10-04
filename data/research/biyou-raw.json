@@ -1,0 +1,1790 @@
+{
+ "industry": "biyou",
+ "date": "2026-10-03",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 美容室 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.the-ect.jp/salon",
+     "https://merly-official.com/",
+     "https://orthair.com/",
+     "https://www.lessismore.co.jp/lim/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSB/stc2200045/spkSP13_spdL064/",
+     "https://www.bestsalonreport.jp/press/54550/",
+     "https://beauty.hotpepper.jp/svcSB/stc2200045/",
+     "https://beauty.hotpepper.jp/svcSB/macBB/salon/sacX061/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://stekina.com/pre27/salon",
+     "https://beauty.hotpepper.jp/svcSB/spkSP13_spdL064/",
+     "https://beauty.hotpepper.jp/keyword/%E5%A4%A7%E9%98%AA%E3%80%80%E4%BA%BA%E6%B0%97%E3%80%80%E7%BE%8E%E5%AE%B9%E9%99%A2%E3%80%80%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/",
+     "https://www.beauty-park.jp/osaka/umeda/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 美容室 カット 上手い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.peek-a-boo.co.jp/visual/27394/",
+     "https://www.ricca.life/",
+     "https://www.stepbonecut.jp/",
+     "https://beauty.hotpepper.jp/slnH000184852/?cstt=244"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGsyGXVb0KK2fZvLVixPl84fmcGEQdtVD2NvyGCDotC6XpmUvRKdKIJVIFIpc_nLRehvtkbjOiGQCzLtmvRiflDUeF845FKrJuKtwLSRYtYOsMC9xTQ8AKtxrWAKxw7IdoaBA=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.bestsalonreport.jp/press/102277/",
+     "https://www.bestsalonreport.jp/press/5103/",
+     "https://stekina.com/pre13/staff",
+     "https://beauty.hotpepper.jp/keyword/%E3%82%AB%E3%83%83%E3%83%88%E3%80%80%E4%B8%8A%E6%89%8B%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%80%80%E5%8F%A3%E3%82%B3%E3%83%9F/",
+     "https://hair.bu0lk.co.jp/tokyo/",
+     "https://beauty.rakuten.co.jp/pre13/tk101/sort15/",
+     "https://beauty.rakuten.co.jp/men/pre13/tk135/",
+     "https://www.beauty-park.jp/specials/tokyo-cut/",
+     "https://beauty.rakuten.co.jp/pre13/tk101/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 縮毛矯正 美容室": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.no-blow.net/",
+     "https://www.ema-style.com/shop/ema-premium-beauty-salon/",
+     "https://kumu-salon.com/menu/",
+     "https://aface-hair.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSC/stc9915740/spkSP03_spdL047/",
+     "https://thechair.jp/",
+     "https://www.no-blow.net/?doing_wp_cron=1791015494.6735849380493164062500"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/genre/gkw027/pre23/city23100001/",
+     "https://beauty.hotpepper.jp/keyword/%E6%9B%B2%E3%81%8C%E3%82%8B%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3%E3%80%80%E5%90%8D%E5%8F%A4%E5%B1%8B/",
+     "https://beauty.hotpepper.jp/keyword/%E3%83%A1%E3%83%B3%E3%82%BA%E3%80%80%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3%E3%80%80%E5%90%8D%E5%8F%A4%E5%B1%8B/",
+     "https://beauty.hotpepper.jp/keyword/%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E3%80%80%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3%E3%80%80%E6%BF%80%E5%AE%89/",
+     "https://beauty.hotpepper.jp/keyword/%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3%E3%80%80%E5%B0%82%E9%96%80%E5%BA%97%E3%80%80%E5%90%8D%E5%8F%A4%E5%B1%8B/",
+     "https://beauty.rakuten.co.jp/addr23101/tk107/sort10/",
+     "https://beauty.rakuten.co.jp/addr23101/tk107/sort15/",
+     "https://chouchou-shop.jp/blogs/articles/straightening-nagoya",
+     "https://un-label.net/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 カラー 美容室 人気": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000393518/",
+     "https://lore-beauty.jp/",
+     "https://lore-beauty.jp/lore-%E6%9C%AC%E5%BA%97/",
+     "https://votangroup.com/archives/shop/votantenjin",
+     "https://kchiara.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://yokatoko-fukuoka.jp/column/hair-salon-color/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG9z6SkMQ8pIKYHtmZjwckG_WJPIKo3FsW4DxbsZIO8TyoVOMopOfM-dmJ9vhouuWkqBLrhnuxkHYxGKe9RYi51NaXj3VltMsj_G6M2QBkXYzdNX8qD7ha4DTDaBI_YNxOLkziih-nhz8WNdLh-wJZkL1bWeH6SrJsO4Kco8w==",
+     "https://beauty.hotpepper.jp/svcSG/stc9925370/",
+     "https://beauty.hotpepper.jp/keyword/%E3%83%8F%E3%82%A4%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AB%E3%83%A9%E3%83%BC%E3%80%80%E4%B8%8A%E6%89%8B%E3%81%84%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%80%80%E7%A6%8F%E5%B2%A1/",
+     "https://beauty.hotpepper.jp/keyword/%E3%83%8F%E3%82%A4%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AB%E3%83%A9%E3%83%BC%E3%80%80%E7%A6%8F%E5%B2%A1/",
+     "https://beauty.hotpepper.jp/genre/gkw008/stc9925370/",
+     "https://www.bestsalonreport.jp/press/99141/",
+     "https://beauty.hotpepper.jp/svcSG/stc9925370/spkSP03_spdL042/",
+     "https://www.bestsalonreport.jp/press/99137/",
+     "https://minimodel.jp/list/1/40/194/3",
+     "https://beauty.hotpepper.jp/genre/gkw021/pre40/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/genre/gkw008/pre40/",
+     "https://beauty.hotpepper.jp/genre/gkw008/pre40/city40130001/",
+     "https://beauty.hotpepper.jp/svcSG/macGA/spkSP03_spdL042/",
+     "https://yokatoko-fukuoka.jp/column/hair-salon/",
+     "https://yokatoko-fukuoka.jp/column/hair-salon-color/",
+     "https://beauty.rakuten.co.jp/pre40/tk103/sort15/",
+     "https://beauty.rakuten.co.jp/pre40/tk103/sort4/",
+     "https://beauty.rakuten.co.jp/pre40/tk103/sort10/",
+     "https://personalcol0r.com/fukuoka/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 美容室 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000305382/review/",
+     "https://beauty.hotpepper.jp/slnH000310942/review/",
+     "https://beauty.hotpepper.jp/slnH000732658/review/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.rakuten.co.jp/addr01101/sort4/",
+     "https://beauty.hotpepper.jp/svcSD/macDA/salon/recommend/?searchGender=ALL",
+     "https://beauty.hotpepper.jp/svcSD/macDA/salon/",
+     "https://beauty.hotpepper.jp/keyword/%E6%9C%AD%E5%B9%8C%E5%B8%82%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/",
+     "https://beauty.hotpepper.jp/svcSD/macDA/salon/recommend/?searchGender=ALL",
+     "https://beauty.hotpepper.jp/svcSD/macDA/salon/",
+     "https://beauty.rakuten.co.jp/addr01101/sort15/",
+     "https://www.beauty-park.jp/hokkaido/sapporo/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSD/macDA/salon/",
+     "https://minimodel.jp/list/1/1/c1/0",
+     "https://stekina.com/svcSD/macDA/salon",
+     "https://www.bestsalonreport.jp/press/49/",
+     "https://beauty.hotpepper.jp/svcSD/macDA/spkSP13_spdL064/",
+     "https://beauty.hotpepper.jp/keyword/%E6%9C%AD%E5%B9%8C%E5%B8%82%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/",
+     "https://www.beauty-park.jp/hokkaido/sapporo-shi/",
+     "https://hairlog.jp/hokkaido",
+     "https://beauty.rakuten.co.jp/addr01101/ks117/sort4/",
+     "https://kamiu.jp/sapporo_reviews_hair/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 メンズ 美容室": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://lipps-hair.com/salon/301/",
+     "https://kenje-group.co.jp/salon/homme/",
+     "https://skalptformen.com/store-yokohama/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.rakuten.co.jp/men/addr14101/",
+     "https://prtimes.jp/main/html/rd/p/000000011.000082144.html",
+     "https://beauty.hotpepper.jp/svcSA/macAP/spkSP08_spdL071/sacX042/",
+     "https://beauty.hotpepper.jp/svcSA/macAP/spkSP13_spdL064/sacX042/",
+     "https://www.beauty-park.jp/kanagawa/yokohama-st/for-men/",
+     "https://beauty.hotpepper.jp/svcSA/macAP/spkSP08_spdL071/",
+     "https://skalptformen.com/",
+     "https://beauty.hotpepper.jp/svcSA/macAP/spkSP08_spdL071/sacX042/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSA/stc0290045/spkSP08_spdL071/",
+     "https://beauty.hotpepper.jp/svcSA/macAP/spkSP08_spdL071/sacX042/",
+     "https://beauty.hotpepper.jp/keyword/%E6%A8%AA%E6%B5%9C%E3%80%80%E3%83%A1%E3%83%B3%E3%82%BA%E5%B0%82%E9%96%80%E5%BA%97%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4/",
+     "https://beauty.hotpepper.jp/genre/gkw002/pre14/city14100001/",
+     "https://www.bestsalonreport.jp/press/2069/",
+     "https://hair.bu0lk.co.jp/yokohama/",
+     "https://beauty.rakuten.co.jp/men/addr14101/",
+     "https://kamidan.jp/recommend-biyou/yokohama-biyou/",
+     "https://skalptformen.com/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 ヘアサロン 個室": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSB/macBF/spkSP12_spdL060/",
+     "https://www.citron-design-works.com/",
+     "https://tukka.info/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSB/macBF/spkSP12_spdL060/",
+     "https://beauty.hotpepper.jp/genre/gkw067/pre26/",
+     "https://beauty.hotpepper.jp/genre/gkw067/pre26/city26100001/",
+     "https://beauty.hotpepper.jp/svcSB/macBF/spkSP12_spdL060/PN2.html",
+     "https://beauty.rakuten.co.jp/pre26/ks137/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/genre/gkw067/pre26/",
+     "https://beauty.hotpepper.jp/genre/gkw067/stc2204735/",
+     "https://www.bestsalonreport.jp/press/2972/",
+     "https://beauty.epark.jp/hair/kyoto/feature/target-private/",
+     "https://beauty.biglobe.ne.jp/salon/middle/BF/kodawari-%E5%80%8B%E5%AE%A4%E3%81%82%E3%82%8A/",
+     "https://niche-cordial-salon.com/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 美容室 髪質改善": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.agelesshairs.com/",
+     "https://ioe0815.co.jp/lp",
+     "https://kobe-ranun.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.agelesshairs.com/",
+     "https://beauty.rakuten.co.jp/addr28101/sort15/",
+     "https://stillhair1.com/",
+     "https://www.bestsalonreport.jp/press/83038/",
+     "https://beauty.hotpepper.jp/svcSB/macBG/spkSP09_spdL051/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/keyword/%E7%A5%9E%E6%88%B8%E3%80%80%E9%AB%AA%E8%B3%AA%E6%94%B9%E5%96%84%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4/",
+     "https://beauty.hotpepper.jp/pre28/city28100001/",
+     "https://beauty.hotpepper.jp/svcSB/stc2200570/spkSP09_spdL051/",
+     "https://beauty.hotpepper.jp/svcSB/macBG/spkSP09_spdL051/sacX088/",
+     "https://beauty.rakuten.co.jp/area2801/tk108/",
+     "https://beauty.rakuten.co.jp/postal6500021/",
+     "https://www.agelesshairs.com/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 美容室 予約 当日": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSE/macEA/salon/today/",
+     "https://beauty.hotpepper.jp/svcSE/stc9950550/immediate/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/keyword/%E4%BB%99%E5%8F%B0%E5%B8%82%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%80%80%E4%BB%8A%E3%81%8B%E3%82%89%E8%A1%8C%E3%81%91%E3%82%8B/",
+     "https://beauty.hotpepper.jp/svcSE/stc9950180/immediate/",
+     "https://minimodel.jp/list/1/6/c1/137",
+     "https://minimodel.jp/list/1/6/c0/137",
+     "https://beauty.rakuten.co.jp/addr04101/ks163/",
+     "https://beauty.rakuten.co.jp/addr04101/ks163/sort10/",
+     "https://beauty.rakuten.co.jp/eki3/ks163/",
+     "https://beauty.hotpepper.jp/svcSE/stc9950550/immediate/",
+     "https://beauty.hotpepper.jp/svcSE/macEA/salon/today/",
+     "https://beauty.hotpepper.jp/svcSE/macEA/salon/today/",
+     "https://beauty.hotpepper.jp/svcSE/stc9950550/immediate/",
+     "https://beauty.rakuten.co.jp/area0405/ks163/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.rakuten.co.jp/area0401/",
+     "https://beauty.rakuten.co.jp/pre04/ks163/",
+     "https://beauty.rakuten.co.jp/addr04101/",
+     "https://beauty.rakuten.co.jp/addr04101/ks163/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 美容室 安い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://chancegroup.co.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.11cut.com/",
+     "https://beauty.rakuten.co.jp/addr34101/sort10/",
+     "https://beauty.hotpepper.jp/svcSF/macFA/spkSP04_spdL009/",
+     "https://minimodel.jp/list/1/34/c0/17",
+     "https://minimodel.jp/list/1/34/c0/17",
+     "https://beauty.hotpepper.jp/keyword/%E3%82%AB%E3%83%83%E3%83%88%E3%80%80%E5%AE%89%E3%81%84%E3%80%80%E5%BA%83%E5%B3%B6/",
+     "https://beauty.rakuten.co.jp/pre34/tk101/sort10/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://minimodel.jp/list/1/34/c0/17",
+     "https://beauty.hotpepper.jp/keyword/%E3%82%AB%E3%83%83%E3%83%88%E3%80%80%E5%AE%89%E3%81%84%E3%80%80%E5%BA%83%E5%B3%B6/",
+     "https://beauty.hotpepper.jp/keyword/%E3%83%98%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88%E3%80%80%E5%AE%89%E3%81%84%E3%80%80%E5%BA%83%E5%B3%B6/",
+     "https://www.beauty-park.jp/hiroshima/hiroshima-shi/",
+     "https://beauty.hotpepper.jp/keyword/%E5%BA%83%E5%B3%B6%E5%B8%82%E3%80%80%E3%82%AB%E3%83%83%E3%83%88%E3%80%80%E5%AE%89%E3%81%84%E3%80%80%E7%BE%8E%E5%AE%B9%E9%99%A2/",
+     "https://www.beauty-park.jp/hiroshima/no-reservation/",
+     "https://www.bestsalonreport.jp/press/23043/",
+     "https://beauty.hotpepper.jp/svcSF/macFA/spkSP04_spdL009/",
+     "https://riyou.jp/low_cut/hiroshima/34101/",
+     "https://beauty.hotpepper.jp/genre/gkw001/pre34/city34100001/",
+     "https://riyou.jp/low_cut/hiroshima/34212/",
+     "https://hairlog.jp/hiroshima/C34101/lowprice"
+    ],
+    "error": ""
+   }
+  },
+  "カット 料金 相場": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.elego.info/entry.php?eid=312103",
+     "https://prtimes.jp/main/html/rd/p/000000044.000061391.html",
+     "https://www.qbhouse.co.jp/guidance/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://www.jpmarket-conditions.com/9531/",
+     "https://www.elego.info/entry.php?eid=312103",
+     "https://sieve-hair.jp/blog/cut-fee/",
+     "https://uraraka.co.jp/harutopi/2022/07/15/%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%81%AE%E3%82%AB%E3%83%83%E3%83%88%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4%E3%82%92%E8%A7%A3%E8%AA%AC/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://www.pricey.jp/web/articles/4912",
+     "https://assist-all.co.jp/salon_reserve/column/20250714-6835/",
+     "https://www.b-merit.jp/magazine/cutcolorpriceguide/",
+     "https://infinity-mobius.com/news/17995/",
+     "https://boblog.tv/post/8577/",
+     "https://doorbell-atomu.com/media/20260306/",
+     "https://salon.tb-id.com/scope/tabenote_management_mprice_240419_01",
+     "https://www.elego.info/entry.php?eid=312103"
+    ],
+    "error": ""
+   }
+  },
+  "カラー 料金 相場": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://infinity-mobius.com/news/17995/",
+     "https://retouch.co.jp/%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.b-merit.jp/magazine/cutcolorpriceguide/",
+     "https://assist-all.co.jp/salon_reserve/column/20250710-6749/",
+     "https://assist-all.co.jp/salon_reserve/column/20250710-6749/",
+     "https://dears-salon.com/advice/haircolr/price-range",
+     "https://flow-kyoto.com/blog/detail/20260318/",
+     "https://dears-salon.com/advice/haircolr/price-range",
+     "https://minnano.wpx.jp/haircolor-price",
+     "https://hairsalon-you.net/column/20260212/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1172328291",
+     "https://sun-platinum.com/blog/20251118/",
+     "https://vimhair.jp/ginowan/2026/07/23/hair-color-price2607/",
+     "https://hairsalon-you.net/column/20260212/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://assist-all.co.jp/salon_reserve/column/20250710-6749/",
+     "https://vimhair.jp/ginowan/2026/07/23/%E3%83%98%E3%82%A2%E3%82%AB%E3%83%A9%E3%83%BC-%E5%80%A4%E6%AE%B5/",
+     "https://anaroir.jp/column/20251212/",
+     "https://boblog.tv/post/8577/",
+     "https://contextneo.jp/ryoukin/hair-color-4787.html",
+     "https://merly-official.com/column/c8f4e266-62b2-41eb-ba1b-7aceb3fdfb7d",
+     "https://hairsalon-you.net/column/20260212/",
+     "https://hairmakegize.com/column/3a778e67-fc98-4f9f-be78-a72640acdf79"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 選び方 初めて": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://hba.beauty.hotpepper.jp/search/column/c_price/38414/",
+     "https://beauty.hotpepper.jp/",
+     "https://lipps-hair.com/column/10750/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.clubd.co.jp/menscosme/post-first-time-hair-salon/",
+     "https://www.ozmall.co.jp/hairsalon/men/37863/",
+     "https://monan.co.jp/blog/shippai-shinai-hairsalon/",
+     "https://www.costa-hair.jp/column/mens-first-salon-guide",
+     "https://organic-luxis.jp/blog/20250902-584/",
+     "https://agland.jp/column/275064a7-3024-459e-87f5-3cda80b0090d",
+     "https://moon-hair.com/blog/choice-search/",
+     "https://flow-kyoto.com/blog/detail/20260418/",
+     "https://soragami-nagoya.com/column/b1b89928-d4a4-4507-85b2-12cf9b090577",
+     "https://www.costa-hair.jp/column/how-to-find-good-hair-salon-tips-2026-05-20",
+     "https://jobvr.co.jp/hairdresser-howtochoose/",
+     "https://agland.jp/column/76fb58dd-b9cd-491a-bc71-41e990788f3b",
+     "https://hair-salon-repos.jp/column/8d24fcbe-9cd4-4765-9551-37707a7dbacd",
+     "https://sun-platinum.com/blog/20250918/",
+     "https://rs-hair-nara.com/column/20260118/",
+     "https://to-ne-hairsalon.com/column/84426c99-d80b-4680-9bf6-76e70dda75bc"
+    ],
+    "error": ""
+   }
+  },
+  "ヘアカラー 種類 選び方": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jhcia.org/en/information/1_classification.html",
+     "https://www.jcia.org/user/public/knowledge/explain/hair-coloring",
+     "https://www.kao.co.jp/liesecolor/qa/",
+     "https://www.kao.com/jp/cosmetics_qa/detail/16524/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.biteki.com/hair/colors/574250",
+     "https://www.b-exgroup.com/bexjournal/howto/3403",
+     "https://ameblo.jp/meilleur-hair/entry-12396932897.html",
+     "https://enore-color.jp/blogs/bleachcolor/16849/",
+     "https://choice.ameba.jp/gray-hair-dye/hair-manicure/",
+     "https://ash-hair.com/column/detail/3339/",
+     "https://ancels-colorbutter.com/Basics-haircoloring.html",
+     "https://www.hairdressing-bh.com/blog/2248/",
+     "https://orienstella.jp/?p=4928"
+    ],
+    "error": ""
+   }
+  },
+  "白髪染め 料金 美容室": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://fufu-color.com/",
+     "https://avenir1985.jp/kashiwa/menu",
+     "https://fufu-color.com/qanda/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000305649/blog/bidA107400253.html",
+     "https://orienstella.jp/?p=4174",
+     "https://beauty.hotpepper.jp/slnH000305649/blog/bidA074523740.html",
+     "https://a-w-a.co.jp/somari/root-touchupcolor/",
+     "https://casacolor.jp/price/",
+     "https://beauty.hotpepper.jp/slnH000305649/blog/bidA074523740.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG8VwB41il73NDnVqcniqUDfT1zvSgUzVtqHEdrJkZz7Do8B4wumemIyx-iPk3i4VLOiZT5zhfsm875O7jXPMzpM32cbVB-mPbfJ9iXK2sDhjn6poZ8qEk7t7b1gQ==",
+     "https://arnie-color.com/shirogazo-compare/",
+     "https://financial-field.com/living/entry-330682",
+     "https://lux-hairsalon.com/how-much-is-shiragabokashi/",
+     "https://beauty.rakuten.co.jp/addr13115/tk104/sort10/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000305649/blog/bidA074523740.html",
+     "https://www.shiragazome.jp/kiso/salonhikaku.html",
+     "https://someyadream.jp/blog/column/34/",
+     "https://altruist.jp/column/7ab68295-a215-4e31-94d2-f842fb112100",
+     "https://flow-kyoto.com/blog/detail/20260318/",
+     "https://lux-hairsalon.com/how-much-is-shiragabokashi/",
+     "http://sabrinafair.info/blog/2582/",
+     "https://orienstella.jp/?p=4174",
+     "https://www.newsab.com/knowledge/hair-dye-price.html",
+     "https://shouriblog.com/middle-aged/shiraga/siragazome-souba-otoko/",
+     "http://www.kirei-hair-color.com/price/",
+     "https://story1005.com/colorblog/2025/04/04/%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%81%AE%E3%83%AD%E3%83%B3%E3%82%B0%E6%96%99%E9%87%91%E4%BA%8B%E6%83%85%EF%BD%9C%E8%B3%A2%E3%81%8F%E9%81%B8%E3%82%93%E3%81%A7%E7%90%86%E6%83%B3%E3%81%AE%E3%83%98%E3%82%A2/"
+    ],
+    "error": ""
+   }
+  },
+  "ハイライト 料金 相場": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.costa-hair.jp/column/highlight-color-types-order-guide",
+     "https://gladroom.jp/price.html",
+     "https://www.iro.tokyo.jp/207594255261-2"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sun-platinum.com/blog/20251106/",
+     "https://kakimoto-arms.com/price/ginza/color/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10281728480",
+     "https://beauty.hotpepper.jp/slnH000428110/blog/bidA093579893.html",
+     "https://enore-color.jp/blogs/designcolor/22785/",
+     "https://hair.socie.jp/special/creative/22886/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10245335010"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://assist-all.co.jp/salon_reserve/column/20250710-6749/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1279985727",
+     "https://hair.socie.jp/special/creative/22886/",
+     "https://infinity-mobius.com/news/17995/",
+     "https://enore-color.jp/blogs/designcolor/22785/",
+     "https://sun-platinum.com/blog/20251106/",
+     "https://biyou-situ.com/beauty-salon-fee/",
+     "https://masaki-ishikawa.net/color/get-to-know-the-highlight-color-times-and-price-market.html",
+     "https://minimodel.jp/list/1/0/c0/148",
+     "https://beauty.hotpepper.jp/keyword/%E3%83%98%E3%82%A2%E3%82%AB%E3%83%A9%E3%83%BC%E3%80%80%E3%83%8F%E3%82%A4%E3%83%A9%E3%82%A4%E3%83%88%E3%80%80%E6%96%99%E9%87%91/",
+     "https://beauty.hotpepper.jp/genre/gkw012/stc9916390/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10245335010"
+    ],
+    "error": ""
+   }
+  },
+  "ブリーチ 料金 いくら": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://elysian.jp/menu/",
+     "https://www.hair-greed.com/price/",
+     "https://reservia.jp/reserve/menu/bfb666f21d?locale=&start_page=2",
+     "https://luck-tokyo.jp/menu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sans-hair.jp/blog/detail/20260106/",
+     "https://anaroir.jp/column/20251206/",
+     "https://coii-hair.com/blog/2160/",
+     "https://vimhair.jp/uruma/2026/07/23/buri-chi-souba2607/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://morikoshi.net/commitment-color/buri-chi-color-nedan.html",
+     "https://sans-hair.jp/blog/detail/20260106/",
+     "https://anaroir.jp/column/20251206/",
+     "https://sans-hair.jp/blog/detail/20251012/",
+     "https://coii-hair.com/blog/1988/",
+     "https://sun-platinum.com/blog/20251118/",
+     "https://coii-hair.com/blog/2160/",
+     "https://lobec-motoyama.com/column/dd7e5f69-cc49-49a5-9c17-44b3eab9fa03",
+     "https://progress-higashi.com/column/11f054e9-c0b7-475a-8dbf-d066c9ef9f4e",
+     "https://minimodel.jp/room/hair/bleach-hair",
+     "https://www.prosol.co.jp/itsukaichi/blog/18903/",
+     "https://kyogokupro.com/note/breach-price/"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 カット カラー セット 料金": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://terrahair.jp/menu/",
+     "https://www.gichair.jp/menu/",
+     "https://www.l-daleite.co.jp/menu.html",
+     "https://www.cote-hair.com/salon/cote/menuprice/",
+     "https://www.shu-group.jp/price/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://dears-salon.com/advice/haircolr/price-range",
+     "https://infinity-mobius.com/news/17995/",
+     "https://salon.tb-id.com/scope/tabenote_management_ccmprice_240821_01",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13321786273",
+     "https://infinity-mobius.com/news/17995/",
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://boblog.tv/post/8577/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12243550437",
+     "https://tmgcomplex.jp/column/detail/20260622120010/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://assist-all.co.jp/salon_reserve/column/20250710-6749/",
+     "https://www.b-merit.jp/magazine/cutcolorpriceguide/",
+     "https://jobvr.co.jp/beauty-salon-cutcolor-cost/",
+     "https://rapol-care.jp/2026/01/31/avarage-selling-prise/",
+     "https://www.salon-chart.com/10583",
+     "https://merly-official.com/column/ae5a7d7d-34ed-43e4-b69f-3f309af16b44",
+     "https://flow-kyoto.com/blog/detail/20260318/",
+     "https://wamu-gr.co.jp/blog/post-482/"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 指名料 相場": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://hairlog.jp/special/article/8818",
+     "https://atrich.jp/menu/",
+     "https://kireibizmedia.jp/column/staff-reservation-fee/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://work.beauty.hotpepper.jp/guide/article/00189/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14302638449",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11327521901",
+     "https://relax-job.com/more/119745",
+     "https://kireibizmedia.jp/column/staff-reservation-fee/",
+     "https://www.youtube.com/watch?v=HBtL3gguQeg",
+     "https://tada-reserve.jp/blog/nomination-fee/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://relax-job.com/more/119745",
+     "https://work.beauty.hotpepper.jp/guide/article/00189/",
+     "https://www.ybe.ac.jp/archives/926",
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://salonx.jp/blog/biyoshi-kyuryo-buai-guide",
+     "https://kireibizmedia.jp/column/staff-reservation-fee/",
+     "https://salon.tb-id.com/scope/tabenote_management_staffRfee_240419_01",
+     "https://kateyokablog.com/%E7%BE%8E%E5%AE%B9%E5%B8%AB%E3%81%AE%E6%8C%87%E5%90%8D%E6%96%99%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%A7%A3%E8%AA%AC%EF%BC%81%E6%8C%87%E5%90%8D%E3%81%99%E3%82%8B%E3%81%AE%E3%81%AF%E6%81%A5%E3%81%9A/",
+     "https://www.joboon.net/column/beauty-salon-appointment-fee/"
+    ],
+    "error": ""
+   }
+  },
+  "美容師 選び方 失敗しない": {
+   "group": "カット・カラーの料金と選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty-st.co.jp/media/how-to-choose-salon/",
+     "https://note.com/sawa_cheminn21/n/n31536b023da3",
+     "https://beauty.hotpepper.jp/slnH000706767/blog/bidA104604057.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://esse-online.jp/articles/-/5945",
+     "https://10mtv.jp/pc/column/article.php?column_article_id=702",
+     "https://minimodel.jp/room/hair/how-to-choose-a-hairdresser",
+     "https://www.predelistyle.com/beauty/20220708-2659",
+     "https://jobvr.co.jp/hairdresser-howtochoose/",
+     "https://ash-hair.com/column/detail/7756/",
+     "https://tranquille-hair.jp/column/595a4f3e-caf6-45ce-808e-bb545db84466",
+     "https://sans-hair.jp/blog/detail/20250112/",
+     "https://libcolor.net/column/detail/20251109100005/"
+    ],
+    "error": ""
+   }
+  },
+  "縮毛矯正 料金 相場": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://across-hair-design.com/blog/shukumou-kyousei-price-guide-2026/",
+     "https://tumugi.tokyo/straight/price/",
+     "https://r.goope.jp/hair-chainon/menu/c1055770",
+     "https://bearbeauty.co.jp/riz-hair/menu",
+     "https://naoki-oshima-syukumou.com/",
+     "https://furstin.net/menu"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlntS3PLGR7RSoZjEq9Mic4PMyDTsWp92zQZqSD4VkYko_DwDba_p6YjIWTH22H4QP8NVWvGP60z1SI0wlFw48xED4TmyHg-czjitpb7WnDcYp268wWG0ZagtcLpFvqzQ1UUO8sGDF",
+     "https://sante-hairsalon.com/131",
+     "https://minimodel.jp/room/hair/straight-perm",
+     "https://enore-kamishitsukaizen.jp/blogs/syukumoukyosei/16903/",
+     "https://morikoshi.net/straightening-hair/syukumoukyousei-nedann.html",
+     "https://www.au-be.jp/column/5bneir9z7g75/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14233984054",
+     "https://tumugi.tokyo/straight/price/",
+     "https://enore.jp/blogs/syukumoukyosei/16830/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://mian-hair.jp/ai-based-hair-straightening-price-survey/",
+     "https://try-salon.jp/know-how/price/",
+     "https://contextneo.jp/ryoukin/syukumou-kyousei-4407.html",
+     "https://www.kyiii.com/post/market-price",
+     "https://www.au-be.jp/column/5bneir9z7g75/",
+     "https://across-hair-design.com/blog/shukumou-kyousei-price-guide-2026/",
+     "https://www.hair-beldad.jp/hair-straightening-price/",
+     "https://merref.com/info/4108268"
+    ],
+    "error": ""
+   }
+  },
+  "縮毛矯正 選び方 美容室": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://eclart.co.jp/news-and-column/33/",
+     "https://tumugi.tokyo/straight/how-to-choose/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000663080/blog/bidA076705918.html",
+     "https://www.au-be.jp/column/d8tt9g-to/",
+     "https://enore.jp/blogs/syukumoukyosei/4958/",
+     "https://www.costa-hair.jp/column/straightening-perm-guide",
+     "https://altruist.jp/column/aee5cf0d-a2e3-41bd-9072-63cf0bd52f52",
+     "https://eclart.co.jp/news-and-column/33/",
+     "https://www.loren-hair.jp/blog/archives/2785",
+     "https://bonheur-hair.com/column/5230/",
+     "https://yukinaga1484.com/%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3%E3%82%B3%E3%83%A9%E3%83%A0/6804/",
+     "https://www.mtgec.jp/beauty/refa/column/article_009.html",
+     "https://www.ozmall.co.jp/hairsalon/shukumokyosei/",
+     "https://morikoshi.net/relaxed-hair/syukumoukyousei-umai-biyousitu.html",
+     "https://kamirepair.jp/select-hairsalon",
+     "https://yosuke-sato.tokyo/blog/24415/",
+     "https://www.haru-no-sora.com/2020/09/29/%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3/",
+     "https://kenjiinoue.net/qa/straight/10536.html"
+    ],
+    "error": ""
+   }
+  },
+  "縮毛矯正 どれくらい持つ": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000709878/blog/bidA078951894.html",
+     "https://www.au-be.jp/column/20270617-1/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://across-hair-design.com/blog/shukumou-kyousei-duration-2026/",
+     "https://eclart.co.jp/news-and-column/203/",
+     "https://onenext.co.jp/column/frequency-hair-straightening.html",
+     "https://beauty.hotpepper.jp/slnH000776395/blog/bidA102087805.html",
+     "https://note.com/orebana/n/n37255e7734c6",
+     "https://www.mtgec.jp/beauty/refa/column/article_053.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13102032268"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000798359/blog/bidA113217387.html",
+     "https://kyogokupro.com/note/how-long-does-keratin-straightening-last/",
+     "https://morikoshi.net/straightening-hair-failure/syukumoukyousei-donokuraimotsu.html",
+     "https://enore-kamishitsukaizen.jp/blogs/syukumoukyosei/17539/",
+     "https://www.loren-hair.jp/blog/archives/508",
+     "https://across-hair-design.com/blog/shukumou-kyousei-duration-2026/",
+     "https://la-rosee-hirakata.com/media/20251218/",
+     "https://boappu-salon.com/archives/12416",
+     "https://zeal-leciel-hair.com/column/d14c3535-0ac0-466d-a0bc-d1d3c780eb80",
+     "https://www.mtgec.jp/beauty/refa/column/article_053.html",
+     "https://salonia.jp/column/hair/hair-how-to/vol_cl14/",
+     "https://beauty.hotpepper.jp/slnH000577094/blog/bidA086596391.html",
+     "https://note.com/glosstokyo/n/n953cd9fd68a4",
+     "https://onenext.co.jp/column/frequency-hair-straightening.html",
+     "https://valette.tokyo/column/9ee7e3ee-e5ad-48d9-9431-d1fd207b11e3"
+    ],
+    "error": ""
+   }
+  },
+  "縮毛矯正 ダメージ 髪質": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jstage.jst.go.jp/article/sfj/60/9/60_9_575/_pdf/-char/ja",
+     "https://pubmed.ncbi.nlm.nih.gov/24261682/",
+     "https://dermatology.ca/public-patients/diseases-conditions/hair-conditions/hair-care/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTpVSNfzSr7LoYYbxx1D0YayOotN_29uSakmp8HpBvKB69YhQnrugAb6RIsi0zjXT-3ZNCMYnvaZoElNLfDL6McZAs-S31JAjuNMMEvhTi_7eX3YNy_WwLoC4rl3Om",
+     "https://beauty.hotpepper.jp/slnH000567153/blog/bidA100578242.html",
+     "https://morikoshi.net/hair-straightening-article/syukumoukyouseikamishitsukaizen.html",
+     "https://sheer-hair.jp/straightening-compare/",
+     "https://eclart.co.jp/news-and-column/81/",
+     "https://enore-kamishitsukaizen.jp/blogs/kamishitsukaizen/12765/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11304090591",
+     "https://www.demi.nicca.co.jp/media/741/",
+     "https://eden-treatment-namba.com/kamishitsu-kaizen-shukumoukyousei-chigai-osaka"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://we-rule.jp/2026/03/25/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E3%80%91%E9%85%B8%E6%80%A7%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%83%88%E3%81%AE%E7%9C%9F%E5%AE%9F%E3%80%82%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3%E3%81%A8/",
+     "https://melia-hair-salon.com/blog/20260120-4727/",
+     "https://across-hair-design.com/blog/shukumou-kyousei-complete-guide-2026/",
+     "https://salon-mogo.com/%E7%B8%AE%E6%AF%9B%E7%9F%AF%E6%AD%A3%E3%81%8C%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%E3%81%AA%E9%AB%AA%E8%B3%AA%E3%81%A8%E3%81%AF%EF%BC%9F%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E4%BA%BA%E3%83%BB/",
+     "https://oku-satomi.com/column/0f071993-08ad-4137-ba35-ec8072864223"
+    ],
+    "error": ""
+   }
+  },
+  "縮毛矯正 失敗 直し方": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.au-be.jp/column/20260703-1/",
+     "https://enore-kamishitsukaizen.jp/blogs/syukumoukyosei/17230/",
+     "https://www.kusegehack.com/haircare/trouble/294"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.au-be.jp/column/7rh6-idx3v6/",
+     "https://enore.jp/blogs/syukumoukyosei/3971/",
+     "https://morikoshi.net/hair-straightening-failure-repair",
+     "https://enore-kamishitsukaizen.jp/blogs/syukumoukyosei/17171/",
+     "https://www.au-be.jp/column/reqq-63oh3/",
+     "https://www.morikoshi.jp/news/syukumoukyousei-sippai",
+     "https://kyogokupro.com/note/unruly-hair-straightening-failure/",
+     "https://kazuhirouno.jp/archives/23426",
+     "https://try-salon.jp/mistake/failure/",
+     "https://pilastrohair.com/examples-of-failed-hair-straightening-treatments-and-how-to-fix-them/",
+     "https://morikoshi.net/relaxed-hair/syukumoukyousei-bibirimou.html",
+     "https://www.au-be.jp/column/xi9c-nmmw/",
+     "https://shilk.jp/failure_bibirige",
+     "https://melia-hair-salon.com/blog/20251119-4609/",
+     "https://yosuke-sato.tokyo/blog/548/",
+     "https://yukinaga1484.com/pickup/6613/"
+    ],
+    "error": ""
+   }
+  },
+  "パーマ 料金 相場": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://flow-kyoto.com/blog/detail/20260112/",
+     "https://www.bearbeauty.co.jp/globe/menu",
+     "https://ranacien.com/menu/",
+     "https://www.nambu-hair.jp/price/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://doorbell-atomu.com/media/20260106/",
+     "https://menssalon-triwell.jp/column/detail/20251217142634/",
+     "https://sieve-hair.jp/blog/perm-prices/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11282114726",
+     "https://www.plage-bb.co.jp/beauty/menu"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://menssalon-triwell.jp/column/detail/20251217142634/",
+     "https://doorbell-atomu.com/media/20260106/",
+     "https://sun-platinum.com/blog/20250906/",
+     "https://coii-hair.com/blog/2198/",
+     "https://salon.tb-id.com/scope/tabenote_management_mprice_240419_01",
+     "https://raccoon-tokyo.com/column/4cd953c3-48fd-4a70-a0fa-f6efbb989a73",
+     "https://doorbell-atomu.com/media/20260312/",
+     "https://monkeypod2004.net/column/4e60d09f-7fb6-4f2f-80a3-a7ef66507373",
+     "https://biyou-situ.com/beauty-salon-fee/",
+     "https://epark.jp/mocobe/i-perm-price/",
+     "https://ameblo.jp/87works-shiba/entry-11259168291.html",
+     "https://anaroir.jp/column/20251118/",
+     "https://fleur0205.jp/blog/post253/",
+     "https://image-act-tsunashima.com/column/detail/22101102181713/",
+     "https://linksforhair.com/blog/column/34/",
+     "https://hozon-navi.com/perm-price/"
+    ],
+    "error": ""
+   }
+  },
+  "デジタルパーマ 選び方": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://hairdresser-taka.com/ja/blog10/",
+     "https://www.hayatosalons.com/page/japan-digitalperm/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://minimodel.jp/room/hair/digitalperm-2022",
+     "https://morikoshi.net/perm-article/digital-perm-prone-to.html",
+     "https://ash-hair.com/column/detail/4773/",
+     "https://kamiwazayasan.blogspot.com/2025/11/blog-post_24.html",
+     "https://mulberry-hair.main.jp/?p=9746",
+     "https://fleur0205.jp/blog/post257/",
+     "https://mieno.net/blog/6314/",
+     "https://agape-hair.com/crushlab/designperm-vs-digitalperm-guide/",
+     "https://www.hair-salon-wave.com/blog/29095.html",
+     "https://blog.syouhei-hair.jp/?p=44051",
+     "https://beauty.hotpepper.jp/magazine/403725/",
+     "https://www.costa-hair.jp/column/perm-types-selection-guide",
+     "https://www.costa-hair.jp/column/long-hair-perm-types-order-guide-2026-05-22",
+     "https://www.costa-hair.jp/column/digital-perm-vs-cold-perm-comparison-2026-04-26",
+     "https://try-salon.jp/mens/digital-vs-cold-perm-straightening/",
+     "https://www.hayatosalons.com/page/london-digitalperm/",
+     "https://kamitohada.net/perm/",
+     "https://biteki-seikatu.com/beauty/hair-care/digital-perm"
+    ],
+    "error": ""
+   }
+  },
+  "くせ毛 美容室 選び方": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://kusege-salon.com/",
+     "https://isesaki-only.com/2026/05/13/isesaki-mens-kusege-hairstyle-howto/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kururi-hair.com/blogs/blog/%E3%81%8F%E3%81%9B%E6%AF%9B%E3%81%95%E3%82%93%E5%90%91%E3%81%91-%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E7%BE%8E%E5%AE%B9%E5%B8%AB%E3%81%95%E3%82%93%E9%81%B8%E3%81%B3%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%95%E9%81%B8",
+     "https://eclart.co.jp/news-and-column/33/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7CPV9jGq-Acpgn9ZPSLhU1LugdvTMR66TJnYh5LCSR5qB7TDyYPyq9MJCgZtR1WXXPq8K_eQ4Kb9KoIpUMuvdM4MVMtOVcs9zJgNDQexRpoh3XLyfIXoJfMHqoueXihW4ptCs4UnSMIZBAgxrAFo49BmZ0k-HPIEu1d4HsXYn8Cey_Rnv7kQ6C0NMkMHx-PcmJlc=",
+     "https://rope-0515.com/column/0489cfff-5d26-43c2-bc9e-bd4975e1e253",
+     "https://www.hairdesignrayz.com/post/curly-hair-style-tips",
+     "https://ameblo.jp/shironekonaoko/entry-12594162114.html",
+     "https://rope-0515.com/column/6574f129-5ee1-4ac6-b324-a63ae841d19b"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wailua-hair.com/blog/hair-dressing.html",
+     "https://kururi-hair.com/blogs/blog/%E3%81%8F%E3%81%9B%E6%AF%9B%E3%81%95%E3%82%93%E5%90%91%E3%81%91-%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E7%BE%8E%E5%AE%B9%E5%B8%AB%E3%81%95%E3%82%93%E9%81%B8%E3%81%B3%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%95%E9%81%B8",
+     "https://note.com/haruhairlabo0125/n/n981eca6e8b22",
+     "https://eclart.co.jp/news-and-column/33/",
+     "https://www.loren-hair.jp/blog/archives/2785",
+     "https://bonheur-hair.com/column/5230/",
+     "https://www.mtgec.jp/beauty/refa/column/article_009.html",
+     "https://beauty.hotpepper.jp/magazine/839822/",
+     "https://gokantakajyo.com/blog/20260618/2888/"
+    ],
+    "error": ""
+   }
+  },
+  "髪質改善 料金 相場": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://salonapis.com/kamishitsu-kaizen-price/",
+     "https://syukumou.jp/blog/blog_4234/",
+     "https://beauty.hotpepper.jp/slnH000610765/coupon/?cstt=10"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://bokuno1205.com/media/detail/20260930-12/",
+     "https://zeen-hairsalon.net/post-1989/",
+     "https://enore-kamishitsukaizen.jp/blogs/kamishitsukaizen/12679/",
+     "https://note.com/glosstokyo/n/n7dd5d078acf9",
+     "https://zeen-hairsalon.net/post-1989/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://cancam.jp/archives/1187046",
+     "https://pono-hair.com/2025/06/27/hair-quality-improvement-price/",
+     "https://enore-kamishitsukaizen.jp/blogs/kamishitsukaizen/12679/",
+     "https://www.salon-venus.com/media/post-442/",
+     "https://guild-ota.com/blog/column/20220308185340-3353",
+     "https://goodvibeshair.jp/smoothing-price/",
+     "https://morikoshi.net/enzyme-treatment/kamishitsukaizen-nedan.html",
+     "https://mezon.jocy.jp/service_types/33"
+    ],
+    "error": ""
+   }
+  },
+  "縮毛矯正 カラー 同日": {
+   "group": "縮毛矯正・パーマの悩みと選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.la-bouquet.jp/trivia/entry/post-12/",
+     "https://www.ozmall.co.jp/hairsalon/2301/blog/139750/",
+     "https://www.perm.or.jp/about-perm/faq/",
+     "https://www.kao.com/jp/haircare/scalp-care/11-6/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000561813/blog/bidA110966264.html",
+     "https://hair-salon-ara.com/all/4567/",
+     "https://www.hoyu.co.jp/licolo/category/hair-color/001176.html",
+     "https://filer.salo.hair/straightening_color_interval/",
+     "https://eclart.co.jp/news-and-column/36/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13271009813",
+     "https://www.loren-hair.jp/blog/archives/1487",
+     "https://loslobos.jp/blog/1470"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://eclart.co.jp/news-and-column/36/",
+     "https://eclart.co.jp/news-and-column/178/",
+     "https://loslobos.jp/blog/1470",
+     "https://www.hair-beldad.jp/hair-straightening-dye/",
+     "https://www.loren-hair.jp/blog/archives/1487",
+     "https://www.roma-hair.com/blog/archives/1487",
+     "https://boappu-salon.com/archives/12318",
+     "https://ametolamp.com/hair/syukumou-color/",
+     "https://hair-salon-ara.com/all/4567/",
+     "https://www.hoyu.co.jp/licolo/category/hair-color/001176.html",
+     "https://beauty.hotpepper.jp/magazine/988656/",
+     "https://kazuhirouno.jp/archives/20791",
+     "https://www.solana-osaka.com/post-25462/",
+     "https://answer.beauty/posts/234",
+     "https://filer.salo.hair/straightening_color_interval/"
+    ],
+    "error": ""
+   }
+  },
+  "メンズ カット 料金 相場": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://liber-shibuya-salon.com/mens-cut/mens-haircut-prices/",
+     "https://www.pricey.jp/web/articles/4912",
+     "https://prtimes.jp/main/html/rd/p/000000044.000061391.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://tiare-hair.jp/blog/20260424/",
+     "https://hairsalon-you.net/column/20251006/",
+     "https://www.elego.info/entry.php?eid=312103",
+     "https://www.plage-bb.co.jp/barber/menu",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10277256755",
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://ricos-hair.com/atelier-drops/time-is-money/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://assist-all.co.jp/salon_reserve/column/20250707-6559/",
+     "https://assist-all.co.jp/salon_reserve/column/20250714-6835/",
+     "https://menssalon-triwell.jp/column/detail/20251126094035/",
+     "https://doorbell-atomu.com/media/20260306/",
+     "https://romans-head.com/column/detail/20251207090007/",
+     "https://hairsalon-you.net/column/20251006/",
+     "https://www.elego.info/entry.php?eid=312103",
+     "https://raccoon-tokyo.com/column/4cd953c3-48fd-4a70-a0fa-f6efbb989a73",
+     "https://gyms.jp/lp/articles/lash-mens-mens-salon-hiyou"
+    ],
+    "error": ""
+   }
+  },
+  "メンズ パーマ 料金": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://37hair.space/menu-price/",
+     "https://mars-international.co.jp/groomingclub/menu/",
+     "https://mars-international.co.jp/homasahi/menu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://menssalon-triwell.jp/column/detail/20251217142634/",
+     "https://doorbell-atomu.com/media/20260312/",
+     "http://sabrinafair.info/blog/2602/",
+     "https://windbyciel.com/price/",
+     "https://beauty.hotpepper.jp/svcSA/spkSP04_spdL069/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://assist-all.co.jp/salon_reserve/column/20250707-6559/",
+     "https://menssalon-triwell.jp/column/detail/20251217142634/",
+     "https://sun-platinum.com/blog/20250906/",
+     "https://liber-shibuya.com/blog/20240926-4819/",
+     "https://coii-hair.com/blog/2198/",
+     "https://doorbell-atomu.com/media/20260312/",
+     "https://raccoon-tokyo.com/column/4cd953c3-48fd-4a70-a0fa-f6efbb989a73",
+     "https://beauty.hotpepper.jp/svcSA/spkSP04_spdL069/",
+     "https://beauty.hotpepper.jp/keyword/%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%91%E3%83%BC%E3%83%9E%E3%80%80%E5%80%A4%E6%AE%B5/",
+     "https://beauty.hotpepper.jp/keyword/%E6%9C%AD%E5%B9%8C%E3%80%80%E3%83%A1%E3%83%B3%E3%82%BA%E3%80%80%E3%83%91%E3%83%BC%E3%83%9E/"
+    ],
+    "error": ""
+   }
+  },
+  "メンズ 美容室 選び方": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.slope-media.jp/blog/post-33257/",
+     "https://www.slope-media.jp/blog/post-32921/",
+     "https://beauty.hotpepper.jp/genre/gkw002/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000206699/blog/bidA113239788.html",
+     "https://www.morikoshi.jp/news/haircut/mens-biyousitu-erabikata",
+     "https://flow-kyoto.com/blog/detail/20260418/",
+     "https://hairsalon-mare.com/blog/column/detail/20251205093947/",
+     "https://bokuno1205.com/media/detail/20260518/",
+     "https://hairsalon-you.net/column/20251006/",
+     "https://angelite2007.com/column/90bdff8b-2f9e-488c-a708-ce166c8ec172",
+     "https://raccoon-tokyo.com/column/69bf42c7-8cda-4555-9196-7b47647585bd",
+     "https://hairsalon-harada.net/news/beauty-barber-salon-mens/"
+    ],
+    "error": ""
+   }
+  },
+  "メンズ 白髪染め 美容室": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.costa-hair.jp/column/shiraga-bokashi-price-guide",
+     "https://ishida1098.com/mens-color/",
+     "https://www.hiroginza.com/salon/pb-omotesando/coupon/131317/",
+     "https://www.jhcia.org/wp-content/uploads/2021/06/i_jishu_sotobako_20210628.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://a-w-a.co.jp/somari/gray-hair-highlights-effect-price/",
+     "https://www.shiragazome.jp/kiso/salonhikaku.html",
+     "https://lux-hairsalon.com/how-much-is-shiragabokashi/",
+     "https://ash-hair.com/salondata/detail/132/coupon/detail/75140/",
+     "https://beauty.hotpepper.jp/keyword/%E3%83%A1%E3%83%B3%E3%82%BA%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%80%80%E6%96%B0%E5%AE%BF%E3%80%80%E7%99%BD%E9%AB%AA%E6%9F%93%E3%82%81/",
+     "https://www.bigen.jp/shiragazome-labo/shiragazome-salon/",
+     "https://www.mensbigen.jp/mens-hair-navi/shiragazome-salon/",
+     "https://www.mensbigen.jp/mens-hair-navi/shiragazome-hindo/",
+     "https://a-w-a.co.jp/somari/grayhairdye-frequency/"
+    ],
+    "error": ""
+   }
+  },
+  "薄毛 髪型 メンズ 美容室": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.inti-tokyo.com/inti-report/entry/post-32/",
+     "https://hairdresser-signpost.com/2023/11/25/thinhair-mens/",
+     "https://www.costa-hair.jp/column/thinning-crown-hairstyle-mens-2026-04-14",
+     "https://sarutahiko.salon/usuge-salon/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ozmall.co.jp/hairsalon/men/37896/",
+     "https://customlife.co.jp/cl-med/thinning-hair-style/",
+     "https://sarutahiko.salon/hairsalon/",
+     "https://sarutahiko.salon/usuge-30/",
+     "https://sarutahiko.salon/kamigata/",
+     "https://relive-tokyo.com/",
+     "https://www.costa-hair.jp/column/mens-hair-thinning-hairstyle-guide",
+     "https://sarutahiko.salon/cool-hage/",
+     "https://and-us.jp/5569/"
+    ],
+    "error": ""
+   }
+  },
+  "頭皮ケア ヘッドスパ 料金": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.dimple-hair.com/lp/headspa",
+     "https://smart1-natural.com/menu_headspa.html",
+     "https://www.headspatokyo.com/ja/menu"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://organic-luxis.jp/blog/20260121-696/",
+     "https://salon.tb-id.com/scope/tabenote_management_headspa-price_260402",
+     "https://mente-salon.com/media/headspa-average-price/",
+     "https://senzu-chikara.com/column/%E7%BE%8E%E5%AE%B9%E9%99%A2%E3%81%AE%E3%83%98%E3%83%83%E3%83%89%E3%82%B9%E3%83%91%E3%81%A8%E5%B0%82%E9%96%80%E5%BA%97%E3%81%AE%E9%81%95%E3%81%84%EF%BC%81%E3%81%A9%E3%81%A1%E3%82%89%E3%82%92%E9%81%B8/",
+     "https://www.elego.info/entry.php?eid=311389",
+     "https://www.demi.nicca.co.jp/media/174/",
+     "https://iikami.com/media/headspa_price/",
+     "https://beauty.hotpepper.jp/genre/kgkw095/pre45/city20100000/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/keyword/%E3%83%98%E3%83%83%E3%83%89%E3%82%B9%E3%83%91%E3%80%80%E7%9B%B8%E5%A0%B4/",
+     "https://organic-luxis.jp/blog/20260121-696/",
+     "https://contextneo.jp/ryoukin/headspa-4495.html",
+     "https://mezon.jocy.jp/service_types/1",
+     "https://doorbell-atomu.com/media/20260412/",
+     "https://nemurineko-utsunomiya.com/headspa/10559/",
+     "https://teunem.com/articles/headspa-cost-guide",
+     "https://nemurineko-h.com/headspa/1659/",
+     "https://salon-naru.com/head-spa-price/"
+    ],
+    "error": ""
+   }
+  },
+  "ヘッドスパ 選び方 効果": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jstage.jst.go.jp/article/sccj/47/3/47_202/_article/-char/ja/",
+     "https://www.jstage.jst.go.jp/article/sccj/48/2/48_97/_article/-char/ja/",
+     "https://www.nccih.nih.gov/health/massage-therapy-what-you-need-to-know",
+     "https://qa.dermatol.or.jp/qa11/q18.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://issou-headspa.jp/blog/headspa-effect-and-frequency/",
+     "https://www.costa-hair.jp/column/head-spa-benefits-guide",
+     "https://medical-esthe.com/column/effects-head-spa/",
+     "https://my-best.com/31214",
+     "https://my-best.com/2447",
+     "https://relax-job.com/more/122834",
+     "https://salonia.jp/column/hair/hair-how-to/vol_cl123/",
+     "https://sarasa-hikone.jp/2025/07/24/headspa/",
+     "https://senzu-chikara.com/column/%E7%9D%A1%E7%9C%A0-%E8%B3%AA-%E5%90%91%E4%B8%8A%E5%8A%B9%E6%9E%9C%E3%82%92%E3%83%98%E3%83%83%E3%83%89%E3%82%B9%E3%83%91%E3%81%A7%E5%AE%9F%E6%84%9F%EF%BC%81%E3%83%97%E3%83%AD%E3%81%AE%E6%9C%AC%E6%A0%BC/"
+    ],
+    "error": ""
+   }
+  },
+  "トリートメント 料金 相場": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/magazine/046613/",
+     "https://vimhair.jp/omoromachi/2026/07/30/price-of-the-treatment2607/",
+     "https://h.tricot.tokyo/tricot/menu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ideal-hairsalon.com/5079.html",
+     "https://enore-kamishitsukaizen.jp/blogs/kamishitsukaizen/12679/",
+     "https://beauty.hotpepper.jp/slnH000760534/blog/bidA100522637.html",
+     "https://www.rcid.co.jp/archives/29083",
+     "https://minimodel.jp/room/hair/tokio-treatoment",
+     "https://www.cura-hp.jp/kamishitsukaizen/entry28729.html",
+     "https://furstin.net/menu"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.morecosmetics.co.jp/disclosure/%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%81%AE%E3%83%88%E3%83%AA%E3%83%BC%E3%83%88%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%81%A8%E7%A8%AE%E9%A1%9E%E3%82%92%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83/",
+     "https://anaroir.jp/column/20260106/",
+     "https://sun-platinum.com/blog/20260118/",
+     "https://rs-hair-nara.com/column/20251211/",
+     "https://salon-each.com/column/30e3dfeb-032f-42fc-bfd6-573f0bfa163f",
+     "https://enore-kamishitsukaizen.jp/blogs/kamishitsukaizen/12679/",
+     "https://assist-all.co.jp/salon_reserve/column/20250707-6559/"
+    ],
+    "error": ""
+   }
+  },
+  "髪 ダメージ ケア 美容室": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://fyb.milbon.co.jp/salon_treatment/",
+     "https://www.kao.com/jp/haircare/scalp-care/8-5/",
+     "https://www.kao.com/jp/haircare/technology/12-2/",
+     "https://www.kao.com/jp/haircare/scalp-care/6-1/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://relax-job.com/more/122566",
+     "https://oggi.jp/6170288",
+     "https://www.biteki.com/hair/trouble/229928",
+     "https://salonia.jp/column/hair/hair-how-to/vol_cl90/",
+     "https://morikoshi.net/treatment-article/hidokuitandakami-treatment-biyouin.html",
+     "https://do-s55.com/archives/105"
+    ],
+    "error": ""
+   }
+  },
+  "メンズ 眉カット 美容室": {
+   "group": "メンズ・ヘアケアの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://kenje-group.co.jp/salon/nico/staffblog/77787/",
+     "https://finf.jp/blog/メンズ眉カット/",
+     "https://beauty.hotpepper.jp/slnH000399592/coupon/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.beaute-p.com/salon/52-3/",
+     "https://hairsalon-you.net/column/20260106/",
+     "https://mens-mayuge-guide.jp/mayuge-salon-price/",
+     "https://www.plus8.bz/blog/4138/",
+     "https://eyebrow-crea.com/column/column-1787/",
+     "https://japo-naiserie.com/blog/column/20220209192437-7405",
+     "http://sabrinafair.info/blog/2545/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tiare-hair.jp/blog/20250912/",
+     "https://www.haruka.co.jp/special/eyebrow-cut-mens/",
+     "https://www.haruka.co.jp/special/beauty-salon-eyebrow-cut/",
+     "https://www.haruka.co.jp/special/eyebrow-cut-price/",
+     "https://monan.co.jp/blog/eyebrows-cut/",
+     "https://beaute-aoi.shop/blog/detail/10",
+     "https://lipps-hair.com/column/6757/",
+     "https://toplook.salon/blog/mens-eyebrow/mayuge-worries/what_is_eyebrowcut/",
+     "https://liber-shibuya.com/column/9e5b2093-4643-4d4a-bf26-c61a951ae247",
+     "https://mayuge.tokyo/blog/type-impression/",
+     "https://merebo.tokyo/self-maintenance/"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 予約 いつ前": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000708749/blog/bidA097220618.html",
+     "https://beauty.hotpepper.jp/slnH000402726/blog/bidA108531807.html",
+     "https://putri.hair/2026/08/05/hair-salon-reservation-timing-kumamoto/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000708749/blog/bidA097220618.html",
+     "https://hairsalon-you.net/column/20250612/",
+     "https://tiare-hair.jp/blog/20260806/",
+     "https://www.b-exgroup.com/bexjournal/howto/49940",
+     "http://sabrinafair.info/blog/2529/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1096234105",
+     "https://www.b-exgroup.com/bexjournal/howto/49940",
+     "https://tiare-hair.jp/blog/20260806/",
+     "https://dore.jp/column/d5c5666c-98cf-4a5a-a8b8-d65ec9348c3f",
+     "https://cutcutcut-yokosuka.jp/column/ac7c9eb6-204b-47c9-9bf6-c9a03d1cd0c5",
+     "https://arumeria-hair.jp/column/bfb65ef5-6704-4b58-abc6-46610b6f24f4",
+     "https://emc-30377.com/media/20260324/",
+     "https://hairsalon-you.net/column/20250612/",
+     "https://plaisir.asia/column/e17cc75a-4a5b-4e14-86a4-71471984a1d7"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 キャンセル 料金": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://curio-blog.net/cancel-policy/",
+     "https://plus-gokan.com/cancel-policy",
+     "https://www.caa.go.jp/policies/policy/consumer_system/consumer_contract_act/annotations/assets/consumer_system_cms203_230915_16.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://assist-all.co.jp/salon_reserve/column/20250707-6561/",
+     "https://assist-all.co.jp/salon_reserve/column/20250704-6526/",
+     "https://assist-all.co.jp/salon_reserve/column/20250809-7548/",
+     "https://www.b-merit.jp/magazine/beautysaloncancellationfeelegalguide/",
+     "https://www.riza-en.jp/column/beauty_salon_noshow_cancellation",
+     "https://jobvr.co.jp/beauty-salon-cancel/",
+     "https://uraraka.co.jp/harutopi/2021/03/01/%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%81%AF%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E6%96%99%E3%82%92%E8%AB%8B%E6%B1%82%E3%81%A7%E3%81%8D%E3%82%8B%EF%BC%9F/",
+     "https://airchair.co.jp/salon-cancel-fee/",
+     "https://payn.io/articles/beauty-salon-cancellation-guide"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 初回 クーポン 選び方": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://hair-butera.com/coupon/",
+     "https://gokan.co.jp/coupon/",
+     "https://beauty-st.co.jp/media/how-to-choose-salon/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000794944/blog/bidA111655673.html",
+     "https://www.costa-hair.jp/column/hot-pepper-beauty-salon-reservation-guide-2026-05-02",
+     "https://hairsalon-mare.com/blog/column/detail/20251222101353/",
+     "https://cutcutcut-yokosuka.jp/column/5ee37e20-309c-4cc9-9876-942d3ce80c6f",
+     "https://www.ozmall.co.jp/hairsalon/kodawari/service/first/",
+     "https://hba.beauty.hotpepper.jp/search/column/c_hpb/35170/2/",
+     "https://yuryoweb.com/hotpepper-beauty-coupon/",
+     "https://www.pricey.jp/web/articles/3783"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 仕上がり 直し 無料": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.refu-hair.com/contents/category/concept/",
+     "https://oth-group.jp/aftercare-hair/",
+     "https://primavera-kagurazaka.jp/technique_quality"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://beauty.hotpepper.jp/magazine/225838/",
+     "https://joie-de-vivre-111.com/column/d64bfb33-0493-40bb-99bb-441dc1f1c7f6",
+     "https://minimodel.jp/room/hair/hair-salon-repair",
+     "https://tiare-hair.jp/blog/20260206/",
+     "https://agape-hair.com/crushlab/perm-redo-how-to-ask-free-period-tips/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11297060006",
+     "https://hairmakegize.com/column/a59c1cc5-1da8-47ae-918c-71fb72a0f98b"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://minimodel.jp/room/hair/hair-salon-repair",
+     "https://morikoshi.net/haircut/haircut-redo-please.html",
+     "https://www.morikoshi.jp/news/beauty-salon-repair",
+     "https://sans-hair.jp/blog/detail/20260212/",
+     "https://rose-allure.jp/media/detail/20250118/",
+     "https://k-beautylog.com/salon-yarinaoshi/",
+     "https://soincheur.com/blog/misc/yarinaoshi-kimazui/",
+     "https://joie-de-vivre-111.com/column/d64bfb33-0493-40bb-99bb-441dc1f1c7f6",
+     "https://simpatica-hair.com/column/65add56e-5e61-485a-9fdf-bfd64d65d646"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 カラー 失敗 相談": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://morikoshi.net/lp/color-failure/",
+     "https://www.faq.kokusen.go.jp/category/show/177?site_domain=default",
+     "https://www.gov-online.go.jp/article/201905/entry-8364.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://dears-salon.com/advice/haircolr/reorder",
+     "https://souhima.com/biyousitu-onaosi/",
+     "https://soincheur.com/blog/misc/color-image-chigau/",
+     "https://bleach-repair.com/haircolor-failure/",
+     "https://www.morikoshi.jp/news/kara-sippai-taisyo",
+     "https://www.faq.kokusen.go.jp/category/show/177?site_domain=default"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 ネット予約 比較": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/",
+     "https://beauty.rakuten.co.jp/cnt/topics/guide/",
+     "https://minimodel.jp/about",
+     "https://guide.minimodel.jp/customer/reservation-and-cancel/reservation/",
+     "https://salonboard.com/about/",
+     "https://salonboard.com/faq/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/theseocojp/n/nc8d1f6c5463a",
+     "https://jobvr.co.jp/rakutenbeauty-hotpepperbeauty/",
+     "https://salon-knowledge.com/htb/hotpepperbeauty-kyogo/",
+     "https://assist-all.co.jp/salon_reserve/column/20250903-8121/",
+     "https://rsvia.co.jp/column/beautysalon_search_site/",
+     "https://pro-marketing.jp/beauty-salon/salon-search-reservation-site/",
+     "https://salonx.jp/blog/rakuten-beauty-tesuryo-keisairyo",
+     "https://it-trend.jp/reservation/article/409-5092",
+     "https://net-salon-mate.jp/reservation-system/reservation-system-compare/comparison/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://it-trend.jp/reservation/article/409-5092",
+     "https://meetsmore.com/product-services/beauty-salon-reservation",
+     "https://ripia.jp/column/48",
+     "https://playbit.co.jp/magazine/article/6233/",
+     "https://yoyaku-package.com/useful/detail/salon-reservation-sysytem/",
+     "https://tada-reserve.jp/blog/beauty-salon/",
+     "https://tada-reserve.jp/blog/salon/",
+     "https://www.like.salon/column/biyoushitsu-net-yoyaku/",
+     "https://reservation-system-comparison.info/column/beautysalon-appointment/",
+     "https://rsvia.co.jp/column/linking-minimo_with_hot_pepper_beauty/",
+     "https://rsvia.co.jp/column/minimo_hot_pepper_linkage/",
+     "https://snsdays.com/other/minimo/",
+     "https://four-design.co.jp/minimo-or-hot_pepper_beauty-13511/",
+     "https://service.kalonade.com/blog/salon-minimo-hotpepper-comparison",
+     "https://salon-knowledge.com/htb/epark-hotpepper/",
+     "https://ambition-net.com/hotpepper/",
+     "https://tada-reserve.jp/blog/hotpepper-epark/",
+     "https://tada-reserve.jp/blog/alignment/"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 料金 追加 トラブル": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://kigyobengo.com/media/useful/4515.html",
+     "https://www.caa.go.jp/policies/application/inquiry/",
+     "https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hairsalon-review.com/biyoushitsu-tsuika-ryoukin-trouble/",
+     "https://hairsalon-review.com/biyoushitsu-tsuika-ryoukin-trouble/",
+     "https://kigyobengo.com/media/useful/4515.html",
+     "https://ba-osaka.com/column/20260330-2/",
+     "https://k-art-factory.jp/topics/news/20210114change_display/",
+     "https://legal.coconala.com/bbses/86547",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1243386557"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://note.com/ciel2409/n/ne9007d42c2df",
+     "https://beauty-salon-lily.com/column/e5572803-4fd3-43c5-b2f1-2aadba90a7d7",
+     "https://www.kokusen.go.jp/news/data/n-20230830_1.html"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 カウンセリング 伝え方": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000352084/blog/bidA122363722.html",
+     "https://beauty.hotpepper.jp/slnH000214393/blog/bidA094667981.html",
+     "https://beauty.hotpepper.jp/slnH000734153/blog/bidA094039238.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gigs-hair.jp/column/6960b4a1-ceaf-4a1f-bd84-ffae7ce3b975",
+     "https://sans-hair.jp/blog/detail/20260318/",
+     "https://www.costa-hair.jp/column/hair-salon-consultation-tips-2026-02-21",
+     "https://hair-work.jp/article/biyoushi-hatarakikata/counselor",
+     "https://sun-platinum.com/blog/20240712/",
+     "https://privatesalontrinity.com/column/detail/20260331090004/",
+     "https://hairplacevive.com/column/detail/20251229100011/",
+     "https://hairsalon-you.net/column/20260318/",
+     "https://parkandco-group.com/journal/992/"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 当日予約 費用": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://beauty.hotpepper.jp/svcSB/macBM/salon/today/recommend/?searchGender=ALL",
+     "https://agy-hair.com/agymenu/",
+     "https://www.shinmi-hair.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ranri.jp/column/e1f648e9-fc1b-40f0-aeb1-c124cd0fcb8d",
+     "https://recruit-help.jp/hpb/s/article/000031948",
+     "https://beauty.hotpepper.jp/slnH000387369/blog/bidA029810467.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11331444766",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13287832483",
+     "https://note.com/theseocojp/n/nc8d1f6c5463a",
+     "https://yukkoszakki.com/hairsalon-app-reasonable/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFbwr0DZd4axRrX2PG6IE_vB_sFf6jJJHb3WsMTkS-fOzkPM8wNt8DzzOD-b_hvDmj8gQetmacQdiFAGgeM_1yKGgPwWq-rpSEZfZF51x-xAPlF8yLEZJZ7Matlmr4iDmPcS39P3mCBIovCzN_5-ZwiRDcnJaJe6l9v0a0H9uw9RL7gyh2nc5-FHhCPlCOoJa2f89V3SN_fDfZGt_q_PnMKYiuKqYZkOSwi7dtpfg==",
+     "https://mixi.co.jp/news/2025/0707/42866/",
+     "https://dohack.jp/utility/app-for-booking-salon",
+     "https://hairstream1518.com/media/20260912/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://rsvia.co.jp/column/cut_color_market_price/",
+     "https://work.beauty.hotpepper.jp/guide/article/00189/",
+     "https://assist-all.co.jp/salon_reserve/column/20250707-6559/",
+     "https://monan.co.jp/blog/hairsalon-reservation-nashi/",
+     "https://beauty.hotpepper.jp/keyword/%E6%9D%B1%E4%BA%AC%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%80%80%E3%82%AB%E3%83%83%E3%83%88%E6%96%99%E9%87%91%E3%80%80%E5%B9%B3%E5%9D%87/",
+     "https://beauty.hotpepper.jp/keyword/%E6%9C%AD%E5%B9%8C%E3%80%80%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%80%80%E6%96%99%E9%87%91%E3%80%80%E7%9B%B8%E5%A0%B4/",
+     "https://beauty.hotpepper.jp/keyword/%E7%BE%8E%E5%AE%B9%E9%99%A2%E3%80%80%E5%A4%A7%E9%98%AA%E3%80%80%E5%BD%93%E6%97%A5%E4%BA%88%E7%B4%84%EF%BD%8F%EF%BD%8B/",
+     "https://beauty.hotpepper.jp/keyword/%E7%BE%8E%E5%AE%B9%E5%AE%A4%E3%80%80%E5%B9%B3%E5%9D%87%E4%BE%A1%E6%A0%BC/"
+    ],
+    "error": ""
+   }
+  },
+  "美容室 変え時 選び方": {
+   "group": "予約・トラブルの相談と費用",
+   "ChatGPT": {
+    "urls": [
+     "https://okurite.app/blog/articles/beauty-salon-choice/",
+     "https://www.beautopia.jp/?p=56126"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://beauty.hotpepper.jp/slnH000793145/blog/bidA110343147.html",
+     "https://beauty.hotpepper.jp/slnH000639582/blog/bidA108101134.html",
+     "https://minimodel.jp/room/hair/salon-nanmin",
+     "https://prtimes.jp/main/html/rd/p/000000159.000107159.html",
+     "https://monan.co.jp/blog/shippai-shinai-hairsalon/",
+     "https://hairsalon-review.com/biyoushitsu-awanai-kaetai-hanarekata/",
+     "https://beauty-kaikei.com/archives/44",
+     "https://www.costa-hair.jp/column/change-hair-stylist-timing-manner-guide-2026-05-07",
+     "https://morikoshi.net/uncategorized/biyousitu-erabikata.html",
+     "https://r-beaute.com/salon/hairsalon1/",
+     "https://flow-kyoto.com/blog/detail/20260418/",
+     "https://beauty-job.biz/media/?p=2492"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

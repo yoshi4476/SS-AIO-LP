@@ -1,0 +1,1990 @@
+{
+ "industry": "kaigo",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 デイサービス おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.venus-comrade.co.jp/office/plus_1st/",
+     "https://www.polaris.care/lp/osaka/",
+     "https://www.tsukui.net/home-care/2091/",
+     "https://www.tsukui.net/support/home-care/dayservice/",
+     "https://www.kaigokensaku.mhlw.go.jp/27/index.php?action_kouhyou_pref_topjigyosyo_index=true"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.heartpage.jp/osaka/list?kw=dayservice",
+     "https://i.ansinkaigo.jp/shokai/home-care/dayservice/p-osaka",
+     "https://i.ansinkaigo.jp/shokai/hikaku/user-capacity-large/dayservice/p-osaka",
+     "https://i.ansinkaigo.jp/shokai/hikaku/user-capacity-large/dayservice/p-osaka/c-osaka",
+     "https://kaigodb.com/ranking/youken_nyuukyo-teiin/kaigo_service/8/27/",
+     "https://kaigo.homes.co.jp/scare/ad27/cc7/15/",
+     "https://www.minnanokaigo.com/search/osaka/day-service/",
+     "https://e-nursingcare.com/o/27/ds01",
+     "https://www.kaigonohonne.com/osaka/cityd15/tag201/reviews",
+     "https://kaigo.homes.co.jp/manual/homecare/relationship_carestaff/dayservice_choose/",
+     "https://e-nursingcare.com/guide/homecare/socializing/day-service-3/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.minnanokaigo.com/search/osaka/day-service--reputation/page5/",
+     "https://e-nursingcare.com/o/27-271004/ds01"
+    ],
+    "error": ""
+   }
+  },
+  "東京 訪問介護 事業所 探し方": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/13/index.php?action_kouhyou_pref_search_condition_index=true",
+     "https://www.city.shinjuku.lg.jp/fukushi/kaigo05_000001_f.html",
+     "https://www.fukushi.metro.tokyo.lg.jp/kourei/sodan/chiiki-zaitaku_center",
+     "https://www.city.shinjuku.lg.jp/fukushi/file07_06_00006.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/13/index.php?action_kouhyou_pref_topjigyosyo_index=true",
+     "https://www.kaigokensaku.mhlw.go.jp/13/index.php?action_kouhyou_pref_search_mapservice_search=true&SelectTab=service",
+     "https://www.fukunavi.or.jp/fukunavi/kohyo/index.html",
+     "https://www.city.ota.tokyo.jp/seikatsu/fukushi/kaigo/jyousyaitiran.html",
+     "https://kaigo.homes.co.jp/manual/homecare/basic/caremanager/",
+     "https://e-nursingcare.com/guide/homecare/socializing/home-visit-care-2/",
+     "https://www.ycota.jp/point/37932"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 老人ホーム 見学 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nichii-home.jp/shisetsu/area/aichi/hoshigaoka.html",
+     "https://www.sompocare.com/service/home/kaigo/H000066",
+     "https://kaigo.benesse-style-care.co.jp/area_aichi/nagoya/home_a-yagoto/life"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://i.ansinkaigo.jp/shokai/p-aichi/c-nagoya",
+     "https://minkai.jp/news/article/1627",
+     "https://r-guide.jp/guide/flow/decide/3361.html",
+     "https://caresul-kaigo.jp/prefectures/23/ordinance_designated_cities/13/facilities/",
+     "https://caresul-kaigo.jp/prefectures/23/ordinance_designated_cities/13/ranking/",
+     "https://kaigo.homes.co.jp/s/list/ad11=23/agrp=2301/",
+     "https://kaigo.homes.co.jp/s/list/ad11=23/agrp=2301/high_class=1/",
+     "https://kaigo.homes.co.jp/manual/how_to_search/nyukyo/visit/",
+     "https://care-mado.jp/news/p681/",
+     "https://www.bellco.co.jp/anatarasiku/navi/knowledge/4449/",
+     "https://www.sykz.co.jp/media/visit-to-nursing-home/",
+     "https://kaigo.alsok.co.jp/burger_editor/burger_editor/dl/1/1__dG91ci1jaGVja2xpc3Q-d-.pdf",
+     "https://www.ycota.jp/point/145768",
+     "https://kaigo.homes.co.jp/manual/how_to_search/nyukyo/visit/check/",
+     "https://fukushinail.jp/nursinghome-kaigo-field-trip",
+     "https://ko-rinkaku.jp/blog/%E6%96%BD%E8%A8%AD%E8%A6%8B%E5%AD%A6%E3%81%A7%E5%BF%85%E3%81%9A%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%97%E3%81%9F%E3%81%8410%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BD%9C%E4%BB%8B%E8%AD%B7/",
+     "https://www.oasisnavi.jp/guides/at-check-field-trip/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.laplace-co.com/post_column/post-1990/",
+     "https://www.city.nagoya.jp/kenkofukushi/koureisha/1016496/1016502.html",
+     "https://www.nrs.or.jp/ikiiki/",
+     "https://www.kaigo-wel.city.nagoya.jp/view/kaigo/yobou/toiawase/",
+     "https://nagoya-roujinhome.jp/point/",
+     "https://kaigo.homes.co.jp/s/list/ad11=23/agrp=2301/can_tour=able,conditionally/",
+     "https://www.minnanokaigo.com/ranking/aichi/visit-acceptable/",
+     "https://www.youtube.com/watch?v=KTRe8C2Yqmg",
+     "https://www.youtube.com/watch?v=MAlNvx-1Bo0",
+     "https://www.youtube.com/watch?v=f8WoGhb4khs"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 小規模多機能 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.fukuoka.lg.jp/fukushi/kaigohoken/health/00/03/3-010601.html",
+     "https://www.minnanokaigo.com/facility/022-4090800907/reputation/",
+     "https://www.minnanokaigo.com/facility/000-4361055926/reputation/",
+     "https://www.city.fukuoka.lg.jp/fukushi/jigyousyasido/health/00/05/5-010110_2.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://i.ansinkaigo.jp/shokai/home-care/nursing-small-multi-home-care/p-fukuoka",
+     "https://minkai.jp/fukuoka/cityd21/reviews",
+     "https://i.ansinkaigo.jp/shokai/home-care/small-multi-home-care/p-fukuoka/c-fukuoka",
+     "https://www.kaigokensaku.mhlw.go.jp/40/index.php?action_kouhyou_detail_021_kani=true&JigyosyoCd=4091100166-00&ServiceCd=730",
+     "https://www.fukujincare.com/satoshoukibo/",
+     "https://yui25.com/",
+     "https://www.mcsg.co.jp/kentatsu/kaigo/8280",
+     "https://solasto-career.com/kaigo/media/15884/",
+     "https://www.ycota.jp/point/107491",
+     "https://kaigo.homes.co.jp/manual/homecare/zaitaku_service/shokibo/",
+     "https://e-nursingcare.com/guide/homecare/type_homecare/small-scale/",
+     "https://job.kiracare.jp/note/article/34413/",
+     "https://www.magicshields.co.jp/column/3393/",
+     "https://mynavi-iryofukushi.jp/media/articles/1311",
+     "https://fukushicar-concierge.com/blog/%E5%B0%8F%E8%A6%8F%E6%A8%A1%E5%A4%9A%E6%A9%9F%E8%83%BD%E3%81%A3%E3%81%A6%E3%81%A9%E3%82%93%E3%81%AA%E3%81%A8%E3%81%93%E3%82%8D%EF%BC%9F%E7%89%B9%E5%BE%B4%E3%82%84%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.heartpage.jp/fukuoka/list?type=multifunction_nursing",
+     "https://www.kaigokensaku.mhlw.go.jp/care_services_guide/care_services_guide_05.html",
+     "https://www.pref.fukuoka.lg.jp/contents/kouhyou-sisutemu.html",
+     "https://www.wam.go.jp/wamappl/26KYOTO/26bb01kj.nsf/6b16380d97f55135492567d0000714b4/20c3ba8a6972ab7b49257e2a00173bcb/$FILE/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E8%A9%95%E4%BE%A1%E3%81%AE%E6%A6%82%E8%A6%81%EF%BC%88%E5%B0%8F%E8%A6%8F%E6%A8%A1%EF%BC%89.pdf",
+     "https://www.city.kitakyushu.lg.jp/contents/16800089.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjZBhZJ7xr-HP8HU7dqwDfNDdRy4oCCWk56csksn6OckucQjy08RrHY4zniCAd9tYqtr2uftl0jHzwLJ4l7BmWBhCmgzOerCEGtJMg_DLblOwpimpPBio2_zjy32ezTnlhl2kkFamDRSKrODQQHn1gJGAwy1w1k122X2qBg_MLeMuGrxa8OxTH",
+     "https://kaigo.homes.co.jp/scare/ad40/area400137/cc15/",
+     "https://kaigo.homes.co.jp/scare/ad40/fukuoka/cc15/",
+     "https://caresul-kaigo.jp/prefectures/40/ordinance_designated_cities/21/ranking/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGF2R8FhkY5P93lEW8zyC5sesKTyDB2OpglMsHmmnqRK1uG0gVumAnu7993yBF0w7zxGuDYh-jB50AI0zI_E7Cn2aGHnjCTS3rUJHwuACQOrITY_q-TbjDupXmQDq6tnObVU6kASZ4sQpWl6qlP8O0TvKrWxlUbwjeovL7kxseBADh_2fRailS7nbdxtg4M",
+     "https://www.kaigokensaku.mhlw.go.jp/40/index.php?action_kouhyou_detail_021_kani=true&JigyosyoCd=4091200073-00&ServiceCd=730",
+     "https://www.minnanokaigo.com/search/fukuoka/fukuoka-shi/reputation/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 認知症 デイサービス 探す": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/01/",
+     "https://www.city.sapporo.jp/kaigo/k300sarch.html",
+     "https://www.city.sapporo.jp/kaigo/k100citizen/k165ninchisyo-soudan.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://i.ansinkaigo.jp/shokai/home-care/dayservice/p-hokkaido/c-sapporo-chuo/dementia",
+     "https://www.heartpage.jp/sapporo/list?type=day_service_demenia",
+     "https://www.heartpage.jp/sapporo/list?kw=dayservice",
+     "https://www.heartpage.jp/sapporo/list?type=day_service_demenia&city=01107",
+     "https://www.sapporo-ohta.or.jp/DS/",
+     "https://www.kaigokensaku.mhlw.go.jp/01/index.php?action_kouhyou_detail_007_kani=true&JigyosyoCd=0190400556-00&ServiceCd=720",
+     "https://kaigo.homes.co.jp/scare/ad1/sapporo/cc9/",
+     "https://kaigo.homes.co.jp/scare/ad1/area010101/cc9/",
+     "https://www.city.sapporo.jp/kaigo/k100citizen/k160dokuji.html",
+     "https://www.city.sapporo.jp/kaigo/k100citizen/documents/r7-houkatuyobouichiran-0707.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.city.sapporo.jp/kaigo/k100citizen/k170houkatuyobou.html",
+     "https://www.city.sapporo.jp/kaigo/k300sarch.html",
+     "https://www.sapporojikeikai.or.jp/facility/toujuen/soudan/",
+     "https://www.kaigokensaku.mhlw.go.jp/01/index.php?action_kouhyou_pref_seikatu_detail_401_detail=true&FacilityId=90363&CityCd=011002&ServiceCd=401&SearchType=dementia",
+     "https://www.heartpage.jp/sapporo/list?type=day_service_demenia",
+     "https://www.heartpage.jp/sapporo/list?type=day_service_demenia&city=01102"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 ショートステイ 空き 探し方": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hama-wel.or.jp/service/shortstay/",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/shisetsu/shisetu-annai/short.html",
+     "https://www.hc-kosuzume.jp/availability.php",
+     "https://www.fureai-g.or.jp/hills/empty/",
+     "https://www.city.yokohama.lg.jp/faq/kukyoku/kenko/kenko-chiiki/20211022153214417.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://minkai.jp/kanagawa/cityd7/tag179",
+     "https://r-guide.jp/search/?prefecture=14&cc=1401&quality=22",
+     "https://www.sompocare.com/search/result/?city%5B%5D=14-%E6%A8%AA%E6%B5%9C%E5%B8%82&type=0&other%5B%5D=2",
+     "https://www.kaigonohonne.com/kanagawa/cityd7/tag179/vacancy",
+     "https://www.city.yokohama.lg.jp/business/bunyabetsu/fukushi-kaigo/kaigo/hoken/unei/kaigo.files/kinkyusho-manual03.pdf",
+     "https://e-nursingcare.com/o/14-141003/sd01",
+     "https://e-nursingcare.com/o/14-141089/sd01",
+     "https://yokokai.jp/shortstay/",
+     "https://www.yokohama-kibouen.com/shortstay/",
+     "https://www.heartpage.jp/yokohama/list?type=yokohama_short_stay_life",
+     "https://kana.rakuraku.or.jp/yokohama/nishi/caremanager",
+     "https://kaigo.homes.co.jp/s/list/ad11=14/ct=5/agrp=1401/",
+     "https://kaigo.homes.co.jp/s/list/ad11=14/agrp=1401/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://np-kouhoku.jp/service/availability.php",
+     "https://www.fureai-g.or.jp/hills/empty/",
+     "https://keijuen.or.jp/yokohama/service/short/vacancy/",
+     "https://www.rou-yumegaoka.jp/vacant/",
+     "https://www.heartpage.jp/yokohama/list?type=yokohama_short_stay_life",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/shisetsu/shisetu-annai/short.html",
+     "https://www.minnanokaigo.com/search/kanagawa/yokohama-shi/shortstay/",
+     "https://minkai.jp/kanagawa/cityd7/tag179"
+    ],
+    "error": ""
+   }
+  },
+  "京都 訪問看護 介護 併用 事業所": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://kamesennin-care.jp/",
+     "https://www.kyoto-fukushi.org/service/detail/vns/",
+     "https://kyoto-hokenkai.org/kissyouin/?page_id=51"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.heartpage.jp/kyoto/list?type=visit_care",
+     "https://www.heartpage.jp/kyoto/list?type=visit_nursing",
+     "https://www.heartpage.jp/kyoto/list?city=26109&type=visit_nursing",
+     "https://i.ansinkaigo.jp/shokai/home-care/visit-nursing/p-kyoto/c-kyoto",
+     "https://kaigo.homes.co.jp/scare/ad26/kyoto/cc4/",
+     "https://e-nursingcare.com/o/26-261009",
+     "https://unican.jp/",
+     "https://fujicl.or.jp/medical-insurance-nursing-care-insurance-difference/",
+     "https://fujicl.or.jp/visiting-nursing-medical-long-term-care-insurance/",
+     "https://www.ns-pace.com/article/category/feature/medical-insurance/",
+     "https://ewellibow.jp/useful/information_20220126/",
+     "https://konohoken.com/medical/article/6529/",
+     "https://update-inc.jp/knowledge/houkan-system/nursing-care-insurance-visiting-nurse/",
+     "https://www.kernel1991.co.jp/post/visiting-nursing-iryohoken/",
+     "https://hp.plume-jp.com/blog/article/46"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.heartpage.jp/kyoto/list?type=visit_nursing&city=26107",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHN-_mGbyxFA8KwkwzW2m-ckLQZ5hWrZmn29_aKUiyCm81bg8OIo1gwHvG0MJdVRRkHgBIT7sS_Cql33RgtUKpgmLsPCEcVVBJeS0k4HwidvHrAORp4e1pZwPJh-ePm7G47wjEqpKvXTzetaBsE",
+     "https://kaigo.rakuwa.or.jp/service/shokibo/",
+     "http://takayasu-group.com/takinou_kamikawa.html",
+     "https://www.ujitoku.or.jp/kaigo-intro/kantaki/",
+     "https://medicaldoc.jp/n/recommend-n/kyoto-home-care/",
+     "https://www.kyotokango-st.com/station/",
+     "https://kaigo.rakuwa.or.jp/service/houmon-kango/",
+     "https://www.kaigokensaku.mhlw.go.jp/26/index.php?action_kouhyou_pref_latestinfo_list=true",
+     "https://unican.jp/",
+     "https://kaigo.rakuwa.or.jp/service/station/shokibo-kango-otoawa/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmw5ciupY2UGXjIOscchb2KfDR1F4P0m0mmQqSstpz7wMjhjVpqFoGRxVlCf-d20hRdowbm7rum0vRrBNUN6GO6dHq1y7rTZMVcIiMRCl4GjCDd9DRfXFwbgILEmkcuOUob1h1V6F62t8U7-4n2rY6nb8CPzHWueuF4vgPEnoclZuXOIU=",
+     "https://kyoto-hyoka.jp/category/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%88%86%E9%A1%9E/%E5%9C%B0%E5%9F%9F%E5%AF%86%E7%9D%80%E5%9E%8B%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/%E7%9C%8B%E8%AD%B7%E5%B0%8F%E8%A6%8F%E6%A8%A1%E5%A4%9A%E6%A9%9F%E8%83%BD%E5%9E%8B%E5%B1%85%E5%AE%85%E4%BB%8B%E8%AD%B7%EF%BC%88%E6%97%A7%E8%A4%87%E5%90%88%E5%9E%8B%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 グループホーム 入居 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ikeikai.or.jp/magokoro/",
+     "https://www.ikeikai.or.jp/magokoro/magokoro-guide/",
+     "https://www.activelife.co.jp/kobe/",
+     "https://www.activelife.co.jp/kobe/usagefee/index.html",
+     "https://www.sompocare.com/service/home/grouphome/H000131/",
+     "https://www.city.kobe.lg.jp/a39067/kenko/fukushi/carenet/shisetsu/gh.html",
+     "https://www.smilenet.kobe-rma.or.jp/support/smilenavi/ninchi/",
+     "https://www.city.kobe.lg.jp/a95295/service_introduction/kyoudouseikatuenzyo.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.city.kobe.lg.jp/a39067/kenko/fukushi/carenet/shisetsu/gh.html",
+     "https://i.ansinkaigo.jp/shokai/hikaku/user-capacity-large/grouphome/p-hyogo/c-kobe",
+     "https://i.ansinkaigo.jp/shokai/grouphome/p-hyogo/c-kobe",
+     "https://i.ansinkaigo.jp/shokai/p-hyogo/c-kobe",
+     "https://caresul-kaigo.jp/prefectures/28/cities/1886/ranking/",
+     "https://caresul-kaigo.jp/prefectures/28/cities/1880/categories/4/facilities/",
+     "https://caresul-kaigo.jp/prefectures/28/cities/1886/categories/4/facilities/",
+     "https://kaigo.homes.co.jp/s/list/ad11=28/ct=4/area2=111/",
+     "https://e-nursingcare.com/p/28-281107/f03",
+     "https://e-nursingcare.com/p/28-281051/f03",
+     "https://e-nursingcare.com/p/28-281000/f03",
+     "https://e-nursingcare.com/p/28-281000/c04",
+     "https://www.roujin-homes.jp/rh/%E5%85%B5%E5%BA%AB%E7%9C%8C/%E7%A5%9E%E6%88%B8%E5%B8%82/?order=getsugaku",
+     "https://www.roujin-homes.jp/rh/%E5%85%B5%E5%BA%AB%E7%9C%8C/%E7%A5%9E%E6%88%B8%E5%B8%82/?ninchi=1&order=getsugaku",
+     "https://www.my-kaigo-home.com/column/193/",
+     "https://kobe-roujinhome.jp/column/nursinghome/grouphome_cost/",
+     "https://www.kobe-fukuseikai.com/service/group/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=hOXFD-_UUBM",
+     "https://caresul-kaigo.jp/prefectures/28/cities/1882/categories/4/facilities/",
+     "https://www.city.kobe.lg.jp/a39067/kenko/fukushi/carenet/shisetsu/gh.html",
+     "https://www.city.kobe.lg.jp/a39067/kenko/fukushi/carenet/shisetsu/gh.html",
+     "https://medicaldoc.jp/n/recommend-n/kobe-ct-group-home/",
+     "https://www.minnanokaigo.com/facility/022-2890500115/",
+     "https://www.minnanokaigo.com/facility/022-2895000376/",
+     "https://www.minnanokaigo.com/facility/022-2870201197/",
+     "https://www.minnanokaigo.com/ranking/hyogo/kobe-shi/grouphome/",
+     "https://kaigo.homes.co.jp/s/list/ad11=28/ct=4/agrp=2801/c_ninchi=1/sort=month/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 サービス付き高齢者向け住宅 探し方": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.satsuki-jutaku.mlit.go.jp/search/list.php?city_code=04100&pref_code=4&sort_col=rent&sort_order=ASC",
+     "https://www.city.sendai.jp/jutakutaisaku/kurashi/machi/sumai/sumai/sakoju.html",
+     "https://www.city.sendai.jp/hokatsushien/kurashi/kenkotofukushi/korenokata/ninchisho/sodan/madoguchi.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.satsuki-jutaku.mlit.go.jp/search/list.php?pref_code=4&city_code=04100",
+     "https://www.city.sendai.jp/jutakutaisaku/kurashi/machi/sumai/sumai/sakoju.html",
+     "https://kaigo.homes.co.jp/s/list/ad11=4/ct=11/area2=104/",
+     "https://kaigo.homes.co.jp/s/list/ad11=4/ct=11/area2=101/",
+     "https://kaigo.homes.co.jp/s/list/ad11=4/ct=11/agrp=0401/",
+     "https://kaigo.homes.co.jp/s/list/ad11=4/ct=11/area2=105/",
+     "https://www.my-kaigo-home.com/a_f/04000_52/",
+     "https://e-nursingcare.com/p/4-41009/f07",
+     "https://www.homemate-s.com/list/miyagi/jc04100/fa-sakoju/",
+     "https://www.satsuki-jutaku.mlit.go.jp/search/list.php?sort_col=apart_name_kana&sort_order=ASC&pref_code=4&city_code=04105",
+     "https://www.kaigokensaku.mhlw.go.jp/04/index.php",
+     "https://www.pref.miyagi.jp/soshiki/juutaku/satsuki-unei-shinki.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.satsuki-jutaku.mlit.go.jp/search/index.php",
+     "https://www.satsuki-jutaku.mlit.go.jp:443/index.php",
+     "https://www.city.sendai.jp/jutakutaisaku/kurashi/machi/sumai/sumai/juutakuichiran.html",
+     "http://www.shpo.or.jp/news/topic/353?page_category=single",
+     "https://minkai.jp/miyagi/cityd2/type334",
+     "https://rougonoanshin-sendai.com/",
+     "https://www.city.sendai.jp/hokatsushien/kurashi/kenkotofukushi/korenokata/johotekyo/sodan.html",
+     "https://sv-partners.jp/expert/uchisirube.html",
+     "https://ameblo.jp/grand-unilife/entry-12802302326.html",
+     "https://www.pref.miyagi.jp/soshiki/juutaku/satsuki.html"
+    ],
+    "error": ""
+   }
+  },
+  "広島 居宅介護支援 ケアマネ 変更": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.town.kumano.lg.jp/9/7/1/2/4709.html",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1006001/1025733/1025735/1011465.html",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1029764/1015516.html",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1029764/1015522.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.alsok.co.jp/person/recommend/2158/",
+     "https://kaigo.homes.co.jp/manual/homecare/zaitaku_service/relationship_carestaff/caremanager_change/",
+     "https://e-nursingcare.com/guide/homecare/choose-caremanager/change/",
+     "https://care.kaigor.com/column/column_3/",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1006001/1025733/1047654.html",
+     "https://www.pref.hiroshima.lg.jp/site/kaigohokennzigyousyamukezyouhou/1170304463184.html",
+     "https://www.city.hiroshima.lg.jp/site/kaigo/103765.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.heartpage.jp/contents/magazine/08-01461",
+     "https://visitcare-aoi.com/care-manager-change/",
+     "https://www.kaigo-soudan21.jp/bbs/detail/41/qanda0001",
+     "https://e-nursingcare.com/guide/homecare/choose-caremanager/change/",
+     "https://www.seniorhome-mado.com/guide/homecare/what-is/change-caremanager/",
+     "https://www.alsok.co.jp/person/recommend/2158/",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1006001/1025722/1011399.html",
+     "https://www.heartpage.jp/hiroshima/kaigo_soudan",
+     "https://www.heartpage.jp/hiroshima/list?kw=caremanager",
+     "https://apply.e-tumo.jp/city-hiroshima-u/offer/offerDetail_initDisplay?tempSeq=19849&accessFrom=offerList",
+     "https://sweet8341.com/%E3%82%B1%E3%82%A2%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC%E5%A4%89%E6%9B%B4%E3%82%AC%E3%82%A4%E3%83%89%E3%80%80%E3%82%B9%E3%83%A0%E3%83%BC%E3%82%BA%E3%81%AA%E6%89%8B%E7%B6%9A%E3%81%8D%E3%81%A8/",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1029764/1015516.html"
+    ],
+    "error": ""
+   }
+  },
+  "デイサービス 料金 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group7.html",
+     "https://www.heart-pia.com/meguminokai/price_list/pdf/day/20240601-iroriishioka_day.pdf",
+     "https://www.yonezu.jp/archives/011/202604/2026.4DS%20ryoukinhyo.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.heartpage.jp/contents/magazine/05-01023",
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/fee/service/day_service/fee",
+     "https://rehab.cloud/mag/3730/",
+     "https://www.sykz.co.jp/media/dayservice-cost/",
+     "https://www.sompocare.com/contents/zaitaku-service/dayservice_price/",
+     "https://kodawari-chef.com/kswp/blog/27114/",
+     "https://kaigosearch-plus.jp/columns/day-service",
+     "https://www.tokyu-wellness-sumairu.jp/column/dayservice-hiyou.php",
+     "https://day-tsuchiya.com/day-service_full-amount-self-pay/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tokyu-wellness-sumairu.jp/column/dayservice-hiyou.php",
+     "https://www.heartpage.jp/contents/magazine/05-01023",
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/fee/service/day_service/fee",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column5/29/",
+     "https://as-heim.com/column/column-16078/",
+     "https://kodawari-chef.com/kswp/blog/27114/",
+     "https://rehab.cloud/mag/3730/"
+    ],
+    "error": ""
+   }
+  },
+  "訪問介護 1回 費用 目安": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group2.html",
+     "https://www.city.higashiyamato.lg.jp/kenkofukushi/kaigohoken/1009174/1009479/1009493.html",
+     "https://betterhomecare.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column5/08/",
+     "https://www.tokyu-wellness-sumairu.jp/column/homehelp-hiyou.php",
+     "https://juzenkai-group.or.jp/blog/homecare-selfcosts/",
+     "https://ososhiki.info/2026/07/05/houmonkaigo-ryokin-taikei-jikan-hoshu/",
+     "https://kaigoroom.com/home-care-cost-monthly/",
+     "https://www.aino-sato.com/fee/visit_care.php",
+     "https://kaigo.site/service-compare/houmon-kaigo-ryoukin/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://umiirorehalife.com/wp-content/uploads/2024/05/syougaihoumonryoukin202404.pdf",
+     "https://juzenkai-group.or.jp/blog/homecare-selfcosts/",
+     "https://presence-m.com/2024/05/27/853695-2/",
+     "https://wakaurakai.or.jp/files/uploads/homuherupariryouryoukin202410.pdf"
+    ],
+    "error": ""
+   }
+  },
+  "老人ホーム 月額 費用 比較": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://kazoku-navi.com/roujin-home/cost/",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group14.html",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sagasix.jp/knowledge/cost/",
+     "https://ichirou.co.jp/column/1366",
+     "https://www.asahi-kasei.co.jp/hebel-senior/column/52/index.html/",
+     "https://minkai.jp/market_price",
+     "https://medical.francebed.co.jp/special/column/71_nursing-facility_cost.php",
+     "https://i.ansinkaigo.jp/shokai/articles/nursing-home-cost/shokai-nursinghome-price",
+     "https://yao-yorozu.com/search/column/column-rougo-home-hiyou-shumi/",
+     "https://kurashicostlab.com/guides/roujin-home-shurui-2026/",
+     "https://solasto-kaigo.com/soramameplus/kaigo-money/1452"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.bellco.co.jp/anatarasiku/navi/knowledge/4850/",
+     "https://www.seniorhome-mado.com/guide/cost/financial-plan/compare-costs/",
+     "https://www.bellco.co.jp/anatarasiku/navi/knowledge/4783/",
+     "https://kaigo-money.site/kaigo-shisetsu-hiyou-hikaku/",
+     "https://www.tokyu-wellness-sumairu.jp/column/rojin-home-shurui.php",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/",
+     "https://treasure-job.co.jp/column/types-of-nursing-homes-costs/",
+     "https://www.sagasix.jp/column/beadhouse/money/",
+     "https://www.minnanokaigo.com/guide/cost/"
+    ],
+    "error": ""
+   }
+  },
+  "介護保険 自己負担 割合 いくら": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html?referral=fbadcv_payroll",
+     "https://www.city.yokohama.lg.jp/faq/kukyoku/kenko/kaigo-hoken/20211018165910309.html",
+     "https://www.mhlw.go.jp/content/001512842.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://min-taxes.com/column/kaigo-hoken-2wari-futan-kakudai-2027/",
+     "https://yorisoi-kaigo.jp/articles/futan-wariai-shou.html",
+     "https://kaigonews.net/articles/kaigohoken-futan-wariai",
+     "https://www.tokyu-wellness-sumairu.jp/column/futan-wariai.php",
+     "https://oya-kaigo.com/seido/futan-wariai/",
+     "https://kaigo-sozai.com/kaigo-hutan-wariai-2026/",
+     "https://kaigo-sozai.com/kaigo-hoken-jiko-futan/",
+     "https://caremaneai.com/guide/futan-wariai-shou-guide",
+     "https://kaigo-plus1.work/staff/kaigo-system-67/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kaigo.miramoru.sompo-hd.com/howto/column00033/",
+     "https://www.city.tama.lg.jp/kenkofukushi/1008237/kaigo/seido/1002967.html",
+     "https://www.tokyu-wellness-sumairu.jp/column/futan-wariai.php",
+     "https://www.sagasix.jp/column/care/nursing-insurance-self-pay/",
+     "https://www.anshin.homes/cpt_blog/%E3%80%902025%E5%B9%B4%E7%89%88%E3%80%91%E4%BB%8B%E8%AD%B7%E4%BF%9D%E9%99%BA%E3%81%AE%E3%80%8C%E8%B2%A0%E6%8B%85%E5%89%B2%E5%90%88%E3%80%8D%E3%81%A8%E3%81%AF%EF%BC%9F%E8%87%AA%E5%B7%B1%E8%B2%A0-2/",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column14/",
+     "https://www.fr-kenpo.or.jp/member/outline/system03.html"
+    ],
+    "error": ""
+   }
+  },
+  "特養 入居費用 一人あたり": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tokyu-wellness-sumairu.jp/column/tokuyo-hiyou.php",
+     "https://www.city.toba.mie.jp/soshiki/choju_kaigo/gyomu/kourei_fukushi_kaigo/kaigo_hoken/3057.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.bellco.co.jp/anatarasiku/navi/knowledge/4783/",
+     "https://www.my-kaigo-home.com/topics/3/",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/cost/",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/hoken/tokuyo/cost/",
+     "https://caresul-kaigo.jp/column/articles/cost_special_nursing_home/",
+     "https://www.tokyu-wellness-sumairu.jp/column/tokuyo-hiyou.php",
+     "https://kaigosearch-plus.jp/columns/special-elderly-nursing-home",
+     "https://compass.ordentier-corp.co.jp/welfare-management/u5yng6jz/",
+     "https://caremaneai.com/guide/tokuyou-guide-complete",
+     "https://ichirou.co.jp/column/3601",
+     "https://www.cocofump.co.jp/articles/kaigo/35/",
+     "https://care-mado.jp/news/p2262/",
+     "https://app.careoffer.jp/specials/863",
+     "https://tarobooro.com/tokuyo-hiyou/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/hoken/tokuyo/cost/",
+     "https://www.kamakura-life.co.jp/monenavi/articles/kaigo/tokuyo-hiyo/",
+     "https://www.youtube.com/watch?v=q8oQx7xwOlU",
+     "https://seishin.sakuradani-fukushikai.or.jp/%E7%89%B9%E5%88%A5%E9%A4%8A%E8%AD%B7%E8%80%81%E4%BA%BA%E3%83%9B%E3%83%BC%E3%83%A0%E3%81%AE%E8%B2%BB%E7%94%A8%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFHAfdOKYmVpxc8PV-TRRgp9KQB61g4o5hbRp_z3orJx3wKQIIocFGtNra3LvzVytRXWFxhKnd8kIFvQkDojAAWuET1pckSpxLHrrqOh_u4XA9rfBlHZ1A=",
+     "https://caresul-kaigo.jp/column/articles/31404/"
+    ],
+    "error": ""
+   }
+  },
+  "ショートステイ 1泊 料金": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://matsukaze.uh-oh.jp/shortR0606.pdf",
+     "https://www.city.kure.lg.jp/soshiki/15/hutangendo.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.heartpage.jp/contents/magazine/05-01161",
+     "https://www.cocofump.co.jp/articles/kaigo/18/",
+     "https://medical.francebed.co.jp/special/column/73_shortstay.php",
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/beginner/short_stay",
+     "https://i.ansinkaigo.jp/questions/127333",
+     "https://kaigo.homes.co.jp/manual/homecare/zaitaku_service/shortstay/",
+     "https://e-nursingcare.com/guide/homecare/type_homecare/short-stay/",
+     "https://www.tokyu-wellness-sumairu.jp/column/shortstay-hiyou.php",
+     "https://sunwell-kaigo.com/short-stay-cost/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tokyu-wellness-sumairu.jp/column/shortstay-hiyou.php",
+     "https://www.minnanokaigo.com/guide/homecare/compare-cost/short-stay/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEjEw0o4_LHo8gAobXTG-N6RAxu4R2qJXq1DDJVpei5iVuriHijkf-ayjiSpd5eCbbophSQq5L6YT4oM9UsrV9t4_K0oCL7WWZCp--TKMkZKt0HfBk5rzANwLY61Bf01wDRAms=",
+     "https://mabashi.org/shortstayservice/fee/",
+     "https://goldage.co.jp/kaigo-column/p3223/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH-coF3J2mznFdeipQtGkL6waeOgUOfxO4zDlAWmGWVRI-Gi3QAH1-NTqLFjmDEapBNHYhq_k5ygtrheAw_5kR186lG3q_pV7ifHYobfvKYGmQWC3G_-ArachvOzagBH1y7TMGcl9tqvqZhTYD5sw4s-FjcotH2Hr8="
+    ],
+    "error": ""
+   }
+  },
+  "介護 費用 払えない 支援制度": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigo-hoken/kougakukaigo.html",
+     "https://www.city.yokohama.lg.jp/faq/kukyoku/kenko/kaigo-hoken/20211015160724252.html",
+     "https://www.city.ageo.lg.jp/page/02911903222.html",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/shisetsu/shisetu-annai/shahukukeigen.html",
+     "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/kokuho/iryo/kogaku/high-cost-kaigo.html",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigo-hoken/shinsei.html",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigo-hoken/kaigo-hoken-hiyo/kaigohokenryo.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/seikatuhogo/index.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/chiiki-houkatsu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kaigo.ne.jp/columns/kougaku-kaigo-futangendogaku",
+     "https://limo.media/articles/-/135656",
+     "https://kaigo-fukushi-navi.com/kougaku-kaigo-service-hi/",
+     "https://www.kaigo-wel.city.nagoya.jp/view/kaigo/seido/hutan/kogaku.html",
+     "https://www.pref.kanagawa.jp/docs/r6w/cnt/f152/p2913.html",
+     "https://r-guide.jp/guide/select/kiso/6924.html",
+     "https://www.famitra.jp/article/kaigo/post-133/",
+     "https://www.mcsg.co.jp/kentatsu/kaigo/4447"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/beginner/support",
+     "https://www.my-kaigo.com/pub/individual/money/kokyo-seido/",
+     "https://www.city.kushiro.lg.jp/kenfuku/fukushi/1004926/1004939/1004946.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGR99M0w2J7HeQKVa0OvKxtPy4RDZBOxmz5ThJkbfbwQfRueSLchKLhyxmIOtXM3BwLZ9-aTHMLtDNHJdJnYNUKg21tBp4cOhl80yOag7l9Thr4S383HTmqdoxBMuztWF9Pg9qV",
+     "https://www.mhlw.go.jp/jigyo_shiwake/dl/r01_jigyou03a_day1.pdf",
+     "https://www.city.matsuyama.ehime.jp/kurashi/kaigohoken/kaigohoken/hutan/syafuku_keigen.html",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column18/03/",
+     "https://r-guide.jp/guide/select/kiso/6924.html"
+    ],
+    "error": ""
+   }
+  },
+  "高額介護サービス費 払い戻し 条件": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.koriyama.lg.jp/soshiki/68/2207.html",
+     "https://www.city.bunkyo.lg.jp/b020/p000565.html",
+     "https://www.city.shinagawa.tokyo.jp/PC/kenkou/kaigo1/kaigo-riyousya-futan-gen/hpg000015024.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://medicaldoc.jp/n/cm-n/nc312/",
+     "https://www.sagasix.jp/column/beadhouse/expensive-nursing-care/",
+     "https://ashitaba-mirai.jp/10092026/25144.html",
+     "https://tetsuzuki-planner.jp/plan/kougaku-kaigo-service-hi",
+     "https://kaigo.ne.jp/columns/kougaku-kaigo-futangendogaku",
+     "https://www.tokyu-wellness-sumairu.jp/column/kougaku-kaigo-service.php",
+     "https://kaigonews.net/glossary/kogaku-kaigo-service-hi",
+     "https://kaigo-fukushi-navi.com/kougaku-kaigo-service-hi/",
+     "https://limo.media/articles/-/137464"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tokyu-wellness-sumairu.jp/column/kougaku-kaigo-service.php",
+     "https://www.my-kaigo.com/pub/individual/money/kokyo-seido/0010.html",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column14/",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html",
+     "https://www.my-kaigo-home.com/column/358/",
+     "https://www.niikawa-kaigohoken.jp/hokenriyou/kougakuriyouryou/"
+    ],
+    "error": ""
+   }
+  },
+  "有料老人ホーム 入居一時金 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.my-kaigo-home.com/topics/3/",
+     "https://caresul-kaigo.jp/cost_markets/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sagasix.jp/column/beadhouse/residential-paid-nursing-home/",
+     "https://www.sagasix.jp/knowledge/cost/",
+     "https://www.my-kaigo-home.com/topics/3/",
+     "https://www.my-kaigo-home.com/column/127/",
+     "https://caresul-kaigo.jp/column/articles/84/",
+     "https://kaigonews.net/articles/kaigotsuki-yuryou-hiyou",
+     "https://www.cocofump.co.jp/articles/kaigo/13/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=R0G89JOKTX0",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/yuryo/nyukyokin/",
+     "https://www.my-kaigo-home.com/topics/3/",
+     "https://www.youtube.com/watch?v=bUkkxQfV3dQ",
+     "https://www.youtube.com/watch?v=XftyqlC1-sA",
+     "https://www.youtube.com/watch?v=PJ0wrhls7Ec",
+     "https://www.anshin.homes/cpt_blog/%E3%80%90%E5%BE%B9%E5%BA%95%E8%A7%A3%E8%AA%AC%E3%80%91%E6%9C%89%E6%96%99%E8%80%81%E4%BA%BA%E3%83%9B%E3%83%BC%E3%83%A0%E3%81%AE%E3%80%8C%E5%85%A5%E5%B1%85%E4%B8%80%E6%99%82%E9%87%91%E3%80%8D%E3%81%A8/",
+     "https://www.youtube.com/watch?v=HByt7feHHuU"
+    ],
+    "error": ""
+   }
+  },
+  "介護費用 医療費控除 対象": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1125.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1127.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1122.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1120.htm"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1125.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1127.htm"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column5/04/",
+     "https://www.city.setagaya.lg.jp/02061/2263.html",
+     "https://www.taiju-life.co.jp/joyful/money/036/",
+     "https://www.sonosaki-life.jp/shop/pg/1kaigo-tax-refund/",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1125.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1127.htm",
+     "https://mynavi-ms.jp/magazine/detail/001525.html"
+    ],
+    "error": ""
+   }
+  },
+  "デイサービス 選び方 ポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group7.html",
+     "https://www.kaigokensaku.mhlw.go.jp/care_services_guide/care_services_guide_08.html",
+     "https://www.kaigokensaku.mhlw.go.jp/help/page1.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.heartpage.jp/contents/magazine/08-01384",
+     "https://www.heartpage.jp/contents/magazine/08-01340",
+     "https://footage-nursing.jp/column/3175/",
+     "https://kaigo.homes.co.jp/manual/homecare/zaitaku_service/relationship_carestaff/dayservice_choose/",
+     "https://rifuri.jp/blog/dayservice-shurui",
+     "https://e-nursingcare.com/guide/homecare/socializing/day-service-3/",
+     "https://www.a-living.jp/feature/about-dayservice.php",
+     "https://www.kaigo-soudan21.jp/column/detail/137/%E3%83%87%E3%82%A4%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E6%A5%BD%E3%81%97%E3%81%BF%E3%81%9F%E3%81%84%EF%BC%81%E7%9B%AE%E7%9A%84%E3%81%AB%E3%81%82%E3%81%A3%E3%81%9F%E3%83%87%E3%82%A4%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E3%80%82"
+    ],
+    "error": ""
+   }
+  },
+  "訪問介護 事業所 比較 ポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/topics/kaigo/kaigi/020904/5-4.html",
+     "https://www.kaigokensaku.mhlw.go.jp/care_services_guide/care_services_guide_00.html",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group2.html",
+     "https://www.kaigokensaku.mhlw.go.jp/help/page2.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://e-nursingcare.com/guide/homecare/socializing/home-visit-care-2/",
+     "https://kaigo.homes.co.jp/manual/homecare/zaitaku_service/relationship_carestaff/visitcare_choose/",
+     "https://ichirou.co.jp/column/1785"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaigo.homes.co.jp/manual/homecare/zaitaku_service/relationship_carestaff/visitcare_choose/",
+     "https://www.egao-kaigo.jp/info/column/1159/",
+     "https://www.magokoro-bento.com/blog/201907/visiting-cares-cost-facility.html",
+     "https://e-nursingcare.com/guide/homecare/socializing/home-visit-care-2/",
+     "https://kaigo.homes.co.jp/manual/homecare/zaitaku_service/relationship_carestaff/visitcare_choose/",
+     "https://kaigo-startup.jp/houmonkaigo-keiei-juuyoupoinnto",
+     "https://www.secom.co.jp/kaigo/basic/20230328.html",
+     "https://www.mhlw.go.jp/topics/kaigo/kentou/020807-1/3.html",
+     "https://www.youtube.com/watch?v=ZKEK_0WVS6Q"
+    ],
+    "error": ""
+   }
+  },
+  "老人ホーム 種類 違い 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/service.html",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group14.html",
+     "https://www.kaigokensaku.mhlw.go.jp/care_services_guide/care_services_guide_service18.html",
+     "https://www.mhlw.go.jp/content/12300000/001751266.pdf",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group18.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/gyakutaiboushi/index_00003.html",
+     "https://www.mhlw.go.jp/topics/kaigo/hoken/seido/0604/dl/15.pdf",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tb6275&dataType=1",
+     "https://www.mhlw.go.jp/content/001203422.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column30/06/",
+     "https://www.cocofump.co.jp/articles/kaigo/5/",
+     "https://www.egao-kaigo.jp/info/600/",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/",
+     "https://genkinakaigo.co.jp/media/types-of-nursing-homes/",
+     "https://www.tokyu-wellness-sumairu.jp/column/rojin-home-shurui.php",
+     "https://as-heim.com/column/column-17079/",
+     "https://kurashicostlab.com/guides/roujin-home-shurui-2026/",
+     "https://senior-living.czb.jp/col1/13s/",
+     "https://www.cocofump.co.jp/articles/kaigo/140/",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column30/13/",
+     "https://goldage.co.jp/kaigo-column/p3823/",
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/nursinghome/type/jutakugata_satsuki",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/yuryo/hikaku_service/",
+     "https://www.my-kaigo-home.com/rich/column/useful/2320/",
+     "https://e-nursingcare.com/guide/kinds/type_sakouju/jutakugata-sakouju/",
+     "https://www.homemate-s.com/useful/nursing_home00076/",
+     "https://www.sunnylife-group.co.jp/contents/%E6%9C%89%E6%96%99%E8%80%81%E4%BA%BA%E3%83%9B%E3%83%BC%E3%83%A0%E3%81%A8%E3%82%B5%E9%AB%98%E4%BD%8F%E3%81%AE%E9%81%95%E3%81%84%E3%81%AF%EF%BC%9F%E8%B2%BB%E7%94%A8%E3%82%84%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%86%85%E5%AE%B9%E3%81%AA%E3%81%A9%E3%82%92%E6%AF%94%E8%BC%83",
+     "https://www.sagasix.jp/knowledge/guide/grouphome-tokuyo.html",
+     "https://healthrent.duskin.jp/column/rental/vol21/",
+     "https://e-nursingcare.com/guide/kinds/type_grouphome/degree-care/",
+     "https://e-nursingcare.com/guide/kinds/type/",
+     "https://kaigohodoki.jp/nursing-home-types/",
+     "https://www.zaitaku-care.jp/shisetsu/guide/types/",
+     "https://kaigocompass.com/kaigo-shisetsu-types/",
+     "https://care-viewer.com/column/type-of-care-facility",
+     "https://fukushi-mirai.org/2026/07/25/%E8%80%81%E4%BA%BA%E3%83%9B%E3%83%BC%E3%83%A0%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%82%92%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83%EF%BD%9C%E6%96%BD%E8%A8%AD%E3%81%94%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84%E3%83%BB/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/",
+     "https://www.tokyu-wellness-sumairu.jp/column/rojin-home-shurui.php",
+     "https://www.i-sedai.com/contents/money/M0122.html",
+     "https://healthrent.duskin.jp/column/rental/vol21/",
+     "https://www.sagasix.jp/knowledge/guide/guide2.html",
+     "https://genkinakaigo.co.jp/media/types-of-nursing-homes/",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column30/06/",
+     "https://www.toyo.ac.jp/link-toyo/life/nursing-home/"
+    ],
+    "error": ""
+   }
+  },
+  "特養 老健 違い どっち": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.pref.osaka.lg.jp/o090100/shisetushidou/koureisyasisetsusyubetu.html",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/service.html",
+     "https://www.city.yokohama.lg.jp/faq/kukyoku/kenko/koreishisetsu/20211014113247833.html",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.asahi-kasei.co.jp/hebel-senior/column/103/index.html/",
+     "https://kaigoshoku.mynavi.jp/support/column/post_76/",
+     "https://www.mcsg.co.jp/kentatsu/kaigo/9210",
+     "https://www.kaigojob.com/magazine/job-qualification/article0127",
+     "https://www.kaigojob.com/magazine/job-qualification/article0390",
+     "https://caresul-kaigo.jp/column/articles/86/",
+     "https://si-academy.jp/column/differences-in-care-facilities/",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/hoken/tokuyo/hikaku_rouken/",
+     "https://www.hakujunkai.jp/post/rouken-tokuyo-chigai",
+     "https://kenaikai.akaedakai.com/column/special_nursing_care_and_health_facilities/"
+    ],
+    "error": ""
+   }
+  },
+  "ケアマネ 選び方 相性": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.oyama.tochigi.jp/data/doc/1725535680_doc_485_0.pdf",
+     "https://www.mhlw.go.jp/topics/kaigo/kentou/020807-1/3.html",
+     "https://www.city.takatsuki.osaka.jp/uploaded/life/141382_768147_misc.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.heartpage.jp/contents/magazine/01-00056",
+     "https://www.my-kaigo.com/pub/individual/chiebukuro/mail_colum/cat35/00372.html",
+     "https://www.alsok.co.jp/person/recommend/2157/",
+     "https://www.sykz.co.jp/media/caremanager-selection/",
+     "https://kaigo.jp/column/id-16/",
+     "https://e-nursingcare.com/guide/homecare/good-caremanager/",
+     "https://yasasiikaigoblog.com/caremanager-erabi/",
+     "https://senior-living.czb.jp/col1/55s/",
+     "https://kaigo.kind-life-japan.com/post/%E3%80%90%E3%82%B1%E3%82%A2%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC%E9%81%B8%E3%81%B3%E6%96%B9%E3%80%91%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%E3%81%AB%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%B9%E3%81%8D%E3%80%8C%E5%85%AC%E7%9A%84%E3%83%AB%E3%83%BC%E3%83%AB%E3%80%8D%E3%81%A8%E3%80%8C3%E3%81%A4%E3%81%AE%E5%9F%BA%E6%BA%96%E3%80%8D",
+     "https://www.alsok.co.jp/person/recommend/2158/",
+     "https://www.minnanokaigo.com/news/kaigo-text/care-manager/no10/",
+     "https://care.kaigor.com/column/column_3/",
+     "https://www.egao-kaigo.jp/info/1563/",
+     "https://mamoria.jp/start/caremane-erabikata/",
+     "https://sotokugroup.co.jp/blog/caremanager-henkou/",
+     "https://navi.lyxis.com/posts/1841",
+     "https://e-nursingcare.com/guide/qa/qa-10479/",
+     "https://yoruri-medical.com/column/find-caremane/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sykz.co.jp/media/caremanager-selection/",
+     "https://note.com/aohina4312/n/n0184cb3b9047",
+     "https://www.irs.jp/media/knowledge/%E3%82%B1%E3%82%A2%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9.html",
+     "https://sotokugroup.co.jp/blog/caremanager-erabikata/",
+     "https://e-nursingcare.com/guide/homecare/choose-caremanager/change/",
+     "https://kaigo.kind-life-japan.com/post/%E3%80%90%E3%82%B1%E3%82%A2%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC%E9%81%B8%E3%81%B3%E6%96%B9%E3%80%91%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%E3%81%AB%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%B9%E3%81%8D%E3%80%8C%E5%85%AC%E7%9A%84%E3%83%AB%E3%83%BC%E3%83%AB%E3%80%8D%E3%81%A8%E3%80%8C3%E3%81%A4%E3%81%AE%E5%9F%BA%E6%BA%96%E3%80%8D",
+     "https://joylife.alsok.co.jp/knowhow/archives/78",
+     "https://sotokugroup.co.jp/blog/caremanager-henkou/",
+     "https://visitcare-aoi.com/care-manager-change/",
+     "https://kaigo.homes.co.jp/tayorini/business/012/"
+    ],
+    "error": ""
+   }
+  },
+  "グループホーム 向いている人 条件": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.pref.chiba.lg.jp/koufuku/fukushishisetsu/ninchishou.html",
+     "https://www.city.yokohama.lg.jp/faq/kukyoku/kenko/kaigojigyo/20211015181225116.html",
+     "https://www.city.uda.lg.jp/site/iryokaigo/1697.html",
+     "https://www.pref.osaka.lg.jp/faq/o090090/faq_000432.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/service/naiyou.html",
+     "https://www.city.minato.tokyo.jp/shougaifukushi/kuse/kocho/faq/fukushi/049.html",
+     "https://www.city.matsubara.lg.jp/fs/1/9/8/6/7/0/_/GH_handbook.pdf",
+     "https://www.city.osaka.lg.jp/fukushi/cmsfiles/contents/0000065/65769/20260227shiryo1.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://challenged.ahc-net.co.jp/recruit/support/job-discription/",
+     "https://karu-keru.com/info/knowhow/grouphome/group-home-conditions-for-moving-in",
+     "https://i.ansinkaigo.jp/shokai/articles/nursing-home-choose/shokai-grouphome-conditions",
+     "https://www.carejinzaibank.com/column/survicemaneger/group-home-assistance_workcontent/",
+     "https://caresul-kaigo.jp/column/articles/16771/",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/other/group_home/",
+     "https://job.kiracare.jp/note/article/13192/",
+     "https://job.kiracare.jp/note/article/7129/",
+     "https://fukusi-syoukai.com/blog/detail/20240624170730/",
+     "https://nagoya-kamogashira.com/2102/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=aZCxSqLsmqI",
+     "https://www.minnanokaigo.com/guide/type/grouphome/",
+     "https://www.mcsg.co.jp/kentatsu/kaigo/9169",
+     "https://info-wpp-sh.biz/grouphome/",
+     "https://minnanoguruho.com/help/%E9%9A%9C%E5%AE%B3%E8%80%85%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9B%E3%83%BC%E3%83%A0%E3%81%AB%E5%85%A5%E5%B1%85%E3%81%A7%E3%81%8D%E3%82%8B%E6%9D%A1%E4%BB%B6%E3%81%A8%E3%81%AF%EF%BC%9F%E5%AF%BE/",
+     "https://service.rodina.co.jp/columns/072/",
+     "https://www.socialinclu.co.jp/column/no-111",
+     "https://www.youtube.com/watch?v=clQgxmoFyuI",
+     "https://knowbe.jp/rakita/articles/shogaisha-grouphome.8cn6gtnh0",
+     "https://sanpo-fukushi.co.jp/column/group-home-condition",
+     "https://onodera-medical.co.jp/souken/ninchisyou-grouphome/",
+     "https://www.irs.jp/media/knowledge/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%83%9B%E3%83%BC%E3%83%A0%E3%81%A8%E3%81%AF.html",
+     "https://www.seniorhome-mado.com/guide/type/grouphome/",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/other/group_home/voice/",
+     "https://www.ycota.jp/point/37859"
+    ],
+    "error": ""
+   }
+  },
+  "デイサービス 見学 チェックリスト": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://kyujinkai.com/post/ja/hajimetenodayservice/",
+     "https://www.shirayuri-group-2004.com/dayservice-visit-checklist-caremanager/",
+     "https://www.kaigokensaku.mhlw.go.jp/care_services_guide/care_services_guide_service08.html",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group7.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://note.com/kaigomemo_pt/n/n1d4349616d15",
+     "https://hohoemi-hatsuga.com/column/2873/",
+     "https://hohoemi-hatsuga.com/column/2890/",
+     "https://hohoemi-hatsuga.com/column/2918/",
+     "https://e-nursingcare.com/guide/homecare/socializing/day-service-3/",
+     "https://tryresta.jp/care-counseling/tips/article/choose-dayservice.php",
+     "https://kyujinkai.com/post/ja/hajimetenodayservice/",
+     "https://rockcamp1985.com/dayservice-tour-check/",
+     "https://www.care-support.biz/blog/5830/",
+     "https://www.kamimutsukawa.com/recruit/staff_blog/staff_blog-2689/",
+     "https://www.homemate-s.com/ikiiki-senior/155/",
+     "https://shukatu-life.net/archives/4574"
+    ],
+    "error": ""
+   }
+  },
+  "介護施設 失敗しない 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/publish_seikatsu/",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group14.html",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/service.html",
+     "https://www.mhlw.go.jp/content/12300000/001259210.pdf",
+     "https://www.mhlw.go.jp/content/12300000/001481759.pdf",
+     "https://www.kaigokensaku.mhlw.go.jp/care_services_guide/care_services_guide_00.html",
+     "https://www.mhlw.go.jp/content/12301000/2r9852000000sj6i.pdf",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen531.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://caresul-kaigo.jp/column/articles/11878/",
+     "https://kaigo.homes.co.jp/qa_article/45/",
+     "https://kaigo.homes.co.jp/manual/voice/choose/failure/",
+     "https://kaigo-sagashi.net/%E8%80%81%E4%BA%BA%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%BB%E4%BB%8B%E8%AD%B7%E6%96%BD%E8%A8%AD%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%E3%80%902026%E5%B9%B4/",
+     "https://www.oya-anshin.com/kaigo-shisetsu-erabikata/",
+     "https://www.cocofump.co.jp/articles/kaigo/195/",
+     "https://www.sagasix.jp/column/beadhouse/roujinhome-kengaku-check-point/",
+     "https://www.sykz.co.jp/media/visit-to-nursing-home/",
+     "https://www.ycota.jp/point/145768",
+     "https://kaigo.homes.co.jp/manual/how_to_search/point/",
+     "https://shizuoka-roujinhome.jp/info/facilities-type-and-choose/",
+     "https://www.akutagawa-heartlife.jp/elderly/howtochoose/",
+     "https://shukatsu-ansin.com/kaigo-shisetsu-shurui-erabikata/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tokyu-wellness-sumairu.jp/column/kengaku-checklist.php",
+     "https://mirai-riha.com/newsdetail?wgd=news-217&wgdo=date-DESC,sort-ASC",
+     "https://hcm-suncity.co.jp/suncity/column/nursing-home/care-home-checklist.html",
+     "https://kurasmile.com/checklist",
+     "https://kyujinkai.com/post/ja/nursing_facility_checkpoint/",
+     "https://www.bellco.co.jp/anatarasiku/navi/knowledge/4449/",
+     "https://user.yurokyo.or.jp/home/view/340",
+     "https://www.youtube.com/watch?v=MxvyadCVfQo"
+    ],
+    "error": ""
+   }
+  },
+  "在宅介護 施設 どちらがいい 判断": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/service.html",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html",
+     "https://www.kaigokensaku.mhlw.go.jp/publish_seikatsu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ichirou.co.jp/column/1669",
+     "https://www.a-living.jp/column/20260401.html",
+     "https://juzenkai-group.or.jp/blog/post-hospital-care/",
+     "https://senior-living.czb.jp/col1/50s/",
+     "https://www.sagasix.jp/column/beadhouse/chooseahouse/",
+     "https://goldage.co.jp/kaigo-column/p3012/",
+     "https://mcp-net.jp/start/compareson/compare-cost.html",
+     "https://kaigo-fukushi-navi.com/kaigo-hiyou-meyasu/",
+     "https://www.tokyu-wellness-sumairu.jp/column/kaigo-hiyou.php"
+    ],
+    "error": ""
+   }
+  },
+  "サ高住 有料老人ホーム 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/12300000/001751266.pdf",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000005.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tb6275&dataType=1"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sykz.co.jp/media/serviced-housing-for-the-elderly-pay-nursing-home-difference/",
+     "https://www.sagasix.jp/knowledge/guide/yuryo-sakoujyu/",
+     "https://cbh.co.jp/column/16932/",
+     "https://goldage.co.jp/kaigo-column/p3000/",
+     "https://solasto-career.com/kaigo/media/16228/",
+     "https://caresul-kaigo.jp/column/articles/101/",
+     "https://cuc-hospice.com/rehope/magazine/4192/",
+     "https://www.sunnylife-group.co.jp/contents/nursing-home-vs-assisted-living",
+     "https://www.homemate-s.com/useful/grounding/sakoju-paid-nursinghome/",
+     "https://www.cocofump.co.jp/articles/kaigo/173/",
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/nursinghome/type/nursinghome_satsuki",
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/nursinghome/type/jutakugata_satsuki",
+     "https://www.irs.jp/media/knowledge/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E4%BB%98%E3%81%8D%E9%AB%98%E9%BD%A2%E8%80%85%E5%90%91%E3%81%91%E4%BD%8F%E5%AE%85%E3%81%A8%E3%81%AF.html",
+     "https://kaigo.homes.co.jp/manual/facilities_comment/list/yuryo/hikaku_service/",
+     "https://e-nursingcare.com/guide/kinds/service-nursinghomedifference/",
+     "https://yase-lifepia.jp/column/facility-type-difference.html",
+     "https://e-nursingcare.com/guide/kinds/type_sakouju/jutakugata-sakouju/",
+     "https://palliative-care-home.com/column/p973/"
+    ],
+    "error": ""
+   }
+  },
+  "要介護認定 申請 流れ": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/flow.html",
+     "https://www.mhlw.go.jp/file/06-Seisakujouhou-12300000-Roukenkyoku/guidebook_1.pdf",
+     "https://www.city.yokohama.lg.jp/lang/residents/living-guide/insurance/hoken4.html",
+     "https://www.mhlw.go.jp/topics/kaigo/nintei/gaiyo1.html",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/about.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.city.fukuoka.lg.jp/fukushi/kaigohoken/health/00/03/3-010302.html",
+     "https://www.city.hamura.tokyo.jp/0000015978.html",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1006001/1025727/1011395.html",
+     "https://www.sykz.co.jp/media/to-be-certified-as-requiring-long-term-care/",
+     "https://deal-light.jp/2026/08/05/youkaigo-nintei/",
+     "https://kaigonews.net/articles/youkaigo-nintei-shinsei",
+     "https://www.tokyu-wellness-sumairu.jp/column/kaigo-nintei.php",
+     "https://xn--0-mz6a60giv7g.com/2026/09/25/yokaigo-nintei-shinsei-nagare/",
+     "https://www.mhlw.go.jp/content/12300000/001510551.pdf"
+    ],
+    "error": ""
+   }
+  },
+  "要介護認定 申請 どこ 窓口": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.wam.go.jp/content/wamnet/pcpub/kaigo/kaigozero/",
+     "https://www.city.yokosuka.kanagawa.jp/2640/g_info/l100050587.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.asahi-kasei.co.jp/hebel-senior/column/75/index.html/",
+     "https://www.mhlw.go.jp/content/11909000/08.pdf",
+     "https://www.city.yamaguchi.lg.jp/site/korei/3961.html",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column13/04/",
+     "https://www.unimat-rc.co.jp/media/to-be-certified-as-requiring-long-term-care",
+     "https://houkatsu.rakuraku.or.jp/kaigo-process/apply.html",
+     "https://kaigo.homes.co.jp/manual/insurance/how_to_get/",
+     "https://www.tokyu-wellness-sumairu.jp/column/kaigo-nintei.php",
+     "https://www.kaigokensaku.mhlw.go.jp/related"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/flow.html",
+     "https://www.minnanokaigo.com/guide/care-insurance/application/",
+     "https://siaa.or.jp/knowledge/cate4-03",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGEWUsj_JiD7m165lMMvxb0TPxrQFqNpLmOTtqJKazPFmVpDxYZ27cdWQp-53bt4AKYi1avYnc6GIJhwfgPHZQCukXF5nJ7V0n9Q1e8CfaiT59WNt1meOnMu3SkUEDSwiy_LpOTkeanFa7BqDg=",
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column5/05/",
+     "https://www.my-kaigo.com/pub/individual/insurance/step.html",
+     "https://www.sykz.co.jp/media/to-be-certified-as-requiring-long-term-care/",
+     "https://www.irs.jp/media/knowledge/%E8%A6%81%E4%BB%8B%E8%AD%B7%E8%AA%8D%E5%AE%9A%E3%82%92%E5%8F%97%E3%81%91%E3%82%8B%E3%81%AB%E3%81%AF.html"
+    ],
+    "error": ""
+   }
+  },
+  "要介護認定 調査 聞かれること": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/001249525.pdf",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tb6469&dataType=1",
+     "https://www.city.suita.osaka.jp/kenko/1018701/1018705/1014458.html",
+     "https://www.city.noshiro.lg.jp/kurashi/fukushi/kaigo-hoken/nintei_chousa_QA/20968"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mcsg.co.jp/kentatsu/kaigo/5339",
+     "https://medical.francebed.co.jp/special/column/07_kaigoninteityousa.php",
+     "https://rehab.cloud/mag/11717/",
+     "https://www.pref.saitama.lg.jp/a0609/riyouhouhou/user03.html",
+     "https://kaigonews.net/glossary/nintei-chousa",
+     "https://medicaldoc.jp/n/cm-n/long-term-care-assessment-interview-questions/",
+     "https://www.tyojyu.or.jp/net/kaigo-seido/kaigo-hoken/nintei-chosa.html",
+     "https://www.ycota.jp/point/45352"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://rehab.cloud/mag/11717/",
+     "https://www.cassiopeia.or.jp/wordpress/wp-content/uploads/nintei_manual.pdf",
+     "https://hitori-cm.com/nintei/",
+     "https://www.kaigo-soudan21.jp/column/detail/169/column0059",
+     "https://www.tricare.jp/knowledge/category1/category1_2/1125/",
+     "https://www.mhlw.go.jp/topics/kaigo/nintei/dl/text2009_2_6.pdf"
+    ],
+    "error": ""
+   }
+  },
+  "要介護1 2 違い 利用できるサービス": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/nintei/gaiyo2.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=82aa0267&dataType=0&pageNo=1",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000212398.html",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group14.html",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/fee.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.bellco.co.jp/anatarasiku/navi/guide/4196/",
+     "https://www.asahi-kasei.co.jp/hebel-senior/column/78/index.html/",
+     "https://www.supercourt.jp/topics/yokaigo-2/",
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/beginner/shienkaigo/youkaigo1",
+     "https://www.city.sakai.lg.jp/kenko/fukushikaigo/kaigo/service-use/kind-cost/kaigoservice/gendokijyungaku.html",
+     "https://heart-life.net/tokuyou-nyusyokizyun/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sykz.co.jp/media/what-is-nursing-care-1/",
+     "https://www.bellco.co.jp/anatarasiku/navi/guide/4196/",
+     "https://pro-sup.com/other/2495/",
+     "https://www.bellco.co.jp/anatarasiku/navi/guide/4196/",
+     "https://medical.francebed.co.jp/special/column/09_yokaigo.php",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6PIX3RjngBz1qOY6-y5uIIPadfbJhTE-3xVn8982ZAhk6P_5IafH2fDqYNRpYpbYSzyMXHH-NI-2EzKmIe7rd8RIRFqi6icRzUBStweXg_3eWfhN7ArOJMXOLkz3NHXbBuelzWgKS-c511JqVWTVAUbGeJez3lcFI6Ms8s49yPV47",
+     "https://www.supercourt.jp/topics/yokaigo-2/",
+     "https://www.sykz.co.jp/media/what-is-nursing-care-1/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6PIX3RjngBz1qOY6-y5uIIPadfbJhTE-3xVn8982ZAhk6P_5IafH2fDqYNRpYpbYSzyMXHH-NI-2EzKmIe7rd8RIRFqi6icRzUBStweXg_3eWfhN7ArOJMXOLkz3NHXbBuelzWgKS-c511JqVWTVAUbGeJez3lcFI6Ms8s49yPV47",
+     "https://www.tricare.jp/knowledge/category4/category4_1/4858/",
+     "https://www.wam.go.jp/wamappl/bb05kaig.nsf/0/c043864777f42d604925896d00255549/$FILE/shikyushiryou.PDF"
+    ],
+    "error": ""
+   }
+  },
+  "要支援 要介護 違い 基準": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/about.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/nintei/gaiyo2.html",
+     "https://www.mhlw.go.jp/file/06-Seisakujouhou-12300000-Roukenkyoku/0000116033.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.asahi-kasei.co.jp/hebel-senior/column/72/index.html/",
+     "https://medical.francebed.co.jp/special/column/83_kaigonintei.php",
+     "https://point.charmcc.jp/trivia/kuHzl",
+     "https://www.kaigojob.com/magazine/job-qualification/article0271",
+     "https://kaigo.homes.co.jp/manual/insurance/how_to_get/",
+     "https://www.bestfirmgroup.jp/zenkoku-sl/kanaeru-note/care/youkaigoninteikubun/",
+     "https://fujimasa.or.jp/%E8%A6%81%E4%BB%8B%E8%AD%B7%E8%AA%8D%E5%AE%9A%E3%81%A8%E3%81%AF%EF%BC%9F%E6%B5%81%E3%82%8C%E3%83%BB%E5%8C%BA%E5%88%86%E3%83%BB%E5%9F%BA%E6%BA%96%E3%82%92%E3%82%8F%E3%81%8B%E3%82%8A%E3%82%84%E3%81%99/",
+     "https://asukafukushikai.com/post_column/2023/01/04/%E8%A6%81%E6%94%AF%E6%8F%B4%E3%83%BB%E8%A6%81%E4%BB%8B%E8%AD%B7%E3%81%AE%E9%81%95%E3%81%84%EF%BD%9C%E8%A6%81%E4%BB%8B%E8%AD%B7%E8%AA%8D%E5%AE%9A%E5%89%8D%E3%81%AB%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A/",
+     "https://www.mhlw.go.jp/topics/kaigo/kentou/15kourei/sankou3.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaigo.benesse-style-care.co.jp/article/knowledge/beginner/shienkaigo",
+     "https://medical.francebed.co.jp/special/column/65_needed_support_care.php",
+     "https://hoken.kakaku.com/gka/select/diff/",
+     "https://www.mhlw.go.jp/topics/kaigo/kentou/15kourei/sankou3.html",
+     "https://kaigoworker.jp/column/category/employment-systems/ka383/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/nintei/gaiyo2.html",
+     "https://www.wam.go.jp/wamappl/bb11gs20.nsf/0/49256fe9001b533f49256da5001852f2/$FILE/siryou3_2.pdf",
+     "https://www.bestfirmgroup.jp/zenkoku-sl/kanaeru-note/care/youkaigoninteikubun/"
+    ],
+    "error": ""
+   }
+  },
+  "要介護認定 結果 期間 何日": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.fujisawa.kanagawa.jp/kaigo-j/kenko/fukushi/kaigohoken/ninte/sinseihouhou.html",
+     "https://www.city.shibukawa.lg.jp/faq/000543/000562/000566/p003965.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.city.omaezaki.shizuoka.jp/material/files/group/14/2407niteiguide.pdf",
+     "https://kaigo.alsok.co.jp/care_story/archives/46",
+     "https://www.heartpage.jp/contents/magazine/01-00033",
+     "https://www.fukuoka-kaigo.jp/outline/procedure/necessity1_4.html",
+     "https://machi-fit.jp/media/long-term-care-certification-guide/",
+     "https://www.tokyu-wellness-sumairu.jp/column/kaigo-nintei.php",
+     "https://roujin-soudan.com/system/certification-flow/",
+     "https://kaigonews.net/articles/youkaigo-nintei-nagare-user",
+     "https://www.mhlw.go.jp/shingi/2010/01/s0115-9.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gemmed.ghc-j.com/?p=64180",
+     "https://www.heartpage.jp/contents/magazine/01-00033",
+     "https://www.kaigo-kyuujin.com/oyakudachi/topics/67522",
+     "https://www.city.chuo.lg.jp/a0029/faq/kenkouiryou/kaigohoken/0010.html",
+     "https://www.mhlw.go.jp/content/12300000/001415212.pdf",
+     "https://www.motosu-union.gifu.jp/care/faq/01",
+     "https://www.tokyu-wellness-sumairu.jp/column/kaigo-nintei.php"
+    ],
+    "error": ""
+   }
+  },
+  "要介護認定 不服 区分変更": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.kobe.lg.jp/a46210/kenko/fukushi/carenet/nintei_guide/shinseidaikou_c03.html",
+     "https://www.pref.osaka.lg.jp/o090090/kaigoshien/kaigo-sinsa/sinsaseikyu.html",
+     "https://www.city.koto.lg.jp/212103/fukushi/kaigohoken/tetsuzuki/72338.html",
+     "https://www.city.shinjuku.lg.jp/fukushi/index07_00000001.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://anshinkaigo.asahi-life.co.jp/activity/kaigo/column5/56/",
+     "https://www.mcsg.co.jp/kentatsu/kaigo/7362",
+     "https://www.secom.co.jp/kaigo/basic/20210713.html",
+     "https://care.kaigor.com/column/column_1/",
+     "https://note.com/oimatsu_clinic/n/n00506ac0e84b",
+     "https://www.egao-kaigo.jp/info/1551/",
+     "https://rifuri.jp/blog/kaigohoken-fufukumoushitate",
+     "https://siawase.jp/2024/05/%E8%A9%B1%E9%A1%8C%EF%BD%9C%E8%A6%81%E4%BB%8B%E8%AD%B7%E8%AA%8D%E5%AE%9A%E7%B5%90%E6%9E%9C%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E4%B8%8D%E6%9C%8D%E7%94%B3%E3%81%97%E7%AB%8B%E3%81%A6/",
+     "https://takenokoplan.com/investigation/",
+     "https://cs.sonylife.co.jp/lpv/pcms/sca/ct/medical/qa-care/07-02.html",
+     "https://rehab.cloud/mag/12059/",
+     "https://comimi.jp/archives/column/classification",
+     "https://goodlifesenior.com/wp/term-b2/2"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://roujin-soudan.com/system/certification-appeal/",
+     "https://www.secom.co.jp/kaigo/basic/20210713.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFfL4O6JS9UFTB1QCAymB9P4ahLNfF_cy8l7YDH1N1Fb20FqXxaU8YHUagHjaECWDc4nrq9M0OpHTo1Y-3cVLlIj7USvIAXbOoWnllIHMU-cKSkem6qnULs6t_UbFEhcSmTsJkHVEeH5ca8SRTD1_q8oH4WmUGzdvYyIxhLHkY=",
+     "https://note.com/oimatsu_clinic/n/n00506ac0e84b",
+     "https://kaigo-tonari.jp/nintei-fufuku/",
+     "https://www.egao-kaigo.jp/info/column/1551/"
+    ],
+    "error": ""
+   }
+  },
+  "要介護認定 申請 必要書類": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.funabashi.lg.jp/faq/kenkou/kaigo/002/p010835.html",
+     "https://www.city.shinjuku.lg.jp/fukushi/file07_03_00004.html",
+     "https://www.city.tokyo-nakano.lg.jp/kenko_hukushi/kourei/kaigohoken/kaigohokennoriyo/yokaigo-yoshien.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.city.koganei.lg.jp/kenkofukuhsi/koreishafukushi/K25/siminnokatamuke/siminsinsedl/youkaigoninntei.html",
+     "https://www.city.kobe.lg.jp/a46210/kenko/fukushi/carenet/nintei_guide/shinsei_a01.html",
+     "https://www.city.tama.lg.jp/kenkofukushi/1008237/kaigo/riyousha/1002974.html",
+     "https://www.city.fukuoka.lg.jp/fukushi/kaigohoken/health/00/03/3-010302.html",
+     "https://www.city.koto.lg.jp/212103/fukushi/kaigohoken/tetsuzuki/6525.html",
+     "https://www4.city.kanazawa.lg.jp/soshikikarasagasu/kaigohokenka/yokuarushitsumon/2864.html",
+     "https://www.sykz.co.jp/media/to-be-certified-as-requiring-long-term-care/",
+     "https://kaigo.homes.co.jp/manual/insurance/how_to_get/",
+     "https://kaigonews.net/articles/youkaigo-nintei-shinsei",
+     "https://www.city.koshigaya.saitama.jp/kurashi_shisei/fukushi/kaigohoken/ninteiari/ninteishinsei/youkaigoninnteisinnseisyorui.html",
+     "https://www.city.tokorozawa.saitama.jp/kenko/kaigohoken/kaigo3/ninteishinkishinsei.html",
+     "https://www.city.hamura.tokyo.jp/0000015978.html",
+     "https://www.city.nagoya.jp/kenkofukushi/koureisha/1016500/1011160/1011165.html",
+     "https://www.city.toshima.lg.jp/194/kenko/kaigo/kaigo/riyo/001087/index.html",
+     "https://www.a-living.jp/contents/3857/",
+     "https://www.tokyu-wellness-sumairu.jp/column/kaigo-nintei.php"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaigo.alsok.co.jp/care_story/archives/46",
+     "https://www.minnanokaigo.com/guide/care-insurance/application/",
+     "https://www.sykz.co.jp/media/to-be-certified-as-requiring-long-term-care/",
+     "https://www.asahi-kasei.co.jp/hebel-senior/column/74/index.html/",
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/flow.html",
+     "https://kaigonomirai.com/nagare.html",
+     "https://www.city.aomori.aomori.jp/hukushi_kenkou/kaigohoken/1003004/1003007.html"
+    ],
+    "error": ""
+   }
+  },
+  "親 要介護認定 受けるべきか 目安": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kaigokensaku.mhlw.go.jp/commentary/about.html",
+     "https://kouseikyoku.mhlw.go.jp/kantoshinetsu/000428235.pdf",
+     "https://www.mhlw.go.jp/topics/kaigo/nintei/gaiyo1.html",
+     "https://chukonen-katsuyaku.mhlw.go.jp/family-care/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ichirou.co.jp/column/3389",
+     "https://minkai.jp/questions/5",
+     "https://www.sykz.co.jp/media/to-be-certified-as-requiring-long-term-care/",
+     "https://kaigo.alsok.co.jp/care_story/archives/46",
+     "https://www.oki-memorial.org/column/careoftheparents0308",
+     "https://rifuri.jp/blog/kaigonintei_ukeru-timing",
+     "https://kaigonews.net/articles/youkaigo-nintei-nagare-user",
+     "https://suehiro-sakura.com/care-certification-application-best-timing/",
+     "https://senior-living.czb.jp/col1/39s/",
+     "https://www.mcsg.co.jp/kentatsu/kaigo/92251",
+     "https://www.heartpage.jp/contents/magazine/08-01138",
+     "https://rehab.cloud/mag/3579/",
+     "https://www.ycota.jp/point/37945",
+     "https://kaigo.homes.co.jp/manual/insurance/how_to_get/",
+     "https://caretasukeru.com/certification-training/practical-skills-training/5023/",
+     "https://www.bestfirmgroup.jp/zenkoku-sl/kanaeru-note/care/youkaigoninteikubun/",
+     "https://www.tokyu-wellness-sumairu.jp/column/kaigo-nintei.php"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://suehiro-sakura.com/care-certification-application-best-timing/",
+     "https://senior-living.czb.jp/col1/39s/",
+     "https://kaigo-postseven.com/772",
+     "https://ichirou.co.jp/column/2020",
+     "https://jos-senior.com/blog/1548619/",
+     "https://note.com/ribbyjam_stk0526/n/n4ab336308708",
+     "https://navi.lyxis.com/posts/4473"
+    ],
+    "error": ""
+   }
+  },
+  "要介護認定 主治医意見書 とは": {
+   "group": "要介護認定",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.kumamoto.jp/kiji00338000/index.html",
+     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1006001/1025722/1025723/1011452.html",
+     "https://www.city.kasugai.lg.jp/faq/1000380/1000383/1000680.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tyojyu.or.jp/net/kaigo-seido/kaigo-hoken/shujii.html",
+     "https://www.east-mikawa.jp/2433.htm",
+     "https://www.city.nagano.nagano.jp/n101500/contents/p002521.html",
+     "https://www.pref.aichi.jp/soshiki/korei/0000068538.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tb6469&dataType=1&pageNo=4",
+     "https://rehab.cloud/mag/3158/",
+     "https://riei-kaigo.jp/column/post-15068/",
+     "https://e-nursingcare.com/guide/insurance/application/doctors-opinion/",
+     "https://www.kyoto.med.or.jp/cms/wp-content/uploads/2026/04/%E4%B8%BB%E6%B2%BB%E5%8C%BB%E6%84%8F%E8%A6%8B%E6%9B%B8%E8%A8%98%E8%BC%89%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB%E6%9C%AC%E6%96%87.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tyojyu.or.jp/net/kaigo-seido/kaigo-hoken/shujii.html",
+     "https://www.fukuoka-kaigo.jp/trader/img/guidance_h210930.pdf",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tb6469&dataType=1&pageNo=4",
+     "https://www.hosp.yamanashi.ac.jp/for_medical/7186/",
+     "https://demokyotomed.tplus-group08.net/cms/wp-content/uploads/2025/03/%E4%B8%BB%E6%B2%BB%E5%8C%BB%E6%84%8F%E8%A6%8B%E6%9B%B8%E8%A8%98%E8%BC%89%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB%E5%8D%98%E3%83%9A%E3%83%BC%E3%82%B8.pdf",
+     "https://www.med.or.jp/nichinews/n110805k.html",
+     "https://rehab.cloud/mag/3158/",
+     "https://kaigo.homes.co.jp/qa_article/142/"
+    ],
+    "error": ""
+   }
+  },
+  "親 介護 始めどき サイン": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/12300000/7_senntokea_2.pdf",
+     "https://www.ncgg.go.jp/dementia/about/answer.html",
+     "https://www.city.kuki.lg.jp/kenko/korei/1003891.html",
+     "https://www.city.kamogawa.lg.jp/site/shinsei/5720.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://medicaldoc.jp/n/cm-n/nc213/",
+     "https://www.crowdcare.jp/care-musubi/content/parent-care-preparation/",
+     "https://medicaldoc.jp/n/column-n/nc269/",
+     "https://medicaldoc.jp/n/column-n/nc316/",
+     "https://tonton.ciao.jp/when-should-i-start-preparing-for-care/",
+     "https://www.sunnylife-group.co.jp/contents/parent-care-age",
+     "https://www.kamakura-life.co.jp/monenavi/articles/kaigo/kaigo-junbi/",
+     "https://kaigo-local.com/guide/oya-no-sign-7-check/",
+     "https://kokomamo.com/hazimaruno/",
+     "https://www.a-living.jp/column/wp-4284.html",
+     "https://www.tokyu-wellness.co.jp/kaigorishoku/column/oya-no-kaigo-hajimaru.html",
+     "https://kaigo-home.sanko-fukushi.jp/bunkyo/kaigo-column/%E3%80%90%E8%A6%AA%E3%81%AE%E4%BB%8B%E8%AD%B7%E3%81%A7%E6%B1%BA%E6%96%AD%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E6%96%B9%E3%81%B8%E3%80%91%E4%BD%95%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8B%E3%81%B9/",
+     "https://care-poke.com/post/135",
+     "https://visitcare-aoi.com/oya-no-kaigo-hajimekata/",
+     "https://yokodate.com/still/",
+     "https://japancareconcierge.com/ja/guide/how-to-coordinate-care-for-parents/",
+     "https://senior-living.czb.jp/col1/6s/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yumecom.com/column/care-signs-and-preparation/",
+     "https://navi.lyxis.com/posts/2454",
+     "https://tryresta.jp/care-counseling/tips/article/age-caregiving-begins.php",
+     "https://kaigo-postseven.com/772",
+     "https://www.orangepage.net/news-daily/187289",
+     "https://www.e-yorisoudan.com/blog/archives/1959",
+     "https://www.sunnylife-group.co.jp/contents/parent-care-age",
+     "https://www.laplace-co.com/post_column/post-2238/",
+     "https://www.sonosaki-life.jp/shop/pg/1data-nursingcare/"
+    ],
+    "error": ""
+   }
+  },
+  "認知症 親 介護 疲れた 相談先": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000076236_00003.html",
+     "https://www.alzheimer.or.jp/?page_id=146",
+     "https://www.wam.go.jp/content/wamnet/pcpub/kaigo/handbook/service/c078-p02-02-Kaigo-12.html",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group12.html",
+     "https://www.alzheimer.or.jp/?page_id=73"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.smilenavigator.jp/ninchisyo/about/06.html",
+     "https://anshinkaigo.asahi-life.co.jp/activity/ninchisho/column10/14/",
+     "https://www.pref.gunma.jp/page/19768.html",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/ninchisyo/ninchisyo-sodan/info.html",
+     "https://www.bellco.co.jp/ninchisho/info/1102/",
+     "https://fukuyama-ninchisho-navi.jp/consultation/",
+     "https://kokorono.co.jp/oyatoko/column/152/",
+     "https://theotol.soudan-e65.com/support/available-services/contact/dementia-consultation",
+     "https://theotol.soudan-e65.com/support/available-services/contact/service-consultation",
+     "https://www.city.itabashi.tokyo.jp/kenko/kourei/1016091/1038769.html",
+     "https://www.alzheimer.or.jp/?page_id=146",
+     "https://medical.francebed.co.jp/special/column/50_care_consultation.php",
+     "https://www.city.suita.osaka.jp/kenko/1018656/1018665/1014553.html",
+     "https://www.bellco.co.jp/anatarasiku/navi/guide/4544/",
+     "https://goldage.co.jp/column/blog-nursing-care-consultation/",
+     "https://www.city.katsushika.lg.jp/kurashi/1000061/1003790/1029814.html",
+     "https://www.city.kyoto.lg.jp/sogo/page/0000251123.html",
+     "https://www.kaigowiki.com/parental-care/telephone-consultation/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://caretasukeru.com/other/8928/",
+     "https://medical.francebed.co.jp/special/column/50_care_consultation.php",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000076236_00003.html",
+     "https://www.seniorhome-mado.com/guide/homecare/work-care-balance/fatigue-consult/",
+     "https://www.smilenavigator.jp/ninchisyo/about/06.html",
+     "https://www.minnanokaigo.com/enquete/no14/",
+     "https://www.alzheimer.or.jp/?page_id=146",
+     "https://www.smilenavigator.jp/ninchisyo/about/06.html",
+     "https://www.alzheimer.or.jp/?page_id=146"
+    ],
+    "error": ""
+   }
+  },
+  "介護 離職 しない 方法": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/balance/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/law-amendment/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/leave/index.html",
+     "https://jsite.mhlw.go.jp/gunma-roudoukyoku/content/contents/002052816.pdf",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158665.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hojyokin-portal.jp/columns/ryoritsu_kaigo",
+     "https://edenred.jp/article/hr-recruiting/245/",
+     "https://jsite.mhlw.go.jp/tokyo-roudoukyoku/newpage_kaigorisyoku.html",
+     "https://go100.jp/column/caregiver-resignation/",
+     "https://manpowercareecre.jp/bible/knowhow/040/",
+     "https://si-academy.jp/column/shoninsya-leaving-employment/",
+     "https://www.espayroll.jp/news/20241261",
+     "https://www.nissay-biz-site.com/article/l08ync8bt",
+     "https://www.towa-syaroshi.com/%E4%BB%A4%E5%92%8C%EF%BC%97%E5%B9%B4%E5%BA%A6%EF%BD%9C%E4%B8%A1%E7%AB%8B%E6%94%AF%E6%8F%B4%E7%AD%89%E5%8A%A9%E6%88%90%E9%87%91%E3%80%94%E4%BB%8B%E8%AD%B7%E9%9B%A2%E8%81%B7%E9%98%B2%E6%AD%A2%E6%94%AF/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kiteartfactory.jp/cont12/70.html",
+     "https://www.carelacare.com/library/%E4%BB%8B%E8%AD%B7%E9%9B%A2%E8%81%B7%E3%82%92%E9%98%B2%E3%81%90%E3%81%9F%E3%82%81%E3%81%AB%EF%BD%9C%E4%BB%95%E4%BA%8B%E3%81%A8%E4%BB%8B%E8%AD%B7%E3%82%92%E4%B8%A1%E7%AB%8B%E3%81%99%E3%82%8B5%E3%81%A4/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/balance/",
+     "https://www.hrpro.co.jp/series_detail.php?t_no=4106",
+     "https://www.youtube.com/watch?v=cCVgDPFmJhk",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/law-amendment/"
+    ],
+    "error": ""
+   }
+  },
+  "親 一人暮らし 心配 見守り": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://chukonen-katsuyaku.mhlw.go.jp/family-care/",
+     "https://www.post.japanpost.jp/life/mimamori/faq.html",
+     "https://www.alsok.co.jp/person/recommend/088/",
+     "https://www.city.hiratsuka.kanagawa.jp/fukushi/page20_00020.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.alsok.co.jp/person/recommend/1111/",
+     "https://life.saisoncard.co.jp/post/c2815/",
+     "https://www.we-are-csp.co.jp/personal/column/column84.php",
+     "https://note.com/carefran/n/na780f3a18c23",
+     "https://icst.jp/minwell/post/763",
+     "https://www.kaigowiki.com/system/monitoring-service/",
+     "https://sorokatu.com/entry/goods-and-services-to-watch-over-elderly-and-distant-parents",
+     "https://migaru-shukatsu.com/mimamori-app/",
+     "https://urajyukublog.com/koureisya-mimamori-apuri7/",
+     "https://www.alsok.co.jp/person/recommend/088/",
+     "https://healthrent.duskin.jp/column/iroha/mimamori/",
+     "https://note.com/umita_0426/n/n88f21633e41a",
+     "https://my-nurse.jp/blogs/column/enkyorikaigo/202211-3449/",
+     "https://www.zaitaku-care.jp/column/mimamori/",
+     "https://www.oss-og.co.jp/column/mimamori/9.html",
+     "https://www.ikiiki-shien.com/blog/welfare-4",
+     "https://xn--nbk9dm7h2ij43vgnvcj6p3s9a9qj.com/shurui/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.ikiiki-shien.com/blog/welfare-4",
+     "https://www.bellco.co.jp/anatarasiku/navi/qa/4125/",
+     "https://www.sykz.co.jp/media/watching-over-the-elderly/",
+     "https://r-guide.jp/learning/prevention/9019.html",
+     "https://hello.inc/news/article/municipalities/",
+     "https://www.youtube.com/watch?v=zvdrd2O8QWY",
+     "https://join.biglobe.ne.jp/mobile/sim/gurashi/tips_0298/",
+     "https://www.alsok.co.jp/person/recommend/2385/",
+     "https://mhlw-navi.com/archives/3639",
+     "https://park.sompo-japan.co.jp/mylife/kaigo-san/article/ot-004/",
+     "https://www.secom.co.jp/mimamori/column/51.html",
+     "https://www.city.okazaki.lg.jp/kenko/kourei/1012326/1012331/1004118.html"
+    ],
+    "error": ""
+   }
+  },
+  "介護 兄弟 分担 揉める": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://medicaldoc.jp/n/column-n/parent-care-siblings/",
+     "https://chukonen-katsuyaku.mhlw.go.jp/family-care/",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_11/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ichirou.co.jp/column/1531",
+     "https://medicaldoc.jp/n/cm-n/parent-care-siblings/",
+     "https://www.sykz.co.jp/media/parents-care-brother/",
+     "https://ichirou.co.jp/column/1651",
+     "https://www.irs.jp/media/knowledge/%E8%A6%AA%E3%81%AE%E4%BB%8B%E8%AD%B7%E3%81%A7%E5%85%84%E5%BC%9F%E5%A7%89%E5%A6%B9%E9%96%93%E3%81%AB%E8%B5%B7%E3%81%93%E3%82%8A%E3%81%8C%E3%81%A1%E3%81%AA%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB.html",
+     "https://joylife.alsok.co.jp/knowhow/archives/79",
+     "https://www.a-living.jp/contents/4273/",
+     "https://sonasapo.com/families/6642/",
+     "https://www.kawamura-fp.com/2024/05/06/%E8%A6%AA%E3%81%AE%E4%BB%8B%E8%AD%B7-%E5%85%84%E5%BC%9F%E3%81%A7%E3%82%82%E3%82%81%E3%82%8B/",
+     "https://www.cocofump.co.jp/articles/kaigo/59/",
+     "https://www.sykz.co.jp/media/parental-care-costs/",
+     "https://legalpro.jp/souzoku/7080/",
+     "https://kaigo.homes.co.jp/manual/money/kaigo_preparation/caresharing/",
+     "https://www.a-living.jp/column/wp-4273.html",
+     "https://goodlifesenior.com/wp/news/39649",
+     "https://www.ogawajimusyo.co.jp/blog/entry-761766/"
+    ],
+    "error": ""
+   }
+  },
+  "親 デイサービス 嫌がる 対処": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://ichirou.co.jp/column/1503",
+     "https://www.minnanokaigo.com/news/kaigo-text/home-care/no390/",
+     "https://www.mhlw.go.jp/content/11909000/000355354.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ichirou.co.jp/column/1503",
+     "https://www.sykz.co.jp/media/dislike-day-service/",
+     "https://e-nursingcare.com/guide/qa/qa-14403/",
+     "https://e-nursingcare.com/guide/homecare/day-service/unwilling-to-go/",
+     "https://tryresta.jp/care-counseling/tips/article/dayservice-reluctant-parents.php",
+     "https://tryresta.jp/care-counseling/tips/article/dayservice-by-category-parents.php",
+     "https://www.secom.co.jp/kaigo/method/20180626.html",
+     "https://www.bellco.co.jp/anatarasiku/navi/knowledge/4082/",
+     "https://www.riha-yumesupo.com/dayservice-iyagaru/",
+     "https://oshigoto.fun-seed.com/2025/09/12/day-service-refusal/",
+     "https://kenaikai.akaedakai.com/column/%E3%83%87%E3%82%A4%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E5%AB%8C%E3%81%8C%E3%82%8B%E8%A6%AA%E3%82%92%E8%AA%AC%E5%BE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/",
+     "https://selrea.co.jp/life/life38/",
+     "https://www.onetop-japan.jp/magocoro/column/day-service/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://mynursing.co.jp/post/354715164351/%E3%83%96%E3%83%AD%E3%82%B0%2F%E8%A6%AA%E3%81%8C%E3%83%87%E3%82%A4%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E5%AB%8C%E3%81%8C%E3%82%8B-%E7%84%A1%E7%90%86%E3%81%AA%E3%81%8F%E9%80%9A%E3%81%A3%E3%81%A6%E3%82%82%E3%82%89%E3%81%86%E3%81%9F%E3%82%81%E3%81%AE%E5%A3%B0%E3%81%8B%E3%81%91%E3%81%A8%E5%B7%A5%E5%A4%AB",
+     "https://www.mcsg.co.jp/kentatsu/kaigo/10902",
+     "https://tryresta.jp/care-counseling/tips/article/dayservice-by-category-parents.php",
+     "https://www.smilenavigator.jp/ninchisyo/komarigoto-navi/case/08.html",
+     "https://www.secom.co.jp/kaigo/method/20180626.html",
+     "https://www.sykz.co.jp/media/dislike-day-service/",
+     "https://www.alzheimer.or.jp/?page_id=4707"
+    ],
+    "error": ""
+   }
+  },
+  "老老介護 限界 相談": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://chukonen-katsuyaku.mhlw.go.jp/family-care/",
+     "https://www.kaigokensaku.mhlw.go.jp/publish/group12.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=82aa7582&dataTy="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.city.ota.tokyo.jp/seikatsu/fukushi/kourei/sodan/index.html",
+     "https://www.city.sakai.lg.jp/kenko/fukushikaigo/koreishafukushi/soudan/chiikishien.html",
+     "https://www.city.kimitsu.lg.jp/soshiki/20/53639.html",
+     "https://www.city.nagano.nagano.jp/n101200/contents/p006066.html",
+     "https://www.city.higashikurume.lg.jp/kurashi/zei/kaigo/1012303.html",
+     "https://www.pref.hokkaido.lg.jp/hf/khf/117374.html",
+     "https://www.city.chuo.lg.jp/a0029/kenkouiryou/koureikaigo/koureisha-shien/otosiyori/madogutiotosiyori.html",
+     "https://www.city.osaka.lg.jp/fukushi/page/0000370522.html",
+     "https://kaigo.homes.co.jp/manual/homecare/basic/center/",
+     "https://medicaldoc.jp/n/cm-n/nc258/",
+     "https://medicaldoc.jp/n/cm-n/nc257/",
+     "https://tetsuzuki-planner.jp/plan/roro-kaigo-koteki-shien",
+     "https://caresul-kaigo.jp/column/articles/20875/",
+     "https://juzenkai-group.or.jp/blog/parental-care/",
+     "https://kaigo.kind-life-japan.com/post/%E5%9C%A8%E5%AE%85%E4%BB%8B%E8%AD%B7%E3%81%AE%E9%99%90%E7%95%8C%E3%82%92%E8%A6%8B%E6%A5%B5%E3%82%81%E3%82%8B5%E3%81%A4%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%80%902026%E5%B9%B4%E7%89%88-%E6%9C%80%E6%96%B0%E5%85%AC%E8%A1%A8%E3%81%AE%E4%B8%80%E6%AC%A1%E6%83%85%E5%A0%B1%E3%83%99%E3%83%BC%E3%82%B9%E3%80%91",
+     "https://yu-life-jihikaigo.com/kaigocolum6/",
+     "https://kokomamo.com/rourou-kyoudaore/",
+     "https://kaigo-home.sanko-fukushi.jp/hirai/kaigo-column/%E3%80%90%E9%99%90%E7%95%8C%E3%82%B5%E3%82%A4%E3%83%B3%E3%80%91%E5%9C%A8%E5%AE%85%E4%BB%8B%E8%AD%B7%E3%81%8C%E3%81%A4%E3%82%89%E3%81%84%E8%80%81%E8%80%81%E4%BB%8B%E8%AD%B7%E3%81%A7%E7%9C%A0/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.bellco.co.jp/anatarasiku/navi/guide/4544/",
+     "https://caretasukeru.com/other/8928/",
+     "https://www.seniorhome-mado.com/guide/homecare/elder-caring/",
+     "https://www.sykz.co.jp/media/long-term-care-consultation/",
+     "https://kaigo-nandemosoudan.jp/",
+     "https://kyosaikai.jp/hakuju-so/yougo/792/",
+     "https://www.pref.kyoto.jp/kourei-engo/13900050.html",
+     "https://www.minnanokaigo.com/enquete/no14/"
+    ],
+    "error": ""
+   }
+  },
+  "親 施設 入れる 罪悪感": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://kaigo.homes.co.jp/qa_article/100/",
+     "https://www.minnanokaigo.com/news/kaigo-text/home-care/no364/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/chiiki-houkatsu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sagasix.jp/column/care/feeling-care/",
+     "https://caresul-kaigo.jp/column/articles/14567/",
+     "https://caresul-kaigo.jp/column/articles/33516/",
+     "https://kaigo.homes.co.jp/qa_article/100/",
+     "https://yase-lifepia.jp/column/sense-guilt-nursing-home.html",
+     "https://jos-senior.com/blog/1545453/",
+     "https://ichirou.co.jp/column/2819",
+     "https://brain-gr.com/tokinaika_clinic/blog/family/feeling-of-guilt-to-get-parents-to-enter-the-elderly-facility/",
+     "https://www.a-living.jp/column/20260701.html",
+     "https://www.hohoemido.com/%E8%A6%AA%E3%82%92%E6%96%BD%E8%A8%AD%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%8B%E7%BD%AA%E6%82%AA%E6%84%9F%E3%81%A8%E3%81%AE%E5%90%91%E3%81%8D%E5%90%88%E3%81%84%E6%96%B9%E3%81%A8%E4%B9%97%E3%82%8A%E8%B6%8A/"
+    ],
+    "error": ""
+   }
+  },
+  "介護 仕事 両立 制度": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/leave/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/shorttime-leave/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/shortworking/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/overtimework/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/law-amendment/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/consultation/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://vs-group.jp/lawyer/roudou/1273/",
+     "https://www.businesslawyers.jp/articles/1442",
+     "https://www.mhlw.go.jp/content/11900000/001259367.pdf",
+     "https://keiyaku-watch.jp/media/hourei/202504-ikujikaigokyugyoho/",
+     "https://hr.dentsusoken.com/column/1398/",
+     "https://job.pc-k.co.jp/2026-childcare-nursing-care-leave-act-revision/",
+     "https://job-medley.com/tips/detail/9326/",
+     "https://nics-gp.co.jp/media/insurance/caregiving-work-balance/",
+     "https://kaigonews.net/articles/kaigo-kyugyo-pillar",
+     "https://www8.cao.go.jp/kisei-kaikaku/suishin/meeting/wg/hoiku/20190412/190412hoikukoyou02.pdf",
+     "https://www.hellowork.mhlw.go.jp/doc/kaigokyuugyou.pdf",
+     "https://www.shiruporuto.jp/public/document/container/kaigo_rishoku/kaigo_rishoku_002.html",
+     "https://www.cocofump.co.jp/articles/kaigo/110/",
+     "https://www.mhlw.go.jp/content/11600000/001282596.pdf",
+     "https://www.gmosign.com/media/work-style/kaigokyugyokyufu/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/leave/",
+     "https://tetsuzuki-planner.jp/plan/kaigo-kyugyo-kyufukin",
+     "https://www.mmea.biz/3548/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/law-amendment/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE8f30lK5wFW6M4AYSN6amM2rrLrypmf00QbbNKJ01SEZjDVpzgGJnkFfNvhhHH1dZJvYMUNBEG0NmZJrloj8GdTCADas7hkJnnmJlJnT5YfILzuwQI07OvgrrOWqXO0_LuT1z8dKTzDENdTSLOKr2EUVEQExFqYNe7wY7_CSwscfuEHBdWQC_jJOwUKEUPzGChd-u-kZX-iHv3TfOXTuD9LJNCpgwo_k557Xq8WfuLocVjBPgzwPWjnSSZaYXifRHFHCQwCi27XaUb0ZL_9Lqt3J3B2R6792R-d6TGp3SLzVN1eNZ3QhzTvaA_-vg3L8t64aO4GO-NINMoMqYlQIzDg4UD4VjUMftpGwR59u1Y_cdKLcjdmfl2hZvlVvwfezmiCzquxdNljF4yBnohzBwNpzJLCOp1fbnWebK2mJE4qsLO",
+     "https://xn--alg-li9dki71toh.com/column/childcare-caregiver-leave-law-amendment/",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/law-amendment/"
+    ],
+    "error": ""
+   }
+  },
+  "認知症 初期症状 家族 気づき方": {
+   "group": "家族の悩み",
+   "ChatGPT": {
+    "urls": [
+     "https://www.gov-online.go.jp/article/202501/entry-7013.html",
+     "https://www.ncgg.go.jp/hospital/navi/40.html",
+     "https://www.ncgg.go.jp/dementia/about/answer.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://anshinkaigo.asahi-life.co.jp/activity/ninchisho/column9/01/",
+     "https://www.mrso.jp/mikata/2749/",
+     "https://www.famitra.jp/article/ninchisyo/post-103/",
+     "https://www.famitra.jp/article/ninchisyo/post-153/",
+     "https://cog-selfcheck.jp/column/t17",
+     "https://www.shibuya-bunkamuradori-ladies.jp/medicine/menopause/dementia/",
+     "https://joylife.alsok.co.jp/knowhow/archives/76",
+     "https://wellnesslab-report.jp/pj/gamma-tech/column/causes-dementia.html",
+     "https://www.tanzawahp.or.jp/pr/2024/03/15/dementia-checklist/",
+     "https://medical.francebed.co.jp/special/column/16_dementia02.php",
+     "https://www.famitra.jp/article/ninchisyo/post-105/",
+     "https://www.mcsg.co.jp/kentatsu/dementia/782",
+     "https://kaigonews.net/articles/ninchisho-shoki-jushin-timing",
+     "https://terasu.clinic/column/early-symptoms-of-dementia/",
+     "https://www.ikiiki-shien.com/blog/care-89",
+     "https://www.oruri-neuro.com/column/dementia-2/",
+     "https://www.senri-homeclinic.com/column/dementia.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.nou-kenkou.jp/dementia_detection_diagnosis/773/",
+     "https://www.city.kounosu.saitama.jp/site/kaigohoken/1788.html",
+     "https://www.tanzawahp.or.jp/pr/2024/03/15/dementia-checklist/",
+     "https://ims-machida.com/ninchishou/public/self-diagnosis/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

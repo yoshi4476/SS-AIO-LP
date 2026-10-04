@@ -149,8 +149,8 @@
    "maker": 39,
    "other": 27,
    "portal": 82,
-   "media": 63,
    "clinic": 85,
+   "media": 63,
    "public": 11,
    "video": 4,
    "wiki": 1
@@ -160,8 +160,8 @@
    "maker": 3,
    "other": 10,
    "portal": 20,
-   "media": 14,
-   "clinic": 19
+   "clinic": 19,
+   "media": 14
   },
   "エアコン掃除": {
    "answers": 18,
@@ -175,8 +175,8 @@
   "家事代行": {
    "answers": 18,
    "clinic": 18,
-   "media": 13,
    "other": 7,
+   "media": 13,
    "portal": 16,
    "maker": 3,
    "video": 3
@@ -194,8 +194,8 @@
    "answers": 17,
    "clinic": 15,
    "maker": 6,
-   "media": 14,
    "portal": 16,
+   "media": 14,
    "other": 3,
    "video": 1,
    "public": 7,

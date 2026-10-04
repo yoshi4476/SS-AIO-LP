@@ -73,7 +73,8 @@ data/reviews/
 # 社ごとのSNSの鍵（social_connect.py の控え。GitHub では SOCIAL_TOKENS_JSON）
 social-tokens.json
 automation/note/
-data/research/*-raw.json
+# data/research/*-raw.json はコミットする（2026-10-05）。CI で ChatGPT の欠けた問いだけを聞き足すには、
+# 既にある答えが要る。中身は出典のURLとエラーだけで、答えの本文は入っていない
 # 出典のドメインの種類（手で確かめた直しを含む）はコミットする。CI で調べ直すとき、直しが消えて数字が変わらないように
 .dev.vars
 

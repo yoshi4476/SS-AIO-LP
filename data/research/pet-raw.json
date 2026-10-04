@@ -1,0 +1,1622 @@
+{
+ "industry": "pet",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 トリミング おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://dogvillaplumeria.com/archives/2140",
+     "https://www.petsalon-trust.com/",
+     "https://peco-japan.com/1681",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E5%A4%A7%E9%98%AA/",
+     "https://epark.jp/pet/list/reg_27/cat_30200/review_ranking/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://animaldoc.jp/petsalon/osaka-s/osaka-s/",
+     "https://epark.jp/pet/list/reg_27/cat_30200/review_ranking/",
+     "https://epark.jp/pet/list/reg_810/cat_30200/review_ranking/",
+     "https://epark.jp/pet/list/reg_27/cat_30200/",
+     "https://trimtrim.jp/salons?prefecture_id%5B0%5D=27",
+     "https://inuneko.petpet.ne.jp/feature-trimming-osaka-osakashi/",
+     "https://scatworks.com/salon/",
+     "https://www.petsalondearest.com/",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E5%A4%A7%E9%98%AA/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 ペットホテル 安い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oneluke.net/edogawaku-matsumoto/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E5%80%A4%E6%AE%B5%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E6%B1%9F%E6%88%B8%E5%B7%9D%E5%8C%BA%E6%9D%BE%E6%9C%AC%E3%81%A7%E7%9F%A5/",
+     "https://airline-haneda.com/article/detail.php/1411/431689",
+     "https://petsalon-uchinoko.jp/column/6ad58feb-8c2f-4bb9-9a14-883537aa44b7",
+     "https://koasalon.jp/report/pethotelryoukin/",
+     "https://petplus.rakuraku-karte.com/sunamoten/booking/hotel",
+     "https://www.ahb.jpn.com/shops/01218",
+     "https://www.cainz.com/pet/service/pethotel/",
+     "https://www.aeonpet.com/service/pethotel/index.html",
+     "https://d-ouchi.jp/pet_hotel/",
+     "https://snow-petsitter.com/pet_column/tokyo-hotel/",
+     "https://dog-puravida.com/pet_hotel/lp9/",
+     "https://cheer-dog.jp/lp/pethotel.html",
+     "http://petsginza.net/pethotel/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wankonowa.com/column/1729/",
+     "https://happy-wanko.com/372/",
+     "https://kyuzitsu-inubu.com/hotel/search/?pref=1675&sort=low",
+     "https://nekonochiblog.com/tokyo-cat-hotel/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 ペットサロン 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://cosewa.jp/blog/best-pet-salons-in-nagoya",
+     "https://nagoyajin.nagoya/trimming/",
+     "https://animaldoc.jp/petsalon/aichi-petsalon/aichi-nagoya-shi-s/aichi-nagoya-shi-s/",
+     "https://petlife.asia/salon/search/aichi/nagoya-shi/rank/",
+     "https://trimtrim.jp/salons?city_id%5B0%5D=1058"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ekiten.jp/g0311/a23101/",
+     "https://epark.jp/pet/list/reg_727/cat_30200/review_ranking/",
+     "https://inuneko.petpet.ne.jp/feature-trimming-aichi-nagoyashi/",
+     "https://www.ekiten.jp/g0538/a23104/",
+     "https://www.cosewa.jp/blog/best-pet-salons-in-nagoya",
+     "https://www.ekiten.jp/g0538/a23114/",
+     "https://www.homemate-research.com/bc22/cid22999/23/ranking/access/",
+     "https://animaldoc.jp/petsalon/aichi-petsalon/aichi-nagoya-shi-s/aichi-nagoya-shi-s/",
+     "https://petsalon-ranking.net/aichi/nagoya/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 犬 トリミング 人気": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.fukuoka-online.jp/column/fukuoka-pettrimmingsalon/",
+     "https://petplus-trimming.com/shop/lalafukuoka/",
+     "https://toredog.com/prefecture/40/",
+     "https://animaldoc.jp/petsalon/fukuoka-s/fukuoka-fukuoka-shi-s/fukuoka-fukuoka-shi-s/",
+     "https://petlife.asia/salon/search/fukuoka/fukuoka-shi/?data[FACILITY][0]=11",
+     "https://epark.jp/pet/list/reg_40/cat_30200/review_ranking/",
+     "https://trimtrim.jp/salons?prefecture_id%5B0%5D=40"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife.asia/salon/search/fukuoka/fukuoka-shi-higashi-ku/",
+     "https://www.fukuoka-online.jp/column/fukuoka-pettrimmingsalon/",
+     "https://itsumo.dog/fukuoka/ad/40/beauty/",
+     "https://epark.jp/pet/list/reg_1075/cat_30200/",
+     "https://epark.jp/pet/list/reg_40/cat_30200/",
+     "https://udog.jp/",
+     "https://dogsalongrace.jp/",
+     "https://www.dogportal.net/trimming/fukuoka",
+     "https://shampowan.com/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 ペットホテル 預かり": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://cosewa.jp/blog/best-pet-hotels-in-sapporo",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFIL7GaSonHaqxejlR8aCDrsF7S829nqxS400-L7CdX5NGKBllt6nx31g5g3fOXFHIkShWfg2V1UaFDSo1n8NHXwc4TiiSo4KKe6xd1PthwW6DytiQSKcs_s7ciUCbjugzkKfDEombonG4gtDEs4Q==",
+     "https://petlife.asia/hotel/search/hokkaido/sapporo-shi/",
+     "https://petlife-navi.jp/pet-hotel/hokkaido/areas/sapporo-toyohira"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wankonowa.com/column/1731/",
+     "https://media.inudia.com/pethotel-sapporo",
+     "https://inudia.com/pethotel-sapporo",
+     "https://pokkur-ah.com/pet_hotel/",
+     "https://cutie-dog.com/hotel.html",
+     "https://petshop-dogdog.com/pethotel.html",
+     "https://www.dogportal.net/pethotel/sapporo"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 ペットサロン 猫 対応": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.nekobeya.jp/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7mnAnfuiQL84pK1X8nE85vdpy_WnRfsBOBpRBNltQwQwDANJ7_9ffygjluzCviHfRx0Nt30OEH42T1j3H6p441QEE8ocWZ9jbfp6VhodQuKzbreAE9sPS11p7AlSHbhlrEpvzRF7uaIjFstvo0hgY2H3rggG3yA==",
+     "https://yokoneko.net/",
+     "https://nekosalon-shippo.com/",
+     "https://www.willstyle.jp/",
+     "https://kawawa-ah.com/",
+     "https://nakata.nk-inuneko.com/trimming",
+     "https://wannyankobo.com/",
+     "https://bluedog.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife.asia/salon/search/kanagawa/yokohama-shi-nishi-ku/station3718/",
+     "https://petlife.asia/salon/search/kanagawa/cat/",
+     "https://epark.jp/pet/list/reg_483/cat_30204/",
+     "https://epark.jp/pet/list/reg_483/cat_30200/review_ranking/",
+     "https://epark.jp/pet/list/reg_14/cat_30204/",
+     "https://epark.jp/pet/list/reg_483/cat_30200/",
+     "https://www.nekobeya.jp/",
+     "https://petpetlife.com/feature-yokohamashi-trimming/",
+     "https://yokohamapetsalon-wanwanstory.com/",
+     "https://www.aeonpet.com/shop/viale_yokohama/price/index.html",
+     "https://www.willstyle.jp/",
+     "https://nyankonchi.jp/grooming/",
+     "https://b-spa.co.jp/price_cat.html",
+     "https://ahg.jp/yokohama/service/%E7%8C%AB%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/",
+     "https://nekobeya.pechika.jp/salon/index.html",
+     "https://rairai.net/petsalontop/search/cat/14"
+    ],
+    "error": ""
+   }
+  },
+  "京都 犬 シャンプー 予約": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://moffme.com/article/2024",
+     "https://thedog-wagon.jp/lp/kyoto/",
+     "https://petlife.asia/salon/search/kyoto/?data[EXAMINATION][0]=3",
+     "https://petlife.asia/salon/search/kyoto/kyoto-shi/",
+     "https://petlife.asia/salon/search/kyoto/kyoto-shi/",
+     "https://trimtrim.jp/salons?prefecture_id%5B0%5D=26&service_id%5B0%5D=1",
+     "https://wansta.hp.peraichi.com/top/",
+     "https://higopet.salon-de-one.com/booking/trimming/kyoto"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife.asia/salon/search/kyoto/kyoto-shi/",
+     "https://epark.jp/pet/list/reg_774/cat_30200/",
+     "https://epark.jp/pet/list/reg_26/cat_30200/",
+     "https://itsumo.dog/kyoto/ad/26/beauty/",
+     "https://www.dog-salon-gift.com/",
+     "https://www.dogportal.net/trimming/kyoto-shimogyo",
+     "https://wannko-salon.com/",
+     "https://homeee-pet.jp/kyoto-trimmingsalon/",
+     "https://coco-dog.com/",
+     "https://dog-salon.jp/",
+     "https://thedog-wagon.jp/lp/kyoto/",
+     "https://petpetlife.com/feature-kyotoshi-trimming/",
+     "https://petpetlife.com/feature-kyoto-kyotoshiminamiku-trimming/",
+     "https://petpetlife.com/feature-kyoto-kyotoshi-fushimiku-trimming/",
+     "https://dogsalon-fleur.com/",
+     "http://www.dogsalon8.com/",
+     "https://www.trimmingsalon-toy.com/",
+     "https://www.dogidol.net/trimming/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 トリミング 小型犬": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pochichi.o.oo7.jp/",
+     "https://riberte.liberty-ah.com/",
+     "https://www.petit-h.info/",
+     "https://petsalon-ranking.net/hyogo/kobe/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://epark.jp/pet/list/reg_840/cat_30201/",
+     "https://epark.jp/pet/list/reg_840/cat_30200/",
+     "https://epark.jp/pet/list/reg_28/cat_30200/review_ranking/",
+     "https://epark.jp/pet/list/reg_28/cat_30200/",
+     "https://inuneko.petpet.ne.jp/feature-trimming-hyogo-kobeshi/",
+     "https://www.dogportal.net/trimming/kobe-nishi",
+     "https://www.dogportal.net/trimming/kobe",
+     "http://dog-salon-el.net/",
+     "https://petsalon-ranking.net/hyogo/kobe/",
+     "https://www.green-dog.com/store/gds/price/groomingpricegds.html",
+     "https://www.doggy111.com/trimming.html",
+     "https://trimal.jp/archives/1018",
+     "https://www.min-breeder.com/magazine/329",
+     "https://dogle.jp/aizumi/trimming/price/",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4/",
+     "https://trimming-station.com/column/trimming-cost/",
+     "https://inu-inu.net/trimmings/",
+     "https://dog.benesse.ne.jp/withdog/content/?id=32696"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 ペットホテル 長期": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oneluke.net/tsutsujigaoka/%E4%BB%99%E5%8F%B0%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%A7%E9%95%B7%E6%9C%9F%E9%A0%90%E3%81%8B%E3%82%8A%E3%81%AF%E5%8F%AF%E8%83%BD%EF%BC%9F%E6%96%99%E9%87%91/",
+     "http://www.happy1chan.com/hotel/",
+     "https://www.nyanwan.jp/dog_home.html",
+     "https://withdog-sendai.jp/pethotel/",
+     "https://oneluke.net/tsutsujigaoka/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E4%B8%80%E6%99%82%E9%A0%90%E3%81%8B%E3%82%8A%E3%81%8B%E3%82%89%E9%95%B7%E6%9C%9F%E6%BB%9E%E5%9C%A8%E3%81%BE%E3%81%A7%E5%AF%BE%E5%BF%9Cone-luke/",
+     "https://oneluke.net/tsutsujigaoka/%E4%BB%99%E5%8F%B0%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%A7%E9%AB%98%E9%BD%A2%E7%8A%AC%E3%82%92%E9%A0%90%E3%81%91%E3%82%8B%E9%9A%9B%E3%81%AB%E3%80%81%E5%80%8B%E5%AE%A4/",
+     "https://petwith-shop.com/hotel",
+     "https://sen-pd2-kunren.com/hotel.html",
+     "https://oneluke.net/tsutsujigaoka/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%A7%E9%95%B7%E6%9C%9F%E9%A0%90%E3%81%8B%E3%82%8A%E3%81%AF%E5%8F%AF%E8%83%BD%EF%BC%9F%E4%BB%99%E5%8F%B0%E3%81%A7%E3%81%AE%E5%AF%BE%E5%BF%9C/",
+     "https://sen-pd2-kunren.com/hotel.html",
+     "https://oneluke.net/tsutsujigaoka/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%A7%E3%82%B7%E3%83%8B%E3%82%A2%E7%8A%AC%E3%81%AF%E9%A0%90%E3%81%91%E3%82%89%E3%82%8C%E3%82%8B%EF%BC%9F%E4%BB%99%E5%8F%B0%E3%81%A7%E3%81%AE/",
+     "https://www.rouken-care.jp/facility/hm0019/price/",
+     "https://www.nyanwan.jp/hotel/price.html",
+     "https://sakagamike-terrapa.com/price/",
+     "https://rokenhomeregalo.com/price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sen-pd2-kunren.com/hotel.html",
+     "https://www.wanderland-sendai.com/hotel/index.html",
+     "https://www.nyanwan.jp/hotel/price.html",
+     "https://oneluke.net/tsutsujigaoka/%E4%BB%99%E5%8F%B0%E3%81%A7%E7%8C%AB%E3%81%AE%E9%95%B7%E6%9C%9F%E9%A0%90%E3%81%8B%E3%82%8A%E3%82%92%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE/",
+     "https://local-media.heteml.net/archives/43340",
+     "https://pet-bible.com/dog/5648/",
+     "https://www.pet-onelove.com/hotel/page154.php",
+     "https://www.pet-onelove.com/hotel/page189.php"
+    ],
+    "error": ""
+   }
+  },
+  "広島 ペットサロン 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://petlife-navi.jp/trimming/hiroshima/areas/hiroshima",
+     "https://petlife.asia/salon/search/hiroshima/hiroshima-shi/?data[FACILITY][0]=5",
+     "https://petlife.asia/salon/search/hiroshima/",
+     "https://petlife.asia/salon/search/hiroshima/hiroshima-shi/",
+     "https://epark.jp/pet/list/reg_942/cat_30200/",
+     "https://trimtrim.jp/salons?prefecture_id%5B0%5D=34"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife.asia/salon/10806/",
+     "https://petlife.asia/salon/10796/",
+     "https://petlife.asia/salon/14290/",
+     "https://petlife.asia/salon/17533/",
+     "https://www.min-petlife.com/79822",
+     "https://petlife.asia/salon/search/hiroshima/hiroshima-shi/"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 費用 相場": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://happybell.co.jp/blog/108976/",
+     "https://www.with-petlife.com/news/696",
+     "https://fromace.net/?page_id=2363",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11307868876",
+     "https://www.min-breeder.com/magazine/329"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife-navi.jp/trimming",
+     "https://trimal.jp/archives/1018",
+     "https://www.min-breeder.com/magazine/329",
+     "http://www.a-vital.co.jp/trimming-price-list/",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://chou-porte.com/column/a2d93360-90c7-4f4e-8594-a67eea5e91cd",
+     "https://dogsalon-shiro.com/price/",
+     "https://animalcompassion.media/dog-trimming-fees-budget/",
+     "https://furu-furu.net/price"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 選び方 サロン": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kirari-dog.com/?p=704",
+     "https://dog-salon-ivy.com/blog/column/detail/20260528180003/",
+     "https://dog-salon-ivy.com/blog/column/detail/20260531162443/",
+     "https://www.eden-petsalon.com/post/how-to-choose-grooming-salon",
+     "https://juyell.com/column/3d128602-7f71-4d04-8f2b-811433518c87",
+     "https://dogsalon-pirka.com/column/c8a80570-2826-4c90-bc3f-e78dc1e5fe78",
+     "https://pet-info.event.rakuten.net/articles/13766639974",
+     "https://isdog.net/nagoyakita/2025/10/29/blog06/",
+     "https://www.pet-life.website/dog/trimming/price",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9/",
+     "https://oneluke.net/itinomiyaeki/%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E5%BA%97%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BC%9A%E4%B8%80%E5%AE%AE%E3%81%A7%E6%8E%A2%E3%81%99%E3%81%AA/",
+     "https://oneluke.net/tsutsujigaoka/%E4%BB%99%E5%8F%B0%E3%81%A7%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3%E3%82%92%E9%81%B8%E3%81%B6%E5%9F%BA%E6%BA%96%E3%81%A8%E3%81%AF%EF%BC%9F%E5%A4%B1%E6%95%97%E3%81%97/"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 頻度 目安": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://inunavi.plan-b.co.jp/trimming/",
+     "https://magazine.cainz.com/wanqol/articles/partial_care_07",
+     "https://www.min-breeder.com/magazine/329",
+     "https://pet-salon-pinocchio.com/frequency/",
+     "https://www.hostfamily2012.com/colum/%E7%8A%AC%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E9%A0%BB%E5%BA%A6%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E7%9B%AE%E5%AE%89%E3%82%84%E9%96%93%E9%9A%94%E3%82%92",
+     "https://thechocolatebearkitchen.com/seniordogs/",
+     "https://thechocolatebearkitchen.com/dogtrimming/",
+     "https://www.with-petlife.com/news/693",
+     "https://resh-trim.com/inunotoriminguhinndokaisetu"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 初めて 流れ": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://inunavi.plan-b.co.jp/trimming/",
+     "https://inuinukaukau.com/first-grooming-salon",
+     "https://queens-spa.com/blog/46685/",
+     "https://www.bungohills.com/puppys-first-grooming-after-adoption",
+     "https://dog-salon-ivy.com/blog/column/detail/20260530163838/",
+     "https://dogsalonharry.com/column/20260212010745-7521cdab-5808-4669-844c-c604ac49714d",
+     "https://www.dogsalonrosette.com/flow/",
+     "https://isdog.net/oharu/2026/05/01/blog19/",
+     "https://shippo-to-iru-mainichi.com/puppy-first-trimming-salon-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 嫌がる 犬 対処": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanchan.jp/care/detail/32598",
+     "https://tail-link.jp/blog/20260425-7443/",
+     "https://www.kirari-dog.com/?p=759",
+     "https://aizuma-vet.com/news/p1737/",
+     "https://aikensalon-chubachi.com/column/b3a00924-0541-4e91-85f2-4062882de793",
+     "https://tetelab.me/how-to/trimming_advice/",
+     "https://animaldoc.jp/petsalon-column/trimming-the-dog-dislikes-it/",
+     "https://lelien111.net/column/3bdfa56d-d855-4e2b-b6ec-4109dc743d6e",
+     "https://trimmingscissor-hikaku.info/column/trimming-dislike/",
+     "https://www.rakuten.co.jp/next-online/contents/article/pet-trimmer/04/",
+     "https://www.matsunami-shop.com/column/dog-trimming/",
+     "https://www.nihonsupport.org/petshikaku/pettrimming/pettrimming-column06/",
+     "https://www.designlearn.co.jp/trimming/trimming-article08/",
+     "https://www.jpinstructor.org/shikaku/trimmer/trimmer_column07/"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 毛玉 追加料金": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.pureluxe.jp/dog/1770/",
+     "https://felice-pet.jp/20240710-2/",
+     "https://www.dogoo.com/toukou/dogqa/faq_log/2045411.htm",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://dogasil.com/trimming_nukegeprice/",
+     "https://dogasil.com/kedama_price/",
+     "https://aizuma-vet.com/news/p1982/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10282373315"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.dogoo.com/toukou/dogqa/faq_log/2045411.htm",
+     "https://oneluke.net/tsutsujigaoka/%E4%BB%99%E5%8F%B0%E3%81%A7%E6%AF%9B%E7%8E%89%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%9F%E7%8A%AC%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%EF%BC%81%E8%BF%BD%E5%8A%A0%E6%96%99%E9%87%91%E3%82%84/",
+     "https://www.pureluxe.jp/dog/1770/",
+     "https://furu-furu.net/price",
+     "https://herme-dogs.com/faq-items/%E6%AF%9B%E7%8E%89%E6%96%99%E9%87%91%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E3%81%99%E3%81%8B%EF%BC%9F/",
+     "https://trimming-station.com/column/trimming-cost/",
+     "https://dogle.jp/aizumi/trimming/price/",
+     "http://www.a-vital.co.jp/trimming-price-list/",
+     "http://petsalonwish.com/trimmingprice.html",
+     "https://trimming-shampoo.com/price/",
+     "https://www.toutoublanc.jp/trimming",
+     "https://fromace.net/?page_id=2363",
+     "https://sites.google.com/site/torimingusaronko/%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%85%E7%80%AC%E5%B8%82%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E6%96%99%E9%87%91%E8%A1%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85",
+     "https://matsumoto-vet.jp/trimming",
+     "https://mixi.jp/view_bbs.pl?comm_id=7762&id=47299820"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 子犬 いつから": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://aizuma-vet.com/news/p1871/",
+     "https://oneluke.net/itinomiyaeki/%E4%B8%80%E5%AE%AE%E3%81%A7%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%EF%BC%81%E5%AD%90%E7%8A%AC%E3%81%AE%E3%83%87%E3%83%93%E3%83%A5%E3%83%BC%E6%99%82%E6%9C%9F%E3%81%A8%E6%B3%A8%E6%84%8F%E7%82%B9/",
+     "https://isdog.net/oharu/2026/03/18/blog16/",
+     "https://dogsalon-rira.com/simple_plan/dog_1st-shampoo/",
+     "https://www.doggyparadise2020.com/news/1523"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.min-breeder.com/magazine/329",
+     "https://maikublog.org/dog/trimming/from-when/",
+     "https://onefordog.com/trimming/",
+     "https://queens-spa.com/blog/46630/",
+     "https://www.with-petlife.com/news/699",
+     "https://aizuma-vet.com/news/p1871/",
+     "https://isdog.net/nerimaitabashi/2025/11/05/blog07/",
+     "https://dog-salon-pawpads.com/puppy-first-trimming/",
+     "https://animaldoc.jp/petsalon-column/trimming-puppies/"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 高齢犬 負担": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://happybell.co.jp/blog/125644/",
+     "https://oneluke.net/mikawashima/ko004/",
+     "https://triza.jp/blogs/blog/260324",
+     "https://coco-dog.jp/blog/olddog/",
+     "https://veterinarian.jp/dog/dog-care/senior-dog-grooming/",
+     "https://www.with-petlife.com/news/632",
+     "https://isdog.net/aisai/2026/02/04/blog13/",
+     "https://dogfellow.tokyo/blog/olddogtrimmingpart1/",
+     "https://www.rouken-care.jp/column/20220121/",
+     "https://trimmingsalonanne.jp/column/a1ddfaab-d489-4459-97c7-f9fe2ac8197d",
+     "https://triza.jp/blogs/blog/250114"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 持ち物 準備": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.wepet.jp/beauty/2888/",
+     "https://www.kirari-dog.com/?p=715",
+     "https://dog-salon-ivy.com/blog/column/detail/20260530163838/",
+     "https://dogsalonharry.com/column/20260212010745-7521cdab-5808-4669-844c-c604ac49714d",
+     "https://juyell.com/column/f553e8e8-f302-4421-acf2-635a9aacac12",
+     "https://juyell.com/column/eecd5559-bc22-40e7-94fc-9af1c51cf9e1",
+     "https://samc.co.jp/news/8tsLCNHC"
+    ],
+    "error": ""
+   }
+  },
+  "トリミング 所要時間 待ち時間": {
+   "group": "トリミング",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oneluke.net/tsutsujigaoka/%E4%BB%99%E5%8F%B0%E3%81%A7%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AF%E3%81%A9%E3%81%AE%E3%81%8F%E3%82%89%E3%81%84%E6%99%82%E9%96%93%E3%81%8C%E3%81%8B%E3%81%8B%E3%82%8B%EF%BC%9F%E7%9B%AE/",
+     "https://www.hostfamily2012.com/colum/%E6%B5%9C%E6%9D%BE%E5%B8%82%EF%BD%9C%E7%8A%AC%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E6%99%82%E9%96%93%E3%81%AF%E3%81%AA%E3%81%9C%E9%81%95%E3%81%86%EF%BC%9F%E3%83%88%E3%82%A4%E3%83%97",
+     "https://wannyankobo.com/sp_faq/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%E3%81%AE%E6%99%82%E9%96%93%E3%81%A7%E7%B5%82%E3%82%8F%E3%82%8A%E3%81%BE%E3%81%99%E3%81%8B%EF%BC%9F/",
+     "https://gluck-smile.jp/190911/",
+     "https://isdog.net/mizuho/2026/04/15/blog18/",
+     "https://doglifesalon-welina.com/column/4966a435-f602-4bc0-93fa-ed8e141c93e8",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1136798656",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13226448453"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://felice-pet.jp/240416/",
+     "https://maikublog.org/dog/trimming/trimmingtime/",
+     "https://isdog.net/matsumoto/2026/04/15/blog18/",
+     "https://www.p-libon.com/blog/dog-trimming-duration/",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E5%B9%B3%E5%9D%87%E6%99%82%E9%96%93/",
+     "https://animaldoc.jp/petsalon-column/trimming-dog-time/",
+     "https://animaldoc.jp/petsalon-column/grooming-takes-time/",
+     "https://www.hostfamily2012.com/colum/%E6%B5%9C%E6%9D%BE%E5%B8%82%EF%BD%9C%E7%8A%AC%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E6%99%82%E9%96%93%E3%81%AF%E3%81%AA%E3%81%9C%E9%81%95%E3%81%86%EF%BC%9F%E3%83%88%E3%82%A4%E3%83%97"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 料金 1泊": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://petlife-navi.jp/pet-hotel/cost",
+     "https://oneluke.net/tudukiku/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E6%96%99%E9%87%91%E3%81%AF%EF%BC%9F%E4%B8%80%E6%B3%8A%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E8%BF%BD/",
+     "https://pet-hotel-japan.com/blog/price-comparison/",
+     "https://petand.co.jp/blog/13676/",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-fees/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://cat.flowens.jp/blog/neko-pethotel",
+     "https://petlife-navi.jp/pet-hotel",
+     "https://petan.jp/pethotel/",
+     "https://contextneo.jp/ryoukin/pet-hotel-18203.html",
+     "https://www.fluv.com/jp/ja/blog/pet-hotel-prices-comparison/",
+     "https://petsalon-uchinoko.jp/column/689bd369-949a-469c-8a01-c1daac4721b0",
+     "https://kurashicostlab.com/guides/pet-hotel-ryoukin-souba/",
+     "https://roukenhome.com/article/1054/",
+     "https://context-japan.co.jp/ryokin/pet-hotel-18203.html"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 選び方 ポイント": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://happybell.co.jp/blog/125648/",
+     "https://cat.flowens.jp/blog/neko-pethotel",
+     "https://nagi-tyousa777.hatenadiary.com/entry/pethotel-azukeru",
+     "https://prtimes.jp/main/html/rd/p/000000014.000048150.html",
+     "https://animal.with-clinic.jp/blog/pethotel/osusume-animal-hotel/",
+     "https://kurashicostlab.com/guides/pet-hotel-ryoukin-souba/",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-fees/",
+     "https://my-best.com/17653",
+     "https://traveldeck.ai/blog/ja-traveling-with-pets-2026-stress-free-guide-8h4y"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 費用 相場 犬": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oneluke.net/tudukiku/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E4%B8%80%E6%B3%8A%E3%81%AE%E5%80%A4%E6%AE%B5%E3%81%A8/",
+     "https://petlife-navi.jp/pet-hotel/cost",
+     "https://oneluke.net/tudukiku/%E6%A8%AA%E6%B5%9C%E9%83%BD%E7%AD%91%E5%8C%BA%E3%81%A7%E4%BF%A1%E9%A0%BC%E3%81%95%E3%82%8C%E3%82%8B%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%82%92%E7%9B%AE%E6%8C%87%E3%81%99%E6%83%B3/",
+     "https://www.citron-pet.com/pethotel",
+     "https://oneluke.net/tudukiku/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E4%B8%80%E6%B3%8A%E3%81%AE%E5%80%A4%E6%AE%B5%E3%81%A8/",
+     "https://roukenhome.com/article/1054/",
+     "https://80old.80dogs.com/pet-hotel-for-dogs/",
+     "https://pet-hotel-japan.com/blog/price-comparison/",
+     "https://thedoghotel.net/price/",
+     "https://www.dogstyle2.com/pet-hotel"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://mofmo.jp/article/4505",
+     "https://petlife-navi.jp/pet-hotel",
+     "https://contextneo.jp/ryoukin/pet-hotel-18203.html",
+     "https://oneluke.net/tudukiku/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E4%B8%80%E6%B3%8A%E3%81%AE%E5%80%A4%E6%AE%B5%E3%81%A8/",
+     "https://www.fluv.com/jp/ja/blog/pet-hotel-prices-comparison/",
+     "https://petsalon-uchinoko.jp/column/689bd369-949a-469c-8a01-c1daac4721b0",
+     "https://roukenhome.com/article/1054/",
+     "https://www.pethotelalfa.com/column/1656/",
+     "https://context-japan.co.jp/ryokin/pet-hotel-18203.html"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 猫 預ける 不安": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://happybell.co.jp/blog/105925/",
+     "https://petokoto.com/articles/385",
+     "https://moffme.com/article/1201",
+     "https://nekobeya.pechika.jp/blog/first_pet_hotel/",
+     "https://www.pethotelalfa.com/column/1632/",
+     "https://nekobeya.pechika.jp/blog/cat_pet_hotel_poor_thing/",
+     "https://nekobeya.pechika.jp/blog/cat_pet_hotel_safe/",
+     "https://cat.benesse.ne.jp/withcat/content/?id=143848",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-cat-stress/",
+     "https://nademo.jp/cat_pethotel/",
+     "https://www.koneko-breeder.com/magazine/13262",
+     "https://cat.flowens.jp/blog/neko-pethotel",
+     "https://oneluke.net/gifuekimae/%E3%80%90%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%80%91%E6%8C%81%E3%81%A1%E7%89%A9%E3%81%AF%E4%BD%95%E3%81%8C%E5%BF%85%E8%A6%81%EF%BC%9F%E5%BF%98%E3%82%8C%E3%81%8C%E3%81%A1%E3%81%AA/",
+     "https://www.matsunami-shop.com/column/bring-when-keeping-cat-pet-hotel/",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-vaccinations/",
+     "https://animaldoc.jp/pethotel-column/cat-only-pet-hotel/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル ワクチン 証明書": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://withdog.iconia.co.jp/articles/479",
+     "https://oneluke.net/itinomiyaeki/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E5%88%A9%E7%94%A8%E5%89%8D%E3%81%AB%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AF%E5%BF%85%E8%A6%81%EF%BC%9F%E6%9D%A1%E4%BB%B6%E3%81%A8%E7%90%86/",
+     "https://www.wantabi-biyori.jp/blog/s9f0xxumc",
+     "https://relohotels.com/faq/withdogs/",
+     "https://pet-hotel-japan.com/blog/vaccine-certificate-guide/",
+     "https://dogtraining-agpon.com/topics/blog/%E9%A3%9F%E4%BA%8B%E3%83%BB%E5%81%A5%E5%BA%B7/post-1642/",
+     "https://nicoripet.com/guide/pet-hotel-no-vaccine/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://animaldoc.jp/pethotel-column/pet-hotel-vaccinations/",
+     "https://withdog.iconia.co.jp/articles/479",
+     "https://wanko.peace-winds.org/journal/36781",
+     "https://www.wannyan.city.fukuoka.lg.jp/yokanet/owner_dog_entry",
+     "https://lelien111.net/column/8700d41d-0a14-4fbd-aca7-9b9d71342e48",
+     "https://yamec.net/vaccination.html",
+     "https://nicoripet.com/guide/pet-hotel-no-vaccine/",
+     "https://www.pethotelalfa.com/column/1675/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 初めて 準備": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pet-takegawa.jp/blog/1836/",
+     "https://chiwapoo.jp/first-pet-hotel/",
+     "https://www.hostfamily2012.com/colum/%E7%8A%AC%E3%82%92%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AB%E9%A0%90%E3%81%91%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AE%E6%8C%81%E3%81%A1%E7%89%A9%E3%81%AF%EF%BC%9F-%E5%BF%85%E8%A6%81",
+     "https://pet-hotels.biz/packing-list/",
+     "https://withpety.com/withpetyclub/detail.php?kid=2081",
+     "https://dog-hub.shop/news/pet-hotel-first-time-tips",
+     "https://dogasil.com/pethotel_belongings/",
+     "https://oneluke.net/itinomiyaeki/%F0%9F%90%95%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E3%83%97%E3%83%AD%E3%81%8C%E8%A7%A3%E8%AA%AC%EF%BC%81%E3%81%8A%E6%B3%8A%E3%82%8A%E5%89%8D%E3%81%AB%E6%BA%96%E5%82%99/",
+     "https://www.yasiro-pet.jp/media/archives/2123"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://nagi-tyousa777.hatenadiary.com/entry/pethotel-azukeru",
+     "https://dogtraining-agpon.com/%E3%83%89%E3%83%83%E3%82%B0%E3%83%9B%E3%83%86%E3%83%AB/post-2412/",
+     "https://www.pethotelalfa.com/column/1598/",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-vaccinations/",
+     "https://pet-my-family.com/pet-hotel-2/",
+     "https://ryunosuke.co.jp/service/pethotel/",
+     "https://chiwapoo.jp/first-pet-hotel/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 当日 預かり": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oneluke.net/gifuekimae/%E5%B2%90%E9%98%9C%E3%81%A7%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AE%E6%8C%81%E3%81%A1%E7%89%A9%E3%81%AF%EF%BC%9F%E5%BD%93%E6%97%A5%E3%81%AB%E6%85%8C/",
+     "https://www.yasiro-pet.jp/media/archives/2123",
+     "https://oneluke.net/itinomiyaeki/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E6%8C%81%E3%81%A1%E7%89%A9%E3%81%AF%E4%BD%95%E3%81%8C%E5%BF%85%E8%A6%81%EF%BC%9F%E5%BF%98%E3%82%8C%E3%81%8C%E3%81%A1%E3%81%AA%E6%BA%96/",
+     "https://dogtraining-agpon.com/%E3%83%89%E3%83%83%E3%82%B0%E3%83%9B%E3%83%86%E3%83%AB/post-2412/",
+     "http://pethotel-area.area51s.com/index.php?caution",
+     "https://pet-takegawa.jp/blog/1836/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFuK8DHR9LfGNxphDrhavgGCwBhgC4UmAopELi5pRjfgYoWMTrPgpeiPdN2QTnHmZCpDQy7jqM-T5KwqxIpPjWeskUZjM8_dfFe6MXJ9wteGFOTD0sZljnAejbqYK0cPQ=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ryunosuke.co.jp/service/pethotel/",
+     "https://moriyama1299.com/hotel/",
+     "https://dogcatcoco.net/hotel/",
+     "https://animaldoc.jp/pethotel/pet-hotel-reservation/",
+     "https://www.pfirst.jp/hotel_information.html",
+     "https://animaldoc.jp/pethotel/pet-hotel-short-stay/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 持ち物 リスト": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://oneluke.net/mikawashima/%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AE%E6%8C%81%E3%81%A1%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AF%EF%BC%9F%E4%B8%89%E6%B2%B3%E5%B3%B6%E3%81%A7%E7%8A%AC%E3%82%92%E9%A0%90/",
+     "https://oneluke.net/gifuekimae/%E3%80%90%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%80%91%E6%8C%81%E3%81%A1%E7%89%A9%E3%81%AF%E4%BD%95%E3%81%8C%E5%BF%85%E8%A6%81%EF%BC%9F%E5%BF%98%E3%82%8C%E3%81%8C%E3%81%A1%E3%81%AA/",
+     "https://pet-takegawa.jp/blog/1836/",
+     "https://peach-lily-dog-hotel.com/articles/dog-hotel-packing-checklist",
+     "https://www.pethotelalfa.com/column/1598/",
+     "https://list-with.com/ja/templates/pet-hotel",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-preparation/",
+     "https://pet-my-family.com/pet-hotel-2/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 年末年始 予約": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://petring.jp/new-year-pet-care/",
+     "https://pet-hotel-japan.com/blog/busy-season-booking/",
+     "https://www.pethoteldelta.com/news/8675",
+     "https://petlife-navi.jp/pet-hotel",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-fees/",
+     "https://www.yasiro-pet.jp/media/archives/2123",
+     "https://lelien111.net/column/086d6150-f13c-4cf7-bb9f-4fc9fd65c013",
+     "https://www.fluv.com/jp/ja/blog/pet-hotel-prices-comparison/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://cats.beeclub.co.jp/archives/17832",
+     "https://www.biwadog.co.jp/info/456.html",
+     "https://family-ah.jp/2025/10/29/%E5%B9%B4%E6%9C%AB%E5%B9%B4%E5%A7%8B12-26%EF%BD%9E1-5%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%94%E5%88%A9%E7%94%A8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://oneluke.net/tsutsujigaoka/%F0%9F%8E%8D%E5%B9%B4%E6%9C%AB%E5%B9%B4%E5%A7%8B%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E4%BA%88%E7%B4%84%E3%80%81%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81/",
+     "https://www.tokky-ah.com/2024/12/06/415/",
+     "https://puripon.com/news/%E7%B9%81%E5%BF%99%E6%9C%9F%E3%83%BB%E9%96%91%E6%95%A3%E6%9C%9F%E3%81%AE%E6%96%99%E9%87%91/",
+     "https://animalfamily-coco.com/2025%E5%B9%B4%EF%BD%9E2026%E5%B9%B4%E5%B9%B4%E6%9C%AB%E5%B9%B4%E5%A7%8B%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E6%BA%80%E5%AE%A4%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B",
+     "https://premiercathoteltokyo.com/diary/201035",
+     "https://wankoto-wa.com/2023/11/24/%F0%9F%8E%8D%E5%B9%B4%E6%9C%AB%E5%B9%B4%E5%A7%8B%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%94%E4%BA%88%E7%B4%84%E5%8F%97%E4%BB%98%E4%B8%AD%E3%81%A7%E3%81%99%F0%9F%8C%85/",
+     "https://aoyamakennel.com/%E3%80%90%E5%B9%B4%E6%9C%AB%E5%B9%B4%E5%A7%8B%E3%83%BB%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%94%E4%BA%88%E7%B4%84%E7%8A%B6%E6%B3%81%E3%80%91/",
+     "https://tail-link.jp/column/58856f6d-7b15-4689-ada0-170af870b2c6",
+     "https://www.rocore.jp/pet-hotel-price-guide-2025/",
+     "https://contextneo.jp/ryoukin/pet-hotel-18203.html",
+     "https://www.ayabe-ah.jp/2024/09/28/2205/",
+     "https://clip-and-dip.com/news/20201211/",
+     "https://www.intime-dogsalon.com/topics/detail/id=147",
+     "https://animaldoc.jp/pethotel/pet-hotel-year-end-and-new-year-holidays/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットホテル 体調 急変 対応": {
+   "group": "ペットホテル",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "http://www.matsunami.co.jp/service/hotel.html",
+     "http://www.matsunami.co.jp/service/pdf/hotel_2.pdf",
+     "https://jvets.co.jp/consentforms/pet_hotel/",
+     "https://pet-hotel-japan.com/blog/pet-hotel-illness-accident/",
+     "https://note.com/ydk0714/n/nb32e575c8022",
+     "https://tail-link.jp/blog/20260322-6868/",
+     "https://www.pethotelalfa.com/column/1649/",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-service/",
+     "https://animaldoc.jp/pethotel-column/pet-hotel-i-became-ill/",
+     "https://dog.benesse.ne.jp/withdog/content/?id=143635"
+    ],
+    "error": ""
+   }
+  },
+  "トイプードル カット 費用": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oneluke.net/tudukiku/%E9%A3%BC%E3%81%84%E4%B8%BB%E6%A7%98%E3%81%AE%E5%BF%83%E9%85%8D%E3%81%BE%E3%81%A7%E5%8F%97%E3%81%91%E6%AD%A2%E3%82%81%E3%82%8B%E3%83%9A%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E3%81%A7%E3%81%82/",
+     "https://www.nihonsupport.org/petshikaku/pettrimming/pettrimming-column02/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1436752929",
+     "https://dogsalon-shiro.com/price/",
+     "https://www.nihonsupport.org/petshikaku/pettrimming/pettrimming-column02/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG3zmUSgaltTbM_OyJFlX0LycJbjo7IbtlEv9DaAxciTSAOqeveOxSgCJui_hBtK5_ZmtVALGFTQuCY2H1-lUfv9lu_Qs6lzsbgK1BgbbQeC9lJLNiNPsn10R4CU9rQB7LIs68=",
+     "https://yoyaku.pet-coo.com/trimming/?action=price_trimming",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1436752929"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://www.min-breeder.com/magazine/329",
+     "https://www.toutoublanc.jp/trimming",
+     "https://animalcompassion.media/dog-trimming-fees-budget/",
+     "https://juyell.com/column/54a5cb93-74ab-4f4f-83d7-d47288927d9d",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4/",
+     "https://trimming-station.com/column/trimming-cost/",
+     "https://dogsalonvid.com/%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%BB%E6%96%99%E9%87%91%E8%A1%A8/"
+    ],
+    "error": ""
+   }
+  },
+  "チワワ トリミング 選び方": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://inunavi.plan-b.co.jp/chihuahua_cut/",
+     "https://moon-fur.com/blog/petsalon-choice3/",
+     "http://th-twinkle.littlestar.jp/%E3%83%81%E3%83%AF%E3%83%AF%E3%82%84%E3%83%80%E3%83%83%E3%82%AF%E3%82%B9%E3%81%AA%E3%81%A9%E3%81%AE%E3%82%B5%E3%83%9E%E3%83%BC%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9/",
+     "https://note.com/deft_beetle3989/n/nb3c6a6966278",
+     "https://mono-mona.com/column/summer-cut/",
+     "https://chiwapoo.jp/chihuahua-cut-style/",
+     "https://wankonoomoi.co.jp/faq/blog/chihuahua-summercut/",
+     "https://wanpedia.com/trimming-salon-choice/",
+     "https://skippy.pet/kurume/how-to-choose-salon",
+     "https://www.berkeley-ah.com/co_diary/0b308e0bc1c25f10e04f6c6584e84a83.html",
+     "https://dogfood8.xsrv.jp/chihuahua-cut-popular-style-collection.html",
+     "https://dog-salon-ivy.com/blog/column/detail/20260917180002/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://inunavi.plan-b.co.jp/chihuahua_cut/",
+     "https://dognoie.com/blog/dog-picturebook/imri09f0d/",
+     "https://starsea.jp/chihuahua-hairstyle/",
+     "https://river-mountain.com/column/detail/20250625142104/",
+     "https://juyell.com/column/d90c2132-71f3-45b0-8a19-af0f5a6d7f0a",
+     "https://dogsalonharry.com/column/296712d1-8778-42c5-bde1-b84efd72363c",
+     "https://pet-pada.com/column/c9318530-f59a-444d-a0ac-c4bff2e1ccc0",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E7%8A%AC%E3%81%AE%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/%E3%83%81%E3%83%AF%E3%83%AF%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/",
+     "https://petmi.jp/article/chiwawa-toriming/",
+     "https://safely.co.jp/pt/trimmer/value/trimming-chihuahua-mari/",
+     "https://www.breeder-navi.jp/column/dog/chihuahua/haircut/",
+     "https://chiwapoo.jp/chihuahua-cut-style/",
+     "https://www.paws-foglio.jp/blog/27618/",
+     "https://petsmate.jp/note/%E3%83%81%E3%83%AF%E3%83%AF%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E7%9B%B8%E5%A0%B4%EF%BC%81%E9%A0%BB%E5%BA%A6%E3%81%A8%E8%87%AA%E5%AE%85%E3%81%A7%E3%81%A7%E3%81%8D%E3%82%8B/",
+     "https://sweet-calm.com/media/20250218/"
+    ],
+    "error": ""
+   }
+  },
+  "柴犬 シャンプー 料金": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://petokoto.com/articles/2949",
+     "https://oneluke.net/mikawashima/%E6%9F%B4%E7%8A%AC%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E6%96%99%E9%87%91%E3%81%AF%E4%B8%89%E6%B2%B3%E5%B3%B6%E3%81%A7%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E9%A0%BB%E5%BA%A6%E3%81%A8/",
+     "https://www.ts-alamode.com/fees/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8SWk3zmdddtzjm6YTkHteCwyvZyRUkL6AZm5nbyzfc0d5zIDvTKDoQALkXTGVKAmXjfHAvEQpF2xUrspnc_6D6HN44W7fY4YiDO2SDVd4vQphJEOAhMpiy43kJsNnNjl030s=",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://inu-inu.net/trimmings/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hotto.me/11231",
+     "https://trimal.jp/archives/1018",
+     "https://trimtrim.jp/salons?prefecture_id%5B0%5D=13&breed_id%5B0%5D=43",
+     "https://dogle.jp/aizumi/trimming/price/",
+     "https://yoyaku.pet-coo.com/trimming/?action=price_trimming",
+     "https://www.toutoublanc.jp/trimming",
+     "https://www.petsalon-chienne.com/trimming_price/",
+     "https://www.ts-alamode.com/fees/"
+    ],
+    "error": ""
+   }
+  },
+  "ミニチュアダックス トリミング 頻度": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://juyell.com/column/9bb6b66a-ee2a-449a-9138-4bc82fd41496",
+     "https://www.wisedoggy.com/cut-catalog/cut-catalog-dachshund/",
+     "https://dogtraining-agpon.com/topics/post-3462/",
+     "https://petokoto.com/articles/751",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH6gJIDJf4Ke-z2YEufc49Zj1u9STLf6PTRsaT2L5VneOAKZCyiXEkTBnYRf83HrowPHzjqr8D0l7C6JMMZDIF8Bn9kvppJaPupCxloPAfGtWXPOQ4FnNfn",
+     "https://pet-lifestyle.com/blogs/view/745"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petokoto.com/articles/751",
+     "https://moffme.com/article/1777",
+     "https://www.paws-foglio.jp/blog/27998/",
+     "https://petsmate.jp/note/miniature-dachshund-grooming-and-cut-styles/",
+     "https://animaldoc.jp/petsalon-column/miniature-dachshund-trimming/",
+     "https://pet-pada.com/column/3ee9dc65-93a9-43f6-833e-5a61b14c70f7",
+     "https://k-h-doggarden.jp/blog/detail/20260124010650/",
+     "https://www.kanaheirocket-pre.com/dachshund-wire-9758"
+    ],
+    "error": ""
+   }
+  },
+  "大型犬 トリミング 費用 相場": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.min-breeder.com/magazine/329",
+     "https://oneluke.net/mikawashima/%E5%A4%A7%E5%9E%8B%E7%8A%AC%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E6%96%99%E9%87%91%E3%81%AF%E4%B8%89%E6%B2%B3%E5%B3%B6%E3%81%A7%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E7%8A%AC%E7%A8%AE/",
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://inu-inu.net/trimmings/",
+     "https://pet-daisy.com/largedog/",
+     "https://fromace.net/?page_id=2363",
+     "https://petlife-navi.jp/trimming",
+     "https://dog-select.com/price/",
+     "https://groomingshopwonwon.jimdofree.com/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/",
+     "https://d-withdog.jp/blog/column/20210201174059-3201",
+     "https://kurashi-pet.jp/articles/pet-grooming-salon-cost/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://happybell.co.jp/blog/108976/",
+     "https://curama.jp/pet-grooming/magazine/2491/",
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://petlife-navi.jp/trimming",
+     "https://trimal.jp/archives/1018",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://www.with-petlife.com/news/595",
+     "https://wanwash.tsuruta-seimitsu.com/2025/02/22/003/",
+     "https://animaldoc.jp/petsalon-column/trimming-dogs-price/"
+    ],
+    "error": ""
+   }
+  },
+  "ゴールデンレトリバー サロン 選び方": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.with-petlife.com/news/595",
+     "https://curama.jp/pet-grooming/magazine/2491/",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://www.breeder-navi.jp/column/dog/golden-retriever/trimming/",
+     "https://petokoto.com/articles/756",
+     "https://suzuran-trimming.jp/column/86bc863c-921d-4640-9bbe-1c18f24f10d4",
+     "https://animaroll.jp/dog-type/golden-retriever/1085385",
+     "https://dekawan.jp/care/large-dog-shampoo-guide"
+    ],
+    "error": ""
+   }
+  },
+  "マルチーズ カット 毛玉": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanchan.jp/osusume/detail/1468",
+     "https://wanchan.jp/care/detail/52870",
+     "https://news.livedoor.com/article/detail/28861549/",
+     "https://petokoto.com/articles/616",
+     "https://www.breeder-navi.jp/column/dog/maltese/maltese-column06/",
+     "https://dog-petit.jp/column/d5f6383b-e21e-491e-af76-2db5836afa4c",
+     "https://trimmingfan.com/x_cut/maru/",
+     "https://river-mountain.com/column/detail/20250624161135/",
+     "https://aikenonline.jp/article/8295/"
+    ],
+    "error": ""
+   }
+  },
+  "犬種別 トリミング 料金 目安": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://kurashi-pet.jp/articles/pet-grooming-salon-cost/",
+     "http://petsalonwish.com/trimmingprice.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11307868876",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11307868876",
+     "https://www.relays.jp/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E6%96%99%E9%87%91%E8%A1%A8/",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://trimal.jp/archives/1018",
+     "https://www.min-breeder.com/magazine/329",
+     "http://www.a-vital.co.jp/trimming-price-list/",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://animalcompassion.media/dog-trimming-fees-budget/",
+     "https://trimming-station.com/column/trimming-cost/",
+     "https://inu-inu.net/trimmings/",
+     "https://furu-furu.net/price",
+     "https://groomingshopwonwon.jimdofree.com/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/"
+    ],
+    "error": ""
+   }
+  },
+  "長毛種 猫 サロン 費用": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://sejima.net/paw/price/",
+     "https://www.bonheur-ah.com/trimming/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGytQy1tvXYetwlSsk3MqvCPBl8CJPMpN4ZgXfWYEgIVigYq-ueCd6HtqhHvFGWwBKadLVYQiIeYrAw9mz_9lVanY-KAUrIwFs5WYcMmVsStdbtdB4QhINQxIQ0DQja4UnEsrs=",
+     "https://www.fujimura-vet.jp/trimming/trimming-price/",
+     "https://petmi.jp/article/neko-toriminngu/",
+     "https://www.barney.co.jp/care/trimming/index.html",
+     "https://sagamihara-neko.jp/trimming/",
+     "https://nekochan.jp/cat/article/5382",
+     "https://happybell.co.jp/blog/108976/",
+     "https://b-spa.co.jp/price_cat.html",
+     "https://kiraragroup.co.jp/service/sunpet/index.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13318146203"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/pet-grooming/magazine/2491/",
+     "https://safely.co.jp/pt/trimmer-category/value/trimming-cat-fee-kuma/",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/%E7%8C%AB%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E6%96%99%E9%87%91/",
+     "https://www.anicom-sompo.co.jp/nekonoshiori/10084.html",
+     "https://cat.benesse.ne.jp/withcat/content/?id=18789",
+     "http://www.a-vital.co.jp/trimming-price-list/",
+     "https://www.neko-ofuro.com/service.php",
+     "https://nekobeya.pechika.jp/salon/index.html",
+     "https://petlife.asia/salon/15319/price/",
+     "https://b-spa.co.jp/price_cat.html",
+     "https://sejima.net/paw/price/",
+     "https://cat.flowens.jp/blog/neko-kau-hiyou",
+     "https://dognoie.com/blog/cat-picturebook/persian_sumcut/"
+    ],
+    "error": ""
+   }
+  },
+  "シニア犬 トリミング 選び方": {
+   "group": "犬種別・サイズ別",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://trimming-passione.jp/column/dff9aff9-6815-4a11-8d47-e6b10a5bf014",
+     "https://doglifesalon-welina.com/column/58090b56-bf66-433e-9809-6656b16021ac",
+     "https://www.eden-petsalon.com/blog/presenior-dog-grooming",
+     "https://oneluke.net/gifuekimae/%E3%80%90%E5%B2%90%E9%98%9C%E3%81%A7%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%80%91%E3%82%B7%E3%83%8B%E3%82%A2%E7%8A%AC%E3%81%AE%E8%B2%A0%E6%8B%85%E3%82%92%E6%B8%9B%E3%82%89%E3%81%99%E3%82%AB/",
+     "https://www.rouken-care.jp/column/20220121/",
+     "https://happybell.co.jp/blog/114717/",
+     "https://dogsalon-mellow.jp/column/57f35c4e-1c30-4a96-be88-f150068a80d9"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://happybell.co.jp/blog/125644/",
+     "https://petokoto.com/articles/1975",
+     "https://ameblo.jp/1bankirakira/entry-12855342949.html",
+     "https://trimmingsalonanne.jp/column/a1ddfaab-d489-4459-97c7-f9fe2ac8197d",
+     "https://veterinarian.jp/dog/dog-care/senior-dog-grooming/",
+     "https://thechocolatebearkitchen.com/seniordogs/",
+     "https://www.with-petlife.com/news/632",
+     "https://dogsalonharry.com/column/58cba6e5-14a6-4421-af3e-be88b987b105",
+     "https://isdog.net/aisai/2026/02/04/blog13/",
+     "https://oneluke.net/mikawashima/ko004/",
+     "https://coco-dog.jp/blog/olddog/",
+     "https://petcare-station.com/pet-care/roken-trimming-kotowarareta/",
+     "https://dog-salon-ivy.com/blog/column/detail/20260528180003/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 予約 取りやすい": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oneluke.net/akasaka/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E4%BA%88%E7%B4%84%E3%81%AF%E3%81%84%E3%81%A4%E5%8F%96%E3%82%8B%EF%BC%9F%E6%B8%AF%E5%8C%BA%E8%B5%A4%E5%9D%82%E3%81%AE%E4%BA%BA%E6%B0%97%E3%82%B5%E3%83%AD/",
+     "https://www.with-petlife.com/news/608",
+     "https://services.cheriee.jp/articles/how-to-successfully-attract-customers-to-a-dog-grooming-salon/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHvR8Mt0dQffj-mT5kzAG_FnBmlv5vaYapOgVoexgeijHDHeL_lTrq_Wwj197dMEdwZUyW_jYJj7hebIIIVqGcRWvIdNU5L__zrAjan4A_C4kEu5JgapqohwZHqUwCgf4YodkqaXq2x6ZV-vH8L",
+     "https://toredog.com/trimming-salon-reservation/",
+     "https://dog-salon-ivy.com/blog/column/detail/20260820180002/",
+     "https://trimmingwan.jp/",
+     "https://petlife.asia/salon/",
+     "https://epark.jp/pet/",
+     "https://trimtrim.jp/",
+     "https://trimtrim.jp/salons"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tol-app.jp/columns/3070",
+     "https://reserva.be/magazine/research-pets-trimming-salon-reservation/",
+     "https://www.with-petlife.com/news/608",
+     "https://chou-porte.com/column/35647a0d-3167-4721-81d7-8c2a2b9163c1",
+     "https://toredog.com/trimming-salon-reservation/",
+     "https://onefordog.com/trimming-reservation-manners/",
+     "https://doglifesalon-welina.com/column/0e8b4c14-f640-4529-b77e-d56f62cb27ca",
+     "https://animaldoc.jp/petsalon-column/trimming-reservachion/",
+     "https://reservation-system-comparison.info/column/pet-salon-reservation/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 予約 キャンセル 料金": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://chou-porte.com/column/57055a00-4c03-4ab4-ab0b-5513a4aece1c",
+     "https://www.japanpetsalon.org/data/pdf/owner/4/2/",
+     "https://www.b-merit.jp/magazine/beautysaloncancellationfeelegalguide/",
+     "https://dogstyle-chico.com/cancell-policy/",
+     "https://dogfuwan.com/2023/05/23/terms-of-service/",
+     "https://yoyaku.pet-coo.com/trimming/?action=rules",
+     "https://white-brick.net/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E6%96%B9%E3%81%B8/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E5%88%A9%E7%94%A8%E8%A6%8F%E7%B4%84/",
+     "https://toneripet.com/2026/01/10/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://dogsalon-ichi.jp/archives/317",
+     "https://note.com/alliedsystem1991/n/nc2ce69997dd6",
+     "https://dogcatcoco.net/cancelpolicy-nagoya-trimmingsalon",
+     "https://trim-yumegocochi.com/faq/",
+     "https://www.beauty-park.jp/college/study/study-13/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petsalon-cuore.com/?p=1374",
+     "https://yoyaku.pet-coo.com/hotel/?action=rules",
+     "https://rsvia.co.jp/column/beauty_salon_cancellation_fee/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 当日 予約 できる": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://epark.jp/pet/",
+     "https://petlife.asia/",
+     "https://epark.jp/pet/list/reg_43/cat_30200/",
+     "https://epark.jp/pet/list/reg_40/cat_30200/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://trimtrim.jp/salons?feature_id%5B0%5D=2",
+     "https://petlife.asia/salon/search/",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E5%BD%93%E6%97%A5%E4%BA%88%E7%B4%84/",
+     "https://animaldoc.jp/petsalon-column/trimming-reservachion/",
+     "https://www.with-petlife.com/news/608",
+     "https://toredog.com/trimming-salon-reservation/",
+     "https://www.ts-alamode.com/faq/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 送迎 サービス 費用": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://petlife.asia/hotel/1609/price/",
+     "https://www.freedoggy.jp/news/273",
+     "https://vita-animal.jp/transfer",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEwE17FZT9kpgeIzkafn9EtZ5bhOiqOpim4YYJBIY7fHOFocEeIC_F0Fgy2S0DBD4y27rfLIDnWdDDq7FEIQ1-7a46WkHIpCvWmdwIvCD2JglLqvUFAW1asTZU=",
+     "https://dogcatcoco.net/sougei/",
+     "https://petcaretaxi.jp/service/trimming/",
+     "https://pet-taxi-adachi.com/triming/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife.asia/salon/search/kanagawa/yokohama-shi/?data%5BFACILITY%5D%5B0%5D=1",
+     "https://tail-link.jp/column/4cd9357c-a86b-41f7-8343-36f0e7a90b15",
+     "http://birthday.jp.net/price/",
+     "https://koasalon.jp/sougei/",
+     "https://www.pethoteldelta.com/news/726",
+     "https://petpetlife.com/feature-kyotoshi-pickup-trimming/",
+     "https://curama.jp/pet-grooming/",
+     "https://petlife-navi.jp/trimming",
+     "https://petlife-navi.jp/pet-taxi",
+     "https://petcaretaxi.jp/column/detail/20260331062357/",
+     "https://contextneo.jp/ryoukin/trimming-salon-17900.html",
+     "https://context-japan.jp/ryoukin/trimming-salon-17900.html"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 選び方 失敗しない": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://inumag.jp/13786",
+     "https://oneluke.net/itinomiyaeki/%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E5%BA%97%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BC%9A%E4%B8%80%E5%AE%AE%E3%81%A7%E6%8E%A2%E3%81%99%E3%81%AA/",
+     "https://office-gyousei.com/choice-of-pet-salontrimming/",
+     "https://www.kirari-dog.com/?p=704",
+     "https://dog-salon-ivy.com/blog/column/detail/20260528180003/",
+     "https://juyell.com/column/3d128602-7f71-4d04-8f2b-811433518c87",
+     "https://dogsalon-pirka.com/column/32e455d8-5a87-4871-9e29-2ce69c819ea8",
+     "https://www.eden-petsalon.com/post/how-to-choose-grooming-salon",
+     "https://dogsalon-pirka.com/column/c8a80570-2826-4c90-bc3f-e78dc1e5fe78"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 初回 割引 料金": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://chou-porte.com/column/a2d93360-90c7-4f4e-8594-a67eea5e91cd",
+     "https://kurashi-pet.jp/articles/pet-grooming-salon-cost/",
+     "https://www.pet-spa.co.jp/service/benefits/",
+     "https://www.ts-alamode.com/fees/",
+     "https://petlife.asia/salon/search/?data[COUPON]=3",
+     "https://petsalon-wanwan.crayonsite.net/p/2/",
+     "https://www.nunoclub.com/blog/2013/03/15/2/",
+     "https://petlife.asia/lp/hajimetewari_cp/",
+     "https://dogsalon-luce.com/coupon-ticket/",
+     "https://dogcatcoco.net/reserve/",
+     "https://www.san-popo.com/trimming",
+     "https://dog-select.com/price/",
+     "https://felice-pet.jp/0325/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife.asia/lp/cp_coupon/",
+     "https://trimal.jp/archives/1018",
+     "https://contextneo.jp/ryoukin/trimming-salon-17900.html",
+     "https://petsalon-wanwan.crayonsite.net/p/2/",
+     "https://pet-charmant.com/trimming.html",
+     "https://www.ts-alamode.com/fees/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 混合ワクチン 必要": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://isdog.net/matsumoto/2026/03/18/blog16/",
+     "https://i-dog.jp/news/vaccine/",
+     "https://dogasil.com/inu_vaccination/",
+     "https://petoria-tokyo.jp/feature/dog-vaccine-certificate-basics/",
+     "https://yamec.net/vaccination.html",
+     "https://www.yamaterrace.com/blog/entry/post-30/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13309682948",
+     "https://note.com/kikoannkei/n/n9a71ed163a0f"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanko.peace-winds.org/journal/36781",
+     "https://i-dog.jp/news/vaccine/",
+     "https://dogasil.com/inu_vaccination/",
+     "https://animaldoc.jp/petsalon-column/trimming-vaccine/",
+     "https://dog-cheer.com/blog/column/36/",
+     "https://isdog.net/nisshin/2026/03/18/blog16/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 噛む 犬 断られる": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.with-petlife.com/%E3%82%B3%E3%83%A9%E3%83%A0/587",
+     "https://pet-salon-pinocchio.com/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%92%E6%96%AD%E3%82%89%E3%82%8C%E3%81%9F%E9%A3%BC%E3%81%84%E4%B8%BB%E3%81%95%E3%82%93%E3%81%B8%EF%BD%9C%E7%90%86%E7%94%B1%E5%88%A5%E3%81%AE%E5%AF%BE/",
+     "https://doglifesalon-welina.com/column/c3a27502-d561-4d7c-b338-daa099759a8a",
+     "https://oneluke.net/tudukiku/%E6%A8%AA%E6%B5%9C%E9%83%BD%E7%AD%91%E5%8C%BA%E3%81%A7%E6%B8%85%E6%BD%94%E3%81%AA%E7%92%B0%E5%A2%83%E3%81%A5%E3%81%8F%E3%82%8A%E3%82%92%E5%A4%A7%E5%88%87%E3%81%AB%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1/",
+     "https://mezasekenkou.net/inu-kamu-torimingu/",
+     "https://animaldoc.jp/petsalon-column/trimming-biting-dog/",
+     "https://trimmer-sagaso.com/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%8C%E8%8B%A6%E6%89%8B%E3%81%AA%E5%AD%90%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C%E8%A1%93%EF%BD%9C%E5%99%9B%E3%82%80%E3%83%BB%E6%9A%B4%E3%82%8C%E3%82%8B/",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/%E5%99%9B%E3%82%80%E7%8A%AC%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/",
+     "https://hometrimmer.net/%E8%A8%98%E4%BA%8B/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3/%E7%8A%AC%E3%81%8C%E3%83%88%E3%83%AA%E3%83%9E%E3%83%BC%E3%82%92%E5%99%9B%E3%82%80%E7%90%86%E7%94%B1%E3%81%A8%E3%81%9D%E3%81%AE%E5%AF%BE%E7%AD%96%E6%96%B9%E6%B3%95%EF%BC%81/",
+     "https://doglifesalon-welina.com/column/8c9cd714-aac4-4f05-8326-b5d4178d02e2"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 料金 追加 理由": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://dog-salon-emma.com/column/909/",
+     "https://dogasil.com/trimming_nukegeprice/",
+     "https://aizuma-vet.com/news/p1982/",
+     "https://oneluke.net/itinomiyaeki/%F0%9F%90%95%E2%9C%A8-%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AE%E5%80%A4%E6%AE%B5%E3%82%92%E3%82%B3%E3%82%B9%E3%83%88%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F%E3%80%8C%E5%A4%A7%E5%88%87/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://curama.jp/pet-grooming/magazine/2491/",
+     "https://www.min-breeder.com/magazine/329",
+     "https://dogsalon-rj.jp/column/8b2d21a9-b571-41d7-8900-6aad118bca21",
+     "https://oneluke.net/tsutsujigaoka/%E4%BB%99%E5%8F%B0%E3%81%A7%E6%AF%9B%E7%8E%89%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%9F%E7%8A%AC%E3%81%AE%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0%EF%BC%81%E8%BF%BD%E5%8A%A0%E6%96%99%E9%87%91%E3%82%84/",
+     "https://animalcompassion.media/dog-trimming-fees-budget/",
+     "https://trimming-station.com/column/trimming-cost/",
+     "https://www.pet-life.website/dog/trimming/price",
+     "https://animaldoc.jp/petsalon-column/trimming-dogs-price/"
+    ],
+    "error": ""
+   }
+  },
+  "ペットサロン 年間 費用 目安": {
+   "group": "予約・利用の悩み",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://happybell.co.jp/blog/108976/",
+     "https://kurashi-pet.jp/articles/pet-grooming-salon-cost/",
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://trimal.jp/archives/1018",
+     "https://petmi.jp/article/dog-trimming/",
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE-iSLO4yAR9gHqh1CCTlJk0epIIFi0ZjlR82vfmZZIYbLyvVep8-923iMczhmXoYb5OzXxTzFmKACEkl9Rsi7n9iCiMJRgPrl987EIdznYJbjQCMHBXBSJFgx5JRyS0l7j_As=",
+     "https://inu-inu.net/trimmings/",
+     "https://price.w3g.jp/trimming",
+     "https://www.min-breeder.com/magazine/329"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://price.w3g.jp/trimming",
+     "https://curama.jp/pet-grooming/magazine/2491/",
+     "https://hugwag.mynavi.jp/trimming/0009/",
+     "https://trimming-station.com/column/trimming-cost/",
+     "https://dogtraining-agpon.com/topics/blog/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%B0/post-2403/",
+     "https://www.min-breeder.com/magazine/329",
+     "https://animalcompassion.media/dog-trimming-fees-budget/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

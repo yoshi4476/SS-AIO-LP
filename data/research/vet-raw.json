@@ -1,0 +1,1738 @@
+{
+ "industry": "vet",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 動物病院 夜間救急": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kurashi-pet.jp/articles/vet-emergency-night-osaka/",
+     "https://doubutsuyakan.jp/medicalguide.html",
+     "https://doubutsuyakan.jp/",
+     "https://www.buke-ah.com/facility",
+     "https://animal.doctorsfile.jp/ah/210907/",
+     "https://heah.jp/",
+     "https://heah.jp/",
+     "https://www.barney.co.jp/guide/er.html",
+     "https://www.raema.or.jp/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHPjBj_o3cTRK9fkT-ET5sBXqoMzo55d58Uo-efaDxBlANyDd-bsxPEsgUi3hdn09YjwXQWuQqGpIvxNlNBzjalAX5BfDuGvIfb4hvG_ReZ519ZCJzNB3LZpfP2Oq5jIppXCoK4z-qNp5-iKFK-z48=",
+     "https://www.raema.or.jp/",
+     "https://www.tokiwa-v.com/tokiwa/%E5%B0%8F%E3%81%95%E3%81%AA%E5%8B%95%E7%89%A9%E3%81%9F%E3%81%A1%E3%81%AE%E5%A4%9C%E9%96%93%E6%95%91%E6%80%A5%E8%A8%BA%E7%99%82/",
+     "https://ah.aeonpet.com/sakai-yakan-emergency/",
+     "https://kawabata-vet.com/night-medical/",
+     "https://barkdoctors.co.jp/",
+     "https://trimtrim.jp/hospitals/facilities/10784",
+     "https://comasuke-senri.com/blog-jp/%E3%80%90%E5%8C%97%E6%91%82%E3%80%91%E5%A4%9C%E9%96%93%E3%81%A7%E3%82%82%E8%A8%BA%E7%99%82%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E5%8B%95%E7%89%A9%E7%97%85%E9%99%A2%E3%81%BE%E3%81%A8%E3%82%81%EF%BD%9C/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://osaka-moriguchi-yakan-ah.jp/",
+     "https://ah.aeonpet.com/sakai-yakan-emergency/",
+     "https://osaka-pet911.com/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 動物病院 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.min-breeder.com/magazine/17418",
+     "https://mc.aeonpet.com/higashi-tokyo/",
+     "https://trva.jp/",
+     "https://tokyo-doctors.com/animalList/f309",
+     "https://jarvis.anicom-med.co.jp/",
+     "https://ts-animal.com/",
+     "https://jarmec.jp/",
+     "https://www.vm.a.u-tokyo.ac.jp/vmc/",
+     "https://jarmec.jp/tokyo/",
+     "https://pet.apokul.jp/web/115/reservations/add",
+     "https://tokyo-doctors.com/animalList",
+     "https://amc-akasaka.com/",
+     "https://epark.jp/pet/list/reg_13/cat_30100/review_ranking/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tokyo-doctors.com/animalList",
+     "https://animaldoc.jp/recommend/tokyo/tokyo-ah/",
+     "https://animaldoc.jp/recommend/tokyo/shinjuku-animal-hospital/",
+     "https://animaldoc.jp/recommend/tokyo/minato-ct-animal-hospital/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 犬 ワクチン 近く": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "http://www.matsunami.co.jp/medical/vaccine.html",
+     "http://www.kibougaoka-ac.com/vaccine.html",
+     "https://moriyama1299.com/shinryo/shinryo_yobou/shinryo_reserve/",
+     "https://www.kurokawa-ah.com/",
+     "https://dccpets.jp/clinictop/cainz-nagoyaminato/",
+     "https://nakagawa-dch.jp/",
+     "https://nagoya-arc.jp/menu/%E4%BA%88%E9%98%B2%E6%8E%A5%E7%A8%AE/",
+     "https://hoshino-vet.com/rabiesvaccination/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wankonowa.com/column/health/vol-05/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202306b/",
+     "https://life.oricon.co.jp/rank_pet/special/dog-disease/vaccination/",
+     "https://petdock.jp/column/cost-guide/dog-vaccine-cost",
+     "https://www.sbipet-ssi.co.jp/column/dog/D0101.html",
+     "https://epc-vet.com/%E8%A8%BA%E7%99%82%E6%96%99%E9%87%91/%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E6%8E%A5%E7%A8%AE%E6%96%99%E9%87%91/",
+     "https://hoshino-vet.com/rabiesvaccination/",
+     "https://hoshino-vet.com/",
+     "https://nagoya-arc.jp/menu/%E4%BA%88%E9%98%B2%E6%8E%A5%E7%A8%AE/",
+     "https://www.kurokawa-ah.com/",
+     "https://sunpetclinic.jp/",
+     "https://www.heisei-meieki-vet.com/",
+     "http://www.matsunami.co.jp/medical/vaccine.html",
+     "https://petlife.asia/hospital/search/aichi/nagoya-shi/",
+     "https://pet.caloo.jp/hospitals/search/23a/all/all"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 猫 去勢 動物病院": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://fuku-neko.main.jp/consult",
+     "https://neco-via.com/learn/health/fukuoka-cat-neuter-subsidy/",
+     "https://chojabaru.com/information/price.php",
+     "https://matoba-forest.com/price.php",
+     "http://www.uryu-kasuya.com/price/",
+     "https://wolveshand.jp/southern-wolves/sasaguri/price/",
+     "https://www.fujisaki-ah.com/contraception/",
+     "https://fukuoka-ahg.jp/price/%E5%8E%BB%E5%8B%A2%E3%83%BB%E9%81%BF%E5%A6%8A%E6%89%8B%E8%A1%93%E6%96%99%E9%87%91/",
+     "https://lead-ac.jp/first.html",
+     "https://wakamiya-amc.com/contraception/",
+     "http://joseikin4catsdogs.web.fc2.com/6_kyushu_okinawa/1_fukuoka.html",
+     "https://www.wannyan.city.fukuoka.lg.jp/yokanet/owner_cat_guide",
+     "https://fukuneko-ope.org/",
+     "https://fukuneko-ope.org/work/",
+     "https://www.city.fukuoka.lg.jp/shicho/koho/fsdweb/reiwa8_dayori/1001/0809.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.city.fukuoka.lg.jp/hofuku/seikatsueisei/shisei/nekonofuninkyoseisyujutsusuisinjigyou.html",
+     "https://www.wannyan.city.fukuoka.lg.jp/yokanet/owner_cat_guide",
+     "https://www.city.fukuoka.lg.jp/shicho/koho/fsdweb/reiwa7_dayori/1101/1004.html",
+     "https://petdock.jp/column/cost-guide/vet-surgery-cost",
+     "https://fuku-neko.main.jp/consult",
+     "https://jiroumaru-ah.com/department/spay.html",
+     "https://fukuoka-ahg.jp/surgery/",
+     "https://animaldoc.jp/recommend/fukuoka/fukuoka-fukuoka-shi/fukuoka-fukuoka-shi-co-animal-hospital-spay/",
+     "http://fukuoka-neko.com/asunaro.html"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 動物病院 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFhFeEfNHG-7lgrk_BA8343MwQ4QY5NzAu_ZPP-5gMTjJzp19izUVH3XwjaQV8qCu06t_o560HfpLNLHHf2G7LwuPXAQ7UvkTQQF1Ceq8YCJH54esvhALbiCM78lkS_43-5M1I5luKs",
+     "https://petlife.asia/hospital/search/hokkaido/sapporo-shi/",
+     "https://www.sapporo1299.net/",
+     "https://animaldoc.jp/recommend/hokkaido/hokkaido-sapporo-shi/sapporo-ct-animal-hospital/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEBV8EXcm7yyMCLQLRwF8SXdFL2M_GWB3fFPsvjhpjmL2VLBbz5cqHJrzZXeCk7RuEzp3DIBWJYMuYaEePRyXrypcsHJxFbGZKC2MXrN2ZGmPYkAcMr83CDQ5xpIZ3YNY26hmkX5qoZg6l8",
+     "https://anes-amc.com/blog/%E3%80%90%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E3%81%AE%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E5%8B%95%E7%89%A9%E7%97%85%E9%99%A2%E3%80%91%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%EF%BC%88/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHkbZRh-ZWLslUBeRBe5lHkWcbb1wGsnb5D6X6SP9rA_xfPGhcZ20BSqytVTDnXq3A_U8UO0V7ydhnkBx8C0xPQByCdoDB5qnK4HjycrSENfLi0GmTX4IafImrPOAT07Ghmmi_gMSJwtOg=",
+     "https://anes-amc.com/medical-night/",
+     "https://www.vetmed.hokudai.ac.jp/VMTH/owner/nightandweekendandholidayservice/",
+     "https://www.youtube.com/watch?v=5P69KACE4hQ",
+     "https://www.sapporo1299.net/hospital-info",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFiNHtdyKk1evtzQe-lbKL8VnNs7Cl6fXBw0a61onmC1Edxfg9EeHIJy66v8ylWZs7SZ0XOsMeQuu0LhH7_XM5jA0d3YvJ8LfpGIFjUeKhZUhiYZ4KemtAEkNqXMB45f8f0dXITvHD7tP0Ryo4=",
+     "https://mc.aeonpet.com/sapporotsukisamu/er/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHBc9vO8lpY5YuQx9u7bh1eONbQR6PRRP9CWAnDnY9A8s1s7Q0pxipuQrHhTy-6PK5bgIeWAamcrJaPwr6xsfl6aBlfFbi5nM5M7w6bWUBZ4QLTGe8vMsedhrpx3ZvXKatHqc3puA=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.homemate-research.com/bc36/01100/ranking/access/",
+     "https://pet.caloo.jp/hospitals/detail/010067/reviews",
+     "https://pet.caloo.jp/hospitals/detail/010135/reviews",
+     "https://animaldoc.jp/recommend/hokkaido/hokkaido-sapporo-shi/sapporo-ct-animal-hospital/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 動物病院 休日診療": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://inoue-animalhospital.jp/",
+     "http://inaba-ah.com/",
+     "https://www.nakamaru-ahp.com/",
+     "https://veccs-yokohama.jp/",
+     "https://aoba-amc.com/",
+     "https://sho-ac.jp/night-clinic/",
+     "https://yasuda-vet.jp/",
+     "https://sueyoshiac.wixsite.com/sueyoshi-ac/blank-19",
+     "https://yokohama-dvms.com/",
+     "https://animal.doctorsfile.jp/search/ft179_pf14/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kanagawa-doctors.com/animalList/f-nichishuku-shinryoka/w-yokohama-shi/",
+     "https://petlife.asia/hospital/search/kanagawa/yokohama-shi/?data%5BDAY%5D%5B0%5D=7",
+     "https://arata-ac.com/",
+     "https://www.nakamura-dobutsubyoin-yokohama.com/",
+     "https://yokohama-exotic-ah.com/",
+     "https://kanagawa-doctors.com/animalList/w-yokohama-shi/f-yakan/",
+     "https://yokohama-doctors.com/animalList/f-yakan/",
+     "https://pet.caloo.jp/hospitals/search/14a/all/all?f=64"
+    ],
+    "error": ""
+   }
+  },
+  "京都 ペット 救急 夜間": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kyoto99.net/",
+     "https://vetokamu.com/night_emergency/",
+     "https://kyoto99.net/access.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3S0ZVAJ8nVcInIk0JKe5scWjfXfcyfxFR4GBXi5J7113tOTsgOyEfldZ1B4LMdo8goPPuWdUMahmxetR3EYpvBLn-qRlWEG3XWb2cNn0f-t2iDC5zHIc66BDmaJ9XDEecCQ==",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH1nZBvlWbnm7wn71Eye4N307yAKVzQLTFuj7wuNXxpMONnIqgsPlpgaGLh5j6jBCJ_oyyDgEPcJr4xBGk--eSWr4x56aLk56cLI7TzMWleKXhdwbEn45rPZZNW8ARsgqv9Rg==",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6V4X0_7wXGlyvg0OEujAeA9RUFsZcOdcYZ0OvI9MC27WoiFw_JEJ-Mx-rToSGC4A_z1RAWadnLUctvi7wAvdwzmTMuWBfDiwz75lwRkeR9utdmaaagNGNcHkaOSTYK4Y_",
+     "https://www.daktari.info/guide/nmer/night/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://animal-kyoto.jp/night/",
+     "https://www.facebook.com/kyotocityanimalemergencycenter/",
+     "https://petlife.asia/hospital/11111/",
+     "https://www.ukyo-ah.com/",
+     "http://nac-kyoto.com/",
+     "https://kuro-shiba.net/hospital-kyoto/",
+     "https://kyoto99.net/",
+     "https://www.daktari.info/",
+     "https://yakan-ah-kensaku.com/kinki",
+     "https://www.kyoto-shiju.or.jp/activity/663/",
+     "http://nac-kyoto.com/about/",
+     "https://kyoto99.net/about.html",
+     "https://kyotochuoah.com/info/activity/activity-158/",
+     "https://dogoh.jp/magazine/articles/6745/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 動物病院 ペット保険 対応": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hyogominato-ah.com/",
+     "https://www.i-hoken.info/pet/info/madoguchi-seisan.php",
+     "https://oshita-ah.com/information/",
+     "https://ackobe.com/",
+     "https://kobe-guri.com/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEIdJyNwDUcpinuxh-U8j8S9lKVb_nUv97qZPjAeB6X64KNkVq1mUVrPnsWDNtYv9j8LmtHmaw6jX31pIODFLuqN7albDKs-umAmWHNxOiYQpkCVudRtdyDP55ElHntMacrXVt8ZbM95o0qNg==",
+     "https://animal-hospital.jaha.or.jp/2022/12/28/2121/",
+     "https://www.anicom-ah.com/vh/anicom?id=7866",
+     "https://pfirst-ah.jp/hospital/kobe-sannomiya/",
+     "https://pia-animalmedicalcenter.com/%E3%83%9A%E3%83%83%E3%83%88%E4%BF%9D%E9%99%BA%E3%81%AE%E7%AA%93%E5%8F%A3%E7%B2%BE%E7%AE%97%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://www.ipetclub.jp/vh/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ipet-ins.com/products/madoguchiseisan/",
+     "https://www.vec-j.com/hospital/knd/",
+     "https://www.ikura-vet.com/",
+     "https://www.ikura-vet.com/news/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E6%96%B9%E3%81%B8%E3%80%81%E7%AA%93%E5%8F%A3%E6%B8%85%E7%AE%97%E5%AF%BE%E5%BF%9C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://kobe-guri.com/",
+     "https://hyogominato-ah.com/",
+     "https://www.anicom-sompo.co.jp/customers/payment/",
+     "https://www.anicom-sompo.co.jp/customers/anicomah/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 猫 健康診断 動物病院": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sakatadogcathospital.jp/cat-friendly-clinic/",
+     "https://www.minasen-ah.net/",
+     "https://animal-99.com/hospital/sendai.html",
+     "https://oa-vet.com/%E5%81%A5%E5%BA%B7%E8%A8%BA%E6%96%AD%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%B3",
+     "https://yu-ah.com/course/healthcare/",
+     "https://galfar.jp/treatment/health/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.bibiinuneko.com/",
+     "https://www.bibiinuneko.com/petdock",
+     "https://oa-vet.com/%E5%81%A5%E5%BA%B7%E8%A8%BA%E6%96%AD%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%B3",
+     "https://animal-99.com/hospital/sendai.html",
+     "https://mukaiyama-ah.com/",
+     "https://iris-ah.net/service.html",
+     "https://niki-ah.com/",
+     "https://www.anicom-sompo.co.jp/nekonoshiori/3578.html"
+    ],
+    "error": ""
+   }
+  },
+  "広島 犬 避妊手術 動物病院": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://konomiah.com/funin.html",
+     "https://minakawa-ah.jp/animalhospital2/spaying_and_neutering/",
+     "https://petlife.asia/hospital/search/hiroshima/dog/?data[EXAMINATION][0]=2",
+     "https://bh-fpc.com/fee/",
+     "https://www.asa-animal-hospital.com/price",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEp0noIV5VyUxCFSIO7mJB3a7CKjuZ69iIdag51Wpig8Pbqy6Flc9AH3KHH4YELf6_dync5DTpGkak2_SUdML1ziy0XhdqrNWhSVmT-IBQbAspOSl8lL-i7cPKdgNk=",
+     "https://www.hiroshima-clover-ah.com/services/",
+     "https://www.hiroshima-clover-ah.com/services/",
+     "https://mimosadcc.jp/medical/",
+     "https://animaldoc.jp/recommend/hiroshima/hiroshima-animal-hospital-spay/",
+     "https://www.kawano-ah.net/",
+     "https://www.midorimachi-ah.com/contens/",
+     "https://www.asa-animal-hospital.com/sinryou/hinin-kyosei",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEp0noIV5VyUxCFSIO7mJB3a7CKjuZ69iIdag51Wpig8Pbqy6Flc9AH3KHH4YELf6_dync5DTpGkak2_SUdML1ziy0XhdqrNWhSVmT-IBQbAspOSl8lL-i7cPKdgNk=",
+     "https://www.oda-pet.com/hinin/",
+     "https://www.sakura-petclinic.jp/welcome/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petlife.asia/hospital/search/hiroshima/",
+     "https://animaldoc.jp/recommend/hiroshima/hiroshima-animal-hospital/",
+     "https://www.primo-ah.com/practice-info/fix/",
+     "https://konan-ahg.jp/%E8%A8%BA%E7%99%82%E6%96%99%E9%87%91/%E5%8E%BB%E5%8B%A2%E3%83%BB%E9%81%BF%E5%A6%8A%E6%89%8B%E8%A1%93%E6%96%99%E9%87%91/",
+     "https://www.asa-animal-hospital.com/sinryou/hinin-kyosei",
+     "https://www.hikarigaoka.net/service/fix/",
+     "https://www.saitopetclinic.com/price/",
+     "https://chura.life/about/price/dog/",
+     "https://www.higashiyama-ah.com/contents/category/price-list/",
+     "https://mogu-pet.com/neutering/"
+    ],
+    "error": ""
+   }
+  },
+  "犬 ワクチン 費用 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.petfamilyins.co.jp/pns/article/pfs202306b/",
+     "https://www.au-sonpo.co.jp/pc/pet-dog/column/post-42.html",
+     "https://family-vets.jp/column/%E3%80%905%E7%A8%AE%E3%81%A7%E3%81%84%E3%81%84%EF%BC%9F%E3%80%91%E6%B7%B7%E5%90%88%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AE%E4%BA%88%E9%98%B2%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E4%BE%A1/",
+     "https://epc-vet.com/%E8%A8%BA%E7%99%82%E6%96%99%E9%87%91/%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E6%8E%A5%E7%A8%AE%E6%96%99%E9%87%91/",
+     "https://www.chayagasaka-ah.jp/media/dog/health/407/",
+     "https://ryugu-ah.com/price/",
+     "https://www.mmvet.net/%E6%96%99%E9%87%91%E8%A1%A8",
+     "https://ppmc.co.jp/pg/kn_common/images/fees_202402.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanko.peace-winds.org/journal/9488",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202306b/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202309b/",
+     "https://petdock.jp/column/cost-guide/dog-vaccine-cost",
+     "https://www.pfirst.jp/contents_reading10.html",
+     "https://www.sbipet-ssi.co.jp/column/dog/D0101.html",
+     "https://alpha-ac.net/allblog/blog/625/",
+     "https://goodcoming.jp/media/67568/"
+    ],
+    "error": ""
+   }
+  },
+  "猫 去勢手術 費用 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://minerva-ah.com/column/breed/kyosei/",
+     "https://www.rakuten-insurance.co.jp/pet/column/pet-cat_contraception.html",
+     "https://life.oricon.co.jp/rank_pet/special/cat-disease/castration-cost/",
+     "https://ppmc.co.jp/pg/kn_common/cast.html",
+     "https://www.npf.co.jp/mag/cat/detail/31",
+     "https://matsuiyamate-ac.com/price/",
+     "https://cat.benesse.ne.jp/withcat/content/?id=18614",
+     "https://chura.life/about/price/cat/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petdock.jp/column/cost-guide/cat-neuter-cost",
+     "https://psnews.jp/cat/p/24530/",
+     "https://www.petline.co.jp/note/cat/contraception_castration/000648/",
+     "https://hoken.rakuten.co.jp/pet/column/castration/",
+     "https://petlife-navi.jp/pet-hospital/cost",
+     "https://petdock.jp/column/cost-guide/vet-surgery-cost"
+    ],
+    "error": ""
+   }
+  },
+  "犬 避妊手術 料金 目安": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://life.oricon.co.jp/rank_pet/special/dog-disease/dog-spay-surgery-cost/",
+     "https://dog.benesse.ne.jp/withdog/content/?id=13693",
+     "https://matsuiyamate-ac.com/price/",
+     "https://www.saiwai-doubutu.com/price/",
+     "https://www.y-mec.com/price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://life.oricon.co.jp/rank_pet/special/dog-disease/dog-spay-surgery-cost/",
+     "https://petlife-navi.jp/pet-hospital/cost",
+     "https://petdock.jp/column/cost-guide/vet-surgery-cost",
+     "https://hoken.rakuten.co.jp/pet/column/castration/",
+     "https://petdock.jp/column/cost-guide/dog-spay-cost",
+     "https://souai-byouin.jpn.org/etc.html",
+     "https://www.hikarigaoka.net/staffblog/post-29/",
+     "https://tohtoanimalhospital.com/price/",
+     "https://pet-4k.jp/pet-insurance-comparison-421/"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 初診料 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hokusetsusuita.com/media/20250912/",
+     "https://www.hakatadogs.com/dogchishiki/animalhospitalrates",
+     "https://wanchan.jp/disease/detail/10865",
+     "https://animal-kyoto.jp/blog/%E3%80%90%E9%A3%BC%E3%81%84%E4%B8%BB%E6%A7%98%E5%BF%85%E8%A6%8B%EF%BC%81%E3%80%91%E8%A8%BA%E7%99%82%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E3%81%94%E8%B2%BB%E7%94%A8%E3%81%AB%E9%96%A2%E3%81%97%E3%81%A6/",
+     "https://mogupet.com/column/ddca46ff-d0b8-46f5-b745-e98c421b611e",
+     "https://cat.benesse.ne.jp/withcat/content/?id=141090",
+     "https://family-ah.jp/price/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGssO-F2dvFLfkL-wmbu0KP41elH3EXBHxzHR4Rp8wUKFjuve9vbDgaC0a2dLfFL12dNhBCkYDoWY8YMRoE8l2nqOxw9K5vzdB3KkuQRb37Moeqgs0=",
+     "https://www.nogi-ah.com/fee",
+     "https://www.tsujimoto-ah.jp/?page=1",
+     "https://jvma-vet.jp/clinic/ryokin.html",
+     "https://www.homemate-research-pet-clinic.com/useful/14030_anima_005/",
+     "https://hara-ah.org/%E8%A8%BA%E7%99%82%E6%96%99%E9%87%91%E3%81%AE%E7%9B%AE%E5%AE%89/",
+     "https://www.nogi-ah.com/fee"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petdock.jp/column/cost-guide/vet-first-visit-cost",
+     "https://www.petdock.jp/column/cost-guide/vet-cost-guide",
+     "https://petlife-navi.jp/pet-hospital/cost",
+     "https://animaldoc.jp/animal-column/animal-hospital-consultation-fee/"
+    ],
+    "error": ""
+   }
+  },
+  "夜間救急 動物病院 料金 高い": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petdock.jp/column/cost-guide/vet-surgery-cost",
+     "https://petdock.jp/column/cost-guide/vet-first-visit-cost",
+     "https://petdock.jp/column/hospital-guide/tokyo-emergency-vet",
+     "https://inunekonikki.hatenablog.com/entry/2023/09/11/123510",
+     "https://www.svet.jp/yakan/price/",
+     "https://vsec.jp/mp/yakanprice-qanda_1",
+     "https://keihin-nightanimal.com/price/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1138911211",
+     "https://www.elsa-hp.com/medicalcare/nighttime/",
+     "https://samec.jp/owners/emergency",
+     "https://jamc.co.jp/yakanshinryo/",
+     "https://note.com/marumimaru/n/naf351f89af9b"
+    ],
+    "error": ""
+   }
+  },
+  "犬 健康診断 費用 どれくらい": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://nutreats.jp/blogs/column/61",
+     "https://pi-xy.co.jp/column/8065/",
+     "https://wanko.peace-winds.org/journal/38370",
+     "https://hokusetsusuita.com/media/20251018/",
+     "https://www.aoneko-ah.com/medical_checkup/",
+     "https://katsuma-pc.jp/kenshin/",
+     "https://www.saitopetclinic.com/price/",
+     "https://akatsuki-ah.com/menu/healthcheck/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ah.aeonpet.com/petdock/",
+     "https://petlife-navi.jp/pet-hospital/cost",
+     "https://petdock.jp/column/cost-guide/vet-first-visit-cost",
+     "https://www.petdock.jp/column/cost-guide/vet-cost-guide",
+     "https://nutreats.jp/blogs/column/61",
+     "https://amcc.pal-animal.com/checkup/",
+     "https://hokusetsusuita.com/media/20251018/",
+     "https://www.homemate-research-pet-clinic.com/medipets/19/",
+     "https://context-japan.jp/ryoukin/pet-kenkoushindan-18578.html"
+    ],
+    "error": ""
+   }
+  },
+  "猫 歯石除去 費用": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.rakuten.co.jp/topet/contents/tartarremoval/",
+     "https://onepetholdings.com/column/1615/",
+     "https://ks-animalhospital.com/cat/5286/",
+     "https://park-ah-dental.com/price/",
+     "https://www.polan-ah.com/dental_flow/",
+     "https://garden-ah.com/clinical/scaling.html",
+     "https://www.okano-vet.com/dental/price.html",
+     "https://kinswith-vet.com/journal/1350/",
+     "https://yell-pet-clinic.com/menu/dental/",
+     "https://www.aoneko-ah.com/dental/",
+     "https://hayashivet.com/news/post/886/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pi-xy.co.jp/column/5155/",
+     "https://hayashivet.com/news/post/886/",
+     "https://www.shiawasegift.com/cat-sisyuubyou-tiryouhi/",
+     "https://neko-reco.com/scaling/",
+     "https://animaldoc.jp/animal-column/veterinary-clinic-tartar-fees/",
+     "https://dr-pettle.com/price-of-tartar-removal-surgery/",
+     "https://note.com/saisonpet_1122/n/nf5807eeac38f",
+     "https://kinswith-vet.com/journal/1350/",
+     "https://keihanna-ah.com/information/scaling",
+     "https://kazu-ah.com/allblog/520/",
+     "https://www.okano-vet.com/dental/price.html"
+    ],
+    "error": ""
+   }
+  },
+  "ペット保険 月額 相場": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHePmORQ2XdHtA6mGqkXbmP8b9PRPlEo9HxT-lpK7EiAt15NuDMr8nBFPub0UizX53yhoM97qG1_XtPtYDiscxMh2iO_5s9X-NEVANNbTmXZw==",
+     "https://au-hoken-navi.fp.au-financial.com/pet/article/082/",
+     "https://hoken-navi.docomo.ne.jp/dmg-ins/pet/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pet.insweb.co.jp/hikaku",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202309bb/",
+     "https://hoken-room.jp/pet-insurance/13353",
+     "https://life.oricon.co.jp/rank_pet/special/basic-information/market-price/",
+     "https://www.rakuten-ssi.co.jp/product/zutto_motto/plan/price/",
+     "https://sorou.jp/column/pet-monthly-cost-budget-guide-2026"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 診察代 払えない 分割": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://linecreditcorp.com/pocketmoney/blog/articles/102.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13315651178",
+     "https://www.juu-i.owls-law.com/2023/04/2553/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202307d/",
+     "https://mysign.jp/templates/installment-payment-agreement-veterinary-clinic",
+     "https://pet-iryouhi.com/prepare/vet-bill-too-expensive",
+     "https://nihon-legal.com/saimu/column/s1132/",
+     "https://www.yotsubasougou.jp/2021/12/21/remuneration/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://erevista.co.jp/media/pet-iryouhi-haraenai/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202307d/",
+     "https://life.saisoncard.co.jp/post/c3169/",
+     "https://linecreditcorp.com/pocketmoney/blog/articles/102.html",
+     "https://www.a-tm.co.jp/top/cardloan/no-money/no-pet-treatment-costs/",
+     "https://seimei.co/article/vet-cannotgo/",
+     "https://animaldoc.jp/animal-column/animal-hospital-postpaid/",
+     "https://pi-xy.co.jp/column/4396/",
+     "https://punipunipaw.com/breeding/detail/350"
+    ],
+    "error": ""
+   }
+  },
+  "犬 フィラリア 予防薬 年間 費用": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://ppmc.co.jp/price",
+     "https://o-vet.co.jp/column/2189/",
+     "https://anicure-petclinic.com/articles/nux909h-gmc",
+     "https://kashiwanoha-vet.com/news/%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E6%A4%9C%E6%9F%BB%E3%83%BB%E4%BA%88%E9%98%B2%E8%96%AC%E3%81%AE%E6%96%99%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://pochitama.pet/list.php?category=%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E4%BA%88%E9%98%B2%E8%96%AC%EF%BC%88%E7%8A%AC%EF%BC%89",
+     "https://m-petclinic.com/fee/",
+     "https://konan-ahg.jp/%E8%A8%BA%E7%99%82%E6%96%99%E9%87%91/%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E7%97%87%E4%BA%88%E9%98%B2%E8%96%AC%E6%96%99%E9%87%91/",
+     "https://esse-animal-cl.com/blog/symptom/%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%80%81%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E4%BA%88%E9%98%B2%E8%96%AC%E3%81%AE%E6%96%99%E9%87%91%E3%80%80%E3%80%8A%E5%90%B9%E7%94%B0%E5%B8%82%E3%80%80es/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://inunavi.plan-b.co.jp/filariasis_injection/",
+     "https://petdock.jp/column/prevention/dog-filaria-2026",
+     "https://www.petdock.jp/column/prevention/filaria-medicine-comparison",
+     "https://coco-stores.jp/archives/235480",
+     "https://www.dogoo.com/toukou/dogqa/faq_log/20010850.htm",
+     "https://o-vet.co.jp/column/2189/",
+     "https://wanwanmedia.com/inu-filaria-nomi-madani-yobou-2026/",
+     "https://konan-ahg.jp/%E8%A8%BA%E7%99%82%E6%96%99%E9%87%91/%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E7%97%87%E4%BA%88%E9%98%B2%E8%96%AC%E6%96%99%E9%87%91/",
+     "https://pet-life-lab.com/comparison-cost-dog/"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 選び方 初めて": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://takehara-vet.co.jp/blog/1265/",
+     "https://ace-ah.com/2025/10/06/10430/",
+     "https://wanko.peace-winds.org/journal/47679",
+     "https://minami-ah.net/column/20260518/",
+     "https://www.min-breeder.com/magazine/63",
+     "http://www.matsunami.co.jp/fan_contents_04.html",
+     "https://note.com/jolly_gerbil547/n/n1c50e413f44c",
+     "https://www.pfirst.jp/contents_reading65.html",
+     "https://www.hash-hugq.com/dog/article/detail/id=5992"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanko.peace-winds.org/journal/47679",
+     "https://www.breeders.jp/info/distinguish/",
+     "https://www.pfirst.jp/contents_reading65.html",
+     "https://takehara-vet.co.jp/blog/1265/",
+     "https://www.koneko-breeder.com/magazine/11787",
+     "https://hs-gac.jp/info/life-support/choosing-veterinary-clinic/",
+     "https://mogupet.com/column/99d1c74b-66b1-4672-b535-f462af9e36b2",
+     "https://minami-ah.net/column/20260518/",
+     "https://yamabiko-dobutsubyoin.com/column/b5e00a0f-d20a-4bcd-acc1-1d2b1044d5ab"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 良い病院 見分け方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanchan.jp/living/detail/35003",
+     "https://www.breeders.jp/info/distinguish/",
+     "https://magazine.cainz.com/wanqol/articles/animal_hospital_06",
+     "https://sakura-shirai-ah.com/blog/%E3%80%90%E7%8F%BE%E5%BD%B9%E7%8D%A3%E5%8C%BB%E5%B8%AB%E3%81%8C%E4%BC%9D%E3%81%88%E3%82%8B%E3%80%91%E8%89%AF%E3%81%84%E7%97%85%E9%99%A2%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BC%81/",
+     "https://petdock.jp/column/hospital-guide/vet-review-guide",
+     "https://ace-ah.com/2025/10/06/10430/",
+     "https://econico.blog/hospital-choice",
+     "https://zeromedical.tv/zeromedical-web/blog/how-to-choose-animal-hospital/",
+     "https://aikenonline.jp/article/6720/",
+     "https://gentosha-go.com/articles/-/2368",
+     "https://www.pfirst.jp/contents_reading65.html",
+     "http://www.matsunami.co.jp/fan_contents_04.html",
+     "https://hokusetsusuita.com/media/20260118/",
+     "https://hayashivet.com/news/post/881/",
+     "https://dogtoclass.com/?original=%E6%84%9B%E7%8A%AC%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AB%E9%81%B8%E3%81%B6%E5%8B%95%E7%89%A9%E7%97%85%E9%99%A2"
+    ],
+    "error": ""
+   }
+  },
+  "かかりつけ 動物病院 決め方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://takehara-vet.co.jp/blog/1265/",
+     "https://www.min-breeder.com/magazine/63",
+     "https://www.meguro-ah.com/point-tokyo-animalhospital.html",
+     "https://wanko.peace-winds.org/journal/47679",
+     "https://www.youtube.com/watch?v=R90lBoGuZPY",
+     "https://magazine.cainz.com/wanqol/articles/animal_hospital_06",
+     "https://tsurumaki-ah.com/blog/2026/04/14/dog-cat-family-doctor-specialist-hospital/",
+     "https://minami-ah.net/column/20260518/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanko.peace-winds.org/journal/47679",
+     "https://magazine.cainz.com/wanqol/articles/animal_hospital_06",
+     "https://www.koneko-breeder.com/magazine/11787",
+     "https://www.min-petlife.com/60746",
+     "https://www.min-breeder.com/magazine/63",
+     "https://www.homemate-research-pet-clinic.com/useful/14027_anima_002/",
+     "https://pet-komachi.com/petinsurance/allpetinsurance/animalhospital-001.html",
+     "https://tsurumaki-ah.com/blog/2026/04/14/dog-cat-family-doctor-specialist-hospital/",
+     "https://animaldoc.jp/animal-column/how-to-choose-animalhospital/"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 大きい 小さい 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.anicom-sompo.co.jp/doubutsu_pedia/node/1418",
+     "https://wanko.peace-winds.org/journal/47679",
+     "https://www.pet-hospital.org/tisiki-007.htm",
+     "https://talkvets.jp/%E7%8D%A3%E5%8C%BB%E3%81%95%E3%82%93%E3%81%AE%E3%82%B3%E3%83%A9%E3%83%A0%EF%BC%8871%EF%BC%89%E7%8D%A3%E5%8C%BB%E3%81%95%E3%82%93%E3%81%8C%E8%A7%A3%E8%AA%AC%E3%81%99%E3%82%8B%E3%82%AF%E3%83%AA%E3%83%8B/",
+     "https://crea-ac.com/2021-12-14/",
+     "https://note.com/vetinchibacity/n/n4103907ae8c8",
+     "https://note.com/vet_tey/n/n00cdab055ec9",
+     "https://animalhospital.co.jp/news/3525/",
+     "https://otaka.21ah.jp/_cms/369/",
+     "https://cat.benesse.ne.jp/withcat/content/?id=177278",
+     "https://dog.benesse.ne.jp/withdog/content/?id=47182"
+    ],
+    "error": ""
+   }
+  },
+  "猫 専門 動物病院 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kawawa-ah.com/cfc.html",
+     "https://www.jsfm-catfriendly.com/cfc/",
+     "https://tsujido-catsanddogs.com/cat-friendly/",
+     "https://www.shirasagi-ah.com/cat-friendly/",
+     "https://www.s-leash-ah.com/cfc/",
+     "https://petlife.asia/feature_t/cat-hospital/",
+     "https://www.jsfm-catfriendly.com/cfc/hospital.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.koneko-breeder.com/magazine/11787",
+     "https://www.katsushika-jikan.com/request/medical/hospital_detail/1824/",
+     "https://nekocafekibunya.com/blog/9576/",
+     "https://www.kitanosato.com/about/cfc/",
+     "https://boss-doubutsu.com/15878649852047",
+     "https://ivy-pet.com/catfriendly/",
+     "https://tsujido-catsanddogs.com/cat-friendly/",
+     "https://heart-one.net/clinic/cat-friendly/",
+     "https://www.hachioji-amc.com/ads02.html",
+     "https://wanko.peace-winds.org/journal/47679",
+     "https://nekochan.jp/column/article/46333",
+     "https://neko-222.jp/blog/how-to-choose-animal-hospitals-and-good-how-to-get-along/",
+     "https://www.hash-hugq.com/cat/article/detail/id=6651",
+     "https://blog.harutsumu.net/2026/08/10/%E7%8C%AB%E3%82%92%E5%8B%95%E7%89%A9%E7%97%85%E9%99%A2%E3%81%AB%E9%80%A3%E3%82%8C%E3%81%A6%E8%A1%8C%E3%81%8F%E5%89%8D%E3%81%AB%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%8D%E3%81%9F%E3%81%84%E3%81%93/",
+     "https://withpety.com/withpetyclub/detail.php?kid=1971&a8=niZoXihHJdaomgRE7NaL7ZgggTf-ufzReNugFKTyKG.HJdZiuduH02ZHIYpEzEQaPGCYReZAPiZoWs00000016494001",
+     "https://minami-ah.net/column/20260227/",
+     "https://www.idrugstore.jp/pet/article/128"
+    ],
+    "error": ""
+   }
+  },
+  "セカンドオピニオン 動物病院 やり方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://info-dpc.net/clinic/second/5186/",
+     "https://ppmc.co.jp/services/second_opinion",
+     "https://minami-ah.net/column/20251018/",
+     "https://note.com/grand_wan_nyan/n/n9aa87d5abde0"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://necobiyori.jp/article/16726/",
+     "https://jarvis.anicom-med.co.jp/second-opinion/",
+     "https://nekocafekibunya.com/blog/8855/",
+     "https://oshita-ah.com/column/145.html/",
+     "https://makurazaki-ah.com/second-opinion/",
+     "https://www.tsutsui-ah.com/secondopinion/",
+     "https://minami-ah.net/column/20251018/",
+     "https://clover-animalhos.info/allblog/blog/381/",
+     "https://animaldoc.jp/animal-column/veterinary-clinic-secondopinion/",
+     "https://cheriee.jp/articles/30763/",
+     "https://www.wepet.jp/health/7308/",
+     "https://pigeon-ah.com/cure/secondopinion/",
+     "https://hokuou-animal.com/second-opinion/",
+     "https://iris-vethosp.com/column/dog-cat-second-opinion/"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 説明 丁寧 見極め": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://animal.doctorsfile.jp/ah/40791/hr/1/",
+     "https://gentosha-go.com/articles/-/2368",
+     "https://www.anicom-sompo.co.jp/doubutsu_pedia/node/1418",
+     "https://sakura-shirai-ah.com/blog/%E3%80%90%E7%8F%BE%E5%BD%B9%E7%8D%A3%E5%8C%BB%E5%B8%AB%E3%81%8C%E4%BC%9D%E3%81%88%E3%82%8B%E3%80%91%E8%89%AF%E3%81%84%E7%97%85%E9%99%A2%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BC%81/",
+     "https://hayashivet.com/news/post/881/",
+     "https://aikenonline.jp/article/6720/",
+     "https://animaldoc.jp/animal-column/how-to-choose-animalhospital/",
+     "https://takehara-vet.co.jp/blog/blog01/555/",
+     "https://www.homemate-research-pet-clinic.com/useful/14056_anima_031/",
+     "https://www.hikarigaoka.net/dog-cat-second-opinion",
+     "https://minami-ah.net/column/20251018/"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 口コミ 信用できる": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://petdock.jp/column/hospital-guide/vet-review-guide",
+     "https://ai.jfsc.jp/research/tokyo-doubutsu-reviews/",
+     "https://www.wanqol.com/articles/animal_hospital_06",
+     "https://sakura-shirai-ah.com/blog/%E3%80%90%E7%8F%BE%E5%BD%B9%E7%8D%A3%E5%8C%BB%E5%B8%AB%E3%81%8C%E4%BC%9D%E3%81%88%E3%82%8B%E3%80%91%E8%89%AF%E3%81%84%E7%97%85%E9%99%A2%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BC%81/",
+     "https://nippon-insurance.com/pets/column/column_003.html",
+     "https://mogupet.com/column/99d1c74b-66b1-4672-b535-f462af9e36b2",
+     "https://hokusetsusuita.com/media/20260118/",
+     "https://animal-hospital-damage.xyz/animal_hospital_reputation_good_is_danger/"
+    ],
+    "error": ""
+   }
+  },
+  "二次診療 動物病院 紹介 とは": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://trva.jp/medical/",
+     "https://otaka.21ah.jp/_cms/369/",
+     "https://dog.benesse.ne.jp/withdog/content/?id=47182",
+     "https://cat.benesse.ne.jp/withcat/content/?id=177278",
+     "https://ameblo.jp/matsumoto-sac/entry-12017356604.html",
+     "https://wanko.peace-winds.org/journal/51877",
+     "http://ds22v.cc.yamaguchi-u.ac.jp/~yuamec1/veterinary/howto.php"
+    ],
+    "error": ""
+   }
+  },
+  "動物病院 引っ越し 転院 方法": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kurashi-pet.jp/articles/vet-moving-transfer/",
+     "https://www.saitama-vma.org/topics/%E9%81%8E%E5%8E%BB%E3%81%A8%E6%9C%AA%E6%9D%A5%E3%82%92%E3%81%A4%E3%81%AA%E3%81%90%E3%80%81%E3%81%8B%E3%81%91%E3%81%8C%E3%81%88%E3%81%AE%E3%81%AA%E3%81%84%E6%83%85%E5%A0%B1-%EF%BD%9E%E5%BC%95%E3%81%A3/",
+     "https://www.apamanshop.com/column/post-37184/",
+     "https://3shisuimei.com/4295.html",
+     "https://home.osakagas.co.jp/column/moving/movings-todo/pet-address-change/",
+     "https://hikkoshi.suumo.jp/oyakudachi/3215.html",
+     "https://www.city.machida.tokyo.jp/iryo/hokenjo/pet/touroku_cyuusya/touroku/hikkoshi.html"
+    ],
+    "error": ""
+   }
+  },
+  "子犬 ワクチン スケジュール": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://takatsuki-your-ah.net/vaccination_arrangements/",
+     "https://coo-premium-online.com/shop/pages/colum4_2.aspx",
+     "https://haretahi.jp/2021/03/294/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202212c/",
+     "https://kendoc.jp/blog/department/%E4%BA%88%E9%98%B2/578/",
+     "https://kendoc.jp/blog/department/%E4%BA%88%E9%98%B2/578/",
+     "https://ani-well.com/mgPwHvNH/ggRU2ICe",
+     "https://akebonoac.jp/vaccine/",
+     "https://hoshino-vet.com/puppy-prevention/",
+     "https://yuzunokiah.jp/dog/",
+     "https://hoshino-vet.com/puppy-prevention/",
+     "https://wanko.peace-winds.org/journal/36781"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://vet.saisoncard.co.jp/lp/blog/dog01",
+     "https://inunavi.plan-b.co.jp/puppy_vaccination/",
+     "https://wanko.peace-winds.org/journal/36781",
+     "https://o-vet.co.jp/column/1857/",
+     "https://www.min-breeder.com/magazine/15128",
+     "https://www.sbipet-ssi.co.jp/column/dog/D0101.html",
+     "https://www.kayama-ah.jp/17393397480651",
+     "https://coo-premium-online.com/shop/pages/colum4_2.aspx",
+     "https://anicure-petclinic.com/articles/by3b2nqdv"
+    ],
+    "error": ""
+   }
+  },
+  "子猫 ワクチン 時期": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hiiragi-ah.com/column/%E5%AD%90%E7%8C%AB%E3%81%AE%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AF%E3%81%84%E3%81%A4%E6%89%93%E3%81%A4%EF%BC%9F%E6%8E%A5%E7%A8%AE%E6%99%82%E6%9C%9F%E3%83%BB%E5%9B%9E%E6%95%B0%E3%83%BB3%E7%A8%AE/",
+     "https://ani-well.com/mgPwHvNH/Bp399BzH",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGh9fcYpC1tDpoBN3er4CqaNJOU_3ejm3ki0ia18-5nUBPMIUy0oHpXwWgnbAIy1fAgVveeNifIeW9HGZy8HXq_FbcQB23GbTAPIy3x3w7vecyt2iF9DsXoQHTh",
+     "https://www.royalcanin.com/jp/cats/kitten/kitten-vaccinations",
+     "https://www.jbvp.org/family/cat/care/13.html",
+     "https://with-animal-hospital.com/medical/cat/c01/",
+     "https://www.kayama-ah.jp/17393418393574",
+     "https://www.sasaki-ah.com/yobou/vaccine_cat.html",
+     "https://i-animalclinic.org/allblog/blog/629/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ipet-ins.com/media/37461/",
+     "https://rabo.cat/media/2023/05/16/vaccine/",
+     "https://www.hills.co.jp/cat-care/healthcare/kitten-vaccinations-and-shots",
+     "https://www.kayama-ah.jp/17221779525966",
+     "https://www.kayama-ah.jp/17393418393574",
+     "https://i-animalclinic.org/allblog/blog/629/",
+     "https://www.tanoue-vet.com/vaccine.html",
+     "https://with-animal-hospital.com/medical/cat/c01/",
+     "https://nekono-clinic-urawa.com/%E5%AD%90%E7%8C%AB%E3%81%AE%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E6%8E%A5%E7%A8%AE%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/"
+    ],
+    "error": ""
+   }
+  },
+  "混合ワクチン 種類 違い": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.wakuchin.net/vaccine/dpt-ipv.html",
+     "https://ppmc.co.jp/services/vaccines",
+     "https://toyosu.child-clinic.or.jp/announcements/11295/",
+     "https://www.know-vpd.jp/children/va_dpt.htm",
+     "https://www.city.edogawa.tokyo.jp/e054/kenko/iryo/yobosesshu/dptipv.html",
+     "https://midori-ped-ent.com/dpt-ipv/",
+     "https://aquakids.jp/blog/dt%EF%BC%88%E4%BA%8C%E7%A8%AE%E6%B7%B7%E5%90%88%EF%BC%89%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6",
+     "https://raha-ah.com/column/%E7%8A%AC%E3%81%AE%E6%B7%B7%E5%90%88%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%80%815%E7%A8%AE%E3%83%BB6%E7%A8%AE%E3%83%BB8%E7%A8%AE%E3%83%BB10%E7%A8%AE%E3%81%A9%E3%82%8C%E3%82%92%E9%81%B8%E3%81%B6/",
+     "https://hoshino-vet.com/combination-vaccine/",
+     "https://www.global-vet.jp/shop/pages/column-dog-vaccination.aspx",
+     "https://takatsuki-your-ah.net/canine_vaccination_program/",
+     "https://jinsai-pc.com/%E7%8A%AC%E3%81%AE%E6%B7%B7%E5%90%88%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%80%80%EF%BC%96%E7%A8%AE%E3%81%A810%E7%A8%AE%E3%81%AF%E3%81%A9%E3%81%86%E3%81%A1%E3%81%8C%E3%81%86%E3%81%AE%EF%BC%9F/",
+     "https://kodaira.anihoc.com/column/416/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pet-tabi.jp/weblog/inu-combination-vaccine/",
+     "https://ishca.jp/2026/05/16/dog-vaccine-types/",
+     "https://petdock.jp/column/prevention/dog-vaccine-types",
+     "https://suwa-ah.com/2020/09/01/vaccine/",
+     "https://raha-ah.com/column/%E7%8A%AC%E3%81%AE%E6%B7%B7%E5%90%88%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%80%815%E7%A8%AE%E3%83%BB6%E7%A8%AE%E3%83%BB8%E7%A8%AE%E3%83%BB10%E7%A8%AE%E3%81%A9%E3%82%8C%E3%82%92%E9%81%B8%E3%81%B6/",
+     "https://dogfood-study.com/dog/vaccine.html",
+     "https://inumame.net/health/dog-mixed-vaccine-guide/",
+     "https://bowmew-ah.com/blog/dog-vaccine-types",
+     "https://hoshino-vet.com/combination-vaccine/",
+     "https://cat.flowens.jp/blog/neko-vaccine-shurui",
+     "https://ppmc.co.jp/services/vaccines",
+     "https://cross-animal.jp/column_01/cat-vaccine-types-indoor/",
+     "https://www.nukumori-amc.com/examination/vaccine2.html",
+     "http://miyagawa-no-hotori-ah.com/cat-vaccine/",
+     "https://cosmos-ac.com/news/p533/",
+     "https://www.sasaki-ah.com/yobou/vaccine_cat.html",
+     "https://yamec.net/vaccination.html",
+     "https://www.kinnotokianimalclinic.com/blog/690"
+    ],
+    "error": ""
+   }
+  },
+  "狂犬病 予防接種 いつ": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hakata-dcm.jp/news/%E7%8B%82%E7%8A%AC%E7%97%85%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AE%E6%B3%A8%E5%B0%84%E6%99%82%E6%9C%9F%E3%81%A8%E5%A4%A7%E5%88%87%E3%81%95/",
+     "https://www.hokeniryo.metro.tokyo.lg.jp/kankyo/aigo/doubutsu_oshirase/rvac23",
+     "https://www.mhlw.go.jp/content/10906000/001594793.pdf",
+     "https://family-vets.jp/column/%E4%BB%A4%E5%92%8C7%E5%B9%B4%E5%BA%A6%E3%81%AE%E7%8B%82%E7%8A%AC%E7%97%85%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%E3%81%84%E3%81%A4%E3%81%BE%E3%81%A7%EF%BC%9F/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hokeniryo.metro.tokyo.lg.jp/kankyo/aigo/doubutsu_oshirase/rvac23",
+     "https://www.city.katsushika.lg.jp/kurashi/1003399/1003401/1029418/1029439/1003501.html",
+     "https://www.city.takasaki.gunma.jp/page/2740.html",
+     "https://www.city.kobe.lg.jp/a84140/kenko/health/hygiene/animal/yoboucyusya/index.html",
+     "https://www.city.yamato.lg.jp/gyosei/soshik/15/ikimono/pet/6301.html",
+     "https://www.city.fujisawa.kanagawa.jp/seiei/kurashi/dobutsu/inuneko/tourokucyuusya.html",
+     "https://news.yahoo.co.jp/articles/4885e9ec9d76959f6f914ea955cd72ad0623fae5",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou/rabies_qa.html"
+    ],
+    "error": ""
+   }
+  },
+  "ワクチン 副作用 症状": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://id-info.jihs.go.jp/niid/ja/typhi-m/iasr-reference/10522-497r05.html",
+     "https://www.mhlw.go.jp/file/06-Seisakujouhou-10900000-Kenkoukyoku/0000167047.pdf",
+     "https://www.pref.kanagawa.jp/docs/ga4/covid19/fukuhannou-kanagawa.html",
+     "https://www.city.kitakyushu.lg.jp/contents/k334_00054.html",
+     "https://www.vaccine4all.jp/news-detail.php?npage=3&nid=105",
+     "https://www.city.sapporo.jp/hokenjo/f1kansen/covid19_vaccine_fukuhannou.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.cov19-vaccine.mhlw.go.jp/qa/0002.html",
+     "https://www.cov19-vaccine.mhlw.go.jp/qa/0005.html",
+     "https://www.city.kitakyushu.lg.jp/contents/k334_00054.html",
+     "https://anamne.com/covid19-vaccination-sideeffect-fever/",
+     "https://www.vaccine4all.jp/news-detail.php?npage=3&nid=105"
+    ],
+    "error": ""
+   }
+  },
+  "室内飼い 猫 ワクチン 必要": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.anicom-sompo.co.jp/nekonoshiori/708.html",
+     "https://www.nihonpet.co.jp/cat/health/cat-vaccination.html",
+     "https://virbac-services.jp/pet-qa/cat-vaccine",
+     "https://www.pfirst.jp/contents_counselling153.html",
+     "https://www.koneko-breeder.com/magazine/11898",
+     "https://petdock.jp/column/prevention/cat-vaccine-schedule",
+     "https://kodaira.anihoc.com/column/634/",
+     "https://inumame.net/cat/cat-vaccine-annual-necessity-2026/",
+     "https://nekoazarasi.com/archives/columns/%E3%80%90%E7%8D%A3%E5%8C%BB%E5%B8%AB%E7%9B%A3%E4%BF%AE%E3%80%91%E7%8C%AB%E3%81%AE%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E6%8E%A5%E7%A8%AE%E3%81%AF%E6%9C%AC%E5%BD%93%E3%81%AB%E5%BF%85%E8%A6%81%EF%BC%9F",
+     "https://cat.flowens.jp/blog/neko-vaccine-shurui",
+     "https://ojiyama.jp/2024/05/07/292/",
+     "https://queue-endosurgcenter.jp/exam/vacprogram.html",
+     "https://www.tokiwa-v.com/tokiwa/%E7%8C%AB%E3%81%AE%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://jp.unicharmpet.com/ja/web-magazine/cat-000025.html",
+     "https://www.kinnotokianimalclinic.com/blog/690"
+    ],
+    "error": ""
+   }
+  },
+  "ノミダニ 予防 いつから": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://oshita-ah.com/column/148.html/",
+     "https://www.sakai-ah.com/information/198/",
+     "https://daktari-machida.com/prevention/%E3%83%8E%E3%83%9F%E3%83%BB%E3%83%9E%E3%83%80%E3%83%8B%E3%81%AE%E4%BA%88%E9%98%B2%E3%81%AF%E3%81%84%E3%81%A4%E3%81%BE%E3%81%A7%E3%82%84%E3%82%8C%E3%81%B0%E3%81%84%E3%81%84%E3%81%AE%EF%BC%9F",
+     "https://pia-animalmedicalcenter.com/%E3%80%90%E3%83%8E%E3%83%9F%E3%83%BB%E3%83%80%E3%83%8B%E3%81%AE%E5%AD%A3%E7%AF%80%E5%88%B0%E6%9D%A5%EF%BC%81%E5%A4%A7%E5%88%87%E3%81%AA%E3%82%8F%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%E3%83%BB%E3%81%AD/",
+     "https://teamhope-f.jp/dog/cr/3.html",
+     "https://www.kanakubo-vet.com/column/2025/09/post-16.html",
+     "https://family-ah.jp/preventive/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://teamhope-f.jp/dog/cr/3.html",
+     "https://felice-pet.jp/240328-2/",
+     "https://punipunipaw.com/breeding/detail/508",
+     "https://aokijima-ah.jp/archives/1032/",
+     "https://family-ah.jp/preventive/",
+     "https://maekawaah.com/flea-tick/",
+     "https://fujimidai-ac.com/column/flea-meds-for-kittens-guide",
+     "https://pochitama.pet/wp/started_fleaandtickmedicine_fordogs",
+     "https://biodiversityexplorer.org/column/heartworm/when_to_start_prevention/",
+     "https://petdock.jp/column/prevention/dog-flea-tick-prevention",
+     "https://higashimurayama-ah.jp/tickflea/",
+     "https://wanwanmedia.com/inu-filaria-nomi-madani-yobou-2026/",
+     "https://www.sakai-ah.com/information/198/",
+     "https://umezono-ah.com/case/vaccine/entry-82.html",
+     "https://www.oojima-ac.com/post/%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E3%83%BB%E3%83%8E%E3%83%9F%E3%83%80%E3%83%8B%E4%BA%88%E9%98%B2%E3%81%8C%E5%A7%8B%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%99"
+    ],
+    "error": ""
+   }
+  },
+  "フィラリア 予防 時期 いつまで": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pochitama.pet/wp/ds3",
+     "https://family-vets.jp/column/2026filaria/",
+     "https://www.miya-petclinic.com/2025/04/16/2025filaria/",
+     "https://hayama-pc.com/blog/5954",
+     "https://samukawa.bliss-pc.com/%E6%B8%A9%E6%9A%96%E5%8C%96%E3%81%A7%E5%A4%89%E3%82%8F%E3%82%8B%EF%BC%81%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E4%BA%88%E9%98%B2%E3%81%AF%E3%81%84%E3%81%A4%E3%81%BE%E3%81%A7%EF%BC%9F/",
+     "https://filaria.jp/html/hdu/kanto/index.html",
+     "https://sano-ah.com/info/3000/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mona-oh.co.jp/column/firaria1/",
+     "https://higatoyo-vet.com/heartworm/",
+     "https://www.colombo-ah.com/firariayobou.html",
+     "https://jinbei-ah.com/blog/%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E3%81%AE%E4%BA%88%E9%98%B2%E3%81%AF%EF%BC%91%E5%B9%B4%E3%81%AE%E6%9C%80%E5%BE%8C%E3%81%8C%E5%A4%A7%E4%BA%8B%E3%81%A7%E3%81%99/",
+     "https://www.kaji-ac.com/fila/",
+     "https://www.emina-vet.com/article/15917626.html",
+     "https://bloom-ah2024.com/blog/280/",
+     "https://momizi-ah.com/blog/1545",
+     "https://pochitama.pet/wp/ds3_kinki"
+    ],
+    "error": ""
+   }
+  },
+  "犬 ワクチン 毎年 必要か": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.dogoo.com/toukou/dogqa/faq_log/20008694.htm",
+     "https://kurashi-pet.jp/articles/dog-vaccine-schedule/",
+     "https://vaccicheck.jp/lp/",
+     "https://queue-endosurgcenter.jp/exam/vacprogram.html",
+     "https://hirai-vet.com/blog_articles/vaccine.html",
+     "https://okabe-ah.com/archives/642",
+     "https://www.yatsuginooka-ah.com/information/482/",
+     "https://www.kugayama-vmc.com/%E4%BA%88%E9%98%B2%E3%83%BB%E5%81%A5%E8%A8%BA/298",
+     "https://petsitter.365keikaku.com/dogvaccine/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202301a/",
+     "https://www.daktari.gr.jp/medical-information2/general-and-preventive-medicine/combination-vaccine/",
+     "https://www.nihonpet.co.jp/dog/health/dog-vaccination.html",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202302c/",
+     "https://magazine.cainz.com/wanqol/articles/dog_vaccination",
+     "https://www.min-breeder.com/magazine/15097",
+     "https://hara-ah.org/2026/06/02/%E7%8A%AC%E3%81%AE%E3%83%AF%E3%82%AF%E3%83%81%E3%83%B3%E3%81%AF%E6%AF%8E%E5%B9%B4%E6%89%93%E3%81%9F%E3%81%AA%E3%81%8F%E3%81%A6%E3%82%82%E3%81%84%E3%81%84%E3%81%A3%E3%81%A6%E6%9C%AC%E5%BD%93%EF%BC%9F/",
+     "https://www.mhlw.go.jp/bunya/kenkou/kekkaku-kansenshou10/07.html"
+    ],
+    "error": ""
+   }
+  },
+  "去勢 避妊 時期 いつ": {
+   "group": "予防とワクチン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hospital.anicom-med.co.jp/atsuta/medical/neuter-and-spay/",
+     "https://akita-yobo-ah.com/2025/05/21/%E3%81%BE%E3%81%A0%E6%97%A9%E3%81%84%E3%81%9D%E3%82%8C%E3%81%A8%E3%82%82%E9%81%85%E3%81%84%E6%89%8B%E8%A1%93%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8/",
+     "https://rururu-animal.com/post-4497/",
+     "https://moriyama-vet.jp/season/",
+     "https://www.miki-vet.com/2024/07/10/894/",
+     "https://www.owl-vet.com/%E4%BA%88%E9%98%B2-%E6%89%8B%E8%A1%93-%E7%97%85%E6%B0%97/%E9%81%BF%E5%A6%8A-%E5%8E%BB%E5%8B%A2%E6%89%8B%E8%A1%93/",
+     "https://oshita-ah.com/column/209.html/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://virbac-services.jp/pet-qa/dog-contraception-castration-season",
+     "https://virbac-services.jp/pet-qa/cat-contraception-castration-season",
+     "https://www.kayama-ah.jp/14997362995751",
+     "https://www.cuddle-ah.jp/437/",
+     "https://hisada-ah-kyoto.jp/neutering/",
+     "https://oshita-ah.com/column/209.html/",
+     "https://nagawaah-vet.com/column/dog-cat-neuter-spay-surgery/",
+     "https://kokubunjiheartanimal.com/blog/%E7%8A%AC%E3%83%BB%E7%8C%AB%E3%81%AE%E9%81%BF%E5%A6%8A%E3%83%BB%E5%8E%BB%E5%8B%A2%E6%89%8B%E8%A1%93%EF%BD%9C%E9%81%A9%E5%88%87%E3%81%AA%E6%99%82%E6%9C%9F%E3%81%A8%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/",
+     "https://www.owl-vet.com/%E4%BA%88%E9%98%B2-%E6%89%8B%E8%A1%93-%E7%97%85%E6%B0%97/%E9%81%BF%E5%A6%8A-%E5%8E%BB%E5%8B%A2%E6%89%8B%E8%A1%93/"
+    ],
+    "error": ""
+   }
+  },
+  "犬 夜間 急に 吐く": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.anicom-sompo.co.jp/inu/1458.html",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202501a/",
+     "https://www.au-sonpo.co.jp/pc/pet-dog/column/post-2.html",
+     "https://www.green-dog.com/feature/dog/life/12226.html",
+     "https://koshigayavet.jp/wp/blog/1787/",
+     "https://akkh-vmc.com/blog/post-389/",
+     "https://jp.unicharmpet.com/ja/web-magazine/dog-000042.html",
+     "https://tsurumaki-ah.com/blog/2025/02/25/dog-vomiting-diarrhea-emergency/",
+     "https://takatsuki-your-ah.net/dog_cat_vomit/",
+     "https://wanko.peace-winds.org/journal/28321",
+     "https://www.ipet-ins.com/media/21542/",
+     "https://www.pfirst.jp/contents_reading86.html",
+     "https://hanareyama-ah.com/column/haku/",
+     "https://kodaira.anihoc.com/column/499/",
+     "https://mitaka-marron.com/trivia/detail/20250807115700/",
+     "https://yokohama.anihoc.com/column/%E7%8A%AC%E3%81%AE%E5%98%94%E5%90%90%EF%BD%9C%E8%A6%8B%E9%80%83%E3%81%97%E3%81%A6%E3%81%AF%E3%81%84%E3%81%91%E3%81%AA%E3%81%84%E3%82%B5%E3%82%A4%E3%83%B3%E3%81%A8%E6%96%B0%E6%A8%AA%E6%B5%9C%E7%97%85/"
+    ],
+    "error": ""
+   }
+  },
+  "猫 夜中 ぐったり 病院": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.nagahara-ah.com/column/dog-cat-after-hours-emergency-care/",
+     "https://nekocafekibunya.com/blog/9558/",
+     "https://yonekawa-ah.jp/column/4fbb3d45-f15a-4350-bd0a-7523134a8d45",
+     "https://cat.benesse.ne.jp/withcat/content/?id=177219",
+     "https://cross-animal.jp/column_01/cat-night-emergency-signs/",
+     "https://nekochan.jp/column/article/43259",
+     "https://www.kayama-ah.jp/17635166065459"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pshoken.co.jp/note_cat/cat_symptom/case022.html",
+     "https://o-vet.co.jp/column/1810/",
+     "https://www.animal-hospital.jp/blog/1075",
+     "https://fujimidai-ac.com/column/cat-lethargy-causes",
+     "https://akkh-vmc.com/blog/post-932/",
+     "https://www.matsunami-shop.com/column/cats-disease/",
+     "https://toda-ah.net/2026/05/06/%E7%8C%AB%E3%81%8C%E3%81%90%E3%81%A3%E3%81%9F%E3%82%8A%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B-%E6%A7%98%E5%AD%90%E8%A6%8B%E5%8E%B3%E7%A6%81%EF%BC%81%E3%81%99%E3%81%90%E3%81%AB%E7%97%85%E9%99%A2/",
+     "https://koduka-ah.com/2026/01/09/%E3%80%90%E7%8C%AB%E3%81%AE%E5%85%83%E6%B0%97%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%8D%E3%80%91%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E5%8E%9F%E5%9B%A0%E3%81%8B%E3%82%89%E9%87%8D%E5%A4%A7%E3%81%AA/",
+     "https://mc.aeonpet.com/makuharishin/er/",
+     "https://trva.jp/emergency/",
+     "https://lifewithpet.net/"
+    ],
+    "error": ""
+   }
+  },
+  "犬 誤飲 すぐ 病院": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.youtube.com/watch?v=q-y6SpYSwfs",
+     "https://libeanimal-clinic-osaka.com/column/Ep6awlCr",
+     "https://www.ikeda-vet.jp/seijo/case/accidental-ingestion/",
+     "https://www.lizaniho.jp/emetic",
+     "https://takatsuki-your-ah.net/wrong_eating/",
+     "https://queue-endosurgcenter.jp/column/emesis.html",
+     "https://www.ipet-ins.com/media/39108/",
+     "https://www.pet-hospital.org/owner/column/disease/03.html",
+     "https://kodaira.anihoc.com/column/414/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wanchan.jp/column/detail/62291",
+     "https://www.au-sonpo.co.jp/pc/pet-dog/column/post-2.html",
+     "https://www.anicom-sompo.co.jp/doubutsu_pedia/node/1347",
+     "https://www.pfirst.jp/contents_reading104.html",
+     "https://www.min-breeder.com/magazine/14821",
+     "https://anegasaki-ah.jp/column/P3SFShq2Hbkq/",
+     "https://akkh-vmc.com/blog/post-653/",
+     "https://dogspecialist-navi.com/column/102/",
+     "https://ruana-ah.com/blog/1424/",
+     "https://uchihap-vetnote.ipet-ins.com/dog/diseases/accidental-ingestion",
+     "https://www.irisplaza.co.jp/media/A13937687454",
+     "https://www.yoshida-ah.jp/column/8446/",
+     "https://jamc.co.jp/dog_colum/%E7%8A%AC%E3%81%8C%E7%95%B0%E7%89%A9%E3%82%92%E9%A3%B2%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0%E6%99%82/",
+     "https://www.houndcom.com/blog/archives/6336",
+     "https://o-vet.co.jp/column/1695/",
+     "https://hotto.me/10095",
+     "https://www.himedou.net/2025/08/22/715/"
+    ],
+    "error": ""
+   }
+  },
+  "猫 痙攣 救急": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kumachan-ah.com/blog/dog-cat-first-aid/",
+     "https://www.kayama-ah.jp/17640581640781",
+     "https://cat.flowens.jp/blog/neko-keiren",
+     "https://www.s-vet.com/emergency.html",
+     "https://keihin-nightanimal.com/",
+     "https://www.jbvp.org/family/cat/care/03.html",
+     "https://hokusetsusuita.com/media/20250906/",
+     "https://toda-ah.net/2026/05/08/%E7%8C%AB%E3%81%AE%E3%81%91%E3%81%84%E3%82%8C%E3%82%93%E7%99%BA%E4%BD%9C-%E7%B7%8A%E6%80%A5%E4%BA%8B%E6%85%8B%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AB%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%84/",
+     "https://www.dr-ozawa.jp/blog/805"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://life.oricon.co.jp/rank_pet/special/cat-disease/convulsions/",
+     "https://pet-tabi.jp/weblog/rouneko-keiren/",
+     "https://hoken.kakaku.com/pet/cat_injuries/convulsions/",
+     "https://jamc.co.jp/cat_colum/512/",
+     "https://www.hs-gac.jp/medicalcare/case/dog-cat-convulsion-seizure/",
+     "https://withpety.com/dictionary/shoujyo/87.html",
+     "https://carelogy-japan.com/ja/symptoms/emergency",
+     "https://animaldoc.jp/cat-sick/cat-convulsions/",
+     "https://pochitama.pet/wp/keiren_cat",
+     "https://pshoken.co.jp/note_cat/cat_symptom/case015.html",
+     "https://www.fpc-pet.co.jp/cat/disease/367",
+     "https://petlife.asia/column/cat/cat-health82.html",
+     "https://www.dr-ozawa.jp/blog/805",
+     "https://www.hosaka-ah.co.jp/blog/department/neurology/entry-386.html",
+     "https://tateishi-ah.jp/column/dog-cat-seizures/",
+     "https://withpety.com/withpetyclub/detail.php?kid=2318",
+     "https://ohtorii-ah.com/column/cat_tenkan/",
+     "https://azabupet.jp/news/%E7%8C%AB%E3%81%AE%E5%91%BD%E3%81%AB%E9%96%A2%E3%82%8F%E3%82%8B%E7%97%85%E6%B0%97%EF%BC%81%E7%97%99%E6%94%A3%E7%99%BA%E4%BD%9C%EF%BC%81/"
+    ],
+    "error": ""
+   }
+  },
+  "夜間救急 動物病院 探し方": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.okijyu.jp/entry-blog.php?eid=189698",
+     "https://petdock.jp/column/hospital-guide/tokyo-emergency-vet",
+     "https://kvma9950.com/",
+     "https://yakan-ah-kensaku.com/",
+     "https://lifewithpet.net/",
+     "https://tvma.or.jp/owner/night/",
+     "https://inami-a-h.com/column/5c98fc49-d80a-48dd-9064-21cc188205d5",
+     "https://www.raema.or.jp/",
+     "https://trva.jp/",
+     "https://hamamatsu-aer.jp/",
+     "https://www.kobe-naec.com/"
+    ],
+    "error": ""
+   }
+  },
+  "犬 熱中症 応急処置": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://family-vets.jp/column/%E7%8A%AC%E3%81%AE%E7%86%B1%E4%B8%AD%E7%97%87%E5%AF%BE%E7%AD%96%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E7%8D%A3%E5%8C%BB%E5%B8%AB%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E4%BA%88%E9%98%B2/",
+     "https://www.petvoice.co.jp/blogs/dog_heat_stroke/",
+     "https://article.yahoo.co.jp/detail/b818ff9f43d03d18da0401b948f328e0098beb6e",
+     "https://www.tamvet2009.info/blog_detail?actual_object_id=375",
+     "https://www.yab.co.jp/jc_broadcast/210394",
+     "https://www.jcp.or.jp/akahata/topic/kurashi_katei/2514/",
+     "https://carica.saido-ps501.co.jp/blogs/yomimono/%E7%8A%AC%E3%81%A8%E7%8C%AB%E3%81%AE%E7%86%B1%E4%B8%AD%E7%97%87%E3%82%92%E9%98%B2%E3%81%90%E6%AD%A3%E3%81%97%E3%81%84%E5%AF%BE%E7%AD%96-2026-8-5",
+     "https://ameblo.jp/anicare/entry-12920373058.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.anicom-sompo.co.jp/inu/1546.html",
+     "https://www.honda.co.jp/dog/useful/heatstroke/",
+     "https://pshoken.co.jp/note_dog/disease_dog/case118.html",
+     "https://www.nihonpet.co.jp/dog/health/dog-heatstroke.html",
+     "https://hoken.rakuten.co.jp/pet/column/heatstroke/",
+     "https://tsuchiya-juui.com/column/22797",
+     "https://ikedaanihos.com/dog-heat-stroke/",
+     "https://kodaira.anihoc.com/column/510/",
+     "https://bun-pet-clinic.com/news/%E7%8A%AC%E3%81%AE%E7%86%B1%E4%B8%AD%E7%97%87%E5%AF%BE%E7%AD%96%E3%82%AC%E3%82%A4%E3%83%89%EF%BC%9A%E5%A4%8F%E3%81%AE%E5%AE%89%E5%85%A8%E3%81%AA%E9%81%8E%E3%81%94%E3%81%97%E6%96%B9%E3%81%A8%E3%82%82%E3%81%97%E3%82%82%E3%81%AE%E6%99%82%E3%81%AE%E5%AF%BE%E5%87%A6%E6%B3%95",
+     "https://www.petfamilyins.co.jp/pns/article/pf20180731/",
+     "https://o-vet.co.jp/column/2155/",
+     "https://koigakubo-animal.com/column/summer.html",
+     "https://jp.ecoflow.com/blogs/disaster-prevention/dog-heatstroke-prevention"
+    ],
+    "error": ""
+   }
+  },
+  "猫 おしっこ 出ない 救急": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://jamc.co.jp/cat_colum/cat-urinary-obstruction/",
+     "https://pet.doctors-interview.jp/treatment/5658",
+     "https://anegasaki-ah.jp/column/GUV5xsVgOJKS/",
+     "https://www.hs-gac.jp/medicalcare/case/cat-urinary-retention/",
+     "https://carelogy-japan.com/en/columns/cat-not-urinating",
+     "https://hugwell-vets.com/topics/1621/",
+     "https://www.nagahara-ah.com/column/cat-urethral-obstruction/",
+     "https://www.neko-topia.com/2025/06/09/cat-urethral-obstruction-emergency/",
+     "https://alohaohana.tv/%E7%8C%AB%E3%81%AE%E5%B0%BF%E9%81%93%E9%96%89%E5%A1%9E%E3%81%A8%E3%81%AF%EF%BC%9F%E3%81%8A%E3%81%97%E3%81%A3%E3%81%93%E3%81%8C%E5%87%BA%E3%81%AA%E3%81%84%E5%8E%9F%E5%9B%A0%E3%83%BB%E7%97%87%E7%8A%B6/",
+     "https://pshoken.co.jp/note_cat/cat_symptom/case023.html",
+     "https://www.idog.jp/blog/2024/06/23/cat-not-peeing/",
+     "https://hs-gac.jp/case/cat-urethral-obstruction/",
+     "https://anegasaki-ah.jp/column/BMzRPDGwexiG/",
+     "https://info-dpc.net/clinic/renal/5245/",
+     "https://daily-drops.com/articles/cat-cannot-pee",
+     "https://www.curefipjapan.com/post/%E7%8C%AB%E3%81%AE%E5%B0%BF%E3%81%8C%E5%87%BA%E3%81%AA%E3%81%84%E5%8E%9F%E5%9B%A0%E3%81%AF%E3%82%B9%E3%83%88%E3%83%AC%E3%82%B9%E3%81%8B%E3%82%82%EF%BC%9F",
+     "https://onepetholdings.com/column/1603/"
+    ],
+    "error": ""
+   }
+  },
+  "夜間 動物病院 電話 相談": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://minami-ah.net/column/20250806/",
+     "https://moriyama1299.com/night/",
+     "https://nara-amc.com/medical/emergency/",
+     "https://www.sapporo1299.net/",
+     "https://www.anicli24.com/",
+     "https://www.anicli24.com/",
+     "https://www.anicli24.com/lp/",
+     "https://t-agmc.com/night/",
+     "https://www.takaya-ah.com/m/medical2.html",
+     "https://kendoc.jp/news/526/",
+     "https://www.sbiprism.co.jp/hotdial24.html",
+     "https://pshoken.co.jp/summary/veterinarian_dial.html",
+     "https://hamamatsu-aer.jp/medical/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ah.aeonpet.com/sakai-yakan-emergency/",
+     "https://www.elsa-hp.com/medicalcare/nighttime/",
+     "https://www.okijyu.jp/entry-blog.php?eid=189698",
+     "https://hamamatsu-aer.jp/",
+     "https://www.pet-hospital.org/",
+     "https://www.raema.or.jp/",
+     "https://heah.jp/",
+     "https://kvma9950.com/guide/",
+     "https://www.sapporo1299.net/",
+     "https://www.omu.ac.jp/vet/vmc/nightmedical/",
+     "https://jamc.co.jp/yakan-lp/",
+     "https://veccs-yokohama.jp/",
+     "https://mc.aeonpet.com/sapporotsukisamu/er/",
+     "https://yakan-ah-kensaku.com/kanto"
+    ],
+    "error": ""
+   }
+  },
+  "犬 下痢 血便 受診 目安": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://m-mirai.jp/blogdetail?wgd=blog-49",
+     "https://hayashi-dcah.com/blog/334/",
+     "https://o-vet.co.jp/column/1439/",
+     "https://yokohama.anihoc.com/column/%E7%8A%AC%E3%81%AE%E8%A1%80%E4%BE%BF%EF%BD%9C%E8%A6%8B%E9%80%83%E3%81%97%E3%81%A6%E3%81%AF%E3%81%84%E3%81%91%E3%81%AA%E3%81%84%E3%82%B5%E3%82%A4%E3%83%B3%E3%81%A8%E6%96%B0%E6%A8%AA%E6%B5%9C%E7%97%85/",
+     "https://torea-ah.com/case/%E7%8A%AC%E3%81%AE%E4%B8%8B%E7%97%A2%E3%81%A8%E8%A1%80%E4%BE%BF%E3%80%81%E3%81%A9%E3%81%86%E8%A6%8B%E5%88%86%E3%81%91%E3%82%8B%EF%BC%9F%E7%97%87%E7%8A%B6%E5%88%A5%E3%83%BB%E5%8E%9F%E5%9B%A0%E3%81%A8/",
+     "https://nangoku-ac.com/allblog/blog/607/",
+     "https://akkh-vmc.com/blog/post-854/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.npf.co.jp/beautypro/dog/journal/333/index.html",
+     "https://petdock.jp/column/dog-health/dog-diarrhea",
+     "https://o-vet.co.jp/column/951/",
+     "https://akkh-vmc.com/blog/post-854/",
+     "https://ruana-ah.com/blog/1420/",
+     "https://kurashikiaigo.com/column/%E7%8A%AC%E3%82%84%E7%8C%AB%E3%81%8C%E4%B8%8B%E7%97%A2%E3%82%92%E3%81%97%E3%81%9F%E9%9A%9B%E3%81%AE%E7%97%85%E9%99%A2%E3%81%AB%E8%A1%8C%E3%81%8F%E3%81%B9%E3%81%8D%E3%82%BF%E3%82%A4%E3%83%9F%E3%83%B3/",
+     "https://nangoku-ac.com/allblog/blog/607/",
+     "https://nagawaah-vet.com/column/bloody-stool-dog/",
+     "https://torea-ah.com/case/%E7%8A%AC%E3%81%AE%E4%B8%8B%E7%97%A2%E3%81%A8%E8%A1%80%E4%BE%BF%E3%80%81%E3%81%A9%E3%81%86%E8%A6%8B%E5%88%86%E3%81%91%E3%82%8B%EF%BC%9F%E7%97%87%E7%8A%B6%E5%88%A5%E3%83%BB%E5%8E%9F%E5%9B%A0%E3%81%A8/",
+     "https://inunavi.plan-b.co.jp/bloody-stool/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202603b/",
+     "https://vetzpetz.jp/blogs/column/dog-blood-stool",
+     "https://www.sbipet-ssi.co.jp/column/dog/D0123.html",
+     "https://petdock.jp/column/dog-health/dog-blood-in-stool",
+     "https://www.himedou.net/2025/02/20/594/",
+     "https://kodaira.anihoc.com/column/501/",
+     "https://www.kaede-ah.com/blog/%E3%80%90%E7%8D%A3%E5%8C%BB%E5%B8%AB%E3%81%8C%E8%A7%A3%E8%AA%AC%E3%80%91%E7%8A%AC%E3%81%AE%E8%A1%80%E4%BE%BF%E3%80%81%E3%81%99%E3%81%90%E7%97%85%E9%99%A2%E3%81%AB%E8%A1%8C%E3%81%8F%E3%81%B9%E3%81%8D/"
+    ],
+    "error": ""
+   }
+  },
+  "救急 受診 持ち物 ペット": {
+   "group": "夜間救急と急な体調不良",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://animaldoc.jp/animal-column/animal-hospital-night/",
+     "https://kibatan-oukoku.com/column/1a4618c8-1550-4ef5-9a5c-1122faaed188",
+     "https://yonekawa-ah.jp/column/4fbb3d45-f15a-4350-bd0a-7523134a8d45",
+     "https://banquet-tokyo.jp/blog/first-visit-manual/",
+     "https://wanchan.jp/column/detail/18608",
+     "https://takatsuki-your-ah.net/first_time_animalhospital/",
+     "https://kurashikiaigo.com/column/%E5%A4%9C%E9%96%93%E3%81%AE%E5%8B%95%E7%89%A9%E7%97%85%E9%99%A2%E3%82%92%E5%8F%97%E8%A8%BA%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AB%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%B9%E3%81%8D%E3%83%9D/",
+     "https://kenpet.net/webcinic_firstaid.html",
+     "https://www.dbfpet.co.jp/living-with-pets/24016/",
+     "https://www.shibaura-amc.com/reserve-city-minato-animalhospital.html",
+     "https://nano-one.net/column/24692/",
+     "https://www.petsougi.jp/blog/15319",
+     "https://peqaboo.com/knowledge/ja/guides/how-to-build-a-pet-first-aid-kit-that-you-will-actually-use"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://mc.aeonpet.com/makuharishin/er/",
+     "https://www.omu.ac.jp/vet/vmc/nightmedical/",
+     "https://heah.jp/",
+     "https://doubutsuyakan.jp/",
+     "https://trva.jp/emergency/",
+     "https://inami-a-h.com/column/10b8383b-4720-49cd-93d3-37e848a3c9d8",
+     "https://www.kobe-naec.com/",
+     "https://keihin-nightanimal.com/",
+     "https://www.sapporo1299.net/",
+     "https://vet.saisoncard.co.jp/lp/blog/animalhospital03",
+     "https://jamc.co.jp/dog_colum/877/",
+     "https://www.kayama-ah.jp/17221798515784",
+     "https://banquet-tokyo.jp/blog/first-visit-manual/",
+     "https://carelogy-japan.com/ja/columns/vet-visit-preparation",
+     "https://heart-ac.com/useful-information/%E5%8B%95%E7%89%A9%E7%97%85%E9%99%A2%E3%81%AB%E8%A1%8C%E3%81%8F%E6%BA%96%E5%82%99%E3%81%A8%E6%8C%81%E3%81%A1%E7%89%A9/",
+     "https://ace-ah.com/2025/10/18/10500/",
+     "https://takatsuki-your-ah.net/first_time_animalhospital/",
+     "https://www.cocopet.jp/journal/health/438/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

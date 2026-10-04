@@ -1,0 +1,1626 @@
+{
+ "industry": "shashin",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 写真館 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://happy-photo-studio.jp/stores/3",
+     "https://coffret-p.jp/studio/umeda",
+     "https://pieno-photostudio.com/",
+     "https://savetheworld.jp/topics/osaka-photo-wedding-recommend-studio-5/",
+     "https://mankiphotostudio.com/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGnCbEa4Yvro_ANegTk0vd911Sje6Kd9Sak2UTFlxroELhmdV_hAxMOZq1JNO_X2VP4Run5nYlsv67HGR-XlyXa5m0dem31yEB-hXOVm9XP7GQcvySxHWAgon8jYg=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://savetheworld.jp/topics/osaka-photo-wedding-recommend-studio-5/",
+     "https://wedding.mynavi.jp/us/article/62631/",
+     "https://yuen-wedding.com/column/self-photo-studio-regional",
+     "https://news.mynavi.jp/photograph/photostudio-osakashi/",
+     "https://photograph.news.mynavi.jp/photostudio-osakashi/",
+     "https://es-labo.com/flow/preparation/preparationproducts/photostudio-osaka/",
+     "https://senzai-shashin.com/studio/pickup/photo-studio/osaka/",
+     "https://studio-age.com/",
+     "https://www.photorait.net/search/area/osaka"
+    ],
+    "error": ""
+   }
+  },
+  "東京 家族写真 スタジオ 人気": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZz-AIR3FjYkojaTSoSZCZJA92fkFzE0p7DF1orFWqnPu0xRI4CCXxXkLWmeEOuGHbbsqbPG9YdKrcg5tOb4rHeNIzHCv-XM1_n8y2xIK63t65a77kKzC-TML6ORoc3rVd2nSEOzD8oWtlg-EKsA==",
+     "https://www.lifestudio.jp/",
+     "https://my-best.com/4683",
+     "https://veryweb.jp/kids/579552/",
+     "https://all-in-one-photostudio.jp/recommend/for_753/2880/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/4683",
+     "https://www.photoru.jp/plus/family-photo-studio/",
+     "https://www.hapiba.com/kids-photostudio",
+     "https://www.photoru.jp/plus/familyphoto-tokyo-yasui/",
+     "https://photo-studio-inailife.com/photostudio-family-cheap/",
+     "https://hanatohoshi-photo.com/",
+     "https://halenohitokyo.com/",
+     "https://studio-market.com/tokyo/family_portrait/",
+     "https://studio-market.com/tokyo/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 七五三 撮影 写真館": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.lifestudio.jp/studio/special/nagoya-sakae/column/753-nagoya-photostudio/",
+     "https://noblem.jp/",
+     "https://coffret-p.jp/studio/nagoyameito",
+     "https://snow-in.cc/post/news/18663/",
+     "https://soshakan.co.jp/blog/blog-138659/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://noblem.jp/",
+     "https://studiopholk.jp/shichigosan/",
+     "https://www.photostudio-hana.com/",
+     "https://studio-myhouse.com/",
+     "https://www.studiob-kids.com/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 成人式 前撮り スタジオ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://photograph.news.mynavi.jp/photostudio-fukuokashi/",
+     "https://first-studio.jp/20th/fukuoka/",
+     "https://photo-k.com/menu/seijin",
+     "https://photostudio58.com/%E6%88%90%E4%BA%BA%E5%BC%8F%E3%83%BB%E5%89%8D%E6%92%AE%E3%82%8A%E3%83%BB%E5%BE%8C%E6%92%AE%E3%82%8A%E5%8F%97%E3%81%91%E4%BB%98%E3%81%91%E4%B8%AD/",
+     "https://photograph.news.mynavi.jp/photostudio-fukuokashi/",
+     "https://www.bib-rental.com/ceremony-shooting",
+     "https://coffret-p.jp/studio/tenjin",
+     "https://studio-feel.jp/seijin/",
+     "https://inabaphoto.com/photomenu/20th/photoplan/",
+     "https://bg-wedding.com/place/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://studio.kimono-hearts.co.jp/fukuoka/",
+     "https://inshouha.jp/coming-of-age-ceremony/",
+     "https://first-studio.jp/access/fukuoka.html",
+     "https://www.motomatsu.ne.jp/service/seijin.html",
+     "https://first-studio.jp/20th/fukuoka/",
+     "https://www.seijinshiki-photoguide.com/area/fukuoka.html",
+     "https://20th-photostudio.com/pre-photograph/",
+     "https://www.bib-rental.com/ceremony-shooting",
+     "https://photoblogawards.com/seijinshiki/fukuoka/",
+     "https://www.photoru.jp/column/province/fukuoka/seijinshiki/",
+     "https://studio-feel.jp/seijin/",
+     "https://first-studio.jp/20th/location_fukuoka/",
+     "https://kyoya.net/furisode/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 マタニティフォト 撮影": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.aimbridal.jp/sapporo/sapporo_topics/57682.html",
+     "https://www.photorait.net/search/kodawari_search/28?location_ids[]=1",
+     "https://la-viecouleur.com/area/sapporo/",
+     "https://www.la-viephoto.com/lavieblog/sapporo/3949",
+     "https://www.st-yume-sapporo.jp/blog-maternity-photo-plan/",
+     "https://ph-north.com/maternity/",
+     "https://lovegraph.me/tags/maternity/areas/sapporo/municipalities/1"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/cameraman/maternity/hokkaido/1/",
+     "https://www.photoru.jp/plus/maternityphoto-yasui-sapporo/",
+     "https://www.st-yume-sapporo.jp/plan/maternity-photo/",
+     "https://book.photo-hug.com/maternity-photo/6415",
+     "https://www.sapporo-tsunagu-photo.com/maternity-photo",
+     "https://fotowa.com/hokkaido/01100/maternity",
+     "https://www.lifestudio.jp/studio/special/sapporo-shiroishi/column/%E3%83%9E%E3%82%BF%E3%83%8B%E3%83%86%E3%82%A3%E6%92%AE%E5%BD%B1%E3%81%A7%E7%89%B9%E5%88%A5%E3%81%AA%E7%9E%AC%E9%96%93%E3%82%92%E6%AE%8B%E3%81%9D%E3%81%86%EF%BD%9C%E3%81%8A%E3%81%99%E3%81%99%E3%82%81/",
+     "https://www.studio-palette.com/lafiler_info/bridal_lafiler/325693.html"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 七五三 撮影 スタジオ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.lifestudio.jp/studio/special/shinyokohama/tag/%E6%A8%AA%E6%B5%9C%E5%B8%82-%E4%B8%83%E4%BA%94%E4%B8%89%E6%92%AE%E5%BD%B1-%E4%BA%BA%E6%B0%97/",
+     "https://www.ichinomiya-photo.com/blog/753-yokohama-yasui/",
+     "https://www.caratt.jp/store/666/",
+     "https://www.photo-studio-luana.com/",
+     "https://photograph.news.mynavi.jp/photostudio-yokohama/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.happilyphoto.jp/store/minatomirai/",
+     "https://www.lifestudio.jp/studio/special/shinyokohama/",
+     "https://www.precieux-studio.com/studio_kanto/yokohama-kouhoku/",
+     "https://laquan.com/shop_info/tamaplaza/index.html",
+     "https://studio-cocoa.com/studio/shin-yokohama/",
+     "https://www.photo-studiolo.com/753"
+    ],
+    "error": ""
+   }
+  },
+  "京都 成人式 前撮り 写真館": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kyoto-photo.yumeyakata.com/seijinsiki_photo_only/",
+     "https://heianjingu-furisode-photo.com/",
+     "https://www.creare.co.jp/plan/seijin/",
+     "https://www.mucu-photostudio.jp/plan/seijinshiki",
+     "https://www.bishouen.com/location/",
+     "https://kyoto.seijinshiki-maedori.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kyoto-photo.yumeyakata.com/seijinshiki-furisode/location/",
+     "https://www.kyoto-photo.yumeyakata.com/seijinsiki_photo_only/",
+     "https://www.kyoto-photo.yumeyakata.com/",
+     "https://8296.jp/20th/kyoto/",
+     "https://www.creare.co.jp/2026/02/14/seijinshiki-maedori-pose/",
+     "https://www.creare.co.jp/plan/seijin/",
+     "https://kyoto-mstudio.com/",
+     "https://www.317mic.com/",
+     "https://www.317mic.com/furisode.html",
+     "https://ichika.kyoto-marunaka.net/",
+     "https://www.gentography.com/seijin.html",
+     "https://www.photoru.jp/plus/seijinshiki-maedori-kyoto-yasui/",
+     "https://photonoba.com/kyoto-20th/",
+     "https://kyoto.seijinshiki-maedori.jp/",
+     "https://elle-pupa.com/kyoto-maedori/locations?id=19202"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 お宮参り 写真 撮影": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yunagifilms.com/news-blog/kobe_omiyamairi/",
+     "https://cocorostudio.com/newborn-baby/",
+     "https://www.minatogawajinja.or.jp/column/10934/",
+     "https://studioemu.net/column/nishikobegokitou/",
+     "https://yunagifilms.com/news-blog/kobe_omiyamairi/",
+     "https://emily.works/articles/recommended-shrine-for-visiting-shrines-in-Kobe",
+     "https://fotowa.com/hyogo/28100/first-shrine-visit",
+     "https://cocorostudio.com/newborn-baby/",
+     "https://ikutajinja-kaikan.jp/worship",
+     "https://yousmile.jp/menu/locaphoto/minatogawa-omiya-location/",
+     "https://miyamae-ps.co.jp/",
+     "https://lovegraph.me/tags/omiyamairi/areas/hyogo/municipalities/1279",
+     "https://fotowa.com/hyogo/28100/02301-1301122",
+     "https://2kiki.com/omiyamairi/minatogawajinja.html",
+     "https://minato2525.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/omiyamairi-photographers",
+     "https://curama.jp/cameraman/shrine-visit/hyogo/1/",
+     "https://meetsmore.com/t/photographers/hyogo/kobe",
+     "https://fotowa.com/first-shrine-visit",
+     "https://fotowa.com/hyogo/28100/first-shrine-visit",
+     "https://our-photo.co/area/28/110/00002/shrinevisit",
+     "https://our-photo.co/area/28/shrinevisit",
+     "https://yousmile.jp/menu/locaphoto/omiyamairi-hyogo/",
+     "https://yousmile.jp/menu/omiyamairi/",
+     "https://fotowa.com/hyogo/28100/02301-1301122",
+     "https://ikutajinja-kaikan.jp/worship",
+     "https://ikutajinja-kaikan.jp/location-shooting",
+     "https://fotorico.jp/location/ikutajinja/",
+     "https://www.yamamoto-photo.co.jp/picture/",
+     "https://2kiki.com/omiyamairi/ikutajinja.html",
+     "https://studio.marry-marble.com/plan/omiyamairi/",
+     "https://yunagifilms.com/news-blog/ikutajinja_omiyamairi_photo/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 家族写真 出張撮影": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHxr2yK-Nf3MtWpOK3QP_YN90qBulSg_J3i8hrZgOw3lR7ion1cVSMCz7D61bIkZIpd2MwCuOE4EE8KyOJ4x_Ca8qoQog8SIzVR2Iin_HXHjVjX5U54GYCpoKob",
+     "https://www.photoru.jp/column/province/miyagi/",
+     "https://lovegraph.me/tags/family/areas/miyagi",
+     "https://photograph.news.mynavi.jp/photostudio-sendai/",
+     "https://sendaiyoursphoto.com/profile/",
+     "https://hibiki-photo.info/",
+     "https://photo-studio-kanno.jp/location-photo/",
+     "https://comfortgate.net/",
+     "https://fotowa.com/miyagi/04100"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/cameraman/miyagi/1/",
+     "https://meetsmore.com/t/photographers/miyagi/sendai",
+     "https://lovegraph.me/tags/shichigosan/areas/miyagi/municipalities/262",
+     "https://fotowa.com/miyagi/04100",
+     "https://news.mynavi.jp/photograph/photostudio-sendai/",
+     "https://www.zehitomo.com/events/photography/photographer/miyagi/sendai",
+     "https://www.photoru.jp/plus/familyphoto-sendai-yasui/",
+     "http://photo-royal.com/info/price.html",
+     "https://la-viecouleur.com/area/sendai/",
+     "https://www.photoru.jp/column/province/miyagi/",
+     "https://qnne.jp/pages/on-location",
+     "http://photo-royal.com/",
+     "https://www.photricot.com/",
+     "https://sendaiyoursphoto.com/profile/",
+     "https://www.atelier-macaron.net/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 証明写真 写真館 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://magazine.cliiip.jp/social/5561/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFqjo-katNNeu9oSLNENq4vLmma0L_1slduYQA2yKneBJ3S9k_I7x0fHgKdjje3SnAxBmIdG753FIdl52R2-oA4vPuJqr7gv-BO_RAZAd5u-pU=",
+     "https://ikunaga.com/?page_id=3848",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFur9J-H3I7FSkl31TVNwnJUM6B0oeVa_pKwAXWVqhxsU4o6Cz4HzrF9JUkdQ9HS_GQp1n7xqyrMopNaYZfRh1tFu9b9b0bCy9Y0IjLUNtfVnAKRVwqHgx3ypavO_HfNXel4NL-MQl6Ugs=",
+     "https://www.saeda.co.jp/saedastudio/access/",
+     "https://www.saeda.co.jp/saedastudio/idphoto/",
+     "https://photoblogawards.com/idphoto/hiroshima/",
+     "https://www.sharakukan.com/proof",
+     "https://www.phopro.jp/studio/hiroshimahigashi.html",
+     "https://store.kitamura.jp/kitamura/detail/4403/service/10018532/",
+     "https://store.kitamura.jp/kitamura/detail/4322/service/10023783/",
+     "https://ikunaga.com/?page_id=3848"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://photo.0neup.co.jp/hiroshima/",
+     "https://www.phopro.jp/studio/hiroshimahigashi.html",
+     "https://www.phopro.jp/studio/hiroshimafukuyama.html",
+     "http://furisode.p2.weblife.me/idphoto.html",
+     "https://es-labo.com/flow/preparation/preparationproducts/photostudio-hiroshima/",
+     "https://www.kameranofurendo.com/cont4/main.html",
+     "https://www.inoue-photo-hiroshima.com/",
+     "https://www.jpshasinkan.com/",
+     "https://photoblogawards.com/idphoto/hiroshima/",
+     "https://www.sharakukan.com/proof",
+     "https://yamanaka-s.com/photography/id_photo/"
+    ],
+    "error": ""
+   }
+  },
+  "七五三 写真館 費用 相場": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://laquan.com/753/topics/oyakudachi106.html",
+     "https://www.happilyphoto.jp/column/692202/",
+     "https://meetsmore.com/services/shichigosan-photographers/media/1753",
+     "https://www.happilyphoto.jp/column/455883/",
+     "https://happy-photo-studio.jp/media/00000026",
+     "https://photo-watanabe.jp/blog/753-howmuch/",
+     "https://753photo.com/reduce-photo-costs-8points/",
+     "https://studiomonami.com/column/shichigosan-photo-souba/",
+     "https://makaranya.co.jp/%E4%B8%83%E4%BA%94%E4%B8%89-%E8%A1%A3%E8%A3%85%E3%82%84%E5%86%99%E7%9C%9F%E3%81%AE%E3%81%8A%E5%80%A4%E6%AE%B5%E3%81%AF%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%E3%81%8B%E3%81%8B%E3%82%8B%E3%81%AE/"
+    ],
+    "error": ""
+   }
+  },
+  "七五三 スタジオ 選び方": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hanatohoshi-photo.com/753-studio-checklist/",
+     "https://studiomonami.com/column/753-studio-guide/",
+     "https://laquan.com/753/topics/oyakudachi05.html",
+     "https://f-photobook.jp/column/63photobook-753studio/",
+     "https://www.studio-palette.com/factory_info/kids/549545.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/pillar03.html",
+     "https://www.post-create.com/stpost/photopedia/tips/sichigosan-pre-photo",
+     "https://ono-group.jp/blog2/2026/08/19/%E3%80%90%E4%BF%9D%E5%AD%98%E7%89%88%E3%80%91%E5%86%99%E7%9C%9F%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BD%9C%E6%96%99%E9%87%91%E3%83%BB%E8%A1%A3%E8%A3%85%E3%83%BB/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://photograph.news.mynavi.jp/category/shichigosan/",
+     "https://news.mynavi.jp/photograph/category/shichigosan/",
+     "https://www.precieux-studio.com/column/753-anniversary-plus/",
+     "https://www.precieux-studio.com/column/753photostudio-tokyo/",
+     "https://www.precieux-studio.com/column/753photostudio_survey/",
+     "https://studiomonami.com/column/753-studio-guide/",
+     "https://hanatohoshi-photo.com/753-studio-checklist/",
+     "https://photo-studio-inailife.com/tokyo-shichigosan-photostudio/",
+     "https://www.lifestudio.jp/plan/753",
+     "https://fotowa.com/753/prices",
+     "https://www.post-create.com/stpost/plan/shichigosan/",
+     "https://f-photobook.jp/column/63photobook-753studio/",
+     "https://okamoto-studio.com/20210226170855/blog/detail/20250912/"
+    ],
+    "error": ""
+   }
+  },
+  "七五三 前撮り 後撮り どっち": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.post-create.com/stpost/photopedia/tips/sichigosan-post-photo",
+     "https://studio753.mai-jp.net/blog/2025/07/02/%E4%B8%83%E4%BA%94%E4%B8%89%E3%81%AF%E5%89%8D%E6%92%AE%E3%82%8A%E3%83%BB%E5%BE%8C%E6%92%AE%E3%82%8A%E3%81%A9%E3%81%A3%E3%81%A1%E3%81%AB%E3%81%99%E3%82%8B%EF%BC%9F%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail21.html",
+     "https://www.happilyphoto.jp/column/699468/",
+     "https://sukisukimono.com/753maeatodori/1623/",
+     "https://aoharu-kyoto.com/shichigosan-mae-ato-hikaku/",
+     "https://www.precieux-studio.com/column/753atodori/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://veryweb.jp/kids/672059/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail21.html",
+     "https://www.precieux-studio.com/column/753atodori/",
+     "https://www.precieux-studio.com/column/753maedori/",
+     "https://www.tomesode-myselect.com/news/753/when-753/753-photo-timing",
+     "https://ep-a-style.jp/pre-or-ontheday/",
+     "https://www.hareginomarusho.co.jp/contents/753/3712/",
+     "https://meetsmore.com/services/shichigosan-photographers/media/2026",
+     "https://www.happilyphoto.jp/column/691655/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail97.html",
+     "https://www.post-create.com/stpost/photopedia/tips/sichigosan-post-photo"
+    ],
+    "error": ""
+   }
+  },
+  "七五三 衣装 レンタル 料金": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.happilyphoto.jp/column/690433/",
+     "https://www.caratt.jp/family/82805/",
+     "https://coffret-p.jp/shichigosan_rental",
+     "https://www.studio-alice.co.jp/753/rental.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/pillar10.html",
+     "https://www.studio-mario.jp/campaign/753_rental/",
+     "https://studiocalen.com/column/money/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.happilyphoto.jp/column/690433/",
+     "https://www.happilyphoto.jp/column/690352/",
+     "https://www.happilyphoto.jp/column/678912/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/pillar10.html",
+     "https://www.studio-alice.co.jp/753/rental.html",
+     "https://www.caratt.jp/family/82805/",
+     "https://www.caratt.jp/rental/shichigosan/",
+     "https://www.arc-web.com/kids/rental/odekake-753/",
+     "https://www.kimono-365.jp/rental/753kimono_kids/",
+     "https://kazokulab.com/guides/shichigosan-hiyou-2026/",
+     "https://kimono-rentalier.jp/column/shichigosan/shichigosan-kimono-buy-rental/"
+    ],
+    "error": ""
+   }
+  },
+  "七五三 撮影 時期 いつ": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://matka-photostudio.jp/news/%E4%B8%83%E4%BA%94%E4%B8%89%E3%81%AE%E5%89%8D%E6%92%AE%E3%82%8A%E3%83%BB%E5%BE%8C%E6%92%AE%E3%82%8A%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8C%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%EF%BC%9F%E3%82%B9%E3%82%BF/",
+     "https://www.hareginomarusho.co.jp/contents/753/3045/",
+     "https://www.happilyphoto.jp/column/699468/",
+     "https://www.studio-mario.jp/event/753/article/036/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail97.html",
+     "https://laquan.com/753/topics/oyakudachi37.html",
+     "https://happy-photo-studio.jp/media/77944318",
+     "https://www.s-orange.jp/blog/250821o/",
+     "https://www.lifestudio.jp/community/life_story/omiya/166889"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/shichigosan-photographers/media/2026",
+     "https://www.happilyphoto.jp/column/603995/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail97.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail27.html",
+     "https://www.studio-mario.jp/event/753/article/012/",
+     "https://www.caratt.jp/family/99563/",
+     "https://www.kimono-365.jp/pre-shoot_753/",
+     "https://maisonmorino.com/column/shichigosann_maedori_jiki/",
+     "https://lantan-photo.com/news/p2441/"
+    ],
+    "error": ""
+   }
+  },
+  "成人式 前撮り 費用 相場": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.ondine.jp/column/seijin-pre-shoot-cost/",
+     "https://www.hi753.com/blog/1162/",
+     "https://hana-toiro.com/%E6%88%90%E4%BA%BA%E5%BC%8F%E5%89%8D%E6%92%AE%E3%82%8A%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E8%B2%BB%E7%94%A8%EF%BD%9C%E3%83%97%E3%83%A9%E3%83%B3%E3%83%BB%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/furisode_preshoot_006/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10326510045",
+     "https://ange-official.com/column/photo-shoot-price/",
+     "https://furisode-luvri.jp/blog/blog-8637/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10326510045",
+     "https://kimonoand.kimono-yamato.co.jp/blog/900/",
+     "https://www.saganokan.com/furisode/content/47659/",
+     "https://www.photoru.jp/plus/seijinshiki-shashin-soba/",
+     "https://financial-field.com/living/entry-168829",
+     "https://www.creare.co.jp/2026/01/15/seijinshiki-hiyou-souba/",
+     "https://walife.co.jp/archives/bloglist/%E6%88%90%E4%BA%BA%E5%BC%8F%E5%89%8D%E6%92%AE%E3%82%8A%E3%81%AE%E5%80%A4%E6%AE%B5%E7%9B%B8%E5%A0%B4%E3%81%AF%EF%BC%9F%E8%B2%BB%E7%94%A8%E3%81%AE%E5%86%85%E8%A8%B3%E3%81%A8%E5%AE%89%E3%81%8F%E6%8A%91",
+     "https://ange-official.com/column/photo-shoot-price/",
+     "https://hana-toiro.com/%E6%88%90%E4%BA%BA%E5%BC%8F%E5%89%8D%E6%92%AE%E3%82%8A%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E8%B2%BB%E7%94%A8%EF%BD%9C%E3%83%97%E3%83%A9%E3%83%B3%E3%83%BB%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3/"
+    ],
+    "error": ""
+   }
+  },
+  "成人式 前撮り 写真館 選び方": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/pre-photoshoot/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/before-adult-ceremony/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/furisode_preshoot_006/",
+     "https://www.precieux-studio.com/column/20th-anniversary-photo/",
+     "https://meetsmore.com/services/seijinshiki-photographers/media/12023",
+     "https://www.saganokan.com/furisode/content/47659/",
+     "https://furisode-luvri.jp/blog/blog-8643/",
+     "https://ange-official.com/column/photo-shoot-price/",
+     "https://news.mynavi.jp/photograph/category/seijinshiki/"
+    ],
+    "error": ""
+   }
+  },
+  "成人式 前撮り 何ヶ月前 予約": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://noblem.jp/plan/furisode/lp/column/maedori/reservation/",
+     "https://walife.co.jp/archives/bloglist/%E6%88%90%E4%BA%BA%E5%BC%8F%E3%81%AE%E5%89%8D%E6%92%AE%E3%82%8A%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8C%E6%9C%80%E9%81%A9%EF%BC%9F%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E3%81%AE%E6%99%82%E6%9C%9F%E3%81%A8",
+     "https://ep-a-style.jp/how-long-does-it-take-to-reserve-a-photo-shoot-before-the-coming-of-age-ceremony-recommended-1-and-a-half-to-1-year-before-the-coming-of-age-ceremony/",
+     "https://www.studio-palette.com/howto_info/activity-howto_info/492712.html",
+     "https://furisode-luvri.jp/blog/blog-8554/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/furisode_preshoot_001/",
+     "https://www.wafukan-ichi.jp/Page/Feature/FeaturePage044.aspx",
+     "https://www.s-orange.jp/blog/260919-n-seijinsiki/",
+     "https://noblem.jp/plan/furisode/lp/column/maedori/reservation/",
+     "https://www.saganokan.com/furisode/content/43257/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/pre-photoshoot-season/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14234445459",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14234445459"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://portal.kimono-hearts.co.jp/column/maedori_when/",
+     "https://portal.kimono-hearts.co.jp/column/seijinshiki_when/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/adult-ceremony-when/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/furisode_preshoot_001/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/pre-photoshoot-season/",
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/season-shooting/",
+     "https://meetsmore.com/services/seijinshiki-photographers/media/11619",
+     "https://www.saganokan.com/furisode/content/43257/",
+     "https://www.saganokan.com/furisode/content/13513/",
+     "https://www.creare.co.jp/2025/12/12/seijinshiki-maedori-timing/",
+     "https://yousmile.jp/menu/furisode/topics/maedoriphoto-detail1/",
+     "https://kasha-g.com/column/%E6%88%90%E4%BA%BA%E5%BC%8F%E5%89%8D%E6%92%AE%E3%82%8A%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88%E3%81%AA%E6%99%82%E6%9C%9F%E3%81%AF%EF%BC%9F%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E8%8F%AF%E5%86%99%E3%81%8C/",
+     "https://www.spacemarket.com/magazine/know-how/shoot/coming-of-age-ceremony-studio/",
+     "https://kimonoand.kimono-yamato.co.jp/blog/1785/",
+     "https://yamanaka-kimono.com/6blog/100128/",
+     "https://ep-a-style.jp/how-long-does-it-take-to-reserve-a-photo-shoot-before-the-coming-of-age-ceremony-recommended-1-and-a-half-to-1-year-before-the-coming-of-age-ceremony/",
+     "https://furisodemorino.com/column/column3"
+    ],
+    "error": ""
+   }
+  },
+  "成人式 振袖 レンタル 撮影 セット 料金": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hana-toiro.com/%E6%88%90%E4%BA%BA%E5%BC%8F%E5%89%8D%E6%92%AE%E3%82%8A%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E8%B2%BB%E7%94%A8%EF%BD%9C%E3%83%97%E3%83%A9%E3%83%B3%E3%83%BB%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3/",
+     "https://www.hanatemari.jp/topics/topics-5081/",
+     "https://furisode-luvri.jp/blog/blog-8637/",
+     "https://www.saganokan.com/furisode/content/43738/",
+     "https://kimono-yamato-furisode.com/column/furisode/rental-market-price/",
+     "https://joyful-eli-outlet.com/plan/",
+     "https://www.ondine.jp/column/seijin-pre-shoot-cost/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/furisode_preshoot_006/",
+     "https://www.studio-alice.co.jp/seijin/furiho/",
+     "https://www.studio-alice.co.jp/seijin/furiho/about/",
+     "https://kamakura-studio.com/menu/adultlongsleeved",
+     "https://kimonoand.kimono-yamato.co.jp/blog/900/",
+     "https://miyakoya.co.jp/furisode-blog/detail/44272/",
+     "https://furisode-furimo.com/magazine/4878",
+     "https://kimono-yamato-furisode.com/column/furisode/rental-market-price/"
+    ],
+    "error": ""
+   }
+  },
+  "七五三 兄弟 同時撮影 注意点": {
+   "group": "七五三・成人式の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.koba-ps.com/kids/colum/detail.php?pid=5474",
+     "https://studiomonami.com/column/753-kyoudai-tsukisoi-photo/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail37.html",
+     "https://www.firststage.co.jp/photostudio/753/topics/6925/",
+     "https://www.happilyphoto.jp/column/604604/",
+     "https://www.studio-palette.com/nishi_info/shichigosan_nishi/539728.html",
+     "https://pigeon.info/404.html",
+     "https://www.hi753.com/blog/1085/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail37.html",
+     "https://www.happilyphoto.jp/column/604604/",
+     "https://fotowa.com/funmily/2022/06/clothes-for-753/",
+     "https://www.studio-palette.com/nishi_info/shichigosan_nishi/539728.html",
+     "https://ep-a-style.jp/celebrate-at-the-same-time/",
+     "https://www.tomesode-myselect.com/news/howto-shichigosan/753_brothers_sisters/",
+     "https://gihublog.com/archives/12790",
+     "https://studio-myhouse.com/2025/05/29/%E4%B8%83%E4%BA%94%E4%B8%89%E5%86%99%E7%9C%9F%E3%82%92%E5%85%84%E5%BC%9F%E3%81%A7%E6%92%AE%E5%BD%B1%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%A8%E6%B3%A8%E6%84%8F/",
+     "https://studiomonami.com/column/753-kyoudai-tsukisoi-photo/",
+     "https://www.studio-mario.jp/event/753/article/071/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail44.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail20.html",
+     "https://www.precieux-studio.com/column/753-brothersister-outfit/",
+     "https://www.precieux-studio.com/column/753-schedule/",
+     "https://www.caratt.jp/family/73384/",
+     "https://www.tomesode-myselect.com/news/753/when-753/753-siblings",
+     "https://www.post-create.com/stpost/photopedia/howto/shichigosan-photo-shoot"
+    ],
+    "error": ""
+   }
+  },
+  "家族写真 スタジオ 料金 相場": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://laquan.com/753/topics/oyakudachi106.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail11.html",
+     "https://studio.benesse.ne.jp/plan/",
+     "https://www.happilyphoto.jp/column/692202/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://news.mynavi.jp/photograph/price/",
+     "https://meetsmore.com/services/family-portrait-photographers/media/23759",
+     "https://fotowa.com/753/prices",
+     "https://prtimes.jp/main/html/rd/p/000000021.000096733.html",
+     "https://www.photoru.jp/plus/kazokushashin-yasui/",
+     "https://photo-ds.jp/blog/blog-14231/",
+     "https://photo-studio-inailife.com/photostudio-family-cheap/",
+     "https://www.kodomo-photostudio.com/ryokin/",
+     "https://studio.benesse.ne.jp/plan/"
+    ],
+    "error": ""
+   }
+  },
+  "家族写真 撮影 選び方": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://mallento.com/recommend/photographer-matching-sites/",
+     "https://happy-photo-studio.jp/media/00000037",
+     "https://okamoto-studio.com/20210226170855/blog/detail/20260619/",
+     "https://earthpro.jp/blog/detail/family-photo-studio-guide/",
+     "https://www.photoru.jp/plus/family-photo-studio/",
+     "https://meetsmore.com/services/family-portrait-photographers",
+     "https://crowdworks.jp/times/know-how/10929/"
+    ],
+    "error": ""
+   }
+  },
+  "家族写真 服装 色 おすすめ": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.precieux-studio.com/column/familyphoto/",
+     "https://www.happilyphoto.jp/column/678421/",
+     "https://www.studio-alice.co.jp/shortcut/family/column/detail14.html",
+     "https://laquan.com/family/topics/oyakudachi08.html",
+     "https://www.studio-palette.com/hokkaido_info/lifestyle/473886.html",
+     "https://www.caratt.jp/family/102191/",
+     "https://onepiece-rental.net/article/2961/",
+     "https://fameux.jp/blog/625/",
+     "https://liliarge.com/column/1194",
+     "https://lifestudio.jp/magazine/life_now/187954",
+     "https://www.happilyphoto.jp/column/674768/",
+     "https://coffret-p.jp/weblog/family-2511-1",
+     "https://www.studio-palette.com/howto_info/studio_howto/510798.html",
+     "https://happy-photo-studio.jp/media/00000047"
+    ],
+    "error": ""
+   }
+  },
+  "家族写真 スタジオ ロケーション 違い": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zexy.net/article/app002101038/",
+     "https://gyutte.jp/blog/205690",
+     "https://www.studio-palette.com/hokkaido_info/childcare/522094.html",
+     "https://www.precieux-studio.com/column/753photo_studio_location/",
+     "https://brapla.com/column/photos/481f42f0-a4ab-42d5-8711-b84c16c369db",
+     "https://happy-photo-studio.jp/media/00000027",
+     "https://www.sakuphotostudio.co.jp/753_location/",
+     "https://www.familiarwedding.jp/column/location-photo",
+     "https://cele-baby.net/media/studio-or-location/"
+    ],
+    "error": ""
+   }
+  },
+  "マタニティフォト 費用 相場": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yuen-wedding.com/column/maternity-photo-cost",
+     "https://laquan.com/maternity/topics/oyakudachi34.html",
+     "https://lovegraph.me/comparation_of_fee",
+     "https://www.studio-alice.co.jp/shortcut/maternity_s/",
+     "https://laquan.com/maternity/topics/oyakudachi34.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGgc3xTooSOPW_nb7qaG6L6_Z_WBZ_Wbi3ESNe9Zu1hveMJQPdgUZiCuEwquvI9aq3axTIQ1oDNPsYlPyn8RxYggjurTydLFpAERO03Mfmc8N_G44MUb3CCABvFW3PiRph1XTxz6B_IwH3gDZ0BLYF28S52pHPMkeZFZ56cDsft_c6_QUODVGF57VtpJT3di0Et0b-aet8cUO0B6WK9dXgt4in4fIJAuMEsoaX2onk_uzyFzlxMgf8onI3dg3br94wZxwHVvHg99vjmWMzK15AN1Hc=",
+     "https://fotowa.com/maternity"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://laquan.com/maternity/topics/oyakudachi34.html",
+     "https://www.happilyphoto.jp/column/616505/",
+     "https://book.photo-hug.com/maternity-photo/10862",
+     "https://www.photoru.jp/plus/maternityphoto-soba/",
+     "https://meetsmore.com/services/maternity-photo-photographers/media/24760",
+     "https://studioemu.net/column/32/",
+     "https://yuen-wedding.com/column/maternity-photo-cost",
+     "https://yuuphoto.net/759/",
+     "https://yuen-wedding.com/column/maternity-photo-nagoya"
+    ],
+    "error": ""
+   }
+  },
+  "ニューボーンフォト 写真館 選び方": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://fufu-photo.com/blog/home-vs-studio/",
+     "https://www.post-create.com/stpost/photopedia/howto/newborn-photo/",
+     "https://weddingitem.net/blogs/baby/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%B3%E3%83%95%E3%82%A9%E3%83%88%E3%81%A8%E3%81%AF-%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA-%E5%87%BA%E5%BC%B5-%E3%82%BB%E3%83%AB%E3%83%95%E3%81%AE%E9%81%95%E3%81%84%E3%81%A8%E9%81%B8%E3%81%B3%E6%96%B9%E3%82%92%E5%BE%B9%E5%BA%95%E6%AF%94%E8%BC%83",
+     "https://glad-inc.jp/blog/newborn-studio-vs-location-hiroshima/",
+     "https://www.yoshidalab.jp/news-topics/news-topics-3390/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://family-album.com/location_photo/newborn",
+     "https://fotowa.com/newborn",
+     "https://lovegraph.me/articles/5905",
+     "https://photograph.news.mynavi.jp/category/newbornphoto/",
+     "https://www.post-create.com/stpost/photopedia/howto/newborn-photo/",
+     "https://hanarakko.com/newbornphoto-fotowa-studioalice-lovegraph/",
+     "https://sleeping-newbornphoto.com/",
+     "https://ppch-j.com/column/newborn-photos-when/",
+     "https://shutcho-satsuei.com/newborn-price/",
+     "https://www.studio-alice.co.jp/shortcut/omiyamairi/column/detail55.html",
+     "https://www.caratt.jp/family/100544/",
+     "https://www.yoshidalab.jp/news-topics/news-topics-3319/",
+     "https://onosha.com/blog2/2025/05/22/newborn/",
+     "https://studiocalen.com/column/newborn-when/",
+     "https://umareru213.com/column/2611/",
+     "https://studio-navel.com/faq/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%B3%E3%83%95%E3%82%A9%E3%83%88%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%EF%BC%9F%E3%83%99%E3%82%B9%E3%83%88%E3%81%AA%E6%92%AE%E5%BD%B1%E6%99%82/"
+    ],
+    "error": ""
+   }
+  },
+  "お宮参り 写真撮影 費用": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/omiyamairi-photographers",
+     "https://kimono-rentalier.jp/column/shrine-visit-for-birth/omiyamairi-syashin-satsuei/",
+     "https://www.photoru.jp/plus/omiyamairi-shashin-nedan/",
+     "https://curama.jp/cameraman/shrine-visit/",
+     "https://our-photo.co/category/shrinevisit",
+     "https://www.photoru.jp/plus/omiyamairi-shashin-yasui/",
+     "https://ongoing-memorial-photo-info.net/archives/103"
+    ],
+    "error": ""
+   }
+  },
+  "還暦 長寿祝い 家族写真 撮影": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.happilyphoto.jp/column/674894/",
+     "https://www.studio-mario.jp/event/adult/",
+     "https://soshakan.co.jp/kanreki/",
+     "https://yousmile.jp/menu/memorial/topics/60thand88thbirthdays/",
+     "https://www.studioselfit.com/menu/silver/",
+     "https://onosha.com/menu/kanreki/index.html",
+     "https://studiomonami.com/column/kanreki-photo/",
+     "https://vivienanniversary.com/plan_overceremo/",
+     "https://kasha-g.com/column/%E9%82%84%E6%9A%A6%E7%A5%9D%E3%81%84%E3%81%AE%E8%B5%A4%E3%81%84%E3%81%A1%E3%82%83%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%E3%81%93%E3%81%AE%E6%84%8F%E5%91%B3%E3%81%A8%E9%9B%91%E5%AD%A6%EF%BD%9C%E3%82%B9/",
+     "https://our-photo.co/photogallery/tag/celebrationoflongevity",
+     "https://lifesnap.jp/senior/",
+     "https://family-haradaphoto.com/2025/04/10/blog22-2/",
+     "https://www.harada1969.com/news/longevity-celebration/",
+     "https://www.harada1969.com/longevity-celebration/",
+     "https://www.nicori-photo.com/anniversary"
+    ],
+    "error": ""
+   }
+  },
+  "ペット 家族写真 スタジオ 撮影 可能": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://my-best.com/4446",
+     "https://store.kitamura.jp/studio-mario/detail/6177/service/10010245/",
+     "https://www.studio-alice.co.jp/wanwan/",
+     "https://wanwan-photo.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.lifestudio.jp/studio/special/fujimino/column/saitama-pet-photostudio/",
+     "https://www.sia-style.jp/pet/",
+     "https://studio-cocoa.com/shooting/pet/index.html",
+     "https://www.petphoto-studio.com/"
+    ],
+    "error": ""
+   }
+  },
+  "子ども 誕生日 記念写真 スタジオ 費用": {
+   "group": "家族写真・記念写真の撮影",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://photo.mother-natures.com/blog/1st-birthday-photo-studio-price-guide/",
+     "https://wayukan-marutoyo.com/blog/20250913-4/",
+     "https://www.tgn.co.jp/funfenfant/column/1694/",
+     "https://photo-ds.jp/blog/blog-14231/",
+     "https://okamoto-studio.com/20210226170855/blog/detail/20250930/",
+     "https://photograph.news.mynavi.jp/price/",
+     "https://www.tgn.co.jp/funfenfant/column/1694/",
+     "https://photograph.news.mynavi.jp/category/birthdayphoto/",
+     "https://studio.benesse.ne.jp/plan/",
+     "https://studio.benesse.ne.jp/plan/",
+     "https://lifestudio.jp/plan/birthday",
+     "https://okamoto-studio.com/20210226170855/blog/detail/20250930/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-mario.jp/event/birthday/",
+     "https://coffret-p.jp/plan/first-birthday",
+     "https://www.lifestudio.jp/plan/",
+     "https://prtimes.jp/main/html/rd/p/000000021.000096733.html",
+     "https://www.caratt.jp/family/109511/",
+     "https://www.photoru.jp/plus/birthday-photo-studio/",
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 撮影料 追加料金 内訳": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tachibana-group.co.jp/column/column/40628",
+     "https://photo-navi.jp/column/photo-price/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 料金 高い 理由": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://c-studio.work/4983/",
+     "https://diamond.jp/articles/-/397615",
+     "https://www.sanaiphoto.co.jp/id-photo/guidance/value-of-photostudio/",
+     "https://note.com/kazuyami77/n/nb67461f88f6f",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10111196210",
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://kasha-g.com/column/%E5%86%99%E7%9C%9F%E9%A4%A8%E3%81%AE%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E6%96%99%E9%87%91%E3%81%8C%E9%AB%98%E3%81%84%E3%81%A8%E6%84%9F%E3%81%98%E3%82%8B%E7%90%86%E7%94%B1%E3%81%A8%E5%BE%8C/",
+     "https://www.precieux-studio.com/column/photostudio-price/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.precieux-studio.com/column/photostudio-price/",
+     "https://prtimes.jp/main/html/rd/p/000000021.000096733.html",
+     "https://kanagawa-photostudio.info/column/album/",
+     "https://kasha-g.com/column/%E5%9C%9F%E6%97%A5%E7%A5%9D%E6%97%A5%E3%81%AE%E5%86%99%E7%9C%9F%E9%A4%A8%E3%81%AF%E3%81%AA%E3%81%9C%E9%AB%98%E3%81%84%EF%BC%9F%E6%96%99%E9%87%91%E3%82%A2%E3%83%83%E3%83%97%E3%81%AE%E7%90%86%E7%94%B1/",
+     "https://www.pricey.jp/web/articles/5043",
+     "https://www.ai-admakers.jp/magazine/ai-model/photograph/shooting-cost/",
+     "https://retouch.ink/article/posts/retouch-pricing-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "フォトスタジオ 料金 比較 方法": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://atsoho.com/blog/photography-cost-comparison-budget",
+     "https://lovegraph.me/comparation_of_fee",
+     "https://photograph.news.mynavi.jp/price/",
+     "https://photo-navi.jp/column/photo-price/",
+     "https://photo-navi.jp/column/photo-cost/",
+     "https://okamoto-studio.com/20210226170855/blog/detail/20260612/",
+     "https://okamoto-studio.com/20210226170855/blog/detail/20260913/",
+     "https://www.post-create.com/stpost/photopedia/howto/choose-a-photo-studio",
+     "https://www.happilyphoto.jp/column/692202/",
+     "https://www.caratt.jp/family/109511/",
+     "https://kanagawa-photostudio.info/column/keep-prices-down/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 キャンセル料 いつから": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://hps-tokyo.com/qa/",
+     "https://photoartisan.jp/faq/anv1.html?753faq",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1247198942",
+     "https://www.studiomax.jp/column/column-0331-1-2/",
+     "https://soshakan.co.jp/faq/",
+     "https://ameblo.jp/kodomo-photostudio/entry-12934426023.html",
+     "https://cocofilm.jp/news/cancel/",
+     "https://studio.benesse.ne.jp/faq/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-alice.co.jp/faq/location_reservation.html",
+     "https://help.family-album.com/hc/ja/articles/360053464433-%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB-%E5%BB%B6%E6%9C%9F%E6%99%82%E3%81%AE%E6%96%99%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6",
+     "https://www.photoru.jp/qa/98.html"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 衣装代 別料金 確認": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tachibana-group.co.jp/column/column/40628",
+     "https://photo-navi.jp/column/photo-price/",
+     "https://www.photorait.net/search/kodawari_search/24",
+     "https://feliz-ikenaga.jp/dress-price.html",
+     "https://www.studio-mario.jp/fee/",
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail60.html"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 プラン 選び方 失敗しない": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tachibana-group.co.jp/column/column/40628",
+     "https://www.precieux-studio.com/column/photostudio/",
+     "https://www.precieux-studio.com/column/kidsphotostudio-ranking/",
+     "https://www.precieux-studio.com/column/howtochoose-kidsphotostudio/",
+     "https://chiicomi.com/press/2036310/",
+     "https://www.mamanavi.tv/life/photo-studio/how-to-choose",
+     "https://atsoho.com/blog/photography-cost-comparison-budget",
+     "https://www.precieux-studio.com/column/photostudio-data-tips/",
+     "https://www.caratt.jp/family/109511/",
+     "https://www.photorait.net/special/422",
+     "https://www.caratt.jp/family/108858/",
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://okamoto-studio.com/20210226170855/blog/detail/20260913/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 ヘアメイク 料金 相場": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://senzai.studioindi.jp/blog/price/",
+     "https://www.cord3.co.jp/news/%E5%BA%83%E5%91%8A%E6%92%AE%E5%BD%B1%E3%81%AE%E3%83%98%E3%82%A2%E3%83%A1%E3%82%A4%E3%82%AF%E6%96%99%E9%87%91%E7%9B%B8%E5%A0%B4%E3%81%A8%E3%83%98%E3%82%A2%E3%83%A1%E3%82%A4%E3%82%AF%E4%BE%9D%E9%A0%BC",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTO036Nq4vgMBQt5ElJjZg99oGKFqW_504Ho80b2_P2EpMT_RMpb7mTePiH3gKdOyUb3p9_kdI_2skl8erFxo7zHNvzUl3nnwl02lAEs7x24ENSJUMT_JZ4gxig49CZw==",
+     "https://photo-ds.jp/blog/blog-14231/",
+     "https://www.familiarwedding.jp/column/photowedding-point"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://malustudio.net/menu/",
+     "https://lotus3.jp/menu/menu-207/",
+     "https://photoartisan.jp/price/price_hmlocation.html",
+     "https://meetsmore.com/services/shichigosan-photographers/media/264547",
+     "https://news.mynavi.jp/photograph/753-photo-price/",
+     "https://curama.jp/hairstyle/magazine/273/",
+     "https://curama.jp/cameraman/traditional-shichi-go-san/magazine/1869/",
+     "https://www.arc-web.com/kids/price/",
+     "https://happy-photo-studio.jp/media/00000026",
+     "https://www.k-studio.net/menu/graduation/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 撮影 当日 支払い 方法": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.studio-alice.co.jp/faq/payment.html",
+     "https://note.com/large_clear/n/n77c6c88871e8",
+     "https://www.pricey.jp/web/articles/6055",
+     "https://www.studio-mario.jp/service/qa/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13311536153"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-alice.co.jp/faq/payment.html",
+     "https://www.studio-alice.co.jp/faq/location_commodity.html"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 割引 キャンペーン 時期": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kasha-g.com/column/%E5%86%99%E7%9C%9F%E9%A4%A8%E3%81%A7%E5%AE%89%E3%81%8F%E6%92%AE%E3%82%8C%E3%82%8B%E6%99%82%E6%9C%9F%E3%81%AF%EF%BC%9F%E9%96%91%E6%95%A3%E6%9C%9F%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHOSB-QiNM3Wj9LOgZfw4ET6sDRU2DyrDrqBYtfT1VHUjyBscSevzndyz7S3cB_U2qqgqjnE97XYnW6TX1ARzKvxAfwShF2VjXaGWsjQfY7E_pBmHwHH4sxNiM5Fgdy-Qo=",
+     "https://photostudio1page.com/media/20250512/",
+     "https://studio753.mai-jp.net/blog/2025/06/28/%E4%B8%83%E4%BA%94%E4%B8%89%E3%81%AE%E5%86%99%E7%9C%9F%E8%B2%BB%E7%94%A8%E3%82%92%E6%8A%91%E3%81%88%E3%82%8B%EF%BC%81%E5%AE%89%E3%81%84%E6%99%82%E6%9C%9F%E3%81%A8%E8%B3%A2%E3%81%84%E3%82%B9%E3%82%BF/",
+     "https://www.happilyphoto.jp/column/691655/",
+     "https://studiomonami.com/column/753-photo-yasui-jiki/",
+     "https://note.com/rikipri/n/n4d63d37e390b",
+     "https://studio-merry.com/blog/%E4%B8%83%E4%BA%94%E4%B8%89%E6%9C%AC%E7%95%AA%E7%9B%B4%E5%89%8D%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%B3%EF%BC%81/",
+     "https://www.studio-alice.co.jp/753/alice-debut.html",
+     "https://www.pricey.jp/web/articles/3670",
+     "https://ameblo.jp/iruka7830/entry-12959738263.html",
+     "https://yotuba.metujin.com/entry/yuutai-alice"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-mario.jp/campaign/753/",
+     "https://www.studio-mario.jp/event/753/article/pillar001/",
+     "https://www.precieux-studio.com/column/753maedori/",
+     "https://studiomonami.com/column/753-photo-yasui-jiki/",
+     "https://www.studio-alice.co.jp/info/",
+     "https://www.studio-alice.co.jp/",
+     "https://toreruyo.jp/studio/alice_discount",
+     "https://www.pricey.jp/web/articles/3670"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 見積もり 確認 ポイント": {
+   "group": "料金・プラン",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://onosha.com/blog2/2025/06/03/others-2/",
+     "https://photostudio1page.com/media/20250406/",
+     "https://www.yoiegao.com/%E6%B0%97%E3%82%92%E3%81%A4%E3%81%91%E3%81%9F%E3%81%84%E5%86%99%E7%9C%9F%E9%A4%A8%E9%81%B8%E3%81%B3/",
+     "https://wedding.mynavi.jp/photo/column_info/mitsumori/",
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tachibana-group.co.jp/column/column/40628",
+     "https://meetsmore.com/services/portrait-photographers/media/125443",
+     "https://fushime.com/service/",
+     "https://airphoto.jp/blog/photo-029",
+     "https://photo-navi.jp/column/photo-price/",
+     "https://www.studio-nagahara.co.jp/price",
+     "https://www.tokyoshasin.com/price.html",
+     "https://www.matsushima-studio.com/plan/",
+     "https://www.delta.photo/colum/prices-and-points-to-keep-in-mind-when-hiring-a-professional-photographer-to-take-pictures",
+     "https://photograph.news.mynavi.jp/price/",
+     "https://www.niwaka.com/ksm/radio/wedding/ready/theme/06/",
+     "https://www.caratt.jp/family/109511/",
+     "https://www.post-create.com/stpost/photopedia/howto/choose-a-photo-studio",
+     "https://inaiwedding.jp/weddingphoto-price-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 データ 納品 費用": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11290276551",
+     "https://www.studio-mario.jp/fee/photocd/",
+     "https://www.studio-alice.co.jp/charge/product/",
+     "https://ameblo.jp/saratora3/entry-12894600179.html",
+     "https://www.studio-alice.co.jp/charge/set_menu/standard/detail.php?id=177",
+     "https://bokun-ikuji.com/studio-alice/",
+     "https://www.studio-mario.jp/fee/",
+     "https://www.studio-mario.jp/fee/data_main/",
+     "https://www.studio-mario.jp/fee/data/",
+     "https://ameblo.jp/iruka7830/entry-12959738263.html",
+     "https://yotuba.metujin.com/entry/alice-yuutaitukaikata",
+     "https://ameblo.jp/sunao2473/entry-12932030094.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.studio-alice.co.jp/charge/data/",
+     "https://photo-navi.jp/column/photo-price/",
+     "https://www.tokyoshasin.com/price.html",
+     "https://www.matsushima-studio.com/plan/",
+     "https://coffret-p.jp/plan",
+     "https://laquan.com/753/index.html",
+     "https://www.precieux-studio.com/plan/753/",
+     "https://www.post-create.com/stpost/plan/shichigosan/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 データ 全カット 納品 料金": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://photograph.news.mynavi.jp/price/",
+     "https://photograph.news.mynavi.jp/price/",
+     "https://www.tachibana-group.co.jp/column/column/40628",
+     "https://h-photo.jp/%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%96%99%E9%87%91%E8%A1%A8/",
+     "https://h-photo.jp/%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%96%99%E9%87%91%E8%A1%A8/",
+     "http://ogawa-shashinkan.com/price/studio-photo-price",
+     "https://www.tachibana-group.co.jp/column/column/40628",
+     "https://coffret-p.jp/simulation"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://news.mynavi.jp/photograph/price/",
+     "https://blog.sakaiphoto.jp/?page_id=1154",
+     "https://www.caratt.jp/family/108858/",
+     "https://www.studio-nagahara.co.jp/price",
+     "https://h-photo.jp/category/price/",
+     "https://www.tokyoshasin.com/price.html",
+     "https://www.matsushima-studio.com/plan/",
+     "https://photo-studio-inailife.com/all-data-delivered/",
+     "https://www.hikari-photo.net/price/",
+     "https://photograph.news.mynavi.jp/price/",
+     "https://www.caratt.jp/family/109511/",
+     "https://photo-navi.jp/column/photo-price/",
+     "https://www.photorait.net/search/kodawari_search/52",
+     "https://www.hi753.com/blog/719/",
+     "https://isetan-photo.co.jp/price/",
+     "https://www.takashimaya-photo.jp/price/",
+     "https://biz.photoproduce.net/system.php"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 データ 納品 いつ届く": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kasha-g.com/column/%E5%86%99%E7%9C%9F%E3%81%AE%E7%B4%8D%E6%9C%9F%E7%9B%AE%E5%AE%89%E3%81%AF%EF%BC%9F%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%92%AE%E5%BD%B1%E3%81%8B%E3%82%89%E3%83%87%E3%83%BC%E3%82%BF%E3%83%BB%E5%95%86/",
+     "https://studio753.mai-jp.net/blog/2026/03/04/%E4%B8%83%E4%BA%94%E4%B8%89%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E7%B4%8D%E5%93%81%E6%99%82%E6%9C%9F%E3%81%AF%E3%81%84%E3%81%A4%EF%BC%9F%E7%9B%AE%E5%AE%89%E3%82%84%E7%A2%BA%E8%AA%8D%E3%81%99%E3%81%B9/",
+     "https://www.precieux-studio.com/column/photostudio-data-tips/",
+     "https://www.precieux-studio.com/column/photostudio-data-tips/",
+     "https://roll7wedding.092photo.com/column/1618/",
+     "https://roll7wedding.092photo.com/column/1618/",
+     "https://weddingworks.jp/blog/photo-nouki/",
+     "https://www.photorait.net/special/422",
+     "https://kasha-g.com/column/%E5%86%99%E7%9C%9F%E3%81%AE%E7%B4%8D%E6%9C%9F%E7%9B%AE%E5%AE%89%E3%81%AF%EF%BC%9F%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%92%AE%E5%BD%B1%E3%81%8B%E3%82%89%E3%83%87%E3%83%BC%E3%82%BF%E3%83%BB%E5%95%86/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kotohana.jp/nouki/",
+     "https://www.la-viephoto.com/faq",
+     "https://tokihana.net/articles/685/",
+     "https://www.photoru.jp/qa/16.html",
+     "https://laquan.com/753/index.html",
+     "https://www.post-create.com/stpost/plan/shichigosan/",
+     "https://www.precieux-studio.com/column/photostudio-data-tips/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 アルバム 作成 費用 相場": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://meetsmore.com/services/shichigosan-photographers/media/67996",
+     "https://laquan.com/753/topics/oyakudachi106.html",
+     "https://furisodemorino.com/column/column35",
+     "https://photo-ds.jp/blog/blog-14231/",
+     "https://studio-coco.jp/album/",
+     "https://www.happilyphoto.jp/column/692202/",
+     "https://h-photo.jp/%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%96%99%E9%87%91%E8%A1%A8/",
+     "https://photobook.kitamura.jp/first-time/size.html",
+     "https://www.nitijyouphotobook.jp/photobook/recommend/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10262851580",
+     "https://www.studio-palette.com/howto_info/studio_howto/489176.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://photo-navi.jp/column/photo-price/",
+     "https://photonoba.com/album/",
+     "https://www.post-create.com/stpost/photopedia/howto/photo-studio-price",
+     "https://www.hi753.com/blog/719/",
+     "https://studio-coco.jp/album/",
+     "https://shibuya-studio.jp/option.html",
+     "https://pic-tomo.com/blog/photobook-service-comparison-2026",
+     "https://tolot.com/lp/cost/",
+     "https://pg-ja.fujifilm.com/photobook_price.html",
+     "https://f-photobook.jp/smart/price/",
+     "https://photobook-hikaku-navi.com/fujiphotoalbum/",
+     "https://photobook-hikaku.net/price-hikaku/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 アルバム 選び方": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/1299",
+     "https://www.yamada-denkiweb.com/media/41967/",
+     "https://kurashi.fujifilm.com/category/howto/374.html",
+     "https://heim.jp/magazine/3272",
+     "https://liliumnenaphoto.com/media/20260127/",
+     "https://www.albumna.jp/articles/243",
+     "https://www.ecotte-shop.com/contents/photo_album_recommendation/",
+     "https://trustcellar.com/media/articles/1630",
+     "https://www.studio-alice.co.jp/charge/commodity/?category=1",
+     "https://print-m.co.jp/photo-print/album.html",
+     "https://www.precieux-studio.com/products/",
+     "https://pickys-life.jp/photo-album/",
+     "https://enishi-kamakura.jp/blog_albumfeatures/",
+     "https://studio-coco.jp/album/",
+     "https://album-tukurou.com/lesson02/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 データ 著作権 利用範囲": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://studio.gophotowork.com/chosaku/",
+     "https://www.jps.gr.jp/rights-2/",
+     "https://dprofessions.co.jp/%E5%BC%81%E8%AD%B7%E5%A3%AB/%E7%9F%A5%E7%9A%84%E8%B2%A1%E7%94%A3%E6%A8%A9/%E8%91%97%E4%BD%9C%E6%A8%A9/SNS%E3%81%AB%E6%8A%95%E7%A8%BF%E3%81%97%E3%81%9F%E5%86%99%E7%9C%9F%E3%81%AE%E8%91%97%E4%BD%9C%E6%A8%A9%E3%81%AF%E8%87%AA%E5%88%86%E3%81%AB%E3%81%82%E3%82%8B%E3%81%AE%E3%81%8B/",
+     "https://www.areadrive.jp/column/photo/photo-copyright-trouble/",
+     "https://rs.sakura.ad.jp/column/others/photographic-rights/",
+     "https://office.vbest.jp/columns/ol_defamation/g_other/7095/",
+     "https://note.com/ai_love_009/n/nd82d8b9e72a9"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jps.gr.jp/rights-2/",
+     "https://prtimes.com/magazine/copyright-portrait-right/",
+     "https://kibidan-go.co.jp/blog/6069/",
+     "https://webseisaku.site/blog/photo-copyright/",
+     "https://copyright-topics.jp/topics/private_use/",
+     "https://www.innovations-i.com/copyright-info/?id=27",
+     "https://corporate.vbest.jp/columns/5673/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 データ 年賀状 使える": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://laquan.com/family/topics/oyakudachi11.html",
+     "https://fujicolor.fujifilm.com/jp/ja/magazine/article/0086-nengajo-self-photo/",
+     "https://our-photo.co/lp/nenga",
+     "https://copyright-topics.jp/topics/use_for_new_years_card/",
+     "https://www.studio-alice.co.jp/charge/data/",
+     "https://www.studio-alice.co.jp/faq/commodity.html"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 台紙 フレーム 選び方": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.precieux-studio.com/column/photoboard-daishi/",
+     "https://kurashi.fujifilm.com/category/howto/174.html",
+     "https://shashin-album.jp/blog/detail/2277",
+     "https://shashin-album.jp/blog/detail/2239",
+     "https://www.happilyphoto.jp/column/693773/",
+     "https://kasha-g.com/column/%E5%86%99%E7%9C%9F%E5%8F%B0%E7%B4%99%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E5%85%AD%E5%88%87%E3%83%BB%E5%9B%9B%E5%88%87%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%92%E8%A7%A3%E8%AA%AC%EF%BC%81%E3%82%B9%E3%82%BF/",
+     "https://sajiki.com/blog/photo-item-01/"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 写真 修整 追加料金": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://studio250.jp/retouch/",
+     "https://patrick-osaka.jp/blog/photo-correction-image-kids/",
+     "https://www.photo-takano.jp/photography/retouch.php",
+     "https://tsubasa-memo.github.io/retouch-pricing-database.html",
+     "https://note.com/tokyo_retouch/n/n904f162d9d67",
+     "https://retouch.ink/article/posts/retouch-pricing-guide/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://studio250.jp/retouch/",
+     "https://photoproduce.net/option/retouch",
+     "https://patrick-osaka.jp/blog/photo-correction-image-kids/",
+     "https://www.bellefoto.work/service.html",
+     "https://tsubasa-memo.github.io/retouch-pricing-database.html",
+     "https://blog.500mails.com/photo-retouching-services-and-prices/",
+     "https://amix-design.com/asoboad/retouch-price"
+    ],
+    "error": ""
+   }
+  },
+  "写真館 データ 保管期間 再注文": {
+   "group": "データ納品・アルバム仕上げ",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14314590189",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12292865247",
+     "https://www.studio-alice.co.jp/faq/commodity.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12313145152",
+     "https://natsumi1984.com/blog/freelance-life/studio-alice-pocketalice/",
+     "https://www.studio-alice.co.jp/charge/data/",
+     "https://faq.kitamura.jp/kb/article/%E3%83%95%E3%82%A9%E3%83%88%E3%83%96%E3%83%83%E3%82%AF%E3%81%AE%E8%BF%BD%E5%8A%A0%E6%B3%A8%E6%96%87%E6%96%B9%E6%B3%95(%E4%BF%9D%E5%AD%98%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8B%E3%82%89%E3%81%AE%E5%86%8D%E6%B3%A8%E6%96%87)%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E4%B8%8B%E3%81%95%E3%81%84/",
+     "https://faq.kitamura.jp/kb/article/%E3%83%95%E3%82%A9%E3%83%88%E3%83%96%E3%83%83%E3%82%AF%E3%81%AE%E8%BF%BD%E5%8A%A0%E6%B3%A8%E6%96%87%E6%96%B9%E6%B3%95(%E4%BF%9D%E5%AD%98%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8B%E3%82%89%E3%81%AE%E5%86%8D%E6%B3%A8%E6%96%87)%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E4%B8%8B%E3%81%95%E3%81%84/",
+     "https://studio.benesse.ne.jp/reserve/kiyaku201903/",
+     "https://faq.ps-turtle.com/%E6%92%AE%E5%BD%B1%E6%B8%88%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%BF%9D%E7%AE%A1%E6%9C%9F%E9%96%93-691441a9f077e5d73a4730e4",
+     "https://kasha-g.com/column/%E5%86%99%E7%9C%9F%E9%A4%A8%E3%81%AE%E7%84%BC%E3%81%8D%E5%A2%97%E3%81%97%E6%9C%9F%E9%99%90%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E4%BF%9D%E7%AE%A1%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9%E3%80%82%E5%A4%A7/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1093365665"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://curama.jp/344466929/blog/5f8b1194-f442-4ad0-889f-f569ef2d85e2/",
+     "https://www.kitamura-print.com/photo_id/service/",
+     "https://www.studio-alice.co.jp/faq/commodity.html",
+     "https://www.studio-tkg.com/faq/014.htm",
+     "https://kasha-g.com/column/%E5%86%99%E7%9C%9F%E9%A4%A8%E3%81%AE%E7%84%BC%E3%81%8D%E5%A2%97%E3%81%97%E6%9C%9F%E9%99%90%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E4%BF%9D%E7%AE%A1%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9%E3%80%82%E5%A4%A7/",
+     "https://www.precieux-studio.com/blog/shopblog/storage_period/",
+     "https://studio.benesse.ne.jp/reserve/kiyaku201903/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

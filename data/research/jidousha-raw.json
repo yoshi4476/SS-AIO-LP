@@ -1,0 +1,1587 @@
+{
+ "industry": "jidousha",
+ "date": "2026-10-05",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 車検 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kobac.co.jp/",
+     "https://www.kobac.co.jp/bin/step_syasyu_select.php?TenpoCode=340",
+     "https://www.syakenkitaosaka.jp/faq.html",
+     "https://www.hayataro.com/shop/list/detail?id=400",
+     "https://www.autobacs.com/static_html/srv/syaken/top.html",
+     "https://www.hayataro.com/shop/list?area=27",
+     "https://www.autobacs.com/static_html/srv/syaken/article/3023/",
+     "https://www.autobacs.com/information/faq/faq_list.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://car-me.jp/carinspection/articles/19817",
+     "https://car.rakuten.co.jp/shaken/ranking/osaka/osakashi/",
+     "https://car.rakuten.co.jp/shaken/ranking/osaka/",
+     "https://car.rakuten.co.jp/shaken/ranking/osaka/osakashi/?type=price",
+     "https://car.rakuten.co.jp/shaken/ranking/osaka/?type=price",
+     "https://car.rakuten.co.jp/shaken/ranking/osaka/higashiosakashi/?type=review",
+     "https://www.okada-car.com/media/shaken/osaka/",
+     "https://www.okada-car.com/media/shaken/higashi-osaka/",
+     "https://shapro.net/shaken-osaka/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://car-me.jp/carinspection/articles/19817",
+     "https://shapro.net/shaken-osaka/",
+     "https://xn--pss754awibnx7fyyh.com/voice/",
+     "https://car-days.fun/blog/inspection/52496",
+     "https://car.rakuten.co.jp/shaken/ranking/osaka/?type=review",
+     "https://car.rakuten.co.jp/shaken/ranking/osaka/osakashi/",
+     "https://www.okada-car.com/media/shaken/osaka/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 中古車 販売店 選び方": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.aftc.or.jp/contents/am/shiharai/index.html",
+     "https://www.aftc.or.jp/contents/am/shiharai/faq.html",
+     "https://www.jucda.or.jp/soudan/know-how/03.html",
+     "https://www.jucda.or.jp/soudan/trouble/afterdelivery/05.html",
+     "https://www.jucda.or.jp/tekisei-hanbaiten/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://life.oricon.co.jp/rank-used-car-sell/specialty/area/kanto.html",
+     "https://life.oricon.co.jp/rank-used-car-sell/specialty/",
+     "https://221616.com/guide/distinguish/",
+     "https://www.goo-net.com/usedcar_shop/pref-13/",
+     "https://oikura.jp/magazine/car46915/",
+     "https://www.carseven.co.jp/guide/news/17751/",
+     "https://carbell.jp/best/car-purchase-tokyo/",
+     "https://otoronplus.com/column/used-car22/",
+     "https://ku-ru-ma.com/blog/?p=3310"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 オイル交換 安い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sharp-ind.co.jp/mente/index.html",
+     "https://www.jms-car.com/shop/tokai/22947_nagoyanishi/maintenance/pitmenu.html",
+     "https://www.autobacs.com/static_html/srv/engineoil/top.html?regular_dm=oil"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jms-car.com/shop/tokai/22947_nagoyanishi/maintenance/pitmenu.html",
+     "https://www.nagoya-auto.com/shaken_88.html",
+     "https://tsushima-oil-koukan.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://driveshop-fuji.jp/",
+     "https://taka-2.com/column/detail/20250531230350/",
+     "https://www.jms-car.com/shop/tokai/22947_nagoyanishi/maintenance/pitmenu.html",
+     "https://mentemo.com/stores/aichi/100/oil"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 車 修理 工場 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.goo-net.com/pit/shop/0804250/top",
+     "https://www.goo-net.com/pit/shop/0172747/top",
+     "https://www.goo-net.com/pit/shop/0804459/top"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.zehitomo.com/lifestyle/transportation/automobile/autorepair/fukuoka",
+     "https://meetsmore.com/t/car-maintenance/fukuoka",
+     "https://www.goo-net.com/pit/inspection/10010/P40",
+     "https://www.goo-net.com/pit/areamap/P40",
+     "https://www.goo-net.com/pit/repair/30110/P40",
+     "https://car.rakuten.co.jp/repair/ranking/fukuoka/fukuokashi/",
+     "https://navifukuoka.com/jidoshatoso/fukuoka/",
+     "https://autowork.jp/",
+     "https://www.matsuoka-motars.co.jp/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.fukuoka-online.jp/column/fukuoka-bankintosou/",
+     "https://www.ekiten.jp/shop_4908150/review/",
+     "https://www.carcon.co.jp/column/article/20240722/",
+     "https://saiyasu-syuuri.com/blog/104135/",
+     "https://meetsmore.com/services/automobile-body-repair-and-paint/fukuoka/reviews",
+     "https://car.rakuten.co.jp/repair/ranking/fukuoka/fukuokashi/?type=review",
+     "https://meetsmore.com/services/automobile-body-repair-and-paint/fukuoka"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 タイヤ交換 予約": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://kitanihon-autobacs.com/booking/",
+     "https://sapporotoyota.co.jp/entered",
+     "https://sapporo-tire.com/choice/",
+     "https://www.savehokkaido.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.taiyakan.co.jp/shop/teine/recommend/1577105/",
+     "https://www.daihatsu-hokkaido.co.jp/Information/2026taiya",
+     "https://sapporotoyota.co.jp/entered",
+     "https://tire-hood.com/store/searchShop/?jisCode=1100",
+     "https://www.nishitire.co.jp/reserve/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://tire-hood.com/store/storeLP/sapporo/",
+     "https://tire-hood.com/store/searchShop/?jisCode=1100",
+     "https://www.tirepit.jp/stores/search?prefecture_word=hokkaido&city=%E6%9C%AD%E5%B9%8C%E5%B8%82",
+     "https://www.jms-car.com/shop/hokkaido/10112_kotoni/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEc7iWoRTm1oVaH71VvoquwEE8abtJ-E8iQWZvGe6ShIgpKe-OvzuEtE5-ZHczKifeXbtzX7P3P8rVSeJL18QXQTTsMfhzdqtucnfqqVMMtsZTDrmyu0iZnMCzQ5cM=",
+     "https://www.doene-net.jp/shop/0103000190",
+     "https://car.rakuten.co.jp/tireexchange/ranking/hokkaido/sapporoshi/?type=price",
+     "https://car.rakuten.co.jp/tireexchange/ranking/hokkaido/sapporoshi-chuoku/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 車検 格安 どこ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://syaken.activecollection.co.jp/",
+     "https://2525syaken.com/store/kanagawa/yokohama/centerminami/",
+     "https://2525syaken.com/price/",
+     "https://kobac-futamatagawa.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://car.rakuten.co.jp/shaken/ranking/kanagawa/yokohamashi/?type=price",
+     "https://car.rakuten.co.jp/shaken/ranking/kanagawa/yokohamashi-konanku/?type=price",
+     "https://safety-shaken.jp/navi/recommended-5vendors-yokohama-city/",
+     "https://2525syaken.com/knowledge/column/s011/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kobac-futamatagawa.com/",
+     "https://kobac-kohoku.com/",
+     "https://kobac-yokohama01.com/",
+     "https://syaken.activecollection.co.jp/",
+     "https://www.hayataro.com/shop/list/detail?id=357",
+     "https://car.rakuten.co.jp/shaken/ranking/kanagawa/yokohamashi/?type=price",
+     "https://car-me.jp/carinspection/articles/19838",
+     "https://shapro.net/yokohamashaken/",
+     "https://www.sakura-shaken.jp/area/kanagawa/yokohama-shi/",
+     "https://otakara-shaken.com/14/14117/city_ranking.aspx",
+     "https://car.rakuten.co.jp/shaken/area/kanagawa/yokohamashi/?options=S0000015"
+    ],
+    "error": ""
+   }
+  },
+  "京都 板金 塗装 見積もり": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.showa-at.co.jp/estimate/",
+     "https://www.gion-m.co.jp/",
+     "https://abw.kyoto/",
+     "https://accelon.jp/repair/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/automobile-body-repair-and-paint/kyoto",
+     "https://meetsmore.com/services/automobile-body-repair-and-paint/kyoto/kyoto",
+     "https://www.kamitake.net/blog/repair/price/",
+     "https://car-days.fun/blog/column/15930",
+     "https://www.4-side.com/column/information/5452/",
+     "https://kumiyama-bankin.com/",
+     "https://www.carcon.co.jp/column/article/20240325/",
+     "https://www.gion-m.co.jp/",
+     "https://msauto-bankin.com/",
+     "https://abw.kyoto/",
+     "https://kakuyasu-bankin.com/kyoto-fushimi/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://carcare-navi.com/area/kyoto-shi/",
+     "https://www.carcon.co.jp/column/article/20240325/",
+     "https://www.showa-at.co.jp/estimate/",
+     "https://garage-shimizu.com/",
+     "https://www.carcon.co.jp/column/article/20240325/",
+     "https://www.gion-m.co.jp/",
+     "https://kakuyasu-bankin.com/kyoto-fushimi/",
+     "https://kyoto-bankin.net/",
+     "https://car.rakuten.co.jp/repair/ranking/kyoto/kyotoshi/?type=price",
+     "https://meetsmore.com/services/automobile-body-repair-and-paint/kyoto",
+     "https://meetsmore.com/services/automobile-body-repair-and-paint/kyoto"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 軽自動車 中古 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/usedcar/pref-28/gov_decreed_city-281/",
+     "https://kakaku.com/kuruma/used/spec/Prefecture=31/BodyType=5/",
+     "https://kuruma-ex.jp/usedcar/search/result/pref/54/city/28111/body/K",
+     "https://u-catch.daihatsu.co.jp/kw/%E7%A5%9E%E6%88%B8%E5%B8%82%E3%80%80%E8%BB%BD%E8%87%AA%E5%8B%95%E8%BB%8A%E3%80%80%E4%B8%AD%E5%8F%A4/",
+     "https://kuruma-ex.jp/usedcar/search/result/pref/54/city/28109/body/K",
+     "https://kuruma-ex.jp/usedcar/search/result/pref/54/body/K/price_max/200000",
+     "https://kuruma-ex.jp/usedcar/search/result/pref/54/city/28102/body/K",
+     "https://kuruma-ex.jp/usedcar/search/result/pref/54/body/K/price_max/300000",
+     "https://kuruma-ex.jp/usedcar/search/result/pref/54/gd_city/28100/body/K/price_max/300000",
+     "https://221616.com/guide/first-time/used-kei/",
+     "https://car-me.jp/usedcars/articles/16111",
+     "https://221616.com/norico/kei-rec/",
+     "https://my-best.com/434",
+     "https://keinomori.com/topics/recommend/light-used-car-ranking20/",
+     "https://keinomori.com/topics/car/2024_oldcar_neraime/",
+     "https://k-collect.jp/blog/useful/1124/",
+     "https://buddica.direct/magazine/car-purchase/how_to_select_old_light_vehicle_103/",
+     "https://carhack.jp/buy/light-vehicle-popularity-ranking/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ecocarpark.jp/information/blog/2533/",
+     "https://www.nextage.jp/buy_guide/recommend/289690/",
+     "https://www.atm-car.co.jp/column/n_1753348379/",
+     "https://cars-enjoy.com/media/?p=10603",
+     "https://carview.yahoo.co.jp/ncar/catalog/honda/n_box/chiebukuro/detail/2/?qid=11317013131",
+     "https://car-mo.jp/mag/category/tips/usedcar/kobe/",
+     "https://kuruma-ex.jp/usedcar/search/result/pref/54/gd_city/28100/body/K/price_max/300000",
+     "https://www.libertynet.jp/store/9.php",
+     "https://www.kobe-car.co.jp/",
+     "https://www.carsensor.net/shop/hyogo/315129005/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 車検 代車 無料": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://car-me.jp/carinspection/articles/19813",
+     "https://www.okada-car.com/media/shaken/sendai/",
+     "https://sunriseauto.co.jp/service/",
+     "https://sendaishi-shaken.com/",
+     "https://sendaishi-shaken.com/price.html",
+     "https://kobac-sendai.com/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kobac-sendaikita.com/about",
+     "https://kobac-sendaikita.com/price_menu",
+     "https://sawamoto-car.co.jp/flow/",
+     "https://sawamoto-car.co.jp/flow/",
+     "https://auto-friend.net/",
+     "https://auto-friend.net/",
+     "https://car-me.jp/carinspection/articles/19813",
+     "https://otakara-shaken.com/601390021/shop.aspx",
+     "https://car.rakuten.co.jp/shaken/area/miyagi/sendaishi/?options=S0000018"
+    ],
+    "error": ""
+   }
+  },
+  "広島 自動車 整備工場 近く": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.yushin-j.com/access.html",
+     "https://okada-motors-19640401.com/",
+     "https://hamai.jp/company/kusunoki-factory/",
+     "https://www.niho-jidosha.jp/company/",
+     "https://www.hiroko-group.co.jp/shinsei/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/pit/inspection/10010/P34",
+     "https://www.goo-net.com/pit/J341037?p=1",
+     "https://www.hasp.or.jp/seibi-cateory/category1/",
+     "https://www.niho-jidosha.jp/",
+     "https://car-premium.net/maintenance/PR-Hiroshima/CT-HiroshimaCity",
+     "https://meetsmore.com/services/automobile-inspection/hiroshima/hiroshima",
+     "https://car.rakuten.co.jp/shaken/ranking/hiroshima/hiroshimashi/",
+     "https://car.rakuten.co.jp/shaken/ranking/hiroshima/hiroshimashi/?type=review"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hasp.or.jp/seibi/",
+     "https://www.seibi-pro.com/menu/1",
+     "https://www.goo-net.com/pit/J341061?p=1",
+     "https://www.goo-net.com/pit/inspection/10030/P34",
+     "https://car.rakuten.co.jp/repair/ranking/hiroshima/hiroshimashi/?type=review",
+     "https://meetsmore.com/t/car-maintenance/hiroshima/hiroshima",
+     "https://www.carcon.co.jp/column/article/20240714/"
+    ],
+    "error": ""
+   }
+  },
+  "車検 費用 相場": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://suzukijiko.co.jp/car-inspection.html",
+     "https://www.cr.mufg.jp/mycard/beginner/23111/index.html",
+     "https://www.autobacs.com/static_html/srv/syaken/article/3001/",
+     "https://carbits.jp/media/kei-shaken-hiyou/",
+     "https://carbits.jp/media/futsusha-shaken-hiyou/",
+     "https://carmap.jp/car-inspection-cost/",
+     "https://otakara-shaken.com/useful/type/type01.html",
+     "https://www.okada-car.com/media/shaken/keijidosha/",
+     "https://car-cost-navi.com/articles/shaken-cost-guide",
+     "https://www.joyobank.co.jp/column/mycar/vehicle_inspection_cost.html",
+     "https://life.oricon.co.jp/rank-vehicle-inspection/special/knowledge/car-inspection-cost/",
+     "https://ottocast.jp/blogs/news/keicar_inspectioncost",
+     "https://carnext.jp/magazine/article/vehicle_inspection_legal_fees/",
+     "https://smile-cars.jp/car-media/car-inspection-cost/",
+     "https://www.sankoseibi.jp/column/how-much-statutory-fees/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://otakara-shaken.com/useful/cost/beginner03.html",
+     "https://xn--y5q62dc41gxzbxp.net/blog/car-inspection-cost/",
+     "https://ss.eneos-wing.co.jp/colum/carinspection-cost-tax/",
+     "https://www.mlit.go.jp/jidosha/kensatoroku/sikumi/houteihiyou.pdf",
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/222940/",
+     "https://suzukijiko.co.jp/car-inspection.html"
+    ],
+    "error": ""
+   }
+  },
+  "車検 どこが安い 比較": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nextage.jp/syaken_guide/tech/144653/",
+     "https://curama.jp/car-inspection/magazine/3136/",
+     "https://matome.response.jp/articles/7071",
+     "https://www.kamitake.net/blog/vehicle-inspection/marketprice/",
+     "https://carmap.jp/car-inspection-cost/",
+     "https://amind.jp/maintenance/shaken-cost-dealer-vs-minka/",
+     "https://www.okada-car.com/media/shaken/shaken_osusume/",
+     "https://syojiki-garage.com/1381",
+     "https://kurasim.com/simulators/car-inspection"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.nextage.jp/syaken_guide/tech/144653/",
+     "https://www.takakuureru.com/magazine/17515",
+     "https://www.wecars.co.jp/column/inspection/cost/006.html",
+     "https://www.shakenkan.co.jp/guide/shaken-hiyou/",
+     "https://cars-enjoy.com/media/?p=15966",
+     "https://www.nextage.jp/syaken_guide/tech/167953/",
+     "https://carlease.idemitsu.com/column/vehicleinspection-lowcost/",
+     "https://www.okada-car.com/media/shaken/shaken_osusume/",
+     "https://car.rakuten.co.jp/shaken/ranking/?type=price",
+     "https://car-me.jp/carinspection/articles/19726",
+     "https://www.kamitake.net/blog/vehicle-inspection/marketprice/",
+     "https://www.yellowhat.jp/column/inspection/029/index.html"
+    ],
+    "error": ""
+   }
+  },
+  "車検 ディーラー 民間 違い": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/tenken-syaken-gimon/4842/",
+     "https://carnext.jp/magazine/article/new_car_inspection/",
+     "https://cobby.jp/car-inspection.html",
+     "https://www.applenet.co.jp/guide/process/dealer_shaken_cost.html",
+     "https://financial-field.com/living/entry-348511",
+     "https://okano-jidousya.com/column/20251118/",
+     "https://amind.jp/maintenance/shaken-cost-dealer-vs-minka/",
+     "https://rachemon.com/blog/index.php?e=82",
+     "https://salaryman-story.com/dealer-shaken-vs-private",
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/217729/",
+     "https://seibii.co.jp/blog/contents/private_shaken",
+     "https://clicccar.com/2020/05/09/974512/",
+     "https://kanto-koudai.com/blog/private-inspection-garages-vs-dealers/"
+    ],
+    "error": ""
+   }
+  },
+  "車検 選び方 ポイント": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.wecars.co.jp/column/inspection/knowhow/021.html",
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/tenken-syaken-gimon/4842/",
+     "https://www.carseven.co.jp/magazine/news/11662/",
+     "https://cobby.jp/car-inspection.html",
+     "https://kanto-koudai.com/blog/private-inspection-garages-vs-dealers/",
+     "https://2525syaken.com/knowledge/column/s001/",
+     "https://rachemon.com/blog/index.php?e=82",
+     "https://salaryman-story.com/dealer-shaken-vs-private",
+     "https://kuruma-kyokasho.com/shaken-dealer-vs-others/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/213976/",
+     "https://www.hayataro.com/column/detail?id=325",
+     "https://www.nextage.jp/syaken_guide/quote/144626/",
+     "https://otakara-shaken.com/useful/knowledge/knowledge15.html",
+     "https://www.sompo-direct.co.jp/otona/oshiete/car/inspection-recommend.html",
+     "https://www.shakenkan.co.jp/guide/shaken-choice/",
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/231199/",
+     "https://www.k-ksk.com/vehicle-inspection/",
+     "https://g-7autoservice.co.jp/2kagetumae_syaken/",
+     "https://www.mlit.go.jp/report/press/jidosha02_hh_000645.html"
+    ],
+    "error": ""
+   }
+  },
+  "車検 いつから 受けられる": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.yellowhat.jp/column/inspection/021/index.html",
+     "https://www.wecars.co.jp/column/inspection/period/025.html",
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/217886/",
+     "https://park.sompo-japan.co.jp/carmag/carlife/tips/column/ct061.html",
+     "https://www.jms-car.com/cp/syaken/setsumei/",
+     "https://faq2.nissan.co.jp/faq/show/9692?category_id=63&site_domain=default",
+     "https://car.rakuten.co.jp/magazine/articles/2019/shaken01/",
+     "https://www.sankoseibi.jp/column/when_best/",
+     "https://carcari.net/shaken/shaken-itsukara/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kaneki5588.com/blog/?p=27",
+     "https://ab-higashitotsuka.com/product_information/oil_batt/14975/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHAcaiPumqme31QcyAPq3fNkn1YZ9UBkfWfDLhjCwOKuidNzTPjPoUZXbrM_JjbhKCumM2kKRPC_WJwhXvDErSomaDKssPBWSnjSjhjsPF_R70HGLWTGBCsnBYJnSeAr_c7xDXALK2sEtqxGPJc9-4=",
+     "https://ab-higashitotsuka.com/product_information/oil_batt/14975/"
+    ],
+    "error": ""
+   }
+  },
+  "車検 法定費用 内訳": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://bsrweb.jp/article/145494",
+     "https://www.jms-car.com/maintenance/syaken/legal-expense/",
+     "https://www.applenet.co.jp/guide/process/inspection_legal_fees.html",
+     "https://www.hayataro.com/column/detail?id=4511",
+     "https://kurashi-keisan.jp/tools/car-shaken-hiyou",
+     "https://www.carseven.co.jp/guide/news/13584/",
+     "https://carbits.jp/media/futsusha-shaken-hiyou/",
+     "https://otakara-shaken.com/useful/tax/legal-expense.html",
+     "https://yattemirulab.com/shaken/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jms-car.com/maintenance/syaken/legal-expense/",
+     "https://www.yokoyama-m.com/blog/blog/4024/",
+     "https://lify.jp/column/insurance-news/article-80914/",
+     "https://www.autobacs.com/static_html/srv/syaken/article/3052/",
+     "https://www.haisya110.com/blog/2025/09/13/5783",
+     "https://car.kaneko-gyosei-office.com/18079/",
+     "https://www.naltec.go.jp/business/inspection/howto/costs.html",
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/217651/"
+    ],
+    "error": ""
+   }
+  },
+  "車検 見積もり 追加費用": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/kuruma-gimon/1845/",
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/kuruma-gimon/4667/",
+     "https://www.nextage.jp/syaken_guide/quote/143416/",
+     "https://www.autobacs.com/static_html/srv/syaken/article/3043/",
+     "https://suzukijiko.co.jp/car-inspection.html",
+     "https://www.carseven.co.jp/magazine/news/832/",
+     "https://www.applenet.co.jp/guide/process/shaken_cost_average.html",
+     "https://www.haisya110.com/blog/2026/05/02/2042",
+     "https://smile-cars.jp/car-media/car-inspection-cost/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/218001/",
+     "https://www.drimportcar.com/hqBlog/106",
+     "https://kobac-kashiwazaki01.com/column/20260121-118/",
+     "https://cos.cosmo-oil.co.jp/blog/289/",
+     "https://yasashiishaken0573.com/647/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13108361948",
+     "https://yasashiishaken758.com/column/626/",
+     "https://www.autobacs.com/static_html/srv/syaken/article/3043/",
+     "https://car-match.jp/shinrifu/shopblog/posts28672",
+     "https://note.com/papanpanpan/n/nec0ada0a123b",
+     "https://note.com/royal_weasel5441/n/ndf817909497d",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13242494313",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12318001717"
+    ],
+    "error": ""
+   }
+  },
+  "車検 当日 返し 可能": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://seibii.co.jp/blog/contents/shaken_same_day",
+     "https://www.yellowhat.jp/column/inspection/026/index.html",
+     "https://www.goo-net.com/magazine/carmaintenance/inspection/217675/",
+     "https://www.carseven.co.jp/guide/news/13488/",
+     "https://www.shakenkan.co.jp/guide/itiniti-shaken/",
+     "https://www.takakuureru.com/magazine/17512",
+     "https://car.rakuten.co.jp/shaken/area/aichi/nagoyashi/?options=S0000004",
+     "https://ideno-car.jp/column/202407_2/",
+     "https://auto-runner.co.jp/blog/%E8%BB%8A%E6%A4%9C%E3%81%AB%E3%81%A9%E3%82%8C%E3%81%8F%E3%82%89%E3%81%84%E6%99%82%E9%96%93%E3%81%8C%E3%81%8B%E3%81%8B%E3%82%8B/"
+    ],
+    "error": ""
+   }
+  },
+  "車検 通らない 原因": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://cos.cosmo-oil.co.jp/blog-detail/1/1000000536/",
+     "https://www.yellowhat.jp/column/inspection/072/index.html",
+     "https://www.goo-net.com/kaitori/kaitori-satei/tenken-syaken-gimon/4612/",
+     "https://morokomi.carcon.co.jp/mag/article/20230120/",
+     "https://www.tama-j.co.jp/column/1527/",
+     "https://yellowhat-shaken.jp/information/shaken-fail/",
+     "https://www.stylewalk.co.jp/post/shaken-toranakattara",
+     "https://syaken.344860.net/blog/%E8%BB%8A%E6%A4%9C%E5%9F%BA%E6%9C%AC%E6%83%85%E5%A0%B1/196/",
+     "https://ctn-net.jp/kaitori/car/column/vehicle-inspection-failed/",
+     "https://www.goo-net.com/kaitori/kaitori-satei/tenken-syaken-gimon/4537/",
+     "https://www.goo-net.com/kaitori/kaitori-satei/tenken-syaken-gimon/5870/",
+     "https://otakara-shaken.com/useful/parts/parts08.html",
+     "https://carglass-repair.com/column/7242/",
+     "https://car3.net/archives/22042197.html",
+     "https://pit.mantan.co.jp/column/detail/12"
+    ],
+    "error": ""
+   }
+  },
+  "車検 ユーザー車検 費用": {
+   "group": "車検",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://ss.eneos-wing.co.jp/colum/carinspection-cost-tax/",
+     "https://suzukijiko.co.jp/car-inspection.html",
+     "https://bsrweb.jp/article/145494",
+     "https://wwwtb.mlit.go.jp/tohoku/qa/kennsa/a7.html",
+     "https://kurashi-keisan.jp/tools/car-shaken-hiyou",
+     "https://smile-cars.jp/car-media/car-inspection-cost/",
+     "https://www.carseven.co.jp/magazine/news/2691/",
+     "https://shinnavi.jp/column/137/",
+     "https://otakara-shaken.com/useful/user/user08.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.carseven.co.jp/magazine/news/2691/",
+     "https://yasashiishaken758.com/column/1977/",
+     "https://shakentsuchiya.com/blog/2025/10/25/3%E5%88%86%E3%81%A7%E3%82%8F%E3%81%8B%E3%82%8B%EF%BC%81%E8%BB%8A%E6%A4%9C%E3%81%AE%E6%B3%95%E5%AE%9A%E8%B2%BB%E7%94%A8%EF%BC%88%E9%87%8D%E9%87%8F%E7%A8%8E%E3%83%BB%E8%87%AA%E8%B3%A0%E8%B2%AC%E3%83%BB/",
+     "https://wwwtb.mlit.go.jp/tohoku/qa/kennsa/a7.html",
+     "https://www.jms-car.com/maintenance/syaken/legal-expense/",
+     "https://e-kobac.com/legalfee/",
+     "https://www.autobacs.com/static_html/srv/syaken/article/3009/",
+     "https://yoyaku.eneos-mobilineer.com/4890/"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 費用 相場": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.pricey.jp/web/articles/2880",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-cost-inexpensive/",
+     "https://www.jpmarket-conditions.com/7341/",
+     "https://carbike-maintenance.jp/2026/03/26/oil-change-cost-comparison-guide/",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-cost/",
+     "https://cars-enjoy.com/media/?p=2902",
+     "https://cobby.jp/oilchange-cost.html",
+     "https://www.tokusen-tai.com/blog/20251005/",
+     "https://wyaguchi.com/blog/2187/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://kobac-miyamoto.com/news/cat02/1175/",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-cost-inexpensive/",
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/211489/",
+     "https://usamart.shop/guides/oil-change/1-5/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFqk1QwmFH88_tQBV6M1uxnrEhHIBZgKdiwzFRzFNgNTc5WwHkomJ2b8-BTQDjHhKn_6hWS4rXnYx4mU1I7Atir9OiBXoceEKfouOg3aG4Va92f73k=",
+     "https://cars-enjoy.com/media/?p=20048",
+     "https://bbs.kakaku.com/bbs/-/SortID=26492203/",
+     "https://car-doc.biz/mentenance/syaken/enjine-oil-exchange-1/",
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/211489/",
+     "https://usamart.shop/guides/oil-change/1-5/"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 どこで 安い": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://cartune.co.jp/magazine/articles/4232",
+     "https://www.takakuureru.com/magazine/17516",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-cost-inexpensive/",
+     "https://carbike-maintenance.jp/2026/03/26/oil-change-cost-comparison-guide/",
+     "https://car-trouble.hatenablog.com/entry/cheap-oil-change",
+     "https://magazine.cartune.me/articles/4231",
+     "https://autofocus365.com/cheap-oil-change/",
+     "https://carlife-lab.com/oirukokan-yasui/",
+     "https://asovica.com/oil-change-cheapest-shop/"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 頻度 目安": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jms-car.com/maintenance/oil/meyasu/",
+     "https://www.yellowhat.jp/column/oil/028/",
+     "https://www.autobacs.com/static_html/srv/engineoil/article/1020/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14320193239",
+     "https://rakunori.idex.co.jp/column/column_16.html",
+     "https://www.kamitake.net/blog/oil-change/interval/",
+     "https://www.atm-car.co.jp/column/n_1745662558/",
+     "https://www.carbase.jp/journal/car-maintenance/guideline-for-car-oil-change.html",
+     "https://www.sol.r-kyoto.co.jp/column/engine-oil-koukan-meyasu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jms-car.com/maintenance/oil/meyasu/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10311669435",
+     "https://note.com/carlife416/n/nccddd173d75c",
+     "https://jaf.or.jp/common/kuruma-qa/category-inspection/subcategory-everyday/faq212",
+     "https://www.youtube.com/watch?v=ORmCr-OsQAU"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 選び方 種類": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.yellowhat.jp/column/oil/020/",
+     "https://matome.response.jp/articles/1128",
+     "https://www.yellowhat.jp/column/oil/047/",
+     "https://www.yoro-store.com/blogs/useful/engineoil-recommend",
+     "https://www.yoro-store.com/blogs/useful/engineoil-kinds",
+     "https://carbike-maintenance.jp/2026/03/31/engine-oil-types-guide/",
+     "https://misakimotors.jp/media/engine/engineoil_baseoil/",
+     "https://refinehub-blog.com/%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%AA%E3%82%A4%E3%83%AB%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E3%81%AF%EF%BC%9F%E9%89%B1%E7%89%A9%E6%B2%B9%E3%83%BB%E5%85%A8%E5%90%88%E6%88%90%E6%B2%B9%E3%83%BB/",
+     "https://car-benri.com/engine-oil-type-car-guide/",
+     "https://autoc-one.jp/knowhow/5020900/",
+     "https://manual.toyota.jp/yaris/2207/cv/ja_JP/contents/vhch08se010401.php",
+     "https://shop.autobacs.com/ja/feature/knowledge/oil",
+     "https://kygnus.jp/products/barn/qa/",
+     "https://hayamihyou.net/oil-viscosity/",
+     "https://kaitorirakuda.com/news/news-01KWGPH5AMY3PXGZ4BKG5VPWVR",
+     "https://ishiharagumi.com/archives/6567",
+     "https://tatsuyajitian.com/entry/2026/04/03/201436",
+     "https://car-lab.net/2026/07/06/engine-oil-viscosity-guide/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://takumi-motoroil.co.jp/knowledge/knowledge01/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFRW_aZYzLmEajMMtEXqMkOsCRiucEbi8qggtVtF1Ff8bxPwO3BFpjcuOzZZWr9pBXV3NXdG9E3GWhSvc4SRnhimatOQc7MiZ6iPzpPK2PngAZ5rnc7qOfV-AjGsYfgACVyfnpBcaUZjA==",
+     "https://jaf.or.jp/common/kuruma-qa/category-construction/subcategory-engine/faq062",
+     "https://www.cosmo-lube.co.jp/technology/engine-oil/types.html",
+     "https://www.eneos.co.jp/binran/part02/chapter02/section02.html",
+     "https://www.jcmanet.or.jp/kikaibukai/yushi/e32.html"
+    ],
+    "error": ""
+   }
+  },
+  "エンジンオイル 粘度 選び方": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://takumi-motoroil.co.jp/knowledge/knowledge02/",
+     "https://www.yoro-store.com/blogs/useful/engineoil-recommend",
+     "https://shop.autobacs.com/ja/feature/knowledge/oil",
+     "https://www.team-mho.com/0w20-5w30/",
+     "https://ax10200.hatenablog.jp/entry/engine-oil-viscosity",
+     "https://kuruma-nandemo.com/engineoil-nendo/",
+     "https://hayamihyou.net/oil-viscosity/",
+     "https://ishiharagumi.com/archives/6567",
+     "https://car-lab.net/2026/07/06/engine-oil-viscosity-guide/",
+     "https://www.yellowhat.jp/column/oil/041/index.html",
+     "https://www.monotaro.com/note/productinfo/enginoil_nendo/",
+     "https://www.kamitake.net/blog/oil-viscosity/",
+     "https://misakimotors.jp/media/engine/oil_viscosity/",
+     "https://www.chugai-yuka.co.jp/blog20231231/",
+     "https://daradara.site/entry/what-is-engine-oil-viscosity-for-car-and-motorcycle"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 ガソリンスタンド 整備工場 違い": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/246603/",
+     "https://www.takakuureru.com/magazine/17516",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-cost-inexpensive/",
+     "https://ideno-car.jp/column/202401_1/",
+     "https://carbike-maintenance.jp/2026/03/26/oil-change-cost-comparison-guide/",
+     "https://yasashiishaken0573.com/669/",
+     "https://carfactorychallenge.com/media/20241130/",
+     "https://yoyaku.eneos-mobilineer.com/14364/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://nikkohsyaryou.com/%E8%BB%8A%E3%81%AE%E3%82%AA%E3%82%A4%E3%83%AB%E4%BA%A4%E6%8F%9B%E3%80%81%E3%81%A9%E3%81%93%E3%81%A7%E3%81%99%E3%81%B9%E3%81%8D%EF%BC%9F3%E3%81%A4%E3%81%AE%E9%81%B8%E6%8A%9E%E8%82%A2%E3%81%A8%E3%81%9D/",
+     "https://www.yellowhat.jp/column/oil/032/index.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12318511027",
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/246603/",
+     "https://tatsuyajitian.com/2026-02-05-202231/",
+     "https://ideno-car.jp/column/202605_1/"
+    ],
+    "error": ""
+   }
+  },
+  "オイルフィルター 交換 費用": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://tire-onlinestore.bridgestone.co.jp/lp/column-066.html",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-oiltype-filter/",
+     "https://cars-enjoy.com/media/?p=3543",
+     "https://www.shakenkan.co.jp/guide/oilfilter-nedan/",
+     "https://cobby.jp/oilchange-cost.html",
+     "https://blog.trck.jp/1717",
+     "https://yebisu-tool.jp/blogs/useful/oil-filter-replacement-cost",
+     "https://bbs.kakaku.com/bbs/-/SortID=26492203/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13326314288"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://cars-enjoy.com/media/?p=3543",
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/246603/",
+     "https://mykobac.com/news/value/20200720-1460/",
+     "https://usamart.shop/guides/oil-change/1-5/",
+     "https://www.yellowhat.jp/column/oil/087/index.html",
+     "https://www.autobacs.com/static_html/srv/engineoil/top.html",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-oiltype-filter/"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 しないと どうなる": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/222756/",
+     "https://www.autobacs.com/static_html/srv/engineoil/article/1054/",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-notreplace/",
+     "https://www.yoro-store.com/blogs/useful/engineoil-not-change",
+     "https://joycal.jp/magazine/maintenance-costs/engine_oil",
+     "https://www.seigaku.ac.jp/news/jido/5679/",
+     "https://mykobac.com/news/20190113-94/",
+     "https://muguruma-garage.com/seiko-lab/engine-oil-change-risk/",
+     "https://to-yo-suzuki.com/engine-oil-change-risks/"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 時間 かかる": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.jms-car.com/maintenance/oil/time/",
+     "https://www.yellowhat.jp/column/oil/049/index.html",
+     "https://carfactorychallenge.com/media/20250107/",
+     "https://alps-st.com/blog/1069",
+     "https://yebisu-tool.jp/blogs/useful/time-to-change-oilfilter"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/222909/",
+     "https://www.yoro-store.com/blogs/useful/oilfilter-change-time",
+     "https://www.autobacs.com/static_html/srv/engineoil/article/1007/",
+     "https://tire-onlinestore.bridgestone.co.jp/lp/column-062.html",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12309508522",
+     "https://www.yellowhat.jp/column/oil/049/index.html",
+     "https://carfactorychallenge.com/media/20250107/"
+    ],
+    "error": ""
+   }
+  },
+  "オイル交換 持ち込み 工賃": {
+   "group": "オイル交換",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://matome.response.jp/articles/4684",
+     "https://bbs.kakaku.com/bbs/-/SortID=26492203/",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-cost-inexpensive/",
+     "https://bbs.kakaku.com/bbs/-/SortID=25671002/",
+     "https://www.pricey.jp/web/articles/2880",
+     "https://ss.eneos-wing.co.jp/colum/oilchange-cost/",
+     "https://minkara.carview.co.jp/search/?q=%E3%82%AA%E3%82%A4%E3%83%AB%E6%8C%81%E3%81%A1%E8%BE%BC%E3%81%BF+%E5%B7%A5%E8%B3%83",
+     "https://carbike-maintenance.jp/2026/03/26/oil-change-cost-comparison-guide/",
+     "https://bacsboots.com/car-maintenance/oil/",
+     "https://cartune.co.jp/magazine/articles/4231",
+     "https://bbs.kakaku.com/bbs/-/SortID=25470813/",
+     "https://bbs.kakaku.com/bbs/-/SortID=4110757/",
+     "https://cars-enjoy.com/media/?p=2902",
+     "https://take-it-easy.tokyo/car/oilchangefee",
+     "https://yebisu-tool.jp/blogs/useful/oil-change-cost-reduction",
+     "https://snow.tamorieeeen.com/car/autobacs-oil/",
+     "https://car-plaza123.com/oirukokan-mochikomi/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://snow.tamorieeeen.com/car/autobacks-oil-2024/",
+     "https://bbs.kakaku.com/bbs/-/SortID=25470813/",
+     "https://www.woow-kobe.com/entry/2026/04/14/120339",
+     "https://ab-higashikanagawa.com/faq/oil/",
+     "https://ab-kanyonizumi.com/pit-service/pit-menu/oil/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13290839038",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11252132601",
+     "https://www.goo-net.com/magazine/carmaintenance/oilchange/246603/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14307116224",
+     "https://cars-enjoy.com/media/?p=2902"
+    ],
+    "error": ""
+   }
+  },
+  "車 修理 費用 相場": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://221616.com/norico/repair-souba/",
+     "https://www.takakuureru.com/magazine/18592",
+     "https://www.haisya110.com/blog/2026/01/20/3098",
+     "https://www.carcon.co.jp/column/article/2020022609/",
+     "https://carmap.jp/car-repair-cost-guide/",
+     "https://www.carseven.co.jp/guide/news/10318/",
+     "https://www.navikuru.jp/kaitori/articles/damagedcar-knowledge/363/",
+     "https://www.tau-reuse.com/contents/jikosha-repair-cost/",
+     "https://amind.jp/repair-cost/repair-cost-guide/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.mobilitydock.jp/blog/series-000/car-repair-cost",
+     "https://www.carcon.co.jp/column/article/2020022609/",
+     "https://pocketmotors.net/ceo-column/car-damage-repair-cost/",
+     "https://haishall.jp/column/other/repair-cost/",
+     "https://www.nakatani-auto.com/post/explanationofcostsfordifferentpartsofacar",
+     "https://221616.com/norico/repair-souba/"
+    ],
+    "error": ""
+   }
+  },
+  "修理 工場 選び方 失敗しない": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/repair/217447/",
+     "https://www.sompo-direct.co.jp/otona/oshiete/car/automobile-repair-shop.html",
+     "https://www.carcon.co.jp/column/article/2019041813/",
+     "https://www.navikuru.jp/articles/knowledges/579/",
+     "https://www.picars.jp/article/273",
+     "https://www.tau-reuse.com/contents/jikosha-repair-shop/",
+     "https://www.carmate-success.jp/column/730/",
+     "https://www.mobilitydock.jp/blog/series-000/repair-shop-benefits",
+     "https://www.idemitsu-autoflat.com/column/automobile-repair-shop/",
+     "https://www.nextage.jp/syaken_guide/quote/260919/",
+     "https://www.carcon.co.jp/column/article/20190818/",
+     "https://mykobac.jp/news/20210917-1074/",
+     "https://www.haisya110.com/blog/2026/03/03/1165",
+     "https://www.dawin.co.jp/contents/detail/id=3126",
+     "https://kanto-koudai.com/blog/certified-factories-and-designated-factories/",
+     "https://mechani-q.com/column/industry-info/175/",
+     "https://car.kaneko-gyosei-office.com/4582/"
+    ],
+    "error": ""
+   }
+  },
+  "ブレーキ 異音 修理 費用": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/repair/219236/",
+     "https://www.nextage.jp/buy_guide/info/737443/",
+     "https://car-trouble.hatenablog.com/entry/car-brakes-squeaking",
+     "https://www.kranz-automotive.co.jp/column/306/",
+     "https://www.tau-reuse.com/contents/brake-kosho/",
+     "https://www.g-kawada.com/syuri/brake.html",
+     "https://youtaro.kojyo-motors.com/works/information/1017/",
+     "https://www.seibishi-garage.com/brakegarigari/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/repair/219236/",
+     "https://www.nextage.jp/buy_guide/info/737443/",
+     "https://car-trouble.hatenablog.com/entry/car-brakes-squeaking",
+     "https://shuri-kaikae.com/car-brake-repair-cost/",
+     "https://www.carbase.jp/journal/car-maintenance/brake-pad-replacement-cost-timing.html",
+     "https://www.wecars.co.jp/column/inspection/knowhow/057.html",
+     "https://www.kranz-automotive.co.jp/column/793/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14157065464",
+     "https://www.nissan-tokyo.co.jp/column/1494/",
+     "https://www.kranz-automotive.co.jp/column/1088/"
+    ],
+    "error": ""
+   }
+  },
+  "バッテリー 上がり 交換 費用": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://matome.response.jp/articles/7197",
+     "https://www.campnofuji.jp/column/maintenance/battery-exchange",
+     "https://www.pricey.jp/web/articles/2060",
+     "https://www.kamitake.net/blog/battery-replace-cost/",
+     "https://www.rakuten.co.jp/thebattery/contents/bateko10/",
+     "https://www.haishaou.com/blog/car-knowledge/battery-replacement-cost/",
+     "https://amind.jp/repair-cost/battery-replacement-cost/",
+     "https://battery-sc.com/battery-dead-price-quote/",
+     "https://familiar-ex.com/carblog/5601/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.zurich.co.jp/car/useful/guide/cc-battery-trouble/",
+     "https://car-rescueteam.jp/dead-battery-towing/",
+     "https://jaf.or.jp/common/about-road-service/estimate-costs",
+     "https://tecmate.co.jp/blog/car-battery-dead-cost/",
+     "https://battery-sc.com/battery-dead-price-quote/",
+     "https://www.seikatsu110.jp/library/battery/bt_car_battery/163872/",
+     "https://www.nextage.jp/syaken_guide/info/737429/",
+     "https://www.carcon.co.jp/column/article/20200720/",
+     "https://matome.response.jp/articles/7197",
+     "https://www.rakuten.co.jp/thebattery/contents/bateko10/",
+     "https://www.campnofuji.jp/column/maintenance/battery-exchange",
+     "https://next-science.jp/blogs/information/car-battery-replacement-cost-where"
+    ],
+    "error": ""
+   }
+  },
+  "エアコン 効かない 修理 料金": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://meetsmore.com/services/air-conditioner-exchange/media/88525",
+     "https://curama.jp/aircon-repair/magazine/1041/",
+     "https://www.sunrefre.jp/aircon/breakdown/repair/",
+     "https://life-techs.jp/ac/repair-cost.html",
+     "https://www.mitsubishielectric.co.jp/ldg/repair/charge/kirigamine.html",
+     "https://rockfield-air.jp/media/20260212/",
+     "https://www.suidoukonsheruju.com/blogs/npkioa20q6",
+     "https://www.ekuapurasu.co.jp/3771",
+     "https://aratec-sos.com/blog/51411/",
+     "https://home.osakagas.co.jp/column/cleaning/air-conditioner-cleaning/air-conditioner-not-cold/",
+     "https://o-uccino.com/front/articles/98434",
+     "https://rockfield-air.jp/media/20250918/",
+     "https://www.forum-net.jp/info_support/commentary/eakon_gas_charge/",
+     "https://kinki-jutakusetsubi.com/2025/12/08/refrigerant-gas-suita/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ootake-kaiteki.com/blog/air-conditioner-repair-costs/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrOzk9VobZUz9X4wikKE6smx32j5GnovaVa7eHR--hm4foZr0l5hdgK9r58jtrFF5P9yUy5q4gVMSA52b4K75880OW7DpDOc6AImRHMddf5eDB8bATGHXx1O7PtRUt3VfojoUm8zZ9twi146Zvr83upU0=",
+     "https://www.mitsubishielectric.co.jp/ldg/repair/charge/kirigamine.html",
+     "https://3sdenki.com/blog/82885",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFfaNhPhXLLUikGoZTaQF1bJhY1diqFYKC-x9-Q6nx9lAO7O2qiRpRNwB7bndwor6Hg4cgt_qjwWwG6hGII5zJiicmaZJPZcTQdXKWY9sOxXfcO_96FubPbGuEjNY5PEg==",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFESbkrnHywiO7MBJegQbYymF_SaXkVHfINyhXscTBB6JZp1txJRIPoZnctO4ECNdw74OMBQKkViMTSMAFnQfRrdmgra80IrkgsLRIFcHwU0TQBaLfOtVgriFglPW0EVb6NNndQ"
+    ],
+    "error": ""
+   }
+  },
+  "車 傷 へこみ 修理 いくら": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/magazine/carmaintenance/repairscratches/256364/",
+     "https://221616.com/car-topics/20240717-1/",
+     "https://www.libertynet.jp/blog/2024/06/10/r60610-01/",
+     "https://cos.cosmo-oil.co.jp/blog-detail/1/1000000279/",
+     "https://www.jms-car.com/ask/scratch/repair/",
+     "https://carnext.jp/magazine/article/car-dent-repair/",
+     "https://www.carcon.co.jp/column/article/2020022609/",
+     "https://carmap.jp/car-scratch-dent-repair/",
+     "https://www.octagon-style.com/column/car-dent-repair/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.carcon.co.jp/column/article/20200726/",
+     "https://carnext.jp/magazine/article/car-dent-repair/",
+     "https://www.youtube.com/watch?v=vZFNyYdZP-4",
+     "https://ss.eneos-wing.co.jp/colum/carrepar-gari-price/",
+     "https://www.yellowhat.jp/column/repair_paint/005/index.html",
+     "https://www.goo-net.com/magazine/carmaintenance/repairscratches/256364/",
+     "https://www.facebook.com/100087989247636/videos/%E3%81%93%E3%82%93%E3%81%AA%E3%82%AD%E3%82%BA%E7%9B%B4%E3%81%99%E3%81%AE%E3%81%AB%E3%81%84%E3%81%8F%E3%82%89%E3%81%8B%E3%81%8B%E3%82%8B%E3%82%93%E3%81%A0%E3%82%8D%E3%81%86-%E3%81%8A%E8%BB%8A%E3%81%AB%E3%82%AD%E3%82%BA%E3%81%8C%E3%81%A4%E3%81%84%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%8D%E4%B8%80%E7%95%AA%E4%B8%8D%E5%AE%89%E3%81%AA%E3%81%AE%E3%81%AF%E4%BF%AE%E7%90%86%E8%B2%BB%E7%94%A8%E3%81%A7%E3%81%99%E3%82%88%E3%81%AD%E3%83%87%E3%82%A3%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AB%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%84%E3%81%8F%E3%81%A8%E3%83%89%E3%82%A2%E3%81%94%E3%81%A8%E4%BA%A4%E6%8F%9B%E3%81%A7%E3%81%99%E3%81%AD%E3%81%A8%E8%A8%80%E3%82%8F%E3%82%8C%E3%81%A6%E9%AB%98%E9%A1%8D%E3%81%AA%E8%A6%8B/942055758321522/",
+     "https://www.jms-car.com/ask/scratch/repair/",
+     "https://www.youtube.com/watch?v=oS32PD-IvZk"
+    ],
+    "error": ""
+   }
+  },
+  "修理 見積もり 比較 ポイント": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nextage.jp/replace_guide/timing/333222/",
+     "https://meetsmore.com/t/car-maintenance/media/130998",
+     "https://221616.com/car-topics/20260603-1/",
+     "https://www.mobilitydock.jp/blog/series-000/car-repair-guide",
+     "https://gmk-car.com/column/e44b31bd-14a9-49db-aef0-9d8c3bae3654",
+     "https://gmk-car.com/column/73be0309-5d5e-4e14-8337-fb361a3271a7",
+     "https://gmk-car.com/column/37708b9d-76b5-4f18-b8a0-3c36b88eaf25",
+     "https://modolly-h.com/column/3650",
+     "http://modolly-h.com/column/2888"
+    ],
+    "error": ""
+   }
+  },
+  "警告灯 点灯 どうする": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://jaf.or.jp/common/kuruma-qa/category-trouble/subcategory-accident/faq187",
+     "https://jaf.or.jp/common/car-trouble-qa/warning-lamp/red/faq1",
+     "https://jaf.or.jp/common/car-trouble-qa/warning-lamp/red/faq4",
+     "https://jaf.or.jp/common/car-trouble-qa/warning-lamp/yellow/faq13",
+     "https://www.carshares.jp/blog/keikokutou/",
+     "https://car-moby.jp/article/car-life/automobile-inspection-maintenance/car-warning-light/",
+     "https://221616.com/norico/light-list/"
+    ],
+    "error": ""
+   }
+  },
+  "エンジン 異音 原因 費用": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goobike.com/magazine/maintenance/repair/141/",
+     "https://glass-d.com/glassstyle/trouble/915",
+     "https://www.haisya110.com/blog/2026/03/31/1376",
+     "https://haishall.jp/column/other/engine-noise/",
+     "https://www.haishaou.com/blog/car-knowledge/enginion/",
+     "https://parts.mobiful.jp/column/engine/engine-noise/",
+     "https://carnext.jp/magazine/article/car_noise/",
+     "https://www.tau-reuse.com/contents/engine-kosho/",
+     "https://kaitorirakuda.com/news/news-3602"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.haishaou.com/blog/car-knowledge/enginion/",
+     "https://service8316.wordpress.com/2026/02/16/%E7%95%B0%E9%9F%B3%E4%BF%AE%E7%90%86%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%E3%81%8B%E3%81%8B%E3%82%8B%EF%BC%9F%EF%BD%9C%E9%9F%B3%E3%81%AE%E7%A8%AE%E9%A1%9E%E5%88%A5%E3%83%BB%E7%8F%BE%E5%AE%9F%E7%9A%84/",
+     "https://cartender.jp/repair/column/2144/",
+     "https://parts.mobiful.jp/column/engine/engine-noise/",
+     "https://www.carcon.co.jp/column/article/201909192/"
+    ],
+    "error": ""
+   }
+  },
+  "修理 ディーラー 町工場 どっち": {
+   "group": "修理",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nextage.jp/replace_guide/info/274657/",
+     "https://mbp-japan.com/gifu/furuta/column/5208064/",
+     "https://www.lineup-car.com/blog/18318.html",
+     "https://www.carseven.co.jp/magazine/news/318/",
+     "https://autonavi.car-mo.jp/mag/category/tips/carlife/dealer/repair_2/",
+     "https://cartomo.jp/category/tips/carlife/dealer/repair/",
+     "https://kuruma-compass.com/dealer-or-repair-shop/",
+     "https://pocketmotors.net/ceo-column/car-repair-dealer-cost/",
+     "https://car-trouble.net/dealer-or-factory/",
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/tenken-syaken-gimon/4842/",
+     "https://cobby.jp/car-inspection.html",
+     "https://www.tama-j.co.jp/column/1453/",
+     "https://cartomo.jp/category/tips/carlife/dealer/repair_2/",
+     "https://otakara-shaken.com/useful/beginner/beginner02.html",
+     "https://rachemon.com/blog/index.php?e=82",
+     "https://syojiki-garage.com/1381",
+     "https://press-feed.com/recommendation/",
+     "http://drivefactory.info/archives/7282"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 費用 総額 相場": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://221616.com/guide/buy/",
+     "https://www.nextage.jp/buy_guide/zeikin/151956/",
+     "https://www.nextage.jp/buy_guide/cost/343835/",
+     "https://www.nextage.jp/buy_guide/zeikin/183916/",
+     "https://www.kamitake.net/blog/used-car/total-cost/",
+     "https://gazoo.com/column/article/26/04/08/usedcars_fees/",
+     "https://www.navikuru.jp/articles/used/426/",
+     "https://www.navikuru.jp/articles/used/485/",
+     "https://car-sokuhou.com/media/%E4%B8%AD%E5%8F%A4%E8%BB%8A%E8%AB%B8%E8%B2%BB%E7%94%A8/",
+     "https://caniva.jp/news/35-%E4%B8%AD%E5%8F%A4%E8%BB%8A%E3%81%AE%E8%AB%B8%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%84%E3%81%8F%E3%82%89%EF%BC%9F%E8%B2%BB%E7%94%A8%E5%86%85%E8%A8%B3%E3%81%A8%E7%AF%80%E7%B4%84/",
+     "https://www.idemitsu-autoflat.com/column/costs-of-buying-used-cars/",
+     "https://carnext.jp/magazine/article/used_car_expenses/",
+     "https://mobilico.jp/magazine/used-car-prise-re/",
+     "https://mobilico.jp/magazine/used-car-prise/",
+     "https://otoronplus.com/column/used-car7/",
+     "https://www.aster-link.co.jp/car/usedcar-sougaku/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 選び方 初心者": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://221616.com/guide/first-time/beginner-choice/",
+     "https://www.nextage.jp/buy_guide/flow/151933/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10310352375",
+     "https://www.kurumaerabi.com/magazine/articles/124/",
+     "https://bqey.com/column/archives/41",
+     "https://kuruma-terrace.com/column/page/?id=16",
+     "https://ucarpac.com/buy/useful/usedcar-purchase-notice/",
+     "https://kurumanomori.com/topics/recommend/used_car_beginner/",
+     "https://sale.ucchari-kacchari.com/blog/%E3%80%90%E5%88%9D%E5%BF%83%E8%80%85%E5%BF%85%E8%A6%8B%EF%BC%81%E3%80%91%E3%83%97%E3%83%AD%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E4%B8%AD%E5%8F%A4%E8%BB%8A%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E3%81%A8/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 販売店 比較 選び方": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://life.oricon.co.jp/rank-used-car-sell/specialty/",
+     "https://www.nextage.jp/buy_guide/info/144606/",
+     "https://crexgroup.com/ja/car-kaitori/maintenance-purchase/used-car-dealers-guide/",
+     "https://procar-purchase.com/outehanbai-ranking/",
+     "https://life-cars.com/car-buying1",
+     "https://blog.cartown.jp/column/used-shop-best/",
+     "https://gazoo.com/U-Car/Info/PurchaseTips/howtochoose.html",
+     "https://221616.com/guide/point/",
+     "https://life.oricon.co.jp/rank-used-car-sell/special/knowledge/where-purchase/",
+     "https://www.applenet.co.jp/guide/buy/usedcar_warranty_selection.html",
+     "https://www.car-byebuy.com/column/article/14389/",
+     "https://blog.cartown.jp/column/trusted-car-dealer/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://cr.j-carnet.co.jp/car-sales-price-display/",
+     "https://www.kurumaerabi.co.jp/useful-details/4490/",
+     "https://www.aftc.or.jp/contents/am/shiharai/faq.html",
+     "https://221616.com/guide/totalcost/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 走行距離 目安": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://221616.com/guide/check/",
+     "https://www.insweb.co.jp/car/used-car/soukoukyori-meyasu.html",
+     "https://221616.com/norico/year-mileage/",
+     "https://ss.eneos-wing.co.jp/colum/cardeal-mileage-important-points/",
+     "https://www.goo-net.com/magazine/contents/check-point/83435/",
+     "https://www.carseven.co.jp/magazine/news/1047/",
+     "https://joycal.jp/magazine/select/mileage-standards-for-used-cars",
+     "https://www.car-byebuy.com/column/article/1116/",
+     "https://mobility-town.jp/blog/1334/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 保証 付き 違い": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://221616.com/guide/first-time/manufacturer-warranty/",
+     "https://www.goo-net.com/magazine/contents/check-point/106366/",
+     "https://e-ladybug.jp/blog/car-guarantee/",
+     "https://www.navikuru.jp/articles/used/496/",
+     "https://bande-gi.co.jp/%E4%B8%AD%E5%8F%A4%E8%BB%8A%E8%B2%A9%E5%A3%B2%E3%81%AE%E3%80%8C%E4%BF%9D%E8%A8%BC%E4%BB%98%E3%81%8D%E3%80%8D%E3%82%92%E5%BE%B9%E5%BA%95%E8%A7%A3%E8%AA%AC%E3%80%80%E3%83%87%E3%82%A3%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%A8%E7%AC%AC%E4%B8%89%E8%80%85%E6%A9%9F%E9%96%A2%E4%BF%9D%E8%A8%BC%E3%81%AE%E9%81%95%E3%81%84/",
+     "https://221616.com/guide/first-time/used-car-warranty/",
+     "https://www.goo-net.com/magazine/contents/check-point/140260/",
+     "https://www.nextage.jp/buy_guide/info/247513/",
+     "https://221616.com/guide/first-time/no-guarantee/",
+     "https://www.kurumaerabi.com/magazine/articles/130/",
+     "https://www.carseven.co.jp/magazine/news/1513/",
+     "https://www.orixcar.jp/ucar/story/20200907.html",
+     "https://www.goodspeed.ne.jp/recommend/170506/",
+     "https://www.aster-link.co.jp/posts/usedcar-hosyou/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 諸費用 内訳": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://221616.com/guide/buy/",
+     "https://www.nextage.jp/buy_guide/cost/343835/",
+     "https://www.nextage.jp/buy_guide/zeikin/151956/",
+     "https://www.kamitake.net/blog/used-car/total-cost/",
+     "https://www.navikuru.jp/articles/used/426/",
+     "https://carnext.jp/magazine/article/used_car_expenses/",
+     "https://www.navikuru.jp/articles/used/485/",
+     "https://www.toyota-mobility-kanagawa.jp/u-car/column_u-car/202405-1_usedcar_cost-breakdown",
+     "https://mobilico.jp/magazine/used-car-prise/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://gazoo.com/U-Car/Info/PurchaseTips/cost.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF0lVtk9U60qiFgHKNNOGeiItNuFdWQ2ccd_s2so8LJABypFT-2nQ-TCDh38EZ8XXU8YVFuPycv7u-DgYAPKTekIY4WoQ0UWA52UNe8Yufn9ZTwuUoK5N0_oNzFHBMfStg=",
+     "https://221616.com/guide/buy/",
+     "https://carlease.idemitsu.com/column/costs-of-buying-used-cars/",
+     "https://www.carsensor.net/pro/sougakugimuka/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 修復歴 見分け方": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.goo-net.com/magazine/contents/check-point/69473/",
+     "https://www.navikuru.jp/kaitori/articles/damagedcar-knowledge/365/",
+     "https://www.navikuru.jp/articles/used/581/",
+     "https://carnext.jp/magazine/article/repair_history/",
+     "https://joycal.jp/magazine/select/how-to-choose-a-car-with-a-repairhistory",
+     "https://kaitori.carview.co.jp/article/knowledge-satei/how-does-car-assessor-check-accident-histories/",
+     "https://www.haishaou.com/blog/car-knowledge/syutyuukosya-syuuhukureki/",
+     "https://www.sapporohonda.com/blog/buy-usedcar/secondhandcar-repair-history.html",
+     "https://ctn-net.jp/kaitori/car/column/car-repair-history/",
+     "https://221616.com/guide/first-time/repair-history/",
+     "https://www.nextage.jp/sell_guide/jikosya/214557/",
+     "https://www.tau-reuse.com/contents/jikosha-trouble/",
+     "http://a-dip.org/a-dip%E6%A5%AD%E5%8B%99%E6%A1%88%E5%86%85/",
+     "https://bande-gi.co.jp/%E4%BF%AE%E5%BE%A9%E6%AD%B4%E5%88%A4%E5%AE%9A%E3%81%AE%E6%A5%AD%E7%95%8C%E5%9F%BA%E6%BA%96%E3%82%92%E5%BE%B9%E5%BA%95%E8%A7%A3%E8%AA%AC%E3%80%80%E9%AA%A8%E6%A0%BC%E9%83%A8%E4%BD%8D%E3%81%AE%E4%BA%A4/",
+     "https://buddica.direct/magazine/car-sell/repair_history_merit_demerit_82/",
+     "https://bande-gi.co.jp/jaai%E6%9F%BB%E5%AE%9A%E5%9F%BA%E6%BA%96%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E4%BF%AE%E5%BE%A9%E6%AD%B4%E5%88%A4%E5%AE%9A%E3%81%AE%E3%81%99%E3%81%B9%E3%81%A6%E3%80%80%E9%AA%A8%E6%A0%BC%E3%83%BB/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 購入 ローン 金利": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.libertynet.jp/blog/2024/12/17/r61217-02/",
+     "https://gazoo.com/column/article/26/02/24/usedcars_interest-rate/",
+     "https://www.niconori.jp/information/f125",
+     "https://mobilico.jp/magazine/used-car-loan-interest-rate/",
+     "https://joycal.jp/magazine/buy/interest-rates-for-used-car-loans",
+     "https://yanase-audi.com/column/used/used-car-loan-interest-rate.html",
+     "https://caniva.jp/news/%E4%B8%AD%E5%8F%A4%E8%BB%8A%E3%83%AD%E3%83%BC%E3%83%B3%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%892025%E5%B9%B4%E7%89%88%EF%BD%9C%E9%87%91%E5%88%A9%E3%83%BB%E5%AF%A9%E6%9F%BB%E3%83%BB%E9%81%B8/",
+     "https://www.goodspeed.ne.jp/recommend/170940/",
+     "https://xn--y5q62dc41gxzbxp.net/blog/used-car-loan/"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 買い時 いつ": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://221616.com/car-topics/20260120-1/",
+     "https://pai-r.com/column/20250828/",
+     "https://www.nextage.jp/gensen_guide/1026/",
+     "https://gazoo.com/column/article/26/03/03/usedcars_best-time-to-buy/",
+     "https://www.navikuru.jp/articles/used/495/",
+     "https://www.haishaou.com/blog/car-knowledge/best-time-to-buy-used-car/",
+     "https://yanase-audi.com/column/used/used-car-time-to-buy.html",
+     "https://kuruma-terrace.com/column/page/?id=33",
+     "https://ucarfan.com/2026/05/07/best-buy-timing-2026/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYd-ClDESx_arFnFI6tXQGMSYR1UMyEnRKiXVjsmtVgzEqXqKiKG7oHG1h3oqSknlT_Mge43KLsUIW1o6etW45h2_cpoRvWZXPgJvYy-ii0m80lzOuO7cfazl2VRdLhUQ=",
+     "https://www.kojyo-motors.com/blog/blog/7267/",
+     "https://www.webcartop.jp/2021/05/695901/",
+     "https://gazoo.com/column/article/26/03/03/usedcars_best-time-to-buy/",
+     "https://www.kurumaerabi.com/magazine/articles/69/",
+     "https://ucarpac.com/sell/useful/whenbuycarbest/",
+     "https://www.haishaou.com/blog/car-knowledge/best-time-to-buy-used-car/",
+     "https://buddica.direct/magazine/car-purchase/cheap-used-car-time_122/",
+     "https://annai-center.com/usedcar/guide/flow/purchasetime/",
+     "https://www.haishaou.com/blog/car-knowledge/best-time-to-buy-used-car/",
+     "https://www.orixcar.jp/ucar/story/20201008.html",
+     "https://car-match.jp/gifukakamigahara/shopblog/posts21078"
+    ],
+    "error": ""
+   }
+  },
+  "中古車 ディーラー 販売店 どっち": {
+   "group": "中古車",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+   },
+   "Claude": {
+    "urls": [
+     "https://www.insweb.co.jp/car/used-car/where-buy.html",
+     "https://www.nextage.jp/buy_guide/info/144606/",
+     "https://www.nextage.jp/buy_guide/info/258079/",
+     "https://www.lineup-car.com/blog/18500.html",
+     "https://yanase-audi.com/column/used/used-car-dealer-authorized-dealer-which-to-choose.html",
+     "https://caniva.jp/news/101-%E4%B8%AD%E5%8F%A4%E8%BB%8A%E3%81%AF%E3%83%87%E3%82%A3%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%A8%E8%B2%A9%E5%A3%B2%E5%BA%97%E3%81%A9%E3%81%A1%E3%82%89%E3%81%A7%E8%B2%B7%E3%81%86%E3%81%B9%E3%81%8D/",
+     "https://buddica.direct/magazine/car-purchase/purchase_merit_demerit/",
+     "https://otoronplus.com/column/used-car1/",
+     "https://blog.cartown.jp/column/dealer-car-benefits/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

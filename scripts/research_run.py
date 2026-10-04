@@ -55,7 +55,10 @@ def main():
             return 0
         print(f"■ {name}（{slug}）{'（ChatGPT の聞き直し）' if thin(slug) else ''}", flush=True)
         # Claude・Gemini の答えは30日キャッシュされるので、聞き直しで課金や二重の負荷は出ない
-        r = subprocess.run([sys.executable, "scripts/industry_ai_sources.py", "--industry", slug, "--sub"], cwd=ROOT,
+        # 生の回答がある業種は欠けた問いだけを聞き足す。--sub で聞き直すと生の回答を丸ごと書き直し、
+        # その回に聞かなかった Gemini・Perplexity の答えが消えていた（2026-10-05 に6業種）
+        mode = "--refill" if (ROOT / "data" / "research" / f"{slug}-raw.json").is_file() else "--sub"
+        r = subprocess.run([sys.executable, "scripts/industry_ai_sources.py", "--industry", slug, mode], cwd=ROOT,
                            text=True, encoding="utf-8", errors="replace")
         if r.returncode == 0 and (ROOT / "data" / "research" / f"{slug}-summary.json").is_file():
             done.append(slug)

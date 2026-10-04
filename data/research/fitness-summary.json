@@ -1,22 +1,21 @@
 {
  "total": {
-  "clinic": 445,
-  "portal": 83,
-  "media": 114,
-  "maker": 12,
-  "other": 9,
+  "clinic": 534,
+  "media": 118,
+  "portal": 87,
+  "maker": 18,
+  "other": 10,
   "video": 11,
-  "public": 11
+  "public": 54
  },
  "by_engine": {
-  "Gemini": {
-   "clinic": 128,
-   "portal": 26,
-   "media": 23,
-   "maker": 5,
-   "other": 7,
-   "video": 4,
-   "public": 1
+  "ChatGPT": {
+   "clinic": 89,
+   "maker": 6,
+   "other": 1,
+   "media": 4,
+   "portal": 4,
+   "public": 43
   },
   "Claude": {
    "media": 91,
@@ -26,62 +25,77 @@
    "video": 7,
    "other": 2,
    "maker": 7
+  },
+  "Gemini": {
+   "clinic": 128,
+   "portal": 26,
+   "media": 23,
+   "maker": 5,
+   "other": 7,
+   "video": 4,
+   "public": 1
   }
  },
  "by_group": {
   "地域で探す": {
-   "clinic": 93,
-   "portal": 41,
-   "media": 33,
-   "maker": 1,
-   "other": 4,
+   "clinic": 124,
+   "media": 34,
+   "portal": 44,
+   "maker": 4,
+   "other": 5,
    "video": 2,
-   "public": 1
+   "public": 2
   },
   "費用": {
+   "clinic": 104,
    "portal": 18,
-   "clinic": 74,
    "media": 23,
+   "maker": 1,
    "other": 1,
-   "public": 4,
+   "public": 5,
    "video": 1
   },
   "選び方": {
-   "clinic": 78,
-   "media": 18,
-   "portal": 13,
+   "portal": 14,
+   "clinic": 91,
+   "media": 20,
    "video": 4,
-   "maker": 7,
+   "public": 18,
    "other": 2,
-   "public": 4
+   "maker": 8
   },
   "ダイエット": {
-   "clinic": 117,
+   "public": 17,
+   "clinic": 121,
    "media": 23,
    "portal": 5,
    "maker": 4,
    "video": 1
   },
   "運動初心者の悩み": {
+   "clinic": 94,
    "portal": 6,
    "video": 3,
-   "media": 17,
-   "clinic": 83,
-   "public": 2,
+   "media": 18,
+   "public": 12,
+   "maker": 1,
    "other": 2
   }
  },
  "answered": {
-  "Gemini": 25,
-  "Claude": 50
+  "ChatGPT": 50,
+  "Claude": 50,
+  "Gemini": 25
  },
  "has_clinic": {
-  "Gemini": 25,
-  "Claude": 49
+  "ChatGPT": 32,
+  "Claude": 49,
+  "Gemini": 25
  },
  "sources": {
-  "Gemini": 194,
-  "Claude": 491
+  "ChatGPT": 147,
+  "Claude": 491,
+  "Gemini": 194
  },
  "portal_top": [
   [
@@ -98,7 +112,7 @@
   ],
   [
    "body-make.jp",
-   7
+   8
   ],
   [
    "personalgym.co.jp",
@@ -113,21 +127,21 @@
    4
   ],
   [
+   "beauty.hotpepper.jp",
+   3
+  ],
+  [
    "my-best.com",
    3
   ],
   [
    "gyms.jp",
    3
-  ],
-  [
-   "beauty.hotpepper.jp",
-   2
   ]
  ],
  "industry": "fitness",
  "name": "フィットネス・ジム",
- "date": "2026-10-04",
+ "date": "2026-10-05",
  "questions": 50,
  "engines": [
   "ChatGPT",
@@ -143,59 +157,62 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 75,
-   "maker": 9,
-   "other": 9,
-   "portal": 43,
-   "clinic": 74,
-   "media": 58,
+   "answers": 125,
+   "clinic": 106,
+   "media": 62,
+   "portal": 46,
+   "maker": 14,
+   "other": 10,
    "video": 11,
-   "public": 4
+   "public": 28
   },
   "地域で探す": {
-   "answers": 20,
-   "maker": 1,
-   "other": 4,
-   "portal": 17,
-   "clinic": 20,
-   "media": 15,
+   "answers": 30,
+   "clinic": 30,
+   "media": 16,
+   "portal": 19,
+   "maker": 3,
+   "other": 5,
    "video": 2,
-   "public": 1
+   "public": 2
   },
   "費用": {
-   "answers": 15,
-   "clinic": 14,
+   "answers": 25,
+   "clinic": 24,
    "portal": 11,
    "media": 13,
+   "maker": 1,
    "other": 1,
-   "public": 1,
+   "public": 2,
    "video": 1
   },
   "選び方": {
-   "answers": 13,
+   "answers": 23,
+   "clinic": 18,
+   "portal": 8,
+   "media": 12,
    "video": 4,
-   "portal": 7,
-   "clinic": 13,
-   "media": 10,
-   "maker": 5,
+   "public": 7,
    "other": 2,
-   "public": 1
+   "maker": 6
   },
   "ダイエット": {
-   "answers": 16,
-   "clinic": 16,
+   "answers": 26,
+   "clinic": 19,
+   "public": 10,
    "media": 11,
    "portal": 4,
    "maker": 3,
    "video": 1
   },
   "運動初心者の悩み": {
-   "answers": 11,
-   "video": 3,
-   "media": 9,
-   "clinic": 11,
+   "answers": 21,
+   "clinic": 15,
    "portal": 4,
-   "public": 1,
+   "video": 3,
+   "media": 10,
+   "public": 7,
+   "maker": 1,
    "other": 2
   }
  }

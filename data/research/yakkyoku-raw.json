@@ -1,0 +1,1544 @@
+{
+ "industry": "yakkyoku",
+ "date": "2026-10-04",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 薬局 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://ebisubashi-magazine.com/namba-ebisubashi-drug-store/",
+     "https://livejapan.com/ja/in-kansai/in-pref-osaka/in-umeda_osaka-station_kitashinchi/article-a2000569/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14318515584",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFs560tDMw_ALGShMFNwa-T4kSjSuH02T9uQgn4khYtHA2bPYYQtVHHR2XG1xxPcVJRvfE4OvBqgipMoLj5vswYplLkZA9ptDXAcu0HYS90ks0D-TIZOAXI0E-lyRaTfHiUSIm2iP0QB94D",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF-hWP6s0MejIxucmBAtfWP5H0zamZtoKiBzsqpCmCXUExHJx303RdI36nqsHTZk8rgsisgTpMl5j0YY0LhNfaMnEGS_i5m8xi7yEy4dVyZH7FHEj4KIGQk98LdQdksBNAuAWs=",
+     "https://www.youtube.com/watch?v=2MQqpjkMssI",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/860/",
+     "https://www.kusurinomadoguchi.com/osaka/list?is_night_2106=1",
+     "https://www.osakafuyaku.or.jp/news/detail.html?id=697"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/osaka/line/station/1160214",
+     "https://www.kusurinomadoguchi.com/osaka/list/osaka"
+    ],
+    "error": ""
+   }
+  },
+  "東京 夜間 薬局 開いてる": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGs0QfASdBQJa7_dN4XbNuElnAQThTfubXznp4Htuy3W-sLhEyAdTJIhoQgVB8XJ4UDSsSHPn5Si5h5HsRrGYLnuWoE3ACHYBFE1rGbQNRvNpiRdqaCbIxtDdFgCVw4u96f-xteSuS5Yhc6rUpCVkNNEqLAjaxTjROU",
+     "https://www.hokeniryo.metro.tokyo.lg.jp/iryo/sodan/komatta/kyuubyou/24h_annai",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHYQiavKG5SVFX1id_1fooVhLGnSDB2YvVVHfZ6WGwHLObAxyyr2GLkbPRL3RD79uxHxSR5Dsbnv30a1nnW2UwHMGe5K7uL4SnIlbm-xdQRi6eSZmvFBF0ZdOKn70A674H3aMs=",
+     "https://www.tfd.metro.tokyo.lg.jp/lfe/kyuu_adv/soudan-center.html",
+     "https://www.kusurinomadoguchi.com/tokyo/list?is_night_2106=1",
+     "https://higashi-medical.com/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/860/",
+     "https://www.tfd.metro.tokyo.lg.jp/ts/ems/page03.html",
+     "https://www.fdma.go.jp/mission/enrichment/appropriate/appropriate007.html",
+     "https://ameblo.jp/mt-hokenshi-kangoshi/entry-12925400161.html",
+     "https://www.shinyaku.com/list.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/tokyo/list/721?is_night_2106=1",
+     "https://www.kusurinomadoguchi.com/tokyo/list/711?is_night_2106=1",
+     "https://www.kusurinomadoguchi.com/tokyo/list/731?is_night_2106=1",
+     "https://www.kusurinomadoguchi.com/tokyo/list/741?is_night_2106=1",
+     "https://www.kusurinomadoguchi.com/tokyo/list/739?is_night_2106=1",
+     "https://www.tokyo.med.or.jp/citizen/counseling/himawari"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 オンライン服薬指導 薬局": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/aichi/list/nagoya?is_online_guidance=1",
+     "https://pharma-star.jp/info/%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E6%9C%8D%E8%96%AC%E6%8C%87%E5%B0%8E%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://on-pharmacy.net/online-medication-guide/",
+     "https://shoeidoyakkyoku-nagoya.jp/online-medication-guidance/",
+     "https://www.youtube.com/watch?v=8OXnsEKDpBM",
+     "https://hukuyaku.online/",
+     "https://scuel.me/pharmacy/facilities/prefecture/23/line/99513/station/9951311/service/10",
+     "https://www.kusurinomadoguchi.com/aichi/list/1155?is_online_guidance=1",
+     "https://www.trust-ph.jp/activities/sp/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHIfBmamWKNLIJakoZl2bjg9kI5XkucBipy0n0GvunCaxAY8adIOF4zBkBRlcg_wzryX97LzOWRoYth8XaWZbjvsqDpPP_4mf1LZA==",
+     "https://hukuyaku.online/",
+     "https://c-medi.co.jp/connectonline/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/aichi/list/nagoya",
+     "https://www.kusurinomadoguchi.com/aichi/list/1156",
+     "https://www.kusurinomadoguchi.com/aichi/list/1161?is_map=1&is_online_guidance=1",
+     "https://www.kusurinomadoguchi.com/s?is_online_guidance=1",
+     "https://www.kusurinomadoguchi.com/lp/rsv/online_guidance",
+     "https://www.kusurinomadoguchi.com/aichi/line/station/1141101",
+     "https://www.kusurinomadoguchi.com/aichi/s1000072828",
+     "https://www.nicho.co.jp/tenpo/meisidaimae/",
+     "https://store.qol-net.co.jp/detail/474/",
+     "https://www.cosmos-ph.co.jp/shop/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 休日 薬局 近く": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.city.fukuoka.med.or.jp/facilities/",
+     "https://www.fpa.gr.jp/hensan/html/kyukansinryo8.html",
+     "https://www.tantankai.com/emergency-information/",
+     "https://fastdoctor.jp/hospitals/fukuoka/40130/night-emergency",
+     "https://www.city.fukuoka.lg.jp/shicho/koho/fsdweb/reiwa8_dayori/0101/1507.html",
+     "https://chikushi.or.jp/?page_id=1731",
+     "http://www.kmpa.or.jp/toubanitiran.html",
+     "https://www.kasuya-pa.or.jp/search/holiday.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/fukuoka/list?is_sun_and_holi=1",
+     "https://www.kusurinomadoguchi.com/fukuoka/list",
+     "https://www.kusurinomadoguchi.com/fukuoka/list/fukuoka",
+     "https://www.kusurinomadoguchi.com/fukuoka/list?is_night_2106=1",
+     "https://www.navitime.co.jp/category/0206005/40134/",
+     "https://epark.jp/pharmacy/list/reg_1075/cat_50100/",
+     "https://www.homemate-research-drugstore.com/40130/list/",
+     "https://melmo-app.com/pharmacy/pref40/reception_hour-sunday",
+     "https://www.fpa.or.jp/member/_2520/_4339.html",
+     "https://www.fpa.gr.jp/citizen/",
+     "https://fpahakata.main.jp/",
+     "https://fukuokashi-yakkyoku.info/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 処方箋 受付 薬局": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nicho.co.jp/tenpo/asabu/",
+     "https://www.kusurinomadoguchi.com/hokkai/list/138?is_net=1",
+     "https://www.kusurinomadoguchi.com/hokkai/list?is_net=1",
+     "https://www.sugi-net.jp/service/specialist/pharmacist/caution",
+     "https://www.kusurinomadoguchi.com/hokkai/list/131?is_net=1",
+     "https://www.kusurinomadoguchi.com/hokkai/list/134?is_sun_and_holi=1",
+     "https://www.kusurinomadoguchi.com/hokkai/list/134",
+     "https://epark.jp/pharmacy/list/reg_76/?condition_ids=217",
+     "https://www.kusurinomadoguchi.com/hokkai/line/station/1110315",
+     "https://epark.jp/pharmacy/list/reg_76/cat_50100/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 かかりつけ薬局 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/kanagawa/list/yokohama",
+     "https://pharmacy.healthcare.rakuten.co.jp/search/kanagawa/city/14104/",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/iryo/anzenshien/imuyaku/kakaritsukeyakkyoku.html",
+     "https://asuka-yakkyoku.com/%E3%81%8B%E3%81%8B%E3%82%8A%E3%81%A4%E3%81%91%E8%96%AC%E5%89%A4%E5%B8%AB"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/kanagawa/line/station/1130604",
+     "https://www.kusurinomadoguchi.com/kanagawa/list/yokohama",
+     "https://epark.jp/pharmacy/list/sta_3718/",
+     "https://epark.jp/pharmacy/list/sta_3861/cat_50100/",
+     "https://pharmacy.healthcare.rakuten.co.jp/search/kanagawa/station/1130105/",
+     "https://www.sumaitoseikatsu.yokohama/archives/61703",
+     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/iryo/anzenshien/imuyaku/kakaritsukeyakkyoku.html",
+     "https://www.pref.kanagawa.jp/docs/n3x/yakumu/shinsei/yakkyokuhanbai/cnt/kensapo.html",
+     "https://www.nichiyaku.or.jp/kakaritsuke/support_pharmacy.html",
+     "https://pharma.mynavi.jp/knowhow/workplace/health-support/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 漢方 薬局 相談": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://jichindo.jp/cat_01/521/",
+     "https://kyoto.tips/kyoto-herbalmedicine",
+     "https://www.kanpodo.co.jp/",
+     "https://skanpodo.com/",
+     "https://www.kotaro.co.jp/store/area/kyoto/",
+     "https://www.kanpou-soudan.net/",
+     "https://www.andokanpou.com/",
+     "https://www.kireidou.co.jp/",
+     "https://kireikanpo.com/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGTE3_WLKnVuZ2k1ef7Oem-4XpLMGjfg_Z1FtdWJIPVTiRlwlTzXWzrMPLPYlFz-1qiwl7gvvoQ2HCp1v1xfftYOpMOq6VmfsGEGEyhQEOLl1YMEBU_mxwKC-QQYZVJ_g=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kotaro.co.jp/store/area/kyoto/",
+     "https://chuiyaku.or.jp/ourshoplist/5019",
+     "https://www.imamurakanpo.jp/",
+     "https://www.wakanyaku.com/",
+     "https://www.kanpou-soudan.net/",
+     "https://jichindo.jp/",
+     "https://www.kanpou.info/",
+     "https://jichindo.jp/cat_01/348/",
+     "https://pharmacy-suzuran.com/",
+     "https://www.kracie.co.jp/ph/k-suisinkai/store/kyoto.html",
+     "https://skanpodo.com/",
+     "https://hukuroudou.com/free/kanpo2",
+     "https://jichindo.jp/cat_01/365/",
+     "https://jichindo.jp/cat_01/312/",
+     "https://kyoto.tips/kyoto-herbalmedicine"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 在宅 訪問 薬局": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "http://www.kobeyaku.org/info/heartful/05.html",
+     "http://www.kobeyaku.org/supply/data/chuo/zaitaku.pdf",
+     "https://www.hps.or.jp/pharmacy/",
+     "https://hyogoku-pa.org/drugsupply/drugsupply-2292/",
+     "https://sc320121edf09e6b4.jimcontent.com/download/version/1745392555/module/9220610620/name/%E5%9C%A8%E5%AE%85%E5%AF%BE%E5%BF%9C%E3%81%AB%E4%BF%82%E3%82%8B%E4%BD%93%E5%88%B6.pdf",
+     "https://kobekitayaku.sakura.ne.jp/202512kitayakuzaitaku.pdf",
+     "http://www.hps-or.jp/zaihou/etrn/list/list3.php?sib=09&town=%BC%D6&city=%BF%C0%B8%CD%BB%D4%BF%DC%CB%E1%B6%E8",
+     "http://www.hps-or.jp/zaihou/etrn/list/list3.php?sib=03&town=%B4%E4%B2%B0&city=%BF%C0%B8%CD%BB%D4%C6%E7%B6%E8",
+     "https://www.mtb-g.com/home_care/index.html",
+     "https://smile-kamome.com/homecare/patient/",
+     "https://shikanoko.jp/for-doctor.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hps.or.jp/children/detail?id=310&search_district_id=5",
+     "http://www.kobeyaku.org/",
+     "https://pharma.mynavi.jp/r/pr_hyogo/ci_28100/",
+     "https://pharma.mynavi.jp/r/pr_hyogo/ci_28110/",
+     "https://yaku-job.com/search/hyogo/kobe_city/",
+     "https://yaku-job.com/search/hyogo/kobe_city/hospital/",
+     "https://www.38-8931.com/hyogo/13863/",
+     "https://en-gage.net/search2/%E8%96%AC%E5%89%A4%E5%B8%AB%E3%81%AE%E6%B1%82%E4%BA%BA-%E5%85%B5%E5%BA%AB%E7%9C%8C-%E7%A5%9E%E6%88%B8%E5%B8%82",
+     "https://nmc.kcho.jp/department/pharmacy-2.html"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 ジェネリック 相談 薬局": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.nicho.co.jp/tenpo/kimatidori/",
+     "https://www.town.misato.miyagi.jp/05kenko/kenko/2025-0425-0907-6.html",
+     "https://ship-ph.co.jp/menu/%E4%BB%99%E5%8F%B0%E8%AA%BF%E5%89%A4%E8%96%AC%E5%B1%80-%E3%81%82%E3%81%99%E3%81%A8%E9%95%B7%E7%94%BA%E5%BA%97/",
+     "https://www.summy-group.com/generic",
+     "https://phmirai.co.jp/store/325/",
+     "https://olivepharmacy.net/",
+     "https://www.city.sendai.jp/imuyakumu/kurashi/kenkotofukushi/kenkoiryo/yakujiese/kusuri/generic.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nicho.co.jp/tenpo/miyaginohara/",
+     "https://www.nicho.co.jp/tenpo/hirosedori/",
+     "https://www.nicho.co.jp/tenpo/takasago/",
+     "https://www.nicho.co.jp/tenpo/murasakiyama/",
+     "https://www.nicho.co.jp/tenpo/kimatidori/",
+     "https://www.jmsys.co.jp/pharmacy/shop-detail_264/",
+     "https://www.kasaburanka-pharma.com/prescription",
+     "https://www.family-pharm.jp/medicine",
+     "https://www.nicho.co.jp/inquiry/941/",
+     "https://www.ainj.co.jp/pharmacy/primary.html",
+     "https://faq.callcenter.city.sendai.jp/app/answers/detail/a_id/783/~/%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AA%E3%83%83%E3%82%AF%E5%8C%BB%E8%96%AC%E5%93%81%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E6%95%99%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82",
+     "https://www.mypha.or.jp/prefecture/medical/",
+     "https://www.ns.yawata-mhp.or.jp/content/items/24",
+     "https://olivepharmacy.net/",
+     "https://www.mhlw.go.jp/content/11120000/02.pdf"
+    ],
+    "error": ""
+   }
+  },
+  "広島 駅前 薬局 営業時間": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pharmacy.healthcare.rakuten.co.jp/search/pharmacy/25042/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF7I_l9VIWirfuXstp3_w3omc31T7e6c3MmOcwvwNMUpPhusgBn2oH4pMuFoB_QcftQL4dzm0fXy2-oMdNcAu4nxD5r8BExNZTFT9BmUrYzeVbJogc9zJO8yQar7qaMZJ8yQ83qaNE4bS28WgiK6HT_vjJc1KZ8F2kG9ejii-UVgdABQ_C2TOQ=",
+     "https://job-medley.com/facility/333971/",
+     "https://www.kusurinomadoguchi.com/hiroshima/s56992",
+     "https://www.minamoa-ekie.jp/shop/?id=161",
+     "https://www.pharmacy-net.co.jp/store/1148.html",
+     "https://shop.sogo-pharmacy.jp/detail/916/",
+     "https://www.minamoa-ekie.jp/shop/?id=156",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEc9u85Vdnr8hxcx2HPMEOg9tpQxOrrcMz0BxsbUbnxrbY3yL4cUgfKJvwdWafe0El1FniCtVdF9moOB3JSlIhbHddHTSNdPZmxayrfkE2d0eUTKAPa9t8X1jGXBYtr4y8IW1hPx6D7a5wGmGpRP2jx",
+     "https://store.ainj.co.jp/detail/1100950/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://psft.co.jp/search/store/4437",
+     "https://www.hiroyaku.or.jp/pharmacy_management/2268",
+     "https://www.iryou.teikyouseido.mhlw.go.jp/znk-web/juminkanja/S2430/initialize?kikanCd=7345342002&kikanKbn=5&prefCd=34",
+     "https://pharmacy.healthcare.rakuten.co.jp/search/pharmacy/25042/"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 薬代 自己負担 目安": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://medic-taiyo.co.jp/column/basic/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/1275/",
+     "https://okusurinohonpo.com/2025/05/13/%E8%96%AC%E5%B1%80%E3%81%AE%E3%81%8A%E4%BC%9A%E8%A8%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-%E8%AA%BF%E5%89%A4%E5%9F%BA%E6%9C%AC%E6%96%99%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/",
+     "https://sokuyaku.jp/column/pharmacy-cfn.html",
+     "https://www.tmhp.jp/tamahoku/20240911.html",
+     "https://takochu.jp/data/202505/bin6837b60c6ca44.pdf",
+     "https://okusuritecho.epark.jp/renew/column/medicinenote-difference"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://psft.co.jp/pharmacy/column/useful/957/",
+     "https://gemmed.ghc-j.com/?p=72051",
+     "https://www.rise-pharm.com/information/1178.php",
+     "https://money-map.jp/useful/yakkyoku-kusuridai-rule-2026/",
+     "https://column.finance.ponta.jp/archives/707/"
+    ],
+    "error": ""
+   }
+  },
+  "調剤基本料 とは 安い 薬局": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pharmacist.m3.com/column/chouzai_santei/6072",
+     "https://pharmacist.m3.com/column/chouzai_santei/6394",
+     "https://kakari.medpeer.jp/dispensation_fee_encyclopedia/1/",
+     "https://medical.nihon-generic.co.jp/topics/column16/",
+     "https://yaku-job.com/column/way_of_working/explaining_prescription_fees_in_an_easy-to-understand_manner/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yakuyomi.jp/career_skillup/skillup/02_090/",
+     "https://medical-saponet.mynavi.jp/news/industry_pharmacy-sapo_houshuukaitei/detail_5270/",
+     "https://www.kusurinomadoguchi.com/column/articles/basic-dispensing-fee",
+     "https://chozai-kaitei.jp/revision/basic-fee-1",
+     "https://zaitaku-ph.jp/dispensing-basic-fee-guide/",
+     "https://yakumika.com/pharmacy-insurance-score1/",
+     "https://tachiyaku.com/chozaikihonryo/",
+     "https://iru-yo.com/blog/pharmacy-basic-fee-2026/",
+     "https://medical-unite-lab.com/2026/02/16/2026%E5%B9%B4%E8%AA%BF%E5%89%A4%E5%A0%B1%E9%85%AC%E6%94%B9%E5%AE%9A%E3%80%80%E7%AD%94%E7%94%B3%E3%80%80%E8%AA%BF%E5%89%A4%E5%9F%BA%E6%9C%AC%E6%96%99%EF%BC%88%E6%9C%AC%E4%BD%93%E9%83%A8%E5%88%86/"
+    ],
+    "error": ""
+   }
+  },
+  "薬局 によって 薬代 違う": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://medicatch.medi-jump.com/prices-vary-by-pharmacy/",
+     "https://yakuyomi.jp/experience_interview/interview/02_071/",
+     "https://www.kusurinomadoguchi.com/column/articles/l5uo7",
+     "https://sokuyaku.jp/column/pharmacy-cfn.html",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/1275/",
+     "https://yakuyomi.jp/experience_interview/interview/02_071/",
+     "https://www.ainj.co.jp/column/healthcare-system/016.html",
+     "https://www.izumi-mip.com/blog/?p=1078",
+     "https://pharmacist.m3.com/column/pharmacy-complaints/6509",
+     "https://mogimed.com/2025/11/03/basic_fee/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ainj.co.jp/column/healthcare-system/016.html",
+     "https://medical-saponet.mynavi.jp/news/industry_pharmacy-sapo_houshuukaitei/detail_5270/",
+     "https://sokuyaku.jp/column/pharmacy-cfn.html",
+     "https://note.com/mr_t0303p/n/nb17fe62d1e90",
+     "https://medicatch.medi-jump.com/prices-vary-by-pharmacy/",
+     "https://jisin.jp/life/health/1703038/",
+     "https://www.askdoctors.jp/articles/201364",
+     "https://yakuyomi.jp/experience_interview/interview/02_071/",
+     "https://fpj.members.jafp.or.jp/column/trendwatch/5072",
+     "https://www.izumi-mip.com/blog/?p=1078",
+     "https://dokogayasui-check.com/pharmacy-deals/"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン服薬指導 料金": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kakari.medpeer.jp/dispensation_fee_encyclopedia/22/202401/",
+     "https://pharmacist.m3.com/column/chouzai_santei/6112",
+     "https://www.mhlw.go.jp/content/12400000/001717704.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yakuyomi.jp/career_skillup/skillup/02_038/",
+     "https://yakuyomi.jp/career_skillup/skillup/02_073/",
+     "https://closedi.jp/23793/",
+     "https://pharmacist.m3.com/column/chouzai_santei/6113",
+     "https://sokuyaku.jp/support/support_faq_category/pharmacy/pharmacy_cost/",
+     "https://todokusuri.com/column/online_psychiatry_insurance/",
+     "https://psft.co.jp/customer/onlinemedicationguidance/"
+    ],
+    "error": ""
+   }
+  },
+  "ジェネリック 薬代 どれくらい 安く": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.meiyaku-kenpo.or.jp/before202303/news/1305/02/02.html",
+     "https://www.sawai.co.jp/medicine/merit/",
+     "https://www.city.nomi.lg.jp/docs/747.html",
+     "https://www.toyota-groupkenpo.jp/generic",
+     "https://www.kenpo.gr.jp/daikin/iryohi/generic/generic-01.html",
+     "https://www.ana-kenpo.jp/iryouhi/generic.html",
+     "https://www.pref.nara.lg.jp/n086/47293.html",
+     "https://www.jga.gr.jp/general/easycalc.html",
+     "http://www.nks-kenpo.or.jp/service/07/07.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kenpo.gr.jp/daikin/iryohi/generic/generic-01.html",
+     "https://fpcafe.jp/mocha/2209",
+     "https://www.city.tachikawa.lg.jp/faq/1020019/1002625/1002877/1002884.html",
+     "https://www.toyota-groupkenpo.jp/generic",
+     "https://clius.jp/mag/2026/09/14/choki-shusaihin-sentei-ryoyo/",
+     "https://yakkle.jp/column/lifestyle/electivecare-medicines",
+     "https://hospital.naramed-u.ac.jp/outpatient/tyouki.html",
+     "https://saikazo.org/news/32422/",
+     "https://kusuriya.co.jp/information/generic2026/"
+    ],
+    "error": ""
+   }
+  },
+  "お薬手帳 持たない 負担 増える": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.toyotakenpo.jp/document/159/a22983fdf9fdeb86c5a88ad508a84c90.pdf",
+     "https://note.com/mr_t0303p/n/n78ca166dc274",
+     "https://www.kusurinomadoguchi.com/column/articles/not-have-medicine-notebook",
+     "https://diamond.jp/articles/-/379204?page=3",
+     "https://www.kusurinomadoguchi.com/column/articles/medicine-notebook-becomes-cheaper",
+     "https://sokuyaku.jp/column/pharmacy-cfn.html",
+     "https://okusuritecho.epark.jp/renew/column/medicinenote-difference",
+     "https://www.ainj.co.jp/column/healthcare-system/016.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/column/articles/yrbil",
+     "https://pharmacist.m3.com/column/sinryouhoushu_faq_26/7273",
+     "https://yakuyomi.jp/career_skillup/skillup/02_073/",
+     "https://www.yuzumarublog.com/medication-notebook-forgot-fee-2026/",
+     "https://www.m-kyosai.jp/qa/1708048891_5026",
+     "https://www.toyotakenpo.jp/document/159/a22983fdf9fdeb86c5a88ad508a84c90.pdf"
+    ],
+    "error": ""
+   }
+  },
+  "市販薬 処方薬 どっちが安い": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://saito-naika-cl.com/blog/post-1595/",
+     "https://akashiyamada.com/blog/7329",
+     "https://note.com/yakkyoku_guide/n/nb895600b2912",
+     "https://diamond.jp/articles/-/141473",
+     "https://kouhokukuyaku.jp/1715/",
+     "https://www.eye-itami.jp/index/blog-detail?id=1202",
+     "https://www.ainj.co.jp/column/medicine/017.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kusurinomadoguchi.com/column/articles/fnbil",
+     "https://www.kusurinomadoguchi.com/column/articles/which-is-cheaper-hospital-or-over-the",
+     "https://www.nikkei.com/article/DGXMZO48903270T20C19A8EA4000/",
+     "https://psft.co.jp/pharmacy/column/useful/957/",
+     "https://www.data-index.co.jp/knowledge/237878/",
+     "https://www.yakuji.co.jp/entry119841.html"
+    ],
+    "error": ""
+   }
+  },
+  "薬の配送 送料 いくら": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://media.hanaseru-medical.com/drugstore/18660/",
+     "https://www.ainj.co.jp/app/faq/detail/002805.html",
+     "https://sokuyaku.tayori.com/q/to-c/detail/1352914/",
+     "https://k-pharmacy-drugstore.jp/blog/deliver-medicine-fee/",
+     "https://www.ryutsuu.biz/it/q070176.html",
+     "https://www.youtube.com/watch?v=5_wEbSNqnTs",
+     "https://olive-ph.com/2024/06/%E3%80%8Csokuyaku%E3%80%8D%E3%81%94%E5%88%A9%E7%94%A8%E6%96%99%E9%87%91%E3%81%AE%E6%94%B9%E5%AE%9A/",
+     "https://plover-pharmacy.com/service/online-medication.html",
+     "https://micin.my.site.com/FAQforPatients/s/article/1361",
+     "https://k-mesen.jp/faq/detail/88",
+     "https://sokuyaku.jp/support/support_faq_category/common/common_cost/",
+     "https://www.axalpha.com/blog/amazon%E3%83%95%E3%82%A1%E3%83%BC%E3%83%9E%E3%82%B7%E3%83%BC-%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95/",
+     "https://sokuyaku.tayori.com/q/to-c/detail/1352929/",
+     "https://sokuyaku.jp/support/%E8%96%AC%E5%89%A4%E3%81%AE%E9%85%8D%E9%80%81%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFbXXoVeXfWBsxienZ6mnnmvmOO7qgjH9nFfDPKq8dzdltVhHMM1E5VFFShBggdRAmP-lVl_DieinKs04ohBT_cLdfGEScocP7S4WTudshTy5czLYf9aNwmMo_o9GBIfyC0t5a4VaotcKzPQVNV1cV4ZJxhKjhL63FumuSrPry-R4ZjTrwKLHsqhczfoSz5FtQUSVXNl8AUf8CWOTPqb70kyW_mIBNwcfPWTla63n9P4hK60ImIUBUBoQGadA1cGKuct-aM4304YhaZuyA9DioSMIQuJj0HbzG8fRnpB3Nvvu00uhGt9HpuUL5qJ7JY44wjkwMEpGZzw6y_aAXy9wKKGMZvJAWW42hxP0lJcgrQclatLyDqufzxbnSPndU00hh1QiwJCHPiZIyJYIrxAsxbXa4S8bGy-t8I72umfd3GebofQZ12_plg2rfflr-7RuGAbFhG6gkt8aJF0KY="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://customer.sundrug-online.com/s/faq/delivery-01",
+     "https://pharmacy.healthcare.rakuten.co.jp/yoyakusuri/",
+     "https://k-pharmacy-drugstore.jp/deliver-medicine/",
+     "https://k-mesen.jp/lp/online-takuyaku",
+     "https://ogikubo-shonika.com/takuyakubin/",
+     "https://www.todokeru-yakkyoku.com/",
+     "https://kusuriya.co.jp/information/dispensing-pharmacy-delivery-fee/"
+    ],
+    "error": ""
+   }
+  },
+  "夜間 休日 加算 薬局": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://pharmacist.m3.com/column/chouzai_santei/6517",
+     "https://kakari.medpeer.jp/dispensation_fee_encyclopedia/19/",
+     "https://www.phchd.com/jp/medicom/park/idea/medicalfees-overtime-addition",
+     "https://note.com/osushi_yaku/n/n4a4b542ad64e",
+     "https://kanri.nkdesk.com/kasan/kasan3.9.php",
+     "https://stu-ge.nichiiko.co.jp/mpi_documents/902",
+     "https://medical-saponet.mynavi.jp/news/industry_pharmacy-sapo_houshuukaitei/detail_5281/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pharmacist.m3.com/column/chouzai_santei/6517",
+     "https://pharmacist.m3.com/column/chouzai_santei/6473",
+     "https://www.nichiyaku.or.jp/files/co/pharmacy-info/2026/20260402_01.pdf",
+     "https://yakuyomi.jp/career_skillup/skillup/02_166/",
+     "https://medical-saponet.mynavi.jp/news/industry_pharmacy-sapo_houshuukaitei/detail_5281/",
+     "https://kakari.medpeer.jp/dispensation_fee_encyclopedia/19/",
+     "https://yakuyomi.jp/career_skillup/skillup/02_122/",
+     "https://www.phchd.com/jp/medicom/park/idea/medicalfees-overtime-addition",
+     "https://www.chouzai-pharmacy.com/entry/kyuujitukasan"
+    ],
+    "error": ""
+   }
+  },
+  "薬局 支払い クレジットカード 対応": {
+   "group": "費用",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/apotheke_umschau/n/n51eb5413a488",
+     "https://ggwh.jp/news/2948/",
+     "https://pharmacist.m3.com/column/houshu_kaisetu2026/7593"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.cardservice.co.jp/service/businessmodel/pharmacy.html",
+     "https://www.nicho.co.jp/inquiry/974/",
+     "https://www.kusurinomadoguchi.com/osaka/list?is_card=1",
+     "https://www.kusurinomadoguchi.com/s?is_card=1",
+     "https://www.kusurinomadoguchi.com/tokyo/list?is_card=1",
+     "https://faq.sugi-net.jp/faq/show/374?category_id=10&site_domain=default",
+     "https://manekai.ameba.jp/creditcard/pharmacy/",
+     "https://www.tokupay.jp/entry/pharmacy-credit-card",
+     "https://andespharmacy.jp/column/detail/20260601090022/"
+    ],
+    "error": ""
+   }
+  },
+  "薬局 選び方 ポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://psft.co.jp/pharmacy/kaitei2026/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/795/",
+     "https://kaigo.homes.co.jp/manual/healthcare/medicine/pharmacist/",
+     "https://kusuriya.co.jp/information/prescription-pharmacy/",
+     "https://nakaimachi-yakkyoku.co.jp/topics/choosepharmacy/",
+     "https://yakkyoku-hyakumeiten.jp/how-to-choose-pharmacy/",
+     "https://www.andespharmacy.com/news/28670.html",
+     "https://www.365medical.or.jp/post/6%E6%9C%88%E3%81%AE%E8%AA%BF%E5%89%A4%E5%A0%B1%E9%85%AC%E6%94%B9%E5%AE%9A%E3%81%A7%E8%96%AC%E5%B1%80%E9%81%B8%E3%81%B3%E3%81%AF%E3%81%A9%E3%81%86%E5%A4%89%E3%82%8F%E3%82%8B%EF%BC%9F",
+     "https://www.shonandaiyakkyoku.com/blog/2552/"
+    ],
+    "error": ""
+   }
+  },
+  "かかりつけ薬剤師 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://kaigo.homes.co.jp/manual/healthcare/medicine/pharmacist/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/1420/",
+     "https://en-joy-group.jp/2025/01/30/%E3%81%8B%E3%81%8B%E3%82%8A%E3%81%A4%E3%81%91%E8%96%AC%E5%89%A4%E5%B8%AB%E3%81%A8%E3%81%AF%EF%BC%9F%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E9%81%B8%E3%81%B3%E6%96%B9%E3%82%92%E8%A7%A3%E8%AA%AC/",
+     "https://relax-job.com/more/331474",
+     "https://healthcarenote.jp/customer/topics/column06/",
+     "https://tokyo-doctors.com/pickup/beauty/2918"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pharmacist.m3.com/column/special_feature/7257",
+     "https://www.jiho.co.jp/blogs/jiho-select/familypharmacist-260430",
+     "https://pharma.mynavi.jp/knowhow/preparation/family-pharmacist/",
+     "https://www.ainj.co.jp/column/healthcare-system/001.html",
+     "https://pharmacist.m3.com/column/sinryouhoushu_faq_26/7168",
+     "https://kaigo.homes.co.jp/manual/healthcare/medicine/pharmacist/",
+     "https://jitsumu-guide.com/family-pharmacist-guidance-fee-2026-guide/",
+     "https://medical.nikkeibp.co.jp/leaf/mem/pub/di/trend/202603/592458.html",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/1420/",
+     "https://yakuyomi.jp/career_skillup/family_pharmacist/07_012/"
+    ],
+    "error": ""
+   }
+  },
+  "病院の近く 薬局 以外 でもいい": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://taishinph.co.jp/tips/prescription-where/",
+     "https://todokusuri.com/column/post_20250904/",
+     "https://news.curon.co/terms/9259",
+     "https://www.nanbu.saiseikai.or.jp/guide/outpatient/medicine/",
+     "https://mydrug.co.jp/nearby-pharmacy/",
+     "https://www.aisei.co.jp/helico/medicine-pharmacy/prescription-drop-off/",
+     "https://pharmacist-info.jp/qa/05",
+     "https://nakaimachi-yakkyoku.co.jp/topics/choosepharmacy/",
+     "https://rakuraku.ltd/about-pharmacy/3703/"
+    ],
+    "error": ""
+   }
+  },
+  "門前薬局 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.38-8931.com/pharma-labo/jobchange/monzen-pharmacy.php",
+     "https://aunara.jp/men-yakkyoku/",
+     "https://www.yakuji.co.jp/entry128497.html",
+     "https://todokusuri.com/column/post_20250904/",
+     "https://www.cotocellar.com/contents/detail/141",
+     "https://sokuyaku.jp/column/pharmacy-uvd.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSdyUBzqLDYHstrn5HX6L2wZ8wDYS-Laii3mS8qSj4Qvjx0W1okJlBa0Cm8uw0HvpYNGnd7N1PLZSZhDBoqyGicNZid8hkmQFUnMIq9SELMGxi0Ev5QDC5QcyT5Pi-a8llIpk=",
+     "https://note.com/pharmbook93/n/nf4e87d9f1bdd"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://pharmacist.m3.com/column/chouzai_tensyoku/7161",
+     "https://md-next.jp/yougo/%E9%9D%A2%E5%88%86%E6%A5%AD",
+     "https://www.pha-net.jp/infomation/special-list/channel/phamacy-work.php",
+     "https://www.sasakigp.co.jp/column/10013742",
+     "https://www.38-8931.com/pharma-labo/jobchange/monzen-pharmacy.php",
+     "https://solasto-career.com/iryo/media/23047/",
+     "https://weldia.welcia-yakkyoku.co.jp/contents/000022.php",
+     "https://www.iyaku.info/column/?ca=2&id=1469695967-466222",
+     "https://imadoki-yakuzaishi.com/pharmacy/2045/",
+     "https://yakuyomi.jp/career_skillup/skillup/02_076/",
+     "https://pharma.mynavi.jp/knowhow/workplace/monzen-pharmacy/",
+     "https://yakuyomi.jp/career_skillup/column/03_075/",
+     "https://yaku-job.com/column/way_of_working/monzen-pharmacy/",
+     "https://mydrug.co.jp/about-family-pharmacy/",
+     "https://ishii-pharmacy.co.jp/1079/",
+     "https://www.ph-10.com/yakupresso/articles/2858/"
+    ],
+    "error": ""
+   }
+  },
+  "薬局 比較 サービス 待ち時間": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://okusuritecho.epark.jp/renew/",
+     "https://healthcarenote.jp/customer/topics/column14/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/833/",
+     "https://www.ainj.co.jp/column/activities/001.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQECtHNXT3t6bLx8l3MdgAeqzJ7wWEpJfqlp2TvqI__Rk4R-qEAKPQLjHPaBeObCh-d2mKIHn1TKTTRltkcCsNOx2P79uvyTlfAfNL7_qiy63GlgAVT2xkl3vC0aA7NFGn4TSQ==",
+     "https://melmo-app.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.msandc.co.jp/info/column/ms/retail/drugstore/case278",
+     "https://psft.co.jp/navi/child/386/",
+     "https://www.kusurinomadoguchi.com/column/pharmacy-youdontneedtowait-3597/",
+     "https://psft.co.jp/pharmacy/column/useful/897/",
+     "https://sokuyaku.jp/column/pharmacy-wjf.html",
+     "https://www.nicho.co.jp/column/14229/",
+     "https://www.hus.ac.jp/hokukadai-jiten/detail/23c8168fef48bc20b7c9bc0c5550a4859e08c81f-19058/",
+     "https://kusuriya.co.jp/information/pharmacy-waiting-time/",
+     "https://healthcarenote.jp/customer/topics/column08/",
+     "https://rakuraku.ltd/about-pharmacy/3664/",
+     "https://www.ainj.co.jp/column/send_rx/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/833/",
+     "https://special.nikkeibp.co.jp/atclh/NXR/24/ainj1101/",
+     "https://www.kusurinomadoguchi.com/lp/app/01",
+     "https://medixs.jp/case/sugiyama_minowa/",
+     "https://www.jmsys.co.jp/syohosen-app/",
+     "https://4yaku.jp/",
+     "https://medical-pay.jp/"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン 対応 薬局 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://sokuyaku.jp/column/2025_110.html",
+     "https://smc-seifukai.or.jp/nhbhp/online/blog/blog18/",
+     "https://www.aspicjapan.org/asu/article/19103",
+     "https://h-zukan.jp/articles/online-medication-guidance/",
+     "https://todokusuri.com/column/online_pharmacy/",
+     "https://smc-seifukai.or.jp/nhbhp/online/blog/blog18/",
+     "https://www.ainj.co.jp/column/healthcare-system/003.html",
+     "https://nicoms.nicho.co.jp/business/contents/20240920-04/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://todokusuri.com/column/online_pharmacy/",
+     "https://sokuyaku.jp/column/2025_110.html",
+     "https://nicoms.nicho.co.jp/business/contents/20250430-01/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iyakuhin/yakkyoku_yakuzai/onlinefukuyaku.html",
+     "https://www.mhlw.go.jp/stf/web_magazine/closeup/20.html",
+     "https://www.nttcoms.com/service/videotalk/column/prescription-video-call/"
+    ],
+    "error": ""
+   }
+  },
+  "薬剤師 相談しやすい 薬局": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iyakuhin/kinoujouhou/index.html",
+     "https://gemmed.ghc-j.com/?p=59964"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nicho.co.jp/column/20452/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/1420/",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/795/",
+     "https://www.nichiyaku.or.jp/kakaritsuke/about/index.html",
+     "https://kaigo.homes.co.jp/manual/healthcare/medicine/pharmacist/",
+     "https://kusuriya.co.jp/information/prescription-pharmacy/",
+     "https://nakaimachi-yakkyoku.co.jp/topics/choosepharmacy/",
+     "https://yakkyoku-hyakumeiten.jp/how-to-choose-pharmacy/",
+     "https://www.andespharmacy.com/news/28670.html",
+     "https://www.mhlw.go.jp/houdou_kouhou/kouhou_shuppan/magazine/2016/05_01.html",
+     "https://www.pref.saitama.lg.jp/a0707/kakarituke/kakaritsuke_yakkyoku.html",
+     "https://pharmacist.m3.com/column/special_feature/3689"
+    ],
+    "error": ""
+   }
+  },
+  "複数の病院 薬局 一つにまとめる": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nicho.co.jp/corporate/newsrelease/20221101_nr1/",
+     "https://www.nicho.co.jp/corporate/newsrelease/20230829_nr1/",
+     "https://www.kusurinomadoguchi.com/column/articles/medication-record-book",
+     "https://iru-yo.com/blog/e-okusuri-techo/",
+     "https://www.wakaba-hldgs.co.jp/information/%E7%9F%A5%E3%81%A3%E3%81%A6%E3%82%8B%EF%BC%9F%E3%80%8C%E3%81%8A%E8%96%AC%E3%81%AE%E4%B8%80%E5%85%83%E7%AE%A1%E7%90%86%E3%80%8D%E3%80%9C1%E3%81%A4%E3%81%AE%E8%96%AC%E5%B1%80%E3%81%AB%E3%81%BE%E3%81%A8/",
+     "https://gemmed.ghc-j.com/?p=5909",
+     "https://www.mhlw.go.jp/file/04-Houdouhappyou-11121000-Iyakushokuhinkyoku-Soumuka/vision_1.pdf"
+    ],
+    "error": ""
+   }
+  },
+  "薬局 口コミ 見るべき点": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://kusuriya.co.jp/information/prescription-pharmacy/",
+     "https://nakaimachi-yakkyoku.co.jp/topics/choosepharmacy/",
+     "https://www.andespharmacy.com/news/28670.html",
+     "https://todokusuri.com/column/post_20250904/",
+     "https://epark.jp/pharmacy/list/review/",
+     "https://www.kusurinomadoguchi.com/tokyo/s116574/reviews",
+     "https://note.com/paa_ooya/n/nbbcc46d33fb2"
+    ],
+    "error": ""
+   }
+  },
+  "健康サポート薬局 とは": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yaku-job.com/column/way_of_working/health-support-pharmacy/",
+     "https://saiyaku.or.jp/pharmacist/kensapo",
+     "https://yu-wood.com/health-support/",
+     "https://www.nichiyaku.or.jp/kakaritsuke/support_pharmacy.html",
+     "https://www.mhlw.go.jp/file/05-Shingikai-11121000-Iyakushokuhinkyoku-Soumuka/matome.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nichiyaku.or.jp/kakaritsuke/support_pharmacy.html",
+     "https://pharma.mynavi.jp/knowhow/workplace/health-support/",
+     "https://yakuyomi.jp/career_skillup/skillup/02_088/",
+     "https://www.pref.shizuoka.jp/kenkofukushi/eiseiyakuji/yakuji/1040703/1003164/1025391.html",
+     "https://www.k-pharmalink.co.jp/trivia/basic/320/"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 有効期限 切れた": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/1523/",
+     "https://todokusuri.com/column/post_20251112/",
+     "https://karu-keru.com/info/knowhow/prescription/prescription-reissue",
+     "https://todokusuri.com/column/prescription_reissue/",
+     "https://papayakuzaishi.hatenablog.com/entry/2026/03/16/101427",
+     "https://www.ken-ei.co.jp/column/pharmacy-guide/shohousen_deadline/",
+     "https://one-doctor-cmic.com/prescription-expired",
+     "https://www.relax-kaizen.com/column/prescription-reissue-guide/",
+     "https://media.hanaseru-medical.com/prescription/14978/"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 スマホ 送る 方法": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://faq.sugi-net.jp/faq/show/3696?category_id=38&site_domain=default",
+     "https://special.nikkeibp.co.jp/atclh/NXR/24/ainj1101/",
+     "https://www.tomods.jp/service/pharmacy/prescription",
+     "https://psft.co.jp/customer/howtouse/",
+     "https://www.kusurinomadoguchi.com/lp/app/01",
+     "https://media.hanaseru-medical.com/prescription/14945/",
+     "https://portal.okusuriplus.com/support/guide/6088/",
+     "https://faq.okusuriplus.com/%E3%83%9E%E3%82%A4%E3%83%8A%E5%8F%97%E4%BB%98%E3%82%92%E3%81%97%E3%81%A6%E9%9B%BB%E5%AD%90%E5%87%A6%E6%96%B9%E7%AE%8B%E3%81%AE%E5%BC%95%E6%8F%9B%E7%95%AA%E5%8F%B7%E3%82%92%E9%80%81%E4%BF%A1-672359574cbd772013e41415",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/833/"
+    ],
+    "error": ""
+   }
+  },
+  "電子処方箋 使い方 薬局": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_kokumin_QA.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_kokumin.html",
+     "https://nicoms.nicho.co.jp/business/contents/20241004-03/",
+     "https://www.phchd.com/jp/medicom/electronic-prescription/column/general/e-prescription-coupon",
+     "https://iryohokenjyoho.service-now.com/csm?id=kb_article_view&sysparm_article=KB0012788",
+     "https://psft.co.jp/navi/medicine-pharmacy/pharmacy/2724/",
+     "https://pharmacist.m3.com/column/dispensation_point/6257",
+     "https://faq.okusuriplus.com/--672359574cbd772013e41415"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/001141058.pdf",
+     "https://kusuriya.co.jp/information/electronic-prescriptions-work/",
+     "https://supago.io/articles/electronic-prescription-guide",
+     "https://yakuzaishi-career-labo.hatenablog.com/entry/2026/04/14/222755",
+     "https://www.ainj.co.jp/column/healthcare-system/013.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_kokumin_QA.html",
+     "https://www.ssk.or.jp/datahealth/s_z_04.html",
+     "https://nicoms.nicho.co.jp/business/contents/20241101-03/",
+     "https://kanri.nkdesk.com/chouzai/chouzai16.php",
+     "https://dx.emedical.ne.jp/denshishohousen_info/"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン服薬指導 やり方 必要なもの": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://todokusuri.com/column/post_20250801/",
+     "https://kaigo.homes.co.jp/manual/healthcare/medicine/fukuyakushidou/online/",
+     "https://march-cos.com/2024/09/25/online-pharmacy-guide/",
+     "https://nicoms.nicho.co.jp/business/contents/20240920-04/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tc7048&dataType=1&pageNo=1",
+     "https://tokyo-doctors.com/webdoctor/8985",
+     "https://www.phchd.com/jp/medicom/park/idea/ph-management-medication-guidance",
+     "https://media.hanaseru-medical.com/prescription/14945/",
+     "https://www.ainj.co.jp/column/online_medication_counseling/",
+     "https://nicoms.nicho.co.jp/business/contents/20240906-01/"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 なし で 薬 もらえる": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://psft.co.jp/navi/medicine-pharmacy/medicine/1322/",
+     "https://karu-keru.com/info/knowhow/prescription/prescription-none-pharmacy",
+     "https://www.daiichisankyo-hc.co.jp/health/knowledge/yakuiku/otc/",
+     "https://fit.clinic/menu/pill/otc/",
+     "https://dr-land-omiya.com/loom/ed-medication/tadalafil-commercially-available/",
+     "https://www.sugawara-uroclinic.com/news/otc/",
+     "https://fpyamagishi.com/?p=2159",
+     "https://www.mhlw.go.jp/content/11121000/001552335.pdf",
+     "https://www.ainj.co.jp/column/medicine/019.html",
+     "https://www.pref.yamaguchi.lg.jp/soshiki/48/339160.html",
+     "https://hirotsu.clinic/blog/%E3%82%A2%E3%83%95%E3%82%BF%E3%83%BC%E3%83%94%E3%83%AB%E3%81%8C%E8%96%AC%E5%B1%80%E3%81%A7%E8%B2%B7%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%EF%BC%9F-%E7%8F%BE%E7%8A%B6/"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 コピー 使える": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/kusuri_no_mado/n/na7514b79425b",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzmbgkolRBBQ588M-X9F3CWWq7DvwoVPaC64fUTNlEkBPpgsRZ3l1s9A_BSfY2MKX72xrDLkNQoW0PxP3A7spIE4Ut6j47ss1dVq8yqTlWHuhmgpff7_zXek32OqkywLol98wkKU4ww0v9srXfn3_XDvdvfoAEZhYOvXFJrphilQ1FnfWPZh3zPM_Svu5GKyR5DyOFPNZy8QRdiG-UM888wOpX_WhRoNAtO4VZ9f-EH3BHaPAJnINMfbkNQ6ECYSlQzQfgNIWQyQtDYUny4ny2r3cr7bW8nnOfk-ta1psE_pwB50D8KkKtSkXJNvsuE_bbgBWG44TLbESp3T74S-XftFwNcQQ_l28f7Zq3ndZLPeT5cDrg56bTTDlqKeczpKGe5XGgl3FC098IFv9qMc8JOSwRrBHedOCQAxcYAeEkktrWEIjcWxycXSPkJzl-wbGG",
+     "https://nicoms.nicho.co.jp/business/contents/20240823-03/",
+     "http://kyotofuyaku.or.jp/data/data1/8519-1.pdf",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGyhOOL9PlsWnGPEdrSItRjciiASRQLqi1FY-ZVFYDdzC7IilK-pZZqV7_i9W0nw96cd9e0VSYd6XMM2KJGCa9ZStEaDcaxTrrpr9YyInH24mv9GbVCiRbyOrF8Bst6NkH0sRZt7AqVFZGbFwL-ozktG2HjJBWIBUoNR4Z0NNE=",
+     "https://yakuzaic.com/archives/12617"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yakuzaic.com/archives/12617",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_kokumin_QA.html",
+     "https://www.mhlw.go.jp/houdou_kouhou/sanka/gyousei_monitor/gijiyoushi_h28.html",
+     "https://sugimoto-kids-clinic.com/clinic/index.php/blog/blog_150605_2346/",
+     "https://taishinph.co.jp/tips/prescription-where/",
+     "http://kyotofuyaku.or.jp/data/data1/8519-1.pdf",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 受付 待ち時間 短縮": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.ainj.co.jp/column/send_rx/",
+     "https://www.nicho.co.jp/service/prescription_web/",
+     "https://todokusuri.com/column/online_prescription/",
+     "https://www.hus.ac.jp/hokukadai-jiten/detail/23c8168fef48bc20b7c9bc0c5550a4859e08c81f-19058/",
+     "https://healthcarenote.jp/customer/topics/column08/",
+     "https://www.kusurinomadoguchi.com/lp/app/01",
+     "https://www.watch.impress.co.jp/docs/series/itsmo/1401415.html"
+    ],
+    "error": ""
+   }
+  },
+  "オンライン服薬指導 初めて 流れ": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nttcoms.com/service/videotalk/column/prescription-video-call/",
+     "https://nicoms.nicho.co.jp/business/contents/20240906-01/",
+     "https://www.phchd.com/jp/medicom/park/idea/ph-management-medication-guidance",
+     "https://yakuyomi.jp/career_skillup/skillup/02_038/",
+     "https://kusuriya.co.jp/information/online-medication-guidance/",
+     "https://medicalcenterjp.com/columns/columns-13392/",
+     "https://march-cos.com/2024/09/25/online-pharmacy-guide/",
+     "https://asuka-pha.com/want-to-know-more-about-online-medication-instruction-new-teaching-method/",
+     "https://www.mscreate-inc.com/%E3%83%9B%E3%83%BC%E3%83%A0/%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E6%9C%8D%E8%96%AC%E6%8C%87%E5%B0%8E%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 他の薬局 変更": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nicho.co.jp/inquiry/931/",
+     "https://faq.sugi-net.jp/faq/show/72?category_id=37&site_domain=default",
+     "https://karu-keru.com/info/knowhow/prescription/prescription-deadline-extension",
+     "https://www.ainj.co.jp/column/healthcare-system/012.html",
+     "https://www.nicho.co.jp/inquiry/930/",
+     "https://karu-keru.com/info/knowhow/prescription/prescription-deadline",
+     "https://www.ken-ei.co.jp/column/pharmacy-guide/shohousen_deadline/",
+     "https://shinkana-cl.com/blog/prescription-expirationdate/",
+     "https://www.mhlw.go.jp/stf/newpage_32041.html"
+    ],
+    "error": ""
+   }
+  },
+  "処方箋 薬 受け取り 家族 代理": {
+   "group": "処方箋とオンライン服薬指導",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://todokusuri.com/column/post_20250903/",
+     "https://taishinph.co.jp/tips/prescription-not-myself/",
+     "https://mydrug.co.jp/dispatch-a-prescription/",
+     "https://fujicl.or.jp/basics/prescription-delivery/",
+     "https://www.phchd.com/jp/medicom/electronic-prescription/column/general/medicine-receiving-proxy",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEB8XoalScaEAmHV3yB2Q3YooCNGrRHvtDglR_gXLz1REJRmvD7un3bcYqCWR2vAQ-qn8VMVHlEzHAHXmVkAff5yPFcULU3GdgB_pzzY1XzARDYgx1_Qj7QLO_yY0lBE9ia33oYoYh6ylPVxqvZ0twFjNWKPEEadnvWJEINB0buQw==",
+     "https://clius.jp/mag/2024/01/15/shohosen-dairi-yakuzai/",
+     "https://ishii-pharmacy.co.jp/1089/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://taishinph.co.jp/tips/prescription-not-myself/",
+     "https://fujicl.or.jp/home-medical-care-proxy-medicine-pickup-guide/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1125024306",
+     "https://todokusuri.com/column/post_20250903/",
+     "https://www.phchd.com/jp/medicom/electronic-prescription/column/general/medicine-receiving-proxy",
+     "https://ameblo.jp/imainakamachi-pharmacy/entry-12962353971.html",
+     "https://mydrug.co.jp/prescription-proxy-use-in-japan/",
+     "https://hikariph.co.jp/faq/prescription/",
+     "https://www.metropharmacy.tokyo/column/770/",
+     "https://clius.jp/mag/2024/01/15/shohosen-dairi-yakuzai/",
+     "https://www.kusurinomadoguchi.com/column/articles/prescription-deputy/",
+     "https://faq.sugi-net.jp/faq/show/5399?category_id=8&return_path=%2Fcategory%2Fshow%2F8%3Fpage%3D1&site_domain=default&sort=sort_access&sort_order=desc&site_domain=default",
+     "https://m-medical.jp/medicine/151",
+     "https://rainbow-yakkyoku.jp/rainbow/medicine-qa/prescription"
+    ],
+    "error": ""
+   }
+  },
+  "ジェネリック 切り替え 不安": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.data-index.co.jp/knowledge/193481/",
+     "https://takochu.jp/data/202505/bin6837b60c6ca44.pdf",
+     "https://www.mhlw.go.jp/stf/newpage_39830.html",
+     "https://www.mhlw.go.jp/stf/houdou_kouhou/kouhou_shuppan/magazine/202410_004.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gov-online.go.jp/useful/article/201309/4.html",
+     "https://www.josai.ac.jp/josai_lab/530/",
+     "https://www.pref.kanagawa.jp/docs/n3x/yakumu/kouhatsu/kouhatsu.html",
+     "https://www.jga.gr.jp/general/about.html",
+     "https://www.pref.saitama.lg.jp/a0707/generic/generic-qa.html",
+     "https://www.pmda.go.jp/files/000144305.pdf",
+     "https://www.gov-online.go.jp/article/201309/entry-8941.html"
+    ],
+    "error": ""
+   }
+  },
+  "ジェネリック 先発 違い 効果": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.gov-online.go.jp/useful/article/201309/4.html",
+     "https://www.interphex.jp/hub/ja-jp/blog/article_022.html",
+     "https://www.ainj.co.jp/column/generic/",
+     "https://www.ainj.co.jp/column/medicine/014.html",
+     "https://cocoromi-mental.jp/drug/generic/",
+     "https://www.nipro-es-pharma.co.jp/product/generic-qa/01/01-01.html",
+     "https://www.oitakenyaku.or.jp/introduction/generic/",
+     "https://www.kyorin-rmd.co.jp/generic/",
+     "https://www.ys-med.com/about_generic/"
+    ],
+    "error": ""
+   }
+  },
+  "薬 在庫 なし 取り寄せ 日数": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sizucu.co.jp/column/kusuri-toriyose.html",
+     "https://pharmacist.m3.com/column/special_feature/3452",
+     "https://aozorapharmacy.jp/2026/09/16/%F0%9F%92%8A%E3%81%8A%E8%96%AC%E3%81%AE%E5%9C%A8%E5%BA%AB%E3%81%8C%E3%81%AA%E3%81%84%E6%99%82%E3%81%A3%E3%81%A6%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%AE%EF%BC%9F%F0%9F%92%8A/",
+     "https://costcozora.com/dispensing-at-back-order/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13317928623",
+     "https://note.com/kusuri_no_mado/n/n68b8167a51cd"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://faq.sugi-net.jp/faq/show/202?category_id=51&site_domain=default",
+     "https://medical.nikkeibp.co.jp/leaf/mem/pub/di/column/sasajima/202509/590207.html"
+    ],
+    "error": ""
+   }
+  },
+  "欠品 薬 代わり 相談": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://note.com/mr_t0303p/n/nf91b85369436",
+     "https://www.min-iren.gr.jp/news-press/genki/20260227_54951.html",
+     "https://www.t-kenseikai.jp/honbu/post-2821/",
+     "https://www.medilab.co.jp/column/ocr/10001/",
+     "https://pharmacist.m3.com/column/benzen/4465",
+     "https://www.town.misato.miyagi.jp/fukushi/shakai/pdf/R8iyakuhinkyoukyuutaisei.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.pmda.go.jp/safety/consultation-for-patients/on-drugs/0001.html",
+     "https://pharmacist.m3.com/column/benzen/4465",
+     "https://fastdoctor-online-faq.zendesk.com/hc/ja/articles/10073179156111-%E8%96%AC%E5%B1%80%E3%81%8B%E3%82%89%E8%96%AC%E3%81%AE%E4%B8%80%E9%83%A8%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E8%A8%80%E3%82%8F%E3%82%8C%E3%81%9F",
+     "https://www.nikkei.com/article/DGXZQOUA160UI0W4A210C2000000/",
+     "https://www.nikkei.com/article/DGXZQOUA130SZ0T10C26A3000000/",
+     "https://psft.co.jp/pharmacy/column/useful/467/"
+    ],
+    "error": ""
+   }
+  },
+  "在庫 確認 電話 前に": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://mamechishiki1.hateblo.jp/entry/2025/06/02/190000",
+     "https://blueshrine.hatenablog.com/entry/2024/10/28/001016",
+     "https://www.nojima.co.jp/support/faq/10241/",
+     "https://hatomugi-info.com/c3103043161/"
+    ],
+    "error": ""
+   }
+  },
+  "ジェネリック 希望 伝え方": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.daiichisankyo-ep.co.jp/whats_generic/3.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEelJcUOMritpS9XtT-1fjCRRFTdO6yHVlMurl7Cgudw-13gG5nO9jYAMpm74ImEB9bo2pozD_-Gt9-R7huNXlMzfNjI3v2PeCJSdOLv1-_xH22R0gKGdZQgC6AZYt1MuX5MBKiM6g6Ggp7h2ooMfeY",
+     "https://www.city.kasaoka.okayama.jp/soshiki/16/1704.html",
+     "https://www.pref.nara.lg.jp/n086/47337.html",
+     "https://www.nichiiko.co.jp/generic/about-generic/generic_09/",
+     "https://www.sawai.co.jp/medicine/prescribe/",
+     "https://www.data-index.co.jp/knowledge/193481/",
+     "https://www.tmhp.jp/tamahoku/20240911.html",
+     "https://www.nicho.co.jp/inquiry/941/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sawai.co.jp/medicine/prescribe/",
+     "https://www.towayakuhin.co.jp/generic/about/faq/qa05.php",
+     "https://www.daiichisankyo-ep.co.jp/whats_generic/3.html",
+     "https://www.takata-seiyaku.co.jp/general/generic/prescription.html",
+     "https://www.pref.nara.lg.jp/n086/47337.html",
+     "https://www.kouikirengo-osaka.jp/home/wp-content/themes/tpl/old/material/pdf/poster/R8/generic_card202607.pdf",
+     "http://www.osaka-kyosai.jp/generic/index.html",
+     "https://kusuriya.co.jp/information/generic2026/"
+    ],
+    "error": ""
+   }
+  },
+  "薬 在庫 ない 他の薬局": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://taishinph.co.jp/tips/prescription-where/",
+     "https://www.medilab.co.jp/aruaru/10014/",
+     "https://note.com/mr_t0303p/n/nac4e31b90628",
+     "https://www.kusurinomadoguchi.com/column/articles/prescription-deadline/",
+     "https://www.ken-ei.co.jp/column/pharmacy-guide/shohousen_deadline/",
+     "https://prtimes.jp/main/html/rd/p/000000022.000100390.html",
+     "https://ameblo.jp/takeyan-ameblog/entry-12885212720.html"
+    ],
+    "error": ""
+   }
+  },
+  "ジェネリック 変更 できない 薬": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://med.sawai.co.jp/topics/substitution/pdf/qa_substitution.pdf",
+     "https://note.com/osushi_yaku/n/n36fe7ade90c2",
+     "https://ckk-kenpo.or.jp/generic/",
+     "https://www.nicho.co.jp/inquiry/941/",
+     "https://stu-ge.nichiiko.co.jp/mpi_documents/1092",
+     "https://www.mhlw.go.jp/file/06-Seisakujouhou-12400000-Hokenkyoku/0000039498.pdf",
+     "https://med.sawai.co.jp/topics/substitution/pdf/qa_substitution.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.nicho.co.jp/inquiry/941/",
+     "https://kusuriya.co.jp/information/generic2026/",
+     "https://www.jga.gr.jp/jgapedia/column/201803.html",
+     "https://www2s.biglobe.ne.jp/~yakujou/memo/generic_ok.html",
+     "https://kanri.nkdesk.com/chouzai/chouzai7.php",
+     "https://www.mhlw.go.jp/stf/newpage_39830.html",
+     "https://credentials.jp/2024-09/special-report/",
+     "https://note.com/kohakudo589/n/na6a0d1504cf7",
+     "https://www.ains.co.jp/system/ai-clinic/medical-information/temporary-r60806.html"
+    ],
+    "error": ""
+   }
+  },
+  "先発品 希望 追加 負担": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.mhlw.go.jp/stf/houdou_kouhou/kouhou_shuppan/magazine/202410_004.html",
+     "https://www.jbh.or.jp/news/16225.html",
+     "https://ueda.com/blog/ueda/1237/",
+     "https://toranomon-sac.com/10%E6%9C%88%E3%82%88%E3%82%8A%E5%85%88%E7%99%BA%E5%8C%BB%E8%96%AC%E5%93%81%E3%82%92%E5%B8%8C%E6%9C%9B%E3%81%95%E3%82%8C%E3%82%8B%E3%81%A8%E8%87%AA%E5%B7%B1%E8%B2%A0%E6%8B%85%E9%A1%8D%E3%81%8C%E5%A2%97/",
+     "https://gemmed.ghc-j.com/?p=60420",
+     "https://www.data-index.co.jp/knowledge/193481/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://medical.nikkeibp.co.jp/leaf/mem/pub/di/trend/202606/593353.html",
+     "https://noguchi-med.or.jp/archives/8184",
+     "https://hospital.naramed-u.ac.jp/outpatient/tyouki.html",
+     "https://note.com/osushi_yaku/n/n42554549f3d7",
+     "https://note.com/apotheke_umschau/n/n50099e8d4a31",
+     "https://hp1.corteai.jp/column/pharmacy-sentei-ryoyo-impact/",
+     "https://mogimed.com/sentei-ryoyo-checker/",
+     "https://morioka-syaroshi.com/long-listed-drug-selective-treatment/",
+     "https://m-assets.com/lp/clinic/blog/sentei-ryoyo-madoguchi-kaikei"
+    ],
+    "error": ""
+   }
+  },
+  "薬 品薄 いつまで 続く": {
+   "group": "ジェネリックと在庫",
+   "ChatGPT": {
+    "urls": [],
+    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+   },
+   "Gemini": {
+    "urls": [
+     "https://yakuzaishi-career-labo.hatenablog.com/entry/2026/04/29/010445",
+     "https://japancompass.jp/2026/09/26/japan-compass055/",
+     "https://iru-yo.com/blog/drug-supply-shortage/",
+     "https://p-himawari.co.jp/communication/column/941/",
+     "https://www.min-iren.gr.jp/news-press/genki/20260227_54951.html",
+     "https://www.yakuji.co.jp/entry114694.html",
+     "https://note.com/apotheke_umschau/n/n4c7fe19f32c5",
+     "https://www.thomsonreuters.co.jp/ja/westlaw-japan/law_guide/2026/0430/",
+     "https://note.com/apotheke_umschau/n/n4c7fe19f32c5",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://yakuzaishi-career-labo.hatenablog.com/entry/2026/04/29/010445",
+     "https://note.com/apotheke_umschau/n/n4c7fe19f32c5",
+     "https://yakuzaishi-career-labo.hatenablog.com/entry/2026/05/26/071225",
+     "https://medical.nikkeibp.co.jp/inc/all/di/column/kyokyu/",
+     "https://jala.co.jp/expart-col_23/",
+     "https://iru-yo.com/blog/drug-supply-shortage/",
+     "https://march-clinic.com/media/medcine-undershipment/",
+     "https://www.pcubed.jp/internal/20260525-7294/",
+     "https://oktapharm.blog/drug-supply-adjustment-summary-2026-04-06/",
+     "https://scueldata.me/ph/guide/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

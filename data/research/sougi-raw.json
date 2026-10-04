@@ -1,0 +1,1934 @@
+{
+ "industry": "sougi",
+ "date": "2026-10-03",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 家族葬 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://1000kaze.jp/",
+     "https://www.koekisha.co.jp/fee/price/kinki/case_kinkiken01/",
+     "https://osakasaiten.com/kaikan/176/",
+     "https://osakasaiten.com/lp2026/sakai/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.e-sogi.com/lp/co_review_ranking/osaka.html",
+     "https://my-best.com/16976",
+     "https://www.e-sogi.com/list_city/osaka.html",
+     "https://y-osohshiki.com/column/1160",
+     "https://meetsmore.com/services/funeral/osaka"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/area/osaka/osaka-shi/top/",
+     "https://www.osohshiki.jp/area/osaka/top/",
+     "https://www.e-sogi.com/list_city/sid27100.html",
+     "https://ansinsougi.jp/a-osaka",
+     "https://ansinsougi.jp/a-osaka/27100",
+     "https://soogi.jp/osaka/osaka__1002_4",
+     "https://www.tear.co.jp/osaka/osaka-shi",
+     "https://soogi.jp/osaka",
+     "https://www.aeonlife.jp/hallguide/%E5%A4%A7%E9%98%AA%E5%BA%9C_%E5%A4%A7%E9%98%AA%E5%B8%82",
+     "https://www.eranda.jp/sogi/sogisha/osaka-pref",
+     "https://y-osohshiki.com/column/764",
+     "https://saieiji.jp/houwa/sogi-osaka-erabikata/",
+     "https://suikosha.ne.jp/column/osaka-funeral-cost/",
+     "https://suikosha.ne.jp/column/osakacity-funeral-cost/",
+     "https://suikosha.ne.jp/area-osakacity/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 葬儀社 評判": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://ansinsougi.jp/s-876/review",
+     "https://ansinsougi.jp/s-131/review",
+     "https://minlog.org/sougi/ranking/?term=97",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sougionline.jp/ranking-area/tokyo/",
+     "https://kazokusou-annai.com/category/sougisha/tokyo/",
+     "https://gosougi.jp/ranking/%E6%9D%B1%E4%BA%AC%E9%83%BD/",
+     "https://www.e-sogi.com/lp/co_review_ranking/tokyo.html",
+     "https://soogi.jp/tokyo",
+     "https://www.e-sogi.com/guide/sougisha_ranking/tokyo/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ansinsougi.jp/a-tokyo",
+     "https://www.e-sogi.com/list_city/tokyo.html",
+     "https://www.e-sogi.com/guide/sougisha_ranking/tokyo/",
+     "https://ansinsougi.jp/s-238",
+     "https://magazine.voicenote.jp/8009/",
+     "https://www.yokohamasougi.com/tokyo-sougisha/column/ranking2026/",
+     "https://kitaosakaceremony.jp/tokyo-sougisha-ranking/",
+     "https://kazokusou-annai.com/category/sougisha/tokyo/",
+     "https://sougi-lab.com/ranking/tokyo-sougisha-ranking/",
+     "https://ansinsougi.jp/s-238/review",
+     "https://soogi.jp/tokyo",
+     "https://tomoikisha-sogi.jp/column/20250217-621/",
+     "https://tomoikisha-sogi.jp/column/20250108-557/",
+     "https://wakariyasui-kazokusou.com/tokyo-kazokusou/column/popularity-ranking/",
+     "https://osousikinote.com/area/tokyo/ranking/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 直葬 費用 安い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tyokusou.info/tyokusou.html",
+     "https://azumu.co.jp/individual/",
+     "https://www.city.nagoya.jp/kurashi/shisetsu/1016323/1016324/1016325.html",
+     "https://www.tyokusou.info/tuikahiyou.html",
+     "https://faq.city.nagoya.jp/faq/detail.aspx?id=105"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://suzusou.co.jp/event/blog/2138/",
+     "https://y-osohshiki.com/column/743",
+     "https://tear-simple.com/knowledge/column/detail.php?pid=1904",
+     "https://tyokusou9761.com/",
+     "https://takusel.info/hall/area/aichi/nagoya-shi/",
+     "https://eitaikuyo.jp/searchs/aichi/nagoya/ic007/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/lp/inexpensive_plan_detail?sogi_type=1&city_code=23100",
+     "https://www.tyokusou.info/",
+     "https://www.osohshiki.jp/area/aichi/nagoya-shi/top/kasousiki/",
+     "https://y-osohshiki.com/column/743",
+     "https://www.city.nagoya.jp/kurashi/shisetsu/1016323/1016324/1016325.html"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 葬儀社 比較": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://nishiten.com/",
+     "https://www.saien-ffines.jp/fukuoka/price",
+     "https://f-chokuso.com/plan/oneday/",
+     "https://tengokusya.co.jp/pricing-plans/guide/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.e-sogi.com/guide/sougisha_ranking/fukuokashi/",
+     "https://www.e-sogi.com/guide/sougisha_ranking/fukuokashi/",
+     "https://www.e-sogi.com/lp/co_review_ranking/sid40130.html",
+     "https://www.yoriso.com/sogi/area/fukuoka/review/",
+     "https://www.limeiro.com/%E7%A6%8F%E5%B2%A1%E7%9C%8C/",
+     "https://www.osohshiki.jp/column/article/area100/",
+     "https://sougi-korekara.com/article/hall-ranking/fukuoka/fukuokashi-popular-family-funeral/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ansinsougi.jp/a-fukuoka",
+     "https://www.e-sogi.com/list_city/fukuoka.html",
+     "https://www.aeonlife.jp/hallguide/%E7%A6%8F%E5%B2%A1%E7%9C%8C_%E7%A6%8F%E5%B2%A1%E5%B8%82",
+     "https://soogi.jp/fukuoka/fukuoka__1002_4",
+     "https://soogi.jp/fukuoka/fukuoka",
+     "https://soogi.jp/fukuoka/fukuoka-hakata",
+     "https://www.eranda.jp/sogi/sogisha/fukuoka-pref/fukuoka",
+     "https://soogi.jp/fukuoka",
+     "https://y-osohshiki.com/column/1157",
+     "https://ansinsougi.jp/a-fukuoka/40130",
+     "https://www.e-sogi.com/guide/sougisha_ranking/fukuokashi/",
+     "https://ansinsougi.jp/a-fukuoka/40135",
+     "https://ansinsougi.jp/a-fukuoka/40132",
+     "https://www.soogi.jp/fukuoka/fukuoka-higashi"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 家族葬 小さな葬儀": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://endo-sourei.com/plan.php",
+     "https://farewell-sapporo.jp/plan/oneday/",
+     "https://www.satsusai.jp/types/plan-fam/",
+     "https://ceremonyhouse.info/hokkaido/sapporo-shi/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hp011-555-6195.com/blog/detail/202505152355/",
+     "https://www.hakuzensha-sapporo.jp/knowledge-tips/post-5131/",
+     "https://www.eikousha-5444.com/kazokusou-toku.html",
+     "https://www.e-sogi.com/guide/44272/",
+     "https://www.osohshiki.jp/area/hokkaido/sapporo-shi/chuo-ku/top-c/",
+     "https://coop-kazokusou.jp/plan/",
+     "https://with-house.jp/blog/2025/06/19301/",
+     "https://www.cpshokushin.com/area/hokkaido/sapporo-shi/knowledge/funeral-cost"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/area/hokkaido/sapporo-shi/top/",
+     "https://www.osohshiki.jp/area/hokkaido/sapporo-shi/chuo-ku/top-c/",
+     "https://www.osohshiki.jp/area/hokkaido/sapporo-shi/top/price/",
+     "https://www.e-sogi.com/list_city_hall/sid1100.html",
+     "https://www.e-sogi.com/guide/44272/",
+     "https://www.e-sogi.com/detail_hall/id1643010125-825107.html",
+     "https://www.famille-kazokusou.com/magazine/otsuya/623",
+     "https://ceremonyhouse.info/hokkaido/sapporo-shi/",
+     "https://funeral-sapporo.com/funeral/tiisana-osousiki-detail/",
+     "https://ansinsougi.jp/s-19573",
+     "https://soogi.jp/hokkaido/sapporo-higashi/1099282/plan"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 葬儀場 家族葬 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://ansinsougi.jp/s-101830/review",
+     "https://www.soogi.jp/kanagawa/yokohama-kanazawa/202076",
+     "https://soogi.jp/kanagawa/yokohama-totsuka/1080154/review",
+     "https://ansinsougi.jp/s-1894/review",
+     "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/saijo/saijo/saijou.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/list_city/sid14100.html",
+     "https://www.e-sogi.com/guide/sougisha_ranking/yokohamashi/",
+     "https://soogi.jp/kanagawa/yokohama__1002_4",
+     "https://www.yoriso.com/sogi/area/kanagawa/yokohama/",
+     "https://hanasou-sougi.co.jp/yokohama/column/5974-2/",
+     "https://hanasou-sougi.co.jp/yokohama/",
+     "https://yokohama-sougi.org/search/kuchikomi.php",
+     "https://xs040264.xsrv.jp/468-2/",
+     "https://www.memorial-center.com/",
+     "https://www.osohshiki.jp/area/kanagawa/yokohama-shi/top/kasousiki/",
+     "https://my-best.com/17073",
+     "https://www.e-sogi.com/guide/44142/",
+     "https://soogi.jp/kanagawa/yokohama__1001",
+     "https://www.yokohamasougi.com/yokohama-sougi/column/ranking2026/",
+     "https://yokohama-kazokusou.jp/facilities",
+     "https://www.yokohamasougi.com/yokohamashikazokuso/column/comparison-yokohama/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 葬儀社 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://koekisha-kyoto.com/",
+     "https://cerema.co.jp/sougi/search/kyoto/kyoto-shi",
+     "https://www.yamacho-kaikan.jp/company/",
+     "https://www.kyoto.coop/cuore/index.html",
+     "https://www.kyoto.coop/cuore/sougi/plan.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://eitaikuyo.jp/searchs/kyoto/ic003/",
+     "https://sougi-kaiketsu.jp/kyoto-sougisha-ranking-2025/",
+     "https://soogi.jp/kyoto",
+     "https://www.e-sogi.com/lp/co_review_ranking/kyoto.html",
+     "https://sougi-kaiketsu.jp/kyoto-sougisha-ranking-2025/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/list_city/sid26100.html",
+     "https://www.osohshiki.jp/area/kyoto/kyoto-shi/top/",
+     "https://www.e-sogi.com/list_city/kyoto.html",
+     "https://www.osohshiki.jp/area/kyoto/top/",
+     "https://soogi.jp/kyoto/kyoto",
+     "https://gosougi.jp/ranking/%E4%BA%AC%E9%83%BD%E5%BA%9C/",
+     "https://kitaosakaceremony.jp/kyoto-sougisha-ranking-2025/",
+     "https://e-omiokuri.com/sougisha-ranking-kyoto/",
+     "https://sougi-lab.com/ranking/kyoto-sougisha-ranking/",
+     "https://ansinsougi.jp/a-kyoto/26100",
+     "https://www.e-sogi.com/guide/sougisha_ranking/kyotoshi/",
+     "https://ansinsougi.jp/a-kyoto",
+     "https://www.e-sogi.com/guide/sougisha_ranking/kyoto/",
+     "https://soogi.jp/kyoto/kyoto__1004",
+     "https://soogi.jp/kyoto/kyoto__1012",
+     "https://www.yokohamasougi.com/column/ranking-kyoto/ranking-kyoto-kyoto3/",
+     "https://www.yokohamasougi.com/column/ranking-kyoto/ranking-kyoto-kitaku3/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 葬儀 安い 近く": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://tera-tyokuso.com/kobe-center/",
+     "https://kobe.sougi.page/",
+     "https://kobe.memosa.jp/",
+     "https://www.city.kobe.lg.jp/a60186/kurashi/memorial/crematory.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.sensho-sougi.com/column/sougi-cost-kobe/",
+     "https://soogi.jp/hyogo/kobe__1002_4",
+     "https://www.e-sogi.com/lp/inexpensive_plan_detail?sogi_type=1&city_code=28100",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH9KSFFFIhmb2xcYy5NKpdKKOt95hnZS2KuescqlMIIAW13U0pzLH5IpJgjk5SF609uXBR6uBFd3dj3WthqT7FesvhxFXORF9VfAvPTcQ45kcurxOiuymG2sMvk0XUxONuaRGzjesGGRxlKG-WHTaCLlmjI",
+     "https://www.city.kobe.lg.jp/a60186/kurashi/memorial/crematory.html",
+     "https://www.sensho-sougi.com/column/kasoujou-kobe/",
+     "https://kazokusou.co/sougi/%E5%85%B5%E5%BA%AB%E7%9C%8C%E7%A5%9E%E6%88%B8%E5%B8%82%E7%AB%8B%E6%9C%89%E9%A6%AC%E6%96%8E%E5%A0%B4/",
+     "https://www.aeonlife.jp/hallguide/%E5%85%B5%E5%BA%AB%E7%9C%8C_%E7%A5%9E%E6%88%B8%E5%B8%82",
+     "https://www.yoriso.com/sogi/area/hyogo/kobe/",
+     "https://www.grandsougisya.co.jp/koube.html",
+     "https://www.e-sogi.com/guide/43872/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/lp/inexpensive_plan_detail?sogi_type=2&city_code=28100",
+     "https://www.e-sogi.com/list_city_hall/sid28100.html",
+     "https://www.e-sogi.com/list_city_hall/id28109.html",
+     "https://www.e-sogi.com/lp/inexpensive_plan_detail?sogi_type=1&city_code=28109",
+     "https://ososhiki.kinpoudou.co.jp/memoryhouse/hyogo/kobe-shi/kasoh/",
+     "https://tera-tyokuso.com/kobe-center/",
+     "https://www.sensho-sougi.com/column/chokusou-kobe/",
+     "https://www.sensho-sougi.com/column/kazokusou-kobe/",
+     "https://www.sensho-sougi.com/column/sougi-cost-kobe/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 家族葬 ホール": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://saiten.heian-sendai.co.jp/halls/sendai/",
+     "https://saiten.heian-sendai.co.jp/halls/odawara/",
+     "https://saiten.heian-sendai.co.jp/halls/nankoudai/",
+     "https://saiten.heian-sendai.co.jp/halls/memorialsato/",
+     "https://www.fs-takahashi.com/morinomiyako/hall/kagitori"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://soogi.jp/miyagi/sendai",
+     "https://y-osohshiki.com/column/1161",
+     "https://www.gishiki.co.jp/hall/prefecture4/city1923/5201",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFBwvfiV5M2EbWKJbohas_mRjeARjSzuyaGu-p0BrAqqfiDoJjqtFSafMCN6nLJxN0OlZtXdlkoaoLHcWiedenhLznnMHK1Sl_YKivwfc7oQ0YmQkyTWYSBOirabkQ7FSeW26Ev-oTIYg==",
+     "https://www.famille-kazokusou.com/search_area/miyagi/sendaishi/",
+     "https://www.aeonlife.jp/hallguide/%E5%AE%AE%E5%9F%8E%E7%9C%8C_%E4%BB%99%E5%8F%B0%E5%B8%82%E5%AE%AE%E5%9F%8E%E9%87%8E%E5%8C%BA",
+     "https://www.osohshiki.jp/area/miyagi/sendai-shi/top-c/",
+     "https://www.yoriso.com/sogi/kasoba/144910/",
+     "https://www.e-sogi.com/detail_hall/id1235038744-083529.html",
+     "https://sendai-green-association.jp/funeralhall/kuzuoka_s/",
+     "https://www.nomco.jp/mh-bodaiju/hall/miyagi/miyagi_sanriku/sendai-city/2002/",
+     "https://www.e-sogi.com/list_city_hall/sid4100.html",
+     "https://ososhiki.kinpoudou.co.jp/area/senwa/miyagi/sendai-shi/fukumuro-hall/",
+     "https://zenkoku-shiminsousai.com/hall/hokkaidotouhoku/miyagi/kuzuokasaijo/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/detail_hall/id1645154897-874571.html",
+     "https://ansinsougi.jp/a-miyagi/4100",
+     "https://www.e-sogi.com/list_city_hall/sid4100.html",
+     "https://soogi.jp/miyagi/sendai",
+     "https://soogi.jp/miyagi/sendai__1002_4",
+     "https://sendai-kazokusou.jp/",
+     "https://sendai-kazokusou.jp/faq",
+     "https://www.nomco.jp/mh-bodaiju/hall/miyagi/miyagi_sanriku/sendai-city/",
+     "https://takusel.info/hall/miyagi/sendai-shi/miyagino-ku/higashisendai.php",
+     "https://tera-tyokuso.com/sendai-center/",
+     "https://ososhiki.kinpoudou.co.jp/area/senwa/miyagi/sendai-shi/yanagiu-hall/",
+     "https://ososhiki.kinpoudou.co.jp/area/senwa/miyagi/sendai-shi/miyamachi-hall/",
+     "https://www.osohshiki.jp/area/miyagi/sendai-shi/top-c/",
+     "https://ososhiki.kinpoudou.co.jp/area/senwa/miyagi/sendai-shi/kimachi-hall/",
+     "https://ososhiki.kinpoudou.co.jp/area/senwa/miyagi/sendai-shi/",
+     "https://www.osohshiki.jp/area/miyagi/sendai-shi/taihaku-ku/top/",
+     "https://www.sogi-annai.com/miyagi/sendaishi/264",
+     "https://www.fs-takahashi.com/morinomiyako/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 葬儀社 選び方": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen475.html",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html",
+     "https://www.city.hiroshima.lg.jp/living/owaka/1021362/1023038.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hoshie.jp/hall/hiroshima-shi/knowledge/price/5032/",
+     "https://ansinsougi.jp/s-5485",
+     "https://www.so-gi.co.jp/",
+     "https://www.hiroshima-jitakusou.jp/company/",
+     "https://ososhiki.kinpoudou.co.jp/aoba/hiroshima/hiroshima-shi/knowledge/point/",
+     "https://www.osohshiki.jp/area/hiroshima/top/",
+     "https://www.yoriso.com/sogi/area/hiroshima/hiroshima-higashi-city/",
+     "https://www.so-gi.co.jp/blog/6794/",
+     "https://sougiya.jp/news/hiroshimaken-sougi-shikitari/",
+     "https://sogidesk.com/knowledge/local-rules/hiroshimaken-sogi",
+     "https://www.yokohamasougi.com/column/ranking-hiroshima/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/list_city/sid34100.html",
+     "https://www.e-sogi.com/list_city/sid34100.html?search_tag=good_reputation",
+     "https://soogi.jp/hiroshima",
+     "https://www.yokohamasougi.com/column/ranking-hiroshima/ranking-hiroshima-hiroshima3/",
+     "https://hoshie.jp/hall/hiroshima-shi/knowledge/price/5086/",
+     "https://sougi-hiroshima.com/",
+     "https://www.sogi.ne.jp/sogisha/hiroshimashi.html",
+     "https://eitaikuyo.jp/searchs/hiroshima/ic003/",
+     "https://sougi-lab.com/ranking/hiroshima-sougisha-ranking/",
+     "https://ansinsougi.jp/a-hiroshima/34100",
+     "https://soogi.jp/hiroshima/hiroshima__1004",
+     "https://soogi.jp/hiroshima/hiroshima__1002_4",
+     "https://hoshie.jp/hall/hiroshima-shi/knowledge/price/5032/",
+     "https://hoshie.jp/hall/hiroshima-shi/knowledge/price/5964/",
+     "https://hoshie.jp/hall/naka-ku/knowledge/price/5089/"
+    ],
+    "error": ""
+   }
+  },
+  "家族葬 費用 相場": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://souken.info/kamakurasinsho-ososiki-7th-survey/",
+     "https://www.koekisha.co.jp/fee/plan/family/about/",
+     "https://tsugumichi.net/sougi-2/",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://cerema.co.jp/sougi/column/column_2501/",
+     "https://www.kamakura-net.co.jp/newstopics/12326/",
+     "https://office-tree.jp/blog/shukatsu/family-funeral-guide/",
+     "https://sougi-korekara.com/article/funeral/price/family-funeral-costs/",
+     "https://souken.info/kamakurasinsho-questionnaire-2024/",
+     "https://note.com/morinokuma2026/n/n63fd50f039eb",
+     "https://www.musubisu-osoushiki.jp/knowledge/family-funeral/knowledge_07/",
+     "https://www.e-sogi.com/guide/59482/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://makino-saiten.com/guide/other/knowledge-other/11207/",
+     "https://simple-osoushiki.jp/column/kazokuso/18.html",
+     "https://www.wagaya-ososhiki.com/column/how-much-family-funeral-cost/",
+     "https://japanese-traditional.com/237/",
+     "https://media.sakai-saijou.com/sogi/post-521/",
+     "https://sougi-anshin.com/kazokusou-hiyou-souba/",
+     "https://kurashicostlab.com/guides/sougi-hiyou-guide/",
+     "https://ososhiki.info/2026/04/19/funeral-cost-breakdown/",
+     "https://www.souen-sougi.com/kazokusouhiyoujissai/"
+    ],
+    "error": ""
+   }
+  },
+  "直葬 費用 いくら": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://imasou.com/article/direct-funeral-costs/",
+     "https://www.aeonlife.jp/knowledge/mosyu/chokusou_attention"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/hiyou-directfuneral/",
+     "https://www.osohshiki.jp/column/article/940/",
+     "https://cerema.co.jp/sougi/column/column_2505/",
+     "https://saihokaku.jp/infoblog/blog-direct-cremation-costs/",
+     "https://www.airis.jp/column/cremation-service-fees/",
+     "https://www.e-sogi.com/guide/58262/",
+     "https://www.hibiya-lsp.com/column/style/chokuso/136/",
+     "https://www.tear.co.jp/knowledge/expenses",
+     "https://www.alphaclub-gp.jp/sagamitenrei/knowledge/cat5/6904/",
+     "https://www.hibiya-lsp.com/column/info/cost/251/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgsCGJZ4Jm3NC29dALQLOz2R4lOMsptSIrnoSglI5zYwID6WlDHa9exCPMqJEL27yR1hHZxNmwtifwA9Y-3mMF00PKBx92DvSb3Da1ic3aMXOqpfrs_q2cu7_ZVahfLc6FlAjyng==",
+     "https://simple-osoushiki.jp/column/chokuso/04.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ansinsougi.jp/p-93",
+     "https://www.e-sogi.com/guide/58262/",
+     "https://www.tenreikaikan.com/trivia/type/article04/merit.html",
+     "https://saihokaku.jp/infoblog/blog-direct-cremation-costs/",
+     "https://sougi-korekara.com/article/funeral/price/direct-cremation-costs/",
+     "https://ansin-saiten.jp/sougijiten/chokusou-hiyou/",
+     "https://media.sakai-saijou.com/sogi/post-521/",
+     "https://www.wagaya-ososhiki.com/column/direct-burial-expenses/",
+     "https://ososhiki.info/2026/04/19/funeral-cost-breakdown/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀費用 内訳 追加費用": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.wakousougisya.com/sougi-hiyou.php",
+     "https://www.fukujuji-yokohama.jp/doc/fukuju_kaikan_2024.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.musubisu-osoushiki.jp/knowledge/cost/additional-fee/",
+     "https://hananomakoto.com/column/funeral-cost-guide/",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/hiyou-uchiwake/",
+     "https://www.tear.co.jp/knowledge/expenses",
+     "https://sohshiki.jp/blog/ceremony/817-2",
+     "https://www.osohshiki.jp/column/article/121/",
+     "https://ending.life/sougi/%E8%91%AC%E5%84%80%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E4%BE%A1%E6%A0%BC%E3%81%AF%E7%B7%8F%E9%A1%8D%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84%EF%BC%9F%E3%80%80%E8%BF%BD%E5%8A%A0%E6%96%99%E9%87%91%E3%81%8C/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/14293/",
+     "https://www.e-sogi.com/guide/806/",
+     "https://ansinsougi.jp/p-15",
+     "https://www.koekisha.co.jp/fee/price/",
+     "https://heiansaiten.co.jp/basic-knowledge/funeral-cost",
+     "https://www.osohshiki.jp/column/article/342/",
+     "https://ososhiki.bellco.co.jp/ready/%E3%81%8A%E8%91%AC%E5%BC%8F%E3%81%AE%E9%A3%B2%E9%A3%9F%E6%8E%A5%E5%BE%85%E8%B2%BB%E3%81%AE%E5%86%85%E8%A8%B3/",
+     "https://www.moshimo.net/knowledge/funeral-expenses/",
+     "https://ososhiki.info/2026/04/19/funeral-cost-breakdown/"
+    ],
+    "error": ""
+   }
+  },
+  "一般葬 費用 平均": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kamakura-net.co.jp/newstopics/12326/",
+     "https://www.kamakura-net.co.jp/newstopics/10760/",
+     "https://mirai-kanai-media.move-for-people.com/blog/sougi-hiyou-heikin"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/337/",
+     "https://www.aeonlife.jp/knowledge/mosyu/ippansou_hiyousouba",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFuY2Bl5oSb9Un9THRE04NO6uSMxDz9U5ADiRjQf-PRPB0Q6w7PCvHHv35wo5Qfz--gJfMXsBXOnUy15OA_z3QuP4CMb3Dvj972yxRFVfe0Jl46gGD7sQZoYhHWq9w04UVSTugKqw=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/14293/",
+     "https://coop-kazokusou.jp/wp/column/sougi-hiyou/",
+     "https://makino-saiten.com/guide/other/knowledge-other/11207/",
+     "https://www.osohshiki.jp/column/article/337/",
+     "https://www.osohshiki.jp/column/article/1841/",
+     "https://media.sakai-saijou.com/sogi/post-521/",
+     "https://kurashicostlab.com/guides/sougi-hiyou-guide/",
+     "https://www.wagaya-ososhiki.com/column/how-much-family-funeral-cost/",
+     "https://cerema.co.jp/sougi/column/column_2502/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀 費用 安く抑える方法": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/1843/",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html",
+     "https://www.city.setagaya.lg.jp/documents/1174/kuminnsougi2025.pdf",
+     "https://www.city.ikeda.osaka.jp/kurashi_tetsuduki/todokede/okuyami/1416362522337.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/burial_charges/",
+     "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/kokuho/iryo/konnatoki/funeral.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/hiyou-osaeru/",
+     "https://www.souen-sougi.com/funeral-cost-cutting/",
+     "https://www.e-sogi.com/guide/533/",
+     "https://kikuyahall.com/blog/info/818/",
+     "https://www.houyugroup.co.jp/topic/topic_sougi/%E5%AE%B6%E6%97%8F%E8%91%AC%E3%81%AE%E8%B2%BB%E7%94%A8%E3%82%92%E5%AE%89%E3%81%8F%E6%8A%91%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E3%81%AF%EF%BC%9F%E3%80%80%E8%B3%A2%E3%81%8F%E6%8A%91%E3%81%88%E3%82%8B%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%A7%A3%E8%AA%AC",
+     "https://ceremonyhouse.info/blog/cheapest-funeral/",
+     "https://with-house.jp/blog/2020/12/7111/",
+     "https://sougi-korekara.com/article/funeral/price/how-to-reduce-family-funeral-costs/",
+     "https://www.osohshiki.jp/column/article/1095/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/14293/",
+     "https://www.osohshiki.jp/column/article/084/",
+     "https://www.osohshiki.jp/column/article/990/",
+     "https://okane-kenko.jp/media/funeral-costs/",
+     "https://makino-saiten.com/guide/other/knowledge-other/11207/",
+     "https://www.yoriso.com/sogi/article/sogi/kazokuso/sougi-yasuku/",
+     "https://y-osohshiki.com/column/626",
+     "https://simple-osoushiki.jp/column/chokuso/14.html",
+     "https://media.sakai-saijou.com/sogi/post-521/",
+     "https://www.e-sogi.com/guide/413/",
+     "https://www.resonabank.co.jp/kojin/column/shoukei/column_0003.html",
+     "https://www.e-sogi.com/guide/58262/",
+     "https://heiansaiten.co.jp/basic-knowledge/funeral-cost",
+     "https://nedan.ja-kyosai.or.jp/column/20250331_familly_no1.html",
+     "https://saitama.sagamitenrei.com/column/funeral/kazokuso-cost/",
+     "https://www.kk-kanou.jp/knowledge/20251002-1468/",
+     "https://cerema.co.jp/sougi/column/column_2502/",
+     "https://ososhiki.info/2026/04/19/funeral-cost-breakdown/"
+    ],
+    "error": ""
+   }
+  },
+  "火葬式 料金 相場": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://imasou.com/article/direct-funeral-costs/",
+     "https://prtimes.jp/main/html/rd/p/000000129.000009951.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://coop-kazokusou.jp/tyokusou_sougi_nagare/",
+     "https://www.aeonlife.jp/knowledge/manner/cost-of-direct-cremation",
+     "https://www.e-sogi.com/guide/58264/",
+     "https://cerema.co.jp/sougi/column/column_2505/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHDC-FVeC67MIjPhG8dSVyrphf7EDb7nkRB0YtQKQyuR2bFVQD7ZGsBK8h4Vb9nqqi_SaVnZU7e50lEFZ925jduUWNcF1N042Z_WU4zCeUhFnZD_RPxJD0LhZg5iPVW7B1GAkjgeA=="
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://price.w3g.jp/cremation-cost",
+     "https://ansinsougi.jp/p-63",
+     "https://makino-saiten.com/guide/other/knowledge-other/11207/",
+     "https://www.hibiya-lsp.com/column/info/cost/251/",
+     "https://www.osohshiki.jp/column/article/940/",
+     "https://www.lifedot.jp/ohaka-kasou-price/",
+     "https://ososhiki.info/2026/04/19/funeral-cost-breakdown/",
+     "https://sogi-tomoshibi.com/kasoushiki/14289/",
+     "https://www.souen-sougi.com/kasouhiyou/",
+     "https://www.e-sogi.com/guide/58262/",
+     "https://www.osohshiki.jp/column/article/354/",
+     "https://chester-tax.com/encyclopedia/20765.html",
+     "https://saihokaku.jp/infoblog/blog-direct-cremation-costs/",
+     "https://cerema.co.jp/sougi/column/column_2505/",
+     "https://simple-osoushiki.jp/column/chokuso/04.html",
+     "https://www.wagaya-ososhiki.com/column/direct-burial-expenses/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀費用 払えない 場合": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.kiryu.lg.jp/_res/projects/default_project/_page_/001/023/895/2.pdf",
+     "https://www.fukushikai.com/introduction/welfare_funeral/faq/",
+     "https://www.kyoukaikenpo.or.jp/benefit/burial_charges/",
+     "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/kokuho/iryo/konnatoki/funeral.html",
+     "https://www.kagoshima-kouiki.jp/yokuarusitumon/",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html",
+     "https://www.faq.kokusen.go.jp/faq/show/178?site_domain=default"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/401/",
+     "https://ansinsougi.jp/p-99",
+     "https://www.tokyohakuzen.co.jp/media/207",
+     "https://simple-osoushiki.jp/column/welfare/04.html",
+     "https://www.wagaya-ososhiki.com/column/funeral-of-welfare-recipient/",
+     "https://www.osohshiki.jp/column/article/507/",
+     "https://www.jcb.co.jp/loancard/special/funeral_unabletopay.html",
+     "https://www.e-sogi.com/guide/57008/",
+     "https://joseikin-insight.com/grants/grant-new-20260528153300/",
+     "https://alphaclub-sagami.com/knowledge/column/family/sougi_haraenai.html"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀 見積もり 比較 ポイント": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/pdf/n-20260603_2.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_24.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/1559/",
+     "https://www.osohshiki.jp/column/article/355/",
+     "https://kanto.memolead.co.jp/funeral/column/post_137.html",
+     "https://sougi-korekara.com/article/funeral/price/funeral-quote-checkpoints/",
+     "https://www.musubisu-osoushiki.jp/knowledge/useful-information/knowledge_05/",
+     "https://morinoan.co.jp/knowledge/4921/",
+     "https://www.ohnoya-funeral.com/knowledge/article/034814/",
+     "https://kanagawa-ceremony.com/archives/shukatsu/5793/",
+     "https://sougi.toyger.co.jp/estimate/"
+    ],
+    "error": ""
+   }
+  },
+  "互助会 葬儀 費用 総額": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.zengokyo.or.jp/contact/",
+     "https://prtimes.jp/main/html/rd/p/000000069.000009951.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_24.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://eitaikuyou.net/ohaka-about/sougi/gojokaihiyou",
+     "https://hananomakoto.com/column/gojokai-hikaku/",
+     "https://www.gojyokuru.net/syukatu/gojyokai/7600/",
+     "https://www.osohshiki.jp/column/article/836/",
+     "https://www.shinke-sousai.com/24-tsumitate/",
+     "https://sougi.bestnet.ne.jp/obihiro-shimin/sp/price.html",
+     "https://www.gojyokuru.net/sougi/cost.html",
+     "https://hananomakoto.com/column/gojokai-hikaku/",
+     "https://www.kurashinotomo.jp/gojokai/faq/039-gojyokai-sougihiyou/",
+     "https://sohshiki.jp/blog/end-of-life/848-2",
+     "https://www.osohshiki.jp/column/article/836/",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/hiyou-gojokai/",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/hiyou-gojokai/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.kurashinotomo.jp/gojokai/faq/038-sougihiyou/",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/hiyou-gojokai/",
+     "https://www.sagamitenrei.com/sougi/pricechart",
+     "https://sougi.bestnet.ne.jp/obihiro-chuo/sp/price.html",
+     "https://eitaikuyou.net/ohaka-about/sougi/gojokaihiyou",
+     "https://sogi-navi.com/tips/view_922/",
+     "https://www.gojyokuru.net/sougi/cost.html",
+     "https://alphaclub-sagami.com/knowledge/column/family/gojokai.html",
+     "https://www.memoire-group.jp/funeral/cost.html",
+     "https://www.osohshiki.jp/column/article/836/",
+     "https://www.e-sogi.com/guide/15240/",
+     "https://www.tokyohakuzen.co.jp/media/618",
+     "https://cerema.co.jp/sougi/column/column_2506/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀費用 補助 葬祭費 いくら": {
+   "group": "費用の相場",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.machida.tokyo.jp/kurashi/hoken/kokuho/ironnakyuufu/sousai.html",
+     "https://www.city.minato.tokyo.jp/kyufu/kuse/kocho/faq/hoken/042.html",
+     "https://www.kyoukaikenpo.or.jp/benefit/burial_charges/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://office-tree.jp/blog/shukatsu/funeral-fee-burial-cost-claim/",
+     "https://rad-st.jp/%E3%80%902025%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E8%91%AC%E7%A5%AD%E8%B2%BB%E3%83%BB%E5%9F%8B%E8%91%AC%E6%96%99%E3%81%AE%E7%B5%A6%E4%BB%98%E9%87%91%E3%82%92%E5%BE%B9%E5%BA%95%E8%A7%A3/",
+     "https://soogi.jp/news/2416",
+     "https://www.e-sogi.com/guide/subsidy/",
+     "https://www.kyoukaikenpo.or.jp/benefit/burial_charges/index.html",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcdCmgWUh3GRXuvQCCtRr0WdVMnPAXRCJZemN0A6JGLUq605kiDtIqY5KS89Ns-5XY7bSZZvaj45VoREVRMPOpQYvLbNMeHY76k-b6Vbyh1R-ooQR8TQYlMjd_MoCZ6UabotEg",
+     "https://agoora.co.jp/souzoku/tetsuduki/benefit.html",
+     "https://coop-kazokusou.jp/wp/sogi_benefits/",
+     "https://sogi-tomoshibi.com/howto/13418/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.i-sozoku.com/navi/guide_sousaihi/",
+     "https://www.city.osaka.lg.jp/fukushi/page/0000240873.html",
+     "https://www.city.itabashi.tokyo.jp/kenko/kourei/kouki/shikyu/1003539.html",
+     "https://chester-tax.com/encyclopedia/8187.html",
+     "https://tomorrowstax.com/gh/blog/sousaihi-maisouryo/"
+    ],
+    "error": ""
+   }
+  },
+  "家族葬 一般葬 違い": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.aeonlife.jp/knowledge/mosyu/kazokusou_ippansou_difference"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.famille-kazokusou.com/magazine/otsuya/141",
+     "https://tengokusya.co.jp/knowledge/kazokusou/difference/",
+     "https://www.e-sogi.com/guide/14632/",
+     "https://www.e-sogi.com/guide/413/",
+     "https://with-house.jp/blog/2026/04/21012/",
+     "https://makino-saiten.com/guide/other/knowledge-other/11207/",
+     "https://www.wagaya-ososhiki.com/column/how-much-family-funeral-cost/",
+     "https://japanese-traditional.com/237/",
+     "https://kurashicostlab.com/guides/sougi-hiyou-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "直葬 後悔 理由": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://coop-kazokusou.jp/tyokusou-koukai/",
+     "https://www.sotozen-net.or.jp/wp2/wp-content/uploads/2020/01/bodaijie.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://soogi.jp/news/2005",
+     "https://goenn.co.jp/know/article/direct-funeral-regret-failure-prevention/",
+     "https://takusel.info/blog/family-funeral/chokuso_eraburiyu.php",
+     "https://coop-kazokusou.jp/tyokusou-koukai/",
+     "https://www.airis.jp/column/direct-cremation-is-pitiful/",
+     "https://www.namu-anmu.com/regret/",
+     "https://rin.saihokaku.jp/post/tyokusou",
+     "https://www.sougi.info/column/column_476"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sougi-korekara.com/article/965/",
+     "https://sougi-korekara.com/article/funeral/before/regrets-about-direct-cremation/",
+     "https://soogi.jp/news/2005",
+     "https://www.airis.jp/column/regrets-about-direct-burial/",
+     "https://goenn.co.jp/know/memorial-service/direct-funeral-regret-failure-prevention/",
+     "https://simple-osoushiki.jp/column/chokuso/20.html",
+     "https://www.wagaya-ososhiki.com/column/directburial-regret/",
+     "https://www.namu-anmu.com/regret/",
+     "https://kamo-sougisien.com/news/%E7%9B%B4%E8%91%AC%E3%81%A7%E5%BE%8C%E6%82%94%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1%E3%81%AF%EF%BC%9F%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%E3%81%AB%E6%B0%97%E3%82%92%E4%BB%98/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀社 選び方 ポイント": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html",
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/kurashi/2101_02/soudan.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.zensoren.or.jp/dictionary/dictionary29/",
+     "https://www.e-sogi.com/guide/18419/",
+     "https://www.musubisu-osoushiki.jp/knowledge/useful-information/knowledge_05/",
+     "https://www.serenus.co.jp/archives/column/%E8%91%AC%E5%84%80%E7%A4%BE%E3%81%AF%E3%81%A9%E3%81%86%E9%81%B8%E3%81%B6%EF%BC%9F%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E8%91%AC%E5%84%80%E7%A4%BE%E9%81%B8%E3%81%B3%E3%81%AE%E3%83%9D%E3%82%A4",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHDX7AmuhWWprEmdCscH-EcjjSl95S_NTYgj709nQEnb4N8iRYKg1fa-WPKY7O3gdViukZu8_qGRHFTUUXDrfEjQCXMHH6CWUKDgEjacGCNuuxAUMSylUZLNxGXq-2ZESLqAz0e",
+     "https://www.alphaclub-gp.jp/sagamitenrei/knowledge/cat5/7174/",
+     "https://kanto.memolead.co.jp/funeral/column/post_131.html",
+     "https://www.tear.co.jp/knowledge/choose"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/353/",
+     "https://heiansaiten.co.jp/basic-knowledge/choosing-a-funeral-company",
+     "https://kanto.memolead.co.jp/funeral/column/post_131.html",
+     "https://www.eranda.jp/sogi/sogisha-choice",
+     "https://chiicomi.com/press/2038964/",
+     "https://www.musubisu-osoushiki.jp/knowledge/useful-information/knowledge_05/",
+     "https://www.yokohamasougi.com/knowledge/%E8%91%AC%E5%84%80%E7%A4%BE%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E3%80%9C%E8%91%AC%E5%84%80%E7%A4%BE%E3%81%AB%E3%82%82%E7%A8%AE%E9%A1%9E%E3%81%8C%E3%81%82%E3%82%8B/",
+     "https://kanagawa-ceremony.com/archives/shukatsu/740/",
+     "https://www.mosyu.net/sougisya.html"
+    ],
+    "error": ""
+   }
+  },
+  "家族葬 どこまで呼ぶ 範囲": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.aeonlife.jp/knowledge/mosyu/kazokusou_sanrestuhani",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/dokomadeyobu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.aeonlife.jp/knowledge/mosyu/kazokusou_sanrestuhani",
+     "https://www.osohshiki.jp/column/article/307/",
+     "https://www.yasiro.co.jp/eitaikuyo/media/archives/5123",
+     "https://saitama.sagamitenrei.com/column/funeral/participation-range/",
+     "https://kanto.memolead.co.jp/funeral/column/post_133.html",
+     "https://kishino-ceremony.com/blog/20260106/",
+     "https://www.ohnoya-funeral.com/knowledge/article/030861/",
+     "https://takusel.info/blog/family-funeral/kazokusou_dokomade.php",
+     "https://alphaclub-sagami.com/knowledge/column/family/kazokuso_trouble.html",
+     "https://www.osohshiki.jp/column/article/1058/",
+     "https://www.aiwaceremony.co.jp/guide/kazokusousanretsuninzuu.html",
+     "https://www.hana-sougi.com/blog/kazokuso_numberofpeople",
+     "https://ansin-saiten.jp/sougijiten/kazokuso-nannin/",
+     "https://www.moshimo.net/knowledge/number-of-family-funerals/",
+     "https://kazokusou-hibiki.jp/column/3528/"
+    ],
+    "error": ""
+   }
+  },
+  "一日葬 向いている人": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://kawaguchitenrei.com/column/ichinichi-sou/",
+     "https://www.ja-tokyo.co.jp/plan/oneday/",
+     "https://www.asagao.or.jp/sougi/ichinichi.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://palmo-sosai.jp/knowledge/073.html",
+     "https://www.yoriso.com/sogi/article/sogi/sogi-shurui/ichinichisotoha/",
+     "https://www.tachibana-sousai.com/memoryhome-shinkoiwa/column/oneday-funeral-katsushikaku/",
+     "https://www.famille-kazokusou.com/magazine/ososhiki/593",
+     "https://www.musubisu-osoushiki.jp/knowledge/manners-flow/ichinichisou-merit-demerit/",
+     "https://takusel.info/blog/family-funeral/chokuso_eraburiyu.php"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.famille-kazokusou.com/magazine/ososhiki/593",
+     "https://www.osohshiki.jp/column/article/1785/",
+     "https://www.eranda.jp/column/186",
+     "https://with-house.jp/blog/2021/02/8766/",
+     "https://www.musubisu-osoushiki.jp/knowledge/manners-flow/ichinichisou-merit-demerit/",
+     "https://www.okuribito-osousiki.com/area/tokyo/columns/130/",
+     "https://coop-kazokusou.jp/itinitisou-kazokusou/",
+     "https://simple-osoushiki.jp/column/ichinichiso/02.html",
+     "https://simple-osoushiki.jp/column/ichinichiso/16.html",
+     "https://www.kurashinotomo.jp/media/n100-ichinichiso/",
+     "https://mbp-japan.com/osaka/osakaceremony/column/5230137/",
+     "https://osoushiki.memolead.co.jp/lp/column/fukuoka-chokuso-ichinichiso/",
+     "https://www.musubisu-osoushiki.jp/knowledge/manners-flow/ichinichisou-sanretsu-manner/",
+     "https://www.musubisu-osoushiki.jp/knowledge/style-funeral/ichinichisou-invitation/",
+     "https://simple-osoushiki.jp/column/ichinichiso/20.html",
+     "https://www.ohnoya-funeral.com/knowledge/article/031903/"
+    ],
+    "error": ""
+   }
+  },
+  "互助会 入るべきか 解約": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/pdf/shinsen_FY2016all.pdf",
+     "https://www.zengokyo.or.jp/contact/",
+     "https://www.faq.kokusen.go.jp/faq/show/1124?site_domain=default"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://soogi.jp/news/2408",
+     "https://note.com/cyanq_910/n/n47bfd71d55e7",
+     "https://www.eranda.jp/column/16378",
+     "https://soogi.jp/news/1583",
+     "https://www.bestfirmgroup.jp/zenkoku-sl/kanaeru-note/ending/gojokai/",
+     "https://hibiki-ceremony.jp/column-005/",
+     "https://momiji-takatsuki.com/gojokai-kaiyaku/",
+     "https://musashinosousai.com/column/gojokai/",
+     "https://www.sougischool.jp/s_gojyo_16/",
+     "https://www.meti.go.jp/policy/economy/consumer/credit/kenkyukaihoukokusyo.pdf",
+     "https://www.coj.gr.jp/newsletter/pdf/news-99-14-03-03.pdf",
+     "https://www.faq.kokusen.go.jp/category/show/144?site_domain=default",
+     "https://www.city.sendai.jp/kehatsu/kurashi/tetsuzuki/shohi/faq/kankonsousai.html",
+     "https://sougiya.jp/news/gozyokai-kaiyaku/",
+     "https://hibiki-ceremony.jp/column-004/",
+     "https://ososhiki.info/2026/04/23/gojokai-kaiyaku-trouble-jirei/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀社 比較 失敗しない": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.pref.hiroshima.lg.jp/site/syouhiseikatsucenter/keihatsu08-0609-2.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen475.html",
+     "https://www.pref.kanagawa.jp/docs/r7b/cnt/f370214/20260119.html",
+     "https://www.kokusen.go.jp/news/data/n-20260603_2.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.zensoren.or.jp/dictionary/dictionary29/",
+     "https://www.e-hashimoto.com/newarticle/66.html",
+     "https://www.city.sendai.jp/kehatsu/kurashi/tetsuzuki/shohi/faq/sougi.html",
+     "https://dime.jp/genre/2134030/",
+     "https://hananomakoto.com/column/funeral-company-checklist/",
+     "https://kazokusou.co/sougi/avoid-funeral-homes/",
+     "https://www.ohnoya-funeral.com/knowledge/article/034814/",
+     "https://www.tear.co.jp/knowledge/choose",
+     "https://www.zensoren.or.jp/dictionary/dictionary29/",
+     "https://kanagawa-ceremony.com/archives/shukatsu/5839/",
+     "https://www.e-sogi.com/guide/18419/",
+     "https://www.koekisha.co.jp/chiebukuro/point02/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://heiansaiten.co.jp/basic-knowledge/choosing-a-funeral-company",
+     "https://www.hana-sougi.com/blog/sougi-kiso/103/",
+     "https://tomuravi-sougi.jp/funeral/20260118/",
+     "https://www.musubisu-osoushiki.jp/knowledge/useful-information/knowledge_05/",
+     "https://www.yoriso.com/sogi/article/shukatsu/sougisha-erabikata/",
+     "https://www.alphaclub-gp.jp/sagamitenrei/knowledge/cat5/7174/",
+     "https://www.ohnoya-funeral.com/knowledge/article/034814/",
+     "https://www.souen-sougi.com/sougisha_erabikata/",
+     "https://www.zensoren.or.jp/dictionary/dictionary29/",
+     "https://kanto.memolead.co.jp/funeral/column/post_131.html",
+     "https://sougi-korekara.com/article/funeral/before/how-to-choose-funeral-home/",
+     "https://www.hibiya-lsp.com/column/info/cost/234/",
+     "https://chiicomi.com/press/2038964/",
+     "https://www.moshimo.net/knowledge/how-to-choose/",
+     "https://www.hiroshima-shiminsougi.com/post/%E8%91%AC%E5%84%80%E7%A4%BE%E9%81%B8%E3%81%B3%E3%81%A7%E5%BE%8C%E6%82%94%E3%81%97%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%E3%81%AB"
+    ],
+    "error": ""
+   }
+  },
+  "家族葬 メリット デメリット": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.fukushisousai.co.jp/tips/detail.php?pid=1456",
+     "https://saitama.sagamitenrei.com/column/funeral/37/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.koekisha.co.jp/chiebukuro/oyakudachi-kazokusou-merideme/",
+     "https://www.famille-kazokusou.com/magazine/otsuya/729",
+     "https://sougi-korekara.com/article/funeral/knowledge/benefits-of-family-funeral/",
+     "https://soogi.jp/news/1/",
+     "https://www.gishiki.co.jp/columns/547",
+     "https://www.okuribito-osousiki.com/column/141",
+     "https://www.houten.co.jp/faq/faq10/",
+     "https://tokaitenrei.com/knowledge/detail.php?pid=647",
+     "https://ceremonyhouse.info/blog/kazokuso-merit-demerit/"
+    ],
+    "error": ""
+   }
+  },
+  "無宗教葬 流れ やり方": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.koekisha.co.jp/fee/plan/free/freeceremony/",
+     "https://www.hibiya-lsp.com/column/religion/mushukyo/157/",
+     "https://kouzensya.co.jp/9387/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.kurashinotomo.jp/media/n59-musyuukyou-sougi/",
+     "https://www.musubisu-osoushiki.jp/knowledge/style-funeral/non-religious-funeral/",
+     "https://www.tear.co.jp/knowledge/manners/no-religion",
+     "https://www.e-sogi.com/guide/836/",
+     "https://www.aeonlife.jp/knowledge/buddhist_significant/noreligion",
+     "https://www.koekisha.co.jp/fee/plan/free/freeceremony/",
+     "https://www.alphaclub-gp.jp/sagamitenrei/knowledge/cat1/3209/",
+     "https://saihokaku.jp/infoblog/blog-what-is-non-religious-funeral/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/836/",
+     "https://www.kurashinotomo.jp/media/n59-musyuukyou-sougi/",
+     "https://www.gishiki.co.jp/columns/468",
+     "https://kouzensya.co.jp/9387/",
+     "https://tomuravi-sougi.jp/funeral/20250606/",
+     "https://e-stories.jp/faq/%E8%87%AA%E7%94%B1%E8%91%AC%E7%84%A1%E5%AE%97%E6%95%99%E8%91%AC%EF%BC%89%E3%81%AE%E6%B5%81%E3%82%8C%E3%83%BB%E5%BC%8F%E6%AC%A1%E7%AC%AC-%E6%B3%A8%E6%84%8F%E3%81%99%E3%81%B9%E3%81%8D%E3%81%93%E3%81%A8/",
+     "https://leaflog.jp/blog_content/15401/",
+     "https://www.wagaya-ososhiki.com/column/non-religious-funeral/",
+     "https://www.moshimo.net/knowledge/manners/18765-2/",
+     "https://www.osohshiki.jp/column/article/766/",
+     "https://ansinsougi.jp/p-94",
+     "https://www.aeonlife.jp/knowledge/buddhist_significant/noreligion",
+     "https://www.hibiya-lsp.com/column/religion/mushukyo/156/",
+     "https://www.musubisu-osoushiki.jp/knowledge/style-funeral/non-religious-funeral/",
+     "https://y-osohshiki.com/column/1406",
+     "https://mazdoya.co.jp/jyumokusou_flowerge/column/column166/",
+     "https://takusel.info/blog/family-funeral/mushukyousou.php"
+    ],
+    "error": ""
+   }
+  },
+  "生前相談 葬儀社 いつから": {
+   "group": "葬儀の形式の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://issinsou.com/consultation/",
+     "https://www.inagakiyasougiten.com/consultation"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sogi.aobaya.co.jp/blog/news/7896/",
+     "https://with-house.jp/blog/2019/02/6734/",
+     "https://www.okuribito-osousiki.com/column/231",
+     "https://coop-kazokusou.jp/sougi-zizen-soudan/",
+     "https://heiansaiten.co.jp/basic-knowledge/sougi-jizen-sodan-timing",
+     "https://muneokaseremo.com/sougi-soudan/%E8%91%AC%E5%84%80%E3%81%AE%E4%BA%8B%E5%89%8D%E7%9B%B8%E8%AB%87%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%9F%E3%83%B3%E3%82%B0/",
+     "https://anrakuin.net/column-posts/column-1759839981/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tear.co.jp/features/consultation",
+     "https://www.osohshiki.jp/column/article/351/",
+     "https://www.aeonlife.jp/knowledge/mosyu/moshu_jizensodan",
+     "https://www.okuribito-osousiki.com/area/tokyo/columns/206",
+     "https://www.musubisu-osoushiki.jp/knowledge/useful-information/preliminary-consultation-2/",
+     "https://www.okuribito-osousiki.com/column/231",
+     "https://coop-kazokusou.jp/sougi-zizen-soudan/",
+     "https://fujisousai-s.com/column/funeral/benefits-pre-funeral-consultation/",
+     "https://sunray-shiunkaku.com/column/%E8%91%AC%E5%84%80%E3%82%84%E3%81%8A%E5%A2%93%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/when-to-choose-funeral-company/",
+     "https://heiansaiten.co.jp/basic-knowledge/sougi-jizen-sodan-timing",
+     "https://www.osohshiki.jp/column/article/434/",
+     "https://with-house.jp/blog/2021/01/6126/",
+     "https://saihokaku.jp/infoblog/blog-prior-consultation/",
+     "https://www.okuribito-osousiki.com/column/426",
+     "https://ansin-saiten.jp/sougijiten/sougi-jizensodan/",
+     "https://sogiwalk.com/sogi-advance-consultation/"
+    ],
+    "error": ""
+   }
+  },
+  "危篤 葬儀社 連絡 いつ": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ja-sakuasama.iijan.or.jp/ja-sougi/urgent",
+     "https://www.jinsoukyou.com/flowchart/flowchart2.html",
+     "https://www.zensoren.or.jp/dictionary/dictionary25/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.zensoren.or.jp/dictionary/dictionary25/",
+     "https://ansinsougi.jp/p-200",
+     "https://www.osohshiki.jp/column/article/599/",
+     "https://www.ryuukyuu.co.jp/column/meetingfuneralcompanyokinawa0331/",
+     "https://www.okuribito-osousiki.com/column/291",
+     "https://takusel.info/blog/family-funeral/sougishahenodenwa.php",
+     "https://www.wagaya-ososhiki.com/column/critical-condition-2/"
+    ],
+    "error": ""
+   }
+  },
+  "臨終 後 流れ 葬儀 まで": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://ja-sousai.jp/moshimo/flow/",
+     "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/todokede/koseki-juminhyo/todokede-touroku/koseki/shiboutodoke.html",
+     "https://www.city.hofu.yamaguchi.jp/soshiki/13/sibou.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.hasegawa.jp/blogs/shukatsu/sougi-procedure",
+     "https://sougi5940.co.jp/column/timeline-to-funeral",
+     "https://simple-osoushiki.jp/column/funeral-cemetery/02.html",
+     "https://www.aeonlife.jp/knowledge/manner/number-of-days-between-death-and-funeral",
+     "https://www.gishiki.co.jp/columns/529",
+     "https://coop-kazokusou.jp/sougi-nagare-2/",
+     "https://www.e-sogi.com/guide/1496/",
+     "https://cerema.co.jp/sougi/column/column_260505/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hasegawa.jp/blogs/shukatsu/sougi-procedure",
+     "https://www.e-sogi.com/guide/1496/",
+     "https://www.kurashinotomo.jp/sougi/flow/",
+     "https://www.gishiki.co.jp/columns/529",
+     "https://www.sougi.info/column/column_264",
+     "https://y-osohshiki.com/column/467",
+     "https://ceremo.jp/pal_member_info/flow-after-death",
+     "https://takusel.info/blog/family-funeral/anchi.php",
+     "https://www.moshimo.net/knowledge/flow-after-death/"
+    ],
+    "error": ""
+   }
+  },
+  "死亡後 手続き 順番 一覧": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.suzu.lg.jp/soshiki/3/1370.html",
+     "https://www.moj.go.jp/ONLINE/FAMILYREGISTER/5-4.html",
+     "https://www.city.hiroshima.lg.jp/living/koseki/1025555/1016830.html",
+     "https://www.city.kurayoshi.lg.jp/2139.htm",
+     "https://www.city.gifu.lg.jp/kurashi/kokuminnenkin/1001829/1001844/1001855.html",
+     "https://www.city.osaka.lg.jp/fukushi/page/0000369741.html",
+     "https://www.city.fukuoka.lg.jp/jonanku/kikaku_ks/life/013.html",
+     "https://www.nenkin.go.jp/section/faq/jukyu/jukyushatodoke/kyotsu/shibo/20140421.html",
+     "https://www.city.takayama.lg.jp/1005237/1014774/1005241.html",
+     "https://www.nenkin.go.jp/service/jukyu/seido/kyotsu/joho/20140421-01.html",
+     "https://www.gov-online.go.jp/article/202403/entry-5848.html",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html?p=1708",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2022.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4208.htm",
+     "https://www.moj.go.jp/MINJI/minji05_00599.html",
+     "https://www.town.hokkaido-mori.lg.jp/material/files/group/1/guidebook_okuyami.pdf",
+     "https://www.kyoukaikenpo.or.jp/application_form/benefit/012/",
+     "https://www.courts.go.jp/gifu/vc-files/gifu/2024/R6.10.1_setsumeigaki.pdf",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4152.htm"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.bf-consulting.co.jp/what-is-the-order-of-procedures-following-a-death/",
+     "https://www.kamakura-life.co.jp/monenavi/articles/sozoku/oya-nakunattara-surukoto/",
+     "https://alphaclub-sagami.com/knowledge/column/after-funeral-checklist.html",
+     "https://with-house.jp/blog/2023/12/16176/",
+     "https://mitsuwa-sougi.co.jp/knowledge/3509/",
+     "https://www.ichikawa-souzokutetsuzuki.kokoro.law/p42998/",
+     "https://koyano-cpa.gr.jp/yasashii-sozoku/column/3785/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/252/",
+     "https://office.vbest.jp/columns/bequest/g_legatee/8343/",
+     "https://www.e-sogi.com/guide/904/",
+     "https://www.ht-tax.or.jp/sozoku-guide/procedure-schedule",
+     "https://agoora.co.jp/souzoku/tetsuduki/inheritance-existence.html",
+     "https://www.souzoku-isan.net/tetsuzuki/",
+     "https://takusel.info/blog/procedure/sougigotetsuzuki.php",
+     "https://acropiece-lawfirm.com/sozoku/procedures-after-death-priority/",
+     "https://ososhiki.info/2026/04/19/sigo-tetuzuki-list/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀 日程 決め方 友引": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://anshin-saiten.jp/sougijiten/sougi-nittei-kimekata/",
+     "https://shinshu-kaikan.jp/faqs/1458.html",
+     "https://www.city.saitama.lg.jp/007/008/003/p001616.html",
+     "https://laws.e-gov.go.jp/law/323AC0000000048?occasion_date=20170725"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.aeonlife.jp/knowledge/mosyu/funeral_schedule",
+     "https://sohshiki.jp/blog/ceremony/69-2",
+     "https://www.osohshiki.jp/column/article/876/",
+     "https://www.gishiki.co.jp/columns/550",
+     "https://1000kaze.jp/column/sougimae/3330/",
+     "https://coop-kazokusou.jp/wp/column/sougi-tomobiki",
+     "https://www.gosougi.co.jp/np_osoushiki/53206/",
+     "https://www.moshimo.net/knowledge/manners/18459-2/",
+     "https://ku-kazokusou.com/knowledge/20260202-2375/"
+    ],
+    "error": ""
+   }
+  },
+  "火葬 までの 日数 安置": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://yasuraginomori.biz/nakunatte-kara-sougi-nissu/",
+     "https://laws.e-gov.go.jp/law/323AC0000000048",
+     "https://www.osohshiki.jp/column/article/182/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yoriso.com/sogi/article/sogi/nagare/anchi-kikan/",
+     "https://www.koekisha.co.jp/chiebukuro/itaianchi/",
+     "https://www.airis.jp/column/length-of-time-body-is-kept/",
+     "https://takusel.info/blog/family-funeral/kazokusou_nittei.php",
+     "https://www.e-sogi.com/guide/15931/",
+     "https://www.osohshiki.jp/column/article/1026/",
+     "https://c-fukushi.co.jp/itai-anchi-kikan/",
+     "https://www.youtube.com/watch?v=xZAjL2VZNPM",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11308237806"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/sou0005/",
+     "https://www.osohshiki.jp/column/article/1026/",
+     "https://www.osohshiki.jp/column/article/182/",
+     "https://www.osohshiki.jp/column/article/1029/",
+     "https://www.famille-kazokusou.com/magazine/ososhiki/404",
+     "https://www.koekisha.co.jp/chiebukuro/itaianchi/",
+     "https://y-osohshiki.com/column/726",
+     "https://simple-osoushiki.jp/column/chokuso/17.html",
+     "https://www.wagaya-ososhiki.com/column/cremation-when/",
+     "https://www.e-sogi.com/guide/15931/",
+     "https://first-leaf.jp/column/kasoba-yoyaku-machi/",
+     "https://nara-seikaen.com/tokyo-cremation-waiting-days/",
+     "https://www.wagaya-ososhiki.com/column/tokyo-crematorium-waiting/",
+     "https://alphaclub-sagami.com/knowledge/column/family/kasoba_taiki.html"
+    ],
+    "error": ""
+   }
+  },
+  "喪主 やること 一覧": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://heiansaiten.co.jp/basic-knowledge/moshu-junbi",
+     "https://sougi-korekara.com/article/funeral/knowledge/chief-mourner-task-list/",
+     "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/todokede/koseki-juminhyo/todokede-touroku/koseki/shiboutodoke.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://senior-job.co.jp/magazine/mosyu-yarukoto",
+     "https://ansinsougi.jp/p-374",
+     "https://www.kurashinotomo.jp/media/n70-mosyu-how-to-action/",
+     "https://sohshiki.jp/blog/ceremony/manner_family/chief_mourner_checklist",
+     "https://sougi-korekara.com/article/funeral/knowledge/chief-mourner-task-list/",
+     "https://www.kazokuso.co.jp/column/column_21",
+     "https://y-osohshiki.com/column/629",
+     "https://simple-osoushiki.jp/column/funeral-cemetery/02.html",
+     "https://tengokusousai.com/blog/chief-mourner/chief-mourner-things-to-do/",
+     "https://fujisousai-s.com/column/funeral/funeral-chief-mourner-what-to-do/",
+     "https://y-osohshiki.com/column/1258",
+     "https://sougi5940.co.jp/column/mourner-tasks-checklist",
+     "https://www.takusho-g.com/knowledge/whatthemournerdoesfuneral1026/",
+     "https://takusel.info/blog/family-funeral/moshunoyakuwari.php",
+     "https://alphaclub-sagami.com/knowledge/column/family/moshu_yarukoto.html"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀 前日 準備 持ち物": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://baylife.co.jp/column/funeral-belongings/",
+     "https://www.fune.ne.jp/sanretsu/mochimono/",
+     "https://ja-sousai.jp/moshimo/attend/",
+     "https://www.e-hashimoto.com/newarticle/84.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.musubisu-osoushiki.jp/knowledge/manners-flow/funeral-items/",
+     "https://tomuravi-sougi.jp/funeral/20250812/",
+     "https://fujisousai-s.com/column/attendees/funeral-belongings/",
+     "https://www.aska-ceremo.co.jp/column/1428/",
+     "https://sohshiki.jp/blog/ceremony/preparation/funeral_preparations",
+     "https://www.ringbell.co.jp/media/tips/kouden/5801/",
+     "https://alphaclub-sagami.com/knowledge/column/mochimono.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/422/",
+     "https://www.osohshiki.jp/column/article/862/",
+     "https://www.koekisha.co.jp/chiebukuro/wake/",
+     "https://coop-kazokusou.jp/otsuya_manner/",
+     "https://anshin-saiten.jp/sougijiten/otsuya-mochimono/",
+     "https://ansin-saiten.jp/sougijiten/otsuya-mochimono/",
+     "https://www.hiroshima-jitakusou.jp/blog/funeral-inventory-list/",
+     "https://www.takusho-g.com/knowledge/funeralbelongingslists1206/",
+     "https://www.wagaya-ososhiki.com/column/what-to-bring-when-attending-funeral/"
+    ],
+    "error": ""
+   }
+  },
+  "死亡届 提出 誰が どこ": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.kobe.lg.jp/a53715/kurashi/registration/koseki/05_shibou.html",
+     "https://www.moj.go.jp/MINJI/minji04_00083.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.moj.go.jp/ONLINE/FAMILYREGISTER/5-4.html",
+     "https://www.souzoku-isan.net/shiboutodoke/",
+     "https://www.isan.info/qa-other-5/",
+     "https://with-house.jp/blog/2018/09/6280/",
+     "https://khasegyousei.tokyo/2023/06/06/%E3%80%90%E5%AD%A4%E7%8B%AC%E6%AD%BB%E3%82%92%E3%82%81%E3%81%90%E3%82%8Bqa%E3%80%91q26%E3%80%80%E6%AD%BB%E4%BA%A1%E5%B1%8A%E3%81%AF%E8%AA%B0%E3%81%8C%E5%87%BA%E3%81%99%E3%81%8B/",
+     "https://www.ht-tax.or.jp/sozoku-guide/who-should-file-the-death-certificate",
+     "https://i-souzoku-law.com/number_1",
+     "https://www.shinjuku-law.jp/services/inheritance/column/souzoku-shiboutodoke-teishutu/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/382/",
+     "https://vs-group.jp/sozokuzei/shiboutodoke/",
+     "https://www.ht-tax.or.jp/sozoku-guide/death-notification-deadline",
+     "https://www.osohshiki.jp/column/article/1936/",
+     "https://aoilaw.or.jp/inheritance/column/inheritance-procedure/report-of-death/",
+     "https://www.souzoku-isan.net/shiboutodoke/",
+     "https://ceremonyhouse.info/blog/37852946/",
+     "https://www.isan.info/qa-other-5/",
+     "https://sunray-shiunkaku.com/column/%E8%91%AC%E5%84%80%E3%82%84%E3%81%8A%E5%A2%93%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/death-notification-cremation-permit/"
+    ],
+    "error": ""
+   }
+  },
+  "病院 から 搬送 葬儀社 決めて いない": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://www.osohshiki.jp/plan/transport/",
+     "https://www.bellco.co.jp/sougi/urgency/",
+     "https://takusel.info/blog/family-funeral/byoin_shokai_sougisha.php",
+     "https://s-tokusyu.jp/service/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/1496/",
+     "https://www.e-sogi.com/guide/789/",
+     "https://sougi-korekara.com/article/funeral/flow/hospital-body-transportation-guide/",
+     "https://ch-nagatani.com/tips/7729/",
+     "https://takusel.info/blog/procedure/hansou.php",
+     "https://www.wakabasousai.com/sougi/2022-0312/",
+     "https://www.kurashinotomo.jp/media/n196-yonaka-byoin/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀 後 やること 香典返し 手続き": {
+   "group": "手続きと段取り",
+   "ChatGPT": {
+    "urls": [
+     "https://www.city.yokohama.lg.jp/life/gohukou.html",
+     "https://www.zengokyo.or.jp/manner/funeral/funeral50.php",
+     "https://www.shop.post.japanpost.jp/shop/pages/koudengaeshi.aspx",
+     "https://www.nenkin.go.jp/section/faq/jukyu/jukyushatodoke/kyotsu/shibo/20140421.html",
+     "https://www.nenkin.go.jp/service/jukyu/tetsuduki/kyotsu/jukyu/20140731-01.html",
+     "https://www.gov-online.go.jp/article/202403/entry-5848.html",
+     "https://www.keisan.nta.go.jp/r6yokuaru_sp/cat2/cat20/scid003.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4202.htm",
+     "https://www.kyoukaikenpo.or.jp/benefit/burial_charges/",
+     "https://www.kyoukaikenpo.or.jp/application_form/benefit/012/",
+     "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/kokuho/iryo/konnatoki/funeral.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yoriso.com/sogi/article/sogi/sogi-manners/kodengaeshi/",
+     "https://ososhiki.kinpoudou.co.jp/area/chiba/morinoie/column/9975/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFsGoaFfjrNx_BieRZAgMHCMXhiCbU66-ojeu5i4K3bUdwQOS_grTTv0l5NyeUuNAtq1GXPEOP5Oz_Q_mzEkgpk9CKyykHFU6YnQ0pFDa-Et8NsPbftqlNaEvlMJ7YF2F1Nr0vX",
+     "https://1000kaze.jp/column/sougigo/3791/",
+     "https://www.chanoniwa-online.com/blog/column/condolence-return-gift/",
+     "https://www.ringbell.co.jp/ringbell/contents/kouden/4811",
+     "https://www.harmonick.co.jp/media/archives/1856/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hasegawa.jp/blogs/shukatsu/guidance",
+     "https://www.kurashinotomo.jp/media/n64-tetsuduki-check-list/",
+     "https://www.e-sogi.com/guide/904/",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/sougigo-list/",
+     "https://www.hana-sougi.com/blog/souzoku-kiso/013/",
+     "https://green-osaka.com/online/inheritance-knowledge/after-the-funeral-todo-list",
+     "https://hanasou-sougi.co.jp/column2/funeral-manners/3917/",
+     "https://saihokaku.jp/infoblog/blog-after-the-funeral-to-do-list/",
+     "https://www.souzoku-isan.net/tetsuzuki/",
+     "https://shaddy.jp/okoudengaeshi/manner/kiake-return/",
+     "https://www.osohshiki.jp/column/article/1351/",
+     "https://www.aeonlife.jp/knowledge/mosyu/koudenkaeshi_henreihin",
+     "https://www.yasiro.co.jp/eitaikuyo/media/archives/11736",
+     "https://www.hasegawa.jp/blogs/kuyou/houji-koudengaeshi",
+     "https://www.kouden-gaeshi.jp/manner/koudengaeshi18.html",
+     "https://sogi.aobaya.co.jp/blog/news/9272/",
+     "https://www.okaeshinavi.jp/kouden/timing.html",
+     "https://www.okomeya.net/okomeya_note/shijukunichi-koudengaeshi/"
+    ],
+    "error": ""
+   }
+  },
+  "お布施 相場 家族葬": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://asuka-kaikan.com/family-funerals/6517",
+     "https://www.airis.jp/column/standard-offerings-for-family-funerals/",
+     "https://www.fukushikai.com/introduction/faq/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.houyugroup.co.jp/topic/topic_sougi/topic/topic_sougi/%E5%AE%B6%E6%97%8F%E8%91%AC%E3%81%AE%E3%81%8A%E5%B8%83%E6%96%BD%E7%9B%B8%E5%A0%B4%E3%81%AF%E3%81%A9%E3%81%AE%E3%81%8F%E3%82%89%E3%81%84%EF%BC%9F%E5%9C%B0%E5%9F%9F%E3%82%84%E5%AE%97%E6%B4%BE%E5%88%A5%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%A7%A3%E8%AA%AC",
+     "https://www.e-sogi.com/guide/57355/",
+     "https://kanto.memolead.co.jp/funeral/column/post_104.html",
+     "https://www.tenreikaikan.com/trivia/type/article02/alms.html",
+     "https://saihokaku.jp/infoblog/blog-family-funeral-offering-price/",
+     "https://coop-kazokusou.jp/kazokuso_ofuse/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hana-sougi.com/blog/ofuse/",
+     "https://www.e-sogi.com/guide/57355/",
+     "https://www.aeonlife.jp/knowledge/manner/market-price",
+     "https://www.e-sogi.com/guide/3755/",
+     "https://www.kurashinotomo.jp/media/n75-kazokusou-ofuse-souba/",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/hiyou-ofuse/",
+     "https://heiansaiten.co.jp/basic-knowledge/funeral-ofuse",
+     "https://saihokaku.jp/infoblog/blog-family-funeral-offering-price/",
+     "https://towas.jp/top-column/9922/"
+    ],
+    "error": ""
+   }
+  },
+  "お布施 渡し方 封筒 書き方": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sugiurahonten.com/column/etiquette-for-offering",
+     "https://www.to-yama-souzoku.jp/ohuse/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.e-sogi.com/guide/58898/",
+     "https://www.isshinji.jp/ofuse-watashikata-manner/",
+     "https://www.yokohamasougi.com/obosan/column/ofuse-envelope-insert/",
+     "https://saitama-sougi.co.jp/article/detail.php/1443/959370",
+     "https://sohshiki.jp/blog/ceremony/offering/offering",
+     "https://www.ringbell.co.jp/giftconcierge/12033",
+     "https://www.yasiro.co.jp/eitaikuyo/media/archives/1827",
+     "https://www.osohshiki.jp/column/article/917/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/919/",
+     "https://www.osohshiki.jp/column/article/860/",
+     "https://sougi-korekara.com/article/how-to-write-buddhist-offering/",
+     "https://sahou.jp/houji/ofuse-fuutou/",
+     "https://www.yasiro.co.jp/eitaikuyo/media/archives/1827",
+     "https://www.ht-tax.or.jp/sozoku-guide/how-to-write-an-envelope-for-an-offering",
+     "https://eigobu.jp/magazine/ofuse-watashikata"
+    ],
+    "error": ""
+   }
+  },
+  "戒名 費用 いくら": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://www.zenyuseki.or.jp/knowbutsuji/kaimyou.html",
+     "https://so-zo-ku.com/article/funeral/manners/15210"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://rin.saihokaku.jp/post/kaimyouryou",
+     "https://www.osohshiki.jp/column/article/096/",
+     "https://oihaimaker.jp/info/page/kaimyo-ryo/",
+     "https://mitsuwa-sougi.co.jp/area/naganoshi/naganoshi-knowledge/3748/",
+     "https://www.aeonlife.jp/knowledge/manner/kaimyou_souba",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF0ksU8AmBuKe93RBbOmYkQehNK9sEx9WhV1UcEARJuPLdN66R21ULVRAxxTM1yNHAPwxmH_QC8zRkC-FZ6KkcV36IkaexUlOgVui5XHKY4lAWOU9_GWHm8n3kujbT2sYm0",
+     "https://asuka-kaikan.com/family-funerals/6667"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/kaimyousouba/",
+     "https://ohaka-sagashi.net/news/kaimyoohuse/",
+     "https://www.sougi.info/column/column_229",
+     "https://heiseigobyou.co.jp/content/buddhist-name-fee/",
+     "https://so-zo-ku.com/article/funeral/manners/15210",
+     "https://mitsuwa-sougi.co.jp/knowledge/3237/",
+     "https://houji.jp/ohaka/posthumous-name-cost/",
+     "https://www.moshimo.net/knowledge/26422-2/",
+     "https://kaimyou.net/%E3%81%8A%E5%B8%83%E6%96%BD%E7%9B%B8%E5%A0%B4/"
+    ],
+    "error": ""
+   }
+  },
+  "直葬 お布施 必要 ない": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/462/",
+     "https://www.shinke-sousai.com/plan/tyokusou/faq/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://chokuso.jp/manners/",
+     "https://osaka-chokusou.jp/column/buddhist-monk/",
+     "https://www.osohshiki.jp/column/article/462/",
+     "https://www.hibiya-lsp.com/column/info/format/92/",
+     "https://sougi-korekara.com/article/funeral/price/direct-cremation-buddhist-offering/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/467/",
+     "https://www.osohshiki.jp/column/article/462/",
+     "https://sougi-korekara.com/article/direct-cremation-buddhist-offering/",
+     "https://www.eranda.jp/column/6953",
+     "https://www.hibiya-lsp.com/column/info/format/92/",
+     "https://kazokusou.co/sougi/bousan_yobanai/",
+     "https://simple-osoushiki.jp/column/chokuso/12.html",
+     "https://kamo-sougisien.com/news/%E7%9B%B4%E8%91%AC%E3%81%A7%E3%82%82%E3%81%8A%E5%9D%8A%E3%81%95%E3%82%93%E3%82%92%E5%91%BC%E3%81%B0%E3%81%AA%E3%81%84%E3%81%A8%E6%88%90%E4%BB%8F%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%EF%BC%9F%E5%91%BC/",
+     "https://alphaclub-sagami.com/knowledge/column/manners/chokuso_obosan.html"
+    ],
+    "error": ""
+   }
+  },
+  "香典 相場 親族 関係別": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://www.osohshiki.jp/column/article/039/",
+     "https://www.touensha.com/post/sougi06"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.aeonlife.jp/knowledge/manner/kouden_manner1",
+     "https://web.hh-online.jp/hankyu-food/blog/lifestyle/detail/002223.html",
+     "https://www.osohshiki.jp/column/article/039/",
+     "https://with-house.jp/blog/2025/09/19817/",
+     "https://www.comwellceremony.co.jp/knowledge/8462/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/1410/",
+     "https://www.tenreikaikan.com/hajimete2/estimation.html",
+     "https://with-house.jp/blog/2025/09/19817/",
+     "https://keisan-navi.jp/konkatsu/koden/kingaku/",
+     "https://sougi-korekara.com/article/funeral/manners/condolence-money-average-cost/",
+     "https://saihokaku.jp/infoblog/blog-koden-souba/",
+     "https://so-zo-ku.com/article/funeral/manners/13511",
+     "https://www.touensha.com/post/sougi06",
+     "https://saitamasougi-note.com/koden-souba/"
+    ],
+    "error": ""
+   }
+  },
+  "家族葬 香典 辞退 マナー": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://www.famille-kazokusou.com/magazine/manner/535",
+     "https://nakamoto.jp/osousiki-qa/kazokusou-kouden-jitai-bunrei/",
+     "https://artmemory.jp/media/condolence-decline/",
+     "https://www.e-hashimoto.com/newarticle/29.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.oki-memorial.org/column/decliningcondolencemoney",
+     "https://saitama.sagamitenrei.com/column/funeral/1332/",
+     "https://www.musubisu-osoushiki.jp/knowledge/manners-flow/kazokusou-kouden-jitai/",
+     "https://coop-kazokusou.jp/sougi-kouden-zitai/",
+     "https://saihokaku.jp/infoblog/blog-family-funeral-condolence-money-declined/",
+     "https://ansin-saiten.jp/sougijiten/kazokusou-koudenjitai/",
+     "https://www.moshimo.net/knowledge/18707-2/",
+     "https://tengokusousai.com/blog/chief-mourner/family-funeral-condolence-money-declined/",
+     "https://ceremonyhouse.info/blog/kazokuso-kodenjitai/"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀 服装 喪服 子供": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://morinoan.co.jp/knowledge/5059/",
+     "https://www.bell-komori.co.jp/tsukuba/faq/faq1/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.koekisha.co.jp/chiebukuro/mofuku_kodomo/",
+     "https://www.osohshiki.jp/column/article/1347/",
+     "https://meetsmore.com/services/funeral/media/143948",
+     "https://www.hana-sougi.com/blog/funeral-with-child/",
+     "https://www.rakuten.ne.jp/gold/catherine/event/blackformal/",
+     "https://kouzensya.co.jp/10428/",
+     "https://www.kazoku24.com/column/article/column072/",
+     "https://takusel.info/blog/manners/kodomonomohuku.php",
+     "https://tengokusousai.com/blog/attendees/funeral-childrens-clothing/"
+    ],
+    "error": ""
+   }
+  },
+  "お布施 払えない 相談": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://otera.net/qa/kaimyou/bunkatu",
+     "https://www.kosodatekannon.com/ofuse",
+     "https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/",
+     "https://honjyuin.com/kaimyou/2026/09/20/kaimyou-bunkatsu/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.airis.jp/column/cannot-afford-to-make-an-offering/",
+     "https://rogo-navi.com/funeral-offering-cannot-pay/",
+     "https://www.a-tm.co.jp/top/cardloan/no-money/offering/",
+     "https://hasunoha.jp/features/84",
+     "https://www.tokyohakuzen.co.jp/media/338",
+     "https://www.e-sogi.com/guide/56906/",
+     "https://www.tokyohakuzen.co.jp/media/145",
+     "https://sougi-korekara.com/article/funeral/knowledge/funeral-assistance-program/",
+     "https://chester-tax.com/encyclopedia/16092.html"
+    ],
+    "error": ""
+   }
+  },
+  "僧侶 手配 葬儀社 料金": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sensho-sougi.com/service/priest/",
+     "https://sougi-kaguya.tokyo/souryo/",
+     "https://www.axcel-sha.jp/temple-arrangement/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.yoriso.com/sogi/ofuse/",
+     "https://ososhiki.bellco.co.jp/kazokusotokushu/kazokusouobousanhiyou/",
+     "https://www.yokohamasougi.com/obosan/column/obosan-bin/",
+     "https://www.e-sogi.com/support/religious",
+     "https://takusel.info/blog/family-funeral/ohuse_ichinichisou.php",
+     "https://www.tenreikaikan.com/trivia/type/article02/alms.html",
+     "https://www.musubisu-osoushiki.jp/knowledge/manners-flow/monk/",
+     "https://www.moshimo.net/knowledge/cost-price-of-offerings/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.e-sogi.com/guide/3755/",
+     "https://www.e-sogi.com/support/religious/",
+     "https://www.hiroshima-jitakusou.jp/blog/jodo-shinshu-donation-price/",
+     "https://sougi-korekara.com/article/hoyo/ofuse/shingon-funeral-buddhist-offering-cost/",
+     "https://sougi-korekara.com/article/hoyo/ofuse/funeral-buddhist-offering-cost/",
+     "https://www.osohshiki.jp/column/article/135/",
+     "https://y-osohshiki.com/column/623",
+     "https://kakuyasuso.jp/obosan/",
+     "https://kakuyasuso.jp/obosan/ososhiki/kazoku/",
+     "https://kakuyasuso.jp/obosan/kuyo/",
+     "https://www.oterasan.in/",
+     "https://ansinsougi.jp/p-144",
+     "https://www.minnshu.com/funeral/480"
+    ],
+    "error": ""
+   }
+  },
+  "葬儀 お車代 御膳料 相場": {
+   "group": "マナーとお布施",
+   "ChatGPT": {
+    "urls": [
+     "https://alphaclub-sagami.com/knowledge/column/hoji/ofuse_okuruma.html",
+     "https://www.moshimo.net/knowledge/gozenryo-explained/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sougi-korekara.com/article/hoyo/ofuse/buddhist-offering-cost-of-car-fare/",
+     "https://www.lifedot.jp/okurumadai/",
+     "https://www.koekisha.co.jp/chiebukuro/ofuse-okurumadai-ozennryou_kakikata/",
+     "https://alphaclub-sagami.com/knowledge/column/hoji/ofuse_okuruma.html",
+     "https://cerema.co.jp/sougi/column/column_260738/",
+     "https://zenshoji.site/info.zenshoji.site/okurumadai/",
+     "https://www.hasegawa.jp/blogs/kuyou/houji-ozenryou"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.lifedot.jp/okurumadai/",
+     "https://www.e-sogi.com/guide/57341/",
+     "https://www.koekisha.co.jp/chiebukuro/ofuse-okurumadai-ozennryou_kakikata/",
+     "https://sougi-korekara.com/article/hoyo/ofuse/buddhist-offering-cost-of-car-fare/",
+     "https://www.eranda.jp/column/2426",
+     "https://y-osohshiki.com/column/1245",
+     "https://cerema.co.jp/sougi/column/column_260738/",
+     "https://www.moshimo.net/knowledge/cost-price-of-offerings/",
+     "https://www.moshimo.net/knowledge/manners/23568-2/",
+     "https://shinkou-c.com/car-fare/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

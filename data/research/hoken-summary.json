@@ -161,10 +161,10 @@
  "per_answer": {
   "全体": {
    "answers": 123,
-   "portal": 73,
    "media": 77,
-   "clinic": 60,
    "maker": 77,
+   "clinic": 60,
+   "portal": 73,
    "other": 13,
    "video": 6,
    "review": 1,
@@ -173,10 +173,10 @@
   },
   "地域で探す": {
    "answers": 20,
-   "portal": 20,
    "media": 16,
-   "clinic": 14,
    "maker": 5,
+   "clinic": 14,
+   "portal": 20,
    "other": 3,
    "video": 1,
    "review": 1
@@ -185,10 +185,10 @@
    "answers": 28,
    "maker": 23,
    "public": 10,
-   "portal": 17,
    "other": 4,
-   "clinic": 11,
+   "portal": 17,
    "media": 18,
+   "clinic": 11,
    "video": 1
   },
   "選び方": {
@@ -205,19 +205,19 @@
    "answers": 25,
    "maker": 16,
    "public": 13,
-   "portal": 13,
    "other": 3,
-   "clinic": 13,
    "media": 15,
+   "clinic": 13,
+   "portal": 13,
    "video": 2
   },
   "事故手続き": {
    "answers": 26,
    "maker": 22,
    "public": 15,
-   "portal": 8,
    "media": 12,
    "clinic": 10,
+   "portal": 8,
    "other": 3
   }
  }

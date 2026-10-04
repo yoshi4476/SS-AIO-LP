@@ -156,9 +156,9 @@
  "per_answer": {
   "全体": {
    "answers": 116,
+   "public": 55,
    "clinic": 90,
    "other": 20,
-   "public": 55,
    "portal": 45,
    "review": 1,
    "video": 5,
@@ -167,36 +167,36 @@
   },
   "地域で探す": {
    "answers": 28,
+   "public": 7,
    "clinic": 26,
    "other": 2,
-   "public": 7,
    "portal": 17,
    "review": 1,
    "video": 1
   },
   "費用・保険": {
    "answers": 22,
-   "clinic": 17,
    "public": 14,
+   "clinic": 17,
    "media": 8,
-   "other": 4,
    "portal": 8,
+   "other": 4,
    "maker": 1
   },
   "選び方": {
    "answers": 21,
    "public": 13,
-   "clinic": 13,
    "media": 7,
-   "maker": 4,
+   "clinic": 13,
    "portal": 4,
+   "maker": 4,
    "video": 3,
    "other": 2
   },
   "肩こり・腰痛などの悩み": {
    "answers": 21,
-   "clinic": 16,
    "public": 10,
+   "clinic": 16,
    "portal": 5,
    "maker": 1,
    "media": 3,
@@ -204,8 +204,8 @@
   },
   "交通事故のけが": {
    "answers": 24,
-   "maker": 6,
    "public": 11,
+   "maker": 6,
    "clinic": 18,
    "other": 12,
    "portal": 11,

@@ -151,32 +151,32 @@
  "per_answer": {
   "全体": {
    "answers": 86,
-   "media": 66,
-   "other": 14,
    "video": 21,
    "public": 51,
+   "media": 66,
    "portal": 45,
+   "other": 14,
    "clinic": 62,
    "maker": 47,
    "review": 1
   },
   "地域で探す": {
    "answers": 19,
-   "media": 13,
-   "other": 6,
    "video": 3,
    "public": 13,
+   "media": 13,
    "portal": 11,
+   "other": 6,
    "clinic": 13,
    "maker": 2,
    "review": 1
   },
   "費用": {
    "answers": 20,
-   "clinic": 11,
    "public": 9,
-   "maker": 14,
+   "clinic": 11,
    "portal": 9,
+   "maker": 14,
    "media": 17,
    "video": 6,
    "other": 1
@@ -187,8 +187,8 @@
    "portal": 14,
    "maker": 10,
    "media": 10,
-   "other": 2,
    "video": 2,
+   "other": 2,
    "public": 9
   },
   "処方箋とオンライン服薬指導": {
@@ -198,8 +198,8 @@
    "portal": 9,
    "public": 8,
    "maker": 10,
-   "other": 2,
-   "video": 2
+   "video": 2,
+   "other": 2
   },
   "ジェネリックと在庫": {
    "answers": 17,

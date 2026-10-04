@@ -260,6 +260,70 @@ def ask_all(ind, workers=6, sub=False):
     return {"industry": ind, "date": date.today().isoformat(), "engines": sorted(eng), "answers": res}
 
 
+# 答えのキャッシュ（ai_cite_check._cached）の名前。サブスクと課金APIで別の名前に入っている
+CACHE_NAMES = {"ChatGPT": ("ChatGPT-sub", "ChatGPT"), "Claude": ("Claude-sub", "Claude"),
+               "Gemini": ("Gemini",), "Perplexity": ("Perplexity",)}
+
+
+def fill_from_cache(raw):
+    """生の回答に無い答えを、答えのキャッシュから埋め戻す（AIは呼ばない）。
+    聞き直しの回に生の回答を丸ごと書き直していたため、その回に聞かなかった Gemini・Perplexity の答えが
+    消えていた（2026-10-05 に6業種で発見）。キャッシュは調査した時点の答えなので、日付は問わずに使う"""
+    import hashlib
+    import ai_cite_check as AC
+    n = 0
+    # その業種の調査で使ったAIと、予算で外れることのある Gemini だけ。別の時期に試しで聞いた答え
+    # （例: 外壁塗装の Perplexity 1件）を混ぜると、聞いたAIの数が実際より多く書かれてしまう
+    targets = set(raw.get("engines") or []) | {"Gemini"}
+    for q, by in raw["answers"].items():
+        for eng, names in CACHE_NAMES.items():
+            if eng not in targets or (by.get(eng) or {}).get("urls"):
+                continue
+            for name in names:
+                p = AC.CACHE_DIR / name / (hashlib.md5(f"{name}\n{q}".encode("utf-8")).hexdigest() + ".json")
+                if p.is_file():
+                    try:
+                        urls = json.loads(p.read_text(encoding="utf-8")).get("urls") or []
+                    except Exception:
+                        continue
+                    if urls:
+                        by[eng] = {"urls": urls, "error": ""}
+                        n += 1
+                        break
+    got = {e for by in raw["answers"].values() for e, r in by.items() if e != "group" and r.get("urls")}
+    raw["engines"] = sorted(set(raw.get("engines") or []) | (got & targets))
+    return n
+
+
+def refill(ind, engine="ChatGPT"):
+    """既にある答えは残し、engine の答えが欠けた問いだけを聞き足す。利用上限に当たったら、そこまでを残して止める"""
+    import ai_cite_check as AC
+    raw_path = OUT / f"{ind}-raw.json"
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    restored = fill_from_cache(raw)
+    ask = AC.subscription_engines().get(engine)
+    asked = got = 0
+    if ask:
+        for q, by in raw["answers"].items():
+            if (by.get(engine) or {}).get("urls"):
+                continue
+            try:
+                urls = ask(q) or []
+                by[engine] = {"urls": urls, "error": ""}
+                got += bool(urls)
+            except AC.UsageLimit as e:
+                print(f"  {e}。ここまでを残して止めます", flush=True)
+                break
+            except Exception as e:
+                by[engine] = {"urls": [], "error": str(e)[:160]}
+            asked += 1
+    fill_from_cache(raw)
+    raw["refilled"] = date.today().isoformat()
+    raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"  キャッシュから戻した答え {restored}件 / {engine} に聞いた {asked}問（答えが取れた {got}問）", flush=True)
+    return raw
+
+
 def classify(raw):
     """出典のドメインを種類に分ける。ルール → 前回の結果 → claude（未知の分だけ）"""
     known = json.loads(CLASS_FILE.read_text(encoding="utf-8")) if CLASS_FILE.is_file() else {}
@@ -680,6 +744,8 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--classify", action="store_true")
     ap.add_argument("--sub", action="store_true", help="課金APIを使わず、サブスクと無料枠だけで聞く")
+    ap.add_argument("--refill", action="store_true", help="既にある答えは残し、ChatGPT の欠けた問いだけを聞き足す")
+    ap.add_argument("--restore", action="store_true", help="AIは呼ばず、キャッシュから欠けた答えを埋め戻して集計し直す")
     a = ap.parse_args()
     qs = questions(a.industry)
     cost = "課金なし（ChatGPT・Claude はサブスク、Gemini は無料枠）" if a.sub else f"見積もり 約${estimate(len(qs)):.1f}（Claudeはサブスク・Geminiは無料枠）"
@@ -690,7 +756,13 @@ def main():
         return 0
     OUT.mkdir(parents=True, exist_ok=True)
     raw_path = OUT / f"{a.industry}-raw.json"
-    if a.classify and raw_path.is_file():
+    if a.restore and raw_path.is_file():
+        raw = json.loads(raw_path.read_text(encoding="utf-8"))
+        print(f"  キャッシュから戻した答え {fill_from_cache(raw)}件", flush=True)
+        raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=1), encoding="utf-8")
+    elif a.refill and raw_path.is_file():
+        raw = refill(a.industry)
+    elif a.classify and raw_path.is_file():
         raw = json.loads(raw_path.read_text(encoding="utf-8"))
     else:
         t0 = time.time()

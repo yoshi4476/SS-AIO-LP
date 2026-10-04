@@ -1,9 +1,9 @@
 {
  "total": {
-  "clinic": 1140,
+  "clinic": 1141,
   "portal": 451,
   "other": 38,
-  "maker": 133,
+  "maker": 132,
   "media": 178,
   "review": 7,
   "public": 216,
@@ -40,9 +40,9 @@
   },
   "Claude": {
    "portal": 163,
-   "clinic": 433,
+   "clinic": 434,
    "media": 86,
-   "maker": 64,
+   "maker": 63,
    "public": 67,
    "video": 3,
    "other": 1
@@ -87,11 +87,11 @@
    "wiki": 4
   },
   "受診のしかた": {
-   "clinic": 138,
+   "clinic": 139,
    "public": 94,
    "portal": 62,
    "media": 35,
-   "maker": 55,
+   "maker": 54,
    "video": 4,
    "other": 5
   }
@@ -208,19 +208,19 @@
   },
   "選び方": {
    "answers": 37,
-   "other": 5,
-   "video": 4,
+   "public": 20,
    "clinic": 31,
    "portal": 23,
    "media": 22,
-   "public": 20,
+   "video": 4,
+   "other": 5,
    "maker": 12
   },
   "症状": {
    "answers": 55,
-   "portal": 37,
    "media": 35,
    "clinic": 55,
+   "portal": 37,
    "maker": 29,
    "public": 20,
    "video": 3,
@@ -234,8 +234,8 @@
    "media": 19,
    "portal": 29,
    "maker": 24,
-   "other": 5,
-   "video": 4
+   "video": 4,
+   "other": 5
   }
  }
 }

@@ -182,8 +182,8 @@
   "犬種別・サイズ別": {
    "answers": 18,
    "clinic": 18,
-   "media": 17,
    "other": 4,
+   "media": 17,
    "portal": 11,
    "video": 2,
    "maker": 1
@@ -191,12 +191,12 @@
   "予約・利用の悩み": {
    "answers": 18,
    "clinic": 17,
-   "portal": 14,
    "other": 4,
+   "portal": 14,
    "maker": 2,
    "media": 14,
-   "video": 2,
-   "public": 1
+   "public": 1,
+   "video": 2
   }
  }
 }

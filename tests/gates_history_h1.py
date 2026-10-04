@@ -236,3 +236,19 @@ def test_research_pages_count_only_engines_that_answered():
         src = (ROOT / "scripts" / f).read_text(encoding="utf-8")
         body = src.split('"""', 2)[2] if src.lstrip().startswith(("# -*-", '"""')) and '"""' in src else src
         check(f"{f}: ページに出す文に「4つのAI」を固定で書いていない", "4つのAI" in body, False)
+
+
+def test_research_refill_keeps_existing_answers_and_runs_in_ci():
+    print("\n■ 業種調査の聞き直し: 既にある答えを消さず、欠けた問いだけ聞き足す。CI で毎日回す")
+    run = (ROOT / "scripts" / "research_run.py").read_text(encoding="utf-8")
+    # --sub で聞き直すと生の回答を丸ごと書き直し、Gemini の答えが6業種で消えた（2026-10-05）
+    check("生の回答がある業種は --refill で聞き足す", '"--refill" if' in run, True)
+    gi = (ROOT / ".gitignore").read_text(encoding="utf-8")
+    check("生の回答は Git に入れる（CI で続きから聞くため）", any(l.strip() == "data/research/*-raw.json" for l in gi.splitlines()), False)
+    import industry_ai_sources as IAS
+    raw = {"engines": ["ChatGPT", "Claude"], "answers": {"問": {"group": "g", "ChatGPT": {"urls": ["https://a.jp/"], "error": ""}}}}
+    IAS.fill_from_cache(raw)
+    check("埋め戻しは、その調査で使ったAIと Gemini だけ（試しの Perplexity を混ぜない）", "Perplexity" in raw["engines"], False)
+    wf = (ROOT / ".github" / "workflows" / "research-refill.yml").read_text(encoding="utf-8")
+    check("CI: 毎日回し、更新されたログイン情報を Secrets に戻し、公開を起動する",
+          ("cron:" in wf, "gh secret set CODEX_AUTH_JSON" in wf, "gh workflow run deploy.yml" in wf), (True, True, True))

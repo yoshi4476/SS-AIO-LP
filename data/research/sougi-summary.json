@@ -176,27 +176,27 @@
   },
   "費用の相場": {
    "answers": 28,
-   "media": 12,
-   "public": 8,
    "clinic": 22,
-   "video": 3,
+   "public": 8,
+   "media": 12,
    "portal": 19,
+   "video": 3,
    "other": 5,
    "maker": 2
   },
   "葬儀の形式の選び方": {
    "answers": 26,
    "portal": 18,
+   "clinic": 22,
    "media": 7,
    "other": 3,
-   "clinic": 22,
    "public": 8,
    "video": 1
   },
   "手続きと段取り": {
    "answers": 26,
-   "public": 10,
    "clinic": 23,
+   "public": 10,
    "portal": 17,
    "maker": 5,
    "other": 7,

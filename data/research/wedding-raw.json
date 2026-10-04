@@ -1,0 +1,1934 @@
+{
+ "industry": "wedding",
+ "date": "2026-10-03",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "answers": {
+  "大阪 結婚式場 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.gardenoriental.com/wedding/",
+     "https://www.hiltonwedding.jp/hilton-osaka",
+     "https://www.osakacastle.jp/wedding",
+     "https://www.bridal-produce.co.jp/bridal/osaka/jacksongarden/service/",
+     "https://www.hotelgp-osaka.com/bridal/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.weddingpark.net/hall/p27/",
+     "https://www.weddingnews.jp/halls/kansai/osaka",
+     "https://zexy.net/wedding/ranking/osaka/",
+     "https://hana-yume.net/ranking/osaka/",
+     "https://www.mwed.jp/shikijo/kansai/osaka/a27000/ranking/",
+     "https://www.weddingpark.net/ranking/1-p27/",
+     "https://hana-yume.net/pref/osaka/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/wedding/ranking/area/?region=26",
+     "https://wedding.mynavi.jp/wedding/ranking/area/?region=26&weddingKodawari=302",
+     "https://hana-yume.net/ranking/osaka/",
+     "https://www.weddingpark.net/ranking/11-p27/",
+     "https://www.weddingpark.net/ranking/18-p27/",
+     "https://www.weddingpark.net/ranking/1-p27/",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/osaka/01/",
+     "https://www.mwed.jp/shikijo/kansai/osaka/a27000/ranking/",
+     "https://www.weddingpark.net/hall/p27/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 少人数婚 会場": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tokyostationhotel.jp/wedding/reception/",
+     "https://ceruleantower-hotel.official-wedding.jp/page/11/",
+     "https://hankyu-hotel-dhtokyo.fuwel.wedding/plan",
+     "https://hotelmonterey-ginza.jp/smallwedding/",
+     "https://www.asakusawedding.jp/party/small.html",
+     "https://avancer-lien.jp/small"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.weddingpark.net/osusume/small/p13/",
+     "https://www.niwaka.com/ksm/wedding-venue/small/Tokyo/",
+     "https://www.weddingnews.jp/pref/tokyo/g/7",
+     "https://www.weddingpark.net/osusume/small/p13-mu7676/",
+     "https://zexy.net/wedding/tokyo/shoninzu/",
+     "https://hana-yume.net/pref/tokyo/kodawari/small/",
+     "https://hana-yume.net/pref/tokyo/kodawari/small/page/3/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://my-best.com/5861",
+     "https://www.weddingpark.net/osusume/small/p13/",
+     "https://www.weddingpark.net/osusume/small/p13-mu7668/",
+     "https://wedding.mynavi.jp/contents/press/detail/tokyo-tokyostation-shoninzu/",
+     "https://hana-yume.net/pref/tokyo/kodawari/small/",
+     "https://hana-yume.net/smallparty/pref/13/",
+     "https://tokihana.net/articles/31965/",
+     "https://kiki-wedding.jp/kanto/tokyo/2276/",
+     "https://www.niwaka.com/ksm/wedding-venue/small/Tokyo/",
+     "https://www.mwed.jp/shikijo/shutoken/tokyo/smallwedding/",
+     "https://wedding.mynavi.jp/wedding/ranking/area/?region=1&weddingKodawari=302",
+     "https://www.weddingpark.net/osusume/small/p13/page3/",
+     "https://tokihana.net/places?spm%5Barea_id%5D=1030600&spm%5Btag_ids%5D%5Bother_details%5D%5B%5D=257",
+     "https://kiki-wedding.jp/kanto/tokyo/1962/",
+     "https://www.petitwedding.com/venue/area-tokyo/",
+     "https://weddinghall-osusume.com/column/average/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 結婚式場 口コミ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.weddingpark.net/000011ff/kuchikomi/",
+     "https://www.weddingpark.net/00000dbe/kuchikomi/",
+     "https://www.weddingpark.net/00001109/kuchikomi/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/ranking/tokai/aichi/01/",
+     "https://www.mwed.jp/shikijo/tokai/aichi/a22001/page4/",
+     "https://www.weddingpark.net/ranking/1-b42/",
+     "https://hana-yume.net/howto/ranking-nagoya/",
+     "https://www.mwed.jp/shikijo/tokai/aichi/a22001/ranking/",
+     "https://zexy.net/wedding/kuchikomi/aichi/a_0526/",
+     "https://www.weddingnews.jp/halls/tokai/aichi/nagoya",
+     "https://hana-yume.net/howto/ranking-nagoya/",
+     "https://www.mwed.jp/shikijo/tokai/aichi/a22001/ranking/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/wedding/ranking/area/?miniRegion=21001",
+     "https://www.weddingpark.net/ranking/1-b42/",
+     "https://www.mwed.jp/shikijo/tokai/aichi/a22001/ranking/",
+     "https://www.mwed.jp/shikijo/tokai/aichi/a22001/",
+     "https://www.mwed.jp/shikijo/tokai/aichi/a22001/ranking/cost/",
+     "https://www.weddingpark.net/0000064b/kuchikomi/",
+     "https://www.weddingpark.net/00001d0c/kuchikomi/",
+     "https://www.weddingpark.net/000011ff/kuchikomi/",
+     "https://hana-yume.net/howto/ranking-nagoya/",
+     "https://hana-yume.net/pref/aichi/nagoya/",
+     "https://www.weddingnews.jp/halls/tokai/aichi/nagoya",
+     "https://www.weddingnews.jp/halls/tokai/aichi",
+     "https://www.weddingpark.net/hall/p23-ci11984/",
+     "https://www.weddingpark.net/hall/p23-mu52/",
+     "https://www.wedding-s.jp/kekkon_info/aichi/nagoya_sikijou_ranking/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 フォトウェディング おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://studio-feel.jp/bridalplans/",
+     "https://photo.decollte.co.jp/brands/4/prices",
+     "https://www.la-viephoto.com/fukuoka/plan/chapel-fukuoka",
+     "https://www.petitwedding.com/photowedding/vid-287479/",
+     "https://studio-feel.jp/bridalplans/f_8h_free/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://roll7wedding.092photo.com/column/1674/",
+     "https://photo.decollte.co.jp/spots?brand_id=4",
+     "https://wedding.mynavi.jp/photo/column_info/fukuoka_spot/",
+     "https://photo-maison-ecrin.jp/article/3234/",
+     "https://wedding-town.co.jp/fukuoka/location-fukuoka/",
+     "https://www.photorait.net/search/area/fukuoka",
+     "https://wedding.mynavi.jp/photo/ranking/fukuoka/",
+     "https://photo.decollte.co.jp/stores/14",
+     "https://studio.luminous.art/kyushu/tenjin/",
+     "https://photo-maison-ecrin.jp/fukuoka/",
+     "https://www.la-viephoto.com/fukuoka/location",
+     "https://fukuoka-photowedding.info/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/photo/ranking/fukuoka/",
+     "https://www.weddingpark.net/osusume/photowedding/p40/",
+     "https://www.la-viephoto.com/fukuoka",
+     "https://www.weddingpark.net/osusume/photowedding/p40-mu68/",
+     "https://www.photorait.net/search/area/fukuoka",
+     "https://www.photorait.net/search/kodawari_search/54?location_ids%5B%5D=40",
+     "https://inaiwedding.jp/studiosfukuoka/",
+     "https://www.photorait.net/search/area/a77",
+     "https://www.res-w.com/sarang/",
+     "https://www.best-anniversary.co.jp/studiophotopark/wedding/kyushu/fukuoka/location/",
+     "https://www.niwaka.com/ksm/wedding-photo/Fukuoka/",
+     "https://www.weddingnews.jp/magazine/153996",
+     "https://dressy.pla-cole.wedding/fukuoka-selfphotostudio/",
+     "https://www.photorait.net/search/plan/result?prefecture_code%5B%5D=fukuoka",
+     "https://photostudiolab.net/blog/2024/08/01/fukuoka/",
+     "https://www.travelbook.co.jp/topic/63315"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 結婚式場 安い": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.petitwedding.com/chapel/vid-7776/",
+     "https://rosegarden-ch.official-wedding.net/plan/list",
+     "https://www.j-mfc.com/plan/594/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.weddingpark.net/osusume/kakuyasu/p1-ci11972/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHG-Ji7-rlF1cKyH5xHy12XBPtju-hh-cJvMnP9TqgNbjj_SckZU0WZVDdKVPAAqzaGUJ8O5NBwo6DJw2aYHvMFOgnAZxkUujUUCshAkNgyHy0eJeFt0eVTVRzBIV64Dca1MaE=",
+     "https://www.bellco.co.jp/otokucon/727/",
+     "https://www.weddingpark.net/osusume/kakuyasu/p1-ci11972/",
+     "https://www.niwaka.com/ksm/wedding-venue/small/Hokkaido/",
+     "https://tokihana.net/places/4137",
+     "https://www.weddingnews.jp/a/hokkaido/g/19",
+     "https://hana-yume.net/pref/hokkaido/sapporo/kodawari/small/",
+     "https://www.mwed.jp/shikijo/hokkaido/hokkaido/a1002/ranking/cost/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/shikijo/hokkaido/hokkaido/a1002/ranking/cost/",
+     "https://www.weddingnews.jp/halls/hokkaido/hokkaido/sapporo",
+     "https://kiki-wedding.jp/hokkaido_tohoku/hokkaido/2449/",
+     "https://www.petitwedding.com/chapel/vid-7776/plan/",
+     "https://www.weddingnews.jp/halls/2290/costs",
+     "https://grand1934.com/wedding/plan/family/",
+     "https://www.elm.cc/wedding/plan/"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 チャペル 結婚式場": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.anniversaire.co.jp/wedding/minatomirai/chapel_banquet/chapel_anniversaire/",
+     "https://www.casadangela.com/facility/chapel/",
+     "https://www.anniversaire.co.jp/wedding/yokohama/chapel_banquet/chapel_anniversaire/",
+     "https://www.bridal-produce.co.jp/bridal/yokohama/theclassica/wedding/ceremony/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.weddingpark.net/ranking/22-b20/",
+     "https://hana-yume.net/ranking/yokohama/",
+     "https://zexy.net/wedding/kanagawa/ma_116101/kyoshiki/tag_102/",
+     "https://www.weddingpark.net/osusume/chapel/p14-ci11976/",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG1LQaqxqglbrJDjR2RezFCXCF9NSUwEm1BO1RPo4D91tYlQdV0DbVI3K91qcmjnvZZ20sVATp4WXEUCSuEbtR2_0173XaoWVSV5givsyWJOJFrQmK0Cbr0gf78GueMNDWjItZ-",
+     "https://www.niwaka.com/ksm/radio/ranking/syutoken-kanto/kanagawa/10/",
+     "https://tokihana.net/articles/59027/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/wedding/ranking/area/?miniRegion=2001&ceremonyStyle=1&a8=0NBZ9NG73DCWnnkV11RZ786eJl_M.Vbj51RNzVIVNOE73DBNrDy0UVB8CD_mgmyCpOiVhcB6pNBZLs00000023974001c",
+     "https://hana-yume.net/pref/kanagawa/yokohama/",
+     "https://www.niwaka.com/ksm/radio/ranking/syutoken-kanto/kanagawa/09/",
+     "https://www.weddingpark.net/hall/p14-ci11976/",
+     "https://www.weddingpark.net/osusume/chapel/p14-ra9496/",
+     "https://zexy.net/wedding/kanagawa/sa_0004/",
+     "https://www.weddingpark.net/osusume/church/p14-ci11976/",
+     "https://zexy.net/wedding/kanagawa/ma_111201/chapel/",
+     "https://www.niwaka.com/ksm/radio/ranking/syutoken-kanto/kanagawa/10/",
+     "https://tokihana.net/articles/59027/",
+     "https://www.mwed.jp/shikijo/shutoken/kanagawa/a14000/ranking/",
+     "https://wedding.mynavi.jp/ranking_w/kanagawa/yokohama/church",
+     "https://www.mwed.jp/shikijo/shutoken/kanagawa/chapelwedding/",
+     "https://www.niwaka.com/ksm/radio/ranking/syutoken-kanto/kanagawa/13/",
+     "https://www.niwaka.com/ksm/radio/ranking/syutoken-kanto/kanagawa/15/",
+     "https://hana-yume.net/ranking/yokohama/",
+     "https://www.wedding-s.jp/kekkon_info/kanagawa/yokohama_sikijou_ranking/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 神社 結婚式 会場": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.heianjingu.com/wedding/place/",
+     "https://kamigamojinja-wedding.info/",
+     "https://kamigamojinja-wedding.info/ceremony/",
+     "https://shimogamo-jinja.jp/reserve/",
+     "https://www.tokiwa-shinden.jp/",
+     "https://www.yoshidajinja.com/kyosiki1.htm"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFfqKTFv_K7Hvw7lU0mUorhotWEmGN1voOSHQrnt7aZxIVZHG_SGhR4SYUAy8Q77k_Pyofw8jjm-Roi0f1USMiEhPrBeZe9l5BG49afSPsam4vFYYAVVLMxLSqLe2VVbaQHnNuwhW1eylUpQTS1vA==",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/kyoto/09/",
+     "https://hana-yume.net/pref/kyoto/kodawari/alliance/",
+     "https://nihon-kekkon.com/party/area/kyoto/",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/kyoto/08/",
+     "https://www.lst.jp/venue_category/ceremony/",
+     "https://ws-i-zen.jp/column/column-5191/",
+     "https://nihon-kekkon.com/party/area/kyoto/",
+     "https://rasisa-wedding.com/magazine/ryotei-wedding/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/shikijo/kansai/kyoto/shrinewedding/",
+     "https://www.mwed.jp/articles/13496/",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/kyoto/09/",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/kyoto/08/",
+     "https://zexy.net/wedding/kyoto/shinzenshiki/",
+     "https://wakon-style.jp/kyoto/list",
+     "https://wakon-style.jp/kyoto",
+     "https://www.tokiwa-shinden.jp/",
+     "https://shimogamo-jinja.jp/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 結婚式場 人気": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://hana-yume.net/ranking/kobe/",
+     "https://www.weddingpark.net/ranking/1-b55/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://wedding.mynavi.jp/wedding/ranking/area/?miniRegion=27001",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/hyogo/01/",
+     "https://tokihana.net/places?spm%5Baddress_locality%5D=%E7%A5%9E%E6%88%B8%E5%B8%82&spm%5Barea_id%5D=1060400",
+     "https://hana-yume.net/ranking/kobe/",
+     "https://hana-yume.net/ranking/kobe/",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/hyogo/01/",
+     "https://www.weddingpark.net/hall/p28-ci11983/",
+     "https://www.weddingpark.net/ranking/8-b55/",
+     "https://weddingday.jp/mag/3471",
+     "https://www.bellco.co.jp/otokucon/1387/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/wedding/ranking/area/?miniRegion=27001",
+     "https://wedding.mynavi.jp/wedding/ranking/area/?miniRegion=27001&hallType=3",
+     "https://hana-yume.net/ranking/kobe/",
+     "https://www.mwed.jp/shikijo/kansai/hyogo/a28001/ranking/",
+     "https://www.niwaka.com/ksm/radio/ranking/kansai/hyogo/01/",
+     "https://www.mwed.jp/shikijo/kansai/hyogo/a28000/ranking/",
+     "https://www.mwed.jp/shikijo/kansai/hyogo/a28000/ranking/cost/",
+     "https://www.mwed.jp/shikijo/kansai/hyogo/a28001/ranking/cost/",
+     "https://www.weddingpark.net/hall/p28-ci11983/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 結婚式場 費用": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://sendai.metropolitan.jp/wedding/plan/index.html",
+     "https://www.kalemera.jp/plan/",
+     "https://produce.novarese.jp/seiryuso/plan/detail.html?post=14922"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zexy.net/wedding/miyagi/",
+     "https://zexy.net/wedding/c_7770027949/plan/",
+     "https://zexy.net/wedding/c_7770006504/plan/",
+     "https://www.weddingpark.net/estimate/p4/",
+     "https://zexy.net/freeword/%E7%B5%90%E5%A9%9A%E5%BC%8F%20%E4%BB%99%E5%8F%B0%20%E6%96%99%E9%87%91/",
+     "https://tokihana.net/places?spm%5Barea_id%5D=1020300&spm%5Btag_ids%5D%5Bother_details%5D%5B%5D=483",
+     "https://www.weddingpark.net/osusume/small/p4/",
+     "https://www.weddingpark.net/ranking/1-p4/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10165275795"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.weddingpark.net/hall/p4-st70/",
+     "https://www.weddingpark.net/osusume/big/p4-ci11973/",
+     "https://www.weddingpark.net/estimate/p4/",
+     "https://www.mwed.jp/shikijo/tohoku/miyagi/a6001/ranking/cost/",
+     "https://www.mwed.jp/hall/14544/cost/",
+     "https://www.mwed.jp/shikijo/tohoku/miyagi/smallwedding/",
+     "https://wedding.mynavi.jp/wedding/ranking/area/?miniRegion=33003",
+     "https://www.petitwedding.com/chapel/vid-7777/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 結婚式場 見学": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hgh.co.jp/wedding/special_offers/post_1.html",
+     "https://sheratongrand-hiroshima.fuwel.wedding/fair",
+     "https://produce.novarese.jp/hiroshima-monolith/event/",
+     "https://h-bkk.jp/wedding/bridal_fair/",
+     "https://www.mielparque.jp/wedding/hiroshima/faq/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://tokihana.net/places?spm%5Barea_id%5D=1070400&spm%5Btag_ids%5D%5Bpoints%5D%5B%5D=426",
+     "https://mitakiso.jp/event/",
+     "https://www.mwed.jp/fair_search/chushikoku/hiroshima/",
+     "https://hana-yume.net/ranking/hiroshima/",
+     "https://space.fivestar-wedding.com/nd-hiroshima/",
+     "https://space.fivestar-wedding.com/nd-hiroshima/news/news-5689/",
+     "https://produce.novarese.jp/hiroshima-monolith/event/",
+     "https://zexy.net/wedding/hiroshima/fairClientList/",
+     "https://www.hiltonwedding.jp/hilton-hiroshima/fairs",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF8s5HO36fQ4C3r57uuE4qkvBanGTeCsczS5222uu-IuLYrZdvBjMv3Ha1KAo7bQtCs9EEWryXFKwgun2u4u_ehsXy1oVc9HaH1UwiOa1_11bCxExj88C3HZSHX-O7aWHQsJ5fqFQvK9xCeULRE097OSK1zKLRv_ZrxOUHbhsqtoR4=",
+     "https://wedding.mynavi.jp/wedding/fair_list/?region=44",
+     "https://zexy.net/wedding/hiroshima/fairClientList/",
+     "https://www.weddingpark.net/fair/p34/",
+     "https://hana-yume.net/fair/hiroshima/",
+     "https://hana-yume.net/fair/hiroshima/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.hgh.co.jp/wedding/",
+     "https://www.mwed.jp/fair_search/chushikoku/hiroshima/",
+     "https://hana-yume.net/pref/hiroshima/",
+     "https://hana-yume.net/fair/hiroshima/",
+     "https://www.weddingpark.net/fair/p34/",
+     "https://hiroshima.hiltonjapan.co.jp/wedding/lp/wedding-fair",
+     "https://produce.novarese.jp/hiroshima-monolith/event/",
+     "https://www.sheratongrand-hiroshima.jp/wedding/campaign/",
+     "https://prince-hiroshima.sp-wedding.jp/fair/",
+     "https://www.mwed.jp/articles/11764/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/524715/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/bridal-fair/10/",
+     "https://www.weddingpark.net/hall/p34/",
+     "https://tokihana.net/places?spm%5Barea_id%5D=1070400&spm%5Btag_ids%5D%5Bpoints%5D%5B%5D=426",
+     "https://anacrowneplaza-hiroshima.fuwel.wedding/fair",
+     "https://www.jadee.net/column/bridal-fair/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 費用 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://souken.zexy.net/data/market2025/market2025_summary.pdf",
+     "https://zexy.net/article/app000100655/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zexy.net/article/app001912025/",
+     "https://www.rakukon.com/howto/ap_money-27-2/",
+     "https://zexy.net/mar/manual/kiso_souba/",
+     "https://www.tgn.co.jp/wedding/column/article-the-wedding-gifts-will-cover-the-cost-of-the-ceremony/",
+     "https://sanlets.com/column/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E4%BA%BA%E6%95%B0%E3%81%A7%E3%81%A9%E3%81%86%E5%A4%89%E3%82%8F%E3%82%8B%EF%BC%9F30%E5%90%8D%E3%81%AE%E5%B0%91%E4%BA%BA/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/budget/08/",
+     "https://zexy.net/article/app002510007/",
+     "https://smakon.jp/guide/guide-wedding-cost",
+     "https://www.mwed.jp/articles/7017/",
+     "https://www.bk.mufg.jp/column/events/wedding/b0017.html",
+     "https://cordy.jp/blogs/cordy-magazine/htwp0046"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/articles/7017/",
+     "https://zexy.net/article/app001912025/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/18331/",
+     "https://hana-yume.net/howto/self-pay/",
+     "https://wedding.mynavi.jp/contents/special_contents/okane01/",
+     "https://zexy.net/article/app002103017/",
+     "https://note.com/114filmswedding/n/n98dba73a3a3d",
+     "https://www.rakukon.com/howto/ap_money-18/",
+     "https://fam-wedding.com/wedding-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 招待客 人数別 費用": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002104302/",
+     "https://zexy.net/article/app002404019/",
+     "https://zexy.net/article/app002111010/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zexy.net/article/app002005017/",
+     "https://www.prehana-gunma.com/cost/self-pay.html",
+     "https://www.tgn.co.jp/wedding/column/article-115/",
+     "https://zerokon.info/wedding-100-people",
+     "https://zexy.net/article/app002510007/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1315676848"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/special_contents/okane01/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/14918/",
+     "https://brass.ne.jp/media/wedding-cost/",
+     "https://weddingcompass.jp/wedding-cost/",
+     "https://hana-yume.net/howto/guest-average/",
+     "https://bridalevent.jp/bridalfair/kekkonshiki-hiyou-souba/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/ceremony/wedding-guest-count/",
+     "https://fam-wedding.com/wedding-cost/",
+     "https://kazokulab.com/guides/kekkonshiki-hiyou-souba-2026/",
+     "https://zexy.net/article/app002510007/",
+     "https://zexy.net/article/app002104302/",
+     "https://zexy.net/article/app002312044/",
+     "https://zexy.net/article/app002111010/",
+     "https://souken.zexy.net/data/trend2024/XY_MT24_report.pdf",
+     "https://www.arcenciel-g.jp/column/bridalfair/38",
+     "https://zexy.net/article/app002005017/",
+     "https://smakon.jp/guide/guide-wedding-cost",
+     "https://fam-wedding.com/kyoshiki-ikura2024/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 見積もり 追加料金": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/mar/manual/kiso_okane/chapter2.html",
+     "https://zexy.net/article/app002208002/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zexy.net/article/app002110016/",
+     "https://barn148.jp/journal/barnjournal-vol-46/",
+     "https://www.mwed.jp/articles/11757/",
+     "https://www.bridal-hoken.jp/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E3%81%A3%E3%81%A6%E4%BD%95%E6%95%85%E3%81%A9%E3%82%93%E3%81%A9%E3%82%93%E4%B8%8A%E3%81%8C%E3%82%8B%E3%81%AE%EF%BC%9F%EF%BC%81/",
+     "https://hana-yume.net/howto/estimate-list/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13159798783",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/budget/26/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://brass.ne.jp/media/wedding-estimate/",
+     "https://zexy.net/mar/manual/kiso_okane/chapter2.html",
+     "https://www.mwed.jp/community/questions/15416",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/budget/26/",
+     "https://zexy.net/article/app002102023/",
+     "https://brapla.com/column/money/44a5d46b-88a9-4ef0-89d7-e7112dff3473",
+     "https://fam-wedding.com/brial-shiharai-best5/",
+     "https://machi-meguri.com/wedding/tips/wedding-estimate-increase-average/",
+     "https://www.jiyuujinn.com/blog/wedding_estimate_increase/",
+     "https://www.weddingnews.jp/magazine/186143",
+     "https://hana-yume.net/howto/estimate-list/",
+     "https://barn148.jp/journal/barnjournal-vol-46/",
+     "https://www.bridal-hoken.jp/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E3%81%A3%E3%81%A6%E4%BD%95%E6%95%85%E3%81%A9%E3%82%93%E3%81%A9%E3%82%93%E4%B8%8A%E3%81%8C%E3%82%8B%E3%81%AE%EF%BC%9F%EF%BC%81/",
+     "https://wedding.hokuto7s.co.jp/blog/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E5%BE%B9%E5%BA%95%E8%A7%A3%E8%AA%AC%EF%BD%9C%E5%88%9D%E5%9B%9E%E3%81%8B%E3%82%89%E6%9C%80%E7%B5%82%E3%81%BE%E3%81%A7%E9%87%91/",
+     "https://beelife.ftwcompleted.com/wedding-estimate-increase"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 ご祝儀 差し引き 自己負担": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://www.recruit.co.jp/newsroom/pressrelease/assets/20241025_marriage_01.pdf",
+     "https://zexy.net/article/app002005017/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/budget/08/",
+     "https://www.ebina-wings.com/blog/article_2797/",
+     "https://www.mwed.jp/articles/1930/",
+     "https://www.the-chelsea.jp/wedding/information/estimate/",
+     "https://terrace-glanz.com/blog/wedding-expenses-covered-congratulatorygift/",
+     "https://www.totalsalon-relier.com/post/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E3%81%94%E7%A5%9D%E5%84%80%E3%80%81%E5%AE%9F%E9%9A%9B%E3%81%84%E3%81%8F%E3%82%89%E9%9B%86%E3%81%BE%E3%82%8B%EF%BC%9F%E7%9B%B8%E5%A0%B4%E3%81%A8%E5%8F%8E%E6%94%AF%E3%81%AE%E3%83%AA%E3%82%A2%E3%83%AB",
+     "https://zexy.net/article/app002005017/",
+     "https://www.tgn.co.jp/wedding/column/article-the-wedding-gifts-will-cover-the-cost-of-the-ceremony/",
+     "https://zexy.net/article/app002005017/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.wedlink.jp/magazine/165",
+     "https://fam-wedding.com/wedding-cost/",
+     "https://www.mwed.jp/articles/7017/",
+     "https://sharefull.com/content/entertainment/24114/",
+     "https://hana-yume.net/howto/self-pay/",
+     "https://bridalevent.jp/bridalfair/kekkonshiki-hiyou-souba/",
+     "https://bridalfair.info/self-payment/",
+     "https://souken.zexy.net/data/trend2024/XY_MT24_report.pdf",
+     "https://zexy.net/article/app002312044/",
+     "https://zexy.net/article/app002005017/"
+    ],
+    "error": ""
+   }
+  },
+  "少人数婚 費用 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/wedding/shoninzu/",
+     "https://zexy.net/article/app002104302/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://sanlets.com/column/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%E4%BA%BA%E6%95%B0%E3%81%A7%E3%81%A9%E3%81%86%E5%A4%89%E3%82%8F%E3%82%8B%EF%BC%9F30%E5%90%8D%E3%81%AE%E5%B0%91%E4%BA%BA/",
+     "https://wedding-plan-navi.com/blog/shonin-kekkonshiki/",
+     "https://smakon.jp/guide/guide-wedding-cost",
+     "https://zexy.net/article/app002104302/",
+     "https://www.tgn.co.jp/wedding/column/wedding-small-number-people-cost/",
+     "https://barn148.jp/journal/vol-33/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zexy.net/article/app002104302/",
+     "https://www.weddingpark.net/osusume/small/feature/4/",
+     "https://wedding.mynavi.jp/contents/special_contents/shoninzu01/u30/",
+     "https://www.tgn.co.jp/wedding/column/wedding-small-number-people-cost/",
+     "https://www.mwed.jp/articles/12323/",
+     "https://wedding.mynavi.jp/contents/special_contents/shoninzu01/",
+     "https://smakon.jp/guide/g2009063",
+     "https://wedding.gnavi.co.jp/smallwedding/",
+     "https://le-chic-unjour.com/blog/5593"
+    ],
+    "error": ""
+   }
+  },
+  "フォトウェディング 料金 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002605001/",
+     "https://www.photorait.net/special/412"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.photorait.net/search/plan/guide",
+     "https://www.arc-web.com/wedding/eventcampaign/260120/",
+     "https://www.hare-to-ke.jp/2025/12/12/shashindakekon/",
+     "https://blanz-w.com/column/1847/",
+     "https://zexy.net/article/app002204030/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/photo/column_info/photowedding_hiyou/",
+     "https://www.mwed.jp/articles/6594/",
+     "https://www.weddingpark.net/osusume/photowedding/feature/9/",
+     "https://inaiwedding.jp/weddingphoto-price-guide/",
+     "https://www.hare-to-ke.jp/2026/01/04/2025price/",
+     "https://www.s-claire.jp/blog/30717/",
+     "https://www.kagaenn.com/kagaenblog/28",
+     "https://studiomonami.com/column/photowedding-hiyou/",
+     "https://torutokoya.com/blog/no21/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 費用 安く抑える方法": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002209204/",
+     "https://hana-yume.net/landing/plan/",
+     "https://www.weddingpark.net/osusume/small/feature/4/",
+     "https://zexy.net/mar/manual/kiso_okane/chapter2.html",
+     "https://zexy.net/article/app002004004/",
+     "https://hana-yume.net/pages/qa/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sharefull.com/content/entertainment/24114/",
+     "https://brass.ne.jp/media/wedding-cheap/",
+     "https://www.mwed.jp/articles/11173/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/saving/05/",
+     "https://hana-yume.net/howto/wedding-season-lowprice/",
+     "https://weddingcompass.jp/wedding-cost/",
+     "https://bridalevent.jp/bridalfair/kekkonshiki-hiyou-souba/",
+     "https://fam-wedding.com/wedding-cost/",
+     "https://kazokulab.com/guides/kekkonshiki-hiyou-souba-2026/",
+     "https://weddingday.jp/mag/3285",
+     "https://www.mwed.jp/articles/7017/",
+     "https://brass.ne.jp/media/wedding-cost/",
+     "https://www.weddingpark.net/estimate/hint/",
+     "https://www.tokyostarbank.co.jp/feature/education/trends/20250707.html",
+     "https://www.arcenciel-g.jp/column/bridalfair/38",
+     "https://4-bridal.jp/bridal_journal/marriage-preparation/detail/97/",
+     "https://www.jadee.net/column/average-wedding-cost/",
+     "https://terrace-glanz.com/blog/wedding-expenses-covered-congratulatorygift/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 ブライダルフェア 割引": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/wedding/bridalfair/benefits/",
+     "https://hana-yume.net/support/supportBenefit/",
+     "https://zexy.net/article/app002608009/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://endrollmovie.com/uncategorized/bridalfair-benefits/",
+     "https://www.tgn.co.jp/wedding/column/article-67/",
+     "https://fam-wedding.com/zexy-mynavi-hikaku/",
+     "https://www.wedding-note.net/campaign/",
+     "https://milymily55.com/shikijo-sagashi-campaign-hikaku/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/bridal-fair/07/",
+     "https://tokihana.net/articles/18714/",
+     "https://note.com/knowns/n/n4b4fc0af2603",
+     "https://ameblo.jp/teashirt-wedding/entry-12754069417.html",
+     "https://hana-yume.net/howto/bridalfair-gift-certificate/",
+     "https://hana-yume.net/howto/wedding-websites/",
+     "https://www.weddingnews.jp/magazine/73502",
+     "https://kame-reon.hatenablog.com/entry/compare-wedding-campaign",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12279731842"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hana-yume.net/howto/bridalfair-gift-certificate/",
+     "https://hanayome-susume.com/wedding-ranking/",
+     "https://wedding.mynavi.jp/contents/special_contents/post_181/",
+     "https://wedding.mynavi.jp/contents/special_contents/seiyakutokuten/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/bridal-fair/07/",
+     "https://ancie.jp/blog/hall-search/bridal-fair/special-benefits/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 持ち込み料 相場": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002004004/",
+     "https://wedding.mynavi.jp/premium/juku/Backstage/3040/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zexy.net/article/app002004004/",
+     "https://brightblue.jp/news/8044/",
+     "https://www.mwed.jp/articles/247/",
+     "https://kitto.wedding/column/202607002/",
+     "https://hana-yume.net/howto/kekkonshiki-mochikomi/",
+     "https://cordy.jp/blogs/cordy-magazine/htwp0054",
+     "https://tokihana.net/articles/20485/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.arcenciel-g.jp/column/bridalfair/322",
+     "https://www.niwaka.com/ksm/radio/wedding/gift/gift-sweets/30/",
+     "https://www.mwed.jp/articles/247/",
+     "https://hana-yume.net/howto/kekkonshiki-mochikomi/",
+     "https://hana-yume.net/howto/bringing-fee/",
+     "https://wedding.mynavi.jp/contents/special_contents/mochikomi_01/",
+     "https://tokihana.net/articles/20485/",
+     "https://omobic.com/helpful/items/wedding-item-price.html"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 クレジットカード 支払い 時期": {
+   "group": "費用・料金",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app000101580/",
+     "https://www.jcb.co.jp/ordercard/special/payment_date.html",
+     "https://www.smbc-card.com/nyukai/magazine/recommend/wedding.jsp"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/budget/28/",
+     "https://www.prehana-gunma.com/cost/payment.html",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/life/519274/",
+     "https://zexy.net/article/app002110017/",
+     "https://www.mitte.ne.jp/wedding/column/3530/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1320641908",
+     "https://lcm-atelier.com/column82_reception_money/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zexy.net/article/app002105016/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/life/519274/",
+     "https://www.smbc-card.com/nyukai/magazine/recommend/wedding.jsp",
+     "https://wedding.mynavi.jp/contents/press/detail/post-117/",
+     "https://my-best.com/articles/3446",
+     "https://www.rakuten-card.co.jp/minna-money/credit-card/knowledge/article_2206_90075/",
+     "https://note.com/weddingplace/n/n48fe55c63224",
+     "https://coetas.jp/creditcard/kekkonshiki/",
+     "https://amore.escrit.jp/howto/preparation/4338/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/budget/28/",
+     "https://zexy.net/article/app001909025/",
+     "https://zexy.net/article/app000101119/",
+     "https://hana-yume.net/howto/pay-later/",
+     "https://zexy.net/article/app002110017/",
+     "https://craftsmanpark.com/%E7%B5%90%E5%A9%9A%E5%BC%8F%E8%B2%BB%E7%94%A8%E3%81%AE%E6%94%AF%E6%89%95%E3%81%84%E6%96%B9%E6%B3%95%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E3%81%8A%E5%BE%97%E3%81%AB%E6%89%95%E3%81%86/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 選び方 ポイント": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002509008/",
+     "https://zexy.net/article/app000000139/",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_23.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hatsuneya.jp/note/86kdi7je9bth3hmekd5r322vz0g2tm",
+     "https://wedding.hokuto7s.co.jp/blog/1731/",
+     "https://wedding.escrit.jp/place/lazorgarden-nagoya/information/wedding-lab/preparation/_preview_point/",
+     "https://wedding.escrit.jp/place/kiyomizu/information/wedding-lab/preparation/wedding-points/",
+     "https://ancie.jp/blog/hall-search/bridal-fair/bridal-fair-check-list/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/20662/",
+     "https://zexy.net/article/app002305011/",
+     "https://villa-angelica.com/news/wedding-hall-choose/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/articles/11522/",
+     "https://brass.ne.jp/media/how-to-choose-wedding-venue/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/kotsu/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/how-to-select/26/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/how-to-select/06/",
+     "https://www.sihd-bk.jp/personal/column/marriage-childbirth-and-education/how-to-choose-your-wedding-venue/",
+     "https://hatsuneya.jp/note/32hd6mffp7nnltmf7ewm6h8p6yaepw",
+     "https://wedding.hokuto7s.co.jp/blog/1731/",
+     "https://terrace-glanz.com/blog/how-to-choose-a-wedding/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 決め手 何を重視": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://prtimes.jp/main/html/rd/p/000002247.000044800.html",
+     "https://wedding.mynavi.jp/contents/special_contents/venue_kimete_ranking/",
+     "https://hana-yume.net/howto/how-to-choose/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zexy.net/article/app002001011/",
+     "https://zexy.net/article/app002102025/",
+     "https://newscast.jp/news/0699041",
+     "https://zexy.net/article/app000000140/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/special_contents/venue_kimete_ranking/",
+     "https://giseleweb.com/prtimes/c44800_r2256/",
+     "https://www.mwed.jp/articles/11522/",
+     "https://www.mwed.jp/articles/10457/",
+     "https://zexy.net/article/app000100976/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/couple/524149/",
+     "https://hana-yume.net/howto/conclusive-factor/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 ホテル ゲストハウス 違い": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002508018/",
+     "https://zexy.net/article/app000101611/?inrlead=article_relatedArticle",
+     "https://zexy.net/wedding/housewedding/",
+     "https://zexy.net/article/app002410022/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/how-to-select/03/",
+     "https://www.arcenciel-g.jp/column/bridalfair/311",
+     "https://smakon.jp/marrial/2017/02/27/13616",
+     "https://tokihana.net/articles/26371/",
+     "https://hatsuneya.jp/note/tjmrwkbgh3rbtc3hnswhzp9g6ddycc",
+     "https://www.kokajin-wedding.com/bridalfair/guesthouse-vs-hotel/",
+     "https://esterio.com/blog/2018/09/11/3656/",
+     "https://four-quadrangle.com/difference.html",
+     "https://bridal-torisetsu.net/guesthouse/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 見積もり 比較 コツ": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app001912024/",
+     "https://zexy.net/article/app002208002/",
+     "https://zexy.net/mar/manual/kiso_okane/chapter2.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_23.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.mwed.jp/articles/11757/",
+     "https://wedding.mynavi.jp/contents/special_contents/okane02/",
+     "https://zexy.net/article/app001912024/",
+     "https://brapla.com/column/money/fda9326e-61b7-4bd3-abfb-dc9c93a1fef6",
+     "https://hana-yume.net/howto/estimate-list/",
+     "https://www.rakukon.com/howto/ap_prepare-123/",
+     "https://note.com/kra_wedding/n/n0b957efff3ce"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zexy.net/article/app001912024/",
+     "https://www.mwed.jp/articles/11757/",
+     "https://brass.ne.jp/media/wedding-estimate/",
+     "https://weddingcompass.jp/wedding-cost/",
+     "https://brapla.com/column/money/fda9326e-61b7-4bd3-abfb-dc9c93a1fef6",
+     "https://barn148.jp/journal/barnjournal-vol-46/",
+     "https://oimoko.com/braidl_kousyo/",
+     "https://xn--t8j597j6jd.net/blog/3325",
+     "https://zerokon.info/wedding-quote-negotiation"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 契約 前 確認事項": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_23.html",
+     "https://zexy.net/article/app001912024/",
+     "https://www.bia.or.jp/checkpoint/",
+     "https://www.faq.kokusen.go.jp/faq/show/487?site_domain=default"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tgn.co.jp/wedding/column/article-178/",
+     "https://www.pref.shiga.lg.jp/shohi/jirei/317769.html",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-cost/budget/09/",
+     "https://www.tgn.co.jp/wedding/column/wedding-cancellation-fee/",
+     "https://pridal.jp/times/articles/keiyaku",
+     "https://cordy.jp/blogs/cordy-magazine/htwp0027",
+     "https://www.nikkei.com/article/DGXMZO26298970Q8A130C1CC0000/",
+     "https://ancie.jp/blog/hall-search/contract-and-quote/application-fee/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 何件 見学 する": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app000000131/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://zexy.net/article/app002203017/",
+     "https://barn148.jp/journal/barnjournal-vol-61/",
+     "https://zexy.net/article/app000000891/",
+     "https://www.bridal-esthe.com/hanayome-note/17790",
+     "https://zexy.net/article/app002109039/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/articles/11650/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/hall-tour/",
+     "https://smakon.jp/marrial/2017/01/23/3716",
+     "https://www.farny.jp/archives/dandori/marriage-manual/58413",
+     "https://tokihana.net/articles/47083/",
+     "https://www.kekkonsikijo.jp/curation/24582/",
+     "https://fam-wedding.com/bridal-fair-when/",
+     "https://www.kokajin-wedding.com/bridalfair/how-many-tours/",
+     "https://www.uniswedding.com/news/2026/01/23/wedding-venue-tour-howmany/",
+     "https://wedding.mynavi.jp/contents/press/detail/post-5/",
+     "https://www.arcenciel-g.jp/column/bridalfair/403",
+     "https://hana-yume.net/howto/landing-bridalfair-plural/",
+     "https://www.bridal-esthe.com/hanayome-note/17790",
+     "https://www.kaihikon.com/note/find-a-ceremonial-place-8",
+     "https://d-d-life.com/wedding-number/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 探し 始める時期": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://hana-yume.net/landing/guide/",
+     "https://zexy.net/article/app002410007/",
+     "https://zexy.net/article/app002507015/?inrlead=article_relatedArticle"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://bloomade.stores.jp/news/68942ec1dfdb47413757c7b5",
+     "https://hana-yume.net/howto/looking-weddinghall/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/timing/",
+     "https://hana-yume.net/howto/wedding-preparation-average/",
+     "https://tokihana.net/articles/46296/",
+     "https://gifukon.jp/howto/wedding-planning/schedule/p6651/",
+     "https://oimoko.com/halfyear/",
+     "https://fam-wedding.com/bridal-fair-when/",
+     "https://bridal-torisetsu.net/season/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/life/517166/",
+     "https://wedding.mynavi.jp/contents/press/detail/post-98/",
+     "https://hana-yume.net/howto/preparation-6months/",
+     "https://gifukon.jp/howto/wedding-planning/schedule/p6645/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 アクセス 遠方ゲスト": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/special_contents/airport/",
+     "https://zexy.net/article/app002508020/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/special_contents/airport/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/enpou/",
+     "https://zexy.net/article/app002211015/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/wedding-hall/",
+     "https://gensenwedding.jp/article/15228",
+     "https://www.styles.jp/news/wedding-hall-access-emphasis/",
+     "https://hatsuneya.jp/note/r2hbr6pxmcxd8brzm8w8e8gyefmxz2",
+     "https://www.kekkonshikijoerabikata.com/15221/",
+     "https://www.miel-cocon.net/info/%E3%80%90%E3%82%B3%E3%83%A9%E3%83%A0%E3%80%91%E9%81%A0%E6%96%B9%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B2%E3%82%B9%E3%83%88%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E9%85%8D%E6%85%AE%E3%81%A8%E3%81%AF%EF%BC%9F/",
+     "https://zexy.net/article/app002508020/",
+     "https://www.mwed.jp/articles/11534/",
+     "https://www.niwaka.com/ksm/radio/wedding/manners/thanks/06/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/525628/",
+     "https://smakon.jp/marrial/2017/01/09/28",
+     "https://kazoku-wedding.jp/howto/wedding-guest-thanks/",
+     "https://team-wedding.piary.jp/magazine/wedding-expenses/e2z37d7xlmpk",
+     "https://soshuen.jp/wedding/column/7080/",
+     "https://www.rakukon.com/howto/ap_money-8/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 料理 試食 チェック": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.tokyo.grand.hyatt.co.jp/wedding/column/tasting/",
+     "https://wedding.mynavi.jp/contents/special_contents/post/",
+     "https://zexy.net/article/app000100333/",
+     "https://zexy.net/article/app002007008/?inrlead=article_relatedArticle"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://le-chic-unjour.com/blog/5645",
+     "https://stpalace.jp/wedding/column/8909",
+     "https://www.tutuwedding.com/faq/cuisine-tasting/",
+     "https://barn148.jp/journal/barnjournal-vol-63/",
+     "https://yamanoue-w.jp/topics/979/",
+     "https://www.tgn.co.jp/wedding/column/article-173/",
+     "https://baum2015.com/blog2/2025/10/14/%E3%82%B3%E3%83%BC%E3%82%B9%E8%A9%A6%E9%A3%9F%E3%81%AE%E9%87%8D%E8%A6%81%E6%80%A7%E3%81%A8%E3%81%AF%EF%BC%9F%E7%B5%90%E5%A9%9A%E5%BC%8F%E5%89%8D%E3%81%AB%E7%A2%BA%E8%AA%8D%E3%81%97%E3%81%9F%E3%81%84/",
+     "https://zexy.net/article/app002007008/",
+     "https://baum2015.com/blog2/2025/10/14/%E3%82%B3%E3%83%BC%E3%82%B9%E8%A9%A6%E9%A3%9F%E3%81%AE%E9%87%8D%E8%A6%81%E6%80%A7%E3%81%A8%E3%81%AF%EF%BC%9F%E7%B5%90%E5%A9%9A%E5%BC%8F%E5%89%8D%E3%81%AB%E7%A2%BA%E8%AA%8D%E3%81%97%E3%81%9F%E3%81%84/",
+     "https://zexy.net/article/app002007008/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.arcenciel-g.jp/column/bridalfair/308",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/fair_contents_06/",
+     "https://hana-yume.net/howto/wedding-fair-tasting/",
+     "https://ancie.jp/blog/hall-search/bridal-fair/tasting-party/",
+     "https://www.styles.jp/news/cuisine-tasting/",
+     "https://stpalace.jp/wedding/column/8909",
+     "https://le-chic-unjour.com/blog/5645",
+     "https://kobewedding27.com/tasting-party",
+     "https://www.tokyo.grand.hyatt.co.jp/wedding/column/tasting/",
+     "https://wedding.mynavi.jp/contents/special_contents/post/",
+     "https://tokihana.net/articles/23440/",
+     "https://wedding-iroha.jp/sisyokukai/",
+     "https://www.bridal-esthe.com/hanayome-note/18514",
+     "https://oimoko.com/bridal_fair_sisyoku/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 プランナー 相性 見極め": {
+   "group": "式場の選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app000100976/",
+     "https://zexy.net/article/app000100687/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.mitte.ne.jp/wedding/column/2914/",
+     "https://baum2015.com/blog2/2026/02/15/%E7%B5%90%E5%A9%9A%E5%BC%8F%E6%89%93%E3%81%A1%E5%90%88%E3%82%8F%E3%81%9B%E3%82%92%E6%88%90%E5%8A%9F%E3%81%AB%E5%B0%8E%E3%81%8F%EF%BC%81%E6%96%B0%E9%83%8E%E6%96%B0%E5%A9%A6%E3%81%8C%E7%9F%A5%E3%82%8B/",
+     "https://zexy.net/article/app002105023/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/21499/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13117493163",
+     "https://www.mwed.jp/community/questions/15437",
+     "https://zexy.net/article/app000100687/",
+     "https://www.tgn.co.jp/wedding/column/article-129/",
+     "https://wedding-media.life-story.app/324/",
+     "https://www.farny.jp/archives/dandori/105177",
+     "https://www.youtube.com/watch?v=vuHMh_d8n2M"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://cordy.jp/blogs/cordy-magazine/rv0026",
+     "https://www.tgn.co.jp/wedding/column/article-129/",
+     "https://terrace-glanz.com/blog/wedding-planner-does-not-fit/",
+     "https://pla-cole.wedding/planners",
+     "https://sikijousagashi.com/planner-change",
+     "https://www.mwed.jp/articles/10675/",
+     "https://www.weddingnews.jp/magazine/162080",
+     "https://dressy.pla-cole.wedding/wedding-planner-change/",
+     "https://strawberry-wedding.jp/articles/5247",
+     "https://www.happibon.jp/blog/planner-change",
+     "https://www.bridal-esthe.com/hanayome-note/15817",
+     "https://www.bridal-esthe.com/hanayome-note/20789",
+     "https://chugoku.1-5jikaiparty.com/blog/06524/"
+    ],
+    "error": ""
+   }
+  },
+  "少人数婚 家族のみ 流れ": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://kazoku-wedding.jp/flow/",
+     "https://zexy.net/article/app002603019/",
+     "https://www.watabe-wedding.co.jp/little_wedding/article/kazokuwedding-nagare/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.watabe-wedding.co.jp/little_wedding/article/kazokuwedding-nagare/",
+     "https://angepatio.com/column/20251014",
+     "https://www.familiarwedding.jp/column/smallwedding-flow",
+     "https://www.weddingpark.net/osusume/small/feature/8/",
+     "https://www.weddingtable.jp/column/small-wedding-ceremony-flow/",
+     "https://wedding.escrit.jp/place/kiyomizu/information/wedding-lab/preparation/wedding-relatives-only-production/",
+     "https://andresortwedding.com/article/1108/2/",
+     "https://zexy.net/article/app002603019/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://weddingtable.jp/column/%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%81%9F%E3%82%89%E3%81%84%E3%81%84%EF%BC%9F%E5%B0%91%E4%BA%BA%E6%95%B0%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AB%E3%81%8B%E3%81%8B%E3%82%8B%E6%BA%96",
+     "https://www.familiarwedding.jp/column/smallwedding-flow",
+     "https://www.vmgfes.com/familywedding_point/",
+     "https://angepatio.com/column/20251014",
+     "https://happyfamilywedding.com/prep_time/",
+     "https://d-d-life.com/wedding-family/",
+     "https://happyfamilywedding.com/wedding_day_schedule/",
+     "https://andresortwedding.com/article/1108/",
+     "https://amore.escrit.jp/howto/wedding-style/family/2158/",
+     "https://www.watabe-wedding.co.jp/little_wedding/article/kazokuwedding-nagare/",
+     "https://7716wedding.com/mag/family-wedding-flow/",
+     "https://smakon.jp/guide/g131",
+     "https://le-chic-unjour.com/blog/5622",
+     "https://xn--t8j597j6jd.net/blog/3331",
+     "https://bridalfair.info/family-flow/"
+    ],
+    "error": ""
+   }
+  },
+  "少人数婚 親族 食事会 違い": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002603019/",
+     "https://zexy.net/article/app002503007/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.smallwedding-navi.effortless-w.jp/post/%E6%8A%AB%E9%9C%B2%E5%AE%B4%E3%81%A8%E9%A3%9F%E4%BA%8B%E4%BC%9A%E3%80%81%E4%BD%95%E3%81%8C%E9%81%95%E3%81%86%E3%81%AE%EF%BC%9F%E5%B0%91%E4%BA%BA%E6%95%B0%E5%A9%9A%E3%81%A7%E9%81%B8%E3%81%B6%E3%81%AA%E3%82%89%E3%81%A9%E3%81%A3%E3%81%A1%EF%BC%9F%E3%80%90%E6%B5%9C%E6%9D%BE%E5%B0%91%E4%BA%BA%E6%95%B0%E5%A9%9A%E3%83%8A%E3%83%93%E3%80%91%E3%80%90",
+     "https://at-hiratsuka.com/news/%E9%A3%9F%E4%BA%8B%E4%BC%9A%E3%82%A6%E3%82%A8%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%EF%BD%9E%E4%BC%9A%E9%A3%9F%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB-%E5%AE%B6%E6%97%8F%E3%81%AE%E3%81%BF-or-%E5%B0%91/",
+     "https://www.kitanomoore.com/wedding/family/",
+     "https://www.familiarwedding.jp/column/smallwedding-flow",
+     "https://zexy.net/article/app002503007/",
+     "https://hana-yume.net/howto/dinner-wedding/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/program/wedding-dinner-party/",
+     "https://barn148.jp/journal/barnjournal-vol-41/",
+     "https://www.weddingpark.net/osusume/small/feature/4/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://zexy.net/article/app002503007/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/program/wedding-dinner-party/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/how-to-select/10/",
+     "https://www.weddingtable.jp/column/%E5%B0%91%E4%BA%BA%E6%95%B0%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AB%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E3%81%97%E3%81%9F%E3%81%84%EF%BC%81%E3%80%8C%E6%8C%99%E5%BC%8F%EF%BC%8B%E9%A3%9F%E4%BA%8B%E4%BC%9A/",
+     "https://www.bridal-hoken.jp/%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%EF%BC%81%E8%A6%AA%E6%97%8F%E4%B8%AD%E5%BF%83%E3%81%A7%E9%81%8E%E3%81%94%E3%81%99%E3%80%8C%E3%81%8A%E9%A3%9F%E4%BA%8B%E4%BC%9A%E3%80%8D%E7%B5%90%E5%A9%9A/",
+     "https://morgan.tagaya.co.jp/blog/blog-4259/",
+     "https://www.familiarwedding.jp/column/smallwedding-flow",
+     "https://at-hiratsuka.com/news/%E9%A3%9F%E4%BA%8B%E4%BC%9A%E3%82%A6%E3%82%A8%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%EF%BD%9E%E4%BC%9A%E9%A3%9F%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%81%AE%E5%AE%B6%E6%97%8F%E3%81%AE%E3%81%BF%E3%83%BB/",
+     "https://hana-yume.net/howto/dinner-wedding/",
+     "https://wedding.mynavi.jp/contents/special_contents/shoninzu01/",
+     "https://hana-yume.net/howto/familywedding-content/",
+     "https://zexy.net/article/app000100892/",
+     "https://zexy.net/article/app002104302/",
+     "https://www.watabe-wedding.co.jp/little_wedding/article/kazokuwedding-nagare/",
+     "https://www.weddingtable.jp/column/smallwedding-cost/",
+     "https://bridalfair.info/relatives-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "フォトウェディング 前撮り 後撮り 違い": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002011023/",
+     "https://www.photo-wedding.net/column/advance_taking/",
+     "https://www.photorait.net/special/411"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://easy.watabe-wedding.co.jp/blogs/column/photowedding-005",
+     "https://www.photorait.net/special/411",
+     "https://zexy.net/mar/manual/photo_kiso/chapter2.html",
+     "https://www.rakukon.com/howto/ap_phot-05/",
+     "https://kyoto-keyaki.com/column/14355/",
+     "https://enishi.b-pictures.jp/column/2900/",
+     "https://brapla.com/column/photos/ba924925-70dc-45ee-bb33-27cc328e8c1a"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://photo.decollte.co.jp/stores/22/blogs/15191",
+     "https://photo.decollte.co.jp/media/8",
+     "https://www.weddingpark.net/magazine/8834/",
+     "https://www.photorait.net/special/411",
+     "https://bloomade.com/news/12027/",
+     "https://studio-focus.jp/column/difference-kobe-photo-wedding/",
+     "https://kyoto-keyaki.com/column/14355/",
+     "https://www.photo-wedding.net/column/advance_taking/",
+     "https://emorma.com/column/3283/",
+     "https://www.uniswedding.com/news/2026/04/13/%E5%89%8D%E6%92%AE%E3%82%8A%E3%83%BB%E5%BE%8C%E6%92%AE%E3%82%8A%E3%83%BB%E3%83%95%E3%82%A9%E3%83%88%E3%82%A6%E3%82%A7%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%AE%E9%81%95%E3%81%84%E3%81%A8%E3%81%AF/?doing_wp_cron=1779181785.6010329723358154296875"
+    ],
+    "error": ""
+   }
+  },
+  "フォトウェディング ロケーション 選び方": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://photo-jellish.jp/location/",
+     "https://weddingphoto.onestyle.co.jp/howto/column260",
+     "https://wedding.mynavi.jp/photo/column_info/location_photo/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://photowedding-tokyo.com/column/location-thinking/",
+     "https://photo.decollte.co.jp/media/3",
+     "https://laquan.net/topics/useful14.html",
+     "https://zexy.net/navi/photo_wedding/manual01.html",
+     "https://www.rweddings.jp/dera_wedding/post-1614183690/",
+     "https://weddingphoto.onestyle.co.jp/howto/column260",
+     "https://wedding.mynavi.jp/photo/column_info/location_photo/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://photo.decollte.co.jp/media/84",
+     "https://photo.decollte.co.jp/media/140",
+     "https://zexy.net/navi/photo_wedding/manual01.html",
+     "https://www.studio-palette.com/howto_info/odekake-howto_info/477907.html",
+     "https://www.photorait.net/special/403",
+     "https://weddingphoto.onestyle.co.jp/howto/column260",
+     "https://24towedding.jp/column/d5c96e7c-889f-49b3-855e-9bb06db83417",
+     "https://the-sky-wedding.com/location-ranking/",
+     "https://www.resortwedding.net/okinawa/column/photo-wedding-location-recommend/",
+     "https://www.studio-palette.com/howto_info/odekake-howto_info/541101.html",
+     "https://www.studio-palette.com/factory_info/531074.html",
+     "https://platinumstyle-invi.jp/maedori/studio/",
+     "https://www.studio-palette.com/howto_info/bridal-howto_info/544596.html",
+     "https://inaiwedding.jp/photowedding-guide-2025/",
+     "https://www.ushers-photo.com/article/wasoyosochigai/",
+     "https://momonawedding.com/info/photowedding-kimono-233/",
+     "https://wedding-ave.com/location-ranking/"
+    ],
+    "error": ""
+   }
+  },
+  "入籍のみ 結婚式 しない 後悔": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002308007/",
+     "https://newscast.jp/news/0605134"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.weddingnews.jp/magazine/138242",
+     "https://www.niwaka.com/ksm/radio/wedding/ready/situation/11/",
+     "https://www.niwaka.com/ksm/radio/wedding/ready/situation/02/",
+     "https://www.first-wedding.net/photo/style/style19/",
+     "https://gifukon.jp/howto/wedding-styles/about/p9399/",
+     "https://www.watabe-wedding.co.jp/photo/article/photowedding-kokai/",
+     "https://cordy.jp/blogs/cordy-magazine/rv0007",
+     "https://anny.gift/mag/renai/%E3%83%95%E3%82%A9%E3%83%88%E3%82%A6%E3%82%A7%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%AE%E3%81%BF%E3%81%A3%E3%81%A6%E3%81%82%E3%82%8A%EF%BC%9F%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%82%92%E6%8C%99%E3%81%92/",
+     "https://okinawa-wedding.online/photowedding-guide/regretted-photowedding/"
+    ],
+    "error": ""
+   }
+  },
+  "神前式 チャペル 人前式 違い": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app000101056/",
+     "https://zexy.net/article/app002301037/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tgn.co.jp/wedding/column/jinzenshiki/",
+     "https://hana-yume.net/howto/109191/",
+     "https://wakon-style.jp/iroha/6534/",
+     "https://kimono.tagaya.co.jp/news/jinja_ceremony/detail/5262",
+     "http://u-wedding.jp/marriage/shinzenshiki/",
+     "https://fam-wedding.com/kyoshiki-style/",
+     "https://www.bridal-style.net/column/773",
+     "https://www.kusatani.com/lalala/202604173390/",
+     "https://www.shinto-ceremony.com/base/christianity.html"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 少人数 何人から": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/wedding/ready/theme/09/",
+     "https://www.watabe-wedding.co.jp/little_wedding/article/shoninzukon/",
+     "https://zexy.net/article/app002603019/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.weddingtable.jp/column/small-wedding-ratio-merit-demerit/",
+     "https://www.watabe-wedding.co.jp/little_wedding/article/shoninzukon/",
+     "https://www.smallwedding-navi.effortless-w.jp/post/%E5%B0%91%E4%BA%BA%E6%95%B0%E5%A9%9A%E3%81%AF%E4%BD%95%E4%BA%BA%E3%81%BE%E3%81%A7%EF%BC%9F%E3%81%A9%E3%81%93%E3%81%BE%E3%81%A7%E6%8B%9B%E5%BE%85%E3%81%99%E3%82%8B%EF%BC%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%82%8B%E7%96%91%E5%95%8F%E3%82%92%E8%A7%A3%E6%B1%BA%E3%80%90%E6%B5%9C%E6%9D%BE%E5%B0%91%E4%BA%BA%E6%95%B0%E5%A9%9A%E3%83%8A%E3%83%93%E3%80%91-1",
+     "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGyTvP4qW-VV8VukmrSeIbE53yQnOU6Nc_LFwFJ-MdNJ_IuwXkDdTu7dPJS7uRdgF4dzNK0q_7DVa-rUmqsheDPfd55i8KG4-1JhAEvyllvPmlmT_ZpbtyHiI4kuelQW186Ym8PoYqZ2jk=",
+     "https://www.tgn.co.jp/wedding/column/article-small-wedding-how-far-call/",
+     "https://kazokukon.hajimete-guide.jp/articles/articles-448/",
+     "https://happo-en.com/wedding/topics/169/?wovn=en"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/feature/smallwedding",
+     "https://wedding.mynavi.jp/contents/special_contents/shoninzu01/",
+     "https://www.mwed.jp/articles/12323/",
+     "https://brass.ne.jp/media/wedding-small-number-people/",
+     "https://www.blestoncourt.com/wedding/small-wedding/",
+     "https://smakon.jp/marrial/2021/07/19/51607",
+     "https://smakon.jp/guide/g89",
+     "https://amore.escrit.jp/howto/wedding-style/small/105/",
+     "https://family-wedding.info/media/294/"
+    ],
+    "error": ""
+   }
+  },
+  "フォトウェディング 衣装 持ち込み": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://tokyo-bay.photowhite.jp/faq/",
+     "https://www.s-claire.jp/qa/",
+     "https://studio-nature.jp/faq/",
+     "https://studio-focus.jp/faq/",
+     "https://www.best-anniversary.co.jp/studiophotopark/wedding/kanto/",
+     "https://www.imagegraph.jp/home/wayousou-plan/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://savetheworld.jp/topics/bringing-in-a-wedding-dress/",
+     "https://brapla.com/column/photos/cfba7788-668a-4ce2-b2ed-6c67abd070aa",
+     "https://shu-myth.com/information/blog/%E3%83%95%E3%82%A9%E3%83%88%E3%82%A6%E3%82%A7%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%AF%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E6%8C%81%E3%81%A1%E8%BE%BC%E3%82%81%E3%82%8B%EF%BC%9F%E7%A2%BA%E8%AA%8D/",
+     "https://momonawedding.com/info/bringing-your-own-items-5672/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1388540398",
+     "https://www.mwed.jp/articles/7721/",
+     "https://www.studio-palette.com/howto_info/bridal-howto_info/475208.html",
+     "https://hana-yume.net/howto/bringing-fee/",
+     "https://cordy.jp/blogs/cordy-magazine/htwp0054"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.photorait.net/search/kodawari_search/33",
+     "https://brapla.com/column/photos/cfba7788-668a-4ce2-b2ed-6c67abd070aa",
+     "https://savetheworld.jp/topics/photo_wedding_point/",
+     "https://enishi.b-pictures.jp/column/1704/",
+     "https://abba-wedding.com/topics/202008071415_7491.html/%E3%83%95%E3%82%A9%E3%83%88%E3%82%A6%E3%82%A7%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%AB%E6%8C%81%E3%81%A1%E8%BE%BC%E3%81%BF%E3%81%AF%E3%81%82%E3%82%8A%EF%BC%9F%EF%BC%9F/",
+     "https://savetheworld.jp/topics/free_carry_on/"
+    ],
+    "error": ""
+   }
+  },
+  "海外 リゾート ウェディング 国内 比較": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/resort/special_contents/abroad_hikaku/",
+     "https://foreign.weddingpark.net/guide/resort/",
+     "https://www.watabe-wedding.co.jp/guide/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.jtb.co.jp/news/list/kaigai/kg_oth2/kg_oth3/wedding_0008",
+     "https://www.b-yasunaga.com/blog-osaka/archives/17207",
+     "https://foreign.weddingpark.net/guide/resort/",
+     "https://zexy.net/article/app002302039/",
+     "https://wedding.mynavi.jp/contents/resort/special_contents/abroad_hikaku/",
+     "https://www.jtb.co.jp/news/list/kaigai/kg_oth2/kg_oth3/wedding_0008",
+     "https://hana-yume.net/howto/resortwd-cost/",
+     "https://wedding.escrit.jp/place/kiyomizu/information/wedding-lab/preparation/domestic-resort-wedding-merit-demerit/",
+     "https://foreign.weddingpark.net/guide/resort/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/resort/03/",
+     "https://zexy.net/navi/abroad/manual22.html",
+     "https://wedding.mynavi.jp/contents/resort/special_contents/abroad_hikaku/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/resort/03/",
+     "https://wedding.mynavi.jp/contents/resort/special_contents/abroad_hikaku/",
+     "https://www.tgn.co.jp/wedding/column/article-386/",
+     "https://hana-yume.net/howto/wedding-overseas-domestic/",
+     "https://hana-yume.net/howto/108101/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/resort/01/",
+     "https://www.watabe-wedding.co.jp/resort_wedding_overseas/",
+     "https://foreign.weddingpark.net/guide/resort/",
+     "https://xn--t8j597j6jd.net/blog/2433",
+     "https://ginza-cruise.co.jp/wedding/knowhow/article-35/",
+     "https://foreign.weddingpark.net/trend/187/",
+     "https://wakon-style.jp/iroha/8664/",
+     "https://www.privatebeach.jp/column/overseas-wedding-price/",
+     "https://www.arluis.com/resortwedding/wedding-hikaku/",
+     "https://cosmo-wedding.com/domestic_or_abroad.php"
+    ],
+    "error": ""
+   }
+  },
+  "二次会 なし 結婚式 披露宴 のみ": {
+   "group": "式のスタイル・少人数婚とフォト",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002110039/",
+     "https://www.spring-note.com/wedding-no-after-party/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://2-hompo.com/blog/%E7%B5%90%E5%A9%9A%E5%BC%8F%E4%BA%8C%E6%AC%A1%E4%BC%9A%E3%81%AA%E3%81%97%E3%81%A8%E3%81%84%E3%81%86%E9%81%B8%E6%8A%9E%E8%82%A2%E3%81%AF%E3%81%82%E3%82%8A%EF%BC%9F%E4%BA%8C%E6%AC%A1%E4%BC%9A%E3%82%92/",
+     "https://propose-to.me/party-needs",
+     "https://wedding.kaijosearch.com/article/kanji-nashi/",
+     "https://www.nijikaidress.jp/blog/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E4%BA%8C%E6%AC%A1%E4%BC%9A%E3%82%92%E3%81%97%E3%81%AA%E3%81%84%E9%81%B8%E6%8A%9E%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%83%87%E3%83%A1%E3%83%AA",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10121735145",
+     "https://www.keihin-park.com/hpgen/HPB/entries/7526.html",
+     "https://magazine.partyhunter.jp/event/7372/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/wedding/ready/theme/42/",
+     "https://www.piary.jp/prize/articles/a0028/",
+     "https://www.bridal-esthe.com/hanayome-note/9910",
+     "https://wedding.kaijosearch.com/article/kanji-nashi/",
+     "https://www.kekkonshikijoerabikata.com/7619/",
+     "https://www.nijikaidress.jp/blog/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E4%BA%8C%E6%AC%A1%E4%BC%9A%E3%82%92%E3%81%97%E3%81%AA%E3%81%84%E9%81%B8%E6%8A%9E%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%83%87%E3%83%A1%E3%83%AA",
+     "https://www.keihinshop.com/guide/wedding-second-party-skip-guide/",
+     "https://propose-to.me/party-needs",
+     "https://www.mwed.jp/community/questions/18489"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 見学 予約 流れ": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/contents/guide/party/help_kengakuyoyaku.html",
+     "https://hana-yume.net/landing/findBridalFair/",
+     "https://hana-yume.net/support/flow/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/articles/11764/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/hall-tour/",
+     "https://wedding.mynavi.jp/contents/special_contents/step3/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/contents_11/",
+     "https://hana-yume.net/howto/tour-reservation/",
+     "https://gifukon.jp/howto/gifu-wedding-venues/selection/p6741/",
+     "https://terrace-glanz.com/blog/wedding-tour-reservation/",
+     "https://amore.escrit.jp/howto/preparation/4229/",
+     "https://marriage.nicocha.com/fair/time"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 見学 服装 持ち物": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app000000131/",
+     "https://zexy.net/article/app000100987/",
+     "https://zexy.net/wedding/bridalfair/halltour/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.mwed.jp/articles/11764/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/524715/",
+     "https://wedding.mynavi.jp/contents/press/detail/post-7/",
+     "https://hana-yume.net/howto/bridalfair-clothes/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/fairdate/",
+     "https://hatsuneya.jp/note/q7me39z9zxrgyuwk2476ywsa9t2gts",
+     "https://haruwedding.com/shikijyou-kenngaku-list/",
+     "https://happyfamilywedding.com/bridal_fair_clothes_items/",
+     "https://www.miel-cocon.net/info/%E3%80%90%E3%82%B3%E3%83%A9%E3%83%A0%E3%80%91%E3%83%96%E3%83%A9%E3%82%A4%E3%83%80%E3%83%AB%E3%83%95%E3%82%A7%E3%82%A2%E3%81%A8%E3%81%AF%EF%BC%9F%E6%8C%81%E3%81%A1%E7%89%A9%E3%82%84%E6%9C%8D%E8%A3%85/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 見学 当日 契約 しない": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.elm.cc/wedding/fair/697/2026/09/30/",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_23.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hana-yume.net/howto/bridalfair-caution/",
+     "https://zexy.net/article/app002201014/",
+     "https://www.wedlink.jp/magazine/111",
+     "https://cinderella-plan.jp/qa/questions/1527",
+     "https://www.rakukon.com/howto/prepare-69/",
+     "https://oimoko.com/bridal_fair_tyuui/",
+     "https://emi-wedding.com/regret/",
+     "https://cyakkariwedding.com/weddinghallsearch/kotowarikata/",
+     "https://d-d-life.com/wedding-no-today-contract/",
+     "https://ancie.jp/blog/hall-search/contract-and-quote/application-fee/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/bridal-fair/07/",
+     "https://zexy.net/article/app002508012/",
+     "https://fam-wedding.com/cancel-a-wedding/",
+     "https://www.tutuwedding.com/faq/_prompt-decision/",
+     "https://www.jadee.net/column/bridal-fair/",
+     "https://wedding-concie.com/tokuten-point/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 持ち込み 禁止 理由": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://note.com/tokihanainc/n/n75a1727197bb",
+     "https://wedding.mynavi.jp/premium/juku/Backstage/3040/",
+     "https://ooita.fuku-kaihikon.com/blog/881/",
+     "https://zexy.net/article/app002004004/?inrlead=article_relatedArticle",
+     "https://www.tokyodome-hotels.co.jp/press/pdf/wedding_news_20240117.pdf"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://tokyo.1-5jikaiparty.com/blog/05459/",
+     "https://www.bridal-hoken.jp/%E5%85%83%E3%83%97%E3%83%A9%E3%83%B3%E3%83%8A%E3%83%BC%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B%E8%B1%86%E7%9F%A5%E8%AD%98%E3%80%9C%E7%B5%90%E5%A9%9A%E5%BC%8F%E5%A0%B4%E3%81%AE%E6%8C%81%E3%81%A1%E8%BE%BC/",
+     "https://note.com/tenpubridal/n/n8870b2bda72d",
+     "https://wedding-seminar.com/2018/02/18/whats_faree-5/",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11280768736",
+     "https://cordy.jp/blogs/cordy-magazine/htwp0054",
+     "https://orifuri.com/topic/blog/?p=669",
+     "https://www.farbeco.jp/weddingmart/archives/12370",
+     "https://zexy.net/article/app002004004/",
+     "https://pridal.jp/times/articles/motikomi_yasuku",
+     "https://www.angelexpress.jp/blog/385",
+     "https://www.freedam.jp/column/4088/",
+     "https://tokihana.net/articles/10078/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/special_contents/mochikomi_01/",
+     "https://cordy.jp/blogs/cordy-magazine/htwp0054",
+     "https://zexy.net/article/app002004004/",
+     "https://tokihana.net/articles/10078/",
+     "https://www.bridal-esthe.com/hanayome-note/16189",
+     "https://www.first-film.com/wedding-other-29/",
+     "https://marry.gift/blog/archives/2901",
+     "https://wedding-seminar.com/2018/02/18/whats_faree-5/",
+     "https://weddingclip.me/column/2",
+     "https://www.mwed.jp/articles/247/",
+     "https://hana-yume.net/howto/kekkonshiki-mochikomi/"
+    ],
+    "error": ""
+   }
+  },
+  "ウェディングドレス 持ち込み 手数料": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://zexy.net/article/app002004004/",
+     "https://wedding.mynavi.jp/contents/special_contents/mochikomi_01/",
+     "https://www.weddingnews.jp/magazine/67819",
+     "https://www.weddingtable.jp/column/wedding-dress-bring/",
+     "https://www.jadee.net/column/wedding-dress-rental/",
+     "https://wedding.mynavi.jp/dress/article/shop-teikei/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://hana-yume.net/howto/bringing-fee/",
+     "https://pridal.jp/times/articles/motikomi_yasuku",
+     "https://www.niwaka.com/ksm/radio/wedding/dress/buying-rental/07/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://cordy.jp/blogs/cordy-magazine/rv0022",
+     "https://www.niwaka.com/ksm/radio/wedding/dress/buying-rental/07/",
+     "https://cordy.jp/blogs/cordy-magazine/htwp0054",
+     "https://wedding.mynavi.jp/contents/special_contents/mochikomi_01/",
+     "https://hana-yume.net/howto/bringing-fee/",
+     "https://wedding.mynavi.jp/dress/article/shop-teikei/",
+     "https://ancie.jp/blog/before/cost/cost-saving-wedding-dress/",
+     "https://omobic.com/helpful/items/wedding-item-price.html",
+     "https://belle-dress.com/blogs/wedding-blog/bring-in-fee",
+     "https://hana-yume.net/howto/kekkonshiki-mochikomi/",
+     "https://tokihana.net/articles/31886/",
+     "https://brapla.com/column/bringing/6e879e7b-6568-4efe-8aab-98b880ee813c",
+     "https://www.tutu-dress.com/column/dress-partner-store/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 キャンセル料 いつから": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nagoyakankohotel.co.jp/wedding/kiyaku/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.tgn.co.jp/wedding/column/wedding-cancellation-fee/",
+     "https://www.bia.or.jp/wp-content/uploads/2017/03/c9266f05bfd4ad4f5716f6e78044f379.pdf",
+     "https://st-amour.co.jp/column/kekkonnshiki-kyannseruryou/",
+     "https://www.pref.shiga.lg.jp/shohi/17222.html",
+     "https://shin-shimizu.com/2026/09/28/qa-cancel-ryo/",
+     "https://yamanaka-bengoshi.jp/2026/09/20/kekkonshikijo-cancel-ryou/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tgn.co.jp/wedding/column/article-178/",
+     "https://www.tgn.co.jp/wedding/column/wedding-cancellation-fee/",
+     "https://www.arcenciel-g.jp/column/bridalfair/275",
+     "https://wedding.mynavi.jp/contents/press/detail/post-40/",
+     "https://www.wedlink.jp/magazine/180",
+     "https://www.bridal-hoken.jp/cancellation-on-the-day/",
+     "http://www.weddingtable.jp/column/%E7%B5%90%E5%A9%9A%E5%BC%8F%E3%81%AE%E5%BB%B6%E6%9C%9F%E3%82%84%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E6%96%99%E3%81%AF%E3%81%84%E3%81%A4%E3%81%8B%E3%82%89%E3%81%8B%E3%81%8B%E3%82%8B%EF%BC%9F/",
+     "https://marry.gift/blogs/posts/3455",
+     "https://kekkonshikisaito.com/46321/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 日程 変更 できる": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.nagoyakankohotel.co.jp/wedding/kiyaku/",
+     "https://www.newotani.co.jp/makuhari/faq/wedding1/",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_23.html"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/press/detail/post-40/",
+     "https://zexy.net/article/app002301029/",
+     "https://www.tgn.co.jp/wedding/column/wedding-cancellation-fee/",
+     "https://www.weddingtable.jp/column/wedding-postpone-cancellation-fee/",
+     "https://lify.jp/non-life/others/bridal/article-86184/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/press/detail/post-40/",
+     "https://www.tgn.co.jp/wedding/column/wedding-cancellation-fee/",
+     "https://www.weddingtable.jp/column/wedding-postpone-cancellation-fee/",
+     "https://gifukon.jp/howto/gifu-wedding-venues/costs/p6739/",
+     "https://wedding.mynavi.jp/contents/special_contents/enkimuryo/",
+     "https://zexy.net/article/app002301029/",
+     "https://www.festaria.jp/journal/column/439",
+     "https://www.s-roses.com/blog/10832"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 仮予約 期限": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/press/detail/post-11/",
+     "https://www.resorts.co.jp/senaga/wedding/faq"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/how-to-select/51/",
+     "https://hana-yume.net/howto/tentative-reservation/",
+     "https://zexy.net/article/app001909022/",
+     "https://smakon.jp/marrial/2017/01/08/1004",
+     "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1113544811"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://wedding.mynavi.jp/contents/press/detail/post-11/",
+     "https://hana-yume.net/howto/tentative-reservation/",
+     "https://zexy.net/article/app001909022/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/how-to-select/51/",
+     "https://how-to-inc.com/wedding-hall-tentative-reservation-18893",
+     "https://www.kokajin-wedding.com/bridalfair/tentative-book/",
+     "https://fam-wedding.com/wedding-contract/"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式 契約 後 追加費用 不安": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2015_23.html",
+     "https://zexy.net/mar/manual/kiso_okane/chapter2.html",
+     "https://www.faq.kokusen.go.jp/faq/show/489?site_domain=default"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://tokihana.net/articles/17754/",
+     "https://ancie.jp/blog/hall-search/contract-and-quote/price-increase/",
+     "https://zexy.net/article/app002102023/",
+     "https://villa-angelica.com/news/wedding-quote/",
+     "https://www.mwed.jp/articles/11757/",
+     "https://hana-yume.net/howto/estimate-list/",
+     "https://www.pref.shiga.lg.jp/shohi/jirei/317769.html",
+     "https://note.com/shinzato/n/n1af658ab65a4"
+    ],
+    "error": ""
+   }
+  },
+  "結婚式場 ブライダルフェア 参加 メリット": {
+   "group": "見学・持ち込み・契約前の不安",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jadee.net/column/bridal-fair/",
+     "https://wedding.mynavi.jp/contents/special_contents/post/",
+     "https://withthestyle.fuwel.wedding/fair/2691/3948120/"
+    ],
+    "error": ""
+   },
+   "Gemini": {
+    "urls": [],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tgn.co.jp/wedding/column/article-124/",
+     "https://hana-yume.net/howto/bridalfair-nanken/",
+     "https://www.tgn.co.jp/wedding/column/article-138/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/bridal-fair/02/",
+     "https://www.tgn.co.jp/wedding/column/article-94/",
+     "https://www.anniversaire.co.jp/brand/omotte/magazine/preparation/12087/",
+     "https://wedding.hotel-chinzanso-tokyo.jp/for-wedding/fair/fair_contents_01/",
+     "https://www.niwaka.com/ksm/radio/wedding/wedding-place/bridal-fair/01/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

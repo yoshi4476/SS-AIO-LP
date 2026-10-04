@@ -171,18 +171,18 @@
   "費用・料金": {
    "answers": 29,
    "portal": 29,
-   "other": 10,
-   "maker": 4,
    "clinic": 17,
    "media": 19,
+   "other": 10,
+   "maker": 4,
    "video": 3
   },
   "式場の選び方": {
    "answers": 26,
-   "portal": 25,
    "public": 4,
-   "media": 16,
+   "portal": 25,
    "clinic": 15,
+   "media": 16,
    "other": 4,
    "video": 2
   },
