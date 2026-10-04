@@ -12,7 +12,8 @@ effect_ab が出すが、悪化した記事もそのまま残る。「当てる�
   python scripts/rewrite_rollback.py            # 判定だけ
   python scripts/rewrite_rollback.py --write    # 戻す
 出す印: ROLLBACK_OK=yes / ROLLED_BACK=<本> / KEPT=<本>
-戻せるのは、直したときに before_title を台帳（auto_fix.jsonl）に残した分だけ。
+戻せるのは、直したときに before_title（題の直し）か before_path（compete の本文の直し）を
+台帳（auto_fix.jsonl）に残した分だけ。
 判定した分は data/rollback_decisions.json に残し、二度は判定しない。
 """
 import argparse
@@ -41,13 +42,31 @@ def entries():
             d = json.loads(ln)
         except ValueError:
             continue
-        if d.get("by") == "auto_rewrite" and d.get("kind") == "title" and d.get("ok") \
-                and d.get("before_title") and str(d.get("note", "")).startswith("直しました"):
+        if d.get("by") != "auto_rewrite" or not d.get("ok") or not str(d.get("note", "")).startswith("直しました"):
+            continue
+        # compete（競合との差を埋める書き直し）は本文を足す直しなので、直す前の原稿ごと戻す
+        if (d.get("kind") == "title" and d.get("before_title")) or (d.get("kind") == "compete" and d.get("before_path")):
             out.append(d)
     return out
 
 
+def restore_file(slug, d):
+    """直す前の原稿へ戻す。直した後にだれかが触っていたら戻さない（その直しまで消してしまう）"""
+    import hashlib
+    p = ROOT / "articles" / f"{slug}.md"
+    src = ROOT / d["before_path"]
+    if not p.is_file() or not src.is_file():
+        return False
+    if hashlib.sha1(p.read_bytes()).hexdigest() != d.get("after_sha"):
+        print(f"要対応: {slug} は直した後に別の変更が入ったため、自動では戻しません（{d['before_path']} と見比べてください）")
+        return False
+    p.write_bytes(src.read_bytes())
+    return True
+
+
 def restore(slug, d):
+    if d.get("kind") == "compete":
+        return restore_file(slug, d)
     p = ROOT / "articles" / f"{slug}.md"
     t = p.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n", t, re.S)
@@ -106,7 +125,8 @@ def main():
             with LOG.open("a", encoding="utf-8") as f:
                 f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "rewrite_rollback",
                                     "slug": slug, "kind": "rollback", "ok": True,
-                                    "note": f"表示×{me[0]:.2f}（対照×{base:.2f}）のため元のタイトルへ戻した"},
+                                    "note": f"表示×{me[0]:.2f}（対照×{base:.2f}）のため"
+                                    + ("直す前の原稿へ戻した" if d.get("kind") == "compete" else "元のタイトルへ戻した")},
                                    ensure_ascii=False) + "\n")
         else:
             kept += 1

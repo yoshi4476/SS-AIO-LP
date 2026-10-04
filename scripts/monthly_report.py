@@ -2347,6 +2347,18 @@ def render(d, a):
     except Exception as e:
         diag_html = f'<p class="note">診断を作れませんでした: {str(e)[:80]}</p>'
 
+    # 競合と比べた現在地と次の打ち手（compete.py が月初に測り、負けている語の差を出す）。測定が無い社は節を出さない
+    compete_pages = ""
+    try:
+        import compete as _cp
+        _cpg = _cp.report_html(SITE_ID, client=_sites_mod.is_client(SITE_ID))
+        if _cpg:
+            _h = '<div class="sheet"><div class="sec"><span class="no">07</span><h2>競合と比べた現在地（AI・検索）{}</h2><div class="gold"></div></div>{}</div>'
+            compete_pages = _h.format("", _cpg[0]) + _h.format("（続き）", _cpg[1])
+    except Exception as e:
+        compete_pages = (f'<div class="sheet"><p class="note">競合との比較を作れませんでした: '
+                         f'{str(e)[:80].replace("<", "")}</p></div>')
+
     # 来月つくるもの。盤面の空き・止まっている記事・食い合いから機械が作る。
     # 1本ずつ人が選ぶと同じマスに重なり、空いたマスが残る（実測で
     # クリニック21本に対し工務店のAIOは0本だった）
@@ -2914,6 +2926,8 @@ CDNやWAFがその手前で落としていれば届かない。ここが塞が�
 Googleの公式ガイドが効くものとして挙げているのも「独自の視点」「一般論に留まらない内容」
 「クロールできること」の3つだけで、自社で集計した一次データはこの3つすべてに同時に効きます。</div>
 </div>
+
+{compete_pages}
 
 <!-- ページ: 改善点の一覧と、その直し方 -->
 <div class="sheet">

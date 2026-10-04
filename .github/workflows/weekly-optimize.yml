@@ -768,6 +768,19 @@ jobs:
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi
 
+      # お客様の競合比較（gaps.json）は public に置かないため、月次が残したキャッシュから戻す
+      - name: 競合比較の控えを戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/compete
+            !data/compete/ai-lab
+            !data/compete/corporate
+            !data/compete/subsidy
+            !data/compete/_usage.json
+          key: compete-${{ github.run_id }}
+          restore-keys: compete-
+
       # 見出しに質問形が無い記事へ、2〜3本だけ質問形の見出しを入れる（本数・順番は変えない）
       - name: 見出しを質問形へ（週2本）
         env:
@@ -782,6 +795,9 @@ jobs:
           # 同じ語で自社の2本が競り合うが主題は別（統合しない）組を、題の付け分けで直す。
           # 公開・改題から28日たっていない記事は順位が落ち着くまで待つ
           python scripts/auto_rewrite.py --write --kind split --limit $n --budget-min 10 2>&1 | tail -6 || true
+          # 競合がAIの出典に出て自社が出ない語の差（compete --gaps が月初に出す）を埋める。週2本まで。
+          # 一次データが無いと勝てない語は書き直さず、findings（compete --check）が要対応で知らせる
+          python scripts/auto_rewrite.py --write --kind compete --limit $n --budget-min 15 2>&1 | tail -6 || true
 
       # 多言語の要約ページ（英語・中国語・韓国語）。**sites/<id>.json に languages を書いた社だけ**作る
       # （指示が無ければ何もしない）。AIが切り出す単位だけを訳し、数字が1つでも変われば捨てる
@@ -805,7 +821,11 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
-          python scripts/rewrite_rollback.py --write 2>&1 | tail -8 || true
+          # compete の本文の直しも28日・対照群比で判定し、効かなければ直す前の原稿へ戻す（後から別の直しが入った記事は要対応）
+          mkdir -p automation/logs
+          out=$(python scripts/rewrite_rollback.py --write 2>&1) || true
+          echo "$out" | tail -8
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
           # 書き直しを2回しても一次性が80点に届かない記事を、同じ手法・業種の近い記事へ（表示・クリックが少ないものだけ）
           python scripts/retire_stale.py --quality --write --limit 1 --budget-min 15 2>&1 | tail -8 || true

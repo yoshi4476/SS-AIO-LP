@@ -347,17 +347,34 @@ def answer_text(fn, q):
     return TEXT.get((getattr(fn, "__name__", fn), q), "")
 
 
+def cache_file(name, q):
+    import hashlib
+    return CACHE_DIR / name / (hashlib.md5(("%s\n%s" % (name, q)).encode("utf-8")).hexdigest() + ".json")
+
+
+def cached(name, q, days=CACHE_DAYS):
+    """キャッシュにある答え（出典URL）。無い・古いなら None。
+    課金の前に「この問いは新しく聞くことになるか」を数えるため（compete の月の上限）。days=None は古さを問わない"""
+    import time as _t
+    p = cache_file(name, q)
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    if days is not None and _t.time() - d.get("at", 0) >= days * 86400:
+        return None
+    return d.get("urls") or []
+
+
 def _cached(name, fn):
     """同じエンジンに同じ質問をしたら、30日は前の答え（出典URL）を使う。
     語の調査（ai_kw_research）・引用の実測（週次/月次）・共起語（cooccur）が同じ語を
     別々に聞いていて、同じ課金を何度もしていた。失敗（例外）はキャッシュしない。
     答えの本文も残す（読み分けの根拠を後から確かめられるように）"""
-    import hashlib
     import time as _t
 
     def wrap(q):
-        key = hashlib.md5(f"{name}\n{q}".encode("utf-8")).hexdigest()
-        p = CACHE_DIR / name / f"{key}.json"
+        p = cache_file(name, q)
         if p.is_file():
             try:
                 d = json.loads(p.read_text(encoding="utf-8"))

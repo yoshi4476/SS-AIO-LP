@@ -17,6 +17,7 @@
 | 表示ゼロの古い記事の整理 | `retire_stale.py --write` | 8.11 |
 | 内部リンクの自動追加と見直し | `auto_improve.py --write` → `auto_review.py --fix` | 8.6（言い回しの偏り・上限） |
 | AIの出典に自社が入るかの実測 | `ai_cite_check.py`（月次・1サイト20語） | 8.5 の6 |
+| 競合と比べたAIのシェア・負けている理由・差を埋める書き直し | `compete.py --measure / --gaps / --check` → `auto_rewrite.py --kind compete` | 8.17 |
 | 共起語（出典・上位が持つ語） | `cooccur.py` | 8.13 |
 | タイトルの型ごとの実測CTR | `title_patterns.py` | 8.13 |
 | URL検査（未登録の理由） | `index_status.py` | 8.11 |

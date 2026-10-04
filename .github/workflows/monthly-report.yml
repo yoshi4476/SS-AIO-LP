@@ -95,6 +95,56 @@ jobs:
             echo "LEAD_TO_EMAIL=info.ai@7senses.co.jp"
           } > .env
 
+      # 競合比較（compete.py）。お客様の分は public リポジトリに置かない（.gitignore）ので、キャッシュで月をまたぐ。
+      # 自社3サイトと月の回数はコミット済みなので、キャッシュで上書きしない
+      - name: 競合比較の控えを戻す
+        if: steps.gate.outputs.ready == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/compete
+            !data/compete/ai-lab
+            !data/compete/corporate
+            !data/compete/subsidy
+            !data/compete/_usage.json
+          key: compete-${{ github.run_id }}
+          restore-keys: compete-
+
+      # レポートより先に測る（レポートの「競合と比べた現在地」がこの結果を読む）。月初だけ。
+      # 新しく聞く回数をサイトごとの月の上限（既定60・sites/<id>.json の compete.ai_cap）で止め、超えたらキャッシュだけで出して知らせる
+      - name: 競合比較の実測と負けている理由（月初）
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          CLAUDE_CITE_API_KEY: ${{ secrets.CLAUDE_CITE_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
+          mkdir -p automation/logs
+          npm install -g @anthropic-ai/claude-code || true
+          # 課金の前に、何回聞くことになるかを必ず記録する
+          python scripts/compete.py --measure --dry-run 2>&1 | tail -25 || true
+          out=$(python scripts/compete.py --measure 2>&1) || true
+          echo "$out" | tail -25
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          python scripts/compete.py --gaps 2>&1 | tail -25 || true
+
+      - name: 競合比較の控えを残す
+        if: always() && steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/compete
+            !data/compete/ai-lab
+            !data/compete/corporate
+            !data/compete/subsidy
+            !data/compete/_usage.json
+          key: compete-${{ github.run_id }}-monthly
+
       # 管制塔が持つ3サイトそれぞれで発行する。以前はAI集客ラボの分しか
       # 出ておらず、コーポレートと補助金サイトの月次報告が存在しなかった。
       - name: 月次レポート生成・メール送付（サイト単体の詳細版）
@@ -265,7 +315,8 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
           # 1つずつ足す（まとめて渡すと、無いパスが1つあるだけで何も足されない）
-          for p in reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw reports/growth_plan.json docs/growth-plan.md; do
+          # data/compete（お客様の分は .gitignore で外れる）と data/ai_cache（課金して聞いた答え。残さないと翌週また払う）
+          for p in reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw reports/growth_plan.json docs/growth-plan.md data/compete data/ai_cache; do
             git add -- "$p" 2>/dev/null || true
           done
           git diff --cached --quiet || git commit -m "chore(report): 来月のKPI目標を保存"

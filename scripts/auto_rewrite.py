@@ -205,6 +205,76 @@ def aisplit_items(limit=2):
     return rows[:limit]
 
 
+COMPETE_LOCK_DAYS = 28   # effect_ab --rewrites・rewrite_rollback が前後28日で比べる。その間に重ねて直さない
+
+
+def compete_items(limit=2, log=None):
+    """競合がAIの出典に出て自社が出ない語のうち、差が書き直しで埋まるもの（compete --gaps が月次で書く）。
+    一次データが無いと勝てない語（needs_data）は書き直さない（運用者への要対応になる）"""
+    from datetime import date, timedelta
+    since = str(date.today() - timedelta(days=COMPETE_LOCK_DAYS))
+    recent = set()
+    f = Path(log) if log else LOG
+    if f.is_file():
+        for line in f.read_text(encoding="utf-8").splitlines():
+            try:
+                d = json.loads(line)
+            except ValueError:
+                continue
+            if d.get("kind") == "compete" and d.get("ok") and str(d.get("at", ""))[:10] >= since:
+                recent.add(d.get("slug"))
+    rows, seen = [], set()
+    for g in sorted((ROOT / "data" / "compete").glob("*/gaps.json")):
+        try:
+            gd = json.loads(g.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for it in gd.get("items") or []:
+            slug = it.get("slug") or ""
+            if it.get("action") != "rewrite" or not slug or slug in seen or slug in recent \
+                    or not (ROOT / "articles" / f"{slug}.md").is_file():
+                continue
+            seen.add(slug)
+            rows.append({"kind": "compete", "slug": slug, "site": gd.get("site") or site_of(slug), "imp": it.get("imp") or 0,
+                         "gap": it, "why": f"「{it['kw']}」でAIの出典に競合（{'・'.join(it.get('competitors', [])[:2])}）が出て、自社が出ていない"})
+    rows.sort(key=lambda r: -r["imp"])
+    return rows[:limit]
+
+
+def copied_heads(before, after, heads, min_len=10):
+    """競合の見出しを、そのまま本文に写したもの（直す前には無かったもの）"""
+    nz = lambda s: re.sub(r"[\s　、。・「」（）()【】|｜:：!！?？]", "", s or "")
+    a, b = nz(after), nz(before)
+    return [h for h in heads if len(nz(h)) >= min_len and nz(h) in a and nz(h) not in b]
+
+
+def compete_guard(before, after, title0, title1, gap):
+    """compete の書き直しにだけ足す検算（共通の check() の後）。通らない理由を返す（空なら合格）"""
+    if title1 != title0:
+        return "タイトルが変わりました（足りない問いを足す直しで、題は変えない）"
+    more = ext_links(after) - ext_links(before)
+    if more:
+        return "出典のURLが増えました（記事にあった出典だけで書くこと）: " + str(sorted(more)[:2])
+    heads = [h for t in gap.get("their_pages") or [] for h in t.get("heads") or []]
+    cp = copied_heads(before, after, heads)
+    if cp:
+        return "競合の見出しをそのまま写しています: " + " / ".join(cp[:2])
+    if len(after) < len(before) * 0.98:
+        return f"本文が減りました（{len(before)}→{len(after)}字）。足す直しのはずです"
+    return ""
+
+
+def keep_before(slug, raw, after_raw):
+    """28日後に効かなければ戻すため、直す前の原稿を残す（rewrite_rollback が読む）。
+    戻すのは、その後だれも触っていないとき（after_sha が一致）だけ"""
+    import hashlib
+    d = ROOT / "data" / "rewrite_before"
+    d.mkdir(parents=True, exist_ok=True)
+    p = d / f"{slug}@{time.strftime('%Y-%m-%d')}.md"
+    p.write_bytes(raw)
+    return {"before_path": p.relative_to(ROOT).as_posix(), "after_sha": hashlib.sha1(after_raw).hexdigest()}
+
+
 def question_items(limit=4):
     """H2に質問形が1本も無い公開記事（表示の多い順は取らず、古い順）"""
     rows = []
@@ -416,6 +486,16 @@ WHAT = {
               "4. 既存の見出し・本文は消さない。足すだけにする\n"
               "5. 同義語・言い換え（例: 整骨院と接骨院）なら別々の節を作らず、\n"
               "   1つの節でまとめて扱い、両方の呼び方を本文に書く\n"),
+    "compete": ("この記事の狙う語「{kw}」で、AIの回答の出典に競合のページが選ばれ、この記事は選ばれていません。\n"
+                "競合の公開ページと比べて、この記事に足りないものは次のとおりです\n"
+                "（競合の見出しは「どんな問いに答えているか」の手がかりです。見出しも文も写さないこと）:\n{diffs}\n"
+                "1. 足りない問いのうち、この記事の主題に**本当に含まれるもの**だけに答える節（H2またはH3）を足す。\n"
+                "   見出しは自分の言葉で書き、直下に40〜60字の1文結論を置く。主題に含まれなければ足さない\n"
+                "2. 「表」が足りないと出ていれば、この記事にすでにある情報だけで比較表か手順表を1つ置く\n"
+                "3. 新しい数字は、下の登録済みの一次情報だけを使う。出典のURLは足さない（記事にある出典だけを使う）\n"
+                "4. タイトル・keyword・既存の見出しと本文は変えない。足すだけにする\n"
+                "5. どれも主題に含まれなければ、何も変えずに終了する\n"
+                "登録済みの一次情報（この数字以外の新しい数字は書かない）:\n{facts}"),
     "review": ("直前の自動修正で表示回数が落ちています。検索意図とずれた可能性があります。\n"
                "冒頭200字と各H2直下の1文結論を読み、狙う語で検索した人が求めている答えに\n"
                "なっているか確かめてください。ずれていれば直してください。\n"
@@ -808,6 +888,18 @@ def build_prompt(item):
                              "主題に含まれるものだけ節を足す）:\n" + "／".join(miss[:10]))
             except Exception:
                 pass
+    if kind == "compete":
+        gap = item["gap"]
+        names = {"questions": "競合が答えていて、この記事が扱っていない問い", "table": "表",
+                 "fresh": "更新日", "primary": "自社で集計した数字（一次データ）", "length": "文字数（参考。長さは成果を分けない）"}
+        lines = []
+        for dd in gap.get("diffs") or []:
+            det = dd.get("detail")
+            det = "／".join(det) if isinstance(det, list) else str(det)
+            lines.append(f"- {names.get(dd['type'], dd['type'])}: {det}")
+        allowed = "\n".join(f"- {c}" for c in gap.get("facts") or [])
+        what = what.format(kw=gap.get("kw", ""), diffs="\n".join(lines),
+                           facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
     if kind == "fresh":
         # 年月の更新だけを許す。今日の年・月・日のトークンは「増えた数字」に数えない
         t = time.localtime()
@@ -963,6 +1055,8 @@ def run_one(item, write, edited=None):
         toks = [w for w in re.split(r"[\s　]+", item["shared"][0].lower()) if w]
         if toks and all(w in t_now[:max(len(t_now) // 2, 1)].lower() for w in toks):
             ng = f"共通の語「{item['shared'][0]}」がタイトルの前半に残っています"
+    if not ng and kind == "compete":
+        ng = compete_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], item["gap"])
     if not ng and meta(slug)[0] != before[0]:
         lk = title_locked(slug)
         if lk:
@@ -974,6 +1068,8 @@ def run_one(item, write, edited=None):
         p.write_bytes(raw)
         sh([sys.executable, "scripts/build.py"], timeout=1800)
         return False, ng
+    if kind == "compete":
+        LAST[slug].update(keep_before(slug, raw, p.read_bytes()))
     return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…）"
 
 
@@ -1090,6 +1186,8 @@ def main():
         items = aisplit_items(max(a.limit, 2))
     elif a.kind == "split":
         items = split_items(max(a.limit, 4))
+    elif a.kind == "compete":
+        items = compete_items(max(a.limit, 2))
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     print(f"■ 人の判断に回っていた直し: {len(items)}件"

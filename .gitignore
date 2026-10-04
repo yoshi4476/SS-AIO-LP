@@ -83,3 +83,10 @@ automation/note/
 # FTP の接続情報・ZIP 納品物（先方の資格情報と納品物は公開リポジトリに置かない）
 ftp-credentials.json
 deliveries/
+# 競合比較（compete.py）。お客様の分（競合の顔ぶれ・自社の順位・負けている語）は public に置かない。
+# 自社3サイトと月の問い合わせ回数だけをコミットし、お客様の分は CI のキャッシュで月をまたぐ
+data/compete/*
+!data/compete/ai-lab/
+!data/compete/corporate/
+!data/compete/subsidy/
+!data/compete/_usage.json
