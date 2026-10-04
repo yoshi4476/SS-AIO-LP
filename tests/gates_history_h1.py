@@ -276,3 +276,32 @@ def test_ai_visits_are_not_counted_as_organic():
         s = (ROOT / ".github" / "workflows" / wf).read_text(encoding="utf-8")
         check(f"{wf}: Codex を使う工程は同じ順番待ちで、更新されたログイン情報を戻す",
               ("group: industry-research" in s, "gh secret set CODEX_AUTH_JSON" in s), (True, True))
+
+
+def _block_tag_issues(text):
+    """原稿の段落（空行で区切った塊）ごとに、インラインの開きと閉じの数を比べる。
+    記事全体で数えると、段落をまたいで閉じた <span>（数は合うが HTML は壊れる）を見逃す"""
+    out = []
+    body = re.sub(r"```.*?```", "", text, flags=re.S)
+    for i, blk in enumerate(re.split(r"\n\s*\n", body)):
+        for tag in ("span", "strong", "a"):
+            o, c = len(re.findall(rf"<{tag}\b", blk)), len(re.findall(rf"</{tag}>", blk))
+            if o != c:
+                out.append(f"段落{i + 1}: <{tag}> 開き{o}・閉じ{c}")
+    if re.search(r"</(content|answer|response)>", body):
+        out.append("AIの出力の残り（</content> など）")
+    return out
+
+
+def test_articles_have_no_broken_inline_tags():
+    print("\n■ 原稿: 段落をまたぐ <span> や AI の出力の残り（</content>）が無い")
+    # 2026-10-05: 補助金の3記事の末尾に </content>、1記事は <span> が空行をまたいで閉じていた（本番の巡回で発見）
+    check("検出器: 段落をまたいだ span を拾う", bool(_block_tag_issues('<span class="x">文。\n\n</span>次の段落')), True)
+    check("検出器: 正しい span は拾わない", _block_tag_issues('<span class="x">文。</span>\n\n次の段落'), [])
+    check("検出器: </content> を拾う", bool(_block_tag_issues("本文。\n</content>\n")), True)
+    bad = []
+    for p in sorted((ROOT / "articles").glob("*.md")):
+        issues = _block_tag_issues(p.read_text(encoding="utf-8-sig").split("\n---", 2)[-1])
+        if issues:
+            bad.append(f"{p.stem}: {issues[0]}")
+    check("全記事", bad, [])

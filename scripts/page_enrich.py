@@ -261,8 +261,8 @@ def apply(site: Path):
         s0 = s
         # フォームの左に写真（中央の細いフォームの両脇が空いていた）
         if 'class="section dl-grid"' not in s:
-            s = s.replace('<section class="section">\n  <!-- TODO: フォーム送信先の設定', '<section class="section dl-grid">\n  <figure><img src="' + DOWNLOAD["side"][0]
-                          + '" alt="' + DOWNLOAD["side"][1] + 'のイメージ" width="1600" height="900" loading="lazy" decoding="async"></figure>\n  <!-- TODO: フォーム送信先の設定', 1)
+            s = s.replace('<section class="section">\n  <!-- 資料の申し込みフォーム', '<section class="section dl-grid">\n  <figure><img src="' + DOWNLOAD["side"][0]
+                          + '" alt="' + DOWNLOAD["side"][1] + 'のイメージ" width="1600" height="900" loading="lazy" decoding="async"></figure>\n  <!-- 資料の申し込みフォーム', 1)
         block = _blocks({**DOWNLOAD, "side": ("/images/shelf/subsidy-docs-1.webp", "資料を見ながら次の手を決める経営者")}, DOWNLOAD["more"])
         s = _put(s, block, r"<footer")
         if s != s0:

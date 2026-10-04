@@ -36,8 +36,9 @@ jobs:
           python -m pip install --quiet -r requirements.txt
           npm i -g @openai/codex @anthropic-ai/claude-code >/dev/null 2>&1
 
+      # 保存は最後の工程で必ず行う（actions/cache の後片付けは成功時しか保存せず、時間切れの日の答えが消えた）
       - name: AIの答えを前回から持ち越す
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: data/ai_cache
           key: ai-cache-${{ github.run_id }}
@@ -58,11 +59,12 @@ jobs:
 
       - name: 欠けた問いだけ聞き足す
         if: steps.login.outputs.ok == 'yes'
+        timeout-minutes: 300
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           PYTHONIOENCODING: utf-8
         run: |
-          python scripts/research_run.py --minutes 300 2>&1 | grep -vE "^\s+[0-9]+/[0-9]+$" | tail -40
+          python scripts/research_run.py --minutes 280 2>&1 | grep -vE "^\s+[0-9]+/[0-9]+$" | tail -40
           python scripts/question_pages.py --data 2>&1 | tail -3 || true
 
       - name: 更新されたログイン情報を Secrets に戻す
@@ -80,7 +82,16 @@ jobs:
         if: always()
         run: rm -f ~/.codex/auth.json /tmp/auth.before
 
+      - name: AIの答えを次の回へ残す
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/ai_cache
+          key: ai-cache-${{ github.run_id }}
+
+      # 聞き足しが途中で止まっても、10問ごとに書き出した分は公開する
       - name: 公開する
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

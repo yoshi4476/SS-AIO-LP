@@ -335,7 +335,8 @@ jobs:
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
-          pip install --quiet pyyaml
+          # ランナーの python3 は外から pip で入れられないことがある（PEP 668）。入っていれば入れない
+          python3 -c "import yaml" 2>/dev/null || pip install --quiet --user pyyaml || pip install --quiet --break-system-packages pyyaml || true
           out=$(python3 scripts/ci_rerun.py --run "$RUN_ID" 2>&1) || out="$out
           要対応: 再実行の判定が動きませんでした（${{ github.event.workflow_run.name }}）"
           echo "$out"

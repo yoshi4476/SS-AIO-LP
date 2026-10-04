@@ -50,6 +50,8 @@ function form_(body) {
   // 本文の項目名はサイトごとに違う（コーポレートは detail）。message に寄せないと
   // 転送された問い合わせが「必須項目が入力されていません」で弾かれ、台帳に残らなかった
   if (!body_(d.message)) d.message = d.detail || d.body || d.topic || '';
+  // 必須の判定は、下で任意の項目を添える前の本文で行う（添えた後だと、本文が空でも通ってしまう）
+  const hasBody = !!body_(d.message);
   // 任意の「希望の連絡方法」「相談したい時期」は列を増やさず本文の末尾に添える（3サイト共通・台帳の列ずれを起こさない）
   const extra = [['希望の連絡方法', d.contact_way], ['相談したい時期', d.contact_when]]
     .filter(function (p) { return clean_(p[1]); })
@@ -66,7 +68,7 @@ function form_(body) {
   if (!email || !isEmail_(email)) {
     return { ok: false, error: 'メールアドレスの形式をご確認ください。' };
   }
-  if (type === 'contact' && (!name || !body_(d.message))) {
+  if (type === 'contact' && (!name || !hasBody)) {
     return { ok: false, error: '必須項目が入力されていません。' };
   }
   if ((type === 'diagnosis' || type === 'site_audit') && !name) {

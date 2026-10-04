@@ -75,3 +75,5 @@ jobs:
           git commit -m "写真の棚: 足りない写真を追加 $(date '+%Y-%m-%d')"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push
+          # GITHUB_TOKEN の push では deploy.yml が動かないので、公開を明示的に起動する
+          GH_TOKEN="${{ github.token }}" gh workflow run deploy.yml --ref "${GITHUB_REF_NAME}" || echo "::warning::公開を起動できませんでした"

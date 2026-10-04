@@ -58,8 +58,11 @@ def main():
         # 生の回答がある業種は欠けた問いだけを聞き足す。--sub で聞き直すと生の回答を丸ごと書き直し、
         # その回に聞かなかった Gemini・Perplexity の答えが消えていた（2026-10-05 に6業種）
         mode = "--refill" if (ROOT / "data" / "research" / f"{slug}-raw.json").is_file() else "--sub"
+        # 業種の途中でも締め切りの5分前に書き出して止まらせる（CI の時間の上限で、聞いた分が丸ごと消えないように）
+        import os
+        env = {**os.environ, "RESEARCH_DEADLINE": str(deadline - 5 * 60)}
         r = subprocess.run([sys.executable, "scripts/industry_ai_sources.py", "--industry", slug, mode], cwd=ROOT,
-                           text=True, encoding="utf-8", errors="replace")
+                           text=True, encoding="utf-8", errors="replace", env=env)
         if r.returncode == 0 and (ROOT / "data" / "research" / f"{slug}-summary.json").is_file():
             done.append(slug)
     left = [s for s, *_ in RX.INDUSTRIES if thin(s)]

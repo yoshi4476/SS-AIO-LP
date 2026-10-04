@@ -303,23 +303,43 @@ def refill(ind, engine="ChatGPT"):
     restored = fill_from_cache(raw)
     ask = AC.subscription_engines().get(engine)
     asked = got = 0
-    if ask:
-        for q, by in raw["answers"].items():
-            if (by.get(engine) or {}).get("urls"):
-                continue
-            try:
-                urls = ask(q) or []
-                by[engine] = {"urls": urls, "error": ""}
-                got += bool(urls)
-            except AC.UsageLimit as e:
-                print(f"  {e}。ここまでを残して止めます", flush=True)
-                break
-            except Exception as e:
-                by[engine] = {"urls": [], "error": str(e)[:160]}
-            asked += 1
+
+    def save():
+        raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    if not ask:
+        # Codex が使えない（未ログイン・未インストール）。何も聞けないのに日付だけ変えて毎日公開しない
+        print(f"  {engine} に聞けません（ログイン・インストールを確認）。何も変えずに終わります", flush=True)
+        if restored:
+            save()
+        return raw
+    import os
+    deadline = float(os.environ.get("RESEARCH_DEADLINE") or 0)
+    for q, by in raw["answers"].items():
+        if (by.get(engine) or {}).get("urls"):
+            continue
+        if deadline and time.time() > deadline:
+            print("  時間の上限が近いので、ここまでを残して止めます", flush=True)
+            break
+        try:
+            r = ask(q)
+            if r is None:
+                raise RuntimeError("答えが返りませんでした")
+            by[engine] = {"urls": r, "error": ""}
+            got += bool(r)
+        except AC.UsageLimit as e:
+            print(f"  {e}。ここまでを残して止めます", flush=True)
+            break
+        except Exception as e:
+            by[engine] = {"urls": [], "error": str(e)[:160]}
+        asked += 1
+        # 10問ごとに書き出す。CI の時間の上限で止まると、最後にまとめて書く形では1業種ぶんが丸ごと消える
+        if asked % 10 == 0:
+            save()
     fill_from_cache(raw)
-    raw["refilled"] = date.today().isoformat()
-    raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=1), encoding="utf-8")
+    if asked or restored:
+        raw["refilled"] = date.today().isoformat()
+        save()
     print(f"  キャッシュから戻した答え {restored}件 / {engine} に聞いた {asked}問（答えが取れた {got}問）", flush=True)
     return raw
 

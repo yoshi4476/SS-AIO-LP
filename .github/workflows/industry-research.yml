@@ -15,6 +15,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   research:
@@ -100,7 +101,11 @@ jobs:
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
           git commit -q -m "業種調査の更新 $(date '+%Y-%m-%d')"
           for i in 1 2 3; do
-            if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then exit 0; fi
+            if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then
+              # GITHUB_TOKEN の push では deploy.yml が動かないので、公開を明示的に起動する
+              GH_TOKEN="${{ github.token }}" gh workflow run deploy.yml --ref "${GITHUB_REF_NAME}" || echo "::warning::公開を起動できませんでした"
+              exit 0
+            fi
             git rebase --abort 2>/dev/null || true
             sleep 5
           done

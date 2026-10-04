@@ -376,6 +376,9 @@ jobs:
       # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
       - name: 原稿からページを作る
         run: |
+          # 前回の通知本文を先に空にする（後の工程で空にすると、この工程が書いた要対応まで消えた）
+          mkdir -p automation/logs
+          rm -f automation/logs/findings.txt
           python scripts/build.py > /tmp/prebuild.log 2>&1 && tail -2 /tmp/prebuild.log || {
             tail -20 /tmp/prebuild.log
             echo "::warning::原稿からページを作れませんでした（このあとの工程は古いページを読みます）"
@@ -390,9 +393,8 @@ jobs:
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
           # 通知本文は工程ごとに追記し、最後に findings.py が既存の要対応を残して組み直す。
-          # 前回分が残っていると先週の要対応が今週の通知に載るので、最初に空にしておく
+          # 前回分は「原稿からページを作る」の先頭で空にしている
           mkdir -p automation/logs
-          rm -f automation/logs/findings.txt
           # 配信の基点。途中の工程が何度コミット・rebase しても、最後にこの時点からの
           # 差分をまとめて他サイトへ配信する（途中1回だけだと後段の直しが届かなかった）
           since="$INPUT_SINCE"
