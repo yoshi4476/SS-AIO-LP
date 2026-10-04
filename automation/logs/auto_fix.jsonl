@@ -1547,3 +1547,6 @@
 {"at": "2026-10-04 11:40", "by": "link_boost", "slug": "aio-service-hikaku", "kind": "link_rescue", "ok": true, "note": "aio-checker から内部リンクを1本"}
 {"at": "2026-10-04 11:40", "by": "link_boost", "slug": "aio-service-hikaku", "kind": "link_rescue", "ok": true, "note": "gaiheki-tosou-aio-taisaku から内部リンクを1本"}
 {"at": "2026-10-04 15:55", "by": "link_boost", "slug": "kaikei-keiri-chigai", "kind": "link_rescue", "ok": true, "note": "keiri-zaimu-chigai から内部リンクを1本"}
+{"at": "2026-10-04 21:24", "by": "link_boost", "slug": "aio-dairiten-erabikata", "kind": "link_rescue", "ok": true, "note": "aio-service-hikaku から内部リンクを1本"}
+{"at": "2026-10-04 21:24", "by": "link_boost", "slug": "aio-dairiten-erabikata", "kind": "link_rescue", "ok": true, "note": "aio-checker から内部リンクを1本"}
+{"at": "2026-10-04 21:24", "by": "link_boost", "slug": "aio-dairiten-erabikata", "kind": "link_rescue", "ok": true, "note": "aio-erabareru-kiji-kakikata から内部リンクを1本"}
