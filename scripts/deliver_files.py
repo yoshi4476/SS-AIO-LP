@@ -59,8 +59,24 @@ def stage(cfg):
         f = d / "blog" / slug / "index.html"
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text(f'<h1>{r["title"]}</h1>"datePublished": "{r.get("date", "")}"', encoding="utf-8")
-    # 公開中の索引を読んで足す（無いものは作らない＝ _update_external_index と同じ扱い）
+    # 公開中の索引を読んで足す（無いものは作らない＝ _update_external_index と同じ扱い）。
+    # FTP の社は上げる先のサーバーから直接読む。HTTPS だけで読んでいたため、公開前のドメイン・
+    # ボット除けのあるサーバーでは sitemap と llms.txt に記事が1本も載らなかった
+    got = {}
+    if cfg.get("type") == "ftp":
+        try:
+            with Remote(credentials(cfg)) as r:
+                for name in ("sitemap.xml", "llms.txt", "article-manifest.json"):
+                    b = r.get(name)
+                    if b is not None:
+                        got[name] = b
+        except (SystemExit, OSError, ftplib.Error) as e:
+            print(f"  FTP から索引を読めませんでした（{type(e).__name__}）。公開URLから読みます")
+    for name, b in got.items():
+        (d / name).write_bytes(b)
     for name in ("sitemap.xml", "llms.txt", "article-manifest.json"):
+        if name in got:
+            continue
         try:
             req = urllib.request.Request(f"{origin}/{name}", headers={"User-Agent": "Mozilla/5.0 SS-AIO-Pipeline"})
             with urllib.request.urlopen(req, timeout=20) as r:
@@ -72,7 +88,7 @@ def stage(cfg):
 
 def stage_cfg(cfg):
     """write_external_html に渡す設定。書き出し先は作業場所の中で決まった形にする"""
-    return dict(cfg, template="_template.html", content_dir="_src",
+    return dict(cfg, template="_template.html", content_dir="_src", page_dir="blog",
                 images_dir=cfg.get("images_dir") or "images")
 
 
@@ -317,7 +333,22 @@ def retract(cfg, rows, push: bool):
                  + [f"   {l}" for l in lines])
         z.writestr("手順.txt", "\n".join(steps) + "\n")
     print(f"  取り下げの ZIP: {out.relative_to(ROOT)}")
-    return True
+    # 届かなければ取り下げ済みにしない（retract が次の回にまた作る）
+    return hand_over(cfg, out) or not os.environ.get("GITHUB_ACTIONS")
+
+
+def hand_over(cfg, out: Path):
+    """ZIP を先方へ届ける。deliveries/ はコミットしないので、CI のランナーに作っただけでは
+    実行が終わると消え、先方には何も届かないまま「配信済み」になっていた"""
+    import site_change
+    if site_change._mail_zip(cfg, out):
+        print("  先方へメールしました")
+        return True
+    if os.environ.get("GITHUB_ACTIONS"):
+        print(f"::warning::{cfg['id']}: ZIP を先方へ送れませんでした（company.json の email・RESEND_API_KEY・"
+              f"LEAD_FROM_EMAIL を確かめる）。{out.name} はこの実行の終わりに消えます")
+        print(f"要対応: {cfg['id']} の ZIP（{out.name}）を先方へ送れませんでした")
+    return False
 
 
 def deliver_batch(cfg, written, base: Path, push: bool, label: str):
@@ -335,6 +366,7 @@ def deliver_batch(cfg, written, base: Path, push: bool, label: str):
         for f, rel in items:
             z.write(f, rel)
     print(f"  ZIP: {out.relative_to(ROOT)}")
+    hand_over(cfg, out)
     return str(out)
 
 
@@ -357,6 +389,8 @@ def deliver(cfg, meta, written, base: Path, push: bool):
             for f, rel in items:
                 z.write(f, rel)
         where = str(out.relative_to(ROOT))
+        if not hand_over(cfg, out) and os.environ.get("GITHUB_ACTIONS"):
+            raise SystemExit(f"{meta['slug']}: ZIP を先方へ届けられないため、配信済みにしません（次の回にまた作ります）")
     idx = load_index(cfg)
     idx[meta["slug"]] = {"title": re.sub(r"\s+", " ", meta["title"]), "date": str(meta["date"])}
     p = index_path(cfg)

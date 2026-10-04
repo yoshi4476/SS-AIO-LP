@@ -641,9 +641,10 @@ def to_config(got):
         "main_category": got.get("main_category", ""),
         "cta": {"label": got.get("cta.label", ""), "url": got.get("cta.url", ""),
                 "note": got.get("cta.note", "")},
-        # 動画・SNSの投稿先（鍵は持たない。接続は youtube_upload --auth / social_connect で当社が行う）
+        # 動画・SNSの投稿先（鍵は持たない。接続は youtube_upload --auth / social_connect で当社が行う）。
+        # 手続きの担当者（氏名とメール）は public の sites/ に置かず private.json へ（to_private）
         "channels": {k: got.get(f"channels.{k}", "") for k in
-                     ("youtube", "video", "facebook", "instagram", "threads", "linkedin", "x", "contact", "admin_added")},
+                     ("youtube", "video", "facebook", "instagram", "threads", "linkedin", "x", "admin_added")},
     }
     # 接頭辞は既定を補わない。空のまま "/blog" を入れると、実際の記事URLと違う
     # URLが sitemap・内部リンク・通知に出る。自社構築は カテゴリ/slug で組むので持たせない
@@ -680,6 +681,9 @@ def to_private(got):
                             if x.strip()]
     if got.get("note"):
         out["note"] = got["note"]
+    for k in ("channels.contact", "supervisor.contact"):
+        if got.get(k):
+            out[k.replace(".", "_")] = got[k]
     return out
 
 
@@ -780,8 +784,11 @@ def to_brief(got, industry=""):
         "subjects": subjects(got),
     }
     for pre in set(k.split(".")[0] for k in got if "." in k):
+        # 業種別の項目だけを拾う。監修者・SNS の章をここへ落とすと、連絡先のメールが
+        # public の brief.json に出ていた（監修者は上の supervisor に contact 抜きで入れている）
         if pre in ("company", "facts", "cta", "kw_seeds", "service", "customer",
-                   "author", "tone", "compete", "asset", "link", "target", "kw"):
+                   "author", "tone", "compete", "asset", "link", "target", "kw",
+                   "supervisor", "channels"):
             continue
         brief.setdefault("industry_detail", {})[pre] = pick(pre)
     # 改行区切りで書かれたものは配列にしておく。記事側で1つずつ使える

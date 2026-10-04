@@ -50,7 +50,8 @@ def apply(row, cfg, dest: Path):
         f = dest / rel
         if f.is_file():
             f.unlink(); touched.append(rel)
-    for d in (dest / "blog" / slug, dest / (cfg.get("images_dir") or "images") / slug, dest / "images" / "blog" / slug):
+    for d in (dest / publish.page_dir(cfg) / slug, dest / (cfg.get("images_dir") or "images") / slug,
+              dest / "images" / "blog" / slug):
         if d.is_dir():
             shutil.rmtree(d); touched.append(str(d.relative_to(dest)))
     mp = publish.manifest_path(cfg, dest)

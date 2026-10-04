@@ -70,7 +70,8 @@ def gsc_rows(site_id):
             CRED,
             ["https://www.googleapis.com/auth/webmasters.readonly"]))
         end = date.today() - timedelta(days=3)
-        all_conf = S.load_all()
+        group = set(S.group_of(site_id)) if site_id else None
+        all_conf = {k: v for k, v in S.load_all().items() if group is None or k in group}
     except Exception as e:
         print(f"   （GSC照合はスキップ: {type(e).__name__}）")
         gsc_rows.failed = f"GSC に接続できません（{type(e).__name__}）"

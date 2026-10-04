@@ -23,7 +23,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 NO_HEAD = "」』）)、。，．！？!?ー…"
 NONSPEECH = re.compile(r"\[(?:音楽|拍手|笑い|笑|歓声|Music|Applause|Laughter)\]|♪|♫", re.I)
-DELIVERY_TYPES = ("self-static", "nextjs-json", "external-html", "external-md", "wordpress")
+# 配信方式の定義は client_add.TYPES が唯一の正。手で並べていたため ftp・zip の社を登録すると門が落ちた
+from client_add import TYPES as _TYPES  # noqa: E402
+DELIVERY_TYPES = tuple(_TYPES)
 
 
 def _warn(title, items, n=8):

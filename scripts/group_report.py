@@ -28,6 +28,12 @@ SA = ROOT / "indexing-service-account.json"
 DEMO = "--demo" in sys.argv
 NAVY, BLUE, TEAL, GOLD, MUTED, LINE = "#0b2447", "#2563eb", "#0d9488", "#b7922e", "#5b6b84", "#e3eaf3"
 CPC = 300  # 広告換算に使う想定クリック単価（円）
+
+
+def own_cfgs():
+    """グループ（自社3サイト）の設定。お客様の数字を自社グループの合計・広告換算に混ぜない"""
+    own = set(sites_mod.own_ids())
+    return {k: v for k, v in sites_mod.load_all().items() if k in own}
 # AI参照元の分類は daily_kpi.AI_SOURCES の1か所に置く（Google以外のAIも全部そこ）。
 # ここに別のリストを持つと、新しいAIが出たときに片方だけ古くなり、レポートで数字が食い違う
 try:
@@ -229,7 +235,7 @@ def fetch_demo(labels):
     seeds = [(320, 480, 690, 940, 1310, 1720), (120, 180, 260, 330, 420, 560),
              (60, 90, 140, 210, 300, 410)]
     out = []
-    for idx, ((sid, cfg), s) in enumerate(zip(sites_mod.load_all().items(), seeds)):
+    for idx, ((sid, cfg), s) in enumerate(zip(own_cfgs().items(), seeds)):
         out.append({
             "id": sid, "name": cfg["name"], "domain": cfg["domain"], "theme": cfg["theme"],
             "audience": cfg.get("audience", ""), "ga_error": None, "sc_error": None,
@@ -305,7 +311,7 @@ def article_stats():
 
 def cross_links():
     """記事本文から他サイトへのリンク数を数える（相互送客の実測）"""
-    doms = {c["domain"]: 0 for c in sites_mod.load_all().values()}
+    doms = {c["domain"]: 0 for c in own_cfgs().values()}
     for p in (ROOT / "articles").glob("*.md"):
         t = p.read_text(encoding="utf-8-sig")
         for d in doms:
@@ -899,7 +905,7 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 <table><tr><th style="width:26%">サイト</th><th>担当する領域</th><th style="width:30%">扱わない領域</th></tr>
 {"".join(f'<tr><td><b>{c["name"][:18]}</b></td><td>{c["theme"]}</td>'
          f'<td>{"／".join(x.split("（")[0] for x in c.get("avoid", []))}</td></tr>'
-         for c in sites_mod.load_all().values())}</table>
+         for c in own_cfgs().values())}</table>
 <p class="note">判断基準: 「この記事の読者は何に困っているか」で振り分けます。
 集客ならAI集客ラボ、資金調達なら補助金サイト、それ以外の経営課題ならコーポレートです。</p>
 <h3>なぜ重複を避ける必要があるのか</h3>
@@ -1243,7 +1249,7 @@ def group_months(sites, labels):
 
 def main():
     labels = months(6)
-    cfgs = sites_mod.load_all()
+    cfgs = own_cfgs()
     if DEMO:
         sites = fetch_demo(labels)
     else:

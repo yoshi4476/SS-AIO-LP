@@ -125,7 +125,9 @@ def main():
         print("REVIEW_OK=unset\nDRAFTS=0")
         return 0
     seen = {r["name"] for r in rows}
-    ng_words = [w for w in re.split(r"[\s、,]+", str(cfg.get("ng_words", ""))) if w]
+    # シートからの登録は rules.ng_words（配列）に入る。直下の ng_words しか見ておらず、効いていなかった
+    ng = (cfg.get("rules") or {}).get("ng_words") or cfg.get("ng_words") or ""
+    ng_words = [w for w in (ng if isinstance(ng, list) else re.split(r"[\s、,]+", str(ng))) if w]
     made = 0
     for rv in got:
         if rv["reply"] or rv["name"] in seen or not rv["comment"] or made >= a.limit:

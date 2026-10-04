@@ -137,10 +137,10 @@ def main():
     _n = sum(1 for a in daily_audit.articles_by_site().get(site_id, [])
              if a["date"][:7] == _ym and a["slug"] != slug
              and daily_audit._is_published(a, need_review=False))   # 未採点は数えない。監修待ちは書いた本数に入れる
-    if _n >= daily_audit.MONTHLY_CAP:
+    if _n >= daily_audit.site_cap(site_id):
         raise SystemExit(
             f"{site_id} は今月すでに {_n} 本公開しており、上限 "
-            f"{daily_audit.MONTHLY_CAP} 本/月に達しています。\n"
+            f"{daily_audit.site_cap(site_id)} 本/月に達しています。\n"
             "  来月まで待つか、scripts/daily_audit.py の MONTHLY_CAP を見直してください")
 
     # 1. 画像（アイキャッチ・図解）

@@ -127,8 +127,16 @@ def compose(a):
     # 本文の1文結論だけを並べ、出典として元記事と社名を必ず末尾に置く
     note = [a["title"], "", body, ""]
     note += [f"■ {p}" for p in a["leads"][1:6]]
+    # お客様の記事は、お客様の社名で出す（当社の名前で転載するとお客様の記事が当社のものに見える）
+    owner = "セブンセンシズ株式会社"
+    comp = ROOT / "data" / "clients" / sid / "company.json"
+    if sid and comp.parent.is_dir():
+        try:
+            owner = json.loads(comp.read_text(encoding="utf-8")).get("name") or cfg.get("name", "")
+        except (OSError, ValueError):
+            owner = cfg.get("name", "")
     note += ["", "続きと根拠（数字の出典・表・FAQ）は元記事にまとめています。",
-             f"元記事: {url}", f"執筆: {cfg.get('name', '')}（セブンセンシズ株式会社）"]
+             f"元記事: {url}", f"執筆: {cfg.get('name', '')}（{owner}）"]
     out["note"] = "\n".join(note)
     # 訪日客向け: 韓国は Naver ブログ、中国は小紅書で調べる。多言語を指示した社で、
     # 訳（数字の検算を通ったもの）があるときだけ作る。新しく訳さない（Claudeを呼ばない）

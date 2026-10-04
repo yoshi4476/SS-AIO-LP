@@ -40,6 +40,36 @@ def own_ids():
     return [sid for sid in load_all() if not (ROOT / "data" / "clients" / sid).is_dir()]
 
 
+def is_client(site_id):
+    """受託のクライアントか（data/clients/<id>/ がある）"""
+    return bool(site_id) and (ROOT / "data" / "clients" / site_id).is_dir()
+
+
+def group_of(site_id):
+    """食い合いを見る相手。自社3サイトはドメインをまたいでも自社どうしで食い合うが、
+    クライアントは別の会社。混ぜると、お客様の順位で自社の記事が止まり、その逆も起きる"""
+    if is_client(site_id):
+        return [site_id]
+    return own_ids()
+
+
+# お客様の記事に出てはいけない運用会社の名前・場所。監修者・著者・実績として混ざると事実と違う記事になる
+OPERATOR_MARKS = ("原口 優", "原口優", "セブンセンシズ", "SEVEN SENSES", "Seven Senses", "AI集客ラボ",
+                  "G-ran", "7senses.co.jp")
+
+
+def operator_leaks(text):
+    """本文・題名に残った運用会社の名前と、自社サイトのカテゴリへの内部リンク（お客様のドメインでは404）"""
+    import re
+    hit = [m for m in OPERATOR_MARKS if m in (text or "")]
+    cats = {c for sid in own_ids() for c in load(sid).get("categories", {})}
+    for path in re.findall(r"""(?:\]\(|href=["'])(/[^)"'\s#?]*)""", text or ""):
+        first = path.strip("/").split("/")[0]
+        if first in cats:
+            hit.append(f"自社サイトへのリンク {path}")
+    return hit
+
+
 def load(site_id):
     all_ = load_all()
     if site_id not in all_:

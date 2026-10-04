@@ -61,7 +61,7 @@ def main():
             continue
         if not publish.gate_ok(meta):          # 観点の足切りまで見る（build.py と同じ）
             continue
-        if not (dest / cfg["url_prefix"].strip("/") / meta["slug"] / "index.html").is_file():
+        if not (dest / publish.page_dir(cfg) / meta["slug"] / "index.html").is_file():
             skipped.append(meta["slug"])           # まだ公開していない記事は触らない（publish の仕事）
             continue
         publish.write_external_html(cfg, dest, meta, body, md)
@@ -73,6 +73,10 @@ def main():
     print(f"配信先で変わるファイル: {len([ln for ln in st.splitlines() if ln.strip()])}")
     if not a.push:
         print("押していません（--push で配信）")
+        return
+    # 変わらない回に commit すると git が「何も無い」で落ち、週次の工程ごと失敗していた
+    if not st.strip():
+        print("変更が無いので押しません")
         return
     subprocess.run(["git", "add", "-A"], cwd=dest, check=True)
     subprocess.run(["git", "-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp",

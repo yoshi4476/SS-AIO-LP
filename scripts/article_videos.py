@@ -60,6 +60,7 @@ def focus(row):
 def candidates(days, limit):
     """直近 days 日に公開した score>=90 の記事で、まだ動画にしていないもの（新しい順）"""
     import sites as S
+    import youtube_upload as YT
     have = load()
     since = (date.today() - timedelta(days=days)).isoformat()
     rows = []
@@ -77,6 +78,10 @@ def candidates(days, limit):
             continue
         sid = S.find_category_owner(g("category")) or ""
         if not sid:
+            continue
+        # チャンネル未接続のクライアントは、本数で切る前に外す。切った後で外すと、
+        # その社の記事が新しい順の先頭にあった日は1日の枠（1本）がまるごと空になる
+        if S.is_client(sid) and not YT.token_path(sid).is_file():
             continue
         row = {"slug": p.stem, "site": sid, "title": g("title"), "date": g("date"), "category": g("category")}
         if focus(row) is None:

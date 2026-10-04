@@ -118,10 +118,10 @@ def check_volume(todo):
     for sid, arts in by_site.items():
         n = sum(1 for a in arts if a["date"] == today_iso())
         month = sum(1 for a in arts if a["date"][:7] == ym)
-        left = MONTHLY_CAP - month
+        left = site_cap(sid) - month
         if left <= 0:
             # 上限に達したら「不足」と言わない。言えば救済が走って超過する
-            print(f"  上限 {sid:10s} 今月 {month}/{MONTHLY_CAP}本 — 今月はこれ以上公開しません")
+            print(f"  上限 {sid:10s} 今月 {month}/{site_cap(sid)}本 — 今月はこれ以上公開しません")
             continue
         want = min(DAILY_TARGET, left)
         # 量産の兆候で本数を落とした週は、その本数を目標にする（pace.py）。
@@ -572,12 +572,23 @@ def split_todo(todo):
     return now[:MAX_TODAY], now[MAX_TODAY:] + later
 
 
+def site_cap(sid):
+    """その社の月の上限。ヒアリングシートで減らした社（rules.monthly_cap）はその数。
+    全社 60 で数えていたため、「月20本」と決めた社にも60本まで書いていた"""
+    try:
+        import sites as S
+        c = (S.load(sid).get("rules") or {}).get("monthly_cap")
+        return min(MONTHLY_CAP, int(c)) if c else MONTHLY_CAP
+    except (SystemExit, ValueError, TypeError):
+        return MONTHLY_CAP
+
+
 def cap_left(sid):
     """今月あと何本公開できるか（publish_flow と同じ数え方）"""
     ym = today_iso()[:7]
     n = sum(1 for a in articles_by_site().get(sid, [])
             if a["date"][:7] == ym and _is_published(a, need_review=False))
-    return MONTHLY_CAP - n
+    return site_cap(sid) - n
 
 
 def main():

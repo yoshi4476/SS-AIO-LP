@@ -213,6 +213,103 @@ def image_prefix(cfg):
     return "/" + d if d else "/images"
 
 
+def client_credit(cfg, url=""):
+    """お客様の記事の監修者・著者・発行元（data/clients/<id>/ の company.json と brief.json から）。
+
+    監修者はお客様ご本人（2026-10-05 運用者の決定）。運用会社の代表を監修者・著者として
+    付けると事実と違う記事になる。掲載の同意（display）が無い方は表示も構造化データも出さない。
+    クライアントでなければ None（自社サイトは各サイトの雛形が持つ）
+    """
+    import html as H
+    cdir = ROOT / "data" / "clients" / cfg["id"]
+    if not cdir.is_dir():
+        return None
+
+    def read(name):
+        try:
+            return json.loads((cdir / name).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return {}
+    comp, brief = read("company.json"), read("brief.json")
+    origin = f"https://{cfg['domain']}/"
+    org = {"@type": "Organization", "name": comp.get("name") or cfg.get("name", ""), "url": origin}
+    if comp.get("tel"):
+        org["telephone"] = comp["tel"]
+    if comp.get("address"):
+        org["address"] = {"@type": "PostalAddress", "streetAddress": comp["address"],
+                          **({"postalCode": comp["postal"]} if comp.get("postal") else {})}
+    a = brief.get("author") or {}
+    author = ({"@type": "Person", "name": a["name"], **({"jobTitle": a["title"]} if a.get("title") else {}),
+               "worksFor": {"@type": "Organization", "name": org["name"]}} if a.get("name") else dict(org))
+    sup = comp.get("supervisor") or {}
+    out = {"publisher": org, "author": author, "reviewer": None, "byline": "", "supervisor": None}
+    if not (sup.get("name") and sup.get("display")):
+        return out
+    quals = sup.get("qualification") or []
+    quals = [q for q in ([quals] if isinstance(quals, str) else quals) if q]
+    rv = {"@type": "Person", "name": sup["name"]}
+    if sup.get("title"):
+        rv["jobTitle"] = sup["title"]
+    if quals:
+        rv["hasCredential"] = [{"@type": "EducationalOccupationalCredential", "name": q} for q in quals]
+    career = sup.get("career") or []
+    if career:
+        rv["description"] = " / ".join(career if isinstance(career, list) else [career])
+    same = sup.get("same_as") or []
+    if same:
+        rv["sameAs"] = same if isinstance(same, list) else [same]
+    if sup.get("profile_url"):
+        rv["url"] = sup["profile_url"]
+    rv["worksFor"] = {"@type": "Organization", "name": org["name"]}
+    out["reviewer"] = rv
+    name = H.escape(sup["name"]) + (f"（{H.escape('・'.join(quals))}）" if quals else "")
+    if sup.get("profile_url"):
+        name = f'<a href="{H.escape(sup["profile_url"])}">{name}</a>'
+    out["byline"] = ('<p class="supervisor" style="font-size:.88rem;color:#4b5563;margin:8px 0 16px">'
+                     f"監修: {name}"
+                     + (f"／{H.escape(sup['title'])}" if sup.get("title") else "")
+                     + (f"<br>監修の範囲: {H.escape(sup['scope'])}" if sup.get("scope") else "")
+                     + "</p>")
+    out["supervisor"] = {k: sup[k] for k in ("name", "title", "qualification", "scope", "profile_url")
+                         if sup.get(k)}
+    return out
+
+
+def credit_jsonld(credit, url, meta):
+    """記事に足す構造化データ（BlogPosting に author・publisher・reviewedBy を付けたもの）"""
+    ld = {"@context": "https://schema.org", "@type": "BlogPosting", "@id": url + "#article",
+          "headline": meta["title"], "mainEntityOfPage": url,
+          "author": credit["author"], "publisher": credit["publisher"]}
+    if credit.get("reviewer"):
+        ld["reviewedBy"] = credit["reviewer"]
+    return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>"
+
+
+def apply_credit(page, credit, url, meta):
+    """描き上がったページへ、お客様の監修者・著者・発行元を当てる。
+    雛形（汎用・先方の template.html）が何を持っているかに依らず、h1 の直後に監修の表示、
+    head に構造化データを置く。雛形にもともとある BlogPosting の publisher は発行元に揃える"""
+    if not credit:
+        return page
+    if credit["byline"]:
+        page = re.sub(r"(</h1>)", lambda m: m.group(1) + "\n" + credit["byline"], page, count=1)
+    # 雛形の BlogPosting に足す（別の BlogPosting を並べると、同じ記事が2つの実体に見える）
+    for m in re.finditer(r'(<script type="application/ld\+json">)(.*?)(</script>)', page, re.S):
+        try:
+            ld = json.loads(m.group(2))
+        except ValueError:
+            continue
+        if not (isinstance(ld, dict) and ld.get("@type") == "BlogPosting"):
+            continue
+        ld["author"], ld["publisher"] = credit["author"], credit["publisher"]
+        if credit.get("reviewer"):
+            ld["reviewedBy"] = credit["reviewer"]
+        new = m.group(1) + json.dumps(ld, ensure_ascii=False) + m.group(3)
+        return page[:m.start()] + new + page[m.end():]
+    tag = credit_jsonld(credit, url, meta)
+    return page.replace("</head>", tag + "\n</head>", 1) if "</head>" in page else page + tag
+
+
 def write_nextjs_json(cfg, dest: Path, meta, body):
     """Next.jsサイト用: 本文HTML込みのJSONを書き出す"""
     html, _ = md2html.convert(body)
@@ -229,6 +326,13 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
         html = html.replace(src_path, dst_path)
         if meta.get("eyecatch"):
             meta = {**meta, "eyecatch": str(meta["eyecatch"]).replace(src_path, dst_path)}
+    # お客様の記事: 配信先のアプリが監修の欄を持たなくても出るよう、本文の頭と末尾に入れる
+    # 読了時間・文字数は本文だけで数える（構造化データの文字を数えない）
+    text_html = html
+    credit = client_credit(cfg)
+    if credit:
+        html = (credit["byline"] + "\n" if credit["byline"] else "") + html + "\n" + \
+            credit_jsonld(credit, sites_mod.article_url(cfg, meta), meta)
 
     out = {
         "slug": meta["slug"],
@@ -238,10 +342,14 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
         "dateModified": str(meta.get("modified") or meta.get("dateModified") or meta["date"]),
         "category": meta["category"],
         "categoryName": sites_mod.category_name(cfg, meta["category"]),
-        "readingMinutes": md2html.reading_minutes(html),
+        "readingMinutes": md2html.reading_minutes(text_html),
         "faq": faq,
         "html": html,
     }
+    if credit:
+        out["author"] = credit["author"]
+        if credit["supervisor"]:
+            out["supervisor"] = credit["supervisor"]
     if meta.get("eyecatch"):
         out["eyecatch"] = meta["eyecatch"]
     # 一覧・記事の頭に出す写真（写真の棚から内容に合う1枚）。共有画像の eyecatch は文字のカードのまま
@@ -287,7 +395,7 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     # Next.jsサイトでも sitemap.xml / llms.txt への追記が要る。呼んでいなかったため、
     # 公開した記事がAIクローラー向けの案内に1本も載っていなかった
     written = [target] + _update_external_index(dest, cfg, meta) + img_written
-    return written, len(md2html.plain_text(html))
+    return written, len(md2html.plain_text(text_html))
 
 
 def to_webp(png: Path, quality=80):
@@ -373,6 +481,13 @@ def _push_token():
     return v.replace("﻿", "").strip().strip('"').strip("'")
 
 
+def page_dir(cfg):
+    """external-html の記事ページを置くフォルダ。URL の接頭辞と同じ場所に置く。
+    "blog" 固定だったため、/column の社では記事が /blog/ に置かれ、sitemap・canonical の /column/ が404になった。
+    FTP・ZIP の作業場所は blog/ に書いてから接頭辞の場所へ移す（deliver_files.stage_cfg が page_dir を渡す）"""
+    return cfg.get("page_dir") or (cfg.get("url_prefix") or "/blog").strip("/") or "blog"
+
+
 def check_contract(cfg, dest: Path, meta):
     """配信先のビルドが壊れない形かを、書き込む前に確かめる。
 
@@ -385,7 +500,7 @@ def check_contract(cfg, dest: Path, meta):
     # 相手のビルドスクリプトを読み解くのは壊れやすい（実装が変わると検査が効かなくなる）。
     # 既に公開されている記事が実際に使っている表記と突き合わせる方が確実で、
     # 相手の実装が変わっても追従できる。
-    blog = dest / "blog"
+    blog = dest / page_dir(cfg)
     if not blog.is_dir():
         return True
     used = {}
@@ -518,12 +633,13 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         html = video_embed.prepend(html, meta)
     except Exception as e:
         print(f"  [警告] 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
+    credit = client_credit(cfg)
     # 著者の実在（Person + sameAs）。配信先のテンプレートは著者名しか出さないので、
     # 台帳から束ねた sameAs を本文側の JSON-LD で足す（AI集客ラボの記事と同じ人物だと機械に分かる）
     try:
         ap = json.loads((ROOT / "data" / "author_profile.json").read_text(encoding="utf-8"))
         # クライアントの記事の著者は先方の人。運用会社の代表を著者として付けると事実と違う
-        if ap.get("same_as") and not (ROOT / "data" / "clients" / cfg["id"]).is_dir():
+        if ap.get("same_as") and not credit:
             person = {"@context": "https://schema.org", "@type": "Person", "name": "原口 優",
                       "@id": "https://ai.7senses.co.jp/author/haraguchi/#person",
                       "url": "https://ai.7senses.co.jp/author/haraguchi/", "jobTitle": "セブンセンシズ株式会社 代表取締役",
@@ -592,9 +708,13 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         "ABOUT_JSONLD": about_json,
         "MENTIONS_JSONLD": mentions_json,
         "RELATED_LINKS": related,
-        "CTA_TITLE": cfg.get("cta_title", "補助金が使えるか、無料で確認しませんか"),
-        "CTA_DESC": cfg.get("cta_desc",
-                            "要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。"),
+        # 既定の文言は補助金サイトのもの。お客様の社に補助金の案内が出ないよう、社の設定が無ければ汎用の文にする
+        "CTA_TITLE": cfg.get("cta_title") or ("補助金が使えるか、無料で確認しませんか" if not credit
+                                              else "まずはお気軽にご相談ください"),
+        "CTA_DESC": cfg.get("cta_desc") or (
+            "要件の確認から申請書類の準備まで、はじめての方でも進められるようご案内します。" if not credit else ""),
+        "CTA_URL": (cfg.get("cta") or {}).get("url") or f"https://{cfg['domain']}/",
+        "CTA_LABEL": (cfg.get("cta") or {}).get("label") or "お問い合わせ",
     }
     out = tpl
     for k, v in vals.items():
@@ -634,7 +754,8 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     if extra:
         out = out.replace("</head>", extra["hreflang"] + "\n</head>", 1)
 
-    page = dest / "blog" / meta["slug"] / "index.html"
+    out = apply_credit(out, credit, sites_mod.article_url(cfg, meta), meta)
+    page = dest / page_dir(cfg) / meta["slug"] / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(out, encoding="utf-8", newline="\n")
 
@@ -685,7 +806,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
 def _recent_articles(dest: Path, cfg, exclude_slug, n):
     """相手サイトの既存記事から関連リンク先を選ぶ（新しい順）"""
     out = []
-    blog = dest / "blog"
+    blog = dest / page_dir(cfg)
     if not blog.exists():
         return out
     # 並びは記事の公開日で決める。作業コピーの mtime はクローンし直すたびに揃って
@@ -702,7 +823,8 @@ def _recent_articles(dest: Path, cfg, exclude_slug, n):
         pub = (re.search(r'"datePublished":\s*"([^"]+)"', c) or [None, ""])[1]
         pages.append((pub, d.name, re.sub(r"<[^>]+>", "", m.group(1)).strip()))
     pages.sort(key=lambda x: (x[0], x[1]), reverse=True)
-    return [(title, f"/blog/{name}/") for _, name, title in pages[:n]]
+    pre = (cfg.get("url_prefix") or "/blog").rstrip("/")
+    return [(title, f"{pre}/{name}/") for _, name, title in pages[:n]]
 
 
 def _public_file(dest: Path, name: str):
@@ -863,6 +985,12 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     import md2html
     html, _ = md2html.convert(body)
     html = insert_mid_cta(html, cfg)
+    # 監修の表示はテーマに欄が無くても出るよう本文に入れる（構造化データは unfiltered_html の権限が要る）
+    chars = len(re.sub(r"<[^>]+>|\s", "", html))
+    credit = client_credit(cfg)
+    if credit:
+        html = (credit["byline"] + "\n" if credit["byline"] else "") + html + "\n" + \
+            credit_jsonld(credit, sites_mod.article_url(cfg, meta), meta)
     score = int(meta.get("score") or 0)
 
     cat_slug = meta["category"]
@@ -906,7 +1034,7 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     print(f"配信先: {cfg['name']}（WordPress / {cfg['domain']}）")
     print(f"  {how}: 投稿ID {res.get('id')} / カテゴリ {cat_slug}"
           + (f" / アイキャッチ {thumb}" if thumb else ""))
-    print(f"  本文: {len(re.sub(r'<[^>]+>|\\s', '', html)):,}字 / score {score}")
+    print(f"  本文: {chars:,}字 / score {score}")
 
     if status == "publish":
         print(f"  公開しました: {link}")
@@ -943,7 +1071,7 @@ def _delivered(cfg, meta):
     dest = ensure_clone(cfg, _push_token())
     where = {"nextjs-json": dest / cfg["content_dir"] / f"{slug}.json",
              "external-md": dest / cfg["content_dir"] / f"{slug}.md",
-             "external-html": dest / "blog" / slug / "index.html"}.get(cfg["type"])
+             "external-html": dest / page_dir(cfg) / slug / "index.html"}.get(cfg["type"])
     return bool(where and where.is_file()), dest
 
 
@@ -998,6 +1126,21 @@ def main():
     if meta["category"] not in cfg.get("categories", {}):
         raise SystemExit(f"カテゴリ '{meta['category']}' は {cfg['id']} に定義されていません"
                          f"（候補: {', '.join(cfg.get('categories', {}))}）")
+    if sites_mod.is_client(cfg["id"]):
+        # お客様の記事に運用会社の名前・実績・自社サイトへのリンクを出さない（監修者はお客様ご本人）
+        leak = sites_mod.operator_leaks(f"{meta.get('title', '')}\n{meta.get('description', '')}\n"
+                                        f"{json.dumps(meta.get('faq') or [], ensure_ascii=False)}\n{body}")
+        # ヒアリングシートの「使ってはいけない表現」（医療広告・景表法など）。シートで聞いて設定に
+        # 書いていたのに、どこも読んでいなかった
+        leak += [f"使えない表現「{w}」" for w in ((cfg.get("rules") or {}).get("ng_words") or [])
+                 if w and w in f"{meta.get('title', '')}{meta.get('description', '')}{body}"]
+        if leak:
+            raise SystemExit(f"BLOCKED(公開不可): {args.slug} にお客様の記事に出せないものがあります: "
+                             + " / ".join(dict.fromkeys(leak)))
+        # 公開前の確認を「要」にした社（医療など）は、確認の記録が付くまで配信しない
+        if (cfg.get("rules") or {}).get("review_before_publish") and args.slug not in editorial_review.load():
+            raise SystemExit(f"HELD(監修待ち): {args.slug} は {cfg['name']} の公開前の確認がまだです"
+                             f"（確認が済んだら python scripts/editorial_review.py --approve {args.slug}）")
 
     # 描画の崩れは、ここで一度だけ見る。各writerの中に書くと、配信方式が
     # 増えたときに必ず漏れる（実際 external-html と wordpress には検査が無く、

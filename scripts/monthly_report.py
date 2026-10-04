@@ -77,6 +77,16 @@ def site_cfg():
     return _s.load(SITE_ID)
 
 
+def addressee():
+    """表紙の宛名。お客様のレポートは company.json の正規表記で「御中」を付ける（自社サイトは空）"""
+    p = ROOT / "data" / "clients" / SITE_ID / "company.json"
+    try:
+        name = json.loads(p.read_text(encoding="utf-8")).get("name", "") if p.is_file() else ""
+    except (OSError, ValueError):
+        name = ""
+    return f"<b>{html.escape(name)} 御中</b><br>" if name else ""
+
+
 def cat_names():
     """カテゴリのスラッグ → 表示名。AI集客ラボの4つだけを書いていたため、
     コーポレート・補助金の月次では「keiri-bpo」「hojokin」がそのまま表に出た（2026-08 の月次）"""
@@ -204,7 +214,11 @@ def group_totals(sc_, cur_m):
     try:
         import sites as _s
         out = []
+        # お客様のレポートには当社3サイトの数字を載せない（その社だけ）。自社は自社3サイト
+        group = set(_s.group_of(SITE_ID))
         for sid, cfg in _s.load_all().items():
+            if sid not in group:
+                continue
             try:
                 r = sc_.searchanalytics().query(
                     siteUrl=f"https://{cfg['domain']}/",
@@ -578,7 +592,20 @@ def fetch_real():
     # --- GSC: 月別クリック/表示/CTR/順位 + クエリ別 ---
     sc = build("searchconsole", "v1", credentials=creds)
     site = f'https://{site_cfg()["domain"]}/'
+    # お客様の Search Console に権限をもらう前（導入直後）は 403 になる。そこで落ちると
+    # その社のレポートが丸ごと出ないので、GA4 と同じく「未接続」として出す。自社は落とす（設定の事故に気づくため）
+    data["gsc_missing"] = False
+    if _sites_mod.is_client(SITE_ID):
+        try:
+            sc.searchanalytics().query(siteUrl=site, body={
+                "startDate": f"{labels[-1]}-01", "endDate": cur_end, "rowLimit": 1}).execute()
+        except Exception as e:
+            print(f"  Search Console を読めません（{type(e).__name__}）。未接続として出します")
+            data["gsc_missing"] = True
     for i, m in enumerate(labels):
+        if data["gsc_missing"]:
+            data["months"][i].update({"clicks": 0, "impressions": 0, "ctr": 0, "pos": 0})
+            continue
         y, mo = map(int, m.split("-"))
         # 当月はまだ月末が来ていない。未来日を渡すと期間が空になるため今日で止める
         end = min(date(y + (mo == 12), (mo % 12) + 1, 1) - timedelta(days=1),
@@ -592,6 +619,8 @@ def fetch_real():
     # **60件取る。** 10件では「いまどの語で何位なのか」の全体像が出ない。
     # 前月ぶんも取り、順位が上がったか下がったかを添える
     def _q(label):
+        if data["gsc_missing"]:
+            return {}
         r = sc.searchanalytics().query(siteUrl=site, body={
             "startDate": f"{label}-01", "endDate": month_end(label),
             # **上限で切らない。** 60で切っていたため「60語」が実数のように
@@ -1920,6 +1949,12 @@ def _imp_facts():
     import json as _j
     f = {}
     arts = sorted((ROOT / "articles").glob("*.md"))
+    client = _sites_mod.is_client(SITE_ID)
+    if client:
+        # お客様のレポートに当社3サイトの記事・被リンク・言及の数を載せない（その社の分だけ数える）
+        cats = set(site_cfg().get("categories") or {})
+        arts = [p for p in arts if (re.search(r"^category:\s*(\S+)", p.read_text(encoding="utf-8-sig")[:2000], re.M)
+                                    or [None, ""])[1] in cats]
     f["n_articles"] = len(arts)
 
     # リンクだけの段落の積み上がり
@@ -1944,9 +1979,18 @@ def _imp_facts():
         f["link_worst"], f["link_max"] = [], 4
 
     # 一次データの本数
-    f["datasets"] = len([p for p in (ROOT / "site" / "data").glob("*") if p.is_dir()])
+    f["datasets"] = 0 if client else len([p for p in (ROOT / "site" / "data").glob("*") if p.is_dir()])
+    f["client"] = client
 
     # 外部での言及と被リンク
+    if client:
+        try:
+            d = _j.loads((ROOT / "data" / "backlinks.json").read_text(encoding="utf-8"))
+            f["backlinks"] = len(d.get(SITE_ID) or [])
+        except Exception:
+            f["backlinks"] = 0
+        f["bl_todo"], f["mentions"], f["mention_linked"], f["genai"] = 0, 0, 0, False
+        return f
     try:
         d = _j.loads((ROOT / "data" / "mentions.json").read_text(encoding="utf-8"))
         third = [x for x in d.get("items", []) if x.get("third", True)]
@@ -2006,6 +2050,18 @@ def improvements_html(part=1):
          "G-ranの生データから業種別の中央値を出す。記録の抽出だけ",
          "高"),
     ]
+    if f.get("client"):
+        # 当社の媒体・当社のデータの話をお客様のレポートに出さない
+        rows_human = [
+            ("外部からのリンクが少ない",
+             f'確認できた被リンク {f["backlinks"]}本',
+             "加盟団体・取引先・掲載中のポータルのページから、御社サイトへのリンクをお願いする（ヒアリングシート20章の接点から）",
+             "最優先"),
+            ("一次情報を増やす",
+             "記事に使える御社の数字（相談件数・期間・母数つき）",
+             "データ記入シートに記入いただくと、記事と一次データのページに使われます",
+             "高"),
+        ]
 
     rows_stop = [
         ("品質スコアを上げる", "91〜93点が96点以上より4.1位<b>上</b>",
@@ -2111,6 +2167,10 @@ def render(d, a):
         demo_banner += ('<div class="callout"><b>このサイトはGA4が未接続です。</b>'
                         'セッション・CV・AI経由参照は未計測で、0と出ている欄も計測値ではありません。'
                         'サイト設定の ga4_property_id を登録すると翌号から載ります。</div>')
+    if d.get("gsc_missing"):
+        demo_banner += ('<div class="callout"><b>このサイトは Search Console が未接続です。</b>'
+                        '表示回数・クリック・順位・検索語は未計測で、0と出ている欄も計測値ではありません。'
+                        'Search Console に当社のサービスアカウントを追加いただくと翌号から載ります。</div>')
 
     # 表紙ロゴ（白版）をbase64で埋め込み
     logo_b64 = ""
@@ -2557,7 +2617,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
     <span class="cv-badge">LPコンバージョン分析</span><span class="cv-badge">改善プラン</span>
   </div>
   <div class="cv-meta">
-    対象メディア: <b>{site_cfg()["name"]}</b>（https://{site_cfg()["domain"]}）<br>
+    {addressee()}対象メディア: <b>{site_cfg()["name"]}</b>（https://{site_cfg()["domain"]}）<br>
     発行: <b>セブンセンシズ株式会社</b>｜発行日: {date.today().isoformat()}｜作成: 自動集計+分析エンジン<br>
     本レポートの数値は Google Analytics 4 / Google Search Console / 運用ログの実測にもとづきます
   </div>
@@ -3285,7 +3345,8 @@ def _main():
 
     # 来月号で達成率を突合するため、設定した目標を翌月のキーで保存する
     # 途中経過の数字から作った目標で、月末の号の目標を上書きしない
-    if not DEMO and not THROUGH:
+    # Search Console 未接続の0から作った目標を残すと、翌号で「未達」と突合される
+    if not DEMO and not THROUGH and not d.get("gsc_missing"):
         y, mo = map(int, ym.split("-"))
         next_ym = f"{y + (mo == 12)}-{(mo % 12) + 1:02d}"
         import sites as _sm3
@@ -3347,12 +3408,18 @@ def _main():
     # 入れ替わる事故は紙を読まないと見つからない
     queue = "--queue" in sys.argv
     if SEND_EMAIL or queue:
-        try:
-            import report_audit
-            ok, bad = report_audit.audit(str(pdf_path), ym,
-                                         THROUGH.isoformat() if THROUGH else None)
-        except Exception as ex:
-            ok, bad = False, [f"照合が動きませんでした（{type(ex).__name__}: {ex}）"]
+        if d.get("gsc_missing") and d.get("ga_missing"):
+            # 導入直後のお客様: 計測した数字が1つも無い（全部「未計測」と印字）。照合は Search Console を
+            # 取り直すので必ず 403 で落ち、権限をもらうまで毎月レポートが出なかった
+            ok, bad = True, []
+            print("  GA4・Search Console とも未接続のため、照合する数字がありません（未計測として発行）")
+        else:
+            try:
+                import report_audit
+                ok, bad = report_audit.audit(str(pdf_path), ym,
+                                             THROUGH.isoformat() if THROUGH else None)
+            except Exception as ex:
+                ok, bad = False, [f"照合が動きませんでした（{type(ex).__name__}: {ex}）"]
         if queue:
             # 社ごとにメールを送らず、まとめて1通にする（report_digest.py が送る）。
             # 照合に落ちた社は添付せず「照合で止めた」として本文に載る

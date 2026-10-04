@@ -251,14 +251,19 @@ def wp_push(cfg, ch):
 
 # ---------------------------------------------------------------- Git の社
 
-def git_push(cfg):
+BOT = ("-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp")
+
+
+def git_push(cfg, committed=False):
+    """committed: 呼び出し側がもうコミットした（戻すとき）。作業ツリーが空でも押す。
+    以前は差分の有無だけで判断していたため、--rollback の revert が押されずに「変更はありません」で終わった"""
     import publish
     dest = WORK / cfg["id"]
     git("add", "-A", cwd=dest)
-    if not git("status", "--porcelain", cwd=dest).strip():
+    if git("status", "--porcelain", cwd=dest).strip():
+        git(*BOT, "commit", "-q", "-m", f"サイト構成の変更（管制塔 {date.today()}）", cwd=dest)
+    elif not committed:
         return "変更はありません"
-    git("-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp",
-        "commit", "-q", "-m", f"サイト構成の変更（管制塔 {date.today()}）", cwd=dest)
     token = publish._push_token()
     if not publish.try_run(["git", "push", f"https://x-access-token@github.com/{cfg['repo']}.git", f"HEAD:{cfg['branch']}"],
                            cwd=dest, env=publish.git_auth(token)):
@@ -293,8 +298,11 @@ def _mail_zip(cfg, path: Path):
     import urllib.request
     if not os.environ.get("GITHUB_ACTIONS"):
         return False
+    # ヒアリングシートは会社の窓口を "email" で書く。"contact_email" だけを見ていたため、
+    # シートから登録した社には1通も届かず、ZIP を作っただけで終わっていた
     try:
-        to = json.loads((ROOT / "data" / "clients" / cfg["id"] / "company.json").read_text(encoding="utf-8")).get("contact_email")
+        c = json.loads((ROOT / "data" / "clients" / cfg["id"] / "company.json").read_text(encoding="utf-8"))
+        to = c.get("contact_email") or c.get("email")
     except (OSError, ValueError):
         to = None
     key, sender = os.environ.get("RESEND_API_KEY"), os.environ.get("LEAD_FROM_EMAIL")
@@ -337,8 +345,8 @@ def main():
             publish.ensure_clone(cfg, publish._push_token())
             print(f"配信先リポジトリを取りました: {dest}（ここで直して --push）")
         elif a.rollback:
-            git("revert", "--no-edit", "HEAD", cwd=dest)
-            print(git_push(cfg))
+            git(*BOT, "revert", "--no-edit", "HEAD", cwd=dest)
+            print(git_push(cfg, committed=True))
         elif a.push:
             print(git_push(cfg))
         else:

@@ -64,6 +64,22 @@ def record(slugs, by=REVIEWER, note=""):
     return len(new)
 
 
+def reviewer_for(slug):
+    """その記事の監修者。お客様のサイトの記事なら company.json の監修者"""
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import sites
+        t = (ROOT / "articles" / f"{slug}.md").read_text(encoding="utf-8-sig")[:3000]
+        m = re.search(r"^category:\s*(\S+)", t, re.M)
+        sid = sites.find_category_owner(m.group(1)) if m else None
+        if sid and sites.is_client(sid):
+            c = json.loads((ROOT / "data" / "clients" / sid / "company.json").read_text(encoding="utf-8"))
+            return (c.get("supervisor") or {}).get("name") or f"{sid} の監修者"
+    except (OSError, ValueError):
+        pass
+    return REVIEWER
+
+
 def _score(path):
     m = re.search(r"^score:\s*([0-9.]+)", path.read_text(encoding="utf-8-sig")[:3000], re.M)
     return float(m.group(1)) if m else 0.0
@@ -85,7 +101,10 @@ def main():
         miss = [s for s in slugs if not (ROOT / "articles" / f"{s}.md").is_file()]
         if miss:
             raise SystemExit("原稿が見つかりません: " + ", ".join(miss))
-        print(f"  記録しました: {record(slugs)}本（監修: {REVIEWER}）")
+        # お客様の記事の監修者はお客様ご本人。当社の代表の名前で記録しない
+        by = {s: reviewer_for(s) for s in slugs}
+        n = sum(record([s], by=by[s]) for s in slugs)
+        print(f"  記録しました: {n}本（監修: {' / '.join(sorted(set(by.values())))}）")
         return 0
     if "--approve-all-pending" in a:
         print(f"  記録しました: {record(pending())}本（監修: {REVIEWER}）")

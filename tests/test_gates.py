@@ -283,10 +283,16 @@ def test_every_article_has_a_lead_path():
     新しい記事が増えるたびに漏れるため、機械で見張る。
     """
     lead = re.compile(r"/diagnosis/|/tools/|/site-audit/|#diagnosis|/contact|/lp/")
+    # お客様の記事の行き先はその社の CTA（予約ページなど）。自社の入口の形だけを見ると、正しい記事が落ちる
+    import sites as S
+    cta = {c: (cfg.get("cta") or {}).get("url") for sid, cfg in S.load_all().items()
+           for c in (cfg.get("categories") or {})}
     missing = []
     for f in sorted((ROOT / "articles").glob("*.md")):
-        body = f.read_text(encoding="utf-8", errors="replace").split("---", 2)[-1]
-        if not lead.search(body):
+        t = f.read_text(encoding="utf-8", errors="replace")
+        body = t.split("---", 2)[-1]
+        cat = (re.search(r"^category:\s*(\S+)", t, re.M) or [None, ""])[1]
+        if not lead.search(body) and not (cta.get(cat) and cta[cat] in body):
             missing.append(f.stem)
     check("リード導線の無い記事", missing[:5], [])
 
