@@ -51,8 +51,16 @@ def gather():
     mentions = [m for m in (_load(ROOT / "data" / "mentions.json", {}).get("items") or [])
                 if str(m.get("third")).lower() == "true" and str(m.get("alive")).lower() == "true" and m.get("url")]
     videos = _load(ROOT / "data" / "videos.json", {})
-    works = [{"kind": "動画", "title": slug, "url": f"https://www.youtube.com/watch?v={v['youtube']}", "date": v.get("date", "")}
-             for slug, v in videos.items() if v.get("youtube")]
+    # 題名は記事の原稿から取る（slug のままだと何の動画か読めなかった）
+    works = [{"kind": "動画", "title": _article_title(slug), "url": f"https://www.youtube.com/watch?v={v['youtube']}",
+              "date": v.get("date", "")}
+             for slug, v in sorted(videos.items(), key=lambda kv: kv[1].get("date", "")) if v.get("youtube")]
+    # AIに聞いた業種別の調査（公開しているページだけ。題名はページそのもの）
+    research = []
+    for p in sorted((ROOT / "site" / "research").glob("*/index.html")):
+        m = re.search(r"<title>([^<｜]+)", p.read_text(encoding="utf-8"))
+        if m and "の質問" in m.group(1):      # ランキング（集計ページ）は調査の件数に数えない
+            research.append({"title": m.group(1).strip(), "url": f"/research/{p.parent.name}/"})
     datasets = sorted((ROOT / "data" / "datasets").glob("*.json"))
     creds = list(conf.get("credentials") or [])          # {title, url, date, kind}（登壇・寄稿・資格）
     seen, uniq = set(), []
@@ -63,13 +71,28 @@ def gather():
     n_articles = sum(1 for p in (ROOT / "articles").glob("*.md")
                      if re.search(r"^score:\s*(9\d|100)", p.read_text(encoding="utf-8-sig")[:600], re.M))
     return {"date": date.today().isoformat(), "same_as": uniq, "mentions": mentions[:30], "works": works[-20:],
-            "credentials": creds, "counts": {"articles": n_articles, "datasets": len(datasets), "videos": len(works)}}
+            "credentials": creds, "research": research,
+            "counts": {"articles": n_articles, "datasets": len(datasets), "videos": len(works), "research": len(research)}}
+
+
+def _article_title(slug):
+    p = ROOT / "articles" / f"{slug}.md"
+    if p.is_file():
+        m = re.search(r"^title:\s*(.+)$", p.read_text(encoding="utf-8-sig")[:800], re.M)
+        if m:
+            return m.group(1).strip().strip('"')
+    return slug
 
 
 def render_block(prof):
     lis = []
     c = prof["counts"]
-    lis.append(f"<li>監修記事 {c['articles']}本（品質90点以上で公開したもの）／公開した一次データ {c['datasets']}件／解説動画 {c['videos']}本</li>")
+    lis.append(f"<li>監修記事 {c['articles']}本（品質90点以上で公開したもの）／公開した一次データ {c['datasets']}件／解説動画 {c['videos']}本"
+               + (f"／AIへの聞き取り調査 {c['research']}件" if c.get("research") else "") + "</li>")
+    if prof.get("research"):
+        lis.append('<li>調査: <a href="/research/">業種別「AIは何を出典に答えるか」の調査</a>（'
+                   + "・".join(_h.escape(r["title"].split("の質問")[0]) for r in prof["research"] if "の質問" in r["title"])
+                   + "）</li>")
     for m in prof["mentions"][:10]:
         lis.append(f'<li>掲載: <a href="{_h.escape(m["url"])}" target="_blank" rel="noopener">{_h.escape(m.get("where") or m["url"])}</a>'
                    f'（{_h.escape(str(m.get("added", ""))[:7])}）</li>')
