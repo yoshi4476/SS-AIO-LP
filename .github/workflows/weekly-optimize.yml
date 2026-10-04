@@ -94,6 +94,8 @@ jobs:
               echo "$out" | tail -5
               python scripts/hub_client.py error_log kw "$s: 週次補充が失敗しました" || true
             fi
+            # 拠点の地域×業種の語（無料のサジェストで需要があるものだけ。kw_seeds.regions を書いた社だけ動く）
+            python scripts/region_kw.py --site "$s" --append 2>&1 | tail -4 || true
             # クレジット切れは実行ログの奥に埋もれる。補充が細る原因に
             # 気づけないため、注釈と通知に回す（記事作成自体は止まらない）。
             # 通知本文は optimize が組むので、成果物で渡す（下の「要対応を渡す」）
