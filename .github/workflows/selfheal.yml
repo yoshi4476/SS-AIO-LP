@@ -57,6 +57,8 @@ jobs:
           python -m pip install --quiet --upgrade pip
           pip install --quiet -r requirements.txt || true
           npm install -g @anthropic-ai/claude-code
+          # 図解の検査（image_check）が日本語フォントを使う。無いと門が途中で止まる（2026-10-05 に自動修復が提案）
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk > /dev/null 2>&1 || true
 
       # 記事のページ・sitemap・feed を Git から外す準備（2026-10-03）。このあとの工程が手元のページを読むので、
       # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
@@ -185,6 +187,16 @@ jobs:
       - name: 直った分だけコミット
         if: steps.diag.outputs.broken == '1' && steps.verify.outputs.ok == '1'
         run: |
+          # ワークフローの変更は CI の鍵（GITHUB_TOKEN）では push できず、修復の全体が拒否されて捨てられた
+          # （2026-10-05・50ファイル）。ワークフローの分だけ外して残りを反映し、変更案は成果物と要対応で知らせる
+          if [ -n "$(git status --porcelain -- .github/workflows)" ]; then
+            git diff -- .github/workflows > /tmp/workflow-change.patch || true
+            git checkout -- .github/workflows 2>/dev/null || true
+            git clean -fdq -- .github/workflows || true
+            echo "::warning::自動修復がワークフローの変更を提案しました（CI の鍵では反映できないため外しました。成果物 workflow-change を確認）"
+            mkdir -p automation/logs
+            echo "要対応: 自動修復がワークフローの変更を提案しました（反映は手で。run の成果物 workflow-change）" >> automation/logs/findings.txt
+          fi
           git add -A
           if git diff --cached --quiet; then
             echo "変更なし"
@@ -217,6 +229,16 @@ jobs:
             --dangerously-skip-permissions --max-turns 160 || true
           rm -f indexing-service-account.json
           python scripts/build.py || true
+          # ワークフローの変更は CI の鍵（GITHUB_TOKEN）では push できず、修復の全体が拒否されて捨てられた
+          # （2026-10-05・50ファイル）。ワークフローの分だけ外して残りを反映し、変更案は成果物と要対応で知らせる
+          if [ -n "$(git status --porcelain -- .github/workflows)" ]; then
+            git diff -- .github/workflows > /tmp/workflow-change.patch || true
+            git checkout -- .github/workflows 2>/dev/null || true
+            git clean -fdq -- .github/workflows || true
+            echo "::warning::自動修復がワークフローの変更を提案しました（CI の鍵では反映できないため外しました。成果物 workflow-change を確認）"
+            mkdir -p automation/logs
+            echo "要対応: 自動修復がワークフローの変更を提案しました（反映は手で。run の成果物 workflow-change）" >> automation/logs/findings.txt
+          fi
           git add -A
           git diff --cached --quiet || {
             git commit -m "selfheal: 落ちた回の記事を書き直し $(date '+%Y-%m-%d')"
@@ -286,6 +308,15 @@ jobs:
           fi
           rm -f indexing-service-account.json .env
 
+      - name: ワークフローの変更案を残す
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workflow-change
+          path: /tmp/workflow-change.patch
+          if-no-files-found: ignore
+          retention-days: 30
+
       - name: 結果の通知
         if: always()
         env:
@@ -306,6 +337,12 @@ jobs:
             msg="🔧 自動修復: 不具合を直しました（内容は実行ログ）"
           else
             msg="🚨 自動修復: 直せませんでした。手当てが必要です"
+          fi
+          # ワークフローの変更案は CI では反映できない。黙らずに知らせる
+          if [ -s /tmp/workflow-change.patch ]; then
+            routine=""
+            msg="$msg
+          ⚠️ ワークフローの変更案があります（CI の鍵では反映できないため外しました。成果物 workflow-change を確認して手で反映）"
           fi
           python scripts/notify_slack.py $routine "$msg
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

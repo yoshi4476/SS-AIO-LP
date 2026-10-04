@@ -320,3 +320,13 @@ def test_intake_requires_client_supervisor():
     check("掲載の同意が「可」でなければ止める", any("掲載の同意" in n for n in ng), True)
     sup = C.to_company(dict(got, **{"supervisor.consent": "可"}))["supervisor"]
     check("確認の連絡先は会社情報（表示に使う側）に入れない", ("contact" in sup, sup["display"]), (False, True))
+
+
+def test_selfheal_never_pushes_workflow_changes():
+    print("\n■ 自動修復: ワークフローの変更は外して残りを反映し、変更案は成果物と通知で知らせる")
+    wf = (ROOT / ".github" / "workflows" / "selfheal.yml").read_text(encoding="utf-8")
+    # CI の鍵ではワークフローを push できず、修復の全体（50ファイル）が拒否されて捨てられた（2026-10-05）
+    check("push の前にワークフローの変更を外す（2か所）", wf.count("git checkout -- .github/workflows") >= 2, True)
+    check("変更案を成果物に残し、通知に書く", ("workflow-change" in wf, "ワークフローの変更案があります" in wf), (True, True))
+    pr = (ROOT / "automation" / "selfheal_prompt.txt").read_text(encoding="utf-8")
+    check("AIへの指示でワークフローを直してはいけない側に置く", pr.index(".github/workflows/") > pr.index("直してはいけない"), True)
