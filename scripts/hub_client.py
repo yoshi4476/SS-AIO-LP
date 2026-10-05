@@ -194,6 +194,16 @@ def next_kw(site):
                     "category": r0.get("category", ""), "picked_by": "打ち出し外の語を飛ばした"})
         kw0 = got["keyword"]
 
+    # 同じ規則に当たる語の中では、15位以内に届きそうな細い語を先に書く（kw_reach の段。
+    # 段が同じなら台帳の並びのまま）。公開1〜4週に15位以内へ入った記事だけが6週以降も残った（2026-10-05）
+    try:
+        import kw_reach
+        held = kw_reach.held_queries(site)
+        reach_band = lambda k: kw_reach.band(kw_reach.reach(k, held=held))
+        todo.sort(key=lambda r: -reach_band(str(r["keyword"])))
+    except Exception:
+        reach_band = None
+
     def pick(rule, why):
         for r in todo:
             kw = str(r["keyword"])
@@ -221,6 +231,12 @@ def next_kw(site):
                 return hit
     except Exception:
         pass
+    if reach_band and reach_band(kw0) < 0:
+        # 台帳の先頭が広い語（「aio対策」のような1語）なら、同じ主力の中で届く語を先に書く。
+        # 広い語は山の週でも20位より下にとどまり、6週で消えた
+        hit = pick(lambda k: reach_band(k) > 0 and (not pat or re.search(pat, k.lower())), "15位に届く細い語")
+        if hit:
+            return hit
     if pat:
         if re.search(pat, kw0.lower()):
             return got                   # すでに主力の語ならそのまま

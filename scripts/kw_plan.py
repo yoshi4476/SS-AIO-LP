@@ -37,6 +37,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import kw_discover as KD          # noqa: E402  採用条件・GSC取得を共有する
 import kw_intent                  # noqa: E402
+import kw_reach                   # noqa: E402
 import rakko                      # noqa: E402
 from cannibal_check import dice, kw_conflicts, load_articles  # noqa: E402
 from kw_status import is_written, written_corpus              # noqa: E402
@@ -49,6 +50,8 @@ CREDIT_CAP = 400      # 1サイト1回のラッコ消費の上限。自動課金
 PER_SUBJECT = 10      # 1サブジェクトから採る上限。1業種に偏らせない
 PER_PRIORITY = 20     # 優先業種（kw_seeds.priority）の上限。月1件の成約で費用が回収できる業種を厚くする
 PRIORITY_BONUS = 1.5  # 優先業種の語への加点。汎用性は他業種を残すことで保つ
+REACH_WEIGHT = 0.7    # 15位以内に入れそうか（kw_reach・-2〜+2）の重み。振れ幅 2.8 を買い手の語（+3.0）より
+                      # 小さくし、「買い手の語を先に」を崩さない
 WEAK_SHARE = 0.2      # 「開く理由の弱い語」が占めてよい割合（kw_discover と同じ）
 MIN_VOL = 10          # これ未満は、GSCに表示が無ければ採らない
 GSC_KEEP_IMP = 10     # 検索数が取れなくても、この表示数があれば採る
@@ -116,8 +119,8 @@ def priority_subjects(S):
     return [str(t) for t in (S["cfg"].get("kw_seeds", {}).get("priority") or [])]
 
 
-def score(c, prio=()):
-    """並べ替えの点。買い手の語・開く理由・検索数・難易度・伸び・実証・優先業種を足す"""
+def score(c, prio=(), held=()):
+    """並べ替えの点。買い手の語・開く理由・検索数・難易度・伸び・実証・優先業種・15位に届くかを足す"""
     vol = c.get("vol") or 0
     kd = c.get("kd")
     intent = kw_intent.score(c["kw"])[0]
@@ -144,6 +147,10 @@ def score(c, prio=()):
         s += math.log1p(c["imp"]) * 0.6           # 自サイトに表示実績がある
     if prio and (c.get("subject") in prio or any(p.lower() in c["kw"].lower() for p in prio)):
         s += PRIORITY_BONUS                        # 月1件で費用が回収できる業種
+    # 公開1〜4週に15位以内（3回以上表示）に入った記事だけが6週以降も残った（2026-10-05・3サイト）。
+    # 広い語（1語・大きい検索数・高い難易度）を下げ、条件つきの細い語と、自サイトが近い語で
+    # 既に15位以内にいる主題を上げる。検索数の対数の加点（大きい語ほど得）を打ち消しすぎない重み
+    s += kw_reach.reach(c["kw"], vol, kd, held) * REACH_WEIGHT
     return round(s, 2)
 
 
@@ -488,7 +495,8 @@ def choose(cands, S, site_id):
     corpus, arts = written_corpus(), load_articles()
     owned = gsc_owned(site_id)
     prio = priority_subjects(S)
-    ranked = sorted(cands.values(), key=lambda c: -score(c, prio))
+    held = kw_reach.held_queries(site_id)
+    ranked = sorted(cands.values(), key=lambda c: -score(c, prio, held))
     picked, why_drop, per_subject = [], defaultdict(int), defaultdict(int)
     picked_norms = []
     weak_room = max(1, int(MAX_PLAN * WEAK_SHARE))
@@ -507,8 +515,9 @@ def choose(cands, S, site_id):
         if weak and weak_room <= 0:
             why_drop["弱い語の上限"] += 1
             continue
-        c["score"] = score(c, prio)
+        c["score"] = score(c, prio, held)
         c["intent"] = kw_intent.score(c["kw"])[0]
+        c["reach"] = kw_reach.reach(c["kw"], c.get("vol"), c.get("kd"), held)
         picked.append(c)
         picked_norms.append(c["kw"])
         per_subject[c["subject"]] += 1

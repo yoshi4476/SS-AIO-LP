@@ -1,0 +1,85 @@
+# -*- coding: utf-8 -*-
+"""公開1〜4週に15位以内へ入れるかを、語の選び方と公開直後の直しに効かせる門（2026-10-05）。
+
+3サイトの分析: 記事は公開1〜3週で表示の山、6週で山の約1/4に落ちる。6週以降も残った記事は公開1〜4週に
+「ある語で15位以内（3回以上表示）」に入っていた（入った11本中5〜7本が残る／入らなかった28本中3〜5本）。
+山の週の平均順位が20位より下の広い語（「aio対策」「士業 seo」）は消え、残った記事の6週目以降の表示の
+73%は1〜4週から出ていた細い語だった。開く理由の強さ（kw_intent）は残るかどうかと差が無かった。
+固定すること: 語の点（kw_reach）が広い語を下げ細い語を上げる／買い手の語を先に置く決まりを崩さない／
+next_kw が届く語を先に拾う。Search Console・台帳・AIには触れない（手元で作った行だけ）。
+"""
+from test_gates import check, ROOT
+
+
+def test_kw_reach_prefers_narrow_words_without_breaking_buyer_first():
+    import kw_plan as KP
+    import kw_reach as R
+    print("\n■ kw_reach: 15位以内に届きそうな細い語を上げ、広い語を下げる")
+    check("1語の広い語は下の段（aio対策）", R.band(R.reach("aio対策")), -1)
+    check("業種×手法の2語は並（士業 seo・工務店 seo）", (R.band(R.reach("士業 seo")), R.band(R.reach("工務店 seo"))), (0, 0))
+    check("条件つきの3語は上の段（ai導入 中小企業 費用・経理 代行 個人事業）",
+          (R.band(R.reach("ai導入 中小企業 費用")), R.band(R.reach("経理 代行 個人事業"))), (1, 1))
+    check("空白の無い自然文も語に割る（請求書の書き方）", R.tokens("請求書の書き方"), ["請求書", "書き方"])
+    check("条件の語で割っただけの複合語は加点を重ねない（中小企業補助金）", R.band(R.reach("中小企業補助金")), 0)
+    kw = "工務店 meo 費用"
+    check("検索数が大きく難易度が高いほど下げる", R.reach(kw, vol=8000, kd=60) < R.reach(kw, vol=100, kd=10) < R.reach(kw) + 0.01, True)
+    held = ["工務店 meo 上がらない"]
+    check("自サイトが15位以内を持つ近い語（語を2つ共有）がある主題は上げる", R.reach(kw, held=held) > R.reach(kw), True)
+    check("同じ語そのものは近い語に数えない（食い合いの検査の受け持ち）", R.near(kw, [kw]), False)
+    check("1語しか共有しなければ近い語にしない", R.near("工務店 seo 費用", ["工務店 meo 上がらない"]), False)
+    rows = {"2026-10-01": [], "2026-10-05": [{"kw": "a b", "pos": 9.0, "imp": 3}, {"kw": "c d", "pos": 15.1, "imp": 50},
+                                              {"kw": "e f", "pos": 4.0, "imp": 2}]}
+    import json
+    import tempfile
+    from pathlib import Path
+    old = R.RANKS
+    with tempfile.TemporaryDirectory() as td:
+        try:
+            R.RANKS = Path(td)
+            (Path(td) / "x.json").write_text(json.dumps(rows), encoding="utf-8")
+            check("15位以内・3回以上表示の語だけ、最新の日の行から拾う", R.held_queries("x"), ["a b"])
+            check("記録が無ければ空（Search Console を呼ばない）", R.held_queries("none"), [])
+        finally:
+            R.RANKS = old
+    span = (R.HI - R.LO) * KP.REACH_WEIGHT
+    check("振れ幅が買い手の語の加点（+3.0）より小さい", span < 3.0, True)
+    src = (ROOT / "scripts" / "kw_plan.py").read_text(encoding="utf-8")
+    check("買い手の語の加点は +3.0 のまま", "s += 3.0" in src, True)
+    a = {"kw": "経理代行 費用 相場", "vol": 210, "subject": "s"}
+    b = {"kw": "請求書 封筒 書き方", "vol": 5400, "subject": "s"}
+    check("近い語の加点があっても、外注を考える語が自分でやる大量検索の語より先（本章-1の例）",
+          KP.score(a, (), ["請求書 書き方 封筒 宛名"]) > KP.score(b, (), ["請求書 書き方 封筒 宛名"]), True)
+    check("choose は届く点を採用した語に残す（計画の表で確かめられる）", 'c["reach"] = kw_reach.reach(' in src, True)
+
+
+def test_next_kw_takes_reachable_words_first():
+    import hub_client as HC
+    import kw_reach as R
+    print("\n■ next_kw: 同じ規則の中では15位に届く語を先に、台帳の先頭が広い語なら届く語へ替える")
+    saved = {k: getattr(HC, k) for k in ("enabled", "_get", "all_kw", "_ai_targets", "_main_offer_pattern", "_drop_pattern")}
+    saved_held = R.held_queries
+    led = []
+    row = lambda k: {"site": "s", "status": "未着手", "keyword": k, "priority": "B"}
+    try:
+        HC.enabled = lambda: True
+        HC._get = lambda p: {"ok": True, "keyword": "aio対策", "category": "aio", "aim": ""}
+        HC.all_kw = lambda strict=False: led
+        HC._ai_targets = lambda site: set()
+        HC._main_offer_pattern = lambda site: r"aio"
+        HC._drop_pattern = lambda site: ""
+        R.held_queries = lambda site: []
+        led[:] = [row(k) for k in ("aio対策", "aio費用", "aio 費用 相場 中小企業")]
+        got = HC.next_kw("s")
+        check("強い語の中でも、台帳で後ろにある届く語を先に拾う",
+              (got["keyword"], got.get("picked_by")), ("aio 費用 相場 中小企業", "強い語×主力"))
+        led[:] = [row(k) for k in ("aio対策", "aio施策", "aio 導入 事例 中小企業")]
+        got = HC.next_kw("s")
+        check("台帳の先頭が広い語（aio対策）なら、主力の中で届く語へ替える",
+              (got["keyword"], got.get("picked_by")), ("aio 導入 事例 中小企業", "15位に届く細い語"))
+        HC._get = lambda p: {"ok": True, "keyword": "aio 導入 事例 中小企業", "category": "aio", "aim": ""}
+        got = HC.next_kw("s")
+        check("先頭が並以上の主力の語なら台帳のまま", (got["keyword"], got.get("picked_by")), ("aio 導入 事例 中小企業", None))
+    finally:
+        for k, v in saved.items():
+            setattr(HC, k, v)
+        R.held_queries = saved_held
