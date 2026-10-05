@@ -20,9 +20,9 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
 /* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
-<link rel="stylesheet" href="/css/style.css?v=fb7ee994">
+<link rel="stylesheet" href="/css/style.css?v=c7c645df">
 <script>document.documentElement.classList.add('js');</script>
-<script defer src="/js/site.js?v=90b77bea"></script>
+<script defer src="/js/site.js?v=c8b02a20"></script>
 <style>
 .audit-panel { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.5rem, 3vw, 2.6rem); max-width: 820px; margin: 0 auto; box-shadow: var(--shadow-lg); }
 .audit-form { display: flex; gap: .8rem; flex-wrap: wrap; }
@@ -213,6 +213,16 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 (function () {
   var form = document.getElementById("auditForm");
   var out = document.getElementById("auditResult");
+  // 記事の入力欄（?src=article_inline&from=<記事のパス>&url=…）から来たら、その URL ですぐ測る。
+  // 結果の表示と相談への移動を、どの記事から来たかつきで数える（記事→入力→結果→相談の段を作るため）
+  var qs = new URLSearchParams(location.search);
+  var from = /^\/[\w\-\/]+\/$/.test(qs.get("from") || "") ? qs.get("from") : "";
+  function ev(name, p) { if (from && typeof window.gtag === "function") window.gtag("event", name, p); }
+  var tp = { page_path: from, tool: "url_check" };
+  out.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest('[data-cta="site_audit_result_lp"]') : null;
+    if (a) ev("inline_tool_consult", tp);
+  });
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var url = document.getElementById("auditUrl").value.trim();
@@ -226,6 +236,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
         out.innerHTML = '<p style="color:#b91c1c;font-weight:700;margin-top:1.2rem;">' + d.error + "</p>";
         return;
       }
+      ev("inline_tool_result", tp);
       if (window.trackLead) {
         window.trackLead("site_audit_complete", { audit_score: d.score, audit_url: d.url });
         // 完了はCVではない（連絡先が無い）。CVは結果送付フォームの送信成功で数える
@@ -269,6 +280,15 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       out.innerHTML = '<p style="color:#b91c1c;font-weight:700;margin-top:1.2rem;">検査サーバーに接続できませんでした。本機能はサイト公開後（Cloudflare Pages上）で利用できます。</p>';
     });
   });
+  var given = (qs.get("url") || "").trim();
+  if (/^https?:\/\/[^\s]+\.[^\s]+/i.test(given)) {
+    document.getElementById("auditUrl").value = given;
+    // 結果の送付欄（leadCapture）は defer の site.js が作るので、読み終わってから測る
+    document.addEventListener("DOMContentLoaded", function () {
+      if (form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event("submit", { cancelable: true }));
+      out.scrollIntoView({ block: "start" });
+    });
+  }
 })();
 </script>
 </body>

@@ -358,6 +358,35 @@
     });
   });
 
+  // 記事の最初の章の入力欄（build.py の inline_tool）。見えた・入力を始めた・送った を記事のパスつきで数える。
+  // 押下だけでは、見られずに終わったのか、入れかけてやめたのかが分からないため
+  document.querySelectorAll('.inline-tool').forEach(function (box) {
+    var f = box.querySelector('form');
+    if (!f) return;
+    var p = { page_path: location.pathname, tool: box.getAttribute('data-tool') || 'tool' };
+    if ('IntersectionObserver' in window) {
+      var vio = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { ga('inline_tool_view', p); vio.disconnect(); }
+      }, { threshold: 0.6 });
+      vio.observe(box);
+    }
+    var started = false;
+    f.addEventListener('focusin', function () {
+      if (!started) { started = true; ga('inline_tool_start', p); }
+    });
+    // 「example.co.jp」のように https:// を省いた入力は、type=url の検査で黙って止まる。先頭を補って送り直す
+    var u = f.querySelector('input[type="url"]');
+    u.addEventListener('invalid', function () {
+      var v = u.value.trim();
+      if (v && !/^https?:\/\//i.test(v) && v.indexOf('.') > 0) {
+        u.value = 'https://' + v;
+        // 検査の途中で送り直すとブラウザが受け付けないので、検査が終わってから送る
+        setTimeout(function () { if (f.requestSubmit) f.requestSubmit(); else f.submit(); }, 0);
+      }
+    });
+    f.addEventListener('submit', function () { ga('inline_tool_submit', p); });
+  });
+
   // 記事目次のスクロールスパイ（現在読んでいる見出しをハイライト）
   var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
   if (tocLinks.length && 'IntersectionObserver' in window) {

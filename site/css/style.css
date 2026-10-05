@@ -1525,6 +1525,15 @@ main.lab .cta-final h2 { color: #fff; }
 .scan-box .sb-form .btn { flex: 0 0 auto; white-space: nowrap; }
 .scan-box .sb-alt { margin: .8rem 0 0; font-size: .82rem; color: rgba(255, 255, 255, .8); }
 .scan-box .sb-alt a, .article-body .scan-box .sb-alt a { color: #fff; text-decoration: underline; }
+/* 最初の章の中の入力欄（build.py の inline_tool）。読み始めの位置なので紺地の診断より軽く、本文の流れを切らない色にする */
+.inline-tool { margin: 1.6rem 0 2rem; padding: 1.1rem 1.25rem 1.2rem; border: 1px solid var(--sky-2); border-left: 4px solid var(--blue); border-radius: 14px; background: var(--sky); }
+main.article .article-body .inline-tool .it-head { margin: 0 0 .25rem; font-size: 1.02rem; font-weight: 800; line-height: 1.55; color: var(--navy); text-wrap: balance; }
+main.article .article-body .inline-tool .it-sub { margin: 0 0 .75rem; font-size: .84rem; font-weight: 400; line-height: 1.7; color: var(--muted); }
+.inline-tool .it-form { display: flex; gap: .5rem; flex-wrap: wrap; }
+.inline-tool .it-form input[type=url] { flex: 1 1 14em; min-width: 0; font: inherit; font-size: 1rem; padding: .7em .9em; border: 1.5px solid var(--sky-2); border-radius: 10px; background: #fff; color: var(--text); }
+.inline-tool .it-form input[type=url]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, .15); }
+.inline-tool .it-form .btn { flex: 0 0 auto; white-space: nowrap; }
+@media (max-width: 480px) { .inline-tool .it-form .btn { flex: 1 1 100%; } }
 .scan-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; padding: .6rem .8rem calc(.6rem + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, .96); box-shadow: 0 -8px 24px -12px rgba(7, 26, 56, .35); transform: translateY(110%); transition: transform .3s ease; }
 .scan-sticky.is-on { transform: none; }
 .scan-sticky .btn { display: block; width: 100%; text-align: center; }

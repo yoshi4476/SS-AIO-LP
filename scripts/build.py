@@ -623,6 +623,50 @@ def insert_tool_box(content, meta):
     return content[:pos] + tool_box(meta) + "\n" + content[pos:]
 
 
+# 最初の章に置く「その場で使える入口」。送り先は URL だけで動くツールに限る
+# （AI診断は地域・社名・メールが要り「登録不要」と書けない）。文言は運用者に見せた案のまま
+INLINE_TOOL = {"tool": "url_check", "path": "/tools/url-check/",
+               "head": "御社のサイト、ChatGPTやGoogleのAIに出ていますか？",
+               "sub": "URLを入れると無料で確かめられます（登録不要）", "button": "確かめる"}
+
+
+def inline_tool(meta):
+    """記事の最初の章の中に置く URL の入力欄。押すと URL診断がその URL で自動で始まる。
+
+    記事のボタンは別ページへの誘導だけで、9/5〜10/2 の3サイト合計で記事の訪問261に対し押下3・問い合わせ0だった。
+    読み始めの位置で、ページを移らずに手を出せる入口を1つ置く。from は記事のパスで、ツール側の計測に引き継ぐ
+    """
+    t = INLINE_TOOL
+    page = f'/{meta["category"]}/{meta["slug"]}/'
+    return (f'<aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="{t["tool"]}">'
+            f'<p class="it-head">{t["head"]}</p>'
+            f'<p class="it-sub">{t["sub"]}</p>'
+            f'<form class="it-form" action="{t["path"]}" method="get">'
+            f'<input type="hidden" name="src" value="article_inline">'
+            f'<input type="hidden" name="from" value="{page}">'
+            f'<input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL">'
+            f'<button type="submit" class="btn btn-primary" data-cta="article_inline_{t["tool"]}">{t["button"]}</button>'
+            f'</form></aside>')
+
+
+def insert_inline_tool(content, meta):
+    """最初の見出しの直下の1文結論（最初の段落）の後に、入力欄を1つだけ置く。
+    最初の章が FAQ・まとめのとき、見出しの直後が段落でないとき、最初の章に別の案内（口コミ返信ツール等）が
+    既に入るときは置かない（同じ章に案内が2つ並ぶと本文が途切れる）"""
+    import re as _re
+    heads = list(_re.finditer(r"<h2[^>]*>(.*?)</h2>", content, _re.S))
+    if not heads or _re.search(r"よくある質問|まとめ", _re.sub(r"<[^>]+>", "", heads[0].group(1))):
+        return content
+    end = heads[1].start() if len(heads) > 1 else len(content)
+    if 'class="scan-box' in content[heads[0].end():end] or 'class="inline-tool' in content:
+        return content
+    m = _re.match(r"\s*<p[ >].*?</p>", content[heads[0].end():end], _re.S)
+    if not m:
+        return content
+    pos = heads[0].end() + m.end()
+    return content[:pos] + "\n" + inline_tool(meta) + content[pos:]
+
+
 # 記事の業種 → LPの業種欄の選択肢（診断を始めたときに業種が選ばれた状態にする。同業平均にも入る）
 LP_INDUSTRY = {"shika": "クリニック・歯科医院", "clinic": "クリニック・歯科医院", "seikotsuin": "クリニック・歯科医院",
                "fudosan": "不動産", "koumuten": "工務店・リフォーム", "reform": "工務店・リフォーム",
@@ -945,7 +989,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
-        "{{CONTENT}}": insert_mid_cta(insert_tool_box(_video_embed(content, meta), meta), meta) + _research_box(meta),
+        "{{CONTENT}}": insert_mid_cta(insert_inline_tool(insert_tool_box(_video_embed(content, meta), meta), meta), meta)
+                       + _research_box(meta),
         "{{LP_URL}}": lp_url(meta),
         "{{LP_LABEL}}": lp_label(meta),
         "{{CTA_COPY}}": cta_copy(meta),
