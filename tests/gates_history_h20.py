@@ -167,3 +167,16 @@ def test_glossary_is_seen_by_cannibal_checks():
         check("kw_guard: 審査中の記事自身の定義から作った用語集は相手に数えない", (lv, rs), (0, []))
     finally:
         KG.gsc_rows, KG.glossary_source = real_rows, real_src
+
+
+def test_pace_inspects_across_publish_dates():
+    import pace as P
+    print("\n■ 量産の兆候: URL検査は公開時期の端から端まで均等に選ぶ（名前順の先頭だけを見ない）")
+    arts = [{"slug": f"a{i:02d}", "date": f"2026-09-{i + 1:02d}"} for i in range(30)]
+    arts.reverse()
+    got = P.spread(arts, 5)
+    check("30本から5本: 最初と最後の公開日を含み、等間隔", [a["date"] for a in got],
+          ["2026-09-01", "2026-09-08", "2026-09-15", "2026-09-23", "2026-09-30"])
+    check("上限より少なければ全部", len(P.spread(arts[:3], 5)), 3)
+    src = (ROOT / "scripts" / "pace.py").read_text(encoding="utf-8")
+    check("measure は spread を通して検査する", "spread(new, INSPECT_MAX)" in src, True)

@@ -108,6 +108,16 @@ def coverage(cfg, paths):
     return out
 
 
+def spread(items, k):
+    """公開日の順に並べ、端から端まで等間隔に k 本選ぶ。
+    名前順の先頭だけを見ると公開時期が偏り（2026-10-05: コーポレートは80本中40本）、
+    未登録が固まった時期を見落とすか、そこだけを見る"""
+    items = sorted(items, key=lambda a: (a["date"], a["slug"]))
+    if len(items) <= k:
+        return items
+    return [items[round(i * (len(items) - 1) / (k - 1))] for i in range(k)]
+
+
 def measure(sid, cfg, arts, end, use_inspect=True):
     import content_yield as CY
     import sites as S
@@ -117,7 +127,7 @@ def measure(sid, cfg, arts, end, use_inspect=True):
     paths = [CY._path(S.article_url(cfg, a)) for a in new]
     cov, how = {}, "URL検査"
     if use_inspect and len(new) >= MIN_NEW:
-        cov = coverage(cfg, paths)
+        cov = coverage(cfg, [CY._path(S.article_url(cfg, a)) for a in spread(new, INSPECT_MAX)])
         if sum(1 for v in cov.values() if v.startswith("ERROR")) > len(cov) / 2:
             cov, how = {}, "代替（表示0の割合）"
     cur = CY.pages(cfg, end - timedelta(days=27), end)
