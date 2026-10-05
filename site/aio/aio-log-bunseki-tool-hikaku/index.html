@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIOのログ分析ツールはどれ？4種の比較と選び方</title>
+<meta name="description" content="AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・生ログ集計・GA4の4種に分かれ、何を数えたいかで選びます。AIクローラーの訪問はGA4に出ないため、ログ側で403や429の有無まで確かめる手順と、条件別の選び方を解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AIOのログ分析ツールはどれ？4種の比較と選び方">
+<meta property="og:description" content="AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・生ログ集計・GA4の4種に分かれ、何を数えたいかで選びます。AIクローラーの訪問はGA4に出ないため、ログ側で403や429の有無まで確かめる手順と、条件別の選び方を解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/thumbs/theme-choose.jpg">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=c7c645df">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=c8b02a20"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AIOのログ分析ツールはどれ？4種の比較と選び方",
+   "description": "AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・生ログ集計・GA4の4種に分かれ、何を数えたいかで選びます。AIクローラーの訪問はGA4に出ないため、ログ側で403や429の有無まで確かめる手順と、条件別の選び方を解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/",
+   "image": "https://ai.7senses.co.jp/images/thumbs/theme-choose.jpg",
+   "datePublished": "2026-10-05",
+   "dateModified": "2026-10-05",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ],
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://x.com/sevensensece",
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/",
+      "https://www.7senses.co.jp/",
+      "https://www.google.com/maps?cid=815053100031552916",
+      "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+     ],
+     "location": {
+      "@type": "Place",
+      "geo": {
+       "@type": "GeoCoordinates",
+       "latitude": 34.6791137,
+       "longitude": 135.555196
+      },
+      "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+     },
+     "knowsAbout": [
+      "MEO（マップ検索最適化）",
+      "AIO（AI検索最適化）",
+      "LLMO（大規模言語モデル最適化）",
+      "SEO",
+      "Googleビジネスプロフィール運用",
+      "店舗集客",
+      "AI導入支援",
+      "IT導入補助金",
+      "ものづくり補助金",
+      "小規模事業者持続化補助金",
+      "経理BPO"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ]
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://x.com/sevensensece",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/",
+     "https://www.7senses.co.jp/",
+     "https://www.google.com/maps?cid=815053100031552916",
+     "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+    ],
+    "location": {
+     "@type": "Place",
+     "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.6791137,
+      "longitude": 135.555196
+     },
+     "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+    },
+    "knowsAbout": [
+     "MEO（マップ検索最適化）",
+     "AIO（AI検索最適化）",
+     "LLMO（大規模言語モデル最適化）",
+     "SEO",
+     "Googleビジネスプロフィール運用",
+     "店舗集客",
+     "AI導入支援",
+     "IT導入補助金",
+     "ものづくり補助金",
+     "小規模事業者持続化補助金",
+     "経理BPO"
+    ]
+   },
+   "inLanguage": "ja",
+   "mentions": [
+    {
+     "@type": "Thing",
+     "name": "Google AI Overview",
+     "sameAs": "https://support.google.com/websearch/answer/14901683"
+    },
+    {
+     "@type": "Thing",
+     "name": "ChatGPT",
+     "sameAs": "https://ja.wikipedia.org/wiki/ChatGPT"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AIOのログ分析ツールはどれ？4種の比較と選び方",
+     "item": "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "ログ分析は自社でどこまでできますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Cloudflareの管理画面かGA4なら、設定済みであれば社内で確認できます。生ログの集計は担当者の技術が要ります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "運用代行に頼むと何をしてもらえますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "クローラーの到達確認、弾かれた記録の原因調査、引用されない記事の直しまでを一続きで行います。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ログ分析を始めてから変化が見えるまでどのくらいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "403の解消などの設定の直しは、直した日以降のログで確かめられます。引用や順位の変化は月単位で見てください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ログ分析が向かないのはどんな場合ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "狙う語がまだ検索の圏外なら先に順位を上げてください。クローラーが来ていても引用は検索上位から選ばれやすいからです。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有料のログ分析ツールは必要ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "月の訪問記録が数千行を超え、複数サイトを比べたくなるまでは、無料の範囲で足ります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GA4にChatGPTからの流入が出ないのはなぜですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "リファラーが渡らないアプリ経由の訪問は直接流入に入ります。ログとGA4の両方で見てください。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/lab/">実装ラボ</a>
+      <a href="/lp/#service" data-cta="nav_service">サービス・料金</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/tools/" class="nav-tool" data-cta="nav_tools">無料ツール</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AIOのログ分析ツールはどれ？4種の比較と選</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AIOのログ分析ツールはどれ？4種の比較と選び方</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-10-05">2026年10月5日</time></span>
+      <span>更新: <time datetime="2026-10-05">2026年10月5日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AIO%E3%81%AE%E3%83%AD%E3%82%B0%E5%88%86%E6%9E%90%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AF%E3%81%A9%E3%82%8C%EF%BC%9F4%E7%A8%AE%E3%81%AE%E6%AF%94%E8%BC%83%E3%81%A8%E9%81%B8%E3%81%B3%E6%96%B9&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-log-bunseki-tool-hikaku%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! ブックマーク</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/thumbs/theme-choose.webp" alt="AIOのログ分析ツールはどれ？4種の比較と選び方" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><span class="toc-title">目次</span><ol><li><a href="#aioga4">AIOのログ分析とは？GA4では見えない訪問を数える作業</a></li><li><a href="#ai4">AIクローラーの訪問記録を数える4つの方法と料金</a></li><li><a href="#_1">比べる軸は「誰の訪問を数えるか」と「生ログに触れるか」</a></li><li><a href="#_2">サーバー環境ごとの選び方</a></li><li><a href="#3">ログで最初に確かめる3つの数字</a></li><li><a href="#aio">AIOのログ分析でよくある失敗</a></li><li><a href="#_5">ログ分析の結果を引用につなげる進め方</a></li><li><a href="#_6">よくある質問</a></li><li><a href="#ga4">まとめ: ログでは「届いているか」、GA4では「人が来たか」を見る</a></li></ol></nav>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・サーバーの生ログ集計・GA4の4種類に分かれます。</strong>選ぶ基準は機能の多さではなく「誰の訪問を数えたいか」です。AIクローラーの訪問はGA4には記録されないため、ログ側で数えないと「AIが読みに来ているか」は分かりません。当社は自社サイトで主要AIクローラー20種を許可し、robots.txtと実際のアクセスの両方で到達を毎日確かめています。その運用から、ツールの違いと条件別の選び方を整理します。</p>
+<div class="target-reader">この記事は、自社サイトにAIのクローラーが来ているかを確かめたい中小企業の経営者・Web担当者向けです。</div>
+
+<p class="freshness">※ 2026年10月時点の情報です。ツールの料金・提供範囲は各社の公式ページで確認した時点のものです。</p>
+
+<div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>AIOのログ分析で数えるものと、GA4で見えないもの</li><li>ログ分析ツール4種の違いと料金の目安</li><li>サーバー環境ごとの選び方</li><li>ログで最初に確かめる3つの数字と、よくある失敗</li></ul></div>
+
+<h2 id="aioga4">AIOのログ分析とは？GA4では見えない訪問を数える作業</h2>
+<p><strong>AIOのログ分析は、AIのクローラーが自社サイトを読みに来た記録を数え、届いていない原因を探す作業です。</strong></p>
+<aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/aio/aio-log-bunseki-tool-hikaku/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
+<div class="definition-box"><span class="term">AIOのログ分析とは</span>、サーバーやCDNに残るアクセス記録から、GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBotなどAIのクローラーの訪問回数と応答の結果を集計することです。</div>
+
+<p>GA4は、ページの中のJavaScriptが動いた訪問だけを数えます。クローラーの多くはJavaScriptを動かしません。加えて、<a href="https://support.google.com/analytics/answer/9888366" target="_blank" rel="noopener">GA4は既知のボットの通信を自動で除外する</a>仕様です。</p>
+<p>そのため、GA4に出るのは「AIの回答から人がクリックして来た訪問」だけになります。<em>AIが読みに来たか</em>と<em>人がAI経由で来たか</em>は、別の道具で数える必要があります。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">知りたいこと</th>
+<th style="text-align: left;">記録が残る場所</th>
+<th style="text-align: left;">GA4で分かるか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">AIのクローラーが読みに来たか</td>
+<td style="text-align: left;">サーバー・CDNのアクセスログ</td>
+<td style="text-align: left;">分からない</td>
+</tr>
+<tr>
+<td style="text-align: left;">クローラーが弾かれていないか</td>
+<td style="text-align: left;">同上（403・429の応答）</td>
+<td style="text-align: left;">分からない</td>
+</tr>
+<tr>
+<td style="text-align: left;">AIの回答から人が来たか</td>
+<td style="text-align: left;">GA4の参照元</td>
+<td style="text-align: left;">分かる</td>
+</tr>
+</tbody>
+</table></div>
+<p>当社がログを見始めた理由も、ここにあります。robots.txtで許可していても、CDNやWAFがその手前で通信を止めることがあるためです。<strong>robots.txtの記述だけでは、届いているかの証明になりません。</strong></p>
+<h2 id="ai4">AIクローラーの訪問記録を数える4つの方法と料金</h2>
+<p><strong>AIクローラーの訪問記録を数える方法は、記録の取り方の違いで4種類に分かれ、1つで全部は見られません。</strong></p>
+<p>まず4種類を同じ表で並べます。料金は2026年10月時点で各社の公式ページに書かれていた内容です。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">種類</th>
+<th style="text-align: left;">代表例</th>
+<th style="text-align: left;">数えられるもの</th>
+<th style="text-align: left;">料金の目安</th>
+<th style="text-align: left;">向く人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">CDNの管理画面</td>
+<td style="text-align: left;">Cloudflare AI Crawl Control</td>
+<td style="text-align: left;">AIクローラー別の訪問・許可/拒否・応答コード</td>
+<td style="text-align: left;">全プランで利用可（参照元の集計は有料プラン）</td>
+<td style="text-align: left;">Cloudflareを使っているサイト</td>
+</tr>
+<tr>
+<td style="text-align: left;">ログ専用ツール</td>
+<td style="text-align: left;">Screaming Frog Log File Analyser</td>
+<td style="text-align: left;">取り込んだログのボット別集計・ページ別の巡回</td>
+<td style="text-align: left;">無料版は1,000行・1件まで、有料版は年99ポンド</td>
+<td style="text-align: left;">生ログを手元に落とせる人</td>
+</tr>
+<tr>
+<td style="text-align: left;">生ログの集計</td>
+<td style="text-align: left;">GoAccess・grepなど</td>
+<td style="text-align: left;">UA別の件数・応答コード</td>
+<td style="text-align: left;">無料（オープンソース）</td>
+<td style="text-align: left;">サーバーに入れる技術者がいる</td>
+</tr>
+<tr>
+<td style="text-align: left;">アクセス解析</td>
+<td style="text-align: left;">GA4</td>
+<td style="text-align: left;">AIの回答から来た人の訪問</td>
+<td style="text-align: left;">無料</td>
+<td style="text-align: left;">全サイト（必ず併用）</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="https://developers.cloudflare.com/ai-crawl-control/" target="_blank" rel="noopener">Cloudflareの公式ドキュメント</a>では、AI Crawl Controlは「全プランで利用可」です。ただし参照元の集計は<a href="https://developers.cloudflare.com/ai-crawl-control/features/analyze-ai-traffic/" target="_blank" rel="noopener">有料プラン向けと明記</a>されています。</p>
+<p><a href="https://www.screamingfrog.co.uk/log-file-analyser/" target="_blank" rel="noopener">Screaming Frogの公式ページ</a>では、無料版の上限はログ1,000行・プロジェクト1件です。1,000行は、小さなサイトでも数日分で埋まる量だと考えてください。</p>
+<aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p></aside>
+<h2 id="_1">比べる軸は「誰の訪問を数えるか」と「生ログに触れるか」</h2>
+<p><strong>ツール選びの軸は2つで、数えたい訪問の種類と、生ログを自分で扱えるかで決まります。</strong></p>
+<p>機能表を見比べても、違いはつかみにくいものです。当社が実務で使っている軸は次の2つです。</p>
+<p>1つ目の軸は、数える相手です。クローラーの訪問を数えたいなら、ログ側の道具が必要です。人の訪問を数えたいなら、GA4で足ります。</p>
+<p>2つ目の軸は、生ログの扱いです。レンタルサーバーなら、管理画面からログを落とせることが多いです。一方、静的サイトの配信サービスでは生ログ自体を渡さない形もあります。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">軸</th>
+<th style="text-align: left;">CDNの管理画面</th>
+<th style="text-align: left;">ログ専用ツール</th>
+<th style="text-align: left;">生ログの集計</th>
+<th style="text-align: left;">GA4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">クローラーの訪問</td>
+<td style="text-align: left;">○</td>
+<td style="text-align: left;">○</td>
+<td style="text-align: left;">○</td>
+<td style="text-align: left;">×</td>
+</tr>
+<tr>
+<td style="text-align: left;">人のAI経由の訪問</td>
+<td style="text-align: left;">一部（有料）</td>
+<td style="text-align: left;">×</td>
+<td style="text-align: left;">△（リファラーのみ）</td>
+<td style="text-align: left;">○</td>
+</tr>
+<tr>
+<td style="text-align: left;">生ログの準備</td>
+<td style="text-align: left;">不要</td>
+<td style="text-align: left;">必要</td>
+<td style="text-align: left;">必要</td>
+<td style="text-align: left;">不要</td>
+</tr>
+<tr>
+<td style="text-align: left;">導入の手間</td>
+<td style="text-align: left;">小</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">大</td>
+<td style="text-align: left;">小</td>
+</tr>
+</tbody>
+</table></div>
+<p><mark>どの道具を選んでも、GA4は外せません。</mark>クローラーが来ていても、人が来ていなければ問い合わせには届かないからです。</p>
+<h2 id="_2">サーバー環境ごとの選び方</h2>
+<p><strong>ログ分析ツールは、サイトがどこで配信されているかで、ほぼ自動的に決まります。</strong></p>
+<p>迷ったときは、次の分岐で選んでください。</p>
+<ul>
+<li><strong>Cloudflareを通しているなら</strong>、まずAI Crawl Controlの画面を開きます。追加の導入は要りません</li>
+<li><strong>レンタルサーバーで生ログを落とせるなら</strong>、Screaming Frogの無料版で1週間分を試します。1,000行を超えたら有料版か生ログの集計へ移ります</li>
+<li><strong>社内にサーバーへ入れる人がいるなら</strong>、GoAccessやgrepで十分です。費用はかかりません</li>
+<li><strong>どれも当てはまらないなら</strong>、GA4のAI参照元だけを先に整え、ログは配信の契約内容を確かめてから考えます</li>
+</ul>
+<p>逆に、ログ分析を後回しにしてよい場合もあります。狙う語がまだ検索の圏外なら、先に順位を上げてください。</p>
+<p>当社の実測では、自社3サイトの表示7,015回（2026年6月23日〜9月20日）で、1〜3位のクリック率は6.28%、4〜10位は1.02%でした（出典: 検索順位ごとの実測クリック率）。<strong>順位が低いままでは、クローラーが届いても読者は来ません。</strong></p>
+<div class="cta-box"><p>自社のサイトにAIのクローラーが届いているか、一緒に確かめませんか。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談はこちら</a></div>
+
+<h2 id="3">ログで最初に確かめる3つの数字</h2>
+<p><strong>ログを開いたら、クローラー別の訪問数・403と429の件数・よく読まれるページの3つを先に見ます。</strong></p>
+<p><img alt="ログ分析を引用につなげる4ステップ" src="/images/aio-log-bunseki-tool-hikaku/steps.png" /></p>
+<p>ログ分析は、次の4ステップで進めると迷いません。届いているかを確かめ、弾かれた記録を探し、読まれたページを見て、最後に順位とAIの出典を照らし合わせます。</p>
+<h3 id="_3">クローラー別の訪問数</h3>
+<p>1つ目は、AIクローラー別の訪問数です。GPTBotは学習用、OAI-SearchBotはChatGPTの検索用というように、同じ会社でも役割が分かれています。</p>
+<p>回答用のクローラーが1件も来ていなければ、そのAIの回答には出ません。<strong>学習用と回答用を分けて数える</strong>ことが要点です。</p>
+<h3 id="403429">403と429の件数</h3>
+<p>2つ目は、応答コードの403（拒否）と429（回数制限）です。robots.txtで許可していても、WAFやボット対策の設定が手前で止めていれば、ここに記録が残ります。</p>
+<p>当社が到達の確認を毎日行っているのは、配信側の設定が変わる可能性があるためです。CDNの管理画面には、robots.txtの先頭に拒否の指示を足す機能もあります。</p>
+<h3 id="_4">よく読まれるページ</h3>
+<p>3つ目は、クローラーがよく読むページです。トップや一覧ばかりで記事が読まれていなければ、内部リンクやサイトマップの見直しが先です。</p>
+<p>読まれている記事が引用されていないなら、問題は本文の側にあります。ここで初めて、記事の書き直しに進みます。</p>
+<h2 id="aio">AIOのログ分析でよくある失敗</h2>
+<p><strong>ログ分析の失敗は、GA4で代用する・UAを信じる・Googleの扱いを誤るの3つにほぼ集約されます。</strong></p>
+<p><img alt="ログ分析のNGとOK" src="/images/aio-log-bunseki-tool-hikaku/ng-ok.png" /></p>
+<h3 id="1-ga4ai">失敗1: GA4だけで「AIが来ていない」と判断する</h3>
+<p>起きたことは、GA4にAIの記録が無いため「AIに読まれていない」と結論づけるケースです。原因は、GA4がクローラーを数えない仕様にあります。</p>
+<p>避け方は、クローラーの訪問はログで、人の訪問はGA4で、と数える場所を分けることです。</p>
+<h3 id="2-ua">失敗2: UAの名前だけで本物と数える</h3>
+<p>起きたことは、GPTBotを名乗る訪問をすべてOpenAIのものとして数えるケースです。原因は、UAの文字列を誰でも名乗れることにあります。</p>
+<p>避け方は、公開されているIPの範囲と照らすことです。OpenAIは<a href="https://developers.openai.com/api/docs/bots" target="_blank" rel="noopener">クローラーの公式説明</a>でIPの一覧を公開しています。<span class="txt-red">名前だけで集計すると、訪問数を多く見積もります。</span></p>
+<h3 id="3-google-extendedaigooglebot">失敗3: Google-ExtendedやAI用のGooglebotを探す</h3>
+<p>起きたことは、ログからGoogle-Extendedを探して「来ていない」と判断するケースです。原因は、<a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers" target="_blank" rel="noopener">Google-Extendedは独自のUAを持たない</a>ことにあります。robots.txtの印だけで、取りに来るのは通常のGoogleのクローラーです。</p>
+<p>AI Overviewも、通常のGooglebotがクロールした結果を使います。避け方は、Googleについては<strong>Googlebotが200で読めているか</strong>を見ることです。Googlebotを止めると、通常の検索とAI Overviewの両方から消えます。</p>
+<p>自社サイトがAI検索にどこまで対応できているかは、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要で、その場で点数が出ます。</p>
+<h2 id="_5">ログ分析の結果を引用につなげる進め方</h2>
+<p><strong>ログ分析は届いているかの確認までが役割で、引用を増やすのは記事の中身と順位です。</strong></p>
+<p>ログで分かるのは「読みに来たか」と「弾いていないか」までです。読まれた後に引用されるかは、記事の独自性と検索順位で決まります。</p>
+<p><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Googleの公式ガイド</a>も、AI検索で効くものとして独自の視点・一般論に留まらない内容・クロールできることを挙げています。ログ分析が担うのは、この3つ目です。</p>
+<p>当社は2026年5月からAIO運用を15件お受けし、3か月以内の解約は0件です（出典: 自社の契約実績、2026年9月時点）。運用では、到達の確認を先に済ませてから記事の直しに入る順番を守っています。届いていない状態で記事を直しても、効果が測れないためです。</p>
+<p>測り方の全体像は<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法と5つの指標</a>で、無料で揃う道具は<a href="/aio/aio-taisaku-muryou-tool/">AIO対策の無料ツール6選</a>で整理しています。</p>
+<p>robots.txtの許可設定から見直すなら<a href="/aio/ai-kensaku-taiou-settei/">公開前に済ませるAI検索対応の設定項目</a>を確認してください。</p>
+<p>今日できる一歩は、配信元がCloudflareかどうかを確かめることです。Cloudflareなら、管理画面でAI Crawl Controlを開き、回答用のクローラーが「許可」になっているかを見てください。それ以外なら、GA4のAI参照元の設定から始めます。</p>
+<div class="cta-box"><p>ログの読み方から、引用されない記事の直しまで、まとめてご相談ください。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談はこちら</a></div>
+
+<h2 id="_6">よくある質問</h2>
+<details><summary>ログ分析は自社でどこまでできますか？</summary><p class="faq-a">Cloudflareの管理画面かGA4なら、設定済みであれば社内で確認できます。生ログの集計は担当者の技術が要ります。</p></details>
+
+<details><summary>運用代行に頼むと何をしてもらえますか？</summary><p class="faq-a">クローラーの到達確認、弾かれた記録の原因調査、引用されない記事の直しまでを一続きで行います。</p></details>
+
+<details><summary>ログ分析を始めてから変化が見えるまでどのくらいですか？</summary><p class="faq-a">403の解消などの設定の直しは、直した日以降のログで確かめられます。引用や順位の変化は月単位で見てください。</p></details>
+
+<details><summary>ログ分析が向かないのはどんな場合ですか？</summary><p class="faq-a">狙う語がまだ検索の圏外なら先に順位を上げてください。クローラーが来ていても引用は検索上位から選ばれやすいからです。</p></details>
+
+<details><summary>有料のログ分析ツールは必要ですか？</summary><p class="faq-a">月の訪問記録が数千行を超え、複数サイトを比べたくなるまでは、無料の範囲で足ります。</p></details>
+
+<details><summary>GA4にChatGPTからの流入が出ないのはなぜですか？</summary><p class="faq-a">リファラーが渡らないアプリ経由の訪問は直接流入に入ります。ログとGA4の両方で見てください。</p></details>
+
+<h2 id="ga4">まとめ: ログでは「届いているか」、GA4では「人が来たか」を見る</h2>
+<p><strong>AIOのログ分析ツールは、配信環境で選び、GA4と必ず組み合わせて使います。</strong></p>
+<p>Cloudflareを使っているならAI Crawl Control、生ログを落とせるならScreaming Frogの無料版、技術者がいるならGoAccessやgrepが出発点です。どの場合も、クローラー別の訪問数・403と429・読まれたページの3つを先に確かめます。</p>
+<p>届いていることが確かめられたら、次は記事の独自性と順位の番です。<em>ログ分析は入口の確認</em>であり、引用を増やす仕事はその後に続きます。</p>
+
+
+      <aside class="scan-box scan-bottom" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_bottom"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_bottom_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_bottom_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/ai-kensaku-taiou-settei/"><span class="thumb"><img src="/images/thumbs/theme-howto.webp" alt="AI検索対応とは？公開前に済ませる7つの設定項目のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-16">2026.09.16</time><h3>AI検索対応とは？公開前に済ませる7つの設定項目<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-checker/"><span class="thumb"><img src="/images/thumbs/theme-howto.webp" alt="AIOチェッカーとは？表示と引用を見分ける使い方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIOチェッカーとは？表示と引用を見分ける使い方<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-dairiten-erabikata/"><span class="thumb"><img src="/images/thumbs/theme-caution.webp" alt="AIO代理店の選び方｜再委託で失敗しない5つのポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-10-04">2026.10.04</time><h3>AIO代理店の選び方｜再委託で失敗しない5つのポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/aio-service-hikaku/"><span>← 前の記事</span><strong>AIOサービス比較で外す5つの落とし穴｜4つの型の向き不向き</strong></a><a class="pn pn-next" href="/aio/shika-hp-ryokinhyou-kakikata/"><span>次の記事 →</span><strong>歯科医院ホームページの料金表の書き方｜違反になる4つのNG</strong></a></nav>
+
+      <section class="cta">
+        <p class="cta-copy">ChatGPTやAI Overviewが御社を出典に選んでいるか、一緒に確かめませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">SEO・AIO・LLMO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="Seven Senses" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修（集客・Web施策）: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+          <p class="how-made">制作の流れ: 一次情報と出典を集め、AIツールで下書き → 機械検査18項目と3観点の採点（90点以上のみ公開）→ 監修者が事実と表現を確認。<a href="/editorial-policy/">編集・訂正ポリシー</a></p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>TEL 06-4305-7547（9:00〜20:00 / 土日祝休）</p>
+      <ul class="social-links" aria-label="外部プロフィール"><li><a href="https://x.com/sevensensece" target="_blank" rel="noopener me" aria-label="X（セブンセンシズ株式会社）" data-net="x"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li><li><a href="https://www.linkedin.com/in/yu-haraguchi" target="_blank" rel="noopener me" aria-label="LinkedIn（原口 優）" data-net="linkedin"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a></li><li><a href="https://note.com/yu_haraguchi" target="_blank" rel="noopener me" aria-label="note（原口 優）" data-net="note"><span>note</span></a></li></ul>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/research/">業種別のAI調査</a>
+      <a href="/download/">無料資料ダウンロード</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/compare/">比較表から探す</a>
+      <a href="/tools/">無料ツール一覧</a>
+      <a href="/tools/url-check/">URL診断（サイトの14項目を採点）</a>
+      <a href="/tools/ai-check/">AI診断（AIにどう紹介されているか）</a>
+      <a href="/tools/aio-check/">AI検索の対応度チェック（30秒）</a>
+      <a href="/tools/kuchikomi-henshin/">口コミ返信文の作成ツール</a>
+      <a href="/tools/meo-check/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/faq/">ご契約前のよくある質問</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- スマホで記事を半分ほど読んだら出る「30秒診断」（site.js が出し入れする） -->
+<div class="scan-sticky" hidden><a class="btn btn-primary" href="/tools/ai-check/" data-cta="article_sticky_ai_check" data-ab="sticky_ai" data-ab-b="ChatGPTやGeminiに御社が出るか見る（無料）">AIに御社が出るか無料で確かめる <span class="arw">→</span></a></div>
+</body>
+</html>
