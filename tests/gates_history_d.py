@@ -390,6 +390,8 @@ REPLY_CASES = {
 def replies(src):
     js = ("var __m=[];MailApp={sendEmail:function(o){__m.push(o);}};"
           "UrlFetchApp={fetch:function(){throw new Error('offline');}};"
+          # 結果メールの返信先は Script Properties で差し替えられる（未設定なら NOTIFY_TO）
+          "PropertiesService={getScriptProperties:function(){return {getProperty:function(){return null;}};}};"
           f"var __c={json.dumps(REPLY_CASES)};var __o={{}};"
           "Object.keys(__c).forEach(function(k){__m=[];var d=__c[k];leadReply_('AI集客ラボ',d.type,d);"
           "__o[k]=__m.length?(__m[0].subject+'\\n'+__m[0].body):'';});globalThis.__out=__o;")

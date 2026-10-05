@@ -265,17 +265,25 @@ function leadNotify_(site, type, temp, d, referer) {
   }
 }
 
+const REPLY_FOOT = ['', '─────────────', 'セブンセンシズ株式会社',
+                    '〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902',
+                    'TEL 06-4305-7547 / info.ai@7senses.co.jp', ''].join('\n');
+// 無料ツールの結果メールに添える案内（文言は運用者が決めたもの。変えない）。
+// 返信はAIが結果をもとに返す（reviewReply）。人が見ているとは書かない
+const REVIEW_OFFER = ['', '▼ 最初に直す1か所を、無料でお返事します',
+  '今回の結果をもとに、御社がまず直すべき1か所と、その直し方をお返事します。',
+  'このメールに「見てほしい」とだけご返信ください（2〜3営業日以内）。', ''].join('\n');
+
 /** 送信者への自動返信。種別ごとに文面を変える */
 function leadReply_(site, type, d) {
   const email = clean_(d.email);
   if (!isEmail_(email)) return;
   const name = clean_(d.name) || 'ご担当者';
-  const foot = ['', '─────────────', 'セブンセンシズ株式会社',
-                '〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902',
-                'TEL 06-4305-7547 / info.ai@7senses.co.jp', ''].join('\n');
+  const foot = REPLY_FOOT;
   let subject = 'お問い合わせありがとうございます';
   let body = '';
   let inquiry = false;
+  let offer = '';
 
   if (type === 'diagnosis' && d.diagnosis) {
     const g = d.diagnosis;
@@ -293,6 +301,7 @@ function leadReply_(site, type, d) {
             'このメールにご返信ください。3営業日以内にご連絡します。'].filter(function (x) {
       return x !== '';
     }).join('\n');
+    offer = REVIEW_OFFER;
   } else if (type === 'site_audit' && d.audit) {
     const a = d.audit;
     subject = '【診断結果】サイト無料診断のご依頼ありがとうございます';
@@ -305,6 +314,7 @@ function leadReply_(site, type, d) {
             '自社で直すのが難しい項目は、このメールにご返信ください。無料でご相談を承ります。'].filter(function (x) {
       return x !== '';
     }).join('\n');
+    offer = REVIEW_OFFER;
   } else if (type === 'download') {
     // 資料ダウンロード。ページで「メールでダウンロードリンクをお送りします」と約束している。
     // 以前は普通の問い合わせと同じ文面で、リンクが入っていなかった（2026-10-02 修正）
@@ -338,6 +348,8 @@ function leadReply_(site, type, d) {
            '出典に入るための直し方は、業種別のチェックリスト（PDF・無料）にまとめています。',
            '  https://ai.7senses.co.jp/download/?utm_source=email&utm_medium=email&utm_campaign=aicheck_result']))
       .concat(['', '詳しく調べたい場合は、このメールにご返信ください。']).join('\n');
+    // チェックが動かなかった回は結果が無いので、直す1か所も返せない
+    if (!failed) offer = REVIEW_OFFER;
   } else {
     inquiry = true;
     body = [name + ' 様', '', 'お問い合わせいただきありがとうございます。',
@@ -371,8 +383,9 @@ function leadReply_(site, type, d) {
       }
     } catch (e) {}
   }
-  MailApp.sendEmail({ to: email, subject: subject, body: body + reco + materials + foot,
-                      name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
+  // 結果メールへの返信は reviewReply が拾う受信箱へ向ける（既定は NOTIFY_TO のまま）
+  MailApp.sendEmail({ to: email, subject: subject, body: body + offer + reco + materials + foot,
+                      name: 'セブンセンシズ株式会社', replyTo: offer ? reviewInbox_() : NOTIFY_TO });
 }
 
 /**
@@ -1099,6 +1112,305 @@ function installFollowUpTrigger() {
   if (has) { console.log('followUp のトリガーは既にあります'); return; }
   ScriptApp.newTrigger('followUp').timeBased().everyDays(1).atHour(9).create();
   console.log('followUp を毎日 09:00 に動かすトリガーを作りました');
+}
+
+/**
+ * 無料ツールの結果メールに「見てほしい」と返信した人へ、AIが「まず直す1か所と直し方」を返す。
+ * 時間トリガー（15分ごと）で、このスクリプトを動かすアカウントの Gmail を読む。
+ * 結果メールの返信先（reviewInbox_）がこのアカウントの受信箱に届くことが前提。届かなければ何も拾えない。
+ * 有効化: Script Properties に GEMINI_API_KEY を入れ、installReviewReplyTrigger を1回実行する
+ */
+const REVIEW_LABEL = 'ss-review-done';          // 1スレッド1回だけ返す（返した・返せないと決めたものに付ける）
+const REVIEW_FAIL_LABEL = 'ss-review-failed';   // 運用者が受信箱で探せるように、作れなかったものにも付ける
+const REVIEW_DAILY_MAX = 30;
+const REVIEW_MAX_TRY = 3;                       // Gemini の 429・5xx は次の回にやり直す。3回で諦めて運用者へ
+const REVIEW_WORD = /見て(ほ|欲)しい|みてほしい/;
+const REVIEW_SUBJECT = /【診断結果】|【結果】AIにどう紹介されているか/;
+// 料金・保証・名乗りを書いた返信は、事実と違う約束になる。1文字でも入れば送らない
+const REVIEW_NG = ['円', '万円', '保証', '必ず', '確実', '担当の'];
+// 指示は400〜700字。日本語の字数は揺れるので、検査は少し幅を持たせる
+const REVIEW_LEN = { min: 350, max: 800 };
+const REVIEW_FORM_URL = 'https://ai.7senses.co.jp/lp/#form';
+const REVIEW_FORM_TEXT = '詳しくお聞きになりたい場合は、お問い合わせフォームからご連絡ください。\n  ' + REVIEW_FORM_URL;
+// gas_deploy.py が .env の GEMINI_API_KEY で埋める。Script Properties に同じ名前があればそちらを使う
+const GEMINI_KEY_FILL = 'GEMINI_KEY_XXXXXXXX';
+const REVIEW_MODEL = 'gemini-3.6-flash';        // scripts/ai_cite_check.py の既定と同じ。GEMINI_MODEL で上書き
+
+function reviewInbox_() {
+  return PropertiesService.getScriptProperties().getProperty('REVIEW_INBOX') || NOTIFY_TO;
+}
+
+function geminiKey_() {
+  const p = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  if (p) return p;
+  return GEMINI_KEY_FILL && GEMINI_KEY_FILL.indexOf('XXXXXXXX') < 0 ? GEMINI_KEY_FILL : '';
+}
+
+/** 自分（このアカウント・通知先・返信の受け口・エイリアス）のアドレス。自分の送ったメールを依頼と読まない */
+function reviewSelf_() {
+  const me = [NOTIFY_TO, reviewInbox_(), Session.getEffectiveUser().getEmail()];
+  try { GmailApp.getAliases().forEach(function (a) { me.push(a); }); } catch (e) {}
+  return me.map(function (a) { return String(a || '').trim().toLowerCase(); }).filter(String);
+}
+
+function addrOf_(from) {
+  const m = String(from || '').match(/<([^>]+)>/);
+  return (m ? m[1] : String(from || '')).trim().toLowerCase();
+}
+
+/**
+ * 返信の本人が書いた部分だけ。引用（> の行・「◯◯ wrote:」以降）を落とす。
+ * 引用の中の結果メールには「見てほしい」とだけご返信ください、が入っているので、
+ * 落とさないと何も書いていない返信まで依頼と読む
+ */
+function replyTop_(text) {
+  const out = [];
+  const lines = String(text || '').replace(/\r\n?/g, '\n').split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    const s = lines[i];
+    if (/^\s*>/.test(s) || /^On .+wrote:\s*$/.test(s) || /^\d{4}年\d{1,2}月\d{1,2}日.*[:：]\s*$/.test(s)
+        || /^(差出人|From|-----Original Message|─────)/.test(s.trim()) || s.indexOf('最初に直す1か所を') >= 0) break;
+    out.push(s);
+  }
+  return out.join('\n').replace(/\s+/g, '').slice(0, 200);
+}
+
+/** スレッドの中で、外から届いた「見てほしい」の返信（新しい順に最初の1通） */
+function reviewAsk_(thread, me) {
+  const msgs = thread.getMessages();
+  for (let i = msgs.length - 1; i >= 0; i--) {
+    const addr = addrOf_(msgs[i].getFrom());
+    if (!isEmail_(addr) || me.indexOf(addr) >= 0) continue;
+    if (REVIEW_WORD.test(replyTop_(msgs[i].getPlainBody()))) return { msg: msgs[i], email: addr };
+  }
+  return null;
+}
+
+/** 台帳から、その人の直近の結果（診断・サイト診断・AI紹介チェック）。結果の無い行は使わない */
+function reviewResult_(email) {
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  if (last < 2) return null;
+  const vals = sh.getRange(2, 1, last - 1, 14).getValues();
+  for (let i = vals.length - 1; i >= 0; i--) {
+    const r = vals[i];
+    if (String(r[6] || '').trim().toLowerCase() !== email) continue;
+    const msg = String(r[8] || '');
+    const detail = String(r[9] || '').split('\n')[0].replace(/^紹介元 \S+( \/ )?/, '');
+    if (/AI紹介チェック: /.test(msg)) {
+      if (msg.indexOf('チェック未実行') === 0) continue;
+      return { kind: 'AI紹介チェック', name: String(r[4] || ''), url: (msg.match(/サイト: (\S+)/) || [])[1] || '',
+               text: msg.split('\n').slice(0, 3).join('\n') };
+    }
+    if (String(r[2]) === LEAD_TYPE_LABELS.site_audit && /\d+\/100/.test(detail)) {
+      return { kind: 'サイト無料診断', name: String(r[4] || ''), url: (detail.match(/対象 (\S+)/) || [])[1] || '',
+               text: detail };
+    }
+    if (String(r[2]) === LEAD_TYPE_LABELS.diagnosis && /\d+\/100/.test(detail)) {
+      return { kind: detail.split(' / ')[0] || '無料診断', name: String(r[4] || ''), url: '', text: detail };
+    }
+  }
+  return null;
+}
+
+/** サイト診断の「直す項目」は台帳に件数しか残らない。同じスレッドの自分が送った結果メールから取る */
+function reviewFixes_(thread, me) {
+  const msgs = thread.getMessages();
+  for (let i = 0; i < msgs.length; i++) {
+    if (me.indexOf(addrOf_(msgs[i].getFrom())) < 0) continue;
+    const b = msgs[i].getPlainBody();
+    const at = b.indexOf('▼ 直す項目と直し方');
+    if (at < 0) continue;
+    return b.slice(at).split(/自社で直すのが難しい項目は|▼ 最初に直す1か所|─────/)[0].trim().slice(0, 2000);
+  }
+  return '';
+}
+
+function reviewPrompt_(res, fixes) {
+  return [
+    'Webサイトの集客（検索・AI検索）の改善について、メールの本文を日本語で書いてください。',
+    '下の「診断の結果」だけを根拠に、この方がまず直すべき1か所と、その直し方を伝えます。',
+    '',
+    '# 決まり',
+    '- 根拠は「診断の結果」だけです。結果に書かれていないこと（サイトの中身・業種の事情・競合など）を推測で書かないでください。',
+    '- 直すのは1か所だけです。結果の中で、点数が最も低い、または直したときに最も効く項目を1つ選んでください。',
+    '- 次の3つの見出しを、この順に、この表記のまま使ってください。',
+    '  【まず直す1か所】項目名と、結果にある点数や状態を1〜2文で。',
+    '  【なぜそこからか】2〜3文で。',
+    '  【直し方】番号つきで3〜5手順。業者に頼まなくても自分でできる範囲で。',
+    '- 全体で400〜700字。ですます調。',
+    '- 書かないこと: 料金・金額・費用、期間や時期の約束、「必ず」「確実に」、検索順位やAIに引用されることの保証、'
+      + '当社や他社の実績の数字、人が書いたかのような名乗り（「担当の◯◯です」など）、宛名・挨拶・署名（こちらで付けます）。',
+    '- 結果に無いURLは書かないでください。記号の装飾（#、*、表）は使わないでください。',
+    '',
+    '# 診断の結果',
+    '種類: ' + res.kind,
+    res.url ? 'URL: ' + res.url : '',
+    '結果: ' + res.text,
+    fixes ? '直す項目（点数の大きい順）:\n' + fixes : '',
+  ].filter(String).join('\n');
+}
+
+/** 送ってよいか。外れた理由を返す（空なら合格） */
+function reviewCheck_(text, res) {
+  const t = String(text || '').trim();
+  if (!t) return '空';
+  const n = t.replace(/\s/g, '').length;
+  if (n < REVIEW_LEN.min || n > REVIEW_LEN.max) return '長さ ' + n + '字';
+  const ng = REVIEW_NG.filter(function (w) { return t.indexOf(w) >= 0; });
+  if (ng.length) return '禁止語 ' + ng.join('・');
+  const urls = t.match(/https?:\/\/\S+/g) || [];
+  if (urls.some(function (u) { return !res.url || u.indexOf(res.url) < 0; })) return '結果に無いURL';
+  return '';
+}
+
+function geminiText_(prompt) {
+  const key = geminiKey_();
+  const model = PropertiesService.getScriptProperties().getProperty('GEMINI_MODEL') || REVIEW_MODEL;
+  const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
+    method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': key },
+    payload: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3 } }),
+  });
+  const code = r.getResponseCode();
+  if (code === 429 || code >= 500) return { retry: true, error: 'Gemini HTTP ' + code };
+  if (code !== 200) return { error: 'Gemini HTTP ' + code };
+  try {
+    const d = JSON.parse(r.getContentText());
+    const parts = (((d.candidates || [])[0] || {}).content || {}).parts || [];
+    return { text: parts.filter(function (p) { return !p.thought; }).map(function (p) { return p.text || ''; }).join('').trim() };
+  } catch (e) {
+    return { error: 'Gemini の応答を読めません' };
+  }
+}
+
+function reviewSheet_() {
+  const ss = book_();
+  let sh = ss.getSheetByName('自動回答');
+  if (!sh) {
+    sh = ss.insertSheet('自動回答');
+    sh.appendRow(['日時', 'メール', '種類', '結果', '理由', 'スレッド']);
+  }
+  return sh;
+}
+
+/** 今日（日本時間）相手に送った通数。上限は相手に届いたものだけで数える */
+function reviewSentToday_(sh) {
+  if (sh.getLastRow() < 2) return 0;
+  const today = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd');
+  return sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues().filter(function (r) {
+    return r[0] instanceof Date && Utilities.formatDate(r[0], 'Asia/Tokyo', 'yyyy-MM-dd') === today
+      && (r[3] === '送信' || r[3] === '結果なし');
+  }).length;
+}
+
+/** 相手には送らず、運用者に知らせる */
+function reviewAlert_(thread, email, why) {
+  try {
+    MailApp.sendEmail({ to: NOTIFY_TO, subject: '【要対応】自動回答を作れませんでした: ' + email,
+      body: ['「見てほしい」への自動回答を作れなかったため、相手には送っていません。', '',
+             'メール: ' + email, '理由: ' + why, 'スレッド: ' + thread.getPermalink(), '',
+             '必要なら、このスレッドから手で返信してください。'].join('\n') });
+  } catch (e) { console.error('自動回答の失敗通知に失敗: ' + e); }
+}
+
+/** 1スレッドを処理する。'sent' / 'none'（結果なしを返した）/ 'failed' / 'retry'（ラベルを付けず次の回へ） */
+function reviewOne_(thread, ask, me, log) {
+  const props = PropertiesService.getScriptProperties();
+  const tryKey = 'review_try_' + thread.getId();
+  const res = reviewResult_(ask.email);
+  const opts = { name: 'セブンセンシズ株式会社', replyTo: reviewInbox_() };
+  if (!res) {
+    ask.msg.reply(['ご担当者 様', '', 'ご返信ありがとうございます。',
+      'お送りした結果が見つからなかったので、お問い合わせフォームからURLをお知らせください。',
+      '  ' + REVIEW_FORM_URL].join('\n') + REPLY_FOOT, opts);
+    log.appendRow([new Date(), ask.email, '', '結果なし', '', thread.getId()]);
+    return 'none';
+  }
+  const prompt = reviewPrompt_(res, res.kind === 'サイト無料診断' ? reviewFixes_(thread, me) : '');
+  let text = '';
+  let why = '';
+  // 検査に外れたら1回だけ作り直す。それでも外れたら相手には送らない
+  for (let i = 0; i < 2; i++) {
+    const g = geminiText_(prompt);
+    if (g.retry) {
+      const n = Number(props.getProperty(tryKey) || 0) + 1;
+      if (n < REVIEW_MAX_TRY) { props.setProperty(tryKey, String(n)); return 'retry'; }
+      why = g.error + '（' + n + '回）';
+      break;
+    }
+    if (g.error) { why = g.error; break; }
+    text = g.text;
+    why = reviewCheck_(text, res);
+    if (!why) break;
+  }
+  props.deleteProperty(tryKey);
+  if (why) {
+    reviewAlert_(thread, ask.email, why);
+    log.appendRow([new Date(), ask.email, res.kind, '失敗', why, thread.getId()]);
+    return 'failed';
+  }
+  const who = (res.name || 'ご担当者') + ' 様';
+  ask.msg.reply([who, '', 'ご返信ありがとうございます。',
+    'お送りした結果をもとに、まず直す1か所と、その直し方をお送りします（この返信は、結果をもとにAIで作成しています）。', '',
+    text.trim(), '', REVIEW_FORM_TEXT].join('\n') + REPLY_FOOT, opts);
+  log.appendRow([new Date(), ask.email, res.kind, '送信', '', thread.getId()]);
+  return 'sent';
+}
+
+function reviewReply() {
+  if (!geminiKey_()) { console.error('GEMINI_API_KEY が未設定のため、自動回答を止めています'); return; }
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(5000)) return;            // 前の回がまだ動いていれば重ねない（二重に返さない）
+  try {
+    const log = reviewSheet_();
+    let left = REVIEW_DAILY_MAX - reviewSentToday_(log);
+    if (left <= 0) return;
+    const done = GmailApp.getUserLabelByName(REVIEW_LABEL) || GmailApp.createLabel(REVIEW_LABEL);
+    const fail = GmailApp.getUserLabelByName(REVIEW_FAIL_LABEL) || GmailApp.createLabel(REVIEW_FAIL_LABEL);
+    const me = reviewSelf_();
+    // 検索は絞り込みだけ。依頼かどうかは件名と本文（引用を除いた先頭）でここで決める
+    const threads = GmailApp.search('in:inbox newer_than:14d -label:' + REVIEW_LABEL
+                                    + ' (見てほしい OR 見て欲しい OR みてほしい)', 0, 50);
+    for (let i = 0; i < threads.length && left > 0; i++) {
+      const th = threads[i];
+      if (!REVIEW_SUBJECT.test(th.getFirstMessageSubject())) continue;
+      const ask = reviewAsk_(th, me);
+      if (!ask) continue;
+      let out;
+      try {
+        out = reviewOne_(th, ask, me, log);
+      } catch (e) {
+        // 途中で落ちたスレッドに印を付けないと、毎回同じ失敗を繰り返して運用者へ知らせ続ける
+        reviewAlert_(th, ask.email, String(e));
+        log.appendRow([new Date(), ask.email, '', '失敗', String(e).slice(0, 200), th.getId()]);
+        out = 'failed';
+      }
+      if (out === 'retry') continue;
+      th.addLabel(done);
+      if (out === 'failed') th.addLabel(fail);
+      else left--;
+    }
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function installReviewReplyTrigger() {
+  // 返信がこのアカウントの受信箱に届くかを先に確かめる（届かなければトリガーを作っても何も拾えない）
+  const me = String(Session.getEffectiveUser().getEmail() || '').toLowerCase();
+  const inbox = reviewInbox_().toLowerCase();
+  const aliases = GmailApp.getAliases().map(function (a) { return String(a).toLowerCase(); });
+  if (me !== inbox && aliases.indexOf(inbox) < 0) {
+    console.warn('注意: このスクリプトは ' + me + ' で動いています。結果メールの返信先 ' + inbox
+      + ' はこのアカウントのアドレスでもエイリアスでもないため、届いているかを確かめてください'
+      + '（届かない場合は ' + inbox + ' からこのアカウントへ転送するか、Script Properties の REVIEW_INBOX に'
+      + 'このアカウントで受けられるアドレスを入れてください）');
+  }
+  if (!geminiKey_()) console.warn('GEMINI_API_KEY が未設定です（Script Properties に入れるまで自動回答は動きません）');
+  const has = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'reviewReply'; });
+  if (has) { console.log('reviewReply のトリガーは既にあります'); return; }
+  ScriptApp.newTrigger('reviewReply').timeBased().everyMinutes(15).create();
+  console.log('reviewReply を15分ごとに動かすトリガーを作りました');
 }
 
 /**

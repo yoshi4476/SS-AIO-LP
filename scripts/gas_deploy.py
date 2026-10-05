@@ -96,7 +96,10 @@ def fill(src_text, e):
     return (src_text
             .replace("https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec",
                      e.get("HUB_URL", ""))
-            .replace("'XXXXXXXXXXXXXXXX'", f"'{e.get('HUB_SECRET', '')}'"))
+            .replace("'XXXXXXXXXXXXXXXX'", f"'{e.get('HUB_SECRET', '')}'")
+            # 「見てほしい」への自動回答（contact.hub.gs の reviewReply）が使う。
+            # 無ければ空で埋まり、Script Properties に入れるまで自動回答は止まったまま
+            .replace("'GEMINI_KEY_XXXXXXXX'", f"'{e.get('GEMINI_API_KEY', '')}'"))
 
 
 # 既存の doPost に転送の呼び出しを1行足す。ここだけは新規ファイルの追加では済まない。
