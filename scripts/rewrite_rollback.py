@@ -9,7 +9,7 @@ effect_ab が出すが、悪化した記事もそのまま残る。「当てる�
 触っていない記事（対照群）の中央値**と比べる。対照の8割を下回り、順位も
 良くなっていなければ、直す前のタイトル・説明文へ戻す。
 
-対照群は、直した記事と**公開からの週数が近い（±1週）**記事だけにする（content_yield のコホートと同じ考え）。
+対照群は、直した記事と**公開からの週数が近い（±1週）**記事だけにする（effect_ab.cohort()。効果判定と同じ物差し）。
 記事は公開1〜3週で表示の山、4〜6週で山の約1/4に落ちる（2026-10-05 実測）。公開から日の浅い記事を直すと
 自然な落ち込みが「直した後」に入り、公開の古い記事が混ざった対照群と比べると、効いた直しまで
 「効かなかった」と読んで戻していた。対照が10本に満たなければ判定を保留し（判定済みにしない）、翌週以降にまた見る。
@@ -17,8 +17,9 @@ effect_ab が出すが、悪化した記事もそのまま残る。「当てる�
   python scripts/rewrite_rollback.py            # 判定だけ
   python scripts/rewrite_rollback.py --write    # 戻す
 出す印: ROLLBACK_OK=yes / ROLLED_BACK=<本> / KEPT=<本> / HELD=<本>（対照が足りず保留）
-戻せるのは、直したときに before_title（題の直し）か before_path（compete の本文の直し）を
-台帳（auto_fix.jsonl）に残した分だけ。
+戻せるのは、直したときに before_title（題の直し）か before_path（compete・early の本文の直し）を
+台帳（auto_fix.jsonl）に残した分だけ。early（公開14〜35日の記事に細い語を入れる直し）は、
+その直しで変えた部分（題・H2の1本・FAQの問い）だけを直す前の原稿から戻す。
 判定した分は data/rollback_decisions.json に残し、二度は判定しない。
 """
 import argparse
@@ -36,46 +37,25 @@ LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 DECIDED = ROOT / "data" / "rollback_decisions.json"
 DAYS = 28
 WORSE = 0.8
-AGE_TOL = 7          # 対照に入れる公開からの日数の差（±1週）
 
 
 def published():
-    """slug → 公開日。日付の無い原稿は入れない（週数をそろえられない）"""
-    import content_yield as CY
-    out = {}
-    for p in (ROOT / "articles").glob("*.md"):
-        a = CY._fm(p)
-        try:
-            out[a["slug"]] = date.fromisoformat(a["date"])
-        except (TypeError, ValueError):
-            continue
-    return out
+    import effect_ab as EA
+    return EA.published()
 
 
 def controls(daily, slug, at, pubs, acts):
-    """直した記事と公開からの週数が近く、比べる前後28日に触っていない記事の表示の倍率。公開日が分からなければ None。
-    「一度でも触った記事」を外すと、内部リンク・CTA を全記事に足してきたため同じ週数の記事が1本も残らない
-    （2026-10-05 実測: 同じ週数73本のうち1本）。比べる期間の外の手は、この判定の表示に入らない。
-    記事以外（トップ・カテゴリ・著者のページ）も公開日が無いので入らない（前は対照38本のうち35本がそれだった）"""
+    """対照の表示の倍率。対照の選び方は effect_ab.cohort()（効果判定と同じ物差し）。公開日が分からなければ None"""
     import effect_ab as EA
-    if slug not in pubs:
+    cs = EA.cohort(daily, slug, at, pubs, acts, DAYS)
+    if cs is None:
         return None
-    age = (at - pubs[slug]).days
-    lo, hi = (at - timedelta(days=DAYS)).isoformat(), (at + timedelta(days=DAYS)).isoformat()
-    touched = {x["slug"] for x in acts if lo <= x["at"] <= hi}
-    out = []
-    for s in daily:
-        if s == slug or s in touched or s not in pubs or abs((at - pubs[s]).days - age) > AGE_TOL:
-            continue
-        c = EA.change(daily, s, at, DAYS)
-        if c is not None:
-            out.append(c[0])
-    return out
+    return [c[0] for s in cs for c in [EA.change(daily, s, at, DAYS)] if c is not None]
 
 
 def min_controls():
-    import content_yield as CY
-    return CY.MIN_COHORT
+    import effect_ab as EA
+    return EA.MIN_CTRL
 
 
 def entries():
@@ -92,10 +72,133 @@ def entries():
         if d.get("by") not in ("auto_rewrite", "manual") or not d.get("ok") \
                 or not str(d.get("note", "")).startswith("直しました"):
             continue
-        # compete（競合との差を埋める書き直し）は本文を足す直しなので、直す前の原稿ごと戻す
-        if (d.get("kind") == "title" and d.get("before_title")) or (d.get("kind") == "compete" and d.get("before_path")):
+        # compete（競合との差を埋める書き直し）は本文を足す直しなので、直す前の原稿ごと戻す。
+        # early は直す前の原稿から、変えた部分だけを戻す
+        if (d.get("kind") == "title" and d.get("before_title")) \
+                or (d.get("kind") in ("compete", "early") and d.get("before_path")):
             out.append(d)
     return out
+
+
+_FM = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.S)
+
+
+def _title_line(text):
+    m = _FM.match(text)
+    t = re.search(r"^title:.*$", m.group(1), re.M) if m else None
+    return t.group(0) if t else ""
+
+
+def _faq(text):
+    m = _FM.match(text)
+    return [q.strip().strip('"') for q in re.findall(r"^\s*-\s*q:\s*(.+)$", m.group(1), re.M)] if m else []
+
+
+def _h2(lines):
+    """本文の H2 の (行番号, 行)。コードの中は数えない"""
+    out, code = [], False
+    for i, ln in enumerate(lines):
+        if ln.startswith("```"):
+            code = not code
+        elif not code and ln.startswith("## "):
+            out.append((i, ln))
+    return out
+
+
+def undo_early(before, now, d):
+    """early で変えた部分（題・H2の1本・足したFAQ）だけを、直す前の原稿 before から戻した本文を返す。
+    返すのは (本文, 理由)。変えた部分の形がその後に変わっていて戻し方が決まらなければ本文は None"""
+    t0, t1 = _title_line(before), _title_line(now)
+    if not t0 or not t1:
+        return None, "フロントマターの題が読めません"
+    if t1 != t0:
+        cur = t1.split(":", 1)[1].strip().strip('"')
+        if d.get("after_title") and cur != d["after_title"]:
+            return None, "early の後に題が変わっています"
+        now = now.replace(t1, t0, 1)
+
+    # 足したFAQ: フロントマターの問いと答え・本文の1行（<details>）を外す
+    new_q = [q for q in _faq(now) if q not in _faq(before)]
+    if new_q:
+        m = _FM.match(now)
+        fm, out, skip = m.group(1).split("\n"), [], None
+        for ln in fm:
+            q = re.match(r"^(\s*)-\s*q:\s*(.+)$", ln)
+            if q:
+                skip = len(q.group(1)) if q.group(2).strip().strip('"') in new_q else None
+            elif skip is not None and (len(ln) - len(ln.lstrip()) <= skip or not ln.strip()):
+                skip = None
+            if skip is None:
+                out.append(ln)
+        body = now[m.end():]
+        bl = [ln for ln in body.split("\n")
+              if not any(f"<summary>{q}</summary>" in ln for q in new_q)]
+        now = now[:m.start(1)] + "\n".join(out) + now[m.end(1):m.end()] + "\n".join(bl)
+
+    # H2: 1本の言い換えなら元の見出しへ、1本足していればその節を外す
+    lines = now.split("\n")
+    h0 = [ln for _, ln in _h2(before.split("\n"))]
+    h1 = _h2(lines)
+    texts = [ln for _, ln in h1]
+    if texts != h0:
+        diff = [i for i, (a, b) in enumerate(zip(texts, h0)) if a != b]
+        if len(texts) == len(h0) and len(diff) == 1:
+            lines[h1[diff[0]][0]] = h0[diff[0]]
+        elif len(texts) == len(h0) + 1:
+            added = [i for i in range(len(texts)) if texts[:i] + texts[i + 1:] == h0]
+            if not added:
+                return None, "H2 が early の後にも変わっています"
+            i = added[0]
+            end = h1[i + 1][0] if i + 1 < len(h1) else len(lines)
+            del lines[h1[i][0]:end]
+        else:
+            return None, f"H2 の本数が直す前と{len(texts) - len(h0):+d}本違います（early は1本まで）"
+        now = "\n".join(lines)
+    if _title_line(now) != t0 or _faq(now) != _faq(before) or [ln for _, ln in _h2(now.split("\n"))] != h0:
+        return None, "戻した後も題・H2・FAQ が直す前と一致しません"
+    return now, ""
+
+
+def later_rewrites(slug, d):
+    """この直しより後に、同じ記事へ入った別の書き直し・統合・手での題の変更"""
+    out = []
+    if not LOG.is_file():
+        return out
+    for ln in LOG.read_text(encoding="utf-8").splitlines():
+        try:
+            x = json.loads(ln)
+        except ValueError:
+            continue
+        if x.get("slug") == slug and x.get("ok") and str(x.get("at", "")) > str(d.get("at", "")) \
+                and x.get("by") in ("auto_rewrite", "auto_merge", "manual") \
+                and str(x.get("note", "")).startswith(("直しました", "統合しました")):
+            out.append(x)
+    return out
+
+
+def restore_early(slug, d):
+    """直した後だれも触っていなければ原稿ごと、内部リンクの追加などだけなら early の部分だけを戻す。
+    別の書き直しが入っていたら戻さない（その直しまで消してしまう）"""
+    import hashlib
+    p = ROOT / "articles" / f"{slug}.md"
+    src = ROOT / d["before_path"]
+    if not p.is_file() or not src.is_file():
+        return False
+    raw = p.read_bytes()
+    if hashlib.sha1(raw).hexdigest() == d.get("after_sha"):
+        p.write_bytes(src.read_bytes())
+        return True
+    later = later_rewrites(slug, d)
+    if later:
+        print(f"要対応: {slug} は early の後に別の直し（{later[-1].get('kind') or later[-1].get('by')}・"
+              f"{str(later[-1].get('at'))[:10]}）が入ったため、自動では戻しません（{d['before_path']} と見比べてください）")
+        return False
+    text, why = undo_early(src.read_bytes().decode("utf-8-sig"), raw.decode("utf-8-sig"), d)
+    if text is None:
+        print(f"要対応: {slug} の early を自動では戻せません（{why}。{d['before_path']} と見比べてください）")
+        return False
+    p.write_text(text, encoding="utf-8", newline="")
+    return True
 
 
 def restore_file(slug, d):
@@ -115,6 +218,8 @@ def restore_file(slug, d):
 def restore(slug, d):
     if d.get("kind") == "compete":
         return restore_file(slug, d)
+    if d.get("kind") == "early":
+        return restore_early(slug, d)
     p = ROOT / "articles" / f"{slug}.md"
     t = p.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n", t, re.S)
@@ -154,7 +259,9 @@ def main():
         print(f"   日次データが取れません（{str(e)[:60]}）。判定を見送ります")
         print("ROLLBACK_OK=yes\nROLLED_BACK=0\nKEPT=0\nHELD=0")
         return 0
-    acts = EA.interventions()
+    # 対照から外すのは書き直し・統合・手での題の変更だけ（effect_ab --rewrites と同じ）。
+    # 内部リンク・CTA まで外すと同じ週数の対照が10本に届かず、判定が永久に保留になる
+    acts = EA.rewrites(LOG) + entries()
     pubs = published()
     rolled = kept = held = 0
     for d in todo:
@@ -173,7 +280,8 @@ def main():
         worse = me[0] < base * WORSE and (me[1] is None or me[1] <= 0)
         key = f"{slug}@{d['at'][:10]}"
         verdict = {"ratio": round(me[0], 2), "control": round(base, 2),
-                   "pos_gain": me[1], "rolled_back": False, "control_n": len(ctrl)}
+                   "pos_gain": me[1], "rolled_back": False, "control_n": len(ctrl),
+                   "kind": d.get("kind") or "title"}
         print(f"   {'×' if worse else '○'} {slug[:38]:<38} 表示×{me[0]:.2f}（対照×{base:.2f}）"
               f" 順位{'+' if (me[1] or 0) > 0 else ''}{me[1] if me[1] is not None else '-'}")
         if worse and a.write and restore(slug, d):
@@ -183,7 +291,8 @@ def main():
                 f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "rewrite_rollback",
                                     "slug": slug, "kind": "rollback", "ok": True,
                                     "note": f"表示×{me[0]:.2f}（対照×{base:.2f}）のため"
-                                    + ("直す前の原稿へ戻した" if d.get("kind") == "compete" else "元のタイトルへ戻した")},
+                                    + {"compete": "直す前の原稿へ戻した",
+                                       "early": "early で変えた題・H2・FAQを直す前へ戻した"}.get(d.get("kind"), "元のタイトルへ戻した")},
                                    ensure_ascii=False) + "\n")
         else:
             kept += 1
