@@ -47,6 +47,13 @@ ADD_PER = 2      # 1記事につき足す本数。増やしすぎると不自然
 # 「少ない順」ではなく「1ページ目に近く表示が多い順」に配る
 RESCUE_FLOOR = 12
 RESCUE_ADD = 3   # 1回で足す上限。週次で回るうちに下限へ寄せる（8.6の振動防止と同じ考え）
+# --rescue のもう1つの入口: 公開後の山から落ちた記事。どの記事も公開1〜3週で表示が山になり、
+# 4〜6週で山の約1/4に落ちる（2026-10-05 実測・3サイト共通）。11〜30位の条件は順位で拾うため、
+# 順位を保ったまま表示が細った記事は拾えなかった。題は変えず、内部リンクだけで支える
+DECAY_RATIO = 0.25
+DECAY_PEAK_MIN = 20  # 山の週の表示がこれ未満は偶然と区別できない（rank_up.MIN_IMP と揃える）
+DECAY_DAYS = 84
+DECAY_MAX = 5        # 1回に拾う本数。11〜30位の経路より多くは配らない
 NL_CH = chr(10)
 _NOISE = re.compile(r"[\s　・|｜:：\-—?？!！。、,.／/（）()【】\[\]]")
 
@@ -72,9 +79,10 @@ def load(site_id):
             continue
         ti = re.search(r"^title:\s*(.+)$", fm, re.M)
         kw = re.search(r"^keyword:\s*(.+)$", fm, re.M)
+        dt = re.search(r"^date:\s*\"?(\d{4}-\d{2}-\d{2})", fm, re.M)
         arts[p.stem] = {"path": p, "title": ti.group(1).strip() if ti else p.stem,
                         "kw": kw.group(1).strip() if kw else "",
-                        "cat": cat.group(1), "body": body}
+                        "cat": cat.group(1), "body": body, "date": dt.group(1) if dt else ""}
     return arts
 
 
@@ -160,6 +168,43 @@ def rescue_targets(site, arts, cnt):
         out.append((r["slug"], r["pos"], r["imp"], cnt.get(r["slug"], 0)))
     out.sort(key=lambda x: -(x[2] * max(0.0, 31 - x[1])))
     return out
+
+
+def peak_drop(day, published, end):
+    """公開後の7日ごとの表示（end から遡って区切る・公開日を含む週は数えない）。
+    (山の週, 直近の週)。公開4週未満か、直近の週が山なら None"""
+    from datetime import date, timedelta
+    d0 = date.fromisoformat(published)
+    weeks, e = [], end
+    while e - timedelta(days=6) > d0:
+        s = e - timedelta(days=6)
+        weeks.append(sum(v for d, v in day.items() if s.isoformat() <= d <= e.isoformat()))
+        e = s - timedelta(days=1)
+    if len(weeks) < 4 or max(weeks) == weeks[0]:
+        return None
+    return max(weeks), weeks[0]
+
+
+def decay_targets(site, arts, cnt, skip=(), day=None, end=None):
+    """山の週の表示に比べ、直近の週が1/4以下に落ちた記事（落ちた表示の多い順）。
+    戻り値は rescue_targets と同じ形 (slug, 山の週, 直近の週, 被リンク)"""
+    from datetime import date, timedelta
+    import content_yield as CY
+    import sites as S
+    end = end or date.today() - timedelta(days=3)      # GSC の確定待ち
+    cfg = S.load(site)
+    if day is None:
+        day = CY.daily(cfg, end - timedelta(days=DECAY_DAYS - 1), end)
+    out = []
+    for s, a in arts.items():
+        if s in skip or not a.get("date") or cnt.get(s, 0) >= RESCUE_FLOOR:
+            continue
+        path = CY._path(S.article_url(cfg, {"slug": s, "category": a["cat"]}))
+        pd = peak_drop(day.get(path, {}), a["date"], end)
+        if pd and pd[0] >= DECAY_PEAK_MIN and pd[1] <= pd[0] * DECAY_RATIO:
+            out.append((s, pd[0], pd[1], cnt.get(s, 0)))
+    out.sort(key=lambda x: -(x[1] - x[2]))
+    return out[:DECAY_MAX]
 
 
 def parse_band(argv):
@@ -531,7 +576,7 @@ def main():
     if inline:
         rescue = False
         band = band or (4.0, 20.0)
-    ranks = {}
+    ranks, decayed = {}, set()
     arts = load(site)
     if not arts:
         raise SystemExit(f"{site} の記事が見つかりません")
@@ -567,6 +612,16 @@ def main():
         print(f"■ {site}: 11〜30位で止まり、被リンクが{RESCUE_FLOOR}本未満 {len(poor)}記事")
         for s, pos, imp, n in tg:
             print(f"     {pos:>5.1f}位 表示{imp:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
+        try:
+            dt = [t for t in decay_targets(site, arts, cnt, skip=set(poor)) if linkable(t[0], arts)]
+        except Exception as e:
+            print(f"   公開後の山から落ちた記事は、日別の表示を取れないため見送ります（{str(e)[:60]}）")
+            dt = []
+        decayed = {s for s, _, _, _ in dt}
+        poor += [s for s, _, _, _ in dt]
+        print(f"■ {site}: 公開後の山の週から直近の週が1/4以下に落ち、被リンクが{RESCUE_FLOOR}本未満 {len(dt)}記事")
+        for s, peak, last, n in dt:
+            print(f"     山の週 表示{peak:>4} → 直近の週{last:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
     else:
         import editorial_review
         _recs = editorial_review.load()
@@ -624,7 +679,9 @@ def main():
                 b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")
                 arts[src]["body"] = nb
                 # 候補を見るだけの実行で台帳に書くと、effect_ab が当てていない記事を介入群に数える
-                note(tgt, src, "link_band" if band else "link_rescue" if rescue else "link")
+                # 山から落ちた記事は種類を分ける（effect_ab が11〜30位の経路と混ぜずに効きを測れる）
+                kind = "link_decay" if tgt in decayed else "link_rescue" if rescue else "link"
+                note(tgt, src, "link_band" if band else kind)
             added += 1
             done += 1
     print(f"\n   {'追加しました' if write else '候補'}: {done}本")

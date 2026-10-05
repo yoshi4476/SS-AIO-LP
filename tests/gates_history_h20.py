@@ -91,3 +91,37 @@ def test_manual_title_changes_join_rollback():
         finally:
             R.ROOT = old
     check("手で足した記録には印がある", all(json.dumps(x, ensure_ascii=False).count("手で") for x in got.values()), True)
+
+
+def test_rescue_picks_articles_fallen_from_their_peak():
+    import inspect
+    import content_yield as CY
+    import link_boost as LB
+    import sites as S
+    print("\n■ link_boost --rescue: 公開後の山から1/4以下に落ちた記事も拾う（題は変えない）")
+    end = date(2026, 10, 2)
+    pub = (end - timedelta(days=60)).isoformat()
+
+    def series(weekly):
+        d = {}
+        for k, v in enumerate(weekly):        # k=0 が直近の週
+            d[(end - timedelta(days=7 * k)).isoformat()] = v
+        return d
+    check("山40 → 直近8 は (40, 8)", LB.peak_drop(series([8, 10, 20, 40, 30]), pub, end), (40, 8))
+    check("直近の週が山なら拾わない", LB.peak_drop(series([50, 10, 20]), pub, end), None)
+    check("公開4週未満は拾わない", LB.peak_drop(series([1, 30]), (end - timedelta(days=20)).isoformat(), end), None)
+    sid = "ai-lab" if "ai-lab" in S.load_all() else next(iter(S.load_all()))
+    cfg = S.load(sid)
+    cat = next(iter(cfg.get("categories") or {"aio": ""}))
+    arts = {s: {"cat": cat, "date": pub} for s in ("fell", "steady", "small", "linked")}
+    path = lambda s: CY._path(S.article_url(cfg, {"slug": s, "category": cat}))
+    day = {path("fell"): series([5, 10, 40, 60, 30]), path("steady"): series([30, 35, 40, 60, 30]),
+           path("small"): series([1, 2, 10, 12]), path("linked"): series([5, 10, 40, 60, 30])}
+    cnt = {"fell": 3, "steady": 3, "small": 3, "linked": LB.RESCUE_FLOOR}
+    got = LB.decay_targets(sid, arts, cnt, day=day, end=end)
+    check("山の1/4以下に落ちた記事だけ（山が小さい・被リンクが下限以上は除く）", [t[0] for t in got], ["fell"])
+    check("11〜30位の経路で拾った記事は二重に数えない", LB.decay_targets(sid, arts, cnt, skip={"fell"}, day=day, end=end), [])
+    msrc = inspect.getsource(LB.main)
+    check("--rescue から呼ばれ、内部リンクだけを足す（台帳の種類は link_decay）",
+          ("decay_targets(" in msrc, '"link_decay"' in msrc), (True, True))
+    check("1回に拾う本数に上限がある", LB.DECAY_MAX <= 5, True)

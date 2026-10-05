@@ -190,7 +190,8 @@ def test_weekly_and_tool_defaults_unchanged():
     check("link_boost: 既定の上限は変えていない", (LB.LOW, LB.ADD_PER, LB.RESCUE_FLOOR, LB.RESCUE_ADD), (5, 2, 12, 3))
     msrc = inspect.getsource(LB.main)
     check("link_boost: 種別の台帳は --band のときだけ link_band",
-          'note(tgt, src, "link_band" if band else "link_rescue" if rescue else "link")' in msrc, True)
+          'note(tgt, src, "link_band" if band else kind)' in msrc
+          and 'kind = "link_decay" if tgt in decayed else "link_rescue" if rescue else "link"' in msrc, True)
     del argparse
 
 
