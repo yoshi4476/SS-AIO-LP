@@ -3491,7 +3491,10 @@ def test_report_actions_close_the_loop():
           all(s in wk for s in ("rewrite_rollback.py --write", "retire_stale.py --write", "--kind fresh")), True)
     check("月次CIが15日に途中経過を出す", '"0 0 15 * *"' in yml and "steps.day.outputs.through" in yml, True)
     gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
-    check("自動返信に資料の案内が入る", "videos/aio-pr.mp4" in gs and "materials + foot" in gs, True)
+    check("自動返信の資料の案内は問い合わせだけ（無料ツールの結果メールには付けない）",
+          ["videos/aio-pr.mp4" in gs, "materials + foot" in gs, "const materials = !inquiry ? '' :" in gs,
+           gs.count("inquiry = true") == 1],
+          [True, True, True, True])
     check("温度別フォローと診断レコメンドがある", "function followUp()" in gs and "reco.json" in gs, True)
 
     # 実測系: 検出器は「見つかるはずの例」で試す（0.1節）

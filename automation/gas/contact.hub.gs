@@ -275,6 +275,7 @@ function leadReply_(site, type, d) {
                 'TEL 06-4305-7547 / info.ai@7senses.co.jp', ''].join('\n');
   let subject = 'お問い合わせありがとうございます';
   let body = '';
+  let inquiry = false;
 
   if (type === 'diagnosis' && d.diagnosis) {
     const g = d.diagnosis;
@@ -338,13 +339,15 @@ function leadReply_(site, type, d) {
            '  https://ai.7senses.co.jp/download/?utm_source=email&utm_medium=email&utm_campaign=aicheck_result']))
       .concat(['', '詳しく調べたい場合は、このメールにご返信ください。']).join('\n');
   } else {
+    inquiry = true;
     body = [name + ' 様', '', 'お問い合わせいただきありがとうございます。',
             '内容を確認のうえ、3営業日以内に担当よりご連絡します。', '',
             'なお、こちらのメールは自動送信です。', ''].join('\n');
   }
   // 返信を待つ間に、判断に必要な材料を先に渡す（商談化を機械が進める）。
-  // 載せるのは公開済みのものだけ。個別の見積りや約束は人が書く
-  const materials = ['', '▼ ご連絡までの間にご覧いただける資料',
+  // 載せるのは公開済みのものだけ。個別の見積りや約束は人が書く。
+  // 無料ツール・資料請求の結果メールには付けない（運用者の判断 2026-10-05。結果だけを渡す）
+  const materials = !inquiry ? '' : ['', '▼ ご連絡までの間にご覧いただける資料',
     '・なぜ今AI検索対策なのか（PR動画・約21分）',
     '  https://ai.7senses.co.jp/videos/aio-pr.mp4',
     '・運用の実態（システムの画面そのまま・約14分）',
