@@ -83,11 +83,18 @@ def stock(site_id):
             "done": int(st.get("done") or 0), "A": a}
 
 
-def findings():
+def findings(site_id=None):
     if not FINDINGS.exists():
         return []
-    return [ln.strip() for ln in FINDINGS.read_text(encoding="utf-8").splitlines()
-            if ln.strip().startswith("要対応")]
+    out = [ln.strip() for ln in FINDINGS.read_text(encoding="utf-8").splitlines()
+           if ln.strip().startswith("要対応")]
+    import sites as S
+    if site_id and S.is_client(site_id):
+        # findings.txt は全社共通。お客様のレポートに当社の社名・他社の話を出さない
+        names = [S.load(i).get("name", "") for i in S.own_ids()]
+        bad = [m for m in (*S.OPERATOR_MARKS, *names) if m]
+        out = [f for f in out if not any(m in f for m in bad)]
+    return out
 
 
 def fixes(site_id, n=5):
@@ -108,7 +115,7 @@ def diagnose(site_id, days=28):
     fx = _try(lambda: fixes(site_id), [])
     return {"site": site_id, "name": cfg["name"], "domain": cfg["domain"], "days": days,
             "bands": bands, "funnel": fun, "brand": br, "stock": st, "fixes": fx,
-            "findings": findings()}
+            "findings": findings(site_id)}
 
 
 def next_actions(d):

@@ -15,7 +15,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from test_gates import check, ROOT
@@ -229,6 +229,24 @@ def _client_tree(td, rules=None, issuer=None):
     return td
 
 
+def test_client_diagnosis_drops_operator_findings():
+    import site_diagnosis as SD
+    import sites as S
+    print("\n■ お客様の診断に、全社共通の要対応（当社の社名）を出さない")
+    old = (SD.FINDINGS, S.ROOT, S.SITES_DIR)
+    try:
+        with tempfile.TemporaryDirectory() as td:
+            SD.FINDINGS = Path(td) / "findings.txt"
+            SD.FINDINGS.write_text("要対応: セブンセンシズ コーポレートサイト — 1/2 本でした\n要対応: 共通の話\n",
+                                   encoding="utf-8")
+            check("自社: 全部出る", len(SD.findings("ai-lab")), 2)
+            S.ROOT = _client_tree(td, issuer="client")
+            S.SITES_DIR = S.ROOT / "sites"
+            check("お客様: 当社の社名を含む行は出ない", SD.findings("h10-dent"), ["要対応: 共通の話"])
+    finally:
+        SD.FINDINGS, S.ROOT, S.SITES_DIR = old
+
+
 def test_monthly_report_issuer_is_selectable():
     import client_intake as ci
     import monthly_report as MR
@@ -279,7 +297,7 @@ def test_client_review_holds_lists_and_releases():
     try:
         with tempfile.TemporaryDirectory() as td:
             root = _client_tree(td, rules={"review_before_publish": True})
-            written = (date.today() - timedelta(days=3)).isoformat()
+            written = (datetime.now(timezone(timedelta(hours=9))).date() - timedelta(days=3)).isoformat()
             (root / "articles").mkdir()
             body = "\n\n".join(f"## 見出し{i}\n\n" + "歯科の予約を増やすには、診療の内容と料金を先に示します。" * 8
                                for i in range(6))
