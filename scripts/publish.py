@@ -463,6 +463,41 @@ def insert_mid_cta(html, cfg):
     return html[:pos] + block + html[pos:]
 
 
+def insert_inline_entry(html, cfg):
+    """最初の見出しの直下の1文結論の後に、その場の入口を1つ置く（サイト設定に cta_inline がある社だけ）。
+
+    AI集客ラボの inline_tool と同じ考え。記事のボタンは別ページへの誘導だけで、9/5〜10/2 の3サイト合計で
+    記事の訪問261に対し押下3だった。配信先のテンプレートは相手のものなので、見た目は style で持ち、
+    計測（見えた・押した）も相手の site.js に頼らずこの塊の中で送る
+    """
+    ent = cfg.get("cta_inline") or {}
+    if not ent.get("url") or "cta-inline" in html:
+        return html
+    heads = list(re.finditer(r"<h2[^>]*>(.*?)</h2>", html, re.S))
+    if not heads or re.search(r"よくある質問|まとめ", re.sub(r"<[^>]+>", "", heads[0].group(1))):
+        return html
+    end = heads[1].start() if len(heads) > 1 else len(html)
+    m = re.match(r"\s*<p[ >].*?</p>", html[heads[0].end():end], re.S)
+    if not m:
+        return html
+    tool = ent.get("tool", "diagnosis")
+    note = f'<p style="margin:8px 0 0;font-size:.8rem;color:#5b6980">{ent["note"]}</p>' if ent.get("note") else ""
+    block = (
+        f'\n<aside class="cta-inline" data-tool="{tool}" style="margin:24px 0 28px;padding:18px 20px;'
+        'border:1px solid #dbe4f0;border-left:4px solid #1b4fa0;border-radius:12px;background:#f4f7fc">'
+        f'<p style="margin:0 0 12px;font-weight:700;color:#132445;line-height:1.6">{ent["head"]}</p>'
+        f'<a class="cta-button" href="{ent["url"]}" data-cta="article_inline_{tool}" '
+        'style="display:inline-block;padding:11px 24px;border-radius:8px;background:#1b4fa0;color:#fff;'
+        f'text-decoration:none;font-weight:700">{ent.get("label", "質問に答える")}</a>{note}'
+        '<script>(function(){var b=document.currentScript.parentNode,p={page_path:location.pathname,tool:b.getAttribute("data-tool")};'
+        'function g(n){if(typeof gtag==="function")gtag("event",n,p);}'
+        'if("IntersectionObserver" in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){g("inline_tool_view");o.disconnect();}},{threshold:.6});o.observe(b);}'
+        'b.querySelector("a").addEventListener("click",function(){g("inline_tool_submit");});})();</script>'
+        '</aside>')
+    pos = heads[0].end() + m.end()
+    return html[:pos] + block + html[pos:]
+
+
 def _jp_date(iso):
     y, m, d = str(iso).split("-")
     return f"{int(y)}年{int(m)}月{int(d)}日"
@@ -705,7 +740,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         "READ_MIN": str(max(3, round(len(plain) / 600))),
         "LEAD_DANGEN": re.sub(r"<[^>]+>", "", lead).strip(),
         "TARGET": target_txt,
-        "BODY": insert_mid_cta(html, cfg),
+        "BODY": insert_mid_cta(insert_inline_entry(html, cfg), cfg),
         "TOC_ITEMS": toc,
         "FAQ_HTML": faq_html,
         "FAQ_JSONLD": faq_jsonld,
