@@ -25,6 +25,7 @@ auto_improve は、タイトルの書き換えと検索意図の見直しを人�
   python scripts/auto_rewrite.py              # 何を直すか見る
   python scripts/auto_rewrite.py --write      # 実際に直す（既定3本）
   python scripts/auto_rewrite.py --write --limit 1
+  python scripts/auto_rewrite.py --write --kind early --limit 2   # 公開14〜35日の記事に、15位以内の細い語を入れる
 """
 import argparse
 import collections
@@ -203,6 +204,141 @@ def aisplit_items(limit=2):
         rows.append({"kind": "aisplit", "slug": slug, "site": site_of(slug), "claims": cl,
                      "why": f"AIの答えが割れた問い {len(split_qs)}件（{split_qs[0][:30]}）"})
     return rows[:limit]
+
+
+EARLY_DAYS = (14, 35)       # 公開2〜5週目。1〜3週が表示の山で、6週で山の約1/4に落ちる（2026-10-05・3サイト）
+EARLY_POS, EARLY_IMP = 15, 3  # 6週以降も残った記事を分けた線（ある語で15位以内・3回以上表示）
+
+
+def narrower_terms(q, kw):
+    """検索語 q が狙う語 kw より細い（kw の語を1つ以上含み、kw に無い語が1つ以上ある）なら、
+    q のうち kw に無い・kw の語を細かくした語を返す。細くなければ空"""
+    import kw_reach
+    from rank_rescue import norm
+    nk = norm(kw)
+    kt = [norm(t) for t in kw_reach.tokens(kw) if len(norm(t)) >= 2]
+    shared, extra = 0, []
+    toks = kw_reach.tokens(q)
+    if len(toks) < 2:
+        return []
+    for t in toks:
+        n = norm(t)
+        if len(n) < 2:
+            continue
+        if n in nk:
+            shared += 1
+        elif any(k in n for k in kt):
+            shared += 1
+            extra.append(t)            # 「照合」→「三点照合」のように語を細かくした
+        else:
+            extra.append(t)
+    return extra if shared and extra else []
+
+
+def _ranks_rows(site):
+    """data/ranks/<site>.json の最新の28日（語×ページ）。rank_track が毎日残す。Search Console を呼ばない"""
+    try:
+        hist = json.loads((ROOT / "data" / "ranks" / f"{site}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    return hist[sorted(hist)[-1]] if hist else []
+
+
+def _done_kind(kind, log=None):
+    """その種類で一度でも直した（ok）記事。early は1記事1回まで（公開直後の1回で効かせる）"""
+    f = Path(log) if log else LOG
+    out = set()
+    if f.is_file():
+        for line in f.read_text(encoding="utf-8").splitlines():
+            try:
+                d = json.loads(line)
+            except ValueError:
+                continue
+            if d.get("kind") == kind and d.get("ok"):
+                out.add(d.get("slug"))
+    return out
+
+
+def early_items(limit=2, today=None, rows_of=None, log=None):
+    """公開14〜35日の記事のうち、狙う語より細い語で15位以内・3回以上表示が出ているもの（表示の多い順）。
+
+    6週以降も残った記事は公開1〜4週にある語で15位以内に入っていて、残った表示の73%はその細い語だった。
+    山が過ぎる前に、その語を題・H2・FAQに入れて15位以内を確かにする"""
+    import datetime as _dt
+    import sites as S
+    today = today or _dt.date.today()
+    lo, hi = (str(today - _dt.timedelta(days=d)) for d in (EARLY_DAYS[1], EARLY_DAYS[0]))
+    rows_of = rows_of or _ranks_rows
+    done = _done_kind("early", log)
+    arts, kws = {}, {}
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+        if not m:
+            continue
+        fm, body = m.group(1), m.group(2)
+        g = lambda k: (re.search(rf"^{k}:\s*(.+)$", fm, re.M) or [0, ""])[1].strip().strip('"')
+        kws[re.sub(r"\s", "", g("keyword").lower())] = p.stem
+        sc, d = g("score"), g("date")[:10]
+        if not sc.isdigit() or int(sc) < 90 or not (lo <= d <= hi) or p.stem in done:
+            continue
+        heads = [g("title")] + re.findall(r"^#{2,3}\s*(.+)$", body, re.M)
+        arts[p.stem] = {"kw": g("keyword"), "date": d, "heads": heads,
+                        "site": S.find_category_owner(g("category")) or ""}
+    best_of = {}
+    for sid in sorted({a["site"] for a in arts.values() if a["site"]}):
+        rows = rows_of(sid)
+        top = {}                                   # 語 → いちばん上にいる自社ページ
+        for r in rows:
+            if r.get("kw") and (r["kw"] not in top or r["pos"] < top[r["kw"]][1]):
+                top[r["kw"]] = (r["url"].rstrip("/").rsplit("/", 1)[-1], r["pos"])
+        for r in rows:
+            slug = r["url"].rstrip("/").rsplit("/", 1)[-1]
+            a = arts.get(slug)
+            if not a or a["site"] != sid or r["imp"] < EARLY_IMP or r["pos"] > EARLY_POS:
+                continue
+            q = r["kw"]
+            if top.get(q, (slug,))[0] != slug:
+                continue                           # 同じ語で別の自社ページが上にいる（入れると食い合う）
+            other = kws.get(re.sub(r"\s", "", q.lower()))
+            if other and other != slug:
+                continue                           # 別の記事がその語を狙っている
+            terms = narrower_terms(q, a["kw"])
+            if not terms or all(heads_cover_terms(a["heads"], [x]) for x in terms):
+                continue                           # 細くない、または題・見出しで既に扱っている
+            if slug in best_of and best_of[slug]["imp"] >= r["imp"]:
+                continue
+            age = (today - _dt.date.fromisoformat(a["date"])).days
+            best_of[slug] = {"kind": "early", "slug": slug, "site": sid, "query": q, "pos": r["pos"],
+                             "imp": r["imp"], "terms": terms, "age": age,
+                             "why": f"公開{age}日・細い語「{q}」で{r['pos']:.1f}位・表示{r['imp']}回（狙う語「{a['kw']}」）"}
+    return sorted(best_of.values(), key=lambda x: -x["imp"])[:limit]
+
+
+def faq_questions(text):
+    """フロントマターの faq の問い"""
+    m = re.match(r"^---\s*\n(.*?)\n---", text, re.S)
+    return re.findall(r"^\s*-\s*q:\s*(.+)$", m.group(1), re.M) if m else []
+
+
+def early_guard(before, after, title0, title1, item):
+    """early の書き直しにだけ足す検算（共通の check() の後）。通らない理由を返す（空なら合格）"""
+    from cannibal_check import dice
+    from rank_rescue import norm
+    if title1 != title0 and dice(norm(title0), norm(title1)) < 0.5:
+        return f"題を変えすぎています（{title0} → {title1}）。細い語を足すだけの直しです"
+    h0, h1 = len(re.findall(r"^##\s", before, re.M)), len(re.findall(r"^##\s", after, re.M))
+    if not 0 <= h1 - h0 <= 1:
+        return f"H2の本数が{h0}→{h1}本（変えないか、1本足すだけ）"
+    q0, q1 = faq_questions(before), faq_questions(after)
+    if len(q1) < len(q0):
+        return f"FAQ が減りました（{len(q0)}→{len(q1)}問）"
+    if not any(norm(x) in norm(q) for q in q1 for x in item.get("terms") or ()):
+        return "FAQ に細い語の問いが入っていません（" + "/".join((item.get("terms") or [])[:3]) + "）"
+    more = ext_links(after) - ext_links(before)
+    if more:
+        return "出典のURLが増えました（記事にあった出典だけで書くこと）: " + str(sorted(more)[:2])
+    return ""
 
 
 COMPETE_LOCK_DAYS = 28   # effect_ab --rewrites・rewrite_rollback が前後28日で比べる。その間に重ねて直さない
@@ -500,6 +636,16 @@ WHAT = {
                 "4. タイトル・keyword・既存の見出しと本文は変えない。足すだけにする\n"
                 "5. どれも主題に含まれなければ、何も変えずに終了する\n"
                 "登録済みの一次情報（この数字以外の新しい数字は書かない）:\n{facts}"),
+    "early": ("この記事は公開から{age}日です。自社3サイトの実測では、公開1〜4週のうちにある語で15位以内に入った\n"
+              "記事だけが6週以降も表示を保ち、その表示の7割は狙う語より細い語でした。\n"
+              "いま、狙う語より細い検索語「{query}」で{pos}位・表示{imp}回が出ています。この語を3か所に自然に入れます。\n"
+              "1. title: {title_rule}\n"
+              "2. H2: 既存のH2のうち「{query}」に最も近い1本の見出しに、その語を自然な日本語で入れる（本数・順番は変えない）。\n"
+              "   近いH2が無ければ、その語に答えるH2を1本だけ足し、直下に40〜60字の1文結論を置く\n"
+              "3. FAQ: 「{query}」をそのまま問う質問を1問足す。フロントマターの faq と本文の「よくある質問」の両方に\n"
+              "   同じ文で入れる。回答は本文にある内容だけで40〜60字\n"
+              "4. その語が記事の主題に含まれない（別の記事で扱うべき）と判断したら、何も変えずに終了する\n"
+              "5. 既存の本文・見出しは消さない。新しい数字・出典URLは足さない。keyword は変えない"),
     "review": ("直前の自動修正で表示回数が落ちています。検索意図とずれた可能性があります。\n"
                "冒頭200字と各H2直下の1文結論を読み、狙う語で検索した人が求めている答えに\n"
                "なっているか確かめてください。ずれていれば直してください。\n"
@@ -648,6 +794,12 @@ def false_alarms():
         ("英語表記の語を日本語の見出しで扱う", heads_cover_terms(["AIOツールの選び方"], ["tool"])),
         ("ハイフンつきの AI-OCR を見出しで扱う", heads_cover_terms(["AI-OCRで請求書を読む"], ["aiocr"])),
         ("題の助詞違い", title_covers_kw("中小企業の助成金とは？申請の流れ", "中小企業助成金")),
+        ("細い語を題・H2・FAQに足すだけ（early）",
+         not early_guard("---\nfaq:\n  - q: 工務店のMEOとは？\n---\n## 始め方\n本文\n",
+                         "---\nfaq:\n  - q: 工務店のMEOとは？\n  - q: 工務店のMEOが上がらないときは？\n---\n"
+                         "## 始め方\n本文\n## 順位が上がらないときは？\n本文\n",
+                         "工務店のMEO対策｜始め方と5つのコツ", "工務店のMEO対策｜上がらない時の5つのコツ",
+                         {"terms": ["上がらない"]})),
     ]
     return [name for name, ok in cases if not ok]
 
@@ -934,6 +1086,13 @@ def build_prompt(item):
         allowed = "\n".join(f"- {c}" for c in gap.get("facts") or [])
         what = what.format(kw=gap.get("kw", ""), diffs="\n".join(lines),
                            facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind == "early":
+        locked = title_locked(slug)
+        rule = ("変えない（{0} に変えた題の判定期間中）".format(locked) if locked else
+                "狙う語（keyword）を残したまま、その語が自然に入るなら最小限の言い換えで入れる。"
+                "入らなければ変えない。全面的に書き換えない。15〜45字")
+        what = what.format(age=item.get("age", ""), query=item["query"], pos=f"{item['pos']:.1f}",
+                           imp=item["imp"], title_rule=rule)
     if kind == "fresh":
         # 年月の更新だけを許す。今日の年・月・日のトークンは「増えた数字」に数えない
         t = time.localtime()
@@ -1091,6 +1250,8 @@ def run_one(item, write, edited=None):
             ng = f"共通の語「{item['shared'][0]}」がタイトルの前半に残っています"
     if not ng and kind == "compete":
         ng = compete_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], item["gap"])
+    if not ng and kind == "early":
+        ng = early_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], item)
     if not ng and meta(slug)[0] != before[0]:
         lk = title_locked(slug)
         if lk:
@@ -1102,8 +1263,10 @@ def run_one(item, write, edited=None):
         p.write_bytes(raw)
         sh([sys.executable, "scripts/build.py"], timeout=1800)
         return False, ng
-    if kind == "compete":
+    if kind in ("compete", "early"):
         LAST[slug].update(keep_before(slug, raw, p.read_bytes()))
+    if kind == "early":
+        LAST[slug].update({"query": item["query"], "pos_before": item["pos"], "imp_before": item["imp"]})
     return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…）"
 
 
@@ -1227,6 +1390,8 @@ def main():
         items = split_items(max(a.limit, 4))
     elif a.kind == "compete":
         items = compete_items(max(a.limit, 2))
+    elif a.kind == "early":
+        items = early_items(max(a.limit, 2))
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     if a.skip_recent:

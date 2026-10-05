@@ -83,3 +83,75 @@ def test_next_kw_takes_reachable_words_first():
         for k, v in saved.items():
             setattr(HC, k, v)
         R.held_queries = saved_held
+
+
+def test_early_rewrite_targets_narrow_words_in_weeks_2_to_5():
+    import datetime as dt
+    import inspect
+    import re
+    import tempfile
+    from pathlib import Path
+    import auto_rewrite as A
+    import sites as S
+    print("\n■ auto_rewrite --kind early: 公開14〜35日の記事に、15位以内に出ている細い語を題・H2・FAQへ入れる")
+    check("細い語: 狙う語の語を含み、無い語を足した語だけ",
+          (A.narrower_terms("工務店 meo 上がらない", "工務店 meo対策"), A.narrower_terms("aio 事例", "aio 導入事例"),
+           A.narrower_terms("三点照合 自動化", "請求書 照合 自動化"), A.narrower_terms("税理士 顧問", "工務店 meo対策")),
+          (["上がらない"], [], ["三点照合"], []))
+    # 本物の原稿を1本選び、公開から20日目として、その記事のURLに出る語の行を手で作る
+    art = None
+    for p in sorted((ROOT / "articles").glob("*.md")):
+        t = p.read_text(encoding="utf-8-sig")
+        sc = re.search(r"^score:\s*(\d+)", t, re.M)
+        kw = re.search(r"^keyword:\s*(.+)$", t, re.M)
+        d = re.search(r"^date:\s*(\d{4}-\d{2}-\d{2})", t, re.M)
+        cat = re.search(r"^category:\s*(\S+)", t, re.M)
+        if sc and int(sc.group(1)) >= 90 and kw and d and cat and S.find_category_owner(cat.group(1)) \
+                and len(kw.group(1).split()) >= 2 and not re.search(r"ぞうさん", t):
+            art = (p.stem, kw.group(1).strip(), dt.date.fromisoformat(d.group(1)), S.find_category_owner(cat.group(1)))
+            break
+    slug, kw, d0, sid = art
+    url = f"https://x.example/c/{slug}/"
+    q = kw + " ぞうさん"
+    rows = [{"kw": q, "url": url, "pos": 9.0, "imp": 6}, {"kw": kw, "url": url, "pos": 7.0, "imp": 40}]
+    with tempfile.TemporaryDirectory() as td:
+        log = Path(td) / "log.jsonl"
+        log.write_text("", encoding="utf-8")
+        got = A.early_items(5, today=d0 + dt.timedelta(days=20), rows_of=lambda s: rows if s == sid else [], log=log)
+        check("公開20日・細い語で9位・6回 → 対象（狙う語そのものは対象にしない）",
+              [(x["slug"], x["query"], x["terms"]) for x in got], [(slug, q, ["ぞうさん"])])
+        check("公開10日・40日は対象外", [A.early_items(5, today=d0 + dt.timedelta(days=n), log=log,
+                                                  rows_of=lambda s: rows if s == sid else []) for n in (10, 40)], [[], []])
+        far = [dict(rows[0], pos=16.0)]
+        check("16位は対象外（15位以内の線）", A.early_items(5, today=d0 + dt.timedelta(days=20), log=log,
+                                                    rows_of=lambda s: far if s == sid else []), [])
+        thin = [dict(rows[0], imp=2)]
+        check("表示2回は対象外（3回以上の線）", A.early_items(5, today=d0 + dt.timedelta(days=20), log=log,
+                                                     rows_of=lambda s: thin if s == sid else []), [])
+        other = rows + [{"kw": q, "url": "https://x.example/c/other-page/", "pos": 3.0, "imp": 9}]
+        check("同じ語で別の自社ページが上にいれば入れない（食い合う）",
+              A.early_items(5, today=d0 + dt.timedelta(days=20), log=log, rows_of=lambda s: other if s == sid else []), [])
+        log.write_text('{"kind": "early", "slug": "%s", "ok": true}\n' % slug, encoding="utf-8")
+        check("一度直した記事は二度目を直さない（1記事1回）",
+              A.early_items(5, today=d0 + dt.timedelta(days=20), log=log, rows_of=lambda s: rows if s == sid else []), [])
+    b = "---\nfaq:\n  - q: 工務店のMEOとは？\n---\n## 始め方\n本文\n"
+    good = ("---\nfaq:\n  - q: 工務店のMEOとは？\n  - q: 工務店のMEOが上がらないときは？\n---\n"
+            "## 始め方\n本文\n## 順位が上がらないときは？\n本文\n")
+    t0 = "工務店のMEO対策｜始め方と5つのコツ"
+    it = {"terms": ["上がらない"]}
+    check("題の小さな言い換え・H2を1本・FAQ を1問足す直しは通す",
+          A.early_guard(b, good, t0, "工務店のMEO対策｜上がらない時の5つのコツ", it), "")
+    check("題を別物に書き換えたら止める", A.early_guard(b, good, t0, "上がらない地図順位を直す方法とは", it).startswith("題を変えすぎ"), True)
+    check("FAQ に細い語の問いが無ければ止める",
+          A.early_guard(b, good.replace("  - q: 工務店のMEOが上がらないときは？\n", ""), t0, t0, it).startswith("FAQ に細い語"), True)
+    two = good + "## 別の節\n本文\n"
+    check("H2を2本以上足したら止める", A.early_guard(b, two, t0, t0, it).startswith("H2の本数"), True)
+    check("出典のURLを増やしたら止める",
+          A.early_guard(b, good + '<a href="https://example.com/x">x</a>\n', t0, t0, it).startswith("出典のURL"), True)
+    check("selftest の誤検出の点検に early が入っている", "（early）" in inspect.getsource(A.false_alarms), True)
+    rsrc = inspect.getsource(A.run_one)
+    check("run_one が early_guard を通し、直す前の原稿を残す（28日後に戻せる）",
+          ("early_guard(" in rsrc, 'kind in ("compete", "early")' in rsrc), (True, True))
+    check("--kind early で early_items を使う（台帳の種類は early・effect_ab が種類別に判定）",
+          'elif a.kind == "early":' in inspect.getsource(A.main), True)
+    check("見出しに細い語が入ったかを共通の検算（terms）でも見る", "\"terms\": terms" in inspect.getsource(A.early_items), True)
