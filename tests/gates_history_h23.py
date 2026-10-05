@@ -180,3 +180,38 @@ def test_top_hero_video_does_not_become_late_lcp():
     still = re.search(r'<img[^>]*lx-hero-still[^>]*>', h)
     check("トップ: 最初の描画は優先の静止画（fetchpriority=high・遅延読み込みしない）",
           bool(still and 'fetchpriority="high"' in still.group(0) and 'loading="lazy"' not in still.group(0)), True)
+
+
+def test_glossary_sends_readers_to_the_article_that_targets_the_term():
+    import re
+    import glossary as GL
+    import sites as S
+    print("\n■ 用語集: 各語の定義の直下に、その語を狙う記事への「詳しくは」を必ず置く（301 の転送先でも見える）")
+    pubs = [{"slug": "def-src", "keyword": "店舗 集客 方法", "title": "定義を書いた記事", "category": "aio", "date": "2026-09-01"},
+            {"slug": "aim", "keyword": "llmo 店舗集客", "title": "LLMOの店舗集客", "category": "aio", "date": "2026-09-02"}]
+    rec = {"term": "LLMO店舗集客", "id": "x1", "definition": "d" * 30, "slug": "def-src", "category": "aio",
+           "title": "定義を書いた記事", "date": "2026-09-01"}
+    check("狙う語が用語と一致する記事へ向ける（定義を書いた記事ではなく）", GL.target_of(rec, pubs)["slug"], "aim")
+    check("括弧の言い換えを外しても照合する（Googleビジネスプロフィール（GBP））",
+          GL.target_of(dict(rec, term="Googleビジネスプロフィール（GBP）"),
+                       [dict(pubs[1], keyword="googleビジネスプロフィール")])["slug"], "aim")
+    check("狙う記事が無ければ定義の出典の記事", GL.target_of(dict(rec, term="ぜんぜん別の語"), pubs)["slug"], "def-src")
+    r = dict(rec, target="aim", target_title="LLMOの店舗集客", target_category="aio")
+    sec = re.search(r'<section class="gl-term" id="x1">.*?</section>', GL.index_html([r]), re.S).group(0)
+    check("節の中で、定義の直後に「詳しくは」（狙う記事へ）・その後に定義の出典",
+          (sec.index("definition-box") < sec.index('class="gl-more">詳しくは <a href="/aio/aim/">')
+           < sec.index('定義の出典の記事: <a href="/aio/def-src/">')), True)
+    same = dict(rec, target="def-src", target_title="定義を書いた記事", target_category="aio")
+    s2 = GL.index_html([same])
+    check("出典と狙う記事が同じならリンクは1本（同じURLを2回並べない）", s2.count('href="/aio/def-src/"'), 1)
+    check("用語集に noindex・正規URLの変更を入れない", ("noindex" in s2, "canonical" in s2), (False, False))
+    sid = S.primary()
+    terms = GL.collect(sid)
+    html = GL.index_html(terms)
+    secs = re.findall(r'<section class="gl-term" id="([0-9a-f]+)">(.*?)</section>', html, re.S)
+    check("実データ: すべての語の節に「詳しくは」がある", [i for i, s in secs if 'class="gl-more">詳しくは <a href="/' not in s], [])
+    slugs = {p.stem for p in (ROOT / "articles").glob("*.md")}
+    check("実データ: 詳しくはの行き先は公開記事（存在する原稿）", [t["term"] for t in terms if t["target"] not in slugs], [])
+    ids = {i for i, _ in secs}
+    check("旧URL /glossary/<id>/ の転送先（#id）が用語集の節にある",
+          [ln for ln in GL.redirects(terms) if ln.split()[1].split("#")[1] not in ids], [])

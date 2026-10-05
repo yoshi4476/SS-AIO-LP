@@ -39,7 +39,7 @@ def collect(site_id, only=None):
     観点の足切りや監修待ちで止めた記事まで出典になり、用語集から404へリンクする
     """
     import sites as S
-    out = {}
+    out, pubs = {}, []
     for p in (ROOT / "articles").glob("*.md"):
         if only is not None and p.stem not in only:
             continue
@@ -54,6 +54,8 @@ def collect(site_id, only=None):
             return x.group(1).strip().strip('"') if x else ""
         if int(g("score") or 0) < 90 or S.find_category_owner(g("category")) != site_id:
             continue
+        pubs.append({"slug": p.stem, "keyword": g("keyword"), "title": g("title"),
+                     "category": g("category"), "date": g("date")})
         for raw_term, raw_def in BOX.findall(body):
             term = _plain(raw_term)
             term = re.sub(r"(とは|の定義)$", "", term).strip()
@@ -64,7 +66,51 @@ def collect(site_id, only=None):
                    "slug": p.stem, "category": g("category"), "title": g("title"), "date": g("date")}
             if term not in out or out[term]["date"] < rec["date"]:
                 out[term] = rec
+    for rec in out.values():
+        t = target_of(rec, pubs)
+        rec.update({"target": t["slug"], "target_title": t["title"], "target_category": t["category"]})
     return sorted(out.values(), key=lambda r: r["term"])
+
+
+def _nz(s):
+    return re.sub(r"[\s　・･/／（）()「」【】|｜:：、。の]", "", str(s).lower())
+
+
+def target_of(rec, pubs):
+    """その用語を狙う記事（狙う語が用語と一致・包含する公開記事）。無ければ定義の出典の記事。
+
+    用語集のページが記事より上に出る語が13語あった（週次の要対応・2026-10-05）。用語集から
+    詳しい記事へ送るリンクは、定義を書いた記事ではなく、その語を狙っている記事に向ける"""
+    names = {_nz(rec["term"]), _nz(re.sub(r"[（(].*?[）)]", "", rec["term"]))} - {""}
+    best, rank = None, 0
+    for a in pubs:
+        k = _nz(a["keyword"])
+        if not k:
+            continue
+        r = 3 if k in names else (2 if any(len(n) >= 3 and (n in k or k in n) for n in names) else 0)
+        # 同じ点なら、定義を書いた記事 → 狙う語が短い（用語に近い）記事の順
+        if r and (r > rank or (r == rank and (a["slug"] == rec["slug"] or
+                                               (best["slug"] != rec["slug"] and len(k) < len(_nz(best["keyword"])))))):
+            best, rank = a, r
+    return best or rec
+
+
+def target_url(rec, article_url):
+    """その語を狙う記事のURL。定義の出典と同じ記事なら article_url（サイトごとの組み方をそのまま使う）"""
+    if not rec.get("target") or rec["target"] == rec["slug"]:
+        return article_url
+    return f'/{rec.get("target_category") or rec["category"]}/{rec["target"]}/'
+
+
+def more_html(rec, article_url, t_url):
+    """定義の直下に置く「詳しくは」の行。用語集に着いた読者（旧URL /glossary/<id>/ から転送された人も）を記事へ送る"""
+    t_title = rec.get("target_title") or rec["title"]
+    line = (f'<p class="gl-more">詳しくは <a href="{t_url}">「{_h.escape(t_title[:60])}」</a>'
+            f'で解説しています。</p>')
+    if t_url == article_url:
+        return line + f'<p class="hub-note">定義の出典はこの記事です（{rec["date"]}時点の記述）。</p>'
+    return line + (f'<p class="hub-note">定義の出典の記事: <a href="{article_url}">{_h.escape(rec["title"][:60])}</a>'
+                   f'（{rec["date"]}時点の記述）</p>')
 
 
 def related(rec, terms, k=4):
@@ -120,8 +166,7 @@ def term_html(rec, article_url, base="/glossary/", rel=()):
           "inDefinedTermSet": {"@type": "DefinedTermSet", "name": "用語集", "url": base}}
     return (f'<div class="latest-block" data-cat="new"><div class="cat-head"><h2>{_h.escape(rec["term"])}とは</h2></div>'
             f'<div class="definition-box"><span class="term">{_h.escape(rec["term"])}とは</span>、{_h.escape(rec["definition"])}</div>'
-            f'<p class="hub-note">出典の記事: <a href="{article_url}">{_h.escape(rec["title"][:60])}</a>'
-            f'（{rec["date"]}時点の記述）</p>' + rel_html +
+            + more_html(rec, article_url, target_url(rec, article_url)) + rel_html +
             f'<p class="hub-note"><a href="{base}">← 用語集へ</a></p></div>'
             '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
@@ -139,15 +184,15 @@ def index_html(terms, base="/glossary/", site_url="", rel_all=None):
             f'<a href="#{x["id"]}">{_h.escape(x["term"])}</a>' for x in rel) + '</p>') if rel else ""
         secs.append(f'<section class="gl-term" id="{r["id"]}"><h3>{_h.escape(r["term"])}とは</h3>'
                     f'<div class="definition-box"><span class="term">{_h.escape(r["term"])}とは</span>、{_h.escape(r["definition"])}</div>'
-                    f'<p class="hub-note">出典の記事: <a href="/{r["category"]}/{r["slug"]}/">{_h.escape(r["title"][:60])}</a>'
-                    f'（{r["date"]}時点の記述）</p>{rel_html}</section>')
+                    + more_html(r, f'/{r["category"]}/{r["slug"]}/', target_url(r, f'/{r["category"]}/{r["slug"]}/'))
+                    + f'{rel_html}</section>')
     ld = {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "用語集", "url": f"{site_url}{base}",
           "hasDefinedTerm": [{"@type": "DefinedTerm", "name": r["term"], "description": r["definition"],
                               "url": f"{site_url}{base}#{r['id']}"} for r in terms]}
     return (f'<div class="latest-block" data-cat="new"><div class="cat-head"><h2>用語集</h2>'
             f'<span class="cnt">{len(terms)}語</span></div>'
             '<p class="hub-lead">記事の中で定義した用語を1か所に集めています。定義は各記事に書いたものと同じで、'
-            '出典の記事から詳しい使い方へ進めます。</p>'
+            '各語の「詳しくは」から、その語を詳しく扱う記事へ進めます。</p>'
             f'<nav class="gl-toc" aria-label="用語の目次">{toc}</nav>{"".join(secs)}</div>'
             '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
