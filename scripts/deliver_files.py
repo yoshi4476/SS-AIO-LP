@@ -83,7 +83,28 @@ def stage(cfg):
                 (d / name).write_bytes(r.read())
         except Exception:
             pass
+    keep_delivered(cfg, d)
     return d
+
+
+def keep_delivered(cfg, d: Path):
+    """前に届けた記事を article-manifest.json から落とさない。
+    ZIP の社は先方が上げるまで公開中の一覧が古い（読めないこともある）ため、読んだものに足すだけでは
+    今回の1本だけの一覧になり、先方が上書きすると前の回の記事が消えていた。手元の配信済み一覧で補う"""
+    idx = load_index(cfg)
+    if not idx:
+        return
+    p = d / "article-manifest.json"
+    try:
+        man = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
+    except ValueError:
+        man = {}
+    if not isinstance(man, dict):
+        man = {}
+    for slug, r in idx.items():
+        # 指紋を控える前に届けた記事は "" （分からない）で載せる
+        man.setdefault(slug, r.get("hash", ""))
+    p.write_text(json.dumps(man, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
 
 
 def stage_cfg(cfg):
@@ -393,6 +414,12 @@ def deliver(cfg, meta, written, base: Path, push: bool):
             raise SystemExit(f"{meta['slug']}: ZIP を先方へ届けられないため、配信済みにしません（次の回にまた作ります）")
     idx = load_index(cfg)
     idx[meta["slug"]] = {"title": re.sub(r"\s+", " ", meta["title"]), "date": str(meta["date"])}
+    try:
+        h = json.loads((base / "article-manifest.json").read_text(encoding="utf-8")).get(meta["slug"])
+    except (OSError, ValueError, AttributeError):
+        h = None
+    if h:
+        idx[meta["slug"]]["hash"] = h
     p = index_path(cfg)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(idx, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
