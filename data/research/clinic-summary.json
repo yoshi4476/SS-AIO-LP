@@ -177,8 +177,8 @@
   "全体": {
    "answers": 293,
    "clinic": 231,
-   "portal": 184,
    "other": 37,
+   "portal": 184,
    "maker": 78,
    "media": 105,
    "review": 7,
@@ -189,8 +189,8 @@
   "地域で探す": {
    "answers": 80,
    "clinic": 41,
-   "portal": 60,
    "other": 16,
+   "portal": 60,
    "maker": 1,
    "media": 6,
    "review": 7,
@@ -201,19 +201,19 @@
    "portal": 35,
    "public": 17,
    "clinic": 69,
-   "maker": 12,
    "media": 23,
+   "maker": 12,
    "other": 7,
    "video": 1
   },
   "選び方": {
    "answers": 37,
-   "public": 20,
-   "clinic": 31,
-   "portal": 23,
    "media": 22,
-   "video": 4,
+   "portal": 23,
+   "public": 20,
    "other": 5,
+   "video": 4,
+   "clinic": 31,
    "maker": 12
   },
   "症状": {
@@ -221,8 +221,8 @@
    "media": 35,
    "clinic": 55,
    "portal": 37,
-   "maker": 29,
    "public": 20,
+   "maker": 29,
    "video": 3,
    "other": 4,
    "wiki": 4
@@ -234,8 +234,8 @@
    "media": 19,
    "portal": 29,
    "maker": 24,
-   "video": 4,
-   "other": 5
+   "other": 5,
+   "video": 4
   }
  }
 }

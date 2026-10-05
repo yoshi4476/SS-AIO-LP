@@ -184,8 +184,8 @@
   "全体": {
    "answers": 295,
    "clinic": 239,
-   "media": 158,
    "portal": 245,
+   "media": 158,
    "video": 43,
    "review": 11,
    "public": 53,
@@ -196,8 +196,8 @@
   "地域で探す": {
    "answers": 78,
    "clinic": 47,
-   "media": 41,
    "portal": 59,
+   "media": 41,
    "video": 2,
    "review": 11,
    "public": 2,
@@ -216,9 +216,9 @@
   },
   "選び方": {
    "answers": 45,
+   "portal": 35,
    "clinic": 44,
    "media": 27,
-   "portal": 35,
    "maker": 25,
    "public": 9,
    "video": 7,
@@ -227,23 +227,23 @@
   },
   "進め方・トラブル": {
    "answers": 52,
+   "portal": 43,
    "clinic": 44,
    "media": 36,
-   "portal": 43,
-   "video": 13,
    "maker": 30,
+   "video": 13,
    "other": 12,
    "public": 22,
    "wiki": 1
   },
   "住まいの悩み": {
    "answers": 48,
-   "media": 25,
-   "clinic": 43,
-   "maker": 27,
    "portal": 44,
-   "video": 7,
+   "maker": 27,
+   "clinic": 43,
+   "media": 25,
    "public": 12,
+   "video": 7,
    "other": 3
   }
  }
