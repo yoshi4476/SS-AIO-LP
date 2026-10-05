@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from cannibal_check import (dice, kw_conflicts, load_articles,  # noqa: E402
+from cannibal_check import (dice, is_glossary, kw_conflicts, load_articles,  # noqa: E402
                             norm_kw, terms, topic_overlap)
 
 # GSCで既存ページがこの順位以内に入っている語は、すでにそのページのもの
@@ -125,6 +125,20 @@ def gsc_related(kw, own):
     return sorted(hit, key=lambda x: x["pos"])
 
 
+def glossary_source(page, site_id, cache={}):
+    """用語集のページ（/glossary/<id>/）の定義を出した記事の slug。分からなければ空"""
+    gid = page.split("/glossary/", 1)[-1].strip("/").split("#")[0]
+    if not gid or not site_id:
+        return ""
+    if site_id not in cache:
+        try:
+            import glossary as GL
+            cache[site_id] = {r["id"]: r["slug"] for r in GL.collect(site_id)}
+        except Exception:
+            cache[site_id] = {}
+    return cache[site_id].get(gid, "")
+
+
 def h2_owner(heading, own):
     """見出し案の主題を、すでに取っているページ
 
@@ -195,6 +209,21 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
     if ex:
         own = [o for o in own if not any(f"/{e}/" in o["page"] or o["page"].rstrip("/").endswith("/" + e)
                                          for e in ex)]
+    # 用語集は記事の定義から作るページなので、記事と同じ扱い（書き足す先・着手禁止）にはしない。
+    # 審査中の記事自身の定義から作った用語集は相手に数えない（数えると、その記事の書き直しが
+    # 自分の写しを相手に毎回差し戻される）。残りは用語集が上に出る語として知らせる
+    gl_own = [o for o in own if is_glossary(o["page"])]
+    own = [o for o in own if not is_glossary(o["page"])]
+    for o in gsc_owner(kw, gl_own)[:3]:
+        src = glossary_source(o["page"], o.get("site") or site_id)
+        if src and src in ex:
+            continue
+        level = max(level, 1)
+        reasons.append((
+            "要対応", f"用語集がこの語で順位を持っている: {o['page'].split('//')[-1]}"
+            + (f"（定義の出典: {src}）" if src else ""),
+            f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。記事を当てるなら、用語集より記事が上に出るよう"
+            f"出典の記事へ寄せてください（用語集の noindex・正規URLは機械では変えません）"))
     for o in gsc_owner(kw, own)[:5]:
         level = max(level, 2)
         if o.get("own", True):

@@ -4,6 +4,7 @@
 使い方:
     python scripts/cannibal_check.py           # 書く前の類似度検査
     python scripts/cannibal_check.py --serp    # 公開後の食い合い（GSC実績）
+    python scripts/cannibal_check.py --glossary  # 用語集が記事より上に出る語（知らせるだけ）
     python scripts/cannibal_check.py --cross   # サイトをまたいだ検査
 
 タイトル・説明文・H2見出しの文字バイグラム類似度で、既存記事どうしの重複を検出する。
@@ -592,8 +593,41 @@ def _slug(url):
     return url.rstrip("/").split("/")[-1] or "top"
 
 
-def serp_overlap(days=28, min_imp=MIN_IMP):
-    """同じ検索語に自社の複数ページが出ている状態を、GSCの実績から拾う"""
+# 用語集（/glossary/。2026-09-24 開始）は記事の定義ブロックから機械で作るため、
+# 記事と同じ語で表示を取り始めている（実測 2026-10-05: AI集客ラボで60語）。
+# _slug だと /glossary/<id>/ が id になり、一覧ページとも記事とも区別できなかった。
+# 用語集が記事より上に出る組は知らせるだけにする（noindex・正規URLは機械で変えない）
+def is_glossary(url):
+    from urllib.parse import urlparse
+    return (urlparse(url).path if "//" in url else url).startswith("/glossary/")
+
+
+def glossary_pairs(rows, article_slugs, min_imp=MIN_IMP):
+    """同じ検索語で、用語集のページが記事より上に出ている組。rows は GSC の query×page の行"""
+    import collections
+    g = collections.defaultdict(list)
+    for x in rows:
+        g[x["keys"][0]].append(x)
+    out = []
+    for kw, v in g.items():
+        gl = [x for x in v if is_glossary(x["keys"][1])]
+        ar = [x for x in v if not is_glossary(x["keys"][1]) and _slug(x["keys"][1]) in article_slugs]
+        if not gl or not ar:
+            continue
+        top_g = min(gl, key=lambda x: x["position"])
+        top_a = min(ar, key=lambda x: x["position"])
+        if top_g["position"] >= top_a["position"] or top_g["impressions"] + top_a["impressions"] < min_imp:
+            continue
+        out.append({"kw": kw, "imp": top_g["impressions"] + top_a["impressions"],
+                    "glossary": (top_g["keys"][1], top_g["position"], top_g["impressions"]),
+                    "article": (_slug(top_a["keys"][1]), top_a["position"], top_a["impressions"])})
+    out.sort(key=lambda x: -x["imp"])
+    return out
+
+
+def serp_overlap(days=28, min_imp=MIN_IMP, gl=None):
+    """同じ検索語に自社の複数ページが出ている状態を、GSCの実績から拾う。
+    gl にリストを渡すと、用語集が記事より上に出る組をそこへ足す（用語集は記事どうしの組から外す）"""
     import collections
     from datetime import date, timedelta
     sys.path.insert(0, str(ROOT / "scripts"))
@@ -604,15 +638,22 @@ def serp_overlap(days=28, min_imp=MIN_IMP):
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
     out = []
+    serp_overlap.failed = False
     for sid, cfg in S.load_all().items():
         try:
             rows = G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 5000,
                        raise_errors=True)
         except Exception as e:
             print(f"  {sid}: GSCから取得できません（{str(e)[:50]}）")
+            serp_overlap.failed = True
             continue
+        if gl is not None:
+            slugs = {a["slug"] for a in load_articles() if S.find_category_owner(a["cat"]) == sid}
+            gl += [dict(h, site=sid) for h in glossary_pairs(rows, slugs, min_imp)]
         g = collections.defaultdict(list)
         for x in rows:
+            if is_glossary(x["keys"][1]):
+                continue
             g[x["keys"][0]].append((_slug(x["keys"][1]), x["position"], x["impressions"]))
         for kw, v in g.items():
             if len(v) < 2:
@@ -633,8 +674,26 @@ def serp_overlap(days=28, min_imp=MIN_IMP):
     return out
 
 
+def glossary_report(gl, failed=False):
+    """用語集が記事より上に出る組を知らせる。印は GLOSSARY_OK"""
+    print(f"GLOSSARY_OVERLAP: 同じ検索語で用語集が記事より上に出ている {len(gl)}語")
+    for h in gl[:20]:
+        g, a = h["glossary"], h["article"]
+        print(f"  要対応: [{h['site']}] 「{h['kw']}」で用語集 {g[1]:.1f}位（{g[0].split('//')[-1]}・表示{g[2]}）が"
+              f"記事 {a[0]} {a[1]:.1f}位（表示{a[2]}）より上")
+    if len(gl) > 20:
+        print(f"  ほか{len(gl) - 20}語")
+    if gl:
+        print("  対処: 記事を勝たせるなら用語集の定義から記事へのリンクを確かめ、用語集の扱い"
+              "（noindex・正規URL）は人が決める（機械では変えません）")
+    print(f"GLOSSARY_OK={'no' if gl else ('unknown' if failed else 'yes')}")
+
+
 def serp_overlap_check(days=28):
-    hits = serp_overlap(days)
+    gl = []
+    hits = serp_overlap(days, gl=gl)
+    glossary_report(gl, getattr(serp_overlap, "failed", False))
+    print()
     print(f"SERP_OVERLAP: 同じ検索語に自社の複数ページが出ている {len(hits)}語")
     if not hits:
         print("SERP_OVERLAP_FOUND=no")
@@ -657,6 +716,11 @@ def serp_overlap_check(days=28):
 def main():
     if "--serp" in sys.argv:
         serp_overlap_check()
+        return
+    if "--glossary" in sys.argv:
+        gl = []
+        serp_overlap(gl=gl)
+        glossary_report(gl, getattr(serp_overlap, "failed", False))
         return
     if "--cross" in sys.argv:
         cross_site_check()

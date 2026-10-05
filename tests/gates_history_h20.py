@@ -125,3 +125,45 @@ def test_rescue_picks_articles_fallen_from_their_peak():
     check("--rescue から呼ばれ、内部リンクだけを足す（台帳の種類は link_decay）",
           ("decay_targets(" in msrc, '"link_decay"' in msrc), (True, True))
     check("1回に拾う本数に上限がある", LB.DECAY_MAX <= 5, True)
+
+
+def test_glossary_is_seen_by_cannibal_checks():
+    import cannibal_check as CC
+    import kw_guard as KG
+    print("\n■ 用語集（/glossary/）も食い合いの検査に入れる（知らせるだけ）")
+    check("用語集のURLを見分ける（一覧の /glossary/ も・記事は違う）",
+          (CC.is_glossary("https://a.example/glossary/abc/"), CC.is_glossary("https://a.example/glossary/"),
+           CC.is_glossary("https://a.example/aio/glossary-x/")), (True, True, False))
+
+    def row(q, page, pos, imp):
+        return {"keys": [q, "https://a.example" + page], "position": pos, "impressions": imp}
+    rows = [row("語A", "/glossary/g1/", 9.8, 4), row("語A", "/seo/art-a/", 12.2, 51),
+            row("語B", "/glossary/g2/", 30.0, 5), row("語B", "/seo/art-b/", 8.0, 40),
+            row("語C", "/glossary/g3/", 5.0, 3), row("語C", "/seo/", 7.0, 20),
+            row("語D", "/glossary/g4/", 5.0, 1), row("語D", "/seo/art-d/", 7.0, 2)]
+    got = CC.glossary_pairs(rows, {"art-a", "art-b", "art-d"})
+    check("記事より上に出る用語集だけ（下にいる・相手が一覧・表示が誤差の組は除く）", [h["kw"] for h in got], ["語A"])
+    check("用語集と記事の両方を残す", (got[0]["glossary"][1], got[0]["article"][0]), (9.8, "art-a"))
+    src = (ROOT / "scripts" / "cannibal_check.py").read_text(encoding="utf-8")
+    check("用語集は記事どうしの組から外し、印 GLOSSARY_OK を出す（noindex・正規URLは変えない）",
+          ("if is_glossary(x[\"keys\"][1]):" in src, "GLOSSARY_OK=" in src, "noindex" in src), (True, True, True))
+    fsrc = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
+    check("週次の要対応に載る", "cannibal_check.py --glossary" in fsrc, True)
+
+    kw = "試験用語ぜっとぜっと"
+    fake = [{"keys": [kw, "https://a.example/glossary/g9/"], "position": 6.0, "impressions": 30}]
+    real_rows, real_src = KG.gsc_rows, KG.glossary_source
+
+    def rows_fn(_sid):
+        rows_fn.failed = ""
+        return fake
+    try:
+        KG.gsc_rows = rows_fn
+        KG.glossary_source = lambda page, sid: "src-article"
+        lv, rs = KG.judge(kw, "ai-lab")
+        check("kw_guard: 用語集が取っている語は要対応で知らせ、着手禁止（2）にはしない",
+              (lv, [r[0] for r in rs]), (1, ["要対応"]))
+        lv, rs = KG.judge(kw, "ai-lab", exclude_slug="src-article")
+        check("kw_guard: 審査中の記事自身の定義から作った用語集は相手に数えない", (lv, rs), (0, []))
+    finally:
+        KG.gsc_rows, KG.glossary_source = real_rows, real_src
