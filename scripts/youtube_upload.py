@@ -198,6 +198,24 @@ def tools_block(a):
 
 
 LEAD_LONG = "lead-long"     # 台帳のショートの desc にこの印があるものだけ、説明欄の先頭に通常の動画を置く
+# 説明欄の上限は 5,000 バイト（UTF-8）。文字数で 4,900 に切っていたため、日本語（1字3バイト）では
+# API が弾く長さになっていた。余裕を見て 4,900 バイトに収める
+DESC_BYTES = 4900
+CHAPTER_HEAD = "\n\n▼ チャプター\n"
+
+
+def fit_description(desc, limit=DESC_BYTES):
+    """説明欄を UTF-8 で limit バイト以下にする。字の途中では切らない。
+    チャプターは末尾にあり、途中で切れると章が壊れるので残し、その前の本文を詰める"""
+    if len(desc.encode("utf-8")) <= limit:
+        return desc
+    head, sep, chap = desc.partition(CHAPTER_HEAD)
+    tail = sep + chap
+    room = limit - len(tail.encode("utf-8"))
+    if not sep or room <= 0:
+        head, tail, room = desc, "", limit
+    cut = head.encode("utf-8")[:room].decode("utf-8", "ignore")
+    return cut.rstrip() + tail
 
 
 def full_description(slug, short=False, chapters=None, lead_long=False):
@@ -224,8 +242,8 @@ def full_description(slug, short=False, chapters=None, lead_long=False):
     ch = Path(chapters) if chapters else None
     if not short and ch and ch.is_file() and ch.read_text(encoding="utf-8").strip():
         # チャプター（<動画>.chapters.txt）。説明欄の時刻がそのまま章になる
-        desc = desc.rstrip() + "\n\n▼ チャプター\n" + ch.read_text(encoding="utf-8").strip() + "\n"
-    return desc[:4900], title, tags
+        desc = desc.rstrip() + CHAPTER_HEAD + ch.read_text(encoding="utf-8").strip() + "\n"
+    return fit_description(desc), title, tags
 
 
 def update_descriptions():
@@ -253,7 +271,7 @@ def update_descriptions():
             if sn.get("description", "").strip() == desc.strip():
                 continue
             body = {"id": vid, "snippet": {"title": sn["title"], "categoryId": sn.get("categoryId", "27"),
-                                           "description": desc[:4900], "tags": sn.get("tags", [])}}
+                                           "description": fit_description(desc), "tags": sn.get("tags", [])}}
             yt.videos().update(part="snippet", body=body).execute()
             n += 1
             print(f"  説明欄を更新: {vid} {sn['title'][:30]}")
@@ -371,7 +389,7 @@ def upload(mp4, slug, public=False, quiet=False, short_title="", replacing=(), t
     title = short_title[:88] + " #Shorts" if short_title else (title or art_title)
     # タイトルは100字まで。超えると API が弾く
     title = (title or slug)[:100]
-    body = {"snippet": {"title": title, "description": desc[:4900],
+    body = {"snippet": {"title": title, "description": fit_description(desc),
                         "tags": tags[:10], "categoryId": CATEGORY_HOWTO,
                         "defaultLanguage": "ja", "defaultAudioLanguage": "ja"},
             "status": {"privacyStatus": "public" if public else "unlisted",
