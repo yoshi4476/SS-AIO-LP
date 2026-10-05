@@ -61,7 +61,9 @@ def test_review_reply_offer_and_auto_answer():
           and 'id="form"' in (ROOT / "site" / "lp" / "index.html").read_text(encoding="utf-8"), True)
     check("固定文は運用者の文言のまま",
           "'詳しくお聞きになりたい場合は、お問い合わせフォームからご連絡ください。\\n  ' + REVIEW_FORM_URL" in src, True)
-    check("AIで作ったことを相手に隠さない", "AIで作成しています" in one, True)
+    # 運用者の判断（2026-10-05）: 人が書いたともAIが書いたとも名乗らない。人を名乗るのは事実と違うので禁止のまま
+    check("どちらとも名乗らない（AIの明記も担当の名乗りも無い）",
+          ["AIで作成しています" in one, "担当" in one.replace("ご担当者", "")], [False, False])
 
     run = _func(src, "reviewReply")
     check("1スレッド1回: 処理済みのラベルを検索で除き、終わったら付ける",

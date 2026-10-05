@@ -908,6 +908,7 @@ function admin_(task) {
     case 'setup':     setup(); return { ok: true, result: 'タブを整えました' };
     case 'clean_kpi': return { ok: true, result: cleanKpi_() };
     case 'tidy_exclude': return { ok: true, result: tidyExclude_() };
+    case 'review_trigger': return { ok: true, result: installReviewReplyTrigger() };
     default:
       return { ok: false, error: '不明なtask: ' + task
                + '（format / triggers / kpi / dashboard / setup）' };

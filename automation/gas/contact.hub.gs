@@ -1351,7 +1351,7 @@ function reviewOne_(thread, ask, me, log) {
   }
   const who = (res.name || 'ご担当者') + ' 様';
   ask.msg.reply([who, '', 'ご返信ありがとうございます。',
-    'お送りした結果をもとに、まず直す1か所と、その直し方をお送りします（この返信は、結果をもとにAIで作成しています）。', '',
+    'お送りした結果をもとに、まず直す1か所と、その直し方をお送りします。', '',
     text.trim(), '', REVIEW_FORM_TEXT].join('\n') + REPLY_FOOT, opts);
   log.appendRow([new Date(), ask.email, res.kind, '送信', '', thread.getId()]);
   return 'sent';
@@ -1397,20 +1397,27 @@ function reviewReply() {
 
 function installReviewReplyTrigger() {
   // 返信がこのアカウントの受信箱に届くかを先に確かめる（届かなければトリガーを作っても何も拾えない）
+  // 結果を文字で返す（管制塔の admin タスクから呼んだときに、エディタを開かずに確かめられるように）
+  const notes = [];
   const me = String(Session.getEffectiveUser().getEmail() || '').toLowerCase();
   const inbox = reviewInbox_().toLowerCase();
   const aliases = GmailApp.getAliases().map(function (a) { return String(a).toLowerCase(); });
   if (me !== inbox && aliases.indexOf(inbox) < 0) {
-    console.warn('注意: このスクリプトは ' + me + ' で動いています。結果メールの返信先 ' + inbox
+    notes.push('注意: このスクリプトは ' + me + ' で動いています。結果メールの返信先 ' + inbox
       + ' はこのアカウントのアドレスでもエイリアスでもないため、届いているかを確かめてください'
       + '（届かない場合は ' + inbox + ' からこのアカウントへ転送するか、Script Properties の REVIEW_INBOX に'
       + 'このアカウントで受けられるアドレスを入れてください）');
   }
-  if (!geminiKey_()) console.warn('GEMINI_API_KEY が未設定です（Script Properties に入れるまで自動回答は動きません）');
+  if (!geminiKey_()) notes.push('GEMINI_API_KEY が未設定です（Script Properties に入れるまで自動回答は動きません）');
   const has = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'reviewReply'; });
-  if (has) { console.log('reviewReply のトリガーは既にあります'); return; }
-  ScriptApp.newTrigger('reviewReply').timeBased().everyMinutes(15).create();
-  console.log('reviewReply を15分ごとに動かすトリガーを作りました');
+  if (has) {
+    notes.push('reviewReply のトリガーは既にあります');
+  } else {
+    ScriptApp.newTrigger('reviewReply').timeBased().everyMinutes(15).create();
+    notes.push('reviewReply を15分ごとに動かすトリガーを作りました');
+  }
+  notes.forEach(function (n) { console.log(n); });
+  return notes.join('\n');
 }
 
 /**
