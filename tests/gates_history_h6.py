@@ -41,7 +41,7 @@ def test_rewrite_effect_by_kind():
     span = [at + timedelta(days=i) for i in range(-28, 29)]
     flat = {d: 10 for d in span}
     grow = {d: (10 if d < at else 20) for d in span}
-    data = {f"ctrl{i}": dict(flat) for i in range(6)}
+    data = {f"ctrl{i}": dict(flat) for i in range(10)}
     acts = []
     for i in range(5):
         data[f"up{i}"] = dict(grow)
@@ -52,7 +52,8 @@ def test_rewrite_effect_by_kind():
         data[f"few{i}"] = dict(grow)
         acts.append({"slug": f"few{i}", "at": at.isoformat(), "kind": "question"})
     acts.append({"slug": "new", "at": "2026-09-30", "kind": "title"})
-    res = E.rewrite_effects(acts, _daily(data), today=date(2026, 10, 4))
+    pubs = {s: at - timedelta(days=60) for s in data}
+    res = E.rewrite_effects(acts, _daily(data), today=date(2026, 10, 4), pubs=pubs)
     k = res["kinds"]
     check("表示が対照群の2倍に伸びた種類は「効いた」", (k["aio"]["verdict"], k["aio"]["net_imp"]), ("効いた", 2.0))
     check("対照群と同じ動きの種類は「効かない」", k["desc"]["verdict"], "効かない")
@@ -60,7 +61,7 @@ def test_rewrite_effect_by_kind():
     check("28日たっていない書き直しは観測中", (k["title"]["verdict"], k["title"]["pending"]), ("判定前", 1))
     # 書き直した記事どうしは対照群に入れない（入れると差が薄まる）
     item = next(x for x in res["items"] if x["slug"] == "up0")
-    check("対照群は書き直していない記事だけ", item["ctrl_n"], 6)
+    check("対照群は書き直していない記事だけ", item["ctrl_n"], 10)
 
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("週次で書き直しの効きを測る", "effect_ab.py --rewrites" in wf, True)

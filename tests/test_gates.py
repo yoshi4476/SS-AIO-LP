@@ -3060,7 +3060,7 @@ def test_interventions_are_measured_against_control():
         FAIL.append("effect_ab")
         return
     src = p.read_text(encoding="utf-8")
-    for need, why in (("touched_days", "触った記事を除いた対照群を作っていません"),
+    for need, why in (("cohort(daily", "触った記事を除いた対照群を作っていません"),
                       ("ctrl_imp", "対照群の動きを測っていません")):
         if need not in src:
             print(f"  NG  {why}")

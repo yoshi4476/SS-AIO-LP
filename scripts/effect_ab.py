@@ -11,6 +11,10 @@
 自社データで裏づけが無かった（1〜10位の中央値5本 < 11〜30位の9〜10本）。
 ああいう発見を、人が気づくのを待たずに毎週出す。
 
+対照群は、直した記事と**公開からの日数が±1週**の記事だけ（記事以外のページは入らない）。
+記事は公開1〜3週で表示の山、4〜6週で山の約1/4に落ちるため、年齢の違う対照と比べると
+公開から日の浅い記事への手は「効かなかった」と読まれる。対照が10本に満たなければ保留する。
+
 **言えないこと**: 本数が少ないので「統計的に有意」とは言わない。
 中央値の差と本数をそのまま出し、判断材料にする。
 
@@ -34,6 +38,41 @@ sys.path.insert(0, str(ROOT / "scripts"))
 LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 MIN_N = 5             # これ未満は参考値としか言えない
 MIN_IMP = 5           # 前期の表示がこれ未満の記事は動きが読めない
+AGE_TOL = 7           # 対照に入れる公開からの日数の差（±1週）
+from content_yield import MIN_COHORT as MIN_CTRL   # 対照がこれ未満なら判定しない（コホート比較と同じ下限）
+
+
+def published():
+    """slug → 公開日。日付の無い原稿は入れない（週数をそろえられない）"""
+    import content_yield as CY
+    out = {}
+    for p in (ROOT / "articles").glob("*.md"):
+        a = CY._fm(p)
+        try:
+            out[a["slug"]] = date.fromisoformat(a["date"])
+        except (TypeError, ValueError):
+            continue
+    return out
+
+
+def cohort(daily, slug, at, pubs, acts, days):
+    """対照に使う記事（直した記事と公開からの日数の差が±1週・比べる前後 days 日に手を打っていない）。
+    公開日が分からなければ None。
+
+    記事は公開1〜3週で表示の山、4〜6週で山の約1/4に落ちる（2026-10-05 実測・3サイト共通）。
+    公開の古い記事やトップ・カテゴリ・著者のページを対照に混ぜると、公開から日の浅い記事を直した手は
+    自然な落ち込みの分だけ「効かなかった」と読まれる（題を戻す判定では対照38本のうち35本が記事以外だった）。
+    外す手（acts）は呼び出し側が決める。書き直しの判定は書き直し・統合だけ、施策ごとの判定はその施策と書き直しだけ。
+    内部リンク・CTA を全記事に足してきたため、期間内の手を全部外すと同じ週数の記事が残らない
+    （2026-10-05 実測: 書き直し51件のうち35件で対照が10本未満。書き直しだけ外せば全件45本以上）。
+    両群に同じように入る手は差し引きで消える。比べる期間の外の手は、この判定の表示に入らない"""
+    if slug not in pubs:
+        return None
+    age = (at - pubs[slug]).days
+    lo, hi = (at - timedelta(days=days)).isoformat(), (at + timedelta(days=days)).isoformat()
+    touched = {x["slug"] for x in acts if lo <= str(x["at"])[:10] <= hi}
+    return [s for s in daily
+            if s != slug and s not in touched and s in pubs and abs((at - pubs[s]).days - age) <= AGE_TOL]
 
 
 def interventions():
@@ -165,27 +204,36 @@ def measure(daily, slug, at, days, today):
                   "clk_diff": ac - bc, "imp": [bi, ai], "clk": [bc, ac]}
 
 
-def rewrite_effects(acts, daily, today, days=REWRITE_DAYS, min_n=MIN_N):
-    """書き直し1件ずつを、同じ日で切った対照群（その前後に書き直していない記事）の中央値で割り引く。
+def rewrite_effects(acts, daily, today, days=REWRITE_DAYS, min_n=MIN_N, pubs=None, touched=None):
+    """書き直し1件ずつを、同じ日で切った対照群の中央値で割り引く。
 
-    対照群から外すのは書き直し・統合だけ。内部リンク・CTA はほぼ全記事に入っており、
-    それも外すと対照群が残らない（両群に同じように入るので差し引きで消える）"""
-    by_slug = defaultdict(list)
-    for x in acts:
-        by_slug[x["slug"]].append(date.fromisoformat(x["at"]))
+    対照群は cohort()（rewrite_rollback と同じ物差し）: 公開からの日数が±1週の記事で、
+    比べる前後 days 日に手（touched。既定は書き直し・統合だけ）を打っていないもの。
+    対照が MIN_CTRL 本に満たない書き直しは保留（判定済みに数えず、翌週また見る）"""
+    pubs = published() if pubs is None else pubs
+    touched = acts if touched is None else touched
+    memo = {}
+
+    def meas(s, at):
+        if (s, at) not in memo:
+            memo[s, at] = measure(daily, s, at, days, today)
+        return memo[s, at]
     items = []
     for x in acts:
         at = date.fromisoformat(x["at"])
-        st_, me = measure(daily, x["slug"], at, days, today)
+        st_, me = meas(x["slug"], at)
         it = {"slug": x["slug"], "at": x["at"], "kind": x["kind"], "status": st_}
         if me is None:
             items.append(it)
             continue
-        busy = {s for s, ds in by_slug.items() if any(abs((d - at).days) <= days for d in ds)}
-        ctrl = [c for s in daily if s not in busy
-                for ok_, c in [measure(daily, s, at, days, today)] if ok_ == "ok"]
-        if len(ctrl) < min_n:
-            it["status"] = "対照群が足りない"
+        cs = cohort(daily, x["slug"], at, pubs, touched, days)
+        if cs is None:
+            it["status"] = "公開日が分からない"
+            items.append(it)
+            continue
+        ctrl = [c for s in cs for ok_, c in [meas(s, at)] if ok_ == "ok"]
+        if len(ctrl) < MIN_CTRL:
+            it.update(status="対照群が足りない", ctrl_n=len(ctrl))
             items.append(it)
             continue
         ci = st.median(c["imp_ratio"] for c in ctrl)
@@ -205,7 +253,9 @@ def rewrite_effects(acts, daily, today, days=REWRITE_DAYS, min_n=MIN_N):
         judged = [x for x in rows if x["status"] == "ok" and x.get("net_imp") is not None]
         k = {"total": len(rows), "judged": len(judged),
              "pending": sum(x["status"] == "観測中" for x in rows),
-             "low_imp": sum(x["status"] == "表示が少ない" for x in rows)}
+             "low_imp": sum(x["status"] == "表示が少ない" for x in rows),
+             "held": sum(x["status"] in ("対照群が足りない", "公開日が分からない") for x in rows),
+             "control_n": round(st.median(x["ctrl_n"] for x in judged)) if judged else 0}
         if len(judged) < min_n:
             k["verdict"] = "判定前"
         else:
@@ -241,21 +291,69 @@ def rewrite_main(days):
         print("REWRITE_EFFECT_OK=unknown")
         return 0
     res = rewrite_effects(acts, daily, date.today(), days)
-    print(f"{'種類':<14}{'書き直し':>6}{'判定':>5}{'観測中':>6}{'表示×(対照比)':>14}{'順位(対照差)':>12}{'クリック差':>10}  判定")
+    print(f"{'種類':<14}{'書き直し':>6}{'判定':>5}{'観測中':>6}{'保留':>5}{'対照':>5}"
+          f"{'表示×(対照比)':>14}{'順位(対照差)':>12}{'クリック差':>10}  判定")
     for kind, k in sorted(res["kinds"].items(), key=lambda kv: -kv[1]["total"]):
         vals = (f"{k['net_imp']:>13.2f}倍{k['net_pos']:>+11.1f}位{k['net_clk']:>+10.1f}"
                 if "net_imp" in k else f"{'-':>14}{'-':>12}{'-':>10}")
-        print(f"{kind[:12]:<14}{k['total']:>6}{k['judged']:>5}{k['pending']:>6}{vals}  {k['verdict']}")
+        print(f"{kind[:12]:<14}{k['total']:>6}{k['judged']:>5}{k['pending']:>6}{k['held']:>5}{k['control_n']:>5}"
+              f"{vals}  {k['verdict']}")
     weak = [kd for kd, k in res["kinds"].items() if k["verdict"] == "効かない"]
     res["generated"] = date.today().isoformat()
     REWRITE_OUT.parent.mkdir(exist_ok=True)
     REWRITE_OUT.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
-    print(f"\n  判定は{MIN_N}件以上がそろった種類だけ（足りない種類は判定前）。結果: data/rewrite_effect.json")
+    print(f"\n  判定は{MIN_N}件以上がそろった種類だけ（足りない種類は判定前）。対照は公開からの日数が±{AGE_TOL}日の記事で、"
+          f"{MIN_CTRL}本に満たない書き直しは保留。結果: data/rewrite_effect.json")
     if weak:
         print(f"  効かない種類: {', '.join(weak)} → 続ける前に、対象の選び方と指示を見直してください")
         print(f"   ::warning::書き直しのうち対照群と差が出ていない種類が{len(weak)}件あります: {', '.join(weak)}")
     print("REWRITE_EFFECT_OK=" + ("no" if weak else "yes"))
     return 0
+
+
+def kind_effects(acts, daily, days, pubs, others=None):
+    """施策ごとに (施策, 判定した本数, 表示の倍率, 対照群, 順位の改善, 対照群, 保留, 対照の本数の中央値)。
+
+    対照群は1件ずつ cohort()（公開からの日数が近く、前後 days 日にその施策と書き直し（others）を
+    受けていない記事）を同じ日で切って測り、その中央値を施策ごとにまとめる。
+    対照が MIN_CTRL 本に満たない件は保留（判定に入れない）"""
+    others = rewrites() if others is None else others
+    same = defaultdict(list)
+    for x in acts:
+        same[x["kind"]].append(x)
+    memo = {}
+
+    def chg(s, at):
+        if (s, at) not in memo:
+            memo[s, at] = change(daily, s, at, days)
+        return memo[s, at]
+    by_kind = defaultdict(lambda: {"t_imp": [], "t_pos": [], "ctrl_imp": [], "ctrl_pos": [], "n": [], "held": 0})
+    for x in acts:
+        try:
+            at = date.fromisoformat(x["at"])
+        except ValueError:
+            continue
+        c = chg(x["slug"], at)
+        if not c:
+            continue
+        k = by_kind[x["kind"]]
+        cs = cohort(daily, x["slug"], at, pubs, same[x["kind"]] + others, days)
+        ctrl = [r for s in (cs or []) for r in [chg(s, at)] if r]
+        if len(ctrl) < MIN_CTRL:
+            k["held"] += 1
+            continue
+        k["t_imp"].append(c[0])
+        if c[1] is not None:
+            k["t_pos"].append(c[1])
+        k["ctrl_imp"].append(st.median(r[0] for r in ctrl))
+        cp = [r[1] for r in ctrl if r[1] is not None]
+        if cp:
+            k["ctrl_pos"].append(st.median(cp))
+        k["n"].append(len(ctrl))
+    med = lambda v: st.median(v) if v else 0
+    out = [(kind, len(k["t_imp"]), med(k["t_imp"]), med(k["ctrl_imp"]), med(k["t_pos"]), med(k["ctrl_pos"]),
+            k["held"], round(med(k["n"]))) for kind, k in by_kind.items()]
+    return sorted(out, key=lambda r: -(r[1] + r[6]))
 
 
 def main():
@@ -273,47 +371,13 @@ def main():
         return 0
 
     daily, gsc_start, gsc_end = daily_by_slug()
-    touched_days = defaultdict(set)
-    for x in acts:
-        touched_days[x["slug"]].add(x["at"])
-
-    by_kind = defaultdict(list)
-    for x in acts:
-        try:
-            at = date.fromisoformat(x["at"])
-        except ValueError:
-            continue
-        c = change(daily, x["slug"], at, a.days)
-        if c:
-            by_kind[x["kind"]].append((x["slug"], at, c))
-
-    # 対照群: その日に触っていない記事。同じ日で切って同じ長さを比べる
-    print(f"■ 打った手の効き（前後{a.days}日・触っていない記事と比較）\n")
-    print(f"{'施策':<14}{'本数':>5}{'表示の倍率':>12}{'対照群':>10}{'順位の改善':>12}{'対照群':>10}")
-    rows_out = []
-    for kind, rows in sorted(by_kind.items(), key=lambda kv: -len(kv[1])):
-        if not rows:
-            continue
-        dates = {r[1] for r in rows}
-        ctrl_imp, ctrl_pos = [], []
-        for at in dates:
-            for slug in daily:
-                if slug in touched_days:
-                    continue
-                c = change(daily, slug, at, a.days)
-                if c:
-                    ctrl_imp.append(c[0])
-                    if c[1] is not None:
-                        ctrl_pos.append(c[1])
-        t_imp = [r[2][0] for r in rows]
-        t_pos = [r[2][1] for r in rows if r[2][1] is not None]
-        mi = st.median(t_imp) if t_imp else 0
-        ci = st.median(ctrl_imp) if ctrl_imp else 0
-        mp = st.median(t_pos) if t_pos else 0
-        cp = st.median(ctrl_pos) if ctrl_pos else 0
-        print(f"{kind[:12]:<14}{len(rows):>5}{mi:>11.2f}倍{ci:>9.2f}倍"
+    print(f"■ 打った手の効き（前後{a.days}日・公開からの日数が近い、触っていない記事と比較）\n")
+    print(f"{'施策':<14}{'本数':>5}{'保留':>5}{'対照':>5}{'表示の倍率':>12}{'対照群':>10}{'順位の改善':>12}{'対照群':>10}")
+    rows_out = kind_effects(acts, daily, a.days, published())
+    for kind, n, mi, ci, mp, cp, held, cn in rows_out:
+        print(f"{kind[:12]:<14}{n:>5}{held:>5}{cn:>5}{mi:>11.2f}倍{ci:>9.2f}倍"
               f"{mp:>+11.1f}位{cp:>+9.1f}位")
-        rows_out.append((kind, len(rows), mi, ci, mp, cp))
+    rows_out = [r[:6] for r in rows_out if r[1]]
 
     if not rows_out:
         print("  まだ判定できる記録がありません"
