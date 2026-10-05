@@ -1,33 +1,121 @@
 {
-  "date": "2026-09-28",
-  "asked": 0,
+  "date": "2026-10-05",
+  "asked": 8,
   "items": [
     {
       "kw": "aio 導入 メリット 費用",
-      "imp": 26,
-      "pos": 18.1,
+      "imp": 34,
+      "pos": 15.5,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 8.4
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "atoz-design.jp",
+          "conmark.jp",
+          "jinrai.co.jp",
+          "malna.co.jp",
+          "media-growth.co.jp",
+          "wreath-ent.co.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "atoz-design.jp",
+              "conmark.jp",
+              "jinrai.co.jp",
+              "malna.co.jp",
+              "media-growth.co.jp",
+              "wreath-ent.co.jp"
+            ]
+          }
+        }
+      },
+      "score": 11.5
     },
     {
-      "kw": "aio 表示確認 方法 手順",
-      "imp": 12,
-      "pos": 24.3,
+      "kw": "aio対策 失敗",
+      "imp": 16,
+      "pos": 12.6,
       "src": "gsc",
       "written": false,
-      "ai": null,
-      "score": 7.1
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "andinc.site",
+          "frontierline.co.jp",
+          "llm-insight.com",
+          "nexer.co.jp",
+          "note.com",
+          "plan-b.co.jp",
+          "r-co.jp",
+          "sitest.jp",
+          "wk-partners.co.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "andinc.site",
+              "frontierline.co.jp",
+              "llm-insight.com",
+              "nexer.co.jp",
+              "note.com",
+              "plan-b.co.jp",
+              "r-co.jp",
+              "sitest.jp"
+            ]
+          }
+        }
+      },
+      "score": 11.2
     },
     {
-      "kw": "aio対策 やってはいけない",
-      "imp": 9,
-      "pos": 17.7,
+      "kw": "aio対策 失敗事例",
+      "imp": 16,
+      "pos": 26.8,
       "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 7.0
+      "written": false,
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "ai-search.techsuite.co.jp",
+          "aimanavo.com",
+          "chamecke.com",
+          "digital-marketing.jp",
+          "extage-marketing.co.jp",
+          "jinrai.co.jp",
+          "llm-insight.com",
+          "note.com",
+          "plan-b.co.jp",
+          "protea-inc.co.jp",
+          "simplique.jp",
+          "sitest.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "ai-search.techsuite.co.jp",
+              "aimanavo.com",
+              "chamecke.com",
+              "digital-marketing.jp",
+              "extage-marketing.co.jp",
+              "jinrai.co.jp",
+              "llm-insight.com",
+              "note.com"
+            ]
+          }
+        }
+      },
+      "score": 10.2
     },
     {
       "kw": "aio対策会社で契約後にトラブルになりやすいポイントは？",
@@ -35,62 +123,181 @@
       "pos": 9.9,
       "src": "gsc",
       "written": false,
-      "ai": null,
-      "score": 6.9
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "atoz-design.jp",
+          "itmedia.co.jp",
+          "prtimes.jp",
+          "youtube.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "atoz-design.jp",
+              "itmedia.co.jp",
+              "prtimes.jp",
+              "youtube.com"
+            ]
+          }
+        }
+      },
+      "score": 9.9
+    },
+    {
+      "kw": "aio 代理店 選び方 ポイント",
+      "imp": 5,
+      "pos": 22.4,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "ai-and-marketing.jp",
+          "aspicjapan.org",
+          "codigital.co.jp",
+          "dgtrends.com",
+          "digitalidentity.co.jp",
+          "dreamteller.biz",
+          "geo-code.co.jp",
+          "owned.co.jp",
+          "white-link.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "ai-and-marketing.jp",
+              "aspicjapan.org",
+              "codigital.co.jp",
+              "dgtrends.com",
+              "digitalidentity.co.jp",
+              "dreamteller.biz",
+              "geo-code.co.jp",
+              "owned.co.jp"
+            ]
+          }
+        }
+      },
+      "score": 9.8
+    },
+    {
+      "kw": "aio対策 やってはいけない",
+      "imp": 19,
+      "pos": 14.5,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": true,
+        "ours": true,
+        "sources": [
+          "ai.7senses.co.jp",
+          "developers.google.com",
+          "seo.whoops.com.tw",
+          "seranking.com",
+          "sitest.jp",
+          "sungrove.co.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": true,
+            "sources": [
+              "ai.7senses.co.jp",
+              "developers.google.com",
+              "seo.whoops.com.tw",
+              "seranking.com",
+              "sitest.jp",
+              "sungrove.co.jp"
+            ]
+          }
+        }
+      },
+      "score": 7.3
     },
     {
       "kw": "aio 対策 費用",
-      "imp": 5,
-      "pos": 5.4,
+      "imp": 12,
+      "pos": 5.8,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 6.8
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 7.1
     },
     {
-      "kw": "aio対策 失敗",
-      "imp": 6,
-      "pos": 28.5,
+      "kw": "aio 表示確認 方法 手順",
+      "imp": 12,
+      "pos": 24.3,
       "src": "gsc",
       "written": false,
-      "ai": null,
-      "score": 6.8
-    },
-    {
-      "kw": "aio対策 失敗事例",
-      "imp": 10,
-      "pos": 42.2,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 6.0
+      "ai": {
+        "answered": true,
+        "ours": true,
+        "sources": [
+          "aeo-check.net",
+          "ai.7senses.co.jp",
+          "bring-flower.com",
+          "jp.linkshare.com",
+          "koukoku.jp",
+          "ritera.bring-flower.com",
+          "shuho-ai.com",
+          "uravation.com",
+          "vertexaisearch.cloud.google.com",
+          "vicme.jp",
+          "yori-ai.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": true,
+            "sources": [
+              "aeo-check.net",
+              "ai.7senses.co.jp",
+              "bring-flower.com",
+              "jp.linkshare.com",
+              "koukoku.jp",
+              "ritera.bring-flower.com",
+              "shuho-ai.com",
+              "uravation.com"
+            ]
+          }
+        }
+      },
+      "score": 7.1
     },
     {
       "kw": "aio対策 相場",
-      "imp": 5,
-      "pos": 8.4,
+      "imp": 7,
+      "pos": 7.9,
       "src": "gsc",
       "written": true,
       "ai": null,
-      "score": 5.8
+      "score": 5.9
     },
     {
       "kw": "aio対策 クリニック",
-      "imp": 31,
-      "pos": 17.2,
+      "imp": 37,
+      "pos": 18.9,
       "src": "gsc",
       "written": true,
       "ai": null,
-      "score": 5.5
-    },
-    {
-      "kw": "aio対策 キーワード選定",
-      "imp": 18,
-      "pos": 15.7,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 5.3
+      "score": 5.6
     },
     {
       "kw": "aio対策 注意点",
@@ -102,11 +309,11 @@
       "score": 5.3
     },
     {
-      "kw": "aio やり方",
+      "kw": "aio 対策ツール",
       "imp": 12,
-      "pos": 15.1,
+      "pos": 18.2,
       "src": "gsc",
-      "written": true,
+      "written": false,
       "ai": null,
       "score": 5.1
     },
@@ -120,22 +327,13 @@
       "score": 5.0
     },
     {
-      "kw": "aio 対策ツール",
-      "imp": 6,
-      "pos": 13.5,
+      "kw": "aio対策 google ai overview",
+      "imp": 9,
+      "pos": 21.1,
       "src": "gsc",
       "written": false,
       "ai": null,
-      "score": 4.8
-    },
-    {
-      "kw": "llmo 対策 btob 会社",
-      "imp": 28,
-      "pos": 34.2,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 4.5
+      "score": 5.0
     },
     {
       "kw": "aio対策 表示されない",
@@ -147,13 +345,40 @@
       "score": 4.3
     },
     {
-      "kw": "llmo代理店になる方法",
-      "imp": 14,
-      "pos": 7.2,
+      "kw": "btob企業向けのaio対策に強い会社を教えてください。",
+      "imp": 12,
+      "pos": 8.4,
       "src": "gsc",
       "written": false,
       "ai": null,
-      "score": 4.2
+      "score": 4.1
+    },
+    {
+      "kw": "aio対策 ai overview",
+      "imp": 7,
+      "pos": 20.4,
+      "src": "gsc",
+      "written": false,
+      "ai": null,
+      "score": 3.9
+    },
+    {
+      "kw": "aio対策 無料ツール",
+      "imp": 75,
+      "pos": 33.1,
+      "src": "gsc",
+      "written": true,
+      "ai": null,
+      "score": 3.9
+    },
+    {
+      "kw": "btob向けaio対策のおすすめ会社は？",
+      "imp": 7,
+      "pos": 21.1,
+      "src": "gsc",
+      "written": true,
+      "ai": null,
+      "score": 3.9
     },
     {
       "kw": "btob向けllmo対策のおすすめ会社は？",
@@ -166,8 +391,8 @@
     },
     {
       "kw": "aio対策 自分で",
-      "imp": 59,
-      "pos": 49.6,
+      "imp": 67,
+      "pos": 46.0,
       "src": "gsc",
       "written": true,
       "ai": null,
@@ -192,29 +417,20 @@
       "score": 3.8
     },
     {
-      "kw": "aio対策 無料ツール",
-      "imp": 68,
-      "pos": 33.6,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 3.8
-    },
-    {
-      "kw": "mdoc 歯科医院 集客方法 新患",
-      "imp": 6,
-      "pos": 70.3,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 3.8
-    },
-    {
       "kw": "aio 対策",
       "imp": 37,
       "pos": 89.5,
       "src": "gsc",
       "written": true,
+      "ai": null,
+      "score": 3.6
+    },
+    {
+      "kw": "aio対策 引用される方法",
+      "imp": 36,
+      "pos": 51,
+      "src": "gsc",
+      "written": false,
       "ai": null,
       "score": 3.6
     },
@@ -228,130 +444,31 @@
       "score": 3.5
     },
     {
-      "kw": "aio対策 引用される方法",
-      "imp": 33,
-      "pos": 51.7,
+      "kw": "aio対策 キーワード選定",
+      "imp": 32,
+      "pos": 10.2,
       "src": "gsc",
-      "written": false,
+      "written": true,
       "ai": null,
       "score": 3.5
     },
     {
-      "kw": "クリニック 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "美容 クリニック 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": true,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 エージェント 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 営業 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 仲介 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 屋 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 会社 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 投資 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 賃貸 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 の 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": true,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "不動産 売買 集客 方法",
-      "imp": 0,
-      "pos": null,
-      "src": "suggest",
-      "written": false,
-      "ai": null,
-      "score": 3.3
-    },
-    {
-      "kw": "aio対策 aiに引用される",
-      "imp": 15,
-      "pos": 71.7,
+      "kw": "aio やり方",
+      "imp": 27,
+      "pos": 10.6,
       "src": "gsc",
       "written": true,
       "ai": null,
-      "score": 3.2
+      "score": 3.4
+    },
+    {
+      "kw": "aio対策 aiに引用される",
+      "imp": 18,
+      "pos": 66.3,
+      "src": "gsc",
+      "written": true,
+      "ai": null,
+      "score": 3.3
     },
     {
       "kw": "aio対策 ai検索",
@@ -368,6 +485,15 @@
       "pos": 71.7,
       "src": "gsc",
       "written": true,
+      "ai": null,
+      "score": 3.2
+    },
+    {
+      "kw": "aio対策 内製",
+      "imp": 14,
+      "pos": 65.3,
+      "src": "gsc",
+      "written": false,
       "ai": null,
       "score": 3.2
     },
@@ -408,15 +534,6 @@
       "score": 3.0
     },
     {
-      "kw": "aio対策 内製",
-      "imp": 10,
-      "pos": 71.9,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 3.0
-    },
-    {
       "kw": "aio対策ツール おすすめ",
       "imp": 8,
       "pos": 6.9,
@@ -426,13 +543,13 @@
       "score": 3.0
     },
     {
-      "kw": "googleマップで不動産店舗の露出を増やせるツールはありますか?",
-      "imp": 10,
-      "pos": 34.9,
+      "kw": "aio対策 成功事例",
+      "imp": 7,
+      "pos": 76.9,
       "src": "gsc",
       "written": false,
       "ai": null,
-      "score": 3.0
+      "score": 2.9
     },
     {
       "kw": "aio対策 被リンク",
@@ -444,9 +561,9 @@
       "score": 2.9
     },
     {
-      "kw": "aio対策 成功事例",
-      "imp": 6,
-      "pos": 81.5,
+      "kw": "ai検索対策 大阪",
+      "imp": 5,
+      "pos": 2.2,
       "src": "gsc",
       "written": false,
       "ai": null,
@@ -472,8 +589,8 @@
     },
     {
       "kw": "aio対策 チェックリスト",
-      "imp": 17,
-      "pos": 68.4,
+      "imp": 19,
+      "pos": 63.8,
       "src": "gsc",
       "written": false,
       "ai": null,

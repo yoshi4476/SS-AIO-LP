@@ -1,51 +1,166 @@
 {
-  "date": "2026-09-28",
-  "asked": 0,
+  "date": "2026-10-05",
+  "asked": 6,
   "items": [
-    {
-      "kw": "it導入支援事業者 選び方",
-      "imp": 5,
-      "pos": 18.4,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 6.8
-    },
     {
       "kw": "ai導入 中小企業 費用",
       "imp": 33,
       "pos": 40,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 6.5
-    },
-    {
-      "kw": "デジタル化 ai導入補助金 選び方",
-      "imp": 6,
-      "pos": 37.7,
-      "src": "gsc",
-      "written": false,
-      "ai": null,
-      "score": 5.8
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "ai-keiei.shift-ai.co.jp",
+          "corinaie.com",
+          "liftbaseinc.com",
+          "main.sr-konishi.jp",
+          "nuco.co.jp",
+          "otsuka-shokai.co.jp",
+          "ricoh.co.jp",
+          "syusodo.co.jp",
+          "vertexaisearch.cloud.google.com",
+          "vnext.co.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "ai-keiei.shift-ai.co.jp",
+              "corinaie.com",
+              "liftbaseinc.com",
+              "main.sr-konishi.jp",
+              "nuco.co.jp",
+              "otsuka-shokai.co.jp",
+              "ricoh.co.jp",
+              "syusodo.co.jp"
+            ]
+          }
+        }
+      },
+      "score": 9.5
     },
     {
       "kw": "it導入補助金 選び方",
-      "imp": 13,
-      "pos": 30.8,
+      "imp": 21,
+      "pos": 33.2,
       "src": "gsc",
       "written": false,
-      "ai": null,
-      "score": 5.1
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "carearc.co.jp",
+          "digital-ai-hojokin.jp",
+          "ds-b.jp",
+          "grandit.jp",
+          "hojokin-agent.jp",
+          "it-shien.smrj.go.jp",
+          "so-labo.co.jp",
+          "somurix.co.jp",
+          "vertexaisearch.cloud.google.com",
+          "youtube.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "carearc.co.jp",
+              "digital-ai-hojokin.jp",
+              "ds-b.jp",
+              "grandit.jp",
+              "hojokin-agent.jp",
+              "it-shien.smrj.go.jp",
+              "so-labo.co.jp",
+              "somurix.co.jp"
+            ]
+          }
+        }
+      },
+      "score": 8.3
+    },
+    {
+      "kw": "it導入支援事業者 選び方",
+      "imp": 5,
+      "pos": 18.4,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 6.8
+    },
+    {
+      "kw": "デジタル化 ai導入補助金 選び方",
+      "imp": 9,
+      "pos": 33,
+      "src": "gsc",
+      "written": false,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 6.0
     },
     {
       "kw": "大阪 ローカルseo 飲食店 対策",
-      "imp": 48,
+      "imp": 49,
       "pos": 63.1,
       "src": "gsc",
       "written": false,
-      "ai": null,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
       "score": 4.7
+    },
+    {
+      "kw": "ベンダー登録とは",
+      "imp": 37,
+      "pos": 5.0,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 2.6
     }
   ]
 }

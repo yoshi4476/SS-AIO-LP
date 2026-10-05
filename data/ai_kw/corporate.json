@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-28",
-  "asked": 0,
+  "date": "2026-10-05",
+  "asked": 8,
   "items": [
     {
       "kw": "経理 bpo 比較",
@@ -8,8 +8,31 @@
       "pos": 15.8,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 8.0
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "fujiko-san.com",
+          "go.taxita.com",
+          "grop.co.jp",
+          "marugotoinc.jp",
+          "probel.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "fujiko-san.com",
+              "go.taxita.com",
+              "grop.co.jp",
+              "marugotoinc.jp",
+              "probel.jp"
+            ]
+          }
+        }
+      },
+      "score": 11.0
     },
     {
       "kw": "経理 時給 相場",
@@ -17,17 +40,31 @@
       "pos": 12.5,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 7.8
-    },
-    {
-      "kw": "経理 派遣 時給 相場",
-      "imp": 19,
-      "pos": 8.5,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 7.3
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "hatarako.net",
+          "jp.stanby.com",
+          "staff.jusnet.co.jp",
+          "vertexaisearch.cloud.google.com",
+          "xn--pckua2a7gp15o89zb.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "hatarako.net",
+              "jp.stanby.com",
+              "staff.jusnet.co.jp",
+              "vertexaisearch.cloud.google.com",
+              "xn--pckua2a7gp15o89zb.com"
+            ]
+          }
+        }
+      },
+      "score": 10.8
     },
     {
       "kw": "派遣 経理 時給 相場",
@@ -35,8 +72,35 @@
       "pos": 8.5,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 7.0
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "bpo.drwallet.jp",
+          "haken.en-japan.com",
+          "hatarako.net",
+          "r-staffing.co.jp",
+          "staff.jusnet.co.jp",
+          "vertexaisearch.cloud.google.com",
+          "xn--pckua2a7gp15o89zb.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "bpo.drwallet.jp",
+              "haken.en-japan.com",
+              "hatarako.net",
+              "r-staffing.co.jp",
+              "staff.jusnet.co.jp",
+              "vertexaisearch.cloud.google.com",
+              "xn--pckua2a7gp15o89zb.com"
+            ]
+          }
+        }
+      },
+      "score": 10.0
     },
     {
       "kw": "管理会計 時給相場",
@@ -44,35 +108,37 @@
       "pos": 15.4,
       "src": "gsc",
       "written": false,
-      "ai": null,
-      "score": 6.8
-    },
-    {
-      "kw": "経理bpo 選び方",
-      "imp": 6,
-      "pos": 14,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 6.8
-    },
-    {
-      "kw": "経理代行 比較",
-      "imp": 17,
-      "pos": 29.7,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 6.3
-    },
-    {
-      "kw": "経理アウトソーシング 相場",
-      "imp": 10,
-      "pos": 28.5,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 6.0
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "fpacamp.com",
+          "haken.en-japan.com",
+          "keiri-freelance.com",
+          "keyplayers.jp",
+          "note.com",
+          "staff.jusnet.co.jp",
+          "vertexaisearch.cloud.google.com",
+          "xn--pckua2a7gp15o89zb.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "fpacamp.com",
+              "haken.en-japan.com",
+              "keiri-freelance.com",
+              "keyplayers.jp",
+              "note.com",
+              "staff.jusnet.co.jp",
+              "vertexaisearch.cloud.google.com",
+              "xn--pckua2a7gp15o89zb.com"
+            ]
+          }
+        }
+      },
+      "score": 9.8
     },
     {
       "kw": "経理 アウトソーシング 費用",
@@ -80,26 +146,61 @@
       "pos": 40.2,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 5.8
-    },
-    {
-      "kw": "経理代行 税理士 違い",
-      "imp": 6,
-      "pos": 34.8,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 5.8
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "catalog.monex.co.jp",
+          "go.taxita.com",
+          "i-ap.net",
+          "persol-bd.co.jp",
+          "wheat-biz.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "catalog.monex.co.jp",
+              "go.taxita.com",
+              "i-ap.net",
+              "persol-bd.co.jp",
+              "wheat-biz.com"
+            ]
+          }
+        }
+      },
+      "score": 8.8
     },
     {
       "kw": "ゆうちょ 記帳 やり方",
-      "imp": 18,
-      "pos": 7.2,
+      "imp": 35,
+      "pos": 6.8,
       "src": "gsc",
       "written": true,
-      "ai": null,
-      "score": 5.3
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "detail.chiebukuro.yahoo.co.jp",
+          "faq.jp-bank.japanpost.jp",
+          "nomad-saving.com",
+          "youtube.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "detail.chiebukuro.yahoo.co.jp",
+              "faq.jp-bank.japanpost.jp",
+              "nomad-saving.com",
+              "youtube.com"
+            ]
+          }
+        }
+      },
+      "score": 8.6
     },
     {
       "kw": "計理 経理 違い",
@@ -107,8 +208,33 @@
       "pos": null,
       "src": "suggest",
       "written": false,
-      "ai": null,
-      "score": 5.3
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "business.ntt-east.co.jp",
+          "detail.chiebukuro.yahoo.co.jp",
+          "kokugoryokuup.com",
+          "note.com",
+          "vertexaisearch.cloud.google.com",
+          "zelos.co.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "business.ntt-east.co.jp",
+              "detail.chiebukuro.yahoo.co.jp",
+              "kokugoryokuup.com",
+              "note.com",
+              "vertexaisearch.cloud.google.com",
+              "zelos.co.jp"
+            ]
+          }
+        }
+      },
+      "score": 8.3
     },
     {
       "kw": "営業 経理 経理 違い",
@@ -116,7 +242,18 @@
       "pos": null,
       "src": "suggest",
       "written": false,
-      "ai": null,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
       "score": 5.3
     },
     {
@@ -124,7 +261,16 @@
       "imp": 0,
       "pos": null,
       "src": "suggest",
-      "written": false,
+      "written": true,
+      "ai": null,
+      "score": 5.3
+    },
+    {
+      "kw": "総 経理 経理 違い",
+      "imp": 0,
+      "pos": null,
+      "src": "suggest",
+      "written": true,
       "ai": null,
       "score": 5.3
     },
@@ -208,15 +354,6 @@
       "written": true,
       "ai": null,
       "score": 5.3
-    },
-    {
-      "kw": "経理代行 選び方",
-      "imp": 6,
-      "pos": 30.2,
-      "src": "gsc",
-      "written": true,
-      "ai": null,
-      "score": 4.8
     },
     {
       "kw": "圧縮 記帳 経理 方法",
