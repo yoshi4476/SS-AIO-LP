@@ -1759,3 +1759,4 @@
 {"at": "2026-10-05 14:45", "by": "fact_cite", "slug": "aio-taisaku-keyword-sentei", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
 {"at": "2026-10-05 14:45", "by": "fact_cite", "slug": "aio-taisaku-souba", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
 {"at": "2026-10-05 14:45", "by": "exit_fix", "slug": "/", "kind": "exit", "ok": true, "note": "「無料ツール」の手前に導線（落差84pt）"}
+{"at": "2026-10-05 21:55", "by": "cta_fill", "slug": "middle-office-backoffice-chigai", "kind": "cta", "ok": true, "note": "CTAを2箇所目まで足した"}
