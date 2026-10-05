@@ -154,5 +154,49 @@
     "retired": [
       "gUyQ2SMAhZ8"
     ]
+  },
+  "shika-hp-ryokinhyou-kakikata": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-05",
+      "keyword": "歯科医院 ホームページ 料金表 書き方",
+      "queries": [
+        "歯科医院 ホームページ 料金表 書き方",
+        "ホームページ 料金表 書き方",
+        "歯科医院 料金表 書き方",
+        "歯科医院 ホームページ 書き方",
+        "歯科医院 ホームページ 料金表"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "診療報酬明細書 書き方",
+        "診療明細書",
+        "歯科 算定",
+        "歯科医院 開業",
+        "ホームページの作成方法",
+        "ホームページ 変更",
+        "歯科医院 紹介動画",
+        "歯科診療報酬",
+        "歯科 デジタル",
+        "歯科 ファイル"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-05",
+      "sec": 43,
+      "title": "歯科の料金表に割引は書いていい？",
+      "youtube": "IcgTeVZjICM"
+    }
+  },
+  "research-biyou": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-10-05",
+    "sec": 186,
+    "mp4": "automation/video/research-biyou.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/biyou-ai-sources/",
+    "youtube": "dYnX1eXwC8w"
   }
 }
