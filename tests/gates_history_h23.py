@@ -155,3 +155,28 @@ def test_early_rewrite_targets_narrow_words_in_weeks_2_to_5():
     check("--kind early で early_items を使う（台帳の種類は early・effect_ab が種類別に判定）",
           'elif a.kind == "early":' in inspect.getsource(A.main), True)
     check("見出しに細い語が入ったかを共通の検算（terms）でも見る", "\"terms\": terms" in inspect.getsource(A.early_items), True)
+
+
+def test_top_hero_video_does_not_become_late_lcp():
+    import re
+    print("\n■ AI集客ラボのトップ: ヒーロー動画は最初の操作の後に読み、モバイルは背景の大きな写真を敷かない")
+    for f in ("index.html", "lp/index.html"):
+        h = (ROOT / "site" / f).read_text(encoding="utf-8")
+        js = "".join(re.findall(r"<script>(.*?)</script>", h, re.S))
+        hero = [s for s in re.findall(r"<script>(.*?)</script>", h, re.S) if "video.lx-hero-video" in s]
+        check(f"{f}: 動画を差し込む処理は1つ", len(hero), 1)
+        s = hero[0] if hero else ""
+        check(f"{f}: 読み込みの後に時間で流さない（後から LCP に数えられる）",
+              bool(re.search(r'addEventListener\("load"', s)) or "setTimeout" in s, False)
+        check(f"{f}: 最初の操作（タップ・キー・スクロール）で読む", all(e in s for e in ('"pointerdown"', '"keydown"', '"scroll"')), True)
+        check(f"{f}: データ節約・2G では読まない", "saveData" in s and "2g" in s, True)
+        check(f"{f}: 動きを減らす設定では読まない", "prefers-reduced-motion" in s, True)
+        check(f"{f}: 計測タグの遅延読み込みはそのまま", "googletagmanager.com/gtag/js" in js, True)
+    h = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+    pre = re.search(r'<link rel="preload" as="image" href="/images/home/mv\.webp"[^>]*>', h)
+    check("トップ: 背景写真の先読みは広い画面だけ", bool(pre and 'media="(min-width: 921px)"' in pre.group(0)), True)
+    mob = re.search(r"@media \(max-width:920px\)\{\.home \.lx-hero\{background:([^}]*)\}\}", h)
+    check("トップ: 狭い画面の背景に大きな写真（--mv-photo）を敷かない", bool(mob) and "mv-photo" not in mob.group(1), True)
+    still = re.search(r'<img[^>]*lx-hero-still[^>]*>', h)
+    check("トップ: 最初の描画は優先の静止画（fetchpriority=high・遅延読み込みしない）",
+          bool(still and 'fetchpriority="high"' in still.group(0) and 'loading="lazy"' not in still.group(0)), True)
