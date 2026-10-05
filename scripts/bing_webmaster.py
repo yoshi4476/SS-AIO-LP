@@ -9,6 +9,13 @@ IndexNow（notify_indexnow.py）は「変わった」と知らせるだけで、
     python scripts/bing_webmaster.py --site <id>    # 本日公開・更新のURL＋sitemap（公開直後）
     python scripts/bing_webmaster.py --weekly       # 全サイトの直近7日の更新URL＋sitemap（週次）
     python scripts/bing_webmaster.py <URL> ...      # 指定URL（reindex の再送から呼ぶ）
+    python scripts/bing_webmaster.py --backfill [--dry-run] [--site <id>]
+                                                    # 本番 sitemap の未送信URLを、その日の枠いっぱい送る（毎日・selfheal）
+
+送り切り（--backfill）: 鍵が無かった 2026-10-05 より前の記事は Bing にほぼ送られていない。ChatGPT の検索は
+Bing の索引を使うため、自社サイトの本番 sitemap のうち一度も送っていないURLを lastmod の新しい順に送る。
+各サイト10件（RESERVE）はその日の新しい記事のために残す。送った記録は data/bing_backfill.json に残して
+コミットする（bing_submit.json は7日で消え、CI のキャッシュも消えうるため、送り切りの記録には使えない）。
 
 鍵: 環境変数 BING_WEBMASTER_API_KEY（.env と GitHub Secrets）。鍵が無ければ何もせず BING_OK=unset。
 印: BING_OK=yes / no（要対応あり）/ unknown（すべて送れなかった）/ unset。終了コードは常に0（8.7節）。
@@ -23,8 +30,11 @@ IndexNow（notify_indexnow.py）は「変わった」と知らせるだけで、
   エラー    https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.apierrorcode
   鍵の発行  https://learn.microsoft.com/en-us/bingwebmaster/getting-access
 """
+import html
 import json
+import math
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -37,6 +47,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 API = "https://ssl.bing.com/webmaster/api.svc/json/"
 STATE = ROOT / "data" / "bing_submit.json"
+BACKFILL = ROOT / "data" / "bing_backfill.json"
+RESERVE = 10
 BATCH_MAX = 500
 KEEP_DAYS = 7
 WEEK_DAYS = 7
@@ -211,6 +223,119 @@ def send_urls(urls, sitemap=False):
     return res
 
 
+def sitemap_entries(domain):
+    """本番の sitemap の (URL, lastmod)。手元の site/ ではなく本番を読むのは、Bing が取りに行くのも本番だから"""
+    req = urllib.request.Request(f"https://{domain}/sitemap.xml", headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        xml = r.read().decode("utf-8", "ignore")
+    out = []
+    for block in re.findall(r"<url>(.*?)</url>", xml, re.S):
+        loc = re.search(r"<loc>\s*(.*?)\s*</loc>", block, re.S)
+        mod = re.search(r"<lastmod>\s*(.*?)\s*</lastmod>", block, re.S)
+        if loc:
+            out.append((html.unescape(loc.group(1)), mod.group(1)[:10] if mod else ""))
+    return out
+
+
+def load_backfill():
+    try:
+        b = json.loads(BACKFILL.read_text(encoding="utf-8")) if BACKFILL.is_file() else {}
+    except (OSError, ValueError):
+        b = {}
+    b.setdefault("sent", {})
+    return b
+
+
+def save_backfill(b):
+    BACKFILL.parent.mkdir(exist_ok=True)
+    BACKFILL.write_text(json.dumps(b, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
+
+
+def backfill_site(sid, domain, entries, key, state, ledger, today, dry=False):
+    """1サイト分の送り切り。送ったことのあるURLは送らず、lastmod の新しい順に、枠から RESERVE を残して送る"""
+    site_url = f"https://{domain}/"
+    urls = list(dict.fromkeys(u for u, _ in sorted(entries, key=lambda e: e[1], reverse=True)))
+    # 週次・公開直後に送った分（bing_submit.json は7日で消える）も送り切りの記録へ移し、二度送らない
+    for u in urls:
+        if u not in ledger["sent"] and u in state["sent"]:
+            ledger["sent"][u] = state["sent"][u]
+    todo = [u for u in urls if u not in ledger["sent"]]
+    res = {"site": sid, "domain": domain, "total": len(urls), "sent": 0, "left": len(todo),
+           "per_day": 0, "state": "ok", "msg": ""}
+    if not todo:
+        return res
+    try:
+        q = quota(site_url, key)
+        res["per_day"] = max(0, min(q - RESERVE, BATCH_MAX))
+        go = todo[:res["per_day"]]
+        if go and not dry:
+            submit_urls(site_url, go, key)
+            ledger["sent"].update({u: today for u in go})
+            state["sent"].update({u: today for u in go})
+        res["sent"] = len(go)
+        res["left"] = len(todo) - len(go)
+    except BingError as e:
+        res["state"], res["msg"] = classify(e), str(e)
+    return res
+
+
+def backfill_report(results, dry=False):
+    """送り切りの印。枠切れ（throttled）は翌日に持ち越すだけなので要対応にしない"""
+    if results and all(r["state"] == "ok" and r["left"] == 0 and r["sent"] == 0 for r in results):
+        print("BING_OK=yes")
+        return
+    bad = []
+    for r in results:
+        if r["state"] == "ok":
+            days = math.ceil(r["left"] / r["per_day"]) if r["left"] and r["per_day"] else 0
+            print(f"  {r['site']}: sitemap {r['total']}件・{'送る予定' if dry else '今回送信'} {r['sent']}件・"
+                  f"残り {r['left']}件" + (f"（あと{days}日）" if days else "")
+                  + ("（枠の残りが少ないため今日は送りません）" if r["left"] and not r["per_day"] else ""))
+            continue
+        print(f"  {r['site']}: 送れません（{r['state']}・{r['msg']}）")
+        if r["state"] == "unregistered":
+            bad.append(f"要対応: Bing Webmaster に未登録 — {r['domain']}（サイトを追加して所有権を確認してください）")
+        elif r["state"] == "invalid_key":
+            bad.append("要対応: Bing Webmaster の API キーが無効です（BING_WEBMASTER_API_KEY を作り直してください）")
+        elif r["state"] != "throttled":
+            bad.append(f"要対応: Bing への送り切りが失敗しました — {r['domain']}（{r['msg']}）")
+    for b in dict.fromkeys(bad):
+        print(b)
+    print(f"BING_BACKFILL_LEFT={sum(r['left'] for r in results)}")
+    if bad:
+        print("BING_OK=no")
+    elif results and all(r["state"] != "ok" for r in results):
+        print("BING_OK=unknown")
+    else:
+        print("BING_OK=yes")
+
+
+def backfill(argv, key):
+    import sites as S
+    cfgs = S.load_all()
+    only = argv[argv.index("--site") + 1] if "--site" in argv and len(argv) > argv.index("--site") + 1 else ""
+    dry = "--dry-run" in argv
+    state, ledger, today = load_state(), load_backfill(), date.today().isoformat()
+    results = []
+    # お客様のサイトは先方の Bing アカウントの持ち物で、こちらの鍵では送れない
+    for sid in S.own_ids():
+        if only and sid != only:
+            continue
+        dom = cfgs[sid]["domain"]
+        try:
+            entries = sitemap_entries(dom)
+        except Exception as e:
+            results.append({"site": sid, "domain": dom, "total": 0, "sent": 0, "left": 0, "per_day": 0,
+                            "state": "error", "msg": f"sitemapを取得できません（{type(e).__name__}）"})
+            continue
+        results.append(backfill_site(sid, dom, entries, key, state, ledger, today, dry))
+    if not dry:
+        save_state(state, today)
+        save_backfill(ledger)
+    backfill_report(results, dry)
+    return 0
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     key = api_key()
@@ -218,6 +343,8 @@ def main(argv=None):
         print("BING_WEBMASTER_API_KEY 未設定のため送りません")
         print("BING_OK=unset")
         return 0
+    if "--backfill" in argv:
+        return backfill(argv, key)
     import sites as S
     cfgs = S.load_all()
     state, today = load_state(), date.today().isoformat()
