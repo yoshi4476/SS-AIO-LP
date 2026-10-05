@@ -145,9 +145,13 @@ def test_focus_mode_never_runs_with_weekly():
     check("ワークフロー全体にはグループを付けない", "concurrency" in y, False)
     crons = [c["cron"] for c in _on(y)["schedule"]]
     wcrons = [c["cron"] for c in _on(w)["schedule"]]
-    days = lambda c: set(c.split()[4].split(","))   # noqa: E731
-    check("週次と同じ曜日に動かない", any(days(a) & days(b) for a in crons for b in wcrons), False)
-    check("週2回", sorted(days(crons[0])), ["2", "5"])
+    # cron は UTC。日本時間の曜日で比べる（UTC 月曜 19:13 は日本時間の火曜 04:13 で、月曜 10:23 の週次とは重ならない）
+    def days(c):
+        f = c.split()
+        shift = 1 if int(f[1]) + 9 >= 24 else 0
+        return {str((int(d) + shift) % 7) for d in f[4].split(",")}
+    check("週次と同じ曜日（日本時間）に動かない", any(days(a) & days(b) for a in crons for b in wcrons), False)
+    check("週2回（日本時間の火・金。初回を 10/6 にするため水・土から変えた）", sorted(days(crons[0])), ["2", "5"])
     pm = _wf("pipeline-multi.yml")
     hours = {int(c["cron"].split()[1]) for c in _on(pm)["schedule"]}
     check("記事の枠が並んでいない時間に始める", any(int(c.split()[1]) in hours for c in crons), False)
