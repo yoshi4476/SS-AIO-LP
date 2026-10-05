@@ -1,6 +1,6 @@
 ---
 title: iPhoneで記帳を自動化する3ステップ｜アプリ比較と法要件
-description: iPhoneの記帳自動化は、レシート撮影・OCR読み取り・仕訳確認の3ステップです。freee等の料金と撮影上限、電子帳簿保存法の要件、人の確認が要る5場面を解説します。
+description: iPhoneの記帳自動化は、レシート撮影・OCR読み取り・仕訳確認の3ステップです。freee等の料金と撮影上限、電子帳簿保存法の要件、人の確認が要る5場面を解説します。手入力の手間を減らせる一方、勘定科目の確認など人の目が必要な工程も残ります。
 slug: iphone-kicho-jidoka
 keyword: iPhone 記帳 自動化
 category: keiri-jitsumu

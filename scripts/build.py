@@ -35,6 +35,7 @@ import md2html
 import entities  # noqa: E402
 import render_check  # noqa: E402
 import industry_thumbs  # noqa: E402
+import desc_fill as DF  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
@@ -1067,9 +1068,10 @@ def quality_checks(all_metas):
         tl = len(m["title"])
         if not 15 <= tl <= 45:
             warns.append(f"タイトル字数NG: {m['slug']} = {tl}字（基準15〜45字）")
-        dl = len(m["description"])
-        if not 60 <= dl <= 160:
-            warns.append(f"メタ記述字数NG: {m['slug']} = {dl}字（基準60〜160字）")
+        # 下限は100字。60字で通していたら Bing Webmaster Tools に「短すぎる」と54ページ指摘された（2026-10-05）
+        dl = len(str(m["description"]))
+        if not DF.MIN <= dl <= DF.GATE_MAX:
+            warns.append(f"メタ記述字数NG: {m['slug']} = {dl}字（基準{DF.MIN}〜{DF.GATE_MAX}字）")
     for i in range(len(all_metas)):
         for j in range(i + 1, len(all_metas)):
             r = difflib.SequenceMatcher(None, all_metas[i]["title"], all_metas[j]["title"]).ratio()
@@ -1421,28 +1423,25 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 """
 
 
-def page_shell(h1="記事一覧", desc=""):
+def page_shell(h1="記事一覧", desc="", more=()):
     """BLOG_PAGE に渡す外枠の値。h1 は title・og:title・パンくずにも入る。
 
     業種・用語集・テーマなどもこの外枠を使うため、h1 と説明を渡さないと
-    どのページも見出しが「記事一覧」になる
+    どのページも見出しが「記事一覧」になる。
+    more はそのページの中身（本数・業種・扱う問い）から作った文で、説明文が100字に届かないときだけ足す
     """
     desc = re.sub(r"\s+", " ", str(desc or "")).strip()
     # 見出しの下に出す説明。業種・用語・質問集のページでも「記事一覧」の説明文が出ていたので、渡された説明を出す
     lead = desc or "SEO・AIO・LLMOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。"
     kicker = ("FAQ" if "よくある質問" in h1 else "Glossary" if h1 == "用語集" or h1.endswith("とは")
               else "Industry" if h1.endswith("の集客") or h1 == "業種から探す" else "All Articles")
-    if len(desc) > 120:                  # 文の途中で切らない（120字以内の最後の「。」まで）
-        cut = desc[:120].rfind("。")
-        desc = desc[:cut + 1] if cut >= 40 else desc[:120]
     desc = desc or (
         f"{SITE_NAME}の全記事一覧。医療・不動産・工務店を中心に、SEO・AIO・LLMOの実践ノウハウを新着順に掲載しています。")
-    # 用語集・業種・テーマなどの外枠は、説明が短く（70字未満が30本）題も短い（20字未満が100本超）ため、
-    # 検索結果と共有時に何のページか伝わらなかった（Ahrefs 2026-09-29: 説明が短い174・題が短い31）。
-    # 足すのは運営者と中身の種類だけで、ページに無い事実は足さない
-    if len(desc) < 90:
-        desc = (desc.rstrip("。") + "。" if desc else "") + \
-            f"{SITE_NAME}（セブンセンシズ株式会社）が、集客支援の現場で確かめた内容をもとにまとめています。"
+    # 説明文は100〜150字（Bing Webmaster Tools が100字未満の54ページを「短すぎる」と指摘。2026-10-05）。
+    # 以前は120字で切っていたため、業種ハブの説明が90字台に落ちていた。
+    # 足すのはそのページの中身から作った文で、運営者の一文は中身の文で届かないときの最後の手
+    desc = DF.extend(desc, list(more) + [
+        f"{SITE_NAME}（セブンセンシズ株式会社）が、集客支援の現場で確かめた内容をもとにまとめています。"])
     # 題は種類ごとに補う。一律の付け足しは「記事一覧｜記事と実例のまとめ」のように不自然になった
     title = {"記事一覧": "記事一覧｜SEO・AIO・LLMOの実践記事",
              "用語集": "用語集｜AI検索と集客の用語をわかりやすく解説",
@@ -1627,8 +1626,11 @@ def build_research_pages(all_metas=()):
                      f'<ul class="hub-list"><li><a href="{answers["url"]}"><strong>{_h.escape(answers["title"])}</strong>'
                      f'<span class="cnt">{len(answers["rows"])}問・{answers["lastmod"][:7].replace("-", "年")}月</span></a>'
                      f'<span class="hub-lead">{_h.escape(answers["description"])}</span></li></ul></div>')
+        names = [IAS.headline(i)["name"] for i in made if IAS.headline(i)]
         page = BLOG_PAGE.format(items=body, **page_shell(
-            "業種別のAI調査", "業種ごとに、AIが何を出典に答えているかを数えた当社の調査の一覧です。"))
+            "業種別のAI調査", "業種ごとに、AIが何を出典に答えているかを数えた当社の調査の一覧です。",
+            [f"{len(rows)}業種の調査を載せ、数字は各業種のページに集計の方法と元のデータ（CSV）と一緒に置いています。",
+             DF.named("対象は", names, f"など{len(rows)}業種です。")]))
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/research/")
         page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
         (SITE / "research").mkdir(parents=True, exist_ok=True)
@@ -1684,7 +1686,9 @@ def build_ranking_page():
         return None
     title, desc, body = got
     u = "/research/ranking/"
-    page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
+    # 説明文には集計の方法を足す（本文の冒頭に書いてある方法そのもの）
+    page = BLOG_PAGE.format(items=body, **page_shell(title, desc, [
+        "毎月1日に業種ごとの質問をGemini（Google検索つき）に聞き、答えの出典になったサイトを数えています。"]))
     page = page.replace(f"{SITE_URL}/blog/", SITE_URL + u)
     page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
     page = re.sub(r'<nav class="breadcrumb".*?</nav>', lambda m: (
@@ -1717,11 +1721,18 @@ def build_industry_hubs(all_metas):
     pairs, g = IH.live(all_metas)
     build_industry_lps(IH, pairs, g)
     made = []
+    def by_cat(ms):
+        import collections
+        n = collections.Counter(m.get("category") for m in ms)
+        return "、".join(f"{CATEGORIES[c][0]}{k}本" for c, k in n.most_common() if c in CATEGORIES)
+
     for ind, metas in pairs:
         out = SITE / "industry" / ind["slug"] / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         page = BLOG_PAGE.format(items=IH.hub_body(ind, metas, CATEGORIES, post_tile), **page_shell(
-            f'{ind["name"]}の集客', ind.get("lead") or f'{ind["name"]}の集客に役立つ記事をまとめています。'))
+            f'{ind["name"]}の集客', ind.get("lead") or f'{ind["name"]}の集客に役立つ記事をまとめています。',
+            [(f'{ind["name"]}向けの記事{len(metas)}本を、{by_cat(metas)}に分けて載せています。',
+              f'{ind["name"]}向けの記事{len(metas)}本を、カテゴリ別に載せています。')]))
         page = page.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/')
         url = f'{SITE_URL}/industry/{ind["slug"]}/'
         page = page.replace("</head>", hub_json_ld(
@@ -1736,9 +1747,13 @@ def build_industry_hubs(all_metas):
             fhtml, fld = fq
             fo = SITE / "industry" / ind["slug"] / "faq" / "index.html"
             fo.parent.mkdir(parents=True, exist_ok=True)
+            qs = [x["name"] for x in fld["mainEntity"]]
+            # 主な質問は字数の短いものから（長い質問1つで150字を使い切らない）
             fpage = BLOG_PAGE.format(items=fhtml, **page_shell(
                 f'{ind["name"]}のよくある質問',
-                f'{ind["name"]}の集客について、記事で答えたよくある質問をまとめています。'))
+                f'{ind["name"]}の集客について、記事{len(metas)}本で答えたよくある質問{len(qs)}問をまとめています。',
+                ["答えは各記事に書いたものと同じで、質問から根拠の記事へ進めます。",
+                 DF.named("主な質問は", sorted(qs, key=len), "です。")]))
             fpage = fpage.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/faq/')
             fpage = fpage.replace("</head>", '<script type="application/ld+json">'
                                   + _json.dumps(fld, ensure_ascii=False) + "</script></head>", 1)
@@ -1746,10 +1761,13 @@ def build_industry_hubs(all_metas):
     if made:
         out = SITE / "industry" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        page = BLOG_PAGE.format(items=IH.index_body(pairs, g), **page_shell(
-            "業種から探す", "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。"))
-        page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")
         flat = [m for _, ms in pairs for m in ms]
+        names = "、".join(i["name"] for i, _ in pairs)
+        page = BLOG_PAGE.format(items=IH.index_body(pairs, g), **page_shell(
+            "業種から探す", "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。",
+            [(f"{names}の{len(pairs)}業種、記事{len({m['slug'] for m in flat})}本を業種別に並べています。",
+              f"{len(pairs)}業種、記事{len({m['slug'] for m in flat})}本を業種別に並べています。")]))
+        page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")
         page = page.replace("</head>", hub_json_ld(
             "業種から探す", f"{SITE_URL}/industry/", flat,
             "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。") + "</head>", 1)
@@ -1791,10 +1809,10 @@ def build_extra_pages(all_metas):
 
     made_paths = set()
 
-    def page(path, items, title, url, desc=""):
+    def page(path, items, title, url, desc="", more=()):
         out = SITE / path / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        p = BLOG_PAGE.format(items=items, **page_shell(title, desc or f"{SITE_NAME}の「{title}」のページです。"))
+        p = BLOG_PAGE.format(items=items, **page_shell(title, desc or f"{SITE_NAME}の「{title}」のページです。", more))
         p = p.replace(f"{SITE_URL}/blog/", url)
         out.write_text(p, encoding="utf-8", newline="\n")
         made_paths.add(out.parent)
@@ -1831,7 +1849,10 @@ def build_extra_pages(all_metas):
         rel_all = GL.related_all(terms)
         # 1語1ページはやめ、1ページにまとめる（旧URLは _redirects で該当箇所へ送る）
         page("glossary", GL.index_html(terms, site_url=SITE_URL, rel_all=rel_all), "用語集", f"{SITE_URL}/glossary/",
-             f"{SITE_NAME}の記事で定義した用語{len(terms)}語の意味を、1ページにまとめた用語集です。")
+             f"{SITE_NAME}の記事で定義した用語{len(terms)}語の意味を、1ページにまとめた用語集です。",
+             [(f"定義は{len({t['slug'] for t in terms})}本の記事の定義ブロックそのままで、各用語から元の記事へ進めます。",
+               "定義は記事の定義ブロックそのままで、各用語から元の記事へ進めます。"),
+              DF.named("たとえば", [t["term"] for t in sorted(terms, key=lambda t: len(t["term"]))], "などを載せています。")])
         rd = SITE / "_redirects"
         cur = rd.read_text(encoding="utf-8") if rd.is_file() else ""
         cur = re.sub(r"\n# 用語集（1語1ページ → 1ページ）.*?# /用語集\n", "\n", cur, flags=re.S)
@@ -1852,11 +1873,16 @@ def build_extra_pages(all_metas):
         sib = f'<div class="latest-block"><div class="cat-head"><h2>ほかの比較表</h2></div><ul class="hub-list">{sib}</ul></div>' if sib else ""
         page(f"compare/{cat}", CP.page_html(name, rows, lambda r, c=cat: f"{SITE_URL}/{c}/{r['slug']}/") + sib,
              f"{name}の比較表", f"{SITE_URL}/compare/{cat}/",
-             f"{name}の記事にある比較表{len(rows)}表を1か所に集めました。")
+             f"{name}の記事にある比較表{len(rows)}表を1か所に集めました。",
+             [f"表は{len({r['slug'] for r in rows})}本の記事に載せたものそのままで、表ごとに出典の記事へ進めます。",
+              DF.named("主な表は", sorted({r['h2'] for r in rows if r['h2']}, key=len), "です。")])
         made.append((cat, name, len(rows)))
     if made:
         page("compare", CP.index_html(made), "比較表から探す", f"{SITE_URL}/compare/",
-             "記事の比較表をカテゴリごとに集め、違いと費用を見比べられる入口です。")
+             "記事の比較表をカテゴリごとに集め、違いと費用を見比べられる入口です。",
+             [(f"{'、'.join(n for _, n, _ in made)}の{len(made)}カテゴリ、計{sum(c for _, _, c in made)}表を載せています。",
+               f"{len(made)}カテゴリ、計{sum(c for _, _, c in made)}表を載せています。"),
+              "各カテゴリのページでは、表を記事に載せたままの形で並べ、表ごとに出典の記事へ進めます。"])
         print(f"比較表: {', '.join(f'{n}{c}表' for _, n, c in made)}")
     # テーマ（ピラー↔クラスター）。主題ごとに「まず読む1本」と掘り下げる記事を束ねる
     groups = []
@@ -1866,10 +1892,16 @@ def build_extra_pages(all_metas):
         for g in groups:
             page(f"topics/{g['slug']}", TP.page_html(g, lambda m: f"{SITE_URL}/{m['category']}/{m['slug']}/"),
                  f"{g['name']}の記事", f"{SITE_URL}/topics/{g['slug']}/",
-                 f"テーマ「{g['name']}」の記事{len(g['members'])}本。まず読む1本は「{g['pillar']['title']}」です。")
+                 f"テーマ「{g['name']}」の記事{len(g['members'])}本。まず読む1本は「{g['pillar']['title']}」です。",
+                 [DF.named("掘り下げる記事は", sorted((m["title"] for m in g["members"] if m is not g["pillar"]), key=len),
+                           f"など{len(g['members']) - 1}本です。", most=2)])
         if groups:
+            n_tp = len({m['slug'] for g in groups for m in g['members']})
             page("topics", TP.index_html(groups), "テーマから探す", f"{SITE_URL}/topics/",
-                 "同じ主題の記事を束ね、まず読む1本と掘り下げる記事に分けたテーマの一覧です。")
+                 "同じ主題の記事を束ね、まず読む1本と掘り下げる記事に分けたテーマの一覧です。",
+                 [(f"{'、'.join(g['name'] for g in groups)}の{len(groups)}テーマ、記事{n_tp}本を載せています。",
+                   f"{len(groups)}テーマ、記事{n_tp}本を載せています。"),
+                  "テーマごとに、まず読む1本の題名と記事の本数を並べています。"])
             print(f"テーマ: {len(groups)}件（{', '.join(g['name'] for g in groups[:6])}…）")
     except Exception as e:
         print(f"WARN: テーマの束ねを飛ばしました（{str(e)[:50]}）")
@@ -1881,10 +1913,16 @@ def build_extra_pages(all_metas):
         for a, ms in area_pairs:
             page(f"area/{a['slug']}", AH.page_html(a, ms, lambda m: f"{SITE_URL}/{m['category']}/{m['slug']}/"),
                  f"{a['name']}の記事", f"{SITE_URL}/area/{a['slug']}/",
-                 f"{a['name']}に関する記事{len(ms)}本をまとめています。")
+                 f"{a['name']}に関する記事{len(ms)}本をまとめています。",
+                 [f"題名か狙う語に「{a['name']}」を含む記事だけを集めています。",
+                  DF.named("主な記事は", sorted((m["title"] for m in ms), key=len), "です。", most=2)])
         if area_pairs:
+            n_ar = len({m['slug'] for _, ms in area_pairs for m in ms})
             page("area", AH.index_html(area_pairs, area_g), "エリアから探す", f"{SITE_URL}/area/",
-                 "エリアごとに記事をまとめています。")
+                 "エリアごとに記事をまとめています。",
+                 [(f"{'、'.join(a['name'] for a, _ in area_pairs)}の{len(area_pairs)}エリア、記事{n_ar}本を載せています。",
+                   f"{len(area_pairs)}エリア、記事{n_ar}本を載せています。"),
+                  "題名か狙う語にエリア名を含む記事だけを、エリアごとに束ねています。"])
             print(f"エリアハブ: {len(area_pairs)}件（{'、'.join(a['name'] for a, _ in area_pairs)}）")
     except Exception as e:
         print(f"WARN: エリアハブを飛ばしました（{str(e)[:50]}）")

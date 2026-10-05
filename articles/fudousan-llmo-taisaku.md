@@ -1,6 +1,6 @@
 ---
 title: 不動産のLLMO対策とは？AIに選ばれる5つの条件
-description: 不動産のLLMO対策とは、ChatGPTやPerplexityが物件相談・会社選びに答える際、自社の情報が引用されるよう整備することです。プラットフォーム別の基準と5つの実践施策を解説します。
+description: 不動産のLLMO対策とは、ChatGPTやPerplexityが物件相談・会社選びに答える際、自社の情報が引用されるよう整備することです。プラットフォーム別の基準と5つの実践施策を解説します。物件探しの入口で、AIチャットに直接相談する利用者がすでに広がり始めています。
 slug: fudousan-llmo-taisaku
 keyword: LLMO 不動産
 category: aio

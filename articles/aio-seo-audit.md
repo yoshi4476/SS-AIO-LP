@@ -1,6 +1,6 @@
 ---
 title: AIO SEO監査とは？既存SEO監査に足す7つの視点
-description: AIO SEO監査とは、通常のSEO監査にAI検索対策の視点を足して点検する作業です。追加すべき7項目と社内で完結する4つの手順、優先順位のつけ方まで解説します。
+description: AIO SEO監査とは、通常のSEO監査にAI検索対策の視点を足して点検する作業です。追加すべき7項目と社内で完結する4つの手順、優先順位のつけ方まで解説します。通常のSEO監査で見ているのは表示速度や重複コンテンツが中心で、AIが引用できる構造までは対象外のことが多いです。
 slug: aio-seo-audit
 keyword: aio seo audit
 category: aio

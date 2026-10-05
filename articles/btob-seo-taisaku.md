@@ -1,6 +1,6 @@
 ---
 title: BtoB SEOとは？商談前に選ばれる5つの施策
-description: BtoB SEOとは、比較検討フェーズで検索エンジンと生成AIの両方から選ばれるための情報設計です。商談前にAIで比較される時代の攻め方を、BtoB・SaaS企業向けに5つの施策で解説します。
+description: BtoB SEOとは、比較検討フェーズで検索エンジンと生成AIの両方から選ばれるための情報設計です。商談前にAIで比較される時代の攻め方を、BtoB・SaaS企業向けに5つの施策で解説します。BtoCと違い、BtoBの購買は決裁までに複数人が関わり、検討期間も長く続きます。
 slug: btob-seo-taisaku
 keyword: BtoB SEO
 category: seo

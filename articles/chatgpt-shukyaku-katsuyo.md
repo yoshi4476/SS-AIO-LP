@@ -1,6 +1,6 @@
 ---
 title: ChatGPTを集客に活用する方法7選【中小企業向け】
-description: ChatGPTを集客に活用する方法は、キャッチコピー作成・口コミ返信・SNS投稿・記事の下書きなど「時間を奪う作業」の代行が基本です。中小企業がすぐ使える7つの活用法をプロンプト例つきで解説します。
+description: ChatGPTを集客に活用する方法は、キャッチコピー作成・口コミ返信・SNS投稿・記事の下書きなど「時間を奪う作業」の代行が基本です。中小企業がすぐ使える7つの活用法をプロンプト例つきで解説します。うまく使えば、これまで外注していた文章仕事の多くが社内で回るようになります。
 slug: chatgpt-shukyaku-katsuyo
 keyword: chatgpt sns集客
 category: ai-marketing

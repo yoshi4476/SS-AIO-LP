@@ -1,6 +1,6 @@
 ---
 title: 口コミ返信テンプレート集｜星評価別の例文とAI活用術
-description: Googleマップの口コミ返信は、星評価別のテンプレートと業種別例文で書けます。低評価対応のコツやAI（ChatGPT）を使った時短プロンプトも紹介し、MEO順位への影響まで解説します。
+description: Googleマップの口コミ返信は、星評価別のテンプレートと業種別例文で書けます。低評価対応のコツやAI（ChatGPT）を使った時短プロンプトも紹介し、MEO順位への影響まで解説します。返信は投稿者だけでなく、来店を検討している読者に向けた発信でもあります。
 slug: googlemap-kuchikomi-henshin
 keyword: googleマップ 口コミ 返信
 category: meo

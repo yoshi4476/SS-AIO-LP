@@ -89,8 +89,10 @@ def data(site, domain):
     n_ans = sum(r["decided"] for r in rows)
     total = sum(src.values()) or 1
     title = f"AIに{cfg['topic']}のことを聞くと答えは割れる｜{len(rows)}問の調査（当社調べ）"
-    desc = (f"当社が{period}に{who}へ{cfg['topic']}の問いを{len(rows)}問聞いた結果。{split}問でAIどうしの結論が分かれました。"
-            f"問いごとの答えと根拠、確かめ方をまとめています。")
+    import desc_fill as DF
+    # 説明文は100字以上（Bing が100字未満を「短すぎる」と指摘する）。足すのは数えた件数だけ
+    desc = DF.extend(f"当社が{period}に{who}へ{cfg['topic']}の問いを{len(rows)}問聞いた結果。{split}問でAIどうしの結論が分かれました。"
+                     f"問いごとの答えと根拠、確かめ方をまとめています。", [f"結論を読み取れた回答は{n_ans}件です。"])
     import research_cite as RC
     h1 = f"AIに{cfg['topic']}のことを聞くと、答えはどれくらい割れるか"
     # コーポレートは会社そのものなので社名だけ。他の2サイトは「社名（サイト名）」で、どのサイトの調査か分かるようにする

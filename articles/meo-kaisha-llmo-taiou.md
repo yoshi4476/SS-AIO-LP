@@ -1,6 +1,6 @@
 ---
 title: MEO会社の選び方｜LLMO対応の見極め3基準
-description: MEO会社を選ぶ際にLLMO対応まで確認すべき理由と、見極めの3つの基準を解説します。MEO専業との違いや依頼前の確認ステップ、よくある失敗も紹介します。
+description: MEO会社を選ぶ際にLLMO対応まで確認すべき理由と、見極めの3つの基準を解説します。MEO専業との違いや依頼前の確認ステップ、よくある失敗も紹介します。MEO会社のLLMO対応とは、Googleマップでの順位対策に加えて、AIチャットの回答で自社が引用されるように情報を設計できることです。
 slug: meo-kaisha-llmo-taiou
 keyword: meo会社 llmo
 category: aio

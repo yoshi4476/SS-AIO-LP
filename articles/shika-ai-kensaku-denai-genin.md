@@ -1,6 +1,6 @@
 ---
 title: 歯科医院がAI検索に出ない5つの原因｜医療広告ガイドラインとMEOの壁
-description: 歯科医院がChatGPTやAI Overviewに出ない主な原因は、医療広告ガイドラインによる表現制限とMEO情報の薄さです。YMYL領域特有の事情とセルフ診断の手順、対処の優先順位を解説します。
+description: 歯科医院がChatGPTやAI Overviewに出ない主な原因は、医療広告ガイドラインによる表現制限とMEO情報の薄さです。YMYL領域特有の事情とセルフ診断の手順、対処の優先順位を解説します。口コミ数や返信率が低い医院は、MEO側の評価情報が薄く、AI検索でも判断材料として拾われにくくなります。
 slug: shika-ai-kensaku-denai-genin
 keyword: 歯科医院 AI検索に出ない原因
 category: aio

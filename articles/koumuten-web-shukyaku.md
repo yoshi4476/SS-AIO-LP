@@ -1,6 +1,6 @@
 ---
 title: 工務店のWeb集客とは？5つの施策と始める順番
-description: 工務店のWeb集客とは、HP・SEO・MEO・SNS・広告を予算と段階に応じて組み合わせる仕組みです。何から始めるべきかの順番と費用相場、失敗する工務店に共通する原因を実務目線で解説します。
+description: 工務店のWeb集客とは、HP・SEO・MEO・SNS・広告を予算と段階に応じて組み合わせる仕組みです。何から始めるべきかの順番と費用相場、失敗する工務店に共通する原因を実務目線で解説します。5つの施策は役割が異なり、比較検討の受け皿になるのはホームページだけです。
 slug: koumuten-web-shukyaku
 keyword: 工務店 web 集客
 category: ai-marketing

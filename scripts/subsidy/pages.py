@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """ブログ一覧・カテゴリ別一覧(4種)・sitemap.xml を記事ファイルから自動生成
    再実行可能: 記事が増えたらこのスクリプトを再実行するだけで全一覧が更新される"""
-import os, sys, io, re
+import os, sys, io, re, html
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
 import photo_match  # noqa: E402
+import desc_fill as DF  # noqa: E402
 
 # 補助金サイトの作業コピー。管制塔の publish.py が SUBSIDY_ROOT で渡す
 # （2026-10-03 まで補助金サイト側の tools/ で CI が動かしていた。管制塔に一本化）
@@ -45,6 +47,11 @@ for d in sorted((ROOT / "blog").iterdir()):
                  "heads": [re.sub(r"<[^>]+>", "", h) for h in heads]})
 arts.sort(key=lambda a: a["date"], reverse=True)
 print(f"記事: {len(arts)}本")
+
+
+def T(a):
+    """説明文に入れる記事の題名（<title> から取った実体参照を戻す）"""
+    return html.unescape(a["title"])
 
 def thumb(a):
     """記事の内容に合う在庫写真を選ぶ (見出し・タイトルとの一致度で判定)"""
@@ -187,11 +194,13 @@ def filters_html(current):
         out.append(f'<a class="filter" href="/blog/category/{slug}/" aria-current="{cur}">{name}({n})</a>')
     return "\n    ".join(out)
 
-def page(url_path, title, desc, h1, lead, cards, current_cat, crumb_leaf, hub_html="", jsonld_extra=""):
+def page(url_path, title, desc, h1, lead, cards, current_cat, crumb_leaf, hub_html="", jsonld_extra="", more=()):
     # 一覧・業種ページの説明が短く（35〜44字）、検索結果と共有で何のページか伝わらなかった
-    # （サイト監査 2026-09-29）。運営者と中身の種類だけを添える（ページに無い事実は足さない）
-    if len(desc) < 90:
-        desc = desc.rstrip("。") + "。セブンセンシズ株式会社が、補助金の申請支援の現場で確かめた内容をもとにまとめています。"
+    # （サイト監査 2026-09-29）。運営者の一文を足しても69〜92字で、Bing が100字未満を「短すぎる」と
+    # 指摘した（2026-10-05）。more はそのページの中身（本数・業種・制度・質問）から作った文で、
+    # 100〜150字に収まるものだけを足す。運営者の一文は中身の文で届かないときの最後の手
+    desc = DF.extend(html.unescape(desc), list(more) + ["セブンセンシズ株式会社が、補助金の申請支援の現場で確かめた内容をもとにまとめています。"])
+    desc = html.escape(desc, quote=True)
     return f'''<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -263,7 +272,8 @@ all_cards = "\n".join(card(a) for a in arts)
     f"AI導入補助金(IT導入補助金)の申請実務・採択のコツを支援現場の一次情報で毎日発信。全{len(arts)}記事。",
     "AI導入補助金の<br>実務ノウハウを毎日発信",
     "AI導入補助金(IT導入補助金)の申請実務・必要書類・採択のコツまで。支援の現場で得た一次情報だけを書いています。",
-    all_cards, "all", "AI導入補助金ブログ"), encoding="utf-8")
+    all_cards, "all", "AI導入補助金ブログ",
+    more=[f"最新の記事は「{T(arts[0])}」です。" if arts else ""]), encoding="utf-8")
 print("生成: blog/index.html")
 
 # ---- カテゴリ別 ----
@@ -282,7 +292,9 @@ for name, (slug, hub, catdesc) in CATS.items():
         f"{catdesc}。全{len(cat_arts)}記事。",
         f"カテゴリ: <span style='color:#7a5b14'>{name}</span>の記事一覧",
         catdesc + "。", cards, name, f'<a href="/blog/">AI導入補助金ブログ</a> › {name}',
-        hub_html, jsonld_extra), encoding="utf-8")
+        hub_html, jsonld_extra,
+        more=[f"体系的に知りたい方は、サービス紹介ページ「{name}のサービス詳細」から読めます。",
+              f"最新の記事は「{T(cat_arts[0])}」です。" if cat_arts else ""]), encoding="utf-8")
     print(f"生成: blog/category/{slug}/index.html ({len(cat_arts)}本)")
 
 # ---- 業種ハブ (/industry/<slug>/) ----
@@ -353,7 +365,9 @@ if IND_FILE.is_file():
             f"{ind['name']}向けの補助金活用・申請実務の記事一覧。全{len(ia)}記事。",
             f"<span style='color:#7a5b14'>{ind['name']}</span>の補助金・AI導入",
             lead, "\n".join(card(a) for a in ia), "all",
-            f'<a href="/industry/">業種から探す</a> › {ind["name"]}', hub_html, jsonld_extra),
+            f'<a href="/industry/">業種から探す</a> › {ind["name"]}', hub_html, jsonld_extra,
+            more=[f'{ind["name"]}で使える補助金と申請の実務について書いた記事です。',
+                  DF.named("主な記事は", sorted((T(a) for a in ia), key=len), "です。", most=2)]),
             encoding="utf-8")
         print(f"生成: industry/{ind['slug']}/index.html ({len(ia)}本)")
     if hub_pairs:
@@ -371,7 +385,11 @@ if IND_FILE.is_file():
             "/industry/", f"業種から探す({len(hub_pairs)}業種)|AI導入補助金ブログ|セブンセンシズ株式会社",
             "補助金・AI導入の記事を業種別にまとめた入口。同じ業種の記事を横断して読めます。",
             "業種から探す", "手法ではなく、自分の業種から記事を探せる入口です。",
-            "", "all", "業種から探す", idx_html), encoding="utf-8")
+            "", "all", "業種から探す", idx_html,
+            more=[("、".join(f'{i["name"]}' for i, _ in hub_pairs)
+                   + f"の{len(hub_pairs)}業種、記事{sum(len(v) for _, v in hub_pairs)}本を載せています。",
+                   f"{len(hub_pairs)}業種、記事{sum(len(v) for _, v in hub_pairs)}本を載せています。"),
+                  "業種ごとに、補助金の対象になりやすいツールと申請の注意点をまとめています。"]), encoding="utf-8")
         print(f"生成: industry/index.html ({len(hub_pairs)}業種)")
     # 業種×よくある質問。質問形のクエリは AI Overview 表示率64.7%。答えは記事の FAQ そのまま
     for ind, ia in hub_pairs:
@@ -397,7 +415,10 @@ if IND_FILE.is_file():
             f"<span style='color:#7a5b14'>{ind['name']}</span>の補助金 よくある質問",
             "記事に書いた質問と答えを、業種ごとに1か所へ集めています。", "", "all",
             f'<a href="/industry/">業種から探す</a> › <a href="/industry/{ind["slug"]}/">{ind["name"]}</a> › よくある質問',
-            faq_html), encoding="utf-8")
+            faq_html,
+            more=["答えは各記事に書いたものと同じで、質問から根拠の記事へ進めます。",
+                  DF.named("主な質問は", sorted((html.unescape(q) for q, _, _ in fq), key=len), "です。")]),
+            encoding="utf-8")
         print(f"生成: industry/{ind['slug']}/faq/index.html ({len(fq)}問)")
 
 # ---- 制度から探す (/seido/<slug>/) ----
@@ -438,7 +459,8 @@ for slug, name, rx, pillar_rx, lead_txt in SEIDO:
         f"<span style='color:#7a5b14'>{name}</span>",
         f"{name}について書いた記事を{len(sa)}本まとめました。まず読む1本から、知りたい論点の記事へ進めます。",
         "\n".join(card(a) for a in [pillar] + rest), "all",
-        f'<a href="/seido/">制度から探す</a> › {name}', hub_html, jsonld_extra),
+        f'<a href="/seido/">制度から探す</a> › {name}', hub_html, jsonld_extra,
+        more=[f"まず読む1本は「{T(pillar)}」です。"]),
         encoding="utf-8")
     print(f"生成: seido/{slug}/index.html ({len(sa)}本)")
 if seido_pairs:
@@ -450,7 +472,10 @@ if seido_pairs:
         "制度から探す", "補助金・助成金の制度ごとに、記事をまとめています。",
         "", "all", "制度から探す",
         f'<div class="hub">事業再構築補助金は新規の受付が終わったため、ここには並べていません（採択後の手続きの記事はブログ一覧から読めます）。</div>\n'
-        f'  <ul class="filters" style="list-style:none">{lis}</ul>'), encoding="utf-8")
+        f'  <ul class="filters" style="list-style:none">{lis}</ul>',
+        more=[("、".join(n for _, n, _ in seido_pairs) + f"の{len(seido_pairs)}制度の記事を載せています。",
+               f"{len(seido_pairs)}制度の記事を載せています。"),
+              "事業再構築補助金は新規の受付が終わったため、ここには並べていません。"]), encoding="utf-8")
     print(f"生成: seido/index.html ({len(seido_pairs)}制度)")
 
 # ---- AIへの聞き取り調査（/research/ai-hojokin/）。一覧の枠ではなく、読み物の枠で出す ----

@@ -334,11 +334,15 @@ def desc_items(limit=4, days=28):
                 continue
             head = metas[slug]["desc"][:40].lower()
             toks = [w for w in re.split(r"[\s　]+", top[0].lower()) if len(w) >= 2]
-            if toks and all(w in head for w in toks):
+            # 100字未満の説明文も直す対象（Bing が「短すぎる」と指摘する。2026-10-05）
+            short = len(metas[slug]["desc"]) < 100
+            if toks and all(w in head for w in toks) and not short:
                 continue
             rows.append({"kind": "desc", "slug": slug, "site": metas[slug]["site"], "queries": top,
                          "imp": sum(imp for _, imp in qs[:3]),
-                         "why": f"流入語「{top[0]}」が説明文の先頭に無い（表示{sum(imp for _, imp in qs[:3])}回）"})
+                         "why": (f"説明文が{len(metas[slug]['desc'])}字で短い" if short else
+                                 f"流入語「{top[0]}」が説明文の先頭に無い")
+                                + f"（表示{sum(imp for _, imp in qs[:3])}回）"})
     rows.sort(key=lambda r: -r["imp"])
     return rows[:limit]
 
@@ -420,7 +424,7 @@ WHAT = {
               "同時に検索結果に出て、互いの順位を下げています。主題は別なので統合はしません。\n"
               "この記事の title と description を、この記事の狙う語（keyword）の主題に寄せてください。\n"
               "共通の語「{shared}」をタイトルの前半に置かないこと。15〜45字。keyword は必ず残すこと。\n"
-              "description は60〜160字で、狙う語を含め、タイトルで言っていないことを書く。\n"
+              "description は100〜160字（目安100〜150字）で、狙う語を含め、タイトルで言っていないことを書く。\n"
               "本文で共通の語の話題を詳しく扱っている段落があれば、要点1〜2文に縮め、\n"
               "詳しくは [{other_title}]({other_url}) へ案内する1文を添えてください（新しい節は足さない）。"),
     "title": ("フロントマターの title・description と、H1相当の書き出しを\n"
@@ -432,7 +436,7 @@ WHAT = {
               "ください。15〜45字。狙う語（keyword）は必ず残すこと。\n"
               "【2026年最新】【2026年】のような飾りの年号は外してください（自社の実測で負けた型）。\n"
               "「2024年問題」のように中身として要る年は残します。\n"
-              "description は60〜160字。狙う語を含め、タイトルで言っていないことを書く\n"
+              "description は100〜160字（目安100〜150字）。狙う語を含め、タイトルで言っていないことを書く\n"
               "（同じ文言を繰り返すと、検索結果で見える情報量が半分になる）。\n"
               "本文にない内容をタイトルや説明文に書かないこと（書くなら本文にも追記する）。"),
     "aio": ("この記事は検索1ページ目にいるのに、AI Overview（AIによる概要）が答えを出してしまい、\n"
@@ -442,10 +446,10 @@ WHAT = {
             "3. 「失敗例・注意点」の見出しに、一次情報から言える具体例を1つ足す\n"
             "4. FAQ の最初の1問を、狙う語そのものの質問にし、回答に一次情報の数字を1つ入れる\n"
             "使ってよい自社の一次情報（**この数字以外の新しい数字は書かない**）:\n{facts}"),
-    "desc": ("この記事に実際に流入している検索語が、説明文（description）の前半に入っていません。\n"
+    "desc": ("この記事の説明文（description）が、実際に流入している検索語を前半に含んでいないか、100字に届いていません。\n"
              "検索結果に出る説明文に検索語が無いと、Googleが本文から別の文を切り出して並べ、意図が伝わりません。\n"
              "流入している語（多い順）:\n{queries}\n"
-             "1. フロントマターの description だけを書き換える（60〜160字）。先頭40字以内に上の語のうち\n"
+             "1. フロントマターの description だけを書き換える（100〜160字。目安100〜150字）。先頭40字以内に上の語のうち\n"
              "   最も多いものを自然に含める。タイトルと同じ文言の繰り返しは避ける\n"
              "2. 本文・タイトル・keyword・他のフロントマターは1文字も変えない\n"
              "3. 本文に無い数字・事実を書かない"),
@@ -1058,8 +1062,8 @@ def run_one(item, write, edited=None):
         d = _desc_of(after_now)
         if strip(after_now) != strip(before[2]):
             ng = "説明文以外が変わりました"
-        elif not (60 <= len(d) <= 160):
-            ng = f"説明文が{len(d)}字（60〜160字）"
+        elif not (100 <= len(d) <= 160):
+            ng = f"説明文が{len(d)}字（100〜160字）"
         elif item.get("queries") and not any(w in d[:40].lower() for w in re.split(r"[\s　]+", item["queries"][0].lower()) if len(w) >= 2):
             ng = "流入語が説明文の先頭に入っていません"
         if ng:

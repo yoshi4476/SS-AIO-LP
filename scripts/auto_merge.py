@@ -298,7 +298,7 @@ PROMPT = """articles/{survivor}.md に、articles/{loser}.md の中身を統合�
 - 数字・社名・出典・年月日は、2本のどちらかにあるものだけ。**新しい数字を書かない**
 - 外部の出典リンク（href="http…"）を消さない。{loser} の出典は移す
 - フロントマターの keyword・category・slug は変えない。title は変えてよいが15〜45字で狙う語（{keyword}）を含める
-- description は60〜160字
+- description は100〜160字（目安100〜150字）
 - ですます調。1文は50字を目安、100字を超えない
 
 終わったら、足した見出しを1行で説明して終了してください。"""

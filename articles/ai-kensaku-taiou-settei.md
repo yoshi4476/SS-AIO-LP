@@ -1,6 +1,6 @@
 ---
 title: AI検索対応とは？公開前に済ませる7つの設定項目
-description: AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。
+description: AI検索対応とは、robots.txtでAIクローラーを許可し、llms.txtと構造化データでサイトをAIが読み取れる状態に整えることです。公開前に済ませる7つの設定項目を解説します。robots.txtは、AIクローラーを1つずつ確認し、Googlebotを誤って止めないことが最優先です。
 slug: ai-kensaku-taiou-settei
 keyword: ai検索対応
 category: aio

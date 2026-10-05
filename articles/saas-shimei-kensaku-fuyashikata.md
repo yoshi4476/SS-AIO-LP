@@ -1,6 +1,6 @@
 ---
 title: SaaS指名検索の増やし方｜AI時代に効く5つの施策
-description: SaaS指名検索の増やし方とは、接触回数を積み重ねて認知を蓄積し、AI引用の構造を整えてサービス名で検索される状態を作ることです。BtoB購買データと5つの施策を解説します。
+description: SaaS指名検索の増やし方とは、接触回数を積み重ねて認知を蓄積し、AI引用の構造を整えてサービス名で検索される状態を作ることです。BtoB購買データと5つの施策を解説します。SaaS指名検索とは、検索者が自社のサービス名や社名を直接入力して検索する行動のことです。
 slug: saas-shimei-kensaku-fuyashikata
 keyword: SaaS 指名検索 増やし方
 category: aio

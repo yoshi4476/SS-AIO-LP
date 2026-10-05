@@ -32,7 +32,9 @@ SITE = ROOT / "site"
 UA = {"User-Agent": "Mozilla/5.0 (compatible; SS-SEO-Audit/1.0)"}
 
 TITLE_MIN, TITLE_MAX = 15, 60          # サイト名込みの字数（日本語）
-DESC_MIN, DESC_MAX = 50, 160
+# 日本語は1字の情報量が多く Google の表示も120字前後で切れる。下限は100字（50字では Bing Webmaster Tools が
+# 「短すぎる」と54ページを指摘した。2026-10-05）。Bing の150〜160字は英語の目安
+DESC_MIN, DESC_MAX = 100, 160
 OG_NEED = ("og:title", "og:description", "og:image", "og:url")
 SHORTENERS = {"goo.gl", "app.goo.gl", "bit.ly", "t.co", "lin.ee", "amzn.to", "youtu.be", "g.page"}
 

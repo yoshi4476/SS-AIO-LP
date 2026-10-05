@@ -126,6 +126,13 @@ def run(slug):
         deco = DECOR_YEAR.search(str(meta.get("title", "")))
         add("タイトルに飾りの年号を入れない", not deco, deco.group(0) if deco else "")
 
+    # --- 説明文 ---
+    # 60字で通していたら Bing Webmaster Tools に「短すぎる」と54ページ指摘された（2026-10-05）。
+    # 日本語は1字の情報量が多く、Google の表示も120字前後で切れるので100〜150字を目標、160字を上限にする
+    import desc_fill as DF
+    dl = len(str(meta.get("description") or ""))
+    add(f"説明文{DF.MIN}〜{DF.GATE_MAX}字（目標{DF.MIN}〜{DF.MAX}字）", DF.MIN <= dl <= DF.GATE_MAX, f"{dl}字")
+
     # --- FAQ ---
     faq = meta.get("faq") or []
     add("FAQ 5問以上", len(faq) >= 5, f"{len(faq)}問")

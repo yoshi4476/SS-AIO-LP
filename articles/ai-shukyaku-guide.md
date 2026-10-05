@@ -1,6 +1,6 @@
 ---
 title: AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像
-description: AI集客とは、AI検索・AIチャット・検索・マップのすべてから見込み客を集める考え方です。AIO・LLMO・SEO・MEOの関係と着手の順番を、1枚の地図としてまとめた完全ガイドです。
+description: AI集客とは、AI検索・AIチャット・検索・マップのすべてから見込み客を集める考え方です。AIO・LLMO・SEO・MEOの関係と着手の順番を、1枚の地図としてまとめた完全ガイドです。AI集客は、SEO・MEOという土台の上に、AIO・LLMOという「AIに引用される層」を重ねた二階建ての構造です。
 slug: ai-shukyaku-guide
 keyword: AI集客
 category: ai-marketing

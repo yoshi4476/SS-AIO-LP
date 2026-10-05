@@ -1,6 +1,6 @@
 ---
 title: AIO・SEO・MEOの違いと使い分け｜店舗が今やるべき順番
-description: AIOとSEOとMEOの違いは、狙う検索結果の場所にあります。AIの回答・自然検索の順位・地図検索の順位という3つの違いと関係、店舗が優先すべき順番を実務から整理します。
+description: AIOとSEOとMEOの違いは、狙う検索結果の場所にあります。AIの回答・自然検索の順位・地図検索の順位という3つの違いと関係、店舗が優先すべき順番を実務から整理します。AIOはAIの回答文の中、SEOは自然検索の一覧、MEOはGoogleマップとローカル検索の一覧です。
 slug: aio-seo-meo-chigai
 keyword: aio seo meo
 category: aio
