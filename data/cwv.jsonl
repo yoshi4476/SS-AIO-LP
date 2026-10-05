@@ -6,3 +6,6 @@
 {"date": "2026-10-03", "site": "ai-lab", "url": "https://ai.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1984.5928847108237, "CLS": 0, "INP": null, "score": 99}
 {"date": "2026-10-03", "site": "corporate", "url": "https://corp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 2115.027782381183, "CLS": 0, "INP": null, "score": 98}
 {"date": "2026-10-03", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1352.5113430293572, "CLS": 0, "INP": null, "score": 100}
+{"date": "2026-10-05", "site": "ai-lab", "url": "https://ai.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 4354.808579438899, "CLS": 0, "INP": null, "score": 82}
+{"date": "2026-10-05", "site": "corporate", "url": "https://corp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 2326.031585542195, "CLS": 0, "INP": null, "score": 97}
+{"date": "2026-10-05", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 982.5104083071686, "CLS": 0, "INP": null, "score": 100}

@@ -1,0 +1,448 @@
+{
+ "articles": {
+  "iryou-meo-taisaku": {
+   "checked": "2026-10-05",
+   "site": "ai-lab",
+   "kw": "医療 meo対策",
+   "published": "2026-08-26",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "colet-lab.jp",
+      "grill.co.jp",
+      "med-pro.jp",
+      "meditex.jp",
+      "mediva.co.jp",
+      "meo-times.com",
+      "nicoms.nicho.co.jp",
+      "saisia.co.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "clinic-seoplus.com",
+      "clinichp.nobu-n.co.jp",
+      "four-design.co.jp",
+      "iryoto.jp",
+      "medical-reserve.co.jp",
+      "meo-hack.com",
+      "stock-sun.com",
+      "to-realize.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "it-hojokin-clinic": {
+   "checked": "2026-10-05",
+   "site": "subsidy",
+   "kw": "クリニック it導入補助金",
+   "published": "2026-08-26",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "clinic-it.jp",
+      "clinit.co.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "c-reserve.jp",
+      "clius.jp",
+      "cotocellar.com",
+      "itreat.co.jp",
+      "med-pro.jp",
+      "upp-medical.com",
+      "vertexaisearch.cloud.google.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "catalog.monex.co.jp",
+      "clius.jp",
+      "gxo.co.jp",
+      "local-mp.co.jp",
+      "med-pro.jp",
+      "phchd.com",
+      "so-labo.co.jp",
+      "yuyama.co.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "carearc.co.jp",
+      "clius.jp",
+      "digi-mado.jp",
+      "digikar.m3.com",
+      "digital-ai-hojokin.jp",
+      "gxo.co.jp",
+      "hojokinnavi.jp",
+      "yuyama.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "keiri-jidoka-ai": {
+   "checked": "2026-10-05",
+   "site": "corporate",
+   "kw": "経理 自動化 AI",
+   "published": "2026-08-26",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "ai-revolution.co.jp",
+      "ainow.jp",
+      "all-senmonka.jp",
+      "biz.moneyforward.com",
+      "keihi.com",
+      "timewell.jp",
+      "uravation.com",
+      "yorozuipsc.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "biz.moneyforward.com",
+      "freee.co.jp",
+      "japan-ai.co.jp",
+      "kakukata.jp",
+      "keihi.com",
+      "promotize.jp",
+      "reiwa-inc.com",
+      "smbc-card.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "keiri-koritsuka-seminar": {
+   "checked": "2026-10-05",
+   "site": "corporate",
+   "kw": "経理 効率化 セミナー",
+   "published": "2026-08-26",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "aimc.co.jp",
+      "ht-tax.or.jp",
+      "info.biztex.co.jp",
+      "journal.bizocean.jp",
+      "prtimes.jp",
+      "r-ac.co.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": true,
+     "ours": [
+      "https://corp.7senses.co.jp/blog/keiri-koritsuka-seminar"
+     ],
+     "sources": [
+      "bakuraku.jp",
+      "biz-partner.net",
+      "corp.7senses.co.jp",
+      "dxpo.jp",
+      "events.nikkei.co.jp",
+      "insource.co.jp",
+      "keibun.co.jp",
+      "keiriplus.jp"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "ey.com",
+      "funaisoken.co.jp",
+      "myevent.tokyo-cci.or.jp",
+      "nagoya-cci.or.jp",
+      "opmia.jp",
+      "osaka.cci.or.jp",
+      "prtimes.jp",
+      "sbbit.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "jfael.or.jp",
+      "keiri4970.com",
+      "kokuchpro.com",
+      "media.invoice.ne.jp",
+      "merrybiz.jp",
+      "myevent.tokyo-cci.or.jp",
+      "smbcc-education.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "meo-settei-guide": {
+   "checked": "2026-10-05",
+   "site": "ai-lab",
+   "kw": "MEO設定",
+   "published": "2026-08-26",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "assist-centering.co.jp",
+      "biz.ne.jp",
+      "cozies.jp",
+      "fwh.co.jp",
+      "gmotech.jp",
+      "keywordmap.jp",
+      "medix-inc.co.jp",
+      "mieru-ca.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "assist-centering.co.jp",
+      "crosswish.com",
+      "embedsocial.jp",
+      "libera-inc.jp",
+      "local-mieruca.com",
+      "locaop.jp",
+      "quickly.co.jp",
+      "sanzen-design.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "monozukuri-hojokin-clinic": {
+   "checked": "2026-10-05",
+   "site": "subsidy",
+   "kw": "ものづくり補助金 クリニック",
+   "published": "2026-08-26",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "pr.mono.ipros.com"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "earnest53.com",
+      "for-ease.co.jp",
+      "hojo.mono-support.com",
+      "inu-llc.co.jp",
+      "local-mp.co.jp",
+      "lp.yoshida-dental.co.jp",
+      "mirasapo-plus.go.jp",
+      "mono-support.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "bizarq.group",
+      "financeinjapan.com",
+      "for-ease.co.jp",
+      "local-mp.co.jp",
+      "note.com",
+      "payments.centralmedience.com",
+      "phchd.com",
+      "samurai-law.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "clinics-cloud.com",
+      "hojoguide.jp",
+      "keiei-consultant.com",
+      "keieichiryou.com",
+      "listing-partners.com",
+      "medical-link.co.jp",
+      "phchd.com",
+      "samurai-law.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "fudousan-hankyou-konai": {
+   "checked": "2026-10-05",
+   "site": "ai-lab",
+   "kw": "不動産 集客 できない",
+   "published": "2026-08-27",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "asantech.co.jp",
+      "geniee.co.jp",
+      "ieul.jp",
+      "iimon.co.jp",
+      "n-create.co.jp",
+      "nexer.co.jp",
+      "sales-dx.jp",
+      "slc-mh.co.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "accel-japan.com",
+      "ampup.co.jp",
+      "cyberhorn.co.jp",
+      "iimon.co.jp",
+      "n-create.co.jp",
+      "sales-dx.jp",
+      "showtime24.co.jp",
+      "slc-mh.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "jizokuka-hojokin-clinic": {
+   "checked": "2026-10-05",
+   "site": "subsidy",
+   "kw": "小規模事業者持続化補助金 クリニック",
+   "published": "2026-08-27",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "chugoku.meti.go.jp",
+      "hojonavi.org",
+      "ivm-bplan.com",
+      "japhic.or.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "clinics-cloud.com",
+      "ivm-bplan.com",
+      "medical.pendel.jp",
+      "mhlw.go.jp",
+      "note.com",
+      "samurai-law.com",
+      "shoukei.mplat.jp",
+      "so-labo.co.jp"
+     ]
+    },
+    "Perplexity": {
+     "cited": true,
+     "ours": [
+      "https://lp.7senses.co.jp/blog/jizokuka-hojokin-clinic/"
+     ],
+     "sources": [
+      "chusho.meti.go.jp",
+      "ichidokiri.co.jp",
+      "local-mp.co.jp",
+      "lp.7senses.co.jp",
+      "phchd.com",
+      "solution.hvac.panasonic.com",
+      "tokyobc.jp",
+      "upp.or.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "012cloud.jp",
+      "11consul.com",
+      "arimura-cpa.com",
+      "clius.jp",
+      "dspace.co.jp",
+      "keieichiryou.com",
+      "medica-web.jp",
+      "nishiharashoko.jp"
+     ]
+    }
+   },
+   "cited": true
+  }
+ },
+ "last_run": {
+  "date": "2026-10-05",
+  "state": "ok",
+  "checked": 8,
+  "failed": 0,
+  "engines": [
+   "ChatGPT",
+   "Gemini",
+   "Perplexity",
+   "Claude"
+  ],
+  "note": ""
+ }
+}
