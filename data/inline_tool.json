@@ -1,0 +1,7 @@
+{
+  "_why": "記事の最初の章に入力欄（その場の入口）を置いた日。funnel.py が前後28日で、記事から入力欄・ツール・相談へ進んだ数を比べる。since は本番に出た日に合わせる（null の社は比べない）",
+  "sites": {
+    "ai-lab": {"since": "2026-10-05", "tool": "url_check", "where": "build.inline_tool"},
+    "subsidy": {"since": null, "tool": "hojokin_quiz", "where": "publish.insert_inline_entry", "_note": "配信先の記事は publish（publish_rerender）で作り直した記事から入る。全記事を作り直した日を since に書く"}
+  }
+}
