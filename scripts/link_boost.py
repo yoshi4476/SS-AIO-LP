@@ -15,6 +15,7 @@ AI検索にも文脈ごと読まれる。
     python scripts/link_boost.py <site_id>            # 候補を出す
     python scripts/link_boost.py <site_id> --write    # 実際に足す
     python scripts/link_boost.py <site_id> --band=4-20 --inline   # 文中リンク（集中モードだけが使う）
+    python scripts/link_boost.py <site_id> --unindexed   # URL検査で未登録のままの記事へ、検索1ページ目の記事から
 
 --inline は段落を足さない。送り元の本文に既にある語句（送り先の狙う語・題の主要な語句）を
 [語](/url/) で囲むだけで、文字は1文字も変えない。リンクだけの段落は上限（4本）に
@@ -54,6 +55,13 @@ DECAY_RATIO = 0.25
 DECAY_PEAK_MIN = 20  # 山の週の表示がこれ未満は偶然と区別できない（rank_up.MIN_IMP と揃える）
 DECAY_DAYS = 84
 DECAY_MAX = 5        # 1回に拾う本数。11〜30位の経路より多くは配らない
+# --unindexed: URL検査で未登録（検出/クロール済み - インデックス未登録・Google に未認識）のまま公開3週を過ぎた記事。
+# 通知（reindex.py --from-cache）だけでは登録まで届かなかった（2026-10-05: コーポレートで 8/30〜9/9 公開の経理系
+# 19本のうち公開25〜34日で10本が「検出 - インデックス未登録」。新しい記事は登録されている）。
+# Google が辿る道を増やすため、検索1ページ目の記事からだけ内部リンクを送る（題は変えない）
+UNINDEXED_MIN_DAYS = 21
+UNINDEXED_CACHE_DAYS = 14   # これより古い検査の結果は使わない（ここでは新たに検査しない）
+UNINDEXED_MAX = 5
 NL_CH = chr(10)
 _NOISE = re.compile(r"[\s　・|｜:：\-—?？!！。、,.／/（）()【】\[\]]")
 
@@ -205,6 +213,34 @@ def decay_targets(site, arts, cnt, skip=(), day=None, end=None):
             out.append((s, pd[0], pd[1], cnt.get(s, 0)))
     out.sort(key=lambda x: -(x[1] - x[2]))
     return out[:DECAY_MAX]
+
+
+def unindexed_targets(site, arts, cnt, cache=None, today=None):
+    """URL検査の結果（reindex が残す data/index_cache.json）で未登録のまま、公開から UNINDEXED_MIN_DAYS 日を
+    過ぎた記事。長く止まっている順（公開の古い順）に (slug, 公開日, 状態, 被リンク)。
+    重複・noindex・404 は内部リンクでは直らないので拾わない（reindex の再送と同じ状態だけ）"""
+    import time
+    from datetime import date, timedelta
+    import reindex as RI
+    import sites as S
+    cfg = S.load(site)
+    cache = RI._cache() if cache is None else cache
+    today = today or date.today()
+    fresh = time.mktime((today - timedelta(days=UNINDEXED_CACHE_DAYS)).timetuple())
+    old = (today - timedelta(days=UNINDEXED_MIN_DAYS)).isoformat()
+    out = []
+    for s, a in arts.items():
+        if not a.get("date") or a["date"] > old or cnt.get(s, 0) >= RESCUE_FLOOR:
+            continue
+        u = S.article_url(cfg, {"slug": s, "category": a["cat"]}).rstrip("/")
+        r = cache.get(u) or cache.get(u + "/")
+        if not r or r.get("at", 0) < fresh or r.get("verdict") == "PASS":
+            continue
+        st = r.get("state") or ""
+        if any(x in st for x in RI.RESEND_STATES):
+            out.append((s, a["date"], st, cnt.get(s, 0)))
+    out.sort(key=lambda x: x[1])
+    return out
 
 
 def parse_band(argv):
@@ -520,15 +556,18 @@ def phrases_for(site, tgt, arts):
     return ph
 
 
-def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None):
+def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None, kind="link_inline", max_tgt=None):
     """送り先ごとに、上位の近い記事の本文にある語句を文中リンクにする。足した本数を返す。
 
     上限: 送り先1本につき ADD_PER、送り元1本につき INLINE_PER_SRC、同じ送り先へは1記事1本、
-    アンカーは shorten_anchors.MAX 字まで、同じアンカーは auto_review.MAX_SAME_ANCHOR 記事まで"""
+    アンカーは shorten_anchors.MAX 字まで、同じアンカーは auto_review.MAX_SAME_ANCHOR 記事まで。
+    max_tgt を渡すと、リンクが入った送り先がその本数に達したところで止める（入らなかった送り先は数えない）"""
     use = ar.anchor_use() if use is None else use
     per_src = Counter()
-    done = 0
+    done = reached = 0
     for tgt in poor:
+        if max_tgt is not None and reached >= max_tgt:
+            break
         a = arts[tgt]
         phrases = phrases_for(site, tgt, arts)
         if not phrases:
@@ -553,13 +592,14 @@ def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None):
                 t = b["path"].read_text(encoding="utf-8-sig")
                 head = t.split("---", 2)[1]
                 b["path"].write_text(f"---{head}---\n{nb}", encoding="utf-8", newline="")
-                note(tgt, src, "link_inline", anchor=anchor, log=log)
+                note(tgt, src, kind, anchor=anchor, log=log)
             # 見るだけの実行でも本文を進める（同じ記事への上限を見込みに反映するため）
             b["body"] = nb
             use[anchor.lower()] += 1
             per_src[src] += 1
             added += 1
             done += 1
+        reached += added > 0
     return done
 
 
@@ -570,6 +610,7 @@ def main():
     site = args[0]
     write = "--write" in sys.argv
     rescue = "--rescue" in sys.argv
+    unindexed = "--unindexed" in sys.argv
     band = parse_band(sys.argv)
     # 文中リンクは集中モードの対象（4〜20位）へ、上位の記事からだけ送る
     inline = "--inline" in sys.argv
@@ -606,6 +647,15 @@ def main():
         print(f"■ {site}: {band[0]:g}〜{band[1]:g}位で被リンクが{RESCUE_FLOOR}本未満 {len(poor)}記事（送り元は上位の記事だけ）")
         for s, pos, imp, n in tg:
             print(f"     {pos:>5.1f}位 表示{imp:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
+    elif unindexed:
+        tg = [t for t in unindexed_targets(site, arts, cnt) if linkable(t[0], arts)]
+        poor = [s for s, _, _, _ in tg]
+        print(f"■ {site}: URL検査で未登録のまま公開{UNINDEXED_MIN_DAYS}日を過ぎ、被リンクが{RESCUE_FLOOR}本未満"
+              f" {len(poor)}記事（送り元は検索1ページ目の記事だけ・1回{UNINDEXED_MAX}記事まで）")
+        for s, pub, st, n in tg[:10]:
+            print(f"     公開{pub}  {st[:16]:<16}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
+        if poor and not _page1(site):
+            print("   検索1ページ目の記事が分からない（順位を取れない）ため、送り元がありません")
     elif rescue:
         tg = [t for t in rescue_targets(site, arts, cnt) if linkable(t[0], arts)]
         poor = [s for s, _, _, _ in tg]
@@ -631,8 +681,17 @@ def main():
     import sites as S
     pre = S.load(site).get("url_prefix")
     done = 0
+    if unindexed:
+        # 送り元は検索1ページ目の記事だけ（評価の無い記事から送っても、Google が辿りに来るきっかけにならない）。
+        # 段落のリンクではなく文中リンクにするのは、1ページ目の記事はリンクだけの段落が上限（4本）に
+        # 当たっていて足せないため（2026-10-05 実測: コーポレートの対象8本の送り元候補が全部上限）
+        ranks = {s: 1 for s in _page1(site)}
+        ranks.update({s: 99 for s in poor})
+        inline = True
     if inline:
-        done = run_inline(site, arts, poor, cnt, ranks, pre, write)
+        done = run_inline(site, arts, poor, cnt, ranks, pre, write,
+                          kind="link_unindexed" if unindexed else "link_inline",
+                          max_tgt=UNINDEXED_MAX if unindexed else None)
         print(f"\n   {'文中リンクを足しました' if write else '文中リンクの候補'}: {done}本")
         if not write:
             print("   実行するには --write を付けてください")
