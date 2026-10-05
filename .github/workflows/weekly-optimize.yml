@@ -10,9 +10,14 @@ on:
         description: "配信し直す起点（既定はこの実行で直した分。取りこぼしを流すときだけ広げる。例: HEAD~10）"
         type: string
         default: "HEAD~1"
+      force:
+        description: "今週もう済んでいても動かす（同じ週に2回目を手で流すときだけ）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
+  actions: read      # 同じ週に済んだ run があるかを見る（schedule_guard）
 
 concurrency:
   group: article-pipeline
@@ -22,6 +27,26 @@ env:
   TZ: Asia/Tokyo
 
 jobs:
+  # 同じ週に2回動かさない。GitHub の schedule は数時間遅れることがあり（2026-10-05 は3時間過ぎても始まらず手で起動）、
+  # 自動修復の見張り（selfheal.yml）も取りこぼしを起動する。その週（日本時間の月曜から）に成功で終わった run か、
+  # 先に始まって動いている run があれば、この回は何もしない。手で2回目を流すときは force
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      go: ${{ steps.g.outputs.go }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: g
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ inputs.force }}" = "true" ]; then echo "force のため、今週の実行の有無を見ません"; echo "go=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          out=$(python3 scripts/schedule_guard.py --already-ran weekly-optimize.yml --week --run-id "${{ github.run_id }}" 2>&1) || true
+          echo "$out"
+          # 判定が動かなかったときは動かす（止めると、その週の最適化がまるごと抜ける）
+          if echo "$out" | grep -q '^ALREADY_RAN=yes'; then echo "go=false" >> "$GITHUB_OUTPUT"; else echo "go=true" >> "$GITHUB_OUTPUT"; fi
+
   # ── 並行ジョブ（2026-10-04）──────────────────────────────────────────
   # 記事（articles/）を書き換える工程と、コミットする工程は optimize に順番どおり残す。
   # ここに出したのは「記事に触らず、後ろの工程が同じ実行の中で結果を読まない」ものだけ。
@@ -32,6 +57,8 @@ jobs:
   # 書き出すのは docs/ai-kw-*.md・data/ai_kw/・data/ai_cache/・KW計画の追記だけで、
   # optimize が読むのは中盤の pull の後（実測・共起語の工程）なので、先に終わっていれば同じ結果になる
   kw-refill:
+    needs: guard
+    if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
@@ -152,6 +179,8 @@ jobs:
   # 通知は optimize の最後に、この結果を使って行う（--from-cache）。先に通知すると Indexing API の
   # 1日200件をこの再通知が使い、その日に直した記事の通知（notify_indexing）が落ちる
   index-inspect:
+    needs: guard
+    if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
@@ -209,6 +238,8 @@ jobs:
   # 読むだけの検査（結果はログ・注釈・管制塔のエラーログに出るだけで、ファイルを書かない）。
   # どれも live の GSC/GA4/本番サイトか、原稿を読むだけなので、記事の直しを待つ理由が無い
   reports:
+    needs: guard
+    if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -341,6 +372,8 @@ jobs:
         run: rm -f indexing-service-account.json
 
   optimize:
+    needs: guard
+    if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
     # 60分では足りず、2026-09-21 は再通知の工程で打ち切られ、コミットも配信も走らなかった。
     # public リポジトリなので実行時間は無料。重い工程はそれぞれ --budget-min で自分を止める
@@ -492,6 +525,9 @@ jobs:
           grep '^要対応' automation/logs/rank_rescue.txt >> automation/logs/findings.txt || true
           for s in ai-lab corporate subsidy; do
             python scripts/link_boost.py "$s" --rescue --write || true
+            # URL検査で未登録のまま公開3週を過ぎた記事へ、検索1ページ目の記事から文中リンク（1回5記事まで）。
+            # 再通知（reindex --from-cache）だけでは登録まで届かなかった（コーポレートの 8/30〜9/9 公開分）
+            python scripts/link_boost.py "$s" --unindexed --write || true
           done
 
       - name: 無料診断への導線を新しい記事にも入れる

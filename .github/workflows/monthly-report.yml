@@ -13,15 +13,40 @@ on:
         description: "各社のレポートだけ作り直して送る（グループ版・在庫・引用の実測・改善の実行はしない）"
         type: boolean
         default: false
+      force:
+        description: "その日にもう済んでいても動かす（同じ日に2回目を手で流すときだけ）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write  # 目標値（reports/targets.json）を保存するため
+  actions: read    # 同じ日に済んだ run があるかを見る（schedule_guard）
 
 env:
   TZ: Asia/Tokyo
 
 jobs:
+  # 同じ日に2回送らない。schedule は遅れ・取りこぼしがあり、自動修復の見張り（selfheal.yml）が取りこぼしを起動する。
+  # 遅れて来た予定の run と重なると、同じレポートが2通届く。各社の作り直し（resend_sites）と force は見ない
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      go: ${{ steps.g.outputs.go }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: g
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ inputs.force }}" = "true" ] || [ "${{ inputs.resend_sites }}" = "true" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          out=$(python3 scripts/schedule_guard.py --already-ran monthly-report.yml --day --run-id "${{ github.run_id }}" 2>&1) || true
+          echo "$out"
+          if echo "$out" | grep -q '^ALREADY_RAN=yes'; then echo "go=false" >> "$GITHUB_OUTPUT"; else echo "go=true" >> "$GITHUB_OUTPUT"; fi
+
   report:
+    needs: guard
+    if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120  # 在庫の組み直し（kw_plan）が1サイト10分前後。20社まで受けるため余裕を持つ
     steps:

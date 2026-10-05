@@ -13,6 +13,11 @@ on:
     # 枠の run が並んでいない時間に始めないと、待機中の記事の run を取り消してしまう
     - cron: "13 19 * * 1,4"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "その日にもう済んでいても動かす（同じ日に2回目を手で流すときだけ）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -32,8 +37,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: st
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           s=$(python3 scripts/focus_report.py --status | sed -n 's/^FOCUS=//p')
+          # 同じ日に2回直さない（遅れて来た予定の run と、見張りが起動した run が重なる）。判定が動かなければ動かす
+          if [ "$s" = "active" ] && [ "${{ inputs.force }}" != "true" ]; then
+            out=$(python3 scripts/schedule_guard.py --already-ran focus-mode.yml --day --run-id "${{ github.run_id }}" 2>&1) || true
+            echo "$out"
+            if echo "$out" | grep -q '^ALREADY_RAN=yes'; then s=done; fi
+          fi
           echo "集中モード: $s"
           echo "state=$s" >> "$GITHUB_OUTPUT"
 

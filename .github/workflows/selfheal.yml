@@ -15,7 +15,11 @@ on:
                 "記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Focus Mode"]
     types: [completed]
   schedule:
-    - cron: "0 15 * * *"   # JST 00:00 — 1日の最後に検査だけはかける
+    - cron: "0 15 * * *"   # JST 00:00 — 1日の最後に検査だけはかける（取りこぼしの見張りの最後の砦も兼ねる）
+    # 下の3本は取りこぼしの見張り（schedule-guard）だけを動かす。heal は 0 15 の回だけ
+    - cron: "53 7 * * 1"   # JST 月 16:53 — Weekly Optimize（月 10:23）から6.5時間
+    - cron: "53 6 1,15 * *"  # JST 1日・15日 15:53 — 月次レポート（9:00）から7時間
+    - cron: "23 20 * * 1,4"  # JST 火・金 05:23 — 集中モード（04:13）から1時間（記事の枠 08:07 までに終わる時間）
   workflow_dispatch:
 
 permissions:
@@ -23,6 +27,44 @@ permissions:
   actions: read
 
 jobs:
+  # 定時のワークフローが始まらなかった回を起動する。GitHub の schedule は遅れ・取りこぼしがあり
+  # （2026-10-05 の Weekly Optimize は3時間過ぎても始まらず手で起動・前の週も5.5時間遅れ）、
+  # 落ちた run は heal が拾うが、始まらなかった run は誰も拾わなかった。
+  # 起動された側は最初のジョブで「その区切りに済んだ run があるか」を見るので、遅れて来た予定の run と重ならない。
+  # 月次は日付で中身が変わる（1日=確定版・15日=途中経過）ので、その日のうちしか起動しない（--max-hours 14）。
+  # 集中モードは記事の枠（08:07〜）と同じグループに並ぶので、枠の前に終わる時間しか起動しない（--max-hours 2）
+  schedule-guard:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: 始まらなかった定時の回を起動する
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          out=""
+          W="weekly-optimize.yml --after-hours 6 --max-hours 48 --period week --avoid-busy"
+          M="monthly-report.yml --after-hours 6 --max-hours 14 --period day"
+          F="focus-mode.yml --after-hours 1 --max-hours 2 --period day --avoid-busy"
+          for a in "$W" "$M" "$F"; do
+            o=$(python3 scripts/schedule_guard.py --missed $a --dispatch 2>&1) || o="$o
+          要対応: 取りこぼしの見張りが動きませんでした（${a%% *}）"
+            out="$out
+          $o"
+          done
+          echo "$out"
+          if echo "$out" | grep -q '^要対応'; then
+            python3 scripts/notify_slack.py "🚨 $(echo "$out" | grep '^要対応' | head -3)" || true
+          fi
+
   heal:
     # 直列にするのは heal だけ。ワークフロー全体にかけると、heal の45分の間に待った再実行の判定が、
     # 後から来た待ちに取り消される（同じグループの待ちは1つしか残らない）
@@ -35,8 +77,10 @@ jobs:
     # ただしデプロイは cancel-in-progress で新しい push が古い run を取り消すのが正常の動き。
     # これを拾うと push が続くたびに修復・書き直し・「cancelled で終わりました」の通知が走る
     # 記事動画・調査などは書き直しの手順（retry_prompt）が合わないので、ここでは扱わない（rerun が受け持つ）
+    # 定期実行は 0 15 の回だけ（ほかの cron は取りこぼしの見張りのため。heal を1日に何度も動かさない）
     if: >-
-      github.event_name != 'workflow_run' ||
+      (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *') ||
+      github.event_name == 'workflow_dispatch' ||
       (contains(fromJSON('["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize", "Monthly Consulting Report", "Weekly Newsletter Digest", "Deploy to Cloudflare Pages"]'), github.event.workflow_run.name) &&
        (github.event.workflow_run.conclusion == 'failure' ||
         (github.event.workflow_run.conclusion == 'cancelled' &&
