@@ -1,0 +1,60 @@
+{
+ "ai-lab": {
+  "quota": 2,
+  "signals": [],
+  "date": "2026-10-05",
+  "how": "URL検査",
+  "new": 74,
+  "judged": 40,
+  "not_indexed_rate": 0.0,
+  "duplicates": 0,
+  "pairs": 0,
+  "imp": [
+   3092,
+   4115
+  ],
+  "states": {
+   "Submitted and indexed": 40
+  }
+ },
+ "corporate": {
+  "quota": 2,
+  "signals": [],
+  "date": "2026-10-05",
+  "how": "URL検査",
+  "new": 80,
+  "judged": 40,
+  "not_indexed_rate": 0.35,
+  "duplicates": 0,
+  "pairs": 0,
+  "imp": [
+   1165,
+   3425
+  ],
+  "states": {
+   "Submitted and indexed": 25,
+   "Discovered - currently not indexed": 10,
+   "Crawled - currently not indexed": 4,
+   "URL is unknown to Google": 1
+  }
+ },
+ "subsidy": {
+  "quota": 2,
+  "signals": [],
+  "date": "2026-10-05",
+  "how": "URL検査",
+  "new": 74,
+  "judged": 40,
+  "not_indexed_rate": 0.0,
+  "duplicates": 0,
+  "pairs": 0,
+  "imp": [
+   2118,
+   2725
+  ],
+  "states": {
+   "Submitted and indexed": 39,
+   "Not found (404)": 1
+  }
+ }
+}
