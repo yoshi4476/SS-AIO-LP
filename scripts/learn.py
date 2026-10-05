@@ -99,8 +99,13 @@ def rollback_signal():
         d = json.loads(p.read_text(encoding="utf-8"))
     except Exception:
         return []
-    # 形式は rewrite_rollback が書く {"<slug>@<日付>": {"ratio", "control", "pos_gain", "rolled_back"}}
-    decided = [r for r in (d.values() if isinstance(d, dict) else []) if isinstance(r, dict) and "rolled_back" in r]
+    # 形式は rewrite_rollback が書く {"<slug>@<日付>": {"ratio", "control", "pos_gain", "rolled_back", "control_n", "kind"}}。
+    # 学びの文は題の直しのことなので題の判定だけを数える（early・compete は本文も変える）。
+    # control_n の無い判定は、公開からの日数が違う記事とページを対照にした頃のもので、
+    # 公開から日の浅い記事の自然な落ち込みを「戻すべき」と読んでいた。数に入れない
+    decided = [r for r in (d.values() if isinstance(d, dict) else [])
+               if isinstance(r, dict) and "rolled_back" in r and r.get("control_n")
+               and r.get("kind", "title") == "title"]
     if len(decided) < 6:
         return []
     back = sum(1 for r in decided if r["rolled_back"])
