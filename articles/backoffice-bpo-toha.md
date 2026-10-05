@@ -88,8 +88,6 @@ faq:
 
 バックオフィスBPOに任せられる業務は、経理・人事労務・総務・購買・IT管理・問い合わせ対応の6つに整理できます。
 
-関連する内容として[経理BPOの契約書｜見落としやすい条項6つと確認手順](/blog/keiri-bpo-keiyakusho-kakunin/)も公開しています。
-
 <figure><img src="/images/backoffice-bpo-toha/gyomu6.png" alt="バックオフィスBPOに任せられる6つの業務範囲: 経理・記帳、人事労務・給与計算、総務・庶務、購買・発注管理、IT管理・ヘルプデスク、問い合わせ対応" loading="lazy"><figcaption>バックオフィスBPOに任せられる6つの業務範囲</figcaption></figure>
 
 **範囲1: 経理・記帳。**仕訳入力、請求書処理、月次決算の補助など、経理BPOと重なる範囲です。専門知識が必要な分、最も委託が進んでいる領域でもあります。

@@ -91,8 +91,6 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 実際の例を先に押さえるなら、[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)が参考になります。
 
-近い論点を[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)で扱っています。
-
 順位だけでなく、この5つを毎月並べて見ることで、記事のどこに手を入れるべきかが分かります。
 
 | 指標 | 何が分かるか | 主な確認先 |
