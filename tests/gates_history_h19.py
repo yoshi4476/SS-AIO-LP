@@ -83,3 +83,52 @@ def test_zip_manifest_keeps_earlier_deliveries():
             DF.index_path, DF.ROOT, DF.hand_over = old
     check("作業場所を用意するたびに配信済みの記事を一覧へ戻す",
           "keep_delivered(cfg, d)" in inspect.getsource(DF.stage), True)
+
+
+def test_wordpress_jsonld_goes_to_post_meta():
+    import io
+    import json
+    from contextlib import redirect_stdout
+    import publish as P
+    print("\n■ WordPress 納品: 構造化データは本文ではなく投稿メタへ（mu-plugin が wp_head で出す）")
+    cfg = {"id": "h19-wp", "type": "wordpress", "name": "h19", "domain": "h19.example", "categories": {"seo": "SEO"}}
+    meta = {"slug": "h19-a", "title": "題", "category": "seo", "score": 92, "description": "説明"}
+    credit = {"author": {"@type": "Person", "name": "著者"}, "publisher": {"@type": "Organization", "name": "社"},
+              "reviewer": {"@type": "Person", "name": "監修者"}, "byline": '<p class="byline">監修: 監修者</p>'}
+    sent = []
+
+    def fake(cfg_, path, data=None, method=None, headers=None, raw=None):
+        if data is not None:
+            sent.append(data)
+        if path.startswith("categories"):
+            return [{"id": 3}]
+        if path.startswith("posts?slug"):
+            return []
+        if path == "posts":
+            return {"id": 7, "status": "draft"}
+        return {"status": "draft", "link": "", "meta": dict(stored)}
+    old = (P._wp_call, P.client_credit)
+    stored = {}
+    try:
+        P._wp_call, P.client_credit = fake, lambda c: credit
+        stored = {"_ss_jsonld": "x"}
+        with redirect_stdout(io.StringIO()) as o:
+            P.write_wordpress(cfg, meta, "## 見出し\n本文です。\n", ROOT / "README.md", push=False)
+        body = sent[-1]
+        ld = json.loads(body["meta"]["_ss_jsonld"])
+        check("本文に <script> を入れない（unfiltered_html の無い投稿者では消される）",
+              "<script" in body["content"], False)
+        check("監修の表示は本文に残す", "監修: 監修者" in body["content"], True)
+        check("構造化データは投稿メタ _ss_jsonld に JSON で入れる",
+              (ld["@type"], ld["reviewedBy"]["name"], ld["headline"]), ("BlogPosting", "監修者", "題"))
+        check("保存された回は要対応を出さない", "要対応:" in o.getvalue(), False)
+        stored = {}
+        with redirect_stdout(io.StringIO()) as o:
+            P.write_wordpress(cfg, meta, "## 見出し\n本文です。\n", ROOT / "README.md", push=False)
+        check("古い mu-plugin でメタが捨てられたら要対応で知らせる", "要対応:" in o.getvalue(), True)
+    finally:
+        P._wp_call, P.client_credit = old
+    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
+    check("mu-plugin: _ss_jsonld を REST で読み書きでき、wp_head で JSON として読めたものだけ組み直して出す",
+          ["SSQG_META_JSONLD => 'string'" in php, "add_action('wp_head'" in php, "json_decode($raw, true)" in php,
+           "wp_json_encode($data" in php, "JSON_HEX_TAG" in php, "is_singular('post')" in php], [True] * 6)

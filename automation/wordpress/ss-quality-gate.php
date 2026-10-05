@@ -31,6 +31,7 @@ if (!defined('ABSPATH')) {
 const SSQG_META_SCORE = '_ss_quality_score';   // 100点換算のスコア
 const SSQG_META_BY    = '_ss_written_by';      // 'agent' か 'human'
 const SSQG_MIN_SCORE  = 90;                    // これ未満は公開させない
+const SSQG_META_JSONLD = '_ss_jsonld';         // 記事の構造化データ（JSON の文字列）
 
 // 人が管理画面で書いた記事に求める最低限。採点の仕組みを通らないぶん、
 // 数えられるものだけを見る。0 にすると人の投稿を素通しできる
@@ -183,11 +184,11 @@ add_action('admin_notices', function () {
 
 
 /**
- * スコアと執筆者の区分を REST API から読み書きできるようにする
+ * スコア・執筆者の区分・構造化データを REST API から読み書きできるようにする
  */
 add_action('init', function () {
     foreach ([SSQG_META_SCORE => 'integer', SSQG_META_BY => 'string',
-              '_ss_gate_last_reason' => 'string'] as $key => $type) {
+              '_ss_gate_last_reason' => 'string', SSQG_META_JSONLD => 'string'] as $key => $type) {
         register_post_meta('post', $key, [
             'type'          => $type,
             'single'        => true,
@@ -197,6 +198,34 @@ add_action('init', function () {
             },
         ]);
     }
+});
+
+
+/**
+ * 構造化データを head に出す。
+ *
+ * 本文に <script> を入れると、投稿ユーザーに unfiltered_html の権限が無い場合に
+ * WordPress が除去する（管理者以外・マルチサイトでは既定で無い）。そこで投稿メタに
+ * JSON だけを入れてもらい、ここで出す。メタは文字列なので、JSON として読めたものだけを
+ * 組み直して出す（任意の HTML を出さない。< > & は \u 表記にして </script> を作らせない）
+ */
+add_action('wp_head', function () {
+    if (!is_singular('post')) {
+        return;
+    }
+    $raw = get_post_meta(get_queried_object_id(), SSQG_META_JSONLD, true);
+    if (!is_string($raw) || $raw === '') {
+        return;
+    }
+    $data = json_decode($raw, true);
+    if (!is_array($data)) {
+        return;
+    }
+    $json = wp_json_encode($data, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP);
+    if ($json === false) {
+        return;
+    }
+    echo '<script type="application/ld+json">' . $json . "</script>\n";
 });
 
 

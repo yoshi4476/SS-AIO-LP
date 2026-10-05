@@ -94,7 +94,7 @@ def test_client_article_credits_the_clients_supervisor():
         P.ROOT, S.ROOT = old_p, old_s
     src = inspect.getsource(P)
     check("nextjs-json・WordPress も同じ監修の表示を入れる",
-          [src.count("client_credit(cfg)") >= 3, "credit_jsonld(credit" in inspect.getsource(P.write_wordpress),
+          [src.count("client_credit(cfg)") >= 3, "credit_ld(credit" in inspect.getsource(P.write_wordpress),
            "credit_jsonld(credit" in inspect.getsource(P.write_nextjs_json)], [True, True, True])
     check("Person（原口）を付けるのは自社だけ", "if ap.get(\"same_as\") and not credit" in inspect.getsource(P.write_external_html), True)
 

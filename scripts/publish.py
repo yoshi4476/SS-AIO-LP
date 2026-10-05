@@ -275,14 +275,18 @@ def client_credit(cfg, url=""):
     return out
 
 
-def credit_jsonld(credit, url, meta):
+def credit_ld(credit, url, meta):
     """記事に足す構造化データ（BlogPosting に author・publisher・reviewedBy を付けたもの）"""
     ld = {"@context": "https://schema.org", "@type": "BlogPosting", "@id": url + "#article",
           "headline": meta["title"], "mainEntityOfPage": url,
           "author": credit["author"], "publisher": credit["publisher"]}
     if credit.get("reviewer"):
         ld["reviewedBy"] = credit["reviewer"]
-    return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>"
+    return ld
+
+
+def credit_jsonld(credit, url, meta):
+    return '<script type="application/ld+json">' + json.dumps(credit_ld(credit, url, meta), ensure_ascii=False) + "</script>"
 
 
 def apply_credit(page, credit, url, meta):
@@ -1006,12 +1010,15 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     import md2html
     html, _ = md2html.convert(body)
     html = insert_mid_cta(html, cfg)
-    # 監修の表示はテーマに欄が無くても出るよう本文に入れる（構造化データは unfiltered_html の権限が要る）
+    # 監修の表示はテーマに欄が無くても出るよう本文に入れる。構造化データは本文に入れない:
+    # 投稿ユーザーに unfiltered_html が無いと <script> が除去される。投稿メタ _ss_jsonld に入れ、
+    # 先方の mu-plugin（ss-quality-gate.php）が wp_head で出す
     chars = len(re.sub(r"<[^>]+>|\s", "", html))
     credit = client_credit(cfg)
+    jsonld = ""
     if credit:
-        html = (credit["byline"] + "\n" if credit["byline"] else "") + html + "\n" + \
-            credit_jsonld(credit, sites_mod.article_url(cfg, meta), meta)
+        html = (credit["byline"] + "\n" if credit["byline"] else "") + html
+        jsonld = json.dumps(credit_ld(credit, sites_mod.article_url(cfg, meta), meta), ensure_ascii=False)
     score = int(meta.get("score") or 0)
 
     cat_slug = meta["category"]
@@ -1030,7 +1037,7 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
         "excerpt": meta.get("description", ""),
         "status": "publish" if push else "draft",
         "categories": [cat_id],
-        "meta": {"_ss_quality_score": score, "_ss_written_by": "agent"},
+        "meta": {"_ss_quality_score": score, "_ss_written_by": "agent", "_ss_jsonld": jsonld},
     }
     if thumb:
         payload["featured_media"] = thumb
@@ -1056,6 +1063,11 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     print(f"  {how}: 投稿ID {res.get('id')} / カテゴリ {cat_slug}"
           + (f" / アイキャッチ {thumb}" if thumb else ""))
     print(f"  本文: {chars:,}字 / score {score}")
+    m = res.get("meta")
+    if jsonld and isinstance(m, dict) and not m.get("_ss_jsonld"):
+        # 古い mu-plugin は _ss_jsonld を登録していないので、WordPress が黙って捨てる
+        print(f"要対応: {cfg['id']} の構造化データが保存されませんでした。先方の mu-plugin を "
+              "automation/wordpress/ss-quality-gate.php の最新に差し替えてください")
 
     if status == "publish":
         print(f"  公開しました: {link}")
