@@ -626,8 +626,8 @@ def insert_tool_box(content, meta):
 # 最初の章に置く「その場で使える入口」。送り先は URL だけで動くツールに限る
 # （AI診断は地域・社名・メールが要り「登録不要」と書けない）。文言は運用者に見せた案のまま
 INLINE_TOOL = {"tool": "url_check", "path": "/tools/url-check/",
-               "head": "御社のサイト、ChatGPTやGoogleのAIに出ていますか？",
-               "sub": "URLを入れると無料で確かめられます（登録不要）", "button": "確かめる"}
+               "head": "御社のサイト、ChatGPTやGoogleのAIに読まれていますか？",
+               "sub": "URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）", "button": "確かめる"}
 
 
 def inline_tool(meta):

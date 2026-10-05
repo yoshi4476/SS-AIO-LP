@@ -48,8 +48,8 @@ def test_inline_tool_wording_and_destination():
     import build
     print("\n■ 記事の入力欄: 文言と送り先")
     t = build.INLINE_TOOL
-    check("見出しは運用者に見せた案のまま", t["head"], "御社のサイト、ChatGPTやGoogleのAIに出ていますか？")
-    check("補足は運用者に見せた案のまま", t["sub"], "URLを入れると無料で確かめられます（登録不要）")
+    check("見出しはツールが確かめる範囲を超えない（読まれているか）", t["head"], "御社のサイト、ChatGPTやGoogleのAIに読まれていますか？")
+    check("補足は何を確かめるかを書く", t["sub"], "URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）")
     h = build.inline_tool(META)
     check("入力は type=url・placeholder は https://", ('type="url"' in h, 'placeholder="https://"' in h), (True, True))
     check("ボタンは「確かめる」", ">確かめる</button>" in h, True)
