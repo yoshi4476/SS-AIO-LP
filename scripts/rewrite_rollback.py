@@ -42,7 +42,10 @@ def entries():
             d = json.loads(ln)
         except ValueError:
             continue
-        if d.get("by") != "auto_rewrite" or not d.get("ok") or not str(d.get("note", "")).startswith("直しました"):
+        # manual は人が手で変えた題を、git の履歴から before_title を取って後から足した記録
+        # （手で変えた題は台帳に残らず、28日・対照群の判定に乗らなかった）
+        if d.get("by") not in ("auto_rewrite", "manual") or not d.get("ok") \
+                or not str(d.get("note", "")).startswith("直しました"):
             continue
         # compete（競合との差を埋める書き直し）は本文を足す直しなので、直す前の原稿ごと戻す
         if (d.get("kind") == "title" and d.get("before_title")) or (d.get("kind") == "compete" and d.get("before_path")):
@@ -73,6 +76,11 @@ def restore(slug, d):
     if not m:
         return False
     fm = m.group(1)
+    # 後から足した記録は、その後に題がまた変わっていれば戻さない（後の直しまで消してしまう）
+    now = re.search(r"^title:\s*(.*)$", fm, re.M)
+    if d.get("by") == "manual" and d.get("after_title") and (now.group(1).strip().strip('"') if now else "") != d["after_title"]:
+        print(f"要対応: {slug} は記録の後に題が変わったため、自動では戻しません")
+        return False
     fm2 = re.sub(r"^title:.*$", "title: " + d["before_title"], fm, count=1, flags=re.M)
     if d.get("before_description"):
         fm2 = re.sub(r"^description:.*$", "description: " + d["before_description"], fm2, count=1, flags=re.M)

@@ -61,3 +61,33 @@ def test_content_yield_compares_same_age_cohorts():
     check("どれも判定できなければ YIELD_OK=unknown の材料になる", CY.judged(r), False)
     src = (ROOT / "scripts" / "content_yield.py").read_text(encoding="utf-8")
     check("YIELD_OK に unknown がある", "'unknown'" in src, True)
+
+
+def test_manual_title_changes_join_rollback():
+    import json
+    import tempfile
+    from pathlib import Path
+    import rewrite_rollback as R
+    print("\n■ rewrite_rollback: 手で変えた題も28日・対照群の判定に乗せる")
+    got = {d["slug"]: d for d in R.entries() if d.get("by") == "manual"}
+    check("8/25 に手で変えた2本が判定の対象に入る", sorted(got), ["aio-shindan-yarikata", "btob-llmo-taisaku"])
+    check("before_title は git の履歴（f1c6d5136 の前）の題",
+          (got["btob-llmo-taisaku"]["before_title"], got["aio-shindan-yarikata"]["before_title"]),
+          ("BtoB AI検索対策（LLMO）とは？発注候補に残る条件", "AIO診断とは？AI検索対応度がわかる8つの視点"))
+    check("変更日は 2026-08-25", {d["at"][:10] for d in got.values()}, {"2026-08-25"})
+    with tempfile.TemporaryDirectory() as td:
+        old = R.ROOT
+        try:
+            R.ROOT = Path(td)
+            (Path(td) / "articles").mkdir()
+            p = Path(td) / "articles" / "x.md"
+            d = {"by": "manual", "kind": "title", "before_title": "前の題", "after_title": "後の題"}
+            p.write_text("---\ntitle: 別の題\n---\n本文\n", encoding="utf-8")
+            check("記録の後に題が変わっていれば戻さない", (R.restore("x", d), "別の題" in p.read_text(encoding="utf-8")),
+                  (False, True))
+            p.write_text("---\ntitle: 後の題\n---\n本文\n", encoding="utf-8")
+            check("題が記録のままなら前の題へ戻せる", (R.restore("x", d), "title: 前の題" in p.read_text(encoding="utf-8")),
+                  (True, True))
+        finally:
+            R.ROOT = old
+    check("手で足した記録には印がある", all(json.dumps(x, ensure_ascii=False).count("手で") for x in got.values()), True)
