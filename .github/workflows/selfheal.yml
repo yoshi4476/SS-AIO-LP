@@ -151,6 +151,39 @@ jobs:
           $(echo "$out" | grep '^要対応' | head -5)" || true
           fi
 
+      # Bing への送り切り。鍵が無かった 2026-10-05 より前の記事は Bing にほぼ送られておらず、
+      # ChatGPT の検索は Bing の索引を使う。本番 sitemap の未送信URLを毎日枠いっぱい送る（各サイト10件は
+      # その日の新しい記事のために残す）。送り切りの記録は二度送らないためコミットする（キャッシュは消えうる）
+      - name: Bing への送信記録を戻す
+        if: github.event_name != 'workflow_run'
+        uses: actions/cache/restore@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}
+          restore-keys: bing-submit-
+
+      - name: Bing へ未送信のURLを送り切る
+        if: github.event_name != 'workflow_run'
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: |
+          mkdir -p automation/logs
+          out=$(python scripts/bing_webmaster.py --backfill 2>&1) || true
+          echo "$out" | tail -10
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          if [ -n "$(git status --porcelain -- data/bing_backfill.json)" ]; then
+            git add data/bing_backfill.json
+            git commit -q -m "Bing へ未送信のURLを送った記録 $(date '+%Y-%m-%d')"
+            git push -q || { git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; } || true
+          fi
+
+      - name: Bing への送信記録を残す
+        if: always() && github.event_name != 'workflow_run' && hashFiles('data/bing_submit.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}-backfill
+
       # 結果の見張り: 「動いたか」ではなく「出来たか」。2026-09-28〜10-03 は記事の枠が毎回「成功」なのに
       # 3サイトとも1本も書かれず、誰も気づかなかった。前日の記事の本数・公開・動画・ニュースレター・問い合わせを数える
       - name: 結果の見張り（記事・公開・動画・ニュースレター・問い合わせ）
