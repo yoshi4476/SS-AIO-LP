@@ -824,6 +824,8 @@ jobs:
         run: |
           n=2; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=1
           python scripts/auto_rewrite.py --write --kind question --limit $n --budget-min 12 2>&1 | tail -6 || true
+          # 公開2〜5週目に15位以内へ入った細い語を題・H2・FAQへ（山から落ちる前に。6週以降も残る記事の目印）
+          python scripts/auto_rewrite.py --write --kind early --limit $n --budget-min 12 2>&1 | tail -6 || true
           # AIに聞いた調査で答えが割れた問いを、記事の冒頭に調査の文のまま入れ、記事の出典だけで答える
           python scripts/auto_rewrite.py --write --kind aisplit --limit $n --budget-min 12 2>&1 | tail -6 || true
           # 流入語が説明文の先頭に無い記事の説明文だけを直す（本文が1文字でも変われば戻す）
