@@ -1,7 +1,72 @@
 {
-  "fetched": "2026-09-28",
+  "fetched": "2026-10-06",
   "sites": {
     "corporate": [
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme",
+        "slug": "theme",
+        "title": "テーマから探す"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme/keiri-bpo",
+        "slug": "keiri-bpo",
+        "title": "経理BPO・外注"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme/kicho",
+        "slug": "kicho",
+        "title": "記帳・仕訳"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme/seikyusho",
+        "slug": "seikyusho",
+        "title": "請求書・支払・経費精算"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme/getsuji",
+        "slug": "getsuji",
+        "title": "月次決算・電子帳簿"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme/jidoka",
+        "slug": "jidoka",
+        "title": "経理の自動化・ツール"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme/zokujin",
+        "slug": "zokujin",
+        "title": "属人化・人手不足"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/theme/kojin",
+        "slug": "kojin",
+        "title": "個人事業主・小規模事業者"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-kanji-chigai",
+        "slug": "keiri-kanji-chigai",
+        "title": "計理と経理は何が違う？保険の計理人・旧計理士と取り違えない3つの場面"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-dekinai-genin",
+        "slug": "tsucho-kicho-dekinai-genin",
+        "title": "通帳が記帳できない原因6つ｜ATMで戻されたときの確認順とNG"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kaikei-keiri-chigai",
+        "slug": "kaikei-keiri-chigai",
+        "title": "会計と経理の違い｜税理士に任せても社内に残る経理の作業"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-zaimu-chigai",
+        "slug": "keiri-zaimu-chigai",
+        "title": "経理と財務の違い｜兼任の社長が資金繰りで詰まる3つの落とし穴"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-kaikeishi-chigai",
+        "slug": "keiri-kaikeishi-chigai",
+        "title": "経理と会計士の違い｜中小企業が頼み先を誤る3つの落とし穴"
+      },
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-template-muryou",
         "slug": "seikyusho-template-muryou",
@@ -155,7 +220,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
         "slug": "tsucho-kicho-yarikata",
-        "title": "通帳の摘要欄はどう読む？記帳のやり方と仕訳3ステップ"
+        "title": "半年放置はNG？通帳の記帳のやり方と摘要欄の読み方"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-check-koritsuka",
@@ -325,7 +390,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-nashi",
         "slug": "gaichuuhi-seikyuusho-nashi",
-        "title": "外注費に請求書がない場合の経費計上｜証憑3つで対応"
+        "title": "現金払いは否認の落とし穴？外注費の請求書なしで経費にする証憑3つ"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/freelance-keiri-yarikata",
@@ -420,7 +485,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
         "slug": "keiri-haken-jikyu-souba",
-        "title": "経理派遣の時給相場は1,600〜2,500円｜経験・地域別の目安"
+        "title": "経理派遣の時給相場｜求人票の時給だけで比べると失敗する落とし穴"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-zangyo-herasu",
@@ -540,7 +605,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-marunage-dekiru-hani",
         "slug": "keiri-marunage-dekiru-hani",
-        "title": "経理の外注はどこまで丸投げできる？残す4業務と導入10社の実測"
+        "title": "経理の外注は丸投げNG？任せてはいけない4業務と偽装請負の落とし穴"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
@@ -625,6 +690,31 @@
         "title": "カテゴリ: 補助金の記事一覧"
       },
       {
+        "url": "https://lp.7senses.co.jp/blog/kojinjigyonushi-joseikin-shinsei-jouken/",
+        "slug": "kojinjigyonushi-joseikin-shinsei-jouken",
+        "title": "個人事業主の助成金の申請条件｜家族だけ・1人では対象外の落とし穴"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/shika-iin-joseikin-taisho/",
+        "slug": "shika-iin-joseikin-taisho",
+        "title": "歯科医院の助成金の対象は？医療法人も人数で決まる3制度"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/it-donyu-shienjigyosha-erabikata/",
+        "slug": "it-donyu-shienjigyosha-erabikata",
+        "title": "IT導入支援事業者の選び方｜契約前に断る5つの危険信号"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/inshokuten-hojokin-ikura/",
+        "slug": "inshokuten-hojokin-ikura",
+        "title": "飲食店の補助金はいくら？上限額で見積もると外れる3つの落とし穴"
+      },
+      {
+        "url": "https://lp.7senses.co.jp/blog/inshokuten-joseikin-jouken/",
+        "slug": "inshokuten-joseikin-jouken",
+        "title": "飲食店の助成金の条件｜22都道府県で業務改善助成金が締切済み"
+      },
+      {
         "url": "https://lp.7senses.co.jp/blog/nougyou-shoki-hiyou-hojokin/",
         "slug": "nougyou-shoki-hiyou-hojokin",
         "title": "農業の初期費用は平均755万円｜費目別に使える補助金4つ"
@@ -680,19 +770,9 @@
         "title": "宿泊業のAI導入補助金はいくら？契約額50万円が分かれ目"
       },
       {
-        "url": "https://lp.7senses.co.jp/blog/oroshiurigyou-ai-hojokin-ochiru-riyu/",
-        "slug": "oroshiurigyou-ai-hojokin-ochiru-riyu",
-        "title": "卸売業のAI導入補助金｜審査で落ちる3つの盲点と対処法"
-      },
-      {
         "url": "https://lp.7senses.co.jp/blog/shigyou-ai-hojokin-teishutsu-shorui/",
         "slug": "shigyou-ai-hojokin-teishutsu-shorui",
         "title": "士業事務所のAI導入補助金｜提出書類の名義は3パターン"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/doubutsu-byouin-ai-hojokin-taisho-youken/",
-        "slug": "doubutsu-byouin-ai-hojokin-taisho-youken",
-        "title": "動物病院はAI導入補助金の対象になるか｜医療法人になれない業種特有の2つの基準"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/kaigo-ai-hojokin-hojogaku-meyasu/",
@@ -727,7 +807,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/inshokuten-ai-hojokin-ochiru-riyu/",
         "slug": "inshokuten-ai-hojokin-ochiru-riyu",
-        "title": "飲食店のAI導入補助金｜落ちる理由と現場の6つの原因【2026年】"
+        "title": "飲食店のAI導入補助金で落ちる理由6つと卸売業の違い【2026年】"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/inshokuten-ai-hojokin-shinsei-susumekata/",
@@ -737,7 +817,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/inshokuten-ai-hojokin-taisho-youken/",
         "slug": "inshokuten-ai-hojokin-taisho-youken",
-        "title": "飲食店のAI導入補助金 対象要件｜資本金・従業員数など5つの基準【2026年】"
+        "title": "飲食店のAI導入補助金 対象要件｜動物病院も含む業種別の判定基準【2026年】"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/nougyou-kikai-hojokin/",
@@ -767,7 +847,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/nougyou-shoki-hiyou/",
         "slug": "nougyou-shoki-hiyou",
-        "title": "農業はAI導入補助金の対象になるか｜条件と使えるソフト"
+        "title": "農業はAI導入補助金の対象か｜トラクターは対象外になる落とし穴"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/shukuhakugyou-hojokin-erabikata/",
@@ -847,7 +927,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-jidousha-seibi/",
         "slug": "jizokuka-hojokin-jidousha-seibi",
-        "title": "小規模事業者持続化補助金｜自動車整備業の経費区分3つと注意点"
+        "title": "小規模事業者持続化補助金 自動車整備｜部品代・代車は対象外の落とし穴"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-jidousha-seibi/",
@@ -942,12 +1022,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-gakushujuku/",
         "slug": "it-hojokin-gakushujuku",
-        "title": "学習塾はIT導入補助金の対象？入退室通知と課金の境界線"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-nougyou-jirei/",
-        "slug": "jigyou-saikouchiku-nougyou-jirei",
-        "title": "事業再構築補助金で農業が使えたのは6次産業化｜対象外の境界線"
+        "title": "IT導入補助金 学習塾の落とし穴｜生徒への課金は対象外、入退室通知は対象"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-jirei/",
@@ -962,7 +1037,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-shukuhakugyou-jirei/",
         "slug": "jigyou-saikouchiku-shukuhakugyou-jirei",
-        "title": "宿泊業のインバウンド投資を支えた事業再構築補助金、今の姿は"
+        "title": "事業再構築補助金 宿泊業と農業の採択事例｜今使える後継制度"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
@@ -1002,7 +1077,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-clinic-2026-schedule/",
         "slug": "ai-hojokin-clinic-2026-schedule",
-        "title": "AI導入補助金2026｜クリニックの次の締切と今から動く3ステップ"
+        "title": "AI導入補助金2026 クリニックの落とし穴｜交付決定前の契約は対象外"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/",
@@ -1012,7 +1087,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-biyoushitsu-jirei/",
         "slug": "jigyou-saikouchiku-biyoushitsu-jirei",
-        "title": "事業再構築補助金 美容室の脱毛転換3事例｜美容師法の注意点"
+        "title": "事業再構築補助金 美容室・建設業の転換事例｜許可と免許の注意点"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-biyoushitsu-kakikata/",
@@ -1022,7 +1097,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-biyoushitsu/",
         "slug": "monozukuri-hojokin-biyoushitsu",
-        "title": "ものづくり補助金は美容室で使える？対象機器と上限750万円の目安"
+        "title": "ものづくり補助金は美容室・小売業で使える？対象投資と上限額"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/unsougyou-jissekihoukokusho/",
@@ -1040,11 +1115,6 @@
         "title": "ものづくり補助金は運送業も使える？新事業進出枠とトラックの線引き"
       },
       {
-        "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kensetsugyou-jirei/",
-        "slug": "jigyou-saikouchiku-kensetsugyou-jirei",
-        "title": "事業再構築補助金は建設業も対象｜3つの事例と今の後継制度"
-      },
-      {
         "url": "https://lp.7senses.co.jp/blog/jizokuka-hojokin-kensetsugyou/",
         "slug": "jizokuka-hojokin-kensetsugyou",
         "title": "小規模事業者持続化補助金2025｜建設業の対象条件と経費"
@@ -1053,11 +1123,6 @@
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kensetsugyou-jirei/",
         "slug": "monozukuri-hojokin-kensetsugyou-jirei",
         "title": "ものづくり補助金｜建設業の採択事例3業種と上限9,000万円"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kourigyou/",
-        "slug": "monozukuri-hojokin-kourigyou",
-        "title": "ものづくり補助金は小売業に使えない？対象になる投資の見極め方"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-inshokuten-jirei/",
@@ -1240,79 +1305,19 @@
         "title": "AI導入補助金の申請に失敗する5つの原因と対策"
       },
       {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kourigyou-katsuyou/",
-        "slug": "ai-hojokin-kourigyou-katsuyou",
-        "title": "AI導入補助金を小売業で活用する方法｜2026年版・事例と申請の流れ"
+        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-futaitaku-riyu/",
+        "slug": "ai-hojokin-futaitaku-riyu",
+        "title": "AI導入補助金の不採択理由7つと再申請までにやるべき対策"
       },
       {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-seizougyou-jirei-2026/",
-        "slug": "ai-hojokin-seizougyou-jirei-2026",
-        "title": "AI導入補助金 製造業の事例2026｜採択の進め方と着金まで"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kaikei-soft-taisho/",
-        "slug": "ai-hojokin-kaikei-soft-taisho",
-        "title": "AI導入補助金の会計ソフト対象条件｜2026年版 選び方と申請手順"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-lp-seisaku-hojo/",
-        "slug": "ai-hojokin-lp-seisaku-hojo",
-        "title": "AI導入補助金でLP制作は補助対象？2026年最新の条件と流れ"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-hitsuyo-shorui-kojin/",
-        "slug": "ai-hojokin-hitsuyo-shorui-kojin",
-        "title": "AI導入補助金 個人事業主の必要書類｜2026年最新の準備チェックリスト"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kobe-shinsei-support/",
-        "slug": "ai-hojokin-kobe-shinsei-support",
-        "title": "AI導入補助金 神戸の申請サポート完全ガイド【2026年最新】採択率と流れ"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-kyoto-shinsei-daiko/",
-        "slug": "ai-hojokin-kyoto-shinsei-daiko",
-        "title": "AI導入補助金の申請代行を京都で頼む前に｜2026年最新・費用と選び方"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-fukuoka-soudan/",
-        "slug": "ai-hojokin-fukuoka-soudan",
-        "title": "AI導入補助金 福岡の相談窓口2026｜採択率を上げる無料相談の使い方"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-nagoya-support/",
-        "slug": "ai-hojokin-nagoya-support",
-        "title": "AI導入補助金 名古屋のサポート先の選び方【2026年版】採択率・費用・流れを解説"
+        "url": "https://lp.7senses.co.jp/blog/ai-donyu-hojokin-jirei/",
+        "slug": "ai-donyu-hojokin-jirei",
+        "title": "AI導入補助金の活用事例5選｜補助額と申請枠の選び方【2026年】"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-security-action-2star/",
         "slug": "ai-hojokin-security-action-2star",
         "title": "AI導入補助金2026｜SECURITY ACTION二つ星の宣言手順と注意点"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-homepage-taisho/",
-        "slug": "ai-hojokin-homepage-taisho",
-        "title": "2026年 AI導入補助金でホームページ制作は対象?対象範囲と注意点を解説"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-it-hojokin-chigai/",
-        "slug": "ai-hojokin-it-hojokin-chigai",
-        "title": "AI導入補助金とIT導入補助金の違いは?結論は同じ制度【2026年の呼び方】"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-osaka-chusho/",
-        "slug": "ai-hojokin-osaka-chusho",
-        "title": "【2026年版】中小企業のAI導入補助金｜大阪の申請サポートと採択の進め方"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru-2026/",
-        "slug": "ai-hojokin-ikura-moraeru-2026",
-        "title": "AI導入補助金2026はいくらもらえる?上限350万円と対象を解説"
-      },
-      {
-        "url": "https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool-2026/",
-        "slug": "ai-hojokin-taisho-tool-2026",
-        "title": "AI導入補助金2026年最新版｜対象ツールの定義と選び方ガイド"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-guide-2026/",
