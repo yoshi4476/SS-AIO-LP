@@ -213,7 +213,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "AIOチェッカーとは何を調べる道具ですか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "検索語にAI Overviewが出るかと、その回答に自社ページが引用されるかを確かめる道具です。"
+      "text": "AI Overviewの表示と自社の引用を確かめる道具です。当社は主要AIクローラー20種を許可し、引用を日次で計測しています。"
      }
     },
     {
@@ -325,7 +325,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <div class="article-body">
       <figure class="article-video" style="margin:24px 0"><div style="position:relative;padding-top:56.25%;background:#0b1830;border-radius:12px;overflow:hidden"><iframe src="https://www.youtube-nocookie.com/embed/4_wtV9p1d7Y" title="AIOチェッカーとは？表示と引用を見分ける使い方" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div><figcaption style="font-size:.85em;color:#5b6980;margin-top:6px">この記事の要点を約4分の動画にまとめています（本文と同じ内容です）</figcaption></figure>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "AIOチェッカーとは？表示と引用を見分ける使い方", "description": "AIOチェッカーは、AI Overviewの表示と自社の引用を確かめる道具です。測るもの別の4種類、点数を信じすぎない理由、結果別に次にやることを自社の実測つきで解説します。確かめられるものは「表示」と「引用」の2つだけで、点数でサイトを採点する診断ツールとは役割が違います。", "thumbnailUrl": "https://i.ytimg.com/vi/4_wtV9p1d7Y/hqdefault.jpg", "uploadDate": "2026-10-03", "duration": "PT4M45S", "embedUrl": "https://www.youtube.com/embed/4_wtV9p1d7Y", "contentUrl": "https://www.youtube.com/watch?v=4_wtV9p1d7Y"}</script>
-<p><strong>AIOチェッカーとは、検索語にAI Overviewが出るか、そしてその回答に自社ページが引用されているかを確かめる道具です。</strong>確かめられるものは「表示」と「引用」の2つだけで、点数でサイトを採点する診断ツールとは役割が違います。本記事では、チェッカーを測るもの別に4種類へ分け、結果を見てから次に何をするかまでを整理します。</p>
+<p><strong>AIOチェッカーとは、検索語にAI Overviewが出るか、そしてその回答に自社ページが引用されているかを確かめる道具です。</strong>確かめられるものは「表示」と「引用」の2つだけで、点数でサイトを採点する診断ツールとは役割が違います。当社はMEO運用サービス「G-ran」で通算3,200店舗以上を運用し、自社サイトでは主要AIクローラー20種の許可と引用状況の日次計測を続けています。その実測をもとに、チェッカーを測るもの別に4種類へ分け、結果を見てから次に何をするかまでを整理します。</p>
 <div class="target-reader">この記事は、自社サイトがAI検索に引用されているかを自分で確かめたい中小企業の経営者・Web担当者向けです。</div>
 
 <p class="freshness">※ 2026年9月時点の情報です。</p>
@@ -334,6 +334,27 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h2 id="aio2">AIOチェッカーとは？確かめられるのは表示と引用の2つ</h2>
 <p><strong>AIOチェッカーで分かるのは「その語でAI Overviewが出るか」と「自社が引用されるか」の2点です。</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">確かめたいこと</th>
+<th style="text-align: left;">見る場所</th>
+<th style="text-align: left;">結果の読み方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">AI Overviewが出るか</td>
+<td style="text-align: left;">狙う語の検索結果</td>
+<td style="text-align: left;">出なければ順位の改善を優先</td>
+</tr>
+<tr>
+<td style="text-align: left;">自社が引用されるか</td>
+<td style="text-align: left;">AI Overviewの出典欄</td>
+<td style="text-align: left;">出典になければ中身を直す</td>
+</tr>
+</tbody>
+</table></div>
 <p>実測の参考として、当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（出典: 自社サイトの実装）。</p>
 <div class="definition-box"><span class="term">AIOチェッカーとは</span>、指定した検索語でGoogleのAI Overview（検索結果上部のAIによる要約）が表示されるかと、その要約の出典に自社ページが入っているかを確かめる道具や手順のことです。</div>
 
@@ -389,7 +410,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <div class="caution-box"><span class="box-title">注意: 点数と引用は別物です</span><br>llms.txtの有無で加点するチェッカーで満点を取っても、Googleの引用が増える根拠にはなりません。<strong>点数は設定の確認、引用は実績の確認</strong>と分けて扱ってください。</div>
 
 <p>順位だけを見るチェッカーにも限界があります。先ほどの<a href="https://arxiv.org/abs/2605.14021" target="_blank" rel="noopener">arXivの実測</a>では、AI Overviewに引用されたドメインの<strong>約30%は1ページ目に出ていません</strong>でした。順位とは別の選び方があるということです。</p>
-<p>当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。私たちの実感でも、設定を全部そろえた記事がそのまま引用されるわけではありません。</p>
+<p>当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。私たちの実感でも、設定を全部そろえた記事がそのまま引用されるわけではありません。失敗例として、20種のクローラー許可を終えた記事でも、冒頭に他所と同じ説明しか無ければ引用の対象になりません。</p>
 <h2 id="_2">チェッカーの結果を記録して前月と比べる方法</h2>
 <p><strong>チェックは1回では意味が薄く、同じ語を同じ条件で月1回記録して前月と比べることで直す場所が見えます。</strong></p>
 <p>AI Overviewは日によって出たり消えたりします。1回の結果で判断すると、たまたま出なかった日の結果で記事を書き換えることになります。</p>
@@ -448,7 +469,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>AI検索への対応で抜けている箇所は、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要で、その場で点数が出ます。</p>
 <h2 id="_4">よくある質問</h2>
 <div class="faq">
-<details><summary>AIOチェッカーとは何を調べる道具ですか？</summary><p class="faq-a">検索語にAI Overviewが出るかと、その回答に自社ページが引用されるかを確かめる道具です。</p></details>
+<details><summary>AIOチェッカーとは何を調べる道具ですか？</summary><p class="faq-a">AI Overviewの表示と自社の引用を確かめる道具です。当社は主要AIクローラー20種を許可し、引用を日次で計測しています。</p></details>
 <details><summary>無料のAIOチェッカーだけで足りますか？</summary><p class="faq-a">狙う語が10個程度なら、手動の検索とSearch Consoleの組み合わせで足ります。</p></details>
 <details><summary>チェッカーの点数が高ければ引用されますか？</summary><p class="faq-a">引用は保証されません。点数の多くはサイトの設定を見ており、引用の実績とは別物です。</p></details>
 <details><summary>どのくらいの頻度で確かめればよいですか？</summary><p class="faq-a">月1回、同じ語・同じ条件で記録し、前月と比べる運用が続けやすい頻度です。</p></details>

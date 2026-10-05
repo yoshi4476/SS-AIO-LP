@@ -81,6 +81,8 @@ faq:
 
 会社員時代と独立後の最大の違いは、集客の主体が会社から個人に移り、反響がゼロから自分の発信次第になる点です。
 
+近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
+
 <a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。新規参入が増え続ける市場では、看板の大きさより「誰が担当するか」が選ばれる決め手になりやすくなっています。
 
 さらに<a href="https://www.pref.osaka.lg.jp/documents/2099/senntori.pdf" target="_blank" rel="noopener">大阪府</a>の解説によると、宅建業法上、事務所には従業者5人につき1人以上の割合で専任の宅地建物取引士を置く義務があります。1人事務所であっても本人が専任宅建士として登録されていれば開業でき、==制度上は個人でも会社と同じ土俵に立てる==点は独立を後押しする材料です。
@@ -138,8 +140,6 @@ faq:
 ## 個人の不動産集客を仕組み化する3ステップ
 
 個人の不動産集客は、発信の準備、実績の蓄積、紹介の仕組み化という3ステップで安定させます。
-
-前提となる考え方は[OB客紹介の仕組み化とは？](/ai-marketing/obkyaku-shoukai-shikumi/)でも扱っています。
 
 <figure><img src="/images/fudousan-kojin-shukyaku/steps.png" alt="個人の不動産集客を仕組み化する3ステップ: 顔を出すでプロフィールと得意分野を明示する、実績を残すで成約事例を1件ずつ蓄積する、紹介を仕組み化するでOB客への定期連絡をルール化する" loading="lazy"><figcaption>個人の不動産集客を仕組み化する3ステップ</figcaption></figure>
 

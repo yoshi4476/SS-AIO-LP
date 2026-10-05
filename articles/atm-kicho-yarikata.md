@@ -49,7 +49,6 @@ faq:
 
 ATMで引き出した現金の記帳は、引き出した現金を何に使うかで仕訳の形が変わります。
 
-
 近い論点を[開業したばかりの経理代行、使うべき？判断基準3つ](/blog/keiri-daiko-kaigyou/)で扱っています。
 
 実際の進め方は[銀行口座の記帳のやり方](/blog/ginko-kicho-yarikata/)で整理しています。
@@ -100,7 +99,6 @@ ATM手数料は、事業に関連する引き出しなら「支払手数料」�
 
 法人には事業主貸・事業主借という勘定科目がなく、従業員の立替やATMでの概算払いは立替金・仮払金で処理します。
 
-
 近い論点を[月次決算とは？初心者向けの基本と進め方5ステップ](/blog/getsuji-kessan-nyumon/)で扱っています。
 
 | 項目 | 個人事業主 | 法人 |
@@ -119,9 +117,9 @@ ATM手数料は、事業に関連する引き出しなら「支払手数料」�
 
 ATM記帳でよくあるミスは、明細の紛失、手数料の記帳漏れ、現金出納帳と通帳残高を照合しないことの3つです。
 
-関連する内容は、[通帳が記帳できない原因6つ](/blog/tsucho-kicho-dekinai-genin)で解説しています。
+関連する内容として[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)も公開しています。
 
-関連する内容として[通帳の摘要欄はどう読む？記帳のやり方と仕訳3ステップ](/blog/tsucho-kicho-yarikata/)も公開しています。
+関連する内容は、[通帳が記帳できない原因6つ](/blog/tsucho-kicho-dekinai-genin)で解説しています。
 
 <figure><img src="/images/atm-kicho-yarikata/step.png" alt="ATM引き出しから記帳までの4ステップ: ATMで引き出す、明細を保管する、勘定科目で仕訳る、通帳残高と照合する" loading="lazy"><figcaption>ATM引き出しから記帳までの4ステップ</figcaption></figure>
 
@@ -165,7 +163,6 @@ ATM引き出しの記帳を仕組み化したい場合は、現金出納帳をEx
 <details><summary>ATM記帳のミスを防ぐにはどうすればいいですか？</summary><p class="faq-a">明細をその場で保管し、現金出納帳と通帳残高を月次で突き合わせる習慣が有効です。</p></details>
 <details><summary>ATMの記帳作業が負担なときはどうすればいいですか？</summary><p class="faq-a">ATM分を含む日々の記帳を経理BPOに外注し、突合作業ごと任せる選択肢があります。</p></details>
 </div>
-
 
 毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 

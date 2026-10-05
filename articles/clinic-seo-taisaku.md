@@ -43,6 +43,9 @@ faq:
 
 **クリニックSEOは、地図検索ではなく一般検索での自院サイトの掲載順位を高める施策です。**同じ集患施策でも、狙う検索結果の場所がMEO・AIOとは異なります。
 
+選ぶときの基準は、[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)で解説しています。
+
+選ぶときの基準は[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)でも扱っています。
 
 近い論点を[医療機関のMEO対策](/meo/iryou-meo-taisaku/)で扱っています。
 
@@ -106,7 +109,6 @@ YMYLとは「Your Money or Your Life」の略で、健康や生命に影響す�
 
 体験談の扱いにも注意が必要です。患者の感想をそのまま掲載する場合、治療効果を保証しているように読めないか、公開前に必ず見直してください。個人の感想であることが伝わる書き方に整えるだけで、規制違反のリスクは大きく下がります。
 
-
 自社サイトの技術面が基準を満たしているかは、[サイトの技術チェック（無料・URL入力だけ）](/tools/url-check/)で確かめられます。登録は不要で、その場で点数が出ます。
 
 ## クリニックSEOの効果が出るまでの期間と見極め方
@@ -132,10 +134,6 @@ YMYLとは「Your Money or Your Life」の略で、健康や生命に影響す�
 ## クリニックSEOでよくある失敗と回避策
 
 **クリニックSEOでよくある失敗は、監修者情報の欠如・MEO偏重・表現規制の見落としの3つです。**どれも致命的ではありませんが、気づかないまま長期間放置されがちです。
-
-関連する内容は[オンライン診療チェックリスト](/ai-marketing/online-shinryo-checklist/)で整理しています。
-
-つまずきやすい点は[クリニックのSEOコンサルティング](/seo/clinic-seo-consulting-erabikata/)で整理しています。
 
 <figure><img src="/images/clinic-seo-taisaku/mistakes.png" alt="クリニックSEOでよくある失敗3つ: 監修者情報がない、MEOだけに偏る、表現規制を見落とす" width="1200" height="675" loading="lazy"><figcaption>クリニックSEOでよくある失敗3つ（当メディア作成）</figcaption></figure>
 

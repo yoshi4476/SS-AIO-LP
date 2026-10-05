@@ -138,7 +138,7 @@ OB客紹介の伸び悩みは、接点の途切れ・依頼タイミングの欠
 
 OB客管理は、引き渡し日・フォロー日・紹介実績をスプレッドシートで一元管理すれば十分です。
 
-関連して、[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)もあわせてご確認ください。
+関連して、[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-donyu-hoho/)もあわせてご確認ください。
 
 <figure><img src="/images/obkyaku-shoukai-shikumi/kanri-flow.png" alt="OB客管理を仕組み化する3ステップ: 引き渡し時に記録、定期的にフォロー、紹介時にお礼を伝える" loading="lazy"><figcaption>OB客管理を仕組み化する3ステップ</figcaption></figure>
 

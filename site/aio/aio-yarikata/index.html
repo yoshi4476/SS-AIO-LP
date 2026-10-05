@@ -228,7 +228,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "AIOのやり方はどこから手をつければいいですか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "まずrobots.txtでAIクローラーを許可し、次に本文の冒頭を断言型に書き直します。"
+      "text": "まずrobots.txtでAIクローラーを許可し、次に冒頭を断言型に直します。当社は3,200店舗以上のMEO運用の知見を踏まえ20種を許可しています。"
      }
     },
     {
@@ -354,7 +354,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       </div>
     </aside>
     <div class="article-body">
-      <p><strong>AIOのやり方は、クローラーの受け入れ整備→本文の断言型書き換え→数値ファクトの追加→FAQの整備→公開後の計測という5ステップです。</strong>個別の技を1つ試すだけでは効果が出にくく、この順番を守って組み合わせる必要があります。</p>
+      <p><strong>AIOのやり方は、クローラーの受け入れ整備→本文の断言型書き換え→数値ファクトの追加→FAQの整備→公開後の計測という5ステップです。</strong>当社はMEO運用サービス「G-ran」で通算3,200店舗以上を運用し、自社サイトでは主要AIクローラー20種の許可と構造化データ・llms.txtを実装して引用状況を日次で計測しています。その実測から言えるのは、個別の技を1つ試すだけでは効果が出にくく、この順番を守って組み合わせる必要があるということです。</p>
 <div class="target-reader">この記事は、自社サイトのAIO対策を自分の手で進めたい中小企業の経営者・マーケティング担当者向けです。</div>
 
 <p class="freshness">※ 2026年9月時点の情報です。</p>
@@ -363,9 +363,45 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h2 id="aio">AIOのやり方とは？何から始めればいいか</h2>
 <p><strong>AIOのやり方とは、クローラーの受け入れ・文章の構造・計測の3つを同時に整える作業のことです。</strong>どれか1つが欠けても、AI検索に引用される確率は上がりません。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">ステップ</th>
+<th style="text-align: left;">やること</th>
+<th style="text-align: left;">最初の確認点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">クローラーを許可し構造化データを整える</td>
+<td style="text-align: left;">robots.txtでAIクローラーが許可されているか</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">本文を断言型に書き直す</td>
+<td style="text-align: left;">冒頭200字が「◯◯は◯◯です」で始まっているか</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">数値ファクトを出典付きで足す</td>
+<td style="text-align: left;">本文に出典と時点つきの数値が3箇所以上あるか</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">FAQを5問以上整える</td>
+<td style="text-align: left;">本文とFAQPageの文言が一致しているか</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">公開後に計測して直す</td>
+<td style="text-align: left;">GSCとGA4で月1回確認しているか</td>
+</tr>
+</tbody>
+</table></div>
+<p>近い論点を<a href="/ai-marketing/clinic-instagram-yarikata/">クリニックのインスタ集客のやり方</a>で扱っています。</p>
 <p>近い論点を<a href="/aio/llmo-dairiten-boshu/">LLMO代理店募集の見分け方｜確認すべき5つの条件</a>で扱っています。</p>
 <p>あわせて<a href="/aio/aio-towa/">AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説</a>もご覧ください。</p>
-<p>近い論点を<a href="/aio/aio-donyu-jirei/">AIO導入事例｜自社サイトで実践した4施策と数値</a>で扱っています。</p>
 <div class="definition-box"><span class="term">AIOのやり方とは</span>、AI検索(AI Overview・ChatGPT等)が本文をそのまま抜き出して回答に使える状態を、技術設定と文章の両面からつくる一連の作業のことです。</div>
 
 <p>似た記事に<a href="/aio/aio-taisaku-donyu-hoho/">AIO対策の導入方法</a>がありますが、扱う範囲が異なります。導入方法は体制づくりを中心とした話で、本記事は記事1本ごとに手を動かす実務手順に絞っています。まず<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方</a>で現状を採点してから、本記事の手順に進むと迷いません。</p>
@@ -440,6 +476,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <p>失敗1つ目は、<strong>前置きから書き始めてしまうこと</strong>です。結論を後回しにすると、AIが要約する前に文章が切れてしまいます。失敗2つ目は、<strong>FAQを本文と構造化データで食い違わせること</strong>です。文言を後から一方だけ直し、もう一方が古いままというケースをよく見ます。</p>
 <p>失敗3つ目は、<strong>数値ファクトに出典と時点を書かないことです。</strong>根拠のない数値は、確認できないという理由で引用の対象から外れやすくなります。私たちも自社メディアの運用で、出典を明記した記事ほど計測データが安定して伸びることを確認しています。</p>
+<p>具体例として、当社は主要AIクローラー20種の許可を実装して引用状況を日次で計測していますが、この許可設定が外れたまま本文だけを直しても、計測上の変化は読み取れません。設定と本文の両方を確認する癖が必要です。</p>
 <p>失敗4つ目は、<strong>代名詞を多用して主語をあいまいにすることです。</strong>「これ」「それ」で文をつなぐと、見出し直下の1文だけを読んだときに何を指すか伝わらなくなります。</p>
 <p>AIの回答に自社サイトが載る準備ができているかは、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録なしで、その場で点数が表示されます。</p>
 <h2 id="aio_2">AIOのやり方は自分でやるべきか、外部に任せるべきか</h2>
@@ -487,7 +524,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h2 id="_1">よくある質問</h2>
 <div class="faq">
-<details><summary>AIOのやり方はどこから手をつければいいですか？</summary><p class="faq-a">まずrobots.txtでAIクローラーを許可し、次に本文の冒頭を断言型に書き直します。</p></details>
+<details><summary>AIOのやり方はどこから手をつければいいですか？</summary><p class="faq-a">まずrobots.txtでAIクローラーを許可し、次に冒頭を断言型に直します。当社は3,200店舗以上のMEO運用の知見を踏まえ20種を許可しています。</p></details>
 <details><summary>AIOのやり方に専門知識は必要ですか？</summary><p class="faq-a">基礎の8割はHTMLの知識がなくても、本文と設定ファイルの書き換えで対応できます。</p></details>
 <details><summary>AIOのやり方とSEOのやり方は別物ですか？</summary><p class="faq-a">土台は同じです。検索上位表示を前提に、抽出されやすい構造を追加で整えます。</p></details>
 <details><summary>AIOのやり方を実践すると何日で効果が出ますか？</summary><p class="faq-a">個別記事の書き換えは数日、クローラー設定は反映まで数週間かかることがあります。</p></details>

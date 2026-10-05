@@ -91,8 +91,6 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 近い論点を[整骨院がAI検索に表示されない5つの理由](/aio/seikotsuin-hiyou-heikin/)で扱っています。
 
-関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
-
 順位だけでなく、この5つを毎月並べて見ることで、記事のどこに手を入れるべきかが分かります。
 
 | 指標 | 何が分かるか | 主な確認先 |

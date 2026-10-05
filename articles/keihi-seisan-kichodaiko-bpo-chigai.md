@@ -91,7 +91,7 @@ faq:
 
 違いは「チェックの有無」「対応範囲」「向いている企業規模」の3点です。
 
-関連する内容として[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)も公開しています。
+実際の進め方は[経理BPOの選び方6つ｜失敗しない比較の視点と手順](/blog/keiri-bpo-erabikata/)でも扱っています。
 
 <figure><img src="/images/keihi-seisan-kichodaiko-bpo-chigai/chigai.png" alt="記帳代行と経理BPOの違い: 記帳代行は入力中心でチェックは対象外、経理BPOはチェックから記帳まで一括対応" loading="lazy"><figcaption>記帳代行と経理BPOの違い</figcaption></figure>
 

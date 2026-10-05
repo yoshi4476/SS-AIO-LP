@@ -114,6 +114,8 @@ faq:
 
 記帳代行の失敗は、範囲の思い込みと資料引き継ぎ不足から起きることがほとんどです。
 
+あわせて[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)もご覧ください。
+
 関連する内容として[記帳代行は税理士法違反？3つの独占業務とNG事例](/blog/kichodaiko-zeirishihou-ihan/)も公開しています。
 
 <figure><img src="/images/kichodaiko-toha/shippai.png" alt="記帳代行で起きやすい失敗3つ: 範囲を思い込んで契約する、税務相談まで任せられると誤解する、資料を渡さないまま運用を始める" loading="lazy"><figcaption>記帳代行で起きやすい失敗3つ</figcaption></figure>
@@ -133,8 +135,6 @@ faq:
 ## 記帳代行の料金相場はどのくらいか
 
 記帳代行の料金相場は、仕訳数に応じた月額制が中心です。
-
-近い論点を[小規模事業者の経理体制の作り方](/blog/shokibo-jigyousha-keiri-taisei/)で扱っています。
 
 弥生株式会社が公開する<a href="https://www.yayoi-kk.co.jp/zeirishi/oyakudachi/market_price/" target="_blank" rel="noopener">「記帳代行の料金相場」</a>によると、**記帳代行専門会社では月間仕訳数100〜250件程度で月額6,000〜2万円が目安**とされています。
 

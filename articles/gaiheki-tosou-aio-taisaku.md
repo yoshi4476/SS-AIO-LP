@@ -76,6 +76,8 @@ AIOの基本的な仕組みは[AIOとは？AI Overviewの仕組み](/aio/aio-tow
 
 **AIに候補から外される塗装業者は、見積もり・事例・エリア・保証・営業方法のどれかが確かめられない状態です。**
 
+近い論点を[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)で扱っています。
+
 関連する内容として[AIOサービス比較で外す5つの落とし穴](/aio/aio-service-hikaku/)も公開しています。
 
 ![AIに候補から外される塗装業者の5つの共通点](/images/gaiheki-tosou-aio-taisaku/hazusareru-5.png)
@@ -147,6 +149,8 @@ AIの回答に自社サイトが載る準備ができているかは、[AI検索
 ## 一括見積もりサイト頼みか自社集客か：状況別の進め方
 
 **一括見積もりサイトからの受注が中心なら、まず見積書の項目と施工事例の条件を自社サイトに移すところから始めます。**
+
+関連する内容として[歯科医院の閉院費用とは？](/meo/shika-heiin-hiyou/)も公開しています。
 
 ![外壁塗装のAIO対策を始める順番](/images/gaiheki-tosou-aio-taisaku/junban-flow.png)
 

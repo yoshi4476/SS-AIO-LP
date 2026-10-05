@@ -47,6 +47,8 @@ faq:
 
 不動産の集客代行とは、反響を生むまでの集客業務を、社内で抱え込まず外部の専門会社に任せる選択肢です。
 
+関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
+
 近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
 
 実際の進め方については、[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)にまとめています。
@@ -66,8 +68,6 @@ faq:
 ## 集客代行を検討すべき3つのサイン
 
 集客代行を検討すべきサインは、反響の横ばい・運用時間の不足・社内ノウハウの不在という3つに整理できます。
-
-あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
 
 <figure><img src="/images/fudousan-shukyaku-daikou/sign.png" alt="集客代行を検討すべき3つのサイン: 反響が横ばいで増えない、運用に割く時間が足りない、社内にノウハウが蓄積しない" loading="lazy"><figcaption>集客代行を検討すべき3つのサイン</figcaption></figure>
 

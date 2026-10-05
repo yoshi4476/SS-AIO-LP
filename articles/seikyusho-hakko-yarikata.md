@@ -90,9 +90,9 @@ faq:
 
 請求書の発行は、記載項目を確認する・請求書を作成する・取引先へ送付する・控えを保存する、という4ステップで進めます。
 
-関連する内容として[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)も公開しています。
+あわせて[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)もご覧ください。
 
-あわせて[請求書封筒の書き方｜宛名・在中表記・差出人の3つの基本](/blog/seikyusho-fuutou-kakikata/)もご覧ください。
+関連する内容として[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)も公開しています。
 
 <figure><img src="/images/seikyusho-hakko-yarikata/step.png" alt="請求書発行の基本4ステップ: 記載項目を確認する、請求書を作成する、取引先へ送付する、控えを保存する" loading="lazy"><figcaption>請求書発行の基本4ステップ</figcaption></figure>
 

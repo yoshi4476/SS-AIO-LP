@@ -67,7 +67,7 @@ diagrams:
 
 **整骨院向け集客セミナーは、業界団体系・公的機関系・ツールベンダー系・コンサル会社系の4種類に分かれます。**
 
-関連する内容として[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)も公開しています。
+関連する内容として[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-donyu-hoho/)も公開しています。
 
 <figure><img src="/images/seikotsuin-shukyaku-seminar/types.png" alt="整骨院向け集客セミナーの4つの種類: 業界団体・士業系セミナー、商工会議所・公的機関系セミナー、ツールベンダー系セミナー、集客コンサル会社系セミナー" loading="lazy"><figcaption>整骨院向け集客セミナーの4つの種類</figcaption></figure>
 

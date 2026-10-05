@@ -47,9 +47,11 @@ faq:
 
 工務店のインスタ集客とは、施工事例や家づくりの過程を発信し、来場予約や問い合わせにつなげる取り組みです。
 
-関連する内容として[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)も公開しています。
+近い論点を[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)で扱っています。
 
-関連して、[住宅会社のInstagram連携とは？](/ai-marketing/jutaku-instagram-renkei/)もあわせてご確認ください。
+実際の進め方は[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で整理しています。
+
+関連する内容として[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)も公開しています。
 
 <div class="definition-box"><span class="term">工務店のインスタ集客とは</span>、Instagramのビジネスアカウントで施工事例・スタッフの人柄・家づくりの豆知識を発信し、フォロワーとの接点を積み上げて来場予約や問い合わせにつなげる一連の活動を指します。単なる写真置き場ではなく、比較検討中の見込み客との継続的な接点づくりが本来の目的です。</div>
 
@@ -99,8 +101,6 @@ faq:
 ## 工務店インスタ集客を成功させる5つの施策
 
 工務店インスタ集客の成功は、プロフィール整備から問い合わせ導線までの5つの施策で決まります。
-
-関連する内容として[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)も公開しています。
 
 <figure><img src="/images/koumuten-instagram-shukyaku/steps.png" alt="工務店インスタ集客を成功させる5つの施策: プロフィール整備、施工事例を投稿、ハッシュタグ活用、リールで発信、DM導線を作る" loading="lazy"><figcaption>工務店インスタ集客を成功させる5つの施策</figcaption></figure>
 

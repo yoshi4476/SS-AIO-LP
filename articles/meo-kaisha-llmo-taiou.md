@@ -47,7 +47,7 @@ faq:
 
 MEO会社にとってのAI引用対応とは、Googleマップの順位対策だけでなく、ChatGPTやPerplexityなどのAIチャットの回答内で自社が引用されるように記事や情報を設計できることです。
 
-近い論点を[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)で扱っています。
+近い論点を[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-donyu-hoho/)で扱っています。
 
 <div class="definition-box"><span class="term">AI引用対応（LLMO対応）とは</span>、構造化データ・一次情報・比較しやすい情報構造を整え、AIが回答を作る際の引用元として選ばれやすくする対策を指します。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Central</a>は、AI OverviewやAIモードへの表示に追加要件はなく、既存の検索SEOの評価がそのまま使われると明記しています。</div>
 

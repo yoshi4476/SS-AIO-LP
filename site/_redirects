@@ -32,6 +32,9 @@
 /diagnosis/meo  /tools/meo-check/  301
 /diagnosis  /tools/  301
 
+# 統合（2026-10-05）: aio-taisaku-merit-hiyou → aio-taisaku-donyu-hoho
+/aio/aio-taisaku-merit-hiyou/  /aio/aio-taisaku-donyu-hoho/  301
+
 # 用語集（1語1ページ → 1ページ）。旧URLはまとめたページの該当箇所へ
 /glossary/b1622b608b/  /glossary/#b1622b608b  301
 /glossary/709431cfc5/  /glossary/#709431cfc5  301

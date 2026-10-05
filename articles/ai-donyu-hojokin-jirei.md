@@ -60,6 +60,12 @@ AIを導入済みの企業のうち82.6%が生成AIを利用しており、**AI�
 
 補助額は申請枠によって幅があり、最も利用されている通常枠は最大450万円です。
 
+近い論点を[農業の補助金を世界と比較｜日本の3つの違いと使い方](/blog/nougyou-hojokin-sekai-hikaku/)で扱っています。
+
+費用の目安は[飲食店の補助金はいくら？](/blog/inshokuten-hojokin-ikura/)で整理しています。
+
+関連する内容として[飲食店の助成金の条件](/blog/inshokuten-joseikin-jouken/)も公開しています。
+
 あわせて[個人事業主の助成金の申請条件](/blog/kojinjigyonushi-joseikin-shinsei-jouken/)もご覧ください。
 
 <figure><img src="/images/ai-donyu-hojokin-jirei/wakugumi.png" alt="AI導入補助金2026の5つの申請枠: 通常枠、インボイス対応類型、電子取引類型、セキュリティ対策推進枠、複数者連携枠" loading="lazy"><figcaption>AI導入補助金2026 5つの申請枠</figcaption></figure>

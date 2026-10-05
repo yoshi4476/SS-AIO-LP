@@ -90,7 +90,7 @@ AIに選ばれる記事とは、生成AIが回答を作る際に、文単位・�
 
 冒頭200字は、結論から書く・前置きを削る・数字を入れるの3つのコツで断言型になります。
 
-関連する内容として[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-merit-hiyou/)も公開しています。
+関連する内容として[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-donyu-hoho/)も公開しています。
 
 <figure><img src="/images/aio-erabareru-kiji-kakikata/kotsu5.png" alt="AIに選ばれる記事を書く5つのコツ: 冒頭200字を断言型で書く、H2直下に1文結論を置く、FAQの回答を単体完結にする、代名詞を主語に言い換える、ファクトと意見を文で分ける" loading="lazy"><figcaption>AIに選ばれる記事を書く5つのコツ</figcaption></figure>
 

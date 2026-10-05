@@ -48,13 +48,13 @@ faq:
 
 経理BPOとは、記帳から月次試算表の作成まで、経理業務のプロセス全体を外部の専門会社に任せる委託形態のことです。
 
+あわせて[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)もご覧ください。
+
 選ぶときの基準は[会計と経理の違い｜税理士に任せても社内に残る経理の作業](/blog/kaikei-keiri-chigai)でも扱っています。
 
 委託先と専門家の役割分担は、[経理と会計士の違い](/blog/keiri-kaikeishi-chigai/)を知ると整理しやすくなります。
 
 前提となる考え方は[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)で整理しています。
-
-近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
 
 <div class="definition-box"><span class="term">経理BPOとは</span>、Business Process Outsourcingの略で、経理業務の一部または全体を、業務フロー・体制の設計まで含めて外部の専門会社に委託する仕組みを指します。==「今の作業をそのまま渡す」だけでなく、非効率な部分の整理まで任せられる==点が、従来の記帳代行との大きな違いです。</div>
 
