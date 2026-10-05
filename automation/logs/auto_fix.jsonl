@@ -1692,3 +1692,4 @@
 {"at": "2026-10-05 10:00", "by": "desc_fill", "slug": "zeirishi-shukyaku-dekinai", "kind": "desc_fill", "ok": true, "note": "説明文 82→130字（冒頭の文を足す）", "before_description": "税理士が集客できない主な原因は、紹介依存・専門性不明・情報未更新など5つです。8万人超が競合する中で、自己診断のやり方と今日からできる改善策を実務目線で解説します。"}
 {"at": "2026-10-05 10:00", "by": "desc_fill", "slug": "zeirishi-shukyaku-site", "kind": "desc_fill", "ok": true, "note": "説明文 79→141字（冒頭の文を足す）", "before_description": "税理士の集客サイトとは、問い合わせにつながる6つのページで構成されたホームページです。掲載すべき内容と、依頼の決め手になる情報の載せ方を実務目線で解説します。"}
 {"at": "2026-10-05 10:06", "by": "desc_fill", "slug": "webinar-shukyaku-hoho", "kind": "desc_fill", "ok": true, "note": "説明文 99→155字（H2結論2の文を足す）", "before_description": "ウェビナー集客とは、平均参加率46%という前提で申込数を確保し当日の離脱を防ぐBtoBの施策です。BtoB企業100社への調査データをもとに、開催2週間前から実践する5つの集客ステップを解説します。"}
+{"at": "2026-10-05 11:01", "by": "link_boost", "slug": "shika-hp-ryokinhyou-kakikata", "kind": "link_rescue", "ok": true, "note": "aio-dairiten-erabikata から内部リンクを1本"}

@@ -20,7 +20,7 @@
 "modified": "2026-09-23"
 },
 "aio-dairiten-erabikata": {
-"hash": "5e7a269712e2483758b660e4843d16bd",
+"hash": "ce2b622d93c5ff8dc558fbbd49b5dec1",
 "modified": "2026-10-04"
 },
 "aio-donyu-jirei": {
@@ -192,7 +192,7 @@
 "modified": "2026-09-07"
 },
 "clinic-hp-hissu-koumoku": {
-"hash": "74c3722248f5fd02fe2c35bde94e5379",
+"hash": "3879298abc30980e8578fc47b896c144",
 "modified": "2026-08-31"
 },
 "clinic-instagram-yarikata": {
@@ -448,7 +448,7 @@
 "modified": "2026-09-12"
 },
 "seikotsuin-hp-shukyaku": {
-"hash": "34255e27848b16e75febc34b49a53c57",
+"hash": "2adff590faa98b3084be44892eaf5c39",
 "modified": "2026-08-22"
 },
 "seikotsuin-meo-taisaku": {
@@ -494,6 +494,10 @@
 "shika-heiin-hiyou": {
 "hash": "0a2195d36366ba11adb8d15d500e9071",
 "modified": "2026-09-09"
+},
+"shika-hp-ryokinhyou-kakikata": {
+"hash": "eb0e622fe6c4e46e11a7eb4737e30c6e",
+"modified": "2026-10-05"
 },
 "shika-iin-shukyaku": {
 "hash": "8bb33979838c1da32e7e9eb926418cd8",
