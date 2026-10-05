@@ -650,6 +650,21 @@ def gaps_site(sid, cfg, pages=PAGES_PER_SITE, fetch=None):
     return out
 
 
+ENQUEUE_PER_SITE = 3   # 月初に台帳へ積む新しい語の上限（書くのは日次の執筆。積みすぎると他の語が後回しになる）
+
+
+def enqueue_new(sid, out, budget=ENQUEUE_PER_SITE):
+    """自社の記事が無い語を、食い合いの検査（kw_guard）を通ったものだけ台帳へ積む。
+    検査と積み方は report_actions.enqueue_gaps と同じ道具を使う（同じ役目を2つ作らない）"""
+    import report_actions as RA
+    items = [{"kind": "article_new", "site": sid, "finding": it["kw"]}
+             for it in (out or {}).get("items", []) if it.get("action") == "new_article"]
+    n = RA.enqueue_gaps(items, budget) if items else 0
+    if items:
+        print(f"   {sid}: 記事の無い語 {len(items)} → 台帳へ積んだ {n}（食い合いの検査を通った分・上限{budget}）")
+    return n
+
+
 def load_gaps(sid):
     try:
         return json.loads((OUT / sid / "gaps.json").read_text(encoding="utf-8"))
@@ -795,7 +810,7 @@ def main():
         print("■ 負けている語の差")
         for sid in sids:
             try:
-                gaps_site(sid, S.load(sid), a.pages)
+                enqueue_new(sid, gaps_site(sid, S.load(sid), a.pages))
             except Exception as e:
                 print(f"   {sid}: 差を出せませんでした（{type(e).__name__}: {str(e)[:80]}）")
     if not (a.measure or a.gaps):

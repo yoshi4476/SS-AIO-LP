@@ -219,3 +219,24 @@ def test_compete_loop_is_wired():
                   [True] * 4)
         finally:
             C.OUT = old
+
+
+def test_compete_new_words_go_to_ledger_through_guard():
+    import compete as C
+    import report_actions as RA
+    print("\n■ 競合比較: 記事の無い語は食い合いの検査を通して台帳へ（月3語まで）")
+    seen = {}
+    old = RA.enqueue_gaps
+    try:
+        RA.enqueue_gaps = lambda items, budget: seen.update(items=items, budget=budget) or len(items)
+        out = {"items": [{"kw": "語C", "action": "new_article"}, {"kw": "語D", "action": "rewrite"},
+                         {"kw": "語E", "action": "new_article"}]}
+        with redirect_stdout(io.StringIO()):
+            n = C.enqueue_new("ai-lab", out)
+            n0 = C.enqueue_new("ai-lab", {"items": [{"kw": "語F", "action": "rewrite"}]})
+    finally:
+        RA.enqueue_gaps = old
+    check("記事の無い語だけを、同じ検査の道具（enqueue_gaps）へ上限3で渡す",
+          [[i["finding"] for i in seen["items"]], seen["budget"], n, n0], [["語C", "語E"], 3, 2, 0])
+    src = (ROOT / "scripts" / "compete.py").read_text(encoding="utf-8")
+    check("--gaps のあとに台帳へ積む", "enqueue_new(sid, gaps_site(" in src, True)
