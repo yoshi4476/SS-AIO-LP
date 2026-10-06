@@ -337,6 +337,8 @@ def hub_pages(cfg, arts, rows):
     cat_links = _category_links(cfg, cats)
     out = []
     for ind, ms in live:
+        # data/industries.json の lead は AI集客ラボの集客の記事向け。お客様のサイトでは事実と違う（aggregate_pages と同じ文）
+        ind = dict(ind, lead=f"{ind['name']}に関する記事{len(ms)}本を、カテゴリごとにまとめています。")
         body = IH.hub_body(ind, ms, {c: (n, "") for c, n in cats.items()},
                            lambda m: _tile(m, by_slug[m["slug"]], cats),
                            cat_url=lambda c: cat_links.get(c, ""), extras=False)
@@ -421,10 +423,12 @@ def sync_pages(cfg, rows=None, arts=None):
 # ---------- 固定ページ（比較表・テーマ・エリア・今の時期の特集・多言語の要約） ----------
 
 def _aggregate(cfg, rows, arts=None, kinds=None):
-    """aggregate_pages.collect を WordPress の公開URLで呼ぶ。多言語の要約は /en/<slug>/（固定ページの階層）"""
+    """aggregate_pages.collect を WordPress の公開URLで呼ぶ。多言語の要約は /en/<slug>/（固定ページの階層）。
+    業種ハブ・用語集は sync_pages が親子の固定ページで作るので、ここでは頼まない（二重に作らない）"""
     import aggregate_pages as AP
     by_slug = url_map(cfg, rows)
-    return AP.collect(cfg, live=set(by_slug), url_of=lambda m: by_slug[m["slug"]], kinds=kinds or AP.KINDS,
+    kinds = kinds or tuple(k for k in AP.KINDS if k not in AP.HUBS)
+    return AP.collect(cfg, live=set(by_slug), url_of=lambda m: by_slug[m["slug"]], kinds=kinds,
                       i18n_prefix="", arts=arts)
 
 

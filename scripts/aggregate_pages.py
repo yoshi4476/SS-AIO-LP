@@ -4,7 +4,7 @@
 
 **なぜ要るか**: AI集客ラボは build.py が site/ に作るが、別リポジトリ・FTP・ZIP・Next.js・WordPress の社には
 1ページも届いていなかった（data/capabilities.json の missing）。方式ごとに描き方を持つと中身が食い違うので、
-中身は build.py と同じモジュールの関数（compare_pages・topics・area_hub・season・i18n）が組み、ここは
+中身は build.py と同じモジュールの関数（compare_pages・topics・area_hub・season・industry_hub・glossary・i18n）が組み、ここは
 
     pages = collect(cfg, live=公開済みの slug, url_of=記事のURL)
       → [{"kind", "path", "title", "description", "html", "jsonld", "lang", "members", "alternates"}]
@@ -16,7 +16,11 @@
     wordpress              → wp_bridge.sync_pages（固定ページ。業種ハブ・用語集と同じ upsert_page）
 
 守ること（各モジュールの決まりのまま）: 比較表は3表未満のカテゴリを作らない・テーマは3本未満を作らない・
-エリアは5本未満を作らない・季節は12か月分の検索データがそろうまで作らない。数字は記事と検索データにあるものだけ。
+エリアは5本未満を作らない・季節は12か月分の検索データがそろうまで作らない・業種ハブは5本未満の業種を作らない
+（業種が1つで記事の8割以上を占める社は、ブログの一覧と同じ中身になるので作らない）・用語集は10語未満なら作らない。
+業種ハブの説明文は data/industries.json の lead（AI集客ラボの集客向けの文）を使わない。数字は記事と検索データにあるものだけ。
+WordPress の業種ハブ・用語集は wp_bridge.sync_pages が作る（wp_bridge._aggregate はここの業種・用語集を頼まない）。
+sites/<id>.json の aggregate_skip に書いた種類は作らない（補助金サイトの業種ハブは subsidy/pages.py が作る）。
 お客様の社のページに運用会社の名前・著者が出たらそのページを捨てる（sites.operator_leaks）。
 先方が自分で作った同じパスのページは上書きも削除もしない（管制塔が作ったものには MARK を付ける）。
 
@@ -32,15 +36,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-KINDS = ("compare", "topics", "area", "season", "i18n", "i18n_index")
+KINDS = ("compare", "topics", "area", "season", "industry", "glossary", "i18n", "i18n_index")
 TOPS = ("compare", "topics", "area", "season")
+# 業種ハブ・用語集。WordPress は wp_bridge.sync_pages が別に作るので、WordPress の入口の一覧（TOPS）には入れない
+HUBS = ("industry", "glossary")
 LANGS = ("en", "zh", "ko")
 LANG_ATTR = {"ja": "ja", "en": "en", "zh": "zh-Hans", "ko": "ko"}
 I18N_NAMES = {"en": "Articles in English", "zh": "中文文章", "ko": "한국어 기사"}
 MARK = "ss-aggregate"
 STATE = ROOT / "data" / "aggregate"
 LLMS_HEAD = "## まとめのページ"
-_LINK = re.compile(r'<a href="(/(?:compare|topics|area|season|en|zh|ko)/[^"#?]*)"([^>]*)>(.*?)</a>', re.S)
+_LINK = re.compile(r'<a href="(/(?:compare|topics|area|season|industry|glossary|en|zh|ko)/[^"#?]*)"([^>]*)>(.*?)</a>', re.S)
+# 用語集の中の記事へのリンク（AI集客ラボの組み方 /<カテゴリ>/<slug>/）
+_ART = re.compile(r'href="/([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)/(#[^"]*)?"')
 
 
 def site_articles(cfg):
@@ -72,13 +80,25 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
     if live is not None:
         arts = [a for a in arts if a[0]["slug"] in live]
     metas = [{"title": str(m.get("title") or ""), "slug": m["slug"], "keyword": str(m.get("keyword") or ""),
-              "category": m.get("category", ""), "date": str(m.get("date") or ""), "body": b} for m, b in arts]
+              "category": m.get("category", ""), "date": str(m.get("date") or ""), "body": b,
+              "faq": m.get("faq") if isinstance(m.get("faq"), list) else []} for m, b in arts]
     by_slug = {m["slug"]: m for m in metas}
     url_of = url_of or (lambda m: S.article_url(cfg, m))
     cats_cfg = cfg.get("categories") or {}
+    skip = set(cfg.get("aggregate_skip") or ())
+    kinds = [k for k in kinds if k not in skip]
     out = []
     if not metas:
         return out
+
+    def art_links(html):
+        """/<カテゴリ>/<slug>/ の記事へのリンクを、その社の記事のURLへ（知らない記事のリンクは文字に戻さず残す）"""
+        def repl(m):
+            a = by_slug.get(m.group(2))
+            if not a or a["category"] != m.group(1):
+                return m.group(0)
+            return f'href="{_h.escape(url_of(a))}{m.group(3) or ""}"'
+        return _ART.sub(repl, html)
 
     if "compare" in kinds:
         import compare_pages as CP
@@ -127,6 +147,56 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
             out.append(_page("season", "/season/", "今の時期の特集",
                              f"毎年この時期に検索が増えるテーマ{len(groups)}つの記事{len(flat)}本をまとめています。",
                              SN.page_html(groups, url_of), members=flat))
+
+    if "industry" in kinds:
+        import industry_hub as IH
+        inds, mn = IH.load()
+        g = IH.group(metas, inds)
+        pairs = [(i, g[i["slug"]]) for i in inds if len(g.get(i["slug"], [])) >= mn]
+        # 1業種の社（歯科医院の自社サイトなど）は、業種ハブがブログの一覧の写しになる（中身の薄い重複ページ）
+        if len(pairs) == 1 and len(pairs[0][1]) >= 0.8 * len(metas):
+            pairs = []
+        cats = {c: (n, "") for c, n in cats_cfg.items()}
+        made = []
+        for ind, ms in pairs:
+            # data/industries.json の lead は AI集客ラボの集客の記事向け。ほかのサイトでは事実と違うので使わない
+            ind2 = dict(ind, lead=f"{ind['name']}に関する記事{len(ms)}本を、カテゴリごとにまとめています。")
+            path = f"/industry/{ind['slug']}/"
+            body = IH.hub_body(ind2, ms, cats, lambda m: f'<li><a href="{_h.escape(url_of(m))}">{_h.escape(m["title"])}</a></li>',
+                               cat_url=lambda c: "", extras=False)
+            ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": f"{ind['name']}の記事",
+                  "url": page_url(cfg, path), "mainEntity": {"@type": "ItemList", "itemListElement": [
+                      {"@type": "ListItem", "position": i, "url": url_of(m), "name": m["title"]}
+                      for i, m in enumerate(ms, 1)]}}
+            out.append(_page("industry", path, f"{ind['name']}の記事", ind2["lead"],
+                             body + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>",
+                             members=[m["slug"] for m in ms], name=ind["name"]))
+            fq = IH.faq_body(ind2, ms, url_of)
+            if fq:
+                fhtml, fld = fq
+                out.append(_page("industry", path + "faq/", f"{ind['name']}のよくある質問",
+                                 f"{ind['name']}の記事{len(ms)}本から、よくある質問{len(fld['mainEntity'])}問と答えをまとめています。",
+                                 fhtml + '<script type="application/ld+json">' + json.dumps(fld, ensure_ascii=False) + "</script>"))
+            made.append((ind, ms, bool(fq)))
+        if made:
+            lis = "".join(f'<li><a href="/industry/{i["slug"]}/"><strong>{_h.escape(i["name"])}</strong>'
+                          f'<span class="cnt">{len(ms)}本</span></a>'
+                          + (f' <a href="/industry/{i["slug"]}/faq/">よくある質問</a>' if fq else "") + "</li>"
+                          for i, ms, fq in made)
+            out.append(_page("industry", "/industry/", "業種から探す", "業種ごとに、カテゴリをまたいで記事をまとめています。",
+                             f'<div class="latest-block" data-cat="new"><div class="cat-head"><h2>業種から探す</h2>'
+                             f'<span class="cnt">{len(made)}業種</span></div><ul class="hub-list">{lis}</ul></div>'))
+
+    if "glossary" in kinds:
+        import glossary as GL
+        terms = GL.collect(cfg["id"], set(by_slug))
+        if len(terms) >= 10:
+            # 構造化データの URL は canonical と同じ形に（末尾スラッシュ無しの社は /glossary）
+            base = page_url(cfg, "/glossary/")[len(f"https://{cfg['domain']}"):]
+            body = GL.index_html(terms, base=base, site_url=f"https://{cfg['domain']}", rel_all=GL.related_all(terms))
+            out.append(_page("glossary", "/glossary/", "用語集",
+                             f"記事で定義した用語{len(terms)}語の意味を、1ページにまとめた用語集です。",
+                             art_links(body)))
 
     if {"i18n", "i18n_index"} & set(kinds):
         import i18n as I
@@ -196,7 +266,8 @@ def links(pages, slug, url_for=None):
         if not u:
             continue
         label = {"compare": f"{p['title']}を見る", "topics": f"テーマ「{p.get('name', '')}」の記事をまとめて見る",
-                 "area": f"{p.get('name', '')}の記事をまとめて見る", "season": "今の時期の特集を見る"}.get(p["kind"])
+                 "area": f"{p.get('name', '')}の記事をまとめて見る", "season": "今の時期の特集を見る",
+                 "industry": f"{p.get('name', '')}の記事をまとめて見る"}.get(p["kind"])
         if label:
             out.append((label, u))
     return out
@@ -320,7 +391,7 @@ def sweep_html(dest: Path, keep):
     """前に管制塔が置いたまとめのページ（印のあるもの）のうち、今回作らなかったものを消す。消したパスを返す。
     消すのはそのページの index.html だけ（同じフォルダの先方のファイル・下のページは残す）"""
     gone = []
-    for top in TOPS + LANGS:
+    for top in TOPS + HUBS + LANGS:
         base = dest / top
         if not base.is_dir():
             continue

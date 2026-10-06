@@ -1,5 +1,5 @@
 // 自動配置（ss-aggregate）: 管制塔の scripts/publish.py（write_aggregate_nextjs）が置く。直接編集しない。
-// まとめのページ（比較表・テーマ・エリア・今の時期の特集・多言語の要約）を、管制塔が書き出した JSON から描く。
+// まとめのページ（比較表・テーマ・エリア・今の時期の特集・業種・用語集・多言語の要約）を、管制塔が書き出した JSON から描く。
 // 中身（本文の HTML・構造化データ）は管制塔の aggregate_pages.collect が作る。ここは置くだけ。
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -34,6 +34,12 @@ const CSS = `
 .ss-aggregate th,.ss-aggregate td{border:1px solid rgba(127,127,127,.35);padding:.5rem .7rem;text-align:left;vertical-align:top}
 .ss-aggregate details{margin:.6rem 0;padding:.7rem 1rem;border:1px solid rgba(127,127,127,.35);border-radius:10px}
 .ss-aggregate summary{font-weight:700;cursor:pointer}
+.ss-aggregate h3{font-size:1.08rem;font-weight:700;margin:1.8rem 0 .6rem}
+.ss-aggregate .definition-box{margin:.6rem 0;padding:.8rem 1rem;border-left:4px solid rgba(127,127,127,.5);background:rgba(127,127,127,.08)}
+.ss-aggregate .definition-box .term{font-weight:700}
+.ss-aggregate .gl-toc,.ss-aggregate .faq-groups{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0;font-size:.92rem}
+.ss-aggregate .faq-groups span{opacity:.7;margin-left:.3rem}
+.ss-aggregate .gl-term{scroll-margin-top:80px}
 `;
 
 /** 「compare」のような入口の下にあるページの slug の並び（generateStaticParams 用） */
