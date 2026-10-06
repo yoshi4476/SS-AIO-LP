@@ -86,7 +86,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2233",
+     "evidence": "scripts/build.py:2249",
      "note": "基準に届かない記事は site/ に生成されない",
      "anchor": "weak = rubric.weak_axes(meta)"
     },
@@ -133,7 +133,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:953",
+     "evidence": "scripts/build.py:966",
      "note": "生成漏れは build.py が検出",
      "anchor": "# 画像実在チェック（生成漏れ・パスtypoの検出。生成: python scripts/make_images.py <slug>）"
     },
@@ -199,7 +199,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:259",
+     "evidence": "scripts/build.py:272",
      "anchor": "meta[\"eyecatch\"] = industry_thumbs.apply(meta) or meta.get(\"eyecatch\")"
     },
     "external-md": {
@@ -355,7 +355,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:859",
+     "evidence": "scripts/build.py:872",
      "note": "build.py が毎回全記事を描く",
      "anchor": "def build_article(path: Path, template: str, related: str = \"\", unpublished_urls=None, prevnext: str = \"\"):"
     },
@@ -460,7 +460,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1321",
+     "evidence": "scripts/build.py:1335",
      "anchor": "def build_sitemap(article_entries):"
     },
     "external-md": {
@@ -515,7 +515,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1302",
+     "evidence": "scripts/build.py:1316",
      "anchor": "llms = SITE / \"llms.txt\""
     },
     "external-md": {
@@ -773,7 +773,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:357",
+     "evidence": "scripts/build.py:370",
      "anchor": "\"@type\": \"BlogPosting\","
     },
     "external-md": {
@@ -822,7 +822,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:395",
+     "evidence": "scripts/build.py:408",
      "anchor": "\"@type\": \"FAQPage\","
     },
     "external-md": {
@@ -871,7 +871,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:365",
+     "evidence": "scripts/build.py:378",
      "anchor": "\"jobTitle\": AUTHOR_ROLE, \"sameAs\": AUTHOR_SAME_AS,"
     },
     "external-md": {
@@ -919,7 +919,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:353",
+     "evidence": "scripts/build.py:366",
      "anchor": "about, mentions = entities.about_and_mentions("
     },
     "external-md": {
@@ -969,7 +969,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2361",
+     "evidence": "scripts/build.py:2383",
      "anchor": "n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）"
     },
     "external-md": {
@@ -1077,7 +1077,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:652",
+     "evidence": "scripts/build.py:665",
      "anchor": "def insert_inline_tool(content, meta):"
     },
     "external-md": {
@@ -1127,7 +1127,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1759",
+     "evidence": "scripts/build.py:1775",
      "anchor": "def build_industry_hubs(all_metas):"
     },
     "external-md": {
@@ -1181,7 +1181,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1892",
+     "evidence": "scripts/build.py:1908",
      "anchor": "terms = GL.collect(sid, only)"
     },
     "external-md": {
@@ -1233,7 +1233,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1908",
+     "evidence": "scripts/build.py:1924",
      "anchor": "cats = CP.collect(sid, only)"
     },
     "external-md": {
@@ -1284,7 +1284,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1936",
+     "evidence": "scripts/build.py:1952",
      "anchor": "groups = TP.build(sid, all_metas)"
     },
     "external-md": {
@@ -1335,7 +1335,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1957",
+     "evidence": "scripts/build.py:1973",
      "anchor": "area_pairs, area_g = AH.live(all_metas)"
     },
     "external-md": {
@@ -1387,7 +1387,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2354",
+     "evidence": "scripts/build.py:2370",
      "anchor": "season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）"
     },
     "external-md": {
@@ -1437,42 +1437,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1536",
+     "evidence": "scripts/build.py:1552",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1536",
+     "evidence": "scripts/build.py:1552",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1536",
+     "evidence": "scripts/build.py:1552",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1536",
+     "evidence": "scripts/build.py:1552",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1536",
+     "evidence": "scripts/build.py:1552",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1536",
+     "evidence": "scripts/build.py:1552",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1536",
+     "evidence": "scripts/build.py:1552",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     }
@@ -1491,18 +1491,18 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1570",
+     "evidence": "scripts/build.py:1586",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1570",
+     "evidence": "scripts/build.py:1586",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1570",
+     "evidence": "scripts/build.py:1586",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
@@ -1514,19 +1514,19 @@
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1570",
+     "evidence": "scripts/build.py:1586",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1570",
+     "evidence": "scripts/build.py:1586",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1570",
+     "evidence": "scripts/build.py:1586",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     }
@@ -1541,42 +1541,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2350",
+     "evidence": "scripts/build.py:2366",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2350",
+     "evidence": "scripts/build.py:2366",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2350",
+     "evidence": "scripts/build.py:2366",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2350",
+     "evidence": "scripts/build.py:2366",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2350",
+     "evidence": "scripts/build.py:2366",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2350",
+     "evidence": "scripts/build.py:2366",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2350",
+     "evidence": "scripts/build.py:2366",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     }
@@ -1690,7 +1690,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:748",
+     "evidence": "scripts/build.py:761",
      "anchor": "content = video_embed.prepend(content, meta)"
     },
     "external-md": {
@@ -1788,7 +1788,8 @@
   "site_change": {
    "label": "サイト構成の変更（ナビ・固定ページ・CSS）",
    "entry": [
-    "scripts/site_change.py"
+    "scripts/site_change.py",
+    "scripts/sync_nav.py"
    ],
    "cells": {
     "self-static": {
@@ -1944,7 +1945,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2383",
+     "evidence": "scripts/build.py:2405",
      "anchor": "render_warns = render_check.scan(sorted((ROOT / \"site\").rglob(\"index.html\")))"
     },
     "external-md": {

@@ -2639,6 +2639,55 @@ def test_site_has_two_axes_and_no_orphans():
             navs.add(tuple(re.findall(r'href="([^"]+)"', m.group(2))))
     check("ナビは全ページで同じ", len(navs), 1)
     check("ずれているページが無い", sync_nav.run(False), [])
+    # 制作・顧問の表記（関係を書いた相互リンク）。フッターを作る場所が雛形・生成・手書きと複数あり、
+    # 1か所ずつ足すと漏れるため、site.config.json の1か所から全ページへ揃える
+    cred = sync_nav.credit()
+    check("制作表記: AIO 対策・サイト制作の表記とリンクがある",
+          'href="https://conflux-partners.jp/works/7senses-aio" target="_blank" rel="noopener">'
+          "AIO 対策・サイト制作：YW（CONFLUX PARTNERS）</a>" in cred, True)
+    check("制作表記: nofollow を付けない", "nofollow" in cred, False)
+    foots = {p: p.read_text(encoding="utf-8", errors="surrogateescape") for p in site.rglob("*.html")}
+    foots = {p: t for p, t in foots.items() if sync_nav.FOOTER in t}
+    check("制作表記: フッターのあるページがある", len(foots) > 100, True)
+    check("制作表記: 全ページのフッターに1つずつある",
+          sorted(p.relative_to(site).as_posix() for p, t in foots.items()
+                 if t.count(cred) != 1 or t.count('class="footer-credit"') != 1), [])
+    sample = '<footer class="site-footer">\n  <div class="inner">\n    <div class="copyright">©</div>\n  </div>\n</footer>'
+    once = sync_nav.fix_credit(sample, cred)
+    check("制作表記: 無いページには著作権表示の直後に足す", once.index(cred) > once.index("©"), True)
+    check("制作表記: 何度揃えても同じ", sync_nav.fix_credit(once, cred), once)
+    check("制作表記: 空にすれば外れる", sync_nav.fix_credit(once, ""), sample)
+    # 補助金サイト: フッターが4種（pages.py・記事の雛形・手書きの LP と固定ページ・404）。pages.py が配信のたびに全ページへ揃える
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("subsidy_footer_credit", ROOT / "scripts" / "subsidy" / "footer_credit.py")
+    FC = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(FC)
+    check("補助金の制作表記: LP 制作の表記とリンク",
+          'href="https://conflux-partners.jp/works/7senses-lp" target="_blank" rel="noopener"' in FC.CREDIT
+          and ">LP 制作：YW（CONFLUX PARTNERS）</a>" in FC.CREDIT and "nofollow" not in FC.CREDIT, True)
+    pg = (ROOT / "scripts" / "subsidy" / "pages.py").read_text(encoding="utf-8")
+    check("補助金の制作表記: pages.py の雛形に入り、配信のたびに全ページへ揃える",
+          "footer_credit.CREDIT" in pg and "footer_credit.apply(ROOT)" in pg, True)
+    for name, html in (("固定ページ", '<footer>\n  <nav><a href="/">x</a></nav>\n  <p>© 2026 X</p>\n      <ul class="social-links"></ul>\n</footer>'),
+                       ("LP", '<footer>\n  <div class="wrap">\n    <p class="copyright">© 2026 X</p>\n  </div>\n</footer>'),
+                       ("CRLF のページ", '<footer>\r\n  <p>© 2026 X</p>\r\n</footer>'),
+                       ("404", "<footer>© 2026 X</footer>")):
+        once = FC.fix(html)
+        check(f"補助金の制作表記: {name}のフッターに1つ・著作権表示の後・何度揃えても同じ",
+              (once.count(FC.CREDIT), once.index(FC.CREDIT) > once.index("©"), FC.fix(once)), (1, True, once))
+    sub = ROOT / ".publish-work" / "subsidy"
+    if sub.is_dir():
+        miss = [p.relative_to(sub).as_posix() for p in sub.rglob("*.html")
+                if not ({".git", "dist", "node_modules"} & set(p.relative_to(sub).parts))
+                and "<footer" in (t := p.read_text(encoding="utf-8", errors="replace")) and t.count(FC.CREDIT) != 1]
+        check("補助金の制作表記: 配信先の全ページのフッターに1つずつある", miss, [])
+    corp = ROOT / ".publish-work" / "corporate" / "src" / "components" / "Footer.tsx"
+    if corp.is_file():
+        ft = corp.read_text(encoding="utf-8")
+        check("コーポレートの制作・顧問の表記とリンクがある（nofollow なし）",
+              all(s in ft for s in ("サイト制作：YW（CONFLUX PARTNERS）", "https://conflux-partners.jp/works/7senses-corp",
+                                    "顧問：YW（AI × 経営コンサルタント）", "https://conflux-partners.jp/about"))
+              and "nofollow" not in ft, True)
 
 
 def test_search_engines_are_told_about_all_sites():

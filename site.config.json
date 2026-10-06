@@ -20,5 +20,9 @@
     "seo": "SEO運用",
     "meo": "MEO運用",
     "ai-marketing": "AI集客・活用全般"
-  }
+  },
+  "_footer_credit": "制作・顧問の関係を書いた表記。build.py が全ページのフッターに1行ずつ出す（文言を省かない。nofollow は付けない）。別サイトへ移すときは消すか、そのサイトの関係に書き換える",
+  "footer_credit": [
+    {"label": "AIO 対策・サイト制作：YW（CONFLUX PARTNERS）", "url": "https://conflux-partners.jp/works/7senses-aio"}
+  ]
 }

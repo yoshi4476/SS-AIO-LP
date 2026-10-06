@@ -128,6 +128,19 @@ def _nav(key, fallback):
                    + it["label"] + "</a>")
     return "\n".join(out)
 
+
+def _footer_credit():
+    """フッターの制作・顧問の表記（site.config.json の footer_credit）。
+
+    既定値を持たないのは、書き出した一式で別のサイトを作ったとき、このサイトの関係が
+    そのまま載るのを防ぐため。手書きの固定ページを含む全ページへの反映は sync_nav.apply_credit"""
+    items = _conf().get("footer_credit") or []
+    if not items:
+        return ""
+    rows = "".join(f'<p><a href="{it["url"]}" target="_blank" rel="noopener">{it["label"]}</a></p>'
+                   for it in items)
+    return f'<div class="footer-credit">{rows}</div>'
+
 # ---- サイト設定 ----
 # 別のサイトへ移したときは site.config.json を置けば切り替わる。
 # 無ければ下の値を使う（このサイトの出力は変わらない）。
@@ -975,6 +988,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{SITE_NAME}}": SITE_NAME,
         "{{NAV}}": _nav("nav", NAV_DEFAULT),
         "{{FOOTER_NAV}}": _nav("footer_nav", FOOTER_NAV_DEFAULT),
+        "{{FOOTER_CREDIT}}": _footer_credit(),
         "{{CAT_NAME}}": cat_name,
         "{{CAT_SLUG}}": meta["category"],
         "{{CAT_CLASS}}": cat_class,
@@ -1460,6 +1474,7 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 {footer_nav}
     </nav>
     <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+    {footer_credit}
   </div>
 </footer>
 
@@ -1503,6 +1518,7 @@ def page_shell(h1="記事一覧", desc="", more=()):
         title += "まとめ｜集客の手順と実例"
     return dict(site=SITE_NAME, url=SITE_URL, nav=_nav("nav", NAV_DEFAULT),
                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
+                footer_credit=_footer_credit(),
                 h1=_html_escape(h1), title=_html_escape(title), desc=_html_escape(desc),
                 lead=_html_escape(lead), kicker=kicker, **_cta())
 
@@ -2357,6 +2373,12 @@ def main():
     industry_thumbs.apply_shelf_bands(SITE)  # 用語集・テーマ・比較表の見出しの下に、写真の棚から内容に合う写真
     hide_data_pages()
     ensure_og()
+    # 制作・顧問の表記は全ページのフッターに出す。手書きの固定ページや、既存ページを写して作る
+    # ページ（FAQ・集約ページ）も、出力の最後でまとめて揃える
+    import sync_nav
+    n = sync_nav.apply_credit(SITE)
+    if n:
+        print(f"フッターの制作表記: {n}ページを揃えました")
     import search_preview
     n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）
     if n:

@@ -574,6 +574,8 @@ body.lp-doc .site-footer .addr { color: #6b6553; }
 body.lp-doc .site-footer nav a { color: #55503f; }
 body.lp-doc .site-footer nav a:hover { color: #96751a; }
 body.lp-doc .site-footer .copyright { color: #8a8471; border-color: #e0dac8; }
+body.lp-doc .site-footer .footer-credit a { color: #6b6553; }
+body.lp-doc .site-footer .footer-credit a:hover { color: #96751a; }
 
 /* ---------- モバイル修正: ヒーローのインライン2カラム指定を上書き ---------- */
 @media (max-width: 940px) {

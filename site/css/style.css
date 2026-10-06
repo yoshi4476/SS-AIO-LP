@@ -539,6 +539,11 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 .site-footer a { color: rgba(255,255,255,.78); text-decoration: none; }
 .site-footer a:hover { color: #8fc0ff; }
 .site-footer .copyright { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: 1.2rem; font-size: .74rem; color: rgba(255,255,255,.45); }
+/* 制作・顧問の表記（sync_nav が全ページに揃える）。著作権表示の直下に小さく出す */
+.site-footer .footer-credit { grid-column: 1 / -1; margin-top: -1.4rem; font-size: .74rem; line-height: 1.8; overflow-wrap: anywhere; }
+.site-footer .footer-credit p { margin: 0; }
+.site-footer .footer-credit a { color: rgba(255,255,255,.62); text-decoration: underline; text-underline-offset: 2px; }
+.site-footer .footer-credit a:hover { color: #8fc0ff; }
 @media (max-width: 640px) { .site-footer .inner { grid-template-columns: 1fr; } }
 
 /* ---------- 記事サイドバー: 補助金サポートバナー ---------- */
