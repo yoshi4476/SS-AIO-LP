@@ -57,6 +57,21 @@ function postVideos(p: BlogPost): NonNullable<MetadataRoute.Sitemap[number]["vid
   return out;
 }
 
+/** 管制塔が置くまとめのページ（比較表・テーマ・エリア・季節・多言語の要約）。publish.py の write_aggregate_nextjs が
+ * src/content/aggregate/pages.json に書く。まだ無い回もビルドを落とさないよう、import せずに読む */
+function aggregatePages(now: Date): MetadataRoute.Sitemap {
+  const f = path.join(process.cwd(), "src", "content", "aggregate", "pages.json");
+  if (!fs.existsSync(f)) return [];
+  try {
+    const d = JSON.parse(fs.readFileSync(f, "utf-8")) as { pages?: Record<string, { url?: string }> };
+    return Object.values(d.pages ?? {})
+      .filter((p) => typeof p.url === "string" && p.url.startsWith(site.url))
+      .map((p) => ({ url: x(String(p.url)), lastModified: now, changeFrequency: "weekly" as const, priority: 0.6 }));
+  } catch {
+    return [];
+  }
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
@@ -100,6 +115,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...(videos.length ? { videos } : {}),
       };
     }),
+    ...aggregatePages(now),
     { url: `${site.url}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.8 },
   ];
 }

@@ -75,7 +75,10 @@ def main():
             w, _ = publish.write_external_html(scfg, base, meta, body, md)
             written += w + [publish.stamp_manifest(cfg, base, meta, md)]
         print(f"描き直し {len(done)}本（{cfg['type']}）")
-        DF.deliver_batch(cfg, written, base, a.push, "描き直し")
+        # まとめのページ（比較表・テーマ・エリア・季節・多言語）も、いまの記事の並びで作り直して一緒に届ける
+        agg, keep = publish.aggregate_for_files(cfg, base, force=True)
+        if DF.deliver_batch(cfg, written + agg, base, a.push, "描き直し"):
+            publish.aggregate_files_done(cfg, keep)
         return
     if cfg["type"] == "wordpress":
         return rerender_wordpress(cfg, a.push)
@@ -108,6 +111,8 @@ def main():
         publish.stamp_manifest(cfg, dest, meta, md)
         done.append(meta["slug"])
     print(f"描き直し {len(done)}本 / 未公開のため見送り {len(skipped)}本")
+    # まとめのページ（比較表・テーマ・エリア・季節・多言語）も、いまの記事の並びで作り直す（同じコミットに入る）
+    publish.aggregate_for_git(cfg, dest)
     st = subprocess.run(["git", "status", "--porcelain"], cwd=dest, capture_output=True,
                         text=True, encoding="utf-8").stdout
     print(f"配信先で変わるファイル: {len([ln for ln in st.splitlines() if ln.strip()])}")

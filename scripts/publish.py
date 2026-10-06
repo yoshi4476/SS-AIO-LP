@@ -333,6 +333,7 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
         html = html.replace(src_path, dst_path)
         if meta.get("eyecatch"):
             meta = {**meta, "eyecatch": str(meta["eyecatch"]).replace(src_path, dst_path)}
+    html += aggregate_links(cfg, dest, meta)
     # お客様の記事: 配信先のアプリが監修の欄を持たなくても出るよう、本文の頭と末尾に入れる
     # 読了時間・文字数は本文だけで数える（構造化データの文字を数えない）
     text_html = html
@@ -871,6 +872,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     html = re.sub(r"<h2[^>]*>\s*よくある質問\s*</h2>.*?(?=<h2|$)", "", html, flags=re.S)
     # YouTube に上がった記事動画があれば先頭に埋め込む（build.py と同じ関数。CSP が許さない配信先は飛ばす）
     html = video_block(meta, dest) + html
+    html += aggregate_links(cfg, dest, meta)
     credit = client_credit(cfg)
     # 著者の実在（Person + sameAs）。配信先のテンプレートは著者名しか出さないので、
     # 台帳から束ねた sameAs を本文側の JSON-LD で足す（AI集客ラボの記事と同じ人物だと機械に分かる）
@@ -1138,6 +1140,207 @@ def _update_external_index(dest: Path, cfg, meta, page=None):
     return touched
 
 
+# ============================================================
+# まとめのページ（比較表・テーマ・エリア・今の時期の特集・多言語の要約）
+# 中身は aggregate_pages.collect（build.py と同じモジュールの関数）。ここは方式ごとに置くだけ
+# ============================================================
+def _live_slugs(cfg, dest: Path, extra=()):
+    """配信先に既にある記事と、いま書いた記事。まとめのページには公開済みの記事しか載せない（404へ送らない）"""
+    if cfg["type"] == "nextjs-json":
+        have = {p.stem for p in (dest / cfg["content_dir"]).glob("*.json")}
+    elif cfg["type"] == "external-md":
+        have = {p.stem for p in (dest / cfg["content_dir"]).glob("*.md")}
+    else:
+        have = {p.parent.name for p in (dest / page_dir(cfg)).glob("*/index.html")}
+    return have | set(extra)
+
+
+def aggregate_links(cfg, dest: Path, meta):
+    """記事の末尾に置く、その記事を含むまとめのページ（テーマ・比較表・エリア・季節）への案内"""
+    try:
+        import aggregate_pages as AP
+        return AP.links_html(AP.cached(cfg, _live_slugs(cfg, dest, {meta["slug"]})), meta["slug"])
+    except Exception as e:
+        print(f"  [警告] まとめのページへの案内を飛ばしました（{str(e)[:60]}）")
+        return ""
+
+
+def write_aggregate_html(cfg, dest: Path, live, gone_extra=()):
+    """external-html・ftp・zip: まとめのページをその社の雛形で書き、sitemap.xml・llms.txt に載せる。
+    先方が自分で作った同じパスのページは上書きしない。(書いたもの, 置いたパス, 消したパス) を返す"""
+    import aggregate_pages as AP
+    pages = AP.cached(cfg, live)
+    tpl = (dest / cfg["template"]).read_text(encoding="utf-8")
+    written, keep = [], set()
+    for p in pages:
+        f = dest / p["path"].strip("/") / "index.html"
+        # 訳のページは記事の配信（_i18n_pages）が先に置いたもの。それ以外で印の無いページは先方のもの
+        if f.is_file() and p["kind"] != "i18n" and not AP.is_ours(f):
+            print(f"要対応: {cfg['id']} の {p['path']} は先方のページなので、まとめのページを置きません")
+            continue
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(AP.html_doc(tpl, cfg, p), encoding="utf-8", newline="\n")
+        written.append(f)
+        keep.add(p["path"])
+    gone = AP.sweep_html(dest, keep) + [g for g in gone_extra if g not in keep]
+    written += AP.update_indexes(dest, cfg, [p for p in pages if p["path"] in keep], gone)
+    AP.ensure_public_dirs(dest, [p.strip("/").split("/")[0] for p in sorted(keep)])
+    return written, keep, gone
+
+
+def write_aggregate_nextjs(cfg, dest: Path, live):
+    """nextjs-json: 中身を <content_dir の親>/aggregate/pages.json に書き、それを描くページ（templates/nextjs_aggregate_*.tsx）を
+    入口ごとに置く。先方が同じ入口（src/app/compare など）を持っていれば触らない"""
+    import aggregate_pages as AP
+    pages = AP.cached(cfg, live)
+    src = dest / "src" if (dest / "src" / "app").is_dir() else dest
+    app = src / "app"
+    if not app.is_dir():
+        print(f"要対応: {cfg['id']} に app ディレクトリが無いため、まとめのページを置けません（App Router の Next.js だけ扱う）")
+        return []
+    comp = src / "components" / "SsAggregatePage.tsx"
+    data_p = dest / Path(cfg["content_dir"]).parent / "aggregate" / "pages.json"
+
+    def ours(f):
+        return f.is_file() and AP.MARK in f.read_text(encoding="utf-8", errors="ignore")[:300]
+
+    def imp(frm, to):
+        rel = os.path.relpath(to, frm.parent).replace(os.sep, "/")
+        return rel if rel.startswith(".") else "./" + rel
+
+    def tpl(name):
+        return (ROOT / "templates" / name).read_text(encoding="utf-8")
+
+    tops = {}
+    for p in pages:
+        tops.setdefault(p["path"].strip("/").split("/")[0], []).append(p)
+    old = {}
+    if data_p.is_file():
+        try:
+            old = json.loads(data_p.read_text(encoding="utf-8")).get("pages") or {}
+        except ValueError:
+            old = {}
+    keep, written = {}, []
+    for top, ps in sorted(tops.items()):
+        idx, slug = app / top / "page.tsx", app / top / "[...slug]" / "page.tsx"
+        if (app / top).exists() and not (ours(idx) or ours(slug)):
+            print(f"要対応: {cfg['id']} に先方のページ /{top} があるため、まとめのページを置きません")
+            continue
+        subs = [p for p in ps if p["path"].strip("/") != top]
+        for f, want, name in ((idx, len(subs) < len(ps), "nextjs_aggregate_index.tsx"),
+                              (slug, bool(subs), "nextjs_aggregate_slug.tsx")):
+            if want:
+                f.parent.mkdir(parents=True, exist_ok=True)
+                f.write_text(tpl(name).replace("__KEY__", top).replace("__COMPONENT__", imp(f, comp.with_suffix(""))),
+                             encoding="utf-8", newline="\n")
+                written.append(f)
+            elif ours(f):
+                f.unlink()
+        for p in ps:
+            keep[p["path"].strip("/")] = {k: p[k] for k in ("title", "description", "html", "jsonld", "lang", "url")}
+            if p.get("alternates"):
+                keep[p["path"].strip("/")]["alternates"] = p["alternates"]
+    # 作らなくなった入口のページを消す（管制塔が置いたものだけ）
+    live_tops = {k.split("/")[0] for k in keep}
+    for d in sorted(app.iterdir()):
+        if d.is_dir() and d.name not in live_tops and (ours(d / "page.tsx") or ours(d / "[...slug]" / "page.tsx")):
+            shutil.rmtree(d, ignore_errors=True)
+    data_p.parent.mkdir(parents=True, exist_ok=True)
+    data_p.write_text(json.dumps({"pages": keep}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
+    og = 'images: [{ url: "/ogp.png" }]' if (dest / "public" / "ogp.png").is_file() else ""
+    comp.parent.mkdir(parents=True, exist_ok=True)
+    comp.write_text(tpl("nextjs_aggregate_page.tsx").replace("__DATA__", imp(comp, data_p)).replace("__OG__", og),
+                    encoding="utf-8", newline="\n")
+    written += [data_p, comp]
+    gone = ["/" + k + "/" for k in old if k not in keep]
+    written += AP.update_indexes(dest, cfg, [p for p in pages if p["path"].strip("/") in keep], gone)
+    return written
+
+
+def write_aggregate_md(cfg, dest: Path, live):
+    """external-md: まとめのページを permalink つきの Markdown（本文は HTML）で pages_dir に置く。
+    HTML にするのは先方のビルド（記事と同じ）。置き場は sites/<id>.json の pages_dir（既定は content_dir の隣の pages/）"""
+    import aggregate_pages as AP
+    from urllib.parse import urlsplit
+    pages = AP.cached(cfg, live)
+    root = dest / (cfg.get("pages_dir") or (Path(cfg["content_dir"]).parent / "pages").as_posix())
+    written, keep = [], set()
+    for p in pages:
+        f = root / p["path"].strip("/") / "index.md"
+        if f.is_file() and "ss_managed: true" not in f.read_text(encoding="utf-8", errors="ignore")[:800]:
+            print(f"要対応: {cfg['id']} の {p['path']} は先方のページなので、まとめのページを置きません")
+            continue
+        link = urlsplit(p["url"]).path
+        front = {"title": p["title"], "description": p["description"], "permalink": link, "url": link,
+                 "lang": p["lang"], "layout": "page", "ss_managed": True}
+        if p.get("alternates"):
+            front["alternates"] = p["alternates"]
+        lds = "".join('\n<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
+                      + "</script>" for ld in p["jsonld"])
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text("---\n" + yaml.safe_dump(front, allow_unicode=True, sort_keys=False) + "---\n\n"
+                     + p["html"] + lds + "\n", encoding="utf-8", newline="\n")
+        written.append(f)
+        keep.add(p["path"])
+    gone = []
+    for f in sorted(root.rglob("index.md")) if root.is_dir() else []:
+        path = "/" + f.parent.relative_to(root).as_posix() + "/"
+        if path not in keep and "ss_managed: true" in f.read_text(encoding="utf-8", errors="ignore")[:800]:
+            f.unlink()
+            gone.append(path)
+    written += AP.update_indexes(dest, cfg, [p for p in pages if p["path"] in keep], gone)
+    return written
+
+
+def aggregate_for_git(cfg, dest: Path, extra=()):
+    """Git の配信先（external-html・nextjs-json・external-md）: 記事を書いたついでに、まとめのページを作り直す。
+    変わらなければ git の差分も出ない。失敗しても記事の配信は止めない（要対応として知らせる）"""
+    try:
+        live = _live_slugs(cfg, dest, extra)
+        if cfg["type"] == "external-html":
+            return write_aggregate_html(cfg, dest, live)[0]
+        if cfg["type"] == "nextjs-json":
+            return write_aggregate_nextjs(cfg, dest, live)
+        if cfg["type"] == "external-md":
+            return write_aggregate_md(cfg, dest, live)
+    except Exception as e:
+        print(f"要対応: {cfg['id']} のまとめのページを作れませんでした（{type(e).__name__}: {str(e)[:80]}）")
+    return []
+
+
+def aggregate_for_files(cfg, base: Path, extra=(), force=False):
+    """ftp・zip: 作業場所にまとめのページを書く（1日1回まで。WordPress の sync_if_stale と同じ間隔）。
+    (書いたもの, 置いたパス) を返す。今日もう届けていれば ([], None)"""
+    import aggregate_pages as AP
+    st = AP.load_state(cfg["id"])
+    if not force and st.get("at") == date.today().isoformat():
+        return [], None
+    try:
+        scfg = deliver_files.stage_cfg(cfg)
+        w, keep, _ = write_aggregate_html(scfg, base, _live_slugs(scfg, base, extra),
+                                          gone_extra=sorted(set(st.get("paths") or [])))
+        return w, keep
+    except Exception as e:
+        print(f"要対応: {cfg['id']} のまとめのページを作れませんでした（{type(e).__name__}: {str(e)[:80]}）")
+        return [], None
+
+
+def aggregate_files_done(cfg, keep):
+    """届けた後: FTP の社は、前に置いて今回作らなかったまとめのページをサーバーから消し、置いたパスを控える。
+    ZIP の社は先方が上げるので消せない（控えだけ残す）"""
+    import aggregate_pages as AP
+    if keep is None:
+        return
+    old = set(AP.load_state(cfg["id"]).get("paths") or [])
+    if cfg["type"] == "ftp" and old - keep:
+        with deliver_files.Remote(deliver_files.credentials(cfg)) as r:
+            for path in sorted(old - keep):
+                n = r.rmtree(path.strip("/"))
+                if n:
+                    print(f"  まとめのページを消しました: {path}（{n}ファイル）")
+    AP.save_state(cfg["id"], keep)
+
+
 
 # ============================================================
 # WordPress（REST API で投稿する）
@@ -1377,6 +1580,11 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
             html += f'\n<p class="ss-industry"><a href="{hub}" data-cta="article_industry_hub">{name}の記事をまとめて見る</a></p>\n'
     except Exception:
         pass
+    # テーマ・比較表・エリア・季節のまとめ（管制塔が作る固定ページ）のうち、この記事を含み、先方に既にあるものへ案内する
+    try:
+        html += wp_bridge.aggregate_links(cfg, rows, meta["slug"])
+    except Exception as e:
+        print(f"  [警告] まとめのページへの案内を飛ばしました（{str(e)[:60]}）")
     ensure_images(meta)
     html, n_img = _wp_body_images(cfg, html, meta["slug"])
     # 監修の表示はテーマに欄が無くても出るよう本文に入れる。構造化データは本文に入れない:
@@ -1593,9 +1801,12 @@ def main():
         written, chars = write_external_html(deliver_files.stage_cfg(cfg), base, meta, body, src)
         written.append(stamp_manifest(cfg, base, meta, src))
         written += search_files(cfg, base)
+        agg, keep = aggregate_for_files(cfg, base, {meta["slug"]})
+        written += agg
         print(f"配信先: {cfg['name']}（{cfg['type']}）/ 本文: {chars:,}字 / score {score}")
         print(f"  公開URL（予定）: {sites_mod.article_url(cfg, meta)}")
-        deliver_files.deliver(cfg, meta, written, base, args.push)
+        if deliver_files.deliver(cfg, meta, written, base, args.push):
+            aggregate_files_done(cfg, keep)
         return
 
     token = _push_token()
@@ -1609,6 +1820,7 @@ def main():
         written, chars = write_external_html(cfg, dest, meta, body, src)
     else:
         raise SystemExit(f"未対応のサイト種別: {cfg['type']}")
+    written += aggregate_for_git(cfg, dest, {meta["slug"]})
 
     written.append(stamp_manifest(cfg, dest, meta, src))
     written += search_files(cfg, dest)

@@ -85,9 +85,15 @@ def page_html(cat_name, rows, url_of, base="/compare/"):
             + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
 
-def index_html(cat_pages, base="/compare/"):
+def index_html(cat_pages, base="/compare/", extras=True):
+    """extras=False: AI集客ラボにしか無い写真・カテゴリの説明・URL診断への案内を出さない（ほかのサイトで404・事実違いになる）"""
     lis = "".join(f'<li><a href="{base}{slug}/"><strong>{_h.escape(name)}の比較表</strong><span class="cnt">{n}表</span></a></li>'
                   for slug, name, n in cat_pages)
+    if not extras:
+        return ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>比較表から探す</h2></div>'
+                '<p class="hub-lead">「何と何がどう違うか」「いくらかかるか」を、記事の表だけを集めて見比べられる入口です。'
+                '表は各記事にあるものと同じで、数字の根拠と前提は表の下の出典の記事に書いています。</p>'
+                f'<ul class="hub-list">{lis}</ul></div>')
     return ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>比較表から探す</h2></div>'
             '<p class="hub-lead">「何と何がどう違うか」「いくらかかるか」を、記事の表だけを集めて見比べられる入口です。</p>'
             '<figure class="lab-band"><img src="/images/shelf/cost-1.webp" alt="費用の見積もりを見比べる経営者のイメージ" '

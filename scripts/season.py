@@ -12,6 +12,7 @@
   python scripts/season.py                 # 見るだけ
   python scripts/season.py --write         # 直接接続があれば台帳の優先度を A に
 出す印: SEASON_OK=yes / SEASON_UP=<件>。結果: docs/season-<site>.md
+      と data/season/<site>.json（山の月だけ。自社サイト以外の社の「今の時期の特集」を aggregate_pages が作る）
 """
 import argparse
 import re
@@ -72,6 +73,82 @@ def upcoming(peak_month):
     return LEAD_WEEKS[0] <= weeks <= LEAD_WEEKS[1]
 
 
+# ---------- 季節の特集（自社サイト以外の社にも出す。aggregate_pages が読む） ----------
+STORE = ROOT / "data" / "season"
+WINDOW_MONTHS = 3        # 今月から3か月のうちに山が来る主題を「今の時期」とする
+FEATURE_MIN = 3          # 3本未満の主題は特集にしない（topics.MIN と同じ。薄い一覧を作らない）
+FEATURE_MAX = 6
+
+
+def save_peaks(site_id, pk, span, words):
+    """山の月だけを残す。表示回数は残さない（お客様の検索の数字を公開リポジトリに置かない）。
+    その社の記事の狙う語・題に出てくる語だけに絞る（特集は記事を束ねるだけなので、ほかの語は要らない）"""
+    import json
+    STORE.mkdir(parents=True, exist_ok=True)
+    peaks_ = {t: m for t, (m, _, _) in sorted(pk.items()) if t in words}
+    (STORE / f"{site_id}.json").write_text(json.dumps(
+        {"made": date.today().isoformat(), "span": int(span), "peak_ratio": PEAK_RATIO, "peaks": peaks_},
+        ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
+
+
+def feature(site_id, metas, today=None):
+    """今の時期の特集。[{term, month, members}]。12か月分の検索データがそろうまでは作らない（判定前）"""
+    import json
+    p = STORE / f"{site_id}.json"
+    if not p.is_file():
+        return []
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except ValueError:
+        return []
+    if int(d.get("span") or 0) < 12:
+        return []
+    today = today or date.today()
+    months = [(today.month - 1 + i) % 12 + 1 for i in range(WINDOW_MONTHS)]
+    out, used = [], set()
+    for t, m in sorted((d.get("peaks") or {}).items(), key=lambda kv: (months.index(kv[1]) if kv[1] in months else 99, kv[0])):
+        if m not in months:
+            continue
+        ms = [x for x in metas if x["slug"] not in used
+              and t in _tokens(f'{x.get("keyword", "")} {x.get("title", "")}')]
+        if len(ms) < FEATURE_MIN:
+            continue
+        out.append({"term": t, "month": m, "members": sorted(ms, key=lambda x: str(x.get("date", "")), reverse=True)})
+        used.update(x["slug"] for x in ms)
+        if len(out) >= FEATURE_MAX:
+            break
+    return out
+
+
+def page_html(groups, url_of, ratio=PEAK_RATIO):
+    """特集のページの中身。文は検索データ（山の月）と記事の題だけで作る"""
+    import html as _h
+    import json
+    blocks = []
+    for g in groups:
+        lis = "".join(f'<li><a href="{url_of(m)}">{_h.escape(m["title"])}</a>'
+                      f'<span class="cnt">{str(m.get("date", ""))[:7]}</span></li>' for m in g["members"])
+        blocks.append(f'<div class="latest-block"><div class="cat-head"><h2>{g["month"]}月に検索が増える「{_h.escape(g["term"])}」</h2>'
+                      f'<span class="cnt">{len(g["members"])}本</span></div><ul class="hub-list">{lis}</ul></div>')
+    flat = [m for g in groups for m in g["members"]]
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "今の時期の特集",
+          "mainEntity": {"@type": "ItemList", "numberOfItems": len(flat),
+                         "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": url_of(m), "name": m["title"]}
+                                             for i, m in enumerate(flat)]}}
+    return ('<div class="latest-block" data-cat="new">'
+            f'<p class="hub-lead">このサイトの検索データで、毎年この時期に検索が月平均の{ratio:g}倍以上に増えるテーマの記事をまとめています。'
+            '検索が増える前に読んでおくと、準備が間に合います。</p></div>' + "\n".join(blocks)
+            + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
+
+
+def _site_words(cfg):
+    try:
+        import wp_bridge
+        return set().union(*[_tokens(f'{m.get("keyword", "")} {m.get("title", "")}') for m, _, _ in wp_bridge._site_articles(cfg)] or [set()])
+    except Exception:
+        return set()
+
+
 def main():
     import gsc_detail as G
     import hub_client as HC
@@ -98,6 +175,7 @@ def main():
         if a.site and sid != a.site:
             continue
         pk = peaks(sc, cfg["domain"])
+        save_peaks(sid, pk, getattr(peaks, "span", 0), _site_words(cfg))
         if getattr(peaks, "span", 0) < 12:
             # 「季節の語が0」ではなく「まだ判定できない」。1年分そろうまでは山の月が決まらないので台帳も触らない
             print(f"■ {cfg['name']}: 検索データが{peaks.span}か月分しか無いため、季節の山はまだ判定できません（12か月分で判定）")

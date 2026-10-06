@@ -14,7 +14,7 @@ ss/v1 の REST を持つ（書き込みは編集者以上かつアプリケー�
 _redirects も llms.txt も置けない。静的サイト向けの道具（sitemap を平らな一覧として読む・URL を
 接頭辞で組み立てる・配信先に _redirects を書く）は、どれも WordPress では0件か404になっていた。
 
-  python scripts/wp_bridge.py --site <id> --sync     # llms.txt・鍵・GA4 と、業種ハブ・用語集の固定ページを揃える
+  python scripts/wp_bridge.py --site <id> --sync     # llms.txt・鍵・GA4 と、業種ハブ・用語集・まとめのページ（比較表・テーマ・エリア・季節・多言語）の固定ページを揃える
   python scripts/wp_bridge.py --check                # WordPress の社の版と自己更新の状態（WPBRIDGE_OK=）
   python scripts/wp_bridge.py --sign                 # プラグインに署名して案内（ss-bridge.json）を作る
   python scripts/wp_bridge.py --keygen               # 署名の鍵を作る（最初の1回だけ・鍵の中身は出力しない）
@@ -412,16 +412,79 @@ def sync_pages(cfg, rows=None, arts=None):
         made.append((GLOSSARY[0], st))
         if st == "taken":
             notes.append(f"要対応: {cfg['id']} に先方の固定ページ /{GLOSSARY[0]}/ があるため、用語集を作れません")
+    notes += sync_aggregate(cfg, rows, arts, made)
     for path, st in made:
         print(f"  /{path}/: {st}")
     return notes
 
 
+# ---------- 固定ページ（比較表・テーマ・エリア・今の時期の特集・多言語の要約） ----------
+
+def _aggregate(cfg, rows, arts=None, kinds=None):
+    """aggregate_pages.collect を WordPress の公開URLで呼ぶ。多言語の要約は /en/<slug>/（固定ページの階層）"""
+    import aggregate_pages as AP
+    by_slug = url_map(cfg, rows)
+    return AP.collect(cfg, live=set(by_slug), url_of=lambda m: by_slug[m["slug"]], kinds=kinds or AP.KINDS,
+                      i18n_prefix="", arts=arts)
+
+
+def sync_aggregate(cfg, rows, arts=None, made=None):
+    """まとめのページを固定ページで揃える（業種ハブと同じ upsert_page）。親（/compare/ など）を先に作り、
+    下に子を作る。作らなくなったページは下書きに戻す。要対応の行を返す"""
+    import aggregate_pages as AP
+    import publish
+    made = [] if made is None else made
+    notes, ids, keep = [], {}, {}
+    for p in sorted(_aggregate(cfg, rows, arts), key=lambda p: p["path"].count("/")):
+        segs = p["path"].strip("/").split("/")
+        parent = "/" + "/".join(segs[:-1]) + "/" if len(segs) > 1 else ""
+        if parent and parent not in ids:
+            continue                                   # 親を作れなかった（先方の同名ページ）
+        html = p["html"] + "".join('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>"
+                                   for ld in p["jsonld"])
+        pid, st = upsert_page(cfg, segs[-1], p["title"], html, parent=ids.get(parent, 0))
+        made.append((p["path"].strip("/"), st))
+        if st == "taken":
+            notes.append(f"要対応: {cfg['id']} に先方の固定ページ {p['path']} があるため、まとめのページを作れません")
+            continue
+        ids[p["path"]] = pid
+        keep.setdefault(ids.get(parent, 0), set()).add(segs[-1])
+    # 下限を割ったテーマ・エリア、指示の外れた言語などは下書きに戻す（管制塔が作ったものだけ。下のページごと）
+    def kids_of(pid):
+        got = publish._wp_call(cfg, f"pages?parent={pid}&status=publish&context=edit&_fields=id,slug,meta&per_page=100")
+        return [k for k in got if str((k.get("meta") or {}).get("_ss_managed") or "") == "1"] if isinstance(got, list) else []
+
+    def draft(k):
+        publish._wp_call(cfg, f"pages/{k['id']}", {"status": "draft"}, method="POST")
+        made.append((k.get("slug", ""), "drafted"))
+        for c in kids_of(k["id"]):
+            draft(c)
+    for parent_id in [0] + [ids[p] for p in ids]:
+        for k in kids_of(parent_id):
+            if parent_id == 0 and k.get("slug") not in AP.TOPS + AP.LANGS:
+                continue                               # 入口の外（業種ハブ・用語集・メニュー・先方のページ）は触らない
+            if k.get("slug") not in keep.get(parent_id, set()):
+                draft(k)
+    return notes
+
+
+def aggregate_links(cfg, rows, slug):
+    """記事の末尾に置く、その記事を含むまとめのページへの案内。先方に既にある（公開中の）ページだけ"""
+    import aggregate_pages as AP
+    there = {urllib.parse.urlsplit(r["url"]).path: r["url"] for r in rows if r.get("managed")}
+    pages = _aggregate(cfg, rows + [{"slug": slug, "url": "", "type": "post"}], kinds=TOP_KINDS)
+    return AP.links_html(pages, slug, url_for=lambda path: there.get(path))
+
+
+TOP_KINDS = ("compare", "topics", "area", "season")
+
+
 def sync_if_stale(cfg, rows, hours=20):
-    """記事を公開したついでに、業種のまとめ・用語集を作り直す（1日1回まで）。
+    """記事を公開したついでに、業種のまとめ・用語集・まとめのページを作り直す（1日1回まで）。
     WordPress の社には週次のビルドが無いので、ここで回さないとまとめのページが古いまま残る"""
     from datetime import datetime, timedelta, timezone
-    tops = {HUB_PARENT[0], GLOSSARY[0]}
+    import aggregate_pages as AP
+    tops = {HUB_PARENT[0], GLOSSARY[0], *AP.TOPS, *AP.LANGS}
     mods = [r.get("modified") or "" for r in rows
             if r.get("managed") and urllib.parse.urlsplit(r["url"]).path.strip("/") in tops]
     since = datetime.now(timezone.utc) - timedelta(hours=hours)

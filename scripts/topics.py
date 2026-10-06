@@ -98,7 +98,8 @@ def build(site_id, metas):
     return groups
 
 
-def page_html(g, url_of):
+def page_html(g, url_of, extras=True, base="/topics/"):
+    """extras=False: AI集客ラボにしか無い URL診断への案内を出さない（ほかのサイトで404になる）"""
     p = g["pillar"]
     items = "".join(f'<li><a href="{url_of(m)}">{_h.escape(m["title"])}</a>'
                     f'<span class="cnt">{str(m.get("date", ""))[:7]}</span></li>' for m in g["members"] if m is not p)
@@ -114,14 +115,15 @@ def page_html(g, url_of):
             f'<div class="enrich-block" style="margin-top:2.2rem"><h2>このテーマの読み進め方</h2><ol class="enrich-steps">'
             f'<li><b>まず読む1本から</b><span>「{_h.escape(g["name"])}」の全体像は、最初に挙げた1本にまとめています。</span></li>'
             '<li><b>気になる論点を掘り下げる</b><span>一覧の記事は、費用・やり方・注意点など、1本ごとに1つの論点を扱っています。</span></li>'
-            '<li><b>自社に当てはめる</b><span>URL診断で自社サイトの現在地を確かめると、どの記事から手を付けるかが決まります。'
-            '<a href="/tools/url-check/">URL診断（無料）</a></span></li></ol></div>'
-            f'<p class="hub-note"><a href="/topics/">← テーマ一覧へ</a></p></div>'
+            + ('<li><b>自社に当てはめる</b><span>URL診断で自社サイトの現在地を確かめると、どの記事から手を付けるかが決まります。'
+               '<a href="/tools/url-check/">URL診断（無料）</a></span></li>' if extras else "")
+            + '</ol></div>'
+            f'<p class="hub-note"><a href="{base}">← テーマ一覧へ</a></p></div>'
             '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
 
-def index_html(groups):
-    lis = "".join(f'<li><a href="/topics/{g["slug"]}/"><strong>{_h.escape(g["name"])}</strong>'
+def index_html(groups, base="/topics/"):
+    lis = "".join(f'<li><a href="{base}{g["slug"]}/"><strong>{_h.escape(g["name"])}</strong>'
                   f'<span class="cnt">{len(g["members"])}本</span></a>'
                   f'<span class="hub-lead">まず読む1本: {_h.escape(g["pillar"]["title"][:40])}</span></li>' for g in groups)
     return ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>テーマから探す</h2>'
