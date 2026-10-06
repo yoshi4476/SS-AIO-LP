@@ -199,30 +199,30 @@
   "費用": {
    "answers": 72,
    "portal": 35,
-   "public": 17,
    "clinic": 69,
-   "media": 23,
+   "public": 17,
    "maker": 12,
+   "media": 23,
    "other": 7,
    "video": 1
   },
   "選び方": {
    "answers": 37,
-   "media": 22,
-   "portal": 23,
-   "public": 20,
-   "other": 5,
-   "video": 4,
    "clinic": 31,
+   "public": 20,
+   "portal": 23,
+   "video": 4,
+   "other": 5,
+   "media": 22,
    "maker": 12
   },
   "症状": {
    "answers": 55,
-   "media": 35,
    "clinic": 55,
+   "media": 35,
    "portal": 37,
-   "public": 20,
    "maker": 29,
+   "public": 20,
    "video": 3,
    "other": 4,
    "wiki": 4
@@ -234,8 +234,8 @@
    "media": 19,
    "portal": 29,
    "maker": 24,
-   "other": 5,
-   "video": 4
+   "video": 4,
+   "other": 5
   }
  }
 }

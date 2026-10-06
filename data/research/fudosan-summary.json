@@ -181,9 +181,9 @@
   "全体": {
    "answers": 285,
    "clinic": 251,
+   "video": 34,
    "media": 144,
    "portal": 227,
-   "video": 34,
    "maker": 125,
    "public": 79,
    "other": 42,
@@ -192,9 +192,9 @@
   "地域で探す": {
    "answers": 80,
    "clinic": 65,
+   "video": 2,
    "media": 32,
    "portal": 61,
-   "video": 2,
    "maker": 41,
    "public": 14,
    "other": 3,
@@ -205,41 +205,41 @@
    "clinic": 56,
    "other": 7,
    "public": 19,
+   "review": 3,
    "maker": 29,
    "portal": 46,
-   "review": 3,
    "media": 22,
    "video": 4
   },
   "選び方": {
    "answers": 43,
-   "media": 26,
-   "portal": 41,
-   "clinic": 43,
    "maker": 12,
+   "clinic": 43,
+   "portal": 41,
+   "media": 26,
    "public": 7,
    "video": 11,
-   "other": 4,
-   "review": 1
+   "review": 1,
+   "other": 4
   },
   "手続き・トラブル": {
    "answers": 46,
    "clinic": 41,
    "portal": 35,
    "public": 25,
-   "media": 26,
    "maker": 23,
+   "media": 26,
    "video": 6,
    "review": 2,
    "other": 13
   },
   "物件・街の探し方": {
    "answers": 54,
-   "media": 38,
-   "portal": 44,
-   "other": 15,
    "maker": 20,
    "clinic": 46,
+   "portal": 44,
+   "media": 38,
+   "other": 15,
    "public": 14,
    "video": 11
   }
