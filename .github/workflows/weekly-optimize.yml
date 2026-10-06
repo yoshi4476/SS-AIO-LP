@@ -304,7 +304,8 @@ jobs:
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
       - name: 盤面の空きを出す（業種 × 手法）
         run: |
-          for s in ai-lab corporate subsidy; do
+          # 全社（お客様の社も）。sites/*.json から一覧を作る（3サイトを並べるとお客様に回らない）
+          for s in $(python scripts/sites.py --ids); do
             python scripts/coverage.py --site "$s" || true
             python scripts/coverage.py --site "$s" --gaps 8 || true
           done
@@ -506,7 +507,7 @@ jobs:
 
       - name: 内部リンクの補充（被リンクの少ない記事へ）
         run: |
-          for s in ai-lab corporate subsidy; do
+          for s in $(python scripts/sites.py --ids); do
             python scripts/link_boost.py "$s" --write || true
           done
 
@@ -523,7 +524,8 @@ jobs:
             python scripts/mentions.py --check || true; } > automation/logs/rank_rescue.txt 2>&1
           tail -40 automation/logs/rank_rescue.txt
           grep '^要対応' automation/logs/rank_rescue.txt >> automation/logs/findings.txt || true
-          for s in ai-lab corporate subsidy; do
+          # 全社。GSC の権限が無い社は順位が取れず、その社は対象0本で終わる（|| true で他社は続く）
+          for s in $(python scripts/sites.py --ids); do
             python scripts/link_boost.py "$s" --rescue --write || true
             # URL検査で未登録のまま公開3週を過ぎた記事へ、検索1ページ目の記事から文中リンク（1回5記事まで）。
             # 再通知（reindex --from-cache）だけでは登録まで届かなかった（コーポレートの 8/30〜9/9 公開分）
@@ -804,7 +806,8 @@ jobs:
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi
 
-      # お客様の競合比較（gaps.json）は public に置かないため、月次が残したキャッシュから戻す
+      # お客様の競合比較（gaps.json）は public に置かないため、月次が残したキャッシュから戻す。
+      # 自社だけ: 自社3サイトの分はコミット済みなのでキャッシュの対象から外す
       - name: 競合比較の控えを戻す
         uses: actions/cache/restore@v4
         with:

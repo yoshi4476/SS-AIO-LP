@@ -197,6 +197,7 @@ jobs:
         run: |
           n=$(python -c "import json;print(json.load(open('data/focus_mode.json',encoding='utf-8'))['title_per_run'])")
           python scripts/auto_rewrite.py --write --kind title --limit "$n" --skip-recent 7 --tag focus \
+            --sites "$(python scripts/focus_report.py --sites)" \
             --parallel 3 --budget-min 60 || true
 
       # 11〜30位で、需要のある問いに答える節が無い記事（rank_rescue の対象）
@@ -209,13 +210,15 @@ jobs:
         run: |
           n=$(python -c "import json;print(json.load(open('data/focus_mode.json',encoding='utf-8'))['stuck_per_run'])")
           python scripts/auto_rewrite.py --write --kind stuck --limit "$n" --skip-recent 7 --tag focus \
+            --sites "$(python scripts/focus_report.py --sites)" \
             --parallel 3 --budget-min 30 || true
 
       # 11〜30位へは --rescue（週次と同じ上限）、4〜10位へは自分より上位の記事からだけ送る（--band）。
       # 4〜20位へは本文に既にある語句を囲む文中リンク（--inline）。リンクだけの段落は上限に当たった記事が多いため
       - name: 内部リンクを寄せる（11〜30位・4〜10位）
         run: |
-          for s in ai-lab corporate subsidy; do
+          # 当てる社は data/focus_mode.json の sites（無ければ自社だけ）。お客様に広げるかは運用者が選ぶ
+          for s in $(python scripts/focus_report.py --sites); do
             python scripts/link_boost.py "$s" --rescue --write || true
             python scripts/link_boost.py "$s" --band=4-10 --write || true
             python scripts/link_boost.py "$s" --band=4-20 --inline --write || true
@@ -304,7 +307,8 @@ jobs:
           BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
         run: |
           mkdir -p automation/logs
-          for s in ai-lab corporate subsidy; do
+          # 自社だけ: お客様のサイトは先方の Bing アカウントの持ち物で、こちらの鍵では送れない
+          for s in $(python scripts/sites.py --own); do
             out=$(python scripts/bing_webmaster.py --site "$s" 2>&1) || true
             echo "$out" | tail -6
             echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true

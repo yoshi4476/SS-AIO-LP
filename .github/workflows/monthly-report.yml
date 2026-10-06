@@ -121,7 +121,7 @@ jobs:
           } > .env
 
       # 競合比較（compete.py）。お客様の分は public リポジトリに置かない（.gitignore）ので、キャッシュで月をまたぐ。
-      # 自社3サイトと月の回数はコミット済みなので、キャッシュで上書きしない
+      # 自社だけ: 自社3サイトと月の回数はコミット済みなので、キャッシュで上書きしない
       - name: 競合比較の控えを戻す
         if: steps.gate.outputs.ready == 'true'
         uses: actions/cache/restore@v4
@@ -158,6 +158,7 @@ jobs:
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           python scripts/compete.py --gaps 2>&1 | tail -25 || true
 
+      # 自社だけ: 自社3サイトの分はコミットするので、キャッシュに残すのはお客様の分だけ
       - name: 競合比較の控えを残す
         if: always() && steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         uses: actions/cache/save@v4
