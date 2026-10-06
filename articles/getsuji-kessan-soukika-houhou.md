@@ -47,6 +47,8 @@ faq:
 
 月次決算の早期化とは、締め作業の手順とルールを見直し、試算表が確定するまでの日数を短くする取り組みのことです。
 
+早期化した月次決算は、四半期の数字を出す土台にもなります。[月次決算と四半期決算の違い](/blog/getsuji-shihanki-kessan-chigai/)もあわせてご覧ください。
+
 関連する内容として[楽楽精算の経費精算のやり方](/blog/rakurakuseisan-keihi-seisan-yarikata/)も公開しています。
 
 関連する内容として[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)も公開しています。
