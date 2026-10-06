@@ -79,7 +79,7 @@ def main():
         agg, keep = publish.aggregate_for_files(cfg, base, force=True)
         if DF.deliver_batch(cfg, written + agg, base, a.push, "描き直し"):
             publish.aggregate_files_done(cfg, keep)
-        return
+        return 0
     if cfg["type"] == "wordpress":
         return rerender_wordpress(cfg, a.push)
     # Next.js の社も、本文HTML込みのJSONを描いて置く方式なので、描き方（監修の表示・画像の置き場）を
@@ -118,11 +118,11 @@ def main():
     print(f"配信先で変わるファイル: {len([ln for ln in st.splitlines() if ln.strip()])}")
     if not a.push:
         print("押していません（--push で配信）")
-        return
+        return 0
     # 変わらない回に commit すると git が「何も無い」で落ち、週次の工程ごと失敗していた
     if not st.strip():
         print("変更が無いので押しません")
-        return
+        return 0
     subprocess.run(["git", "add", "-A"], cwd=dest, check=True)
     subprocess.run(["git", "-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp",
                     "commit", "-q", "-m", f"記事{len(done)}本を、いまのテンプレートと設定で描き直す"],
@@ -134,7 +134,10 @@ def main():
     print("push:", "OK" if r.returncode == 0 else "NG")
     if r.returncode != 0:
         print(r.stderr[-400:].replace(token or "@@", "***"))
+        # 押せなかった回を成功に見せない（rerender_watch が指紋を進めず、次の回にやり直す）
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
