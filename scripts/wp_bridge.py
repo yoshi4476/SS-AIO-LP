@@ -271,6 +271,12 @@ def push_settings(cfg, rows=None):
         data["indexnow_key"] = key
     if ga4_id(cfg):
         data["ga4"] = ga4_id(cfg)
+    # Bing の確認コード（同意のある社だけ）。/BingSiteAuth.xml を返す窓口はプラグインの次の版で足す（署名し直しが要る）
+    if cfg.get("bing_consent") is True:
+        import bing_webmaster
+        code = bing_webmaster.auth_code(cfg)
+        if code:
+            data["bing_auth"] = code
     st = cfg.get("cta_sticky") or {}
     if st.get("url") and st.get("label") and to_path(cfg, st["url"]):
         data["sticky"] = {"url": to_path(cfg, st["url"]), "label": st["label"],

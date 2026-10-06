@@ -17,6 +17,12 @@ Bing の索引を使うため、自社サイトの本番 sitemap のうち一度
 各サイト10件（RESERVE）はその日の新しい記事のために残す。送った記録は data/bing_backfill.json に残して
 コミットする（bing_submit.json は7日で消え、CI のキャッシュも消えうるため、送り切りの記録には使えない）。
 
+お客様の社（2026-10-06）: ヒアリングシートで「当社の Bing アカウントで登録することに同意」を「可」にした社
+（sites/<id>.json の bing_consent）だけ、当社の Bing アカウントにドメインを足し（AddSite）、確認コード
+（GetUserSites の AuthenticationCode）を BingSiteAuth.xml として配信と一緒に置き（search_connect.place・publish.py）、
+本番に出たら所有権を確かめる（VerifySite）。確かめられた社から、自社と同じく公開直後・週次・送り切りの対象に入る。
+同意の無い社は対象外のまま（先方の Bing アカウントの持ち物）。
+
 鍵: 環境変数 BING_WEBMASTER_API_KEY（.env と GitHub Secrets）。鍵が無ければ何もせず BING_OK=unset。
 印: BING_OK=yes / no（要対応あり）/ unknown（すべて送れなかった）/ unset。終了コードは常に0（8.7節）。
 
@@ -28,11 +34,14 @@ Bing の索引を使うため、自社サイトの本番 sitemap のうち一度
   sitemap   https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi.submitfeed
             （SubmitSitemap という名の操作は無く、SubmitFeed が sitemap を受ける）
   エラー    https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.apierrorcode
+  サイトの追加・確認  https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi
+            （AddSite / GetUserSites / VerifySite。確認コードは Site.AuthenticationCode）
   鍵の発行  https://learn.microsoft.com/en-us/bingwebmaster/getting-access
 """
 import json
 import math
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -118,6 +127,161 @@ def submit_feed(site_url, feed_url, key):
     _request("POST", "SubmitFeed", key, body={"siteUrl": site_url, "feedUrl": feed_url})
 
 
+# ---------- お客様のドメインを当社の Bing アカウントへ足す ----------
+
+SITE_AUTH = "BingSiteAuth.xml"
+WAIT_DAYS = 7
+
+
+def _host(u):
+    return urllib.parse.urlsplit(u if "//" in u else "https://" + u).netloc.lower()
+
+
+def client_cfgs():
+    """同意のあるお客様の社（ヒアリングシートで「当社の Bing アカウントで登録することに同意」を可にした社）"""
+    import sites as S
+    return {sid: c for sid, c in S.load_all().items() if S.is_client(sid) and c.get("bing_consent") is True}
+
+
+def user_sites(key):
+    """当社の Bing アカウントにあるサイト {ドメイン: {"code", "verified"}}"""
+    rows = _request("GET", "GetUserSites", key).get("d") or []
+    return {_host(r["Url"]): {"code": r.get("AuthenticationCode") or "", "verified": bool(r.get("IsVerified"))}
+            for r in rows if isinstance(r, dict) and r.get("Url")}
+
+
+def add_site(site_url, key):
+    _request("POST", "AddSite", key, body={"siteUrl": site_url})
+
+
+def verify_site(site_url, key):
+    return bool(_request("POST", "VerifySite", key, body={"siteUrl": site_url}).get("d"))
+
+
+def auth_code(cfg, key=None, add=True):
+    """お客様のドメインの確認コード（BingSiteAuth.xml に書く）。同意の無い社・鍵が無いときは ""。
+    当社のアカウントにまだ無ければ足してから取る（記事の配信と同じ回で確認ファイルを置けるように）"""
+    if cfg.get("bing_consent") is not True:
+        return ""
+    key = api_key() if key is None else key
+    if not key:
+        return ""
+    dom = cfg["domain"].lower()
+    try:
+        have = user_sites(key)
+        if dom not in have and add:
+            add_site(f"https://{dom}/", key)
+            have = user_sites(key)
+    except BingError as e:
+        print(f"  {cfg['id']}: Bing の確認コードを取れません（{classify(e)}）")
+        return ""
+    return (have.get(dom) or {}).get("code", "")
+
+
+def auth_users(text):
+    return re.findall(r"<user>\s*([^<\s]+)\s*</user>", text or "")
+
+
+def site_auth_xml(codes, current=""):
+    """BingSiteAuth.xml の中身。先方が自分の Bing アカウントのために置いた分（current）を消さずに足す"""
+    users = list(dict.fromkeys(auth_users(current) + [c for c in codes if c]))
+    return '<?xml version="1.0"?>\n<users>\n' + "".join(f"\t<user>{u}</user>\n" for u in users) + "</users>\n"
+
+
+def live_auth(domain):
+    """本番の BingSiteAuth.xml の中身（無ければ ""）"""
+    try:
+        req = urllib.request.Request(f"https://{domain}/{SITE_AUTH}", headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return r.read().decode("utf-8", "ignore")
+    except Exception:
+        return ""
+
+
+def connect(cfgs, key, ledger=None, today=None):
+    """同意のあるお客様の社を当社の Bing アカウントへ足し、確認ファイルが本番に出ていれば所有権を確かめる。
+    state: verified / waiting（ファイル待ち）/ stuck（WAIT_DAYS を過ぎても出ない）/ failed（出ているのに確認できない）/ error。
+    ledger（送り切りの記録・selfheal がコミットする）があれば、待ち始めた日を残して stuck を判定する"""
+    today = today or date.today().isoformat()
+    waits = ledger.setdefault("connect", {}) if ledger is not None else {}
+    try:
+        have = user_sites(key) if cfgs else {}
+    except BingError as e:
+        return [{"site": sid, "domain": c["domain"], "state": "error", "msg": str(e)} for sid, c in cfgs.items()]
+    out = []
+    for sid, cfg in cfgs.items():
+        dom = cfg["domain"].lower()
+        r = {"site": sid, "domain": dom, "state": "verified", "msg": ""}
+        out.append(r)
+        try:
+            if dom not in have:
+                add_site(f"https://{dom}/", key)
+                have = user_sites(key)
+            info = have.get(dom) or {}
+            if info.get("verified"):
+                waits.pop(sid, None)
+                continue
+            code = info.get("code", "")
+            if not code:
+                r["state"], r["msg"] = "error", "確認コードが返りません"
+                continue
+            if cfg.get("type") == "wordpress":
+                # WordPress は直下にファイルを置けない。橋渡しへ確認コードを渡す（返す窓口はプラグインの版による）
+                import wp_bridge
+                try:
+                    wp_bridge.push_settings(cfg)
+                except SystemExit as e:
+                    r["msg"] = f"橋渡しへ確認コードを渡せません（{str(e)[:60]}）"
+            if code not in auth_users(live_auth(dom)):
+                since = waits.setdefault(sid, today)
+                late = (date.fromisoformat(today) - date.fromisoformat(since)).days > WAIT_DAYS
+                r["state"] = "stuck" if late else "waiting"
+                continue
+            if verify_site(f"https://{dom}/", key):
+                waits.pop(sid, None)
+            else:
+                r["state"], r["msg"] = "failed", "VerifySite が確認できないと返しました"
+        except BingError as e:
+            r["state"], r["msg"] = "error", str(e)
+    return out
+
+
+def connect_report(results):
+    """つなぐ工程の行。人が動くまで消えないもの（失敗・長く出ない）だけ要対応にする"""
+    bad = []
+    for r in results:
+        url = f"https://{r['domain']}/{SITE_AUTH}"
+        if r["state"] == "verified":
+            print(f"  {r['site']}: Bing の所有権を確認済み（送信の対象）")
+        elif r["state"] == "waiting":
+            print(f"確認中: {r['domain']} の Bing の確認ファイル {url} が本番に出るのを待っています（記事の配信と一緒に置きます）")
+        elif r["state"] == "stuck":
+            bad.append(f"要対応: {r['domain']} の Bing の確認ファイル {url} が{WAIT_DAYS}日たっても本番に出ていません"
+                       "（配信先の公開フォルダの直下に置かれているか確かめてください）")
+        elif r["state"] == "failed":
+            bad.append(f"要対応: {r['domain']} を Bing で所有権を確認できません（{url} の中身を確かめてください）")
+        else:
+            bad.append(f"要対応: {r['domain']} を当社の Bing アカウントへ足せません（{r['msg']}）")
+    for b in dict.fromkeys(bad):
+        print(b)
+    return bad
+
+
+def send_cfgs(key=None):
+    """送ってよい社＝自社と、同意があり当社の Bing アカウントで所有権を確かめたお客様の社"""
+    out = dict(own_cfgs())
+    cl = client_cfgs()
+    if not cl:
+        return out
+    key = api_key() if key is None else key
+    try:
+        have = user_sites(key) if key else {}
+    except BingError:
+        have = {}
+    out.update({sid: c for sid, c in cl.items() if (have.get(c["domain"].lower()) or {}).get("verified")})
+    return out
+
+
 def load_state():
     try:
         s = json.loads(STATE.read_text(encoding="utf-8")) if STATE.is_file() else {}
@@ -161,9 +325,11 @@ def send_site(sid, domain, urls, key, state, today, sitemap=True):
     return res
 
 
-def report(results):
-    """印と要対応の行を出す。未登録・鍵の誤りは人が手を動かすまで消えないので要対応にする"""
-    bad = []
+def report(results, bad=None):
+    """印と要対応の行を出す。未登録・鍵の誤りは人が手を動かすまで消えないので要対応にする
+    （bad: つなぐ工程で出た要対応。行は connect_report が出し済み）"""
+    shown = list(bad or [])
+    bad = list(shown)
     for r in results:
         line = (f"  {r['site']}: URL {r['sent']}件を送信・本日送信済み {r['skipped_today']}件は省略"
                 f"{'・枠を超えるため ' + str(r['over_quota']) + '件は次回' if r['over_quota'] else ''}"
@@ -174,7 +340,8 @@ def report(results):
         elif r["state"] == "invalid_key":
             bad.append("要対応: Bing Webmaster の API キーが無効です（BING_WEBMASTER_API_KEY を作り直してください）")
     for b in dict.fromkeys(bad):
-        print(b)
+        if b not in shown:
+            print(b)
     if bad:
         print("BING_OK=no")
     elif results and all(r["state"] != "ok" for r in results):
@@ -196,8 +363,7 @@ def recent_urls(cfg, days):
 
 
 def own_cfgs():
-    """送ってよい社＝自社だけ。お客様のサイトは先方の Bing アカウントの持ち物で、こちらの鍵では送れない
-    （送り切りの backfill も同じ理由で自社だけ）"""
+    """自社の社。お客様の社は、同意を取り所有権を確かめた社だけ send_cfgs が足す"""
     import sites as S
     cfgs = S.load_all()
     return {sid: cfgs[sid] for sid in S.own_ids() if sid in cfgs}
@@ -212,7 +378,7 @@ def jobs_for_urls(urls, cfgs):
         if host in by_dom:
             out.setdefault((by_dom[host], host), []).append(u.strip())
         else:
-            print(f"  {host}: 自社のサイトではない（sites/*.json に無い・お客様の Bing は先方の持ち物）ため送りません")
+            print(f"  {host}: 送り先にない（sites/*.json に無い・同意が無い・Bing で所有権を確かめていない）ため送りません")
     return out
 
 
@@ -223,7 +389,7 @@ def send_urls(urls, sitemap=False):
         return []
     state, today = load_state(), date.today().isoformat()
     res = [send_site(sid, dom, us, key, state, today, sitemap)
-           for (sid, dom), us in jobs_for_urls(urls, own_cfgs()).items()]
+           for (sid, dom), us in jobs_for_urls(urls, send_cfgs(key)).items()]
     save_state(state, today)
     return res
 
@@ -277,12 +443,13 @@ def backfill_site(sid, domain, entries, key, state, ledger, today, dry=False):
     return res
 
 
-def backfill_report(results, dry=False):
-    """送り切りの印。枠切れ（throttled）は翌日に持ち越すだけなので要対応にしない"""
-    if results and all(r["state"] == "ok" and r["left"] == 0 and r["sent"] == 0 for r in results):
+def backfill_report(results, dry=False, pre_bad=()):
+    """送り切りの印。枠切れ（throttled）は翌日に持ち越すだけなので要対応にしない
+    （pre_bad: つなぐ工程の要対応。行は connect_report が出し済み）"""
+    if not pre_bad and results and all(r["state"] == "ok" and r["left"] == 0 and r["sent"] == 0 for r in results):
         print("BING_OK=yes")
         return
-    bad = []
+    bad = list(pre_bad)
     for r in results:
         if r["state"] == "ok":
             days = math.ceil(r["left"] / r["per_day"]) if r["left"] and r["per_day"] else 0
@@ -298,7 +465,8 @@ def backfill_report(results, dry=False):
         elif r["state"] != "throttled":
             bad.append(f"要対応: Bing への送り切りが失敗しました — {r['domain']}（{r['msg']}）")
     for b in dict.fromkeys(bad):
-        print(b)
+        if b not in pre_bad:
+            print(b)
     print(f"BING_BACKFILL_LEFT={sum(r['left'] for r in results)}")
     if bad:
         print("BING_OK=no")
@@ -309,17 +477,18 @@ def backfill_report(results, dry=False):
 
 
 def backfill(argv, key):
-    import sites as S
-    cfgs = S.load_all()
     only = argv[argv.index("--site") + 1] if "--site" in argv and len(argv) > argv.index("--site") + 1 else ""
     dry = "--dry-run" in argv
     state, ledger, today = load_state(), load_backfill(), date.today().isoformat()
     results = []
-    # お客様のサイトは先方の Bing アカウントの持ち物で、こちらの鍵では送れない
-    for sid in S.own_ids():
+    # 同意のあるお客様の社は、毎日ここでつなぐ（足す→確認ファイルが出ていれば所有権を確かめる）。待ち始めた日は ledger に残る
+    cl = {sid: c for sid, c in client_cfgs().items() if not only or sid == only}
+    pre_bad = connect_report(connect(cl, key, ledger, today)) if cl and not dry else []
+    # 同意の無いお客様の社は先方の Bing アカウントの持ち物のため送らない
+    for sid, cfg in send_cfgs(key).items():
         if only and sid != only:
             continue
-        dom = cfgs[sid]["domain"]
+        dom = cfg["domain"]
         try:
             entries = sitemap_entries(dom)
         except Exception as e:
@@ -330,7 +499,7 @@ def backfill(argv, key):
     if not dry:
         save_state(state, today)
         save_backfill(ledger)
-    backfill_report(results, dry)
+    backfill_report(results, dry, pre_bad)
     return 0
 
 
@@ -343,13 +512,17 @@ def main(argv=None):
         return 0
     if "--backfill" in argv:
         return backfill(argv, key)
-    cfgs = own_cfgs()
     state, today = load_state(), date.today().isoformat()
     only = argv[argv.index("--site") + 1] if "--site" in argv and len(argv) > argv.index("--site") + 1 else ""
+    # 同意のあるお客様の社は、送る前につなぐ（記事CIでは、配信と一緒に置いた確認ファイルがこの時点で本番に出ている）
+    cl = {sid: c for sid, c in client_cfgs().items() if (sid == only if only else "--weekly" in argv)}
+    bad = connect_report(connect(cl, key)) if cl else []
+    cfgs = send_cfgs(key)
     if only and only not in cfgs:
-        # 記事CI（pipeline-multi）はお客様の社でも呼ぶ。先方の Bing はこちらの鍵では送れない
-        print(f"{only}: お客様のサイトは先方の Bing アカウントの持ち物のため送りません")
-        print("BING_OK=unset")
+        # 記事CI（pipeline-multi）はお客様の社でも呼ぶ。同意の無い社は先方の Bing アカウントの持ち物で送らない
+        print(f"{only}: " + ("Bing の所有権の確認がまだのため、今回は送りません" if only in cl else
+                             "Bing への登録に同意の無いお客様のサイト（先方の Bing アカウントの持ち物）のため送りません"))
+        print("BING_OK=" + ("no" if bad else "unset"))
         return 0
     urls = [a for a in argv if a.startswith("http")]
     results = []
@@ -363,7 +536,7 @@ def main(argv=None):
                 continue
             results.append(send_site(sid, cfg["domain"], recent_urls(cfg, days), key, state, today))
     save_state(state, today)
-    report(results)
+    report(results, bad)
     return 0
 
 

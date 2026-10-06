@@ -3,6 +3,7 @@
 
 使い方: python scripts/notify_indexnow.py <URL> [<URL> ...]
         引数なしの場合は sitemap.xml の全URLを通知
+        python scripts/notify_indexnow.py --site <id>   # その社の本日公開・更新の記事だけ（記事CIの公開直後）
 前提: .env に INDEXNOW_KEY を設定し、site/{KEY}.txt を配置していること
 
 処理はすべて main() の中に置く。モジュールの直下に書くと、他のスクリプトが
@@ -84,10 +85,24 @@ def notify(urls, key, site_url):
         return res.status
 
 
-def main(argv=None):
-    """3サイトすべてに通知する。以前は AI集客ラボ だけを見ていたため、
-    コーポレートと補助金は記事を出しても検索エンジンに知らせていなかった"""
-    argv = sys.argv[1:] if argv is None else argv
+def recent_urls(cfg):
+    """本日公開・更新した記事のうち、本番の sitemap に載っているもの（記事CIの公開直後に1社分だけ送る）"""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import notify_indexing as NX
+    known = {u.rstrip("/") + "/" for u in NX.sitemap_of(cfg)}
+    return [u for u in NX.todays_urls(cfg) if u.rstrip("/") + "/" in known]
+
+
+def main(argv=None, cfgs=None):
+    """全サイトに通知する。以前は AI集客ラボ だけを見ていたため、
+    コーポレートと補助金は記事を出しても検索エンジンに知らせていなかった。
+    --site <id> は記事CIの公開直後の分（その社の本日の記事だけ。お客様の社も同じ）"""
+    argv = list(sys.argv[1:] if argv is None else argv)
+    only = ""
+    if "--site" in argv:
+        i = argv.index("--site")
+        only = argv[i + 1] if len(argv) > i + 1 else ""
+        argv = argv[:i] + argv[i + 2:]
     env = load_env()
     key = find_key(env)
     if not key:
@@ -102,7 +117,10 @@ def main(argv=None):
     sys.path.insert(0, str(ROOT / "scripts"))
     import sites as S
     sent = 0
-    for sid, cfg in S.load_all().items():
+    cfgs = S.load_all() if cfgs is None else cfgs
+    for sid, cfg in cfgs.items():
+        if only and sid != only:
+            continue
         dom = cfg["domain"]
         wp = cfg.get("type") == "wordpress"
         if wp and not key_ok(dom, key):
@@ -114,13 +132,21 @@ def main(argv=None):
                 print(f"  {sid}: 橋渡しへ鍵を渡せません（{str(e)[:60]}）")
         if not key_ok(dom, key):
             print(f"  {sid}: 鍵ファイル https://{dom}/{key}.txt がありません（通知は拒否されます）")
+            if only and S.is_client(sid):
+                # 鍵ファイルは配信と一緒に置いている（search_connect.place・WordPress は橋渡し）。出ていなければ置き場が違う
+                print(f"要対応: {cfg.get('name', sid)} の IndexNow の鍵ファイル https://{dom}/{key}.txt が出ていません"
+                      "（配信先の公開フォルダの直下に置かれているか確かめてください）")
             continue
-        if wp:
+        if only:
+            urls = recent_urls(cfg)
+        elif wp:
             import wp_bridge
             urls = wp_bridge.site_urls(cfg)
         else:
             urls = sitemap_urls(None if sid == S.primary() else dom)
         if not urls:
+            if only:
+                print(f"  {sid}: 通知対象なし（本日の記事が本番の sitemap にまだありません）")
             continue
         try:
             status = notify(urls, key, f"https://{dom}")

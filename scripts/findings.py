@@ -121,6 +121,9 @@ CHECKS = [
     # WordPress の社のプラグインは自分で新しい版に置き換わる。書き換えを許さないサーバーでは古いまま残るので知らせる
     ("WordPress の橋渡し（プラグインの版・自己更新）", "wp_bridge.py --check",
      re.compile(r"^要対応:")),
+    # お客様の社の検索エンジンへの最初の接続（Search Console のオーナー・zip の残り）。先方にお願いするまで消えない
+    ("検索エンジンへの接続（お客様の社）", "search_connect.py --check",
+     re.compile(r"^要対応:")),
     # Ahrefs の Site Audit と同じ観点を3サイトの本番に当てる（外部リンク切れ・乗っ取られたドメインへの転送も）
     ("サイト監査（Ahrefs相当・3サイトの本番）", "seo_audit.py --live --all --external",
      re.compile(r"^要対応:")),

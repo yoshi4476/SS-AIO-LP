@@ -1472,6 +1472,18 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     return True
 
 
+def search_files(cfg, dest: Path):
+    """検索エンジンへの通知に要るファイル（IndexNow の鍵・Bing の確認ファイル）を、配信と一緒に直下へ置く。
+    お客様の社で、公開直後の通知が鍵ファイルの無いドメインとして拒否されないため（search_connect.place）。
+    置けなくても記事の配信は止めない（翌日の通知の工程が要対応で知らせる）"""
+    try:
+        import search_connect
+        return search_connect.place(cfg, dest)
+    except Exception as e:
+        print(f"  [警告] 通知用のファイルを置けませんでした（{type(e).__name__}）")
+        return []
+
+
 def _delivered(cfg, meta):
     """この記事が配信先に既にあるか。(在るか, 作業コピー) を返す。
 
@@ -1580,6 +1592,7 @@ def main():
         base = deliver_files.stage(cfg)
         written, chars = write_external_html(deliver_files.stage_cfg(cfg), base, meta, body, src)
         written.append(stamp_manifest(cfg, base, meta, src))
+        written += search_files(cfg, base)
         print(f"配信先: {cfg['name']}（{cfg['type']}）/ 本文: {chars:,}字 / score {score}")
         print(f"  公開URL（予定）: {sites_mod.article_url(cfg, meta)}")
         deliver_files.deliver(cfg, meta, written, base, args.push)
@@ -1598,6 +1611,7 @@ def main():
         raise SystemExit(f"未対応のサイト種別: {cfg['type']}")
 
     written.append(stamp_manifest(cfg, dest, meta, src))
+    written += search_files(cfg, dest)
 
     print(f"配信先: {cfg['name']}（{cfg['repo']} / {cfg['branch']}）")
     for w in written:

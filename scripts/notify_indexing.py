@@ -14,6 +14,8 @@ AI集客ラボ72%に対しコーポレート41%と、明確に差が出ていた
 
 前提: indexing-service-account.json（対象サイトのGSCオーナー権限）
 ※未配置なら静かにスキップする（Actionsで未設定でも失敗させない）
+お客様の社は、サービスアカウントが Search Console のオーナーになっている社だけ送る（gsc_owner_ok）。
+なっていなければ送らず「要対応」を出す（記事CIの公開直後の通知から findings へ載る）。
 """
 import re
 import sys
@@ -77,29 +79,86 @@ def todays_urls(cfg, days=1):
     return out
 
 
-def main():
+def sa_email():
+    try:
+        import json
+        return json.loads(SA_PATH.read_text(encoding="utf-8-sig")).get("client_email", "")
+    except (OSError, ValueError):
+        return ""
+
+
+def owner_domains():
+    """サービスアカウントが Search Console のオーナーになっているドメイン。読めなければ None（設定の値で判断する）。
+    Indexing API はオーナーのサイトのURLしか受け付けない。先方がオーナーに足した時点で、設定を書き換えなくても送り始める"""
+    try:
+        import gcreds
+        from googleapiclient.discovery import build as gbuild
+        sc = gbuild("searchconsole", "v1", credentials=gcreds.load(
+            SA_PATH, ["https://www.googleapis.com/auth/webmasters.readonly"]))
+        rows = sc.sites().list().execute().get("siteEntry", [])
+    except Exception:
+        return None
+    out = set()
+    for r in rows:
+        if r.get("permissionLevel") != "siteOwner":
+            continue
+        u = r.get("siteUrl", "")
+        out.add(u.split(":", 1)[1] if u.startswith("sc-domain:") else u.split("//", 1)[-1].strip("/"))
+    return out
+
+
+def gsc_owner_ok(cfg, owners=None):
+    """Indexing API で送ってよい社か。自社は既にオーナー。お客様は Search Console の実際の権限
+    （読めたとき）か、ヒアリングで聞いた sites/<id>.json の gsc_owner"""
     import sites as S
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if not S.is_client(cfg["id"]):
+        return True
+    if owners is not None:
+        d = cfg["domain"]
+        return any(d == o or d.endswith("." + o) for o in owners)
+    return cfg.get("gsc_owner") is True
+
+
+def gsc_owner_todo(cfg):
+    who = sa_email() or "当社のサービスアカウント"
+    return (f"要対応: {cfg.get('name', cfg['id'])}（{cfg['domain']}）の Search Console に"
+            f"サービスアカウント（{who}）をオーナーで追加してください。追加されるまで新しい記事を Indexing API で知らせません")
+
+
+def _service():
+    import gcreds
+    from googleapiclient.discovery import build as gbuild
+    return gbuild("indexing", "v3",
+                  credentials=gcreds.load(SA_PATH, ["https://www.googleapis.com/auth/indexing"]))
+
+
+def main(argv=None, cfgs=None):
+    import sites as S
+    argv = sys.argv[1:] if argv is None else argv
+    args = [a for a in argv if not a.startswith("--")]
     only = ""
-    if "--site" in sys.argv:
-        i = sys.argv.index("--site")
-        only = sys.argv[i + 1] if len(sys.argv) > i + 1 else ""
+    if "--site" in argv:
+        i = argv.index("--site")
+        only = argv[i + 1] if len(argv) > i + 1 else ""
         args = [a for a in args if a != only]
     if not SA_PATH.exists():
         print("indexing-service-account.json 未配置のためスキップ")
         return 0
 
-    import gcreds
-    from googleapiclient.discovery import build as gbuild
-    svc = gbuild("indexing", "v3",
-                 credentials=gcreds.load(SA_PATH, ["https://www.googleapis.com/auth/indexing"]))
+    svc = _service()
+    cfgs = S.load_all() if cfgs is None else cfgs
 
     jobs = []
     if args:
         jobs = [("（指定URL）", args)]
     else:
-        for sid, cfg in S.load_all().items():
+        owners = owner_domains() if any(S.is_client(s) for s in cfgs) else None
+        for sid, cfg in cfgs.items():
             if only and sid != only:
+                continue
+            # 権限の無い社に送っても 403 が並ぶだけ。送らずに、先方にお願いすることを出す
+            if not gsc_owner_ok(cfg, owners):
+                print(gsc_owner_todo(cfg))
                 continue
             urls = sitemap_of(cfg)
             if "--all" in sys.argv:
