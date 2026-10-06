@@ -611,9 +611,9 @@
      "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/bing_webmaster.py:232",
-     "need": "当社の Bing アカウントへの追加と、確認コードの受け渡し（wp_bridge.push_settings の bing_auth）までは動くが、先方のプラグイン（ss-quality-gate.php）に /BingSiteAuth.xml を返す窓口が無く、所有権を確かめられない。プラグインに窓口を足して版を上げ、運用者の手元で wp_bridge.py --sign し直す（自己更新で先方へ届く）"
+     "status": "ok",
+     "evidence": "automation/wordpress/ss-quality-gate.php:416",
+     "note": "同意のある社だけ、当社の Bing に追加し、確認コードを橋渡し（2.0.1 以降）が /BingSiteAuth.xml として返す。確認後は公開直後・週次・送り切りの対象"
     },
     "ftp": {
      "status": "ok",

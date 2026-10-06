@@ -297,3 +297,14 @@ def test_intake_asks_consent_and_retires_zip():
     check("表: Git・FTP の方式で Indexing API・IndexNow・Bing が ok",
           {(fid, m): caps["features"][fid]["cells"][m]["status"] for fid in ("indexing_api", "indexnow", "bing")
            for m in GIT_FTP if caps["features"][fid]["cells"][m]["status"] != "ok"}, {})
+
+
+def test_wordpress_bridge_serves_bing_auth():
+    print("\n■ WordPress: 橋渡し（2.0.1）が Bing の確認ファイルを返す（英数字のコードだけ・固定の XML の形）")
+    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
+    check("確認コードを受け取り、形を検査して保存する",
+          ["get_param('bing_auth')" in php, "update_option('ssb_bing_auth'" in php,
+           "/^[A-Za-z0-9]{8,64}$/" in php], [True, True, True])
+    check("/BingSiteAuth.xml を大文字小文字を問わず、固定の XML で返す",
+          ["strtolower($p) === '/bingsiteauth.xml'" in php, "'<users><user>' . $bing . '</user></users>'" in php,
+           "X-Content-Type-Options: nosniff" in php], [True, True, True])

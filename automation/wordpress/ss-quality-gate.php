@@ -44,7 +44,7 @@ const SSQG_HUMAN_MIN_CHARS = 3000;
 const SSQG_HUMAN_MIN_H2    = 4;
 
 // 自己更新で、届いたファイルの中にこの行があることを確かめる（版の書き換えだけの差し替えを通さない）
-const SSB_VERSION = '2.0.0';
+const SSB_VERSION = '2.0.1';
 const SSB_META_JSONLD_EXTRA = '_ss_jsonld_extra';   // FAQPage など BlogPosting 以外の実体（JSON の配列）
 const SSB_META_MANAGED = '_ss_managed';             // 管制塔が作った固定ページの印
 // 更新元と公開鍵は wp-config.php で上書きできる（鍵を替えるときのため）。ここに置くのは公開鍵だけ
@@ -412,6 +412,14 @@ add_action('parse_request', function () {
     if ($key !== '' && $p === '/' . $key . '.txt') {
         ssb_text_response($key);
     }
+    $bing = (string) get_option('ssb_bing_auth', '');
+    if ($bing !== '' && strtolower($p) === '/bingsiteauth.xml' && preg_match('/^[A-Za-z0-9]{8,64}$/', $bing)) {
+        status_header(200);
+        header('Content-Type: application/xml; charset=utf-8');
+        header('X-Content-Type-Options: nosniff');
+        echo '<?xml version="1.0"?>' . "\n" . '<users><user>' . $bing . '</user></users>';
+        exit;
+    }
 }, 0);
 
 
@@ -714,6 +722,15 @@ add_action('rest_api_init', function () {
                 }
                 update_option('ssb_indexnow_key', $key, true);
                 $done[] = 'indexnow_key';
+            }
+            // Bing の所有権の確認コード（英数字だけ。XML の中身は固定の形で組むので、任意の文字は出せない）
+            $bing = $req->get_param('bing_auth');
+            if (is_string($bing)) {
+                if ($bing !== '' && !preg_match('/^[A-Za-z0-9]{8,64}$/', $bing)) {
+                    return new WP_Error('ssb_bing', 'Bing の確認コードの形が違います', ['status' => 400]);
+                }
+                update_option('ssb_bing_auth', $bing, true);
+                $done[] = 'bing_auth';
             }
             $ga = $req->get_param('ga4');
             if (is_string($ga)) {

@@ -271,7 +271,7 @@ def push_settings(cfg, rows=None):
         data["indexnow_key"] = key
     if ga4_id(cfg):
         data["ga4"] = ga4_id(cfg)
-    # Bing の確認コード（同意のある社だけ）。/BingSiteAuth.xml を返す窓口はプラグインの次の版で足す（署名し直しが要る）
+    # Bing の確認コード（同意のある社だけ）。プラグイン 2.0.1 以降が /BingSiteAuth.xml として返す
     if cfg.get("bing_consent") is True:
         import bing_webmaster
         code = bing_webmaster.auth_code(cfg)
