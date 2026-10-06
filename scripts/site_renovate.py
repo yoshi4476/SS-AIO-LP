@@ -224,7 +224,9 @@ def ask_claude(cfg, w: Path, ask):
     kind = "git" if is_git(cfg) else cfg["type"]
     prompt = PROMPT.format(name=cfg.get("name", cfg["id"]), kind={"git": "配信先リポジトリ", "ftp": "サーバーのファイル",
                                                                   "wordpress": "WordPress の中身"}[kind],
-                           ask=ask, max_files=max_files(cfg), type_note=TYPE_NOTE[kind])
+                           ask=ask, max_files=max_files(cfg), type_note=TYPE_NOTE[kind]
+                           + ("\n- 次のページには触れない（お客様の指定）: " + "・".join(cfg["renovate_protect"])
+                              if cfg.get("renovate_protect") else ""))
     r = AR.sh([AR.claude_bin(), "-p", "--max-turns", "60", *AR.model_args(),
                "--allowedTools", "Read,Edit,Write,Glob,Grep", "--settings", perm_settings()],
               timeout=3600, stdin_text=prompt, cwd=w)
@@ -406,6 +408,26 @@ def _resolves(root: Path, page: Path, url, cfg):
     return False
 
 
+def protected(cfg, f, data=b""):
+    """作業場所のファイル f が、お客様が「触ってはいけない」としたページ（sites/<id>.json の renovate_protect）か。
+    当たれば指定のパスを返す。静的なファイルはパス（/recruit/ → recruit/index.html・pages/recruit.astro）で、
+    WordPress の JSON は中の link・slug で見る"""
+    path = "/" + f.rsplit(".", 1)[0] + "/"
+    link = ""
+    if f.endswith(".json") and data:
+        try:
+            d = json.loads(data.decode("utf-8"))
+            if isinstance(d, dict):
+                link = urlsplit(str(d.get("link") or "")).path or ("/" + str(d.get("slug") or "") + "/")
+        except ValueError:
+            pass
+    for p in cfg.get("renovate_protect") or []:
+        seg = "/" + str(p).strip("/") + "/"
+        if seg != "//" and (seg in path or (link and seg in (link if link.endswith("/") else link + "/"))):
+            return p
+    return ""
+
+
 def max_files(cfg):
     return int(cfg.get("renovate_max_files") or MAX_FILES)
 
@@ -455,6 +477,10 @@ def inspect_changes(cfg, ch, ask=""):
             ng.append(f"{f}: WordPress 本体・アップロード画像は触りません")
             continue
         before = before_bytes(cfg, f) if st != "A" else b""
+        hit = protected(cfg, f, before or ((w / f).read_bytes() if st != "D" else b""))
+        if hit:
+            ng.append(f"{f}: 触ってはいけないページ（{hit}。ヒアリングシートの指定・renovate_protect）です")
+            continue
         after = (w / f).read_bytes() if st != "D" else b""
         ext = Path(f).suffix.lower()
         if st == "D":

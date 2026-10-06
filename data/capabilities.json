@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-06",
+ "updated": "2026-10-07",
  "about": "配信方式（sites/<id>.json の type）× 自動運用の機能。その方式で受けたお客様の社で、最初の接続（鍵・権限・雛形の受け取り）が済んだ後に、人の手を使わずに動くかを、コードを読んで判定した。evidence はその判定の根拠の行（ファイル:行）。行番号はコードの変更でずれるので、各セルに根拠の行の中身（anchor・同じ行が他にもあれば直前の行 anchor_prev）を持たせ、python scripts/caps_anchor.py --write で中身から引き直す（門が根拠の行と中身の一致を確かめる）。機能を足したら features に、方式を足したら methods と全機能の cells に足す（tests/gates_history_h28.py が抜けを止める）",
  "statuses": {
   "ok": "人の手なしで動く",
@@ -1817,7 +1817,7 @@
     "wordpress": {
      "status": "partial",
      "evidence": "scripts/site_change.py:322",
-     "need": "固定ページ・メニュー・ナビ・テンプレート・テンプレートパーツ・ウィジェット・配色・サイト設定は REST で変えられる。追加CSS・head とフッターの追記（link・meta・ld+json・許可したドメインの script src だけ）は橋渡し 2.0.4 の /ss/v1/design で変えられる（外観の編集の権限＝管理者のアプリケーションパスワードが要る。2.0.4 は署名して配るまで先方に届かない）。テーマの PHP は FTP の接続情報がある社だけ、--pull が有効なテーマを theme/ に取り、--push が FTP で戻す（取った後に先方で変わったファイルは上書きしない）。ヒアリングシートは WordPress の社に FTP の接続情報を聞いていない（client_intake.py。最初の接続の点検で聞けば ok になる）",
+     "need": "固定ページ・メニュー・ナビ・テンプレート・テンプレートパーツ・ウィジェット・配色・サイト設定は REST で変えられる。追加CSS・head とフッターの追記（link・meta・ld+json・許可したドメインの script src だけ）は橋渡し 2.0.4 の /ss/v1/design で変えられる（外観の編集の権限＝管理者のアプリケーションパスワードが要る。2.0.4 は署名して配るまで先方に届かない）。テーマの PHP は FTP の接続情報がある社だけ、--pull が有効なテーマを theme/ に取り、--push が FTP で戻す（取った後に先方で変わったファイルは上書きしない）。ヒアリングシートで WordPress の社にも FTP の接続情報を出せるか（wp.ftp）と、改修用の管理者の鍵を出せるか（wp.admin_key）を聞き、出せない社は準備状況（intake_readiness.py）が知らせる",
      "anchor": "def wp_push(cfg, ch):",
      "note": "onboard_check で確かめる（FTP の接続情報があり、テーマの速度・構成も自動で直せる）"
     },
@@ -1871,7 +1871,7 @@
      "evidence": "automation/wordpress/ss-quality-gate.php:355",
      "anchor": "function ssb_speed_on()",
      "note": "先方の mu-plugin（2.0.2〜）がフィルターで直す: 本文の画像に loading=lazy・アイキャッチに fetchpriority=high・gtag.js を load の1.2秒後に読む・日本語の Web フォント（Google Fonts）の CSS を読まない。wp-config.php の SSB_SPEED / SSB_KEEP_WEBFONTS で止められる。onboard_check で確かめる（FTP の接続情報があり、テーマの速度・構成も自動で直せる）",
-     "need": "テーマの PHP に直書きされたフォント・計測タグは、FTP の接続情報がある社だけ週次の speed_fix --auto が直す（PHP の外の HTML だけ・直した後にトップが返らなければ戻す）。ヒアリングシートは WordPress の社に FTP の接続情報を聞いていない（client_intake.py。最初の接続の点検で聞けば ok になる）"
+     "need": "テーマの PHP に直書きされたフォント・計測タグは、FTP の接続情報がある社だけ週次の speed_fix --auto が直す（PHP の外の HTML だけ・直した後にトップが返らなければ戻す）。ヒアリングシートで WordPress の社にも FTP の接続情報を出せるか（wp.ftp）と、改修用の管理者の鍵を出せるか（wp.admin_key）を聞き、出せない社は準備状況（intake_readiness.py）が知らせる"
     },
     "ftp": {
      "status": "ok",
@@ -2144,37 +2144,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/compete.py:794",
+     "evidence": "scripts/compete.py:806",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/compete.py:794",
+     "evidence": "scripts/compete.py:806",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/compete.py:794",
+     "evidence": "scripts/compete.py:806",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/compete.py:794",
+     "evidence": "scripts/compete.py:806",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/compete.py:794",
+     "evidence": "scripts/compete.py:806",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/compete.py:794",
+     "evidence": "scripts/compete.py:806",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/compete.py:794",
+     "evidence": "scripts/compete.py:806",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     }
    }
@@ -2290,31 +2290,31 @@
    "cells": {
     "self-static": {
      "status": "n/a",
-     "evidence": "scripts/site_renovate.py:806",
+     "evidence": "scripts/site_renovate.py:832",
      "anchor": "if cfg[\"type\"] == \"self-static\":",
      "note": "このリポジトリのサイトは site/ と templates/ を直して build.py（門が検査する）"
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/site_renovate.py:375",
+     "evidence": "scripts/site_renovate.py:377",
      "anchor": "def static_root(cfg, w: Path):",
      "need": "ビルドで作るサイトは作業場所でリンクを解決できず、変更前の写真を手元で撮れない（反映の前後に本番を撮って並べ、リンクは反映後の確認で200と導線を見る）。反映後の確認は配信の完了を renovate_wait_sec（既定240秒）待つだけで、先方のビルドの完了は見ていない"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/site_renovate.py:375",
+     "evidence": "scripts/site_renovate.py:377",
      "anchor": "def static_root(cfg, w: Path):",
      "note": "静的な根（static_dir・public・site・dist・out・docs・直下の index.html）でリンクを解決し、変更前後を手元で撮る"
     },
     "nextjs-json": {
      "status": "partial",
-     "evidence": "scripts/site_renovate.py:375",
+     "evidence": "scripts/site_renovate.py:377",
      "anchor": "def static_root(cfg, w: Path):",
      "need": "ビルドで作るサイトは作業場所でリンクを解決できず、変更前の写真を手元で撮れない（反映の前後に本番を撮って並べ、リンクは反映後の確認で200と導線を見る）。反映後の確認は配信の完了を renovate_wait_sec（既定240秒）待つだけで、先方のビルドの完了は見ていない"
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/site_renovate.py:708",
+     "evidence": "scripts/site_renovate.py:734",
      "anchor": "def preview_live_before(cfg, ch):",
      "need": "反映の前に変更後の画面は撮れない（反映前の本番と反映後を並べる。外れたら自動で戻す）。追加CSS・head とフッターの追記は橋渡し 2.0.4 を署名して配ってから。テーマの PHP は FTP の接続情報がある社だけ"
     },

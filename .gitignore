@@ -46,6 +46,8 @@ data/clients/*/private.json
 # 最初の接続の点検の結果（onboard_check.py）。お客様のサイトの抜けと先方に頼むことが入るので public に置かない。
 # 自社3サイトの分（data/onboard/<id>.json）はコミットする
 data/clients/*/onboard.json
+# 機能ごとの準備状況（intake_readiness.py）。先方に頼むことと鍵の受け渡しの状況が入るので public に置かない
+data/clients/*/readiness.json
 
 # ラッコの応答のキャッシュ（課金を減らすための手元の控え。公開リポジトリには置かない）
 data/rakko_cache/

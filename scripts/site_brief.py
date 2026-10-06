@@ -101,6 +101,7 @@ def _show(b):
     block("狙う語", [
         ("メインキーワード", kw.get("main")),
         ("サブキーワード", kw.get("sub")),
+        ("狙いたい地域", kw.get("regions")),
         ("地域を付けて狙う語", kw.get("area_word")),
         ("狙わない語（主題にしない）", kw.get("exclude"))])
 
@@ -117,15 +118,32 @@ def _show(b):
 
     s = b.get("service") or {}
     block("売っているもの（記事の結論はここへ着地させる）", [
-        ("提供するもの", s.get("list")), ("価格帯", s.get("price")),
+        ("提供するもの", s.get("list")),
+        ("利益の大きい順（結論はこの順で案内する）", s.get("priority")),
+        ("価格帯", s.get("price")), ("価格の載せ方（これを超えて書かない）", s.get("price_policy")),
         ("提供エリア", s.get("area")), ("他社と違う点", s.get("strength")),
-        ("依頼から開始まで", s.get("flow"))])
+        ("選ばれる理由", s.get("why_chosen")),
+        ("問い合わせから成約・開始まで", s.get("flow"))])
 
     c = b.get("customer") or {}
     block("読者が困っていること（記事の入口に使う）", [
         ("困りごと", c.get("problem")),
         ("よく聞かれる質問（FAQにそのまま使える）", c.get("faq")),
-        ("相談のきっかけ", c.get("trigger")), ("よくある誤解", c.get("ng"))])
+        ("相談のきっかけ", c.get("trigger")), ("よくある誤解", c.get("ng")),
+        ("よく失注する理由（記事で先回りして答える）", c.get("lost"))])
+
+    # 掲載が「可」で本人の確認が済んだものだけが入っている（client_intake.usable_cases / usable_voices）
+    cases = [f"{x.get('summary')} → {x.get('result')}" + ("" if x.get("show_name") else "（社名は出さない）")
+             for x in (b.get("cases") or []) if isinstance(x, dict)]
+    voices = [f"「{x.get('text')}」（{x.get('name') or '表示名なし'}）" for x in (b.get("voices") or []) if isinstance(x, dict)]
+    block("使ってよい事例とお客様の声（書いてあるとおりだけ。数字を足さない・言い換えない）", [
+        ("事例", cases), ("お客様の声", voices)])
+
+    ast = b.get("asset") or {}
+    block("すでにあるもの", [
+        ("よく読まれている既存のページ（内部リンクの送り先）", ast.get("top_pages")),
+        ("過去にうまくいかなかった施策（記事で勧めない）", ast.get("failed")),
+        ("写真素材", ast.get("photos"))])
 
     a = b.get("author") or {}
     block("記事の書き手（著者情報に入れる）", [
@@ -135,7 +153,8 @@ def _show(b):
     t = b.get("tone") or {}
     block("書き方のきまり", [
         ("自社の呼び方", t.get("person")), ("文体", t.get("style")),
-        ("専門用語", t.get("level")), ("使わない表現", t.get("avoid"))])
+        ("専門用語", t.get("level")), ("使わない表現", t.get("avoid")),
+        ("業種の表現の決まり（ふれる書き方をしない）", t.get("regulation"))])
 
     for name, sec in (b.get("industry_detail") or {}).items():
         block(f"業種の詳細（{name}）", list(sec.items()))

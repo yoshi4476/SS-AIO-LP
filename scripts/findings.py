@@ -127,6 +127,10 @@ CHECKS = [
     # お客様の社の検索エンジンへの最初の接続（Search Console のオーナー・zip の残り）。先方にお願いするまで消えない
     ("検索エンジンへの接続（お客様の社）", "search_connect.py --check",
      re.compile(r"^要対応:")),
+    # ヒアリングシートと鍵の登録から見た機能ごとの準備状況（お客様の社）。本番は読まない（本番は onboard_check）。
+    # Search Console のオーナーは上の search_connect が知らせるので、ここでは重ねて出さない
+    ("機能ごとの準備状況（ヒアリングと鍵・お客様の社）", "intake_readiness.py --all",
+     re.compile(r"^要対応:")),
     # Ahrefs の Site Audit と同じ観点を3サイトの本番に当てる（外部リンク切れ・乗っ取られたドメインへの転送も）
     ("サイト監査（Ahrefs相当・3サイトの本番）", "seo_audit.py --live --all --external",
      re.compile(r"^要対応:")),

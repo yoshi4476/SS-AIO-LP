@@ -141,6 +141,23 @@ def page_html(groups, url_of, ratio=PEAK_RATIO):
             + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>")
 
 
+def declared_peaks(cfg):
+    """ヒアリングシートの繁忙期（sites/<id>.json の season.peaks）を peaks() と同じ形にする。
+    表示回数は無いので 0（台帳の優先度を上げる判定にだけ使う）"""
+    out = {}
+    for p in (cfg.get("season") or {}).get("peaks") or []:
+        try:
+            m = int(p.get("month"))
+        except (TypeError, ValueError, AttributeError):
+            continue
+        if not 1 <= m <= 12:
+            continue
+        for w in p.get("words") or []:
+            for t in _tokens(w):
+                out.setdefault(t, (m, 0, 0))
+    return out
+
+
 def _site_words(cfg):
     try:
         import wp_bridge
@@ -177,9 +194,13 @@ def main():
         pk = peaks(sc, cfg["domain"])
         save_peaks(sid, pk, getattr(peaks, "span", 0), _site_words(cfg))
         if getattr(peaks, "span", 0) < 12:
-            # 「季節の語が0」ではなく「まだ判定できない」。1年分そろうまでは山の月が決まらないので台帳も触らない
-            print(f"■ {cfg['name']}: 検索データが{peaks.span}か月分しか無いため、季節の山はまだ判定できません（12か月分で判定）")
-            continue
+            # 「季節の語が0」ではなく「まだ判定できない」。1年分そろうまでは山の月が決まらないので台帳も触らない。
+            # ヒアリングシートで繁忙期を申告した社だけ、その申告で山の月を決める（立ち上げの1年目に前へ出せないため）
+            pk = declared_peaks(cfg)
+            if not pk:
+                print(f"■ {cfg['name']}: 検索データが{peaks.span}か月分しか無いため、季節の山はまだ判定できません（12か月分で判定）")
+                continue
+            print(f"■ {cfg['name']}: 検索データが{peaks.span}か月分のため、ヒアリングシートの繁忙期で判定します")
         hot = {t: v for t, v in pk.items() if upcoming(v[0])}
         picks = []
         for r in todo:

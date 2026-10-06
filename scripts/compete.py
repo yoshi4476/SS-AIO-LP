@@ -316,8 +316,14 @@ def ask(kw, eng, mine, operator):
     return out
 
 
-def summarize(items, mine, operator):
-    """指標: AIのシェア（出典に自社が出た語の割合）・上位10位の割合、競合上位5社の同じ指標"""
+def declared_rivals(cfg):
+    """ヒアリングシートで挙げた競合（sites/<id>.json の compete.rivals）。AIの出典に出た回数が少なくても比較に入れる"""
+    return [str(d).lower().removeprefix("www.") for d in (cfg.get("compete") or {}).get("rivals") or [] if d]
+
+
+def summarize(items, mine, operator, declared=()):
+    """指標: AIのシェア（出典に自社が出た語の割合）・上位10位の割合、競合上位5社の同じ指標。
+    declared（お客様が挙げた競合）は上位5社に入らなくても後ろに足す（declared: true）"""
     answered = [x for x in items if x["ai_answered"]]
     ranked = [x for x in items if x["pos"] is not None]
     dn = len(answered)
@@ -339,12 +345,18 @@ def summarize(items, mine, operator):
             e["ours"] += bool(r.get("ours"))
     own_ai = sum(1 for x in answered if x["ai_ours"])
     top10 = sum(1 for x in ranked if x["pos"] <= 10)
+    comps = [{"domain": d, "type": "peer", "ai_n": n, "ai_share": share(n, dn), "top10_rate": None} for d, n in comp]
+    for d in declared:
+        if any(c["domain"] == d for c in comps):
+            continue
+        n = sum(1 for x in answered if any(a == d or a.endswith("." + d) for a in x["ai_domains"]))
+        comps.append({"domain": d, "type": "peer", "ai_n": n, "ai_share": share(n, dn), "top10_rate": None,
+                      "declared": True})
     return {
         "kw_n": len(items),
         "ai": {"answered_n": dn, "ours_n": own_ai, "share": share(own_ai, dn)},
         "search": {"ranked_n": len(ranked), "top10_n": top10, "top10_rate": share(top10, len(ranked))},
-        "competitors": [{"domain": d, "type": "peer", "ai_n": n, "ai_share": share(n, dn),
-                         "top10_rate": None} for d, n in comp],
+        "competitors": comps,
         "other_types": {k: sorted(v)[:8] for k, v in kinds.items() if k not in ("peer", "self", "operator", "")},
         "engines": engines_n,
         # 検索上位の顔ぶれは課金APIで取らない（0.3節・課金の決まり）。相手の上位率は出せない
@@ -414,7 +426,7 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
         save_usage(usage)
     rec = {"site": sid, "ym": ym, "measured": date.today().isoformat(),
            "mode": "cache" if cache_only or status == "over_cap" else "live", "status": status,
-           "gsc_window": window, "engines": sorted(eng), "summary": summarize(items, mine, operator),
+           "gsc_window": window, "engines": sorted(eng), "summary": summarize(items, mine, operator, declared_rivals(cfg)),
            "items": items}
     if prev:
         rec["diff"] = diff(prev, rec)
@@ -732,7 +744,7 @@ def report_html(sid, client=False):
         f'<div class="s">{sr_n}/{sr_d}語 ・先月から {pt(d.get("top10_pt"))}</div></div></div>')
     rows = [f'<tr><td><b>自社</b></td><td>{E(fmt_share(ai_n, ai_d))}</td><td>{E(fmt_share(sr_n, sr_d))}</td></tr>']
     for c in s["competitors"]:
-        rows.append(f'<tr><td>{E(c["domain"])}</td><td>{E(fmt_share(c["ai_n"], ai_d))}</td><td>未取得</td></tr>')
+        rows.append(f'<tr><td>{E(c["domain"])}{"（ご指定）" if c.get("declared") else ""}</td><td>{E(fmt_share(c["ai_n"], ai_d))}</td><td>未取得</td></tr>')
     if not s["competitors"]:
         rows.append(f'<tr><td colspan="3">{MIN_REPEAT}語以上でAIの出典に出た同業のサイトはありませんでした</td></tr>')
     others = "／".join(f"{TYPES.get(k, k)}: {'・'.join(v[:3])}" for k, v in (s.get("other_types") or {}).items())

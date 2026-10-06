@@ -130,8 +130,37 @@ def one(src, write, k=None):
     ind = next((k for k, (lab, _) in C.INDUSTRY.items() if lab in src.name), "")
     C.apply(got, cfg, ind)
     move(src, DONE)
+    readiness(cfg.get("id"))
     onboard(cfg.get("id"))
     return True, "%s（%s）を登録しました" % (name, cfg.get("id", "?"))
+
+
+def _to_findings(todo, path):
+    """要対応の行を次の通知（findings.txt）へ足す（同じ行は二度足さない）"""
+    if not todo:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    t = path.read_text(encoding="utf-8") if path.is_file() else ""
+    add = [l for l in todo if l not in t]
+    if add:
+        path.write_text(t.rstrip("\n") + ("\n" if t else "") + "\n".join(add) + "\n", encoding="utf-8")
+
+
+def readiness(site_id):
+    """登録した直後に、機能ごとの準備状況（シートと鍵の有無）を出し、要対応を次の通知へ足す。
+    本番を読む点検（onboard）とは見るものが違う（重ねない）"""
+    import intake_readiness as R
+    if not site_id:
+        return []
+    try:
+        todo = R.check_site(site_id)
+    except Exception as e:
+        print("   準備状況を出せませんでした（%s）" % str(e)[:80])
+        return []
+    for l in todo:
+        print("   " + l)
+    _to_findings(todo, FINDINGS)
+    return todo
 
 
 def onboard(site_id):
@@ -153,12 +182,7 @@ def onboard(site_id):
     todo = [l for l in buf.getvalue().splitlines() if l.startswith("要対応:")]
     for l in todo:
         print("   " + l)
-    if todo:
-        FINDINGS.parent.mkdir(parents=True, exist_ok=True)
-        t = FINDINGS.read_text(encoding="utf-8") if FINDINGS.is_file() else ""
-        add = [l for l in todo if l not in t]
-        if add:
-            FINDINGS.write_text(t.rstrip("\n") + ("\n" if t else "") + "\n".join(add) + "\n", encoding="utf-8")
+    _to_findings(todo, FINDINGS)
     return todo
 
 
