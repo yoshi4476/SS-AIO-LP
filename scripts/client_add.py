@@ -47,6 +47,10 @@ TEMPLATE = {
     "cta": {"label": "ボタンの文言", "url": "https://example.co.jp/contact",
             "note": "補足（任意）"},
     "x_tags": ["SNS投稿に付けるタグ"],
+    # 当社のサービスアカウントを Search Console のオーナーにしてもらったか（Indexing API で新しい記事を知らせる条件）
+    "gsc_owner": False,
+    # 当社の Bing アカウントでサイトを登録することに先方が同意したか（同意の無い社は Bing へ送らない）
+    "bing_consent": False,
 }
 
 REQUIRED = ["id", "name", "domain", "type", "theme", "audience",
@@ -58,8 +62,14 @@ TYPES = {
     "external-html": "別リポジトリ。HTMLに変換して置く（相手のテンプレートを使う）",
     "wordpress": "WordPress。REST APIで投稿する（品質ゲートは先方のmu-pluginが担う）",
     "ftp": "Gitを使わないレンタルサーバー。HTMLに変換してFTPS/FTP/SFTPで上げる（接続情報は FTP_CREDENTIALS_JSON）",
-    "zip": "先方が自分で上げる。HTMLに変換して deliveries/<id>/ にZIPを作る",
+    "zip": "先方が自分で上げる。HTMLに変換して deliveries/<id>/ にZIPを作る（新規受付なし）",
 }
+# 新規の登録では選べない方式。コードの分岐は過去の互換で残す（TYPES からは消さない）。
+# zip は記事・書き直し・サイトの変更のたびに先方がファイルを上げる作業が残り、
+# 「最初の接続の後は人の手なしで全機能が動く」（2026-10-06 運用者の方針）に合わない
+RETIRED = {"zip": "先方が毎回 ZIP を自分のサーバーへ上げる作業が残るため、新規受付をやめました（2026-10-06）。"
+                  "FTP の接続情報（ftp）か配信先の Git リポジトリ、または WordPress の接続をいただいてください"}
+NEW_TYPES = {k: v for k, v in TYPES.items() if k not in RETIRED}
 
 
 def check(cfg):
@@ -69,8 +79,10 @@ def check(cfg):
         v = cfg.get(k)
         if not v:
             ng.append(f"{k} が空です")
-    if cfg.get("type") not in TYPES:
-        ng.append(f"type が不正です（{' / '.join(TYPES)}）")
+    if cfg.get("type") in RETIRED:
+        ng.append(f"type「{cfg['type']}」は選べません: {RETIRED[cfg['type']]}")
+    elif cfg.get("type") not in TYPES:
+        ng.append(f"type が不正です（{' / '.join(NEW_TYPES)}）")
     if cfg.get("type") not in ("self-static", "wordpress", "ftp", "zip") and not cfg.get("repo"):
         ng.append("repo が空です（外部サイトは配信先リポジトリが要ります）")
 
@@ -165,8 +177,10 @@ def main():
         print(f"  作成: {plan.relative_to(ROOT).as_posix()}")
     print("\n  次にやること")
     print("    1. python scripts/kw_discover.py --site " + cfg["id"] + " --append")
-    print("    2. GA4とSearch Consoleにサービスアカウントを追加")
-    print("    3. 配信先リポジトリに書き込めるかを token_check.py で確認")
+    print("    2. GA4とSearch Consoleにサービスアカウントを追加（Search Console はオーナーで。"
+          "新しい記事を Indexing API で知らせる条件）")
+    print("    3. python scripts/search_connect.py --check   … 検索エンジンへの接続で残っていることを見る")
+    print("    4. 配信先リポジトリに書き込めるかを token_check.py で確認")
 
 
 if __name__ == "__main__":

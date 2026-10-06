@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SHEET = ROOT / "docs" / "client" / "ヒアリングシート.xlsx"
 SITES = ROOT / "sites"
 sys.path.insert(0, str(ROOT / "scripts"))
-from client_add import TYPES  # noqa: E402  形式の定義は1か所に置く
+from client_add import TYPES, NEW_TYPES, RETIRED  # noqa: E402  形式の定義は1か所に置く
 
 # ── 聞くこと ────────────────────────────────────
 # (キー, 見出し, 説明, 記入例, 必須)
@@ -55,7 +55,8 @@ FIELDS = [
     ("type", "サイトの形式",
      "WordPressをお使いなら wordpress。当社で新規構築するなら self-static。"
      "既存の静的サイトへ配信する場合は external-html / external-md / nextjs-json。"
-     "Git を使わないレンタルサーバー（FTP で上げているサイト）なら ftp、自分で上げたい先方には zip",
+     "Git を使わないレンタルサーバー（FTP で上げているサイト）なら ftp（FTP の接続情報を1回いただきます）。"
+     "どの形式でも、最初の接続の後は御社の作業はありません（ZIP で受け取る形式は受け付けていません）",
      "wordpress", True),
     ("url_prefix", "記事URLの接頭辞",
      "記事が /blog/xxx/ に出るなら /blog。自社構築（self-static）以外は必ず記入"
@@ -71,7 +72,8 @@ FIELDS = [
      "パスワード自体はこのシートに書かず、別途お預かりします",
      "https://example.co.jp/wp-admin/ / ユーザー名: editor-bot", False),
     ("ga4_measurement_id", "GA4の測定ID（G-で始まる）",
-     "形式が wordpress のときのみ。記事の計測（ボタン・フォーム・読了）を当社のプラグインが入れます。"
+     "形式が wordpress / ftp のときのみ。記事の計測（ボタン・フォーム・読了）を当社が入れます"
+     "（wordpress は当社のプラグイン、ftp は当社が書き出す記事のページ）。"
      "GA4 を既にサイトへ入れている場合は空欄で構いません（二重には入れません）", "G-XXXXXXXXXX", False),
 
     ("#offer", "3. 主力商材", "いちばん大切な項目です。ここが曖昧だと、"
@@ -153,6 +155,13 @@ FIELDS = [
      "御社の社名・住所・サイトだけを載せます（社内・取引先へそのまま回す場合）", "当社名を出す", False),
     ("gsc_ready", "Search Consoleの権限付与", "済 / 未 で記入。未の場合は導入時にご案内します",
      "未", False),
+    ("gsc_owner", "Search Consoleのオーナー権限",
+     "当社のサービスアカウント（導入時にメールでお知らせします）を Search Console に「オーナー」で追加。済 / 未。"
+     "オーナーでないと、新しい記事を Google へすぐ知らせる仕組み（Indexing API）が使えません", "未", False),
+    ("bing_consent", "Bing・検索エンジンへの登録の同意",
+     "Bing・検索エンジンへの登録を当社のアカウントで行うことに同意いただけるか。可 / 不可。"
+     "可の場合、当社の Bing Webmaster に御社のサイトを登録し、確認用のファイル（BingSiteAuth.xml）を"
+     "サイトの直下に置いて、新しい記事を Bing（ChatGPT の検索も使う索引）へすぐ知らせます", "可", False),
 
     ("#rule", "9. 運用のきまり", "業種による表現規制や、公開前の確認が必要かどうか。", "", False),
     ("monthly_cap", "月の公開本数", "既定は60本（1日2本）。減らす場合は数字を記入", "60", False),
@@ -568,13 +577,18 @@ def make_sheet(path=SHEET, industry=""):
         ws.cell(row=r, column=6, value=key)
         r += 1
 
-    dv = DataValidation(type="list", formula1='"wordpress,self-static,external-md,external-html,nextjs-json,ftp,zip"')
+    # 選べるのは新規受付のある形式だけ（zip は新規受付なし: client_add.RETIRED）
+    dv = DataValidation(type="list", formula1='"' + ",".join(NEW_TYPES) + '"')
     ws.add_data_validation(dv)
     for row in range(SAMPLE_ROW, r):
         if ws.cell(row=row, column=6).value == "type":
             dv.add(ws.cell(row=row, column=2))
     yn = DataValidation(type="list", formula1='"要,不要"')
     ws.add_data_validation(yn)
+    done = DataValidation(type="list", formula1='"済,未"')
+    ws.add_data_validation(done)
+    agree = DataValidation(type="list", formula1='"可,不可"')
+    ws.add_data_validation(agree)
     iss = DataValidation(type="list", formula1='"当社名を出す,お客様名だけ"')
     ws.add_data_validation(iss)
     for row in range(SAMPLE_ROW, r):
@@ -582,6 +596,10 @@ def make_sheet(path=SHEET, industry=""):
             yn.add(ws.cell(row=row, column=2))
         if ws.cell(row=row, column=6).value == "report_issuer":
             iss.add(ws.cell(row=row, column=2))
+        if ws.cell(row=row, column=6).value in ("gsc_ready", "gsc_owner"):
+            done.add(ws.cell(row=row, column=2))
+        if ws.cell(row=row, column=6).value == "bing_consent":
+            agree.add(ws.cell(row=row, column=2))
 
     ws.column_dimensions["A"].width = 26
     ws.column_dimensions["B"].width = 42
@@ -667,12 +685,17 @@ def to_config(got):
     for k in ("content_dir", "images_dir", "cta_title", "cta_desc", "wp_api"):
         if got.get(k):
             cfg[k] = got[k]
-    # 計測を当社のプラグインで入れるのは WordPress の社だけ（ほかの方式は先方のテンプレートが持つ）
-    if cfg["type"] == "wordpress" and got.get("ga4_measurement_id"):
+    # 計測を当社が入れるのは、ページを当社が出す方式だけ。WordPress は当社のプラグイン、ftp（と互換で残す zip）は
+    # 当社が書き出す記事の雛形が、測定IDのある社だけ計測を置く。Git の方式は先方のテンプレートが持つ
+    if cfg["type"] in ("wordpress", "ftp", "zip") and got.get("ga4_measurement_id"):
         cfg["ga4_measurement_id"] = str(got["ga4_measurement_id"]).strip()
     mix = pairs(got.get("category_mix"), num=True)
     if mix:
         cfg["category_mix"] = mix
+    # 検索エンジンへの最初の接続。オーナーでなければ Indexing API で送らない（notify_indexing.gsc_owner_ok）。
+    # Bing は「可」と書いた社だけ当社のアカウントへ足す（bing_webmaster.client_cfgs）。空欄は同意なしとして扱う
+    cfg["gsc_owner"] = str(got.get("gsc_owner", "")).startswith("済")
+    cfg["bing_consent"] = str(got.get("bing_consent", "")).strip() == "可"
     # 月次レポートの名義（monthly_report.issuer）。「お客様名だけ」以外は当社名義（既定）
     cfg["report_issuer"] = "client" if "お客様" in (got.get("report_issuer") or "") else "operator"
     # 運用のきまり。既定と違うときだけ持たせる
@@ -897,8 +920,10 @@ def review(got, cfg):
 
     if cfg.get("id") and not re.fullmatch(r"[a-z][a-z0-9-]*", cfg["id"]):
         ng.append("サイトIDは英小文字とハイフンのみで書いてください")
-    if cfg.get("type") not in TYPES:
-        ng.append(f"サイトの形式が不正です（{' / '.join(TYPES)}）")
+    if cfg.get("type") in RETIRED:
+        ng.append(f"サイトの形式「{cfg['type']}」は選べません: {RETIRED[cfg['type']]}")
+    elif cfg.get("type") not in TYPES:
+        ng.append(f"サイトの形式が不正です（{' / '.join(NEW_TYPES)}）")
     # wordpress は REST API で投稿するのでリポジトリは要らない（client_add と同じ条件）。
     # ここで止めると、repo 欄を空にした WordPress の社がいつまでも登録できない
     if cfg.get("type") not in ("self-static", "wordpress", "ftp", "zip") and not cfg.get("repo"):
@@ -912,10 +937,6 @@ def review(got, cfg):
         ng.append("記事URLの接頭辞が空です（記事が /blog/xxx/ に出るなら /blog と書いてください）")
     if cfg.get("ga4_measurement_id") and not re.fullmatch(r"G-[A-Z0-9]{4,20}", cfg["ga4_measurement_id"]):
         ng.append("GA4の測定IDは G- で始まる形で書いてください（例: G-AB12CD34EF）")
-    # ZIP は最後に先方がサーバーへ置く作業が残る。FTP の接続情報を1回もらえば、記事もサイトの変更も全自動になる
-    if cfg.get("type") == "zip":
-        warn.append("形式が zip です。記事・サイト変更のたびに先方がファイルを置く作業が残ります。"
-                    "サーバーの FTP 接続情報を1回いただければ ftp にでき、先方の作業は無くなります")
     _, bad = languages(got.get("languages"))
     if bad:
         warn.append(f"多言語の指定で読めない語があります: {' / '.join(bad)}"
@@ -964,6 +985,12 @@ def review(got, cfg):
         warn.append("GA4プロパティIDが空です。レポートに流入データが出ません")
     if got.get("gsc_ready", "").startswith("未"):
         warn.append("Search Consoleの権限が未付与です。順位と検索語が取れません")
+    if not cfg.get("gsc_owner"):
+        warn.append(f"要対応: {cfg.get('name') or cfg.get('id')} の Search Console にサービスアカウントをオーナーで追加"
+                    "（オーナーになるまで、新しい記事を Indexing API で知らせません。追加されれば設定を直さなくても送り始めます）")
+    if not cfg.get("bing_consent"):
+        warn.append("Bing への登録の同意が「可」ではありません。Bing（ChatGPT の検索も使う索引）へは送りません"
+                    "（IndexNow の通知だけ届きます）")
 
     facts = to_facts(got, cfg.get("id") or "client")
     hard = [f for f in facts if f.get("verifiable")]
@@ -1127,9 +1154,10 @@ def main():
         print(f"    {p.relative_to(ROOT).as_posix()}")
     print("\n  次にやること")
     print(f"    1. python scripts/kw_discover.py --site {cfg['id']} --append   … KWを補充する")
-    print("    2. GA4とSearch Consoleにサービスアカウントを追加してもらう")
+    print("    2. GA4とSearch Consoleにサービスアカウントを追加してもらう（Search Console はオーナーで）")
+    print("    3. python scripts/search_connect.py --check   … 検索エンジンへの接続で残っていることを見る")
     if cfg.get("type") != "self-static":
-        print("    3. python scripts/token_check.py   … 配信先に書き込めるか確認する")
+        print("    4. python scripts/token_check.py   … 配信先に書き込めるか確認する")
     if (cfg.get("rules") or {}).get("review_before_publish"):
         print("    ※ このクライアントは公開前の確認が必要です。自動公開を切ってください")
     return 0
