@@ -343,6 +343,10 @@ def test_research_runs_quarterly_and_refill_stops_itself():
     q = (ROOT / ".github" / "workflows" / "industry-research.yml").read_text(encoding="utf-8")
     check("3か月ごとの回: 欠けがあれば聞き足しを有効に戻す", "gh workflow enable research-refill.yml" in q, True)
     check("3か月ごとの回の予定は3か月おき", "1,4,7,10" in q, True)
+    # 上限を待つと、明けた直後にまた上限に当たり、何時間も0問のまま CI の時間だけ使った（2026-10-04〜06）
+    src = (ROOT / "scripts" / "research_run.py").read_text(encoding="utf-8")
+    check("聞き足し: CI は ChatGPT の上限を待たず、4時間ごとに覗く",
+          ["--no-wait" in wf, '"7 */4 * * *"' in wf, "if a.no_wait:" in src], [True, True, True])
 
 
 def test_deploy_build_has_japanese_font_for_charts():

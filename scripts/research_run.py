@@ -29,6 +29,7 @@ def industries():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--minutes", type=int, default=110)
+    ap.add_argument("--no-wait", action="store_true", help="ChatGPT の利用上限に当たっていたら待たずに止める（CI 用）")
     ap.add_argument("--left", action="store_true", help="まだ聞き終わっていない業種の数だけを出す（聞かない）")
     a = ap.parse_args()
     import research_extra as RX
@@ -57,6 +58,11 @@ def main():
         until = AC.limit_until("ChatGPT")
         if not until:
             return True
+        # CI では待たない。待つと上限が明けた直後にまた上限に当たり、何時間も0問のまま CI の時間だけ使った
+        # （2026-10-04〜06: 毎回 約4時間20分待って0問）。止めて、次の回（4時間ごと）に任せる
+        if a.no_wait:
+            print(f"   ChatGPT は利用上限です（{until:%m-%d %H:%M} まで）。待たずに次の回へ回します", flush=True)
+            return False
         if until.timestamp() > deadline - 20 * 60:
             return False
         print(f"   ChatGPT の利用上限が明けるまで待ちます（{until:%H:%M}）", flush=True)

@@ -7,7 +7,7 @@ name: 業種調査の聞き足し
 
 on:
   schedule:
-    - cron: "0 22 * * *"   # 毎日 07:00 JST
+    - cron: "7 */4 * * *"   # 4時間ごと。ChatGPT の利用上限は数時間で明けるので、待たずに何度か覗く（上限中はすぐ終わる）
   workflow_dispatch:
 
 concurrency:
@@ -21,7 +21,7 @@ permissions:
 jobs:
   refill:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 130
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -59,12 +59,12 @@ jobs:
 
       - name: 欠けた問いだけ聞き足す
         if: steps.login.outputs.ok == 'yes'
-        timeout-minutes: 300
+        timeout-minutes: 110
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           PYTHONIOENCODING: utf-8
         run: |
-          python scripts/research_run.py --minutes 280 2>&1 | grep -vE "^\s+[0-9]+/[0-9]+$" | tail -40
+          python scripts/research_run.py --minutes 100 --no-wait 2>&1 | grep -vE "^\s+[0-9]+/[0-9]+$" | tail -40
           python scripts/question_pages.py --data 2>&1 | tail -3 || true
 
       - name: 更新されたログイン情報を Secrets に戻す
