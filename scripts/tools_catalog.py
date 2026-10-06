@@ -46,6 +46,12 @@ TOOLS = [
      "desc": "8つの質問に答えると、Googleビジネスプロフィールの整備度を100点満点で採点します。"},
 ]
 BY_ID = {t["id"]: t for t in TOOLS}
+# 無料ツールの開発者。当社は公開・運用する側（publisher）で、開発は YW（CONFLUX PARTNERS）。
+# @id は開発元のサイトの構造化データと同じにする（同じ人物・同じ組織だと AI が結び付けられる）
+DEVELOPER = {"@type": "Person", "@id": "https://conflux-partners.jp/#person", "name": "YW",
+             "jobTitle": "AI × 経営コンサルタント", "url": "https://conflux-partners.jp/about",
+             "affiliation": {"@type": "Organization", "@id": "https://conflux-partners.jp/#brand",
+                             "name": "CONFLUX PARTNERS", "url": "https://conflux-partners.jp/"}}
 E = html.escape
 
 
@@ -68,7 +74,7 @@ def ld(t):
         {"@type": "WebApplication", "name": label(t), "url": SITE_URL + t["url"],
          "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "inLanguage": "ja",
          "isAccessibleForFree": True, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
-         "description": t["desc"], "publisher": ORG},
+         "description": t["desc"], "publisher": ORG, "creator": DEVELOPER},
     ]
     return ('<script type="application/ld+json" data-tools-ld>\n'
             + json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=1)
