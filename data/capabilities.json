@@ -22,12 +22,13 @@
    "entry": [
     "scripts/publish.py",
     "scripts/build.py",
-    "scripts/deliver_files.py"
+    "scripts/deliver_files.py",
+    "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1221",
+     "evidence": "scripts/publish.py:1353",
      "note": "build.py が site/ に書き、デプロイで公開"
     },
     "external-md": {
@@ -47,8 +48,8 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1038",
-     "note": "REST API で投稿（--push で publish）"
+     "evidence": "scripts/publish.py:1127",
+     "note": "REST API で投稿（--push で publish）。本文の内部リンクは実際のパーマリンクへ直す"
     },
     "ftp": {
      "status": "ok",
@@ -69,7 +70,8 @@
     "scripts/scaled_guard.py",
     "scripts/editorial_review.py",
     "scripts/build.py",
-    "scripts/publish.py"
+    "scripts/publish.py",
+    "automation/wordpress/ss-quality-gate.php"
    ],
    "cells": {
     "self-static": {
@@ -79,28 +81,28 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1173"
+     "evidence": "scripts/publish.py:1305"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1173"
+     "evidence": "scripts/publish.py:1305"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1173"
+     "evidence": "scripts/publish.py:1305"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "automation/wordpress/ss-quality-gate.php:96",
-     "note": "配信側の判定に加え、先方の mu-plugin が公開を下書きへ戻す"
+     "evidence": "automation/wordpress/ss-quality-gate.php:141",
+     "note": "配信側の判定に加え、先方の mu-plugin が wp_insert_post_data で公開を下書きへ戻す"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1173"
+     "evidence": "scripts/publish.py:1305"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1173",
+     "evidence": "scripts/publish.py:1305",
      "note": "基準に届かない記事は ZIP を作らない"
     }
    }
@@ -132,9 +134,9 @@
      "note": "アイキャッチは WebP も作る"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1013",
-     "need": "アイキャッチだけをメディアに上げる。本文の図解（/images/<slug>/…）は上げておらず、WordPress では本文の画像が404になる（図解もメディアに上げて本文の参照を差し替える処理が要る）"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1164",
+     "note": "本文の /images/ をメディアに上げて src を置き換える（アイキャッチも同じ）"
     },
     "ftp": {
      "status": "ok",
@@ -176,8 +178,8 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:1078",
-     "need": "文字のアイキャッチをアイキャッチ画像にするだけ。写真の棚から選ぶ処理が無い"
+     "evidence": "scripts/publish.py:1180",
+     "need": "文字のアイキャッチをアイキャッチ画像にするだけ。写真の棚（photo_shelf.pick）から選んでメディアに上げ、featured_media にする処理が要る（ftp は publish.py:772 で選んでいる）"
     },
     "ftp": {
      "status": "ok",
@@ -193,34 +195,35 @@
   "verify_publish": {
    "label": "公開の確認（公開直後）",
    "entry": [
-    "scripts/verify_publish.py"
+    "scripts/verify_publish.py",
+    "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/verify_publish.py:131"
+     "evidence": "scripts/verify_publish.py:140"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/verify_publish.py:132",
+     "evidence": "scripts/verify_publish.py:141",
      "note": "配信先リポジトリのビルドを待ってから本番を見る"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/verify_publish.py:132"
+     "evidence": "scripts/verify_publish.py:141"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/verify_publish.py:132"
+     "evidence": "scripts/verify_publish.py:141"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/verify_publish.py:131",
-     "need": "wordpress は repo を持たないのに wait_build(cfg['repo']) へ進み KeyError で落ちる。REST API で status=publish を確かめる分岐が要る（verify_publish.py）"
+     "status": "ok",
+     "evidence": "scripts/verify_publish.py:132",
+     "note": "先方の REST が返すパーマリンク（wp_bridge.post_link）で公開を確かめる"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/verify_publish.py:131",
+     "evidence": "scripts/verify_publish.py:140",
      "note": "上げた時点で公開される（ビルドを待たない）"
     },
     "zip": {
@@ -290,27 +293,27 @@
     },
     "external-html": {
      "status": "partial",
-     "evidence": "scripts/publish_rerender.py:75",
+     "evidence": "scripts/publish_rerender.py:107",
      "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
     },
     "nextjs-json": {
      "status": "partial",
-     "evidence": "scripts/publish_rerender.py:73",
+     "evidence": "scripts/publish_rerender.py:105",
      "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/publish_rerender.py:53",
-     "need": "WordPress の投稿をまとめて描き直す道具が無い（publish_changed は原稿が変わった記事だけ）"
+     "status": "ok",
+     "evidence": "scripts/publish_rerender.py:80",
+     "note": "公開済みの記事を REST で送り直し、業種ハブ・用語集・llms.txt も作り直す"
     },
     "ftp": {
      "status": "partial",
-     "evidence": "scripts/publish_rerender.py:48",
+     "evidence": "scripts/publish_rerender.py:78",
      "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
     },
     "zip": {
      "status": "partial",
-     "evidence": "scripts/publish_rerender.py:48",
+     "evidence": "scripts/publish_rerender.py:78",
      "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
@@ -319,7 +322,9 @@
    "label": "統合と301転送",
    "entry": [
     "scripts/auto_merge.py",
-    "scripts/retract.py"
+    "scripts/retract.py",
+    "scripts/wp_bridge.py",
+    "automation/wordpress/ss-quality-gate.php"
    ],
    "cells": {
     "self-static": {
@@ -342,9 +347,9 @@
      "need": "_redirects（Cloudflare Pages の書式）に書く。配信先が Cloudflare Pages 以外（Vercel・Netlify 以外のホスト等）では転送が効かない。ホストを sites/<id>.json に持ち書き分ける処理が要る"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/retract.py:152",
-     "need": "記事は下書きに戻すが、301 は人が管理画面（Redirection 等）で設定する"
+     "status": "ok",
+     "evidence": "scripts/retract.py:156",
+     "note": "先方の mu-plugin の転送表へ実際のパーマリンク同士の301を足してから下書きに戻す（mu-plugin の template_redirect が送る）"
     },
     "ftp": {
      "status": "ok",
@@ -386,8 +391,8 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:27",
-     "note": "WordPress 本体が /wp-sitemap.xml を作る"
+     "evidence": "scripts/wp_bridge.py:72",
+     "note": "WordPress 本体が /wp-sitemap.xml（索引形式）を作る。管制塔は子まで辿って読む"
     },
     "ftp": {
      "status": "partial",
@@ -405,7 +410,9 @@
    "label": "llms.txt",
    "entry": [
     "scripts/build.py",
-    "scripts/publish.py"
+    "scripts/publish.py",
+    "scripts/wp_bridge.py",
+    "automation/wordpress/ss-quality-gate.php"
    ],
    "cells": {
     "self-static": {
@@ -428,9 +435,9 @@
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/publish.py:1038",
-     "need": "WordPress に llms.txt を置く仕組みが無い（mu-plugin で /llms.txt を返す等）"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1237",
+     "note": "公開のたびに wp_bridge.push_settings が llms.txt を送り、mu-plugin が /llms.txt で返す"
     },
     "ftp": {
      "status": "partial",
@@ -447,7 +454,8 @@
   "robots_txt": {
    "label": "robots.txt（AIクローラーの許可）",
    "entry": [
-    "scripts/ai_crawler_check.py"
+    "scripts/ai_crawler_check.py",
+    "automation/wordpress/ss-quality-gate.php"
    ],
    "cells": {
     "self-static": {
@@ -471,8 +479,8 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/ai_crawler_check.py:103",
-     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う"
+     "evidence": "automation/wordpress/ss-quality-gate.php:436",
+     "need": "mu-plugin が WordPress の仮想 robots.txt に AI クローラーを足すが、サーバーに実在する robots.txt・先方が名指しで塞いだ AI クローラー・CDN（Cloudflare 等）の遮断は直せない（ai_crawler_check が知らせるだけ）"
     },
     "ftp": {
      "status": "partial",
@@ -514,8 +522,8 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": ".github/workflows/pipeline-multi.yml:508",
-     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+     "evidence": "scripts/notify_indexing.py:37",
+     "need": "WordPress の公開URLは橋渡しから取れるが、記事の枠の通知（.github/workflows/pipeline-multi.yml:508）は自社の枠だけで --site を付けて回すため、お客様の社の新記事はその日の通知から漏れる。サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
     },
     "ftp": {
      "status": "partial",
@@ -532,7 +540,8 @@
   "indexnow": {
    "label": "IndexNow",
    "entry": [
-    "scripts/notify_indexnow.py"
+    "scripts/notify_indexnow.py",
+    "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
@@ -541,32 +550,32 @@
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:108",
+     "evidence": "scripts/notify_indexnow.py:116",
      "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
     },
     "external-html": {
      "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:108",
+     "evidence": "scripts/notify_indexnow.py:116",
      "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
     },
     "nextjs-json": {
      "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:108",
+     "evidence": "scripts/notify_indexnow.py:116",
      "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
     },
     "wordpress": {
-     "status": "partial",
+     "status": "ok",
      "evidence": "scripts/notify_indexnow.py:108",
-     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+     "note": "鍵ファイルを置けない代わりに mu-plugin へ鍵を渡し /<鍵>.txt を返させる。公開URLは橋渡しの一覧（自社の枠と週次の notify_indexnow が全社を回す）"
     },
     "ftp": {
      "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:108",
+     "evidence": "scripts/notify_indexnow.py:116",
      "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
     },
     "zip": {
      "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:108",
+     "evidence": "scripts/notify_indexnow.py:116",
      "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
@@ -583,32 +592,32 @@
     },
     "external-md": {
      "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:320",
+     "evidence": "scripts/bing_webmaster.py:311",
      "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
     },
     "external-html": {
      "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:320",
+     "evidence": "scripts/bing_webmaster.py:311",
      "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
     },
     "nextjs-json": {
      "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:320",
+     "evidence": "scripts/bing_webmaster.py:311",
      "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
     },
     "wordpress": {
      "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:320",
-     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+     "evidence": "scripts/bing_webmaster.py:198",
+     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認）が無く、送るのは自社だけ（own_cfgs）。先方の Bing アカウントの API キーを預かって送る処理が要る"
     },
     "ftp": {
      "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:320",
+     "evidence": "scripts/bing_webmaster.py:311",
      "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
     },
     "zip": {
      "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:320",
+     "evidence": "scripts/bing_webmaster.py:311",
      "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
     }
    }
@@ -641,9 +650,9 @@
      "need": "お客様の社だけ本文に最小の BlogPosting を入れる。日付・画像などはアプリ側の実装任せ"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1075",
-     "need": "お客様の社だけ、最新の mu-plugin が wp_head で出す。自社の WordPress には出さない"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1184",
+     "note": "投稿メタ _ss_jsonld に入れ、mu-plugin が wp_head で出す（自社の WordPress にも出す）"
     },
     "ftp": {
      "status": "ok",
@@ -683,9 +692,9 @@
      "need": "FAQ を JSON で渡すだけ。FAQPage を出すかはアプリ側"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/publish.py:1038",
-     "need": "FAQPage を出していない（本文に FAQ の見出しが残るだけ）"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1121",
+     "note": "FAQPage を投稿メタ _ss_jsonld_extra に入れ、mu-plugin が wp_head で出す"
     },
     "ftp": {
      "status": "ok",
@@ -725,9 +734,9 @@
      "need": "お客様の社だけ JSON に著者を入れる。出し方はアプリ側"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1075",
-     "need": "お客様の社だけ mu-plugin 経由。自社の著者は出さない"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1086",
+     "note": "お客様の社は監修・著者（credit_ld）、自社は Person + sameAs"
     },
     "ftp": {
      "status": "ok",
@@ -765,9 +774,9 @@
      "need": "about・mentions を JSON に入れていない"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/publish.py:1038",
-     "need": "about・mentions を出していない"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1099",
+     "note": "about・mentions を BlogPosting に入れる"
     },
     "ftp": {
      "status": "ok",
@@ -805,9 +814,9 @@
      "need": "robots の meta はアプリ側。画像・動画のサイトマップ行は書き出した HTML から拾うため Next.js では空になる"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/publish.py:1038",
-     "need": "robots の meta・画像/動画のサイトマップを扱っていない"
+     "status": "partial",
+     "evidence": "automation/wordpress/ss-quality-gate.php:325",
+     "need": "robots の meta（max-snippet 等）は mu-plugin が出すが、画像・動画のサイトマップが無い（WordPress 本体の wp-sitemap は画像・動画を載せない。mu-plugin の sitemap のフィルタで足す処理が要る）"
     },
     "ftp": {
      "status": "ok",
@@ -824,7 +833,8 @@
    "label": "計測（GA4・CTA・フォーム・入口・A/B）",
    "entry": [
     "site/js/site.js",
-    "scripts/daily_kpi.py"
+    "scripts/daily_kpi.py",
+    "automation/wordpress/ss-quality-gate.php"
    ],
    "cells": {
     "self-static": {
@@ -847,9 +857,9 @@
      "need": "ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1038",
-     "need": "ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い"
+     "status": "ok",
+     "evidence": "automation/wordpress/ss-quality-gate.php:584",
+     "note": "mu-plugin が site.js と同じ出来事（CTA・フォーム・入口・A/B・スクロール）を送る。GA4 の測定IDはシートで聞き push_settings で渡す（初回接続）"
     },
     "ftp": {
      "status": "missing",
@@ -890,9 +900,9 @@
      "need": "原稿に入る2箇所目の CTA（cta_fill）だけ。中ほどの導線・その場の入口（cta_inline）は入らない"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1047",
-     "need": "中ほどの導線は入るが、その場の入口（cta_inline）を入れていない"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1142",
+     "note": "その場の入口と中ほどの導線を他の方式と同じ関数で入れる（計測は mu-plugin）"
     },
     "ftp": {
      "status": "ok",
@@ -908,7 +918,8 @@
   "industry_hub": {
    "label": "業種ハブ（/industry/）",
    "entry": [
-    "scripts/industry_hub.py"
+    "scripts/industry_hub.py",
+    "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
@@ -931,9 +942,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/build.py:1759",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "partial",
+     "evidence": "scripts/wp_bridge.py:373",
+     "need": "固定ページ（/industry/・/industry/<業種>/・faq/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る（記事末の案内からは辿れる）"
     },
     "ftp": {
      "status": "missing",
@@ -950,7 +961,8 @@
   "glossary": {
    "label": "用語集（/glossary/）",
    "entry": [
-    "scripts/glossary.py"
+    "scripts/glossary.py",
+    "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
@@ -973,9 +985,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/build.py:1892",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "partial",
+     "evidence": "scripts/wp_bridge.py:403",
+     "need": "固定ページ（/glossary/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る"
     },
     "ftp": {
      "status": "missing",
@@ -1017,7 +1029,7 @@
     "wordpress": {
      "status": "missing",
      "evidence": "scripts/build.py:1908",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "need": "build.py が site/ にだけ作る。WordPress では業種ハブ・用語集と同じく、wp_bridge.upsert_page で固定ページにして sync_pages から作り直す処理が要る"
     },
     "ftp": {
      "status": "missing",
@@ -1059,7 +1071,7 @@
     "wordpress": {
      "status": "missing",
      "evidence": "scripts/build.py:1936",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "need": "build.py が site/ にだけ作る。WordPress では業種ハブ・用語集と同じく、wp_bridge.upsert_page で固定ページにして sync_pages から作り直す処理が要る"
     },
     "ftp": {
      "status": "missing",
@@ -1101,7 +1113,7 @@
     "wordpress": {
      "status": "missing",
      "evidence": "scripts/build.py:1957",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "need": "build.py が site/ にだけ作る。WordPress では業種ハブ・用語集と同じく、wp_bridge.upsert_page で固定ページにして sync_pages から作り直す処理が要る"
     },
     "ftp": {
      "status": "missing",
@@ -1143,7 +1155,7 @@
     "wordpress": {
      "status": "missing",
      "evidence": "scripts/build.py:2354",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "need": "build.py が site/ にだけ作る。WordPress では業種ハブ・用語集と同じく、wp_bridge.upsert_page で固定ページにして sync_pages から作り直す処理が要る"
     },
     "ftp": {
      "status": "missing",
@@ -1316,8 +1328,8 @@
     },
     "wordpress": {
      "status": "missing",
-     "evidence": "scripts/publish.py:1038",
-     "need": "訳のページ・hreflang を WordPress に出す処理が無い"
+     "evidence": "scripts/wp_bridge.py:373",
+     "need": "訳の要約ページを固定ページ（wp_bridge.upsert_page）で作り、日本語の記事と hreflang で結ぶ処理（mu-plugin の wp_head）が要る。sync_pages は業種ハブと用語集だけを作る"
     },
     "ftp": {
      "status": "ok",
@@ -1357,7 +1369,7 @@
     "wordpress": {
      "status": "missing",
      "evidence": "scripts/menu_page.py:280",
-     "need": "固定ページとして入れる処理が無い"
+     "need": "メニューのページ（Menu 構造化データ・QR）を wp_bridge.upsert_page で固定ページにする処理が要る"
     },
     "ftp": {
      "status": "ok",
@@ -1395,9 +1407,9 @@
      "need": "動画の埋め込み・VideoObject を JSON に入れていない"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/publish.py:1038",
-     "need": "動画の埋め込み・VideoObject を本文に入れていない"
+     "status": "ok",
+     "evidence": "scripts/publish.py:1149",
+     "note": "動画の URL を1行で置き（WordPress が埋め込みにする）、VideoObject を BlogPosting の video に入れる"
     },
     "ftp": {
      "status": "ok",
@@ -1440,8 +1452,8 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/youtube_upload.py:40",
-     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+     "evidence": "scripts/youtube_upload.py:303",
+     "note": "先方のアカウントでの許可（初回接続）が済めば動く。説明欄の記事URLは実際のパーマリンク"
     },
     "ftp": {
      "status": "ok",
@@ -1541,42 +1553,43 @@
   "site_audit": {
    "label": "サイト監査（Ahrefs 相当）",
    "entry": [
-    "scripts/seo_audit.py"
+    "scripts/seo_audit.py",
+    "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:309",
+     "evidence": "scripts/seo_audit.py:314",
      "note": "公開前の門"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:338",
+     "evidence": "scripts/seo_audit.py:343",
      "note": "本番を巡回して知らせる（findings の週次）"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:338",
+     "evidence": "scripts/seo_audit.py:343",
      "note": "本番を巡回して知らせる（findings の週次）"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:338",
+     "evidence": "scripts/seo_audit.py:343",
      "note": "本番を巡回して知らせる（findings の週次）"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:338",
-     "note": "本番を巡回して知らせる（findings の週次）"
+     "evidence": "scripts/seo_audit.py:263",
+     "note": "橋渡しの公開URLの一覧で本番を巡回して知らせる（findings の週次）"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:338",
+     "evidence": "scripts/seo_audit.py:343",
      "note": "本番を巡回して知らせる（findings の週次）"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:338",
+     "evidence": "scripts/seo_audit.py:343",
      "note": "本番を巡回して知らせる（findings の週次）"
     }
    }
@@ -1589,36 +1602,36 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2380"
+     "evidence": "scripts/build.py:2383"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1216",
+     "evidence": "scripts/publish.py:1348",
      "note": "全方式が配信前にこの行を通る"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1216",
+     "evidence": "scripts/publish.py:1348",
      "note": "全方式が配信前にこの行を通る"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1216",
+     "evidence": "scripts/publish.py:1348",
      "note": "全方式が配信前にこの行を通る"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1216",
+     "evidence": "scripts/publish.py:1348",
      "note": "全方式が配信前にこの行を通る"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1216",
+     "evidence": "scripts/publish.py:1348",
      "note": "全方式が配信前にこの行を通る"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1216",
+     "evidence": "scripts/publish.py:1348",
      "note": "全方式が配信前にこの行を通る"
     }
    }
@@ -1627,7 +1640,8 @@
    "label": "本番の検査（live_check・publish_gap）",
    "entry": [
     "scripts/live_check.py",
-    "scripts/publish_gap.py"
+    "scripts/publish_gap.py",
+    "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
@@ -1649,8 +1663,8 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish_gap.py:27",
-     "need": "記事が在るかだけ見る。指紋が無いので、本文の更新が届いたかは見られない"
+     "evidence": "scripts/publish_gap.py:218",
+     "need": "本番の巡回（live_check.py:158）と公開済みの slug の照合はするが、配信時の指紋（manifest）が無いので本文の更新が届いたかは見られない。投稿メタに指紋を残して /ss/v1/urls で返す処理が要る"
     },
     "ftp": {
      "status": "ok",

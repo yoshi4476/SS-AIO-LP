@@ -114,6 +114,16 @@ def load(site_id):
 
 def article_url(cfg, meta):
     """公開後のURLを組み立てる"""
+    # WordPress はパーマリンク設定が URL を決めるので、組み立てる前に先方へ聞く。
+    # wp_bridge.article_url はこの関数を呼ぶため、循環しない post_link だけを使う
+    if cfg.get("type") == "wordpress":
+        try:
+            import wp_bridge
+            link = wp_bridge.post_link(cfg, meta["slug"])
+        except Exception:
+            link = ""
+        if link:
+            return link
     prefix = cfg.get("url_prefix")
     url = (f"https://{cfg['domain']}{prefix}/{meta['slug']}/" if prefix
            else f"https://{cfg['domain']}/{meta['category']}/{meta['slug']}/")
