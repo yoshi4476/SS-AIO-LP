@@ -152,7 +152,9 @@ def translate(menu, lang):
 
 
 # ── ページと QR ───────────────────────────────────────
-def page(menu, lang, cfg, others):
+def parts(menu, lang, cfg, others):
+    """ページの本文（言語の切り替え・税込の注記・区分ごとの品目）と Menu の構造化データ。
+    page() も WordPress の固定ページもこれを使う（描き方を2つ持たない）"""
     lab, tax, yen = LABEL[lang]
     by = {}
     for it in menu["items"]:
@@ -165,16 +167,23 @@ def page(menu, lang, cfg, others):
             + (f'<div class="t">{_h.escape(i["note"])}</div>' if i.get("note") else "") + "</li>" for i in items)
         secs.append((f"<h2>{_h.escape(cat)}</h2>" if cat else "") + f"<ul>{rows}</ul>")
     base = f"https://{cfg['domain']}/menu/"
-    alts = "\n".join(f'<link rel="alternate" hreflang="{LANG_ATTR[o]}" href="{base}{o}/">' for o in others)
     switch = " / ".join(f'<a href="{base}{o}/">{LABEL[o][0]}</a>' for o in others if o != lang)
     ld = {"@context": "https://schema.org", "@type": "Menu", "name": f"{menu['shop']} {lab}", "inLanguage": LANG_ATTR[lang],
           "hasMenuSection": [{"@type": "MenuSection", "name": cat or lab, "hasMenuItem": [
               {"@type": "MenuItem", "name": i["name"], "description": i.get("desc", ""),
                "offers": {"@type": "Offer", "price": i["price"], "priceCurrency": "JPY"}} for i in items]}
               for cat, items in by.items()]}
+    body = f'<p class="sw">{switch}</p><p class="tax">{tax}</p>\n{"".join(secs)}'
+    return f"{menu['shop']} {lab}", body, ld
+
+
+def page(menu, lang, cfg, others):
+    title, body, ld = parts(menu, lang, cfg, others)
+    base = f"https://{cfg['domain']}/menu/"
+    alts = "\n".join(f'<link rel="alternate" hreflang="{LANG_ATTR[o]}" href="{base}{o}/">' for o in others)
     return f"""<!DOCTYPE html>
 <html lang="{LANG_ATTR[lang]}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{_h.escape(menu['shop'])} {lab}</title><link rel="canonical" href="{base}{lang}/">
+<title>{_h.escape(title)}</title><link rel="canonical" href="{base}{lang}/">
 {alts}
 <link rel="alternate" hreflang="x-default" href="{base}ja/">
 <style>body{{margin:0;background:#fdfcf9;color:#212b3d;font-family:-apple-system,"Hiragino Sans","Noto Sans CJK JP",sans-serif}}
@@ -183,8 +192,8 @@ ul{{list-style:none;padding:0;margin:0}}li{{display:grid;grid-template-columns:1
 .n{{font-weight:700}}.p{{font-weight:700;white-space:nowrap}}.d,.t{{grid-column:1/-1;font-size:.9rem;color:#5b6472}}.t{{font-size:.82rem}}
 .sw{{font-size:.9rem}}.tax{{font-size:.85rem;color:#5b6472}}</style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script></head>
-<body><main><p class="sw">{switch}</p><h1>{_h.escape(menu['shop'])} {lab}</h1><p class="tax">{tax}</p>
-{''.join(secs)}</main></body></html>
+<body><main><h1>{_h.escape(title)}</h1>
+{body}</main></body></html>
 """
 
 
@@ -229,17 +238,30 @@ def build(site, push=False, write=True):
         p.write_text(page(m, lg, cfg, have), encoding="utf-8")
         qr(f"https://{cfg['domain']}/menu/{lg}/", out / f"qr-{lg}.png")
     print(f"   ページと QR: {out}（{'・'.join(have)}）")
-    if push and cfg.get("type") in ("external-html", "external-md"):
+    if push and cfg.get("type") == "wordpress":
+        # WordPress は固定ページ（/menu/ の下に言語ごと）。業種のまとめと同じ upsert_page で作る
+        import wp_bridge
+        pid, st = wp_bridge.upsert_page(cfg, "menu", f"{menu['shop']} {LABEL['ja'][0]}",
+                                        " / ".join(f'<a href="/menu/{o}/">{LABEL[o][0]}</a>' for o in have))
+        print(f"   /menu/: {st}")
+        if st == "taken":
+            print(f"要対応: {cfg['id']} に先方の固定ページ /menu/ があるため、メニューを置けません")
+            return len(have)
+        for lg, m in menus.items():
+            title, body, ld = parts(m, lg, cfg, have)
+            _, cst = wp_bridge.upsert_page(cfg, lg, title, body + '<script type="application/ld+json">'
+                                           + json.dumps(ld, ensure_ascii=False) + "</script>", parent=pid)
+            print(f"   /menu/{lg}/: {cst}")
+        return len(have)
+    if push and cfg.get("type") in ("external-html", "external-md", "nextjs-json"):
+        import aggregate_pages as AP
         import publish
         tok = publish._push_token()
         dest = publish.ensure_clone(cfg, tok)
-        shutil.copytree(out, dest / "menu", dirs_exist_ok=True, ignore=shutil.ignore_patterns("qr-*.png"))
-        md = dest / "tools" / "make_dist.py"
-        if md.is_file():
-            t = md.read_text(encoding="utf-8")
-            mm = re.search(r"PUBLIC_DIRS\s*=\s*\[([^\]]*)\]", t)
-            if mm and '"menu"' not in mm.group(1):
-                md.write_text(t[:mm.end(1)] + ', "menu"' + t[mm.end(1):], encoding="utf-8", newline="\n")
+        # Next.js（静的書き出し）は public/ の中身がそのまま公開される
+        sub = dest / "public" / "menu" if cfg["type"] == "nextjs-json" else dest / "menu"
+        shutil.copytree(out, sub, dirs_exist_ok=True, ignore=shutil.ignore_patterns("qr-*.png"))
+        AP.ensure_public_dirs(dest, ["menu"])
         subprocess.run(["git", "add", "-A"], cwd=dest, check=True)
         subprocess.run(["git", "-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp",
                         "commit", "-q", "-m", "多言語メニュー（/menu/）を更新"], cwd=dest)
