@@ -412,7 +412,8 @@ def test_bridge_self_update_is_signed():
     pub = base64.b64encode(bytes(sk.verify_key)).decode()
     with tempfile.TemporaryDirectory() as td:
         plug, man = Path(td) / "p.php", Path(td) / "m.json"
-        src = php.replace("define('SSB_PUBKEY', '')", f"define('SSB_PUBKEY', '{pub}')").replace("\n", "\r\n")
+        # 本物の公開鍵が入った後でも試験の鍵に差し替える（空のときだけ差し替えると、鍵を作った後に門が落ちる）
+        src = re.sub(r"define\('SSB_PUBKEY', '[^']*'\)", f"define('SSB_PUBKEY', '{pub}')", php).replace("\n", "\r\n")
         plug.write_bytes(src.encode("utf-8"))
         old = _with(W, PLUGIN=plug, MANIFEST=man)
         try:
