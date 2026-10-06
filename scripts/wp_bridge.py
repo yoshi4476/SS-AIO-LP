@@ -9,6 +9,8 @@ ss/v1 の REST を持つ（書き込みは編集者以上かつアプリケー�
   POST /ss/v1/redirects  統合した記事の301（同じサイトのパスだけ）
   POST /ss/v1/settings   llms.txt・IndexNow の鍵・GA4 の測定ID・スマホの固定ボタン
   POST /ss/v1/update     自己更新を今すぐ試す（ふだんは日に1回、先方の WordPress が自分で見る）
+  GET/POST /ss/v1/design 追加CSS・head とフッターの追記（2.0.4。外観の編集の権限も要る。項目は link・meta・
+                         ld+json・許可したドメインの script src だけ。site_change.py が design/ に取って戻す）
 
 **なぜ要るか**: WordPress は記事のURLをパーマリンク設定が決め、sitemap は索引形式（/wp-sitemap.xml）で、
 _redirects も llms.txt も置けない。静的サイト向けの道具（sitemap を平らな一覧として読む・URL を

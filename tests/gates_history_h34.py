@@ -236,7 +236,9 @@ def test_wordpress_fingerprint_and_media_sitemap():
     check("橋渡し: 動画は必須（サムネイル・題・説明・再生の場所）がそろうものだけ", "if ($thumb === '' || $player === '' || $title === '' || $desc === '')" in sm, True)
     check("橋渡し: 公開している robots.txt にだけ、画像・動画のサイトマップの Sitemap 行を足す",
           "ssb_media_posts(1)" in php.split("add_filter('robots_txt'", 1)[1].split("}, 99, 2);", 1)[0], True)
-    check("橋渡しの版は 2.0.3", re.search(r"^const SSB_VERSION = '(\d+\.\d+\.\d+)';", php, re.M).group(1), "2.0.3")
+    # 版は上がっていく（2.0.4 で追加CSS・head とフッターの窓口を足した。h37）
+    check("橋渡しの版は 2.0.3 以降",
+          tuple(map(int, re.search(r"^const SSB_VERSION = '(\d+\.\d+\.\d+)';", php, re.M).group(1).split("."))) >= (2, 0, 3), True)
 
 
 def test_capability_cells_follow_the_work():
