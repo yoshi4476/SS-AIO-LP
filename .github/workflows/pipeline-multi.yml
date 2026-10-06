@@ -320,6 +320,8 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          # 同意のあるお客様の社は、配信と一緒に Bing の確認ファイルを置く（publish.py → search_connect.place）
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
           # 公開直後のSNS投稿（publish_flow → post_social）。未登録の媒体は黙って飛ばす
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
@@ -493,42 +495,6 @@ jobs:
           echo "::error::3回ともデプロイ失敗。記事はコミット済みなので次回のデプロイで反映される"
           exit 1
 
-      # 検索エンジンへの通知はデプロイの後に送る。以前は publish_flow の中（コミット・
-      # デプロイより前）で送っており、まだ配信されていないURLを知らせて404を踏ませていた。
-      # デプロイが落ちた回は、この工程も走らない（出ていないURLを知らせない）
-      # Bing への送信記録を前の回から戻す。戻さないと同じ日の2枠目が同じURLをもう一度送り、枠を食う
-      - name: Bing への送信記録を戻す
-        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.own == 'True'
-        uses: actions/cache/restore@v4
-        with:
-          path: data/bing_submit.json
-          key: bing-submit-${{ github.run_id }}
-          restore-keys: bing-submit-
-
-      - name: 新しいURLを検索エンジンへ通知（自前ビルドのサイトのみ）
-        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.own == 'True'
-        continue-on-error: true
-        env:
-          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
-          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
-        run: |
-          python scripts/notify_indexnow.py || true
-          python scripts/bing_webmaster.py --site "${{ steps.site.outputs.id }}" || true
-          if [ -n "$SA_JSON" ]; then
-            printf '%s' "$SA_JSON" > indexing-service-account.json
-            python scripts/notify_indexing.py --site "${{ steps.site.outputs.id }}" || true
-            rm -f indexing-service-account.json
-          else
-            echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — Indexing API はスキップ"
-          fi
-
-      - name: Bing への送信記録を残す
-        if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.own == 'True' && hashFiles('data/bing_submit.json') != ''
-        uses: actions/cache/save@v4
-        with:
-          path: data/bing_submit.json
-          key: bing-submit-${{ github.run_id }}
-
       # ワークフローが成功しても、デプロイだけ落ちていることがある。
       # 実際、wrangler の依存パッケージの公開遅れでデプロイが3回とも失敗し、
       # 記事はコミット済みなのに本番が数日古いままだった。
@@ -559,6 +525,59 @@ jobs:
             echo "確認中: 公開直後に本番で確認できず（翌日の照合で判定します）" >> automation/logs/findings.txt
           fi
 
+      # 検索エンジンへの通知は、本番に届いたかを確かめた後に送る。以前は publish_flow の中（コミット・
+      # デプロイより前）で送っており、まだ配信されていないURLを知らせて404を踏ませていた。
+      # デプロイが落ちた回は、この工程も走らない（出ていないURLを知らせない）。
+      # お客様の社も同じく送る（2026-10-06）。以前は自前ビルドの枠だけで、お客様の新しい記事は
+      # 週次の再送まで知らせていなかった。配信先のビルドは自分で動くので、通知は本番の sitemap に
+      # 載ったURLだけを送る（notify_indexing / bing_webmaster が sitemap と突き合わせる）。
+      # 鍵ファイル・Bing の確認ファイルは publish.py が配信と一緒に置いている（search_connect.place）
+      # Bing への送信記録を前の回から戻す。戻さないと同じ日の2枠目が同じURLをもう一度送り、枠を食う
+      - name: Bing への送信記録を戻す
+        if: steps.site.outputs.skip != 'yes'
+        uses: actions/cache/restore@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}
+          restore-keys: bing-submit-
+
+      - name: 新しいURLを検索エンジンへ通知
+        if: steps.site.outputs.skip != 'yes'
+        continue-on-error: true
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}   # WordPress の社は橋渡しへ鍵・確認コードを渡す
+        run: |
+          id="${{ steps.site.outputs.id }}"
+          mkdir -p automation/logs
+          {
+            # 自前ビルドの枠は今までどおり全サイトの sitemap を送る。お客様の社はその社の本日の記事だけ
+            if [ "${{ steps.site.outputs.own }}" = "True" ]; then
+              python scripts/notify_indexnow.py || true
+            else
+              python scripts/notify_indexnow.py --site "$id" || true
+            fi
+            python scripts/bing_webmaster.py --site "$id" || true
+            if [ -n "$SA_JSON" ]; then
+              printf '%s' "$SA_JSON" > indexing-service-account.json
+              python scripts/notify_indexing.py --site "$id" || true
+              rm -f indexing-service-account.json
+            else
+              echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — Indexing API はスキップ"
+            fi
+          } > /tmp/notify.log 2>&1
+          cat /tmp/notify.log
+          # 先方にお願いすること（Search Console のオーナー・確認ファイルが出ない等）は通知の本文へ
+          grep '^要対応' /tmp/notify.log >> automation/logs/findings.txt || true
+
+      - name: Bing への送信記録を残す
+        if: always() && steps.site.outputs.skip != 'yes' && hashFiles('data/bing_submit.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: data/bing_submit.json
+          key: bing-submit-${{ github.run_id }}
+
       # 品質ゲートはすべて原稿とビルド出力を見ている。公開後の実物を見る工程が
       # 無かったため、社内向けTODOコメント・生成時の作業タグ </content>・
       # 失敗すると訪問者を追い出すフォームが、そのまま本番に届いていた。
@@ -584,6 +603,7 @@ jobs:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}   # 配信と一緒に Bing の確認ファイルを置く
           HUB_URL: ${{ secrets.HUB_URL }}          # 配信できた記事の公開の後の手順（台帳への記録）に使う
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
