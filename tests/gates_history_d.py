@@ -742,8 +742,7 @@ def site_enumerations(src, ids):
 
 
 # 列挙が意味を持つものだけ通す。足すときは理由を書く
-SITE_LIST_ALLOW = {"add_fact.py": "人が書き換える記入例の雛形",
-                   "speed_fix.py": "自社3サイトそれぞれのファイル配置に合わせた処理"}
+SITE_LIST_ALLOW = {"add_fact.py": "人が書き換える記入例の雛形"}
 
 
 def test_hist_no_hardcoded_site_list():

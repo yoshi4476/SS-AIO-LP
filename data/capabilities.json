@@ -1,0 +1,1877 @@
+{
+ "updated": "2026-10-06",
+ "about": "配信方式（sites/<id>.json の type）× 自動運用の機能。その方式で受けたお客様の社で、最初の接続（鍵・権限・雛形の受け取り）が済んだ後に、人の手を使わずに動くかを、コードを読んで判定した。evidence はその判定の根拠の行（ファイル:行）。行番号はコードの変更でずれるので、判定を見直すときに引き直す。機能を足したら features に、方式を足したら methods と全機能の cells に足す（tests/gates_history_h28.py が抜けを止める）",
+ "statuses": {
+  "ok": "人の手なしで動く",
+  "partial": "一部が動かない・人の作業が残る（need に何が要るか）",
+  "missing": "仕組みが無い（need に何が要るか）",
+  "n/a": "その方式（の社）では意味が無い"
+ },
+ "methods": {
+  "self-static": "この管制塔リポジトリ内の静的サイト（build.py が公開する）",
+  "external-md": "別リポジトリの静的サイト。Markdownをそのまま置く",
+  "external-html": "別リポジトリ。HTMLに変換して置く（相手のテンプレートを使う）",
+  "nextjs-json": "Next.jsサイト。src/content/blog/<slug>.json を書き出す",
+  "wordpress": "WordPress。REST APIで投稿する（品質ゲートは先方のmu-pluginが担う）",
+  "ftp": "Gitを使わないレンタルサーバー。HTMLに変換してFTPS/FTP/SFTPで上げる（接続情報は FTP_CREDENTIALS_JSON）",
+  "zip": "先方が自分で上げる。HTMLに変換して deliveries/<id>/ にZIPを作る"
+ },
+ "features": {
+  "publish_new": {
+   "label": "新記事の公開",
+   "entry": [
+    "scripts/publish.py",
+    "scripts/build.py",
+    "scripts/deliver_files.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1221",
+     "note": "build.py が site/ に書き、デプロイで公開"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:420",
+     "note": "原稿（.md）を配信先リポジトリに置く。HTML にするのは先方のビルド"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:651",
+     "note": "先方の雛形で HTML を作り、配信先リポジトリへ push"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:317",
+     "note": "本文 HTML 込みの JSON を配信先リポジトリへ push"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1038",
+     "note": "REST API で投稿（--push で publish）"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/deliver_files.py:301",
+     "note": "書き出したファイルだけを FTPS/FTP/SFTP で上げる"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/deliver_files.py:361",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。ZIP は先方へメールで届く"
+    }
+   }
+  },
+  "quality_gate": {
+   "label": "品質ゲート（90点・観点の足切り・量産の指紋・監修）",
+   "entry": [
+    "scripts/rubric.py",
+    "scripts/scaled_guard.py",
+    "scripts/editorial_review.py",
+    "scripts/build.py",
+    "scripts/publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:2233",
+     "note": "基準に届かない記事は site/ に生成されない"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1173"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1173"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1173"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "automation/wordpress/ss-quality-gate.php:96",
+     "note": "配信側の判定に加え、先方の mu-plugin が公開を下書きへ戻す"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1173"
+    },
+    "zip": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1173",
+     "note": "基準に届かない記事は ZIP を作らない"
+    }
+   }
+  },
+  "body_images": {
+   "label": "本文の画像（アイキャッチ・図解）",
+   "entry": [
+    "scripts/make_images.py",
+    "scripts/publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:953",
+     "note": "生成漏れは build.py が検出"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "site/images/<slug>/ を配信先へ複製していない。本文の図解・アイキャッチが404になる（publish.py の write_external_md に画像の複製を足す）"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:839"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:392",
+     "note": "アイキャッチは WebP も作る"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:1013",
+     "need": "アイキャッチだけをメディアに上げる。本文の図解（/images/<slug>/…）は上げておらず、WordPress では本文の画像が404になる（図解もメディアに上げて本文の参照を差し替える処理が要る）"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:840"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:840",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "thumbnail_photo": {
+   "label": "一覧の写真・サムネイル・OGP画像",
+   "entry": [
+    "scripts/photo_shelf.py",
+    "scripts/pick_photo.py",
+    "scripts/industry_thumbs.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:259"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "写真の棚から選ぶ処理も OGP 画像の差し替えも無い"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:783",
+     "note": "写真の棚から選び、一覧カードと og:image に当てる"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:363",
+     "note": "JSON の photo に入れる（表示はアプリ側）"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:1078",
+     "need": "文字のアイキャッチをアイキャッチ画像にするだけ。写真の棚から選ぶ処理が無い"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:783"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:783",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "verify_publish": {
+   "label": "公開の確認（公開直後）",
+   "entry": [
+    "scripts/verify_publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/verify_publish.py:131"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/verify_publish.py:132",
+     "note": "配信先リポジトリのビルドを待ってから本番を見る"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/verify_publish.py:132"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/verify_publish.py:132"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/verify_publish.py:131",
+     "need": "wordpress は repo を持たないのに wait_build(cfg['repo']) へ進み KeyError で落ちる。REST API で status=publish を確かめる分岐が要る（verify_publish.py）"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/verify_publish.py:131",
+     "note": "上げた時点で公開される（ビルドを待たない）"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/verify_publish.py:128",
+     "need": "ZIP を作れたことしか確かめない。先方が上げたかを後から見に行く工程が無い（publish_gap も zip を飛ばす）"
+    }
+   }
+  },
+  "rewrite_redeliver": {
+   "label": "書き直しの再配信（直した原稿を届ける）",
+   "entry": [
+    "scripts/publish_changed.py",
+    "scripts/desc_fill.py",
+    "scripts/auto_rewrite.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/publish_changed.py:80",
+     "note": "build.py が毎回描き直す"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/publish_changed.py:103"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish_changed.py:103"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/publish_changed.py:103"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/publish_changed.py:103",
+     "note": "同じ slug の投稿を更新する"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish_changed.py:103"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish_changed.py:103",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。直すたびに記事ごとの ZIP がメールで届く"
+    }
+   }
+  },
+  "bulk_rerender": {
+   "label": "一括の描き直し（雛形・設定の変更を既存記事へ）",
+   "entry": [
+    "scripts/publish_rerender.py",
+    "scripts/republish_images.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:859",
+     "note": "build.py が毎回全記事を描く"
+    },
+    "external-md": {
+     "status": "n/a",
+     "evidence": "scripts/publish.py:420",
+     "note": "原稿をそのまま置く方式。描くのは先方のビルドで、毎回描き直される"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/publish_rerender.py:75",
+     "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish_rerender.py:73",
+     "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/publish_rerender.py:53",
+     "need": "WordPress の投稿をまとめて描き直す道具が無い（publish_changed は原稿が変わった記事だけ）"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/publish_rerender.py:48",
+     "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish_rerender.py:48",
+     "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "merge_redirect": {
+   "label": "統合と301転送",
+   "entry": [
+    "scripts/auto_merge.py",
+    "scripts/retract.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/auto_merge.py:425"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/retract.py:35",
+     "need": "_redirects（Cloudflare Pages の書式）に書く。配信先が Cloudflare Pages 以外（Vercel・Netlify 以外のホスト等）では転送が効かない。ホストを sites/<id>.json に持ち書き分ける処理が要る"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/retract.py:35",
+     "need": "_redirects（Cloudflare Pages の書式）に書く。配信先が Cloudflare Pages 以外（Vercel・Netlify 以外のホスト等）では転送が効かない。ホストを sites/<id>.json に持ち書き分ける処理が要る"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/retract.py:35",
+     "need": "_redirects（Cloudflare Pages の書式）に書く。配信先が Cloudflare Pages 以外（Vercel・Netlify 以外のホスト等）では転送が効かない。ホストを sites/<id>.json に持ち書き分ける処理が要る"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/retract.py:152",
+     "need": "記事は下書きに戻すが、301 は人が管理画面（Redirection 等）で設定する"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/deliver_files.py:321",
+     "note": ".htaccess に Redirect 301 を足す（Apache 前提）"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/deliver_files.py:355",
+     "need": "消すフォルダと .htaccess に足す行を手順書にして送る。先方が作業する"
+    }
+   }
+  },
+  "sitemap": {
+   "label": "sitemap.xml",
+   "entry": [
+    "scripts/build.py",
+    "scripts/publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1321"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:420",
+     "need": "sitemap.xml に足さない。先方のビルドが作るなら足りるが、作らない先方では記事が載らない"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:903",
+     "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:903",
+     "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/publish_gap.py:27",
+     "note": "WordPress 本体が /wp-sitemap.xml を作る"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/deliver_files.py:69",
+     "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:903",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    }
+   }
+  },
+  "llms_txt": {
+   "label": "llms.txt",
+   "entry": [
+    "scripts/build.py",
+    "scripts/publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1302"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "llms.txt に足さない"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:917",
+     "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:917",
+     "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:1038",
+     "need": "WordPress に llms.txt を置く仕組みが無い（mu-plugin で /llms.txt を返す等）"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:917",
+     "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:917",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+    }
+   }
+  },
+  "robots_txt": {
+   "label": "robots.txt（AIクローラーの許可）",
+   "entry": [
+    "scripts/ai_crawler_check.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "site/robots.txt:1"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/ai_crawler_check.py:103",
+     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/ai_crawler_check.py:103",
+     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/ai_crawler_check.py:103",
+     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/ai_crawler_check.py:103",
+     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/ai_crawler_check.py:103",
+     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/ai_crawler_check.py:103",
+     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "indexing_api": {
+   "label": "Indexing API（Google への即時通知）",
+   "entry": [
+    "scripts/notify_indexing.py",
+    "scripts/reindex.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": ".github/workflows/pipeline-multi.yml:519"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": ".github/workflows/pipeline-multi.yml:508",
+     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": ".github/workflows/pipeline-multi.yml:508",
+     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": ".github/workflows/pipeline-multi.yml:508",
+     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": ".github/workflows/pipeline-multi.yml:508",
+     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": ".github/workflows/pipeline-multi.yml:508",
+     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": ".github/workflows/pipeline-multi.yml:508",
+     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "indexnow": {
+   "label": "IndexNow",
+   "entry": [
+    "scripts/notify_indexnow.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/notify_indexnow.py:57"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/notify_indexnow.py:108",
+     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/notify_indexnow.py:108",
+     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/notify_indexnow.py:108",
+     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/notify_indexnow.py:108",
+     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/notify_indexnow.py:108",
+     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/notify_indexnow.py:108",
+     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "bing": {
+   "label": "Bing（Webmaster API）",
+   "entry": [
+    "scripts/bing_webmaster.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": ".github/workflows/pipeline-multi.yml:516"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/bing_webmaster.py:320",
+     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+    },
+    "external-html": {
+     "status": "missing",
+     "evidence": "scripts/bing_webmaster.py:320",
+     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/bing_webmaster.py:320",
+     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/bing_webmaster.py:320",
+     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "scripts/bing_webmaster.py:320",
+     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "scripts/bing_webmaster.py:320",
+     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+    }
+   }
+  },
+  "ld_blogposting": {
+   "label": "構造化データ: BlogPosting",
+   "entry": [
+    "scripts/build.py",
+    "scripts/publish.py",
+    "templates/external_article.html"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:357"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "構造化データを付けない（先方のビルド任せ）。publish.py の write_external_md は原稿を置くだけ"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:292",
+     "note": "先方の雛形の BlogPosting に著者・発行元を当てる（雛形に無ければ足す）"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:339",
+     "need": "お客様の社だけ本文に最小の BlogPosting を入れる。日付・画像などはアプリ側の実装任せ"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:1075",
+     "need": "お客様の社だけ、最新の mu-plugin が wp_head で出す。自社の WordPress には出さない"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "templates/external_article.html:32"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "templates/external_article.html:32",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "ld_faqpage": {
+   "label": "構造化データ: FAQPage",
+   "entry": [
+    "scripts/build.py",
+    "scripts/publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:395"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "構造化データを付けない（先方のビルド任せ）。publish.py の write_external_md は原稿を置くだけ"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:746",
+     "note": "先方の雛形に {{FAQ_JSONLD}} があること（無ければ配信が止まる）"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:350",
+     "need": "FAQ を JSON で渡すだけ。FAQPage を出すかはアプリ側"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:1038",
+     "need": "FAQPage を出していない（本文に FAQ の見出しが残るだけ）"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "templates/external_article.html:38"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "templates/external_article.html:38",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "ld_author_person": {
+   "label": "構造化データ: 著者（Person・sameAs）",
+   "entry": [
+    "scripts/author_profile.py",
+    "scripts/publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:365"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "構造化データを付けない（先方のビルド任せ）。publish.py の write_external_md は原稿を置くだけ"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:682",
+     "note": "自社は台帳の sameAs、お客様は先方の著者・監修者（client_credit）"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:354",
+     "need": "お客様の社だけ JSON に著者を入れる。出し方はアプリ側"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:1075",
+     "need": "お客様の社だけ mu-plugin 経由。自社の著者は出さない"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:292"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:292",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "ld_entities": {
+   "label": "構造化データ: 実体（about・mentions）",
+   "entry": [
+    "scripts/entities.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:353"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "構造化データを付けない（先方のビルド任せ）。publish.py の write_external_md は原稿を置くだけ"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:726"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:317",
+     "need": "about・mentions を JSON に入れていない"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:1038",
+     "need": "about・mentions を出していない"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "templates/external_article.html:34"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "templates/external_article.html:34",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "search_preview": {
+   "label": "検索での見え方（robots の meta・画像/動画のサイトマップ）",
+   "entry": [
+    "scripts/search_preview.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:2361"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "robots の meta・画像/動画のサイトマップ行を足さない"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:799"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:886",
+     "need": "robots の meta はアプリ側。画像・動画のサイトマップ行は書き出した HTML から拾うため Next.js では空になる"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:1038",
+     "need": "robots の meta・画像/動画のサイトマップを扱っていない"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:799"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:799",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "measurement": {
+   "label": "計測（GA4・CTA・フォーム・入口・A/B）",
+   "entry": [
+    "site/js/site.js",
+    "scripts/daily_kpi.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "site/js/site.js:211"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:420",
+     "need": "ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:494",
+     "need": "記事内の入口だけは自前で送る。ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:317",
+     "need": "ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:1038",
+     "need": "ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "templates/external_article.html:53",
+     "need": "汎用の雛形（templates/external_article.html）に GA4 の計測タグが無く、data-cta を送る site.js も無い。測定ID（G-…）を sites/<id>.json に持ち雛形へ入れる工程が要る（先方の template.html があればそれ次第）"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "templates/external_article.html:53",
+     "need": "汎用の雛形に GA4 の計測タグが無い（ftp と同じ）。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "inline_entry": {
+   "label": "記事内の入口（inline_tool・CTA の差し込み）",
+   "entry": [
+    "scripts/cta_fill.py",
+    "scripts/build.py",
+    "scripts/publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:652"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/cta_fill.py:30",
+     "need": "原稿に入る2箇所目の CTA（cta_fill）だけ。中ほどの導線・その場の入口（cta_inline）は入らない"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:743"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/cta_fill.py:30",
+     "need": "原稿に入る2箇所目の CTA（cta_fill）だけ。中ほどの導線・その場の入口（cta_inline）は入らない"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:1047",
+     "need": "中ほどの導線は入るが、その場の入口（cta_inline）を入れていない"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:743"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:743",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "industry_hub": {
+   "label": "業種ハブ（/industry/）",
+   "entry": [
+    "scripts/industry_hub.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1759"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1759",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:821",
+     "need": "補助金サイトの雛形（hero-owner.webp がある配信先）だけ subsidy/pages.py が作る。お客様の社には作らない"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1759",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1759",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1759",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1759",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    }
+   }
+  },
+  "glossary": {
+   "label": "用語集（/glossary/）",
+   "entry": [
+    "scripts/glossary.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1892"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1892",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "external-html": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1892",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1892",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1892",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1892",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1892",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    }
+   }
+  },
+  "compare": {
+   "label": "比較表（/compare/）",
+   "entry": [
+    "scripts/compare_pages.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1908"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1908",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "external-html": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1908",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1908",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1908",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1908",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1908",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    }
+   }
+  },
+  "topics": {
+   "label": "トピック（/topics/）",
+   "entry": [
+    "scripts/topics.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1936"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1936",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "external-html": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1936",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1936",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1936",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1936",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1936",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    }
+   }
+  },
+  "area": {
+   "label": "エリア（/area/）",
+   "entry": [
+    "scripts/area_hub.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1957"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1957",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "external-html": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1957",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1957",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1957",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1957",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "scripts/build.py:1957",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    }
+   }
+  },
+  "season_feature": {
+   "label": "季節の特集",
+   "entry": [
+    "scripts/season_feature.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:2354"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/build.py:2354",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "external-html": {
+     "status": "missing",
+     "evidence": "scripts/build.py:2354",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/build.py:2354",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/build.py:2354",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "ftp": {
+     "status": "missing",
+     "evidence": "scripts/build.py:2354",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    },
+    "zip": {
+     "status": "missing",
+     "evidence": "scripts/build.py:2354",
+     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+    }
+   }
+  },
+  "industry_lp": {
+   "label": "業種別LP（/lp/<業種>/）",
+   "entry": [
+    "scripts/industry_lp.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1536"
+    },
+    "external-md": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1536",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "external-html": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1536",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "nextjs-json": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1536",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "wordpress": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1536",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "ftp": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1536",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "zip": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1536",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    }
+   }
+  },
+  "research_pages": {
+   "label": "一次データ・調査ページ（/data/・/research/）",
+   "entry": [
+    "scripts/data_intake.py",
+    "scripts/industry_ai_sources.py",
+    "scripts/question_pages.py",
+    "scripts/ai_ranking.py",
+    "scripts/research_cite.py",
+    "scripts/research_publish.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:1570"
+    },
+    "external-md": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1570",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "external-html": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1570",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "nextjs-json": {
+     "status": "n/a",
+     "evidence": "scripts/research_publish.py:65",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない（自社のコーポレートには research_publish.py が置く）"
+    },
+    "wordpress": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1570",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "ftp": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1570",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "zip": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:1570",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    }
+   }
+  },
+  "free_tools": {
+   "label": "無料ツール（/tools/）",
+   "entry": [
+    "scripts/tools_catalog.py",
+    "scripts/page_enrich.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:2350"
+    },
+    "external-md": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:2350",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "external-html": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:2350",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "nextjs-json": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:2350",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "wordpress": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:2350",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "ftp": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:2350",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    },
+    "zip": {
+     "status": "n/a",
+     "evidence": "scripts/build.py:2350",
+     "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない"
+    }
+   }
+  },
+  "i18n": {
+   "label": "多言語の要約ページ（hreflang）",
+   "entry": [
+    "scripts/i18n.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/i18n.py:334",
+     "note": "build.py が置く"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "訳のページも hreflang も置かない"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:595"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:381",
+     "need": "訳を JSON の translations に入れるだけ。/en/… を出すのはアプリ側"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:1038",
+     "need": "訳のページ・hreflang を WordPress に出す処理が無い"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:813"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:813",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "menu": {
+   "label": "多言語メニュー（/menu/）",
+   "entry": [
+    "scripts/menu_page.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "n/a",
+     "evidence": "scripts/menu_page.py:280",
+     "note": "このリポジトリのサイトは店舗ではない"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/menu_page.py:232"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/menu_page.py:232"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/menu_page.py:280",
+     "need": "Next.js の public/menu/ へ置く処理が無い"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/menu_page.py:280",
+     "need": "固定ページとして入れる処理が無い"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/menu_page.py:254"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/menu_page.py:275",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。中身が変わった回だけメールで届く"
+    }
+   }
+  },
+  "video_embed": {
+   "label": "動画の埋め込みと VideoObject",
+   "entry": [
+    "scripts/video_embed.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:748"
+    },
+    "external-md": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:420",
+     "need": "動画を埋め込まない"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:672"
+    },
+    "nextjs-json": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:317",
+     "need": "動画の埋め込み・VideoObject を JSON に入れていない"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/publish.py:1038",
+     "need": "動画の埋め込み・VideoObject を本文に入れていない"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:672"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish.py:672",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "video_social": {
+   "label": "YouTube・SNS への投稿",
+   "entry": [
+    "scripts/article_videos.py",
+    "scripts/youtube_upload.py",
+    "scripts/social_post.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/youtube_upload.py:40",
+     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/youtube_upload.py:40",
+     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/youtube_upload.py:40",
+     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/youtube_upload.py:40",
+     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/youtube_upload.py:40",
+     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/youtube_upload.py:40",
+     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+    },
+    "zip": {
+     "status": "ok",
+     "evidence": "scripts/youtube_upload.py:40",
+     "note": "先方のアカウントでの許可（初回接続）が済めば、配信方式に関係なく動く"
+    }
+   }
+  },
+  "site_change": {
+   "label": "サイト構成の変更（ナビ・固定ページ・CSS）",
+   "entry": [
+    "scripts/site_change.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/site_change.py:339",
+     "note": "site/ と templates/ を直して build.py"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/site_change.py:36"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/site_change.py:36"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/site_change.py:36"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/site_change.py:213",
+     "need": "固定ページ・メニュー・テンプレート・配色は変えられるが、PHP のテーマは触れない（FTP の接続情報が要る）"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/site_change.py:131"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/site_change.py:276",
+     "need": "変更を ZIP と手順書にしてメールで送る。先方が置く"
+    }
+   }
+  },
+  "speed_fix": {
+   "label": "表示速度の直し（フォント・計測タグ・遅延読み込み）",
+   "entry": [
+    "scripts/speed_fix.py",
+    "scripts/cwv_check.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "tests/test_gates.py:2078",
+     "note": "門が site/ に重い読み方が戻るのを止める"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/speed_fix.py:218",
+     "need": "直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/speed_fix.py:218",
+     "need": "直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/speed_fix.py:218",
+     "need": "直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ"
+    },
+    "wordpress": {
+     "status": "missing",
+     "evidence": "scripts/speed_fix.py:247",
+     "need": "WordPress のテーマを直す手段が無い"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/speed_fix.py:218",
+     "need": "直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/speed_fix.py:218",
+     "need": "直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "site_audit": {
+   "label": "サイト監査（Ahrefs 相当）",
+   "entry": [
+    "scripts/seo_audit.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/seo_audit.py:309",
+     "note": "公開前の門"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/seo_audit.py:338",
+     "note": "本番を巡回して知らせる（findings の週次）"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/seo_audit.py:338",
+     "note": "本番を巡回して知らせる（findings の週次）"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/seo_audit.py:338",
+     "note": "本番を巡回して知らせる（findings の週次）"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/seo_audit.py:338",
+     "note": "本番を巡回して知らせる（findings の週次）"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/seo_audit.py:338",
+     "note": "本番を巡回して知らせる（findings の週次）"
+    },
+    "zip": {
+     "status": "ok",
+     "evidence": "scripts/seo_audit.py:338",
+     "note": "本番を巡回して知らせる（findings の週次）"
+    }
+   }
+  },
+  "render_check": {
+   "label": "描画の検査（原稿→HTML の崩れ）",
+   "entry": [
+    "scripts/render_check.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/build.py:2380"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1216",
+     "note": "全方式が配信前にこの行を通る"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1216",
+     "note": "全方式が配信前にこの行を通る"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1216",
+     "note": "全方式が配信前にこの行を通る"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1216",
+     "note": "全方式が配信前にこの行を通る"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1216",
+     "note": "全方式が配信前にこの行を通る"
+    },
+    "zip": {
+     "status": "ok",
+     "evidence": "scripts/publish.py:1216",
+     "note": "全方式が配信前にこの行を通る"
+    }
+   }
+  },
+  "live_check": {
+   "label": "本番の検査（live_check・publish_gap）",
+   "entry": [
+    "scripts/live_check.py",
+    "scripts/publish_gap.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/live_check.py:155"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/publish_gap.py:218",
+     "note": "配信した原稿の指紋（article-manifest.json）と本番を突き合わせ、足りなければ配信し直す"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/publish_gap.py:218"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/publish_gap.py:218"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/publish_gap.py:27",
+     "need": "記事が在るかだけ見る。指紋が無いので、本文の更新が届いたかは見られない"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/publish_gap.py:218"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/publish_gap.py:198",
+     "need": "ZIP の社は照合から外す（先方が上げたかを確かめない）"
+    }
+   }
+  },
+  "internal_links": {
+   "label": "内部リンク",
+   "entry": [
+    "scripts/link_boost.py",
+    "scripts/auto_review.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/link_boost.py:235"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/link_boost.py:235",
+     "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/link_boost.py:235",
+     "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/link_boost.py:235",
+     "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/link_boost.py:235",
+     "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/link_boost.py:235",
+     "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/link_boost.py:235",
+     "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+    }
+   }
+  },
+  "monthly_report": {
+   "label": "月次レポート",
+   "entry": [
+    "scripts/monthly_report.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/monthly_report.py:1985",
+     "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/monthly_report.py:1985",
+     "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/monthly_report.py:1985",
+     "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/monthly_report.py:1985",
+     "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/monthly_report.py:1985",
+     "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/monthly_report.py:1985",
+     "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る"
+    },
+    "zip": {
+     "status": "ok",
+     "evidence": "scripts/monthly_report.py:1985",
+     "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る"
+    }
+   }
+  },
+  "compete": {
+   "label": "競合比較",
+   "entry": [
+    "scripts/compete.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/compete.py:794"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/compete.py:794"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/compete.py:794"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/compete.py:794"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/compete.py:794"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/compete.py:794"
+    },
+    "zip": {
+     "status": "ok",
+     "evidence": "scripts/compete.py:794"
+    }
+   }
+  },
+  "effect_ab": {
+   "label": "効果判定と戻し（effect_ab・rewrite_rollback）",
+   "entry": [
+    "scripts/effect_ab.py",
+    "scripts/rewrite_rollback.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "scripts/effect_ab.py:114",
+     "note": "判定は GSC で方式に関係なく動く。戻した原稿は再配信で届く"
+    },
+    "external-md": {
+     "status": "ok",
+     "evidence": "scripts/effect_ab.py:114",
+     "note": "判定は GSC で方式に関係なく動く。戻した原稿は再配信で届く"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/effect_ab.py:114",
+     "note": "判定は GSC で方式に関係なく動く。戻した原稿は再配信で届く"
+    },
+    "nextjs-json": {
+     "status": "ok",
+     "evidence": "scripts/effect_ab.py:114",
+     "note": "判定は GSC で方式に関係なく動く。戻した原稿は再配信で届く"
+    },
+    "wordpress": {
+     "status": "ok",
+     "evidence": "scripts/effect_ab.py:114",
+     "note": "判定は GSC で方式に関係なく動く。戻した原稿は再配信で届く"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/effect_ab.py:114",
+     "note": "判定は GSC で方式に関係なく動く。戻した原稿は再配信で届く"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/effect_ab.py:114",
+     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。判定は動くが、戻した原稿を届けるには先方の作業が要る"
+    }
+   }
+  },
+  "auto_reply": {
+   "label": "問い合わせの自動回答・追いかけ",
+   "entry": [
+    "automation/gas/contact.hub.gs",
+    "scripts/gas_deploy.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "ok",
+     "evidence": "automation/gas/contact.hub.gs:400",
+     "note": "フォームを管制塔が直接受ける"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/gas_deploy.py:40",
+     "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
+    },
+    "external-html": {
+     "status": "partial",
+     "evidence": "scripts/gas_deploy.py:40",
+     "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/gas_deploy.py:40",
+     "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/gas_deploy.py:40",
+     "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
+    },
+    "ftp": {
+     "status": "partial",
+     "evidence": "scripts/gas_deploy.py:40",
+     "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
+    },
+    "zip": {
+     "status": "partial",
+     "evidence": "scripts/gas_deploy.py:40",
+     "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
+    }
+   }
+  }
+ }
+}

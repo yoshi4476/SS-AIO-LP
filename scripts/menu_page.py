@@ -254,13 +254,28 @@ def build(site, push=False, write=True):
             DF._ftp_upload(DF.credentials(cfg), items)
             print(f"   配信: {cfg['domain']}/menu/ へ {len(items)} ファイル")
         else:
+            # ZIP は作るだけでは届かない（deliveries/ はコミットせず、CI のランナーと一緒に消える）。
+            # 記事の ZIP と同じく先方へメールする。週次で毎回呼ばれるので、中身が変わった回だけ送る
             import zipfile
+            sig = hashlib.sha1(b"".join(rel.encode() + p.read_bytes() for p, rel in sorted(items, key=lambda x: x[1]))).hexdigest()[:12]
+            mark = ROOT / "data" / "clients" / cfg["id"] / "menu_sent.json"
+            try:
+                sent = json.loads(mark.read_text(encoding="utf-8")).get("hash") if mark.is_file() else None
+            except ValueError:
+                sent = None
+            if sent == sig:
+                print("   メニューは前に送ったものと同じなので送りません")
+                return len(have)
             z = ROOT / "deliveries" / cfg["id"] / "menu.zip"
             z.parent.mkdir(parents=True, exist_ok=True)
             with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as zf:
                 for p, rel in items:
                     zf.write(p, rel)
             print(f"   ZIP: {z}")
+            if DF.hand_over(cfg, z):
+                mark.parent.mkdir(parents=True, exist_ok=True)
+                mark.write_text(json.dumps({"hash": sig, "at": date.today().isoformat()}, ensure_ascii=False),
+                                encoding="utf-8", newline="\n")
     elif push:
         print(f"   {cfg.get('type')} への自動配置は未対応。{out} のファイルを先方のサイトに置いてください")
     return len(have)

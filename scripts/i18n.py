@@ -339,8 +339,26 @@ def _republish(site_id, slugs):
         print(f"   配信 {s[:40]}: {'OK' if r.returncode == 0 else 'NG ' + (r.stdout + r.stderr)[-80:].strip()}")
 
 
+def _credit(ja_url):
+    """訳のページの著者・発行元。お客様の社の訳には、その社の著者・社名を出す。
+    運用会社の代表を著者として付けると事実と違う（publish.client_credit と同じ材料を使う）"""
+    from urllib.parse import urlsplit
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S
+    host = urlsplit(ja_url).netloc
+    for sid, cfg in S.load_all().items():
+        if cfg.get("domain") == host and S.is_client(sid):
+            import publish
+            c = publish.client_credit(cfg) or {}
+            if c.get("author") and c.get("publisher"):
+                return c["author"], c["publisher"]
+    return ({"@type": "Person", "name": "Yu Haraguchi", "url": "https://ai.7senses.co.jp/author/haraguchi/"},
+            {"@type": "Organization", "name": "Seven Senses Inc."})
+
+
 def page_html(d, ja_url, lang):
     """訳した要約ページの中身（外枠は build が包む）"""
+    author, publisher = _credit(ja_url)
     secs = "".join(f'<div class="latest-block"><div class="cat-head"><h2>{_h.escape(s["h2"])}</h2></div>'
                    f'<p class="hub-lead">{_h.escape(s["answer"])}</p></div>' for s in d.get("sections", []))
     faq = "".join(f'<details class="faq-item"><summary>{_h.escape(f["q"])}</summary><div class="a"><p>{_h.escape(f["a"])}</p></div></details>'
@@ -352,8 +370,7 @@ def page_html(d, ja_url, lang):
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": d["title"], "description": d["description"],
           "inLanguage": LANGS[lang][1], "translationOfWork": {"@type": "Article", "url": ja_url, "inLanguage": "ja"},
           "datePublished": d.get("date", ""), "dateModified": d.get("modified", ""),
-          "author": {"@type": "Person", "name": "Yu Haraguchi", "url": "https://ai.7senses.co.jp/author/haraguchi/"},
-          "publisher": {"@type": "Organization", "name": "Seven Senses Inc."}}
+          "author": author, "publisher": publisher}
     faq_ld = ({"@context": "https://schema.org", "@type": "FAQPage",
                "mainEntity": [{"@type": "Question", "name": f["q"], "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
                               for f in d.get("faq", [])]} if d.get("faq") else None)

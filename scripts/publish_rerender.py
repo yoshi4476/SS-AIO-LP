@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""配信先の公開済み記事を、いまのテンプレート・設定で全部描き直す（external-html 用）。
+"""配信先の公開済み記事を、いまのテンプレート・設定で全部描き直す（external-html・nextjs-json・ftp・zip）。
 
 **なぜ要るか**: テンプレートやサイト設定（CTAの文言・導線）を変えても、
 publish_changed は「原稿が変わった記事」しか配信しない。既存の記事は古い
@@ -47,8 +47,11 @@ def main():
         print(f"描き直し {len(done)}本（{cfg['type']}）")
         DF.deliver_batch(cfg, written, base, a.push, "描き直し")
         return
-    if cfg["type"] != "external-html":
-        raise SystemExit(f"{a.site} は {cfg['type']}。この道具は external-html だけを扱います")
+    # Next.js の社も、本文HTML込みのJSONを描いて置く方式なので、描き方（監修の表示・画像の置き場）を
+    # 変えたら描き直しが要る。external-html だけを扱っていたため、変えても既存記事に届かなかった
+    if cfg["type"] not in ("external-html", "nextjs-json"):
+        raise SystemExit(f"{a.site} は {cfg['type']}。この道具は external-html・nextjs-json・ftp・zip を扱います")
+    nextjs = cfg["type"] == "nextjs-json"
     token = publish._push_token()
     dest = (publish.WORK / cfg["id"]) if a.no_sync else publish.ensure_clone(cfg, token)
     done, skipped = [], []
@@ -61,10 +64,15 @@ def main():
             continue
         if not publish.gate_ok(meta):          # 観点の足切りまで見る（build.py と同じ）
             continue
-        if not (dest / publish.page_dir(cfg) / meta["slug"] / "index.html").is_file():
+        page = (dest / cfg["content_dir"] / f"{meta['slug']}.json" if nextjs
+                else dest / publish.page_dir(cfg) / meta["slug"] / "index.html")
+        if not page.is_file():
             skipped.append(meta["slug"])           # まだ公開していない記事は触らない（publish の仕事）
             continue
-        publish.write_external_html(cfg, dest, meta, body, md)
+        if nextjs:
+            publish.write_nextjs_json(cfg, dest, meta, body)
+        else:
+            publish.write_external_html(cfg, dest, meta, body, md)
         publish.stamp_manifest(cfg, dest, meta, md)
         done.append(meta["slug"])
     print(f"描き直し {len(done)}本 / 未公開のため見送り {len(skipped)}本")
