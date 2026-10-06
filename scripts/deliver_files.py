@@ -53,6 +53,10 @@ def stage(cfg):
     tpl = (tpl.replace("{{SITE_NAME}}", cfg.get("name", cfg["domain"]))
               .replace("{{ORIGIN}}", origin)
               .replace("{{PREFIX}}", (cfg.get("url_prefix") or "/blog").rstrip("/")))
+    # 先方の見た目を写した雛形に日本語の Web フォント・先に読む計測タグがあれば、書き出す前に外す
+    # （配信のたびに軽いページを出す。CLAUDE.md 8.4 の方針。サーバーに既にあるページは speed_fix --auto が直す）
+    import speed_fix
+    tpl = speed_fix.fix_html(tpl, cfg["id"])
     (d / "_template.html").write_text(tpl, encoding="utf-8")
     # 関連記事は write_external_html が blog/ の中から選ぶ。配信済みの記事を見出しだけの控えで並べる
     for slug, r in load_index(cfg).items():

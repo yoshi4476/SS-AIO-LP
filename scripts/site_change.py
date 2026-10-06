@@ -16,7 +16,7 @@
 |:--|:--|:--|
 | Git の社（external-*・nextjs-json） | 配信先リポジトリを取る | commit + push（先方のビルドが動く） |
 | ftp | サーバーのファイルを全部取る（大きいファイル・WordPress 本体は除く） | 変えたファイルだけ上げる・消したファイルは消す |
-| wordpress | 固定ページ・メニュー・ナビ・テンプレート・配色・サイト設定を JSON で取る | 変えた項目だけ REST API で更新する |
+| wordpress | 固定ページ・メニュー・ナビ・テンプレート・配色・サイト設定を JSON で取る（FTP の接続情報がある社は有効なテーマの PHP も theme/ に取る） | 変えた項目だけ REST API で更新する（theme/ は FTP で戻す） |
 | zip | 取れない（先方のサーバーに触れない） | 変更を ZIP と手順書にして先方へメールで送る（先方が置く作業が残る。勧めない） |
 
 **反映の前に、先方で誰かが同じものを変えていないかを確かめる。** 取った時点と今のサーバーが
@@ -206,14 +206,60 @@ def wp_pull(cfg):
             got["global-styles"] = 1
     except SystemExit:
         pass
+    got.update(wp_theme_pull(cfg, m))
     snapshot(m, f"取得 {datetime.now():%Y-%m-%d %H:%M}（{got}）")
     return f"取りました: {got}（新しい固定ページ・メニュー項目は <資源>/new-<名前>.json で作れます）"
+
+
+# テーマの PHP は REST では触れない。FTP の接続情報（FTP_CREDENTIALS_JSON の同じ社のID）がある社だけ、
+# 有効なテーマ（子テーマなら親も）を theme/ に取り、変えたファイルを FTP で戻す
+THEME_DIR = "theme"
+
+
+def wp_theme_pull(cfg, m: Path):
+    import deliver_files as DF
+    import speed_fix
+    if not speed_fix.has_ftp(cfg):
+        return {}
+    files = speed_fix._wp_theme_files(cfg)
+    d = m / THEME_DIR
+    if d.is_dir():
+        import shutil
+        shutil.rmtree(d)
+    with DF.Remote(DF.credentials(cfg)) as r:
+        for f in files:
+            data = r.get(f)
+            if data is not None:
+                p = d / f
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.write_bytes(data)
+    return {"theme": len(files)}
+
+
+def wp_theme_push(cfg, ch):
+    """theme/ の変更を FTP で戻す。取った後に先方で変わったファイルがあれば上書きしない"""
+    import deliver_files as DF
+    m = mirror(cfg)
+    ch = [(st, f[len(THEME_DIR) + 1:], f) for st, f in ch]
+    with DF.Remote(DF.credentials(cfg)) as r:
+        moved = [rel for st, rel, f in ch if st != "A" and r.get(rel) != at_remote(m, f)]
+        if moved:
+            raise SystemExit("先方のサーバーで、取った後に変わったテーマのファイルがあります（上書きしません）:\n  "
+                             + "\n  ".join(moved[:10]) + "\n--pull で取り直してから、もう一度直してください")
+        for st, rel, f in ch:
+            if st == "D":
+                r.delete(rel)
+            else:
+                r.put(m / f, rel)
+    return len(ch)
 
 
 def wp_push(cfg, ch):
     m = mirror(cfg)
     fields_of = {n: f for n, _, f in WP_RES}
-    done = 0
+    theme = [(st, f) for st, f in ch if f.startswith(THEME_DIR + "/")]
+    ch = [(st, f) for st, f in ch if not f.startswith(THEME_DIR + "/")]
+    done = wp_theme_push(cfg, theme) if theme else 0
     for st, f in ch:
         p = m / f
         if f == "settings.json":

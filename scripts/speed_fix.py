@@ -233,30 +233,197 @@ def plan(cfg):
     return None, t, []
 
 
+def apply_plan(cfg, base, kind, lazy, write):
+    """plan() の場所を直す。直した（直す）ファイルの一覧"""
+    sid = cfg["id"]
+    if kind == "nextjs":
+        changed = apply_corporate(base, write)
+        if (base / "public").is_dir():
+            changed += apply_static(sid, base / "public", write)
+        return changed
+    if cfg.get("type") == "self-static":
+        changed = apply_static(sid, base, write, css_files=[p for p in [base / "css" / "style.css"] if p.is_file()])
+        return changed + apply_static(sid, ROOT / "templates", write)
+    return apply_static(sid, base, write, lazy_dirs=lazy)
+
+
+# ---------------------------------------------------------------- 週次の自動（取る → 直す → 反映）
+# 道具はあったが手で走らせる前提で、お客様の社は誰も走らせなかった。先方のサイトの見た目（雛形・固定ページ）が
+# 重い読み方に戻っても、週次の cwv_check は測って知らせるだけだった
+
+AUTO_TYPES = ("external-html", "external-md", "nextjs-json", "ftp", "wordpress")
+FTP_FIX_EXT = (".html", ".htm")
+THEME_EXT = (".php", ".html")
+THEME_MAX = 512 * 1024
+_PHP = re.compile(r"(<\?(?:php\b|=)?.*?(?:\?>|\Z))", re.S)
+
+
+def fix_php(text, site):
+    """PHP のテンプレートは、PHP の外（HTML として出る部分）だけを直す。PHP の文字列の中を書き換えると、
+    引用符がずれてサイトが真っ白になる"""
+    parts = _PHP.split(text)
+    return "".join(p if i % 2 else fix_html(p, site) for i, p in enumerate(parts))
+
+
+def _backup(cfg, rel, data: bytes, kind):
+    from datetime import date
+    p = ROOT / ".publish-work" / f"{cfg['id']}-{kind}" / date.today().isoformat() / rel
+    p.parent.mkdir(parents=True, exist_ok=True)
+    if not p.exists():
+        p.write_bytes(data)
+
+
+def _alive(cfg):
+    """直した後に先方のトップが 200 で返るか（直しで壊していないか）"""
+    import time
+    import urllib.request
+    req = urllib.request.Request(f"https://{cfg['domain']}/?ss_speed={int(time.time())}",
+                                 headers={"User-Agent": "Mozilla/5.0 SS-AIO-Pipeline"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.status == 200
+    except Exception:
+        return False
+
+
+def _ftp_fix(cfg, files, fixer, write, kind):
+    """FTP で取って直して上げる。上げた後にトップが返らなければ、元の中身へ戻す"""
+    import deliver_files as DF
+    changed, olds = [], {}
+    with DF.Remote(DF.credentials(cfg)) as r:
+        for rel in files:
+            data = r.get(rel)
+            if data is None:
+                continue
+            try:
+                t = data.decode("utf-8")
+            except UnicodeDecodeError:
+                continue                    # UTF-8 でないファイルは触らない（文字化けさせない）
+            u = fixer(t)
+            if u == t:
+                continue
+            changed.append(rel)
+            if not write:
+                continue
+            _backup(cfg, rel, data, kind)
+            olds[rel] = data
+            tmp = ROOT / ".publish-work" / f"{cfg['id']}-{kind}" / "_up"
+            tmp.parent.mkdir(parents=True, exist_ok=True)
+            tmp.write_text(u, encoding="utf-8", newline="")
+            r.put(tmp, rel)
+        if olds and not _alive(cfg):
+            tmp = ROOT / ".publish-work" / f"{cfg['id']}-{kind}" / "_up"
+            for rel, data in olds.items():
+                tmp.write_bytes(data)
+                r.put(tmp, rel)
+            raise SystemExit(f"{cfg['id']}: 直した後にトップが返らなくなったので、元に戻しました（{len(olds)}ファイル）")
+    return changed
+
+
+def _ftp_html(cfg):
+    import deliver_files as DF
+    import site_change as SC
+    with DF.Remote(DF.credentials(cfg)) as r:
+        return [f for f, n in r.walk("", tuple(cfg.get("ftp_skip") or SC.FTP_SKIP))
+                if f.lower().endswith(FTP_FIX_EXT) and n <= THEME_MAX]
+
+
+def _wp_theme_files(cfg):
+    """WordPress の有効なテーマ（子テーマなら親も）の PHP・HTML。FTP の置き場は wp_root（既定は FTP の root 直下）"""
+    import deliver_files as DF
+    import publish
+    th = publish._wp_call(cfg, "themes?status=active&_fields=stylesheet,template")
+    th = th[0] if isinstance(th, list) and th else {}
+    names = [n for n in dict.fromkeys((th.get("stylesheet"), th.get("template"))) if n]
+    if not names:
+        raise SystemExit(f"{cfg['id']}: 有効なテーマが分かりません（REST の themes が読めない）")
+    pre = str(cfg.get("wp_root") or "").strip("/")
+    out = []
+    with DF.Remote(DF.credentials(cfg)) as r:
+        for n in names:
+            base = "/".join(x for x in (pre, "wp-content/themes", n) if x)
+            out += [f for f, size in r.walk(base) if f.lower().endswith(THEME_EXT) and size <= THEME_MAX]
+    return out
+
+
+def has_ftp(cfg):
+    import deliver_files as DF
+    try:
+        DF.credentials(cfg)
+        return True
+    except SystemExit:
+        return False
+
+
+def auto(cfg, write):
+    """取る → 直す → 変わった分だけ反映する。(直したファイルの数, 説明)。直せない社は (None, 理由)"""
+    t, sid = cfg.get("type"), cfg["id"]
+    if t not in AUTO_TYPES:
+        return None, f"{t} は対象外"
+    if t == "wordpress":
+        # 本文・アイキャッチ・計測タグ・Google Fonts の CSS は先方の mu-plugin が直す。残るのはテーマの PHP に
+        # 直書きされたものだけで、FTP の接続情報がある社だけ直せる
+        if not has_ftp(cfg):
+            return None, "FTP の接続情報が無いので、テーマの PHP は直せません（mu-plugin が直す範囲だけ）"
+        ch = _ftp_fix(cfg, _wp_theme_files(cfg), lambda x: fix_php(x, sid), write, "theme")
+        return len(ch), "テーマの PHP・HTML"
+    if t == "ftp":
+        ch = _ftp_fix(cfg, _ftp_html(cfg), lambda x: fix_html(x, sid, lazy_images=False), write, "speed")
+        return len(ch), "サーバーの HTML"
+    import publish
+    import site_change as SC
+    publish.ensure_clone(cfg, publish._push_token())
+    base, kind, _ = plan(cfg)
+    # 週次ではフォントと計測タグだけを直す。画像の遅延読み込みまで足すと、記事を配信し直すたびに書き出しが
+    # 元へ戻し、週次が足し直す（毎週同じ差分を押す）。フォントと計測タグは雛形ごと直るので戻らない
+    changed = apply_plan(cfg, base, kind, [], write)
+    if write and changed:
+        print("  " + SC.git_push(cfg))
+    return len(changed), "配信先リポジトリ"
+
+
+def run_auto(ids, write):
+    import sites as S
+    bad = []
+    for sid in ids:
+        cfg = S.load(sid)
+        if cfg.get("type") == "self-static":
+            continue                         # 門（leftovers）が site/ に重い読み方が戻るのを止めている
+        try:
+            n, what = auto(cfg, write)
+        except (SystemExit, Exception) as e:
+            bad.append(f"要対応: {cfg.get('name', sid)} の表示速度の直しが動きませんでした（{str(e)[:80]}）")
+            continue
+        if n is None:
+            print(f"  {sid}: 見送り … {what}")
+        else:
+            print(f"  {sid}: {what}を{'直しました' if write else '直します'} {n}ファイル")
+    for b in bad:
+        print(b)
+    print("SPEED_FIX_OK=" + ("no" if bad else "yes"))
+    return 0
+
+
 def main():
     sys.path.insert(0, str(ROOT / "scripts"))
     import sites as S
     all_ = S.load_all()
     ap = argparse.ArgumentParser()
-    ap.add_argument("--site", required=True, choices=list(all_))
+    ap.add_argument("--site", choices=list(all_))
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--auto", action="store_true", help="取る → 直す → 反映まで行う（週次。--site が無ければ全社）")
     a = ap.parse_args()
+    if a.auto:
+        return run_auto([a.site] if a.site else S.ids(), a.apply)
+    if not a.site:
+        ap.error("--site か --auto を指定してください")
     cfg = all_[a.site]
     base, kind, lazy = plan(cfg)
     if base is None:
-        raise SystemExit(f"{a.site} は {kind}。テーマの PHP は触れないため、ここでは直せません"
-                         "（FTP の接続情報があれば type を ftp にして site_change.py --pull で取ってから直す）")
+        raise SystemExit(f"{a.site} は {kind}。テーマの PHP は --auto で直します（FTP の接続情報がある社だけ）")
     if not base.is_dir():
         raise SystemExit(f"{base} がありません。先に python scripts/site_change.py --site {a.site} --pull で取ってください")
-    if kind == "nextjs":
-        changed = apply_corporate(base, a.apply)
-        if (base / "public").is_dir():
-            changed += apply_static(a.site, base / "public", a.apply)
-    elif cfg.get("type") == "self-static":
-        changed = apply_static(a.site, base, a.apply, css_files=[p for p in [base / "css" / "style.css"] if p.is_file()])
-        changed += apply_static(a.site, ROOT / "templates", a.apply)
-    else:
-        changed = apply_static(a.site, base, a.apply, lazy_dirs=lazy)
+    changed = apply_plan(cfg, base, kind, lazy, a.apply)
     print(f"{'直した' if a.apply else '直す'}: {len(changed)}ファイル")
     for p in changed[:8]:
         print("  ", p.relative_to(ROOT).as_posix())
