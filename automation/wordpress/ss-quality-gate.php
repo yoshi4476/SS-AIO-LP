@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: 品質ゲートと橋渡し（管制塔との接続）
- * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・自己更新）を持つ。
- * Version: 2.0.0
+ * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・訳のページとの hreflang・表示速度・自己更新）を持つ。
+ * Version: 2.0.2
  *
  * ■ 先方が最初に1回だけすること
  *   1. このファイルを wp-content/mu-plugins/ に置く
@@ -44,8 +44,9 @@ const SSQG_HUMAN_MIN_CHARS = 3000;
 const SSQG_HUMAN_MIN_H2    = 4;
 
 // 自己更新で、届いたファイルの中にこの行があることを確かめる（版の書き換えだけの差し替えを通さない）
-const SSB_VERSION = '2.0.1';
+const SSB_VERSION = '2.0.2';
 const SSB_META_JSONLD_EXTRA = '_ss_jsonld_extra';   // FAQPage など BlogPosting 以外の実体（JSON の配列）
+const SSB_META_ALTERNATES = '_ss_alternates';       // 訳のページとの組（{"en": URL, …} の JSON。同じサイトの URL だけ出す）
 const SSB_META_MANAGED = '_ss_managed';             // 管制塔が作った固定ページの印
 // 更新元と公開鍵は wp-config.php で上書きできる（鍵を替えるときのため）。ここに置くのは公開鍵だけ
 if (!defined('SSB_UPDATE_URL')) {
@@ -234,9 +235,9 @@ add_action('init', function () {
     $metas = [
         'post' => [SSQG_META_SCORE => 'integer', SSQG_META_BY => 'string',
                    '_ss_gate_last_reason' => 'string', SSQG_META_JSONLD => 'string',
-                   SSB_META_JSONLD_EXTRA => 'string'],
+                   SSB_META_JSONLD_EXTRA => 'string', SSB_META_ALTERNATES => 'string'],
         // 業種のまとめ・用語集などは固定ページとして作る。_ss_managed の無いページは管制塔が触らない
-        'page' => [SSQG_META_JSONLD => 'string', SSB_META_MANAGED => 'string'],
+        'page' => [SSQG_META_JSONLD => 'string', SSB_META_MANAGED => 'string', SSB_META_ALTERNATES => 'string'],
     ];
     foreach ($metas as $ptype => $keys) {
         foreach ($keys as $key => $type) {
@@ -287,7 +288,119 @@ add_action('wp_head', function () {
     if (is_singular('post')) {
         ssqg_print_jsonld(get_post_meta($id, SSB_META_JSONLD_EXTRA, true));
     }
+    // 日本語の記事と訳のページ（固定ページ）の双方から、互いを指す hreflang（片側だけだと Google は使わない）
+    foreach (ssb_alternates($id) as $lang => $url) {
+        printf('<link rel="alternate" hreflang="%s" href="%s">' . "\n", esc_attr($lang), esc_url($url));
+    }
 });
+
+
+/**
+ * 日本語の記事と訳のページ（管制塔が作る固定ページ /en/<slug>/ など）の組。
+ * 投稿メタ _ss_alternates（JSON）から、言語の名前の形をした鍵と、同じサイトの http(s) の URL だけを採る。
+ * 指す先が公開されていなければ出さない（404 を指す hreflang を出さない）。
+ * 記事は自分（ja・x-default）をパーマリンクから出す。訳のページは組をそのまま（日本語の記事も公開済みのものだけ）。
+ * 2言語にならなければ何も出さない
+ */
+function ssb_alternates($id)
+{
+    $raw = get_post_meta($id, SSB_META_ALTERNATES, true);
+    $data = is_string($raw) && $raw !== '' ? json_decode($raw, true) : null;
+    $self = get_permalink($id);
+    if (!is_array($data) || !$self) {
+        return [];
+    }
+    $is_post = get_post_type($id) === 'post';
+    $home = strtolower((string) (wp_parse_url(home_url('/'), PHP_URL_HOST) ?? ''));
+    $out = [];
+    foreach ($data as $lang => $url) {
+        if (!is_string($lang) || !is_string($url) || ($is_post && ($lang === 'ja' || $lang === 'x-default'))
+            || !preg_match('/^(x-default|[a-z]{2,3}(-[A-Za-z0-9]{2,8})*)$/', $lang)) {
+            continue;
+        }
+        $u = wp_parse_url($url);
+        if (!is_array($u) || !in_array($u['scheme'] ?? '', ['http', 'https'], true)
+            || $home === '' || strtolower((string) ($u['host'] ?? '')) !== $home) {
+            continue;
+        }
+        $pid = url_to_postid($url);
+        if (!$pid || get_post_status($pid) !== 'publish') {
+            continue;
+        }
+        $out[$lang] = $url;
+    }
+    if ($is_post) {
+        return $out ? array_merge(['ja' => $self, 'x-default' => $self], $out) : [];
+    }
+    return count(array_diff(array_keys($out), ['x-default'])) >= 2 ? $out : [];
+}
+
+
+/*
+ * 表示速度（管制塔の scripts/speed_fix.py と同じ方針のうち、テーマに手を入れずにフィルターで出来るもの）。
+ *   1. 本文の画像は遅延読み込み（loading の無い img だけ。WordPress 本体は width/height の無い画像に付けない）
+ *   2. 記事のアイキャッチ（LCP の候補）は優先して読む
+ *   3. 計測タグ（gtag.js・172KB）は描画の後（load から1.2秒後）に読む。それまでの出来事は dataLayer に溜まる
+ *   4. 日本語の Web フォント（Google Fonts）の CSS を読まない（端末のフォントで描く。1ページ 1.0〜1.4MB 減る）
+ * テーマの PHP に直書きされたフォント・計測タグは直せない（FTP の接続情報があれば speed_fix.py で直す）。
+ * 止めるときは wp-config.php で define('SSB_SPEED', false);、フォントだけ残すときは define('SSB_KEEP_WEBFONTS', true);
+ */
+if (!defined('SSB_SPEED')) {
+    define('SSB_SPEED', true);
+}
+
+function ssb_speed_on()
+{
+    return SSB_SPEED && !is_admin() && !is_feed() && !wp_doing_ajax() && !(defined('REST_REQUEST') && REST_REQUEST);
+}
+
+add_filter('the_content', function ($html) {
+    if (!ssb_speed_on() || !is_string($html) || stripos($html, '<img') === false) {
+        return $html;
+    }
+    return preg_replace_callback('/<img\b(?![^>]*\sloading=)[^>]*>/i', function ($m) {
+        $add = ' loading="lazy"' . (stripos($m[0], 'decoding=') === false ? ' decoding="async"' : '');
+        return preg_replace('/^<img\b/i', '<img' . $add, $m[0], 1);
+    }, $html);
+}, 99);
+
+add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment) {
+    static $done = false;
+    if ($done || !ssb_speed_on() || !is_singular('post') || !is_object($attachment)) {
+        return $attr;
+    }
+    if ((int) get_post_thumbnail_id(get_queried_object_id()) !== (int) $attachment->ID) {
+        return $attr;
+    }
+    $done = true;
+    $attr['fetchpriority'] = 'high';
+    $attr['loading'] = 'eager';
+    return $attr;
+}, 99, 2);
+
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+    if (!ssb_speed_on() || !is_string($src) || strpos($src, 'https://www.googletagmanager.com/gtag/js') !== 0) {
+        return $tag;
+    }
+    $late = '<script>window.addEventListener("load",function(){setTimeout(function(){var s=document.createElement("script");'
+        . 's.async=true;s.src=' . wp_json_encode($src, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_SLASHES)
+        . ';document.head.appendChild(s);},1200);});</script>';
+    // 前後のインラインの設定（gtag('config', …)）は残し、読み込みの1行だけを差し替える
+    return preg_replace_callback('#<script\b[^>]*\ssrc=["\']https://www\.googletagmanager\.com/gtag/js[^"\']*["\'][^>]*>\s*</script>#i',
+        function () use ($late) {
+            return $late;
+        }, $tag, 1);
+}, 99, 3);
+
+add_filter('style_loader_tag', function ($tag, $handle, $href) {
+    if (!ssb_speed_on() || defined('SSB_KEEP_WEBFONTS') || !is_string($href)) {
+        return $tag;
+    }
+    if (preg_match('#^(https:)?//fonts\.googleapis\.com/css2?\?.*family=[^&]*(Noto\+Sans\+JP|Noto\+Serif\+JP|Zen\+|Shippori|M\+PLUS|Kosugi|Sawarabi|BIZ\+UD|Kiwi\+Maru|Klee|Yu\+Gothic)#i', $href)) {
+        return '';
+    }
+    return $tag;
+}, 99, 3);
 
 
 /**

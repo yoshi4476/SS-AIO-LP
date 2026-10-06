@@ -301,8 +301,9 @@ def _split_ld(html):
     return body, lds
 
 
-def upsert_page(cfg, slug, title, html, parent=0):
+def upsert_page(cfg, slug, title, html, parent=0, alternates=None):
     """管制塔が持つ固定ページを作る・直す。同じ slug の先方のページ（_ss_managed の無いもの）は触らない。
+    alternates: 訳のページと日本語の記事の組（先方の mu-plugin が head に hreflang で出す）。
     戻り値は (ページID, 状態)。状態は created / updated / taken"""
     import publish
     body, lds = _split_ld(html)
@@ -311,6 +312,8 @@ def upsert_page(cfg, slug, title, html, parent=0):
     payload = {"title": title, "slug": slug, "parent": parent, "status": "publish", "content": body,
                "meta": {"_ss_managed": "1",
                         "_ss_jsonld": json.dumps(lds[0] if len(lds) == 1 else lds, ensure_ascii=False) if lds else ""}}
+    if alternates is not None:
+        payload["meta"]["_ss_alternates"] = json.dumps(alternates, ensure_ascii=False) if alternates else ""
     if isinstance(found, list) and found:
         if str((found[0].get("meta") or {}).get("_ss_managed") or "") != "1":
             return found[0]["id"], "taken"
@@ -446,7 +449,8 @@ def sync_aggregate(cfg, rows, arts=None, made=None):
             continue                                   # 親を作れなかった（先方の同名ページ）
         html = p["html"] + "".join('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>"
                                    for ld in p["jsonld"])
-        pid, st = upsert_page(cfg, segs[-1], p["title"], html, parent=ids.get(parent, 0))
+        pid, st = upsert_page(cfg, segs[-1], p["title"], html, parent=ids.get(parent, 0),
+                              alternates=p.get("alternates") if p["kind"] == "i18n" else None)
         made.append((p["path"].strip("/"), st))
         if st == "taken":
             notes.append(f"要対応: {cfg['id']} に先方の固定ページ {p['path']} があるため、まとめのページを作れません")

@@ -408,6 +408,10 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
                 out["translations"] = tr
         except Exception:
             pass
+    # 日本語の記事と訳のページの組（hreflang）。記事ページの generateMetadata が配った部品（ssAlternates）で head に出す
+    alts = article_alternates(cfg, dest, meta)
+    if alts:
+        out["alternates"] = alts
     # 画像を先に複製する（本文が /images/... を参照するため）。JSONはその後に書く。
     # アイキャッチはWebP（PNGの1/3）も作り、表示はそちらを使う。OG画像はPNGのまま
     img_written = []
@@ -429,6 +433,8 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     page = html + (f'<meta property="og:image" content="https://{cfg["domain"]}{out["eyecatch"]}">'
                    if out.get("eyecatch") else "")
     written = [target] + _update_external_index(dest, cfg, meta, page=page) + img_written
+    if langs:
+        written += nextjs_alternates_part(cfg, dest, warn=bool(alts))
     return written, len(md2html.plain_text(text_html))
 
 
@@ -541,6 +547,10 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
     html = md2html.convert(body)[0]
     credit = client_credit(cfg, url)
     body = body.rstrip("\n") + "\n\n" + ld_scripts(cfg, meta, url, html, image, credit, video=not vb)
+    # 訳のページとの組（hreflang の値 → URL）。head に出すのは先方の雛形（訳のページの Markdown と同じ alternates の形）
+    alts = article_alternates(cfg, dest, meta)
+    if alts:
+        fm["alternates"] = alts
     target = dest / cfg["content_dir"] / f"{slug}.md"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text("---\n" + yaml.safe_dump(fm, allow_unicode=True, sort_keys=False, width=1000)
@@ -1165,6 +1175,47 @@ def aggregate_links(cfg, dest: Path, meta):
         return ""
 
 
+def article_alternates(cfg, dest: Path, meta):
+    """日本語の記事と訳のページの組（hreflang の値 → URL。ja・x-default・訳のある言語）。訳が無ければ None。
+    訳のページを作るのと同じ aggregate_pages.collect の組をそのまま使う（記事の側と訳の側で URL が食い違わない）"""
+    if not [l for l in (cfg.get("languages") or []) if l in ("en", "zh", "ko")]:
+        return None
+    try:
+        import aggregate_pages as AP
+        tail = f"/{meta['slug']}/"
+        return next((dict(p["alternates"]) for p in AP.cached(cfg, _live_slugs(cfg, dest, {meta["slug"]}))
+                     if p["kind"] == "i18n" and p["path"].endswith(tail) and p.get("alternates")), None)
+    except Exception as e:
+        print(f"  [警告] 訳のページとの組（hreflang）を飛ばしました（{str(e)[:60]}）")
+        return None
+
+
+NEXTJS_ALT_PART = "nextjs_alternates.ts"
+
+
+def nextjs_alternates_part(cfg, dest: Path, warn=True):
+    """nextjs-json: 記事 JSON の alternates を generateMetadata の alternates.languages にする部品（lib/ssAlternates.ts）を置く。
+    先方の記事ページがこの部品を使っていなければ要対応で知らせる（最初の接続で記事ページに1行足す）。書いたファイルを返す"""
+    src = dest / "src" if (dest / "src" / "app").is_dir() else dest
+    part = src / "lib" / "ssAlternates.ts"
+    body = (ROOT / "templates" / NEXTJS_ALT_PART).read_text(encoding="utf-8")
+    written = []
+    if not part.is_file() or part.read_text(encoding="utf-8") != body:
+        if part.is_file() and "ss-aggregate" not in part.read_text(encoding="utf-8", errors="ignore")[:300]:
+            print(f"要対応: {cfg['id']} の {part.relative_to(dest).as_posix()} は先方のファイルなので、hreflang の部品を置きません")
+            return []
+        part.parent.mkdir(parents=True, exist_ok=True)
+        part.write_text(body, encoding="utf-8", newline="\n")
+        written.append(part)
+    app = src / "app"
+    used = app.is_dir() and any("ssAlternates(" in f.read_text(encoding="utf-8", errors="ignore")
+                                for f in app.rglob("page.tsx") if "ss-aggregate" not in f.read_text(encoding="utf-8", errors="ignore")[:300])
+    if warn and not used:
+        print(f"要対応: {cfg['id']} の記事ページが訳のページとの組（hreflang）を出していません。記事ページの generateMetadata で "
+              "alternates: ssAlternates(post, canonical) を返してください（部品は lib/ssAlternates.ts に置きました）")
+    return written
+
+
 def write_aggregate_html(cfg, dest: Path, live, gone_extra=()):
     """external-html・ftp・zip: まとめのページをその社の雛形で書き、sitemap.xml・llms.txt に載せる。
     先方が自分で作った同じパスのページは上書きしない。(書いたもの, 置いたパス, 消したパス) を返す"""
@@ -1544,6 +1595,21 @@ def _wp_jsonld(cfg, meta, base, url, html, image=""):
     return ld, extra
 
 
+def wp_alternates(cfg, rows, meta, url):
+    """WordPress: 日本語の記事と訳のページ（固定ページ /en/<slug>/ など）の組。訳の無い記事・多言語の指示の無い社は {}。
+    訳のページを作る wp_bridge.sync_aggregate と同じ組（aggregate_pages.collect）を使う"""
+    if not [l for l in (cfg.get("languages") or []) if l in ("en", "zh", "ko")]:
+        return {}
+    try:
+        import wp_bridge
+        got = wp_bridge._aggregate(cfg, list(rows) + [{"slug": meta["slug"], "url": url, "type": "post"}], kinds=("i18n",))
+        return next((dict(p["alternates"]) for p in got
+                     if p["path"].endswith(f"/{meta['slug']}/") and p.get("alternates")), {})
+    except Exception as e:
+        print(f"  [警告] 訳のページとの組（hreflang）を飛ばしました（{str(e)[:60]}）")
+        return {}
+
+
 def write_wordpress(cfg, meta, body, src: Path, push=False):
     """記事をWordPressへ送る。
 
@@ -1609,6 +1675,7 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     url = wp_bridge.url_map(cfg, rows).get(meta["slug"]) or sites_mod.article_url(cfg, meta)
     ld, extra = _wp_jsonld(cfg, meta, credit_ld(credit, url, meta) if credit else None, url, html, thumb_url)
     jsonld = json.dumps(ld, ensure_ascii=False)
+    alts = wp_alternates(cfg, rows, meta, url)
 
     # --push が付くまでは下書きで入れる。他の形式が「書き込むがpushしない」
     # のと揃える。ここを publish 固定にすると、確認のつもりの実行で公開される
@@ -1618,7 +1685,9 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
         "status": "publish" if push else "draft",
         "categories": [cat_id],
         "meta": {"_ss_quality_score": score, "_ss_written_by": "agent", "_ss_jsonld": jsonld,
-                 "_ss_jsonld_extra": json.dumps(extra, ensure_ascii=False) if extra else ""},
+                 "_ss_jsonld_extra": json.dumps(extra, ensure_ascii=False) if extra else "",
+                 # 訳のページとの組。head の hreflang は先方の mu-plugin が出す（訳のページが公開されているものだけ）
+                 "_ss_alternates": json.dumps(alts, ensure_ascii=False) if alts else ""},
     }
     if thumb:
         payload["featured_media"] = thumb
