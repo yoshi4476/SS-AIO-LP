@@ -176,8 +176,8 @@
   "全体": {
    "answers": 305,
    "review": 5,
-   "clinic": 249,
    "portal": 159,
+   "clinic": 249,
    "public": 51,
    "maker": 58,
    "other": 19,
@@ -188,16 +188,16 @@
   "地域で探す": {
    "answers": 78,
    "review": 5,
-   "clinic": 30,
    "portal": 61,
+   "clinic": 30,
    "public": 5,
    "maker": 3,
    "other": 9
   },
   "費用": {
    "answers": 103,
-   "clinic": 102,
    "media": 14,
+   "clinic": 102,
    "video": 3,
    "portal": 38,
    "maker": 29,
@@ -206,18 +206,18 @@
   },
   "治療の選び方": {
    "answers": 38,
-   "public": 17,
-   "clinic": 38,
-   "portal": 16,
    "media": 5,
+   "portal": 16,
+   "clinic": 38,
+   "public": 17,
    "maker": 13,
    "video": 1,
    "wiki": 2
   },
   "症状": {
    "answers": 50,
-   "clinic": 50,
    "portal": 23,
+   "clinic": 50,
    "maker": 11,
    "public": 9,
    "media": 12,
