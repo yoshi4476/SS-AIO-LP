@@ -14,6 +14,13 @@
     <summary>歯科医院ホームページの治療説明は、1つの治療に1ページを充て、対象となる症状・治療の流れ・期間と回数・費用・リスク・問い合わせ先の6項目を書きます。体験談やビフォーアフター写真の扱いなど医療広告ガイドラインのNG例と、AI検索に引用される書き方も整理します。</summary>
   </entry>
   <entry>
+    <title>歯科医院の症状ページの作り方｜受診の目安まで書く6項目と見出し例</title>
+    <link href="https://ai.7senses.co.jp/aio/shika-shoujou-page-tsukurikata/"/>
+    <id>https://ai.7senses.co.jp/aio/shika-shoujou-page-tsukurikata/</id>
+    <updated>2026-10-06T00:00:00+09:00</updated>
+    <summary>歯科医院の症状ページは、患者が検索する言葉を題名にし、考えられる原因・見分け方・受診を急ぐサイン・自院での検査と治療・予約の順に1症状1ページで作ります。歯がしみるを例にした見出しの型、作る順番の決め方、起きやすい4つの失敗も整理します。</summary>
+  </entry>
+  <entry>
     <title>AIOのログ分析ツールはどれ？4種の比較と選び方</title>
     <link href="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/"/>
     <id>https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</id>
     <updated>2026-09-21T00:00:00+09:00</updated>
     <summary>AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。</summary>
-  </entry>
-  <entry>
-    <title>整骨院のAIO対策でやりがちな失敗5つ｜柔整広告制限と口コミ不足の壁</title>
-    <link href="https://ai.7senses.co.jp/aio/seikotsuin-aio-taisaku-shippai/"/>
-    <id>https://ai.7senses.co.jp/aio/seikotsuin-aio-taisaku-shippai/</id>
-    <updated>2026-09-21T00:00:00+09:00</updated>
-    <summary>整骨院のAIO対策で最も多い失敗は、柔道整復師法の広告制限を超えた断定表現と、口コミ・指名検索を後回しにしたまま構造だけ整えることです。5つの失敗パターンと自院での確認手順を解説します。整骨院のAIO対策の失敗は、広告表現・口コミ体制・技術設定の3つに集中しています。</summary>
   </entry>
 </feed>
