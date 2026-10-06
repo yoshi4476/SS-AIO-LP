@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
 import photo_match  # noqa: E402
 import desc_fill as DF  # noqa: E402
+import footer_credit  # noqa: E402
 
 # 補助金サイトの作業コピー。管制塔の publish.py が SUBSIDY_ROOT で渡す
 # （2026-10-03 まで補助金サイト側の tools/ で CI が動かしていた。管制塔に一本化）
@@ -184,6 +185,7 @@ SIDEBAR = '''<aside class="side">
 FOOTER = '''<footer>
   <nav><a href="/">AI導入補助金LP</a><a href="/service/hojokin/">補助金サポート</a><a href="/service/aio/">AIOコンサル</a><a href="/service/meo/">MEOコンサル</a><a href="/service/dev/">システム開発</a><a href="/#diagnosis">無料診断</a><a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a><a href="/privacy/">プライバシーポリシー</a></nav>
   <p>© 2026 SEVEN SENSES INC. セブンセンシズ株式会社|大阪市東成区神路1-7-4</p>
+  ''' + footer_credit.CREDIT + '''
 </footer>'''
 
 def filters_html(current):
@@ -625,6 +627,8 @@ if llms_path.is_file():
 print(f"生成: sitemap.xml ({len(urls)} URLs・画像{n_img}・動画{n_vid})")
 # 手書きの固定ページも含めて、検索結果での見え方の指定をそろえる（noindex のページは触らない）
 print(f"robots の見え方の指定: {search_preview.apply_dir(ROOT)}ページ")
+# LP の制作表記も、手書きの LP・固定ページ・記事の雛形を含む全ページのフッターに揃える
+print(f"フッターの制作表記: {footer_credit.apply(ROOT)}ページを揃えました")
 print("done")
 
 
