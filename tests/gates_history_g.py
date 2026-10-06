@@ -15,10 +15,14 @@ from test_gates import check, ROOT
 def test_file_delivery_types_are_wired():
     import client_add
     import deliver_files as DF
+    sheet = (ROOT / "scripts" / "client_intake.py").read_text(encoding="utf-8")
+    check("ヒアリングシートの選択肢は新規受付のある形式（client_add.NEW_TYPES）から作る",
+          "formula1='\"' + \",\".join(NEW_TYPES) + '\"'" in sheet, True)
     for t in DF.TYPES:
         check(f"配信方式 {t} が形式の一覧にある", t in client_add.TYPES, True)
-        check(f"配信方式 {t} をヒアリングシートで選べる",
-              t in (ROOT / "scripts" / "client_intake.py").read_text(encoding="utf-8").split("DataValidation(type=\"list\", formula1='\"wordpress")[1].split("'")[0], True)
+        # zip は新規受付なし（2026-10-06）。過去の互換で TYPES に残すが、シートでは選べない（gates_history_h32）
+        check(f"配信方式 {t} をヒアリングシートで選べる（新規受付なしの方式を除く）",
+              t in client_add.NEW_TYPES, t not in client_add.RETIRED)
 
     # 原稿（.md）と作業用の雛形は相手のサーバーに上げない。記事は接頭辞の場所へ移す
     with tempfile.TemporaryDirectory() as d:

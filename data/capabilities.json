@@ -5,16 +5,16 @@
   "ok": "人の手なしで動く",
   "partial": "一部が動かない・人の作業が残る（need に何が要るか）",
   "missing": "仕組みが無い（need に何が要るか）",
-  "n/a": "その方式（の社）では意味が無い"
+  "n/a": "その方式（の社）では意味が無い。新規受付をやめた方式（methods の注記）で人の作業が残る機能も、元の判定を注記に残して n/a にする"
  },
  "methods": {
   "self-static": "この管制塔リポジトリ内の静的サイト（build.py が公開する）",
-  "external-md": "別リポジトリの静的サイト。Markdownを置き、画像・写真・構造化データ・動画・入口を原稿に揃える（変換は先方のビルド）",
+  "external-md": "別リポジトリの静的サイト。Markdownをそのまま置く",
   "external-html": "別リポジトリ。HTMLに変換して置く（相手のテンプレートを使う）",
   "nextjs-json": "Next.jsサイト。src/content/blog/<slug>.json を書き出す",
   "wordpress": "WordPress。REST APIで投稿する（品質ゲートは先方のmu-pluginが担う）",
   "ftp": "Gitを使わないレンタルサーバー。HTMLに変換してFTPS/FTP/SFTPで上げる（接続情報は FTP_CREDENTIALS_JSON）",
-  "zip": "先方が自分で上げる。HTMLに変換して deliveries/<id>/ にZIPを作る"
+  "zip": "先方が自分で上げる。HTMLに変換して deliveries/<id>/ にZIPを作る。新規受付なし（2026-10-06・client_add.RETIRED。ヒアリングシートで選べず、登録の検査で止まる。コードの分岐は過去の互換で残す）"
  },
  "features": {
   "publish_new": {
@@ -28,7 +28,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1571",
+     "evidence": "scripts/publish.py:1365",
      "note": "build.py が site/ に書き、デプロイで公開"
     },
     "external-md": {
@@ -57,9 +57,9 @@
      "note": "書き出したファイルだけを FTPS/FTP/SFTP で上げる"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/deliver_files.py:361",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。ZIP は先方へメールで届く"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。ZIP は先方へメールで届く"
     }
    }
   },
@@ -81,15 +81,15 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1523"
+     "evidence": "scripts/publish.py:1317"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1523"
+     "evidence": "scripts/publish.py:1317"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1523"
+     "evidence": "scripts/publish.py:1317"
     },
     "wordpress": {
      "status": "ok",
@@ -98,11 +98,11 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1523"
+     "evidence": "scripts/publish.py:1317"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1523",
+     "evidence": "scripts/publish.py:1317",
      "note": "基準に届かない記事は ZIP を作らない"
     }
    }
@@ -143,9 +143,9 @@
      "evidence": "scripts/publish.py:1043"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1043",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -187,9 +187,9 @@
      "evidence": "scripts/publish.py:982"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:982",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -228,9 +228,9 @@
      "note": "上げた時点で公開される（ビルドを待たない）"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/verify_publish.py:128",
-     "need": "ZIP を作れたことしか確かめない。先方が上げたかを後から見に行く工程が無い（publish_gap も zip を飛ばす）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — ZIP を作れたことしか確かめない。先方が上げたかを後から見に行く工程が無い（publish_gap も zip を飛ばす）"
     }
    }
   },
@@ -269,9 +269,9 @@
      "evidence": "scripts/publish_changed.py:103"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish_changed.py:103",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。直すたびに記事ごとの ZIP がメールで届く"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。直すたびに記事ごとの ZIP がメールで届く"
     }
    }
   },
@@ -313,9 +313,9 @@
      "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish_rerender.py:78",
-     "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -358,9 +358,9 @@
      "note": ".htaccess に Redirect 301 を足す（Apache 前提）"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/deliver_files.py:355",
-     "need": "消すフォルダと .htaccess に足す行を手順書にして送る。先方が作業する"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 消すフォルダと .htaccess に足す行を手順書にして送る。先方が作業する"
     }
    }
   },
@@ -401,9 +401,9 @@
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1108",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     }
    }
   },
@@ -446,9 +446,9 @@
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1122",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     }
    }
   },
@@ -489,9 +489,9 @@
      "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/ai_crawler_check.py:103",
-     "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -499,42 +499,43 @@
    "label": "Indexing API（Google への即時通知）",
    "entry": [
     "scripts/notify_indexing.py",
-    "scripts/reindex.py"
+    "scripts/reindex.py",
+    "scripts/search_connect.py"
    ],
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:519"
+     "evidence": ".github/workflows/pipeline-multi.yml:564"
     },
     "external-md": {
-     "status": "partial",
-     "evidence": ".github/workflows/pipeline-multi.yml:508",
-     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+     "status": "ok",
+     "evidence": ".github/workflows/pipeline-multi.yml:564",
+     "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）"
     },
     "external-html": {
-     "status": "partial",
-     "evidence": ".github/workflows/pipeline-multi.yml:508",
-     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+     "status": "ok",
+     "evidence": ".github/workflows/pipeline-multi.yml:564",
+     "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）"
     },
     "nextjs-json": {
-     "status": "partial",
-     "evidence": ".github/workflows/pipeline-multi.yml:508",
-     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+     "status": "ok",
+     "evidence": ".github/workflows/pipeline-multi.yml:564",
+     "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）"
     },
     "wordpress": {
-     "status": "partial",
-     "evidence": "scripts/notify_indexing.py:37",
-     "need": "WordPress の公開URLは橋渡しから取れるが、記事の枠の通知（.github/workflows/pipeline-multi.yml:508）は自社の枠だけで --site を付けて回すため、お客様の社の新記事はその日の通知から漏れる。サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+     "status": "ok",
+     "evidence": ".github/workflows/pipeline-multi.yml:564",
+     "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）"
     },
     "ftp": {
-     "status": "partial",
-     "evidence": ".github/workflows/pipeline-multi.yml:508",
-     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る"
+     "status": "ok",
+     "evidence": ".github/workflows/pipeline-multi.yml:564",
+     "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）"
     },
     "zip": {
-     "status": "partial",
-     "evidence": ".github/workflows/pipeline-multi.yml:508",
-     "need": "記事の公開直後の通知は自前ビルド（self-static）の枠だけ。他の方式は週次の reindex（未登録の再送）だけで、サービスアカウントを先方の Search Console のオーナーに入れる初回接続も要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial"
     }
    }
   },
@@ -542,84 +543,87 @@
    "label": "IndexNow",
    "entry": [
     "scripts/notify_indexnow.py",
+    "scripts/search_connect.py",
     "scripts/wp_bridge.py"
    ],
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/notify_indexnow.py:57"
+     "evidence": "scripts/notify_indexnow.py:58"
     },
     "external-md": {
-     "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:116",
-     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+     "status": "ok",
+     "evidence": "scripts/search_connect.py:56",
+     "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）"
     },
     "external-html": {
-     "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:116",
-     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+     "status": "ok",
+     "evidence": "scripts/search_connect.py:56",
+     "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）"
     },
     "nextjs-json": {
-     "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:116",
-     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+     "status": "ok",
+     "evidence": "scripts/search_connect.py:56",
+     "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/notify_indexnow.py:108",
-     "note": "鍵ファイルを置けない代わりに mu-plugin へ鍵を渡し /<鍵>.txt を返させる。公開URLは橋渡しの一覧（自社の枠と週次の notify_indexnow が全社を回す）"
+     "evidence": "scripts/notify_indexnow.py:126",
+     "note": "鍵ファイルを置けないかわりに mu-plugin へ鍵を渡し /<鍵>.txt を返させる。公開URLは橋渡しの一覧。記事の枠の公開直後にその社の分を送る（.github/workflows/pipeline-multi.yml:559）"
     },
     "ftp": {
-     "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:116",
-     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る"
+     "status": "ok",
+     "evidence": "scripts/search_connect.py:56",
+     "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:116",
-     "need": "鍵ファイル（<KEY>.txt）を先方のドメイン直下に置く工程が無い。置かれていれば自前ビルドの枠の notify_indexnow が sitemap ごと送る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial"
     }
    }
   },
   "bing": {
    "label": "Bing（Webmaster API）",
    "entry": [
-    "scripts/bing_webmaster.py"
+    "scripts/bing_webmaster.py",
+    "scripts/client_intake.py",
+    "scripts/search_connect.py"
    ],
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:516"
+     "evidence": ".github/workflows/pipeline-multi.yml:561"
     },
     "external-md": {
-     "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:311",
-     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+     "status": "ok",
+     "evidence": "scripts/bing_webmaster.py:201",
+     "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま"
     },
     "external-html": {
-     "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:311",
-     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+     "status": "ok",
+     "evidence": "scripts/bing_webmaster.py:201",
+     "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま"
     },
     "nextjs-json": {
-     "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:311",
-     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+     "status": "ok",
+     "evidence": "scripts/bing_webmaster.py:201",
+     "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま"
     },
     "wordpress": {
-     "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:198",
-     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認）が無く、送るのは自社だけ（own_cfgs）。先方の Bing アカウントの API キーを預かって送る処理が要る"
+     "status": "partial",
+     "evidence": "scripts/bing_webmaster.py:232",
+     "need": "当社の Bing アカウントへの追加と、確認コードの受け渡し（wp_bridge.push_settings の bing_auth）までは動くが、先方のプラグイン（ss-quality-gate.php）に /BingSiteAuth.xml を返す窓口が無く、所有権を確かめられない。プラグインに窓口を足して版を上げ、運用者の手元で wp_bridge.py --sign し直す（自己更新で先方へ届く）"
     },
     "ftp": {
-     "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:311",
-     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+     "status": "ok",
+     "evidence": "scripts/bing_webmaster.py:201",
+     "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま"
     },
     "zip": {
-     "status": "missing",
-     "evidence": "scripts/bing_webmaster.py:311",
-     "need": "お客様のドメインを当社の Bing Webmaster に登録する工程（所有確認ファイルの配信）が無く、公開時の送信も自前ビルドの枠だけ（自社のコーポレート・補助金は別の工程で送っている）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing"
     }
    }
   },
@@ -660,9 +664,9 @@
      "evidence": "templates/external_article.html:32"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "templates/external_article.html:32",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -702,9 +706,9 @@
      "evidence": "templates/external_article.html:38"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "templates/external_article.html:38",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -744,9 +748,9 @@
      "evidence": "scripts/publish.py:295"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:295",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -784,9 +788,9 @@
      "evidence": "templates/external_article.html:34"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "templates/external_article.html:34",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -826,9 +830,9 @@
      "evidence": "scripts/publish.py:998"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:998",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -871,10 +875,9 @@
      "need": "測定ID（G-…）が sites/<id>.json の ga4_measurement_id に要る。ヒアリングシートは WordPress の社だけ保存する（scripts/client_intake.py:671）ので、ftp/zip でも保存する必要がある"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1002",
-     "note": "汎用の雛形で描いたページに、WordPress の橋渡しと同じ計測（ss-quality-gate.php の SSB_MEASURE_JS をそのまま読む）を置く。測定IDが無い社には出さない",
-     "need": "測定ID（G-…）が sites/<id>.json の ga4_measurement_id に要る。ヒアリングシートは WordPress の社だけ保存する（scripts/client_intake.py:671）ので、ftp/zip でも保存する必要がある。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing — 汎用の雛形に GA4 の計測タグが無い（ftp と同じ）。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -914,9 +917,9 @@
      "evidence": "scripts/publish.py:942"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:942",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -948,7 +951,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/wp_bridge.py:373",
+     "evidence": "scripts/wp_bridge.py:379",
      "need": "固定ページ（/industry/・/industry/<業種>/・faq/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る（記事末の案内からは辿れる）"
     },
     "ftp": {
@@ -957,9 +960,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "zip": {
-     "status": "missing",
-     "evidence": "scripts/build.py:1759",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing — build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     }
    }
   },
@@ -991,7 +994,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/wp_bridge.py:403",
+     "evidence": "scripts/wp_bridge.py:409",
      "need": "固定ページ（/glossary/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る"
     },
     "ftp": {
@@ -1000,9 +1003,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "zip": {
-     "status": "missing",
-     "evidence": "scripts/build.py:1892",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing — build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     }
    }
   },
@@ -1042,9 +1045,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "zip": {
-     "status": "missing",
-     "evidence": "scripts/build.py:1908",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing — build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     }
    }
   },
@@ -1084,9 +1087,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "zip": {
-     "status": "missing",
-     "evidence": "scripts/build.py:1936",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing — build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     }
    }
   },
@@ -1126,9 +1129,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "zip": {
-     "status": "missing",
-     "evidence": "scripts/build.py:1957",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing — build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     }
    }
   },
@@ -1168,9 +1171,9 @@
      "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     },
     "zip": {
-     "status": "missing",
-     "evidence": "scripts/build.py:2354",
-     "need": "build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: missing — build.py が site/ にだけ作る。配信先へ書き出す処理が無い"
     }
    }
   },
@@ -1333,7 +1336,7 @@
     },
     "wordpress": {
      "status": "missing",
-     "evidence": "scripts/wp_bridge.py:373",
+     "evidence": "scripts/wp_bridge.py:379",
      "need": "訳の要約ページを固定ページ（wp_bridge.upsert_page）で作り、日本語の記事と hreflang で結ぶ処理（mu-plugin の wp_head）が要る。sync_pages は業種ハブと用語集だけを作る"
     },
     "ftp": {
@@ -1341,9 +1344,9 @@
      "evidence": "scripts/publish.py:1016"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:1016",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -1381,9 +1384,9 @@
      "evidence": "scripts/menu_page.py:254"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/menu_page.py:275",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。中身が変わった回だけメールで届く"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。中身が変わった回だけメールで届く"
     }
    }
   },
@@ -1422,9 +1425,9 @@
      "evidence": "scripts/publish.py:873"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish.py:873",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -1506,9 +1509,9 @@
      "evidence": "scripts/site_change.py:131"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/site_change.py:276",
-     "need": "変更を ZIP と手順書にしてメールで送る。先方が置く"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 変更を ZIP と手順書にしてメールで送る。先方が置く"
     }
    }
   },
@@ -1550,9 +1553,9 @@
      "need": "直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/speed_fix.py:218",
-     "need": "直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 直す道具（speed_fix.py → site_change.py --push）はあるが手で走らせる。週次の cwv_check は測って知らせるだけ。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -1612,32 +1615,32 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1566",
+     "evidence": "scripts/publish.py:1360",
      "note": "全方式が配信前にこの行を通る"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1566",
+     "evidence": "scripts/publish.py:1360",
      "note": "全方式が配信前にこの行を通る"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1566",
+     "evidence": "scripts/publish.py:1360",
      "note": "全方式が配信前にこの行を通る"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1566",
+     "evidence": "scripts/publish.py:1360",
      "note": "全方式が配信前にこの行を通る"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1566",
+     "evidence": "scripts/publish.py:1360",
      "note": "全方式が配信前にこの行を通る"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1566",
+     "evidence": "scripts/publish.py:1360",
      "note": "全方式が配信前にこの行を通る"
     }
    }
@@ -1677,9 +1680,9 @@
      "evidence": "scripts/publish_gap.py:218"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/publish_gap.py:198",
-     "need": "ZIP の社は照合から外す（先方が上げたかを確かめない）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — ZIP の社は照合から外す（先方が上げたかを確かめない）"
     }
    }
   },
@@ -1720,9 +1723,9 @@
      "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/link_boost.py:235",
-     "need": "記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 記事の公開直後に1回（記事CI の link_boost --only）は張るが、週次の補充・押し上げ（weekly-optimize.yml・focus-mode.yml）が自社3サイトのIDを直書きで回しており、お客様の社は回らない。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -1843,9 +1846,9 @@
      "note": "判定は GSC で方式に関係なく動く。戻した原稿は再配信で届く"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/effect_ab.py:114",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。判定は動くが、戻した原稿を届けるには先方の作業が要る"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。判定は動くが、戻した原稿を届けるには先方の作業が要る"
     }
    }
   },
@@ -1887,9 +1890,9 @@
      "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
     },
     "zip": {
-     "status": "partial",
-     "evidence": "scripts/gas_deploy.py:40",
-     "need": "先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない"
     }
    }
   }
