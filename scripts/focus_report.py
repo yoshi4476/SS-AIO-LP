@@ -17,6 +17,7 @@
   python scripts/focus_report.py --write    # 直近28日を測って data/focus_mode.json に残す
   python scripts/focus_report.py --line     # 週次の findings に載せる1行（情報。要対応ではない）
   python scripts/focus_report.py --final    # 4週間のまとめを docs/focus-mode-result.md に書く
+  python scripts/focus_report.py --sites    # 当てる社（data/focus_mode.json の sites。無ければ自社だけ）
 """
 import argparse
 import json
@@ -120,15 +121,26 @@ def agree(a, b, tol=TOL):
     return "／".join(bad)
 
 
-def measure(start, end):
+def focus_sites(conf=None):
+    """集中モードを当てる社。data/focus_mode.json の sites（無ければ自社だけ）。
+    運用者が自社のために4週間だけ決めたもの。お客様に広げるかは sites に書いて選ぶ（既定では広げない）"""
+    import sites as S
+    conf = conf if conf is not None else (load_conf() if CONF.is_file() else {})
+    known = S.load_all()
+    want = conf.get("sites") or S.own_ids()
+    return [s for s in want if s in known and s != "sample"]
+
+
+def measure(start, end, sites=None):
     """サイトごとに2通りで測る。{site: (A, B)}。読めなかったサイトは入れない（0件と区別する）"""
     import gsc_detail as G
     import sites as S
     sc = G.client()
     out = {}
-    for sid, cfg in S.load_all().items():
-        dom = cfg.get("domain")
-        if not dom or sid == "sample":
+    cfgs = S.load_all()
+    for sid in (sites if sites is not None else focus_sites()):
+        dom = cfgs.get(sid, {}).get("domain")
+        if not dom:
             continue
         try:
             out[sid] = (merge(_rows(sc, dom, start, end, ["page"]), 0),
@@ -199,11 +211,11 @@ def run(conf, today=None):
     """開始前の28日と直近28日を測り、2通りが一致した回だけ記録の形で返す"""
     b0, b1 = conf["baseline"]
     s, e = window(today)
-    import sites as S
-    base, now = measure(b0, b1), measure(s, e)
+    want = focus_sites(conf)
+    base, now = measure(b0, b1, want), measure(s, e, want)
     # 片方の期間だけ読めたサイトを混ぜると、増減が読めない。両方で読めたサイトだけで比べる
     keep = sorted(set(base) & set(now))
-    failed = sorted(x for x in S.load_all() if x != "sample" and x not in keep)
+    failed = sorted(x for x in want if x not in keep)
     base_a, base_b = union(base, keep, 0), union(base, keep, 1)
     now_a, now_b = union(now, keep, 0), union(now, keep, 1)
     rec = {"measured": str(today or date.today()), "window": [str(s), str(e)],
@@ -293,7 +305,11 @@ def main():
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--line", action="store_true")
     ap.add_argument("--final", action="store_true")
+    ap.add_argument("--sites", action="store_true", help="当てる社のID（空白区切り。ワークフローのループが読む）")
     a = ap.parse_args()
+    if a.sites:
+        print(" ".join(focus_sites()))
+        return 0
     if not CONF.is_file():
         print("FOCUS=none")
         return 0

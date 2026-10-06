@@ -920,6 +920,20 @@ def site_of(slug):
     return S.find_category_owner(cat) or "ai-lab"
 
 
+def only_sites(items, spec):
+    """spec（空白かカンマ区切りの社ID）の記事だけに絞る。空なら絞らない（全社）"""
+    want = {s for s in re.split(r"[\s,]+", spec or "") if s}
+    if not want:
+        return items
+
+    def owner(x):
+        try:
+            return x.get("site") or site_of(x["slug"])
+        except OSError:
+            return ""
+    return [x for x in items if owner(x) in want]
+
+
 def hub_rewrite_log(item, why):
     """管制塔の「リライトログ」に残す。手元の台帳（auto_fix.jsonl）だけだと、
     シートを見る人には直した記録が1件も見えなかった（4行しか無かった）"""
@@ -1370,6 +1384,8 @@ def main():
     ap.add_argument("--skip-recent", type=int, default=0,
                     help="直近この日数に auto_rewrite が手を付けた記事を外す（0=外さない。集中モードが使う）")
     ap.add_argument("--tag", default="", help="台帳に残す印（集中モードの直しを対照群と分けるため）")
+    ap.add_argument("--sites", default="",
+                    help="この社の記事だけを直す（空白かカンマ区切り。空=全社。集中モードが focus_report --sites を渡す）")
     a = ap.parse_args()
     global TAG
     TAG = a.tag
@@ -1394,6 +1410,7 @@ def main():
         items = early_items(max(a.limit, 2))
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
+    items = only_sites(items, a.sites)
     if a.skip_recent:
         busy = recently_touched(a.skip_recent)
         # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う

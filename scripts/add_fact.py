@@ -44,6 +44,7 @@ TEMPLATES = {
     },
     "shien": {
         "id": "shien-count",
+        # 自社だけ: 運用会社の実績の雛形。お客様の一次情報は data/clients/<id>/facts.json に別に持つ
         "sites": ["corporate", "subsidy", "ai-lab"],
         "topic": ["支援実績", "導入支援"],
         "claim": "＜例＞2020年3月の創業から2026年9月までに、のべ◯◯社の導入を支援しました",

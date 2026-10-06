@@ -3,6 +3,9 @@
 
 sites/*.json を読み、どのサイトへ何を書くかの情報を提供する。
 サイトを増やすときは sites/ にJSONを1つ足すだけでよい。
+
+  python scripts/sites.py --ids   # 全社のID（空白区切り）。直しを全社に回すループはこれで回す
+  python scripts/sites.py --own   # 自社のIDだけ（先方のアカウントの物に触る工程用）
 """
 import json
 import re
@@ -141,5 +144,17 @@ def summary():
     return "\n".join(lines)
 
 
+def ids():
+    """全社のID（自社＋お客様。雛形の sample は除く）。ワークフローのループはこれで回す。
+    `for s in ai-lab corporate subsidy` と並べると、お客様の社には直しが回らない"""
+    return [sid for sid in load_all() if sid != "sample"]
+
+
 if __name__ == "__main__":
-    print(summary())
+    import sys
+    if "--ids" in sys.argv:
+        print(" ".join(ids()))
+    elif "--own" in sys.argv:
+        print(" ".join(s for s in own_ids() if s != "sample"))
+    else:
+        print(summary())

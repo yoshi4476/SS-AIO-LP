@@ -197,6 +197,14 @@ def recent_urls(cfg, days):
     return [u for u in NX.todays_urls(cfg, days) if u.rstrip("/") + "/" in known]
 
 
+def own_cfgs():
+    """送ってよい社＝自社だけ。お客様のサイトは先方の Bing アカウントの持ち物で、こちらの鍵では送れない
+    （送り切りの backfill も同じ理由で自社だけ）"""
+    import sites as S
+    cfgs = S.load_all()
+    return {sid: cfgs[sid] for sid in S.own_ids() if sid in cfgs}
+
+
 def jobs_for_urls(urls, cfgs):
     """指定URLをサイトごとに束ねる。登録していないドメインのURLは送らない"""
     by_dom = {c["domain"]: sid for sid, c in cfgs.items()}
@@ -206,7 +214,7 @@ def jobs_for_urls(urls, cfgs):
         if host in by_dom:
             out.setdefault((by_dom[host], host), []).append(u.strip())
         else:
-            print(f"  {host}: sites/*.json に無いドメインのため送りません")
+            print(f"  {host}: 自社のサイトではない（sites/*.json に無い・お客様の Bing は先方の持ち物）ため送りません")
     return out
 
 
@@ -215,10 +223,9 @@ def send_urls(urls, sitemap=False):
     key = api_key()
     if not key or not urls:
         return []
-    import sites as S
     state, today = load_state(), date.today().isoformat()
     res = [send_site(sid, dom, us, key, state, today, sitemap)
-           for (sid, dom), us in jobs_for_urls(urls, S.load_all()).items()]
+           for (sid, dom), us in jobs_for_urls(urls, own_cfgs()).items()]
     save_state(state, today)
     return res
 
@@ -345,10 +352,14 @@ def main(argv=None):
         return 0
     if "--backfill" in argv:
         return backfill(argv, key)
-    import sites as S
-    cfgs = S.load_all()
+    cfgs = own_cfgs()
     state, today = load_state(), date.today().isoformat()
     only = argv[argv.index("--site") + 1] if "--site" in argv and len(argv) > argv.index("--site") + 1 else ""
+    if only and only not in cfgs:
+        # 記事CI（pipeline-multi）はお客様の社でも呼ぶ。先方の Bing はこちらの鍵では送れない
+        print(f"{only}: お客様のサイトは先方の Bing アカウントの持ち物のため送りません")
+        print("BING_OK=unset")
+        return 0
     urls = [a for a in argv if a.startswith("http")]
     results = []
     if urls:

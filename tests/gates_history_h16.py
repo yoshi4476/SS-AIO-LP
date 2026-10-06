@@ -212,7 +212,7 @@ def test_focus_report_measures_two_ways():
     check("1%を超える食い違いは数字を出さない理由になる", bool(F.agree(a, b)), True)
     old = F.measure
     try:
-        F.measure = lambda s, e: {}
+        F.measure = lambda s, e, *_: {}
         rec = F.run({"start": "2026-10-05", "baseline": ["2026-09-02", "2026-09-29"]}, date(2026, 10, 10))
         check("どのサイトも読めなければ0件を数字として残さない", bool(rec.get("disagree")) and "groups" not in rec, True)
     finally:

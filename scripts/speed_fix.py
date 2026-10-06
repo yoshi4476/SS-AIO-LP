@@ -209,6 +209,7 @@ def leftovers(base):
 
 def main():
     ap = argparse.ArgumentParser()
+    # 自社だけ: 下の3つの分岐は自社3サイトのファイルの置き方（site/・.publish-work/）に合わせた手作業の直し。CIでは呼ばない
     ap.add_argument("--site", required=True, choices=["ai-lab", "subsidy", "corporate"])
     ap.add_argument("--apply", action="store_true")
     a = ap.parse_args()
