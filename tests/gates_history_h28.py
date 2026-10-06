@@ -6,7 +6,11 @@
 だれにも気づかれないまま残る（実際、external-md は画像も sitemap も llms.txt も届けていなかった）。
 表を機械が持ち、方式や機能を足したときに表へ足し忘れたら、ここで止める。
 
-いまは missing・partial の数を出すだけで落とさない。すべて ok / n/a になったら FAIL_ON を切り替える。
+missing が残っていたら落とす（FAIL_ON）。partial は数を出すだけ。すべて ok / n/a になったら FAIL_ON に partial も足す。
+
+根拠の行（evidence「ファイル:行」）は行番号なので、コードを1行足すだけで別の行を指す。並行作業の結合で
+行番号がずれ、引き直したつもりの表に古い判定が混ざった（2026-10-06）。各セルに行の中身（anchor）を持たせ、
+根拠の行がその中身と一致することを確かめる。ずれたら python scripts/caps_anchor.py --write で引き直す。
 """
 import ast
 import json
@@ -17,9 +21,9 @@ from test_gates import check, ROOT
 
 CAPS = ROOT / "data" / "capabilities.json"
 STATUSES = ("ok", "partial", "missing", "n/a")
-# 表の状態で門を落とすもの。いまは数を記録するだけ（空）。
-# すべての方式で missing が無くなったら ("missing",)、partial も無くなったら ("missing", "partial") にする
-FAIL_ON = ()
+# 表の状態で門を落とすもの。missing は 2026-10-06 に0になった（業種ハブ・用語集を全方式へ、WordPress の表示速度を
+# mu-plugin で）ので、新しく missing を作ったら落とす。partial も無くなったら ("missing", "partial") にする
+FAIL_ON = ("missing",)
 # build.py・publish.py が読み込むが、機能ではなく道具立てのもの（表に載せない）
 PLUMBING = {"md2html": "Markdown→HTML の変換", "sites": "サイト設定の読み込み"}
 # 配信方式の値を持つ変数名（他の辞書の "type" と取り違えない）
@@ -162,3 +166,39 @@ def test_capability_matrix_covers_every_method_and_feature():
                 hard.append(f"{p.name}:{i}")
     if hard:
         print(f"  WARN  サイトIDを直書きして回すワークフロー（お客様の社が回らない）: {len(hard)}件  " + " / ".join(hard))
+
+
+def test_capability_evidence_lines_match_anchors():
+    import tempfile
+    from pathlib import Path
+    import caps_anchor as CA
+    print("\n■ 方式×機能の表の根拠の行が、記録した行の中身（anchor）と一致する（ずれたら caps_anchor.py --write）")
+
+    # 検出器が効くか（偽のファイルで、行を足す・同じ中身の行が2つある・行を消す）
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        src = ["def a():", "    return 1", "", "def b():", "    x = 1", "}", "", "def c():", "    y = 2", "}"]
+        (root / "f.py").write_text("\n".join(src) + "\n", encoding="utf-8")
+        lines = CA.read_lines("f.py", root=root)
+        caps = {"features": {"x": {"cells": {"m1": {"evidence": "f.py:4"}, "m2": {"evidence": "f.py:10"}}}}}
+        for c in caps["features"]["x"]["cells"].values():
+            c.update(CA.make_anchor(lines, int(c["evidence"].split(":")[1])))
+        check("検出器: 同じ中身の行（「}」）は直前の行まで記録する",
+              caps["features"]["x"]["cells"]["m2"].get("anchor_prev"), ["y = 2"])
+        check("検出器: 行が動いていなければ何も言わない", CA.run(caps, root=root), ([], []))
+        (root / "f.py").write_text("\n".join(["import os", "", "", ""] + src) + "\n", encoding="utf-8")
+        _, todo = CA.run(json.loads(json.dumps(caps)), root=root)
+        check("検出器: 上に行が増えたらずれを知らせる", len(todo), 2)
+        fixed, todo = CA.run(caps, write=True, root=root)
+        check("検出器: --write で中身から引き直す（同じ「}」が2つあっても直前の行で決める）",
+              ([c["evidence"] for c in caps["features"]["x"]["cells"].values()], todo), (["f.py:8", "f.py:14"], []))
+        (root / "f.py").write_text("\n".join(x for x in src if x != "def b():") + "\n", encoding="utf-8")
+        _, todo = CA.run(caps, write=True, root=root)
+        check("検出器: 根拠の行が消えたら探し直せない（判定を見直す要対応）", ["見つかりません" in t for t in todo], [True])
+
+    caps = load()
+    missing = sorted(f"{fid} × {m}" for fid, f in caps["features"].items() for m, c in f["cells"].items() if not c.get("anchor"))
+    check("表の全セルが根拠の行の中身（anchor）を持つ（python scripts/caps_anchor.py --write で付く）", missing, [])
+    _, todo = CA.run(caps)
+    check("根拠の行が記録した中身と一致する（ずれたら python scripts/caps_anchor.py --write で引き直し、"
+          "見つからないセルは判定を見直す）", todo, [])
