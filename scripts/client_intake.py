@@ -58,7 +58,8 @@ FIELDS = [
      "Git を使わないレンタルサーバー（FTP で上げているサイト）なら ftp、自分で上げたい先方には zip",
      "wordpress", True),
     ("url_prefix", "記事URLの接頭辞",
-     "記事が /blog/xxx/ に出るなら /blog。自社構築（self-static）以外は必ず記入", "/blog", False),
+     "記事が /blog/xxx/ に出るなら /blog。自社構築（self-static）以外は必ず記入"
+     "（wordpress は空欄で可。記事のURLは先方のパーマリンク設定から取ります）", "/blog", False),
     ("content_dir", "記事の置き場所", "配信先リポジトリ内のパス", "src/content/blog", False),
     ("images_dir", "画像の置き場所", "同上", "public/images/blog", False),
     ("wp_api", "WordPressのAPIのURL",
@@ -69,6 +70,9 @@ FIELDS = [
      "アプリケーションパスワードを発行できる権限のユーザー名。"
      "パスワード自体はこのシートに書かず、別途お預かりします",
      "https://example.co.jp/wp-admin/ / ユーザー名: editor-bot", False),
+    ("ga4_measurement_id", "GA4の測定ID（G-で始まる）",
+     "形式が wordpress のときのみ。記事の計測（ボタン・フォーム・読了）を当社のプラグインが入れます。"
+     "GA4 を既にサイトへ入れている場合は空欄で構いません（二重には入れません）", "G-XXXXXXXXXX", False),
 
     ("#offer", "3. 主力商材", "いちばん大切な項目です。ここが曖昧だと、"
      "表示回数は増えても問い合わせにつながらない記事が量産されます。", "", False),
@@ -663,6 +667,9 @@ def to_config(got):
     for k in ("content_dir", "images_dir", "cta_title", "cta_desc", "wp_api"):
         if got.get(k):
             cfg[k] = got[k]
+    # 計測を当社のプラグインで入れるのは WordPress の社だけ（ほかの方式は先方のテンプレートが持つ）
+    if cfg["type"] == "wordpress" and got.get("ga4_measurement_id"):
+        cfg["ga4_measurement_id"] = str(got["ga4_measurement_id"]).strip()
     mix = pairs(got.get("category_mix"), num=True)
     if mix:
         cfg["category_mix"] = mix
@@ -897,9 +904,14 @@ def review(got, cfg):
     if cfg.get("type") not in ("self-static", "wordpress", "ftp", "zip") and not cfg.get("repo"):
         ng.append("配信先リポジトリが空です（自社構築以外は書き込み先が要ります）")
     # 以前は空欄に "/blog" を補っていた。実際の記事URLが違えば、sitemap も通知も
-    # 存在しないURLを指す。推測で埋めず、書いてもらう
-    if cfg.get("type") in TYPES and cfg["type"] != "self-static" and not cfg.get("url_prefix"):
+    # 存在しないURLを指す。推測で埋めず、書いてもらう。
+    # WordPress は記事のURLを先方のパーマリンク設定が決め、管制塔は REST で実際のURLを読む（wp_bridge）。
+    # /%postname%/ の社は接頭辞が無いので、空欄で止めると登録できなかった
+    if (cfg.get("type") in TYPES and cfg["type"] not in ("self-static", "wordpress")
+            and not cfg.get("url_prefix")):
         ng.append("記事URLの接頭辞が空です（記事が /blog/xxx/ に出るなら /blog と書いてください）")
+    if cfg.get("ga4_measurement_id") and not re.fullmatch(r"G-[A-Z0-9]{4,20}", cfg["ga4_measurement_id"]):
+        ng.append("GA4の測定IDは G- で始まる形で書いてください（例: G-AB12CD34EF）")
     # ZIP は最後に先方がサーバーへ置く作業が残る。FTP の接続情報を1回もらえば、記事もサイトの変更も全自動になる
     if cfg.get("type") == "zip":
         warn.append("形式が zip です。記事・サイト変更のたびに先方がファイルを置く作業が残ります。"
