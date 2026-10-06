@@ -95,6 +95,9 @@ CHECKS = [
      re.compile(r"^要対応:|^\s{2}- ")),
     ("YouTube の許可の上限（未確認アプリは累計100）", "youtube_upload.py --users",
      re.compile(r"^要対応:")),
+    # 指示での改修（site_renovate）が反映後の確認で外れ、自動で戻した回。台帳を読むだけ（改修は走らせない）
+    ("サイト改修の自動の戻し", "site_renovate.py --report",
+     re.compile(r"^要対応:")),
     ("監修待ちの記事", "editorial_review.py --pending",
      re.compile(r"^要対応:|^\s{2}- ")),
     # 組の違う社（お客様どうし・お客様と自社）が同じ語を持った。弾かずに登録してあるので、

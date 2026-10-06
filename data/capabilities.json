@@ -486,7 +486,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/wp_bridge.py:72",
+     "evidence": "scripts/wp_bridge.py:74",
      "note": "WordPress 本体が /wp-sitemap.xml（索引形式）を作る。管制塔は子まで辿って読む",
      "anchor": "def sitemap_entries(domain, max_children=60):"
     },
@@ -1152,7 +1152,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/wp_bridge.py:384",
+     "evidence": "scripts/wp_bridge.py:386",
      "need": "固定ページ（/industry/・/industry/<業種>/・faq/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る（記事末の案内からは辿れる）",
      "anchor": "def sync_pages(cfg, rows=None, arts=None):",
      "note": "onboard_check で確かめる（/industry/ が開けて中身が出る・トップのナビから /industry/・/glossary/ へ辿れる）"
@@ -1206,7 +1206,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/wp_bridge.py:414",
+     "evidence": "scripts/wp_bridge.py:416",
      "need": "固定ページ（/glossary/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る",
      "anchor": "gl = glossary_page(cfg, arts, rows)",
      "note": "onboard_check で確かめる（/glossary/ が開けて中身が出る・トップのナビから /industry/・/glossary/ へ辿れる）"
@@ -1258,7 +1258,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/wp_bridge.py:438",
+     "evidence": "scripts/wp_bridge.py:440",
      "note": "業種ハブ・用語集と同じ upsert_page で固定ページにする（構造化データは _ss_jsonld）。記事の公開のついでに1日1回（sync_if_stale）作り直し、下限を割ったページは下書きに戻す。記事の末尾から案内する（ナビへの掲載はしない）",
      "anchor": "def sync_aggregate(cfg, rows, arts=None, made=None):"
     },
@@ -1309,7 +1309,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/wp_bridge.py:438",
+     "evidence": "scripts/wp_bridge.py:440",
      "note": "業種ハブ・用語集と同じ upsert_page で固定ページにする（構造化データは _ss_jsonld）。記事の公開のついでに1日1回（sync_if_stale）作り直し、下限を割ったページは下書きに戻す。記事の末尾から案内する（ナビへの掲載はしない）",
      "anchor": "def sync_aggregate(cfg, rows, arts=None, made=None):"
     },
@@ -1360,7 +1360,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/wp_bridge.py:438",
+     "evidence": "scripts/wp_bridge.py:440",
      "note": "業種ハブ・用語集と同じ upsert_page で固定ページにする（構造化データは _ss_jsonld）。記事の公開のついでに1日1回（sync_if_stale）作り直し、下限を割ったページは下書きに戻す。記事の末尾から案内する（ナビへの掲載はしない）",
      "anchor": "def sync_aggregate(cfg, rows, arts=None, made=None):"
     },
@@ -1412,7 +1412,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/wp_bridge.py:438",
+     "evidence": "scripts/wp_bridge.py:440",
      "note": "業種ハブ・用語集と同じ upsert_page で固定ページにする（構造化データは _ss_jsonld）。記事の公開のついでに1日1回（sync_if_stale）作り直し、下限を割ったページは下書きに戻す。記事の末尾から案内する（ナビへの掲載はしない）。検索データ（season.py が data/season/<id>.json に山の月だけ残す）が12か月分そろうまでは作らない（判定前）",
      "anchor": "def sync_aggregate(cfg, rows, arts=None, made=None):"
     },
@@ -1795,35 +1795,35 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/site_change.py:385",
+     "evidence": "scripts/site_change.py:460",
      "note": "site/ と templates/ を直して build.py",
      "anchor": "if t == \"self-static\":"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/site_change.py:36",
+     "evidence": "scripts/site_change.py:38",
      "anchor": "GIT_TYPES = (\"external-md\", \"external-html\", \"nextjs-json\")"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/site_change.py:36",
+     "evidence": "scripts/site_change.py:38",
      "anchor": "GIT_TYPES = (\"external-md\", \"external-html\", \"nextjs-json\")"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/site_change.py:36",
+     "evidence": "scripts/site_change.py:38",
      "anchor": "GIT_TYPES = (\"external-md\", \"external-html\", \"nextjs-json\")"
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/site_change.py:257",
-     "need": "固定ページ・メニュー・テンプレート・配色は REST で変えられる。テーマの PHP は FTP の接続情報がある社だけ、--pull が有効なテーマを theme/ に取り、--push が FTP で戻す（取った後に先方で変わったファイルは上書きしない）。ヒアリングシートは WordPress の社に FTP の接続情報を聞いていない（client_intake.py。最初の接続の点検で聞けば ok になる）",
+     "evidence": "scripts/site_change.py:322",
+     "need": "固定ページ・メニュー・ナビ・テンプレート・テンプレートパーツ・ウィジェット・配色・サイト設定は REST で変えられる。追加CSS・head とフッターの追記（link・meta・ld+json・許可したドメインの script src だけ）は橋渡し 2.0.4 の /ss/v1/design で変えられる（外観の編集の権限＝管理者のアプリケーションパスワードが要る。2.0.4 は署名して配るまで先方に届かない）。テーマの PHP は FTP の接続情報がある社だけ、--pull が有効なテーマを theme/ に取り、--push が FTP で戻す（取った後に先方で変わったファイルは上書きしない）。ヒアリングシートは WordPress の社に FTP の接続情報を聞いていない（client_intake.py。最初の接続の点検で聞けば ok になる）",
      "anchor": "def wp_push(cfg, ch):",
      "note": "onboard_check で確かめる（FTP の接続情報があり、テーマの速度・構成も自動で直せる）"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/site_change.py:131",
+     "evidence": "scripts/site_change.py:152",
      "anchor": "def ftp_push(cfg, ch):"
     },
     "zip": {
@@ -2278,6 +2278,57 @@
      "evidence": "scripts/client_add.py:82",
      "note": "新規受付なし（zip の社はいない・新規の登録は検査で止まる）。元の判定: partial — 先方のフォームが Apps Script のときだけ、転送のコード（forward-to-hub.gs）を GAS_SCRIPT_ID_<ID> で配れる。それ以外のフォームの問い合わせは管制塔に届かず、自動の返信・追いかけ（followUp）が動かない",
      "anchor": "if cfg.get(\"type\") in RETIRED:"
+    }
+   }
+  },
+  "site_renovate": {
+   "label": "指示でのサイト改修（Claude が直し、検査・写真・反映後の確認・自動の戻し）",
+   "entry": [
+    "scripts/site_renovate.py",
+    "scripts/site_change.py"
+   ],
+   "cells": {
+    "self-static": {
+     "status": "n/a",
+     "evidence": "scripts/site_renovate.py:806",
+     "anchor": "if cfg[\"type\"] == \"self-static\":",
+     "note": "このリポジトリのサイトは site/ と templates/ を直して build.py（門が検査する）"
+    },
+    "external-md": {
+     "status": "partial",
+     "evidence": "scripts/site_renovate.py:375",
+     "anchor": "def static_root(cfg, w: Path):",
+     "need": "ビルドで作るサイトは作業場所でリンクを解決できず、変更前の写真を手元で撮れない（反映の前後に本番を撮って並べ、リンクは反映後の確認で200と導線を見る）。反映後の確認は配信の完了を renovate_wait_sec（既定240秒）待つだけで、先方のビルドの完了は見ていない"
+    },
+    "external-html": {
+     "status": "ok",
+     "evidence": "scripts/site_renovate.py:375",
+     "anchor": "def static_root(cfg, w: Path):",
+     "note": "静的な根（static_dir・public・site・dist・out・docs・直下の index.html）でリンクを解決し、変更前後を手元で撮る"
+    },
+    "nextjs-json": {
+     "status": "partial",
+     "evidence": "scripts/site_renovate.py:375",
+     "anchor": "def static_root(cfg, w: Path):",
+     "need": "ビルドで作るサイトは作業場所でリンクを解決できず、変更前の写真を手元で撮れない（反映の前後に本番を撮って並べ、リンクは反映後の確認で200と導線を見る）。反映後の確認は配信の完了を renovate_wait_sec（既定240秒）待つだけで、先方のビルドの完了は見ていない"
+    },
+    "wordpress": {
+     "status": "partial",
+     "evidence": "scripts/site_renovate.py:708",
+     "anchor": "def preview_live_before(cfg, ch):",
+     "need": "反映の前に変更後の画面は撮れない（反映前の本番と反映後を並べる。外れたら自動で戻す）。追加CSS・head とフッターの追記は橋渡し 2.0.4 を署名して配ってから。テーマの PHP は FTP の接続情報がある社だけ"
+    },
+    "ftp": {
+     "status": "ok",
+     "evidence": "scripts/site_renovate.py:124",
+     "anchor": "def pull(cfg):",
+     "note": "WordPress を FTP で置いている社（index.php がある）は、リンクの解決と手元の写真を飛ばし、反映後の確認で見る"
+    },
+    "zip": {
+     "status": "n/a",
+     "evidence": "scripts/client_add.py:82",
+     "anchor": "if cfg.get(\"type\") in RETIRED:",
+     "note": "新規受付なし。先方のサーバーを取れないので、指示での改修はしない（site_renovate が止める）"
     }
    }
   }

@@ -257,11 +257,24 @@ python scripts/site_change.py --site <id> --push       # 変えた分だけ反�
 python scripts/site_change.py --site <id> --rollback   # 直前の反映の前へ戻す
 ```
 
+**指示の一文で改修する**（Claude が作業場所の中だけを直し、通してよいかは機械が決める。中身は `site_renovate.py`）:
+
+```bash
+python scripts/site_change.py --site <id> --ask "トップの施工事例の見出しを…"   # 取る→直す→検査→変更前後の写真→止まる
+python scripts/site_renovate.py --site <id> --apply      # 写真（.publish-work/<id>-site/_preview/）と差分を見て反映
+python scripts/site_renovate.py --site <id> --discard    # 捨てる（--ask … --yes なら検査が通りしだい反映）
+```
+
+検査（タグの開閉・JSON-LD・内部リンク・速度の方針・表現・許可していない script・鍵と個人情報・20ファイル／削除5%まで）に
+1つでも外れたら反映しない。反映後にトップと変えたページの200・ナビ・フッター・問い合わせの導線を確かめ、外れたら自動で戻す
+（台帳 `automation/logs/renovate.jsonl`・週次の findings が要対応で知らせる）。確認なしで反映するのは、
+`sites/<id>.json` の `renovate_auto`（`"css"`・`"text"`）に書いた種類だけの小さな直し（既定は無効）。
+
 | 形式 | 変えられる範囲 |
 |:--|:--|
 | Git の社 | 全部（配信先リポジトリへ push） |
 | `ftp` | 全部（変えたファイルだけ上げる。WordPress 本体・アップロード画像・5MB超は取らない） |
-| `wordpress` | 固定ページ・メニュー・ナビ・テンプレート・テンプレートパーツ・配色（ブロックテーマ）・サイト設定。PHP のテーマは触れない（その場合は FTP の接続情報をもらう）。メニュー・設定は管理者権限のユーザーが要る |
+| `wordpress` | 固定ページ・メニュー・ナビ・テンプレート・テンプレートパーツ・ウィジェット・配色（ブロックテーマ）・サイト設定。橋渡し 2.0.4 以降は追加CSS・head とフッターの追記（link・meta・ld+json・許可したドメインの script src だけ）も FTP 無しで変えられる（外観の編集の権限が要る）。PHP のテーマは FTP の接続情報がある社だけ。メニュー・設定は管理者権限のユーザーが要る |
 | `zip` | ZIP と手順書を先方へメール（先方の作業が残るので、登録時に ftp を勧める警告が出る） |
 
 作業場所の git は必ずその場所の `.git` を名指しする（壊れた `.git` から親の管制塔リポジトリへさかのぼり、

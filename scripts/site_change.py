@@ -9,6 +9,8 @@
   python scripts/site_change.py --site <id> --diff       # 何が変わるかを見る
   python scripts/site_change.py --site <id> --push       # 変えた分だけ先方へ反映する
   python scripts/site_change.py --site <id> --rollback   # 直前の反映の前へ戻す（--rollback <コミット> で任意の時点）
+  python scripts/site_change.py --site <id> --ask "<指示>"   # 取る→Claude が直す→検査→写真で止まる（--yes で反映）
+      # 中身は site_renovate.py。反映後にトップと変えたページを確かめ、だめなら自動で戻す
 
 作業場所は .publish-work/<id>-site/。中に Git の履歴を持ち、取った時点（remote）と反映の履歴が残る。
 
@@ -16,7 +18,7 @@
 |:--|:--|:--|
 | Git の社（external-*・nextjs-json） | 配信先リポジトリを取る | commit + push（先方のビルドが動く） |
 | ftp | サーバーのファイルを全部取る（大きいファイル・WordPress 本体は除く） | 変えたファイルだけ上げる・消したファイルは消す |
-| wordpress | 固定ページ・メニュー・ナビ・テンプレート・配色・サイト設定を JSON で取る（FTP の接続情報がある社は有効なテーマの PHP も theme/ に取る） | 変えた項目だけ REST API で更新する（theme/ は FTP で戻す） |
+| wordpress | 固定ページ・メニュー・ナビ・テンプレート・ウィジェット・配色・サイト設定を JSON で取る。橋渡し 2.0.4 以降は追加CSS・head とフッターの追記も design/ に取る（FTP の接続情報がある社は有効なテーマの PHP も theme/ に取る） | 変えた項目だけ REST API で更新する（theme/ は FTP で戻す） |
 | zip | 取れない（先方のサーバーに触れない） | 変更を ZIP と手順書にして先方へメールで送る（先方が置く作業が残る。勧めない） |
 
 **反映の前に、先方で誰かが同じものを変えていないかを確かめる。** 取った時点と今のサーバーが
@@ -47,7 +49,15 @@ WP_RES = [
     ("navigation", "navigation?context=edit&per_page=100", ("title", "content", "status")),
     ("templates", "templates?context=edit&per_page=100", ("content", "title", "description")),
     ("template-parts", "template-parts?context=edit&per_page=100", ("content", "title", "description", "area")),
+    # ウィジェット（WordPress 5.8 以降の wp/v2/widgets。クラシックテーマのサイドバー・フッター）。
+    # instance は {"raw": …} で返り、書き戻しも {"raw": …} で渡す（raw を出さない古いウィジェットは位置だけ動かす）
+    ("widgets", "widgets?context=edit", ("id_base", "sidebar", "instance")),
 ]
+# 橋渡しのプラグイン（2.0.4 以降）の窓口 /ss/v1/design で取る追加CSS・head とフッターの追記。古い版の社は 404 で取らない
+DESIGN_DIR = "design"
+DESIGN_FILES = {"custom.css": "css", "head.json": "head", "footer.json": "footer"}
+# 作業場所に置くが先方へ送らないもの（--ask の比較の写真）
+LOCAL_ONLY = ("_preview/",)
 WP_SETTINGS = ("title", "description", "show_on_front", "page_on_front", "page_for_posts", "posts_per_page")
 
 
@@ -69,8 +79,18 @@ def mgit(m: Path, *a, check=True):
     return git(f"--git-dir={m / '.git'}", f"--work-tree={m}", *a, cwd=m, check=check)
 
 
+def _exclude_local(m: Path):
+    """写真（_preview/）を作業場所の記録に入れない。入れると FTP の社では先方のサーバーへ上がる"""
+    ex = m / ".git" / "info" / "exclude"
+    have = ex.read_text(encoding="utf-8") if ex.is_file() else ""
+    if any(x not in have.split() for x in LOCAL_ONLY):
+        ex.parent.mkdir(parents=True, exist_ok=True)
+        ex.write_text(have + "".join(x + "\n" for x in LOCAL_ONLY if x not in have.split()), encoding="utf-8")
+
+
 def ensure_repo(m: Path):
     if (m / ".git" / "HEAD").is_file():
+        _exclude_local(m)
         return
     import shutil
     import stat
@@ -80,6 +100,7 @@ def ensure_repo(m: Path):
     git("init", "-q", str(m), cwd=m)
     for k, v in (("user.name", "AIO Pipeline Bot"), ("user.email", "noreply@7senses.co.jp"), ("core.autocrlf", "false")):
         mgit(m, "config", k, v)
+    _exclude_local(m)
 
 
 def snapshot(m: Path, msg):
@@ -121,7 +142,7 @@ def ftp_pull(cfg):
     # サーバーから消えたものは作業場所からも消す（.git は除く）
     for p in list(m.rglob("*")):
         rel = p.relative_to(m).as_posix()
-        if p.is_file() and not rel.startswith(".git/") and rel not in keep:
+        if p.is_file() and not rel.startswith((".git/",) + LOCAL_ONLY) and rel not in keep:
             p.unlink()
     snapshot(m, f"取得 {datetime.now():%Y-%m-%d %H:%M}（{len(keep)}ファイル）")
     note = f"／{FTP_MAX // 1024 // 1024}MB超の {len(big)} ファイルは取っていません（触りません）" if big else ""
@@ -206,9 +227,53 @@ def wp_pull(cfg):
             got["global-styles"] = 1
     except SystemExit:
         pass
+    got.update(wp_design_pull(cfg, m))
     got.update(wp_theme_pull(cfg, m))
     snapshot(m, f"取得 {datetime.now():%Y-%m-%d %H:%M}（{got}）")
     return f"取りました: {got}（新しい固定ページ・メニュー項目は <資源>/new-<名前>.json で作れます）"
+
+
+def _design_files(d):
+    """/ss/v1/design の応答 → 作業場所のファイルの中身（css はそのまま、head・footer は項目の JSON）"""
+    return {"custom.css": d.get("css") or "",
+            "head.json": json.dumps(d.get("head") or [], ensure_ascii=False, indent=1),
+            "footer.json": json.dumps(d.get("footer") or [], ensure_ascii=False, indent=1)}
+
+
+def wp_design_pull(cfg, m: Path):
+    """追加CSS・head とフッターの追記（橋渡し 2.0.4 以降）。FTP の鍵が無い社でも見た目と計測の小さな追記を変えられる。
+    head・footer は任意の HTML ではなく項目の一覧（link・meta・ld+json・許可したドメインの script src）"""
+    d = m / DESIGN_DIR
+    try:
+        got = _wp(cfg, "/ss/v1/design")
+    except SystemExit:
+        return {}
+    if not isinstance(got, dict) or "css" not in got:
+        return {}
+    d.mkdir(exist_ok=True)
+    for name, text in _design_files(got).items():
+        (d / name).write_text(text, encoding="utf-8")
+    return {"design": len(DESIGN_FILES)}
+
+
+def wp_design_push(cfg, ch):
+    """design/ の変更を1回の POST で送る。取った後に先方で変わっていれば上書きしない"""
+    m = mirror(cfg)
+    now = _design_files(_wp(cfg, "/ss/v1/design"))
+    moved = [f for st, f in ch if st != "A" and now.get(f.split("/", 1)[1], "").encode("utf-8") != at_remote(m, f)]
+    if moved:
+        raise SystemExit("先方の管理画面で、取った後に変わっています（上書きしません）: " + ", ".join(moved)
+                         + "\n--pull で取り直してください")
+    body = {}
+    for name, key in DESIGN_FILES.items():
+        p = m / DESIGN_DIR / name
+        if p.is_file():
+            t = p.read_text(encoding="utf-8")
+            body[key] = t if key == "css" else json.loads(t or "[]")
+    got = _wp(cfg, "/ss/v1/design", body)
+    if isinstance(got, dict) and got.get("rejected"):
+        raise SystemExit(f"橋渡しのプラグインが受け付けなかった項目があります: {got['rejected']}")
+    return len(ch)
 
 
 # テーマの PHP は REST では触れない。FTP の接続情報（FTP_CREDENTIALS_JSON の同じ社のID）がある社だけ、
@@ -258,8 +323,10 @@ def wp_push(cfg, ch):
     m = mirror(cfg)
     fields_of = {n: f for n, _, f in WP_RES}
     theme = [(st, f) for st, f in ch if f.startswith(THEME_DIR + "/")]
-    ch = [(st, f) for st, f in ch if not f.startswith(THEME_DIR + "/")]
+    design = [(st, f) for st, f in ch if f.startswith(DESIGN_DIR + "/") and f.split("/", 1)[1] in DESIGN_FILES]
+    ch = [(st, f) for st, f in ch if not f.startswith((THEME_DIR + "/", DESIGN_DIR + "/"))]
     done = wp_theme_push(cfg, theme) if theme else 0
+    done += wp_design_push(cfg, design) if design else 0
     for st, f in ch:
         p = m / f
         if f == "settings.json":
@@ -281,6 +348,11 @@ def wp_push(cfg, ch):
             done += 1
             continue
         data = {k: v for k, v in json.loads(p.read_text(encoding="utf-8")).items() if k in fields_of[name]}
+        if name == "widgets":
+            # 取るときは raw だけを持つ。書き戻すときは {"raw": …} に包む（raw の無いウィジェットは中身に触れない）
+            inst = data.pop("instance", None)
+            if isinstance(inst, dict):
+                data["instance"] = {"raw": inst}
         if st == "A" or key.startswith("new-"):
             created = _wp(cfg, name, data)
             # 作られた id の名前に付け替え、次の反映で二重に作らない
@@ -378,12 +450,18 @@ def main():
     ap.add_argument("--diff", action="store_true")
     ap.add_argument("--push", action="store_true")
     ap.add_argument("--rollback", nargs="?", const="remote~1", default=None)
+    ap.add_argument("--ask", help="改修の指示（取る→Claude が直す→検査→写真→止まる。site_renovate.py）")
+    ap.add_argument("--yes", action="store_true", help="--ask の検査が通れば反映する（反映後に確かめ、だめなら戻す）")
+    ap.add_argument("--no-preview", action="store_true", help="--ask で画面の写真を撮らない")
     a = ap.parse_args()
     cfg = S.load(a.site)
     t = cfg["type"]
     m = mirror(cfg)
     if t == "self-static":
         raise SystemExit("このリポジトリのサイトです。site/ と templates/ を直して build.py で公開してください")
+    if a.ask:
+        import site_renovate
+        return site_renovate.run(cfg, a.ask, yes=a.yes, preview=not a.no_preview)
     if t in GIT_TYPES:
         import publish
         dest = WORK / cfg["id"]
@@ -410,11 +488,7 @@ def main():
     if not (m / ".git" / "HEAD").is_file():
         raise SystemExit(f"先に --pull してください（{m} がありません）")
     if a.rollback:
-        # 指定の時点の中身に作業場所を戻し、その差分を反映する（履歴は消さない）
-        mgit(m, "checkout", a.rollback, "--", ".")
-        # checkout だけでは、その時点より後に足したファイルが残る（試しで about.html が消えなかった）
-        for f in mgit(m, "diff", "--name-only", "--diff-filter=A", a.rollback, "HEAD").splitlines():
-            (m / f).unlink(missing_ok=True)
+        restore(cfg, a.rollback)
         print(f"作業場所を {a.rollback} の状態に戻しました")
         a.push = True
     ch = changes(m)
@@ -423,10 +497,24 @@ def main():
     print(f"変更 {len(ch)} 件")
     if not a.push or not ch:
         return 0
-    msg = {"ftp": ftp_push, "wordpress": wp_push, "zip": zip_push}[t](cfg, ch)
-    snapshot(m, f"反映 {datetime.now():%Y-%m-%d %H:%M}: {len(ch)}件")
-    print(msg)
+    print(push_mirror(cfg, ch))
     return 0
+
+
+def restore(cfg, rev="remote~1"):
+    """作業場所を指定の時点の中身に戻す（履歴は消さない。反映は push_mirror）"""
+    m = mirror(cfg)
+    mgit(m, "checkout", rev, "--", ".")
+    # checkout だけでは、その時点より後に足したファイルが残る（試しで about.html が消えなかった）
+    for f in mgit(m, "diff", "--name-only", "--diff-filter=A", rev, "HEAD").splitlines():
+        (m / f).unlink(missing_ok=True)
+
+
+def push_mirror(cfg, ch):
+    """FTP・WordPress・ZIP の社: 作業場所の変化を先方へ反映し、反映後の中身を「先方の今」として記録する"""
+    msg = {"ftp": ftp_push, "wordpress": wp_push, "zip": zip_push}[cfg["type"]](cfg, ch)
+    snapshot(mirror(cfg), f"反映 {datetime.now():%Y-%m-%d %H:%M}: {len(ch)}件")
+    return msg
 
 
 if __name__ == "__main__":
