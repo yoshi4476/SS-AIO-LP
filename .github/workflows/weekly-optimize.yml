@@ -921,6 +921,27 @@ jobs:
             git push -q || echo "::warning::配信の記録を正本へ push できませんでした"
           }
 
+      # 原稿が変わらない限り、雛形・CTA・会社の表記を変えても既存の記事は古い描き方のまま残る。
+      # 描き方の材料の指紋が変わった社だけ全部描き直す（初めて見る社は記録だけ）。
+      # 先方のサイトに日本語の Web フォント・先に読む計測タグが戻っていれば外す（CLAUDE.md 8.4。WordPress は FTP の鍵がある社のテーマだけ）
+      - name: 雛形・設定が変わった社の描き直しと表示速度の直し
+        timeout-minutes: 60
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+        run: |
+          out=$( { python scripts/rerender_watch.py --push || true; python scripts/speed_fix.py --auto --apply || true; } 2>&1 )
+          echo "$out" | tail -40
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          # 描き直した社の指紋（data/rerender_state.json）を正本に残す。残さないと翌週また描き直す
+          git add data/rerender_state.json 2>/dev/null || true
+          git diff --cached --quiet || {
+            git commit -q -m "weekly: 描き直しの指紋 $(date '+%Y-%m-%d')"
+            git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
+            git push -q || echo "::warning::描き直しの指紋を正本へ push できませんでした"
+          }
+
       - name: Cloudflare Pagesへデプロイ
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
