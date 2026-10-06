@@ -88,3 +88,13 @@ def test_legal_claims_detector_and_all_public_pages():
     import auto_rewrite as AR
     check("執筆の指示: 当社の採択率・支援社数と作成代行を書かない決まりがある（記事・書き直し）",
           ("支援社数" in prompt and "legal_claims.py" in prompt, "申請を代行" in AR.PROMPT), (True, True))
+
+
+def test_legal_claims_catches_subsidy_rebate():
+    import legal_claims as LC
+    print("\n■ 補助金の還元（採択・交付を条件にした値引き）を見つけ、注意喚起の文は止めない")
+    bad = ["開発費550万円−補助金350万円−採択者割引=実質約80万円", "ご契約者様は会員価格で大幅割引",
+           "補助金でシステムを導入し、割引になった分でマップ集客まで頼めました", "補助金の一部をキャッシュバックします"]
+    ok = ["採択を条件にした割引や特典の提示は、補助金の規程上で問題になります", "2店舗目以降は店舗数に応じた割引を設計します"]
+    check("還元の表現は見つける", [bool([k for k, _ in LC.find(x) if k == "rebate"]) for x in bad], [True] * len(bad))
+    check("注意喚起や補助金と関係の無い割引は止めない", [bool([k for k, _ in LC.find(x) if k == "rebate"]) for x in ok], [False] * len(ok))
