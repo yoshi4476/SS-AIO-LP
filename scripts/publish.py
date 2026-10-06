@@ -1820,6 +1820,13 @@ def main():
     # 「<<<<<<< Updated upstream」が H1 として公開されていた（2026-09-29: 17本）
     if re.search(r"^(<<<<<<< |>>>>>>> |=======\s*$)", body, re.M):
         raise SystemExit(f"{args.slug}: git の衝突マーカーが原稿に残っています。解いてから配信してください")
+    # 当社の採択率・支援社数（根拠の母数・期間が無い）と、当社が申請書類を作成・代行すると読める文は
+    # 配信しない（景品表示法・行政書士法。定型文として約75本に広がっていた 2026-10-07）
+    import legal_claims
+    _legal = legal_claims.find(src.read_text(encoding="utf-8"))
+    if _legal:
+        raise SystemExit(f"{args.slug}: 当社の採択率・支援社数、または申請書類の作成・代行と読める文があります"
+                         f"（{_legal[0][0]}: {_legal[0][1][:60]}）。python scripts/legal_claims.py で確かめて直してください")
     # 一次データを非公開にしている間は、AI集客ラボの /data/ へのリンクを文字に戻す。
     # AI集客ラボのビルドは外しているが、配信先の記事には残り、404へ送っていた（2026-09-29: コーポレート4本）
     try:

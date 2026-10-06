@@ -28,7 +28,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1881",
+     "evidence": "scripts/publish.py:1888",
      "note": "build.py が site/ に書き、デプロイで公開",
      "anchor": "if cfg[\"type\"] == \"self-static\":",
      "anchor_prev": [
@@ -74,10 +74,11 @@
    }
   },
   "quality_gate": {
-   "label": "品質ゲート（90点・観点の足切り・量産の指紋・監修）",
+   "label": "品質ゲート（90点・観点の足切り・量産の指紋・監修・表示の決まり）",
    "entry": [
     "scripts/rubric.py",
     "scripts/scaled_guard.py",
+    "scripts/legal_claims.py",
     "scripts/editorial_review.py",
     "scripts/build.py",
     "scripts/publish.py",
@@ -92,17 +93,17 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1834",
+     "evidence": "scripts/publish.py:1841",
      "anchor": "if not gate_ok(meta):"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1834",
+     "evidence": "scripts/publish.py:1841",
      "anchor": "if not gate_ok(meta):"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1834",
+     "evidence": "scripts/publish.py:1841",
      "anchor": "if not gate_ok(meta):"
     },
     "wordpress": {
@@ -113,12 +114,12 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1834",
+     "evidence": "scripts/publish.py:1841",
      "anchor": "if not gate_ok(meta):"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1834",
+     "evidence": "scripts/publish.py:1841",
      "note": "基準に届かない記事は ZIP を作らない",
      "anchor": "if not gate_ok(meta):"
     }
@@ -969,7 +970,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2383",
+     "evidence": "scripts/build.py:2390",
      "anchor": "n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）"
     },
     "external-md": {
@@ -1158,7 +1159,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})",
      "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
@@ -1212,7 +1213,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})",
      "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
@@ -1263,13 +1264,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1314,13 +1315,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1365,13 +1366,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1387,7 +1388,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2370",
+     "evidence": "scripts/build.py:2377",
      "anchor": "season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）"
     },
     "external-md": {
@@ -1417,13 +1418,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す。検索データ（season.py が data/season/<id>.json に山の月だけ残す）が12か月分そろうまでは作らない（判定前）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1897",
+     "evidence": "scripts/publish.py:1904",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1541,42 +1542,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2366",
+     "evidence": "scripts/build.py:2373",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2366",
+     "evidence": "scripts/build.py:2373",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2366",
+     "evidence": "scripts/build.py:2373",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2366",
+     "evidence": "scripts/build.py:2373",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2366",
+     "evidence": "scripts/build.py:2373",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2366",
+     "evidence": "scripts/build.py:2373",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2366",
+     "evidence": "scripts/build.py:2373",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     }
@@ -1945,42 +1946,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2405",
+     "evidence": "scripts/build.py:2412",
      "anchor": "render_warns = render_check.scan(sorted((ROOT / \"site\").rglob(\"index.html\")))"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1877",
+     "evidence": "scripts/publish.py:1884",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1877",
+     "evidence": "scripts/publish.py:1884",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1877",
+     "evidence": "scripts/publish.py:1884",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1877",
+     "evidence": "scripts/publish.py:1884",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1877",
+     "evidence": "scripts/publish.py:1884",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1877",
+     "evidence": "scripts/publish.py:1884",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     }

@@ -2252,6 +2252,13 @@ def main():
             blocked.append(f"{meta['slug']}: 観点足切り {weak}（各{th}/{full}以上が必要）")
             blocked_metas.append(meta)
             continue
+        # 当社の採択率・支援社数、当社が申請書類を作成・代行すると読める文は公開しない（publish.py と同じ判定）
+        import legal_claims
+        _legal = legal_claims.find(p.read_text(encoding="utf-8"))
+        if _legal:
+            blocked.append(f"{meta['slug']}: 表示の決まりに当たる文（{_legal[0][0]}: {_legal[0][1][:40]}）")
+            blocked_metas.append(meta)
+            continue
         if not title_has_keyword(str(meta.get("title") or ""),
                                  str(meta.get("keyword") or "")):
             QUALITY_ISSUES.setdefault(meta["slug"], []).append(
