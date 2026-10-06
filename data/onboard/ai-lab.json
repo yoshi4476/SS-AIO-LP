@@ -1,0 +1,137 @@
+{
+ "site": "ai-lab",
+ "type": "self-static",
+ "domain": "ai.7senses.co.jp",
+ "at": "2026-10-06 17:29",
+ "generator": "",
+ "ok": true,
+ "requests": 15,
+ "checks": [
+  {
+   "id": "robots_txt",
+   "feature": "robots_txt",
+   "status": "ok",
+   "detail": "AI クローラーを止めていない",
+   "ask": ""
+  },
+  {
+   "id": "sitemap",
+   "feature": "sitemap",
+   "status": "ok",
+   "detail": "記事 144本が載る",
+   "ask": ""
+  },
+  {
+   "id": "llms_txt",
+   "feature": "llms_txt",
+   "status": "ok",
+   "detail": "記事 144本が載る",
+   "ask": ""
+  },
+  {
+   "id": "ld_blogposting",
+   "feature": "ld_blogposting",
+   "status": "ok",
+   "detail": "出ている",
+   "ask": ""
+  },
+  {
+   "id": "ld_faqpage",
+   "feature": "ld_faqpage",
+   "status": "ok",
+   "detail": "出ている",
+   "ask": ""
+  },
+  {
+   "id": "robots_meta",
+   "feature": "search_preview",
+   "status": "ok",
+   "detail": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+   "ask": ""
+  },
+  {
+   "id": "og_image",
+   "feature": "thumbnail_photo",
+   "status": "ok",
+   "detail": "https://ai.7senses.co.jp/images/thumbs/aio-shika.jpg",
+   "ask": ""
+  },
+  {
+   "id": "measure_tag",
+   "feature": "measurement",
+   "status": "ok",
+   "detail": "計測タグあり",
+   "ask": ""
+  },
+  {
+   "id": "sitemap_images",
+   "feature": "search_preview",
+   "status": "ok",
+   "detail": "画像の行あり",
+   "ask": ""
+  },
+  {
+   "id": "video_embed",
+   "feature": "video_embed",
+   "status": "ok",
+   "detail": "koumuten-chumon-jutaku-aio",
+   "ask": ""
+  },
+  {
+   "id": "merge_301",
+   "feature": "merge_redirect",
+   "status": "ok",
+   "detail": "/aio/aio-taisaku-merit-hiyou/ → /aio/aio-taisaku-donyu-hoho/",
+   "ask": ""
+  },
+  {
+   "id": "merge_301",
+   "feature": "merge_redirect",
+   "status": "ok",
+   "detail": "/aio/aio-koka-sokutei-report-hinagata/ → /aio/aio-taisaku-keisoku-houhou/",
+   "ask": ""
+  },
+  {
+   "id": "indexnow_key",
+   "feature": "indexnow",
+   "status": "ok",
+   "detail": "鍵ファイルが返る",
+   "ask": ""
+  },
+  {
+   "id": "bing_auth",
+   "feature": "bing",
+   "status": "ok",
+   "detail": "確認ファイルが返る",
+   "ask": ""
+  },
+  {
+   "id": "agg_compare",
+   "feature": "compare",
+   "status": "ok",
+   "detail": "/compare/",
+   "ask": ""
+  },
+  {
+   "id": "agg_glossary",
+   "feature": "glossary",
+   "status": "ok",
+   "detail": "/glossary/",
+   "ask": ""
+  },
+  {
+   "id": "agg_industry",
+   "feature": "industry_hub",
+   "status": "ok",
+   "detail": "/industry/",
+   "ask": ""
+  },
+  {
+   "id": "agg_topics",
+   "feature": "topics",
+   "status": "ok",
+   "detail": "/topics/",
+   "ask": ""
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "site": "subsidy",
+ "type": "external-html",
+ "domain": "lp.7senses.co.jp",
+ "at": "2026-10-06 17:29",
+ "generator": "",
+ "ok": true,
+ "requests": 13,
+ "checks": [
+  {
+   "id": "robots_txt",
+   "feature": "robots_txt",
+   "status": "ok",
+   "detail": "AI クローラーを止めていない",
+   "ask": ""
+  },
+  {
+   "id": "sitemap",
+   "feature": "sitemap",
+   "status": "ok",
+   "detail": "記事 126本が載る",
+   "ask": ""
+  },
+  {
+   "id": "llms_txt",
+   "feature": "llms_txt",
+   "status": "ok",
+   "detail": "記事 126本が載る",
+   "ask": ""
+  },
+  {
+   "id": "ld_blogposting",
+   "feature": "ld_blogposting",
+   "status": "ok",
+   "detail": "出ている",
+   "ask": ""
+  },
+  {
+   "id": "ld_faqpage",
+   "feature": "ld_faqpage",
+   "status": "ok",
+   "detail": "出ている",
+   "ask": ""
+  },
+  {
+   "id": "robots_meta",
+   "feature": "search_preview",
+   "status": "ok",
+   "detail": "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+   "ask": ""
+  },
+  {
+   "id": "og_image",
+   "feature": "thumbnail_photo",
+   "status": "ok",
+   "detail": "https://lp.7senses.co.jp/images/blog/it-hojokin-joken/thumbnail.webp",
+   "ask": ""
+  },
+  {
+   "id": "measure_tag",
+   "feature": "measurement",
+   "status": "ok",
+   "detail": "計測タグあり",
+   "ask": ""
+  },
+  {
+   "id": "measure_entry",
+   "feature": "measurement",
+   "status": "ok",
+   "detail": "入口と計測のスクリプトが残る",
+   "ask": ""
+  },
+  {
+   "id": "sitemap_images",
+   "feature": "search_preview",
+   "status": "ok",
+   "detail": "画像の行あり",
+   "ask": ""
+  },
+  {
+   "id": "video_embed",
+   "feature": "video_embed",
+   "status": "ok",
+   "detail": "nougyou-shoki-hiyou-hojokin",
+   "ask": ""
+  },
+  {
+   "id": "merge_301",
+   "feature": "merge_redirect",
+   "status": "ok",
+   "detail": "/blog/ai-hojokin-seizougyou-jirei-2026/ → /blog/it-hojokin-seizougyou/",
+   "ask": ""
+  },
+  {
+   "id": "merge_301",
+   "feature": "merge_redirect",
+   "status": "ok",
+   "detail": "/blog/ai-hojokin-nagoya-support/ → /blog/it-hojokin-nagoya/",
+   "ask": ""
+  },
+  {
+   "id": "indexnow_key",
+   "feature": "indexnow",
+   "status": "ok",
+   "detail": "鍵ファイルが返る",
+   "ask": ""
+  },
+  {
+   "id": "agg_compare",
+   "feature": "compare",
+   "status": "skip",
+   "detail": "/compare/ はまだ配っていません（次の配信で置く）",
+   "ask": ""
+  },
+  {
+   "id": "agg_glossary",
+   "feature": "glossary",
+   "status": "skip",
+   "detail": "/glossary/ はまだ配っていません（次の配信で置く）",
+   "ask": ""
+  },
+  {
+   "id": "agg_topics",
+   "feature": "topics",
+   "status": "skip",
+   "detail": "/topics/ はまだ配っていません（次の配信で置く）",
+   "ask": ""
+  }
+ ]
+}

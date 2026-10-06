@@ -1,0 +1,109 @@
+{
+ "site": "corporate",
+ "type": "nextjs-json",
+ "domain": "corp.7senses.co.jp",
+ "at": "2026-10-06 17:29",
+ "generator": "next",
+ "ok": false,
+ "requests": 11,
+ "checks": [
+  {
+   "id": "robots_txt",
+   "feature": "robots_txt",
+   "status": "ok",
+   "detail": "AI クローラーを止めていない",
+   "ask": ""
+  },
+  {
+   "id": "sitemap",
+   "feature": "sitemap",
+   "status": "ok",
+   "detail": "記事 129本が載る",
+   "ask": ""
+  },
+  {
+   "id": "llms_txt",
+   "feature": "llms_txt",
+   "status": "ok",
+   "detail": "記事 129本が載る",
+   "ask": ""
+  },
+  {
+   "id": "ld_blogposting",
+   "feature": "ld_blogposting",
+   "status": "ok",
+   "detail": "出ている",
+   "ask": ""
+  },
+  {
+   "id": "ld_faqpage",
+   "feature": "ld_faqpage",
+   "status": "ok",
+   "detail": "出ている",
+   "ask": ""
+  },
+  {
+   "id": "robots_meta",
+   "feature": "search_preview",
+   "status": "ok",
+   "detail": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+   "ask": ""
+  },
+  {
+   "id": "og_image",
+   "feature": "thumbnail_photo",
+   "status": "ok",
+   "detail": "https://corp.7senses.co.jp/images/blog/getsuji-shihanki-kessan-chigai/eyecatch.p",
+   "ask": ""
+  },
+  {
+   "id": "measure_tag",
+   "feature": "measurement",
+   "status": "ok",
+   "detail": "計測タグあり",
+   "ask": ""
+  },
+  {
+   "id": "sitemap_images",
+   "feature": "search_preview",
+   "status": "ok",
+   "detail": "画像の行あり",
+   "ask": ""
+  },
+  {
+   "id": "video_embed",
+   "feature": "video_embed",
+   "status": "ng",
+   "detail": "動画のある記事に埋め込みが出ていません（seikyusho-template-muryou・CSP は YouTube を許している）",
+   "ask": "記事を配り直す（python scripts/publish_rerender.py --site corporate --push。CSP が止めていた頃に配った JSON には video が無い）。配り直しても出なければ、先方の記事ページで JSON の video（または本文の <iframe>）を描く"
+  },
+  {
+   "id": "indexnow_key",
+   "feature": "indexnow",
+   "status": "ok",
+   "detail": "鍵ファイルが返る",
+   "ask": ""
+  },
+  {
+   "id": "agg_compare",
+   "feature": "compare",
+   "status": "ok",
+   "detail": "/compare/",
+   "ask": ""
+  },
+  {
+   "id": "agg_glossary",
+   "feature": "glossary",
+   "status": "ok",
+   "detail": "/glossary/",
+   "ask": ""
+  },
+  {
+   "id": "agg_topics",
+   "feature": "topics",
+   "status": "ok",
+   "detail": "/topics/",
+   "ask": ""
+  }
+ ]
+}
