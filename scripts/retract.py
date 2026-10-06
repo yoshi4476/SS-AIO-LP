@@ -142,15 +142,35 @@ def main():
                     r["done_at"] = date.today().isoformat()
                 print(f"  [{sid}] 取り下げ完了（{cfg['type']}）")
             continue
-        # WordPress は記事を下書きに戻す（公開から外す）。転送はプラグインが要るので人に知らせる
+        # WordPress: 先方の mu-plugin の転送表に301を足してから、記事を下書きに戻す（公開から外す）。
+        # 転送元・転送先は台帳の組み立てたURLではなく、WordPress の実際のパーマリンクを使う
         if cfg.get("type") == "wordpress":
+            import wp_bridge
             for r in items:
-                found = publish._wp_call(cfg, f"posts?slug={r['slug']}&status=publish&_fields=id")
-                for p in found if isinstance(found, list) else []:
+                found = publish._wp_call(cfg, f"posts?slug={r['slug']}&status=publish&_fields=id,link")
+                found = found if isinstance(found, list) else []
+                src = found[0].get("link") if found else r["from"]
+                survivor = r.get("survivor") or r["to"].rstrip("/").rsplit("/", 1)[-1]
+                dst = wp_bridge.post_link(cfg, survivor) or r["to"]
+                try:
+                    n, rej = wp_bridge.add_redirects(cfg, [(src, dst)])
+                except SystemExit as e:
+                    print(f"  [{sid}] {r['slug']}: 転送を足せません（橋渡しが無い・古い）。次回また試します: {str(e)[:80]}")
+                    continue
+                if not n:
+                    print(f"  [{sid}] {r['slug']}: 転送を受け付けませんでした（{rej}）。次回また試します")
+                    continue
+                for p in found:
                     publish._wp_call(cfg, f"posts/{p['id']}", {"status": "draft"})
                 r["done_at"] = date.today().isoformat()
-                r["note"] = f"下書きに戻した。転送 {r['from']} → {r['to']} は Redirection プラグインで設定が要る"
-                print(f"  [{sid}] {r['slug']}: 下書きに戻しました（転送は管理画面で: {r['from']} → {r['to']}）")
+                r["note"] = f"下書きに戻し、{src} → {dst} を301で送る"
+                print(f"  [{sid}] {r['slug']}: 下書きに戻し、301 {src} → {dst}")
+            # llms.txt から外した記事を消す（静的サイトで llms.txt の行を消すのと同じ）
+            if any(r.get("done_at") for r in items):
+                try:
+                    wp_bridge.push_settings(cfg)
+                except SystemExit:
+                    pass
             continue
         dest = publish.ensure_clone(cfg, publish._push_token())
         for r in items:

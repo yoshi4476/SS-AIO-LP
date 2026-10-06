@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""配信先の公開済み記事を、いまのテンプレート・設定で全部描き直す（external-html・nextjs-json・ftp・zip）。
+"""配信先の公開済み記事を、いまのテンプレート・設定で全部描き直す（external-html・nextjs-json・ftp・zip・WordPress）。
 
 **なぜ要るか**: テンプレートやサイト設定（CTAの文言・導線）を変えても、
 publish_changed は「原稿が変わった記事」しか配信しない。既存の記事は古い
@@ -20,6 +20,36 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+
+
+def rerender_wordpress(cfg, push):
+    """WordPress: 公開済みの記事（先方に公開されている slug）を、いまの描き方で全部送り直す。
+    1本ずつ REST で更新するので、同期・コミットは要らない。公開していない記事は触らない（publish の仕事）"""
+    import publish
+    import wp_bridge
+    live = wp_bridge.url_map(cfg)
+    arts = [(m, b, p) for m, b, p in wp_bridge._site_articles(cfg) if m["slug"] in live]
+    print(f"描き直し {len(arts)}本（WordPress・公開済みのもの）")
+    if not push:
+        print("送っていません（--push で配信）")
+        return 0
+    ng = 0
+    for meta, body, md in arts:
+        try:
+            if not publish.write_wordpress(cfg, meta, body, md, push=True):
+                ng += 1
+        except SystemExit as e:
+            ng += 1
+            print(f"  × {meta['slug']}: {str(e)[:80]}")
+    print(f"送り直し {len(arts) - ng}本 / 失敗 {ng}本")
+    # 業種のまとめ・用語集のページと llms.txt も、いまの記事の並びで作り直す
+    try:
+        for n in wp_bridge.sync_pages(cfg):
+            print(n)
+        wp_bridge.push_settings(cfg)
+    except SystemExit as e:
+        print(f"要対応: {cfg['id']} の橋渡しに届きません（{str(e)[:80]}）")
+    return 1 if ng else 0
 
 
 def main():
@@ -47,10 +77,12 @@ def main():
         print(f"描き直し {len(done)}本（{cfg['type']}）")
         DF.deliver_batch(cfg, written, base, a.push, "描き直し")
         return
+    if cfg["type"] == "wordpress":
+        return rerender_wordpress(cfg, a.push)
     # Next.js の社も、本文HTML込みのJSONを描いて置く方式なので、描き方（監修の表示・画像の置き場）を
     # 変えたら描き直しが要る。external-html だけを扱っていたため、変えても既存記事に届かなかった
     if cfg["type"] not in ("external-html", "nextjs-json"):
-        raise SystemExit(f"{a.site} は {cfg['type']}。この道具は external-html・nextjs-json・ftp・zip を扱います")
+        raise SystemExit(f"{a.site} は {cfg['type']}。この道具は external-html・nextjs-json・ftp・zip・WordPress を扱います")
     nextjs = cfg["type"] == "nextjs-json"
     token = publish._push_token()
     dest = (publish.WORK / cfg["id"]) if a.no_sync else publish.ensure_clone(cfg, token)
