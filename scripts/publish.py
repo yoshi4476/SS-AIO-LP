@@ -33,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import md2html  # noqa: E402
 import deliver_files  # noqa: E402
 import render_check  # noqa: E402
+import site_files  # noqa: E402
 import sites as sites_mod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1867,7 +1868,9 @@ def main():
     # Git を使わない配信先（レンタルサーバーの FTP・ZIP 納品）も、書き出しは external-html と同じ
     if cfg["type"] in deliver_files.TYPES:
         base = deliver_files.stage(cfg)
+        placed = site_files.ensure(cfg, base, base / "blog")
         written, chars = write_external_html(deliver_files.stage_cfg(cfg), base, meta, body, src)
+        written += [p for p in placed if p not in written]
         written.append(stamp_manifest(cfg, base, meta, src))
         written += search_files(cfg, base)
         agg, keep = aggregate_for_files(cfg, base, {meta["slug"]})
@@ -1880,6 +1883,9 @@ def main():
 
     token = _push_token()
     dest = dest or ensure_clone(cfg, token)
+    # 直下の llms.txt・robots.txt（と静的サイトの sitemap.xml）が無ければ作り、AI クローラーを塞いでいれば直す。
+    # 書き出しより先に置く（記事の行は書き出しが既にあるファイルへ足すため）
+    placed = site_files.ensure(cfg, dest, dest / page_dir(cfg))
 
     if cfg["type"] == "nextjs-json":
         written, chars = write_nextjs_json(cfg, dest, meta, body)
@@ -1892,7 +1898,7 @@ def main():
     written += aggregate_for_git(cfg, dest, {meta["slug"]})
 
     written.append(stamp_manifest(cfg, dest, meta, src))
-    written += search_files(cfg, dest)
+    written += search_files(cfg, dest) + [p for p in placed if p not in written]
 
     print(f"配信先: {cfg['name']}（{cfg['repo']} / {cfg['branch']}）")
     for w in written:

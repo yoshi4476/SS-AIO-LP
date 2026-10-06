@@ -33,12 +33,9 @@ def save(rows):
 
 
 def redirects_file(cfg, dest: Path):
-    """_redirects の置き場。Next.js の静的書き出しは public/ 配下、静的サイトは直下"""
-    import publish
-    f = publish._public_file(dest, "_redirects")
-    if f:
-        return f
-    return dest / ("public" if (cfg.get("images_dir") or "").startswith("public/") else "") / "_redirects"
+    """_redirects の置き場。Next.js の静的書き出しは public/ 配下、静的サイトは直下（中身は site_files に1か所）"""
+    import site_files
+    return site_files.redirects_file(cfg, dest)
 
 
 def apply(row, cfg, dest: Path):
@@ -76,14 +73,14 @@ def apply(row, cfg, dest: Path):
         keep = [x for x in lt.read_text(encoding="utf-8").splitlines() if row["from"] not in x]
         if len(keep) != len(lt.read_text(encoding="utf-8").splitlines()):
             lt.write_text("\n".join(keep) + "\n", encoding="utf-8", newline="\n"); touched.append("llms.txt")
-    rd = redirects_file(cfg, dest)
-    line = f"{row['from']} {row['to']} 301"
-    cur = rd.read_text(encoding="utf-8") if rd.is_file() else "# Cloudflare Pages のリダイレクト定義\n"
-    if line not in cur:
-        rd.parent.mkdir(parents=True, exist_ok=True)
-        rd.write_text(cur.rstrip("\n") + f"\n# {row.get('reason', '取り下げ')}（{row['at']}）\n{line}\n",
-                      encoding="utf-8", newline="\n")
-        touched.append(str(rd.relative_to(dest)))
+    # 転送は配信先のホストが読む形で書く（Cloudflare Pages の _redirects・Vercel の vercel.json・Netlify の
+    # netlify.toml・Apache の .htaccess）。_redirects だけだと Cloudflare 以外の配信先では転送が効かなかった。
+    # FTP・ZIP の社は deliver_files.retract が .htaccess に書く（ここは作業場所の索引を直すだけ）
+    import site_files
+    if cfg.get("type") not in ("ftp", "zip"):
+        rd = site_files.add_redirect(cfg, dest, row["from"], row["to"], f"{row.get('reason', '取り下げ')}（{row['at']}）")
+        if rd:
+            touched.append(str(rd.relative_to(dest)))
     del S
     return touched
 

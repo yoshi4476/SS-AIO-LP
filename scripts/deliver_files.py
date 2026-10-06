@@ -59,30 +59,41 @@ def stage(cfg):
         f = d / "blog" / slug / "index.html"
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text(f'<h1>{r["title"]}</h1>"datePublished": "{r.get("date", "")}"', encoding="utf-8")
-    # 公開中の索引を読んで足す（無いものは作らない＝ _update_external_index と同じ扱い）。
+    # 公開中の索引を読んで足す。無いもの（llms.txt・robots.txt・sitemap.xml）は publish.py が site_files.ensure で作る。
     # FTP の社は上げる先のサーバーから直接読む。HTTPS だけで読んでいたため、公開前のドメイン・
     # ボット除けのあるサーバーでは sitemap と llms.txt に記事が1本も載らなかった
+    import site_files
+    names = ("sitemap.xml", "llms.txt", "article-manifest.json", "robots.txt")
     got = {}
     if cfg.get("type") == "ftp":
         try:
             with Remote(credentials(cfg)) as r:
-                for name in ("sitemap.xml", "llms.txt", "article-manifest.json"):
+                for name in names:
                     b = r.get(name)
-                    if b is not None:
+                    if b is not None and site_files.valid(name, b):
                         got[name] = b
         except (SystemExit, OSError, ftplib.Error) as e:
             print(f"  FTP から索引を読めませんでした（{type(e).__name__}）。公開URLから読みます")
     for name, b in got.items():
         (d / name).write_bytes(b)
-    for name in ("sitemap.xml", "llms.txt", "article-manifest.json"):
+    for name in names:
         if name in got:
             continue
         try:
             req = urllib.request.Request(f"{origin}/{name}", headers={"User-Agent": "Mozilla/5.0 SS-AIO-Pipeline"})
             with urllib.request.urlopen(req, timeout=20) as r:
-                (d / name).write_bytes(r.read())
+                b = r.read()
         except Exception:
-            pass
+            continue
+        # 無いページを 200 で返すサーバーでは HTML が届く。それを sitemap.xml として上げると先方の索引を壊す
+        if not site_files.valid(name, b):
+            continue
+        if name == "robots.txt":
+            # サーバーのファイルとして取れなかった robots.txt は写さない（CMS・CDN が作っているか、確かめられない）。
+            # 写して上げると、作る側の設定（Cloudflare の管理された robots.txt 等）を実ファイルで固めてしまう
+            (d / "_robots_dynamic").write_text("1", encoding="utf-8")
+            continue
+        (d / name).write_bytes(b)
     keep_delivered(cfg, d)
     return d
 
