@@ -1816,7 +1816,8 @@
      "status": "partial",
      "evidence": "scripts/site_change.py:257",
      "need": "固定ページ・メニュー・テンプレート・配色は REST で変えられる。テーマの PHP は FTP の接続情報がある社だけ、--pull が有効なテーマを theme/ に取り、--push が FTP で戻す（取った後に先方で変わったファイルは上書きしない）。ヒアリングシートは WordPress の社に FTP の接続情報を聞いていない（client_intake.py。最初の接続の点検で聞けば ok になる）",
-     "anchor": "def wp_push(cfg, ch):"
+     "anchor": "def wp_push(cfg, ch):",
+     "note": "onboard_check で確かめる（FTP の接続情報があり、テーマの速度・構成も自動で直せる）"
     },
     "ftp": {
      "status": "ok",
@@ -1867,7 +1868,7 @@
      "status": "partial",
      "evidence": "automation/wordpress/ss-quality-gate.php:355",
      "anchor": "function ssb_speed_on()",
-     "note": "先方の mu-plugin（2.0.2〜）がフィルターで直す: 本文の画像に loading=lazy・アイキャッチに fetchpriority=high・gtag.js を load の1.2秒後に読む・日本語の Web フォント（Google Fonts）の CSS を読まない。wp-config.php の SSB_SPEED / SSB_KEEP_WEBFONTS で止められる",
+     "note": "先方の mu-plugin（2.0.2〜）がフィルターで直す: 本文の画像に loading=lazy・アイキャッチに fetchpriority=high・gtag.js を load の1.2秒後に読む・日本語の Web フォント（Google Fonts）の CSS を読まない。wp-config.php の SSB_SPEED / SSB_KEEP_WEBFONTS で止められる。onboard_check で確かめる（FTP の接続情報があり、テーマの速度・構成も自動で直せる）",
      "need": "テーマの PHP に直書きされたフォント・計測タグは、FTP の接続情報がある社だけ週次の speed_fix --auto が直す（PHP の外の HTML だけ・直した後にトップが返らなければ戻す）。ヒアリングシートは WordPress の社に FTP の接続情報を聞いていない（client_intake.py。最初の接続の点検で聞けば ok になる）"
     },
     "ftp": {

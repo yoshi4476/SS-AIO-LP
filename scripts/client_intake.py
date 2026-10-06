@@ -53,7 +53,8 @@ FIELDS = [
     ("repo", "配信先リポジトリ", "owner/repo の形式。自社ビルドなら空欄", "example/media-site", False),
     ("branch", "ブランチ", "通常は main", "main", False),
     ("type", "サイトの形式",
-     "WordPressをお使いなら wordpress。当社で新規構築するなら self-static。"
+     "WordPressをお使いなら wordpress（あわせて FTP の接続情報もいただくと、テーマ由来の表示速度とサイト構成の変更まで当社が自動で行います）。"
+     "当社で新規構築するなら self-static。"
      "既存の静的サイトへ配信する場合は external-html / external-md / nextjs-json。"
      "Git を使わないレンタルサーバー（FTP で上げているサイト）なら ftp（FTP の接続情報を1回いただきます）。"
      "どの形式でも、最初の接続の後は御社の作業はありません（ZIP で受け取る形式は受け付けていません）",

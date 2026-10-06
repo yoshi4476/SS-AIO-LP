@@ -69,6 +69,8 @@ CHECKS = {
     "video_embed": (("video_embed",), ALL, "動画のある記事に埋め込みが出て、CSP が YouTube を止めていない"),
     "merge_301": (("merge_redirect",), ALL, "統合した記事の旧URLが301で残す記事へ飛ぶ"),
     "wp_bridge": (("quality_gate",), ("wordpress",), "橋渡し（mu-plugin）の版と自己更新"),
+    # テーマ（PHP）由来の表示速度とサイト構成の変更は、FTP の接続情報がある社だけ自動で直せる
+    "wp_ftp": (("speed_fix", "site_change"), ("wordpress",), "FTP の接続情報があり、テーマの速度・構成も自動で直せる"),
 }
 AGG_CHECK = {"compare": "agg_compare", "topics": "agg_topics", "area": "agg_area", "season": "agg_season",
              "industry": "agg_industry", "glossary": "agg_glossary", "i18n": "agg_i18n", "i18n_index": "agg_i18n"}
@@ -593,6 +595,10 @@ def run_site(cfg, hints=None, today=None):
             except Exception as e:
                 bad = [f"要対応: 橋渡しを確かめられません（{type(e).__name__}）"]
         add("wp_bridge", "ng" if bad else "ok", "；".join(re.sub(r"^要対応:\s*", "", b) for b in bad)[:200] or "最新")
+        import speed_fix
+        has = speed_fix.has_ftp(cfg)
+        add("wp_ftp", "ok" if has else "ng",
+            "FTP の接続情報あり" if has else "FTP の接続情報が無く、テーマ由来の速度・構成は自動で直せません")
     return {"site": cfg["id"], "checks": res, "reached": ctx.reached, "requests": ctx.used, "generator": gen[0]}
 
 
