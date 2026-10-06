@@ -467,7 +467,8 @@
      "status": "partial",
      "evidence": "scripts/site_files.py:147",
      "need": "静的な sitemap.xml がある社には記事を足す。サイトマップを先方のビルド（Next.js の sitemap.ts・Hugo・Astro 等）が作る方式で、無い社に置くと二重になるので作らない（先方の作り次第）",
-     "anchor": "def ensure(cfg, dest, pages=None, write=True):"
+     "anchor": "def ensure(cfg, dest, pages=None, write=True):",
+     "note": "onboard_check で確かめる（sitemap.xml が開けて、本番で開ける記事が全部載る）"
     },
     "external-html": {
      "status": "ok",
@@ -479,7 +480,8 @@
      "status": "partial",
      "evidence": "scripts/site_files.py:147",
      "need": "静的な sitemap.xml がある社には記事を足す。サイトマップを先方のビルド（Next.js の sitemap.ts・Hugo・Astro 等）が作る方式で、無い社に置くと二重になるので作らない（先方の作り次第）",
-     "anchor": "def ensure(cfg, dest, pages=None, write=True):"
+     "anchor": "def ensure(cfg, dest, pages=None, write=True):",
+     "note": "onboard_check で確かめる（sitemap.xml が開けて、本番で開ける記事が全部載る）"
     },
     "wordpress": {
      "status": "ok",
@@ -571,7 +573,8 @@
      "status": "partial",
      "evidence": "scripts/site_files.py:70",
      "need": "公開フォルダの robots.txt なら配信のたびに直す（site_files.ensure）。robots をコード（Next.js の app/robots.ts・Hugo の layouts/robots.txt 等）で作る社は、置くと二重になるので直さず知らせるだけ（先方の作り次第。コーポレートは robots.ts）",
-     "anchor": "def fix_robots(text, paths=(\"/\",)):"
+     "anchor": "def fix_robots(text, paths=(\"/\",)):",
+     "note": "onboard_check で確かめる（robots.txt が AI クローラーを止めていない）"
     },
     "external-html": {
      "status": "ok",
@@ -583,7 +586,8 @@
      "status": "partial",
      "evidence": "scripts/site_files.py:70",
      "need": "公開フォルダの robots.txt なら配信のたびに直す（site_files.ensure）。robots をコード（Next.js の app/robots.ts・Hugo の layouts/robots.txt 等）で作る社は、置くと二重になるので直さず知らせるだけ（先方の作り次第。コーポレートは robots.ts）",
-     "anchor": "def fix_robots(text, paths=(\"/\",)):"
+     "anchor": "def fix_robots(text, paths=(\"/\",)):",
+     "note": "onboard_check で確かめる（robots.txt が AI クローラーを止めていない）"
     },
     "wordpress": {
      "status": "partial",
@@ -1996,19 +2000,19 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:218",
+     "evidence": "scripts/publish_gap.py:234",
      "note": "配信した原稿の指紋（article-manifest.json）と本番を突き合わせ、足りなければ配信し直す",
-     "anchor": "man = None if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
+     "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:218",
-     "anchor": "man = None if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
+     "evidence": "scripts/publish_gap.py:234",
+     "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:218",
-     "anchor": "man = None if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
+     "evidence": "scripts/publish_gap.py:234",
+     "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "wordpress": {
      "status": "ok",
@@ -2018,8 +2022,8 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:218",
-     "anchor": "man = None if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
+     "evidence": "scripts/publish_gap.py:234",
+     "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "zip": {
      "status": "n/a",
