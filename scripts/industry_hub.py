@@ -187,8 +187,12 @@ def tool_link(ind):
             f'口コミへの返信案をその場で作る（無料ツール・登録不要）</a></p>')
 
 
-def hub_body(ind, metas, categories, post_tile):
-    """業種ハブの中身。手法ごとに区切る（読者は自分に必要な手法から入る）"""
+def hub_body(ind, metas, categories, post_tile, cat_url=None, extras=True):
+    """業種ハブの中身。手法ごとに区切る（読者は自分に必要な手法から入る）。
+
+    cat_url: カテゴリ一覧のURL（既定は /<カテゴリ>/。WordPress は /category/<カテゴリ>/ などになる）。
+    extras=False: AI集客ラボにしか無い LP・調査・ツールへの案内を出さない（お客様の WordPress で404になる）"""
+    cat_url = cat_url or (lambda c: f"/{c}/")
     import html as _h
     pairs = faq_pairs(metas)
     nq = len(pairs)
@@ -205,15 +209,16 @@ def hub_body(ind, metas, categories, post_tile):
     blocks = [f'<div class="latest-block" data-cat="new">'
               f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の記事</h2>'
               f'<span class="cnt">全{len(metas)}本</span></div>'
-              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}{lp_link(ind)}{research_link(ind)}{tool_link(ind)}</div>']
+              f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}'
+              + (f'{lp_link(ind)}{research_link(ind)}{tool_link(ind)}' if extras else "") + '</div>']
     for cat, (name, cls) in categories.items():
         part = [m for m in metas if m["category"] == cat]
         if not part:
             continue
+        more = f'<a class="more" href="{cat_url(cat)}">このカテゴリを見る →</a>' if cat_url(cat) else ""
         blocks.append(f'<div class="latest-block {cls}" data-cat="{cat}">'
                       f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の{_h.escape(name)}</h2>'
-                      f'<span class="cnt">{len(part)}本</span>'
-                      f'<a class="more" href="/{cat}/">このカテゴリを見る →</a></div>'
+                      f'<span class="cnt">{len(part)}本</span>{more}</div>'
                       f'<ul class="post-list">\n{_tiles(part, post_tile)}\n</ul></div>')
     return "\n".join(blocks)
 

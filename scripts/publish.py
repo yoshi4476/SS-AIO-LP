@@ -980,10 +980,17 @@ def _wp_api(cfg):
     return base.rstrip("/")
 
 
+def _wp_root(cfg):
+    """REST の根（…/wp-json）。橋渡しのプラグインの ss/v1 はここから引く"""
+    api = _wp_api(cfg)
+    return api[:-len("/wp/v2")] if api.endswith("/wp/v2") else api.rsplit("/wp/v2", 1)[0]
+
+
 def _wp_call(cfg, path, data=None, method=None, headers=None, raw=None):
+    """path が / で始まれば REST の根から（例: /ss/v1/urls）、それ以外は wp/v2 から引く"""
     import urllib.error
     import urllib.request
-    url = f"{_wp_api(cfg)}/{path.lstrip('/')}"
+    url = f"{_wp_root(cfg) if path.startswith('/') else _wp_api(cfg)}/{path.lstrip('/')}"
     h = dict(_wp_auth(cfg))
     if headers:
         h.update(headers)
@@ -1011,28 +1018,110 @@ def _wp_term(cfg, slug, name, taxonomy="categories"):
 
 
 def _wp_media(cfg, path: Path, alt="", slug=""):
-    """アイキャッチを上げてIDを返す。同じ記事のものが既にあれば使い回す
+    """アイキャッチを上げてIDを返す。同じ記事のものが既にあれば使い回す"""
+    return _wp_media_info(cfg, path, alt, slug).get("id", 0)
+
+
+WP_MEDIA_TYPES = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp",
+                  ".gif": "image/gif"}
+
+
+def _wp_media_info(cfg, path: Path, alt="", slug=""):
+    """画像を上げて {id, url} を返す。同じ記事のものが既にあれば使い回す
 
     記事の画像はどれも eyecatch.png という同じ名前で作られる。
     そのまま上げると、検索で別の記事の画像を拾ってしまう。
     記事のスラッグを付けて、記事ごとに別のファイル名にする。
     """
-    if not path.is_file():
-        return 0
+    if not path.is_file() or path.suffix.lower() not in WP_MEDIA_TYPES:
+        return {}
     name = f"{slug}-{path.name}" if slug else path.name
-    want = Path(name).stem
+    # WordPress は添付の slug を小文字・英数とハイフンにする（ドットや _ は - に変わる）
+    want = re.sub(r"[^a-z0-9-]+", "-", Path(name).stem.lower()).strip("-")
     found = _wp_call(cfg, f"media?search={want}&per_page=5")
     if isinstance(found, list):
         for m in found:
             if m.get("slug") == want:
-                return m["id"]
-    kind = "image/png" if path.suffix.lower() == ".png" else "image/jpeg"
+                return {"id": m["id"], "url": m.get("source_url", "")}
     res = _wp_call(cfg, "media", raw=path.read_bytes(), method="POST",
-                   headers={"Content-Type": kind,
+                   headers={"Content-Type": WP_MEDIA_TYPES[path.suffix.lower()],
                             "Content-Disposition": f'attachment; filename="{name}"'})
     if alt and res.get("id"):
         _wp_call(cfg, f"media/{res['id']}", {"alt_text": alt}, method="POST")
-    return res.get("id", 0)
+    return {"id": res.get("id", 0), "url": res.get("source_url", "")}
+
+
+def _wp_body_images(cfg, html, slug):
+    """本文の画像（/images/… を指すもの）を WordPress のメディアに上げ、src をその URL に置き換える。
+    アイキャッチしか上げていなかったため、WordPress の記事では図解が全部404になっていた"""
+    done = {}
+    for src in dict.fromkeys(re.findall(r'<img[^>]+src="(/images/[^"]+)"', html)):
+        p = ROOT / "site" / src.lstrip("/")
+        info = _wp_media_info(cfg, p, slug=slug if f"/images/{slug}/" in src else "")
+        if info.get("url"):
+            done[src] = info["url"]
+        else:
+            print(f"  [警告] 本文の画像を上げられませんでした: {src}")
+    for a, b in done.items():
+        html = html.replace(f'src="{a}"', f'src="{b}"')
+    return html, len(done)
+
+
+def _wp_jsonld(cfg, meta, base, url, html, image=""):
+    """WordPress の記事の構造化データ。(BlogPosting, そのほかの実体の配列)。
+
+    base はお客様の記事の BlogPosting（credit_ld。著者・発行元・監修者つき）。
+    BlogPosting は投稿メタ _ss_jsonld、FAQPage は _ss_jsonld_extra に入れ、先方の mu-plugin が wp_head で出す。
+    自社の WordPress（お客様でない）では base が無く、以前は構造化データが空だった"""
+    if base:
+        ld = dict(base)
+    else:
+        org = {"@type": "Organization", "name": cfg.get("name", ""), "url": f"https://{cfg['domain']}/"}
+        ld = {"@context": "https://schema.org", "@type": "BlogPosting", "@id": url + "#article",
+              "headline": meta["title"], "mainEntityOfPage": url, "author": dict(org), "publisher": org}
+        # 著者の実在（Person + sameAs）。運用会社の自社サイトだけ（お客様の記事の著者は先方の人）
+        try:
+            ap = json.loads((ROOT / "data" / "author_profile.json").read_text(encoding="utf-8"))
+            if ap.get("same_as"):
+                ld["author"] = {"@type": "Person", "name": "原口 優",
+                                "@id": "https://ai.7senses.co.jp/author/haraguchi/#person",
+                                "url": "https://ai.7senses.co.jp/author/haraguchi/",
+                                "jobTitle": "セブンセンシズ株式会社 代表取締役", "sameAs": ap["same_as"]}
+        except (OSError, ValueError):
+            pass
+    ld["description"] = meta.get("description", "")
+    if meta.get("date"):
+        ld.update({"datePublished": str(meta["date"]), "dateModified": str(meta.get("modified") or meta["date"])})
+    if image:
+        ld["image"] = image
+    try:
+        import entities
+        about, mentions = entities.about_and_mentions(f"{meta['title']} {meta.get('keyword', '')}",
+                                                      md2html.plain_text(html))
+        if about:
+            ld["about"] = about
+        if mentions:
+            ld["mentions"] = mentions
+    except Exception:
+        pass
+    try:
+        import video_embed
+        rec = video_embed.info(meta.get("slug", ""))
+        if rec:
+            m = re.search(r'<script type="application/ld\+json">(.*?)</script>', video_embed.block(meta), re.S)
+            if m:
+                v = json.loads(m.group(1))
+                v.pop("@context", None)
+                ld["video"] = v
+    except Exception:
+        pass
+    extra = []
+    faqs = [f for f in (meta.get("faq") or []) if f.get("q") and f.get("a")]
+    if faqs:
+        extra.append({"@context": "https://schema.org", "@type": "FAQPage",
+                      "mainEntity": [{"@type": "Question", "name": str(f["q"]),
+                                      "acceptedAnswer": {"@type": "Answer", "text": str(f["a"])}} for f in faqs]})
+    return ld, extra
 
 
 def write_wordpress(cfg, meta, body, src: Path, push=False):
@@ -1043,27 +1132,57 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     二重に見るのは、配信側だけの検査では管理画面からの投稿を止められないため。
     """
     import md2html
+    import wp_bridge
     html, _ = md2html.convert(body)
-    html = insert_mid_cta(html, cfg)
+    # 公開URLの一覧（パーマリンク）。本文の内部リンクを実際のURLへ直すのと、構造化データの URL に使う
+    rows = wp_bridge.url_rows(cfg, fallback=False)
+    html = wp_bridge.rewrite_links(html, rows)
+    # 入口・導線は他の配信方式と同じ関数で入れる。入口の塊の計測スクリプトは外す:
+    # 投稿者に unfiltered_html が無いと消され、計測は先方の mu-plugin（wp_footer）が同じ名前で送る
+    html = insert_mid_cta(insert_inline_entry(html, cfg), cfg)
+    html = re.sub(r"<script>\(function\(\)\{var b=document\.currentScript.*?</script>", "", html, flags=re.S)
+    # 記事の動画は URL を1行で置く（WordPress が埋め込みに変える）。iframe は投稿者の権限によっては消される
+    try:
+        import video_embed
+        rec = video_embed.info(meta["slug"])
+        if rec:
+            html = f'\n<p>https://www.youtube.com/watch?v={rec["youtube"]}</p>\n' + html
+    except Exception as e:
+        print(f"  [警告] 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
+    # 同じ業種のまとめ（管制塔が作る固定ページ）があれば、記事の末尾から案内する
+    try:
+        import industry_hub as IH
+        ind = IH.detect(meta.get("title", ""), meta.get("keyword", ""))
+        hub = next((r["url"] for r in rows if r.get("managed")
+                    and r["url"].rstrip("/").endswith(f"/{wp_bridge.HUB_PARENT[0]}/{ind}")), "") if ind else ""
+        if hub:
+            name = next(i["name"] for i in IH.load()[0] if i["slug"] == ind)
+            html += f'\n<p class="ss-industry"><a href="{hub}" data-cta="article_industry_hub">{name}の記事をまとめて見る</a></p>\n'
+    except Exception:
+        pass
+    ensure_images(meta)
+    html, n_img = _wp_body_images(cfg, html, meta["slug"])
     # 監修の表示はテーマに欄が無くても出るよう本文に入れる。構造化データは本文に入れない:
     # 投稿ユーザーに unfiltered_html が無いと <script> が除去される。投稿メタ _ss_jsonld に入れ、
     # 先方の mu-plugin（ss-quality-gate.php）が wp_head で出す
     chars = len(re.sub(r"<[^>]+>|\s", "", html))
     credit = client_credit(cfg)
-    jsonld = ""
-    if credit:
-        html = (credit["byline"] + "\n" if credit["byline"] else "") + html
-        jsonld = json.dumps(credit_ld(credit, sites_mod.article_url(cfg, meta), meta), ensure_ascii=False)
+    if credit and credit["byline"]:
+        html = credit["byline"] + "\n" + html
     score = int(meta.get("score") or 0)
 
     cat_slug = meta["category"]
     cat_id = _wp_term(cfg, cat_slug, cfg["categories"].get(cat_slug, cat_slug))
 
-    thumb = 0
+    thumb, thumb_url = 0, ""
     eye = meta.get("eyecatch") or ""
     if eye:
-        p = ROOT / "site" / eye.lstrip("/")
-        thumb = _wp_media(cfg, p, meta.get("title", ""), meta["slug"])
+        info = _wp_media_info(cfg, ROOT / "site" / eye.lstrip("/"), meta.get("title", ""), meta["slug"])
+        thumb, thumb_url = info.get("id", 0), info.get("url", "")
+
+    url = wp_bridge.url_map(cfg, rows).get(meta["slug"]) or sites_mod.article_url(cfg, meta)
+    ld, extra = _wp_jsonld(cfg, meta, credit_ld(credit, url, meta) if credit else None, url, html, thumb_url)
+    jsonld = json.dumps(ld, ensure_ascii=False)
 
     # --push が付くまでは下書きで入れる。他の形式が「書き込むがpushしない」
     # のと揃える。ここを publish 固定にすると、確認のつもりの実行で公開される
@@ -1072,7 +1191,8 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
         "excerpt": meta.get("description", ""),
         "status": "publish" if push else "draft",
         "categories": [cat_id],
-        "meta": {"_ss_quality_score": score, "_ss_written_by": "agent", "_ss_jsonld": jsonld},
+        "meta": {"_ss_quality_score": score, "_ss_written_by": "agent", "_ss_jsonld": jsonld,
+                 "_ss_jsonld_extra": json.dumps(extra, ensure_ascii=False) if extra else ""},
     }
     if thumb:
         payload["featured_media"] = thumb
@@ -1094,9 +1214,13 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
             res = {**res, **after}
     status = res.get("status", "?")
     link = res.get("link", "")
+    # 初めての記事は、投稿するまでパーマリンクが分からない。分かったら構造化データの URL を直す
+    if pid and status == "publish" and link and link != url:
+        ld2, _ = _wp_jsonld(cfg, meta, credit_ld(credit, link, meta) if credit else None, link, html, thumb_url)
+        _wp_call(cfg, f"posts/{pid}", {"meta": {"_ss_jsonld": json.dumps(ld2, ensure_ascii=False)}}, method="POST")
     print(f"配信先: {cfg['name']}（WordPress / {cfg['domain']}）")
     print(f"  {how}: 投稿ID {res.get('id')} / カテゴリ {cat_slug}"
-          + (f" / アイキャッチ {thumb}" if thumb else ""))
+          + (f" / アイキャッチ {thumb}" if thumb else "") + (f" / 本文の画像 {n_img}枚" if n_img else ""))
     print(f"  本文: {chars:,}字 / score {score}")
     m = res.get("meta")
     if jsonld and isinstance(m, dict) and not m.get("_ss_jsonld"):
@@ -1106,6 +1230,14 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
 
     if status == "publish":
         print(f"  公開しました: {link}")
+        # llms.txt・IndexNow の鍵・計測の設定を揃える（静的サイトの _update_external_index に当たる）
+        try:
+            for note in wp_bridge.sync_if_stale(cfg, rows):
+                print(note)
+            wp_bridge.push_settings(cfg)
+        except SystemExit as e:
+            print(f"要対応: {cfg['id']} の橋渡し（llms.txt・計測の設定）に届きません。先方の mu-plugin を "
+                  f"最新に差し替えてください（{str(e)[:80]}）")
     elif not push:
         print(f"  下書きとして入れました（投稿ID {res.get('id')}）")
         print("  ※ --push を付けると公開します")
