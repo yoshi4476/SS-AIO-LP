@@ -198,5 +198,67 @@
     "format": "duo",
     "url": "https://ai.7senses.co.jp/research/biyou-ai-sources/",
     "youtube": "dYnX1eXwC8w"
+  },
+  "shika-hp-chiryou-setsumei-kakikata": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-06",
+      "keyword": "歯科医院 ホームページ 治療説明 書き方",
+      "queries": [
+        "歯科医院 ホームページ 治療説明 書き方",
+        "ホームページ 治療説明 書き方",
+        "歯科医院 治療説明 書き方",
+        "歯科医院 ホームページ 書き方",
+        "歯科医院 ホームページ 治療説明"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "歯科診療報酬",
+        "歯科医院 紹介動画",
+        "医療事務 歯科",
+        "ホームページ作成検定1級",
+        "ホームページ 構成",
+        "ホームページ 変更",
+        "歯科 歯内療法",
+        "歯科医院 治療",
+        "歯科 先生",
+        "歯内療法"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-06",
+      "sec": 51,
+      "title": "歯科医院のHP、治療説明は何を書く？",
+      "youtube": "iHSGUdnWSD4"
+    }
+  },
+  "keiri-kanji-chigai": {
+    "site": "corporate",
+    "date": "2026-10-06",
+    "sec": 271,
+    "mp4": "automation/video/keiri-kanji-chigai.mp4",
+    "nums": [
+      "10",
+      "2",
+      "2026",
+      "3"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-10-06",
+      "keyword": "計理 経理 違い",
+      "queries": [
+        "計理 経理 違い",
+        "経理 違い",
+        "計理 違い",
+        "計理 経理"
+      ],
+      "decision": "make",
+      "term": "財務 経理 違い",
+      "title": "財務 経理 違いは？｜保険の計理人・旧計理士と取り違えない3つの場面",
+      "reason": "YouTube のサジェストに「財務 経理 違い」が出ます"
+    },
+    "youtube": "-fUhQeHt8ss"
   }
 }
