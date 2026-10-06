@@ -127,9 +127,18 @@ def verify(site_id, slug, since_iso=None, build_timeout=BUILD_TIMEOUT, live_time
     # ZIP は先方が上げるまで公開されない。待っても確かめられないので、作れたことだけ返す
     if cfg["type"] == "zip":
         return True, ["ZIP を作りました（公開は先方が上げた後）"]
+    # WordPress は配信先のビルドが無く、URL はパーマリンク設定が決める。組み立てたURLではなく先方の REST が返す
+    # リンクで確かめる（repo が無いので、ビルド待ちに進むと KeyError で止まり台帳が「公開済み」にならなかった）
+    if cfg["type"] == "wordpress":
+        import wp_bridge
+        link = wp_bridge.post_link(cfg, slug)
+        if not link:
+            return False, [f"WordPress に公開済みの記事がありません（slug: {slug}）"]
+        ok, m = wait_live(link, live_timeout, _front(slug, 'title'))
+        return ok, [m]
     # FTP は上げた時点で公開される（相手のビルドが無い）
-    if cfg["type"] not in ("self-static", "ftp"):
-        ok, m = wait_build(cfg["repo"], cfg["branch"], since, build_timeout)
+    if cfg["type"] not in ("self-static", "ftp") and cfg.get("repo"):
+        ok, m = wait_build(cfg["repo"], cfg.get("branch", "main"), since, build_timeout)
         msgs.append(m)
         if not ok:
             return False, msgs

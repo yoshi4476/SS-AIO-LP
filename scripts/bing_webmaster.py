@@ -30,11 +30,9 @@ Bing の索引を使うため、自社サイトの本番 sitemap のうち一度
   エラー    https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.apierrorcode
   鍵の発行  https://learn.microsoft.com/en-us/bingwebmaster/getting-access
 """
-import html
 import json
 import math
 import os
-import re
 import sys
 import urllib.error
 import urllib.parse
@@ -231,17 +229,10 @@ def send_urls(urls, sitemap=False):
 
 
 def sitemap_entries(domain):
-    """本番の sitemap の (URL, lastmod)。手元の site/ ではなく本番を読むのは、Bing が取りに行くのも本番だから"""
-    req = urllib.request.Request(f"https://{domain}/sitemap.xml", headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        xml = r.read().decode("utf-8", "ignore")
-    out = []
-    for block in re.findall(r"<url>(.*?)</url>", xml, re.S):
-        loc = re.search(r"<loc>\s*(.*?)\s*</loc>", block, re.S)
-        mod = re.search(r"<lastmod>\s*(.*?)\s*</lastmod>", block, re.S)
-        if loc:
-            out.append((html.unescape(loc.group(1)), mod.group(1)[:10] if mod else ""))
-    return out
+    """本番の sitemap の (URL, lastmod)。手元の site/ ではなく本番を読むのは、Bing が取りに行くのも本番だから。
+    索引形式（WordPress の /wp-sitemap.xml 等）は子まで辿る（平らに読むと子の sitemap のURLを記事として送っていた）"""
+    import wp_bridge
+    return wp_bridge.sitemap_entries(domain)
 
 
 def load_backfill():

@@ -259,11 +259,16 @@ def external(pages, cap=400):
     return out
 
 
-def live(domain, limit):
-    st, sm, _ = _get(f"https://{domain}/sitemap.xml")
-    if st != 200:
-        raise RuntimeError(f"sitemap を読めません（{st}）")
-    urls = re.findall(r"<loc>(.*?)</loc>", sm)[:limit]
+def live(domain, limit, cfg=None):
+    if cfg and cfg.get("type") == "wordpress":
+        # WordPress の sitemap は索引形式。平らに読むと子の sitemap（XML）をページとして監査していた
+        import wp_bridge
+        urls = wp_bridge.site_urls(cfg)[:limit]
+    else:
+        st, sm, _ = _get(f"https://{domain}/sitemap.xml")
+        if st != 200:
+            raise RuntimeError(f"sitemap を読めません（{st}）")
+        urls = re.findall(r"<loc>(.*?)</loc>", sm)[:limit]
     import concurrent.futures as cf
     pages = {}
 
@@ -343,7 +348,7 @@ def main():
             if not dom:
                 continue
             try:
-                rows, pages = live(dom, a.limit)
+                rows, pages = live(dom, a.limit, cfgs[sid])
                 if a.external:
                     rows += external(pages)
                 bad += report(f"{cfgs[sid].get('name', sid)}（本番）", rows)

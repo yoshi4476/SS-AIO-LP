@@ -162,7 +162,8 @@ def check_live(todo, by_site):
             if not _is_published(a):        # 監修待ちはまだ公開されていないので、404 は正常
                 continue
             meta = {"slug": a["slug"], "category": a.get("category", "")}
-            url = sites_mod.article_url(cfgs[sid], meta)
+            import wp_bridge     # WordPress はパーマリンク設定が決めたURLで確かめる
+            url = wp_bridge.article_url(cfgs[sid], meta)
             checked += 1
             try:
                 r = urllib.request.urlopen(

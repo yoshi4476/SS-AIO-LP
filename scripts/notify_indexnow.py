@@ -104,10 +104,22 @@ def main(argv=None):
     sent = 0
     for sid, cfg in S.load_all().items():
         dom = cfg["domain"]
+        wp = cfg.get("type") == "wordpress"
+        if wp and not key_ok(dom, key):
+            # WordPress は鍵ファイルを置けない。先方の mu-plugin に鍵を渡すと、/<鍵>.txt を返すようになる
+            import wp_bridge
+            try:
+                wp_bridge.push_settings(cfg)
+            except SystemExit as e:
+                print(f"  {sid}: 橋渡しへ鍵を渡せません（{str(e)[:60]}）")
         if not key_ok(dom, key):
             print(f"  {sid}: 鍵ファイル https://{dom}/{key}.txt がありません（通知は拒否されます）")
             continue
-        urls = sitemap_urls(None if sid == S.primary() else dom)
+        if wp:
+            import wp_bridge
+            urls = wp_bridge.site_urls(cfg)
+        else:
+            urls = sitemap_urls(None if sid == S.primary() else dom)
         if not urls:
             continue
         try:

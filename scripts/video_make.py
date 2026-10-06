@@ -637,8 +637,9 @@ def from_article(slug):
     # ai.7senses.co.jp を決め打ちすると、他サイトの記事で存在しないURLを読み上げる
     try:
         import sites as _S
+        import wp_bridge
         cfg = _S.load(_S.find_category_owner(cat) or _S.primary())
-        url = _S.article_url(cfg, {"slug": slug, "category": cat}).replace("https://", "")
+        url = wp_bridge.article_url(cfg, {"slug": slug, "category": cat}).replace("https://", "")
     except Exception:
         url = f"ai.7senses.co.jp/{cat}/{slug}/"
     segs.append({"say": "続きは記事にまとめています。概要欄からご覧ください。",

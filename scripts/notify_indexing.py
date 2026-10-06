@@ -33,6 +33,10 @@ def sitemap_of(cfg):
     import sites as S
     if cfg["id"] == S.primary() and local.is_file():
         return re.findall(r"<loc>(.*?)</loc>", local.read_text(encoding="utf-8"))
+    # WordPress の sitemap は索引形式（/wp-sitemap.xml）で、平らに読むと記事が0件だった。橋渡しの一覧から取る
+    if cfg.get("type") == "wordpress":
+        import wp_bridge
+        return wp_bridge.site_urls(cfg)
     try:
         req = urllib.request.Request(f"https://{cfg['domain']}/sitemap.xml",
                                      headers={"User-Agent": "Mozilla/5.0"})
@@ -50,6 +54,11 @@ def todays_urls(cfg, days=1):
     from datetime import timedelta
     dates = "|".join(str(date.today() - timedelta(days=i)) for i in range(max(1, days)))
     out = []
+    # WordPress の記事URLはパーマリンク設定が決める（組み立てると sitemap と突き合わず、通知が0件になる）
+    links = {}
+    if cfg.get("type") == "wordpress":
+        import wp_bridge
+        links = wp_bridge.url_map(cfg)
     for p in (ROOT / "articles").glob("*.md"):
         t = p.read_text(encoding="utf-8-sig")
         m = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
@@ -62,8 +71,8 @@ def todays_urls(cfg, days=1):
         if not cat or S.find_category_owner(cat.group(1)) != cfg["id"]:
             continue
         slug = re.search(r"^slug:\s*(\S+)", fm, re.M)
-        out.append(S.article_url(cfg, {"category": cat.group(1),
-                                       "slug": slug.group(1) if slug else p.stem}))
+        slug = slug.group(1) if slug else p.stem
+        out.append(links.get(slug) or S.article_url(cfg, {"category": cat.group(1), "slug": slug}))
     del build
     return out
 

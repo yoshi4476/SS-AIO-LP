@@ -155,6 +155,14 @@ def check_page(url, html, status, final):
 def targets(site_id, all_urls):
     cfg = sites_mod.load(site_id)
     base = "https://" + cfg["domain"]
+    if cfg.get("type") == "wordpress":
+        # WordPress は sitemap が索引形式で、AI集客ラボの固定ページ（/lp/ 等）も無い。橋渡しの公開URLの一覧から選ぶ
+        import wp_bridge
+        rows = wp_bridge.url_rows(cfg)
+        if all_urls:
+            return [r["url"] for r in rows]
+        return [base + "/"] + [r["url"] for r in rows if r.get("type") == "page"][:5] \
+            + [r["url"] for r in rows if r.get("type") == "post"][:5]
     if all_urls:
         st, body, _ = fetch(base + "/sitemap.xml")
         return re.findall(r"<loc>([^<]+)</loc>", body) if st == 200 else []

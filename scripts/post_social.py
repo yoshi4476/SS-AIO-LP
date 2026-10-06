@@ -289,7 +289,9 @@ def article(slug):
 def deliver(site_id, slug, e, dry):
     cfg = sites_mod.load(site_id)
     meta = article(slug)
-    url = sites_mod.article_url(cfg, meta)
+    # WordPress の記事URLはパーマリンク設定が決める（組み立てたURLを投稿すると404・推測の転送になる）
+    import wp_bridge
+    url = wp_bridge.article_url(cfg, meta)
     img = image_url(meta, cfg)
     # 媒体ごとに文面を作り分ける。同じ文を全媒体に流すと、どこでも中途半端になる
     t = {p: compose(meta, url, cfg, p) for p in STYLE}

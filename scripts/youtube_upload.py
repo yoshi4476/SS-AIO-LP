@@ -300,8 +300,8 @@ def describe(slug):
                     f'セブンセンシズ株式会社\nhttps://ai.7senses.co.jp/'), d["title"], []
         return "", slug, []
     sid, cfg = SP.site_of(a["category"])
-    import sites as S
-    url = S.article_url(cfg, {"slug": slug, "category": a["category"]})
+    import wp_bridge     # WordPress の社はパーマリンク設定が決めたURL（組み立てると説明欄のリンクが404）
+    url = wp_bridge.article_url(cfg, {"slug": slug, "category": a["category"]})
     body = "\n".join(f"・{x}" for x in a["leads"][:5])
     desc = (f'▼ 記事はこちら\n{url}\n\n{a["desc"]}\n\n'
             f'{body}\n\n{tools_block(a) if sid == "ai-lab" else ""}セブンセンシズ株式会社\nhttps://{cfg.get("domain", "")}/')
