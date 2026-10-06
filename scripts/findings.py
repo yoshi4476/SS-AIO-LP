@@ -127,6 +127,10 @@ CHECKS = [
     # Ahrefs の Site Audit と同じ観点を3サイトの本番に当てる（外部リンク切れ・乗っ取られたドメインへの転送も）
     ("サイト監査（Ahrefs相当・3サイトの本番）", "seo_audit.py --live --all --external",
      re.compile(r"^要対応:")),
+    # 先方の作り次第の項目（まとめのページ・head の構造化データ/hreflang/robots/OGP・sitemap・llms.txt・robots.txt・計測・
+    # IndexNow/Bing のファイル・動画の CSP・統合の301）が本番で動いているか。先方に頼む1文まで出す
+    ("最初の接続の点検（先方の作り次第の項目）", "onboard_check.py --all",
+     re.compile(r"^要対応:")),
     # 量産と見られている兆候と1日の本数（落としたサイトは要対応として知らせる）
     ("量産の兆候と本数（Google の大量生成の定義）", "pace.py",
      re.compile(r"^\s*(要対応:|兆候:)")),

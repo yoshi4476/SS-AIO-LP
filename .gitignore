@@ -43,6 +43,9 @@ intake/todo/
 # シートの「レポートの送付先」（担当者のメール）と「その他の申し送り」（社内事情）。
 # sites/*.json に入れると公開されるため、ここに分けて置く（client_intake.to_private）
 data/clients/*/private.json
+# 最初の接続の点検の結果（onboard_check.py）。お客様のサイトの抜けと先方に頼むことが入るので public に置かない。
+# 自社3サイトの分（data/onboard/<id>.json）はコミットする
+data/clients/*/onboard.json
 
 # ラッコの応答のキャッシュ（課金を減らすための手元の控え。公開リポジトリには置かない）
 data/rakko_cache/

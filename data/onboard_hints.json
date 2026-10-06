@@ -1,0 +1,231 @@
+{
+ "_about": "onboard_check.py が「要対応」に添える、先方に頼む1文。点検の項目 → 方式（sites/<id>.json の type）→ 文。文の代わりに {静的サイト生成器: 文} を置くと、本番の meta generator（Hugo・Jekyll・Astro・Eleventy・Gatsby・Next.js 等）で選ぶ（\"_\" は分からないとき）。\"_\" の方式は既定。{domain} は先方のドメインに置き換わる",
+ "agg_compare": {
+  "_": "配った /compare/ のページを公開の対象に入れる（配信先の公開フォルダの設定に compare/ を足す）",
+  "external-md": {
+   "_": "ビルドの設定で pages/ フォルダ（sites の pages_dir）の Markdown をページとして出し、フロントマターの permalink どおりの URL にする（Hugo なら content/pages を、Jekyll なら _pages を collections に足して output: true、Astro なら src/pages の動的ルートで読む）",
+   "hugo": "Hugo の設定で content/pages（pages_dir）をビルド対象にし、フロントマターの url / permalink をそのまま使う（[permalinks] で上書きしない）",
+   "jekyll": "_config.yml の collections に pages（pages_dir）を足して output: true にし、フロントマターの permalink を有効にする",
+   "astro": "src/pages に pages_dir の Markdown を読む動的ルート（[...slug].astro）を置き、フロントマターの permalink を URL に使う",
+   "eleventy": "Eleventy の入力に pages_dir を含め、フロントマターの permalink をそのまま使う（.eleventy.js で無視していないか確かめる）",
+   "gatsby": "gatsby-source-filesystem に pages_dir を足し、createPages でフロントマターの permalink の URL にページを作る"
+  },
+  "external-html": "配信先の公開フォルダ（または tools/make_dist.py の PUBLIC_DIRS）に compare/ を入れる",
+  "nextjs-json": "Next.js の app に src/content/pages.json を読むページ（app/[...path]/page.tsx。配った雛形）を置き、/compare/ を描く",
+  "wordpress": "固定ページ /compare/ を「公開」のままにする（下書き・非公開・パスワードにしない）",
+  "ftp": "サーバーの公開フォルダ直下の compare/ を消さない・転送しない（.htaccess の書き換えで別URLへ飛ばしていないか確かめる）"
+ },
+ "agg_topics": {
+  "_": "配った /topics/ のページを公開の対象に入れる",
+  "external-md": {
+   "_": "ビルドの設定で pages/ フォルダ（pages_dir）の Markdown をページとして出し、permalink どおりの URL にする（Hugo なら content/pages、Jekyll なら _pages の permalink を有効に）",
+   "hugo": "Hugo の設定で content/pages（pages_dir）をビルド対象にし、フロントマターの url / permalink をそのまま使う",
+   "jekyll": "_config.yml の collections に pages（pages_dir）を足して output: true にし、permalink を有効にする",
+   "astro": "src/pages に pages_dir の Markdown を読む動的ルートを置き、permalink を URL に使う",
+   "eleventy": "Eleventy の入力に pages_dir を含め、permalink をそのまま使う"
+  },
+  "external-html": "配信先の公開フォルダ（または tools/make_dist.py の PUBLIC_DIRS）に topics/ を入れる",
+  "nextjs-json": "Next.js の app に src/content/pages.json を読むページ（配った雛形）を置き、/topics/ を描く",
+  "wordpress": "固定ページ /topics/ を「公開」のままにする",
+  "ftp": "サーバーの公開フォルダ直下の topics/ を消さない・転送しない"
+ },
+ "agg_area": {
+  "_": "配った /area/ のページを公開の対象に入れる",
+  "external-md": "ビルドの設定で pages/ フォルダ（pages_dir）の Markdown をページとして出し、permalink どおりの URL にする（Hugo なら content/pages、Jekyll なら _pages の permalink を有効に）",
+  "external-html": "配信先の公開フォルダ（または tools/make_dist.py の PUBLIC_DIRS）に area/ を入れる",
+  "nextjs-json": "Next.js の app に src/content/pages.json を読むページ（配った雛形）を置き、/area/ を描く",
+  "wordpress": "固定ページ /area/ を「公開」のままにする",
+  "ftp": "サーバーの公開フォルダ直下の area/ を消さない・転送しない"
+ },
+ "agg_season": {
+  "_": "配った季節の特集のページを公開の対象に入れる",
+  "external-md": "ビルドの設定で pages/ フォルダ（pages_dir）の Markdown をページとして出し、permalink どおりの URL にする（Hugo なら content/pages、Jekyll なら _pages の permalink を有効に）",
+  "external-html": "配信先の公開フォルダ（または tools/make_dist.py の PUBLIC_DIRS）に season/ を入れる",
+  "nextjs-json": "Next.js の app に src/content/pages.json を読むページ（配った雛形）を置き、季節の特集を描く",
+  "wordpress": "季節の特集の固定ページを「公開」のままにする",
+  "ftp": "サーバーの公開フォルダ直下の season/ を消さない・転送しない"
+ },
+ "agg_industry": {
+  "_": "配った /industry/ のページを公開の対象に入れる",
+  "external-md": "ビルドの設定で pages/ フォルダ（pages_dir）の Markdown をページとして出し、permalink どおりの URL にする（Hugo なら content/pages、Jekyll なら _pages の permalink を有効に）",
+  "external-html": "配信先の公開フォルダ（または tools/make_dist.py の PUBLIC_DIRS）に industry/ を入れる",
+  "nextjs-json": "Next.js の app に src/content/pages.json を読むページ（配った雛形）を置き、/industry/ を描く",
+  "wordpress": "固定ページ /industry/ を「公開」のままにする",
+  "ftp": "サーバーの公開フォルダ直下の industry/ を消さない・転送しない"
+ },
+ "agg_glossary": {
+  "_": "配った /glossary/ のページを公開の対象に入れる",
+  "external-md": "ビルドの設定で pages/ フォルダ（pages_dir）の Markdown をページとして出し、permalink どおりの URL にする（Hugo なら content/pages、Jekyll なら _pages の permalink を有効に）",
+  "external-html": "配信先の公開フォルダ（または tools/make_dist.py の PUBLIC_DIRS）に glossary/ を入れる",
+  "nextjs-json": "Next.js の app に src/content/pages.json を読むページ（配った雛形）を置き、/glossary/ を描く",
+  "wordpress": "固定ページ /glossary/ を「公開」のままにする",
+  "ftp": "サーバーの公開フォルダ直下の glossary/ を消さない・転送しない"
+ },
+ "agg_i18n": {
+  "_": "配った訳のページ（/en/・/zh/・/ko/）を公開の対象に入れる",
+  "external-md": "ビルドの設定で pages/ フォルダ（pages_dir）の訳のページを permalink どおりの URL（/en/… など）で出す（Hugo の多言語設定で /en/ を別言語に振り直していないか確かめる）",
+  "external-html": "配信先の公開フォルダ（または tools/make_dist.py の PUBLIC_DIRS）に en/・zh/・ko/ を入れる",
+  "nextjs-json": "Next.js の app に src/content/pages.json を読むページ（配った雛形）を置き、/en/ などの訳のページを描く（i18n のルーティングで /en/ を奪っていないか確かめる）",
+  "wordpress": "訳の固定ページを「公開」のままにする（多言語プラグインで /en/ を別に使っていないか確かめる）",
+  "ftp": "サーバーの公開フォルダ直下の en/・zh/・ko/ を消さない・転送しない"
+ },
+ "hub_nav": {
+  "_": "サイトのナビ（メニュー）に「業種から探す（/industry/）」「用語集（/glossary/）」を足す",
+  "wordpress": "WordPress の 外観 > メニュー（ブロックテーマなら ナビゲーション）に「業種から探す（/industry/）」「用語集（/glossary/）」を足す"
+ },
+ "ld_blogposting": {
+  "_": "記事の雛形の head に、配った JSON-LD（BlogPosting）をそのまま出す",
+  "external-md": {
+   "_": "記事のレイアウトで、本文の <script type=\"application/ld+json\"> を消さずに出す（Markdown の変換で生の HTML を許す設定にする）",
+   "hugo": "Hugo の設定で [markup.goldmark.renderer] unsafe = true にし、本文の <script type=\"application/ld+json\"> を出す",
+   "jekyll": "kramdown で本文の生の HTML を消していないか確かめ、記事のレイアウトで {{ content }} をそのまま出す",
+   "astro": "記事のレイアウトで本文を set:html で出し、<script type=\"application/ld+json\"> を消さない"
+  },
+  "external-html": "記事の雛形（data/clients/<id>/template.html）に {{JSONLD}} の差し込みを残す",
+  "nextjs-json": "記事ページ（app/blog/[slug]/page.tsx）で、JSON の jsonld を <script type=\"application/ld+json\"> として head に出す",
+  "wordpress": "テーマの header.php で wp_head() を呼ぶ（呼んでいないと橋渡しの構造化データが出ない）",
+  "ftp": "記事の雛形（data/clients/<id>/template.html）に {{JSONLD}} の差し込みを残す"
+ },
+ "ld_faqpage": {
+  "_": "記事の雛形の head に、配った JSON-LD（FAQPage）をそのまま出す",
+  "external-md": "記事のレイアウトで、本文の <script type=\"application/ld+json\">（FAQPage）を消さずに出す（Hugo なら goldmark の unsafe = true）",
+  "external-html": "記事の雛形に {{JSONLD}} の差し込みを残す",
+  "nextjs-json": "記事ページで JSON の jsonld（FAQPage を含む配列）を全部出す（先頭の1つだけにしない）",
+  "wordpress": "テーマの header.php で wp_head() を呼ぶ",
+  "ftp": "記事の雛形に {{JSONLD}} の差し込みを残す"
+ },
+ "robots_meta": {
+  "_": "記事の head に <meta name=\"robots\" content=\"max-snippet:-1, max-image-preview:large, max-video-preview:-1\"> を出す",
+  "external-md": {
+   "_": "記事のレイアウトで、フロントマターの robots を <meta name=\"robots\" content=\"…\"> として head に出す",
+   "hugo": "記事のレイアウトの head に {{ with .Params.robots }}<meta name=\"robots\" content=\"{{ . }}\">{{ end }} を足す",
+   "jekyll": "記事のレイアウトの head に {% if page.robots %}<meta name=\"robots\" content=\"{{ page.robots }}\">{% endif %} を足す",
+   "astro": "記事のレイアウトの head に、フロントマターの robots を <meta name=\"robots\"> として出す",
+   "eleventy": "記事のレイアウトの head に {% if robots %}<meta name=\"robots\" content=\"{{ robots }}\">{% endif %} を足す"
+  },
+  "nextjs-json": "app/layout.tsx の metadata.robots に maxSnippet: -1・maxImagePreview: 'large'・maxVideoPreview: -1 を足す",
+  "wordpress": "テーマの header.php で wp_head() を呼ぶ（SEO プラグインが noindex を出していないかも確かめる）"
+ },
+ "sitemap_images": {
+  "_": "sitemap.xml を先方のビルドが作り直さないようにする（配った sitemap.xml の image:image の行を残す）",
+  "external-md": {
+   "_": "先方のビルドが sitemap.xml を作るなら止め、配信先に置いた sitemap.xml（画像の行つき）をそのまま出す",
+   "hugo": "Hugo の [sitemap] を止め（disableKinds に \"sitemap\"）、static/sitemap.xml（配ったもの）をそのまま出す",
+   "jekyll": "jekyll-sitemap を外し、配った sitemap.xml をそのまま出す",
+   "astro": "@astrojs/sitemap を外すか、配った public/sitemap.xml を優先する"
+  },
+  "nextjs-json": "app/sitemap.ts で記事ごとに images（アイキャッチの絶対URL）を返す（templates/corporate_sitemap.ts の形）",
+  "wordpress": "画像のサイトマップを出す SEO プラグイン（Yoast・Rank Math 等）を有効にするか、橋渡しの最新版に置き直す"
+ },
+ "og_image": {
+  "_": "記事の head に <meta property=\"og:image\" content=\"（アイキャッチの絶対URL）\"> を出す",
+  "external-md": {
+   "_": "記事のレイアウトで、フロントマターの image（OGP の JPEG の絶対URL）を og:image として head に出す",
+   "hugo": "記事のレイアウトの head に {{ with .Params.image }}<meta property=\"og:image\" content=\"{{ . }}\">{{ end }} を足す",
+   "jekyll": "記事のレイアウトの head に {% if page.image %}<meta property=\"og:image\" content=\"{{ page.image }}\">{% endif %} を足す（jekyll-seo-tag なら image をそのまま使う）",
+   "astro": "記事のレイアウトの head に、フロントマターの image を og:image として出す"
+  },
+  "external-html": "記事の雛形の head に og:image の差し込み（{{OG_IMAGE}}）を残し、images/ を公開の対象に入れる",
+  "nextjs-json": "記事ページの generateMetadata で JSON の image（絶対URL）を openGraph.images に渡す",
+  "wordpress": "記事にアイキャッチ（投稿サムネイル）を出すテーマにするか、SEO プラグインの OGP を有効にする",
+  "ftp": "記事の雛形の head に og:image の差し込みを残し、images/ を消さない"
+ },
+ "hreflang": {
+  "_": "日本語の記事の head に、訳のページへの <link rel=\"alternate\" hreflang=\"…\"> を出す",
+  "external-md": {
+   "_": "記事のレイアウトで、フロントマターの alternates（言語 → URL）を <link rel=\"alternate\" hreflang=\"言語\" href=\"URL\"> として head に出す",
+   "hugo": "記事のレイアウトの head に {{ range $k, $v := .Params.alternates }}<link rel=\"alternate\" hreflang=\"{{ $k }}\" href=\"{{ $v }}\">{{ end }} を足す",
+   "jekyll": "記事のレイアウトの head に {% for a in page.alternates %}<link rel=\"alternate\" hreflang=\"{{ a[0] }}\" href=\"{{ a[1] }}\">{% endfor %} を足す",
+   "astro": "記事のレイアウトの head で、フロントマターの alternates を <link rel=\"alternate\" hreflang> として並べる"
+  },
+  "external-html": "記事の雛形の head に hreflang の差し込みを残す",
+  "nextjs-json": "記事ページの generateMetadata で JSON の ssAlternates を alternates.languages に渡す",
+  "wordpress": "テーマの header.php で wp_head() を呼ぶ（多言語プラグインが hreflang を上書きしていないか確かめる）",
+  "ftp": "記事の雛形の head に hreflang の差し込みを残す"
+ },
+ "sitemap": {
+  "_": "サイトの直下に sitemap.xml を置き、記事のURLを載せる（無ければ配った雛形を置く）",
+  "external-md": {
+   "_": "先方のビルドが作る sitemap.xml に記事が載るようにする（記事の置き場を sitemap の対象から外していないか確かめる）",
+   "hugo": "Hugo の sitemap を有効にし（disableKinds から外す）、記事の section を対象に入れる",
+   "jekyll": "jekyll-sitemap を入れるか、配った sitemap.xml をそのまま出す",
+   "astro": "@astrojs/sitemap を入れ、site を本番のドメインにする"
+  },
+  "external-html": "配信先の直下に sitemap.xml を置く（管制塔が記事を足していく。無いと足せない）",
+  "nextjs-json": "app/sitemap.ts で src/content/blog の記事を全部返す（templates/corporate_sitemap.ts の形）",
+  "wordpress": "設定 > 表示設定 の「検索エンジンでの表示」を外し、wp-sitemap.xml（または SEO プラグインのサイトマップ）を有効にする",
+  "ftp": "サーバーの直下に sitemap.xml を置く（管制塔が記事を足していく。無いと足せない）"
+ },
+ "llms_txt": {
+  "_": "サイトの直下に llms.txt を置く（無いと管制塔が記事を足せない）",
+  "external-md": "静的ファイルの置き場（Hugo は static/、Jekyll はルート、Astro は public/）に llms.txt を置き、ビルドで消えないようにする",
+  "external-html": "配信先の直下（公開フォルダ）に llms.txt を置く",
+  "nextjs-json": "public/llms.txt を置く（管制塔が記事を足していく）",
+  "wordpress": "橋渡し（mu-plugin）を最新版にする（llms.txt は橋渡しが返す。サーバーに実在の llms.txt があれば消す）",
+  "ftp": "サーバーの直下に llms.txt を置く（管制塔が記事を足していく）"
+ },
+ "robots_txt": {
+  "_": "robots.txt で AI クローラー（GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended）を Disallow にしない（Cloudflare の「AI クローラーをブロック」も切る）",
+  "wordpress": "サーバーに実在する robots.txt を消すか AI クローラーの Disallow を外す（WordPress の仮想 robots.txt は橋渡しが整える）。Cloudflare の「AI クローラーをブロック」も切る",
+  "nextjs-json": "app/robots.ts（または public/robots.txt）で AI クローラーを Disallow にしない"
+ },
+ "measure_tag": {
+  "_": "記事のページに GA4 の計測タグ（gtag.js と測定ID）を入れる",
+  "external-md": {
+   "_": "記事のレイアウトの head に GA4 の計測タグ（測定ID）を入れる",
+   "hugo": "Hugo の設定の services.googleAnalytics.ID に測定IDを入れ、レイアウトで {{ template \"_internal/google_analytics.html\" . }} を呼ぶ",
+   "jekyll": "記事のレイアウトの head に GA4 の計測タグ（gtag.js）を入れる"
+  },
+  "nextjs-json": "app/layout.tsx に GA4 の計測タグ（@next/third-parties の GoogleAnalytics など）を入れる",
+  "wordpress": "テーマの footer.php で wp_footer() を呼ぶ（呼んでいないと橋渡しの計測が出ない）。測定IDはヒアリングシートの欄に入れる",
+  "ftp": "ヒアリングシートに GA4 の測定ID（G-…）を記入する（管制塔の雛形が計測を置く）"
+ },
+ "measure_entry": {
+  "_": "記事の本文の HTML（<aside class=\"cta-inline\"> と中の <script>）を消さずに出す",
+  "external-md": {
+   "_": "Markdown の変換で生の HTML と <script> を許す設定にする",
+   "hugo": "Hugo の設定で [markup.goldmark.renderer] unsafe = true にする",
+   "jekyll": "kramdown の設定で生の HTML を消していないか確かめる（parse_block_html を無効にしない）"
+  },
+  "nextjs-json": "記事ページで JSON の本文を dangerouslySetInnerHTML でそのまま出し、中の <script> を実行する（sanitize で落とさない。next/script で同じ処理を置いてもよい）",
+  "wordpress": "記事の本文から <script> を落とすプラグイン・設定（KSES の強化など）を外す"
+ },
+ "indexnow_key": {
+  "_": "配った IndexNow の鍵ファイル（<鍵>.txt）を直下で配信する（公開の対象から外さない）",
+  "external-md": "静的ファイルの置き場（Hugo は static/、Jekyll はルート、Astro は public/）に置いた <鍵>.txt をビルドで消さない",
+  "external-html": "配信先の直下の <鍵>.txt を公開の対象に入れる（tools/make_dist.py を使うなら PUBLIC_FILES に足す）",
+  "nextjs-json": "public/<鍵>.txt を消さない",
+  "wordpress": "橋渡し（mu-plugin）を最新版にする（鍵ファイルは橋渡しが返す）",
+  "ftp": "サーバーの直下の <鍵>.txt を消さない"
+ },
+ "bing_auth": {
+  "_": "配った BingSiteAuth.xml を直下で配信する（公開の対象から外さない）",
+  "external-md": "静的ファイルの置き場に置いた BingSiteAuth.xml をビルドで消さない",
+  "external-html": "配信先の直下の BingSiteAuth.xml を公開の対象に入れる",
+  "nextjs-json": "public/BingSiteAuth.xml を消さない",
+  "wordpress": "橋渡し（mu-plugin）を最新版にする",
+  "ftp": "サーバーの直下の BingSiteAuth.xml を消さない"
+ },
+ "video_embed": {
+  "_": "CSP の frame-src に https://www.youtube-nocookie.com、img-src に https://i.ytimg.com を足す",
+  "nextjs-json": "public/_headers（または next.config の headers）の CSP の frame-src に https://www.youtube-nocookie.com、img-src に https://i.ytimg.com を足し、記事ページで JSON の video を描く",
+  "external-md": "CSP の frame-src に https://www.youtube-nocookie.com を足し、Markdown の変換で <iframe> を消さない（Hugo なら goldmark の unsafe = true）",
+  "wordpress": "CSP（セキュリティ系プラグイン・サーバーの設定）の frame-src に https://www.youtube-nocookie.com を足す"
+ },
+ "video_missing": {
+  "_": "記事を配り直す（python scripts/publish_rerender.py --site {site} --push。CSP が止めていた頃に配った記事は動画を持たない）。配り直しても出なければ、先方の記事ページが本文の <iframe> を消していないか確かめる",
+  "nextjs-json": "記事を配り直す（python scripts/publish_rerender.py --site {site} --push。CSP が止めていた頃に配った JSON には video が無い）。配り直しても出なければ、先方の記事ページで JSON の video（または本文の <iframe>）を描く",
+  "wordpress": "記事を配り直す（python scripts/publish.py --site {site} --slug <slug>）。出なければ、本文の <iframe> を落とすプラグイン・設定を外す"
+ },
+ "merge_301": {
+  "_": "統合した記事の旧URLを301で残す記事へ転送する",
+  "external-md": "配信先が Cloudflare Pages 以外なら、配った _redirects と同じ転送をホストの設定（Netlify の _redirects・Vercel の vercel.json の redirects・.htaccess）に入れる",
+  "external-html": "配信先が Cloudflare Pages 以外なら、配った _redirects と同じ転送をホストの設定（Netlify の _redirects・Vercel の vercel.json・.htaccess）に入れる",
+  "nextjs-json": "配った _redirects が効かないホストなら、next.config の redirects() に同じ転送（permanent: true）を入れる",
+  "wordpress": "橋渡し（mu-plugin）を最新版にする（転送は橋渡しが返す。リダイレクト系プラグインが上書きしていないか確かめる）",
+  "ftp": ".htaccess に Redirect 301 の行を足せるよう、サーバーが .htaccess を読む設定（AllowOverride）にする"
+ },
+ "wp_bridge": {
+  "_": "最新の automation/wordpress/ss-quality-gate.php を wp-content/mu-plugins/ に置き直す（サーバーがファイルの書き換えを許せば、以後は自動で更新される）"
+ }
+}

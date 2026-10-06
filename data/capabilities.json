@@ -205,7 +205,7 @@
     "external-md": {
      "status": "partial",
      "evidence": "scripts/publish.py:526",
-     "note": "写真の棚から1枚を選んで配信先へ複製し、フロントマターの photo（表示用 WebP）と image（OGP の JPEG の絶対URL）に載せる",
+     "note": "写真の棚から1枚を選んで配信先へ複製し、フロントマターの photo（表示用 WebP）と image（OGP の JPEG の絶対URL）に載せる。onboard_check で確かめる（記事の og:image が絶対URLで開ける）",
      "need": "一覧・OGP に出すのは先方の雛形。photo / image を読む形になっていない先方では出ない（初回の接続で雛形を確かめる）",
      "anchor": "import photo_shelf",
      "anchor_prev": [
@@ -414,19 +414,22 @@
      "status": "partial",
      "evidence": "scripts/retract.py:35",
      "need": "_redirects（Cloudflare Pages の書式）に書く。配信先が Cloudflare Pages 以外（Vercel・Netlify 以外のホスト等）では転送が効かない。ホストを sites/<id>.json に持ち書き分ける処理が要る",
-     "anchor": "def redirects_file(cfg, dest: Path):"
+     "anchor": "def redirects_file(cfg, dest: Path):",
+     "note": "onboard_check で確かめる（統合した記事の旧URLが301で残す記事へ飛ぶ）"
     },
     "external-html": {
      "status": "partial",
      "evidence": "scripts/retract.py:35",
      "need": "_redirects（Cloudflare Pages の書式）に書く。配信先が Cloudflare Pages 以外（Vercel・Netlify 以外のホスト等）では転送が効かない。ホストを sites/<id>.json に持ち書き分ける処理が要る",
-     "anchor": "def redirects_file(cfg, dest: Path):"
+     "anchor": "def redirects_file(cfg, dest: Path):",
+     "note": "onboard_check で確かめる（統合した記事の旧URLが301で残す記事へ飛ぶ）"
     },
     "nextjs-json": {
      "status": "partial",
      "evidence": "scripts/retract.py:35",
      "need": "_redirects（Cloudflare Pages の書式）に書く。配信先が Cloudflare Pages 以外（Vercel・Netlify 以外のホスト等）では転送が効かない。ホストを sites/<id>.json に持ち書き分ける処理が要る",
-     "anchor": "def redirects_file(cfg, dest: Path):"
+     "anchor": "def redirects_file(cfg, dest: Path):",
+     "note": "onboard_check で確かめる（統合した記事の旧URLが301で残す記事へ飛ぶ）"
     },
     "wordpress": {
      "status": "ok",
@@ -464,19 +467,22 @@
      "status": "partial",
      "evidence": "scripts/publish.py:560",
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
-     "anchor": "written = [target] + _update_external_index(dest, cfg, meta, page=page) + written"
+     "anchor": "written = [target] + _update_external_index(dest, cfg, meta, page=page) + written",
+     "note": "onboard_check で確かめる（sitemap.xml が開けて、本番で開ける記事が全部載る）"
     },
     "external-html": {
      "status": "partial",
      "evidence": "scripts/publish.py:1120",
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
-     "anchor": "def _update_external_index(dest: Path, cfg, meta, page=None):"
+     "anchor": "def _update_external_index(dest: Path, cfg, meta, page=None):",
+     "note": "onboard_check で確かめる（sitemap.xml が開けて、本番で開ける記事が全部載る）"
     },
     "nextjs-json": {
      "status": "partial",
      "evidence": "scripts/publish.py:1120",
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
-     "anchor": "def _update_external_index(dest: Path, cfg, meta, page=None):"
+     "anchor": "def _update_external_index(dest: Path, cfg, meta, page=None):",
+     "note": "onboard_check で確かめる（sitemap.xml が開けて、本番で開ける記事が全部載る）"
     },
     "wordpress": {
      "status": "ok",
@@ -491,7 +497,8 @@
      "anchor": "for name in (\"sitemap.xml\", \"llms.txt\", \"article-manifest.json\"):",
      "anchor_prev": [
       "with Remote(credentials(cfg)) as r:"
-     ]
+     ],
+     "note": "onboard_check で確かめる（sitemap.xml が開けて、本番で開ける記事が全部載る）"
     },
     "zip": {
      "status": "n/a",
@@ -519,19 +526,22 @@
      "status": "partial",
      "evidence": "scripts/publish.py:560",
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
-     "anchor": "written = [target] + _update_external_index(dest, cfg, meta, page=page) + written"
+     "anchor": "written = [target] + _update_external_index(dest, cfg, meta, page=page) + written",
+     "note": "onboard_check で確かめる（llms.txt が開けて、sitemap の記事が全部載る）"
     },
     "external-html": {
      "status": "partial",
      "evidence": "scripts/publish.py:1134",
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
-     "anchor": "lt = _public_file(dest, \"llms.txt\")"
+     "anchor": "lt = _public_file(dest, \"llms.txt\")",
+     "note": "onboard_check で確かめる（llms.txt が開けて、sitemap の記事が全部載る）"
     },
     "nextjs-json": {
      "status": "partial",
      "evidence": "scripts/publish.py:1134",
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
-     "anchor": "lt = _public_file(dest, \"llms.txt\")"
+     "anchor": "lt = _public_file(dest, \"llms.txt\")",
+     "note": "onboard_check で確かめる（llms.txt が開けて、sitemap の記事が全部載る）"
     },
     "wordpress": {
      "status": "ok",
@@ -543,7 +553,8 @@
      "status": "partial",
      "evidence": "scripts/publish.py:1134",
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
-     "anchor": "lt = _public_file(dest, \"llms.txt\")"
+     "anchor": "lt = _public_file(dest, \"llms.txt\")",
+     "note": "onboard_check で確かめる（llms.txt が開けて、sitemap の記事が全部載る）"
     },
     "zip": {
      "status": "n/a",
@@ -569,31 +580,36 @@
      "status": "partial",
      "evidence": "scripts/ai_crawler_check.py:103",
      "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う",
-     "anchor": "def fetch_robots(domain):"
+     "anchor": "def fetch_robots(domain):",
+     "note": "onboard_check で確かめる（robots.txt が AI クローラーを止めていない）"
     },
     "external-html": {
      "status": "partial",
      "evidence": "scripts/ai_crawler_check.py:103",
      "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う",
-     "anchor": "def fetch_robots(domain):"
+     "anchor": "def fetch_robots(domain):",
+     "note": "onboard_check で確かめる（robots.txt が AI クローラーを止めていない）"
     },
     "nextjs-json": {
      "status": "partial",
      "evidence": "scripts/ai_crawler_check.py:103",
      "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う",
-     "anchor": "def fetch_robots(domain):"
+     "anchor": "def fetch_robots(domain):",
+     "note": "onboard_check で確かめる（robots.txt が AI クローラーを止めていない）"
     },
     "wordpress": {
      "status": "partial",
      "evidence": "automation/wordpress/ss-quality-gate.php:557",
      "need": "mu-plugin が WordPress の仮想 robots.txt に AI クローラーを足すが、サーバーに実在する robots.txt・先方が名指しで塞いだ AI クローラー・CDN（Cloudflare 等）の遮断は直せない（ai_crawler_check が知らせるだけ）",
-     "anchor": "add_filter('robots_txt', function ($out, $public) {"
+     "anchor": "add_filter('robots_txt', function ($out, $public) {",
+     "note": "onboard_check で確かめる（robots.txt が AI クローラーを止めていない）"
     },
     "ftp": {
      "status": "partial",
      "evidence": "scripts/ai_crawler_check.py:103",
      "need": "本番の robots.txt を読んで、AIクローラーを塞いでいれば知らせるだけ（selfheal）。置く・直すのは site_change で人が行う",
-     "anchor": "def fetch_robots(domain):"
+     "anchor": "def fetch_robots(domain):",
+     "note": "onboard_check で確かめる（robots.txt が AI クローラーを止めていない）"
     },
     "zip": {
      "status": "n/a",
@@ -968,7 +984,7 @@
     "external-md": {
      "status": "partial",
      "evidence": "scripts/publish.py:540",
-     "note": "画像・動画のサイトマップ行は配信先の sitemap.xml に足す（変換した本文から拾う）。robots の値はフロントマターの robots に載せる",
+     "note": "画像・動画のサイトマップ行は配信先の sitemap.xml に足す（変換した本文から拾う）。robots の値はフロントマターの robots に載せる。onboard_check で確かめる（記事の head に robots の meta（max-image-preview 等・noindex でない）・sitemap.xml に記事の画像の行（image:loc））",
      "need": "robots の meta を head に出すのは先方の雛形（フロントマターの robots を読む形か初回に確かめる）。sitemap.xml を先方のビルドが作る社では画像の行が載らない",
      "anchor": "import search_preview",
      "anchor_prev": [
@@ -983,7 +999,7 @@
     "nextjs-json": {
      "status": "partial",
      "evidence": "scripts/publish.py:434",
-     "note": "画像・動画のサイトマップ行は本文とアイキャッチから拾って sitemap.xml に足す（静的な sitemap.xml がある社）",
+     "note": "画像・動画のサイトマップ行は本文とアイキャッチから拾って sitemap.xml に足す（静的な sitemap.xml がある社）。onboard_check で確かめる（記事の head に robots の meta（max-image-preview 等・noindex でない）・sitemap.xml に記事の画像の行（image:loc））",
      "need": "robots の meta はアプリ側。sitemap をアプリが作る社（コーポレートは sitemap.ts）は templates/corporate_sitemap.ts の形に揃える必要がある",
      "anchor": "if out.get(\"eyecatch\") else \"\")"
     },
@@ -991,7 +1007,8 @@
      "status": "partial",
      "evidence": "automation/wordpress/ss-quality-gate.php:438",
      "need": "robots の meta（max-snippet 等）は mu-plugin が出すが、画像・動画のサイトマップが無い（WordPress 本体の wp-sitemap は画像・動画を載せない。mu-plugin の sitemap のフィルタで足す処理が要る）",
-     "anchor": "add_filter('wp_robots', function ($robots) {"
+     "anchor": "add_filter('wp_robots', function ($robots) {",
+     "note": "onboard_check で確かめる（記事の head に robots の meta（max-image-preview 等・noindex でない）・sitemap.xml に記事の画像の行（image:loc））"
     },
     "ftp": {
      "status": "ok",
@@ -1023,19 +1040,22 @@
      "status": "partial",
      "evidence": "scripts/publish.py:494",
      "need": "ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い",
-     "anchor": "def write_external_md(cfg, dest: Path, meta, body, src: Path):"
+     "anchor": "def write_external_md(cfg, dest: Path, meta, body, src: Path):",
+     "note": "onboard_check で確かめる（記事に GA4 の測定ID（計測タグ）が出る・記事内の入口（cta-inline）と、その計測のスクリプトが残る）"
     },
     "external-html": {
      "status": "partial",
      "evidence": "scripts/publish.py:639",
      "need": "記事内の入口だけは自前で送る。ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い",
-     "anchor": "'function g(n){if(typeof gtag===\"function\")gtag(\"event\",n,p);}'"
+     "anchor": "'function g(n){if(typeof gtag===\"function\")gtag(\"event\",n,p);}'",
+     "note": "onboard_check で確かめる（記事に GA4 の測定ID（計測タグ）が出る・記事内の入口（cta-inline）と、その計測のスクリプトが残る）"
     },
     "nextjs-json": {
      "status": "partial",
      "evidence": "scripts/publish.py:320",
      "need": "ページの計測タグ・CTA/フォームの計測・A/B は先方の雛形（テーマ・アプリ）任せ。入っているかを確かめる工程も無い",
-     "anchor": "def write_nextjs_json(cfg, dest: Path, meta, body):"
+     "anchor": "def write_nextjs_json(cfg, dest: Path, meta, body):",
+     "note": "onboard_check で確かめる（記事に GA4 の測定ID（計測タグ）が出る・記事内の入口（cta-inline）と、その計測のスクリプトが残る）"
     },
     "wordpress": {
      "status": "ok",
@@ -1046,7 +1066,7 @@
     "ftp": {
      "status": "partial",
      "evidence": "scripts/publish.py:1014",
-     "note": "汎用の雛形で描いたページに、WordPress の橋渡しと同じ計測（ss-quality-gate.php の SSB_MEASURE_JS をそのまま読む）を置く。測定IDが無い社には出さない",
+     "note": "汎用の雛形で描いたページに、WordPress の橋渡しと同じ計測（ss-quality-gate.php の SSB_MEASURE_JS をそのまま読む）を置く。測定IDが無い社には出さない。onboard_check で確かめる（記事に GA4 の測定ID（計測タグ）が出る・記事内の入口（cta-inline）と、その計測のスクリプトが残る）",
      "need": "測定ID（G-…）が sites/<id>.json の ga4_measurement_id に要る。ヒアリングシートは WordPress の社だけ保存する（scripts/client_intake.py:671）ので、ftp/zip でも保存する必要がある",
      "anchor": "out = add_measure(out, cfg)"
     },
@@ -1125,7 +1145,7 @@
      "status": "partial",
      "evidence": "scripts/publish.py:1356",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
-     "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。記事を配信するたびに作り直す",
+     "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。記事を配信するたびに作り直す。onboard_check で確かめる（/industry/ が開けて中身が出る）",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）"
     },
     "external-html": {
@@ -1144,7 +1164,8 @@
      "status": "partial",
      "evidence": "scripts/wp_bridge.py:384",
      "need": "固定ページ（/industry/・/industry/<業種>/・faq/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る（記事末の案内からは辿れる）",
-     "anchor": "def sync_pages(cfg, rows=None, arts=None):"
+     "anchor": "def sync_pages(cfg, rows=None, arts=None):",
+     "note": "onboard_check で確かめる（/industry/ が開けて中身が出る・トップのナビから /industry/・/glossary/ へ辿れる）"
     },
     "ftp": {
      "status": "ok",
@@ -1178,7 +1199,7 @@
      "status": "partial",
      "evidence": "scripts/publish.py:1356",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
-     "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。記事を配信するたびに作り直す",
+     "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。記事を配信するたびに作り直す。onboard_check で確かめる（/glossary/ が開けて中身が出る）",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）"
     },
     "external-html": {
@@ -1197,7 +1218,8 @@
      "status": "partial",
      "evidence": "scripts/wp_bridge.py:414",
      "need": "固定ページ（/glossary/）は作るが、先方のメニュー（ナビ）に載せていない。WordPress のメニュー（wp/v2/menu-items）へ足す処理が要る",
-     "anchor": "gl = glossary_page(cfg, arts, rows)"
+     "anchor": "gl = glossary_page(cfg, arts, rows)",
+     "note": "onboard_check で確かめる（/glossary/ が開けて中身が出る・トップのナビから /industry/・/glossary/ へ辿れる）"
     },
     "ftp": {
      "status": "ok",
@@ -1229,7 +1251,8 @@
      "status": "partial",
      "evidence": "scripts/publish.py:1356",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
-     "anchor": "return write_aggregate_md(cfg, dest, live)"
+     "anchor": "return write_aggregate_md(cfg, dest, live)",
+     "note": "onboard_check で確かめる（/compare/ が開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
@@ -1279,7 +1302,8 @@
      "status": "partial",
      "evidence": "scripts/publish.py:1356",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
-     "anchor": "return write_aggregate_md(cfg, dest, live)"
+     "anchor": "return write_aggregate_md(cfg, dest, live)",
+     "note": "onboard_check で確かめる（/topics/ が開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
@@ -1329,7 +1353,8 @@
      "status": "partial",
      "evidence": "scripts/publish.py:1356",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
-     "anchor": "return write_aggregate_md(cfg, dest, live)"
+     "anchor": "return write_aggregate_md(cfg, dest, live)",
+     "note": "onboard_check で確かめる（/area/ が開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
@@ -1380,7 +1405,8 @@
      "status": "partial",
      "evidence": "scripts/publish.py:1356",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
-     "anchor": "return write_aggregate_md(cfg, dest, live)"
+     "anchor": "return write_aggregate_md(cfg, dest, live)",
+     "note": "onboard_check で確かめる（季節の特集のページが開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
@@ -1584,7 +1610,8 @@
      "status": "partial",
      "evidence": "scripts/publish.py:553",
      "anchor": "fm[\"alternates\"] = alts",
-     "need": "日本語の記事のフロントマターに alternates（ja・x-default・訳の言語 → URL）を載せ、訳のページは pages_dir に permalink つきで置くところまで。head に hreflang を出すのと pages_dir を HTML にするのは先方のビルド（最初の接続で雛形が alternates を読むかを確かめる）"
+     "need": "日本語の記事のフロントマターに alternates（ja・x-default・訳の言語 → URL）を載せ、訳のページは pages_dir に permalink つきで置くところまで。head に hreflang を出すのと pages_dir を HTML にするのは先方のビルド（最初の接続で雛形が alternates を読むかを確かめる）",
+     "note": "onboard_check で確かめる（訳のページ（/en/ など）が開けて中身が出る・訳のある記事の head に hreflang）"
     },
     "external-html": {
      "status": "ok",
@@ -1694,7 +1721,7 @@
     "nextjs-json": {
      "status": "partial",
      "evidence": "scripts/publish.py:342",
-     "note": "本文の頭に埋め込みと VideoObject、JSON の video に材料（inHtml）。CSP が YouTube を許さない配信先は埋め込まず要対応を出す",
+     "note": "本文の頭に埋め込みと VideoObject、JSON の video に材料（inHtml）。CSP が YouTube を許さない配信先は埋め込まず要対応を出す。onboard_check で確かめる（動画のある記事に埋め込みが出て、CSP が YouTube を止めていない）",
      "need": "コーポレートは public/_headers の CSP（frame-src が Google マップだけ）が YouTube を止めるので埋め込まれない。frame-src に https://www.youtube-nocookie.com、img-src に https://i.ytimg.com を足す（site_change）",
      "anchor": "# 記事の動画（VideoObject つき）は本文の頭に置く。配信先の CSP が YouTube を許さなければ置かない"
     },

@@ -30,7 +30,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 IN = ROOT / "intake"
 DONE = IN / "done"
 TODO = IN / "todo"
-MAX_SITES = 20   # 日次の枠は40（1社2本×20社）。pipeline-multi.yml の cron の本数÷2 と揃える
+FINDINGS = ROOT / "automation" / "logs" / "findings.txt"
+MAX_SITES = 20  # 日次の枠は40（1社2本×20社）。pipeline-multi.yml の cron の本数÷2 と揃える
 
 
 def sheets():
@@ -129,7 +130,36 @@ def one(src, write, k=None):
     ind = next((k for k, (lab, _) in C.INDUSTRY.items() if lab in src.name), "")
     C.apply(got, cfg, ind)
     move(src, DONE)
+    onboard(cfg.get("id"))
     return True, "%s（%s）を登録しました" % (name, cfg.get("id", "?"))
+
+
+def onboard(site_id):
+    """登録した直後に、先方の今のサイトで「先方の作り次第」の項目を点検し、要対応を次の通知（findings.txt）へ足す。
+    記事が要る項目は、記事を配った後の週次（findings の onboard_check.py --all）で確かめる"""
+    import contextlib
+    import io
+    import sites as S
+    import onboard_check as OC
+    if not site_id or site_id not in S.load_all():
+        return []
+    buf = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buf):
+            OC.main(["--site", site_id])
+    except Exception as e:
+        print("   最初の接続の点検を回せませんでした（%s）" % str(e)[:80])
+        return []
+    todo = [l for l in buf.getvalue().splitlines() if l.startswith("要対応:")]
+    for l in todo:
+        print("   " + l)
+    if todo:
+        FINDINGS.parent.mkdir(parents=True, exist_ok=True)
+        t = FINDINGS.read_text(encoding="utf-8") if FINDINGS.is_file() else ""
+        add = [l for l in todo if l not in t]
+        if add:
+            FINDINGS.write_text(t.rstrip("\n") + ("\n" if t else "") + "\n".join(add) + "\n", encoding="utf-8")
+    return todo
 
 
 def main():
