@@ -11,7 +11,7 @@
 サイト種別:
   self-static  … 本リポジトリの静的サイト。build.py が担当するため何もしない
   nextjs-json  … Next.jsサイト。src/content/blog/<slug>.json を書き出す
-  external-md  … 別リポジトリの静的サイト。Markdownをそのまま置く
+  external-md  … 別リポジトリの静的サイト。Markdownを置く（画像・写真・構造化データ・動画・入口も揃える）
   wordpress    … WordPress。REST APIで投稿する（公開可否は先方のmu-pluginが判定）
 
 対象リポジトリへの書き込みには SITE_PUSH_TOKEN（repo権限のPAT）が必要。
@@ -285,7 +285,10 @@ def credit_ld(credit, url, meta):
     return ld
 
 
-def credit_jsonld(credit, url, meta):
+def credit_jsonld(credit, url, meta, cfg=None, html=None, image="", video=True):
+    """お客様の記事の構造化データ。cfg を渡すと BlogPosting に日付・画像・about/mentions を足し、FAQPage も出す"""
+    if cfg is not None:
+        return ld_scripts(cfg, meta, url, html or "", image, credit, video)
     return '<script type="application/ld+json">' + json.dumps(credit_ld(credit, url, meta), ensure_ascii=False) + "</script>"
 
 
@@ -333,10 +336,20 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     # お客様の記事: 配信先のアプリが監修の欄を持たなくても出るよう、本文の頭と末尾に入れる
     # 読了時間・文字数は本文だけで数える（構造化データの文字を数えない）
     text_html = html
+    url = sites_mod.article_url(cfg, meta)
     credit = client_credit(cfg)
+    # 記事の動画（VideoObject つき）は本文の頭に置く。配信先の CSP が YouTube を許さなければ置かない
+    vb = video_block(meta, dest)
+    if vb:
+        html = vb + html
     if credit:
-        html = (credit["byline"] + "\n" if credit["byline"] else "") + html + "\n" + \
-            credit_jsonld(credit, sites_mod.article_url(cfg, meta), meta)
+        # お客様の Next.js には、当社が記事の雛形を持たない。入口・中ほどの導線・構造化データ
+        # （BlogPosting に日付・画像・about/mentions・著者、FAQPage）を本文に入れて、アプリの実装に依らず出す。
+        # コーポレート（自社）はアプリ側が出す（InlineToolBox・事業への帯・BlogPosting/FAQPage/about）ので入れない
+        img = f"https://{cfg['domain']}{meta['eyecatch']}" if meta.get("eyecatch") else ""
+        html = (credit["byline"] + "\n" if credit["byline"] else "") + \
+            insert_mid_cta(insert_inline_entry(html, cfg), cfg) + "\n" + \
+            credit_jsonld(credit, url, meta, cfg=cfg, html=text_html, image=img, video=not vb)
 
     out = {
         "slug": meta["slug"],
@@ -356,6 +369,19 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
             out["supervisor"] = credit["supervisor"]
     if meta.get("eyecatch"):
         out["eyecatch"] = meta["eyecatch"]
+    # 記事が扱う実体（構造化データの about / mentions）。アプリが head に出すための材料
+    import entities
+    out["about"], out["mentions"] = entities.about_and_mentions(
+        f"{meta['title']} {meta.get('keyword', '')}", md2html.plain_text(text_html))
+    try:
+        import video_embed
+        rec = video_embed.info(meta["slug"])
+        if rec:
+            # inHtml が偽なら本文に入っていない（CSP で止めた）。アプリが自前で出すときの材料
+            out["video"] = {"youtube": rec["youtube"], "embedUrl": f"https://www.youtube-nocookie.com/embed/{rec['youtube']}",
+                            "uploadDate": rec.get("date", ""), "seconds": int(rec.get("sec") or 0), "inHtml": bool(vb)}
+    except Exception:
+        pass
     # 一覧・記事の頭に出す写真（写真の棚から内容に合う1枚）。共有画像の eyecatch は文字のカードのまま
     try:
         import photo_shelf
@@ -398,7 +424,10 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     target.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     # Next.jsサイトでも sitemap.xml / llms.txt への追記が要る。呼んでいなかったため、
     # 公開した記事がAIクローラー向けの案内に1本も載っていなかった
-    written = [target] + _update_external_index(dest, cfg, meta) + img_written
+    # 画像・動画のサイトマップ行は、ページを書き出さないので本文とアイキャッチから拾う
+    page = html + (f'<meta property="og:image" content="https://{cfg["domain"]}{out["eyecatch"]}">'
+                   if out.get("eyecatch") else "")
+    written = [target] + _update_external_index(dest, cfg, meta, page=page) + img_written
     return written, len(md2html.plain_text(text_html))
 
 
@@ -417,12 +446,108 @@ def to_webp(png: Path, quality=80):
         return None
 
 
+def public_root(cfg, dest: Path):
+    """配信先で URL の / に当たるフォルダ（images_dir の public/・static/・site/ を見る）"""
+    d = (cfg.get("images_dir") or "").strip("/")
+    for head in ("public", "static", "site"):
+        if d.startswith(head + "/"):
+            return dest / head
+    return dest
+
+
+def _md_insert_entries(body, cfg):
+    """Markdown の原稿に、その場の入口と中ほどの導線を置く（HTML の insert_inline_entry・insert_mid_cta と同じ位置）。
+    塊は1行の HTML で、前後に空行を置く（Markdown の HTML ブロックとして本文から切り離す）"""
+    lines = body.split("\n")
+    fence = False
+    heads = []
+    for i, ln in enumerate(lines):
+        if ln.startswith("```"):
+            fence = not fence
+        elif not fence and re.match(r"## (?!#)", ln):
+            heads.append(i)
+    ins = {}
+    ent = cfg.get("cta_inline") or {}
+    if ent.get("url") and "cta-inline" not in body and heads \
+            and not re.search(r"よくある質問|まとめ", lines[heads[0]]):
+        i = heads[0] + 1
+        while i < len(lines) and not lines[i].strip():
+            i += 1
+        if i < len(lines) and not re.match(r"\s*(<|[|#>]|[-*+]\s|\d+\.\s)", lines[i]):
+            while i < len(lines) and lines[i].strip():
+                i += 1
+            ins[i] = inline_entry_block(ent)
+    if len(heads) >= 5 and "cta-mid" not in body:
+        ins[heads[len(heads) // 2]] = mid_cta_block(cfg)
+    for i in sorted(ins, reverse=True):
+        lines[i:i] = ["", ins[i], ""]
+    return "\n".join(lines)
+
+
 def write_external_md(cfg, dest: Path, meta, body, src: Path):
-    """別リポジトリの静的サイト用: Markdownをそのまま置く"""
-    target = dest / cfg["content_dir"] / f"{meta['slug']}.md"
+    """別リポジトリの静的サイト用: Markdown を置き、記事1本分の届け物を揃える。
+
+    原稿を置くだけでは、本文の図解とアイキャッチが404になり（画像を複製していなかった）、
+    構造化データ・動画・入口・写真・サイトマップの画像の行が1つも届かなかった。
+    本文には既に生の HTML（図解の figure・注意の枠）があり、先方の変換は生の HTML を通す前提なので、
+    構造化データ・動画・入口は本文に HTML で置く（先方の雛形に手を入れずに出る）。
+    head にしか置けないもの（robots の meta・OGP の画像）はフロントマターに載せる:
+      image（OGP の絶対URL）・photo（一覧・記事の頭の写真）・robots・video（YouTube の URL）"""
+    slug = meta["slug"]
+    url = sites_mod.article_url(cfg, meta)
+    origin = f"https://{cfg['domain']}"
+    root = public_root(cfg, dest)
+    images_dir = cfg.get("images_dir") or "images"
+    prefix = image_prefix({**cfg, "images_dir": images_dir})
+    fm = dict(meta)
+    src_path, dst_path = f"/images/{slug}/", f"{prefix}/{slug}/"
+    if src_path != dst_path:
+        body = body.replace(src_path, dst_path)
+        if fm.get("eyecatch"):
+            fm["eyecatch"] = str(fm["eyecatch"]).replace(src_path, dst_path)
+    chars = len(md2html.plain_text(md2html.convert(body)[0]))
+    written = []
+    ensure_images(meta)
+    img_src = ROOT / "site" / "images" / slug
+    if img_src.is_dir():
+        img_dest = dest / images_dir / slug
+        shutil.rmtree(img_dest, ignore_errors=True)
+        shutil.copytree(img_src, img_dest)
+        written.append(img_dest)
+    image = f"{origin}{fm['eyecatch']}" if fm.get("eyecatch") else ""
+    try:
+        import photo_shelf
+        _, purl = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), slug)
+        photo = photo_shelf.copy_to(root, purl) if purl else ""
+        if photo:
+            fm["photo"] = photo
+            jpg = photo_shelf.path_of(purl)
+            if jpg.is_file():
+                shutil.copy2(jpg, root / "images" / "shelf" / jpg.name)
+                image = f"{origin}/images/shelf/{jpg.name}"
+            written += [root / "images" / "shelf"]
+    except Exception as e:
+        print(f"  写真の棚をスキップ: {e}")
+    if image:
+        fm["image"] = image
+    import search_preview
+    fm["robots"] = ", ".join(search_preview.DIRECTIVES)
+    vb = video_block(meta, dest)
+    if vb:
+        fm["video"] = re.search(r'"contentUrl": "([^"]+)"', vb).group(1)
+        body = vb + "\n" + body.lstrip("\n")
+    body = _md_insert_entries(body, cfg)
+    html = md2html.convert(body)[0]
+    credit = client_credit(cfg, url)
+    body = body.rstrip("\n") + "\n\n" + ld_scripts(cfg, meta, url, html, image, credit, video=not vb)
+    target = dest / cfg["content_dir"] / f"{slug}.md"
     target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(src, target)
-    return [target], len(md2html.plain_text(md2html.convert(body)[0]))
+    target.write_text("---\n" + yaml.safe_dump(fm, allow_unicode=True, sort_keys=False, width=1000)
+                      + "---\n" + body, encoding="utf-8", newline="\n")
+    page = html + "".join(f'<meta property="og:image" content="{u}">'
+                          for u in dict.fromkeys([image, f"{origin}{fm.get('eyecatch') or ''}"]) if u and u != origin)
+    written = [target] + _update_external_index(dest, cfg, meta, page=page) + written
+    return written, chars
 
 
 JP_ERA = "%Y年%-m月%-d日"
@@ -442,6 +567,11 @@ def insert_mid_cta(html, cfg):
     if len(heads) < 5:
         return html
     pos = heads[len(heads) // 2]
+    return html[:pos] + mid_cta_block(cfg) + "\n" + html[pos:]
+
+
+def mid_cta_block(cfg):
+    """中ほどの導線の塊（HTML 1行）。Markdown の原稿へもそのまま置ける形にする（external-md）"""
     # 記事の中ほどは、読み手がまだ「相談する」段階にない。実測で補助金サイトは
     # 記事到達147に対しCTA押下4（2.7%）、診断を前面に出すAI集客ラボは9.4%だった。
     # サイト設定に cta_mid があれば、中ほどだけ軽い入口（診断など）に差し替える
@@ -450,7 +580,7 @@ def insert_mid_cta(html, cfg):
     url = mid.get("url") or (cfg.get("cta") or {}).get("url", "/#contact")
     note = mid.get("note") or "要件の確認だけでもご利用いただけます"
     tag = "article_mid_diagnosis" if "diagnosis" in url else "article_mid_contact"
-    block = (
+    return (
         '<div class="cta-mid" style="background:#f4f7fc;border:1px solid #dbe4f0;'
         'border-radius:12px;padding:20px;margin:28px 0;text-align:center">'
         '<p style="margin:0 0 12px;font-weight:700">'
@@ -459,8 +589,7 @@ def insert_mid_cta(html, cfg):
         'style="display:inline-block;padding:12px 26px;border-radius:8px;'
         f'background:#1b4fa0;color:#fff;text-decoration:none;font-weight:700">{label}</a>'
         '<p style="margin:10px 0 0;font-size:.82rem;color:#5b6980">'
-        f'{note}</p></div>' + "\n")
-    return html[:pos] + block + html[pos:]
+        f'{note}</p></div>')
 
 
 def insert_inline_entry(html, cfg):
@@ -480,10 +609,16 @@ def insert_inline_entry(html, cfg):
     m = re.match(r"\s*<p[ >].*?</p>", html[heads[0].end():end], re.S)
     if not m:
         return html
+    pos = heads[0].end() + m.end()
+    return html[:pos] + "\n" + inline_entry_block(ent) + html[pos:]
+
+
+def inline_entry_block(ent):
+    """その場の入口の塊（HTML 1行）。Markdown の原稿へもそのまま置ける形にする（external-md）"""
     tool = ent.get("tool", "diagnosis")
     note = f'<p style="margin:8px 0 0;font-size:.8rem;color:#5b6980">{ent["note"]}</p>' if ent.get("note") else ""
-    block = (
-        f'\n<aside class="cta-inline" data-tool="{tool}" style="margin:24px 0 28px;padding:18px 20px;'
+    return (
+        f'<aside class="cta-inline" data-tool="{tool}" style="margin:24px 0 28px;padding:18px 20px;'
         'border:1px solid #dbe4f0;border-left:4px solid #1b4fa0;border-radius:12px;background:#f4f7fc">'
         f'<p style="margin:0 0 12px;font-weight:700;color:#132445;line-height:1.6">{ent["head"]}</p>'
         f'<a class="cta-button" href="{ent["url"]}" data-cta="article_inline_{tool}" '
@@ -494,8 +629,76 @@ def insert_inline_entry(html, cfg):
         'if("IntersectionObserver" in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){g("inline_tool_view");o.disconnect();}},{threshold:.6});o.observe(b);}'
         'b.querySelector("a").addEventListener("click",function(){g("inline_tool_submit");});})();</script>'
         '</aside>')
-    pos = heads[0].end() + m.end()
-    return html[:pos] + block + html[pos:]
+
+
+# 入口の塊が自分で送る計測。先方のページに ss-measure（同じ名前で送る）を置くときは外す（二重に数えない）
+INLINE_SELF_MEASURE = re.compile(r"<script>\(function\(\)\{var b=document\.currentScript.*?</script>", re.S)
+
+
+def measure_script(cfg):
+    """GA4 の計測（WordPress の橋渡しプラグインと同じ出来事・同じ名前・同じ引数）。測定IDが無い社は空。
+
+    中身は automation/wordpress/ss-quality-gate.php の SSB_MEASURE_JS を唯一の正として読む。
+    写しを持つと、片方だけ直したときに方式ごとで数え方がずれ、月次の比較が成り立たなくなる"""
+    import wp_bridge
+    gid = wp_bridge.ga4_id(cfg)
+    if not gid:
+        return ""
+    php = (Path(__file__).resolve().parent.parent / "automation" / "wordpress" / "ss-quality-gate.php")
+    m = re.search(r"const SSB_MEASURE_JS = <<<'JS'\n(.*?)\nJS;", php.read_text(encoding="utf-8"), re.S)
+    if not m:
+        raise SystemExit("計測の本体（ss-quality-gate.php の SSB_MEASURE_JS）が見つかりません")
+    return f'<script id="ss-measure">window.SSB_GA4={json.dumps(gid)};\n{m.group(1)}</script>\n'
+
+
+def add_measure(page, cfg):
+    """管制塔の雛形で描いたページ（FTP・ZIP）に計測を置く。雛形に既にあれば何もしない"""
+    tag = measure_script(cfg)
+    if not tag or 'id="ss-measure"' in page or "</body>" not in page:
+        return page
+    page = INLINE_SELF_MEASURE.sub("", page)
+    return page.replace("</body>", tag + "</body>", 1)
+
+
+def youtube_blocked(dest: Path):
+    """配信先の CSP（Cloudflare Pages の _headers）が YouTube の埋め込みを許さないか。
+    許さないのに埋めると、記事の頭に空の枠が出る（コーポレートは frame-src が Google マップだけ）"""
+    for rel in ("_headers", "public/_headers", "static/_headers"):
+        f = dest / rel
+        if not f.is_file():
+            continue
+        m = re.search(r"Content-Security-Policy:\s*(.+)", f.read_text(encoding="utf-8", errors="ignore"))
+        if not m:
+            continue
+        pol = {p.strip().split(" ", 1)[0]: p.strip() for p in m.group(1).split(";") if p.strip()}
+        rule = pol.get("frame-src") or pol.get("child-src") or pol.get("default-src") or ""
+        return "youtube-nocookie.com" not in rule and "*" not in rule.split()
+    return False
+
+
+def video_block(meta, dest: Path):
+    """記事の動画の埋め込み（VideoObject つき）。台帳に無い・配信先の CSP が許さないときは空"""
+    try:
+        import video_embed
+        b = video_embed.block(meta)
+    except Exception as e:
+        print(f"  [警告] 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
+        return ""
+    if b and youtube_blocked(dest):
+        print(f"要対応: {meta['slug']} の動画を埋め込めません。配信先の CSP（_headers）の frame-src に "
+              "https://www.youtube-nocookie.com、img-src に https://i.ytimg.com を足してください（site_change）")
+        return ""
+    return b
+
+
+def ld_scripts(cfg, meta, url, html, image="", credit=None, video=True):
+    """記事の構造化データ（BlogPosting＋FAQPage）の script タグ。中身は WordPress と同じ _wp_jsonld。
+    本文に動画の塊（VideoObject つき）を置いた記事は video=False（同じ動画を2つの実体にしない）"""
+    ld, extra = _wp_jsonld(cfg, meta, credit_ld(credit, url, meta) if credit else None, url, html, image)
+    if not video:
+        ld.pop("video", None)
+    return "".join('<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + "</script>\n"
+                   for d in [ld] + extra)
 
 
 def _jp_date(iso):
@@ -666,12 +869,8 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # FAQはテンプレート側が専用セクションを持つので、本文からは先に取り除く
     # （目次を作る前に消さないと、存在しない見出しへのリンクが目次に残る）
     html = re.sub(r"<h2[^>]*>\s*よくある質問\s*</h2>.*?(?=<h2|$)", "", html, flags=re.S)
-    # YouTube に上がった記事動画があれば先頭に埋め込む（build.py と同じ関数）
-    try:
-        import video_embed
-        html = video_embed.prepend(html, meta)
-    except Exception as e:
-        print(f"  [警告] 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
+    # YouTube に上がった記事動画があれば先頭に埋め込む（build.py と同じ関数。CSP が許さない配信先は飛ばす）
+    html = video_block(meta, dest) + html
     credit = client_credit(cfg)
     # 著者の実在（Person + sameAs）。配信先のテンプレートは著者名しか出さないので、
     # 台帳から束ねた sameAs を本文側の JSON-LD で足す（AI集客ラボの記事と同じ人物だと機械に分かる）
@@ -797,6 +996,10 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # 先方の雛形が robots を持たない・index,follow だけでも、見え方の指定を1つの meta にまとめて足す
     import search_preview
     out = search_preview.robots_tag(out)
+    # FTP・ZIP の社は管制塔の雛形で描くので、計測（GA4・CTA・フォーム・入口・A/B）もここで置く。
+    # Git の社（external-html）は先方の雛形が計測を持つ（補助金サイトは site.js）
+    if cfg.get("type") in deliver_files.TYPES:
+        out = add_measure(out, cfg)
     page = dest / page_dir(cfg) / meta["slug"] / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(out, encoding="utf-8", newline="\n")
@@ -883,15 +1086,17 @@ def _public_file(dest: Path, name: str):
     return None
 
 
-def _media_xml(dest: Path, cfg, meta, url):
+def _media_xml(dest: Path, cfg, meta, url, page=None):
     """記事の画像（アイキャッチ・図解）と埋め込んだ動画のサイトマップ行。書き出したページから拾う。
+    ページを書き出さない方式（external-md・nextjs-json）は、変換した本文を page で渡す。
     図解はこの時点でまだ配信先へ複製していないので、複製元（site/images/<slug>/）にあれば実在とみなす"""
     import search_preview as SP
     from urllib.parse import urlparse
-    f = dest / page_dir(cfg) / meta["slug"] / "index.html"
-    if not f.is_file():
-        return ""
-    page = f.read_text(encoding="utf-8")
+    if page is None:
+        f = dest / page_dir(cfg) / meta["slug"] / "index.html"
+        if not f.is_file():
+            return ""
+        page = f.read_text(encoding="utf-8")
 
     def exists(p):
         rel = p.lstrip("/")
@@ -900,7 +1105,7 @@ def _media_xml(dest: Path, cfg, meta, url):
     return SP.media_lines(page, meta["slug"], f"{o.scheme}://{o.netloc}", exists)
 
 
-def _update_external_index(dest: Path, cfg, meta):
+def _update_external_index(dest: Path, cfg, meta, page=None):
     """相手サイトのsitemap.xmlとllms.txtに新記事を足す（検出されないと公開の意味がない）"""
     touched = []
     url = sites_mod.article_url(cfg, meta)
@@ -909,7 +1114,7 @@ def _update_external_index(dest: Path, cfg, meta):
         t = sm.read_text(encoding="utf-8")
         if url not in t:
             entry = (f"  <url>\n    <loc>{url}</loc>\n"
-                     f"    <lastmod>{meta['date']}</lastmod>\n" + _media_xml(dest, cfg, meta, url) + "  </url>\n")
+                     f"    <lastmod>{meta['date']}</lastmod>\n" + _media_xml(dest, cfg, meta, url, page) + "  </url>\n")
             import search_preview
             t = search_preview.ensure_ns(t.replace("</urlset>", entry + "</urlset>"))
             sm.write_text(t, encoding="utf-8", newline="\n")
@@ -1067,6 +1272,18 @@ def _wp_body_images(cfg, html, slug):
     return html, len(done)
 
 
+def _wp_photo(cfg, meta):
+    """写真の棚から選んだ1枚を WordPress のメディアに上げて {id, url}。棚は記事をまたいで同じ写真を使うので、
+    記事のスラッグでなく ss-shelf- を付けた名前で1回だけ上げて使い回す（先方の画像と名前がぶつからない）"""
+    try:
+        import photo_shelf
+        _, url = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), meta["slug"])
+        return _wp_media_info(cfg, photo_shelf.path_of(url), meta.get("title", ""), "ss-shelf") if url else {}
+    except Exception as e:
+        print(f"  写真の棚をスキップ: {str(e)[:60]}")
+        return {}
+
+
 def _wp_jsonld(cfg, meta, base, url, html, image=""):
     """WordPress の記事の構造化データ。(BlogPosting, そのほかの実体の配列)。
 
@@ -1174,11 +1391,12 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     cat_slug = meta["category"]
     cat_id = _wp_term(cfg, cat_slug, cfg["categories"].get(cat_slug, cat_slug))
 
-    thumb, thumb_url = 0, ""
+    # アイキャッチ画像は写真の棚から内容に合う1枚（FTP・Next.js と同じ選び方）。棚が空なら文字のアイキャッチ
+    info = _wp_photo(cfg, meta)
     eye = meta.get("eyecatch") or ""
-    if eye:
+    if not info.get("id") and eye:
         info = _wp_media_info(cfg, ROOT / "site" / eye.lstrip("/"), meta.get("title", ""), meta["slug"])
-        thumb, thumb_url = info.get("id", 0), info.get("url", "")
+    thumb, thumb_url = info.get("id", 0), info.get("url", "")
 
     url = wp_bridge.url_map(cfg, rows).get(meta["slug"]) or sites_mod.article_url(cfg, meta)
     ld, extra = _wp_jsonld(cfg, meta, credit_ld(credit, url, meta) if credit else None, url, html, thumb_url)

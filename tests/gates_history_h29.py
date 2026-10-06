@@ -188,7 +188,11 @@ def test_wordpress_article_gets_images_entries_and_full_jsonld():
           ("BlogPosting", "https://wp.example/2026/10/06/h29-a/", "VideoObject", "2026-10-06"))
     check("FAQPage は別の実体として _ss_jsonld_extra に入れる", (extra[0]["@type"], extra[0]["mainEntity"][0]["name"]),
           ("FAQPage", "費用は？"))
-    check("アイキャッチの URL を image に入れる", ld.get("image", "").endswith("h29-a-eyecatch.png"), True)
+    # アイキャッチ画像は写真の棚の1枚（h31 で他の方式と揃えた）。棚が空のときだけ文字のアイキャッチ
+    shelf = [m["id"] for m in fake.media.values() if m["slug"].startswith("ss-shelf-")]
+    sent = [d.get("featured_media") for p, d in fake.calls if p == "posts" and d]
+    check("アイキャッチ画像（写真の棚から上げたもの）を featured_media にし、その URL を image に入れる",
+          ["/ss-shelf-" in ld.get("image", ""), bool(shelf) and sent[:1] == shelf[:1]], [True, True])
     check("公開したら llms.txt・GA4 の測定IDを先方へ送る（静的サイトの llms.txt 追記に当たる）",
           ["llms" in fake.settings, fake.settings.get("ga4")], [True, "G-ABCD1234"])
     check("初回はパーマリンクが分かってから構造化データの URL を直す（2回目の保存）",
