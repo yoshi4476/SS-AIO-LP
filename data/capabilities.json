@@ -143,9 +143,9 @@
      "evidence": "scripts/publish.py:842"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:842",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -186,9 +186,9 @@
      "evidence": "scripts/publish.py:785"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:785",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -312,9 +312,9 @@
      "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish_rerender.py:80",
-     "need": "道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 道具（publish_rerender.py）はあるが定期の工程から呼ばれていない。雛形や設定を変えた回に走らせる工程が要る。先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -400,9 +400,9 @@
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:905",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     }
    }
   },
@@ -445,9 +445,9 @@
      "need": "既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:919",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）"
     }
    }
   },
@@ -827,9 +827,9 @@
      "evidence": "scripts/publish.py:801"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:801",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -914,9 +914,9 @@
      "evidence": "scripts/publish.py:745"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:745",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -1043,9 +1043,9 @@
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:1106",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
     }
    }
   },
@@ -1086,9 +1086,9 @@
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:1106",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
     }
    }
   },
@@ -1129,9 +1129,9 @@
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:1106",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
     }
    }
   },
@@ -1173,9 +1173,9 @@
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す。検索データ（season.py が data/season/<id>.json に山の月だけ残す）が12か月分そろうまでは作らない（判定前）"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:1106",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）"
     }
    }
   },
@@ -1349,9 +1349,9 @@
      "note": "external-html と同じ"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:815",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
@@ -1389,9 +1389,9 @@
      "evidence": "scripts/menu_page.py:276"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/menu_page.py:297",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。中身が変わった回だけメールで届く"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。中身が変わった回だけメールで届く"
     }
    }
   },
@@ -1430,9 +1430,9 @@
      "evidence": "scripts/publish.py:673"
     },
     "zip": {
-     "status": "partial",
+     "status": "n/a",
      "evidence": "scripts/publish.py:673",
-     "need": "先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
+     "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）"
     }
    }
   },
