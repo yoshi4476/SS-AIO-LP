@@ -452,7 +452,7 @@
 "modified": "2026-09-12"
 },
 "seikotsuin-hp-shukyaku": {
-"hash": "5b7b5e613de3d2b48fcfd406ab13d971",
+"hash": "a741085facb8bed1138831ab92a6c417",
 "modified": "2026-08-22"
 },
 "seikotsuin-meo-taisaku": {
@@ -499,8 +499,12 @@
 "hash": "76b88d30e2829adec979804fbe064a62",
 "modified": "2026-09-09"
 },
+"shika-hp-chiryou-setsumei-kakikata": {
+"hash": "e48246585aebf86fbc6fdfcedb68971a",
+"modified": "2026-10-06"
+},
 "shika-hp-ryokinhyou-kakikata": {
-"hash": "d3dce0089c34dd865c4e011e83ae3731",
+"hash": "ca9110875351aeea7eab40e59d468657",
 "modified": "2026-10-05"
 },
 "shika-iin-shukyaku": {
