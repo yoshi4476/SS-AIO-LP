@@ -313,8 +313,11 @@ def test_wordpress_plugin_prints_hreflang_and_speeds_up():
     import wp_bridge as W
     print("\n■ WordPress の mu-plugin（2.0.2）: 訳のページへの hreflang と、テーマに触れずに出来る表示速度の直し")
     php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
-    check("版は 2.0.2（見出しの Version と SSB_VERSION がそろう）",
-          [W.plugin_version(php), bool(re.search(r"^ \* Version: 2\.0\.2$", php, re.M))], ["2.0.2", True])
+    # 版は上がっていく（2.0.3 で画像・動画のサイトマップと配信の指紋を足した）。2.0.2 以降で、見出しと定数がそろうこと
+    ver = W.plugin_version(php)
+    head_ver = (re.search(r"^ \* Version: (\d+\.\d+\.\d+)$", php, re.M) or [None, None])[1]
+    check("版は 2.0.2 以降（見出しの Version と SSB_VERSION がそろう）",
+          [tuple(map(int, ver.split("."))) >= (2, 0, 2), head_ver == ver], [True, True])
     alt = php.split("function ssb_alternates($id)", 1)[1].split("\n}\n", 1)[0]
     check("hreflang: 投稿メタ _ss_alternates を REST で書けるように登録する",
           "SSB_META_ALTERNATES => 'string'" in php, True)

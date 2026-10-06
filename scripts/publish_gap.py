@@ -85,6 +85,22 @@ def live_manifest(domain):
         return None
 
 
+def live_manifest_wp(cfg, rows=None):
+    """WordPress の配信済み原稿の指紋（橋渡し 2.0.3 の /ss/v1/urls が投稿メタ _ss_source_hash を返す）。
+    古い橋渡しは指紋を返さないので None（タイトルと本文の突き合わせに切り替える）。
+    配信時の指紋が無いと、本文だけ直した更新が届いたかを見られなかった"""
+    if rows is None:
+        try:
+            import wp_bridge
+            rows = wp_bridge.url_rows(cfg)
+        except Exception:
+            return None
+    posts = [r for r in rows or [] if r.get("type", "post") == "post"]
+    if not posts or not any("hash" in r for r in posts):
+        return None
+    return {r["slug"]: r["hash"] for r in posts if r.get("slug") and r.get("hash")}
+
+
 def source_hash(md_path):
     import hashlib
     return hashlib.sha1(Path(md_path).read_bytes()).hexdigest()[:12]
@@ -215,7 +231,7 @@ def main():
             print(f"■ {site}: 手元 {len(slugs)}本 / 自前ビルドのため照合しません"
                   + (f" / 監修待ち {len(held)}本" if held else ""))
             continue
-        man = None if c.get("type") == "wordpress" else live_manifest(c["domain"])
+        man = live_manifest_wp(c) if c.get("type") == "wordpress" else live_manifest(c["domain"])
         fresh = set() if man is not None else recently_edited()
         stale, why = [], {}
         for s, title, frags, h in slugs:

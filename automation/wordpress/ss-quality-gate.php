@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: 品質ゲートと橋渡し（管制塔との接続）
- * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・訳のページとの hreflang・表示速度・自己更新）を持つ。
- * Version: 2.0.2
+ * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・訳のページとの hreflang・表示速度・画像と動画のサイトマップ・配信の指紋・自己更新）を持つ。
+ * Version: 2.0.3
  *
  * ■ 先方が最初に1回だけすること
  *   1. このファイルを wp-content/mu-plugins/ に置く
@@ -44,10 +44,12 @@ const SSQG_HUMAN_MIN_CHARS = 3000;
 const SSQG_HUMAN_MIN_H2    = 4;
 
 // 自己更新で、届いたファイルの中にこの行があることを確かめる（版の書き換えだけの差し替えを通さない）
-const SSB_VERSION = '2.0.2';
+const SSB_VERSION = '2.0.3';
 const SSB_META_JSONLD_EXTRA = '_ss_jsonld_extra';   // FAQPage など BlogPosting 以外の実体（JSON の配列）
 const SSB_META_ALTERNATES = '_ss_alternates';       // 訳のページとの組（{"en": URL, …} の JSON。同じサイトの URL だけ出す）
 const SSB_META_MANAGED = '_ss_managed';             // 管制塔が作った固定ページの印
+const SSB_META_HASH = '_ss_source_hash';            // 配信した原稿の指紋（/ss/v1/urls で返す。本文の更新が届いたかを管制塔が照合する）
+const SSB_META_MEDIA = '_ss_media';                 // 記事の画像・動画（{"images": [URL], "videos": [{…}]} の JSON。/ss-media-sitemap.xml に出す）
 // 更新元と公開鍵は wp-config.php で上書きできる（鍵を替えるときのため）。ここに置くのは公開鍵だけ
 if (!defined('SSB_UPDATE_URL')) {
     define('SSB_UPDATE_URL', 'https://ai.7senses.co.jp/wp/ss-bridge.json');
@@ -235,7 +237,8 @@ add_action('init', function () {
     $metas = [
         'post' => [SSQG_META_SCORE => 'integer', SSQG_META_BY => 'string',
                    '_ss_gate_last_reason' => 'string', SSQG_META_JSONLD => 'string',
-                   SSB_META_JSONLD_EXTRA => 'string', SSB_META_ALTERNATES => 'string'],
+                   SSB_META_JSONLD_EXTRA => 'string', SSB_META_ALTERNATES => 'string',
+                   SSB_META_HASH => 'string', SSB_META_MEDIA => 'string'],
         // 業種のまとめ・用語集などは固定ページとして作る。_ss_managed の無いページは管制塔が触らない
         'page' => [SSQG_META_JSONLD => 'string', SSB_META_MANAGED => 'string', SSB_META_ALTERNATES => 'string'],
     ];
@@ -514,6 +517,14 @@ function ssb_text_response($text)
  */
 add_action('parse_request', function () {
     $p = ssb_norm(ssb_req_path());
+    if ($p === '/ss-media-sitemap.xml') {
+        status_header(200);
+        header('Content-Type: application/xml; charset=utf-8');
+        header('X-Content-Type-Options: nosniff');
+        header('Cache-Control: public, max-age=3600');
+        echo ssb_media_sitemap();
+        exit;
+    }
     if ($p === '/llms.txt') {
         $t = (string) get_option('ssb_llms', '');
         if ($t !== '') {
@@ -570,8 +581,78 @@ add_filter('robots_txt', function ($out, $public) {
     if (get_option('ssb_llms', '') !== '' && stripos($out, 'llms.txt') === false) {
         $out = rtrim($out) . "\n\n# AI向けのサイト案内: " . home_url('/llms.txt') . "\n";
     }
+    if (stripos($out, 'ss-media-sitemap.xml') === false && ssb_media_posts(1)) {
+        $out = rtrim($out) . "\nSitemap: " . home_url('/ss-media-sitemap.xml') . "\n";
+    }
     return $out;
 }, 99, 2);
+
+
+/**
+ * 画像・動画のサイトマップ（/ss-media-sitemap.xml）。WordPress 本体の wp-sitemap は loc・lastmod 以外の項目を
+ * 受け付けない（画像・動画を載せられない）ので、管制塔が配信した記事の投稿メタ _ss_media から別に作る。
+ * 出すのは JSON として読めた http(s) の URL と文字だけ（esc_xml で退避。任意の XML を出させない）
+ */
+function ssb_media_posts($n)
+{
+    $q = new WP_Query([
+        'post_type' => 'post', 'post_status' => 'publish', 'has_password' => false, 'posts_per_page' => $n,
+        'fields' => 'ids', 'meta_key' => SSB_META_MEDIA, 'no_found_rows' => true, 'orderby' => 'ID', 'order' => 'ASC',
+    ]);
+    return $q->posts;
+}
+
+function ssb_media_url($u, $https_only = false)
+{
+    return is_string($u) && preg_match($https_only ? '#^https://#' : '#^https?://#', $u) ? esc_xml(esc_url_raw($u)) : '';
+}
+
+function ssb_media_sitemap()
+{
+    $out = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
+        . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+        . ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'
+        . ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">' . "\n";
+    foreach (ssb_media_posts(2000) as $id) {
+        $m = json_decode((string) get_post_meta($id, SSB_META_MEDIA, true), true);
+        if (!is_array($m)) {
+            continue;
+        }
+        $body = '';
+        foreach (array_slice((array) ($m['images'] ?? []), 0, 1000) as $img) {
+            $u = ssb_media_url($img);
+            if ($u !== '') {
+                $body .= '<image:image><image:loc>' . $u . '</image:loc></image:image>';
+            }
+        }
+        foreach ((array) ($m['videos'] ?? []) as $v) {
+            if (!is_array($v)) {
+                continue;
+            }
+            $thumb = ssb_media_url($v['thumbnail_loc'] ?? '', true);
+            $player = ssb_media_url($v['player_loc'] ?? '', true);
+            $title = is_string($v['title'] ?? null) ? trim($v['title']) : '';
+            $desc = is_string($v['description'] ?? null) ? trim($v['description']) : '';
+            if ($thumb === '' || $player === '' || $title === '' || $desc === '') {
+                continue;      // 必須（サムネイル・題・説明・再生の場所）がそろわない動画は載せない
+            }
+            $desc = function_exists('mb_substr') ? mb_substr($desc, 0, 2048) : substr($desc, 0, 2048);
+            $body .= '<video:video><video:thumbnail_loc>' . $thumb . '</video:thumbnail_loc>'
+                . '<video:title>' . esc_xml($title) . '</video:title>'
+                . '<video:description>' . esc_xml($desc) . '</video:description>'
+                . '<video:player_loc>' . $player . '</video:player_loc>';
+            $d = (int) ($v['duration'] ?? 0);
+            if ($d >= 1 && $d <= 28800) {
+                $body .= '<video:duration>' . $d . '</video:duration>';
+            }
+            $body .= '</video:video>';
+        }
+        if ($body !== '') {
+            $out .= '<url><loc>' . esc_xml(esc_url_raw(get_permalink($id))) . '</loc>' . $body . "</url>\n";
+        }
+    }
+    return $out . "</urlset>\n";
+}
 
 
 /**
@@ -745,7 +826,9 @@ add_action('rest_api_init', function () {
             foreach ($q->posts as $id) {
                 $rows[] = ['url' => get_permalink($id), 'slug' => get_post_field('post_name', $id),
                            'type' => get_post_type($id), 'modified' => get_post_modified_time('c', true, $id),
-                           'managed' => get_post_meta($id, SSB_META_MANAGED, true) !== ''];
+                           'managed' => get_post_meta($id, SSB_META_MANAGED, true) !== '',
+                           // 配信した原稿の指紋（管制塔の publish_gap が、本文の更新が届いたかを照合する）
+                           'hash' => (string) get_post_meta($id, SSB_META_HASH, true)];
             }
             return ['page' => $page, 'pages' => (int) $q->max_num_pages, 'urls' => $rows];
         },

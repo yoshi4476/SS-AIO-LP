@@ -1611,6 +1611,23 @@ def wp_alternates(cfg, rows, meta, url):
         return {}
 
 
+def wp_media(html, thumb_url, ld):
+    """WordPress の記事の画像・動画（サイトマップの材料）。画像は上げた後の URL（アイキャッチと本文）、
+    動画は構造化データの VideoObject から。必須（サムネイル・題・説明・再生の場所）のそろう動画だけ"""
+    import search_preview as SP
+    imgs = [u for u in dict.fromkeys([thumb_url] + re.findall(r'<img[^>]+src="(https?://[^"]+)"', html)) if u]
+    vids = []
+    v = (ld or {}).get("video")
+    for x in (v if isinstance(v, list) else [v] if isinstance(v, dict) else []):
+        thumb = x.get("thumbnailUrl")
+        thumb = thumb[0] if isinstance(thumb, list) and thumb else thumb
+        if thumb and x.get("name") and x.get("description") and x.get("embedUrl"):
+            vids.append({"thumbnail_loc": thumb, "title": x["name"],
+                         "description": str(x["description"])[:SP.MAX_VIDEO_DESC], "player_loc": x["embedUrl"],
+                         "duration": SP._seconds(x.get("duration"))})
+    return {"images": imgs[:SP.MAX_IMAGES], "videos": vids}
+
+
 def write_wordpress(cfg, meta, body, src: Path, push=False):
     """記事をWordPressへ送る。
 
@@ -1688,7 +1705,11 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
         "meta": {"_ss_quality_score": score, "_ss_written_by": "agent", "_ss_jsonld": jsonld,
                  "_ss_jsonld_extra": json.dumps(extra, ensure_ascii=False) if extra else "",
                  # 訳のページとの組。head の hreflang は先方の mu-plugin が出す（訳のページが公開されているものだけ）
-                 "_ss_alternates": json.dumps(alts, ensure_ascii=False) if alts else ""},
+                 "_ss_alternates": json.dumps(alts, ensure_ascii=False) if alts else "",
+                 # 原稿の指紋（publish_gap が /ss/v1/urls で本文の更新が届いたかを照合する）と、画像・動画のサイトマップの
+                 # 材料（mu-plugin 2.0.3 が /ss-media-sitemap.xml に出す）。古い mu-plugin は黙って捨てる
+                 "_ss_source_hash": source_hash(src) if Path(src).is_file() else "",
+                 "_ss_media": json.dumps(wp_media(html, thumb_url, ld), ensure_ascii=False)},
     }
     if thumb:
         payload["featured_media"] = thumb
