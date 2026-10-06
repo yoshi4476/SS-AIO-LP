@@ -52,7 +52,7 @@ if (!defined('SSB_UPDATE_URL')) {
     define('SSB_UPDATE_URL', 'https://ai.7senses.co.jp/wp/ss-bridge.json');
 }
 if (!defined('SSB_PUBKEY')) {
-    define('SSB_PUBKEY', '');   // Ed25519 の公開鍵（base64）。python scripts/wp_bridge.py --keygen が書く
+    define('SSB_PUBKEY', 'hlNuMbLzh43H3cU8vTuF+ADK/mV4+0LG8Oi4pMwhaqY=');   // Ed25519 の公開鍵（base64）。python scripts/wp_bridge.py --keygen が書く
 }
 
 
