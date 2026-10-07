@@ -308,34 +308,34 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:80",
+     "evidence": "scripts/publish_changed.py:93",
      "note": "build.py が毎回描き直す",
      "anchor": "if cfg[\"type\"] == \"self-static\":"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:103",
+     "evidence": "scripts/publish_changed.py:116",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:103",
+     "evidence": "scripts/publish_changed.py:116",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:103",
+     "evidence": "scripts/publish_changed.py:116",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:103",
+     "evidence": "scripts/publish_changed.py:116",
      "note": "同じ slug の投稿を更新する",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:103",
+     "evidence": "scripts/publish_changed.py:116",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "zip": {

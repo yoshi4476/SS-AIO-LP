@@ -50,11 +50,43 @@ def get(url, ua=UA, timeout=30):
         return 0, ""
 
 
-def sample_articles(domain, n=3):
-    """sitemapから記事URLを何本か拾う"""
-    _, xml = get(f"https://{domain}/sitemap.xml")
-    urls = re.findall(r"<loc>([^<]+)</loc>", xml)
-    arts = [u for u in urls if u.rstrip("/").count("/") >= 4]
+def article_slugs(site_id):
+    """その社の記事（公開基準を満たす原稿）の slug。
+    sitemap の深さ（/ の数）で記事を決めていたため、業種ハブ・用語集・調査・事例のページまで記事に数え、
+    ai-lab の llms.txt を「74%」と誤って出していた（2026-10-07。原稿の記事で数えると 146/146 本＝100%）"""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import publish as P
+    import sites as S
+    out = set()
+    for p in (ROOT / "articles").glob("*.md"):
+        if p.name.startswith("_"):
+            continue
+        m = P.read_meta(p)
+        if m and S.find_category_owner(m.get("category", "")) == site_id and P.gate_ok(m):
+            out.add(p.stem)
+    return out
+
+
+def _norm(u):
+    return u.split("#")[0].split("?")[0].rstrip("/")
+
+
+def article_urls(sitemap_xml, slugs):
+    """sitemap のURLのうち、末尾がその社の記事の slug のもの（WordPress のパーマリンクでも同じに数える）"""
+    return [u for u in re.findall(r"<loc>([^<]+)</loc>", sitemap_xml) if _norm(u).rsplit("/", 1)[-1] in slugs]
+
+
+def article_coverage(sitemap_xml, llms_text, slugs):
+    """(llms.txt に載っている記事の数, sitemap にある記事の数, 載っていない記事のURL)"""
+    arts = article_urls(sitemap_xml, slugs)
+    listed = {_norm(u) for u in re.findall(r"\((https?://[^)\s]+)\)", llms_text)}
+    miss = [u for u in arts if _norm(u) not in listed]
+    return len(arts) - len(miss), len(arts), miss
+
+
+def sample_articles(sitemap_xml, slugs, n=3):
+    """sitemap から、その社の記事のURLを何本か拾う（記事でないページは拾わない）"""
+    arts = article_urls(sitemap_xml, slugs)
     random.seed(0)                       # 毎回同じ標本にして、前回と比べられるようにする
     return random.sample(arts, min(n, len(arts))) if arts else []
 
@@ -105,21 +137,20 @@ def main():
         if blocked:
             ng.append(f"{site}: {'/'.join(blocked)} が読めません")
 
-        # 2. 案内ファイルが記事数に追いついているか
+        # 2. 案内ファイルが記事数に追いついているか（sitemap にある、その社の記事のうち llms.txt に載っている割合）
         code, llms = get(f"https://{d}/llms.txt")
-        listed = len(re.findall(r"^- \[", llms, re.M)) if code == 200 else 0
         _, xml = get(f"https://{d}/sitemap.xml")
-        total = len([u for u in re.findall(r"<loc>([^<]+)</loc>", xml)
-                     if u.rstrip("/").count("/") >= 4])
+        slugs = article_slugs(site)
+        listed, total, miss = article_coverage(xml, llms if code == 200 else "", slugs)
         rate = (listed / total * 100) if total else 0
         print("\n  ▼ 生成エンジン向けの案内（llms.txt）")
-        print(f"     掲載 {listed}件 / 記事 {total}本（{rate:.0f}%）")
-        if rate < 80:
+        print(f"     掲載 {listed}件 / 記事 {total}本（{rate:.0f}%）" + (f"  例: {miss[0]}" if miss else ""))
+        if total and rate < 80:
             ng.append(f"{site}: llms.txt の掲載が {rate:.0f}% しかありません")
 
         # 3〜5. 記事の中身が引用に耐えるか
         print(f"\n  ▼ 引用しやすい作りか（{a.articles}本を抽出）")
-        for u in sample_articles(d, a.articles):
+        for u in sample_articles(xml, slugs, a.articles):
             code, html = get(u)
             if code != 200:
                 print(f"     取得できません（{code}）: {u}")

@@ -31,18 +31,21 @@ UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-watch/1.0)"}
 
 
 def expected_articles(sid, arts, day):
-    """その日に書くはずの本数。月の上限に達していれば0、量産の兆候で絞っていればその本数"""
+    """その日に書くはずの本数。月の上限に達していれば0、量産の兆候で絞っていればその本数。
+    上限は社ごと（daily_audit.site_cap）。全社60で数えると、月30本と決めた社（rules.monthly_cap）が
+    上限で止まった日から月末まで「書かれていない」と毎日知らせてしまう（2026-10-07 の点検）"""
     import daily_audit as D
     before = sum(1 for a in arts if a["date"][:7] == day.isoformat()[:7] and a["date"] < day.isoformat()
                  and D._is_published(a, need_review=False))
-    if before >= D.MONTHLY_CAP:
+    cap = D.site_cap(sid)
+    if before >= cap:
         return 0
     try:
         import pace
         q = pace.quota(sid)
     except Exception:
         q = D.DAILY_TARGET
-    return min(D.DAILY_TARGET, q, D.MONTHLY_CAP - before)
+    return min(D.DAILY_TARGET, q, cap - before)
 
 
 def check_articles(day, bad):

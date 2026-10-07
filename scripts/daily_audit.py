@@ -94,19 +94,47 @@ _REVIEWS = None      # 監修の記録（1回の実行で1度だけ読む）
 # 記事を公開する時刻（JST）。この時刻を過ぎていなければ、まだ無くて当然。
 # GitHub Actions の定期実行は数時間ずれることがある。実際、21:30の救済が
 # 翌03:07に走り、「本日0本」と見て6本を書こうとしてターン上限で落ちた
+# 枠の時刻は publish_hours が pipeline-multi.yml から求める。ここは求められないとき（ワークフローを読めない等）の控え
 PUBLISH_HOURS = {"ai-lab": (8, 15), "corporate": (10, 17), "subsidy": (12, 19)}
 GRACE_HOURS = 2      # 公開の時刻から、これだけ過ぎて無ければ不足とみなす
+WORKFLOW = ROOT / ".github" / "workflows" / "pipeline-multi.yml"
 
 
-def _due_now(sid):
-    """いまの時刻で、何本まで公開されているべきか"""
+def publish_hours(sid):
+    """その社の記事の枠の時刻（JST の時）。pipeline-multi.yml の「対象サイトの判定」と同じ割り当てで求める
+    （cron の並び＝枠の番号・site_order の並び・枠の番号 % 社数・その日の何本目 < 1日の本数）。
+    3社の時刻を手で書いていたため、社を足すと枠の時刻とずれ、書いていない社（CONFLUX）は時刻に関係なく
+    「不足」になり、夜の救済が先回りで1本書いて1日1本の決まりを超えるところだった（2026-10-07 の点検）。
+    求められないときは None"""
+    try:
+        import site_order
+        crons = re.findall(r'^\s*- cron:\s*"([^"]+)"', WORKFLOW.read_text(encoding="utf-8"), re.M)
+        order = site_order.order()
+    except Exception:
+        return None
+    if sid not in order or not crons:
+        return None
+    n, i = len(order), order.index(sid)
+    try:
+        import pace
+        q = min(DAILY_TARGET, pace.quota(sid))
+    except Exception:
+        q = DAILY_TARGET
+    return tuple(sorted((int(c.split()[1]) + 9) % 24 for slot, c in enumerate(crons)
+                        if slot < n * 2 and slot % n == i and slot // n < q))
+
+
+def _due_now(sid, hour=None):
+    """いまの時刻（JST の時。hour で与えることもできる）で、何本まで公開されているべきか"""
     import datetime
-    jst = (datetime.datetime.now(datetime.timezone.utc)
-           + datetime.timedelta(hours=9))
-    hours = PUBLISH_HOURS.get(sid)
-    if not hours:
+    if hour is None:
+        hour = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=9)).hour
+    hours = publish_hours(sid)
+    if hours is None:
+        hours = PUBLISH_HOURS.get(sid)
+    if hours is None:
         return DAILY_TARGET
-    return sum(1 for h in hours if jst.hour >= h + GRACE_HOURS)
+    return sum(1 for h in hours if hour >= h + GRACE_HOURS)
 
 
 def check_volume(todo):
@@ -134,7 +162,7 @@ def check_volume(todo):
         due = min(want, _due_now(sid))      # いまの時刻で在るべき本数
         mark = "OK " if n >= due else "不足"
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"
-        print(f"  {mark} {sid:10s} 本日 {n}/{want}本  今月 {month}/{MONTHLY_CAP}本"
+        print(f"  {mark} {sid:10s} 本日 {n}/{want}本  今月 {month}/{site_cap(sid)}本"
               f"  （累計 {len(arts)}本）{yet}")
         # 公開の時刻より前に「不足」と言うと、救済が先回りして1日分を
         # まとめて書こうとする。時刻が来たぶんだけを不足として数える

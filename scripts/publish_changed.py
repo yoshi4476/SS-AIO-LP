@@ -29,6 +29,18 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import publish as P  # noqa: E402
 import sites as sites_mod  # noqa: E402
 
+def failure_line(failed):
+    """配信に落ちた記事の「要対応」の1行（呼び出し側のワークフローが findings.txt へ足す）。
+    週次・集中モード・月次は `|| true` で呼び、--since でその回に直した分だけを送る。
+    落ちた記事は次に原稿が変わるまで送られず、印も通知も無いため誰も気づかなかった（2026-10-07 の点検）"""
+    if not failed:
+        return ""
+    sites = sorted({f.split("/", 1)[0] for f in failed})
+    return (f"要対応: 書き直した記事のうち {len(failed)}本が配信先に届いていません"
+            f"（{'、'.join(failed[:4])}{' ほか' if len(failed) > 4 else ''}）。"
+            + "・".join(f"python scripts/publish_changed.py --site {s} --push" for s in sites)
+            + " で送り直してください（--since なしでも push されるのは本文の変わった記事だけ）")
+
 
 def site_articles(site_id):
     """そのサイトが担当する記事を返す（公開基準を満たすものだけ）"""
@@ -75,6 +87,7 @@ def main():
         ap.error("--site か --all を指定してください")
 
     total_ok = total_ng = 0
+    failed = []         # 届かなかった記事（社/slug）。打ち切った残りも含める
     for sid in ids:
         cfg = sites_mod.load(sid)
         if cfg["type"] == "self-static":
@@ -114,6 +127,7 @@ def main():
             else:
                 ng += 1
                 miss += 1
+                failed.append(f"{sid}/{slug}")
                 why = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
                 print(f"   [{i}/{len(targets)}] × {slug}: {why[-1][:70] if why else '原因不明'}",
                       flush=True)
@@ -123,6 +137,7 @@ def main():
                 if miss >= 3:
                     print("   → 3本続けて失敗しました。環境の問題とみなして中断します")
                     print("      python scripts/token_check.py で権限を確かめてください")
+                    failed += [f"{sid}/{s}" for s in targets[i:]]
                     break
         print(f"   配信 {ok}本 / 失敗 {ng}本\n")
         total_ok += ok
@@ -130,6 +145,8 @@ def main():
 
     if a.push:
         print(f"PUBLISH_CHANGED: 成功 {total_ok}本 / 失敗 {total_ng}本")
+        if failed:
+            print(failure_line(failed))
     else:
         print("※ --push を付けると実際に配信します")
     return 1 if total_ng else 0

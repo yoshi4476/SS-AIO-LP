@@ -118,7 +118,7 @@
     "agent": 40,
     "ai": 15
   },
-  "gsc_owner": false,
+  "gsc_owner": true,
   "bing_consent": true,
   "report_issuer": "client",
   "rules": {
@@ -150,6 +150,7 @@
     "url": "https://conflux-partners.jp/package"
   },
   "onboarding": {
+    "ga4_viewer": true,
     "ga4_installed": true,
     "gsc_property": "URLプレフィックス",
     "git_invited": true,

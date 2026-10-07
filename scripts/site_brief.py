@@ -194,8 +194,10 @@ def main():
         _n = sum(1 for a in daily_audit.articles_by_site().get(cfg["id"], [])
                  if a["date"][:7] == _ym
                  and daily_audit._is_published(a, need_review=False))
-        if _n >= daily_audit.MONTHLY_CAP:
-            print(f"\n!! 今月の公開 {_n}/{daily_audit.MONTHLY_CAP}本で上限に達しています。"
+        # 上限は社ごと（ヒアリングシートで減らした rules.monthly_cap）。publish_flow と同じ数で知らせる
+        _cap = daily_audit.site_cap(cfg["id"])
+        if _n >= _cap:
+            print(f"\n!! 今月の公開 {_n}/{_cap}本で上限に達しています。"
                   "新規記事は書かず、リライトに回すこと")
             print("MONTHLY_CAP_REACHED=yes")
     except Exception as e:   # 上限の表示で案内全体を止めない

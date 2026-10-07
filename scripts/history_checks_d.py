@@ -13,6 +13,7 @@
     python scripts/history_checks_d.py
 
 見つかったら「要対応: …」と HISTD_OK=no を出して 0 で終わる。動けなかったときだけ 1。
+GitHub API の検査（1・4）が動けなかった回は HISTD_GH_OK=unknown も出す（findings は「動かせず」と知らせる）。
 鍵の値は出さない（名前と HTTP の状態だけ）。
 """
 import json
@@ -34,6 +35,9 @@ OPTIONAL = {"ANTHROPIC_API_KEY", "SLACK_WEBHOOK_URL", "CLAUDE_CITE_API_KEY", "XA
             "OPENAI_API_KEY", "PERPLEXITY_API_KEY", "GBP_CLIENT_JSON", "GBP_TOKENS_JSON",
             "CODEX_AUTH_JSON", "X_BEARER_TOKEN", "BING_WEBMASTER_API_KEY"}
 SNS_PREFIX = ("FB_", "IG_", "LINKEDIN_", "THREADS_", "SOCIAL_TOKENS")
+# GitHub API の検査（鍵の登録・配信先のフォント）が動けなかった理由。動けなかった回を「問題なし」と読ませない。
+# 2026-10-05 の週次は CI に GH_TOKEN が無く、2つとも動かないまま HISTD_OK=yes と出ていた
+GH_SKIPPED = []
 
 
 def _env(key):
@@ -51,11 +55,13 @@ def workflow_secrets():
 def check_secrets(found):
     if not shutil.which("gh"):
         print("  GitHub Secrets: gh が無いため確かめられません")
+        GH_SKIPPED.append("鍵の登録: gh が無い")
         return
     r = subprocess.run(["gh", "secret", "list", "--json", "name"], cwd=ROOT, capture_output=True,
                        text=True, encoding="utf-8", errors="replace", timeout=60)
     if r.returncode != 0:
         print(f"  GitHub Secrets: 一覧を取れません（{(r.stderr or '').strip()[:80]}）")
+        GH_SKIPPED.append(f"鍵の登録: {(r.stderr or '').strip()[:60]}")
         return
     have = {d["name"] for d in json.loads(r.stdout or "[]")}
     miss = sorted(workflow_secrets() - have)
@@ -184,15 +190,19 @@ def check_delivery_fonts(found):
     import sites as S
     if not shutil.which("gh"):
         print("  配信先のフォント: gh が無いため確かめられません")
+        GH_SKIPPED.append("配信先のフォント: gh が無い")
         return
+    tried, failed = 0, []
     for sid, cfg in S.load_all().items():
         repo = cfg.get("repo") or ""
         if cfg.get("type") == "self-static" or "/" not in repo:
             continue
+        tried += 1
         r = subprocess.run(["gh", "api", "-X", "GET", "search/code", "-f", f'q="next/font/google" repo:{repo}'],
                            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
         if r.returncode != 0:
             print(f"  配信先のフォント: {repo} を検索できません（{(r.stderr or '').strip()[:60]}）")
+            failed.append((r.stderr or "").strip()[:60])
             continue
         hits = []
         for it in json.loads(r.stdout or "{}").get("items", []):
@@ -206,17 +216,26 @@ def check_delivery_fonts(found):
         print(f"  配信先のフォント: {repo} " + ("import なし" if not hits else f"import {len(hits)}件"))
         for h in hits:
             found.append(f"要対応: {repo}/{h} が next/font/google を import しています（CI のビルドが外部取得で落ちる。next/font/local へ）")
+    if tried and len(failed) == tried:
+        GH_SKIPPED.append(f"配信先のフォント: {failed[-1]}")
 
 
 def main():
     found = []
+    GH_SKIPPED.clear()
     for fn in (check_secrets, check_gas, check_engines, check_delivery_fonts):
         try:
             fn(found)
         except Exception as ex:
             print(f"  {fn.__name__}: 確かめられませんでした（{type(ex).__name__}: {str(ex)[:80]}）")
+            if fn in (check_secrets, check_delivery_fonts):
+                GH_SKIPPED.append(f"{fn.__name__}: {type(ex).__name__}")
     for f in found:
         print(f)
+    # 動けなかった GitHub API の検査は *_OK=unknown で出す。findings は「動かせず」として知らせる（CLAUDE.md 8.7）。
+    # CI で動かすには、鍵の一覧を読めるトークンを GH_TOKEN に渡す（GITHUB_TOKEN では Secrets の一覧を読めない）
+    if GH_SKIPPED:
+        print("HISTD_GH_OK=unknown（" + " / ".join(GH_SKIPPED)[:160] + "）")
     print(f"HISTD_OK={'no' if found else 'yes'}")
     return 0
 
