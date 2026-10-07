@@ -211,6 +211,44 @@
     });
   }, { passive: true });
 
+  // 入口（/lp/・/contact/・/download/・/tools/ の診断）へのリンク。ボタンでも本文の文字リンクでも押されたら数える。
+  // 本文の普通のリンクの入口（約200本）は押されても送られず、どの入口が効いているか分からなかった（2026-10-08）
+  var ENTRY = /^\/(?:lp|contact|download|tools)(?:\/|$)/;
+  function isEntry(a) {
+    if (a.tagName !== 'A' || !a.getAttribute('href') || (a.host && a.host !== location.host)) return false;
+    return ENTRY.test(a.pathname);
+  }
+  // data-cta の無いボタン・リンクの名前は「ページの種類＋位置＋行き先」で付ける（例: article_body3_tools_ai_check）。
+  // 文言から作ると日本語が落ち、305本が同じ「AI」になっていた
+  function pageKind() {
+    var p = location.pathname;
+    if (p === '/' || p === '/index.html') return 'top';
+    if (document.querySelector('main.article .article-body')) return 'article';
+    return slugId(p.split('/')[1]);
+  }
+  function region(el) {
+    if (!el.closest) return 'main';
+    var r = el.closest('.site-header') ? 'head' : el.closest('.site-footer') ? 'foot'
+      : el.closest('.scan-sticky, .sticky-cta') ? 'sticky' : el.closest('.article-side') ? 'side'
+      : el.closest('.article-body') ? 'body' : '';
+    if (r) return r;
+    var s = el.closest('[data-area-id]');
+    return s ? slugId(s.getAttribute('data-area-id')) : 'main';
+  }
+  function dest(el) {
+    var f = el.form || (el.closest && el.closest('form'));
+    var to = el.tagName === 'A' ? el.pathname + el.hash : (f && f.getAttribute('action')) || '';
+    return slugId(to.replace(/#/g, '_')) || 'here';
+  }
+  function autoId(el) {
+    var r = region(el), d = dest(el);
+    // 同じ位置・同じ行き先が2つ以上あれば、ページの中の順番を付けて分ける
+    var same = Array.prototype.filter.call(document.querySelectorAll('a[href], button'), function (x) {
+      return region(x) === r && dest(x) === d;
+    });
+    return pageKind() + '_' + r + (same.length > 1 ? same.indexOf(el) + 1 : '') + '_' + d;
+  }
+
   // cta_click + cta_〈ボタンID〉（設置場所別）/ 電話タップ
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a, button') : null;
@@ -226,8 +264,8 @@
     // data-cta を付けた文字リンク（記事の診断の下の「AI診断」など）も数える。ボタンの形のものだけを
     // 数えていたため、足した入口が効いたかを測れなかった（2026-10-04）
     if (a.classList && (a.classList.contains('btn') || a.classList.contains('nav-cta') ||
-                        a.classList.contains('cta-button') || a.hasAttribute('data-cta'))) {
-      var id = a.getAttribute('data-cta') || slugId((a.textContent || '').trim());
+                        a.classList.contains('cta-button') || a.hasAttribute('data-cta') || isEntry(a))) {
+      var id = a.getAttribute('data-cta') || autoId(a);
       var params = { cta_id: id, page_path: location.pathname };
       var abv = a.getAttribute('data-ab-variant');
       if (abv) {
