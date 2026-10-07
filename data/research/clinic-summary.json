@@ -1,21 +1,23 @@
 {
  "total": {
-  "clinic": 1141,
-  "portal": 451,
+  "clinic": 1188,
+  "portal": 455,
   "other": 38,
-  "maker": 132,
-  "media": 178,
+  "maker": 133,
+  "media": 181,
   "review": 7,
-  "public": 216,
+  "public": 344,
   "video": 12,
   "wiki": 4
  },
  "by_engine": {
   "ChatGPT": {
-   "clinic": 99,
+   "clinic": 146,
    "review": 5,
-   "portal": 4,
-   "public": 1
+   "portal": 8,
+   "public": 129,
+   "media": 3,
+   "maker": 1
   },
   "Gemini": {
    "clinic": 265,
@@ -59,57 +61,57 @@
    "public": 3
   },
   "費用": {
-   "portal": 45,
-   "clinic": 413,
-   "public": 24,
+   "portal": 48,
+   "clinic": 424,
+   "public": 35,
    "maker": 12,
    "media": 42,
    "other": 7,
    "video": 1
   },
   "選び方": {
+   "public": 99,
    "clinic": 155,
-   "media": 41,
-   "portal": 42,
+   "media": 42,
+   "portal": 43,
    "other": 6,
-   "public": 61,
    "video": 4,
    "maker": 27
   },
   "症状": {
-   "clinic": 282,
-   "media": 54,
+   "public": 79,
+   "clinic": 303,
+   "media": 56,
    "portal": 60,
    "maker": 38,
-   "public": 34,
    "video": 3,
    "other": 4,
    "wiki": 4
   },
   "受診のしかた": {
-   "clinic": 139,
-   "public": 94,
+   "clinic": 154,
+   "public": 128,
    "portal": 62,
    "media": 35,
-   "maker": 54,
+   "maker": 55,
    "video": 4,
    "other": 5
   }
  },
  "answered": {
-  "ChatGPT": 34,
+  "ChatGPT": 100,
   "Gemini": 59,
   "Perplexity": 100,
   "Claude": 100
  },
  "has_clinic": {
-  "ChatGPT": 26,
+  "ChatGPT": 52,
   "Gemini": 55,
   "Claude": 79,
   "Perplexity": 71
  },
  "sources": {
-  "ChatGPT": 109,
+  "ChatGPT": 292,
   "Gemini": 440,
   "Perplexity": 813,
   "Claude": 817
@@ -175,14 +177,14 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 293,
-   "clinic": 231,
+   "answers": 359,
+   "clinic": 257,
    "other": 37,
-   "portal": 184,
-   "maker": 78,
-   "media": 105,
+   "portal": 187,
+   "maker": 79,
+   "media": 108,
    "review": 7,
-   "public": 91,
+   "public": 149,
    "video": 12,
    "wiki": 4
   },
@@ -197,43 +199,43 @@
    "public": 3
   },
   "費用": {
-   "answers": 72,
-   "portal": 35,
-   "clinic": 69,
-   "public": 17,
-   "maker": 12,
+   "answers": 80,
+   "portal": 37,
+   "public": 22,
+   "clinic": 74,
    "media": 23,
+   "maker": 12,
    "other": 7,
    "video": 1
   },
   "選び方": {
-   "answers": 37,
-   "clinic": 31,
-   "public": 20,
-   "portal": 23,
+   "answers": 52,
+   "public": 35,
    "video": 4,
    "other": 5,
-   "media": 22,
+   "media": 23,
+   "clinic": 31,
+   "portal": 24,
    "maker": 12
   },
   "症状": {
-   "answers": 55,
-   "clinic": 55,
-   "media": 35,
+   "answers": 80,
+   "public": 42,
+   "clinic": 69,
    "portal": 37,
+   "media": 37,
    "maker": 29,
-   "public": 20,
    "video": 3,
    "other": 4,
    "wiki": 4
   },
   "受診のしかた": {
-   "answers": 49,
-   "clinic": 35,
-   "public": 31,
-   "media": 19,
+   "answers": 67,
+   "clinic": 42,
+   "public": 47,
    "portal": 29,
-   "maker": 24,
+   "media": 19,
+   "maker": 25,
    "video": 4,
    "other": 5
   }

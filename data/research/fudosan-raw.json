@@ -1166,7 +1166,11 @@
   "仲介手数料 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.ur-net.go.jp/chintai/sp/college/202107/000707.html",
+     "https://www.mlit.go.jp/notice/noticedata/sgml/1970/26197000/26197000.html",
+     "https://www.mlit.go.jp/policy/shingikai/content/001864121.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1212,7 +1216,17 @@
   "不動産売却 費用 内訳": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://www.pref.osaka.lg.jp/o130200/kenshin/houshu/index.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7108.htm",
+     "https://t-k-download.moj.go.jp/application/manual/fudousan_sougou_teitouken_massyou.pdf",
+     "https://www.smbc.co.jp/kojin/fee/loan.html",
+     "https://www.rehouse.co.jp/sell/flow/step01/",
+     "https://www.rehouse.co.jp/sell/lp/hiyo/?lp=hiyo_top",
+     "https://www.nta.go.jp/taxes/shiraberu/shinkoku/tokushu/keisubetsu/fudousan.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3302.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1252,7 +1266,12 @@
   "家を売る 税金": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3202.htm",
+     "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/05_3.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3302.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7108.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1301,7 +1320,14 @@
   "マンション売却 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7108.htm",
+     "https://www.nomu.com/seller/column/20251015_1.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3208.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3211.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3302.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1348,7 +1374,13 @@
   "土地 売却 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/policy/shingikai/content/001864121.pdf",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7108.htm",
+     "https://houmukyoku.moj.go.jp/homu/content/001325692.pdf",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3208.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3211.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1392,7 +1424,12 @@
   "賃貸 初期費用 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/chintai/fr_money/chintai_shokihiyou/",
+     "https://www.homes.co.jp/cont/rent/rent_01089/",
+     "https://www.homes.co.jp/cont/rent/rent_00645/",
+     "https://www.homes.co.jp/cont/rent/rent_00762/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1496,7 +1533,11 @@
   "家 査定 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nomu.com/seller/column/20221227.html",
+     "https://www.rehouse.co.jp/relifemode/column/at/at_0397/",
+     "https://www.athome.co.jp/contents/for-sellers/sellers-knowhow/appraisal-cost/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1543,7 +1584,14 @@
   "相続 不動産 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/05_1.htm",
+     "https://www.shiho-shoshi.or.jp/about/remuneration/",
+     "https://www.moj.go.jp/MINJI/minji05_00565.html",
+     "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/05_5.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm",
+     "https://houmukyoku.moj.go.jp/homu/page7_000017.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1599,7 +1647,10 @@
   "住宅ローン 諸費用 目安": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.bk.mufg.jp/kariru/jutaku/column/020/index.html",
+     "https://www.smbc.co.jp/kojin/jutaku_loan/column/expense/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1645,7 +1696,12 @@
   "中古マンション 購入 諸費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/ms_shinchiku/ms_money/mansion_syohiyo/",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7108.htm",
+     "https://suumo.jp/article/oyakudachi/oyaku/ms_chuko/mc_money/second-hand-apartment_initial_cost/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1701,7 +1757,12 @@
   "固定資産税 計算": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.city.chiba.jp/zaiseikyoku/zeimu/kazeikanri/koteishisan_keisan.html",
+     "https://www.city.kodaira.tokyo.jp/kurashi/037/037046.html",
+     "https://www.city.chiba.jp/faq/zaiseikyoku/zeimu/kazeikanri/91.html",
+     "https://www.city.kashiwa.lg.jp/shisanzei/zeikin/kotei/toti/shikumi.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1815,7 +1876,15 @@
   "空き家 売却 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7108.htm",
+     "https://suumo.jp/baikyaku/guide/entry/akiya_baikyaku",
+     "https://suumo.jp/baikyaku/guide/entry/sarachi_hiyo",
+     "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/05_3.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3258.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3306.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2126,7 +2195,11 @@
   "任意売却 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.flat35.com/files/topics/6453_ext_99_0.pdf",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://iekon.jp/column/voluntary-sale/28956"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2174,7 +2247,12 @@
   "不動産会社 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.ur-net.go.jp/chintai/sp/college/202002/000479.html",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://www.kokusen.go.jp/news/data/n-20220303_1.html",
+     "https://www.retio.or.jp/wp-content/uploads/2024/10/baibai.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2214,7 +2292,10 @@
   "仲介 買取 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.rehouse.co.jp/relifemode/column/at/at_0056/",
+     "https://www.homes.co.jp/satei/media/entry/cont/sale_00070"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2254,7 +2335,14 @@
   "一括査定 デメリット": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://life.oricon.co.jp/rank_carbuyer/special/knowledge-assessment/bulk-assessment-stop/",
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/satei-knowhow/5629/",
+     "https://kurumakaitori.kakaku.com/kuruma_kaitori/article02/011.html",
+     "https://www.athome.co.jp/contents/for-sellers/sellers-knowhow/appraisal-all-at-once/",
+     "https://www.kokusen.go.jp/news/data/n-20240618_1.html",
+     "https://www.stepon.co.jp/uri/column/019/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2294,7 +2382,10 @@
   "専任媒介 一般媒介 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.kinkireins.or.jp/baikai/",
+     "https://takuken.net/pdf/r6baibai_tebiki.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2334,7 +2425,11 @@
   "大手 地元 不動産 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_01495/",
+     "https://www.homes.co.jp/cont/rent/rent_00488/",
+     "https://www.fudosan-entetsu.jp/osumubi/sell/559/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2382,7 +2477,11 @@
   "賃貸 不動産屋 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://tokyo.zennichi.or.jp/ippan/point/",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://www.ur-net.go.jp/chintai/sp/college/202002/000479.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2431,7 +2530,11 @@
   "管理会社 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.livable.co.jp/fudosan-toushi/knowledge/basic/pro066/",
+     "https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/pm_portal/administrator_duties.html",
+     "https://etsuran2.mlit.go.jp/TAKKEN/chintaiKensaku.do"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2480,7 +2583,11 @@
   "売却 時期 いつ": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.stepon.co.jp/uri/column/009/",
+     "https://sumitas.jp/sell/guide/6943/",
+     "https://suumo.jp/baikyaku/guide/entry/jukatsu-timing-2/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2520,7 +2627,10 @@
   "住み替え 進め方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.smtb.jp/personal/column/life-event-column/column_12",
+     "https://www.rehouse.co.jp/sell/replace-flow/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2569,7 +2679,12 @@
   "中古 新築 どっち": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/shoene-jutaku/index.html",
+     "https://www.chord.or.jp/case/detail/detail_6643.html",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/consumer/existing_housing_kizonjutaku.html",
+     "https://www.mansion-info.mlit.go.jp/manshion_kanri/329/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2609,7 +2724,11 @@
   "マンション 戸建て どっち": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/sumai_nyumon/hikaku/jibunniaunoha_mansion_vs_ikkodate/",
+     "https://www.mlit.go.jp/sumai_literacy_pf/knowledge02/0005/",
+     "https://www.mansion-info.mlit.go.jp/manshion_kanri/329/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2649,7 +2768,11 @@
   "賃貸 持ち家 どっち": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/sumai_literacy_pf/knowledge02/0003/",
+     "https://www.mlit.go.jp/sumai_literacy_pf/knowledge02/0005/",
+     "https://www.mansion-info.mlit.go.jp/manshion_kanri/329/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2689,7 +2812,12 @@
   "リノベーション物件 注意点": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk4_000001.html",
+     "https://www.mansion-info.mlit.go.jp/manshion_kanri/329/",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/consumer/existing_housing_kizonjutaku.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk2_000038.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2742,7 +2870,14 @@
   "不動産投資 始め方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jpx.co.jp/equities/products/reits/outline/index.html",
+     "https://www.reinfolib.mlit.go.jp/help/apiManual/xit001/",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2019_27.html",
+     "https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/pm_portal/sublease.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1370.htm",
+     "https://www.kokusen.go.jp/news/data/n-20190328_1.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2790,7 +2925,14 @@
   "相続した家 どうする": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.moj.go.jp/MINJI/minji05_00599.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/akiya-taisaku/articles/2024020102.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3306.htm",
+     "https://www.moj.go.jp/content/001376610.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2832,7 +2974,12 @@
   "空き家 活用 方法": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/house/akiya-taisaku/articles/2024032002.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/akiya-taisaku/articles/2024032003.html",
+     "https://www.mlit.go.jp/kankocho/minpaku/business/host/",
+     "https://www.mlit.go.jp/kankocho/minpaku/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2876,7 +3023,12 @@
   "土地活用 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.livable.co.jp/l-note/question/1806/",
+     "https://www.homes.co.jp/satei/media/entry/202505/0501",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk5_000081.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4124.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2923,7 +3075,13 @@
   "査定額 違う 理由": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.zba.jp/car-kaitori/cont/difference-between-prices/?webcrew_auth_res=",
+     "https://www.goo-net.com/kaitori/satei/kaitori-satei/satei-knowhow/573/",
+     "https://brand-lex.jp/column/32752/",
+     "https://www.mitsui-mall.com/article/1128.html",
+     "https://www.jpuc.or.jp/consultation/article/67441385bd865d720f0fa412/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2969,7 +3127,11 @@
   "不動産屋 信用できる 見分け方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://www.mlit.go.jp/nega-inf/cgi-bin/search.cgi?jigyoubunya=takuti",
+     "https://www.kokusen.go.jp/news/data/n-20260217_1.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3026,7 +3188,12 @@
   "おとり物件 見分け方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/representation_regulation/case_003/",
+     "https://suumo.jp/journal/2014/05/14/62708/",
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/guideline/pdf/100121premiums_32.pdf",
+     "https://www.sfkoutori.or.jp/ippansoudanjirei/%E3%81%8A%E3%81%A8%E3%82%8A%E5%BA%83%E5%91%8A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3090,7 +3257,12 @@
   "家を売る 流れ": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.reins.or.jp/selling/",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000013.html",
+     "https://qa.smbc.co.jp/faq/show/642?site_domain=default",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3302.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3130,7 +3302,11 @@
   "賃貸 契約 流れ": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.ur-net.go.jp/chintai/sp/college/202505/000428.html",
+     "https://www.ur-net.go.jp/chintai/college/202505/000942.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/content/001399558.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3170,7 +3346,12 @@
   "住宅購入 流れ": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://smtrc.jp/useful/buy/index.html",
+     "https://suumo.jp/article/oyakudachi/oyaku/chumon/c_knowhow/kodatekounyu_nagare/",
+     "https://suumo.jp/article/oyakudachi/oyaku/sumai_nyumon/iesagashi/jukatsu-524/",
+     "https://www.suumocounter.jp/fp/article/home/purchasing-flow.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3218,7 +3399,13 @@
   "重要事項説明 ポイント": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/policy/shingikai/content/001480798.pdf",
+     "https://www.kokusen.go.jp/wko/pdf/wko-202205_05.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20260217_1.html",
+     "https://www.mlit.go.jp/totikensangyo/const/sosei_const_fr3_000074.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000060.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3266,7 +3453,12 @@
   "売買契約 キャンセル": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.kokusen.go.jp/pdf_dl/wko/wko-202207.pdf",
+     "https://www.kokusen.go.jp/soudan_now/data/coolingoff.html",
+     "https://www.gov-online.go.jp/article/201803/entry-8412.html",
+     "https://www.caa.go.jp/policies/policy/consumer_policy/meeting_materials/assets/consumer_policy_cms107_220826_08.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3306,7 +3498,13 @@
   "敷金 返ってこない": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/common/000991393.pdf",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000020.html?_fsi=ZcbcEZ66",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html",
+     "https://www.kokusen.go.jp/news/data/n-20260217_1.html",
+     "https://www.courts.go.jp/saiban/qa/qa_kansai/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3343,7 +3541,11 @@
   "原状回復 トラブル": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000020.html?_fsi=ZcbcEZ66",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html",
+     "https://www.kokusen.go.jp/news/data/n-20230201_2.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3392,7 +3594,10 @@
   "退去費用 高い": {
    "group": "手続き・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000024.html",
+     "https://www.kokusen.go.jp/news/data/n-20230201_2.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4940,5 +5145,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }

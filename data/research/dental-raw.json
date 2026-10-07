@@ -1315,7 +1315,11 @@
   "入れ歯 費用 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://takedashika.net/ireba/price/",
+     "https://www.mitsui-dc.net/service/denture/",
+     "https://umeda.yasuoka-dental.net/column/partial-full/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1420,7 +1424,11 @@
   "親知らず 抜歯 費用 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://kitte-hakata-shika.com/medical/medical03/",
+     "https://nakajima-shika-clinic.com/menu/wisdom_teeth/",
+     "https://www.nikoraikai.org/operate/wisdom"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1688,7 +1696,9 @@
   "ホワイトニング 保険 適用 されるか": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/consultation/vol-36.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1735,7 +1745,11 @@
   "セラミック 保険 適用 されるか": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/park/lifestage/BK/index18.html",
+     "https://www.nskjs.jda.or.jp/webpc/img/SeminerText.pdf",
+     "https://www.jstage.jst.go.jp/article/ajps/14/3/14_244/_article/-char/ja/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1785,7 +1799,10 @@
   "入れ歯 保険 適用 されるか": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.pref.osaka.lg.jp/o100080/kokuho/iryouseido/situgi.html",
+     "https://www.jda.or.jp/park/lose/index17_02.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1825,7 +1842,10 @@
   "根管治療 保険 適用 されるか": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/content/001385789.pdf",
+     "https://www.okada-dental-clinic.jp/root-canal-treatment/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1872,7 +1892,11 @@
   "親知らず 抜歯 保険 適用 されるか": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.chikatsukai-oyashirazu.jp/faq/faq-insurance-vs-self-pay/",
+     "https://www.irie-oralsurg.com/services/",
+     "https://www.mhlw.go.jp/topics/2008/03/dl/tp0305-1bb.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1921,7 +1945,10 @@
   "歯周病 治療 保険 適用 されるか": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://seiwakai-minami.com/perio_faq",
+     "https://minds.jcqhc.or.jp/common/summary/pdf/c00823.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1975,7 +2002,11 @@
   "小児矯正 保険 適用 されるか": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.ortho.dent.kyushu-u.ac.jp/about/charge.html",
+     "https://www.jos.gr.jp/facility",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1128.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2310,7 +2341,10 @@
   "ブリッジ 費用 保険": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suminodo.yasuoka-dental.net/blog/bridge-price-list-insurance-coverage-white-teeth/",
+     "https://youdental.jp/staffblog/blog-cadcam-bridge/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2360,7 +2394,9 @@
   "被せ物 種類 値段": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://fernas-dc.com/column/2885/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2406,7 +2442,11 @@
   "矯正 分割払い できる": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://litokoku.com/campaign/loan/",
+     "https://www.kyosei-shika.jp/cost/loan.html",
+     "https://tokyo-shinjuku-kyousei.com/price/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2463,7 +2503,11 @@
   "歯科 医療費控除 対象": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1128.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1122.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1120.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2519,7 +2563,11 @@
   "歯のクリーニング 自費 違い": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.kusunose-dental.com/blog/3301/",
+     "https://www.toshiba-kenpo.or.jp/UploadedFiles/health/info_20220415.pdf",
+     "https://www.shibuya-shinbi.jp/cleaning/difference/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2567,7 +2615,9 @@
   "歯科 ローン 使える": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.aplus.co.jp/loan/credit/dental/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2625,7 +2675,12 @@
   "インプラント 失敗しない 歯医者の選び方": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.shika-implant.org/min-implant/faq/",
+     "https://www.shika-implant.org/min-implant/doctor/howto/",
+     "https://www.kokusen.go.jp/news/data/n-20190314_1.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2012_57.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2671,7 +2726,10 @@
   "矯正歯科 選び方": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jos.gr.jp/about",
+     "https://www.jpao.jp/orthodontic_dentistry/guideline.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2719,7 +2777,12 @@
   "ホワイトニング 歯科 エステ 違い": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://harimadent.jp/knowledge/ホワイトニングについて-2/",
+     "https://www.gc.dental/japan/whitening/column/dr.sa1/",
+     "https://www.jda.or.jp/park/trouble/white.html",
+     "https://www.kokusen.go.jp/news/data/n-20240731_1.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2766,7 +2829,12 @@
   "マウスピース矯正 デメリット": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://bos.org.uk/wp-content/uploads/2024/01/Aligners-version-2024.pdf",
+     "https://www.jos.gr.jp/information/guideline_aligner_pointer",
+     "https://www.jpao.jp/news/trendwatch/entry-4784.html",
+     "https://www.jos.gr.jp/4348"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2821,7 +2889,11 @@
   "インプラント 入れ歯 ブリッジ 比較": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.shika-implant.org/min-implant/beginner/difference/",
+     "https://www.shika-implant.org/min-implant/faq/",
+     "https://www.jda.or.jp/park/lose/index17.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2866,7 +2938,11 @@
   "セラミック 保険 違い": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/asahiruban/vol58/contents/",
+     "https://www.jscad.org/cadcam/",
+     "https://sodental.jp/asked_dentist/保険の白い歯cad-camとセラミックの違いは/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2918,7 +2994,11 @@
   "親知らず 抜くべきか": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/consultation/vol-16.html",
+     "https://www.nhs.uk/tests-and-treatments/wisdom-tooth-removal/",
+     "https://www.nice.org.uk/guidance/ta1/chapter/1-Recommendations"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2965,7 +3045,11 @@
   "根管治療 専門医 必要か": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.aae.org/patients/root-canal-treatment/what-is-a-root-canal/root-canal-explained/",
+     "https://www.aae.org/specialty/clinical-resources/treatment-planning/case-assessment-tools/",
+     "https://www.aae.org/specialty/wp-content/uploads/sites/2/2022/01/CaseDifficultyAssessmentFormFINAL2022.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3026,7 +3110,12 @@
   "歯周病 治るのか": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/happysmile/assets/img/backnumber/pdf/happysmile_vol22.pdf",
+     "https://www.perio.jp/publication/upload_file/guideline_perio_2022.pdf",
+     "https://www.perio.jp/qa/treatment/",
+     "https://www.jacp.net/perio/mainte/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3074,7 +3163,11 @@
   "子供 矯正 何歳から": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jpao.jp/news/entry-4318.html",
+     "https://www.jpao.jp/faq/howto/entry-4396.html",
+     "https://www.jpao.jp/orthodontic_dentistry/about_orthodontic/treatment_process.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3122,7 +3215,10 @@
   "審美歯科 とは": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.kokusen.go.jp/wko/pdf/wko-202407_07.pdf",
+     "https://www.jda.or.jp/consultation/vol-36.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3162,7 +3258,11 @@
   "予防歯科 通う頻度": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/hanogakko/vol76/nazenani.html",
+     "https://www.nice.org.uk/guidance/cg19/chapter/Recommendations",
+     "https://www.jda.or.jp/go/check.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3215,7 +3315,10 @@
   "歯科 セカンドオピニオン": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.tmd.ac.jp/dent_hospital/medical/second_opinion.html",
+     "https://hospital.dent.osaka-u.ac.jp/patient/out_patient/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3267,7 +3370,11 @@
   "訪問歯科 とは": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/park/dentistwork/visitingexamination.html",
+     "https://www.kyoukaikenpo.or.jp/shibu/tokushima/health_promotion/006/018/index.html",
+     "https://www.jda.or.jp/go/cannot.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3317,7 +3424,10 @@
   "口腔外科 とは 何をする": {
    "group": "治療の選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jsoms.or.jp/public/kouku_geka/",
+     "https://www.jsoms.or.jp/public/disease/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3357,7 +3467,12 @@
   "歯が痛い 夜 どうする": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nhs.uk/symptoms/toothache/",
+     "https://www.royaldevon.nhs.uk/services/community-dental-service/emergency-dental-service/advice-on-managing-dental-pain/",
+     "https://www.jda.or.jp/news/pdf/poster_qa.pdf",
+     "https://www.fdma.go.jp/mission/enrichment/appropriate/appropriate007.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3403,7 +3518,11 @@
   "歯茎から血が出る 原因": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/consultation/vol-04.html",
+     "https://medlineplus.gov/ency/article/003062.htm",
+     "https://www.mouthhealthy.org/all-topics-a-z/bleeding-gums"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3450,7 +3569,11 @@
   "知覚過敏 治し方": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://hospital.dent.osaka-u.ac.jp/publication/1343/",
+     "https://tokyo-ohc.org/wp/wp-content/uploads/2026/03/s53.pdf",
+     "https://www.dent-kng.or.jp/hagaitai/115/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3498,7 +3621,11 @@
   "口臭 歯医者 行くべき": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/consultation/vol-32.html",
+     "https://www.jda.or.jp/asahiruban/vol50/contents/",
+     "https://www.jda.or.jp/go/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3545,7 +3672,11 @@
   "銀歯 取れた どうする": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://hospital.dent.agu.ac.jp/worries/dental_worries/dental-worries/taken-off",
+     "https://www.nakamura-dental-clinic.osaka.jp/silver-teeth-can-be-removed/",
+     "https://futamatagawa-dental.com/oral-guide/wisdom-tooth/lost-filling/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3650,7 +3781,10 @@
   "顎関節症 何科": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://kokuhoken.net/jstmj/general/faq.html",
+     "https://www.jsoms.or.jp/public/disease/setumei_kansetu/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3690,7 +3824,11 @@
   "虫歯 放置 どうなる": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nhs.uk/conditions/tooth-decay/",
+     "https://www.nhs.uk/conditions/dental-abscess/",
+     "https://www.jda.or.jp/Foreign-temporary-workers/pdf/mouth-Health-Handbook_v02.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3740,7 +3878,13 @@
   "歯が欠けた 応急処置": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/park/lifestage/BK/gaisyou_01.html",
+     "https://111.wales.nhs.uk/chipped%2Cbrokenorcrackedtooth/",
+     "https://northeastnorthcumbria.nhs.uk/here-to-help-you/nhs-dentistry/get-urgent-dental-care/",
+     "https://www.gloscommunitydental.nhs.uk/wp-content/uploads/Advice-for-Managing-Dental-Problems-at-Home-pdf.pdf",
+     "https://www.nhsinform.scot/illnesses-and-conditions/injuries/dental-injuries/broken-or-knocked-out-tooth/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3788,7 +3932,12 @@
   "親知らず 腫れた": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.dent-kng.or.jp/colum/basic/90/",
+     "https://www.chigasakitokushukai.jp/department/dental_oral/inflammation/",
+     "https://london.wtepharmacy.nhs.uk/dyn/_assets/_folder4/dental-factsheets-2022/dental_factsheets_pericoronitis_gum_inflammation_erupting_wisdom_tooth.pdf",
+     "https://www.mascat.nihon-u.ac.jp/hospital/feature/02_q01.html/r/02_q03.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3828,7 +3977,12 @@
   "歯がしみる 原因": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/consultation/vol-02.html",
+     "https://www.jda.or.jp/asahiruban/vol52/contents/oshiete.html",
+     "https://www.nhs.uk/conditions/tooth-decay/",
+     "https://www.nhs.uk/symptoms/toothache/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3878,7 +4032,12 @@
   "歯茎 腫れ 膿": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nhs.uk/conditions/dental-abscess/",
+     "https://www.jda.or.jp/hanogakko/vol79/number.html",
+     "https://www.nhsinform.scot/illnesses-and-conditions/mouth/dental-abscess/",
+     "https://www.northeastnorthcumbria.nhs.uk/here-to-help-you/nhs-dentistry/get-urgent-dental-care/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3918,7 +4077,10 @@
   "子供 歯 ぐらぐら": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.kurozumi-shika.com/2026/04/08/1059/",
+     "https://www.jspd.or.jp/question/lower_grade/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3967,7 +4129,12 @@
   "口内炎 歯医者 行くべきか": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/consultation/",
+     "https://www.chigasaki-md.sakura.ne.jp/department/dental_oral/stomatitis/",
+     "https://www.kochi-u.ac.jp/kms/fm_otrhn/orl-kochi/medical-advice/",
+     "https://ubie.app/byoki_qa/clinical-questions/xz_zv0ddo"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4015,7 +4182,10 @@
   "差し歯 取れた": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.matsumoto.or.jp/toothteeth/loose-crown-causes-and-fixes/",
+     "https://www.dent-kng.or.jp/colum/basic/617/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4055,7 +4225,10 @@
   "歯石 取り 頻度": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.perio.jp/qa/treatment/",
+     "https://www.jacp.net/perio/mainte/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4103,7 +4276,10 @@
   "歯の黄ばみ 原因": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://my.clevelandclinic.org/health/symptoms/10958-tooth-discoloration",
+     "https://www.jda.or.jp/consultation/vol-36.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4143,7 +4319,12 @@
   "噛むと痛い 歯": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://hospital.dent.agu.ac.jp/worries/dental_worries/dental-worries/tooth-float",
+     "https://www.saga-dental.or.jp/health-information/1623.html",
+     "https://www.nhs.uk/symptoms/toothache/",
+     "https://www.northeastnorthcumbria.nhs.uk/here-to-help-you/nhs-dentistry/get-urgent-dental-care/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4183,7 +4364,12 @@
   "インプラント 痛み 術後": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://implant.iwate-med.ac.jp/cn25/FAQ.html",
+     "https://www.leedsth.nhs.uk/patients/resources/dental-implants/",
+     "https://www.guysandstthomas.nhs.uk/health-information/dental-implants/after-having-dental-implant",
+     "https://www.uhleicester.nhs.uk/wp-content/uploads/2025/03/Dental-Implants-Informan-for-Patients-UHL.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4240,7 +4426,13 @@
   "抜歯後 ドライソケット": {
    "group": "症状",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mayoclinic.org/diseases-conditions/dry-socket/symptoms-causes/syc-20354376?p=1&page=0",
+     "https://www.guysandstthomas.nhs.uk/health-information/dental-surgery-and-recovery",
+     "https://www.mayoclinic.org/diseases-conditions/dry-socket/diagnosis-treatment/drc-20354382?p=1",
+     "https://www.geh.nhs.uk/patients-and-visitors/patients/patient-leaflets/post-operative-instructions-after-extraction",
+     "https://www.nhs.uk/tests-and-treatments/wisdom-tooth-removal/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4294,7 +4486,14 @@
   "いい歯医者 見分け方": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://kakarikata.mhlw.go.jp/kakaritsuke/mitsukeru.html",
+     "https://www.kokusen.go.jp/news/data/n-20190314_1.html",
+     "https://www.jda.or.jp/jda/other/kakaritsuke.html",
+     "https://www.jda.or.jp/dentist/anshin-mark/pdf/guideline.pdf?v01=",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2012_57.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/teikyouseido/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4342,7 +4541,11 @@
   "歯医者 変えたい 途中": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.fujishiro-dental.com/referral-letter/",
+     "https://www.jpao.jp/change/",
+     "https://www.city.kashiwa.lg.jp/shohiseikatsu-c/chuichumoku/20250825.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4404,7 +4607,10 @@
   "歯医者 予約 取りやすい": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://haisha-yoyaku.jp/bun2sdental/list/?online_reserve=1",
+     "https://www.shika-tanaka.com/about/reserve_point/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4449,7 +4655,10 @@
   "歯医者 土日 診療": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/index_00004.html",
+     "https://www.iryou.teikyouseido.mhlw.go.jp/znk-web/juminkanja/S3870/initialize"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4496,7 +4705,13 @@
   "歯医者 怖い 痛くない": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nhs.uk/tests-and-treatments/local-anaesthesia/",
+     "https://jdsa.jp/about/qa.html",
+     "https://www.england.nhs.uk/long-read/clinical-guide-for-dental-anxiety-management/",
+     "https://sps.nhs.uk/articles/managing-reactions-to-dental-local-anaesthetic-injections/",
+     "https://www.osaka-dent.ac.jp/hospital/da.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4536,7 +4751,10 @@
   "歯医者 初診 何をする": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://odawara.toeikai.or.jp/flow/",
+     "https://ourdental.jp/wp/for-first-time-patinets/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4576,7 +4794,13 @@
   "歯科 自費 保険 違い": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/content/000937919.pdf",
+     "https://www.mhlw.go.jp/content/001713166.pdf",
+     "https://www.jda.or.jp/consultation/vol-36.html",
+     "https://www.jda.or.jp/consultation/vol-34.html",
+     "https://www.jda.or.jp/asahiruban/vol58/contents/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4616,7 +4840,11 @@
   "歯医者 口コミ 信用できるか": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.caa.go.jp/notice/assets/representation_cms204_250318.pdf",
+     "https://www.mhlw.go.jp/stf/shingi2/0000201829_00005.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/teikyouseido/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4654,7 +4882,11 @@
   "歯医者 説明 しない": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jda.or.jp/jda/about/pdf/trusteddentist2.pdf",
+     "https://www4.pref.fukushima.jp/sec/21045c/iryou-soudan.html",
+     "https://www.pref.nagano.lg.jp/iryo/kenko/iryo/sodan/iryo-sodan.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4700,7 +4932,10 @@
   "歯医者 削りすぎ": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.dent.osaka-u.ac.jp/conserve/conserve-2707/conserve-5338",
+     "https://www.dent-kng.or.jp/colum/basic/3959/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4749,7 +4984,10 @@
   "歯医者 何ヶ月ごと 検診": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://hospital.dent.agu.ac.jp/worries/dental_worries/other-worries/dental-checkup",
+     "https://www.nhs.uk/live-well/healthy-teeth-and-gums/dental-check-ups/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4789,7 +5027,10 @@
   "女性 歯科医師 探し方": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://haisha-yoyaku.jp/bun2sdental/list/?woman=1",
+     "https://www.iryou.teikyouseido.mhlw.go.jp/znk-web/juminkanja/S2344/initialize"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4890,7 +5131,12 @@
   "歯医者 治療 長い なぜ": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://jea-endo.or.jp/public/about-faq.html",
+     "https://cocoro-dc.tokyo/menu/general/",
+     "https://www.jda.or.jp/park/lifestage/BK/index_05.html",
+     "https://dental-naito.com/blog/174"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4930,7 +5176,11 @@
   "歯医者 転院 紹介状": {
    "group": "受診のしかた",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.fujishiro-dental.com/transfer-patient/",
+     "https://yoshimatsu-dental.jp/column/3970",
+     "https://www.hospital.pref.ibaraki.jp/chuo/gairai/syoukai/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4973,5 +5223,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }

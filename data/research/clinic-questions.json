@@ -41,8 +41,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "maker": 1,
-    "portal": 3
+    "portal": 3,
+    "maker": 1
    },
    "top": [
     [
@@ -123,9 +123,9 @@
    "kinds": {
     "review": 2,
     "clinic": 1,
-    "portal": 3,
-    "other": 1,
     "media": 1,
+    "other": 1,
+    "portal": 3,
     "public": 1
    },
    "top": [
@@ -152,8 +152,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -205,9 +205,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "portal": 3,
-    "other": 1,
     "public": 1,
+    "other": 1,
+    "portal": 3,
     "media": 1
    },
    "top": [
@@ -235,8 +235,8 @@
    "kinds": {
     "review": 1,
     "clinic": 1,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -263,8 +263,8 @@
    "kinds": {
     "review": 2,
     "clinic": 1,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -290,8 +290,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -317,9 +317,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
+    "media": 2,
     "portal": 3,
     "other": 1,
-    "media": 2,
     "public": 1
    },
    "top": [
@@ -372,8 +372,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "portal": 3,
     "other": 1,
+    "portal": 3,
     "media": 1
    },
    "top": [
@@ -401,8 +401,8 @@
    "kinds": {
     "review": 1,
     "clinic": 1,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -428,8 +428,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -455,8 +455,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -482,8 +482,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -509,8 +509,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -537,8 +537,8 @@
    "kinds": {
     "review": 1,
     "clinic": 1,
-    "portal": 3,
-    "other": 1
+    "other": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -564,8 +564,8 @@
    "answered": 4,
    "kinds": {
     "portal": 4,
-    "clinic": 3,
     "public": 2,
+    "clinic": 3,
     "media": 2,
     "maker": 1
    },
@@ -590,12 +590,12 @@
   {
    "q": "人間ドック 費用 相場",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 2,
+    "clinic": 4,
     "portal": 3,
     "maker": 2,
-    "public": 1,
     "media": 1
    },
    "top": [
@@ -610,8 +610,8 @@
      3
     ],
     [
-     "taiyo-seimei.co.jp",
-     "maker",
+     "sumitomo-hp.or.jp",
+     "clinic",
      2
     ]
    ]
@@ -619,9 +619,9 @@
   {
    "q": "シミ取り 美容皮膚科 費用 相場",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "clinic": 4,
     "portal": 3
    },
    "top": [
@@ -676,8 +676,8 @@
    "answered": 4,
    "kinds": {
     "portal": 3,
-    "clinic": 3,
     "other": 1,
+    "clinic": 3,
     "media": 2
    },
    "top": [
@@ -705,8 +705,8 @@
    "kinds": {
     "public": 2,
     "clinic": 3,
-    "portal": 3,
     "media": 3,
+    "portal": 3,
     "maker": 2
    },
    "top": [
@@ -732,8 +732,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "clinic": 4,
-    "portal": 2
+    "portal": 2,
+    "clinic": 4
    },
    "top": [
     [
@@ -786,8 +786,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "portal": 1,
     "public": 1,
+    "portal": 1,
     "other": 1
    },
    "top": [
@@ -811,10 +811,10 @@
   {
    "q": "禁煙外来 費用 相場",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
-    "public": 3,
+    "clinic": 4,
+    "public": 4,
     "media": 2
    },
    "top": [
@@ -824,12 +824,12 @@
      3
     ],
     [
-     "soujinkai.or.jp",
-     "clinic",
+     "ncvc.go.jp",
+     "public",
      2
     ],
     [
-     "kuroyanagi-iida.com",
+     "soujinkai.or.jp",
      "clinic",
      2
     ]
@@ -838,10 +838,11 @@
   {
    "q": "ニキビ 治療 保険 適用 されるか",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 1,
     "media": 1,
+    "clinic": 3,
     "portal": 1
    },
    "top": [
@@ -869,8 +870,8 @@
    "kinds": {
     "clinic": 4,
     "maker": 1,
-    "other": 1,
     "media": 2,
+    "other": 1,
     "portal": 1
    },
    "top": [
@@ -894,16 +895,16 @@
   {
    "q": "胃カメラ 保険 適用 されるか",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
-    "portal": 1
+    "portal": 2,
+    "clinic": 4
    },
    "top": [
     [
      "ningyocho-naishikyo-media.jp",
      "clinic",
-     2
+     3
     ],
     [
      "tenpakubashi-endoscope.or.jp",
@@ -923,8 +924,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "maker": 1,
-    "public": 1
+    "public": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -977,8 +978,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "clinic": 4,
     "portal": 3,
+    "clinic": 4,
     "maker": 1,
     "media": 1
    },
@@ -1003,13 +1004,13 @@
   {
    "q": "漢方 処方 保険 適用 されるか",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 2,
     "maker": 2,
     "clinic": 3,
     "portal": 1,
-    "media": 2,
-    "public": 1
+    "media": 2
    },
    "top": [
     [
@@ -1032,12 +1033,12 @@
   {
    "q": "睡眠外来 保険 適用 されるか",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
-    "portal": 2,
-    "media": 3,
+    "portal": 3,
+    "clinic": 4,
     "public": 2,
+    "media": 3,
     "other": 1
    },
    "top": [
@@ -1052,7 +1053,7 @@
      3
     ],
     [
-     "banno-clinic.biz",
+     "nishiarai-cl.jp",
      "clinic",
      2
     ]
@@ -1061,12 +1062,12 @@
   {
    "q": "禁煙外来 保険 適用 されるか",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 4,
     "video": 1,
-    "clinic": 3,
     "other": 2,
-    "public": 3
+    "clinic": 3
    },
    "top": [
     [
@@ -1116,16 +1117,21 @@
   {
    "q": "内科 選び方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "portal": 1,
-    "video": 1,
-    "other": 1,
+    "public": 2,
     "media": 2,
-    "public": 1,
-    "clinic": 3
+    "portal": 1,
+    "clinic": 3,
+    "video": 1,
+    "other": 1
    },
    "top": [
+    [
+     "kakarikata.mhlw.go.jp",
+     "public",
+     2
+    ],
     [
      "takasuna-naika.com",
      "clinic",
@@ -1135,39 +1141,34 @@
      "b-leaf-clinic.com",
      "clinic",
      2
-    ],
-    [
-     "morishima-clinic.com",
-     "clinic",
-     2
     ]
    ]
   },
   {
    "q": "かかりつけ医 選び方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
-    "other": 1,
+    "public": 4,
     "media": 2,
+    "other": 1,
     "maker": 1,
     "clinic": 1
    },
    "top": [
+    [
+     "kakarikata.mhlw.go.jp",
+     "public",
+     3
+    ],
     [
      "kyoukaikenpo.or.jp",
      "public",
      2
     ],
     [
-     "kakarikata.mhlw.go.jp",
+     "tokyo.med.or.jp",
      "public",
-     2
-    ],
-    [
-     "vertexaisearch.cloud.google.com",
-     "other",
      1
     ]
    ]
@@ -1175,10 +1176,12 @@
   {
    "q": "皮膚科 美容皮膚科 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
-    "portal": 1
+    "media": 1,
+    "public": 1,
+    "portal": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -1201,11 +1204,11 @@
   {
    "q": "胃カメラ 鎮静 クリニック 選び方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 3,
     "clinic": 3,
-    "portal": 3,
-    "public": 2
+    "portal": 3
    },
    "top": [
     [
@@ -1214,13 +1217,13 @@
      3
     ],
     [
-     "naishikyo.or.jp",
-     "clinic",
+     "jges.net",
+     "public",
      2
     ],
     [
-     "tsurumi-naishikyo.com",
-     "clinic",
+     "jstage.jst.go.jp",
+     "public",
      2
     ]
    ]
@@ -1228,12 +1231,12 @@
   {
    "q": "オンライン診療 デメリット",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
-    "clinic": 2,
+    "public": 2,
     "media": 2,
-    "public": 1
+    "maker": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -1256,26 +1259,26 @@
   {
    "q": "発熱外来 探し方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
-    "portal": 1,
+    "public": 4,
     "clinic": 2,
-    "media": 2
+    "media": 2,
+    "portal": 1
    },
    "top": [
     [
      "mhlw.go.jp",
      "public",
+     2
+    ],
+    [
+     "kakarikata.mhlw.go.jp",
+     "public",
      1
     ],
     [
-     "carenet.com",
-     "media",
-     1
-    ],
-    [
-     "city.sapporo.jp",
+     "gov-online.go.jp",
      "public",
      1
     ]
@@ -1284,16 +1287,21 @@
   {
    "q": "心療内科 精神科 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 2,
-    "video": 1,
+    "public": 2,
     "media": 2,
-    "public": 1,
-    "maker": 2,
-    "clinic": 2
+    "portal": 2,
+    "clinic": 2,
+    "video": 1,
+    "maker": 2
    },
    "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
     [
      "luna-tokyo.clinic",
      "clinic",
@@ -1303,24 +1311,20 @@
      "koshigaya-mentalclinic.jp",
      "clinic",
      2
-    ],
-    [
-     "mhlw.go.jp",
-     "public",
-     1
     ]
    ]
   },
   {
    "q": "クリニック 病院 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "media": 2,
+    "clinic": 1,
     "portal": 2,
     "other": 1,
-    "media": 2,
-    "maker": 2,
-    "clinic": 1
+    "maker": 2
    },
    "top": [
     [
@@ -1343,9 +1347,9 @@
   {
    "q": "専門医 探し方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
+    "public": 4,
     "portal": 2,
     "clinic": 1
    },
@@ -1356,13 +1360,13 @@
      3
     ],
     [
-     "jspn.or.jp",
+     "kakarikata.mhlw.go.jp",
      "public",
      2
     ],
     [
-     "hospita.jp",
-     "portal",
+     "iryou.teikyouseido.mhlw.go.jp",
+     "public",
      2
     ]
    ]
@@ -1370,13 +1374,13 @@
   {
    "q": "小児科 選び方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 4,
     "maker": 2,
     "clinic": 3,
-    "public": 3,
-    "portal": 2,
-    "media": 2
+    "media": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -1390,8 +1394,8 @@
      3
     ],
     [
-     "nisisyounika.jp",
-     "clinic",
+     "kakarikata.mhlw.go.jp",
+     "public",
      2
     ]
    ]
@@ -1399,13 +1403,13 @@
   {
    "q": "婦人科 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "other": 1,
+    "public": 2,
     "media": 2,
-    "public": 1,
-    "maker": 2,
     "clinic": 2,
+    "other": 1,
+    "maker": 2,
     "portal": 1,
     "video": 1
    },
@@ -1430,8 +1434,9 @@
   {
    "q": "耳鼻科 子供 選び方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 1,
     "clinic": 3,
     "video": 1,
     "portal": 2,
@@ -1459,26 +1464,26 @@
   {
    "q": "整形外科 整骨院 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
     "portal": 2,
     "media": 1,
-    "public": 1
+    "clinic": 2
    },
    "top": [
+    [
+     "joa.or.jp",
+     "public",
+     2
+    ],
     [
      "shin-kokura.kkr.or.jp",
      "clinic",
      2
     ],
     [
-     "med-pro.jp",
-     "portal",
-     1
-    ],
-    [
-     "joa.or.jp",
+     "mhlw.go.jp",
      "public",
      1
     ]
@@ -1487,12 +1492,13 @@
   {
    "q": "眼科 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 1,
     "portal": 2,
+    "media": 2,
     "other": 1,
-    "media": 2
+    "clinic": 2
    },
    "top": [
     [
@@ -1506,8 +1512,8 @@
      2
     ],
     [
-     "eye-care-lab.com",
-     "media",
+     "iryou.teikyouseido.mhlw.go.jp",
+     "public",
      1
     ]
    ]
@@ -1515,14 +1521,19 @@
   {
    "q": "人間ドック 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 3,
+    "public": 2,
     "clinic": 2,
-    "portal": 2,
-    "media": 2,
-    "public": 1
+    "media": 2
    },
    "top": [
+    [
+     "e-ningendock.jp",
+     "portal",
+     2
+    ],
     [
      "mrso.jp",
      "portal",
@@ -1532,20 +1543,16 @@
      "docknet.jp",
      "portal",
      2
-    ],
-    [
-     "nidc.or.jp",
-     "clinic",
-     2
     ]
    ]
   },
   {
    "q": "発熱 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "clinic": 3,
+    "public": 1,
     "portal": 1,
     "media": 2
    },
@@ -1556,12 +1563,12 @@
      2
     ],
     [
-     "yakushido-k-clinic.com",
-     "clinic",
+     "hokeniryo.metro.tokyo.lg.jp",
+     "public",
      1
     ],
     [
-     "minato-family-clinic.com",
+     "numazu.seirei.or.jp",
      "clinic",
      1
     ]
@@ -1570,12 +1577,12 @@
   {
    "q": "頭痛 続く 何科",
    "group": "症状",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
-    "portal": 2,
+    "public": 2,
+    "clinic": 4,
     "media": 2,
-    "public": 1,
+    "portal": 2,
     "maker": 1,
     "video": 1
    },
@@ -1586,12 +1593,12 @@
      3
     ],
     [
-     "hayashi-cl.co.jp",
+     "8cho3cho-cl.com",
      "clinic",
      2
     ],
     [
-     "leo-aoi.com",
+     "hayashi-cl.co.jp",
      "clinic",
      2
     ]
@@ -1600,27 +1607,27 @@
   {
    "q": "腹痛 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
+    "media": 3,
+    "clinic": 3,
     "other": 1,
-    "media": 2,
-    "public": 1,
     "portal": 1
    },
    "top": [
     [
-     "register.cgmh.org.tw",
-     "clinic",
-     1
-    ],
-    [
      "saiseikai.or.jp",
      "clinic",
-     1
+     2
     ],
     [
-     "tcpa.taiwan-pharma.org.tw",
+     "ubie.app",
+     "media",
+     2
+    ],
+    [
+     "chukyo.jcho.go.jp",
      "public",
      1
     ]
@@ -1629,39 +1636,39 @@
   {
    "q": "めまい 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 1,
-    "portal": 1,
+    "public": 2,
     "clinic": 2,
-    "media": 2
+    "media": 2,
+    "portal": 1
    },
    "top": [
+    [
+     "hosp.juntendo.ac.jp",
+     "public",
+     2
+    ],
+    [
+     "neurology-jp.org",
+     "public",
+     2
+    ],
     [
      "kamatanishiguchi-cli.jp",
      "clinic",
      2
-    ],
-    [
-     "kompas.hosp.keio.ac.jp",
-     "public",
-     1
-    ],
-    [
-     "clinic-yasuda.jp",
-     "clinic",
-     1
     ]
    ]
   },
   {
    "q": "動悸 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 1,
-    "clinic": 2,
+    "clinic": 3,
     "media": 2,
+    "maker": 1,
     "portal": 1
    },
    "top": [
@@ -1671,13 +1678,13 @@
      2
     ],
     [
-     "healthcare.omron.co.jp",
-     "maker",
+     "med.jrc.or.jp",
+     "clinic",
      1
     ],
     [
-     "donoka.jp",
-     "media",
+     "yamamotonaika.or.jp",
+     "clinic",
      1
     ]
    ]
@@ -1685,13 +1692,14 @@
   {
    "q": "咳 止まらない 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "media": 1,
+    "clinic": 2,
     "portal": 2,
     "other": 1,
-    "media": 1,
-    "maker": 2,
-    "clinic": 2
+    "maker": 2
    },
    "top": [
     [
@@ -1705,8 +1713,8 @@
      2
     ],
     [
-     "your-doctor.jp",
-     "portal",
+     "pref.saitama.lg.jp",
+     "public",
      1
     ]
    ]
@@ -1714,11 +1722,11 @@
   {
    "q": "湿疹 かゆい 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
-    "portal": 2,
-    "public": 1
+    "clinic": 3,
+    "public": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -1727,13 +1735,13 @@
      2
     ],
     [
-     "hiro-clinic.or.jp",
-     "clinic",
+     "hp.kmu.ac.jp",
+     "public",
      1
     ],
     [
-     "hosp.asahi-u.ac.jp",
-     "public",
+     "takenotsuka-hifuka.jp",
+     "clinic",
      1
     ]
    ]
@@ -1741,14 +1749,14 @@
   {
    "q": "腰痛 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "clinic": 3,
+    "public": 2,
+    "media": 2,
     "portal": 2,
     "wiki": 1,
-    "media": 2,
-    "public": 1,
-    "maker": 2,
-    "clinic": 2
+    "maker": 2
    },
    "top": [
     [
@@ -1771,11 +1779,11 @@
   {
    "q": "不眠 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
     "portal": 2,
-    "public": 1
+    "clinic": 2
    },
    "top": [
     [
@@ -1789,8 +1797,8 @@
      2
     ],
     [
-     "mdf.or.jp",
-     "clinic",
+     "nagoya.hosp.go.jp",
+     "public",
      1
     ]
    ]
@@ -1798,8 +1806,9 @@
   {
    "q": "胃もたれ 続く",
    "group": "症状",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 1,
     "clinic": 3,
     "maker": 1,
     "media": 1
@@ -1825,24 +1834,24 @@
   {
    "q": "花粉症 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
     "portal": 2,
-    "wiki": 1,
-    "public": 2,
-    "maker": 2,
     "clinic": 2,
+    "wiki": 1,
+    "maker": 2,
     "media": 1
    },
    "top": [
     [
-     "brand.taisho.co.jp",
-     "maker",
-     2
-    ],
-    [
      "city.hachioji.tokyo.jp",
      "public",
+     3
+    ],
+    [
+     "brand.taisho.co.jp",
+     "maker",
      2
     ],
     [
@@ -1855,12 +1864,12 @@
   {
    "q": "ニキビ 皮膚科 行くべき",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
     "portal": 2,
-    "media": 1,
-    "public": 1
+    "clinic": 2,
+    "media": 1
    },
    "top": [
     [
@@ -1869,13 +1878,13 @@
      2
     ],
     [
-     "takamiclinic.or.jp",
-     "clinic",
+     "qa.dermatol.or.jp",
+     "public",
      1
     ],
     [
-     "oogaki.or.jp",
-     "clinic",
+     "nhs.uk",
+     "public",
      1
     ]
    ]
@@ -1883,14 +1892,14 @@
   {
    "q": "じんましん 原因",
    "group": "症状",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 3,
     "video": 1,
-    "maker": 3,
-    "public": 2,
     "clinic": 3,
-    "portal": 1,
+    "maker": 3,
     "media": 1,
+    "portal": 1,
     "other": 1
    },
    "top": [
@@ -1900,13 +1909,13 @@
      2
     ],
     [
-     "halujujo.clinic",
-     "clinic",
+     "dermatol.or.jp",
+     "public",
      1
     ],
     [
-     "sokuyaku.jp",
-     "maker",
+     "qa.dermatol.or.jp",
+     "public",
      1
     ]
    ]
@@ -1914,12 +1923,13 @@
   {
    "q": "喉の痛み 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
-    "clinic": 2,
+    "clinic": 3,
+    "public": 1,
+    "media": 1,
     "portal": 1,
-    "media": 1
+    "maker": 2
    },
    "top": [
     [
@@ -1928,13 +1938,13 @@
      2
     ],
     [
-     "hibiyakawabata.or.jp",
-     "clinic",
+     "jibika.or.jp",
+     "public",
      1
     ],
     [
-     "cocoromi-cl.jp",
-     "clinic",
+     "hokeniryo.metro.tokyo.lg.jp",
+     "public",
      1
     ]
    ]
@@ -1942,12 +1952,12 @@
   {
    "q": "血圧 高い 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 1,
-    "clinic": 2,
+    "clinic": 3,
+    "media": 2,
     "portal": 1,
-    "media": 2
+    "maker": 1
    },
    "top": [
     [
@@ -1970,26 +1980,27 @@
   {
    "q": "肩こり 頭痛 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
-    "clinic": 2,
+    "public": 1,
+    "media": 3,
+    "clinic": 3,
     "portal": 2,
-    "media": 2
+    "maker": 2
    },
    "top": [
+    [
+     "ubie.app",
+     "media",
+     2
+    ],
     [
      "mcsg.co.jp",
      "maker",
      2
     ],
     [
-     "ssp.co.jp",
-     "maker",
-     1
-    ],
-    [
-     "sbc-seikeigeka.com",
+     "omori.jrc.or.jp",
      "clinic",
      1
     ]
@@ -1998,12 +2009,12 @@
   {
    "q": "目のかゆみ 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "clinic": 3,
+    "public": 3,
     "maker": 1,
-    "clinic": 2,
     "portal": 1,
-    "public": 2,
     "media": 1
    },
    "top": [
@@ -2013,13 +2024,13 @@
      2
     ],
     [
-     "byoinnavi.jp",
-     "portal",
+     "gankaikai.or.jp",
+     "public",
      1
     ],
     [
-     "brand.taisho.co.jp",
-     "maker",
+     "tokyo.miyata-med.ne.jp",
+     "clinic",
      1
     ]
    ]
@@ -2027,13 +2038,13 @@
   {
    "q": "膀胱炎 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 1,
+    "clinic": 3,
     "media": 2,
+    "portal": 1,
     "public": 1,
-    "maker": 2,
-    "clinic": 2
+    "maker": 2
    },
    "top": [
     [
@@ -2056,12 +2067,13 @@
   {
    "q": "生理痛 ひどい 何科",
    "group": "症状",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 1,
     "maker": 3,
-    "clinic": 3,
     "portal": 3,
-    "media": 2
+    "media": 2,
+    "clinic": 3
    },
    "top": [
     [
@@ -2084,27 +2096,27 @@
   {
    "q": "子供 発熱 受診 目安",
    "group": "症状",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 3,
     "clinic": 3,
-    "public": 2,
-    "portal": 2,
     "media": 2,
+    "portal": 2,
     "maker": 2
    },
    "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
     [
      "cocoromi-cl.jp",
      "clinic",
      2
     ],
     [
-     "ebisukodomo.jp",
-     "clinic",
-     1
-    ],
-    [
-     "jpeds.or.jp",
+     "kakarikata.mhlw.go.jp",
      "public",
      1
     ]
@@ -2113,13 +2125,13 @@
   {
    "q": "物忘れ 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 1,
+    "public": 3,
     "media": 2,
-    "public": 2,
-    "maker": 2,
-    "clinic": 2
+    "portal": 1,
+    "clinic": 2,
+    "maker": 2
    },
    "top": [
     [
@@ -2133,8 +2145,8 @@
      2
     ],
     [
-     "tokyonishi-hp.or.jp",
-     "clinic",
+     "dcnet.gr.jp",
+     "public",
      1
     ]
    ]
@@ -2142,11 +2154,11 @@
   {
    "q": "しびれ 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
+    "clinic": 3,
     "portal": 2,
-    "public": 1,
     "media": 1
    },
    "top": [
@@ -2170,12 +2182,12 @@
   {
    "q": "耳鳴り 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 2,
     "wiki": 1,
-    "clinic": 2,
     "portal": 2,
-    "public": 1,
+    "clinic": 2,
     "video": 1,
     "media": 1
    },
@@ -2186,13 +2198,13 @@
      2
     ],
     [
-     "hirao-hp.jp",
-     "clinic",
+     "nms.ac.jp",
+     "public",
      1
     ],
     [
-     "ja.wikipedia.org",
-     "wiki",
+     "mhlw.go.jp",
+     "public",
      1
     ]
    ]
@@ -2200,9 +2212,10 @@
   {
    "q": "下痢 続く 何科",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 1,
+    "clinic": 3,
     "portal": 2,
     "other": 1,
     "media": 1
@@ -2211,16 +2224,16 @@
     [
      "yurin.or.jp",
      "clinic",
-     2
+     3
+    ],
+    [
+     "niddk.nih.gov",
+     "public",
+     1
     ],
     [
      "saiseikai.or.jp",
      "clinic",
-     1
-    ],
-    [
-     "hospita.jp",
-     "portal",
      1
     ]
    ]
@@ -2228,14 +2241,20 @@
   {
    "q": "動悸 息切れ 原因",
    "group": "症状",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
+    "clinic": 3,
+    "public": 1,
     "wiki": 1,
-    "clinic": 2,
+    "maker": 2,
     "media": 1
    },
    "top": [
+    [
+     "saiseikai.or.jp",
+     "clinic",
+     2
+    ],
     [
      "healthcare.omron.co.jp",
      "maker",
@@ -2245,35 +2264,30 @@
      "cvi.or.jp",
      "clinic",
      2
-    ],
-    [
-     "kcm-cl.jp",
-     "clinic",
-     2
     ]
    ]
   },
   {
    "q": "クリニック 予約なし",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "clinic": 3,
     "public": 1
    },
    "top": [
     [
-     "sjk-nanairo.tokyo",
+     "sugimoto-nc.jp",
      "clinic",
      1
     ],
     [
-     "w-wellness.com",
+     "tokyo-ortho.jp",
      "clinic",
      1
     ],
     [
-     "yoshi-clinic.com",
+     "nishinomiya-naika.jp",
      "clinic",
      1
     ]
@@ -2285,8 +2299,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 2,
-    "portal": 1,
-    "media": 1
+    "media": 1,
+    "portal": 1
    },
    "top": [
     [
@@ -2309,10 +2323,10 @@
   {
    "q": "夜間 クリニック",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 2,
-    "public": 1
+    "public": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -2321,13 +2335,13 @@
      2
     ],
     [
-     "m-life.jp",
-     "portal",
+     "iryou.teikyouseido.mhlw.go.jp",
+     "public",
      1
     ],
     [
-     "epark.jp",
-     "portal",
+     "kakarikata.mhlw.go.jp",
+     "public",
      1
     ]
    ]
@@ -2335,9 +2349,9 @@
   {
    "q": "初診 紹介状 必要か",
    "group": "受診のしかた",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
+    "public": 4,
     "clinic": 2,
     "portal": 1
    },
@@ -2348,12 +2362,12 @@
      2
     ],
     [
-     "mhlw.go.jp",
+     "gov-online.go.jp",
      "public",
      1
     ],
     [
-     "alpskenpo.or.jp",
+     "tokyo-hp.hosp.go.jp",
      "public",
      1
     ]
@@ -2362,11 +2376,11 @@
   {
    "q": "オンライン診療 やり方",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
-    "public": 2,
+    "public": 3,
     "portal": 2,
+    "maker": 2,
     "media": 1,
     "clinic": 1
    },
@@ -2374,7 +2388,7 @@
     [
      "mhlw.go.jp",
      "public",
-     2
+     3
     ],
     [
      "sokuyaku.jp",
@@ -2391,15 +2405,15 @@
   {
    "q": "クリニック 口コミ 信用できるか",
    "group": "受診のしかた",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "maker": 4,
+    "public": 2,
+    "media": 3,
+    "clinic": 3,
     "portal": 2,
     "video": 2,
-    "other": 2,
-    "media": 3,
-    "public": 1,
-    "maker": 3,
-    "clinic": 3
+    "other": 2
    },
    "top": [
     [
@@ -2408,13 +2422,13 @@
      3
     ],
     [
-     "review-system.jp",
-     "maker",
+     "mhlw.go.jp",
+     "public",
      2
     ],
     [
-     "president.jp",
-     "media",
+     "review-system.jp",
+     "maker",
      2
     ]
    ]
@@ -2422,28 +2436,28 @@
   {
    "q": "セカンドオピニオン やり方",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 2,
+    "public": 3,
     "media": 2,
-    "public": 2,
-    "maker": 1,
-    "clinic": 2
+    "clinic": 2,
+    "portal": 2,
+    "maker": 1
    },
    "top": [
     [
+     "ganjoho.jp",
+     "public",
+     2
+    ],
+    [
+     "ncc.go.jp",
+     "public",
+     2
+    ],
+    [
      "t-pec.jp",
      "media",
-     2
-    ],
-    [
-     "sbi-medic.tokyo",
-     "clinic",
-     2
-    ],
-    [
-     "gan-portal.metro.tokyo.lg.jp",
-     "public",
      2
     ]
    ]
@@ -2451,27 +2465,27 @@
   {
    "q": "診断書 もらい方",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 2,
     "maker": 2,
-    "public": 1,
     "portal": 1,
     "media": 1,
     "clinic": 1
    },
    "top": [
     [
-     "ncc.go.jp",
+     "hosp.jihs.go.jp",
+     "public",
+     2
+    ],
+    [
+     "saigai.hosp.go.jp",
      "public",
      1
     ],
     [
-     "mentoa.excite.co.jp",
-     "media",
-     1
-    ],
-    [
-     "hospinfo.tokyo-med.ac.jp",
+     "ncc.go.jp",
      "public",
      1
     ]
@@ -2480,13 +2494,13 @@
   {
    "q": "健康診断 再検査 どこで",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
+    "clinic": 3,
     "portal": 2,
-    "public": 1,
-    "maker": 1,
-    "media": 1
+    "media": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -2495,13 +2509,13 @@
      2
     ],
     [
-     "watanabe-iin.org",
+     "nakamura-med.or.jp",
      "clinic",
      1
     ],
     [
-     "sawayaka-saisei.or.jp",
-     "clinic",
+     "nhsc.or.jp",
+     "public",
      1
     ]
    ]
@@ -2509,26 +2523,26 @@
   {
    "q": "予防接種 予約 方法",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
     "clinic": 2,
-    "portal": 2,
     "other": 1,
-    "public": 2
+    "portal": 2
    },
    "top": [
     [
-     "mrso.jp",
-     "portal",
+     "city.yokohama.lg.jp",
+     "public",
+     2
+    ],
+    [
+     "city.fukushima.fukushima.jp",
+     "public",
      1
     ],
     [
-     "uniconomori.com",
-     "clinic",
-     1
-    ],
-    [
-     "city.tomi.nagano.jp",
+     "city.hachioji.tokyo.jp",
      "public",
      1
     ]
@@ -2537,20 +2551,20 @@
   {
    "q": "医療費控除 対象 クリニック",
    "group": "受診のしかた",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 4,
     "video": 2,
-    "maker": 3,
-    "public": 3,
     "clinic": 2,
-    "portal": 1,
-    "media": 1
+    "maker": 3,
+    "media": 1,
+    "portal": 1
    },
    "top": [
     [
      "nta.go.jp",
      "public",
-     3
+     4
     ],
     [
      "freee.co.jp",
@@ -2567,28 +2581,28 @@
   {
    "q": "待ち時間 短い クリニック",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
-    "portal": 2,
+    "clinic": 3,
     "public": 1,
+    "portal": 2,
     "maker": 1,
     "media": 1
    },
    "top": [
     [
-     "revoclinic.jp",
+     "amagasaki-skinclinic.com",
      "clinic",
      1
     ],
     [
-     "caloo.jp",
-     "portal",
+     "ebina-fdc.jp",
+     "clinic",
      1
     ],
     [
-     "mhlw.go.jp",
-     "public",
+     "revoclinic.jp",
+     "clinic",
      1
     ]
    ]
@@ -2596,13 +2610,13 @@
   {
    "q": "クリニック 変える 紹介状",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 1,
-    "clinic": 2,
+    "public": 2,
+    "clinic": 3,
     "media": 2,
-    "portal": 1,
-    "public": 1
+    "maker": 1,
+    "portal": 1
    },
    "top": [
     [
@@ -2611,12 +2625,12 @@
      2
     ],
     [
-     "clius.jp",
-     "maker",
+     "klc.nomura-magokoro-med.or.jp",
+     "clinic",
      1
     ],
     [
-     "uch-naika.com",
+     "kyoto-cocokara.clinic",
      "clinic",
      1
     ]
@@ -2625,9 +2639,9 @@
   {
    "q": "女性医師 探し方",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 2,
+    "public": 3,
     "portal": 2,
     "maker": 1
    },
@@ -2655,10 +2669,10 @@
    "answered": 4,
    "kinds": {
     "clinic": 1,
-    "public": 3,
     "other": 1,
-    "maker": 1,
-    "portal": 1
+    "public": 3,
+    "portal": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -2681,13 +2695,13 @@
   {
    "q": "クリニック 電話 予約 取れない",
    "group": "受診のしかた",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 2,
+    "public": 2,
+    "clinic": 2,
     "media": 2,
-    "public": 1,
-    "maker": 2,
-    "clinic": 1
+    "portal": 2,
+    "maker": 2
    },
    "top": [
     [
@@ -2696,13 +2710,13 @@
      2
     ],
     [
-     "d-bashifc.com",
+     "tsutsuji-h.com",
      "clinic",
      1
     ],
     [
-     "ho.chiba-u.ac.jp",
-     "public",
+     "tsunagari-cl.or.jp",
+     "clinic",
      1
     ]
    ]
@@ -2710,20 +2724,20 @@
   {
    "q": "往診 頼み方",
    "group": "受診のしかた",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 2,
+    "clinic": 4,
     "maker": 2,
-    "other": 1,
     "media": 1,
-    "portal": 1,
-    "public": 1
+    "other": 1,
+    "portal": 1
    },
    "top": [
     [
      "fujicl.or.jp",
      "clinic",
-     3
+     4
     ],
     [
      "kyotoohara.or.jp",
@@ -2740,41 +2754,12 @@
   {
    "q": "訪問診療 とは",
    "group": "受診のしかた",
-   "answered": 2,
-   "kinds": {
-    "clinic": 2,
-    "public": 1,
-    "maker": 1,
-    "portal": 1
-   },
-   "top": [
-    [
-     "kyoto-kyoritsu.org",
-     "clinic",
-     1
-    ],
-    [
-     "city.koshu.yamanashi.jp",
-     "public",
-     1
-    ],
-    [
-     "kakamigahara.gifu.med.or.jp",
-     "public",
-     1
-    ]
-   ]
-  },
-  {
-   "q": "かかりつけ医 必要か",
-   "group": "受診のしかた",
    "answered": 3,
    "kinds": {
-    "clinic": 2,
     "public": 2,
-    "media": 2,
-    "portal": 1,
-    "maker": 1
+    "clinic": 2,
+    "maker": 1,
+    "portal": 1
    },
    "top": [
     [
@@ -2783,13 +2768,42 @@
      2
     ],
     [
-     "gemmed.ghc-j.com",
-     "clinic",
+     "iryou.teikyouseido.mhlw.go.jp",
+     "public",
      1
     ],
     [
-     "kyoukaikenpo.or.jp",
+     "kyoto-kyoritsu.org",
+     "clinic",
+     1
+    ]
+   ]
+  },
+  {
+   "q": "かかりつけ医 必要か",
+   "group": "受診のしかた",
+   "answered": 4,
+   "kinds": {
+    "public": 3,
+    "clinic": 2,
+    "media": 2,
+    "portal": 1,
+    "maker": 1
+   },
+   "top": [
+    [
+     "mhlw.go.jp",
      "public",
+     3
+    ],
+    [
+     "kakarikata.mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "gemmed.ghc-j.com",
+     "clinic",
      1
     ]
    ]
@@ -2797,27 +2811,27 @@
   {
    "q": "小児科 何歳まで",
    "group": "受診のしかた",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 3,
+    "clinic": 4,
     "portal": 2,
-    "public": 2,
     "media": 1,
     "maker": 2
    },
    "top": [
     [
-     "bambi-clinic.com",
+     "ogikubo-shonika.com",
      "clinic",
+     3
+    ],
+    [
+     "jpeds.or.jp",
+     "public",
      2
     ],
     [
-     "med-pro.jp",
-     "portal",
-     2
-    ],
-    [
-     "ohara-clinic.net",
+     "bambi-clinic.com",
      "clinic",
      2
     ]
