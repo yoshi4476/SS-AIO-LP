@@ -177,9 +177,17 @@ def hero(key, c):
             f'<label>ホームページのURL<input type="url" name="check" inputmode="url" placeholder="https://example.co.jp" autocomplete="url" required></label>'
             f'<button type="submit" class="lx-go" data-cta="lp_{key}_scan">30秒で無料診断する</button>'
             f'<p class="lx-micro"><span>入力はURLだけ</span><span>登録不要</span><span>営業電話なし</span></p></form>'
-            f'<p class="lx-alt">話を聞いてから決めたい方は <a href="/lp/#form" data-cta="lp_{key}_hero_consult">無料相談</a>'
+            f'<p class="lx-alt">話を聞いてから決めたい方は <a href="{_e(consult_url(key))}" data-cta="lp_{key}_hero_consult">無料相談</a>'
             f' ／ サービス内容と料金は <a href="/lp/#service">こちら</a></p>'
             f'</div>{stats}</div></section>')
+
+
+def consult_url(key):
+    """業種LPの「相談する」の行き先。相談のフォームは全業種向けの /lp/ にあるため、業種を ?ind= で渡す
+    （診断の ?ind= と同じ値。/lp/ では site.js がフォームの隠し項目に入れ、受付が本文に添える）。
+    以前は /lp/#form へ移るだけで、どの業種の人の相談か分からなかった（2026-10-08）"""
+    from urllib.parse import quote
+    return f'/lp/?ind={quote(LPS[key]["scan_ind"])}&src=lp_{key}#form'
 
 
 def url_for(hub_slug):
@@ -249,7 +257,7 @@ def body(key, metas, faq_pairs, post_tile, site_url):
            'ここに挙げた業種のほかにも対応しています。</p></section>',
            '<section class="ilp-band"><h2>まずは、今の状態を知るところから</h2>'
            '<p>現状分析は無料です。30秒の診断だけでも、直す順番が分かります。</p><div class="btns">'
-           f'<a class="btn btn-primary" href="/lp/#form" data-cta="lp_{key}_consult">無料で相談する（現状分析つき）</a>'
+           f'<a class="btn btn-primary" href="{_e(consult_url(key))}" data-cta="lp_{key}_consult">無料で相談する（現状分析つき）</a>'
            f'<a class="btn btn-ghost" href="#scan-start" data-cta="lp_{key}_band_scan">30秒で診断する</a>'
            f'<a class="btn btn-ghost" href="/tools/ai-check/" data-cta="lp_{key}_band_aicheck">AIにどう紹介されているか確かめる</a></div></section>']
     if tiles:

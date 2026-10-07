@@ -1963,3 +1963,9 @@ html.js .rsx-tools { display: flex; flex-wrap: wrap; align-items: center; justif
 .contact-side .enrich-steps li { padding: 1rem 1.1rem .95rem; }
 @media (min-width: 1000px) { .contact-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.6rem); } }
 
+/* 業種ハブの入口（診断・チェックリスト・相談）。季節の特集のときだけ出ていたものを、いつも出す（industry_hub.entry） */
+.hub-entry { margin: 1.1rem 0 .4rem; padding: 1.1rem 1.25rem; border: 1px solid var(--sky-2); border-left: 4px solid var(--blue); border-radius: 0 14px 14px 0; background: var(--sky); }
+.hub-entry p { margin: 0 0 .7rem; font-weight: 700; color: var(--navy); line-height: 1.7; }
+.hub-entry .hub-entry-btns { display: flex; flex-wrap: wrap; gap: .6rem; }
+.hub-entry .btn { padding: .7em 1.3em; font-size: .92rem; line-height: 1.6; }
+@media (max-width: 600px) { .hub-entry .btn { flex: 1 1 100%; } }

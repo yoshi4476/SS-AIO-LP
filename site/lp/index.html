@@ -584,6 +584,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   
   <form class="form-panel" action="/api/lead" method="post" style="margin:0;max-width:none;">
     <input type="hidden" name="form_type" value="無料相談（LP）">
+    <!-- 業種別のページ（/lp/medical/ など）から ?ind= で来た人の業種。site.js が入れ、受付（/api/lead）が本文に添える -->
+    <input type="hidden" name="industry" value="">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
     <label>お名前 <span class="req">必須</span>
       <input type="text" name="name" required autocomplete="name">

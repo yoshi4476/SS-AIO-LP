@@ -750,3 +750,16 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
   addEventListener("scroll", tick, { passive: true });
   tick();
 })();
+
+/* 業種別のページ（/lp/medical/ など）から ?ind= で来た人の業種を、相談フォームの隠し項目に入れる。
+ * 業種LPの「無料で相談する」は全業種向けの /lp/ のフォームへ移るため、業種が引き継がれていなかった（2026-10-08）。
+ * 値は診断欄の業種の選択肢にあるものだけ（lp-scan.js が ?ind= で診断欄の業種を選ぶのと同じ値） */
+(function () {
+  var box = document.querySelector('form input[name="industry"]');
+  if (!box) return;
+  var v = (new URLSearchParams(location.search).get("ind") || "").trim();
+  var ok = Array.prototype.some.call(document.querySelectorAll("#lx-industry option"), function (o) {
+    return o.value && o.value === v;
+  });
+  if (ok) box.value = v;
+})();

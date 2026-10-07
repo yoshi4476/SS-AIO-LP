@@ -187,6 +187,31 @@ def tool_link(ind):
             f'口コミへの返信案をその場で作る（無料ツール・登録不要）</a></p>')
 
 
+# 業種ハブ → AI診断（/tools/ai-check/）の業種の選択肢（?ind= で選んだ状態で開く）
+AI_CHECK_IND = {"shika": "dental", "clinic": "clinic", "fudosan": "fudosan", "koumuten": "koumuten", "reform": "reform"}
+
+
+def entry(ind):
+    """業種ハブの入口: AI診断・URL診断・業種のチェックリスト。季節の特集（season_feature）の期間にしか出ず、
+    特集の無い時期の業種ハブには診断もチェックリストも無かった（2026-10-08）"""
+    import html as _h
+    slug = ind.get("slug", "")
+    try:
+        import industry_ai_sources as IAS
+        cl = IAS.RESEARCH_TO_CHECKLIST.get(IAS.HUB_TO_RESEARCH.get(slug, ""), "")
+    except Exception:
+        cl = ""
+    ai = AI_CHECK_IND.get(slug, "")
+    btns = (f'<a class="btn btn-ghost" href="/tools/ai-check/{"?ind=" + ai if ai else ""}" data-cta="hub_entry_ai_{slug}">'
+            'AIに御社が出るか確かめる</a>'
+            f'<a class="btn btn-ghost" href="/tools/url-check/" data-cta="hub_entry_url_{slug}">自社サイトを30秒で診断する</a>')
+    if cl:
+        btns += (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="hub_entry_checklist_{slug}">'
+                 'チェックリスト（PDF）を受け取る</a>')
+    return (f'<div class="hub-entry"><p>{_h.escape(ind["name"])}のサイトが、AIと検索にどう出ているかを無料で確かめられます（登録不要）。</p>'
+            f'<div class="hub-entry-btns">{btns}</div></div>')
+
+
 def hub_body(ind, metas, categories, post_tile, cat_url=None, extras=True):
     """業種ハブの中身。手法ごとに区切る（読者は自分に必要な手法から入る）。
 
@@ -210,7 +235,7 @@ def hub_body(ind, metas, categories, post_tile, cat_url=None, extras=True):
               f'<div class="cat-head"><h2>{_h.escape(ind["name"])}の記事</h2>'
               f'<span class="cnt">全{len(metas)}本</span></div>'
               f'<p class="hub-lead">{_h.escape(ind["lead"])}</p>{fresh}{faq_link}'
-              + (f'{lp_link(ind)}{research_link(ind)}{tool_link(ind)}' if extras else "") + '</div>']
+              + (f'{lp_link(ind)}{entry(ind)}{research_link(ind)}{tool_link(ind)}' if extras else "") + '</div>']
     for cat, (name, cls) in categories.items():
         part = [m for m in metas if m["category"] == cat]
         if not part:

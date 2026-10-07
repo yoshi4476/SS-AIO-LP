@@ -60,6 +60,9 @@ export async function onRequestPost({ request, env }) {
                     fixes: data.audit_fixes || "" };
     }
     if (!String(hub.message || "").trim()) hub.message = data.topic || ft || "（本文なし）";
+    // 業種別のページ（/lp/medical/ など）から来た相談は、業種を本文の末尾に添える（台帳の列は増やさない）
+    const ind = String(data.industry || "").replace(/\s+/g, " ").trim().slice(0, 30);
+    if (ind) hub.message = String(hub.message) + "\n\n【業種】" + ind + "（業種別のページから）";
     try {
       const gas = await fetch(env.GAS_WEBHOOK_URL, {
         method: "POST",
