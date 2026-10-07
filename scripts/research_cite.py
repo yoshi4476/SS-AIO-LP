@@ -44,6 +44,12 @@ def usage_url(page_url):
     return page_url.split("#")[0] + "#" + ANCHOR
 
 
+def license_url(page_url):
+    """Dataset の license（Search Console が「license がありません」と知らせるため。2026-10-07）。
+    引用の条件は運用者が決めた TERMS（出典の明記で引用可）なので、CC BY などに広げず、その条件の枠を指す"""
+    return usage_url(page_url)
+
+
 STYLE = ("<style>.cite-box{border:1px solid #d3e0f0;border-radius:16px;padding:1.1rem 1.3rem;background:#f5f8fc;display:grid;gap:.8rem}"
          ".cite-box h3{font-size:1rem;margin:0}.cite-text{background:#fff;border:1px solid #d3e0f0;border-radius:10px;"
          "padding:.7rem .9rem;margin:0;font-size:.92rem;line-height:1.7;word-break:break-all}"

@@ -754,6 +754,7 @@ def render(ind):
     ld = {"@context": "https://schema.org", "@type": "Dataset",
           "name": f"{name}に関する質問に、AIは何を出典にして答えているか（{y}年{m}月）",
           "description": cite, "url": page_url, "usageInfo": RC.usage_url(page_url),
+          "license": RC.license_url(page_url),
           "creator": {"@type": "Organization", "name": "セブンセンシズ株式会社", "url": "https://corp.7senses.co.jp/"},
           "datePublished": s["date"], "variableMeasured": ["出典のサイトの種類", "出典の割合"],
           "distribution": {"@type": "DataDownload", "encodingFormat": "text/csv",

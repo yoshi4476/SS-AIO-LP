@@ -172,6 +172,8 @@ def dataset_ld(d):
             "temporalCoverage": d["period"].replace("〜", "/"),
             "distribution": {"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": d["domain"] + d["url"] + "data.csv"},
             "usageInfo": d["domain"] + d["url"] + "#cite",
+            # Search Console が「license がありません」と知らせるため。引用の条件の枠（#cite）を指す（research_cite.license_url と同じ）
+            "license": d["domain"] + d["url"] + "#cite",
             "creator": {"@type": "Organization", "name": "セブンセンシズ株式会社", "url": "https://corp.7senses.co.jp/"}}
 
 
