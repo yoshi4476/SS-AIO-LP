@@ -21,6 +21,7 @@ faq:
 ---
 ※ ファイル名が _ で始まる記事（例: _sample.md）は下書き扱いでスキップ。
 """
+import functools
 import json
 import re
 import sys
@@ -36,6 +37,7 @@ import entities  # noqa: E402
 import render_check  # noqa: E402
 import industry_thumbs  # noqa: E402
 import desc_fill as DF  # noqa: E402
+import table_charts  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
@@ -242,6 +244,13 @@ def article_site(path: Path):
         return sites_mod.find_category_owner(cat) if cat else None
     except Exception:
         return None
+
+
+@functools.lru_cache(maxsize=1)
+def _chart_site():
+    """このビルドが描くサイトの設定（グラフの色 = sites/<id>.json の diagram_colors。無ければ図の既定の色）"""
+    import sites as sites_mod
+    return sites_mod.load_all().get(sites_mod.primary())
 
 
 def drop_stale_html(slug: str):
@@ -1017,8 +1026,11 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         "{{JSON_LD}}": build_json_ld(meta, url, content),
         "{{TOC}}": render_toc(toc_tokens),
         "{{EYECATCH}}": eyecatch,
-        "{{CONTENT}}": insert_mid_cta(insert_inline_tool(insert_tool_box(_video_embed(content, meta), meta), meta), meta)
-                       + _research_box(meta),
+        # 表の数字を同じ数字の横棒グラフにして表の直後に添える（1記事2つまで・検算を通ったものだけ）。
+        # 本文の検査（字数・強調・タグ）と構造化データは表だけの本文で済ませ、グラフの文字を数えない
+        "{{CONTENT}}": table_charts.add_to_html(
+            insert_mid_cta(insert_inline_tool(insert_tool_box(_video_embed(content, meta), meta), meta), meta),
+            _chart_site()) + _research_box(meta),
         "{{LP_URL}}": lp_url(meta),
         "{{LP_LABEL}}": lp_label(meta),
         "{{CTA_COPY}}": cta_copy(meta),

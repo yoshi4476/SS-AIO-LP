@@ -50,7 +50,9 @@ def _get(url, timeout=30):
 
 
 def page_facts(h):
-    t = re.search(r"<title>(.*?)</title>", h, re.S)
+    # 本文のインラインの図（表のグラフ）の <title> は図の名前で、ページの題ではない。数えるのは図の外だけ
+    no_svg = re.sub(r"<svg\b.*?</svg>", "", h, flags=re.S | re.I)
+    t = re.search(r"<title>(.*?)</title>", no_svg, re.S)
     d = re.search(r'<meta name="description" content="([^"]*)"', h)
     c = re.search(r'<link rel="canonical" href="([^"]+)"', h)
     body = re.sub(r"<script.*?</script>|<style.*?</style>", "", h, flags=re.S)
@@ -71,7 +73,7 @@ def page_facts(h):
     text = re.sub(r"<[^>]+>", "", re.sub(r"<(header|footer|nav)\b.*?</\1>", "", body, flags=re.S))
     return {
         "title": _h.unescape(t.group(1)).strip() if t else None,
-        "n_title": len(re.findall(r"<title>", h)),
+        "n_title": len(re.findall(r"<title>", no_svg)),
         "n_desc": len(re.findall(r'<meta name="description"', h)),
         "viewport": 'name="viewport"' in h,
         "lang": bool(re.search(r"<html[^>]*\blang=", h)),

@@ -35,6 +35,7 @@ import deliver_files  # noqa: E402
 import render_check  # noqa: E402
 import site_files  # noqa: E402
 import sites as sites_mod  # noqa: E402
+import table_charts  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".publish-work"  # 対象リポジトリのクローン置き場（.gitignore対象）
@@ -427,6 +428,9 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
         html = (credit["byline"] + "\n" if credit["byline"] else "") + \
             insert_mid_cta(insert_inline_entry(html, cfg), cfg) + "\n" + \
             credit_jsonld(credit, url, meta, cfg=cfg, html=text_html, image=img, video=not vb)
+    # 表の数字を同じ数字の横棒グラフにして表の直後に添える（読了時間・扱う実体は表だけの本文で数える）。
+    # 先方のアプリは本文を dangerouslySetInnerHTML でそのまま描く（消毒しない）ので、インラインの SVG のまま渡す
+    html = table_charts.add_to_html(html, cfg)
 
     out = {
         "slug": meta["slug"],
@@ -830,6 +834,9 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
             fm["eyecatch"] = str(fm["eyecatch"]).replace(src_path, dst_path)
     chars = len(md2html.plain_text(md2html.convert(body)[0]))
     vb = video_block(meta, dest)
+    # 表の数字の横棒グラフは、前後を空行で挟んだ1行の HTML の塊として表の直後に置く（先方の marked は生の HTML を
+    # そのまま通す。消毒しない。中の * や = は文字参照にしてあるので、journal_md の読み替えにも拾われない）
+    body = table_charts.add_to_markdown(body, cfg)
     if journal:
         body = _md_insert_entries((vb + "\n" + body.lstrip("\n")) if vb else body, cfg)
         html = md2html.convert(body)[0]
@@ -1334,6 +1341,8 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         "CTA_URL": (cfg.get("cta") or {}).get("url") or f"https://{cfg['domain']}/",
         "CTA_LABEL": (cfg.get("cta") or {}).get("label") or "お問い合わせ",
     }
+    # 表の数字の横棒グラフ（表の直後・1記事2つまで）。読了時間・扱う実体は上で表だけの本文から数えてある
+    vals["BODY"] = table_charts.add_to_html(vals["BODY"], cfg)
     out = tpl
     for k, v in vals.items():
         out = out.replace("{{" + k + "}}", v)
