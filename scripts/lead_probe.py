@@ -101,7 +101,11 @@ def main():
     ep = subsidy_endpoint()
     results["subsidy"] = probe_direct("subsidy", ep, {}) if ep else (False, "送り先が公開中のページに見つからない")
     ep, key = corporate_endpoint()
-    results["corporate"] = probe_direct("corporate", ep, {"formKey": key}) if ep else (False, "送り先が site.ts に見つからない")
+    # コーポレートのフォームと同じ形で送る（必須の「ご相談内容」だけ選び、任意の詳細は空）。本文を入れて送ると、
+    # 詳細が空の相談が受付で弾かれる不具合（2026-10-07 判明）を見逃す
+    results["corporate"] = (probe_direct("corporate", ep, {"formKey": key, "message": "", "detail": "",
+                                                           "service": "週次の疎通確認（自動）"})
+                            if ep else (False, "送り先が site.ts に見つからない"))
     time.sleep(15)
     st = (HC._post({"action": "probe_status"}) or {}).get("last", {})
     labels = {"ai-lab": "AI集客ラボ", "subsidy": "補助金", "corporate": "コーポレート"}
