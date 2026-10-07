@@ -115,6 +115,8 @@ faq:
 
 **症状ページの失敗は、専門用語の題名・似た症状の乱立・原因の言い切り・出口の欠けの4つです。**
 
+近い論点を[クリニックのホームページの料金の載せ方は？](/aio/clinic-hp-ryokin-nosekata/)で扱っています。
+
 <figure><img src="/images/shika-shoujou-page-tsukurikata/ng-ok.png" alt="歯科医院の症状ページのNGとOKの比較" loading="lazy"><figcaption>症状ページのNGとOK</figcaption></figure>
 
 どれも院内の感覚で作ると起きやすいものです。起きたこと・原因・避け方の順に見てください。

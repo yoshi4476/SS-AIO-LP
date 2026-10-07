@@ -7,6 +7,27 @@
   <updated>2026-10-07T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>AIO導入事例｜自社サイトで実践した4施策と数値</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-donyu-jirei/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</id>
+    <updated>2026-10-07T00:00:00+09:00</updated>
+    <summary>AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。</summary>
+  </entry>
+  <entry>
+    <title>クリニックのホームページの料金の載せ方は？診療の区分ごとの書き方</title>
+    <link href="https://ai.7senses.co.jp/aio/clinic-hp-ryokin-nosekata/"/>
+    <id>https://ai.7senses.co.jp/aio/clinic-hp-ryokin-nosekata/</id>
+    <updated>2026-10-07T00:00:00+09:00</updated>
+    <summary>クリニックのホームページの料金は、保険診療・自由診療・健康診断・予防接種の区分ごとに書ける範囲が違います。自由診療は全額自己負担の旨と窓口で払う総額の幅、期間、リスクを文字で示し、薬の販売名は書きません。区分別の書き方と失敗例を整理します。</summary>
+  </entry>
+  <entry>
+    <title>LLMO代理店募集の見分け方｜確認すべき5つの条件</title>
+    <link href="https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/"/>
+    <id>https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/</id>
+    <updated>2026-10-07T00:00:00+09:00</updated>
+    <summary>LLMO代理店の募集情報は条件があいまいなまま契約すると業務範囲でトラブルになります。契約前に確認すべき5つの条件、始め方3ステップ、失敗しやすい3つの落とし穴を2026年9月時点の情報で解説します。</summary>
+  </entry>
+  <entry>
     <title>歯科医院ホームページで治療説明はどう書く？インプラントの見出し例</title>
     <link href="https://ai.7senses.co.jp/aio/shika-hp-chiryou-setsumei-kakikata/"/>
     <id>https://ai.7senses.co.jp/aio/shika-hp-chiryou-setsumei-kakikata/</id>
@@ -124,26 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-checker/</id>
     <updated>2026-09-23T00:00:00+09:00</updated>
     <summary>AIOチェッカーは、AI Overviewの表示と自社の引用を確かめる道具です。測るもの別の4種類、点数を信じすぎない理由、結果別に次にやることを自社の実測つきで解説します。確かめられるものは「表示」と「引用」の2つだけで、点数でサイトを採点する診断ツールとは役割が違います。</summary>
-  </entry>
-  <entry>
-    <title>AIO対策の具体例｜構造別6パターンとNG集</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-gutairei/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-taisaku-gutairei/</id>
-    <updated>2026-09-23T00:00:00+09:00</updated>
-    <summary>AIO対策の具体例とは、冒頭の断言回答・1文結論・定義ブロック・比較表・FAQ・数値ファクトという6つの構造ごとに、そのまま使えるNG→OKの書き方を示したものです。自社サイトの実測データを交えて解説します。</summary>
-  </entry>
-  <entry>
-    <title>大阪でMEOとAIOを両方任せられる会社の選び方｜比較4基準</title>
-    <link href="https://ai.7senses.co.jp/aio/osaka-meo-aio-kaisha/"/>
-    <id>https://ai.7senses.co.jp/aio/osaka-meo-aio-kaisha/</id>
-    <updated>2026-09-22T00:00:00+09:00</updated>
-    <summary>大阪でMEOとAIOを両方任せられる会社を探すなら、実績・一次情報の設計力・計測レポート・契約の柔軟性の4基準で比較してください。大阪市拠点で店舗集客を支援してきた実務から、確認すべき点と費用の考え方を整理します。</summary>
-  </entry>
-  <entry>
-    <title>AIO導入事例｜自社サイトで実践した4施策と数値</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-donyu-jirei/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</id>
-    <updated>2026-09-21T00:00:00+09:00</updated>
-    <summary>AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。</summary>
   </entry>
 </feed>

@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: 品質ゲートと橋渡し（管制塔との接続）
- * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・訳のページとの hreflang・表示速度・画像と動画のサイトマップ・配信の指紋・自己更新）を持つ。
- * Version: 2.0.3
+ * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・訳のページとの hreflang・表示速度・画像と動画のサイトマップ・配信の指紋・追加CSSと head・フッターの小さな追記・自己更新）を持つ。
+ * Version: 2.0.4
  *
  * ■ 先方が最初に1回だけすること
  *   1. このファイルを wp-content/mu-plugins/ に置く
@@ -44,7 +44,7 @@ const SSQG_HUMAN_MIN_CHARS = 3000;
 const SSQG_HUMAN_MIN_H2    = 4;
 
 // 自己更新で、届いたファイルの中にこの行があることを確かめる（版の書き換えだけの差し替えを通さない）
-const SSB_VERSION = '2.0.3';
+const SSB_VERSION = '2.0.4';
 const SSB_META_JSONLD_EXTRA = '_ss_jsonld_extra';   // FAQPage など BlogPosting 以外の実体（JSON の配列）
 const SSB_META_ALTERNATES = '_ss_alternates';       // 訳のページとの組（{"en": URL, …} の JSON。同じサイトの URL だけ出す）
 const SSB_META_MANAGED = '_ss_managed';             // 管制塔が作った固定ページの印
@@ -806,6 +806,145 @@ add_action('wp_footer', function () {
 }, 99);
 
 
+/* ---------- 見た目の小さな追記（追加CSS・head とフッター）2.0.4 ----------
+ * FTP の接続情報が無い社でも、管制塔（site_change.py / site_renovate.py）から追加CSS・構造化データ・
+ * 確認用の meta を変えられるようにする。任意の HTML は受けない。項目の一覧（link・meta・ld+json・
+ * 許可したドメインの script src）だけを保存し、出すときにこちらで組み立てる（保存した文字列をそのまま出さない）。
+ * インラインの script・on* 属性・style 要素・任意のタグは、項目の形に無いので通しようがない。
+ */
+const SSB_MAX_CSS = 100000;
+const SSB_MAX_ITEMS = 30;
+const SSB_MAX_ITEM_BYTES = 20000;
+const SSB_CSS_BAD = '#</style|<script|<!--|expression\s*\(|javascript:|fonts\.googleapis\.com#i';
+const SSB_ITEM_KEYS = ['t', 'a', 'json', 'src', 'async', 'defer'];
+const SSB_LINK_ATTRS = ['rel', 'href', 'as', 'type', 'crossorigin', 'media', 'sizes', 'hreflang', 'title'];
+const SSB_LINK_RELS = ['canonical', 'alternate', 'preconnect', 'dns-prefetch', 'preload', 'icon', 'apple-touch-icon',
+                       'manifest', 'author', 'me', 'license'];
+const SSB_META_ATTRS = ['name', 'property', 'content'];
+// script src を許すドメイン（管制塔が決める。署名した更新でだけ変わる）。先方のサーバー管理者は
+// wp-config.php の define('SSB_EXTRA_SCRIPT_HOSTS', 'a.example,b.example'); で足せる（REST からは足せない）
+const SSB_SCRIPT_HOSTS = ['challenges.cloudflare.com', 'www.google.com', 'www.gstatic.com', 'static.cloudflareinsights.com'];
+
+/** 見た目の追記は、書き込みの条件に加えて「外観の編集」の権限（既定は管理者）を求める。
+ * WordPress 本体も追加CSS・ウィジェットは edit_theme_options の利用者にしか変えさせない */
+function ssb_can_design()
+{
+    return ssb_can_write() && current_user_can('edit_theme_options');
+}
+
+function ssb_script_hosts()
+{
+    $hosts = SSB_SCRIPT_HOSTS;
+    if (defined('SSB_EXTRA_SCRIPT_HOSTS')) {
+        foreach (explode(',', (string) SSB_EXTRA_SCRIPT_HOSTS) as $h) {
+            $h = strtolower(trim($h));
+            if (preg_match('/^[a-z0-9.-]+\.[a-z]{2,}$/', $h)) {
+                $hosts[] = $h;
+            }
+        }
+    }
+    return $hosts;
+}
+
+function ssb_https_url($u)
+{
+    return is_string($u) && strlen($u) <= 2000 && (bool) preg_match('#^https://[A-Za-z0-9.-]+(?::\d+)?(?:/[^\s"\'<>\\\\]*)?$#', $u);
+}
+
+/** 1項目を検める。通れば保存する形（組み立て直した配列）、通らなければ理由の文字列 */
+function ssb_design_item($it)
+{
+    if (!is_array($it)) {
+        return '項目がオブジェクトではありません';
+    }
+    $extra = array_diff(array_keys($it), SSB_ITEM_KEYS);
+    if ($extra) {
+        return '知らないキーがあります';
+    }
+    $t = $it['t'] ?? '';
+    if ($t === 'link' || $t === 'meta') {
+        $a = $it['a'] ?? null;
+        if (!is_array($a) || !$a) {
+            return $t . ' の属性（a）がありません';
+        }
+        $allow = $t === 'link' ? SSB_LINK_ATTRS : SSB_META_ATTRS;
+        $out = [];
+        foreach ($a as $k => $v) {
+            if (!is_string($k) || !in_array($k, $allow, true) || !is_string($v) || strlen($v) > 2000) {
+                return $t . ' に使えない属性があります';
+            }
+            $out[$k] = $v;
+        }
+        if ($t === 'link') {
+            $h = $out['href'] ?? '';
+            if (!in_array(strtolower($out['rel'] ?? ''), SSB_LINK_RELS, true)) {
+                return 'link の rel が許可の外です（stylesheet は追加CSSで）';
+            }
+            if (!(ssb_safe_path($h) || ssb_https_url($h)) || stripos($h, 'fonts.googleapis.com') !== false) {
+                return 'link の href は同じサイトのパスか https の URL だけです（Google Fonts は読まない）';
+            }
+        } elseif (!isset($out['content']) || (!isset($out['name']) && !isset($out['property']))) {
+            return 'meta は name か property と、content が要ります（http-equiv は使えません）';
+        }
+        return ['t' => $t, 'a' => $out];
+    }
+    if ($t === 'ld') {
+        if (!is_array($it['json'] ?? null) || !$it['json']) {
+            return 'ld の json がオブジェクトではありません';
+        }
+        return ['t' => 'ld', 'json' => $it['json']];
+    }
+    if ($t === 'script') {
+        $src = $it['src'] ?? '';
+        if (!ssb_https_url($src) || !in_array(strtolower((string) wp_parse_url($src, PHP_URL_HOST)), ssb_script_hosts(), true)) {
+            return 'script の読み込み先が許可したドメインではありません';
+        }
+        return ['t' => 'script', 'src' => $src, 'async' => !empty($it['async']), 'defer' => !empty($it['defer'])];
+    }
+    return '使えない種類です（link・meta・ld・script だけ）';
+}
+
+/** 保存した項目から HTML を組み立てる。出す直前にもう一度検める（許可の定数を後で狭めたときのため） */
+function ssb_design_html($items)
+{
+    $h = '';
+    foreach ((array) $items as $it) {
+        $it = ssb_design_item($it);
+        if (!is_array($it)) {
+            continue;
+        }
+        if ($it['t'] === 'ld') {
+            // JSON_HEX_TAG で < > を < > にする（中身から </script> を作れない）
+            $h .= '<script type="application/ld+json">'
+                . wp_json_encode($it['json'], JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+                . "</script>\n";
+        } elseif ($it['t'] === 'script') {
+            $h .= '<script src="' . esc_url($it['src']) . '"' . ($it['async'] ? ' async' : '') . ($it['defer'] ? ' defer' : '')
+                . "></script>\n";
+        } else {
+            $h .= '<' . $it['t'];
+            foreach ($it['a'] as $k => $v) {
+                $h .= ' ' . $k . '="' . ($k === 'href' ? esc_url($v) : esc_attr($v)) . '"';
+            }
+            $h .= ">\n";
+        }
+    }
+    return $h;
+}
+
+add_action('wp_head', function () {
+    if (!is_admin() && !is_feed()) {
+        echo ssb_design_html(get_option('ssb_head', []));
+    }
+}, 20);
+
+add_action('wp_footer', function () {
+    if (!is_admin() && !is_feed()) {
+        echo ssb_design_html(get_option('ssb_footer', []));
+    }
+}, 98);
+
+
 /* ---------- REST ---------- */
 
 add_action('rest_api_init', function () {
@@ -952,6 +1091,67 @@ add_action('rest_api_init', function () {
             }
             return ['saved' => $done];
         },
+    ]);
+
+    // 追加CSS・head とフッターの追記。1つでも受け付けない項目があれば何も保存しない（半端に変えない）
+    register_rest_route(SSB_NS, '/design', [
+        ['methods' => 'GET', 'permission_callback' => 'ssb_can_design',
+         'callback' => function () {
+             return ['css' => (string) wp_get_custom_css(),
+                     'head' => array_values((array) get_option('ssb_head', [])),
+                     'footer' => array_values((array) get_option('ssb_footer', []))];
+         }],
+        ['methods' => 'POST', 'permission_callback' => 'ssb_can_design',
+         'callback' => function ($req) {
+             $save = [];
+             $bad = [];
+             $css = $req->get_param('css');
+             if ($css !== null) {
+                 if (!is_string($css) || strlen($css) > SSB_MAX_CSS || preg_match(SSB_CSS_BAD, $css)
+                     || ($css !== '' && wp_check_invalid_utf8($css) === '')) {
+                     $bad[] = ['field' => 'css', 'why' => '追加CSSが大きすぎるか、使えない記述（</style>・<script>・expression・javascript:・Google Fonts）があります'];
+                 } else {
+                     $save['css'] = $css;
+                 }
+             }
+             foreach (['head', 'footer'] as $k) {
+                 $items = $req->get_param($k);
+                 if ($items === null) {
+                     continue;
+                 }
+                 if (!is_array($items) || count($items) > SSB_MAX_ITEMS) {
+                     $bad[] = ['field' => $k, 'why' => '項目の一覧ではないか、多すぎます'];
+                     continue;
+                 }
+                 $ok = [];
+                 foreach (array_values($items) as $i => $it) {
+                     $r = ssb_design_item($it);
+                     if (!is_array($r)) {
+                         $bad[] = ['field' => $k, 'index' => $i, 'why' => $r];
+                     } elseif (strlen((string) wp_json_encode($r)) > SSB_MAX_ITEM_BYTES) {
+                         $bad[] = ['field' => $k, 'index' => $i, 'why' => '項目が大きすぎます'];
+                     } else {
+                         $ok[] = $r;
+                     }
+                 }
+                 $save[$k] = $ok;
+             }
+             if ($bad) {
+                 return new WP_Error('ssb_design', '受け付けない項目があります（何も保存していません）', ['status' => 400, 'rejected' => $bad]);
+             }
+             if (isset($save['css'])) {
+                 $r = wp_update_custom_css_post($save['css']);
+                 if (is_wp_error($r)) {
+                     return $r;
+                 }
+             }
+             foreach (['head', 'footer'] as $k) {
+                 if (isset($save[$k])) {
+                     update_option('ssb_' . $k, $save[$k], true);
+                 }
+             }
+             return ['saved' => array_keys($save)];
+         }],
     ]);
 
     register_rest_route(SSB_NS, '/update', $w + [

@@ -116,7 +116,7 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-dairiten-erabikata/five-points.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-dairiten-erabikata/ng-ok.png</image:loc></image:image>
   </url>
-  <url><loc>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</loc><lastmod>2026-09-21</lastmod>
+  <url><loc>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</loc><lastmod>2026-10-07</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-donyu-jirei/4sesaku.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-donyu-jirei/before-after.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-donyu-jirei/steps.png</image:loc></image:image>
@@ -307,6 +307,10 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-hp-hissu-koumoku/mondai.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-hp-hissu-koumoku/koumoku.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-hp-hissu-koumoku/steps.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/aio/clinic-hp-ryokin-nosekata/</loc><lastmod>2026-10-07</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-hp-ryokin-nosekata/kubun.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-hp-ryokin-nosekata/ng-ok.png</image:loc></image:image>
   </url>
   <url><loc>https://ai.7senses.co.jp/ai-marketing/clinic-instagram-yarikata/</loc><lastmod>2026-09-12</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-instagram-yarikata/riyu.png</image:loc></image:image>
@@ -514,7 +518,7 @@
   <url><loc>https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/</loc><lastmod>2026-08-31</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/kuchikomi-fuyasu-hoho/steps.png</image:loc></image:image>
   </url>
-  <url><loc>https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/</loc><lastmod>2026-09-19</lastmod>
+  <url><loc>https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/</loc><lastmod>2026-10-07</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/llmo-dairiten-boshu/kakunin5.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/llmo-dairiten-boshu/steps3.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/llmo-dairiten-boshu/goodbad.png</image:loc></image:image>
