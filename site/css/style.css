@@ -125,7 +125,11 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .nav-open .nav-toggle span::before { transform: translateX(-50%) translateY(6px) rotate(45deg); }
 .nav-open .nav-toggle span::after { transform: translateX(-50%) translateY(-6px) rotate(-45deg); }
 @media (max-width: 1260px) {
-  .nav-toggle { display: block; }
+  /* 固定のヘッダーは画面の1割未満に（2026-10-08）。上下の余白 .8rem で 72px、ツールの帯と合わせて 111px を
+     スマホの画面の13%で常に覆っていた。上下 .5rem・ボタン 42px で約 59px にする */
+  .site-header .inner { padding-top: .5rem; padding-bottom: .5rem; }
+  .nav-toggle { display: block; width: 42px; height: 42px; }
+  .nav-toggle span { top: 20px; }
   .global-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: #fff; border-bottom: 1px solid var(--line); box-shadow: var(--shadow-md); padding: .6rem 1.25rem 1.1rem; }
   .nav-open .global-nav { display: flex; }
   .global-nav a:not(.nav-cta) { display: block; padding: .8em .2em; border-bottom: 1px solid var(--line); font-size: .95rem; }
@@ -496,9 +500,14 @@ code { font-family: Consolas, "Courier New", monospace; }
 .hero-form button { width: 100%; margin-top: 1rem; border: none; cursor: pointer; font-family: inherit; font-size: .98rem; }
 .hero-form .hf-note { font-size: .78rem; color: var(--muted); text-align: center; margin: .7rem 0 0; }
 
-.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: none; background: rgba(11,36,71,.96); backdrop-filter: blur(8px); padding: .7rem 1rem; gap: .7rem; }
-.sticky-cta .btn { flex: 1; padding: .85em .5em; font-size: .9rem; }
-@media (max-width: 720px) { .sticky-cta { display: flex; } body.has-sticky { padding-bottom: 72px; } }
+/* LP のスマホの固定ボタン。記事の固定ボタン（.scan-sticky）と同じ仕組みで site.js が出し入れする。
+   最初の画面から出てヒーローの「30秒で診断する」に重なり、フォームに入力している間も画面の下を覆って、
+   「30秒診断」が入力中の人をフォームの外へ連れ出していた（2026-10-08）。高さは 64px 以内 */
+.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: none; background: rgba(11,36,71,.96); backdrop-filter: blur(8px); padding: .5rem .8rem calc(.5rem + env(safe-area-inset-bottom, 0px)); gap: .6rem; transform: translateY(110%); transition: transform .3s ease; }
+.sticky-cta.is-on { transform: none; }
+.sticky-cta .btn { flex: 1; padding: .55em .5em; font-size: .9rem; line-height: 1.6; }
+@media (max-width: 760px) { .sticky-cta { display: flex; } }
+@media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
 
 /* ---------- 重要箇所マーカー（サイト全体・自動適用） ---------- */
 .section strong, .check-list strong, .pillar strong, .term-tile strong,
@@ -1570,9 +1579,10 @@ main.article .article-body .inline-tool .it-sub { margin: 0 0 .75rem; font-size:
 .inline-tool .it-form input[type=url]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, .15); }
 .inline-tool .it-form .btn { flex: 0 0 auto; white-space: nowrap; }
 @media (max-width: 480px) { .inline-tool .it-form .btn { flex: 1 1 100%; } }
-.scan-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; padding: .6rem .8rem calc(.6rem + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, .96); box-shadow: 0 -8px 24px -12px rgba(7, 26, 56, .35); transform: translateY(110%); transition: transform .3s ease; }
+.scan-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; padding: .5rem .8rem calc(.5rem + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, .96); box-shadow: 0 -8px 24px -12px rgba(7, 26, 56, .35); transform: translateY(110%); transition: transform .3s ease; }
 .scan-sticky.is-on { transform: none; }
-.scan-sticky .btn { display: block; width: 100%; text-align: center; }
+/* 帯の高さは 64px 以内（83px あり、上の固定ヘッダーと合わせて画面の約1/4を覆っていた） */
+.scan-sticky .btn { display: block; width: 100%; text-align: center; padding: .6em 1em; line-height: 1.6; }
 @media (min-width: 761px) { .scan-sticky { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { .scan-sticky { transition: none; } }
 
@@ -1587,10 +1597,12 @@ main.article .article-body .inline-tool .it-sub { margin: 0 0 .75rem; font-size:
 .hdr-tools { display: none; }
 @media (max-width: 1260px) {
   .global-nav .nav-tool { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: .8em .2em; }
-  /* 帯は JS が後から足す。場所を先に取っておき、ページが下へずれないようにする（CLS） */
-  .site-header:has(.nav-tool) { padding-bottom: 40px; }
-  .hdr-tools { display: flex; justify-content: center; align-items: center; gap: .4rem; position: absolute; left: 0; right: 0; bottom: 0; height: 40px; padding: 0 var(--gutter); background: var(--sky); border-top: 1px solid var(--line); }
-  .hdr-tools a { font-size: .8rem; font-weight: 700; color: var(--blue); text-decoration: none; padding: .3em .8em; border-radius: 999px; background: #fff; border: 1px solid var(--sky-2); white-space: nowrap; }
+  /* 帯は JS が後から足す。場所を先に取っておき、ページが下へずれないようにする（CLS）。
+     帯を出すのはトップと /tools/ だけ（site.js と同じ条件）。全ページで固定のヘッダーが 111px になり、
+     記事では下の固定ボタンと合わせて画面の約1/4を常に覆っていた（2026-10-08） */
+  body.home .site-header:has(.nav-tool), body:has(.tools-main) .site-header:has(.nav-tool) { padding-bottom: 46px; }
+  .hdr-tools { display: flex; justify-content: center; align-items: center; gap: .6rem; position: absolute; left: 0; right: 0; bottom: 0; height: 46px; padding: 0 var(--gutter); background: var(--sky); border-top: 1px solid var(--line); }
+  .hdr-tools a { display: inline-flex; align-items: center; min-height: 36px; font-size: .8125rem; font-weight: 700; color: var(--blue); text-decoration: none; padding: 0 .9em; border-radius: 999px; background: #fff; border: 1px solid var(--sky-2); white-space: nowrap; }
   .hdr-tools a:first-child { background: var(--blue); color: #fff; border-color: var(--blue); }
 }
 .tools-head { max-width: 980px; margin: 0 auto; padding: 2.2rem var(--gutter) 1rem; text-align: center; }

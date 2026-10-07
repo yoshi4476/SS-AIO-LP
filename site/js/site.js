@@ -10,8 +10,11 @@
   var header = document.querySelector('.site-header');
   if (toggle && header) {
     // メニューを畳む幅でも無料ツールが見えるよう、ヘッダーの下に細い帯を出す（CSSで広い幅では隠す）。
-    // ロゴの横にボタンを並べると、スマホでロゴの文字が3行に折れた（2026-10-03）
-    if (header.querySelector('.global-nav .nav-tool') && !header.querySelector('.hdr-tools')) {
+    // ロゴの横にボタンを並べると、スマホでロゴの文字が3行に折れた（2026-10-03）。
+    // 出すのはトップと /tools/ だけ（CSS が場所を取るのと同じ条件）。全ページに出すと固定のヘッダーが 111px になり、
+    // 記事では下の固定ボタンと合わせて画面の約1/4を常に覆っていた（2026-10-08）
+    var toolsPage = document.body.classList.contains('home') || document.querySelector('.tools-main');
+    if (toolsPage && header.querySelector('.global-nav .nav-tool') && !header.querySelector('.hdr-tools')) {
       var bar = document.createElement('div');
       bar.className = 'hdr-tools';
       bar.innerHTML = '<a href="/tools/" data-cta="hdr_tools">無料ツール</a>'
@@ -675,14 +678,17 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
   }, true);
 })();
 
-/* 記事のスマホ固定ボタン（.scan-sticky）
- * 1画面半ほど読み進めたら出し、記事末の診断欄やフッターが見えている間は引っ込める（同じ誘いを二重に見せない）。 */
+/* スマホの固定ボタン（記事の .scan-sticky・LP の .sticky-cta）
+ * 1画面半ほど読み進めたら出し、フォーム・診断欄・フッターが見えている間と、入力している間は引っ込める
+ * （同じ誘いを二重に見せない）。LP の帯は最初の画面から出てヒーローの「30秒で診断する」に重なり、
+ * フォームの入力中も出たままで、「30秒診断」が入力中の人をフォームの外へ連れ出していた（2026-10-08） */
 (function () {
-  var bar = document.querySelector(".scan-sticky");
+  var bar = document.querySelector(".scan-sticky, .sticky-cta");
   if (!bar || !window.matchMedia || !matchMedia("(max-width: 760px)").matches) return;
   bar.hidden = false;
-  var ends = document.querySelectorAll(".scan-bottom, .site-footer");
-  var near = false, seen = [];
+  // 申し込み・診断の区画（#form・#scan-start）は、フォームの前の説明が見えている間から引っ込める
+  var ends = document.querySelectorAll(".scan-bottom, .site-footer, form, #scan, #form, #scan-start");
+  var near = false, typing = false, seen = [];
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
@@ -693,11 +699,14 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
       near = seen.length > 0;
       tick();
     });
-    ends.forEach(function (el) { io.observe(el); });
+    ends.forEach(function (el) { if (!bar.contains(el)) io.observe(el); });
   }
+  function field(t) { return t && t.closest && t.closest("input, textarea, select"); }
+  document.addEventListener("focusin", function (e) { if (field(e.target)) { typing = true; tick(); } });
+  document.addEventListener("focusout", function (e) { if (field(e.target)) { typing = false; setTimeout(tick, 60); } });
   function tick() {
     // 割合で決めると、長い記事（スマホで2万px）ほど出るのが遅れる。1画面半を読み進めたら出す
-    var on = scrollY > innerHeight * 1.5 && !near;
+    var on = scrollY > innerHeight * 1.5 && !near && !typing;
     bar.classList.toggle("is-on", on);
   }
   addEventListener("scroll", tick, { passive: true });
