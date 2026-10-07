@@ -1203,6 +1203,14 @@ GitHub Actions では `::warning::` の注釈になり、run の画面に出る�
 （`form_submit` と `lead_capture` が同時に飛ぶ、国が取れない流入がある等）。
 **消すべき警告ではなく、数字を報告する前に読む前提条件**として扱う（0.1節）。
 
+**「要対応」は新しく出たもの・悪化したもの・期限のあるものだけ**（2026-10-08）。要対応が毎週15種前後並び、
+本当の異常が埋もれていた。前の週と同じ内容が続くもの（数字は伏せて比べ、件数が増えたら悪化）と、
+人が動かせないもの（`findings.STEADY`: 数字の信頼性・盤面の空き・構成の提案・達成率・判断の当たり具合・
+主要クエリの推移）は、本文の下の「――― 情報」の欄にまとめる。情報の欄だけの週はメールを送らない
+（`notify_slack.INFO_MARK` より上だけを見る）。期限のあるもの（`findings.DEADLINE`: SNS の鍵・YouTube の許可の上限・
+生成AIの取り込み）と、その回の仕事が失われた行（push・配信の失敗）は続いていても要対応。
+前の週の記録は `data/findings_seen.json`（明細はハッシュだけ）。判定（`*_OK=` の印・終了コード）は変えていない。
+
 #### メールで届けるのは4つだけ
 
 **うまくいった報告は送らない。** 1日2〜3通の成功通知が届くと、本当に見てほしい
@@ -1405,6 +1413,13 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | 見せる | 月次レポートの「競合と比べた現在地」（お客様名義でも出す）。週次 findings の「AIのシェアが下がった語」 | 母数10語未満は割合にせず件数で。期間（GSC の28日・AIに聞いた日）を必ず添える |
 
 **お客様の分（競合の顔ぶれ・順位）は public リポジトリに置かない**（.gitignore。CI のキャッシュで月をまたぐ）。自社3サイトの分だけコミットする。
+
+**お客様の社の順位・AIの語・引用の実測も同じ**（2026-10-08）。サイトごとのファイル（`data/ranks/<id>.json`・
+`data/ai_kw/`・`data/win_patterns/`・`docs/ai-kw-`・`kw-strong-`・`country-`・`season-`・`kw-plan-`・
+`reports/targets-<id>.json`）は .gitignore で外し、全社で1ファイルの記録（`data/rank_up.json`・
+`data/ai_citations/`・`data/cooccur/`・`data/index_cache.json`・`data/index_resend.json`）はお客様の分だけを
+`data/clients/<id>/private/` に分けて書く（`scripts/client_private.py`）。外しただけでは CI の実行ごとに消えるため、
+書いた工程の終わりにキャッシュへ残し、読む工程の始めに戻す（`.github/actions/client-private`）。成果物（artifact）には入れない。
 
 ### 8.15 1リポジトリで20社まで（枠は cron の本数で決まる）
 

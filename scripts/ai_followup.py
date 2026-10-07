@@ -31,15 +31,35 @@ PUBLISH_SCORE = 90          # build.py が公開する点数の下限。未公�
 
 
 def load():
+    """確かめた記録。お客様の社の記事の分（語・AIの出典）は data/clients/<id>/private/ にある（合わせて返す）"""
+    import client_private as CP
     try:
-        return json.loads(OUT.read_text(encoding="utf-8"))
+        d = json.loads(OUT.read_text(encoding="utf-8"))
     except Exception:
-        return {"articles": {}, "last_run": {}}
+        d = {"articles": {}, "last_run": {}}
+    d.setdefault("articles", {})
+    rel = "data/ai_citations/followup.json"
+    for sid in CP.clients():
+        try:
+            d["articles"].update(json.loads(CP.private_path(sid, rel).read_text(encoding="utf-8")).get("articles") or {})
+        except (OSError, ValueError):
+            pass
+    return d
 
 
 def save(d):
+    import client_private as CP
+    rel = "data/ai_citations/followup.json"
+    arts = d.get("articles") or {}
+    pub = dict(d, articles={k: v for k, v in arts.items() if not CP.is_private((v or {}).get("site"))})
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    OUT.write_text(json.dumps(pub, ensure_ascii=False, indent=1), encoding="utf-8")
+    for sid in CP.clients():
+        mine = {k: v for k, v in arts.items() if (v or {}).get("site") == sid}
+        p = CP.private_path(sid, rel)
+        if mine or p.is_file():
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(json.dumps({"articles": mine}, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 def _date(v):

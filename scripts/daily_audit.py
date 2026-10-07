@@ -13,11 +13,16 @@
 
 出力の最後に AUDIT_OK=yes/no と、直すべき項目を TODO: 行で並べる。
 救済ワークフローはこの TODO: 行だけを読めばよい。
+
+数える日は環境変数 AUDIT_DAY（無ければ今日）。同日救済が日付をまたいで走った回は、
+ワークフローが `--rescue-day` の日（その日の最初の枠より前なら前日）を AUDIT_DAY に入れる。
 """
+import json
+import os
 import re
 import subprocess
 import sys
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -33,10 +38,96 @@ KW_MIN_DAYS = 8        # 未着手KWがこの日数分を切ったら補充す�
 KW_WARN_DAYS = 30      # この日数分を切ったら早期警戒（補充の井戸が枯れていないか見る）
                        # 週次補充まで最大7日空くため、4日分では次の補充を待てずに枯れる
 PY = sys.executable
+JST = timezone(timedelta(hours=9))
+# 前日の不足分として書いた記事（slug → どの日の分か）。公開日（date:）は公開した日のまま変えず、
+# 本数だけ前日に数える。frontmatter に書くと配信先（external-md）の原稿にまで載るため、台帳に分ける
+MAKEUP = ROOT / "data" / "makeup.json"
 
 
 def today_iso():
     return date.today().isoformat()
+
+
+def audit_day():
+    """監査で本数を数える日。AUDIT_DAY（同日救済のワークフローが --rescue-day で入れる）が無ければ今日"""
+    d = os.environ.get("AUDIT_DAY", "").strip()
+    if d:
+        try:
+            return date.fromisoformat(d).isoformat()
+        except ValueError:
+            print(f"  AUDIT_DAY={d} は日付として読めないため、今日を数えます")
+    return today_iso()
+
+
+def first_slot_hour():
+    """その日の最初の記事の枠の時刻（JST の時）。枠の割り当てが読めなければ手書きの控えから"""
+    hours = []
+    try:
+        import site_order
+        for sid in site_order.order():
+            hours += list(publish_hours(sid) or PUBLISH_HOURS.get(sid) or ())
+    except Exception:
+        pass
+    return min(hours or [h for hs in PUBLISH_HOURS.values() for h in hs])
+
+
+def rescue_day(now=None):
+    """同日救済が数える日。予定は 21:30 だが、GitHub の定時は遅れて日付をまたぐ（2026-09〜10 の14回とも
+    翌 1:36〜5:36 に始まり、「この時刻での期待は0本」と見て、3社とも0本だった日まで「救済不要」にしていた）。
+    その日の最初の枠（08:07）より前に始まった回は、前日を数える"""
+    now = now or datetime.now(JST)
+    if now.hour < first_slot_hour():
+        return (now.date() - timedelta(days=1)).isoformat()
+    return now.date().isoformat()
+
+
+def makeups():
+    try:
+        return json.loads(MAKEUP.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def counted_day(a):
+    """その記事を何日の本数に数えるか。前日の不足分として書いた記事は前日、それ以外は公開日"""
+    return a.get("makeup_for") or a["date"]
+
+
+def is_new_article(slug):
+    """この実行で書いた（まだコミットしていない）記事か。git が無ければ新しくないとみなす"""
+    try:
+        r = subprocess.run(["git", "ls-files", "--error-unmatch", f"articles/{slug}.md"],
+                           cwd=ROOT, capture_output=True)
+    except OSError:
+        return False
+    return r.returncode != 0
+
+
+def stamp_makeup(slug):
+    """同日救済が日付をまたいだ回（AUDIT_DAY が今日より前）に書いた新しい記事を、前日の分として記録する。
+    公開日（date:）は公開する今日にする。前日の日付で出すと、検索エンジンに公開日を偽ることになる。
+    記録した日を返す（記録しなければ None）。publish_flow が配信の前に呼ぶ"""
+    day, today = audit_day(), today_iso()
+    if day >= today or not is_new_article(slug):
+        return None
+    src = ARTICLES / f"{slug}.md"
+    text = src.read_text(encoding="utf-8-sig")
+    m = re.match(r"^---\s*\n(.*?)\n---", text, re.S)
+    if not m:
+        return None
+    fm = m.group(1)
+    new = re.sub(r"^date:.*$", f"date: {today}", fm, count=1, flags=re.M) if re.search(r"^date:", fm, re.M) \
+        else fm + f"\ndate: {today}"
+    # 更新日が公開日より前になると、構造化データの日付が逆転する
+    new = re.sub(r"^(modified:\s*)\"?(\d{4}-\d{2}-\d{2})\"?\s*$",
+                 lambda mm: mm.group(1) + max(mm.group(2), today), new, count=1, flags=re.M)
+    if new != fm:
+        src.write_text(text[:m.start(1)] + new + text[m.end(1):], encoding="utf-8")
+    led = makeups()
+    led[slug] = day
+    MAKEUP.write_text(json.dumps(dict(sorted(led.items())), ensure_ascii=False, indent=1) + "\n",
+                      encoding="utf-8")
+    return day
 
 
 def articles_by_site():
@@ -44,6 +135,7 @@ def articles_by_site():
     cat2site = {c: sid for sid, cfg in sites_mod.load_all().items()
                 for c in cfg.get("categories", {})}
     out = {sid: [] for sid in sites_mod.load_all()}
+    made = makeups()
     for p in sorted(ARTICLES.glob("*.md")):
         if p.name.startswith("_"):
             continue
@@ -59,7 +151,8 @@ def articles_by_site():
         site = cat2site.get(fv("category"))
         if site:
             out[site].append({"slug": p.stem, "date": fv("date"), "score": fv("score"),
-                              "title": fv("title"), "category": fv("category")})
+                              "title": fv("title"), "category": fv("category"),
+                              "makeup_for": made.get(p.stem, "")})
     return out
 
 
@@ -138,15 +231,24 @@ def _due_now(sid, hour=None):
 
 
 def check_volume(todo):
-    """当日の公開本数が目標に届いているか（月の上限も見る）"""
-    print(f"■ 本数（目標: 1サイト {DAILY_TARGET}本/日・上限 {MONTHLY_CAP}本/月・{today_iso()}）")
+    """数える日（audit_day）の公開本数が目標に届いているか（月の上限も見る）。
+    前日を数える回（同日救済が日付をまたいだ）は、前日の枠はすべて過ぎているので1日の本数を丸ごと求める"""
+    day = audit_day()
+    past = day < today_iso()
+    print(f"■ 本数（目標: 1サイト {DAILY_TARGET}本/日・上限 {MONTHLY_CAP}本/月・{day}）")
+    if past:
+        print(f"  同日救済が日付をまたいで走ったため、前日（{day}）を数えます。"
+              "足りない分は今日書き、公開日は今日のまま前日の分として記録します（data/makeup.json）")
     by_site = {sid: [a for a in arts if _is_published(a, need_review=False)]
                for sid, arts in articles_by_site().items()}
-    ym = today_iso()[:7]
+    ym = day[:7]
     for sid, arts in by_site.items():
-        n = sum(1 for a in arts if a["date"] == today_iso())
+        n = sum(1 for a in arts if counted_day(a) == day)
         month = sum(1 for a in arts if a["date"][:7] == ym)
         left = site_cap(sid) - month
+        if past and today_iso()[:7] != ym:
+            # 書き足す記事の公開日は今日。今日の月の上限にも収める（月末の前日分を翌月1日に書く回）
+            left = min(left, site_cap(sid) - sum(1 for a in arts if a["date"][:7] == today_iso()[:7]))
         if left <= 0:
             # 上限に達したら「不足」と言わない。言えば救済が走って超過する
             print(f"  上限 {sid:10s} 今月 {month}/{site_cap(sid)}本 — 今月はこれ以上公開しません")
@@ -159,14 +261,17 @@ def check_volume(todo):
             want = min(want, pace.quota(sid))
         except Exception:
             pass
-        due = min(want, _due_now(sid))      # いまの時刻で在るべき本数
+        due = want if past else min(want, _due_now(sid))      # いまの時刻で在るべき本数
         mark = "OK " if n >= due else "不足"
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"
-        print(f"  {mark} {sid:10s} 本日 {n}/{want}本  今月 {month}/{site_cap(sid)}本"
+        print(f"  {mark} {sid:10s} {'前日' if past else '本日'} {n}/{want}本  今月 {month}/{site_cap(sid)}本"
               f"  （累計 {len(arts)}本）{yet}")
         # 公開の時刻より前に「不足」と言うと、救済が先回りして1日分を
         # まとめて書こうとする。時刻が来たぶんだけを不足として数える
-        if n < due:
+        if n < due and past:
+            todo.append(f"TODO: {sid} の記事を前日（{day}）の不足分としてあと {due - n} 本作成して公開する"
+                        "（date: は公開する今日の日付。publish_flow が前日の分として記録する）")
+        elif n < due:
             todo.append(f"TODO: {sid} の記事を本日あと {due - n} 本作成して公開する")
     return by_site
 
@@ -183,11 +288,18 @@ def check_live(todo, by_site):
     print("\n■ 公開の実地確認（当日分のURLを実際に開く）")
     cfgs = sites_mod.load_all()
     checked = 0
+    day = audit_day()
     for sid, arts in by_site.items():
         for a in arts:
-            if a["date"] != today_iso():
+            if counted_day(a) != day:
                 continue
             if not _is_published(a):        # 監修待ちはまだ公開されていないので、404 は正常
+                continue
+            # この実行で書いた記事（未コミット）は、自前ビルドならこの後のコミット・デプロイで出る。
+            # ここで開くと必ず404で、救済の書いた記事が毎回「救済後も未解決」と知らされる
+            # （配信先の社は publish_flow が公開を確かめてから記録している）
+            if is_new_article(a["slug"]):
+                print(f"  ―   {a['slug']}: この実行で書いた記事。公開の確認はデプロイの後（翌日の publish_gap）")
                 continue
             meta = {"slug": a["slug"], "category": a.get("category", "")}
             import wp_bridge     # WordPress はパーマリンク設定が決めたURLで確かめる
@@ -582,8 +694,9 @@ def check_deploy(todo):
 # 同日救済が1回の実行で片づけるもの。ここに入らない指摘は「知らせるだけ」に回す。
 # 全部を今日やらせると、記事1本目に着手する前にターン上限へ達する
 # （実際、300ターン使って5本の記事が1本も書けずに落ちた）
-TODAY = ("の記事を本日あと", "を品質基準まで直して", "の領域。", "の既存記事と重複",
+TODAY = ("の記事を本日あと", "の不足分としてあと", "を品質基準まで直して", "の領域。", "の既存記事と重複",
          "がサイトで見られない", "のKWを補充する", "のKW補充が0件")
+WRITE = ("の記事を本日あと", "の不足分としてあと")   # 記事を書く TODO（先頭に置く）
 
 # 1回の実行で扱う上限。記事の作成がいちばん重く、他を積むと本数が埋まらない
 MAX_TODAY = 8
@@ -597,7 +710,7 @@ def split_todo(todo):
     """
     now = [t for t in todo if any(k in t for k in TODAY)]
     later = [t for t in todo if t not in now]
-    now.sort(key=lambda t: 0 if "の記事を本日あと" in t else 1)
+    now.sort(key=lambda t: 0 if any(k in t for k in WRITE) else 1)
     return now[:MAX_TODAY], now[MAX_TODAY:] + later
 
 
@@ -627,9 +740,13 @@ def main():
         left = cap_left(sys.argv[2])
         print(f"CAP_LEFT={left}")
         return 0 if left <= 0 else 1
+    # 同日救済のワークフローが最初に1回だけ呼び、AUDIT_DAY に入れる（途中で日付が変わっても数える日を変えない）
+    if sys.argv[1:] == ["--rescue-day"]:
+        print(rescue_day())
+        return 0
     fix_kw = "--fix-kw" in sys.argv
     todo = []
-    print(f"===== 日次監査 {today_iso()} =====\n")
+    print(f"===== 日次監査 {audit_day()} =====\n")
     by_site = check_volume(todo)
     check_live(todo, by_site)
     check_blocked(todo)

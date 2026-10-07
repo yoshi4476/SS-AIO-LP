@@ -39,6 +39,9 @@ NEEDS_ATTENTION = re.compile(
     "失敗|エラー|未解決|不足|止まりました|"
     "failure|cancelled|timed_out|BLOCKED|"
     "🚨|⚠")
+# これより下は「情報」（毎週続いているもの・人が動かせないもの。findings.py が書く）。
+# 情報の明細にある「不足」「失敗」で、要対応の無い週まで送らないよう、ここより上だけを見る
+INFO_MARK = "――― 情報"
 
 
 def load_env():
@@ -62,8 +65,8 @@ def unsendable(text):
 
 
 def worth_sending(text, routine):
-    """定時の工程なら、知らせることがあるときだけ送る"""
-    return (not routine) or bool(NEEDS_ATTENTION.search(text or ""))
+    """定時の工程なら、知らせることがあるときだけ送る（情報の欄より上だけを見る）"""
+    return (not routine) or bool(NEEDS_ATTENTION.search((text or "").split(INFO_MARK, 1)[0]))
 
 
 def main():

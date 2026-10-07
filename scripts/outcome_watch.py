@@ -54,7 +54,8 @@ def check_articles(day, bad):
     cfgs = S.load_all()
     for sid, arts in D.articles_by_site().items():
         name = cfgs[sid].get("name", sid)
-        done = [a for a in arts if a["date"] == day.isoformat() and D._is_published(a, need_review=False)]
+        # 前日の不足分として翌日に書いた記事（data/makeup.json）は、その前日の本数に数える（公開日は書いた日のまま）
+        done = [a for a in arts if D.counted_day(a) == day.isoformat() and D._is_published(a, need_review=False)]
         want = expected_articles(sid, arts, day)
         print(f"  記事 {name}: {len(done)}/{want}本")
         if len(done) < want:

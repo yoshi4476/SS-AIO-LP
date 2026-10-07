@@ -79,9 +79,12 @@ def cover(site_id, slug, keyword, body):
     theirs = terms([h for u in urls for h in headings(u)])
     mine = terms(re.findall(r"^#{2,3}\s+(.+)$", body, re.M)) | terms([body[:20000]])
     missing = sorted(theirs - mine, key=lambda w: -len(w))[:12]
-    OUT.mkdir(parents=True, exist_ok=True)
     rec = {"keyword": keyword, "sources": urls, "missing": missing, "covered": round(1 - len(theirs - mine) / max(len(theirs), 1), 2)}
-    (OUT / f"{slug}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+    # お客様の社の分（止まっている語・出典）は public に置かず data/clients/<id>/private/ へ
+    import client_private as CP
+    out = CP.site_file(site_id, f"{OUT.relative_to(ROOT).as_posix()}/{slug}.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
     return rec
 
 

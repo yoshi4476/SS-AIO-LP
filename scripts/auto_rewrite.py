@@ -61,11 +61,14 @@ def aio_items():
     順位はあるのにクリックが期待の半分未満＝AIが答えを出し、自社は引用されていない。
     直す手は「そこにしか無い情報」を先頭に置くこと（第8.2章の最高優先度）
     """
-    files = sorted((ROOT / "data" / "ai_citations").glob("*.json"))
-    if not files:
+    # 月の記録（YYYY-MM.json）だけ。*.json だと followup.json が最新に来て、候補が空になっていた。
+    # お客様の社の分は data/clients/<id>/private/ にある（client_private が合わせる）
+    import client_private as CP
+    months = CP.citation_months()
+    if not months:
         return []
     try:
-        d = json.loads(files[-1].read_text(encoding="utf-8"))
+        d = CP.load_citations(months[-1])
     except Exception:
         return []
     out, seen = [], set()
@@ -1080,8 +1083,9 @@ def build_prompt(item):
         except Exception:
             pass
     if kind == "stuck":
-        # 上位・引用元の記事が扱っていて、この記事に無い語（cooccur が週次で書く）
-        cp = ROOT / "data" / "cooccur" / f"{slug}.json"
+        # 上位・引用元の記事が扱っていて、この記事に無い語（cooccur が週次で書く。お客様の社は private の置き場）
+        import client_private as CP
+        cp = CP.find_file(f"data/cooccur/{slug}.json")
         if cp.is_file():
             try:
                 miss = json.loads(cp.read_text(encoding="utf-8")).get("missing") or []

@@ -80,7 +80,12 @@ def main():
                                 "items": taken[:20]}
 
     p = OUT / f"{date.today():%Y-%m}.json"
-    p.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 同じ月の記録には引用の実測（ai_cite_check の measured）も入っている。丸ごと書き直していたため、
+    # 毎晩それが消えていた。お客様の社の分（語・順位・表示）は public に置かず data/clients/<id>/private/ へ分ける
+    import client_private as CP
+    d = CP.load_citations(p.name)
+    d.update(result)
+    CP.save_citations(p.name, d)
     print(f"\n記録: {p.relative_to(ROOT).as_posix()}")
     print("※ AI引用の有無を直接観測する手段は無いため、CTRの歪みからの推定です")
 

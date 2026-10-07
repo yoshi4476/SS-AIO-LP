@@ -14,7 +14,6 @@
   python scripts/win_patterns.py --brief ai-lab         # 書く前に読ませる分を出す
 """
 import argparse
-import glob
 import json
 import re
 import sys
@@ -36,8 +35,11 @@ def cited_words(site_id):
         for r in json.loads(p.read_text(encoding="utf-8")).get("items", []):
             if (r.get("ai") or {}).get("ours"):
                 words.add(_norm(r["kw"]))
-    for f in sorted(glob.glob(str(ROOT / "data" / "ai_citations" / "*.json")))[-3:]:
-        d = json.loads(Path(f).read_text(encoding="utf-8"))
+    # 月の記録（YYYY-MM.json）の直近3か月。*.json だと followup.json が混ざって2か月分しか見ていなかった。
+    # お客様の社の分は data/clients/<id>/private/ にある（client_private が合わせる）
+    import client_private as CP
+    for name in CP.citation_months()[-3:]:
+        d = CP.load_citations(name)
         for r in ((d.get("measured") or {}).get("sites") or {}).get(site_id, {}).get("items", []):
             if r.get("cited"):
                 words.add(_norm(r["kw"]))

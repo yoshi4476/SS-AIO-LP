@@ -461,8 +461,12 @@ def main():
     print(f"■ 引用の実測: エンジン {', '.join(engines)} / 1サイト{a.limit}語まで")
     OUT.mkdir(parents=True, exist_ok=True)
     p = OUT / f"{date.today():%Y-%m}.json"
-    d = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {"date": date.today().isoformat(), "sites": {}}
+    # お客様の社の分（語・出典）は public に置かず data/clients/<id>/private/ に分けてある（読むときに合わせる）
+    import client_private as CP
+    d = CP.load_citations(p.name)
+    d.setdefault("date", date.today().isoformat())
     measured = d.setdefault("measured", {"date": date.today().isoformat(), "engines": list(engines), "sites": {}})
+    measured.setdefault("sites", {})
     total_q = total_cited = 0
     for sid, cfg in S.load_all().items():
         if a.site and sid != a.site:
@@ -494,7 +498,7 @@ def main():
         measured["sites"][sid] = {"queries": len(qs), "cited": cited, "items": items}
         total_q += len(qs); total_cited += cited
         print(f"   {cfg['name']}: 引用 {cited}/{len(qs)}語")
-    p.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
+    CP.save_citations(p.name, d)
     print(f"AI_CITED={total_cited}/{total_q}")
     print(f"記録: {p.relative_to(ROOT).as_posix()}")
     return 0

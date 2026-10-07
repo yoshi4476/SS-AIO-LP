@@ -130,9 +130,16 @@ def main():
             "  対処: タイトルとH2を、その業種・対象読者にしか当てはまらない切り口へ変える。\n"
             "        業種名だけを差し替えた構成は、量産の痕跡として評価を下げる")
 
+    # 0-2-3. 同日救済が日付をまたいで走った回に、前日の不足分として書いた新しい記事。
+    #        公開日（date:）は公開する今日にそろえ（前日の日付で出すと公開日を偽る）、前日の分として台帳に残す
+    import daily_audit
+    _mk = daily_audit.stamp_makeup(slug)
+    if _mk:
+        meta, body = load_article(slug)
+        print(f"前日（{_mk}）の不足分として記録しました（公開日は今日 {meta.get('date')}・data/makeup.json）")
+
     # 0-3. 月の上限（監査だけでは止まらない。配信の入口で頭を打たせる）
     #      同一ドメインへ短期に大量投入すると、機械的な生成と見なされる risk がある。
-    import daily_audit
     _ym = str(meta.get("date", ""))[:7] or datetime.now().strftime("%Y-%m")
     _n = sum(1 for a in daily_audit.articles_by_site().get(site_id, [])
              if a["date"][:7] == _ym and a["slug"] != slug

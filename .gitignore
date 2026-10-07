@@ -142,3 +142,13 @@ docs/kw-plan-*.md
 !docs/kw-plan-ai-lab.md
 !docs/kw-plan-corporate.md
 !docs/kw-plan-subsidy.md
+# 実数から作る翌月の目標（monthly_report。月次の「目標値の保存をコミット」が reports/targets-*.json を足す）。
+# お客様の分は public に置かない（自社は ai-lab が targets.json・残り2社が targets-<id>.json）
+reports/targets-*.json
+!reports/targets-corporate.json
+!reports/targets-subsidy.json
+# お客様の社の非公開の置き場（client_private.py）。上の外したファイルの写しと、全社で1ファイルの記録
+# （rank_up.json・ai_citations・共起語・URL検査の記録と再送の間隔）のお客様の分。CI のキャッシュ（.github/actions/client-private）で持ち越す
+data/clients/*/private/
+# 日次KPIを送った日（daily_kpi.py --once）。CI は daily-kpi.yml のキャッシュで持ち越す
+data/kpi_sent.json

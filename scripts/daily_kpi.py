@@ -2,8 +2,13 @@
 """3サイトのKPIを集計して管制塔のダッシュボードへ送る（毎日1回）
 
 使い方:
-    python scripts/daily_kpi.py           # 集計結果を表示するだけ
-    python scripts/daily_kpi.py --send    # 管制塔へ送信して台帳を更新
+    python scripts/daily_kpi.py                  # 集計結果を表示するだけ
+    python scripts/daily_kpi.py --send           # 管制塔へ送信して台帳を更新
+    python scripts/daily_kpi.py --send --once    # 送った日を記録し、同じ日は2回送らない（抜けた日は7日前まで埋める）
+    python scripts/daily_kpi.py --send --once --day 2026-09-28   # その日の分だけ（送り済みなら送らない）
+
+定時の実行は .github/workflows/daily-kpi.yml（毎日 10:13 JST・記事の枠とは別のワークフロー）。
+以前は記事の枠0の中にあり、枠0が月の上限・量産の兆候・取りこぼしで飛ぶと集計も飛んだ（2026-09-28〜10-03 の6日）。
 
 Search Console API は Apps Script の追加サービスに無いため、集計はここ（Python）で行い、
 GASは受け取って書くだけにしている。認証は既存のサービスアカウントを流用する。
@@ -12,6 +17,7 @@ GASは受け取って書くだけにしている。認証は既存のサービ�
     indexing-service-account.json（GA4は閲覧者、GSCはオーナー権限）
     sites/*.json の ga4_property_id … 未設定のサイトはGA4分をスキップする
 """
+import json
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -22,6 +28,10 @@ import sites as sites_mod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SA = ROOT / "indexing-service-account.json"
+# 送った日（GA4 の日）。管制塔の kpi_log は行を足すだけなので、同じ日を2回送ると KPIレポート・AIO計測に
+# 同じ行が2本並ぶ。CI は daily-kpi.yml がキャッシュで持ち越す（.gitignore）
+SENT = ROOT / "data" / "kpi_sent.json"
+CATCH_UP = 7          # 取りこぼした日を埋めるのは7日前まで
 AI_DOMAINS = {
     # AI経由の流入は参照元ドメインでしか見分けられない。ここに無いサービスは
     # 「Referral」に埋もれてAI流入として数えられないため、主要どころを網羅する
@@ -126,11 +136,13 @@ def aio_estimate(site_id):
     """AI Overview に取られている表示の推定。GSCのCTRの歪みから ai_citation_check が
     月ごとに出す（data/ai_citations/YYYY-MM.json）。APIでは取れない値なので推定と明記する"""
     try:
-        import json as _j
-        files = sorted((ROOT / "data" / "ai_citations").glob("*.json"))
-        if not files:
+        # 月の記録（YYYY-MM.json）だけを見る。*.json だと followup.json が「最新」に来て、推定が空になっていた。
+        # お客様の社の分は data/clients/<id>/private/ にある（client_private が合わせる）
+        import client_private as CP
+        months = CP.citation_months()
+        if not months:
             return {}
-        d = _j.loads(files[-1].read_text(encoding="utf-8"))
+        d = CP.load_citations(months[-1])
         s = (d.get("sites") or {}).get(site_id) or {}
         n = int(s.get("suspect_taken") or 0)
         note = f"推定（{d.get('date', '')} CTR歪み・判定{s.get('judged', 0)}語中）"
@@ -143,12 +155,38 @@ def aio_estimate(site_id):
         return {}
 
 
-def main():
-    if not SA.exists():
-        raise SystemExit("indexing-service-account.json がありません")
-    ga_day = (date.today() - timedelta(days=1)).isoformat()
-    sc_day = (date.today() - timedelta(days=3)).isoformat()
+def sent_days():
+    try:
+        return set(json.loads(SENT.read_text(encoding="utf-8")).get("days") or [])
+    except (OSError, ValueError, AttributeError):
+        return set()
 
+
+def mark_sent(day):
+    SENT.parent.mkdir(parents=True, exist_ok=True)
+    SENT.write_text(json.dumps({"days": sorted(sent_days() | {day})[-60:]}, ensure_ascii=False, indent=1) + "\n",
+                    encoding="utf-8")
+
+
+def days_to_send(sent, today):
+    """送る GA4 の日（古い順）。前日がまだなら前日。送った記録があれば、最後に送った日の翌日から前日までの
+    抜けも埋める（CATCH_UP 日まで）。GitHub の定時は取りこぼすことがある。記録が無いときは前日だけ
+    （記録より前の日は、記事の枠の中で送っていたかもしれないので二重に送らない）"""
+    y = today - timedelta(days=1)
+    if not sent:
+        return [y.isoformat()]
+    d = max(date.fromisoformat(max(sent)) + timedelta(days=1), y - timedelta(days=CATCH_UP - 1))
+    out = []
+    while d <= y:
+        if d.isoformat() not in sent:
+            out.append(d.isoformat())
+        d += timedelta(days=1)
+    return out
+
+
+def collect(ga_day):
+    """GA4 は ga_day、Search Console は確定を待って2日前（毎日送る回の「前日」と「3日前」の関係のまま）"""
+    sc_day = (date.fromisoformat(ga_day) - timedelta(days=2)).isoformat()
     rows = []
     for sid, cfg in sites_mod.load_all().items():
         row = {"site": sid, "date": ga_day, "note": f"GSCは{sc_day}時点"}
@@ -167,16 +205,45 @@ def main():
                 print(f"  {sid}: GSC取得スキップ（{e}）")
         row.update(aio_estimate(sid))
         rows.append(row)
-        print(f"{sid:10s} セッション{row.get('sessions', 0):5d}  表示{row.get('impressions', 0):6d}  "
+        print(f"{ga_day} {sid:10s} セッション{row.get('sessions', 0):5d}  表示{row.get('impressions', 0):6d}  "
               f"クリック{row.get('clicks', 0):4d}  AI参照{row.get('ai', 0):3d}")
+    return rows
 
-    if "--send" not in sys.argv:
-        print("\n※ 確認モードです。管制塔へ送るには --send を付けてください。")
-        return
-    if not hub_client.enabled():
+
+def main():
+    a = sys.argv[1:]
+    if not SA.exists():
+        raise SystemExit("indexing-service-account.json がありません")
+    once = "--once" in a
+    if "--day" in a:
+        days = [date.fromisoformat(a[a.index("--day") + 1]).isoformat()]
+    elif once:
+        days = days_to_send(sent_days(), date.today())
+    else:
+        days = [(date.today() - timedelta(days=1)).isoformat()]
+    if once:
+        done = sent_days()
+        for d in days:
+            if d in done:
+                print(f"{d} は送り済みです（同じ日を2回送りません。管制塔の kpi_log は行を足すだけ）")
+        days = [d for d in days if d not in done]
+    if "--send" in a and not hub_client.enabled():
         raise SystemExit("HUB_URL が未設定です")
-    r = hub_client._post({"action": "kpi_log", "rows": rows})
-    print(f"\n管制塔へ送信: {r.get('rows', 0)}件 / ダッシュボード更新済み")
+    sent = 0
+    for ga_day in days:
+        rows = collect(ga_day)
+        if "--send" not in a:
+            continue
+        r = hub_client._post({"action": "kpi_log", "rows": rows})
+        if r.get("ok") is False:
+            raise SystemExit(f"管制塔が受け取りませんでした（{ga_day}）: {r.get('error')}")
+        print(f"\n管制塔へ送信（{ga_day}）: {r.get('rows', 0)}件 / ダッシュボード更新済み")
+        sent += 1
+        if once:
+            mark_sent(ga_day)
+    if "--send" not in a:
+        print("\n※ 確認モードです。管制塔へ送るには --send を付けてください。")
+    print(f"KPI_SENT={sent}")
 
 
 if __name__ == "__main__":

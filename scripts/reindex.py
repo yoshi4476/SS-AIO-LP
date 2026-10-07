@@ -52,17 +52,19 @@ FRESH_DAYS = 30
 
 
 def _cache():
+    """URL検査の記録。お客様の社のURLの分は public に置かず data/clients/<id>/private/ にある（合わせて返す）"""
+    import client_private as CP
+    return CP.load_dict("data/index_cache.json", pub=CACHE)
+
+
+def _dump(o):
     import json
-    try:
-        return json.loads(CACHE.read_text(encoding="utf-8")) if CACHE.is_file() else {}
-    except Exception:
-        return {}
+    return json.dumps(o, ensure_ascii=False, indent=0, sort_keys=True)
 
 
 def _save(c):
-    import json
-    CACHE.parent.mkdir(exist_ok=True)
-    CACHE.write_text(json.dumps(c, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
+    import client_private as CP
+    CP.save_dict("data/index_cache.json", c, CP.url_owner(), dump=_dump, pub=CACHE)
 
 
 def needs_check(u, c):
@@ -225,11 +227,14 @@ def resend_plan(ng, sent, today, left=RESEND_MAX):
 
 
 def _sent():
-    import json
-    try:
-        return json.loads(SENT.read_text(encoding="utf-8")) if SENT.is_file() else {}
-    except Exception:
-        return {}
+    """送った日（14日は送り直さない）。お客様の社のURLの分は data/clients/<id>/private/ にある"""
+    import client_private as CP
+    return CP.load_dict("data/index_resend.json", pub=SENT)
+
+
+def _save_sent(sent):
+    import client_private as CP
+    CP.save_dict("data/index_resend.json", sent, CP.url_owner(), dump=_dump, pub=SENT)
 
 
 def _indexnow(urls):
@@ -265,7 +270,6 @@ _left = [RESEND_MAX]
 
 
 def _publish(idx, d, ng, dry):
-    import json
     from datetime import date
     site_url = f"https://{d}/"
     sent, today = _sent(), date.today().isoformat()
@@ -307,8 +311,7 @@ def _publish(idx, d, ng, dry):
     # Indexing API に送れたURLだけ日付を残す。IndexNow だけ通ったURLまで残すと、
     # Google への再送が見送り期間のあいだ止まる（失敗したものは次の週にもう一度送る）
     sent.update({u: today for u in done})
-    SENT.parent.mkdir(exist_ok=True)
-    SENT.write_text(json.dumps(sent, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
+    _save_sent(sent)
 
     # sitemap 再送信（クロールのきっかけを作る）
     try:

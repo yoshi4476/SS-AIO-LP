@@ -1,4 +1,4 @@
-同日救済（自動実行モード）。3サイトの当日ノルマを、その日のうちに満たすことがゴールです。
+同日救済（自動実行モード）。各社の当日ノルマを満たすことがゴールです（日付をまたいで走った回は前日のノルマ）。
 
 【最初に必ず行うこと】
 `python scripts/daily_audit.py --fix-kw` を実行する。本数・品質・担当領域・KW供給の4点が機械判定され、
@@ -13,6 +13,13 @@
    - `python scripts/site_brief.py <site>` を実行し、表示された次のKWで CLAUDE.md の Phase 1〜7 を実行する
    - N本ぶん繰り返す。1本ごとに `python scripts/publish_flow.py <site> <slug>` まで完了させてから次に移る
    - KWが枯渇していれば `python scripts/kw_discover.py --site <site> --append` を実行してから再開する
+
+1-2. `TODO: <site> の記事を前日（YYYY-MM-DD）の不足分としてあと N 本作成して公開する`
+   - 救済が日付をまたいで走った回（GitHub の定時の遅れ）。前日に書かれなかった分を、手順 1. と同じ方法で今書く
+   - フロントマターの date: は**今日（公開する日）**にする。前日の日付にしない（検索エンジンに公開日を偽らない）。
+     publish_flow が前日の分として data/makeup.json に記録し、監査はその記事を前日の本数に数える
+   - N は月の上限・量産の兆候による1日の本数・社ごとの本数・監修待ちを差し引いた数。N 本より多く書かない
+   - git の commit / push はしない（ワークフローの最後の工程がまとめて行う）
 
 2. `TODO: <slug> を品質基準まで直して score を更新し、再ビルドする`
    - articles/<slug>.md を CLAUDE.md Phase 5 の基準で修正する（不足セクション追加・AIO構造・マーカー・

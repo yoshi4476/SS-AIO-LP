@@ -270,10 +270,9 @@ def human_items(site=""):
 
 
 def load_log():
-    try:
-        return json.loads(LOG.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return {}
+    """直した記録。お客様の社の分（順位・表示）は public に置かず data/clients/<id>/private/ にある（合わせて返す）"""
+    import client_private as CP
+    return CP.load_dict("data/rank_up.json", pub=LOG)
 
 
 def hub_rewrite_log(site, slug, reason, summary, pos_before=""):
@@ -289,8 +288,8 @@ def hub_rewrite_log(site, slug, reason, summary, pos_before=""):
 
 
 def save_log(d):
-    LOG.parent.mkdir(parents=True, exist_ok=True)
-    LOG.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    import client_private as CP
+    CP.save_dict("data/rank_up.json", d, lambda slug, v: (v or {}).get("site") or CP.owner_of_slug(slug), pub=LOG)
 
 
 def show_effect(pages_by_site):

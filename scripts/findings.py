@@ -10,17 +10,30 @@ AIO基盤の欠けは毎週検出されうるのに、Slackには「週次最適
 ここは検査をまとめて回し、出力から「見つかったもの」だけを抜き出して、
 GitHubの注釈と通知本文に載る形にする。**ここ自体は決して止まらない**
 （常に0で終わる）。知らせるのが仕事であって、止めるのは各検査の仕事。
+
+通知の本文で「要対応」にするのは、新しく出たもの・悪化したもの・期限のあるものだけ。
+毎週続いているもの（前の週と同じ）と人が動かせないもの（STEADY）は、本文の下の「情報」にまとめる。
+週次のメールに要対応が毎週15種前後並び、本当の異常が埋もれていたため（2026-10-08）。
+判定（judge・*_OK= の印・終了コード）は変えず、知らせ方だけを分ける。前の週に出たものは
+data/findings_seen.json（明細はハッシュだけ）に残し、CI の回だけ書き換える。
 """
 import argparse
+import hashlib
 import io
+import json
+import os
 import re
 import subprocess
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from notify_slack import INFO_MARK  # noqa: E402  （ここより下の情報では通知を送らない）
+
 OUT = ROOT / "automation" / "logs" / "findings.txt"
+SEEN = ROOT / "data" / "findings_seen.json"
 MAX_LINES = 6        # 1検査あたりの明細。多すぎると通知が読まれなくなる
 TIMEOUT = 900
 JST = timezone(timedelta(hours=9))
@@ -221,6 +234,126 @@ UNKNOWN = re.compile(r"[A-Z_]+_OK=unknown|GROWTH_DROP=unknown")
 # 期間のある取り組み（集中モード）は、期間外に何も出さない側で終わらせる
 INFO = ["focus_report.py --line"]
 
+# 毎週出る性質で、人が動かせないもの。新しく出ても「情報」にまとめる（理由は通知に添える）
+STEADY = {
+    "数字の信頼性": "直しようのない計測の事実（二重計上・国の取れない流入など）を毎週出す検査。"
+                    "数字を報告する前に読む前提条件で、消す警告ではない（CLAUDE.md 8.7）",
+    "盤面の空き（業種×手法）": "空いたマスは月次の report_actions が台帳へ積み、記事の枠が埋める（人の手は要らない）",
+    "サイト構成の提案": "提案は月次の report_actions が台帳へ積み、記事の枠が書く（月次レポートにも載る）",
+    "こちら側で決まる要因の達成率": "達成率という状態の数字。欠けた要因は週次・月次の自動の工程が直す",
+    "判断の当たり具合": "判断（品質スコア・内部リンクの下限など）が成果を分けているかの検証。本数が少ないうちは"
+                        "同じ結果が毎週出る。直すのは判断の基準で、毎週の作業ではない",
+    "主要クエリの推移": "宣言した語の順位の推移と、割り当てた手（統合・書き直しなど週次の自動の工程）の一覧。毎週同じ語が並ぶ",
+}
+# 期限のあるもの。前の週と同じでも要対応のまま（遅れると取り返せない）
+DEADLINE = {
+    "SNS の鍵の期限（Threads・LinkedIn は60日）": "期限あり: 切れるとその間の投稿が落ちる",
+    "YouTube の許可の上限（未確認アプリは累計100）": "期限あり: 上限に達すると新しい社のチャンネルをつなげない",
+    "生成AIの表示回数（手動の取り込み）": "期限あり: 取り込みを忘れた月は数字が永久に空く（APIが無く、人がCSVを落とすしかない）",
+}
+# 前の工程が足した行のうち、この回の仕事が失われたもの。続いていても要対応のまま
+LOST = re.compile(r"作れませんでした|push|配信に落ち|反映されていません|届いていません")
+# 明細の中の件数。同じ明細でも件数が増えたら「悪化」
+COUNT = re.compile(r"(\d[\d,]*)\s*(?:件|本|語|組|箇所|か所|ページ)")
+
+
+def norm(line):
+    """数字を伏せた明細（毎週変わる順位・回数・日付で「新しい」と読まない）"""
+    return re.sub(r"\s+", " ", re.sub(r"\d+(?:[.,]\d+)*", "#", str(line))).strip()
+
+
+def sig(line):
+    return hashlib.sha1(norm(line).encode("utf-8")).hexdigest()[:12]
+
+
+def counted(lines):
+    return sum(int(m.group(1).replace(",", "")) for ln in lines for m in COUNT.finditer(ln))
+
+
+def notice(key, lines, seen, today, state="要対応", steady="", deadline=""):
+    """要対応にするか「情報」に下げるか。(要対応か, 理由, 先に見せる明細, 次の週へ残す記録) を返す。
+    seen は前の週の記録（{key: {first, sigs, n, count}}）。明細の順位・回数は伏せて比べ、件数は別に比べる"""
+    prev = seen.get(key)
+    all_sigs = [sig("状態:" + state)] + [sig(ln) for ln in lines]
+    was = set((prev or {}).get("sigs") or [])
+    new = [ln for ln in lines if sig(ln) not in was] if prev else list(lines)
+    first = (prev or {}).get("first") or today
+    count, n = counted(lines), len(lines)
+    rec = {"first": first, "sigs": sorted(set(all_sigs))[:300], "n": n, "count": count}
+    try:
+        weeks = (date.fromisoformat(today) - date.fromisoformat(first)).days // 7 + 1
+    except ValueError:
+        weeks = 1
+    rest = [ln for ln in lines if ln not in new]
+    if deadline:
+        return True, deadline, new + rest, rec
+    if steady:
+        return False, f"{weeks}週目 — {steady}", list(lines), rec
+    if not prev:
+        return True, "新しく出ました", list(lines), rec
+    if new or not set(all_sigs) <= was:
+        return True, f"新しい明細 {len(new)}件" if new else "状態が変わりました", new + rest, rec
+    if count > int(prev.get("count") or 0):
+        return True, f"先週より増えました（{prev.get('count')}→{count}）", list(lines), rec
+    if n > int(prev.get("n") or 0):
+        return True, f"先週より増えました（{prev.get('n')}→{n}件）", list(lines), rec
+    return False, f"{weeks}週目・先週と同じ", list(lines), rec
+
+
+def load_seen(path=None):
+    try:
+        return json.loads(Path(path or SEEN).read_text(encoding="utf-8")).get("items") or {}
+    except (OSError, ValueError, AttributeError):
+        return {}
+
+
+def save_seen(items, today, path=None):
+    p = Path(path or SEEN)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({"at": today, "items": dict(sorted(items.items()))}, ensure_ascii=False, indent=1) + "\n",
+                 encoding="utf-8")
+
+
+def compose(rows, prev, seen, today, extra_info=()):
+    """通知の本文（先頭の「# 生成:」の次から）と、次の週へ残す記録を組み立てる。
+    rows は [(検査名, 判定, 明細)]、prev は前の工程が足した「要対応」の行。
+    返すのは (本文の行, 記録, 要対応にした数, 情報に下げた [(検査名か行, 理由)])"""
+    items, act, info = {}, [], []
+    for label, state, det in rows:
+        if state == "問題なし":
+            continue
+        a, why, show, rec = notice(label, det, seen, today, state,
+                                   STEADY.get(label, ""), DEADLINE.get(label, ""))
+        items[label] = rec
+        (act if a else info).append((state, label, why, show))
+    c_act, c_info = [], []
+    for ln in prev:
+        key = "行:" + sig(ln)
+        a, why, _, rec = notice(key, [ln], seen, today,
+                                deadline="この回の仕事が失われています（続いていても要対応）" if LOST.search(ln) else "")
+        items[key] = rec
+        (c_act if a else c_info).append((ln, why))
+
+    body = [ln for ln, _ in c_act]
+    for state, label, why, show in act:
+        body.append("%s: %s" % (state, label))     # この形は carry_over が「自分の行」と見分ける形のまま
+        body.append("   （%s）" % why)
+        body += ["   " + d[:80] for d in show[:3]]
+    if not act and not c_act:
+        quiet = not any(r[1] != "問題なし" for r in rows) and not prev
+        body.append("検査%d件すべて問題なし" % len(rows) if quiet
+                    else "今週あらたに対応が要るものはありません（続いているものは下の「情報」）")
+    if info or c_info or extra_info:
+        body.append("%s（毎週続いているもの・人が動かせないもの。急ぎではありません） ―――" % INFO_MARK)
+        for state, label, why, show in info:
+            body.append("情報: %s（%s%s）" % (label, "動かせず・" if state == "動かせず" else "", why))
+            body += ["   " + d[:80] for d in show[:2]]
+        for ln, why in c_info:
+            body.append("情報: %s（%s）" % (re.sub(r"^要対応[:：]?\s*", "", ln), why))
+        body += list(extra_info)
+    downgraded = [(label, why) for _, label, why, _ in info] + [(ln, why) for ln, why in c_info]
+    return body, items, len(act) + len(c_act), downgraded
+
 
 def info_lines():
     out = []
@@ -292,6 +425,8 @@ def main():
         description="週次の検査をまとめて回し、見つかったものを集める")
     ap.add_argument("--quiet", action="store_true",
                     help="各検査の生の出力を表示しない")
+    ap.add_argument("--remember", action="store_true",
+                    help="今回出たものを data/findings_seen.json に残す（CI では付けなくても残す）")
     a = ap.parse_args()
 
     rows, lines = [], []
@@ -336,29 +471,34 @@ def main():
     # いつ回した結果かを必ず先頭に書く。日付の無い記録は、古くても今の問題に見える
     lines.append("# 生成: %s JST（この時点で検査を回し直した結果）"
                  % datetime.now(JST).strftime("%Y-%m-%d %H:%M"))
-    lines.extend(prev)
-
-    # 通知に載せる本文。Slackが読める長さに収める
-    for label, state, det in bad:
-        lines.append("%s: %s" % (state, label))
-        for d in det[:3]:
-            lines.append("   " + d[:80])
-    if not bad and not prev:
-        lines.append("検査%d件すべて問題なし" % len(rows))
-    lines.extend(info_lines())
+    # 通知に載せる本文。Slackが読める長さに収める。要対応は新しく出た・悪化した・期限のあるものだけ
+    today = datetime.now(JST).date().isoformat()
+    body, items, n_act, down = compose(rows, prev, load_seen(), today, info_lines())
+    lines.extend(body)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     io.open(OUT, "w", encoding="utf-8", newline="\n").write("\n".join(lines) + "\n")
     print("\n  通知用に書き出しました: %s" % OUT.relative_to(ROOT))
+    if down:
+        print("\n■ 情報に下げたもの（毎週続いている・人が動かせない）")
+        for what, why in down:
+            print("  %s … %s" % (what[:60], why[:90]))
+    # 前の週と比べるための記録。手元で試した回が CI の比べる相手にならないよう、CI の回だけ書く
+    if os.environ.get("GITHUB_ACTIONS") or a.remember:
+        save_seen(items, today)
 
+    down_names = {what for what, _ in down}
     for label, state, det in bad:
-        if state == "動かせず":
+        if label in down_names:
+            annotate("notice", "%s（情報: 先週から続いている・人が動かせない）" % label)
+        elif state == "動かせず":
             annotate("error", "検査が動きません: %s" % label)
         else:
             annotate("warning", "%s — %s" % (
                 label, " / ".join(d[:60] for d in det[:2]) or "詳細は実行ログ"))
 
     print("FINDINGS=%d" % len(bad))
+    print("FINDINGS_ACTION=%d" % n_act)
     return 0   # 知らせるのが仕事。ここで止めない
 
 
