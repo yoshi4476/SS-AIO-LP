@@ -342,6 +342,9 @@ jobs:
           out=$(python scripts/lead_probe.py) || true
           echo "$out"
           echo "$out" | grep -q "LEAD_PROBE_OK=no" && echo "::warning::問い合わせが台帳まで届いていないサイトがあります（ログの「要対応」）" || true
+          # 注釈だけでは誰にも届かない。要対応は optimize の通知本文へ渡す（下の「要対応を渡す」）
+          mkdir -p automation/logs
+          echo "$out" | grep -o '要対応:.*' >> automation/logs/findings.txt || true
 
       # AI診断の段階ごとの数（入口→診断→結果→次の一歩→メールから戻った→相談）。どこで落ちているかを毎週見る
       - name: AI診断の段階ごとの数
@@ -352,6 +355,8 @@ jobs:
           out=$(python scripts/aicheck_funnel.py) || true
           echo "$out"
           echo "$out" | grep -q "AICHECK_FUNNEL_OK=no" && echo "::warning::AI診断で、ページは見られているのに診断を始めた人がいません" || true
+          mkdir -p automation/logs
+          echo "$out" | grep -o '要対応:.*' >> automation/logs/findings.txt || true
 
       - name: 生成エンジンから読める状態かの検査（GEO）
         run: |
@@ -360,6 +365,8 @@ jobs:
           if ! echo "$out" | grep -q "GEO_OK=yes"; then
             echo "::warning::生成エンジン向けの状態に欠けがあります"
             python scripts/hub_client.py error_log geo               "$(echo "$out" | grep -A6 'GEO_OK=no' | head -6)" || true
+            mkdir -p automation/logs
+            echo "$out" | sed -n 's/^  - /要対応: 生成エンジン向けの欠け — /p' >> automation/logs/findings.txt || true
           fi
 
       - name: 2ページ目で止まっている記事の洗い出し
@@ -367,6 +374,17 @@ jobs:
           if [ -f indexing-service-account.json ]; then
             python scripts/rewrite_list.py --top 12 || true
           fi
+
+      # このジョブは通知しない。問い合わせの疎通・AI診断・生成エンジン向けの要対応は optimize が通知本文へ足す
+      # （kw-refill と同じ渡し方）。以前は注釈と管制塔のエラーログだけで、メールに載らなかった（2026-10-07 の点検）
+      - name: 要対応を渡す
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-findings
+          path: automation/logs/findings.txt
+          if-no-files-found: ignore
+          retention-days: 3
 
       - name: 鍵の後始末
         if: always()
@@ -923,7 +941,9 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
-          python scripts/publish_changed.py --all --since "$BASE_SHA" --push || true
+          # 落ちた記事は --since のため次の回も送られない。要対応の行を通知本文へ足す（2026-10-07 の点検）
+          python scripts/publish_changed.py --all --since "$BASE_SHA" --push 2>&1 | tee /tmp/publish_changed.txt || true
+          grep '^要対応' /tmp/publish_changed.txt >> automation/logs/findings.txt || true
           # 統合で消した記事は配信先にも残っている。外して 301 で送らないと2本が出続ける
           python scripts/retract.py --pending --push || true
           # 取り下げ済みの印（data/retractions.jsonl）を正本に残す。残さないと翌週また取り下げ直す
@@ -1016,11 +1036,22 @@ jobs:
           name: kw-findings
           path: /tmp/kw-findings
 
+      # 並行ジョブ（reports）が見つけた要対応（問い合わせの疎通・AI診断・生成エンジン向け）も同じく足す
+      - name: 読むだけの検査の要対応を受け取る
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: reports-findings
+          path: /tmp/reports-findings
+
       - name: KW補充の要対応を通知本文へ足す
         run: |
           mkdir -p automation/logs
           if [ -f /tmp/kw-findings/findings.txt ]; then
             cat /tmp/kw-findings/findings.txt >> automation/logs/findings.txt
+          fi
+          if [ -f /tmp/reports-findings/findings.txt ]; then
+            cat /tmp/reports-findings/findings.txt >> automation/logs/findings.txt
           fi
 
       # Bing Webmaster へ sitemap と直近7日の更新URLを送る（3サイト＋お客様）。
@@ -1070,6 +1101,11 @@ jobs:
         env:
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}   # SNS の鍵の期限を見る
           HUB_URL: ${{ secrets.HUB_URL }}                         # 管制塔の「KW重複の確認」を読む（無いと unset で素通りする）
+          # 準備状況（intake_readiness）・WordPress の橋渡しは配信の鍵が登録されているかを見る。渡さないと、
+          # 登録済みのお客様の社まで毎週「配信用トークンの登録（当社）」と誤って知らせる（2026-10-07 の点検）
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
           python scripts/findings.py || true
           # 公開した後の結果（題の型のCTR・別工程の採点・本数の効き・戻された直し）から学び、

@@ -354,7 +354,10 @@ jobs:
             git add -A -- "$p" 2>/dev/null || true
           done
           git diff --cached --quiet || git commit -m "monthly: レポートの改善点を自動実行 $(date '+%Y-%m-%d')"
-          python scripts/publish_changed.py --all --since HEAD~1 --push || true
+          # 落ちた記事は --since のため次の回も送られない。要対応の行を通知本文へ足す（2026-10-07 の点検）
+          python scripts/publish_changed.py --all --since HEAD~1 --push 2>&1 | tee /tmp/publish_changed.txt || true
+          mkdir -p automation/logs
+          grep '^要対応' /tmp/publish_changed.txt >> automation/logs/findings.txt || true
 
       # 各社のレポートを1通にまとめて送る（要対応がある社を先頭に。照合に落ちた社は理由だけ）
       - name: 各社のレポートを1通にまとめて送る

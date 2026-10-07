@@ -260,7 +260,9 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
         run: |
-          python scripts/publish_changed.py --all --since "$BASE_SHA" --push || true
+          # 落ちた記事は --since のため次の回も送られない。要対応の行を通知本文へ足す（2026-10-07 の点検）
+          python scripts/publish_changed.py --all --since "$BASE_SHA" --push 2>&1 | tee /tmp/publish_changed.txt || true
+          grep '^要対応' /tmp/publish_changed.txt >> automation/logs/findings.txt || true
           git add -A
           git diff --cached --quiet || {
             git commit -q -m "focus-mode: 配信の記録 $(date '+%Y-%m-%d')"

@@ -2050,31 +2050,31 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:511",
+     "evidence": ".github/workflows/weekly-optimize.yml:529",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:511",
+     "evidence": ".github/workflows/weekly-optimize.yml:529",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:511",
+     "evidence": ".github/workflows/weekly-optimize.yml:529",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:511",
+     "evidence": ".github/workflows/weekly-optimize.yml:529",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:511",
+     "evidence": ".github/workflows/weekly-optimize.yml:529",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },

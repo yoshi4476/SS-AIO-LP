@@ -163,6 +163,43 @@ def test_site_brief_uses_each_sites_cap():
           ("site_cap(" in body, "daily_audit.MONTHLY_CAP" in body), (True, False))
 
 
+def _wf_steps(name, job):
+    import yaml
+    y = yaml.safe_load((ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8"))
+    return y["jobs"][job]["steps"]
+
+
+def test_weekly_findings_reach_the_notice():
+    """週次の通知本文（findings.txt）に、見つけたものが本当に届くこと"""
+    opt = _wf_steps("weekly-optimize.yml", "optimize")
+    fstep = next(s for s in opt if "scripts/findings.py" in str(s.get("run", "")))
+    env = fstep.get("env") or {}
+    check("週次の検査の工程に配信の鍵を渡す（渡さないと準備状況が「配信用トークンの登録」と誤って知らせる）",
+          [k for k in ("SITE_PUSH_TOKEN", "FTP_CREDENTIALS_JSON", "WP_CREDENTIALS_JSON") if k not in env], [])
+    rep = _wf_steps("weekly-optimize.yml", "reports")
+    runs = {s.get("name"): str(s.get("run", "")) for s in rep}
+    for script in ("lead_probe.py", "aicheck_funnel.py", "geo_check.py"):
+        body = next((r for r in runs.values() if script in r), "")
+        check(f"週次の読むだけの検査: {script} の要対応を findings.txt へ書く",
+              ">> automation/logs/findings.txt" in body, True)
+    up = [s for s in rep if (s.get("with") or {}).get("name") == "reports-findings"]
+    check("週次の読むだけの検査: 要対応を optimize へ渡す（成果物）",
+          bool(up) and str(up[0].get("if", "")) == "always()", True)
+    names = [str(s.get("name", "")) for s in opt]
+    dl = next((i for i, s in enumerate(opt) if (s.get("with") or {}).get("name") == "reports-findings"), None)
+    cat = next((i for i, s in enumerate(opt) if "/tmp/reports-findings/findings.txt" in str(s.get("run", ""))), None)
+    fi = next(i for i, s in enumerate(opt) if "scripts/findings.py" in str(s.get("run", "")))
+    check("週次: 受け取った要対応を findings.py より前に通知本文へ足す",
+          dl is not None and cat is not None and dl < cat < fi, True)
+    # 書き直しの配信に落ちた記事（publish_changed が出す「要対応」）を3つのワークフローとも通知本文へ足す
+    for wf, job in (("weekly-optimize.yml", "optimize"), ("focus-mode.yml", "focus"), ("monthly-report.yml", "report")):
+        body = next(str(s.get("run", "")) for s in _wf_steps(wf, job) if "publish_changed.py" in str(s.get("run", "")))
+        check(f"{wf}: publish_changed の要対応を findings.txt へ足す",
+              "tee /tmp/publish_changed.txt" in body and "grep '^要対応' /tmp/publish_changed.txt >> automation/logs/findings.txt" in body,
+              True)
+    check("週次の名前が変わっていない（取り違え防止）", "見つかったものを集めて知らせる" in names, True)
+
+
 def test_geo_check_counts_only_articles():
     import geo_check as GC
     sm = "".join(f"<url><loc>{u}</loc></url>" for u in (
