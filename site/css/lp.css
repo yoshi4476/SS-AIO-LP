@@ -25,5 +25,5 @@ body.lp-doc .lead-band .btn { flex-shrink: 0; white-space: nowrap; }
 
 /* 申し込みフォームの横の「✓」。明るい面なので、暗い面用の白い丸では見えない */
 body.lp-doc #form .trust-row span::before { background: var(--sky); color: var(--blue); }
-/* 見出しを中央に置いた区画は、上の英字の小見出しも中央に */
-body.lp-doc #form .section-head .en { margin-left: auto; margin-right: auto; }
+/* 見出しを中央に置いた区画は、上の小見出しも中央に */
+body.lp-doc #form .section-head .eyebrow { margin-left: auto; margin-right: auto; }

@@ -1939,6 +1939,19 @@ html.js .rsx-tools { display: flex; flex-wrap: wrap; align-items: center; justif
 }
 
 /* ============================================================
+   固定ページの見た目（2026-10-08）: 見出しの上の札と、図と表
+   図は画像を増やさず、CSS と文字で描く（速度の方針）。色はサイトの値だけ:
+   探す=--chart-base・調べる=--chart-accent（/research/ の一覧と同じ）、比べる相手は灰色
+   ============================================================ */
+/* -- 見出しの上の札（日本語）。英字の札（.en）は大文字・字間 .34em の飾りで、日本語には広すぎる -- */
+.section-head .eyebrow { display: flex; align-items: center; gap: .6em; width: fit-content; font-family: var(--sans); font-size: .82rem; font-weight: 700; letter-spacing: .12em; line-height: 1.6; color: var(--blue); }
+.section-head .eyebrow::before { content: ""; width: 1.6em; height: 2px; border-radius: 2px; background: currentColor; }
+.dark-sec .section-head .eyebrow { color: rgba(255,255,255,.75); }
+.eyebrow-sm { display: block; font-size: .8125rem; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+/* 見出しの折り返しをそろえる（スマホで「…までの流 / れ」のように1字だけ次の行へ落ちていた） */
+.section-head h2 { text-wrap: balance; }
+
+/* ============================================================
    デザインとリード導線の点検（2026-10-08）
    ============================================================ */
 /* 説明の段落は1行42字前後まで。パソコンで業種ハブ 70〜84字・比較表 84字・用語集 91字・運営者 75字になっていた

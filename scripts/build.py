@@ -1647,7 +1647,7 @@ def build_research_pages(all_metas=()):
             if ms:
                 tiles = "\n".join(post_tile(m) for m in ms)
                 body = body.replace('<section><h2>引用する場合</h2>',
-                                    '<section><span class="ilp-eb">Articles</span><h2>この業種の記事</h2>'
+                                    '<section><span class="ilp-eb">関連する記事</span><h2>この業種の記事</h2>'
                                     f'<ul class="post-list">\n{tiles}\n</ul></section>\n<section><h2>引用する場合</h2>', 1)
         except Exception as e:
             print(f"WARN: 調査ページの記事一覧を作れません（{str(e)[:50]}）")
@@ -1750,7 +1750,7 @@ def build_question_pages():
             f'    <li><a href="/research/{ind}-ai-sources/">{name}の調査</a></li>\n'
             '    <li aria-current="page">質問集</li>\n  </ol>\n</nav>'), page, count=1, flags=re.S)
         page = re.sub(r'<section class="hero">.*?</section>', lambda m: (
-            '<section class="hero"><span class="kicker">AI Questions</span>'
+            '<section class="hero"><span class="kicker">調査の質問集</span>'
             f'<h1>{html.escape(title)}</h1><p class="lead">{html.escape(desc)}</p></section>'), page, count=1, flags=re.S)
         page = re.sub(r'<section class="section">\s*<div class="cta reveal">.*?</section>\n?',
                       lambda m: IAS.cta_band(ind), page, count=1, flags=re.S)
@@ -1786,7 +1786,7 @@ def build_ranking_page():
         '<nav class="breadcrumb" aria-label="パンくずリスト">\n  <ol>\n    <li><a href="/">ホーム</a></li>\n'
         '    <li aria-current="page">AIが出典にするサイトのランキング</li>\n  </ol>\n</nav>'), page, count=1, flags=re.S)
     page = re.sub(r'<section class="hero">.*?</section>', lambda m: (
-        '<section class="hero"><span class="kicker">Monthly Ranking</span>'
+        '<section class="hero"><span class="kicker">毎月の集計</span>'
         f'<h1>{html.escape(title)}</h1><p class="lead">{html.escape(desc)}</p></section>'), page, count=1, flags=re.S)
     ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "ホーム", "item": SITE_URL + "/"},

@@ -98,7 +98,7 @@ BY_HUB = {s: k for k, v in LPS.items() for s in v["slugs"]}
 
 STYLE = """<style>
 .ilp{max-width:1120px;margin:0 auto;display:grid;gap:3.4rem}
-.ilp-eb{display:block;font-family:var(--en);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.35rem}
+.ilp-eb{display:block;font-family:var(--sans);font-size:.8125rem;letter-spacing:.1em;color:var(--blue);font-weight:700;margin-bottom:.35rem}
 .ilp h2{font-size:clamp(1.3rem,2.5vw,1.75rem);margin:0 0 1.1rem;line-height:1.45;text-wrap:balance}
 .ilp-cards{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
 .ilp-card{border:1px solid var(--line);border-radius:18px;padding:1.25rem 1.3rem;background:#fff;box-shadow:var(--shadow-sm)}
@@ -223,7 +223,7 @@ def data_section(key, c):
             f'　<a href="{IAS.checklist_url(r)}" data-cta="lp_{key}_checklist_{r}">チェックリスト（PDF）</a></p></div>')
     if not cards:
         return ""
-    return ('<section class="ilp-data"><span class="ilp-eb">Data</span><h2>データで見る：AIは何を出典に答えているか</h2>'
+    return ('<section class="ilp-data"><span class="ilp-eb">当社の調査</span><h2>データで見る：AIは何を出典に答えているか</h2>'
             '<p class="ilp-proof" style="margin:0 0 1rem">当社が、実際に調べられそうな質問を ChatGPT・Gemini・Claude などのAIに聞き、'
             '回答の出典になったサイトを種類ごとに数えた結果です。</p>'
             f'<div class="ilp-cards">{"".join(cards)}</div></section>')
@@ -250,9 +250,9 @@ def body(key, metas, faq_pairs, post_tile, site_url):
             '<input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL">'
             f'<button type="submit" class="btn btn-primary" data-cta="lp_{key}_scan">30秒で診断する</button></form></section>')
     out = [STYLE, '<div class="ilp">',
-           f'<section class="ilp-pain"><span class="ilp-eb">Problems</span><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
+           f'<section class="ilp-pain"><span class="ilp-eb">課題</span><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
            data_section(key, c),
-           f'<section class="ilp-fix"><span class="ilp-eb">Solution</span><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
+           f'<section class="ilp-fix"><span class="ilp-eb">支援内容</span><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
            '<p class="ilp-proof" style="margin-top:1rem">集客支援の実務: 店舗集客「G-ran」で通算3,200店舗以上（2026年7月時点）の運用に携わってきました。'
            'ここに挙げた業種のほかにも対応しています。</p></section>',
            '<section class="ilp-band"><h2>まずは、今の状態を知るところから</h2>'
@@ -261,11 +261,11 @@ def body(key, metas, faq_pairs, post_tile, site_url):
            f'<a class="btn btn-ghost" href="#scan-start" data-cta="lp_{key}_band_scan">30秒で診断する</a>'
            f'<a class="btn btn-ghost" href="/tools/ai-check/" data-cta="lp_{key}_band_aicheck">AIにどう紹介されているか確かめる</a></div></section>']
     if tiles:
-        out.append(f'<section><span class="ilp-eb">Articles</span><h2>{_e(c["name"])}の集客に役立つ記事</h2><ul class="post-list">\n{tiles}\n</ul>'
+        out.append(f'<section><span class="ilp-eb">関連する記事</span><h2>{_e(c["name"])}の集客に役立つ記事</h2><ul class="post-list">\n{tiles}\n</ul>'
                    + (f'<p class="ilp-more">業種別のまとめ: {hubs}</p>' if hubs else "") + '</section>')
     if faq:
         # 質問の列だけだと右が空くので、相談に答える場面の写真（イメージ）を右に置く
-        out.append(f'<section class="ilp-faq"><span class="ilp-eb">FAQ</span><h2>よくある質問</h2>'
+        out.append(f'<section class="ilp-faq"><span class="ilp-eb">質問と答え</span><h2>よくある質問</h2>'
                    f'<div class="ilp-faq-grid"><div>{faq}</div><figure class="ilp-faq-ph">'
                    f'<img src="/images/scenes/faq.webp" alt="オンラインで相談に答える担当者のイメージ" width="1600" height="900" loading="lazy">'
                    f'</figure></div></section>')

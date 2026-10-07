@@ -268,7 +268,7 @@ def render(voices, style="lp"):
         body = f"<h2>お客様の声</h2>\n  {grid}\n  {note}"
     else:
         body = ('<section class="section" data-area="お客様の声" data-area-id="voices">\n'
-                '  <div class="section-head"><span class="en">Voice</span><h2>お客様の声</h2>\n'
+                '  <div class="section-head"><span class="eyebrow">実際の声</span><h2>お客様の声</h2>\n'
                 '  <p class="section-lead">実際に運用させていただいている会社さまの言葉です。'
                 '数字は各社が測った値で、集計期間を添えています。</p></div>\n'
                 f"  {grid}\n  {note}\n</section>")
