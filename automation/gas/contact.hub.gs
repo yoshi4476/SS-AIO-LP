@@ -85,6 +85,11 @@ function form_(body) {
     return { ok: true, probe: true };
   }
 
+  // 配信停止（補助金サイトの /unsubscribe/）は問い合わせではない。台帳・担当への通知・自動返信・後追いに入れず、
+  // 配信除外に残して本人へ停止の確認だけを返す。以前は問い合わせの1行として台帳に入り、担当へ通知され、
+  // 本人には問い合わせ用の自動返信（3営業日以内にご連絡します・動画の案内）が届いていた（2026-10-08）
+  if (type === 'unsubscribe') return unsubscribe_(email, site);
+
   // 営業メールらしい送信は、送り主への自動返信だけを止める。担当への通知は「営業の可能性」の印を付けて出す。
   // 「弊社サービス」「業務提携」は本物の相談にも入りうるので、通知まで止めると問い合わせを見落とす（最後は人が判断する）
   const sales = type === 'contact' && isSales_(body_(d.message));
@@ -117,6 +122,30 @@ function form_(body) {
     } catch (e2) {}
   }
   return { ok: true, temperature: temp, row: row };
+}
+
+/**
+ * 配信停止の受付（form_ から）。配信除外に「配信停止」の区分で足す。
+ * ステップメール・自動フォロー・測り直しは、送る前にこの一覧を見る（excluded_）。
+ * 本人へは停止の確認を1通だけ返す。停止済みのアドレスには送り直さない（同じ宛先へ何度も送らせない）。
+ * ページは already を見て「確認メールをお送りしました」と書くかを決める
+ */
+function unsubscribe_(email, site) {
+  const addr = String(email || '').trim().toLowerCase();
+  if (excludeSet_().emails[addr]) return { ok: true, already: true };
+  excludeSheet_().appendRow([addr, '', '配信停止', '配信停止のフォーム（' + site + '）',
+    Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd'), '配信停止フォーム']);
+  // 停止の記録は済んでいる。確認メールで失敗しても、送信者にはエラーを返さない（停止できていないと誤解される）
+  try {
+    MailApp.sendEmail({ to: addr, subject: '配信停止のお手続きが完了しました（セブンセンシズ株式会社）',
+      body: ['当社からのご案内メールの配信を停止しました。',
+             '今後、ご案内メールはお送りしません（お問い合わせへの返信など、お取引に必要なご連絡は除きます）。'].join('\n')
+            + '\n' + REPLY_FOOT,
+      name: 'セブンセンシズ株式会社', replyTo: NOTIFY_TO });
+  } catch (err) {
+    console.error('配信停止の確認メールに失敗（停止の記録は済んでいます）: ' + err);
+  }
+  return { ok: true };
 }
 
 /** リードの温度。診断とサイト診断は、自社の情報を差し出しているので高く見る */
@@ -237,11 +266,12 @@ function leadNotify_(site, type, temp, d, referer) {
   if (body_(d.message)) lines.push('ご相談内容:', body_(d.message), '');
   const detail = leadDetail_(type, d);
   if (detail) lines.push('詳細: ' + detail, '');
-  // 既存のお客様からの連絡は、担当が一目で分かるようにする（ステップメールも送られない）
+  // 既存のお客様からの連絡は、担当が一目で分かるようにする（ステップメールも送られない）。
+  // 配信除外には配信停止の手続きをしただけの人も入るので、「既存のお客様」と決めつけない
   try {
     const a = d.audit || {};
     if (excluded_(excludeSet_(), d.email, a.url ? '対象 ' + a.url : '')) {
-      lines.unshift('※ 既存のお客様です（配信除外に登録あり。自動のご案内メールは送りません）', '');
+      lines.unshift('※ 配信除外に登録があります（既存のお客様か、配信停止の手続き済みの方。自動のご案内メールは送りません）', '');
     }
   } catch (e) {}
   lines.push('送信元: ' + (referer || '不明'),
@@ -630,10 +660,11 @@ const STEP_DAYS = { low: [1, 4, 10], mid: [2, 7, 14], high: [3, 30] };
  *
  * 行の状態で止めるだけでは足りない。既存のお客様が自社サイトをもう一度診断すると、
  * 新しい行が「未対応」でできて、案内が始まってしまう。そこで相手そのもので除外する。
- * 除外に入るのは次の3つ。
+ * 除外に入るのは次の4つ。
  *   1) 「配信除外」シートに書いたメールアドレスかドメイン（手で足す）
  *   2) 台帳の状態を「成約」「契約中」「既存客」にした行のメールと、診断したサイトのドメイン（自動で足す）
  *   3) 「サイト一覧」に登録した受託先のドメイン（自社の7senses.co.jpは除く）
+ *   4) 配信停止のフォーム（補助金サイトの /unsubscribe/）から手続きしたメール（unsubscribe_ が区分「配信停止」で足す）
  * メールのドメインは、会社のドメインのときだけ使う（gmail.com などで除外すると他人まで止まる）。
  */
 const CLIENT_STATUS = /成約|契約中|既存客/;
