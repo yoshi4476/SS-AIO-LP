@@ -31,15 +31,17 @@ class _Fake:
 @contextlib.contextmanager
 def _patched(fake, entries):
     import bing_webmaster as BW
-    saved = (BW._request, BW.STATE, BW.BACKFILL, BW.api_key, BW.sitemap_entries)
+    saved = (BW._request, BW.STATE, BW.BACKFILL, BW.api_key, BW.sitemap_entries, BW.client_cfgs)
     with tempfile.TemporaryDirectory() as d:
         BW._request, BW.STATE, BW.BACKFILL = fake, Path(d) / "s.json", Path(d) / "b.json"
         BW.api_key = lambda: "dummy-key"
         BW.sitemap_entries = lambda dom: entries.get(dom, [])
+        # 自社だけで確かめる。本物の sites/ に同意済みのお客様（conflux 等）が増えると GetUserSites を呼び、呼び出しの数が変わる
+        BW.client_cfgs = lambda: {}
         try:
             yield BW
         finally:
-            BW._request, BW.STATE, BW.BACKFILL, BW.api_key, BW.sitemap_entries = saved
+            BW._request, BW.STATE, BW.BACKFILL, BW.api_key, BW.sitemap_entries, BW.client_cfgs = saved
 
 
 def _run(BW, argv):
