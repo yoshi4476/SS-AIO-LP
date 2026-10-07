@@ -155,5 +155,7 @@
     "git_invited": true,
     "keys_sent": "不要",
     "gbp_status": "店舗が無い"
-  }
+  },
+  "renovate_max_files": 60,
+  "renovate_wait_sec": 360
 }
