@@ -728,19 +728,19 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/bing_webmaster.py:201",
+     "evidence": "scripts/bing_webmaster.py:217",
      "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま",
      "anchor": "def connect(cfgs, key, ledger=None, today=None):"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/bing_webmaster.py:201",
+     "evidence": "scripts/bing_webmaster.py:217",
      "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま",
      "anchor": "def connect(cfgs, key, ledger=None, today=None):"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/bing_webmaster.py:201",
+     "evidence": "scripts/bing_webmaster.py:217",
      "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま",
      "anchor": "def connect(cfgs, key, ledger=None, today=None):"
     },
@@ -752,7 +752,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/bing_webmaster.py:201",
+     "evidence": "scripts/bing_webmaster.py:217",
      "note": "最初の接続: ヒアリングシートで「当社のアカウントで登録することに同意」を可（bing_consent）。当社の Bing アカウントへ AddSite → 確認コード（GetUserSites）を BingSiteAuth.xml として配信と一緒に置く（先方が置いた分は残して足す）→ 本番に出たら VerifySite → 公開直後・週次・送り切りの対象。同意の無い社は対象外のまま",
      "anchor": "def connect(cfgs, key, ledger=None, today=None):"
     },

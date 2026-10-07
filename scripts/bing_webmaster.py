@@ -11,6 +11,14 @@ IndexNow（notify_indexnow.py）は「変わった」と知らせるだけで、
     python scripts/bing_webmaster.py <URL> ...      # 指定URL（reindex の再送から呼ぶ）
     python scripts/bing_webmaster.py --backfill [--dry-run] [--site <id>]
                                                     # 本番 sitemap の未送信URLを、その日の枠いっぱい送る（毎日・selfheal）
+    python scripts/bing_webmaster.py --stats [--site <id>]
+                                                    # 検索の成績を data/bing_stats/<id>.json に積む（週次）
+
+検索の成績（--stats・2026-10-07 運用者の依頼）: Google の Search Console と並べて、Bing（ChatGPT の検索も使う索引）での
+表示・クリック・主な語を月次レポートに出すため。API が返すのは日別が約70日・語とページが約9週だけなので、毎週取って
+日付ごとに積み増す（前の回の分を消さない）。対象は送信と同じ send_cfgs（自社と、同意があり所有権を確かめたお客様の社）。
+お客様の社のファイルは .gitignore で外し、CI のキャッシュで持ち越す（data/compete と同じ方針）。
+印: BING_STATS_OK=yes / no（鍵の誤り・未登録）/ unknown（すべて取れなかった）/ unset。
 
 送り切り（--backfill）: 鍵が無かった 2026-10-05 より前の記事は Bing にほぼ送られていない。ChatGPT の検索は
 Bing の索引を使うため、自社サイトの本番 sitemap のうち一度も送っていないURLを lastmod の新しい順に送る。
@@ -37,6 +45,11 @@ Bing の索引を使うため、自社サイトの本番 sitemap のうち一度
   サイトの追加・確認  https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi
             （AddSite / GetUserSites / VerifySite。確認コードは Site.AuthenticationCode）
   鍵の発行  https://learn.microsoft.com/en-us/bingwebmaster/getting-access
+  検索の成績 https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi.getrankandtrafficstats
+            （日別の Impressions / Clicks。2023年3月24日以降はウェブ・チャット・ニュース・画像・動画・ナレッジパネルの合計）
+            ….getquerystats / ….getpagestats（上位の語・ページ。QueryStats の Query / Impressions / Clicks /
+            AvgImpressionPosition / AvgClickPosition / Date。「毎週更新」で、Date は週の始まり。ページは Query にURLが入る）
+            日付は "/Date(1316156400000-0700)/" の形（UTC のミリ秒＋任意の時差）。実測（2026-10-07）は時差なし・UTC の0時
 """
 import json
 import math
@@ -55,6 +68,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 API = "https://ssl.bing.com/webmaster/api.svc/json/"
 STATE = ROOT / "data" / "bing_submit.json"
 BACKFILL = ROOT / "data" / "bing_backfill.json"
+STATS_DIR = ROOT / "data" / "bing_stats"
+MIN_N = 10                # 表示がこれ未満ならクリック率を出さない（割合は母数10以上・0.1節）
+TOP_N = 10                # 月次レポートに出す語の数
 RESERVE = 10
 BATCH_MAX = 500
 KEEP_DAYS = 7
@@ -503,13 +519,201 @@ def backfill(argv, key):
     return 0
 
 
+# ---------- 検索の成績（週次で積み、月次レポートが読む） ----------
+
+def bing_day(v):
+    """Bing の日付 "/Date(ms[±hhmm])/" → YYYY-MM-DD。ms は UTC の時刻で、時差があればその土地の日付にする
+    （公式の例 "/Date(1316156400000-0700)/" は XML の 2011-09-16T00:00:00-07:00 と同じ日）"""
+    m = re.match(r"/Date\((-?\d+)([+-]\d{4})?\)/", str(v or ""))
+    if not m:
+        return ""
+    ms = int(m.group(1))
+    if m.group(2):
+        off = (int(m.group(2)[1:3]) * 60 + int(m.group(2)[3:5])) * 60000
+        ms += off if m.group(2)[0] == "+" else -off
+    return (date(1970, 1, 1) + timedelta(milliseconds=ms)).isoformat()
+
+
+def _pos(v):
+    """平均順位。Bing はデータの無いとき -1 を返す（実測: クリック1回でも AvgClickPosition が -1）"""
+    return v if isinstance(v, (int, float)) and v > 0 else None
+
+
+def fetch_stats(site_url, key):
+    """(日別, 語, ページ) の生の行。どれか1つでも失敗すれば BingError（半端に積まない）"""
+    return tuple(_request("GET", op, key, {"siteUrl": site_url}).get("d") or []
+                 for op in ("GetRankAndTrafficStats", "GetQueryStats", "GetPageStats"))
+
+
+def merge_stats(old, rt, qs, ps, today):
+    """前の回の分に積み増す。日別は日付ごとに今回の値で上書き、語・ページは今回返った週だけを丸ごと差し替える
+    （古い週・古い日は API の窓から外れても残す）"""
+    s = dict(old or {})
+    daily = dict(s.get("daily") or {})
+    for r in rt:
+        d = bing_day(r.get("Date"))
+        if d:
+            daily[d] = {"imp": int(r.get("Impressions") or 0), "clicks": int(r.get("Clicks") or 0)}
+    fresh = {}
+    for kind, rows in (("queries", qs), ("pages", ps)):
+        for r in rows:
+            d, k = bing_day(r.get("Date")), str(r.get("Query") or "").strip()
+            if d and k:
+                fresh.setdefault(d, {"queries": [], "pages": []})[kind].append(
+                    {"key": k, "imp": int(r.get("Impressions") or 0), "clicks": int(r.get("Clicks") or 0),
+                     "pos": _pos(r.get("AvgImpressionPosition"))})
+    weeks = dict(s.get("weeks") or {})
+    for d, w in fresh.items():
+        weeks[d] = {kind: sorted(v, key=lambda x: (-x["imp"], -x["clicks"], x["key"])) for kind, v in w.items()}
+    s.update(daily=dict(sorted(daily.items())), weeks=dict(sorted(weeks.items())), updated=today)
+    return s
+
+
+def stats_path(sid):
+    return STATS_DIR / f"{sid}.json"
+
+
+def load_stats(sid):
+    p = stats_path(sid)
+    try:
+        return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else None
+    except (OSError, ValueError):
+        return None
+
+
+def collect_stats(argv, key):
+    """送る対象と同じ社（send_cfgs）の成績を取って積む。同意の無いお客様の社は取らない"""
+    only = argv[argv.index("--site") + 1] if "--site" in argv and len(argv) > argv.index("--site") + 1 else ""
+    today = date.today().isoformat()
+    results, bad = [], []
+    for sid, cfg in send_cfgs(key).items():
+        if only and sid != only:
+            continue
+        dom = cfg["domain"]
+        try:
+            rt, qs, ps = fetch_stats(f"https://{dom}/", key)
+        except BingError as e:
+            st = classify(e)
+            results.append(st)
+            print(f"  {sid}: 成績を取れません（{st}・{e}）")
+            if st == "unregistered":
+                bad.append(f"要対応: Bing Webmaster に未登録 — {dom}（成績を取れません）")
+            elif st == "invalid_key":
+                bad.append("要対応: Bing Webmaster の API キーが無効です（BING_WEBMASTER_API_KEY を作り直してください）")
+            continue
+        s = merge_stats(load_stats(sid), rt, qs, ps, today)
+        s.update(site=sid, domain=dom)
+        STATS_DIR.mkdir(parents=True, exist_ok=True)
+        stats_path(sid).write_text(json.dumps(s, ensure_ascii=False, indent=0), encoding="utf-8")
+        results.append("ok")
+        days = [d for d in s["daily"]]
+        if not (rt or qs or ps):
+            print(f"  {sid}: Bing から成績がまだ返っていません（所有権の確認から日が浅い・表示が無い。積んだ日別 {len(days)}日）")
+            continue
+        print(f"  {sid}: 今回 日別 {len(rt)}日・語 {len(qs)}行・ページ {len(ps)}行 → 積んだ日別 {len(days)}日"
+              f"（{days[0]}〜{days[-1]}）・週 {len(s['weeks'])}週")
+    for b in dict.fromkeys(bad):
+        print(b)
+    if bad:
+        print("BING_STATS_OK=no")
+    elif results and all(r != "ok" for r in results):
+        print("BING_STATS_OK=unknown")
+    else:
+        print("BING_STATS_OK=yes")
+    return 0
+
+
+def month_totals(s, start, end):
+    """[start, end] の日別の合計。(表示, クリック, 日数, 最初の日, 最後の日)"""
+    days = [(d, v) for d, v in (s.get("daily") or {}).items() if start <= d <= end]
+    if not days:
+        return 0, 0, 0, "", ""
+    return (sum(v["imp"] for _, v in days), sum(v["clicks"] for _, v in days), len(days), days[0][0], days[-1][0])
+
+
+def top_queries(s, start, end, n=TOP_N):
+    """週の始まりが [start, end] の週の語を足し合わせる。順位は表示回数で重みをつけた平均"""
+    agg = {}
+    for wk, w in (s.get("weeks") or {}).items():
+        if not start <= wk <= end:
+            continue
+        for r in w.get("queries", []):
+            a = agg.setdefault(r["key"], {"key": r["key"], "imp": 0, "clicks": 0, "pw": 0.0, "pi": 0})
+            a["imp"] += r["imp"]
+            a["clicks"] += r["clicks"]
+            if r.get("pos") and r["imp"]:
+                a["pw"] += r["pos"] * r["imp"]
+                a["pi"] += r["imp"]
+    rows = sorted(agg.values(), key=lambda a: (-a["imp"], -a["clicks"], a["key"]))[:n]
+    for a in rows:
+        a["pos"] = round(a["pw"] / a["pi"], 1) if a["pi"] else None
+    return rows
+
+
+def _ctr(clicks, imp):
+    if imp is None or clicks is None:
+        return "—"
+    if imp < MIN_N:
+        return f"—（表示{MIN_N}回未満）"
+    return f"{clicks / imp * 100:.1f}%"
+
+
+def report_html(sid, ym, through=None, google=None):
+    """月次レポートの「Bing での表示・クリック・主な語」の中身（節の見出しは呼び出し側）。
+    成績を取っていない社（Bing の対象外）は ""。取っていてもまだ返っていなければ、0 と書かずにそう書く"""
+    import html as H
+    s = load_stats(sid)
+    if s is None:
+        return ""
+    y, mo = map(int, ym.split("-"))
+    start = f"{ym}-01"
+    end = (date(y + (mo == 12), mo % 12 + 1, 1) - timedelta(days=1)).isoformat()
+    if through:
+        end = min(end, str(through)[:10])
+    imp, clk, n_days, d0, d1 = month_totals(s, start, end)
+    out = ['<p style="font-size:9.5pt">ChatGPT の検索は Bing の索引も使います。Bing に載って表示されているかは、'
+           'ChatGPT の回答に出る前提の1つです。Google（Search Console）と同じ月で並べます。</p>']
+    if not n_days:
+        last = max((s.get("daily") or {}), default="")
+        out.append('<div class="callout"><b>この月の Bing の成績はまだ返っていません。</b>'
+                   + (f'手元にある最後の日は {H.escape(last)} です。' if last else
+                      'Bing Webmaster で所有権を確かめた直後は、成績が出るまで日数がかかります。')
+                   + '表示が0回だったという意味ではありません。</div>')
+        return "\n".join(out)
+    g = google or {}
+    gi, gc = g.get("imp"), g.get("clicks")
+    fmt = (lambda v: f"{v:,}" if isinstance(v, int) else "—")
+    out.append('<table><tr><th>指標</th><th>Bing</th><th>Google（Search Console）</th></tr>'
+               f'<tr><td>表示回数</td><td class="num">{imp:,}</td><td class="num">{fmt(gi)}</td></tr>'
+               f'<tr><td>クリック</td><td class="num">{clk:,}</td><td class="num">{fmt(gc)}</td></tr>'
+               f'<tr><td>クリック率</td><td class="num">{_ctr(clk, imp)}</td>'
+               f'<td class="num">{_ctr(gc, gi) if isinstance(gi, int) else "—"}</td></tr>'
+               f'<tr><td>期間</td><td>{d0}〜{d1}（{n_days}日分）</td><td>{start}〜{end}</td></tr></table>')
+    rows = top_queries(s, start, end)
+    if rows:
+        tr = "".join(f'<tr><td>{H.escape(r["key"])}</td><td class="num">{r["imp"]:,}</td>'
+                     f'<td class="num">{r["clicks"]:,}</td>'
+                     f'<td class="num">{r["pos"] if r["pos"] is not None else "—"}</td></tr>' for r in rows)
+        out.append('<h3>Bing の主な検索語（表示回数順）</h3>'
+                   '<table><tr><th>検索語</th><th>表示回数</th><th>クリック</th><th>平均順位</th></tr>' + tr + '</table>')
+    else:
+        out.append('<p class="note">この月に始まる週の検索語は、まだ返っていません。</p>')
+    out.append('<p class="note">Bing の表示・クリックは、ウェブ・チャット（Copilot）・ニュース・画像・動画などの面の合計です'
+               '（2023年3月24日以降の Bing の仕様）。検索語は週ごと（週の始まりがこの月の週）で上位の語だけが返るため、'
+               '語の合計は日別の合計より少なくなります。'
+               f'表示が{MIN_N}回に満たないときはクリック率を出さず、回数だけを示します。</p>')
+    return "\n".join(out)
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     key = api_key()
     if not key:
         print("BING_WEBMASTER_API_KEY 未設定のため送りません")
-        print("BING_OK=unset")
+        print("BING_STATS_OK=unset" if "--stats" in argv else "BING_OK=unset")
         return 0
+    if "--stats" in argv:
+        return collect_stats(argv, key)
     if "--backfill" in argv:
         return backfill(argv, key)
     state, today = load_state(), date.today().isoformat()

@@ -95,3 +95,8 @@ data/compete/*
 !data/compete/corporate/
 !data/compete/subsidy/
 !data/compete/_usage.json
+# Bing の検索の成績（bing_webmaster.py --stats）。お客様の分（検索語・ページ・回数）は public に置かず、CI のキャッシュで持ち越す
+data/bing_stats/*
+!data/bing_stats/ai-lab.json
+!data/bing_stats/corporate.json
+!data/bing_stats/subsidy.json

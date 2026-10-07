@@ -2359,6 +2359,21 @@ def render(d, a):
         compete_pages = (f'<div class="sheet"><p class="note">競合との比較を作れませんでした: '
                          f'{str(e)[:80].replace("<", "")}</p></div>')
 
+    # Bing（ChatGPT の検索も使う索引）での表示・クリック・主な語を Google と並べる。成績を週次で積んでいない社
+    # （Bing の対象外）は節を出さない。見本（--demo）では Google 側が作った数字なので並べない
+    bing_pages = ""
+    if not d["demo"]:
+        try:
+            import bing_webmaster as _bw
+            _bh = _bw.report_html(SITE_ID, ym, THROUGH, {"imp": cur.get("impressions"), "clicks": cur.get("clicks")})
+            if _bh:
+                bing_pages = ('<div class="sheet"><div class="sec"><span class="no">07</span>'
+                              '<h2>Bing（ChatGPT の検索も使う索引）での表示・クリック・主な語</h2>'
+                              f'<div class="gold"></div></div>{_bh}</div>')
+        except Exception as e:
+            bing_pages = (f'<div class="sheet"><p class="note">Bing の成績を作れませんでした: '
+                          f'{str(e)[:80].replace("<", "")}</p></div>')
+
     # 来月つくるもの。盤面の空き・止まっている記事・食い合いから機械が作る。
     # 1本ずつ人が選ぶと同じマスに重なり、空いたマスが残る（実測で
     # クリニック21本に対し工務店のAIOは0本だった）
@@ -2928,6 +2943,8 @@ Googleの公式ガイドが効くものとして挙げているのも「独自�
 </div>
 
 {compete_pages}
+
+{bing_pages}
 
 <!-- ページ: 改善点の一覧と、その直し方 -->
 <div class="sheet">
