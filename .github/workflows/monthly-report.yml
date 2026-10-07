@@ -148,6 +148,19 @@ jobs:
           key: bing-stats-${{ github.run_id }}
           restore-keys: bing-stats-
 
+      # 実利用者の表示速度（週次の cwv_check の CrUX）。お客様の分だけキャッシュから戻す
+      - name: 実利用者の表示速度（お客様の分）を戻す
+        if: steps.gate.outputs.ready == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/cwv_crux
+            !data/cwv_crux/ai-lab.json
+            !data/cwv_crux/corporate.json
+            !data/cwv_crux/subsidy.json
+          key: cwv-crux-${{ github.run_id }}
+          restore-keys: cwv-crux-
+
       # レポートより先に測る（レポートの「競合と比べた現在地」がこの結果を読む）。月初だけ。
       # 新しく聞く回数をサイトごとの月の上限（既定60・sites/<id>.json の compete.ai_cap）で止め、超えたらキャッシュだけで出して知らせる
       - name: 競合比較の実測と負けている理由（月初）

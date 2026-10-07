@@ -754,6 +754,7 @@ jobs:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+          CRUX_API_KEY: ${{ secrets.CRUX_API_KEY }}   # 無ければ YOUTUBE_API_KEY で CrUX を聞く
           GBP_CLIENT_JSON: ${{ secrets.GBP_CLIENT_JSON }}
           GBP_TOKENS_JSON: ${{ secrets.GBP_TOKENS_JSON }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -805,6 +806,18 @@ jobs:
           rm -f gbp-client.json gbp-token-*.json
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi
+
+      # 実利用者の表示速度（cwv_check の CrUX）。お客様の分は .gitignore なので、月次レポートへキャッシュで渡す
+      - name: 実利用者の表示速度（お客様の分）を残す
+        if: always() && hashFiles('data/cwv_crux/*.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/cwv_crux
+            !data/cwv_crux/ai-lab.json
+            !data/cwv_crux/corporate.json
+            !data/cwv_crux/subsidy.json
+          key: cwv-crux-${{ github.run_id }}
 
       # お客様の競合比較（gaps.json）は public に置かないため、月次が残したキャッシュから戻す。
       # 自社だけ: 自社3サイトの分はコミット済みなのでキャッシュの対象から外す
