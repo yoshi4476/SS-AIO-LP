@@ -1019,6 +1019,18 @@ jobs:
           key: bing-submit-${{ github.run_id }}
           restore-keys: bing-submit-
 
+      # Bing の検索の成績（bing_webmaster.py --stats）。お客様の分は public に置かない（.gitignore）ので、キャッシュで週をまたぐ
+      - name: Bing の検索の成績（お客様の分）を戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/bing_stats
+            !data/bing_stats/ai-lab.json
+            !data/bing_stats/corporate.json
+            !data/bing_stats/subsidy.json
+          key: bing-stats-${{ github.run_id }}
+          restore-keys: bing-stats-
+
       - name: Bing Webmaster へ sitemap と更新URLを送る
         env:
           BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
@@ -1027,6 +1039,19 @@ jobs:
           out=$(python scripts/bing_webmaster.py --weekly 2>&1) || true
           echo "$out" | tail -15
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          # 検索の成績（日別の表示・クリック、週ごとの語・ページ）を積む。月次レポートが Google と並べる
+          python scripts/bing_webmaster.py --stats 2>&1 | tail -6 || true
+
+      - name: Bing の検索の成績（お客様の分）を残す
+        if: always() && hashFiles('data/bing_stats/*.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/bing_stats
+            !data/bing_stats/ai-lab.json
+            !data/bing_stats/corporate.json
+            !data/bing_stats/subsidy.json
+          key: bing-stats-${{ github.run_id }}-weekly
 
       - name: 見つかったものを集めて知らせる
         env:
@@ -1040,7 +1065,8 @@ jobs:
           # 量産と見られている兆候（Google の大量生成の不正使用の定義にもとづく）から、来週の1日の本数を決める
           python scripts/pace.py --write 2>&1 | tail -12 || true
           # content_yield の判定（統合を増やすサイト）と学びの台帳を残す。日次の執筆がこれを読む
-          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json; do if [ -e "$p" ]; then git add "$p"; fi; done
+          # Bing の検索の成績は自社3サイトの分だけ（お客様の分は .gitignore で外れる）
+          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet || {
             git commit -q -m "weekly: 記事本数の判定と結果からの学び $(date '+%Y-%m-%d')"
             git pull --rebase -q origin "${GITHUB_REF_NAME}" || true

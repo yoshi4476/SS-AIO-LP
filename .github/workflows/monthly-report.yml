@@ -135,6 +135,19 @@ jobs:
           key: compete-${{ github.run_id }}
           restore-keys: compete-
 
+      # Bing の検索の成績（週次の bing_webmaster.py --stats が積む）。お客様の分だけキャッシュから戻す（自社3サイトはコミット済み）
+      - name: Bing の検索の成績（お客様の分）を戻す
+        if: steps.gate.outputs.ready == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/bing_stats
+            !data/bing_stats/ai-lab.json
+            !data/bing_stats/corporate.json
+            !data/bing_stats/subsidy.json
+          key: bing-stats-${{ github.run_id }}
+          restore-keys: bing-stats-
+
       # レポートより先に測る（レポートの「競合と比べた現在地」がこの結果を読む）。月初だけ。
       # 新しく聞く回数をサイトごとの月の上限（既定60・sites/<id>.json の compete.ai_cap）で止め、超えたらキャッシュだけで出して知らせる
       - name: 競合比較の実測と負けている理由（月初）
