@@ -81,6 +81,21 @@ def rescue_day(now=None):
     return now.date().isoformat()
 
 
+def slot_day(cron, now=None):
+    """記事の枠が予定されていた日（JST）。GitHub の定時は3〜8時間遅れて始まり、夕方の枠が日付をまたいで書くと、
+    その日の本数が足りず翌日が多く見えていた（2026-10-07 の AI集客ラボの2本目は 17:07 の枠が翌0:28 に走った）。
+    cron（"分 時 * * *"・UTC）の直近の予定時刻を、始まった時刻からさかのぼって求める（定時は遅れることはあっても
+    早まらない）。読めない・手で動かした回は今日"""
+    now = now or datetime.now(timezone.utc)
+    m = re.match(r"^\s*(\d+)\s+(\d+)\s+\*\s+\*\s+\*\s*$", cron or "")
+    if not m:
+        return now.astimezone(JST).date().isoformat()
+    sched = now.astimezone(timezone.utc).replace(hour=int(m.group(2)), minute=int(m.group(1)), second=0, microsecond=0)
+    if sched > now:
+        sched -= timedelta(days=1)
+    return sched.astimezone(JST).date().isoformat()
+
+
 def makeups():
     try:
         return json.loads(MAKEUP.read_text(encoding="utf-8"))
@@ -747,6 +762,10 @@ def main():
     # 同日救済のワークフローが最初に1回だけ呼び、AUDIT_DAY に入れる（途中で日付が変わっても数える日を変えない）
     if sys.argv[1:] == ["--rescue-day"]:
         print(rescue_day())
+        return 0
+    # 記事の枠が予定されていた日（日次の枠のワークフローが AUDIT_DAY に入れる）
+    if len(sys.argv) == 3 and sys.argv[1] == "--slot-day":
+        print(slot_day(sys.argv[2]))
         return 0
     fix_kw = "--fix-kw" in sys.argv
     todo = []

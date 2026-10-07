@@ -233,6 +233,9 @@ def meta(k):
     return {"slug": k, "title": g("title"), "category": cat, "site": S.find_category_owner(cat) or ""}
 
 
+SHORT_FAILS = []   # この回にショートを作れなかった記事。失敗しても VIDEOS_OK=yes と出していた（2026-10-07）
+
+
 def shorts(ledger, limit, token, public):
     """横型の動画がある記事から、ショートの無いものを新しい順に作る。
     TikTok は審査前だと自動投稿が非公開になるため、mp4 を残すだけ（CI の成果物から手で上げる）"""
@@ -257,6 +260,9 @@ def shorts(ledger, limit, token, public):
                 print(f"   × short {slug[:40]}: 台本が検査に通りませんでした")
                 continue
             out = VM.OUT / f"{slug}.short.mp4"
+            # 置き場は通常の動画を作ったときにだけできていた。通常の動画が0本の回（YouTube で検索されていない記事
+            # だけの日）は ffmpeg が書き出せず、2026-10-07 はショートも0本になった
+            out.parent.mkdir(parents=True, exist_ok=True)
             sec = DS.make(sc, out)
             rec = {"date": date.today().isoformat(), "sec": round(sec), "title": sc.get("title", "")}
             # 同じ記事の通常の動画があれば、説明欄の先頭に続きとして置く（この印の付いたショートだけ）
@@ -270,7 +276,8 @@ def shorts(ledger, limit, token, public):
             made += 1
             print(f"   ○ short {slug[:40]:<40} {sec:.0f}秒" + (f" → youtube.com/shorts/{rec['youtube']}" if token else ""))
         except Exception as e:
-            print(f"   × short {slug[:40]}: {str(e)[:80]}")
+            SHORT_FAILS.append(slug)
+            print(f"   × short {slug[:40]}: {str(e)[:300]}")
             if "uploadLimitExceeded" in str(e):
                 # 1日のアップロード上限（API は手動より厳しい。2026-10-03 は約10本で当たった）。
                 # 続けても作っては失敗するだけなので、この回はやめる。翌日の回で続きから上がる
@@ -383,6 +390,8 @@ def main():
         LEDGER.parent.mkdir(parents=True, exist_ok=True)
         LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
     made_s = shorts(ledger, a.shorts, token, a.public) if a.shorts else 0
+    if SHORT_FAILS:
+        ok = False
     # 作り直しの判定で控えた基準（nums）も残す（動画を作らなかった回でも）
     LEDGER.parent.mkdir(parents=True, exist_ok=True)
     LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
