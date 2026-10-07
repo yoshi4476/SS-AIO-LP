@@ -106,6 +106,26 @@ def test_bing_stats_are_collected_and_merged():
           src[src.index("def collect_stats"):src.index("def month_totals")], True)
 
 
+def test_bing_stats_partial_answers():
+    """2026-10-07 の見直しで再現: 語だけ返った週のページを空で上書きしていた・日別が空で語だけ返ると落ちていた"""
+    import bing_webmaster as B
+    old = {"daily": {}, "weeks": {"2026-09-07": {
+        "queries": [{"key": "a", "imp": 3, "clicks": 0, "pos": 2}],
+        "pages": [{"key": "https://x.example/", "imp": 3, "clicks": 0, "pos": 2}]}}}
+    q = [{"Date": "/Date(1788739200000)/", "Query": "a", "Impressions": 4, "Clicks": 0, "AvgImpressionPosition": 2}]
+    s = B.merge_stats(old, [], q, [], "2026-10-07")
+    check("Bing の成績: 語だけ返った週は語だけ差し替え、ページは残す",
+          (s["weeks"]["2026-09-07"]["queries"][0]["imp"], [p["key"] for p in s["weeks"]["2026-09-07"]["pages"]]),
+          (4, ["https://x.example/"]))
+    with fake(B, {"GetQueryStats": q}, {"own": {"id": "own", "domain": "own.example"}}):
+        try:
+            B.collect_stats(["--stats"], "k")
+            got = sorted(B.load_stats("own")["weeks"])
+        except Exception as e:
+            got = type(e).__name__
+    check("Bing の成績: 日別が1日も無く語だけ返っても落ちずに積む", got, ["2026-09-07"])
+
+
 def test_bing_stats_privacy_and_wiring():
     def ignored(rel):
         r = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "-q", rel])

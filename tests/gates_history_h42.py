@@ -138,3 +138,24 @@ def test_form_verify_splits_retention():
     check("検算: 保持期間の外の食い違いは分けて出す", len(old), 2)
     bad, _ = FN.verify_forms(rows, {("20261006", "form_start"): 2}, date(2026, 8, 7))
     check("検算: 保持期間内の食い違いは不一致として出す", len(bad), 1)
+
+
+def test_form_field_ideas_match_the_field():
+    """2026-10-07 の見直しで再現: email_address / mail_address が住所（address）の候補になっていた"""
+    import funnel as FN
+    check("項目の候補: メールの項目名（email_address・mail_address・your-email）はメールの候補",
+          [FN.field_ideas(f)[0] for f in ("email_address", "mail_address", "your-email", "email")],
+          ["入力例を添える"] * 4)
+    import os
+    import subprocess
+    import sys
+    code = ("import sys; sys.path[:0] = [r'%s', r'%s']; import funnel as FN, gates_history_h42 as H; "
+            "FN.print_forms({'t': {'name': 't', 'ga4_property_id': '1'}}, 2, "
+            "rows_fn=lambda p, s, e: H._rows(5), totals_fn=lambda p, s, e: {})") % (ROOT / "scripts", ROOT / "tests")
+    env = {**os.environ, "PYTHONIOENCODING": "cp932", "PYTHONUTF8": "0"}
+    r = subprocess.run([sys.executable, "-c", code], capture_output=True, env=env, cwd=ROOT)
+    check("--forms: 出力が cp932（手元の Windows でファイル・パイプへ流す）でも「—」で落ちない",
+          (r.returncode, b"UnicodeEncodeError" in r.stderr), (0, False))
+    check("項目の候補: 住所・電話はそれぞれの候補のまま",
+          (FN.field_ideas("address")[1], FN.field_ideas("tel")[1]),
+          ("郵便番号から自動で入れる", "連絡方法でメールを選んだ人には聞かない"))

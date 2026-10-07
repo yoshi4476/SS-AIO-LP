@@ -197,6 +197,8 @@ FIELD_IDEAS = [
     (("company", "organization", "shop", "store"),
      ("任意にする（個人事業主や検討初期の人は書きにくい）", "届いた後に聞く")),
     (("tel", "phone"), ("任意にする", "連絡方法でメールを選んだ人には聞かない")),
+    # メールは住所（address）より先に見る。email_address / mail_address が住所の候補になっていた（2026-10-07 再現）
+    (("email", "mail"), ("入力例を添える", "形式の誤りを入力中に示す")),
     (("contact_way", "contact_when", "time"), ("任意にする", "届いた後に聞く")),
     (("message", "body", "detail", "inquiry", "content", "comment"),
      ("入力例を添える", "相談の種類（選択式）だけを必須にし、自由記述は任意にする")),
@@ -206,7 +208,6 @@ FIELD_IDEAS = [
     (("budget", "price", "cost"), ("金額の幅の選択式にする", "届いた後に聞く")),
     (("zip", "address", "pref", "city"), ("届いた後に聞く", "郵便番号から自動で入れる")),
     (("agree", "consent", "privacy"), ("同意の文を短くし、送信ボタンの直前に置く",)),
-    (("email", "mail"), ("入力例を添える", "形式の誤りを入力中に示す")),
     (("name",), ("入力例を添える（姓だけでも可と書く）",)),
 ]
 _FORM_CACHE = {}
@@ -393,6 +394,9 @@ def form_report_html(prop, ym, through=None, rows_fn=None):
 def print_forms(conf, months, rows_fn=None, totals_fn=None):
     """サイト × 月 × フォームの種類 × 項目。最後に、項目の次元を付けない取り方と件数を突き合わせる"""
     from datetime import date
+    # 手元の Windows で出力をファイル・パイプに流すと cp932 になり、割合の「—」（U+2014）で落ちていた（2026-10-07 再現）
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")
     t = date.today()
     yms = [f"{t.year + (t.month - i - 1) // 12}-{(t.month - i - 1) % 12 + 1:02d}" for i in range(months - 1, -1, -1)]
     s, e = month_range(yms[0])[0], month_range(yms[-1])[1]

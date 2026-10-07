@@ -14,6 +14,7 @@
     python scripts/outreach.py --track                          # mentions の台帳と突き合わせ、掲載を記録する
     python scripts/outreach.py --reply 09 "返事の要旨"           # 返事を記録する
     python scripts/outreach.py --stop 09                        # 配信停止の申し出。以後この媒体へは送らない
+    python scripts/outreach.py --resolve 09 sent|notsent        # 「送れたか不明」を Resend の画面で確かめた結果
 
 守ること:
   - **宛先・連絡先・下書き・送った記録は公開リポジトリに置かない**（data/outreach/ は .gitignore）。CI では使わない
@@ -36,7 +37,8 @@ import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.error import HTTPError, URLError
+from urllib.parse import quote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -55,7 +57,7 @@ OWN_HOSTS = ("ai.7senses.co.jp", "corp.7senses.co.jp", "lp.7senses.co.jp")
 
 STATUS = {"new": "未着手", "drafted": "下書きあり", "sent": "送った", "skipped": "やめた",
           "stopped": "配信停止", "hold": "保留（有料・条件あり）", "replied": "返事あり",
-          "published": "掲載された"}
+          "published": "掲載された", "unknown": "送れたか不明（Resend の画面で確かめて --resolve）"}
 
 # 持ち込む材料（md の「持ち込むもの」の語 → 当社の公開ページ）。上から順に見て、当たったものを全部使う
 MATERIAL = [("歯科", "research/dental-ai-sources"), ("クリニック", "research/clinic-ai-sources"),
@@ -80,6 +82,19 @@ BANNED = re.compile(r"www\.7senses\.co\.jp|株式会社セブンセンシズ|採
 URL_RE = re.compile(r"https?://[^\s）)」』>、。]+")
 MAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
 DIG = str.maketrans("０１２３４５６７８９．，％", "0123456789.,%")
+# 漢字の数（「八割」「三千社」）。数字の検査をすり抜けて、材料に無い割合・件数が書けていた（2026-10-07 再現）。
+# 単位の付くものだけを数にする（「十分」「一部」のような語は数にしない）。「一」だけのもの（一社・一度）は数えない
+KANJI_NUM = re.compile(r"[〇一二三四五六七八九十百千]+(?:[万億][〇一二三四五六七八九十百千]*)*"
+                       r"(?=[割倍件社人名問院店校軒台本個回年日%]|業種|種類|か月|ヶ月|カ月|パーセント|施設|万|億)")
+KANJI_DIGIT = {c: i for i, c in enumerate("〇一二三四五六七八九")}
+# 数字のあとの千・万・億（「3千社」「2万件」）は桁まで含めて1つの数にする
+UNIT_NUM = re.compile(r"(\d+(?:\.\d+)?)\s*([千万億])")
+UNIT = {"千": 1000, "万": 10 ** 4, "億": 10 ** 8}
+# 媒体の見分けに使えない共用の窓口（フォームの外部サービス・フリーメール）。ここではドメインでなく窓口そのもので見分ける。
+# ドメインで見分けると、Google フォームの宛先どうしが同じ媒体として90日止め合い、配信停止も巻き込む
+SHARED_HOSTS = ("forms.gle", "docs.google.com", "form.run", "forms.office.com", "tayori.com", "formzu.net",
+                "jotform.com", "form.jotform.com", "typeform.com", "ssl.form-mailer.jp", "gmail.com", "yahoo.co.jp",
+                "ymail.ne.jp", "outlook.com", "outlook.jp", "hotmail.com", "icloud.com", "me.com")
 
 
 # ---------------------------------------------------------------- 置き場
@@ -140,6 +155,29 @@ def _host(url):
     return h[4:] if h.startswith("www.") else h
 
 
+def media_key(media, contact=""):
+    """同じ媒体かを見分ける鍵（90日・1日の上限・配信停止の照合に使う）。
+    媒体のURLがあればそのドメイン。無ければ窓口のドメイン（メールは @ の後ろ）。
+    窓口が共用のサービス（Google フォーム・フリーメール）なら、窓口そのもの。
+    以前はメールだけの宛先で鍵が空になり、90日も配信停止も効かなかった（2026-10-07 再現）"""
+    for v in (media, contact):
+        v = (v or "").strip()
+        if not v:
+            continue
+        if MAIL_RE.fullmatch(v):
+            h = v.rsplit("@", 1)[1].lower()
+        else:
+            h = _host(v)
+        if not h:
+            continue
+        return v.lower() if h in SHARED_HOSTS else h
+    return ""
+
+
+def _key(t):
+    return t.get("domain") or media_key(t.get("media_url"), t.get("contact"))
+
+
 def _kind(bring, window):
     s = bring + window
     if "寄稿" in s:
@@ -176,8 +214,9 @@ def parse_md(text):
         media = urls[0] if urls else ""
         w_urls, w_mails = URL_RE.findall(window), MAIL_RE.findall(window)
         if not media:
-            media = by_base.get(base, "") or (w_urls[0] if w_urls else "")
-        by_base.setdefault(base, media)
+            media = by_base.get(base, "") or next((u for u in w_urls if _host(u) not in SHARED_HOSTS), "")
+        if media:
+            by_base.setdefault(base, media)
         if w_mails:
             channel, contact = "email", w_mails[0]
         elif re.search(r"会員登録|企業登録|予約|投げ込み|応募用紙|持参", window) or not w_urls:
@@ -188,7 +227,7 @@ def parse_md(text):
         hold = bool(re.search(r"有料|会員であることが条件", fee))
         verify = bool(re.search(r"検索結果|要確認|確かめる", window + reason + fee))
         rows.append({"id": num.zfill(2), "priority": prio, "group": group, "name": name,
-                     "media_url": media, "domain": _host(media or contact), "channel": channel,
+                     "media_url": media, "domain": media_key(media, contact), "channel": channel,
                      "contact": contact, "window": URL_RE.sub("", window).strip(" （）()"),
                      "kind": _kind(bring, window), "bring": bring, "fee": fee, "about": reason,
                      "verify_first": verify, "status": "hold" if hold else "new"})
@@ -205,8 +244,11 @@ def import_md(path):
         if old:
             status = old.get("status", "new")
             old.update({k: v for k, v in r.items() if k != "status"})
-            if status in ("new", "hold"):
+            # 下書きの後に費用が有料に変わったら保留へ戻す（下書きのまま承認・送信できていた。2026-10-07 再現）
+            if status in ("new", "hold") or (status == "drafted" and r["status"] == "hold"):
                 old["status"] = r["status"]
+                if old["status"] == "hold":
+                    old.pop("approval", None)
         else:
             _event(r, "imported", Path(path).name)
             d["targets"].append(r)
@@ -247,17 +289,46 @@ def material(t):
     return {"pages": [(u, x) for u, x in pages if x], "facts": [f["claim"] for f in facts_for_outreach()]}
 
 
+def _kanji_int(s):
+    """「三千二百」→ 3200、「二〇二六」→ 2026（位取りの字が無ければ1字ずつ並べた数）"""
+    if not re.search(r"[十百千万億]", s):
+        return int("".join(str(KANJI_DIGIT[c]) for c in s))
+    total = section = num = 0
+    for c in s:
+        if c in KANJI_DIGIT:
+            num = KANJI_DIGIT[c]
+        elif c in "十百千":
+            section += (num or 1) * {"十": 10, "百": 100, "千": 1000}[c]
+            num = 0
+        else:
+            total += ((section + num) or 1) * UNIT[c]
+            section = num = 0
+    return total + section + num
+
+
+def _num_key(f):
+    return str(int(f)) if float(f).is_integer() else repr(float(f))
+
+
 def numbers(text):
-    """文中の数字の集合（URL・メールの中は数えない。全角は半角に、桁区切りは外し、10.0 は 10 に）"""
+    """文中の数字の集合（URL・メールの中は数えない。全角は半角に、桁区切りは外し、10.0 は 10 に。
+    「3千」「2万」は桁まで含めた数に、単位の付く漢字の数（八割・三千社）も数にする）"""
     t = MAIL_RE.sub(" ", URL_RE.sub(" ", (text or "").translate(DIG)))
+    t = re.sub(r"(?<=\d),(?=\d{3})", "", t)
     out = set()
+    for m in UNIT_NUM.finditer(t):
+        out.add(_num_key(float(m.group(1)) * UNIT[m.group(2)]))
+    t = UNIT_NUM.sub(" ", t)
+    for m in KANJI_NUM.finditer(t):
+        if m.group() != "一":
+            out.add(_num_key(_kanji_int(m.group())))
     for m in re.finditer(r"\d+(?:[.,]\d+)*", t):
         s = m.group().replace(",", "")
         try:
             f = float(s)
         except ValueError:
             continue
-        out.add(str(int(f)) if f.is_integer() else repr(f))
+        out.add(_num_key(f))
     return out
 
 
@@ -312,9 +383,14 @@ def footer(t, c=None):
             f"TEL {c['tel']}（{c['hours']}）\n"
             f"Email {c['email']}\n"
             f"AI集客ラボ {c['sites']['ai-lab']}\n\n"
-            f"本メールは、貴媒体が公開している窓口（{where}）宛てに、{c['name']}がお送りしています。\n"
-            f"今後このようなご連絡が不要でしたら、本メールに「配信停止」とご返信いただくか、"
-            f"{c['email']} までお知らせください。以後お送りしません。")
+            + (f"本メールは、貴媒体が公開している窓口（{where}）宛てに、{c['name']}がお送りしています。\n"
+               f"今後このようなご連絡が不要でしたら、本メールに「配信停止」とご返信いただくか、"
+               f"{c['email']} までお知らせください。以後お送りしません。"
+               if t.get("channel") == "email" else
+               # フォームに貼る文面で「本メールにご返信」と書くと、返信できない窓口に返信を求めることになる
+               f"本連絡は、貴媒体が公開している窓口（{where}）から、{c['name']}がお送りしています。\n"
+               f"今後このようなご連絡が不要でしたら、{c['email']} まで「配信停止」とお知らせください。"
+               f"以後お送りしません。"))
 
 
 def has_sender_info(text, c=None):
@@ -443,8 +519,9 @@ def blockers(d, t, log=None, when=None):
     when = when or now()
     log = sent_log() if log is None else log
     why = []
-    if t.get("status") in ("stopped", "skipped", "hold"):
-        why.append(f"状況が「{STATUS[t['status']]}」")
+    # 送れるのは「下書きあり」だけ。送った・返事あり・掲載・送れたか不明の宛先は、承認が残っていても止める
+    if t.get("status") != "drafted":
+        why.append(f"状況が「{STATUS.get(t.get('status'), t.get('status'))}」")
     if not t.get("draft"):
         why.append("下書きが無い")
         return why
@@ -461,23 +538,36 @@ def blockers(d, t, log=None, when=None):
         why.append("送信者情報・配信停止の案内が無い")
     if t.get("channel") == "email" and not MAIL_RE.fullmatch(t.get("contact", "")):
         why.append("宛先のメールアドレスが無い")
-    stopped = {x["domain"] for x in d["targets"] if x.get("status") == "stopped" and x.get("domain")}
-    if t.get("domain") in stopped:
+    key, contact = _key(t), (t.get("contact") or "").lower()
+    if not key:
+        why.append("媒体を見分けられない（媒体のURLも窓口も無い）")
+    stopped = set()
+    for x in d["targets"]:
+        if x.get("status") == "stopped":
+            stopped |= {_key(x), (x.get("contact") or "").lower()} - {""}
+    if {key, contact} & stopped:
         why.append("同じ媒体から配信停止の申し出がある")
-    today = when.astimezone(JST).date().isoformat()
-    n_today = sum(1 for r in log if r.get("at", "")[:10] == today)
+    today = when.astimezone(JST).date()
+    n_today = sum(1 for r in log if _at(r) and _at(r).astimezone(JST).date() == today)
     if n_today >= DAILY_CAP:
         why.append(f"今日はもう{n_today}通送った（上限{DAILY_CAP}通）")
     for r in log:
-        if r.get("domain") and r.get("domain") == t.get("domain"):
-            try:
-                ago = when - datetime.fromisoformat(r["at"])
-            except (KeyError, ValueError):
-                continue
+        same = (key and r.get("domain") == key) or (contact and (r.get("contact") or "").lower() == contact)
+        if same and _at(r):
+            ago = when - _at(r)
             if ago < timedelta(days=COOLDOWN_DAYS):
                 why.append(f"同じ媒体へ{ago.days}日前に送った（{COOLDOWN_DAYS}日あける）")
                 break
     return why
+
+
+def _at(r):
+    """送った記録の時刻（時差つき）。時差の無い記録は日本時間とみなす"""
+    try:
+        v = datetime.fromisoformat(r["at"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    return v if v.tzinfo else v.replace(tzinfo=JST)
 
 
 def resend_mail(to, subject, text, reply_to):
@@ -486,12 +576,16 @@ def resend_mail(to, subject, text, reply_to):
     key, frm = SR.env("RESEND_API_KEY"), SR.env("LEAD_FROM_EMAIL", "AI集客ラボ <info@ai.7senses.co.jp>")
     if not key or "YOUR_" in key:
         raise RuntimeError("RESEND_API_KEY が未設定です")
+    # ヘッダの URI に生の日本語は置けない（RFC 2369・3986）。件名は %XX にする
+    unsub = f"<mailto:{reply_to}?subject={quote('配信停止')}>"
     payload = json.dumps({"from": frm, "to": [to], "subject": subject, "text": text, "reply_to": reply_to,
-                          "headers": {"List-Unsubscribe": f"<mailto:{reply_to}?subject=配信停止>"}}).encode()
+                          "headers": {"List-Unsubscribe": unsub}}).encode()
+    # 同じ宛先・同じ文面の送り直しを Resend 側で1通にまとめる（24時間）。応答を受け取れずに送り直したときの二重送信を防ぐ
+    idem = "outreach-" + hashlib.sha256(f"{to}\n{subject}\n{text}".encode("utf-8")).hexdigest()
     req = urllib.request.Request(
         "https://api.resend.com/emails", data=payload,
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json",
-                 "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"})
+                 "Idempotency-Key": idem, "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"})
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.loads(r.read().decode("utf-8") or "{}").get("id", "")
 
@@ -505,9 +599,33 @@ def send_approved(d, t, mailer=None, when=None):
     if why:
         return False, why
     subject, text = compose(t)
-    mid = (mailer or resend_mail)(t["contact"], subject, text, company()["email"])
+    try:
+        mid = (mailer or resend_mail)(t["contact"], subject, text, company()["email"])
+    except Exception as e:
+        if not sent_maybe(e):
+            raise
+        # 応答を受け取れなかった（読み取りのタイムアウト・切断・5xx）。届いている恐れがあるので、
+        # 下書きのまま残すと次に押したとき二重に送る。「不明」にして、人が確かめるまで送らない
+        t["status"] = "unknown"
+        t["unknown"] = {"at": (when or now()).isoformat(timespec="seconds"), "subject": subject,
+                        "approved_by": t.pop("approval", {}).get("by", "")}
+        _event(t, "send_unknown", f"{type(e).__name__}: {str(e)[:120]}")
+        save(d)
+        return False, [f"送れたか分かりません（{type(e).__name__}）。Resend の画面で確かめ、"
+                       f"--resolve {t['id']} sent か notsent で記録してください"]
     _record(d, t, "email", subject, mid, when)
     return True, []
+
+
+def sent_maybe(e):
+    """送信の例外のうち、相手に届いている恐れがあるもの。4xx（Resend が受け付けなかった）と、
+    つながる前の失敗（名前解決・接続拒否）は届いていない"""
+    if isinstance(e, HTTPError):
+        return e.code >= 500
+    if isinstance(e, URLError):
+        return isinstance(e.reason, TimeoutError)
+    # .env が無い（FileNotFoundError）は送る前の失敗
+    return isinstance(e, OSError) and not isinstance(e, FileNotFoundError)
 
 
 def mark_posted(d, t, when=None):
@@ -524,12 +642,69 @@ def mark_posted(d, t, when=None):
 
 def _record(d, t, channel, subject, mid, when=None):
     when = when or now()
-    _append_sent({"at": when.isoformat(timespec="seconds"), "id": t["id"], "domain": t.get("domain", ""),
-                  "channel": channel, "subject": subject, "message_id": mid, "approved_by": t["approval"]["by"]})
+    _append_sent({"at": when.isoformat(timespec="seconds"), "id": t["id"], "domain": _key(t),
+                  "contact": t.get("contact", ""), "channel": channel, "subject": subject, "message_id": mid,
+                  "approved_by": (t.get("approval") or {}).get("by", "")})
     t["status"] = "sent"
     t["sent_at"] = when.isoformat(timespec="seconds")
     _event(t, "sent", channel, when)
     save(d)
+
+
+def resolve(d, t, sent):
+    """「送れたか不明」を人が Resend の画面で確かめた結果を記録する。届いていたら送った記録へ
+    （90日・1日の上限に数える）、届いていなければ下書きへ戻す（承認はやり直し）"""
+    if t.get("status") != "unknown":
+        return False
+    u = t.pop("unknown", {})
+    if sent:
+        when = datetime.fromisoformat(u["at"]) if u.get("at") else now()
+        t["approval"] = {"by": u.get("approved_by", "")}
+        _record(d, t, "email", u.get("subject", ""), "", when)
+        t.pop("approval", None)
+    else:
+        t["status"] = "drafted"
+        _event(t, "resolved", "届いていないと確かめた")
+    save(d)
+    return True
+
+
+def submit(d, t, confirm, copy=None, open_url=None, mailer=None, when=None):
+    """承認の画面の「送る」の中身（画面から切り離して門で確かめる）。confirm(題, 文) -> bool。
+    返り値 (送れたか, 理由)。人が途中でやめたら (None, [])。
+
+    フォームの窓口は、上限・90日・配信停止を**コピーしてフォームを開く前に**確かめる。以前は人が貼って
+    送った後に確かめていたため、上限に当たると「送ったのに記録されない」（90日が効かない）になっていた"""
+    if t.get("verify_first") and not confirm("確認", "窓口のページを開いて、宛先が正しいことを確かめましたか？"):
+        return None, []
+    if not confirm("送る", f"{t['name']} へ、この文面で出します。よろしいですか？"):
+        return None, []
+    approve(t)
+    why = blockers(d, t, when=when)
+    if not why:
+        if t.get("channel") == "email":
+            try:
+                ok, why = send_approved(d, t, mailer, when)
+            except Exception as e:
+                ok, why = False, [f"送れませんでした: {e}"]
+            if ok:
+                return True, []
+        else:
+            s, b = compose(t)
+            (copy or (lambda x: None))(f"{s}\n\n{b}")
+            if t.get("contact"):
+                (open_url or (lambda u: None))(t["contact"])
+            if not confirm("フォーム", "件名と本文をコピーしてフォームを開きました。\n貼って送信し終えたら「はい」"):
+                t.pop("approval", None)
+                save(d)
+                return None, []
+            # 人がもう送った。条件は開く前に確かめたので、ここでは必ず記録する（記録しないと90日が効かない）
+            _record(d, t, t.get("channel", "form"), s, "", when)
+            return True, []
+    if t.get("status") == "drafted":
+        t.pop("approval", None)
+    save(d)
+    return False, why
 
 
 def skip(d, t, why=""):
@@ -555,8 +730,12 @@ def track(d=None, mentions=None):
             continue
         for m in mentions:
             host = _host(m.get("url", ""))
+            # 登録日の無い言及・自社ドメインの言及は、依頼の後に載ったと言えないので数えない
+            # （以前は登録日が無いと "9999" とみなし、依頼より前からある掲載を「掲載された」にしていた）
+            if not m.get("added") or m.get("third") is False:
+                continue
             if host == t["domain"] or host.endswith("." + t["domain"]):
-                if m.get("added", "9999") >= (t.get("sent_at") or "")[:10]:
+                if m["added"] >= (t.get("sent_at") or "")[:10]:
                     t["status"] = "published"
                     t["mention"] = m["url"]
                     _event(t, "published", m["url"])
@@ -591,9 +770,10 @@ def review():
     subj.pack(fill="x", padx=10, pady=6)
     body = tk.Text(root, wrap="char", font=("Yu Gothic UI", 10), height=24)
     body.pack(fill="both", expand=True, padx=10)
-    foot = tk.Label(root, anchor="w", justify="left", fg="#666", font=("Yu Gothic UI", 8))
+    # 承認するのは署名・配信停止の案内まで含めた全文なので、途中で切らずに折り返して全部見せる
+    foot = tk.Label(root, anchor="w", justify="left", fg="#666", font=("Yu Gothic UI", 8), wraplength=870)
     foot.pack(fill="x", padx=10)
-    note = tk.Label(root, anchor="w", justify="left", fg="#b00020")
+    note = tk.Label(root, anchor="w", justify="left", fg="#b00020", wraplength=870)
     note.pack(fill="x", padx=10, pady=4)
     bar = tk.Frame(root)
     bar.pack(fill="x", padx=10, pady=10)
@@ -614,7 +794,7 @@ def review():
         subj.insert(0, t["draft"]["subject"])
         body.delete("1.0", "end")
         body.insert("1.0", t["draft"]["body"])
-        foot.config(text="（送るときに機械が付ける署名・配信停止の案内）" + footer(t)[:160].replace("\n", " ") + "…")
+        foot.config(text="（送るときに機械が付ける署名・配信停止の案内）\n" + footer(t).strip())
         msgs = blockers(d, {**t, "approval": {"digest": _digest(t), "by": "-"}})
         if t.get("verify_first"):
             msgs.insert(0, "窓口は検索結果で確かめたもの。送る前に窓口のページを開いて確かめてください")
@@ -635,30 +815,17 @@ def review():
         if subj.get().strip() != t["draft"]["subject"] or body.get("1.0", "end").strip() != t["draft"]["body"]:
             note.config(text="文面が直されています。先に「直す」で保存してください")
             return
-        if t.get("verify_first") and not messagebox.askyesno("確認", "窓口のページを開いて、宛先が正しいことを確かめましたか？"):
-            return
-        if not messagebox.askyesno("送る", f"{t['name']} へ、この文面で出します。よろしいですか？"):
-            return
-        approve(t)
-        if t["channel"] == "email":
-            try:
-                ok, why = send_approved(d, t)
-            except Exception as e:
-                ok, why = False, [f"送れませんでした: {e}"]
-        else:
-            s, b = compose(t)
+        def copy(text):
             root.clipboard_clear()
-            root.clipboard_append(f"{s}\n\n{b}")
-            if t.get("contact"):
-                webbrowser.open(t["contact"])
-            if not messagebox.askyesno("フォーム", "件名と本文をコピーしてフォームを開きました。\n貼って送信し終えたら「はい」"):
-                t.pop("approval", None)
-                save(d)
-                return
-            ok, why = mark_posted(d, t)
+            root.clipboard_append(text)
+        ok, why = submit(d, t, messagebox.askyesno, copy, webbrowser.open)
+        if ok is None:
+            return
         if not ok:
-            t.pop("approval", None)
-            save(d)
+            if t.get("status") == "unknown":
+                messagebox.showwarning("送れたか不明", "\n".join(why))
+                nxt()
+                return
             note.config(text="出せません: " + " / ".join(why))
             return
         nxt()
@@ -707,6 +874,8 @@ def main():
     ap.add_argument("--track", action="store_true")
     ap.add_argument("--reply", nargs=2, metavar=("ID", "MEMO"))
     ap.add_argument("--stop", metavar="ID")
+    ap.add_argument("--resolve", nargs=2, metavar=("ID", "sent|notsent"),
+                    help="送れたか不明の宛先を、Resend の画面で確かめた結果で記録する")
     a = ap.parse_args()
 
     if a.imp:
@@ -732,6 +901,13 @@ def main():
         return 0
     if a.track:
         print(f"  掲載を記録 {track(d)}件")
+        return 0
+    if a.resolve:
+        t = find(d, a.resolve[0])
+        if not t or a.resolve[1] not in ("sent", "notsent") or not resolve(d, t, a.resolve[1] == "sent"):
+            print("  その番号の「送れたか不明」の宛先がありません（sent か notsent で指定）")
+            return 0
+        print(f"  {t['id']} を「{STATUS[t['status']]}」にしました")
         return 0
     if a.reply or a.stop:
         t = find(d, a.reply[0] if a.reply else a.stop)

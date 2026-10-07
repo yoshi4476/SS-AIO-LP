@@ -148,7 +148,7 @@ def test_outreach_is_approved_and_checked_before_sending():
 
         # 90日・上限・配信停止
         t2 = _target("05")
-        t2["draft"] = dict(GOOD)
+        t2["draft"], t2["status"] = dict(GOOD), "drafted"
         d["targets"].append(t2)
         O.approve(t2, "テスト")
         later = O.now() + timedelta(days=89)
@@ -157,7 +157,7 @@ def test_outreach_is_approved_and_checked_before_sending():
         check("同じ媒体へは90日送らない（89日目は止め、91日目は通す）",
               (any("90日" in w for w in why89), why91), (True, []))
         t3 = _target("06", domain="other.example.jp")
-        t3["draft"] = dict(GOOD)
+        t3["draft"], t3["status"] = dict(GOOD), "drafted"
         O.approve(t3, "テスト")
         d["targets"].append(t3)
         today = O.now().isoformat(timespec="seconds")
@@ -193,3 +193,174 @@ def test_outreach_is_approved_and_checked_before_sending():
           [u for u, _ in O.material(t)["pages"]], ["https://ai.7senses.co.jp/research/dental-ai-sources/"])
     check("材料: サービスの成績・店舗数の一次情報は使わない",
           any("3,200" in f or "継続率" in f for f in O.material(t)["facts"]), False)
+
+
+def _md(rows):
+    head = "## 1. 宛先\n\n| # | 優先 | 名称 | 窓口 | 持ち込むもの | 費用 | 理由 |\n|--|--|--|--|--|--|--|\n"
+    return head + "".join(f"| {r} |\n" for r in rows)
+
+
+def _drafted(O, i, **kw):
+    t = {**_target(i), "draft": dict(GOOD), "status": "drafted", **kw}
+    return t
+
+
+def test_outreach_holes_found_2026_10_07():
+    """2026-10-07 の敵対的な見直しで再現した穴（送信・Claude・Resend はすべて偽物）"""
+    import urllib.error
+    import urllib.request
+    import outreach as O
+    import send_reports as SR
+    print("\n■ 言及の依頼: 見直しで見つけた穴")
+    with sandbox(O) as tmp:
+        md = tmp / "a.md"
+        # 1. メールだけの宛先（名称にも窓口にもURLが無い）。以前は媒体の鍵が空で、90日も配信停止も効かなかった
+        md.write_text(_md(["1 | A | メールだけの媒体 | news@mailonly.example.jp | 歯科の調査 | 無料 | x",
+                           "2 | A | 同じ窓口の別名 | news@mailonly.example.jp | 歯科の調査 | 無料 | x",
+                           "3 | A | フォームだけの媒体 | https://forms.gle/aaa | 歯科の調査 | 無料 | x",
+                           "4 | A | 別のフォームだけの媒体 | https://forms.gle/bbb | 歯科の調査 | 無料 | x"]),
+                      encoding="utf-8")
+        O.import_md(md)
+        d = O.load()
+        by = {t["id"]: t for t in d["targets"]}
+        check("媒体の鍵: メールだけの宛先は @ の後ろ、共用のフォームは窓口そのもの（Google フォームどうしを同じ媒体にしない）",
+              [by[i]["domain"] for i in ("01", "03", "04")],
+              ["mailonly.example.jp", "https://forms.gle/aaa", "https://forms.gle/bbb"])
+        for t in d["targets"]:
+            t["draft"], t["status"] = dict(GOOD), "drafted"
+        sent = []
+        mailer = lambda to, s, b, r: sent.append(to) or "m"
+        O.approve(by["01"], "テスト")
+        check("メールだけの宛先も送れる", O.send_approved(d, by["01"], mailer)[0], True)
+        O.approve(by["02"], "テスト")
+        check("同じ宛先へは、媒体名が違っても90日送らない",
+              any("90日" in w for w in O.blockers(d, by["02"])), True)
+        check("送った宛先は承認が残っていても送らない（下書きあり以外は止める）",
+              any("状況" in w for w in O.blockers(d, by["01"])), True)
+        O.approve(by["04"], "テスト")
+        check("別の Google フォームの媒体は止め合わない", O.blockers(d, by["04"], log=[]), [])
+        by["03"]["status"] = "stopped"
+        check("配信停止は同じ窓口にだけ効く（同じフォーム・サービスの別媒体は巻き込まない）",
+              (O.blockers(d, by["04"], log=[]), any("配信停止" in w for w in O.blockers(d, {**by["03"], "status": "drafted",
+                                                                                         "id": "99"}, log=[]))),
+              ([], True))
+
+        # 2. 送れたか分からない失敗（読み取りのタイムアウト）。以前は下書きのまま残り、もう一度押すと二重に送れた
+        t = _drafted(O, "10", domain="t10.example.jp", contact="a@t10.example.jp")
+        d["targets"].append(t)
+        O.approve(t, "テスト")
+
+        def timeout(*a):
+            raise TimeoutError("read timed out")
+        ok, why = O.send_approved(d, t, timeout)
+        O.approve(t, "テスト")
+        check("送れたか不明: 「不明」にして送らない（送った記録には入れない）",
+              (ok, t["status"], any("状況" in w for w in O.blockers(d, t)), len(O.sent_log())),
+              (False, "unknown", True, 1))
+        n0 = len(O.sent_log())
+        O.resolve(d, t, sent=True)
+        check("送れたか不明 → 届いていたと確かめたら送った記録へ（90日・上限に数える）",
+              (t["status"], len(O.sent_log()) - n0, O.sent_log()[-1]["approved_by"]), ("sent", 1, "テスト"))
+        t11 = _drafted(O, "11", domain="t11.example.jp", contact="a@t11.example.jp")
+        d["targets"].append(t11)
+        O.approve(t11, "テスト")
+        O.send_approved(d, t11, timeout)
+        O.resolve(d, t11, sent=False)
+        check("送れたか不明 → 届いていなければ下書きへ戻し、承認はやり直し", (t11["status"], "approval" in t11),
+              ("drafted", False))
+
+        def rejected(*a):
+            raise urllib.error.HTTPError("https://api.resend.com/emails", 422, "bad", {}, None)
+        O.approve(t11, "テスト")
+        try:
+            O.send_approved(d, t11, rejected)
+            raised = False
+        except urllib.error.HTTPError:
+            raised = True
+        check("Resend が受け付けなかった（4xx）は送った記録にも不明にもしない",
+              (raised, t11["status"], len(O.sent_log()) - n0), (True, "drafted", 1))
+
+        # 3. 承認の画面の「送る」（submit）: フォームは上限・90日を開く前に確かめる
+        f = _drafted(O, "12", channel="form", domain="f12.example.jp")
+        f["contact"] = "https://f12.example.jp/form"
+        d["targets"].append(f)
+        opened, copied = [], []
+        full = [{"at": O.now().isoformat(timespec="seconds"), "id": str(i), "domain": f"x{i}.example"}
+                for i in range(O.DAILY_CAP)]
+        old_log = O.sent_log
+        O.sent_log = lambda: full
+        ok, why = O.submit(d, f, lambda *a: True, copied.append, opened.append)
+        O.sent_log = old_log
+        check("フォーム: 上限に当たっていればコピーもフォームを開くこともしない（送った後に記録できない、を防ぐ）",
+              (ok, copied, opened, any("上限" in w for w in why), "approval" in f), (False, [], [], True, False))
+        ok, _ = O.submit(d, f, lambda title, text: title != "フォーム", copied.append, opened.append)
+        check("フォーム: 貼って送っていなければ記録せず、承認も外す", (ok, f["status"], "approval" in f, len(opened)),
+              (None, "drafted", False, 1))
+        n1 = len(O.sent_log())
+        ok, _ = O.submit(d, f, lambda *a: True, copied.append, opened.append)
+        check("フォーム: 貼って送ったら必ず記録する", (ok, f["status"], len(O.sent_log()) - n1), (True, "sent", 1))
+        e = _drafted(O, "13", domain="e13.example.jp", contact="a@e13.example.jp")
+        d["targets"].append(e)
+        sent.clear()
+        check("メール: 人が「送る」でやめたら送らない",
+              (O.submit(d, e, lambda title, text: title != "送る", mailer=mailer)[0], sent), (None, []))
+        check("メール: 人が確かめたら承認して送る", (O.submit(d, e, lambda *a: True, mailer=mailer)[0], sent),
+              (True, ["a@e13.example.jp"]))
+
+        # 4. 取り込み直しで費用が有料になった下書きは保留へ戻す
+        md.write_text(_md(["7 | A | 例 https://m7.example.jp/ | news@m7.example.jp | 歯科の調査 | 無料 | x"]), encoding="utf-8")
+        O.import_md(md)
+        d = O.load()
+        t7 = O.find(d, "07")
+        t7["draft"], t7["status"] = dict(GOOD), "drafted"
+        O.save(d)
+        md.write_text(md.read_text(encoding="utf-8").replace("| 無料 |", "| 有料（月3万円） |"), encoding="utf-8")
+        O.import_md(md)
+        check("取り込み直し: 下書きの後に有料になったら保留へ戻す", O.find(O.load(), "07")["status"], "hold")
+
+    # 5. 漢字の数・「3千」が材料の数字の検査をすり抜けていた
+    check("検査: 漢字の数（八割・二百社）と「3千社」を材料に無い数字として止める",
+          [bool(O.inspect(GOOD["subject"], GOOD_BODY + x, MAT)) for x in
+           ("\n歯科医院の八割がAIで探されています。", "\n二百社が導入しました。", "\n3千社が対象です。")],
+          [True, True, True])
+    check("検査: 材料にある数の漢字（四つのAI）と、数でない語（十分・一部）は止めない",
+          O.inspect(GOOD["subject"], GOOD_BODY + "\n四つのAIに聞き、十分に確かめ、一部を公開しました。", MAT), [])
+    check("数字の読み: 漢字の数・千万の単位", O.numbers("三千二百件・二〇二六年・2.4万件・八割"),
+          {"3200", "2026", "24000", "8"})
+
+    # 6. Resend の呼び方: List-Unsubscribe に生の日本語を置かない・送り直しを1通にまとめる鍵を付ける
+    cap = {}
+
+    class Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return b'{"id": "x"}'
+    old = (urllib.request.urlopen, SR.env)
+    urllib.request.urlopen = lambda req, timeout=0: cap.setdefault("req", req) and Resp()
+    SR.env = lambda k, default="": {"RESEND_API_KEY": "re_test"}.get(k, default)
+    try:
+        O.resend_mail("a@b.example", "件名", "本文", "info@example.jp")
+    finally:
+        urllib.request.urlopen, SR.env = old
+    import json
+    hd = json.loads(cap["req"].data)["headers"]["List-Unsubscribe"]
+    check("Resend: List-Unsubscribe は ASCII だけ（件名は %XX）・Idempotency-Key を付ける",
+          (hd.isascii(), "subject=%E9%85%8D" in hd, bool(cap["req"].get_header("Idempotency-key"))), (True, True, True))
+
+    # 7. 掲載の照合: 登録日の無い言及を「依頼の後に載った」と数えない
+    t = {**_target("20", domain="m20.example.jp"), "status": "sent", "sent_at": "2026-10-07T10:00:00+09:00"}
+    with sandbox(O):
+        check("掲載の照合: 登録日の無い言及・自社の言及は数えない",
+              O.track({"targets": [t]}, [{"url": "https://m20.example.jp/old"},
+                                         {"url": "https://m20.example.jp/own", "added": "2999-01-01", "third": False}]),
+              0)
+
+    # 8. フォームに貼る文面で「本メールにご返信」と書かない（返信できない窓口）
+    fb = O.footer({"channel": "form", "contact": "https://f.example/"})
+    check("署名: フォームの文面は「本メールにご返信」と書かず、配信停止の窓口は会社のメール",
+          ("本メール" in fb, O.has_sender_info(fb)), (False, True))

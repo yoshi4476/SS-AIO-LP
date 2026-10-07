@@ -564,7 +564,13 @@ def merge_stats(old, rt, qs, ps, today):
                      "pos": _pos(r.get("AvgImpressionPosition"))})
     weeks = dict(s.get("weeks") or {})
     for d, w in fresh.items():
-        weeks[d] = {kind: sorted(v, key=lambda x: (-x["imp"], -x["clicks"], x["key"])) for kind, v in w.items()}
+        # 差し替えるのは今回その週に返った種類だけ。語だけ返った週のページを空で上書きしていた（2026-10-07 再現）。
+        # 語とページは API の窓の端の週がずれることがある
+        wk = dict(weeks.get(d) or {"queries": [], "pages": []})
+        for kind, v in w.items():
+            if v:
+                wk[kind] = sorted(v, key=lambda x: (-x["imp"], -x["clicks"], x["key"]))
+        weeks[d] = wk
     s.update(daily=dict(sorted(daily.items())), weeks=dict(sorted(weeks.items())), updated=today)
     return s
 
@@ -584,6 +590,9 @@ def load_stats(sid):
 def collect_stats(argv, key):
     """送る対象と同じ社（send_cfgs）の成績を取って積む。同意の無いお客様の社は取らない"""
     only = argv[argv.index("--site") + 1] if "--site" in argv and len(argv) > argv.index("--site") + 1 else ""
+    # 手元の Windows で出力を流すと cp932 になり、「未登録 — ドメイン」の「—」で印（BING_STATS_OK）の前に落ちる
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")
     today = date.today().isoformat()
     results, bad = [], []
     for sid, cfg in send_cfgs(key).items():
@@ -610,8 +619,10 @@ def collect_stats(argv, key):
         if not (rt or qs or ps):
             print(f"  {sid}: Bing から成績がまだ返っていません（所有権の確認から日が浅い・表示が無い。積んだ日別 {len(days)}日）")
             continue
+        # 日別が1日も無く語・ページだけ返ることがある（days[0] で落ちていた。2026-10-07 再現）
+        span = f"（{days[0]}〜{days[-1]}）" if days else ""
         print(f"  {sid}: 今回 日別 {len(rt)}日・語 {len(qs)}行・ページ {len(ps)}行 → 積んだ日別 {len(days)}日"
-              f"（{days[0]}〜{days[-1]}）・週 {len(s['weeks'])}週")
+              f"{span}・週 {len(s['weeks'])}週")
     for b in dict.fromkeys(bad):
         print(b)
     if bad:
