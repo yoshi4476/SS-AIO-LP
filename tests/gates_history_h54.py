@@ -101,14 +101,16 @@ def test_previous_day_shortfall_is_counted_and_written():
     with patched(D, articles_by_site=lambda: arts, today_iso=lambda: today), \
             patched(pace, quota=lambda sid: 1 if sid == "client-one" else 2), audit_day(day):
         _, out = _quiet(D.check_volume, todo)
-    want = [f"TODO: own-zero の記事を前日（{day}）の不足分としてあと 2 本作成して公開する",
-            f"TODO: client-one の記事を前日（{day}）の不足分としてあと 1 本作成して公開する"]
-    check("救済（前日）: 足りない社だけ、社ごとの1日の本数ぶん書き足す（上限・監修待ち・書き足し済みは数える）",
+    want = [f"TODO: own-zero の記事を前日（{day}）の不足分としてあと 2 本作成して公開する"]
+    check("救済（前日）: 足りない社だけ書き足す（上限・監修待ち・書き足し済みは数える）",
           [t.split("（date:")[0] for t in todo], want)
+    # 1日1本に絞っている社（CONFLUX はオーナーの指示）は書き足さない。書き足すと暦の上で1日2本になる
+    check("救済（前日）: 1日の本数を絞っている社は前日の分を書き足さない",
+          ("client-one は1日1本に絞っているため" in out, any("client-one" in t for t in todo)), (True, False))
     check("救済（前日）: 公開日は今日のまま書くよう指示する（前日の日付で出さない）",
           all("date: は公開する今日の日付" in t for t in todo), True)
     now, _ = D.split_todo(todo + ["TODO: x を品質基準まで直して score を更新し、再ビルドする"])
-    check("救済（前日）: 書き足しの TODO は今日やることの先頭に来る", now[:2] == todo, True)
+    check("救済（前日）: 書き足しの TODO は今日やることの先頭に来る", now[:len(todo)] == todo, True)
     # 前日分として今日書いた記事を、今日の本数に二重に数えない（今日の枠の2本はそのまま書かれる）
     todo2 = []
     with patched(D, articles_by_site=lambda: {"own-made": arts["own-made"]}, today_iso=lambda: today,

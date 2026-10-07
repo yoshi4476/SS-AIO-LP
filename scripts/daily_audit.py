@@ -268,7 +268,11 @@ def check_volume(todo):
               f"  （累計 {len(arts)}本）{yet}")
         # 公開の時刻より前に「不足」と言うと、救済が先回りして1日分を
         # まとめて書こうとする。時刻が来たぶんだけを不足として数える
-        if n < due and past:
+        if n < due and past and want < DAILY_TARGET:
+            # 1日の本数を絞っている社（オーナーの指示で1日1本の CONFLUX・量産の兆候で落とした週）は、前日の分を
+            # 今日書き足さない。書き足すと暦の上で1日2本になり、絞った理由（指示・量産の見え方）に反する
+            print(f"     {sid} は1日{want}本に絞っているため、前日の不足分は書き足しません")
+        elif n < due and past:
             todo.append(f"TODO: {sid} の記事を前日（{day}）の不足分としてあと {due - n} 本作成して公開する"
                         "（date: は公開する今日の日付。publish_flow が前日の分として記録する）")
         elif n < due:
