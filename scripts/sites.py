@@ -93,12 +93,20 @@ OPERATOR_MARKS = ("原口 優", "原口優", "セブンセンシズ", "SEVEN SEN
                   "G-ran", "7senses.co.jp")
 
 
-def operator_leaks(text):
-    """本文・題名に残った運用会社の名前と、自社サイトのカテゴリへの内部リンク（お客様のドメインでは404）"""
+def operator_leaks(text, cfg=None):
+    """本文・題名に残った運用会社の名前と、自社サイトのカテゴリへの内部リンク（お客様のドメインでは404）。
+
+    cfg の operator_ok に書いた語（運用者がその社にだけ許した当社の表記）は、外してから見る。
+    CONFLUX は「ラクシフトAIは、セブンセンシズ株式会社が提供しています」と書いてよい（2026-10-08 運用者の決定）。
+    許すのは書いた語そのものだけで、代表者名・社名の略・AI集客ラボ・当社のドメインは止める"""
     import re
-    hit = [m for m in OPERATOR_MARKS if m in (text or "")]
+    text = text or ""
+    for ok in (cfg or {}).get("operator_ok") or []:
+        if ok:
+            text = text.replace(ok, "")
+    hit = [m for m in OPERATOR_MARKS if m in text]
     cats = {c for sid in own_ids() for c in load(sid).get("categories", {})}
-    for path in re.findall(r"""(?:\]\(|href=["'])(/[^)"'\s#?]*)""", text or ""):
+    for path in re.findall(r"""(?:\]\(|href=["'])(/[^)"'\s#?]*)""", text):
         first = path.strip("/").split("/")[0]
         if first in cats:
             hit.append(f"自社サイトへのリンク {path}")

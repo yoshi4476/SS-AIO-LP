@@ -103,7 +103,8 @@ def record(slugs, by=REVIEWER, note=""):
 
 
 def reviewer_for(slug):
-    """その記事の監修者。お客様のサイトの記事なら company.json の監修者"""
+    """その記事の監修者。お客様のサイトの記事なら、サイト設定の review_by（その社のサイトが出す監修の表示と同じ並び。
+    CONFLUX は「YW（CONFLUX PARTNERS）・セブンセンシズ株式会社」）、無ければ company.json の監修者"""
     try:
         sys.path.insert(0, str(ROOT / "scripts"))
         import sites
@@ -111,6 +112,9 @@ def reviewer_for(slug):
         m = re.search(r"^category:\s*(\S+)", t, re.M)
         sid = sites.find_category_owner(m.group(1)) if m else None
         if sid and sites.is_client(sid):
+            names = [n for n in (sites.load_all().get(sid) or {}).get("review_by") or [] if n]
+            if names:
+                return "・".join(names)
             c = json.loads((ROOT / "data" / "clients" / sid / "company.json").read_text(encoding="utf-8"))
             return (c.get("supervisor") or {}).get("name") or f"{sid} の監修者"
     except (OSError, ValueError):

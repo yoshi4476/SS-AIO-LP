@@ -617,12 +617,15 @@ def _md_block(html):
     return "\n\n" + re.sub(r"\n\s*\n", "\n", html.strip()) + "\n\n"
 
 
-def _journal_box(cls, title, inner):
+def _journal_box(cls, title, inner, label=""):
+    """先方の枠（box-note・box-warn）。label は枠の札の文字（先方の CSS が data-label を札に描く。無ければ
+    box-note は「ポイント」、box-warn は「注意」）。札と同じ文を題（box-title）として中に重ねない"""
     inner = re.sub(r"^\s*(?:<br\s*/?>\s*)+", "", inner.strip())
     if not re.match(r"<(p|ul|ol|table|div)\b", inner):
         inner = f"<p>{inner}</p>"
-    head = f'<p class="box-title">{title}</p>\n' if title else ""
-    return _md_block(f'<div class="{cls}">\n{head}{inner}\n</div>')
+    head = f'<p class="box-title">{title}</p>\n' if title and title != label else ""
+    attr = f' data-label="{label}"' if label else ""
+    return _md_block(f'<div class="{cls}"{attr}>\n{head}{inner}\n</div>')
 
 
 def _journal_cta(href, label, text, tag=""):
@@ -725,9 +728,10 @@ def journal_md(cfg, meta, body, dialect):
             break
         body = new
     body = _journal_intro(body, cfg, meta)
+    # 定義は先方の box-note の札を「定義」にする（先方の globals.css が data-label を札に描く。2026-10-08 先方の指定）
     body = re.sub(r'<div class="definition-box">(.*?)</div>',
-                  lambda m: _journal_box("box-note", "定義", re.sub(r'<span class="term">(.*?)</span>', r"<strong>\1</strong>",
-                                                                   m.group(1), flags=re.S)), body, flags=re.S)
+                  lambda m: _journal_box("box-note", "", re.sub(r'<span class="term">(.*?)</span>', r"<strong>\1</strong>",
+                                                               m.group(1), flags=re.S), label="定義"), body, flags=re.S)
 
     def warn(m):
         inner, title = m.group(1).strip(), ""
@@ -761,14 +765,16 @@ def journal_md(cfg, meta, body, dialect):
         i += 1
     body = re.sub(r"\n{3,}", "\n\n", md_inline_to_html("\n".join(out), em="strong")).strip("\n") + "\n"
     fm = {k: meta[k] for k in ("slug", "title", "description", "category", "date") if meta.get(k) not in (None, "")}
-    fm["updated"] = meta.get("modified") or meta.get("date")
+    # 更新日は modified、狙う語は keyword（先方の docs/journal-pipeline.md の書き方。先方は updated・tags も読むが、
+    # 書き方の説明と食い違うと、先方が読む欄を絞ったときに更新日と狙う語が黙って公開日と題に変わる）
+    fm["modified"] = meta.get("modified") or meta.get("date")
     try:
         brief = json.loads((ROOT / "data" / "clients" / cfg["id"] / "brief.json").read_text(encoding="utf-8"))
     except (OSError, ValueError):
         brief = {}
     fm["author"] = dialect.get("author") or (brief.get("author") or {}).get("name") or ""
     if meta.get("keyword"):
-        fm["tags"] = [str(meta["keyword"])]
+        fm["keyword"] = str(meta["keyword"])
     return fm, body
 
 
@@ -785,6 +791,9 @@ def journal_problems(fm, body, dialect):
              if not re.match(r"\s*(目次|この記事の要点|よくある質問|出典|参考)", h)]
     if len(heads) < 3:
         out.append(f"見出し（H2）が3つ未満（{len(heads)}）")
+    # 先方は layout（Measure）で計測する。本文の計測は二重に数え、ページ内の移動では動かない
+    if re.search(r"<script\b(?![^>]*application/ld\+json)", body):
+        out.append("本文に計測などのスクリプトがあります（先方は layout で計測する）")
     bare = _PROTECT.sub("", body)
     if "**" in bare:
         out.append("** が残っています（先方の変換では記号のまま出ます）")
@@ -2211,9 +2220,10 @@ def main():
         raise SystemExit(f"カテゴリ '{meta['category']}' は {cfg['id']} に定義されていません"
                          f"（候補: {', '.join(cfg.get('categories', {}))}）")
     if sites_mod.is_client(cfg["id"]):
-        # お客様の記事に運用会社の名前・実績・自社サイトへのリンクを出さない（監修者はお客様ご本人）
+        # お客様の記事に運用会社の名前・実績・自社サイトへのリンクを出さない（監修者はお客様ご本人）。
+        # その社の operator_ok に書いた語だけは通す（CONFLUX の「セブンセンシズ株式会社」。2026-10-08 運用者の決定）
         leak = sites_mod.operator_leaks(f"{meta.get('title', '')}\n{meta.get('description', '')}\n"
-                                        f"{json.dumps(meta.get('faq') or [], ensure_ascii=False)}\n{body}")
+                                        f"{json.dumps(meta.get('faq') or [], ensure_ascii=False)}\n{body}", cfg)
         # ヒアリングシートの「使ってはいけない表現」（医療広告・景表法など）。シートで聞いて設定に
         # 書いていたのに、どこも読んでいなかった
         leak += [f"使えない表現「{w}」" for w in ((cfg.get("rules") or {}).get("ng_words") or [])

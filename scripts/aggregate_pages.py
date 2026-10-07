@@ -235,7 +235,7 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
     for p in out:
         p["html"] = drop_title_heading(_LINK.sub(fix, p["html"]), p["title"])
         p["url"] = page_url(cfg, p["path"])
-        leak = S.operator_leaks(p["html"] + json.dumps(p["jsonld"], ensure_ascii=False)) if client else []
+        leak = S.operator_leaks(p["html"] + json.dumps(p["jsonld"], ensure_ascii=False), cfg) if client else []
         if leak:
             print(f"要対応: {cfg['id']} の {p['path']} に運用会社の名前があるため作りません（{' / '.join(leak[:3])}）")
             continue

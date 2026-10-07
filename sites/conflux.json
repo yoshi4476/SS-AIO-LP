@@ -110,6 +110,8 @@
     "admin_added": ""
   },
   "url_prefix": "/journal",
+  "trailing_slash": false,
+  "_trailing_slash_note": "先方は Next.js で、/journal/<slug>/ は /journal/<slug> へ 308 で転送する（2026-10-08 本番で確認）。記事の正規の URL・サイトマップ・本文の内部リンクも末尾スラッシュ無し。通知・配信の記録・レポートの URL を正規の形にそろえる（コーポレートと同じ）",
   "content_dir": "content/journal",
   "images_dir": "public/images/journal",
   "md_dialect": {
@@ -124,6 +126,15 @@
     ],
     "_why": "先方の scripts/build-journal.mjs（fromPipeline）が読む形で置く（publish.journal_md）。当社の原稿のままでは score があり author の無い記事で先方の組み立てが落ち、** と当社の部品が素のまま出ていた（2026-10-08）。forbidden は先方の FORBIDDEN と同じ語（1本でも入ると先方のサイト全体の組み立てが止まる）"
   },
+  "operator_ok": [
+    "セブンセンシズ株式会社"
+  ],
+  "_operator_ok_note": "運用者の決定（2026-10-08）: CONFLUX の記事は本文に当社名が出てよい（例「ラクシフトAIは、セブンセンシズ株式会社が提供しています」。書き換えない）。お客様の記事に当社名を入れない検査（sites.operator_leaks。publish.py の配信の入口とまとめのページ）が、この社だけこの語を通す。代表者名・社名の略・AI集客ラボ・当社のドメインは今までどおり止める",
+  "review_by": [
+    "YW（CONFLUX PARTNERS）",
+    "セブンセンシズ株式会社"
+  ],
+  "_review_by_note": "運用者の決定（2026-10-08）: 自動化の記事の監修は両方の名前で表示する（先方の src/content/journal-credit.ts の PIPELINE_SUPERVISORS と同じ並び）。監修の記録（editorial_review --approve）の名義もこの並び。代表者の実名は書かない",
   "diagram_colors": {
     "ink": "#0E0F12",
     "accent": "#C2410C",

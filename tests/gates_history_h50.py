@@ -134,10 +134,11 @@ def test_journal_md_is_what_the_receiver_reads():
             fm = __import__("yaml").safe_load(md.split("---\n")[1])
             body = md.split("---\n", 2)[2]
             got = _from_pipeline(body)
-            check("先方の「自動化の記事」の条件: score が無く date と author（YW）がある・更新日は updated",
-                  ["score" in fm, "score_breakdown" in fm, "diagrams" in fm, "modified" in fm, str(fm.get("date")),
-                   str(fm.get("updated")), fm.get("author"), fm.get("tags")],
-                  [False, False, False, False, "2026-10-07", "2026-10-08", "YW（試験）", ["業務 自動化"]])
+            # 更新日と狙う語は先方の書き方（modified・keyword）に合わせた（2026-10-08 の結合の確認・gates_history_h55）
+            check("先方の「自動化の記事」の条件: score が無く date と author（YW）がある・更新日は modified・狙う語は keyword",
+                  ["score" in fm, "score_breakdown" in fm, "diagrams" in fm, "updated" in fm, str(fm.get("date")),
+                   str(fm.get("modified")), fm.get("author"), fm.get("keyword")],
+                  [False, False, False, False, "2026-10-07", "2026-10-08", "YW（試験）", "業務 自動化"])
             check("結論の枠は本文の冒頭の結論（説明文ではない）・本文の頭に同じ文を残さない",
                   [got["answer"], got["answer"] in _strip(got["md"])],
                   ["業務の自動化は、手順の決まった業務を1つ選んで小さく試すと失敗しにくくなります。", False])
@@ -158,8 +159,8 @@ def test_journal_md_is_what_the_receiver_reads():
             classes = sorted({c for cs in re.findall(r'class="([^"]+)"', bare) for c in cs.split()})
             check("部品は先方のもの（box-note・box-warn・cta-inline・table-wrap）だけ",
                   [c for c in classes if c not in ("box-note", "box-warn", "box-title", "cta-inline", "table-wrap", "marker")], [])
-            check("定義は box-note（題「定義」）、注意は box-warn（「注意:」を外した題）、赤字は太字",
-                  ['<div class="box-note">\n<p class="box-title">定義</p>\n<p><strong>人月とは</strong>' in got["md"],
+            check("定義は box-note（札を「定義」にする data-label。gates_history_h55）、注意は box-warn（「注意:」を外した題）、赤字は太字",
+                  ['<div class="box-note" data-label="定義">\n<p><strong>人月とは</strong>' in got["md"],
                    '<p class="box-title">安さだけで選ぶのはNG</p>' in got["md"], "<strong>先に払わない</strong>" in got["md"]],
                   [True, True, True])
             check("相談の箱と中ほどの導線は先方の .cta-inline（当社の青 #1b4fa0 を持ち込まない）",
@@ -398,4 +399,7 @@ def test_client_supervisor_is_the_client():
     if not slugs:
         print("  --  CONFLUX の記事が無いため、承認の記録の名義は確かめません")
         return
-    check("承認の記録の名義は先方の監修者", ER.reviewer_for(slugs[0]), "YW")
+    # 2026-10-08 運用者の決定: 自動化の記事の監修は「YW（CONFLUX PARTNERS）」と「セブンセンシズ株式会社」の両方（gates_history_h55）
+    check("承認の記録の名義は先方の監修の表示と同じ並び（代表者の実名は入れない）",
+          [ER.reviewer_for(slugs[0]), "原口" in ER.reviewer_for(slugs[0])],
+          ["・".join(S.load("conflux")["review_by"]), False])
