@@ -148,7 +148,7 @@ def body(ind):
     cta = ('<section class="qa-cta"><h2>この質問に、御社のサイトは答えられていますか</h2>'
            '<p>AIが答えに使うのは、質問に答えているページです。御社がAIにどう紹介されているかは、無料で確かめられます。</p>'
            '<p class="qa-btns"><a class="btn btn-primary" href="/tools/ai-check/" data-cta="questions_' + ind + '_ai">AI診断で確かめる</a>'
-           f'<a class="btn btn-ghost" href="/download/?ind={IAS.RESEARCH_TO_CHECKLIST.get(ind, "")}" data-cta="questions_{ind}_checklist">'
+           f'<a class="btn btn-ghost" href="{IAS.checklist_url(ind)}" data-cta="questions_{ind}_checklist">'
            'チェックリスト（PDF）を受け取る</a></p></section>')
     title = f'{hl["name"]}でAIに聞かれる質問{n}と出典'
     desc = (f'{hl["name"]}について調べられそうな質問{n}問を{engines}に聞き、答えの出典になったサイトの種類と'

@@ -459,6 +459,14 @@ RESEARCH_TO_CHECKLIST = {"dental": "dental", "clinic": "clinic", "fudosan": "fud
                          "shigyou": "shigyou"}
 
 
+def checklist_url(r):
+    """チェックリストの受け取りページ。業種のチェックリストが無い調査には値の無い ?ind= を付けない。
+    付けると /download/?ind= という別の URL ができ、Search Console に「代替ページ（適切な canonical タグあり）」
+    として出ていた（2026-10 ai.7senses.co.jp・業種調査のページから）"""
+    cl = RESEARCH_TO_CHECKLIST.get(r or "", "")
+    return f"/download/?ind={cl}" if cl else "/download/"
+
+
 # 記事の題名から、調査のどの種類の質問に当たるかを決める（上から順に見る）。
 # 当たれば、その種類の質問だけの内訳を記事に出す（業種全体の同じ数字を全記事に出すより、そのページにしか無い中身になる）
 GROUP_RX = [
@@ -613,7 +621,7 @@ def hero(ind):
             f'<p class="lx-lead">{H.escape(T["asker"])}が実際に調べそうな{hl["questions"]}問を、{hl["engines_text"]} の{hl["n_engines"]}つに聞き、'
             f'回答の出典になったサイトの種類を数えました。</p>'
             f'<p class="lx-alt">集計データ: <a href="/research/{ind}-ai-sources/data.csv" download>CSVをダウンロード</a>'
-            f' ／ <a href="/download/?ind={RESEARCH_TO_CHECKLIST.get(ind, "")}" data-cta="research_hero_checklist_{ind}">チェックリスト（PDF）を受け取る</a>'
+            f' ／ <a href="{checklist_url(ind)}" data-cta="research_hero_checklist_{ind}">チェックリスト（PDF）を受け取る</a>'
             f' ／ {H.escape(T["owner"])}向けの対策: <a href="{_lpu(T)}" data-cta="research_hero_lp_{T["lp"]}">{H.escape(T["lp_name"])}</a></p>'
             f'</div><div class="lx-console ilp-console" aria-label="調査の要点">'
             f'<div class="lx-console-head"><b>要点</b><small>{hl["questions"]}問×{hl["n_engines"]}つのAI・{hl["date"]}</small></div>'
@@ -740,7 +748,7 @@ def render(ind):
 <section><h2>{T['owner']}にとっての意味</h2>
 <p>{find_txt}</p>
 <p>{seek_txt}</p>
-<p>当社は、{T['owner']}のSEO・AI検索対策を行っています。<a href="/lp/{T['lp']}/" data-cta="research_lp_{T['lp']}">{T['lp_name']}</a>をご覧ください。</p>
+<p>当社は、{T['owner']}のSEO・AI検索対策を行っています。<a href="{_lpu(T)}" data-cta="research_lp_{T['lp']}">{T['lp_name']}</a>をご覧ください。</p>
 </section>
 <section><h2>引用する場合</h2>{cite_box}
 <p style="font-size:.88rem">集計データ（CSV）: <a href="/research/{ind}-ai-sources/data.csv" download>ダウンロード</a></p></section>

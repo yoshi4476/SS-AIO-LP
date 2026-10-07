@@ -144,7 +144,23 @@ def parse_article(path: Path):
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
     if not m:
         raise SystemExit(f"フロントマターがありません: {path}")
-    return yaml.safe_load(m.group(1)), m.group(2)
+    return yaml.safe_load(m.group(1)), strip_private_links(m.group(2))
+
+
+def strip_private_links(body):
+    """一次データを非公開にしている間は、AI集客ラボの /data/ へのリンクを文字に戻す。
+    AI集客ラボのビルドは外しているが、配信先の記事には残り、404へ送っていた（2026-09-29: コーポレート4本）。
+    main() だけで外していたため、描き直し（publish_rerender・republish_images）が素の原稿で書き戻し、
+    2026-10-06 の描き直しでコーポレート8本に 404 へのリンクが戻った。配信の入口（parse_article）で外す"""
+    try:
+        import data_intake
+    except ImportError:
+        return body
+    if data_intake.PUBLIC:
+        return body
+    body = re.sub(r"\[([^\]]+)\]\(https://ai\.7senses\.co\.jp/data/(?!reco\.json)[^)]*\)", r"\1", body)
+    return re.sub(r'<a\s[^>]*href="https://ai\.7senses\.co\.jp/data/(?!reco\.json)[^"]*"[^>]*>(.*?)</a>',
+                  r"\1", body, flags=re.S)
 
 
 def ensure_clone(cfg, token):
@@ -1827,16 +1843,6 @@ def main():
     if _legal:
         raise SystemExit(f"{args.slug}: 当社の採択率・支援社数、または申請書類の作成・代行と読める文があります"
                          f"（{_legal[0][0]}: {_legal[0][1][:60]}）。python scripts/legal_claims.py で確かめて直してください")
-    # 一次データを非公開にしている間は、AI集客ラボの /data/ へのリンクを文字に戻す。
-    # AI集客ラボのビルドは外しているが、配信先の記事には残り、404へ送っていた（2026-09-29: コーポレート4本）
-    try:
-        import data_intake
-        if not data_intake.PUBLIC:
-            body = re.sub(r"\[([^\]]+)\]\(https://ai\.7senses\.co\.jp/data/[^)]*\)", r"\1", body)
-            body = re.sub(r'<a\s[^>]*href="https://ai\.7senses\.co\.jp/data/[^"]*"[^>]*>(.*?)</a>', r"\1", body, flags=re.S)
-    except ImportError:
-        pass
-
     score = meta.get("score") or 0
     if not gate_ok(meta):
         raise SystemExit(f"公開基準未達のため配信しません: score={score}"

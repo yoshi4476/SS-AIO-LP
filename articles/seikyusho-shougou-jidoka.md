@@ -188,7 +188,7 @@ RPAやクラウド請求書システムは、月間の処理件数に応じた�
 - 照合に加えて記帳や支払いも遅れ、担当が1人の会社は、経理BPOで業務ごと外に出すほうが早く片付きます
 - 取引先が月に数社で件数も少ない会社は、エクセルの関数による突合で足り、有料ツールは待ってよい段階です
 
-当社が経理BPOを導入した10社の集計では、月次決算の日数が中央値で15日から7日に縮みました（<a href="https://ai.7senses.co.jp/data/keiri-bpo-getsuji-nissuu/" target="_blank" rel="noopener">2024年4月〜2026年8月・個社差が大きい</a>）。
+当社が経理BPOを導入した10社の集計では、月次決算の日数が中央値で15日から7日に縮みました（2024年4月〜2026年8月・個社差が大きい）。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
