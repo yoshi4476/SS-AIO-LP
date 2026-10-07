@@ -1568,6 +1568,42 @@ def strip_list_tools(page):
     return re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
 
 
+_ECHO_HEAD = re.compile(r'<div class="cat-head"><h2>(.*?)</h2>(?:<span class="cnt">[^<]*</span>)?</div>', re.S)
+_COUNTED = re.compile(r"\d[\d,]*(?:表|語|問|本|業種|テーマ|エリア)")
+
+
+def drop_echo_head(page):
+    """まとめのページの最初の区画の見出しが、ページの見出し（h1）と同じ言葉なら、その見出しを外す。
+    比較表・用語集・テーマ・業種の一覧・業種のよくある質問で、同じ見出しが続けて2回出ていた（2026-10-08）。
+    すぐ後の説明の文がページの説明と同じ（数を除く）なら、その文も外す（「…を1か所に集めました」が2回続いていた）"""
+    h1 = re.search(r"<h1[^>]*>(.*?)</h1>", page, re.S)
+    if not h1:
+        return page
+    title = re.sub(r"<[^>]+>", "", h1.group(1)).strip()
+    m = _ECHO_HEAD.search(page, h1.end())
+    if not m or re.sub(r"<[^>]+>", "", m.group(1)).strip() != title:
+        return page
+    page = page[:m.start()] + page[m.end():]
+    lead = re.search(r'<p class="lead">(.*?)</p>', page, re.S)
+    hub = re.compile(r'<p class="hub-lead">(.*?)</p>', re.S).match(page, m.start())
+    if lead and hub:
+        norm = lambda s: re.sub(r"\s", "", _COUNTED.sub("", re.sub(r"<[^>]+>", "", s)))
+        said = {norm(x) for x in re.findall(r"[^。]+。", lead.group(1))}
+        keep = "".join(x for x in re.findall(r"[^。]+。?", hub.group(1)) if norm(x) not in said)
+        page = page[:hub.start()] + (f'<p class="hub-lead">{keep}</p>' if keep.strip() else "") + page[hub.end():]
+    return page
+
+
+def drop_echo_lead(page):
+    """最初の区画の説明（hub-lead）が見出しの下の説明（lead）と同じ文なら外す。
+    業種ハブで、業種の説明の段落が見出しの下と「◯◯の記事」の下に続けて2回出ていた（2026-10-08）"""
+    lead = re.search(r'<p class="lead">(.*?)</p>', page, re.S)
+    hub = re.search(r'<p class="hub-lead">(.*?)</p>', page, re.S)
+    if lead and hub and re.sub(r"\s", "", lead.group(1)) == re.sub(r"\s", "", hub.group(1)):
+        return page[:hub.start()] + page[hub.end():]
+    return page
+
+
 def hub_json_ld(name, url, metas, desc=""):
     """業種ハブの構造化データ。何の集まりで、何が入っているかを機械に渡す"""
     items = [{"@type": "ListItem", "position": i + 1,
@@ -1824,6 +1860,7 @@ def build_industry_hubs(all_metas):
             f'{ind["name"]}の集客', ind.get("lead") or f'{ind["name"]}の集客に役立つ記事をまとめています。',
             [(f'{ind["name"]}向けの記事{len(metas)}本を、{by_cat(metas)}に分けて載せています。',
               f'{ind["name"]}向けの記事{len(metas)}本を、カテゴリ別に載せています。')], cta=industry_cta(ind["slug"])))
+        page = drop_echo_lead(page)
         page = page.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/')
         url = f'{SITE_URL}/industry/{ind["slug"]}/'
         page = page.replace("</head>", hub_json_ld(
@@ -1845,7 +1882,7 @@ def build_industry_hubs(all_metas):
                 f'{ind["name"]}の集客について、記事{len(metas)}本で答えたよくある質問{len(qs)}問をまとめています。',
                 ["答えは各記事に書いたものと同じで、質問から根拠の記事へ進めます。",
                  DF.named("主な質問は", sorted(qs, key=len), "です。")], cta=industry_cta(ind["slug"])))
-            fpage = strip_list_tools(fpage.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/faq/'))
+            fpage = drop_echo_head(strip_list_tools(fpage.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/faq/')))
             fpage = fpage.replace("</head>", '<script type="application/ld+json">'
                                   + _json.dumps(fld, ensure_ascii=False) + "</script></head>", 1)
             fo.write_text(fpage, encoding="utf-8", newline="\n")
@@ -1858,7 +1895,7 @@ def build_industry_hubs(all_metas):
             "業種から探す", "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。",
             [(f"{names}の{len(pairs)}業種、記事{len({m['slug'] for m in flat})}本を業種別に並べています。",
               f"{len(pairs)}業種、記事{len({m['slug'] for m in flat})}本を業種別に並べています。")]))
-        page = strip_list_tools(page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/"))
+        page = drop_echo_head(strip_list_tools(page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")))
         page = page.replace("</head>", hub_json_ld(
             "業種から探す", f"{SITE_URL}/industry/", flat,
             "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。") + "</head>", 1)
@@ -1907,7 +1944,7 @@ def build_extra_pages(all_metas):
                   "area": "エリア別の記事"}.get(path.split("/")[0])
         p = BLOG_PAGE.format(items=items, **page_shell(title, desc or f"{SITE_NAME}の「{title}」のページです。", more,
                                                        kicker=kicker))
-        p = strip_list_tools(p.replace(f"{SITE_URL}/blog/", url))
+        p = drop_echo_head(strip_list_tools(p.replace(f"{SITE_URL}/blog/", url)))
         out.write_text(p, encoding="utf-8", newline="\n")
         made_paths.add(out.parent)
 

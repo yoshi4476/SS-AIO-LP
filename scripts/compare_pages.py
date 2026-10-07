@@ -71,8 +71,12 @@ def page_html(cat_name, rows, url_of, base="/compare/"):
     blocks = []
     for r in rows:
         tbl_html, _ = md2html.convert(r["table"])
+        # md2html は表を横スクロールの枠（table-wrap）に入れて返す。もう一度包むと枠が二重になり、
+        # 表の上に白い帯と影が2重に出ていた（2026-10-08）
+        if 'class="table-wrap"' not in tbl_html:
+            tbl_html = f'<div class="table-wrap">{tbl_html}</div>'
         blocks.append(f'<div class="latest-block"><div class="cat-head"><h2>{_h.escape(r["h2"] or r["title"][:40])}</h2></div>'
-                      f'<div class="table-wrap">{tbl_html}</div>'
+                      f'{tbl_html}'
                       f'<p class="hub-note">出典: <a href="{url_of(r)}">{_h.escape(r["title"][:60])}</a>（{r["date"]}時点）</p></div>')
     ld = {"@context": "https://schema.org", "@type": "ItemList",
           "name": f"{cat_name}の比較表", "numberOfItems": len(rows),
