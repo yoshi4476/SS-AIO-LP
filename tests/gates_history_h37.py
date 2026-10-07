@@ -424,8 +424,8 @@ def test_bridge_design_window_is_safe():
     import site_renovate as R
     print("\n■ 橋渡し 2.0.4: 追加CSS・head・フッターの窓口は許可した項目しか通さない")
     php = _php()
-    check("版は 2.0.4（見出しと定数）", (re.search(r"^ \* Version: (\S+)", php, re.M).group(1),
-                                    re.search(r"^const SSB_VERSION = '(\S+)';", php, re.M).group(1)), ("2.0.4", "2.0.4"))
+    check("版は 2.0.5（見出しと定数）", (re.search(r"^ \* Version: (\S+)", php, re.M).group(1),
+                                    re.search(r"^const SSB_VERSION = '(\S+)';", php, re.M).group(1)), ("2.0.5", "2.0.5"))
     route = php.split("register_rest_route(SSB_NS, '/design'", 1)[1].split("register_rest_route(", 1)[0]
     check("窓口: GET・POST とも、書き込みの条件（アプリケーションパスワード）＋外観の編集の権限",
           (route.count("'permission_callback' => 'ssb_can_design'"),

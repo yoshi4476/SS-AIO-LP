@@ -1050,7 +1050,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "automation/wordpress/ss-quality-gate.php:805",
+     "evidence": "automation/wordpress/ss-quality-gate.php:809",
      "note": "mu-plugin が site.js と同じ出来事（CTA・フォーム・入口・A/B・スクロール）を送る。GA4 の測定IDはシートで聞き push_settings で渡す（初回接続）",
      "anchor": "echo '<script id=\"ss-measure\">window.SSB_GA4=' . wp_json_encode($ga) . \";\\n\" . SSB_MEASURE_JS . \"</script>\\n\";"
     },

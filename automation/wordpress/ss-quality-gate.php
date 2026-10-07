@@ -2,7 +2,7 @@
 /**
  * Plugin Name: 品質ゲートと橋渡し（管制塔との接続）
  * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・訳のページとの hreflang・表示速度・画像と動画のサイトマップ・配信の指紋・追加CSSと head・フッターの小さな追記・自己更新）を持つ。
- * Version: 2.0.4
+ * Version: 2.0.5
  *
  * ■ 先方が最初に1回だけすること
  *   1. このファイルを wp-content/mu-plugins/ に置く
@@ -44,7 +44,7 @@ const SSQG_HUMAN_MIN_CHARS = 3000;
 const SSQG_HUMAN_MIN_H2    = 4;
 
 // 自己更新で、届いたファイルの中にこの行があることを確かめる（版の書き換えだけの差し替えを通さない）
-const SSB_VERSION = '2.0.4';
+const SSB_VERSION = '2.0.5';
 const SSB_META_JSONLD_EXTRA = '_ss_jsonld_extra';   // FAQPage など BlogPosting 以外の実体（JSON の配列）
 const SSB_META_ALTERNATES = '_ss_alternates';       // 訳のページとの組（{"en": URL, …} の JSON。同じサイトの URL だけ出す）
 const SSB_META_MANAGED = '_ss_managed';             // 管制塔が作った固定ページの印
@@ -747,15 +747,19 @@ const SSB_MEASURE_JS = <<<'JS'
     if (f.getAttribute('role') === 'search' || f.classList.contains('search-form') || f.classList.contains('wp-block-search') || f.id === 'commentform' || f._ssm) return;
     f._ssm = true;
     var type = (f.querySelector('[name="form_type"]') || {}).value || f.getAttribute('data-ss-form') || 'form';
-    var started = false, last = '', done = false;
+    var started = false, last = '', done = false, gone = false;
     f.addEventListener('focusin', function (e) {
       var el = e.target;
       if (!el || !el.name || el.type === 'hidden') return;
       last = el.name;
       if (!started) { started = true; ga('form_start', { form_type: type, page_path: path }); }
     });
+    // 離脱は1回の表示につき1回。戻る・進む（bfcache）で表示し直したら、その表示で触ったときだけ数え直す（2.0.5）
     window.addEventListener('pagehide', function () {
-      if (started && !done) ga('form_abandon', { form_type: type, last_field: last, page_path: path });
+      if (started && !done && !gone) { gone = true; ga('form_abandon', { form_type: type, last_field: last, page_path: path }); }
+    });
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) { started = false; done = false; gone = false; last = ''; }
     });
     var sent = function () {
       if (done) return;
