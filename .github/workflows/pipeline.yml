@@ -63,6 +63,12 @@ jobs:
           fi
           claude --version
 
+      # お客様の社の順位・AIの語（.gitignore）を前の回から戻す。順位の記録（rank_track）は毎晩ここに積み足す
+      - uses: ./.github/actions/client-private
+        with: {mode: restore}
+      - uses: ./.github/actions/client-private
+        with: {mode: restore, family: ai-kw, kinds: ai_kw}
+
       # 記事のページ・sitemap・feed を Git から外す準備（2026-10-03）。このあとの工程が手元のページを読むので、
       # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
       - name: 原稿からページを作る
@@ -107,6 +113,12 @@ jobs:
             claude -p "$(cat automation/retry_prompt.txt)" \
               --dangerously-skip-permissions --max-turns 160
           done
+
+      # 予定は 21:30 だが GitHub の定時は遅れ、14回とも日付が変わってから始まり（翌1:36〜5:36）「期待は0本」としていた。
+      # その日の最初の枠より前に始まった回は前日を数える。claude と再監査も同じ日を数える（途中で日付が変わっても動かさない）
+      - name: 救済で数える日を決める
+        if: steps.mode.outputs.mode == 'rescue'
+        run: echo "AUDIT_DAY=$(python scripts/daily_audit.py --rescue-day)" | tee -a "$GITHUB_ENV"
 
       # 3サイト分の当日ノルマ（各2本）・品質・担当領域・KW供給を機械監査し、
       # 不足があればその日のうちに書き直し・追加公開まで行う
@@ -173,6 +185,11 @@ jobs:
           else
             echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定のため順位を記録できません"
           fi
+
+      # お客様の社の順位・AI引用の推定を次の回（記事の枠・週次・月次）へ残す（public には置かない）
+      - uses: ./.github/actions/client-private
+        if: always()
+        with: {mode: save}
 
       # 書いた直後に、機械で直せる崩れを直す（pipeline-multi と同じ工程）。
       # 週次にしか入っていなかったため、公開から最大6日そのままになっていた

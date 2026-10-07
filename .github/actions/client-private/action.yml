@@ -1,0 +1,47 @@
+name: お客様の非公開データの持ち越し
+description: >-
+  お客様の社の検索語・順位・AIの出典を、public のリポジトリにも成果物（artifact）にも置かずに、
+  CI のキャッシュで書いた工程から読む工程へ渡す。置き場は data/clients/<id>/private/（.gitignore）。
+  何を写し、全社で1ファイルの記録のどこを分けるかは scripts/client_private.py が決める。
+  .gitignore で外しただけだと CI の実行ごとに消え、順位の推移・AIの語の優先・引用の実測・
+  競合比較の自社順位がお客様の社だけ空になっていた（2026-10-08 の点検）。
+
+inputs:
+  mode:
+    description: restore（読む工程の始め）か save（書いた工程の終わり）
+    required: true
+  family:
+    description: >-
+      キャッシュの系統。private（救済・週次・月次が書く全部）／ai-kw（週次の KW 補充が書く AI の語）／
+      index（週次の URL 検査が書く記録）。並行ジョブが書いた分を、別のジョブの古い写しで上書きしないために分ける
+    default: private
+  kinds:
+    description: 写す・戻すサイトごとの記録の種類（client_private.PER_SITE の名前。空なら全部、- なら写さない）
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - if: inputs.mode == 'restore'
+      uses: actions/cache/restore@v4
+      with:
+        path: data/clients/*/private
+        key: client-${{ inputs.family }}-${{ github.run_id }}-${{ github.run_attempt }}
+        restore-keys: client-${{ inputs.family }}-
+
+    - if: inputs.mode == 'restore'
+      shell: bash
+      run: python3 scripts/client_private.py --unpack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
+
+    - if: inputs.mode == 'save'
+      id: pack
+      shell: bash
+      run: |
+        python3 scripts/client_private.py --pack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
+        if compgen -G "data/clients/*/private" > /dev/null; then echo "any=yes" >> "$GITHUB_OUTPUT"; fi
+
+    - if: inputs.mode == 'save' && steps.pack.outputs.any == 'yes'
+      uses: actions/cache/save@v4
+      with:
+        path: data/clients/*/private
+        key: client-${{ inputs.family }}-${{ github.run_id }}-${{ github.run_attempt }}

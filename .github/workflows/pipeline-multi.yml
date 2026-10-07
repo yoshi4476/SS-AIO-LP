@@ -216,6 +216,13 @@ jobs:
           fi
           claude --version
 
+      # お客様の社の順位・AIの語（public に置かないため .gitignore）を前の回のキャッシュから戻す。
+      # 戻さないと、お客様の社だけ次に書く語の優先（next_kw）・勝ち型・順位が空のまま書く
+      - uses: ./.github/actions/client-private
+        with: {mode: restore}
+      - uses: ./.github/actions/client-private
+        with: {mode: restore, family: ai-kw, kinds: ai_kw}
+
       # 記事のページ・sitemap・feed を Git から外す準備（2026-10-03）。このあとの工程が手元のページを読むので、
       # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
       - name: 原稿からページを作る
@@ -594,7 +601,6 @@ jobs:
               echo "$out" | grep "NG " | head -5; } >> automation/logs/findings.txt
           fi
 
-      # KPIは1日1回でよいので、朝いちばんの枠のときに全サイト分をまとめて集計する
       # 手元にあるのに本番に無い記事を、公開サイトのsitemapと突き合わせて拾う。
       # gitの差分では「配信済み」に見えてしまい、抜けに気づけない。
       - name: 未配信の記事がないかの確認
@@ -641,20 +647,7 @@ jobs:
             fi
           fi
 
-      - name: KPI集計 → 管制塔ダッシュボード
-        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.id == steps.site.outputs.first && github.event.schedule == '7 23 * * *'
-        env:
-          HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
-        run: |
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-            pip install --quiet google-analytics-data google-api-python-client google-auth
-            python scripts/daily_kpi.py --send || true
-            rm -f indexing-service-account.json
-          fi
-
+      # 日次KPIは記事の枠から外した（daily-kpi.yml）。枠0が上限・量産の兆候で飛ぶと集計も飛んでいた
       - name: 運用通知
         if: steps.site.outputs.skip != 'yes' && always()
         env:

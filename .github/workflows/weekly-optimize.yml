@@ -138,6 +138,12 @@ jobs:
           python scripts/season_feature.py --kw 2>&1 | tail -6 || true
           python scripts/kw_status.py
 
+      # お客様の社の AI の語（.gitignore）を、次に読む工程（記事の枠の next_kw・optimize の共起語/勝ち型）へ渡す。
+      # optimize と並行に動くので別の系統（ai-kw）に残す（同じ系統だと optimize の古い写しで上書きされる）
+      - uses: ./.github/actions/client-private
+        if: always()
+        with: {mode: save, family: ai-kw, kinds: ai_kw}
+
       - name: ラッコの控えを残す
         if: always()
         uses: actions/cache/save@v4
@@ -207,6 +213,11 @@ jobs:
           chmod 600 indexing-service-account.json
           python scripts/reindex.py --dry --budget-min 15 || true
           rm -f indexing-service-account.json
+
+      # お客様の社のURLの検査結果は public の記録と成果物に入れず（client_private）、キャッシュで optimize の再通知へ渡す
+      - uses: ./.github/actions/client-private
+        if: always()
+        with: {mode: save, family: index, kinds: "-"}
 
       - name: 検査の結果を渡す
         uses: actions/upload-artifact@v4
@@ -423,6 +434,10 @@ jobs:
             node "$(npm root -g)/@anthropic-ai/claude-code/install.cjs" || true
           fi
           claude --version
+
+      # お客様の社の順位・共起語・引用の記録（.gitignore と置き場）を前の回から戻す（最後に残す）
+      - uses: ./.github/actions/client-private
+        with: {mode: restore}
 
       # 記事のページ・sitemap・feed を Git から外す準備（2026-10-03）。このあとの工程が手元のページを読むので、
       # 先に原稿から作っておく。作れなくても止めない（外す前は、コミット済みのページが残っている）
@@ -748,6 +763,10 @@ jobs:
           git diff --cached --quiet || git commit -m "weekly: 内部リンクと導線の補充"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || git rebase --abort || true
           git push || echo "::warning::正本への push に失敗（最後のコミット工程で再度 push します）"
+
+      # 並行の KW 補充が残したお客様の社の AI の語を受け取る（自社の分は上の pull で受け取る。後ろの共起語・勝ち型が読む）
+      - uses: ./.github/actions/client-private
+        with: {mode: restore, family: ai-kw, kinds: ai_kw}
 
       - name: 週次最適化の実行
         env:
@@ -1115,10 +1134,11 @@ jobs:
           python scripts/pace.py --write 2>&1 | tail -12 || true
           # content_yield の判定（統合を増やすサイト）と学びの台帳を残す。日次の執筆がこれを読む
           # Bing の検索の成績は自社3サイトの分だけ（お客様の分は .gitignore で外れる）
-          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats; do if [ -e "$p" ]; then git add "$p"; fi; done
+          # findings_seen は前の週に出たもの（来週の要対応と情報の振り分けが読む）。pull は未コミットの変更があっても通す
+          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats data/findings_seen.json; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet || {
             git commit -q -m "weekly: 記事本数の判定と結果からの学び $(date '+%Y-%m-%d')"
-            git pull --rebase -q origin "${GITHUB_REF_NAME}" || true
+            git pull --rebase --autostash -q origin "${GITHUB_REF_NAME}" || true
             git push -q || true
           }
 
@@ -1152,6 +1172,10 @@ jobs:
           name: index-cache
           path: /tmp/index-cache
 
+      # お客様の社のURLの検査結果（成果物には入れていない）をキャッシュから受け取る
+      - uses: ./.github/actions/client-private
+        with: {mode: restore, family: index, kinds: "-"}
+
       - name: 登録されていないページを拾って再通知
         timeout-minutes: 20
         env:
@@ -1177,6 +1201,11 @@ jobs:
           else
             echo "GCP_SERVICE_ACCOUNT_JSON 未設定 — スキップ"
           fi
+
+      # お客様の社の分（勝ち型・並び替え・国別・季節・順位を上げた記録・共起語・引用の実測・URL検査）を次の回へ残す
+      - uses: ./.github/actions/client-private
+        if: always()
+        with: {mode: save}
 
       - name: Bing への送信記録を残す
         if: always() && hashFiles('data/bing_submit.json') != ''

@@ -12,7 +12,8 @@ on:
     # どちらの一覧に入れるかは各ジョブの if: の fromJSON に書く（scripts/ci_rerun.py も同じ所を読む）
     workflows: ["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize",
                 "Monthly Consulting Report", "Weekly Newsletter Digest", "Deploy to Cloudflare Pages",
-                "記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Focus Mode"]
+                "記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Focus Mode",
+                "Daily KPI"]
     types: [completed]
   schedule:
     - cron: "0 15 * * *"   # JST 00:00 — 1日の最後に検査だけはかける（取りこぼしの見張りの最後の砦も兼ねる）
@@ -429,11 +430,12 @@ jobs:
   # 同じ run は1回まで: ci_rerun.py が run_attempt 2 以上を再実行しない。デプロイは後の run があれば再実行しない
   # （古い中身で新しい公開を上書きする）。記事・週次・月次・ニュースレターは再実行すると二重に書く・送るので入れない。
   # 集中モード（Focus Mode）は再実行の回（run_attempt 2以上）で書き直しを飛ばすので、二重には直さない
+  # 日次KPI（Daily KPI）は送った日を記録してから残すので、再実行しても同じ日を二重に送らない
   rerun:
     if: >-
       github.event_name == 'workflow_run' &&
       github.event.workflow_run.conclusion == 'failure' &&
-      contains(fromJSON('["記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Deploy to Cloudflare Pages", "Focus Mode"]'), github.event.workflow_run.name)
+      contains(fromJSON('["記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Deploy to Cloudflare Pages", "Focus Mode", "Daily KPI"]'), github.event.workflow_run.name)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:

@@ -120,6 +120,15 @@ jobs:
             echo "LEAD_TO_EMAIL=info.ai@7senses.co.jp"
           } > .env
 
+      # お客様の社の順位・AIの語・引用の記録・前月の目標（.gitignore と置き場）を前の回から戻す。
+      # 戻さないと、お客様の社だけ引用の実測が「順位の記録が無い」で飛び、競合比較の自社順位と目標の突合が空になる
+      - uses: ./.github/actions/client-private
+        if: steps.gate.outputs.ready == 'true'
+        with: {mode: restore}
+      - uses: ./.github/actions/client-private
+        if: steps.gate.outputs.ready == 'true'
+        with: {mode: restore, family: ai-kw, kinds: ai_kw}
+
       # 競合比較（compete.py）。お客様の分は public リポジトリに置かない（.gitignore）ので、キャッシュで月をまたぐ。
       # 自社だけ: 自社3サイトと月の回数はコミット済みなので、キャッシュで上書きしない
       - name: 競合比較の控えを戻す
@@ -385,6 +394,11 @@ jobs:
           else
             echo "保存すべき変更なし"
           fi
+
+      # お客様の社の来月の目標・在庫計画・引用の実測（コミットしない分）を次の回へ残す
+      - uses: ./.github/actions/client-private
+        if: always() && steps.gate.outputs.ready == 'true'
+        with: {mode: save}
 
       - name: 運用通知（Slack→メール自動フォールバック）
         if: always()

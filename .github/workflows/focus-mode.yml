@@ -137,6 +137,10 @@ jobs:
           fi
           claude --version
 
+      # お客様の社の順位・共起語（.gitignore と置き場）を前の回から戻す（題の直し・欠けた問いの直しが読む）
+      - uses: ./.github/actions/client-private
+        with: {mode: restore}
+
       # このあとの工程が手元のページを読むので、先に原稿から作っておく（週次と同じ）
       - name: 原稿からページを作る
         run: |

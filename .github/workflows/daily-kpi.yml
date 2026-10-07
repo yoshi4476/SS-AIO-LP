@@ -1,0 +1,90 @@
+name: Daily KPI
+
+# 管制塔の KPI（KPIレポート・AIO計測・AI参照・ダッシュボード）を毎日1回送る（scripts/daily_kpi.py）。
+# 以前は記事の枠0（pipeline-multi）の中にあり、枠0が月の上限・量産の兆候・取りこぼしで飛ぶと集計も飛んだ
+# （2026-09-28〜10-03 の6日が欠けた）。記事の枠とは別の定時にし、送った日を記録して同じ日を2回送らない
+# （管制塔の kpi_log は行を足すだけ）。取りこぼした日は、次の回が7日前まで埋める
+on:
+  schedule:
+    - cron: "13 1 * * *"   # JST 10:13 — 前日分（GA4 は前日・Search Console は確定を待って3日前）。数時間遅れても日付をまたがない
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "その日の分だけ送る（YYYY-MM-DD。送り済みなら送らない）。空なら前日と抜けた日"
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+# 2回目が同時に走っても、1回目が送った日の記録を見てから動く
+concurrency:
+  group: daily-kpi
+  cancel-in-progress: false
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  kpi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: pip install -r requirements.txt
+
+      # 送った日の記録（.gitignore）。持ち越さないと毎回「記録なし」で前日だけになり、抜けた日を埋められない
+      - name: 送った日の記録を戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: data/kpi_sent.json
+          key: kpi-sent-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: kpi-sent-
+
+      # お客様の社の AIO の推定（引用の記録のお客様の分・public に置かない）を前の回から戻す
+      - uses: ./.github/actions/client-private
+        with: {mode: restore}
+
+      - name: KPI集計 → 管制塔ダッシュボード
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          DAY: ${{ inputs.day }}     # 入力は環境変数で受ける（run に直接埋めるとコマンドとして解釈される）
+        run: |
+          if [ -z "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定のため集計できません"
+            exit 0
+          fi
+          printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          python scripts/daily_kpi.py --send --once ${DAY:+--day "$DAY"}
+
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json
+
+      - name: 送った日の記録を残す
+        if: always() && hashFiles('data/kpi_sent.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: data/kpi_sent.json
+          key: kpi-sent-${{ github.run_id }}-${{ github.run_attempt }}
+
+      # 送れなかった日は記録に残らないので、次の回が埋める。続けて落ちていないかは通知で知らせる
+      - name: 運用通知（落ちたときだけ）
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          python scripts/notify_slack.py "🚨 日次KPIの集計が失敗しました（次の回が7日前まで埋めます）
+          https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

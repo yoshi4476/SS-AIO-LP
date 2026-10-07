@@ -355,3 +355,123 @@ def test_weekly_notice_raises_only_new_worse_or_deadline():
           ("state = judge(text, rc)" in src, "return 0   # 知らせるのが仕事" in src), (True, True))
     check("前の週の記録は CI の回だけ書く（手元で試した回を比べる相手にしない）",
           'os.environ.get("GITHUB_ACTIONS")' in src and "save_seen(" in src, True)
+
+
+# ── ワークフロー（ワークフローの変更と同じコミット） ──────────────────────
+
+def _yaml(path):
+    import yaml
+    return yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+
+
+def _steps(name, job):
+    return _yaml(ROOT / ".github" / "workflows" / name)["jobs"][job]["steps"]
+
+
+def _at(steps, pred):
+    return next((i for i, s in enumerate(steps) if pred(s)), None)
+
+
+def _named(text):
+    return lambda s: text in str(s.get("name", ""))
+
+
+def _ran(text):
+    return lambda s: text in str(s.get("run", ""))
+
+
+def _cp(mode, family="private"):
+    def pred(s):
+        w = s.get("with") or {}
+        return (s.get("uses") == "./.github/actions/client-private" and w.get("mode") == mode
+                and (w.get("family") or "private") == family)
+    return pred
+
+
+def test_rescue_workflow_counts_one_day_throughout():
+    st = _steps("pipeline.yml", "pipeline")
+    day, rescue, again = _at(st, _ran("daily_audit.py --rescue-day")), _at(st, _named("同日救済")), _at(st, _named("救済後の再監査"))
+    check("救済: 数える日を最初に1回だけ決め、claude と再監査が同じ日を数える（GITHUB_ENV）",
+          (day is not None and rescue is not None and again is not None and day < rescue < again,
+           "GITHUB_ENV" in str(st[day].get("run", "")) if day is not None else False,
+           str(st[day].get("if", "")) if day is not None else ""),
+          (True, True, "steps.mode.outputs.mode == 'rescue'"))
+
+
+def test_daily_kpi_runs_outside_the_article_slots():
+    pm = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("日次KPIは記事の枠（pipeline-multi）から外した（枠0が上限・量産の兆候で飛ぶと集計も飛んだ）",
+          "daily_kpi.py" in pm, False)
+    p = ROOT / ".github" / "workflows" / "daily-kpi.yml"
+    check("日次KPIは独立したワークフロー（daily-kpi.yml）", p.is_file(), True)
+    if not p.is_file():
+        return
+    y = _yaml(p)
+    trig = y.get("on") or y.get(True) or {}
+    crons = [c["cron"] for c in trig.get("schedule") or []]
+    st = y["jobs"]["kpi"]["steps"]
+    run = "\n".join(str(s.get("run", "")) for s in st)
+    check("日次KPI: 毎日1回・同時に2本動かない・同じ日は2回送らない（--once）",
+          (len(crons), (y.get("concurrency") or {}).get("group"), "daily_kpi.py --send --once" in run),
+          (1, "daily-kpi", True))
+    rest = _at(st, lambda s: (s.get("with") or {}).get("path") == "data/kpi_sent.json" and "restore" in str(s.get("uses")))
+    send = _at(st, _ran("daily_kpi.py"))
+    save = _at(st, lambda s: (s.get("with") or {}).get("path") == "data/kpi_sent.json" and "save" in str(s.get("uses")))
+    check("日次KPI: 送った日の記録を送る前に戻し、送った後に（落ちても）残す",
+          (None not in (rest, send, save) and rest < send < save,
+           str(st[save].get("if", "")).startswith("always()") if save is not None else False), (True, True))
+    m, h = crons[0].split()[:2] if crons else ("", "")
+    jst = f"{(int(h) + 9) % 24:02d}:{int(m):02d}" if crons else ""
+    row = next((ln for ln in (ROOT / "CLAUDE.md").read_text(encoding="utf-8").splitlines()
+                if ln.startswith("| Daily KPI Report")), "")
+    check("CLAUDE.md 5章の表の時刻とワークフローの定時が合う", (f"毎日 {jst}" in row, "daily-kpi.yml" in row), (True, True))
+
+
+def test_client_private_is_carried_between_jobs():
+    act = _yaml(ROOT / ".github" / "actions" / "client-private" / "action.yml")
+    paths = {str((s.get("with") or {}).get("path")) for s in act["runs"]["steps"] if "actions/cache" in str(s.get("uses"))}
+    check("持ち越し: キャッシュは data/clients/*/private の1か所だけ（成果物には入れない）", paths, {"data/clients/*/private"})
+    bad = []
+
+    def order(wf, job, before, after, what):
+        st = _steps(wf, job)
+        a, b = _at(st, before), _at(st, after)
+        if a is None or b is None or not a < b:
+            bad.append(f"{wf}/{job}: {what}")
+
+    # 読む工程の前に戻す
+    order("pipeline-multi.yml", "write", _cp("restore"), _named("執筆ブリーフ"), "書く前に戻す")
+    order("pipeline-multi.yml", "write", _cp("restore", "ai-kw"), _named("食い合いゲート（執筆前）"), "次の語の前に AI の語を戻す")
+    order("pipeline.yml", "pipeline", _cp("restore"), _named("順位の記録"), "順位を積み足す前に戻す")
+    order("weekly-optimize.yml", "optimize", _cp("restore"), _named("順位を上げる"), "直す前に戻す")
+    order("weekly-optimize.yml", "optimize", _named("途中までの直しを正本へ保存"), _cp("restore", "ai-kw"), "並行の KW 補充の後に AI の語を受け取る")
+    order("weekly-optimize.yml", "optimize", _cp("restore", "ai-kw"), _named("実測（速度"), "共起語・勝ち型の前に AI の語を受け取る")
+    order("weekly-optimize.yml", "optimize", _cp("restore", "index"), _named("登録されていないページを拾って再通知"), "再通知の前に URL検査を受け取る")
+    order("monthly-report.yml", "report", _cp("restore"), _named("AI引用の実測"), "引用の実測の前に順位を戻す")
+    order("monthly-report.yml", "report", _cp("restore"), _named("月次レポート生成"), "レポートの前に目標を戻す")
+    order("focus-mode.yml", "focus", _cp("restore"), _named("11〜30位の欠けた問いを足す"), "直す前に戻す")
+    order("daily-kpi.yml", "kpi", _cp("restore"), _ran("daily_kpi.py"), "AIO の推定の前に戻す")
+    # 書いた工程の後に（落ちても）残す
+    order("pipeline.yml", "pipeline", _named("順位の記録"), _cp("save"), "順位を積んだ後に残す")
+    order("weekly-optimize.yml", "kw-refill", _named("KWキューの実データ補充"), _cp("save", "ai-kw"), "AI の語を書いた後に残す")
+    order("weekly-optimize.yml", "index-inspect", _named("登録されていないページを検査する"), _cp("save", "index"), "URL検査の後に残す")
+    order("weekly-optimize.yml", "optimize", _named("登録されていないページを拾って再通知"), _cp("save"), "最後に残す")
+    order("monthly-report.yml", "report", _named("目標値の保存をコミット"), _cp("save"), "目標を作った後に残す")
+    check("持ち越し: 読む工程の前に戻し、書いた工程の後に残す", bad, [])
+    saves = [(wf, job) for wf in ("pipeline.yml", "weekly-optimize.yml", "monthly-report.yml")
+             for job, j in _yaml(ROOT / ".github" / "workflows" / wf)["jobs"].items()
+             for s in j.get("steps") or [] if (s.get("with") or {}).get("mode") == "save"
+             and s.get("uses") == "./.github/actions/client-private" and not str(s.get("if", "")).startswith("always()")]
+    check("持ち越し: 残す工程は途中が落ちても動く（always()）", saves, [])
+    # 並行ジョブは自分の系統だけに残す（同じ系統だと optimize の古い写しで上書きされる）
+    kw = [s for s in _steps("weekly-optimize.yml", "kw-refill") if s.get("uses") == "./.github/actions/client-private"]
+    ix = [s for s in _steps("weekly-optimize.yml", "index-inspect") if s.get("uses") == "./.github/actions/client-private"]
+    check("持ち越し: 並行ジョブは戻さず、自分の系統（ai-kw・index）にだけ残す",
+          ([(s["with"]["mode"], s["with"].get("family")) for s in kw], [(s["with"]["mode"], s["with"].get("family")) for s in ix]),
+          ([("save", "ai-kw")], [("save", "index")]))
+
+
+def test_weekly_remembers_what_it_reported():
+    body = next(str(s.get("run")) for s in _steps("weekly-optimize.yml", "optimize") if _ran("scripts/findings.py")(s))
+    check("週次: 前の週に出たもの（findings_seen.json）をコミットし、未コミットの変更があっても pull を通す",
+          ("data/findings_seen.json" in body, "git pull --rebase --autostash" in body), (True, True))
