@@ -136,6 +136,12 @@ def main():
         kind = "リンクあり" if a.linked else "リンクなし"
         who = "自社ドメイン（数えない）" if a.own else "第三者"
         print(f"  登録しました（{kind} / {who}）: {a.where or a.add}")
+        # 依頼して載った掲載なら、依頼の台帳（outreach.py・公開しない置き場）にも記録する
+        import outreach
+        if (outreach.STORE_DIR / "targets.json").is_file():
+            n = outreach.track(mentions=d["items"])
+            if n:
+                print(f"  依頼の台帳: {n}件を「掲載された」にしました")
         return 0
 
     items = d["items"]
