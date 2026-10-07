@@ -7,6 +7,8 @@
      数えるのは lead_capture / generate_lead だけにする（ファネルの「送信した」も同じ）
   2. 補助金は lead_hub: false で突き合わせから外れていた（本番の送り先は管制塔）。台帳にサイト名が
      「（不明）」で残った行は「メールにだけ届いた」とは言わず、サイト名を直すよう知らせる
+  3. コーポレートの入口は ?s=backoffice（選択肢に無い）・?s=keiri-shindan（送信時に名前が付かない）で、
+     /contact/ は /contact へ 308 で転送されていた。行き先を変えても日次の --write が2本目を足さない
 
 ネットワーク・GA4・台帳には触れない（全部スタブ）。
 """
@@ -15,6 +17,9 @@ import contextlib
 import io
 import re
 import sys
+import tempfile
+from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 
 from test_gates import check, ROOT
 
@@ -119,3 +124,65 @@ def test_subsidy_is_reconciled_and_unknown_rows_are_named():
                   (LR, "ACKED", {})):
         _, out = _out(LR.main, argv=["lead_reconcile.py"])
     check("台帳に補助金の行があれば食い違いにしない", ("LEADS_OK=yes" in out, sub["name"] in out), (True, True))
+
+
+# コーポレートのフォームの「ご相談内容」で、送信時に名前が付く値（services.ts の slug と ContactForm.tsx の EXTRA）。
+# 配信先の作業コピーがあればそこから読む（無い CI では 2026-10-07 時点の値）
+CORP_CHOICES = {"keiri-bpo", "ai-subsidy", "meo", "aio", "ai-consulting", "web-production",
+                "system-development", "rakushift", "aio-agent", "all", "other"}
+
+
+def _corp_choices():
+    src = ROOT / ".publish-work" / "corporate" / "src"
+    svc, form = src / "lib" / "services.ts", src / "components" / "ContactForm.tsx"
+    if not (svc.is_file() and form.is_file()):
+        return CORP_CHOICES
+    slugs = set(re.findall(r'^    slug: "([^"]+)"', svc.read_text(encoding="utf-8"), re.M))
+    extra = re.search(r"const EXTRA[^=]*=\s*\{(.*?)\};", form.read_text(encoding="utf-8"), re.S)
+    keys = set(re.findall(r'^\s*"?([a-z0-9-]+)"?\s*:', extra.group(1), re.M)) if extra else set()
+    return (slugs | keys) or CORP_CHOICES
+
+
+def test_corporate_entry_links_open_a_named_choice_without_redirect():
+    import tool_links as TL
+    choices = _corp_choices()
+    corp = {k: v[0] for k, v in TL.OFFER.items() if "corp.7senses.co.jp" in v[0]}
+    check("コーポレートの入口がある", sorted(corp), ["backoffice", "keiri-bpo", "keiri-jitsumu"])
+    bad = {}
+    for k, url in corp.items():
+        u = urlparse(url)
+        s = parse_qs(u.query).get("s", [""])[0]
+        if u.path.endswith("/") or s not in choices:
+            bad[k] = url
+    check("入口は /contact（転送なし）で、?s= はフォームの選択肢のうち名前が付く値だけ", bad, {})
+
+    old = "https://corp.7senses.co.jp/contact/?s=keiri-shindan"
+    art = ("---\ntitle: テスト\ncategory: keiri-bpo\n---\n\n## 失敗しやすい点\n\n本文です。\n\n"
+           "整理は、[経理の現状分析（無料）](" + old + ")からご相談いただけます。\n\n"
+           '<div class="cta-box"><a class="cta-button" href="' + old + '">経理の現状分析（無料）</a></div>\n\n'
+           "## まとめ\n\n本文です。\n")
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        (root / "articles").mkdir()
+        (root / "sites").mkdir()
+        p = root / "articles" / "h52-test.md"
+        p.write_bytes(art.encode("utf-8"))
+        fresh = root / "articles" / "h52-fresh.md"
+        fresh.write_bytes(art.replace("整理は、[経理の現状分析（無料）](" + old + ")からご相談いただけます。\n\n", "")
+                          .replace('<div class="cta-box"><a class="cta-button" href="' + old
+                                   + '">経理の現状分析（無料）</a></div>\n\n', "").encode("utf-8"))
+        with _patched((TL, "ROOT", root)):
+            _out(TL.main, True)
+            check("以前の行き先が入った記事に、日次の --write が2本目を足さない", p.read_bytes().decode("utf-8"), art)
+            check("入口の無い記事には今の行き先で1本入る",
+                  fresh.read_text(encoding="utf-8").count("corp.7senses.co.jp/contact"), 1)
+            relink = getattr(TL, "relink", None)
+            if relink:
+                _out(relink, True)
+            got = p.read_bytes().decode("utf-8")
+            check("--relink で以前の行き先を今の行き先へ（本文のリンクも cta-box の href も）",
+                  (old in got, got.count(TL.OFFER["keiri-bpo"][0])), (False, 2))
+            check("--relink は行き先だけを変える", got.replace(TL.OFFER["keiri-bpo"][0], old), art)
+            if relink:
+                _out(relink, True)
+            check("--relink は何度当てても同じ", p.read_bytes().decode("utf-8"), got)

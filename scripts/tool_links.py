@@ -11,6 +11,7 @@
 
   python scripts/tool_links.py            # 候補を出す
   python scripts/tool_links.py --write    # 本文に入れる
+  python scripts/tool_links.py --relink [--write]   # 以前の行き先（RETIRED）のまま入っている記事を差し替える
 """
 import glob
 import json
@@ -26,6 +27,17 @@ TOOL_TAIL = "で確かめられます。登録は不要で、その場で点数�
 # コーポレートには自己診断が無く、人が読んで返す現状分析につなぐ。
 # 同じ文末を使うと「その場で点数が出る」が事実と違ってしまうため分けている
 TALK_TAIL = "からご相談いただけます。ご契約を前提としたご案内ではありません。"
+# コーポレートの相談フォーム。?s= には「ご相談内容」の選択肢の値のうち、送信時に名前が付くもの
+# （corporate の src/lib/services.ts の slug と ContactForm.tsx の EXTRA のキー）だけを使う。
+# 以前の ?s=backoffice は選択肢に無く未選択のまま開き、?s=keiri-shindan は選べても EXTRA に無く
+# 「ご相談内容」が空で届く（詳細も空だと受付で弾かれる）。/contact/ は /contact へ 308 で転送される
+# ので末尾のスラッシュを付けない（2026-10-07 の点検。134本が転送を1回挟んでいた）
+CORP_CONTACT = "https://corp.7senses.co.jp/contact?s=keiri-bpo"
+# 以前の行き先 → 今の行き先。入っている記事は --relink で差し替える（差し替えるまで main は二重に入れない）
+RETIRED = {
+    "https://corp.7senses.co.jp/contact/?s=keiri-shindan": CORP_CONTACT,
+    "https://corp.7senses.co.jp/contact/?s=backoffice": CORP_CONTACT,
+}
 
 # カテゴリ → (リンク先, アンカー, 導入の一文, 文末)
 OFFER = {
@@ -41,14 +53,11 @@ OFFER = {
     "hojokin": ("/#diagnosis", "3分の適性診断（無料・8問）",
                 "自社が補助金の対象になるかどうかは、", TOOL_TAIL),
     # コーポレートは88本中75本に行き先が無かった。読んだ人が動けない
-    "keiri-bpo": ("https://corp.7senses.co.jp/contact/?s=keiri-shindan",
-                  "経理の現状分析（無料）",
+    "keiri-bpo": (CORP_CONTACT, "経理の現状分析（無料）",
                   "どこから手をつけるべきかの整理は、", TALK_TAIL),
-    "keiri-jitsumu": ("https://corp.7senses.co.jp/contact/?s=keiri-shindan",
-                      "経理の現状分析（無料）",
+    "keiri-jitsumu": (CORP_CONTACT, "経理の現状分析（無料）",
                       "自社の経理のどこに時間がかかっているかは、", TALK_TAIL),
-    "backoffice": ("https://corp.7senses.co.jp/contact/?s=backoffice",
-                   "バックオフィスの現状分析（無料）",
+    "backoffice": (CORP_CONTACT, "バックオフィスの現状分析（無料）",
                    "どの業務から整理すべきかは、", TALK_TAIL),
 }
 # 同じ一文を何十本にも貼ると、それ自体が量産の指紋になる（実測で1文が106本に並んでいた）。
@@ -136,6 +145,32 @@ def insert_at(body):
     return m.start() if m else None
 
 
+def has_link(text, url):
+    """その記事に行き先が入っているか。以前の行き先（RETIRED）のままでも入っているとみなす
+    （行き先を変えた日に、日次の --write が同じ導線を2本目として足さないため）"""
+    return url in text or any(old in text for old, cur in RETIRED.items() if cur == url)
+
+
+def relink(write=False):
+    """以前の行き先のまま入っている記事を、今の行き先に差し替える（アンカーと文は変えない）。
+    配信済みの記事へは、原稿を差し替えた後に publish_changed で届ける"""
+    pats = [(re.compile(re.escape(old) + r"(?![\w&=%-])"), cur) for old, cur in RETIRED.items()]
+    n = links = 0
+    for f in sorted(glob.glob(str(ROOT / "articles" / "*.md"))):
+        p = Path(f)
+        t = p.read_bytes().decode("utf-8")
+        new = t
+        for pat, cur in pats:
+            new, k = pat.subn(cur, new)
+            links += k
+        if new != t:
+            n += 1
+            if write:
+                p.write_bytes(new.encode("utf-8"))
+    print(f"  以前の行き先を{'差し替えた' if write else '差し替える候補'}: {n}本（リンク{links}か所）")
+    return 0
+
+
 def main(write=False):
     conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
             for p in (ROOT / "sites").glob("*.json")}
@@ -149,7 +184,7 @@ def main(write=False):
         if not key:
             continue
         url, anchor, lead, tail = OFFER[key]
-        if url in t:
+        if has_link(t, url):
             continue
         pos = insert_at(t)
         if pos is None:
@@ -168,4 +203,6 @@ def main(write=False):
 if __name__ == "__main__":
     if "--vary" in sys.argv:
         sys.exit(vary("--write" in sys.argv))
+    if "--relink" in sys.argv:
+        sys.exit(relink("--write" in sys.argv))
     sys.exit(main("--write" in sys.argv))
