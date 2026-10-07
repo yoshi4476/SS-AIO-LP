@@ -10,8 +10,13 @@
   "大阪 外構工事 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.famitei.net/",
+     "https://fuji-exterior.com/",
+     "https://www.flower-lag.co.jp/",
+     "https://www.exterior-fujii.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -46,8 +51,14 @@
   "東京 解体工事 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://tokyo-kaitai-pro.com/",
+     "https://www.kondou-kaitai.tokyo/index.html",
+     "https://www.inase.jp/",
+     "https://dikauke.com/",
+     "https://www.toshiseibi.metro.tokyo.lg.jp/ryokuchi_keikan/shoshigen/recy/6"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -88,8 +99,13 @@
   "名古屋 電気工事 会社": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.e-kouji.com/",
+     "https://www.nnd-ew.com/company/",
+     "https://itoe.co.jp/",
+     "https://www.chubudenko.co.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -123,8 +139,12 @@
   "福岡 エアコン工事 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://fukuoka-kuchoservice.jp/installation/",
+     "https://mikasa-denki.com/work/kakaku",
+     "https://www.airconservice.jp/service/personalaircom"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -157,8 +177,14 @@
   "札幌 外構 エクステリア 施工": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.takezawa-wall.com/",
+     "https://www.morizouen.co.jp/",
+     "https://www.white-garden.jp/company",
+     "https://www.joushun.com/",
+     "https://www.abiesgarden.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -193,8 +219,14 @@
   "横浜 リフォーム 設備工事": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kamosita.co.jp/company/",
+     "https://www.daieiyunitto-kogyo.com/",
+     "https://relife-jyuusetsu.co.jp/",
+     "https://www.ozawa-ss.jp/",
+     "https://www.faq.kokusen.go.jp/faq/show/1398?site_domain=default"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -230,8 +262,14 @@
   "京都 解体工事 費用": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://33ken.com/2026/03/11/%E3%80%902026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E4%BA%AC%E9%83%BD%E3%81%AE%E8%A7%A3%E4%BD%93%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%82%92%E8%A9%B3%E3%81%97%E3%81%8F%E8%A7%A3%E8%AA%AC/",
+     "https://www.kaitai-guide.net/costprice/areacp/kyoto/kyotoshi/",
+     "https://takumikaitai.com/",
+     "https://bloom-kaitai.com/blog/%E4%BA%AC%E9%83%BD%E3%81%AE%E8%A7%A3%E4%BD%93%E5%B7%A5%E4%BA%8B%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%9D%AA%E5%8D%98%E4%BE%A1%E7%9B%B8%E5%A0%B4%E3%81%A8%E8%A7%A3%E4%BD%93%E8%B2%BB%E7%94%A8%E5%89%8A/",
+     "https://www.city.kyoto.lg.jp/sogo/page/0000246819.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -254,8 +292,14 @@
   "神戸 電気工事 業者 選び方": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.meti.go.jp/information/license/c_text24.html",
+     "https://web.pref.hyogo.lg.jp/sr12/pa19_000000020.html",
+     "https://www.pref.gunma.jp/page/720518.html",
+     "https://hyogo-denki.com/",
+     "https://kobe-consumer.smartkobe-portal.com/wp-content/uploads/2025/08/aefc12874202613382a84721b43245ec.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -277,8 +321,14 @@
   "仙台 空調工事 会社": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://aks-sendai.com/",
+     "https://ats-sendai.com/company/profile/",
+     "https://www.realize-sendai.com/",
+     "https://sanei-aci.com/",
+     "https://www.tk-kamioka.co.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -318,8 +368,12 @@
   "広島 外構工事 見積": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.gaikouya.co.jp/hiroshimaexterior/2889",
+     "https://www.gaikouexterior-partners.jp/contents/hiroshima",
+     "https://www.asunaro-ex.com/areas/hiroshima/hiroshima-naka/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -355,8 +409,11 @@
   "外構工事 費用 相場": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://house.home4u.jp/contents/budget-53-16941",
+     "https://actradic.com/gaikou-kouji-hiyou.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -394,8 +451,11 @@
   "外構工事 業者 選び方": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kurashi-pro.jp/content/articles/gaikou-gyousha-erabikata/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen491.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -427,8 +487,13 @@
   "カーポート 設置 費用": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kurashi-pro.jp/content/articles/carport-hiyou/",
+     "https://www.ex-shop.net/index.php?action=public_item_cp_search_execute&se_05=capa%3Ac1&sort1=item_totalprice",
+     "https://www.ex-shop.net/index.php?action=public_item_cp_search_execute&se_05=capa%3Ac3&sort1=item_totalprice",
+     "https://handg-kikaku.com/blog/79638"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -459,8 +524,11 @@
   "駐車場 コンクリート 費用 目安": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://ext.juncham.com/parking-concrete-cost/",
+     "https://www.gaikouexterior-partners.jp/contents/2060"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -494,8 +562,11 @@
   "フェンス 設置 費用 相場": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.homepro.jp/exterior/exterior-basic/2345ca",
+     "https://gumi-hayashi.com/blog/privacy-fence-types-cost-guide/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -528,8 +599,12 @@
   "外構工事 見積 比較 ポイント": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://ukai-kogyo.jp/news/upjngqkly83/",
+     "https://toda-gaikou.com/exterior-construction-comparison/",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/dl_files/pricr-check-list.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -562,8 +637,13 @@
   "庭 リフォーム 費用 抑える方法": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.lixil-reformshop.jp/column/article/garden_reform/",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/dl_files/pricr-check-list.pdf",
+     "https://rescue.epark.jp/columns/home-repair/ekusuteria/1973",
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_01101/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -594,8 +674,12 @@
   "外構 後悔 しないために": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://cre-corporation.jp/gaiku-failure-lessons/",
+     "https://www.arinkono-niwa.com/regret/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen491.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -642,8 +726,11 @@
   "門扉 アプローチ 施工 費用": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://exterior.news.mynavi.jp/gate-basics/",
+     "https://gumi-hayashi.com/blog/entrance-approach-materials-cost-guide/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -678,8 +765,12 @@
   "外構工事 いつ 依頼 新築": {
    "group": "外構・エクステリアの費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.simplehome-yamaka.com/column/details_60.html",
+     "https://www.garterior.net/gaiko-timing/",
+     "https://toda-gaikou.com/new-construction-exterior-construction/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -720,8 +811,11 @@
   "解体工事 費用 相場": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kaitai.hokuto7s.co.jp/demolition-cost-2026/",
+     "https://www.city.kashiwara.lg.jp/docs/2025080400036/file_contents/kaitaikouji_guide.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -753,8 +847,11 @@
   "木造住宅 解体 坪単価": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://clean-kyushu.com/blog/staff/wooden-house-demolition-cost-per-tsubo/",
+     "https://kaitai.hokuto7s.co.jp/demolition-cost-2026/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -795,8 +892,14 @@
   "解体工事 業者 選び方": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bt_000080.html",
+     "https://www.toshiseibi.metro.tokyo.lg.jp/ryokuchi_keikan/shoshigen/recy/6",
+     "https://www.city.kashiwara.lg.jp/docs/2025080400036/file_contents/kaitaikouji_guide.pdf",
+     "https://www.env.go.jp/air/asbestos/post_87.html",
+     "https://www.pref.gifu.lg.jp/page/469888.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -827,8 +930,11 @@
   "解体工事 見積 内訳": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.kashiwara.lg.jp/docs/2025080400036/file_contents/kaitaikouji_guide.pdf",
+     "https://www.mlit.go.jp/common/001023921.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -869,8 +975,13 @@
   "アスベスト 調査 解体 費用": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://ishiwatachousa.com/price/",
+     "https://simon-re.com/asbestos/price/",
+     "https://www.mlit.go.jp/jutakukentiku/build/Q%26A/index.html",
+     "https://www.ishiwata.mhlw.go.jp/procedures/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -918,8 +1029,13 @@
   "解体 補助金 自治体 申請": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.sapporo.jp/toshi/k-shido/akiya/akiyahojyo.html",
+     "https://www.city.yokosuka.kanagawa.jp/4821/akiyakanri/kaitaihojo.html",
+     "https://www.city.tomioka.lg.jp/www/contents/1459473339010/index.html",
+     "https://www.city.echizen.lg.jp/office/070/040/roukyukikenakiya/roukyukikenakiyahojyokin.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -952,8 +1068,14 @@
   "家 解体 流れ 期間": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.aokikogyo.com/news/news-2861/",
+     "https://www.j-akiya.jp/wp-content/uploads/2024/03/crassone_vacanthome_demolition_checkpoints.pdf",
+     "https://www.mlit.go.jp/sogoseisaku/region/recycle/d11pdf/recyclehou/todokede/todokede10.pdf",
+     "https://www.ishiwata.mhlw.go.jp/business/house-wrecker/",
+     "https://houmukyoku.moj.go.jp/gifu/content/001325580.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -986,8 +1108,14 @@
   "解体工事 追加費用 トラブル": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://sancle.co.jp/kaitai/additional-cost/",
+     "https://kaitai-pegasus.com/blog/251002",
+     "https://www.mlit.go.jp/report/press/sogo13_hh_000023.html",
+     "https://www.env.go.jp/air/asbestos/post_87.html",
+     "https://www.caa.go.jp/about_us/about/contact/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1018,8 +1146,14 @@
   "空き家 解体 費用 目安": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hoei-dev.com/666-2/",
+     "https://kenshinsougyou.co.jp/column/vacant-house-demolition-costs/",
+     "https://akiya-mimamori-navi.com/column/kaitai-hiyou/",
+     "https://www.city.yokohama.lg.jp/business/bunyabetsu/kenchiku/bosai/taishin/hojokinshienseido/mokutai/jyuutakujyokyaku.html",
+     "https://www.city.chiba.jp/toshi/toshi/anzen/akiya-genmen.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1053,8 +1187,15 @@
   "解体業者 悪徳 見分け方": {
    "group": "解体工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.pref.kyoto.jp/kensetugyo/kaitai/2022630.html",
+     "https://www.faq.kokusen.go.jp/faq/show/1398?site_domain=default",
+     "https://asbestos-hikaku.net/kaitai/troubleshooting/",
+     "https://www.ishiwata.mhlw.go.jp/business/house-wrecker/",
+     "https://www.env.go.jp/hourei/add/k035.pdf",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen491.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1092,8 +1233,13 @@
   "電気工事 費用 相場": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://ok-renovation.jp/denki-koji-cost/",
+     "https://media.bisenn.jp/estimate-simulation/outlet/",
+     "https://denkucom.kmccorp.jp/column/bunden-koukan-zousetsu-cost",
+     "https://koba-elc.co.jp/concent-zosetsu-hiyo/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1126,8 +1272,13 @@
   "電気工事 業者 選び方": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.meti.go.jp/information/license/c_text24.html",
+     "https://www.meti.go.jp/shingikai/sankoshin/hoan_shohi/denryoku_anzen/hoan_seido/pdf/016_01_02.pdf",
+     "https://www.kokusen.go.jp/pdf/n-20250115_1.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20260916_2.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1151,8 +1302,11 @@
   "コンセント 増設 費用": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.qracian.co.jp/column/electricity/14112/",
+     "https://koba-elc.co.jp/concent-zosetsu-hiyo/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1182,8 +1336,12 @@
   "分電盤 交換 費用 目安": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.eneos-power.co.jp/article/basics-electricity/distribution-board-replace-cost/",
+     "https://koba-elc.co.jp/bunkanden-koukan-hiyou/",
+     "https://jimoden.jp/distribution-board-replacement/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1214,8 +1372,15 @@
   "電気工事士 資格 確認 方法": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.shiken.or.jp/construction/license/",
+     "https://www.safety-tohoku.meti.go.jp/electric/detail/04_kojisha/gaiyo.html",
+     "https://www.safety-chubu.meti.go.jp/denryoku/kouzi/detail/koujishi.html",
+     "https://www.pref.kochi.lg.jp/form/010301/menjousyoukai.html",
+     "https://www.pref.osaka.lg.jp/faq/o020100/faq_000733.html",
+     "https://www.shiken.or.jp/construction/license/counter/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1247,8 +1412,11 @@
   "照明 取り付け 工事 料金": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/lighting-installation/",
+     "https://meetsmore.com/services/lighting-exchange"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1291,8 +1459,15 @@
   "EV充電器 設置 工事 費用": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://evdays.tepco.co.jp/entry/2021/03/22/000004",
+     "https://ev-charge-enechange.jp/articles/162/",
+     "https://www.nttev.com/column/ev_charging_equipment_cost/",
+     "https://evdays.tepco.co.jp/entry/2021/11/24/000024",
+     "https://www.mlit.go.jp/common/001981321.pdf",
+     "https://www.metro.tokyo.lg.jp/information/press/2026/06/2026061815"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1335,8 +1510,13 @@
   "電気工事 見積 注意点": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://denkikoji-guide.com/guide/mitsumori/",
+     "https://smile-partner.co/denki-koji-mitsumorisho-yomikata/",
+     "https://www.caa.go.jp/notice/entry/045076/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen508.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1374,8 +1554,13 @@
   "漏電 修理 業者 依頼": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://pgservice1.tepco.co.jp/flow/",
+     "https://www.meti.go.jp/press/2024/01/20250115001/20250115001.html",
+     "https://pgservice1.tepco.co.jp/service/",
+     "https://www.kokusen.go.jp/news/data/n-20260916_2.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1412,8 +1597,13 @@
   "配線工事 見積 内訳": {
    "group": "電気工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/common/001203247.pdf",
+     "https://www.concrew.co.jp/base/content/zy6g-zrygi8",
+     "https://ok-renovation.jp/service/electrical/outlet/",
+     "https://sanyudensetsu.com/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1449,8 +1639,11 @@
   "エアコン 取り付け 工事費 相場": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.yodobashi.com/ec/support/beginner/setup/aircon/index.html",
+     "https://www.yamada-denkiweb.com/info/wcontents/kouji_aircon.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1485,8 +1678,16 @@
   "空調工事 業者 選び方": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.j-reform.com/publish/pdf_guidebook/r5-all.pdf",
+     "https://www.jerco.or.jp/reform/select/",
+     "https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/files/AChyou.pdf",
+     "https://www.pref.fukuoka.lg.jp/contents/fron-11.html",
+     "https://www.env.go.jp/earth/furon/operator/meibo.html",
+     "https://www.j-reform.com/consumer/consumer03.html",
+     "https://www.kokusen.go.jp/news/data/n-20260603_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1517,8 +1718,11 @@
   "エアコン 設置 追加料金 内訳": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.biccamera.com/bc/c/info/purchase/aircon_kouji.jsp",
+     "https://y-ichiban.jp/yamadacorp/faq/faq.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1558,8 +1762,11 @@
   "業務用エアコン 入れ替え 費用": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ac.daikin.co.jp/customercenter/useful/article/49",
+     "https://www.totoka.jp/construction/air_conditioning/cost/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1599,8 +1806,11 @@
   "エアコン 移設 工事 料金": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/aircon-install/magazine/592/",
+     "https://meetsmore.com/services/air-conditioner-installation/media/98208"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1637,8 +1847,11 @@
   "ダクト 空調 工事 費用 目安": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://iwasaki-duct.com/blog/80049",
+     "https://kuuchousha.com/blog/99157"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1679,8 +1892,12 @@
   "エアコン 工事 見積 比較": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.yodobashi.com/ec/support/beginner/setup/aircon/index.html",
+     "https://www.yamada-denkiweb.com/info/wcontents/kouji_aircon.html",
+     "https://curama.jp/aircon-install/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1708,8 +1925,12 @@
   "新築 エアコン 設置 時期": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kokokara-sisanunyo.com/new-build-air-conditioner-installation/",
+     "https://www.cleverlyhome.com/kurashi/item/14391/",
+     "https://www.yodobashi.com/ec/support/beginner/setup/aircon/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1744,8 +1965,12 @@
   "エアコン 配管 延長 費用": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://home.tokyo-gas.co.jp/column/air_conditioner/0182/",
+     "https://www.biccamera.com/bc/c/info/purchase/airconconstruction_pricelist.jsp",
+     "https://shop.nocria.jp/pages/air-conditioner-construction"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1783,8 +2008,13 @@
   "空調 設備 更新 補助金": {
    "group": "空調（エアコン）工事の費用や選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.syouenehojyokin.sii.or.jp/about-type/setsubi.html",
+     "https://sii.or.jp/",
+     "https://sii.or.jp/setsubi07r/uploads/r7h_st_01_kouboyouryou.pdf",
+     "https://www.city.fukuoka.lg.jp/kankyo/s-suishin/hp/syoenekaden2026.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1809,5 +2039,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }

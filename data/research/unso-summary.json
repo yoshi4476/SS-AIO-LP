@@ -1,15 +1,23 @@
 {
  "total": {
-  "media": 76,
-  "clinic": 391,
-  "portal": 196,
+  "portal": 204,
+  "maker": 130,
+  "media": 79,
+  "clinic": 435,
   "review": 5,
+  "video": 14,
   "other": 12,
-  "video": 10,
-  "maker": 52,
-  "public": 20
+  "public": 42
  },
  "by_engine": {
+  "ChatGPT": {
+   "portal": 8,
+   "maker": 78,
+   "video": 4,
+   "media": 3,
+   "clinic": 44,
+   "public": 22
+  },
   "Gemini": {
    "media": 17,
    "clinic": 158,
@@ -33,71 +41,74 @@
  },
  "by_group": {
   "地域で探す": {
-   "media": 17,
-   "clinic": 95,
-   "portal": 45,
+   "portal": 48,
+   "maker": 31,
+   "media": 18,
+   "clinic": 101,
    "review": 5,
-   "other": 7,
-   "video": 1,
-   "maker": 2
+   "video": 3,
+   "other": 7
   },
   "引っ越し": {
-   "portal": 60,
-   "maker": 15,
-   "clinic": 37,
-   "media": 25,
-   "public": 5,
+   "portal": 63,
+   "maker": 16,
+   "clinic": 40,
+   "media": 26,
+   "public": 16,
    "video": 2,
    "other": 2
   },
   "チャーター便": {
-   "portal": 27,
-   "clinic": 108,
-   "public": 4,
+   "portal": 28,
+   "clinic": 122,
+   "maker": 17,
+   "public": 6,
    "video": 1,
    "media": 8,
-   "other": 1,
-   "maker": 3
+   "other": 1
   },
   "倉庫・保管": {
-   "clinic": 87,
-   "portal": 50,
-   "media": 12,
-   "maker": 13,
-   "public": 6,
+   "maker": 34,
+   "media": 13,
+   "clinic": 91,
+   "portal": 51,
+   "public": 14,
    "other": 1,
-   "video": 1
+   "video": 2
   },
   "配送料金": {
-   "clinic": 64,
+   "clinic": 81,
    "portal": 14,
-   "maker": 19,
+   "maker": 32,
    "media": 14,
    "other": 1,
-   "video": 5,
-   "public": 5
+   "video": 6,
+   "public": 6
   }
  },
  "answered": {
+  "ChatGPT": 50,
   "Gemini": 35,
   "Claude": 50
  },
  "has_clinic": {
   "Gemini": 34,
-  "Claude": 48
+  "Claude": 48,
+  "ChatGPT": 26
  },
  "sources": {
+  "ChatGPT": 159,
   "Gemini": 289,
   "Claude": 473
  },
  "portal_top": [
   [
    "pickgo.town",
-   25
+   26
   ],
   [
    "hikkoshi.suumo.jp",
-   14
+   16
   ],
   [
    "hikkoshizamurai.jp",
@@ -150,65 +161,65 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 85,
-   "portal": 73,
-   "media": 49,
-   "clinic": 82,
+   "answers": 135,
+   "portal": 81,
+   "maker": 69,
+   "clinic": 108,
+   "media": 52,
    "review": 3,
+   "video": 13,
    "other": 12,
-   "video": 9,
-   "maker": 31,
-   "public": 15
+   "public": 28
   },
   "地域で探す": {
-   "answers": 20,
-   "portal": 18,
-   "media": 11,
-   "clinic": 18,
+   "answers": 30,
+   "portal": 21,
+   "maker": 12,
+   "clinic": 22,
+   "media": 12,
    "review": 3,
-   "other": 7,
-   "video": 1,
-   "maker": 2
+   "video": 3,
+   "other": 7
   },
   "引っ越し": {
-   "answers": 15,
-   "portal": 15,
-   "clinic": 14,
-   "maker": 9,
-   "media": 10,
-   "public": 4,
+   "answers": 25,
+   "portal": 18,
+   "clinic": 16,
+   "maker": 10,
+   "media": 11,
+   "public": 9,
    "video": 2,
    "other": 2
   },
   "チャーター便": {
-   "answers": 16,
-   "portal": 13,
-   "clinic": 16,
-   "public": 3,
+   "answers": 26,
+   "portal": 14,
+   "clinic": 24,
+   "maker": 10,
+   "public": 5,
    "video": 1,
    "media": 8,
-   "other": 1,
-   "maker": 2
+   "other": 1
   },
   "倉庫・保管": {
-   "answers": 18,
-   "media": 10,
-   "portal": 17,
-   "clinic": 18,
-   "maker": 7,
+   "answers": 28,
+   "media": 11,
+   "maker": 17,
+   "portal": 18,
+   "clinic": 21,
+   "public": 10,
    "other": 1,
-   "public": 5,
-   "video": 1
+   "video": 2
   },
   "配送料金": {
-   "answers": 16,
+   "answers": 26,
+   "clinic": 25,
    "portal": 10,
-   "clinic": 16,
-   "maker": 11,
+   "maker": 20,
    "media": 10,
    "other": 1,
-   "video": 4,
-   "public": 3
+   "video": 5,
+   "public": 4
   }
  }
 }

@@ -10,8 +10,13 @@
   "大阪 金属加工 試作 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.sinei-model.com/t_metal/",
+     "https://k-yb.co.jp/",
+     "https://cococ.biz/jigyou/",
+     "https://www.bankin-kf.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -46,8 +51,13 @@
   "東京 樹脂成形 小ロット 対応": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.daytech.co.jp/business/injection-molding",
+     "https://monozukuri-1stop.com/injection-molding.html",
+     "https://www.platech-p.com/",
+     "https://azmas.co.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -90,8 +100,12 @@
   "名古屋 切削加工 短納期": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://aokiseisakusyo.com/index.html",
+     "https://shouwaseiki.co.jp/",
+     "https://sunseiki.co.jp/custom-parts/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -123,8 +137,13 @@
   "福岡 板金加工 試作 依頼": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kl-tech.jp/q_and_a.html",
+     "https://www.genkaigiken.co.jp/",
+     "https://takara-metal.jp/",
+     "https://takara-metal.jp/technology"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -155,8 +174,12 @@
   "札幌 金属加工 小ロット": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kitasato-kikai.com/",
+     "https://kyoritu-press.co.jp/",
+     "https://northcreates.com/made-to-order/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -192,8 +215,13 @@
   "横浜 精密部品 受託加工": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.alphatech-yokohama.co.jp/strength.html",
+     "https://www.yanase-k.jp/",
+     "https://www.toukou.ne.jp/",
+     "https://nochi.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -225,8 +253,14 @@
   "京都 試作 加工 会社": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.iwaiseisakusyo.co.jp/",
+     "https://makoto-plastic.co.jp/company/",
+     "https://goodwood-kyoto.com/",
+     "https://metali.co.jp/works/trial.html",
+     "https://kyoto-shisaku.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -269,8 +303,12 @@
   "神戸 金属プレス 受託 相談": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.oshima-kk.com/qa/",
+     "https://www.fuji-spf.co.jp/",
+     "https://www.issin-k.jp/company-profile"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -311,8 +349,14 @@
   "仙台 樹脂 射出成形 試作": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.plamoul-seiko.co.jp/kanagata.html",
+     "https://www.mg-japan.co.jp/company.html",
+     "https://www.j-screwm.com/business.html",
+     "https://www.mit.pref.miyagi.jp/services/solution/usage/プラスチックの試作と評価/",
+     "https://www.mit.pref.miyagi.jp/about/location/access/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -351,8 +395,13 @@
   "広島 機械加工 多品種少量": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://houeihiroshima.com/business/",
+     "https://www.nagai-mac.com/",
+     "https://dl-japan.com/",
+     "https://www.kano-kasei.co.jp/product/plastic/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -386,8 +435,13 @@
   "試作 加工 費用 相場": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://sharingfactory.jp/2026/05/03/senbankakou/",
+     "https://kanto-seimitsu.jp/",
+     "https://online.solize.com/blog/protocost",
+     "https://3day-printer.com/media/product-service/3d-printer-prototyping/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -421,8 +475,14 @@
   "小ロット 樹脂成形 見積 目安": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://doudaseiko.com/product/",
+     "https://mitsudenshi.co.jp/service/simple_metallic_mold/",
+     "https://www.pla-part.com/service/oem-odm/",
+     "https://www.ricoh.co.jp/3dp/print_service/price",
+     "https://www.techno-labo.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -464,8 +524,11 @@
   "金属切削 1個 見積 いくら": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kyoto-kikai-shoji.com/column/旋盤加工の料金と見積り完全ガイド｜費用の決ま/",
+     "https://tel-mic.com/works/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -510,8 +573,12 @@
   "板金加工 見積 料金 相場": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://grip-space.co.jp/mfg-db/column/sheet-metal-price",
+     "https://jp.meviy.misumi-ec.com/info/ja/fa-sheet-metal-service/",
+     "https://tomoe-eng.co.jp/column/cost-down/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -545,8 +612,12 @@
   "射出成形 金型代 相場": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://injection-lab.com/technics/1802-2.html",
+     "https://mitsudenshi.co.jp/service/simple_metallic_mold/",
+     "https://injection-lab.com/technology/1984-2.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -578,8 +649,12 @@
   "アルミ 削り出し 単価 目安": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://mdsa.co.jp/osirase/index15.html",
+     "https://jp.meviy.misumi-ec.com/info/ja/example/method/turning/material/aluminum/",
+     "https://jp.marketplace.meviy.misumi-ec.com/info/ja/service/machining/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -612,8 +687,11 @@
   "見積 依頼 必要な情報 図面": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nogatadenki.jp/estimate.html",
+     "https://www.bantec2022.com/archives/1726"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -634,8 +712,12 @@
   "試作 見積 無料 有料": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://3dprintdaikou.com/",
+     "https://www.cycos-japan.com/service/advisory/",
+     "https://oripra.com/prototype-production.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -657,8 +739,12 @@
   "単品加工 費用 抑える方法": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://laser-tech.jp/works/981/",
+     "https://www.sakakibara-kouki.co.jp/blog2/costdown_point/",
+     "https://www.yumoto.jp/technology/onepoint/alternative-proposal/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -683,8 +769,14 @@
   "金型 なし 樹脂 試作 費用": {
    "group": "費用・見積",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.corefront.com/products/3d_printing_service/",
+     "https://www.kyokutokasei.info/price",
+     "https://www.technoassocie.co.jp/modelport/resin_cutting/",
+     "https://www.xeffect.com/vacuum/",
+     "https://www.ricoh.co.jp/3dp/print_service/price"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -723,8 +815,12 @@
   "加工会社 選び方 試作": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://emtopia.net/blog/63",
+     "https://houeihiroshima.com/column/precision-metal-prototype-parts/",
+     "https://emtopia.net/blog/64"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -748,8 +844,12 @@
   "受託加工 依頼先 比較 ポイント": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.tatsumiya-metal.com/cutting-machining-outsourcing-guide/",
+     "https://barrel-polish.com/column/outsource-tips/",
+     "https://sei.co.jp/csr/guideline/pdf/qualitycontrol-b.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -779,8 +879,13 @@
   "小ロット 対応 加工会社 探し方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.tatsumiya-metal.com/cutting-machining-prototype-small-lot-guide/",
+     "https://houeihiroshima.com/column/small-lot-parts-processing/",
+     "https://jgoodtech.smrj.go.jp/",
+     "https://ts-taisei.co.jp/jigmatch/senban-outsourcing/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -803,8 +908,12 @@
   "金属加工 外注 失敗しない選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://houeihiroshima.com/column/metal-processing-selection/",
+     "https://ikoma-kogyo.com/blog/in-house-vs-outsourcing-metal-processing",
+     "https://mitsu-ri.net/articles/short-delivery"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -845,8 +954,13 @@
   "樹脂成形 メーカー 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.plastics.toray/ja/technical/torelina/tec_030.html",
+     "https://www.protolabs.com/resources/design-tips/11-tips-to-reduce-injection-molding-costs/",
+     "https://www.protolabs.com/services/injection-molding/on-demand-manufacturing/",
+     "https://www.chusho.meti.go.jp/koukai/kenkyukai/kigyo_torihiki/004/001.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -878,8 +992,13 @@
   "試作専門 量産対応 加工会社 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.asanuma-g.jp/service/",
+     "https://www.senban1ban.com/liaise/prototype",
+     "https://www.yazawa-ss.co.jp/production/index.html",
+     "https://tpm.co.jp/services"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -903,8 +1022,12 @@
   "加工会社 見積 比較 注意点": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://houeihiroshima.com/column/metal-processing-estimate/",
+     "https://www.agency-assist.co.jp/column/1273/",
+     "https://www.fukasawa.co.jp/column/2515/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -945,8 +1068,15 @@
   "新規 取引 加工会社 確認事項": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.tatsumiya-metal.com/cutting-machining-outsourcing-guide/",
+     "https://www.tetras.uitec.jeed.go.jp/files/kankoubutu/a-130-2-08.pdf",
+     "https://www.willtecgroup-ems.jp/column/outsourcing-selection/",
+     "https://barrel-polish.com/column/outsource-tips/",
+     "https://www.jftc.go.jp/toriteki/toritekigaiyo/gaiyo.html",
+     "https://www.jftc.go.jp/toriteki/toritekigaiyo/oyagimu.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -967,8 +1097,12 @@
   "精密加工 業者 見極め方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nikkoss.jp/columns/post-958",
+     "https://stainless-steel-milling.com/machining-5axis-hardmaterial-supplier/",
+     "https://www.showa-keikin.co.jp/blog-list/3392/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1005,8 +1139,13 @@
   "試作 外注 初めて 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.minamidesign.co.jp/review/992/",
+     "https://www.xeffect.com/blog/%E3%80%8C%E8%A9%A6%E4%BD%9C%E3%81%AF%E9%A0%BC%E3%81%BF%E3%81%A5%E3%82%89%E3%81%84%E3%80%8D%E3%82%92%E8%A7%A3%E6%B6%88%EF%BC%81%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/",
+     "https://www.tokaimodel.com/news/573/",
+     "https://www.shikoku.meti.go.jp/chizai/pdf/otoshiana_06.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1027,8 +1166,13 @@
   "試作 加工 最短 納期": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.seimitsubankin-costdown.com/prototype/",
+     "https://www.tokuyosi.co.jp/business/machining/machining",
+     "https://www.ks-model.com/services/",
+     "https://www.inatec-corp.com/tech/trial/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1062,8 +1206,13 @@
   "小ロット 1個から 加工 可能": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ariel-inc.jp/manufacturing/cutting/",
+     "https://www.zen.co.jp/area/kanto/",
+     "https://shimizu-mold.com/machining/",
+     "https://www.ariel-inc.jp/manufacturing/cutting/prototype-small-lot/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1095,8 +1244,13 @@
   "特急 加工 対応 どこまで": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nissinsangyo.jp/super-fast/",
+     "https://www.sakaiwork.jp/urgent/",
+     "https://tasiro.co.jp/express/",
+     "https://www.kinzoku-kakou.net/category/1843625.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1126,8 +1280,13 @@
   "試作から量産 切り替え 流れ": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.yamauchi.co.jp/newcomer/workflow/",
+     "https://www.enax.jp/service/pp.html",
+     "https://www.qten.co.jp/EMS/manufacturing/quality.html",
+     "https://cpe.jma.or.jp/assets/pdf/cpe_studyguide_v4_sample.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1149,8 +1308,13 @@
   "金属加工 納期 目安 日数": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://marusanss.com/help",
+     "https://tsutsumi-s.co.jp/article/quick-delivery/",
+     "https://www.nichimecha.jp/QnA/",
+     "https://www.nissinsangyo.jp/super-fast/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1189,8 +1353,12 @@
   "樹脂成形 試作 何日": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.plaquick.com/",
+     "https://jp.marketplace.meviy.misumi-ec.com/info/ja/service/injection-molding/",
+     "https://www.kda1969.com/pla_molding/pla_molding_smart.htm"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1221,8 +1389,12 @@
   "追加注文 リピート 納期 短縮": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.takachi-el.co.jp/images/pdfs/custom/custom-sheet01.pdf",
+     "https://pretty-tshirtshop.com/ja/blog/repeat-order-guide",
+     "https://maniau.jp/customer/faq_detail/18"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1254,8 +1426,11 @@
   "納期 遅れ 加工会社 対策": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.smrj.go.jp/supporter/tool/guidebook/fbrion0000004agy-att/a19vbo000000dm3f.pdf",
+     "https://www.tetras.uitec.jeed.go.jp/files/kankoubutu/i-038-03.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1284,8 +1459,12 @@
   "ロット 数 単価 下がる 目安": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://axis-publication.com/goods/ring_memo/",
+     "https://www.kpac.co.jp/tweet/pkg-lot-impact/",
+     "https://gemilya.com/volume"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1322,8 +1501,12 @@
   "短納期 試作 依頼 方法": {
    "group": "納期・ロット",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.urbanlead.net/quotation/",
+     "https://tokyo.watanabe-mfg.co.jp/inquiry/",
+     "https://www.sekidai.co.jp/estimate/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1350,8 +1533,12 @@
   "加工できる 材質 一覧 金属": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.aizaki.co.jp/precision/",
+     "https://jp.marketplace.meviy.misumi-ec.com/info/ja/service/machining/",
+     "https://tomoe-eng.co.jp/materials/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1372,8 +1559,13 @@
   "ステンレス アルミ 加工 違い": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.alloy.co.jp/processing/processing/",
+     "https://www.askk.co.jp/contents/blog/difference.html",
+     "https://www.kobelco.co.jp/products/advanced-materials/about-almi/characteristic.html",
+     "https://www.kobelco.co.jp/products/welding/pdf/catalog.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1410,8 +1602,11 @@
   "樹脂 材質 選び方 試作": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://cycos-japan.com/column/abs-pc-pp-pom-materials-selection/",
+     "https://formlabs.com/jp/blog/choosing-right-materials/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1456,8 +1651,12 @@
   "図面なし 加工 相談 可能": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://sugiura-ss.com/cad-design/",
+     "https://hirokawa-plus.com/",
+     "https://www.yamanaka-u.co.jp/drawing-before-consultation.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1496,8 +1695,13 @@
   "3D データ のみ 加工 依頼": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://promade-big.co.jp/processing/",
+     "https://direct.kabuku.io/project/new",
+     "https://www.ricoh.co.jp/3dp/print_service/spec",
+     "https://quote.make.dmm.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1532,8 +1736,14 @@
   "公差 精度 加工 どこまで": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://cp.misumi.jp/tech/tech1.html",
+     "https://jp.meviy.misumi-ec.com/info/ja/news/new-release/41295/",
+     "https://www.kato-kenma.com/equipment/%E5%86%86%E7%AD%92%E7%A0%94%E5%89%8A%E7%9B%A4/",
+     "https://nissin-corp.com/precision/",
+     "https://jp.meviy.misumi-ec.com/info/ja/howto/mech-design/20399/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1565,8 +1775,12 @@
   "検査 成績書 発行 依頼": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.sumibe.co.jp/product/s-bio/download/index.html",
+     "https://www.eishinkagaku.co.jp/exam-result/exam-result-contact/",
+     "https://labchem-wako.fujifilm.com/jp/product/search/coaSearch.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1585,8 +1799,16 @@
   "表面処理 メッキ 対応 加工": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.sanwa-p.co.jp/mekkilist/",
+     "https://www.meiko-web.com/technology/",
+     "https://www.kiyokawa.co.jp/technology/detail10",
+     "https://eptec.co.jp/technology/lineup06/",
+     "https://ele.kyocera.com/ja/technical/con_plating/",
+     "https://www.ulvac-techno.co.jp/document/pdf/ch_order_5764290107.pdf",
+     "https://www.kida-zinger.com/image_pdf/request.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1619,8 +1841,12 @@
   "金属 から 樹脂 置き換え 相談": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.asahi-kasei-plastics.com/trend/metal-replacement/",
+     "https://kishimotokogyo.co.jp/archives/resin_replacement/",
+     "https://emtopia.net/solution/B-3"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1647,8 +1873,14 @@
   "不良 品質 トラブル 対応 加工会社": {
    "group": "材質・図面・品質",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://yachiyo-sol.com/library/furyohin-ryushutsu-boshi/",
+     "https://www.ricoh.co.jp/service/digital-manufacturing/media/article/detail25",
+     "https://www.jemco.co.jp/comm/202409taisaku1/",
+     "https://www.chusho.meti.go.jp/keiei/torihiki/guideline/14_paper.pdf",
+     "https://www.metrol.co.jp/blog/2024/07/16/74844/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1670,5 +1902,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }

@@ -1,14 +1,19 @@
 {
  "total": {
+  "maker": 104,
+  "media": 350,
+  "clinic": 116,
   "portal": 146,
   "public": 38,
-  "maker": 101,
   "other": 24,
-  "clinic": 115,
-  "media": 349,
   "video": 20
  },
  "by_engine": {
+  "ChatGPT": {
+   "maker": 3,
+   "media": 1,
+   "clinic": 1
+  },
   "Gemini": {
    "portal": 35,
    "public": 23,
@@ -30,12 +35,12 @@
  },
  "by_group": {
   "地域で探す": {
+   "maker": 18,
+   "media": 28,
+   "clinic": 75,
    "portal": 46,
    "public": 25,
-   "maker": 15,
    "other": 7,
-   "clinic": 74,
-   "media": 27,
    "video": 4
   },
   "料金・費用を調べる": {
@@ -74,14 +79,17 @@
   }
  },
  "answered": {
+  "ChatGPT": 1,
   "Gemini": 34,
   "Claude": 50
  },
  "has_clinic": {
+  "ChatGPT": 1,
   "Gemini": 18,
   "Claude": 26
  },
  "sources": {
+  "ChatGPT": 5,
   "Gemini": 284,
   "Claude": 509
  },
@@ -145,60 +153,60 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 84,
-   "other": 21,
-   "maker": 54,
-   "public": 22,
-   "clinic": 44,
+   "answers": 85,
+   "media": 79,
+   "maker": 55,
+   "clinic": 45,
    "portal": 57,
-   "media": 78,
+   "public": 22,
+   "other": 21,
    "video": 18
   },
   "地域で探す": {
-   "answers": 20,
-   "other": 5,
-   "maker": 9,
-   "public": 10,
-   "clinic": 19,
+   "answers": 21,
+   "media": 17,
+   "maker": 10,
+   "clinic": 20,
    "portal": 18,
-   "media": 16,
+   "public": 10,
+   "other": 5,
    "video": 4
   },
   "料金・費用を調べる": {
    "answers": 18,
+   "maker": 11,
    "portal": 11,
    "other": 7,
-   "maker": 11,
    "media": 17,
    "clinic": 11,
    "video": 3
   },
   "選び方を調べる": {
    "answers": 15,
-   "maker": 12,
    "media": 15,
+   "maker": 12,
+   "portal": 7,
    "public": 5,
    "clinic": 5,
-   "portal": 7,
-   "other": 2,
-   "video": 4
+   "video": 4,
+   "other": 2
   },
   "製品やサービスを比べる": {
    "answers": 17,
+   "maker": 14,
    "public": 7,
    "portal": 15,
    "other": 6,
-   "maker": 14,
    "media": 16,
-   "clinic": 6,
-   "video": 4
+   "video": 4,
+   "clinic": 6
   },
   "導入や運用の悩みを調べる": {
    "answers": 14,
+   "media": 14,
+   "maker": 8,
    "portal": 6,
    "other": 1,
-   "maker": 8,
-   "media": 14,
    "clinic": 3,
    "video": 3
   }

@@ -10,8 +10,15 @@
   "大阪 勤怠管理システム おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kingoftime.jp/faq/really_300/",
+     "https://jobcan.ne.jp/price",
+     "https://www.kintaisystem.com/lp-m01/",
+     "https://www.xronos-inc.co.jp/products/xronos/",
+     "https://www.xronos-inc.co.jp/corporate/",
+     "https://www.tims-biz.com/kintai"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1701,5 +1708,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }

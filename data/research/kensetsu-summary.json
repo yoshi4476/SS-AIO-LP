@@ -1,14 +1,23 @@
 {
  "total": {
-  "video": 24,
-  "portal": 218,
-  "clinic": 473,
-  "media": 49,
-  "maker": 58,
-  "public": 28,
-  "other": 21
+  "portal": 244,
+  "clinic": 536,
+  "video": 25,
+  "media": 54,
+  "public": 90,
+  "maker": 69,
+  "other": 25
  },
  "by_engine": {
+  "ChatGPT": {
+   "portal": 26,
+   "clinic": 63,
+   "public": 62,
+   "video": 1,
+   "media": 5,
+   "maker": 11,
+   "other": 4
+  },
   "Gemini": {
    "video": 14,
    "portal": 68,
@@ -30,66 +39,69 @@
  },
  "by_group": {
   "地域で探す": {
-   "video": 7,
-   "portal": 54,
-   "clinic": 85,
+   "portal": 60,
+   "clinic": 115,
+   "video": 8,
    "media": 6,
+   "public": 14,
    "maker": 3,
-   "public": 7,
    "other": 2
   },
   "外構・エクステリアの費用や選び方": {
-   "portal": 40,
-   "clinic": 99,
-   "media": 20,
-   "public": 1,
+   "portal": 47,
+   "clinic": 111,
+   "media": 23,
+   "public": 5,
    "maker": 8,
    "other": 3,
    "video": 7
   },
   "解体工事の費用や選び方": {
-   "portal": 57,
-   "clinic": 118,
+   "clinic": 128,
+   "public": 33,
+   "portal": 59,
    "video": 2,
    "maker": 6,
-   "public": 5,
    "media": 3
   },
   "電気工事の費用や選び方": {
-   "clinic": 82,
-   "portal": 43,
+   "portal": 50,
+   "media": 8,
+   "clinic": 90,
    "video": 7,
-   "media": 7,
-   "maker": 19,
-   "public": 11,
+   "public": 25,
+   "maker": 23,
    "other": 5
   },
   "空調（エアコン）工事の費用や選び方": {
-   "clinic": 89,
-   "other": 11,
-   "maker": 22,
-   "portal": 24,
-   "media": 13,
-   "video": 1,
-   "public": 4
+   "other": 15,
+   "maker": 29,
+   "clinic": 92,
+   "portal": 28,
+   "media": 14,
+   "public": 13,
+   "video": 1
   }
  },
  "answered": {
+  "ChatGPT": 50,
   "Gemini": 43,
   "Claude": 50
  },
  "has_clinic": {
+  "ChatGPT": 33,
   "Claude": 49,
   "Gemini": 41
  },
  "sources": {
+  "ChatGPT": 172,
   "Gemini": 339,
   "Claude": 532
  },
  "portal_top": [
   [
    "meetsmore.com",
-   17
+   19
   ],
   [
    "rehome-navi.com",
@@ -97,11 +109,15 @@
   ],
   [
    "kaitai-guide.net",
-   11
+   12
   ],
   [
    "curama.jp",
-   7
+   10
+  ],
+  [
+   "gaikouexterior-partners.jp",
+   8
   ],
   [
    "hapisumu.jp",
@@ -113,10 +129,6 @@
   ],
   [
    "exterior-connect.com",
-   6
-  ],
-  [
-   "gaikouexterior-partners.jp",
    6
   ],
   [
@@ -146,63 +158,63 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 93,
-   "portal": 75,
-   "video": 21,
-   "media": 36,
-   "clinic": 90,
-   "maker": 39,
-   "public": 16,
-   "other": 18
+   "answers": 143,
+   "clinic": 123,
+   "portal": 96,
+   "video": 22,
+   "media": 41,
+   "public": 41,
+   "maker": 47,
+   "other": 22
   },
   "地域で探す": {
-   "answers": 19,
-   "portal": 19,
-   "video": 4,
+   "answers": 29,
+   "clinic": 27,
+   "portal": 24,
+   "video": 5,
    "media": 5,
-   "clinic": 17,
+   "public": 9,
    "maker": 3,
-   "public": 5,
    "other": 2
   },
   "外構・エクステリアの費用や選び方": {
-   "answers": 18,
-   "portal": 15,
-   "clinic": 18,
-   "media": 12,
-   "public": 1,
+   "answers": 28,
+   "clinic": 27,
+   "portal": 21,
+   "public": 5,
+   "media": 15,
    "maker": 7,
    "other": 3,
    "video": 7
   },
   "解体工事の費用や選び方": {
-   "answers": 18,
-   "portal": 16,
-   "clinic": 18,
+   "answers": 28,
+   "public": 11,
+   "clinic": 24,
+   "portal": 18,
    "video": 2,
    "maker": 6,
-   "public": 2,
    "media": 2
   },
   "電気工事の費用や選び方": {
-   "answers": 19,
-   "media": 6,
-   "portal": 16,
+   "answers": 29,
+   "media": 7,
+   "clinic": 23,
+   "portal": 21,
    "video": 7,
-   "clinic": 18,
-   "public": 4,
-   "maker": 10,
+   "public": 10,
+   "maker": 13,
    "other": 4
   },
   "空調（エアコン）工事の費用や選び方": {
-   "answers": 19,
-   "maker": 13,
-   "other": 9,
-   "clinic": 19,
-   "media": 11,
-   "portal": 9,
-   "video": 1,
-   "public": 4
+   "answers": 29,
+   "maker": 18,
+   "other": 13,
+   "clinic": 22,
+   "media": 12,
+   "portal": 12,
+   "public": 6,
+   "video": 1
   }
  }
 }

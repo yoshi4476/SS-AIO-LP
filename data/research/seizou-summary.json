@@ -1,14 +1,21 @@
 {
  "total": {
-  "maker": 559,
-  "portal": 91,
+  "clinic": 70,
+  "maker": 639,
+  "portal": 106,
   "other": 11,
-  "public": 20,
-  "media": 51,
-  "video": 2,
-  "clinic": 4
+  "public": 30,
+  "media": 53,
+  "video": 2
  },
  "by_engine": {
+  "ChatGPT": {
+   "clinic": 66,
+   "maker": 80,
+   "portal": 15,
+   "public": 10,
+   "media": 2
+  },
   "Gemini": {
    "maker": 194,
    "portal": 26,
@@ -29,62 +36,68 @@
  },
  "by_group": {
   "地域で探す": {
-   "maker": 116,
-   "portal": 29,
+   "clinic": 20,
+   "maker": 130,
+   "portal": 31,
    "other": 8,
-   "public": 18,
+   "public": 19,
    "media": 2
   },
   "費用・見積": {
-   "maker": 109,
-   "portal": 14,
+   "portal": 19,
+   "maker": 124,
    "media": 20,
+   "clinic": 12,
    "video": 1,
    "other": 1
   },
   "選び方": {
-   "maker": 94,
-   "portal": 24,
-   "media": 5,
-   "other": 2,
-   "clinic": 1
+   "media": 6,
+   "maker": 115,
+   "portal": 26,
+   "public": 5,
+   "clinic": 6,
+   "other": 2
   },
   "納期・ロット": {
-   "maker": 118,
-   "portal": 15,
+   "clinic": 20,
+   "maker": 127,
+   "portal": 18,
    "media": 10,
-   "clinic": 2,
-   "public": 1,
+   "public": 4,
    "video": 1
   },
   "材質・図面・品質": {
-   "maker": 122,
-   "portal": 9,
-   "media": 14,
-   "clinic": 1,
-   "public": 1
+   "clinic": 12,
+   "portal": 12,
+   "maker": 143,
+   "media": 15,
+   "public": 2
   }
  },
  "answered": {
+  "ChatGPT": 50,
   "Gemini": 31,
   "Claude": 50
  },
  "has_clinic": {
+  "ChatGPT": 35,
   "Claude": 3,
   "Gemini": 1
  },
  "sources": {
+  "ChatGPT": 173,
   "Gemini": 263,
   "Claude": 475
  },
  "portal_top": [
   [
    "mitsu-ri.net",
-   12
+   13
   ],
   [
    "kinzoku-kakou.net",
-   6
+   7
   ],
   [
    "metoree.com",
@@ -92,6 +105,10 @@
   ],
   [
    "mono.ipros.com",
+   5
+  ],
+  [
+   "jp.marketplace.meviy.misumi-ec.com",
    5
   ],
   [
@@ -107,16 +124,12 @@
    3
   ],
   [
-   "cutting-answer.com",
+   "kyoto-shisaku.com",
    3
   ],
   [
-   "jp-mfg.com",
-   2
-  ],
-  [
-   "ipros.jp",
-   2
+   "3day-printer.com",
+   3
   ]
  ],
  "industry": "seizou",
@@ -137,55 +150,58 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 81,
-   "maker": 81,
+   "answers": 131,
+   "clinic": 39,
+   "maker": 123,
+   "portal": 62,
+   "public": 21,
    "other": 10,
-   "portal": 50,
-   "public": 13,
-   "media": 28,
-   "video": 2,
-   "clinic": 4
+   "media": 30,
+   "video": 2
   },
   "地域で探す": {
-   "answers": 20,
-   "maker": 20,
+   "answers": 30,
+   "clinic": 7,
+   "maker": 28,
+   "portal": 16,
+   "public": 12,
    "other": 7,
-   "portal": 14,
-   "public": 11,
    "media": 2
   },
   "費用・見積": {
-   "answers": 17,
-   "maker": 17,
-   "portal": 7,
+   "answers": 27,
+   "maker": 26,
+   "portal": 10,
    "media": 10,
+   "clinic": 8,
    "video": 1,
    "other": 1
   },
   "選び方": {
-   "answers": 14,
-   "maker": 14,
-   "portal": 12,
-   "media": 4,
-   "other": 2,
-   "clinic": 1
+   "answers": 24,
+   "media": 5,
+   "maker": 23,
+   "portal": 14,
+   "public": 4,
+   "clinic": 4,
+   "other": 2
   },
   "納期・ロット": {
-   "answers": 16,
-   "maker": 16,
-   "portal": 9,
+   "answers": 26,
+   "clinic": 10,
+   "maker": 22,
+   "portal": 12,
    "media": 6,
-   "clinic": 2,
-   "video": 1,
-   "public": 1
+   "public": 3,
+   "video": 1
   },
   "材質・図面・品質": {
-   "answers": 14,
-   "maker": 14,
-   "portal": 8,
-   "media": 6,
-   "clinic": 1,
-   "public": 1
+   "answers": 24,
+   "clinic": 10,
+   "maker": 24,
+   "portal": 10,
+   "media": 7,
+   "public": 2
   }
  }
 }

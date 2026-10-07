@@ -10,8 +10,14 @@
   "大阪 運送会社 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://osaka.akabou.jp/",
+     "https://maruwaunyu.co.jp/transportation/",
+     "https://www.marukyo-group.co.jp/",
+     "https://www.mj-transport.jp/",
+     "https://www.marutaka-g.co.jp/company/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -43,8 +49,11 @@
   "東京 チャーター便 料金": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.shigeta-ex.com/kei-haisou-charter/",
+     "https://yamahashi.com/charter_fee.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -77,8 +86,16 @@
   "名古屋 引っ越し業者 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://life.oricon.co.jp/rank_move/prefecture/aichi.html",
+     "https://www.welcome-basket.co.jp/",
+     "https://www.the0123.com/siten/nagoya.html",
+     "https://hikkoshi-sakai.co.jp/",
+     "https://www.hikkoshi-sakai.co.jp/area/aichi/detail/nagoyahigashi.html",
+     "https://www.154-313.com/",
+     "https://www.154-313.com/plans/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -113,8 +130,14 @@
   "福岡 倉庫 保管 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.tofuku.net/business/warehouse/",
+     "https://www.mitsui-soko.com/company/group/msc/business/mcky/service/01",
+     "https://www.hirakishoji.co.jp/product/logistics_service.php",
+     "https://fukuoka-moving.com/storage",
+     "https://www.daiex.com/kyushu/center/fukuoka/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -151,8 +174,13 @@
   "札幌 軽貨物 配送 依頼": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://temc-delivery.com/service.html",
+     "https://s2line.net/spot/",
+     "https://www.kei-haitatu.com/",
+     "https://sakauchi-express.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -187,8 +215,14 @@
   "横浜 トラック 貸切 運送": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.aikou-corp.co.jp/Iraishitai-Kokunai",
+     "https://www.transcom-yokohama.com/",
+     "https://r.goope.jp/marutomo/menu",
+     "https://t-p-service.com/service/reserved/",
+     "https://akabougotou.wixsite.com/yokohama/blank-1"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -223,8 +257,12 @@
   "京都 引っ越し 安い 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kyoto.akabou.jp/fare/",
+     "https://www.hayabusa-hikkoshi.jp/",
+     "https://armup.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -266,8 +304,13 @@
   "神戸 物流 倉庫 委託": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://asahitsuushou.co.jp/business/warehouse/",
+     "https://www.ueda-cold.co.jp/facility/kansai",
+     "https://watick.co.jp/",
+     "https://www.nickel.co.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -307,8 +350,14 @@
   "仙台 企業 配送 委託": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://j-m-l.jp/general-business.html",
+     "https://www.takumi-haisou.com/service.html",
+     "https://qej-groupcompany.jp/",
+     "https://nomadic-inc.co.jp/",
+     "https://tenriku.jp/logiquest/job/26931676"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -348,8 +397,12 @@
   "広島 運送会社 法人 依頼": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.wakiji.com/business/charter/",
+     "https://butsuryu.mobius-t.com/service",
+     "https://sheepcargo.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -383,8 +436,10 @@
   "引っ越し 料金 相場": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://hikkoshi.suumo.jp/soba/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -416,8 +471,13 @@
   "引っ越し 業者 選び方": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://wwwtb.mlit.go.jp/hokkaido/bunyabetsu/jidousya/hikkoshi/index.html",
+     "https://wwwtb.mlit.go.jp/kinki/hikosi/q-a.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2018_23.html",
+     "https://www.kokusen.go.jp/mimamori/kmj_mailmag/kmj-support231.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -441,8 +501,11 @@
   "単身 引っ越し 費用 安く": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.athome.co.jp/contents/moving/cost/season/",
+     "https://kepco.jp/service/move/article_cost/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -487,8 +550,13 @@
   "引っ越し 見積もり 比較 コツ": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/wko/pdf/wko-202412_05.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20260204_1.html",
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/kurashi/1702/wadai.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2018_23.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -512,8 +580,11 @@
   "引っ越し 繁忙期 料金 いつ": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/report/press/content/001978842.pdf",
+     "https://prtimes.jp/main/html/rd/p/000000100.000026519.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -550,8 +621,13 @@
   "引っ越し 当日 追加料金 なぜ": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.torakyo-hiroshima.or.jp/customer/sansyutsu.html",
+     "https://www.kokusen.go.jp/pdf/n-20260204_1.pdf",
+     "https://www.mlit.go.jp/common/001269092.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20260204_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -581,8 +657,12 @@
   "引っ越し 荷造り 自分でやる 違い": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hikkoshi-sakai.co.jp/plan/economy.html",
+     "https://www.hikkoshi-sakai.co.jp/plan/standard.html",
+     "https://www.hikkoshi-sakai.co.jp/plan/full.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -607,8 +687,13 @@
   "引っ越し 業者 破損 補償": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/jidosha/content/001881518.pdf",
+     "https://www.shouhiseikatu.metro.tokyo.lg.jp/sodan/kinkyu/20260316.html",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2018_24.html",
+     "https://www.kokusen.go.jp/news/data/n-20260204_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -643,8 +728,11 @@
   "長距離 引っ越し 費用 目安": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://hikkoshi.suumo.jp/soba/",
+     "https://hikkoshi.suumo.jp/oyakudachi/6052.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -680,8 +768,11 @@
   "引っ越し 時間指定 フリー便 違い": {
    "group": "引っ越し",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.the0123.com/cp/free.html",
+     "https://www.hikkoshi-sakai.co.jp/guide/faq/service.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -705,8 +796,12 @@
   "チャーター便 料金 相場": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://pickgo.town/blog/charter-structure",
+     "https://www.scroll360.jp/note/20221223-6267/",
+     "https://www.jalba.co.jp/news/pdf/charter202511.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -743,8 +838,13 @@
   "チャーター便 選び方 業者": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.sagawa-exp.co.jp/customer/send/service/h-charter/",
+     "https://yamaharu-konpou-unyu.com/blog/82514",
+     "https://www.lightcargo.jp/articles/charter-mitsumori-point",
+     "https://www.mlit.go.jp/jidosha/jidosha_mn4_000019.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -774,8 +874,12 @@
   "チャーター便 費用 計算 方法": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.toaline.co.jp/quote/",
+     "https://akabou-nakaya.jp/fee.html",
+     "https://www.air-oas.co.jp/service/charter/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -814,8 +918,11 @@
   "チャーター便 混載 違い": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.seino.co.jp/seino/service/domestic/logistics/glossary/charter-truck/",
+     "https://www.scroll360.jp/note/20221223-6267/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -839,8 +946,12 @@
   "チャーター便 緊急 手配 依頼": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.momo-chan-express.com/",
+     "https://www.world-express.info/",
+     "https://www.logicnankai.co.jp/service/transport/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -860,8 +971,11 @@
   "チャーター便 トラック サイズ 選び方": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.tescompo.co.jp/business/delivery.html",
+     "https://toaline.co.jp/blog/charter-truckage/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -900,8 +1014,12 @@
   "チャーター便 往復 料金 高い": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.air-oas.co.jp/service/charter/",
+     "https://www.fpgair.jp/price/",
+     "https://faq.his-j.com/faqs/1240/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -929,8 +1047,13 @@
   "チャーター便 当日 手配 できる": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://osaka-line.com/service/shipping/charter/",
+     "https://www.nikkei-exp.com/",
+     "https://www.logicnankai.co.jp/service/transport/",
+     "https://ariair.arila.co.jp/emergency/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -971,8 +1094,12 @@
   "チャーター便 荷物 破損 補償": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.jal.co.jp/jalcargo/inter/conditions/pdf/Condition_of_Carriage_Charter_effective_from_28DEC2024_03_jp.pdf",
+     "https://www.ana.co.jp/ja/mm/guide/boarding-procedures/baggage/domestic/damage/",
+     "https://www.mlit.go.jp/koku/koku_fr3_000012.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1004,8 +1131,13 @@
   "チャーター便 見積もり 比較 ポイント": {
    "group": "チャーター便",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.marushou-unyu.co.jp/price/",
+     "https://www.akabou-carryquality.com/service5",
+     "https://www.kibo-express.com/service.html",
+     "https://www.toaline.co.jp/quote/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1040,8 +1172,12 @@
   "倉庫 保管料 相場": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kunilogi.jp/column/warehouse-storage-costs/",
+     "https://ec-logi.sun-web.co.jp/column/18",
+     "https://ecnomikata.com/ecnews/eclogistics/38348/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1075,8 +1211,12 @@
   "倉庫 業者 選び方": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.post.japanpost.jp/bizpost/column/logistics5/choose-warehouse/",
+     "https://www.hapilogi.co.jp/pickup/logistics-lab/5900/",
+     "https://www.mlit.go.jp/seisakutokatsu/freight/butsuryu05100.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1106,8 +1246,15 @@
   "トランクルーム 倉庫 違い 法人": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/seisakutokatsu/freight/announcement.pdf",
+     "https://www.mlit.go.jp/seisakutokatsu/freight/butsuryu05100.html",
+     "https://wwwtb.mlit.go.jp/chubu/souko/soukogyo-torankurumuriyouhou.html",
+     "https://www.quraz.com/common/corporate.aspx",
+     "https://www.hello-storage.com/images/renewal/agreement/jyuuyou_jikou_kakuninsyo.pdf?2025-06-03=",
+     "https://faq.hello-storage.com/%E5%A5%91%E7%B4%84%E6%99%82%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%82%E3%81%AE-64ed8f08976afb001cc5da4b"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1141,8 +1288,12 @@
   "倉庫 在庫管理 委託 費用": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://logi-tecservice.co.jp/price/",
+     "https://maruni-logicom.co.jp/business/price/",
+     "https://www.c-logico.co.jp/logistics/price"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1183,8 +1334,12 @@
   "倉庫 短期 保管 料金": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.shutoken.net/palettelogistics/storage/",
+     "https://www.yamax-kokura.jp/warehousing-fee",
+     "https://abc-butsuryu.com/warehouse/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1227,8 +1382,12 @@
   "倉庫 入出庫 作業費 内訳": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.minamoto-logistics.co.jp/article/column/a8",
+     "https://www.rjapan.co.jp/column/logistics-agency-fees/",
+     "https://www.mitsubishi-logistics.co.jp/pdf/termsandconditions_09.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1262,8 +1421,13 @@
   "倉庫 温度管理 保管 依頼": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://mikalogi.jp/service/c-t-warehouse/",
+     "https://www.h-itaku.co.jp/service/warehouse/low/index.html",
+     "https://central-logistics.com/service/chilled/",
+     "https://mcthis.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1294,8 +1458,13 @@
   "倉庫 3PL 委託 メリット": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/seisakutokatsu/freight/butsuryu03340.html",
+     "https://www.fedex.com/ja-jp/small-business/streamline-operations/3pl-third-party-logistics-guide.html",
+     "https://www.post.japanpost.jp/bizpost/column/logistics3/logistics_outsourcing/",
+     "https://j-net21prod.smrj.go.jp/solution/qa/efficiency/Q0267.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1319,8 +1488,13 @@
   "倉庫 保管 荷物 事故 保険": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/seisakutokatsu/freight/content/001986920.pdf",
+     "https://www.tokiomarine-nichido.co.jp/hojin/marine_site/kamotsu/unbai/hosho.html/1000",
+     "https://www.sompo-japan.co.jp/hinsurance/risk/property/pd/?device=pc",
+     "https://www.nissokyo.or.jp/trunk/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1356,8 +1530,13 @@
   "倉庫 契約 最低期間 解約": {
    "group": "倉庫・保管",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk3_000060.html",
+     "https://www.sokobank.jp/diary-detail-27022/",
+     "https://www.hello-storage.com/faq/",
+     "https://www.quraz.com/user/cancel.aspx"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1391,8 +1570,12 @@
   "配送料金 相場 法人": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kuronekoyamato.co.jp/ytc/search/estimate/ichiran.html",
+     "https://www.sagawa-exp.co.jp/fare/faretable04.html?service=TK",
+     "https://business.kuronekoyamato.co.jp/article/package/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1422,8 +1605,14 @@
   "配送 業者 選び方 比較": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/services/takkyubin/",
+     "https://www.sagawa-exp.co.jp/business/send/service/takuhai/",
+     "https://www.post.japanpost.jp/service/send/domestic/delivery/yu-pack/?vm=r",
+     "https://www.kuronekoyamato.co.jp/ytc/search/estimate/ichiran.html",
+     "https://www.sagawa-exp.co.jp/fare/attention.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1446,8 +1635,14 @@
   "配送料金 安くする 方法": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kuronekoyamato.co.jp/ytc/search/payment/result_01.html",
+     "https://www.post.japanpost.jp/service/send/domestic/delivery/clickpost/",
+     "https://www.post.japanpost.jp/service/send/domestic/mail/letterpack/",
+     "https://www.post.japanpost.jp/service/send/domestic/delivery/yu-pack/toku.html",
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/search/payment/discount/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1478,8 +1673,17 @@
   "宅配便 運送会社 料金 違い": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kuronekoyamato.co.jp/ytc/search/estimate/ichiran.html",
+     "https://www.sagawa-exp.co.jp/fare/faretable04.html?service=TK",
+     "https://www.post.japanpost.jp/send/fee/kokunai/pdf/tokyo.pdf",
+     "https://faq-en.kuronekoyamato.co.jp/app/answers/detail/a_id/2874/~/how-are-the-sizes-determined-for-ta-q-bin",
+     "https://www.post.japanpost.jp/service/send/domestic/delivery/yu-pack/?vm=r",
+     "https://www.post.japanpost.jp/question/19.html",
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/services/takkyubin/",
+     "https://www.sagawa-exp.co.jp/business/send/service/takuhai/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1511,8 +1715,12 @@
   "定期配送 契約 料金 目安": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.krk-llc.com/fee.php",
+     "https://www.shigeta-ex.com/s-teiki/",
+     "https://www.kyoritsu.info/service/carry/regular.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1546,8 +1754,12 @@
   "配送料金 燃料サーチャージ 仕組み": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://wwwtb.mlit.go.jp/hokushin/content/000273788.pdf",
+     "https://www.dhl.com/discover/content/dam/japan/download-files/service_and_rate_guide_jp_ja_2026.pdf",
+     "https://www.dhl.com/jp-ja/home/important-information/2026/express-fuel-surcharge-updates.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1580,8 +1792,13 @@
   "配送 遅延 対応 運送会社": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kuronekoyamato.co.jp/ytc/contact/?id=ytc_menu_pc",
+     "https://faq.kuronekoyamato.co.jp/app/answers/detail/a_id/1523/",
+     "https://www.sagawa-exp.co.jp/contact/",
+     "https://www.post.japanpost.jp/question/120.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1604,8 +1821,12 @@
   "大口 配送 値引き 交渉": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://faq-biz.kuronekoyamato.co.jp/app/answers/detail/a_id/7526/p/874/related/1",
+     "https://business.kuronekoyamato.co.jp/contact/",
+     "https://www.sagawa-exp.co.jp/contact/about-luggage/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1633,8 +1854,14 @@
   "配送 見積もり 依頼 必要情報": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://advance-express.com/service/",
+     "https://www.kyoritsu.info/info/flow.html",
+     "https://www.kyoritsu.info/wp/request/",
+     "https://www.daiei-exp.jp/choshaku/",
+     "https://www.nipponexpress.com/jp/ja/faq/air/faq-003.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1658,8 +1885,14 @@
   "配送料金 サイズ 重量 計算": {
    "group": "配送料金",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/search/payment/size/",
+     "https://www.sagawa-exp.co.jp/fare/attention.html",
+     "https://www.post.japanpost.jp/service/send/domestic/delivery/yu-pack/",
+     "https://www.kuronekoyamato.co.jp/ytc/customer/send/services/takkyubin/",
+     "https://www2.sagawa-exp.co.jp/send/fare/input/?open=ac5"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1688,5 +1921,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }
