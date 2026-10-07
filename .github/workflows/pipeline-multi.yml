@@ -85,6 +85,7 @@ jobs:
       own: ${{ steps.site.outputs.own }}
       first: ${{ steps.site.outputs.first }}
       over: ${{ steps.site.outputs.over }}
+      slot_day: ${{ steps.site.outputs.slot_day }}
     steps:
       - uses: actions/checkout@v4
 
@@ -115,6 +116,9 @@ jobs:
           print(crons.index(s) if s in crons else 0, len(crons))
           PY
           )
+          # この枠が予定されていた日。定時が遅れて日付をまたいでも、書いた記事は予定の日の本数に数える
+          # （公開日 date: は公開した日のまま。daily_audit.stamp_makeup が data/makeup.json に記録する）
+          echo "slot_day=$(python scripts/daily_audit.py --slot-day "${{ github.event.schedule }}")" >> "$GITHUB_OUTPUT"
           s="${{ inputs.site }}"
           if [ -z "$s" ]; then
             if [ "$N" -eq 0 ]; then
@@ -170,6 +174,8 @@ jobs:
     if: needs.select.outputs.skip != 'yes'
     runs-on: ubuntu-latest
     timeout-minutes: 75
+    env:
+      AUDIT_DAY: ${{ needs.select.outputs.slot_day }}
     # 並ぶのは実際に記事を書く枠だけ。週次・救済（pipeline.yml）とも同じグループで直列にする
     concurrency:
       group: article-pipeline
