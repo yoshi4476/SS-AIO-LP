@@ -260,8 +260,13 @@
   "神戸 軽自動車 中古 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.suzuki.co.jp/dealer/28111951.sj-hyogo/",
+     "https://www.suzuki.co.jp/ucar/contents/certified/",
+     "https://www.hondamobility-kinki.co.jp/usedcar/search.html?model=HO%3AS094&shopCD=0G",
+     "https://www.apple-car.jp/shop/kobearima"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -305,8 +310,13 @@
   "仙台 車検 代車 無料": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://zacnet.jp/?page_id=70",
+     "https://www.ts-magic.co.jp/shaken-mock.html",
+     "https://sunsinsendai.wixsite.com/sunsin/rentcar",
+     "https://kobac-sendai.com/reason/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -375,8 +385,12 @@
   "車検 費用 相場": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/static_html/srv/syaken/article/3001/index.html",
+     "https://www.mlit.go.jp/jidosha/kensatoroku/sikumi/houteihiyou.pdf",
+     "https://www.hayawaza.jp/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -413,8 +427,14 @@
   "車検 どこが安い 比較": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.sompo-direct.co.jp/otona/oshiete/car/light-car-user-inspection.html",
+     "https://transport.kobac.co.jp/menu.html",
+     "https://www.hayataro.com/",
+     "https://www.autobacs.com/static_html/srv/syaken/top.html?ecr=12",
+     "https://car.rakuten.co.jp/shaken/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -451,8 +471,13 @@
   "車検 ディーラー 民間 違い": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://kanto-koudai.com/blog/private-inspection-garages-vs-dealers/",
+     "https://www.mlit.go.jp/jidosha/kensatoroku/sikumi/houteihiyou.pdf",
+     "https://misakimotors.jp/media/maintenance/dealer-vehicle-inspection/",
+     "https://www.mlit.go.jp/jidosha/ninshoutoshiteinochigai.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -476,8 +501,13 @@
   "車検 選び方 ポイント": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/static_html/srv/syaken/article/3001/index.html",
+     "https://www.mlit.go.jp/jidosha/ninshoutoshiteinochigai.html",
+     "https://wwwtb.mlit.go.jp/kanto/jidou_gian/seibishuninsha/date/tiiki_kyouzai_26.pdf",
+     "https://www.autobacs.com/static_html/srv/syaken/article/3008/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -512,8 +542,11 @@
   "車検 いつから 受けられる": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/report/press/jidosha02_hh_000645.html",
+     "https://www.keikenkyo-faq.jp/category06/inport-58/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -542,8 +575,11 @@
   "車検 法定費用 内訳": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.naltec.go.jp/business/inspection/howto/costs.html",
+     "https://ss.eneos-wing.co.jp/colum/carinspection-cost-tax/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -576,8 +612,12 @@
   "車検 見積もり 追加費用": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/static_html/srv/syaken/article/3043/",
+     "https://www.shakenkan.co.jp/cost/simulation/",
+     "https://www.mlit.go.jp/jidosha/kensatoroku/sikumi/houteihiyou.pdf"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -615,8 +655,11 @@
   "車検 当日 返し 可能": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/static_html/srv/syaken/article/3055/",
+     "https://www.yellowhat.jp/column/inspection/076/index.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -636,8 +679,14 @@
   "車検 通らない 原因": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://jaf-training.jp/column/vehicle-management/tire-checking/",
+     "https://www.naltec.go.jp/news/gtg5d2000000232i-att/gtg5d2000000233d.pdf",
+     "https://www.keikenkyo.or.jp/inspection/process/howto.html",
+     "https://www.obd.naltec.go.jp/about/",
+     "https://www.naltec.go.jp/business/inspection/howto/flow/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -663,8 +712,16 @@
   "車検 ユーザー車検 費用": {
    "group": "車検",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.naltec.go.jp/business/inspection/howto/costs.html",
+     "https://www.mlit.go.jp/jidosha/content/001884517.pdf",
+     "https://www.mlit.go.jp/jidosha/jibaiseki/about/policyholder/index.html",
+     "https://www.naltec.go.jp/business/inspection/howto/hbh5ss0000000n5i-att/a1773121280802.pdf",
+     "https://www.naltec.go.jp/business/inspection/howto/flow/maintenance.html",
+     "https://www.keikenkyo-faq.jp/category07/inport-78/",
+     "https://www.mlit.go.jp/jidosha/jidosha_fr1_000076.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -697,8 +754,13 @@
   "オイル交換 費用 相場": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.yellowhat.jp/store_service/engine_oil/index.html",
+     "https://www.yellowhat.jp/column/oil/007/index.html",
+     "https://www.autobacs.com/static_html/srv/engineoil/article/1053/",
+     "https://www.autobacs.com/static_html/srv/engineoil/top.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -733,8 +795,12 @@
   "オイル交換 どこで 安い": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.jms-car.com/maintenance/enginoil/",
+     "https://yellowhat.pro/store_service/engine_oil/",
+     "https://mb.autobacs.com/static_html/srv/engineoil/top.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -754,8 +820,13 @@
   "オイル交換 頻度 目安": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.honda.co.jp/customer/auto/auto-maintenance/faq/qa002/",
+     "https://toyota.jp/after_service/tenken/driver/maintenance/engine_oil/?padid=from_as_tenken_driver_maintenance_to_engine_oil",
+     "https://www.honda.co.jp/auto-parts/severe/",
+     "https://toyota.jp/faq/show/197.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -785,8 +856,13 @@
   "オイル交換 選び方 種類": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://jaf.or.jp/common/kuruma-qa/category-construction/subcategory-engine/faq062",
+     "https://www.eneos.co.jp/consumer/ss/service/oil/naruhodo/qa.html",
+     "https://www.eneos.co.jp/consumer/ss/service/inspect/engine_oil.html",
+     "https://jaf.or.jp/common/kuruma-qa/category-inspection/subcategory-everyday/faq212"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -826,8 +902,12 @@
   "エンジンオイル 粘度 選び方": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://toyota.jp/after_service/tenken/driver/maintenance/engine_oil/",
+     "https://manual.toyota.jp/corollatouring/2404/cv/ja_JP/contents/vhch08se010401.php",
+     "https://www.eneos.co.jp/consumer/ss/service/inspect/engine_oil.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -853,8 +933,15 @@
   "オイル交換 ガソリンスタンド 整備工場 違い": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.eneos-wing.co.jp/service/consumer/",
+     "https://www.eneos-ss.com/search/yoyaku/rwd/detail.php?f_shp_code=200593",
+     "https://www.kawacar.com/price/",
+     "https://anzenmotor.com/menu.html",
+     "https://toyota.jp/after_service/tenken/driver/maintenance/engine_oil/?padid=from_as_tenken_driver_maintenance_to_engine_oil",
+     "https://toyota.jp/faq/show/194.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -884,8 +971,12 @@
   "オイルフィルター 交換 費用": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://cars-enjoy.com/media/?p=3543",
+     "https://www.yellowhat.jp/store_service/engine_oil/index.html",
+     "https://www.autobacs.com/static_html/srv/engineoil/top.html?ecr=3"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -917,8 +1008,12 @@
   "オイル交換 しないと どうなる": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/static_html/srv/engineoil/article/1054/",
+     "https://jaf.or.jp/common/kuruma-qa/category-inspection/subcategory-everyday/faq212",
+     "https://toyota.jp/faq/show/197.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -938,8 +1033,11 @@
   "オイル交換 時間 かかる": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.yellowhat.jp/column/oil/049/index.html",
+     "https://www.yellowhat.jp/store_service/engine_oil/flow/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -967,8 +1065,13 @@
   "オイル交換 持ち込み 工賃": {
    "group": "オイル交換",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://bacsboots.com/car-maintenance/oil/",
+     "https://shop.autobacs.com/ja/retail/shops/071579/qa/1000000054011",
+     "https://shop.autobacs.com/ja/retail/shops/112063/news/1000000110718",
+     "https://yellowhat.pro/store_service/engine_oil/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1011,8 +1114,13 @@
   "車 修理 費用 相場": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://ss.eneos-wing.co.jp/colum/carrepar-gari-price/",
+     "https://car.rakuten.co.jp/magazine/articles/2022/repair08/",
+     "https://meetsmore.com/services/car-air-conditioner-installation",
+     "https://ss.eneos-wing.co.jp/0083153/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1043,8 +1151,13 @@
   "修理 工場 選び方 失敗しない": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/jidosha/ninshoutoshiteinochigai.html",
+     "https://www.jaspa.or.jp/association/about/posture.html",
+     "https://www.kokusen.go.jp/news/data/n-20260217_2.html",
+     "https://www.jaspa.or.jp/user/help_line/"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1072,8 +1185,14 @@
   "ブレーキ 異音 修理 費用": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/static_html/srv/syaken/article/3028/",
+     "https://sa-kawasaki.com/pit-service/working-price/",
+     "https://www.tokyoauto.com/carlife/static/maintenance_fee.pdf?2026=",
+     "https://jaf.or.jp/common/kuruma-qa/category-inspection/subcategory-everyday/faq210",
+     "https://jaf.or.jp/common/car-trouble-qa"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1107,8 +1226,13 @@
   "バッテリー 上がり 交換 費用": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/static_html/srv/battery/top.html",
+     "https://mb.autobacs.com/static_html/srv/battery/article/5045/",
+     "https://jaf.or.jp/-/media/1/2590/2591/2592/3157/road-service-terms02.pdf",
+     "https://jaf.or.jp/common/kuruma-qa/category-trouble/subcategory-support/faq267"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1145,8 +1269,11 @@
   "エアコン 効かない 修理 料金": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.daikincc.com/faq/customer/web/knowledge2736.html",
+     "https://www.daikincc.com/faq/customer/web/knowledge3008.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1182,8 +1309,11 @@
   "車 傷 へこみ 修理 いくら": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.autobacs.com/magazine/article/4007/",
+     "https://www.yellowhat.jp/column/repair_paint/037/index.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1217,8 +1347,11 @@
   "修理 見積もり 比較 ポイント": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/pdf/n-20181220_1.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20260603_1.html"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1238,8 +1371,12 @@
   "警告灯 点灯 どうする": {
    "group": "修理",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-05 02:45 まで）"
+    "urls": [
+     "https://jaf.or.jp/common/kuruma-qa/category-trouble/subcategory-accident/faq187",
+     "https://manual.toyota.jp/harrier/2209/cv/ja_JP/contents/vhch07se020403.php",
+     "https://toyota.jp/after_service/tenken/driver/sign/?padid=from_after_service_repair_top_trouble-warning"
+    ],
+    "error": ""
    },
    "Claude": {
     "urls": [
@@ -1583,5 +1720,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }

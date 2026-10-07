@@ -14,8 +14,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 1,
-    "video": 1,
-    "portal": 3
+    "portal": 3,
+    "video": 1
    },
    "top": [
     [
@@ -41,9 +41,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
+    "portal": 3,
     "media": 1,
-    "other": 2,
-    "portal": 3
+    "other": 2
    },
    "top": [
     [
@@ -96,8 +96,8 @@
    "group": "地域で探す",
    "answered": 4,
    "kinds": {
-    "video": 2,
     "portal": 4,
+    "video": 2,
     "clinic": 2,
     "media": 3
    },
@@ -126,8 +126,8 @@
    "kinds": {
     "portal": 4,
     "video": 1,
-    "clinic": 1,
-    "other": 1
+    "other": 1,
+    "clinic": 1
    },
    "top": [
     [
@@ -154,8 +154,8 @@
    "kinds": {
     "review": 1,
     "portal": 2,
-    "clinic": 1,
-    "media": 1
+    "media": 1,
+    "clinic": 1
    },
    "top": [
     [
@@ -181,9 +181,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
+    "portal": 3,
     "video": 1,
-    "clinic": 2,
-    "portal": 3
+    "clinic": 2
    },
    "top": [
     [
@@ -208,8 +208,8 @@
    "group": "地域で探す",
    "answered": 4,
    "kinds": {
-    "review": 2,
     "portal": 4,
+    "review": 2,
     "other": 1,
     "clinic": 2
    },
@@ -236,8 +236,8 @@
    "group": "地域で探す",
    "answered": 4,
    "kinds": {
-    "review": 1,
     "portal": 4,
+    "review": 1,
     "clinic": 1,
     "other": 1
    },
@@ -291,8 +291,8 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "other": 1,
     "portal": 3,
+    "other": 1,
     "clinic": 2
    },
    "top": [
@@ -319,8 +319,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -373,8 +373,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -428,9 +428,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "clinic": 2,
+    "portal": 3,
     "other": 1,
-    "portal": 3
+    "clinic": 2
    },
    "top": [
     [
@@ -456,8 +456,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -483,9 +483,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "clinic": 2,
+    "portal": 3,
     "other": 1,
-    "portal": 3
+    "clinic": 2
    },
    "top": [
     [
@@ -592,15 +592,20 @@
   {
    "q": "確定申告 税理士 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "portal": 3,
+    "clinic": 4,
     "video": 3,
     "maker": 3,
-    "clinic": 3,
-    "portal": 2,
     "other": 1
    },
    "top": [
+    [
+     "meetsmore.com",
+     "portal",
+     3
+    ],
     [
      "yayoi-kk.co.jp",
      "maker",
@@ -609,11 +614,6 @@
     [
      "biz.moneyforward.com",
      "maker",
-     2
-    ],
-    [
-     "all-senmonka.jp",
-     "portal",
      2
     ]
    ]
@@ -654,8 +654,8 @@
    "kinds": {
     "video": 1,
     "clinic": 4,
-    "media": 1,
     "portal": 2,
+    "media": 1,
     "maker": 1
    },
    "top": [
@@ -711,9 +711,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
+    "other": 1,
     "video": 3,
     "maker": 1,
-    "other": 1,
     "portal": 1
    },
    "top": [
@@ -742,8 +742,8 @@
     "clinic": 4,
     "public": 3,
     "maker": 1,
-    "other": 1,
     "portal": 2,
+    "other": 1,
     "media": 1
    },
    "top": [
@@ -767,12 +767,13 @@
   {
    "q": "就業規則 作成 費用",
    "group": "費用",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "clinic": 3,
     "portal": 2,
-    "clinic": 2,
-    "video": 2,
     "other": 2,
+    "video": 2,
     "maker": 2
    },
    "top": [
@@ -800,8 +801,8 @@
    "kinds": {
     "media": 4,
     "clinic": 4,
-    "portal": 3,
     "other": 1,
+    "portal": 3,
     "video": 2
    },
    "top": [
@@ -828,8 +829,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "media": 1,
     "portal": 2,
+    "media": 1,
     "other": 1,
     "maker": 1
    },
@@ -857,8 +858,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "video": 1,
-    "public": 1
+    "public": 1,
+    "video": 1
    },
    "top": [
     [
@@ -884,10 +885,10 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "media": 2,
     "portal": 1,
-    "other": 1,
-    "public": 1
+    "public": 1,
+    "media": 2,
+    "other": 1
    },
    "top": [
     [
@@ -910,15 +911,20 @@
   {
    "q": "弁護士 相談料 相場",
    "group": "費用",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 2,
+    "public": 3,
     "portal": 2,
+    "media": 2,
     "clinic": 2,
-    "public": 2,
     "maker": 2
    },
    "top": [
+    [
+     "toben.or.jp",
+     "public",
+     2
+    ],
     [
      "financeinjapan.com",
      "media",
@@ -928,23 +934,24 @@
      "legal.asiro.co.jp",
      "portal",
      2
-    ],
-    [
-     "mikata-ins.co.jp",
-     "maker",
-     2
     ]
    ]
   },
   {
    "q": "離婚 弁護士 費用",
    "group": "費用",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 1,
+    "clinic": 3,
     "portal": 2
    },
    "top": [
+    [
+     "avance-lg.com",
+     "clinic",
+     3
+    ],
     [
      "bennavi.jp",
      "portal",
@@ -952,11 +959,6 @@
     ],
     [
      "daylight-law.jp",
-     "clinic",
-     2
-    ],
-    [
-     "avance-lg.com",
      "clinic",
      2
     ]
@@ -969,8 +971,8 @@
    "kinds": {
     "clinic": 4,
     "other": 1,
-    "video": 2,
-    "portal": 2
+    "portal": 2,
+    "video": 2
    },
    "top": [
     [
@@ -1021,25 +1023,26 @@
   {
    "q": "会社 解散 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "portal": 1,
-    "maker": 3,
-    "clinic": 3
+    "public": 1,
+    "maker": 4,
+    "clinic": 4,
+    "portal": 1
    },
    "top": [
     [
      "biz.moneyforward.com",
      "maker",
+     4
+    ],
+    [
+     "proceo.jp",
+     "clinic",
      3
     ],
     [
      "vs-group.jp",
-     "clinic",
-     2
-    ],
-    [
-     "hitodeki.com",
      "clinic",
      2
     ]
@@ -1080,10 +1083,10 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "maker": 3,
     "portal": 3,
-    "media": 2,
-    "public": 2
+    "maker": 3,
+    "public": 2,
+    "media": 2
    },
    "top": [
     [
@@ -1110,9 +1113,9 @@
    "kinds": {
     "clinic": 4,
     "maker": 3,
-    "media": 2,
     "portal": 2,
-    "public": 1
+    "public": 1,
+    "media": 2
    },
    "top": [
     [
@@ -1135,10 +1138,11 @@
   {
    "q": "税理士 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 1,
+    "public": 1,
     "portal": 2,
+    "video": 1,
     "maker": 2,
     "clinic": 2,
     "media": 1
@@ -1164,10 +1168,11 @@
   {
    "q": "税理士 変える タイミング",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "clinic": 3,
     "portal": 2,
-    "clinic": 2,
     "video": 1
    },
    "top": [
@@ -1177,12 +1182,12 @@
      2
     ],
     [
-     "honors.jp",
+     "homare.tax",
      "clinic",
      1
     ],
     [
-     "tokyo-consulting.com",
+     "arkjpn.net",
      "clinic",
      1
     ]
@@ -1191,15 +1196,20 @@
   {
    "q": "社労士 選び方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "media": 3,
+    "public": 2,
+    "clinic": 4,
     "other": 1,
-    "clinic": 3,
-    "public": 1,
+    "media": 3,
     "portal": 1
    },
    "top": [
+    [
+     "sharoushi-mirai.jp",
+     "clinic",
+     2
+    ],
     [
      "taxlabor.com",
      "clinic",
@@ -1209,19 +1219,15 @@
      "next-sfa.jp",
      "media",
      2
-    ],
-    [
-     "biz.hrbase.jp",
-     "media",
-     2
     ]
    ]
   },
   {
    "q": "行政書士 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "portal": 2,
     "media": 2,
     "clinic": 2,
@@ -1239,8 +1245,8 @@
      2
     ],
     [
-     "next-sfa.jp",
-     "media",
+     "tokyo-gyosei.or.jp",
+     "public",
      1
     ]
    ]
@@ -1248,8 +1254,9 @@
   {
    "q": "弁護士 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "portal": 2,
     "clinic": 2,
     "media": 1,
@@ -1276,11 +1283,12 @@
   {
    "q": "司法書士 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "other": 1,
     "portal": 1,
     "media": 2,
-    "other": 1,
     "clinic": 2,
     "video": 1
    },
@@ -1296,8 +1304,8 @@
      2
     ],
     [
-     "goworkship.com",
-     "media",
+     "souzoku.shiho-shoshi.or.jp",
+     "public",
      1
     ]
    ]
@@ -1305,12 +1313,12 @@
   {
    "q": "税理士 会計士 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
     "portal": 2,
-    "video": 1,
     "other": 1,
-    "public": 2,
+    "video": 1,
     "maker": 2,
     "clinic": 1
    },
@@ -1326,8 +1334,8 @@
      2
     ],
     [
-     "roberthalf.com",
-     "maker",
+     "nichizeiren.or.jp",
+     "public",
      1
     ]
    ]
@@ -1335,12 +1343,13 @@
   {
    "q": "司法書士 行政書士 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 2,
-    "maker": 2,
-    "other": 1,
+    "public": 1,
     "portal": 1,
+    "media": 2,
+    "other": 1,
+    "maker": 2,
     "clinic": 1
    },
    "top": [
@@ -1364,12 +1373,12 @@
   {
    "q": "社労士 必要か",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 3,
     "portal": 2,
+    "clinic": 2,
     "other": 1,
-    "public": 2,
     "maker": 2,
     "media": 1
    },
@@ -1380,13 +1389,13 @@
      2
     ],
     [
-     "alc.co.jp",
-     "maker",
+     "nenkin.go.jp",
+     "public",
      1
     ],
     [
-     "bpsr.jp",
-     "clinic",
+     "shakaihokenroumushi.jp",
+     "public",
      1
     ]
    ]
@@ -1394,11 +1403,12 @@
   {
    "q": "顧問税理士 必要か",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "other": 2,
     "portal": 2,
     "maker": 2,
-    "other": 2,
     "clinic": 2
    },
    "top": [
@@ -1422,28 +1432,28 @@
   {
    "q": "相続 誰に相談",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
     "portal": 2,
+    "clinic": 2,
     "video": 1,
-    "public": 1,
     "maker": 2
    },
    "top": [
     [
-     "aoilaw.or.jp",
-     "clinic",
+     "houterasu.or.jp",
+     "public",
      1
     ],
     [
-     "bk.mufg.jp",
-     "maker",
+     "souzoku.shiho-shoshi.or.jp",
+     "public",
      1
     ],
     [
-     "ht-tax.or.jp",
-     "clinic",
+     "nta.go.jp",
+     "public",
      1
     ]
    ]
@@ -1451,8 +1461,9 @@
   {
    "q": "会社設立 誰に頼む",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "portal": 2,
     "maker": 2,
     "clinic": 2,
@@ -1479,17 +1490,18 @@
   {
    "q": "オンライン 税理士 デメリット",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 1,
+    "clinic": 4,
     "maker": 1,
-    "clinic": 3,
     "portal": 2
    },
    "top": [
     [
      "koyano-cpa.gr.jp",
      "clinic",
-     3
+     4
     ],
     [
      "ht-tax.or.jp",
@@ -1506,28 +1518,28 @@
   {
    "q": "女性 税理士 探し方",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "portal": 3,
+    "public": 3,
     "wiki": 1,
-    "public": 2,
-    "portal": 2,
     "maker": 2,
     "clinic": 2
    },
    "top": [
+    [
+     "zeirishikensaku.jp",
+     "public",
+     2
+    ],
     [
      "accnt.jp",
      "portal",
      2
     ],
     [
-     "jozeiren.com",
-     "public",
-     1
-    ],
-    [
-     "ja.wikipedia.org",
-     "wiki",
+     "zeiri4.com",
+     "portal",
      1
     ]
    ]
@@ -1535,11 +1547,11 @@
   {
    "q": "相続 弁護士 税理士 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 1,
-    "maker": 1,
+    "public": 2,
     "portal": 2,
+    "maker": 1,
     "clinic": 2,
     "video": 1
    },
@@ -1564,11 +1576,11 @@
   {
    "q": "労務トラブル 相談先",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 2,
-    "clinic": 1,
+    "public": 3,
     "portal": 1,
+    "clinic": 1,
     "other": 1,
     "maker": 1
    },
@@ -1576,45 +1588,46 @@
     [
      "mhlw.go.jp",
      "public",
-     2
-    ],
-    [
-     "jsite.mhlw.go.jp",
-     "public",
-     2
+     3
     ],
     [
      "check-roudou.mhlw.go.jp",
      "public",
-     1
+     2
+    ],
+    [
+     "houterasu.or.jp",
+     "public",
+     2
     ]
    ]
   },
   {
    "q": "許認可 自分で できるか",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "clinic": 3,
     "video": 1,
     "maker": 1,
-    "clinic": 2,
     "portal": 1,
     "media": 1
    },
    "top": [
     [
-     "genai-ai.co.jp",
-     "maker",
-     1
-    ],
-    [
-     "office-nagaoka.jp",
+     "kanadeoffice.com",
      "clinic",
      1
     ],
     [
-     "takami-gs.com",
-     "clinic",
+     "mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "mlit.go.jp",
+     "public",
      1
     ]
    ]
@@ -1622,12 +1635,13 @@
   {
    "q": "記帳代行 税理士 違い",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "media": 3,
-    "clinic": 3,
-    "maker": 3,
+    "public": 1,
     "portal": 3,
+    "media": 3,
+    "maker": 3,
+    "clinic": 3,
     "other": 1
    },
    "top": [
@@ -1642,8 +1656,8 @@
      2
     ],
     [
-     "kaikeiplus.jp",
-     "portal",
+     "nta.go.jp",
+     "public",
      1
     ]
    ]
@@ -1651,15 +1665,21 @@
   {
    "q": "税理士 紹介サービス 使うべきか",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 3,
+    "public": 1,
     "media": 2,
-    "portal": 2,
     "clinic": 2,
     "video": 1,
     "maker": 2
    },
    "top": [
+    [
+     "zeiri4.com",
+     "portal",
+     2
+    ],
     [
      "boater.jp",
      "media",
@@ -1669,19 +1689,15 @@
      "zeirishic.com",
      "portal",
      2
-    ],
-    [
-     "marunagekanri.com",
-     "maker",
-     2
     ]
    ]
   },
   {
    "q": "社労士 顧問 なし 大丈夫か",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "media": 1,
     "clinic": 2,
     "maker": 1
@@ -1698,8 +1714,8 @@
      2
     ],
     [
-     "sharoushi-pro.com",
-     "clinic",
+     "mhlw.go.jp",
+     "public",
      1
     ]
    ]
@@ -1707,16 +1723,21 @@
   {
    "q": "確定申告 やり方",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 2,
+    "public": 3,
     "portal": 2,
+    "media": 2,
     "video": 1,
-    "public": 2,
     "maker": 2,
     "clinic": 1
    },
    "top": [
+    [
+     "nta.go.jp",
+     "public",
+     2
+    ],
     [
      "agsc.co.jp",
      "portal",
@@ -1726,20 +1747,15 @@
      "yayoi-kk.co.jp",
      "maker",
      2
-    ],
-    [
-     "nta.go.jp",
-     "public",
-     1
     ]
    ]
   },
   {
    "q": "インボイス 登録 必要か",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
+    "public": 4,
     "maker": 3,
     "clinic": 3,
     "media": 1
@@ -1748,7 +1764,7 @@
     [
      "nta.go.jp",
      "public",
-     3
+     4
     ],
     [
      "gov-online.go.jp",
@@ -1756,8 +1772,8 @@
      2
     ],
     [
-     "sun-soleil.or.jp",
-     "clinic",
+     "keisan.nta.go.jp",
+     "public",
      1
     ]
    ]
@@ -1765,10 +1781,10 @@
   {
    "q": "電子帳簿保存法 対応",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
     "maker": 2,
-    "public": 2,
     "media": 1,
     "clinic": 1
    },
@@ -1776,7 +1792,7 @@
     [
      "nta.go.jp",
      "public",
-     2
+     3
     ],
     [
      "yayoi-kk.co.jp",
@@ -1793,11 +1809,11 @@
   {
    "q": "相続税 申告 期限",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 4,
     "portal": 2,
     "other": 1,
-    "public": 3,
     "clinic": 3,
     "video": 1,
     "maker": 1
@@ -1806,15 +1822,15 @@
     [
      "nta.go.jp",
      "public",
+     4
+    ],
+    [
+     "keisan.nta.go.jp",
+     "public",
      3
     ],
     [
      "shiruporuto.jp",
-     "public",
-     2
-    ],
-    [
-     "keisan.nta.go.jp",
      "public",
      2
     ]
@@ -1823,18 +1839,18 @@
   {
    "q": "相続放棄 手続き",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 3,
+    "portal": 2,
     "maker": 2,
-    "public": 2,
-    "portal": 2
+    "clinic": 2
    },
    "top": [
     [
      "courts.go.jp",
      "public",
-     2
+     3
     ],
     [
      "resonabank.co.jp",
@@ -1842,8 +1858,8 @@
      2
     ],
     [
-     "ace-law.or.jp",
-     "clinic",
+     "moj.go.jp",
+     "public",
      1
     ]
    ]
@@ -1851,8 +1867,9 @@
   {
    "q": "遺産分割 揉めた",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "media": 2,
     "clinic": 2,
     "maker": 1
@@ -1869,8 +1886,8 @@
      2
     ],
     [
-     "yui-lo.com",
-     "clinic",
+     "courts.go.jp",
+     "public",
      1
     ]
    ]
@@ -1878,10 +1895,10 @@
   {
    "q": "会社設立 流れ",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 3,
     "media": 3,
-    "public": 2,
     "maker": 3,
     "clinic": 3,
     "portal": 2
@@ -1893,13 +1910,13 @@
      3
     ],
     [
-     "smbc.co.jp",
-     "maker",
+     "moj.go.jp",
+     "public",
      2
     ],
     [
-     "canaeru.usen.com",
-     "media",
+     "smbc.co.jp",
+     "maker",
      2
     ]
    ]
@@ -1907,15 +1924,21 @@
   {
    "q": "法人成り タイミング",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 2,
-    "clinic": 2,
-    "maker": 2,
+    "public": 1,
+    "clinic": 3,
     "portal": 1,
+    "video": 2,
+    "maker": 2,
     "media": 1
    },
    "top": [
+    [
+     "chiyoda-tax.or.jp",
+     "clinic",
+     2
+    ],
     [
      "freee.co.jp",
      "maker",
@@ -1925,38 +1948,33 @@
      "koyano-cpa.gr.jp",
      "clinic",
      2
-    ],
-    [
-     "kokoro.tax",
-     "clinic",
-     2
     ]
    ]
   },
   {
    "q": "社会保険 加入 義務",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 2,
-    "maker": 3,
+    "public": 4,
     "other": 1,
-    "public": 3,
+    "maker": 3,
+    "clinic": 2,
     "portal": 1
    },
    "top": [
     [
-     "bowgl.com",
-     "maker",
-     2
+     "mhlw.go.jp",
+     "public",
+     3
     ],
     [
-     "mhlw.go.jp",
+     "nenkin.go.jp",
      "public",
      2
     ],
     [
-     "freee.co.jp",
+     "bowgl.com",
      "maker",
      2
     ]
@@ -1965,8 +1983,9 @@
   {
    "q": "未払い残業代 請求された",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "maker": 2,
     "clinic": 2,
     "other": 1
@@ -1992,17 +2011,22 @@
   {
    "q": "労働基準監督署 調査",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 2,
     "portal": 2,
     "clinic": 2,
     "other": 1,
-    "public": 1,
     "maker": 2
    },
    "top": [
     [
      "jsite.mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "mhlw.go.jp",
      "public",
      1
     ],
@@ -2010,38 +2034,33 @@
      "partners.en-japan.com",
      "portal",
      1
-    ],
-    [
-     "freee.co.jp",
-     "maker",
-     1
     ]
    ]
   },
   {
    "q": "就業規則 作成 義務",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
     "portal": 1,
-    "public": 2,
     "media": 1,
     "maker": 1,
     "clinic": 1
    },
    "top": [
     [
-     "jsite.mhlw.go.jp",
-     "public",
-     1
-    ],
-    [
-     "hataraku.metro.tokyo.lg.jp",
-     "public",
-     1
-    ],
-    [
      "mhlw.go.jp",
+     "public",
+     2
+    ],
+    [
+     "startup-roudou.mhlw.go.jp",
+     "public",
+     1
+    ],
+    [
+     "jsite.mhlw.go.jp",
      "public",
      1
     ]
@@ -2050,10 +2069,10 @@
   {
    "q": "建設業許可 要件",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
     "maker": 2,
-    "public": 2,
     "media": 1,
     "clinic": 1
    },
@@ -2061,7 +2080,7 @@
     [
      "mlit.go.jp",
      "public",
-     2
+     3
     ],
     [
      "www8.cao.go.jp",
@@ -2078,16 +2097,21 @@
   {
    "q": "古物商許可 取り方",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 4,
     "maker": 3,
-    "public": 3,
+    "clinic": 3,
     "video": 1
    },
    "top": [
     [
      "keishicho.metro.tokyo.lg.jp",
+     "public",
+     4
+    ],
+    [
+     "police.pref.kanagawa.jp",
      "public",
      3
     ],
@@ -2095,36 +2119,31 @@
      "stores.fun",
      "maker",
      2
-    ],
-    [
-     "pref.nagano.lg.jp",
-     "public",
-     2
     ]
    ]
   },
   {
    "q": "在留資格 変更 手続き",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 4,
+    "portal": 3,
     "media": 1,
     "clinic": 3,
-    "portal": 3,
-    "video": 1,
     "other": 1,
-    "public": 3
+    "video": 1
    },
    "top": [
+    [
+     "moj.go.jp",
+     "public",
+     3
+    ],
     [
      "global-saponet.mgl.mynavi.jp",
      "portal",
      3
-    ],
-    [
-     "moj.go.jp",
-     "public",
-     2
     ],
     [
      "aidemglobal.jp",
@@ -2136,15 +2155,20 @@
   {
    "q": "税務調査 来た",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 1,
+    "public": 2,
     "portal": 1,
     "maker": 2,
     "clinic": 2,
     "media": 1
    },
    "top": [
+    [
+     "nta.go.jp",
+     "public",
+     2
+    ],
     [
      "yg-tax.net",
      "clinic",
@@ -2154,29 +2178,24 @@
      "on-tax.or.jp",
      "clinic",
      1
-    ],
-    [
-     "business.ntt-west.co.jp",
-     "maker",
-     1
     ]
    ]
   },
   {
    "q": "延滞税 計算",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 4,
     "maker": 2,
-    "public": 3,
+    "clinic": 3,
     "media": 1
    },
    "top": [
     [
      "nta.go.jp",
      "public",
-     3
+     4
     ],
     [
      "ht-tax.or.jp",
@@ -2193,20 +2212,20 @@
   {
    "q": "資金繰り 相談先",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 2,
+    "public": 4,
     "maker": 3,
-    "public": 3
+    "clinic": 2
    },
    "top": [
     [
-     "dreamgate.gr.jp",
+     "mirasapo-plus.go.jp",
      "public",
-     3
+     4
     ],
     [
-     "mirasapo-plus.go.jp",
+     "dreamgate.gr.jp",
      "public",
      3
     ],
@@ -2220,28 +2239,28 @@
   {
    "q": "事業承継 進め方",
    "group": "手続き・悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
-    "maker": 3,
+    "public": 4,
     "other": 1,
+    "maker": 3,
     "clinic": 3,
     "portal": 1
    },
    "top": [
+    [
+     "chusho.meti.go.jp",
+     "public",
+     3
+    ],
     [
      "ma-cp.com",
      "clinic",
      3
     ],
     [
-     "chusho.meti.go.jp",
+     "smrj.go.jp",
      "public",
-     2
-    ],
-    [
-     "biz.moneyforward.com",
-     "maker",
      2
     ]
    ]
@@ -2249,28 +2268,28 @@
   {
    "q": "小規模 M&A 相談先",
    "group": "手続き・悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 2,
+    "public": 3,
     "portal": 2,
+    "media": 2,
     "clinic": 2,
-    "video": 1,
-    "public": 2
+    "video": 1
    },
    "top": [
     [
-     "ma-navigator.com",
-     "portal",
-     2
-    ],
-    [
-     "catalog.monex.co.jp",
-     "media",
-     2
-    ],
-    [
      "chusho.meti.go.jp",
      "public",
+     3
+    ],
+    [
+     "ma-shienkikan.go.jp",
+     "public",
+     2
+    ],
+    [
+     "ma-navigator.com",
+     "portal",
      2
     ]
    ]
@@ -2278,11 +2297,11 @@
   {
    "q": "相続税 基礎控除",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 2,
-    "maker": 3,
+    "public": 3,
     "other": 1,
+    "maker": 3,
     "clinic": 2,
     "media": 2,
     "portal": 1,
@@ -2290,18 +2309,18 @@
    },
    "top": [
     [
-     "taxlawyer328.jp",
-     "clinic",
-     2
+     "nta.go.jp",
+     "public",
+     3
     ],
     [
-     "nta.go.jp",
+     "gov-online.go.jp",
      "public",
      2
     ],
     [
-     "resonabank.co.jp",
-     "maker",
+     "taxlawyer328.jp",
+     "clinic",
      2
     ]
    ]
@@ -2309,20 +2328,20 @@
   {
    "q": "贈与税 非課税",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 4,
     "media": 2,
     "clinic": 3,
-    "video": 2,
     "other": 1,
-    "public": 3,
+    "video": 2,
     "maker": 2
    },
    "top": [
     [
      "nta.go.jp",
      "public",
-     3
+     4
     ],
     [
      "freee.co.jp",
@@ -2339,12 +2358,12 @@
   {
    "q": "小規模宅地等の特例",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 4,
+    "other": 1,
     "video": 1,
     "clinic": 3,
-    "other": 1,
-    "public": 3,
     "media": 2,
     "maker": 1,
     "portal": 1
@@ -2353,7 +2372,7 @@
     [
      "nta.go.jp",
      "public",
-     3
+     4
     ],
     [
      "keisan.nta.go.jp",
@@ -2370,18 +2389,18 @@
   {
    "q": "青色申告 メリット",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
+    "public": 2,
     "other": 1,
-    "public": 1,
+    "maker": 2,
     "clinic": 1
    },
    "top": [
     [
      "nta.go.jp",
      "public",
-     1
+     2
     ],
     [
      "bk.mufg.jp",
@@ -2398,15 +2417,20 @@
   {
    "q": "経費 認められる 範囲",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
+    "public": 2,
     "portal": 2,
+    "maker": 2,
     "media": 1,
-    "clinic": 1,
-    "public": 1
+    "clinic": 1
    },
    "top": [
+    [
+     "nta.go.jp",
+     "public",
+     2
+    ],
     [
      "biz.moneyforward.com",
      "maker",
@@ -2416,23 +2440,18 @@
      "yayoi-kk.co.jp",
      "maker",
      2
-    ],
-    [
-     "jcb.co.jp",
-     "maker",
-     2
     ]
    ]
   },
   {
    "q": "減価償却 とは",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 2,
     "wiki": 1,
-    "maker": 2,
     "media": 2,
-    "public": 1
+    "maker": 2
    },
    "top": [
     [
@@ -2446,8 +2465,8 @@
      2
     ],
     [
-     "ja.wikipedia.org",
-     "wiki",
+     "nta.go.jp",
+     "public",
      1
     ]
    ]
@@ -2455,20 +2474,20 @@
   {
    "q": "消費税 免税事業者",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 2,
+    "public": 4,
     "maker": 3,
-    "public": 3,
-    "media": 2,
+    "clinic": 2,
     "portal": 2,
+    "media": 2,
     "video": 1
    },
    "top": [
     [
      "nta.go.jp",
      "public",
-     3
+     4
     ],
     [
      "yayoi-kk.co.jp",
@@ -2485,28 +2504,28 @@
   {
    "q": "社会保険 扶養 範囲",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 2,
+    "portal": 1,
     "media": 2,
     "clinic": 2,
-    "portal": 1,
-    "public": 1,
     "maker": 2
    },
    "top": [
+    [
+     "nenkin.go.jp",
+     "public",
+     2
+    ],
     [
      "biz.moneyforward.com",
      "maker",
      2
     ],
     [
-     "jp.adp.com",
-     "maker",
-     1
-    ],
-    [
-     "freee.co.jp",
-     "maker",
+     "kyoukaikenpo.or.jp",
+     "public",
      1
     ]
    ]
@@ -2514,11 +2533,11 @@
   {
    "q": "育児休業 給付金",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "video": 1,
+    "public": 4,
     "other": 1,
-    "public": 3,
+    "video": 1,
     "maker": 2,
     "clinic": 1
    },
@@ -2526,7 +2545,7 @@
     [
      "mhlw.go.jp",
      "public",
-     3
+     4
     ],
     [
      "jsite.mhlw.go.jp",
@@ -2543,11 +2562,11 @@
   {
    "q": "雇用保険 加入条件",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 4,
     "maker": 2,
-    "public": 3,
+    "clinic": 3,
     "portal": 2,
     "media": 1,
     "other": 1
@@ -2556,16 +2575,16 @@
     [
      "jsite.mhlw.go.jp",
      "public",
+     3
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
      2
     ],
     [
      "freee.co.jp",
      "maker",
-     2
-    ],
-    [
-     "jtuc-rengo.or.jp",
-     "public",
      2
     ]
    ]
@@ -2573,11 +2592,11 @@
   {
    "q": "36協定 とは",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 2,
-    "maker": 2,
+    "public": 3,
     "portal": 2,
+    "maker": 2,
     "clinic": 1,
     "media": 1
    },
@@ -2593,7 +2612,7 @@
      2
     ],
     [
-     "jeed.go.jp",
+     "mhlw.go.jp",
      "public",
      1
     ]
@@ -2602,12 +2621,12 @@
   {
    "q": "最低賃金 2026",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 2,
     "media": 3,
     "maker": 2,
     "clinic": 3,
-    "public": 1,
     "portal": 1
    },
    "top": [
@@ -2622,8 +2641,8 @@
      2
     ],
     [
-     "kito-sr.com",
-     "clinic",
+     "saiteichingin.mhlw.go.jp",
+     "public",
      1
     ]
    ]
@@ -2631,15 +2650,20 @@
   {
    "q": "パート 有給 日数",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "public": 3,
     "maker": 3,
-    "public": 2,
+    "clinic": 3,
     "portal": 1,
     "media": 1
    },
    "top": [
+    [
+     "check-roudou.mhlw.go.jp",
+     "public",
+     1
+    ],
     [
      "mhlw.go.jp",
      "public",
@@ -2649,25 +2673,25 @@
      "jsite.mhlw.go.jp",
      "public",
      1
-    ],
-    [
-     "mag.smarthr.jp",
-     "maker",
-     1
     ]
    ]
   },
   {
    "q": "労災 申請 方法",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 2,
     "maker": 2,
-    "public": 1,
+    "clinic": 2,
     "portal": 1
    },
    "top": [
+    [
+     "mhlw.go.jp",
+     "public",
+     2
+    ],
     [
      "daylight-law.jp",
      "clinic",
@@ -2677,39 +2701,34 @@
      "jp-life.japanpost.jp",
      "maker",
      2
-    ],
-    [
-     "mhlw.go.jp",
-     "public",
-     1
     ]
    ]
   },
   {
    "q": "遺言 種類",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "wiki": 1,
-    "public": 2,
-    "clinic": 2,
+    "public": 3,
     "portal": 1,
+    "wiki": 1,
+    "clinic": 2,
     "maker": 1
    },
    "top": [
     [
      "koshonin.gr.jp",
      "public",
-     2
+     3
+    ],
+    [
+     "moj.go.jp",
+     "public",
+     1
     ],
     [
      "kondo-fp.jp",
      "clinic",
-     1
-    ],
-    [
-     "ja.wikipedia.org",
-     "wiki",
      1
     ]
    ]
@@ -2717,40 +2736,41 @@
   {
    "q": "成年後見 とは",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
+    "public": 4,
     "wiki": 1,
-    "clinic": 1,
-    "portal": 1
+    "portal": 1,
+    "clinic": 1
    },
    "top": [
     [
-     "mhlw.go.jp",
-     "public",
-     2
-    ],
-    [
-     "guardianship.mhlw.go.jp",
+     "courts.go.jp",
      "public",
      2
     ],
     [
      "moj.go.jp",
      "public",
-     1
+     2
+    ],
+    [
+     "mhlw.go.jp",
+     "public",
+     2
     ]
    ]
   },
   {
    "q": "家族信託 とは",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 1,
+    "public": 1,
     "portal": 2,
-    "clinic": 2,
     "wiki": 1,
+    "media": 1,
+    "clinic": 2,
     "maker": 2
    },
    "top": [
@@ -2765,8 +2785,8 @@
      2
     ],
     [
-     "ht-tax.or.jp",
-     "clinic",
+     "houmukyoku.moj.go.jp",
+     "public",
      1
     ]
    ]
@@ -2778,8 +2798,8 @@
    "kinds": {
     "media": 2,
     "clinic": 3,
-    "maker": 1,
     "other": 1,
+    "maker": 1,
     "public": 2
    },
    "top": [
@@ -2803,10 +2823,11 @@
   {
    "q": "補助金 申請 誰に頼む",
    "group": "制度・ルール",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 2,
+    "public": 1,
     "portal": 2,
+    "video": 2,
     "media": 2,
     "clinic": 2,
     "maker": 1
@@ -2818,13 +2839,13 @@
      2
     ],
     [
-     "so-labo.co.jp",
-     "clinic",
+     "chusho.meti.go.jp",
+     "public",
      1
     ],
     [
-     "minnano-joseikin.com",
-     "portal",
+     "mirasapo-plus.go.jp",
+     "public",
      1
     ]
    ]
@@ -2832,10 +2853,11 @@
   {
    "q": "役員報酬 決め方",
    "group": "制度・ルール",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "other": 1,
+    "public": 2,
     "media": 2,
-    "public": 1,
     "maker": 3,
     "clinic": 3
    },
@@ -2846,12 +2868,12 @@
      3
     ],
     [
-     "freee.co.jp",
-     "maker",
+     "nta.go.jp",
+     "public",
      2
     ],
     [
-     "biz.moneyforward.com",
+     "freee.co.jp",
      "maker",
      2
     ]

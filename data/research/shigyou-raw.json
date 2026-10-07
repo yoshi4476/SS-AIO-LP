@@ -1180,7 +1180,10 @@
   "確定申告 税理士 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://meetsmore.com/services/tax-return-accountant/media/11605",
+     "https://matsuura-zeirishi.com/fee/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1497,7 +1500,12 @@
   "就業規則 作成 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://srtamu.com/2024/01/15/sk-5/",
+     "https://ocsr.or.jp/price/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/model/index.html",
+     "https://www.startup-roudou.mhlw.go.jp/support_regulation.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1757,7 +1765,11 @@
   "弁護士 相談料 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.toben.or.jp/bengoshi/hiyou.html",
+     "https://soudan.osakaben.or.jp/about/center.html",
+     "https://www.houterasu.or.jp/site/soudan-tatekae/soudanqa.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1797,7 +1809,11 @@
   "離婚 弁護士 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.avance-lg.com/customer_contents/rikon/lawyer-fee/",
+     "https://www.houterasu.or.jp/site/soudan-tatekae/",
+     "https://www.houterasu.or.jp/site/jichitaifukushi-faq/faq-009.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1951,7 +1967,13 @@
   "会社 解散 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.proceo.jp/column/company-liquidation/",
+     "https://www.legare.shiga.jp/jigyou/jigyou8/",
+     "https://www.gov-book.or.jp/asp/Kanpo/KanpoPrice/?op=1",
+     "https://iroae.jp/blog/kaisan-seisan/",
+     "https://biz.moneyforward.com/ma/basic/852/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2154,7 +2176,11 @@
   "税理士 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nichizeiren.or.jp/cpta/about/",
+     "https://www.zeirishikensaku.jp/Information/Faq",
+     "https://www.nichizeiren.or.jp/consultation/expart/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2195,7 +2221,11 @@
   "税理士 変える タイミング": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://homare.tax/tax-accountant-handover/",
+     "https://arkjpn.net/column/column-7470/",
+     "https://www.e-tax.nta.go.jp/uketsuke/ininkankei_registration.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2236,7 +2266,10 @@
   "社労士 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.shakaihokenroumushi.jp/info/FAQ.html",
+     "https://sharoushi-mirai.jp/blog/sharoushi-erabikata/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2296,7 +2329,12 @@
   "行政書士 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.tokyo-gyosei.or.jp/outline/index.html",
+     "https://www.gyosei.or.jp/info/registration/registry",
+     "https://www.gyosei.or.jp/service",
+     "https://www.gyosei.or.jp/about/disclosure/reward"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2340,7 +2378,12 @@
   "弁護士 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.bengoshikai.jp/?upc=",
+     "https://niben.jp/legaladvice/soudan/guide/hiyou.html",
+     "https://niben.jp/legaladvice/soudan/guide/flow.html",
+     "https://www.houterasu.or.jp/site/soudan-tatekae/soudanqa.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2380,7 +2423,12 @@
   "司法書士 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://souzoku.shiho-shoshi.or.jp/",
+     "https://www.shiho.or.jp/search.html",
+     "https://www.shiho-shoshi.or.jp/about/remuneration/",
+     "https://www.shiho.or.jp/faq.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2420,7 +2468,11 @@
   "税理士 会計士 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nichizeiren.or.jp/cpta/about/",
+     "https://jicpa.or.jp/cpainfo/introduction/about/vocation/",
+     "https://jicpa.or.jp/cpainfo/introduction/qa/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2461,7 +2513,11 @@
   "司法書士 行政書士 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.shiho-shoshi.or.jp/about/business.html",
+     "https://www.gyosei.or.jp/info/service",
+     "https://www.moj.go.jp/MINJI/minji116.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2501,7 +2557,10 @@
   "社労士 必要か": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nenkin.go.jp/denshibenri/",
+     "https://www.shakaihokenroumushi.jp/info/FAQ.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2550,7 +2609,12 @@
   "顧問税理士 必要か": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nichizeiren.or.jp/cpta/about/",
+     "https://www.nta.go.jp/taxes/shiraberu/shinkoku/tokushu/kakushin-sakusei/",
+     "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/hojin/shinkoku/01.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6501.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2599,7 +2663,14 @@
   "相続 誰に相談": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.houterasu.or.jp/lp/souzoku2022a/",
+     "https://souzoku.shiho-shoshi.or.jp/lp/",
+     "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/shinkoku/sozoku/sozoku.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/shirabekata/9200.htm",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2639,7 +2710,12 @@
   "会社設立 誰に頼む": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.shiho-shoshi.or.jp/consulting/corporation/",
+     "https://www.nichizeiren.or.jp/cpta/about/",
+     "https://www.gyosei.or.jp/service/corporate",
+     "https://www.shakaihokenroumushi.jp/info/procedure.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2688,7 +2764,10 @@
   "オンライン 税理士 デメリット": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://koyano-cpa.gr.jp/nobiyo-kaikei/column/9030/",
+     "https://www.nta.go.jp/about/introduction/torikumi/onlinetool/index.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2735,7 +2814,11 @@
   "女性 税理士 探し方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.zeiri4.com/",
+     "https://www.nichizeiren.or.jp/consultation/expart/",
+     "https://www.zeirishikensaku.jp/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2780,7 +2863,12 @@
   "相続 弁護士 税理士 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.toben.or.jp/bengoshi/syoukai/field/yuigonsouzoku.html",
+     "https://www.nichizeiren.or.jp/cpta/about/",
+     "https://www.toben.or.jp/service/lawyer-cando.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4102.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2820,7 +2908,13 @@
   "労務トラブル 相談先": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/general/seido/chihou/kaiketu/soudan.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/kijyungaiyou/kijyungaiyou06.html",
+     "https://www.mhlw.go.jp/content/001697628.pdf",
+     "https://www.check-roudou.mhlw.go.jp/lp/hotline/index.html",
+     "https://www.houterasu.or.jp/lp/roudou2022a/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2866,7 +2960,12 @@
   "許認可 自分で できるか": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://kanadeoffice.com/kensetsufaq24/",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/kigu/index_00012.html",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bt_000086.html",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bt_000284.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2904,7 +3003,11 @@
   "記帳代行 税理士 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/02.htm",
+     "https://www.nichizeiren.or.jp/cpta/about/",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/osirase/9204.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2951,7 +3054,12 @@
   "税理士 紹介サービス 使うべきか": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.zeiri4.com/shoukai/consultation/service/",
+     "https://www.zeiri4.com/zeirishi/lp/",
+     "https://www.nichizeiren.or.jp/consultation/expart/",
+     "https://www.nichizeiren.or.jp/consultation/info/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2998,7 +3106,14 @@
   "社労士 顧問 なし 大丈夫か": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/web/t_doc?dataId=84020000&dataType=0&pageNo=1",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/roudouseisaku/chushoukigyou/koyou_rule.html",
+     "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150518.html",
+     "https://www.check-roudou.mhlw.go.jp/law/kantokukan.html",
+     "https://www.shakaihokenroumushi.jp/Portals/0/doc/nsec/souken/2025/panerucyousakekka_syousaiban.pdf",
+     "https://www.mhlw.go.jp/general/seido/chihou/kaiketu/soudan.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3038,7 +3153,15 @@
   "確定申告 やり方": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/shinkoku/tokushu/shinkoku-nagare/shinkoku-nagare.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/shinkoku/tokushu/smartphone-mynaportal-etax/index.htm",
+     "https://www.keisan.nta.go.jp/kyoutu/ky/sm/top",
+     "https://www.keisan.nta.go.jp/r7yokuaru_sp/cat1/cat16/cat162/scid1490.html",
+     "https://www.nta.go.jp/taxes/shiraberu/shinkoku/tokushu/zeikin-nouhu/",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2024.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2030.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3086,7 +3209,11 @@
   "インボイス 登録 必要か": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/0023010-121.pdf",
+     "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/0022009-057.pdf",
+     "https://www.keisan.nta.go.jp/r7yokuaru_sp/shohizei/shohizeishikumi/nozeigimumenjo/scid1831.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3130,7 +3257,12 @@
   "電子帳簿保存法 対応": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/about/introduction/torikumi/week/dennsityoubo.htm",
+     "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/tokusetsu/pdf/0026006-122.pdf",
+     "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/tokusetsu/pdf/0024011-003_01.pdf",
+     "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/tokusetsu/pdf/0024011-003_02.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3187,7 +3319,11 @@
   "相続税 申告 期限": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4208.htm",
+     "https://www.keisan.nta.go.jp/oshirase/sozoku/yohihantei/goriyomae/shinkokukigen.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3235,7 +3371,12 @@
   "相続放棄 手続き": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html",
+     "https://www.moj.go.jp/MINJI/minji07_00025.html",
+     "https://www.courts.go.jp/nagoya-f/vc-files/nagoya-f/file/syouteim-s02qa.H271116.pdf",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_25/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3278,7 +3419,13 @@
   "遺産分割 揉めた": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_12/index.html",
+     "https://www.courts.go.jp/kyoto/saiban/isanbunkatu/index.html",
+     "https://www.moj.go.jp/MINJI/minji05_00599.html",
+     "https://www.moj.go.jp/content/001444017.pdf",
+     "https://www.houterasu.or.jp/lp/souzoku2022a/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3317,7 +3464,13 @@
   "会社設立 流れ": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.moj.go.jp/MINJI/minji06_00134.html",
+     "https://www.moj.go.jp/MINJI/minji06_00141.html",
+     "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/07_3.htm",
+     "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150311.html?referral=kaigyo",
+     "https://houmukyoku.moj.go.jp/homu/shogyo_online01.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3365,7 +3518,12 @@
   "法人成り タイミング": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://chiyoda-tax.or.jp/column/sole-proprietor/incorporation-timing/",
+     "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150518.html",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6531.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5100.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3413,7 +3571,11 @@
   "社会保険 加入 義務": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150518.html",
+     "https://www.mhlw.go.jp/tekiyoukakudai/qa/",
+     "https://www.mhlw.go.jp/tekiyoukakudai/seido/tanjikan/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3458,7 +3620,13 @@
   "未払い残業代 請求された": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.courts.go.jp/saiban/syurui/syurui_minzi/minzi_25_21/index.html",
+     "https://www.mhlw.go.jp/content/11202000/001278556.pdf",
+     "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q11.html",
+     "https://www.check-roudou.mhlw.go.jp/study/roudousya_jikangai.html",
+     "https://jsite.mhlw.go.jp/hiroshima-roudoukyoku/hourei_seido_tetsuzuki/_00001.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3506,7 +3674,13 @@
   "労働基準監督署 調査": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/kijyungaiyou/kantokukanwork.html",
+     "https://jsite.mhlw.go.jp/yamanashi-roudoukyoku/kantoku/roudoukijun/24.html",
+     "https://www.mhlw.go.jp/content/11200000/001489472.pdf",
+     "https://jsite.mhlw.go.jp/toyama-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/houkokusyo.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/kijyungaiyou/kijyungaiyou06.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3546,7 +3720,12 @@
   "就業規則 作成 義務": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/syuugyoukisoku/q1.html",
+     "https://www.startup-roudou.mhlw.go.jp/regulation.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tc4731&dataType=1&pageNo=1",
+     "https://www.mhlw.go.jp/file/06-Seisakujouhou-11800000-Shokugyounouryokukaihatsukyoku/0000087057.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3586,7 +3765,11 @@
   "建設業許可 要件": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bt_000082.html",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bt_000080.html",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bt_000086.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3626,7 +3809,13 @@
   "古物商許可 取り方": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.police.pref.kanagawa.jp/tetsuzuki/eigyokankei/kobutsu/mesd0019.html",
+     "https://www.keishicho.metro.tokyo.lg.jp/tetsuzuki/kobutsu/tetsuzuki/kyoka.html",
+     "https://www.police.pref.kochi.lg.jp/docs/2023110700668/",
+     "https://www.keishicho.metro.tokyo.lg.jp/about_mpd/johokoukai_portal/shinsa_syobun/shinsa/seian.files/1_seian_017.pdf",
+     "https://www.keishicho.metro.tokyo.lg.jp/tetsuzuki/kobutsu/kaisetsu/kobutsu_shinsei.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3680,7 +3869,12 @@
   "在留資格 変更 手続き": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.moj.go.jp/isa/applications/procedures/16-2.html",
+     "https://www.moj.go.jp/isa/applications/status/gijinkoku?lang=km&language=jpn",
+     "https://www.moj.go.jp/isa/11_00107?lang=mn",
+     "https://www.moj.go.jp/isa/applications/procedures/tokureikikan_00001.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3731,7 +3925,11 @@
   "税務調査 来た": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/information/attention/attention.htm",
+     "https://www.nta.go.jp/information/other/data/h24/nozeikankyo/ippan02.htm",
+     "https://www.nta.go.jp/publication/pamph/koho/02.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3778,7 +3976,11 @@
   "延滞税 計算": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/nozei/entaizei/keisan/entai.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/osirase/9205.htm",
+     "https://www.nta.go.jp/law/tsutatsu/kobetsu/shotoku/shinkoku/001115/pdf/12/12_302b.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3819,7 +4021,11 @@
   "資金繰り 相談先": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.chusho.meti.go.jp/soudan/soudan_03.html",
+     "https://www.smrj.go.jp/sme/succession/revitalization/index.html",
+     "https://mirasapo-plus.go.jp/firststep/finance/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3866,7 +4072,11 @@
   "事業承継 進め方": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.smrj.go.jp/sme/succession/succession/index.html",
+     "https://www.chusho.meti.go.jp/koukai/shingikai/kihonmondai/2016/download/161128kihonmondai03.pdf",
+     "https://www.chusho.meti.go.jp/zaimu/shoukei/implement_business_succession.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3912,7 +4122,13 @@
   "小規模 M&A 相談先": {
    "group": "手続き・悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.chusho.meti.go.jp/zaimu/shoukei/business_succession_support_measures.html",
+     "https://www.jfc.go.jp/n/finance/jigyosyokei/index.html",
+     "https://www.chusho.meti.go.jp/zaimu/shoukei/implement_business_succession.html",
+     "https://ma-shienkikan.go.jp/search",
+     "https://www.chusho.meti.go.jp/zaimu/shoukei/2024/240830_02.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3952,7 +4168,11 @@
   "相続税 基礎控除": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4152.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4102.htm",
+     "https://www.gov-online.go.jp/article/202407/entry-6250.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4001,7 +4221,15 @@
   "贈与税 非課税": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/zoyo/4402.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/zoyo/4405.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4508.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/zoyo/4452.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/zoyo/4511.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/zoyo/4510.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4103.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4059,7 +4287,10 @@
   "小規模宅地等の特例": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4124.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4205.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4107,7 +4338,11 @@
   "青色申告 メリット": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2070.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2075.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4147,7 +4382,11 @@
   "経費 認められる 範囲": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2210.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1350.htm",
+     "https://www.keisan.nta.go.jp/r7yokuaru_sp/aoiroshinkoku/hitsuyokeihi/settaikosaihi/scid1722.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4196,7 +4435,9 @@
   "減価償却 とは": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2100.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4235,7 +4476,11 @@
   "消費税 免税事業者": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6501.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6125.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice_kakutei.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4291,7 +4536,11 @@
   "社会保険 扶養 範囲": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20141202.html",
+     "https://www.nenkin.go.jp/oshirase/taisetu/2025/202508/0819.html",
+     "https://www.kyoukaikenpo.or.jp/application_form/voluntary_continuation/002/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4337,7 +4586,10 @@
   "育児休業 給付金": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158500.html",
+     "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/childcare/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4380,7 +4632,12 @@
   "雇用保険 加入条件": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000147331.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000140565.html",
+     "https://jsite.mhlw.go.jp/tokyo-hellowork/kakushu_jouhou/koyouhoken/koyouhoken/QA/hihokensya_qa.html",
+     "https://www.mhlw.go.jp/content/11601000/001670426.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4426,7 +4683,11 @@
   "36協定 とは": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/index.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudouseisaku/chushoukigyou/joken_kankyou_rule.html",
+     "https://www.mhlw.go.jp/content/000611834.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4466,7 +4727,10 @@
   "最低賃金 2026": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://saiteichingin.mhlw.go.jp/table/page_list_nationallist.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/chingin/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4514,7 +4778,9 @@
   "パート 有給 日数": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q1.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4561,7 +4827,14 @@
   "労災 申請 方法": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/rousai/index.html",
+     "https://www.check-roudou.mhlw.go.jp/qa/roudousya/sonota/q10.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/rousaihoken.html",
+     "https://jsite.mhlw.go.jp/kagoshima-roudoukyoku/hourei_seido_tetsuzuki/rousai_hoken/rousai02.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000154445.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000154480.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4601,7 +4874,10 @@
   "遺言 種類": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.koshonin.gr.jp/notary/ow02",
+     "https://www.moj.go.jp/content/001417666.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4641,7 +4917,12 @@
   "成年後見 とは": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.courts.go.jp/saiban/koukenp00/koukenp1/index.html",
+     "https://www.moj.go.jp/MINJI/a02.html",
+     "https://www.moj.go.jp/MINJI/a01.html",
+     "https://www.moj.go.jp/MINJI/a03.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4687,7 +4968,11 @@
   "家族信託 とは": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://houmukyoku.moj.go.jp/morioka/content/001396290.pdf",
+     "https://www.moj.go.jp/content/001459941.pdf",
+     "https://www.seiho.or.jp/activity/kourei/pdf/ninchi_all.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4776,7 +5061,14 @@
   "補助金 申請 誰に頼む": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.chusho.meti.go.jp/link/jisshi_kikan.html",
+     "https://mirasapo-plus.go.jp/supporter/",
+     "https://www.gyosei.or.jp/sites/default/files/1692165941/Pamphlet_child_women_A4.pdf",
+     "https://www.shakaihokenroumushi.jp/Portals/0/resources/knight/",
+     "https://www.chusho.meti.go.jp/soudan/soudan_01.html",
+     "https://www.chusho.meti.go.jp/soudan/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4818,7 +5110,11 @@
   "役員報酬 決め方": {
    "group": "制度・ルール",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.nta.go.jp/about/organization/ntc/soshoshiryo/kazei/2016/pdf/12849.pdf",
+     "https://lawplayer.com/jp/article/417AC0000000086/361",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5211.htm"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4871,5 +5167,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }

@@ -14,8 +14,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 2,
-    "media": 2,
-    "portal": 2
+    "portal": 2,
+    "media": 2
    },
    "top": [
     [
@@ -41,8 +41,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "video": 1,
     "portal": 3,
+    "video": 1,
     "media": 2
    },
    "top": [
@@ -97,8 +97,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "media": 3,
-    "portal": 3
+    "portal": 3,
+    "media": 3
    },
    "top": [
     [
@@ -151,9 +151,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
+    "portal": 3,
     "review": 1,
     "media": 3,
-    "portal": 3,
     "video": 1
    },
    "top": [
@@ -180,8 +180,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "media": 3,
-    "portal": 3
+    "portal": 3,
+    "media": 3
    },
    "top": [
     [
@@ -207,8 +207,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "media": 3,
     "portal": 3,
+    "media": 3,
     "review": 1
    },
    "top": [
@@ -237,8 +237,8 @@
     "review": 1,
     "media": 3,
     "clinic": 3,
-    "public": 1,
-    "portal": 2
+    "portal": 2,
+    "public": 1
    },
    "top": [
     [
@@ -292,8 +292,8 @@
    "group": "地域で探す",
    "answered": 4,
    "kinds": {
-    "public": 1,
     "portal": 4,
+    "public": 1,
     "media": 3,
     "clinic": 3,
     "maker": 1
@@ -350,8 +350,8 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "media": 1,
     "portal": 3,
+    "media": 1,
     "clinic": 1
    },
    "top": [
@@ -430,8 +430,8 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "clinic": 2,
-    "portal": 3
+    "portal": 3,
+    "clinic": 2
    },
    "top": [
     [
@@ -457,8 +457,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "media": 2,
-    "portal": 3
+    "portal": 3,
+    "media": 2
    },
    "top": [
     [
@@ -511,8 +511,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 1,
-    "media": 1,
-    "portal": 3
+    "portal": 3,
+    "media": 1
    },
    "top": [
     [
@@ -538,8 +538,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "review": 1,
     "portal": 3,
+    "review": 1,
     "media": 1
    },
    "top": [
@@ -594,8 +594,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "media": 3,
     "portal": 3,
+    "media": 3,
     "clinic": 3,
     "public": 2
    },
@@ -622,9 +622,9 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
+    "portal": 4,
     "video": 2,
     "clinic": 4,
-    "portal": 4,
     "maker": 1,
     "media": 1
    },
@@ -649,13 +649,13 @@
   {
    "q": "二世帯住宅 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "maker": 2,
     "portal": 3,
     "clinic": 3,
     "video": 1,
-    "media": 1,
-    "maker": 1
+    "media": 1
    },
    "top": [
     [
@@ -680,8 +680,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "maker": 1,
     "portal": 4,
+    "maker": 1,
     "video": 1,
     "clinic": 2,
     "media": 2
@@ -707,28 +707,28 @@
   {
    "q": "屋根 リフォーム 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "portal": 3,
+    "maker": 2,
     "media": 2,
-    "clinic": 3,
-    "maker": 1,
-    "portal": 2
+    "clinic": 3
    },
    "top": [
     [
-     "rehome-navi.com",
+     "forest.toppan.com",
+     "maker",
+     2
+    ],
+    [
+     "reform-guide.jp",
      "portal",
      2
     ],
     [
-     "yaneiroha.com",
-     "media",
-     1
-    ],
-    [
-     "besthome-tosou.com",
-     "clinic",
-     1
+     "rehome-navi.com",
+     "portal",
+     2
     ]
    ]
   },
@@ -739,10 +739,10 @@
    "kinds": {
     "video": 1,
     "media": 2,
-    "clinic": 3,
-    "maker": 3,
+    "portal": 3,
     "other": 1,
-    "portal": 3
+    "maker": 3,
+    "clinic": 3
    },
    "top": [
     [
@@ -768,9 +768,9 @@
    "answered": 3,
    "kinds": {
     "video": 1,
-    "clinic": 2,
+    "portal": 2,
     "maker": 1,
-    "portal": 2
+    "clinic": 2
    },
    "top": [
     [
@@ -822,10 +822,10 @@
   {
    "q": "フルリノベーション 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "portal": 3,
-    "clinic": 3,
+    "portal": 4,
+    "clinic": 4,
     "public": 1,
     "maker": 2,
     "media": 1
@@ -834,7 +834,7 @@
     [
      "zerorenovation.co.jp",
      "clinic",
-     2
+     3
     ],
     [
      "furureno.jp",
@@ -910,14 +910,19 @@
   {
    "q": "建て替え 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "portal": 4,
     "maker": 2,
-    "portal": 3,
+    "clinic": 3,
     "media": 2
    },
    "top": [
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
     [
      "house.home4u.jp",
      "portal",
@@ -927,11 +932,6 @@
      "kinoedesign.co.jp",
      "clinic",
      2
-    ],
-    [
-     "furureno.jp",
-     "portal",
-     2
     ]
    ]
   },
@@ -940,9 +940,9 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "video": 1,
-    "public": 3,
     "portal": 4,
+    "public": 3,
+    "video": 1,
     "clinic": 3,
     "maker": 1,
     "media": 1
@@ -970,11 +970,11 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "maker": 3,
     "media": 2,
+    "maker": 3,
     "clinic": 3,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -997,27 +997,27 @@
   {
    "q": "注文住宅 諸費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "portal": 4,
+    "clinic": 4,
     "media": 1,
-    "portal": 3,
     "maker": 2
    },
    "top": [
     [
-     "yamadahomes.jp",
+     "homes.panasonic.com",
      "clinic",
-     2
+     3
     ],
     [
      "athome.co.jp",
      "portal",
-     2
+     3
     ],
     [
-     "mitsuihome.co.jp",
-     "maker",
+     "yamadahomes.jp",
+     "clinic",
      2
     ]
    ]
@@ -1025,13 +1025,13 @@
   {
    "q": "地盤改良 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "media": 2,
+    "clinic": 4,
     "other": 1,
-    "clinic": 3,
-    "video": 1,
-    "media": 1,
-    "portal": 2
+    "portal": 2,
+    "video": 1
    },
    "top": [
     [
@@ -1056,8 +1056,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "video": 2,
     "portal": 4,
+    "video": 2,
     "clinic": 4,
     "maker": 1
    },
@@ -1084,8 +1084,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "video": 1,
     "portal": 4,
+    "video": 1,
     "media": 3,
     "clinic": 4,
     "maker": 3
@@ -1111,14 +1111,19 @@
   {
    "q": "床 張り替え 費用",
    "group": "費用",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
+    "portal": 4,
     "other": 1,
-    "portal": 3,
+    "clinic": 3,
     "maker": 2
    },
    "top": [
+    [
+     "homepro.jp",
+     "portal",
+     3
+    ],
     [
      "rehome-navi.com",
      "portal",
@@ -1128,38 +1133,33 @@
      "renoco.jp",
      "portal",
      2
-    ],
-    [
-     "forest.toppan.com",
-     "maker",
-     2
     ]
    ]
   },
   {
    "q": "工務店 ハウスメーカー 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 1,
-    "portal": 2,
+    "portal": 3,
     "media": 1,
+    "maker": 1,
     "clinic": 2
    },
    "top": [
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
     [
      "suumocounter.jp",
      "portal",
      2
     ],
     [
-     "life.oricon.co.jp",
-     "media",
-     1
-    ],
-    [
-     "abc-housing.asahi.co.jp",
-     "clinic",
+     "homes.co.jp",
+     "portal",
      1
     ]
    ]
@@ -1167,12 +1167,13 @@
   {
    "q": "工務店 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
-    "clinic": 2,
+    "public": 1,
+    "portal": 2,
     "media": 1,
-    "portal": 2
+    "maker": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -1195,15 +1196,20 @@
   {
    "q": "リフォーム会社 選び方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 2,
+    "public": 2,
     "portal": 2,
+    "media": 2,
     "clinic": 2,
-    "public": 1,
     "maker": 1
    },
    "top": [
+    [
+     "j-reform.com",
+     "public",
+     2
+    ],
     [
      "refonavi.or.jp",
      "portal",
@@ -1213,23 +1219,19 @@
      "news.mynavi.jp",
      "media",
      2
-    ],
-    [
-     "rehome-navi.com",
-     "portal",
-     2
     ]
    ]
   },
   {
    "q": "設計事務所 工務店 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 1,
+    "public": 1,
+    "clinic": 3,
     "portal": 1,
-    "media": 1,
-    "clinic": 2
+    "video": 1,
+    "media": 1
    },
    "top": [
     [
@@ -1238,13 +1240,13 @@
      2
     ],
     [
-     "touwa-corp.co.jp",
-     "clinic",
+     "mlit.go.jp",
+     "public",
      1
     ],
     [
-     "crexgroup.com",
-     "media",
+     "art-ao.co.jp",
+     "clinic",
      1
     ]
    ]
@@ -1252,15 +1254,22 @@
   {
    "q": "相見積もり 注意点",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 1,
+    "public": 1,
+    "maker": 3,
     "media": 2,
     "clinic": 2,
-    "video": 1,
     "other": 2,
-    "maker": 2
+    "video": 1
    },
    "top": [
+    [
+     "leaner.jp",
+     "maker",
+     3
+    ],
     [
      "kaonavi.jp",
      "maker",
@@ -1270,21 +1279,18 @@
      "bod-grp.com",
      "maker",
      2
-    ],
-    [
-     "leaner.jp",
-     "maker",
-     2
     ]
    ]
   },
   {
    "q": "高気密高断熱 工務店 見分け方",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 1,
+    "other": 1,
+    "public": 1,
     "portal": 1,
+    "video": 1,
     "clinic": 2
    },
    "top": [
@@ -1294,13 +1300,13 @@
      2
     ],
     [
-     "actie.jp",
-     "clinic",
+     "mlit.go.jp",
+     "public",
      1
     ],
     [
-     "smifulhome.jp",
-     "clinic",
+     "ibecs.or.jp",
+     "public",
      1
     ]
    ]
@@ -1308,25 +1314,25 @@
   {
    "q": "ZEH とは",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "clinic": 2,
+    "public": 3,
     "maker": 2,
-    "public": 2,
+    "clinic": 2,
     "portal": 1,
-    "other": 1,
-    "wiki": 1
+    "wiki": 1,
+    "other": 1
    },
    "top": [
     [
-     "env.go.jp",
+     "enecho.meti.go.jp",
      "public",
      2
     ],
     [
-     "enecho.meti.go.jp",
+     "env.go.jp",
      "public",
-     1
+     2
     ],
     [
      "pref.nara.lg.jp",
@@ -1338,13 +1344,13 @@
   {
    "q": "長期優良住宅 メリット",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 2,
+    "portal": 3,
+    "public": 3,
     "maker": 3,
     "clinic": 3,
-    "media": 1,
-    "portal": 2
+    "media": 1
    },
    "top": [
     [
@@ -1367,11 +1373,12 @@
   {
    "q": "耐震等級3 必要か",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 1,
+    "public": 1,
+    "maker": 3,
     "portal": 2,
-    "maker": 2,
+    "media": 1,
     "clinic": 2
    },
    "top": [
@@ -1386,8 +1393,8 @@
      2
     ],
     [
-     "marukyo-net.co.jp",
-     "clinic",
+     "mlit.go.jp",
+     "public",
      1
     ]
    ]
@@ -1395,16 +1402,21 @@
   {
    "q": "断熱等級 とは",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 2,
     "media": 3,
     "clinic": 3,
     "other": 1,
-    "public": 1,
     "maker": 2,
     "portal": 2
    },
    "top": [
+    [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
     [
      "standard-project.net",
      "media",
@@ -1414,21 +1426,16 @@
      "ms-as.jp",
      "clinic",
      2
-    ],
-    [
-     "zaijubiz.jp",
-     "media",
-     1
     ]
    ]
   },
   {
    "q": "木造 鉄骨 どっち",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 3,
     "video": 1,
-    "portal": 2,
     "media": 1,
     "clinic": 2
    },
@@ -1453,16 +1460,44 @@
   {
    "q": "平屋 二階建て どっち",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "clinic": 3,
     "portal": 2,
-    "media": 1,
-    "clinic": 2
+    "media": 1
    },
    "top": [
     [
      "homes.panasonic.com",
      "clinic",
+     3
+    ],
+    [
+     "toyotahome.co.jp",
+     "clinic",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ]
+   ]
+  },
+  {
+   "q": "建売 注文住宅 違い",
+   "group": "選び方",
+   "answered": 3,
+   "kinds": {
+    "portal": 3,
+    "media": 1,
+    "maker": 1,
+    "clinic": 2
+   },
+   "top": [
+    [
+     "athome.co.jp",
+     "portal",
      2
     ],
     [
@@ -1471,64 +1506,37 @@
      2
     ],
     [
-     "abc-housing.asahi.co.jp",
-     "clinic",
-     1
-    ]
-   ]
-  },
-  {
-   "q": "建売 注文住宅 違い",
-   "group": "選び方",
-   "answered": 2,
-   "kinds": {
-    "maker": 1,
-    "portal": 2,
-    "media": 1,
-    "clinic": 2
-   },
-   "top": [
-    [
      "hajime-kensetsu.co.jp",
      "clinic",
      2
-    ],
-    [
-     "homes.panasonic.com",
-     "clinic",
-     1
-    ],
-    [
-     "athome.co.jp",
-     "portal",
-     1
     ]
    ]
   },
   {
    "q": "リフォーム 建て替え どっち",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
-    "portal": 2,
+    "portal": 3,
+    "public": 1,
     "media": 1,
+    "maker": 2,
     "clinic": 2
    },
    "top": [
+    [
+     "reform-guide.jp",
+     "portal",
+     2
+    ],
     [
      "fujitakensetsu.jp",
      "clinic",
      2
     ],
     [
-     "kurashi-pro.jp",
-     "media",
-     1
-    ],
-    [
-     "crexgroup.com",
-     "media",
+     "taishin-kaishu.mlit.go.jp",
+     "public",
      1
     ]
    ]
@@ -1536,9 +1544,10 @@
   {
    "q": "リノベーション リフォーム 違い",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 2,
+    "portal": 3,
+    "public": 1,
     "maker": 2,
     "clinic": 2,
     "media": 1
@@ -1564,13 +1573,14 @@
   {
    "q": "工務店 倒産 リスク",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 1,
+    "other": 2,
+    "public": 1,
+    "portal": 2,
     "media": 2,
-    "clinic": 2,
-    "portal": 1,
-    "other": 1
+    "maker": 1,
+    "clinic": 2
    },
    "top": [
     [
@@ -1584,8 +1594,8 @@
      2
     ],
     [
-     "concrew.co.jp",
-     "clinic",
+     "tdb.co.jp",
+     "other",
      1
     ]
    ]
@@ -1593,27 +1603,27 @@
   {
    "q": "完成見学会 チェックポイント",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 2,
+    "clinic": 3,
     "video": 1,
-    "media": 1,
-    "clinic": 2,
-    "portal": 1
+    "media": 1
    },
    "top": [
+    [
+     "athome.co.jp",
+     "portal",
+     2
+    ],
     [
      "yuyuhome.co.jp",
      "clinic",
      2
     ],
     [
-     "sbs-mhc.co.jp",
+     "apple-h.co.jp",
      "clinic",
-     1
-    ],
-    [
-     "kurashi-pro.jp",
-     "media",
      1
     ]
    ]
@@ -1621,28 +1631,28 @@
   {
    "q": "モデルハウス 見るべき点",
    "group": "選び方",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 2,
-    "media": 1,
-    "clinic": 2,
+    "portal": 2,
+    "maker": 3,
+    "clinic": 3,
     "video": 1,
-    "portal": 1
+    "media": 1
    },
    "top": [
+    [
+     "school.stephouse.jp",
+     "portal",
+     2
+    ],
     [
      "iwakura-home.co.jp",
      "clinic",
      2
     ],
     [
-     "replan.ne.jp",
-     "media",
-     1
-    ],
-    [
-     "growing.hosoda.co.jp",
-     "clinic",
+     "eyefulhome.jp",
+     "maker",
      1
     ]
    ]
@@ -1652,8 +1662,8 @@
    "group": "選び方",
    "answered": 4,
    "kinds": {
-    "media": 4,
     "portal": 4,
+    "media": 4,
     "clinic": 3,
     "video": 1,
     "maker": 1
@@ -1679,9 +1689,9 @@
   {
    "q": "住宅 保証 期間",
    "group": "選び方",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
+    "public": 4,
     "portal": 3,
     "other": 1,
     "clinic": 3,
@@ -1690,13 +1700,13 @@
    },
    "top": [
     [
-     "shintoa-tosou.jp",
-     "clinic",
-     2
-    ],
-    [
      "mlit.go.jp",
      "public",
+     3
+    ],
+    [
+     "shintoa-tosou.jp",
+     "clinic",
      2
     ],
     [
@@ -1709,11 +1719,12 @@
   {
    "q": "注文住宅 流れ",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 2,
-    "media": 1,
-    "clinic": 2
+    "portal": 3,
+    "maker": 1,
+    "clinic": 3,
+    "media": 1
    },
    "top": [
     [
@@ -1727,7 +1738,7 @@
      2
     ],
     [
-     "athome.co.jp",
+     "suumo.jp",
      "portal",
      1
     ]
@@ -1736,15 +1747,20 @@
   {
    "q": "家づくり 何から",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 1,
+    "maker": 2,
     "portal": 2,
+    "media": 1,
     "clinic": 2,
-    "video": 1,
-    "maker": 1
+    "video": 1
    },
    "top": [
+    [
+     "sumai.panasonic.jp",
+     "maker",
+     2
+    ],
     [
      "athome.co.jp",
      "portal",
@@ -1754,48 +1770,43 @@
      "homes.co.jp",
      "portal",
      2
-    ],
-    [
-     "asahi-kasei.co.jp",
-     "maker",
-     1
     ]
    ]
   },
   {
    "q": "土地探し 工務店",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "portal": 2,
+    "portal": 3,
     "clinic": 2,
     "media": 1
    },
    "top": [
     [
-     "athome.co.jp",
+     "suumocounter.jp",
      "portal",
      2
     ],
     [
-     "build.hosoda.co.jp",
-     "clinic",
-     1
-    ],
-    [
      "homes.co.jp",
      "portal",
-     1
+     2
+    ],
+    [
+     "athome.co.jp",
+     "portal",
+     2
     ]
    ]
   },
   {
    "q": "住宅ローン いつ 申し込む",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "maker": 4,
     "portal": 3,
-    "maker": 3,
     "other": 1,
     "clinic": 2,
     "media": 1
@@ -1812,8 +1823,8 @@
      3
     ],
     [
-     "mogecheck.jp",
-     "portal",
+     "mizuhobank.co.jp",
+     "maker",
      2
     ]
    ]
@@ -1821,14 +1832,19 @@
   {
    "q": "間取り 失敗",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 3,
+    "clinic": 3,
     "video": 1,
-    "clinic": 2,
-    "media": 2,
-    "portal": 2
+    "media": 2
    },
    "top": [
+    [
+     "homes.co.jp",
+     "portal",
+     2
+    ],
     [
      "suumo.jp",
      "portal",
@@ -1838,55 +1854,55 @@
      "mochiie.com",
      "portal",
      2
-    ],
-    [
-     "allabout.co.jp",
-     "media",
-     1
     ]
    ]
   },
   {
    "q": "注文住宅 後悔",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 2,
     "video": 1,
     "media": 2,
     "clinic": 2,
-    "maker": 1,
-    "portal": 1
+    "maker": 1
    },
    "top": [
+    [
+     "suumocounter.jp",
+     "portal",
+     2
+    ],
+    [
+     "suumo.jp",
+     "portal",
+     2
+    ],
     [
      "prtimes.jp",
      "media",
      2
-    ],
-    [
-     "ishinhome.co.jp",
-     "clinic",
-     1
-    ],
-    [
-     "news.mynavi.jp",
-     "media",
-     1
     ]
    ]
   },
   {
    "q": "リフォーム トラブル",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 2,
+    "public": 2,
     "portal": 2,
+    "media": 2,
     "maker": 2,
-    "clinic": 2,
-    "public": 1
+    "clinic": 2
    },
    "top": [
+    [
+     "chord.or.jp",
+     "public",
+     2
+    ],
     [
      "hikari-kensetsu.jp",
      "clinic",
@@ -1896,20 +1912,15 @@
      "reform-guide.jp",
      "portal",
      2
-    ],
-    [
-     "zeenb.astecpaints.jp",
-     "maker",
-     2
     ]
    ]
   },
   {
    "q": "追加費用 トラブル 工事",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "public": 3,
+    "public": 4,
     "portal": 2,
     "other": 2,
     "clinic": 3,
@@ -1917,6 +1928,11 @@
     "video": 1
    },
    "top": [
+    [
+     "chord.or.jp",
+     "public",
+     2
+    ],
     [
      "accelserve-legal.com",
      "clinic",
@@ -1926,41 +1942,36 @@
      "vbest.jp",
      "other",
      2
-    ],
-    [
-     "naito-csc.jp",
-     "clinic",
-     2
     ]
    ]
   },
   {
    "q": "工期 遅れる",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
+    "portal": 2,
     "media": 2,
     "clinic": 2,
-    "portal": 2,
     "video": 1,
-    "public": 2,
     "maker": 2,
     "other": 1
    },
    "top": [
     [
+     "mlit.go.jp",
+     "public",
+     2
+    ],
+    [
+     "chord.or.jp",
+     "public",
+     2
+    ],
+    [
      "lp.kanna4u.com",
      "maker",
-     2
-    ],
-    [
-     "kuraemon.com",
-     "maker",
-     2
-    ],
-    [
-     "naito-csc.jp",
-     "clinic",
      2
     ]
    ]
@@ -1968,13 +1979,14 @@
   {
    "q": "欠陥住宅 見分け方",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "wiki": 1,
-    "clinic": 2,
-    "media": 2,
+    "other": 1,
+    "public": 2,
     "portal": 2,
-    "public": 1,
+    "wiki": 1,
+    "media": 2,
+    "clinic": 2,
     "maker": 1
    },
    "top": [
@@ -1998,12 +2010,12 @@
   {
    "q": "新築 雨漏り",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 3,
-    "media": 2,
+    "public": 4,
     "other": 3,
-    "public": 3,
+    "media": 2,
+    "clinic": 3,
     "portal": 2,
     "video": 1,
     "maker": 1
@@ -2015,14 +2027,14 @@
      3
     ],
     [
-     "sharing-tech.co.jp",
-     "clinic",
+     "chord.or.jp",
+     "public",
      2
     ],
     [
-     "zennichi.or.jp",
-     "public",
-     1
+     "sharing-tech.co.jp",
+     "clinic",
+     2
     ]
    ]
   },
@@ -2031,13 +2043,13 @@
    "group": "進め方・トラブル",
    "answered": 4,
    "kinds": {
+    "other": 2,
     "media": 2,
     "maker": 4,
-    "other": 2,
     "portal": 3,
+    "public": 3,
     "clinic": 3,
-    "video": 1,
-    "public": 3
+    "video": 1
    },
    "top": [
     [
@@ -2062,10 +2074,10 @@
    "group": "進め方・トラブル",
    "answered": 4,
    "kinds": {
-    "media": 3,
     "public": 4,
-    "clinic": 2,
+    "media": 3,
     "portal": 3,
+    "clinic": 2,
     "video": 1,
     "maker": 3
    },
@@ -2090,9 +2102,11 @@
   {
    "q": "外壁塗装 時期",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 2,
+    "public": 1,
+    "maker": 1,
+    "clinic": 3,
     "portal": 3,
     "video": 1,
     "media": 1
@@ -2118,15 +2132,20 @@
   {
    "q": "リフォーム 契約 注意点",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 2,
-    "media": 2,
+    "public": 3,
     "portal": 2,
+    "media": 2,
     "other": 1,
     "maker": 1
    },
    "top": [
+    [
+     "chord.or.jp",
+     "public",
+     2
+    ],
     [
      "kakaku.com",
      "portal",
@@ -2136,23 +2155,18 @@
      "crexgroup.com",
      "media",
      2
-    ],
-    [
-     "housingbazar.jp",
-     "portal",
-     1
     ]
    ]
   },
   {
    "q": "工事 近所 挨拶",
    "group": "進め方・トラブル",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "portal": 3,
+    "media": 1,
     "maker": 1,
     "clinic": 2,
-    "media": 1,
-    "portal": 2,
     "video": 1
    },
    "top": [
@@ -2176,11 +2190,11 @@
   {
    "q": "地鎮祭 必要か",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "maker": 4,
+    "clinic": 4,
     "media": 3,
-    "maker": 3,
-    "clinic": 3,
     "portal": 2,
     "other": 1
    },
@@ -2191,12 +2205,12 @@
      3
     ],
     [
-     "ishidacs.co.jp",
-     "clinic",
+     "alsok.co.jp",
+     "maker",
      2
     ],
     [
-     "showa-hc.jp",
+     "ishidacs.co.jp",
      "clinic",
      2
     ]
@@ -2205,15 +2219,21 @@
   {
    "q": "引き渡し チェック",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "portal": 4,
+    "public": 1,
     "media": 3,
     "clinic": 3,
-    "portal": 3,
     "video": 2,
     "maker": 2
    },
    "top": [
+    [
+     "suumo.jp",
+     "portal",
+     3
+    ],
     [
      "anest.net",
      "media",
@@ -2223,38 +2243,33 @@
      "sakurajimusyo.com",
      "maker",
      2
-    ],
-    [
-     "healthy-home.co.jp",
-     "clinic",
-     2
     ]
    ]
   },
   {
    "q": "新築 定期点検 内容",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "maker": 2,
-    "clinic": 3,
-    "media": 2,
-    "public": 1
+    "maker": 3,
+    "clinic": 4,
+    "public": 1,
+    "media": 2
    },
    "top": [
     [
+     "tacthome.co.jp",
+     "clinic",
+     3
+    ],
+    [
      "johnsonhome.co.jp",
      "clinic",
-     2
+     3
     ],
     [
      "crexgroup.com",
      "media",
-     2
-    ],
-    [
-     "tacthome.co.jp",
-     "clinic",
      2
     ]
    ]
@@ -2262,14 +2277,14 @@
   {
    "q": "リフォーム ローン",
    "group": "進め方・トラブル",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 2,
+    "public": 3,
+    "maker": 4,
     "portal": 3,
-    "video": 1,
+    "clinic": 2,
     "other": 1,
-    "public": 2,
-    "maker": 3,
+    "video": 1,
     "media": 2
    },
    "top": [
@@ -2293,27 +2308,28 @@
   {
    "q": "家 寒い 対策",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "portal": 2,
     "media": 2,
-    "clinic": 2,
     "maker": 2,
-    "portal": 2
+    "clinic": 2
    },
    "top": [
     [
+     "enecho.meti.go.jp",
+     "public",
+     1
+    ],
+    [
+     "gov-online.go.jp",
+     "public",
+     1
+    ],
+    [
      "nitori-net.jp",
      "maker",
-     1
-    ],
-    [
-     "amemiya.co.jp",
-     "maker",
-     1
-    ],
-    [
-     "nuri-kae.jp",
-     "portal",
      1
     ]
    ]
@@ -2321,15 +2337,20 @@
   {
    "q": "結露 対策",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 1,
-    "public": 1,
-    "maker": 2,
+    "maker": 3,
     "portal": 2,
+    "public": 1,
+    "video": 1,
     "clinic": 1
    },
    "top": [
+    [
+     "ykkap.co.jp",
+     "maker",
+     2
+    ],
     [
      "curama.jp",
      "portal",
@@ -2339,23 +2360,19 @@
      "panasonic.jp",
      "maker",
      2
-    ],
-    [
-     "asahiglassplaza.net",
-     "maker",
-     2
     ]
    ]
   },
   {
    "q": "家 カビ 原因",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "portal": 2,
     "media": 2,
-    "clinic": 2,
     "maker": 2,
-    "portal": 2
+    "clinic": 2
    },
    "top": [
     [
@@ -2364,13 +2381,13 @@
      2
     ],
     [
-     "taskle.jp",
-     "portal",
+     "city.ota.tokyo.jp",
+     "public",
      1
     ],
     [
-     "eidaihouse.com",
-     "clinic",
+     "city.yokohama.lg.jp",
+     "public",
      1
     ]
    ]
@@ -2378,11 +2395,12 @@
   {
    "q": "床 きしむ 原因",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "media": 1,
+    "other": 1,
+    "maker": 3,
     "portal": 1,
-    "maker": 2,
+    "media": 1,
     "clinic": 2
    },
    "top": [
@@ -2397,8 +2415,8 @@
      2
     ],
     [
-     "hdc.asahi.co.jp",
-     "clinic",
+     "faq.lixil.co.jp",
+     "maker",
      1
     ]
    ]
@@ -2406,12 +2424,13 @@
   {
    "q": "雨漏り 修理 どこに頼む",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "portal": 2,
     "clinic": 2,
-    "maker": 1,
-    "other": 1
+    "other": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -2425,8 +2444,8 @@
      2
     ],
     [
-     "kk-bless.com",
-     "clinic",
+     "portal.town.hirono.iwate.jp",
+     "public",
      1
     ]
    ]
@@ -2434,12 +2453,13 @@
   {
    "q": "シロアリ 対策",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "public": 1,
-    "clinic": 2,
-    "maker": 2,
+    "public": 2,
+    "video": 1,
     "portal": 2,
+    "maker": 2,
+    "clinic": 2,
     "media": 1
    },
    "top": [
@@ -2454,8 +2474,8 @@
      2
     ],
     [
-     "athome.co.jp",
-     "portal",
+     "shiroari.or.jp",
+     "public",
      1
     ]
    ]
@@ -2463,14 +2483,20 @@
   {
    "q": "外壁 ひび割れ",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 1,
+    "other": 1,
+    "clinic": 3,
     "portal": 2,
-    "clinic": 2,
+    "video": 1,
     "maker": 1
    },
    "top": [
+    [
+     "morutarugaiheki.jp",
+     "clinic",
+     2
+    ],
     [
      "rehome-navi.com",
      "portal",
@@ -2480,23 +2506,18 @@
      "nuri-kae.jp",
      "portal",
      2
-    ],
-    [
-     "housing-box.co.jp",
-     "clinic",
-     1
     ]
    ]
   },
   {
    "q": "窓 断熱 方法",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 1,
-    "public": 1,
-    "maker": 2,
+    "public": 2,
+    "maker": 3,
     "portal": 2,
+    "video": 1,
     "media": 1,
     "clinic": 1
    },
@@ -2504,16 +2525,16 @@
     [
      "ykkap.co.jp",
      "maker",
-     2
+     3
     ],
     [
-     "sls.co.jp",
-     "maker",
+     "enecho.meti.go.jp",
+     "public",
      1
     ],
     [
-     "kenzai-navi.com",
-     "portal",
+     "asahiglassplaza.net",
+     "maker",
      1
     ]
    ]
@@ -2521,8 +2542,9 @@
   {
    "q": "家 暑い 対策",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
     "portal": 2,
     "maker": 2,
     "clinic": 2
@@ -2534,13 +2556,13 @@
      2
     ],
     [
-     "ykkap.co.jp",
-     "maker",
+     "wbgt.env.go.jp",
+     "public",
      1
     ],
     [
-     "idaiko.com",
-     "clinic",
+     "env.go.jp",
+     "public",
      1
     ]
    ]
@@ -2548,27 +2570,27 @@
   {
    "q": "防音 リフォーム",
    "group": "住まいの悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "clinic": 2,
+    "portal": 4,
+    "maker": 3,
     "media": 3,
-    "portal": 3,
-    "maker": 2
+    "clinic": 2
    },
    "top": [
     [
      "rehome-navi.com",
      "portal",
+     3
+    ],
+    [
+     "suumo.jp",
+     "portal",
      2
     ],
     [
-     "hifumi-reform.com",
-     "clinic",
-     1
-    ],
-    [
-     "standard-project.net",
-     "media",
+     "lixil.co.jp",
+     "maker",
      1
     ]
    ]
@@ -2576,13 +2598,13 @@
   {
    "q": "バリアフリー リフォーム",
    "group": "住まいの悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "media": 2,
+    "public": 4,
+    "clinic": 4,
     "portal": 3,
-    "clinic": 3,
-    "other": 1,
-    "public": 3
+    "media": 2,
+    "other": 1
    },
    "top": [
     [
@@ -2605,11 +2627,11 @@
   {
    "q": "収納 増やす リフォーム",
    "group": "住まいの悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "portal": 4,
+    "maker": 3,
     "clinic": 3,
-    "maker": 2,
-    "portal": 3,
     "media": 1
    },
    "top": [
@@ -2633,26 +2655,26 @@
   {
    "q": "耐震診断 古い家",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 3,
     "maker": 1,
-    "public": 2,
     "portal": 1,
     "clinic": 1
    },
    "top": [
+    [
+     "taishin-kaishu.mlit.go.jp",
+     "public",
+     2
+    ],
     [
      "taishin.metro.tokyo.lg.jp",
      "public",
      2
     ],
     [
-     "mlit.go.jp",
-     "public",
-     1
-    ],
-    [
-     "city.nagano.nagano.jp",
+     "city.yokohama.lg.jp",
      "public",
      1
     ]
@@ -2661,10 +2683,10 @@
   {
    "q": "給湯器 交換 時期",
    "group": "住まいの悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "maker": 4,
     "portal": 3,
-    "maker": 3,
     "clinic": 3,
     "video": 1
    },
@@ -2689,11 +2711,12 @@
   {
    "q": "屋根 修理 業者 選び方",
    "group": "住まいの悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
+    "public": 1,
+    "portal": 3,
     "video": 1,
     "clinic": 3,
-    "portal": 3,
     "media": 2
    },
    "top": [
@@ -2708,8 +2731,8 @@
      2
     ],
     [
-     "yuko-navi.com",
-     "portal",
+     "j-reform.com",
+     "public",
      1
     ]
    ]
@@ -2717,13 +2740,13 @@
   {
    "q": "空き家 リフォーム",
    "group": "住まいの悩み",
-   "answered": 3,
+   "answered": 4,
    "kinds": {
-    "media": 3,
+    "public": 4,
     "portal": 3,
-    "video": 1,
+    "media": 3,
     "other": 1,
-    "public": 3,
+    "video": 1,
     "clinic": 2
    },
    "top": [
@@ -2747,12 +2770,13 @@
   {
    "q": "古民家 リノベーション",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
+    "public": 1,
+    "maker": 2,
     "portal": 2,
     "media": 2,
-    "clinic": 2,
-    "maker": 1
+    "clinic": 2
    },
    "top": [
     [
@@ -2761,13 +2785,13 @@
      2
     ],
     [
-     "hikari-kensetsu.jp",
-     "clinic",
+     "sumai.panasonic.jp",
+     "maker",
      1
     ],
     [
-     "news.mynavi.jp",
-     "media",
+     "pref.nagano.lg.jp",
+     "public",
      1
     ]
    ]
@@ -2775,27 +2799,27 @@
   {
    "q": "狭小住宅 間取り",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "maker": 1,
-    "portal": 2,
+    "portal": 3,
+    "clinic": 3,
     "media": 2,
-    "clinic": 2
+    "maker": 1
    },
    "top": [
+    [
+     "toyotahome.co.jp",
+     "clinic",
+     3
+    ],
     [
      "hng.ne.jp",
      "media",
      2
     ],
     [
-     "toyotahome.co.jp",
-     "clinic",
-     2
-    ],
-    [
-     "hiyamakenkou.com",
-     "clinic",
+     "e-iezukuri.biz",
+     "portal",
      1
     ]
    ]
@@ -2806,8 +2830,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "public": 1,
     "portal": 2,
+    "public": 1,
     "media": 2
    },
    "top": [
@@ -2831,12 +2855,13 @@
   {
    "q": "中古住宅 リフォーム 注意点",
    "group": "住まいの悩み",
-   "answered": 2,
+   "answered": 3,
    "kinds": {
-    "video": 1,
-    "clinic": 2,
-    "media": 1,
+    "public": 1,
     "portal": 2,
+    "video": 1,
+    "media": 1,
+    "clinic": 2,
     "maker": 1
    },
    "top": [
@@ -2846,13 +2871,13 @@
      2
     ],
     [
-     "homes.co.jp",
-     "portal",
+     "mlit.go.jp",
+     "public",
      1
     ],
     [
-     "allabout.co.jp",
-     "media",
+     "j-reform.com",
+     "public",
      1
     ]
    ]

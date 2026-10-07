@@ -1,22 +1,25 @@
 {
  "total": {
-  "clinic": 897,
-  "portal": 521,
+  "clinic": 908,
+  "portal": 524,
   "video": 54,
   "media": 126,
-  "other": 51,
+  "other": 52,
   "review": 12,
-  "public": 214,
-  "maker": 312,
+  "public": 347,
+  "maker": 313,
   "wiki": 7
  },
  "by_engine": {
   "ChatGPT": {
-   "clinic": 83,
+   "clinic": 94,
    "video": 3,
-   "portal": 11,
+   "portal": 14,
    "review": 11,
-   "media": 2
+   "public": 133,
+   "media": 2,
+   "maker": 1,
+   "other": 1
   },
   "Gemini": {
    "portal": 94,
@@ -60,37 +63,37 @@
    "public": 1
   },
   "費用": {
-   "clinic": 302,
-   "portal": 92,
+   "clinic": 307,
+   "portal": 93,
    "video": 23,
    "media": 25,
-   "maker": 52,
+   "maker": 53,
    "other": 11,
-   "public": 11
+   "public": 20
   },
   "選び方": {
-   "clinic": 208,
-   "portal": 89,
+   "public": 71,
+   "clinic": 213,
+   "portal": 91,
    "video": 9,
    "maker": 44,
    "media": 27,
    "other": 12,
-   "public": 24,
    "wiki": 1
   },
   "手続き・悩み": {
+   "public": 146,
    "portal": 28,
-   "public": 102,
    "maker": 92,
    "video": 8,
    "media": 26,
-   "clinic": 146,
+   "clinic": 147,
    "other": 6
   },
   "制度・ルール": {
+   "public": 109,
    "clinic": 119,
-   "public": 76,
-   "other": 7,
+   "other": 8,
    "maker": 124,
    "media": 41,
    "portal": 35,
@@ -99,19 +102,19 @@
   }
  },
  "answered": {
-  "ChatGPT": 36,
+  "ChatGPT": 100,
   "Gemini": 58,
   "Perplexity": 100,
   "Claude": 100
  },
  "has_clinic": {
-  "ChatGPT": 23,
+  "ChatGPT": 32,
   "Gemini": 50,
   "Claude": 92,
   "Perplexity": 69
  },
  "sources": {
-  "ChatGPT": 110,
+  "ChatGPT": 259,
   "Gemini": 396,
   "Perplexity": 754,
   "Claude": 934
@@ -127,15 +130,15 @@
   ],
   [
    "meetsmore.com",
-   31
+   32
+  ],
+  [
+   "zeiri4.com",
+   30
   ],
   [
    "i-sozoku.com",
    29
-  ],
-  [
-   "zeiri4.com",
-   28
   ],
   [
    "imitsu.jp",
@@ -177,67 +180,67 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 294,
-   "clinic": 234,
-   "portal": 179,
+   "answers": 358,
+   "clinic": 243,
    "video": 48,
+   "portal": 182,
    "media": 90,
-   "other": 49,
+   "other": 50,
    "review": 12,
-   "public": 98,
-   "maker": 133,
+   "public": 161,
+   "maker": 134,
    "wiki": 5
   },
   "地域で探す": {
    "answers": 78,
    "clinic": 41,
-   "portal": 61,
    "video": 5,
+   "portal": 61,
    "media": 7,
    "other": 15,
    "review": 12,
    "public": 1
   },
   "費用": {
-   "answers": 71,
-   "portal": 44,
-   "clinic": 70,
+   "answers": 76,
+   "portal": 45,
+   "clinic": 74,
    "video": 20,
    "media": 20,
-   "maker": 29,
+   "maker": 30,
    "other": 11,
-   "public": 11
+   "public": 15
   },
   "選び方": {
-   "answers": 44,
-   "portal": 34,
-   "clinic": 40,
+   "answers": 64,
+   "public": 31,
    "video": 8,
    "maker": 27,
+   "portal": 36,
+   "clinic": 44,
    "media": 20,
    "other": 10,
-   "public": 11,
    "wiki": 1
   },
   "手続き・悩み": {
-   "answers": 49,
+   "answers": 69,
+   "public": 60,
+   "video": 7,
+   "maker": 39,
    "media": 17,
    "portal": 20,
-   "maker": 39,
-   "public": 40,
-   "video": 7,
-   "clinic": 43,
+   "clinic": 44,
    "other": 6
   },
   "制度・ルール": {
-   "answers": 52,
+   "answers": 71,
+   "public": 54,
    "maker": 38,
-   "public": 35,
    "clinic": 40,
-   "other": 7,
+   "other": 8,
    "media": 26,
-   "portal": 20,
    "video": 8,
+   "portal": 20,
    "wiki": 4
   }
  }

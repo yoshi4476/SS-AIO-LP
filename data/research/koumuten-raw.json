@@ -1305,7 +1305,9 @@
   "二世帯住宅 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.asahi-kasei.co.jp/hebel/column/two-family-price/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1416,7 +1418,10 @@
   "屋根 リフォーム 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://forest.toppan.com/refotoru/column/part/roof/article_2025_03_31_222/",
+     "https://www.reform-guide.jp/topics/yane-reform-hiyou/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1610,7 +1615,10 @@
   "フルリノベーション 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.zerorenovation.co.jp/service/customer/plan/contents/budget-cost/87332",
+     "https://www.homepro.jp/hiyou/total.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1780,7 +1788,10 @@
   "建て替え 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/chumon/c_knowhow/tatekae_tochiari/",
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_01382/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1943,7 +1954,10 @@
   "注文住宅 諸費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://homes.panasonic.com/column/50447/",
+     "https://www.athome.co.jp/contents/custom/build-cost/miscellaneous-expenses/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -1999,7 +2013,10 @@
   "地盤改良 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://touwa-corp.co.jp/jp/knowledge/ground-survey-cost/",
+     "https://www.metaexpo.jp/knowhow/land-search/14370/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2156,7 +2173,10 @@
   "床 張り替え 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.homepro.jp/flooring/flooring-basic/2212ca",
+     "https://hapisumu.jp/category/floor-reform/946/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2203,7 +2223,10 @@
   "工務店 ハウスメーカー 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/chumon/c_knowhow/komutentoha/",
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_00343/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2243,7 +2266,13 @@
   "工務店 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.smilenet.kobe-rma.or.jp/construction/partner/",
+     "https://www.chord.or.jp/expand/",
+     "https://www.mlit.go.jp/common/001190773.pdf",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/rikouhou/qanda.html",
+     "https://www.chord.or.jp/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2292,7 +2321,14 @@
   "リフォーム会社 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.jerco.or.jp/reform/select/",
+     "https://www.chord.or.jp/reform/basic_knowledge/index.html",
+     "https://www.chord.or.jp/reform/trouble.html",
+     "https://www.j-reform.com/reform-dantai/kensaku.php",
+     "https://www.kokusen.go.jp/news/data/n-20231011_1.html",
+     "https://www.chord.or.jp/reform/index.html?red_param=220106"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2337,7 +2373,10 @@
   "設計事務所 工務店 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/common/001185180.pdf",
+     "https://art-ao.co.jp/blog/design-office-vs-builder/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2385,7 +2424,11 @@
   "相見積もり 注意点": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://leaner.jp/column/what-is-a-competitive-quotation",
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_00216/",
+     "https://www.kokusen.go.jp/news/data/n-20260204_1.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2425,7 +2468,15 @@
   "高気密高断熱 工務店 見分け方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/shoene-label/insulation.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/content/001593812.pdf",
+     "https://www.ibecs.or.jp/investigate/air-tightness.html",
+     "https://www.kimitu.jp/kimitu-siken/index1.html",
+     "https://www1.mlit.go.jp/common/001627105.pdf",
+     "https://www.mlit.go.jp/report/press/house04_hh_001264.html",
+     "https://www.gbrc.or.jp/confirm_inspection/bels/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2462,7 +2513,10 @@
   "ZEH とは": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/housing/index.html",
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/housing/data/zeh_leaflet.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2502,7 +2556,15 @@
   "長期優良住宅 メリット": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/house/content/001970912.pdf",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk2_000022.html",
+     "https://www.flat35.com/loan/lineup/flat35s/",
+     "https://www.flat35.com/loan/lineup/ijihozen/index.html",
+     "https://www.jishin-hoken.jp/price/?id=estimate",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk4_000325.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk4_000006.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2551,7 +2613,11 @@
   "耐震等級3 必要か": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/common/001204021.pdf",
+     "https://www.mlit.go.jp/common/001147923.pdf",
+     "https://www.nihonjishin.co.jp/insurance/qa.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2595,7 +2661,10 @@
   "断熱等級 とは": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://policies.env.go.jp/earth/zeh/shoene/",
+     "https://www.mlit.go.jp/shoene-label/insulation.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2645,7 +2714,10 @@
   "木造 鉄骨 どっち": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.homes.co.jp/cont/rent/rent_00485/",
+     "https://suumo.jp/article/oyakudachi/oyaku/chumon/c_knowhow/kouzouchigai/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2692,7 +2764,10 @@
   "平屋 二階建て どっち": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://homes.panasonic.com/column/50131/",
+     "https://www.toyotahome.co.jp/housing/howto/hometag/article/861/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2738,7 +2813,10 @@
   "建売 注文住宅 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.athome.co.jp/contents/sumikae-kau/type/difference/",
+     "https://suumo.jp/article/oyakudachi/oyaku/sumai_nyumon/hikaku/chumon_vstateuri/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2778,7 +2856,13 @@
   "リフォーム 建て替え どっち": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://taishin-kaishu.mlit.go.jp/renovation/",
+     "https://www.j-reform.com/publish/pdf_guidebook/r7-all.pdf",
+     "https://www.reform-guide.jp/topics/reform-or-tatekae/",
+     "https://www.city.yokohama.lg.jp/business/bunyabetsu/kenchiku/tetsuduki/kyoka/43.html",
+     "https://www.mlit.go.jp/report/press/house05_hh_001148.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2818,7 +2902,10 @@
   "リノベーション リフォーム 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://plus.renovation.or.jp/column/206/",
+     "https://www.refonavi.or.jp/how-to/renovation/217"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2858,7 +2945,13 @@
   "工務店 倒産 リスク": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.tdb.co.jp/report/industry/1lm_mer_4e/",
+     "https://www.chord.or.jp/planning/housing/trouble_case/case06.html",
+     "https://www.chord.or.jp/case/detail/detail_6681.html",
+     "https://www.mamoris.jp/kansei/",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/consumer/newly_house_qanda.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2898,7 +2991,10 @@
   "完成見学会 チェックポイント": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.athome.co.jp/contents/custom/build-kiso/completion-tour/",
+     "https://www.apple-h.co.jp/blog/id1411/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -2938,7 +3034,11 @@
   "モデルハウス 見るべき点": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.eyefulhome.jp/sodate/article/house-exhibition-place/",
+     "https://school.stephouse.jp/article/modelhouse-visit/",
+     "https://www.mitsuikaihatsu.co.jp/blog/info/17166/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3046,7 +3146,13 @@
   "住宅 保証 期間": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/consumer/newly_house.html",
+     "https://laws.e-gov.go.jp/document?lawid=411AC0000000081_20240401_505AC0000000063",
+     "https://www.chord.or.jp/planning/q_a.html",
+     "https://www.chord.or.jp/faq/detail/detail_147.html",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/jigyousya/about.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3094,7 +3200,11 @@
   "注文住宅 流れ": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/chumon/c_knowhow/jukatsu-nagare/",
+     "https://www.sekisuihouse.co.jp/kodate/start/flow/",
+     "https://www.mizuhobank.co.jp/loan_housing/faq/loanguide/tips/article33/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3134,7 +3244,9 @@
   "家づくり 何から": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://sumai.panasonic.jp/sumu2/cate01/custom_home_tips/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3182,7 +3294,10 @@
   "土地探し 工務店": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.suumocounter.jp/chumon/report/jitsurei/entry/koumuten_tochisagashi/",
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_00874/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3227,7 +3342,11 @@
   "住宅ローン いつ 申し込む": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mizuhobank.co.jp/loan_housing/faq/loanguide/tips/article06/index.html",
+     "https://www.bk.mufg.jp/kariru/jutaku/soudan/index.html",
+     "https://www.bk.mufg.jp/kariru/jutaku/column/006/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3281,7 +3400,10 @@
   "間取り 失敗": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_00217/",
+     "https://www.kawazoe-architects.com/not-fail-housing/introduction/floor-plan-regrets-checklist"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3328,7 +3450,10 @@
   "注文住宅 後悔": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.suumocounter.jp/chumon/report/jitsurei/entry/chumonjutaku_regret/",
+     "https://suumo.jp/article/oyakudachi/oyaku/chumon/c_plan/h0wp10049/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3374,7 +3499,14 @@
   "リフォーム トラブル": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.chord.or.jp/consult_tel/form/index.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen491.html",
+     "https://www.kokusen.go.jp/soudan_topics/data/reformtenken.html",
+     "https://www.chord.or.jp/consult/index.html",
+     "https://www.no-trouble.caa.go.jp/what/doortodoorsales/",
+     "https://www.faq.kokusen.go.jp/faq/show/1398?site_domain=default"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3422,7 +3554,12 @@
   "追加費用 トラブル 工事": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.chord.or.jp/faq/detail/detail_155.html",
+     "https://www.smilenet.kobe-rma.or.jp/faq-list/15841/",
+     "https://www.faq.kokusen.go.jp/faq/show/1398?site_domain=default",
+     "https://www.chord.or.jp/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3467,7 +3604,12 @@
   "工期 遅れる": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.ktr.mlit.go.jp/ktr_content/content/000865182.pdf",
+     "https://www.mlit.go.jp/totikensangyo/const/content/001765655.pdf",
+     "https://www.chord.or.jp/case/detail/detail_6431.html",
+     "https://www.chord.or.jp/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3516,7 +3658,12 @@
   "欠陥住宅 見分け方": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/common/001158049.pdf",
+     "https://www.chord.or.jp/katamuki/",
+     "https://jouhou.chord.or.jp/sr/ts/kt/m_gai.html?koz=4",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/jigyousya/inspection.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3562,7 +3709,12 @@
   "新築 雨漏り": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/consumer/newly_house.html",
+     "https://www.chord.or.jp/faq/detail/detail_11.html",
+     "https://www.chord.or.jp/amamori/ingress/index.html",
+     "https://www.chord.or.jp/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3750,7 +3902,12 @@
   "外壁塗装 時期": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://zeenb.astecpaints.jp/journal/diy/exteriorwall-paint-47757",
+     "https://japan-paint.org/faq/",
+     "https://www.sk-kaken.co.jp/mansion/products/surfacer/",
+     "https://www.mori-toso.co.jp/faq/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3806,7 +3963,14 @@
   "リフォーム 契約 注意点": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.j-reform.com/consumer/consumer03.html",
+     "https://www.kokusen.go.jp/soudan_topics/data/reformtenken.html",
+     "https://j-reform.com/publish/pdf_guidebook/r6-all.pdf",
+     "https://www.chord.or.jp/faq/detail/detail_155.html",
+     "https://www.faq.kokusen.go.jp/faq/show/79?site_domain=default",
+     "https://www.chord.or.jp/reform/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3845,7 +4009,10 @@
   "工事 近所 挨拶": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/yougo/k/kinrinaisatsu/",
+     "https://suumo.jp/remodel/blog/entry/20231207/001"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3894,7 +4061,11 @@
   "地鎮祭 必要か": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.alsok.co.jp/person/recommend/2110/",
+     "https://kansai-iezukuri.kintetsu-re.co.jp/column/column-3541/",
+     "https://www.clasishome.jp/faq/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -3954,7 +4125,11 @@
   "引き渡し チェック": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://suumo.jp/article/oyakudachi/oyaku/sumai_nyumon/iesagashi/jukatsu-594/",
+     "https://suumo.jp/article/oyakudachi/oyaku/chumon/c_knowhow/jukatsu-1607/",
+     "https://www.juutakuseisaku.metro.tokyo.lg.jp/documents/d/juutakuseisaku/jouhouteikyou_youshiki_12__2"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4004,7 +4179,12 @@
   "新築 定期点検 内容": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.tacthome.co.jp/owner/pro-maintenance/inspection2.html",
+     "https://www.johnsonhome.co.jp/media/repair/maintenance-annual-support",
+     "https://www.daiwahouse.co.jp/dfc/procedure/afterservice/",
+     "https://growing.hosoda.co.jp/support/maintenance/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4048,7 +4228,11 @@
   "リフォーム ローン": {
    "group": "進め方・トラブル",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.smbc.co.jp/kojin/mokuteki_loan/free_m/",
+     "https://www.faq.mizuhobank.co.jp/faq/show/1534?site_domain=default",
+     "https://www.jhf.go.jp/lp/grl/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4108,7 +4292,11 @@
   "家 寒い 対策": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/howto/airconditioning/index.html",
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/housing/index.html",
+     "https://www.gov-online.go.jp/article/201101/entry-10349.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4148,7 +4336,12 @@
   "結露 対策": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.ykkap.co.jp/business/law/tec/condensation/",
+     "https://aplug.ykkap.co.jp/communities/130/contents/1175",
+     "https://www.ykkap.co.jp/consumer/reform/problem/983",
+     "https://faq.ykkap.co.jp/pro/faq_detail.html?id=37"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4188,7 +4381,13 @@
   "家 カビ 原因": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.city.ota.tokyo.jp/seikatsu/hoken/eisei/sumai_soudan/kabi.html",
+     "https://www.city.yokohama.lg.jp/kanazawa/kurashi/sumai_kurashi/seikatsu/poster/20160913145621.html",
+     "https://www.city.kita.lg.jp/socialcare-health/hygiene/1008979/1026180/1009009.html",
+     "https://www.city.shinagawa.tokyo.jp/PC/kenkou/kenkou-eisei/kenkou-eisei-kankyo/kenkou-eisei-kankyo-sumai/hpg000030057.html",
+     "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/jutaku/joho/nyuukyosyamukesiryou.files/0003_20241120.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4237,7 +4436,11 @@
   "床 きしむ 原因": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://faq.lixil.co.jp/フローリングから「ギシギシ」と音がする-626cd6ce3974480023fe4e11",
+     "https://www.woodtec.co.jp/lab/maintenance/problems/yukanari_kodate/",
+     "https://reference.chord.or.jp/sr/ts/t2/yuka_n.html?koz=2"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4276,7 +4479,11 @@
   "雨漏り 修理 どこに頼む": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://portal.town.hirono.iwate.jp/feature/feature-7622/",
+     "https://www.kokusen.go.jp/soudan_topics/data/reformtenken.html",
+     "https://www.chord.or.jp/consult_tel/index.html?red_param=220106"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4325,7 +4532,14 @@
   "シロアリ 対策": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://shiroari.or.jp/kyoukai/40shiroari.html",
+     "https://www.youtube.com/watch?v=AxE36YuknXQ",
+     "https://www.shiroari.org/shiroari/shiroari04",
+     "https://www.shiroari-kanto.jp/column/2025-03-03",
+     "https://www.hakutaikyo.or.jp/sp/boujo.html",
+     "https://www.kokusen.go.jp/mimamori/pdf/shinsen_FY2019all.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4373,7 +4587,10 @@
   "外壁 ひび割れ": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://morutarugaiheki.jp/crack/",
+     "https://jouhou.chord.or.jp/sr/hs/t/G-2-501.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4413,7 +4630,15 @@
   "窓 断熱 方法": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/howto/airconditioning/index.html",
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/media/data/2025_winter/syouenemenu_katei01.pdf",
+     "https://www.ykkap.co.jp/consumer/reform/window/inner-window/",
+     "https://www.ykkap.co.jp/consumer/reform/columns/4906",
+     "https://www.ykkap.co.jp/consumer/reform/window/replacement/",
+     "https://www.asahiglassplaza.net/wpcms/faq_type/n209/",
+     "https://faq.lixil.co.jp/窓や玄関のガラスにフィルムシートを貼っても良いですか？-636dbd37a9a29e001d7be20e"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4462,7 +4687,13 @@
   "家 暑い 対策": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.wbgt.env.go.jp/pdf/manual/heatillness_manual_3-1.pdf",
+     "https://www.env.go.jp/guide/info/ecojin/feature1/20230726.html",
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/howto/airconditioning/index.html",
+     "https://www.env.go.jp/k/chemi/heatstroke/kourei/confirm.html",
+     "https://www.enecho.meti.go.jp/category/saving_and_new/saving/general/housing/index.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4502,7 +4733,13 @@
   "防音 リフォーム": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.lixil.co.jp/lineup/window/inplus/merit/",
+     "https://www.daiken.jp/buildingmaterials/sound/soundproofflooring/",
+     "https://rehome-navi.com/articles/639",
+     "https://www.ienakama.com/soundproof/tips/page/?tid=1166",
+     "https://suumo.jp/remodel/blog/entry/20230328/001"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4558,7 +4795,14 @@
   "バリアフリー リフォーム": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000212398.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk4_000251.html",
+     "https://www.okamura-home.co.jp/reform/column/202506-f02/",
+     "https://www.city.yokosuka.kanagawa.jp/2640/g_info/l100050601.html",
+     "https://www.city.yokohama.lg.jp/business/bunyabetsu/fukushi-kaigo/kaigo/shinsei/jyutakukaishu.html",
+     "https://www.mlit.go.jp/jutakukentiku/house/reform/consumer.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4619,7 +4863,12 @@
   "収納 増やす リフォーム": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.homepro.jp/hiyou/storage.html",
+     "https://www.lixil.co.jp/lineup/livingroom_bedroom/s/livingdeli/living/14383/",
+     "https://owners.lixil.co.jp/articles/livingroom/203/",
+     "https://www.lixil.co.jp/reform/shop/reform-tips/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4679,7 +4928,11 @@
   "耐震診断 古い家": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://taishin-kaishu.mlit.go.jp/",
+     "https://taishin-kaishu.mlit.go.jp/earthquake/",
+     "https://www.city.yokohama.lg.jp/business/bunyabetsu/kenchiku/bosai/taishin/hojokinshienseido/mokutai/taishin/mokushindan.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4718,7 +4971,11 @@
   "給湯器 交換 時期": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.noritz.co.jp/aftersupport/hosyu/kyutoki_tenken.html",
+     "https://www.noritz.co.jp/product/kyutou_bath/gas/retool/qa.html",
+     "https://www.rinnai.co.jp/safety/replace/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4765,7 +5022,14 @@
   "屋根 修理 業者 選び方": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.j-reform.com/consumer/consumer04.html",
+     "https://www.chord.or.jp/caution/",
+     "https://www.j-reform.com/publish/publish_business.html",
+     "https://www.kokusen.go.jp/news/data/n-20231011_1.html",
+     "https://www.j-reform.com/reform-dantai/kensaku.php",
+     "https://www.chord.or.jp/reform/index.html?red_param=220106"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4812,7 +5076,14 @@
   "空き家 リフォーム": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.j-reform.com/",
+     "https://taishin-kaishu.mlit.go.jp/rsystem/",
+     "https://www.chord.or.jp/reform/index.html?red_param=220106",
+     "https://www.j-reform.com/reform-support/",
+     "https://mirai-eco2026.mlit.go.jp/reform/",
+     "https://www.mlit.go.jp/common/001766698.pdf"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4872,7 +5143,12 @@
   "古民家 リノベーション": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://sumai.panasonic.jp/sumai_create/hiyou/kominka/",
+     "https://www.pref.nagano.lg.jp/kenchiku/kominka/documents/manual.pdf",
+     "https://taishin-kaishu.mlit.go.jp/rsystem/",
+     "https://jutaku-shoene2026.mlit.go.jp/about/reform-map/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -4921,7 +5197,12 @@
   "狭小住宅 間取り": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.toyotahome.co.jp/housing/howto/hometag/article/769/",
+     "https://www.e-iezukuri.biz/plan/",
+     "https://www.homes.co.jp/cont/iezukuri/iezukuri_00840/",
+     "https://www.toyotahome.co.jp/housing/howto/hometag/article/1123/"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -5015,7 +5296,12 @@
   "中古住宅 リフォーム 注意点": {
    "group": "住まいの悩み",
    "ChatGPT": {
-    "urls": [],
+    "urls": [
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/jigyousya/inspection.html",
+     "https://www.j-reform.com/publish/pdf_guidebook/r4-P15-33.pdf",
+     "https://www.mlit.go.jp/common/001766698.pdf",
+     "https://www.j-reform.com/consumer/consumer03.html"
+    ],
     "error": ""
    },
    "Gemini": {
@@ -5061,5 +5347,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-07"
 }
