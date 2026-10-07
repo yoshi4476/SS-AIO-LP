@@ -39,13 +39,16 @@ export async function onRequestPost({ request, env }) {
   }
 
   const referer = request.headers.get("referer") || "不明";
+  const ft = String(data.form_type || "");
+  // 資料ダウンロードの後は、資料の案内と次の一歩のページへ。
+  // 以前は「2営業日以内に担当者よりご連絡」と出ていた（資料はメールで届くのに）（2026-10-08）
+  const thanks = new URL(ft.includes("資料") ? "/thanks/?type=download" : "/thanks/", request.url);
 
   // A) Google Apps Script（スプレッドシート台帳＋Gmail通知）
   if (hasGas) {
     // 管制塔の受付（contact.hub.gs の form_）は type が無いと contact として本文を必須にする。
     // LPヒーローと資料DLは本文欄が無いため「必須項目が入力されていません」で弾かれ、
     // 台帳に残っていなかった。種別を form_type から決め、本文が無ければ相談テーマか種別で補う
-    const ft = String(data.form_type || "");
     // サイト診断の結果（URL・点数・直し方）が付いていれば site_audit。
     // これが無いと「無料診断」の汎用返信になり、画面で約束した直し方がメールに入らなかった
     const type = data.audit_url ? "site_audit"
@@ -65,7 +68,7 @@ export async function onRequestPost({ request, env }) {
       });
       // GASは失敗時も200で {ok:false} を返すため、本文まで確認する
       const out = await gas.json().catch(() => ({}));
-      if (gas.ok && out.ok) return Response.redirect(new URL("/thanks/", request.url), 303);
+      if (gas.ok && out.ok) return Response.redirect(thanks, 303);
     } catch (_) {
       // 通信失敗時は下のResendへフォールバックする
     }
@@ -98,5 +101,5 @@ export async function onRequestPost({ request, env }) {
   if (!res.ok) {
     return new Response("送信に失敗しました。時間をおいて再度お試しいただくか、06-4305-7547 までお電話ください。", { status: 502 });
   }
-  return Response.redirect(new URL("/thanks/", request.url), 303);
+  return Response.redirect(thanks, 303);
 }
