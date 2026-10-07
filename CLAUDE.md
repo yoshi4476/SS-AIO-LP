@@ -1276,7 +1276,7 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 
 | 打ち手（効く順） | 工程 | 担当 |
 |:--|:--|:--|
-| YouTubeでの言及（相関0.71・被リンクの3倍） | `article_videos.py`（毎日1本。キャラクター2人の掛け合い動画＝`duo_video.py`。鍵は `youtube-token.json`） | 自動（鍵の作成だけ1回人） |
+| YouTubeでの言及（相関0.71・被リンクの3倍） | `article_videos.py`（毎日1本。キャラクター2人の掛け合い動画＝`duo_video.py`。鍵は `youtube-token.json`。自社は AIO の記事だけ＝`sites/<id>.json` の `video_categories`・調査ページの動画は続ける） | 自動（鍵の作成だけ1回人） |
 | 質問形・買い手の語を先に書く | `ai_kw_research` → `hub_client.next_kw`（AIが答えを出し自社が出典に無い語を最優先） | 自動 |
 | 業種×手法の面 | `structure_plan` → `report_actions`（空きマスを台帳へ）／業種ハブ（AI集客ラボ・補助金） | 自動 |
 | 一次データの公開 | `data_auto`（週次） | 自動 |

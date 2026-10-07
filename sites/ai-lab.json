@@ -113,6 +113,7 @@
   },
   "main_offer": "SEO・AIO・LLMO運用代行（検索とAI検索の両方で選ばれる状態をつくる）",
   "main_category": "aio",
+  "video_categories": ["aio"],
   "priority": 1,
   "youtube": {
     "token": "",

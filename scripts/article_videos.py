@@ -56,6 +56,9 @@ def focus(row):
         return None
     if (cfg.get("category_mix") or {}).get(row.get("category", "")) == 0:
         return None
+    # 動画にするカテゴリを絞った社（自社は AIO だけ・2026-10-07 運用者の決定）。キーの無い社（お客様）は絞らない
+    if "video_categories" in cfg and row.get("category", "") not in cfg["video_categories"]:
+        return None
     pri = (cfg.get("kw_seeds") or {}).get("priority") or []
     return (2 if any(w in (row.get("title") or "") for w in pri) else 0) + \
            (1 if row.get("category") == cfg.get("main_category") else 0)
@@ -201,19 +204,21 @@ def note_token_missing():
         FINDINGS.write_text(t.rstrip("\n") + ("\n" if t else "") + line + "\n", encoding="utf-8")
 
 
+def meta(k):
+    import sites as S
+    t = (ROOT / "articles" / f"{k}.md").read_text(encoding="utf-8-sig")[:2000]
+    g = lambda f: (re.search(rf"^{f}:\s*(.+)$", t, re.M) or [None, ""])[1].strip().strip('"')
+    cat = g("category")
+    return {"slug": k, "title": g("title"), "category": cat, "site": S.find_category_owner(cat) or ""}
+
+
 def shorts(ledger, limit, token, public):
     """横型の動画がある記事から、ショートの無いものを新しい順に作る。
     TikTok は審査前だと自動投稿が非公開になるため、mp4 を残すだけ（CI の成果物から手で上げる）"""
     import duo_short as DS
     import video_make as VM
     import youtube_upload as YT
-    import sites as S
 
-    def meta(k):
-        t = (ROOT / "articles" / f"{k}.md").read_text(encoding="utf-8-sig")[:2000]
-        g = lambda f: (re.search(rf"^{f}:\s*(.+)$", t, re.M) or [None, ""])[1].strip().strip('"')
-        cat = g("category")
-        return {"slug": k, "title": g("title"), "category": cat, "site": S.find_category_owner(cat) or ""}
     # 通常の動画がある記事と、YouTube で検索されていないため通常の動画を作らなかった記事（ショートだけ）
     pool = [meta(k) for k, v in ledger.items()
             if (v.get("youtube") or (v.get("long") or {}).get("decision") == "skip") and not v.get("short")
@@ -276,7 +281,7 @@ def main():
     if token and DV.ready():
         redo += [k for k, v in ledger.items()
                  if v.get("youtube") and v.get("format") != "duo" and k not in redo
-                 and (ROOT / "articles" / f"{k}.md").is_file()]
+                 and (ROOT / "articles" / f"{k}.md").is_file() and focus(meta(k)) is not None]
     rows = [{"slug": s, "site": ledger[s].get("site") or "", "title": s, "date": "", "redo": True}
             for s in redo][:a.limit]
     skipped = []
