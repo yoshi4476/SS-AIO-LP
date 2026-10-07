@@ -32,3 +32,34 @@ def test_videos_only_for_aio_on_own_sites():
     src = (ROOT / "scripts" / "article_videos.py").read_text(encoding="utf-8")
     check("動画の範囲: 古い形式の作り直しも範囲外の記事は作らない",
           'v.get("format") != "duo"' in src and "focus(meta(k)) is not None" in src, True)
+
+
+def test_stale_out_of_scope_videos_are_unlisted():
+    """数字が変わった範囲外の動画は、作り直さずに限定公開へ下げる（2026-10-07 運用者の決定）"""
+    import article_videos as AV
+    rows = {"aio-x": {"site": "ai-lab", "category": "aio", "title": "t"},
+            "keiri-x": {"site": "corporate", "category": "keiri-bpo", "title": "t"},
+            "fail-x": {"site": "subsidy", "category": "hojokin", "title": "t"}}
+    orig_meta = AV.meta
+    AV.meta = lambda k: dict(rows[k], slug=k)
+    AV._CFG.clear()
+    ledger = {"aio-x": {"youtube": "A1"}, "keiri-x": {"youtube": "K1", "short": {"youtube": "K2"}},
+              "fail-x": {"youtube": "F1"}}
+    calls = []
+
+    def fake(vid, status):
+        if vid == "F1":
+            raise RuntimeError("通信")
+        calls.append((vid, status))
+    try:
+        keep = AV.hide_out_of_scope(ledger, ["aio-x", "keiri-x", "fail-x"], fake)
+    finally:
+        AV.meta = orig_meta
+        AV._CFG.clear()
+    check("限定公開: AIO の記事は作り直しに残す", keep, ["aio-x"])
+    check("限定公開: 範囲外は通常の動画もショートも限定公開に下げる", calls, [("K1", "unlisted"), ("K2", "unlisted")])
+    check("限定公開: 下げた記録を残し、次からは数字の比較をしない", bool(ledger["keiri-x"].get("hidden")), True)
+    check("限定公開: 下げられなかったものは記録せず、翌日また下げる",
+          ("hidden" in ledger["fail-x"], "fail-x" in keep), (False, False))
+    check("限定公開: 下げた動画は数字が変わっても作り直しの列に入らない",
+          'rec.get("hidden")' in (AV.ROOT / "scripts" / "article_videos.py").read_text(encoding="utf-8"), True)

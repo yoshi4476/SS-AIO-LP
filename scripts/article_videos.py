@@ -138,7 +138,7 @@ def stale(ledger):
     import video_make as VM
     out = []
     for slug, rec in ledger.items():
-        if not rec.get("youtube") or not (ROOT / "articles" / f"{slug}.md").is_file():
+        if not rec.get("youtube") or rec.get("hidden") or not (ROOT / "articles" / f"{slug}.md").is_file():
             continue
         try:
             now = _nums(VM.from_article(slug))
@@ -150,6 +150,27 @@ def stale(ledger):
         if now != rec["nums"]:
             out.append(slug)
     return out
+
+
+def hide_out_of_scope(ledger, redo, set_privacy):
+    """数字が変わった動画のうち、動画を作る範囲の外（自社は AIO 以外）のものは作り直さず限定公開に下げる。
+    古い数字を見せ続けず、毎日の1枠も使わない（2026-10-07 運用者の決定）。ショートも同じ記事なら下げる。
+    下げられなかったもの（鍵・通信）は作り直しの列からだけ外し、翌日また下げる"""
+    keep = []
+    for slug in redo:
+        if focus(meta(slug)) is not None:
+            keep.append(slug)
+            continue
+        rec = ledger[slug]
+        try:
+            for vid in [rec.get("youtube"), (rec.get("short") or {}).get("youtube")]:
+                if vid:
+                    set_privacy(vid, "unlisted")
+            rec["hidden"] = {"date": date.today().isoformat(), "why": "数字が変わった・動画を作る範囲の外"}
+            print(f"   限定公開に下げました（範囲外・数字が変わった）: {slug[:40]}")
+        except Exception as e:
+            print(f"   × 限定公開に下げられませんでした {slug[:40]}: {str(e)[:80]}")
+    return keep
 
 
 def research_due(ledger, per_week, today=None):
@@ -276,7 +297,7 @@ def main():
     ledger = load()
     token = YT.TOKEN.is_file()
     # 作り直しを先に（記事と食い違った動画を長く出したままにしない）。枠は新しい記事と共有する
-    redo = stale(ledger) if token else []
+    redo = hide_out_of_scope(ledger, stale(ledger), YT.set_privacy) if token else []
     # 掛け合い形式（基準の形）になっていない動画も作り直す。数字が変わったものの後ろに並べる
     if token and DV.ready():
         redo += [k for k, v in ledger.items()
