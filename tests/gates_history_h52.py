@@ -9,6 +9,7 @@
      「（不明）」で残った行は「メールにだけ届いた」とは言わず、サイト名を直すよう知らせる
   3. コーポレートの入口は ?s=backoffice（選択肢に無い）・?s=keiri-shindan（送信時に名前が付かない）で、
      /contact/ は /contact へ 308 で転送されていた。行き先を変えても日次の --write が2本目を足さない
+  4. 補助金の記事138本の著者欄の「AI診断」の入口は、押されても計測されていなかった
 
 ネットワーク・GA4・台帳には触れない（全部スタブ）。
 """
@@ -186,3 +187,22 @@ def test_corporate_entry_links_open_a_named_choice_without_redirect():
             if relink:
                 _out(relink, True)
             check("--relink は何度当てても同じ", p.read_bytes().decode("utf-8"), got)
+
+
+def test_subsidy_aicheck_entry_sends_cta_click():
+    import subsidy_cta as C
+    page = ('<html><body><div class="author"><div class="sv-links"><a href="/about/">プロフィール詳細</a>'
+            + C.SUPERVISOR_END + "\n    </div></body></html>")
+    out = C.apply(page)
+    track = re.search(r'data-cta="subsidy_aicheck_blog"[^>]*>[^<]*</a>(<script>.*?</script>)</aside>', out, re.S)
+    js = track.group(1) if track else ""
+    check("著者欄の入口に、押されたら cta_click を送る計測が付く", '"cta_click"' in js, True)
+    check("送る項目は記事ページの計測と同じ（cta_id は data-cta・link_url・page_path）",
+          all(k in js for k in ('cta_id:a.getAttribute("data-cta")', 'link_url:a.getAttribute("href")',
+                                "page_path:location.pathname")), True)
+    v1 = getattr(C, "AICHECK_V1", "")
+    old = page.replace(C.SUPERVISOR_END, C.SUPERVISOR_END + "\n      " + v1) if v1 else ""
+    up = C.apply(old) if old else ""
+    check("配信済みの記事（計測の無い版）は差し替わり、入口は1つのまま",
+          (bool(v1) and v1 not in up, up.count('data-cta="subsidy_aicheck_blog"'), up.count('"cta_click"')), (True, 1, 1))
+    check("何度当てても同じ", (C.apply(out) == out, C.apply(up) == up if up else False), (True, True))

@@ -53,17 +53,28 @@ def mid_box(title):
             f'<a class="cta" href="/#diagnosis" data-cta="blog_mid_diag">無料で診断する</a></aside>\n')
 
 
-AICHECK = ('<aside style="max-width:880px;margin:28px auto 0;padding:18px 22px;border:1px solid rgba(19,36,69,.14);border-radius:14px;'
-           'background:#fff;text-align:left;font-size:14px;line-height:1.9">'
-           '<b style="display:block;font-size:15px;color:#132445">AIに、御社はどう紹介されていますか？</b>'
-           '地域と業種を入れると、AIに「地域名＋業種 おすすめ」など3つの質問をして、答えの出典に御社のサイトや社名が出ているかを確かめます（無料）。'
-           ' <a href="https://ai.7senses.co.jp/tools/ai-check/?src=lp_subsidy&amp;from=blog" target="_blank" rel="noopener" '
-           'data-cta="subsidy_aicheck_blog" style="font-weight:700">無料でチェックする</a></aside>')
+_AICHECK_BODY = ('<aside style="max-width:880px;margin:28px auto 0;padding:18px 22px;border:1px solid rgba(19,36,69,.14);border-radius:14px;'
+                 'background:#fff;text-align:left;font-size:14px;line-height:1.9">'
+                 '<b style="display:block;font-size:15px;color:#132445">AIに、御社はどう紹介されていますか？</b>'
+                 '地域と業種を入れると、AIに「地域名＋業種 おすすめ」など3つの質問をして、答えの出典に御社のサイトや社名が出ているかを確かめます（無料）。'
+                 ' <a href="https://ai.7senses.co.jp/tools/ai-check/?src=lp_subsidy&amp;from=blog" target="_blank" rel="noopener" '
+                 'data-cta="subsidy_aicheck_blog" style="font-weight:700">無料でチェックする</a>')
+# 押されたら cta_click を送る。記事ページの計測（クラスに cta を含むリンクと #contact・#diagnosis・/contact
+# だけを拾う）はこの文字リンクを拾わず、138本の入口が押されても1件も記録されていなかった（2026-10-07）。
+# 送る項目は記事ページの計測と同じ（cta_id・link_url・page_path）。cta_id は data-cta の値
+AICHECK_TRACK = ('<script>(function(){var a=document.currentScript.parentNode.querySelector("a[data-cta]");'
+                 'a.addEventListener("click",function(){if(typeof gtag==="function")gtag("event","cta_click",'
+                 '{cta_id:a.getAttribute("data-cta"),link_url:a.getAttribute("href"),page_path:location.pathname});});})();'
+                 '</script>')
+AICHECK = _AICHECK_BODY + AICHECK_TRACK + '</aside>'
+AICHECK_V1 = _AICHECK_BODY + '</aside>'      # 計測の無かった版。入っている記事は差し替える
 SUPERVISOR_END = '<a href="/#contact">監修者に相談する</a></div>'
 
 
 def add_aicheck(html):
     """AI集客ラボの「AIにどう紹介されているか無料チェック」への入口（監修者の欄の下・既存記事にも入れる）"""
+    if AICHECK_V1 in html:
+        return html.replace(AICHECK_V1, AICHECK, 1)
     if "subsidy_aicheck_blog" in html or SUPERVISOR_END not in html:
         return html
     return html.replace(SUPERVISOR_END, SUPERVISOR_END + "\n      " + AICHECK, 1)
