@@ -328,13 +328,18 @@ def save_body_hashes():
 
 
 def render_toc(toc_tokens) -> str:
+    """目次。開閉できる形にし、1列（スマホ・タブレット）では畳んだまま本文の前に置く。
+    パソコン（横の欄）では直後の小さな処理で開く。1列で全部を開いて本文の前に出すと、記事の答えが目次の下へ押し出される（2026-10-08）"""
     if not toc_tokens:
         return ""
     items = []
     for t in toc_tokens:  # H2のみ（AIO: Query Fan-Out単位）
         items.append(f'<li><a href="#{t["id"]}">{t["name"]}</a></li>')
-    return ('<nav class="toc" aria-label="目次"><span class="toc-title">目次</span>'
-            f'<ol>{"".join(items)}</ol></nav>')
+    return ('<nav class="toc" aria-label="目次"><details>'
+            f'<summary class="toc-title">目次<span class="toc-n">{len(items)}項目</span></summary>'
+            f'<ol>{"".join(items)}</ol></details></nav>'
+            '<script>if(matchMedia("(min-width: 1100px)").matches)'
+            'document.currentScript.previousElementSibling.querySelector("details").open=true</script>')
 
 
 def howto_steps(body_html):

@@ -137,7 +137,8 @@ html.js .reveal-d3 { transition-delay: .3s; }
 
 /* ---------- パンくず ---------- */
 .breadcrumb { max-width: var(--max-wide); margin: 0 auto; padding: .9rem var(--gutter) 0; font-size: .83rem; color: var(--muted); }
-.breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: .4em; margin: 0; padding: 0; }
+/* 揃えは中央。指で押す端末ではリンクにだけ上下の余白が付き、「ホーム」だけが約10px下にずれていた */
+.breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: .4em; margin: 0; padding: 0; }
 .breadcrumb li + li::before { content: "/"; margin-right: .4em; color: var(--line); }
 .breadcrumb a { color: var(--muted); text-decoration: none; }
 .breadcrumb a:hover { color: var(--blue); }
@@ -219,6 +220,8 @@ html.js .rise-5 { animation-delay: .6s; }
 
 /* ---------- ライトヒーロー（下層） ---------- */
 .hero { max-width: var(--max-wide); margin: 0 auto; padding: 4.5rem var(--gutter) 2.5rem; }
+/* スマホではパンくずと見出しの間が約100px空いていた（カテゴリの一覧はパンくずの直後の .section が見出し） */
+@media (max-width: 720px) { .hero, .breadcrumb + .section { padding-top: 1.75rem; } }
 .hero .kicker { color: var(--blue); }
 .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; margin: .45em 0; }
 .hero .lead { max-width: 42em; color: var(--muted); }
@@ -333,10 +336,23 @@ main.article { max-width: 1360px; margin: 0 auto; padding: 3rem var(--gutter) 4r
   .article-body { grid-column: 1; grid-row: 1; }
   .article-side .toc { margin: 0; }
 }
-.article-header .cat-badge { display: inline-block; font-size: .7rem; font-weight: 700; color: var(--cat-color, var(--blue)); background: color-mix(in srgb, var(--cat-color, var(--blue)) 10%, #fff); border: 1px solid color-mix(in srgb, var(--cat-color, var(--blue)) 30%, #fff); padding: .3em 1em; border-radius: 999px; }
+/* 1列のとき（スマホ・タブレット）は、横の欄（相談・補助金の案内）を本文の後ろへ回す。
+   HTML の先頭にあるため、目次・相談・補助金の広告が本文の上に積まれ、記事の答えが 2,083px 下にあった（146本すべて）。
+   目次だけは畳んで本文の前に残す */
+@media (max-width: 1099.98px) {
+  main.article { padding-top: 1.25rem; }
+  .article-eyecatch { margin: 1.1rem 0 .4rem; }
+  .article-layout { display: flex; flex-direction: column; gap: 0; margin-top: .6rem; }
+  .article-side, .article-side .side-sticky { display: contents; }
+  .article-side .toc { order: -1; margin: 0 0 1.4rem; }
+  .article-side .side-cta, .article-side .side-banner { order: 1; margin: 1.6rem 0 0; }
+}
+.article-header .cat-badge { display: inline-block; font-size: .75rem; font-weight: 700; color: color-mix(in srgb, var(--cat-color, var(--blue)) 70%, #000); background: color-mix(in srgb, var(--cat-color, var(--blue)) 10%, #fff); border: 1px solid color-mix(in srgb, var(--cat-color, var(--blue)) 30%, #fff); padding: .3em 1em; border-radius: 999px; }
 .article-header h1 { font-size: clamp(1.6rem, 3.8vw, 2.25rem); font-weight: 900; margin: .6em 0 .4em; }
-.article-meta { font-size: .78rem; color: var(--muted); display: flex; gap: 1.2em; flex-wrap: wrap; }
+.article-meta { font-size: .8125rem; color: var(--muted); display: flex; gap: .5em 1.2em; flex-wrap: wrap; align-items: center; }
 .article-eyecatch { margin: 1.8rem 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
+/* 写真の下に行の高さ分の白い帯が出ていた（画像を行の中に置いていたため） */
+.article-eyecatch img { display: block; width: 100%; }
 
 main.article h2 { font-size: 1.45rem; margin: 2.8em 0 1em; padding: .6em 1.1em; background: var(--sky); border-left: 5px solid var(--blue); border-radius: 0 12px 12px 0; }
 main.article h3 { font-size: 1.18rem; margin: 2.2em 0 .8em; padding: 0 0 .35em .8em; border-left: 4px solid var(--sky-2); border-bottom: 2px solid var(--line); }
@@ -364,10 +380,19 @@ main.article .article-body > p:first-child { font-size: 1.13em; line-height: 2; 
 .toc { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-alt); padding: 1.4em 1.8em; margin: 2em 0; }
 .toc .toc-title { font-weight: 700; font-size: .88rem; letter-spacing: .14em; display: flex; align-items: center; gap: .6em; }
 .toc .toc-title::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+/* 目次は開閉できる（render_toc）。スマホでは畳んだ状態で本文の前に置く */
+.toc summary { cursor: pointer; list-style: none; }
+.toc summary::-webkit-details-marker { display: none; }
+.toc summary::after { content: "開く"; margin-left: auto; font-size: .78rem; font-weight: 700; letter-spacing: .04em; color: var(--blue); }
+.toc details[open] > summary::after { content: "閉じる"; }
+.toc .toc-n { font-weight: 600; letter-spacing: 0; color: var(--muted); }
 .toc ol { margin: .7em 0 0 1.2em; padding: 0; font-size: .9rem; }
-.toc li { margin: .4em 0; }
-.toc a { text-decoration: none; color: var(--muted); }
+.toc li { margin: 0; }
+/* 指で押せる高さに（文字だけの18pxだった）。パソコンの横の欄では詰める（追従する欄が画面の高さを超えないように） */
+.toc a { display: block; padding: .4em 0; line-height: 1.6; text-decoration: none; color: var(--muted); }
 .toc a:hover { color: var(--blue); }
+@media (min-width: 1100px) { .toc a { padding: .2em 0; } }
+@media (max-width: 1099.98px) { .toc { padding: .85em 1.2em; } }
 
 .article-summary-box { border: 1px solid var(--line); border-left: 4px solid var(--blue); background: #fff; padding: 1.2em 1.5em; margin: 1.6em 0; border-radius: 0 12px 12px 0; box-shadow: var(--shadow-sm); }
 .article-summary-box .box-title { font-weight: 700; font-size: .92rem; }
@@ -614,6 +639,12 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 
 /* ---------- シェアボタン ---------- */
 .share-row { display: inline-flex; gap: .5em; flex-wrap: wrap; align-items: center; }
+/* スマホでは1段（高さ約38px）。2段に折れ、写真と合わせて最初の画面に本文が1行も出ていなかった */
+@media (max-width: 720px) {
+  .share-row { flex-wrap: nowrap; max-width: 100%; overflow-x: auto; scrollbar-width: none; gap: .4em; }
+  .share-row::-webkit-scrollbar { display: none; }
+  .share-row .share-btn { flex: none; padding: .3em .7em; }
+}
 .share-btn {
   display: inline-flex; align-items: center; gap: .35em;
   font: inherit; font-size: .74rem; font-weight: 700;
