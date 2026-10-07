@@ -2384,6 +2384,10 @@ def main():
     save_body_hashes()
     build_feed(entries)
     sync_listings(all_metas)
+    # 一覧が全部そろってから、同じ一覧で同じ画像は2回までにそろえる（一覧・業種・LP・関連記事のどれで作っても）
+    n = industry_thumbs.limit_repeats(SITE)
+    if n:
+        print(f"一覧の画像: 同じ画像が3回以上並ぶ一覧を {n}ページで直しました")
     warns += quality_checks(all_metas)
     stamp_assets()
     # WordPress の社のプラグインが日に1回見に来る /wp/（署名がいまのプラグインと合うときだけ置く）

@@ -94,13 +94,12 @@ def apply(meta):
         import hashlib
         i = int(hashlib.md5(str(meta.get("slug", "")).encode("utf-8")).hexdigest(), 16) % len(files)
         return f"/images/thumbs/{files[i]}"
-    t = theme_for(meta)
-    if t and (DIR / f"theme-{t}.jpg").is_file():
-        return f"/images/thumbs/theme-{t}.jpg"
-    # 業種・テーマの画像が無い記事は、文字だけのアイキャッチをやめて「写真の棚」から内容に合う写真を当てる
+    # 業種の決まらない記事は、文字の無い「写真の棚」から内容に合う写真を当てる。
+    # 文字入りのテーマ画像（theme-*.jpg）は使わない: 題の言葉で7種に寄せていたため、37本の先頭が文字入りの7種の
+    # 使い回しになり、12本は題と関係なく「AIO対策の始め方」と出ていた（例: 「AIO対策の計測方法」。2026-10-08）
     try:
+        url = _shelf(meta)
         import photo_shelf
-        _, url = photo_shelf.pick(meta.get("title", ""), meta.get("keyword", ""), meta.get("slug", ""))
         if url and photo_shelf.path_of(url).is_file():
             return url
     except Exception:
@@ -108,25 +107,27 @@ def apply(meta):
     return cur
 
 
-# 業種の決まらない AI検索の対策の記事は、テーマの画像（費用・注意点・違い…）を題の言葉で当てる。上から順に見る
-THEMES = [
-    ("cost", r"費用|相場|いくら|料金"),
-    ("caution", r"失敗|注意|NG|落とし穴|表示されない|出ない|原因"),
-    ("choose", r"選び方|会社|外注|コンサル|ライター"),
-    ("diff", r"違い|使い分け|比較"),
-    ("llmo", r"LLMO|ChatGPT"),
-    ("seo", r"SEO"),
-    ("howto", r""),
-]
+AI_WORDS = re.compile(r"AIO|AI検索|AI ?Overview|LLMO|生成AI|AI", re.I)
 
 
-def theme_for(meta):
-    title, kw = str(meta.get("title", "")), str(meta.get("keyword", ""))
+def _shelf(meta):
+    """写真の棚の1枚（/images/shelf/…jpg）。AI検索の記事は、題の「AI」の語で自動化の写真（automation）に寄ってしまうので、
+    AIの語を除いた題の中身（費用・口コミ・地図…）で選び、当たらなければ AI検索の写真（aisearch）にする"""
+    import hashlib
+    import photo_shelf
+    title, kw, slug = str(meta.get("title", "")), str(meta.get("keyword", "")), str(meta.get("slug", ""))
     if meta.get("category") != "aio" and not AIO_THEME.search(title + " " + kw):
+        return photo_shelf.pick(title, kw, slug)[1]
+    k = photo_shelf.key_for(AI_WORDS.sub("", title), AI_WORDS.sub("", kw))
+    if k == "office" and photo_shelf.files("aisearch"):
+        k = "aisearch"
+    fs = photo_shelf.files(k) or photo_shelf.files("office")
+    if not fs:
         return ""
-    if re.search(r"AIO|AI検索|LLMO", title):
-        title = title.replace("SEO", "")               # AIOとSEOの両方を扱う記事は SEO のテーマにしない
-    return next(k for k, rx in THEMES if re.search(rx, title))
+    jpg = fs[int(hashlib.md5((slug or title).encode("utf-8")).hexdigest(), 16) % len(fs)][:-5] + ".jpg"
+    if not (photo_shelf.DIR / jpg).is_file():
+        photo_shelf.ensure_jpg()
+    return f"/images/shelf/{jpg}"
 
 
 def shown(url):
@@ -227,6 +228,57 @@ def apply_share_images(site: Path, site_url: str):
         new = _re.sub(r'(<meta name="twitter:image" content=")[^"]*(")', lambda m: m.group(1) + url + m.group(2), new, count=1)
         if 'name="twitter:image"' not in new:
             new = new.replace("</head>", f'<meta name="twitter:image" content="{url}">\n</head>', 1)
+        if new != s:
+            p.write_text(new, encoding="utf-8", newline="")
+            n += 1
+    return n
+
+
+# 一覧（ul.post-list）の1枚。<li class="…"><a href="/<カテゴリ>/<slug>/"><span class="thumb"><img src="…" …>
+_TILE = re.compile(r'(<li class="[^"]*"><a href="/[^/"]+/([^/"]+)/">)<span class="thumb"><img src="([^"]+)"([^>]*)>')
+_LIST = re.compile(r'(<ul class="post-list[^"]*">)(.*?)(</ul>)', re.S)
+
+
+def _others(slug, alt_attr):
+    """同じ画像が出すぎた1枚の代わり（上から順に）: 題を描いた自動生成のアイキャッチ、内容に合う写真の棚の別の1枚"""
+    out = [f"/images/{slug}/eyecatch.png"]
+    m = re.search(r'alt="(.*?)のアイキャッチ画像"', alt_attr)
+    try:
+        import photo_shelf
+        fs = photo_shelf.files(photo_shelf.key_for(m.group(1) if m else ""))
+        if fs:
+            import hashlib
+            i = int(hashlib.md5(slug.encode("utf-8")).hexdigest(), 16) % len(fs)
+            out += [f"/images/shelf/{f}" for f in fs[i:] + fs[:i]]
+    except Exception:
+        pass
+    return out
+
+
+def _limit(block, most):
+    used = {}
+
+    def one(m):
+        head, slug, src, rest = m.groups()
+        pick = src
+        if used.get(src, 0) >= most:
+            pick = next((u for u in _others(slug, rest)
+                         if used.get(u, 0) < most and (ROOT / "site" / u.lstrip("/")).is_file()), src)
+        used[pick] = used.get(pick, 0) + 1
+        return m.group(0) if pick == src else f'{head}<span class="thumb"><img src="{pick}"{rest}>'
+    return _TILE.sub(one, block)
+
+
+def limit_repeats(site: Path, most=2):
+    """同じ一覧で同じ画像は most 回まで。3回目からは、その記事の題を描いた自動生成のアイキャッチ（無ければ写真の棚の別の1枚）。
+    業種・写真の棚の画像は種類が少なく、/aio/ では55枚中17種（同じ画像が12回）、/industry/clinic/ では25枚中9種が並んでいた（2026-10-08）。
+    一覧はどこで作っても（一覧・業種・LP・関連記事）この1か所でそろえる。何度呼んでも同じ"""
+    n = 0
+    for p in site.rglob("index.html"):
+        s = p.read_text(encoding="utf-8")
+        if 'class="post-list' not in s:
+            continue
+        new = _LIST.sub(lambda m: m.group(1) + _limit(m.group(2), most) + m.group(3), s)
         if new != s:
             p.write_text(new, encoding="utf-8", newline="")
             n += 1

@@ -2498,8 +2498,9 @@ def test_industry_thumbnails_follow_rules():
           any("biyou" in f for f in IT.variants("clinic")), False)
     check("同じ記事にはいつも同じ1枚",
           IT.apply({**base, "title": "士業のAIO対策", "keyword": ""}) == IT.apply({**base, "title": "士業のAIO対策", "keyword": ""}), True)
-    check("業種の無いAIO記事はテーマの画像（費用）",
-          IT.apply({**base, "title": "AIO対策の相場は月3万〜30万円", "keyword": "aio 相場"}), "/images/thumbs/theme-cost.jpg")
+    # 文字入りのテーマ画像（theme-*.jpg）は使わない。題と関係なく「AIO対策の始め方」と出ていた（2026-10-08・gates_history_h51）
+    check("業種の無いAIO記事は文字の無い写真の棚から（費用の写真）",
+          str(IT.apply({**base, "title": "AIO対策の相場は月3万〜30万円", "keyword": "aio 相場"})).startswith("/images/shelf/cost-"), True)
     check("表示は WebP・共有画像は JPEG", (IT.shown("/images/thumbs/aio-shika.jpg"), IT.shown("/images/x/eyecatch.png")),
           ("/images/thumbs/aio-shika.webp", "/images/x/eyecatch.png"))
     lp = (ROOT / "site" / "lp" / "fudosan" / "index.html").read_text(encoding="utf-8")
