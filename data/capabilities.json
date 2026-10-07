@@ -87,7 +87,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2249",
+     "evidence": "scripts/build.py:2234",
      "note": "基準に届かない記事は site/ に生成されない",
      "anchor": "weak = rubric.weak_axes(meta)"
     },
@@ -970,7 +970,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2390",
+     "evidence": "scripts/build.py:2375",
      "anchor": "n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）"
     },
     "external-md": {
@@ -1128,7 +1128,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1775",
+     "evidence": "scripts/build.py:1760",
      "anchor": "def build_industry_hubs(all_metas):"
     },
     "external-md": {
@@ -1182,7 +1182,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1908",
+     "evidence": "scripts/build.py:1893",
      "anchor": "terms = GL.collect(sid, only)"
     },
     "external-md": {
@@ -1234,7 +1234,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1924",
+     "evidence": "scripts/build.py:1909",
      "anchor": "cats = CP.collect(sid, only)"
     },
     "external-md": {
@@ -1285,7 +1285,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1952",
+     "evidence": "scripts/build.py:1937",
      "anchor": "groups = TP.build(sid, all_metas)"
     },
     "external-md": {
@@ -1336,7 +1336,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1973",
+     "evidence": "scripts/build.py:1958",
      "anchor": "area_pairs, area_g = AH.live(all_metas)"
     },
     "external-md": {
@@ -1388,7 +1388,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2377",
+     "evidence": "scripts/build.py:2362",
      "anchor": "season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）"
     },
     "external-md": {
@@ -1542,42 +1542,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2373",
+     "evidence": "scripts/build.py:2358",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2373",
+     "evidence": "scripts/build.py:2358",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2373",
+     "evidence": "scripts/build.py:2358",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2373",
+     "evidence": "scripts/build.py:2358",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2373",
+     "evidence": "scripts/build.py:2358",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2373",
+     "evidence": "scripts/build.py:2358",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2373",
+     "evidence": "scripts/build.py:2358",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     }
@@ -1946,7 +1946,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2412",
+     "evidence": "scripts/build.py:2397",
      "anchor": "render_warns = render_check.scan(sorted((ROOT / \"site\").rglob(\"index.html\")))"
     },
     "external-md": {

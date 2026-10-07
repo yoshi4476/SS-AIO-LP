@@ -643,6 +643,171 @@ def cta_band(ind):
             f'<a class="btn btn-ghost" href="{_lpu(T)}" data-cta="research_band_lp_{ind}">{T["lp_name"]}を見る</a></div></div></section>')
 
 
+# 一覧（/research/）で業種を探すためのまとまり。data/industries.json には分類が無いので、ここで決める。
+# ここに無い業種は「その他」に入る（一覧から消えない）
+INDEX_GROUPS = [
+    ("medical", "医療・介護", ("clinic", "dental", "seikotsuin", "yakkyoku", "kaigo", "vet")),
+    ("beauty", "美容・健康", ("biyou", "esthe", "fitness")),
+    ("home", "住まい・家まわり", ("fudosan", "koumuten", "gaiheki", "kensetsu", "kaji", "fuyouhin")),
+    ("life", "暮らしのサービス", ("jidousha", "hoken", "juku", "pet", "sougi", "wedding", "shashin")),
+    ("food", "飲食・宿泊・買い物", ("inshoku", "hotel", "ec")),
+    ("biz", "会社向け・士業", ("saas", "seizou", "unso", "shigyou")),
+]
+
+
+def index_summary(hls):
+    """一覧の最初に出す結論の数字。カードと同じ headline() の値からだけ数える（手で書かない）"""
+    import statistics as st
+    n = len(hls)
+    med = lambda k: round(st.median(h[k] for h in hls), 1)
+    dates = sorted(h["date"] for h in hls)
+    engines = sorted({e for h in hls for e in h["engines_text"].split("・") if e},
+                     key=("ChatGPT", "Gemini", "Claude", "Perplexity").index)
+    return {"n": n, "questions": sum(h["questions"] for h in hls), "first": dates[0], "last": dates[-1],
+            "engines": engines, "min_eng": min(h["n_engines"] for h in hls), "max_eng": max(h["n_engines"] for h in hls),
+            "oa_half": sum(h["oa"] > 50 for h in hls), "portal_more": sum(h["lp"] > h["lc"] for h in hls),
+            "owner_more": sum(h["lc"] > h["lp"] for h in hls),
+            "med_oa": med("oa"), "med_lp": med("lp"), "med_lc": med("lc")}
+
+
+def _jp_date(d):
+    return f"{d[:4]}年{int(d[5:7])}月{int(d[8:10])}日"
+
+
+def index_page(inds, answers=None, site_url="https://ai.7senses.co.jp"):
+    """業種別の調査の一覧（/research/）の (最初の画面, 本文, 構造化データ)。
+    数字は各業種の headline() からだけ取り、業種ページの最初の画面と同じ値・同じ書き方で出す"""
+    import html as H
+    hls = [h for h in (headline(i) for i in inds) if h]
+    if not hls:
+        return None
+    S = index_summary(hls)
+    n = S["n"]
+    # 結論の言い方は数字で分岐する（決め打ちにすると、集計が変わったときにデータと違う文が載る）
+    if S["oa_half"] * 2 > n:
+        seek = "費用・選び方などを調べる質問では、AIの回答の多くが公式サイトを出典に入れていました。"
+    else:
+        seek = (f"費用・選び方などを調べる質問で、公式サイトを出典に入れた回答が半数を超えた業種は"
+                f"{n}業種中{S['oa_half']}業種でした。")
+    if S["portal_more"] * 2 > n and not (n >= 10 and abs(S["med_lp"] - S["med_lc"]) < 5):
+        find = "地域で探す質問では、比較・予約などのサイトが公式サイトより多く出典になる業種が多数でした。"
+    elif S["owner_more"] * 2 > n and not (n >= 10 and abs(S["med_lp"] - S["med_lc"]) < 5):
+        find = "地域で探す質問では、公式サイトが比較・予約などのサイトより多く出典になる業種が多数でした。"
+    else:
+        find = "地域で探す質問では、比較・予約などのサイトと公式サイトのどちらが多いかは業種で分かれます。"
+    eng = "・".join(S["engines"])
+    eng_n = f"{S['min_eng']}〜{S['max_eng']}つ" if S["min_eng"] != S["max_eng"] else f"{S['max_eng']}つ"
+    last = S["last"]
+    # 同じ年・月なら終わりの日は日だけ（2026年10月2日〜5日）
+    tail = (f"{int(last[8:10])}日" if last[:7] == S["first"][:7] else _jp_date(last))
+    period = _jp_date(S["first"]) + ("〜" + tail if last != S["first"] else "")
+    med = n >= 10   # 業種が10未満のときは中央値を出さず、件数だけにする
+    stats = [
+        (f'{S["oa_half"]}<small>／{n}業種</small>',
+         "調べる質問で、公式サイトを出典に入れた回答が半数を超えた業種",
+         f'業種ごとの中央値 {S["med_oa"]}%' if med else ""),
+        (f'{S["portal_more"]}<small>／{n}業種</small>',
+         "探す質問で、出典に占める比較・予約などのサイトの割合が公式サイトを上回った業種",
+         f'中央値 比較・予約など {S["med_lp"]}%／公式サイト {S["med_lc"]}%' if med else ""),
+    ]
+    tiles = "".join(f'<div class="rsx-stat"><p class="rsx-stat-n">{a}</p><p class="rsx-stat-l">{H.escape(b)}</p>'
+                    + (f'<p class="rsx-stat-s">{H.escape(c)}</p>' if c else "") + '</div>' for a, b, c in stats)
+    summary = (f'<div class="rsx-sum"><p class="rsx-eyebrow">{n}業種の調査からわかったこと</p>'
+               f'<h2 class="rsx-sum-h">{H.escape(seek)}{H.escape(find)}</h2>'
+               f'<div class="rsx-stats">{tiles}</div>'
+               f'<p class="rsx-note">当社調べ。{n}業種・計{S["questions"]:,}問を、{H.escape(eng)}のうち{eng_n}に{period}に聞きました。'
+               + ('中央値は業種ごとの値の中央値です。' if med else '')
+               + '集計の方法と元のデータ（CSV）は各業種のページにあります。</p></div>')
+
+    def linked(s):
+        # 矢印だけが次の行へ落ちないよう、最後の1文字と矢印を離さない
+        return (H.escape(s[:-1]) + f'<span class="rsx-nw">{H.escape(s[-1:])}'
+                '<span class="rsx-arw" aria-hidden="true">→</span></span>')
+
+    def card(h, gid):
+        name = linked(h["name"])
+        ym = f'{h["date"][:4]}年{int(h["date"][5:7])}月'
+        T = h["T"]
+        m1 = f'地域で探す質問の出典のうち、{T["owner_site"]}は{h["lc"]}%（{T["portal"]}は{h["lp"]}%）'
+        m2 = f'{T["other_short"]}の質問で、{T["owner_site"]}を出典に入れた回答は{h["oa"]}%'
+        cell = lambda cls, key, v, label: (
+            f'<div class="rsx-m {cls}"><span class="rsx-k">{key}</span>'
+            f'<span class="rsx-bar" role="img" aria-label="{H.escape(label)}"><i style="width:{min(v, 100)}%"></i></span>'
+            f'<span class="rsx-v">{v}%</span></div>')
+        return (f'<li class="rsx-item" data-group="{gid}" data-ind="{h["ind"]}" data-loc="{h["lc"]}" data-oth="{h["oa"]}">'
+                f'<div class="rsx-head"><a class="rsx-name" href="/research/{h["ind"]}-ai-sources/">{name}</a>'
+                f'<span class="rsx-meta">{h["questions"]}問・{ym}</span></div>'
+                + cell("loc", "探す", h["lc"], m1) + cell("oth", "調べる", h["oa"], m2) + '</li>')
+
+    by = {h["ind"]: h for h in hls}
+    known = {i for _, _, ids in INDEX_GROUPS for i in ids}
+    groups = [(gid, label, [by[i] for i in ids if i in by]) for gid, label, ids in INDEX_GROUPS]
+    rest = sorted((h for h in hls if h["ind"] not in known), key=lambda h: h["ind"])
+    if rest:
+        groups.append(("etc", "その他", rest))
+    groups = [g for g in groups if g[2]]
+    buttons = ('<button type="button" data-g="all" aria-pressed="true">すべて<span>' + str(n) + '</span></button>'
+               + "".join(f'<button type="button" data-g="{gid}" aria-pressed="false">{H.escape(label)}<span>{len(hs)}</span></button>'
+                         for gid, label, hs in groups))
+    tools = ('<div class="rsx-tools" id="rsxTools">'
+             f'<div class="rsx-filter" role="group" aria-label="業種のまとまりで絞り込む">{buttons}</div>'
+             '<label class="rsx-sort">並べ替え<select id="rsxSort">'
+             '<option value="group">まとまりごと</option>'
+             '<option value="loc">探す質問の公式サイトが多い順</option>'
+             '<option value="oth">調べる質問の公式サイトが多い順</option></select></label></div>')
+    legend = ('<div class="rsx-legend"><p><span class="rsx-key loc">探す</span>「地域名＋業種」で探す質問。'
+              '出典の件数のうち公式サイトの割合</p>'
+              '<p><span class="rsx-key oth">調べる</span>費用・選び方などを調べる質問。'
+              '公式サイトを出典に入れた回答の割合</p>'
+              '<p class="rsx-legend-n">数え方が違うため、2本の棒は同じものさしではありません。業種名を押すと、質問の種類ごとの内訳を見られます。</p></div>')
+    secs = "".join(f'<section class="rsx-group" data-group="{gid}"><h2>{H.escape(label)}<span>{len(hs)}業種</span></h2>'
+                   f'<ul class="rsx-list">{"".join(card(h, gid) for h in hs)}</ul></section>' for gid, label, hs in groups)
+    other = ""
+    if answers:
+        split, rows = answers.get("split", 0), answers.get("rows", 0)
+        rows_n = rows if isinstance(rows, int) else len(rows)
+        ym = f'{answers["lastmod"][:4]}年{int(answers["lastmod"][5:7])}月'
+        other = ('<section class="rsx-group rsx-more" data-group="more"><h2>記事の問いをAIに聞いた調査</h2><ul class="rsx-list">'
+                 f'<li class="rsx-item"><div class="rsx-head"><a class="rsx-name" href="{answers["url"]}">'
+                 f'{linked(answers.get("h1") or answers["title"])}</a>'
+                 f'<span class="rsx-meta">{rows_n}問・{ym}</span></div>'
+                 f'<div class="rsx-m split"><span class="rsx-k">結論が割れた</span>'
+                 f'<span class="rsx-bar" role="img" aria-label="{rows_n}問のうち、AIどうしの結論が分かれた問いは{split}問">'
+                 f'<i style="width:{round(split / max(rows_n, 1) * 100, 1)}%"></i></span>'
+                 f'<span class="rsx-v">{split}<small>／{rows_n}問</small></span></div></li></ul></section>')
+    script = ("<script>(function(){var t=document.getElementById('rsxTools');if(!t)return;"
+              "var root=document.getElementById('rsxRoot'),flat=document.getElementById('rsxFlat'),"
+              "sel=document.getElementById('rsxSort'),g='all',s='group';"
+              "var items=[].slice.call(root.querySelectorAll('.rsx-group:not(.rsx-more) .rsx-item'));"
+              "items.forEach(function(li){li._home=li.parentNode;});"
+              "function draw(){var groups=root.querySelectorAll('.rsx-group');"
+              "if(s==='group'){items.forEach(function(li){li._home.appendChild(li);li.hidden=false;});flat.hidden=true;"
+              "[].forEach.call(groups,function(sec){sec.hidden=!(g==='all'||sec.getAttribute('data-group')===g);});}"
+              "else{var k='data-'+s;items.slice().sort(function(a,b){return parseFloat(b.getAttribute(k))-parseFloat(a.getAttribute(k));})"
+              ".forEach(function(li){flat.appendChild(li);li.hidden=!(g==='all'||li.getAttribute('data-group')===g);});"
+              "flat.hidden=false;[].forEach.call(groups,function(sec){sec.hidden=!(g==='all'&&sec.classList.contains('rsx-more'));});}}"
+              "t.addEventListener('click',function(e){var b=e.target.closest('button[data-g]');if(!b)return;"
+              "[].forEach.call(t.querySelectorAll('button[data-g]'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});"
+              "g=b.getAttribute('data-g');draw();});"
+              "sel.addEventListener('change',function(){s=sel.value;draw();});})();</script>")
+    hero = ('<section class="rsx-hero"><div class="rsx-wrap"><p class="rsx-eyebrow">調査レポート・当社調べ</p>'
+            '<h1>業種別のAI調査</h1>'
+            '<p class="rsx-lead">お客様がAIに聞きそうな質問を業種ごとにAIへ聞き、答えの出典になったサイトの種類を数えた当社の調査です。</p>'
+            '</div></section>')
+    body = (f'<div class="rsx-wrap" id="rsxRoot">{summary}{tools}{legend}{secs}'
+            '<ul class="rsx-list rsx-flat" id="rsxFlat" hidden></ul>'
+            f'{other}</div>{script}')
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "ItemList", "name": "業種別のAI調査", "numberOfItems": n,
+         "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": f'{h["name"]}の質問に、AIは何を出典に答えるか',
+                              "url": f'{site_url}/research/{h["ind"]}-ai-sources/'}
+                             for i, h in enumerate(h for _, _, hs in groups for h in hs)]},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "ホーム", "item": f"{site_url}/"},
+            {"@type": "ListItem", "position": 2, "name": "業種別のAI調査", "item": f"{site_url}/research/"}]}]}
+    return hero, body, ld
+
+
 def render(ind):
     """公開ページの中身（HTML）と構造化データ。数字は集計ファイルからだけ取る（手で書かない）"""
     import html as H

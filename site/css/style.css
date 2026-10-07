@@ -1793,3 +1793,88 @@ section.tool-hero ~ section .quiz-panel { margin-left: 0; }
 .gl-term h3 { margin: 0 0 .7rem; font-size: 1.12rem; }
 .gl-term .definition-box { margin: 0 0 .5rem; }
 .gl-rel { font-size: .84rem; color: var(--muted); margin: .4rem 0 0; }
+
+/* 業種別のAI調査の一覧（/research/・2026-10-07）。最初に全体の結論、続けて業種を2本の棒で比べる。
+   文字だけのカードを29枚並べると数字が文に埋もれ、スマホで約9,800pxになっていた */
+.rsx-wrap { max-width: 1120px; margin: 0 auto; }
+.rsx-hero { padding: clamp(1.2rem, 3.5vw, 2.8rem) var(--gutter) .4rem; }
+.rsx-eyebrow { margin: 0 0 .4em; font-size: .8rem; font-weight: 700; color: var(--blue); letter-spacing: .06em; line-height: 1.5; }
+.rsx-hero h1 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 900; margin: 0 0 .3em; }
+.rsx-lead { color: var(--muted); max-width: 46em; margin: 0; line-height: 1.8; }
+.section.rsx-sec { padding-top: 1.1rem; padding-bottom: clamp(1.4rem, 4vw, 3rem); }
+.rsx-sum { background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1rem, 3vw, 1.8rem); margin: 0 0 1.6rem; }
+.rsx-sum .rsx-eyebrow { color: var(--muted); }
+.rsx-sum-h { font-size: clamp(1.05rem, 2.1vw, 1.38rem); line-height: 1.65; margin: 0 0 1rem; color: var(--navy); }
+.rsx-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.rsx-stat { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 1rem; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: .85rem 1.1rem; }
+.rsx-stat p { margin: 0; }
+.rsx-stat-n { grid-row: 1 / span 2; font-family: var(--en); font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 700; line-height: 1.05; color: var(--navy); white-space: nowrap; }
+.rsx-stat-n small { display: block; font-family: var(--sans); font-size: .4em; font-weight: 700; color: var(--muted); margin-top: .25em; }
+.rsx-stat-l { font-size: .86rem; line-height: 1.6; }
+.rsx-stat-s { font-size: .76rem; color: var(--muted); line-height: 1.5; margin-top: .2rem !important; }
+.rsx-note { font-size: .74rem; color: var(--muted); line-height: 1.7; margin: .9rem 0 0; }
+/* 絞り込みと並べ替えは JS があるときだけ出す（JS が無ければ全業種がまとまりごとに見えている） */
+.rsx-tools { display: none; }
+html.js .rsx-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem 1.2rem; margin: 0 0 .9rem; }
+.rsx-filter { display: flex; flex-wrap: wrap; gap: .4rem; min-width: 0; }
+.rsx-filter button { flex: none; font-family: var(--sans); font-size: .82rem; font-weight: 700; line-height: 1.5; cursor: pointer; min-height: 36px; padding: .3em .9em; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--navy); transition: border-color .2s, color .2s, background .2s; }
+.rsx-filter button span { margin-left: .35em; font-family: var(--en); font-weight: 600; color: var(--muted); }
+.rsx-filter button:hover { border-color: var(--blue); color: var(--blue); }
+.rsx-filter button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+.rsx-filter button[aria-pressed="true"] span { color: rgba(255,255,255,.75); }
+.rsx-sort { display: flex; align-items: center; gap: .5rem; font-size: .78rem; color: var(--muted); white-space: nowrap; }
+.rsx-sort select { font-family: var(--sans); font-size: .82rem; color: var(--navy); min-height: 36px; padding: .2em .6em; border: 1px solid var(--line); border-radius: 8px; background: #fff; max-width: 100%; }
+.rsx-legend { font-size: .8rem; line-height: 1.6; border-top: 1px solid var(--line); padding: .7rem 0 0; display: flex; flex-wrap: wrap; gap: .1rem 1.6rem; }
+.rsx-legend p { margin: 0; }
+.rsx-legend-n { color: var(--muted); font-size: .74rem; flex-basis: 100%; }
+.rsx-key { display: inline-block; font-size: .7rem; font-weight: 700; color: #fff; border-radius: 4px; padding: 0 .45em; margin-right: .45em; line-height: 1.65; }
+.rsx-key.loc, .rsx-m.loc .rsx-bar i { background: var(--chart-base); }
+.rsx-key.oth, .rsx-m.oth .rsx-bar i { background: var(--chart-accent); }
+.rsx-m.split .rsx-bar i { background: #64748b; }
+.rsx-group { margin: 1.3rem 0 0; }
+.rsx-group[hidden], .rsx-item[hidden], .rsx-flat[hidden] { display: none; }
+.rsx-group h2 { display: flex; align-items: baseline; gap: .6em; font-size: 1.02rem; line-height: 1.5; margin: 0; padding: 0 0 .35rem; border-bottom: 2px solid var(--navy); }
+.rsx-group h2 span { font-family: var(--en); font-size: .78rem; font-weight: 600; color: var(--muted); }
+.rsx-list { list-style: none; margin: 0; padding: 0; }
+.rsx-flat { margin-top: 1rem; border-top: 2px solid var(--navy); }
+.rsx-item { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr); gap: .3rem 1.6rem; align-items: center; padding: .5rem .6rem; border-bottom: 1px solid var(--line); transition: background .15s; }
+.rsx-item:hover { background: var(--bg-alt); }
+.rsx-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .7rem; min-width: 0; }
+.rsx-name { font-weight: 700; font-size: .98rem; line-height: 1.5; color: var(--blue-deep); text-decoration: none; }
+.rsx-name::after { content: ""; position: absolute; inset: 0; }   /* 行のどこを押しても業種ページへ */
+.rsx-item:hover .rsx-name, .rsx-name:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+.rsx-nw { white-space: nowrap; }
+.rsx-arw { display: inline-block; margin-left: .3em; transition: transform .2s; }
+.rsx-sum-h, .rsx-stat-l, .rsx-lead { word-break: auto-phrase; }   /* 文節で折り返す（「業 / 種」のような切れ方を防ぐ） */
+.rsx-item:hover .rsx-arw { transform: translateX(3px); }
+.rsx-meta { font-size: .72rem; color: var(--muted); line-height: 1.4; }
+.rsx-m { display: grid; grid-template-columns: 3.1em minmax(0, 1fr) 3.6em; gap: .55rem; align-items: center; }
+.rsx-k { font-size: .72rem; font-weight: 700; color: var(--muted); white-space: nowrap; line-height: 1.4; }
+.rsx-bar { display: block; height: 10px; background: #e8eef6; border-radius: 999px; overflow: hidden; }
+.rsx-bar i { display: block; height: 100%; border-radius: 999px; }
+.rsx-v { font-family: var(--en); font-weight: 700; font-size: .92rem; line-height: 1.4; text-align: right; font-variant-numeric: tabular-nums; color: var(--navy); white-space: nowrap; }
+.rsx-v small { font-size: .78em; color: var(--muted); font-weight: 600; }
+.rsx-more .rsx-m { grid-column: 2 / -1; grid-template-columns: 6.4em minmax(0, 1fr) 4.6em; }
+@media (max-width: 760px) {
+  .rsx-stats { grid-template-columns: 1fr; gap: .5rem; }
+  .rsx-stat { padding: .65rem .85rem; gap: 0 .85rem; }
+  .rsx-stat-n { font-size: 1.7rem; min-width: 2.4em; }
+  .rsx-stat-l { font-size: .8rem; line-height: 1.55; }
+  /* まとまりのボタンは横に流す（折り返すと3段になり、一覧が下へ押し出される）。ページは横に動かない */
+  html.js .rsx-tools { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: .5rem; }
+  .rsx-sort select { flex: 1; min-width: 0; }
+  .rsx-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) .1rem; }
+  .rsx-filter::-webkit-scrollbar { display: none; }
+  .rsx-legend { font-size: .76rem; }
+  /* 1行＝1業種。業種名の右に2つの数字と短い棒を並べる */
+  .rsx-group { margin-top: 1.1rem; }
+  .rsx-item { grid-template-columns: minmax(0, 1fr) 5.4rem 5.4rem; gap: .2rem .7rem; padding: .35rem .1rem; }
+  .rsx-head { flex-direction: column; align-items: flex-start; gap: 0; }
+  .rsx-name { font-size: .92rem; line-height: 1.4; word-break: auto-phrase; }
+  .rsx-m { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k v" "b b"; gap: .1rem .3rem; }
+  .rsx-k { grid-area: k; font-size: .66rem; }
+  .rsx-v { grid-area: v; font-size: .84rem; }
+  .rsx-bar { grid-area: b; height: 7px; }
+  .rsx-more .rsx-item { grid-template-columns: minmax(0, 1fr) 8rem; }
+  .rsx-more .rsx-m { grid-column: auto; grid-template-columns: minmax(0, 1fr) auto; }
+}

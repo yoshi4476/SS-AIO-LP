@@ -1664,36 +1664,21 @@ def build_research_pages(all_metas=()):
     except Exception as e:
         print(f"WARN: AIに聞いた調査のページを作れません（{str(e)[:60]}）")
     if made:
-        # 全業種の調査の一覧（/research/）。業種ごとの要点の数字は headline() からだけ取る
-        import html as _h
-        rows = []
-        for ind in made:
-            hl = IAS.headline(ind)
-            if not hl:
-                continue
-            T = hl["T"]
-            rows.append(f'<li><a href="/research/{ind}-ai-sources/"><strong>{_h.escape(hl["name"])}</strong>'
-                        f'<span class="cnt">{hl["questions"]}問・{hl["date"][:7].replace("-", "年")}月</span></a>'
-                        f'<span class="hub-lead">「地域で探す」の質問では、出典の{hl["lp"]}%が{_h.escape(T["portal"])}、'
-                        f'{hl["lc"]}%が{_h.escape(T["owner_site"])}。{_h.escape(T["other_short"])}の質問では、'
-                        f'回答の{hl["oa"]}%が{_h.escape(T["owner_site"])}を出典にしていました。</span></li>')
-        body = ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>業種別のAI調査</h2>'
-                f'<span class="cnt">{len(rows)}業種</span></div>'
-                '<p class="hub-lead">業種ごとに、お客様がAIに聞きそうな質問を ChatGPT・Gemini・Claude などに聞き、'
-                'AIが何を出典に答えているかを数えた当社の調査です。数字は各業種の調査ページに、集計の方法と元のデータ（CSV）と一緒に載せています。</p>'
-                f'<ul class="hub-list">{"".join(rows)}</ul></div>')
-        if answers:
-            body += ('<div class="latest-block"><div class="cat-head"><h2>記事の問いをAIに聞いた調査</h2></div>'
-                     f'<ul class="hub-list"><li><a href="{answers["url"]}"><strong>{_h.escape(answers["title"])}</strong>'
-                     f'<span class="cnt">{len(answers["rows"])}問・{answers["lastmod"][:7].replace("-", "年")}月</span></a>'
-                     f'<span class="hub-lead">{_h.escape(answers["description"])}</span></li></ul></div>')
+        # 全業種の調査の一覧（/research/）。最初に全体の結論、続けて業種を比べられる棒の一覧。
+        # 数字は業種ページと同じ headline() からだけ取る（作りは industry_ai_sources.index_page）
+        hero, body, ld = IAS.index_page(made, answers, SITE_URL)
         names = [IAS.headline(i)["name"] for i in made if IAS.headline(i)]
         page = BLOG_PAGE.format(items=body, **page_shell(
             "業種別のAI調査", "業種ごとに、AIが何を出典に答えているかを数えた当社の調査の一覧です。",
-            [f"{len(rows)}業種の調査を載せ、数字は各業種のページに集計の方法と元のデータ（CSV）と一緒に置いています。",
-             DF.named("対象は", names, f"など{len(rows)}業種です。")]))
+            [f"{len(names)}業種の調査を載せ、数字は各業種のページに集計の方法と元のデータ（CSV）と一緒に置いています。",
+             DF.named("対象は", names, f"など{len(names)}業種です。")]))
         page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/research/")
         page = re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
+        page = re.sub(r'\s*<div class="cat-filter" id="catFilter".*?</div>\n', "\n", page, count=1, flags=re.S)
+        page = re.sub(r'<section class="hero">.*?</section>', lambda m: hero, page, count=1, flags=re.S)
+        page = page.replace('<section class="section" style="padding-top:1rem;">', '<section class="section rsx-sec">', 1)
+        page = page.replace("</head>", '<script type="application/ld+json">'
+                            + json.dumps(ld, ensure_ascii=False) + "</script></head>", 1)
         (SITE / "research").mkdir(parents=True, exist_ok=True)
         (SITE / "research" / "index.html").write_text(page, encoding="utf-8", newline="\n")
     return made
