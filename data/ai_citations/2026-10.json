@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 18,
       "suspect_taken": 14,
       "healthy": 4,
-      "too_thin": 177,
+      "too_thin": 172,
       "items": [
         {
           "kw": "aio やり方",
@@ -32,7 +32,7 @@
           "kw": "aio 対策 費用",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
           "pos": 5.8,
-          "imp": 12,
+          "imp": 11,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -41,8 +41,8 @@
         {
           "kw": "aio 導入 メリット 費用",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
-          "pos": 7.4,
-          "imp": 17,
+          "pos": 6.6,
+          "imp": 16,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -150,6 +150,13 @@
         }
       ]
     },
+    "conflux": {
+      "judged": 0,
+      "suspect_taken": 0,
+      "healthy": 0,
+      "too_thin": 0,
+      "items": []
+    },
     "corporate": {
       "judged": 15,
       "suspect_taken": 8,
@@ -200,7 +207,7 @@
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
           "pos": 6.7,
-          "imp": 123,
+          "imp": 122,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -242,7 +249,7 @@
       "judged": 2,
       "suspect_taken": 1,
       "healthy": 1,
-      "too_thin": 45,
+      "too_thin": 42,
       "items": [
         {
           "kw": "it導入補助金 個人事業主",
