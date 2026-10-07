@@ -146,8 +146,8 @@ def test_hist_lessons_list_diagram_draws_no_pipe():
     rec = {}
     real_canvas, real_save = MD.canvas, MD.save_png
 
-    def canvas(h, title):
-        img, d = real_canvas(h, title)
+    def canvas(h, title, *rest):
+        img, d = real_canvas(h, title, *rest)
         rec["d"] = _Rec(d)
         return img, rec["d"]
     try:
