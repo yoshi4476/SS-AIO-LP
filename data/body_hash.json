@@ -200,7 +200,7 @@
 "modified": "2026-08-31"
 },
 "clinic-hp-ryokin-nosekata": {
-"hash": "dd2a138ea139306d27450edf651b7731",
+"hash": "728e8fc082a2f1a2fbb560984b260b56",
 "modified": "2026-10-07"
 },
 "clinic-instagram-yarikata": {
@@ -234,6 +234,10 @@
 "clinic-shiko-jirei": {
 "hash": "faa6f1dc9c8953b5fca404be940077c0",
 "modified": "2026-09-06"
+},
+"clinic-shoujou-page-tsukurikata": {
+"hash": "f5e3856d1e0959a066208911c9a39ba9",
+"modified": "2026-10-08"
 },
 "clinic-shukyaku-consaru-erabikata": {
 "hash": "b8455ff19641c286ee5cd53cb08a4ffa",
@@ -532,7 +536,7 @@
 "modified": "2026-08-18"
 },
 "shika-shoujou-page-tsukurikata": {
-"hash": "0d85ee95cb7e84529bb0800626c631a7",
+"hash": "44c7390ec093a880b950b9ab5db1dd38",
 "modified": "2026-10-06"
 },
 "shiko-jirei-kakikata": {

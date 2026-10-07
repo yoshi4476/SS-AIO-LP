@@ -62,6 +62,8 @@ faq:
 
 **症状ページには、症状名・原因・見分け方・受診を急ぐサイン・当院での検査と治療・予約の6項目を、この順で書きます。**
 
+内科や皮膚科など医科の場合は、何科か迷う患者への線引きまで含めて[クリニックの症状ページの作り方](/aio/clinic-shoujou-page-tsukurikata/)で整理しています。
+
 <figure><img src="/images/shika-shoujou-page-tsukurikata/koumoku.png" alt="歯科医院の症状ページに書く6つの項目の一覧" loading="lazy"><figcaption>症状ページに書く6つの項目</figcaption></figure>
 
 順番は、患者の頭に浮かぶ問いの順にそろえています。「なぜ？」「自分はどれ？」「今すぐ行くべき？」「行ったら何をされる？」の順です。
