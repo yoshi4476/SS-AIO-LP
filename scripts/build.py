@@ -1440,7 +1440,7 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 </nav>
 
 <section class="hero">
-  <span class="kicker">{kicker}</span>
+  {kicker}
   <h1>{h1}</h1>
   <p class="lead">{lead}</p>
 </section>
@@ -1488,18 +1488,25 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 """
 
 
-def page_shell(h1="記事一覧", desc="", more=()):
+def page_shell(h1="記事一覧", desc="", more=(), kicker=None, cta=None):
     """BLOG_PAGE に渡す外枠の値。h1 は title・og:title・パンくずにも入る。
 
     業種・用語集・テーマなどもこの外枠を使うため、h1 と説明を渡さないと
     どのページも見出しが「記事一覧」になる。
-    more はそのページの中身（本数・業種・扱う問い）から作った文で、説明文が100字に届かないときだけ足す
+    more はそのページの中身（本数・業種・扱う問い）から作った文で、説明文が100字に届かないときだけ足す。
+    kicker は見出しの上の小さな札（省けば見出しから決める）。cta は末尾の相談の帯の差し替え（業種のページは業種のLPへ）
     """
     desc = re.sub(r"\s+", " ", str(desc or "")).strip()
     # 見出しの下に出す説明。業種・用語・質問集のページでも「記事一覧」の説明文が出ていたので、渡された説明を出す
     lead = desc or "SEO・AIO・LLMOの実践ノウハウを、カテゴリごとに分けて掲載しています。まず新着を見て、気になる領域の見出しから読み進めてください。"
-    kicker = ("FAQ" if "よくある質問" in h1 else "Glossary" if h1 == "用語集" or h1.endswith("とは")
-              else "Industry" if h1.endswith("の集客") or h1 == "業種から探す" else "All Articles")
+    # 見出しの上の札は日本語でページの種類を書く。英字の飾り（ALL ARTICLES）が比較表・テーマ・調査のページにも出て、
+    # 中身と合っていなかった。見出しと同じ言葉になるときは出さない（2026-10-08）
+    if kicker is None:
+        kicker = ("よくある質問" if "よくある質問" in h1 else "用語集" if h1 == "用語集" or h1.endswith("とは")
+                  else "業種別の記事" if h1.endswith("の集客") or h1 == "業種から探す"
+                  else "比較表" if "比較" in h1 else "テーマ別の記事" if "テーマ" in h1
+                  else "調査" if "調査" in h1 else "記事一覧")
+    kicker = f'<span class="kicker">{_html_escape(kicker)}</span>' if kicker and kicker not in h1 else ""
     desc = desc or (
         f"{SITE_NAME}の全記事一覧。医療・不動産・工務店を中心に、SEO・AIO・LLMOの実践ノウハウを新着順に掲載しています。")
     # 説明文は100〜150字（Bing Webmaster Tools が100字未満の54ページを「短すぎる」と指摘。2026-10-05）。
@@ -1525,7 +1532,25 @@ def page_shell(h1="記事一覧", desc="", more=()):
                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
                 footer_credit=_footer_credit(),
                 h1=_html_escape(h1), title=_html_escape(title), desc=_html_escape(desc),
-                lead=_html_escape(lead), kicker=kicker, **_cta())
+                lead=_html_escape(lead), kicker=kicker, **{**_cta(), **(cta or {})})
+
+
+def industry_cta(slug):
+    """業種のページ（業種ハブ・業種のよくある質問）の末尾の相談の帯。業種のLPがあればそちらへ。
+    全業種向けの /lp/ だけに送っていたため、業種の話を読んだ人が業種の案内に着かなかった（2026-10-08）"""
+    import industry_lp as IL
+    k = IL.BY_HUB.get(slug)
+    if not k:
+        return None
+    return {"cta_url": f"/lp/{k}/", "cta_label": f"{IL.LPS[k]['name']}のSEO・AI検索対策（無料診断つき）"}
+
+
+def strip_list_tools(page):
+    """記事の検索欄とカテゴリの絞り込みを外す。記事の一覧（post-list）が無いページ（比較表・テーマ・用語集・
+    業種のよくある質問など）では、入力しても何も絞り込まれなかった（2026-10-08）"""
+    if 'class="post-list' in page:
+        return page
+    return re.sub(r'<input type="search" id="blogSearch".*?</div>\n', "", page, count=1, flags=re.S)
 
 
 def hub_json_ld(name, url, metas, desc=""):
@@ -1783,7 +1808,7 @@ def build_industry_hubs(all_metas):
         page = BLOG_PAGE.format(items=IH.hub_body(ind, metas, CATEGORIES, post_tile), **page_shell(
             f'{ind["name"]}の集客', ind.get("lead") or f'{ind["name"]}の集客に役立つ記事をまとめています。',
             [(f'{ind["name"]}向けの記事{len(metas)}本を、{by_cat(metas)}に分けて載せています。',
-              f'{ind["name"]}向けの記事{len(metas)}本を、カテゴリ別に載せています。')]))
+              f'{ind["name"]}向けの記事{len(metas)}本を、カテゴリ別に載せています。')], cta=industry_cta(ind["slug"])))
         page = page.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/')
         url = f'{SITE_URL}/industry/{ind["slug"]}/'
         page = page.replace("</head>", hub_json_ld(
@@ -1804,8 +1829,8 @@ def build_industry_hubs(all_metas):
                 f'{ind["name"]}のよくある質問',
                 f'{ind["name"]}の集客について、記事{len(metas)}本で答えたよくある質問{len(qs)}問をまとめています。',
                 ["答えは各記事に書いたものと同じで、質問から根拠の記事へ進めます。",
-                 DF.named("主な質問は", sorted(qs, key=len), "です。")]))
-            fpage = fpage.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/faq/')
+                 DF.named("主な質問は", sorted(qs, key=len), "です。")], cta=industry_cta(ind["slug"])))
+            fpage = strip_list_tools(fpage.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/faq/'))
             fpage = fpage.replace("</head>", '<script type="application/ld+json">'
                                   + _json.dumps(fld, ensure_ascii=False) + "</script></head>", 1)
             fo.write_text(fpage, encoding="utf-8", newline="\n")
@@ -1818,7 +1843,7 @@ def build_industry_hubs(all_metas):
             "業種から探す", "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。",
             [(f"{names}の{len(pairs)}業種、記事{len({m['slug'] for m in flat})}本を業種別に並べています。",
               f"{len(pairs)}業種、記事{len({m['slug'] for m in flat})}本を業種別に並べています。")]))
-        page = page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/")
+        page = strip_list_tools(page.replace(f"{SITE_URL}/blog/", f"{SITE_URL}/industry/"))
         page = page.replace("</head>", hub_json_ld(
             "業種から探す", f"{SITE_URL}/industry/", flat,
             "業種ごとに、集客・SEO・AIO・LLMOの記事をまとめています。") + "</head>", 1)
@@ -1863,8 +1888,11 @@ def build_extra_pages(all_metas):
     def page(path, items, title, url, desc="", more=()):
         out = SITE / path / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        p = BLOG_PAGE.format(items=items, **page_shell(title, desc or f"{SITE_NAME}の「{title}」のページです。", more))
-        p = p.replace(f"{SITE_URL}/blog/", url)
+        kicker = {"glossary": "用語集", "compare": "比較表", "topics": "テーマ別の記事",
+                  "area": "エリア別の記事"}.get(path.split("/")[0])
+        p = BLOG_PAGE.format(items=items, **page_shell(title, desc or f"{SITE_NAME}の「{title}」のページです。", more,
+                                                       kicker=kicker))
+        p = strip_list_tools(p.replace(f"{SITE_URL}/blog/", url))
         out.write_text(p, encoding="utf-8", newline="\n")
         made_paths.add(out.parent)
 
