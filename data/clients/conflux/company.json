@@ -1,0 +1,29 @@
+{
+  "name": "CONFLUX PARTNERS",
+  "name_en": "CONFLUX PARTNERS",
+  "address": "非公開（全国オンライン対応。所在地はサイトに掲載しない方針）",
+  "tel": "非公開（連絡は相談フォームのみ）",
+  "hours": "相談フォームは24時間受付。2営業日以内にご連絡",
+  "founded": "2003年（事業の開始）",
+  "ceo": "YW",
+  "email": "contact@conflux-partners.jp",
+  "supervisor": {
+    "name": "YW",
+    "title": "AI × 経営コンサルタント（CONFLUX PARTNERS）",
+    "qualification": [
+      "なし（実務の経歴で監修。資格は表示しない）"
+    ],
+    "career": [
+      "2003年に HP 制作会社を創業",
+      "2022〜2025年 AI・システム開発会社 2社の代表取締役",
+      "AI エージェント・業務システムの開発"
+    ],
+    "scope": "事実（数字・制度・製品の説明）と、表現（断定・誇大な言い方がないか）",
+    "profile_url": "https://conflux-partners.jp/about",
+    "photo": "なし（人物の写真は掲載しない方針）",
+    "consent": "可",
+    "review": "公開前に確かめる",
+    "display": true
+  },
+  "_readme": "この会社の正規表記。記事の著者情報・構造化データ・レポートの宛名はすべてここを参照する。表記がぶれると検索エンジンが同名の別法人と混同する。"
+}

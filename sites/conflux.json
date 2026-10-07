@@ -1,0 +1,159 @@
+{
+  "id": "conflux",
+  "name": "CONFLUX PARTNERS の記事",
+  "domain": "conflux-partners.jp",
+  "repo": "yoshi4476/conflux-partners",
+  "branch": "main",
+  "type": "external-md",
+  "ga4_property_id": "",
+  "kw_plan": "docs/kw-conflux.md",
+  "theme": "AI エージェントとシステム開発で、中小企業の仕事を楽にする方法",
+  "audience": "IT の専任者がいない従業員10〜100名の中小企業の経営者・事業責任者で、手作業や Excel の業務を AI やシステムで楽にしたい人",
+  "owns": [
+    "AI エージェント",
+    "業務自動化",
+    "AI 自動化",
+    "RAG",
+    "社内文書検索",
+    "チャットボット",
+    "システム開発",
+    "業務システム",
+    "Web アプリ",
+    "SaaS 開発",
+    "オーダーメイド システム",
+    "Excel 脱却",
+    "要件定義",
+    "見積もり",
+    "外注",
+    "保守",
+    "生成AI 社内ルール",
+    "AI 導入",
+    "AI コンサルティング",
+    "AI 研修"
+  ],
+  "avoid": [
+    "AIO・LLMO・SEO・MEO などの集客手法（ai.7senses.co.jp の担当領域のため）",
+    "補助金の申請手続き（lp.7senses.co.jp の担当領域のため）",
+    "経理 BPO・記帳代行・経理の自動化（corp.7senses.co.jp の担当領域のため）",
+    "事業売却・M&A・経営判断（オーナーの判断で扱わない）"
+  ],
+  "languages": [],
+  "categories": {
+    "development": "システム開発",
+    "agent": "AI エージェント",
+    "ai": "AI 活用・コンサルティング"
+  },
+  "kw_seeds": {
+    "industries": [
+      "製造業",
+      "建設業",
+      "工務店",
+      "不動産",
+      "卸売",
+      "小売",
+      "飲食（多店舗）",
+      "美容・サロン",
+      "クリニック",
+      "介護",
+      "士業",
+      "人材派遣・紹介",
+      "広告代理店",
+      "Web 制作会社",
+      "物流・運送",
+      "教育・スクール",
+      "ホテル・旅館",
+      "EC・通販",
+      "保険代理店",
+      "コールセンター"
+    ],
+    "intents": [
+      "できること",
+      "事例",
+      "費用",
+      "相場",
+      "期間",
+      "始め方",
+      "進め方",
+      "失敗例",
+      "注意点",
+      "比較",
+      "選び方",
+      "外注",
+      "内製",
+      "見積もり",
+      "無料で試す",
+      "おすすめ"
+    ],
+    "priority": [
+      "製造業",
+      "建設業",
+      "不動産",
+      "人材派遣・紹介",
+      "物流・運送"
+    ]
+  },
+  "main_offer": "AI エージェントとシステム開発（オーダーメイドの業務システム・業務の自動化）の受託と、それをまとめて任せられる CONFLUX 顧問パッケージ",
+  "main_category": "development",
+  "cta": {
+    "label": "自社で使えるか、相談する",
+    "url": "https://conflux-partners.jp/contact",
+    "note": "ご契約を前提としたご案内ではありません。何を頼むか決まっていなくても大丈夫です"
+  },
+  "channels": {
+    "youtube": "",
+    "video": "不要（いまは記事に集中）",
+    "facebook": "",
+    "instagram": "",
+    "threads": "",
+    "linkedin": "",
+    "x": "",
+    "admin_added": ""
+  },
+  "url_prefix": "/journal",
+  "content_dir": "content/journal",
+  "cta_title": "自社の業務で、何が自動化できるか相談しませんか",
+  "cta_desc": "いまの業務の流れをうかがい、AI エージェントやシステムで楽にできるところと、費用・期間の目安をお伝えします。全国オンラインで対応します。",
+  "category_mix": {
+    "development": 45,
+    "agent": 40,
+    "ai": 15
+  },
+  "gsc_owner": false,
+  "bing_consent": true,
+  "report_issuer": "client",
+  "rules": {
+    "monthly_cap": 30,
+    "review_before_publish": true,
+    "ng_words": [
+      "必ず",
+      "確実に",
+      "保証",
+      "No.1",
+      "最安",
+      "業界初",
+      "絶対",
+      "申請代行",
+      "採択保証",
+      "事業売却"
+    ],
+    "regulation": [
+      "景品表示法",
+      "著作権法",
+      "個人情報保護法",
+      "弁護士法（法律の個別判断は弁護士へ）",
+      "行政書士法（補助金は相談・助言・伴走支援の表現だけ）"
+    ]
+  },
+  "pages_dir": "content/journal-pages",
+  "cta_mid": {
+    "label": "顧問パッケージの内容と料金を見る",
+    "url": "https://conflux-partners.jp/package"
+  },
+  "onboarding": {
+    "ga4_installed": true,
+    "gsc_property": "URLプレフィックス",
+    "git_invited": true,
+    "keys_sent": "不要",
+    "gbp_status": "店舗が無い"
+  }
+}
