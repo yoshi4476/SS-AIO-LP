@@ -102,3 +102,8 @@ data/bing_stats/*
 !data/bing_stats/ai-lab.json
 !data/bing_stats/corporate.json
 !data/bing_stats/subsidy.json
+# 実利用者の表示速度（cwv_check.py の CrUX）。お客様の分は public に置かず、CI のキャッシュで月次へ渡す
+data/cwv_crux/*
+!data/cwv_crux/ai-lab.json
+!data/cwv_crux/corporate.json
+!data/cwv_crux/subsidy.json

@@ -39,6 +39,8 @@ TO_GITHUB = {
     "GBP_CLIENT_JSON", "GBP_TOKENS_JSON",
     # 表示速度の実測（cwv_check）。YOUTUBE_API_KEY のプロジェクトでは PageSpeed API が使えず、週次で測れなかった
     "PAGESPEED_API_KEY",
+    # 実利用者の表示速度（cwv_check の CrUX）。無ければ YOUTUBE_API_KEY で聞く（その鍵の API の制限に CrUX が要る）
+    "CRUX_API_KEY",
     # Bing Webmaster への URL・sitemap 送信（bing_webmaster）。無ければ送らない
     "BING_WEBMASTER_API_KEY",
     # AI検索の引用の実測（ai_cite_check）。鍵のあるAIだけに聞く

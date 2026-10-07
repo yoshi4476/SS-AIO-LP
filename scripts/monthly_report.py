@@ -2387,6 +2387,19 @@ def render(d, a):
             form_pages = (f'<div class="sheet"><p class="note">フォームの項目別の離脱を作れませんでした: '
                           f'{str(e)[:80].replace("<", "")}</p></div>')
 
+    # 実際の利用者の表示速度（週次の cwv_check.py が取る CrUX）。記録の無い社は節を出さない
+    crux_pages = ""
+    if not d["demo"]:
+        try:
+            import cwv_check as _cwv
+            _ch = _cwv.crux_html(SITE_ID)
+            if _ch:
+                crux_pages = ('<div class="sheet"><div class="sec"><span class="no">07</span>'
+                              f'<h2>実際の利用者の表示速度</h2><div class="gold"></div></div>{_ch}</div>')
+        except Exception as e:
+            crux_pages = (f'<div class="sheet"><p class="note">実際の利用者の表示速度を作れませんでした: '
+                          f'{str(e)[:80].replace("<", "")}</p></div>')
+
     # 来月つくるもの。盤面の空き・止まっている記事・食い合いから機械が作る。
     # 1本ずつ人が選ぶと同じマスに重なり、空いたマスが残る（実測で
     # クリニック21本に対し工務店のAIOは0本だった）
@@ -2959,6 +2972,8 @@ Googleの公式ガイドが効くものとして挙げているのも「独自�
 {compete_pages}
 
 {bing_pages}
+
+{crux_pages}
 
 <!-- ページ: 改善点の一覧と、その直し方 -->
 <div class="sheet">
