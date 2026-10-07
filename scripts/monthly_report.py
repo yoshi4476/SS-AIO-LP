@@ -2374,6 +2374,19 @@ def render(d, a):
             bing_pages = (f'<div class="sheet"><p class="note">Bing の成績を作れませんでした: '
                           f'{str(e)[:80].replace("<", "")}</p></div>')
 
+    # フォームのどの項目で離れたか（funnel.form_report_html）。直し方は候補を出すだけで、フォームは変えない。
+    # GA4 未接続の社と見本（--demo）は節を出さない
+    form_pages = ""
+    if not d["demo"] and not ga_na:
+        try:
+            import funnel as _fn
+            form_pages = ('<div class="sheet"><div class="sec"><span class="no">00</span>'
+                          '<h2>フォームのどの項目で離れたか</h2><div class="gold"></div></div>'
+                          f'{_fn.form_report_html(ga4_property(), ym, THROUGH)}</div>')
+        except Exception as e:
+            form_pages = (f'<div class="sheet"><p class="note">フォームの項目別の離脱を作れませんでした: '
+                          f'{str(e)[:80].replace("<", "")}</p></div>')
+
     # 来月つくるもの。盤面の空き・止まっている記事・食い合いから機械が作る。
     # 1本ずつ人が選ぶと同じマスに重なり、空いたマスが残る（実測で
     # クリニック21本に対し工務店のAIOは0本だった）
@@ -2871,6 +2884,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <tr><td>送信完了</td><td class="num">{(d.get("behavior") or {}).get("form_submit", 0)}</td><td>完了した数。開始との差が項目数の問題</td></tr>
 </table>
 </div>
+{form_pages}
 
 <!-- ページ: 実測から出た改修点 -->
 <div class="sheet">

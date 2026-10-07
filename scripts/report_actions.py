@@ -59,6 +59,7 @@ RUNNERS = {
 HUMAN = {"measure": "計測の権限・設定（サービスアカウントの付与）",
          "lp": "LPのCTA位置・文言（判断が要る）",
          "hub_external": "配信先サイトに業種ハブの仕組みが無い（テンプレート側の対応が要る）",
+         "form": "フォームの項目の見直し（候補から選ぶ。フォームは自動では変えない）",
          "finding": "導出そのものが動かなかった（実行ログを確認）"}
 LOW_STOCK = 40
 GATE_TIMEOUT = 20 * 60
@@ -137,6 +138,25 @@ def derive(site_ids):
             # サイトごとに繰り返すと、同じ10件が3回並んで本当の項目が埋もれる
         except Exception as e:
             add("finding", sid, f"現在地を診断できません: {str(e)[:60]}", "site_diagnosis を確認")
+
+        # フォームのどの項目で離れたか（先月分・funnel.form_plan）。入力開始が足りない月は判定前で載せない。
+        # 直すかは人が決める（運用者の指示）ので、RUNNERS には入れず候補だけを届ける
+        prop = _sites(sid).get(sid, {}).get("ga4_property_id")
+        if prop:
+            import funnel as FN
+            ym = FN.last_month()
+            try:
+                for p in FN.form_plan(prop, ym):
+                    for h in p["hot"]:
+                        share = f'・離脱の{h["share"] * 100:.0f}%' if h["share"] is not None else ""
+                        add("form", sid, f'[{p["type"]}] 「{h["label"]}」で離脱{h["n"]}件{share}'
+                            f'（{ym}・入力開始{p["start"]}件）', "候補: " + " / ".join(h["ideas"]))
+            except Exception as e:
+                if FN.dims_missing(e):
+                    add("measure", sid, "GA4 に form_type / last_field が未登録で、フォームの項目別の離脱を数えられない",
+                        HUMAN["measure"])
+                else:
+                    add("finding", sid, f"フォームの項目別の離脱を取れません: {str(e)[:60]}", "funnel.py --forms を確認")
 
         # 構成の整備は毎回（何も無ければ道具が何もしない）
         add("links", sid, "被リンクの少ない記事へ話題の合う記事から足す", "link_boost")
