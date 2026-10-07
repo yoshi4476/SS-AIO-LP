@@ -194,22 +194,40 @@ def _e(s):
     return _h.escape(s, quote=True)
 
 
-def _blocks(d, more):
+def _parts(d, more):
+    """区画ごとの HTML（使い方・わかること・向いている方・よくある質問・次に読む）"""
     steps = "".join(f"<li><b>{_e(a)}</b><span>{_e(b)}</span></li>" for a, b in d["steps"])
     learn = "".join(f"<div><dt>{_e(a)}</dt><dd>{_e(b)}</dd></div>" for a, b in d["learn"])
     who = "".join(f"<li>{_e(x)}</li>" for x in d["who"])
     faq = "".join(f"<details><summary>{_e(q)}</summary><p>{_e(a)}</p></details>" for q, a in d["faq"])
     links = "".join(f'<a href="{u}">{_e(t)}</a>' for u, t in more)
     src, alt = d["side"]
-    return (f'<div class="enrich">'
-            f'<div class="enrich-block"><span class="en">How to use</span><h2>使い方は3ステップ</h2><ol class="enrich-steps">{steps}</ol></div>'
-            f'<div class="enrich-block"><span class="en">Result</span><h2>結果でわかること</h2><div class="enrich-learn">'
-            f'<figure><img src="{src}" alt="{_e(alt)}のイメージ" width="1600" height="900" loading="lazy" decoding="async"></figure>'
-            f'<dl>{learn}</dl></div><p class="enrich-note">※ 写真はイメージです</p></div>'
-            f'<div class="enrich-block"><span class="en">For you</span><h2>こんな方に向いています</h2><ul class="enrich-who">{who}</ul></div>'
-            f'<div class="enrich-block enrich-faq"><span class="en">FAQ</span><h2>よくある質問</h2>{faq}</div>'
-            + (f'<div class="enrich-block"><span class="en">Next</span><h2>あわせて読む・使う</h2><div class="enrich-more">{links}</div></div>' if links else "")
-            + '</div>')
+    return {
+        "steps": f'<div class="enrich-block"><span class="en">How to use</span><h2>使い方は3ステップ</h2><ol class="enrich-steps">{steps}</ol></div>',
+        "learn": (f'<div class="enrich-block"><span class="en">Result</span><h2>結果でわかること</h2><div class="enrich-learn">'
+                  f'<figure><img src="{src}" alt="{_e(alt)}のイメージ" width="1600" height="900" loading="lazy" decoding="async"></figure>'
+                  f'<dl>{learn}</dl></div><p class="enrich-note">※ 写真はイメージです</p></div>'),
+        "who": f'<div class="enrich-block"><span class="en">For you</span><h2>こんな方に向いています</h2><ul class="enrich-who">{who}</ul></div>',
+        "faq": f'<div class="enrich-block enrich-faq"><span class="en">FAQ</span><h2>よくある質問</h2>{faq}</div>',
+        "more": (f'<div class="enrich-block"><span class="en">Next</span><h2>あわせて読む・使う</h2><div class="enrich-more">{links}</div></div>'
+                 if links else ""),
+    }
+
+
+def _blocks(d, more, only=("steps", "learn", "who", "faq", "more")):
+    p = _parts(d, more)
+    return '<div class="enrich">' + "".join(p[k] for k in only) + '</div>'
+
+
+SIDE = re.compile(r"<!-- contact-side -->.*?<!-- /contact-side -->", re.S)
+
+
+def _contact_side():
+    """問い合わせの右の欄（相談の流れ・よくある質問）。フォームだけが中央にあり、パソコンで右半分が空いていた（2026-10-08）"""
+    p = _parts(CONTACT, [])
+    return ('<!-- contact-side --><aside class="contact-side" aria-label="ご相談の流れとよくある質問">'
+            + p["steps"].replace("<h2>使い方は3ステップ</h2>", "<h2>ご相談の流れ</h2>").replace(">How to use<", ">Flow<")
+            + p["faq"] + '</aside><!-- /contact-side -->')
 
 
 def _put(s, block, before_rx):
@@ -276,7 +294,12 @@ def apply(site: Path):
     if p.is_file():
         s = p.read_text(encoding="utf-8")
         s0 = s
-        s = _put(s, _blocks(CONTACT, CONTACT["more"]).replace("<h2>使い方は3ステップ</h2>", "<h2>ご相談の流れ</h2>")
+        # 相談の流れとよくある質問はフォームの右の欄へ（印が無い古いページでは、従来どおり下にまとめて出す）
+        side = bool(SIDE.search(s))
+        if side:
+            s = SIDE.sub(lambda m: _contact_side(), s, count=1)
+        only = ("learn", "who", "more") if side else ("steps", "learn", "who", "faq", "more")
+        s = _put(s, _blocks(CONTACT, CONTACT["more"], only).replace("<h2>使い方は3ステップ</h2>", "<h2>ご相談の流れ</h2>")
                  .replace("<h2>結果でわかること</h2>", "<h2>ご相談でわかること</h2>")
                  .replace("<h2>あわせて読む・使う</h2>", "<h2>先に自分で確かめる</h2>"), r"<footer")
         if s != s0:
