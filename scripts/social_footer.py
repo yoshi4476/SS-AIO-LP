@@ -7,12 +7,14 @@
 
   python scripts/social_footer.py            # 何が変わるか
   python scripts/social_footer.py --apply    # 入れる
+  python scripts/social_footer.py --apply --subsidy <補助金サイトの作業コピー>
 
 対象:
-  AI集客ラボ  templates/article.html・scripts/build.py の雛形・site/**.html
-  補助金      .publish-work/subsidy/**.html（フッターが2種類あるので両方見る）
+  AI集客ラボ  templates/article.html・scripts/build.py の雛形・site/**.html（暗い足元。白の輪郭）
+  補助金      .publish-work/subsidy/**.html（フッターが2種類あるので両方見る。明るい足元なので灰色の輪郭・中央）
   コーポレート  src/components/Footer.tsx は React のため手で入れる（この道具では触らない）
 
+足元の色は社ごとに違う（SITE_CSS）。補助金サイトの各ページの CSS は、暗い足元用のものが入っていれば入れ替える。
 何度実行しても同じ結果（既に入っていれば何もしない）。
 """
 import argparse
@@ -52,6 +54,44 @@ CSS = """
 .social-links a[data-net="note"]:hover, .social-links a[data-net="note"]:focus-visible { background: #41c9b4; }
 """
 
+# 明るい面の足元（補助金サイトはアイボリー #f4f1e9）。暗い面用の白い輪郭のままだと地の色と 1.1:1 で見えず、
+# 中央揃えの足元で左端に寄っていた（2026-10-07 の点検）。社ごとに色を持ち、ほかの社の見た目は変えない
+CSS_LIGHT = """
+/* 外部プロフィール（フッター）。明るい面に置くので、灰色の輪郭で中央に並べ、触れると各サービスの色 */
+.social-links { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin: .9rem 0 0; padding: 0; }
+.social-links a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+  border: 1px solid #d8d2c2; border-radius: 50%; color: #5b6472; background: #fff;
+  text-decoration: none; transition: background-color .2s, border-color .2s, color .2s; }
+.social-links a span { font-size: .72rem; font-weight: 700; letter-spacing: .02em; }
+.social-links a:hover, .social-links a:focus-visible { color: #fff; border-color: transparent; }
+.social-links a[data-net="linkedin"]:hover, .social-links a[data-net="linkedin"]:focus-visible { background: #0a66c2; }
+.social-links a[data-net="x"]:hover, .social-links a[data-net="x"]:focus-visible { background: #000; }
+.social-links a[data-net="note"]:hover, .social-links a[data-net="note"]:focus-visible { background: #41c9b4; }
+"""
+SITE_CSS = {"subsidy": CSS_LIGHT}
+# 補助金サイトの各ページの head に入れた CSS（古いものは id が無い）。見出しのコメントで見分けて入れ替える
+STYLE_RX = re.compile(r'<style(?: id="social-css")?>\s*/\* 外部プロフィール（フッター）.*?</style>', re.S)
+
+
+def css_for(site):
+    """その社の足元に合う CSS（指定の無い社は暗い面用）"""
+    return SITE_CSS.get(site, CSS)
+
+
+def style_tag(site):
+    return f'<style id="social-css">{css_for(site)}</style>'
+
+
+def fix_style(text, site, nl="\n"):
+    """アイコンを置いたページの CSS を、その社の足元の色に揃える（暗い面用の古い CSS は入れ替える）。
+    アイコンの無いページは触らない。nl はそのページの改行（CRLF のページに LF を混ぜない）。何度当てても同じ結果"""
+    if f'<ul class="{MARK}"' not in text:
+        return text
+    want = style_tag(site).replace("\n", nl)
+    if STYLE_RX.search(text):
+        return STYLE_RX.sub(lambda _: want, text, count=1)
+    return text.replace("</head>", want + nl + "</head>", 1) if "</head>" in text else text
+
 # 置く場所。AI集客ラボは住所の段落の直後、補助金はページによってフッターが2種類ある
 AI_ANCHOR = r'<p class="addr">.*?</p>'
 SUB_ANCHORS = (r'<p>セブンセンシズ株式会社<br>.*?</p>',
@@ -73,7 +113,19 @@ def insert(text, anchor_rx):
     return text[: m.end()] + "\n      " + BLOCK + text[m.end():]
 
 
-def run(write):
+def subsidy_page(text):
+    """補助金サイトの1ページ: アイコンが無ければ足元に入れ、CSS を明るい足元の色に揃える（改行はそのページのまま）"""
+    nl = "\r\n" if "\r\n" in text else "\n"
+    u = text
+    for rx in SUB_ANCHORS:
+        u = insert(u, rx)
+        if u != text:
+            u = u.replace("\n      " + BLOCK, nl + "      " + BLOCK, 1) if nl != "\n" else u
+            break
+    return fix_style(u, "subsidy", nl)
+
+
+def run(write, subsidy=None):
     changed = []
     # ── AI集客ラボ（雛形・生成側・公開済みの固定ページ）
     for p in [ROOT / "templates" / "article.html", ROOT / "scripts" / "build.py"] + _walk(ROOT / "site"):
@@ -89,35 +141,30 @@ def run(write):
         if write:
             css.write_text(css.read_text(encoding="utf-8").rstrip("\n") + "\n" + CSS,
                            encoding="utf-8", newline="\n")
-    # ── 補助金（配信先の作業コピー。無ければ飛ばす）
-    sub = ROOT / ".publish-work" / "subsidy"
+    # ── 補助金（配信先の作業コピー。無ければ飛ばす）。外部CSSを持たないページがあるため、CSS は各ページの head に入れる
+    sub = Path(subsidy) if subsidy else ROOT / ".publish-work" / "subsidy"
     if sub.is_dir():
         for p in _walk(sub):
-            t = p.read_text(encoding="utf-8", errors="surrogateescape")
-            u = t
-            for rx in SUB_ANCHORS:
-                u = insert(u, rx)
-                if u != t:
-                    break
+            # 改行コードは元のまま（変換すると、アイコンと関係ない全行が差分になる）
+            t = p.read_bytes().decode("utf-8", "surrogateescape")
+            u = subsidy_page(t)
             if u == t:
                 continue
-            # 外部CSSを持たないページがあるため、各ページの head に入れる
-            if "</head>" in u:
-                u = u.replace("</head>", "<style>" + CSS + "</style>\n</head>", 1)
             changed.append(p)
             if write:
-                p.write_text(u, encoding="utf-8", errors="surrogateescape", newline="\n")
+                p.write_bytes(u.encode("utf-8", "surrogateescape"))
     return changed
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--subsidy", default="", help="補助金サイトの作業コピー（既定は .publish-work/subsidy）")
     a = ap.parse_args()
-    changed = run(a.apply)
+    changed = run(a.apply, a.subsidy or None)
     print(f"{'入れた' if a.apply else '入れる'}: {len(changed)}ファイル")
     for p in changed[:6]:
-        print("  ", p.relative_to(ROOT).as_posix())
+        print("  ", p.relative_to(ROOT).as_posix() if p.is_relative_to(ROOT) else p.as_posix())
     if len(changed) > 6:
         print(f"   …ほか{len(changed) - 6}")
     if not a.apply and changed:
