@@ -7,6 +7,17 @@
   "type": "external-html",
   "content_dir": "blog-system/content/posted",
   "images_dir": "images",
+  "diagram_colors": {
+    "ink": "#212B3D",
+    "accent": "#2A4A8A",
+    "soft": "#F4EAD3",
+    "line": "#E2DCCB",
+    "bg": "#FAF8F2",
+    "dot": "#EAE4D5",
+    "shadow": "#ECE7DB",
+    "muted": "#5B6472",
+    "_why": "記事の図解の色。サイトの記事の CSS（--text・--navy2・--gold-pale・--panel2・--muted）に合わせる。未設定のときは AI集客ラボの青で描かれ、記事の中で図だけが別のサイトの色だった（2026-10-08）"
+  },
   "url_prefix": "/blog",
   "aggregate_skip": ["industry"],
   "aggregate_skip_note": "業種ハブ（/industry/）は subsidy/pages.py が補助金サイトの見た目で作る。まとめのページの共通の口（aggregate_pages）からは作らない",

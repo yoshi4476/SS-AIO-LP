@@ -325,8 +325,10 @@ def test_diagram_credit_and_colors_follow_the_site():
         return
     finally:
         MD.site_for_slug, MD.save_png, MD.credit = real
+    # 図は論理の座標の SCALE 倍で書き出す（gates_history_h57）。題の印は論理の (46, 56) にある
+    s = getattr(MD, "SCALE", 1)
     check("描いた図: 題の印の色と地の色が CONFLUX の色・名義に当社名が無い",
-          [got["img"].getpixel((46, 56)), got["img"].getpixel((5, 5)), "セブンセンシズ" in got["credit"]],
+          [got["img"].getpixel((46 * s, 56 * s)), got["img"].getpixel((5, 5)), "セブンセンシズ" in got["credit"]],
           [(0xC2, 0x41, 0x0C), (0xF4, 0xF4, 0xF1), False])
 
 

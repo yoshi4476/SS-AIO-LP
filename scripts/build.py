@@ -974,6 +974,15 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     for src in sorted(set(re.findall(r'<img src="(/images/[^"]+)"', content))):
         if not (SITE / src.lstrip("/")).exists():
             print(f"WARN: 本文画像が存在しない: {meta['slug']} → {src}")
+    # 図解の宣言（描かれなかった図・型ごとの項目数・bars の数字が本文に無い・新しい記事の型の重なりと置き忘れ）。
+    # 描く側（make_diagram）と同じ判定を使う。以前は flow の項目数だけを見ていて、
+    # 他の型の上限や描かれなかった図は素通りした（flow の6個目以降が黙って切られた不具合の続き）
+    import make_diagram as _MD
+    for _p in _MD.article_problems(meta, body, SITE, meta["slug"]):
+        if f"図解: {_p}" not in QUALITY_ISSUES.get(meta["slug"], []):
+            QUALITY_ISSUES.setdefault(meta["slug"], []).append(f"図解: {_p}")
+            _hint = f"（python scripts/make_images.py {meta['slug']}）" if _p.startswith("画像がありません") else ""
+            print(f"WARN: 図解: {meta['slug']} → {_p}{_hint}")
 
     eyecatch = ""
     if meta.get("eyecatch"):
@@ -1121,14 +1130,8 @@ def quality_checks(all_metas):
     import difflib
     warns = []
     for m in all_metas:
-        # 図解のflow型は描画が5項目までで、6個目以降は黙って切り捨てられる。
-        # 本文やタイトルが「6ステップ」と言っているのに図は5つ、というずれが実際に起きた
-        for dg in (m.get("diagrams") or []):
-            if isinstance(dg, dict) and (dg.get("type") or "flow") == "flow":
-                items = dg.get("items") or []
-                if len(items) > 5:
-                    warns.append(f"図解の項目が多すぎ: {m['slug']} の「{dg.get('title', '')}」は"
-                                 f"{len(items)}項目（flow型は5項目まで。6個目以降は画像に出ない）")
+        # 図解の項目数（flow の6個目以降が黙って切られた件）は、全部の型について build_article が
+        # make_diagram.article_problems で見る（公開前の記事は止まる）。ここで二重に数えない
         tl = len(m["title"])
         if not 15 <= tl <= 45:
             warns.append(f"タイトル字数NG: {m['slug']} = {tl}字（基準15〜45字）")

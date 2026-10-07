@@ -129,13 +129,14 @@
    "label": "本文の画像（アイキャッチ・図解）",
    "entry": [
     "scripts/make_images.py",
+    "scripts/make_diagram.py",
     "scripts/publish.py"
    ],
    "cells": {
     "self-static": {
      "status": "ok",
      "evidence": "scripts/build.py:971",
-     "note": "生成漏れは build.py が検出",
+     "note": "生成漏れ・型ごとの項目数・bars の数字が本文に無い図は、build.py が make_diagram.article_problems で検出して公開前の記事を止める",
      "anchor": "# 画像実在チェック（生成漏れ・パスtypoの検出。生成: python scripts/make_images.py <slug>）"
     },
     "external-md": {

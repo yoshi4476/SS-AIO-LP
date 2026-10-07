@@ -334,6 +334,15 @@ def main():
 
     show_brief(cfg["id"])
 
+    # 図解の型の選び方と、このサイトの直近の組み合わせ。出さないと毎回 flow・list・vs の3枚に揃った
+    # （2026-10-08 の点検。score 90以上の409本のうち291本が同じ組み合わせ）
+    try:
+        import make_diagram
+        print()
+        print("\n".join(make_diagram.brief(cfg["id"])))
+    except Exception as e:   # 図解の案内で案内全体を止めない
+        print(f"\n（図解の案内を出せませんでした: {e}）")
+
     print("\n■ 公開の流れ")
     if cfg["type"] == "self-static":
         print("  articles/<slug>.md に保存 → python scripts/publish_flow.py "

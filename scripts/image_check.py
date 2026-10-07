@@ -8,11 +8,15 @@ make_diagram / make_eyecatch の収め方（縮小の下限・折り返し）を
 
 見るもの:
   1. はみ出し … 下限の文字サイズでも枠に収まらない題・項目。flow 型は折り返した行が
-     番号の丸や箱の下端にかかるもの。項目数が型の上限を超えて黙って切られるもの
+     番号の丸や箱の下端にかかるもの。項目数が型の上限を超えて黙って切られるもの。
+     新しい型（steps・matrix・cycle・funnel・bars・pyramid・tree）は描く関数そのものを
+     保存せずに走らせて測る（描く側は収まらなければ止まるので、ここで先に知らせる）
   2. list 型の「|」 … list は段を分けない。原稿の意図（ラベル|説明）と絵がずれる
   3. 英語だけの文字列 … 画像に英語を入れない決まり（CLAUDE.md 画像ルール）。
      AI/SEO などの略語と製品名は除く
   4. 画像ファイルの欠け … フロントマターの eyecatch / diagrams にあるのに無いもの
+  5. bars の数字 … 本文・表に同じ値で無い数字（描く側は描かずに止める）
+  6. 新しい記事（make_diagram.DIAGRAM_RULES_FROM 以降）… 同じ型の重なり・宣言した図の置き忘れ
 
     python scripts/image_check.py              # 直近7日に描いた・書いた記事
     python scripts/image_check.py --days 30
@@ -63,7 +67,8 @@ SLACK_PX = 4             # 文字の高さはフォントサイズより少し�
 
 
 def _draw():
-    return ImageDraw.Draw(Image.new("RGB", (8, 8)))
+    """描く側と同じ倍率で文字の幅を測る下地（1倍で測ると、描いた幅と少しずれる）"""
+    return MD.Pen()
 
 
 def frontmatter(path):
@@ -101,8 +106,9 @@ def _too_wide(d, text, width, minimum):
     return d.textlength(text, font=MD.font(minimum)) > width
 
 
-def diagram_problems(dg, d=None):
-    """図解1枚の宣言から、崩れの原因を [文] で返す。描いたときと同じ計算で測る"""
+def diagram_problems(dg, d=None, body=None):
+    """図解1枚の宣言から、崩れの原因を [文] で返す。描いたときと同じ計算で測る。
+    body（記事の本文）があれば bars の数字も本文と突き合わせる"""
     d = d or _draw()
     out = []
     name = dg.get("name", "?")
@@ -110,6 +116,15 @@ def diagram_problems(dg, d=None):
     title = str(dg.get("title", ""))
     items = [str(x) for x in (dg.get("items") or [])]
     W = MD.W
+
+    if dtype in MD.TYPES and dtype not in MD.OLD_TYPES:
+        # 新しい型は、描く関数を保存せずに走らせる（宣言の誤り・本文に無い数字・収まらない文字）
+        out += MD.render("zz-image-check", dg, body=body, save=False)
+        for text in MD.all_texts(dg):
+            bad = english_only(text)
+            if bad:
+                out.append(f"{name}: 英語だけの文字列があります（{'・'.join(bad)}）… {text[:30]}")
+        return out
 
     if _too_wide(d, title, W - 68 - 20, 20):
         out.append(f"{name}: 題が長すぎて枠の端に届くか、はみ出します（{len(title)}字）")
@@ -130,7 +145,7 @@ def diagram_problems(dg, d=None):
         for it in items[:5]:
             lines, tf = MD.flow_lines(d, it, bw - 28)
             k = len(lines)
-            lh = 38 if k <= 2 else min(38, int(tf.size * 1.45))
+            lh = MD.flow_lh(lines, tf)
             half = (k - 1) * lh / 2 + tf.size / 2
             if 118 - half < FLOW_BOX_TOP - SLACK_PX or 118 + half > FLOW_BOX_H + SLACK_PX:
                 out.append(f"{name}: 項目が{k}行に折り返され、箱からはみ出します … {it[:30]}")
@@ -148,7 +163,7 @@ def diagram_problems(dg, d=None):
                 if _too_wide(d, row, cw - 64 - EDGE_PX, 16):
                     out.append(f"{name}: 行が長すぎて枠の端に届くか、はみ出します … {row[:30]}")
     else:
-        out.append(f"{name}: 未対応の型 {dtype}（flow / list / vs）")
+        out.append(f"{name}: 未対応の型 {dtype}（{' / '.join(MD.TYPES)}）")
 
     for text in [title] + items:
         bad = english_only(text)
@@ -158,17 +173,20 @@ def diagram_problems(dg, d=None):
 
 
 def eyecatch_problems(title, d=None):
-    d = d or _draw()
+    # アイキャッチは等倍で描く（記事の頭の最大の画像なので重くしない）。測るのも等倍の下地で
+    d = ImageDraw.Draw(Image.new("RGB", (8, 8)))
     lines, tf = ME.wrap_title(d, str(title), ME.W - 160)
     if any(d.textlength(x, font=tf) > ME.W - 80 - EDGE_PX for x in lines):
         return [f"eyecatch: 題が最小の文字でも2行に収まりません（{len(str(title))}字）"]
     return []
 
 
-def article_problems(meta, slug, site_root=SITE):
+def article_problems(meta, slug, site_root=SITE, body=None):
     """1記事の画像の崩れ・欠けを返す。eyecatch は自前で描いた .png だけ測る（写真は測れない）"""
     d = _draw()
     out = []
+    if body is None:
+        body = MD.article_body(slug)
     eye = meta.get("eyecatch")
     if eye:
         if not (site_root / str(eye).lstrip("/")).exists():
@@ -182,7 +200,10 @@ def article_problems(meta, slug, site_root=SITE):
         f = site_root / "images" / slug / f"{dg.get('name', '')}.png"
         if not f.exists():
             out.append(f"画像がありません: /images/{slug}/{dg.get('name')}.png")
-        out += diagram_problems(dg, d)
+        out += diagram_problems(dg, d, body=body)
+    # 新しい記事だけの決まり（同じ型の重なり・宣言した図の置き忘れ）。描く側・ビルドと同じ判定を使う
+    out += [p for p in MD.article_problems(meta, body, site_root, slug)
+            if p.startswith(("同じ型の図", "宣言した図を本文に"))]
     return out
 
 

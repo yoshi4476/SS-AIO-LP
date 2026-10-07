@@ -7,6 +7,17 @@
   "type": "nextjs-json",
   "content_dir": "src/content/blog",
   "images_dir": "public/images/blog",
+  "diagram_colors": {
+    "ink": "#0D1420",
+    "accent": "#1C3F7C",
+    "soft": "#E6ECF5",
+    "line": "#D3DAE4",
+    "bg": "#F1F4F8",
+    "dot": "#DEE3EA",
+    "shadow": "#E2E7EE",
+    "muted": "#5A6678",
+    "_why": "記事の図解の色。サイトの CSS（src/app/globals.css の --color-ink・--color-pulse・--color-mist・--color-slate）に合わせる。未設定のときは AI集客ラボの青で描かれ、記事の中で図だけが別のサイトの色だった（2026-10-08）"
+  },
   "html_parts": {
     "definition-box": "def-box",
     "caution-box": "note-box",
