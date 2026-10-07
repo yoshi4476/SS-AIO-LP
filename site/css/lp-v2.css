@@ -106,14 +106,14 @@
 }
 .lx-console-head { display: flex; justify-content: space-between; align-items: baseline; gap: .6rem; margin-bottom: .8rem; }
 .lx-console-head b { font-size: .95rem; letter-spacing: .04em; }
-.lx-console-head small { font-size: .74rem; color: rgba(255, 255, 255, .6); }
+.lx-console-head small { font-size: .75rem; color: rgba(255, 255, 255, .75); }
 .lx-group { margin: 0 0 .7rem; }
 .lx-group:last-child { margin-bottom: 0; }
 .lx-group h3 {
   margin: 0 0 .35rem; font-size: .76rem; font-weight: 700; letter-spacing: .12em;
   color: #8fb7ff; display: flex; justify-content: space-between;
 }
-.lx-group h3 span { font-family: var(--lx-num); font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, .7); letter-spacing: 0; }
+.lx-group h3 span { font-family: var(--lx-num); font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, .78); letter-spacing: 0; }
 .lx-group ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .28rem; }
 .lx-item {
   display: grid; grid-template-columns: 1.3rem 1fr auto; align-items: center; gap: .5rem;
@@ -126,7 +126,8 @@
   border: 1.5px solid rgba(255, 255, 255, .35);
   display: inline-grid; place-items: center; font-size: .7rem; font-weight: 900;
 }
-.lx-item .pt { font-family: var(--lx-num); font-variant-numeric: tabular-nums; font-size: .74rem; color: rgba(255, 255, 255, .5); }
+/* 14項目の点数。白50%では紺の写真の上で 2.55:1 しかなかった */
+.lx-item .pt { font-family: var(--lx-num); font-variant-numeric: tabular-nums; font-size: .75rem; color: rgba(255, 255, 255, .75); }
 .lx-item.is-scan { background: rgba(143, 183, 255, .12); }
 .lx-item.is-scan .mk { border-color: #8fb7ff; border-top-color: transparent; animation: lx-spin .8s linear infinite; }
 .lx-item.is-ok .mk { background: var(--lx-ok); border-color: var(--lx-ok); }
@@ -134,7 +135,7 @@
 .lx-item.is-ng { background: rgba(194, 54, 43, .22); color: #fff; }
 .lx-item.is-ng .mk { background: var(--lx-ng); border-color: var(--lx-ng); }
 .lx-item.is-ng .mk::before { content: "!"; color: #fff; }
-.lx-console-foot { margin: .8rem 0 0; font-size: .74rem; color: rgba(255, 255, 255, .55); }
+.lx-console-foot { margin: .8rem 0 0; font-size: .8125rem; color: rgba(255, 255, 255, .75); }
 @keyframes lx-spin { to { transform: rotate(360deg); } }
 
 /* ---------- 実績の帯（数字は台帳の検証済みのものだけ） ---------- */
@@ -151,7 +152,7 @@
 .lx-proof .s { font-size: .72rem; color: var(--lx-mute); }
 
 /* ---------- 診断結果 ---------- */
-.lx-result { background: var(--lx-paper); padding: clamp(2rem, 5vw, 3.6rem) 0; scroll-margin-top: 80px; }
+.lx-result { background: var(--lx-paper); padding: clamp(2rem, 5vw, 3.6rem) 0; }
 .lx-result[hidden] { display: none !important; }
 .lx-res-top {
   display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); align-items: center;
@@ -261,6 +262,8 @@
   background: linear-gradient(90deg, rgba(8, 26, 60, .66) 0%, rgba(8, 26, 60, .32) 55%, rgba(8, 26, 60, .14) 100%), linear-gradient(180deg, transparent 62%, rgba(8, 26, 60, .5) 100%); }
 .lx-hero::before { z-index: 1; }
 .lx-hero > .lx-wrap { z-index: 2; }
+/* 入力欄の外に置いた案内（よくある質問へ）も覆いの上に出す。覆いの下になり、白い文字が沈んでいた */
+.lx-hero > p { position: relative; z-index: 2; padding: 0 clamp(1rem, 3vw, 2rem); }
 @media (prefers-reduced-motion: reduce) { .lx-hero-video { display: none; } }
 
 /* トップのヒーロー（2026-10-03）: 入力欄と14項目の計測盤を、最初の画面にすべて収める。

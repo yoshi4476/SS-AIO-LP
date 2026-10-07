@@ -41,6 +41,9 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* 行き先（/lp/#service・目次の見出しなど）が固定のヘッダーの下に潜らないように */
+html { scroll-padding-top: 84px; }
+@media (max-width: 1260px) { html { scroll-padding-top: 68px; } }
 ::selection { background: var(--sky-2); color: var(--navy); }
 ::-webkit-scrollbar { width: 12px; }
 ::-webkit-scrollbar-track { background: var(--bg-alt); }
@@ -764,7 +767,6 @@ html.js .section-head.reveal.in h2::after {
   animation: gradSlide 3s 1.2s linear infinite;
 }
 @keyframes gradSlide { to { background-position: -200% 0; } }
-body.lp-doc .section-head.reveal h2::after { background: linear-gradient(90deg, var(--gold), #e8c766, var(--gold)); background-size: 200% 100%; }
 
 /* ---------- 回転コニック枠: ホバーで光が一周する ---------- */
 body:not(.lp-doc) .cat-card, .term-tile, body:not(.lp-doc) .pillar { position: relative; }
@@ -821,7 +823,6 @@ body:not(.lp-doc) .pillar:hover::before {
   opacity: 0;
   transition: opacity .4s;
 }
-body.lp-doc .cursor-glow { background: radial-gradient(circle, rgba(183,146,46,.09), transparent 65%); }
 
 /* ---------- 数値のポップ（count-up完了時） ---------- */
 @keyframes numPop { 30% { transform: scale(1.12); } }
@@ -1817,7 +1818,7 @@ section.tool-hero ~ section .quiz-panel { margin-left: 0; }
 .faq-groups a { display: inline-flex; align-items: center; gap: .45em; min-height: 40px; padding: .35em 1em; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-weight: 700; font-size: .88rem; text-decoration: none; color: var(--blue-deep); }
 .faq-groups a span { font-size: .74rem; color: var(--muted); font-weight: 600; }
 .faq-groups a:hover { border-color: var(--blue); }
-.faq-group { margin: 2.2rem 0 .8rem; font-size: 1.15rem; padding-left: .7rem; border-left: 4px solid var(--blue); scroll-margin-top: 96px; }
+.faq-group { margin: 2.2rem 0 .8rem; font-size: 1.15rem; padding-left: .7rem; border-left: 4px solid var(--blue); scroll-margin-top: 12px; }
 
 /* 記事末の調査の内訳（質問の種類ごと・2026-10-03） */
 .rb-bars { list-style: none; margin: .8rem 0 .6rem; padding: 0; display: grid; gap: .4rem; }
@@ -1832,7 +1833,7 @@ section.tool-hero ~ section .quiz-panel { margin-left: 0; }
 /* 用語集を1ページに（2026-10-03） */
 .gl-toc { display: flex; flex-wrap: wrap; gap: .35rem .5rem; margin: 1.2rem 0 1.6rem; padding: 1rem; background: var(--bg-alt); border-radius: 14px; }
 .gl-toc a { font-size: .82rem; padding: .25em .7em; border-radius: 999px; background: #fff; border: 1px solid var(--line); text-decoration: none; color: var(--blue-deep); }
-.gl-term { padding: 1.4rem 0; border-top: 1px solid var(--line); scroll-margin-top: 96px; }
+.gl-term { padding: 1.4rem 0; border-top: 1px solid var(--line); scroll-margin-top: 12px; }
 .gl-term h3 { margin: 0 0 .7rem; font-size: 1.12rem; }
 .gl-term .definition-box { margin: 0 0 .5rem; }
 .gl-rel { font-size: .84rem; color: var(--muted); margin: .4rem 0 0; }
