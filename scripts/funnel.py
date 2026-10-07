@@ -10,7 +10,7 @@
   1. 記事を見た      page_view（記事ページ）
   2. CTAを押した     cta_click / diagnosis_click
   3. フォームを開いた  form_start
-  4. 送信した        form_submit / contact_intent
+  4. 送信した        lead_capture / generate_lead（lead_reconcile.is_lead と同じ数え方）
 
 段階は入れ子になっていないため、通過率が100%を超えることがある。
 診断結果のメール送信のように、フォームを開かずに送信まで至る経路があるため。
@@ -26,15 +26,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-# 1回の送信で複数のイベントが飛ぶ。site.js は form_submit と lead_capture の
-# 両方を発火させるため、両方を足すと同じ送信を2回数える。
-# 実測で「送信10件」と出ていたが、中身は form_submit 4 + lead_capture 6 で、
-# 実際の送信は4件だった。数える対象は form_submit 系だけにする。
+# 1回の送信で複数のイベントが飛ぶので、足さずに1つの数え方にそろえる（lead_reconcile.is_lead）。
+# form_submit は数えない: ページを移るフォームでは site.js と GA4 の拡張計測が1回ずつ出し、問い合わせ1回が
+# 2件になっていた（AI集客ラボ /contact/ の 9/4・9/7・10/7。2026-10-07 判明）。診断のURL入力でも出る。
+# 送れたときに1回だけ出る lead_capture（コーポレートは generate_lead も同時に出る）を数える。
 STEPS = [
     ("記事を見た", ("page_view",)),
     ("CTAを押した", ("cta_click", "diagnosis_click", "contact_intent")),
     ("フォームを開いた", ("form_start",)),
-    ("送信した", ("form_submit",)),   # 実際の数は lead_reconcile.is_lead で数える（main）。これは取れないときの代わり。同時に飛ぶ lead_capture は足さない
+    # 実際の数は lead_reconcile.ga4_by_day で数える（main）。これは取れないときの代わりで、足さずに多い方を取る
+    ("送信した", ("lead_capture", "generate_lead")),
 ]
 
 # 送信の中身。問い合わせと購読を同じ箱に入れると、商談につながる数が分からない。
@@ -265,8 +266,8 @@ def form_totals(prop, start, end):
 def summarize_forms(rows):
     """月 → フォームの種類 → 入力開始・離脱・送信・離脱した項目。
 
-    送信は問い合わせの数え方（lead_reconcile.is_lead）に合わせ、同じ日・同じ種類の
-    form_submit / lead_capture / generate_lead は足さずに多い方を取る（同じ送信で両方飛ぶ）。
+    送信は問い合わせの数え方（lead_reconcile.is_lead）に合わせ、lead_capture / generate_lead だけを数え
+    （form_submit は拡張計測と二重に出るので数えない）、同じ日・同じ種類のものは足さずに多い方を取る。
     種類の付かない送信は種類別には入れず、月の合計（sent_total = lead_reconcile.count_rows）にだけ入る"""
     import collections
     import lead_reconcile as LR
@@ -501,7 +502,8 @@ def main():
         print(f"\n■ {c.get('name', site)}（直近{a.days}日）")
         prev = None
         # 「送信した」は問い合わせの数え方を1つにそろえる（lead_reconcile.is_lead）。以前はサイト全体の form_submit を
-        # 足しており、30秒診断のURL入力まで送信に数え、コーポレートは記録の無い名前を見て0と出していた（2026-10-04）
+        # 足しており、30秒診断のURL入力まで送信に数え、コーポレートは記録の無い名前を見て0と出していた（2026-10-04）。
+        # その後も /contact/ の form_submit を数え、拡張計測の分と合わせて問い合わせ1回を2件にしていた（2026-10-07）
         import lead_reconcile as LR
         from datetime import date, timedelta
         try:
@@ -510,8 +512,9 @@ def main():
             sent = None
         for label, names in STEPS:
             n = sum(ev.get(x, 0) for x in names)
-            if label == "送信した" and sent is not None:
-                n = sent
+            if label == "送信した":
+                # 取れないときの代わりも足さない（コーポレートは同じ送信で lead_capture と generate_lead が出る）
+                n = sent if sent is not None else max(ev.get(x, 0) for x in names)
             if prev is None:
                 rate = ""
             elif prev == 0:

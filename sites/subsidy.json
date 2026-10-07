@@ -161,8 +161,8 @@
     "threads": "",
     "linkedin": ""
   },
-  "lead_hub": false,
-  "_comment_lead_hub": "問い合わせは自前のGAS（form-endpoint.gs）の台帳に入る。管制塔の「問い合わせ」とは突き合わせない（lead_reconcile）",
+  "lead_hub": true,
+  "_comment_lead_hub": "問い合わせは管制塔（contact.hub.gs）の「問い合わせ」に入る（2026-08-21 に受付を統合。週次の疎通確認も管制塔に届く）。lead_reconcile・data_sanity が GA4 と突き合わせる。以前は false で突き合わせから外れていた（2026-10-07 判明）",
   "facts_allow": [
     "subsidy-vendor",
     "founded",

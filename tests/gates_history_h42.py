@@ -5,7 +5,7 @@ GA4 には触れず、偽の行で確かめる:
 
   - 入力開始が30件未満の月は「判定前」で、項目を挙げない（候補も出さない）
   - フォームの種類 × 最後に触った項目で数える。種類の無い form_start（GA4 の自動計測・記事の入力欄）は除く
-  - 送信は lead_reconcile.is_lead の数え方（form_submit と lead_capture を足さない・/contact 以外の form_submit は数えない）
+  - 送信は lead_reconcile.is_lead の数え方（lead_capture / generate_lead を足さずに数え、form_submit は数えない。gates_history_h52）
   - 割合は母数10以上のときだけ
   - 提案は月次レポートの節と、report_actions の「人の手が要るもの」に出る（RUNNERS には入れない）
   - フォーム（site/ の HTML と site.js）を書き換えない

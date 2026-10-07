@@ -1280,6 +1280,9 @@ def test_submissions_are_not_double_counted():
     site.js は1回の送信で form_submit と lead_capture の両方を発火させる。
     両方を足していたため「送信10件」と出ていたが、実際は4件だった
     （form_submit 4 + lead_capture 6）。転換率を2倍以上に見せてしまう。
+    その後 form_submit だけを数えたが、ページを移るフォームでは GA4 の拡張計測も form_submit を出し、
+    問い合わせ1回が2件になっていた（2026-10-07）。数えるのは送れたときに1回だけ出る lead_capture
+    （コーポレートは同時に generate_lead も出るので足さない）。詳しくは gates_history_h52
 
     問い合わせと購読も分ける。同じ箱に入れると、商談につながる数が分からない。
     """
@@ -1287,8 +1290,8 @@ def test_submissions_are_not_double_counted():
     import funnel
     print(chr(10) + "■ 送信数の数え方")
     names = dict(funnel.STEPS)["送信した"]
-    check("lead_capture を送信に数えない", "lead_capture" in names, False)
-    check("form_submit は数える", "form_submit" in names, True)
+    check("送信は lead_capture で数える", "lead_capture" in names, True)
+    check("form_submit は数えない（拡張計測と二重に出る）", "form_submit" in names, False)
     # 同じ送信で飛ぶイベントを2つ以上足していないか
     fired_together = {"form_submit", "lead_capture", "lead_newsletter"}
     check("同時に飛ぶイベントを重ねて数えない",
@@ -3459,9 +3462,10 @@ def test_detectors_do_not_misread_neighbors():
     check("問い合わせ照合: トップの診断入力は数えない", LR.count_rows([("20260928", "form_submit", "/", 1)]), {})
     check("問い合わせ照合: 記事内の診断入力は数えない",
           LR.count_rows([("20260930", "form_submit", "/ai-marketing/x/", 1)]), {})
-    check("問い合わせ照合: 問い合わせページの送信は数え、同時に出る印は足さない",
+    # form_submit 2 は site.js と GA4 の拡張計測が1回ずつ出したもの。問い合わせは1件（2026-10-07。gates_history_h52）
+    check("問い合わせ照合: 問い合わせページの送信は lead_capture で1件と数え、form_submit は足さない",
           LR.count_rows([("20260904", "form_submit", "/contact/", 2), ("20260904", "lead_capture", "/contact/", 1)]),
-          {"2026-09-04": 2})
+          {"2026-09-04": 1})
     import live_check as LC_
     page = ('<form class="lx-form" action="/lp/" method="get"><input name="url"></form>'
             '<form class="form-panel" action="/api/lead" method="post"></form>')
