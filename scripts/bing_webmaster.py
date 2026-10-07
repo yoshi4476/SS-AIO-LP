@@ -694,13 +694,15 @@ def report_html(sid, ym, through=None, google=None):
         tr = "".join(f'<tr><td>{H.escape(r["key"])}</td><td class="num">{r["imp"]:,}</td>'
                      f'<td class="num">{r["clicks"]:,}</td>'
                      f'<td class="num">{r["pos"] if r["pos"] is not None else "—"}</td></tr>' for r in rows)
+        # 語の表を足し算して日別の合計と食い違うと読まれやすいので、表の直前に赤字で置く
         out.append('<h3>Bing の主な検索語（表示回数順）</h3>'
+                   '<p class="note" style="color:#c62828;font-weight:700;font-size:9.5pt">'
+                   '※ 検索語は上位の語だけが返るため、語の合計は上の日別の合計より少なくなります。</p>'
                    '<table><tr><th>検索語</th><th>表示回数</th><th>クリック</th><th>平均順位</th></tr>' + tr + '</table>')
     else:
         out.append('<p class="note">この月に始まる週の検索語は、まだ返っていません。</p>')
     out.append('<p class="note">Bing の表示・クリックは、ウェブ・チャット（Copilot）・ニュース・画像・動画などの面の合計です'
-               '（2023年3月24日以降の Bing の仕様）。検索語は週ごと（週の始まりがこの月の週）で上位の語だけが返るため、'
-               '語の合計は日別の合計より少なくなります。'
+               '（2023年3月24日以降の Bing の仕様）。検索語は週ごとで、週の始まりがこの月の週を数えています。'
                f'表示が{MIN_N}回に満たないときはクリック率を出さず、回数だけを示します。</p>')
     return "\n".join(out)
 
