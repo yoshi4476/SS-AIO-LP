@@ -4,6 +4,13 @@
    見出し: Zen Kaku Gothic New / EN・数字: Outfit / 本文: Noto Sans JP
    ============================================================ */
 
+/* Windows の本文を細く薄くしない（2026-10-08）。「Yu Gothic」の既定は細い Regular で、
+   文字の指定が Hiragino の次に Yu Gothic だったため、Windows では本文が細く薄く出ていた。
+   端末に入っている Medium / Bold を名前で呼ぶだけで、ファイルは読み込まない（速度の方針のまま）。
+   Medium の無い古い Windows では Regular に落ちる（太字の面だけが当たり、本文が太字になるのを防ぐ） */
+@font-face { font-family: "YuGothicM"; src: local("Yu Gothic Medium"), local("YuGothic-Medium"), local("Yu Gothic Regular"), local("YuGothic-Regular"); }
+@font-face { font-family: "YuGothicM"; src: local("Yu Gothic Bold"), local("YuGothic-Bold"); font-weight: 700; }
+
 :root {
   --navy: #0b2447;
   --navy-deep: #071a38;
@@ -25,8 +32,8 @@
   --max-article: 760px;
   --max-wide: 1760px;
   --gutter: clamp(1.25rem, 5vw, 6.5rem);
-  --head: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
-  --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
+  --head: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
+  --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
   --en: "Outfit", "Segoe UI", sans-serif;
   --ease-out: cubic-bezier(.19, 1, .22, 1);
   --shadow-sm: 0 1px 2px rgba(11,36,71,.05), 0 4px 12px -4px rgba(11,36,71,.06);
@@ -235,10 +242,14 @@ html.js .rise-5 { animation-delay: .6s; }
 
 /* ---------- ボタン ---------- */
 .btn {
+  /* <button class="btn"> にもリンクのボタンと同じ見た目を。ブラウザ既定の 2px の黒枠と 13.33px の文字が出ていた */
+  border: 0; font: inherit;
   display: inline-flex; align-items: center; justify-content: center; gap: .6em;
   text-decoration: none; font-weight: 700; padding: 1em 2.3em; border-radius: 12px;
   transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out), background .2s;
 }
+/* 入力欄と横に並ぶボタンは、入力欄と同じ高さにそろえる */
+button.btn { line-height: 1.5; cursor: pointer; }
 .btn .arw { transition: transform .25s var(--ease-out); }
 .btn:hover .arw { transform: translateX(5px); }
 .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 10px 28px -10px rgba(37,99,235,.65); }
@@ -319,10 +330,10 @@ html.js .rise-5 { animation-delay: .6s; }
 .post-list .thumb { display: block; aspect-ratio: 16 / 9; overflow: hidden; }
 .post-list .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease-out); }
 .post-list li:hover .thumb img { transform: scale(1.04); }
-.post-list time { font-family: var(--en); font-size: .74rem; color: var(--muted); padding: 1rem 1.3rem 0; }
+.post-list time { font-family: var(--en); font-size: .8125rem; color: var(--muted); padding: 1rem 1.3rem 0; }
 .post-list h3 { font-size: .98rem; font-weight: 700; margin: .3em 0 0; padding: 0 1.3rem 1.2rem; line-height: 1.7; transition: color .2s; }
 .post-list a:hover h3 { color: var(--blue); }
-.post-list .tag { display: inline-block; font-size: .64rem; font-weight: 700; margin-left: .7em; padding: .2em .8em; border-radius: 999px; color: var(--cat-color, var(--blue)); background: color-mix(in srgb, var(--cat-color, var(--blue)) 10%, #fff); border: 1px solid color-mix(in srgb, var(--cat-color, var(--blue)) 30%, #fff); vertical-align: middle; }
+.post-list .tag { display: inline-block; font-size: .75rem; font-weight: 700; margin-left: .7em; padding: .2em .8em; border-radius: 999px; color: color-mix(in srgb, var(--cat-color, var(--blue)) 70%, #000); background: color-mix(in srgb, var(--cat-color, var(--blue)) 10%, #fff); border: 1px solid color-mix(in srgb, var(--cat-color, var(--blue)) 30%, #fff); vertical-align: middle; }
 .empty-note { color: var(--muted); font-size: .88rem; border: 1.5px dashed var(--line); border-radius: var(--radius); padding: 1.4rem; background: var(--bg-alt); }
 
 /* ============================================================
@@ -336,7 +347,7 @@ main.article { max-width: 1360px; margin: 0 auto; padding: 3rem var(--gutter) 4r
 .side-cta { background: linear-gradient(150deg, var(--navy-deep), var(--navy) 60%, #10387a); color: #fff; border-radius: var(--radius); padding: 1.5rem 1.4rem; text-align: center; }
 .side-cta .t { font-family: var(--head); font-weight: 900; font-size: 1rem; margin-bottom: .9rem; }
 .side-cta .btn { width: 100%; padding: .85em 1em; font-size: .9rem; }
-.side-cta .s { font-size: .72rem; color: rgba(255,255,255,.7); margin-top: .7rem; }
+.side-cta .s { font-size: .8125rem; color: rgba(255,255,255,.7); margin-top: .7rem; }
 @media (min-width: 1100px) {
   .article-layout { grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(2.5rem, 4vw, 4.5rem); }
   .article-side { grid-column: 2; grid-row: 1; }
@@ -368,8 +379,10 @@ main.article h4::before { content: "▶ "; font-size: .8em; color: var(--blue); 
 
 /* ---------- 記事本文の強調・装飾（自動生成記事にも全適用） ---------- */
 main.article .article-body { font-size: 1.05rem; }
-main.article strong { background: linear-gradient(transparent 58%, #ffe873 58%); padding: 0 .12em; font-weight: 700; }
-main.article mark { background: linear-gradient(transparent 45%, #ffef9e 45%); padding: 0 .12em; color: inherit; }
+/* 黄色の帯は文字の下 28% に薄く（2026-10-08）。#ffe873 の太い帯が文字の下 42% にかかり、
+   1本に33か所・本文の約12%が塗られて、どこが大事か分からなくなっていた。強調の数（門の8か所以上）は変えない */
+main.article strong { background: linear-gradient(transparent 72%, rgba(255,222,89,.55) 72%); padding: 0 .12em; font-weight: 700; }
+main.article mark { background: linear-gradient(transparent 72%, rgba(255,222,89,.55) 72%); padding: 0 .12em; color: inherit; }
 main.article mark.blue, main.article .marker-blue { background: linear-gradient(transparent 45%, var(--sky-2) 45%); padding: 0 .12em; }
 main.article .txt-red { color: #d92d20; font-weight: 700; }
 main.article .txt-blue { color: var(--blue-deep); font-weight: 700; }
@@ -377,6 +390,8 @@ main.article .big { font-size: 1.3em; font-weight: 700; line-height: 1.7; }
 main.article em { font-style: normal; font-weight: 700; color: var(--blue-deep); border-bottom: 2px dotted var(--blue); }
 /* H2直下の1文結論を自動で目立たせる（パイプラインの「H2直下1文結論」ルールと連動） */
 main.article .article-body h2 + p { font-size: 1.1em; font-weight: 600; color: var(--navy); }
+/* 1文結論は太字・紺で十分目立つ。中の太字にまで帯を重ねない */
+main.article .article-body h2 + p strong { background: none; }
 /* リストの視認性 */
 main.article .article-body ul > li::marker { color: var(--blue); }
 main.article .article-body ol > li::marker { color: var(--blue); font-weight: 700; }
@@ -406,10 +421,10 @@ main.article .article-body > p:first-child { font-size: 1.13em; line-height: 2; 
 .article-summary-box ul { margin: .5em 0 0 1.2em; padding: 0; font-size: .92rem; }
 .target-reader { font-size: .88rem; color: var(--muted); background: var(--bg-alt); padding: .9em 1.2em; border-radius: 10px; margin: 1.2em 0; }
 .definition-box { border: 1.5px solid var(--blue); border-radius: var(--radius); background: var(--sky); padding: 1.3em 1.5em; margin: 2em 0 1.8em; position: relative; }
-.definition-box::before { content: "定義"; position: absolute; top: -0.9em; left: 1.2em; background: var(--blue); color: #fff; font-size: .68rem; font-weight: 700; padding: .2em 1em; border-radius: 999px; letter-spacing: .18em; }
+.definition-box::before { content: "定義"; position: absolute; top: -0.9em; left: 1.2em; background: var(--blue); color: #fff; font-size: .75rem; font-weight: 700; padding: .2em 1em; border-radius: 999px; letter-spacing: .18em; }
 .definition-box .term { font-weight: 700; color: var(--blue-deep); }
 .caution-box { border: 1.5px solid #dc6803; border-radius: var(--radius); background: #fffaf3; padding: 1.3em 1.5em; margin: 2em 0 1.8em; position: relative; }
-.caution-box::before { content: "注意"; position: absolute; top: -0.9em; left: 1.2em; background: #dc6803; color: #fff; font-size: .68rem; font-weight: 700; padding: .2em 1em; border-radius: 999px; letter-spacing: .18em; }
+.caution-box::before { content: "注意"; position: absolute; top: -0.9em; left: 1.2em; background: #dc6803; color: #fff; font-size: .75rem; font-weight: 700; padding: .2em 1em; border-radius: 999px; letter-spacing: .18em; }
 .caution-box .box-title { font-weight: 700; color: #b54708; }
 .freshness { font-size: .84rem; color: var(--muted); }
 
@@ -446,16 +461,16 @@ code { font-family: Consolas, "Courier New", monospace; }
 .cta::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px); background-size: 30px 30px; }
 .cta > * { position: relative; z-index: 1; }
 .cta .cta-copy { font-family: var(--head); font-size: 1.3rem; font-weight: 900; margin-bottom: 1.3rem; }
-.cta .cta-sub { font-size: .78rem; color: rgba(255,255,255,.72); margin-top: 1rem; }
+.cta .cta-sub { font-size: .8125rem; color: rgba(255,255,255,.72); margin-top: 1rem; }
 
 /* 著者情報 */
 .author-box { display: flex; gap: 1.3em; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; padding: 1.5em; margin-top: 3.5em; box-shadow: var(--shadow-sm); }
 .author-box .avatar { width: 76px; height: 76px; border-radius: 50%; background: linear-gradient(135deg, var(--sky), var(--sky-2)); flex-shrink: 0; overflow: hidden; display: grid; place-items: center; font-family: var(--head); font-weight: 900; color: var(--blue); font-size: 1.4rem; }
 .author-box .name { font-weight: 700; }
-.author-box .role { font-size: .78rem; color: var(--muted); }
-.author-box p { font-size: .88rem; margin: .5em 0 0; }
-.author-box p.how-made { font-size: .76rem; color: var(--muted); border-top: 1px dashed var(--line, #e2e6ec); padding-top: .5em; margin-top: .7em; }
-.author-box p.scope-note { font-size: .8rem; color: var(--text, #33415c); background: var(--bg-soft, #f4f6f9); border-radius: 6px; padding: .55em .8em; margin: .5em 0 .2em; }
+.author-box .role { font-size: .8125rem; color: var(--muted); }
+.author-box p { font-size: .9375rem; margin: .5em 0 0; }
+.author-box p.how-made { font-size: .8125rem; color: var(--muted); border-top: 1px dashed var(--line, #e2e6ec); padding-top: .5em; margin-top: .7em; }
+.author-box p.scope-note { font-size: .8125rem; color: var(--text, #33415c); background: var(--bg-soft, #f4f6f9); border-radius: 6px; padding: .55em .8em; margin: .5em 0 .2em; }
 
 /* ============================================================
    LP
@@ -515,7 +530,7 @@ code { font-family: Consolas, "Courier New", monospace; }
 /* ---------- 重要箇所マーカー（サイト全体・自動適用） ---------- */
 .section strong, .check-list strong, .pillar strong, .term-tile strong,
 .article-summary-box strong, .form-panel strong {
-  background: linear-gradient(transparent 58%, #ffe873 58%); padding: 0 .12em; font-weight: 700;
+  background: linear-gradient(transparent 72%, rgba(255,222,89,.55) 72%); padding: 0 .12em; font-weight: 700;
 }
 /* 暗い面では黄マーカーが読めなくなるため解除する（色で強調する） */
 .hero-dark strong, .cta strong, .side-cta strong, .site-footer strong,
@@ -575,9 +590,9 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 .site-footer nav { display: grid; grid-template-columns: repeat(2, auto); gap: .55em 2.4em; font-size: .85rem; align-content: start; }
 .site-footer a { color: rgba(255,255,255,.78); text-decoration: none; }
 .site-footer a:hover { color: #8fc0ff; }
-.site-footer .copyright { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: 1.2rem; font-size: .74rem; color: rgba(255,255,255,.45); }
+.site-footer .copyright { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: 1.2rem; font-size: .8125rem; color: rgba(255,255,255,.6); }
 /* 制作・顧問の表記（sync_nav が全ページに揃える）。著作権表示の直下に小さく出す */
-.site-footer .footer-credit { grid-column: 1 / -1; margin-top: -1.4rem; font-size: .74rem; line-height: 1.8; overflow-wrap: anywhere; }
+.site-footer .footer-credit { grid-column: 1 / -1; margin-top: -1.4rem; font-size: .8125rem; line-height: 1.8; overflow-wrap: anywhere; }
 .site-footer .footer-credit p { margin: 0; }
 .site-footer .footer-credit a { color: rgba(255,255,255,.62); text-decoration: underline; text-underline-offset: 2px; }
 .site-footer .footer-credit a:hover { color: #8fc0ff; }
@@ -598,7 +613,7 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 .side-banner:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 .side-banner .sb-kicker {
   display: block;
-  font-size: .68rem;
+  font-size: .75rem;
   font-weight: 700;
   letter-spacing: .18em;
   color: #ffd76a;
@@ -613,7 +628,7 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 }
 .side-banner .sb-sub {
   display: block;
-  font-size: .74rem;
+  font-size: .8125rem;
   color: rgba(255,255,255,.85);
   margin-top: .6em;
 }
@@ -659,7 +674,7 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
 }
 .share-btn {
   display: inline-flex; align-items: center; gap: .35em;
-  font: inherit; font-size: .74rem; font-weight: 700;
+  font: inherit; font-size: .8125rem; font-weight: 700;
   color: var(--muted); background: #fff;
   border: 1.5px solid var(--line); border-radius: 999px;
   padding: .35em 1em; cursor: pointer; text-decoration: none;
@@ -677,7 +692,7 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
   padding: 1.5rem clamp(1.2rem, 2.5vw, 2rem);
 }
 .diag-banner .db-text { flex: 1 1 26em; min-width: min(24em, 100%); }
-.diag-banner .db-kicker { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; color: var(--blue); margin-bottom: .4em; }
+.diag-banner .db-kicker { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .14em; color: var(--blue); margin-bottom: .4em; }
 .diag-banner .db-title { display: block; font-family: var(--head); font-weight: 900; font-size: 1.25rem; line-height: 1.4; }
 .diag-banner .db-desc { display: block; font-size: .84rem; color: var(--muted); margin-top: .35em; }
 .diag-banner .btn { flex-shrink: 0; }
@@ -695,7 +710,7 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
   transition: border-color .2s, transform .2s var(--ease-out), box-shadow .2s;
 }
 .prev-next a.pn:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.prev-next .pn span { display: block; font-size: .7rem; font-weight: 700; color: var(--blue); letter-spacing: .1em; margin-bottom: .35em; }
+.prev-next .pn span { display: block; font-size: .75rem; font-weight: 700; color: var(--blue); letter-spacing: .1em; margin-bottom: .35em; }
 .prev-next .pn strong { font-size: .88rem; font-weight: 700; line-height: 1.5; background: none; }
 .prev-next .pn-next { text-align: right; }
 .prev-next .pn-empty { border: none; background: none; }
@@ -1401,7 +1416,7 @@ main.lab .cta-final h2 { color: #fff; }
 .cta.cta-mid { padding: 1.6rem 1.4rem; margin: 2.4em 0; border-radius: 16px; }
 .cta.cta-mid::before { animation: none; opacity: .55; }
 .cta.cta-mid .cta-copy { font-size: 1.02rem; margin-bottom: .9rem; }
-.cta.cta-mid .cta-sub { font-size: .72rem; margin-top: .7rem; }
+.cta.cta-mid .cta-sub { font-size: .8125rem; margin-top: .7rem; }
 .cta.cta-mid .btn { padding: .7rem 1.4rem; font-size: .88rem; }
 @media (max-width: 640px) {
   .cta.cta-mid { padding: 1.3rem 1rem; }
@@ -1425,7 +1440,7 @@ main.lab .cta-final h2 { color: #fff; }
 .lc-form input:focus-visible{outline:2px solid var(--navy,#1d4ed8);outline-offset:1px;border-color:transparent}
 .lc-form input[name="_gotcha"]{position:absolute;left:-9999px;width:1px;height:1px}
 .lc-form button{justify-self:start;margin-top:.2rem}
-.lc-note{font-size:.75rem;color:var(--muted);margin:.1em 0 0;line-height:1.7}
+.lc-note{font-size:.8125rem;color:var(--muted);margin:.1em 0 0;line-height:1.7}
 .lc-msg{font-size:.82rem;color:#b91c1c;font-weight:700;margin:0;min-height:1em}
 .lc-done{font-size:.92rem;margin:0;line-height:1.8}
 @media (min-width:620px){
@@ -1562,7 +1577,7 @@ main.lab .cta-final h2 { color: #fff; }
 
 /* 記事の中の「URLを入れるだけの30秒診断」（build.py の scan_box）と、スマホの固定ボタン */
 .scan-box { margin: 2.4rem 0; padding: 1.4rem 1.5rem 1.3rem; border-radius: 18px; background: linear-gradient(135deg, #071a38 0%, #0b2f66 100%); color: #fff; box-shadow: 0 18px 40px -24px rgba(7, 26, 56, .7); }
-.scan-box .sb-kicker { margin: 0 0 .35rem; font-size: .74rem; font-weight: 700; letter-spacing: .12em; color: #8fb7ff; }
+.scan-box .sb-kicker { margin: 0 0 .35rem; font-size: .75rem; font-weight: 700; letter-spacing: .12em; color: #8fb7ff; }
 .scan-box .sb-head { margin: 0 0 .4rem; font-size: clamp(1.05rem, 2.2vw, 1.25rem); font-weight: 900; line-height: 1.5; color: #fff; text-wrap: balance; }
 .scan-box .sb-sub { margin: 0 0 .9rem; font-size: .86rem; line-height: 1.75; color: rgba(255, 255, 255, .82); }
 .scan-box .sb-form { display: flex; gap: .6rem; flex-wrap: wrap; }
@@ -1667,7 +1682,7 @@ main.article .article-body .inline-tool .it-sub { margin: 0 0 .75rem; font-size:
 .qa-chip { font-size: .75rem; padding: .15em .55em; border-radius: 999px; background: var(--bg-alt); color: var(--text); }
 .qa-chip.qa-clinic { background: #e7f6ee; color: #0f6a3d; font-weight: 700; }
 .qa-chip.qa-portal { background: #fff4e5; color: #8a5a00; }
-.qa-top { margin: 0; font-size: .78rem; color: var(--muted); overflow-wrap: anywhere; }
+.qa-top { margin: 0; font-size: .95rem; color: var(--text); overflow-wrap: anywhere; }
 .qa-cta { text-align: center; background: var(--sky); border-radius: var(--radius); padding: 1.6rem; }
 .qa-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
 /* ご契約前のよくある質問（faq_page.py） */
@@ -1922,3 +1937,18 @@ html.js .rsx-tools { display: flex; flex-wrap: wrap; align-items: center; justif
   .rsx-more .rsx-item { grid-template-columns: minmax(0, 1fr) 8rem; }
   .rsx-more .rsx-m { grid-column: auto; grid-template-columns: minmax(0, 1fr) auto; }
 }
+
+/* ============================================================
+   デザインとリード導線の点検（2026-10-08）
+   ============================================================ */
+/* 説明の段落は1行42字前後まで。パソコンで業種ハブ 70〜84字・比較表 84字・用語集 91字・運営者 75字になっていた
+   （記事本文の46字はそのまま） */
+.hub-lead, .hub-note, .season-lead, .gl-rel, .ilp-proof, .cite-box p,
+.latest-block > section > p, .latest-block > section > ul > li, main.article > .author-box p { max-width: 42em; }
+
+/* お客様の声は左揃えで読む。一般の figure（中央揃え）を受け継ぎ、12px台の文字が中央に並んでいた */
+.voice { text-align: left; }
+.voice-metric .m-label { font-size: .875rem; }
+.voice figcaption { font-size: .875rem; }
+.voice .voice-term { font-size: .8125rem; }
+
