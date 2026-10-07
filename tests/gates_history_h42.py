@@ -159,3 +159,39 @@ def test_form_field_ideas_match_the_field():
     check("項目の候補: 住所・電話はそれぞれの候補のまま",
           (FN.field_ideas("address")[1], FN.field_ideas("tel")[1]),
           ("郵便番号から自動で入れる", "連絡方法でメールを選んだ人には聞かない"))
+
+
+def test_form_retention_note_next_to_numbers_and_abandon_once():
+    """2026-10-07 の2回目の見直しで再現:
+    - 保持期間の前の月は項目の次元を付けると出来事が消え、送信0件と出るのに、注記は末尾にしか無かった
+      （月次レポートで過ぎた月を作り直すと、注記も無く「記録がまだありません」と出た）
+    - site.js の form_abandon が、戻る・進む（bfcache）のたびに送られていた（Chromium で開始1回に離脱4回）"""
+    import contextlib
+    import io
+    from datetime import timedelta
+    import funnel as FN
+    rs = FN.retention_start()
+    old = (rs - timedelta(days=1)).strftime("%Y%m%d")
+    new = (date.today() - timedelta(days=3)).strftime("%Y%m%d")
+    rows = [(new, "form_start", "contact", "email", "/contact/", 40)]
+    tot = {(old, "form_start"): 30, (old, "form_submit"): 4, (new, "form_start"): 40}
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        FN.print_forms({"t": {"name": "t", "ga4_property_id": "1"}}, 4, rows_fn=lambda *a: rows, totals_fn=lambda *a: tot)
+    ym = f"{old[:4]}-{old[4:6]}"
+    line = next((ln for ln in buf.getvalue().splitlines() if ln.strip().startswith(f"{ym}:")), "")
+    check("--forms: 保持期間の前を含む月は、送信の数字の行に「少なく出る」と書く", "少なく出ます" in line, True)
+    html = FN.form_report_html("1", ym, rows_fn=lambda *a: [])
+    check("月次の節: 保持期間の前の月は、少なく出ることを書く", "保持期間" in html, True)
+    html = FN.form_report_html("1", FN.last_month(), rows_fn=lambda *a: [])
+    check("月次の節: 先月（保持期間の内）には書かない", "保持期間" in html, False)
+
+    js = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
+    i = js.index("ga('form_abandon'")
+    hide = js[js.rindex("addEventListener('pagehide'", 0, i):i]
+    check("site.js: form_abandon は1回の表示につき1回（送ったら印を立てる）",
+          ("!abandoned" in hide, "abandoned = true" in hide), (True, True))
+    j = js.find("addEventListener('pageshow'", i)
+    show = js[j:j + 300] if j >= 0 else ""
+    check("site.js: 戻る・進む（bfcache）で表示し直したら、その表示で触ったときだけ数え直す",
+          ("e.persisted" in show, "started = false" in show, "abandoned = false" in show), (True, True, True))

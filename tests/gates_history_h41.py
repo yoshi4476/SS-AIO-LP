@@ -200,3 +200,67 @@ def test_crux_privacy_and_wiring():
     mr = (ROOT / "scripts" / "monthly_report.py").read_text(encoding="utf-8")
     check("月次レポート: 実際の利用者の表示速度の節を差し込む",
           "_cwv.crux_html(SITE_ID)" in mr and "{crux_pages}" in mr, True)
+
+
+def test_crux_failed_week_keeps_last_values():
+    """全部取れなかった週（5xx・429）に、前の週の値を消して「データはまだありません」と出していた（2026-10-07 再現）"""
+    import cwv_check as C
+
+    def good(method, body):
+        if method == "queryRecord":
+            return _record(1800, 150, "0.02")
+        return _history([1800] * 25, [150] * 25, ["0.02"] * 25)
+
+    def down(method, body):
+        raise RuntimeError("503 backendError")
+    with fake(C, good) as (calls, td):
+        _run(C)
+        rec = json.loads((td / "own-x.json").read_text(encoding="utf-8"))
+        rec["updated"] = "2026-09-28"
+        (td / "own-x.json").write_text(json.dumps(rec), encoding="utf-8")
+        C._crux_post = lambda m, b, k: down(m, b)
+        rc, out = _run(C)
+        html = C.crux_html("own-x")
+        rec = json.loads((td / "own-x.json").read_text(encoding="utf-8"))
+        check("CrUX: 全部取れなかった週は CRUX_OK=unknown（遅い・データ無しと言わない）", ("CRUX_OK=unknown" in out, rc), (True, 1))
+        check("CrUX: 取れなかった週も、前の週の値を残し（取得日を添え）、「まだありません」と書かない",
+              ("<table>" in html, "まだありません" in html, "前回（2026-09-28）" in html), (True, False, True))
+        check("CrUX の log: 取れなかった日は前の値で埋めず error と書く", rec["log"][-1].get("PHONE"), "error")
+    with fake(C, down) as (calls, td):
+        _run(C)
+        html = C.crux_html("own-x")
+        check("CrUX: 前の値も無く取れなかったときは「取得できませんでした」（データ無しと書かない）",
+              ("取得できませんでした" in html, "まだありません" in html), (True, False))
+
+
+def _cache_paths(text):
+    """workflow の actions/cache の path: | の塊を [(含めるもの, 外すもの)] で返す"""
+    out, lines, i = [], text.splitlines(), 0
+    while i < len(lines):
+        if lines[i].strip() == "path: |":
+            ind = len(lines[i + 1]) - len(lines[i + 1].lstrip())
+            block = []
+            i += 1
+            while i < len(lines) and lines[i].strip() and len(lines[i]) - len(lines[i].lstrip()) >= ind:
+                block.append(lines[i].strip())
+                i += 1
+            out.append(([b for b in block if not b.startswith("!")], [b[1:] for b in block if b.startswith("!")]))
+            continue
+        i += 1
+    return out
+
+
+def test_cache_exclusions_take_effect():
+    """actions/cache は implicitDescendants: false で glob するため、ディレクトリを丸ごと指定すると
+    その下の `!` の除外が効かず、ディレクトリごと tar に入る（@actions/glob 0.7.0 で実測）。
+    復元でコミット済みの自社3サイトの記録を古いキャッシュで上書きしていた。中身を `/*` で指定する"""
+    bad = []
+    for wf in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
+        for inc, exc in _cache_paths(wf.read_text(encoding="utf-8")):
+            for p in inc:
+                if not any(ch in p for ch in "*?[") and any(e.startswith(p.rstrip("/") + "/") for e in exc):
+                    bad.append(f"{wf.name}: {p}")
+    check("キャッシュ: 除外のあるディレクトリは中身（/*）で指定する（ディレクトリ丸ごとだと除外が効かない）", bad, [])
+    w = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("キャッシュ: 残す条件も自社3サイトを除いて数える（お客様の分が無ければ保存しない）",
+          [f"hashFiles('data/{d}/*.json', '!data/{d}/ai-lab.json'" in w for d in ("cwv_crux", "bing_stats")], [True, True])

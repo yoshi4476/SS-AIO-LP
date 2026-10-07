@@ -29,6 +29,7 @@
 終了コードは常に0（CLAUDE.md 8.7）。判定は OUTREACH_OK= の印で行う。
 """
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -79,7 +80,14 @@ QUID = re.compile(r"相互リンク|相互掲載|被リンク|dofollow|nofollow|
                   r"リンクを(?:張|貼|設置|掲載|いただ|お願)|リンクして(?:いただ|ください|もら)|"
                   r"(?:当社|弊社)(?:の)?(?:サイト|ページ)(?:から|で)[^。\n]{0,12}(?:紹介|リンク)します")
 BANNED = re.compile(r"www\.7senses\.co\.jp|株式会社セブンセンシズ|採択率|支援社数|3,?200\s*(?:店舗|社)")
-URL_RE = re.compile(r"https?://[^\s）)」』>、。]+")
+# URL に使える ASCII の文字だけ。以前は日本語まで URL とみなし、当社URLの直後に空白なしで続く文
+# （「…/research/では997件が…」「…/research/やhttps://他社/」）の数字・他社URLを検査から外していた（2026-10-07 再現）
+URL_RE = re.compile(r"https?://[A-Za-z0-9\-._~:/?#\[\]@!$&'*+,;=%]+", re.I)
+# http の無いドメインだけの書き方（example.com/x・www.example.co.jp）。当社以外のURLとして止める
+BARE_HOST = re.compile(r"(?<![A-Za-z0-9.@/_-])((?:www\.)?(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+"
+                       r"(?:com|net|org|jp|io|co|info|biz|me|ai|app|dev|xyz|tv|us|uk|cn|kr|tw|asia|tokyo|site|"
+                       r"online|tech|blog|page|link|news|so|to|ly|gl|cc|fm|be|jobs|pro|work|shop|store))"
+                       r"(?![A-Za-z0-9-])")
 MAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
 DIG = str.maketrans("０１２３４５６７８９．，％", "0123456789.,%")
 # 漢字の数（「八割」「三千社」）。数字の検査をすり抜けて、材料に無い割合・件数が書けていた（2026-10-07 再現）。
@@ -103,16 +111,107 @@ def _p(name):
     return STORE_DIR / name
 
 
-def load():
+class Ledger(dict):
+    """読んだ時点の宛先（seen: 宛先の鍵 → JSON の並び）を持つ台帳。保存のときに、自分が変えた宛先だけを書くために使う"""
+    seen = None
+
+
+def _dump(t):
+    return json.dumps(t, ensure_ascii=False, sort_keys=True)
+
+
+def _tkey(t):
+    return t.get("id"), t.get("name", "")
+
+
+def _snapshot(targets):
+    seen = {}
+    for t in targets:
+        seen.setdefault(_tkey(t), []).append(_dump(t))
+    return seen
+
+
+def _read_disk():
     p = _p("targets.json")
     if p.is_file():
         return json.loads(p.read_text(encoding="utf-8"))
     return {"_readme": "言及の依頼の宛先（公開リポジトリに置かない。.gitignore 済み）", "targets": []}
 
 
+def load():
+    d = Ledger(_read_disk())
+    d.seen = _snapshot(d["targets"])
+    return d
+
+
+# 両方の工程が同じ宛先を変えたとき、こちらの変更より残すもの。配信停止は必ず残し、
+# 送った・送れたか不明・掲載・返事の記録は、下書きの段の変更で戻さない
+_KEEP_DISK = {"stopped": None, "sent": ("new", "hold", "drafted"), "unknown": ("new", "hold", "drafted"),
+              "published": ("new", "hold", "drafted"), "replied": ("new", "hold", "drafted")}
+
+
+def _merge(d, disk):
+    """disk の宛先に、d で変えた宛先だけを重ねる。d で触っていない宛先は disk の方を d にも写す（その場で）。
+    返り値は (書く宛先の並び, d に無く disk にだけある宛先)。
+    承認の画面を開いたまま --draft を走らせると、画面の保存が読んだ時点の台帳を丸ごと書き、
+    その間の下書き・配信停止を消していた（2026-10-07 再現）"""
+    seen = getattr(d, "seen", None)
+    mine = {}
+    for t in d["targets"]:
+        mine.setdefault(_tkey(t), []).append(t)
+    out, only_disk, pos = [], [], {}
+    for x in disk.get("targets", []):
+        k = _tkey(x)
+        i = pos[k] = pos.get(k, -1) + 1
+        t = mine[k].pop(0) if mine.get(k) else None
+        if t is None:
+            out.append(x)
+            only_disk.append(x)
+            continue
+        lst = (seen or {}).get(k) or []
+        before = lst[i] if i < len(lst) else None
+        if seen is not None and _dump(t) == before:
+            keep_disk = True                                     # こちらは触っていない
+        elif before is not None and _dump(x) != before:          # 両方が変えた
+            rule = _KEEP_DISK.get(x.get("status"), ())
+            keep_disk = rule is None or t.get("status") in rule
+        else:
+            keep_disk = False
+        if keep_disk and t is not x:
+            t.clear()
+            t.update(copy.deepcopy(x))
+        out.append(t)
+    out += [t for ts in mine.values() for t in ts]
+    return out, only_disk
+
+
+def refresh(d):
+    """ほかの工程（--draft・--stop・別の画面）が書いた分を、こちらで触っていない宛先にだけ取り込む（その場で）"""
+    if getattr(d, "seen", None) is None or not _p("targets.json").is_file():
+        return d
+    disk = _read_disk()
+    _, only_disk = _merge(d, disk)
+    d["targets"] += [copy.deepcopy(x) for x in only_disk]
+    # 取り込めた（disk と同じになった）宛先は、読んだ時点を disk に合わせる。こちらで変えた宛先は変えたまま
+    now_seen = _snapshot(disk.get("targets", []))
+    for k, dumps in now_seen.items():
+        mine = [_dump(t) for t in d["targets"] if _tkey(t) == k]
+        old = d.seen.get(k) or []
+        d.seen[k] = [dumps[i] if i < len(dumps) and i < len(mine) and mine[i] == dumps[i]
+                     else (old[i] if i < len(old) else None) for i in range(max(len(dumps), len(mine)))]
+    return d
+
+
 def save(d):
+    """自分が変えた宛先だけを書く（保存の直前に読み直す）"""
     STORE_DIR.mkdir(parents=True, exist_ok=True)
-    _p("targets.json").write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
+    disk = _read_disk()
+    targets, _ = _merge(d, disk)
+    out = {**disk, **{k: v for k, v in d.items() if k != "targets"}, "targets": targets}
+    d["targets"] = targets
+    _p("targets.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    if isinstance(d, Ledger):
+        d.seen = _snapshot(targets)
 
 
 def sent_log():
@@ -313,7 +412,7 @@ def _num_key(f):
 def numbers(text):
     """文中の数字の集合（URL・メールの中は数えない。全角は半角に、桁区切りは外し、10.0 は 10 に。
     「3千」「2万」は桁まで含めた数に、単位の付く漢字の数（八割・三千社）も数にする）"""
-    t = MAIL_RE.sub(" ", URL_RE.sub(" ", (text or "").translate(DIG)))
+    t = BARE_HOST.sub(" ", MAIL_RE.sub(" ", URL_RE.sub(" ", (text or "").translate(DIG))))
     t = re.sub(r"(?<=\d),(?=\d{3})", "", t)
     out = set()
     for m in UNIT_NUM.finditer(t):
@@ -353,10 +452,11 @@ def inspect(subject, body, mat):
         m = pat.search(text)
         if m:
             why.append(f"{name}: {m.group(0)}")
-    for u in URL_RE.findall(text):
-        if urlparse(u).netloc.lower() not in OWN_HOSTS:
-            why.append(f"当社以外のURL: {u[:50]}")
-            break
+    others = [u for u in URL_RE.findall(text) if urlparse(u).netloc.lower() not in OWN_HOSTS]
+    others += [h for h in BARE_HOST.findall(MAIL_RE.sub(" ", URL_RE.sub(" ", text)))
+               if h.lower() not in OWN_HOSTS]
+    if others:
+        why.append(f"当社以外のURL: {others[0][:50]}")
     if MAIL_RE.search(text):
         why.append("本文にメールアドレス（署名は機械が付ける）")
     if not (200 <= len(body) <= 1500):
@@ -595,6 +695,7 @@ def send_approved(d, t, mailer=None, when=None):
     返り値は (送れたか, 理由の一覧)"""
     if t.get("channel") != "email":
         return False, ["メールの窓口ではない（フォームは貼って送ったあと記録する）"]
+    refresh(d)
     why = blockers(d, t, when=when)
     if why:
         return False, why
@@ -632,6 +733,7 @@ def mark_posted(d, t, when=None):
     """フォームに貼って送った（人が送った）ことを記録する。承認・上限・90日の条件は同じ"""
     if t.get("channel") == "email":
         return False, ["メールの窓口は send_approved で送る"]
+    refresh(d)
     why = blockers(d, t, when=when)
     if why:
         return False, why
@@ -679,6 +781,8 @@ def submit(d, t, confirm, copy=None, open_url=None, mailer=None, when=None):
         return None, []
     if not confirm("送る", f"{t['name']} へ、この文面で出します。よろしいですか？"):
         return None, []
+    # 画面を開いた後の配信停止・送信を取り込んでから確かめる（読んだ時点の台帳のまま送っていた）
+    refresh(d)
     approve(t)
     why = blockers(d, t, when=when)
     if not why:
@@ -701,8 +805,7 @@ def submit(d, t, confirm, copy=None, open_url=None, mailer=None, when=None):
             # 人がもう送った。条件は開く前に確かめたので、ここでは必ず記録する（記録しないと90日が効かない）
             _record(d, t, t.get("channel", "form"), s, "", when)
             return True, []
-    if t.get("status") == "drafted":
-        t.pop("approval", None)
+    t.pop("approval", None)
     save(d)
     return False, why
 
@@ -782,6 +885,7 @@ def review():
         return queue[pos["i"]] if pos["i"] < len(queue) else None
 
     def show():
+        refresh(d)
         t = cur()
         if not t:
             messagebox.showinfo("終わり", "承認待ちの下書きはもうありません")
@@ -919,7 +1023,9 @@ def main():
             t.pop("approval", None)
             _event(t, "stopped", "配信停止の申し出")
         else:
-            t["status"] = "replied" if t.get("status") != "published" else t["status"]
+            # 配信停止の後の返事（停止の申し出そのもの等）で停止を解かない。解くと同じ媒体の別の宛先へ送れた（2026-10-07 再現）
+            if t.get("status") not in ("published", "stopped"):
+                t["status"] = "replied"
             t.setdefault("replies", []).append({"at": now().isoformat(timespec="seconds"), "memo": a.reply[1]})
             _event(t, "replied", a.reply[1][:80])
         save(d)

@@ -809,11 +809,11 @@ jobs:
 
       # 実利用者の表示速度（cwv_check の CrUX）。お客様の分は .gitignore なので、月次レポートへキャッシュで渡す
       - name: 実利用者の表示速度（お客様の分）を残す
-        if: always() && hashFiles('data/cwv_crux/*.json') != ''
+        if: always() && hashFiles('data/cwv_crux/*.json', '!data/cwv_crux/ai-lab.json', '!data/cwv_crux/corporate.json', '!data/cwv_crux/subsidy.json') != ''
         uses: actions/cache/save@v4
         with:
           path: |
-            data/cwv_crux
+            data/cwv_crux/*
             !data/cwv_crux/ai-lab.json
             !data/cwv_crux/corporate.json
             !data/cwv_crux/subsidy.json
@@ -825,7 +825,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            data/compete
+            data/compete/*
             !data/compete/ai-lab
             !data/compete/corporate
             !data/compete/subsidy
@@ -1037,7 +1037,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            data/bing_stats
+            data/bing_stats/*
             !data/bing_stats/ai-lab.json
             !data/bing_stats/corporate.json
             !data/bing_stats/subsidy.json
@@ -1056,11 +1056,11 @@ jobs:
           python scripts/bing_webmaster.py --stats 2>&1 | tail -6 || true
 
       - name: Bing の検索の成績（お客様の分）を残す
-        if: always() && hashFiles('data/bing_stats/*.json') != ''
+        if: always() && hashFiles('data/bing_stats/*.json', '!data/bing_stats/ai-lab.json', '!data/bing_stats/corporate.json', '!data/bing_stats/subsidy.json') != ''
         uses: actions/cache/save@v4
         with:
           path: |
-            data/bing_stats
+            data/bing_stats/*
             !data/bing_stats/ai-lab.json
             !data/bing_stats/corporate.json
             !data/bing_stats/subsidy.json

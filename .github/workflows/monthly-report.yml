@@ -127,7 +127,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            data/compete
+            data/compete/*
             !data/compete/ai-lab
             !data/compete/corporate
             !data/compete/subsidy
@@ -141,7 +141,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            data/bing_stats
+            data/bing_stats/*
             !data/bing_stats/ai-lab.json
             !data/bing_stats/corporate.json
             !data/bing_stats/subsidy.json
@@ -154,7 +154,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            data/cwv_crux
+            data/cwv_crux/*
             !data/cwv_crux/ai-lab.json
             !data/cwv_crux/corporate.json
             !data/cwv_crux/subsidy.json
@@ -190,7 +190,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            data/compete
+            data/compete/*
             !data/compete/ai-lab
             !data/compete/corporate
             !data/compete/subsidy

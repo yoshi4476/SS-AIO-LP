@@ -319,7 +319,7 @@
   document.querySelectorAll('form.form-panel').forEach(function (f) {
     // 「開いたのに送らなかった」を項目つきで数える。開いた7人中1人しか送らない原因を
     // 分けるため。form_start = 最初の入力、form_abandon = 送らずに離れた（最後に触った項目つき）
-    var started = false, lastField = '', submitted = false;
+    var started = false, lastField = '', submitted = false, abandoned = false;
     f.addEventListener('focusin', function (e) {
       var el = e.target;
       if (!el || !el.name || el.type === 'hidden') return;
@@ -331,10 +331,16 @@
       }
     });
     window.addEventListener('pagehide', function () {
-      if (started && !submitted) {
+      if (started && !submitted && !abandoned) {
+        abandoned = true;
         var t = f.querySelector('[name="form_type"]');
         ga('form_abandon', { form_type: t ? t.value : 'form', last_field: lastField, page_path: location.pathname });
       }
+    });
+    // 戻る・進む（bfcache）で表示し直したら、その表示で触ったときだけ開始・離脱を数え直す。
+    // 以前は同じ人の離脱を、戻る・進むのたびに送っていた（開始1回に離脱4回。2026-10-07 Chromium で再現）
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) { started = false; abandoned = false; submitted = false; lastField = ''; }
     });
     f.addEventListener('submit', function () {
       submitted = true;

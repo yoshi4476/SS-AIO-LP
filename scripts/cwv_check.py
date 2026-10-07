@@ -318,10 +318,24 @@ def save_crux(sid, rec, today=None):
         except Exception:
             old = {}
     today = today or date.today().isoformat()
+    # 取れなかった（error）ページは、前の回の値を取得日つきで残す。以前は全部失敗した週（5xx・429）に
+    # 前の週の値を消し、月次レポートが「実利用者のデータはまだありません」と出していた（2026-10-07 再現）
+    prev = {(t.get("kind"), t.get("id"), t.get("form")): t for t in old.get("targets") or []
+            if t.get("status") in ("ok", "nodata")}
+    targets = []
+    for t in rec["targets"]:
+        o = prev.get((t["kind"], t["id"], t["form"]))
+        if t["status"] == "error" and o:
+            targets.append({**o, "stale_from": o.get("stale_from") or old.get("updated", ""),
+                            "error": t.get("error", "")})
+        else:
+            targets.append(t)
+    rec = {**rec, "targets": targets}
     entry = {"date": today}
     for t in rec["targets"]:
         if t["kind"] == "origin":
-            entry[t["form"]] = ({k: t["current"].get(k) for k in CRUX_METRICS} if t["status"] == "ok" else t["status"])
+            entry[t["form"]] = ("error" if t.get("stale_from") else
+                                {k: t["current"].get(k) for k in CRUX_METRICS} if t["status"] == "ok" else t["status"])
     log = [x for x in (old.get("log") or []) if x.get("date") != today] + [entry]
     p.write_text(json.dumps({**rec, "updated": today, "log": log[-104:]}, ensure_ascii=False, indent=1) + "\n",
                  encoding="utf-8")
@@ -393,9 +407,14 @@ def crux_html(sid):
     out = ['<p style="font-size:9.5pt">実際に Chrome でページを開いた人の、直近28日間の75パーセンタイルです'
            '（Chrome UX Report）。「良好」の基準は LCP 2.5秒以下・INP 200ms以下・CLS 0.1以下です。'
            f'取得日: {H.escape(d.get("updated", ""))}</p>']
+    errors = [t for t in d.get("targets") or [] if t.get("status") == "error"]
     if not ok:
-        out.append('<div class="callout"><b>実利用者のデータはまだありません。</b>アクセスが一定数に届くまで、'
-                   'Google はデータを出しません。遅いという意味ではありません。</div>')
+        if errors and not nodata:
+            out.append('<div class="callout"><b>この回は実利用者の値を取得できませんでした。</b>'
+                       'データが無いという意味でも、遅いという意味でもありません。</div>')
+        else:
+            out.append('<div class="callout"><b>実利用者のデータはまだありません。</b>アクセスが一定数に届くまで、'
+                       'Google はデータを出しません。遅いという意味ではありません。</div>')
         return "\n".join(out)
     cell = (lambda t, m: f'{_fmt(m, t["current"].get(m))}'
             + {"bad": " ×", "worse": " △"}.get((t.get("judge") or {}).get(m), ""))
@@ -407,6 +426,9 @@ def crux_html(sid):
     if nodata:
         note += (f'ほかに {len({t["id"] for t in nodata})} ページはアクセスが少なくデータがありません'
                  '（遅いという意味ではありません）。')
+    stale = sorted({t["stale_from"] for t in ok if t.get("stale_from")})
+    if stale:
+        note += f'この回に取れなかったページは、前回（{H.escape("・".join(stale))}）の値です。'
     out.append(f'<p class="note">{note}</p>')
     return "\n".join(out)
 

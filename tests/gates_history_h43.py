@@ -364,3 +364,63 @@ def test_outreach_holes_found_2026_10_07():
     fb = O.footer({"channel": "form", "contact": "https://f.example/"})
     check("署名: フォームの文面は「本メールにご返信」と書かず、配信停止の窓口は会社のメール",
           ("本メール" in fb, O.has_sender_info(fb)), (False, True))
+
+
+def test_outreach_second_review_2026_10_07():
+    """2026-10-07 の2回目の見直しで再現した穴（送信はすべて偽物）"""
+    import outreach as O
+    print("\n■ 言及の依頼: 2回目の見直しで見つけた穴")
+    url = "https://ai.7senses.co.jp/research/dental-ai-sources/"
+    # 1. 当社URLの直後に空白なしで続く文の数字・他社URLが、URL の一部とみなされて検査を素通りした
+    check("検査: 当社URLの直後に空白なしで続く、材料に無い数字を止める",
+          bool(O.inspect(GOOD["subject"], GOOD_BODY + f"\n詳しくは {url}では997件が誤りでした。", MAT)), True)
+    check("検査: 当社URLの直後に空白なしで続く他社URLを止める",
+          bool(O.inspect(GOOD["subject"], GOOD_BODY + f"\n{url}やhttps://other.example/x", MAT)), True)
+    # 2. http の無い他社URL
+    check("検査: http の無い他社のURL（example.com/x・www.example.co.jp）を止める",
+          [bool(O.inspect(GOOD["subject"], GOOD_BODY + f"\n参考: {u}", MAT))
+           for u in ("example.com/x", "www.example.co.jp", "HTTPS://example.com/x")], [True, True, True])
+    check("検査: 当社のドメインだけの書き方・Next.js のような語は止めない",
+          O.inspect(GOOD["subject"], GOOD_BODY + "\nai.7senses.co.jp で公開し、Next.js で作りました。", MAT), [])
+
+    with sandbox(O):
+        O.save({"targets": [_drafted(O, "01"), {**_target("02", domain="m2.example.jp"), "status": "new"},
+                            _drafted(O, "03", domain="m3.example.jp", contact="a@m3.example.jp")]})
+        # 3. 承認の画面を開いたまま --draft を走らせると、画面の保存が下書きを消した
+        screen = O.load()
+        draft = O.load()
+        t2 = O.find(draft, "02")
+        t2["draft"], t2["status"] = dict(GOOD), "drafted"
+        O.save(draft)
+        O.edit_draft(O.find(screen, "01"), GOOD["subject"] + "（直した）", GOOD_BODY)
+        O.save(screen)
+        now = O.load()
+        check("同時の保存: 画面の保存が、その間に --draft が書いた下書きを消さない（画面の直しも残る）",
+              (O.find(now, "02")["status"], "（直した）" in O.find(now, "01")["draft"]["subject"]), ("drafted", True))
+        # 4. --draft の途中に --stop が入ると、--draft の保存が配信停止を消した
+        draft = O.load()
+        cli = O.load()
+        O.find(cli, "03")["status"] = "stopped"
+        O.save(cli)
+        O.find(draft, "03")["draft"]["subject"] += "x"
+        O.save(draft)
+        check("同時の保存: 配信停止は、ほかの工程の保存で消えない", O.find(O.load(), "03")["status"], "stopped")
+        # 5. 画面を開いた後に --stop が入っても、画面の「送る」は読んだ時点の台帳のまま送った
+        screen = O.load()
+        cli = O.load()
+        O.find(cli, "01")["status"] = "stopped"
+        O.save(cli)
+        sent = []
+        ok, why = O.submit(screen, O.find(screen, "01"), lambda *a: True, mailer=lambda *a: sent.append(a) or "m")
+        check("送る直前に読み直す: 画面を開いた後の配信停止で止める",
+              (ok, sent, any("配信停止" in w or "状況" in w for w in why)), (False, [], True))
+        # 6. 配信停止の後に返事を記録すると「返事あり」になり、停止が外れた（同じ媒体の別の宛先へ送れた）
+        import sys as _s
+        old = _s.argv
+        try:
+            _s.argv = ["outreach.py", "--reply", "03", "配信停止の旨の返信"]
+            with contextlib.redirect_stdout(__import__("io").StringIO()):
+                O.main()
+        finally:
+            _s.argv = old
+        check("返事の記録: 配信停止の宛先は停止のまま", O.find(O.load(), "03")["status"], "stopped")

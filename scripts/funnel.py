@@ -363,6 +363,11 @@ def form_report_html(prop, ym, through=None, rows_fn=None):
     intro = ('<p style="font-size:9.5pt">フォームを開いた人が<span class="mark">どの項目で離れたか</span>を'
              '数えています。離脱の項目は「最後に触った項目」で、その項目か次の項目で止まったことを表します。'
              f'入力開始が{MIN_START}件に満たない月は、項目の良し悪しを決めず「判定前」とします。</p>')
+    rs = retention_start()
+    if month_range(ym, through)[0] < rs:
+        # 過ぎた月を作り直すと、保持期間の外の日が黙って0件・少なく出ていた（2026-10-07 再現）
+        intro += (f'<p class="note" style="color:#c62828;font-weight:700">※ {rs} より前は GA4 のデータ保持期間'
+                  '（2か月）の外で、項目別には数えられません。この月の数は実際より少なく出ます。</p>')
     if not plans:
         return intro + '<p class="note">この月は、フォームの種類つきの記録がまだありません。</p>'
     rows = "".join(
@@ -413,10 +418,14 @@ def print_forms(conf, months, rows_fn=None, totals_fn=None):
                   else f"   取得できません（{str(ex)[:60]}）")
             continue
         summ = summarize_forms(rows)
+        rs = retention_start()
         for ym in yms:
             m = summ.get(ym.replace("-", ""), {"types": {}, "untyped_start": 0, "sent_total": 0})
+            # 保持期間の外の日を含む月は、数字の横に書く（末尾の注記だけでは、送信0件をそのまま読まれた。2026-10-07 再現）
+            short = (f"（※{rs} より前は GA4 の保持期間の外で数えられず、実際より少なく出ます）"
+                     if month_range(ym)[0] < rs else "")
             print(f"   {ym}: 問い合わせの送信 {m['sent_total']}件（lead_reconcile の数え方）"
-                  f"・種類の無い入力開始 {m['untyped_start']}件は除外")
+                  f"・種類の無い入力開始 {m['untyped_start']}件は除外{short}")
             if not m["types"]:
                 print("     フォームの種類つきの記録はまだありません")
             for ft, tt in sorted(m["types"].items(), key=lambda x: -x[1]["start"]):
