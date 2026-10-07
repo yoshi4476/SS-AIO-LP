@@ -111,7 +111,30 @@
   },
   "url_prefix": "/journal",
   "content_dir": "content/journal",
-  "cta_title": "自社の業務で、何が自動化できるか相談しませんか",
+  "images_dir": "public/images/journal",
+  "md_dialect": {
+    "name": "journal",
+    "author": "YW（AI × 経営コンサルタント）",
+    "forbidden": [
+      "原口",
+      "若田",
+      "wakata",
+      "事業売却",
+      "バイアウト"
+    ],
+    "_why": "先方の scripts/build-journal.mjs（fromPipeline）が読む形で置く（publish.journal_md）。当社の原稿のままでは score があり author の無い記事で先方の組み立てが落ち、** と当社の部品が素のまま出ていた（2026-10-08）。forbidden は先方の FORBIDDEN と同じ語（1本でも入ると先方のサイト全体の組み立てが止まる）"
+  },
+  "diagram_colors": {
+    "ink": "#0E0F12",
+    "accent": "#C2410C",
+    "soft": "#F7E4D9",
+    "line": "#D5D6D0",
+    "bg": "#F4F4F1",
+    "dot": "#DCDDD7",
+    "shadow": "#E3E4DF",
+    "muted": "#4B4F57",
+    "ng": "#4B4F57"
+  },
   "cta_desc": "いまの業務の流れをうかがい、AI エージェントやシステムで楽にできるところと、費用・期間の目安をお伝えします。全国オンラインで対応します。",
   "category_mix": {
     "development": 45,

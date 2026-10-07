@@ -218,7 +218,8 @@ def test_every_static_method_gets_industry_and_glossary_pages():
         check("Next.js: 用語集の構造化データの URL は canonical と同じ形（末尾スラッシュ無しの社は /glossary）",
               [data["glossary"]["url"], data["glossary"]["jsonld"][0]["url"]],
               ["https://h33.example/glossary", "https://h33.example/glossary"])
-        comp = (ROOT / "templates" / "nextjs_aggregate_page.tsx").read_text(encoding="utf-8")
+        # 見た目は雛形と aggregate_pages.CSS（HTML の社と共通）を合わせて置く。置いた部品そのものを見る（2026-10-08）
+        comp = (dest / "src" / "components" / "SsAggregatePage.tsx").read_text(encoding="utf-8")
         check("Next.js の描く部品が用語の枠・目次の見た目を持つ（サイトの CSS はリセットされている）",
               [".definition-box" in comp, ".gl-toc" in comp], [True, True])
 

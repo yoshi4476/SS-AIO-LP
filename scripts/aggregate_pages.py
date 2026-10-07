@@ -233,7 +233,7 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
     kept = []
     client = S.is_client(cfg["id"])
     for p in out:
-        p["html"] = _LINK.sub(fix, p["html"])
+        p["html"] = drop_title_heading(_LINK.sub(fix, p["html"]), p["title"])
         p["url"] = page_url(cfg, p["path"])
         leak = S.operator_leaks(p["html"] + json.dumps(p["jsonld"], ensure_ascii=False)) if client else []
         if leak:
@@ -241,6 +241,61 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
             continue
         kept.append(p)
     return kept
+
+
+def drop_title_heading(html, title):
+    """本文の最初の見出しがページの題と同じなら外す。題は置く側（雛形の h1・WordPress の固定ページの題）が出す。
+    外さないと「テーマから探す」の h1 の直後に同じ文の h2 が続いていた（補助金・コーポレートの全まとめのページ。2026-10-08）"""
+    m = re.search(r"<h([1-6])[^>]*>(.*?)</h\1>", html, re.S)
+    if m and m.group(1) == "2" and _h.unescape(re.sub(r"<[^>]+>", "", m.group(2))).strip() == title.strip():
+        return html[:m.start()] + html[m.end():]
+    return html
+
+
+# まとめのページの一覧・見出し・手順の見た目（AI集客ラボの hub-list・cat-head・enrich-steps・gl-toc と同じ形）。
+# 配信先の CSS はこの部品を持たず、黒丸と下線だけの箇条書きになり、件数や日付が題にくっついていた（「…対象外2026-10」）。
+# ページに同梱する。文字色・リンク色は配信先のものを使い、線と地の色だけ持つ（どの配色の社でも浮かない）
+CSS = (
+    ".ss-aggregate .latest-block{margin:0 0 2.6rem}"
+    ".ss-aggregate .cat-head{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;padding-bottom:.7rem;"
+    "margin:0 0 1.4rem;border-bottom:2px solid rgba(127,127,127,.22)}"
+    ".ss-aggregate .cat-head h2{margin:0;padding-left:.8rem;border-left:4px solid currentColor;font-size:1.3rem;line-height:1.4}"
+    ".ss-aggregate .cnt{font-size:.8rem;font-weight:400;opacity:.7}"
+    ".ss-aggregate .hub-lead{margin:.4rem 0 0;font-size:.92rem;line-height:1.85;opacity:.85}"
+    ".ss-aggregate .hub-list{list-style:none;margin:1.2rem 0 0;padding:0;display:grid;"
+    "grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:.9rem}"
+    ".ss-aggregate .hub-list li{list-style:none;margin:0;padding:1rem 1.1rem;border:1px solid rgba(127,127,127,.25);"
+    "border-radius:14px;background:#fff}"
+    ".ss-aggregate .hub-list li>a{display:flex;align-items:baseline;gap:.6em;text-decoration:none;font-weight:700;line-height:1.6}"
+    ".ss-aggregate .hub-list li>a strong{font-size:1.05rem}"
+    ".ss-aggregate .hub-list li>a .cnt{margin-left:auto;white-space:nowrap}"
+    ".ss-aggregate .hub-list li>.cnt,.ss-aggregate .hub-list .hub-lead{display:block;margin:.4rem 0 0;font-size:.84rem}"
+    ".ss-aggregate .hub-note{margin:1rem 0 0;font-size:.84rem;opacity:.8}"
+    ".ss-aggregate .enrich-steps{list-style:none;counter-reset:s;display:grid;"
+    "grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:1rem;margin:1.2rem 0 0;padding:0}"
+    ".ss-aggregate .enrich-steps li{counter-increment:s;list-style:none;margin:0;padding:1.2rem;"
+    "border:1px solid rgba(127,127,127,.25);border-radius:16px;background:#fff}"
+    ".ss-aggregate .enrich-steps li::before{content:\"STEP \" counter(s);display:block;margin-bottom:.4rem;"
+    "font-size:.72rem;font-weight:800;letter-spacing:.14em;opacity:.7}"
+    ".ss-aggregate .enrich-steps b{display:block;margin-bottom:.35rem}"
+    ".ss-aggregate .enrich-steps span{font-size:.88rem;line-height:1.85;opacity:.85}"
+    ".ss-aggregate .gl-toc{display:flex;flex-wrap:wrap;gap:.35rem .5rem;margin:1.2rem 0 1.6rem;padding:1rem;"
+    "border-radius:14px;background:rgba(127,127,127,.07)}"
+    ".ss-aggregate .gl-toc a{padding:.25em .7em;border:1px solid rgba(127,127,127,.25);border-radius:999px;"
+    "background:#fff;font-size:.82rem;text-decoration:none}"
+    ".ss-aggregate .gl-term{padding:1.4rem 0;border-top:1px solid rgba(127,127,127,.25);scroll-margin-top:96px}"
+    ".ss-aggregate .gl-term h3{margin:0 0 .7rem}"
+    ".ss-aggregate .gl-rel,.ss-aggregate .gl-more{margin:.4rem 0 0;font-size:.84rem;opacity:.85}"
+    ".ss-aggregate .definition-box{margin:.6rem 0;padding:.8rem 1rem;border-left:4px solid rgba(127,127,127,.5);"
+    "background:rgba(127,127,127,.08)}"
+    ".ss-aggregate .definition-box .term{font-weight:700}"
+    ".ss-aggregate .table-wrap{overflow-x:auto;margin:.8rem 0}"
+    ".ss-aggregate table{border-collapse:collapse;width:100%;font-size:.92rem}"
+    ".ss-aggregate th,.ss-aggregate td{border:1px solid rgba(127,127,127,.35);padding:.5rem .7rem;text-align:left;"
+    "vertical-align:top}"
+    ".ss-aggregate details{margin:.6rem 0;padding:.7rem 1rem;border:1px solid rgba(127,127,127,.35);border-radius:10px}"
+    ".ss-aggregate summary{font-weight:700;cursor:pointer}"
+)
 
 
 _CACHE = {}
@@ -302,7 +357,7 @@ def html_doc(tpl, cfg, page):
     body = (f'<div class="{MARK}" style="grid-column:1/-1;min-width:0">\n<h1>{E(page["title"])}</h1>\n'
             f'{page["html"]}\n</div>')
     alts = "".join(f'<link rel="alternate" hreflang="{k}" href="{E(v)}">\n' for k, v in (page.get("alternates") or {}).items())
-    head = (f'<meta name="generator" content="{MARK}">\n{alts}'
+    head = (f'<meta name="generator" content="{MARK}">\n{alts}<style>{CSS}</style>\n'
             + "".join('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
                       + "</script>\n" for ld in page["jsonld"]))
     if re.search(r"<main\b[^>]*>.*?</main>", t, re.S):

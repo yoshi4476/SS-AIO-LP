@@ -7,6 +7,12 @@
   "type": "nextjs-json",
   "content_dir": "src/content/blog",
   "images_dir": "public/images/blog",
+  "html_parts": {
+    "definition-box": "def-box",
+    "caution-box": "note-box",
+    "lead-summary": "summary-box",
+    "_why": "原稿の部品の見た目は AI集客ラボの CSS にしか無く、全記事の定義・注意・要約が素の段落になっていた（2026-10-08）。記事の CSS（src/app/blog/[slug]/article.css）が持つ部品の名前へ読み替える（publish.apply_html_parts）"
+  },
   "url_prefix": "/blog",
   "trailing_slash": false,
   "ga4_property_id": "547741583",

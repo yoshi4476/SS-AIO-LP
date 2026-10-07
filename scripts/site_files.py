@@ -56,11 +56,17 @@ def generated(dest: Path, stem):
     if stem == "sitemap" and any((dest / n).is_file() for n in ("hugo.toml", "hugo.yaml", "config.toml")):
         return True
     rx = re.compile(rf"^{stem}(\.txt|\.xml)?\.(ts|tsx|js|jsx|mjs)$|^{stem}\.(txt|xml)$")
+    route_dir = re.compile(rf"^{stem}\.(txt|xml)$")
+    route = re.compile(r"^route\.(ts|tsx|js|jsx|mjs)$")
     for top, dirs, files in os.walk(dest):
         dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
         if Path(top) == dest:
             continue                      # 直下の robots.txt は公開ファイルそのもの（生成ではない）
         if any(rx.match(f) for f in files):
+            return True
+        # Next.js の App Router の経路（app/llms.txt/route.ts）。見落として public/llms.txt を置き、
+        # 先方の動的な llms.txt と同じ URL を取り合うところだった（CONFLUX・2026-10-08）
+        if route_dir.match(Path(top).name) and any(route.match(f) for f in files):
             return True
     return False
 

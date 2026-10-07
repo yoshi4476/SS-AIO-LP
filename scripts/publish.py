@@ -263,7 +263,10 @@ def client_credit(cfg, url=""):
     if not (sup.get("name") and sup.get("display")):
         return out
     quals = sup.get("qualification") or []
-    quals = [q for q in ([quals] if isinstance(quals, str) else quals) if q]
+    # ヒアリングシートの「なし（実務の経歴で監修。資格は表示しない）」は資格ではない。資格として出すと
+    # 「監修: YW（なし（…））」と表示され、構造化データにも資格として載る（CONFLUX・2026-10-08）
+    quals = [q for q in ([quals] if isinstance(quals, str) else quals)
+             if q and not re.match(r"\s*(なし|無し|ない|-|－|ー)(\s|（|\(|$)", str(q))]
     rv = {"@type": "Person", "name": sup["name"]}
     if sup.get("title"):
         rv["jobTitle"] = sup["title"]
@@ -334,9 +337,65 @@ def apply_credit(page, credit, url, meta):
     return page.replace("</head>", tag + "\n</head>", 1) if "</head>" in page else page + tag
 
 
+def apply_html_parts(html, cfg):
+    """原稿の部品（definition-box など）を、配信先の CSS が持つ部品の名前へ読み替える（sites/<id>.json の html_parts）。
+
+    部品の見た目は AI集客ラボの CSS にしかなく、そのまま渡すとコーポレートでは全記事の定義・注意・要約が素の段落になっていた
+    （2026-10-08 の点検: 132/132本）。コーポレートの記事の CSS（article.css）は def-box・note-box・summary-box を持ち、
+    箱の題は先頭の strong で描く（.summary-box > strong）。部品の題（lst-title・box-title）も strong にする"""
+    parts = {k: v for k, v in (cfg.get("html_parts") or {}).items() if not k.startswith("_") and v}
+    if not parts:
+        return html
+
+    def box(m):
+        # 題の後の <br> は残す（注意の箱の strong は行の中の要素なので、改行が無いと本文とつながる）
+        inner = re.sub(r'^\s*<(p|span) class="(?:lst-title|box-title)">(.*?)</\1>',
+                       r"<strong>\2</strong>", m.group(2), count=1, flags=re.S)
+        return f'<div class="{parts[m.group(1)]}">{inner}</div>'
+    return re.sub(r'<div class="(' + "|".join(map(re.escape, parts)) + r')">(.*?)</div>', box, html, flags=re.S)
+
+
+def template_intro(html, tpl, cfg, meta):
+    """雛形が冒頭に別に出すもの（{{LEAD_DANGEN}} の結論・{{TARGET}} の対象読者・{{DATE_YM}} の時点）を本文から外し、
+    (本文, 結論の文字, 対象読者) を返す。雛形に無いものは本文に残す（先方の雛形 template.html が持たない社がある）。
+
+    両方に出すと冒頭で同じ文が2回並ぶ（補助金サイト 129本）。対象読者の箱に2文目があると
+    「この記事は<b>…方に向けて書いています。</b>向けです」と文が壊れた（47本）。対象読者は最初の「向けです」の前だけを使い、
+    箱の2文目以降（「…方に向けて書いています。」「公募の日程は◯日時点の…」）は本文に残す"""
+    cut = html.find("<h2")
+    intro, rest = (html[:cut], html[cut:]) if cut >= 0 else (html, "")
+    lead = ""
+    m = re.search(r"<p>(.*?)</p>", intro, re.S)
+    if m:
+        lead = _plain(m.group(1))
+        if "{{LEAD_DANGEN}}" in tpl:
+            intro = intro[:m.start()] + intro[m.end():]
+    target = ""
+    m = re.search(r'<div class="target-reader">(.*?)</div>', intro, re.S)
+    if m:
+        head, sep, tail = m.group(1).partition("向けです")
+        if sep:
+            target = re.sub(r"(の方)?$", "", re.sub(r"^この記事は[、,]?\s*", "", _plain(head)))
+            if "{{TARGET}}" in tpl:
+                tail = re.sub(r"^[。.]\s*", "", tail.strip())
+                intro = (intro[:m.start()] + (f'<div class="target-reader">{tail}</div>' if _plain(tail) else "")
+                         + intro[m.end():])
+    if not target:
+        target = re.sub(r"(の方)?向けです[。.]?$", "", re.sub(r"^この記事は[、,]?\s*", "",
+                                                         str(cfg.get("audience") or "").strip()))
+    m = re.search(r'<p class="freshness">(.*?)</p>', intro, re.S)
+    if m and "{{DATE_YM}}" in tpl:
+        head, sep, tail = m.group(1).partition("時点の情報です")
+        if sep:
+            tail = re.sub(r"^[。.]\s*", "", tail.strip())
+            intro = intro[:m.start()] + (f'<p class="freshness">※ {tail}</p>' if _plain(tail) else "") + intro[m.end():]
+    return intro + rest, lead or str(meta.get("description") or ""), target
+
+
 def write_nextjs_json(cfg, dest: Path, meta, body):
     """Next.jsサイト用: 本文HTML込みのJSONを書き出す"""
     html, _ = md2html.convert(body)
+    html = apply_html_parts(html, cfg)
     faq = md2html.extract_faq(body)
     # 変換されずに残ったMarkdownの検査は main() に移した。
     # ここに置くと nextjs-json だけが見られ、他の配信方式が素通りする
@@ -508,6 +567,233 @@ def _md_insert_entries(body, cfg):
     return "\n".join(lines)
 
 
+# ============================================================
+# 先方の変換が読む Markdown の方言（sites/<id>.json の md_dialect。いまは CONFLUX の journal）
+# ============================================================
+# CONFLUX は届いた Markdown を先方の scripts/build-journal.mjs（fromPipeline）で読み替え、marked で HTML にする。
+# 当社の原稿のまま置くと、次のことが起きる（2026-10-08 の点検で再現）:
+#   - score があり author の無い記事を「自動化の記事」と見なさず、日付の欄が無いまま読んで組み立てごと落ちる（RangeError）
+#   - marked（CommonMark）は「**…。**本文」の ** を閉じと見なさず、記号のまま出す（1本で7組）
+#   - 定義・注意・要約・対象読者・時点・相談の箱に先方の CSS が無く素の段落になる。相談の箱は当社の青で浮く
+#   - よくある質問の <div class="faq"> の殻が残り、中身の無い見出しが先方の質問欄と並んで目次に2回出る
+#   - 結論の枠に説明文（description）が入る（先方は最初の em-marker を結論として読む）
+# 先方の部品（globals.css の .prose-yw の box-note・box-warn・cta-inline・table-wrap）と、
+# fromPipeline が読む書き方（「本記事は◯時点の情報です。この記事は、◯向けです。」の1行・## この記事の要点・em-marker）へ直す
+_PROTECT = re.compile(r"```.*?```|`[^`\n]+`|<script\b.*?</script>", re.S)
+_HOLD = re.compile(r"@@HOLD(\d+)@@")
+# 先方が描けない当社の部品（変換の後に残っていれば配信しない）
+OUR_PARTS = ("definition-box", "caution-box", "lead-summary", "target-reader", "freshness", "cta-box", "cta-mid",
+             "cta-button", "faq", "txt-red", "txt-blue", "big", "lst-title", "term")
+
+
+def md_dialect(cfg):
+    """先方の変換が読む方言の設定（sites/<id>.json の md_dialect）。無ければ {}（当社の原稿の形のまま置く）"""
+    d = cfg.get("md_dialect")
+    return d if isinstance(d, dict) and d.get("name") == "journal" else {}
+
+
+def md_inline_to_html(md, em="em"):
+    """**強調** と *強調* を HTML のタグにする（当社の変換 Python-Markdown と同じ範囲）。コード・script の中は触らない。
+    CommonMark（marked など）は句読点の直後の ** を閉じと見なさず、「**…。**本文」が記号のまま表示される。
+    em は *強調* のタグ（当社のサイトでは青の太字。斜体を持たない和文の配信先には strong を渡す）"""
+    keep = []
+
+    def hold(m):
+        keep.append(m.group(0))
+        return f"@@HOLD{len(keep) - 1}@@"
+    t = _PROTECT.sub(hold, md)
+    t = re.sub(r"\*\*(?!\s)([^\n]+?)(?<!\s)\*\*", r"<strong>\1</strong>", t)
+    t = re.sub(r"(?<!\*)\*(?![\s*])([^*\n]+?)(?<![\s*])\*(?!\*)", rf"<{em}>\1</{em}>", t)
+    return _HOLD.sub(lambda m: keep[int(m.group(1))], t)
+
+
+def _plain(html):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", html)).replace("==", "").strip()
+
+
+def _md_block(html):
+    """HTML の塊を1つの塊として置く（中の空行を詰め、前後に空行）。CommonMark は空行で HTML の塊を終え、
+    残りを Markdown として読むため、塊の中に空行があると閉じタグが本文に出る"""
+    return "\n\n" + re.sub(r"\n\s*\n", "\n", html.strip()) + "\n\n"
+
+
+def _journal_box(cls, title, inner):
+    inner = re.sub(r"^\s*(?:<br\s*/?>\s*)+", "", inner.strip())
+    if not re.match(r"<(p|ul|ol|table|div)\b", inner):
+        inner = f"<p>{inner}</p>"
+    head = f'<p class="box-title">{title}</p>\n' if title else ""
+    return _md_block(f'<div class="{cls}">\n{head}{inner}\n</div>')
+
+
+def _journal_cta(href, label, text, tag=""):
+    """相談の導線を先方の部品（.cta-inline: 黒地に用紙色の文字）にする。先方の手書きの記事と同じ書き方"""
+    label = re.sub(r"\s*[→＞>]+\s*$", "", _plain(label))
+    data = f' data-cta="{tag}"' if tag else ""
+    return _md_block(f'<a class="cta-inline" href="{href}"{data}><strong>{label} →</strong>'
+                     f"<span>{_plain(text)}</span></a>")
+
+
+def _lead_answer(block):
+    """冒頭の段落から結論の1文を取り出す。(結論の Markdown, 残りの Markdown)。取れなければ ("", block)"""
+    bold = re.match(r"\s*\*\*(.+?)\*\*", block, re.S)
+    if bold and bold.group(1).rstrip().endswith(("。", "！", "？")):
+        return bold.group(1), block[bold.end():].strip()
+    sent = re.match(r"\s*(.+?[。！？])", block, re.S)
+    if sent and sent.group(1).count("**") % 2 == 0:
+        return sent.group(1), block[sent.end():].strip()
+    return "", block
+
+
+def _journal_intro(body, cfg, meta):
+    """最初の見出し（H2）より前を先方の形にする。
+
+    先方は「本記事は◯時点の情報です。この記事は、◯向けです。」の行から時点と対象読者を取って行ごと外し、
+    最初の em-marker を結論の枠に出す。結論はこの行に置く（本文の1段落目に残すと、結論の枠と本文の頭に同じ文が2回並ぶ）。
+    「この記事でわかること」は ## この記事の要点 の箇条書きで渡す。最初の見出しの直前に置く
+    （先方は次の ## までを節として外すので、後ろに本文があると一緒に消える）。
+    対象読者・時点の箱にある2文目以降（「…方に向けて書いています。」「公募の日程は◯日時点の…」）は本文に残す"""
+    m = re.search(r"^## ", body, re.M)
+    if not m:
+        return body
+    intro, rest = body[:m.start()], body[m.start():]
+
+    def take(rx):
+        nonlocal intro
+        got = re.search(rx, intro, re.S)
+        if got:
+            intro = intro[:got.start()] + intro[got.end():]
+        return got.group(1) if got else None
+    target = take(r'<div class="target-reader">(.*?)</div>')
+    fresh = take(r'<p class="freshness">(.*?)</p>')
+    summary = take(r'<div class="lead-summary">(.*?)</div>')
+    notes, aud, asof = [], "", ""
+    if target is not None:
+        head, sep, tail = target.partition("向けです")
+        if sep:
+            aud = re.sub(r"^この記事は[、,]?\s*", "", _plain(head))
+            tail = re.sub(r"^[。.]\s*", "", tail.strip())
+            if _plain(tail):
+                notes.append(tail)
+        else:
+            notes.append(target.strip())
+    aud = aud or re.sub(r"(の方)?向けです[。.]?$", "", str(cfg.get("audience") or "").strip())
+    if fresh is not None:
+        head, sep, tail = fresh.partition("時点の情報です")
+        if sep:
+            asof = re.sub(r"^[※*\s]+", "", _plain(head)) + "時点の情報です"
+            tail = re.sub(r"^[。.]\s*", "", tail.strip())
+            if _plain(tail):
+                notes.append("※ " + tail)
+        else:
+            notes.append(fresh.strip())
+    mod = str(meta.get("modified") or meta.get("date") or "")
+    if not asof and re.match(r"\d{4}-\d{2}", mod):
+        asof = f"{mod[:4]}年{int(mod[5:7])}月時点の情報です"
+    blocks = [b for b in re.split(r"\n\s*\n", intro.strip("\n")) if b.strip()]
+    answer, out = "", []
+    for b in blocks:
+        # 生の HTML の塊（動画・図・注意の箱）は結論にしない。文字の装飾で始まる段落は結論の候補
+        if answer or not (asof and aud) or re.match(r"\s*<(?!strong\b|em\b|b\b|a\b|span\b)[a-z]", b):
+            out.append(b)
+            continue
+        ans, left = _lead_answer(b)
+        # 結論の枠は文字だけを描く（リンクの記法は文字に戻す）
+        answer = _plain(md_inline_to_html(re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", ans)))
+        if left or not answer:
+            out.append(left if answer else b)
+    head = []
+    if asof and aud:
+        head.append(f"本記事は{asof}。この記事は、{aud}向けです。"
+                    + (f'<span class="em-marker">{answer}</span>' if answer else ""))
+    learn = ""
+    items = [li.strip() for li in re.findall(r"<li>(.*?)</li>", summary or "", re.S) if _plain(li)]
+    if items:
+        learn = "## この記事の要点\n\n" + "\n".join(f"- {li}" for li in items) + "\n\n"
+    return "\n\n".join(head + out + notes) + "\n\n" + learn + rest
+
+
+def journal_md(cfg, meta, body, dialect):
+    """当社の原稿（入口・導線を置いた後）を、先方の変換が読む (フロントマター, 本文) にする"""
+    # 自社サイト内のリンクは / から（先方の変換は https のリンクを全部「新しいタブ」で開くようにする）
+    body = re.sub(r"(\]\(|href=\")https?://(?:www\.)?" + re.escape(cfg["domain"]) + r"(?=/)", r"\1", body)
+    # 文字の装飾（入れ子は内側から）。赤・青は太字、大きな文字は先方のマーカー
+    for _ in range(5):
+        new = re.sub(r'<span class="(txt-red|txt-blue|big)">((?:(?!<span\b).)*?)</span>',
+                     lambda m: (f'<strong class="marker">{m.group(2)}</strong>' if m.group(1) == "big"
+                                else f"<strong>{m.group(2)}</strong>"), body, flags=re.S)
+        if new == body:
+            break
+        body = new
+    body = _journal_intro(body, cfg, meta)
+    body = re.sub(r'<div class="definition-box">(.*?)</div>',
+                  lambda m: _journal_box("box-note", "定義", re.sub(r'<span class="term">(.*?)</span>', r"<strong>\1</strong>",
+                                                                   m.group(1), flags=re.S)), body, flags=re.S)
+
+    def warn(m):
+        inner, title = m.group(1).strip(), ""
+        t = re.match(r'<(span|p) class="box-title">(.*?)</\1>', inner, re.S)
+        if t:
+            # 先方の枠は「注意」の札を付けるので、題の頭の「注意:」は外す
+            title, inner = re.sub(r"^\s*注意点?\s*[:：]\s*", "", t.group(2)).strip(), inner[t.end():]
+        return _journal_box("box-warn", title, inner)
+    body = re.sub(r'<div class="caution-box">(.*?)</div>', warn, body, flags=re.S)
+    body = re.sub(r'<div class="cta-box">\s*<p>(.*?)</p>\s*<a class="cta-button" href="([^"]+)"[^>]*>(.*?)</a>\s*</div>',
+                  lambda m: _journal_cta(m.group(2), m.group(3), m.group(1)), body, flags=re.S)
+    body = re.sub(r'<div class="cta-mid"[^>]*>\s*<p[^>]*>(.*?)</p>\s*<a class="cta-button" href="([^"]+)"'
+                  r'(?: data-cta="([^"]*)")?[^>]*>(.*?)</a>\s*(?:<p[^>]*>(.*?)</p>)?\s*</div>',
+                  lambda m: _journal_cta(m.group(2), m.group(4), m.group(1) + (m.group(5) or ""), m.group(3) or ""),
+                  body, flags=re.S)
+    # よくある質問: 先方は <details> を抜き出して質問欄にし、空になった見出しを外す。殻の div が残ると見出しも残る
+    body = re.sub(r'<div class="faq">\s*(.*?)\s*</div>', lambda m: "\n" + m.group(1) + "\n", body, flags=re.S)
+    # 表は先方の横スクロールの枠（.table-wrap）に入れる（先方の手書きの記事と同じ形）
+    lines, out, fence, i = body.split("\n"), [], False, 0
+    while i < len(lines):
+        if lines[i].startswith("```"):
+            fence = not fence
+        if not fence and lines[i].lstrip().startswith("|"):
+            j = i
+            while j < len(lines) and lines[j].lstrip().startswith("|"):
+                j += 1
+            out += ["", '<div class="table-wrap">', ""] + lines[i:j] + ["", "</div>", ""]
+            i = j
+            continue
+        out.append(lines[i])
+        i += 1
+    body = re.sub(r"\n{3,}", "\n\n", md_inline_to_html("\n".join(out), em="strong")).strip("\n") + "\n"
+    fm = {k: meta[k] for k in ("slug", "title", "description", "category", "date") if meta.get(k) not in (None, "")}
+    fm["updated"] = meta.get("modified") or meta.get("date")
+    try:
+        brief = json.loads((ROOT / "data" / "clients" / cfg["id"] / "brief.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        brief = {}
+    fm["author"] = dialect.get("author") or (brief.get("author") or {}).get("name") or ""
+    if meta.get("keyword"):
+        fm["tags"] = [str(meta["keyword"])]
+    return fm, body
+
+
+def journal_problems(fm, body, dialect):
+    """先方の変換が組み立てを止める条件（build-journal.mjs）と、先方が描けない形を、書き込む前に見る。
+    先方は1本でも止まるとサイト全体の組み立てが失敗し、どの記事も更新されなくなる"""
+    out = []
+    if "score" in fm or not fm.get("date"):
+        out.append("自動化の記事と見なされない（score がある・date が無い）")
+    out += [f"{k} がありません" for k in ("slug", "title", "description", "category", "author") if not fm.get(k)]
+    text = json.dumps(fm, ensure_ascii=False, default=str) + body
+    out += [f"先方が止める語「{w}」が入っています" for w in dialect.get("forbidden") or [] if w and w in text]
+    heads = [h for h in re.findall(r"^##\s*(.+)$", body, re.M)
+             if not re.match(r"\s*(目次|この記事の要点|よくある質問|出典|参考)", h)]
+    if len(heads) < 3:
+        out.append(f"見出し（H2）が3つ未満（{len(heads)}）")
+    bare = _PROTECT.sub("", body)
+    if "**" in bare:
+        out.append("** が残っています（先方の変換では記号のまま出ます）")
+    left = sorted({c for c in re.findall(r'class="([^"]+)"', bare) if c in OUR_PARTS})
+    if left:
+        out.append("先方に無い部品が残っています: " + "・".join(left))
+    return out
+
+
 def write_external_md(cfg, dest: Path, meta, body, src: Path):
     """別リポジトリの静的サイト用: Markdown を置き、記事1本分の届け物を揃える。
 
@@ -516,13 +802,17 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
     本文には既に生の HTML（図解の figure・注意の枠）があり、先方の変換は生の HTML を通す前提なので、
     構造化データ・動画・入口は本文に HTML で置く（先方の雛形に手を入れずに出る）。
     head にしか置けないもの（robots の meta・OGP の画像）はフロントマターに載せる:
-      image（OGP の絶対URL）・photo（一覧・記事の頭の写真）・robots・video（YouTube の URL）"""
+      image（OGP の絶対URL）・photo（一覧・記事の頭の写真）・robots・video（YouTube の URL）
+
+    sites/<id>.json に md_dialect がある社は、先方の変換が読む形（journal_md）で置く。先方のページが記事・FAQ の
+    構造化データ・アイキャッチ・写真を自分で出すので、それらは置かない（重ねると同じ記事が2つの実体に見える）"""
     slug = meta["slug"]
     url = sites_mod.article_url(cfg, meta)
     origin = f"https://{cfg['domain']}"
     root = public_root(cfg, dest)
     images_dir = cfg.get("images_dir") or "images"
     prefix = image_prefix({**cfg, "images_dir": images_dir})
+    journal = md_dialect(cfg)
     fm = dict(meta)
     src_path, dst_path = f"/images/{slug}/", f"{prefix}/{slug}/"
     if src_path != dst_path:
@@ -530,44 +820,54 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
         if fm.get("eyecatch"):
             fm["eyecatch"] = str(fm["eyecatch"]).replace(src_path, dst_path)
     chars = len(md2html.plain_text(md2html.convert(body)[0]))
+    vb = video_block(meta, dest)
+    if journal:
+        body = _md_insert_entries((vb + "\n" + body.lstrip("\n")) if vb else body, cfg)
+        html = md2html.convert(body)[0]
+        fm, body = journal_md(cfg, meta, body, journal)
+        bad = journal_problems(fm, body, journal)
+        if bad:
+            raise SystemExit(f"BLOCKED(公開不可): {slug} は {cfg.get('name', cfg['id'])} の先方の変換で組み立てが止まるか、"
+                             "崩れる形です: " + " / ".join(bad))
     written = []
     ensure_images(meta)
     img_src = ROOT / "site" / "images" / slug
     if img_src.is_dir():
         img_dest = dest / images_dir / slug
         shutil.rmtree(img_dest, ignore_errors=True)
-        shutil.copytree(img_src, img_dest)
+        # アイキャッチには運用会社の名前が入る。先方の雛形が使わない方言では図解だけを届ける
+        shutil.copytree(img_src, img_dest, ignore=shutil.ignore_patterns("eyecatch.*") if journal else None)
         written.append(img_dest)
     image = f"{origin}{fm['eyecatch']}" if fm.get("eyecatch") else ""
-    try:
-        import photo_shelf
-        _, purl = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), slug)
-        photo = photo_shelf.copy_to(root, purl) if purl else ""
-        if photo:
-            fm["photo"] = photo
-            jpg = photo_shelf.path_of(purl)
-            if jpg.is_file():
-                shutil.copy2(jpg, root / "images" / "shelf" / jpg.name)
-                image = f"{origin}/images/shelf/{jpg.name}"
-            written += [root / "images" / "shelf"]
-    except Exception as e:
-        print(f"  写真の棚をスキップ: {e}")
-    if image:
-        fm["image"] = image
-    import search_preview
-    fm["robots"] = ", ".join(search_preview.DIRECTIVES)
-    vb = video_block(meta, dest)
-    if vb:
-        fm["video"] = re.search(r'"contentUrl": "([^"]+)"', vb).group(1)
-        body = vb + "\n" + body.lstrip("\n")
-    body = _md_insert_entries(body, cfg)
-    html = md2html.convert(body)[0]
-    credit = client_credit(cfg, url)
-    body = body.rstrip("\n") + "\n\n" + ld_scripts(cfg, meta, url, html, image, credit, video=not vb)
-    # 訳のページとの組（hreflang の値 → URL）。head に出すのは先方の雛形（訳のページの Markdown と同じ alternates の形）
-    alts = article_alternates(cfg, dest, meta)
-    if alts:
-        fm["alternates"] = alts
+    if not journal:
+        try:
+            import photo_shelf
+            _, purl = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), slug)
+            photo = photo_shelf.copy_to(root, purl) if purl else ""
+            if photo:
+                fm["photo"] = photo
+                jpg = photo_shelf.path_of(purl)
+                if jpg.is_file():
+                    shutil.copy2(jpg, root / "images" / "shelf" / jpg.name)
+                    image = f"{origin}/images/shelf/{jpg.name}"
+                written += [root / "images" / "shelf"]
+        except Exception as e:
+            print(f"  写真の棚をスキップ: {e}")
+        if image:
+            fm["image"] = image
+        import search_preview
+        fm["robots"] = ", ".join(search_preview.DIRECTIVES)
+        if vb:
+            fm["video"] = re.search(r'"contentUrl": "([^"]+)"', vb).group(1)
+            body = vb + "\n" + body.lstrip("\n")
+        body = _md_insert_entries(body, cfg)
+        html = md2html.convert(body)[0]
+        credit = client_credit(cfg, url)
+        body = body.rstrip("\n") + "\n\n" + ld_scripts(cfg, meta, url, html, image, credit, video=not vb)
+        # 訳のページとの組（hreflang の値 → URL）。head に出すのは先方の雛形（訳のページの Markdown と同じ alternates の形）
+        alts = article_alternates(cfg, dest, meta)
+        if alts:
+            fm["alternates"] = alts
     target = dest / cfg["content_dir"] / f"{slug}.md"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text("---\n" + yaml.safe_dump(fm, allow_unicode=True, sort_keys=False, width=1000)
@@ -758,6 +1058,52 @@ def page_dir(cfg):
     return cfg.get("page_dir") or (cfg.get("url_prefix") or "/blog").strip("/") or "blog"
 
 
+def _route_exists(dest: Path, seg):
+    """配信先の作業コピーに、/<seg> で開ける場所があるか（静的ファイル・Next.js の app の経路・転送の規則）"""
+    for base in ("", "public", "static", "site", "src/app", "app"):
+        if (dest / base / seg).exists():
+            return True
+    # Next.js の動的な階層の下（src/app/[locale]/journal など）
+    for app in (dest / "src" / "app", dest / "app"):
+        if app.is_dir() and any(p.is_dir() for p in app.glob(f"[[]*[]]/{seg}")):
+            return True
+    for rel in ("_redirects", "public/_redirects", "static/_redirects"):
+        f = dest / rel
+        if f.is_file() and re.search(rf"^/{re.escape(seg)}(/|\s)", f.read_text(encoding="utf-8", errors="ignore"), re.M):
+            return True
+    return False
+
+
+def foreign_links(cfg, body, dest=None):
+    """原稿の / で始まるリンクのうち、その社に無い場所へ向かうもの。
+
+    AI集客ラボの相談先 /lp/ がコーポレート・補助金の記事の相談ボタンに入り、404 だった（2026-10-08: 2本4か所）。
+    Git の社は配信先の作業コピーに在るかで見る。作業コピーの無い方式（FTP・ZIP・WordPress）は、
+    AI集客ラボにしか無い入口（/lp/ とカテゴリ）だけを見る"""
+    if cfg.get("type") == "self-static":
+        return []
+    pre = (cfg.get("url_prefix") or "").strip("/").split("/")[0]
+    lab = set()
+    for sid, c in sites_mod.load_all().items():
+        if c.get("type") == "self-static" and sid != cfg.get("id"):
+            lab |= {"lp", *(c.get("categories") or {})}
+    bad = []
+    for path in re.findall(r"""(?:\]\(|href=["'])(/[^)"'\s#?]*)""", body):
+        seg = path.strip("/").split("/")[0]
+        if path.startswith("//") or seg in ("", "images", pre):
+            continue
+        if (not _route_exists(dest, seg)) if dest is not None else (seg in lab):
+            bad.append(path)
+    return sorted(set(bad))
+
+
+def stop_foreign_links(cfg, meta, body, dest=None):
+    bad = foreign_links(cfg, body, dest)
+    if bad:
+        raise SystemExit(f"BLOCKED(公開不可): {meta['slug']} に {cfg.get('name', cfg['id'])} に無い場所へのリンクがあります: "
+                         f"{' / '.join(bad)}（相談先は sites/{cfg['id']}.json の cta.url: {(cfg.get('cta') or {}).get('url', '—')}）")
+
+
 def check_contract(cfg, dest: Path, meta):
     """配信先のビルドが壊れない形かを、書き込む前に確かめる。
 
@@ -894,9 +1240,12 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     tpl = tpl_path.read_text(encoding="utf-8")
 
     html, _ = md2html.convert(body)
+    html = apply_html_parts(html, cfg)
     # FAQはテンプレート側が専用セクションを持つので、本文からは先に取り除く
     # （目次を作る前に消さないと、存在しない見出しへのリンクが目次に残る）
     html = re.sub(r"<h2[^>]*>\s*よくある質問\s*</h2>.*?(?=<h2|$)", "", html, flags=re.S)
+    # 雛形が冒頭に出す結論・対象読者・時点は本文から外す（動画を頭に足す前に。動画の説明を結論と取り違えない）
+    html, lead, target_txt = template_intro(html, tpl, cfg, meta)
     # YouTube に上がった記事動画があれば先頭に埋め込む（build.py と同じ関数。CSP が許さない配信先は飛ばす）
     html = video_block(meta, dest) + html
     html += aggregate_links(cfg, dest, meta)
@@ -939,15 +1288,8 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     related = "\n".join(f'<li><a href="{u}">{t}</a></li>'
                         for t, u in _recent_articles(dest, cfg, meta["slug"], 3))
 
-    plain = md2html.plain_text(html)
-    lead = (re.search(r"<p[^>]*>(.*?)</p>", html, re.S) or [None, ""])[1]
-    target_txt = (re.search(r'class="target-reader">(.*?)</div>', body, re.S)
-                  or [None, cfg.get("audience", "")])[1]
-    # テンプレートが「この記事は<b>◯◯</b>向けです」の形で囲むため、
-    # 原稿側の「この記事は…向けです。」から中身だけを取り出す（二重表記を避ける）
-    target_txt = re.sub(r"<[^>]+>", "", target_txt).strip()
-    target_txt = re.sub(r"^この記事は[、,]?\s*", "", target_txt)
-    target_txt = re.sub(r"(の方)?向けです[。.]?\s*$", "", target_txt)
+    # 冒頭の結論は雛形の枠に出る。本文から外しても、読む量と扱う実体には数える
+    plain = md2html.plain_text(html) + lead
 
     # 記事が扱う実体（IT導入補助金など）を公式の場所へ結ぶ（AI検索が同じ実体として束ねる）
     import entities
@@ -966,7 +1308,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         # 「◯年◯月時点」は情報を確かめた時点。書き直した記事で公開月のままだと古く見える
         "DATE_YM": f"{mod[:4]}年{int(mod[5:7])}月",
         "READ_MIN": str(max(3, round(len(plain) / 600))),
-        "LEAD_DANGEN": re.sub(r"<[^>]+>", "", lead).strip(),
+        "LEAD_DANGEN": lead,
         "TARGET": target_txt,
         "BODY": insert_mid_cta(insert_inline_entry(html, cfg), cfg),
         "TOC_ITEMS": toc,
@@ -1317,8 +1659,8 @@ def write_aggregate_nextjs(cfg, dest: Path, live):
     data_p.write_text(json.dumps({"pages": keep}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     og = 'images: [{ url: "/ogp.png" }]' if (dest / "public" / "ogp.png").is_file() else ""
     comp.parent.mkdir(parents=True, exist_ok=True)
-    comp.write_text(tpl("nextjs_aggregate_page.tsx").replace("__DATA__", imp(comp, data_p)).replace("__OG__", og),
-                    encoding="utf-8", newline="\n")
+    comp.write_text(tpl("nextjs_aggregate_page.tsx").replace("__DATA__", imp(comp, data_p)).replace("__OG__", og)
+                    .replace("__CSS__", json.dumps(AP.CSS, ensure_ascii=False)), encoding="utf-8", newline="\n")
     written += [data_p, comp]
     gone = ["/" + k + "/" for k in old if k not in keep]
     written += AP.update_indexes(dest, cfg, [p for p in pages if p["path"].strip("/") in keep], gone)
@@ -1895,6 +2237,10 @@ def main():
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")
         return
 
+    # その社に無い場所へのリンク（AI集客ラボの /lp/ など）は配信しない。Git の社は作業コピーを取った後に見る
+    if cfg["type"] == "wordpress" or cfg["type"] in deliver_files.TYPES:
+        stop_foreign_links(cfg, meta, body)
+
     if cfg["type"] == "wordpress":
         ok = write_wordpress(cfg, meta, body, src, push=args.push)
         raise SystemExit(0 if ok else 1)
@@ -1917,6 +2263,7 @@ def main():
 
     token = _push_token()
     dest = dest or ensure_clone(cfg, token)
+    stop_foreign_links(cfg, meta, body, dest)
     # 直下の llms.txt・robots.txt（と静的サイトの sitemap.xml）が無ければ作り、AI クローラーを塞いでいれば直す。
     # 書き出しより先に置く（記事の行は書き出しが既にあるファイルへ足すため）
     placed = site_files.ensure(cfg, dest, dest / page_dir(cfg))

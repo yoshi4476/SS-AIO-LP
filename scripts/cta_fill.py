@@ -35,7 +35,9 @@ def cta_html(site_id):
     # 3サイトとも同じ文言になり、サイトごとの売り物が伝わらない
     c = cfg.get("cta") or {}
     label = c.get("label") or "無料で相談する"
-    href = c.get("url") or "/lp/"
+    # /lp/ は AI集客ラボにしか無い。ほかの社の記事に入ると相談のボタンが 404 になる（2026-10-08: 2本）。
+    # 配信先の見た目（CONFLUX の .cta-inline など）への読み替えは配信の時に publish.py が行う
+    href = c.get("url") or ("/lp/" if cfg.get("type") == "self-static" else f"https://{cfg.get('domain', '')}/")
     lead = (cfg.get("cta_desc") or c.get("note")
             or "ここまでの内容を自社に当てはめると何から着手すべきかを、無料で確認できます。")
     if not lead.endswith(("。", "！", "？")):
