@@ -307,6 +307,38 @@ const REVIEW_OFFER = ['', '▼ 最初に直す1か所を、無料でお返事し
   '今回の結果をもとに、御社がまず直すべき1か所と、その直し方をお返事します。',
   'このメールに「見てほしい」とだけご返信ください（2〜3営業日以内）。', ''].join('\n');
 
+// 問い合わせへの自動返信に添える「ご連絡までの間にご覧いただける資料」。サイトごとに、そのサイトの公開済みのものだけ。
+// 補助金の相談に AI集客ラボ（AIO）の動画と LP を添えていて、相談した内容と関係のない営業メールになっていた
+// （followUp が補助金・コーポレートの行を外しているのと同じ理由。2026-10-08）。コーポレート（経理BPO）には添える資料が無い。
+// サイト欄は表示名「名前 (ドメイン)」か、サイト一覧に無ければサイトID。ID・ドメイン・名前のどれかを含めば当てる
+const REPLY_MATERIALS = [
+  { keys: ['ai-lab', 'ai.7senses.co.jp', 'AI集客ラボ'], lines: [
+    '・なぜ今AI検索対策なのか（PR動画・約21分）',
+    '  https://ai.7senses.co.jp/videos/aio-pr.mp4',
+    '・運用の実態（システムの画面そのまま・約14分）',
+    '  https://ai.7senses.co.jp/videos/console-demo.mp4',
+    '・提案資料の説明動画（約18分）',
+    '  https://ai.7senses.co.jp/videos/doc-guide.mp4',
+    '・サービス案内と無料診断',
+    '  https://ai.7senses.co.jp/lp/'] },
+  { keys: ['subsidy', 'lp.7senses.co.jp', 'AI導入補助金サポート'], lines: [
+    '・補助金申請サポートの内容と、ご相談から申請までの流れ（申請はお客様、当社は相談・助言）',
+    '  https://lp.7senses.co.jp/service/hojokin/',
+    '・AI導入補助金の要項・必要書類のまとめ',
+    '  https://lp.7senses.co.jp/youkou/',
+    '・AIに補助金のことを聞いた調査（答えが割れた問いと、公募要領での確かめ方）',
+    '  https://lp.7senses.co.jp/research/ai-hojokin/'] },
+];
+
+function replyMaterials_(site) {
+  const s = String(site || '');
+  const hit = REPLY_MATERIALS.filter(function (m) {
+    return m.keys.some(function (k) { return s.indexOf(k) >= 0; });
+  })[0];
+  if (!hit) return '';
+  return ['', '▼ ご連絡までの間にご覧いただける資料'].concat(hit.lines).concat(['']).join('\n');
+}
+
 /** 送信者への自動返信。種別ごとに文面を変える */
 function leadReply_(site, type, d) {
   const email = clean_(d.email);
@@ -392,15 +424,8 @@ function leadReply_(site, type, d) {
   // 返信を待つ間に、判断に必要な材料を先に渡す（商談化を機械が進める）。
   // 載せるのは公開済みのものだけ。個別の見積りや約束は人が書く。
   // 無料ツール・資料請求の結果メールには付けない（運用者の判断 2026-10-05。結果だけを渡す）
-  const materials = !inquiry ? '' : ['', '▼ ご連絡までの間にご覧いただける資料',
-    '・なぜ今AI検索対策なのか（PR動画・約21分）',
-    '  https://ai.7senses.co.jp/videos/aio-pr.mp4',
-    '・運用の実態（システムの画面そのまま・約14分）',
-    '  https://ai.7senses.co.jp/videos/console-demo.mp4',
-    '・提案資料の説明動画（約18分）',
-    '  https://ai.7senses.co.jp/videos/doc-guide.mp4',
-    '・サービス案内と無料診断',
-    '  https://ai.7senses.co.jp/lp/', ''].join('\n');
+  // 中身は問い合わせが来たサイトのもの（REPLY_MATERIALS）。当てはまるサイトが無ければ付けない
+  const materials = !inquiry ? '' : replyMaterials_(site);
   // 診断は「弱かった項目にまず効く記事」を3本添える。対応表はサイトのビルドが
   // /data/reco.json に出す（記事が増えれば自動で新しくなる）。取れなければ何も足さない
   let reco = '';
