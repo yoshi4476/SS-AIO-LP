@@ -12,7 +12,7 @@ inputs:
     required: true
   family:
     description: >-
-      キャッシュの系統。private（救済・週次・月次が書く全部）／ai-kw（週次の KW 補充が書く AI の語）／
+      キャッシュの系統。private（記事の枠・救済・週次・月次が書く全部）／ai-kw（週次の KW 補充が書く AI の語）／
       index（週次の URL 検査が書く記録）。並行ジョブが書いた分を、別のジョブの古い写しで上書きしないために分ける
     default: private
   kinds:
@@ -22,6 +22,11 @@ inputs:
 runs:
   using: composite
   steps:
+    # 戻す前と後の中身を覚える。残すときに「このジョブで変えたファイル」だけを最新の写しに重ねるため
+    - if: inputs.mode == 'restore'
+      shell: bash
+      run: python3 scripts/client_private.py --mark-before || true
+
     - if: inputs.mode == 'restore'
       uses: actions/cache/restore@v4
       with:
@@ -31,14 +36,37 @@ runs:
 
     - if: inputs.mode == 'restore'
       shell: bash
-      run: python3 scripts/client_private.py --unpack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
+      run: |
+        python3 scripts/client_private.py --mark-after || true
+        python3 scripts/client_private.py --unpack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
 
     - if: inputs.mode == 'save'
       id: pack
       shell: bash
       run: |
         python3 scripts/client_private.py --pack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
-        if compgen -G "data/clients/*/private" > /dev/null; then echo "any=yes" >> "$GITHUB_OUTPUT"; fi
+        n=$(python3 scripts/client_private.py --stash 2>/dev/null | sed -n 's/^CLIENT_PRIVATE_STASHED=//p')
+        echo "このジョブで書いた・変えたお客様のファイル: ${n:-数えられません}"
+        if ! compgen -G "data/clients/*/private" > /dev/null; then exit 0; fi
+        case "$n" in
+          0) ;;                                                     # 何も変えていない（戻した写しのまま。残さない）
+          ''|*[!0-9]*) echo "any=yes" >> "$GITHUB_OUTPUT" ;;         # 数えられない回は重ねずにそのまま残す
+          *) echo "any=yes" >> "$GITHUB_OUTPUT"; echo "merge=yes" >> "$GITHUB_OUTPUT" ;;
+        esac
+
+    # private の系統は記事の枠・救済・週次・月次が書く。月次は記事の枠と同じ直列のグループに入れられない
+    # （待っている run は後から来た枠に取り消される）ので、重なっても失わないよう、残す直前に一番新しい写しを
+    # 重ね直し、このジョブで変えたファイルだけを戻してから残す（後から残した方が先の方の更新を消していた）
+    - if: inputs.mode == 'save' && inputs.family == 'private' && steps.pack.outputs.merge == 'yes'
+      uses: actions/cache/restore@v4
+      with:
+        path: data/clients/*/private
+        key: client-${{ inputs.family }}-${{ github.run_id }}-${{ github.run_attempt }}-latest
+        restore-keys: client-${{ inputs.family }}-
+
+    - if: inputs.mode == 'save' && inputs.family == 'private' && steps.pack.outputs.merge == 'yes'
+      shell: bash
+      run: python3 scripts/client_private.py --unstash || true
 
     - if: inputs.mode == 'save' && steps.pack.outputs.any == 'yes'
       uses: actions/cache/save@v4

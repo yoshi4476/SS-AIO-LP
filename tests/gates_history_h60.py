@@ -492,3 +492,38 @@ def test_saving_does_not_drop_other_jobs_updates():
     check("学びの台帳（id のある行）は同じ id ならこのジョブの行を残す",
           CP.merge_jsonl('{"id": "L1", "hits": 1}\n{"id": "L2"}\n', '{"id": "L1", "hits": 2}\n'),
           '{"id": "L1", "hits": 2}\n{"id": "L2"}\n')
+
+
+def _wf(name):
+    import yaml
+    return yaml.safe_load((ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8"))
+
+
+def test_client_private_is_merged_and_saved_by_writers():
+    import yaml
+    act = yaml.safe_load((ROOT / ".github" / "actions" / "client-private" / "action.yml").read_text(encoding="utf-8"))
+    st = act["runs"]["steps"]
+    run = [str(s.get("run", "")) + str(s.get("uses", "")) for s in st]
+
+    def at(text):
+        return next((i for i, r in enumerate(run) if text in r), None)
+    order = [at("--mark-before"), at("cache/restore"), at("--mark-after"), at("--stash"),
+             next((i for i, s in enumerate(st) if "cache/restore" in str(s.get("uses")) and "save" in str(s.get("if"))), None),
+             at("--unstash"), at("cache/save")]
+    check("持ち越し（action）: 戻す前後に中身を覚え、残す前に退避→最新の写しを戻す→このジョブの分を重ねる→残す",
+          None not in order and order == sorted(order), True)
+    merge = [s for s in st if "cache/restore" in str(s.get("uses")) and "save" in str(s.get("if"))]
+    check("持ち越し（action）: 最新の写しへ重ねるのは private の系統だけ（並行ジョブの ai-kw・index は今までどおり）",
+          bool(merge) and all("inputs.family == 'private'" in str(s.get("if")) for s in merge), True)
+    pm = _wf("pipeline-multi.yml")["jobs"]
+    sel = pm["select"]["steps"]
+    i_r = next((i for i, s in enumerate(sel) if s.get("uses") == "./.github/actions/client-private"), None)
+    i_s = next((i for i, s in enumerate(sel) if "対象サイトの判定" in str(s.get("name"))), None)
+    check("記事の枠: 1日の本数（pace の判定）を読む前に、お客様の置き場を戻す",
+          i_r is not None and i_s is not None and i_r < i_s, True)
+    wr = pm["write"]["steps"]
+    saves = [i for i, s in enumerate(wr) if s.get("uses") == "./.github/actions/client-private"
+             and (s.get("with") or {}).get("mode") == "save"]
+    last_write = max(i for i, s in enumerate(wr) if "link_boost.py" in str(s.get("run", "")))
+    check("記事の枠: お客様の記事に当てた直しの台帳・学びを、書いた後に（落ちても）残す",
+          bool(saves) and saves[-1] > last_write and str(wr[saves[-1]].get("if", "")).startswith("always()"), True)

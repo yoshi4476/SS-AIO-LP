@@ -113,6 +113,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/sched_guard.py
 
+      # お客様の社の量産の兆候（pace_state）は public に置かず置き場にある。戻さないとお客様の1日の本数が既定の2本になる
+      - uses: ./.github/actions/client-private
+        if: steps.sched.outputs.sched_go != 'no'
+        with: {mode: restore}
+
       - name: 対象サイトの判定
         id: site
         if: steps.sched.outputs.sched_go != 'no'
@@ -701,6 +706,11 @@ jobs:
               echo "要対応: 公開の後の手順で足したリンクを push できませんでした（次の配信で消えます）" >> automation/logs/findings.txt
             fi
           fi
+
+      # お客様の記事に当てた直しの台帳の行（公開直後のリンク）と学びは public に置かず置き場に書く。残さないと消える
+      - uses: ./.github/actions/client-private
+        if: always()
+        with: {mode: save}
 
       # 日次KPIは記事の枠から外した（daily-kpi.yml）。枠0が上限・量産の兆候で飛ぶと集計も飛んでいた
       - name: 運用通知
