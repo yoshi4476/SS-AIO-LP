@@ -173,6 +173,8 @@ faq:
 
 **記帳代行は、安さだけで選ぶと追加費用や対応範囲の食い違いが後から起きやすくなります。**
 
+近い論点を[コーポレートとバックオフィスは同じ？](/blog/corporate-backoffice-chigai/)で扱っています。
+
 <figure><img src="/images/kichodaiko-hiyou-souba/hikaku.png" alt="記帳代行選びのNGとOK: NG例は安さだけで依頼先を決める・仕訳数の上限を確認せず契約する・対応範囲を書面で確認しない・見積もりを1社だけで決める、OK例は料金体系と対応範囲を含めて比較する・仕訳数の上限と超過単価を確認する・対応範囲を書面で確認する・複数社から見積もりを取る" loading="lazy"><figcaption>記帳代行選びのNGとOK</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 仕訳数の上限を確認せず契約しない</span><br>月額固定プランには仕訳数の上限が設定されていることが多く、超過分は従量課金になります。<span class="txt-red">上限と超過単価を事前に確認しないと、繁忙月に想定外の請求が発生します。</span></div>
