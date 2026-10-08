@@ -146,7 +146,9 @@ def parse_article(path: Path):
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
     if not m:
         raise SystemExit(f"フロントマターがありません: {path}")
-    return yaml.safe_load(m.group(1)), strip_private_links(m.group(2))
+    # 検索から外した記事（noindex）へのリンクも配信の入口で外す（文は残す。build.py と同じ関数）。
+    # main() だけで外すと、描き直し（publish_rerender・republish_images・wp_bridge）が素の原稿で書き戻す
+    return yaml.safe_load(m.group(1)), noindex.unlink(strip_private_links(m.group(2)))[0]
 
 
 def strip_private_links(body):
@@ -2252,9 +2254,6 @@ def main():
     if not src.exists():
         raise SystemExit(f"記事が見つかりません: {src}")
     meta, body = parse_article(src)
-    # 検索から外した記事（noindex）へのリンクは、文を残して記法だけ外して配信する（build.py と同じ。
-    # 原稿は noindex.py --unlink で直してあるが、週次の道具が張り直しても配信先のページには出さない）
-    body = noindex.unlink(body)[0]
     # git の衝突マーカーが残った原稿は配信しない。「=======」が見出しとして描かれ、
     # 「<<<<<<< Updated upstream」が H1 として公開されていた（2026-09-29: 17本）
     if re.search(r"^(<<<<<<< |>>>>>>> |=======\s*$)", body, re.M):

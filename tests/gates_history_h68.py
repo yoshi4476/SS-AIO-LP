@@ -163,7 +163,12 @@ def test_four_renderers_mark_noindex_and_drop_from_indexes():
         w, why = noindex.nextjs_app(dest)
         check("nextjs: 形の違う先方のアプリには書かず、理由を返す", (w, bool(why)), ([], True))
     # 描き方ごとの配線（どの方式もこの1か所を通る）
-    check("publish: 配信する本文から外した記事へのリンクを外す（4方式とも main を通る）", "noindex.unlink" in inspect.getsource(P.main), True)
+    with tempfile.TemporaryDirectory() as d:
+        md = Path(d) / "x.md"
+        md.write_text("---\ntitle: x\n---\n本文の[ゆうちょの記帳](/blog/yucho-kicho-yarikata/)と[記帳代行とは](/blog/kichodaiko-toha/)。\n",
+                      encoding="utf-8")
+        check("publish: 配信の入口（parse_article。配信・描き直し・WordPress が通る）で外した記事へのリンクを外す",
+              P.parse_article(md)[1].strip(), "本文のゆうちょの記帳と[記帳代行とは](/blog/kichodaiko-toha/)。")
     check("publish nextjs-json: JSON と先方のアプリ", ("noindex.nextjs_fields" in inspect.getsource(P.write_nextjs_json),
                                                    "noindex.nextjs_app" in inspect.getsource(P.write_nextjs_json)), (True, True))
     check("publish external-html: head を noindex に", "noindex.set_robots" in inspect.getsource(P.write_external_html), True)
