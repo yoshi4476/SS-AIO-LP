@@ -10,8 +10,13 @@
   "大阪 写真館 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://happy-photo-studio.jp/stores/3/plans",
+     "https://studio-age.com/family-photo/",
+     "https://caja-photo.jp/family/",
+     "https://profile.studioindi.jp/access/osaka-umeda/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -42,8 +47,16 @@
   "東京 家族写真 スタジオ 人気": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://my-best.com/4683",
+     "https://lifestudio.jp/",
+     "https://lifestudio.jp/system/product",
+     "https://www.happilyphoto.jp/",
+     "https://www.happilyphoto.jp/about/",
+     "https://www.precieux-studio.com/",
+     "https://www.studio-alice.co.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -73,8 +86,14 @@
   "名古屋 七五三 撮影 写真館": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.p-takara.co.jp/menu/shichigosan/",
+     "https://studio753.mai-jp.net/price/",
+     "https://studio753.mai-jp.net/shop/tenpaku.html",
+     "https://studio753.mai-jp.net/shop/takinomizu.html",
+     "https://www.studio-calendar.jp/blank-6"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -100,8 +119,14 @@
   "福岡 成人式 前撮り スタジオ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://first-studio.jp/20th/fukuoka/",
+     "https://photonagi.com/plan/ageceremony",
+     "https://www.bib-rental.com/ceremony-shooting",
+     "https://inabaphoto.com/photomenu/20th/photoplan/",
+     "https://www.studioms.jp/furisode/furisode.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -140,8 +165,12 @@
   "札幌 マタニティフォト 撮影": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://studio-oneday.com/plan/maternity/",
+     "https://www.st-yume-sapporo.jp/plan/maternity-photo/",
+     "https://cherish-s.com/service/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -172,8 +201,14 @@
   "横浜 七五三 撮影 スタジオ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-origami.com/753",
+     "https://www.studio-origami.com/yotsubako-shop",
+     "https://www.post-create.com/stpost/studio/aobadai/shichigosan/",
+     "https://www.watanabephoto.co.jp/y_sogo/menu/anniversary/753/",
+     "https://ybht.co.jp/facilities/photostudio.php"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -200,8 +235,13 @@
   "京都 成人式 前撮り 写真館": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kyoto.seijinshiki-maedori.jp/",
+     "https://www.rentalkimonorose.com/location/plan_furisode_studio_r.html",
+     "https://kimono-pro.com/furisodephoto",
+     "https://photo-hayashi.net/maedorisatsu/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -238,8 +278,13 @@
   "神戸 お宮参り 写真 撮影": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kobebabyphotography.com/kobe-omiyamairi",
+     "https://www.minatogawajinja.or.jp/nankou/celebration/photo/",
+     "https://www.yamamoto-photo.co.jp/picture/",
+     "https://www.minatogawajinja.or.jp/wp-content/uploads/2021/03/photo-camera-manners.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -287,8 +332,12 @@
   "仙台 家族写真 出張撮影": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.photricot.com/family",
+     "https://hibiki-photo.info/menu/",
+     "https://comfortgate.net/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -328,8 +377,12 @@
   "広島 証明写真 写真館 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.saeda.co.jp/saedastudio/idphoto/",
+     "https://takasu.photo/service/shoumei/",
+     "https://www.inoue-photo-hiroshima.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -368,8 +421,13 @@
   "七五三 写真館 費用 相場": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail28.html",
+     "https://www.studio-mario.jp/event/753/article/pillar001/",
+     "https://www.studio-mario.jp/adlp/753/",
+     "https://studio-market.com/column/shichigosan-price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -393,8 +451,12 @@
   "七五三 スタジオ 選び方": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://f-photobook.jp/column/63photobook-753studio/",
+     "https://www.photoartisan.jp/plan/753.html",
+     "https://savetheworld.jp/photograph/osaka-shichigosan-studio-guide/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -431,8 +493,12 @@
   "七五三 前撮り 後撮り どっち": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-mario.jp/event/753/article/012/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail86.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail21.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1622,5 +1688,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-08"
 }

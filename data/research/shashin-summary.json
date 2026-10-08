@@ -1,14 +1,20 @@
 {
  "total": {
-  "clinic": 477,
-  "other": 13,
-  "portal": 106,
-  "media": 61,
+  "clinic": 516,
+  "other": 14,
+  "portal": 110,
+  "media": 62,
   "maker": 17,
   "video": 8,
   "public": 4
  },
  "by_engine": {
+  "ChatGPT": {
+   "clinic": 39,
+   "portal": 4,
+   "other": 1,
+   "media": 1
+  },
   "Gemini": {
    "clinic": 189,
    "other": 10,
@@ -29,15 +35,15 @@
  },
  "by_group": {
   "地域で探す": {
-   "clinic": 107,
-   "other": 7,
-   "portal": 41,
+   "clinic": 140,
+   "other": 8,
+   "portal": 44,
    "media": 8
   },
   "七五三・成人式の撮影": {
-   "clinic": 128,
-   "portal": 11,
-   "media": 12,
+   "clinic": 134,
+   "portal": 12,
+   "media": 13,
    "maker": 1
   },
   "家族写真・記念写真の撮影": {
@@ -64,14 +70,17 @@
   }
  },
  "answered": {
+  "ChatGPT": 13,
   "Gemini": 36,
   "Claude": 50
  },
  "has_clinic": {
+  "ChatGPT": 13,
   "Gemini": 36,
   "Claude": 50
  },
  "sources": {
+  "ChatGPT": 45,
   "Gemini": 255,
   "Claude": 431
  },
@@ -106,7 +115,7 @@
   ],
   [
    "my-best.com",
-   4
+   5
   ],
   [
    "photo-studio-inailife.com",
@@ -135,49 +144,49 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 86,
-   "clinic": 86,
-   "other": 12,
-   "media": 44,
-   "portal": 52,
+   "answers": 99,
+   "clinic": 99,
+   "other": 13,
+   "portal": 55,
+   "media": 45,
    "maker": 8,
    "video": 7,
    "public": 3
   },
   "地域で探す": {
-   "answers": 20,
-   "clinic": 20,
-   "other": 6,
-   "media": 7,
-   "portal": 14
+   "answers": 30,
+   "clinic": 30,
+   "other": 7,
+   "portal": 16,
+   "media": 7
   },
   "七五三・成人式の撮影": {
-   "answers": 18,
-   "clinic": 18,
-   "portal": 9,
-   "media": 9,
+   "answers": 21,
+   "clinic": 21,
+   "portal": 10,
+   "media": 10,
    "maker": 1
   },
   "家族写真・記念写真の撮影": {
    "answers": 15,
    "clinic": 15,
-   "media": 6,
    "portal": 10,
+   "media": 6,
    "other": 1
   },
   "料金・プラン": {
    "answers": 16,
    "clinic": 16,
    "portal": 10,
-   "media": 11,
    "video": 4,
+   "media": 11,
    "other": 3
   },
   "データ納品・アルバム仕上げ": {
    "answers": 17,
-   "media": 11,
    "clinic": 17,
    "video": 3,
+   "media": 11,
    "portal": 9,
    "maker": 7,
    "public": 3,

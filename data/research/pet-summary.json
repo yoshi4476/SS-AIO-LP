@@ -1,14 +1,22 @@
 {
  "total": {
-  "clinic": 377,
-  "media": 157,
-  "portal": 144,
-  "maker": 11,
-  "other": 14,
-  "video": 6,
-  "public": 2
+  "clinic": 493,
+  "other": 15,
+  "media": 174,
+  "portal": 161,
+  "maker": 13,
+  "public": 10,
+  "video": 6
  },
  "by_engine": {
+  "ChatGPT": {
+   "clinic": 116,
+   "other": 1,
+   "portal": 17,
+   "media": 17,
+   "public": 8,
+   "maker": 2
+  },
   "Gemini": {
    "clinic": 155,
    "media": 46,
@@ -30,75 +38,80 @@
  },
  "by_group": {
   "地域で探す": {
-   "clinic": 69,
-   "media": 18,
-   "portal": 57,
-   "maker": 3,
-   "other": 2
+   "clinic": 97,
+   "other": 3,
+   "media": 19,
+   "portal": 62,
+   "maker": 3
   },
   "トリミング": {
-   "clinic": 80,
-   "media": 29,
-   "portal": 7,
+   "portal": 12,
+   "clinic": 93,
+   "media": 33,
+   "public": 2,
    "maker": 3,
    "other": 2,
    "video": 1
   },
   "ペットホテル": {
-   "media": 37,
-   "clinic": 63,
-   "portal": 30,
-   "maker": 1,
-   "public": 1,
+   "media": 42,
+   "clinic": 92,
+   "portal": 33,
+   "public": 4,
+   "maker": 2,
    "other": 1,
    "video": 1
   },
   "犬種別・サイズ別": {
-   "clinic": 91,
+   "clinic": 114,
    "other": 5,
-   "media": 48,
-   "portal": 19,
+   "media": 53,
+   "portal": 22,
    "video": 2,
-   "maker": 1
+   "maker": 2,
+   "public": 1
   },
   "予約・利用の悩み": {
-   "clinic": 74,
+   "clinic": 97,
+   "portal": 32,
    "maker": 3,
    "other": 4,
-   "portal": 31,
-   "media": 25,
-   "public": 1,
+   "media": 27,
+   "public": 3,
    "video": 2
   }
  },
  "answered": {
+  "ChatGPT": 50,
   "Gemini": 36,
   "Claude": 50
  },
  "has_clinic": {
+  "ChatGPT": 40,
   "Gemini": 32,
   "Claude": 47
  },
  "sources": {
+  "ChatGPT": 161,
   "Gemini": 267,
   "Claude": 444
  },
  "portal_top": [
   [
    "animaldoc.jp",
-   24
+   27
   ],
   [
    "petlife.asia",
-   17
+   18
   ],
   [
    "epark.jp",
-   11
+   12
   ],
   [
    "hometrimmer.net",
-   10
+   11
   ],
   [
    "trimtrim.jp",
@@ -106,7 +119,7 @@
   ],
   [
    "curama.jp",
-   6
+   7
   ],
   [
    "pet-hotel-japan.com",
@@ -143,60 +156,62 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 86,
-   "clinic": 79,
-   "portal": 61,
-   "media": 70,
-   "maker": 8,
-   "other": 12,
-   "video": 6,
-   "public": 2
+   "answers": 136,
+   "other": 13,
+   "clinic": 119,
+   "media": 84,
+   "portal": 75,
+   "maker": 10,
+   "public": 9,
+   "video": 6
   },
   "地域で探す": {
-   "answers": 20,
-   "clinic": 14,
-   "portal": 16,
-   "media": 12,
-   "maker": 2,
-   "other": 2
+   "answers": 30,
+   "other": 3,
+   "clinic": 22,
+   "media": 13,
+   "portal": 19,
+   "maker": 2
   },
   "トリミング": {
-   "answers": 14,
-   "clinic": 14,
-   "media": 13,
-   "portal": 5,
-   "other": 1,
+   "answers": 24,
+   "portal": 10,
+   "clinic": 20,
+   "media": 16,
+   "public": 2,
    "maker": 2,
+   "other": 1,
    "video": 1
   },
   "ペットホテル": {
-   "answers": 16,
-   "clinic": 16,
-   "portal": 15,
-   "media": 14,
-   "maker": 1,
-   "public": 1,
+   "answers": 26,
+   "media": 18,
+   "clinic": 24,
+   "portal": 18,
+   "public": 3,
+   "maker": 2,
    "other": 1,
    "video": 1
   },
   "犬種別・サイズ別": {
-   "answers": 18,
-   "clinic": 18,
+   "answers": 28,
+   "clinic": 27,
+   "media": 21,
    "other": 4,
-   "media": 17,
-   "portal": 11,
+   "portal": 13,
    "video": 2,
-   "maker": 1
+   "maker": 2,
+   "public": 1
   },
   "予約・利用の悩み": {
-   "answers": 18,
-   "clinic": 17,
+   "answers": 28,
+   "portal": 15,
+   "clinic": 26,
    "other": 4,
-   "portal": 14,
    "maker": 2,
-   "media": 14,
-   "public": 1,
-   "video": 2
+   "media": 16,
+   "video": 2,
+   "public": 3
   }
  }
 }

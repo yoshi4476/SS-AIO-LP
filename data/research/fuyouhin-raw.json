@@ -10,8 +10,15 @@
   "大阪 不用品回収 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.osaka.lg.jp/kankyo/page/0000369355.html",
+     "https://www.k-clean.jp/service/unlimited/",
+     "https://kansai-qs.com/",
+     "https://www.powers09.com/price/",
+     "https://www.kokusen.go.jp/pdf/n-20221102_1.pdf",
+     "https://www.city.osaka.lg.jp/kankyo/page/0000369358.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -51,8 +58,13 @@
   "東京 遺品整理 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ihinseiri-progress.com/tokyo/",
+     "https://otasuke-kizunaya.com/price/",
+     "https://ihin-3r.com/price/",
+     "https://www.kokusen.go.jp/mimamori/pdf/shinsen525.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -90,8 +102,13 @@
   "名古屋 粗大ごみ 回収 即日": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.nagoya.jp/kurashi/gomi/1012183/1035058/1012184/1033988.html",
+     "https://www.city.nagoya.jp/kurashi/gomi/1012183/1035058/1012184/1046635.html",
+     "https://www.city.nagoya.jp/kurashi/gomi/1012410/1012415.html",
+     "https://www.city.nagoya.jp/kurashi/gomi/1012183/1033991.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -124,8 +141,13 @@
   "福岡 不用品回収 安い": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.fukuoka.lg.jp/kankyo/kateigomi/life/katei-bunbetsu/sodaigomi.html",
+     "https://www.city.fukuoka.lg.jp/kankyo/kanri/hp/jikohannyuu.html",
+     "https://www.fastfukuoka.net/contents/category/price/",
+     "https://www.city.fukuoka.lg.jp/shicho/koho/fsdweb/reiwa8_dayori/0301/1004.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -156,8 +178,13 @@
   "札幌 遺品整理 費用": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://shippou-group.com/estate-cleanout-cost/",
+     "https://www.shimin-shu-katsu.jp/service1",
+     "https://sapporo-yuwa.jp/price/",
+     "https://ihinseiri-soudansho.co.jp/search/ihinseiri/hokkaido/sapporo_shi/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -191,8 +218,13 @@
   "横浜 不用品回収 業者 口コミ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/disposal/kanagawa/1/review/",
+     "https://meetsmore.com/services/unwanted-item-pick-up/kanagawa/yokohama/reviews",
+     "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/chui/ihinkaisyuu_tyuui.html",
+     "https://www.city.yokohama.lg.jp/business/bunyabetsu/gomi-recycle/ippan/i-syorigyo/kyoka.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -226,8 +258,10 @@
   "京都 実家 片付け 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.kyoto.lg.jp/kankyo/page/0000335583.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -268,8 +302,12 @@
   "神戸 家電 回収 無料": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.kobe.lg.jp/a25748/kurashi/recycle/gomi/genryo/kogatakaden.html",
+     "https://www.city.kobe.lg.jp/a04164/kurashi/recycle/gomi/dashikata/shushushinai/computer.html",
+     "https://www.city.kobe.lg.jp/a04164/kurashi/recycle/gomi/dashikata/shushushinai/aircondition/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -306,8 +344,13 @@
   "仙台 生前整理 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://smilelife-miyagi.com/",
+     "https://miyagi-ihinseiri.jp/",
+     "https://sendai-recycle.net/",
+     "https://www.sorabito.biz/ihinseiri"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -350,8 +393,13 @@
   "広島 引越し 不用品 処分": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.hiroshima.lg.jp/living/gomi-kankyo/1021277/1021279/1003526.html",
+     "https://www.city.hiroshima.lg.jp/living/gomi-kankyo/1021277/1003072/1026095/1026097/1003173.html",
+     "https://www.city.hiroshima.lg.jp/faq/gomi-kankyo/1001569/1002049.html",
+     "https://www.city.hiroshima.lg.jp/living/gomi-kankyo/1021277/1003072/1026095/1026096/1003182.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -390,8 +438,12 @@
   "不用品回収 料金 相場": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://meetsmore.com/services/unwanted-item-pick-up/media/274187",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.kokusen.go.jp/pdf/n-20221102_1.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -429,8 +481,10 @@
   "遺品整理 費用 相場 間取り": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://m-ihinseiri.jp/article-1/ihinseiri/cost/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -459,8 +513,12 @@
   "トラック積み放題 料金 目安": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://nandemo-kaishudan.co.jp/gominfo/huyohin-unlimited-truck/",
+     "https://recycle-abroad.com/recovery/20251126113942/",
+     "https://www.kokusen.go.jp/pdf/n-20221102_1.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -492,8 +550,13 @@
   "粗大ごみ 回収 費用 業者": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://cgi.city.yokohama.lg.jp/somu/reiki/reiki_honbun/g202RG00000772.html",
+     "https://ohmura.info/price/",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -540,8 +603,11 @@
   "一軒家 片付け 費用": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://m-ihinseiri.jp/article-1/heya/ikkenya/cost/",
+     "https://m-ihinseiri.jp/article-know-how/make-cheaper/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -573,8 +639,13 @@
   "ゴミ屋敷 清掃 費用": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/hoarding-cleanup/magazine/709/",
+     "https://okatashi.co.jp/gomiyashiki_katazuke_hiyou/",
+     "https://www.yamamoto-mrc.co.jp/huyouhin/price_hoarding_house/",
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -613,8 +684,13 @@
   "冷蔵庫 洗濯機 回収 料金": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.meti.go.jp/policy/it_policy/kaden_recycle/faq/faq.html",
+     "https://ymall.jp/info/wcontents/guide_recycle.html",
+     "https://www.yodobashi.com/ec/support/beginner/setup/recycle/index.html",
+     "https://www.yodobashi.com/ec/support/beginner/setup/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -646,8 +722,11 @@
   "不用品回収 見積もり 無料 追加料金": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html",
+     "https://www.kankyo.metro.tokyo.lg.jp/resource/industrial_waste/improper_handling/fuyouhin/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -671,8 +750,11 @@
   "遺品整理 ワンルーム 料金": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://m-ihinseiri.jp/article-1/ihinseiri/cost/",
+     "https://www.ihinseiri-progress.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -709,8 +791,12 @@
   "ベッド タンス 処分 費用": {
    "group": "料金・費用の相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/sibuyaku_sodaitesuuryou.html",
+     "https://kobe-kaitorecycle.jp/fuyouhin/bed/",
+     "https://recycle-abroad.com/recovery/20260218095555/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -753,8 +839,11 @@
   "不用品回収 業者 選び方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -795,8 +884,12 @@
   "遺品整理 業者 悪徳 見分け方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html",
+     "https://www.kokusen.go.jp/news/data/n-20180719_1.html",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -837,8 +930,12 @@
   "一般廃棄物収集運搬 許可 確認": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.city.yokohama.lg.jp/business/bunyabetsu/gomi-recycle/ippan/i-syorigyo/kyoka.html",
+     "https://www.city.kumamoto.jp/kankyo/kiji0031282/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -863,8 +960,12 @@
   "不用品回収 トラブル 事例": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html",
+     "https://www.caa.go.jp/notice/entry/028878/",
+     "https://www.faq.kokusen.go.jp/faq/show/171?site_domain=default"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -895,8 +996,12 @@
   "遺品整理士 いる業者 違い": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.env.go.jp/content/000064653.pdf",
+     "https://www.is-mind.org/faqs/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -934,8 +1039,12 @@
   "不用品回収 口コミ 信頼できる": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html",
+     "https://www.faq.kokusen.go.jp/faq/show/171?site_domain=default"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -968,8 +1077,11 @@
   "遺品整理 見積もり 比較 ポイント": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html",
+     "https://www.kokusen.go.jp/pdf/n-20180719_1.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -991,8 +1103,11 @@
   "無許可 回収業者 見分け方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1035,8 +1150,12 @@
   "不用品回収 自治体 業者 違い": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.yokohama.lg.jp/lang/residents/living-guide/garbage/default2019090311453.html",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1062,8 +1181,13 @@
   "遺品整理 立ち会い 必要か": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ihin-next.com/faq/other-faq/post-44.html",
+     "https://www.carryone-reuse.com/service/ihin-seiri/",
+     "https://www.powers-ihin.com/service/sv-empty/",
+     "https://www.kokusen.go.jp/pdf/ihin_seiri180719.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1095,8 +1219,12 @@
   "遺品整理 いつから 始める": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.post.japanpost.jp/life/inheriting/column2/",
+     "https://souzoku-pro.info/columns/other/515/",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1127,8 +1255,14 @@
   "遺品整理 手順 流れ": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/pri/houkoku/gaiyou/pdf/R3_6.pdf",
+     "https://www.kokusen.go.jp/news/data/n-20180719_1.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen525.html",
+     "https://www.courts.go.jp/gifu/vc-files/gifu/2024/R6.10.1_setsumeigaki.pdf",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html?campaign=sbi"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1159,8 +1293,14 @@
   "遺品整理 形見分け 方法": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://m-ihinseiri.jp/article-1/ihinseiri/katami/",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4202.htm",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4105.htm",
+     "https://www.kfs.go.jp/service/JP/119/01/besshi.html",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_25/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1200,8 +1340,14 @@
   "遺品整理 賃貸 退去 期限": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://magazine.zennichi.or.jp/trouble/21145",
+     "https://www.mlit.go.jp/jutakukentiku/house/content/001493363.pdf",
+     "https://www.mlit.go.jp/jutakukentiku/house/torikumi/keiyaku/kei02.html",
+     "https://www.courts.go.jp/gifu/vc-files/gifu/2024/R6.10.1_setsumeigaki.pdf",
+     "https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_tk7_000050.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1243,8 +1389,13 @@
   "遺品整理 自分でやる 方法": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.akiya-souzoku110.jp/column/ihin/timing/flow",
+     "https://www.kankyo.metro.tokyo.lg.jp/resource/industrial_waste/improper_handling/fuyouhin/",
+     "https://www.meti.go.jp/policy/it_policy/kaden_recycle/faq/faq.html",
+     "https://www.courts.go.jp/gifu/vc-files/gifu/2024/R6.10.1_setsumeigaki.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1268,8 +1419,11 @@
   "遺品整理 貴重品 探し方": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://m-ihinseiri.jp/article-1/ihinseiri/valuables/",
+     "https://ihinseiri-note.com/posts/ihinseiri-mae-kichohin-sagashikata/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1302,8 +1456,13 @@
   "遺品整理 仏壇 処分": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.shosenji.or.jp/faq/altar.html",
+     "https://zensho-ji.or.jp/butsudan-shobun/",
+     "https://www.city.osaka.lg.jp/kankyo/page/0000384507.html",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1334,8 +1493,14 @@
   "遺品整理 写真 手紙 処分": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://seikatsu-sc.com/guide/guide35.html",
+     "https://www.city.hachioji.tokyo.jp/question/010/p035740.html",
+     "https://www.city.odawara.kanagawa.jp/field/envi/refuse/segregate/sonotagami.html",
+     "https://www.city.owariasahi.lg.jp/site/gomi-recycle/33000.html",
+     "https://johsenji.net/ihin-kuyo/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1359,8 +1524,12 @@
   "遺品整理 遠方 業者 依頼": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.powers-ihin.com/service/sv-empty/",
+     "https://www.kokusen.go.jp/news/data/n-20180719_1.html",
+     "https://ihinseiri-green.com/enpou/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1395,8 +1564,15 @@
   "遺品整理 兄弟 揉める 分け方": {
    "group": "遺品整理の進め方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://ihinseiri-ichiban.com/blog/ihinseiri/ihinseiri-kyoudai-momeru/",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4132.htm",
+     "https://tokyo-souzoku.or.jp/isanbunkatsu-qa/qa32-2/",
+     "https://www.courts.go.jp/kyoto/saiban/isanbunkatu/index.html",
+     "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_12/index.html",
+     "https://www.courts.go.jp/gifu/vc-files/gifu/2024/R6.10.1_setsumeigaki.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1419,8 +1595,12 @@
   "不用品 買取 回収 同時": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://porte-co.jp/service/purchase/",
+     "https://yaruyo.jp/service/kaitori/",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1447,8 +1627,13 @@
   "遺品整理 買取 できるもの": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kazai.tralab.co.jp/",
+     "https://www.re-kaitori.net/ihin.html",
+     "https://happy-clover-k.jp/news/4927/",
+     "https://www.mlit.go.jp/pri/houkoku/gaiyou/pdf/R3_6.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1480,8 +1665,13 @@
   "着物 骨董品 買取 遺品": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hakkoudo.com/kimono/",
+     "https://www.hakkoudo.com/ihin/",
+     "https://kuraya-kaitori.com/kimono/",
+     "https://www.no-trouble.caa.go.jp/case/doortodoorpurchases/case01.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1518,8 +1708,13 @@
   "家電 買取 年式 処分": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.2ndstreet.jp/sell/category/appliances",
+     "https://www.hardoff.co.jp/shop/item/304/",
+     "https://www.meti.go.jp/policy/it_policy/kaden_recycle/fukyu_special/",
+     "https://www.env.go.jp/recycle/kaden/tvrecycle.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1543,8 +1738,12 @@
   "ブランド品 買取 不用品回収": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kaitori.brandoff.co.jp/guide",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.kokusen.go.jp/news/data/n-20221102_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1576,8 +1775,13 @@
   "古い家具 買取 値段つく": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://f-bijutsu.com/item/antique/",
+     "https://mtk-art.com/items/kagu",
+     "https://www.2ndstreet.jp/sell/category/furniture",
+     "https://www.2ndstreet.jp/guide/sell/visit"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1614,8 +1818,11 @@
   "不用品 売る 捨てる 判断": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://dime.jp/genre/2152137/",
+     "https://www.gov-online.go.jp/article/201909/entry-8930.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1639,8 +1846,13 @@
   "リサイクルショップ 出張買取 回収": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hardoff.co.jp/sell/shuccho/",
+     "https://www.hardoff.co.jp/faq/",
+     "https://www.env.go.jp/recycle/kaden/tv-recycle/qa.html",
+     "https://www.env.go.jp/press/13804.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1678,8 +1890,13 @@
   "遺品整理 買取 査定 流れ": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/pdf/ihin_seiri180719.pdf",
+     "https://www.tokyoihin.jp/flow/",
+     "https://www.ihinseiri-progress.com/flow/",
+     "https://www.faq.kokusen.go.jp/faq/show/478?site_domain=default"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1711,8 +1928,13 @@
   "買取不可 品物 処分 方法": {
    "group": "買取と処分の判断",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata-shousai/reuse.html",
+     "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/",
+     "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata/sodaigomi.html",
+     "https://www.env.go.jp/recycle/kaden/tvrecycle.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1731,5 +1953,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-08"
 }

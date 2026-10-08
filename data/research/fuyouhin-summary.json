@@ -1,15 +1,24 @@
 {
  "total": {
-  "portal": 180,
-  "other": 14,
-  "clinic": 506,
-  "media": 53,
-  "public": 49,
-  "video": 11,
-  "maker": 18,
+  "public": 126,
+  "clinic": 549,
+  "other": 20,
+  "portal": 194,
+  "media": 54,
+  "video": 12,
+  "maker": 19,
   "wiki": 1
  },
  "by_engine": {
+  "ChatGPT": {
+   "public": 77,
+   "clinic": 43,
+   "other": 6,
+   "portal": 14,
+   "maker": 1,
+   "video": 1,
+   "media": 1
+  },
   "Gemini": {
    "portal": 45,
    "other": 7,
@@ -32,66 +41,69 @@
  },
  "by_group": {
   "地域で探す": {
-   "portal": 65,
-   "other": 4,
-   "clinic": 88,
+   "public": 15,
+   "clinic": 100,
+   "other": 5,
+   "portal": 69,
    "media": 17,
-   "public": 6,
    "video": 2
   },
   "料金・費用の相場": {
-   "clinic": 112,
-   "portal": 40,
+   "portal": 45,
+   "public": 17,
+   "clinic": 120,
    "maker": 9,
    "media": 10,
-   "other": 2,
-   "public": 6,
+   "other": 4,
    "video": 1
   },
   "業者の選び方": {
+   "public": 55,
    "portal": 34,
-   "public": 32,
-   "clinic": 92,
+   "clinic": 95,
    "other": 4,
    "media": 7,
    "maker": 1,
    "wiki": 1
   },
   "遺品整理の進め方": {
-   "portal": 26,
-   "clinic": 110,
-   "maker": 7,
-   "other": 2,
+   "maker": 8,
+   "portal": 30,
+   "public": 22,
+   "clinic": 115,
+   "other": 5,
    "media": 6,
-   "video": 4,
-   "public": 1
+   "video": 5
   },
   "買取と処分の判断": {
-   "clinic": 104,
-   "media": 13,
+   "portal": 16,
+   "clinic": 119,
+   "public": 17,
+   "media": 14,
    "video": 4,
-   "portal": 15,
-   "public": 4,
    "other": 2,
    "maker": 1
   }
  },
  "answered": {
+  "ChatGPT": 50,
   "Gemini": 33,
   "Claude": 50
  },
  "has_clinic": {
+  "ChatGPT": 22,
   "Claude": 49,
   "Gemini": 30
  },
  "sources": {
+  "ChatGPT": 143,
   "Gemini": 270,
   "Claude": 562
  },
  "portal_top": [
   [
    "m-ihinseiri.jp",
-   29
+   34
   ],
   [
    "fuyouhin-soudansho.com",
@@ -99,15 +111,15 @@
   ],
   [
    "curama.jp",
+   12
+  ],
+  [
+   "meetsmore.com",
    10
   ],
   [
    "sodaigomi-center.com",
    9
-  ],
-  [
-   "meetsmore.com",
-   8
   ],
   [
    "sodaigomi-kaishu.com",
@@ -126,7 +138,7 @@
    5
   ],
   [
-   "ecopit-huyouhin.com",
+   "ihinseiri-soudansho.co.jp",
    5
   ]
  ],
@@ -148,39 +160,39 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 83,
-   "other": 14,
-   "portal": 66,
-   "clinic": 79,
-   "media": 38,
-   "public": 21,
-   "video": 11,
-   "maker": 14,
+   "answers": 133,
+   "clinic": 101,
+   "other": 18,
+   "public": 64,
+   "portal": 78,
+   "media": 39,
+   "video": 12,
+   "maker": 15,
    "wiki": 1
   },
   "地域で探す": {
-   "answers": 20,
-   "other": 4,
-   "portal": 18,
-   "clinic": 18,
+   "answers": 30,
+   "clinic": 23,
+   "other": 5,
+   "public": 14,
+   "portal": 20,
    "media": 11,
-   "public": 6,
    "video": 2
   },
   "料金・費用の相場": {
-   "answers": 19,
-   "clinic": 17,
-   "portal": 17,
+   "answers": 29,
+   "portal": 22,
+   "public": 9,
+   "clinic": 22,
    "maker": 6,
    "media": 8,
-   "public": 2,
-   "other": 2,
+   "other": 3,
    "video": 1
   },
   "業者の選び方": {
-   "answers": 15,
-   "clinic": 15,
-   "public": 10,
+   "answers": 25,
+   "public": 20,
+   "clinic": 16,
    "portal": 11,
    "other": 4,
    "media": 5,
@@ -188,23 +200,23 @@
    "wiki": 1
   },
   "遺品整理の進め方": {
-   "answers": 14,
-   "clinic": 14,
-   "maker": 6,
-   "portal": 9,
-   "other": 2,
-   "media": 4,
-   "video": 4,
-   "public": 1
+   "answers": 24,
+   "portal": 13,
+   "public": 10,
+   "maker": 7,
+   "clinic": 17,
+   "other": 4,
+   "video": 5,
+   "media": 4
   },
   "買取と処分の判断": {
-   "answers": 15,
-   "clinic": 15,
-   "other": 2,
-   "portal": 11,
-   "public": 2,
-   "media": 10,
+   "answers": 25,
+   "clinic": 23,
+   "portal": 12,
+   "public": 11,
    "video": 4,
+   "media": 11,
+   "other": 2,
    "maker": 1
   }
  }
