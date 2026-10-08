@@ -164,7 +164,7 @@ ATM引き出しの記帳を仕組み化したい場合は、現金出納帳をEx
 <details><summary>ATMの記帳作業が負担なときはどうすればいいですか？</summary><p class="faq-a">ATM分を含む日々の記帳を経理BPOに外注し、突合作業ごと任せる選択肢があります。</p></details>
 </div>
 
-毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
+毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 ## まとめ: ATM記帳は「引き出した現金の使いみち」で仕訳が決まる
 

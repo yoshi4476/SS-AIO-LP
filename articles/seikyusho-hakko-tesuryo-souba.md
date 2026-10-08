@@ -195,7 +195,7 @@ b2b-kessai.jpが公開する<a href="https://b2b-kessai.jp/services/btob-kakebar
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 
-経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
+経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 ## よくある質問
 

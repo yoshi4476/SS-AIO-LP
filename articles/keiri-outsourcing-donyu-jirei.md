@@ -163,7 +163,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 
 自社だけで比較の進め方が判断しづらい場合は、経理BPOの無料相談で、事例に近い進め方を一緒に確認することもできます。
 
-外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
+外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

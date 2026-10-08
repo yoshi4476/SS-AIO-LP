@@ -150,7 +150,7 @@ faq:
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
-経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
+経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 ## 自分で回す限界のサインと外注に切り替える判断基準
 

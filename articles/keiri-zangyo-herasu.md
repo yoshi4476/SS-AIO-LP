@@ -185,7 +185,7 @@ Sansan株式会社が2024年8月22日〜27日に経理担当者1,000名（20〜5
 原因の可視化を省略するのも避けたい進め方です。感覚だけで対策を選ぶと、実際には効果の小さい施策に時間を使ってしまい、残業は思うように減りません。
 
 
-自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
+自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

@@ -152,7 +152,7 @@ faq:
 
 複数社から相見積もりを取ると、自社の取引規模に対して相場より高いのか安いのかも判断しやすくなります。自社の場合どのくらいの費用感になるか分からない場合は、経理BPOの無料相談で概算を確認することもできます。相談は契約前の情報収集の段階でも利用できます。
 
-<div style="text-align:center"><a href="https://corp.7senses.co.jp/contact/?s=keiri-shindan" class="cta-button">経理の現状分析（無料）はこちら</a></div>
+<div style="text-align:center"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button">経理の現状分析（無料）はこちら</a></div>
 
 ## よくある質問
 
@@ -171,4 +171,4 @@ faq:
 
 記帳代行の利用を検討していて、自社にどの範囲が合うか分からない場合は、経理の現状分析（無料）で相談することもできます。まずは自社の月間仕訳数と、証憑の管理方法を洗い出すところから始めてください。
 
-<div style="text-align:center"><a href="https://corp.7senses.co.jp/contact/?s=keiri-shindan" class="cta-button">経理の現状分析（無料）はこちら</a></div>
+<div style="text-align:center"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button">経理の現状分析（無料）はこちら</a></div>

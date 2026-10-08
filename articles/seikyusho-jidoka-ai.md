@@ -170,7 +170,7 @@ AIで処理量を減らしても人手が足りない場合は、例外対応ま
 <details><summary>導入しても人手不足が解消しない場合はどうすればいいですか？</summary><p class="faq-a">例外処理まで含めて任せられる経理BPOへの委託を組み合わせる方法があります。</p></details>
 </div>
 
-外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
+外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

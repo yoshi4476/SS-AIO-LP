@@ -129,7 +129,7 @@ faq:
 個人に頼むかどうかで迷う場合は、[経理外注は個人（フリーランス）でも可能？](https://corp.7senses.co.jp/blog/keiri-gaichuu-kojin/)で向き不向きを比べています。
 
 
-経理のどの作業を先に軽くするかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
+経理のどの作業を先に軽くするかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 ## 業務委託で頼む前の確認5つ
 

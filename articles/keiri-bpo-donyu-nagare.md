@@ -160,7 +160,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 
 3つの失敗パターンに共通するのは、いずれも**「決めるべきことを先送りにした結果」**だという点です。範囲・担当者・段階移行のどれか一つでも先に決めておけば、トラブルの発生率は下げられます。
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

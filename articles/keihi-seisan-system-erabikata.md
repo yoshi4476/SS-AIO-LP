@@ -158,7 +158,7 @@ BOXILは2025年10月、経費精算システムの導入担当者1,865人を対�
 
 自社に合うシステムの選び方に迷う場合や、システム化と経費精算BPOのどちらが合うか判断がつかない場合は、経理BPOの無料相談で、現状の申請フローの棚卸しから相談することもできます。
 
-毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
+毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

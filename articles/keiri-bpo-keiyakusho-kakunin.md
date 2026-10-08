@@ -151,7 +151,7 @@ faq:
 
 最低利用期間を確認しないまま試験的に契約し、2か月で解約を申し出た結果、残り期間分の違約金を請求されたという例もあります。[経理代行の失敗5パターン](/blog/keiri-daiko-shippai/)でも、契約前の確認不足が失敗につながる共通点として挙げています。
 
-<div class="cta-box"><p>受け取った契約書案を、6項目に沿って無料でチェックします。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/?s=keiri-shindan">経理の現状分析（無料）はこちら</a></div>
+<div class="cta-box"><p>受け取った契約書案を、6項目に沿って無料でチェックします。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理の現状分析（無料）はこちら</a></div>
 
 ご契約を前提としたご案内ではありません。
 

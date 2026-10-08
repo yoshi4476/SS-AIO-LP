@@ -160,7 +160,7 @@ Sansan株式会社も2023年11月20日、<a href="https://jp.corp-sansan.com/new
 確認作業を担当者1人に集中させる運用も、負担軽減とは逆方向です。**システムや代行を導入しても、最終確認を1人だけに任せていては、属人化の問題が形を変えて残るだけ**です。確認体制は複数人、または外部の委託先と分散させてください。
 
 
-自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

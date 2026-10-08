@@ -164,7 +164,7 @@ faq:
 
 <div class="cta-box"><p>記帳代行と経理BPOのどちらが向いているか、無料で診断します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 ## まとめ: 記帳代行を断られたら準備を見直す
 

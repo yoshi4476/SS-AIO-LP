@@ -117,7 +117,7 @@ AI-OCRは、freee会計やマネーフォワードクラウドなどのクラウ
 <details><summary>自動化しても人の判断が必要な業務はありますか？</summary><p class="faq-a">あります。例外処理や数値の妥当性チェックは人が担う領域です。</p></details>
 </div>
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

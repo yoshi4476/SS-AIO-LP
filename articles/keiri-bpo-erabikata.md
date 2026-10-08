@@ -76,7 +76,7 @@ faq:
 そもそも外部委託すべきか判断がついていない場合は、[経理外注の判断基準5つ｜自社に向いているかのチェックリスト](https://corp.7senses.co.jp/blog/keiri-gaichuu-handan-kijun/)で自社の状況を先に整理しておくと、比較の軸がぶれにくくなります。
 
 
-外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
+外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 
 ## 移行・引き継ぎ体制を確認する
 

@@ -181,7 +181,7 @@ faq:
 <details><summary>外注コストが妥当かはどう判断すればいいですか？</summary><p class="faq-a">正社員採用や内製継続にかかる総コストと比べると妥当性が見えます。</p></details>
 </div>
 
-どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
+どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

@@ -177,7 +177,7 @@ faq:
 管理部門の業務改善そのものを見直したい場合は、[バックオフィス業務改善の4ステップ｜進まない原因と対策](https://corp.7senses.co.jp/blog/backoffice-gyomu-kaizen/)もあわせて参考にしてください。
 
 
-手放せるバックオフィス業務の見極めは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact/?s=backoffice)からご相談いただけます。ご契約を前提としたご案内ではありません。
+手放せるバックオフィス業務の見極めは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
