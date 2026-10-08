@@ -235,6 +235,7 @@ def test_rakko_purpose_budgets():
         ok, out = _quiet(rk.allow, "ai-lab", {"reserve": 180, "volume": 30})
         check("枠を超える目的だけ外し、他の目的は続ける", (ok, rk.granted(), "RAKKO_BUCKET=skip:reserve" in out,
                                                  "RAKKO_GUARD=bucket" in out), (False, True, True, True))
+        check("目的ごとの許可（一括検索数は可・予備は不可）", (rk.granted("volume"), rk.granted("reserve")), (True, False))
         _quiet(rk.suggest, "aio")
         got = [_quiet(rk.call, "/v1/search-volume", {"keywords": [f"k{i}"]})[0] is not None for i in range(3)]
         _quiet(rk.call, "/v1/headline", {"keyword": "aio"})

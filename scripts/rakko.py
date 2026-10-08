@@ -323,9 +323,9 @@ def allow(site, est, dry=False, purpose="reserve"):
     return not skip
 
 
-def granted():
-    """この回は課金の呼び出しを許されているか（allow を通ったか。一部の目的だけでも）"""
-    return _GRANT is not None
+def granted(purpose=None):
+    """この回は課金の呼び出しを許されているか（allow を通ったか。purpose を渡すとその目的で）"""
+    return _GRANT is not None and (purpose is None or purpose in _GRANT["plimit"])
 
 
 def _say(key, msg):

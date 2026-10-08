@@ -428,7 +428,7 @@ def fill_volume(cands):
         n = max(1, -(-len(missing) // BULK)) if missing else 0
         print(f"   [dry-run] 一括調査: {len(missing)}件を{n}回 → 約{15 * n}クレジット（登録しません）")
         return hit
-    if not missing or not rakko.enabled() or not rakko.granted():
+    if not missing or not rakko.enabled() or not rakko.granted("volume"):
         return hit                                  # 上限で止めた回は登録しない（手元の記録の分だけ）
     total, answered = hit, set()
     for part in chunks(missing, BULK):
