@@ -63,15 +63,17 @@ jobs:
           key: whisper-medium-v1
       - name: 準備
         run: |
-          sudo apt-get update -qq > /dev/null 2>&1 || true
-          sudo apt-get install -y -qq ffmpeg fonts-noto-cjk > /dev/null 2>&1 || true
-          command -v ffmpeg > /dev/null || echo "::warning::ffmpeg が入らず、記事動画を作れません"
+          # apt・npm・pip は互いに関係ないので同時に入れる（順に入れて約70秒・遅い日は6分）
+          (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk) > /dev/null 2>&1 & apt=$!
+          # 掛け合いの台本を書かせる（動かなければスライド形式に落ちる）
+          npm install -g @anthropic-ai/claude-code > /dev/null 2>&1 & npm=$!
           pip install --quiet -r requirements.txt edge-tts
           # 作った声を聞き直して読み違いを直す（入らなくても動画づくりは止めない）
           pip install --quiet -r requirements-video.txt || echo "::warning::読みの聞き直しが入らず、読み違いを検査できません"
+          wait $apt || true
+          command -v ffmpeg > /dev/null || echo "::warning::ffmpeg が入らず、記事動画を作れません"
           python scripts/yomi_guard.py --selftest || echo "::warning::読みの検査が壊れています（読み違いを見逃します）"
-          # 掛け合いの台本を書かせる（動かなければスライド形式に落ちる）
-          npm install -g @anthropic-ai/claude-code > /dev/null 2>&1 || true
+          wait $npm || true
           if ! claude --version >/dev/null 2>&1; then
             node "$(npm root -g)/@anthropic-ai/claude-code/install.cjs" > /dev/null 2>&1 || true
           fi
@@ -100,7 +102,10 @@ jobs:
           [ -n "$YOUTUBE_CLIENT_JSON" ] && printf '%s' "$YOUTUBE_CLIENT_JSON" > youtube-client.json
           [ -n "$YOUTUBE_TOKEN_JSON" ]  && printf '%s' "$YOUTUBE_TOKEN_JSON"  > youtube-token.json
           [ -n "$YOUTUBE_TOKENS_JSON" ] && python -c 'import json,os;[open(f"youtube-token-{k}.json","w",encoding="utf-8").write(json.dumps(v)) for k,v in json.loads(os.environ["YOUTUBE_TOKENS_JSON"]).items()]'
-          python scripts/article_videos.py --write --limit 1 --days 7 --shorts 1 --research 1 2>&1 | tail -10 || true
+          # 工程ごとの所要時間（VIDEO_TIME）はその場で出す。ほかは最後の10行だけ（16分以上1行も出ない回があった）
+          PYTHONUNBUFFERED=1 python scripts/article_videos.py --write --limit 1 --days 7 --shorts 1 --research 1 2>&1 \
+            | tee /tmp/video.log | grep --line-buffered '^VIDEO_TIME' || true
+          tail -10 /tmp/video.log
           rm -f youtube-client.json youtube-token.json youtube-token-*.json
       # TikTok は審査前だと自動投稿が非公開になるため、縦型の mp4 を成果物に残して手で上げる（30日保存）
       - name: 縦型ショートを成果物に残す（TikTok 用）

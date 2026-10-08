@@ -240,9 +240,15 @@ jobs:
       - name: 依存インストール
         if: steps.site.outputs.skip != 'yes'
         run: |
-          pip install -r requirements.txt
-          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
-          npm install -g @anthropic-ai/claude-code
+          # 3つは互いに関係ないので同時に入れる（順に入れて約35秒・遅い日は5分）。1つでも失敗したら止める
+          pip install -q -r requirements.txt yt-dlp > /tmp/pip.log 2>&1 & p1=$!
+          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & p2=$!
+          npm install -g @anthropic-ai/claude-code > /tmp/npm.log 2>&1 & p3=$!
+          ok=1
+          wait $p1 || { cat /tmp/pip.log; ok=0; }
+          wait $p2 || { cat /tmp/apt.log; ok=0; }
+          wait $p3 || { cat /tmp/npm.log; ok=0; }
+          [ "$ok" = 1 ] || exit 1
           # ネイティブバイナリが落ちてこないことがある（postinstallが走らない／
           # optional依存が省かれる）。実行時まで気づけず、記事生成ごと落ちる。
           # ここで動作を確かめ、駄目ならインストーラを直接叩き直す。
@@ -307,14 +313,20 @@ jobs:
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
-        run: python scripts/site_brief.py "${{ steps.site.outputs.id }}"
+        run: |
+          # 記事を書く claude が同じ出力を読む（同じものを2回作らない。1回約50秒）
+          set -o pipefail
+          mkdir -p automation/logs
+          python scripts/site_brief.py "${{ steps.site.outputs.id }}" | tee automation/logs/brief.txt
 
       - name: 全サイト横断のカニバリ・領域チェック
         if: steps.site.outputs.skip != 'yes'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
-        run: python scripts/cannibal_check.py --cross || true
+        run: |
+          echo "■ python scripts/cannibal_check.py --cross の結果" >> automation/logs/brief.txt
+          python scripts/cannibal_check.py --cross 2>&1 | tee -a automation/logs/brief.txt || true
 
       # 手順書に「必ず実行すること」と書いても、それは関門ではない。
       # 実行を忘れれば素通りする。実際、タイトル類似だけのゲートを通り抜けて
@@ -333,6 +345,7 @@ jobs:
           out=$(python scripts/kw_gate.py --before --site "${{ steps.site.outputs.id }}") || true
           rm -f indexing-service-account.json
           echo "$out"
+          { echo "■ 食い合いゲート（kw_gate --before）の結果"; echo "$out"; } >> automation/logs/brief.txt
           if echo "$out" | grep -q "KW_GATE=block"; then
             echo "::error::次のKWが既存ページと食い合います。台帳を直すまで記事を書きません"
             exit 1
@@ -346,7 +359,6 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
-          pip install --quiet yt-dlp
           python scripts/research_next.py "${{ steps.site.outputs.id }}" || true
 
       - name: 記事生成（Phase 1〜7）
@@ -404,6 +416,8 @@ jobs:
               break
             fi
             echo "::warning::記事が増えていません。書き直します（$try/3）"
+            # 書き直しの回は台帳が変わっている（1回目が語を「執筆中」にした等）。先に作ったブリーフは使わせない
+            rm -f automation/logs/brief.txt
             if [ "$try" = "3" ]; then
               echo "::error::3回試しても記事が増えませんでした"
               python scripts/hub_client.py error_log write \
@@ -546,10 +560,15 @@ jobs:
         if: steps.site.outputs.skip != 'yes'
         continue-on-error: true      # 反映の遅れで run を落とさない。気づければよい
         run: |
-          sleep 45                   # Cloudflare の配信が行き渡るのを待つ
           mkdir -p automation/logs
           # 印を拾い、注釈と通知の両方へ回す。`|| true` だけだと古いまま気づけない
-          out=$(python scripts/deploy_check.py) || true
+          # Cloudflare の配信が行き渡るまで、5秒おきに最長45秒確かめる（以前は毎回45秒待ってから1回だけ見ていた）
+          deadline=$(( $(date +%s) + 45 ))
+          while :; do
+            out=$(python scripts/deploy_check.py) && break
+            [ "$(date +%s)" -ge "$deadline" ] && break
+            sleep 5
+          done
           echo "$out"
           if echo "$out" | grep -q "DEPLOY_OK=no"; then
             echo "::warning::本番が手元より古い状態です。次のデプロイまで反映されません"
