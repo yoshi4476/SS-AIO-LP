@@ -85,6 +85,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
+同じ質問をAIに毎月聞き直して記録する手順は、不動産会社を例に[不動産会社のAIO対策のやり方](/aio/fudousan-aio-taisaku-yarikata/)でまとめました。
+
 被リンクの本数を指標に入れるべきかは、[AIO対策と被リンクの関係](/aio/aio-taisaku-hilink/)で解説しています。
 
 関連する内容については、[外壁塗装のAIO対策](/aio/gaiheki-tosou-aio-taisaku/)にまとめています。

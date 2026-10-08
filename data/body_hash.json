@@ -100,7 +100,7 @@
 "modified": "2026-08-14"
 },
 "aio-taisaku-keisoku-houhou": {
-"hash": "d42fd4de5bc1e42f1af4bc57f8ccb202",
+"hash": "deab734840243d7bb9dc048ee8d93ae0",
 "modified": "2026-09-02"
 },
 "aio-taisaku-keyword-sentei": {
@@ -264,8 +264,12 @@
 "modified": "2026-08-03"
 },
 "fudousan-ai-kensaku-taisaku": {
-"hash": "aeecbcb4cd35e5a7a78a4e1c3ed2ae3b",
+"hash": "c7d121fecb15b924d2b729f3a0f94fcc",
 "modified": "2026-08-10"
+},
+"fudousan-aio-taisaku-yarikata": {
+"hash": "ae5a46e7e15ee82ad317b13589f7c614",
+"modified": "2026-10-09"
 },
 "fudousan-hankyou-konai": {
 "hash": "29a488880a636e0d645bb92f4bc8a366",
