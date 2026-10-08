@@ -2004,6 +2004,144 @@ figure.vz { margin: 0; text-align: left; background: #fff; border: 1px solid var
   .vz-axis span { grid-column: 1; }
 }
 
+/* -- トップ: サービスの全体像（ご契約前の3段 → ご契約後の毎月の4段の輪） -- */
+figure.svc-map { margin: 0 auto 1rem; max-width: 1120px; text-align: left; }
+.svc-map-cap { margin: 0 0 .9rem; font-size: 1.02rem; font-weight: 800; color: var(--navy); }
+.svc-map-fig { display: grid; grid-template-columns: minmax(0, .95fr) 3.4rem minmax(0, 1.25fr); align-items: stretch; }
+.svc-phase { border-radius: var(--radius); padding: 1.2rem 1.3rem 1.4rem; min-width: 0; }
+.svc-phase.is-free { background: var(--sky); border: 1px solid var(--sky-2); }
+.svc-phase.is-run { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+.svc-phase.is-run .svc-cyc { flex: 1; display: grid; align-content: center; }
+.svc-phase-h { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; margin: 0 0 1.1rem; font-size: .95rem; font-weight: 800; color: var(--navy); line-height: 1.5; }
+.svc-tag { font-size: .8125rem; font-weight: 700; letter-spacing: .06em; padding: .15em .85em; border-radius: 999px; background: var(--blue); color: #fff; }
+.is-run .svc-tag { background: var(--navy); }
+.svc-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; counter-reset: svc; }
+.svc-steps li { counter-increment: svc; position: relative; display: grid; grid-template-columns: 2.1rem minmax(0, 1fr); column-gap: .75rem; align-items: center; background: #fff; border: 1px solid var(--sky-2); border-radius: 12px; padding: .7rem .9rem; }
+.svc-steps li::before { content: counter(svc); grid-row: 1 / span 2; width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; background: var(--blue); color: #fff; font-family: var(--en); font-weight: 800; }
+.svc-steps li:not(:last-child)::after { content: ""; position: absolute; left: calc(.9rem + 1.05rem - 6px); bottom: -.9rem; border: 6px solid transparent; border-top-color: var(--blue); border-bottom-width: 0; }
+.svc-steps b, .svc-cycle b { display: block; font-size: .98rem; font-weight: 800; color: var(--navy); line-height: 1.5; }
+.svc-steps li > span, .svc-cycle li > span { display: block; font-size: .875rem; color: var(--muted); line-height: 1.6; }
+.svc-go { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; padding: .5rem 0; }
+.svc-go span { writing-mode: vertical-rl; font-size: .8125rem; font-weight: 700; letter-spacing: .12em; color: var(--blue-deep); }
+.svc-go::after { content: ""; border: 11px solid transparent; border-left: 14px solid var(--blue); border-right-width: 0; }
+.svc-cyc { position: relative; }
+.svc-cycle { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "a b" "d c"; gap: 2.6rem 3rem; }
+.svc-cycle li { position: relative; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px; padding: .75rem .95rem; min-width: 0; }
+.svc-cycle li:nth-child(1) { grid-area: a; }
+.svc-cycle li:nth-child(2) { grid-area: b; }
+.svc-cycle li:nth-child(3) { grid-area: c; }
+.svc-cycle li:nth-child(4) { grid-area: d; }
+.svc-cycle li::after { position: absolute; font-size: 1.15rem; font-weight: 900; line-height: 1; color: var(--navy); }
+.svc-cycle li:nth-child(1)::after { content: "→"; right: -2.05rem; top: 50%; transform: translateY(-50%); }
+.svc-cycle li:nth-child(2)::after { content: "↓"; left: 50%; bottom: -1.95rem; transform: translateX(-50%); }
+.svc-cycle li:nth-child(3)::after { content: "←"; left: -2.05rem; top: 50%; transform: translateY(-50%); }
+.svc-cycle li:nth-child(4)::after { content: "↑"; left: 50%; top: -1.95rem; transform: translateX(-50%); }
+.svc-loop { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 3.4rem; height: 3.4rem; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--navy); color: #fff; font-size: .8125rem; font-weight: 800; line-height: 1.2; box-shadow: 0 0 0 5px #fff; }
+.svc-loop::before { content: "↻"; display: block; font-size: 1rem; }
+.svc-map-text { max-width: 1120px; margin: 0 auto 2rem; font-size: .94rem; line-height: 1.9; }
+.svc-map-text a { font-weight: 700; color: var(--blue-deep); margin-left: .3em; }
+@media (max-width: 899.98px) {
+  .svc-map-fig { grid-template-columns: minmax(0, 1fr); }
+  .svc-go { flex-direction: row; padding: .7rem 0; }
+  .svc-go span { writing-mode: horizontal-tb; letter-spacing: .06em; }
+  .svc-go::after { border: 11px solid transparent; border-top: 14px solid var(--blue); border-bottom-width: 0; }
+}
+@media (max-width: 600px) {
+  .svc-cycle { gap: 2.4rem 2.6rem; }
+  .svc-cycle li { padding: .65rem .75rem; }
+  .svc-cycle li:nth-child(1)::after { right: -1.85rem; }
+  .svc-cycle li:nth-child(3)::after { left: -1.85rem; }
+  .svc-loop { width: 3rem; height: 3rem; font-size: .75rem; }
+}
+
+/* -- LP: AIO・SEO・LLMOの関係（SEOの土台の上にAIOとLLMO） -- */
+figure.layers { margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; text-align: left; }
+.layers-cap { margin: 0 0 1rem; font-size: 1.05rem; font-weight: 800; color: var(--navy); }
+.layers-fig { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "aio llmo" "join join" "seo seo"; column-gap: 1rem; }
+.layer { --c: var(--blue); min-width: 0; background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: var(--radius); padding: 1.1rem 1.25rem 1.2rem; box-shadow: var(--shadow-sm); }
+.layer.is-aio { grid-area: aio; --c: var(--cat-aio); }
+.layer.is-llmo { grid-area: llmo; --c: var(--cat-ai); }
+.layer.is-seo { grid-area: seo; --c: var(--cat-seo); background: color-mix(in srgb, var(--cat-seo) 5%, #fff); }
+.layer-k { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .7rem; margin: 0 0 .7rem; font-family: var(--head); font-size: 1.4rem; font-weight: 900; line-height: 1.3; color: var(--c); }
+.layer-k small { font-family: var(--sans); font-size: .8125rem; font-weight: 700; color: var(--muted); }
+.layer dl { margin: 0; display: grid; gap: .45rem; }
+.layer dl > div { display: grid; grid-template-columns: 6.6em minmax(0, 1fr); gap: .7rem; align-items: baseline; }
+.layer dt { font-size: .8125rem; font-weight: 700; color: var(--muted); }
+.layer dd { margin: 0; font-size: .92rem; font-weight: 600; line-height: 1.65; color: var(--text); }
+.is-seo dl { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem 1.2rem; }
+.is-seo dl > div { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+.layer-join { grid-area: join; position: relative; display: grid; place-items: center; height: 3.4rem; }
+/* 土台（SEO）から上の2つへの矢印。軸と矢じりを1つの形で描く */
+.layer-join::before, .layer-join::after { content: ""; position: absolute; top: 0; bottom: 0; width: 14px; margin-left: -7px; background: var(--cat-seo); clip-path: polygon(50% 0, 100% 10px, calc(50% + 1px) 10px, calc(50% + 1px) 100%, calc(50% - 1px) 100%, calc(50% - 1px) 10px, 0 10px); }
+.layer-join::before { left: 25%; }
+.layer-join::after { left: 75%; }
+.layer-join span { position: relative; z-index: 1; padding: .2em .95em; border-radius: 999px; background: #fff; border: 1px solid color-mix(in srgb, var(--cat-seo) 35%, #fff); font-size: .8125rem; font-weight: 700; color: var(--cat-seo); }
+.layers-text { margin: 1.2rem 0 0; font-size: .94rem; line-height: 1.9; max-width: 56em; }
+@media (max-width: 720px) {
+  .layers-fig { grid-template-columns: minmax(0, 1fr); grid-template-areas: "aio" "llmo" "join" "seo"; row-gap: .9rem; }
+  .layer-join { height: 2.6rem; }
+  .layer-join::before { left: 50%; }
+  .layer-join::after { display: none; }
+  .layer dl > div, .is-seo dl > div { grid-template-columns: minmax(0, 1fr); gap: .05rem; }
+  .is-seo dl { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* -- 表をスマホで1行ずつの札にする（横に動かさなくても全部読める）。列名は各欄の上に出す（data-label） -- */
+@media (max-width: 720px) {
+  .vz-stack { overflow: visible; border: 0; border-radius: 0; box-shadow: none; }
+  .vz-stack table, .vz-stack tbody, .vz-stack tr, .vz-stack th, .vz-stack td { display: block; width: auto; }
+  .vz-stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .vz-stack tr { margin: 0 0 .9rem; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: var(--shadow-sm); }
+  .vz-stack tbody th { width: auto; padding: .6em 1em; border: 0; background: var(--navy); color: #fff; white-space: normal; }
+  .vz-stack tbody th a { color: #fff; }
+  .vz-stack tbody th small { color: rgba(255,255,255,.78); }
+  .vz-stack td { padding: .65em 1em; border: 0; border-top: 1px solid var(--line); background: #fff !important; text-align: left !important; white-space: normal !important; }
+  .vz-stack th + td { border-top: 0; }
+  .vz-stack td::before { content: attr(data-label); display: block; margin-bottom: .1em; font-size: .8125rem; font-weight: 700; color: var(--muted); }
+}
+
+/* -- LP: 進め方の比較（自社で運用／代行を頼む／ツールだけ使う） -- */
+.ap-table table { font-size: .9rem; table-layout: fixed; }
+.ap-table thead th:first-child { width: 11em; }
+.ap-table tbody th { white-space: normal; }
+.ap-table tbody th small { display: block; font-size: .8125rem; font-weight: 500; color: var(--muted); }
+.ap-table tr.ap-all td { background: var(--sky) !important; font-weight: 700; color: var(--navy); text-align: center; vertical-align: middle; }
+.ap-table tr.ap-use td { background: #fff !important; }
+.ap-table tr.ap-use a { font-weight: 700; color: var(--blue-deep); }
+.ap-src { margin: .8rem 0 0; font-size: .8125rem; line-height: 1.85; color: var(--muted); max-width: 62em; }
+.ap-src a { color: var(--muted); }
+
+/* -- LP: ご相談から運用開始までの段階図。1〜4（ご契約前・無料）と5〜6（ご契約後）を括りで分ける -- */
+.stage-phases { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 1rem; margin: 0 0 1rem; }
+.stage-phases span { position: relative; padding: 0 0 .55rem; text-align: center; font-size: .8125rem; font-weight: 700; color: var(--blue-deep); border-bottom: 2px solid currentColor; }
+.stage-phases span::before, .stage-phases span::after { content: ""; position: absolute; bottom: -2px; width: 2px; height: .6rem; background: currentColor; }
+.stage-phases span::before { left: 0; }
+.stage-phases span::after { right: 0; }
+.stage-phases .is-free { grid-column: 1 / 5; }
+.stage-phases .is-run { grid-column: 5 / 7; color: var(--navy); }
+.stage-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; counter-reset: stg; }
+.stage-steps li { counter-increment: stg; position: relative; min-width: 0; padding: 3.7rem 1rem 1.15rem; background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.stage-steps li.is-run { border-top-color: var(--navy); }
+.stage-steps li::before { content: counter(stg); position: absolute; top: 1rem; left: 1rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; display: grid; place-items: center; background: var(--blue); color: #fff; font-family: var(--en); font-size: 1rem; font-weight: 800; }
+.stage-steps li.is-run::before { background: var(--navy); }
+.stage-steps li:not(:last-child)::after { content: ""; position: absolute; right: -14px; top: 1.75rem; border: 7px solid transparent; border-left: 9px solid var(--blue); border-right-width: 0; z-index: 1; }
+.stage-steps .step-title { display: block; font-size: .95rem; font-weight: 800; line-height: 1.55; color: var(--navy); }
+.stage-steps p { margin: .45rem 0 0; font-size: .875rem; line-height: 1.8; color: var(--muted); }
+.stage-loop { display: inline-flex; align-items: center; gap: .3em; margin-top: .7rem; padding: .15em .85em; border-radius: 999px; background: var(--sky); font-size: .8125rem; font-weight: 700; color: var(--navy); }
+.stage-loop::before { content: "↻"; }
+@media (max-width: 1099.98px) {
+  /* 6列が窮屈になる幅から縦の並びに。括りは凡例に、丸の色（青＝ご契約前・紺＝ご契約後）で分ける */
+  .stage-phases { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: 0 0 1.2rem; }
+  .stage-phases span { padding: 0; border: 0; text-align: left; display: inline-flex; align-items: center; gap: .45em; }
+  .stage-phases span::before { position: static; width: .8em; height: .8em; border-radius: 50%; background: currentColor; }
+  .stage-phases span::after { display: none; }
+  .stage-steps { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .stage-steps li { padding: 0 0 1.5rem 3.2rem; background: none; border: 0; border-radius: 0; box-shadow: none; }
+  .stage-steps li::before { top: 0; left: 0; }
+  .stage-steps li:not(:last-child)::after { right: auto; left: calc(1.1rem - 1px); top: 2.2rem; bottom: 0; width: 2px; border: 0; background: var(--sky-2); z-index: 0; }
+  .stage-steps .step-title { padding-top: .2rem; }
+}
+
 /* ============================================================
    デザインとリード導線の点検（2026-10-08）
    ============================================================ */
