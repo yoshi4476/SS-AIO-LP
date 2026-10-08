@@ -466,7 +466,7 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
         if rec:
             # inHtml が偽なら本文に入っていない（CSP で止めた）。アプリが自前で出すときの材料
             out["video"] = {"youtube": rec["youtube"], "embedUrl": f"https://www.youtube-nocookie.com/embed/{rec['youtube']}",
-                            "uploadDate": rec.get("date", ""), "seconds": int(rec.get("sec") or 0), "inHtml": bool(vb)}
+                            "uploadDate": video_embed.upload_date(rec), "seconds": int(rec.get("sec") or 0), "inHtml": bool(vb)}
     except Exception:
         pass
     # 一覧・記事の頭に出す写真（写真の棚から内容に合う1枚）。共有画像の eyecatch は文字のカードのまま

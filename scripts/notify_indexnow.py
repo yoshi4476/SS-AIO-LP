@@ -55,6 +55,19 @@ def sitemap_urls(domain=None):
         return []
 
 
+def key_for(domain, key):
+    """そのドメインで公開している鍵。先方が自分の鍵を既に置いている社は sites/<id>.json の indexnow_key。
+    CONFLUX は先方の鍵（b1d698…）が直下で返るのに、共通の鍵で確かめて毎回「鍵ファイルが出ていません」と
+    出していた（2026-10-08）。IndexNow は host ごとに別の鍵でよい"""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S
+    dom = domain.split("//", 1)[-1].strip("/").lower()
+    for c in S.load_all().values():
+        if (c.get("domain") or "").lower() == dom and c.get("indexnow_key"):
+            return c["indexnow_key"]
+    return key
+
+
 def key_ok(domain, key):
     """鍵ファイルが置かれているか。無いドメインへの通知は拒否される（実際にそうなっていた）"""
     try:
@@ -111,17 +124,18 @@ def main(argv=None, cfgs=None):
         # host は URL のドメインから決める。SITE_URL 固定だと、補助金サイトの URL を
         # host=ai.7senses.co.jp で送って HTTP 422 になっていた（2026-09-26）
         for site_url, urls in by_host(argv).items():
-            status = notify(urls, key, site_url)
+            status = notify(urls, key_for(site_url, key), site_url)
             print(f"IndexNow通知: {site_url} {len(urls)}件 → HTTP {status}")
         return 0
     sys.path.insert(0, str(ROOT / "scripts"))
     import sites as S
-    sent = 0
+    sent, base_key = 0, key
     cfgs = S.load_all() if cfgs is None else cfgs
     for sid, cfg in cfgs.items():
         if only and sid != only:
             continue
         dom = cfg["domain"]
+        key = cfg.get("indexnow_key") or base_key
         wp = cfg.get("type") == "wordpress"
         if wp and not key_ok(dom, key):
             # WordPress は鍵ファイルを置けない。先方の mu-plugin に鍵を渡すと、/<鍵>.txt を返すようになる

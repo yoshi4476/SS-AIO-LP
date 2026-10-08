@@ -51,7 +51,7 @@ def files_for(cfg, current_auth=None):
     import notify_indexnow as NI
     import bing_webmaster as BW
     out = {}
-    key = NI.find_key(NI.load_env())
+    key = cfg.get("indexnow_key") or NI.find_key(NI.load_env())
     if key:
         out[f"{key}.txt"] = key
     code = BW.auth_code(cfg)

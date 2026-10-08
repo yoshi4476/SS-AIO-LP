@@ -245,11 +245,12 @@ def _indexnow(urls):
         return set()
     ok = set()
     for host, us in NI.by_host(urls).items():
-        if not NI.key_ok(host.split("//", 1)[-1], key):
+        k = NI.key_for(host, key)
+        if not NI.key_ok(host.split("//", 1)[-1], k):
             print(f"    IndexNow: {host} に鍵ファイルが無いため送りません")
             continue
         try:
-            print(f"    IndexNow: {len(us)}件 → HTTP {NI.notify(us, key, host)}")
+            print(f"    IndexNow: {len(us)}件 → HTTP {NI.notify(us, k, host)}")
             ok.update(us)
         except Exception as e:
             print(f"    IndexNow に失敗: {str(e)[:80]}")

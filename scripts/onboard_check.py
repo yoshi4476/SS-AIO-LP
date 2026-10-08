@@ -539,7 +539,7 @@ def run_site(cfg, hints=None, today=None):
             add("merge_301", "ng", f"統合した記事の旧URL {old_p} が転送されません（HTTP {st}）")
 
     # IndexNow・Bing
-    k = indexnow_key()
+    k = cfg.get("indexnow_key") or indexnow_key()
     if k:
         st, _, b, _ = ctx.get(f"/{k}.txt")
         add("indexnow_key", "ok" if st == 200 and b.strip() == k else ("unknown" if st is None else "ng"),

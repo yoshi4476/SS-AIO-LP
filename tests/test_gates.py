@@ -2712,7 +2712,9 @@ def test_site_has_two_axes_and_no_orphans():
         check("コーポレートの制作・顧問の表記とリンクがある（nofollow なし）",
               all(s in ft for s in ("サイト制作：YW（CONFLUX PARTNERS）", "https://conflux-partners.jp/works/7senses-corp",
                                     "顧問：YW（AI × 経営コンサルタント）", "https://conflux-partners.jp/about"))
-              and "nofollow" not in ft, True)
+              # コメント（「nofollow も付けない」）は数えない。2026-10-08 にコメントを拾って NG になった
+              and not any("nofollow" in ln for ln in ft.splitlines() if not ln.strip().startswith(("//", "*", "/*"))),
+              True)
 
 
 def test_search_engines_are_told_about_all_sites():

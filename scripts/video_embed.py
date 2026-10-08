@@ -29,6 +29,13 @@ def _iso_duration(sec):
     return f"PT{sec // 60}M{sec % 60}S"
 
 
+def upload_date(rec):
+    """uploadDate は時差つきの日時で出す。日付だけだと Search Console が「タイムゾーンがありません」
+    「日時値が無効です」と出す（2026-10-08 コーポレートで実際に出た）。台帳は日本時間の日付だけを持つ"""
+    d = str((rec or {}).get("date") or "")
+    return d + "T00:00:00+09:00" if len(d) == 10 else d
+
+
 def block(meta):
     """埋め込みの HTML（figure + VideoObject の JSON-LD）。無ければ空文字"""
     rec = info(meta.get("slug", ""))
@@ -39,7 +46,7 @@ def block(meta):
           "name": str(meta.get("title", ""))[:100],
           "description": str(meta.get("description", ""))[:300],
           "thumbnailUrl": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
-          "uploadDate": rec.get("date", ""),
+          "uploadDate": upload_date(rec),
           "duration": _iso_duration(rec.get("sec")),
           "embedUrl": f"https://www.youtube.com/embed/{vid}",
           "contentUrl": f"https://www.youtube.com/watch?v={vid}"}

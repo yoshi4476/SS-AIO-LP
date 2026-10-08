@@ -2,6 +2,7 @@
   "id": "conflux",
   "name": "CONFLUX PARTNERS の記事",
   "domain": "conflux-partners.jp",
+  "indexnow_key": "b1d698a3b0111f8ddc9cc2f94d344fde",
   "repo": "yoshi4476/conflux-partners",
   "branch": "main",
   "type": "external-md",

@@ -724,7 +724,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/notify_indexnow.py:58",
+     "evidence": "scripts/notify_indexnow.py:71",
      "anchor": "def key_ok(domain, key):"
     },
     "external-md": {
@@ -747,7 +747,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/notify_indexnow.py:126",
+     "evidence": "scripts/notify_indexnow.py:140",
      "note": "鍵ファイルを置けないかわりに mu-plugin へ鍵を渡し /<鍵>.txt を返させる。公開URLは橋渡しの一覧。記事の枠の公開直後にその社の分を送る（.github/workflows/pipeline-multi.yml:559）",
      "anchor": "if wp and not key_ok(dom, key):"
     },
