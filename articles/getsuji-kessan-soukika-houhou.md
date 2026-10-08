@@ -49,7 +49,7 @@ faq:
 
 早期化した月次決算は、四半期の数字を出す土台にもなります。[月次決算と四半期決算の違い](/blog/getsuji-shihanki-kessan-chigai/)もあわせてご覧ください。
 
-関連する内容として[楽楽精算の経費精算のやり方](/blog/rakurakuseisan-keihi-seisan-yarikata/)も公開しています。
+関連する内容として楽楽精算の経費精算のやり方も公開しています。
 
 関連する内容として[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)も公開しています。
 

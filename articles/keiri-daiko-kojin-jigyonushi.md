@@ -71,7 +71,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 *経理代行を検討すべきタイミング*は、確定申告前に帳簿が未整理・売上増で仕訳が増えた・本業に集中したい、の3つです。
 
-近い論点を[記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方](/blog/yucho-kicho-yarikata/)で扱っています。
+近い論点を記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方で扱っています。
 
 <figure><img src="/images/keiri-daiko-kojin-jigyonushi/taimingu.png" alt="経理代行を検討すべき3つのタイミング: 確定申告前に帳簿が未整理、売上増で仕訳が増えた、本業に集中したい" loading="lazy"><figcaption>経理代行を検討すべき3つのタイミング</figcaption></figure>
 

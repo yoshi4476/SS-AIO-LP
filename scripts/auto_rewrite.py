@@ -1173,6 +1173,9 @@ def run_one(item, write, edited=None):
     p = ROOT / "articles" / f"{slug}.md"
     if not p.is_file():
         return False, "記事がありません"
+    import noindex
+    if noindex.hidden_text(p.read_text(encoding="utf-8-sig", errors="replace")):
+        return False, "検索から外した記事（noindex）なので直しません"
     if write:
         import shutil
         if not (shutil.which("claude") or shutil.which("claude.cmd")):
@@ -1415,6 +1418,9 @@ def main():
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     items = only_sites(items, a.sites)
+    # 検索から外した記事（noindex）は書き直さない（本数の枠と下書きの時間を使わせない）
+    import noindex
+    items = noindex.drop(items)
     if a.skip_recent:
         busy = recently_touched(a.skip_recent)
         # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う

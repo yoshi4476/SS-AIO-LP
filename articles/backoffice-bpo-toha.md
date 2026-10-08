@@ -55,7 +55,7 @@ faq:
 
 近い論点を[店舗の事務作業をAIで効率化する5つの方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)で扱っています。
 
-関連する内容として[経理効率化の本おすすめ6選｜選び方3ステップと失敗例](/blog/keiri-koritsuka-hon/)も公開しています。
+関連する内容として経理効率化の本おすすめ6選｜選び方3ステップと失敗例も公開しています。
 
 <div class="definition-box"><span class="term">バックオフィスBPOとは</span>、Business Process Outsourcingの略で、特定の業務を切り出して外部に委託するだけでなく、部門間で発生する情報のやり取りまで含めて設計・運用を任せる仕組みを指します。単発の作業代行とは異なり、業務プロセスそのものを継続的に任せる契約形態です。</div>
 

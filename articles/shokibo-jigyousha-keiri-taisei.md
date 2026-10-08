@@ -85,7 +85,7 @@ faq:
 
 関連する内容として[経理の外注と丸投げの違い](/blog/keiri-marunage-dekiru-hani/)も公開しています。
 
-あわせて[ATM入出金の記帳のやり方](/blog/atm-kicho-yarikata/)もご覧ください。
+あわせてATM入出金の記帳のやり方もご覧ください。
 
 <figure><img src="/images/shokibo-jigyousha-keiri-taisei/patterns.png" alt="小規模事業者の経理体制3パターン: 経営者が自分で兼務する、パート・アルバイトを雇う、経理BPOを併用する" loading="lazy"><figcaption>小規模事業者の経理体制3パターン</figcaption></figure>
 

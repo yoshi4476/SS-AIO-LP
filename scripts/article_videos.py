@@ -102,6 +102,9 @@ def candidates(days, limit):
             return x.group(1).strip().strip('"') if x else ""
         if p.stem in have or not published(p.stem, g("score")) or g("date") < since:
             continue
+        import noindex
+        if noindex.hidden_fm(fm):           # 検索から外した記事（noindex）は動画にしない
+            continue
         sid = S.find_category_owner(g("category")) or ""
         if not sid:
             continue

@@ -12,6 +12,7 @@ import photo_match  # noqa: E402
 import desc_fill as DF  # noqa: E402
 import footer_credit  # noqa: E402
 import social_footer as SF  # noqa: E402
+import noindex as NI  # noqa: E402
 
 # 補助金サイトの作業コピー。管制塔の publish.py が SUBSIDY_ROOT で渡す
 # （2026-10-03 まで補助金サイト側の tools/ で CI が動かしていた。管制塔に一本化）
@@ -216,6 +217,9 @@ for d in sorted((ROOT / "blog").iterdir()):
     if not d.is_dir() or not f.is_file() or d.name == "category":
         continue
     c = f.read_text(encoding="utf-8")
+    # 検索から外した記事（noindex）はページを残すが、一覧・制度別・業種別・sitemap・llms.txt には出さない
+    if NI.page_hidden(c) or NI.is_hidden(d.name):
+        continue
     title = re.search(r"<title>(.*?)[||]", c)
     desc = re.search(r'name="description" content="(.*?)"', c)
     date = re.search(r'"datePublished":\s*"(\d{4}-\d{2}-\d{2})"', c)

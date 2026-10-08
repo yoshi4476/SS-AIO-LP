@@ -59,7 +59,7 @@ faq:
 
 **経理の外注先選びは、税務申告まで任せたいかどうかを最初に決めると、候補が一気に絞れます。**
 
-近い論点を[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)で扱っています。
+近い論点を通帳だけで記帳するやり方で扱っています。
 
 <figure><img src="/images/keiri-gaichuu-kichodaiko-center/kirawake.png" alt="経理の外注先を切り分ける3つの軸: 税務申告まで任せたいか、記帳の作業量を減らしたいか、請求・支払まで含めたいか" loading="lazy"><figcaption>経理の外注先を切り分ける3つの軸</figcaption></figure>
 

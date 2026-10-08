@@ -51,7 +51,7 @@ faq:
 
 選ぶときの基準は[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)でも扱っています。
 
-部門が複数ある会社向けの実際の進め方は、[楽楽精算の経費精算のやり方](/blog/rakurakuseisan-keihi-seisan-yarikata/)でまとめています。個人事業主〜中小企業向けには、[freeeの経費精算のやり方](/blog/freee-keihi-seisan-yarikata/)も参考になります。
+部門が複数ある会社向けの実際の進め方は、楽楽精算の経費精算のやり方でまとめています。個人事業主〜中小企業向けには、freeeの経費精算のやり方も参考になります。
 
 費用の目安は、[経費精算BPOとは？任せられる業務3つと費用相場](/blog/keihi-seisan-bpo/)で解説しています。
 

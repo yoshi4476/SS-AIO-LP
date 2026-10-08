@@ -53,6 +53,9 @@ def candidates(site_id):
             return x.group(1).strip().strip('"') if x else ""
         if int(g("score") or 0) < 90 or S.find_category_owner(g("category")) != site_id:
             continue
+        import noindex
+        if noindex.hidden_fm(fm):       # 検索から外した記事（noindex）には一次情報の文を入れない
+            continue
         if MARK in body or "セブンセンシズ株式会社が" in body:
             continue
         key = _tokens(g("title") + " " + g("keyword"))

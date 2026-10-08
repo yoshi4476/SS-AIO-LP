@@ -406,6 +406,9 @@ def main():
 
     paths = sorted((ROOT / "articles").glob("*.md"))
     paths = [p for p in paths if not a.only or p.stem == a.only]
+    # 検索から外した記事（noindex）には手を入れない（言い回しの振り直し・リンクの間引きもしない）
+    import noindex
+    paths = [p for p in paths if not noindex.is_hidden(p.stem)]
     bad = findings(paths)
     _, share, total = spread(paths, write=False)
     top = share.most_common(3)

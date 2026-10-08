@@ -49,9 +49,9 @@ diagrams:
 
 あわせて[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)もご覧ください。
 
-関連する内容として[クリニックM&A後の集患再建](/meo/clinic-ma-shukyaku-jirei/)も公開しています。
+関連する内容としてクリニックM&A後の集患再建も公開しています。
 
-関連する内容として[クリニックのサイバー攻撃事例と集患を守る5つの初動対応](/ai-marketing/clinic-cyber-jirei/)も公開しています。
+関連する内容としてクリニックのサイバー攻撃事例と集患を守る5つの初動対応も公開しています。
 
 <div class="definition-box"><span class="term">クリニックDXとは</span>、紙とその場対応が中心だった業務を、デジタルツールに置き換えて再設計する取り組みです。単なるIT化ではなく、業務の流れそのものを見直す点が特徴です。</div>
 

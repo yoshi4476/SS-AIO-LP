@@ -158,7 +158,7 @@ faq:
 
 AI検索は施工事例の具体性と情報の正確さの一致を見ており、地道な発信の積み重ねが最大の対策になります。
 
-関連する内容として[AI集客とは？無料で今日から始める5つの方法と落とし穴3つ](/ai-marketing/ai-kantan-shukyaku/)も公開しています。
+関連する内容としてAI集客とは？無料で今日から始める5つの方法と落とし穴3つも公開しています。
 
 関連して、[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)もあわせてご確認ください。
 <a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。

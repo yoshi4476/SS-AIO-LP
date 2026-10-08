@@ -41,6 +41,9 @@ def _fm(p):
     if not m:
         return None
     fm = m.group(1)
+    import noindex
+    if noindex.hidden_fm(fm):
+        return None          # 検索から外した記事（noindex）は統合の候補（どちらの側にも）にしない
 
     def g(k):
         x = re.search(rf"^{k}:\s*(.+)$", fm, re.M)

@@ -17,6 +17,21 @@ import sites as sites_mod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# 補助金サイトの制度（sites/subsidy.json の scheme_mix の名前）。どれにも当たらなければ「その他」（業種・自治体の補助金）
+SCHEMES = [("AI導入補助金", r"ai(導入)?補助金|ai-hojokin"),
+           ("IT導入補助金", r"it(導入)?補助金|it-hojokin"),
+           ("ものづくり", r"ものづくり|monozukuri"),
+           ("持続化", r"持続化|jizokuka"),
+           ("事業再構築", r"事業再構築|saikouchiku")]
+
+
+def scheme_of(text):
+    """題・狙う語・slug から制度を1つ。空白を外して見る（台帳の語は「ai導入 補助金」のように語の間に空白が入って届き、
+    そのままでは主力の語まで「その他」に数え、周辺が実際より多く見えていた）"""
+    import unicodedata
+    t = re.sub(r"\s+", "", unicodedata.normalize("NFKC", str(text or "")).lower())
+    return next((name for name, pat in SCHEMES if re.search(pat, t)), "その他")
+
 
 def local_next_kw(cfg, limit=5):
     """管制塔が使えないときのフォールバック（KW計画ファイルから未執筆を拾う）"""
@@ -252,24 +267,16 @@ def main():
             if not k.startswith("_")}
     if smix:
         import collections
-        pats = [("AI導入補助金", r"ai(導入)?補助金|ai-hojokin"),
-                ("IT導入補助金", r"it導入補助金|it-hojokin"),
-                ("ものづくり", r"ものづくり|monozukuri"),
-                ("持続化", r"持続化|jizokuka"),
-                ("事業再構築", r"事業再構築|saikouchiku")]
+        import noindex
         now = collections.Counter()
         for f in (ROOT / "articles").glob("*.md"):
             raw = f.read_text(encoding="utf-8", errors="replace")
             m = re.search(r"^category:\s*(.+)$", raw[:1200], re.M)
             if not m or m.group(1).strip() not in cfg.get("categories", {}):
                 continue
-            head = (raw[:800] + f.stem).lower()
-            for name, pat in pats:
-                if re.search(pat, head):
-                    now[name] += 1
-                    break
-            else:
-                now["その他"] += 1
+            if noindex.hidden_text(raw):    # 検索から外した記事（noindex）は配分に数えない
+                continue
+            now[scheme_of(raw[:800] + f.stem)] += 1
         total = sum(now.values()) or 1
         print("\n■ 制度の配分（狙い / いま）")
         short = []

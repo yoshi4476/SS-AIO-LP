@@ -50,7 +50,7 @@ faq:
 
 経理効率化とは、記帳・請求・支払い・決算といった経理業務の手間や時間を、仕組みの見直しで減らす取り組み全般を指します。
 
-近い論点を[通帳だけで記帳するやり方](/blog/tsucho-kicho-yarikata/)で扱っています。
+近い論点を通帳だけで記帳するやり方で扱っています。
 
 あわせて[請求書を銀行振込で支払う手順](/blog/seikyusho-ginko-furikomi-yarikata/)もご覧ください。
 
@@ -68,7 +68,7 @@ faq:
 
 クラウド会計への切り替えは、銀行明細やカード情報の自動取り込みで入力作業そのものを減らす事例です。
 
-関連する内容として[freeeの経費精算のやり方](/blog/freee-keihi-seisan-yarikata/)も公開しています。
+関連する内容としてfreeeの経費精算のやり方も公開しています。
 
 <figure><img src="/images/keiri-koritsuka-jirei/jirei4.png" alt="経理効率化の4つの事例: クラウド会計に切り替える、定型業務を自動化する、業務フローを見直す、経理BPOを活用する" loading="lazy"><figcaption>経理効率化の4つの事例</figcaption></figure>
 

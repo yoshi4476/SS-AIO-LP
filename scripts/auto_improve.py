@@ -129,7 +129,9 @@ def main():
 
     import effect
     rows = effect.collect(a.days, a.until or None)
-    acts = effect.actions(rows)
+    # 検索から外した記事（noindex）は、リンクを足す先にも送り元にもしない・直す候補にも出さない
+    import noindex
+    acts = noindex.drop(effect.actions(rows))
     by = {}
     for x in acts:
         by.setdefault(x["do"], []).append(x)
@@ -142,6 +144,7 @@ def main():
 
     texts = {p.stem: p.read_text(encoding="utf-8", errors="replace")
              for p in (ROOT / "articles").glob("*.md")}
+    texts = {k: t for k, t in texts.items() if not noindex.hidden_text(t)}
     print("\n■ 内部リンクの補充")
     total = 0
     for x in by.get("links", [])[:MAX_PER_RUN]:

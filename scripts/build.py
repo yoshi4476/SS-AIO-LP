@@ -38,6 +38,7 @@ import render_check  # noqa: E402
 import industry_thumbs  # noqa: E402
 import desc_fill as DF  # noqa: E402
 import table_charts  # noqa: E402
+import noindex  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
@@ -883,10 +884,14 @@ def _glossary_links(content, meta):
         return content
 
 
-def build_article(path: Path, template: str, related: str = "", unpublished_urls=None, prevnext: str = ""):
+def build_article(path: Path, template: str, related: str = "", unpublished_urls=None, prevnext: str = "",
+                  noindex_page: bool = False):
     meta, body = parse_article(path)
     cat_name, cat_class = CATEGORIES[meta["category"]]
     url = f"{SITE_URL}/{meta['category']}/{meta['slug']}/"
+    # 検索から外した記事（noindex）へのリンクは、文を残して記法だけ外す。原稿は noindex.py --unlink で直してあるが、
+    # 週次の道具が後から張り直しても、公開するページには出さない（配信の publish.py も同じ関数を通す）
+    body = noindex.unlink(body)[0]
 
     # 変換ルールは md2html に集約（publish.py と共通化し、サイト間で装飾がずれないようにする）
     content, toc_tokens = md2html.convert(body)
@@ -1047,9 +1052,12 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
         html = html.replace(k, v)
     # 訳した要約ページへの hreflang は head の末尾に置く（JSON-LD の中に入れると parse が壊れる。
     # 実測: 1記事の JSON-LD が「Extra data」で壊れた）
-    alt = _hreflang(meta)
+    alt = "" if noindex_page else _hreflang(meta)
     if alt:
         html = html.replace("</head>", alt + "\n</head>", 1)
+    if noindex_page:
+        # 検索から外した記事: ページは残し（URL を 404 にしない）、head だけ noindex,follow にする
+        html = noindex.set_robots(html)
 
     out = SITE / meta["category"] / meta["slug"] / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -2356,6 +2364,14 @@ def main():
         all_metas.append(meta)
     for b in blocked:
         print(f"BLOCKED(公開不可): {b} → 修正・再審査後に score を更新してください")
+    # 検索から外した記事（noindex: true。担当領域の外と運用者が決めたもの）。ページは描いて URL を残すが、
+    # 一覧・関連・前後・テーマ・業種ハブ・まとめのページ・sitemap・llms.txt・feed には出さない（all_metas から外す）
+    hidden_metas = [m for m in all_metas if noindex.on(m)]
+    all_metas = [m for m in all_metas if not noindex.on(m)]
+    path_of = {}
+    for p in paths:
+        s = re.search(r"^slug:\s*(\S+)", p.read_text(encoding="utf-8-sig")[:3000], re.M)
+        path_of[s.group(1).strip().strip("'\"") if s else p.stem] = p
 
     # 隔離記事の生成済みHTMLを物理削除（過去ビルドの残骸が配信されるのを防ぐ）
     unpublished_urls = set()
@@ -2450,8 +2466,12 @@ def main():
         all_metas = [m for m in all_metas if m["slug"] not in late_blocked]
         print(f"再描画: {len(late_blocked)}本を止めたため、関連リンクを作り直します")
         entries = render_all(all_metas, late_blocked)
+    hidden_entries = [build_article(path_of[m["slug"]], template, related_html(m, all_metas),
+                                    unpublished_urls=unpublished_urls, noindex_page=True) for m in hidden_metas]
+    if hidden_entries:
+        print(f"noindex: 検索から外した記事 {len(hidden_entries)}本（ページは残し、一覧・sitemap・llms.txt から外す）")
     sync_llms(entries)
-    prune_orphan_articles(entries, unparsable)
+    prune_orphan_articles(entries + hidden_entries, unparsable)
     build_blog_index(all_metas)
     build_research_pages(all_metas)  # 先に作る（LP と業種ハブが、調査ページがあればリンクする）
     build_question_pages()  # 調査の質問集（集計は data/research/<業種>-questions.json）
@@ -2522,7 +2542,8 @@ def main():
         out = list((ROOT / "site").glob(f"*/{md.stem}/index.html"))
         if not out:
             continue
-        body = re.sub(r"^---\s*\n.*?\n---\s*\n", "", t, flags=re.S)
+        # 描くときに外した記事へのリンクを外す（build_article と同じ）ので、原稿の側も同じに数える
+        body = noindex.unlink(re.sub(r"^---\s*\n.*?\n---\s*\n", "", t, flags=re.S))[0]
         g = render_check.structure_gap(
             body, out[0].read_text(encoding="utf-8", errors="replace"))
         if g:
@@ -2555,7 +2576,7 @@ def main():
     # 原稿が無くなった slug（統合で _merged/ へ移したもの等）だけは外す
     alive = {f.stem for f in ARTICLES.rglob("*.md") if "_merged" not in f.parts}
     save_published({s for s in (_known or set()) if s in alive}
-                   | {m["slug"] for m, _ in entries})
+                   | {m["slug"] for m, _ in entries + hidden_entries})
     if _known is None:
         print(f"公開台帳を作りました（{len(entries)}本）。"
               "次のビルドからは、品質検査に落ちた新規記事は公開されません")

@@ -79,6 +79,9 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
     arts = [(dict(m, slug=m.get("slug") or (Path(rest[0]).stem if rest else "")), b) for m, b, *rest in arts]
     if live is not None:
         arts = [a for a in arts if a[0]["slug"] in live]
+    # 検索から外した記事（noindex）は、どの配信方式でもまとめのページに入れない
+    import noindex
+    arts = [a for a in arts if not noindex.on(a[0]) and not noindex.is_hidden(a[0]["slug"])]
     metas = [{"title": str(m.get("title") or ""), "slug": m["slug"], "keyword": str(m.get("keyword") or ""),
               "category": m.get("category", ""), "date": str(m.get("date") or ""), "body": b,
               "faq": m.get("faq") if isinstance(m.get("faq"), list) else []} for m, b in arts]

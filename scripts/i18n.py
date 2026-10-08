@@ -241,9 +241,12 @@ def candidates(site_id, langs):
             pass
     have = translated()
     rows = []
+    import noindex
     for md in (ROOT / "articles").glob("*.md"):
         cat = re.search(r"^category:\s*(\S+)", md.read_text(encoding="utf-8-sig")[:800], re.M)
         if not cat or S.find_category_owner(cat.group(1)) != site_id:
+            continue
+        if noindex.is_hidden(md.stem):      # 検索から外した記事（noindex）は訳さない
             continue
         src = summary(md.stem)
         if not src or not src["sections"]:

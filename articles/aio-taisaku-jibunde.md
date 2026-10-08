@@ -71,7 +71,7 @@ faq:
 
 関連する内容として[AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](/aio/aio-towa/)も公開しています。
 
-関連する内容として[AIかんたん集客とは？専門知識ゼロで始める5つの方法](/ai-marketing/ai-kantan-shukyaku/)も公開しています。
+関連する内容としてAIかんたん集客とは？専門知識ゼロで始める5つの方法も公開しています。
 
 <figure><img src="/images/aio-taisaku-jibunde/steps.png" alt="自分でできるAIO対策5つの手順: 現状を診断する、冒頭を断言型に書き換える、H2に1文結論を追加する、FAQを5問作る、月1回計測する" width="1200" height="675" loading="lazy"><figcaption>自分でできるAIO対策5つの手順（当メディア作成）</figcaption></figure>
 

@@ -226,6 +226,9 @@ def plan(site=None, slug=None, lo=MIN, hi=MAX):
         if not parts:
             continue
         meta = yaml.safe_load(parts[1]) or {}
+        import noindex
+        if noindex.on(meta):            # 検索から外した記事（noindex）には手を入れない
+            continue
         owner = S.find_category_owner(meta.get("category")) or ""
         if site and owner != site:
             continue

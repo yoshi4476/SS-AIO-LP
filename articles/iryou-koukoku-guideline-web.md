@@ -48,7 +48,7 @@ diagrams:
 
 近い論点を[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)で扱っています。
 
-関連する内容として[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)も公開しています。
+関連する内容として整骨院の費用は医療費控除の対象になる？も公開しています。
 
 あわせて[医療機関のMEO対策](/meo/iryou-meo-taisaku/)もご覧ください。
 

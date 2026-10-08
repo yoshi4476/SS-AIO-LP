@@ -53,6 +53,9 @@ def collect(site_id, only=None):
             return x.group(1).strip().strip('"') if x else ""
         if int(g("score") or 0) < 90 or S.find_category_owner(g("category")) != site_id:
             continue
+        import noindex
+        if noindex.hidden_fm(fm):           # 検索から外した記事（noindex）の表を比較表の元にしない
+            continue
         for h2, tbl in _tables(body):
             head = tbl.splitlines()[0]
             cols = [c.strip() for c in head.strip("|").split("|")]

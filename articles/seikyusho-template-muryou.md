@@ -136,7 +136,7 @@ Wordの型は、見た目を整えやすい反面、金額の計算を手で行�
 
 あわせて[経理マクロ自動化とは？](/blog/keiri-macro-jidoka/)もご覧ください。
 
-関連する内容として[SMBCグループの経理自動化事例](/blog/smbc-keiri-jidouka/)も公開しています。
+関連する内容としてSMBCグループの経理自動化事例も公開しています。
 
 <figure><img src="/images/seikyusho-template-muryou/step.png" alt="無料テンプレートを1つに決める3ステップ: 今のテンプレートを集める、6点を確認して1つに絞る、保存先と番号の振り方を決める" loading="lazy"><figcaption>無料テンプレートを1つに決める3ステップ</figcaption></figure>
 

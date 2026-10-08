@@ -2635,7 +2635,10 @@ def test_site_has_two_axes_and_no_orphans():
             if v not in depth:
                 depth[v] = depth[u] + 1
                 q.append(v)
-    lost = [u for u in sorted(pages) if u not in depth and u != "/thanks/"]
+    # 検索から外した記事（noindex。2026-10-08 運用者の決定）は、わざと導線から外している（URL だけ残す）。たどり着けなくてよい
+    import noindex as _NI
+    lost = [u for u in sorted(pages) if u not in depth and u != "/thanks/"
+            and not _NI.page_hidden(pages[u].read_text(encoding="utf-8", errors="surrogateescape"))]
     check("トップからたどり着けないページが無い", lost, [])
     import data_intake
     for u in (("/data/",) if data_intake.PUBLIC else ()) + ("/industry/", "/download/"):

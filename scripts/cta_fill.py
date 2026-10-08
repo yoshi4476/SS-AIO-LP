@@ -107,6 +107,9 @@ def main():
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
         if not sc or int(sc.group(1)) < 90:
             continue
+        import noindex
+        if noindex.hidden_fm(fm):       # 検索から外した記事（noindex）には手を入れない
+            continue
         if body.count("cta-button") >= NEED:
             continue
         cat = re.search(r"^category:\s*(\S+)", fm, re.M)

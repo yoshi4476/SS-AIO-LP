@@ -85,6 +85,10 @@ def load(site_id):
         cat = re.search(r"^category:\s*(\S+)", fm, re.M)
         if not cat or S.find_category_owner(cat.group(1)) != site_id:
             continue
+        # 検索から外した記事（noindex）は送り元にも送り先にもしない（リンクを張り直さない・手を入れない）
+        import noindex
+        if noindex.hidden_fm(fm):
+            continue
         ti = re.search(r"^title:\s*(.+)$", fm, re.M)
         kw = re.search(r"^keyword:\s*(.+)$", fm, re.M)
         dt = re.search(r"^date:\s*\"?(\d{4}-\d{2}-\d{2})", fm, re.M)

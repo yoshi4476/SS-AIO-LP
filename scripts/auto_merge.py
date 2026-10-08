@@ -543,10 +543,22 @@ def draft_all(pairs, workers):
     return AR.map_each(one, pairs, workers)
 
 
+def skip_noindex(pairs):
+    """検索から外した記事（noindex）を含む組は見送りにする（一覧には理由つきで残す）"""
+    import noindex
+    for p in pairs:
+        if not p.get("skip") and (noindex.is_hidden(p["survivor"]) or noindex.is_hidden(p["loser"])):
+            p["skip"] = "検索から外した記事（noindex）を含む"
+    return pairs
+
+
 def run_one(pair, write, draft=None):
     s, l = pair["survivor"], pair["loser"]
     if not (is_article(s) and is_article(l)):
         return False, "記事がありません"
+    import noindex
+    if noindex.is_hidden(s) or noindex.is_hidden(l):
+        return False, "検索から外した記事（noindex）を含む組は統合しません"
     if not write:
         return True, "（確認のみ）"
     raw = (ARTICLES / f"{s}.md").read_bytes()
@@ -676,7 +688,7 @@ def main():
         return selftest(a.scaled)
 
     if a.scaled:
-        pairs = scaled_candidates(a.site)
+        pairs = skip_noindex(scaled_candidates(a.site))
         ready = [p for p in pairs if not p["skip"]]
         print(f"■ 業種を入れ替えただけの同型の組（重なり{SCALED_MIN_SIM:.0%}以上）: {len(pairs)}（統合できる {len(ready)}）"
               + (f"（1回に{a.limit}組まで）" if a.write else "") + "\n")
@@ -687,7 +699,7 @@ def main():
                   f"クリック{ls.get('clicks', 0)}/{ss.get('clicks', 0)} 表示{ls.get('imp', 0)}/{ss.get('imp', 0)}"
                   + (f"  ｜{p['skip']}" if p["skip"] else ""))
     else:
-        pairs = candidates(a.site)
+        pairs = skip_noindex(candidates(a.site))
         ready = [p for p in pairs if not p["skip"]]
         print(f"■ 同じ語で食い合っている組: {len(pairs)}（統合できる {len(ready)}）"
               + (f"（1回に{a.limit}組まで）" if a.write else "") + "\n")

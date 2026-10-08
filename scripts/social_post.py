@@ -170,7 +170,8 @@ def save(rows):
 
 
 def add(slug, rows):
-    if any(r["id"] == slug for r in rows):
+    import noindex
+    if any(r["id"] == slug for r in rows) or noindex.is_hidden(slug):   # 検索から外した記事（noindex）は投稿しない
         return None
     a = article(slug)
     if not a:

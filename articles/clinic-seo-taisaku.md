@@ -69,7 +69,7 @@ MEOはGoogleマップとローカルパックでの表示を狙い、AIOはAI Ov
 
 **クリニックサイトはYMYL領域に該当し、通常のサイトより厳しい品質基準で評価されます。**この前提を理解しないまま施策を進めると、成果が出にくくなります。
 
-実際の例を先に押さえるなら、[クリニックの施工事例｜見るべき5つのポイント](/ai-marketing/clinic-shiko-jirei/)が参考になります。
+実際の例を先に押さえるなら、クリニックの施工事例｜見るべき5つのポイントが参考になります。
 
 YMYLとは「Your Money or Your Life」の略で、健康や生命に影響する情報を扱う分野を指します。<a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener">Googleの検索品質に関する公式ガイド</a>では、こうした分野で信頼性の高い一次情報を重視する方針が示されています。
 

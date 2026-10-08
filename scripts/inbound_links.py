@@ -53,6 +53,9 @@ def load_articles(site_id):
             score = 0
         if score < 90:      # 未公開の記事はリンク元にもリンク先にもしない
             continue
+        import noindex
+        if noindex.hidden_fm(fm):   # 検索から外した記事（noindex）も、リンク元にもリンク先にもしない
+            continue
         url = re.sub(r"^https?://[^/]+", "",
                      sites_mod.article_url(cfg, {"slug": p.stem, "category": cat,
                                                  "date": fv("date")}))

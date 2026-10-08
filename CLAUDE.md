@@ -519,6 +519,11 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
    書いた後（`kw_gate --after`・`publish_flow`）も同じ判定を通る。同じ字で別の意味の担当領域語（「記帳」と通帳の記帳、「申請」と開業届）は
    `sites/<id>.json` の `kw_needs`（その意味を示す語）、担当の外の文脈は `kw_off` に書く。台帳に残った語は `python scripts/kw_fit.py --ledger` で一覧にする（`--retire` は運用者が確かめてから）。
 
+   **公開済みの担当領域の外の記事は、消さずに検索から外す**（`scripts/noindex.py`。2026-10-08 運用者の決定で26本）。フロントマターに
+   `noindex: true`・`noindex_reason`・`noindex_date` を書くと、4つの描き方（build.py・nextjs-json・external-html・external-md）で
+   head が noindex,follow になり、sitemap・llms.txt・一覧・関連・まとめのページから外れ、他の記事からのリンクは文を残して記法だけ外れる。
+   週次の自動の直しは触らない。URL は 404 にしない（張られたリンクと評価を残す）。門: `tests/gates_history_h68.py`。
+
 1. **記事作成ログの確認**
    - 「記事作成ログ」タブのステータス「未着手」の一番上の行を取得
    - 未着手行あり → そのKWで Phase 2 へ（Ahrefsリサーチ不要）

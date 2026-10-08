@@ -103,7 +103,7 @@ SEOはGSCと順位ツールを、AIOはGSCの生成AIレポートとGA4のAI参�
 
 あわせて[AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](/aio/aio-towa/)もご覧ください。
 
-近い論点を[AI集客とは？無料で今日から始める5つの方法と落とし穴3つ](/ai-marketing/ai-kantan-shukyaku/)で扱っています。
+近い論点をAI集客とは？無料で今日から始める5つの方法と落とし穴3つで扱っています。
 
 関連する内容は[AIO効果測定レポートの雛形](/aio/aio-taisaku-keisoku-houhou/)で整理しています。
 

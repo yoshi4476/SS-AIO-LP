@@ -151,6 +151,9 @@ def article_index():
         score = g("score")
         if not score.isdigit() or int(score) < 90:
             continue                                 # 非公開の記事は押し上げない
+        import noindex
+        if noindex.hidden_fm(fm):
+            continue                                 # 検索から外した記事（noindex）も押し上げない
         slug = g("slug") or p.stem
         heads = re.findall(r"^#{2,4}\s*(.+)$", body, re.M)
         out[slug] = {"slug": slug, "file": p.name, "title": g("title"),

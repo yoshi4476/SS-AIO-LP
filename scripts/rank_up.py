@@ -124,8 +124,11 @@ def fetch(domain, days=28):
 
 
 def articles():
-    return {p.stem: p.read_text(encoding="utf-8-sig", errors="replace")
-            for p in (ROOT / "articles").glob("*.md")}
+    """原稿の本文。検索から外した記事（noindex）は押し上げの対象にもリンクの送り元にもしない"""
+    import noindex
+    texts = {p.stem: p.read_text(encoding="utf-8-sig", errors="replace")
+             for p in (ROOT / "articles").glob("*.md")}
+    return {k: t for k, t in texts.items() if not noindex.hidden_text(t)}
 
 
 def inbound(slug, texts):

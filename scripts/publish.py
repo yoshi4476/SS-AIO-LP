@@ -36,6 +36,7 @@ import render_check  # noqa: E402
 import site_files  # noqa: E402
 import sites as sites_mod  # noqa: E402
 import table_charts  # noqa: E402
+import noindex  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".publish-work"  # 対象リポジトリのクローン置き場（.gitignore対象）
@@ -444,6 +445,9 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
         "faq": faq,
         "html": html,
     }
+    if noindex.on(meta):
+        # 検索から外した記事: 先方の記事ページが head を noindex にし、一覧・関連・サイトマップから外す
+        out = noindex.nextjs_fields(out)
     if credit:
         out["author"] = credit["author"]
         if credit["supervisor"]:
@@ -515,6 +519,16 @@ def write_nextjs_json(cfg, dest: Path, meta, body):
     written = [target] + _update_external_index(dest, cfg, meta, page=page) + img_written
     if langs:
         written += nextjs_alternates_part(cfg, dest, warn=bool(alts))
+    # 検索から外した記事（noindex）を先方のアプリが扱えるようにする（記事の読み込みと記事ページに数行。2回目からは何も書かない）。
+    # お客様のアプリは先方のファイルなので書き換えず、外した記事を配信したときだけ要対応で知らせる
+    client = sites_mod.is_client(cfg["id"])
+    nj, why = noindex.nextjs_app(dest, write=not client)
+    if client and nj:
+        why = "記事の読み込み（lib/blog.ts）と記事ページに、JSON の noindex を robots と一覧の除外に使う数行を足してください"
+    elif nj:
+        written += nj
+    if why and noindex.on(meta):
+        print(f"要対応: {cfg['id']} の記事 {meta['slug']} は検索から外す記事ですが、先方のアプリが noindex を読めません（{why}）")
     return written, len(md2html.plain_text(text_html))
 
 
@@ -884,6 +898,13 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
         alts = article_alternates(cfg, dest, meta)
         if alts:
             fm["alternates"] = alts
+    if noindex.on(meta):
+        # 検索から外した記事: head の robots は先方の雛形がフロントマターから出す（見え方の指定 max-* は付けない）
+        fm = noindex.md_front(fm)
+        if journal and not any("noindex" in f.read_text(encoding="utf-8", errors="ignore")
+                               for f in (dest / "scripts").glob("*.mjs")):
+            print(f"要対応: {cfg['id']} の記事 {slug} は検索から外す記事ですが、先方の組み立て（scripts/*.mjs）が "
+                  "フロントマターの noindex・robots を読みません。先方の記事ページに robots を出す1行を足してください")
     target = dest / cfg["content_dir"] / f"{slug}.md"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text("---\n" + yaml.safe_dump(fm, allow_unicode=True, sort_keys=False, width=1000)
@@ -1398,7 +1419,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         print(f"  写真の選定をスキップ: {e}")
 
     # 多言語の要約（指示のある社だけ）: 日本語ページの head に hreflang を足し、訳のページを置く
-    extra = _i18n_pages(cfg, meta, dest)
+    extra = None if noindex.on(meta) else _i18n_pages(cfg, meta, dest)
     if extra:
         out = out.replace("</head>", extra["hreflang"] + "\n</head>", 1)
 
@@ -1406,6 +1427,10 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # 先方の雛形が robots を持たない・index,follow だけでも、見え方の指定を1つの meta にまとめて足す
     import search_preview
     out = search_preview.robots_tag(out)
+    if noindex.on(meta):
+        # 検索から外した記事: ページは置き（URL を 404 にしない）、head を noindex,follow にする。
+        # 一覧・業種・sitemap・llms.txt（subsidy/pages.py）と関連記事（_recent_articles）はこの印で外す
+        out = noindex.set_robots(out)
     # FTP・ZIP の社は管制塔の雛形で描くので、計測（GA4・CTA・フォーム・入口・A/B）もここで置く。
     # Git の社（external-html）は先方の雛形が計測を持つ（補助金サイトは site.js）
     if cfg.get("type") in deliver_files.TYPES:
@@ -1473,7 +1498,8 @@ def _recent_articles(dest: Path, cfg, exclude_slug, n):
             continue
         c = idx.read_text(encoding="utf-8")
         m = re.search(r"<h1[^>]*>(.*?)</h1>", c, re.S)
-        if not m:
+        # 検索から外した記事（noindex）は関連記事に出さない（自社の導線から外す）
+        if not m or noindex.page_hidden(c) or noindex.is_hidden(d.name):
             continue
         pub = (re.search(r'"datePublished":\s*"([^"]+)"', c) or [None, ""])[1]
         pages.append((pub, d.name, re.sub(r"<[^>]+>", "", m.group(1)).strip()))
@@ -1520,6 +1546,19 @@ def _update_external_index(dest: Path, cfg, meta, page=None):
     touched = []
     url = sites_mod.article_url(cfg, meta)
     sm = _public_file(dest, "sitemap.xml")
+    lt = _public_file(dest, "llms.txt")
+    # 検索から外した記事（noindex）の行は、どの記事を配信するときにも外す（noindex のページを sitemap に載せると矛盾する）。
+    # 外した記事そのものは、足さずにここで終える
+    hid = set(noindex.slugs()) | ({meta["slug"]} if noindex.on(meta) else set())
+    for f, prune in ((sm, noindex.prune_sitemap), (lt, noindex.prune_llms)):
+        if f and hid:
+            t = f.read_text(encoding="utf-8")
+            new = prune(t, hid)
+            if new != t:
+                f.write_text(new, encoding="utf-8", newline="\n")
+                touched.append(f)
+    if noindex.on(meta):
+        return touched
     if sm:
         t = sm.read_text(encoding="utf-8")
         if url not in t:
@@ -1529,7 +1568,6 @@ def _update_external_index(dest: Path, cfg, meta, page=None):
             t = search_preview.ensure_ns(t.replace("</urlset>", entry + "</urlset>"))
             sm.write_text(t, encoding="utf-8", newline="\n")
             touched.append(sm)
-    lt = _public_file(dest, "llms.txt")
     if lt:
         t = lt.read_text(encoding="utf-8")
         line = f"- [{meta['title']}]({url}): {meta['description']}"
@@ -1560,7 +1598,8 @@ def _live_slugs(cfg, dest: Path, extra=()):
         have = {p.stem for p in (dest / cfg["content_dir"]).glob("*.md")}
     else:
         have = {p.parent.name for p in (dest / page_dir(cfg)).glob("*/index.html")}
-    return have | set(extra)
+    # 検索から外した記事（noindex）は、まとめのページ（比較表・テーマ・用語集・エリア・訳）の材料にしない
+    return noindex.live(have | set(extra))
 
 
 def aggregate_links(cfg, dest: Path, meta):
@@ -2213,6 +2252,9 @@ def main():
     if not src.exists():
         raise SystemExit(f"記事が見つかりません: {src}")
     meta, body = parse_article(src)
+    # 検索から外した記事（noindex）へのリンクは、文を残して記法だけ外して配信する（build.py と同じ。
+    # 原稿は noindex.py --unlink で直してあるが、週次の道具が張り直しても配信先のページには出さない）
+    body = noindex.unlink(body)[0]
     # git の衝突マーカーが残った原稿は配信しない。「=======」が見出しとして描かれ、
     # 「<<<<<<< Updated upstream」が H1 として公開されていた（2026-09-29: 17本）
     if re.search(r"^(<<<<<<< |>>>>>>> |=======\s*$)", body, re.M):

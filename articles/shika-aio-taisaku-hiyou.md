@@ -72,7 +72,7 @@ AIO対策は、記事の構造改善と一次情報の整備に人手がかか�
 
 関連する内容として[AIO対策の導入方法](/aio/aio-taisaku-donyu-hoho/)も公開しています。
 
-近い論点を[整骨院の費用は医療費控除の対象になる？](/seo/seikotsuin-hiyou-iryouhikojo/)で扱っています。
+近い論点を整骨院の費用は医療費控除の対象になる？で扱っています。
 
 <figure><img src="/images/shika-aio-taisaku-hiyou/hiyou-yoin.png" alt="歯科医院のAIO対策費用が変わる3つの要因" width="1200" height="700" loading="lazy"><figcaption>歯科医院のAIO対策費用が変わる3つの要因（当メディア作成）</figcaption></figure>
 

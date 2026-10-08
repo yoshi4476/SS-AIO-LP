@@ -113,6 +113,10 @@ def data(site, domain):
                 url = S.article_url(S.load(site), {"slug": r["slug"], "category": cat}).replace(domain, "")
             except Exception:
                 url = ""
+        # 検索から外した記事（noindex）へは調査のページからもリンクしない（問いと答えの集計は調査の結果なので残す）
+        import noindex
+        if url and noindex.is_hidden(url.rstrip("/").split("/")[-1]):
+            url = ""
         shown = set()
         for q, by in r["stance"].items():
             c = Counter(v["label"] for v in by.values())
