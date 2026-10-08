@@ -432,11 +432,15 @@
 "modified": "2026-08-29"
 },
 "reform-seo-taisaku": {
-"hash": "aab89e72168eeacf0b30f7e4aed32b0a",
+"hash": "a1de24de8de0b51d9a1c2a633e54dab4",
 "modified": "2026-08-29"
 },
+"reform-shukyaku-daikou": {
+"hash": "831be4b71770c6bb77e6cd5e1c21c8bd",
+"modified": "2026-10-08"
+},
 "reform-shukyaku-hoho": {
-"hash": "6b17f7a8ee73208e8ed19786a7e89521",
+"hash": "21000f5f3333917422b5498f177e55c8",
 "modified": "2026-08-06"
 },
 "saas-hikaku-kiji-taisaku": {
