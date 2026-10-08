@@ -257,6 +257,9 @@ function doPost(e) {
       case 'ai_check_quota': return json_(aiCheckQuota_(body));
       case 'gemini_usage':   return json_(geminiUsage_());
       case 'gemini_log':     return json_(geminiLog_(body));
+      // ラッコキーワードの消費。手元とCIの実行が同じ台帳で数える（scripts/rakko.py の allow / sync_shared）
+      case 'rakko_usage':    return json_(rakkoUsage_(body));
+      case 'rakko_log':      return json_(rakkoLog_(body));
       case 'ai_check_stats': return json_(aiCheckStats_(body));
       case 'probe_status':   return json_(probeStatus_());
       case 'ai_check_log':   return json_(aiCheckLog_(body));

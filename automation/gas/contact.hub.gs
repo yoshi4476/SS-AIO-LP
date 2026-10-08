@@ -1109,6 +1109,55 @@ function geminiLog_(body) {
   return { ok: true };
 }
 
+/**
+ * ラッコキーワードの消費（クレジット）。利用記録は公開リポジトリに置けず、手元とCIで別々に数えると
+ * 上限が2倍に効くため、両方がここへ差分を写して同じ合計で判断する（2026-10-08）。
+ * 上限（1サイト月150・全体月600）の判断は scripts/rakko.py の allow。ここは数えるだけ。
+ * 応答の rakko: true は、配る前の古いコード（action を知らずフォームとして扱う）と見分ける印
+ */
+function rakkoSheet_() {
+  const ss = book_();
+  let sh = ss.getSheetByName('ラッコ利用');
+  if (!sh) {
+    sh = ss.insertSheet('ラッコ利用');
+    sh.appendRow(['日時', 'サイト', '環境', 'クレジット', '内容', '目的']);
+  }
+  return sh;
+}
+
+function rakkoUsage_(body) {
+  const month = String(body.month || Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM'));
+  const out = { ok: true, rakko: true, month: month, total: 0, sites: {}, purposes: {}, envs: {}, blocked: {} };
+  const sh = rakkoSheet_();
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues().forEach(function (r) {
+      const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+      if (Utilities.formatDate(at, 'Asia/Tokyo', 'yyyy-MM') !== month) return;
+      const site = String(r[1] || ''), env = String(r[2] || ''), credit = Number(r[3]) || 0;
+      const purpose = String(r[5] || 'reserve');
+      out.total += credit;
+      if (site) {
+        out.sites[site] = (out.sites[site] || 0) + credit;
+        out.purposes[site] = out.purposes[site] || {};
+        out.purposes[site][purpose] = (out.purposes[site][purpose] || 0) + credit;
+      }
+      // 環境ごとの写した量（社|目的）。rakko.py の sync_shared が差分だけを写すのに使う
+      out.envs[env] = out.envs[env] || {};
+      out.envs[env][site + '|' + purpose] = (out.envs[env][site + '|' + purpose] || 0) + credit;
+      if (String(r[4] || '').indexOf('止めた') === 0) out.blocked[site] = (out.blocked[site] || 0) + 1;
+    });
+  }
+  return out;
+}
+
+function rakkoLog_(body) {
+  const credit = Number(body.credit) || 0;
+  if (credit < 0) return { ok: false, error: 'credit' };
+  rakkoSheet_().appendRow([new Date(), clean_(body.site).slice(0, 40), clean_(body.env).slice(0, 10), credit,
+                           clean_(body.note).slice(0, 80), clean_(body.purpose).slice(0, 20)]);
+  return { ok: true, rakko: true };
+}
+
 function aiCheckQuota_(body) {
   const email = clean_(body.email).toLowerCase();
   if (!email) return { ok: false, error: 'email' };

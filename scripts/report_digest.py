@@ -83,6 +83,13 @@ def main():
         elif hum.get(r["site"]):
             lines.append(f"・{r['name']}:")
             lines += [f"    - {x}" for x in hum[r["site"]][:6]]
+    try:
+        import rakko                    # ラッコキーワードの消費（社ごと・上限・止めた回数）。お客様のPDFには載せない
+        rl, rover = rakko.month_report(ym)
+        lines += ["", "■ ラッコキーワードの消費" + ("（上限に達した・止めた社があります）" if rover else "")]
+        lines += ["・" + ln for ln in rl]
+    except Exception as e:
+        lines += ["", f"■ ラッコキーワードの消費: 集計できませんでした（{type(e).__name__}）"]
     lines += ["", "■ 添付", ""]
     attach, size = [], 0
     for r in rows:

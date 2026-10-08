@@ -356,16 +356,12 @@ def main():
                     break
             time.sleep(0.2)  # サジェストAPIへの配慮
 
-    # --- 2-1. ラッコキーワード（キーがあるときだけ）---
-    # 無料のサジェストは候補は取れるが検索ボリュームが分からない。
-    # ラッコはボリューム付きで返すので、多い順に採れる。
+    # --- 2-1. ラッコキーワードの控え（課金しない）---
+    # 週次の補充ではラッコを呼ばない（2026-10-08 運用者の決定。課金は月次の kw_plan と新しいお客様の登録だけ）。
+    # rakko.allow を通していないので、call() は控え（data/rakko_cache・30日）にある応答だけを返す。
     # キー未設定なら何も起きない（無料ぶんだけで動き続ける）。
     try:
         import rakko
-        # 月の目安は超えても止めない（自動課金にしているため）。超えたことは知らせる
-        if rakko.enabled() and rakko.month_spent() > rakko.MONTHLY_BUDGET:
-            print(f"  ラッコは今月の目安（{rakko.MONTHLY_BUDGET}）を超えています（自動課金で続けます）")
-            print("RAKKO_MONTH=over")
         if rakko.enabled():
             before = len(discovered)
             for ind in S["industries"]:
@@ -387,7 +383,7 @@ def main():
                     picked += 1
                     if picked >= PER_SEED * 3:
                         break
-            print(f"  ラッコキーワードから追加: {len(discovered) - before}件")
+            print(f"  ラッコの控えから追加: {len(discovered) - before}件（課金なし）")
             # 尽きたことを機械が読める形で出す。実行ログの奥に埋もれると、
             # 補充が細っている理由に誰も気づけない
             if rakko.exhausted():

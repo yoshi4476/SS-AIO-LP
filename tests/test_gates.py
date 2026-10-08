@@ -1732,30 +1732,34 @@ def test_kw_plan_keeps_only_buyers():
     diy = kw_plan.score({"kw": "請求書 封筒 書き方", "vol": 5400, "kd": 33})
     check("外注を考える語が、自分でやる語より上", buyer > diy, True)
 
-    # ルール: 課金の前に必ず見積もり、予算内でだけ取得する（手で走らせても同じ）
+    # ルール: 課金の前に必ず見積もり、上限（1サイト月150・全体月600・1回150・目的ごとの枠）を通す。
+    # 超えるなら呼ばない（自動課金なので警告では止まらない。2026-10-08）。詳しい門は gates_history_h67
     src_plan = (ROOT / "scripts" / "kw_plan.py").read_text(encoding="utf-8")
-    check("課金の前に見積もる", "if not budget_ok(S) and not DRY" in src_plan, True)
+    check("課金の前に見積もる", "granted = budget_ok(S)" in src_plan, True)
     import rakko as _rk
-    S_est = {"cfg": {"kw_seeds": {"core": ["集客"]}}, "own_terms": ("aio",),
+    S_est = {"cfg": {"id": "ai-lab", "kw_seeds": {"core": ["集客"]}}, "own_terms": ("aio",),
              "industries": ["クリニック", "歯科医院"], "intents": []}
-    check("見積もりは問い合わせ数×1.5＋一括15", kw_plan.estimate(S_est), 2 * 1.5 + 15)
+    check("見積もりは問い合わせ数×1.5＋一括15×2（登録のやり直しぶん）", kw_plan.estimate(S_est), 2 * 1.5 + 2 * 15)
     # 一括調査でSEO難易度を取ると1語0.75で、500語なら375になる（今日の主因）。取らない
     check("一括調査で難易度を取らない", '"seoDifficulty": False' in src_plan and '"seoDifficulty": True' not in src_plan, True)
-    saved_ms, saved_mb = _rk.month_spent, _rk.MONTHLY_BUDGET
+    import os as _os
+    import tempfile as _tf
+    saved_rk = (_rk.SPEND_LOG, _rk._hub, _os.environ.get("GITHUB_ACTIONS"))
+    _rk.SPEND_LOG, _rk._hub = Path(_tf.mkdtemp()) / "spend.jsonl", (lambda body: None)
+    _os.environ.pop("GITHUB_ACTIONS", None)
     try:
-        _rk.month_spent, _rk.MONTHLY_BUDGET = (lambda month=None: 995.0), 1000
-        check("月の目安を超えても取得する（自動課金・2026-09方針）", kw_plan.budget_ok(S_est), True)
-        _rk.month_spent = lambda month=None: 0.0
-        check("予算内なら取得する", kw_plan.budget_ok(S_est), True)
-        S_over_cap = {"cfg": {"kw_seeds": {"core": ["集客", "SEO", "MEO", "AIO"]}}, "own_terms": ("aio",),
-                      "industries": ["業種%d" % i for i in range(100)], "intents": []}
-        check("1回の上限は超えたら取得しない（暴走の歯止め）", kw_plan.budget_ok(S_over_cap), False)
+        check("上限内なら取得する", kw_plan.budget_ok(S_est), True)
+        _rk.SPEND_LOG.write_text(json.dumps({"at": _rk.this_month() + "-01T00:00:00+09:00",
+                                             "path": "/v1/search-volume", "credit": 590.0}) + "\n", encoding="utf-8")
+        check("全体の月の上限を超えるなら取得しない（自動課金・2026-10-08 方針）", kw_plan.budget_ok(S_est), False)
     finally:
-        _rk.month_spent, _rk.MONTHLY_BUDGET = saved_ms, saved_mb
+        _rk.SPEND_LOG, _rk._hub, _rk._GRANT = saved_rk[0], saved_rk[1], None
+        if saved_rk[2] is not None:
+            _os.environ["GITHUB_ACTIONS"] = saved_rk[2]
     wf_m = (ROOT / ".github" / "workflows" / "monthly-report.yml").read_text(encoding="utf-8", errors="replace")
     check("月次は dry-run を先に記録してから本番", wf_m.index("--dry-run") < wf_m.index("--if-needed --replace"), True)
     src_disc = (ROOT / "scripts" / "kw_discover.py").read_text(encoding="utf-8")
-    check("週次補充も月の目安を見る", "rakko.month_spent() > rakko.MONTHLY_BUDGET" in src_disc, True)
+    check("週次補充はラッコに課金しない（上限の許可を取らない）", "allow(" in src_disc or "MONTHLY_BUDGET" in src_disc, False)
 
     # 一括調査に送るのは価値の高い語だけ、1回ぶんまで（1万件を20回送って300クレジット払った）
     many = [{"kw": "補助金 その%d" % i} for i in range(700)] \
@@ -1786,8 +1790,12 @@ def test_kw_plan_keeps_only_buyers():
     rakko.CACHE_DIR = pathlib.Path(tempfile.mkdtemp())
     # 本物の利用台帳にも書かない。偽の消費が月の合計に積まれ、CI のキャッシュにも持ち越されていた（2026-10-03）
     rakko.SPEND_LOG = pathlib.Path(tempfile.mkdtemp()) / "spend.jsonl"
+    # 課金の呼び出しは上限の許可（rakko.allow）を通った後だけ。管制塔には触らない
+    saved_hub, saved_ci = rakko._hub, os.environ.pop("GITHUB_ACTIONS", None)
+    rakko._hub = lambda body: None
     try:
-        r = rakko.call("/v1/x", {"a": 1})
+        check("上限の許可", rakko.allow("_gate_", {"reserve": 20, "volume": 30}), True)
+        r = rakko.call("/v1/suggest-keywords", {"a": 1})
         check("5xx は待ってやり直す", (r or {}).get("data"), {"ok": 1})
         check("やり直しの回数", calls["n"], 3)
         # 自動課金だと尽きずに請求が伸びる。上限に達したら以降は呼ばない
@@ -1796,7 +1804,7 @@ def test_kw_plan_keeps_only_buyers():
         rakko.urllib.request.urlopen = paid
         rakko.CONSUMED, rakko.BUDGET = 0.0, 3.0
         # 問い合わせを変える（同じ内容はキャッシュから返って課金されないため）
-        got = [rakko.call("/v1/x", {"i": i}) is not None for i in range(4)]
+        got = [rakko.call("/v1/suggest-keywords", {"i": i}) is not None for i in range(4)]
         check("上限まで呼べる（1.5×2=3.0）", got[:2], [True, True])
         check("上限に達したら止まる", got[2:], [False, False])
         check("消費を数えている", rakko.spent(), 3.0)
@@ -1816,8 +1824,10 @@ def test_kw_plan_keeps_only_buyers():
         check("一括調査の登録は残さない（毎回別物）", hits["n"], 3)
     finally:
         rakko.urllib.request.urlopen, rakko.api_key, rakko.RETRY_WAIT, rakko._OUT_OF_CREDIT = saved
-        rakko.CONSUMED, rakko.BUDGET = 0.0, None
+        rakko.CONSUMED, rakko.BUDGET, rakko._GRANT, rakko._hub = 0.0, None, None, saved_hub
         rakko.CACHE_DIR, rakko.SPEND_LOG = saved_cache, saved_log
+        if saved_ci is not None:
+            os.environ["GITHUB_ACTIONS"] = saved_ci
 
     # 管制塔の一時的な404も待ってやり直す。取り下げ直後の追加で当たると未着手が0件で残る
     import hub_client

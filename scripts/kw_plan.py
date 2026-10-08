@@ -45,9 +45,8 @@ from kw_status import is_written, written_corpus              # noqa: E402
 
 MAX_PLAN = 120        # 1サイトの計画本数。1日2本で60日分
 ENOUGH = 40           # 未着手がこれ以上あるサイトは、--if-needed のとき組み直さない（20日分）
-CREDIT_CAP = 400      # 1サイト1回のラッコ消費の上限。自動課金だと尽きずに請求が伸びる。
-                      # 実測は corporate 約35 / ai-lab 約75 / subsidy 約170 で、
-                      # 400 を超えるのは何かが暴走しているとき
+CREDIT_CAP = rakko.RUN_CAP   # 1サイト1回のラッコ消費の上限（150）。社の月の上限・全体の月の上限は rakko.allow が見る
+                             # （超えるなら呼ばない。自動課金なので警告では止まらない。2026-10-08 運用者の決定）
 PER_SUBJECT = 10      # 1サブジェクトから採る上限。1業種に偏らせない
 PER_PRIORITY = 20     # 優先業種（kw_seeds.priority）の上限。月1件の成約で費用が回収できる業種を厚くする
 PRIORITY_BONUS = 1.5  # 優先業種の語への加点。汎用性は他業種を残すことで保つ
@@ -152,6 +151,7 @@ def score(c, prio=(), held=()):
 
 
 DRY = False   # True のとき、ラッコは呼ばず（キャッシュにあれば使う）、課金の見積もりだけ出す
+DEEP = False  # --deep（LSI/PAA を1起点22.5で取る）。見積もりに含めるため main で立てる
 
 
 def gather(site_id, S, deep):
@@ -428,8 +428,8 @@ def fill_volume(cands):
         n = max(1, -(-len(missing) // BULK)) if missing else 0
         print(f"   [dry-run] 一括調査: {len(missing)}件を{n}回 → 約{15 * n}クレジット（登録しません）")
         return hit
-    if not missing or not rakko.enabled():
-        return hit
+    if not missing or not rakko.enabled() or not rakko.granted():
+        return hit                                  # 上限で止めた回は登録しない（手元の記録の分だけ）
     total, answered = hit, set()
     for part in chunks(missing, BULK):
         n, got = _fill_part(cands, part)
@@ -638,8 +638,9 @@ def split_retire(todo, plan_kws, own_norms=()):
     return retire, keep
 
 
-def replace_ledger(site_id, picked):
-    """台帳の「未着手」を対象外にし、新しい計画を積む。公開済み・執筆中は触らない"""
+def replace_ledger(site_id, picked, retire_old=True):
+    """台帳の「未着手」を対象外にし、新しい計画を積む。公開済み・執筆中は触らない。
+    retire_old=False（ラッコの上限で止めた回）は足すだけ。検索数の欠けた薄い計画で在庫を減らさない"""
     import hub_client
     if not hub_client.enabled():
         print("   管制塔が未接続のため、台帳は更新しません")
@@ -647,6 +648,9 @@ def replace_ledger(site_id, picked):
     rows = hub_client.all_kw(strict=True)
     todo = [r["keyword"] for r in rows if r.get("site") == site_id and r.get("status") == "未着手"]
     retire, keep = split_retire(todo, [c["kw"] for c in picked], added_before(site_id))
+    if not retire_old and retire:
+        print(f"   ラッコの上限で止めた回なので、未着手 {len(retire)}件は取り下げずに残します")
+        keep, retire = keep + retire, []
     if retire:
         for i in range(0, len(retire), CHUNK):
             hub_client.retire_kw(site_id, retire[i:i + CHUNK],
@@ -684,27 +688,33 @@ def paid_queries(S):
 BULK_COST = 15   # 一括調査1回（検索数のみ・500語まで）。難易度を付けると +0.75/語 になるので付けない
 
 
+def estimate_parts(S):
+    """課金の見積もり（目的ごとのクレジット）。実際より小さく出ると上限が効かないので、実際以上に出す（安全側）。
+    単価は公式の資料のまま（rakko.price）。控えに無い問い合わせ ＋ --deep の LSI/PAA（1起点22.5）
+    ＋ 一括調査（LOOKUP_MAX 語を BULK 語ずつ・1回最低15）＋ 一括調査の登録のやり直し1回ぶん
+    （_fill_part は requestId が返らないと登録し直す）。2026-10-08 の CONFLUX は実際 121回・195 → 見積もり 210"""
+    parts = defaultdict(float)
+    for path, body in paid_queries(S):
+        p = rakko.price(path, body)
+        parts[rakko.PURPOSE_OF.get(path, "reserve")] += rakko.RUN_CAP if p is None else p
+    if DEEP:
+        parts["qa"] += len(S["industries"]) * rakko.price("/v1/other-keywords")
+    parts["volume"] += rakko.price("/v1/search-volume", {"keywords": [""] * BULK}) * (-(-LOOKUP_MAX // BULK) + 1)
+    return {p: round(v, 2) for p, v in parts.items()}
+
+
 def estimate(S):
-    """課金の見積もり（クレジット）。問い合わせ1回1.5 ＋ 一括調査1回（500語まで）15"""
-    return len(paid_queries(S)) * 1.5 + BULK_COST
+    return round(sum(estimate_parts(S).values()), 2)
 
 
 def budget_ok(S):
-    """1回の見積もりが上限（暴走の歯止め）を超えるなら取得しない。手で走らせても同じ。
-    月の目安は超えても止めない（自動課金にしているため。2026-09 に方針変更）。超えたことは知らせる"""
-    est = estimate(S)
-    used = rakko.month_spent()
-    print(f"   見積もり: 約{est:.0f}クレジット（今月の合計 {used:.0f} ＋ → {used + est:.0f} / 目安 {rakko.MONTHLY_BUDGET}）")
-    print(f"RAKKO_EST={est:.0f}")
-    if est > CREDIT_CAP:
-        print(f"   1回の上限 {CREDIT_CAP} を超えるため取得しません。起点か掛ける語を減らしてください")
-        print("RAKKO_GUARD=over")
-        return False
-    if used + est > rakko.MONTHLY_BUDGET:
-        print(f"   今月の目安 {rakko.MONTHLY_BUDGET} を超えますが、自動課金にしているため続けます")
-        print("RAKKO_MONTH=over")
-    print("RAKKO_GUARD=ok")
-    return True
+    """課金の前に必ず見積もり、上限（rakko.allow: 1サイト月150・全体月600・1回150・目的ごとの枠）を通す。
+    手で走らせても同じ。超えるならラッコは呼ばない（自動課金なので、警告ではなく止める。2026-10-08 運用者の決定）。
+    枠を超える目的だけを外して続けた回も False（計画が欠けるので台帳は足すだけにする）。
+    dry-run は判定を見せるだけで、許可は出さない"""
+    parts = estimate_parts(S)
+    print(f"RAKKO_EST={sum(parts.values()):.0f}")
+    return rakko.allow(S["cfg"].get("id", ""), parts, dry=DRY)
 
 
 def todo_count(site_id):
@@ -735,8 +745,9 @@ def run(site_id, deep, replace, if_needed=False):
         print("   kw_seeds が未定義のため作れません")
         return
     # 課金の前に必ず見積もる。予算内でなければ取得しない（--dry-run は見積もりだけ）
-    if not budget_ok(S) and not DRY:
-        return
+    # 上限を超えるならラッコは呼ばず（call() が断る）、無料の材料と控えだけで組む。
+    # そのときの計画は検索数が欠けて薄いので、台帳は足すだけにして今の在庫を取り下げない
+    granted = budget_ok(S)
     if not rakko.enabled():
         print("   RAKKO_API_KEY が未設定です。python scripts/set_key.py RAKKO_API_KEY")
         return
@@ -762,7 +773,7 @@ def run(site_id, deep, replace, if_needed=False):
         print("     %s %-30s 月間%-5s KD%-3s 意図%+d %s" % (
             c["priority"], c["kw"][:30], c.get("vol", "—"), c.get("kd", "—"), c["intent"], c["subject"]))
     if replace:
-        replace_ledger(site_id, picked)
+        replace_ledger(site_id, picked, retire_old=granted)
     else:
         print("   （--replace を付けると、台帳の未着手を対象外にして新計画を積みます）")
 
@@ -778,15 +789,17 @@ def main():
     ap.add_argument("--dry-run", action="store_true",
                     help="ラッコを呼ばず（キャッシュは使う）、候補の構成と課金の見積もりだけ出す")
     a = ap.parse_args()
-    global DRY
-    DRY = a.dry_run
+    global DRY, DEEP
+    DRY, DEEP = a.dry_run, a.deep
     if DRY and a.replace:
         raise SystemExit("--dry-run と --replace は同時に使えません（見積もりで台帳は変えない）")
     import sites as S_
     ids = sorted(S_.load_all()) if a.all else ([a.site] if a.site else [S_.primary()])
     for sid in ids:
         run(sid, a.deep, a.replace, a.if_needed)
-    print(f"\nRAKKO_SPENT={rakko.spent():.0f}（今月の合計 {rakko.month_spent():.0f} / 目安 {rakko.MONTHLY_BUDGET}）")
+    if not DRY:
+        rakko.sync_shared()                 # この回の消費を管制塔の台帳へ写す（手元とCIで同じ合計にする）
+    print(f"\nRAKKO_SPENT={rakko.spent():.0f}（今月の合計 {rakko.month_spent():.0f} / 全体の上限 {rakko.TOTAL_CAP}）")
     return 0
 
 
