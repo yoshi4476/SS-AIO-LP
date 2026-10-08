@@ -39,11 +39,6 @@ WEAK_SHARE = 0.2
 UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"}
 PER_SEED = 4  # 1つの起点から採用する上限（特定業種に偏らせない）
 
-# 頼み方の語。どの業種の買い手も使うので、領域の語として扱わない（owns にあっても）。
-# CONFLUX の owns（外注・見積もり・保守）が他の3サイトの除外語に入り、「経理 外注」「seo 外注」が
-# 計画からも週次の補充からも落ちていた。CONFLUX の側では「美容 師 外注 源泉」「高須 クリニック 見積もり」が
-# 領域の語として通っていた（2026-10-08）
-SHARED_TERMS = ("外注", "見積もり", "見積", "保守", "委託", "依頼")
 # 検索者が見込み客でないKW（ブランド固有名・調べ物）はどのサイトでも除外する
 BASE_NG = ("年収", "給料", "ceo", "セオリー", "湘南", "とは何", "英語", "意味", "2ch", "知恵袋")
 
@@ -51,20 +46,23 @@ BASE_NG = ("年収", "給料", "ceo", "セオリー", "湘南", "とは何", "�
 def site_config(site_id):
     """サイトごとの発掘条件を組み立てる。
 
-    担当領域（owns）をそのまま採用条件に使い、他サイトのownsを除外条件に使う。
+    担当領域（owns）をそのまま採用条件に使い、同じ組（sites.group_of）の他サイトのownsを除外条件に使う。
     これにより「補充した時点で領域外のKWが混ざらない」状態を作る。
+    組で分けるのは kw_fit と同じ理由: お客様（CONFLUX）の owns の「外注・見積もり・保守・ai 導入」が自社3サイトの
+    除外語に入り、「経理 外注」「seo 外注」「ai 導入 補助金」を落としていた（2026-10-08）。
+    お客様の側の担当の外は sites/<id>.json の kw_off・kw_needs に書く（kw_fit が見る）
     """
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import sites as sites_mod
     cfgs = sites_mod.load_all()
     cfg = cfgs[site_id]
     seeds = cfg.get("kw_seeds", {})
-    own = tuple(t.lower() for t in cfg.get("owns", []) if t.lower() not in SHARED_TERMS)
-    other = tuple(t.lower() for sid, c in cfgs.items() if sid != site_id
+    own = tuple(t.lower() for t in cfg.get("owns", []))
+    group = set(sites_mod.group_of(site_id))
+    other = tuple(t.lower() for sid, c in cfgs.items() if sid != site_id and sid in group
                   for t in c.get("owns", []))
-    # 自サイトも使う語は除外語から外す（例: ai-lab と subsidy が共に「AI」を持つ場合）。
-    # 頼み方の語は、どのサイトの owns にあっても領域の語でも除外語でもない
-    other = tuple(t for t in other if t not in own and t not in SHARED_TERMS)
+    # 自サイトも使う語は除外語から外す（例: ai-lab と subsidy が共に「AI」を持つ場合）
+    other = tuple(t for t in other if t not in own)
     return {
         "id": site_id,
         "cfg": cfg,

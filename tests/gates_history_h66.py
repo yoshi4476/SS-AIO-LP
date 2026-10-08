@@ -62,8 +62,14 @@ def test_kw_plan_uses_the_hearing_sheet_keywords():
         "ai 導入 費用 中小企業": "",                   # 「AI 導入補助金」の1語だけでは落とさない
         "ai 導入補助金 2026": "狙わない語",
         "it導入補助金 システム開発": "狙わない語",
-        "美容 師 外注 源泉": "領域語なし",             # 頼み方の語は領域の語ではない
-        "高須 クリニック 見積もり": "領域語なし",
+        "美容 師 外注 源泉": "担当の外",               # 頼み方の語は開発・AI の文脈が要る（kw_needs）
+        "高須 クリニック 見積もり": "担当の外",
+        "システム開発 外注 費用": "",
+        "ai 開発 保守 費用": "",
+        # 当社の3サイトの担当（kw_off。お客様と自社は別の組なので、自社の owns は除外語として届かない）
+        "seo 外注 システム開発": "担当の外",
+        "集客 ai エージェント": "担当の外",
+        "経理 自動化 ai エージェント": "担当の外",
         "建設業 役員報酬 相場": "領域語なし",
         "システム開発 外注費 勘定科目": "除外語",      # 会計処理の調べ物（sites/conflux.json の ng_terms）
         "システム開発 求人": "見込み客でない",
@@ -71,14 +77,15 @@ def test_kw_plan_uses_the_hearing_sheet_keywords():
         "ai エージェント 導入 開発 運用 トータル ガイド": "除外語",
         "ai エージェント 費用 相場 比較 おすすめ 一覧": "題のような語",
         "中小企業 ai導入支援": "除外語",
-        "中小 企業 ai 導入 支援": "除外語",
+        "中小 企業 ai 導入 支援": "担当の外",          # kw_fit は空白を外して除外語を見る
         # 一新のあとに繰り上がって入った語（展示会・6語未満に切れた題・他社名・製品・個人の利用）
         "ai エージェント 導入 開発 運用": "除外語",
         "日生 不動産 ai エージェント": "除外語",
-        "ai 業務 自動化 店": "除外語",
+        "ai 業務 自動化 店": "担当の外",
         "ai 業務 自動化 展 セミナー": "除外語",
+        "関西 ai 業務自動化展": "担当の外",
         "ai/ナビ搭載 業務自動化rpa": "除外語",
-        "aiエージェント活用事例 個人": "除外語",
+        "aiエージェント活用事例 個人": "担当の外",
         "ai 業務 自動化 展 幕張": "除外語",
         "ai 業務自動化 セミナー": "除外語",
         "ai 業務自動化 展示会": "除外語",
@@ -88,7 +95,8 @@ def test_kw_plan_uses_the_hearing_sheet_keywords():
         "業務自動化 店舗 ai": "",
     }
     for kw, want in cases.items():
-        check(f"CONFLUX: {kw}", P.cheap_reject({"kw": kw}, S), want)
+        got = P.cheap_reject({"kw": kw}, S)
+        check(f"CONFLUX: {kw}", got.split("（")[0] if got.startswith("担当の外") else got, want)
 
     # 業種名は聞ける形にして掛ける。「人材派遣・紹介 システム開発」と打つ人はいない
     check("業種名の「・」以降を外す", P.ind_query("人材派遣・紹介"), "人材派遣")
@@ -143,28 +151,30 @@ def test_dry_run_reads_the_same_cache_as_the_paid_call():
     check("kw_plan に問い合わせの中身を手で書かない", '"modes": ["google", "youtube"], "limit": 100}' in src, False)
 
 
-def test_shared_request_words_are_not_another_sites_domain():
-    print("\n■ 頼み方の語（外注・見積もり・保守）は、どのサイトの領域でも除外語でもない")
+def test_client_owns_do_not_exclude_own_sites_words():
+    print("\n■ お客様の owns（外注・見積もり・保守・ai 導入）は、自社3サイトの除外語にしない（kw_fit と同じ組で分ける）")
     import kw_discover as KD
+    import kw_fit
     import kw_plan as P
     for sid in ("corporate", "ai-lab", "subsidy"):
         S = KD.site_config(sid)
-        check(f"{sid}: 外注・見積もり・保守を除外語にしない",
-              [t for t in ("外注", "見積もり", "保守") if t in S["ng_terms"]], [])
+        check(f"{sid}: CONFLUX の owns を除外語にしない",
+              [t for t in ("外注", "見積もり", "保守", "ai 導入", "システム開発") if t in S["ng_terms"]], [])
     check("コーポレート: 経理 外注 費用 を落とさない", P.cheap_reject({"kw": "経理 外注 費用"}, KD.site_config("corporate")), "")
     check("AI集客ラボ: seo 外注 を落とさない", P.cheap_reject({"kw": "seo 外注 費用"}, KD.site_config("ai-lab")), "")
-    check("CONFLUX: 頼み方の語を領域の語にしない",
-          [t for t in KD.site_config("conflux")["own_terms"] if t in KD.SHARED_TERMS], [])
+    check("補助金: ai 導入 補助金 を落とさない", P.cheap_reject({"kw": "ai 導入 補助金 申請"}, KD.site_config("subsidy")), "")
+    check("CONFLUX: 頼み方の語だけでは担当にしない（kw_needs）", kw_fit.judge("美容 師 外注 源泉", "conflux")[0], 2)
+    check("CONFLUX: 開発の文脈の頼み方の語は担当", kw_fit.judge("システム開発 外注 費用", "conflux")[0], 0)
 
 
 def test_kw_discover_needs_a_domain_word():
     print("\n■ 週次の補充は、業種名と汎用語（相場・費用）だけの語を積まない")
     import kw_discover as KD
-    check("空白の有無を問わず領域の語に当たる", KD.has_term("aiエージェント 費用", ("ai エージェント",)), True)
-    check("領域の語が無ければ当たらない", KD.has_term("建設業 役員報酬 相場", KD.site_config("conflux")["own_terms"]), False)
+    S = KD.site_config("conflux")
+    check("空白の有無を問わず領域の語に当たる", KD.fits("aiエージェント 費用", S), True)
+    check("領域の語が無ければ積まない", KD.fits("建設業 役員報酬 相場", S), False)
     src = (ROOT / "scripts" / "kw_discover.py").read_text(encoding="utf-8")
     check("業種の経路で汎用語を領域の語として使わない", "domain_terms" in src, False)
-    check("採用はすべて担当領域の語で判定する", src.count('has_term(low, S["own_terms"])'), 5)
 
 
 def test_intake_subjects_exclude_by_phrase():
