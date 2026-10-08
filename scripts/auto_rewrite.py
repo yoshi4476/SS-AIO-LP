@@ -41,6 +41,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 # 台帳のお客様の記事の行（題・説明文・順位）は置き場に書き、読むときに合わせる
 import client_private as CP  # noqa: E402
+import kw_fit  # noqa: E402  流入語に寄せる直し（early・desc）で、担当領域の外の語を入れない
 TITLE_MIN, TITLE_MAX = 15, 45
 
 
@@ -302,6 +303,8 @@ def early_items(limit=2, today=None, rows_of=None, log=None):
             if not a or a["site"] != sid or r["imp"] < EARLY_IMP or r["pos"] > EARLY_POS:
                 continue
             q = r["kw"]
+            if kw_fit.judge(q, sid)[0] >= 2:
+                continue                           # 担当領域の外の語に寄せない（「送金 振込 違い ゆうちょ」を FAQ に足していた）
             if top.get(q, (slug,))[0] != slug:
                 continue                           # 同じ語で別の自社ページが上にいる（入れると食い合う）
             other = kws.get(re.sub(r"\s", "", q.lower()))
@@ -464,7 +467,8 @@ def desc_items(limit=4, days=28):
         by = {}
         for r in G.q(sc, cfg["domain"], str(start), str(end), ["query", "page"], 25000):
             slug = r["keys"][1].rstrip("/").split("/")[-1]
-            if slug in metas:
+            # 担当領域の外の流入語（通帳・ゆうちょの送金と振込など）を説明文の先頭に入れない。寄せるほど関係ない読者が増える
+            if slug in metas and kw_fit.judge(r["keys"][0], cfg["id"])[0] < 2:
                 by.setdefault(slug, []).append((r["keys"][0], int(r["impressions"])))
         for slug, qs in by.items():
             qs.sort(key=lambda x: -x[1])

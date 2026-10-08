@@ -5,8 +5,8 @@
     python scripts/kw_discover.py --site corporate           # 候補を表示するだけ
     python scripts/kw_discover.py --site corporate --append  # 計画ファイルと管制塔へ追加
 
---site を省略すると環境変数 SITE_ID、それも無ければ ai-lab を対象にする。採用条件は sites/*.json の owns（担当領域語）と
-kw_seeds（業種×課題の起点）から自動生成するため、補充した時点で領域外のKWは混ざらない。
+--site を省略すると環境変数 SITE_ID、それも無ければ ai-lab を対象にする。採用するのは kw_fit の判定0の語だけ
+（sites/*.json の owns＝担当領域語を含み、kw_off・kw_needs・同じ組の他サイトの担当で関係ない語にならないもの）。
 
 2つの無料の実データソースを使う:
   1. Google Search Console API — 自サイトが実際に表示されたクエリ。
@@ -39,9 +39,6 @@ WEAK_SHARE = 0.2
 UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"}
 PER_SEED = 4  # 1つの起点から採用する上限（特定業種に偏らせない）
 
-# どのサイトでも意味を持つ汎用語。サジェストの雑音（ブランド名・無関係語）を落とすために使う
-GENERIC_TERMS = ("対策", "方法", "やり方", "手順", "費用", "相場", "事例", "選び方",
-                 "比較", "とは", "ポイント", "コツ", "注意点", "チェック", "改善")
 # 検索者が見込み客でないKW（ブランド固有名・調べ物）はどのサイトでも除外する
 BASE_NG = ("年収", "給料", "ceo", "セオリー", "湘南", "とは何", "英語", "意味", "2ch", "知恵袋")
 
@@ -63,13 +60,13 @@ def site_config(site_id):
     # 自サイトも使う語は除外語から外す（例: ai-lab と subsidy が共に「AI」を持つ場合）
     other = tuple(t for t in other if t not in own)
     return {
+        "id": site_id,
         "cfg": cfg,
         "plan": ROOT / cfg.get("kw_plan", "docs/industry-pillar-plan.md"),
         "gsc": f"https://{cfg['domain']}/",
         "industries": seeds.get("industries", []),
         "intents": seeds.get("intents", []),
         "own_terms": own,
-        "domain_terms": own + GENERIC_TERMS,
         # サイト固有の除外語（受付の終わった制度など。sites/<id>.json の ng_terms）
         "ng_terms": BASE_NG + other + tuple(t.lower() for t in cfg.get("ng_terms", [])),
     }
@@ -217,6 +214,14 @@ def is_brand_query(low):
     return any(t in low for t in BRAND_TERMS)
 
 
+def fits(kw, S):
+    """自動で拾ってよい語か（担当領域語を含み、関係ない語でない＝kw_fit の判定0）。
+    以前は担当領域語か汎用語（費用・やり方・事例…）のどちらかを含めば通していたため、
+    「クリニック 電話予約 やり方」「歯科医院 閉院 費用」が業種名＋汎用語だけで台帳に入った（2026-08-04）"""
+    import kw_fit
+    return kw_fit.judge(kw, S.get("id") or S["cfg"].get("id", ""))[0] == 0
+
+
 
 def hub_client_enabled_but_unreadable(ledger_ok):
     """管制塔が設定されているのに読めなかったか（未設定なら手元実行なので許可する）"""
@@ -288,7 +293,7 @@ def main():
         low = kw.lower()
         if is_written(kw, corpus) or is_dup(kw, arts, seen):
             continue
-        if not any(t in low for t in S["own_terms"]):
+        if not fits(kw, S):
             continue
         if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
             continue
@@ -305,7 +310,7 @@ def main():
         low = kw.lower()
         if is_written(kw, corpus) or is_dup(kw, arts, seen):
             continue
-        if not any(t in low for t in S["own_terms"]):
+        if not fits(kw, S):
             continue
         if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
             continue
@@ -337,8 +342,8 @@ def main():
                 # 起点そのもの・短すぎる語・既出は除外し、ロングテールだけ残す
                 if len(s) < 6 or s == f"{ind} {it}" or is_written(s, corpus):
                     continue
-                # 業種語を含み、自社テーマの語を1つ以上含み、除外語を含まないものだけ採用
-                if ind not in s or not any(t in low for t in S["domain_terms"]):
+                # 業種語を含み、担当領域の語（汎用語ではなく）を含み、関係ない語でないものだけ採用
+                if ind not in s or not fits(s, S):
                     continue
                 if any(t in low for t in S["ng_terms"]):
                     continue
@@ -371,7 +376,7 @@ def main():
                     low = s.lower()
                     if len(s) < 6 or s == ind or is_written(s, corpus):
                         continue
-                    if not any(t in low for t in S["domain_terms"]):
+                    if not fits(s, S):
                         continue
                     if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
                         continue
@@ -405,7 +410,7 @@ def main():
                 low = s.lower()
                 if len(s) < 6 or s == ind or is_written(s, corpus):
                     continue
-                if ind not in s or not any(t in low for t in S["domain_terms"]):
+                if ind not in s or not fits(s, S):
                     continue
                 if any(t in low for t in S["ng_terms"]) or is_brand_query(low):
                     continue

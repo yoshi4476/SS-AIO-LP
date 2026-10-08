@@ -142,10 +142,15 @@ def main():
                 print(f"\n次に書くKW: 「{kw}」")
                 print("KW_GATE=ok")
                 return 0
+            # 担当領域の外の語は、食い合いと書かずに理由を残す（台帳の掃除の記録になる）。
+            # 通常は next_kw が先に飛ばすので、ここに来るのは台帳の一覧を読めなかった日だけ
+            import kw_fit
+            fit, why = kw_fit.judge(kw, a.site)
+            reason = (f"担当領域の外（kw_fit: {why}）" if fit >= 2
+                      else "既存ページと食い合うため自動退避（kw_gate）")
             try:
                 import hub_client
-                r = hub_client.retire_kw(a.site, [kw],
-                                         "既存ページと食い合うため自動退避（kw_gate）") or {}
+                r = hub_client.retire_kw(a.site, [kw], reason) or {}
             except Exception as e:
                 r = {"ok": False, "error": type(e).__name__}
             if not r.get("ok"):
@@ -174,6 +179,7 @@ def main():
             print("この実行で追加された記事はありません")
             print("KW_GATE=skip")
             return 0
+        import kw_fit
         ng = []
         for slug, kw in pairs:
             level, out = judge(kw, a.site, exclude_slug=slug)
@@ -182,8 +188,13 @@ def main():
             # 3（判定不能）で隔離すると、GSC を読めない日に正当な記事まで公開から外れる
             if level == 3:
                 print("   食い合いの検査が動きませんでした（鍵・通信を確認）。隔離はしません")
-            if level == 2:
-                ng.append((slug, kw))
+            # 書き手が台帳と違う語を選んでも、担当領域の外の記事は世に出さない
+            fit, why = kw_fit.judge(kw, a.site)
+            if fit >= 2:
+                print(f"   担当領域の外: {why}")
+                ng.append((slug, kw, f"担当領域の外（kw_fit: {why}）"))
+            elif level == 2:
+                ng.append((slug, kw, "既存ページと食い合うため隔離（kw_gate）"))
         if not ng:
             print("\nKW_GATE=ok")
             return 0
@@ -191,19 +202,18 @@ def main():
         # 全体を落とすと、問題のない記事まで巻き添えで消える
         qdir = ROOT / "articles" / "_conflicted"
         qdir.mkdir(exist_ok=True)
-        for slug, kw in ng:
+        for slug, kw, reason in ng:
             src = ROOT / "articles" / f"{slug}.md"
             if src.is_file():
                 src.replace(qdir / f"{slug}.md")
-            print(f"  隔離: {slug}（「{kw}」が既存ページと食い合うため）")
+            print(f"  隔離: {slug}（「{kw}」: {reason}）")
             try:
                 import hub_client
-                hub_client.retire_kw(a.site, [kw],
-                                     "既存ページと食い合うため隔離（kw_gate）", force=True)
+                hub_client.retire_kw(a.site, [kw], reason, force=True)
             except Exception:
                 pass
         print("\nKW_GATE=quarantined")
-        print("食い合う記事は articles/_conflicted/ へ移しました。残りは公開できます")
+        print("食い合う・担当領域の外の記事は articles/_conflicted/ へ移しました。残りは公開できます")
         return 0
 
     ap.error("--before か --after のどちらかを指定してください")

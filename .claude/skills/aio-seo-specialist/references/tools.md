@@ -5,6 +5,7 @@
 | 目的 | 道具 | 決まり（CLAUDE.md） |
 |:--|:--|:--|
 | 狙う語の食い合い | `kw_guard.py "<KW>" --site <id> [--title --h2 ...]` | Phase 1 / Phase 3 の項目3。終了コードで判定 |
+| 担当領域の語か（関係ない語を止める） | `kw_fit.py "<KW>" --site <id>`／台帳の一覧 `kw_fit.py --ledger` | Phase 1 の 0。積む・選ぶ・書く前後の入口が全部これを通る。同じ字で別の意味の語は sites/<id>.json の `kw_needs`、担当の外の文脈は `kw_off` |
 | 開かないと済まない語か | `kw_intent.py "<KW>"` | Phase 1 の 4.5 |
 | KW在庫の計画（課金あり） | `kw_plan.py --site <id>`（先に `--dry-run`） | Phase 1 の -1。1サイト1回400クレジットまで |
 | 伸びている語の補充 | `kw_discover --append`（週次） | 定常運転の表 |

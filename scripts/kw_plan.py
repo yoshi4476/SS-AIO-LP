@@ -36,6 +36,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import kw_discover as KD          # noqa: E402  採用条件・GSC取得を共有する
+import kw_fit                     # noqa: E402  担当領域の判定（積む・選ぶ・書く前後で同じ基準）
 import kw_intent                  # noqa: E402
 import kw_reach                   # noqa: E402
 import rakko                      # noqa: E402
@@ -66,13 +67,9 @@ NOT_BUYER = ("求人", "転職", "副業", "在宅ワーク", "フリーラン�
 
 # 他社の製品・サービス名。その名前で検索する人はその製品を使いたい人で、
 # 「請求書freee」（9,900/月）を書いても経理BPOの相談には来ない。
-# 指名検索の除外（is_brand_query）は自社名だけを見ていた
-RIVALS = ("freee", "フリー会計", "マネーフォワード", "money forward", "弥生", "やよい",
-          "ジョブカン", "楽楽精算", "楽楽明細", "奉行", "pca", "jdl", "tkc", "勘定奉行",
-          "ドットコム", "misoca", "board", "invoice", "バクラク", "concur", "sansan",
-          "bill one", "kintone", "salesforce", "hubspot", "canva", "chatgpt plus",
-          "kinmaq", "キンマク", "レジーナ", "湘南美容", "ホットペッパー", "エキテン", "ぐるなび",
-          "食べログ", "リクルート", "indeed", "タウンページ", "ミツモア", "くらしのマーケット")
+# 指名検索の除外（is_brand_query）は自社名だけを見ていた。一覧は kw_fit と共有する
+# （計画にだけ持っていたため「sweeep 請求書」（9,900/月）が計画に入り、記事になった。2026-09-21）
+RIVALS = kw_fit.RIVALS + kw_fit.PORTALS
 
 
 def norm(kw):
@@ -300,7 +297,17 @@ def cheap_reject(c, S):
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
-    return ""
+    return outside(c["kw"], S)
+
+
+def outside(kw, S):
+    """担当領域の外（kw_fit の判定2）なら理由。同じ字で別の意味の語（「記帳」と通帳の記帳）は
+    語の先頭一致（own_hit）では見分けられず、「通帳 記帳できない 原因」（320/月）が計画に入った（2026-09-21）。
+    サイト設定の無い呼び出し（門の作り物の S）では見ない"""
+    if not S.get("id"):
+        return ""
+    lv, why = kw_fit.judge(kw, S["id"])
+    return f"担当の外（{why}）" if lv >= 2 else ""
 
 
 def relevant(c, S, corpus, arts, owned, picked_norms):
@@ -320,6 +327,9 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
+    why = outside(kw, S)
+    if why:
+        return why
     if is_written(kw, corpus):
         return "執筆済み"
     if kw_conflicts(kw, arts):

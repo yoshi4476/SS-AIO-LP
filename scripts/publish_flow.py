@@ -175,6 +175,13 @@ def main():
             raise SystemExit(
                 f"BLOCKED(食い合い): 「{kw}」は既存ページと食い合うため配信しません。\n"
                 "  この後の kw_gate --after が articles/_conflicted/ へ隔離します")
+        # 担当領域の外（kw_fit）の新しい記事も配信しない。公開済み記事の再配信（書き直し）は止めない
+        import kw_fit
+        fit, why = kw_fit.judge(kw, site_id)
+        if fit >= 2 and slug in {s for s, _k in kw_gate.written_keyword(site_id)}:
+            raise SystemExit(
+                f"BLOCKED(担当領域の外): 「{kw}」は{why}のため配信しません。\n"
+                "  この後の kw_gate --after が articles/_conflicted/ へ隔離します")
 
     import editorial_review
 

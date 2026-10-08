@@ -174,24 +174,28 @@ def next_kw(site):
     # 打ち出しから外したテーマ（sites/<id>.json の drop_kw）の語は書かない。
     # 2026-10-02 に AI集客ラボは MEO を打ち出さず SEO・AIO・LLMO に絞ると決めた
     drop = _drop_pattern(site)
-    if _norm(kw0) in aiq and (not pat or re.search(pat, kw0.lower())) \
-            and not (drop and re.search(drop, kw0.lower())):
+    # 担当領域の外（kw_fit の判定2）の語も書かない。台帳に残った「記帳 やり方 ゆうちょ」
+    # 「保険代理店 選び方」を、台帳を書き換えずに選ばないようにする（2026-10-08）
+    unfit = _unfit(site)
+    dropped = lambda k: bool(drop and re.search(drop, k.lower()))
+    bad = lambda k: dropped(k) or unfit(k)
+    if _norm(kw0) in aiq and (not pat or re.search(pat, kw0.lower())) and not bad(kw0):
         return got
     try:
         rows = all_kw()
     except Exception:
-        return None if drop and re.search(drop, kw0.lower()) else got
+        return None if bad(kw0) else got
     todo = [r for r in rows or []
             if r.get("site") == site and str(r.get("status", "")).strip() == "未着手"
             and str(r.get("keyword", ""))
-            and not (drop and re.search(drop, str(r.get("keyword", "")).lower()))]
-    if drop and re.search(drop, kw0.lower()):
+            and not bad(str(r.get("keyword", "")))]
+    if bad(kw0):
         if not todo:
             return None
         r0 = todo[0]
         got = dict(got)
-        got.update({"keyword": str(r0["keyword"]), "aim": r0.get("aim", ""),
-                    "category": r0.get("category", ""), "picked_by": "打ち出し外の語を飛ばした"})
+        got.update({"keyword": str(r0["keyword"]), "aim": r0.get("aim", ""), "category": r0.get("category", ""),
+                    "picked_by": "打ち出し外の語を飛ばした" if dropped(kw0) else "担当領域の外の語を飛ばした"})
         kw0 = got["keyword"]
 
     # 同じ規則に当たる語の中では、15位以内に届きそうな細い語を先に書く（kw_reach の段。
@@ -255,6 +259,15 @@ def _drop_pattern(site):
         return ""
     words = [w for w in cfg.get("drop_kw") or [] if w]
     return "|".join(re.escape(w.lower()) for w in words)
+
+
+def _unfit(site):
+    """担当領域の外（kw_fit の判定2）の語か、を返す関数。判定を読み込めなければ止めない"""
+    try:
+        import kw_fit
+    except Exception:
+        return lambda k: False
+    return lambda k: kw_fit.judge(k, site)[0] >= 2
 
 
 def _norm(s):
@@ -327,8 +340,23 @@ def retire_kw(site, keywords, reason, force=False):
 
 
 def add_kw(site, keywords):
-    """同じ組（自社3サイト・同じお客様）の語は弾き、組の違う社と重なった語は登録して「KW重複の確認」に残す"""
-    return _post({"action": "add_kw", "site": site, "keywords": keywords, "ctx": kw_context()}) if enabled() else None
+    """同じ組（自社3サイト・同じお客様）の語は弾き、組の違う社と重なった語は登録して「KW重複の確認」に残す。
+    担当領域の外の語（kw_fit の判定2）は台帳へ送らない。積む道具が8つあり、どれか1つの基準が甘いと
+    そこから漏れる（「記帳 やり方 ゆうちょ」がコーポレートの表示の4割になった。2026-10-08）"""
+    if not enabled():
+        return None
+    unfit, keep, skipped = _unfit(site), [], []
+    for k in keywords or []:
+        kw = str(k.get("keyword", "") if isinstance(k, dict) else k)
+        if unfit(kw):
+            import kw_fit
+            skipped.append({"keyword": kw, "why": kw_fit.judge(kw, site)[1]})
+        else:
+            keep.append(k)
+    if not keep:
+        return {"ok": True, "added": 0, "keywords": [], "skipped_unfit": skipped}
+    r = _post({"action": "add_kw", "site": site, "keywords": keep, "ctx": kw_context()})
+    return dict(r, skipped_unfit=skipped) if skipped and isinstance(r, dict) else r
 
 
 def kw_overlaps():

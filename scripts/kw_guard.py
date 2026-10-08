@@ -180,6 +180,17 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
             pass
     reasons, level = [], 0
 
+    # ⓪ 担当領域の外（kw_fit）。食い合わなくても、そのサイトの読者の検索でなければ書かない
+    #    （「記帳 やり方 ゆうちょ」がコーポレートの表示の4割になった。2026-10-08）。
+    #    公開済み記事の書き直し・統合（--exclude-slug あり）は止めない。扱いは運用者が決める
+    if site_id and not ex:
+        import kw_fit
+        fit, why = kw_fit.judge(kw, site_id)
+        if fit >= 2:
+            level = 2
+            reasons.append(("禁止", f"担当領域の外: {why}",
+                            "このサイトの読者（買い手）の検索ではありません。台帳から外すか、担当のサイトへ移してください"))
+
     # ① 狙う語のぶつかり。表記ゆれを吸収して同一視する
     for _score, a, kind in kw_conflicts(kw, arts):
         if kind == "完全一致":
