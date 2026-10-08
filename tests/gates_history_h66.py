@@ -68,9 +68,24 @@ def test_kw_plan_uses_the_hearing_sheet_keywords():
         "システム開発 外注費 勘定科目": "除外語",      # 会計処理の調べ物（sites/conflux.json の ng_terms）
         "システム開発 求人": "見込み客でない",
         # 運用者の判断（2026-10-08）: ページの題と、補助金の制度名（中小企業デジタル化・AI導入支援事業）は入れない
-        "ai エージェント 導入 開発 運用 トータル ガイド": "題のような語",
+        "ai エージェント 導入 開発 運用 トータル ガイド": "除外語",
+        "ai エージェント 費用 相場 比較 おすすめ 一覧": "題のような語",
         "中小企業 ai導入支援": "除外語",
         "中小 企業 ai 導入 支援": "除外語",
+        # 一新のあとに繰り上がって入った語（展示会・6語未満に切れた題・他社名・製品・個人の利用）
+        "ai エージェント 導入 開発 運用": "除外語",
+        "日生 不動産 ai エージェント": "除外語",
+        "ai 業務 自動化 店": "除外語",
+        "ai 業務 自動化 展 セミナー": "除外語",
+        "ai/ナビ搭載 業務自動化rpa": "除外語",
+        "aiエージェント活用事例 個人": "除外語",
+        "ai 業務 自動化 展 幕張": "除外語",
+        "ai 業務自動化 セミナー": "除外語",
+        "ai 業務自動化 展示会": "除外語",
+        # 除外語で巻き込まない語
+        "ai 業務 自動化 展開 方法": "",
+        "生成ai 社内ルール 個人情報": "",
+        "業務自動化 店舗 ai": "",
     }
     for kw, want in cases.items():
         check(f"CONFLUX: {kw}", P.cheap_reject({"kw": kw}, S), want)
@@ -101,6 +116,7 @@ def test_kw_plan_uses_the_hearing_sheet_keywords():
           P.worth_lookup([{"kw": "x a"}, {"kw": "業務自動化 ai", "src": {"sheet"}}])[0]["kw"], "業務自動化 ai")
     src = (ROOT / "scripts" / "kw_plan.py").read_text(encoding="utf-8")
     check("計画の実行でシートの語を読む", 'S["sheet"], S["sheet_ng"] = sheet_terms(site_id)' in src, True)
+    check("6語以上はページの題とみなす", P.title_like("ai エージェント 導入 開発 運用 トータル ガイド"), True)
     # AI集客ラボは AI への質問の形（長い1語）を狙っている。題の判定に巻き込まない
     check("AIへの質問の形は題とみなさない", P.title_like("大阪でmeoとaioの両方を支援してくれる会社を教えてください。"), False)
 
