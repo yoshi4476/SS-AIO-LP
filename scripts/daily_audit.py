@@ -81,11 +81,18 @@ def rescue_day(now=None):
     return now.date().isoformat()
 
 
-def slot_day(cron, now=None):
+def slot_day(cron, now=None, at=""):
     """記事の枠が予定されていた日（JST）。GitHub の定時は3〜8時間遅れて始まり、夕方の枠が日付をまたいで書くと、
     その日の本数が足りず翌日が多く見えていた（2026-10-07 の AI集客ラボの2本目は 17:07 の枠が翌0:28 に走った）。
-    cron（"分 時 * * *"・UTC）の直近の予定時刻を、始まった時刻からさかのぼって求める（定時は遅れることはあっても
-    早まらない）。読めない・手で動かした回は今日"""
+    定時の起動役（Cloudflare Worker）が起動した回は予定の時刻 at（scheduled_for・ISO 8601）の日。
+    予備の定時の回は cron（"分 時 * * *"・UTC）の直近の予定時刻を、始まった時刻からさかのぼって求める（定時は
+    遅れることはあっても早まらない）。読めない・手で動かした回は今日"""
+    try:
+        t = datetime.fromisoformat((at or "").strip().replace("Z", "+00:00"))
+        if t.tzinfo:
+            return t.astimezone(JST).date().isoformat()
+    except ValueError:
+        pass
     now = now or datetime.now(timezone.utc)
     m = re.match(r"^\s*(\d+)\s+(\d+)\s+\*\s+\*\s+\*\s*$", cron or "")
     if not m:
@@ -763,9 +770,9 @@ def main():
     if sys.argv[1:] == ["--rescue-day"]:
         print(rescue_day())
         return 0
-    # 記事の枠が予定されていた日（日次の枠のワークフローが AUDIT_DAY に入れる）
-    if len(sys.argv) == 3 and sys.argv[1] == "--slot-day":
-        print(slot_day(sys.argv[2]))
+    # 記事の枠が予定されていた日（日次の枠のワークフローが AUDIT_DAY に入れる）。3つ目は起動役が渡す予定の時刻
+    if len(sys.argv) in (3, 4) and sys.argv[1] == "--slot-day":
+        print(slot_day(sys.argv[2], at=sys.argv[3] if len(sys.argv) == 4 else ""))
         return 0
     fix_kw = "--fix-kw" in sys.argv
     todo = []

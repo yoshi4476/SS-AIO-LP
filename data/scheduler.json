@@ -1,0 +1,8 @@
+{
+ "note": "定時の起動役（Cloudflare Worker・automation/scheduler）の記録。公開してよい値だけ（鍵そのものは置かない）。deployed_at・token_set_at・token_expiry_manual は scripts/scheduler_deploy.py、first_seen・token_expiry は Worker が起動した回（scripts/sched_guard.py）が書く",
+ "deployed_at": "",
+ "first_seen": "",
+ "token_set_at": "",
+ "token_expiry": "",
+ "token_expiry_manual": ""
+}

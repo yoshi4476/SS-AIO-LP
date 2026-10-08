@@ -1,0 +1,20 @@
+// 定時の起動役（Cloudflare Workers の Cron Triggers・無料プラン）。説明は README.md
+// 配るのは python scripts/scheduler_deploy.py（鍵は --set-token。ここにもリポジトリにも書かない）
+{
+  "name": "ss-aio-scheduler",
+  "main": "src/index.mjs",
+  // wrangler@4.121.0 の手元の実行環境が扱える日付まで（新しすぎると wrangler dev で動かない）
+  "compatibility_date": "2026-08-01",
+  // HTTP では呼ばれない（定時だけ）。workers.dev の URL もプレビューの URL も作らない
+  "workers_dev": false,
+  "preview_urls": false,
+  // 5分ごとに1回（無料プランの定時はアカウントで5個まで。ここで使うのは1個）。
+  // 間隔を変えるときは scripts/scheduler_build.py の TICK_MINUTES も同じ値にする（門が突き合わせる）
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
+  // 起動・失敗の記録を Workers Logs に残す（無料プランは1日20万件・3日保存。ここは1日数百件）
+  "observability": {
+    "enabled": true
+  }
+}

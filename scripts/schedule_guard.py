@@ -66,34 +66,68 @@ def crons(wf, text=None):
 
 
 def _field(s, lo, hi):
+    """cron の1つの欄。"*" は None（どれでもよい）。"1,4"・"1-5"・"*/4"・"0-30/10" を読む"""
     if s == "*":
         return None
     out = set()
     for part in s.split(","):
-        if "-" in part:
-            a, b = part.split("-")
-            out.update(range(int(a), int(b) + 1))
+        rng, _, step = part.partition("/")
+        if rng == "*":
+            a, b = lo, hi
+        elif "-" in rng:
+            a, b = (int(x) for x in rng.split("-"))
         else:
-            out.add(int(part))
+            a = b = int(rng)
+            if step:
+                b = hi
+        out.update(range(a, b + 1, int(step) if step else 1))
     return {v for v in out if lo <= v <= hi}
+
+
+def fields(cron):
+    """cron（UTC）の5つの欄（分・時・日・月・曜日）。曜日の 7（日曜）は 0 にそろえる"""
+    mi, ho, dom, mon, dow = cron.split()
+    mi, ho = _field(mi, 0, 59), _field(ho, 0, 23)
+    dom, mon, dow = _field(dom, 1, 31), _field(mon, 1, 12), _field(dow, 0, 7)
+    if dow is not None and 7 in dow:
+        dow = (dow - {7}) | {0}
+    return mi, ho, dom, mon, dow
+
+
+def day_ok(d, dom, mon, dow):
+    """その日（UTC の日付）に予定があるか"""
+    ok_dom = dom is None or d.day in dom
+    ok_dow = dow is None or (d.weekday() + 1) % 7 in dow
+    # cron の決まり: 日と曜日の両方を指定したときは、どちらかに合えばよい
+    ok = (ok_dom or ok_dow) if (dom is not None and dow is not None) else (ok_dom and ok_dow)
+    return ok and (mon is None or d.month in mon)
+
+
+def fires(cron_list, start, end):
+    """start 以上 end 未満の予定の時刻（UTC）を早い順に（定時の起動役の表を確かめる門が使う）"""
+    out = set()
+    for c in cron_list:
+        mi, ho, dom, mon, dow = fields(c)
+        d = start.date()
+        while d <= end.date():
+            if day_ok(d, dom, mon, dow):
+                for h in (ho if ho is not None else range(24)):
+                    for m in (mi if mi is not None else range(60)):
+                        t = datetime(d.year, d.month, d.day, h, m, tzinfo=timezone.utc)
+                        if start <= t < end:
+                            out.add(t)
+            d += timedelta(days=1)
+    return sorted(out)
 
 
 def last_slot(cron_list, now):
     """now 以前でいちばん新しい予定の時刻（UTC）。cron の曜日は 0=日曜"""
     best = None
     for c in cron_list:
-        mi, ho, dom, mon, dow = c.split()
-        mi, ho = _field(mi, 0, 59), _field(ho, 0, 23)
-        dom, mon, dow = _field(dom, 1, 31), _field(mon, 1, 12), _field(dow, 0, 7)
-        if dow is not None and 7 in dow:
-            dow.add(0)
+        mi, ho, dom, mon, dow = fields(c)
         for back in range(0, 40):
             d = (now - timedelta(days=back)).date()
-            ok_dom = dom is None or d.day in dom
-            ok_dow = dow is None or (d.weekday() + 1) % 7 in dow
-            # cron の決まり: 日と曜日の両方を指定したときは、どちらかに合えばよい
-            day_ok = (ok_dom or ok_dow) if (dom is not None and dow is not None) else (ok_dom and ok_dow)
-            if not day_ok or (mon is not None and d.month not in mon):
+            if not day_ok(d, dom, mon, dow):
                 continue
             hits = [datetime(d.year, d.month, d.day, h, m, tzinfo=timezone.utc)
                     for h in sorted(ho if ho is not None else range(24))

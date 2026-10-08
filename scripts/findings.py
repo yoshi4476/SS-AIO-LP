@@ -104,6 +104,9 @@ CHECKS = [
      re.compile(r"^要対応:")),
     ("SNS の鍵の期限（Threads・LinkedIn は60日）", "social_connect.py --check",
      re.compile(r"^要対応:")),
+    # GitHub の定時は3〜8時間遅れるため、Cloudflare Worker が時刻どおりに起動している。止まると黙って遅れに戻る
+    ("定時の起動役（Cloudflare Worker）の起動と鍵の期限", "sched_guard.py --watch",
+     re.compile(r"^要対応:")),
     ("動画の読み違い（聞き直して直せなかった読み）", "yomi_guard.py --report",
      re.compile(r"^要対応:|^\s{2}- ")),
     ("YouTube の許可の上限（未確認アプリは累計100）", "youtube_upload.py --users",
@@ -250,6 +253,7 @@ DEADLINE = {
     "SNS の鍵の期限（Threads・LinkedIn は60日）": "期限あり: 切れるとその間の投稿が落ちる",
     "YouTube の許可の上限（未確認アプリは累計100）": "期限あり: 上限に達すると新しい社のチャンネルをつなげない",
     "生成AIの表示回数（手動の取り込み）": "期限あり: 取り込みを忘れた月は数字が永久に空く（APIが無く、人がCSVを落とすしかない）",
+    "定時の起動役（Cloudflare Worker）の起動と鍵の期限": "期限あり: 止まっている間、記事・救済・動画・週次が3〜8時間遅れて動く",
 }
 # 前の工程が足した行のうち、この回の仕事が失われたもの。続いていても要対応のまま
 LOST = re.compile(r"作れませんでした|push|配信に落ち|反映されていません|届いていません")
