@@ -1081,6 +1081,20 @@ def sync_listings(all_metas):
         replace(SITE / cat / "index.html", cat_metas, f"カテゴリ {cat}")
 
 
+def sync_home_research():
+    """トップの「AIは何を出典に答えているか」の区画（<!-- research:home --> の間）を、業種別の調査の集計から作り直す。
+    グラフの数字を手で書くと、調査を足したり聞き直したりしたときに /research/ と食い違う"""
+    import industry_ai_sources as IAS
+    page = SITE / "index.html"
+    if not page.is_file():
+        return
+    html = page.read_text(encoding="utf-8")
+    new = IAS.sync_home(html)
+    if new != html:
+        page.write_text(new, encoding="utf-8", newline="\n")
+        print("SYNC: トップの業種別の調査の図を集計から作り直しました")
+
+
 # 記事ごとの品質不合格。印字するだけでは公開を止められないため、ここに集める。
 # 「まだ公開していない記事」だけを止める（公開済みを取り下げると順位を失う）
 QUALITY_ISSUES = {}
@@ -1459,7 +1473,7 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
   <h1>{h1}</h1>
   <p class="lead">{lead}</p>
 </section>
-
+{top}
 <section class="section" style="padding-top:1rem;">
   <input type="search" id="blogSearch" class="blog-search" placeholder="記事をキーワードで検索（例: 口コミ / AIO / ChatGPT）" aria-label="記事を検索">
   <p id="blogSearchEmpty" class="blog-search-empty">該当する記事が見つかりませんでした。別のキーワードをお試しください。</p>
@@ -1503,13 +1517,14 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 """
 
 
-def page_shell(h1="記事一覧", desc="", more=(), kicker=None, cta=None):
+def page_shell(h1="記事一覧", desc="", more=(), kicker=None, cta=None, top=""):
     """BLOG_PAGE に渡す外枠の値。h1 は title・og:title・パンくずにも入る。
 
     業種・用語集・テーマなどもこの外枠を使うため、h1 と説明を渡さないと
     どのページも見出しが「記事一覧」になる。
     more はそのページの中身（本数・業種・扱う問い）から作った文で、説明文が100字に届かないときだけ足す。
-    kicker は見出しの上の小さな札（省けば見出しから決める）。cta は末尾の相談の帯の差し替え（業種のページは業種のLPへ）
+    kicker は見出しの上の小さな札（省けば見出しから決める）。cta は末尾の相談の帯の差し替え（業種のページは業種のLPへ）。
+    top は見出しの下・記事の検索欄より上に置く区画（業種ハブの調査の要点の図）
     """
     desc = re.sub(r"\s+", " ", str(desc or "")).strip()
     # 見出しの下に出す説明。業種・用語・質問集のページでも「記事一覧」の説明文が出ていたので、渡された説明を出す
@@ -1547,7 +1562,9 @@ def page_shell(h1="記事一覧", desc="", more=(), kicker=None, cta=None):
                 footer_nav=_nav("footer_nav", FOOTER_NAV_DEFAULT),
                 footer_credit=_footer_credit(),
                 h1=_html_escape(h1), title=_html_escape(title), desc=_html_escape(desc),
-                lead=_html_escape(lead), kicker=kicker, **{**_cta(), **(cta or {})})
+                lead=_html_escape(lead), kicker=kicker,
+                top=f'<section class="section rsh-top">{top}</section>\n' if top else "",
+                **{**_cta(), **(cta or {})})
 
 
 def industry_cta(slug):
@@ -1856,10 +1873,12 @@ def build_industry_hubs(all_metas):
     for ind, metas in pairs:
         out = SITE / "industry" / ind["slug"] / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
+        # 見出しのすぐ下（記事の検索欄より上）に、その業種の調査の要点の図。調査の無い業種は出さない
         page = BLOG_PAGE.format(items=IH.hub_body(ind, metas, CATEGORIES, post_tile), **page_shell(
             f'{ind["name"]}の集客', ind.get("lead") or f'{ind["name"]}の集客に役立つ記事をまとめています。',
             [(f'{ind["name"]}向けの記事{len(metas)}本を、{by_cat(metas)}に分けて載せています。',
-              f'{ind["name"]}向けの記事{len(metas)}本を、カテゴリ別に載せています。')], cta=industry_cta(ind["slug"])))
+              f'{ind["name"]}向けの記事{len(metas)}本を、カテゴリ別に載せています。')], cta=industry_cta(ind["slug"]),
+            top=IH.research_card(ind)))
         page = drop_echo_lead(page)
         page = page.replace(f"{SITE_URL}/blog/", f'{SITE_URL}/industry/{ind["slug"]}/')
         url = f'{SITE_URL}/industry/{ind["slug"]}/'
@@ -2464,6 +2483,7 @@ def main():
     save_body_hashes()
     build_feed(entries)
     sync_listings(all_metas)
+    sync_home_research()
     # 一覧が全部そろってから、同じ一覧で同じ画像は2回までにそろえる（一覧・業種・LP・関連記事のどれで作っても）
     n = industry_thumbs.limit_repeats(SITE)
     if n:

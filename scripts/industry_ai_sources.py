@@ -674,13 +674,21 @@ def _jp_date(d):
     return f"{d[:4]}年{int(d[5:7])}月{int(d[8:10])}日"
 
 
-def index_page(inds, answers=None, site_url="https://ai.7senses.co.jp"):
-    """業種別の調査の一覧（/research/）の (最初の画面, 本文, 構造化データ)。
-    数字は各業種の headline() からだけ取り、業種ページの最初の画面と同じ値・同じ書き方で出す"""
+def live_inds():
+    """集計のそろった業種（data/research/<業種>-summary.json があり per_answer を持つもの）。
+    一覧（/research/）・トップの調査の区画・業種ハブが同じ並びを使う"""
+    out = []
+    for f in sorted(OUT.glob("*-summary.json")):
+        ind = f.name[:-len("-summary.json")]
+        if ind in QUESTIONS and headline(ind):
+            out.append(ind)
+    return out
+
+
+def summary_html(hls, level="h2"):
+    """全業種の結論（文・2つの数字・調べ方）。/research/ の一覧の最初と、トップの調査の区画が同じものを出す。
+    level はページの中の見出しの深さ（トップでは区画の見出しの下なので h3）"""
     import html as H
-    hls = [h for h in (headline(i) for i in inds) if h]
-    if not hls:
-        return None
     S = index_summary(hls)
     n = S["n"]
     # 結論の言い方は数字で分岐する（決め打ちにすると、集計が変わったときにデータと違う文が載る）
@@ -712,12 +720,173 @@ def index_page(inds, answers=None, site_url="https://ai.7senses.co.jp"):
     ]
     tiles = "".join(f'<div class="rsx-stat"><p class="rsx-stat-n">{a}</p><p class="rsx-stat-l">{H.escape(b)}</p>'
                     + (f'<p class="rsx-stat-s">{H.escape(c)}</p>' if c else "") + '</div>' for a, b, c in stats)
-    summary = (f'<div class="rsx-sum"><p class="rsx-eyebrow">{n}業種の調査からわかったこと</p>'
-               f'<h2 class="rsx-sum-h">{H.escape(seek)}{H.escape(find)}</h2>'
-               f'<div class="rsx-stats">{tiles}</div>'
-               f'<p class="rsx-note">当社調べ。{n}業種・計{S["questions"]:,}問を、{H.escape(eng)}のうち{eng_n}に{period}に聞きました。'
-               + ('中央値は業種ごとの値の中央値です。' if med else '')
-               + '集計の方法と元のデータ（CSV）は各業種のページにあります。</p></div>')
+    return (f'<div class="rsx-sum"><p class="rsx-eyebrow">{n}業種の調査からわかったこと</p>'
+            f'<{level} class="rsx-sum-h">{H.escape(seek)}{H.escape(find)}</{level}>'
+            f'<div class="rsx-stats">{tiles}</div>'
+            f'<p class="rsx-note">当社調べ。{n}業種・計{S["questions"]:,}問を、{H.escape(eng)}のうち{eng_n}に{period}に聞きました。'
+            + ('中央値は業種ごとの値の中央値です。' if med else '')
+            + '集計の方法と元のデータ（CSV）は各業種のページにあります。</p></div>')
+
+
+def group_stats(hls):
+    """業種のまとまり（INDEX_GROUPS）ごとの値。調べる質問（oa）と探す質問（lc・lp）の、業種ごとの値の中央値と幅。
+    数は headline() の値からだけ数える（トップの図と /research/ の棒が同じ数字になる）。まとまりに無い業種は「その他」"""
+    import statistics as st
+    by = {h["ind"]: h for h in hls}
+    known = {i for _, _, ids in INDEX_GROUPS for i in ids}
+    groups = [(gid, label, [by[i] for i in ids if i in by]) for gid, label, ids in INDEX_GROUPS]
+    rest = sorted((h for h in hls if h["ind"] not in known), key=lambda h: h["ind"])
+    if rest:
+        groups.append(("etc", "その他", rest))
+    out = []
+    for gid, label, hs in groups:
+        if not hs:
+            continue
+        row = {"gid": gid, "label": label, "n": len(hs), "names": [h["name"] for h in hs]}
+        for k in ("oa", "lc", "lp"):
+            vals = [h[k] for h in hs]
+            row[k] = round(st.median(vals), 1)
+            row[k + "_min"], row[k + "_max"] = min(vals), max(vals)
+        out.append(row)
+    return out
+
+
+# まとまりの図の2つの数え方。/research/ の一覧の「探す」「調べる」と同じ色・同じ言葉
+GROUP_MEASURES = {
+    "oa": ("oth", "調べる", "費用・選び方などを調べる質問で、公式サイトを出典に入れた回答の割合"),
+    "lc": ("loc", "探す", "地域名で探す質問で、出典の件数に占める公式サイトの割合"),
+}
+
+
+def _pct(v):
+    """調査のほかのページ（/research/・業種ページ）と同じ書き方（75.2%・85.0%）"""
+    return f"{v}%"
+
+
+def group_chart(G, key):
+    """まとまりごとの横棒（1つの数え方につき1つの図）。棒は中央値、ラベルの下に業種の数と幅。
+    図そのもの（棒）は role="img" と説明文。数字は文字としても棒の右に出す"""
+    import html as H
+    cls, short, title = GROUP_MEASURES[key]
+    rows = "".join(
+        f'<div class="vz-row"><span class="vz-l">{H.escape(g["label"])}'
+        f'<small>{g["n"]}業種・幅 {g[key + "_min"]}〜{_pct(g[key + "_max"])}</small></span>'
+        f'<span class="vz-bar is-{cls}"><i style="width:{min(g[key], 100)}%"></i></span>'
+        f'<span class="vz-v">{_pct(g[key])}</span></div>' for g in G)
+    desc = (f"{title}（業種のまとまりごとの中央値）。"
+            + "、".join(f'{g["label"]}（{g["n"]}業種）{_pct(g[key])}' for g in G) + "。")
+    return (f'<figure class="vz" data-measure="{key}">'
+            f'<figcaption class="vz-cap"><span class="rsx-key {cls}">{short}</span>'
+            f'<b>{H.escape(title)}</b><small>業種のまとまりごとの中央値</small></figcaption>'
+            f'<div class="vz-plot" role="img" aria-label="{H.escape(desc)}">{rows}'
+            '<div class="vz-axis" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div></div>'
+            '</figure>')
+
+
+def group_table(G):
+    """図と同じ数字の表（読み上げ・AI・印刷のため）。まとまりに入る業種の名前も書く"""
+    import html as H
+    body = "".join(
+        f'<tr><th scope="row">{H.escape(g["label"])}<small>{g["n"]}業種: {H.escape("・".join(g["names"]))}</small></th>'
+        f'<td data-label="調べる質問">{_pct(g["oa"])}<small>幅 {g["oa_min"]}〜{_pct(g["oa_max"])}</small></td>'
+        f'<td data-label="探す質問">{_pct(g["lc"])}<small>幅 {g["lc_min"]}〜{_pct(g["lc_max"])}</small></td></tr>'
+        for g in G)
+    return ('<details class="vz-table"><summary>まとまりごとの数字を表で見る</summary>'
+            '<div class="table-wrap"><table><thead><tr><th scope="col">業種のまとまり</th>'
+            '<th scope="col">調べる質問<small>公式サイトを出典に入れた回答（中央値）</small></th>'
+            '<th scope="col">探す質問<small>出典に占める公式サイト（中央値）</small></th></tr></thead>'
+            f'<tbody>{body}</tbody></table></div></details>')
+
+
+HOME_MARK = re.compile(r"<!-- research:home -->.*?<!-- /research:home -->", re.S)
+
+
+def home_section(inds=None):
+    """トップの「AIは何を出典に答えているか」の区画（<!-- research:home --> の間）。
+    結論・2つの数字は /research/ の一覧と同じもの、図は業種のまとまりごと。集計が無ければ区画ごと出さない"""
+    hls = [h for h in (headline(i) for i in (inds if inds is not None else live_inds())) if h]
+    if not hls:
+        return "<!-- research:home --><!-- /research:home -->"
+    G = group_stats(hls)
+    n = len(hls)
+    return ('<!-- research:home -->\n'
+            '<section class="section rsh" data-area="業種別のAI調査" data-area-id="research">\n'
+            '  <div class="section-head reveal">\n'
+            '    <span class="eyebrow">当社の調査</span>\n'
+            '    <h2>AIは、何を出典にして答えているか</h2>\n'
+            '    <p class="sub">お客様がAIに聞きそうな質問を業種ごとにAIへ聞き、答えの出典になったサイトの種類を数えました。'
+            f'下の図は、{n}業種を{len(G)}つのまとまりに分けて見たものです。</p>\n'
+            '  </div>\n'
+            f'  <div class="rsh-wrap">{summary_html(hls, "h3")}\n'
+            f'  <div class="rsh-charts">{group_chart(G, "oa")}{group_chart(G, "lc")}</div>\n'
+            '  <p class="vz-note">「探す」は出典の件数に占める割合、「調べる」は出典のある回答のうち公式サイトを1つ以上入れた回答の割合です。'
+            '数え方が違うため、2つの図は同じものさしではありません。棒は業種のまとまりごとの中央値で、幅は業種ごとの値の最小〜最大です。</p>\n'
+            f'  {group_table(G)}\n'
+            '  <div class="btn-row rsh-btns">'
+            f'<a class="btn btn-primary" href="/research/" data-cta="top_research_index">{n}業種の結果を業種ごとに見る <span class="arw">→</span></a>'
+            '<a class="btn btn-ghost" href="/tools/ai-check/" data-cta="top_research_aicheck">御社の地域で、AIの答えを確かめる（無料）</a></div>\n'
+            '  </div>\n</section>\n<!-- /research:home -->')
+
+
+def sync_home(top_html):
+    """トップの印の間を、いまの集計から作り直した区画に差し替える（印が無ければそのまま返す）"""
+    return HOME_MARK.sub(lambda m: home_section(), top_html, count=1)
+
+
+def hub_card(hub_slug, site=None):
+    """業種ハブの先頭に置く、その業種の調査の要点（小さな図2つと文）。調査の無い業種・調査ページの無い業種は空。
+    数は headline() からだけ取る（調査ページの最初の画面と同じ数字）"""
+    import html as H
+    r = HUB_TO_RESEARCH.get(hub_slug or "")
+    hl = headline(r) if r else None
+    if not hl:
+        return ""
+    site = site or (ROOT / "site")
+    if not (site / "research" / f"{r}-ai-sources" / "index.html").is_file():
+        return ""
+    T = hl["T"]
+    y, m = hl["date"][:4], int(hl["date"][5:7])
+    asker = T.get("asker", "お客様")
+
+    def row(label, cls, v):
+        return (f'<div class="vz-row"><span class="vz-l">{H.escape(label)}</span>'
+                f'<span class="vz-bar is-{cls}"><i style="width:{min(v, 100)}%"></i></span>'
+                f'<span class="vz-v">{_pct(v)}</span></div>')
+    find_desc = (f'{T["owner"]}を探す質問の出典の件数のうち、{T["portal"]}は{_pct(hl["lp"])}、'
+                 f'{T["owner_site"]}は{_pct(hl["lc"])}')
+    seek_desc = f'{T["other_short"]}を調べる質問で、{T["owner_site"]}を出典に入れた回答は{_pct(hl["oa"])}'
+    text = (f'{T["find_ex"]}のように{T["owner"]}を探す質問では、出典の{_pct(hl["lp"])}が{T["portal"]}、'
+            f'{_pct(hl["lc"])}が{T["owner_site"]}でした。{T["other_short"]}を調べる質問では、'
+            f'回答の{_pct(hl["oa"])}が{T["owner_site"]}を出典に入れていました。')
+    return (f'<aside class="rsh-hub" aria-label="{H.escape(hl["name"])}の調査の要点">'
+            f'<p class="rsh-hub-k">当社の調査・{y}年{m}月・{H.escape(hl["name"])}の質問{hl["questions"]}問を'
+            f'{H.escape(hl["engines_text"])}の{hl["n_engines"]}つのAIに聞いた結果</p>'
+            f'<p class="rsh-hub-h">{H.escape(asker)}がAIに聞いたとき、答えの出典になったサイト</p>'
+            '<div class="rsh-hub-grid">'
+            f'<figure class="vz vz-sm" data-measure="find"><figcaption class="vz-cap"><span class="rsx-key loc">探す</span>'
+            f'<b>{H.escape(T["owner"])}を探す質問の出典</b><small>出典の件数に占める割合</small></figcaption>'
+            f'<div class="vz-plot" role="img" aria-label="{H.escape(find_desc)}">'
+            + row(T["portal"], "sub", hl["lp"]) + row(T["owner_site"], "loc", hl["lc"]) + '</div></figure>'
+            f'<figure class="vz vz-sm" data-measure="seek"><figcaption class="vz-cap"><span class="rsx-key oth">調べる</span>'
+            f'<b>{H.escape(T["other_short"])}を調べる質問</b><small>出典のある回答に占める割合</small></figcaption>'
+            f'<div class="vz-plot" role="img" aria-label="{H.escape(seek_desc)}">'
+            + row(f'{T["owner_site"]}を出典に入れた回答', "oth", hl["oa"]) + '</div></figure>'
+            '</div>'
+            f'<p class="rsh-hub-text">{H.escape(text)}</p>'
+            f'<p class="rsh-hub-more"><a href="/research/{r}-ai-sources/" data-cta="hub_research_card_{r}">'
+            '調査の結果を見る（質問の種類ごとの内訳・CSV）</a></p></aside>')
+
+
+def index_page(inds, answers=None, site_url="https://ai.7senses.co.jp"):
+    """業種別の調査の一覧（/research/）の (最初の画面, 本文, 構造化データ)。
+    数字は各業種の headline() からだけ取り、業種ページの最初の画面と同じ値・同じ書き方で出す"""
+    import html as H
+    hls = [h for h in (headline(i) for i in inds) if h]
+    if not hls:
+        return None
+    S = index_summary(hls)
+    n = S["n"]
+    summary = summary_html(hls)
 
     def linked(s):
         # 矢印だけが次の行へ落ちないよう、最後の1文字と矢印を離さない

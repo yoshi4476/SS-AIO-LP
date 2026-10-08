@@ -153,6 +153,9 @@ def apply(site: Path, today=None):
     jobs += [(p, "hub", p.parent.name, r'<section class="hero">') for p in sorted((site / "industry").glob("*/index.html"))]
     for p, kind, key, hero in jobs:
         s = p.read_text(encoding="utf-8")
+        # 業種ページに調査の要点の図（build.py の rsh-top）があれば、特集はその後ろ（図を見出しの近くに残す）
+        if kind == "hub" and '<section class="section rsh-top">' in s:
+            hero = r'<section class="section rsh-top">'
         e = pick(kind, key, today, entries)
         new = _put(s, box_html(e) if e else EMPTY, hero)
         if new != s:
