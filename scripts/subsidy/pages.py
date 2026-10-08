@@ -752,6 +752,8 @@ try:
     import research as _RS
     research_done = _RS.build(ROOT, DOMAIN, research_shell)
     print(f"生成: {research_done[0]}" if research_done else "AIへの聞き取り調査: 材料が足りないのでページを作らない")
+    # トップの調査のグラフ（<!--research:top--> のあいだ）も同じデータから入れ直す。数字を手で書かない
+    print(f"トップの調査の図: {_RS.put_top(ROOT, DOMAIN)}")
 except Exception as e:
     print(f"AIへの聞き取り調査のページを作れませんでした: {e}")
 

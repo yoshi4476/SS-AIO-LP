@@ -21,8 +21,13 @@ MAIN = Path(__file__).resolve().parents[2]
 LABEL = {"yes": "はい（対象になる・できる）", "cond": "条件による", "no": "いいえ（対象外・できない）"}
 MIN_DECIDED = 2          # 結論が読み取れた回答がこれ未満の問いは載せない（割れ方を語れない）
 MIN_ROWS = 5             # 問いがこれ未満ならページを作らない（薄いページを出さない）
+# questions_only: 問いの形の行だけを載せ、根拠のページも載せた問いの答えだけで数える。
+# 調べた問いの1つ目は記事の題そのもので、題が問いの形でないと「AI導入補助金の申請代行を京都で頼む前に…」のような
+# 題が問いとして並び、しかも記事が取り下げられた後も旧題のまま残った（2026-10-08）。ページの「調べ方」に書いた
+# 「はい・いいえで答えられる問い」と合わせる。根拠を載せない問いの分まで数えると「N問聞いたところ…」と合わない
+QUESTION = re.compile(r"([?？]|ますか|ませんか|ですか|でしょうか)\s*$")
 SITE = {
-    "subsidy": {"url": "/research/ai-hojokin/", "topic": "補助金", "article": "/blog/{slug}/",
+    "subsidy": {"url": "/research/ai-hojokin/", "topic": "補助金", "article": "/blog/{slug}/", "questions_only": True,
                 "readout": ("<p><b>AIの答えは、申請の可否を決める根拠になりません。</b>補助の対象・金額・締切は、公募要領と事務局のページで決まります。"
                             "AIが根拠にしたページの多くは民間のサイトで、公募要領より古い情報や、特定の製品をすすめる内容が含まれることがあります。</p>"
                             "<p>AIに聞いて答えが分かれたときは、その問いの言葉で公募要領を検索し、事務局の「よくある質問」で確かめてください。"
@@ -43,6 +48,41 @@ def _survey_files(site):
     return sorted((MAIN / "data" / "ai_survey" / site).glob("*.json"))
 
 
+def is_question(q):
+    return bool(QUESTION.search(str(q).strip()))
+
+
+def _final_url(site):
+    """取り下げ・統合で 301 を書いた記事の URL を、最後の転送先へ（data/retractions.jsonl。retract が配信先へ写す元）。
+    調べた記事の多くは後で取り下げ・統合され、調査ページのリンクが転送を経由し、旧題も残っていた"""
+    moves = {}
+    f = MAIN / "data" / "retractions.jsonl"
+    for ln in f.read_text(encoding="utf-8").splitlines() if f.is_file() else []:
+        try:
+            r = json.loads(ln)
+        except ValueError:
+            continue
+        if r.get("site") == site and r.get("from") and r.get("to"):
+            moves[r["from"]] = r["to"]
+
+    def final(u):
+        seen = set()
+        while u in moves and u not in seen:
+            seen.add(u)
+            u = moves[u]
+        return u
+    return final
+
+
+def _title(slug):
+    """記事の今の題（原稿の title）。原稿が無ければ空"""
+    for p in (MAIN / "articles" / f"{slug}.md", MAIN / "articles" / "_legacy" / f"{slug}.md"):
+        if p.is_file():
+            m = re.search(r'^title:\s*"?(.+?)"?\s*$', p.read_text(encoding="utf-8"), re.M)
+            return m.group(1).strip() if m else ""
+    return ""
+
+
 def data(site, domain):
     """ページの中身（サイトに依存しない形）。材料が足りなければ None"""
     import sys
@@ -50,6 +90,7 @@ def data(site, domain):
     import subsidy_survey as SV
     import sites as S
     cfg = SITE[site]
+    final = _final_url(site)
     rows, engines, dates, src = [], set(), [], Counter()
     for p in _survey_files(site):
         try:
@@ -59,10 +100,12 @@ def data(site, domain):
         if not r.get("stance"):
             continue
         dates.append(r["date"])
-        for k, v in SV.tally(r)["sources"].items():
-            src[k] += v
+        now_title = ""
         if cfg["article"]:
             url = cfg["article"].format(slug=r["slug"])
+            if final(url) != url:
+                url = final(url)
+                now_title = _title(url.strip("/").split("/")[-1])
         else:
             try:
                 art = (MAIN / "articles" / f"{r['slug']}.md").read_text(encoding="utf-8")
@@ -70,17 +113,24 @@ def data(site, domain):
                 url = S.article_url(S.load(site), {"slug": r["slug"], "category": cat}).replace(domain, "")
             except Exception:
                 url = ""
+        shown = set()
         for q, by in r["stance"].items():
             c = Counter(v["label"] for v in by.values())
             if c["yes"] + c["cond"] + c["no"] < MIN_DECIDED:
                 continue
+            if cfg.get("questions_only") and not is_question(q):
+                continue
+            shown.add(q)
             engines |= set(by)
             answers = {e: {"label": LABEL.get((by.get(e) or {}).get("label"), "結論が読み取れず"),
                            "quote": re.sub(r"[*#`>]", "", (by.get(e) or {}).get("quote", ""))[:120]}
                        for e in by}
-            rows.append({"q": q, "url": url, "date": r["date"], "answers": answers,
+            rows.append({"q": q, "url": url, "date": r["date"], "answers": answers, "now_title": now_title,
                          "split": len([k for k in ("yes", "cond", "no") if c[k]]) >= 2,
                          "decided": c["yes"] + c["cond"] + c["no"]})
+        rec = dict(r, answers={q: a for q, a in r.get("answers", {}).items() if q in shown}) if cfg.get("questions_only") else r
+        for k, v in SV.tally(rec)["sources"].items():
+            src[k] += v
     if len(rows) < MIN_ROWS:
         return None
     period = f"{min(dates)}〜{max(dates)}" if min(dates) != max(dates) else min(dates)
@@ -124,7 +174,11 @@ def html_body(d):
     esc = lambda s: html.escape(str(s), quote=True)
     trs = []
     for r in d["rows"]:
-        q = f'<a href="{esc(r["url"])}">{esc(r["q"])}</a>' if r["url"] else esc(r["q"])
+        if r.get("now_title") and r["url"]:
+            # 調べた記事が統合・取り下げで移ったとき: 問いは聞いたときの文のまま、リンクは移った先の記事を今の題で出す
+            q = f'{esc(r["q"])}<br><small>記事: <a href="{esc(r["url"])}">{esc(r["now_title"])}</a></small>'
+        else:
+            q = f'<a href="{esc(r["url"])}">{esc(r["q"])}</a>' if r["url"] else esc(r["q"])
         cells = "".join(
             f'<td><b>{esc(r["answers"][e]["label"])}</b><br><small>「{esc(r["answers"][e]["quote"][:70])}」</small></td>'
             if e in r["answers"] and r["answers"][e]["quote"] else
@@ -175,6 +229,106 @@ def dataset_ld(d):
             # Search Console が「license がありません」と知らせるため。引用の条件の枠（#cite）を指す（research_cite.license_url と同じ）
             "license": d["domain"] + d["url"] + "#cite",
             "creator": {"@type": "Organization", "name": "セブンセンシズ株式会社", "url": "https://corp.7senses.co.jp/"}}
+
+
+TOP_MARK = ("<!--research:top-->", "<!--/research:top-->")
+KINDS = {"public": "公的機関（go.jp など）", "private": "民間のサイト", "media": "報道・SNS・動画", "own": "当社のサイト"}
+
+
+def top_html(d):
+    """補助金サイトのトップに置く、調査の要点の小さなグラフ2つ。数字はすべて d（調査のデータ）から読む（手で書かない）。
+    図は CSS だけで描き、画像を増やさない。図は role="img" と説明を持ち、同じことを図の下に文字でも書く"""
+    esc = lambda s: html.escape(str(s), quote=True)
+    n, split = len(d["rows"]), d["split"]
+    who = "・".join(d["engines"])
+    s = d["sources"]
+    total = sum(s.values()) or 1
+    pct = lambda k: s.get(k, 0) * 100 // total          # 調査ページの public_pct と同じ切り捨て
+    pct_txt = lambda k: f"{pct(k)}%" if pct(k) or not s.get(k) else "1%未満"
+    jp = lambda iso: re.sub(r"(\d{4})-0?(\d{1,2})-0?(\d{1,2})", r"\1年\2月\3日", iso)
+    when = jp(d["period"])
+    same = n - split
+    cells = "".join(f'<i class="{"is-split" if i < split else ""}"></i>' for i in range(n))
+    said1 = f"調べた{n}問のうち{split}問で、{who}の結論が分かれました。残りの{same}問は結論が同じでした。"
+    order = sorted((k for k in KINDS if s.get(k)), key=lambda k: -s[k])
+    bars = "".join(
+        f'<li class="{"is-em" if k == "public" else ""}"><span class="rs-l">{KINDS[k]}</span>'
+        f'<span class="rs-v">{s[k]}件<small>（{pct_txt(k)}）</small></span>'
+        f'<span class="rs-t"><span style="width:{s[k] * 100 / total:.1f}%"></span></span></li>' for k in order)
+    said2 = (f"AIが根拠にしたページ{total}件のうち、公的機関のページは{s.get('public', 0)}件（{d['public_pct']}%）、"
+             f"民間のサイトは{s.get('private', 0)}件（{pct_txt('private')}）でした。")
+    return f'''<section id="research" class="rs" aria-labelledby="rs-h" style="background:var(--bg2)">
+<style>
+#research .rs-grid{{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;margin-top:30px}}
+@media(max-width:860px){{#research .rs-grid{{grid-template-columns:1fr}}}}
+#research .rs-card{{margin:0;min-width:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px;box-shadow:var(--shadow)}}
+#research .rs-k{{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px}}
+#research .rs-big{{font-family:var(--num);color:var(--navy);line-height:1.1;margin-bottom:14px}}
+#research .rs-big b{{font-size:52px;font-weight:600;letter-spacing:.02em}}
+#research .rs-big small{{font-family:var(--sans);font-size:15px;color:var(--muted);margin-left:6px}}
+#research .rs-cells{{display:grid;grid-template-columns:repeat({min(n, 25)},1fr);gap:3px;max-width:420px}}
+#research .rs-cells i{{display:block;height:26px;border-radius:4px;background:#ebe5d6}}
+#research .rs-cells i.is-split{{background:var(--navy2)}}
+#research .rs-key{{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:13px;color:var(--muted)}}
+#research .rs-key span::before{{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:#ebe5d6}}
+#research .rs-key span.is-split::before{{background:var(--navy2)}}
+#research .rs-bars{{list-style:none;margin:0;padding:0;display:grid;gap:12px}}
+#research .rs-bars li{{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:baseline;font-size:14px}}
+#research .rs-l{{color:var(--text)}}
+#research .rs-v{{font-family:var(--num);font-size:17px;color:var(--text);white-space:nowrap}}
+#research .rs-v small{{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-left:2px}}
+#research .rs-t{{grid-column:1/-1;display:block;height:12px;border-radius:6px;background:#f1ece0;overflow:hidden}}
+#research .rs-t span{{display:block;height:100%;min-width:3px;border-radius:6px;background:#c9bfa6}}
+#research li.is-em .rs-l{{font-weight:700;color:var(--navy)}}
+#research li.is-em .rs-t span{{background:var(--navy2)}}
+#research figcaption{{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:14px;color:var(--muted);line-height:1.8}}
+#research .rs-note{{margin-top:22px;font-size:14px;color:var(--muted);max-width:860px}}
+#research .rs-cta{{margin-top:18px}}
+</style>
+  <div class="wrap rev">
+    <p class="kicker">Research</p>
+    <h2 id="rs-h">補助金をAIに聞くと、<br class="sp"><span class="accent">答えは割れます</span></h2>
+    <p class="lead">当社が{esc(when)}に{esc(who)}へ、補助金について読者が聞きそうな問いを{n}問聞き、AIの結論と、根拠にしたページを数えました（当社調べ）。</p>
+    <div class="rs-grid">
+      <figure class="rs-card">
+        <p class="rs-k">AIどうしで結論が分かれた問い</p>
+        <div role="img" aria-label="{esc(said1)}">
+          <p class="rs-big"><b>{split}</b>問<small>／{n}問中</small></p>
+          <div class="rs-cells">{cells}</div>
+          <p class="rs-key"><span class="is-split">結論が分かれた {split}問</span><span>結論が同じ {same}問</span></p>
+        </div>
+        <figcaption>{esc(said1)}</figcaption>
+      </figure>
+      <figure class="rs-card">
+        <p class="rs-k">AIが根拠にしたページの種類（{total}件）</p>
+        <ol class="rs-bars" role="img" aria-label="{esc(said2)}">{bars}</ol>
+        <figcaption>{esc(said2)}</figcaption>
+      </figure>
+    </div>
+    <p class="rs-note">AIの答えは、申請の可否を決める根拠になりません。補助の対象・金額・締切は、公募要領と事務局のページで確かめてください。調べた日は{esc(when)}で、その日の1回の結果です。</p>
+    <p class="rs-cta"><a class="btn btn-ghost" href="{d["url"]}" data-cta="top_research">問いごとの答えと根拠を見る</a></p>
+  </div>
+</section>'''
+
+
+def put_top(root: Path, domain: str, site="subsidy"):
+    """トップ（index.html）の目印のあいだに top_html を入れ直す（配信のたびに pages.py が呼ぶ）。
+    目印が無ければ何もしない。材料が足りなければ目印のあいだを空にする（古い数字を残さない）"""
+    f = root / "index.html"
+    if not f.is_file():
+        return "トップがありません"
+    t = f.read_bytes().decode("utf-8", "surrogateescape")
+    a, b = TOP_MARK
+    i, j = t.find(a), t.find(b)
+    if i < 0 or j < i:
+        return "目印（<!--research:top-->）がありません"
+    d = data(site, domain)
+    nl = "\r\n" if "\r\n" in t else "\n"
+    body = (nl + top_html(d).replace("\n", nl) + nl) if d else ""
+    if t[i + len(a):j] == body:
+        return "変わりません"
+    f.write_bytes((t[:i + len(a)] + body + t[j:]).encode("utf-8", "surrogateescape"))
+    return "入れ直しました" if d else "材料が足りないので空にしました"
 
 
 def build(root: Path, domain: str, shell, site="subsidy"):
