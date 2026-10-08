@@ -376,9 +376,10 @@ def check(pair, before, before_warns, loser_text, snap):
 
 
 def _append(path, obj):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+    # 統合の記録（data/merges.jsonl）には共通の検索語と表示の数が入る。お客様の社の行は置き場へ（client_private）。
+    # 取り下げの記録（retractions.jsonl）は配信先の URL だけで、CI の retract が読むので public のまま
+    import client_private as CP
+    CP.append_jsonl(path, obj, sid=obj.get("site"))
 
 
 def relink(site, from_url, to_url, survivor):
@@ -477,13 +478,11 @@ def fm_merged(slug):
 
 
 def note(pair, ok, why):
-    LOG.parent.mkdir(parents=True, exist_ok=True)
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "auto_merge",
-                            "slug": pair["survivor"],
-                            "kind": "merge-scaled" if pair.get("kind") == "scaled" else "merge",
-                            "loser": pair["loser"],
-                            "ok": ok, "note": why}, ensure_ascii=False) + "\n")
+    import client_private as CP
+    CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "auto_merge",
+                          "slug": pair["survivor"],
+                          "kind": "merge-scaled" if pair.get("kind") == "scaled" else "merge",
+                          "loser": pair["loser"], "ok": ok, "note": why}, sid=pair.get("site"))
 
 
 def build_prompt(pair, keyword):

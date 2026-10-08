@@ -91,7 +91,8 @@
   "cta": {
     "label": "経理BPOの無料相談",
     "note": "経理・バックオフィスの外部委託についてご相談いただけます",
-    "url": "https://corp.7senses.co.jp/contact/"
+    "url": "https://corp.7senses.co.jp/contact?s=keiri-bpo",
+    "_why": "/contact/ は /contact へ 308 で転送され、記事の相談ボタン262か所が転送を1回挟んでいた。コーポレートの計測（Tracking.tsx）も pathname が /contact のときだけ入口として数えるので、末尾の / 付きは押されても数えられていなかった。?s=keiri-bpo は相談フォームの「ご相談内容」で経理BPOを選んで開く（ボタンの文言と同じ。記事の入口 tool_links.CORP_CONTACT とも同じ）。変えたら cta_fill.py --relink --write で記事のボタンを揃える（2026-10-08）"
   },
   "link_policy": "内部リンクは keiri-bpo / keiri-jitsumu / backoffice の記事から選ぶ。",
   "x_tags": [

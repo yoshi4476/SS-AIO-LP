@@ -95,15 +95,16 @@ def in_territory(kw, cfg):
     return any(o in low for o in owns) or any(i in low for i in inds)
 
 
-def probe(kw, dom):
+def probe(kw, dom, site=None):
     """検索つきのAI**すべて**（鍵があるもの）に聞き、エンジンごとに「答えが出たか・出典に自社が入るか」を返す。
 
     Google（Gemini）だけを見ると、ChatGPT・Perplexity・Claude・Grok で出典が違うことを見落とす。
-    answered / ours は「どれか1つでも」。エンジン別は engines に残す
+    answered / ours は「どれか1つでも」。エンジン別は engines に残す。
+    site（どの社の語か）がお客様の社なら、質問と答えは public の data/ai_cache に置かない
     """
     import ai_cite_check as AC
     per, all_doms, ours = {}, set(), False
-    for name, fn in AC.engines_available().items():
+    for name, fn in AC.engines_available(site=site).items():
         try:
             urls = fn(kw) or []
         except Exception as e:
@@ -151,7 +152,7 @@ def research(sid, cfg, probe_n=0):
             if asked >= probe_n:
                 break
             try:
-                r["ai"] = probe(r["kw"], dom)
+                r["ai"] = probe(r["kw"], dom, site=sid)
             except Exception as e:
                 r["ai"] = {"error": str(e)[:80]}
                 # 枠切れ（429）はその回は何度聞いても同じ。残りは来週に回す

@@ -8,7 +8,7 @@
 段階は5つ。前の段階に対する割合で見る。
 
   1. 記事を見た      page_view（記事ページ）
-  2. CTAを押した     cta_click / diagnosis_click
+  2. CTAを押した     cta_click だけ（cta_click の無い日だけ diagnosis_click / contact_intent。cta_counts）
   3. フォームを開いた  form_start
   4. 送信した        lead_capture / generate_lead（lead_reconcile.is_lead と同じ数え方）
 
@@ -20,6 +20,7 @@
 """
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -32,11 +33,33 @@ sys.path.insert(0, str(ROOT / "scripts"))
 # 送れたときに1回だけ出る lead_capture（コーポレートは generate_lead も同時に出る）を数える。
 STEPS = [
     ("記事を見た", ("page_view",)),
-    ("CTAを押した", ("cta_click", "diagnosis_click", "contact_intent")),
+    # 入口の押下は cta_click だけで数える。コーポレートは 10/8 から診断の入口で cta_click と diagnosis_click を、
+    # 相談の入口で cta_click と contact_intent を同時に送るので、足すと同じ押下を2回数える（2026-10-08）
+    ("CTAを押した", ("cta_click",)),
     ("フォームを開いた", ("form_start",)),
     # 実際の数は lead_reconcile.ga4_by_day で数える（main）。これは取れないときの代わりで、足さずに多い方を取る
     ("送信した", ("lead_capture", "generate_lead")),
 ]
+# cta_click を送っていなかった日（コーポレートの 10/7 まで）の入口の押下。その日だけこの2つで数える
+# （当時は診断へのリンクと /contact へのリンクで別々に1つずつ送っており、重ならない）
+CTA_LEGACY = ("diagnosis_click", "contact_intent")
+# 入口の押下の数え方が変わった日。この日をまたぐ期間は、前後の件数を比べられない。サイトの計測を変えたら足す
+CTA_CHANGES = {
+    "ai-lab": [("2026-10-08", "ヘッダー・足元・本文の入口リンクも cta_click を送るようになった"
+                              "（それまではボタンの形の入口だけ）")],
+    "corporate": [("2026-10-08", "入口の押下に cta_click を送り始めた（それまでの日は、診断へのリンク diagnosis_click と"
+                                 "相談への遷移 contact_intent で数えている）")],
+}
+# 問い合わせ方向かを決める行き先の語。cta_id の中で最後に出てくる語で決める
+# （ai_check_lp_fudosan は診断の結果から LP（相談）へ、lp_fudosan_scan は LP の上の診断）。
+# cta_id の形は社ごとに違う（AI集客ラボ・補助金は data-cta か「ページ_場所_行き先」、コーポレート・CONFLUX は
+# 「ページの種類_位置_行き先」、補助金の記事はボタンの文字）。cta_kind（コーポレート）があれば、それだけで決める
+CONTACT_WORDS = ("contact", "consult", "soudan", "lp", "tel", "mail")
+TOOL_WORDS = ("scan", "check", "aicheck", "checklist", "quiz", "diag", "diagnosis", "audit", "tool", "tools",
+              "shindan", "download", "dl", "pdf")
+CONTACT_JA, TOOL_JA = ("相談", "問い合わせ", "問合せ"), ("診断", "チェック", "資料")
+FORM_AUTO_FILE = ROOT / "data" / "ga4_settings.json"     # 拡張計測の「フォームの操作」を止めた日（ga4_dims.py）
+INLINE_FILE = ROOT / "data" / "inline_tool.json"
 
 # 送信の中身。問い合わせと購読を同じ箱に入れると、商談につながる数が分からない。
 # lead_route は site.js が付けている（newsletter / dl / form / 診断の結果送付）。
@@ -48,20 +71,146 @@ LEAD_ROUTES = [
 ]
 
 
-def events(prop, days):
-    import gcreds
-    from google.analytics.data_v1beta import BetaAnalyticsDataClient
-    from google.analytics.data_v1beta.types import (DateRange, Dimension, Metric,
-                                                    RunReportRequest)
-    cl = BetaAnalyticsDataClient(credentials=gcreds.load(
-        ROOT / "indexing-service-account.json",
-        ["https://www.googleapis.com/auth/analytics.readonly"]))
-    r = cl.run_report(RunReportRequest(
-        property="properties/" + str(prop),
-        date_ranges=[DateRange(start_date=f"{days}daysAgo", end_date="yesterday")],
-        dimensions=[Dimension(name="eventName")],
-        metrics=[Metric(name="eventCount")], limit=200))
-    return {x.dimension_values[0].value: int(x.metric_values[0].value) for x in r.rows}
+# ── 入口の押下（cta_click だけ・cta_click の無い日は旧い2つ） ───────────────
+
+def contact_bound(cta_id, kind=""):
+    """問い合わせ方向の入口か。cta_kind（コーポレート）があればそれだけで、無ければ cta_id の中で
+    最後に出てくる行き先の語で決める（CONTACT_WORDS / TOOL_WORDS。補助金の記事はボタンの文字）"""
+    if kind and kind not in NOT_SET:
+        return kind == "contact"
+    s = str(cta_id or "").lower()
+    hits = [(m.start(), m.group(0) in CONTACT_WORDS) for m in re.finditer(r"[a-z0-9]+", s)
+            if m.group(0) in CONTACT_WORDS or m.group(0) in TOOL_WORDS]
+    for words, val in ((CONTACT_JA, True), (TOOL_JA, False)):
+        hits += [(m.start(), val) for w in words for m in re.finditer(re.escape(w), s)]
+    return max(hits)[1] if hits else False
+
+
+def cta_counts(by_day, ids_by_day=None):
+    """入口の押下の数と、うち問い合わせ方向。日ごとに数え方を決め、同じ押下を2回数えない。
+
+    by_day     {YYYYMMDD: {出来事: 件数}}（cta_click・cta_〈ボタンID〉・CTA_LEGACY を含む）
+    ids_by_day {YYYYMMDD: [(cta_id, cta_kind, 件数)]}（cta_click の分。cta_id が未登録なら None）
+
+    - cta_click のある日は cta_click だけ。問い合わせ方向は cta_kind・cta_id で決め、cta_id の付いていない日
+      （GA4 に cta_id を登録した 10/5 ごろより前）は、同時に送っている cta_〈ボタンID〉の名前で決める
+    - cta_click の無い日（コーポレートの 10/7 まで）は CTA_LEGACY の合計。問い合わせ方向は contact_intent
+    返り値 {"total", "to_contact", "legacy_days", "name_days", "unknown"（行き先を決められなかった押下）}"""
+    out = {"total": 0, "to_contact": 0, "legacy_days": [], "name_days": [], "unknown": 0}
+    for d in sorted(by_day):
+        ev = by_day[d]
+        n = ev.get("cta_click", 0)
+        if not n:
+            legacy = sum(ev.get(x, 0) for x in CTA_LEGACY)
+            if legacy:
+                out["total"] += legacy
+                out["to_contact"] += ev.get("contact_intent", 0)
+                out["legacy_days"].append(d)
+            continue
+        out["total"] += n
+        ids = None if ids_by_day is None else ids_by_day.get(d)
+        # cta_click_a / cta_click_<試験>_<案> は A/B の数え直しで、押下そのものではない
+        names = {k[4:]: v for k, v in ev.items() if k.startswith("cta_") and not k.startswith("cta_click")}
+        notset = sum(v for cid, _k, v in ids or [] if cid in NOT_SET)
+        if ids and not (notset and names):
+            out["to_contact"] += sum(v for cid, kind, v in ids if cid not in NOT_SET and contact_bound(cid, kind))
+            out["unknown"] += notset
+        elif names:
+            out["to_contact"] += sum(v for k, v in names.items() if contact_bound(k))
+            out["name_days"].append(d)
+        else:
+            out["unknown"] += n
+    return out
+
+
+def day_events(prop, start, end):
+    """{YYYYMMDD: {出来事: 件数}}。段の出来事・cta で始まる出来事（ボタンIDの名前）・CTA_LEGACY・session_start"""
+    from google.analytics.data_v1beta.types import (DateRange, Dimension, Filter, FilterExpression,
+                                                    FilterExpressionList, Metric, RunReportRequest)
+    names = sorted({x for _, ns in STEPS for x in ns} | set(CTA_LEGACY) | {"session_start", "form_submit"})
+    filt = FilterExpression(or_group=FilterExpressionList(expressions=[
+        FilterExpression(filter=Filter(field_name="eventName", in_list_filter=Filter.InListFilter(values=names))),
+        FilterExpression(filter=Filter(field_name="eventName", string_filter=Filter.StringFilter(
+            value="cta_", match_type=Filter.StringFilter.MatchType.BEGINS_WITH)))]))
+    r = _ga_client().run_report(RunReportRequest(
+        property=f"properties/{prop}", date_ranges=[DateRange(start_date=str(start), end_date=str(end))],
+        dimensions=[Dimension(name="date"), Dimension(name="eventName")], metrics=[Metric(name="eventCount")],
+        dimension_filter=filt, limit=100000))
+    out = {}
+    for x in r.rows:
+        out.setdefault(x.dimension_values[0].value, {})[x.dimension_values[1].value] = int(x.metric_values[0].value)
+    return out
+
+
+def cta_ids(prop, start, end):
+    """{YYYYMMDD: [(cta_id, cta_kind, 件数)]}（cta_click）。cta_id が GA4 に未登録なら None、cta_kind が未登録なら ''"""
+    from google.analytics.data_v1beta.types import DateRange, Dimension, Filter, FilterExpression, Metric, RunReportRequest
+    filt = FilterExpression(filter=Filter(field_name="eventName", string_filter=Filter.StringFilter(value="cta_click")))
+    for dims in (("date", "customEvent:cta_id", "customEvent:cta_kind"), ("date", "customEvent:cta_id")):
+        try:
+            r = _ga_client().run_report(RunReportRequest(
+                property=f"properties/{prop}", date_ranges=[DateRange(start_date=str(start), end_date=str(end))],
+                dimensions=[Dimension(name=n) for n in dims], metrics=[Metric(name="eventCount")],
+                dimension_filter=filt, limit=100000))
+        except Exception as e:
+            if dims_missing(e):
+                continue
+            raise
+        out = {}
+        for x in r.rows:
+            v = [y.value for y in x.dimension_values]
+            out.setdefault(v[0], []).append((v[1], v[2] if len(v) > 2 else "", int(x.metric_values[0].value)))
+        return out
+    return None
+
+
+def stages(prop, start, end, by_day=None, sent=None):
+    """[(段の名前, 件数)]。CTAを押した は cta_counts、送信した は sent（lead_reconcile の数え方）。
+    sent が無ければ lead_capture・generate_lead のうち多い方（足さない）"""
+    by_day = day_events(prop, start, end) if by_day is None else by_day
+
+    def tot(name):
+        return sum(d.get(name, 0) for d in by_day.values())
+    out = []
+    for label, names in STEPS:
+        if label == "CTAを押した":
+            n = cta_counts(by_day)["total"]
+        elif label == "送信した":
+            n = sent if sent is not None else max(tot(x) for x in names)
+        else:
+            n = sum(tot(x) for x in names)
+        out.append((label, n))
+    return out
+
+
+def change_notes(site, start, end):
+    """期間 [start, end] の途中で入口の押下の数え方が変わったなら、その注記（CTA_CHANGES）"""
+    return [f"{d} から{what}。この日をまたぐ期間は、入口の押下の件数を前後で比べられません"
+            for d, what in CTA_CHANGES.get(site, []) if str(start) < d <= str(end)]
+
+
+def form_auto_off(site):
+    """GA4 の拡張計測の「フォームの操作」を止めた日（data/ga4_settings.json。ga4_dims.py --forms-off が書く）"""
+    try:
+        d = json.loads(FORM_AUTO_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return ""
+    return str(((d.get("form_interactions_off") or {}).get(site) or {}).get("at") or "")
+
+
+def form_note(site, start, end):
+    """入力開始（form_start）に GA4 の自動の分が重なっている期間なら、その注記。重なっていなければ None"""
+    off = form_auto_off(site)
+    if not off:
+        return ("GA4 の拡張計測（フォームの操作）が有効なため、入力開始（form_start）は自前の計測と"
+                "2重に出ることがあります")
+    if off > str(end):
+        return (f"この期間は GA4 の拡張計測（フォームの操作）が有効だったため、入力開始（form_start）は"
+                f"自前の計測と重なっています（{off} に止めました）")
+    if str(start) < off:
+        return (f"{off} より前は、GA4 の拡張計測（フォームの操作）の form_start・form_submit が自前の計測と"
+                "重なっています（この日に止めました）")
+    return None
 
 
 def lead_routes(prop, days):
@@ -155,7 +304,8 @@ def inline_compare(site, prop, since, days=28, rows_fn=None):
 
 
 def print_inline(conf):
-    p = ROOT / "data" / "inline_tool.json"
+    from datetime import date, timedelta
+    p = INLINE_FILE
     if not p.is_file():
         return
     sites = json.loads(p.read_text(encoding="utf-8")).get("sites", {})
@@ -175,6 +325,9 @@ def print_inline(conf):
             print(f"   {label:<16} 前 {b:6,}  後 {a:6,}")
         if n < 28:
             print(f"   ※後ろはまだ{n}日分です。28日そろうまで、前と同じ尺度では比べられません")
+        s = date.fromisoformat(v["since"])
+        for note in change_notes(site, s - timedelta(days=28), s + timedelta(days=max(n, 1) - 1)):
+            print(f"   ※{note}（記事のボタン・リンクの押下の前後は、入力欄の効果だけを表しません）")
 
 
 # ── フォームの項目ごとの離脱 ───────────────────────────────
@@ -490,31 +643,34 @@ def main():
             for p in (ROOT / "sites").glob("*.json")}
     worst = []
     need_setup = set()
+    from datetime import date, timedelta
+    import lead_reconcile as LR
+    start, end = date.today() - timedelta(days=a.days), date.today() - timedelta(days=1)
     for site, c in sorted(conf.items()):
         prop = c.get("ga4_property_id")
         if not prop:
             continue
         try:
-            ev = events(prop, a.days)
+            by_day = day_events(prop, start, end)
         except Exception as e:
             print(f"■ {c.get('name', site)}: 取得できません（{str(e)[:60]}）")
             continue
+        ev = {}
+        for d in by_day.values():
+            for k, v in d.items():
+                ev[k] = ev.get(k, 0) + v
         print(f"\n■ {c.get('name', site)}（直近{a.days}日）")
         prev = None
         # 「送信した」は問い合わせの数え方を1つにそろえる（lead_reconcile.is_lead）。以前はサイト全体の form_submit を
         # 足しており、30秒診断のURL入力まで送信に数え、コーポレートは記録の無い名前を見て0と出していた（2026-10-04）。
         # その後も /contact/ の form_submit を数え、拡張計測の分と合わせて問い合わせ1回を2件にしていた（2026-10-07）
-        import lead_reconcile as LR
-        from datetime import date, timedelta
         try:
-            sent = sum(LR.ga4_by_day(prop, date.today() - timedelta(days=a.days), date.today() - timedelta(days=1)).values())
+            sent = sum(LR.ga4_by_day(prop, start, end).values())
         except Exception:
             sent = None
-        for label, names in STEPS:
-            n = sum(ev.get(x, 0) for x in names)
-            if label == "送信した":
-                # 取れないときの代わりも足さない（コーポレートは同じ送信で lead_capture と generate_lead が出る）
-                n = sent if sent is not None else max(ev.get(x, 0) for x in names)
+        names_of = dict(STEPS)
+        for label, n in stages(prop, start, end, by_day=by_day, sent=sent):
+            names = names_of[label]
             if prev is None:
                 rate = ""
             elif prev == 0:
@@ -532,6 +688,13 @@ def main():
                 x not in ev for x in names) else ""
             print(f"   {label:<12} {n:6,}{rate}{missing}")
             prev = n
+        cc = cta_counts(by_day)
+        if cc["legacy_days"]:
+            print(f"     ※CTAを押した: cta_click の無い{len(cc['legacy_days'])}日は、診断へのリンク（diagnosis_click）と"
+                  "相談への遷移（contact_intent）で数えました（cta_click のある日は cta_click だけ）")
+        for note in change_notes(site, start, end) + [form_note(site, start, end)]:
+            if note:
+                print(f"     ※{note}")
         # 送信の中身を分ける。問い合わせと購読を同じ数で語ると、
         # 商談につながる数が分からなくなる。
         # lead_route はGA4の「カスタム定義」に登録しないとAPIから読めない

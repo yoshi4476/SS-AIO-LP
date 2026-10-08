@@ -57,7 +57,7 @@ def source_urls(site_id, keyword, limit=6):
                 urls += [f"https://{d}/" for d in r["ai"]["sources"]]
     try:
         import ai_cite_check as AC
-        eng = AC.engines_available()          # 30日キャッシュつき（同じ語を何度も課金しない）
+        eng = AC.engines_available(site=site_id)   # 30日キャッシュつき。お客様の社の答えはその社の置き場へ
         if "Gemini" in eng:
             urls += eng["Gemini"](keyword) or []
     except Exception:

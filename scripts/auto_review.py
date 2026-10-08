@@ -354,16 +354,16 @@ def anchor_use(paths=None):
 def inline_anchor_bias(paths=None, log=None):
     """文中リンクとして足したアンカーのうち、MAX_SAME_ANCHOR を超える記事で使われているもの。
     どれが文中リンクかは本文から見分けられないので、台帳（link_boost の anchor）から拾う"""
+    import client_private as CP
     f = Path(log) if log else LOG
     mine = set()
-    if f.is_file():
-        for line in io.open(f, encoding="utf-8").read().splitlines():
-            try:
-                r = json.loads(line)
-            except ValueError:
-                continue
-            if r.get("by") == "link_boost" and r.get("kind") == "link_inline" and r.get("anchor"):
-                mine.add(r["anchor"].lower())
+    for line in CP.read_lines(f):           # お客様の記事の行（置き場）も合わせて読む
+        try:
+            r = json.loads(line)
+        except ValueError:
+            continue
+        if r.get("by") == "link_boost" and r.get("kind") == "link_inline" and r.get("anchor"):
+            mine.add(r["anchor"].lower())
     if not mine:
         return {}
     use = anchor_use(paths)
@@ -371,10 +371,9 @@ def inline_anchor_bias(paths=None, log=None):
 
 
 def log_rows(n=40):
-    if not LOG.is_file():
-        return []
+    import client_private as CP
     rows = []
-    for line in io.open(LOG, encoding="utf-8").read().splitlines():
+    for line in CP.read_lines(LOG):
         try:
             rows.append(json.loads(line))
         except Exception:
@@ -462,12 +461,11 @@ def main():
             print("   %-34s %s" % (s[:34], why))
         if len(skipped) > 10:
             print("   …ほか%d本" % (len(skipped) - 10))
-    LOG.parent.mkdir(parents=True, exist_ok=True)
-    with io.open(LOG, "a", encoding="utf-8", newline="") as f:
-        f.write(json.dumps({"when": __import__("datetime").datetime.now().isoformat(),
-                            "by": "auto_review", "slug": "(%d記事)" % len(bad),
-                            "what": "言い回し%d件を振り直し・%d件を削除" % (rw, dr)},
-                           ensure_ascii=False) + "\n")
+    import client_private as CP
+    # 集計の1行（記事の名前も社も入らない）なので public へ
+    CP.append_jsonl(LOG, {"when": __import__("datetime").datetime.now().isoformat(),
+                          "by": "auto_review", "slug": "(%d記事)" % len(bad),
+                          "what": "言い回し%d件を振り直し・%d件を削除" % (rw, dr)})
     sp, share, total = spread(paths, write=True)
     print("\n   記事内の積み上がり: 振り直し%d件 / 削除%d件" % (rw, dr))
     print("   サイト全体の偏り: 振り直し%d件" % sp)

@@ -32,10 +32,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 STATE = ROOT / "data" / "rerender_state.json"
 # 描き直しの対象。self-static は build.py が毎回全部描く。external-md は先方のビルドが描く。zip は新規受付なし
 TYPES = ("external-html", "nextjs-json", "ftp", "wordpress")
-# サイト設定のうち、記事の描き方に関係しない項目（変えても描き直さない）
+# サイト設定のうち、記事の描き方に関係しない項目（変えても描き直さない）。
+# lead_hub は問い合わせの突き合わせ（lead_reconcile・data_sanity）だけが読む。入っていなかったため、
+# 補助金の lead_hub を false→true にしただけで全記事を描き直すところだった（2026-10-08）
 IGNORE_KEYS = {"_path", "kw_seeds", "kw_plan", "drop_kw", "_drop_kw_note", "compete", "audience", "avoid", "owns",
                "priority", "category_mix", "scheme_mix", "x_tags", "youtube", "social", "note", "notes",
-               "ga4_property_id", "facts_allow", "ng_terms", "_comment_lead_hub", "aggregate_skip_note"}
+               "ga4_property_id", "facts_allow", "ng_terms", "lead_hub", "_comment_lead_hub", "aggregate_skip_note"}
 
 
 def _h(b: bytes):

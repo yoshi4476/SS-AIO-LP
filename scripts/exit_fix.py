@@ -139,11 +139,10 @@ def main():
             print(f"      {'○' if ok else '－'} {why}")
             if ok and a.write:
                 added += 1
-                LOG.parent.mkdir(parents=True, exist_ok=True)
-                with LOG.open("a", encoding="utf-8") as fh:
-                    fh.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "exit_fix", "slug": page_path,
-                                         "kind": "exit", "ok": True, "note": f"「{name}」の手前に導線（落差{w[2]}pt）"},
-                                        ensure_ascii=False) + "\n")
+                import client_private as CP
+                # 固定ページ（記事でない）なので持ち主は記事から決まらない。社は固定ページを持つ自社（public）
+                CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "exit_fix", "slug": page_path,
+                                      "kind": "exit", "ok": True, "note": f"「{name}」の手前に導線（落差{w[2]}pt）"})
     print(f"EXIT_OK=yes\nEXIT_ADDED={added}")
     return 0
 

@@ -914,6 +914,26 @@ def insert_mid_cta(html, cfg):
     return html[:pos] + mid_cta_block(cfg) + "\n" + html[pos:]
 
 
+# 中ほどの導線の色。サイト設定の cta_colors（主ボタンの色）→ diagram_colors（図の色）→ AI集客ラボの色の順に使う。
+# 色を直書きしていたため、補助金の記事の中ほどだけ AI集客ラボの青で、主ボタン（金）と揃っていなかった（2026-10-08）
+CTA_COLORS = {"button": "#1b4fa0", "button_ink": "#fff", "soft": "#f4f7fc", "line": "#dbe4f0", "muted": "#5b6980"}
+_HEX = r"#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})"
+_CSS_COLOR = re.compile(rf"{_HEX}|linear-gradient\(\d{{1,3}}deg(?:,{_HEX}(?: \d{{1,3}}%)?){{2,4}}\)")
+
+
+def cta_colors(cfg):
+    c = dict(CTA_COLORS)
+    dia = cfg.get("diagram_colors") or {}
+    for k, src in (("button", "accent"), ("soft", "soft"), ("line", "line"), ("muted", "muted")):
+        if isinstance(dia.get(src), str) and _CSS_COLOR.fullmatch(dia[src]):
+            c[k] = dia[src]
+    for k, v in (cfg.get("cta_colors") or {}).items():
+        # style 属性へそのまま入れるので、色と線形のグラデーション以外は使わない
+        if k in c and isinstance(v, str) and _CSS_COLOR.fullmatch(v):
+            c[k] = v
+    return c
+
+
 def mid_cta_block(cfg):
     """中ほどの導線の塊（HTML 1行）。Markdown の原稿へもそのまま置ける形にする（external-md）"""
     # 記事の中ほどは、読み手がまだ「相談する」段階にない。実測で補助金サイトは
@@ -924,15 +944,16 @@ def mid_cta_block(cfg):
     url = mid.get("url") or (cfg.get("cta") or {}).get("url", "/#contact")
     note = mid.get("note") or "要件の確認だけでもご利用いただけます"
     tag = "article_mid_diagnosis" if "diagnosis" in url else "article_mid_contact"
+    c = cta_colors(cfg)
     return (
-        '<div class="cta-mid" style="background:#f4f7fc;border:1px solid #dbe4f0;'
+        f'<div class="cta-mid" style="background:{c["soft"]};border:1px solid {c["line"]};'
         'border-radius:12px;padding:20px;margin:28px 0;text-align:center">'
         '<p style="margin:0 0 12px;font-weight:700">'
         'ここまでの内容が自社に当てはまるか、確認しませんか。</p>'
         f'<a class="cta-button" href="{url}" data-cta="{tag}" '
         'style="display:inline-block;padding:12px 26px;border-radius:8px;'
-        f'background:#1b4fa0;color:#fff;text-decoration:none;font-weight:700">{label}</a>'
-        '<p style="margin:10px 0 0;font-size:.82rem;color:#5b6980">'
+        f'background:{c["button"]};color:{c["button_ink"]};text-decoration:none;font-weight:700">{label}</a>'
+        f'<p style="margin:10px 0 0;font-size:.82rem;color:{c["muted"]}">'
         f'{note}</p></div>')
 
 

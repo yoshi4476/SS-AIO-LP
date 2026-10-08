@@ -597,23 +597,19 @@ ADDED = ROOT / "data" / "kw_plan_added.json"   # kw_plan が積んだ語の記�
 
 
 def added_before(site_id):
-    try:
-        return set(json.loads(ADDED.read_text(encoding="utf-8")).get(site_id, []))
-    except Exception:
-        return set()
+    import client_private as CP
+    return set(CP.load_dict("data/kw_plan_added.json", pub=ADDED).get(site_id, []))
 
 
 def remember_added(site_id, kws):
-    """積んだ語を記録する。次の再実行で取り下げないため"""
-    try:
-        d = json.loads(ADDED.read_text(encoding="utf-8")) if ADDED.exists() else {}
-    except Exception:
-        d = {}
+    """積んだ語を記録する。次の再実行で取り下げないため。お客様の社の語は public に置かない（client_private）"""
+    import client_private as CP
+    d = CP.load_dict("data/kw_plan_added.json", pub=ADDED)
     cur = set(d.get(site_id, []))
     cur.update(norm(k) for k in kws)
     d[site_id] = sorted(cur)
-    ADDED.parent.mkdir(parents=True, exist_ok=True)
-    ADDED.write_text(json.dumps(d, ensure_ascii=False, indent=0), encoding="utf-8")
+    CP.save_dict("data/kw_plan_added.json", d, CP.site_key,
+                 dump=lambda o: json.dumps(o, ensure_ascii=False, indent=0), pub=ADDED)
 
 
 def split_retire(todo, plan_kws, own_norms=()):

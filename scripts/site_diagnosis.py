@@ -52,9 +52,17 @@ def rank_bands(domain, days=28):
 
 
 def funnel_counts(prop, days=28):
+    """ファネルと同じ数え方（funnel.stages）。以前は段の出来事を足しており、入口の押下（cta_click と
+    diagnosis_click・contact_intent）と送信（コーポレートの lead_capture と generate_lead）を2回数えていた"""
     import funnel
-    ev = funnel.events(prop, days)
-    return [(label, sum(ev.get(x, 0) for x in names)) for label, names in funnel.STEPS]
+    import lead_reconcile as LR
+    from datetime import date, timedelta
+    start, end = date.today() - timedelta(days=days), date.today() - timedelta(days=1)
+    try:
+        sent = sum(LR.ga4_by_day(prop, start, end).values())
+    except Exception:
+        sent = None
+    return funnel.stages(prop, start, end, sent=sent)
 
 
 def brand(site_id, days=28):

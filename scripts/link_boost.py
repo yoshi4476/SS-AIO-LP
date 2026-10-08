@@ -298,16 +298,14 @@ def note(tgt, src, kind, anchor=None, log=None):
     link_boost の記録が1件も無いため、内部リンクが効いたかを判定できなかった。
     文中リンクはアンカーも残す（auto_review がサイト全体の偏りをこれで数える）。
     """
-    import json
     import time
+    import client_private as CP
     log = Path(log) if log else ROOT / "automation" / "logs" / "auto_fix.jsonl"
-    log.parent.mkdir(parents=True, exist_ok=True)
     row = {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "link_boost", "slug": tgt, "kind": kind,
            "ok": True, "note": f"{src} から内部リンクを1本"}
     if anchor:
         row.update(src=src, anchor=anchor, note=f"{src} の本文の「{anchor}」を文中リンクに")
-    with io.open(log, "a", encoding="utf-8", newline="") as f:
-        f.write(json.dumps(row, ensure_ascii=False) + NL_CH)
+    CP.append_jsonl(log, row)               # お客様の記事の行は置き場へ
 
 
 def insert_ok(before, after):

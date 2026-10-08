@@ -76,11 +76,10 @@ def originality_signal():
 
 def yield_signal():
     """記事を増やした分が伸びていないサイト（content_yield の判定）。狙う語の選び方を変える"""
-    p = DATA / "yield_state.json"
-    if not p.is_file():
-        return []
+    import client_private as CP
     out = []
-    for sid, st in json.loads(p.read_text(encoding="utf-8")).items():
+    # お客様の社の判定は置き場にある（client_private）。合わせて読み、学びはその社の置き場へ入る（lessons._owner）
+    for sid, st in CP.load_dict("data/yield_state.json", pub=DATA / "yield_state.json").items():
         if isinstance(st, dict) and (st.get("flagged") or st.get("throttle")):
             why = "／".join(st.get("reasons") or [])[:160]
             out.append((f"learn:yield:{sid}", "failure", "kw", [sid],
@@ -92,13 +91,8 @@ def yield_signal():
 
 def rollback_signal():
     """直した手が28日後に戻された割合（rewrite_rollback の判定）。戻されがちな直し方は避ける"""
-    p = DATA / "rollback_decisions.json"
-    if not p.is_file():
-        return []
-    try:
-        d = json.loads(p.read_text(encoding="utf-8"))
-    except Exception:
-        return []
+    import client_private as CP
+    d = CP.load_dict("data/rollback_decisions.json", pub=DATA / "rollback_decisions.json")
     # 形式は rewrite_rollback が書く {"<slug>@<日付>": {"ratio", "control", "pos_gain", "rolled_back", "control_n", "kind"}}。
     # 学びの文は題の直しのことなので題の判定だけを数える（early・compete は本文も変える）。
     # control_n の無い判定は、公開からの日数が違う記事とページを対照にした頃のもので、

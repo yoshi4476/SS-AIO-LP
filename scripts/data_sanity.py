@@ -34,10 +34,12 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 # 同時に飛ぶイベント。足すと同じ行動を2回数える
+# （コーポレートは 2026-10-08 から、相談の入口で cta_click と contact_intent も同時に送る）
 CO_FIRED = [
     ("form_submit", "lead_capture"),
     ("form_submit", "lead_newsletter"),
     ("cta_click", "diagnosis_click"),
+    ("cta_click", "contact_intent"),
 ]
 
 

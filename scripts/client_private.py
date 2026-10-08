@@ -11,10 +11,18 @@ data/ranks が無い社を飛ばす）・競合比較の自社順位が、お客
   1. サイトごとの記録（PER_SITE。data/ranks/<id>.json など）は元の場所のまま読み書きする。
      書いた工程の終わりに --pack で置き場へ写し、読む工程の始めに --unpack で元の場所へ戻す
   2. 全社で1ファイルの記録（rank_up.json・ai_citations の月の記録と followup.json・共起語・
-     URL検査の記録と再送の間隔）は、お客様の分だけを置き場に分けて書き（save_*）、読むときに合わせる（load_*）
+     URL検査の記録と再送の間隔・量産の兆候・本数の効き・狙う語の推移・積んだ語）は、お客様の分だけを
+     置き場に分けて書き（save_*）、読むときに合わせる（load_*）
+  3. 1行ずつ積む記録（SPLIT_JSONL。介入の台帳・学び）は、お客様の記事・社の行だけを置き場へ書き
+     （append_jsonl・save_jsonl）、読むときに合わせる（read_lines）。全社に効く学びは public に残し、
+     お客様の名前・ドメインは伏せる（redact）
+  4. AIの答え（data/ai_cache）は、お客様の社の質問だけ置き場に置く（ai_cite_check.cache_file の site）
+  5. 残すときは、一番新しい写しを重ね直してから、このジョブで変えたファイルだけを戻す（並行のジョブの分を消さない）
 
   python scripts/client_private.py --pack [--kinds ai_kw]     # 書いた工程の終わり
   python scripts/client_private.py --unpack [--kinds ai_kw]   # 読む工程の始め（- なら戻さない）
+  python scripts/client_private.py --mark-before / --mark-after   # キャッシュを戻す前と後（戻した中身を覚える）
+  python scripts/client_private.py --stash / --unstash             # 残す前にこのジョブの分を退避し、最新に重ねて戻す
   python scripts/client_private.py --list                     # 置き場にあるもの
 """
 import json
@@ -159,6 +167,95 @@ def find_file(rel):
     return ROOT / rel
 
 
+def site_key(key, _value=None):
+    """{社のID: …} の記録（量産の兆候・本数の効き・狙う語の推移・積んだ語）の持ち主"""
+    return key
+
+
+# ── 1行ずつ積む記録（介入の台帳・学び・統合の記録） ─────────────────────
+# 介入の台帳の備考には直した記事の順位・表示が、学びの詳細と統合の記録には検索語・表示の数が入る。
+# お客様の記事・社の行は置き場へ書き、読むときに合わせる（2026-10-08 の点検で、どれも public に載りうる形だった）
+SPLIT_JSONL = ("automation/logs/auto_fix.jsonl", "data/lessons.jsonl", "data/merges.jsonl")
+
+
+def _split_rel(p):
+    """p が public の分け書きの記録（SPLIT_JSONL）ならその相対パス。門の一時ファイルなど、それ以外は None"""
+    try:
+        rel = Path(p).resolve().relative_to(ROOT.resolve()).as_posix()
+    except (ValueError, OSError):
+        return None
+    return rel if rel in SPLIT_JSONL else None
+
+
+def append_jsonl(p, row, sid=None):
+    """1行を積む。持ち主（sid、無ければ row の slug の記事の社）がお客様なら置き場へ、それ以外は p へ"""
+    rel = _split_rel(p)
+    if rel and sid is None:
+        sid = owner_of_slug(str(row.get("slug") or ""))
+    target = private_path(sid, rel) if rel and is_private(sid) else Path(p)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with target.open("a", encoding="utf-8", newline="") as f:
+        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def read_lines(p):
+    """p の空でない行。p が分け書きの記録なら、お客様の置き場の行を後ろに足す"""
+    rel = _split_rel(p)
+    out = []
+    for q in [Path(p)] + ([private_path(sid, rel) for sid in clients()] if rel else []):
+        try:
+            out += [x for x in q.read_text(encoding="utf-8").splitlines() if x.strip()]
+        except OSError:
+            pass
+    return out
+
+
+def save_jsonl(p, rows, owner, scrub=None):
+    """rows を書き直す。owner(row) がお客様の社の行はその社の置き場へ、それ以外は p へ（scrub があれば通す）。
+    p が分け書きの記録でなければ（門の一時ファイル）全部 p へ"""
+    rel = _split_rel(p)
+    pub, priv = [], {}
+    for r in rows:
+        sid = owner(r) if rel else None
+        if is_private(sid):
+            priv.setdefault(sid, []).append(r)
+        else:
+            pub.append(scrub(r) if scrub and rel else r)
+
+    def text(rs):
+        return "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rs)
+    Path(p).parent.mkdir(parents=True, exist_ok=True)
+    Path(p).write_text(text(pub), encoding="utf-8", newline="\n")
+    for sid in clients() if rel else []:
+        q = private_path(sid, rel)
+        if sid in priv or q.is_file():
+            q.parent.mkdir(parents=True, exist_ok=True)
+            q.write_text(text(priv.get(sid, [])), encoding="utf-8", newline="\n")
+
+
+def markers():
+    """お客様の社ごとの名前・ドメイン（public の文から伏せる語）。{社のID: [語…]}"""
+    out = {}
+    for sid in clients():
+        cfg = S.load_all().get(sid) or {}
+        names = [sid, str(cfg.get("domain") or "").lower().replace("www.", "")]
+        try:
+            co = json.loads((ROOT / "data" / "clients" / sid / "company.json").read_text(encoding="utf-8"))
+            names += [co.get("name"), co.get("name_en")]
+        except (OSError, ValueError):
+            pass
+        out[sid] = [n for n in dict.fromkeys(names) if n and len(str(n)) >= 3]
+    return out
+
+
+def redact(text):
+    """お客様の名前・ドメインを「お客様のサイト」に置き換える（長い語から・大文字小文字を問わない）"""
+    words = sorted({w for ws in markers().values() for w in ws}, key=len, reverse=True)
+    for w in words:
+        text = re.sub(re.escape(w), "お客様のサイト", str(text), flags=re.I)
+    return text
+
+
 def citation_months():
     """data/ai_citations の月の記録（YYYY-MM.json）の名前を古い順に。
     *.json で拾うと followup.json が最後に来て「最新の月」と取り違える（AIOの推定が空になっていた）"""
@@ -207,8 +304,102 @@ def save_citations(name, d):
             _write(p, json.dumps(mine, ensure_ascii=False, indent=2))
 
 
+# ── 持ち越しの保存で、ほかのジョブが同じ間に残した分を消さない ─────────────
+# キャッシュは「一番新しい写し」を丸ごと戻す。2つのジョブが同じ写しから始めて別々に残すと、後から残した方が
+# 先の方の更新を消していた（月曜と1日・15日に週次と月次が重なると、お客様の更新が1回分失われる。2026-10-08 の点検）。
+# 戻すたびに、戻したことで変わったファイルの中身を覚え（mark）、残す前にこのジョブで変えたファイルだけを退避し（stash）、
+# 一番新しい写しを重ね直してから戻す（unstash）。1行ずつ積む記録（.jsonl）は両方の行を残す
+def _work():
+    import os
+    import tempfile
+    return Path(os.environ.get("RUNNER_TEMP") or tempfile.gettempdir()) / "client-private"
+
+
+def _hashes():
+    import hashlib
+    out = {}
+    for d in sorted((ROOT / "data" / "clients").glob("*/private")):
+        for p in d.rglob("*"):
+            if p.is_file():
+                out[p.relative_to(ROOT).as_posix()] = hashlib.sha1(p.read_bytes()).hexdigest()
+    return out
+
+
+def mark_before():
+    _write(_work() / "pre.json", json.dumps(_hashes()))
+    return len(_read(_work() / "pre.json", {}))
+
+
+def mark_after():
+    """戻したことで現れた・変わったファイルを「戻した時点の中身」として覚える。
+    このジョブが先に書いたファイル（戻しても変わらなかったもの）は覚え直さない（このジョブの分として残す）"""
+    pre = _read(_work() / "pre.json", {})
+    base = _read(_work() / "base.json", {})
+    for f, h in _hashes().items():
+        if pre.get(f) != h:
+            base[f] = h
+    _write(_work() / "base.json", json.dumps(base))
+    return len(base)
+
+
+def stash():
+    """このジョブで書いた・変えたファイル（覚えた中身と違うもの）を退避する。件数を返す"""
+    base = _read(_work() / "base.json", {})
+    mine = _work() / "mine"
+    shutil.rmtree(mine, ignore_errors=True)
+    n = 0
+    for f, h in _hashes().items():
+        if base.get(f) != h:
+            (mine / f).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / f, mine / f)
+            n += 1
+    return n
+
+
+def merge_jsonl(latest, mine):
+    """1行ずつ積む記録を合わせる。id のある行（学び）は同じ id ならこのジョブの行、ほかは同じ行を2回入れない"""
+    def key(ln):
+        try:
+            d = json.loads(ln)
+        except ValueError:
+            return ("line", ln)
+        return ("id", d["id"]) if isinstance(d, dict) and d.get("id") else ("line", ln)
+    rows, order = {}, []
+    for ln in latest.splitlines() + mine.splitlines():
+        if not ln.strip():
+            continue
+        k = key(ln)
+        if k not in rows:
+            order.append(k)
+        rows[k] = ln
+    return "".join(rows[k] + "\n" for k in order)
+
+
+def unstash():
+    """一番新しい写しを戻した後に、このジョブの分を重ねる（.jsonl は merge_jsonl、ほかはこのジョブの中身）"""
+    mine = _work() / "mine"
+    n = 0
+    for p in sorted(mine.rglob("*")) if mine.is_dir() else []:
+        if not p.is_file():
+            continue
+        dst = ROOT / p.relative_to(mine)
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        if p.suffix == ".jsonl" and dst.is_file():
+            dst.write_text(merge_jsonl(dst.read_text(encoding="utf-8"), p.read_text(encoding="utf-8")),
+                           encoding="utf-8", newline="\n")
+        else:
+            shutil.copy2(p, dst)
+        n += 1
+    return n
+
+
 def main():
     a = sys.argv[1:]
+    for flag, fn, label in (("--mark-before", mark_before, "MARKED"), ("--mark-after", mark_after, "BASE"),
+                            ("--stash", stash, "STASHED"), ("--unstash", unstash, "UNSTASHED")):
+        if flag in a:
+            print(f"CLIENT_PRIVATE_{label}={fn()}")
+            return 0
     kinds = None
     if "--kinds" in a:
         kinds = [k for k in a[a.index("--kinds") + 1].split(",") if k]

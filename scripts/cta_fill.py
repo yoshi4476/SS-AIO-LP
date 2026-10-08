@@ -14,6 +14,7 @@
 
     python scripts/cta_fill.py            # どこに入るか見る
     python scripts/cta_fill.py --write
+    python scripts/cta_fill.py --relink [--write]   # 相談ボタンの行き先をサイト設定の cta.url にそろえる
 """
 import argparse
 import re
@@ -88,7 +89,10 @@ def check(before, after, added=1):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--relink", action="store_true", help="相談ボタンの行き先をサイト設定の cta.url にそろえる")
     a = ap.parse_args()
+    if a.relink:
+        return relink(a.write)
 
     import sites as S
     done = skip = 0
@@ -138,14 +142,72 @@ def main():
 
 
 def _note(slug, site_id):
-    import json
     import time
-    log = ROOT / "automation" / "logs" / "auto_fix.jsonl"
-    log.parent.mkdir(parents=True, exist_ok=True)
-    with log.open("a", encoding="utf-8", newline="") as f:
-        f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "cta_fill",
-                            "slug": slug, "kind": "cta", "ok": True,
-                            "note": "CTAを2箇所目まで足した"}, ensure_ascii=False) + NL)
+    import client_private as CP
+    # お客様の記事の行は public の台帳に書かない（client_private の置き場へ）
+    CP.append_jsonl(ROOT / "automation" / "logs" / "auto_fix.jsonl",
+                    {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "cta_fill", "slug": slug, "kind": "cta", "ok": True,
+                     "note": "CTAを2箇所目まで足した"}, sid=site_id)
+
+
+# ── 相談ボタンの行き先をサイト設定にそろえる ────────────────────────
+# ボタンは原稿に書き込むので、cta.url を変えても既存の記事は前の行き先のまま残る。
+# コーポレートは /contact/（/contact へ 308 で転送）のまま262か所が残り、転送を挟んだうえ、
+# 先方の計測（pathname が /contact のときだけ入口として数える）にも数えられていなかった（2026-10-08）
+_TAG = re.compile(r"<a\b[^>]*>")
+_HREF = re.compile(r'\bhref="([^"]*)"')
+
+
+def _old_form(href, cur):
+    """href が今の行き先 cur と同じ場所の古い形か（同じホストで、パスの末尾の / だけが違い、クエリも # も無い）。
+    クエリや # の付いたリンク・別の場所へのボタンは、意図して付けたものなので触らない"""
+    from urllib.parse import urlsplit
+    a, b = urlsplit(href), urlsplit(cur)
+    return (a.scheme in ("http", "https") and a.netloc == b.netloc and not a.query and not a.fragment
+            and a.path != b.path and a.path.rstrip("/") == b.path.rstrip("/"))
+
+
+def _relink_text(text, cur):
+    n = 0
+
+    def fix(m):
+        nonlocal n
+        tag = m.group(0)
+        h = _HREF.search(tag)
+        if not re.search(r'\bclass="[^"]*\bcta-button\b', tag) or not h or not _old_form(h.group(1), cur):
+            return tag
+        n += 1
+        return tag[:h.start(1)] + cur + tag[h.end(1):]
+    return _TAG.sub(fix, text), n
+
+
+def stale_links(write=False):
+    """相談ボタン（class="cta-button"）の行き先が、サイト設定の cta.url と同じ場所の古い形のままの記事。
+    [(slug, 件数)]。write なら今の行き先に差し替える（アンカーと文は変えない）"""
+    import sites as S
+    conf = S.load_all()
+    out = []
+    for p in sorted((ROOT / "articles").glob("*.md")):
+        if p.name.startswith("_"):
+            continue
+        t = p.read_bytes().decode("utf-8")
+        cat = re.search(r"^category:\s*(\S+)", t, re.M)
+        cur = (((conf.get(S.find_category_owner(cat.group(1)) if cat else "") or {}).get("cta") or {}).get("url") or "")
+        if not cur.startswith("http"):
+            continue
+        new, n = _relink_text(t, cur)
+        if n:
+            out.append((p.stem, n))
+            if write:
+                p.write_bytes(new.encode("utf-8"))
+    return out
+
+
+def relink(write=False):
+    got = stale_links(write)
+    print(f"  相談ボタンの行き先を{'差し替えた' if write else '差し替える候補'}: {len(got)}本（{sum(n for _, n in got)}か所）")
+    print("CTA_RELINK=" + str(sum(n for _, n in got)))
+    return 0
 
 
 if __name__ == "__main__":

@@ -247,28 +247,28 @@ def plan(site=None, slug=None, lo=MIN, hi=MAX):
 
 def write(rows):
     import auto_review as AR
+    import client_private as CP
     done = 0
-    LOG.parent.mkdir(parents=True, exist_ok=True)
-    with io.open(LOG, "a", encoding="utf-8", newline="\n") as lg:
-        for r in rows:
-            if r["ng"]:
-                continue
-            after = set_description(r["text"], r["new"])
-            a = split(after)
-            # 本文には1文字も触れていないことを、見直しの検算（タグ・導線・見出し・本文の減り）で確かめる
-            ng = AR.guard(split(r["text"])[1], r["body"], a[3], 0)
-            if not ng and str((yaml.safe_load(a[1]) or {}).get("description")) != r["new"]:
-                ng = "書き換えた説明文を読み戻せない"
-            if ng:
-                r["ng"] = ng
-                continue
-            io.open(r["path"], "w", encoding="utf-8", newline="").write(after)
-            lg.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "desc_fill", "slug": r["slug"],
-                                 "kind": "desc_fill", "ok": True,
-                                 "note": f"説明文 {len(r['old'])}→{len(r['new'])}字（"
-                                         + "・".join(s for s, _ in r["added"]) + "の文を足す）",
-                                 "before_description": r["old"]}, ensure_ascii=False) + "\n")
-            done += 1
+    for r in rows:
+        if r["ng"]:
+            continue
+        after = set_description(r["text"], r["new"])
+        a = split(after)
+        # 本文には1文字も触れていないことを、見直しの検算（タグ・導線・見出し・本文の減り）で確かめる
+        ng = AR.guard(split(r["text"])[1], r["body"], a[3], 0)
+        if not ng and str((yaml.safe_load(a[1]) or {}).get("description")) != r["new"]:
+            ng = "書き換えた説明文を読み戻せない"
+        if ng:
+            r["ng"] = ng
+            continue
+        io.open(r["path"], "w", encoding="utf-8", newline="").write(after)
+        # お客様の記事の行（前の説明文）は置き場へ（client_private）
+        CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "desc_fill", "slug": r["slug"],
+                              "kind": "desc_fill", "ok": True,
+                              "note": f"説明文 {len(r['old'])}→{len(r['new'])}字（"
+                                      + "・".join(s for s, _ in r["added"]) + "の文を足す）",
+                              "before_description": r["old"]})
+        done += 1
     return done
 
 

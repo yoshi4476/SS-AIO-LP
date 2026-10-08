@@ -347,35 +347,51 @@ def answer_text(fn, q):
     return TEXT.get((getattr(fn, "__name__", fn), q), "")
 
 
-def cache_file(name, q):
+def cache_file(name, q, site=None):
+    """答えの置き場。お客様の社（site）の質問は public に置かない（client_private の置き場の data/ai_cache/）。
+    お客様向けの質問文と答えが public に残っていた（2026-10-08 の点検）"""
     import hashlib
-    return CACHE_DIR / name / (hashlib.md5(("%s\n%s" % (name, q)).encode("utf-8")).hexdigest() + ".json")
+    p = CACHE_DIR / name / (hashlib.md5(("%s\n%s" % (name, q)).encode("utf-8")).hexdigest() + ".json")
+    if site:
+        import client_private as CP
+        if CP.is_private(site):
+            return CP.private_path(site, f"data/ai_cache/{name}/{p.name}")
+    return p
 
 
-def cached(name, q, days=CACHE_DAYS):
+def _cache_files(name, q, site=None):
+    """読む順。お客様の社は置き場を先に見て、無ければ public（自社の工程が同じ語を聞いた答え）も使う"""
+    own = cache_file(name, q, site)
+    pub = cache_file(name, q)
+    return [own] if own == pub else [own, pub]
+
+
+def cached(name, q, days=CACHE_DAYS, site=None):
     """キャッシュにある答え（出典URL）。無い・古いなら None。
     課金の前に「この問いは新しく聞くことになるか」を数えるため（compete の月の上限）。days=None は古さを問わない"""
     import time as _t
-    p = cache_file(name, q)
-    try:
-        d = json.loads(p.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return None
-    if days is not None and _t.time() - d.get("at", 0) >= days * 86400:
-        return None
-    return d.get("urls") or []
+    for p in _cache_files(name, q, site):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if days is not None and _t.time() - d.get("at", 0) >= days * 86400:
+            continue
+        return d.get("urls") or []
+    return None
 
 
-def _cached(name, fn):
+def _cached(name, fn, site=None):
     """同じエンジンに同じ質問をしたら、30日は前の答え（出典URL）を使う。
     語の調査（ai_kw_research）・引用の実測（週次/月次）・共起語（cooccur）が同じ語を
     別々に聞いていて、同じ課金を何度もしていた。失敗（例外）はキャッシュしない。
-    答えの本文も残す（読み分けの根拠を後から確かめられるように）"""
+    答えの本文も残す（読み分けの根拠を後から確かめられるように）。site がお客様の社なら答えは置き場へ"""
     import time as _t
 
     def wrap(q):
-        p = cache_file(name, q)
-        if p.is_file():
+        for p in _cache_files(name, q, site):
+            if not p.is_file():
+                continue
             try:
                 d = json.loads(p.read_text(encoding="utf-8"))
                 if _t.time() - d.get("at", 0) < CACHE_DAYS * 86400 and (d.get("text") or not NEED_TEXT):
@@ -386,6 +402,7 @@ def _cached(name, fn):
                 pass
         urls = fn(q)
         if urls is not None:
+            p = cache_file(name, q, site)
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(json.dumps({"q": q, "at": _t.time(), "urls": urls, "text": answer_text(fn, q)},
                                     ensure_ascii=False), encoding="utf-8")
@@ -394,8 +411,9 @@ def _cached(name, fn):
     return wrap
 
 
-def engines_available():
-    return {k: _cached(k, v) for k, v in ENGINES.items()
+def engines_available(site=None):
+    """聞けるAI。site（どの社の質問か）を渡すと、お客様の社の答えは public に置かない"""
+    return {k: _cached(k, v, site=site) for k, v in ENGINES.items()
             if (_env(ENGINE_KEYS[k]) or (k == "Claude" and _claude_cli_ready()))
             and (k != "Gemini" or gemini_budget_ok())}     # 検索つきは有料。月の検索回数の残りがあるときだけ
 
@@ -477,10 +495,11 @@ def main():
             print(f"   {sid}: 順位の記録が無く語を選べません（rank_track を先に）")
             continue
         items, cited = [], 0
+        site_engines = engines_available(site=sid)      # お客様の社の答えは置き場へ
         for q in qs:
             row = {"kw": q, "engines": {}}
             hit = False
-            for name, fn in engines.items():
+            for name, fn in site_engines.items():
                 try:
                     urls = fn(q) or []
                 except Exception as e:

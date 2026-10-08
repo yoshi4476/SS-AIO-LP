@@ -102,13 +102,10 @@ LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
 
 
 def record(by, slug, what):
-    """当てた修正を1行ずつ残す。後から何をしたか追えないと見直せない"""
+    """当てた修正を1行ずつ残す。後から何をしたか追えないと見直せない（お客様の記事の行は置き場へ・client_private）"""
     import datetime
-    LOG.parent.mkdir(parents=True, exist_ok=True)
-    with open(LOG, "a", encoding="utf-8", newline="") as f:
-        f.write(json.dumps({"when": datetime.datetime.now().isoformat(),
-                            "by": by, "slug": slug, "what": what},
-                           ensure_ascii=False) + "\n")
+    import client_private as CP
+    CP.append_jsonl(LOG, {"when": datetime.datetime.now().isoformat(), "by": by, "slug": slug, "what": what})
 
 
 def human_items(days=28, until=None):

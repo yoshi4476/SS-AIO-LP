@@ -159,11 +159,10 @@ def union(per_site, keep, i):
 
 def focus_edits(start, log=None):
     """集中モードが直した記事（検算を通った分だけ）と、期間中に auto_rewrite が直した全記事"""
+    import client_private as CP
     f = Path(log) if log else LOG
     mine, any_ = set(), set()
-    if not f.is_file():
-        return mine, any_
-    for line in f.read_text(encoding="utf-8").splitlines():
+    for line in CP.read_lines(f):            # お客様の記事の行（置き場）も合わせる
         try:
             d = json.loads(line)
         except ValueError:

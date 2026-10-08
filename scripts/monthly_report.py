@@ -354,6 +354,57 @@ def section_heat(sections):
             + "".join(rows) + "</table>")
 
 
+# ボタン押下・送信完了の数え方を変えた月。この月のレポートに、以前のレポートとの違いを書く
+METHOD_CHANGED = "2026-10"
+
+
+def behavior_counts(by_day, ids_by_day=None, leads=None):
+    """行動の内訳。数え方はファネルと同じ（funnel.cta_counts・lead_reconcile）。
+
+    ボタン押下は cta_click だけ。以前は cta で始まる出来事を全部足しており、同じ押下で同時に送る
+    cta_〈ボタンID〉も数えて2倍に出ていた（AI集客ラボ・補助金）。問い合わせ方向は cta_kind・cta_id で決める
+    （CONFLUX は cta_click の1種類で、行き先は cta_id にだけ入る）。送信完了は問い合わせの数え方
+    （form_submit は GA4 の拡張計測の分が重なり、問い合わせ1回が2件になっていた）"""
+    import funnel as FN
+
+    def tot(name):
+        return sum(d.get(name, 0) for d in by_day.values())
+    cc = FN.cta_counts(by_day, ids_by_day)
+    return {"sessions": tot("session_start"), "cta": cc["total"], "cta_to_form": cc["to_contact"],
+            "cta_unknown": cc["unknown"], "legacy_days": len(cc["legacy_days"]), "form_start": tot("form_start"),
+            "form_submit": leads if leads is not None else max(tot("lead_capture"), tot("generate_lead"))}
+
+
+def method_note(ym, doubled=True):
+    """数え方を変えた月（METHOD_CHANGED）のレポートに添える、以前のレポートとの違い"""
+    if ym != METHOD_CHANGED:
+        return ""
+    y, m = ym.split("-")
+    out = (f"{int(y)}年{int(m)}月のレポートから、送信完了を問い合わせの数え方（lead_capture・generate_lead）で"
+           "数えています。以前の form_submit は、GA4 の拡張計測の分と重なって2件に出ることがありました。")
+    if doubled:
+        out += ("ボタン押下も cta_click だけにしました。以前のレポートは、同じ押下で同時に送る cta_〈ボタンID〉も"
+                "足しており、2倍に出ていました。")
+    return out
+
+
+def behavior_notes(site, ym, end, b, doubled):
+    """行動の内訳の下に添える注記（前月と比べられない理由・数えられなかった分）"""
+    import funnel as FN
+    y, m = map(int, ym.split("-"))
+    start = date(y, m, 1)
+    prev_start = date(y - (m == 1), (m - 2) % 12 + 1, 1)
+    notes = [method_note(ym, doubled)] + FN.change_notes(site, prev_start, end)
+    notes.append(FN.form_note(site, start, end))
+    if b.get("legacy_days"):
+        notes.append(f"cta_click の無い{b['legacy_days']}日のボタン押下は、診断へのリンク（diagnosis_click）と"
+                     "相談への遷移（contact_intent）で数えています（問い合わせ方向は contact_intent）。")
+    if b.get("cta_unknown"):
+        notes.append(f"行き先を決められない押下が{b['cta_unknown']}件あります（GA4 に cta_id が無い日）。"
+                     "問い合わせ方向には入れていません。")
+    return [n for n in notes if n]
+
+
 def fix_list(d):
     """実測から改修点を出す。担当者の勘ではなく、数字が閾値を割った箇所だけ挙げる"""
     out = []
@@ -791,11 +842,6 @@ def fetch_real():
     # どこで読者が離脱したかは、合計の滞在時間では分からない。
     # section_view_<名前> の到達数を先頭比で見ると、落ちる位置が特定できる。
     try:
-        rep = ga.run_report(RunReportRequest(
-            property=prop, date_ranges=cur_range, dimensions=[Dimension(name="eventName")],
-            metrics=[Metric(name="eventCount")], limit=120))
-        ev = {r.dimension_values[0].value: int(r.metric_values[0].value) for r in rep.rows}
-
         # 区画はページごとに数える。全ページを合算すると、訪問の多いページの
         # 区画が分母になり、他ページの区画が一律「離脱大」に見える。
         # 実際それで、LPの区画が到達41%あるのに15%と報告されていた。
@@ -830,20 +876,25 @@ def fetch_real():
                 k = "".join(ch for ch in nm if ch.isdigit()) or "?"
                 depths[k] = depths.get(k, 0) + int(r.metric_values[0].value)
         data["depths"] = depths
-        # フォームへ向かうCTAだけを別に数える。診断・記事一覧・
-        # ヘッダーのリンクを同じ「CTA」に混ぜると、詰まりを誤検知する
-        FORM_CTA = ("form", "contact", "soudan", "consult", "lp", "mv")
-        data["behavior"] = {
-            "sessions": ev.get("session_start", 0),
-            "cta": sum(v for k, v in ev.items() if k.startswith("cta")),
-            "cta_to_form": sum(v for k, v in ev.items()
-                               if k.startswith("cta")
-                               and any(w in k for w in FORM_CTA)),
-            "form_start": ev.get("form_start", 0),
-            "form_submit": ev.get("form_submit", 0),
-        }
     except Exception:
         data["sections"] = []
+    # 行動の内訳はファネル（funnel.cta_counts）・問い合わせ（lead_reconcile）と同じ数え方
+    try:
+        import funnel as FN
+        import lead_reconcile as LR
+        by_day = FN.day_events(pid, f"{cur_m}-01", cur_end)
+        try:
+            ids = FN.cta_ids(pid, f"{cur_m}-01", cur_end)
+        except Exception:
+            ids = None
+        try:
+            leads = sum(LR.ga4_by_day(pid, date.fromisoformat(f"{cur_m}-01"), date.fromisoformat(cur_end)).values())
+        except Exception:
+            leads = None
+        data["behavior"] = behavior_counts(by_day, ids, leads)
+        doubled = any(k.startswith("cta_") and not k.startswith("cta_click") for d in by_day.values() for k in d)
+        data["behavior"]["notes"] = behavior_notes(SITE_ID, cur_m, cur_end, data["behavior"], doubled)
+    except Exception:
         data["behavior"] = {}
 
     # --- GSC: 順位帯の分布（リライト対象がどれだけ眠っているかの可視化）---
@@ -2891,11 +2942,12 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <h3 style="margin-top:14px">行動の内訳</h3>
 <table><tr><th style="width:28%">指標</th><th style="width:16%">件数</th><th>読み方</th></tr>
 <tr><td>セッション</td><td class="num">{(d.get("behavior") or {}).get("sessions", 0)}</td><td>訪問の総数</td></tr>
-<tr><td>ボタン押下（全体）</td><td class="num">{(d.get("behavior") or {}).get("cta", 0)}</td><td>サイト内のボタンが押された回数。診断・記事一覧なども含みます</td></tr>
-<tr><td>うち問い合わせ方向</td><td class="num">{(d.get("behavior") or {}).get("cta_to_form", 0)}</td><td>問い合わせフォームへ向かうボタン。ここが少ないと入口が足りていません</td></tr>
+<tr><td>ボタン押下（全体）</td><td class="num">{(d.get("behavior") or {}).get("cta", 0)}</td><td>入口（相談・資料・ツール・診断）が押された回数（cta_click）。診断・記事一覧なども含みます</td></tr>
+<tr><td>うち問い合わせ方向</td><td class="num">{(d.get("behavior") or {}).get("cta_to_form", 0)}</td><td>問い合わせフォームへ向かうボタン（入口の種類・ボタンIDの行き先で判定）。ここが少ないと入口が足りていません</td></tr>
 <tr><td>入力開始</td><td class="num">{(d.get("behavior") or {}).get("form_start", 0)}</td><td>入力を始めた数。CTA押下より極端に少ない場合、遷移先で落ちている</td></tr>
-<tr><td>送信完了</td><td class="num">{(d.get("behavior") or {}).get("form_submit", 0)}</td><td>完了した数。開始との差が項目数の問題</td></tr>
+<tr><td>送信完了</td><td class="num">{(d.get("behavior") or {}).get("form_submit", 0)}</td><td>問い合わせ・資料・購読の送信（lead_capture・generate_lead。足さずに数える）。開始との差が項目数の問題</td></tr>
 </table>
+{"".join(f'<p class="note">※ {html.escape(n)}</p>' for n in (d.get("behavior") or {}).get("notes", []))}
 </div>
 {form_pages}
 

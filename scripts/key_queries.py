@@ -45,11 +45,15 @@ def sites():
 
 
 def load():
-    return json.loads(REG.read_text(encoding="utf-8")) if REG.is_file() else {}
+    import client_private as CP
+    return CP.load_dict("data/key_queries.json", pub=REG)
 
 
 def save(d):
-    REG.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
+    # お客様の社の狙う語と順位は public に置かない（client_private の置き場へ。読むときは load が合わせる）
+    import client_private as CP
+    CP.save_dict("data/key_queries.json", d, CP.site_key,
+                 dump=lambda o: json.dumps(o, ensure_ascii=False, indent=2), pub=REG)
 
 
 def norm(s):

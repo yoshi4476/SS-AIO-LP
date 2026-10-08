@@ -21,15 +21,19 @@
   python scripts/lessons.py --import-md           # kpi_feedback.md の既存分を取り込む（移行用・1回）
 
 台帳: data/lessons.jsonl（1行1件）。サイトを指定しない学びは全サイト（クライアント含む）に効く。
+お客様の社の学び（sites にお客様の社）は data/clients/<id>/private/data/lessons.jsonl に置き（public に
+置かない。CI はキャッシュで持ち越す）、全社の学びに入ったお客様の名前・ドメインは伏せる（client_private）。
 """
 import argparse
 import json
+import os
 import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
 SRC = ROOT / "data" / "lessons.jsonl"
 FEEDBACK = ROOT / "kpi_feedback.md"
 BRIEF_MAX = 12          # 記事を書く前に読ませる上限（増やすほど1本あたりの手間が増える）
@@ -39,23 +43,38 @@ PHASES = ("kw", "research", "design", "writing", "quality", "publish", "analysis
 
 
 def load():
-    if not SRC.is_file():
-        return []
+    """public の台帳に、お客様の社の置き場の行を合わせたもの（client_private.read_lines）"""
+    import client_private as CP
     out = []
-    for line in SRC.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line:
-            try:
-                out.append(json.loads(line))
-            except ValueError:
-                pass
+    for line in CP.read_lines(SRC):
+        try:
+            out.append(json.loads(line))
+        except ValueError:
+            pass
     return out
 
 
+def _owner(row):
+    """お客様の社の学び（sites にお客様の社がある）なら、その社。検索語・表示の数が詳細に入るので public に置かない"""
+    import client_private as CP
+    return next((s for s in row.get("sites") or [] if CP.is_private(s)), None)
+
+
+def _scrub(row):
+    """全社に効く学びは public に残し、お客様の名前・ドメイン・記事の名前は伏せる"""
+    import client_private as CP
+    r = dict(row)
+    for k in ("rule", "detail"):
+        if r.get(k):
+            r[k] = CP.redact(r[k])
+    if r.get("source") and CP.is_private(CP.owner_of_slug(str(r["source"]))):
+        r["source"] = "お客様の記事"
+    return r
+
+
 def save(rows):
-    SRC.parent.mkdir(parents=True, exist_ok=True)
-    SRC.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows),
-                   encoding="utf-8", newline="\n")
+    import client_private as CP
+    CP.save_jsonl(SRC, rows, _owner, scrub=_scrub)
 
 
 def _id(rows):
@@ -244,6 +263,10 @@ def main():
         rec, made = add(a.kind, a.phase, a.rule, a.detail,
                         [s for s in a.sites.split(",") if s], a.gate, a.source)
         print(("追加: " if made else "既にあります: ") + f'{rec["id"]} [{rec["phase"]}] {rec["rule"][:60]}')
+        if made and _owner(rec) and not os.environ.get("GITHUB_ACTIONS"):
+            # 置き場は CI のキャッシュでしか CI に渡らない。手元で積んだお客様の学びは CI の記事に効かない
+            print(f"   注意: お客様の社の学びは public に置かず、この端末の置き場に入りました（CI には届きません）。"
+                  f"記事に必ず効かせる決まりは data/clients/{_owner(rec)}/brief.json に書いてください")
         return 0
     if a.review:
         r = review()

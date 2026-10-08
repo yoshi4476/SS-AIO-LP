@@ -159,11 +159,10 @@ def main():
                 for x in recs:
                     if x["ok"]:
                         x.update(ok=False, note="ビルドが通らず戻した")
-        # 台帳はビルドの結果が出てから書く
-        LOG.parent.mkdir(parents=True, exist_ok=True)
-        with LOG.open("a", encoding="utf-8") as f:
-            for x in recs:
-                f.write(json.dumps(x, ensure_ascii=False) + "\n")
+        # 台帳はビルドの結果が出てから書く（お客様の記事の行は置き場へ・client_private）
+        import client_private as CP
+        for x in recs:
+            CP.append_jsonl(LOG, x)
     print(f"FACT_CITE_OK=yes\nCITED={n}")
     return 0
 

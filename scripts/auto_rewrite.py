@@ -39,6 +39,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 LOG = ROOT / "automation" / "logs" / "auto_fix.jsonl"
+# 台帳のお客様の記事の行（題・説明文・順位）は置き場に書き、読むときに合わせる
+import client_private as CP  # noqa: E402
 TITLE_MIN, TITLE_MAX = 15, 45
 
 
@@ -251,14 +253,13 @@ def _done_kind(kind, log=None):
     """その種類で一度でも直した（ok）記事。early は1記事1回まで（公開直後の1回で効かせる）"""
     f = Path(log) if log else LOG
     out = set()
-    if f.is_file():
-        for line in f.read_text(encoding="utf-8").splitlines():
-            try:
-                d = json.loads(line)
-            except ValueError:
-                continue
-            if d.get("kind") == kind and d.get("ok"):
-                out.add(d.get("slug"))
+    for line in CP.read_lines(f):            # お客様の記事の行（置き場）も合わせて読む
+        try:
+            d = json.loads(line)
+        except ValueError:
+            continue
+        if d.get("kind") == kind and d.get("ok"):
+            out.add(d.get("slug"))
     return out
 
 
@@ -354,14 +355,13 @@ def compete_items(limit=2, log=None):
     since = str(date.today() - timedelta(days=COMPETE_LOCK_DAYS))
     recent = set()
     f = Path(log) if log else LOG
-    if f.is_file():
-        for line in f.read_text(encoding="utf-8").splitlines():
-            try:
-                d = json.loads(line)
-            except ValueError:
-                continue
-            if d.get("kind") == "compete" and d.get("ok") and str(d.get("at", ""))[:10] >= since:
-                recent.add(d.get("slug"))
+    for line in CP.read_lines(f):
+        try:
+            d = json.loads(line)
+        except ValueError:
+            continue
+        if d.get("kind") == "compete" and d.get("ok") and str(d.get("at", ""))[:10] >= since:
+            recent.add(d.get("slug"))
     rows, seen = [], set()
     for g in sorted((ROOT / "data" / "compete").glob("*/gaps.json")):
         try:
@@ -980,9 +980,7 @@ def title_changes(log=None):
     """台帳から「タイトルを実際に変えた」記録を (slug, 日付) で返す"""
     out = []
     f = Path(log) if log else LOG
-    if not f.is_file():
-        return out
-    for line in f.read_text(encoding="utf-8").splitlines():
+    for line in CP.read_lines(f):            # お客様の記事の行（置き場）も合わせる。見ないと判定期間中に題を変える
         try:
             d = json.loads(line)
         except ValueError:
@@ -1013,14 +1011,12 @@ TAG = ""      # --tag。集中モード（focus-mode.yml）の直しを対照群
 
 
 def note(slug, kind, ok, why):
-    LOG.parent.mkdir(parents=True, exist_ok=True)
     rec = {"at": time.strftime("%Y-%m-%d %H:%M"),
            "by": "auto_rewrite", "slug": slug, "kind": kind,
            "ok": ok, "note": why, **LAST.pop(slug, {})}
     if TAG:
         rec["tag"] = TAG
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    CP.append_jsonl(LOG, rec)               # お客様の記事の行（題・説明文・順位）は置き場へ
 
 
 def recently_touched(days, log=None, today=None):
@@ -1033,11 +1029,9 @@ def recently_touched(days, log=None, today=None):
     if days <= 0:
         return set()
     f = Path(log) if log else LOG
-    if not f.is_file():
-        return set()
     since = str((today or date.today()) - timedelta(days=days))
     out = set()
-    for line in f.read_text(encoding="utf-8").splitlines():
+    for line in CP.read_lines(f):
         try:
             d = json.loads(line)
         except ValueError:

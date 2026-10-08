@@ -198,11 +198,8 @@ def judged(r):
 
 def flagged(sid=""):
     """sid を渡せばそのサイト、空なら「どれか1つでも」"""
-    import json
-    try:
-        allst = json.loads(STATE.read_text(encoding="utf-8"))
-    except Exception:
-        return False
+    import client_private as CP
+    allst = CP.load_dict("data/yield_state.json", pub=STATE)
     since = (date.today() - timedelta(days=STATE_DAYS)).isoformat()
     sts = [allst.get(sid) or {}] if sid else [v for v in allst.values() if isinstance(v, dict)]
     return any((st.get("flagged") or st.get("throttle")) and st.get("date", "") >= since for st in sts)
@@ -259,7 +256,9 @@ def main():
     if not ran:
         print("  どのサイトも GSC を読めませんでした")
         return 1
-    STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    # お客様の社の判定の理由（表示の数）は public に置かない（client_private の置き場へ）
+    import client_private as CP
+    CP.save_dict("data/yield_state.json", state, CP.site_key, pub=STATE)
     for sid, st in state.items():
         if st["flagged"]:
             print(f"  → {sid}: 来週は統合を週4組に増やします（新しい記事は1日2本のまま）")

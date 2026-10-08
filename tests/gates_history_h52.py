@@ -83,12 +83,14 @@ def test_one_inquiry_is_counted_once():
 
     # 送信の数が取れないときの代わり: lead_capture と generate_lead は足さずに多い方（form_submit は見ない）
     ev = {"page_view": 100, "cta_click": 10, "form_start": 5, "form_submit": 4, "lead_capture": 2, "generate_lead": 2}
-    with _patched((FN, "events", lambda prop, days: ev), (LR, "ga4_by_day", _boom),
+    # 日ごとの出来事（funnel.day_events。2026-10-08 から入口の押下を日ごとに数えるため、日の次元で取る）
+    days = lambda prop, s, e: {"20261007": dict(ev)}    # noqa: E731
+    with _patched((FN, "day_events", days), (LR, "ga4_by_day", _boom),
                   (FN, "lead_routes", lambda prop, days: {}), (FN, "print_inline", lambda conf: None)):
         _, out = _out(FN.main, argv=["funnel.py"])
     sent = re.findall(r"送信した\s+(\d+)", out)
     check("ファネル: 送信の数が取れない日の代わりも2倍にしない", bool(sent) and set(sent) == {"2"}, True)
-    with _patched((FN, "events", lambda prop, days: ev), (LR, "ga4_by_day", lambda *a: {"2026-10-07": 1}),
+    with _patched((FN, "day_events", days), (LR, "ga4_by_day", lambda *a: {"2026-10-07": 1}),
                   (FN, "lead_routes", lambda prop, days: {}), (FN, "print_inline", lambda conf: None)):
         _, out = _out(FN.main, argv=["funnel.py"])
     sent = re.findall(r"送信した\s+(\d+)", out)

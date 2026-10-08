@@ -76,14 +76,10 @@ def cohort(daily, slug, at, pubs, acts, days):
 
 
 def interventions():
-    """いつ・どの記事に・どの手を打ったか"""
+    """いつ・どの記事に・どの手を打ったか（お客様の記事の行は置き場から合わせる・client_private）"""
+    import client_private as CP
     out = []
-    if not LOG.is_file():
-        return out
-    for line in LOG.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line:
-            continue
+    for line in CP.read_lines(LOG):
         try:
             d = json.loads(line)
         except ValueError:
@@ -170,11 +166,10 @@ LAG = 3               # GSC は直近3日が欠けるので、観測の終わり
 
 def rewrites(log=None):
     """実際に本文を書き換えた記録だけ（変更なし・検算で戻した分は打っていない）"""
+    import client_private as CP
     out = []
     f = Path(log) if log else LOG
-    if not f.is_file():
-        return out
-    for line in f.read_text(encoding="utf-8").splitlines():
+    for line in CP.read_lines(f):
         try:
             d = json.loads(line)
         except ValueError:

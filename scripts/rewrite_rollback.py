@@ -59,10 +59,9 @@ def min_controls():
 
 
 def entries():
+    import client_private as CP
     out = []
-    if not LOG.is_file():
-        return out
-    for ln in LOG.read_text(encoding="utf-8").splitlines():
+    for ln in CP.read_lines(LOG):           # お客様の記事の行（置き場）も合わせる。見ないとお客様の直しを戻せない
         try:
             d = json.loads(ln)
         except ValueError:
@@ -161,10 +160,9 @@ def undo_early(before, now, d):
 
 def later_rewrites(slug, d):
     """この直しより後に、同じ記事へ入った別の書き直し・統合・手での題の変更"""
+    import client_private as CP
     out = []
-    if not LOG.is_file():
-        return out
-    for ln in LOG.read_text(encoding="utf-8").splitlines():
+    for ln in CP.read_lines(LOG):
         try:
             x = json.loads(ln)
         except ValueError:
@@ -245,7 +243,9 @@ def main():
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args()
     import effect_ab as EA
-    decided = json.loads(DECIDED.read_text(encoding="utf-8")) if DECIDED.is_file() else {}
+    import client_private as CP
+    # 判定（表示の比）はお客様の記事の分を置き場に置く。読むときは合わせる
+    decided = CP.load_dict("data/rollback_decisions.json", pub=DECIDED)
     todo = [d for d in entries() if f'{d["slug"]}@{d["at"][:10]}' not in decided]
     cutoff = date.today() - timedelta(days=DAYS + 3)
     todo = [d for d in todo if date.fromisoformat(d["at"][:10]) <= cutoff]
@@ -287,20 +287,19 @@ def main():
         if worse and a.write and restore(slug, d):
             verdict["rolled_back"] = True
             rolled += 1
-            with LOG.open("a", encoding="utf-8") as f:
-                f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "rewrite_rollback",
-                                    "slug": slug, "kind": "rollback", "ok": True,
-                                    "note": f"表示×{me[0]:.2f}（対照×{base:.2f}）のため"
-                                    + {"compete": "直す前の原稿へ戻した",
-                                       "early": "early で変えた題・H2・FAQを直す前へ戻した"}.get(d.get("kind"), "元のタイトルへ戻した")},
-                                   ensure_ascii=False) + "\n")
+            import client_private as CP
+            CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "rewrite_rollback",
+                                  "slug": slug, "kind": "rollback", "ok": True,
+                                  "note": f"表示×{me[0]:.2f}（対照×{base:.2f}）のため"
+                                  + {"compete": "直す前の原稿へ戻した",
+                                     "early": "early で変えた題・H2・FAQを直す前へ戻した"}.get(d.get("kind"), "元のタイトルへ戻した")})
         else:
             kept += 1
         if a.write:
             decided[key] = verdict
     if a.write:
-        DECIDED.parent.mkdir(exist_ok=True)
-        DECIDED.write_text(json.dumps(decided, ensure_ascii=False, indent=2), encoding="utf-8")
+        CP.save_dict("data/rollback_decisions.json", decided, lambda k, _v: CP.owner_of_slug(k.split("@")[0]),
+                     dump=lambda o: json.dumps(o, ensure_ascii=False, indent=2), pub=DECIDED)
     print(f"ROLLBACK_OK=yes\nROLLED_BACK={rolled}\nKEPT={kept}\nHELD={held}")
     return 0
 

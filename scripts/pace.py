@@ -73,7 +73,8 @@ def quota(sid):
     """日次の枠が読む本数。手動による対策が最優先。記録が無い・古いときは既定の2本"""
     if (_json(MANUAL).get(sid) or {}).get("quota") is not None:
         return int(_json(MANUAL)[sid]["quota"])
-    st = _json(STATE).get(sid) or {}
+    import client_private as CP
+    st = CP.load_dict("data/pace_state.json", pub=STATE).get(sid) or {}
     if st.get("date", "") < (date.today() - timedelta(days=STATE_DAYS)).isoformat():
         return DEFAULT
     return int(st.get("quota", DEFAULT))
@@ -229,7 +230,9 @@ def main():
         print("  どのサイトも測れませんでした")
         return 1
     if a.write:
-        STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        # お客様の社の兆候（URL検査の内訳・表示の推移）は public に置かない（client_private の置き場へ）
+        import client_private as CP
+        CP.save_dict("data/pace_state.json", state, CP.site_key, pub=STATE)
     print(f"\nPACE_OK={'no' if low else 'yes'}")
     return 0
 

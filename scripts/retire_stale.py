@@ -122,11 +122,10 @@ QUALITY_REASON = """理由: {loser} は書き直しを{tries}回しても、別�
 def quality_tries(log=None):
     """slug → 一次性を上げるための書き直し（auto_rewrite の quality）を実際に当てた日の一覧"""
     import json
+    import client_private as CP
     f = Path(log) if log else ROOT / "automation" / "logs" / "auto_fix.jsonl"
     out = {}
-    if not f.is_file():
-        return out
-    for line in f.read_text(encoding="utf-8").splitlines():
+    for line in CP.read_lines(f):            # お客様の記事の行（置き場）も合わせる
         try:
             d = json.loads(line)
         except ValueError:

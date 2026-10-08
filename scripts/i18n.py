@@ -319,10 +319,9 @@ def _run(rows, t0, budget_min):
                 (OUT / lg / f"{slug}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
                 n.add(slug)
             print(f"   {'○' if ok else '×'} {lg} {slug[:40]:<40} {why}")
-            LOG.parent.mkdir(parents=True, exist_ok=True)
-            with LOG.open("a", encoding="utf-8") as f:
-                f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), "by": "i18n", "slug": slug,
-                                    "kind": f"i18n-{lg}", "ok": ok, "note": why or "訳した"}, ensure_ascii=False) + "\n")
+            import client_private as CP
+            CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "i18n", "slug": slug,
+                                  "kind": f"i18n-{lg}", "ok": ok, "note": why or "訳した"})
     return n
 
 

@@ -1,0 +1,55 @@
+{
+ "_why": "GA4 の管理設定を変えた記録（ga4_dims.py --forms-off）。ファネル・月次レポートが、止めた日より前の入力開始・送信には拡張計測の分が重なっていると添える",
+ "form_interactions_off": {
+  "ai-lab": {
+   "at": "2026-10-08",
+   "stream": "properties/547346579/dataStreams/15337492113",
+   "before": {
+    "name": "properties/547346579/dataStreams/15337492113/enhancedMeasurementSettings",
+    "streamEnabled": true,
+    "scrollsEnabled": true,
+    "outboundClicksEnabled": true,
+    "siteSearchEnabled": true,
+    "videoEngagementEnabled": true,
+    "fileDownloadsEnabled": true,
+    "pageChangesEnabled": true,
+    "formInteractionsEnabled": true,
+    "searchQueryParameter": "q,s,search,query,keyword"
+   },
+   "seen": {
+    "typed_start": 1,
+    "typed_submit": 1,
+    "abandon": 1,
+    "leads": 6,
+    "types": [
+     "お問い合わせ"
+    ]
+   }
+  },
+  "corporate": {
+   "at": "2026-10-08",
+   "stream": "properties/547741583/dataStreams/15349678102",
+   "before": {
+    "name": "properties/547741583/dataStreams/15349678102/enhancedMeasurementSettings",
+    "streamEnabled": true,
+    "scrollsEnabled": true,
+    "outboundClicksEnabled": true,
+    "siteSearchEnabled": true,
+    "videoEngagementEnabled": true,
+    "fileDownloadsEnabled": true,
+    "pageChangesEnabled": true,
+    "formInteractionsEnabled": true,
+    "searchQueryParameter": "q,s,search,query,keyword"
+   },
+   "seen": {
+    "typed_start": 1,
+    "typed_submit": 1,
+    "abandon": 2,
+    "leads": 4,
+    "types": [
+     "contact"
+    ]
+   }
+  }
+ }
+}

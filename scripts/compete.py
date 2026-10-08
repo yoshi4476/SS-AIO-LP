@@ -273,27 +273,31 @@ def save_usage(u):
     USAGE.write_text(json.dumps(u, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 
 
-def engines(cache_only):
-    """聞くAI。cache_only は呼ばずに答えのキャッシュだけを読む（古さを問わない。試しと上限超えの回）"""
+def engines(cache_only, site=None):
+    """聞くAI。cache_only は呼ばずに答えのキャッシュだけを読む（古さを問わない。試しと上限超えの回）。
+    site がお客様の社なら、答えはその社の置き場から読み、置き場へ書く（public の data/ai_cache に置かない）"""
     import ai_cite_check as AC
     if cache_only:
+        import client_private as CP
+
         def reader(name):
             def f(q):
                 for n in (name, name + "-sub"):
-                    u = AC.cached(n, q, days=None)
+                    u = AC.cached(n, q, days=None, site=site)
                     if u is not None:
                         return u
                 return None
             return f
+        dirs = [AC.CACHE_DIR] + ([CP.private_path(site, "data/ai_cache")] if CP.is_private(site) else [])
         return {n: reader(n) for n in ENGINE_NAMES
-                if (AC.CACHE_DIR / n).is_dir() or (AC.CACHE_DIR / (n + "-sub")).is_dir()}
-    return AC.engines_available()
+                if any((d / n).is_dir() or (d / (n + "-sub")).is_dir() for d in dirs)}
+    return AC.engines_available(site=site)
 
 
-def need_calls(kws, names):
+def need_calls(kws, names, site=None):
     """新しく聞くことになる回数（30日以内のキャッシュに無い組）。課金の前に数える"""
     import ai_cite_check as AC
-    return sum(1 for q in kws for n in names if AC.cached(n, q) is None)
+    return sum(1 for q in kws for n in names if AC.cached(n, q, site=site) is None)
 
 
 def ask(kw, eng, mine, operator):
@@ -390,12 +394,12 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
     if not kws:
         print(f"   {sid}: 語を選べません（Search Console の順位も台帳の語もありません）")
         return None
-    eng = eng if eng is not None else engines(cache_only)
+    eng = eng if eng is not None else engines(cache_only, site=sid)
     usage = usage if usage is not None else load_usage()
     cap, used = ai_cap(cfg), usage.get(ym, {}).get(sid, 0)
     status, need = "ok", 0
     if not cache_only:
-        need = need_calls(kws, list(eng))
+        need = need_calls(kws, list(eng), site=sid)
         print(f"   {sid}: {len(kws)}語 × AI {len(eng)}つ（{', '.join(eng) or 'なし'}）。新しく聞く {need}回"
               f"（今月 {used}/{cap}回）")
         if dry:
@@ -405,7 +409,7 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
             print(f"要対応: {cfg['name']} の競合比較は月の上限（AIに新しく聞く {cap}回）を超えるため、"
                   f"AIには聞きませんでした（必要 {need}回・残り {max(cap - used, 0)}回）。"
                   f"キャッシュにある答えだけで出します。上限は sites/{sid}.json の compete.ai_cap")
-            eng, status = engines(True), "over_cap"
+            eng, status = engines(True, site=sid), "over_cap"
     elif dry:
         return None
     if not eng and status == "ok":
@@ -808,13 +812,14 @@ def main():
         return check(sids)
     if a.measure:
         print("■ 競合比較の測定" + ("（キャッシュだけ）" if a.cache_only else "（予定だけ）" if a.dry_run else ""))
-        eng = engines(a.cache_only)
-        if not eng and not a.cache_only:
+        if not engines(a.cache_only) and not a.cache_only:
             print("   AIの鍵がありません（検索側だけを残します）")
         usage = load_usage()
         for sid in sids:
             try:
-                measure_site(sid, S.load(sid), a.cache_only, a.dry_run, eng=eng, usage=usage)
+                # 聞き方は社ごとに作る（お客様の社の質問と答えは、その社の置き場へ）
+                measure_site(sid, S.load(sid), a.cache_only, a.dry_run, eng=engines(a.cache_only, site=sid),
+                             usage=usage)
             except Exception as e:
                 print(f"   {sid}: 測れませんでした（{type(e).__name__}: {str(e)[:80]}）")
                 print("COMPETE_OK=unknown")

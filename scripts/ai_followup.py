@@ -189,7 +189,8 @@ def main():
         cfg = cfgs.get(owners[t["slug"]] or "")
         if not cfg:
             continue
-        r = measure(t, cfg["domain"], engines)
+        # お客様の社の記事の質問と答えは public の data/ai_cache に置かない（その社の置き場へ）
+        r = measure(t, cfg["domain"], AC.engines_available(site=owners[t["slug"]]))
         if r is None:
             failed += 1
             print(f"   × {t['slug']}: どのAIにも聞けませんでした")
