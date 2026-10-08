@@ -59,8 +59,13 @@
   "東京 会計ソフト 導入支援": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://prime-tax.or.jp/service-cloudkaikei/",
+     "https://grove-tf.co.jp/service/",
+     "https://tax-startup.com/service/tax/cloud",
+     "https://m-assets.com/lp/online/cloud"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -100,8 +105,14 @@
   "名古屋 CRM 開発 会社": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.c3index.co.jp/system/crm/",
+     "https://mercury-soft.co.jp/product/service03/",
+     "https://webnation.co.jp/works/clientx/",
+     "https://nayutatech.com/service",
+     "https://www.dot-think.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -137,8 +148,13 @@
   "福岡 SaaS 導入 相談": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://fdx.community/dxsoudan/",
+     "https://www.fukunet.or.jp/keieisodan/digital-tool/digital-consultation/",
+     "https://digital-fukuoka.jp/",
+     "https://www.pref.fukuoka.lg.jp/press-release/kasegu-center-open.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -174,8 +190,14 @@
   "札幌 業務システム 開発 会社": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://plugins.co.jp/",
+     "https://www.lic.ne.jp/",
+     "https://www.nazcacomputer.com/service/",
+     "https://www.public.co.jp/service/businesssysytemdevelopment/",
+     "https://www.infot.co.jp/business/development/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -211,8 +233,13 @@
   "横浜 クラウド 会計ソフト 導入": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.yoko-so.co.jp/business/dx/efficiency/",
+     "https://www.taxacc.jp/service/efficient/",
+     "https://www.kobayashi-jp.com/tax/",
+     "https://ycci-dx.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -250,8 +277,13 @@
   "京都 販売管理システム 導入 会社": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://ccandc.co.jp/service/software/sales/",
+     "https://www.sysport.co.jp/product/",
+     "https://www.kyoto-tanac.co.jp/system/yayoi.html",
+     "https://kyonaka-gozan.kyoto/service/service007/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -289,8 +321,12 @@
   "神戸 勤怠管理 クラウド 導入支援": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://koberokko-sr.com/",
+     "https://cl-aid.com/",
+     "https://www.kingoftime.jp/support/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -335,8 +371,12 @@
   "仙台 顧客管理システム 相談": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.sendaicci.or.jp/",
+     "https://cybozu.co.jp/tohoku/",
+     "https://yutech.co.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -366,8 +406,15 @@
   "広島 ERP 導入 支援 会社": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.skygroup.jp/service/erp/",
+     "https://www.skygroup.jp/company/access/hiroshima.html",
+     "https://www.hirogin-its.co.jp/lp/iaas/index.html",
+     "https://www.hirogin-its.co.jp/company/index.html",
+     "https://ixis.ai/service/",
+     "https://ixis.ai/outline/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -403,8 +450,12 @@
   "勤怠管理システム 料金 相場": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jobcan.ne.jp/price",
+     "https://www.kingoftime.jp/question_genre/q_price/",
+     "https://www.kingoftime.jp/costlist/cost/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -432,8 +483,13 @@
   "会計ソフト 月額 費用": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://support.freee.co.jp/hc/ja/articles/213726523--%E5%80%8B%E4%BA%BA-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6",
+     "https://biz.moneyforward.com/tax_return/price/",
+     "https://www.yayoi-kk.co.jp/shinkoku/aoiroshinkoku/price/",
+     "https://biz.moneyforward.com/accounting/smb/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -468,8 +524,12 @@
   "CRM 導入 費用 目安": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.e-sales.jp/eigyo-labo/crm-cost-23537",
+     "https://boxil.jp/mag/a8302/",
+     "https://www.salesforce.com/jp/sales/pricing/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -510,8 +570,12 @@
   "SaaS 初期費用 ランニングコスト": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.saaske.com/blog/ma-sfa-crm/saas-cost-guide/",
+     "https://kintone.cybozu.co.jp/price/",
+     "https://kintone.cybozu.co.jp/jp/ordering/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -550,8 +614,12 @@
   "ERP 導入 費用 中小企業": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.oflight.co.jp/ja/columns/core-system-erp-renewal-cost-2026",
+     "https://eerp.jp/",
+     "https://eerp.jp/guide/erp-cost/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -585,8 +653,15 @@
   "クラウド会計 料金 比較": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://biz.moneyforward.com/price/individual/",
+     "https://www.freee.co.jp/accounting/individual/pricing/?referral=aw_brand",
+     "https://www.yayoi-kk.co.jp/shinkoku/aoiroshinkoku/price/",
+     "https://biz.moneyforward.com/price/",
+     "https://www.yayoi-kk.co.jp/kaikei/kaikei-next/price/",
+     "https://www.freee.co.jp/accounting/new-corporation/pricing/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -614,8 +689,13 @@
   "勤怠管理 1人あたり 料金": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kingoftime.jp/costlist/",
+     "https://jobcan.ne.jp/",
+     "https://www.freee.co.jp/pricing/",
+     "https://biz.moneyforward.com/attendance/price"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -652,8 +732,12 @@
   "CRM 無料プラン 有料プラン 違い": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hubspot.jp/pricing/crm",
+     "https://www.zoho.com/jp/crm/zohocrm-pricing.html",
+     "https://www.zoho.com/jp/crm/free-crm.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -685,8 +769,12 @@
   "システム開発 見積もり 相場": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.siainc.jp/topic/system-development-cost",
+     "https://overx.co.jp/cost-guide/",
+     "https://www.geek-bridge.com/public/column/business-system-development-cost"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -729,8 +817,11 @@
   "SaaS 年額 月額 どっちが安い": {
    "group": "料金・費用を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://slack.com/intl/ja-jp/pricing",
+     "https://www.notion.com/ja/pricing"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -752,8 +843,11 @@
   "勤怠管理システム 選び方 ポイント": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.itmedia.co.jp/itselect/attendance-management/article/5533/",
+     "https://www.check-roudou.mhlw.go.jp/qa/roudousya/roudoujikan/q5.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -785,8 +879,12 @@
   "会計ソフト 選び方 法人": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.yayoi-kk.co.jp/kaikei/oyakudachi/software_select/",
+     "https://biz.moneyforward.com/price/",
+     "https://support.freee.co.jp/hc/ja/articles/203318190-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E6%8B%9B%E5%BE%85-%E6%A8%A9%E9%99%90"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -818,8 +916,12 @@
   "CRM 選び方 中小企業": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jp.sansan.com/media/crm-smallbusiness/",
+     "https://www.e-sales.jp/eigyo-labo/crm-sme-23536",
+     "https://www.jfc.go.jp/n/findings/pdf/dxbook.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -843,8 +945,12 @@
   "SaaS 導入 選定 チェックリスト": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ipa.go.jp/digital/model/ug65p90000001ljh-att/000090726.pdf",
+     "https://www.onamae.com/business/article/301261/",
+     "https://www.josys.com/jp/blog/saas-security-assessment-checklist-vendor-selection-and-risk-scoring-guide"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -878,8 +984,13 @@
   "クラウド型 オンプレ 選び方": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://azure.microsoft.com/ja-jp/resources/cloud-computing-dictionary/what-are-private-public-hybrid-clouds/",
+     "https://aws.amazon.com/jp/blogs/news/cloud-cost-estimation-compared-with-onpremise/",
+     "https://aws.amazon.com/jp/compliance/shared-responsibility-model/",
+     "https://azure.microsoft.com/ja-jp/resources/cloud-computing-dictionary/what-is-hybrid-cloud-computing/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -903,8 +1014,15 @@
   "勤怠管理 機能 必須 項目": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mhlw.go.jp/content/11202000/001278556.pdf",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=73023000&dataType=0&pageNo=2",
+     "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q5.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudouseisaku/chushoukigyou/joken_kankyou_rule.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/gyosyu/topics/01.html",
+     "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/syuugyoukisoku/q6.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -939,8 +1057,14 @@
   "会計ソフト 個人事業主 法人 違い 選定": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://support.yayoi-kk.co.jp/faq_Subcontents.html?page_id=30744",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm",
+     "https://biz.moneyforward.com/support/account/faq/features2/fe12.html",
+     "https://www.yayoi-kk.co.jp/kaikei/oyakudachi/software_select/",
+     "https://support.freee.co.jp/hc/ja/articles/205015960"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -973,8 +1097,12 @@
   "CRM 営業支援 SFA 違い 選び方": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.salesforce.com/jp/marketing/difference-between-ma-crm-sfa/",
+     "https://www.hubspot.jp/products/sales/sfa/difference-between-crm-and-sfa",
+     "https://www.salesforce.com/jp/sales/sales-force-automation-software-sfa/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -998,8 +1126,15 @@
   "SaaS セキュリティ 確認 項目": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ipa.go.jp/security/guide/sme/ug65p90000019cbk-att/sme_guideline_v4.0_app_cloudservice.pdf",
+     "https://www.ipa.go.jp/security/reports/economics/scrm/cloud2021.html",
+     "https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication",
+     "https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/use-logging-on-business-systems",
+     "https://www.ppc.go.jp/personalinfo/legal/guidelines_tsusoku/",
+     "https://www.ppc.go.jp/personalinfo/legal/guidelines_offshore/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1031,8 +1166,14 @@
   "業務システム ベンダー 選定 基準": {
    "group": "選び方を調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ipa.go.jp/choutatsu/nyusatsu/2025/nyusatsu20260323.html",
+     "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/e98a2d2e-f6da-4dce-a3c3-360a38616d8d/a9bf0f5d/20230410_procurement_manual_04.pdf",
+     "https://www.ipa.go.jp/archive/files/000066170.pdf",
+     "https://www.ipa.go.jp/digital/model/index.html",
+     "https://dx.ipa.go.jp/youken-teigi"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1064,8 +1205,16 @@
   "勤怠管理システム 比較 ランキング": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kingoftime.jp/costlist/",
+     "https://jobcan.ne.jp/",
+     "https://www.kintaisystem.com/faq/",
+     "https://www.ieyasu.co/",
+     "https://www.freee.co.jp/time-tracking-plus/pricing/",
+     "https://www.freee.co.jp/time-tracking-plus/",
+     "https://biz.moneyforward.com/attendance/price"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1102,8 +1251,16 @@
   "会計ソフト クラウド 比較 法人": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://biz.moneyforward.com/price/",
+     "https://www.yayoi-kk.co.jp/kaikei/kaikei-next/price/",
+     "https://www.freee.co.jp/pricing/",
+     "https://www.freee.co.jp/lp2/accounting/05/",
+     "https://www.obc.co.jp/bugyo-cloud/kanjo?sscl=footer",
+     "https://www2.obc.co.jp/simulation/",
+     "https://biz.moneyforward.com/service/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1146,8 +1303,14 @@
   "CRM 比較 中小企業 向け": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.zoho.com/jp/crm/zohocrm-pricing.html",
+     "https://www.hubspot.jp/products/crm",
+     "https://kintone.cybozu.co.jp/price/",
+     "https://kintone.cybozu.co.jp/solutions/purpose/sfacrm.html",
+     "https://www.salesforce.com/jp/small-business/pricing/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1188,8 +1351,14 @@
   "勤怠管理 無料 有料 比較": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ieyasu.co/fee/",
+     "https://atdguide.hrmos.co/hc/ja/articles/58757966278553-%E6%9C%80%E4%BD%8E%E5%88%A9%E7%94%A8%E6%96%99%E9%87%91%E3%81%A8%E3%81%AF",
+     "https://jobcan.ne.jp/",
+     "https://www.kingoftime.jp/faq/",
+     "https://hrmos.co/kintai/faq/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1225,8 +1394,13 @@
   "SaaS 国産 海外製 比較": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.onamae.com/business/article/302887/",
+     "https://www.onamae.com/business/article/295404/",
+     "https://kintone.cybozu.co.jp/solutions/purpose/global.html",
+     "https://learn.microsoft.com/ja-jp/microsoft-365/enterprise/o365-data-locations?view=o365-worldwide"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1250,8 +1424,13 @@
   "会計ソフト 機能 比較 表": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://support.freee.co.jp/hc/ja/articles/27975180546713",
+     "https://biz.moneyforward.com/accounting/smb/function/",
+     "https://biz.moneyforward.com/support/account/faq/price/p12.html",
+     "https://www.yayoi-kk.co.jp/users/cloud/menu/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1285,8 +1464,15 @@
   "CRM 営業管理 ツール 比較": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.salesforce.com/jp/sales/pricing/",
+     "https://www.hubspot.jp/pricing/sales",
+     "https://www.zoho.com/jp/crm/zohocrm-pricing.html",
+     "https://kintone.cybozu.co.jp/jp/crm/",
+     "https://kintone.cybozu.co.jp/price/",
+     "https://www.e-sales.jp/esm/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1332,8 +1518,20 @@
   "給与計算 勤怠 連携 ソフト 比較": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kingoftime.jp/payroll/main-lp/",
+     "https://www.freee.co.jp/hr/price/",
+     "https://www.freee.co.jp/pricing/",
+     "https://biz.moneyforward.com/support/payroll/faq/import/at04.html",
+     "https://biz.moneyforward.com/attendance/price",
+     "https://market.jobcan.ne.jp/jbc-pay/",
+     "https://jobcan.ne.jp/",
+     "https://jobcan.ne.jp/medical",
+     "https://www.obc.co.jp/bugyo-cloud/kyuyo",
+     "https://www.obc.co.jp/bugyo-edge/attend",
+     "https://www.obc.co.jp/bugyo-cloud/kyuyo/function/api"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1368,8 +1566,12 @@
   "ERP パッケージ スクラッチ 比較": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.grandit.jp/erp/column/erp_comparison/",
+     "https://www.sap.com/resources/what-is-a-clean-core",
+     "https://www.c3index.co.jp/blog/blog_1483/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1396,8 +1598,14 @@
   "ワークフロー システム 比較 クラウド": {
    "group": "製品やサービスを比べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.collabo-style.co.jp/",
+     "https://www.collabo-style.co.jp/price/",
+     "https://www.atled.jp/xpoint_cloud/faq/",
+     "https://kickflow.com/?frame=0",
+     "https://kickflow.com/pricing"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1421,8 +1629,12 @@
   "勤怠管理システム 導入 失敗 原因": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.comdec.jp/comdeclab/kot/system-failure/",
+     "https://boxil.jp/mag/a10090/",
+     "https://www.obc.co.jp/360/list/post491"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1456,8 +1668,13 @@
   "会計ソフト 乗り換え データ移行 方法": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://biz.moneyforward.com/support/tax-return/faq/migration/m02.html",
+     "https://support.freee.co.jp/hc/ja/articles/900002466666",
+     "https://support.freee.co.jp/hc/ja/articles/12596091509273",
+     "https://support.yayoi-kk.co.jp/subcontents.html?page_id=29610"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1480,8 +1697,11 @@
   "CRM 定着しない 理由": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.salesforce.com/jp/crm/why-crm-deployment-fails/",
+     "https://www.zoho.com/jp/crm/academy/learning/crm-implementation/crm-adoption-tips/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1508,8 +1728,12 @@
   "SaaS 導入 社内 反発 対策": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://learn.microsoft.com/en-us/power-platform/guidance/adoption/manage-resistance",
+     "https://www.prosci.com/managing-change-resistance",
+     "https://learn.microsoft.com/ja-jp/power-bi/guidance/fabric-adoption-roadmap-change-management"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1539,8 +1763,13 @@
   "勤怠管理 打刻 ミス 防止": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kingoftime.jp/function/alert/",
+     "https://jobcan.zendesk.com/hc/ja/articles/4404355570201",
+     "https://www.rakus.co.jp/rakurakucloud/kintai/function/attendance/",
+     "https://www.mhlw.go.jp/content/11202000/001278556.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1564,8 +1793,11 @@
   "システム 導入 スケジュール 期間": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.grandit.jp/support/introduction/plan/",
+     "https://www.sap.com/japan/resources/erp-implementation-best-practices"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1609,8 +1841,12 @@
   "SaaS 解約 データ 引き継ぎ": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://knowledge.workspace.google.com/admin/billing/cancel-google-workspace?hl=ja",
+     "https://learn.microsoft.com/en-us/microsoft-365/commerce/subscriptions/what-if-my-subscription-expires?view=o365-worldwide",
+     "https://slack.com/intl/ja-jp/help/articles/201658943-ワークスペースのデータをエクスポートする"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1638,8 +1874,12 @@
   "CRM 入力 負担 減らす 方法": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://successjp.salesforce.com/article/NAI-000137",
+     "https://www.hubspot.jp/products/email-integration",
+     "https://www.salesforce.com/jp/crm/automation/?bc=OTH"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1662,8 +1902,14 @@
   "会計ソフト インボイス 対応 設定": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://biz.moneyforward.com/support/account/guide/office02/of02.html",
+     "https://support.freee.co.jp/hc/ja/articles/23506259068825-freee請求書におけるインボイス制度に対応した機能について",
+     "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6498.htm",
+     "https://biz.moneyforward.com/support/account/guide/invoice/invoice-ca01.html",
+     "https://www.freee.co.jp/accounting/invoice-guide/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1685,8 +1931,15 @@
   "SaaS 他システム 連携 できない 対処": {
    "group": "導入や運用の悩みを調べる",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://help.salesforce.com/s/articleView?id=000005140&language=en_US&type=1",
+     "https://docs.workato.com/recipes/design-time-errors/unestablished-connectivity.html",
+     "https://docs.workato.com/recipes/run-time-errors/internal-upstream-errors.html",
+     "https://docs.workato.com/en/api-mgmt/api-access-policies.html",
+     "https://docs.workato.com/developing-connectors/http-v2",
+     "https://docs.workato.com/en/developing-connectors.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1709,5 +1962,5 @@
    }
   }
  },
- "refilled": "2026-10-07"
+ "refilled": "2026-10-08"
 }

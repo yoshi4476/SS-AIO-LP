@@ -217,8 +217,15 @@
   "横浜 屋根修理 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://yamada-kougei.com/",
+     "https://yamada-kougei.com/service/",
+     "https://midoriyane.com/",
+     "https://www.iraka-yane.com/yokohama",
+     "https://www.sanwa-yokohama.co.jp/company.html",
+     "https://www.yokohama-consumer.or.jp/cms_files/news/pdf/release20240430.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -255,8 +262,13 @@
   "京都 外壁塗装 景観 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://welbe-home.com/knowledge/jourei/",
+     "https://epec.co.jp/blog/?p=5141",
+     "https://www.city.kyoto.lg.jp/tokei/page/0000281341.html",
+     "https://www.city.kyoto.lg.jp/tokei/cmsfiles/contents/0000351/351834/R709_gaideline_kentikudesignhen.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -288,8 +300,14 @@
   "神戸 屋根 葺き替え 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://g-roof-kobe.com/",
+     "https://www.f-kobe-yane.com/",
+     "https://www.k-texhome.com/?p=431",
+     "https://www.hioki-juken.jp/",
+     "https://www.housepartner-japan.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -325,8 +343,13 @@
   "仙台 外壁塗装 地元 評判": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://onizawapaint.co.jp/",
+     "https://www.nuri-kae.jp/company/1842",
+     "https://www.nuri-kae.jp/company/1842/review",
+     "https://gaiso-sendai.com/voice"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -358,8 +381,13 @@
   "広島 屋根塗装 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://sasaki-tosou.co.jp/",
+     "https://sasaki-tosou.co.jp/company/",
+     "https://yane-kabe.jp/",
+     "https://yanetto.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -425,8 +453,11 @@
   "屋根塗装 料金 目安": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nuri-kae.jp/column/construction-cost/12368/",
+     "https://www.cjcoop.or.jp/column/roof/4604/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -447,8 +478,11 @@
   "外壁塗装 坪数別 費用": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nuri-kae.jp/column/construction-cost/152/",
+     "https://rehome-navi.com/articles/2736"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -477,8 +511,11 @@
   "屋根葺き替え 費用 相場": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.manaka-reform-chiba.com/column/yane-tosou/12678/",
+     "https://hapisumu.jp/category/roof-reform/11949/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -514,8 +551,12 @@
   "屋根カバー工法 費用 相場": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://roof-kabe.jp/blog/27019/",
+     "https://www.kodama-t.co.jp/base/roof-cover/",
+     "https://skroofworks.com/cover-koho-cost/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -545,8 +586,11 @@
   "足場代 相場 外壁塗装": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://moriroofkensou.com/info/外壁塗装の費用で足場代はいくら？相場と見積も/",
+     "https://hiroshima-toso.com/blog/2423/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -577,8 +621,12 @@
   "外壁塗装 助成金 いくらもらえる": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.city.kasumigaura.lg.jp/page/page004836.html",
+     "https://www.city.tokushima.tokushima.jp/kurashi/house/house_keikaku/jyutaku_reform.html",
+     "https://www.city.sapporo.jp/toshi/jutaku/03reform/eco/eco.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -616,8 +664,12 @@
   "火災保険 外壁 屋根 修理 適用": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://soudanguide.sonpo.or.jp/home/q050.html",
+     "https://www.zurich.co.jp/fire/compensation/basic02/",
+     "https://www.secom-sonpo.co.jp/tetsuzuki/hokenkin_shiharai_faq.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -656,8 +708,11 @@
   "外壁塗装 見積もり 内訳 見方": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.etic.co.jp/feature/outerwall-paintingwork-estimate/",
+     "https://matching.d-a.co.jp/column/gaiheki-tosou-mitsumori/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -698,8 +753,13 @@
   "外壁塗装 ローン 支払い方法": {
    "group": "費用・相場",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.oriental-h-s.jp/payments/",
+     "https://www.tokyostarbank.co.jp/products/loan/unsecured/reform/",
+     "https://gaiheki.relife-corp.jp/%E3%80%90%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AEq%EF%BC%86a%E3%80%91/",
+     "https://www.shizuokachuo-bank.co.jp/kojin/kariru/personal/reform/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -732,8 +792,16 @@
   "外壁塗装 業者 選び方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://j-reform.com/publish/pdf_guidebook/r6-all.pdf",
+     "https://ichikawa-paint.com/select/",
+     "https://www.chord.or.jp/caution/",
+     "https://www.refonet.jp/csm/process/proc_step2.html",
+     "https://www.kokusen.go.jp/soudan_topics/data/reformtenken.html",
+     "https://www.chord.or.jp/reform/index.html?red_param=220106",
+     "https://www.faq.kokusen.go.jp/faq/show/91?site_domain=default"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -766,8 +834,12 @@
   "屋根工事 業者 失敗しない選び方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20231011_1.html",
+     "https://www.refonavi.or.jp/how-to/know-how/427",
+     "https://www.chord.or.jp/reform/index.html?red_param=220106"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -810,8 +882,12 @@
   "外壁塗装 見積もり 比較 ポイント": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.homepro.jp/gaiheki/gaiheki-basic/0010pl",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/consumer/reform.html",
+     "https://www.chord.or.jp/reform/index.html?red_param=220106"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -842,8 +918,13 @@
   "地元の塗装店 大手 違い": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://marusei-tech.net/gaihekitosou/34642/",
+     "https://www.sekisuihouse.co.jp/kodate/support/",
+     "https://www.faq.kokusen.go.jp/faq/show/1398?site_domain=default",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen491.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -865,8 +946,13 @@
   "塗装業者 口コミ 信頼できる見分け方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/",
+     "https://www.chord.or.jp/existinghome/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen491.html",
+     "https://www.chord.or.jp/reform/index.html?red_param=220106"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -897,8 +983,13 @@
   "外壁塗装 悪徳業者 見分け方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_policy/caution/caution_031",
+     "https://www.kokusen.go.jp/news/data/n-20231011_1.html",
+     "https://www.faq.kokusen.go.jp/faq/show/1398?site_domain=default",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen491.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -931,8 +1022,12 @@
   "外壁塗装 訪問営業 断り方": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.no-trouble.caa.go.jp/pdf/20230623la03_03.pdf",
+     "https://www.no-trouble.caa.go.jp/what/doortodoorsales/",
+     "https://www.kokusen.go.jp/news/data/n-20231011_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -965,8 +1060,11 @@
   "屋根修理 業者 相見積もり 何社": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://shiga-yanesyuri.com/knowledge/909/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen516.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -997,8 +1095,15 @@
   "塗装 保証 アフター 業者 選ぶ": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mlit.go.jp/common/001266702.pdf",
+     "https://repco.gr.jp/knowhow/dandori/dandori-detail-st6-02.html",
+     "https://www.kokusen.go.jp/pdf/n-20181220_3.pdf",
+     "https://www.repco.gr.jp/index.php/knowhow/Q_and_A/qa-detail-q32.html",
+     "https://www.mlit.go.jp/jutakukentiku/jutaku-kentiku.files/kashitanpocorner/consumer/reform_business_search.html",
+     "https://www.j-reform.com/consumer/consumer04.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1031,8 +1136,13 @@
   "塗装職人 資格 確認 方法": {
    "group": "業者の選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/jinzaikaihatsu/ability_skill/ginoukentei/",
+     "https://www.javada.or.jp/jigyou/gino/sagyou_naiyou.html",
+     "https://etsuran2.mlit.go.jp/TAKKEN/kensetuKensaku.do",
+     "https://www.mlit.go.jp/totikensangyo/const/1_6_bt_000080.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1085,8 +1195,12 @@
   "外壁 チョーキング 塗り替え時期": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nipponpaint.co.jp/nippelab/term/96/",
+     "https://www.nipponpaint.co.jp/nippelab/term/132/",
+     "https://www.nyg.gr.jp/toha/pdf/mainte.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1123,8 +1237,12 @@
   "外壁 ひび割れ 補修 放置": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hyoukakyoukai.or.jp/seido/kizon/08.html",
+     "https://www.j-reform.com/publish/pdf_guidebook/r8-all.pdf",
+     "https://morutarugaiheki.jp/crack/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1148,8 +1266,11 @@
   "屋根 雨漏り 原因 修理": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.uchinobankin.jp/column/amamori-yane",
+     "https://suumo.jp/remodel/blog/entry/20240529/003"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1173,8 +1294,15 @@
   "外壁 カビ コケ 落とし方 塗装": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://ksd20-www.nipponpaint.co.jp/nippelab/detached-home/checkpoint/",
+     "https://www.kmew.co.jp/maintenance/pdfs/mainte_hikari.pdf",
+     "https://www.hfc816t.jp/cs/no-69/",
+     "https://www.kmew.co.jp/maintenance/pdfs/mainte_s_powercoat.pdf",
+     "https://www.nipponpaint.co.jp/support/faq/5/",
+     "https://www.nipponpaint.co.jp/images/products/feature/perfect/prd_213b.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1208,8 +1336,12 @@
   "屋根 瓦 ずれ 修理": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.fujiiseikawara.co.jp/blog/roof-repair/kawara-zure-trouble/",
+     "https://www.mlit.go.jp/jutakukentiku/build/content/001386795.pdf",
+     "https://www.kokusen.go.jp/soudan_now/data/disaster.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1254,8 +1386,11 @@
   "外壁塗装 時期 何年ごと": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.homepro.jp/gaiheki/gaiheki-basic/0012pl",
+     "https://www.nipponpaint.co.jp/nippelab/term/132/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1297,8 +1432,13 @@
   "サイディング 反り 剥がれ 対処": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nyg.gr.jp/toha/pdf/mainte.pdf",
+     "https://www.nyg.gr.jp/toha/pdf/siding.pdf",
+     "https://www.nyg.gr.jp/toha/tuukikouhou.html",
+     "https://www.nichiha.co.jp/info/maintenance/yogyo/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1336,8 +1476,11 @@
   "屋根 色あせ 塗り替え サイン": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.manaka-reform-chiba.com/column/yane-tosou/12705/",
+     "https://www.sankometal.co.jp/columns/column-02.php"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1361,8 +1504,12 @@
   "コーキング 劣化 打ち替え 時期": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nichiha.co.jp/kabenosusume/article/wall10.html",
+     "https://www.nichiha.co.jp/info/maintenance/yogyo/",
+     "https://www.nichiha.co.jp/kabenosusume/article/wall.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1394,8 +1541,12 @@
   "ベランダ 防水 劣化 症状": {
    "group": "劣化・症状の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://bousui-association.jp/contents2505/",
+     "https://www.kan-bo-kyo.or.jp/column/20240210/",
+     "https://suzuyoshi-hachioji.jp/info/blog/18065"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1419,8 +1570,13 @@
   "外壁塗装 塗料 種類 違い": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.sk-kaken.co.jp/faq/faq-01/",
+     "https://www.sk-kaken.co.jp/product/overcoat-materials/sk-premium-muki/",
+     "https://www.nipponpaint.co.jp/news/20250324/426/",
+     "https://www.nipponpaint.co.jp/support/faq/31/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1444,8 +1600,12 @@
   "シリコン フッ素 無機 どれがいい": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kansai.co.jp/reform-s/howto/paint/",
+     "https://ichikawa-paint.com/paint-workmanship/paint-grade-comparison/",
+     "https://www.nipponpaint.co.jp/images/nippelab/nippeman/nippeman_guidebook.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1469,8 +1629,12 @@
   "遮熱塗料 効果 夏 暑さ": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.toryo.or.jp/jp/anzen/reflect/reflect-leaflet-2021.pdf",
+     "https://www.jstage.jst.go.jp/article/finex/2005/0/2005_0_20/_article/-char/ja",
+     "https://www.env.go.jp/earth/zeb/detail/06.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1502,8 +1666,10 @@
   "外壁塗装 色選び 失敗 後悔": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://zeenb.astecpaints.jp/journal/gaihekitosou/gaiheki_iroerabi-63954"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1542,8 +1708,12 @@
   "外壁塗装 工事期間 日数 目安": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://konnai-inc.jp/faq/",
+     "https://saniken.com/blog/2924/",
+     "https://www.my-painter.com/column/20211122chihi-kikan/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1567,8 +1737,12 @@
   "外壁塗装 洗浄 下地処理 大事": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nipponpaint.co.jp/support/faq/5/",
+     "https://www.kansai.co.jp/alesdynamic/pdf/972.pdf",
+     "https://www.nipponpaint.co.jp/biz1/building/pdf/r7/kkd2.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1601,8 +1775,11 @@
   "外壁塗装 近隣挨拶 騒音 臭い": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.m-kensou.com/column/tosou/20210327ty-2/",
+     "https://ichikawa-paint.com/precautions-before-construction/neighbor-trouble/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1630,8 +1807,11 @@
   "外壁塗装 梅雨 冬 施工 できる": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nipponpaint.co.jp/support/faq/8/",
+     "https://www.kansai.co.jp/reform-s/catalog/pdf/959.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1671,8 +1851,12 @@
   "屋根塗装 縁切り タスペーサー": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.taspacer.com/guide/enkiri/index.html",
+     "https://www.taspacer.com/guide/taspacer-method/index.html",
+     "https://www.taspacer.com/faq/taspacer/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1719,8 +1903,13 @@
   "外壁塗装 DIY 自分で 塗る リスク": {
    "group": "塗料・工事内容の悩み",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nyg.gr.jp/toha/mainte.html",
+     "https://www.nipponpaint.co.jp/nippelab/term/132/",
+     "https://zeenb.astecpaints.jp/journal/diy/painting-7604",
+     "https://sebuken.com/tips/163/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1749,5 +1938,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-08"
 }

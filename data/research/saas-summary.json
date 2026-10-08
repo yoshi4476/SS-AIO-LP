@@ -1,18 +1,22 @@
 {
  "total": {
-  "maker": 104,
-  "media": 350,
-  "clinic": 116,
-  "portal": 146,
-  "public": 38,
-  "other": 24,
-  "video": 20
+  "maker": 217,
+  "media": 360,
+  "clinic": 129,
+  "portal": 148,
+  "public": 59,
+  "other": 25,
+  "video": 21
  },
  "by_engine": {
   "ChatGPT": {
-   "maker": 3,
-   "media": 1,
-   "clinic": 1
+   "maker": 116,
+   "media": 11,
+   "clinic": 14,
+   "video": 1,
+   "public": 21,
+   "portal": 2,
+   "other": 1
   },
   "Gemini": {
    "portal": 35,
@@ -35,61 +39,62 @@
  },
  "by_group": {
   "地域で探す": {
-   "maker": 18,
+   "maker": 34,
    "media": 28,
-   "clinic": 75,
+   "clinic": 87,
    "portal": 46,
-   "public": 25,
+   "public": 31,
    "other": 7,
-   "video": 4
+   "video": 5
   },
   "料金・費用を調べる": {
-   "portal": 25,
-   "other": 8,
-   "maker": 19,
-   "media": 96,
+   "maker": 39,
+   "portal": 26,
+   "other": 9,
+   "media": 100,
    "clinic": 18,
    "video": 4
   },
   "選び方を調べる": {
-   "media": 69,
-   "maker": 26,
+   "media": 72,
+   "public": 19,
+   "maker": 39,
    "portal": 16,
-   "public": 6,
    "clinic": 8,
    "video": 5,
    "other": 2
   },
   "製品やサービスを比べる": {
+   "maker": 63,
+   "media": 79,
    "other": 6,
    "public": 7,
-   "maker": 23,
    "portal": 49,
-   "media": 77,
    "video": 4,
-   "clinic": 11
+   "clinic": 12
   },
   "導入や運用の悩みを調べる": {
-   "media": 80,
-   "maker": 18,
-   "portal": 10,
+   "media": 81,
+   "portal": 11,
+   "maker": 42,
    "other": 1,
    "clinic": 4,
-   "video": 3
+   "video": 3,
+   "public": 2
   }
  },
  "answered": {
-  "ChatGPT": 1,
+  "ChatGPT": 50,
   "Gemini": 34,
   "Claude": 50
  },
  "has_clinic": {
-  "ChatGPT": 1,
+  "ChatGPT": 9,
   "Gemini": 18,
   "Claude": 26
  },
  "sources": {
-  "ChatGPT": 5,
+  "ChatGPT": 166,
   "Gemini": 284,
   "Claude": 509
  },
@@ -100,7 +105,7 @@
   ],
   [
    "boxil.jp",
-   14
+   16
   ],
   [
    "biz.ne.jp",
@@ -153,62 +158,63 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 85,
-   "media": 79,
-   "maker": 55,
-   "clinic": 45,
-   "portal": 57,
-   "public": 22,
-   "other": 21,
-   "video": 18
+   "answers": 134,
+   "clinic": 53,
+   "maker": 99,
+   "media": 88,
+   "portal": 59,
+   "other": 22,
+   "public": 35,
+   "video": 19
   },
   "地域で探す": {
-   "answers": 21,
+   "answers": 30,
+   "clinic": 27,
+   "maker": 18,
    "media": 17,
-   "maker": 10,
-   "clinic": 20,
    "portal": 18,
-   "public": 10,
    "other": 5,
-   "video": 4
+   "public": 14,
+   "video": 5
   },
   "料金・費用を調べる": {
-   "answers": 18,
-   "maker": 11,
-   "portal": 11,
-   "other": 7,
-   "media": 17,
+   "answers": 28,
+   "maker": 21,
+   "other": 8,
+   "portal": 12,
+   "media": 20,
    "clinic": 11,
    "video": 3
   },
   "選び方を調べる": {
-   "answers": 15,
-   "media": 15,
-   "maker": 12,
-   "portal": 7,
-   "public": 5,
+   "answers": 25,
+   "media": 18,
+   "public": 12,
+   "maker": 18,
    "clinic": 5,
+   "portal": 7,
    "video": 4,
    "other": 2
   },
   "製品やサービスを比べる": {
-   "answers": 17,
-   "maker": 14,
-   "public": 7,
-   "portal": 15,
+   "answers": 27,
+   "maker": 24,
+   "media": 18,
    "other": 6,
-   "media": 16,
-   "video": 4,
-   "clinic": 6
+   "portal": 15,
+   "public": 7,
+   "clinic": 7,
+   "video": 4
   },
   "導入や運用の悩みを調べる": {
-   "answers": 14,
-   "media": 14,
-   "maker": 8,
-   "portal": 6,
+   "answers": 24,
+   "maker": 18,
+   "media": 15,
+   "portal": 7,
    "other": 1,
    "clinic": 3,
-   "video": 3
+   "video": 3,
+   "public": 2
   }
  }
 }

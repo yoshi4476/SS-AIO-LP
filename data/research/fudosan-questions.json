@@ -14,9 +14,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "video": 2,
-    "portal": 3,
     "media": 3,
+    "portal": 3,
+    "video": 2,
     "maker": 2,
     "public": 1
    },
@@ -44,10 +44,10 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
+    "media": 2,
     "portal": 3,
-    "public": 1,
     "maker": 3,
-    "media": 2
+    "public": 1
    },
    "top": [
     [
@@ -73,10 +73,10 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
+    "media": 3,
     "portal": 3,
-    "public": 1,
     "maker": 3,
-    "media": 3
+    "public": 1
    },
    "top": [
     [
@@ -102,10 +102,10 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "portal": 3,
     "other": 1,
-    "maker": 3,
-    "media": 3
+    "media": 3,
+    "portal": 3,
+    "maker": 3
    },
    "top": [
     [
@@ -159,9 +159,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "maker": 3,
-    "portal": 3,
     "media": 3,
+    "portal": 3,
+    "maker": 3,
     "other": 1
    },
    "top": [
@@ -188,10 +188,10 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
+    "media": 2,
     "portal": 3,
-    "public": 1,
     "maker": 3,
-    "media": 2
+    "public": 1
    },
    "top": [
     [
@@ -217,9 +217,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "maker": 3,
     "clinic": 3,
     "portal": 3,
+    "maker": 3,
     "media": 2
    },
    "top": [
@@ -246,9 +246,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "maker": 3,
     "clinic": 3,
     "portal": 3,
+    "maker": 3,
     "media": 2
    },
    "top": [
@@ -307,8 +307,8 @@
     "clinic": 3,
     "portal": 3,
     "media": 3,
-    "public": 2,
-    "maker": 2
+    "maker": 2,
+    "public": 2
    },
    "top": [
     [
@@ -335,8 +335,8 @@
    "kinds": {
     "clinic": 4,
     "portal": 4,
-    "other": 1,
     "public": 3,
+    "other": 1,
     "maker": 1
    },
    "top": [
@@ -366,8 +366,8 @@
     "clinic": 3,
     "portal": 3,
     "maker": 2,
-    "public": 1,
-    "media": 1
+    "media": 1,
+    "public": 1
    },
    "top": [
     [
@@ -422,8 +422,8 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "portal": 3,
     "clinic": 3,
+    "portal": 3,
     "maker": 1
    },
    "top": [
@@ -450,9 +450,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "maker": 1,
-    "portal": 3,
     "public": 1,
+    "portal": 3,
+    "maker": 1,
     "media": 1
    },
    "top": [
@@ -479,9 +479,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
+    "public": 1,
     "portal": 3,
-    "maker": 1,
-    "public": 1
+    "maker": 1
    },
    "top": [
     [
@@ -508,8 +508,8 @@
    "kinds": {
     "review": 1,
     "clinic": 2,
-    "portal": 3,
     "public": 2,
+    "portal": 3,
     "maker": 2,
     "media": 1
    },
@@ -597,9 +597,9 @@
     "public": 2,
     "clinic": 3,
     "other": 1,
-    "maker": 1,
-    "review": 1,
     "portal": 1,
+    "review": 1,
+    "maker": 1,
     "media": 1
    },
    "top": [
@@ -626,8 +626,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "maker": 1,
     "public": 1,
+    "maker": 1,
     "portal": 2,
     "media": 2
    },
@@ -655,10 +655,10 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "clinic": 2,
+    "media": 1,
     "portal": 2,
     "maker": 2,
-    "media": 1
+    "clinic": 2
    },
    "top": [
     [
@@ -742,8 +742,8 @@
    "kinds": {
     "portal": 4,
     "clinic": 3,
-    "maker": 2,
     "public": 2,
+    "maker": 2,
     "media": 1
    },
    "top": [
@@ -771,9 +771,9 @@
    "kinds": {
     "media": 2,
     "public": 4,
-    "maker": 3,
     "clinic": 2,
-    "portal": 3
+    "portal": 3,
+    "maker": 3
    },
    "top": [
     [
@@ -825,12 +825,12 @@
    "answered": 4,
    "kinds": {
     "public": 2,
-    "portal": 3,
     "video": 3,
     "other": 1,
+    "portal": 3,
     "maker": 3,
-    "clinic": 2,
-    "media": 2
+    "media": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -882,12 +882,12 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "portal": 4,
     "public": 1,
+    "portal": 4,
     "clinic": 3,
     "other": 1,
-    "maker": 2,
     "review": 1,
+    "maker": 2,
     "media": 1
    },
    "top": [
@@ -914,8 +914,8 @@
    "answered": 4,
    "kinds": {
     "public": 4,
-    "portal": 1,
     "clinic": 3,
+    "portal": 1,
     "maker": 3,
     "media": 1
    },
@@ -946,8 +946,8 @@
     "clinic": 3,
     "maker": 3,
     "other": 1,
-    "public": 1,
-    "media": 2
+    "media": 2,
+    "public": 1
    },
    "top": [
     [
@@ -972,8 +972,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "portal": 3,
     "public": 2,
+    "portal": 3,
     "clinic": 3,
     "media": 1
    },
@@ -1054,11 +1054,11 @@
    "answered": 4,
    "kinds": {
     "media": 2,
-    "clinic": 3,
-    "portal": 3,
-    "public": 2,
     "other": 1,
-    "maker": 3
+    "portal": 3,
+    "maker": 3,
+    "clinic": 3,
+    "public": 2
    },
    "top": [
     [
@@ -1085,8 +1085,8 @@
    "kinds": {
     "clinic": 4,
     "portal": 4,
-    "other": 1,
     "public": 1,
+    "other": 1,
     "media": 1
    },
    "top": [
@@ -1114,8 +1114,8 @@
    "kinds": {
     "clinic": 4,
     "portal": 4,
-    "maker": 2,
-    "media": 1
+    "media": 1,
+    "maker": 2
    },
    "top": [
     [
@@ -1143,9 +1143,9 @@
     "clinic": 4,
     "public": 2,
     "other": 1,
-    "portal": 2,
     "video": 1,
-    "media": 2
+    "media": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -1171,10 +1171,10 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "clinic": 2,
+    "media": 1,
     "portal": 2,
     "maker": 1,
-    "media": 1
+    "clinic": 2
    },
    "top": [
     [
@@ -1227,10 +1227,10 @@
    "group": "選び方",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
-    "portal": 3,
     "media": 3,
     "public": 1,
+    "portal": 3,
+    "clinic": 3,
     "video": 1
    },
    "top": [
@@ -1258,8 +1258,8 @@
    "kinds": {
     "public": 1,
     "clinic": 2,
-    "video": 1,
     "portal": 2,
+    "video": 1,
     "media": 1
    },
    "top": [
@@ -1343,11 +1343,11 @@
    "kinds": {
     "clinic": 3,
     "public": 2,
-    "portal": 2,
+    "review": 1,
     "other": 1,
-    "maker": 2,
     "media": 2,
-    "review": 1
+    "portal": 2,
+    "maker": 2
    },
    "top": [
     [
@@ -1427,9 +1427,9 @@
    "answered": 3,
    "kinds": {
     "public": 1,
-    "portal": 2,
     "clinic": 2,
     "video": 2,
+    "portal": 2,
     "maker": 1
    },
    "top": [
@@ -1455,8 +1455,8 @@
    "group": "選び方",
    "answered": 3,
    "kinds": {
-    "portal": 3,
     "public": 1,
+    "portal": 3,
     "clinic": 2,
     "maker": 1,
     "media": 1,
@@ -1486,11 +1486,11 @@
    "answered": 3,
    "kinds": {
     "public": 1,
-    "portal": 2,
     "clinic": 2,
+    "portal": 2,
     "maker": 1,
-    "video": 1,
-    "media": 1
+    "media": 1,
+    "video": 1
    },
    "top": [
     [
@@ -1544,8 +1544,8 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "clinic": 2,
     "media": 2,
+    "clinic": 2,
     "portal": 1
    },
    "top": [
@@ -1576,8 +1576,8 @@
     "portal": 1,
     "other": 1,
     "video": 1,
-    "maker": 1,
-    "media": 1
+    "media": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -1603,10 +1603,10 @@
    "answered": 3,
    "kinds": {
     "public": 3,
-    "clinic": 2,
+    "media": 2,
     "portal": 2,
     "maker": 1,
-    "media": 2
+    "clinic": 2
    },
    "top": [
     [
@@ -1632,8 +1632,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "portal": 3,
     "public": 1,
+    "portal": 3,
     "media": 2,
     "maker": 1
    },
@@ -1660,11 +1660,11 @@
    "group": "選び方",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
-    "portal": 3,
-    "public": 1,
-    "maker": 1,
     "media": 3,
+    "portal": 3,
+    "maker": 1,
+    "clinic": 3,
+    "public": 1,
     "video": 2
    },
    "top": [
@@ -1691,11 +1691,11 @@
    "answered": 4,
    "kinds": {
     "public": 1,
-    "clinic": 3,
-    "portal": 3,
     "video": 1,
     "other": 1,
-    "media": 3
+    "media": 3,
+    "portal": 3,
+    "clinic": 3
    },
    "top": [
     [
@@ -1720,8 +1720,8 @@
    "group": "選び方",
    "answered": 4,
    "kinds": {
-    "portal": 4,
     "public": 2,
+    "portal": 4,
     "clinic": 3,
     "other": 1,
     "media": 2
@@ -1749,8 +1749,8 @@
    "group": "手続き・トラブル",
    "answered": 3,
    "kinds": {
-    "maker": 1,
     "public": 2,
+    "maker": 1,
     "clinic": 2,
     "portal": 2
    },
@@ -1778,10 +1778,10 @@
    "answered": 3,
    "kinds": {
     "public": 3,
-    "clinic": 2,
+    "media": 1,
     "portal": 2,
     "maker": 1,
-    "media": 1
+    "clinic": 2
    },
    "top": [
     [
@@ -1835,12 +1835,12 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "portal": 2,
     "video": 1,
-    "maker": 2,
     "media": 2,
-    "clinic": 1,
-    "review": 1
+    "portal": 2,
+    "maker": 2,
+    "review": 1,
+    "clinic": 1
    },
    "top": [
     [
@@ -1866,11 +1866,11 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "clinic": 2,
-    "portal": 2,
     "video": 1,
+    "media": 2,
+    "portal": 2,
     "maker": 1,
-    "media": 2
+    "clinic": 2
    },
    "top": [
     [
@@ -1896,11 +1896,11 @@
    "answered": 3,
    "kinds": {
     "public": 3,
-    "maker": 1,
     "clinic": 2,
     "portal": 1,
-    "video": 1,
-    "media": 1
+    "maker": 1,
+    "media": 1,
+    "video": 1
    },
    "top": [
     [
@@ -1926,10 +1926,10 @@
    "answered": 3,
    "kinds": {
     "public": 3,
-    "clinic": 2,
-    "portal": 2,
     "video": 1,
     "other": 2,
+    "portal": 2,
+    "clinic": 2,
     "media": 1
    },
    "top": [
@@ -1956,11 +1956,11 @@
    "answered": 3,
    "kinds": {
     "public": 1,
-    "clinic": 2,
-    "portal": 2,
     "other": 2,
+    "media": 2,
+    "portal": 2,
     "maker": 2,
-    "media": 2
+    "clinic": 2
    },
    "top": [
     [
@@ -1985,11 +1985,11 @@
    "group": "手続き・トラブル",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
-    "portal": 2,
-    "public": 1,
     "other": 1,
-    "maker": 2
+    "portal": 2,
+    "maker": 2,
+    "clinic": 2,
+    "public": 1
    },
    "top": [
     [
@@ -2043,9 +2043,9 @@
    "group": "手続き・トラブル",
    "answered": 2,
    "kinds": {
-    "maker": 2,
     "clinic": 2,
     "portal": 2,
+    "maker": 2,
     "media": 2
    },
    "top": [
@@ -2097,9 +2097,9 @@
    "group": "手続き・トラブル",
    "answered": 2,
    "kinds": {
-    "maker": 2,
     "clinic": 2,
     "portal": 2,
+    "maker": 2,
     "review": 1
    },
    "top": [
@@ -2126,8 +2126,8 @@
    "answered": 2,
    "kinds": {
     "clinic": 2,
-    "video": 1,
     "portal": 2,
+    "video": 1,
     "media": 2,
     "maker": 1
    },
@@ -2183,11 +2183,11 @@
    "group": "手続き・トラブル",
    "answered": 3,
    "kinds": {
-    "clinic": 1,
-    "portal": 2,
-    "public": 3,
     "other": 2,
     "media": 2,
+    "portal": 2,
+    "clinic": 1,
+    "public": 3,
     "video": 1,
     "maker": 1
    },
@@ -2215,9 +2215,9 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "other": 2,
-    "media": 1,
     "public": 2,
+    "media": 1,
+    "other": 2,
     "portal": 1
    },
    "top": [
@@ -2243,11 +2243,11 @@
    "group": "手続き・トラブル",
    "answered": 3,
    "kinds": {
+    "other": 1,
+    "media": 2,
+    "maker": 3,
     "clinic": 2,
     "public": 3,
-    "other": 1,
-    "maker": 3,
-    "media": 2,
     "portal": 1
    },
    "top": [
@@ -2273,10 +2273,10 @@
    "group": "手続き・トラブル",
    "answered": 2,
    "kinds": {
-    "other": 2,
     "clinic": 2,
     "portal": 2,
     "media": 2,
+    "other": 2,
     "public": 1
    },
    "top": [
@@ -2303,8 +2303,8 @@
    "answered": 2,
    "kinds": {
     "clinic": 2,
-    "portal": 2,
     "public": 2,
+    "portal": 2,
     "media": 1
    },
    "top": [
@@ -2330,11 +2330,11 @@
    "group": "物件・街の探し方",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
-    "portal": 3,
     "other": 2,
+    "media": 3,
+    "portal": 3,
     "maker": 3,
-    "media": 3
+    "clinic": 3
    },
    "top": [
     [
@@ -2359,9 +2359,9 @@
    "group": "物件・街の探し方",
    "answered": 3,
    "kinds": {
-    "clinic": 3,
-    "maker": 1,
     "media": 3,
+    "maker": 1,
+    "clinic": 3,
     "portal": 2
    },
    "top": [
@@ -2389,10 +2389,10 @@
    "kinds": {
     "clinic": 3,
     "other": 1,
+    "media": 2,
     "portal": 2,
-    "public": 2,
     "maker": 1,
-    "media": 2
+    "public": 2
    },
    "top": [
     [
@@ -2417,10 +2417,10 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "maker": 2,
-    "clinic": 2,
+    "media": 2,
     "portal": 2,
-    "media": 2
+    "maker": 2,
+    "clinic": 2
    },
    "top": [
     [
@@ -2447,8 +2447,8 @@
    "kinds": {
     "portal": 3,
     "other": 1,
-    "maker": 1,
     "media": 2,
+    "maker": 1,
     "clinic": 1
    },
    "top": [
@@ -2475,9 +2475,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "video": 3,
-    "portal": 4,
     "public": 3,
+    "portal": 4,
+    "video": 3,
     "other": 2,
     "media": 2
    },
@@ -2532,9 +2532,9 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
+    "media": 2,
     "portal": 2,
-    "media": 2
+    "clinic": 2
    },
    "top": [
     [
@@ -2559,8 +2559,8 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "portal": 2,
     "media": 2,
+    "portal": 2,
     "clinic": 1
    },
    "top": [
@@ -2586,11 +2586,11 @@
    "group": "物件・街の探し方",
    "answered": 3,
    "kinds": {
-    "portal": 3,
     "video": 2,
     "other": 2,
-    "maker": 1,
     "media": 3,
+    "portal": 3,
+    "maker": 1,
     "clinic": 2
    },
    "top": [
@@ -2616,10 +2616,10 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "other": 1,
-    "clinic": 2,
-    "portal": 2,
     "media": 2,
+    "portal": 2,
+    "clinic": 2,
+    "other": 1,
     "public": 1
    },
    "top": [
@@ -2645,10 +2645,10 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "portal": 2,
     "clinic": 2,
-    "video": 1,
+    "portal": 2,
     "maker": 1,
+    "video": 1,
     "media": 1
    },
    "top": [
@@ -2675,9 +2675,9 @@
    "answered": 3,
    "kinds": {
     "clinic": 1,
+    "public": 3,
     "maker": 1,
     "other": 1,
-    "public": 3,
     "media": 1
    },
    "top": [
@@ -2703,12 +2703,12 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "clinic": 2,
-    "portal": 1,
     "video": 1,
     "other": 2,
-    "maker": 1,
     "media": 2,
+    "portal": 1,
+    "maker": 1,
+    "clinic": 2,
     "public": 1
    },
    "top": [
@@ -2734,11 +2734,11 @@
    "group": "物件・街の探し方",
    "answered": 4,
    "kinds": {
-    "clinic": 3,
     "media": 2,
-    "portal": 3,
+    "clinic": 3,
     "video": 2,
     "other": 1,
+    "portal": 3,
     "maker": 1
    },
    "top": [
@@ -2764,9 +2764,9 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "portal": 2,
     "clinic": 2,
     "video": 1,
+    "portal": 2,
     "maker": 2,
     "media": 1
    },
@@ -2795,8 +2795,8 @@
    "kinds": {
     "clinic": 3,
     "maker": 3,
-    "portal": 2,
     "public": 1,
+    "portal": 2,
     "media": 1
    },
    "top": [
@@ -2853,8 +2853,8 @@
    "kinds": {
     "clinic": 3,
     "video": 1,
-    "portal": 2,
-    "media": 2
+    "media": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -2879,11 +2879,11 @@
    "group": "物件・街の探し方",
    "answered": 2,
    "kinds": {
-    "maker": 2,
-    "portal": 2,
     "public": 2,
-    "clinic": 1,
-    "media": 1
+    "portal": 2,
+    "maker": 2,
+    "media": 1,
+    "clinic": 1
    },
    "top": [
     [

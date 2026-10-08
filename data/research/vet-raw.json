@@ -10,8 +10,13 @@
   "大阪 動物病院 夜間救急": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://doubutsuyakan.jp/",
+     "https://heah.jp/",
+     "https://www.raema.or.jp/",
+     "https://horie-amc.jp/hospital-guide/night-practice/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -47,8 +52,15 @@
   "東京 動物病院 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jamc.co.jp/",
+     "https://www.otakibashi.com/index.php",
+     "https://dec-ah.com/",
+     "https://trva.jp/",
+     "https://www.vm.a.u-tokyo.ac.jp/vmc/",
+     "https://www.vm.a.u-tokyo.ac.jp/vmc/owner/appointment/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -81,8 +93,13 @@
   "名古屋 犬 ワクチン 近く": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nagoya-ah.com/clinic/",
+     "https://nagoyamirai.jp/dog-prevention/",
+     "https://okmts-ah.com/",
+     "https://nagoyavet.jp/rabies.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -121,8 +138,13 @@
   "福岡 猫 去勢 動物病院": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://oasis-ah.net/medical/?id=NormalMedical",
+     "https://imakoga-ah.com/medical/",
+     "https://24-84.com/fukuoka/",
+     "https://www.city.fukuoka.lg.jp/hofuku/seikatsueisei/shisei/microtip_2.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -162,8 +184,11 @@
   "札幌 動物病院 口コミ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://pet.caloo.jp/hospitals/search/01a/all/all",
+     "https://pet.caloo.jp/reviews/search/01a/all/all"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -197,8 +222,13 @@
   "横浜 動物病院 休日診療": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kirsche-vet.jp/",
+     "https://aoba-amc.com/",
+     "https://www.nakahata-ac.com/",
+     "https://veccs-yokohama.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -232,8 +262,12 @@
   "京都 ペット 救急 夜間": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kyoto99.net/about.html",
+     "https://kyoto99.net/preps_flow.html",
+     "https://nac-kyoto.com/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -270,8 +304,15 @@
   "神戸 動物病院 ペット保険 対応": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ikura-vet.com/news/初めての方へ、窓口清算対応について/",
+     "https://hyogominato-ah.com/",
+     "https://ackobe.com/about/",
+     "https://family-ac.com/first/",
+     "https://www.anicom-sompo.co.jp/customers/payment/",
+     "https://faq-ipet.dga.jp/18147/?page=1"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -306,8 +347,13 @@
   "仙台 猫 健康診断 動物病院": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://yu-ah.com/course/healthcare/",
+     "https://www.small-animal.com/cat",
+     "https://iris-ah.net/service.html",
+     "https://ebisu-ah.jp/treatment/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -337,8 +383,13 @@
   "広島 犬 避妊手術 動物病院": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kawano-ah.com/castration/",
+     "https://ah.aeonpet.com/hospitals/hiroshimafuchu/",
+     "https://www.ishizaki-ah.jp/fukukuukyo/",
+     "https://yasunaga-inuneko.com/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -380,8 +431,13 @@
   "犬 ワクチン 費用 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.anac.tokyo/prevention/",
+     "https://www.kogasaka-ah.com/fees.html",
+     "https://www.city.chiba.jp/hokenfukushi/iryoeisei/seikatsueisei/dobutsuhogo/r7shugouchucha/r7shugouchucha.html",
+     "https://tomo-ah.jp/vaccine.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -413,8 +469,11 @@
   "猫 去勢手術 費用 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://bowmew-ah.com/blog/cat-neuter-cost",
+     "https://www.doushin-amc.jp/fee/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -444,8 +503,13 @@
   "犬 避妊手術 料金 目安": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hachioji-amc.com/information/fee/",
+     "https://www.ogikubo-animal.com/prevention/spay-neuter/",
+     "https://peco-japan.com/hospital/price/",
+     "https://omah.tokyo/medical/spay/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -475,8 +539,13 @@
   "動物病院 初診料 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.hachioji-amc.com/information/fee/",
+     "https://komachi-ah.com/service/price/",
+     "https://waf-ac.com/first_visit/",
+     "https://yawataminami.com/first/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -510,8 +579,11 @@
   "夜間救急 動物病院 料金 高い": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jamc.co.jp/yakanshinryo/",
+     "https://www.svet.jp/yakan/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -538,8 +610,11 @@
   "犬 健康診断 費用 どれくらい": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://hugwell-vets.com/medical/healthcheck.html",
+     "https://www.pet-care-center.com/guide/checkup/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -572,8 +647,12 @@
   "猫 歯石除去 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.aoneko-ah.com/dental/",
+     "https://www.tsutsuji-vh.com/price/",
+     "https://ohya-ah.com/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -611,8 +690,12 @@
   "ペット保険 月額 相場": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.petfamilyins.co.jp/pns/article/pfs202309bb/",
+     "https://www.petfamilyins.co.jp/pns/article/pfs202308c/",
+     "https://hoken.rakuten.co.jp/pet/column/explanation/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -637,8 +720,13 @@
   "動物病院 診察代 払えない 分割": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.nvlu.ac.jp/amedical/medical-guidance/002-002.html",
+     "https://www.mona-oh.co.jp/department/",
+     "https://www.daktari.gr.jp/faq_category/payment/",
+     "https://www.surugabank.co.jp/reserved/landing/pet/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -671,8 +759,13 @@
   "犬 フィラリア 予防薬 年間 費用": {
    "group": "費用",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.shibaura-amc.com/ryoukin.html",
+     "https://furuya-ac.co.jp/heartworm",
+     "https://www.terayachi.com/firalia/",
+     "https://www.ukyo-ah.com/hospital/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -705,8 +798,13 @@
   "動物病院 選び方 初めて": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://animal-hospital.jaha.or.jp/search/",
+     "https://www.anicom-sompo.co.jp/doubutsu_pedia/node/1418",
+     "https://jvma-vet.jp/about/pdf/3-2.pdf",
+     "https://jvma-vet.jp/clinic/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -740,8 +838,12 @@
   "動物病院 良い病院 見分け方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jvma-vet.jp/about/pdf/3-2.pdf",
+     "https://animal-hospital.jaha.or.jp/search/",
+     "https://www.tochigi-vet.or.jp/outline/rinen.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -771,8 +873,13 @@
   "かかりつけ 動物病院 決め方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://tvma.or.jp/clinic/",
+     "https://jvma-vet.jp/about/projects/chikai_pdf/2-1.pdf",
+     "https://jvma-vet.jp/data/small/index.html",
+     "https://www.s-vet.com/doubutsu/doubutsu27/doubutsu27.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -805,8 +912,12 @@
   "動物病院 大きい 小さい 違い": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://animal.kyoto/guide/",
+     "https://jamc.co.jp/about/",
+     "https://trva.jp/medical/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -832,8 +943,13 @@
   "猫 専門 動物病院 選び方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://catvets.com/resource/isfm-aafp-cat-friendly-veterinary-environment-guidelines/",
+     "https://www.jsfm-catfriendly.com/cfc/standard.html",
+     "https://www.jsfm-catfriendly.com/cfc/hospital.html",
+     "https://www.jsfm-catfriendly.com/cfc/interview03/index.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -873,8 +989,12 @@
   "セカンドオピニオン 動物病院 やり方": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jarvis.anicom-med.co.jp/second-opinion/",
+     "https://jamc.co.jp/second-opinion/",
+     "https://www.takeda-ah.com/guide/secondopinion/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -908,8 +1028,11 @@
   "動物病院 説明 丁寧 見極め": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jvma-vet.jp/about/pdf/3-2.pdf",
+     "https://www.anicom-sompo.co.jp/doubutsu_pedia/node/1418?search-pattern=breed"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -935,8 +1058,12 @@
   "動物病院 口コミ 信用できる": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://support.google.com/contributionpolicy/answer/7400114?hl=ja",
+     "https://blog.google/intl/ja-jp/products/explore-get-answers/2022_02_google-reviews-jp/",
+     "https://cheriee.jp/articles/57627/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -959,8 +1086,12 @@
   "二次診療 動物病院 紹介 とは": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://namc.co.jp/vet/renkei/",
+     "https://www.allheart-arc.com/guide/",
+     "https://www.vetmed.hokudai.ac.jp/VMTH/owner/yoyaku/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -982,8 +1113,13 @@
   "動物病院 引っ越し 転院 方法": {
    "group": "選び方",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://animaldoc.jp/animal-column/veterinary-hospital-transfer/",
+     "https://www.uchinokono.jp/column/vet-transfer/",
+     "https://www.city.fukuoka.lg.jp/hofuku/dobutsukanri/qa/FAQ4148.html",
+     "https://www.env.go.jp/nature/dobutsu/aigo/pickup/chip/leaflet.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1005,8 +1141,11 @@
   "子犬 ワクチン スケジュール": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://onlinelibrary.wiley.com/doi/10.1111/jsap.13718",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou/rabies_qa.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1043,8 +1182,12 @@
   "子猫 ワクチン 時期": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.aaha.org/resources/2020-aahaaafp-feline-vaccination-guidelines/core-vaccines-for-pet-cats/",
+     "https://doi.org/10.1111/jsap.13718",
+     "https://www.aaha.org/resources/2020-aahaaafp-feline-vaccination-guidelines/vaccination-principles/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1078,8 +1221,14 @@
   "混合ワクチン 種類 違い": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou/yobou-sesshu/vaccine/dpt-ipv-hib/index.html",
+     "https://www.city.toyama.lg.jp/health/kenshin/1010430/1004041.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou/yobou-sesshu/vaccine/mr/index.html",
+     "https://www.mhlw.go.jp/web/t_doc?dataId=00tc9060&dataType=1&pageNo=1",
+     "https://www.jpeds.or.jp/society-activities/pediatric-medical-care/vaccination/opinion/20236.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1126,8 +1275,12 @@
   "狂犬病 予防接種 いつ": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mhlw.go.jp/bunya/kenkou/kekkaku-kansenshou18/dl/240328-01.pdf",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou/rabies_qa.html",
+     "https://www.forth.go.jp/moreinfo/topics/useful_vaccination.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1155,8 +1308,13 @@
   "ワクチン 副作用 症状": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou/infulenza/QA2024.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/vaccine_qa_archive.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/vaccine_qa.html",
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou/hpv_qa.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1183,8 +1341,12 @@
   "室内飼い 猫 ワクチン 必要": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.aaha.org/trends-magazine/publications/2020-aahaaafp-feline-vaccination-guidelines/",
+     "https://www.vet.cornell.edu/departments-centers-and-institutes/cornell-feline-health-center/health-information/feline-health-topics/feline-vaccines-benefits-and-risks",
+     "https://www.aaha.org/resources/2020-aahaaafp-feline-vaccination-guidelines/core-vaccines-for-pet-cats/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1214,8 +1376,12 @@
   "ノミダニ 予防 いつから": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.halu.vet/【ノミ・マダニ予防】予防必須！ノミやマダニは/",
+     "https://www.oak-animal.com/prevention/dog/flea_tick",
+     "https://www.matsunami-shop.com/f/faq_06"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1253,8 +1419,12 @@
   "フィラリア 予防 時期 いつまで": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.saitama-vma.org/topics/%E4%BB%8A%E3%81%95%E3%82%89%EF%BC%9F%E3%83%95%E3%82%A3%E3%83%A9%E3%83%AA%E3%82%A2%E4%BA%88%E9%98%B2q%EF%BC%86a/",
+     "https://www.animal-119.com/qa.html",
+     "https://www.kohoku-ah.com/2024/05/08/1621/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1286,8 +1456,11 @@
   "犬 ワクチン 毎年 必要か": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kekkaku-kansenshou18/kyokenbyou.html",
+     "https://wsava.org/wp-content/uploads/2024/04/WSAVA-Vaccination-guidelines-2024.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1319,8 +1492,11 @@
   "去勢 避妊 時期 いつ": {
    "group": "予防とワクチン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.aaha.org/resources/spay-or-neuter/",
+     "https://www.aaha.org/resources/life-stage-canine-2019/spay-and-neuter-timing/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1352,8 +1528,12 @@
   "犬 夜間 急に 吐く": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://vcahospitals.com/know-your-pet/common-emergencies-in-dogs",
+     "https://www.bluecross.org.uk/advice/dog/basic-first-aid-for-dogs",
+     "https://www.bluecross.org.uk/advice/dog/caring-for-your-sick-dog"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1384,8 +1564,13 @@
   "猫 夜中 ぐったり 病院": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ka-mc.com/emergency/",
+     "https://shinagawa-vet.com/night-2/",
+     "https://jamc.co.jp/yakanshinryo/faq/",
+     "https://o-vet.co.jp/column/1810/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1419,8 +1604,12 @@
   "犬 誤飲 すぐ 病院": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://koduka-ah.com/?p=1740",
+     "https://kodaira.anihoc.com/column/512/",
+     "https://jamc.co.jp/dog_colum/犬が異物を飲み込んだ時/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1462,8 +1651,13 @@
   "猫 痙攣 救急": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.pdsa.org.uk/what-we-do/blog/vet-qas-what-to-know-about-epilepsy-in-cats",
+     "https://vcahospitals.com/know-your-pet/seizures-and-epilepsy-in-cats",
+     "https://www.pdsa.org.uk/media/4803/45716_pet-first-aid-a5-portrait_aw_hires_spreads.pdf",
+     "https://www.pdsa.org.uk/pet-help-and-advice/pet-health-hub/other-veterinary-advice/first-aid-for-fitsseizures-in-pets"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1506,8 +1700,14 @@
   "夜間救急 動物病院 探し方": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://jvma-vet.jp/clinic/index.html",
+     "https://animal-hospital.jaha.or.jp/search/",
+     "https://nagoyavet.jp/hospital_yakan.php",
+     "https://www.sapporo1299.net/",
+     "https://kyoto99.net/preps_flow.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1533,8 +1733,12 @@
   "犬 熱中症 応急処置": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.rvc.ac.uk/small-animal-vet/teaching-and-research/fact-files/heatstroke-in-dogs-and-cats",
+     "https://onlinelibrary.wiley.com/doi/full/10.1111/vec.70138",
+     "https://vcahospitals.com/know-your-pet/heat-stroke-in-dogs"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1571,8 +1775,11 @@
   "猫 おしっこ 出ない 救急": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.vet.cornell.edu/departments-centers-and-institutes/cornell-feline-health-center/health-information/feline-health-topics/feline-lower-urinary-tract-disease",
+     "https://www.acvs.org/small-animal/urinary-obstruction-in-male-cats/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1604,8 +1811,13 @@
   "夜間 動物病院 電話 相談": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.anicli24.com/lp/",
+     "https://jamc.co.jp/yakanshinryo/faq/",
+     "https://trva.jp/",
+     "https://kitakyu-vet.com/night/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1648,8 +1860,12 @@
   "犬 下痢 血便 受診 目安": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://pascal-omiya.com/2025/06/01/1264/",
+     "https://maruo-ah.jp/dog-cat-diarrhea/",
+     "https://www.himedou.net/2025/02/20/594/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1689,8 +1905,12 @@
   "救急 受診 持ち物 ペット": {
    "group": "夜間救急と急な体調不良",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kobe-naec.com/information/",
+     "https://heah.jp/",
+     "https://www.pet-hospital.org/about/note.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1734,5 +1954,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-08"
 }

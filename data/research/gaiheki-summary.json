@@ -1,21 +1,21 @@
 {
  "total": {
-  "clinic": 494,
-  "other": 19,
+  "clinic": 535,
+  "other": 22,
   "video": 8,
-  "maker": 37,
-  "portal": 253,
-  "public": 12,
+  "maker": 59,
+  "portal": 265,
+  "public": 57,
   "media": 22,
   "wiki": 1
  },
  "by_engine": {
   "ChatGPT": {
-   "clinic": 12,
-   "other": 1,
-   "public": 1,
-   "portal": 4,
-   "maker": 3
+   "clinic": 53,
+   "other": 4,
+   "public": 46,
+   "portal": 16,
+   "maker": 25
   },
   "Gemini": {
    "clinic": 149,
@@ -39,77 +39,80 @@
  },
  "by_group": {
   "地域で探す": {
-   "clinic": 70,
+   "clinic": 85,
    "other": 3,
    "video": 3,
    "maker": 4,
-   "portal": 81,
-   "public": 2,
+   "portal": 83,
+   "public": 4,
    "media": 9
   },
   "費用・相場": {
-   "portal": 61,
-   "maker": 10,
-   "clinic": 89,
+   "portal": 66,
+   "maker": 12,
+   "clinic": 99,
    "video": 1,
    "media": 7,
-   "other": 1
+   "other": 3,
+   "public": 4
   },
   "業者の選び方": {
+   "public": 37,
+   "clinic": 99,
+   "portal": 59,
    "media": 6,
-   "portal": 56,
-   "clinic": 95,
-   "public": 10,
    "maker": 2,
    "video": 2,
    "other": 10,
    "wiki": 1
   },
   "劣化・症状の悩み": {
-   "clinic": 122,
-   "portal": 29,
-   "other": 3,
-   "maker": 7,
+   "maker": 15,
+   "public": 8,
+   "clinic": 127,
+   "portal": 31,
+   "other": 4,
    "video": 1
   },
   "塗料・工事内容の悩み": {
+   "maker": 26,
    "portal": 26,
-   "clinic": 118,
+   "clinic": 125,
+   "public": 4,
    "other": 2,
-   "maker": 14,
    "video": 1
   }
  },
  "answered": {
-  "ChatGPT": 6,
+  "ChatGPT": 50,
   "Gemini": 33,
   "Claude": 50
  },
  "has_clinic": {
-  "ChatGPT": 5,
+  "ChatGPT": 28,
   "Gemini": 33,
   "Claude": 49
  },
  "sources": {
-  "ChatGPT": 21,
+  "ChatGPT": 144,
   "Gemini": 258,
   "Claude": 567
  },
  "portal_top": [
   [
    "nuri-kae.jp",
-   33
+   36
   ],
   [
    "tosouyasan13.net",
    19
   ],
   [
-   "gaiheki-madoguchi.com",
-   12
+   "rehome-navi.com",
+   13
   ],
   [
-   "rehome-navi.com",
+   "gaiheki-madoguchi.com",
    12
   ],
   [
@@ -155,60 +158,63 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 89,
-   "other": 10,
-   "clinic": 87,
-   "portal": 80,
+   "answers": 133,
+   "other": 12,
+   "clinic": 110,
+   "portal": 91,
    "video": 8,
-   "maker": 26,
-   "public": 6,
+   "maker": 40,
+   "public": 27,
    "media": 17,
    "wiki": 1
   },
   "地域で探す": {
-   "answers": 25,
+   "answers": 30,
    "other": 3,
-   "clinic": 24,
-   "portal": 20,
+   "clinic": 29,
+   "portal": 22,
    "video": 3,
    "maker": 3,
-   "public": 2,
+   "public": 4,
    "media": 7
   },
   "費用・相場": {
-   "answers": 20,
-   "maker": 7,
-   "portal": 20,
+   "answers": 29,
+   "maker": 8,
+   "portal": 24,
    "video": 1,
-   "clinic": 19,
+   "clinic": 25,
    "media": 6,
-   "other": 1
+   "other": 2,
+   "public": 2
   },
   "業者の選び方": {
-   "answers": 14,
+   "answers": 24,
+   "public": 14,
+   "portal": 16,
+   "clinic": 17,
    "media": 4,
-   "clinic": 14,
-   "portal": 13,
-   "public": 4,
    "maker": 2,
    "video": 2,
-   "other": 1,
-   "wiki": 1
+   "wiki": 1,
+   "other": 1
   },
   "劣化・症状の悩み": {
-   "answers": 15,
-   "other": 3,
-   "portal": 14,
-   "clinic": 15,
-   "maker": 5,
+   "answers": 25,
+   "maker": 11,
+   "public": 5,
+   "other": 4,
+   "portal": 16,
+   "clinic": 20,
    "video": 1
   },
   "塗料・工事内容の悩み": {
-   "answers": 15,
-   "clinic": 15,
+   "answers": 25,
+   "maker": 16,
    "portal": 13,
+   "clinic": 19,
+   "public": 2,
    "other": 2,
-   "maker": 9,
    "video": 1
   }
  }

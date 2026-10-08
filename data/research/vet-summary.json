@@ -1,14 +1,22 @@
 {
  "total": {
-  "media": 168,
-  "portal": 79,
-  "clinic": 429,
-  "other": 25,
-  "public": 52,
-  "maker": 73,
+  "portal": 92,
+  "clinic": 514,
+  "media": 171,
+  "other": 26,
+  "public": 90,
+  "maker": 83,
   "video": 11
  },
  "by_engine": {
+  "ChatGPT": {
+   "portal": 13,
+   "clinic": 85,
+   "public": 38,
+   "maker": 10,
+   "other": 1,
+   "media": 3
+  },
   "Gemini": {
    "media": 38,
    "portal": 28,
@@ -30,81 +38,96 @@
  },
  "by_group": {
   "地域で探す": {
+   "portal": 38,
+   "clinic": 130,
    "media": 9,
-   "portal": 35,
-   "clinic": 100,
-   "other": 10,
-   "public": 9,
-   "maker": 6,
+   "other": 11,
+   "public": 11,
+   "maker": 8,
    "video": 2
   },
   "費用": {
-   "maker": 14,
-   "clinic": 63,
-   "media": 51,
+   "clinic": 88,
+   "public": 4,
+   "maker": 17,
+   "media": 52,
    "portal": 11,
-   "public": 2,
    "other": 4,
    "video": 2
   },
   "選び方": {
-   "clinic": 56,
-   "media": 47,
+   "portal": 17,
+   "maker": 8,
+   "public": 17,
+   "clinic": 65,
+   "media": 48,
    "video": 5,
-   "public": 6,
-   "portal": 13,
-   "maker": 4,
    "other": 3
   },
   "予防とワクチン": {
-   "clinic": 95,
-   "maker": 16,
+   "public": 41,
+   "clinic": 98,
+   "maker": 17,
    "media": 28,
-   "portal": 5,
-   "other": 4,
-   "public": 25
+   "portal": 6,
+   "other": 4
   },
   "夜間救急と急な体調不良": {
+   "portal": 20,
+   "public": 17,
    "maker": 33,
-   "media": 33,
-   "clinic": 115,
+   "media": 34,
+   "clinic": 133,
    "other": 4,
-   "portal": 15,
-   "video": 2,
-   "public": 10
+   "video": 2
   }
  },
  "answered": {
+  "ChatGPT": 50,
   "Gemini": 38,
   "Claude": 50
  },
  "has_clinic": {
+  "ChatGPT": 30,
   "Gemini": 36,
   "Claude": 43
  },
  "sources": {
+  "ChatGPT": 150,
   "Gemini": 325,
   "Claude": 512
  },
  "portal_top": [
   [
    "animaldoc.jp",
-   14
+   15
   ],
   [
    "petlife.asia",
    8
   ],
   [
+   "pet.caloo.jp",
+   4
+  ],
+  [
+   "animal-hospital.jaha.or.jp",
+   4
+  ],
+  [
    "homemate-research-pet-clinic.com",
    4
   ],
   [
-   "animal.doctorsfile.jp",
+   "pet-hospital.org",
+   4
+  ],
+  [
+   "doubutsuyakan.jp",
    3
   ],
   [
-   "pet.caloo.jp",
+   "animal.doctorsfile.jp",
    3
   ],
   [
@@ -112,20 +135,8 @@
    3
   ],
   [
-   "pet-hospital.org",
+   "vcahospitals.com",
    3
-  ],
-  [
-   "doubutsuyakan.jp",
-   2
-  ],
-  [
-   "tokyo-doctors.com",
-   2
-  ],
-  [
-   "asa-animal-hospital.com",
-   2
   ]
  ],
  "industry": "vet",
@@ -146,63 +157,63 @@
  },
  "per_answer": {
   "全体": {
-   "answers": 88,
-   "clinic": 79,
-   "other": 22,
-   "media": 57,
-   "portal": 47,
-   "public": 27,
-   "maker": 35,
+   "answers": 138,
+   "clinic": 109,
+   "portal": 59,
+   "media": 60,
+   "other": 23,
+   "public": 52,
+   "maker": 42,
    "video": 11
   },
   "地域で探す": {
-   "answers": 20,
-   "clinic": 18,
-   "other": 7,
+   "answers": 30,
+   "clinic": 27,
+   "portal": 18,
    "media": 7,
-   "portal": 15,
-   "public": 6,
-   "maker": 4,
+   "other": 8,
+   "public": 8,
+   "maker": 5,
    "video": 2
   },
   "費用": {
-   "answers": 19,
-   "clinic": 15,
-   "maker": 8,
-   "media": 16,
+   "answers": 29,
+   "clinic": 24,
+   "public": 3,
+   "maker": 10,
+   "media": 17,
    "portal": 9,
-   "public": 1,
    "other": 4,
    "video": 2
   },
   "選び方": {
-   "answers": 14,
-   "clinic": 14,
+   "answers": 24,
+   "maker": 7,
+   "public": 12,
+   "portal": 11,
+   "media": 13,
    "video": 5,
-   "media": 12,
-   "public": 5,
-   "portal": 8,
-   "maker": 4,
+   "clinic": 18,
    "other": 3
   },
   "予防とワクチン": {
-   "answers": 18,
-   "clinic": 15,
-   "maker": 7,
+   "answers": 28,
+   "public": 18,
    "media": 10,
-   "portal": 5,
-   "public": 9,
+   "clinic": 17,
+   "portal": 6,
+   "maker": 8,
    "other": 4
   },
   "夜間救急と急な体調不良": {
-   "answers": 17,
-   "clinic": 17,
+   "answers": 27,
+   "public": 11,
+   "portal": 15,
+   "media": 13,
+   "clinic": 23,
    "maker": 12,
-   "media": 12,
    "other": 4,
-   "portal": 10,
-   "video": 2,
-   "public": 6
+   "video": 2
   }
  }
 }
