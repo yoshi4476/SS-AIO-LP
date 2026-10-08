@@ -287,6 +287,12 @@
         "クリニック 事務長"
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-08",
+      "sec": 45,
+      "title": "自由診療の料金、どう載せる？",
+      "youtube": "-aXtIQyypoI"
     }
   },
   "shika-shoujou-page-tsukurikata": {
@@ -468,6 +474,23 @@
         "外壁塗装 diy",
         "外壁塗装",
         "外壁塗装の仕方"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "aio-taisaku-hilink": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-08",
+      "keyword": "aio対策 被リンク",
+      "queries": [
+        "aio対策 被リンク"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "被リンク",
+        "被リンクとは",
+        "イラレ リフレクトツール"
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
     }
