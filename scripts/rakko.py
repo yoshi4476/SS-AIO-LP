@@ -514,21 +514,31 @@ def _rows(res):
     return d if isinstance(d, list) else []
 
 
+SUGGEST = "/v1/suggest-keywords"
+RELATED = "/v1/related-keywords"
+
+
+def suggest_body(keyword, modes=None, limit=100):
+    """サジェストの問い合わせの中身。控え（キャッシュ）の鍵になるので、見積もり・dry-run も必ずこれで作る。
+    kw_plan は別の中身で控えを引いていたため、取得済みの語も「未取得」と数え、dry-run で控えを使えなかった（2026-10-08）"""
+    return {"keyword": keyword, "modes": modes or ["google", "youtube"],
+            "increaseKeyword": True,          # 50音展開ぶんも含める
+            "sortBy": "searchVolume", "orderBy": "desc", "limit": limit}
+
+
+def related_body(keyword, limit=100):
+    return {"keyword": keyword, "matchType": "partialMatch",
+            "sortBy": "searchVolume", "orderBy": "desc", "limit": limit}
+
+
 def suggest(keyword, modes=None, limit=100):
     """サジェスト。modes は google / bing / youtube などを複数指定できる"""
-    res = call("/v1/suggest-keywords", {
-        "keyword": keyword, "modes": modes or ["google", "youtube"],
-        "increaseKeyword": True,          # 50音展開ぶんも含める
-        "sortBy": "searchVolume", "orderBy": "desc", "limit": limit})
-    return _rows(res)
+    return _rows(call(SUGGEST, suggest_body(keyword, modes, limit)))
 
 
 def related(keyword, limit=100):
     """関連キーワード（部分一致）"""
-    res = call("/v1/related-keywords", {
-        "keyword": keyword, "matchType": "partialMatch",
-        "sortBy": "searchVolume", "orderBy": "desc", "limit": limit})
-    return _rows(res)
+    return _rows(call(RELATED, related_body(keyword, limit)))
 
 
 def questions(keyword):

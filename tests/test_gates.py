@@ -1739,7 +1739,15 @@ def test_kw_plan_keeps_only_buyers():
     import rakko as _rk
     S_est = {"cfg": {"id": "ai-lab", "kw_seeds": {"core": ["集客"]}}, "own_terms": ("aio",),
              "industries": ["クリニック", "歯科医院"], "intents": []}
-    check("見積もりは問い合わせ数×1.5＋一括15×2（登録のやり直しぶん）", kw_plan.estimate(S_est), 2 * 1.5 + 2 * 15)
+    # 見積もりは控えにある問い合わせを数えない。手元の控えに左右されないよう、空の置き場で数える
+    # （2026-10-08 に見積もりが本番と同じ中身で控えを引くようになり、手元の控えで減った）
+    import tempfile as _tf, pathlib as _pl
+    saved_cache_dir = _rk.CACHE_DIR
+    try:
+        _rk.CACHE_DIR = _pl.Path(_tf.mkdtemp())
+        check("見積もりは問い合わせ数×1.5＋一括15×2（登録のやり直しぶん）", kw_plan.estimate(S_est), 2 * 1.5 + 2 * 15)
+    finally:
+        _rk.CACHE_DIR = saved_cache_dir
     # 一括調査でSEO難易度を取ると1語0.75で、500語なら375になる（今日の主因）。取らない
     check("一括調査で難易度を取らない", '"seoDifficulty": False' in src_plan and '"seoDifficulty": True' not in src_plan, True)
     import os as _os

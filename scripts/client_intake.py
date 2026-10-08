@@ -1134,9 +1134,12 @@ def subjects(got, limit=60):
         kw = re.sub(r"[ 　]+", " ", kw).strip()
         if not kw or kw in seen:
             return
-        # 狙わない語に含まれる言葉が入っていたら捨てる
+        # 狙わない語の言葉が全部入っていたら捨てる。1語ずつ見ていたため、CONFLUX の「AI 導入補助金」の
+        # 「AI」で、シートに書いた AI の語（AI エージェント 導入 など）が主題の候補から全部消えていた（2026-10-08）
+        low = kw.lower()
         for ng in exclude:
-            if any(w and w in kw for w in re.split(r"[ 　]+", ng)):
+            ws = [w for w in re.split(r"[ 　]+", ng.lower()) if w]
+            if ws and all(w in low for w in ws):
                 return
         seen.add(kw)
         out.append({"keyword": kw, "from": why})

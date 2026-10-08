@@ -115,6 +115,57 @@ def priority_subjects(S):
     return [str(t) for t in (S["cfg"].get("kw_seeds", {}).get("priority") or [])]
 
 
+def sheet_terms(site_id):
+    """ヒアリングシートの「狙う語」（data/clients/<id>/brief.json の keyword）。
+
+    main・sub は起点（単体でラッコに聞く）と担当領域の語に、exclude は落とす語にする。
+    シートの語は brief.json にだけ入り、計画は kw_seeds（業種×意図）しか見ていなかった。
+    CONFLUX は「システム開発 外注」「AI エージェント 導入」を書いたのに、1語も起点にならなかった（2026-10-08）"""
+    p = ROOT / "data" / "clients" / site_id / "brief.json"
+    try:
+        kw = (json.loads(p.read_text(encoding="utf-8")) or {}).get("keyword") or {}
+    except (OSError, ValueError, AttributeError):
+        return [], []
+
+    def clean(xs):
+        out = []
+        for t in xs if isinstance(xs, list) else []:
+            t = re.sub(r"[\s　]+", " ", str(t)).strip()
+            if t and t.lower() not in [o.lower() for o in out]:
+                out.append(t)
+        return out
+    return clean((kw.get("main") or []) + (kw.get("sub") or [])), clean(kw.get("exclude") or [])
+
+
+def ng_phrase(low, S):
+    """シートの「狙わない語」に当たるか。語句の言葉が全部入っていれば当たり（1語ずつだと
+    「AI 導入補助金」の「AI」で AI の語が全部落ちる）"""
+    for ph in S.get("sheet_ng") or ():
+        toks = [t for t in re.split(r"[\s　]+", ph.lower()) if t]
+        if toks and all(t in low for t in toks):
+            return True
+    return False
+
+
+TITLE_TOKENS = 6     # 空白で区切って6語以上は、検索語ではなくページ・本の題（3サイトの計画と記事の狙う語680語に1つも無い）
+
+
+def title_like(low):
+    """ページや本の題のような語か。ラッコのサジェストは題をそのまま返し、検索数も付く。
+    CONFLUX の計画に「ai エージェント 導入 開発 運用 トータル ガイド」（月40）が7位で入った（2026-10-08）。
+    区切りの無い長い1語は見ない。AI集客ラボは「大阪でmeoとaioの両方を…教えてください。」のような
+    AIへの質問の形を狙っている"""
+    toks = [t for t in re.split(r"[\s　]+", low) if t]
+    return len(toks) >= TITLE_TOKENS or bool(re.search(r"[「」『』【】]", low))
+
+
+def ind_query(ind):
+    """業種名をラッコに聞く形にする。「人材派遣・紹介」「飲食（多店舗）」のままでは
+    「人材派遣・紹介 システム開発」と誰も打たない語になり、課金して何も返らない"""
+    s = re.sub(r"[（(][^）)]*[）)]", "", str(ind))
+    return re.split(r"[・／/]", s)[0].strip() or str(ind)
+
+
 def score(c, prio=(), held=()):
     """並べ替えの点。買い手の語・開く理由・検索数・難易度・伸び・実証・優先業種・15位に届くかを足す"""
     vol = c.get("vol") or 0
@@ -141,7 +192,7 @@ def score(c, prio=(), held=()):
         s += 1.0                                  # 12か月で3割以上伸びている
     if c.get("imp"):
         s += math.log1p(c["imp"]) * 0.6           # 自サイトに表示実績がある
-    if prio and (c.get("subject") in prio or any(p.lower() in c["kw"].lower() for p in prio)):
+    if prio and (c.get("subject") in prio or any(ind_query(p).lower() in c["kw"].lower() for p in prio)):
         s += PRIORITY_BONUS                        # 月1件で費用が回収できる業種
     # 公開1〜4週に15位以内（3回以上表示）に入った記事だけが6週以降も残った（2026-10-05・3サイト）。
     # 広い語（1語・大きい検索数・高い難易度）を下げ、条件つきの細い語と、自サイトが近い語で
@@ -187,9 +238,8 @@ def gather(site_id, S, deep):
     def paid_call(fn, *a, **k):
         """課金の呼び出し。--dry-run ではキャッシュにあるときだけ返し、無ければ数だけ数える"""
         if DRY:
-            path = "/v1/related-keywords" if fn is rakko.related else "/v1/suggest-keywords"
-            body = ({"keyword": a[0], "limit": 100} if fn is rakko.related
-                    else {"keyword": a[0], "modes": ["google", "youtube"], "limit": 100})
+            path, body = ((rakko.RELATED, rakko.related_body(a[0])) if fn is rakko.related
+                          else (rakko.SUGGEST, rakko.suggest_body(a[0])))
             hit = rakko._cache_get(path, body, "POST")
             if hit is None:
                 paid["calls"] += 1
@@ -197,12 +247,20 @@ def gather(site_id, S, deep):
             return rakko._rows(hit)
         return fn(*a, **k)
 
+    # 2-0. シートの「狙う語」。それ自体が領域の語なので、業種に掛けず単体で聞く。
+    # 語そのものも候補に入れる（検索数は一括で埋める）
+    for seed in S.get("sheet") or []:
+        put(seed, seed, "sheet")
+        rows = rakko.as_rows(paid_call(rakko.related, seed)) + rakko.as_rows(paid_call(rakko.suggest, seed))
+        for kw, vol, kd in rows:
+            put(kw, seed, "rakko", vol=vol, kd=kd)
+
     for ind in S["industries"]:
         if ind.lower() in S["own_terms"]:
             queries = [ind]
             rows = rakko.as_rows(paid_call(rakko.related, ind))
         else:
-            queries = [f"{ind} {t}" for t in own_core]
+            queries = [f"{ind_query(ind)} {t}" for t in own_core]
             rows = []
         for q in queries:
             rows += rakko.as_rows(paid_call(rakko.suggest, q))
@@ -219,7 +277,7 @@ def gather(site_id, S, deep):
         # 補助金サイトは起点26×意図30＝780通りで、全通り叩くと10分を超えて
         # 時間切れになった。意図は「開く理由の強い順」に上位だけ使う
         for it in intents_for(S):
-            for s in KD.suggest(f"{ind} {it}"):
+            for s in KD.suggest(f"{ind_query(ind)} {it}"):
                 put(s, ind, "suggest")
         time.sleep(0.2)
     if DRY:
@@ -261,7 +319,17 @@ def known_heads(S):
         for tok in re.split(r"[\s　]+", str(t).lower()):
             if len(tok) >= 3 and any(o in tok for o in own):
                 heads.add(tok)
+    # シートの「狙う語」はお客様が挙げた領域の語。「問い合わせ対応 自動化」は owns に無くても通す
+    heads.update(str(t).lower() for t in S.get("sheet") or ())
     return heads
+
+
+def _starts_at_token(toks, head):
+    """語の区切りから始まって head が続くか。head は空白を含んでよい（「ai エージェント」）。
+    1語ずつ比べていたため、空白を含む owns（CONFLUX の「AI エージェント」「Excel 脱却」）が
+    どの語にも当たらず、「aiエージェント 費用」も「ai エージェント 費用」も領域語なしで落ちていた"""
+    h = re.sub(r"[\s　のをにへとがで]+", "", head)    # 語の側と同じ区切りで外す
+    return bool(h) and any("".join(toks[i:]).startswith(h) for i in range(len(toks)))
 
 
 # 領域語でも、消費者の検索に多い語は文脈を要求する。「レジーナ クリニック 口コミ」は
@@ -272,13 +340,12 @@ OWN_NEEDS = {"口コミ": re.compile(r"返信|対策|管理|増や|集め|依頼
 def own_hit(low, S):
     heads = known_heads(S)      # 毎回計算する。設定を差し替えても古い先頭語が残らない
     toks = [t for t in re.split(r"[\s　のをにへとがで]+", low) if t]
-    for tok in toks:
-        for h in heads:
-            if tok.startswith(h):
-                need = OWN_NEEDS.get(h)
-                if need and not need.search(low):
-                    continue
-                return True
+    for h in heads:
+        if _starts_at_token(toks, h):
+            need = OWN_NEEDS.get(h)
+            if need and not need.search(low):
+                continue
+            return True
     return False
 
 
@@ -289,6 +356,8 @@ def cheap_reject(c, S):
     low = c["kw"].lower()
     if not own_hit(low, S):
         return "領域語なし"
+    if ng_phrase(low, S):
+        return "狙わない語"
     if any(t in low for t in S["ng_terms"]):
         return "除外語"
     if any(t in low for t in NOT_BUYER):
@@ -297,6 +366,8 @@ def cheap_reject(c, S):
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
+    if title_like(low):
+        return "題のような語"
     return outside(c["kw"], S)
 
 
@@ -319,6 +390,8 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
     # 当たる。語の先頭か、サイト設定にある複合語（IT導入補助金・経理代行）だけを認める
     if not own_hit(low, S):
         return "領域語なし"
+    if ng_phrase(low, S):
+        return "狙わない語"
     if any(t in low for t in S["ng_terms"]):
         return "除外語"
     if any(t in low for t in NOT_BUYER):
@@ -327,6 +400,8 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
+    if title_like(low):
+        return "題のような語"
     why = outside(kw, S)
     if why:
         return why
@@ -377,8 +452,10 @@ def worth_lookup(cands):
     送ると500件ずつ20回（300クレジット）払っていた。買い手の語・開く理由の
     強い語・表示実績のある語に限る"""
     good = [c for c in cands
-            if c.get("imp") or BUYER.search(c["kw"].lower()) or kw_intent.score(c["kw"])[0] >= 2]
-    good.sort(key=lambda c: -pre_score(c))
+            if "sheet" in c.get("src", ()) or c.get("imp") or BUYER.search(c["kw"].lower())
+            or kw_intent.score(c["kw"])[0] >= 2]
+    # シートに書いた語そのものは必ず測る（入らなかった理由を「検索数」で言えるように）
+    good.sort(key=lambda c: (-("sheet" in c.get("src", ())), -pre_score(c)))
     return good[:LOOKUP_MAX]
 
 
@@ -514,16 +591,15 @@ def choose(cands, S, site_id):
         if len(picked) >= MAX_PLAN:
             break
         r = relevant(c, S, corpus, arts, owned, picked_norms)
+        cap = PER_PRIORITY if c["subject"] in prio else PER_SUBJECT
+        weak = kw_intent.score(c["kw"])[0] < 0
+        if not r and per_subject[c["subject"]] >= cap:
+            r = "サブジェクト上限"
+        if not r and weak and weak_room <= 0:
+            r = "弱い語の上限"
         if r:
             why_drop[r] += 1
-            continue
-        cap = PER_PRIORITY if c["subject"] in prio else PER_SUBJECT
-        if per_subject[c["subject"]] >= cap:
-            why_drop["サブジェクト上限"] += 1
-            continue
-        weak = kw_intent.score(c["kw"])[0] < 0
-        if weak and weak_room <= 0:
-            why_drop["弱い語の上限"] += 1
+            c["why"] = r          # シートの語が入らなかった理由を計画に書くため
             continue
         c["score"] = score(c, prio, held)
         c["intent"] = kw_intent.score(c["kw"])[0]
@@ -540,7 +616,7 @@ def choose(cands, S, site_id):
     return picked, dict(why_drop)
 
 
-def write_plan(site_id, S, picked, dropped, deep):
+def write_plan(site_id, S, picked, dropped, deep, sheet_fate=None, cands=None):
     out = ROOT / "docs" / (f"kw-plan-{site_id}.md" if not DRY else f"kw-plan-{site_id}.dry.md")
     by = defaultdict(list)
     for c in picked:
@@ -553,7 +629,8 @@ def write_plan(site_id, S, picked, dropped, deep):
          f"優先業種（枠{PER_PRIORITY}本・加点{PRIORITY_BONUS}）: "
          + ("／".join(priority_subjects(S)) or "指定なし") + f" ／ その他は枠{PER_SUBJECT}本",
          "",
-         f"ラッコの消費: 約{rakko.spent():.0f}クレジット（1回の上限 {CREDIT_CAP}）",
+         (f"ラッコの消費: 約{rakko.spent():.0f}クレジット（1回の上限 {CREDIT_CAP}）" if not DRY else
+          "ラッコの消費: なし（dry-run。控え data/rakko_cache・rakko_volume.json にある応答だけで組み直し）"),
          "",
          f"採用 {len(picked)}本（A={sum(c['priority']=='A' for c in picked)} / "
          f"B={sum(c['priority']=='B' for c in picked)} / C={sum(c['priority']=='C' for c in picked)}）。"
@@ -561,8 +638,16 @@ def write_plan(site_id, S, picked, dropped, deep):
          "",
          "落とした理由: " + " / ".join(f"{k} {v}件" for k, v in sorted(dropped.items(), key=lambda x: -x[1])),
          ""]
+    if S.get("sheet"):
+        L += ["## シートに書いた語の行方", "", "| 語 | 月間 | 結果 |", "|:--|--:|:--|"]
+        for seed in S["sheet"]:
+            c = (cands or {}).get(norm(seed)) or {}
+            L.append("| %s | %s | %s |" % (seed, c.get("vol") if c.get("vol") is not None else "—",
+                                          (sheet_fate or {}).get(norm(seed), "—")))
+        L.append("")
+    sheet = {s.lower() for s in S.get("sheet") or ()}
     for subj in sorted(by, key=lambda s: -sum(c["score"] for c in by[s])):
-        L += [f"## {subj}", "",
+        L += [f"## {subj}" + ("（シートの語）" if subj.lower() in sheet else ""), "",
               "| 優先 | キーワード | 月間 | 難易度 | 開く理由 | 12か月 | 表示 | 出どころ |",
               "|:--|:--|--:|--:|--:|--:|--:|:--|"]
         for c in sorted(by[subj], key=lambda c: -c["score"]):
@@ -638,16 +723,18 @@ def split_retire(todo, plan_kws, own_norms=()):
     return retire, keep
 
 
-def replace_ledger(site_id, picked, retire_old=True):
+def replace_ledger(site_id, picked, retire_old=True, sheet=()):
     """台帳の「未着手」を対象外にし、新しい計画を積む。公開済み・執筆中は触らない。
-    retire_old=False（ラッコの上限で止めた回）は足すだけ。検索数の欠けた薄い計画で在庫を減らさない"""
+    retire_old=False（ラッコの上限で止めた回）は足すだけ。検索数の欠けた薄い計画で在庫を減らさない。
+    シートに書いた語（sheet）は、検索数が0でも取り下げない（お客様が狙うと言った語）"""
     import hub_client
     if not hub_client.enabled():
         print("   管制塔が未接続のため、台帳は更新しません")
         return
     rows = hub_client.all_kw(strict=True)
     todo = [r["keyword"] for r in rows if r.get("site") == site_id and r.get("status") == "未着手"]
-    retire, keep = split_retire(todo, [c["kw"] for c in picked], added_before(site_id))
+    retire, keep = split_retire(todo, [c["kw"] for c in picked],
+                                added_before(site_id) | {norm(s) for s in sheet})
     if not retire_old and retire:
         print(f"   ラッコの上限で止めた回なので、未着手 {len(retire)}件は取り下げずに残します")
         keep, retire = keep + retire, []
@@ -670,19 +757,16 @@ def replace_ledger(site_id, picked, retire_old=True):
 
 def paid_queries(S):
     """このサイトで課金になる問い合わせの一覧（キャッシュにあるものは除く）"""
-    out = []
     core = core_terms(S)
+    qs = []
+    for seed in S.get("sheet") or []:      # シートの「狙う語」は単体で関連語とサジェスト（gather と同じ）
+        qs += [(rakko.RELATED, rakko.related_body(seed)), (rakko.SUGGEST, rakko.suggest_body(seed))]
     for ind in S["industries"]:
         if ind.lower() in S["own_terms"]:
-            qs = [("/v1/related-keywords", {"keyword": ind, "limit": 100}),
-                  ("/v1/suggest-keywords", {"keyword": ind, "modes": ["google", "youtube"], "limit": 100})]
+            qs += [(rakko.RELATED, rakko.related_body(ind)), (rakko.SUGGEST, rakko.suggest_body(ind))]
         else:
-            qs = [("/v1/suggest-keywords", {"keyword": f"{ind} {t}", "modes": ["google", "youtube"], "limit": 100})
-                  for t in core]
-        for path, body in qs:
-            if rakko._cache_get(path, body, "POST") is None:
-                out.append((path, body))
-    return out
+            qs += [(rakko.SUGGEST, rakko.suggest_body(f"{ind_query(ind)} {t}")) for t in core]
+    return [(path, body) for path, body in qs if rakko._cache_get(path, body, "POST") is None]
 
 
 BULK_COST = 15   # 一括調査1回（検索数のみ・500語まで）。難易度を付けると +0.75/語 になるので付けない
@@ -741,7 +825,10 @@ def run(site_id, deep, replace, if_needed=False):
             print(f"   未着手が {n} 本あるので、今回は組み直しません（{ENOUGH}本未満で組み直す）")
             return
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
-    if not S["industries"]:
+    S["sheet"], S["sheet_ng"] = sheet_terms(site_id)
+    if S["sheet"] or S["sheet_ng"]:
+        print(f"   シートの狙う語 {len(S['sheet'])}件を起点に、狙わない語 {len(S['sheet_ng'])}件を除外に使います")
+    if not S["industries"] and not S["sheet"]:
         print("   kw_seeds が未定義のため作れません")
         return
     # 課金の前に必ず見積もる。予算内でなければ取得しない（--dry-run は見積もりだけ）
@@ -753,10 +840,13 @@ def run(site_id, deep, replace, if_needed=False):
         return
     cands = gather(site_id, S, deep)
     pre = defaultdict(int)
+    sheet_fate = {}
     for k in list(cands):
         why = cheap_reject(cands[k], S)
         if why:
             pre[why] += 1
+            if "sheet" in cands[k]["src"]:
+                sheet_fate[k] = why
             del cands[k]
     print(f"   候補 {len(cands) + sum(pre.values())}件（起点 {len(S['industries'])}件）→ "
           f"事前選別で {sum(pre.values())}件を除外（"
@@ -765,7 +855,14 @@ def run(site_id, deep, replace, if_needed=False):
     print(f"   検索数を一括で埋めました: {n}件（未取得 "
           f"{sum(1 for c in cands.values() if c.get('vol') is None)}件）")
     picked, dropped = choose(cands, S, site_id)
-    out = write_plan(site_id, S, picked, dropped, deep)
+    for seed in S["sheet"]:
+        k = norm(seed)
+        if k in sheet_fate:
+            continue
+        c = cands.get(k) or {}
+        sheet_fate[k] = ("採用" if any(norm(p["kw"]) == k for p in picked) else
+                         c.get("why") or f"点が計画の上限（{MAX_PLAN}本）に届かない")
+    out = write_plan(site_id, S, picked, dropped, deep, sheet_fate, cands)
     print(f"   採用 {len(picked)}本 → {out.relative_to(ROOT).as_posix()}"
           f"（ラッコ消費 {rakko.spent():.0f} クレジット）")
     print("   落とした理由: " + " / ".join(f"{k} {v}" for k, v in sorted(dropped.items(), key=lambda x: -x[1])[:6]))
@@ -773,7 +870,7 @@ def run(site_id, deep, replace, if_needed=False):
         print("     %s %-30s 月間%-5s KD%-3s 意図%+d %s" % (
             c["priority"], c["kw"][:30], c.get("vol", "—"), c.get("kd", "—"), c["intent"], c["subject"]))
     if replace:
-        replace_ledger(site_id, picked, retire_old=granted)
+        replace_ledger(site_id, picked, retire_old=granted, sheet=S["sheet"])
     else:
         print("   （--replace を付けると、台帳の未着手を対象外にして新計画を積みます）")
 
