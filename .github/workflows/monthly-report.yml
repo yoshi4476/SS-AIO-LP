@@ -292,13 +292,13 @@ jobs:
           if [ -z "$RAKKO_API_KEY" ]; then echo "RAKKO_API_KEY 未設定 — 組み直しはスキップ"; exit 0; fi
           # 課金の前に、必ず構成と見積もりを記録する（ルール: 設計を固めてからラッコは1回だけ）
           python scripts/kw_plan.py --all --if-needed --dry-run 2>&1 | grep -E "^■|RAKKO_EST|dry-run|見積もり" || true
-          # 本番。スクリプト側が見積もりと月の目安を見て、超えていれば取得しない
+          # 本番。スクリプト側（rakko.allow）が1サイト月150・全体月600・1回150・目的ごとの枠を見て、超えるなら呼ばない
           out=$(python scripts/kw_plan.py --all --if-needed --replace 2>&1) || true
           echo "$out" | tail -40
-          if echo "$out" | grep -q "RAKKO_GUARD=over"; then
-            echo "::warning::1回の見積もりが上限（400）を超えるため、在庫の組み直しを取得せずに終えたサイトがあります"
+          if echo "$out" | grep -qE "RAKKO_GUARD=(run_cap|site_cap|total_cap|bucket|shared|run_limit)"; then
+            echo "::warning::ラッコの上限で止めたサイトがあります（無料の材料だけで組み、在庫は取り下げていません）"
             mkdir -p automation/logs
-            echo "要対応: ラッコの1回の見積もりが上限（400）を超えたため在庫の組み直しを見送りました（起点の数が増えすぎていないか確認）" >> automation/logs/findings.txt
+            echo "要対応: ラッコの上限で止めました（$(echo "$out" | grep -oE "RAKKO_GUARD=[a-z_]+" | grep -v "=ok" | sort | uniq -c | tr -s ' ' | tr '\n' ' ')）。社ごとの消費は python scripts/rakko.py --check" >> automation/logs/findings.txt
           fi
           if echo "$out" | grep -q "クレジットが尽きました"; then
             echo "::warning::ラッコキーワードのクレジットが尽きました（在庫の組み直しは途中まで）"
