@@ -25,25 +25,37 @@ GROUPS = [
     ("prep", "対策の準備に使う", "自社で直すときの手順と、そのまま使える文面を用意しています。"),
     ("map", "地図（Googleマップ）", "Googleビジネスプロフィールの整備度を確かめます。"),
 ]
+# learn・time・input は /tools/ の比較の表（わかること・所要時間・入力するもの）。どれも各ツールのページに書いてあることだけ。
+# 所要時間はページに書いた目安の言葉のまま（数字の無いツールに秒数を作らない）
 TOOLS = [
     {"id": "url-check", "url": "/tools/url-check/", "group": "site", "name": "URL診断",
      "sub": "サイトの14項目を採点", "spec": "URLだけ・約30秒",
-     "desc": "URLを入れるだけで、AIのクローラーが入れるか・検索に出るか・内容を読み取れるかを14項目・100点満点で採点し、直す順番と直し方を表示します。"},
+     "desc": "URLを入れるだけで、AIのクローラーが入れるか・検索に出るか・内容を読み取れるかを14項目・100点満点で採点し、直す順番と直し方を表示します。",
+     "learn": "AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかの点数（14項目・100点満点）と、直す順番・直し方",
+     "time": "約30秒", "input": "URLだけ（登録不要）"},
     {"id": "ai-check", "url": "/tools/ai-check/", "group": "ai", "name": "AI診断",
      "sub": "AIにどう紹介されているか", "spec": "1回3問・1メールアドレス3回まで",
-     "desc": "地域と業種を入れると、AIに「地域名＋業種 おすすめ」など3つの質問をして、答えの出典に御社のサイトが入っているか、回答に社名が出るかを表示します。"},
+     "desc": "地域と業種を入れると、AIに「地域名＋業種 おすすめ」など3つの質問をして、答えの出典に御社のサイトが入っているか、回答に社名が出るかを表示します。",
+     "learn": "AIの答えの出典に御社のサイトが入っているか・回答に社名が出るか（3つの質問）と、代わりに出典になっているサイト",
+     "time": "その場で表示", "input": "地域・業種・会社名・お名前・メールアドレス（1メールアドレス3回まで）"},
     {"id": "aio-check", "url": "/tools/aio-check/", "group": "ai", "name": "AI検索の対応度チェック",
      "sub": "8つの質問で採点", "spec": "8問・約30秒",
-     "desc": "8つの質問に答えると、AI検索に引用されるために足りないものを100点満点で表示します。"},
+     "desc": "8つの質問に答えると、AI検索に引用されるために足りないものを100点満点で表示します。",
+     "learn": "AI検索に引用されるために足りないもの（100点満点）", "time": "約30秒", "input": "8つの質問に答えるだけ"},
     {"id": "checklist", "url": "/download/", "group": "prep", "name": "AI検索対策チェックリスト",
      "sub": "業種別PDF", "spec": "5業種", "page": False,
-     "desc": "歯科医院・クリニック・不動産会社・工務店・士業事務所の5業種。印をつけながら、自社で直すところを確かめられます。"},
+     "desc": "歯科医院・クリニック・不動産会社・工務店・士業事務所の5業種。印をつけながら、自社で直すところを確かめられます。",
+     "learn": "自社で直すところ（業種別のPDF・{items}項目に印をつける）", "time": "送信後、メールでリンクが届く",
+     "input": "お名前・会社名・メールアドレス"},
     {"id": "kuchikomi-henshin", "url": "/tools/kuchikomi-henshin/", "group": "prep", "name": "口コミ返信文の作成ツール",
      "sub": "返信案を3つ作る", "spec": "業種と口コミの種類を選ぶだけ",
-     "desc": "業種と口コミの種類を選ぶと、そのまま使える返信案を3つ作ります。医療は医療広告ガイドラインにふれない書き方にそろえます。"},
+     "desc": "業種と口コミの種類を選ぶと、そのまま使える返信案を3つ作ります。医療は医療広告ガイドラインにふれない書き方にそろえます。",
+     "learn": "そのまま使える口コミへの返信案3つ（医療は医療広告ガイドラインにふれない書き方）", "time": "すぐ作れる",
+     "input": "業種と口コミの種類を選ぶだけ"},
     {"id": "meo-check", "url": "/tools/meo-check/", "group": "map", "name": "マップ集客の整備度チェック",
      "sub": "8つの質問で採点", "spec": "8問・約30秒",
-     "desc": "8つの質問に答えると、Googleビジネスプロフィールの整備度を100点満点で採点します。"},
+     "desc": "8つの質問に答えると、Googleビジネスプロフィールの整備度を100点満点で採点します。",
+     "learn": "Googleビジネスプロフィールの整備度（100点満点）", "time": "約30秒", "input": "8つの質問に答えるだけ"},
 ]
 BY_ID = {t["id"]: t for t in TOOLS}
 # 無料ツールの開発者。当社は公開・運用する側（publisher）で、開発は YW（CONFLUX PARTNERS）。
@@ -114,6 +126,30 @@ def index_html():
             '<a href="/lp/#form" data-cta="tools_consult">無料相談を申し込む</a></p>\n</section>\n<!-- /tools:catalog -->')
 
 
+def _learn(t):
+    if "{items}" not in t["learn"]:
+        return t["learn"]
+    from page_enrich import CHECKLIST_ITEMS     # 資料のページ・PDF と同じ項目数（1か所だけで持つ）
+    return t["learn"].replace("{items}", str(CHECKLIST_ITEMS))
+
+
+def table_html():
+    """/tools/ の比較の表（わかること・所要時間・入力するもの）。並びは目的別の一覧と同じ。
+    スマホでは1ツールずつの縦の並びになる（列名は data-label で各欄に出す）"""
+    order = [x for gid, _, _ in GROUPS for x in TOOLS if x["group"] == gid]
+    rows = "".join(
+        f'<tr><th scope="row"><a href="{t["url"]}" data-cta="tools_table_{t["id"]}">{E(t["name"])}</a></th>'
+        f'<td data-label="わかること・できること">{E(_learn(t))}</td>'
+        f'<td data-label="所要時間" class="tt-time">{E(t["time"])}</td>'
+        f'<td data-label="入力するもの">{E(t["input"])}</td></tr>' for t in order)
+    return ('<!-- tools:table -->\n<section class="tools-table" aria-labelledby="tools-table-h">\n'
+            f'  <h2 id="tools-table-h">{len(order)}つの無料ツールを比べる</h2>\n'
+            '  <p class="tools-table-lead">わかること・所要時間の目安・入力するものを並べました。どれも無料です。</p>\n'
+            '  <div class="table-wrap vz-stack"><table><thead><tr><th scope="col">ツール</th><th scope="col">わかること・できること</th>'
+            '<th scope="col">所要時間</th><th scope="col">入力するもの</th></tr></thead>'
+            f'<tbody>{rows}</tbody></table></div>\n</section>\n<!-- /tools:table -->')
+
+
 def index_ld():
     items = [{"@type": "ListItem", "position": i, "name": label(t), "url": SITE_URL + t["url"]}
              for i, t in enumerate(TOOLS, 1)]
@@ -154,6 +190,11 @@ def apply(site: Path):
     p = site / "tools" / "index.html"
     s = p.read_text(encoding="utf-8")
     new = re.sub(r"<!-- tools:catalog -->.*?<!-- /tools:catalog -->", lambda m: index_html(), s, flags=re.S)
+    # 比べる表は目的別の一覧の前に置く（印が無いページには一覧の前へ入れる）
+    if "<!-- tools:table -->" in new:
+        new = re.sub(r"<!-- tools:table -->.*?<!-- /tools:table -->", lambda m: table_html(), new, flags=re.S)
+    else:
+        new = new.replace("<!-- tools:catalog -->", table_html() + "\n\n<!-- tools:catalog -->", 1)
     ld_blocks = [m for m in LD_BLOCK.finditer(new) if "ItemList" in m.group(0) and "BreadcrumbList" not in m.group(0)]
     if len(ld_blocks) != 1:
         raise ValueError("/tools/: ItemList の構造化データが1つではありません")

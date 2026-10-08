@@ -2142,6 +2142,22 @@ figure.layers { margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; text-align: left; }
   .stage-steps .step-title { padding-top: .2rem; }
 }
 
+/* -- ツール一覧: 比べる表（tools_catalog.table_html）。ツール名・所要時間の列は折り返さない幅 -- */
+.tools-table { max-width: 1180px; margin: 0 auto; padding: 1.4rem var(--gutter); }
+.tools-table h2 { font-size: 1.2rem; color: var(--navy); margin: 0 0 .4rem; }
+.tools-table-lead { margin: 0; font-size: .92rem; color: var(--muted); }
+.tools-table .table-wrap { margin: 1rem 0 0; }
+.tools-table table { font-size: .9rem; table-layout: fixed; }
+.tools-table thead th:nth-child(1) { width: 15em; }
+.tools-table thead th:nth-child(3) { width: 11em; }
+.tools-table thead th:nth-child(4) { width: 24%; }
+/* ツール名は語の途中で折らない（「…チェッ / ク」と割れていた） */
+.tools-table tbody th { white-space: normal; word-break: auto-phrase; }
+.tools-table tbody th a { color: var(--blue-deep); font-weight: 800; }
+.tools-table td.tt-time { font-weight: 800; color: var(--navy); }
+/* スマホの札では、紺の帯の上のツール名は白（青 #1d4ed8 のままだと紺の上で 2.3:1 で読めない） */
+@media (max-width: 720px) { .tools-table .vz-stack tbody th a { color: #fff; } }
+
 /* ============================================================
    デザインとリード導線の点検（2026-10-08）
    ============================================================ */
