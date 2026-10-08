@@ -751,6 +751,17 @@ function excluded_(set, email, detail) {
   return !!(url && domainHit_(set, url));
 }
 
+/**
+ * ニュースレター（Resend の購読者）のうち、配信除外に当たるメールアドレス（newsletter_exclude.py が送る直前に聞く）。
+ * 補助金サイトの /unsubscribe/ で配信停止した人に、AI集客ラボのニュースレター（同じ会社）が届き続けていた（2026-10-08）。
+ * 判定は自動フォローと同じ excluded_。聞かれたアドレスのうち当たった分だけを返す（一覧そのものは渡さない）
+ */
+function newsletterExcluded_(body) {
+  const set = excludeSet_();
+  const emails = (body && body.emails) || [];
+  return { ok: true, excluded: emails.filter(function (e) { return excluded_(set, e, ''); }) };
+}
+
 /** 状態を「成約・契約中・既存客」にした行を、配信除外へ自動で写す（二重には足さない） */
 function syncClientExcludes_(vals, set) {
   const sh = excludeSheet_();

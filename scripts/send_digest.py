@@ -114,6 +114,13 @@ def main():
         with urllib.request.urlopen(req) as r:
             return json.load(r)
 
+    # 補助金サイトなどで配信停止した人（管制塔の「配信除外」）を、送る前に購読者から外す。照らせなければ送らない
+    import newsletter_exclude as NE
+    try:
+        NE.apply(key)
+    except NE.NotChecked as e:
+        raise SystemExit(f"配信を止めました: {e}")
+
     created = api("/broadcasts", {
         "audience_id": aud, "from": sender, "subject": subject, "html": html})
     api(f"/broadcasts/{created['id']}/send", {})

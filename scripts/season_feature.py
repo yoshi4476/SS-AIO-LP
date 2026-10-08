@@ -261,6 +261,13 @@ def broadcast(subject, body):
         with urllib.request.urlopen(req, timeout=30) as r:
             return json.load(r)
 
+    # 補助金サイトなどで配信停止した人（管制塔の「配信除外」）を、送る前に購読者から外す。照らせなければ送らない
+    import newsletter_exclude as NE
+    try:
+        NE.apply(key)
+    except NE.NotChecked as e:
+        print(f"SEASON_MAIL=skip（{e}）")
+        return False
     created = api("/broadcasts", {"audience_id": aud, "from": sender, "subject": subject, "html": body})
     api(f"/broadcasts/{created['id']}/send", {})
     print(f"SEASON_MAIL=sent {subject}")

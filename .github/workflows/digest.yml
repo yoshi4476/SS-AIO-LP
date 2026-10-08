@@ -58,6 +58,9 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          # 送る前に管制塔の「配信除外」（補助金サイトの配信停止など）と照らす（newsletter_exclude.py）
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           if [ "${{ inputs.demo }}" = "true" ]; then
             python scripts/send_digest.py --demo

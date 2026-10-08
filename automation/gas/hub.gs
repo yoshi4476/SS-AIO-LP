@@ -262,6 +262,8 @@ function doPost(e) {
       case 'ai_check_log':   return json_(aiCheckLog_(body));
       case 'ai_recheck_list': return json_(aiRecheckList_());
       case 'ai_recheck_done': return json_(aiRecheckDone_(body));
+      // ニュースレターを送る前に、購読者のうち配信除外に当たる人を聞く（newsletter_exclude.py。合言葉つき）
+      case 'newsletter_excluded': return json_(newsletterExcluded_(body));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
       default:            return json_(form_(body));
