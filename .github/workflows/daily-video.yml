@@ -5,22 +5,48 @@
 # チャンネルごと表示を抑えられる。本数ではなく毎日続くことを取る。
 # リライトで読み上げ部分の数字が変わった記事は、古い動画を限定公開に下げて作り直す（同じ1本の枠）。
 name: 記事動画（毎日1本）
+run-name: ${{ inputs.scheduled_for && format('記事動画 {0}', inputs.scheduled_for) || github.event.schedule && format('記事動画（予備の定時） {0}', github.event.schedule) || github.workflow }}
 
 on:
   schedule:
     - cron: "30 1 * * *"   # JST 10:30（記事の枠と時刻をずらす）
   workflow_dispatch:
+    inputs:
+      # 定時の起動役（Cloudflare Worker）が入れる。手で動かすときは空のまま
+      scheduled_for:
+        description: "予定の時刻（起動役が入れる）"
+        type: string
+        default: ""
+      token_expiry:
+        description: "起動役の鍵の期限（起動役が入れる）"
+        type: string
+        default: ""
 
 permissions:
   contents: write
   actions: write           # 動画を記事に埋めたあと、デプロイを起動する（GITHUB_TOKEN の push では動かない）
 
-concurrency:
-  group: daily-video
-  cancel-in-progress: false
-
 jobs:
+  # 起動役（Worker）の回と予備の定時の回のうち、同じ予定を先に受け持った回だけが動画を上げる（1日に2本上げない）。
+  # 判定はグループの外で終える（何もしない回が並ぶと、待っている回を取り消す）
+  sched:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      go: ${{ steps.g.outputs.sched_go }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: g
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/sched_guard.py
+
   video:
+    needs: sched
+    if: ${{ !cancelled() && needs.sched.outputs.go != 'no' }}
+    concurrency:
+      group: daily-video
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 100  # 掛け合い動画（台本づくり・24fpsの描画）と読みの聞き直しの分
     env:

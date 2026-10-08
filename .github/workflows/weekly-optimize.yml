@@ -1,4 +1,5 @@
 name: Weekly Optimize
+run-name: ${{ inputs.scheduled_for && format('週次 {0}', inputs.scheduled_for) || github.event.schedule && format('週次（予備の定時） {0}', github.event.schedule) || github.workflow }}
 
 # 毎週月曜 10:23 JST（= UTC 1:23 月曜）に既存記事のリライト・内部リンク・AIO構造を自動最適化
 on:
@@ -14,6 +15,15 @@ on:
         description: "今週もう済んでいても動かす（同じ週に2回目を手で流すときだけ）"
         type: boolean
         default: false
+      # 定時の起動役（Cloudflare Worker）が入れる。手で動かすときは空のまま
+      scheduled_for:
+        description: "予定の時刻（起動役が入れる）"
+        type: string
+        default: ""
+      token_expiry:
+        description: "起動役の鍵の期限（起動役が入れる）"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -42,6 +52,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ "${{ inputs.force }}" = "true" ]; then echo "force のため、今週の実行の有無を見ません"; echo "go=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          # 起動役（Cloudflare Worker）の回と予備の定時の回は、同じ予定を先に受け持った回だけが動く（sched_guard）
+          s=$(python3 scripts/sched_guard.py 2>&1) || true; echo "$s"
+          if echo "$s" | grep -q '^SCHED_GO=no'; then echo "go=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           out=$(python3 scripts/schedule_guard.py --already-ran weekly-optimize.yml --week --run-id "${{ github.run_id }}" 2>&1) || true
           echo "$out"
           # 判定が動かなかったときは動かす（止めると、その週の最適化がまるごと抜ける）
@@ -1125,6 +1138,7 @@ jobs:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+          SCHED_GH_TOKEN: ${{ github.token }}   # 定時の起動役（Cloudflare Worker）の起動の記録を読む（sched_guard --watch だけが使う）
         run: |
           python scripts/findings.py || true
           # 公開した後の結果（題の型のCTR・別工程の採点・本数の効き・戻された直し）から学び、

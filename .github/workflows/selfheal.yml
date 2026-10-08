@@ -142,10 +142,13 @@ jobs:
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+          SCHED_GH_TOKEN: ${{ github.token }}   # 定時の起動役の起動の記録を読む（sched_guard --watch だけが使う）
         run: |
           mkdir -p automation/logs
           out=$( (python scripts/cert_check.py; python scripts/token_check.py) 2>&1 ) || true
           echo "$out" | tail -12
+          # 定時の起動役（Cloudflare Worker）からの起動の途絶え・起動しそびれ・鍵の期限
+          w=$(python scripts/sched_guard.py --watch 2>&1) || true; echo "$w"; out="$out"$'\n'"$w"
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           if echo "$out" | grep -q '^要対応'; then
             python scripts/notify_slack.py "🚨 生存監視で要対応があります

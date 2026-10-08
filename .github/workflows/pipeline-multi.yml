@@ -1,4 +1,7 @@
 name: Multi-Site Article Pipeline
+# 定時の起動役（Cloudflare Worker・automation/scheduler）が起動した回は「記事の枠 12 2026-10-08T20:07+09:00」、
+# 予備の GitHub の定時の回は「記事の枠（予備の定時） 7 11 * * *」と出す（scripts/sched_guard.py がこの名前で突き合わせる）
+run-name: ${{ inputs.scheduled_for && format('記事の枠 {0} {1}', inputs.slot, inputs.scheduled_for) || github.event.schedule && format('記事の枠（予備の定時） {0}', github.event.schedule) || github.workflow }}
 
 # 全サイトの記事生成を1本のワークフローにまとめたもの。
 # どのサイトを書くかは sites/*.json の並び順で決める（JST = UTC+9）。
@@ -63,9 +66,23 @@ on:
         description: "対象サイト（空なら sites/ の並び順で判定）"
         type: string
         default: ""
+      # 以下3つは定時の起動役（Cloudflare Worker）が入れる。手で動かすときは空のまま
+      slot:
+        description: "枠の番号（空なら定時の cron の位置。手で動かした回は枠0）"
+        type: string
+        default: ""
+      scheduled_for:
+        description: "予定の時刻（起動役が入れる）"
+        type: string
+        default: ""
+      token_expiry:
+        description: "起動役の鍵の期限（起動役が入れる）"
+        type: string
+        default: ""
 
 permissions:
   contents: write
+  actions: read      # 同じ予定を先に受け持った回があるかを見る（sched_guard）
 
 # concurrency はワークフロー単位ではなく、記事を書く job（write）にだけ付ける。
 # ワークフロー単位だと空き枠の run までグループに並び、GitHub の仕様（待てるのは1件）で
@@ -80,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
-      skip: ${{ steps.site.outputs.skip }}
+      skip: ${{ steps.sched.outputs.sched_go == 'no' && 'yes' || steps.site.outputs.skip }}
       id: ${{ steps.site.outputs.id }}
       own: ${{ steps.site.outputs.own }}
       first: ${{ steps.site.outputs.first }}
@@ -89,8 +106,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 起動役（Worker）の回と予備の定時の回のうち、同じ枠・同じ予定の日を先に受け持った回だけが書く
+      - name: 同じ予定を先に受け持った回があるか
+        id: sched
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/sched_guard.py
+
       - name: 対象サイトの判定
         id: site
+        if: steps.sched.outputs.sched_go != 'no'
+        env:
+          IN_SLOT: ${{ inputs.slot }}
+          IN_AT: ${{ inputs.scheduled_for }}
         run: |
           # sites/*.json の並び順で決める。サイトIDを直接書くと、
           # 別の会社へ移したときに存在しないサイトを指したまま毎日空振りする。
@@ -109,16 +137,18 @@ jobs:
           # 枠の番号は、このファイルの cron の並び順から機械で決める。以前は case 文に
           # 20行を手で書いていたため、cron を足しても case を足し忘れると枠0に潰れた。
           # cron を1行足せば枠が1つ増える（上限＝cron の本数÷2 社）
-          read -r slot SLOTS < <(python - "${{ github.event.schedule }}" <<'PY'
+          # 起動役（Worker）の回は枠の番号を入力 slot で受け取る（無ければ今までどおり cron の位置）
+          read -r slot SLOTS < <(python - "${{ github.event.schedule }}" "$IN_SLOT" <<'PY'
           import re, sys
           crons = re.findall(r'^\s*- cron:\s*"([^"]+)"', open(".github/workflows/pipeline-multi.yml", encoding="utf-8").read(), re.M)
-          s = sys.argv[1].strip()
-          print(crons.index(s) if s in crons else 0, len(crons))
+          s, n = sys.argv[1].strip(), sys.argv[2].strip()
+          print(int(n) if n.isdigit() else crons.index(s) if s in crons else 0, len(crons))
           PY
           )
           # この枠が予定されていた日。定時が遅れて日付をまたいでも、書いた記事は予定の日の本数に数える
-          # （公開日 date: は公開した日のまま。daily_audit.stamp_makeup が data/makeup.json に記録する）
-          echo "slot_day=$(python scripts/daily_audit.py --slot-day "${{ github.event.schedule }}")" >> "$GITHUB_OUTPUT"
+          # （公開日 date: は公開した日のまま。daily_audit.stamp_makeup が data/makeup.json に記録する）。
+          # 起動役の回は予定の時刻（scheduled_for）の日
+          echo "slot_day=$(python scripts/daily_audit.py --slot-day "${{ github.event.schedule }}" "$IN_AT")" >> "$GITHUB_OUTPUT"
           s="${{ inputs.site }}"
           if [ -z "$s" ]; then
             if [ "$N" -eq 0 ]; then

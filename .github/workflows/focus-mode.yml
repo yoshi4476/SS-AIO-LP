@@ -1,4 +1,5 @@
 name: Focus Mode
+run-name: ${{ inputs.scheduled_for && format('集中モード {0}', inputs.scheduled_for) || github.event.schedule && format('集中モード（予備の定時） {0}', github.event.schedule) || github.workflow }}
 
 # 集中モード（運用者の決定・2026-10-05から4週間）。週次（Weekly Optimize）に上乗せして、
 # 4〜10位でクリックが取れていない記事の題と、11〜30位で需要のある問いに答えていない記事を直す。
@@ -18,6 +19,15 @@ on:
         description: "その日にもう済んでいても動かす（同じ日に2回目を手で流すときだけ）"
         type: boolean
         default: false
+      # 定時の起動役（Cloudflare Worker）が入れる。手で動かすときは空のまま
+      scheduled_for:
+        description: "予定の時刻（起動役が入れる）"
+        type: string
+        default: ""
+      token_expiry:
+        description: "起動役の鍵の期限（起動役が入れる）"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -41,6 +51,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           s=$(python3 scripts/focus_report.py --status | sed -n 's/^FOCUS=//p')
+          # 起動役（Cloudflare Worker）の回と予備の定時の回は、同じ予定を先に受け持った回だけが動く（sched_guard）
+          g=$(python3 scripts/sched_guard.py 2>&1) || true; echo "$g"
+          if echo "$g" | grep -q '^SCHED_GO=no'; then s=done; fi
           # 同じ日に2回直さない（遅れて来た予定の run と、見張りが起動した run が重なる）。判定が動かなければ動かす
           if [ "$s" = "active" ] && [ "${{ inputs.force }}" != "true" ]; then
             out=$(python3 scripts/schedule_guard.py --already-ran focus-mode.yml --day --run-id "${{ github.run_id }}" 2>&1) || true

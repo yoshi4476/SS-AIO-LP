@@ -1,4 +1,5 @@
 name: Monthly Consulting Report
+run-name: ${{ inputs.scheduled_for && format('月次 {0}', inputs.scheduled_for) || github.event.schedule && format('月次（予備の定時） {0}', github.event.schedule) || github.workflow }}
 
 # 毎月1日 9:00 JST（= UTC 0:00）に月次レポートPDFを生成し info.ai@7senses.co.jp へメール送付
 # 実データ取得には GCP_SERVICE_ACCOUNT_JSON / GA4_PROPERTY_ID シークレットが必要。
@@ -17,6 +18,15 @@ on:
         description: "その日にもう済んでいても動かす（同じ日に2回目を手で流すときだけ）"
         type: boolean
         default: false
+      # 定時の起動役（Cloudflare Worker）が入れる。手で動かすときは空のまま
+      scheduled_for:
+        description: "予定の時刻（起動役が入れる）"
+        type: string
+        default: ""
+      token_expiry:
+        description: "起動役の鍵の期限（起動役が入れる）"
+        type: string
+        default: ""
 
 permissions:
   contents: write  # 目標値（reports/targets.json）を保存するため
@@ -40,6 +50,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ "${{ inputs.force }}" = "true" ] || [ "${{ inputs.resend_sites }}" = "true" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          # 起動役（Cloudflare Worker）の回と予備の定時の回は、同じ予定を先に受け持った回だけが動く（sched_guard）
+          s=$(python3 scripts/sched_guard.py 2>&1) || true; echo "$s"
+          if echo "$s" | grep -q '^SCHED_GO=no'; then echo "go=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           out=$(python3 scripts/schedule_guard.py --already-ran monthly-report.yml --day --run-id "${{ github.run_id }}" 2>&1) || true
           echo "$out"
           if echo "$out" | grep -q '^ALREADY_RAN=yes'; then echo "go=false" >> "$GITHUB_OUTPUT"; else echo "go=true" >> "$GITHUB_OUTPUT"; fi
