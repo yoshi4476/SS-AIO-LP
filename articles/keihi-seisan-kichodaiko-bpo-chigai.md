@@ -91,6 +91,8 @@ faq:
 
 違いは「チェックの有無」「対応範囲」「向いている企業規模」の3点です。
 
+大阪府内で依頼先を探す場合の分け方は、[大阪で記帳代行を頼むときの依頼先の選び方](/blog/kichodaiko-osaka)で整理しています。
+
 実際の進め方は[経理BPOの選び方6つ｜失敗しない比較の視点と手順](/blog/keiri-bpo-erabikata/)でも扱っています。
 
 <figure><img src="/images/keihi-seisan-kichodaiko-bpo-chigai/chigai.png" alt="記帳代行と経理BPOの違い: 記帳代行は入力中心でチェックは対象外、経理BPOはチェックから記帳まで一括対応" loading="lazy"><figcaption>記帳代行と経理BPOの違い</figcaption></figure>
