@@ -28,6 +28,7 @@ import argparse
 import json
 import re
 import sys
+import time
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -64,8 +65,26 @@ def focus(row):
            (1 if row.get("category") == cfg.get("main_category") else 0)
 
 
+_REVIEWS = None
+
+
+def published(slug, score):
+    """公開済みの記事か（score 90 以上で、監修の記録がある。daily_audit._is_published と同じ判定）。
+    監修待ち（HELD）の記事は公開されていないのに、動画の候補に入っていた（2026-10-08 CONFLUX）"""
+    global _REVIEWS
+    import editorial_review as ER
+    try:
+        if float(score or 0) < 90:
+            return False
+    except (TypeError, ValueError):
+        return False
+    if _REVIEWS is None:
+        _REVIEWS = ER.load()
+    return ER.reviewed(slug, _REVIEWS)
+
+
 def candidates(days, limit):
-    """直近 days 日に公開した score>=90 の記事で、まだ動画にしていないもの（新しい順）"""
+    """直近 days 日に公開した記事（score>=90・監修の記録あり）で、まだ動画にしていないもの（新しい順）"""
     import sites as S
     import youtube_upload as YT
     have = load()
@@ -81,7 +100,7 @@ def candidates(days, limit):
         def g(k):
             x = re.search(rf"^{k}:\s*(.+)$", fm, re.M)
             return x.group(1).strip().strip('"') if x else ""
-        if p.stem in have or (int(g("score") or 0) < 90) or g("date") < since:
+        if p.stem in have or not published(p.stem, g("score")) or g("date") < since:
             continue
         sid = S.find_category_owner(g("category")) or ""
         if not sid:
@@ -195,7 +214,8 @@ def make_research(r, ledger, token, public):
     import duo_video as DV
     import video_make as VM
     import youtube_upload as YT
-    sc = DV.load_script(r["slug"]) or DV.write_script(r["slug"])
+    with VM.timed("research.script"):
+        sc = DV.load_script(r["slug"]) or DV.write_script(r["slug"])
     if not sc:
         print(f"   × {r['slug']}: 台本が検査に通りませんでした（作りません）")
         # 翌日また同じ業種で claude を3回呼ばないよう、通らなかった業種は記録して次の業種へ回す
@@ -206,11 +226,13 @@ def make_research(r, ledger, token, public):
         return False
     out = VM.OUT / f'{r["slug"]}.mp4'
     out.parent.mkdir(parents=True, exist_ok=True)
-    sec = DV.make(sc, out)
+    with VM.timed("research.make"):
+        sec = DV.make(sc, out)
     rec = {"site": "ai-lab", "kind": "research", "date": date.today().isoformat(), "sec": round(sec),
            "mp4": str(out.relative_to(ROOT)).replace("\\", "/"), "format": "duo", "url": r["url"]}
     if token:
-        rec["youtube"] = YT.upload(out, r["slug"], public=public, quiet=True)
+        with VM.timed("research.upload"):
+            rec["youtube"] = YT.upload(out, r["slug"], public=public, quiet=True)
     ledger[r["slug"]] = rec
     LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"   ○ {r['slug'][:40]:<40} {sec:.0f}秒 duo（調査）" + (f" → youtu.be/{rec['youtube']}" if token else ""))
@@ -230,7 +252,8 @@ def meta(k):
     t = (ROOT / "articles" / f"{k}.md").read_text(encoding="utf-8-sig")[:2000]
     g = lambda f: (re.search(rf"^{f}:\s*(.+)$", t, re.M) or [None, ""])[1].strip().strip('"')
     cat = g("category")
-    return {"slug": k, "title": g("title"), "category": cat, "site": S.find_category_owner(cat) or ""}
+    return {"slug": k, "title": g("title"), "category": cat, "site": S.find_category_owner(cat) or "",
+            "score": g("score")}
 
 
 SHORT_FAILS = []   # この回にショートを作れなかった記事。失敗しても VIDEOS_OK=yes と出していた（2026-10-07）
@@ -247,15 +270,17 @@ def shorts(ledger, limit, token, public):
     pool = [meta(k) for k, v in ledger.items()
             if (v.get("youtube") or (v.get("long") or {}).get("decision") == "skip") and not v.get("short")
             and (ROOT / "articles" / f"{k}.md").is_file()]
-    # 打ち出しから外したテーマは作らない。主力の業種・分野を先に、同じなら新しい順
-    pool = [m for m in pool if focus(m) is not None]
+    # 打ち出しから外したテーマは作らない。主力の業種・分野を先に、同じなら新しい順。
+    # 公開されていない記事（監修待ち・90点未満）は作らない（台帳に判定だけ残った記事が入っていた）
+    pool = [m for m in pool if focus(m) is not None and published(m["slug"], m["score"])]
     pool = [m for m in pool if not YT.is_client(m["site"]) or YT.token_path(m["site"]).is_file()]
     when = lambda k: ledger[k].get("date") or (ledger[k].get("long") or {}).get("date", "")
     todo = [m["slug"] for m in sorted(pool, key=lambda m: (focus(m), when(m["slug"])), reverse=True)][:limit]
     made = 0
     for slug in todo:
         try:
-            sc = DS.load_script(slug) or DS.write_script(slug)
+            with VM.timed("short.script"):
+                sc = DS.load_script(slug) or DS.write_script(slug)
             if not sc:
                 print(f"   × short {slug[:40]}: 台本が検査に通りませんでした")
                 continue
@@ -263,15 +288,17 @@ def shorts(ledger, limit, token, public):
             # 置き場は通常の動画を作ったときにだけできていた。通常の動画が0本の回（YouTube で検索されていない記事
             # だけの日）は ffmpeg が書き出せず、2026-10-07 はショートも0本になった
             out.parent.mkdir(parents=True, exist_ok=True)
-            sec = DS.make(sc, out)
+            with VM.timed("short.make"):
+                sec = DS.make(sc, out)
             rec = {"date": date.today().isoformat(), "sec": round(sec), "title": sc.get("title", "")}
             # 同じ記事の通常の動画があれば、説明欄の先頭に続きとして置く（この印の付いたショートだけ）
             lead = bool(ledger[slug].get("youtube"))
             if lead:
                 rec["desc"] = YT.LEAD_LONG
             if token:
-                rec["youtube"] = YT.upload(out, slug, public=public, quiet=True, short_title=sc.get("title", ""),
-                                           lead_long=lead)
+                with VM.timed("short.upload"):
+                    rec["youtube"] = YT.upload(out, slug, public=public, quiet=True, short_title=sc.get("title", ""),
+                                               lead_long=lead)
             ledger[slug]["short"] = rec
             made += 1
             print(f"   ○ short {slug[:40]:<40} {sec:.0f}秒" + (f" → youtube.com/shorts/{rec['youtube']}" if token else ""))
@@ -301,6 +328,7 @@ def main():
     import duo_video as DV
     import video_make as VM
     import youtube_upload as YT
+    t_start = time.perf_counter()
     ledger = load()
     token = YT.TOKEN.is_file()
     # 作り直しを先に（記事と食い違った動画を長く出したままにしない）。枠は新しい記事と共有する
@@ -328,6 +356,7 @@ def main():
         hl = RP.headline(ind)
         rows = rows[:a.limit - 1] + [{"slug": RP.PREFIX + ind, "site": "ai-lab", "title": RP.title(hl),
                                       "date": "調査", "research": True, "url": hl["url"]}]
+    VM.note_time("videos.plan", time.perf_counter() - t_start)
     print(f"■ 記事動画: 今回 {len(rows)}本（作り直し {len(redo)}本待ち・直近{a.days}日の未作成） / "
           f"YouTubeの鍵 {'あり' if token else '無し'}")
     for r in rows:
@@ -352,14 +381,16 @@ def main():
             out = VM.OUT / f'{r["slug"]}.mp4'
             out.parent.mkdir(parents=True, exist_ok=True)
             # 基準はキャラクター2人の掛け合い（duo_video）。台本が検査に通らなければスライド形式で出す
-            duo = (DV.load_script(r["slug"]) or DV.write_script(r["slug"])) if DV.ready() else None
+            with VM.timed("long.script"):
+                duo = (DV.load_script(r["slug"]) or DV.write_script(r["slug"])) if DV.ready() else None
             sj = DV.SCRIPTS / f'{r["slug"]}.json'
-            if duo and a.reuse and out.is_file() and sj.is_file() and out.stat().st_mtime > sj.stat().st_mtime:
-                sec, fmt = VM.duration(out), "duo"
-            elif duo:
-                sec, fmt = DV.make(duo, out), "duo"
-            else:
-                sec, fmt = VM.build(script, out, quiet=True), "slides"
+            with VM.timed("long.make"):
+                if duo and a.reuse and out.is_file() and sj.is_file() and out.stat().st_mtime > sj.stat().st_mtime:
+                    sec, fmt = VM.duration(out), "duo"
+                elif duo:
+                    sec, fmt = DV.make(duo, out), "duo"
+                else:
+                    sec, fmt = VM.build(script, out, quiet=True), "slides"
             old = ledger.get(r["slug"]) or {}
             rec = {"site": r["site"], "date": date.today().isoformat(),
                    "sec": round(sec), "mp4": str(out.relative_to(ROOT)).replace("\\", "/"),
@@ -368,8 +399,9 @@ def main():
             if r.get("yt"):
                 rec["long"] = r["yt"]
             if token:
-                rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True, replacing=replacing,
-                                           title=(r.get("yt") or {}).get("title", ""))
+                with VM.timed("long.upload"):
+                    rec["youtube"] = YT.upload(out, r["slug"], public=a.public, quiet=True, replacing=replacing,
+                                               title=(r.get("yt") or {}).get("title", ""))
             if replacing:
                 # 消すと再生数と埋め込みが失われる。限定公開に下げて、新しい動画に差し替える。
                 # 下げるのは新しい版が上がった後（先に下げると、上限で上がらなかった日に動画が無くなる。2026-10-03）
@@ -397,6 +429,7 @@ def main():
     LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
     if rows and not token:
         note_token_missing()
+    VM.note_time("videos.total", time.perf_counter() - t_start)
     print(f"VIDEOS_OK={'yes' if ok else 'no'}")
     print(f"VIDEOS_MADE={made}")
     print(f"SHORTS_MADE={made_s}")

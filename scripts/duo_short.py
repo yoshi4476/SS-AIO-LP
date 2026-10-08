@@ -25,6 +25,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -340,15 +341,8 @@ def make(sc, out_mp4):
     SR = 24000
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as td:
         td = Path(td)
-        waves = []
-        for i, ln in enumerate(lines):
-            v, rate, pitch = DV.VOICE[ln["who"]]
-            mp3, wav = td / f"v{i:03d}.mp3", td / f"v{i:03d}.wav"
-            VM.say(ln["text"], mp3, v, rate, pitch)
-            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp3), "-ar", str(SR), "-ac", "1", str(wav)], check=True)
-            a = DV._read_wav(wav)
-            nz = np.where(np.abs(a) > 0.01)[0]
-            waves.append(a[max(0, nz[0] - 600):nz[-1] + 1200] if len(nz) else a)
+        waves = DV.voices(VM, lines, td, SR, "short")
+        t_audio = time.perf_counter()
         # ショートは間を詰める（長い間で指が離れる）
         gaps = [0.12 if (ln["who"] == "K" and ln["text"].endswith(("？", "?"))) else 0.18 for ln in lines]
         gaps[-1] = 1.0
@@ -369,6 +363,8 @@ def make(sc, out_mp4):
                         "[1:a]volume=0.5[b];[b][sc]sidechaincompress=threshold=0.015:ratio=5:attack=30:release=500[bd];"
                         "[v][bd]amix=inputs=2:duration=longest:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.95[a]",
                         "-map", "[a]", "-ar", "44100", str(td / "mix.wav")], check=True)
+        VM.note_time("short.audio", time.perf_counter() - t_audio)
+        t_render, t_draw, t_write = time.perf_counter(), 0.0, 0.0
 
         def env_of(a):
             hop = SR / FPS
@@ -390,6 +386,10 @@ def make(sc, out_mp4):
         rs = lambda im: im.resize((round(im.width * CH / im.height), CH), Image.LANCZOS)
         sp = {k: {kk: rs(v) for kk, v in d.items()} for k, d in sp0.items()}
         dim = {k: rs(v) for k, v in dim0.items()}
+        # 毎コマ貼るものは透明な余白を落としておく（字幕は画面全体の大きさの透明な板だった。貼った結果は同じ）
+        sp_c = {k: {kk: DV.crop_layer(im) for kk, im in d.items()} for k, d in sp.items()}
+        dim_c = {kk: DV.crop_layer(im) for kk, im in dim.items()}
+        line_cs = {}     # 字幕の区切りと読みの重みはセリフごとに1回だけ求める
         pos = {"N": 10, "K": 470}
         enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
                                 "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", str(td / "mix.wav"),
@@ -400,6 +400,7 @@ def make(sc, out_mp4):
         blink = {"N": 1.0, "K": 1.8}
         li, prev_key, fade_from, fade_t0, sub_cache = -1, None, None, 0.0, {}
         for f in range(int(total * FPS)):
+            t0f = time.perf_counter()
             t = f / FPS
             while li + 1 < len(lines) and t >= starts[li + 1] - 0.04:
                 li += 1
@@ -424,11 +425,15 @@ def make(sc, out_mp4):
                 br = math.sin(t * 2 * math.pi / (3.6 if k == "N" else 4.2)) * 3
                 if k == who:
                     im, dy = sp[k][(eye, mouth(v))], br - 6
+                    cim, cx, cy = sp_c[k][(eye, mouth(v))]
                 else:
                     im, dy = dim[(k, eye, "m0")], br + 6
-                frame.paste(im, (pos[k], int(H - im.height + 30 + dy)), im)
-            cs = DV.chunks(lines[i]["text"], limit=30)
-            wts = [len(VM.read_text(c)) for c in cs]
+                    cim, cx, cy = dim_c[(k, eye, "m0")]
+                frame.paste(cim, (pos[k] + cx, int(H - im.height + 30 + dy) + cy), cim)
+            if i not in line_cs:
+                cs0 = DV.chunks(lines[i]["text"], limit=30)
+                line_cs[i] = (cs0, [len(VM.read_text(c)) for c in cs0])
+            cs, wts = line_cs[i]
             pos_ = max(0, local) / max(0.1, len(a) / SR) * sum(wts)
             ci, acc = 0, 0
             for ci, wv in enumerate(wts):
@@ -437,16 +442,25 @@ def make(sc, out_mp4):
                     break
             sk = (who, cs[ci])
             if sk not in sub_cache:
-                sub_cache[sk] = _subtitle(VM, who, names[who], roles[who], cs[ci])
-            frame.paste(sub_cache[sk], (0, 0), sub_cache[sk])
+                sub_cache[sk] = DV.crop_layer(_subtitle(VM, who, names[who], roles[who], cs[ci]))
+            sim, sx, sy = sub_cache[sk]
+            frame.paste(sim, (sx, sy), sim)
+            t1f = time.perf_counter()
+            t_draw += t1f - t0f
             try:
                 enc.stdin.write(frame.tobytes())
             except BrokenPipeError:
                 # ffmpeg が先に落ちると「Broken pipe」しか残らず、原因が分からなかった（2026-10-03）
                 enc.wait()
                 raise RuntimeError("ffmpeg が止まりました: " + (td / "enc.log").read_text(encoding="utf-8", errors="ignore")[-400:])
+            t_write += time.perf_counter() - t1f
+        t1f = time.perf_counter()
         enc.stdin.close()
         enc.wait()
+        t_write += time.perf_counter() - t1f
+        VM.note_time("short.render", time.perf_counter() - t_render, f"frames={int(total * FPS)} {W}x{H}")
+        VM.note_time("short.render.draw", t_draw)
+        VM.note_time("short.render.encode_wait", t_write)
         # 字幕（youtube_upload が <動画>.srt を上げる）。無いと YouTube の自動字幕が出て、
         # 「[音楽]」や聞き違い（請求書テンプレ→請求書店）がそのまま表示されていた（2026-10-03）
         srt = [f"{i + 1}\n{VM._fmt_srt(s)} --> {VM._fmt_srt(s + len(a) / SR)}\n{ln['text']}\n"

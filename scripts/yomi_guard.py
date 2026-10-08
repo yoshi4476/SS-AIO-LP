@@ -28,6 +28,10 @@ ROOT = Path(__file__).resolve().parent.parent
 DICT = ROOT / "data" / "yomi_dict.json"
 ISSUES = ROOT / "data" / "yomi_issues.jsonl"
 MODEL = os.environ.get("YOMI_MODEL", "medium")
+# 同時に聞く数。1本ずつ4スレッドで聞くより、2本を2スレッドずつで聞くほうが速かった
+# （2026-10-08 手元の実測。同じ8本で1本あたり20〜27秒 → 9秒、書き起こしは8本とも同じ文字。
+#  CI と同じ4CPUに絞った45行の動画では、聞き直しの合計 2,116秒 → 1,489秒）
+WORKERS = max(1, int(os.environ.get("YOMI_WORKERS", "2")))
 _model = _tagger = None
 
 
@@ -111,10 +115,54 @@ LETTER = dict(zip("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
 
 def hear(path, beam=5):
+    import time
+    import video_make as V
+    t0 = time.perf_counter()
+    try:
+        return _hear(path, beam)
+    finally:
+        V.spend("hear", t0, n=1)
+
+
+def _load():
     global _model
     if _model is None:
+        import time
+        import video_make as V
         from faster_whisper import WhisperModel
-        _model = WhisperModel(MODEL, device="cpu", compute_type="int8")
+        t0 = time.perf_counter()
+        cpus = (getattr(os, "process_cpu_count", None) or os.cpu_count)() or 4
+        _model = WhisperModel(MODEL, device="cpu", compute_type="int8", num_workers=WORKERS,
+                              cpu_threads=max(1, cpus // WORKERS))
+        V.note_time("yomi.load", time.perf_counter() - t0)
+    return _model
+
+
+def hear_many(paths):
+    """何本もの声の1回目の聞き取り（hear と同じ beam 5）を同時に行う。{番号: 書き起こし}。
+    聞けなかった分は入れない（呼び出し側が1本ずつ聞き直す。検査を飛ばさない）"""
+    from concurrent.futures import ThreadPoolExecutor
+    out = {}
+    if WORKERS < 2 or len(paths) < 2:
+        return out
+    try:
+        _load()          # 同時に読み込ませない
+    except Exception as e:
+        print(f"  読みの検査のモデルを読めませんでした（1本ずつ聞きます）: {e}")
+        return out
+
+    def one(i):
+        try:
+            out[i] = hear(paths[i])
+        except Exception:
+            pass
+    with ThreadPoolExecutor(WORKERS) as ex:
+        list(ex.map(one, range(len(paths))))
+    return out
+
+
+def _hear(path, beam):
+    _load()
     # ひらがなで書き起こさせる。数字や漢字で書かれると、どう読んだかが消える
     # （「さんじゅうふたつぼ」が「32つぼ」と書かれ、読み違いを見逃した）
     # 音声は ffmpeg で読んで配列で渡す。faster-whisper 内部の PyAV は版が上がると引数が合わず
@@ -167,21 +215,23 @@ def fix_text(text, bad):
     return s, learned
 
 
-def _differs(text, path):
-    """ずれを返す。ずれたら聞き取り方を変えてもう一度聞き、どちらかで一致すれば聞き取りの誤りとみなす"""
-    bad = diff(text, hear(path))
+def _differs(text, path, heard=None):
+    """ずれを返す。ずれたら聞き取り方を変えてもう一度聞き、どちらかで一致すれば聞き取りの誤りとみなす。
+    heard は同じ声を hear（beam 5）で先に聞いた書き起こし（hear_many）。無ければここで聞く"""
+    bad = diff(text, heard if heard is not None else hear(path))
     if bad and not diff(text, hear(path, beam=1)):
         return []
     return bad
 
 
-def guard(text, path, synth):
+def guard(text, path, synth, heard=None):
     """作った声を聞き直し、ずれていれば作り直す。synth(読み上げ文, path) で声を作る関数を渡す。
+    heard はこの声を先に聞いた書き起こし（作り直す前の声のものだけ渡す）。
     返り値: 残ったずれ（無ければ空）"""
     if not available():
         return []
     try:
-        bad = _differs(text, path)
+        bad = _differs(text, path, heard)
     except Exception as e:   # 検査が動かないことで動画を止めない
         print(f"  読みの検査を飛ばしました: {e}")
         return []

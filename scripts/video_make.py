@@ -22,6 +22,9 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
+import time
+from contextlib import contextmanager
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -29,6 +32,32 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 OUT = ROOT / "automation" / "video"
+
+# 工程ごとの所要時間。CI のログは最後にまとめて出るため、どこで時間を使ったかが見えなかった
+# （16分以上1行も出ない回があった・2026-10-08）。`VIDEO_TIME <工程> <秒>` の1行で出す
+SPENT = {}
+_SPENT_LOCK = threading.Lock()
+
+
+def note_time(name, sec, extra=""):
+    print(f"VIDEO_TIME {name} {sec:.1f}" + (f" {extra}" if extra else ""), flush=True)
+
+
+@contextmanager
+def timed(name):
+    t0 = time.perf_counter()
+    try:
+        yield
+    finally:
+        note_time(name, time.perf_counter() - t0)
+
+
+def spend(key, t0, n=0):
+    """工程の中の積み上げ（同時に動く分は合計なので、実際の経過時間より長くなりうる）"""
+    with _SPENT_LOCK:
+        SPENT[key] = SPENT.get(key, 0.0) + time.perf_counter() - t0
+        if n:
+            SPENT[key + "_n"] = SPENT.get(key + "_n", 0) + n
 
 W, H = 1920, 1080
 # 提案書と同じ意匠（紺＋金・白地）。資料と動画で色が違うと別の会社に見える
@@ -347,23 +376,72 @@ def read_text(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def say(text, path, voice=None, rate=None, pitch=None):
-    """読み上げる。声と速さはサイトごとに変えられる（クライアントの色に合わせる）"""
+def _synth(voice=None, rate=None, pitch=None):
+    """声を作る関数（読み上げ文, 書き出し先）。声と速さはサイトごとに変えられる（クライアントの色に合わせる）"""
     import edge_tts
 
     def synth(spoken, out):
+        t0 = time.perf_counter()
+
         async def go():
             await edge_tts.Communicate(spoken, voice or VOICE, rate=rate or RATE,
                                        pitch=pitch or "+0Hz").save(str(out))
         asyncio.run(go())
+        spend("tts", t0, n=1)
+    return synth
 
-    synth(read_text(text), path)
+
+def _guard(text, path, synth, heard=None):
     # 作った声を聞き直し、読み違いがあれば直して作り直す（音声認識が無い環境では何もしない）
+    t0, tts0 = time.perf_counter(), SPENT.get("tts", 0.0)
     try:
         import yomi_guard
-        yomi_guard.guard(text, path, synth)
+        yomi_guard.guard(text, path, synth, heard=heard)
     except ImportError:
         pass
+    with _SPENT_LOCK:   # 聞き直しの時間（作り直した声の分は tts に数えるので除く）
+        SPENT["yomi"] = SPENT.get("yomi", 0.0) + time.perf_counter() - t0 - (SPENT.get("tts", 0.0) - tts0)
+
+
+def say(text, path, voice=None, rate=None, pitch=None):
+    """読み上げる（1行）"""
+    synth = _synth(voice, rate, pitch)
+    synth(read_text(text), path)
+    _guard(text, path, synth)
+
+
+TTS_WORKERS = 4      # 声を同時に作る数。edge-tts は外のサービスなので控えめにする
+
+
+def say_many(items, workers=TTS_WORKERS):
+    """複数の行を読み上げる。items は (台本の文, 書き出し先, 声, 速さ, 高さ) の並び。
+
+    1行ずつ「声を作る→聞き直す」を繰り返すと、通信の待ち（1行約1秒）と音声認識が行の数だけ積み上がる
+    （2026-10-08 手元の実測: 45行で声44秒・聞き直し2,116秒。動画づくりの8割）。
+    声（通信）は同時に作り、1回目の聞き取りも同時に行う（yomi_guard.hear_many）。ずれの判定・作り直し・
+    辞書に覚える所は台本の順に1行ずつ行う（中身は say と同じ）。
+    聞き直しで覚えた読み（yomi_dict）は、後の行に効かせる。先に作った声がその前の読みなら作り直し、聞き直す"""
+    from concurrent.futures import ThreadPoolExecutor
+    t0 = time.perf_counter()
+    jobs = [(text, Path(out), _synth(v, r, p), read_text(text)) for text, out, v, r, p in items]
+    with ThreadPoolExecutor(max(1, workers)) as ex:
+        list(ex.map(lambda j: j[2](j[3], j[1]), jobs))
+    spend("tts_wall", t0)
+    pre = {}
+    try:
+        import yomi_guard
+        if yomi_guard.available():
+            t1 = time.perf_counter()
+            pre = yomi_guard.hear_many([j[1] for j in jobs])
+            spend("hear_wall", t1)
+    except ImportError:
+        pass
+    for i, (text, out, synth, spoken) in enumerate(jobs):
+        now = read_text(text)
+        if now != spoken:
+            synth(now, out)
+            pre.pop(i, None)      # 作り直した声は先に聞いた書き起こしと別物
+        _guard(text, out, synth, pre.get(i))
 
 
 def duration(path):
