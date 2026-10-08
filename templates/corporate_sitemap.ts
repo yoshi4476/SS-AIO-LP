@@ -87,6 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/rakushift`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${site.url}/aio-agent`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${site.url}/company`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${site.url}/press/kit`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${site.url}/news`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     ...news.map((n) => ({
       url: `${site.url}/news/${n.slug}`,
