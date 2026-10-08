@@ -55,8 +55,6 @@ AIが引用元を選ぶ材料として、被リンクより社名の言及が強
 
 あわせて[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)もご覧ください。
 
-前提となる考え方は[税理士法人のAIO対策とは？](/aio/zeirishi-houjin-aio/)でも扱っています。
-
 関連する内容は、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)で解説しています。
 
 <div class="definition-box"><span class="term">AIO対策でAIに引用されるとは</span>、ChatGPTやGoogleのAI Overviewなどの生成AIが、回答を組み立てる際に特定のWebページを根拠として採用し、その内容や運営者名を回答に含めることを指します。</div>

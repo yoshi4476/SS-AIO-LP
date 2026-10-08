@@ -119,11 +119,10 @@
   "site": "subsidy"
  },
  "it-hojokin-osusume": {
-  "at": "2026-10-05",
-  "pos": 15.6,
-  "imp": 50,
-  "band": "11〜20位",
-  "site": "subsidy"
+  "at": "2026-10-09",
+  "pos": 16.0,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  },
  "byoin-kuchikomi-henshin-reibun": {
   "at": "2026-10-05",
@@ -317,11 +316,10 @@
   "site": "subsidy"
  },
  "ai-hojokin-jissekihoukoku-kakikata": {
-  "at": "2026-09-20",
-  "pos": 7.1,
-  "imp": 68,
-  "band": "4〜10位",
-  "site": "subsidy"
+  "at": "2026-10-09",
+  "pos": 8.0,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  },
  "ai-hojokin-nozeishomeisho-dore": {
   "at": "2026-09-20",
@@ -357,11 +355,10 @@
   "by": "auto_rewrite"
  },
  "monozukuri-hojokin-biyoushitsu": {
-  "at": "2026-10-05",
-  "pos": 19.4,
-  "imp": 54,
-  "band": "11〜20位",
-  "site": "subsidy"
+  "at": "2026-10-09",
+  "pos": 28.2,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  },
  "jizokuka-hojokin-inshokuten-jirei": {
   "at": "2026-10-05",
@@ -397,11 +394,10 @@
   "site": "subsidy"
  },
  "nougyou-kikai-hojokin": {
-  "at": "2026-10-05",
-  "pos": 12.2,
-  "imp": 33,
-  "band": "11〜20位",
-  "site": "subsidy"
+  "at": "2026-10-09",
+  "pos": 12.0,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  },
  "egov-denshishinsei-kojinjigyonushi": {
   "at": "2026-10-05",

@@ -49,6 +49,8 @@ faq:
 
 記帳代行費用の勘定科目は、記帳という業務プロセスを外部に委託した対価として、多くの場合「外注費」に区分します。
 
+あわせて[現金払いは否認の落とし穴？](/blog/gaichuuhi-seikyuusho-nashi/)もご覧ください。
+
 関連する内容として[請求書の支払いのやり方｜4つの方法と60日ルール](/blog/seikyusho-shiharai-yarikata/)も公開しています。
 
 費用の目安は、[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)で解説しています。

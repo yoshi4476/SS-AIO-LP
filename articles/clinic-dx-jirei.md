@@ -47,6 +47,10 @@ diagrams:
 
 **クリニックDXの事例は、受付から会計までの業務を5つの領域に分けると整理しやすくなります。**
 
+近い論点を[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)で扱っています。
+
+あわせて[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)もご覧ください。
+
 あわせて[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)もご覧ください。
 
 関連する内容としてクリニックM&A後の集患再建も公開しています。

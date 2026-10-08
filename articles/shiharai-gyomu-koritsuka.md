@@ -63,6 +63,8 @@ faq:
 
 支払業務が非効率になる原因は、請求書の形式のばらつき・承認の属人化・振込データの手入力という3つに整理できます。
 
+関連する内容として[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)も公開しています。
+
 関連する内容として[バックオフィス業務改善の4ステップ](/blog/backoffice-gyomu-kaizen/)も公開しています。
 
 <figure><img src="/images/shiharai-gyomu-koritsuka/genin.png" alt="支払業務が非効率になる3つの原因: 請求書がバラバラに届く、承認フローが属人化する、振込データを手入力する" loading="lazy"><figcaption>支払業務が非効率になる3つの原因</figcaption></figure>

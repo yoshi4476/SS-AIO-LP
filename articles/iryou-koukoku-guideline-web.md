@@ -162,6 +162,8 @@ Webサイト上の表現が医療広告として規制されるかどうかは�
 
 医療広告ガイドライン違反は、ただちに罰則というより、段階を踏んだ是正の流れで進みます。
 
+あわせて[病院・クリニックの口コミ返信](/meo/byoin-kuchikomi-henshin-reibun/)もご覧ください。
+
 まず<a href="https://iryoukoukoku-patrol.mhlw.go.jp/" target="_blank" rel="noopener">医療機関ネットパトロール</a>などの監視で違反が見つかると、都道府県等から医療機関へ改善指導が入ります。ここで是正すれば大きな問題にはなりません。改善指導に応じない場合は中止命令・是正命令に進み、さらに従わない場合は、罰則の適用や告発が検討されます。
 
 <div class="caution-box"><span class="box-title">注意: 虚偽広告には直接罰則の規定がある</span><br>特に虚偽広告（内容が事実と異なる広告）は、<a href="https://elaws.e-gov.go.jp/document?lawid=323AC0000000205" target="_blank" rel="noopener">医療法</a>87条1号により<strong>6ヶ月以下の懲役または30万円以下の罰金</strong>の対象です。他の類型より重く扱われる点を押さえておいてください。</div>

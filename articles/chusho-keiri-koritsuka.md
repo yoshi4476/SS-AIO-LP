@@ -107,6 +107,8 @@ faq:
 
 打ち手は、業務改善・システム化・経理BPO活用という3パターンに大きく分かれます。
 
+あわせて[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)もご覧ください。
+
 関連する内容として[経理の業務フローテンプレート4選](/blog/keiri-gyomu-flow-template/)も公開しています。
 
 <figure><img src="/images/chusho-keiri-koritsuka/pattern3.png" alt="打ち手の選択肢3パターン: 業務改善で見直す、システムを導入する、経理BPOに任せる" loading="lazy"><figcaption>打ち手の選択肢3パターン</figcaption></figure>

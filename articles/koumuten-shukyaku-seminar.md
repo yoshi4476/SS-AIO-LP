@@ -49,13 +49,17 @@ diagrams:
 
 **工務店の集客セミナーとは、契約棟数を増やす知識を体系的に学べる、経営者向けの学びの場です。**
 
+あわせて[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)もご覧ください。
+
+あわせて[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)もご覧ください。
+
 近い論点をクリニックのサイバー攻撃事例と集患を守る5つの初動対応で扱っています。
 
 関連する内容として[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)も公開しています。
 
 関連する内容としてクリニックの建築事例｜失敗しない5つの視点と坪単価も公開しています。
 
-あわせて[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)もご覧ください。
+関連する内容として[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)も公開しています。
 
 <div class="definition-box"><span class="term">工務店の集客セミナーとは</span>、Web集客・見学会の企画・施工事例の見せ方といった、新規契約につながる知識をまとめて学べる場のことです。==自己流でSNSやブログを触るのと違い、複数の施策を体系立てて学べる点が特徴==です。</div>
 

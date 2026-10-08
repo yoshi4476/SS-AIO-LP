@@ -87,8 +87,6 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 被リンクの本数を指標に入れるべきかは、[AIO対策と被リンクの関係](/aio/aio-taisaku-hilink/)で解説しています。
 
-選ぶときの基準は[AIOサービス比較で外す5つの落とし穴](/aio/aio-service-hikaku/)で整理しています。
-
 関連する内容については、[外壁塗装のAIO対策](/aio/gaiheki-tosou-aio-taisaku/)にまとめています。
 
 実際の例を先に押さえるなら、[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)が参考になります。
