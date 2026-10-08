@@ -94,7 +94,7 @@ faq:
 
 <a href="https://laws.e-gov.go.jp/law/324AC0000000237" target="_blank" rel="noopener">税理士法</a>第52条により、税務申告の代理や税務書類の作成は、税理士でない人は行えません。頼めるかどうかは、名前ではなく資格の登録で決まります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 社内の書類ではどちらを書く？場面ごとの使い分け
 
@@ -154,7 +154,7 @@ faq:
 
 2023年1月〜2026年8月に契約した経理BPO10社のうち、2年以内に解約したのは1社でした（**継続率90%**）。どこまで任せられるかは、[経理の外注で丸投げできる範囲と残す4業務](/blog/keiri-marunage-dekiru-hani/)で確かめられます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

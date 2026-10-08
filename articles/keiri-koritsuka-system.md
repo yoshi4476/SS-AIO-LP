@@ -173,7 +173,7 @@ MM総研の同調査では、<strong>会計ソフトの事業者別シェアは�
 
 経理のどの作業を先に軽くするかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -186,7 +186,7 @@ MM総研の同調査では、<strong>会計ソフトの事業者別シェアは�
 <details><summary>システム導入で失敗しやすいポイントは何ですか？</summary><p class="faq-a">現状把握をせずツールから決めると、二重入力が増えて逆効果になりやすいです。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理効率化システムは「比較軸」を先に決めてから選ぶ
 

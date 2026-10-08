@@ -158,7 +158,7 @@ b2b-kessai.jpが公開する<a href="https://b2b-kessai.jp/services/btob-kakebar
 
 取引先の中に電子化を歓迎しない相手がいる場合は、全件を一気に切り替えるのではなく、対応可能な取引先から段階的に移行する進め方も選択肢です。一部だけでも郵送をなくせれば、その分の手数料は確実に減ります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 請求書発行を代行に切り替える判断基準3つ
 
@@ -192,7 +192,7 @@ b2b-kessai.jpが公開する<a href="https://b2b-kessai.jp/services/btob-kakebar
 
 私も過去に、料金の安さだけで代行会社を選んだ経営者から「郵送のたびに追加料金がかかっていることに半年気づかなかった」という相談を受けたことがあります。月次の明細を確認する習慣も、あわせて持っておくと安心です。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 
 経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。

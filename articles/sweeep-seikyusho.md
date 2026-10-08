@@ -150,7 +150,7 @@ freeeも「受取請求書アシスト」という代行を用意しています
 
 ツールを入れる前に、受取の経路や承認の流れを整える方法は、[請求書処理の効率化とは？](/blog/seikyusho-shori-koritsuka/)をあわせてご覧ください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -169,4 +169,4 @@ freeeも「受取請求書アシスト」という代行を用意しています
 
 今日できる一歩は、先月受け取った請求書を経路別（郵送・メール・FAX）に数えることです。その数で、ツールで足りるか、代行に出すかが決まります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

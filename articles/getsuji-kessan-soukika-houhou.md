@@ -159,7 +159,7 @@ faq:
 
 外部委託と聞くと「自社のやり方を大きく変えなければならない」と身構える経営者もいます。ただし、実際には今の締めスケジュールを棚卸しするところから一緒に進める委託先も多く、**いきなり全工程を任せる必要はありません**。まずは証憑の回収や照合など、負担の大きい一部の工程だけを切り出して相談することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -172,7 +172,7 @@ faq:
 <details><summary>自社での早期化が難しい場合はどうすればよいですか？</summary><p class="faq-a">経理BPOへの外注で、早期化のノウハウごと任せるという方法もあります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 月次決算の早期化は「原因の特定」から始まる
 

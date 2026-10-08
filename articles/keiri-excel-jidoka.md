@@ -175,7 +175,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 <span class="txt-red">パスワード付きのマクロは避けてください。</span>作った人がいなくなると、開けないまま捨てることになります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -188,7 +188,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 <details><summary>エクセル自動化だけで人手不足は解消しますか？</summary><p class="faq-a">入力作業は減っても判断業務は残るため、経理BPOへの外注も選択肢になります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: エクセル自動化は「限界を見極めて移行すること」が近道
 

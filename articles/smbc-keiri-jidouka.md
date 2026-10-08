@@ -55,7 +55,7 @@ SMBCグループの自動化は、大規模なERPやRPA基盤を前提にして�
 
 一方で、自動化の狙いそのもの（紙の書類を減らす・入力を人手からシステムへ移す・例外だけ人が見る）は、規模に関係なく共通しています。**真似すべきは技術の規模ではなく、自動化の考え方**だといえます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 中小企業が使える自動化の技術要素3つ
 
@@ -119,7 +119,7 @@ AI-OCRは、freee会計やマネーフォワードクラウドなどのクラウ
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 真似るべきは規模ではなく自動化の考え方
 

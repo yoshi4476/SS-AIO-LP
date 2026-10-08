@@ -172,7 +172,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 
 引き継ぎの進め方に不安が残る場合は、経理BPOの無料相談も選択肢です。資料の整理から窓口の決め方まで、具体的に相談できます。まずは前章のチェックリストで、手元にある資料を洗い出してみてください。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -184,7 +184,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 <details><summary>引き継ぎ後にトラブルが起きた場合はどうすればよいですか？</summary><p class="faq-a">前任者への確認可否と、社内・委託先どちらが対応するかを決めておくことです。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理外注の引き継ぎは資料の準備で9割決まる
 

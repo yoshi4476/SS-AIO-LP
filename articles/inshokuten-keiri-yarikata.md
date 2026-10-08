@@ -88,7 +88,7 @@ faq:
 
 深夜営業や早朝仕込みがある店舗では、「当日中」を暦日ではなく営業サイクル単位で決めておくと無理がありません。閉店から翌営業開始までの間に締める、という運用ルールにすれば、深夜営業でも回せます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 月次でやること：仕入れ原価と人件費（シフト給与）の集計
 
@@ -150,7 +150,7 @@ freeeやマネーフォワード クラウドといった主要なクラウド�
 
 POSレジ導入の初期費用や運用の手間を考えると、すべてを一度に切り替える必要はありません。まずは売上データの連携だけを先に整え、原価管理機能は後から追加するといった段階的な進め方でも十分に効果があります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 自分で回す限界と経理BPOに切り替える判断基準
 

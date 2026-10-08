@@ -122,7 +122,7 @@ faq:
 
 それでも支払い業務の負担が減らない場合は、確認から証憑保存までを含めて経理BPOへ外注する方法もあります。費用の目安は、[経理アウトソーシングの費用相場内訳と抑え方](/blog/keiri-outsourcing-hiyou-souba/)で解説しています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 請求書の支払いでやってはいけないNG対応
 
@@ -157,4 +157,4 @@ faq:
 
 確認と体制づくりを進めても支払業務の負担が減らないこともあります。その場合は、経理BPOの無料相談で支払業務を含めた外注範囲について相談することもできます。まずは直近1か月分の支払い処理で、期日ギリギリになっている取引先がないか洗い出すところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

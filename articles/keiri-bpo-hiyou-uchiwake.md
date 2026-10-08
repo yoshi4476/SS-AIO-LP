@@ -111,7 +111,7 @@ CREXコンサルティングが公開する<a href="https://crex-consulting.com/
 
 すでにクラウド会計ソフトを使っている会社は、データ連携がスムーズに進みやすく、初期費用を抑えられることがあります。逆に紙の帳簿や表計算ソフトだけで管理してきた会社は、電子化の手間が加わる分、初期費用が上振れしやすい点も見積もり時に確認しておくとよいでしょう。
 
-<div class="cta-box"><p>自社の見積もりに含まれる費目を、無料で一緒に確認しませんか。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の見積もりに含まれる費目を、無料で一緒に確認しませんか。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## 見積書でチェックすべき3つのポイント
 
@@ -165,7 +165,7 @@ CREXコンサルティングが公開する<a href="https://crex-consulting.com/
 
 私たちが中小企業の経理支援に携わる中でも、**初期費用の存在を契約直前まで知らなかった**という相談を受けることがあります。初期費用は見積書の下部や別紙に小さく記載されているだけのことも多いため、契約前に必ず質問し、書面で確認しておいてください。
 
-<div class="cta-box"><p>自社の業務量なら、内訳ごとにどのくらいの費用感になるか無料で確認しませんか。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の業務量なら、内訳ごとにどのくらいの費用感になるか無料で確認しませんか。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 

@@ -90,7 +90,7 @@ faq:
 
 経理の締切はもっと短い間隔で来ます。振込日・給与日・請求書の発行日が毎月あり、遅れると取引先や従業員に直接影響が出ます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 税理士に会計を任せても、社内に残る経理の作業は？
 
@@ -152,7 +152,7 @@ faq:
 
 一方で、支払の承認と資金の判断は外に出せません。<span class="txt-blue">外に出すのは作業、残すのは判断</span>と線を引いてください。どこまで任せられるかは、[経理の外注で丸投げできる範囲と残す4業務](/blog/keiri-marunage-dekiru-hani/)で確かめられます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

@@ -187,7 +187,7 @@ Sansan株式会社が2024年8月22日〜27日に経理担当者1,000名（20〜5
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -200,7 +200,7 @@ Sansan株式会社が2024年8月22日〜27日に経理担当者1,000名（20〜5
 <details><summary>経理の残業削減で注意すべき点はありますか？</summary><p class="faq-a">属人化を放置したまま人を増やしても、残業は根本的に減りません。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理の残業は「原因の切り分け」と「仕組み化」で減らす
 

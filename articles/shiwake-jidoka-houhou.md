@@ -162,7 +162,7 @@ faq:
 
 バックオフィス業務全体の効率化については[店舗の事務作業をAIで効率化する5つの方法](https://corp.7senses.co.jp/blog/tenpo-jimu-sagyou-ai-koritsuka/)、外部委託まで含めた選択肢は[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で整理しています。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -174,7 +174,7 @@ faq:
 <details><summary>自動化しても経理担当者が足りない場合はどうすればよいですか？</summary><p class="faq-a">自動化で浮いた時間を確認作業に充てるか、経理BPOへの外注を検討します。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 仕訳の自動化は「範囲を絞って始めること」が近道
 

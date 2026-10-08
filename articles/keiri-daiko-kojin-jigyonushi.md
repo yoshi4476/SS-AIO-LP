@@ -171,7 +171,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -183,7 +183,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 <details><summary>経理代行を使うと青色申告の控除額は変わりますか？</summary><p class="faq-a">複式簿記で電子帳簿保存やe-Taxを行えば、65万円控除の対象になります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理代行は個人事業主も範囲を絞れば無理なく使える
 

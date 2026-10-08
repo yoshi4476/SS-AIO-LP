@@ -152,7 +152,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 この3つに加えて、料金プランも確認しておきたいポイントです。**無料プランは登録できる取引件数や連携できる口座数に上限があることが多く、事業が育つ前提で少し余裕のあるプランを選ぶと、後からの切り替えを避けられます。**まずは無料期間を使って、実際の操作感を試してみてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 経理を自分でやる場合と外注する場合の違い
 
@@ -189,7 +189,7 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 売掛金や支払業務まで含めた経理全体の効率化は、[売掛金管理の方法とは？](/blog/urikakekin-kanri-houhou/)や[支払業務の効率化とは？基本4ステップと方法の比較](/blog/shiharai-gyomu-koritsuka/)でも扱っています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

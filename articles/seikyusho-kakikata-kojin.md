@@ -159,7 +159,7 @@ faq:
 
 自分で請求書のテンプレートを整えるのが負担な場合は、経理BPOの無料相談で発行から記帳までまとめて相談することもできます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 自社の経理のどこに時間がかかっているかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 
@@ -192,6 +192,6 @@ faq:
 
 まずは自分が受け取る予定の仕事が源泉徴収の対象かどうかを確認するところから始めてください。発行から記帳までをまとめて見直したい場合は、経理BPOの無料相談で相談することもできます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 請求書の書き方に迷ったら、まずはテンプレートを1つ作ること。それが、個人が請求書で失敗しないための一番の近道です。

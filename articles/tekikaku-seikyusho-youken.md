@@ -168,7 +168,7 @@ faq:
 
 任せる範囲の決め方は、[経理BPOとは？メリット3つと費用相場](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で整理しています。委託時のつまずきは、[請求書の経理BPOでやりがちな失敗5つ](https://corp.7senses.co.jp/blog/seikyusho-keiri-bpo-shippai/)にまとめました。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -180,7 +180,7 @@ faq:
 <details><summary>適格請求書がなくても仕入税額控除できる取引はありますか？</summary><p class="faq-a">税込1万円未満の少額特例の対象や、3万円未満の公共交通機関の運賃は帳簿の保存だけで控除できます。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 適格請求書の要件は6項目の有無で判断する
 

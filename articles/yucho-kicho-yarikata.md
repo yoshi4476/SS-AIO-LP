@@ -176,7 +176,7 @@ faq:
 
 記帳代行を依頼する際の任せられる範囲や選び方は、[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)で解説しています。経理業務全体をどこまで外部に任せられるかを知りたい場合は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)もあわせてご確認ください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -199,4 +199,4 @@ faq:
 
 締めが翌月半ばまでずれ込んでいるなら、記帳ごと外に出す判断も早めにしてください。まずは直近1か月分の通帳で、「合算」表示になっている箇所がないか確認するところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

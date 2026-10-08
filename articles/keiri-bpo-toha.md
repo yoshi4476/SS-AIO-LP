@@ -173,7 +173,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 導入後にルールを一度も見直さないことも避けたい運用です。取引先が増えたり、事業が拡大したりすると、当初の委託範囲では対応しきれなくなる場面が出てきます。半年に一度は委託範囲と業務量が実態に合っているか、委託先とすり合わせる機会を作ってください。契約時の取り決めがすべての土台。ここを丁寧に作るほど、後のトラブルは減ります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -186,7 +186,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 <details><summary>経理BPO会社はどう選べばよいですか？</summary><p class="faq-a">対応範囲の明確さ、セキュリティ体制、報告頻度の3点で比較して選びます。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理BPOは「範囲を決めて任せる」ことが成功の分かれ道
 

@@ -148,7 +148,7 @@ faq:
 一括振込の仕組みを導入しても、振込先の新規登録や、名義相違が起きたときの確認作業は人の手で対応する必要があります。**この確認・保存作業までまとめて負担に感じる場合は、支払業務そのものを経理BPOへ任せる方法が現実的です。
 **任せられる範囲や費用相場は、[経理アウトソーシングの費用相場内訳と抑え方](/blog/keiri-outsourcing-hiyou-souba/)で解説しています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -170,4 +170,4 @@ faq:
 
 確認と保存を習慣にしても支払業務の負担が減らないこともあります。その場合は、経理BPOの無料相談で銀行振込を含めた支払業務の外注範囲について相談することもできます。まずは直近1か月分の振込作業で、確認に時間がかかっている工程がないか洗い出すところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

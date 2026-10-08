@@ -165,7 +165,7 @@ CSVでのデータ連携しか対応していない委託先だと、月次の�
 
 自社だけで判断がつかない場合は、経理BPOの無料相談で比較のポイントを一緒に整理することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -178,7 +178,7 @@ CSVでのデータ連携しか対応していない委託先だと、月次の�
 <details><summary>経理BPOはどのくらいの規模の会社から検討できますか？</summary><p class="faq-a">経理担当者が1人しかいない小規模企業でも、部分的な委託から検討できます。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理BPOの選び方は6つの視点と段階的な試験運用で決める
 

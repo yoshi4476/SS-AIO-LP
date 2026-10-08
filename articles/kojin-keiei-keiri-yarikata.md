@@ -101,7 +101,7 @@ faq:
 
 3つの理由に共通するのは、経理を「空いた時間にやるもの」として扱っていること。次の章から、この3つの理由に対応する具体的なコツを順番に見ていきます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## コツ1: 経理の時間を先に「予定化」する
 
@@ -148,7 +148,7 @@ faq:
 
 帳簿や書類の保存義務も、失敗しやすいポイントです。国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/shinkoku/kojin_jigyo/index.htm" target="_blank" rel="noopener">個人で事業を行っている方の記帳・帳簿等の保存について</a>では、2014年1月の改正により、白色申告者にも記帳と帳簿・書類の保存義務が課されているとされています。**帳簿は原則7年、請求書や領収書などの書類は5年の保存が必要です。**「白色申告だから記帳は不要」という思い込みが、あとから慌てる原因になりがちです。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
@@ -174,7 +174,7 @@ faq:
 
 判断に迷う場合は、無理に一人で結論を出そうとせず、一度相談してみるだけでも進め方が整理しやすくなります。**繁忙期が近づいてから慌てて探すより、余裕があるうちに外注先の候補を知っておく方が、いざというときの選択肢が広がります。**
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

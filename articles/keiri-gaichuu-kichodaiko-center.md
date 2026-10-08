@@ -98,7 +98,7 @@ faq:
 
 呼び名は事業者が自由に名乗れるため、記帳代行センターと名乗りながら経理代行の範囲まで対応する会社もあります。**サービス名ではなく、契約書に書かれた業務範囲で判断してください。**経理BPOの位置づけは[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)で詳しく整理しています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 記帳代行センターに頼める業務と頼めない業務の線引き
 
@@ -150,7 +150,7 @@ faq:
 
 私たちが相談を受ける中でも、この3つを書き出すだけで候補が2社程度まで絞れるケースは珍しくありません。比較の前に、任せたい範囲を言語化する時間を先に取ってください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 記帳代行センターへ依頼する前に準備する4つのもの
 
@@ -205,7 +205,7 @@ faq:
 
 **外注先を変えるタイミングとしては、期首か、担当者の異動が起きる前が動きやすい時期です。**期中の切り替えは仕訳ルールの引き継ぎが増えるため、余力のあるうちに検討を始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

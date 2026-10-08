@@ -178,7 +178,7 @@ Airレジ マガジンが公開する<a href="https://airregi.jp/magazine/guide/
 
 帳簿づけの仕組みそのものを整えたい場合は、経理BPOの無料相談で、複式簿記への移行や記帳の外注範囲について相談することもできます。まずは現在の記帳方式が簡易簿記か複式簿記かを確認するところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -197,4 +197,4 @@ Airレジ マガジンが公開する<a href="https://airregi.jp/magazine/guide/
 
 現在の記帳方式に不安がある、あるいは複式簿記への移行を機に記帳ごと外部に任せたいという場合は、経理BPOの無料相談で相談することもできます。まずは自分の帳簿が簡易簿記と複式簿記のどちらに当たるかを確認するところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

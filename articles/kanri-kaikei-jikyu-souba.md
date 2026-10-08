@@ -166,7 +166,7 @@ faq:
 
 当社は中小企業向けに会計ソフト・受発注ソフトの導入支援を行っており、経理業務のどこでつまずきやすいかを支援の現場で数多く見てきました。管理会計の体制づくりでも、最初から完璧な仕組みを目指すより、優先度の高い業務から着手する企業のほうが定着しやすいというのが実感です。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -179,7 +179,7 @@ faq:
 <details><summary>見積もりを比べるときに何を確認すればいいですか？</summary><p class="faq-a">委託範囲の階層、資料の提出頻度、スポット費用、担当者の経験の4点を揃えて比べてください。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 料金は「範囲の階層」で決まる
 

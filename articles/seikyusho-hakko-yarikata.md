@@ -184,7 +184,7 @@ faq:
 
 送付の記録も残します。**メールの送信履歴か、システムの送信ログ**があれば、支払いが遅れたときに「いつ送ったか」を示せます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -197,7 +197,7 @@ faq:
 <details><summary>請求書発行を効率化するにはどうすればいいですか？</summary><p class="faq-a">クラウド請求書サービスの導入や、発行から記帳までの外部委託という方法があります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 請求書発行は6項目の確認とテンプレート化で安定する
 

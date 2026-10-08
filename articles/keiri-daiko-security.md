@@ -171,7 +171,7 @@ faq:
 
 経理代行と経理BPOの違いは、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)で整理しています。自社だけで判断がつかない場合は、経理BPOの無料相談で確認項目を一緒に整理することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -183,7 +183,7 @@ faq:
 <details><summary>セキュリティが不安な場合、まず何を確認すればよいですか？</summary><p class="faq-a">データの保管場所とアクセス権限の範囲を、委託先に具体的に質問してください。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理代行のセキュリティは5つのポイントを契約前に確認する
 

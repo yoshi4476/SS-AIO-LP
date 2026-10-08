@@ -171,7 +171,7 @@ faq:
 
 自社で作った規程を渡し、日々の運用だけを任せる進め方も可能です。自社の運用体制に不安がある場合は、経理BPOの無料相談で、どこまでを委託できるか相談することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -184,7 +184,7 @@ faq:
 <details><summary>経費精算ルールが社内に浸透しないときはどうすればよいですか？</summary><p class="faq-a">申請フォーマットを統一し、違反時の対応まで規程に明記すると浸透しやすくなります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経費精算ルールは「5項目を決めて文書化する」ことから始まる
 

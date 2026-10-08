@@ -160,7 +160,7 @@ BOXILは2025年10月、経費精算システムの導入担当者1,865人を対�
 
 毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -173,7 +173,7 @@ BOXILは2025年10月、経費精算システムの導入担当者1,865人を対�
 <details><summary>経費精算システム導入でよくある失敗は何ですか？</summary><p class="faq-a">現状の申請ルールを整理せず、機能の多さだけでツールを選んでしまうことです。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経費精算システムは「申請ルールの整理」を先に済ませてから選ぶ
 

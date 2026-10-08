@@ -67,7 +67,7 @@ faq:
 
 現金出納帳は、現金の入出金を記録する帳簿です。現金取引が少ない会社でも、小口現金がある限りは記帳を省略できません。現金の動きが少ない会社ほど、記帳漏れに気づきにくい点に注意してください。預金出納帳や売掛帳・買掛帳といった補助簿も、必要に応じて整えておくと管理の精度が上がります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 日次・月次・年次でやることを分ける
 
@@ -160,7 +160,7 @@ faq:
 <details><summary>自社だけで経理が回らない場合はどうすればよいですか？</summary><p class="faq-a">一部の業務を経理BPOなど外部委託と組み合わせる方法があります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 会社の経理は「帳簿×周期×体制」の3点セットで整える
 

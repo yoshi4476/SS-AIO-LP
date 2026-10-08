@@ -84,7 +84,7 @@ faq:
 
 そのため、中小企業の「バックオフィス」という言葉には、ミドルの判断がまぎれ込んでいます。外部委託を考える前に、まずこの2つを分けて見ることが出発点になります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 外に出せるのはバックオフィス、残すのはミドルオフィスの判断
 
@@ -134,7 +134,7 @@ faq:
 
 書き出した表があれば、相談の場でそのまま委託範囲の話に入れます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 外に出すのは処理、残すのは判断
 

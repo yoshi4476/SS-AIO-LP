@@ -55,7 +55,7 @@ faq:
 
 当社は補助金を使った会計ソフト・受発注ソフトの導入支援を手がけており、中小企業が経理業務のどこでつまずくかを申請の現場で見てきました。書類の整理が後回しになっている企業ほど、記帳代行の依頼段階でもつまずきやすいというのが実感です。
 
-<div class="cta-box"><p>自社の資料の状態が依頼に耐えるか、無料で確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の資料の状態が依頼に耐えるか、無料で確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## 記帳代行を断られる6つの理由
 
@@ -162,7 +162,7 @@ faq:
 
 私たちが補助金支援の現場で相談を受ける際も、記帳代行だけを個別に探し直すより、業務範囲を一度棚卸ししてから相談先を決めた企業のほうが、結果的に早く落ち着き先が見つかっている印象があります。記帳代行で複数回断られている場合は、依頼を細分化するより、対応範囲の広い経理BPOへ切り替えたほうが早く解決することもあります。
 
-<div class="cta-box"><p>記帳代行と経理BPOのどちらが向いているか、無料で診断します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>記帳代行と経理BPOのどちらが向いているか、無料で診断します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 どこから手をつけるべきかの整理は、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からご相談いただけます。ご契約を前提としたご案内ではありません。
 

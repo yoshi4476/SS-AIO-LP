@@ -151,7 +151,7 @@ ATM引き出しの記帳を仕組み化したい場合は、現金出納帳をEx
 
 記帳をどこまで自分で続け、どこから外に任せるかで迷ったら、[経理代行は個人事業主でも使える？](/blog/keiri-daiko-kojin-jigyonushi/)も参考になります。現金の記帳だけを部分的に依頼する、確定申告の時期だけスポットで任せるなど、事業規模に合わせた任せ方を選べます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -172,4 +172,4 @@ ATM引き出しの記帳を仕組み化したい場合は、現金出納帳をEx
 
 明細の保管と月次の残高照合を習慣にしても記帳の負担が減らない場合は、経理BPOの無料相談で、ATM分を含めた記帳の外注範囲について相談することもできます。まずは直近のATM明細が手元に残っているか確認するところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

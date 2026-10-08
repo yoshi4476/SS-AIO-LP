@@ -100,7 +100,7 @@ faq:
 
 見落としやすいのが4行目です。店舗の家賃や水道光熱費は事業専用のため、按分の計算が要りません。自宅兼店舗の場合だけ按分が必要になります。**按分の手間が減る一方で、現金と在庫の管理という手間が増える。これが個人店の経理の実像です。**
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 現金：レジ締めと現金出納帳を日次で回す4ステップ
 
@@ -179,7 +179,7 @@ faq:
 
 備品を買ったときの扱いも覚えておくと得です。青色申告者は、取得価額30万円未満の資産を年間300万円まで一括で経費にできる特例を使えます。冷蔵ケースや施術ベッドなど、店舗ならではの設備投資で効いてきます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 個人店の経理でやってはいけない3つのNG
 
@@ -219,7 +219,7 @@ faq:
 
 私たちが店舗の相談を受ける中でも、申告直前に1年分の領収書を持ち込まれる例を何度も見てきました。その時点では選択肢が減り、費用も割高になります。余裕があるうちに候補を知っておくほうが、結果として安く済みます。個人事業主が使える外注先の選び方は、[経理代行は個人事業主でも使える？](/blog/keiri-daiko-kojin-jigyonushi/)にまとめました。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

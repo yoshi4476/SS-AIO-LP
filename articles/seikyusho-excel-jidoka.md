@@ -183,7 +183,7 @@ faq:
 
 経理BPOの基本的な仕組みは[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)、エクセル経理全体の限界については[経理の自動化はエクセルでどこまで可能？](/blog/keiri-excel-jidoka/)で整理しています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 「自社の場合、関数だけで続けるべきか、ソフトやBPOに切り替えるべきか」を自分たちだけで判断しにくい場合は、無料相談で取引件数や体制をもとに概算を確認することもできます。
 
@@ -206,4 +206,4 @@ faq:
 
 まずは請求書番号の採番など、ミスが起きやすい部分から自動化に着手してください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

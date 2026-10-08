@@ -138,7 +138,7 @@ faq:
 
 記帳をどこまで自分で続け、どこから外に任せるかで迷ったら、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)も参考になります。通帳分だけを部分的に依頼する、確定申告の時期だけスポットで任せるなど、取引件数に合わせた任せ方を選べます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -160,4 +160,4 @@ faq:
 
 まずは直近の通帳が何か月分記帳(印字)されないまま溜まっているかを確認するところから始めてください。記帳の範囲を自分でどこまで抱えるか迷う場合は、経理BPOの無料相談で通帳分の記帳を含めた外注範囲について相談することもできます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

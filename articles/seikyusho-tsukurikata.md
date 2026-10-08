@@ -142,7 +142,7 @@ Excelは関数を使えば税率ごとの小計と消費税額を自動計算で
 
 毎月の締めが遅れる原因の切り分けは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 自分で作るか、外部に任せるか判断の分かれ目
 
@@ -154,7 +154,7 @@ Excelは関数を使えば税率ごとの小計と消費税額を自動計算で
 
 外部委託を選ぶ場合も、テンプレートの型そのものは無駄になりません。**委託先に自社の取引条件を伝える際の共通の資料として、そのまま使えます。**紙の請求書をデータ管理に切り替えたい場合は、[請求書電子化の進め方](/blog/seikyusho-denshika-susumekata/)も参考になります。判断に迷う場合は、経理BPOの無料相談で自社の状況を整理することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

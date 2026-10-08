@@ -120,7 +120,7 @@ faq:
 
 **契約前の確認を丁寧に行うほど、導入後のトラブルは減る**というのが、支援の現場で感じている実感です。補助金の申請書類も、提出範囲を事前に明確にしておくほど、後から追加資料を求められる手戻りが少なくなる点は、経理代行の契約範囲確認と同じ構造だと感じています。
 
-<div class="cta-box"><p>自社の契約内容に抜け漏れがないか、無料で確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の契約内容に抜け漏れがないか、無料で確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## 失敗してしまった場合のリカバリー方法
 
@@ -156,7 +156,7 @@ faq:
 
 もう一つ向いていないのは、経営者自身が数字を細部まで把握していたいタイプの企業です。委託によって手間は減りますが、日々の仕訳を自分の目で確認する機会も減ります。**数字への関与度を下げたくない場合は、全面委託ではなく、一部の業務だけを任せる部分委託から検討する**ほうが無理がありません。委託範囲を段階的に広げながら、自社に合う関与度を探っていく進め方もあります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理代行の失敗は契約前の確認で防げる
 

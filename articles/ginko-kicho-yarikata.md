@@ -151,7 +151,7 @@ faq:
 
 外注する場合も、取引先との契約内容や口座振替の勘定科目の判断基準は、事業者側から一度共有しておく必要があります。記帳代行を依頼する際の任せられる範囲や選び方は、[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)で解説しています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -173,4 +173,4 @@ faq:
 
 摘要の確認や月次照合を習慣にしても記帳の負担が減らないこともあります。その場合は、経理BPOの無料相談で銀行口座分を含めた外注範囲について相談することもできます。まずは直近1か月分の明細で、摘要欄の意味が分からない取引がないか確認するところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

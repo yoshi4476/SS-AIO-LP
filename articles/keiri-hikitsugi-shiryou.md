@@ -177,7 +177,7 @@ faq:
 
 **資料は引き継いだ側が書き足して完成します。**前任者が書いた時点では、前任者が当たり前と思っていることが抜けているためです。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -190,7 +190,7 @@ faq:
 <details><summary>資料を作る時間や人手が足りない場合はどうすればいいですか？</summary><p class="faq-a">経理BPOに運用ごと委託し、標準化された引き継ぎの進め方を活用する方法があります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理引き継ぎ資料は「6項目をそろえ、早く着手する」ことが精度を決める
 

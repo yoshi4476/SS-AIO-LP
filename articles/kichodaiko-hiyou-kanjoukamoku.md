@@ -165,7 +165,7 @@ faq:
 
 <span class="txt-red">期の途中で科目を変えるのは避けてください。</span>前年比較ができなくなり、税務調査で説明を求められることもあります。変える場合は<strong>期首から</strong>にして、変更した理由を記録に残します。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -178,7 +178,7 @@ faq:
 <details><summary>勘定科目の判断に迷ったらどうすればよいですか？</summary><p class="faq-a">判断基準を社内ルール化したうえで、迷う仕訳は顧問税理士に確認してください。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 記帳代行費用は「継続性」で勘定科目を選ぶ
 

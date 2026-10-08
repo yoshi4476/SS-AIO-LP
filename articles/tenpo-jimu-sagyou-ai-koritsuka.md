@@ -179,7 +179,7 @@ AI活用を定着させるには、入力禁止情報のルール化と、効果
 
 複数店舗を展開している企業ほど、店舗ごとにAIの使い方がバラバラになりやすいため、本部が最低限のルールを示し、各店舗がそれに沿って運用できる状態を作ることが定着の近道です。自社だけで進め方に迷う場合は、AIコンサルティングとして導入設計や社内ルールづくりを支援することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -191,7 +191,7 @@ AI活用を定着させるには、入力禁止情報のルール化と、効果
 <details><summary>店舗でAI活用が定着しない原因は何ですか？</summary><p class="faq-a">任せる業務の範囲を決めず、担当者1人の判断に任せきりにしてしまうことが主な原因です。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 事務作業のAI活用は「1業務に絞ること」から始まる
 

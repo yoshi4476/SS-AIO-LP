@@ -116,7 +116,7 @@ faq:
 
 採用競争の面でも、管理部門は不利になりやすい領域です。成長業種が採用を強化するほど、経理・総務・人事の求人は応募が集まりにくくなります。**新たに採用するより、既存業務の一部を外部委託するほうが早く負担を減らせる**場面は少なくありません。欠員が出てから委託先を探し始めると、引き継ぎが間に合わず現場の混乱が長引くため、余裕があるうちに検討しておくことをおすすめします。
 
-<div class="cta-box"><p>自社にバックオフィスBPOが向いているか、無料で診断します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社にバックオフィスBPOが向いているか、無料で診断します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## バックオフィスBPO導入までの3ステップ
 
@@ -156,7 +156,7 @@ faq:
 
 どの業務から整理すべきかは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact/?s=backoffice)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: バックオフィスBPOは「範囲を決めて段階的に任せる」ことが成功の条件
 

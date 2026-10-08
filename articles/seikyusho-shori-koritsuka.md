@@ -145,7 +145,7 @@ faq:
 
 総務・経理のどこに負担が偏っているかは、[バックオフィスの現状分析（無料）](https://corp.7senses.co.jp/contact/?s=backoffice)からお問い合わせいただけます。ご相談だけでもかまいません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -158,7 +158,7 @@ faq:
 <details><summary>請求書処理を外部に委託することもできますか？</summary><p class="faq-a">記帳や支払処理を含めて経理BPOに委託し、社内の負担を減らす方法もあります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 請求書処理の効率化はフローの整理が先
 

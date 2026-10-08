@@ -171,7 +171,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 **すべてを一度に外注する必要はありません。**試算表作成の一部だけを委託し、判断や承認は社内に残すという分担も選べます。自社の体制で無理なく続けられるかどうかが、自社運用と外注を分ける最初の判断軸です。自社の状況に合う分担が分からない場合は、経理BPOの無料相談で一緒に整理することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -187,7 +187,7 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 
 経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 月次決算はまず締切とルールを決めることから
 

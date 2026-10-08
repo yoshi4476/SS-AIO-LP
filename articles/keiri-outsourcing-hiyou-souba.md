@@ -166,7 +166,7 @@ faq:
 
 1社だけの見積もりで即決すると、相場観がないまま契約することになり、後から他社と比べて割高だったと気づくケースもあります。**最低でも2〜3社から見積もりを取り、同じ業務内容で比較する**だけで、費用の妥当性はかなり判断しやすくなります。自社の取引量なら費用感がどの程度になるか分からない場合は、経理BPOの無料相談で概算を確認することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -179,7 +179,7 @@ faq:
 <details><summary>スポット対応（決算期のみ等）の費用相場はどのくらいですか？</summary><p class="faq-a">依頼内容ごとの見積もりが基本で、繁忙度に応じて金額が変わります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 費用相場は「範囲をそろえて比較する」ことで見えてくる
 

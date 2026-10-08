@@ -100,7 +100,7 @@ faq:
 
 スマートフォンで領収書を撮影し、その場で会計ソフトのアプリに取り込む方法も有効です。移動中や外出先での支払いも、その場で処理してしまえば、週1回の記帳日にまとめる負担がさらに軽くなります。判断に迷う取引が出てきたら、無理にその場で確定させず、仮の科目で記帳して週次のタイミングで見直す方法も実用的です。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 土台3: 経費と家事按分の判断基準を先に決めておく
 
@@ -168,7 +168,7 @@ faq:
 
 外注する範囲は、記帳のすべてを任せる必要はありません。日次の記帳だけを依頼し、月次確認や年次の申告準備は自分で続けるといった、部分的な組み合わせ方もあります。まずは負担が大きい部分だけを切り出して相談してみると、費用と手間のバランスを取りやすくなります。判断に迷う場合は、無理に一人で結論を出さず、一度相談してみるだけでも進め方が整理しやすくなります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

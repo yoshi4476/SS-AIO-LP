@@ -172,7 +172,7 @@ faq:
 
 これらのサインが1つでも当てはまる場合は、年末調整の確認作業だけを切り出して委託する選択肢があります。経理BPOの仕組み自体について確認したい場合は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)をあわせてご覧ください。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -186,7 +186,7 @@ faq:
 <details><summary>経理の人手が足りず年末調整の時期だけ業務が回りません。どうすればいいですか？</summary><p class="faq-a">年末調整の確認作業だけを経理BPOに委託すれば、増員なしで繁忙期を乗り切れます。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 年末調整の効率化は電子化と体制づくりの両輪で進める
 

@@ -190,7 +190,7 @@ faq:
 
 2人で行けない場合は、**参加者に「終わったら10分で報告する場」を先に設定**しておいてください。日程を決めずに解散すると、報告は行われません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -203,7 +203,7 @@ faq:
 <details><summary>セミナーの参加費用はどのくらいが目安ですか？</summary><p class="faq-a">無料から、商工会議所の有料講座は会員2万円台〜非会員5万円台が目安です。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理効率化セミナーは「参加後の実行」で効果が決まる
 

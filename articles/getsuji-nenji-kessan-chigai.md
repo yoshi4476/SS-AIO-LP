@@ -129,7 +129,7 @@ faq:
 
 上場を目指す会社は、月次と年次の間に四半期の締めも加わります。違いは[月次決算と四半期決算の違いは？](/blog/getsuji-shihanki-kessan-chigai/)で整理しています。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -142,7 +142,7 @@ faq:
 <details><summary>外部委託が向かないのはどんな会社ですか？</summary><p class="faq-a">取引が月数件と少なく、社長自身が毎月の数字を見られている会社は、自社と税理士だけで足ります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 年次決算の負担は月次決算で分ける
 

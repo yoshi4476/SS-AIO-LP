@@ -160,7 +160,7 @@ faq:
 
 自社だけで判断がつかない場合は、経理BPOの無料相談で契約前のチェックポイントを一緒に整理することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -172,7 +172,7 @@ faq:
 <details><summary>デメリットを避ける委託先の選び方はありますか？</summary><p class="faq-a">業務範囲の洗い出し・複数社での比較・管理体制の確認という3つのステップを踏むと安心です。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: デメリットは契約前の確認で防げる
 

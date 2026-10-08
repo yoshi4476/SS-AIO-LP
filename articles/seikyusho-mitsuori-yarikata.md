@@ -131,7 +131,7 @@ faq:
 
 発送業務そのものを含めて経理業務全体を外部に任せる場合は、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)で任せられる範囲を確認できます。請求書の発行にかかる手数料相場は、[請求書発行の手数料相場依頼先別の料金と内訳](/blog/seikyusho-hakko-tesuryo-souba/)で解説しています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 外注費として請求書を発行する側の書き方は、[外注費の請求書の書き方｜記載必須項目とインボイス対応](/blog/gaichuuhi-seikyuusho-kakikata/)で確認できます。銀行振込で請求書を支払う手順は、[請求書を銀行振込で支払う手順](/blog/seikyusho-ginko-furikomi-yarikata/)にまとめています。
 
@@ -154,4 +154,4 @@ faq:
 
 発送枚数が増えて折る作業自体が負担になってきた場合は、封入封緘機の導入や、経理BPOへの外注も選択肢になります。まずは直近1か月分の発送枚数を数えて、手作業にどれだけ時間がかかっているかを確認するところから始めてください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

@@ -164,7 +164,7 @@ OK例に共通するのは、*一時的か続くのか*が読み取れる点で�
 
 担当者1人に作業が集まっている場合は[経理の属人化を解消する5つの方法](https://corp.7senses.co.jp/blog/keiri-zokujinka-kaisho/)も参考になります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -177,7 +177,7 @@ OK例に共通するのは、*一時的か続くのか*が読み取れる点で�
 <details><summary>報告書の形式に決まりはありますか？</summary><p class="faq-a">法律で決まった様式はありません。会社法が作成を求めるのは年1回の計算書類で、月次は社内向けです。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 月次決算報告書は「理由と打ち手」まで書いて完成
 

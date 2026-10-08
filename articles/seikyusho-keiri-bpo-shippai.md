@@ -119,7 +119,7 @@ faq:
 
 インボイス制度に関わる細かい実務の論点は[インボイス制度と経理実務の変化点3つ](/blog/invoice-seido-keiri-jitsumu/)で詳しく解説しています。契約前にあわせて確認しておくと、委託先との認識合わせがスムーズになります。
 
-<div class="cta-box"><p>自社の請求書業務のどこまでを任せられるか、無料で診断します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の請求書業務のどこまでを任せられるか、無料で診断します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## 請求書業務を任せる範囲の決め方
 
@@ -165,7 +165,7 @@ faq:
 
 判断に迷う場合は、月間の発行・受領枚数を実際に数えてみるところから始めてください。**感覚で「多い」と思っていても、数えてみると数十枚程度にとどまっている**ケースは珍しくありません。数字で把握してから外注の要否を決めるほうが、後悔の少ない判断につながります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 請求書業務の経理BPOの失敗は工程分解で防げる
 

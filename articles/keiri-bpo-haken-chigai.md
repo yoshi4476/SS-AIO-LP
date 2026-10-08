@@ -167,7 +167,7 @@ faq:
 
 第四に、契約形態を決めます。ここまでの整理を踏まえたうえで、経理BPO会社を選ぶ際は、[経理代行の選び方5選｜比較軸と契約前チェックリスト](https://corp.7senses.co.jp/blog/keiri-daiko-erabikata/)の比較軸も参考にしてください。自社の状況に近いものがまだ見えない場合は、経理BPOの無料相談で相談することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -180,7 +180,7 @@ faq:
 <details><summary>経理BPOと人材派遣、どちらが情報漏洩のリスクが低いですか？</summary><p class="faq-a">一律に決まらず、委託先・派遣元双方のセキュリティ体制の確認が必要です。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理BPOと人材派遣は「指揮命令権」で選び分ける
 

@@ -123,7 +123,7 @@ faq:
 
 一方で、取引が月数件で、社長自身が毎月数字を見られている会社には外部委託は向きません。自社で回したほうが早く、費用もかかりません。委託を決める前の確認項目は[月次決算の経理BPO契約前に確認すべき5つのこと](/blog/getsuji-kessan-bpo-keiyakumae/)にまとめています。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -136,7 +136,7 @@ faq:
 <details><summary>外部委託が向かないのはどんな会社ですか？</summary><p class="faq-a">取引が月数件と少なく、社長自身が数字を毎月見られている会社は、自社で回したほうが早く済みます。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 中小企業は月次決算を固めてから四半期を考える
 

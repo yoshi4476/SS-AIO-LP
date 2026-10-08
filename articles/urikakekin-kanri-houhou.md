@@ -163,7 +163,7 @@ faq:
 
 私も、社内で売掛金管理の担当者が育たず、督促の連絡だけを外部に委託して回収率が改善したという事例を聞いたことがあります。自社の取引件数や体制でどこまで任せられるか分からない場合は、経理BPOの無料相談で相談することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -176,7 +176,7 @@ faq:
 <details><summary>下請法の支払期日ルールは売掛金管理に関係しますか？</summary><p class="faq-a">下請取引に該当する場合、支払期日60日以内と遅延利息のルールが適用されます。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 売掛金管理は「仕組み化」で属人化を防ぐ
 

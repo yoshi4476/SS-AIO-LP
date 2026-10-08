@@ -198,7 +198,7 @@ faq:
 
 内製を続けるか外に出すかで迷っている段階なら、[経理の内製と外注を比較｜6つの軸で見る違いと選び方](https://corp.7senses.co.jp/blog/keiri-naisei-gaichuu-hikaku/)を先に読むと整理しやすくなります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -210,7 +210,7 @@ faq:
 <details><summary>業務委託した相手に、申告書の作成まで頼めますか？</summary><p class="faq-a">税務書類の作成は税理士の独占業務です。税理士資格のない相手には記帳までを頼んでください。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理の業務委託は「型」を決めてから契約する
 

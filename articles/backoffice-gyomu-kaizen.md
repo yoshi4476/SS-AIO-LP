@@ -185,7 +185,7 @@ faq:
 
 測り方は、改善の前に1〜2週間ぶんを手で記録するだけで構いません。**改善後に「前はどうだったか」を思い出そうとしても正確には出ません。**先に取っておく必要があります。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -197,7 +197,7 @@ faq:
 <details><summary>業務改善の効果はどう確認すればいいですか？</summary><p class="faq-a">作業時間や件数を数値化し、施策の前後で比較して効果を振り返ります。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: バックオフィス業務改善は「1つの業務を数値で見直す」ことから始まる
 

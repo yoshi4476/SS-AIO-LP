@@ -177,7 +177,7 @@ Excel・PowerPoint・専用ツールにはそれぞれ向き不向きがあり�
 
 マニュアルとフロー図を両方整備したい場合は、[経理マニュアルの作り方とは？属人化を防ぐ5つの手順](https://corp.7senses.co.jp/blog/keiri-manual-tsukurikata/)が参考になります。委託先の選定や費用感まで含めて相談したい方は、経理BPOの無料相談で状況を伝えていただくことも可能です。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -190,7 +190,7 @@ Excel・PowerPoint・専用ツールにはそれぞれ向き不向きがあり�
 <details><summary>フローチャートの記号に決まりはありますか？</summary><p class="faq-a">JIS X 0121で開始・終了・処理・判断などの記号が標準化されています。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: テンプレートは「当てはめて壊す」が使いこなしのコツ
 

@@ -165,7 +165,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 
 外に任せられる経理業務の見極めは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)からお問い合わせいただけます。ご相談だけでもかまいません。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -177,7 +177,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 <details><summary>導入事例からわかる失敗しやすい進め方は何ですか？</summary><p class="faq-a">委託範囲を決めずに1社で即決し、引き継ぎ資料を準備しないまま移行する進め方です。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 事例に近いパターンを知ってから委託範囲を決める
 

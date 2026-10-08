@@ -89,7 +89,7 @@ faq:
 
 自社での早期化の考え方は、[月次決算の早期化とは？中小企業ができる5つの方法](/blog/getsuji-kessan-soukika-houhou/)で詳しく解説しています。経理BPOを検討する場合も、まず自社の月次決算がどの工程で遅れているかを把握しておくと、SLA交渉で的を絞った確認ができます。
 
-<div class="cta-box"><p>自社の月次決算がどの工程で遅れているか、無料で一緒に確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の月次決算がどの工程で遅れているか、無料で一緒に確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## 自社に残す作業とBPOに任せる作業の線引き
 
@@ -152,7 +152,7 @@ faq:
 
 導入後の具体的な進め方は、経理BPO導入の流れ｜6ステップと期間の目安【2026年】で解説しています。自社だけで確認項目の洗い出しが難しい場合は、契約前の段階から第三者を交えて整理することもできます。試験運用の期間中に月次決算が実際に早まったかどうかを数値で比較しておくと、本格移行の判断材料にもなります。
 
-<div class="cta-box"><p>自社の契約内容に抜け漏れがないか、無料で確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の契約内容に抜け漏れがないか、無料で確認します。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## よくある質問
 

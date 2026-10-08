@@ -115,7 +115,7 @@ faq:
 
 私たちが導入支援の現場で相談を受ける中でも、この保存義務を正確に把握していない個人事業主の方は少なくありません。**「白色申告だから帳簿は不要」という誤解が、あとから慌てる原因になりがちです。**年に1度、保存状況を棚卸しする習慣をつけておくと安心です。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 個人事業主特有の実務：家事按分と勘定科目の型
 
@@ -170,7 +170,7 @@ NGパターンは、按分比率をその都度変える、用途メモを残さ
 
 外注する範囲は、記帳のすべてを任せる必要はありません。日次の記帳だけを依頼し、月次確認や年次の申告準備は自分で続けるといった、部分的な外注の組み合わせ方もあります。まずは負担が大きい周期だけを切り出して相談してみると、費用と手間のバランスを取りやすくなります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

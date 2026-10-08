@@ -88,7 +88,7 @@ faq:
 
 決算対応をどこでするかを決めていないまま経理BPOだけを契約すると、確定申告の時期に依頼先を探し直すことになります。**記帳と決算をどこまで一体で頼むかを、最初に決めておく**ことが後悔しない選び方です。経理の内製と外注のどちらが自社に合うかは、[経理の内製と外注を比較｜6つの軸で見る違いと選び方](/blog/keiri-naisei-gaichuu-hikaku/)でも整理しています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 顧問料・決算料を含めた年間費用の目安
 
@@ -144,7 +144,7 @@ faq:
 
 比較の軸を具体的に知りたい場合は[経理代行の選び方5選｜比較軸と契約前チェックリスト](/blog/keiri-daiko-erabikata/)も参考にしてください。自社の仕訳件数ならどの程度の費用感になるか分からない場合は、経理BPOの無料相談で概算を確認することもできます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 経理のどの作業を先に軽くするかは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact/?s=keiri-shindan)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 

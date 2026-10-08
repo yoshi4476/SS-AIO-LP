@@ -137,7 +137,7 @@ faq:
 
 通帳の明細を仕訳に変える手順は[通帳の記帳のやり方と摘要欄の読み方](/blog/tsucho-kicho-yarikata/)で、ゆうちょの合算の内訳の取り方は[ゆうちょ口座の記帳のやり方](/blog/yucho-kicho-yarikata/)で解説しています。ネットバンキング明細の読み方は[銀行口座の記帳のやり方](/blog/ginko-kicho-yarikata/)にまとめました。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 通帳が記帳できないときのNGと、通帳に頼らない判断
 
@@ -168,4 +168,4 @@ faq:
 
 今日できる一歩は、記帳できなかった通帳の最終ページの日付と、ATMに出た文言を控えることです。同じ口座で何度も止まるなら、通帳に頼らない明細の取り方を含めて、経理BPOの無料相談でご相談ください。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

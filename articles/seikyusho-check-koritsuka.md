@@ -166,7 +166,7 @@ OCR・AIツールでの自動照合は、発注データや過去の請求金額
 
 第三に、標準化してからツールを検討します。確認項目が整理されないままツールを導入すると、非効率な確認作業をそのままシステム化するだけになります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある失敗・注意点
 
@@ -204,4 +204,4 @@ OCR・AIツールでの自動照合は、発注データや過去の請求金額
 
 ツールを入れるかどうかで迷っている段階でも、現状のチェック手順を見せていただければ、優先して直すべき箇所を一緒に確認できます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

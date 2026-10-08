@@ -89,7 +89,7 @@ faq:
 
 言葉の定義よりも大切なのは、社内で誰がどちらを担っているかです。次の章で、中小企業の実態を見ます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 中小企業で財務を担うのは誰か？多くは社長の兼任
 
@@ -151,7 +151,7 @@ faq:
 
 締めを早める具体的な手順は、[月次決算の早期化で中小企業ができる5つの方法](/blog/getsuji-kessan-soukika-houhou/)にまとめています。どこまで任せられるかは、[経理の外注で丸投げできる範囲と残す4業務](/blog/keiri-marunage-dekiru-hani/)で確かめられます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

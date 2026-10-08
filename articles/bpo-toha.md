@@ -116,7 +116,7 @@ BPOの導入は、委託範囲の洗い出しから運用開始まで、3つの�
 
 BPO会社は、対応範囲の明確さ・セキュリティ体制・報告頻度の3点で比較すると選びやすくなります。
 
-<div class="cta-box"><p>自社にどのBPOが向いているか、無料で相談できます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社にどのBPOが向いているか、無料で相談できます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 対応範囲は、契約書やメールで明文化しておくことが基本です。口頭確認だけで済ませると、「ここは対象外でした」という食い違いが後から起きやすくなります。
 
@@ -151,4 +151,4 @@ BPOを導入しても、委託範囲や報告体制を曖昧にしたまま任�
 
 経理・バックオフィスの人手不足や属人化は、後回しにしがちな経営課題の代表格です。まずは自社のどの業務に最も時間がかかっているかを洗い出すところから始めてください。
 
-<div class="cta-box"><p>委託範囲の整理から一緒に進められます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>委託範囲の整理から一緒に進められます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>

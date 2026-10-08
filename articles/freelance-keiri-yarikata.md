@@ -104,7 +104,7 @@ faq:
 
 <div class="caution-box"><span class="box-title">注意: 源泉徴収税額を売上に含めて記帳するとNG</span><br>入金額だけを売上として記帳すると、源泉徴収された分だけ売上が過少になります。<span class="txt-red">請求額全体を売上に計上し、源泉徴収税額は別科目で管理してください。</span></div>
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 収入が月によって変動するときの資金管理のやり方
 
@@ -158,7 +158,7 @@ faq:
 
 自動化する範囲は、最初から全部でなくても構いません。まずは請求書発行と入金消込だけを自動化し、慣れてきたら仕訳や確定申告書類の作成まで範囲を広げる進め方も実用的です。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 経理のやり方が崩れやすいタイミングと立て直し方
 

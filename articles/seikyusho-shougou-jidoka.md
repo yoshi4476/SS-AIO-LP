@@ -190,7 +190,7 @@ RPAやクラウド請求書システムは、月間の処理件数に応じた�
 
 当社が経理BPOを導入した10社の集計では、月次決算の日数が中央値で15日から7日に縮みました（2024年4月〜2026年8月・個社差が大きい）。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -215,4 +215,4 @@ RPAやクラウド請求書システムは、月間の処理件数に応じた�
 
 自社で照合の仕組みを整える余力がない、あるいは照合以外の経理業務もあわせて任せたい場合は、経理BPOの無料相談で、現状のフローから一緒に整理することもできます。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

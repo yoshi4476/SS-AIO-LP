@@ -128,7 +128,7 @@ Wordの型は、見た目を整えやすい反面、金額の計算を手で行�
 
 外部に任せる費用の目安は、[経理アウトソーシングの費用相場](/blog/keiri-outsourcing-hiyou-souba/)で整理しています。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 今日やること：テンプレートを1つに決める3ステップ
 
@@ -150,7 +150,7 @@ Wordの型は、見た目を整えやすい反面、金額の計算を手で行�
 
 Excelの型から番号と計算を自動にしたいなら、[請求書をエクセルで自動化する手段](/blog/seikyusho-excel-jidoka/)も読んでみてください。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

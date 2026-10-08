@@ -137,7 +137,7 @@ faq:
 
 人を雇うか外に出すかで迷うときは、[経理の内製と外注を6つの軸で比べた記事](/blog/keiri-naisei-gaichuu-hikaku/)も判断材料になります。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 頼み先を誤る3つの落とし穴
 
@@ -186,7 +186,7 @@ faq:
 
 記帳代行と経理BPOのどちらが合うかは、[記帳代行と経理BPOの違いを3つで比べた記事](/blog/keihi-seisan-kichodaiko-bpo-chigai/)で判断できます。費用の目安は、[税理士の記帳代行報酬相場と経理BPOの比較](/blog/zeirishi-houshu-kichodaiko-souba/)にまとめています。
 
-<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact/" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
+<div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## よくある質問
 

@@ -155,7 +155,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 
 備えがある会社ほど、退職の申し出を受けた直後の動きが速くなります。まずは前章までのチェックリストで、自社に何が残っているかを洗い出してみてください。対応に迷う場合は、経理BPOの無料相談で体制づくりから相談することもできます。
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## よくある質問
 
@@ -167,7 +167,7 @@ M&Iリサーチセンターが2025年8月に発刊した<a href="https://mic-r.c
 <details><summary>経理担当者の退職を繰り返さないためにはどうすればいいですか？</summary><p class="faq-a">マニュアル化と複数人体制の整備、経理BPOの活用で属人化を防ぐことが有効です。</p></details>
 </div>
 
-<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談</a></div>
+<div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## まとめ: 経理担当者の退職対応は直後の5つの初動で決まる
 

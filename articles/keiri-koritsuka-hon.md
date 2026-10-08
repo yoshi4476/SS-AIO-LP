@@ -118,7 +118,7 @@ faq:
 
 たとえば、月次決算の遅れに悩む経営者が「稲盛和夫の実学」を読んで数字の重要性を理解しても、担当者側の入力作業が遅い原因までは解決しません。逆に、担当者だけが実務書を読んで仕訳を早くできるようになっても、経営者が数字を経営判断に使えていなければ、効率化の効果は限定的です。両方の立場で読む本を分けて、月次のミーティングなどで内容を共有する進め方が現実的です。
 
-<div class="cta-box"><p>自社の経理体制に合った改善方法を無料で相談できます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>自社の経理体制に合った改善方法を無料で相談できます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## 本を読んでも効率化が進まない3つのケース
 
@@ -148,7 +148,7 @@ faq:
 
 読んだ知識を組織に定着させる仕組みとしては、[経理マニュアルの作り方とは？属人化を防ぐ5つの手順](/blog/keiri-manual-tsukurikata/)も合わせて役立ちます。
 
-<div class="cta-box"><p>本で学んだ内容を実務に落とし込むところまで、無料でご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact/">経理BPOの無料相談はこちら</a></div>
+<div class="cta-box"><p>本で学んだ内容を実務に落とし込むところまで、無料でご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談はこちら</a></div>
 
 ## よくある質問
 
