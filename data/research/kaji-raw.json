@@ -10,8 +10,15 @@
   "大阪 エアコン掃除 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.osoujikakumei.jp/aircon-cleaning/osaka/osaka-shi/",
+     "https://www.osoujihonpo.com/house-cleaning/aircon/",
+     "https://www.osoujihonpo.com/shop/kinki/osaka/",
+     "https://suikouseikatsu.duskin.jp/servicemaster/spot/sm000010/?dus=smcross",
+     "https://suikouseikatsu.duskin.jp/servicemaster/service-list/?dus=gene",
+     "https://www.duskin-shirokita.jp/house/aircon/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -42,8 +49,14 @@
   "東京 家事代行 安い": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://taskaji.jp/plus/cleanup/2650/",
+     "https://taskaji.jp/category/prefecture/1",
+     "https://pinay.jp/price/",
+     "https://casy.co.jp/service/cleaning",
+     "https://casy.co.jp/area/13"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -76,8 +89,13 @@
   "名古屋 ハウスクリーニング 口コミ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/house/aichi/1/",
+     "https://meetsmore.com/t/cleaning/aichi/nagoya/reviews",
+     "https://meetsmore.com/p/ZHcS43t5NIJ7hGvz",
+     "https://curama.jp/house/vacancy/aichi/1/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -116,8 +134,12 @@
   "福岡 浴室クリーニング 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://egao-honpo.com/bathroom-cleaning/",
+     "https://www.osoujikakumei.jp/house-cleaning/fukuoka/fukuoka-shi/",
+     "https://www.osoujikakumei.jp/fukuoka_fukutsu/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -161,8 +183,12 @@
   "札幌 キッチン 換気扇 掃除 依頼": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://meetsmore.com/services/fan-cleaning/hokkaido/sapporo",
+     "https://halleru-ya.com/menu/range-kitchen",
+     "https://www.duskin.jp/servicemaster/water/sm000070/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -198,8 +224,15 @@
   "横浜 家事代行 定期 おすすめ": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://casy.co.jp/area/1410",
+     "https://casy.co.jp/price",
+     "https://casy.co.jp/",
+     "https://www.happy-bears.com/kaji/",
+     "https://www.happy-bears.com/kaji/delux/",
+     "https://www.minimaid.co.jp/area/kanagawa-yokohama/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -244,8 +277,11 @@
   "京都 ハウスクリーニング 料金": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://meetsmore.com/t/cleaning/kyoto/kyoto",
+     "https://duskin-plan.jp/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -280,8 +316,12 @@
   "神戸 エアコンクリーニング 安い": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://yamagishi-construction.jp/",
+     "https://ability-cleaning.com/services",
+     "https://www.osoujikakumei.jp/fj_kobenishiku/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -311,8 +351,12 @@
   "仙台 引越し 前 掃除 業者": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://granpa-oc.com/price.php",
+     "https://www.kca-cs.com/menu_housemove.html",
+     "https://life-clean-s.com/service-guide/private-home/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -350,8 +394,13 @@
   "広島 水回り クリーニング 比較": {
    "group": "地域で探す",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://meetsmore.com/services/bathroom-and-kitchen-cleaning/hiroshima/hiroshima",
+     "https://mi-company.net/menu/set/",
+     "https://duskin-hiroshima.com/setmenu/",
+     "https://osouji-fukuyama.com/set-menu/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -388,8 +437,11 @@
   "エアコン掃除 料金 相場": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/aircon/",
+     "https://www.duskin.jp/servicemaster/sm_value_a.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -420,8 +472,11 @@
   "エアコン掃除 業者 選び方": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20250228_1.html",
+     "https://fc.duskin.jp/servicemaster/column/detail/00049/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -462,8 +517,11 @@
   "エアコン掃除 自分でやる 業者 どっち": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ac.daikin.co.jp/clubdaikin/useful/aircon_care",
+     "https://www.daikin.co.jp/air/life/laboratory/aircon-clean"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -502,8 +560,14 @@
   "お掃除機能付き エアコン 掃除 費用": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.osoujikakumei.jp/mitsumori/airconditioner/",
+     "https://www.osoujihonpo.com/campaign/super-sale/",
+     "https://www.duskin.jp/servicemaster/sm_value_a.html",
+     "https://www.osoujihonpo.com/guide/aircon/240215-01/",
+     "https://www.osoujihonpo.com/house-cleaning/aircon/detail/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -532,8 +596,12 @@
   "エアコン掃除 頻度 目安": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.daikincc.com/faq/customer/web/knowledge2700.html",
+     "https://www.daikin-streamer.com/article/024.html",
+     "https://www.daikin-streamer.com/article/026.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -565,8 +633,12 @@
   "エアコン 臭い カビ 掃除 頼む": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.daikin.co.jp/air/life/laboratory/aircon-clean",
+     "https://www.duskin.jp/servicemaster/spot/sm000010/?dus=store_tosu",
+     "https://www.ac.daikin.co.jp/clubdaikin/useful/aircon_care"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -594,8 +666,12 @@
   "エアコン掃除 複数台 割引": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.osoujihonpo.com/campaign/aircon-multiple-units/",
+     "https://www.osoujikakumei.jp/aircon-cleaning/",
+     "https://www.duskin.jp/special/air/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -626,8 +702,12 @@
   "エアコン掃除 作業時間 どれくらい": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.duskin.jp/special/air/?dus=special-air_topics",
+     "https://www.osoujihonpo.com/guide/aircon/230925-01/",
+     "https://home.osakagas.co.jp/housecleaning/column/air-conditioner-cleaning/air-conditioner-filter/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -657,8 +737,11 @@
   "エアコン掃除 失敗 トラブル 対策": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.ac.daikin.co.jp/clubdaikin/useful/aircon_care",
+     "https://www.nite.go.jp/data/000111239.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -686,8 +769,12 @@
   "エアコン掃除 業者 比較 ポイント": {
    "group": "エアコン掃除",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20250228_1.html",
+     "https://www.osoujihonpo.com/house-cleaning/aircon/",
+     "https://www.osoujihonpo.com/guide/aircon/240215-01/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -711,8 +798,13 @@
   "家事代行 料金 相場": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://taskaji.jp/?lang=ja",
+     "https://casy.co.jp/price",
+     "https://www.duskin.jp/merrymaids/first/",
+     "https://www.duskin.jp/merrymaids/kajidaiko/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -742,8 +834,13 @@
   "家事代行 選び方 ポイント": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.happy-bears.com/kaji/faq/",
+     "https://casy.co.jp/faq",
+     "https://my-best.com/5377",
+     "https://lifestage-service.go.jp/kaji-japan/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -775,8 +872,13 @@
   "家事代行 1回 いくら": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://taskaji.jp/terms/PriceList",
+     "https://support.taskaji.jp/hc/ja/articles/225709867",
+     "https://casy.co.jp/service/cleaning",
+     "https://casy.co.jp/topics/697"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -809,8 +911,11 @@
   "家事代行 頼める 範囲": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.happy-bears.com/kaji/faq/",
+     "https://support.taskaji.jp/hc/ja/articles/225822548"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -841,8 +946,13 @@
   "家事代行 初めて 準備 何をする": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://uchi.tokyo-gas.co.jp/topics/6428",
+     "https://www.advance1997.co.jp/ad-daikou/column/202306-01/",
+     "https://casy.co.jp/flow/cooking/starter",
+     "https://casy.co.jp/service/cooking/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -873,8 +983,12 @@
   "家事代行 共働き 週1 費用": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://taskaji.jp/terms/PriceList",
+     "https://casy.co.jp/price",
+     "https://casy.co.jp/service/cleaning"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -905,8 +1019,13 @@
   "家事代行 不在 でも 頼める": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://faq.kajitaku.com/ufaq-tag/家事代行（掃除代行サービス）/page/2/",
+     "https://www.kajitaku.com/index.php/house-work/cleaning/regular/",
+     "https://www.kurashinity.com/faq/",
+     "https://www.happy-bears.com/kaji/faq/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -930,8 +1049,13 @@
   "家事代行 スタッフ 相性 変更": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.minimaid.co.jp/faq/",
+     "https://assist-kd.com/faq/",
+     "https://support.taskaji.jp/hc/ja/articles/360056647892-タスカジにおける信頼関係構築ガイドライン",
+     "https://taskaji.jp/terms/ForClient"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -962,8 +1086,12 @@
   "家事代行 高い 安い 違い": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://taskaji.jp/",
+     "https://www.happy-bears.com/kaji/",
+     "https://casy.co.jp/service/cleaning/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -994,8 +1122,14 @@
   "家事代行 買い物 料理 追加 料金": {
    "group": "家事代行",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://casy.co.jp/service/cooking/",
+     "https://ssl.takamisupply.co.jp/kaji/",
+     "https://sharedine.me/shokuiku-media/user_faq/",
+     "https://support.kirari.co.jp/price/",
+     "https://casy.co.jp/faq"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1033,8 +1167,14 @@
   "ハウスクリーニング 料金 相場": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/kitchen/",
+     "https://curama.jp/bath/magazine/329/",
+     "https://curama.jp/toilet/magazine/1032/",
+     "https://www.osoujihonpo.com/guide/aircon/240215-01/",
+     "https://kurashi.kakaku.com/magazine/24/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1068,8 +1208,12 @@
   "ハウスクリーニング 見積もり 比較 方法": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen539.html",
+     "https://www.duskin.jp/servicemaster/sm_value_a.html",
+     "https://drink.duskin.jp/servicemaster/simulation/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1108,8 +1252,11 @@
   "ハウスクリーニング 定期契約 メリット": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.osoujikakumei.jp/house-cleaning/guide/archives/30",
+     "https://nac-duskin.com/duskin-merrymaidcleaning/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1141,8 +1288,12 @@
   "定期清掃 月額 費用 目安": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.office-seisou.jp/17603395351985",
+     "https://ambs.co.jp/price/",
+     "https://www.meikuri.co.jp/info_houjin/6191/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1182,8 +1333,12 @@
   "ハウスクリーニング 追加料金 発生 ケース": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kaji.tokyo-gas.co.jp/housecleaning/guide/price",
+     "https://lifelights.co.jp/wp-content/uploads/2025/07/price-list.pdf",
+     "https://www.osoujihonpo.com/house-cleaning/faq/estimate_application/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1222,8 +1377,12 @@
   "定期契約 解約 違約金 確認": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/pdf/n-20240131_1.pdf",
+     "https://www.caa.go.jp/policies/policy/consumer_transaction/amendment/2021/notice03",
+     "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2021_12.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1251,8 +1410,13 @@
   "ハウスクリーニング キャンセル料 いつから": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.osoujihonpo.com/house-cleaning/faq/",
+     "https://www.osoujikakumei.jp/support/faq/",
+     "https://www.duskin.jp/faq/detail.aspx?a=102&id=1093&isCrawler=1",
+     "https://cleanrevolution-koshigaya.jp/faq/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1290,8 +1454,13 @@
   "ハウスクリーニング 出張費 駐車場 料金": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.osoujikakumei.jp/house-cleaning/",
+     "https://kaji.tokyo-gas.co.jp/housecleaning/faq/detail_2926",
+     "https://www.duskin.jp/servicemaster/sm_value_a.html",
+     "https://kaji.tokyo-gas.co.jp/housecleaning/guide/price/parkingfee"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1319,8 +1488,11 @@
   "ハウスクリーニング 安い 業者 注意点": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20250228_1.html",
+     "https://www.kokusen.go.jp/mimamori/pdf/shinsen539.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1340,8 +1512,13 @@
   "定期プラン 回数 選び方": {
    "group": "料金と定期契約",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://clubpilates.co.jp/classes/",
+     "https://oppen.jp/pages/subscription",
+     "https://shopping.yahoo.co.jp/notice/subscription/",
+     "https://www.kokusen.go.jp/news/data/n-20260428_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1364,8 +1541,13 @@
   "ハウスクリーニング 業者 選び方": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen539.html",
+     "https://home.osakagas.co.jp/column/cleaning/house-cleaning/",
+     "https://www.faq.kokusen.go.jp/faq/show/1629?site_domain=default",
+     "https://www.kokusen.go.jp/pdf/n-20250228_1_lf.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1396,8 +1578,12 @@
   "ハウスクリーニング 口コミ 信頼できる": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/consumer_research/white_paper/assets/consumer_research_cms201_240614_31.pdf",
+     "https://life.oricon.co.jp/rank-house-cleaning/",
+     "https://www.kokusen.go.jp/mimamori/pdf/shinsen539.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1439,8 +1625,12 @@
   "清掃業者 悪徳 見分け方": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/news/data/n-20250228_1.html",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen539.html",
+     "https://www.kokusen.go.jp/news/data/n-20201015_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1477,8 +1667,12 @@
   "ハウスクリーニング 損害 保険 加入": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://direct.nisshinfire.co.jp/busisup/column/premises.html",
+     "https://www.housecleaning-kyokai.org/insurance/index.php",
+     "https://kaji.tokyo-gas.co.jp/housecleaning/faq/detail_230"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1516,8 +1710,13 @@
   "ハウスクリーニング 当日 追加 請求 トラブル": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen539.html",
+     "https://www.kokusen.go.jp/news/data/n-20250228_1.html",
+     "https://www.no-trouble.caa.go.jp/what/doortodoorsales/",
+     "https://www.kokusen.go.jp/pdf/n-20151203_1.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1547,8 +1746,13 @@
   "ハウスクリーニング 業者 比較サイト 使い方": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://curama.jp/about/",
+     "https://yourmystar.jp/explanation/",
+     "https://faq.curama.jp/docs/user/finding-service-providers/",
+     "https://faq.curama.jp/docs/user/cancellation-and-changes/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1578,8 +1782,12 @@
   "家事代行 口コミ 本当 参考": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/",
+     "https://pinay.jp/research/housekeeping-survey-2026/",
+     "https://www.nichiiweb.jp/kaji/trial/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1608,8 +1816,13 @@
   "ハウスクリーニング 評判 良い 業者 特徴": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.jhca.or.jp/howto/",
+     "https://www.jhca.or.jp/yuryo_kigyo/",
+     "https://www.kokusen.go.jp/mimamori/mj_mailmag/mj-shinsen539.html",
+     "https://www.kokusen.go.jp/pdf/n-20250228_1_lf.pdf"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1646,8 +1859,12 @@
   "清掃 作業後 クレーム 対応": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.faq.kokusen.go.jp/faq/show/1629?site_domain=default",
+     "https://www.faq.kokusen.go.jp/faq/show/1631?site_domain=default",
+     "https://www.kokusen.go.jp/news/data/n-20250228_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1680,8 +1897,14 @@
   "ハウスクリーニング 資格 実績 確認": {
    "group": "口コミと業者選び",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.housecleaning-kyokai.org/examination/about_examination.php",
+     "https://www.housecleaning-kyokai.org/examination/number.php",
+     "https://www.housecleaning-kyokai.org/outline/technician-list.php",
+     "https://www.jhca.or.jp/service/",
+     "https://www.kokusen.go.jp/news/data/n-20250228_1.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1725,5 +1948,6 @@
     "error": ""
    }
   }
- }
+ },
+ "refilled": "2026-10-08"
 }

@@ -532,8 +532,12 @@
   "七五三 衣装 レンタル 料金": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kyotostyle.net/collections/753rental",
+     "https://www.studio-mario.jp/campaign/753_rental/",
+     "https://www.studio-alice.co.jp/753/rental.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -567,8 +571,12 @@
   "七五三 撮影 時期 いつ": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/pillar04.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail97.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail86.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -602,8 +610,12 @@
   "成人式 前撮り 費用 相場": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/seijin/furiho/furiho_times/photo/furisode_preshoot_006/",
+     "https://www.ondine.jp/column/seijin-pre-shoot-cost/",
+     "https://hana-toiro.com/成人式前撮りにかかる費用｜プラン・オプション/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -635,8 +647,12 @@
   "成人式 前撮り 写真館 選び方": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://noblem.jp/plan/furisode/lp/column/photo/how-to-choose-studio/",
+     "https://www.hanatemari.jp/topics/topics-5632/",
+     "https://noblem.jp/plan/furisode/lp/faq/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -660,8 +676,13 @@
   "成人式 前撮り 何ヶ月前 予約": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://kimono-haregi.com/furisode/column/photo/",
+     "https://laquan.com/20th/topics/oyakudachi62.html",
+     "https://noblem.jp/plan/furisode/lp/column/maedori/reservation/",
+     "https://linkstyle.studio-link.jp/first/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -707,8 +728,12 @@
   "成人式 振袖 レンタル 撮影 セット 料金": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/shortcut/seijin/",
+     "https://studio-any.com/campaign/adult-ceremony/",
+     "https://www.studio-anne.co.jp/contents/archives/plan-cate/seijinshiki-rental/seijinshiki-rental_tokyo/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -739,8 +764,12 @@
   "七五三 兄弟 同時撮影 注意点": {
    "group": "七五三・成人式の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-palette.com/nishi_info/shichigosan_nishi/548086.html",
+     "https://www.studio-alice.co.jp/shortcut/753_s/",
+     "https://www.studio-alice.co.jp/shortcut/753_s/column/detail100.html"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -781,8 +810,14 @@
   "家族写真 スタジオ 料金 相場": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://earthpro.jp/studio-photography/familyphoto-plan/familyphoto-plan/",
+     "https://photo-ds.jp/family/",
+     "https://hanna-family.kyoto.jp/plan/familyphoto/",
+     "https://www.studio-alice.co.jp/",
+     "https://www.studio-mario.jp/fee/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -812,8 +847,14 @@
   "家族写真 撮影 選び方": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.photo-navi.jp/column/family-photo/",
+     "https://studio-market.com/family_portrait/",
+     "https://tomotin.com/photographer-how-to-choose/",
+     "https://fotowa.com/guide/prepare-for-shooting",
+     "https://www.post-create.com/stpost/photopedia/enjoy/familyphoto-clothes/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -835,8 +876,11 @@
   "家族写真 服装 色 おすすめ": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.lifestudio.jp/magazine/column/posts/199101",
+     "https://photostudio-be.jp/studiobe/1631/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -865,8 +909,11 @@
   "家族写真 スタジオ ロケーション 違い": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://c-studio.work/4999/",
+     "https://happy-photo-studio.jp/media/00000027"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -890,8 +937,12 @@
   "マタニティフォト 費用 相場": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://book.photo-hug.com/maternity-photo/10862",
+     "https://laquan.com/maternity/topics/oyakudachi34.html",
+     "https://fotowa.com/tokyo/13116/maternity"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -923,8 +974,12 @@
   "ニューボーンフォト 写真館 選び方": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.newbornsafety.jp/安心安全な撮影について",
+     "https://note.com/photo_studio_rin/n/nba025df7aa15",
+     "https://newborn-photo.co.jp/blog/newborn-photo-faq-photographer/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -961,8 +1016,12 @@
   "お宮参り 写真撮影 費用": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-mario.jp/event/omiya/",
+     "https://fotowa.com/aichi/23227/first-shrine-visit",
+     "https://www.studio-alice.co.jp/shortcut/location_omiyamairi/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -984,8 +1043,14 @@
   "還暦 長寿祝い 家族写真 撮影": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studioselfit.com/menu/silver/",
+     "https://photo-ichikawa.com/menu/kanreki/",
+     "https://la-viecouleur.com/scene/kanreki/",
+     "https://www.happilyphoto.jp/column/674894/",
+     "https://studio-age.com/kanreki/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1015,8 +1080,13 @@
   "ペット 家族写真 スタジオ 撮影 可能": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://petstudio-sio.com/kids",
+     "https://pet-fam.jp/selfphotostudio/",
+     "https://www.petphoto-studio.com/plan/one-shot/",
+     "https://www.e-shashin.net/about"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1040,8 +1110,15 @@
   "子ども 誕生日 記念写真 スタジオ 費用": {
    "group": "家族写真・記念写真の撮影",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-mario.jp/adlp/general/",
+     "https://www.studio-mario.jp/fee/",
+     "https://www.studio-alice.co.jp/shortcut/myhbd_s/",
+     "https://www.studio-alice.co.jp/charge/product/",
+     "https://www.lifestudio.jp/",
+     "https://lifestudio.jp/system/product"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1077,8 +1154,12 @@
   "写真館 撮影料 追加料金 内訳": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-mario.jp/fee/",
+     "https://www.kowa-studio.com/service/shichigosan/photo",
+     "https://www.studio-alice.co.jp/shortcut/school/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1095,8 +1176,13 @@
   "写真館 料金 高い 理由": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/",
+     "https://www.tachibana-group.co.jp/column/column/40628",
+     "https://studio-cherish.hp.peraichi.com/",
+     "https://www.studio-alice.co.jp/a.php?id=403"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1127,8 +1213,12 @@
   "フォトスタジオ 料金 比較 方法": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-mario.jp/fee/",
+     "https://www.studio-alice.co.jp/shortcut/school/",
+     "https://lifestudio.jp/system/product"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1154,8 +1244,12 @@
   "写真館 キャンセル料 いつから": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://studio366.jp/privacy",
+     "https://photostudio-billett.com/pages/terms/",
+     "https://www.studio-mario.jp/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1182,8 +1276,12 @@
   "写真館 衣装代 別料金 確認": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/",
+     "https://www.studio-mario.jp/fee/",
+     "https://www.studio-mario.jp/costume/option/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1205,8 +1303,13 @@
   "写真館 プラン 選び方 失敗しない": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-mario.jp/fee/",
+     "https://www.studio-alice.co.jp/faq/commodity.html",
+     "https://www.studio-mario.jp/fee/data_main/",
+     "https://www.lifestudio.jp/system/faq"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1234,8 +1337,14 @@
   "写真館 ヘアメイク 料金 相場": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.tokyoshasin.com/price.html",
+     "https://shashin.co.jp/jobhunting/",
+     "https://studio250.jp/hairmake/",
+     "https://jette.co.jp/photo-studio/",
+     "https://www.saeda.co.jp/saedastudio/profile/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1267,8 +1376,11 @@
   "写真館 撮影 当日 支払い 方法": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/faq/payment.html",
+     "https://www.studio-mario.jp/service/qa/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1291,8 +1403,13 @@
   "写真館 割引 キャンペーン 時期": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/753/hayadori_753.html",
+     "https://www.studio-mario.jp/campaign/753/",
+     "https://www.studio-mario.jp/campaign/753-old/",
+     "https://www.studio-alice.co.jp/info/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1328,8 +1445,13 @@
   "写真館 見積もり 確認 ポイント": {
    "group": "料金・プラン",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.tokyoshasin.com/price.html",
+     "https://www.studio-mario.jp/fee/data/",
+     "https://www.aandk.co.jp/plan.html",
+     "https://www.tokyo-maedorii.com/qanda/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1364,8 +1486,12 @@
   "写真館 データ 納品 費用": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-alice.co.jp/charge/data/",
+     "https://shimizu-syashinkan.jp/pages/102/",
+     "https://photoful.jp/price/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1401,8 +1527,12 @@
   "写真館 データ 全カット 納品 料金": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://hiramame-photo.com/menu/item/index.html",
+     "https://www.studio-anne.co.jp/contents/archives/campaign/dataonly/",
+     "https://www.studio-alice.co.jp/charge/data/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1445,8 +1575,12 @@
   "写真館 データ 納品 いつ届く": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.pinokio.co.jp/faq/list/contents_type%3D66",
+     "https://www.studio-alice.co.jp/moaly/qa.html",
+     "https://www.studio-alice.co.jp/charge/data/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1478,8 +1612,13 @@
   "写真館 アルバム 作成 費用 相場": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.studio-mario.jp/fee/album/",
+     "https://www.studio-mario.jp/fee/mycole/",
+     "https://www.hinodephoto.com/price/",
+     "https://www.studio-mario.jp/fee/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1518,8 +1657,13 @@
   "写真館 アルバム 選び方": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://enishi-kamakura.jp/blog_albumfeatures/",
+     "https://www.studio-alice.co.jp/charge/",
+     "https://www.studio-alice.co.jp/charge/commodity/detail.php?id=1494",
+     "https://www.studio-alice.co.jp/charge/data/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1549,8 +1693,13 @@
   "写真館 データ 著作権 利用範囲": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.jps.gr.jp/rights-2/",
+     "https://pf.bunka.go.jp/chosaku/chosakuken/c-template/type06_precution.php",
+     "https://www.kyoto-kokoro-group.jp/commercial_use/",
+     "https://www.delta.photo/company/copyright"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1580,8 +1729,12 @@
   "写真館 データ 年賀状 使える": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://oath-and-ours.jp/column/nengajo-maedori-toyama/",
+     "https://www.studio-alice.co.jp/faq/commodity.html",
+     "https://www.studio-mario.jp/fee/data/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1602,8 +1755,13 @@
   "写真館 台紙 フレーム 選び方": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.precieux-studio.com/column/photoboard-daishi/",
+     "https://shashin-album.jp/blog/detail/2265",
+     "https://www.ta-ke-no.co.jp/products/album/frame/",
+     "https://faq.shashin-album.jp/写真プリントの用紙種類-67ef45cae4126721f9e1aa66"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [],
@@ -1625,8 +1783,12 @@
   "写真館 写真 修整 追加料金": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://studiomalias.com/retaxtuchi/",
+     "https://www.e-shingai.com/kodawari/",
+     "https://www.watanabephoto.co.jp/c_sogo/menu/id/id-photo/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [
@@ -1655,8 +1817,13 @@
   "写真館 データ 保管期間 再注文": {
    "group": "データ納品・アルバム仕上げ",
    "ChatGPT": {
-    "urls": [],
-    "error": "ChatGPT は利用上限です（10-04 08:04 まで）"
+    "urls": [
+     "https://www.1122.co.jp/menu/kids/faq/index.html",
+     "https://www.p-takara.co.jp/qa/",
+     "https://photo-watanabe.jp/qa/",
+     "https://www.studio-alice.co.jp/charge/data/"
+    ],
+    "error": ""
    },
    "Gemini": {
     "urls": [

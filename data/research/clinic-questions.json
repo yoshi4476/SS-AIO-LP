@@ -14,8 +14,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -41,8 +41,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "portal": 3,
-    "maker": 1
+    "maker": 1,
+    "portal": 3
    },
    "top": [
     [
@@ -94,8 +94,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "other": 1,
     "portal": 3,
+    "other": 1,
     "media": 1
    },
    "top": [
@@ -122,10 +122,10 @@
    "answered": 4,
    "kinds": {
     "review": 2,
-    "media": 1,
     "other": 1,
-    "portal": 3,
     "clinic": 1,
+    "portal": 3,
+    "media": 1,
     "public": 1
    },
    "top": [
@@ -152,8 +152,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -205,9 +205,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
+    "portal": 3,
     "public": 1,
     "other": 1,
-    "portal": 3,
     "media": 1
    },
    "top": [
@@ -234,9 +234,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "other": 1,
+    "clinic": 1,
     "portal": 3,
-    "clinic": 1
+    "other": 1
    },
    "top": [
     [
@@ -262,9 +262,9 @@
    "answered": 4,
    "kinds": {
     "review": 2,
-    "other": 1,
+    "clinic": 1,
     "portal": 3,
-    "clinic": 1
+    "other": 1
    },
    "top": [
     [
@@ -290,8 +290,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -317,9 +317,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
+    "public": 1,
     "media": 2,
     "other": 1,
-    "public": 1,
     "portal": 3
    },
    "top": [
@@ -372,8 +372,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "other": 1,
     "portal": 3,
+    "other": 1,
     "media": 1
    },
    "top": [
@@ -400,9 +400,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "other": 1,
+    "clinic": 1,
     "portal": 3,
-    "clinic": 1
+    "other": 1
    },
    "top": [
     [
@@ -428,8 +428,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -455,8 +455,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -482,8 +482,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 3,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -509,8 +509,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 2,
-    "other": 1,
-    "portal": 3
+    "portal": 3,
+    "other": 1
    },
    "top": [
     [
@@ -536,9 +536,9 @@
    "answered": 4,
    "kinds": {
     "review": 1,
-    "other": 1,
+    "clinic": 1,
     "portal": 3,
-    "clinic": 1
+    "other": 1
    },
    "top": [
     [
@@ -564,8 +564,8 @@
    "answered": 4,
    "kinds": {
     "portal": 4,
-    "public": 2,
     "clinic": 3,
+    "public": 2,
     "media": 2,
     "maker": 1
    },
@@ -592,8 +592,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "public": 2,
     "clinic": 4,
+    "public": 2,
     "portal": 3,
     "maker": 2,
     "media": 1
@@ -648,9 +648,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "media": 3,
+    "portal": 2,
     "maker": 1,
-    "portal": 2
+    "media": 3
    },
    "top": [
     [
@@ -676,8 +676,8 @@
    "answered": 4,
    "kinds": {
     "portal": 3,
-    "other": 1,
     "clinic": 3,
+    "other": 1,
     "media": 2
    },
    "top": [
@@ -704,9 +704,9 @@
    "answered": 4,
    "kinds": {
     "public": 2,
-    "media": 3,
-    "portal": 3,
     "clinic": 3,
+    "portal": 3,
+    "media": 3,
     "maker": 2
    },
    "top": [
@@ -732,8 +732,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "portal": 2,
-    "clinic": 4
+    "clinic": 4,
+    "portal": 2
    },
    "top": [
     [
@@ -759,8 +759,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "public": 1,
-    "portal": 1
+    "portal": 1,
+    "public": 1
    },
    "top": [
     [
@@ -786,8 +786,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "public": 1,
     "portal": 1,
+    "public": 1,
     "other": 1
    },
    "top": [
@@ -813,8 +813,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "public": 4,
     "clinic": 4,
+    "public": 4,
     "media": 2
    },
    "top": [
@@ -841,8 +841,8 @@
    "answered": 4,
    "kinds": {
     "public": 1,
-    "media": 1,
     "clinic": 3,
+    "media": 1,
     "portal": 1
    },
    "top": [
@@ -869,9 +869,9 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "media": 2,
-    "other": 1,
     "maker": 1,
+    "other": 1,
+    "media": 2,
     "portal": 1
    },
    "top": [
@@ -897,8 +897,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "portal": 2,
-    "clinic": 4
+    "clinic": 4,
+    "portal": 2
    },
    "top": [
     [
@@ -924,8 +924,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "public": 1,
-    "maker": 1
+    "maker": 1,
+    "public": 1
    },
    "top": [
     [
@@ -951,8 +951,8 @@
    "answered": 4,
    "kinds": {
     "clinic": 4,
-    "other": 1,
     "portal": 3,
+    "other": 1,
     "maker": 1
    },
    "top": [
@@ -978,8 +978,8 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "portal": 3,
     "clinic": 4,
+    "portal": 3,
     "maker": 1,
     "media": 1
    },
@@ -1007,10 +1007,10 @@
    "answered": 4,
    "kinds": {
     "public": 2,
-    "maker": 2,
     "clinic": 3,
-    "media": 2,
-    "portal": 1
+    "maker": 2,
+    "portal": 1,
+    "media": 2
    },
    "top": [
     [
@@ -1035,10 +1035,10 @@
    "group": "費用",
    "answered": 4,
    "kinds": {
-    "portal": 3,
     "clinic": 4,
-    "media": 3,
+    "portal": 3,
     "public": 2,
+    "media": 3,
     "other": 1
    },
    "top": [
@@ -1066,8 +1066,8 @@
    "kinds": {
     "public": 4,
     "video": 1,
-    "other": 2,
-    "clinic": 3
+    "clinic": 3,
+    "other": 2
    },
    "top": [
     [
@@ -1120,11 +1120,11 @@
    "answered": 4,
    "kinds": {
     "public": 2,
-    "video": 1,
     "media": 2,
     "other": 1,
-    "portal": 1,
-    "clinic": 3
+    "video": 1,
+    "clinic": 3,
+    "portal": 1
    },
    "top": [
     [
@@ -1150,8 +1150,8 @@
    "answered": 4,
    "kinds": {
     "public": 4,
-    "media": 2,
     "other": 1,
+    "media": 2,
     "maker": 1,
     "clinic": 1
    },
@@ -1178,10 +1178,10 @@
    "group": "選び方",
    "answered": 3,
    "kinds": {
-    "media": 1,
     "public": 1,
-    "portal": 1,
-    "clinic": 2
+    "media": 1,
+    "clinic": 2,
+    "portal": 1
    },
    "top": [
     [
@@ -1207,8 +1207,8 @@
    "answered": 4,
    "kinds": {
     "public": 3,
-    "portal": 3,
-    "clinic": 3
+    "clinic": 3,
+    "portal": 3
    },
    "top": [
     [
@@ -1234,9 +1234,9 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "media": 2,
+    "clinic": 2,
     "maker": 2,
-    "clinic": 2
+    "media": 2
    },
    "top": [
     [
@@ -1262,9 +1262,9 @@
    "answered": 4,
    "kinds": {
     "public": 4,
-    "media": 2,
+    "clinic": 2,
     "portal": 1,
-    "clinic": 2
+    "media": 2
    },
    "top": [
     [
@@ -1290,11 +1290,11 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "video": 1,
-    "media": 2,
     "maker": 2,
-    "portal": 2,
-    "clinic": 2
+    "media": 2,
+    "video": 1,
+    "clinic": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -1322,9 +1322,9 @@
     "public": 1,
     "media": 2,
     "other": 1,
-    "maker": 2,
     "portal": 2,
-    "clinic": 1
+    "clinic": 1,
+    "maker": 2
    },
    "top": [
     [
@@ -1350,8 +1350,8 @@
    "answered": 4,
    "kinds": {
     "public": 4,
-    "portal": 2,
-    "clinic": 1
+    "clinic": 1,
+    "portal": 2
    },
    "top": [
     [
@@ -1377,10 +1377,10 @@
    "answered": 4,
    "kinds": {
     "public": 4,
-    "maker": 2,
     "clinic": 3,
-    "media": 2,
-    "portal": 2
+    "maker": 2,
+    "portal": 2,
+    "media": 2
    },
    "top": [
     [
@@ -1408,10 +1408,10 @@
     "public": 2,
     "media": 2,
     "other": 1,
-    "maker": 2,
     "clinic": 2,
-    "video": 1,
-    "portal": 1
+    "maker": 2,
+    "portal": 1,
+    "video": 1
    },
    "top": [
     [
@@ -1439,8 +1439,8 @@
     "public": 1,
     "clinic": 3,
     "video": 1,
-    "media": 1,
     "portal": 2,
+    "media": 1,
     "maker": 1
    },
    "top": [
@@ -1467,9 +1467,9 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "media": 1,
+    "clinic": 2,
     "portal": 2,
-    "clinic": 2
+    "media": 1
    },
    "top": [
     [
@@ -1495,10 +1495,10 @@
    "answered": 3,
    "kinds": {
     "public": 1,
-    "media": 2,
     "other": 1,
+    "clinic": 2,
     "portal": 2,
-    "clinic": 2
+    "media": 2
    },
    "top": [
     [
@@ -1523,10 +1523,10 @@
    "group": "選び方",
    "answered": 3,
    "kinds": {
-    "public": 2,
     "portal": 3,
-    "media": 2,
-    "clinic": 2
+    "public": 2,
+    "clinic": 2,
+    "media": 2
    },
    "top": [
     [
@@ -1551,10 +1551,10 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 1,
     "clinic": 3,
-    "media": 2,
-    "portal": 1
+    "public": 1,
+    "portal": 1,
+    "media": 2
    },
    "top": [
     [
@@ -1579,11 +1579,11 @@
    "group": "症状",
    "answered": 4,
    "kinds": {
-    "public": 2,
     "clinic": 4,
+    "public": 2,
     "media": 2,
-    "maker": 1,
     "portal": 2,
+    "maker": 1,
     "video": 1
    },
    "top": [
@@ -1609,9 +1609,9 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "media": 3,
-    "public": 2,
     "clinic": 3,
+    "public": 2,
+    "media": 3,
     "other": 1,
     "portal": 1
    },
@@ -1639,9 +1639,9 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "media": 2,
+    "clinic": 2,
     "portal": 1,
-    "clinic": 2
+    "media": 2
    },
    "top": [
     [
@@ -1667,8 +1667,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "media": 2,
     "maker": 1,
+    "media": 2,
     "portal": 1
    },
    "top": [
@@ -1695,11 +1695,11 @@
    "answered": 3,
    "kinds": {
     "public": 1,
+    "maker": 2,
     "media": 1,
     "other": 1,
-    "portal": 2,
-    "maker": 2,
-    "clinic": 2
+    "clinic": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -1724,8 +1724,8 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 2,
     "clinic": 3,
+    "public": 2,
     "portal": 2
    },
    "top": [
@@ -1751,12 +1751,12 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 2,
     "clinic": 3,
-    "wiki": 1,
+    "public": 2,
     "media": 2,
-    "maker": 2,
-    "portal": 2
+    "portal": 2,
+    "wiki": 1,
+    "maker": 2
    },
    "top": [
     [
@@ -1782,8 +1782,8 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "portal": 2,
-    "clinic": 2
+    "clinic": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -1810,8 +1810,8 @@
    "kinds": {
     "public": 1,
     "clinic": 3,
-    "media": 1,
-    "maker": 1
+    "maker": 1,
+    "media": 1
    },
    "top": [
     [
@@ -1837,10 +1837,10 @@
    "answered": 3,
    "kinds": {
     "public": 3,
-    "wiki": 1,
-    "maker": 2,
     "portal": 2,
+    "wiki": 1,
     "clinic": 2,
+    "maker": 2,
     "media": 1
    },
    "top": [
@@ -1867,8 +1867,8 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "portal": 2,
     "clinic": 2,
+    "portal": 2,
     "media": 1
    },
    "top": [
@@ -1896,8 +1896,8 @@
    "kinds": {
     "public": 3,
     "video": 1,
-    "maker": 3,
     "clinic": 3,
+    "maker": 3,
     "media": 1,
     "portal": 1,
     "other": 1
@@ -1925,11 +1925,11 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 1,
     "clinic": 3,
+    "public": 1,
+    "maker": 2,
     "media": 1,
-    "portal": 1,
-    "maker": 2
+    "portal": 1
    },
    "top": [
     [
@@ -1955,8 +1955,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "maker": 1,
     "portal": 1,
+    "maker": 1,
     "media": 2
    },
    "top": [
@@ -1982,11 +1982,11 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "media": 3,
-    "public": 1,
     "clinic": 3,
-    "portal": 2,
-    "maker": 2
+    "public": 1,
+    "media": 3,
+    "maker": 2,
+    "portal": 2
    },
    "top": [
     [
@@ -2011,10 +2011,10 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 3,
     "clinic": 3,
-    "maker": 1,
+    "public": 3,
     "portal": 1,
+    "maker": 1,
     "media": 1
    },
    "top": [
@@ -2041,10 +2041,10 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "media": 2,
-    "maker": 2,
     "public": 1,
-    "portal": 1
+    "media": 2,
+    "portal": 1,
+    "maker": 2
    },
    "top": [
     [
@@ -2070,10 +2070,10 @@
    "answered": 4,
    "kinds": {
     "public": 1,
-    "media": 2,
-    "maker": 3,
+    "clinic": 3,
     "portal": 3,
-    "clinic": 3
+    "maker": 3,
+    "media": 2
    },
    "top": [
     [
@@ -2100,9 +2100,9 @@
    "kinds": {
     "public": 3,
     "clinic": 3,
-    "portal": 2,
+    "maker": 2,
     "media": 2,
-    "maker": 2
+    "portal": 2
    },
    "top": [
     [
@@ -2129,9 +2129,9 @@
    "kinds": {
     "public": 3,
     "media": 2,
-    "maker": 2,
     "portal": 1,
-    "clinic": 2
+    "clinic": 2,
+    "maker": 2
    },
    "top": [
     [
@@ -2156,8 +2156,8 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 2,
     "clinic": 3,
+    "public": 2,
     "portal": 2,
     "media": 1
    },
@@ -2185,9 +2185,9 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "wiki": 1,
-    "portal": 2,
     "clinic": 2,
+    "portal": 2,
+    "wiki": 1,
     "video": 1,
     "media": 1
    },
@@ -2214,10 +2214,10 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 1,
     "clinic": 3,
-    "other": 1,
+    "public": 1,
     "portal": 2,
+    "other": 1,
     "media": 1
    },
    "top": [
@@ -2243,10 +2243,10 @@
    "group": "症状",
    "answered": 3,
    "kinds": {
-    "public": 1,
     "clinic": 3,
-    "media": 1,
+    "public": 1,
     "maker": 2,
+    "media": 1,
     "wiki": 1
    },
    "top": [
@@ -2299,8 +2299,8 @@
    "answered": 3,
    "kinds": {
     "clinic": 2,
-    "media": 1,
-    "portal": 1
+    "portal": 1,
+    "media": 1
    },
    "top": [
     [
@@ -2379,8 +2379,8 @@
    "answered": 3,
    "kinds": {
     "public": 3,
-    "portal": 2,
     "maker": 2,
+    "portal": 2,
     "media": 1,
     "clinic": 1
    },
@@ -2407,12 +2407,12 @@
    "group": "受診のしかた",
    "answered": 4,
    "kinds": {
-    "public": 2,
     "maker": 4,
-    "video": 2,
+    "public": 2,
     "media": 3,
     "other": 2,
     "portal": 2,
+    "video": 2,
     "clinic": 3
    },
    "top": [
@@ -2440,9 +2440,9 @@
    "kinds": {
     "public": 3,
     "media": 2,
-    "maker": 1,
     "portal": 2,
-    "clinic": 2
+    "clinic": 2,
+    "maker": 1
    },
    "top": [
     [
@@ -2468,9 +2468,9 @@
    "answered": 3,
    "kinds": {
     "public": 2,
-    "media": 1,
-    "maker": 2,
     "portal": 1,
+    "maker": 2,
+    "media": 1,
     "clinic": 1
    },
    "top": [
@@ -2496,8 +2496,8 @@
    "group": "受診のしかた",
    "answered": 3,
    "kinds": {
-    "public": 2,
     "clinic": 3,
+    "public": 2,
     "portal": 2,
     "maker": 1,
     "media": 1
@@ -2526,9 +2526,9 @@
    "answered": 3,
    "kinds": {
     "public": 3,
-    "other": 1,
+    "clinic": 2,
     "portal": 2,
-    "clinic": 2
+    "other": 1
    },
    "top": [
     [
@@ -2555,8 +2555,8 @@
    "kinds": {
     "public": 4,
     "video": 2,
-    "maker": 3,
     "clinic": 2,
+    "maker": 3,
     "media": 1,
     "portal": 1
    },
@@ -2584,10 +2584,10 @@
    "answered": 3,
    "kinds": {
     "clinic": 3,
-    "public": 1,
     "portal": 2,
-    "media": 1,
-    "maker": 1
+    "public": 1,
+    "maker": 1,
+    "media": 1
    },
    "top": [
     [
@@ -2612,10 +2612,10 @@
    "group": "受診のしかた",
    "answered": 3,
    "kinds": {
-    "public": 2,
     "clinic": 3,
-    "media": 2,
+    "public": 2,
     "maker": 1,
+    "media": 2,
     "portal": 1
    },
    "top": [
@@ -2671,8 +2671,8 @@
     "clinic": 1,
     "public": 3,
     "other": 1,
-    "maker": 1,
-    "portal": 1
+    "portal": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -2697,11 +2697,11 @@
    "group": "受診のしかた",
    "answered": 3,
    "kinds": {
-    "public": 2,
     "clinic": 2,
+    "public": 2,
     "media": 2,
-    "maker": 2,
-    "portal": 2
+    "portal": 2,
+    "maker": 2
    },
    "top": [
     [
@@ -2726,11 +2726,11 @@
    "group": "受診のしかた",
    "answered": 4,
    "kinds": {
-    "public": 2,
     "clinic": 4,
-    "media": 1,
+    "public": 2,
     "other": 1,
     "maker": 2,
+    "media": 1,
     "portal": 1
    },
    "top": [
@@ -2758,8 +2758,8 @@
    "kinds": {
     "public": 2,
     "clinic": 2,
-    "maker": 1,
-    "portal": 1
+    "portal": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -2787,8 +2787,8 @@
     "public": 3,
     "clinic": 2,
     "media": 2,
-    "maker": 1,
-    "portal": 1
+    "portal": 1,
+    "maker": 1
    },
    "top": [
     [
@@ -2813,11 +2813,11 @@
    "group": "受診のしかた",
    "answered": 4,
    "kinds": {
-    "public": 3,
     "clinic": 4,
+    "public": 3,
     "portal": 2,
-    "media": 1,
-    "maker": 2
+    "maker": 2,
+    "media": 1
    },
    "top": [
     [
