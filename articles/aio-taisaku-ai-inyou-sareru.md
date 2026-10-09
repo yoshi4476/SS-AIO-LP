@@ -128,6 +128,8 @@ AI Overview・AIモードは通常のGooglebotのクロール結果を使うた�
 
 **5つの実践ポイントは、順位確認からクロール許可、構造化、数値ファクトまでを一続きの手順として実行することです。**
 
+Geminiアプリに絞った場合は、robots.txtのGoogle-Extendedも確かめます。手順は[Geminiの引用に載る方法](/aio/gemini-inyou-noru-houhou/)で解説しています。
+
 ここまでの内容を、着手する順番に沿って整理すると次の5項目になります。鍵は、実行の順番。優先順位を変えずに上から進めてください。
 
 <figure><img src="/images/aio-taisaku-ai-inyou-sareru/point5.png" alt="AIに引用されるための5つの実践ポイント: 検索10位以内という土台を先に確認する、GooglebotとAIクローラーの許可を個別に確認する、冒頭200字を断言型の直接回答にする、各H2直下に40〜60字の1文結論を置く、出典付きの数値ファクトを3つ以上入れる" width="1200" height="675" loading="lazy"><figcaption>AIに引用されるための5つの実践ポイント（当メディア作成）</figcaption></figure>

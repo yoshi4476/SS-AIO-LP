@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-10-09T00:00:00+09:00</updated>
+  <updated>2026-10-10T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>AIOでGeminiの引用に載る方法は？18語の実測と5つの手順</title>
+    <link href="https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/"/>
+    <id>https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/</id>
+    <updated>2026-10-10T00:00:00+09:00</updated>
+    <summary>Geminiの引用に載るには、Google検索の索引に入り、質問1つに1ページで答えることが土台です。当サイトがGeminiに18語を聞いた実測では、出典に入った3語はどれも、聞かれた語1つに絞ったページが選ばれました。Google-Extendedの確認から計測まで5つの手順で解説します。</summary>
+  </entry>
   <entry>
     <title>不動産会社のAIO対策のやり方は？業態別の質問表と6つの作業手順</title>
     <link href="https://ai.7senses.co.jp/aio/fudousan-aio-taisaku-yarikata/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/</id>
     <updated>2026-09-28T00:00:00+09:00</updated>
     <summary>AIO対策の無料ツールは、Search Console・GA4・リッチリザルトテストなど6つで足ります。AI引用状況と構造化データを無料で診断する手順と、足りなくなったときの安い有料ツールの価格帯まで解説します。</summary>
-  </entry>
-  <entry>
-    <title>病院・クリニックの口コミ返信｜違反になるNG表現と例文8つ</title>
-    <link href="https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/"/>
-    <id>https://ai.7senses.co.jp/meo/byoin-kuchikomi-henshin-reibun/</id>
-    <updated>2026-09-27T00:00:00+09:00</updated>
-    <summary>医療機関（病院・クリニック・歯科）の口コミ返信で使える例文8つと、医療広告ガイドライン違反になるNG表現6種類の言い換えをまとめました。守秘義務に触れない書き方と院内の承認体制も、2026年9月時点の情報で解説します。</summary>
   </entry>
 </feed>

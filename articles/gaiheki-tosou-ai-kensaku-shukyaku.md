@@ -180,6 +180,8 @@ GoogleのAIの答えは、通常の検索と同じ土台で作られます。Goo
 
 **AI検索集客は、施主の質問をAIに聞く・記録する・直す・数えるの4つを毎月1回まわし、3か月単位で成果を見ます。**
 
+近い論点を[AIOでGeminiの引用に載る方法は？](/aio/gemini-inyou-noru-houhou/)で扱っています。
+
 <figure><img src="/images/gaiheki-tosou-ai-kensaku-shukyaku/maitsuki-cycle.png" alt="塗装店が毎月回すAI検索集客の作業" width="1200" height="700" loading="lazy"><figcaption>塗装店が毎月回すAI検索集客の作業（当メディア作成）</figcaption></figure>
 
 最初に、現地調査で実際に聞かれた質問を10個書き出します。ChatGPT・Gemini・Perplexity・GoogleのAIモードに同じ文で聞き、社名が出たか・出典はどのページかを表に残します。他社が出た場合は、その会社のどのページが出典かも残してください。

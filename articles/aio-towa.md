@@ -82,7 +82,9 @@ AI Overviewは、Google検索の結果の上部にAIが作る要約です。要�
 | AIO | Google AI Overview・AIモード | 生成AIレポートの表示回数 |
 | LLMO | ChatGPT・Perplexity・Gemini・Claude | GA4のAI参照元セッション |
 
-書き方の違いは[AIOとSEOの違いを5つの視点で比較した記事](/aio/aio-to-seo-no-chigai/)に、店舗での使い分けは[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)にまとめています。ChatGPT向けの対策は[LLMO対策の方法](/aio/llmo-taisaku-hoho/)をご覧ください。
+書き方の違いは[AIOとSEOの違いを5つの視点で比較した記事](/aio/aio-to-seo-no-chigai/)に、店舗での使い分けは[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)にまとめています。
+
+ChatGPT向けの対策は[LLMO対策の方法](/aio/llmo-taisaku-hoho/)を、Geminiアプリ向けは[Geminiの引用に載る方法](/aio/gemini-inyou-noru-houhou/)をご覧ください。
 
 ## Googleが公式に否定したAIOの通説5つ
 
