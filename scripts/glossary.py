@@ -40,7 +40,7 @@ def collect(site_id, only=None):
     """
     import sites as S
     out, pubs = {}, []
-    for p in (ROOT / "articles").glob("*.md"):
+    for p in sorted((ROOT / "articles").glob("*.md")):   # 名前順（ランナーごとにファイルの並びが違い、同じ日付の並びが毎回変わった）
         if only is not None and p.stem not in only:
             continue
         t = p.read_text(encoding="utf-8-sig")

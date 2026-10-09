@@ -39,7 +39,7 @@ def collect(site_id, only=None):
     """only: 実際に公開する記事の slug の集合（build.py が渡す）。止めた記事の表を出典にしない"""
     import sites as S
     cats = {}
-    for p in (ROOT / "articles").glob("*.md"):
+    for p in sorted((ROOT / "articles").glob("*.md")):   # 名前順（ランナーごとにファイルの並びが違い、同じ日付の並びが毎回変わった）
         if only is not None and p.stem not in only:
             continue
         t = p.read_text(encoding="utf-8-sig")

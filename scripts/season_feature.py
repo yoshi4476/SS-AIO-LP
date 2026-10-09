@@ -95,7 +95,7 @@ def related(e, n=3):
         site = sites.load(sites.primary())
         cats = sites.valid_categories(site)
         _ARTS = []
-        for p in (ROOT / "articles").glob("*.md"):
+        for p in sorted((ROOT / "articles").glob("*.md")):   # 名前順（ランナーごとにファイルの並びが違い、同じ日付の並びが毎回変わった）
             m = re.match(r"^---\s*\n(.*?)\n---", p.read_text(encoding="utf-8-sig"), re.S)
             if not m:
                 continue

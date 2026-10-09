@@ -114,6 +114,16 @@ def test_deploy_skips_only_identical_output():
           0 <= own.find("deploy_marker.py --write --salt wrangler@4.121.0") < own.find("pages deploy site"), True)
 
 
+def test_pages_do_not_depend_on_file_order():
+    print("\n■ 作り直し: 同じ原稿からは毎回同じページになる（並びをファイルの順に任せない）")
+    # 2026-10-10 同じコミットを2回作り直すと /compare/ の2ページだけ違った（同じ日付の表の並びが
+    # ランナーごとのファイルの並びで変わる）。同じ中身なら送り出しを省く仕組みが効かず、毎回送り直していた
+    for f in ("compare_pages.py", "glossary.py", "season_feature.py"):
+        src = (ROOT / "scripts" / f).read_text(encoding="utf-8")
+        check(f"{f} は記事を名前順に読む", ('sorted((ROOT / "articles").glob("*.md"))' in src,
+                                          'in (ROOT / "articles").glob("*.md"):' in src), (True, False))
+
+
 def test_select_skips_only_big_unused_dirs():
     print("\n■ 記事の枠の判定: 使わない大きな置き場だけ取らない（判定が読むものは取る）")
     sel = _y("pipeline-multi.yml")["jobs"]["select"]
