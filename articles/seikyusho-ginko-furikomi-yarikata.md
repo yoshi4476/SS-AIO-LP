@@ -49,6 +49,8 @@ faq:
 
 請求書を銀行振込で支払う流れは、内容確認、振込方法の選択、振込の実行、証憑の保存という4ステップで進みます。
 
+近い論点を[営業経理と経理の違い](/blog/eigyo-keiri-chigai/)で扱っています。
+
 実際の進め方については、[請求書の支払いのやり方｜4つの方法と60日ルール](/blog/seikyusho-shiharai-yarikata/)にまとめています。
 
 <figure><img src="/images/seikyusho-ginko-furikomi-yarikata/step.png" alt="請求書を銀行振込で支払う4ステップ: 請求書を確認する、振込方法を選ぶ、振込を実行する、証憑を保存する" loading="lazy"><figcaption>請求書を銀行振込で支払う4ステップ</figcaption></figure>

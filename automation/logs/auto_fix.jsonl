@@ -1841,3 +1841,6 @@
 {"at": "2026-10-09 09:22", "by": "link_boost", "slug": "shoene-hojokin-chusho-kigyo", "kind": "link_rescue", "ok": true, "note": "it-hojokin-clinic から内部リンクを1本"}
 {"at": "2026-10-09 09:22", "by": "link_boost", "slug": "shoene-hojokin-chusho-kigyo", "kind": "link_rescue", "ok": true, "note": "chusho-shoryokuka-toshi-hojokin から内部リンクを1本"}
 {"at": "2026-10-08 15:42", "by": "cta_fill", "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin", "kind": "cta", "ok": true, "note": "CTAを2箇所目まで足した"}
+{"at": "2026-10-09 10:18", "by": "link_boost", "slug": "eigyo-keiri-chigai", "kind": "link_rescue", "ok": true, "note": "kaikei-keiri-chigai から内部リンクを1本"}
+{"at": "2026-10-09 10:18", "by": "link_boost", "slug": "eigyo-keiri-chigai", "kind": "link_rescue", "ok": true, "note": "kojin-keiei-keiri-yarikata から内部リンクを1本"}
+{"at": "2026-10-09 10:18", "by": "link_boost", "slug": "eigyo-keiri-chigai", "kind": "link_rescue", "ok": true, "note": "seikyusho-ginko-furikomi-yarikata から内部リンクを1本"}
