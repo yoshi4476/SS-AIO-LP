@@ -144,15 +144,48 @@ docs/kw-plan-*.md
 !docs/kw-plan-ai-lab.md
 !docs/kw-plan-corporate.md
 !docs/kw-plan-subsidy.md
+# 弱い語の付け直し（kw_reorder）と地域の語（region_kw）。全社を回すので、お客様の語が public に載る
+docs/kw-priority-*.md
+!docs/kw-priority-ai-lab.md
+!docs/kw-priority-corporate.md
+!docs/kw-priority-subsidy.md
+docs/kw-region-*.md
+!docs/kw-region-ai-lab.md
+!docs/kw-region-corporate.md
+!docs/kw-region-subsidy.md
 # 上位ページの見出し・共起語・実際の質問（kw_plan がラッコで取る。kw_serp が執筆と書き直しへ渡す）。
 # ラッコの利用規約は社内利用の範囲なので、自社の社の分も public に置かない（2026-10-09 運用者の決定）。
 # client_private の置き場（CI のキャッシュ。自社は data/clients/_own/private/）で持ち越す
 data/kw_serp/
-# 実数から作る翌月の目標（monthly_report。月次の「目標値の保存をコミット」が reports/targets-*.json を足す）。
-# お客様の分は public に置かない（自社は ai-lab が targets.json・残り2社が targets-<id>.json）
-reports/targets-*.json
-!reports/targets-corporate.json
-!reports/targets-subsidy.json
+# ── 守秘義務（2026-10-10 運用者の指示「お客様の情報が公開されないように。守秘義務も問題ないように」）──
+# このリポジトリは GitHub Actions を無料で使うため public のまま。お客様から預かったもの・お客様について調べたもの、
+# 当社の料金と営業の台本、月次レポートは、非公開のリポジトリ yoshi4476/ss-aio-private に置く（scripts/private_store.py）。
+# 手元と CI は管制塔の直下 private/ に取得する
+private/
+# お客様の社の材料（会社情報・記事の材料・一次情報・サイト設定の戦略の部分・キーワード計画）。公開側では追跡しない
+data/clients/*/company.json
+data/clients/*/brief.json
+data/clients/*/facts.json
+data/clients/*/site_private.json
+docs/kw-*.md
+!docs/kw-ai-lab.md
+!docs/kw-corporate.md
+!docs/kw-subsidy.md
+!docs/kw-plan-ai-lab.md
+!docs/kw-plan-corporate.md
+!docs/kw-plan-subsidy.md
+!docs/kw-strong-ai-lab.md
+!docs/kw-strong-corporate.md
+!docs/kw-strong-subsidy.md
+!docs/kw-priority-ai-lab.md
+!docs/kw-priority-corporate.md
+!docs/kw-priority-subsidy.md
+# 月次・週次・グループのレポートと目標値（自社3サイトの実数を含む）。非公開のリポジトリの reports/ に置く
+reports/
+# 3倍計画の道筋と実績（自社の問い合わせ数を含む。growth_plan.py が非公開のリポジトリの reports/ に書く）
+docs/growth-plan.md
+# 料金と営業の資料（提案書）。非公開のリポジトリの sales/ に置く
+docs/sales/
 # お客様の社の非公開の置き場（client_private.py）。上の外したファイルの写しと、全社で1ファイルの記録
 # （rank_up.json・ai_citations・共起語・URL検査の記録と再送の間隔）のお客様の分。CI のキャッシュ（.github/actions/client-private）で持ち越す
 data/clients/*/private/

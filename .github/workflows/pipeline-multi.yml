@@ -120,6 +120,12 @@ jobs:
             !/reports/
             !/写真素材/
 
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+
       # 起動役（Worker）の回と予備の定時の回のうち、同じ枠・同じ予定の日を先に受け持った回だけが書く
       - name: 同じ予定を先に受け持った回があるか
         id: sched
@@ -245,16 +251,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+
       # 以降の工程は steps.site.outputs.* で読む（select の判定をそのまま受け取る）
       - name: 対象サイト（select の判定を受け取る）
         id: site
         run: |
+          # お客様の社は、非公開のデータ（会社情報・記事の材料・サイト設定の戦略の部分）が読めなければ書かない。
+          # 材料なしで書かせると、書かれていないことを憶測で補った記事が公開される（2026-10-10 運用者の指示）
+          chk=$(python3 scripts/private_store.py --check-site "${{ needs.select.outputs.id }}" 2>&1 | tail -1)
+          mode="${{ needs.select.outputs.mode || 'write' }}"
+          if [ "$chk" = "PRIVATE_OK=no" ]; then
+            mode=blocked
+            { echo "skip=yes"; echo "blocked=yes"; } >> "$GITHUB_OUTPUT"
+            mkdir -p automation/logs
+            echo "要対応: ${{ needs.select.outputs.id }} の記事を書きませんでした。非公開のデータ（yoshi4476/ss-aio-private）が読めません。Secret PRIVATE_DATA_TOKEN（無ければ SITE_PUSH_TOKEN）にこのリポジトリの Contents の読み書きを足してください" >> automation/logs/findings.txt
+            echo "::error::${{ needs.select.outputs.id }} の記事を書きません。非公開のデータが読めません（鍵の権限を確認）"
+          fi
           {
             echo "id=${{ needs.select.outputs.id }}"
             echo "own=${{ needs.select.outputs.own }}"
             echo "first=${{ needs.select.outputs.first }}"
             # rewrite: 運用者の設定（daily_articles）で浮いた枠。新しい記事は書かず、主力の記事を1本書き直す
-            echo "mode=${{ needs.select.outputs.mode || 'write' }}"
+            echo "mode=$mode"
+            # お客様の社は、執筆の案内・次に書く語をログに出さない（CI のログは public。claude はファイルを読む）
+            echo "quiet=$(python3 scripts/private_store.py --is-client "${{ needs.select.outputs.id }}")"
           } >> "$GITHUB_OUTPUT"
           # 配信先のビルドを探す起点。push の後の時刻にすると、先に始まったビルドを見失う
           echo "RUN_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
@@ -401,15 +426,20 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
-          # 記事を書く claude が同じ出力を読む（同じものを2回作らない。1回約50秒）
-          set -o pipefail
+          # 記事を書く claude が同じ出力を読む（同じものを2回作らない。1回約50秒）。
+          # お客様の社の案内（記事の材料・狙う語・一次情報・売り物と料金）はログに出さない（CI のログは public）
           mkdir -p automation/logs
           # 次の工程の横断のカニバリ検査は管制塔とファイルを読むだけで、このブリーフと関わらない。どちらも管制塔の
           # 応答待ちが長い（2026-10-03〜09 の39回でブリーフ平均35秒・横断平均39秒を順に待っていた）ので同時に始め、
           # 結果は次の工程で今までと同じ順に brief.txt へ書き足す
           rm -f /tmp/cannibal.txt /tmp/cannibal.rc
           ( python scripts/cannibal_check.py --cross > /tmp/cannibal.txt 2>&1; echo $? > /tmp/cannibal.rc ) < /dev/null > /dev/null 2>&1 &
-          python scripts/site_brief.py "${{ steps.site.outputs.id }}" | tee automation/logs/brief.txt
+          if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+            python scripts/site_brief.py "${{ steps.site.outputs.id }}" > automation/logs/brief.txt
+            echo "お客様の社の執筆の案内はログに出しません（$(wc -l < automation/logs/brief.txt) 行。claude は automation/logs/brief.txt を読みます）"
+          else
+            python scripts/site_brief.py "${{ steps.site.outputs.id }}" | tee automation/logs/brief.txt
+          fi
 
       - name: 全サイト横断のカニバリ・領域チェック
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
@@ -420,8 +450,15 @@ jobs:
           echo "■ python scripts/cannibal_check.py --cross の結果" >> automation/logs/brief.txt
           # 前の工程で始めた検査の終わりを待つ。始まっていなければ（工程を手で動かした等）ここで動かす
           for i in $(seq 1 1800); do [ -f /tmp/cannibal.rc ] && break; [ -f /tmp/cannibal.txt ] || break; sleep 1; done
-          if [ -f /tmp/cannibal.rc ]; then
+          # お客様の社の回は結果をログに出さず brief.txt にだけ書く（CI のログは public。2026-10-10 守秘義務）
+          if [ -f /tmp/cannibal.rc ] && [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+            cat /tmp/cannibal.txt >> automation/logs/brief.txt || true
+            echo "（お客様の社の回は結果をログに出しません。brief.txt にあります）"
+          elif [ -f /tmp/cannibal.rc ]; then
             tee -a automation/logs/brief.txt < /tmp/cannibal.txt || true
+          elif [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+            python scripts/cannibal_check.py --cross >> automation/logs/brief.txt 2>&1 || true
+            echo "（お客様の社の回は結果をログに出しません。brief.txt にあります）"
           else
             python scripts/cannibal_check.py --cross 2>&1 | tee -a automation/logs/brief.txt || true
           fi
@@ -442,7 +479,8 @@ jobs:
           fi
           out=$(python scripts/kw_gate.py --before --site "${{ steps.site.outputs.id }}") || true
           rm -f indexing-service-account.json
-          echo "$out"
+          # お客様の社の語（候補・次に書く語）はログに出さない。判定の印だけ（claude は brief.txt を読む）
+          if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then echo "$out" | grep -E '^KW_GATE=' || true; else echo "$out"; fi
           { echo "■ 食い合いゲート（kw_gate --before）の結果"; echo "$out"; } >> automation/logs/brief.txt
           if echo "$out" | grep -q "KW_GATE=block"; then
             echo "::error::次のKWが既存ページと食い合います。台帳を直すまで記事を書きません"
@@ -457,7 +495,12 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
-          python scripts/research_next.py "${{ steps.site.outputs.id }}" || true
+          if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+            python scripts/research_next.py "${{ steps.site.outputs.id }}" > /tmp/research_next.log 2>&1 || true
+            echo "一次情報の収集: $(wc -l < /tmp/research_next.log) 行（お客様の社の回はログに出しません）"
+          else
+            python scripts/research_next.py "${{ steps.site.outputs.id }}" || true
+          fi
 
       - name: 記事生成（Phase 1〜7）
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
@@ -536,7 +579,12 @@ jobs:
           fi
           out=$(python scripts/kw_gate.py --after --site "${{ steps.site.outputs.id }}") || true
           rm -f indexing-service-account.json
-          echo "$out"
+          if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+            echo "$out" | grep -E '^KW_GATE=' || true
+            echo "隔離 $(echo "$out" | grep -c '隔離:') 本（お客様の社の語はログに出しません）"
+          else
+            echo "$out"
+          fi
           # 隔離は警告どまり。食い合う記事だけが articles/_conflicted/ へ移り、
           # 問題のない記事はそのまま公開される（全体を巻き添えにしない）
           if echo "$out" | grep -q "KW_GATE=quarantined"; then
@@ -839,7 +887,7 @@ jobs:
 
       # 日次KPIは記事の枠から外した（daily-kpi.yml）。枠0が上限・量産の兆候で飛ぶと集計も飛んでいた
       - name: 運用通知
-        if: steps.site.outputs.skip != 'yes' && always()
+        if: (steps.site.outputs.skip != 'yes' || steps.site.outputs.blocked == 'yes') && always()
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

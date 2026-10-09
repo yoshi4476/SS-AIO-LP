@@ -62,7 +62,8 @@ def main():
     for key, mod in names.items():
         if a.only and key != a.only:
             continue
-        segs = expand(__import__(mod).script()["segments"])
+        import private_store         # 台本は非公開のリポジトリの sales/
+        segs = expand(private_store.sales_module(mod).script()["segments"])
         print(f"■ {key}（{len(segs)}区間）")
         seen = {}
         for i, s in enumerate(segs, 1):

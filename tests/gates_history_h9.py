@@ -178,5 +178,5 @@ def test_client_is_kept_apart_from_own_sites():
            inspect.getsource(MR.improvements_html).split("if f.get(\"client\"):")[1]], [True] * 4)
     check("グループ月次は自社3サイトだけ", "own_cfgs()" in inspect.getsource(GR.main), True)
     check("動画は未接続のお客様を本数で切る前に外す", "token_path(sid)" in inspect.getsource(AV.candidates), True)
-    check("note の転載文はお客様の社名で出す", "data\" / \"clients\" / sid" in inspect.getsource(SP.compose), True)
+    check("note の転載文はお客様の社名で出す", "private_store.read_json(sid, \"company.json\"" in inspect.getsource(SP.compose), True)
     check("月の上限はシートで減らした数（rules.monthly_cap）を使う", "site_cap(sid) - n" in inspect.getsource(DA.cap_left), True)

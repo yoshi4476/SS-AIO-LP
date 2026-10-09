@@ -145,11 +145,12 @@ def sheet_terms(site_id):
 
     main・sub は起点（単体でラッコに聞く）と担当領域の語に、exclude は落とす語にする。
     シートの語は brief.json にだけ入り、計画は kw_seeds（業種×意図）しか見ていなかった。
-    CONFLUX は「システム開発 外注」「AI エージェント 導入」を書いたのに、1語も起点にならなかった（2026-10-08）"""
-    p = ROOT / "data" / "clients" / site_id / "brief.json"
+    お客様の社がシートに書いたメインの語が、1語も起点にならなかった（2026-10-08）。
+    シートの語は非公開の置き場にある（private_store。public のコードに預かった語を書かない）"""
+    import private_store
     try:
-        kw = (json.loads(p.read_text(encoding="utf-8")) or {}).get("keyword") or {}
-    except (OSError, ValueError, AttributeError):
+        kw = (private_store.read_json(site_id, "brief.json", {}) or {}).get("keyword") or {}
+    except AttributeError:
         return [], []
 
     def clean(xs):
@@ -177,7 +178,7 @@ TITLE_TOKENS = 6     # 空白で区切って6語以上は、検索語ではな�
 
 def title_like(low):
     """ページや本の題のような語か。ラッコのサジェストは題をそのまま返し、検索数も付く。
-    CONFLUX の計画に「ai エージェント 導入 開発 運用 トータル ガイド」（月40）が7位で入った（2026-10-08）。
+    お客様の社の計画に、6語の本の題（月40）が7位で入った（2026-10-08）。
     区切りの無い長い1語は見ない。AI集客ラボは「大阪でmeoとaioの両方を…教えてください。」のような
     AIへの質問の形を狙っている"""
     toks = [t for t in re.split(r"[\s　]+", low) if t]
@@ -412,15 +413,15 @@ def known_heads(S):
         for tok in re.split(r"[\s　]+", str(t).lower()):
             if len(tok) >= 3 and any(o in tok for o in own):
                 heads.add(tok)
-    # シートの「狙う語」はお客様が挙げた領域の語。「問い合わせ対応 自動化」は owns に無くても通す
+    # シートの「狙う語」はお客様が挙げた領域の語。owns に無くても通す
     heads.update(str(t).lower() for t in S.get("sheet") or ())
     return heads
 
 
 def _starts_at_token(toks, head):
     """語の区切りから始まって head が続くか。head は空白を含んでよい（「ai エージェント」）。
-    1語ずつ比べていたため、空白を含む owns（CONFLUX の「AI エージェント」「Excel 脱却」）が
-    どの語にも当たらず、「aiエージェント 費用」も「ai エージェント 費用」も領域語なしで落ちていた"""
+    1語ずつ比べていたため、空白を含むお客様の owns（2語の語）がどの語にも当たらず、
+    空白の有無にかかわらず領域語なしで落ちていた"""
     h = re.sub(r"[\s　のをにへとがで]+", "", head)    # 語の側と同じ区切りで外す
     return bool(h) and any("".join(toks[i:]).startswith(h) for i in range(len(toks)))
 
@@ -1359,6 +1360,11 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     """main_first=N は、主力の語だけを最大N本、優先度Aで積み足す（今の未着手は消さない・月1回の組みとは数えない）。
     補助金で、未着手106本中の主力が2本だった。一新（--replace）は主力の候補が11本しか無く、
     在庫を28本まで減らして残りをまた周辺の制度で埋めるだけだった（2026-10-09 の試算）"""
+    # お客様の社は、非公開のデータ（サイト設定の戦略の部分・記事の材料の狙う語）が読めなければ組まない。
+    # 空の設定で組むと、担当外の語を積み、ラッコのクレジットを使う
+    import private_store
+    if not private_store.require(site_id, "キーワードの計画"):
+        return
     S = KD.site_config(site_id)
     print(f"\n■ {site_id}（{S['cfg']['name']}）")
     month = rakko.this_month()
@@ -1468,13 +1474,18 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     ctx = {"stock": stock_line, "main": main_line, "est": est, "to_rewrite": to_rw, "blocked": blocked,
            "serp": got, "keep": {norm(k) for k in st["todo"]}}
     out = write_plan(site_id, S, picked, dropped, deep, sheet_fate, cands, ctx)
-    print(f"   採用 {len(picked)}本 → {out.relative_to(ROOT).as_posix()}"
+    # お客様の社は語・主力の名前をログに出さない（CI のログは public。件数だけ）
+    import sites as _S
+    quiet = _S.is_client(site_id)
+    print(f"   採用 {len(picked)}本 → {'（非公開の置き場）' if quiet else out.relative_to(ROOT).as_posix()}"
           f"（ラッコ消費 {rakko.spent():.0f} クレジット）")
-    if main_line:
+    if main_line and not quiet:
         print("   " + main_line)
+    elif main_line:
+        print(f"   主力の語: 今回 {main_now}/{len(picked)}本")
     print("   落とした理由: " + " / ".join(f"{k} {v}" for k, v in sorted(dropped.items(), key=lambda x: -x[1])[:6]))
     print(f"   書き直しへ回した実証済みの語 {len(to_rw)}件 ／ 記事以外・他サイトが持つ実証済みの語 {len(blocked)}件")
-    for c in picked[:20]:
+    for c in ([] if quiet else picked[:20]):
         print("     %s %-30s 月間%-5s KD%-3s 意図%+d 出どころ:%s%s" % (
             c["priority"], c["kw"][:30], c.get("vol", "—"), c.get("kd", "—"), c["intent"], primary_src(c),
             "（4〜30位）" if c.get("proven") else ""))
@@ -1520,7 +1531,7 @@ def main():
         except Exception as e:           # 1社の失敗で他の社の在庫を止めない（組みは済んだことにしない＝翌日やり直す）
             import traceback
             traceback.print_exc()
-            print(f"KW_PLAN_ERROR={sid}: {type(e).__name__}: {str(e)[:120]}")
+            print(f"KW_PLAN_ERROR={sid}: {type(e).__name__}" + ("" if S_.is_client(sid) else f": {str(e)[:120]}"))
     if not DRY:
         rakko.sync_shared()                 # この回の消費を管制塔の台帳へ写す（手元とCIで同じ合計にする）
     print(f"\nRAKKO_SPENT={rakko.spent():.0f}（今月の合計 {rakko.month_spent():.0f} / 全体の上限 {rakko.TOTAL_CAP}）")

@@ -20,7 +20,7 @@ import re
 import tempfile
 from pathlib import Path
 
-from test_gates import check, ROOT
+from test_gates import check, ROOT, client_ready
 
 SLUG = "h50-journal"
 LEAD = "**業務の自動化は、手順の決まった業務を1つ選んで小さく試すと失敗しにくくなります。**画面の数より、決める範囲で費用が動きます。"
@@ -190,6 +190,9 @@ def test_journal_md_is_what_the_receiver_reads():
 
 
 def test_journal_config_and_real_articles():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     print("\n■ CONFLUX の設定と、いまある記事が先方の変換の条件を満たす形で書き出せること")
     import publish as P
     import sites as S
@@ -304,6 +307,9 @@ def test_aggregate_pages_have_one_h1_and_styled_lists():
 
 
 def test_diagram_credit_and_colors_follow_the_site():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     print("\n■ 図: お客様の図の名義はその社の名前だけ・色はサイトの設定（無ければ AI集客ラボの色）")
     import make_diagram as MD
     import sites as S
@@ -387,6 +393,9 @@ def test_app_router_files_are_not_shadowed():
 
 
 def test_client_supervisor_is_the_client():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     print("\n■ 監修: CONFLUX の記事の監修者は先方（YW）。当社の代表を出さない・「なし（…）」を資格にしない")
     import editorial_review as ER
     import publish as P

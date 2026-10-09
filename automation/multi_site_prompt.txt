@@ -1,6 +1,7 @@
 3サイト共通の記事パイプライン（自動実行モード）。環境変数 SITE_ID が対象サイトを示す。CLAUDE.md の Phase 1〜7 を、対象サイトの設定に合わせて実行し、新規記事を1本作成すること。
 
 【最初に必ず行うこと】
+(0) site_brief.py が「要対応: … 非公開のデータ（yoshi4476/ss-aio-private …）が読めません」と出して止まったら、**記事を書かずにそこで終える**。お客様の社は、会社情報・記事の材料・一次情報（非公開の置き場 private/clients/<id>/）が無いまま書くと、書かれていないことを憶測で補った記事になる。private/ にある当社の料金・営業の台本・レポートと、お客様の担当者の連絡先・まだ公開していない会社情報は、記事にもコミットにも写さない（守秘義務）。お客様の記事に使ってよいのは site_brief.py が出した範囲だけで、価格の載せ方などの書き方のきまりに従う。
 (1) `python scripts/site_brief.py "$SITE_ID"` の出力を読む。ワークフローが直前に実行し、`python scripts/cannibal_check.py --cross` と食い合いゲート（kw_gate --before）の結果と一緒に `automation/logs/brief.txt` に残している。**このファイルがあれば Read で読み、同じコマンドを実行し直さない**（2つで約1分かかる）。無いときだけ自分で site_brief.py を実行する。対象サイトのテーマ・読者・担当領域・書いてはいけない領域・カテゴリ・次に書くKWが全て表示される。以降はこの出力に従うこと（自分でサイト設定を探し直さない）。
 (2) 表示された「次のKW」をそのまま採用する。食い合いゲートの「次に書くKW」が違う語なら、ゲートの語を採用する（ゲートが食い合う語を台帳から外した後の語）。表示が空、または need_replenish=true の場合は `python scripts/kw_discover.py --site "$SITE_ID" --append` を実行してから再度 site_brief.py を実行する。
 (3) 記事作成の前に、cannibal_check --cross の結果（brief.txt に無ければ `python scripts/cannibal_check.py --cross` を実行）で、採用予定のKWが TERRITORY_CHECK や CROSS_CANNIBAL に出ていないことを確認する。出ていた場合はそのKWを使わず、次の候補に移る。

@@ -19,6 +19,12 @@ RANKS = ROOT / "data" / "ranks"
 MIN_IMP = 20
 
 
+def _is_client(site_id):
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S
+    return S.is_client(site_id) or (ROOT / "data" / "clients" / str(site_id)).is_dir()
+
+
 def own_data_facts(site_id):
     """自サイトの実測から言えること（記事に書ける形にして返す）"""
     f = RANKS / f"{site_id}.json"
@@ -46,7 +52,7 @@ def own_data_facts(site_id):
             "source": "自社サイトのSearch Console実測",
             "as_of": date.today().strftime("%Y-%m"), "verifiable": True,
         })
-    elif not (ROOT / "data" / "clients" / site_id).is_dir():
+    elif not _is_client(site_id):
         # 「AIO対策の実装を日次で計測」は運用会社の立場の一文。
         # クライアントの記事に出すと、その会社がしていないことを書くことになる
         out.append({
@@ -153,13 +159,12 @@ def load_for(site_id):
             print(f"  （{path.name} を読めませんでした: {e}）")
             return None
 
-    client = ROOT / "data" / "clients" / site_id / "facts.json"
-    if client.is_file():
-        d = read(client)
-        if d is not None:
-            return d, list(d.get("facts", []))
-        # 読めないときに自社の一次情報へ落とすと、他社の実績を書いてしまう
-        return {"facts": []}, []
+    # お客様の一次情報は非公開の置き場（private_store）。読めないときに自社の一次情報へ落とすと、他社の実績を書いてしまう
+    if _is_client(site_id):
+        import private_store
+        client = private_store.client_path(site_id, "facts.json")
+        d = read(client) if client.is_file() else None
+        return (d, list(d.get("facts", []))) if d is not None else ({"facts": []}, [])
     data = read(SRC) if SRC.is_file() else {"facts": []}
     if data is None:
         return {"facts": []}, []
@@ -169,7 +174,8 @@ def load_for(site_id):
     # 入り、採点でも「主題と関係ない数字」と減点されていた（2026-10-04）
     try:
         import fnmatch
-        allow = json.loads((ROOT / "sites" / f"{site_id}.json").read_text(encoding="utf-8")).get("facts_allow")
+        import sites as S
+        allow = (S.load_all().get(site_id) or {}).get("facts_allow")
     except (OSError, ValueError):
         allow = None
     if allow is not None:

@@ -261,7 +261,8 @@ def _drop_pattern(site):
     """sites/<id>.json の drop_kw（打ち出しから外した語）を1つの正規表現にする。無ければ空"""
     import re
     try:
-        cfg = json.loads((ROOT / "sites" / f"{site}.json").read_text(encoding="utf-8"))
+        import sites as _S           # お客様の社の設定は非公開の置き場の分を重ねて読む
+        cfg = _S.load_all().get(site) or {}
     except Exception:
         return ""
     words = [w for w in cfg.get("drop_kw") or [] if w]
@@ -399,9 +400,14 @@ def overlaps_report():
         return 0
     todo = [r for r in got if str(r.get("status") or "").strip() in ("", "未確認")]
     print(f"■ KW重複の確認（組の違う社が同じ語を持っている）: 未確認 {len(todo)}件 / 全{len(got)}件")
-    for r in todo[:30]:
+    # お客様の社を含む組は語を出さない（CI のログ・通知は public の実行記録に残る。語は管制塔の表で見る）
+    import sites as _S
+    mine = [r for r in todo if _S.is_client(r.get("site_a")) or _S.is_client(r.get("site_b"))]
+    for r in [r for r in todo if r not in mine][:30]:
         print(f"  - 「{r.get('keyword')}」 {r.get('site_a')}（{r.get('region_a') or '地域不明'}・先に登録）"
               f" ↔ {r.get('site_b')}（{r.get('region_b') or '地域不明'}）")
+    if mine:
+        print(f"  - お客様の社を含む重複 {len(mine)}件（語は管制塔の「KW重複の確認」の表で見てください）")
     if todo:
         print(f"要対応: 組の違う社が同じ語を持っています（未確認{len(todo)}件）。管制塔の「KW重複の確認」で"
               "状態を「両方使う」か「片方を外す」にしてください")

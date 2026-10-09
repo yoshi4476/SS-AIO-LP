@@ -1,0 +1,32 @@
+name: 非公開のデータ（お客様の情報・料金・レポート）
+description: >-
+  非公開のリポジトリ yoshi4476/ss-aio-private を管制塔の直下 private/ に取得し、お客様の守秘の語を ::add-mask:: で伏せる。
+  管制塔は GitHub Actions を無料で使うため public で、CI のログも誰でも読める（90日残る）。お客様のデータを扱うジョブは
+  checkout の直後にこれを通す（門 gates_history_h76）。composite action は secrets を読めないので、鍵は呼ぶ側が
+  token に渡す（secrets.PRIVATE_DATA_TOKEN、無ければ secrets.SITE_PUSH_TOKEN）。取れなければ、お客様の社の工程は
+  scripts/private_store.py の require で止まって知らせ、自社3サイトはこれまでどおり動く。
+
+inputs:
+  token:
+    description: 非公開のリポジトリを読み書きできる鍵（fine-grained なら yoshi4476/ss-aio-private の Contents を Read and write）
+    required: false
+    default: ""
+
+outputs:
+  ok:
+    description: 取得できたか（yes / no）
+    value: ${{ steps.fetch.outputs.ok }}
+
+runs:
+  using: composite
+  steps:
+    # 取得する。鍵の base64 は private_store が ::add-mask:: で伏せてから使う（鍵そのものは GitHub が伏せる）
+    - id: fetch
+      shell: bash
+      env:
+        PRIVATE_DATA_TOKEN: ${{ inputs.token }}
+      run: python3 scripts/private_store.py --fetch
+
+    # お客様の守秘の語を伏せる。これより後の工程のログ・注釈では *** になる（成果物には効かないので、成果物に入れない）
+    - shell: bash
+      run: python3 scripts/ci_mask.py

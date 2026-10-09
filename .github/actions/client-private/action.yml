@@ -40,6 +40,12 @@ runs:
         python3 scripts/client_private.py --mark-after || true
         python3 scripts/client_private.py --unpack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
 
+    # 戻した記録（お客様の検索語・順位・キーワード計画）の語もログで伏せる。CI のログは public（守秘義務。2026-10-10）。
+    # 非公開のリポジトリの取得と最初の伏せは .github/actions/private-data（checkout の直後）が行う
+    - if: inputs.mode == 'restore'
+      shell: bash
+      run: python3 scripts/ci_mask.py || true
+
     - if: inputs.mode == 'save'
       id: pack
       shell: bash
@@ -73,3 +79,10 @@ runs:
       with:
         path: data/clients/*/private
         key: client-${{ inputs.family }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+    # 非公開のリポジトリ（private/。キーワード計画・レポート）にこの回で書いた分を残す。キャッシュは7日で消えるので、
+    # 元の情報は非公開のリポジトリに置く（private_store）。private/ が無い回は何もしない
+    - if: inputs.mode == 'save'
+      shell: bash
+      run: |
+        python3 scripts/private_store.py --push "CI: ${{ github.workflow }} / ${{ github.job }}（run ${{ github.run_id }}）" || true

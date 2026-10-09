@@ -418,11 +418,9 @@ def _mail_zip(cfg, path: Path):
         return False
     # ヒアリングシートは会社の窓口を "email" で書く。"contact_email" だけを見ていたため、
     # シートから登録した社には1通も届かず、ZIP を作っただけで終わっていた
-    try:
-        c = json.loads((ROOT / "data" / "clients" / cfg["id"] / "company.json").read_text(encoding="utf-8"))
-        to = c.get("contact_email") or c.get("email")
-    except (OSError, ValueError):
-        to = None
+    import private_store
+    c = private_store.read_json(cfg["id"], "company.json", {}) or {}
+    to = c.get("contact_email") or c.get("email")
     key, sender = os.environ.get("RESEND_API_KEY"), os.environ.get("LEAD_FROM_EMAIL")
     if not (to and key and sender):
         return False

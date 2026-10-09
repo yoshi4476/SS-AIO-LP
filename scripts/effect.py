@@ -102,8 +102,8 @@ def top_queries(sc, domain, slug, start, end, n=3):
 
 
 def collect(days=30, until=None):
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    import sites as _S
+    conf = _S.load_all()
     cs = {k: s for s, c in conf.items() for k in (c.get("categories") or {})}
     sc = sc_client()
     today = date.today() - timedelta(days=3)       # GSCの確定分

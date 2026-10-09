@@ -116,8 +116,8 @@ def main():
     ap.add_argument("--articles", type=int, default=3, help="1サイトあたり調べる記事数")
     a = ap.parse_args()
 
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    import sites as _S
+    conf = _S.load_all()
     ng = []
     for site, c in sorted(conf.items()):
         if a.site and site != a.site:

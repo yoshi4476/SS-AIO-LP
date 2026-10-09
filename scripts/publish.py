@@ -243,15 +243,13 @@ def client_credit(cfg, url=""):
     クライアントでなければ None（自社サイトは各サイトの雛形が持つ）
     """
     import html as H
-    cdir = ROOT / "data" / "clients" / cfg["id"]
-    if not cdir.is_dir():
+    import private_store
+    if not sites_mod.is_client(cfg["id"]):
         return None
 
     def read(name):
-        try:
-            return json.loads((cdir / name).read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            return {}
+        d = private_store.read_json(cfg["id"], name, {})
+        return d if isinstance(d, dict) else {}
     comp, brief = read("company.json"), read("brief.json")
     origin = f"https://{cfg['domain']}/"
     org = {"@type": "Organization", "name": comp.get("name") or cfg.get("name", ""), "url": origin}
@@ -268,8 +266,8 @@ def client_credit(cfg, url=""):
     if not (sup.get("name") and sup.get("display")):
         return out
     quals = sup.get("qualification") or []
-    # ヒアリングシートの「なし（実務の経歴で監修。資格は表示しない）」は資格ではない。資格として出すと
-    # 「監修: YW（なし（…））」と表示され、構造化データにも資格として載る（CONFLUX・2026-10-08）
+    # ヒアリングシートの資格の欄に「なし（…）」と書かれていたら資格ではない。資格として出すと
+    # 「監修: 名前（なし（…））」と表示され、構造化データにも資格として載る（お客様の社・2026-10-08）
     quals = [q for q in ([quals] if isinstance(quals, str) else quals)
              if q and not re.match(r"\s*(なし|無し|ない|-|－|ー)(\s|（|\(|$)", str(q))]
     rv = {"@type": "Person", "name": sup["name"]}
@@ -789,10 +787,8 @@ def journal_md(cfg, meta, body, dialect):
     # 更新日は modified、狙う語は keyword（先方の docs/journal-pipeline.md の書き方。先方は updated・tags も読むが、
     # 書き方の説明と食い違うと、先方が読む欄を絞ったときに更新日と狙う語が黙って公開日と題に変わる）
     fm["modified"] = meta.get("modified") or meta.get("date")
-    try:
-        brief = json.loads((ROOT / "data" / "clients" / cfg["id"] / "brief.json").read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        brief = {}
+    import private_store
+    brief = private_store.read_json(cfg["id"], "brief.json", {}) or {}
     fm["author"] = dialect.get("author") or (brief.get("author") or {}).get("name") or ""
     if meta.get("keyword"):
         fm["keyword"] = str(meta["keyword"])
@@ -2308,14 +2304,21 @@ def main():
         raise SystemExit(f"カテゴリ '{meta['category']}' は {cfg['id']} に定義されていません"
                          f"（候補: {', '.join(cfg.get('categories', {}))}）")
     if sites_mod.is_client(cfg["id"]):
+        # 非公開のデータ（会社情報・サイト設定の戦略の部分）が読めなければ配信しない。禁止語・監修・発行元の
+        # 検査が空の設定で素通りし、お客様の記事に出せないものが届く（2026-10-10 運用者の指示）
+        import private_store
+        if not private_store.require(cfg["id"], "配信"):
+            raise SystemExit(f"BLOCKED(非公開のデータなし): {args.slug} は {cfg['id']} の非公開のデータが読めないため配信しません")
         # お客様の記事に運用会社の名前・実績・自社サイトへのリンクを出さない（監修者はお客様ご本人）。
         # その社の operator_ok に書いた語だけは通す（CONFLUX の「セブンセンシズ株式会社」。2026-10-08 運用者の決定）
         leak = sites_mod.operator_leaks(f"{meta.get('title', '')}\n{meta.get('description', '')}\n"
                                         f"{json.dumps(meta.get('faq') or [], ensure_ascii=False)}\n{body}", cfg)
         # ヒアリングシートの「使ってはいけない表現」（医療広告・景表法など）。シートで聞いて設定に
         # 書いていたのに、どこも読んでいなかった
-        leak += [f"使えない表現「{w}」" for w in ((cfg.get("rules") or {}).get("ng_words") or [])
-                 if w and w in f"{meta.get('title', '')}{meta.get('description', '')}{body}"]
+        ng = [w for w in ((cfg.get("rules") or {}).get("ng_words") or [])
+              if w and w in f"{meta.get('title', '')}{meta.get('description', '')}{body}"]
+        # 語そのものはヒアリングシートの中身（CI のログは public）。件数だけ出し、語は手元で publish.py を回して見る
+        leak += [f"使えない表現 {len(ng)}語（ヒアリングシートの ng_words）"] if ng else []
         if leak:
             raise SystemExit(f"BLOCKED(公開不可): {args.slug} にお客様の記事に出せないものがあります: "
                              + " / ".join(dict.fromkeys(leak)))

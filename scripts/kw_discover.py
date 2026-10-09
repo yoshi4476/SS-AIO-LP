@@ -66,7 +66,10 @@ def site_config(site_id):
     return {
         "id": site_id,
         "cfg": cfg,
-        "plan": ROOT / cfg.get("kw_plan", "docs/industry-pillar-plan.md"),
+        # お客様の社のキーワード計画は非公開の置き場（private/clients/<id>/kw.md）。公開側の docs/ に積むと
+        # 週次の git add -A でお客様の語が public に載る（docs/kw-conflux.md に「自動補充」が積まれていた）
+        "plan": (__import__("private_store").client_path(site_id, "kw.md", write=True) if sites_mod.is_client(site_id)
+                 else ROOT / cfg.get("kw_plan", "docs/industry-pillar-plan.md")),
         "gsc": f"https://{cfg['domain']}/",
         "industries": seeds.get("industries", []),
         "intents": seeds.get("intents", []),
@@ -256,6 +259,12 @@ def main():
     site_id = os.environ.get("SITE_ID") or _sm.primary()
     if "--site" in sys.argv:
         site_id = sys.argv[sys.argv.index("--site") + 1]
+    # お客様の社は、非公開のデータ（サイト設定の戦略の部分・キーワード計画）が読めなければ積まない。
+    # CI のログは誰でも読めるので、お客様の社の語は一覧にせず件数だけ出す（2026-10-10 運用者の指示）
+    import private_store
+    if not private_store.require(site_id, "キーワードの補充"):
+        return
+    quiet = _sm.is_client(site_id)
     S = site_config(site_id)
     if not S["industries"]:
         print(f"{site_id}: sites/{site_id}.json に kw_seeds が未定義のため発掘できません")
@@ -322,7 +331,7 @@ def main():
         rising.append(q)
     if rising:
         print(f"\n■ いま伸びている語（前の28日と比べて2倍以上・担当領域内）{len(rising)}件")
-        for q in rising[:12]:
+        for q in ([] if quiet else rising[:12]):
             g = "新規" if q["prev"] == 0 else f"{q['growth']:.1f}倍"
             print(f"   表示{q['imp']:>4}（前{q['prev']:>3}／{g}） {q['pos']:>5.1f}位  {q['kw']}")
         # 伸びている語は、表示実績のある語と同じ扱いで先頭に積む。
@@ -432,12 +441,14 @@ def main():
 
     print(f"KW_DISCOVER: GSC実証={len(proven)}件 / サジェスト発掘={len(discovered)}件"
           f"（うち開く理由の弱い語 {len(weak)}件）")
-    if proven:
+    if quiet:
+        print(f"  {site_id}: 語の一覧はログに出しません（お客様の社。表示実績あり{len(proven)}語・新規候補{len(discovered)}語）")
+    elif proven:
         print("\n■ 表示実績あり・記事なし（最優先で執筆する）")
         for q in proven[:15]:
             v, pt, _ = kw_intent.verdict(q["kw"])
             print(f"  - [{v}] {q['kw']}  （表示{q['imp']}回・平均{q['pos']}位）")
-    if discovered:
+    if discovered and not quiet:
         print("\n■ サジェスト由来の新規候補（検索需要の裏付けあり）")
         for s in discovered[:20]:
             v, pt, why = kw_intent.verdict(s)
@@ -467,9 +478,10 @@ def main():
         line = (f"\n**自動補充 {date.today().isoformat()}"
                 f"（GSC実証{len(proven[:10])}件+サジェスト{len(picks) - len(proven[:10])}件・{len(picks)}本）**: "
                 + " / ".join(picks) + "\n")
+        S["plan"].parent.mkdir(parents=True, exist_ok=True)
         with S["plan"].open("a", encoding="utf-8") as f:
             f.write(line)
-        print(f"\n{S['plan'].relative_to(ROOT).as_posix()} へ {len(picks)}件を追記しました")
+        print(f"\n{'非公開のキーワード計画' if quiet else S['plan'].relative_to(ROOT).as_posix()} へ {len(picks)}件を追記しました")
         # 実行時にKWを供給しているのは管制塔の台帳なので、そちらにも積む
         try:
             import hub_client

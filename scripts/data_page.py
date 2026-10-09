@@ -71,10 +71,10 @@ def build_body(days=28):
     from data_auto import is_client, own_categories
     # クライアントのサイトは集計しない。その会社の実数を運用会社名義で公開しないため
     conf = {}
-    for p in (ROOT / "sites").glob("*.json"):
-        c = json.loads(p.read_text(encoding="utf-8-sig"))
-        if not is_client(c.get("id") or p.stem):
-            conf[p.stem] = c
+    import sites as _S
+    for sid, c in _S.load_all().items():
+        if not is_client(sid):
+            conf[sid] = c
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=days - 1)
 

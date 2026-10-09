@@ -186,7 +186,8 @@ def main():
     ap.add_argument("--site")
     ap.add_argument("--forms-off", action="store_true", help="拡張計測の「フォームの操作」を止める（確かめた社だけ）")
     a = ap.parse_args()
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in sorted((ROOT / "sites").glob("*.json"))}
+    import sites as _S             # 計測の ID はお客様の社だと非公開の置き場にある（load_all が重ねる）
+    conf = _S.load_all()
     targets = [(k, c["ga4_property_id"]) for k, c in conf.items()
                if c.get("ga4_property_id") and (not a.site or k == a.site)]
     if not targets:

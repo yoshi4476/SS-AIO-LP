@@ -72,8 +72,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=28)
     a = ap.parse_args()
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S               # 計測の ID はお客様の社だと非公開の置き場にある（load_all が重ねる）
+    conf = S.load_all()
     for site, c in sorted(conf.items()):
         prop = c.get("ga4_property_id")
         if not prop:

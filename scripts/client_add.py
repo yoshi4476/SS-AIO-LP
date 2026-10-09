@@ -121,8 +121,9 @@ def check(cfg):
                         "表示は増えても相談につながりにくくなります")
     # 一次情報はAI検索に引用されるかを決める材料。無いまま書き始めると、
     # どのサイトでも書ける記事になる
-    if not (ROOT / "data" / "clients" / str(cfg.get("id")) / "facts.json").is_file():
-        warn.append("一次情報が未登録です（data/clients/<id>/facts.json）。"
+    import private_store as PS
+    if not PS.client_path(str(cfg.get("id")), "facts.json").is_file():
+        warn.append("一次情報が未登録です（非公開の置き場 private/clients/<id>/facts.json）。"
                     "client_intake.py のヒアリングシートから登録できます")
 
     seeds = cfg.get("kw_seeds", {})
@@ -165,16 +166,20 @@ def main():
     if "--write" not in sys.argv:
         print("\n  確認のみ（--write を付けると sites/ に追加します）")
         return
-    out = SITES / f"{cfg['id']}.json"
-    out.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"\n  作成: {out.relative_to(ROOT).as_posix()}")
-    plan = ROOT / cfg.get("kw_plan", f"docs/kw-{cfg['id']}.md")
-    if not plan.exists():
-        plan.parent.mkdir(parents=True, exist_ok=True)
-        plan.write_text(f"# {cfg['name']} KW計画\n\n"
-                        f"対象: {cfg['audience']}\n\n"
-                        "（kw_discover.py が自動補充します）\n", encoding="utf-8")
+    # 公開側（public）には公開してよい項目だけ。戦略の部分とキーワード計画は非公開のリポジトリへ（private_store）
+    import private_store as PS
+    if not (PS.base() / ".git").is_dir():
+        raise SystemExit(f"\n  非公開のリポジトリ（{PS.REPO}）が手元の private/ にありません。"
+                         "先に python scripts/private_store.py --fetch で取得してください")
+    for out in PS.write_site(cfg, SITES):
+        print(f"\n  作成: {out.relative_to(ROOT).as_posix()}")
+    if not PS.client_path(cfg["id"], "kw.md").is_file():
+        plan = PS.write_text(cfg["id"], "kw.md", f"# {cfg['name']} KW計画\n\n"
+                             f"対象: {cfg.get('audience', '')}\n\n"
+                             "（kw_discover.py が自動補充します）\n")
         print(f"  作成: {plan.relative_to(ROOT).as_posix()}")
+    if not PS.push(f"導入: {cfg['id']} のサイト設定の戦略の部分・キーワード計画"):
+        print("  ! 非公開のリポジトリへ push できませんでした（private/ で git push してください）")
     print("\n  次にやること")
     print("    1. python scripts/kw_discover.py --site " + cfg["id"] + " --append")
     print("    2. GA4とSearch Consoleにサービスアカウントを追加（Search Console はオーナーで。"

@@ -29,7 +29,7 @@ on:
         default: ""
 
 permissions:
-  contents: write  # 目標値（reports/targets.json）を保存するため
+  contents: write  # 記事の直し・在庫計画を保存するため（レポートと目標値は非公開のリポジトリへ。private_store）
   actions: read    # 同じ日に済んだ run があるかを見る（schedule_guard）
 
 env:
@@ -64,6 +64,12 @@ jobs:
     timeout-minutes: 120  # 20社までのレポート・競合比較・改善の実行に余裕を持つ（在庫の組みは毎日の kw-stock へ移した）
     steps:
       - uses: actions/checkout@v4
+
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
       - name: 実データ設定の有無を確認
         id: gate
@@ -322,9 +328,9 @@ jobs:
           # 直した記事は配信先にも届ける（届かなければ直した意味が無い）
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
-          # 範囲を決めて足す。-A だと reports/*/report.pdf|html（クライアントの実数）まで
-          # public リポジトリに載る。1つずつ足すのは、無いパスが1つあると git add 全体が何も足さずに落ちるため
-          for p in articles site data docs reports/targets.json reports/targets-*.json reports/growth_plan.json; do
+          # 範囲を決めて足す。レポート（reports/）は .gitignore で外れ、非公開のリポジトリへ残す（2026-10-10 守秘義務）。
+          # 1つずつ足すのは、無いパスが1つあると git add 全体が何も足さずに落ちるため
+          for p in articles site data docs; do
             git add -A -- "$p" 2>/dev/null || true
           done
           git diff --cached --quiet || git commit -m "monthly: レポートの改善点を自動実行 $(date '+%Y-%m-%d')"
@@ -345,7 +351,7 @@ jobs:
           git config user.email "noreply@7senses.co.jp"
           # 1つずつ足す（まとめて渡すと、無いパスが1つあるだけで何も足されない）
           # data/compete（お客様の分は .gitignore で外れる）と data/ai_cache（課金して聞いた答え。残さないと翌週また払う）
-          for p in reports/targets.json reports/targets-*.json docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw reports/growth_plan.json docs/growth-plan.md data/compete data/ai_cache; do
+          for p in docs/kw-plan-*.md data/ai_citations/*.json docs/ai-kw-*.md data/ai_kw data/compete data/ai_cache; do
             git add -- "$p" 2>/dev/null || true
           done
           git diff --cached --quiet || git commit -m "chore(report): 来月のKPI目標を保存"
@@ -359,6 +365,14 @@ jobs:
           else
             echo "保存すべき変更なし"
           fi
+
+      # レポート（PDF・HTML）・来月の目標値・3倍計画は非公開のリポジトリの reports/ に書いた（private_store）。
+      # public のリポジトリには置かない（自社3サイトの実数・問い合わせの数を含む。2026-10-10 運用者の指示）
+      - name: レポートと目標値を非公開のリポジトリへ残す
+        if: always() && steps.gate.outputs.ready == 'true'
+        run: |
+          python3 scripts/private_store.py --push "月次: レポートと目標値 $(date '+%Y-%m-%d')" \
+            || echo "::warning::レポートと目標値を非公開のリポジトリへ残せませんでした（鍵 PRIVATE_DATA_TOKEN／SITE_PUSH_TOKEN の権限を確認）"
 
       # お客様の社の来月の目標・在庫計画・引用の実測（コミットしない分）を次の回へ残す
       - uses: ./.github/actions/client-private

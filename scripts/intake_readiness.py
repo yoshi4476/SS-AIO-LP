@@ -3,7 +3,7 @@
 お客様の社の各機能が動く状態かを出す（運用者の依頼 2026-10-07「シートを読み込むだけで全機能が動く」）。
 
 onboard_check.py は本番のサイトを読んで「先方の作り次第」の項目を確かめる。こちらは本番を読まず、
-登録した設定（sites/<id>.json・data/clients/<id>/）と鍵の有無だけで判定する（重ねて見ない）。
+登録した設定（sites/<id>.json と非公開の置き場 private/clients/<id>/。private_store）と鍵の有無だけで判定する（重ねて見ない）。
 
   python scripts/intake_readiness.py --site <id>   # 1社（data/clients/<id>/readiness.json に残す。public に置かない）
   python scripts/intake_readiness.py --all         # お客様の全社（週次 findings・ヒアリングの登録直後）
@@ -43,13 +43,15 @@ def _json(p):
 
 
 def load(site_id, root=ROOT):
-    cdir = root / "data" / "clients" / site_id
-    cfg = _json(root / "sites" / f"{site_id}.json") or {"id": site_id}
-    facts = _json(cdir / "facts.json") or {}
-    return {"cfg": cfg, "company": _json(cdir / "company.json") or {}, "brief": _json(cdir / "brief.json") or {},
+    # お客様から預かった内容は非公開の置き場（private_store）。サイト設定は公開側の項目に戦略の部分を重ねる
+    import private_store as PS
+    cfg = {**PS.site_private(site_id, root=root), **(_json(root / "sites" / f"{site_id}.json") or {"id": site_id})}
+    facts = PS.read_json(site_id, "facts.json", {}, root=root) or {}
+    return {"cfg": cfg, "company": PS.read_json(site_id, "company.json", {}, root=root) or {},
+            "brief": PS.read_json(site_id, "brief.json", {}, root=root) or {},
             "facts": facts.get("facts", []) if isinstance(facts, dict) else [],
-            # private.json は .gitignore（CI には無い）。無いときは、それを見る判定を飛ばす（鍵の登録で判定する）
-            "private": _json(cdir / "private.json")}
+            # private.json が無いとき（非公開のデータを取れない回）は、それを見る判定を飛ばす（鍵の登録で判定する）
+            "private": PS.read_json(site_id, "private.json", None, root=root)}
 
 
 def connections(cfg, root=ROOT):
@@ -344,6 +346,7 @@ def compute(site_id, root=ROOT, have=None):
 
 def save(site_id, items, root=ROOT):
     p = root / "data" / "clients" / site_id / "readiness.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps({"site": site_id, "made": date.today().isoformat(),
                              "items": [{k: v for k, v in x.items() if k != "dup"} for x in items]},
                             ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
@@ -370,13 +373,19 @@ def check_site(site_id, root=ROOT, have=None, write=True):
     items = compute(site_id, root, have)
     cfg = load(site_id, root)["cfg"]
     show(site_id, items, cfg)
-    if write and (root / "data" / "clients" / site_id).is_dir():
+    if write and _is_client(site_id, root):
         save(site_id, items, root)
     return todo_lines(cfg.get("name") or site_id, items)
 
 
+def _is_client(site_id, root=ROOT):
+    import private_store as PS
+    return ((root / "data" / "clients" / site_id).is_dir() or PS.client_dir(site_id, root).is_dir()
+            or bool((_json(root / "sites" / f"{site_id}.json") or {}).get("client")))
+
+
 def clients(root=ROOT):
-    return sorted(p.stem for p in (root / "sites").glob("*.json") if (root / "data" / "clients" / p.stem).is_dir())
+    return sorted(p.stem for p in (root / "sites").glob("*.json") if _is_client(p.stem, root))
 
 
 # ---------------------------------------------------------------- 文書

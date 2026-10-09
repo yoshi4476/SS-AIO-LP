@@ -1273,7 +1273,8 @@ def main():
     html = render(sites, labels, arts, cross, links, pipeline, a)
 
     ym = labels[-1]
-    out_dir = ROOT / "reports" / f"group-{ym}"
+    import private_store             # 非公開のリポジトリの reports/（public に数字を置かない。2026-10-10）
+    out_dir = private_store.reports_dir() / f"group-{ym}"
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "report.html").write_text(html, encoding="utf-8")
     print(f"HTML: {out_dir / 'report.html'}")

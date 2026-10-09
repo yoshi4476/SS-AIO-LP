@@ -512,6 +512,8 @@ def main():
             row["cited"] = hit
             cited += hit
             items.append(row)
+            if quiet:
+                continue                 # お客様の社の検索語は CI のログに出さない（件数は下の行）
             print(f"   {'○' if hit else '－'} {q[:30]:<30} " + " ".join(
                 f"{n}:{_mark(r)}" for n, r in row["engines"].items()))
         measured["sites"][sid] = {"queries": len(qs), "cited": cited, "items": items}

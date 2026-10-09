@@ -80,6 +80,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -181,14 +187,19 @@ jobs:
           done
           echo "::warning::KW補充の記録を push できませんでした（台帳への追記は済んでいます）"
 
+      # 要対応は成果物（artifact）で渡さない。public のリポジトリでは成果物は誰でも落とせ、ログの伏せ（::add-mask::）も
+      # 効かない（お客様の語が載りうる）。同じ run の optimize へは CI のキャッシュで渡す（2026-10-10 守秘義務）
+      - name: 要対応を渡す（キャッシュへ写す）
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/kw-findings"
+          cp automation/logs/findings.txt "$RUNNER_TEMP/kw-findings/findings.txt" 2>/dev/null || touch "$RUNNER_TEMP/kw-findings/findings.txt"
       - name: 要対応を渡す
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/cache/save@v4
         with:
-          name: kw-findings
-          path: automation/logs/findings.txt
-          if-no-files-found: ignore
-          retention-days: 3
+          path: ${{ runner.temp }}/kw-findings
+          key: kw-findings-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: 鍵の後始末
         if: always()
@@ -207,6 +218,12 @@ jobs:
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
       - uses: actions/checkout@v4
+
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
@@ -271,6 +288,12 @@ jobs:
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
       - uses: actions/checkout@v4
+
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
@@ -401,14 +424,17 @@ jobs:
 
       # このジョブは通知しない。問い合わせの疎通・AI診断・生成エンジン向けの要対応は optimize が通知本文へ足す
       # （kw-refill と同じ渡し方）。以前は注釈と管制塔のエラーログだけで、メールに載らなかった（2026-10-07 の点検）
+      - name: 要対応を渡す（キャッシュへ写す）
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/reports-findings"
+          cp automation/logs/findings.txt "$RUNNER_TEMP/reports-findings/findings.txt" 2>/dev/null || touch "$RUNNER_TEMP/reports-findings/findings.txt"
       - name: 要対応を渡す
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/cache/save@v4
         with:
-          name: reports-findings
-          path: automation/logs/findings.txt
-          if-no-files-found: ignore
-          retention-days: 3
+          path: ${{ runner.temp }}/reports-findings
+          key: reports-findings-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: 鍵の後始末
         if: always()
@@ -428,6 +454,12 @@ jobs:
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
       - uses: actions/checkout@v4
+
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
@@ -1062,28 +1094,30 @@ jobs:
 
       # 並行ジョブ（kw-refill）が見つけた要対応（ラッコのクレジット切れ）を通知本文へ足す
       - name: KW補充の要対応を受け取る
-        uses: actions/download-artifact@v4
+        uses: actions/cache/restore@v4
         continue-on-error: true
         with:
-          name: kw-findings
-          path: /tmp/kw-findings
+          path: ${{ runner.temp }}/kw-findings
+          key: kw-findings-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: kw-findings-${{ github.run_id }}-
 
       # 並行ジョブ（reports）が見つけた要対応（問い合わせの疎通・AI診断・生成エンジン向け）も同じく足す
       - name: 読むだけの検査の要対応を受け取る
-        uses: actions/download-artifact@v4
+        uses: actions/cache/restore@v4
         continue-on-error: true
         with:
-          name: reports-findings
-          path: /tmp/reports-findings
+          path: ${{ runner.temp }}/reports-findings
+          key: reports-findings-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: reports-findings-${{ github.run_id }}-
 
       - name: KW補充の要対応を通知本文へ足す
         run: |
           mkdir -p automation/logs
-          if [ -f /tmp/kw-findings/findings.txt ]; then
-            cat /tmp/kw-findings/findings.txt >> automation/logs/findings.txt
+          if [ -f "$RUNNER_TEMP/kw-findings/findings.txt" ]; then
+            cat "$RUNNER_TEMP/kw-findings/findings.txt" >> automation/logs/findings.txt
           fi
-          if [ -f /tmp/reports-findings/findings.txt ]; then
-            cat /tmp/reports-findings/findings.txt >> automation/logs/findings.txt
+          if [ -f "$RUNNER_TEMP/reports-findings/findings.txt" ]; then
+            cat "$RUNNER_TEMP/reports-findings/findings.txt" >> automation/logs/findings.txt
           fi
 
       # Bing Webmaster へ sitemap と直近7日の更新URLを送る（3サイト＋お客様）。

@@ -41,6 +41,7 @@ PER_SITE = {
     "ranks": ("data/ranks/{}.json",),                                   # rank_track（毎晩の救済）
     "ai_kw": ("data/ai_kw/{}.json", "docs/ai-kw-{}.md"),                 # ai_kw_research（週次の KW 補充）
     "weekly": ("data/win_patterns/{}.md", "docs/kw-strong-{}.md",        # win_patterns・kw_reorder・
+               "docs/kw-priority-{}.md",                                  # kw_reorder（弱い語の付け直し）
                "docs/country-{}.md", "docs/season-{}.md"),               # country_rank・season（週次）
     "monthly": ("docs/kw-plan-{}.md", "reports/targets-{}.json"),       # kw_plan（毎日の在庫の見張り）・monthly_report（月次）
     "kw_serp": ("data/kw_serp/{}.json",),                                # kw_plan が取った上位の見出し・共起語・質問（執筆と書き直しが読む）
@@ -250,11 +251,9 @@ def markers():
     for sid in clients():
         cfg = S.load_all().get(sid) or {}
         names = [sid, str(cfg.get("domain") or "").lower().replace("www.", "")]
-        try:
-            co = json.loads((ROOT / "data" / "clients" / sid / "company.json").read_text(encoding="utf-8"))
-            names += [co.get("name"), co.get("name_en")]
-        except (OSError, ValueError):
-            pass
+        import private_store
+        co = private_store.read_json(sid, "company.json", {}) or {}
+        names += [co.get("name"), co.get("name_en")]
         out[sid] = [n for n in dict.fromkeys(names) if n and len(str(n)) >= 3]
     return out
 

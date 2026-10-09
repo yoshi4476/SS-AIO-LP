@@ -21,7 +21,7 @@ import tempfile
 from datetime import date
 from pathlib import Path
 
-from test_gates import check, ROOT
+from test_gates import check, ROOT, client_ready
 
 sys.path.insert(0, str(ROOT / "scripts"))
 
@@ -51,8 +51,14 @@ def test_client_search_data_stays_out_of_public_repo():
 
 def test_conflux_record_matches_verified_access():
     """2026-10-07 にサービスアカウントで確かめた: Search Console の https://conflux-partners.jp/ は siteOwner、
-    GA4 のプロパティ 557865908 は runReport が通る。シートを取り込み直して記録が戻ると、また誤って知らせる"""
-    cfg = json.loads((ROOT / "sites" / "conflux.json").read_text(encoding="utf-8"))
+    GA4 のプロパティ（ID は非公開の置き場）は runReport が通る。シートを取り込み直して記録が戻ると、また誤って知らせる"""
+    import sites as S
+    import private_store as PS
+    # 設定の戦略の部分は非公開の置き場（sites.load_all が重ねる。2026-10-10 守秘義務・h76）
+    if not PS.available("conflux"):
+        print("  WARN  非公開のデータが無いため CONFLUX の記録は確かめられません")
+        return
+    cfg = S.load("conflux")
     check("CONFLUX: Search Console のオーナー（API で確かめた事実）", cfg.get("gsc_owner"), True)
     check("CONFLUX: GA4 を当社が読める（API で確かめた事実）", (cfg.get("onboarding") or {}).get("ga4_viewer"), True)
     import intake_readiness as R
@@ -111,6 +117,9 @@ def test_failed_redelivery_reaches_the_notice():
 
 
 def test_outcome_watch_uses_each_sites_cap():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     import outcome_watch as OW
     import pace
     day = date(2026, 11, 30)
@@ -182,12 +191,15 @@ def test_weekly_findings_reach_the_notice():
         body = next((r for r in runs.values() if script in r), "")
         check(f"週次の読むだけの検査: {script} の要対応を findings.txt へ書く",
               ">> automation/logs/findings.txt" in body, True)
-    up = [s for s in rep if (s.get("with") or {}).get("name") == "reports-findings"]
-    check("週次の読むだけの検査: 要対応を optimize へ渡す（成果物）",
+    # 成果物（artifact）は public のリポジトリでは誰でも落とせるので、CI のキャッシュで渡す（2026-10-10 守秘義務・h76）
+    up = [s for s in rep if "reports-findings" in str((s.get("with") or {}).get("path", ""))
+          and "cache/save" in str(s.get("uses", ""))]
+    check("週次の読むだけの検査: 要対応を optimize へ渡す（キャッシュ）",
           bool(up) and str(up[0].get("if", "")) == "always()", True)
     names = [str(s.get("name", "")) for s in opt]
-    dl = next((i for i, s in enumerate(opt) if (s.get("with") or {}).get("name") == "reports-findings"), None)
-    cat = next((i for i, s in enumerate(opt) if "/tmp/reports-findings/findings.txt" in str(s.get("run", ""))), None)
+    dl = next((i for i, s in enumerate(opt) if "reports-findings" in str((s.get("with") or {}).get("path", ""))
+               and "cache/restore" in str(s.get("uses", ""))), None)
+    cat = next((i for i, s in enumerate(opt) if "reports-findings/findings.txt" in str(s.get("run", ""))), None)
     fi = next(i for i, s in enumerate(opt) if "scripts/findings.py" in str(s.get("run", "")))
     check("週次: 受け取った要対応を findings.py より前に通知本文へ足す",
           dl is not None and cat is not None and dl < cat < fi, True)

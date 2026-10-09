@@ -198,10 +198,12 @@ def test_client_private_stays_out_of_public_repo():
                                  "data/clients/client-zz/private/data/rank_up.json")], [True, True])
     check("お客様の翌月の目標（reports/targets-<id>.json）は public に置かない（11/1 の月次がコミットする）",
           [_ignored(p) for p in ("reports/targets-conflux.json", "reports/targets-client-zz.json")], [True, True])
-    check("自社の目標・置き場の外の記録はこれまでどおりコミットする",
+    # 目標値・レポートと、お客様の会社情報は非公開のリポジトリへ移した（2026-10-10 守秘義務・h76）
+    check("目標値とお客様の会社情報は公開側に置かない（非公開のリポジトリ）",
           [_ignored(p) for p in ("reports/targets.json", "reports/targets-corporate.json",
-                                 "reports/targets-subsidy.json", "data/clients/conflux/company.json",
-                                 "data/makeup.json", "data/findings_seen.json")], [False] * 6)
+                                 "reports/targets-subsidy.json", "data/clients/conflux/company.json")], [True] * 4)
+    check("置き場の外の記録はこれまでどおりコミットする",
+          [_ignored(p) for p in ("data/makeup.json", "data/findings_seen.json")], [False] * 2)
     check("日次KPIを送った日の記録（キャッシュで持ち越す）はコミットしない", _ignored("data/kpi_sent.json"), True)
 
 

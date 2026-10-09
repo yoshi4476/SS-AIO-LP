@@ -454,7 +454,9 @@ def inspect_changes(cfg, ch, ask=""):
         notes.append("表現の検査（legal_claims.py）がまだ無いため飛ばしました")
     # 既にサイトに載っているメール・電話（会社の窓口）は新しい個人情報に数えない
     known = set(EMAIL.findall(ask)) | set(PHONE.findall(ask))
-    for p in [ROOT / "sites" / f"{cfg['id']}.json", ROOT / "data" / "clients" / cfg["id"] / "company.json"]:
+    import private_store
+    for p in [ROOT / "sites" / f"{cfg['id']}.json", private_store.client_path(cfg["id"], "site_private.json"),
+              private_store.client_path(cfg["id"], "company.json")]:
         if p.is_file():
             t = p.read_text(encoding="utf-8", errors="replace")
             known |= set(EMAIL.findall(t)) | set(PHONE.findall(t))

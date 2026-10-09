@@ -98,7 +98,7 @@ def main():
             continue
         b = p.read_bytes()
         if size + len(b) * 4 // 3 > MAX_BYTES:
-            lines.append(f"・{r['name']}（容量の上限のため添付を省略。reports/ にあります）")
+            lines.append(f"・{r['name']}（容量の上限のため添付を省略。非公開のリポジトリの reports/ にあります）")
             continue
         size += len(b) * 4 // 3
         fn = f"{r['site']}-{r['ym']}{partial(r)}.pdf"

@@ -115,7 +115,8 @@ def reviewer_for(slug):
             names = [n for n in (sites.load_all().get(sid) or {}).get("review_by") or [] if n]
             if names:
                 return "・".join(names)
-            c = json.loads((ROOT / "data" / "clients" / sid / "company.json").read_text(encoding="utf-8"))
+            import private_store
+            c = private_store.read_json(sid, "company.json", {}) or {}
             return (c.get("supervisor") or {}).get("name") or f"{sid} の監修者"
     except (OSError, ValueError):
         pass

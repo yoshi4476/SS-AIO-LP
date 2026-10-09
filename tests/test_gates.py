@@ -38,6 +38,17 @@ def check(name, got, want):
             raise AssertionError(f"{name}: 得た {got!r} / 期待 {want!r}")
 
 
+def client_ready(sid):
+    """お客様の社の設定の戦略の部分・材料（非公開の置き場。private_store）が読めるか。読めなければ WARN を出して False。
+    その社に依る門を、非公開のデータが取れない回（鍵の権限が無い CI など）に飛ばすため（2026-10-10 守秘義務）"""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import private_store
+    if private_store.available(sid):
+        return True
+    print(f"  WARN  {sid} の非公開のデータ（private/clients/{sid}/）が無いため、この門は飛ばします")
+    return False
+
+
 _AST = {}
 
 
@@ -380,15 +391,20 @@ def test_each_site_declares_what_it_sells():
     主力が最多ではなかった（ラボはAIO 19.8%、コーポレートはBPO 40.8%、
     補助金はAI導入補助金 37.6%）。読まれても売上につながらない。
     """
-    import json
-    for f in sorted((ROOT / "sites").glob("*.json")):
-        c = json.loads(f.read_text(encoding="utf-8"))
-        check(f"{f.stem} に主力がある", bool(c.get("main_offer")), True)
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S
+    import private_store as PS
+    # お客様の社の主力・配分は非公開の置き場の戦略の部分（sites.load_all が重ねる。2026-10-10 守秘義務）
+    for sid, c in S.load_all().items():
+        if S.is_client(sid) and not PS.available(sid):
+            print(f"  WARN  {sid}: 非公開のデータが無いため主力・配分は確かめられません")
+            continue
+        check(f"{sid} に主力がある", bool(c.get("main_offer")), True)
         mix = c.get("category_mix") or c.get("scheme_mix") or {}
         real = {k: v for k, v in mix.items() if not k.startswith("_")}
-        check(f"{f.stem} に狙う配分がある", bool(real), True)
+        check(f"{sid} に狙う配分がある", bool(real), True)
         if real:
-            check(f"{f.stem} の配分が100%", sum(real.values()), 100)
+            check(f"{sid} の配分が100%", sum(real.values()), 100)
     brief = (ROOT / "scripts" / "site_brief.py").read_text(encoding="utf-8")
     check("執筆前に主力を見せている", "このサイトで売るもの" in brief, True)
 
@@ -3746,6 +3762,18 @@ def history_tests():
     for p in sorted((ROOT / "tests").glob("gates_history_*.py")):
         m = importlib.import_module(p.stem)
         out += [getattr(m, n) for n in dir(m) if n.startswith("test_") and callable(getattr(m, n))]
+    # お客様の社の設定・狙う語に依る門は、非公開のリポジトリの tests/ に置く（public に預かった語を書かない。2026-10-10）。
+    # 非公開のデータが取れない回は飛ばす（自社3サイトの門はこれまでどおり回る）
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import private_store
+    priv = private_store.base() / "tests"
+    if priv.is_dir():
+        sys.path.insert(0, str(priv))
+        for p in sorted(priv.glob("gates_client_*.py")):
+            m = importlib.import_module(p.stem)
+            out += [getattr(m, n) for n in dir(m) if n.startswith("test_") and callable(getattr(m, n))]
+    else:
+        print("  WARN  非公開のデータ（private/）が無いため、お客様の社の門（private/tests/gates_client_*.py）は飛ばします")
     return out
 
 

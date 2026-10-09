@@ -34,7 +34,8 @@ from client_add import TYPES, NEW_TYPES, RETIRED  # noqa: E402  形式の定義�
 # キーの先頭が "#" の行は見出しだけを置く区切り。
 # 必須は True（どの方式でも）か、方式の印（"wordpress" / "git" / "ftp" / "new"。カンマで複数）。
 # 印の付いた欄は、2章で選んだ形式がその方式のときだけ必須になる（review が見る・シートのC列に出る）。
-# どの欄も、どこかの設定（sites/<id>.json・data/clients/<id>/ の各ファイル）か準備状況（intake_readiness）へ流れる。
+# どの欄も、どこかの設定（sites/<id>.json と非公開の置き場 private/clients/<id>/ の各ファイル）か準備状況（intake_readiness）へ流れる。
+# 公開側（public のリポジトリ）に書くのは sites/<id>.json の公開してよい項目（sites.PUBLIC_KEYS）だけ（apply・private_store）。
 # 流れ先の一覧は docs/intake-requirements.md。流れ先の無い欄は作らない
 FIELDS = [
     ("#basic", "1. 会社・担当・連絡先", "記事の著者情報・構造化データ・レポートの宛名に使います。"
@@ -157,7 +158,7 @@ FIELDS = [
      "改行区切り。メニュー・プラン・サービス名を具体的に",
      "記帳代行\n月次決算の代行\n給与計算\n請求書発行の代行", True),
     ("service.price", "価格帯", "記事に載せてよい範囲で。「応相談」でも構いません",
-     "月額3万円〜（仕訳数と業務範囲による）", False),
+     "月額◯万円〜（仕訳数と業務範囲による）", False),
     ("service.price_policy", "価格の載せ方", "載せてよい / 目安だけ / 載せない", "目安だけ", False),
     ("service.area", "提供エリア", "地域名を書くと、地域名を含む検索で拾えます",
      "大阪府全域・兵庫県南部（オンラインは全国）", False),
@@ -609,10 +610,10 @@ INDUSTRY = {
 
 # 欄ごとの流れ先（docs/intake-requirements.md に出す）。キーそのもの、または「接頭辞.」で引く（長い方が先）。
 # 欄を足したらここにも足す（門 gates_history_h38 が、流れ先の無い欄と、抜いても出力が変わらない欄を止める）
-_BRIEF = "data/clients/<id>/brief.json → 執筆の案内（site_brief）"
-_OB = "sites/<id>.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）"
+_BRIEF = "非公開の clients/<id>/brief.json → 執筆の案内（site_brief）"
+_OB = "非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）"
 FLOW = {
-    "company.": "data/clients/<id>/company.json → 発行元・著者の構造化データ・月次レポートの宛名・表記ゆれの検査（nap_check）",
+    "company.": "非公開の clients/<id>/company.json → 発行元・著者の構造化データ・月次レポートの宛名・表記ゆれの検査（nap_check）",
     "contact.": "private.json（公開しない）→ 導入の手続きの連絡先",
     "id": "sites/<id>.json のファイル名 → 全工程のサイトID",
     "name": "sites/<id>.json → 記事一覧・レポート・通知の表示名",
@@ -625,7 +626,7 @@ FLOW = {
     "wp.plugin": _OB + "（品質ゲート）",
     "wp.admin_key": _OB + "（サイト改修）",
     "wp.ftp": _OB + "（品質ゲート・表示速度の直し）",
-    "wp_api": "sites/<id>.json → WordPress の REST の入口（publish.py）",
+    "wp_api": "非公開の site_private.json → WordPress の REST の入口（publish.py）",
     "repo": "sites/<id>.json → 配信先（publish.py・site_change.py）",
     "branch": "sites/<id>.json → 配信先のブランチ（publish.py）",
     "content_dir": "sites/<id>.json → 記事の置き場所（publish.py）",
@@ -635,61 +636,61 @@ FLOW = {
     "ftp.": "private.json → 鍵の登録の雛形（--creds の FTP_CREDENTIALS_JSON）・準備状況",
     "dns.provider": "private.json → 準備状況（新規構築）",
     "dns.access": _OB + "（新規構築）",
-    "ga4_property_id": "sites/<id>.json → GA4 の数字（daily_kpi・月次レポート・lead_reconcile ほか）",
+    "ga4_property_id": "非公開の site_private.json → GA4 の数字（daily_kpi・月次レポート・lead_reconcile ほか）",
     "ga4.": _OB + "（計測）",
-    "ga4_measurement_id": "sites/<id>.json → WordPress のプラグイン・FTP の記事の雛形が計測タグを置く",
+    "ga4_measurement_id": "非公開の site_private.json → WordPress のプラグイン・FTP の記事の雛形が計測タグを置く",
     "gsc.property": _OB + "（Search Console のプロパティの形）",
-    "gsc_owner": "sites/<id>.json → Indexing API で送るか（notify_indexing）・接続の点検（search_connect）",
-    "bing_consent": "sites/<id>.json → 当社の Bing への登録と確認ファイル（bing_webmaster・search_connect）",
-    "main_offer": "sites/<id>.json → 執筆の案内（記事の着地点）・月次レポート",
-    "main_category": "sites/<id>.json → カテゴリの配分の主力（site_brief）",
+    "gsc_owner": "非公開の site_private.json → Indexing API で送るか（notify_indexing）・接続の点検（search_connect）",
+    "bing_consent": "非公開の site_private.json → 当社の Bing への登録と確認ファイル（bing_webmaster・search_connect）",
+    "main_offer": "非公開の site_private.json → 執筆の案内（記事の着地点）・月次レポート",
+    "main_category": "非公開の site_private.json → カテゴリの配分の主力（site_brief）",
     "categories": "sites/<id>.json → 記事のカテゴリ（publish.py が定義外を止める）",
-    "category_mix": "sites/<id>.json → カテゴリの配分（site_brief が不足を出す）",
+    "category_mix": "非公開の site_private.json → カテゴリの配分（site_brief が不足を出す）",
     "service.": _BRIEF + "（売っているもの・記事の結論）",
     "customer.": _BRIEF + "（読者の困りごと・FAQ・失注の理由）",
-    "theme": "sites/<id>.json → 執筆の案内・KWの選定（kw_plan）",
-    "audience": "sites/<id>.json → 執筆の案内（読者像）",
-    "owns": "sites/<id>.json → 守備範囲（kw_guard・kw_discover・kw_plan）",
-    "avoid": "sites/<id>.json → 書いてはいけない領域（site_brief・kw_guard）",
+    "theme": "非公開の site_private.json → 執筆の案内・KWの選定（kw_plan）",
+    "audience": "非公開の site_private.json → 執筆の案内（読者像）",
+    "owns": "非公開の site_private.json → 守備範囲（kw_guard・kw_discover・kw_plan）",
+    "avoid": "非公開の site_private.json → 書いてはいけない領域（site_brief・kw_guard）",
     "target.": _BRIEF + "（ターゲット）",
-    "compete.sites": "sites/<id>.json の compete.rivals（毎月の競合比較に必ず入れる: compete.py）・" + _BRIEF,
+    "compete.sites": "非公開の site_private.json の compete.rivals（毎月の競合比較に必ず入れる: compete.py）・" + _BRIEF,
     "compete.diff": _BRIEF + "（競合との差）",
-    "cta.": "sites/<id>.json の cta → 記事のボタン（publish.py）",
-    "cta_title": "sites/<id>.json → 記事下の導線の見出し（publish.py）",
-    "cta_desc": "sites/<id>.json → 記事下の導線の説明（publish.py）",
-    "cta_mid.": "sites/<id>.json の cta_mid → 記事の中ほどの軽い入口（publish.mid_cta_block）",
+    "cta.": "非公開の site_private.json の cta → 記事のボタン（publish.py）",
+    "cta_title": "非公開の site_private.json → 記事下の導線の見出し（publish.py）",
+    "cta_desc": "非公開の site_private.json → 記事下の導線の説明（publish.py）",
+    "cta_mid.": "非公開の site_private.json の cta_mid → 記事の中ほどの軽い入口（publish.mid_cta_block）",
     "kw.": _BRIEF + "・主題の候補（subjects）",
-    "kw.regions": "sites/<id>.json の kw_seeds.regions（同じ語を持つ他社との地域の判断: sites.region_of）・" + _BRIEF,
-    "kw_seeds.industries": "sites/<id>.json の kw_seeds → KWの計画（kw_plan・kw_discover・ai_kw_research）",
-    "kw_seeds.intents": "sites/<id>.json の kw_seeds → KWの計画（kw_plan・kw_discover）",
-    "kw_seeds.priority": "sites/<id>.json の kw_seeds.priority → KWの計画の枠と加点（kw_plan）",
-    "season.peaks": "sites/<id>.json の season.peaks → 季節の前出し（season.py。1年分の検索データがそろうまで）",
-    "facts.": "data/clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない）",
+    "kw.regions": "非公開の site_private.json の kw_seeds.regions（同じ語を持つ他社との地域の判断: sites.region_of）・" + _BRIEF,
+    "kw_seeds.industries": "非公開の site_private.json の kw_seeds → KWの計画（kw_plan・kw_discover・ai_kw_research）",
+    "kw_seeds.intents": "非公開の site_private.json の kw_seeds → KWの計画（kw_plan・kw_discover）",
+    "kw_seeds.priority": "非公開の site_private.json の kw_seeds.priority → KWの計画の枠と加点（kw_plan）",
+    "season.peaks": "非公開の site_private.json の season.peaks → 季節の前出し（season.py。1年分の検索データがそろうまで）",
+    "facts.": "非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない）",
     "case.": "brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内",
     "voice.": "brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内",
     "author.": "brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内",
     "supervisor.": "company.json の supervisor → 記事の監修の表示と reviewedBy（publish.py）・brief.json",
     "supervisor.contact": "private.json（公開しない）→ 監修の確認依頼（editorial_review）・準備状況",
     "tone.": _BRIEF + "（書き方のきまり）",
-    "tone.regulation": "sites/<id>.json の rules.regulation・brief.json → 執筆の案内・公開前の確認の勧め（review）",
-    "ng_words": "sites/<id>.json の rules.ng_words → 含む記事の公開を止める（publish.py）・口コミの返信案（review_reply）",
+    "tone.regulation": "非公開の site_private.json の rules.regulation・brief.json → 執筆の案内・公開前の確認の勧め（review）",
+    "ng_words": "非公開の site_private.json の rules.ng_words → 含む記事の公開を止める（publish.py）・口コミの返信案（review_reply）",
     "asset.": _BRIEF + "（既存のページ・過去の施策）",
     "asset.photos": _BRIEF + "・" + _OB,
-    "channels.": "sites/<id>.json の channels → 動画・SNS の投稿先（youtube_upload・post_social）・準備状況",
+    "channels.": "非公開の site_private.json の channels → 動画・SNS の投稿先（youtube_upload・post_social）・準備状況",
     "channels.contact": "private.json（公開しない）→ 許可の手続きの連絡先",
-    "channels.tags": "sites/<id>.json の x_tags → SNS の投稿のタグ（social_post・post_social）",
+    "channels.tags": "非公開の site_private.json の x_tags → SNS の投稿のタグ（social_post・post_social）",
     "gbp.status": _OB + "（Googleビジネスプロフィール）",
     "gbp.invite": _OB + "（Googleビジネスプロフィール）",
-    "gbp.description": "sites/<id>.json の gbp.description → 地図の説明文（gbp.py --sync）",
+    "gbp.description": "非公開の site_private.json の gbp.description → 地図の説明文（gbp.py --sync）",
     "renovate.want": _OB + "（サイト改修）",
-    "renovate_auto": "sites/<id>.json の renovate_auto → 確認なしで反映してよい直し（site_renovate.auto_ok）",
-    "renovate.protect": "sites/<id>.json の renovate_protect → 改修の検査で止める（site_renovate）",
+    "renovate_auto": "非公開の site_private.json の renovate_auto → 確認なしで反映してよい直し（site_renovate.auto_ok）",
+    "renovate.protect": "非公開の site_private.json の renovate_protect → 改修の検査で止める（site_renovate）",
     "renovate.wish": "private.json → 導入後の改修の提案の控え",
     "report_to": "private.json（公開しない）→ レポートの送付先・準備状況",
-    "report_issuer": "sites/<id>.json → 月次レポートの名義（monthly_report.issuer）",
-    "review_before_publish": "sites/<id>.json の rules → 確認の記録が付くまで配信しない（publish.py）",
-    "monthly_cap": "sites/<id>.json の rules.monthly_cap → 月の上限（daily_audit）",
-    "languages": "sites/<id>.json → 多言語の要約ページ（i18n.py・publish.py）",
+    "report_issuer": "非公開の site_private.json → 月次レポートの名義（monthly_report.issuer）",
+    "review_before_publish": "非公開の site_private.json の rules → 確認の記録が付くまで配信しない（publish.py）",
+    "monthly_cap": "非公開の site_private.json の rules.monthly_cap → 月の上限（daily_audit）",
+    "languages": "非公開の site_private.json → 多言語の要約ページ（i18n.py・publish.py）",
     "note": "private.json（公開しない）→ 社内の申し送り",
     "link.": "brief.json の backlink → 執筆の案内（記事で触れると自然にリンクが生まれる相手）",
     "shop.": "brief.json の industry_detail → 執筆の案内（業種の詳細）",
@@ -920,7 +921,6 @@ def to_config(got):
         "branch": got.get("branch", "main"),
         "type": got.get("type", "external-html"),
         "ga4_property_id": got.get("ga4_property_id", ""),
-        "kw_plan": f"docs/kw-{got.get('id', 'client')}.md",
         "theme": got.get("theme", ""),
         "audience": got.get("audience", ""),
         "owns": lines(got.get("owns")),
@@ -1052,7 +1052,7 @@ def rival_domains(v, own=""):
 
 def to_private(got):
     """公開リポジトリに置けないもの（担当者のメール・社内の申し送り・接続先のホスト名）。
-    data/clients/<id>/private.json に書き、.gitignore で外す。パスワード類はシートで聞かない"""
+    非公開の置き場の clients/<id>/private.json に書く（private_store）。パスワード類はシートで聞かない"""
     out = {}
     if got.get("report_to"):
         out["report_to"] = [x.strip() for x in got["report_to"].replace("、", ",").split(",")
@@ -1134,8 +1134,8 @@ def subjects(got, limit=60):
         kw = re.sub(r"[ 　]+", " ", kw).strip()
         if not kw or kw in seen:
             return
-        # 狙わない語の言葉が全部入っていたら捨てる。1語ずつ見ていたため、CONFLUX の「AI 導入補助金」の
-        # 「AI」で、シートに書いた AI の語（AI エージェント 導入 など）が主題の候補から全部消えていた（2026-10-08）
+        # 狙わない語の言葉が全部入っていたら捨てる。1語ずつ見ていたため、お客様の狙わない語の1語（「AI」など）で、
+        # シートに書いた同じ語を含む語が主題の候補から全部消えていた（2026-10-08）
         low = kw.lower()
         for ng in exclude:
             ws = [w for w in re.split(r"[ 　]+", ng.lower()) if w]
@@ -1377,7 +1377,7 @@ def review(got, cfg):
             warn.append(f"主力カテゴリの配分が{main}%です。"
                         "40〜50%を下回ると、表示は増えても相談につながりにくくなります")
 
-    # 既存サイトとの衝突。記事がどちらのものか決まらなくなる
+    # 既存サイトとの衝突。記事がどちらのものか決まらなくなる（id・ドメイン・カテゴリは公開側の項目だけで見られる）
     for p in SITES.glob("*.json"):
         other = json.loads(p.read_text(encoding="utf-8-sig"))
         if other.get("id") == cfg.get("id"):
@@ -1463,47 +1463,34 @@ def show(cfg, got, ng, warn):
 # 反映する
 # ============================================================
 def apply(got, cfg, industry=""):
+    """登録する。**お客様から預かった内容は非公開の置き場（private_store。private/clients/<id>/）にだけ書く**。
+    公開側（このリポジトリは public）に書くのは sites/<id>.json の公開してよい項目（sites.PUBLIC_KEYS）だけ。
+    以前は会社情報・記事の材料・一次情報・キーワード計画・サイト設定の戦略の部分を公開側に書いていた（2026-10-10 まで）"""
+    import private_store as PS
     site_id = cfg["id"]
-    made = []
-
-    out = SITES / f"{site_id}.json"
-    out.write_text(json.dumps(cfg, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    made.append(out)
+    # 自社構築（self-static）の社も、お客様の社として扱う（運用会社の自社サイトはこの入口では作らない）
+    made = PS.write_site(cfg, SITES, root=ROOT)
 
     # 会社情報と一次情報はクライアントごとに分ける。1つのファイルに混ぜると
     # 別のクライアントの実績を引いてしまう事故が起きる
-    cdir = ROOT / "data" / "clients" / site_id
-    cdir.mkdir(parents=True, exist_ok=True)
     comp = to_company(got)
     if comp:
-        p = cdir / "company.json"
-        p.write_text(json.dumps(comp, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        made.append(p)
+        made.append(PS.write_json(site_id, "company.json", comp, root=ROOT))
     priv = to_private(got)
     if priv:
-        p = cdir / "private.json"          # .gitignore 済み（public リポジトリに出さない）
-        p.write_text(json.dumps(priv, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        made.append(p)
-    brief = to_brief(got, industry)
-    bp = cdir / "brief.json"
-    bp.write_text(json.dumps(brief, ensure_ascii=False, indent=2) + chr(10),
-                  encoding="utf-8")
-    made.append(bp)
+        made.append(PS.write_json(site_id, "private.json", priv, root=ROOT))
+    made.append(PS.write_json(site_id, "brief.json", to_brief(got, industry), root=ROOT))
 
     facts = to_facts(got, site_id)
     if facts:
-        p = cdir / "facts.json"
-        p.write_text(json.dumps(
-            {"_readme": "この会社にしか出せない一次情報。記事はここから最低1つ引く。"
-                        "確認できない数値は載せない（載せた瞬間に信頼を失う）。",
-             "facts": facts}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        made.append(p)
+        made.append(PS.write_json(site_id, "facts.json", {
+            "_readme": "この会社にしか出せない一次情報。記事はここから最低1つ引く。"
+                       "確認できない数値は載せない（載せた瞬間に信頼を失う）。",
+            "facts": facts}, root=ROOT))
 
-    plan = ROOT / cfg["kw_plan"]
-    if not plan.exists():
-        plan.parent.mkdir(parents=True, exist_ok=True)
+    if not PS.client_path(site_id, "kw.md", root=ROOT).is_file():
         seeds = cfg.get("kw_seeds", {})
-        plan.write_text(
+        made.append(PS.write_text(site_id, "kw.md",
             f"# {cfg['name']} KW計画\n\n"
             f"- 主力商材: {cfg.get('main_offer', '')}\n"
             f"- 対象読者: {cfg.get('audience', '')}\n"
@@ -1511,9 +1498,14 @@ def apply(got, cfg, industry=""):
             f"- 扱わない: {' / '.join(cfg.get('avoid', [])) or '（未設定）'}\n\n"
             f"## 起点\n業種{len(seeds.get('industries', []))}件 × "
             f"意図{len(seeds.get('intents', []))}件\n\n"
-            "（kw_discover.py が自動で補充します）\n", encoding="utf-8")
-        made.append(plan)
+            "（kw_discover.py が自動で補充します）\n", root=ROOT))
     return made
+
+
+def save_private(site_id):
+    """登録した内容を非公開のリポジトリへ commit・push する（公開側の commit とは別）。届かなければ False"""
+    import private_store as PS
+    return PS.push(f"導入: {site_id} の会社情報・記事の材料・一次情報・キーワード計画・サイト設定の戦略の部分")
 
 
 def main():
@@ -1562,13 +1554,21 @@ def main():
         print("\n  確認のみ（--apply を付けると登録します）")
         return 0
 
+    # 登録した内容は非公開のリポジトリにだけ置く。手元に private/ が無ければ登録しない（公開側に落とさない）
+    import private_store as PS
+    if not (PS.base() / ".git").is_dir():
+        print(f"\n  非公開のリポジトリ（{PS.REPO}）が手元の private/ にありません。登録しません。"
+              "\n  先に取得してください: python scripts/private_store.py --fetch")
+        return 1
     # ファイル名から業種を拾う。シート名を変えられても動くよう、中身でも見る
     ind2 = ind or next((k for k, (lab, _) in INDUSTRY.items()
                         if lab in src.name), "")
     made = apply(got, cfg, ind2)
-    print("\n  作成したファイル")
+    print("\n  作成したファイル（公開側は sites/ の1つだけ。ほかは非公開のリポジトリ）")
     for p in made:
         print(f"    {p.relative_to(ROOT).as_posix()}")
+    if not save_private(cfg["id"]):
+        print("  ! 非公開のリポジトリへ push できませんでした（private/ で git push してください）")
     print("\n  次にやること")
     print(f"    1. python scripts/kw_discover.py --site {cfg['id']} --append   … KWを補充する")
     print(f"    2. 別経路で受け取った鍵を登録する（形は python scripts/client_intake.py --creds {cfg['id']}）")
@@ -1587,8 +1587,8 @@ def main():
 
 def print_creds(site_id):
     """別経路で受け取った鍵を登録するときの形（パスワードの欄は空）。private.json の接続先から作る"""
-    p = ROOT / "data" / "clients" / site_id / "private.json"
-    priv = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
+    import private_store as PS
+    priv = PS.read_json(site_id, "private.json", {}, root=ROOT) or {}
     t = creds_template(site_id, priv)
     if not t:
         print(f"{site_id}: 登録の形を作れる接続先（FTP のホスト・WordPress のユーザー名）がシートにありません")

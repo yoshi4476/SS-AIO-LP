@@ -19,7 +19,7 @@ import inspect
 import re
 import sys
 
-from test_gates import check, ROOT
+from test_gates import check, ROOT, client_ready
 
 sys.path.insert(0, str(ROOT / "scripts"))
 SLUG = "business-system-development-cost"
@@ -38,6 +38,9 @@ def _receiver_reads(fm):
 
 
 def test_conflux_may_name_the_operator_only_where_allowed():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     print("\n■ CONFLUX の記事は当社名（セブンセンシズ株式会社）を出してよい。ほかの社と、ほかの当社の表記は今までどおり止める")
     import aggregate_pages as AP
     import sites as S
@@ -58,6 +61,9 @@ def test_conflux_may_name_the_operator_only_where_allowed():
 
 
 def test_held_conflux_article_reaches_delivery_once_approved():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     print("\n■ 監修待ちの CONFLUX の記事は、承認の記録が付けば当社名の検査で止まらず、配信（作業コピーの取得）まで進む")
     import editorial_review as ER
     import publish as P
@@ -88,6 +94,9 @@ def test_held_conflux_article_reaches_delivery_once_approved():
 
 
 def test_journal_front_matter_and_parts_match_the_receiver():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     print("\n■ CONFLUX へ渡す形: 更新日 modified・狙う語 keyword・定義の札・本文に計測のスクリプトを入れない")
     import publish as P
     import sites as S
@@ -125,6 +134,9 @@ def test_journal_front_matter_and_parts_match_the_receiver():
 
 
 def test_conflux_review_record_names_both_supervisors():
+    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
+    if not client_ready("conflux"):
+        return
     print("\n■ 監修の記録の名義: CONFLUX の自動化の記事は、先方の表示と同じ「YW（CONFLUX PARTNERS）・セブンセンシズ株式会社」")
     import editorial_review as ER
     import sites as S

@@ -45,7 +45,8 @@ def is_client(site_id):
     """受託運用のクライアントか（data/clients/<id>/ がある）。
     クライアントの実数は、その会社の数字。運用会社名義の一次データとして公開すると、
     他社の計測を自社の実績として出すことになる"""
-    return (ROOT / "data" / "clients" / str(site_id)).is_dir()
+    import sites as S
+    return S.is_client(str(site_id))
 
 
 def own_sites():

@@ -79,11 +79,9 @@ def site_cfg():
 
 def addressee():
     """表紙の宛名。お客様のレポートは company.json の正規表記で「御中」を付ける（自社サイトは空）"""
-    p = ROOT / "data" / "clients" / SITE_ID / "company.json"
-    try:
-        name = json.loads(p.read_text(encoding="utf-8")).get("name", "") if p.is_file() else ""
-    except (OSError, ValueError):
-        name = ""
+    import private_store
+    name = (private_store.read_json(SITE_ID, "company.json", {}) or {}).get("name", "") \
+        if _sites_mod.is_client(SITE_ID) else ""
     return f"<b>{html.escape(name)} 御中</b><br>" if name else ""
 
 
@@ -95,10 +93,8 @@ def issuer():
     """
     cfg = site_cfg()
     if _sites_mod.is_client(SITE_ID) and cfg.get("report_issuer") == "client":
-        try:
-            c = json.loads((_sites_mod.ROOT / "data" / "clients" / SITE_ID / "company.json").read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            c = {}
+        import private_store
+        c = private_store.read_json(SITE_ID, "company.json", {}) or {}
         return {"operator": False, "name": c.get("name") or cfg["name"],
                 "address": c.get("address") or "", "tel": c.get("tel") or "",
                 "urls": f"https://{cfg['domain']}"}
@@ -1378,8 +1374,8 @@ def analyze(d):
     import json as _json
     prev_targets, achievement = {}, []
     import sites as _sm
-    tf = ROOT / "reports" / ("targets.json" if SITE_ID == _sm.primary()
-                            else f"targets-{SITE_ID}.json")
+    import private_store as _ps      # レポートと目標値は非公開のリポジトリ（public に数字を置かない。2026-10-10）
+    tf = _ps.report_path("targets.json" if SITE_ID == _sm.primary() else f"targets-{SITE_ID}.json")
     if tf.exists():
         try:
             prev_targets = _json.loads(tf.read_text(encoding="utf-8")).get(cur["label"], {})
@@ -3485,8 +3481,8 @@ def _main():
     ym = d["months"][-1]["label"]
     # サイトごとに分ける。同じ場所へ書くと最後に走ったサイトだけが残る。
     import sites as _sm2
-    out_dir = ROOT / "reports" / (ym if SITE_ID == _sm2.primary()
-                                  else f"{ym}-{SITE_ID}")
+    import private_store as _ps2     # 非公開のリポジトリの reports/（取れない回は手元の reports/。public では追跡しない）
+    out_dir = _ps2.reports_dir() / (ym if SITE_ID == _sm2.primary() else f"{ym}-{SITE_ID}")
     out_dir.mkdir(parents=True, exist_ok=True)
     html_path = out_dir / "report.html"
     pdf_path = out_dir / "report.pdf"
@@ -3500,8 +3496,8 @@ def _main():
         y, mo = map(int, ym.split("-"))
         next_ym = f"{y + (mo == 12)}-{(mo % 12) + 1:02d}"
         import sites as _sm3
-        tf = ROOT / "reports" / ("targets.json" if SITE_ID == _sm3.primary()
-                                else f"targets-{SITE_ID}.json")
+        tf = _ps2.report_path("targets.json" if SITE_ID == _sm3.primary() else f"targets-{SITE_ID}.json")
+        tf.parent.mkdir(parents=True, exist_ok=True)
         store = {}
         if tf.exists():
             try:

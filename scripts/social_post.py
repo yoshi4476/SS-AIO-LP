@@ -129,12 +129,9 @@ def compose(a):
     note += [f"■ {p}" for p in a["leads"][1:6]]
     # お客様の記事は、お客様の社名で出す（当社の名前で転載するとお客様の記事が当社のものに見える）
     owner = "セブンセンシズ株式会社"
-    comp = ROOT / "data" / "clients" / sid / "company.json"
-    if sid and comp.parent.is_dir():
-        try:
-            owner = json.loads(comp.read_text(encoding="utf-8")).get("name") or cfg.get("name", "")
-        except (OSError, ValueError):
-            owner = cfg.get("name", "")
+    import private_store
+    if sid and private_store.is_client(sid):
+        owner = (private_store.read_json(sid, "company.json", {}) or {}).get("name") or cfg.get("name", "")
     note += ["", "続きと根拠（数字の出典・表・FAQ）は元記事にまとめています。",
              f"元記事: {url}", f"執筆: {cfg.get('name', '')}（{owner}）"]
     out["note"] = "\n".join(note)

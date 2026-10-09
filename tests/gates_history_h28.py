@@ -25,7 +25,8 @@ STATUSES = ("ok", "partial", "missing", "n/a")
 # mu-plugin で）ので、新しく missing を作ったら落とす。partial も無くなったら ("missing", "partial") にする
 FAIL_ON = ("missing",)
 # build.py・publish.py が読み込むが、機能ではなく道具立てのもの（表に載せない）
-PLUMBING = {"md2html": "Markdown→HTML の変換", "sites": "サイト設定の読み込み"}
+PLUMBING = {"md2html": "Markdown→HTML の変換", "sites": "サイト設定の読み込み",
+            "private_store": "非公開のデータ（お客様の情報・料金・レポート）の読み書き"}
 # 配信方式の値を持つ変数名（他の辞書の "type" と取り違えない）
 CFG_NAMES = {"cfg", "c", "_cfg", "conf"}
 

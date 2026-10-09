@@ -13,7 +13,7 @@
   python scripts/growth_plan.py --check         # 先月の実績を道筋と比べる（月次CIが呼ぶ）
   python scripts/growth_plan.py                 # 台帳を見る
 出す印: GROWTH_OK=yes/no/unknown。遅れは「要対応:」で始める（findings に載る）
-台帳: reports/growth_plan.json / 説明: docs/growth-plan.md
+台帳: 非公開のリポジトリの reports/growth_plan.json / 説明: 同じく reports/growth-plan.md（private_store。public に数字を置かない）
 """
 import argparse
 import json
@@ -23,8 +23,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-PLAN = ROOT / "reports" / "growth_plan.json"
-DOC = ROOT / "docs" / "growth-plan.md"
+sys.path.insert(0, str(ROOT / "scripts"))
+import private_store  # noqa: E402  計画と実績は非公開のリポジトリ（public に数字を置かない。2026-10-10）
+PLAN = private_store.report_path("growth_plan.json")
+DOC = private_store.report_path("growth-plan.md")      # 道筋と実績の数字（問い合わせ数を含む）も非公開
 METRICS = (("sessions", "セッション"), ("clicks", "検索クリック"), ("cv", "リード"), ("ai", "AI経由参照"))
 MULT, MONTHS = 3.0, 6
 LATE = 0.8            # 道筋の8割を割ったら遅れ
@@ -164,7 +166,7 @@ def main():
         return 0
 
     write_doc(plan, plan.get("checks", {}))
-    print(f"起点 {plan['baseline_month']} → {plan['target_month']} に{plan['multiple']:.0f}倍。詳細: docs/growth-plan.md")
+    print(f"起点 {plan['baseline_month']} → {plan['target_month']} に{plan['multiple']:.0f}倍。詳細: 非公開のリポジトリの reports/growth-plan.md")
     print("GROWTH_OK=yes")
     return 0
 

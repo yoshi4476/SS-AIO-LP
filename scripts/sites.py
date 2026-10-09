@@ -14,11 +14,36 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITES_DIR = ROOT / "sites"
 
+# お客様の社の sites/<id>.json（public）に置いてよい項目。社の id・ドメイン・納品方式と、配信の置き場・カテゴリ（記事の
+# 持ち主を決める）・1日の本数（枠の割り当て）・IndexNow の鍵（先方のサイトの直下で公開されるもの）だけ。
+# 狙う業種・禁止語・配分・優先・読者・売り物・監修・計測の ID などの戦略の部分は、非公開のリポジトリの
+# clients/<id>/site_private.json に置き、load_all が重ねて読む（private_store。門 gates_history_h76 が守る）
+PUBLIC_KEYS = ("id", "name", "domain", "type", "client", "repo", "branch", "url_prefix", "trailing_slash",
+               "content_dir", "images_dir", "pages_dir", "categories", "daily_articles", "indexnow_key")
+
+
+def split_public(cfg):
+    """サイト設定を (公開してよい項目, 非公開の項目) に分ける"""
+    pub = {k: v for k, v in cfg.items() if k in PUBLIC_KEYS}
+    priv = {k: v for k, v in cfg.items() if k not in PUBLIC_KEYS and k != "_path"}
+    return pub, priv
+
+
+def _raw(site_id):
+    try:
+        return json.loads((SITES_DIR / f"{site_id}.json").read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError):
+        return {}
+
 
 def load_all():
     out = {}
     for p in sorted(SITES_DIR.glob("*.json")):
         cfg = json.loads(p.read_text(encoding="utf-8-sig"))
+        if cfg.get("client"):
+            # お客様の社は、非公開の置き場の戦略の部分を重ねる（公開側の項目が優先。取れなければ公開側の項目だけ）
+            import private_store
+            cfg = {**private_store.site_private(cfg["id"]), **cfg}
         cfg["_path"] = p.as_posix()
         out[cfg["id"]] = cfg
     return out
@@ -41,12 +66,14 @@ def own_ids():
     """運用会社が自分で運営しているサイトのID（受託のクライアントは data/clients/<id>/ がある）。
     ('ai-lab', 'corporate', 'subsidy') と直書きすると、移植先では存在しないサイトを回して
     毎朝0のまま空振りした（2026-08-24）。クライアントを混ぜると自社の数字が他社の記事に出る"""
-    return [sid for sid in load_all() if not (ROOT / "data" / "clients" / sid).is_dir()]
+    return [sid for sid in load_all() if not is_client(sid)]
 
 
 def is_client(site_id):
-    """受託のクライアントか（data/clients/<id>/ がある）"""
-    return bool(site_id) and (ROOT / "data" / "clients" / site_id).is_dir()
+    """受託のクライアントか。sites/<id>.json の "client": true（公開側に残す印）か、data/clients/<id>/ がある社。
+    材料を非公開のリポジトリへ移した後は data/clients/<id>/ が CI に無いので、印で決める（無いと自社と判定され、
+    お客様の順位・語が public に書かれる）"""
+    return bool(site_id) and (bool(_raw(site_id).get("client")) or (ROOT / "data" / "clients" / site_id).is_dir())
 
 
 def group_of(site_id):
@@ -72,12 +99,14 @@ def region_of(site_id):
     regs = [r for r in (cfg.get("kw_seeds") or {}).get("regions") or [] if r]
     if regs:
         return "・".join(regs)
-    p = (ROOT / "data" / "clients" / site_id / "company.json" if is_client(site_id)
-         else ROOT / "data" / "company_profile.json")
-    try:
-        addr = json.loads(p.read_text(encoding="utf-8-sig")).get("address") or ""
-    except (OSError, ValueError):
-        return ""
+    if is_client(site_id):
+        import private_store
+        addr = (private_store.read_json(site_id, "company.json", {}) or {}).get("address") or ""
+    else:
+        try:
+            addr = json.loads((ROOT / "data" / "company_profile.json").read_text(encoding="utf-8-sig")).get("address") or ""
+        except (OSError, ValueError):
+            return ""
     m = PREF.search(addr)
     return m.group(1) if m else ""
 
@@ -158,7 +187,8 @@ def find_category_owner(slug):
 def summary():
     lines = []
     for cid, c in load_all().items():
-        lines.append(f"{cid:10s} {c['domain']:22s} {c['type']:14s} {c['theme']}")
+        theme = "（お客様）" if is_client(cid) else c.get("theme", "")     # お客様のテーマは CI のログに出さない
+        lines.append(f"{cid:10s} {c['domain']:22s} {c['type']:14s} {theme}")
     return "\n".join(lines)
 
 

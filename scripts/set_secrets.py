@@ -54,6 +54,9 @@ TO_GITHUB = {
     "FTP_CREDENTIALS_JSON", "WP_CREDENTIALS_JSON",
     # AI診断のロボットよけ（Cloudflare Turnstile）。deploy.yml が Cloudflare Pages に入れる
     "TURNSTILE_SITEKEY", "TURNSTILE_SECRET",
+    # 非公開のデータ（yoshi4476/ss-aio-private）を CI で読み書きする鍵。無ければ SITE_PUSH_TOKEN で読む
+    # （.github/actions/private-data。2026-10-10 守秘義務）
+    "PRIVATE_DATA_TOKEN",
 }
 
 TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply` を実行します。
@@ -67,9 +70,14 @@ TEMPLATE = """# ここに値を書いて `python scripts/set_secrets.py --apply`
 #     yoshi4476/SS-CorporateHP
 #     yoshi4476/seven-HPunyou
 #     yoshi4476/SS-AIO-LP
+#     yoshi4476/ss-aio-private（非公開のデータ。下の PRIVATE_DATA_TOKEN を別に作らないなら必須）
 #   Permissions → Repository permissions → Contents: Read and write
 #                                          Workflows: Read and write（任意）
 SITE_PUSH_TOKEN=
+
+# ── 非公開のデータ（お客様の情報・料金・レポート。任意）──────────────────
+# 空なら SITE_PUSH_TOKEN で読む。分けるなら fine-grained で yoshi4476/ss-aio-private だけ・Contents: Read and write
+PRIVATE_DATA_TOKEN=
 
 # ── サイト配信（Cloudflare Pages）───────────────────────────────
 # 発行: https://dash.cloudflare.com/profile/api-tokens

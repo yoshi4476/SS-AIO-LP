@@ -138,6 +138,49 @@ python scripts/lessons.py --review         # 週次の棚卸し（多すぎ・�
 
 認証情報は [.env](.env) に設定する（雛形あり）。スプレッドシートIDは PROJECT.md で管理。
 
+### 2.1 守秘義務（どこに何を置くか・最優先）
+
+管制塔（yoshi4476/SS-AIO-LP）は GitHub Actions を無料で使うため **public のまま**運用する（2026-10-10 運用者の指示）。
+public なので、**リポジトリの中身・コミットの履歴・CI のログ（90日）・成果物（artifact）は誰でも読める**。
+お客様から預かったもの・お客様について調べたもの、当社の料金と営業の台本、レポートの数字は、
+**非公開のリポジトリ `yoshi4476/ss-aio-private`（workflow は置かない＝料金はかからない）にだけ置く**。
+手元と CI は管制塔の直下 `private/` に取得する（`.gitignore` 済み）。読み書きは必ず `scripts/private_store.py` を通す。
+
+| 置き場 | 置くもの |
+|:--|:--|
+| 非公開 `clients/<id>/company.json` | まだ公開していない会社情報（住所・電話・代表者・資本金・問い合わせのメール・監修者の名前と資格と登録番号） |
+| 非公開 `clients/<id>/brief.json` | 記事の材料（売り物と料金・読者の困りごと・FAQ・狙う語・狙わない語・競合・事例・お客様の声） |
+| 非公開 `clients/<id>/facts.json` | 一次情報 |
+| 非公開 `clients/<id>/kw.md` | キーワード計画（週次の補充が積む） |
+| 非公開 `clients/<id>/site_private.json` | サイト設定の戦略の部分（狙う業種・禁止語・配分・優先・読者・テーマ・売り物・監修・CTA・計測の ID など。`sites.load_all()` が重ねて読む） |
+| 非公開 `clients/<id>/private.json` | 担当者の連絡先・接続先（パスワードは入れない。鍵は Secrets） |
+| 非公開 `sales/` | 当社の料金（`prices.json`・提案書の料金のページ `proposal_pricing.json`・`sales_prices.py`）、営業の台本（`sales_script_*.py`）、提案資料の生成（`sales_deck.py`・`sales_pptx.py`）と出来上がり |
+| 非公開 `reports/` | 月次・週次・グループのレポート（PDF・HTML）、翌月の目標（`targets*.json`）、3倍計画（`growth_plan.json`・`growth-plan.md`） |
+| CI のキャッシュ（`data/clients/<id>/private/`） | お客様の順位・AIの答え・共起語などの派生データ（7日使わないと消えるので、元の情報の置き場にしない） |
+| **public（このリポジトリ）** | お客様のサイトに公開済みの記事そのもの（`articles/`）と、構造上どうしても要る最小限: `sites/<id>.json` の公開してよい項目（`sites.PUBLIC_KEYS`: id・名前・ドメイン・納品方式・配信先のリポジトリと置き場・カテゴリ・1日の本数・IndexNow の鍵・`"client": true`） |
+
+**守ること**（門 `tests/gates_history_h76.py` が止める）:
+- お客様の社のファイル（company/brief/facts/site_private・`docs/kw-<id>.md`）、`reports/`・`docs/sales/`・`docs/growth-plan.md` を公開側で追跡しない
+- `sites/<お客様>.json` に `PUBLIC_KEYS` 以外の項目を書かない（書いたら `private_store.write_site` で分ける）
+- 公開側のコード・指示・文書に当社の料金の数字を書かない（`proposal_make.pricing_pages` は非公開の JSON から読む）
+- `pull_request` / `pull_request_target` で動く workflow を置かない（キャッシュと鍵を他人の変更提案から守る）
+- お客様のデータを扱うジョブは checkout の直後に `.github/actions/private-data` を通す（取得と、守秘の語の `::add-mask::`。`scripts/ci_mask.py`）。
+  お客様の社について工程が出す行は **語の一覧ではなく件数**にする（例: 「conflux: 候補12語」）。執筆の案内（site_brief）はファイルにだけ書き、ログに出さない
+- 成果物（artifact）にお客様の語が載りうるファイルを入れない（ジョブ間の受け渡しは CI のキャッシュ）
+- **CI で非公開のデータが取れないときは、お客様の社の記事・キーワード計画・配信を止めて知らせる**（`private_store.require`。
+  材料なしで書かせない）。自社3サイトはこれまでどおり動く
+- 鍵: CI は Secret `PRIVATE_DATA_TOKEN`（無ければ `SITE_PUSH_TOKEN`）。fine-grained トークンなら `yoshi4476/ss-aio-private` の Contents を Read and write
+
+```bash
+python scripts/private_store.py --fetch            # 手元に private/ を取得する（あれば最新にする）
+python scripts/private_store.py --status           # 社ごとの材料の有無（件数だけ）
+python scripts/private_store.py --check-site <id>  # お客様の社の材料が読めるか（PRIVATE_OK=yes/no/own）
+python scripts/private_store.py --push "<理由>"     # private/ の変更を commit・push する
+python scripts/ci_mask.py --count                  # 社ごとの伏せる語の数（語は出さない）
+```
+
+過去の記録（コミットの履歴・90日以内の CI のログ）に残っているものは消していない（履歴の書き換えとログの削除は運用者が決める）。
+
 ---
 
 ## 3. セットアップ手順
@@ -165,8 +208,10 @@ python scripts/intake_watch.py --apply    # 登録まで行う
 | 不備があった | `intake/todo/` と、同じ名前の `.不備.txt`（直す箇所を書く） |
 
 **シートそのものはコミットされない**（`.gitignore` 済み）。会社名・住所・電話・
-担当者のメールが入るうえ、このリポジトリは public のため。登録後に生成される
-`sites/*.json` だけをコミットする。**10社を超えるシートは受け付けずに止める。**
+担当者のメールが入るうえ、このリポジトリは public のため。**登録した内容は非公開のリポジトリ（`private/`）にだけ書いて
+commit・push し**（`client_intake.save_private`）、公開側には `sites/<id>.json` の公開してよい項目だけを書く（2.1 節）。
+手元に `private/` が無ければ登録しない（`python scripts/private_store.py --fetch` で取得してから）。
+**20社を超えるシートは受け付けずに止める。**
 
 1枚ずつ指定したいときは従来どおり `client_intake.py <記入済み.xlsx> --apply` も使える。
 
@@ -188,13 +233,15 @@ llms.txt と sitemap に載り、同じカテゴリの記事末に「自社の�
 
 `--apply` で作られるもの:
 
-| 生成物 | 中身 |
-|:--|:--|
-| `sites/<id>.json` | サイト設定（主力商材・カテゴリ配分・守備範囲・CTA・計測） |
-| `data/clients/<id>/company.json` | 会社の正規表記（著者情報・構造化データ・レポートの宛名） |
-| `data/clients/<id>/facts.json` | その会社にしか出せない一次情報 |
-| `data/clients/<id>/brief.json` | 記事を書くための材料（売り物・読者の困りごと・FAQ・著者・文体・狙う語・外部接点） |
-| `docs/kw-<id>.md` | KW計画の雛形 |
+| 生成物 | 置き場 | 中身 |
+|:--|:--|:--|
+| `sites/<id>.json` | public | 公開してよい項目だけ（id・名前・ドメイン・納品方式・配信先・カテゴリ・1日の本数・`"client": true`） |
+| `clients/<id>/site_private.json` | 非公開 | サイト設定の戦略の部分（主力商材・カテゴリ配分・守備範囲・CTA・計測・禁止語） |
+| `clients/<id>/company.json` | 非公開 | 会社の正規表記（著者情報・構造化データ・レポートの宛名） |
+| `clients/<id>/facts.json` | 非公開 | その会社にしか出せない一次情報 |
+| `clients/<id>/brief.json` | 非公開 | 記事を書くための材料（売り物・読者の困りごと・FAQ・著者・文体・狙う語・外部接点） |
+| `clients/<id>/kw.md` | 非公開 | KW計画の雛形 |
+| `clients/<id>/private.json` | 非公開 | 担当者の連絡先・接続先（パスワードは入れない） |
 
 **記事の自動化に効く部分**: シートの回答は `site_brief.py` が執筆時に読み込む。売っているもの・読者の困りごと・よく聞かれる質問（そのままFAQになる）・著者情報・文体・メイン/サブキーワード・外部との接点まで渡るため、「その会社にしか書けない記事」になる。**書かれていないことは書かせない**（憶測で補うと事実と違う記事が公開される）。
 
@@ -206,7 +253,7 @@ llms.txt と sitemap に載り、同じカテゴリの記事末に「自社の�
 - 既存サイトとカテゴリ・ドメインが重複 → 記事がどちらのものか決まらない
 - 主力カテゴリの配分が35%未満 → 警告（40〜50%を推奨）
 
-**受託運用での分離**: クライアントの記事に運用会社の実績を書くと事実と違う記事になる。`data/clients/<id>/facts.json` がある場合、`facts.py` はそちらだけを使い、自社の一次情報を混ぜない。
+**受託運用での分離**: クライアントの記事に運用会社の実績を書くと事実と違う記事になる。お客様の社では、`facts.py` は非公開の置き場の `clients/<id>/facts.json` だけを使い、自社の一次情報を混ぜない（読めなければ一次情報は空）。
 
 **動画とSNSは先方のアカウントにだけ上げる**（当社のアカウントに落とさない。門が確かめる）:
 
@@ -1335,7 +1382,7 @@ Gemini は無料枠を超えると 429 で止まる（実測 2026-09-24）。止
 
 **順位も流入も Google が決める。3倍は目標であって保証ではない。** 約束できるのは、
 実測で効くと分かっている順（0.3節）に打ち手を並べ、全部を自動工程に入れ、
-毎月の遅れを数字で知らせること。台帳は `reports/growth_plan.json`、説明は `docs/growth-plan.md`。
+毎月の遅れを数字で知らせること。台帳と説明は非公開のリポジトリの `reports/growth_plan.json`・`reports/growth-plan.md`（自社の問い合わせ数を含むため public に置かない。2.1 節）。
 
 ```bash
 python scripts/growth_plan.py --init     # 先月を起点に、6か月で3倍の道筋を書く（1回）

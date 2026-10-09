@@ -22,7 +22,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-OUT = ROOT / "reports" / "weekly"
+sys.path.insert(0, str(ROOT / "scripts"))
+import private_store  # noqa: E402  週報は非公開のリポジトリ（public に数字を置かない。2026-10-10）
+OUT = private_store.reports_dir() / "weekly"
 NAVY, MUTED, ACCENT = "#0b2447", "#6b7c93", "#1967d2"
 GOOD, WARN = "#137333", "#b06000"
 

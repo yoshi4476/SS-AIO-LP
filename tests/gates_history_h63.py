@@ -193,10 +193,12 @@ def test_article_slot_does_not_wait_or_repeat():
     check("依存: yt-dlp もまとめて入れる（一次情報の工程で入れ直さない）",
           ("yt-dlp" in deps, "pip install --quiet yt-dlp" in _step(wf, "一次情報の収集")), (True, False))
     brief = _step(wf, "執筆ブリーフの表示")
+    # お客様の社の案内はログに出さない（2026-10-10 守秘義務・h76）。ファイルへ書き、失敗はそのまま工程を落とす
     check("ブリーフ: 出力を claude が読むファイルに残す（失敗は隠さない）",
-          ("tee automation/logs/brief.txt" in brief, "set -o pipefail" in brief), (True, True))
+          ("> automation/logs/brief.txt" in brief, "|| true" in brief.split("> automation/logs/brief.txt")[0][-200:]),
+          (True, False))
     check("カニバリ・食い合いゲートの結果も同じファイルへ",
-          ("tee -a automation/logs/brief.txt" in _step(wf, "全サイト横断のカニバリ・領域チェック"),
+          (">> automation/logs/brief.txt" in _step(wf, "全サイト横断のカニバリ・領域チェック"),
            ">> automation/logs/brief.txt" in _step(wf, "食い合いゲート（執筆前）")), (True, True))
     check("書き直しの回は、古くなったブリーフを使わせない", "rm -f automation/logs/brief.txt" in _step(wf, "記事生成（Phase 1〜7）"), True)
     gi = (ROOT / ".gitignore").read_text(encoding="utf-8")

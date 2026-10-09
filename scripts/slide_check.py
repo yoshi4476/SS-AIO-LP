@@ -95,7 +95,8 @@ def main():
     for key, mod in NAMES.items():
         if a.only and key != a.only:
             continue
-        total += check(expand(__import__(mod).script()["segments"]), key)
+        import private_store         # 台本は非公開のリポジトリの sales/
+        total += check(expand(private_store.sales_module(mod).script()["segments"]), key)
     print(f"\n合計 {total}件")
     return 0
 

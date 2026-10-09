@@ -76,6 +76,9 @@ def main():
             if lr:
                 lines += table(lr, f"{lg} の要約ページだけ")
         (DOCS / f"country-{sid}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        if S.is_client(sid):              # お客様の社の数字は CI のログに出さない
+            print(f"■ {cfg['name']}: 国別を記録しました")
+            continue
         print(f"■ {cfg['name']}: 表示 {int(total):,}回 / 日本以外 {abroad / total * 100 if total else 0:.1f}%"
               + "".join(f" / {NAMES[c]} {int(sum(r['impressions'] for r in rows if r['keys'][0] == c)):,}" for c in FOCUS
                         if any(r["keys"][0] == c for r in rows)))

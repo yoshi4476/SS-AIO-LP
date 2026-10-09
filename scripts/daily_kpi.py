@@ -205,6 +205,9 @@ def collect(ga_day):
                 print(f"  {sid}: GSC取得スキップ（{e}）")
         row.update(aio_estimate(sid))
         rows.append(row)
+        if sites_mod.is_client(sid):     # お客様の社の数字は CI のログに出さない（日次の記録とメールには入る）
+            print(f"{ga_day} {sid:10s} 取得しました")
+            continue
         print(f"{ga_day} {sid:10s} セッション{row.get('sessions', 0):5d}  表示{row.get('impressions', 0):6d}  "
               f"クリック{row.get('clicks', 0):4d}  AI参照{row.get('ai', 0):3d}")
     return rows

@@ -144,12 +144,8 @@ def _brand_rx(sid, cfg):
     except Exception:
         pass
     names = [cfg.get("name", "")]
-    p = ROOT / "data" / "clients" / sid / "company.json"
-    if p.is_file():
-        try:
-            names.append(json.loads(p.read_text(encoding="utf-8")).get("name", ""))
-        except (OSError, ValueError):
-            pass
+    import private_store
+    names.append((private_store.read_json(sid, "company.json", {}) or {}).get("name", ""))
     pats += [re.escape(n) for n in names if n and len(n) >= 2]
     return re.compile("|".join(pats), re.I) if pats else None
 
@@ -437,6 +433,10 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
     (OUT / sid).mkdir(parents=True, exist_ok=True)
     (OUT / sid / f"{ym}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
     s = rec["summary"]
+    import sites as _S
+    if _S.is_client(sid):           # お客様の社の数字と競合の顔ぶれは CI のログに出さない（件数だけ）
+        print(f"   {cfg['name']}: 測った語 {len(items)}語・競合 {len(s['competitors'])}社（数字はレポートだけに出します）")
+        return rec
     print(f"   {cfg['name']}: AIのシェア {fmt_share(s['ai']['ours_n'], s['ai']['answered_n'])} ／ "
           f"上位10位 {fmt_share(s['search']['top10_n'], s['search']['ranked_n'])} ／ 競合 "
           + "・".join(f"{c['domain']}({c['ai_n']})" for c in s["competitors"]))
@@ -706,7 +706,7 @@ def check(sids=None):
             bad = True
             print(f"要対応: {cfg['name']} でAIのシェアが下がった語 {len(d['lost'])}語（{d.get('from')}→{cur['ym']}。"
                   f"先月はAIの出典に出ていた）")
-            for kw in d["lost"][:6]:
+            for kw in ([] if S.is_client(sid) else d["lost"][:6]):     # お客様の語は件数だけ
                 print(f"  - {kw}")
         if cur.get("status") == "over_cap":
             bad = True
@@ -716,7 +716,7 @@ def check(sids=None):
         if wish:
             bad = True
             print(f"要対応: {cfg['name']} で一次データがあれば勝てる語 {len(wish)}語（書き直しでは埋まらない）")
-            for it in wish[:6]:
+            for it in ([] if S.is_client(sid) else wish[:6]):
                 print(f"  - {it['kw']}: {it.get('wish', '')}（add_fact で登録すると書き直しに回ります）")
     print("COMPETE_OK=" + ("no" if bad else "yes"))
     return 0

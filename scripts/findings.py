@@ -424,9 +424,42 @@ def details(text, pat):
     return out
 
 
+def _client_marks():
+    """お客様の社の id・ドメイン・社名・サイト名（ログで伏せる行の目印）"""
+    try:
+        import client_private as CP
+        import sites as S
+        cfgs = S.load_all()
+        marks = [w for ws in CP.markers().values() for w in ws]
+        marks += [cfgs[s].get("name", "") for s in CP.clients()]
+        return [m.lower() for m in marks if m and len(m) >= 3]
+    except Exception:
+        return []
+
+
+def for_log(text, marks=None):
+    """CI のログ・注釈に出す形（public のリポジトリでは誰でも読める）。お客様の社にふれる行と、その下の明細
+    （字下げした行）を伏せる。通知の本文（findings.txt。メールで運用者にだけ届く）はそのまま"""
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return text
+    marks = _client_marks() if marks is None else marks
+    out, hiding = [], False
+    for ln in str(text).splitlines():
+        if any(m in ln.lower() for m in marks):
+            if not hiding:
+                out.append("  （お客様の社の行はログに出しません。通知のメールに載ります）")
+            hiding = True
+            continue
+        if hiding and ln.startswith(("  ", "\t", "   ")) and not ln.strip().startswith(("■", "=")):
+            continue
+        hiding = False
+        out.append(ln)
+    return "\n".join(out)
+
+
 def annotate(level, msg):
     """GitHub Actions の注釈。ローカルではただの1行として出る"""
-    print("::%s::%s" % (level, msg.replace("\n", " ")))
+    print("::%s::%s" % (level, for_log(msg).replace("\n", " ")))
 
 
 def main():
@@ -454,7 +487,7 @@ def main():
         print("\n===== %s（%s） =====" % (label, script), flush=True)
         text, rc = started.pop(script).result() if script in started else run(script)
         if not a.quiet:
-            print(text.rstrip())
+            print(for_log(text).rstrip())
         state = judge(text, rc)
         rows.append((label, state, details(text, pat) if state == "要対応" else []))
     pool.shutdown(wait=True)
@@ -467,7 +500,7 @@ def main():
         print("  %s %s%s" % (mark, label,
                              "（%d件）" % len(det) if det else ""))
         for d in det[:MAX_LINES]:
-            print("       " + d[:100])
+            print("       " + for_log(d[:100]).strip())
         if len(det) > MAX_LINES:
             print("       …ほか%d件" % (len(det) - MAX_LINES))
 

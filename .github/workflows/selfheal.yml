@@ -93,6 +93,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
+      # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

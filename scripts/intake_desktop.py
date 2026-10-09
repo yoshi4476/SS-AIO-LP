@@ -6,7 +6,8 @@
 
   登録できたシート → 記入済みシートを入れる/取り込み済み/
   不備があったシート → その場に残し、同じ名前の .不備.txt に直す箇所を書く
-  登録された設定（sites/<id>.json・data/clients/<id>/・docs/kw-<id>.md）はコミットして公開する。
+  公開側（public のリポジトリ）にコミットするのは sites/<id>.json の公開してよい項目だけ。会社情報・記事の材料・
+  一次情報・キーワード計画・サイト設定の戦略の部分は、登録（intake_watch）が非公開のリポジトリ（private/）へ push する。
   シートそのものはコミットしない（会社名・住所・担当者の連絡先が入るため。intake/ は .gitignore 済み）
 
     python scripts/intake_desktop.py            # 取り込む
@@ -77,9 +78,9 @@ def main():
             ok.append(p.name)
             print(f"○ {p.name}: 登録しました")
     if ok:
-        # 登録された設定だけをコミットする（シートは intake/ にあり、コミットされない）
-        paths = [x for x in ("sites", "data/clients", "docs") if (ROOT / x).exists()]
-        subprocess.run(["git", "add", *paths], cwd=ROOT)
+        # 公開側には sites/ だけをコミットする。会社情報・材料は登録が非公開のリポジトリへ push 済み
+        # （以前は data/clients と docs まで足し、お客様の情報を public に載せていた）
+        subprocess.run(["git", "add", "sites"], cwd=ROOT)
         c = subprocess.run(["git", "commit", "-q", "-m", f"クライアントの登録（ヒアリングシート {len(ok)}件）"], cwd=ROOT)
         if c.returncode == 0:
             for _ in range(3):

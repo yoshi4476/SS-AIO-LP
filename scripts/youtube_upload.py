@@ -39,7 +39,8 @@ CATEGORY_HOWTO = "27"        # 「教育」。解説動画はここに入れる
 
 def is_client(site):
     """受託のクライアントか（data/clients/<id> がある社）。自社3サイトは同じチャンネルに上げる"""
-    return bool(site) and (ROOT / "data" / "clients" / site).is_dir()
+    import sites as S
+    return S.is_client(site)
 
 
 def token_path(site=None):
@@ -91,12 +92,16 @@ def expected_clients(root=ROOT):
     man = root / "data" / "youtube_connected.json"
     if man.is_file():
         ids |= set(json.loads(man.read_text(encoding="utf-8")).get("sites", []))
-    for p in (root / "sites").glob("*.json"):
+    import sites as S
+    for sid, cfg in (S.load_all().items() if root == ROOT else ()):
+        if S.is_client(sid) and (cfg.get("channels") or {}).get("youtube"):
+            ids.add(sid)
+    for p in (root / "sites").glob("*.json") if root != ROOT else ():
         try:
             cfg = json.loads(p.read_text(encoding="utf-8"))
         except ValueError:
             continue
-        if (root / "data" / "clients" / p.stem).is_dir() and (cfg.get("channels") or {}).get("youtube"):
+        if ((root / "data" / "clients" / p.stem).is_dir() or cfg.get("client")) and (cfg.get("channels") or {}).get("youtube"):
             ids.add(p.stem)
     return ids
 

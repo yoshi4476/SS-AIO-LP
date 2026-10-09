@@ -325,6 +325,9 @@ def show_effect(pages_by_site):
             posted.append({"site": rec.get("site", ""), "article": slug,
                            "posBefore": round(before, 1), "posAfter": round(now, 1),
                            "effect": ("上昇 " if diff > 0.5 else "下降 " if diff < -0.5 else "変わらず ") + f"{diff:+.1f}位"})
+        import sites as _S
+        if _S.is_client(rec.get("site", "")):
+            continue                # お客様の記事の順位は CI のログに出さない（下の数には入れた）
         print(f"  {slug[:32]:<34}{rec.get('at','')[:10]:<12}"
               f"{before or 0:>6.1f}位{now:>6.1f}位{mark:>8}")
     print("  " + "-" * 70)
@@ -375,6 +378,7 @@ def main():
         if not mine:
             continue
         total += len(mine)
+        quiet = S.is_client(sid)    # お客様の社は順位・表示・語を CI のログに出さない（帯ごとのページ数だけ）
         print(f"■ {S.load(sid)['name'][:22]}  {len(mine)}ページ\n")
         # 帯ごとに、表示の多い順で見る。表示が少ないものは偶然と区別できない
         for lo, hi, name, todo in BANDS:
@@ -384,8 +388,7 @@ def main():
                 continue
             imp = sum(d["imp"] for d in in_band)
             clk = sum(d["clicks"] for d in in_band)
-            print(f"  ── {name}（{todo}）  {len(in_band)}ページ / "
-                  f"表示{imp} / クリック{clk}")
+            print(f"  ── {name}（{todo}）  {len(in_band)}ページ" + ("" if quiet else f" / 表示{imp} / クリック{clk}"))
             acted = 0
             for d in in_band:
                 if d["imp"] < MIN_IMP:
@@ -396,11 +399,11 @@ def main():
                     continue
                 acted += 1
                 covered += 1
-                if acted <= a.limit:
+                if acted <= a.limit and not quiet:
                     print(f"     {d['pos']:>5.1f}位 表示{d['imp']:>4} "
                           f"ｸﾘｯｸ{d['clicks']:>3}  {slug[:30]}")
                 for kind, msg, need in issues:
-                    if acted <= a.limit:
+                    if acted <= a.limit and not quiet:
                         print(f"           ・{msg}")
                     if kind == "links" and a.write and need:
                         import priority_boost as P

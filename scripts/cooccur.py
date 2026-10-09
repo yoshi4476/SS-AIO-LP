@@ -117,7 +117,10 @@ def main():
         rec = cover(it["site"], it["slug"], kw.group(1).strip(), m.group(2))
         if rec:
             n += 1
-            print(f"   {it['slug'][:36]:<36} カバー率 {rec['covered']:.0%} / 無い語: {'・'.join(rec['missing'][:6])}")
+            import sites as _S
+            gap = (f"無い語 {len(rec['missing'])}語" if _S.is_client(it["site"])     # お客様の語は件数だけ
+                   else f"無い語: {'・'.join(rec['missing'][:6])}")
+            print(f"   {it['slug'][:36]:<36} カバー率 {rec['covered']:.0%} / {gap}")
         else:
             print(f"   {it['slug'][:36]:<36} 出典が取れません（AIの記録なし・鍵なし）")
     print(f"COOCCUR_OK=yes\nCOVERED={n}")

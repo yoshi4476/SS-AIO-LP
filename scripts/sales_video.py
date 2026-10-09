@@ -5,7 +5,7 @@
   demo  運用デモ動画          システムが実際にどう動いているか（画面をそのまま見せる）
   doc   資料説明動画          提案書39ページを、ページ番号を言いながら1枚ずつ
 
-**数字は sales_common に1か所だけ置く。** 3本で別々に書くと、片方だけ古くなる。
+**数字は1か所だけに置く**（共通の部品は sales_common、料金と台本は非公開のリポジトリの sales/）。3本で別々に書くと、片方だけ古くなる。
 
     python scripts/sales_video.py              # 3本とも作る
     python scripts/sales_video.py --only pr    # 1本だけ
@@ -29,7 +29,8 @@ MAKERS = {"pr": ("AI集客ラボ_PR_完成版", "sales_script_pr"),
 
 def load(key):
     """台本を読み、長い読み上げを割ってから返す"""
-    sc = __import__(MAKERS[key][1]).script()
+    import private_store             # 台本は非公開のリポジトリの sales/（public に営業の台本を置かない）
+    sc = private_store.sales_module(MAKERS[key][1]).script()
     sc["segments"] = expand(sc["segments"])
     sc.setdefault("footer", FOOT)
     return sc

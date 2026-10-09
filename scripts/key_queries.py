@@ -41,7 +41,8 @@ CANN_MAX_GAP = 15.0  # 2ページの順位差がこれを超えれば偶然と�
 
 
 def sites():
-    return {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in sorted(SITES.glob("*.json"))}
+    import sites as S               # お客様の社は非公開の置き場の戦略の部分を重ねたもの
+    return {sid: cfg for sid, cfg in S.load_all().items()}
 
 
 def load():
@@ -223,12 +224,15 @@ def track(only=""):
             up_all += up
             lines.append(f"  {site_id}: {n}語中 上がった{up} / 変わらず{same} / 下がった{down}"
                          f"（起点 {blk['since']}）")
-            for q, base, pos in stuck[:6]:
+            import sites as _S
+            for q, base, pos in ([] if _S.is_client(site_id) else stuck[:6]):     # お客様の語と順位は CI のログに出さない
                 c, how = cause(q, pos, rows_pq, titles)
                 b = "圏外" if base >= OUT else f"{base:g}位"
                 p = "圏外" if pos >= OUT else f"{pos:g}位"
                 lines.append(f"      {q}（{b}→{p}） … {c} → {how}")
                 stuck_all.append((site_id, q, c))
+            if _S.is_client(site_id):
+                stuck_all += [(site_id, q, "") for q, _b, _p in stuck]
     print("■ 主要クエリの推移")
     for l in lines:
         print(l)

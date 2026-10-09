@@ -89,6 +89,8 @@ def main():
         print(f"\n■ {cfg['name']}（計測KW {len(cur)}件）")
         print(f"   10位以内 {len(top10)}件 / 11〜30位 {len(striking)}件"
               + (f" / 前回比は{base_day}と比較" if base_day else " / 比較対象なし（初回）"))
+        if sites_mod.is_client(sid):
+            continue                     # お客様の社の検索語と順位は CI のログに出さない（件数は上の行）
         if striking:
             print("   ＜1ページ目まであと少し（表示回数順）＞")
             for r in striking[:5]:

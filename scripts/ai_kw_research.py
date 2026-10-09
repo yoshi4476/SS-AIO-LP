@@ -232,7 +232,7 @@ def main():
         ours = sum(1 for c in cands if (c.get("ai") or {}).get("ours"))
         print(f"■ {cfg['name']}: 候補 {len(cands)}語（GSC {gsc}・サジェスト {len(cands) - gsc}）"
               f" / AIに聞いた {asked}語 → 答えが出る {got}・自社が出典 {ours}")
-        for r in cands[:8]:
+        for r in ([] if S.is_client(sid) else cands[:8]):        # お客様の社の語は CI のログに出さない（件数は上の行）
             ai = r.get("ai") or {}
             print(f"   {r['score']:>4} {r['kw'][:34]:<34} 表示{r['imp']:>5} "
                   f"{('%.0f位' % r['pos']) if r['pos'] else '   -':>5} "

@@ -49,10 +49,11 @@ def inputs(cfg, dest=None):
     sid, t = cfg["id"], cfg.get("type")
     conf = {k: v for k, v in cfg.items() if k not in IGNORE_KEYS}
     out = {"sites": _h(json.dumps(conf, ensure_ascii=False, sort_keys=True).encode("utf-8"))}
+    import private_store
     cdir = ROOT / "data" / "clients" / sid
-    for name in ("company.json", "template.html"):
-        if (cdir / name).is_file():
-            out[f"clients/{name}"] = _h((cdir / name).read_bytes())
+    for name, p in (("company.json", private_store.client_path(sid, "company.json")), ("template.html", cdir / "template.html")):
+        if p.is_file():
+            out[f"clients/{name}"] = _h(p.read_bytes())
     tpls = []
     if t == "ftp" and not (cdir / "template.html").is_file():
         tpls.append(ROOT / "templates" / "external_article.html")

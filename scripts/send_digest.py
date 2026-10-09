@@ -94,7 +94,8 @@ def main():
                else f"【{SITE_NAME}】今週のAI集客まとめ（{today.month}/{today.day}号・{len(items)}本）")
 
     if "--demo" in sys.argv:
-        out = ROOT / "reports" / "digest-preview.html"
+        import private_store
+        out = private_store.reports_dir() / "digest-preview.html"
         out.parent.mkdir(exist_ok=True)
         out.write_text(html.replace("{{{RESEND_UNSUBSCRIBE_URL}}}", "#"), encoding="utf-8")
         print(f"デモ出力: {out}（件名: {subject} / {len(items)}本）")

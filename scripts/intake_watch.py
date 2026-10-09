@@ -127,8 +127,14 @@ def one(src, write, k=None):
     if not write:
         return True, "%s: 登録できます（--apply で実行）" % name
 
+    # 登録した内容は非公開のリポジトリにだけ置く。手元に private/ が無ければ登録しない（公開側に落とさない）
+    import private_store as PS
+    if not (PS.base() / ".git").is_dir():
+        return False, "%s: 非公開のリポジトリ（private/）がありません。python scripts/private_store.py --fetch の後にやり直してください" % name
     ind = next((k for k, (lab, _) in C.INDUSTRY.items() if lab in src.name), "")
     C.apply(got, cfg, ind)
+    if not C.save_private(cfg.get("id")):
+        print("   ! 非公開のリポジトリへ push できませんでした（private/ で git push してください）")
     move(src, DONE)
     readiness(cfg.get("id"))
     onboard(cfg.get("id"))

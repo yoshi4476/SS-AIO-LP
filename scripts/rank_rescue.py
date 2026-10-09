@@ -280,6 +280,7 @@ def main():
     ap.add_argument("--plan", action="store_true", help="auto_rewrite に渡る順で見る")
     ap.add_argument("--top", type=int, default=20)
     a = ap.parse_args()
+    import sites as S
 
     if a.plan:
         for i, it in enumerate(items(), 1):
@@ -298,7 +299,11 @@ def main():
     print(f"  原因別: 語が見出しに無い {by['term']}本 / 食い合い {by['cannibal']}本 / "
           f"内部リンク不足 {by['link']}本\n")
     print(f"{'順位':>6}{'表示':>6}{'内部':>5}  原因          記事")
+    hidden = 0
     for r in rows[:a.top]:
+        if S.is_client(r.get("site")):
+            hidden += 1             # お客様の記事の順位・語は CI のログに出さない（本数だけ下に出す）
+            continue
         print(f"{r['pos']:>5.1f}位{r['imp']:>6}{r['inbound']:>5}  "
               f"{'+'.join(r['kinds']):<14}{r['title'][:38]}")
         for m in r["miss"][:2]:
@@ -307,6 +312,8 @@ def main():
         for c in r["cannibal"][:1]:
             print(f"        → 食い合い「{c['kw'][:24]}」{c['pos']:.0f}位 ←→ "
                   f"{c['rival'].rstrip('/').split('/')[-1][:26]} {c['rival_pos']:.0f}位")
+    if hidden:
+        print(f"  ほかにお客様の社の記事 {hidden}本（ログに出しません）")
     print(f"\n  次にやること")
     print(f"   語が見出しに無い  → python scripts/auto_rewrite.py --write（stuck種別で直る）")
     print(f"   食い合い          → python scripts/auto_merge.py")

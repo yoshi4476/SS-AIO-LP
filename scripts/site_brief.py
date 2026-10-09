@@ -37,8 +37,10 @@ def local_next_kw(cfg, limit=5):
     """管制塔が使えないときのフォールバック（KW計画ファイルから未執筆を拾う）"""
     import re
     from cannibal_check import load_articles
-    plan = ROOT / cfg.get("kw_plan", "")
-    if not plan.exists():
+    import private_store
+    plan = (private_store.client_path(cfg["id"], "kw.md") if sites_mod.is_client(cfg.get("id"))
+            else ROOT / cfg.get("kw_plan", ""))
+    if not cfg.get("kw_plan") and not sites_mod.is_client(cfg.get("id")) or not plan.is_file():
         return []
     corpus = [f"{a['slug']} {a['title']} {a['desc']}" for a in load_articles()]
     out = []
@@ -68,7 +70,8 @@ def show_brief(site_id):
     逆に空の項目を憶測で埋めると、事実と違う記事が公開される。
     書いていないことは書かない、という前提で読ませる。
     """
-    f = ROOT / "data" / "clients" / site_id / "brief.json"
+    import private_store
+    f = private_store.client_path(site_id, "brief.json", root=ROOT)
     if not f.is_file():
         return
     try:
@@ -192,11 +195,15 @@ def main():
     if len(sys.argv) < 2:
         raise SystemExit("使い方: python scripts/site_brief.py <site_id>\n" + sites_mod.summary())
     cfg = sites_mod.load(sys.argv[1])
+    # お客様の社は、非公開のデータ（会社情報・記事の材料・サイト設定の戦略の部分）が読めなければ書かせない。
+    # 材料なしで書くと、書かれていないことを憶測で補った記事が公開される（2026-10-10 運用者の指示）
+    import private_store
+    private_store.require_or_exit(cfg["id"], "記事")
 
     print("=" * 68)
     print(f"■ 対象サイト: {cfg['name']}（{cfg['id']}）")
     print(f"  ドメイン : {cfg['domain']}")
-    print(f"  テーマ   : {cfg['theme']}")
+    print(f"  テーマ   : {cfg.get('theme', '（未設定）')}")
     print(f"  読者     : {cfg.get('audience', '（未設定）')}")
     print("=" * 68)
 

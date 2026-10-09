@@ -83,10 +83,8 @@ def credit_text(cfg):
     if not cfg:
         return "AI集客ラボ（セブンセンシズ株式会社）"
     if sites_mod.is_client(cfg["id"]):
-        try:
-            name = json.loads((ROOT / "data" / "clients" / cfg["id"] / "company.json").read_text(encoding="utf-8")).get("name")
-        except (OSError, ValueError):
-            name = ""
+        import private_store
+        name = (private_store.read_json(cfg["id"], "company.json", {}) or {}).get("name")
         return name or cfg.get("name", "")
     return f"{cfg['name']}（セブンセンシズ株式会社）"
 

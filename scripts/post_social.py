@@ -81,7 +81,8 @@ def pick(e, name, site_id):
     s = social()
     if (s.get(site_id) or {}).get(name):
         return s[site_id][name]
-    if (ROOT / "data" / "clients" / site_id).is_dir():
+    import sites as S
+    if S.is_client(site_id):
         return ""
     suf = site_id.upper().replace("-", "_")
     return e.get(f"{name}_{suf}") or (s.get("_default") or {}).get(name) or e.get(name, "")
