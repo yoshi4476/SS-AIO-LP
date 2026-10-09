@@ -106,7 +106,19 @@ jobs:
       # write（新しい記事）か rewrite（運用者の設定で浮いた枠に、主力の記事を1本書き直す）
       mode: ${{ steps.site.outputs.mode }}
     steps:
+      # 枠の判定は1日80回近く動き、書くのはそのうち1割。判定に要らない大きな置き場（画像・動画・資料・写真の原本。
+      # 334MB のうち 287MB）は取らない。取得に平均12秒かかっていた（2026-10-03〜09 の305回）。
+      # 外すのは下の5つだけで、判定が読む scripts/・sites/・data/・articles/・.github/ はそのまま取る
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/site/images/
+            !/site/videos/
+            !/assets/
+            !/reports/
+            !/写真素材/
 
       # 起動役（Worker）の回と予備の定時の回のうち、同じ枠・同じ予定の日を先に受け持った回だけが書く
       - name: 同じ予定を先に受け持った回があるか
@@ -392,6 +404,11 @@ jobs:
           # 記事を書く claude が同じ出力を読む（同じものを2回作らない。1回約50秒）
           set -o pipefail
           mkdir -p automation/logs
+          # 次の工程の横断のカニバリ検査は管制塔とファイルを読むだけで、このブリーフと関わらない。どちらも管制塔の
+          # 応答待ちが長い（2026-10-03〜09 の39回でブリーフ平均35秒・横断平均39秒を順に待っていた）ので同時に始め、
+          # 結果は次の工程で今までと同じ順に brief.txt へ書き足す
+          rm -f /tmp/cannibal.txt /tmp/cannibal.rc
+          ( python scripts/cannibal_check.py --cross > /tmp/cannibal.txt 2>&1; echo $? > /tmp/cannibal.rc ) < /dev/null > /dev/null 2>&1 &
           python scripts/site_brief.py "${{ steps.site.outputs.id }}" | tee automation/logs/brief.txt
 
       - name: 全サイト横断のカニバリ・領域チェック
@@ -401,7 +418,13 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           echo "■ python scripts/cannibal_check.py --cross の結果" >> automation/logs/brief.txt
-          python scripts/cannibal_check.py --cross 2>&1 | tee -a automation/logs/brief.txt || true
+          # 前の工程で始めた検査の終わりを待つ。始まっていなければ（工程を手で動かした等）ここで動かす
+          for i in $(seq 1 1800); do [ -f /tmp/cannibal.rc ] && break; [ -f /tmp/cannibal.txt ] || break; sleep 1; done
+          if [ -f /tmp/cannibal.rc ]; then
+            tee -a automation/logs/brief.txt < /tmp/cannibal.txt || true
+          else
+            python scripts/cannibal_check.py --cross 2>&1 | tee -a automation/logs/brief.txt || true
+          fi
 
       # 手順書に「必ず実行すること」と書いても、それは関門ではない。
       # 実行を忘れれば素通りする。実際、タイトル類似だけのゲートを通り抜けて
@@ -647,6 +670,9 @@ jobs:
           # 配信先のプロジェクト名。直書きだと別のサイトへ配りにいく
           proj=$(python -c "import json,pathlib;p=pathlib.Path('site.config.json');print(json.loads(p.read_text(encoding='utf-8')).get('cf_project','') if p.is_file() else '')")
           [ -z "$proj" ] && proj="${{ steps.site.outputs.id }}"
+          # 送る中身の指紋も一緒に置く。この回の push で動く deploy.yml が同じ中身を作ったら、送り出しを省ける
+          # （scripts/deploy_marker.py。置けなくても送り出しは続け、次の deploy.yml は省かずに送る）
+          python3 scripts/deploy_marker.py --write --salt wrangler@4.121.0 || rm -f site/deploy-hash.txt
           # Cloudflare APIは稀に522（一時的な接続タイムアウト）を返す。瞬断でrunを落とさないため再試行する
           for i in 1 2 3; do
             npx --yes wrangler@4.121.0 pages deploy site --project-name="$proj" --branch="${GITHUB_REF_NAME}" --commit-dirty=true && exit 0
