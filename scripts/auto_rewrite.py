@@ -454,6 +454,52 @@ def spare_items():
     return out
 
 
+FREE_BAND = (3.5, 30.5)   # 無料の補充で見る順位（4〜30位）
+FREE_TRY = 3              # 1回に無料の調べ（cooccur）を試す記事の数（Gemini の無料枠と取得の時間を食い過ぎない）
+
+
+def free_spare_items(sites, skip=()):
+    """浮いた枠の候補が尽きた日の補充（課金なし）。上の3つの順に1本も無いとき、4〜30位・表示15回以上の
+    主力の記事に、上位・AIの出典の記事の見出しにあって自記事に無い語を cooccur（Gemini 検索＋見出しの取得・無料）で
+    その場で調べ、語が見つかった記事を stuck の形で返す。ラッコの見出し（kw_serp）は在庫が1か月分を切った月しか
+    取らないので、補助金は5本ほどで候補が尽きる（2026-10-09 運用者「無料の材料で候補を広げる」）"""
+    import cooccur
+    import kw_plan as KP
+    import noindex
+    out = []
+    for sid in [s for s in re.split(r"[\s,]+", sites or "") if s]:
+        pos = page_positions(sid)
+        cands = []
+        for slug, kw in KP.site_articles(sid).items():
+            p, imp = pos.get(slug, (None, 0))
+            if (p is None or imp < KP.REWRITE_MIN_IMP or not (FREE_BAND[0] <= p <= FREE_BAND[1])
+                    or slug in skip or not is_main(slug, sid) or noindex.drop([{"slug": slug}]) == []):
+                continue
+            cands.append((imp * (31 - p), slug, kw, p, imp))
+        for _, slug, kw, p, imp in sorted(cands, reverse=True)[:FREE_TRY]:
+            t = (ROOT / "articles" / f"{slug}.md").read_text(encoding="utf-8-sig")
+            m = re.match(r"^---\s*\n.*?\n---\s*\n(.*)$", t, re.S)
+            try:
+                rec = cooccur.cover(sid, slug, kw, m.group(1) if m else t)
+            except Exception as e:
+                print(f"  （{slug}: 無料の調べに失敗 {type(e).__name__}）")
+                continue
+            # 主力の記事に、ほかの制度の名前（持続化補助金・キャリアアップ助成金など）を節として足させない。
+            # 主力の割合を上げるための書き直しで、周辺の制度を広げてしまう（2026-10-09 の本物の調べで混ざった）
+            rule = _MAIN.get(sid) or KP.main_rule(sid)[0]
+            miss = [w for w in (rec or {}).get("missing") or []
+                    if not (re.search(r"補助金|助成金|給付金|支援金", w) and not (rule and rule(w)))]
+            if miss:
+                import client_private as CP
+                f = CP.site_file(sid, f"data/cooccur/{slug}.json")
+                if f.is_file():                       # stuck の指示が読む語も、ふるった後の語にそろえる
+                    f.write_text(json.dumps({**rec, "missing": miss}, ensure_ascii=False, indent=1), encoding="utf-8")
+                out.append({"kind": "stuck", "slug": slug, "site": sid, "terms": miss[:6], "pos": f"{p:.1f}",
+                            "why": (f"{p:.1f}位・表示{imp}回。上位・AIの出典の記事の見出しにあって、この記事に無い語"
+                                    f"（無料の調べ）: {'／'.join(miss[:8])}")})
+    return out
+
+
 _MAIN = {}
 
 
@@ -1548,7 +1594,7 @@ def main():
     ap.add_argument("--selftest", action="store_true",
                     help="検算が効くかを本番の記事で確かめる（claudeは呼ばない）")
     ap.add_argument("--kind", default="",
-                    help="種別を絞る（fresh は鮮度更新だけを回す。spare は浮いた枠の順: serp → stuck → compete）")
+                    help="種別を絞る（fresh は鮮度更新だけを回す。spare は浮いた枠の順: serp → stuck → compete → 無料の調べ（cooccur）。補充は --main-only のときだけ）")
     ap.add_argument("--skip-recent", type=int, default=0,
                     help="直近この日数に auto_rewrite が手を付けた記事を外す（0=外さない。集中モード・浮いた枠が使う）")
     ap.add_argument("--tag", default="", help="台帳に残す印（集中モード・浮いた枠の直しを対照群と分けるため）")
@@ -1598,6 +1644,10 @@ def main():
         items = [x for x in items if x["slug"] not in busy]
         if held:
             print(f"  直近{a.skip_recent}日に手を付けた・題の判定期間中の{len(held)}本を外しました: {', '.join(held[:6])}")
+    if not items and a.kind == "spare" and a.main_only:
+        items = free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set())
+        if items:
+            print(f"  上位の見出しがある候補が尽きたので、無料の調べ（cooccur）で {len(items)}本を候補にしました")
     print(f"■ 人の判断に回っていた直し: {len(items)}件"
           + (f"（1回に{a.limit}本まで）\n" if a.write else "\n"))
     if not items:

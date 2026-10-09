@@ -26,6 +26,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 OUT = ROOT / "data" / "cooccur"
 UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0; +https://ai.7senses.co.jp/)"}
 STOP = {"まとめ", "よくある質問", "はじめに", "目次", "関連記事", "この記事", "監修", "注意", "こちら"}
+# ページの部品の見出し（記事の中身ではない）。2026-10-09 に「投稿ナビゲーション」「ワンポイントアドバイス」を
+# 「上位の記事にあってこの記事に無い語」として拾い、書き直しに渡していた
+# 「検索」「広告」「ブログ」「サイト」は AI集客ラボの主題の語なので入れない
+UI_PART = re.compile(r"ナビ|投稿|ワンポイント|関連|問い合わせ|メニュー|ホーム|カテゴリ|タグ|シェア|コメント|"
+                     r"新着|人気記事|ランキング|プロフィール|ログイン|フォロー|購読|メルマガ|アーカイブ|バナー|"
+                     r"スポンサー|コピーライト|ページトップ|前の記事|次の記事")
 
 
 def headings(url):
@@ -42,7 +48,7 @@ def terms(texts):
     out = set()
     for t in texts:
         for w in re.findall(r"[一-龥ァ-ヶー]{2,}|[A-Za-z][A-Za-z0-9]{2,}", t):
-            if w not in STOP and len(w) <= 12:
+            if w not in STOP and len(w) <= 12 and not UI_PART.search(w):
                 out.add(w.lower())
     return out
 

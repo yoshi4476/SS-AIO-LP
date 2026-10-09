@@ -1036,8 +1036,10 @@ def main_rule(site_id):
             if not str(k).startswith("_") and isinstance(v, (int, float))}
     if smix:
         import site_brief
-        top = max(smix, key=smix.get)
-        return (lambda kw: site_brief.scheme_of(kw) == top), smix[top], top
+        # main_schemes があればその制度をまとめて主力にする。補助金は AI導入補助金と旧称の IT導入補助金
+        # （同じ制度の名前が変わっただけ。旧称で探す人も同じ見込み客。2026-10-09 運用者の決定）
+        tops = [s for s in (cfg.get("main_schemes") or []) if s in smix] or [max(smix, key=smix.get)]
+        return (lambda kw: site_brief.scheme_of(kw) in tops), sum(smix[s] for s in tops), "・".join(tops)
     mix = {k: v for k, v in (cfg.get("category_mix") or {}).items()
            if not str(k).startswith("_") and isinstance(v, (int, float))}
     mc = cfg.get("main_category")

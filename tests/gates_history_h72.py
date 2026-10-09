@@ -224,7 +224,9 @@ def test_main_only_keeps_main_articles():
         with patched(AR, ROOT=base):
             items = [{"kind": "stuck", "slug": s, "site": "subsidy", "why": ""} for s in ("a", "b", "c")]
             got = [x["slug"] for x in AR.only_main(items)]
-    check("--main-only: 補助金は主力（AI導入補助金）の語の記事だけ（題に名前が出るだけの周辺の記事は入れない）", got, ["a"])
+    # 旧称の IT導入補助金も主力に数える（2026-10-09 運用者の決定・sites/subsidy.json の main_schemes。gates_history_h73）
+    check("--main-only: 補助金は主力（AI導入補助金・旧称の IT導入補助金）の語の記事だけ（題に名前が出るだけの周辺の記事は入れない）",
+          got, ["a", "c"])
 
 
 def test_spare_candidates_order_and_empty_day():
@@ -262,7 +264,9 @@ def test_spare_candidates_order_and_empty_day():
         try:
             sys.argv = ["auto_rewrite.py", "--write", "--kind", "spare", "--main-only", "--sites", "subsidy",
                         "--limit", "1", "--skip-recent", "28", "--tag", "spare-slot"]
-            with patched(AR, LOG=log, spare_items=lambda: [], run_one=lambda *a, **k: calls.append(a) or (True, "")):
+            # 無料の補充（free_spare_items・gates_history_h73）も空の日。本物の調べ（Gemini・取得）を門で呼ばない
+            with patched(AR, LOG=log, spare_items=lambda: [], free_spare_items=lambda s, skip=(): [],
+                         run_one=lambda *a, **k: calls.append(a) or (True, "")):
                 rc, out = _quiet(AR.main)
             check("候補が無い日: 何もしない（書き直しも新しい記事もしない）・実行ログに残す",
                   (rc, calls, "SPARE_SLOT=none" in out, log.exists()), (0, [], True, False))
@@ -272,6 +276,7 @@ def test_spare_candidates_order_and_empty_day():
                                        "kind": "stuck", "ok": True, "note": "直しました（…）"}, ensure_ascii=False) + "\n",
                            encoding="utf-8")
             with patched(AR, LOG=log, spare_items=lambda: cands, only_main=lambda items: items,
+                         free_spare_items=lambda s, skip=(): [],
                          run_one=lambda x, w, edited=None: calls.append(x["slug"]) or (True, "直しました（a… → b…）"),
                          hub_rewrite_log=lambda *a, **k: None):
                 rc, out = _quiet(AR.main)
