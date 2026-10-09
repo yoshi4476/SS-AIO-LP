@@ -80,14 +80,16 @@ def price(path, body=None, method="POST"):
 
 
 def api_key():
+    """CI は GitHub Secrets（環境変数）、手元は .env。以前は .env だけを見ていたため、CI では鍵を渡しても
+    「未設定」と判断され、ラッコを一度も使えていなかった（2026-10-09 補助金の積み足しで判明）"""
+    v = os.environ.get("RAKKO_API_KEY", "").strip().strip("'\"")
     p = ROOT / ".env"
-    if not p.is_file():
-        return ""
-    for line in p.read_text(encoding="utf-8-sig").splitlines():
-        if line.startswith("RAKKO_API_KEY="):
-            v = line.split("=", 1)[1].strip().strip("'\"")
-            return "" if v.upper().startswith("YOUR_") else v
-    return ""
+    if not v and p.is_file():
+        for line in p.read_text(encoding="utf-8-sig").splitlines():
+            if line.startswith("RAKKO_API_KEY="):
+                v = line.split("=", 1)[1].strip().strip("'\"")
+                break
+    return "" if v.upper().startswith("YOUR_") else v
 
 
 def enabled():
