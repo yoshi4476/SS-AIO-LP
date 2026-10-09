@@ -286,9 +286,31 @@ def test_client_plan_and_research_stay_private():
     import client_private as CP
     import kw_plan as KP
     print("\n■ お客様の社の調べ・計画・積んだ語の出どころは public の場所に出ない")
-    for rel, want in (("data/kw_serp/conflux.json", 0), ("docs/kw-plan-conflux.md", 0), ("data/kw_serp/corporate.json", 1)):
+    # ラッコで取った見出し・共起語・質問は、規約（社内利用）に合わせて自社の分も Git に入れない（2026-10-09）
+    for rel, want in (("data/kw_serp/conflux.json", 0), ("docs/kw-plan-conflux.md", 0), ("data/kw_serp/corporate.json", 0),
+                      ("data/clients/_own/private/corporate/data/kw_serp/corporate.json", 0), ("docs/kw-plan-corporate.md", 1)):
         r = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "-q", rel])
         check(f"{'Git に入らない' if want == 0 else 'Git に入る（自社）'}: {rel}", r.returncode, want)
+    check("ラッコの調べは自社の社も置き場で持ち越す", "kw_serp" in CP.ALL_SITES, True)
+    own = CP.private_path("corporate", "data/kw_serp/corporate.json").relative_to(CP.ROOT).as_posix()
+    check("自社の社の置き場は data/clients/<社>/ を作らない（作るとお客様と判定される）",
+          (own.startswith("data/clients/corporate/"), own.startswith("data/clients/_own/private/")), (False, True))
+    import sites as SS
+    check("置き場の区画の名前は社の id に無い", CP.OWN in SS.load_all(), False)
+    with tempfile.TemporaryDirectory() as td:
+        base = Path(td)
+        (base / "data" / "kw_serp").mkdir(parents=True)
+        (base / "data" / "kw_serp" / "corporate.json").write_text("{}", encoding="utf-8")
+        with patched(CP, ROOT=base, clients=lambda: [], is_private=lambda s: False), \
+                patched(CP.S, load_all=lambda: {"corporate": {}}):
+            n = CP.pack(["kw_serp"])
+            (base / "data" / "kw_serp" / "corporate.json").unlink()
+            back = CP.unpack(["kw_serp"])
+        check("自社の社の調べも置き場へ写り、次のジョブで戻る",
+              (n, (base / "data" / "clients" / "_own" / "private" / "corporate" / "data" / "kw_serp" / "corporate.json").is_file(),
+               back, (base / "data" / "kw_serp" / "corporate.json").is_file()), (1, True, 1, True))
+        check("自社の社のフォルダ（data/clients/corporate）は作られない",
+              (base / "data" / "clients" / "corporate").exists(), False)
     with tempfile.TemporaryDirectory() as td:
         base = Path(td)
         (base / "data").mkdir()
@@ -387,3 +409,20 @@ def test_ranking_puts_proven_and_main_first():
         got = HC.next_kw("s")
     check("次に書く語は、実証済みの語（4〜30位）を先に拾う", (got["keyword"], got.get("picked_by")),
           ("aio 外注 東京", "実証済みの語（4〜30位）"))
+
+
+def test_main_first_adds_only_main_words_as_a_without_retiring():
+    """2026-10-09 補助金: 未着手106本中の主力が2本。一新は主力の候補が11本しか無く在庫を28本に減らすだけなので、
+    主力の語だけを優先度Aで積み足す（今の未着手は消さない・月1回の組みとは数えない）"""
+    import kw_plan as KP
+    print("\n■ 主力の語だけを優先度Aで積み足す（--main-first）")
+    got, retired = [], []
+    with _flow(["既存 %d" % i for i in range(100)], []) as (td, net), \
+            patched(KP, main_rule=lambda s: ((lambda kw: "代行" in kw), 55, "主力"),
+                    add_ledger=lambda s, picked: got.append([(c["kw"], c["priority"]) for c in picked]) or True,
+                    replace_ledger=lambda *a, **k: retired.append(1)):
+        _quiet(KP.run, "x", False, False, main_first=5)
+        check("在庫が足りていても、主力の語だけを積む（優先度はすべてA）",
+              (len(got), bool(got and got[0]), all("代行" in k and p == "A" for k, p in (got[0] if got else []))),
+              (1, True, True))
+        check("今の未着手は取り下げない・月1回の組みとは数えない", (retired, (td / "runs.json").exists()), ([], False))

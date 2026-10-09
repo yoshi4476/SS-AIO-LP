@@ -143,11 +143,9 @@ docs/kw-plan-*.md
 !docs/kw-plan-corporate.md
 !docs/kw-plan-subsidy.md
 # 上位ページの見出し・共起語・実際の質問（kw_plan がラッコで取る。kw_serp が執筆と書き直しへ渡す）。
-# お客様の分は client_private の置き場（CI のキャッシュ）で持ち越す
-data/kw_serp/*
-!data/kw_serp/ai-lab.json
-!data/kw_serp/corporate.json
-!data/kw_serp/subsidy.json
+# ラッコの利用規約は社内利用の範囲なので、自社の社の分も public に置かない（2026-10-09 運用者の決定）。
+# client_private の置き場（CI のキャッシュ。自社は data/clients/_own/private/）で持ち越す
+data/kw_serp/
 # 実数から作る翌月の目標（monthly_report。月次の「目標値の保存をコミット」が reports/targets-*.json を足す）。
 # お客様の分は public に置かない（自社は ai-lab が targets.json・残り2社が targets-<id>.json）
 reports/targets-*.json

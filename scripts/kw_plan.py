@@ -1353,7 +1353,10 @@ def _copy(cands):
     return {k: dict(c, src=set(c["src"])) for k, c in cands.items()}
 
 
-def run(site_id, deep, replace, if_needed=False):
+def run(site_id, deep, replace, if_needed=False, main_first=0):
+    """main_first=N は、主力の語だけを最大N本、優先度Aで積み足す（今の未着手は消さない・月1回の組みとは数えない）。
+    補助金で、未着手106本中の主力が2本だった。一新（--replace）は主力の候補が11本しか無く、
+    在庫を28本まで減らして残りをまた周辺の制度で埋めるだけだった（2026-10-09 の試算）"""
     S = KD.site_config(site_id)
     print(f"\n■ {site_id}（{S['cfg']['name']}）")
     month = rakko.this_month()
@@ -1385,6 +1388,11 @@ def run(site_id, deep, replace, if_needed=False):
     rule, share, main_name = main_rule(site_id)
     have_main = sum(1 for k in st["todo"] if rule and rule(k))
     need_main = 0 if replace or not rule else min(limit, max(0, math.ceil(share / 100 * (len(st["todo"]) + limit)) - have_main))
+    if main_first:
+        if not rule:
+            print("   主力の決まり（scheme_mix / category_mix）が無いため、主力だけを積むことはできません")
+            return
+        limit = need_main = main_first
     stock_line = (f"在庫: 未着手 {len(st['todo'])}本 ／ 1か月分 {need_m}本 ／ 積む目標 {target}本（1か月分×{STOCK_FACTOR}）"
                   f" → 今回 {limit}本まで積む" if st["ok"] else f"在庫: 台帳を読めないため {limit}本まで組む（積む前に管制塔が重複を弾く）")
     print("   " + stock_line)
@@ -1435,6 +1443,10 @@ def run(site_id, deep, replace, if_needed=False):
         fill_volume(cands)
         picked, dropped = choose(cands, S, site_id, limit=limit, main=(rule, need_main), ledger=st["keys"],
                                  owned=owned, floor=not replace)
+    if main_first:
+        picked = [c for c in picked if rule(c["kw"])][:main_first]
+        for c in picked:
+            c["priority"] = "A"
     # 5〜6. 見出し・共起語（これから書く優先度Aの上位＋4〜20位の自社記事）と実際の質問（上位約20語）
     a_kws = [c["kw"] for c in picked if c["priority"] == "A"] + st["a"]
     plan = serp_plan(site_id, a_kws, rewrites)
@@ -1471,6 +1483,9 @@ def run(site_id, deep, replace, if_needed=False):
     elif picked and not add_ledger(site_id, picked):
         print("   台帳に積めなかったため、今月の組みは済んだことにしません（翌日の見張りがやり直す）")
         return
+    if main_first:
+        print(f"   主力の語 {len(picked)}本を優先度Aで積み足しました（今の未着手は残し、月1回の組みとは数えません）")
+        return
     if rakko.enabled():
         mark_done(site_id, month)          # 1社1か月1回（鍵の無い回は、鍵が入ったらすぐ組み直せるよう残さない）
         print(f"KW_PLAN_DONE={site_id}:{month}")
@@ -1486,16 +1501,20 @@ def main():
                     help="未着手が1か月分（1日の本数×30）を切った社だけ、1か月1回積み足す（毎日の在庫の見張り）")
     ap.add_argument("--dry-run", action="store_true",
                     help="ラッコを呼ばず（キャッシュは使う）、候補の構成と課金の見積もりだけ出す")
+    ap.add_argument("--main-first", type=int, default=0, metavar="N",
+                    help="主力の語だけを最大N本、優先度Aで積み足す（今の未着手は消さない。手で使う）")
     a = ap.parse_args()
     global DRY, DEEP
     DRY, DEEP = a.dry_run, a.deep
     if DRY and a.replace:
         raise SystemExit("--dry-run と --replace は同時に使えません（見積もりで台帳は変えない）")
+    if a.main_first and (a.replace or a.if_needed):
+        raise SystemExit("--main-first は --replace・--if-needed と同時に使えません")
     import sites as S_
     ids = sorted(S_.load_all()) if a.all else ([a.site] if a.site else [S_.primary()])
     for sid in ids:
         try:
-            run(sid, a.deep, a.replace, a.if_needed)
+            run(sid, a.deep, a.replace, a.if_needed, a.main_first)
         except Exception as e:           # 1社の失敗で他の社の在庫を止めない（組みは済んだことにしない＝翌日やり直す）
             import traceback
             traceback.print_exc()

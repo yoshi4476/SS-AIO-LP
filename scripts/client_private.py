@@ -45,6 +45,10 @@ PER_SITE = {
     "monthly": ("docs/kw-plan-{}.md", "reports/targets-{}.json"),       # kw_plan（毎日の在庫の見張り）・monthly_report（月次）
     "kw_serp": ("data/kw_serp/{}.json",),                                # kw_plan が取った上位の見出し・共起語・質問（執筆と書き直しが読む）
 }
+# 自社の社の分も public に置かない種類。ラッコの利用規約は「社内利用の範囲」なので、ラッコで取った上位の見出し・
+# 共起語・質問は自社3サイトの分も置き場で持ち越す（2026-10-09 運用者の決定）
+ALL_SITES = {"kw_serp"}
+OWN = "_own"   # 自社の社の置き場の区画（社の id には無い名前）
 CITATIONS = "data/ai_citations"
 MONTH = re.compile(r"^\d{4}-\d{2}\.json$")
 
@@ -58,7 +62,11 @@ def is_private(sid):
 
 
 def private_path(sid, rel):
-    return ROOT / "data" / "clients" / sid / "private" / rel
+    # 自社の社は data/clients/_own/private/<id>/。data/clients/<id>/ を作るとその社が「お客様」と判定され
+    # （sites.is_client）、置き場の場所を変えると CI のキャッシュの版が変わってお客様の持ち越しが1回分戻らない
+    if is_private(sid):
+        return ROOT / "data" / "clients" / sid / "private" / rel
+    return ROOT / "data" / "clients" / OWN / "private" / sid / rel
 
 
 def templates(kinds=None):
@@ -67,8 +75,10 @@ def templates(kinds=None):
 
 def _copy_all(kinds, to_private):
     n = 0
-    for sid in clients():
-        for t in templates(kinds):
+    for kind, ts in PER_SITE.items():
+        if kinds and kind not in kinds:
+            continue
+        for sid, t in ((s, t) for s in (list(S.load_all()) if kind in ALL_SITES else clients()) for t in ts):
             rel = t.format(sid)
             src, dst = (ROOT / rel, private_path(sid, rel)) if to_private else (private_path(sid, rel), ROOT / rel)
             if src.is_file():

@@ -212,11 +212,12 @@ jobs:
         if: always()
         with: {mode: save}
 
-      # 1つずつ足す（お客様の社のファイルは .gitignore で外れ、足せずに飛ばされる）
+      # 1つずつ足す（お客様の社のファイルは .gitignore で外れ、足せずに飛ばされる）。
+      # ラッコで取った上位の見出し・共起語・質問（data/kw_serp）は自社の分も Git に入れない（規約は社内利用。上の置き場で渡す）
       - name: 計画と組んだ月を正本へ保存
         run: |
           rm -f indexing-service-account.json
-          for p in docs/kw-plan-*.md data/kw_plan_runs.json data/kw_plan_added.json data/kw_origin.json data/kw_serp; do
+          for p in docs/kw-plan-*.md data/kw_plan_runs.json data/kw_plan_added.json data/kw_origin.json; do
             git add -- "$p" 2>/dev/null || true
           done
           git diff --cached --quiet && { echo "変更なし"; exit 0; }
