@@ -24,6 +24,16 @@ on:
         description: "起動役の鍵の期限（起動役が入れる）"
         type: string
         default: ""
+      # 主力の語だけを優先度Aで積み足す（kw_plan --main-first）。手で1回だけ動かすとき。
+      # 手元で動かすと、ラッコで取った見出し・質問（非公開）が CI の執筆に届かないため、CI で動かす
+      main_first_site:
+        description: "主力の語だけを積み足す社（例: subsidy）。空なら通常の在庫の見張り"
+        type: string
+        default: ""
+      main_first_n:
+        description: "積み足す主力の語の上限の本数"
+        type: string
+        default: "20"
 
 permissions:
   contents: read
@@ -176,12 +186,20 @@ jobs:
       - name: 対策キーワードの在庫を見て、1か月分を切った社だけ積み足す
         env:
           RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
+          MAIN_FIRST_SITE: ${{ inputs.main_first_site }}   # 入力は環境変数で受ける（run に直接埋め込むとコマンドとして実行できてしまう）
+          MAIN_FIRST_N: ${{ inputs.main_first_n }}
         run: |
           if [ -z "$HUB_URL" ]; then echo "HUB_URL が未設定のため在庫を数えられません（何もしません）"; exit 0; fi
+          if [ -n "$MAIN_FIRST_SITE" ]; then
+            if ! [[ "$MAIN_FIRST_SITE" =~ ^[a-z0-9-]+$ && "$MAIN_FIRST_N" =~ ^[0-9]+$ ]]; then echo "::error::入力が不正です"; exit 1; fi
+            python scripts/kw_plan.py --site "$MAIN_FIRST_SITE" --main-first "$MAIN_FIRST_N" --dry-run 2>&1 | grep -E "^■|在庫|主力|RAKKO_EST|dry-run|見積もり" || true
+            out=$(python scripts/kw_plan.py --site "$MAIN_FIRST_SITE" --main-first "$MAIN_FIRST_N" 2>&1) || true
+          else
           # 課金の前に、必ず構成と見積もりを記録する（ルール: 設計を固めてからラッコは1回だけ）
           python scripts/kw_plan.py --all --if-needed --dry-run 2>&1 | grep -E "^■|在庫|組みます|組みません|組みました|RAKKO_EST|dry-run|見積もり" || true
           # 本番。スクリプト側（rakko.allow）が1サイト月150・全体月600・1回150・目的ごとの枠を見て、超えるなら呼ばない
           out=$(python scripts/kw_plan.py --all --if-needed 2>&1) || true
+          fi
           echo "$out" | tail -80
           if echo "$out" | grep -qE "RAKKO_GUARD=(run_cap|site_cap|total_cap|bucket|shared|run_limit)"; then
             echo "::warning::ラッコの上限で止めた社があります（無料の材料と控えだけで組み、在庫は取り下げていません）"
