@@ -494,5 +494,66 @@
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
     }
+  },
+  "fudousan-aio-taisaku-yarikata": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-09",
+      "keyword": "不動産会社 aio対策 やり方",
+      "queries": [
+        "不動産会社 aio対策 やり方",
+        "aio対策 やり方",
+        "不動産会社 やり方",
+        "不動産会社 aio対策"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "不動産賃貸仲介 営業",
+        "物件探し 注意点",
+        "物件探し ポイント",
+        "賃貸仲介 集客",
+        "インターネット対応 賃貸",
+        "賃貸管理会社",
+        "賃貸アパート経営",
+        "アパートを借りる",
+        "物件 条件",
+        "物件 やめとけ"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-09",
+      "sec": 38,
+      "title": "物件を増やせばAIに選ばれる？",
+      "youtube": "MObZZZpOqmA"
+    }
+  },
+  "ai-agent-cost": {
+    "site": "conflux",
+    "date": "2026-10-09",
+    "sec": 213,
+    "mp4": "automation/video/ai-agent-cost.mp4",
+    "nums": [
+      "1",
+      "1,000",
+      "20",
+      "3"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-10-09",
+      "keyword": "AI エージェント 費用",
+      "queries": [
+        "ai エージェント 費用",
+        "エージェント 費用",
+        "ai 費用",
+        "ai エージェント"
+      ],
+      "decision": "make",
+      "term": "aiエージェント",
+      "title": "AIエージェントは何から始める？｜3つの内訳と月額の試算方法",
+      "reason": "YouTube のサジェストに「aiエージェント」が出ます"
+    },
+    "youtube": "im8JxcFWCxc"
   }
 }
