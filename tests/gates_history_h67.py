@@ -315,8 +315,9 @@ def test_weekly_refill_never_calls_rakko():
     wk = yaml.safe_load((ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8"))
     runs = " ".join(str(s.get("run") or "") for j in wk["jobs"].values() for s in j.get("steps", []))
     check("週次のワークフローは kw_plan（課金する工程）を動かさない", "kw_plan.py" in runs, False)
-    mo = (ROOT / ".github" / "workflows" / "monthly-report.yml").read_text(encoding="utf-8")
-    check("月次: 上限で止めた回を要対応にする（社・全体・1回・目的の枠）",
+    # 課金する工程（kw_plan）は 2026-10-09 から毎日の在庫の見張り（daily-kpi.yml の kw-stock）が動かす（gates_history_h71）
+    mo = (ROOT / ".github" / "workflows" / "daily-kpi.yml").read_text(encoding="utf-8")
+    check("在庫の見張り: 上限で止めた回を要対応にする（社・全体・1回・目的の枠）",
           all(w in mo for w in ("site_cap", "total_cap", "run_cap", "bucket")), True)
 
 
@@ -328,10 +329,11 @@ def test_every_rakko_call_goes_through_one_door():
         rel = p.relative_to(ROOT).as_posix()
         if "rakkokeyword.com" in s and rel != "scripts/rakko.py":
             direct.append(rel)
-        if re.search(r"\brakko\.(call|suggest|related|questions|account)\(", s):
+        if re.search(r"\brakko\.(call|suggest|related|questions|headline|cooccur|account)\(", s):
             door.append(rel)
     check("ラッコの URL を持つのは rakko.py だけ", direct, [])
-    check("ラッコを呼ぶ工程は kw_plan（月次・新しいお客様）と kw_discover（控えだけ）", door,
+    # kw_serp は kw_plan が取った見出し・共起語・質問を残して読むだけ（ラッコには触らない）
+    check("ラッコを呼ぶ工程は kw_plan（毎日の在庫の見張り）と kw_discover（控えだけ）", door,
           ["scripts/kw_discover.py", "scripts/kw_plan.py"])
     rk_src = (ROOT / "scripts" / "rakko.py").read_text(encoding="utf-8")
     check("rakko.py の中でも通信は call() の1か所", len(re.findall(r"urlopen\(", rk_src)), 1)

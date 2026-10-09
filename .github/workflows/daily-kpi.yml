@@ -4,7 +4,8 @@ run-name: ${{ inputs.scheduled_for && format('日次KPI {0}', inputs.scheduled_f
 # 管制塔の KPI（KPIレポート・AIO計測・AI参照・ダッシュボード）を毎日1回送る（scripts/daily_kpi.py）。
 # 以前は記事の枠0（pipeline-multi）の中にあり、枠0が月の上限・量産の兆候・取りこぼしで飛ぶと集計も飛んだ
 # （2026-09-28〜10-03 の6日が欠けた）。記事の枠とは別の定時にし、送った日を記録して同じ日を2回送らない
-# （管制塔の kpi_log は行を足すだけ）。取りこぼした日は、次の回が7日前まで埋める
+# （管制塔の kpi_log は行を足すだけ）。取りこぼした日は、次の回が7日前まで埋める。
+# 同じ定時に、対策キーワードの在庫の見張り（kw-stock。1か月分を切った社だけ積み足す）も別のジョブで動く
 on:
   schedule:
     - cron: "13 1 * * *"   # JST 10:13 — 前日分（GA4 は前日・Search Console は確定を待って3日前）。数時間遅れても日付をまたがない
@@ -114,3 +115,119 @@ jobs:
         run: |
           python scripts/notify_slack.py "🚨 日次KPIの集計が失敗しました（次の回が7日前まで埋めます）
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+
+  # 対策キーワードの在庫の見張り（2026-10-09 運用者の決定）。書く記事（台帳の未着手）が1か月分（1日の本数×30）を
+  # 切った社だけ、その日に積み足す。月の途中でもよい。1社1か月1回（組んだ月は data/kw_plan_runs.json に社と年月だけ）。
+  # 流れは kw_plan.py の冒頭（実証済みの語→シート→主力×業種→無料のサジェスト→検索数→見出し・共起語→実際の質問→予備）。
+  # ラッコの上限（1サイト月150・全体600・1回150・目的ごとの枠）は rakko.allow が見る。KPI の集計とは別のジョブ（落ちても集計は止めない）
+  kw-stock:
+    needs: sched
+    if: ${{ !cancelled() && needs.sched.outputs.go != 'no' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write   # 計画（docs/kw-plan-*.md）・組んだ月・積んだ語の出どころ・上位ページの調べ（自社3サイト）を残す
+      actions: read
+    env:
+      HUB_URL: ${{ secrets.HUB_URL }}
+      HUB_SECRET: ${{ secrets.HUB_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存インストール
+        run: pip install -r requirements.txt
+
+      - name: サービスアカウントの鍵を置く
+        env:
+          SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          mkdir -p automation/logs
+          if [ -n "$SA_JSON" ]; then
+            printf '%s' "$SA_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          else
+            echo "::warning::GCP_SERVICE_ACCOUNT_JSON が未設定です（食い合いの照合に Search Console を使えません）"
+          fi
+
+      # お客様の社の順位（実証済みの語・4〜20位の記事）・前回の計画と上位ページの調べ・AIの質問形の語を前の回から戻す
+      - uses: ./.github/actions/client-private
+        with: {mode: restore}
+      - uses: ./.github/actions/client-private
+        with: {mode: restore, family: ai-kw, kinds: ai_kw}
+
+      # ラッコの利用記録と応答の控え（30日）を、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）
+      - name: ラッコの控えを戻す
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}
+          restore-keys: rakko-
+
+      - name: 対策キーワードの在庫を見て、1か月分を切った社だけ積み足す
+        env:
+          RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
+        run: |
+          if [ -z "$HUB_URL" ]; then echo "HUB_URL が未設定のため在庫を数えられません（何もしません）"; exit 0; fi
+          # 課金の前に、必ず構成と見積もりを記録する（ルール: 設計を固めてからラッコは1回だけ）
+          python scripts/kw_plan.py --all --if-needed --dry-run 2>&1 | grep -E "^■|在庫|組みます|組みません|組みました|RAKKO_EST|dry-run|見積もり" || true
+          # 本番。スクリプト側（rakko.allow）が1サイト月150・全体月600・1回150・目的ごとの枠を見て、超えるなら呼ばない
+          out=$(python scripts/kw_plan.py --all --if-needed 2>&1) || true
+          echo "$out" | tail -80
+          if echo "$out" | grep -qE "RAKKO_GUARD=(run_cap|site_cap|total_cap|bucket|shared|run_limit)"; then
+            echo "::warning::ラッコの上限で止めた社があります（無料の材料と控えだけで組み、在庫は取り下げていません）"
+            echo "要対応: ラッコの上限で止めました（$(echo "$out" | grep -oE "RAKKO_GUARD=[a-z_]+" | grep -v "=ok" | sort | uniq -c | tr -s ' ' | tr '\n' ' ')）。社ごとの消費は python scripts/rakko.py --check" >> automation/logs/findings.txt
+            python scripts/hub_client.py error_log kw "対策キーワードの在庫: ラッコの上限で止めた社があります（rakko.py --check）" || true
+          fi
+          if echo "$out" | grep -q "クレジットが尽きました"; then
+            echo "::warning::ラッコキーワードのクレジットが尽きました（在庫の積み足しは途中まで）"
+            python scripts/hub_client.py error_log kw "対策キーワードの在庫: ラッコのクレジットが尽きました（途中まで）" || true
+          fi
+          if echo "$out" | grep -q "KW_PLAN_ERROR="; then
+            echo "::warning::在庫の積み足しが途中で落ちた社があります（翌日の見張りがやり直します）"
+            python scripts/hub_client.py error_log kw "対策キーワードの在庫: $(echo "$out" | grep -m1 -o 'KW_PLAN_ERROR=.*' | cut -c1-160)" || true
+          fi
+
+      - name: ラッコの控えを残す
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}-${{ github.run_attempt }}-kwstock
+
+      # お客様の社の計画・上位ページの調べ・積んだ語の記録（.gitignore）を、執筆（記事の枠）と書き直し（週次）へ渡す
+      - uses: ./.github/actions/client-private
+        if: always()
+        with: {mode: save}
+
+      # 1つずつ足す（お客様の社のファイルは .gitignore で外れ、足せずに飛ばされる）
+      - name: 計画と組んだ月を正本へ保存
+        run: |
+          rm -f indexing-service-account.json
+          for p in docs/kw-plan-*.md data/kw_plan_runs.json data/kw_plan_added.json data/kw_origin.json data/kw_serp; do
+            git add -- "$p" 2>/dev/null || true
+          done
+          git diff --cached --quiet && { echo "変更なし"; exit 0; }
+          git commit -q -m "kw: 1か月分を切った社の対策キーワードを積み足し $(date '+%Y-%m-%d')"
+          for i in 1 2 3; do
+            if git pull --rebase --autostash -q origin "${GITHUB_REF_NAME}" && git push -q; then exit 0; fi
+            git rebase --abort 2>/dev/null || true     # 途中の rebase を残すと、次の再試行も必ず失敗する
+            sleep 5
+          done
+          echo "::warning::計画を push できませんでした（台帳への積み足しは済んでいます。組んだ月が残らないので翌日もう一度見ます）"
+
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json

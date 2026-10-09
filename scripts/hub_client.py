@@ -223,6 +223,13 @@ def next_kw(site):
                or pick(lambda k: _norm(k) in aiq, "AI回答あり"))
         if hit:
             return hit
+    # 検索の実績で4〜30位・表示10回以上なのに狙う記事が無かった語（kw_plan が積んだ・data/kw_origin.json の proven）。
+    # 需要と届く見込みが実測で分かっている語を、台帳の並びや語の形の規則より先に書く（2026-10-09 運用者の決定）
+    proven = _proven_targets(site)
+    if proven:
+        hit = pick(lambda k: _norm(k) in proven, "実証済みの語（4〜30位）")
+        if hit:
+            return hit
     # 「開かないと済まない語」（kw_intent で強）を、弱い語より先に書く。
     # 同じ順位でもクリック率が5倍違う。台帳の並び（登録順）に任せない
     try:
@@ -273,6 +280,16 @@ def _unfit(site):
 def _norm(s):
     import re
     return re.sub(r"[\s　・･／/（）()｜|【】\[\]「」、。,.\-‐－—_]", "", str(s).lower())
+
+
+def _proven_targets(site):
+    """kw_plan が積んだ語のうち、検索の実績で4〜30位にいた（実証済みの）語。お客様の社の分は置き場から合わせて読む"""
+    try:
+        import client_private as CP
+        d = CP.load_dict("data/kw_origin.json").get(site) or {}
+    except Exception:
+        return set()
+    return {_norm(v.get("kw", "")) for v in d.values() if isinstance(v, dict) and v.get("proven")} - {""}
 
 
 def _ai_targets(site):

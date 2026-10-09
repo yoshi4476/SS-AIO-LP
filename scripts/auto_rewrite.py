@@ -1104,6 +1104,15 @@ def build_prompt(item):
         allowed = "\n".join(f"- {c}" for c in gap.get("facts") or [])
         what = what.format(kw=gap.get("kw", ""), diffs="\n".join(lines),
                            facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind in ("stuck", "compete"):
+        # 狙う語の上位ページの見出しの並び・共起語・実際の質問（kw_plan がラッコで取り data/kw_serp に残す。
+        # お客様の社の分は private の置き場から CI のキャッシュで戻る）。format の後に足す（見出しに波括弧があっても崩さない）。
+        # 数字は足させない（検算はそのまま）
+        try:
+            import kw_serp
+            what += kw_serp.rewrite_brief(slug)
+        except Exception:
+            pass
     if kind == "early":
         locked = title_locked(slug)
         rule = ("変えない（{0} に変えた題の判定期間中）".format(locked) if locked else

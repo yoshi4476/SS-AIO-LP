@@ -1764,8 +1764,10 @@ def test_kw_plan_keeps_only_buyers():
         _rk.SPEND_LOG, _rk._hub, _rk._GRANT = saved_rk[0], saved_rk[1], None
         if saved_rk[2] is not None:
             _os.environ["GITHUB_ACTIONS"] = saved_rk[2]
-    wf_m = (ROOT / ".github" / "workflows" / "monthly-report.yml").read_text(encoding="utf-8", errors="replace")
-    check("月次は dry-run を先に記録してから本番", wf_m.index("--dry-run") < wf_m.index("--if-needed --replace"), True)
+    # 在庫の組みは 2026-10-09 から毎日の見張り（daily-kpi.yml の kw-stock）。詳しい門は gates_history_h71
+    wf_m = (ROOT / ".github" / "workflows" / "daily-kpi.yml").read_text(encoding="utf-8", errors="replace")
+    check("在庫の見張りは dry-run を先に記録してから本番",
+          0 <= wf_m.find("--if-needed --dry-run") < wf_m.find("kw_plan.py --all --if-needed 2>&1)"), True)
     src_disc = (ROOT / "scripts" / "kw_discover.py").read_text(encoding="utf-8")
     check("週次補充はラッコに課金しない（上限の許可を取らない）", "allow(" in src_disc or "MONTHLY_BUDGET" in src_disc, False)
 

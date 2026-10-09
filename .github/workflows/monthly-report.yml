@@ -6,7 +6,7 @@ run-name: ${{ inputs.scheduled_for && format('月次 {0}', inputs.scheduled_for)
 # 未設定の間は静かにスキップする（デモデータの誤送信を防ぐため）。
 on:
   schedule:
-    - cron: "0 0 1 * *"     # 1日: 先月分の確定版＋在庫の組み直し＋改善の実行
+    - cron: "0 0 1 * *"     # 1日: 先月分の確定版＋改善の実行（在庫の組みは毎日の kw-stock）
     - cron: "0 0 15 * *"    # 15日: 当月の途中経過版だけ（遅れに2週間早く気づく）
   workflow_dispatch:
     inputs:
@@ -61,7 +61,7 @@ jobs:
     needs: guard
     if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 120  # 在庫の組み直し（kw_plan）が1サイト10分前後。20社まで受けるため余裕を持つ
+    timeout-minutes: 120  # 20社までのレポート・競合比較・改善の実行に余裕を持つ（在庫の組みは毎日の kw-stock へ移した）
     steps:
       - uses: actions/checkout@v4
 
@@ -264,57 +264,9 @@ jobs:
             fi
           fi
 
-      # 目標値は翌月号の達成率突合に使うためリポジトリへ残す
-      # 対策キーワードの在庫を、月1回・必要なサイトだけ組み直す。
-      # 毎週やると課金が伸びる。未着手が40本以上あるサイトは飛ばし、
-      # 応答は30日キャッシュされるため、同じ起点への問い合わせは月1回しか課金されない。
-      # RAKKO_API_KEY が無ければ何もしない（無料のサジェストだけの補充は週次が担う）
-      # ラッコの利用記録と応答の控えを、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）。
-      # 持ち越さないと月の上限（1,000）が1回分しか数えられず、30日キャッシュも効かずに毎回課金される
-      - name: ラッコの控えを戻す
-        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            data/rakko_cache
-            data/rakko_volume.json
-            data/rakko_spend.jsonl
-          key: rakko-${{ github.run_id }}
-          restore-keys: rakko-
-
-      - name: 対策キーワードの在庫を組み直す（必要なサイトだけ）
-        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
-        env:
-          RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
-          HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
-        run: |
-          if [ -z "$RAKKO_API_KEY" ]; then echo "RAKKO_API_KEY 未設定 — 組み直しはスキップ"; exit 0; fi
-          # 課金の前に、必ず構成と見積もりを記録する（ルール: 設計を固めてからラッコは1回だけ）
-          python scripts/kw_plan.py --all --if-needed --dry-run 2>&1 | grep -E "^■|RAKKO_EST|dry-run|見積もり" || true
-          # 本番。スクリプト側（rakko.allow）が1サイト月150・全体月600・1回150・目的ごとの枠を見て、超えるなら呼ばない
-          out=$(python scripts/kw_plan.py --all --if-needed --replace 2>&1) || true
-          echo "$out" | tail -40
-          if echo "$out" | grep -qE "RAKKO_GUARD=(run_cap|site_cap|total_cap|bucket|shared|run_limit)"; then
-            echo "::warning::ラッコの上限で止めたサイトがあります（無料の材料だけで組み、在庫は取り下げていません）"
-            mkdir -p automation/logs
-            echo "要対応: ラッコの上限で止めました（$(echo "$out" | grep -oE "RAKKO_GUARD=[a-z_]+" | grep -v "=ok" | sort | uniq -c | tr -s ' ' | tr '\n' ' ')）。社ごとの消費は python scripts/rakko.py --check" >> automation/logs/findings.txt
-          fi
-          if echo "$out" | grep -q "クレジットが尽きました"; then
-            echo "::warning::ラッコキーワードのクレジットが尽きました（在庫の組み直しは途中まで）"
-            mkdir -p automation/logs
-            echo "要対応: ラッコキーワードのクレジットが尽きました（在庫の組み直しが途中）" >> automation/logs/findings.txt
-          fi
-
-      - name: ラッコの控えを残す
-        if: always() && steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            data/rakko_cache
-            data/rakko_volume.json
-            data/rakko_spend.jsonl
-          key: rakko-${{ github.run_id }}-monthly
+      # 対策キーワードの在庫は、ここ（毎月1日）では組まない。2026-10-09 から毎日の在庫の見張り
+      # （daily-kpi.yml の kw-stock）が、未着手が1か月分を切った社だけを、月の途中でもその日に積み足す（1社1か月1回）。
+      # 1日に両方で組むと同じ社を2回組むので、この工程は消した
 
       # AI検索に本当に引用されているかを実測する（キーがあるエンジンだけ。無ければ飛ばす）。
       # 1サイト20語・月1回。試行錯誤で本番を叩かない

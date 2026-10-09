@@ -142,7 +142,8 @@ def next_actions(d):
         acts.append(("自動", f"{x['slug']}: {x['why'][:38]}"))
     st = d.get("stock")
     if st and st["todo"] < LOW_STOCK:
-        acts.append(("自動", f"対策キーワードの在庫が {st['todo']} 本（{LOW_STOCK}本未満）。月次の kw_plan が組み直す"))
+        acts.append(("自動", f"対策キーワードの在庫が {st['todo']} 本（{LOW_STOCK}本未満）。"
+                            "1か月分を切った日に、毎日の在庫の見張り（kw_plan）が積み足す"))
     fun = d.get("funnel")
     if fun and fun[0][1] >= 50:
         view, cta = fun[0][1], fun[1][1]

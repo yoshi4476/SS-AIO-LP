@@ -541,9 +541,39 @@ def related(keyword, limit=100):
     return _rows(call(RELATED, related_body(keyword, limit)))
 
 
+HEADLINE = "/v1/headline"
+COOCCUR = "/v1/co-occurrence"
+QUESTION = "/v1/question-search"
+
+
+def headline_body(keyword):
+    """検索上位ページの見出し（h1〜h4・上位20ページ）。1回3クレジット（公式の資料 v1.21.0）"""
+    return {"keyword": keyword, "h1": True, "h2": True, "h3": True, "h4": False, "limit": 20}
+
+
+def cooccur_body(keyword):
+    """検索上位ページの共起語。ページごとの詳細（URL・題）は要らないので取らない。1回3クレジット"""
+    return {"keyword": keyword, "getDetails": False, "sortBy": "siteCountTotal", "orderBy": "desc", "limit": 60}
+
+
+def question_body(keyword):
+    """その語を含む実際の質問（相対需要の高い順）。1回1.5クレジット"""
+    return {"keyword": keyword, "sortBy": "relativeDemand", "orderBy": "desc", "limit": 50}
+
+
+def headline(keyword):
+    """上位ページの見出しの応答（data: summary・items[].page・metrics・headlines）。呼べなければ None"""
+    return call(HEADLINE, headline_body(keyword))
+
+
+def cooccur(keyword):
+    """共起語の応答（data: items[].word・metrics）。呼べなければ None"""
+    return call(COOCCUR, cooccur_body(keyword))
+
+
 def questions(keyword):
-    """よくある質問。FAQの見出しづくりに使える"""
-    return _rows(call("/v1/question-search", {"keyword": keyword}))
+    """よくある質問（data: items[].question・metrics.relativeDemand）。FAQの候補に使う"""
+    return _rows(call(QUESTION, question_body(keyword)))
 
 
 def metrics(r):

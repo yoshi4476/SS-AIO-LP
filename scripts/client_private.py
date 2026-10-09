@@ -42,7 +42,8 @@ PER_SITE = {
     "ai_kw": ("data/ai_kw/{}.json", "docs/ai-kw-{}.md"),                 # ai_kw_research（週次の KW 補充）
     "weekly": ("data/win_patterns/{}.md", "docs/kw-strong-{}.md",        # win_patterns・kw_reorder・
                "docs/country-{}.md", "docs/season-{}.md"),               # country_rank・season（週次）
-    "monthly": ("docs/kw-plan-{}.md", "reports/targets-{}.json"),       # kw_plan・monthly_report（月次）
+    "monthly": ("docs/kw-plan-{}.md", "reports/targets-{}.json"),       # kw_plan（毎日の在庫の見張り）・monthly_report（月次）
+    "kw_serp": ("data/kw_serp/{}.json",),                                # kw_plan が取った上位の見出し・共起語・質問（執筆と書き直しが読む）
 }
 CITATIONS = "data/ai_citations"
 MONTH = re.compile(r"^\d{4}-\d{2}\.json$")

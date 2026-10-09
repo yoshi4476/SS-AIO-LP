@@ -823,14 +823,18 @@ def _replace_with_fake_hub(KP, rows, picked):
     fake.all_kw = lambda strict=False: rows
     fake.retire_kw = lambda site, kws, reason, force=False: calls["retire"].extend(kws)
     fake.add_kw = lambda site, items: (calls["add"].extend(i["keyword"] for i in items), {"added": len(items)})[1]
-    real, added = sys.modules.get("hub_client"), KP.ADDED
+    real, added, origin = sys.modules.get("hub_client"), KP.ADDED, getattr(KP, "ORIGIN", None)
     with tempfile.TemporaryDirectory() as d:
         try:
             sys.modules["hub_client"] = fake
             KP.ADDED = Path(d) / "added.json"
+            if origin is not None:
+                KP.ORIGIN = Path(d) / "origin.json"     # 積んだ語の出どころ（2026-10-09〜）も本物に書かない
             KP.replace_ledger("x", picked)
         finally:
             KP.ADDED = added
+            if origin is not None:
+                KP.ORIGIN = origin
             if real is not None:
                 sys.modules["hub_client"] = real
             else:
