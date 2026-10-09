@@ -107,6 +107,9 @@ def ask_openai(q):
 
 
 LIMITS = ROOT / "data" / "ai_cache" / "_limits.json"
+# 上限の記録は読んで書き戻す。AIごとに同時に聞く工程（ai_followup）で2つが同時に上限に当たっても片方を消さない
+import threading  # noqa: E402
+_LIMITS_LOCK = threading.Lock()
 
 
 class UsageLimit(RuntimeError):
@@ -139,13 +142,14 @@ def _note_limit(engine, text):
         if until <= now:
             until += timedelta(days=1)
     until += timedelta(minutes=5)
-    try:
-        d = json.loads(LIMITS.read_text(encoding="utf-8")) if LIMITS.is_file() else {}
-    except Exception:
-        d = {}
-    d[engine] = until.isoformat(timespec="minutes")
-    LIMITS.parent.mkdir(parents=True, exist_ok=True)
-    LIMITS.write_text(json.dumps(d), encoding="utf-8")
+    with _LIMITS_LOCK:
+        try:
+            d = json.loads(LIMITS.read_text(encoding="utf-8")) if LIMITS.is_file() else {}
+        except Exception:
+            d = {}
+        d[engine] = until.isoformat(timespec="minutes")
+        LIMITS.parent.mkdir(parents=True, exist_ok=True)
+        LIMITS.write_text(json.dumps(d), encoding="utf-8")
     return until
 
 

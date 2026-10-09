@@ -114,12 +114,23 @@ def ours(urls, domain):
 def measure(a, domain, engines):
     """1本分。全エンジンが失敗したら None（記録せず、窓の中なら次の週にもう一度聞く）"""
     import ai_cite_check as AC
-    row, ok = {}, False
-    for name, fn in engines.items():
+    from concurrent.futures import ThreadPoolExecutor
+
+    def ask(item):
+        name, fn = item
         try:
-            urls = fn(a["keyword"])
+            return name, fn(a["keyword"]), None
         except Exception as e:
-            row[name] = {"error": str(e)[:80]}
+            return name, None, e
+
+    # AIごとに別の会社なので、同じ質問を同時に投げる（1つのAIへは今までどおり1問ずつ）。
+    # 週次でこの工程だけ約8分半かかり、AIの応答を順に待っていた（2026-10-05）。並びは engines の順のまま
+    with ThreadPoolExecutor(max_workers=max(1, len(engines))) as ex:
+        answers = list(ex.map(ask, engines.items()))
+    row, ok = {}, False
+    for name, urls, err in answers:
+        if err is not None:
+            row[name] = {"error": str(err)[:80]}
             continue
         if urls is None:
             # None は「聞けなかった」（Gemini の予算切れなど）。空の出典と同じに扱うと「引用なし」で確定する
