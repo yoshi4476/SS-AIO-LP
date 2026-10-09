@@ -44,7 +44,7 @@ from cannibal_check import dice, kw_conflicts, load_articles  # noqa: E402
 from kw_status import is_written, written_corpus              # noqa: E402
 
 MAX_PLAN = 120        # 1サイトの計画本数。1日2本で60日分
-ENOUGH = 40           # 未着手がこれ以上あるサイトは、--if-needed のとき組み直さない（20日分）
+ENOUGH_DAYS = 30      # 未着手がこの日数分あるサイトは、--if-needed のとき組み直さない（2026-10-08 運用者「1か月分を切ったら」）
 CREDIT_CAP = rakko.RUN_CAP   # 1サイト1回のラッコ消費の上限（150）。社の月の上限・全体の月の上限は rakko.allow が見る
                              # （超えるなら呼ばない。自動課金なので警告では止まらない。2026-10-08 運用者の決定）
 PER_SUBJECT = 10      # 1サブジェクトから採る上限。1業種に偏らせない
@@ -801,6 +801,19 @@ def budget_ok(S):
     return rakko.allow(S["cfg"].get("id", ""), parts, dry=DRY)
 
 
+def month_need(site_id):
+    """1か月分の本数＝1日の本数×30（月の上限まで）。量産の兆候で本数を絞った社は、絞った本数で数える
+    （1日0本の社は0＝組み直さない）"""
+    import daily_audit as DA
+    per_day = DA.DAILY_TARGET
+    try:
+        import pace
+        per_day = min(per_day, pace.quota(site_id))
+    except Exception:
+        pass
+    return min(per_day * ENOUGH_DAYS, DA.MONTHLY_CAP)
+
+
 def todo_count(site_id):
     try:
         import hub_client
@@ -821,9 +834,11 @@ def run(site_id, deep, replace, if_needed=False):
         if n is None:
             print("   在庫を確認できないため組み直しません（管制塔の状態が取れない。課金しない）")
             return
-        if n >= ENOUGH:
-            print(f"   未着手が {n} 本あるので、今回は組み直しません（{ENOUGH}本未満で組み直す）")
+        need = month_need(site_id)
+        if n >= need:
+            print(f"   未着手が {n} 本あるので、今回は組み直しません（1か月分 {need}本を切ったら組み直す）")
             return
+        print(f"   未着手 {n} 本は1か月分 {need}本に足りないので組み直します")
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
     S["sheet"], S["sheet_ng"] = sheet_terms(site_id)
     if S["sheet"] or S["sheet_ng"]:
@@ -882,7 +897,7 @@ def main():
     ap.add_argument("--deep", action="store_true", help="LSI/PAA も使う（1起点22.5クレジット）")
     ap.add_argument("--replace", action="store_true", help="台帳の未着手を対象外にして積み直す")
     ap.add_argument("--if-needed", action="store_true",
-                    help=f"未着手が{ENOUGH}本未満のサイトだけ組み直す（月次の定常運転用）")
+                    help="未着手が1か月分（1日の本数×30）を切ったサイトだけ組み直す（月次の定常運転用）")
     ap.add_argument("--dry-run", action="store_true",
                     help="ラッコを呼ばず（キャッシュは使う）、候補の構成と課金の見積もりだけ出す")
     a = ap.parse_args()
