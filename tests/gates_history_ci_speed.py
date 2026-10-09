@@ -124,6 +124,25 @@ def test_pages_do_not_depend_on_file_order():
                                           'in (ROOT / "articles").glob("*.md"):' in src), (True, False))
 
 
+def test_publish_gap_does_not_redeliver_delivered_noindex():
+    print("\n■ 未配信の確認: 検索から外した記事は、配信の指紋が同じなら配信し直さない（違えば配信する）")
+    # 2026-10-10 noindex の19本（corporate 10・subsidy 9）は sitemap に載らないため毎回「未配信」になり、
+    # 記事の枠のたびに配信し直していた（この工程だけで平均118秒×6日で39回）。どれも配信の指紋は一致していた
+    import publish_gap as PG
+    hidden = {"hid-same", "hid-diff", "hid-none"}.__contains__
+    man = {"hid-same": "aaa", "hid-diff": "old", "open": "bbb"}
+    hashes = {"hid-same": "aaa", "hid-diff": "new", "hid-none": "ccc", "open": "zzz"}
+    missing = ["hid-same", "hid-diff", "hid-none", "open"]
+    check("指紋が今の原稿と同じ noindex の記事だけを届いているとみなす",
+          PG.hidden_delivered(missing, man, hashes, hidden), ["hid-same"])
+    check("指紋を読めないサイトでは今までどおり全部配信する", PG.hidden_delivered(missing, None, hashes, hidden), [])
+    check("検索に出す記事は sitemap に無ければ配信する（指紋が同じでも）",
+          PG.hidden_delivered(["open"], {"open": "zzz"}, hashes, hidden), [])
+    src = (ROOT / "scripts" / "publish_gap.py").read_text(encoding="utf-8")
+    check("配信先の指紋を読んだ後で、未配信から外す",
+          0 <= src.find("man = live_manifest_wp(c)") < src.find("hidden_ok = hidden_delivered(missing, man"), True)
+
+
 def test_select_skips_only_big_unused_dirs():
     print("\n■ 記事の枠の判定: 使わない大きな置き場だけ取らない（判定が読むものは取る）")
     sel = _y("pipeline-multi.yml")["jobs"]["select"]

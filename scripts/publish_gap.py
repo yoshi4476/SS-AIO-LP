@@ -168,6 +168,14 @@ def _live_matches(domain, slug, title, frags):
     return True, ""    # 場所が違うだけかもしれない。判断できないものは古い扱いにしない
 
 
+def hidden_delivered(missing, man, hashes, is_hidden):
+    """sitemap に無い記事のうち、検索から外した記事（noindex）で、配信の指紋（man）が今の原稿の指紋と同じもの。
+    noindex の記事は sitemap に載らないのが正しいので、届いたかは指紋で見る。指紋が無い・違えば含めない（配信する）"""
+    if man is None:
+        return []
+    return [s for s in missing if is_hidden(s) and hashes.get(s) and man.get(s) == hashes.get(s)]
+
+
 def _get(url):
     req = urllib.request.Request(
         url, headers={"User-Agent": "SevenSenses-PublishGap/1.0 (+https://7senses.co.jp)"})
@@ -232,6 +240,16 @@ def main():
                   + (f" / 監修待ち {len(held)}本" if held else ""))
             continue
         man = live_manifest_wp(c) if c.get("type") == "wordpress" else live_manifest(c["domain"])
+        # 検索から外した記事（noindex）は配信先の sitemap に載らない（載せないのが正しい）。sitemap だけで見ると毎回
+        # 「未配信」になり、記事の枠のたびに同じ19本を配信し直していた（2026-10-10: corporate 10本・subsidy 9本。
+        # どれも配信先の指紋 article-manifest.json が今の原稿と一致し、ページも公開中）。noindex の記事は、
+        # 配信の指紋が今の原稿と同じときだけ届いているとみなす。指紋が無い・違うときは今までどおり配信する
+        if man is not None and missing:
+            import noindex
+            hidden_ok = hidden_delivered(missing, man, {s: h for s, _, _, h in slugs}, noindex.is_hidden)
+            missing = [s for s in missing if s not in hidden_ok]
+            if hidden_ok:
+                print(f"   {site}: 検索から外した記事 {len(hidden_ok)}本は sitemap に載らないが、配信の指紋が今の原稿と一致")
         fresh = set() if man is not None else recently_edited()
         stale, why = [], {}
         for s, title, frags, h in slugs:
