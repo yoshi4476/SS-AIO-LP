@@ -433,33 +433,6 @@
       "youtube": "dXTflJruSVg"
     }
   },
-  "business-system-development-cost": {
-    "site": "conflux",
-    "long": {
-      "date": "2026-10-08",
-      "keyword": "業務システム 開発 費用",
-      "queries": [
-        "業務システム 開発 費用",
-        "開発 費用",
-        "業務システム 費用",
-        "業務システム 開発"
-      ],
-      "decision": "skip",
-      "suggestions": [
-        "業務システム",
-        "業務系エンジニア",
-        "業務自動化 プログラミング",
-        "システム開発 見積",
-        "開発行為",
-        "開発申請",
-        "開発許可制度",
-        "開発経済",
-        "開発許可",
-        "業務要件定義"
-      ],
-      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
-    }
-  },
   "gaiheki-tosou-aio-taisaku": {
     "site": "ai-lab",
     "long": {
@@ -527,33 +500,5 @@
       "title": "物件を増やせばAIに選ばれる？",
       "youtube": "MObZZZpOqmA"
     }
-  },
-  "ai-agent-cost": {
-    "site": "conflux",
-    "date": "2026-10-09",
-    "sec": 213,
-    "mp4": "automation/video/ai-agent-cost.mp4",
-    "nums": [
-      "1",
-      "1,000",
-      "20",
-      "3"
-    ],
-    "format": "duo",
-    "long": {
-      "date": "2026-10-09",
-      "keyword": "AI エージェント 費用",
-      "queries": [
-        "ai エージェント 費用",
-        "エージェント 費用",
-        "ai 費用",
-        "ai エージェント"
-      ],
-      "decision": "make",
-      "term": "aiエージェント",
-      "title": "AIエージェントは何から始める？｜3つの内訳と月額の試算方法",
-      "reason": "YouTube のサジェストに「aiエージェント」が出ます"
-    },
-    "youtube": "im8JxcFWCxc"
   }
 }
