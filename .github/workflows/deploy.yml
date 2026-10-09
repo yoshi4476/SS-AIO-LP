@@ -34,13 +34,38 @@ jobs:
         with:
           token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
+      # 日本語フォント（fonts-noto-cjk）の控え。apt-get update と入れるのに約15秒かかり、作り直しの前の待ちの大半だった
+      # （2026-10-10 の配信）。控えはランナーの OS の版で切る（版が変われば apt で入れ直して控え直す）
+      - name: ランナーの版
+        id: img
+        run: echo "os=${ImageOS:-unknown}-${ImageVersion%%.*}" >> "$GITHUB_OUTPUT"
+      - name: 日本語フォントの控えを戻す
+        id: fonts
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.fonts-ci
+          key: ja-fonts-v1-${{ steps.img.outputs.os }}
+
       # 互いに関係ない準備を先に裏で始める（終わりは使う工程が印のファイルで待つ）。2026-10-03〜09 の147回で、
       # 順に入れて作り直しまで平均37秒・wrangler の取得が送り出しの工程の頭で平均14秒かかっていた。
       # 調査ページの「貼れる図」は日本語フォントで描く。無いと図だけ外れて公開される（2026-10-05 に全ページで欠けていた）。
+      # 図は Pillow がフォントのパス（/usr/share/fonts/opentype/noto/）で読むので、控えを同じ場所へ写せば apt と同じになる。
       # wrangler は送り出しの工程で同じ版を使うので、ここでは取っておくだけ（取れなくても送り出しの工程が取り直す）
       - name: 時間のかかる準備を先に始める（日本語フォント・wrangler）
         run: |
-          ( (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1; echo $? > /tmp/apt.rc ) < /dev/null > /dev/null 2>&1 &
+          if [ -f ~/.fonts-ci/done ] && [ -d ~/.fonts-ci/noto ]; then
+            # 写せなければ apt で入れる（控えが壊れていても図は外れない）
+            ( ( { sudo mkdir -p /usr/share/fonts/opentype && sudo cp -r ~/.fonts-ci/noto /usr/share/fonts/opentype/ \
+                  && [ -f /usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc ]; } \
+                || { sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk; } ) > /tmp/apt.log 2>&1
+              echo $? > /tmp/apt.rc ) < /dev/null > /dev/null 2>&1 &
+          else
+            ( (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1; rc=$?
+              if [ "$rc" = 0 ] && [ -d /usr/share/fonts/opentype/noto ]; then
+                rm -rf ~/.fonts-ci && mkdir -p ~/.fonts-ci && cp -r /usr/share/fonts/opentype/noto ~/.fonts-ci/ && touch ~/.fonts-ci/done
+              fi
+              echo $rc > /tmp/apt.rc ) < /dev/null > /dev/null 2>&1 &
+          fi
           ( npx --yes wrangler@4.121.0 --version > /tmp/wrangler-prefetch.log 2>&1; echo $? > /tmp/wrangler.rc ) < /dev/null > /dev/null 2>&1 &
 
       # Python と依存（requirements.txt）を週ごとの控えから戻す。戻せた回は下の pip install が確かめるだけになる
@@ -51,17 +76,28 @@ jobs:
       # 日付で切り替わる特集（season_feature）も、公開した日の暦で出る。
       # 作り直しに失敗したら、コミット済みのページをそのまま公開する（公開を止めない）
       - name: 原稿から作り直す
+        id: build
         run: |
           # どれも失敗しても止めないのは前と同じ
           python -m pip install --quiet -r requirements.txt || true
           # 日本語フォントを入れ終えてから作り直す（最初の工程で裏で始めたもの。最長5分待つ）
           for i in $(seq 1 300); do [ -f /tmp/apt.rc ] && break; sleep 1; done
           [ "$(cat /tmp/apt.rc 2>/dev/null)" = "0" ] || echo "::warning::日本語フォントを入れられませんでした（図だけ外れることがあります）"
-          echo "準備の待ち: 工程の頭から ${SECONDS}秒"
+          [ -f ~/.fonts-ci/done ] && echo "fonts=ready" >> "$GITHUB_OUTPUT"
+          echo "準備の待ち: 工程の頭から ${SECONDS}秒（日本語フォント $(ls /usr/share/fonts/opentype/noto 2>/dev/null | wc -l)本・控え ${{ steps.fonts.outputs.cache-hit == 'true' && 'あり' || 'なし' }}）"
           python scripts/build.py > /tmp/build.log 2>&1 && echo "作り直しました" \
             || { tail -20 /tmp/build.log; git checkout -- site; echo "::warning::作り直しに失敗したため、コミット済みのページを公開します"; }
           tail -3 /tmp/build.log
           echo "作り直し: 工程の頭から ${SECONDS}秒"
+
+      # apt で入れた回だけ、日本語フォントを控える（次の回から apt を待たない）
+      - name: 日本語フォントを控える
+        if: steps.fonts.outputs.cache-hit != 'true' && steps.build.outputs.fonts == 'ready'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.fonts-ci
+          key: ja-fonts-v1-${{ steps.img.outputs.os }}
 
       - name: Cloudflare Pagesへデプロイ（初回はプロジェクトを自動作成）
         env:

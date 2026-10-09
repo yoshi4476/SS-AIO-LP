@@ -96,10 +96,22 @@ def test_deploy_skips_only_identical_output():
           ("python scripts/build.py" in build, _step(job, "原稿から作り直す").get("if")), (True, None))
     pre = _step(job, "時間のかかる準備を先に始める")["run"]
     names = [s.get("name", s.get("uses", "")) for s in job["steps"]]
-    check("フォントと wrangler は非公開のデータの取得の直後に裏で始め、終わりの印を残す",
-          (names.index("時間のかかる準備を先に始める（日本語フォント・wrangler）") == 2,
-           "fonts-noto-cjk" in pre and "echo $? > /tmp/apt.rc" in pre and "echo $? > /tmp/wrangler.rc" in pre,
-           pre.count("< /dev/null > /dev/null 2>&1 &")), (True, True, 2))
+    check("フォントと wrangler は非公開のデータの取得の後に裏で始め、終わりの印を残す",
+          (names.index("時間のかかる準備を先に始める（日本語フォント・wrangler）") > names.index("./.github/actions/private-data"),
+           "fonts-noto-cjk" in pre and "/tmp/apt.rc" in pre and "echo $? > /tmp/wrangler.rc" in pre,
+           pre.count("< /dev/null > /dev/null 2>&1 &")), (True, True, 3))
+    rest = _step(job, "日本語フォントの控えを戻す")
+    save = _step(job, "日本語フォントを控える")
+    check("フォントの控えはランナーの版で切り、戻す鍵と控える鍵が同じ",
+          (rest["with"]["key"], rest["with"]["key"] == save["with"]["key"], "ImageVersion" in _step(job, "ランナーの版")["run"]),
+          ("ja-fonts-v1-${{ steps.img.outputs.os }}", True, True))
+    check("控えるのは apt で入れた回だけ（戻した回・入れられなかった回は控えない）",
+          ("steps.fonts.outputs.cache-hit != 'true'" in save["if"], "steps.build.outputs.fonts == 'ready'" in save["if"],
+           save.get("continue-on-error")), (True, True, True))
+    check("控えを写せない・中身が欠けていれば apt で入れる（図を外さない）",
+          ("NotoSansCJK-Bold.ttc" in pre, pre.count("sudo apt-get install -y -qq fonts-noto-cjk")), (True, 2))
+    check("控えの保存は作り直しの後（フォントを入れ終えた後）",
+          names.index("日本語フォントを控える") > names.index("原稿から作り直す"), True)
     check("日本語フォントを入れ終えてから作り直す",
           0 <= build.find("[ -f /tmp/apt.rc ] && break") < build.find("python scripts/build.py"), True)
     check("依存は今までどおり pip install で確かめる（控えが無い回も入る・失敗しても止めない）",
