@@ -122,6 +122,11 @@ def test_pages_do_not_depend_on_file_order():
         src = (ROOT / "scripts" / f).read_text(encoding="utf-8")
         check(f"{f} は記事を名前順に読む", ('sorted((ROOT / "articles").glob("*.md"))' in src,
                                           'in (ROOT / "articles").glob("*.md"):' in src), (True, False))
+    # 集合の並びは実行ごとに変わる（PYTHONHASHSEED）。一部の鍵だけで並べると、同じ値どうしの順が毎回変わる。
+    # 2026-10-10 PYTHONHASHSEED を 1・2・3 にして作り直すと /compare/aio/・/compare/meo/ の説明文が毎回違った
+    src = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("build.py は集合を一部の鍵だけで並べない（sorted({...}, key=...)）",
+          re.findall(r"sorted\(\{[^}]*\}, *key=", src), [])
 
 
 def test_publish_gap_does_not_redeliver_delivered_noindex():

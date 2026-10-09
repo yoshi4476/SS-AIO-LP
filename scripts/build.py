@@ -2033,7 +2033,8 @@ def build_extra_pages(all_metas):
              f"{name}の比較表", f"{SITE_URL}/compare/{cat}/",
              f"{name}の記事にある比較表{len(rows)}表を1か所に集めました。",
              [f"表は{len({r['slug'] for r in rows})}本の記事に載せたものそのままで、表ごとに出典の記事へ進めます。",
-              DF.named("主な表は", sorted({r['h2'] for r in rows if r['h2']}, key=len), "です。")])
+              # 同じ長さの見出しは表の並びの順（集合で重複を除くと順が実行ごとに変わり、同じ原稿から違うページができた）
+              DF.named("主な表は", sorted(dict.fromkeys(r['h2'] for r in rows if r['h2']), key=len), "です。")])
         made.append((cat, name, len(rows)))
     if made:
         page("compare", CP.index_html(made), "比較表から探す", f"{SITE_URL}/compare/",

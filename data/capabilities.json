@@ -87,7 +87,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2346",
+     "evidence": "scripts/build.py:2347",
      "note": "基準に届かない記事は site/ に生成されない",
      "anchor": "weak = rubric.weak_axes(meta)"
     },
@@ -1022,7 +1022,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2499",
+     "evidence": "scripts/build.py:2500",
      "anchor": "n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）"
     },
     "external-md": {
@@ -1337,7 +1337,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2049",
+     "evidence": "scripts/build.py:2050",
      "anchor": "groups = TP.build(sid, all_metas)"
     },
     "external-md": {
@@ -1388,7 +1388,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2070",
+     "evidence": "scripts/build.py:2071",
      "anchor": "area_pairs, area_g = AH.live(all_metas)"
     },
     "external-md": {
@@ -1440,7 +1440,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2486",
+     "evidence": "scripts/build.py:2487",
      "anchor": "season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）"
     },
     "external-md": {
@@ -1594,42 +1594,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2482",
+     "evidence": "scripts/build.py:2483",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2482",
+     "evidence": "scripts/build.py:2483",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2482",
+     "evidence": "scripts/build.py:2483",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2482",
+     "evidence": "scripts/build.py:2483",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2482",
+     "evidence": "scripts/build.py:2483",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2482",
+     "evidence": "scripts/build.py:2483",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2482",
+     "evidence": "scripts/build.py:2483",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     }
@@ -1998,7 +1998,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2526",
+     "evidence": "scripts/build.py:2527",
      "anchor": "render_warns = render_check.scan(sorted((ROOT / \"site\").rglob(\"index.html\")))"
     },
     "external-md": {
@@ -2392,7 +2392,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2369",
+     "evidence": "scripts/build.py:2370",
      "anchor": "hidden_metas = [m for m in all_metas if noindex.on(m)]",
      "note": "ページは描いて URL を残し、head を noindex,follow に。一覧・関連・前後・テーマ・業種ハブ・用語集・比較表・sitemap・llms.txt・feed から外す。他の記事のリンクは描くときに外す"
     },
