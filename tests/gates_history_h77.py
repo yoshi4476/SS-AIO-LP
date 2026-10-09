@@ -28,6 +28,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from unittest import mock
 
 from test_gates import check, ROOT
 from gates_history_h72 import patched, _quiet
@@ -420,3 +421,39 @@ def test_jobs_save_client_files_at_the_end():
     check("取得の後に重ねて置き、見張りを入れる。送る前に作業場所の分を戻す",
           ("overlay_in()" in ps.split("def _after_fetch")[1][:400], "install_hook()" in ps.split("def _after_fetch")[1][:400],
            "overlay_out(unstage=False)" in ps.split("def push")[1][:600]), (True, True, True))
+
+
+def test_private_push_fails_loudly_when_it_cannot_write():
+    """2026-10-10。CI から非公開のリポジトリへ書けないと、その回に書いたお客様の原稿はランナーと一緒に消える。
+    ところが送る工程は、書けなくてもログに PRIVATE_PUSH=failed を1行出して `|| true` で終わり、誰にも届かなかった。
+    書くものが無い回（nochange）は push しないので、権限が無いことに書いた回まで気づけなかった"""
+    print("\n■ 守秘義務: 非公開のリポジトリへ書けないことを、書くものが無い回でも確かめて知らせる")
+    import private_store as PS
+    with tempfile.TemporaryDirectory() as d:
+        bare, work = Path(d) / "origin.git", Path(d) / "private"
+        g = lambda *a, cwd=None: subprocess.run(["git", *a], cwd=cwd, capture_output=True, text=True)
+        g("init", "-q", "--bare", str(bare))
+        g("clone", "-q", str(bare), str(work))
+        for k, v in (("user.name", "t"), ("user.email", "t@example.com")):
+            g("config", k, v, cwd=work)
+        (work / "a.txt").write_text("1", encoding="utf-8")
+        g("add", "-A", cwd=work)
+        g("commit", "-q", "-m", "init", cwd=work)
+        g("push", "-q", "origin", "HEAD", cwd=work)
+        out = []
+        with mock.patch.dict(os.environ, {"SS_PRIVATE_DIR": str(work), "GITHUB_ACTIONS": "true"}), \
+                mock.patch.object(PS, "overlay_out", return_value=[]), \
+                mock.patch("builtins.print", side_effect=lambda *a, **k: out.append(" ".join(map(str, a)))):
+            ok1 = PS.push("t")
+            g("remote", "set-url", "origin", str(Path(d) / "nowhere.git"), cwd=work)
+            ok2 = PS.push("t")
+            (work / "b.txt").write_text("2", encoding="utf-8")
+            with mock.patch.object(PS.time, "sleep"):
+                ok3 = PS.push("t", tries=1)
+    check("書けて変更が無い回は nochange", (ok1, any(o.startswith("PRIVATE_PUSH=nochange") for o in out[:1])), (True, True))
+    check("変更が無くても、書けない回は failed（push の下見で確かめる）", ok2, False)
+    check("変更があって書けない回も failed", ok3, False)
+    check("書けない回は実行の画面に赤い注釈を出す", sum(o.startswith("::error title=非公開のリポジトリへ書けません") for o in out), 2)
+    act = (ROOT / ".github" / "actions" / "private-data" / "action.yml").read_text(encoding="utf-8")
+    check("save の工程は、書けない回だけ失敗にする（private/ が無い回は止めない）",
+          ("grep -q '^PRIVATE_PUSH=failed'" in act, "then exit 1" in act), (True, True))

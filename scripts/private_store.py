@@ -305,16 +305,29 @@ def push(message, tries=3):
     overlay_out(unstage=False)         # 作業場所で書いた・直したお客様の社の記事・画像・台本も残す
     _git("add", "-A")
     if _git("diff", "--cached", "--quiet").returncode == 0:
+        # 書くものが無い回も、書けるかだけは確かめる。書けないまま原稿を書いた回は、その原稿がランナーと一緒に消える
+        r = _git("push", "--dry-run", "-q", "origin", "HEAD")
+        if r.returncode:
+            return _push_failed((r.stderr or r.stdout).strip()[-200:])
         print("PRIVATE_PUSH=nochange", flush=True)
         return True
     _git("commit", "-q", "-m", message)
     for i in range(tries):
-        if _git("push", "-q", "origin", "HEAD").returncode == 0:
+        r = _git("push", "-q", "origin", "HEAD")
+        if r.returncode == 0:
             print("PRIVATE_PUSH=ok", flush=True)
             return True
         _git("pull", "-q", "--rebase")
         time.sleep(3 * (i + 1))
-    print("PRIVATE_PUSH=failed（非公開のリポジトリへ push できませんでした）", flush=True)
+    return _push_failed((r.stderr or r.stdout).strip()[-200:])
+
+
+def _push_failed(why):
+    """書けないことを、ログの1行ではなく実行の画面の赤い注釈で出す（呼ぶ側の工程も失敗にして、異常の知らせに載せる）"""
+    print(f"PRIVATE_PUSH=failed（非公開のリポジトリへ push できませんでした）{why}", flush=True)
+    if os.environ.get("GITHUB_ACTIONS"):
+        print(f"::error title=非公開のリポジトリへ書けません::{REPO} へ push できません。SITE_PUSH_TOKEN の対象に {REPO} を足して"
+              " Contents を Read and write にするか、Secret PRIVATE_DATA_TOKEN を作ってください", flush=True)
     return False
 
 

@@ -43,4 +43,6 @@ runs:
     - if: inputs.mode == 'save'
       shell: bash
       run: |
-        python3 scripts/private_store.py --push "CI: ${{ github.workflow }} / ${{ github.job }}（run ${{ github.run_id }}）" || true
+        python3 scripts/private_store.py --push "CI: ${{ github.workflow }} / ${{ github.job }}（run ${{ github.run_id }}）" | tee "$RUNNER_TEMP/private_push.log" || true
+        # 書けない（権限が無い）ときだけ工程を失敗にして異常の知らせに載せる。private/ が無い回（none）は止めない
+        if grep -q '^PRIVATE_PUSH=failed' "$RUNNER_TEMP/private_push.log"; then exit 1; fi
