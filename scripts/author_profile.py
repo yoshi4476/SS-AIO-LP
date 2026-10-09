@@ -107,13 +107,26 @@ def render_block(prof):
             + "\n    ".join(lis) + "\n  </ul>\n  <!-- /auto:works -->")
 
 
+# ProfilePage の dateModified は日時（DateTime）。日付だけだと Search Console が「日時値が無効です」と出す（2026-10-10）
+DATE_MOD = re.compile(r'"dateModified":\s*"([^"]*)"')
+STAMP = re.compile(r"自動集計・\d{4}-\d{2}-\d{2}更新")
+
+
+def _with_date(s, d):
+    return DATE_MOD.sub(f'"dateModified": "{d}T00:00:00+09:00"' if len(d) == 10 else f'"dateModified": "{d}"', s, count=1)
+
+
+def _bare(s):
+    return STAMP.sub("", DATE_MOD.sub("", s))
+
+
 def write_page(prof):
     if not PAGE.is_file():
         return False
     t = PAGE.read_text(encoding="utf-8")
     same_json = json.dumps(prof["same_as"], ensure_ascii=False)
     t2 = re.sub(r'"sameAs":\s*\[[^\]]*\]', '"sameAs": ' + same_json, t, count=1)
-    t2 = re.sub(r'"dateModified":\s*"\d{4}-\d{2}-\d{2}"', f'"dateModified": "{prof["date"]}"', t2, count=1)
+    t2 = _with_date(t2, prof["date"])
     block = render_block(prof)
     if "<!-- auto:works -->" in t2:
         t2 = re.sub(r"<!-- auto:works -->.*?<!-- /auto:works -->", block, t2, count=1, flags=re.S)
@@ -127,6 +140,10 @@ def write_page(prof):
         if add:
             extra = "".join(f'\n    <li><a href="{_h.escape(u)}" target="_blank" rel="noopener me">{_h.escape(u)}</a></li>' for u in add)
             t2 = t2[:m.end(1)] + extra + t2[m.end(1):]
+    # 中身が変わらない回は日付を進めない（日付だけ動かすと鮮度の信号が薄まる）。書き方だけ日時にそろえる
+    if _bare(t2) == _bare(t):
+        old = DATE_MOD.search(t)
+        t2 = _with_date(t, old.group(1)) if old else t
     if t2 != t:
         PAGE.write_text(t2, encoding="utf-8", newline="\n")
         return True

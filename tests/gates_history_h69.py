@@ -57,3 +57,33 @@ def test_indexnow_uses_the_key_each_domain_serves():
     for f in ("reindex.py", "onboard_check.py"):
         s = (ROOT / "scripts" / f).read_text(encoding="utf-8")
         check(f"{f} もその社の鍵で確かめる", "key_for(" in s or 'cfg.get("indexnow_key")' in s, True)
+
+
+def test_profile_page_date_modified_is_datetime():
+    """2026-10-10 Search Console（ai.7senses.co.jp）「プロフィール ページ … 『dateModified』の日時値が無効です」
+    （/author/haraguchi/）から。ProfilePage の dateModified は日時（DateTime）で、日付だけ（2026-10-05）を出していた。
+    書き換える author_profile.py は日付だけの形しか探さず、週次のたびに中身が同じでも日付だけ進めていた"""
+    import shutil
+    import tempfile
+    from pathlib import Path
+    import author_profile as AP
+    page = ROOT / "site" / "author" / "haraguchi" / "index.html"
+    src = page.read_text(encoding="utf-8")
+    lds = [json.loads(m) for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', src, re.S)]
+    prof_ld = [g for ld in lds for g in ld.get("@graph", [ld]) if g.get("@type") == "ProfilePage"]
+    check("著者ページの ProfilePage の dateModified は時差つきの日時", [bool(ISO_TZ.match(g.get("dateModified", ""))) for g in prof_ld], [True])
+
+    block = re.search(r"<!-- auto:works -->.*?<!-- /auto:works -->", src, re.S).group(0)
+    same = json.loads(re.search(r'"sameAs":\s*(\[[^\]]*\])', src).group(1))
+    old = re.search(r'"dateModified":\s*"([^"]*)"', src).group(1)
+    with tempfile.TemporaryDirectory() as d:
+        tmp = Path(d) / "index.html"
+        shutil.copy(page, tmp)
+        stamp = lambda p: AP.STAMP.sub(f"自動集計・{p['date']}更新", block)
+        with mock.patch.object(AP, "PAGE", tmp), mock.patch.object(AP, "render_block", side_effect=stamp):
+            AP.write_page({"date": "2099-01-02", "same_as": same})
+            got = re.search(r'"dateModified":\s*"([^"]*)"', tmp.read_text(encoding="utf-8")).group(1)
+            check("中身が同じ回は日付を進めない（日時の形のまま）", got, old)
+            AP.write_page({"date": "2099-01-02", "same_as": same + ["https://example.com/new-profile"]})
+            got = re.search(r'"dateModified":\s*"([^"]*)"', tmp.read_text(encoding="utf-8")).group(1)
+            check("中身が変わった回は新しい日付を時差つきの日時で出す", got, "2099-01-02T00:00:00+09:00")
