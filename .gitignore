@@ -19,6 +19,8 @@ automation/images/
 Thumbs.db
 __pycache__/
 .wrangler/
+# 送り出した中身の指紋（scripts/deploy_marker.py）。送り出しの直前に作り、本番にだけ置く
+site/deploy-hash.txt
 
 # 配信先リポジトリの作業クローン
 .publish-work/

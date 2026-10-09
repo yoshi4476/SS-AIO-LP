@@ -8,6 +8,11 @@ on:
     paths: ["site/**", "functions/**", "articles/**", "templates/**", "scripts/**",
             "data/research/**", "data/season_calendar.json", "data/industries.json"]
   workflow_dispatch:
+    inputs:
+      force:
+        description: "本番と同じ中身でも送る（指紋の比較を飛ばす）"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -34,12 +39,19 @@ jobs:
       # 作り直しに失敗したら、コミット済みのページをそのまま公開する（公開を止めない）
       - name: 原稿から作り直す
         run: |
-          python -m pip install --quiet -r requirements.txt || true
+          # 互いに関係ない準備は同時に進める（2026-10-03〜09 の147回で、順に入れて作り直しまで平均37秒・
+          # wrangler の取得が送り出しの工程の頭で平均14秒）。どれも失敗しても止めないのは前と同じ。
+          # wrangler は送り出しの工程で同じ版を使うので、ここでは取っておくだけ（取れなくても送り出しの工程が取り直す）
           # 調査ページの「貼れる図」は日本語フォントで描く。無いと図だけ外れて公開される（2026-10-05 に全ページで欠けていた）
-          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk > /dev/null 2>&1 || true
+          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /dev/null 2>&1 & apt=$!
+          npx --yes wrangler@4.121.0 --version > /tmp/wrangler-prefetch.log 2>&1 & wr=$!
+          python -m pip install --quiet -r requirements.txt || true
+          wait $apt || true
           python scripts/build.py > /tmp/build.log 2>&1 && echo "作り直しました" \
             || { tail -20 /tmp/build.log; git checkout -- site; echo "::warning::作り直しに失敗したため、コミット済みのページを公開します"; }
           tail -3 /tmp/build.log
+          # 取り終えるのを待つ（同じ取り置きを次の工程と同時に書き換えない）
+          wait $wr || echo "wrangler を先に取れませんでした（送り出しの工程で取り直します）"
 
       - name: Cloudflare Pagesへデプロイ（初回はプロジェクトを自動作成）
         env:
@@ -51,6 +63,19 @@ jobs:
         run: |
           # 公開前の門: sitemapの404/noindex・git の衝突マーカーがあれば公開しない（seo_audit --gate）
           python3 scripts/seo_audit.py --gate || { echo "::error::サイト監査の門で止めました（上の ::error:: を直す）"; exit 1; }
+          # 本番と同じ中身なら送らない（作り直しと門は上で通している）。2026-10-03〜09 の147回のうち68回は
+          # 新しいファイルが0本だった。指紋が違う・読めない・本番に指紋が無いときは送る（scripts/deploy_marker.py）。
+          # 鍵の設定も一緒に省く: Pages の鍵は新しい送り出しから効くので、送らない回に入れても変わらない
+          if [ "${{ inputs.force }}" != "true" ]; then
+            same=$(python3 scripts/deploy_marker.py --same https://ss-aio-lp.pages.dev --salt wrangler@4.121.0) || same="SAME=no"
+            echo "$same"
+            if echo "$same" | grep -q '^SAME=yes'; then
+              echo "::notice::本番と同じ中身のため、Cloudflare への送り出しを省きました（作り直しと公開前の門は通しています）"
+              echo "本番と同じ中身のため送り出しを省きました" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+          fi
+          python3 scripts/deploy_marker.py --write --salt wrangler@4.121.0
           npx --yes wrangler@4.121.0 pages project create ss-aio-lp --production-branch=master 2>/dev/null || echo "プロジェクトは作成済み"
           # AI紹介チェック（functions/api/ai-check.js）が使う鍵。Gemini の検索つき回答は有料（無料枠では使えない）なので、
           # 回数の上限（月の検索5,000回・同じ回線1日2回）と、ロボットよけ（Turnstile）の鍵を一緒に入れる
