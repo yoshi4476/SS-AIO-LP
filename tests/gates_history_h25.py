@@ -36,7 +36,7 @@ def _patched(fake, entries):
         BW._request, BW.STATE, BW.BACKFILL = fake, Path(d) / "s.json", Path(d) / "b.json"
         BW.api_key = lambda: "dummy-key"
         BW.sitemap_entries = lambda dom: entries.get(dom, [])
-        # 自社だけで確かめる。本物の sites/ に同意済みのお客様（conflux 等）が増えると GetUserSites を呼び、呼び出しの数が変わる
+        # 自社だけで確かめる。本物の sites/ に同意済みのお客様の社が増えると GetUserSites を呼び、呼び出しの数が変わる
         BW.client_cfgs = lambda: {}
         try:
             yield BW

@@ -111,7 +111,7 @@ data/cwv_crux/*
 !data/cwv_crux/subsidy.json
 # サイトごとの検索語・順位・AIの出典（rank_track・ai_kw_research・win_patterns・kw_reorder・country_rank・season・kw_plan）。
 # どれも sites/*.json の全社を回すため、お客様を足すと先方の検索語と順位がそのまま public に載る
-# （2026-10-07 CONFLUX を足した日の夜の救済で data/ranks/conflux.json が載るところだった）。自社3サイトの分だけコミットする
+# （2026-10-07 お客様の社 を足した日の夜の救済で data/ranks/<お客様>.json が載るところだった）。自社3サイトの分だけコミットする
 data/ranks/*
 !data/ranks/ai-lab.json
 !data/ranks/corporate.json

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """自動化の点検（2026-10-07「全ファイルをチェックして、完璧な自動化ができているか」）で見つけた穴。
 
-  1. お客様の社（CONFLUX）を足した日、rank_track・ai_kw_research などが全社を回すため、先方の検索語と順位が
+  1. お客様の社を足した日、rank_track・ai_kw_research などが全社を回すため、先方の検索語と順位が
      その夜の救済の `git add -A` で public リポジトリに載るところだった（compete・bing_stats・cwv_crux だけ除外していた）
-  2. sites/conflux.json の gsc_owner=false・GA4 の閲覧の記録なしが、API で確かめた実態（Search Console は siteOwner・
+  2. お客様の社の設定の gsc_owner=false・GA4 の閲覧の記録なしが、API で確かめた実態（Search Console は siteOwner・
      GA4 は読める）と食い違い、準備状況が「GA4 に当社を閲覧者で追加（お客様）」と誤って知らせる
   3. history_checks_d は CI に GH_TOKEN が無く、鍵の登録と配信先の検査が1つも動かないまま HISTD_OK=yes と出ていた
      （2026-10-05 の週次のログ: 「gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment」）
@@ -49,23 +49,6 @@ def test_client_search_data_stays_out_of_public_repo():
         check(f"{name} は sites/*.json の全社を回す（お客様の分も書く）", "load_all()" in src, True)
 
 
-def test_conflux_record_matches_verified_access():
-    """2026-10-07 にサービスアカウントで確かめた: Search Console の https://conflux-partners.jp/ は siteOwner、
-    GA4 のプロパティ（ID は非公開の置き場）は runReport が通る。シートを取り込み直して記録が戻ると、また誤って知らせる"""
-    import sites as S
-    import private_store as PS
-    # 設定の戦略の部分は非公開の置き場（sites.load_all が重ねる。2026-10-10 守秘義務・h76）
-    if not PS.available("conflux"):
-        print("  WARN  非公開のデータが無いため CONFLUX の記録は確かめられません")
-        return
-    cfg = S.load("conflux")
-    check("CONFLUX: Search Console のオーナー（API で確かめた事実）", cfg.get("gsc_owner"), True)
-    check("CONFLUX: GA4 を当社が読める（API で確かめた事実）", (cfg.get("onboarding") or {}).get("ga4_viewer"), True)
-    import intake_readiness as R
-    have = {"git": True, "youtube": True, "wp": False, "ftp": False, "gbp": ""}
-    st = {x["id"]: x["status"] for x in R.compute("conflux", have=have)}
-    check("CONFLUX: 計測・検索の実績・Indexing API を「要対応」にしない",
-          (st.get("measurement"), st.get("search_console"), st.get("indexing_api")), ("ok", "ok", "ok"))
 
 
 def test_histd_does_not_claim_ok_when_github_checks_could_not_run():
@@ -116,31 +99,16 @@ def test_failed_redelivery_reaches_the_notice():
     check("publish_changed: findings.txt を自分で書かない", ('"findings.txt"' in src, "FINDINGS" in src), (False, False))
 
 
-def test_outcome_watch_uses_each_sites_cap():
-    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
-    if not client_ready("conflux"):
-        return
-    import outcome_watch as OW
-    import pace
-    day = date(2026, 11, 30)
-    arts = [{"slug": f"a{i}", "date": f"2026-11-{i:02d}", "score": "95"} for i in range(1, 30)]
-    arts.append({"slug": "a30", "date": "2026-11-29", "score": "95"})
-    saved = pace.quota
-    try:
-        pace.quota = lambda sid: 1
-        want = OW.expected_articles("conflux", arts, day)
-    finally:
-        pace.quota = saved
-    check("結果の見張り: 月30本の社（rules.monthly_cap）が30本書いた後は、その日の本数を求めない", want, 0)
 
 
 def test_rescue_waits_for_each_sites_own_slot():
     """救済（daily_audit）が「不足」と言うのは、その社の枠の時刻＋猶予を過ぎてから。
-    3社の時刻を手で書いていたため、書いていない社（CONFLUX）は時刻に関係なく不足とみなされ、
+    3社の時刻を手で書いていたため、書いていない社（お客様の社）は時刻に関係なく不足とみなされ、
     夜の救済（実際は翌3時ごろに走る）が先回りで1本書き、枠の1本と合わせて1日1本の決まりを超えるところだった"""
     import daily_audit as D
     import pace
     import site_order
+    import sites as S
     ph = getattr(D, "publish_hours", None)
     check("救済: 枠の時刻を pipeline-multi.yml の割り当てから求める（社を足しても手で直さない）", callable(ph), True)
     if not callable(ph):
@@ -148,7 +116,8 @@ def test_rescue_waits_for_each_sites_own_slot():
     saved = pace.quota
     bad = []
     try:
-        pace.quota = lambda sid: 1 if sid == "conflux" else 2
+        # お客様の社は1日1本（枠の並びは公開の id、本数は社の id で数える。どちらで聞いても同じ本数）
+        pace.quota = lambda sid: 1 if S.is_client(sid) else 2
         for s in site_order.order():
             hs, want = ph(s), min(D.DAILY_TARGET, pace.quota(s))
             if hs is None or len(hs) != want:
@@ -223,3 +192,22 @@ def test_geo_check_counts_only_articles():
           cov(sm, llms, {"a1", "a2"})[:2] if cov else None, (2, 2))
     src = (ROOT / "scripts" / "geo_check.py").read_text(encoding="utf-8")
     check("geo_check: 掲載率も抽出する記事も、深さ（/ の数）で記事を決めない", "count(\"/\") >= 4" in src, False)
+
+
+def test_outcome_watch_uses_each_sites_cap():
+    """月の上限は社ごと（daily_audit.site_cap）。月30本と決めた社が上限に達した日から月末まで「書かれていない」と
+    知らせていた（2026-10-07 の点検）。架空の社で確かめる（お客様の社の設定は非公開の置き場）"""
+    import outcome_watch as OW
+    import pace
+    import sites as S
+    day = date(2026, 11, 30)
+    arts = [{"slug": f"a{i}", "date": f"2026-11-{i:02d}", "score": "95"} for i in range(1, 30)]
+    arts.append({"slug": "a30", "date": "2026-11-29", "score": "95"})
+    saved = (pace.quota, S.load)
+    try:
+        pace.quota = lambda sid: 1
+        S.load = lambda sid: {"id": sid, "rules": {"monthly_cap": 30}}
+        want = OW.expected_articles("client-zz", arts, day)
+    finally:
+        pace.quota, S.load = saved
+    check("結果の見張り: 月30本の社（rules.monthly_cap）が30本書いた後は、その日の本数を求めない", want, 0)

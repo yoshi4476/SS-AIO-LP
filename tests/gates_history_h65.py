@@ -74,7 +74,7 @@ def test_discovery_sources_require_territory_words():
     check("kw_discover: 主力の語は拾う", (KD.fits("クリニック aio対策 費用", lab), KD.fits("記帳代行 相場", corp),
                                     KD.fits("it導入補助金 電子申請", sub)), (True, True, True))
     check("kw_discover: 受け入れの判定に汎用語（domain_terms）を使わない", 'S["domain_terms"]' in inspect.getsource(KD.main), False)
-    # kw_fit の「別のサイトの担当」は同じ組（自社3サイト）だけを見る。お客様の社（CONFLUX）の「外注」で
+    # kw_fit の「別のサイトの担当」は同じ組（自社3サイト）だけを見る。お客様の社の「外注」で
     # 「経理 外注 費用」を落とさない（kw_discover の除外語の取り違えは別の直しで止める）
     import kw_fit
     check("kw_fit: お客様の社の担当領域語で自社の買い手の語を止めない",

@@ -7,7 +7,7 @@ AI集客ラボの整骨院の保険・クリニックの建築や M&A、補助�
 
 決めたこと: URL は残し（404 にしない）、noindex にして、自社の導線（sitemap・llms.txt・一覧・関連・
 まとめのページ・内部リンク）から外す。4つの描き方（AI集客ラボ build.py・コーポレート nextjs-json・
-補助金 external-html・CONFLUX external-md）で同じに効かせる。週次の自動の直しが外した記事に手を入れたり、
+補助金 external-html・お客様の社 external-md）で同じに効かせる。週次の自動の直しが外した記事に手を入れたり、
 リンクを戻したりしない。リンクは記法だけ外して文は残す（auto_review.guard の検算を通る）。
 AI集客ラボは周辺のテーマ（SNS・チラシ・看板・イベント）を kw_off で止める。
 """

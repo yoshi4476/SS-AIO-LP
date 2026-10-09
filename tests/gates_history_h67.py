@@ -165,8 +165,8 @@ def test_rakko_caps_stop_before_calling():
     at = f"{month}-01T10:00:00+09:00"
 
     # 社の上限: その社の今月 140 ＋ 見積もり 15 > 150 → 呼ばない
-    with sandbox([_row(at, 140, "conflux", "/v1/headline")]) as (rk, net, log):
-        ok, out = _quiet(rk.allow, "conflux", 15)
+    with sandbox([_row(at, 140, "client-zz", "/v1/headline")]) as (rk, net, log):
+        ok, out = _quiet(rk.allow, "client-zz", 15)
         check("社の今月＋見積もりが社の上限を超えるなら許可しない", ok, False)
         check("止めた印は RAKKO_GUARD=site_cap", "RAKKO_GUARD=site_cap" in out, True)
         _quiet(rk.suggest, "クリニック 集客")
@@ -177,7 +177,7 @@ def test_rakko_caps_stop_before_calling():
               ["site_cap"])
         lines, over = rk.month_report(month)
         check("止めた回は要対応（RAKKO_MONTH=over）", over, True)
-        check("社ごとの今月の消費と上限を出す", any("conflux: 140.0 / 上限 150" in ln and "止めた 1回" in ln for ln in lines), True)
+        check("社ごとの今月の消費と上限を出す", any("client-zz: 140.0 / 上限 150" in ln and "止めた 1回" in ln for ln in lines), True)
 
     # 全体の上限: 社の記録なし（過去の行）590 ＋ 見積もり 15 > 600 → 呼ばない。過去の行は社に割り振らない
     with sandbox([_row(at, 590)]) as (rk, net, log):
@@ -205,11 +205,11 @@ def test_rakko_caps_stop_before_calling():
 
     # 社ごとに上限を変えられる（rakko_monthly_cap）。1回の上限は社の上限を上げても150
     import sites
-    cfgs = {"conflux": {"id": "conflux", "rakko_monthly_cap": 30, "rakko_budget": {"headline": 70}},
+    cfgs = {"client-zz": {"id": "client-zz", "rakko_monthly_cap": 30, "rakko_budget": {"headline": 70}},
             "big": {"id": "big", "rakko_monthly_cap": 400}}
     with sandbox() as (rk, net, log), patched(sites, load_all=lambda: cfgs):
-        check("社ごとの上限（rakko_monthly_cap）と、書いていない社の既定", (rk.site_cap("conflux"), rk.site_cap("ai-lab")), (30, 150))
-        ok, out = _quiet(rk.allow, "conflux", {"headline": 31.5})
+        check("社ごとの上限（rakko_monthly_cap）と、書いていない社の既定", (rk.site_cap("client-zz"), rk.site_cap("ai-lab")), (30, 150))
+        ok, out = _quiet(rk.allow, "client-zz", {"headline": 31.5})
         check("社ごとの上限を超えるなら許可しない", (ok, "RAKKO_GUARD=site_cap" in out), (False, True))
         ok, out = _quiet(rk.allow, "big", {"headline": 160})
         check("見積もりが1回の上限を超えるなら許可しない", (ok, "RAKKO_GUARD=run_cap" in out), (False, True))
@@ -260,22 +260,22 @@ def test_rakko_counts_local_and_ci_in_one_total():
     month = rakko.datetime.now(rakko.JST).strftime("%Y-%m") if hasattr(rakko, "JST") else "2026-10"
     at = f"{month}-02T10:00:00+09:00"
     hub = FakeHub()
-    # 手元で conflux に 100 使った（見出し・共起語）
-    with sandbox([_row(at, 100, "conflux", "/v1/headline")], hub=hub) as (rk, net, log):
+    # 手元で client-zz に 100 使った（見出し・共起語）
+    with sandbox([_row(at, 100, "client-zz", "/v1/headline")], hub=hub) as (rk, net, log):
         _quiet(rk.sync_shared)
         _quiet(rk.sync_shared)
         check("手元の記録を管制塔へ写す（2回写しても二重にならない）", hub.rows and sum(r[2] for r in hub.rows), 100)
-    # CI の記録には conflux は無いが、管制塔の台帳で手元の 100 が見える → 100＋60 > 150 で止まる
+    # CI の記録には client-zz は無いが、管制塔の台帳で手元の 100 が見える → 100＋60 > 150 で止まる
     with sandbox([], hub=hub, ci=True) as (rk, net, log):
-        check("CI から手元の目的ごとの消費が見える", rk.usage("conflux", month, rk.shared_usage(month))["purposes"]["headline"], 100)
-        ok, out = _quiet(rk.allow, "conflux", {"qa": 30, "volume": 30})
+        check("CI から手元の目的ごとの消費が見える", rk.usage("client-zz", month, rk.shared_usage(month))["purposes"]["headline"], 100)
+        ok, out = _quiet(rk.allow, "client-zz", {"qa": 30, "volume": 30})
         check("CI でも手元の消費を合わせて社の上限を判断する", (ok, "RAKKO_GUARD=site_cap" in out), (False, True))
-        ok, out = _quiet(rk.allow, "conflux", {"qa": 30, "reserve": 15})
+        ok, out = _quiet(rk.allow, "client-zz", {"qa": 30, "reserve": 15})
         check("合わせても上限内なら許可する", ok, True)
     # CI で使った分も写り、手元から見える
     with sandbox([_row(at, 30, "ai-lab", "/v1/search-volume")], hub=hub, ci=True) as (rk, net, log):
         _quiet(rk.sync_shared)
-    with sandbox([_row(at, 100, "conflux", "/v1/headline")], hub=hub) as (rk, net, log):
+    with sandbox([_row(at, 100, "client-zz", "/v1/headline")], hub=hub) as (rk, net, log):
         u = rk.usage("ai-lab", month, rk.shared_usage(month))
         check("手元から CI の消費が見える（全体の合計も同じ）", (u["site"], u["total"], u["purposes"]["volume"]), (30, 130, 30))
     # 管制塔に届かないとき: CI は呼ばない（手元の消費が見えない）。手元は自分の記録で判断する
@@ -358,9 +358,9 @@ def test_rakko_estimate_is_not_below_actual():
         check("一括調査は1語0.03・1回最低15（500語で15）",
               (rakko.price("/v1/search-volume", {"keywords": ["a"] * 500}),
                rakko.price("/v1/search-volume", {"keywords": ["a"] * 1000})), (15.0, 30.0))
-    # 2026-10-08 の CONFLUX: 問い合わせ120回（1.5）＋一括1回（15）＝実際 195
+    # 2026-10-08 のお客様の社: 問い合わせ120回（1.5）＋一括1回（15）＝実際 195
     with patched(KP, paid_queries=lambda S: [("/v1/suggest-keywords", {"keyword": str(i)}) for i in range(120)]):
-        check("CONFLUX の実例（実際195）より見積もりが小さくない", KP.estimate({"industries": []}) >= 195, True)
+        check("お客様の社の実例（実際195）より見積もりが小さくない", KP.estimate({"industries": []}) >= 195, True)
         check("見積もりを目的ごとに分ける（サジェスト＝予備・一括＝一括検索数）",
               KP.estimate_parts({"industries": []}), {"reserve": 180.0, "volume": 30.0})
     with patched(KP, paid_queries=lambda S: [], DEEP=True):

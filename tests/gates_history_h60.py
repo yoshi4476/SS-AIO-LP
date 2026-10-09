@@ -4,7 +4,7 @@
   1. 入口の押下を cta_click・diagnosis_click・contact_intent の合計で数え、診断・相談の押下を2回数えていた
      （コーポレートは 10/8 から診断の入口で cta_click と diagnosis_click を両方送る）。月次レポートは
      cta で始まる出来事を全部足し、cta_click と cta_〈ボタンID〉の2つを数えて2倍に出ていた（AI集客ラボ・補助金）
-  2. コーポレートが送る cta_kind が GA4 に未登録。CONFLUX はカスタム定義が1つも無かった
+  2. コーポレートが送る cta_kind が GA4 に未登録。お客様の社はカスタム定義が1つも無かった
   3. 拡張計測の「フォームの操作」と自前の form_start・form_submit が重なる。止めた日を残し、数字に添える
   4. コーポレートの記事の相談ボタン（262か所）が /contact/ → /contact の転送（308）を挟み、
      コーポレートの計測（pathname === "/contact"）にも数えられていなかった
@@ -140,7 +140,7 @@ def test_inline_compare_warns_when_counting_changed():
 def test_ga4_custom_dims_and_form_interactions():
     import ga4_dims as G
     check("GA4: cta_kind（入口の種類）を登録する", "cta_kind" in [n for n, _ in G.DIMS], True)
-    check("GA4: 表示名に記号を使わない（全角の括弧で CONFLUX の page_path が 400 で登録できなかった）",
+    check("GA4: 表示名に記号を使わない（全角の括弧でお客様の社の page_path が 400 で登録できなかった）",
           [label for _, label in G.DIMS if not re.fullmatch(r"[\w ]+", label)], [])
     ver = getattr(G, "verified", None)
     check("拡張計測: 自前の計測が出ているかを決める関数がある（ga4_dims.verified）", callable(ver), True)
@@ -270,7 +270,7 @@ def test_mid_cta_uses_the_site_colors():
     check("色でない値は使わない（style に入れる値を検める）", "url(x)" in bad, False)
     m = re.search(r'<div class="cta-mid"[^>]*>\s*<p[^>]*>(.*?)</p>\s*<a class="cta-button" href="([^"]+)"'
                   r'(?: data-cta="([^"]*)")?[^>]*>(.*?)</a>\s*(?:<p[^>]*>(.*?)</p>)?\s*</div>', sub, re.S)
-    check("塊の形は変えない（CONFLUX の .cta-inline への読み替えが同じ形で読む）", bool(m), True)
+    check("塊の形は変えない（external-md の社の .cta-inline への読み替えが同じ形で読む）", bool(m), True)
 
 
 # ── 6. 描き直しの指紋 ─────────────────────────────────────────

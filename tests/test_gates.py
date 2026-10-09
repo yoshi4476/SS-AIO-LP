@@ -27,9 +27,36 @@ sys.path.insert(0, str(ROOT / "scripts"))
 FAIL = []
 
 
+_HIDE = None
+
+
+def hide(text):
+    """門の出力（CI のログ。public）から、お客様の社の id・名前・ドメイン・記事の題・slug を公開の id に置き換える。
+    門の見出しや「得た／期待」に社の id が混ざっても出さないための最後の守り（2026-10-10 守秘義務）。
+    非公開のデータが無い回は置き換える語が無い"""
+    global _HIDE
+    if _HIDE is None:
+        _HIDE = []
+        try:
+            import ci_mask
+            import private_store
+            import sites
+            for sid, cfg in sites.load_all().items():
+                if sites.is_client(sid) and cfg.get("public_id"):
+                    comp = private_store.read_json(sid, "company.json", {}) or {}
+                    _HIDE += [(w, cfg["public_id"]) for w in ci_mask.identity_words(sid, cfg, comp)]
+            _HIDE.sort(key=lambda x: -len(x[0]))
+        except Exception:
+            _HIDE = []
+    for w, pid in _HIDE:
+        if w in text:
+            text = re.sub(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", pid, text)
+    return text
+
+
 def check(name, got, want):
     ok = got == want
-    print(f"  {'OK' if ok else 'NG'}  {name}" + ("" if ok else f"  （得た {got!r} / 期待 {want!r}）"))
+    print(hide(f"  {'OK' if ok else 'NG'}  {name}" + ("" if ok else f"  （得た {got!r} / 期待 {want!r}）")))
     if not ok:
         FAIL.append(name)
         # pytest で走らせたときも NG を落とす。記録するだけだと pytest は「passed」と出し、
@@ -45,7 +72,7 @@ def client_ready(sid):
     import private_store
     if private_store.available(sid):
         return True
-    print(f"  WARN  {sid} の非公開のデータ（private/clients/{sid}/）が無いため、この門は飛ばします")
+    print(hide(f"  WARN  {sid} の非公開のデータ（private/clients/{sid}/）が無いため、この門は飛ばします"))
     return False
 
 
@@ -396,15 +423,16 @@ def test_each_site_declares_what_it_sells():
     import private_store as PS
     # お客様の社の主力・配分は非公開の置き場の戦略の部分（sites.load_all が重ねる。2026-10-10 守秘義務）
     for sid, c in S.load_all().items():
+        pid = c.get("public_id") or sid          # CI のログには公開の id だけを出す
         if S.is_client(sid) and not PS.available(sid):
-            print(f"  WARN  {sid}: 非公開のデータが無いため主力・配分は確かめられません")
+            print(f"  WARN  {pid}: 非公開のデータが無いため主力・配分は確かめられません")
             continue
-        check(f"{sid} に主力がある", bool(c.get("main_offer")), True)
+        check(f"{pid} に主力がある", bool(c.get("main_offer")), True)
         mix = c.get("category_mix") or c.get("scheme_mix") or {}
         real = {k: v for k, v in mix.items() if not k.startswith("_")}
-        check(f"{sid} に狙う配分がある", bool(real), True)
+        check(f"{pid} に狙う配分がある", bool(real), True)
         if real:
-            check(f"{sid} の配分が100%", sum(real.values()), 100)
+            check(f"{pid} の配分が100%", sum(real.values()), 100)
     brief = (ROOT / "scripts" / "site_brief.py").read_text(encoding="utf-8")
     check("執筆前に主力を見せている", "このサイトで売るもの" in brief, True)
 
@@ -2684,10 +2712,14 @@ def test_site_has_two_axes_and_no_orphans():
     check("ずれているページが無い", sync_nav.run(False), [])
     # 制作・顧問の表記（関係を書いた相互リンク）。フッターを作る場所が雛形・生成・手書きと複数あり、
     # 1か所ずつ足すと漏れるため、site.config.json の1か所から全ページへ揃える
+    # 表記の文言と URL は正本（site.config.json の footer_credit）から読む。門に社の名前・ドメインを書き写さない
+    # （公開側の追跡ファイルに名前が並ぶと、お客様の社の名前が出ない門と見分けがつかなくなる。2026-10-10）
     cred = sync_nav.credit()
+    items = json.loads((ROOT / "site.config.json").read_text(encoding="utf-8")).get("footer_credit") or []
     check("制作表記: AIO 対策・サイト制作の表記とリンクがある",
-          'href="https://conflux-partners.jp/works/7senses-aio" target="_blank" rel="noopener">'
-          "AIO 対策・サイト制作：YW（CONFLUX PARTNERS）</a>" in cred, True)
+          (bool(items), any(it["label"].startswith("AIO 対策・サイト制作：") for it in items),
+           all(f'href="{it["url"]}" target="_blank" rel="noopener">{it["label"]}</a>' in cred for it in items)),
+          (True, True, True))
     check("制作表記: nofollow を付けない", "nofollow" in cred, False)
     foots = {p: p.read_text(encoding="utf-8", errors="surrogateescape") for p in site.rglob("*.html")}
     foots = {p: t for p, t in foots.items() if sync_nav.FOOTER in t}
@@ -2706,8 +2738,9 @@ def test_site_has_two_axes_and_no_orphans():
     FC = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(FC)
     check("補助金の制作表記: LP 制作の表記とリンク",
-          'href="https://conflux-partners.jp/works/7senses-lp" target="_blank" rel="noopener"' in FC.CREDIT
-          and ">LP 制作：YW（CONFLUX PARTNERS）</a>" in FC.CREDIT and "nofollow" not in FC.CREDIT, True)
+          FC.LABEL.startswith("LP 制作：") and FC.URL.startswith("https://")
+          and f'href="{FC.URL}" target="_blank" rel="noopener"' in FC.CREDIT
+          and f">{FC.LABEL}</a>" in FC.CREDIT and "nofollow" not in FC.CREDIT, True)
     pg = (ROOT / "scripts" / "subsidy" / "pages.py").read_text(encoding="utf-8")
     check("補助金の制作表記: pages.py の雛形に入り、配信のたびに全ページへ揃える",
           "footer_credit.CREDIT" in pg and "footer_credit.apply(ROOT)" in pg, True)
@@ -2727,9 +2760,11 @@ def test_site_has_two_axes_and_no_orphans():
     corp = ROOT / ".publish-work" / "corporate" / "src" / "components" / "Footer.tsx"
     if corp.is_file():
         ft = corp.read_text(encoding="utf-8")
+        who = FC.LABEL.split("：", 1)[1]                       # 制作者の表記（補助金の LP と同じ）
+        home = "/".join(FC.URL.split("/")[:3])                 # 制作者のサイト
         check("コーポレートの制作・顧問の表記とリンクがある（nofollow なし）",
-              all(s in ft for s in ("サイト制作：YW（CONFLUX PARTNERS）", "https://conflux-partners.jp/works/7senses-corp",
-                                    "顧問：YW（AI × 経営コンサルタント）", "https://conflux-partners.jp/about"))
+              all(s in ft for s in (f"サイト制作：{who}", f"{home}/works/7senses-corp",
+                                    "顧問：YW（AI × 経営コンサルタント）", f"{home}/about"))
               # コメント（「nofollow も付けない」）は数えない。2026-10-08 にコメントを拾って NG になった
               and not any("nofollow" in ln for ln in ft.splitlines() if not ln.strip().startswith(("//", "*", "/*"))),
               True)
@@ -3752,6 +3787,10 @@ def test_report_actions_close_the_loop():
     check("win_patterns: 引用実績が無ければ同じ業種の上位記事の型", callable(getattr(WP, "ranked_for", None)), True)
 
 
+def _hidden_print(*a, **k):
+    print(*(hide(str(x)) for x in a), **k)
+
+
 def history_tests():
     """tests/gates_history_*.py の test_ 関数（過去の誤りの棚卸しから作った門）。
     各モジュールは check を `from test_gates import check` で使う"""
@@ -3771,6 +3810,8 @@ def history_tests():
         sys.path.insert(0, str(priv))
         for p in sorted(priv.glob("gates_client_*.py")):
             m = importlib.import_module(p.stem)
+            # 非公開の門の見出し（print）も社の名前を公開の id に置き換えて出す（CI のログは public）
+            m.print = _hidden_print
             out += [getattr(m, n) for n in dir(m) if n.startswith("test_") and callable(getattr(m, n))]
     else:
         print("  WARN  非公開のデータ（private/）が無いため、お客様の社の門（private/tests/gates_client_*.py）は飛ばします")

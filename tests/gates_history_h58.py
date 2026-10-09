@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """記事の表の数字を、同じ数字の横棒グラフにして表の直後に添える（2026-10-08 運用者の依頼「表やグラフ、図なども盛り込んで
-視覚的に見やすく」）。4サイト（AI集客ラボ・コーポレート・補助金・CONFLUX）の記事に効かせる。
+視覚的に見やすく」）。全サイト（自社3サイトとお客様の社）の記事に効かせる。
 
 数字の入った表は約半数の記事にあるのに（AI集客ラボ 147本中71本・コーポ 131本中54本・補助金 130本中95本）、
 グラフは1つも無く、大小は表を読み比べないと分からなかった。グラフは誤れば表より害が大きいので、門で守るのは:
@@ -246,77 +246,6 @@ def _ok_svg(fig):
         return False
 
 
-def test_charts_survive_each_sites_renderer():
-    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
-    if not client_ready("conflux"):
-        return
-    print("\n■ 表のグラフ: AI集客ラボ（build.py）・コーポ（nextjs-json）・補助金（external-html）・CONFLUX（external-md）で残る")
-    import build as B
-    import sites as S
-    cfgs = S.load_all()
-    # AI集客ラボ: build.py の記事の変換
-    with tempfile.TemporaryDirectory() as td:
-        art = Path(td) / f"{SLUG}.md"
-        meta = dict(META, category="aio")
-        art.write_text("---\n" + "\n".join(f"{k}: {json.dumps(v, ensure_ascii=False)}" for k, v in meta.items())
-                       + "\n---\n" + BODY, encoding="utf-8")
-        old = B.SITE
-        try:
-            B.SITE = Path(td) / "site"
-            with contextlib.redirect_stdout(io.StringIO()):
-                B.build_article(art, B.TEMPLATE.read_text(encoding="utf-8"))
-            page = (B.SITE / "aio" / SLUG / "index.html").read_text(encoding="utf-8")
-        finally:
-            B.SITE = old
-            B.QUALITY_ISSUES.pop(SLUG, None)      # 試験の記事の検査結果・更新日の台帳を、本物の集計に残さない
-            B._HASHES.pop(SLUG, None)
-    figs = _svgs(page)
-    T = _tc()
-    accent = {sid: T.colors_for(cfgs[sid])["s1"] for sid in ("ai-lab", "corporate", "subsidy", "conflux")}
-    check("AI集客ラボ: 記事のページに図が2つ・SVG として読める・図の主色", [len(figs), all(map(_ok_svg, figs)),
-          all(f'fill="{accent["ai-lab"]}"' in f for f in figs)], [2, True, True])
-    # コーポレート（nextjs-json）・補助金（external-html）・CONFLUX（external-md の journal）。設定は各社のもの
-    corp = dict(cfgs["corporate"], languages=[])
-    sub = dict(cfgs["subsidy"], languages=[])
-    cf = dict(cfgs["conflux"])
-    with tempfile.TemporaryDirectory() as td:
-        root = _tree(td)
-        src = root / f"{SLUG}.md"
-        src.write_text(BODY, encoding="utf-8")
-        with _Patched(root) as P, contextlib.redirect_stdout(io.StringIO()):
-            d1 = _dest(Path(td) / "corp")
-            P.write_nextjs_json(corp, d1, dict(META, category=next(iter(corp["categories"]))), BODY)
-            js = json.loads((d1 / corp["content_dir"] / f"{SLUG}.json").read_text(encoding="utf-8"))
-            d2 = _dest(Path(td) / "sub")
-            (d2 / Path(sub["template"]).parent).mkdir(parents=True)
-            (d2 / sub["template"]).write_text("<!doctype html><html><head><title>{{TITLE}}</title></head>"
-                                               "<body><article>{{BODY}}</article></body></html>", encoding="utf-8")
-            P.write_external_html(sub, d2, dict(META, category=next(iter(sub["categories"]))), BODY, src)
-            page2 = (d2 / P.page_dir(sub) / SLUG / "index.html").read_text(encoding="utf-8")
-            d3 = _dest(Path(td) / "cf")
-            (d3 / "public").mkdir()
-            P.write_external_md(cf, d3, dict(META, category=next(iter(cf["categories"]))), BODY, src)
-            md3 = (d3 / cf["content_dir"] / f"{SLUG}.md").read_text(encoding="utf-8")
-    f1, f2, f3 = _svgs(js["html"]), _svgs(page2), _svgs(md3)
-    check("コーポ: JSON の本文 HTML に図が2つ（先方は dangerouslySetInnerHTML でそのまま描く）・SVG として読める",
-          [len(f1), all(map(_ok_svg, f1)), len(re.findall(r'</table></div><figure class="table-chart"', js["html"]))], [2, True, 2])
-    check("補助金: 雛形に流し込んだページの本文に図が2つ・SVG として読める",
-          [len(f2), all(map(_ok_svg, f2)), page2.index("<article>") < page2.index("table-chart") < page2.index("</article>")],
-          [2, True, True])
-    lines = md3.split("\n")
-    at = [i for i, ln in enumerate(lines) if ln.startswith('<figure class="table-chart"')]
-    check("CONFLUX: 図は前後を空行で挟んだ1行の HTML の塊（marked はそのまま通す）・表の枠（table-wrap）の後ろ",
-          [len(at), all(lines[i - 1] == "" and lines[i + 1] == "" for i in at),
-           all("</div>" in "\n".join(lines[max(0, i - 3):i]) for i in at), all(map(_ok_svg, f3))], [2, True, True, True])
-    check("CONFLUX: 先方の変換が止める形にならない（** が無い・先方に無い部品の名前を使わない）",
-          [P.journal_problems({"slug": SLUG, "title": "t", "description": "d", "category": "ai", "author": "YW", "date": "2026-10-08"},
-                              md3.split("---\n", 2)[2], P.md_dialect(cf)), "**" in "".join(f3)], [[], False])
-    check("色は各社の図の主色（sites/<id>.json の diagram_colors。無ければ図の既定の色）",
-          [all(f'fill="{accent["corporate"]}"' in f for f in f1), all(f'fill="{accent["subsidy"]}"' in f for f in f2),
-           all(f'fill="{accent["conflux"]}"' in f for f in f3)], [True, True, True])
-    import md2html
-    check("読了時間は表だけの本文で数える（コーポの readingMinutes に図の文字を足さない）",
-          js["readingMinutes"], md2html.reading_minutes(re.sub(r'<figure class="table-chart".*?</figure>', "", js["html"], flags=re.S)))
 
 
 # ── 5. 色・読み込み・スマホの文字・ページの題 ───────────────────────────
@@ -326,8 +255,9 @@ def test_chart_uses_site_colors_only_and_stays_light_and_readable():
     T = _tc()
     import sites as S
     import seo_audit
-    for sid in ("ai-lab", "corporate", "subsidy", "conflux"):
-        cfg = S.load(sid)
+    # 全社（お客様の社は非公開のデータがある回だけ入る）。お客様の社は公開の id で出す（CI のログに社の id を出さない）
+    for real, cfg in sorted(S.load_all().items()):
+        sid = cfg.get("public_id") or real
         c = T.colors_for(cfg)
         s = T.svg(_a(T_TWO), c)
         paints = set(re.findall(r'(?:fill|stroke)="([^"]+)"', s))

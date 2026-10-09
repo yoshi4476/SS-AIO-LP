@@ -106,7 +106,7 @@ def test_intake_subjects_exclude_by_phrase():
 
 def test_client_kw_plan_stays_out_of_git():
     print("\n■ お客様の計画とラッコの控えは public のリポジトリに入らない")
-    for rel in ("docs/kw-plan-conflux.md", "docs/kw-plan-conflux.dry.md",
+    for rel in ("docs/kw-plan-client-zz.md", "docs/kw-plan-client-zz.dry.md",
                 "data/rakko_cache/0000.json", "data/rakko_volume.json", "data/rakko_spend.jsonl"):
         r = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "-q", rel])
         check(f"Git に入らない: {rel}", r.returncode, 0)

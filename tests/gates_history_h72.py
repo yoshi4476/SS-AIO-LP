@@ -69,7 +69,7 @@ def fake_pace(sites, state=None, manual=None):
 SITES = {"x": {"daily_articles": 1, "spare_slot": "rewrite_main"},     # 補助金と同じ設定
          "y": {},                                                       # 設定なし（既定の2本）
          "z": {"daily_articles": 0, "spare_slot": "rewrite_main"},     # 新しい記事を止め、2枠とも書き直し
-         "w": {"daily_articles": 1},                                    # 1日1本だが書き直しはしない（CONFLUX と同じ）
+         "w": {"daily_articles": 1},                                    # 1日1本だが書き直しはしない（お客様の社と同じ）
          "bad": {"daily_articles": 7}}                                  # 範囲外は0〜2に収める
 
 
@@ -127,27 +127,6 @@ def test_daily_audit_and_month_need_count_by_setting():
         check("結果の見張り: 1本の日に「1/2本でした」と知らせない", ("1/1本" in out, bad), (True, []))
 
 
-def test_operator_setting_is_not_reported_as_a_signal():
-    import pace
-    rl = getattr(pace, "report_line", None)
-    check("pace: 一覧の1行と「要対応」かを返す関数がある（report_line）", callable(rl), True)
-    if not callable(rl):
-        return
-    calm = {"quota": 2, "signals": [], "new": 10, "how": "URL検査", "not_indexed_rate": 0.0, "duplicates": 0,
-            "pairs": 0, "imp": [100, 120]}
-    with fake_pace(SITES):
-        line, flagged = rl("x", "補助金", calm)
-        check("運用者の設定で1本の社: 「要対応」にせず「1日1本（運用者の設定）」と出す",
-              (line.lstrip().startswith("要対応"), "1日1本（運用者の設定）" in line, flagged), (False, True, False))
-        line2, flagged2 = rl("y", "Y", dict(calm, quota=1, signals=["サイト全体の表示が急落"]))
-        check("量産の兆候で落とした社は今までどおり「要対応」", (line2.lstrip().startswith("要対応"), flagged2), (True, True))
-    src = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
-    check("週次の findings は pace の「要対応:」「兆候:」の行だけを拾う（設定の行は拾われない）",
-          'pace.py' in src and "要対応:|兆候:" in src, True)
-    manual = json.loads((ROOT / "data" / "pace_manual.json").read_text(encoding="utf-8"))
-    conflux = json.loads((ROOT / "sites" / "conflux.json").read_text(encoding="utf-8"))
-    check("CONFLUX の毎日1本（オーナーの指示）は手動による対策ではなく運用者の設定で持つ",
-          ("conflux" in manual, conflux.get("daily_articles")), (False, 1))
 
 
 def test_spare_slot_goes_to_rewrite_only_when_the_setting_frees_it():
@@ -340,3 +319,22 @@ def test_spare_rewrites_are_guarded_judged_and_rolled_back():
           (got, restored), (["p", "r"], ["p", "r"]))
     check("効きの判定（effect_ab --rewrites）: 浮いた枠の直しは週次の直しと分けて数える",
           (kinds[0] != "serp" and kinds[0].startswith("serp"), kinds[1] != "stuck", kinds[2]), (True, True, "stuck"))
+
+
+def test_operator_setting_is_not_reported_as_a_signal():
+    import pace
+    rl = getattr(pace, "report_line", None)
+    check("pace: 一覧の1行と「要対応」かを返す関数がある（report_line）", callable(rl), True)
+    if not callable(rl):
+        return
+    calm = {"quota": 2, "signals": [], "new": 10, "how": "URL検査", "not_indexed_rate": 0.0, "duplicates": 0,
+            "pairs": 0, "imp": [100, 120]}
+    with fake_pace(SITES):
+        line, flagged = rl("x", "補助金", calm)
+        check("運用者の設定で1本の社: 「要対応」にせず「1日1本（運用者の設定）」と出す",
+              (line.lstrip().startswith("要対応"), "1日1本（運用者の設定）" in line, flagged), (False, True, False))
+        line2, flagged2 = rl("y", "Y", dict(calm, quota=1, signals=["サイト全体の表示が急落"]))
+        check("量産の兆候で落とした社は今までどおり「要対応」", (line2.lstrip().startswith("要対応"), flagged2), (True, True))
+    src = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
+    check("週次の findings は pace の「要対応:」「兆候:」の行だけを拾う（設定の行は拾われない）",
+          'pace.py' in src and "要対応:|兆候:" in src, True)

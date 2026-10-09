@@ -111,7 +111,7 @@ python scripts/lessons.py --review         # 週次の棚卸し（多すぎ・�
     （`pace.quota`）で、日次の枠・救済と本数の点検・結果の見張り・在庫の1か月分が同じ数を使う。運用者の判断なので
     量産の兆候とは分け、一覧・週次の通知で「要対応」にしない。`spare_slot: "rewrite_main"` の社は、減らして浮いた枠で
     新しい記事の代わりに主力の語の既存記事を1本書き直す（8.6。どの枠かは `pace.py --slot`。兆候・手動の対策・
-    月の上限で止めた枠は書き直さない）。補助金は 2026-10-09 から1日1本＋書き直し1本、CONFLUX は1日1本（書き直しなし）
+    月の上限で止めた枠は書き直さない）。補助金は 2026-10-09 から1日1本＋書き直し1本、お客様の社は1日1本（書き直しなし）
 - AIO/GEO/LLMO対応（AI Overview・AIモードでの引用獲得率向上、AI経由流入の獲得）
 - ゼロクリック検索時代に備えた「引用される資産」と「指名検索・CV導線」の同時構築
 
@@ -152,27 +152,47 @@ public なので、**リポジトリの中身・コミットの履歴・CI の�
 | 非公開 `clients/<id>/brief.json` | 記事の材料（売り物と料金・読者の困りごと・FAQ・狙う語・狙わない語・競合・事例・お客様の声） |
 | 非公開 `clients/<id>/facts.json` | 一次情報 |
 | 非公開 `clients/<id>/kw.md` | キーワード計画（週次の補充が積む） |
-| 非公開 `clients/<id>/site_private.json` | サイト設定の戦略の部分（狙う業種・禁止語・配分・優先・読者・テーマ・売り物・監修・CTA・計測の ID など。`sites.load_all()` が重ねて読む） |
+| 非公開 `clients/<id>/site_private.json` | サイト設定の全部（社名・ドメイン・納品方式・配信先・カテゴリと、狙う業種・禁止語・配分・優先・読者・テーマ・売り物・監修・CTA・計測の ID など）と公開の id（`public_id`）。`sites.load_all()` がここから読む |
+| 非公開 `articles/`・`site/images/<slug>/`・`data/duo_scripts/`・`data/duo_shorts/` | お客様の社の原稿（公開前・90点未満で止めたものも）・図・動画の台本。取得のたびに作業場所へ重ねて置く（下記） |
+| 非公開 `clients/<id>/data/` | 全社1ファイルの記録のその社の行（`videos.json`・`youtube_connected.json`・`editorial_reviews.jsonl`・`bing_backfill.json`・`pace_manual.json`。`client_private.REPO_BACKED`。読むときに公開側と合わせる） |
 | 非公開 `clients/<id>/private.json` | 担当者の連絡先・接続先（パスワードは入れない。鍵は Secrets） |
 | 非公開 `sales/` | 当社の料金（`prices.json`・提案書の料金のページ `proposal_pricing.json`・`sales_prices.py`）、営業の台本（`sales_script_*.py`）、提案資料の生成（`sales_deck.py`・`sales_pptx.py`）と出来上がり |
 | 非公開 `reports/` | 月次・週次・グループのレポート（PDF・HTML）、翌月の目標（`targets*.json`）、3倍計画（`growth_plan.json`・`growth-plan.md`） |
 | CI のキャッシュ（`data/clients/<id>/private/`） | お客様の順位・AIの答え・共起語などの派生データ（7日使わないと消えるので、元の情報の置き場にしない） |
-| **public（このリポジトリ）** | お客様のサイトに公開済みの記事そのもの（`articles/`）と、構造上どうしても要る最小限: `sites/<id>.json` の公開してよい項目（`sites.PUBLIC_KEYS`: id・名前・ドメイン・納品方式・配信先のリポジトリと置き場・カテゴリ・1日の本数・IndexNow の鍵・`"client": true`） |
+| **public（このリポジトリ）** | 社が特定できない印だけ: `sites/<公開の id>.json` に `sites.PUBLIC_KEYS`（id・`"client": true`・1日の本数）。枠の割り当て（`site_order`）を、非公開のデータが取れない回も同じにするために残す |
 
-**守ること**（門 `tests/gates_history_h76.py` が止める）:
+**公開の id**: お客様の社は、社名から推測できない `c` と16進8桁（`private_store.new_public_id`）を公開の id にする。
+新しく受ける社は社の id も同じ値（`client_intake.assign_id`。シートの「id」欄は使わない）。運用者自身の事業の社は
+社の id（内部の名前）と公開の id が違い、`sites.resolve`（公開の id → 社の id）・`sites.public_id`（逆）で行き来する。
+ジョブの間の受け渡し・コミットの文・知らせる文は公開の id、工程に渡すのは社の id（`private_store.py --resolve`）。
+社の id は CI で伏せる語なので、ジョブの出力に入れると GitHub が落とす。
+
+**重ねて置く仕組み**（原稿・図・台本）: 取得（`--fetch`）のたびに `overlay_in` が非公開の `articles/` などを作業場所の
+同じ場所へ写し、`.git/info/exclude` の管理区画に載せて公開側の git から外す。`.git/hooks/pre-commit`（`--pre-commit`）が
+commit の直前にお客様の社のファイルを commit から外して非公開へ戻し、ジョブの最後の `private-data`（`mode: save`・
+`if: always()`）が `--push` で残す。手元で書いた分も commit のたびに戻る。運用者自身の事業の社も同じ道を毎日通す
+（外部のお客様より先に壊れた所が見つかる）。自社サイトのフッターの制作表記など、もともと公開している表示は残す。
+
+**守ること**（門 `tests/gates_history_h76.py`・`h77.py` が止める）:
 - お客様の社のファイル（company/brief/facts/site_private・`docs/kw-<id>.md`）、`reports/`・`docs/sales/`・`docs/growth-plan.md` を公開側で追跡しない
-- `sites/<お客様>.json` に `PUBLIC_KEYS` 以外の項目を書かない（書いたら `private_store.write_site` で分ける）
+- `sites/<公開の id>.json` に `PUBLIC_KEYS` 以外の項目を書かない（`private_store.write_site` が分ける）
+- 公開側で追跡しているファイル（コード・門・コメント・記録）に、お客様の社の名前・ドメイン・配信先と記事の題・slug を書かない。
+  門に要るときは架空の社（`client-zz`・`zz.example`）で書く。社に依る門は非公開の `tests/gates_client_*.py`（データがある回だけ回る）
+- CI のログに記事の題・slug を出さない（`private_store.shown(slug)` は「（お客様の記事）」を返す。件数で出す）。
+  門の出力も `test_gates.hide` が社の id・名前を公開の id に置き換える
 - 公開側のコード・指示・文書に当社の料金の数字を書かない（`proposal_make.pricing_pages` は非公開の JSON から読む）
 - `pull_request` / `pull_request_target` で動く workflow を置かない（キャッシュと鍵を他人の変更提案から守る）
 - お客様のデータを扱うジョブは checkout の直後に `.github/actions/private-data` を通す（取得と、守秘の語の `::add-mask::`。`scripts/ci_mask.py`）。
-  お客様の社について工程が出す行は **語の一覧ではなく件数**にする（例: 「conflux: 候補12語」）。執筆の案内（site_brief）はファイルにだけ書き、ログに出さない
+  お客様の社について工程が出す行は **語の一覧ではなく件数**にする（例: 「<公開の id>: 候補12語」）。執筆の案内（site_brief）はファイルにだけ書き、ログに出さない
 - 成果物（artifact）にお客様の語が載りうるファイルを入れない（ジョブ間の受け渡しは CI のキャッシュ）
 - **CI で非公開のデータが取れないときは、お客様の社の記事・キーワード計画・配信を止めて知らせる**（`private_store.require`。
   材料なしで書かせない）。自社3サイトはこれまでどおり動く
 - 鍵: CI は Secret `PRIVATE_DATA_TOKEN`（無ければ `SITE_PUSH_TOKEN`）。fine-grained トークンなら `yoshi4476/ss-aio-private` の Contents を Read and write
 
 ```bash
-python scripts/private_store.py --fetch            # 手元に private/ を取得する（あれば最新にする）
+python scripts/private_store.py --fetch            # 手元に private/ を取得する（あれば最新にする）。原稿を重ねて置き、hook を入れる
+python scripts/private_store.py --overlay          # 取得済みの private/ の原稿・図・台本を作業場所へ重ね直す
+python scripts/private_store.py --resolve <公開の id>   # 社の id（--public-id <社の id> で逆）
 python scripts/private_store.py --status           # 社ごとの材料の有無（件数だけ）
 python scripts/private_store.py --check-site <id>  # お客様の社の材料が読めるか（PRIVATE_OK=yes/no/own）
 python scripts/private_store.py --push "<理由>"     # private/ の変更を commit・push する
@@ -209,7 +229,8 @@ python scripts/intake_watch.py --apply    # 登録まで行う
 
 **シートそのものはコミットされない**（`.gitignore` 済み）。会社名・住所・電話・
 担当者のメールが入るうえ、このリポジトリは public のため。**登録した内容は非公開のリポジトリ（`private/`）にだけ書いて
-commit・push し**（`client_intake.save_private`）、公開側には `sites/<id>.json` の公開してよい項目だけを書く（2.1 節）。
+commit・push し**（`client_intake.save_private`）、公開側には `sites/<公開の id>.json` の印だけを書く（2.1 節）。
+社の id はシートに書かれた id や社名から作らず、推測できない公開の id にする（`client_intake.assign_id`）。
 手元に `private/` が無ければ登録しない（`python scripts/private_store.py --fetch` で取得してから）。
 **20社を超えるシートは受け付けずに止める。**
 
@@ -235,8 +256,8 @@ llms.txt と sitemap に載り、同じカテゴリの記事末に「自社の�
 
 | 生成物 | 置き場 | 中身 |
 |:--|:--|:--|
-| `sites/<id>.json` | public | 公開してよい項目だけ（id・名前・ドメイン・納品方式・配信先・カテゴリ・1日の本数・`"client": true`） |
-| `clients/<id>/site_private.json` | 非公開 | サイト設定の戦略の部分（主力商材・カテゴリ配分・守備範囲・CTA・計測・禁止語） |
+| `sites/<公開の id>.json` | public | 社が特定できない印だけ（公開の id・`"client": true`・1日の本数） |
+| `clients/<id>/site_private.json` | 非公開 | サイト設定の全部（社名・ドメイン・納品方式・配信先・カテゴリ・主力商材・カテゴリ配分・守備範囲・CTA・計測・禁止語）と公開の id |
 | `clients/<id>/company.json` | 非公開 | 会社の正規表記（著者情報・構造化データ・レポートの宛名） |
 | `clients/<id>/facts.json` | 非公開 | その会社にしか出せない一次情報 |
 | `clients/<id>/brief.json` | 非公開 | 記事を書くための材料（売り物・読者の困りごと・FAQ・著者・文体・狙う語・外部接点） |
@@ -534,7 +555,7 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
    - 単価（公式の資料 v1.21.0・2026-10-09 に1経路1回だけ本物で確かめた）: 見出し 3／共起語 3／実際の質問 1.5／サジェスト・関連語 1.5／
      LSI・PAA 22.5／一括調査 1語0.03（1回最低15）
    - 見積もりは実際以上に出す（単価は公式の資料のまま・`--deep` の LSI/PAA 1起点22.5・一括調査の登録のやり直し1回ぶん）。
-     2026-10-08 の CONFLUX は実際 121回・195 に対し見積もり 210
+     2026-10-08 の お客様の社は実際 121回・195 に対し見積もり 210
    - **数え方（手元とCIで同じ合計）**: 1回ごとに `data/rakko_spend.jsonl` へ社・環境・目的つきで書き、管制塔の「ラッコ利用」タブ
      （`rakko_usage` / `rakko_log`）へ差分を写す。判断は「この環境の記録」と「管制塔の合計」の大きい方。**CI は管制塔に届かないとき呼ばない**。
      社を書く前の行（2026-10-08 より前）は全体の合計にだけ数え、推定で社に割り振らない。ラッコの API は残高（`GET /v1/account/info`・

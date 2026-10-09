@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """記事を配信先へ渡すときの変換の門（2026-10-08 のデザイン点検とリード導線の点検）。
 
-CONFLUX（external-md）は先方の scripts/build-journal.mjs（fromPipeline）が Markdown を読み替えて marked で描く。
+お客様の社（external-md）は先方の scripts/build-journal.mjs（fromPipeline）が Markdown を読み替えて marked で描く。
 当社の原稿のまま置くと、score があり author の無い記事で先方の組み立てが RangeError で落ち、「**…。**本文」の ** が
 記号のまま出て、定義・注意・相談の箱が素の段落（相談の箱は当社の青）になり、よくある質問の殻と見出しが残り、
 結論の枠に説明文が入り、図と写真は Next.js が配らない置き場（リポジトリ直下の images/）で 404 だった。
-図の右下には「CONFLUX PARTNERS の記事（セブンセンシズ株式会社）」と当社名が入り、色は AI集客ラボの青だった。
+図の右下には「（先方のサイト名）の記事（セブンセンシズ株式会社）」と当社名が入り、色は AI集客ラボの青だった。
 コーポレート・補助金では部品（定義・注意・要約）の CSS が無く素の段落になり、補助金は冒頭で結論・対象読者・時点が
 雛形と本文に2回ずつ出て、47本で「…書いています。向けです」と文が壊れていた。まとめのページは h1 と同じ文の h2 が続き、
 一覧は黒丸と下線だけ・日付が題にくっつき、コーポレートでは h1 が固定ヘッダーの下に潜っていた。
@@ -57,7 +57,7 @@ def _strip(s):
 
 
 def _from_pipeline(md):
-    """先方（CONFLUX）の build-journal.mjs の fromPipeline の読み方の写し（2026-10-08 の版）"""
+    """先方（external-md のお客様の社）の build-journal.mjs の fromPipeline の読み方の写し（2026-10-08 の版）"""
     def take(text, title):
         m = re.search(r"^##\s*" + title + r"[^\n]*\n([\s\S]*?)(?=^##\s|\Z)", text, re.M)
         return (m.group(1), text.replace(m.group(0), "", 1)) if m else ("", text)
@@ -123,7 +123,7 @@ def _root(td):
 
 
 def test_journal_md_is_what_the_receiver_reads():
-    print("\n■ CONFLUX（external-md）: 先方の変換が読む形で置く（落ちない・** が残らない・先方の部品・図は public 配下）")
+    print("\n■ external-md の社: 先方の変換が読む形で置く（落ちない・** が残らない・先方の部品・図は public 配下）")
     with tempfile.TemporaryDirectory() as td:
         root = _root(td)
         dest = Path(td) / "dest"
@@ -134,7 +134,7 @@ def test_journal_md_is_what_the_receiver_reads():
             fm = __import__("yaml").safe_load(md.split("---\n")[1])
             body = md.split("---\n", 2)[2]
             got = _from_pipeline(body)
-            # 更新日と狙う語は先方の書き方（modified・keyword）に合わせた（2026-10-08 の結合の確認・gates_history_h55）
+            # 更新日と狙う語は先方の書き方（modified・keyword）に合わせた（2026-10-08 の結合の確認）
             check("先方の「自動化の記事」の条件: score が無く date と author（YW）がある・更新日は modified・狙う語は keyword",
                   ["score" in fm, "score_breakdown" in fm, "diagrams" in fm, "updated" in fm, str(fm.get("date")),
                    str(fm.get("modified")), fm.get("author"), fm.get("keyword")],
@@ -159,7 +159,7 @@ def test_journal_md_is_what_the_receiver_reads():
             classes = sorted({c for cs in re.findall(r'class="([^"]+)"', bare) for c in cs.split()})
             check("部品は先方のもの（box-note・box-warn・cta-inline・table-wrap）だけ",
                   [c for c in classes if c not in ("box-note", "box-warn", "box-title", "cta-inline", "table-wrap", "marker")], [])
-            check("定義は box-note（札を「定義」にする data-label。gates_history_h55）、注意は box-warn（「注意:」を外した題）、赤字は太字",
+            check("定義は box-note（札を「定義」にする data-label）、注意は box-warn（「注意:」を外した題）、赤字は太字",
                   ['<div class="box-note" data-label="定義">\n<p><strong>人月とは</strong>' in got["md"],
                    '<p class="box-title">安さだけで選ぶのはNG</p>' in got["md"], "<strong>先に払わない</strong>" in got["md"]],
                   [True, True, True])
@@ -189,35 +189,6 @@ def test_journal_md_is_what_the_receiver_reads():
             check("検出器: score が残ると止める", bool(P.journal_problems({"score": 90, "date": "2026-10-07"}, "## a\n## b\n## c\n", {})), True)
 
 
-def test_journal_config_and_real_articles():
-    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
-    if not client_ready("conflux"):
-        return
-    print("\n■ CONFLUX の設定と、いまある記事が先方の変換の条件を満たす形で書き出せること")
-    import publish as P
-    import sites as S
-    cfg = S.load("conflux")
-    d = P.md_dialect(cfg)
-    check("sites/conflux.json: 方言・著者・止める語・図の置き場（public/）",
-          [d.get("name"), "YW" in str(d.get("author")), "原口" in (d.get("forbidden") or []),
-           str(cfg.get("images_dir", "")).startswith("public/")], ["journal", True, True, True])
-    check("先方に出す場所の無い cta_title を持たない（external-md は記事下の見出しを描かない）", "cta_title" in cfg, False)
-    dd = {k: v for k, v in d.items() if k != "forbidden"}      # 語の有無は原稿の中身の問題。ここは変換の形だけを見る
-    bad = []
-    for p in sorted((ROOT / "articles").glob("*.md")):
-        try:
-            meta, body = P.parse_article(p)
-        except SystemExit:
-            continue
-        if S.find_category_owner(meta.get("category", "")) != "conflux":
-            continue
-        fm, md = P.journal_md(cfg, meta, P._md_insert_entries(body, cfg), dd)
-        got = _from_pipeline(md)
-        probs = P.journal_problems(fm, md, dd) + ([] if got["answer"] else ["結論が取れない"]) + \
-            ([] if got["asOf"] and got["audience"] else ["時点・対象読者が取れない"])
-        if probs:
-            bad.append(f"{p.stem}: {' / '.join(probs)}")
-    check("CONFLUX の記事は先方の変換の条件を満たす", bad, [])
 
 
 def test_inline_markup_survives_commonmark():
@@ -306,36 +277,6 @@ def test_aggregate_pages_have_one_h1_and_styled_lists():
                "BreadcrumbList" in comp, ".ss-aggregate .hub-list{" in comp, "__CSS__" in comp], [True, True, True, True, True, False])
 
 
-def test_diagram_credit_and_colors_follow_the_site():
-    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
-    if not client_ready("conflux"):
-        return
-    print("\n■ 図: お客様の図の名義はその社の名前だけ・色はサイトの設定（無ければ AI集客ラボの色）")
-    import make_diagram as MD
-    import sites as S
-    conflux, lab = S.load("conflux"), S.load("ai-lab")
-    check("名義: お客様は社名だけ（運用会社の名前を出さない）、自社は「（セブンセンシズ株式会社）」つき",
-          [MD.credit_text(conflux), "セブンセンシズ" in MD.credit_text(lab)], ["CONFLUX PARTNERS", True])
-    check("色: CONFLUX は設定の色（橙・黒鉛）、AI集客ラボは今の色",
-          [MD.palette_for(conflux)["accent"], MD.palette_for(conflux)["ink"], MD.palette_for(lab) == MD.PALETTE],
-          [(0xC2, 0x41, 0x0C), (0x0E, 0x0F, 0x12), True])
-    got = {}
-    real = (MD.site_for_slug, MD.save_png, MD.credit)
-    try:
-        MD.site_for_slug = lambda slug: conflux
-        MD.save_png = lambda img, slug, name: got.setdefault("img", img)
-        MD.credit = lambda d, h, text="", pal=MD.PALETTE: got.setdefault("credit", text) and real[2](d, h, text, pal)
-        MD.draw_list("zz-h50", "x", "題", ["一", "二", "三"])
-    except SystemExit:
-        print("  WARN  日本語フォントが無いため、図の描画は確かめられません")
-        return
-    finally:
-        MD.site_for_slug, MD.save_png, MD.credit = real
-    # 図は論理の座標の SCALE 倍で書き出す（gates_history_h57）。題の印は論理の (46, 56) にある
-    s = getattr(MD, "SCALE", 1)
-    check("描いた図: 題の印の色と地の色が CONFLUX の色・名義に当社名が無い",
-          [got["img"].getpixel((46 * s, 56 * s)), got["img"].getpixel((5, 5)), "セブンセンシズ" in got["credit"]],
-          [(0xC2, 0x41, 0x0C), (0xF4, 0xF4, 0xF1), False])
 
 
 def test_links_never_point_to_another_sites_paths():
@@ -390,27 +331,3 @@ def test_app_router_files_are_not_shadowed():
         check("生成コードとして見分ける", SF.generated(dest, "llms"), True)
         placed = SF.ensure({"id": "h50", "type": "external-md", "domain": "x.test", "name": "x"}, dest, write=False)
         check("llms.txt を置かない", [p.name for p in placed if p.name == "llms.txt"], [])
-
-
-def test_client_supervisor_is_the_client():
-    # CONFLUX の設定・材料は非公開の置き場（2026-10-10 守秘義務）。取れない回は飛ばす（自社の門は回る）
-    if not client_ready("conflux"):
-        return
-    print("\n■ 監修: CONFLUX の記事の監修者は先方（YW）。当社の代表を出さない・「なし（…）」を資格にしない")
-    import editorial_review as ER
-    import publish as P
-    import sites as S
-    cr = P.client_credit(S.load("conflux"))
-    check("監修の表示と構造化データ（YW・資格の欄に「なし」を入れない）",
-          [cr["reviewer"]["name"], "hasCredential" in cr["reviewer"], "なし" in cr["byline"], "原口" in json.dumps(cr, ensure_ascii=False)],
-          ["YW", False, False, False])
-    slugs = [p.stem for p in sorted((ROOT / "articles").glob("*.md"))
-             if S.find_category_owner((re.search(r"^category:\s*(\S+)", p.read_text(encoding="utf-8")[:3000], re.M)
-                                       or [None, ""])[1]) == "conflux"]
-    if not slugs:
-        print("  --  CONFLUX の記事が無いため、承認の記録の名義は確かめません")
-        return
-    # 2026-10-08 運用者の決定: 自動化の記事の監修は「YW（CONFLUX PARTNERS）」と「セブンセンシズ株式会社」の両方（gates_history_h55）
-    check("承認の記録の名義は先方の監修の表示と同じ並び（代表者の実名は入れない）",
-          [ER.reviewer_for(slugs[0]), "原口" in ER.reviewer_for(slugs[0])],
-          ["・".join(S.load("conflux")["review_by"]), False])

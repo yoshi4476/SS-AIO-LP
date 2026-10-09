@@ -34,29 +34,6 @@ def test_video_upload_date_has_timezone():
           ["video_embed.upload_date(rec)" in src, '"uploadDate": rec.get("date"' in src], [True, False])
 
 
-def test_indexnow_uses_the_key_each_domain_serves():
-    """同じ日の通知「CONFLUX … IndexNow の鍵ファイル https://conflux-partners.jp/acc9b880….txt が出ていません」から。
-    先方は自分の鍵（b1d698…）を直下に置いていた。共通の鍵で確かめると毎回「要対応」が出て、通知も送られない"""
-    import notify_indexnow as NI
-    import search_connect as SC
-    check("社の設定に鍵があればその鍵", NI.key_for("https://conflux-partners.jp", "共通"),
-          "b1d698a3b0111f8ddc9cc2f94d344fde")
-    check("無ければ共通の鍵", NI.key_for("https://lp.7senses.co.jp", "共通"), "共通")
-    sent = []
-    cfgs = {"x": {"id": "x", "domain": "x.example.jp", "indexnow_key": "k" * 32, "type": "external-md"}}
-    with mock.patch.object(NI, "load_env", return_value={"INDEXNOW_KEY": "c" * 32}), \
-            mock.patch.object(NI, "key_ok", side_effect=lambda d, k: sent.append(("ok", k)) or True), \
-            mock.patch.object(NI, "sitemap_urls", return_value=["https://x.example.jp/a/"]), \
-            mock.patch.object(NI, "notify", side_effect=lambda u, k, s: sent.append(("send", k)) or 200):
-        NI.main([], cfgs)
-    check("通知も確かめも、その社の鍵で行う", sent, [("ok", "k" * 32), ("send", "k" * 32)])
-    with mock.patch.object(NI, "load_env", return_value={"INDEXNOW_KEY": "c" * 32}), \
-            mock.patch("bing_webmaster.auth_code", return_value=""), mock.patch("sites.is_client", return_value=True):
-        files = SC.files_for({"id": "x", "type": "external-md", "indexnow_key": "k" * 32})
-    check("配信で置く鍵ファイルも、その社の鍵（共通の鍵を足さない）", sorted(files), [f"{'k' * 32}.txt"])
-    for f in ("reindex.py", "onboard_check.py"):
-        s = (ROOT / "scripts" / f).read_text(encoding="utf-8")
-        check(f"{f} もその社の鍵で確かめる", "key_for(" in s or 'cfg.get("indexnow_key")' in s, True)
 
 
 def test_profile_page_date_modified_is_datetime():
@@ -87,3 +64,26 @@ def test_profile_page_date_modified_is_datetime():
             AP.write_page({"date": "2099-01-02", "same_as": same + ["https://example.com/new-profile"]})
             got = re.search(r'"dateModified":\s*"([^"]*)"', tmp.read_text(encoding="utf-8")).group(1)
             check("中身が変わった回は新しい日付を時差つきの日時で出す", got, "2099-01-02T00:00:00+09:00")
+
+
+def test_indexnow_uses_the_key_each_domain_serves():
+    """お客様の社が自分の鍵を直下に置いていた（2026-10-09 の通知）。共通の鍵で確かめると毎回「要対応」が出て、
+    通知も送られない。お客様の社の鍵そのものの照合は非公開の門（private/tests/）"""
+    import notify_indexnow as NI
+    import search_connect as SC
+    check("無ければ共通の鍵", NI.key_for("https://lp.7senses.co.jp", "共通"), "共通")
+    sent = []
+    cfgs = {"x": {"id": "x", "domain": "x.example.jp", "indexnow_key": "k" * 32, "type": "external-md"}}
+    with mock.patch.object(NI, "load_env", return_value={"INDEXNOW_KEY": "c" * 32}), \
+            mock.patch.object(NI, "key_ok", side_effect=lambda d, k: sent.append(("ok", k)) or True), \
+            mock.patch.object(NI, "sitemap_urls", return_value=["https://x.example.jp/a/"]), \
+            mock.patch.object(NI, "notify", side_effect=lambda u, k, s: sent.append(("send", k)) or 200):
+        NI.main([], cfgs)
+    check("通知も確かめも、その社の鍵で行う", sent, [("ok", "k" * 32), ("send", "k" * 32)])
+    with mock.patch.object(NI, "load_env", return_value={"INDEXNOW_KEY": "c" * 32}), \
+            mock.patch("bing_webmaster.auth_code", return_value=""), mock.patch("sites.is_client", return_value=True):
+        files = SC.files_for({"id": "x", "type": "external-md", "indexnow_key": "k" * 32})
+    check("配信で置く鍵ファイルも、その社の鍵（共通の鍵を足さない）", sorted(files), [f"{'k' * 32}.txt"])
+    for f in ("reindex.py", "onboard_check.py"):
+        s = (ROOT / "scripts" / f).read_text(encoding="utf-8")
+        check(f"{f} もその社の鍵で確かめる", "key_for(" in s or 'cfg.get("indexnow_key")' in s, True)

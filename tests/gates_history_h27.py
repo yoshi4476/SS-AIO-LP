@@ -100,8 +100,9 @@ def test_site_lists_come_from_sites_json():
     import focus_report as F
     import auto_rewrite as AR
     import bing_webmaster as BW
-    check("sites.ids は sites/*.json の全社（sample を除く）",
-          S.ids(), [p.stem for p in sorted((ROOT / "sites").glob("*.json")) if p.stem != "sample"])
+    # お客様の社は公開の印（sites/<公開の id>.json）から社の id に戻して並ぶ。非公開のデータが無い回は入らない
+    want = [S.resolve(p.stem) for p in sorted((ROOT / "sites").glob("*.json")) if p.stem != "sample"]
+    check("sites.ids は sites/*.json の全社（sample を除く）", S.ids(), [s for s in want if s in S.load_all()])
     check("集中モード: sites が無ければ自社だけ（今の動き）", F.focus_sites({}), [s for s in S.own_ids() if s != "sample"])
     one = S.ids()[-1]
     check("集中モード: sites に書いた社だけ（無い社は捨てる）", F.focus_sites({"sites": [one, "no-such-site"]}), [one])

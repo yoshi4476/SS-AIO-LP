@@ -92,7 +92,7 @@ def test_previous_day_shortfall_is_counted_and_written():
     day, today = "2026-10-07", "2026-10-08"
     arts = {
         "own-zero": [],                                                     # 前日0本
-        "client-one": [],                                                   # 1日1本の社（CONFLUX と同じ）
+        "client-one": [],                                                   # 1日1本の社（お客様の社と同じ）
         "own-cap": [_art(f"c{i}", f"2026-10-{i % 6 + 1:02d}") for i in range(60)],   # 月の上限に達した社
         "own-held": [_art("h1", day), _art("h2", day)],                     # 監修待ちでも書いた本数に入る
         "own-made": [_art("m1", today, makeup=day), _art("m2", day)],        # 前日分を今日書いた1本
@@ -104,7 +104,7 @@ def test_previous_day_shortfall_is_counted_and_written():
     want = [f"TODO: own-zero の記事を前日（{day}）の不足分としてあと 2 本作成して公開する"]
     check("救済（前日）: 足りない社だけ書き足す（上限・監修待ち・書き足し済みは数える）",
           [t.split("（date:")[0] for t in todo], want)
-    # 1日1本に絞っている社（CONFLUX はオーナーの指示）は書き足さない。書き足すと暦の上で1日2本になる
+    # 1日1本に絞っている社（お客様の社はオーナーの指示）は書き足さない。書き足すと暦の上で1日2本になる
     check("救済（前日）: 1日の本数を絞っている社は前日の分を書き足さない",
           ("client-one は1日1本に絞っているため" in out, any("client-one" in t for t in todo)), (True, False))
     check("救済（前日）: 公開日は今日のまま書くよう指示する（前日の日付で出さない）",
@@ -194,14 +194,14 @@ def _ignored(rel):
 
 def test_client_private_stays_out_of_public_repo():
     check("お客様の置き場（data/clients/<id>/private/）は public に置かない",
-          [_ignored(p) for p in ("data/clients/conflux/private/data/ranks/conflux.json",
+          [_ignored(p) for p in ("data/clients/client-yy/private/data/ranks/client-yy.json",
                                  "data/clients/client-zz/private/data/rank_up.json")], [True, True])
     check("お客様の翌月の目標（reports/targets-<id>.json）は public に置かない（11/1 の月次がコミットする）",
-          [_ignored(p) for p in ("reports/targets-conflux.json", "reports/targets-client-zz.json")], [True, True])
+          [_ignored(p) for p in ("reports/targets-client-yy.json", "reports/targets-client-zz.json")], [True, True])
     # 目標値・レポートと、お客様の会社情報は非公開のリポジトリへ移した（2026-10-10 守秘義務・h76）
     check("目標値とお客様の会社情報は公開側に置かない（非公開のリポジトリ）",
           [_ignored(p) for p in ("reports/targets.json", "reports/targets-corporate.json",
-                                 "reports/targets-subsidy.json", "data/clients/conflux/company.json")], [True] * 4)
+                                 "reports/targets-subsidy.json", "data/clients/client-zz/company.json")], [True] * 4)
     check("置き場の外の記録はこれまでどおりコミットする",
           [_ignored(p) for p in ("data/makeup.json", "data/findings_seen.json")], [False] * 2)
     check("日次KPIを送った日の記録（キャッシュで持ち越す）はコミットしない", _ignored("data/kpi_sent.json"), True)
@@ -255,21 +255,24 @@ def test_shared_ledgers_split_client_rows():
     import ai_citation_check as AC
     with tempfile.TemporaryDirectory() as td:
         base = Path(td)
-        with patched(CP, ROOT=base, clients=lambda: ["conflux"], is_private=lambda s: s == "conflux"):
-            priv = base / "data" / "clients" / "conflux" / "private"
+        # 架空のお客様の社（client-zz）。URL の持ち主は本物の設定ではなく、この門のドメインの表で決める
+        doms = {"ai.7senses.co.jp": "ai-lab", "client-zz.example": "client-zz"}
+        owner = lambda: (lambda url, _v=None: doms.get(str(url).split("/")[2]) if str(url).count("/") >= 2 else None)  # noqa: E731
+        with patched(CP, ROOT=base, clients=lambda: ["client-zz"], is_private=lambda s: s == "client-zz", url_owner=owner):
+            priv = base / "data" / "clients" / "client-zz" / "private"
             with patched(RU, LOG=base / "data" / "rank_up.json"):
-                RU.save_log({"s-own": {"site": "ai-lab", "pos": 12}, "s-client": {"site": "conflux", "pos": 15}})
+                RU.save_log({"s-own": {"site": "ai-lab", "pos": 12}, "s-client": {"site": "client-zz", "pos": 15}})
                 check("rank_up.json: お客様の記事の順位は public に書かず、読むときは合わせる",
                       (sorted(json.loads(RU.LOG.read_text(encoding="utf-8"))), sorted(RU.load_log())),
                       (["s-own"], ["s-client", "s-own"]))
             with patched(AF, OUT=base / "data" / "ai_citations" / "followup.json"):
-                AF.save({"articles": {"a": {"site": "ai-lab"}, "c": {"site": "conflux"}}, "last_run": {"date": "x"}})
+                AF.save({"articles": {"a": {"site": "ai-lab"}, "c": {"site": "client-zz"}}, "last_run": {"date": "x"}})
                 check("followup.json: お客様の記事の分は public に書かず、読むときは合わせる",
                       (sorted(json.loads(AF.OUT.read_text(encoding="utf-8"))["articles"]), sorted(AF.load()["articles"])),
                       (["a"], ["a", "c"]))
             with patched(RX, CACHE=base / "data" / "index_cache.json", SENT=base / "data" / "index_resend.json"):
                 urls = {"https://ai.7senses.co.jp/aio/x/": {"verdict": "PASS"},
-                        "https://conflux-partners.jp/blog/y/": {"verdict": "NEUTRAL"}}
+                        "https://client-zz.example/blog/y/": {"verdict": "NEUTRAL"}}
                 RX._save(dict(urls))
                 RX._save_sent({u: "2026-10-08" for u in urls})
                 check("URL検査の記録・再送の間隔: お客様のURLは public に書かず、読むときは合わせる",
@@ -279,22 +282,22 @@ def test_shared_ledgers_split_client_rows():
             # 毎晩の推定（ai_citation_check）が、週次・月次の実測（measured）を消さない
             month = f"{date.today():%Y-%m}.json"
             CP.save_citations(month, {"date": "x", "sites": {}, "measured": {"engines": ["G"], "sites": {
-                "ai-lab": {"cited": 1}, "conflux": {"cited": 0}}}})
+                "ai-lab": {"cited": 1}, "client-zz": {"cited": 0}}}})
             ranks = base / "data" / "ranks"
             ranks.mkdir(parents=True, exist_ok=True)
             row = {"kw": "語", "url": "u", "pos": 3.0, "imp": 50, "clicks": 0, "ctr": 0.0}
-            for sid in ("ai-lab", "conflux"):
+            for sid in ("ai-lab", "client-zz"):
                 (ranks / f"{sid}.json").write_text(json.dumps({"2026-10-07": [row]}), encoding="utf-8")
             fake = type("S", (), {"load_all": staticmethod(lambda: {"ai-lab": {"id": "ai-lab", "name": "A"},
-                                                                    "conflux": {"id": "conflux", "name": "C"}})})
+                                                                    "client-zz": {"id": "client-zz", "name": "C"}})})
             with patched(AC, ROOT=base, RANKS=ranks, OUT=base / "data" / "ai_citations", sites_mod=fake):
                 _quiet(AC.main)
             got = CP.load_citations(month)
             pub = (base / "data" / "ai_citations" / month).read_text(encoding="utf-8")
             check("毎晩の推定が実測（measured）を消さず、お客様の分は置き場に分ける",
-                  (sorted(got.get("measured", {}).get("sites", {})), sorted(got["sites"]), "conflux" in pub,
+                  (sorted(got.get("measured", {}).get("sites", {})), sorted(got["sites"]), "client-zz" in pub,
                    (priv / "data" / "ai_citations" / month).is_file()),
-                  (["ai-lab", "conflux"], ["ai-lab", "conflux"], False, True))
+                  (["ai-lab", "client-zz"], ["ai-lab", "client-zz"], False, True))
     import cooccur as CO
     import auto_rewrite as AR
     import daily_kpi as DK

@@ -87,7 +87,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2347",
+     "evidence": "scripts/build.py:2351",
      "note": "基準に届かない記事は site/ に生成されない",
      "anchor": "weak = rubric.weak_axes(meta)"
     },
@@ -360,34 +360,34 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:93",
+     "evidence": "scripts/publish_changed.py:97",
      "note": "build.py が毎回描き直す",
      "anchor": "if cfg[\"type\"] == \"self-static\":"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:116",
+     "evidence": "scripts/publish_changed.py:120",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:116",
+     "evidence": "scripts/publish_changed.py:120",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:116",
+     "evidence": "scripts/publish_changed.py:120",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:116",
+     "evidence": "scripts/publish_changed.py:120",
      "note": "同じ slug の投稿を更新する",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish_changed.py:116",
+     "evidence": "scripts/publish_changed.py:120",
      "anchor": "[sys.executable, str(ROOT / \"scripts\" / \"publish.py\"),"
     },
     "zip": {
@@ -673,36 +673,36 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:803",
+     "evidence": ".github/workflows/pipeline-multi.yml:832",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:803",
+     "evidence": ".github/workflows/pipeline-multi.yml:832",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:803",
+     "evidence": ".github/workflows/pipeline-multi.yml:832",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:803",
+     "evidence": ".github/workflows/pipeline-multi.yml:832",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:803",
+     "evidence": ".github/workflows/pipeline-multi.yml:832",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:803",
+     "evidence": ".github/workflows/pipeline-multi.yml:832",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
@@ -775,7 +775,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:800",
+     "evidence": ".github/workflows/pipeline-multi.yml:829",
      "anchor": "python scripts/bing_webmaster.py --site \"$id\" || true"
     },
     "external-md": {
@@ -1022,7 +1022,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2500",
+     "evidence": "scripts/build.py:2506",
      "anchor": "n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）"
     },
     "external-md": {
@@ -1440,7 +1440,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2487",
+     "evidence": "scripts/build.py:2493",
      "anchor": "season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）"
     },
     "external-md": {
@@ -1594,42 +1594,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2483",
+     "evidence": "scripts/build.py:2489",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2483",
+     "evidence": "scripts/build.py:2489",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2483",
+     "evidence": "scripts/build.py:2489",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2483",
+     "evidence": "scripts/build.py:2489",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2483",
+     "evidence": "scripts/build.py:2489",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2483",
+     "evidence": "scripts/build.py:2489",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2483",
+     "evidence": "scripts/build.py:2489",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     }
@@ -1820,7 +1820,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/youtube_upload.py:308",
+     "evidence": "scripts/youtube_upload.py:307",
      "note": "先方のアカウントでの許可（初回接続）が済めば動く。説明欄の記事URLは実際のパーマリンク",
      "anchor": "import wp_bridge     # WordPress の社はパーマリンク設定が決めたURL（組み立てると説明欄のリンクが404）"
     },
@@ -1896,7 +1896,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "tests/test_gates.py:2117",
+     "evidence": "tests/test_gates.py:2145",
      "note": "門が site/ に重い読み方が戻るのを止める",
      "anchor": "def test_speed_fix_keeps_pages_light():"
     },
@@ -1998,7 +1998,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2527",
+     "evidence": "scripts/build.py:2533",
      "anchor": "render_warns = render_check.scan(sorted((ROOT / \"site\").rglob(\"index.html\")))"
     },
     "external-md": {
@@ -2055,18 +2055,18 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:242",
+     "evidence": "scripts/publish_gap.py:249",
      "note": "配信した原稿の指紋（article-manifest.json）と本番を突き合わせ、足りなければ配信し直す",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:242",
+     "evidence": "scripts/publish_gap.py:249",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:242",
+     "evidence": "scripts/publish_gap.py:249",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "wordpress": {
@@ -2077,7 +2077,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:242",
+     "evidence": "scripts/publish_gap.py:249",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "zip": {
@@ -2102,31 +2102,31 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:589",
+     "evidence": ".github/workflows/weekly-optimize.yml:610",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:589",
+     "evidence": ".github/workflows/weekly-optimize.yml:610",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:589",
+     "evidence": ".github/workflows/weekly-optimize.yml:610",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:589",
+     "evidence": ".github/workflows/weekly-optimize.yml:610",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:589",
+     "evidence": ".github/workflows/weekly-optimize.yml:610",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
@@ -2392,7 +2392,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2370",
+     "evidence": "scripts/build.py:2376",
      "anchor": "hidden_metas = [m for m in all_metas if noindex.on(m)]",
      "note": "ページは描いて URL を残し、head を noindex,follow に。一覧・関連・前後・テーマ・業種ハブ・用語集・比較表・sitemap・llms.txt・feed から外す。他の記事のリンクは描くときに外す"
     },

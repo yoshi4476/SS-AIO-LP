@@ -3,9 +3,9 @@
 公開されないように。守秘義務も問題ないようにしてほしい」から作った門。
 
 公開されていたもの（2026-10-10 の点検）:
-  - CONFLUX の会社情報・記事の材料・一次情報（data/clients/conflux/{company,brief,facts}.json）とキーワード計画
-    （docs/kw-conflux.md。週次の補充が「自動補充」の行を積んでいた）
-  - sites/conflux.json の戦略の部分（狙う業種・除外語・配分・優先・読者・売り物・監修・計測の ID）
+  - お客様の社の会社情報・記事の材料・一次情報（data/clients/<id>/{company,brief,facts}.json）とキーワード計画
+    （docs/kw-<id>.md。週次の補充が「自動補充」の行を積んでいた）
+  - sites/<id>.json の戦略の部分（狙う業種・除外語・配分・優先・読者・売り物・監修・計測の ID）
   - 当社の料金と営業の台本（proposal_make.py・sales_* の台本・docs/sales/ の提案書・PROJECT.md）
   - 月次・週次・グループのレポート（reports/**。自社3サイトの実数と問い合わせの数）と 3倍計画（docs/growth-plan.md）
   - CI のログ: 記事の枠が site_brief をそのまま tee し、お客様の売り物と料金・狙う語・一次情報をログに出していた。
@@ -108,8 +108,8 @@ def test_client_site_config_has_public_keys_only():
             "ng_terms": ["aws"], "audience": "社長", "ga4_property_id": "1", "categories": {"a": "A"}}
     pub, priv = S.split_public(full)
     check("検出器: 戦略の部分（狙う業種・除外語・読者・計測の ID）は非公開へ分かれる",
-          (sorted(pub), sorted(priv)), (["categories", "domain", "id", "type"],
-                                        ["audience", "ga4_property_id", "kw_seeds", "ng_terms"]))
+          (sorted(pub), sorted(priv)), (["id"], ["audience", "categories", "domain", "ga4_property_id", "kw_seeds",
+                                                 "ng_terms", "type"]))
     for p in sorted(S.SITES_DIR.glob("*.json")):
         raw = json.loads(p.read_text(encoding="utf-8-sig"))
         if not (raw.get("client") or (ROOT / "data" / "clients" / p.stem).is_dir()):
@@ -117,8 +117,9 @@ def test_client_site_config_has_public_keys_only():
         check(f"sites/{p.name}: 許可していない項目が無い", sorted(set(raw) - set(S.PUBLIC_KEYS)), [])
         check(f"sites/{p.name}: お客様の印（client: true）がある（無いと CI で自社と判定される）",
               raw.get("client"), True)
-    check("お客様の社は load_all で非公開の置き場の戦略の部分を重ねる",
-          "private_store.site_private(cfg[\"id\"])" in (ROOT / "scripts" / "sites.py").read_text(encoding="utf-8"), True)
+    src = (ROOT / "scripts" / "sites.py").read_text(encoding="utf-8")
+    check("お客様の社は load_all で非公開の置き場の設定を読む（公開の印に重ねる。h77）",
+          ("_private_clients()" in src, 'public_id=stub["id"]' in src), (True, True))
 
 
 # ── 3. 公開側のコードに料金の数字が無い ────────────────────────────────
@@ -208,13 +209,13 @@ def test_jobs_with_client_data_mask_logs():
     check("client-private の restore は、戻した記録の語も伏せる", "ci_mask.py" in cp, True)
     import ci_mask as M
     corpus = ("aio対策の始め方\n補助金の申請", "事務局へ提出する書類と要件定義の進め方", "aio対策の始め方\n補助金の申請")
-    pub = {"conflux", "conflux-partners.jp", "conflux partners の記事"}
+    pub = {"client-zz", "client-zz.example", "client zz の記事"}
     got = {w: M.usable(w, corpus, pub) for w in ("門の検査 架空の語の費用", "ab", "export", "AIO 対策", "事務局",
-                                                 "conflux-partners.jp", "https://conflux-partners.jp/package",
+                                                 "client-zz.example", "https://client-zz.example/package",
                                                  "顧問プラン（月額 99万円・年間契約）", "2026-10")}
     check("伏せる語の選び方: 守秘の語は伏せ、短い語・英数の短い語・自社の記事名の語・一般語・公開済みの名前は伏せない",
           got, {"門の検査 架空の語の費用": True, "ab": False, "export": False, "AIO 対策": False, "事務局": False,
-                "conflux-partners.jp": False, "https://conflux-partners.jp/package": False,
+                "client-zz.example": False, "https://client-zz.example/package": False,
                 "顧問プラン（月額 99万円・年間契約）": True, "2026-10": False})
     with _env(GITHUB_ACTIONS="", SS_PRIVATE_DIR=str(ROOT / "no-such-private")), contextlib.redirect_stdout(io.StringIO()) as o:
         M.main(["--count"])
@@ -287,11 +288,13 @@ def test_client_work_stops_without_private_data():
     print("\n■ 守秘義務: 非公開のデータが取れない回は、お客様の社の記事・計画・配信を止めて知らせる（自社は動く）")
     import sites as S
     import private_store as PS
-    clients = [s for s in S.load_all() if S.is_client(s)]
-    if not clients:
+    # 公開側の印（sites/<公開の id>.json）で確かめる。非公開のデータが無い CI でも、この門は回る
+    stubs = [p.stem for p in sorted(S.SITES_DIR.glob("*.json"))
+             if json.loads(p.read_text(encoding="utf-8-sig")).get("client")]
+    if not stubs:
         print("  WARN  お客様の社が無いため飛ばします")
         return
-    sid = clients[0]
+    sid = stubs[0]
     old_root = S.ROOT
     with tempfile.TemporaryDirectory() as d, _env(SS_PRIVATE_DIR=str(Path(d) / "private")):
         S.ROOT = Path(d)                     # 移行前の場所（data/clients/）も無い状態
@@ -339,7 +342,7 @@ def test_client_work_stops_without_private_data():
     check("執筆の指示: 材料が読めないと出たら書かずに終える", "記事を書かずにそこで終える" in prompt, True)
 
 
-# ── 8. 移した後も CONFLUX の材料が読める（非公開のデータがある手元・CI） ─────────────
+# ── 8. 移した後もお客様の社の材料が読める（非公開のデータがある手元・CI） ─────────────
 
 def test_moved_client_data_still_reads():
     print("\n■ 守秘義務: 移した後も、お客様の材料・キーワード・配信の設定が今までどおり読める")
@@ -352,9 +355,10 @@ def test_moved_client_data_still_reads():
         return
     for sid in ready:
         cfg = S.load(sid)
-        check(f"{sid}: サイト設定に戦略の部分が重なる（狙う業種・読者・カテゴリ）",
+        pid = cfg.get("public_id") or S.public_id(sid)   # CI のログには公開の id だけを出す（社の id を出さない）
+        check(f"{pid}: サイト設定に戦略の部分が重なる（狙う業種・読者・カテゴリ）",
               all(cfg.get(k) for k in ("kw_seeds", "audience", "categories", "domain")), True)
-        check(f"{sid}: 記事の材料・会社情報・一次情報を非公開の置き場から読む",
+        check(f"{pid}: 記事の材料・会社情報・一次情報を非公開の置き場から読む",
               all(PS.client_path(sid, n).is_file() and PS.client_dir(sid) in PS.client_path(sid, n).parents
                   for n in ("brief.json", "company.json", "facts.json")), True)
     import kw_plan
@@ -391,8 +395,10 @@ def test_public_code_has_no_client_secrets():
         return
     files = _tracked()
     # 先方のサイトに公開済みの記事（articles/）に出ている語と、英数1語・一般の語は数えない
-    pub = "\n".join((ROOT / f).read_text(encoding="utf-8", errors="ignore") for f in files
-                    if f.startswith("articles/") and f.endswith(".md"))
+    # お客様の社の原稿は非公開のリポジトリへ移した（h77）。先方のサイトに出ている語なので、そちらも数えない
+    pub = "\n".join([(ROOT / f).read_text(encoding="utf-8", errors="ignore") for f in files
+                     if f.startswith("articles/") and f.endswith(".md")]
+                    + [p.read_text(encoding="utf-8", errors="ignore") for p in sorted((PS.base() / "articles").glob("*.md"))])
     pub_ns = re.sub(r"[ 　]+", "", pub).lower()
     hits = []
     for sid in ready:

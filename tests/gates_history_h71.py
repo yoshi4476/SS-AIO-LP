@@ -287,7 +287,7 @@ def test_client_plan_and_research_stay_private():
     import kw_plan as KP
     print("\n■ お客様の社の調べ・計画・積んだ語の出どころは public の場所に出ない")
     # ラッコで取った見出し・共起語・質問は、規約（社内利用）に合わせて自社の分も Git に入れない（2026-10-09）
-    for rel, want in (("data/kw_serp/conflux.json", 0), ("docs/kw-plan-conflux.md", 0), ("data/kw_serp/corporate.json", 0),
+    for rel, want in (("data/kw_serp/client-zz.json", 0), ("docs/kw-plan-client-zz.md", 0), ("data/kw_serp/corporate.json", 0),
                       ("data/clients/_own/private/corporate/data/kw_serp/corporate.json", 0), ("docs/kw-plan-corporate.md", 1)):
         r = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "-q", rel])
         check(f"{'Git に入らない' if want == 0 else 'Git に入る（自社）'}: {rel}", r.returncode, want)
