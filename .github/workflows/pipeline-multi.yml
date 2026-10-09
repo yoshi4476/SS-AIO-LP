@@ -103,6 +103,8 @@ jobs:
       first: ${{ steps.site.outputs.first }}
       over: ${{ steps.site.outputs.over }}
       slot_day: ${{ steps.site.outputs.slot_day }}
+      # write（新しい記事）か rewrite（運用者の設定で浮いた枠に、主力の記事を1本書き直す）
+      mode: ${{ steps.site.outputs.mode }}
     steps:
       - uses: actions/checkout@v4
 
@@ -187,13 +189,26 @@ jobs:
               exit 0
             fi
             # 量産と見られている兆候（Google の大量生成の不正使用の定義にもとづく・週次の pace.py）で
-            # 1日の本数を 2/1/0 に自動で調整する。その日の何本目の枠か（0始まり）が本数以上なら書かない
+            # 1日の本数を 2/1/0 に自動で調整する。運用者が sites/<id>.json の daily_articles で本数を減らした社は、
+            # その本数（兆候と小さい方）。その日の何本目の枠か（0始まり）が本数以上なら新しい記事は書かない。
+            # 設定で浮いた枠は、spare_slot=rewrite_main の社だけ主力の記事の書き直しに回す（2026-10-09 運用者の決定）。
+            # 兆候・手動の対策で止めた枠と、上の月の上限で止めた枠は書き直さない（pace.slot が決める）
             rank=$(( slot / N ))
-            q=$(python scripts/pace.py --quota "$s" 2>/dev/null || echo 2)
-            if [ "$rank" -ge "$q" ]; then
+            out=$(python scripts/pace.py --slot "$s" "$rank" 2>/dev/null) || true
+            mode=$(echo "$out" | sed -n 's/^SLOT=//p')
+            why=$(echo "$out" | sed -n 's/^SLOT_WHY=//p')
+            if [ -z "$mode" ]; then
+              echo "::warning::$s の1日の本数を読めませんでした（pace.py --slot）。既定の1日2本で判定します"
+              if [ "$rank" -ge 2 ]; then mode=skip; else mode=write; fi
+            fi
+            if [ "$mode" = "skip" ]; then
               echo "skip=yes" >> "$GITHUB_OUTPUT"
-              echo "$s は今週1日${q}本にしています（量産の兆候。python scripts/pace.py で理由を確認）"
+              echo "$s のこの枠は書きません（$why）"
               exit 0
+            fi
+            echo "mode=$mode" >> "$GITHUB_OUTPUT"
+            if [ "$mode" = "rewrite" ]; then
+              echo "$s のこの枠は新しい記事を書かず、主力の記事を1本書き直します（$why）"
             fi
           fi
           # 自前でビルドするサイトかどうか。デプロイと配信の分岐に使う
@@ -226,6 +241,8 @@ jobs:
             echo "id=${{ needs.select.outputs.id }}"
             echo "own=${{ needs.select.outputs.own }}"
             echo "first=${{ needs.select.outputs.first }}"
+            # rewrite: 運用者の設定（daily_articles）で浮いた枠。新しい記事は書かず、主力の記事を1本書き直す
+            echo "mode=${{ needs.select.outputs.mode || 'write' }}"
           } >> "$GITHUB_OUTPUT"
           # 配信先のビルドを探す起点。push の後の時刻にすると、先に始まったビルドを見失う
           echo "RUN_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
@@ -234,7 +251,7 @@ jobs:
             mkdir -p automation/logs
             echo "$over" >> automation/logs/findings.txt
           fi
-          echo "対象サイト: ${{ needs.select.outputs.id }}"
+          echo "対象サイト: ${{ needs.select.outputs.id }}（${{ needs.select.outputs.mode == 'rewrite' && '浮いた枠: 主力の記事の書き直し' || '新しい記事' }}）"
 
       - uses: actions/setup-python@v5
         if: steps.site.outputs.skip != 'yes'
@@ -313,8 +330,61 @@ jobs:
           fi
           exit 1
 
+      # 運用者の設定（sites/<id>.json の daily_articles）で浮いた枠は、新しい記事の代わりに主力の記事を1本書き直す
+      # （2026-10-09 運用者の決定。spare_slot=rewrite_main の社だけ・どの枠かは select の pace.slot が決める）。
+      # 先に、やってはいけない書き換えを当てて検算が止めるかを見る（週次・集中モードと同じ。claude は呼ばない）
+      - name: 浮いた枠：検算が効くか確かめる
+        id: guard
+        if: steps.site.outputs.mode == 'rewrite'
+        timeout-minutes: 25
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          fi
+          if python scripts/auto_rewrite.py --selftest; then
+            echo "ok=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=no" >> "$GITHUB_OUTPUT"
+            echo "::error::検算が効いていません。浮いた枠の書き直しは行いません"
+            mkdir -p automation/logs
+            echo "要対応: auto_rewrite の検算が効いていません（${{ steps.site.outputs.id }} の浮いた枠の書き直しを飛ばしました）" >> automation/logs/findings.txt
+          fi
+          rm -f indexing-service-account.json
+
+      # 主力の語（kw_plan.main_rule）の記事を1本だけ。順は「4〜20位で上位の見出しがある（data/kw_serp）」→
+      # 「11〜30位で需要のある語に答えていない」→「競合がAIの出典に出ている」。直近28日に直した記事は外す
+      # （effect_ab・rewrite_rollback が前後28日で比べる）。候補が無い日は何もしない（新しい記事にも戻さない）。
+      # 台帳（auto_fix.jsonl）には印 spare-slot を付け、週次の直しと分けて効きを測る
+      - name: 浮いた枠：主力の記事を1本書き直す
+        if: steps.site.outputs.mode == 'rewrite' && steps.guard.outputs.ok == 'yes'
+        timeout-minutes: 45
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          fi
+          # 配信の基点。書き直した記事だけを後の工程で配信先へ届ける
+          echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          out=$(python scripts/auto_rewrite.py --write --kind spare --main-only --sites "${{ steps.site.outputs.id }}" \
+            --limit 1 --skip-recent 28 --tag spare-slot 2>&1) || true
+          rm -f indexing-service-account.json
+          echo "$out"
+          r=$(echo "$out" | sed -n 's/^SPARE_SLOT=//p')
+          echo "::notice::浮いた枠（${{ steps.site.outputs.id }}）: ${r:-結果の印がありません（上のログを確認）}"
+          echo "浮いた枠（${{ steps.site.outputs.id }}）: ${r:-結果の印がありません}" >> "$GITHUB_STEP_SUMMARY"
+
       - name: 執筆ブリーフの表示（KW残数と担当領域をログに残す）
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -325,7 +395,7 @@ jobs:
           python scripts/site_brief.py "${{ steps.site.outputs.id }}" | tee automation/logs/brief.txt
 
       - name: 全サイト横断のカニバリ・領域チェック
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -338,7 +408,7 @@ jobs:
       # 狙う範囲が8記事と重なり、51語・表示484回でクリック0の記事ができた。
       # ここで止めれば、書き始める前に判定が終わる。
       - name: 食い合いゲート（執筆前）
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -359,7 +429,7 @@ jobs:
       # 一次情報を先に集めておく。執筆側に任せると取りこぼすため、
       # 次に書くKWで文字起こしを取得し、本文を読める状態にしておく
       - name: 一次情報の収集（YouTube文字起こし）
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
@@ -367,7 +437,7 @@ jobs:
           python scripts/research_next.py "${{ steps.site.outputs.id }}" || true
 
       - name: 記事生成（Phase 1〜7）
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           SITE_ID: ${{ steps.site.outputs.id }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -434,7 +504,7 @@ jobs:
       # 書き手が執筆前ゲートと違うKWを選ぶことがある。
       # 実際に書かれた記事の keyword を見て、公開前にもう一度止める。
       - name: 食い合いゲート（執筆後）
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -454,13 +524,13 @@ jobs:
           fi
 
       - name: リード導線を新しい記事に入れる
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         run: python scripts/tool_links.py --write || true
 
       # 新記事は被リンク0で始まる。週次を待つと最大6日そのままで、インデックスと
       # 評価の立ち上がりが遅れる。公開と同時に、話題の近い既存記事から先にリンクを張る
       - name: 公開直後に既存記事から新記事へリンクを張る
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         run: |
           for f in $(git ls-files --others --exclude-standard articles/*.md); do
             slug=$(basename "$f" .md)
@@ -470,7 +540,7 @@ jobs:
       # 多言語を指示した社だけ、書いた記事の要約をその場で訳す（週次を待たずに公開と同時に多言語化）。
       # 指示が無い社では i18n.py が何もせずに終わる
       - name: 多言語の要約（指示のある社だけ・新しい記事のみ）
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
@@ -486,7 +556,7 @@ jobs:
       # 公開前に直すので、読者が崩れたページを見ることがなくなる。
       # どれも地の文を変えず、検算に外れたら書き込まない作りになっている
       - name: 公開前に、機械で直せる崩れを直す
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         run: |
           python scripts/fix_block_breaks.py --write || true
           python scripts/split_paragraphs.py --all --write || true
@@ -495,7 +565,7 @@ jobs:
           python scripts/shorten_anchors.py --write || true
 
       - name: 監修待ちを知らせる
-        if: steps.site.outputs.skip != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         run: |
           # 記録の無い記事は公開されない（HELD）。放置すると書いた記事が溜まるだけになるため、毎回知らせる
           mkdir -p automation/logs
@@ -512,7 +582,11 @@ jobs:
           if git diff --cached --quiet; then
             echo "変更なし — コミットをスキップ"
           else
-            git commit -m "publish(${{ steps.site.outputs.id }}): $(date '+%Y-%m-%d %H:%M JST')"
+            if [ "${{ steps.site.outputs.mode }}" = "rewrite" ]; then
+              git commit -m "spare-slot(${{ steps.site.outputs.id }}): 浮いた枠で主力の記事を書き直し $(date '+%Y-%m-%d %H:%M JST')"
+            else
+              git commit -m "publish(${{ steps.site.outputs.id }}): $(date '+%Y-%m-%d %H:%M JST')"
+            fi
             pushed=0
             for i in 1 2 3; do
               git push && { pushed=1; break; }
@@ -534,6 +608,31 @@ jobs:
               git push || { echo "::error::push に失敗しました。記事のコミットがリポジトリに反映されていません"; exit 1; }
             fi
           fi
+
+      # 書き直した記事は配信先へ届けないと本番に反映されない。週次・集中モードと同じ道具（publish_changed）で、
+      # この回に書き直した分（BASE_SHA からの差分）だけを送る。自前でビルドする社は下のデプロイが届ける
+      - name: 浮いた枠：書き直した記事を配信先へ届ける
+        if: steps.site.outputs.mode == 'rewrite' && steps.site.outputs.own != 'True' && env.BASE_SHA != ''
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: |
+          mkdir -p automation/logs
+          python scripts/publish_changed.py --site "${{ steps.site.outputs.id }}" --since "$BASE_SHA" --push 2>&1 | tee /tmp/publish_changed.txt || true
+          grep '^要対応' /tmp/publish_changed.txt >> automation/logs/findings.txt || true
+          git add -A
+          git diff --cached --quiet || {
+            git commit -q -m "spare-slot(${{ steps.site.outputs.id }}): 配信の記録 $(date '+%Y-%m-%d %H:%M JST')"
+            pushed=0
+            for i in 1 2 3; do
+              if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep 5
+            done
+            [ "$pushed" = 1 ] || echo "::warning::配信の記録を正本へ push できませんでした"
+          }
 
       # 自前でビルドするサイトはここでデプロイまで行う
       # （他サイトは publish.py が対象リポジトリへpushし、各サイトのビルドが動く）

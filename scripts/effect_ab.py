@@ -75,6 +75,16 @@ def cohort(daily, slug, at, pubs, acts, days):
             if s != slug and s not in touched and s in pubs and abs((at - pubs[s]).days - age) <= AGE_TOL]
 
 
+# 週次の直しと分けて効きを数える印（auto_rewrite --tag）。浮いた枠（運用者の設定で新しい記事を減らした枠）の
+# 書き直しは、同じ種類でも週次の直しと混ぜると「枠を書き直しに回した効き」が見えない（2026-10-09）
+APART = {"spare-slot": "浮き枠"}
+
+
+def _label(d, kind):
+    tag = d.get("tag")
+    return f"{kind}（{APART[tag]}）" if tag in APART else str(kind)
+
+
 def interventions():
     """いつ・どの記事に・どの手を打ったか（お客様の記事の行は置き場から合わせる・client_private）"""
     import client_private as CP
@@ -95,7 +105,7 @@ def interventions():
             continue                              # 差し戻した分は打っていない
         if "変更なし" in str(d.get("note") or ""):
             continue
-        out.append({"slug": slug, "at": when, "kind": str(kind)})
+        out.append({"slug": slug, "at": when, "kind": _label(d, kind)})
     return out
 
 
@@ -179,7 +189,7 @@ def rewrites(log=None):
                 or not str(d.get("note") or "").startswith(REWRITE_DONE) \
                 or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", when):
             continue
-        out.append({"slug": d["slug"], "at": when, "kind": str(d.get("kind") or "?")})
+        out.append({"slug": d["slug"], "at": when, "kind": _label(d, d.get("kind") or "?")})
     return out
 
 

@@ -34,12 +34,19 @@
   0本でも統合・書き直し・内部リンクの週次は回る。判定は data/pace_state.json（14日で失効）。
   次の週に兆候が消えれば自動で2本に戻る。
 
+■ 運用者の設定（兆候とは別の理由）
+  sites/<id>.json の daily_articles（0〜2）。1日の本数は「兆候の判定」と「設定」の小さい方。
+  設定で浮いた枠は、spare_slot が "rewrite_main" の社だけ主力の記事の書き直しに回す（slot()）。
+  兆候・手動の対策で止めた枠は書き直しにも回さない。設定で減らした社は一覧で「要対応」にしない
+  （2026-10-09 運用者の決定: 補助金は新しい記事を1日1本にし、浮いた1枠で主力の記事を書き直す）
+
     python scripts/pace.py                 # 測って見るだけ
     python scripts/pace.py --write         # 判定を残す（週次）
     python scripts/pace.py --quota <site>  # 今日の本数（日次の枠が読む）
+    python scripts/pace.py --slot <site> <その日の何本目（0始まり）>   # SLOT=write|rewrite|skip（日次の枠が読む）
     python scripts/pace.py --manual <site> "<理由>"   # 手動による対策を受けたときに0本にする
     python scripts/pace.py --manual <site> --clear   # 解除（再審査が通った後）
-出す印: PACE_OK=yes|no（1本でも落としたサイトがあれば no）
+出す印: PACE_OK=yes|no（兆候・手動の対策で1本でも落としたサイトがあれば no。運用者の設定は数えない）
 """
 import argparse
 import json
@@ -54,6 +61,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 STATE = ROOT / "data" / "pace_state.json"
 MANUAL = ROOT / "data" / "pace_manual.json"
+SITES = ROOT / "sites"
+SPARE_REWRITE = "rewrite_main"
 DEFAULT, STATE_DAYS = 2, 14
 NOTIDX_MAX, NOTIDX_SEVERE, MIN_NEW, INSPECT_MAX = 0.50, 0.70, 6, 40
 DUP_MAX = 2
@@ -69,8 +78,20 @@ def _json(p):
         return {}
 
 
-def quota(sid):
-    """日次の枠が読む本数。手動による対策が最優先。記録が無い・古いときは既定の2本"""
+def _site(sid):
+    return _json(SITES / f"{sid}.json")
+
+
+def setting(sid):
+    """運用者が sites/<id>.json の daily_articles に決めた1日の本数（0〜2）。無い・読めないときは既定の2本"""
+    v = _site(sid).get("daily_articles")
+    if isinstance(v, bool) or not isinstance(v, int):
+        return DEFAULT
+    return max(0, min(DEFAULT, v))
+
+
+def signal_quota(sid):
+    """量産の兆候（週次の判定）と手動による対策から決まる本数。手動が最優先。記録が無い・古いときは既定の2本"""
     if (_json(MANUAL).get(sid) or {}).get("quota") is not None:
         return int(_json(MANUAL)[sid]["quota"])
     import client_private as CP
@@ -78,6 +99,36 @@ def quota(sid):
     if st.get("date", "") < (date.today() - timedelta(days=STATE_DAYS)).isoformat():
         return DEFAULT
     return int(st.get("quota", DEFAULT))
+
+
+def quota(sid):
+    """日次の枠が読む本数＝兆候の判定と運用者の設定の小さい方（本数の点検・救済・在庫の1か月分も同じ数を使う）"""
+    return min(signal_quota(sid), setting(sid))
+
+
+def slot(sid, rank):
+    """その日の rank 本目（0始まり）の枠で何をするか。(write|rewrite|skip, 理由)。
+    運用者の設定で浮いた枠だけを書き直しに回す。兆候・手動の対策で止めた枠は書き直さない
+    （量産と見られている週に、既存記事の書き換えまで増やさない）"""
+    sig, mine = signal_quota(sid), setting(sid)
+    if rank < min(sig, mine):
+        return "write", f"1日{min(sig, mine)}本のうち{rank + 1}本目"
+    if rank >= sig:
+        why = "手動による対策" if (_json(MANUAL).get(sid) or {}).get("quota") is not None else "量産の兆候"
+        return "skip", f"今週1日{sig}本（{why}。python scripts/pace.py で理由を確認）"
+    if _site(sid).get("spare_slot") == SPARE_REWRITE:
+        return "rewrite", f"新しい記事は1日{mine}本（運用者の設定）。浮いた枠で主力の記事を書き直す"
+    return "skip", f"新しい記事は1日{mine}本（運用者の設定）"
+
+
+def report_line(sid, name, r):
+    """一覧の1行と「要対応」か。要対応は兆候・手動の対策で落とした社だけ（運用者の設定は理由が別）"""
+    mine = setting(sid)
+    flagged = r["quota"] < DEFAULT
+    tail = "（運用者の設定）" if mine < DEFAULT and mine <= r["quota"] else ""
+    return (f"  {'要対応:' if flagged else '○'} {name} — 1日{min(r['quota'], mine)}本{tail}（新しい記事{r['new']}本・"
+            f"{r['how']} 未登録{r['not_indexed_rate']:.0%}・重複{r['duplicates']}・同型{r['pairs']}組・"
+            f"表示{r['imp'][0]:,}→{r['imp'][1]:,}）"), flagged
 
 
 def _sitemap(domain):
@@ -179,12 +230,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--quota", metavar="SITE")
+    ap.add_argument("--slot", nargs=2, metavar=("SITE", "RANK"))
     ap.add_argument("--manual", nargs="+", metavar=("SITE", "REASON"))
     ap.add_argument("--clear", action="store_true")
     ap.add_argument("--no-inspect", action="store_true", help="URL検査を使わない（試すとき）")
     a = ap.parse_args()
     if a.quota:
         print(quota(a.quota))           # 日次の枠（CI の select）が呼ぶ。標準ライブラリだけで動く
+        return 0
+    if a.slot:
+        mode, why = slot(a.slot[0], int(a.slot[1]))     # 同じく select が pip の前に呼ぶ
+        print(f"SLOT={mode}\nSLOT_WHY={why}")
         return 0
     if a.manual:
         m = _json(MANUAL)
@@ -214,18 +270,18 @@ def main():
             print(f"  {cfg.get('name', sid)}: 測れません（{str(e)[:60]}）→ 既定の{DEFAULT}本のまま")
             continue
         if sid in manual:
-            r["quota"] = 0
+            r["quota"] = min(r["quota"], int(manual[sid].get("quota") or 0))
             r["signals"].insert(0, f"手動による対策: {manual[sid].get('reason')}（{manual[sid].get('at')}）")
         ran += 1
+        # 残すのは兆候の判定だけ（運用者の設定は sites/<id>.json にあり、quota() が読むときに重ねる）
         state[sid] = r
-        mark = "○" if r["quota"] == DEFAULT else "要対応:"
-        print(f"  {mark} {cfg.get('name', sid)} — 1日{r['quota']}本（新しい記事{r['new']}本・{r['how']}"
-              f" 未登録{r['not_indexed_rate']:.0%}・重複{r['duplicates']}・同型{r['pairs']}組・表示{r['imp'][0]:,}→{r['imp'][1]:,}）")
+        line, flagged = report_line(sid, cfg.get("name", sid), r)
+        print(line)
         if r["states"]:
             print("      索引の内訳: " + "／".join(f"{k} {v}" for k, v in sorted(r["states"].items(), key=lambda x: -x[1])))
         for s in r["signals"]:
             print(f"      兆候: {s}")
-        low += r["quota"] < DEFAULT
+        low += flagged
     if not ran:
         print("  どのサイトも測れませんでした")
         return 1

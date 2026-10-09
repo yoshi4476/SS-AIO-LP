@@ -151,7 +151,8 @@ def test_early_rewrite_targets_narrow_words_in_weeks_2_to_5():
     check("selftest の誤検出の点検に early が入っている", "（early）" in inspect.getsource(A.false_alarms), True)
     rsrc = inspect.getsource(A.run_one)
     check("run_one が early_guard を通し、直す前の原稿を残す（28日後に戻せる）",
-          ("early_guard(" in rsrc, 'kind in ("compete", "early")' in rsrc), (True, True))
+          # 残すかは keep_original が決める（2026-10-09 に serp・浮いた枠の直しも残すようにした）
+          ("early_guard(" in rsrc, "keep_original(kind)" in rsrc and A.keep_original("early")), (True, True))
     check("--kind early で early_items を使う（台帳の種類は early・effect_ab が種類別に判定）",
           'elif a.kind == "early":' in inspect.getsource(A.main), True)
     check("見出しに細い語が入ったかを共通の検算（terms）でも見る", "\"terms\": terms" in inspect.getsource(A.early_items), True)

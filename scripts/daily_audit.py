@@ -215,6 +215,15 @@ GRACE_HOURS = 2      # 公開の時刻から、これだけ過ぎて無ければ
 WORKFLOW = ROOT / ".github" / "workflows" / "pipeline-multi.yml"
 
 
+def daily_quota(sid):
+    """その社の1日の新しい記事の本数（pace.quota＝量産の兆候と運用者の設定 daily_articles の小さい方）。読めなければ既定"""
+    try:
+        import pace
+        return min(DAILY_TARGET, pace.quota(sid))
+    except Exception:
+        return DAILY_TARGET
+
+
 def publish_hours(sid):
     """その社の記事の枠の時刻（JST の時）。pipeline-multi.yml の「対象サイトの判定」と同じ割り当てで求める
     （cron の並び＝枠の番号・site_order の並び・枠の番号 % 社数・その日の何本目 < 1日の本数）。
@@ -230,11 +239,7 @@ def publish_hours(sid):
     if sid not in order or not crons:
         return None
     n, i = len(order), order.index(sid)
-    try:
-        import pace
-        q = min(DAILY_TARGET, pace.quota(sid))
-    except Exception:
-        q = DAILY_TARGET
+    q = daily_quota(sid)
     return tuple(sorted((int(c.split()[1]) + 9) % 24 for slot, c in enumerate(crons)
                         if slot < n * 2 and slot % n == i and slot // n < q))
 
@@ -275,14 +280,9 @@ def check_volume(todo):
             # 上限に達したら「不足」と言わない。言えば救済が走って超過する
             print(f"  上限 {sid:10s} 今月 {month}/{site_cap(sid)}本 — 今月はこれ以上公開しません")
             continue
-        want = min(DAILY_TARGET, left)
-        # 量産の兆候で本数を落とした週は、その本数を目標にする（pace.py）。
+        # 量産の兆候で本数を落とした週・運用者が1日の本数を減らした社（daily_articles）は、その本数を目標にする。
         # 2本のままだと救済が「不足」とみなし、落とした分を書き足してしまう
-        try:
-            import pace
-            want = min(want, pace.quota(sid))
-        except Exception:
-            pass
+        want = min(left, daily_quota(sid))
         due = want if past else min(want, _due_now(sid))      # いまの時刻で在るべき本数
         mark = "OK " if n >= due else "不足"
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"
@@ -477,15 +477,20 @@ def check_supply(todo, fix=False):
     for k in rows:
         if (k.get("status") or "").strip() == "未着手":
             per[k.get("site") or "?"] = per.get(k.get("site") or "?", 0) + 1
-    need = DAILY_TARGET * KW_MIN_DAYS
     for sid in sites_mod.load_all():
         n = per.get(sid, 0)
-        days = n / DAILY_TARGET
+        # 何日分かは、その社の1日の本数で数える（1日1本の社を2本で割ると、在庫が半分の日数に見える）
+        rate = daily_quota(sid)
+        if not rate:
+            print(f"  OK  {sid:10s} 未着手 {n:3d}件（新しい記事は1日0本のため減りません）")
+            continue
+        need = rate * KW_MIN_DAYS
+        days = n / rate
         mark = "OK " if n >= need else "不足"
         print(f"  {mark} {sid:10s} 未着手 {n:3d}件（{days:.1f}日分）")
         # サジェスト由来の候補は有限で、掘り尽くすと補充が0件になる。
         # 8日分を切ってから気づいても手が打てないため、30日分の時点で知らせる。
-        if need <= n < DAILY_TARGET * KW_WARN_DAYS:
+        if need <= n < rate * KW_WARN_DAYS:
             todo.append(f"TODO: {sid} のKW在庫が残り{days:.0f}日分"
                         f"（kw_seeds を広げるか、GSCの実データ取得を有効にすること）")
         if n < need:

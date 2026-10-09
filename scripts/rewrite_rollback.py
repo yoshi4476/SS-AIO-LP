@@ -17,7 +17,7 @@ effect_ab が出すが、悪化した記事もそのまま残る。「当てる�
   python scripts/rewrite_rollback.py            # 判定だけ
   python scripts/rewrite_rollback.py --write    # 戻す
 出す印: ROLLBACK_OK=yes / ROLLED_BACK=<本> / KEPT=<本> / HELD=<本>（対照が足りず保留）
-戻せるのは、直したときに before_title（題の直し）か before_path（compete・early の本文の直し）を
+戻せるのは、直したときに before_title（題の直し）か before_path（compete・early・serp・浮いた枠の本文の直し）を
 台帳（auto_fix.jsonl）に残した分だけ。early（公開14〜35日の記事に細い語を入れる直し）は、
 その直しで変えた部分（題・H2の1本・FAQの問い）だけを直す前の原稿から戻す。
 判定した分は data/rollback_decisions.json に残し、二度は判定しない。
@@ -71,10 +71,11 @@ def entries():
         if d.get("by") not in ("auto_rewrite", "manual") or not d.get("ok") \
                 or not str(d.get("note", "")).startswith("直しました"):
             continue
-        # compete（競合との差を埋める書き直し）は本文を足す直しなので、直す前の原稿ごと戻す。
+        # compete（競合との差を埋める書き直し）・serp（上位の見出しとの差）・浮いた枠の直しは本文を足す直しなので、
+        # 直す前の原稿ごと戻す（auto_rewrite.keep_original が before_path を残した分）。
         # early は直す前の原稿から、変えた部分だけを戻す
         if (d.get("kind") == "title" and d.get("before_title")) \
-                or (d.get("kind") in ("compete", "early") and d.get("before_path")):
+                or (d.get("kind") != "title" and d.get("before_path")):
             out.append(d)
     return out
 
@@ -214,10 +215,10 @@ def restore_file(slug, d):
 
 
 def restore(slug, d):
-    if d.get("kind") == "compete":
-        return restore_file(slug, d)
     if d.get("kind") == "early":
         return restore_early(slug, d)
+    if d.get("kind") != "title" and d.get("before_path"):
+        return restore_file(slug, d)
     p = ROOT / "articles" / f"{slug}.md"
     t = p.read_text(encoding="utf-8-sig")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n", t, re.S)
@@ -291,8 +292,9 @@ def main():
             CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "rewrite_rollback",
                                   "slug": slug, "kind": "rollback", "ok": True,
                                   "note": f"表示×{me[0]:.2f}（対照×{base:.2f}）のため"
-                                  + {"compete": "直す前の原稿へ戻した",
-                                     "early": "early で変えた題・H2・FAQを直す前へ戻した"}.get(d.get("kind"), "元のタイトルへ戻した")})
+                                  + ("early で変えた題・H2・FAQを直す前へ戻した" if d.get("kind") == "early" else
+                                     "直す前の原稿へ戻した" if d.get("kind") != "title" and d.get("before_path") else
+                                     "元のタイトルへ戻した")})
         else:
             kept += 1
         if a.write:

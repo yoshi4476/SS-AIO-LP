@@ -26,6 +26,9 @@ auto_improve は、タイトルの書き換えと検索意図の見直しを人�
   python scripts/auto_rewrite.py --write      # 実際に直す（既定3本）
   python scripts/auto_rewrite.py --write --limit 1
   python scripts/auto_rewrite.py --write --kind early --limit 2   # 公開14〜35日の記事に、15位以内の細い語を入れる
+  python scripts/auto_rewrite.py --write --kind spare --main-only --sites subsidy --limit 1 --skip-recent 28 --tag spare-slot
+      # 記事の枠のうち、運用者の設定（sites/<id>.json の daily_articles）で浮いた枠が呼ぶ。主力の語の記事を1本だけ
+      # （4〜20位で上位の見出しがある → 11〜30位 → 競合との差 の順）。候補が無ければ何もしない（SPARE_SLOT=none）
 """
 import argparse
 import collections
@@ -383,6 +386,94 @@ def compete_items(limit=2, log=None):
     return rows[:limit]
 
 
+def serp_items():
+    """4〜20位にいる自社記事（kw_plan.rewrite_targets と同じ並び）のうち、狙う語の上位ページの見出し
+    （kw_plan がラッコで取り data/kw_serp に残す。60日以内）があるもの"""
+    import kw_plan as KP
+    import kw_serp
+    import sites as S
+    out = []
+    for sid in S.load_all():
+        for r in KP.rewrite_targets(sid, KP.site_articles(sid)):
+            rec = kw_serp.get(sid, r["kw"])
+            if not rec or not (rec.get("headline") or {}).get("pages"):
+                continue
+            m = re.search(r"(\d+(?:\.\d+)?)位", r.get("why", ""))
+            out.append({"kind": "serp", "slug": r["slug"], "site": sid, "kw": r["kw"],
+                        "pos": m.group(1) if m else "4〜20",
+                        "why": f"{r.get('why', '')}。狙う語の上位ページの見出し・共起語がある（{rec.get('at')} 時点）"})
+    return out
+
+
+def spare_items():
+    """浮いた枠で直す順。上位の見出しがある4〜20位（serp）→ 11〜30位で需要のある語に答えていない（rank_rescue）
+    → 競合がAIの出典に出ている（compete）。同じ記事は1回（先に来た理由で直す）"""
+    rows = list(serp_items())
+    try:
+        import rank_rescue as RR
+        rows += RR.items()
+    except Exception as e:
+        print(f"  （rank_rescue から取れません: {str(e)[:50]}）")
+    rows += compete_items(limit=50)
+    out, seen = [], set()
+    for x in rows:
+        if x["slug"] not in seen:
+            seen.add(x["slug"])
+            out.append(x)
+    return out
+
+
+_MAIN = {}
+
+
+def is_main(slug, site=""):
+    """その社の主力の語（kw_plan.main_rule。補助金は scheme_mix の最大の制度）の記事か。狙う語で決める
+    （題に制度名が出るだけの周辺の記事は入れない）。狙う語の無い記事だけ題で見る"""
+    site = site or site_of(slug)
+    if site not in _MAIN:
+        import kw_plan as KP
+        _MAIN[site] = KP.main_rule(site)[0]
+    rule = _MAIN[site]
+    if not rule:
+        return False
+    title, kw, _ = meta(slug)
+    return bool(rule(kw or title))
+
+
+def only_main(items):
+    """--main-only。主力の決まり（scheme_mix / category_mix）が無い社の記事は残さない"""
+    return [x for x in items if (ROOT / "articles" / f"{x['slug']}.md").is_file()
+            and is_main(x["slug"], x.get("site", ""))]
+
+
+def serp_heads(slug):
+    """その記事の狙う語の上位ページの見出し（自社のページを除く）。写していないかを見るのに使う"""
+    import kw_serp
+    site, kw = kw_serp.article_meta(slug)
+    rec = (kw_serp.get(site, kw) if site and kw else None) or {}
+    return [h[1] for p in (rec.get("headline") or {}).get("pages") or [] if not p.get("ours")
+            for h in p.get("heads") or []]
+
+
+def serp_guard(before, after, title0, title1, heads):
+    """serp（上位ページの見出しとの差を埋める）の書き直しにだけ足す検算（共通の check() の後）。
+    通らない理由を返す（空なら合格）"""
+    if title1 != title0:
+        return "タイトルが変わりました（足りない観点の節を足す直しで、題は変えない）"
+    more = ext_links(after) - ext_links(before)
+    if more:
+        return "出典のURLが増えました（記事にあった出典だけで書くこと）: " + str(sorted(more)[:2])
+    cp = copied_heads(before, after, heads)
+    if cp:
+        return "上位ページの見出しをそのまま写しています: " + " / ".join(cp[:2])
+    if len(after) < len(before) * 0.98:
+        return f"本文が減りました（{len(before)}→{len(after)}字）。足す直しのはずです"
+    h0, h1 = (len(re.findall(r"^#{2,3}\s", t, re.M)) for t in (before, after))
+    if h1 <= h0 and len(faq_questions(after)) <= len(faq_questions(before)):
+        return f"節もFAQも増えていません（見出し{h0}→{h1}本）。足りない観点に答える節を足す直しです"
+    return ""
+
+
 def copied_heads(before, after, heads, min_len=10):
     """競合の見出しを、そのまま本文に写したもの（直す前には無かったもの）"""
     nz = lambda s: re.sub(r"[\s　、。・「」（）()【】|｜:：!！?？]", "", s or "")
@@ -635,6 +726,15 @@ WHAT = {
               "4. 既存の見出し・本文は消さない。足すだけにする\n"
               "5. 同義語・言い換え（例: 整骨院と接骨院）なら別々の節を作らず、\n"
               "   1つの節でまとめて扱い、両方の呼び方を本文に書く\n"),
+    "serp": ("この記事は検索で{pos}位にいます（上位の手前）。狙う語「{kw}」の上位ページが共通して扱っている観点のうち、\n"
+             "この記事に無いものがあると、上位に上がりきれません。下に、上位ページの見出しの並び・共起語・実際の質問を挙げます\n"
+             "（観点の手がかりです。見出しも文も写さないこと）。\n"
+             "1. この記事に無い観点のうち、この記事の主題に**本当に含まれるもの**だけを1〜2個選ぶ。\n"
+             "   どれも主題に含まれなければ、何も変えずに終了する（無理に足すと主題がぼやけて、いまの順位まで落ちる）\n"
+             "2. 選んだ観点に答える節（H2またはH3）を足す。見出しは自分の言葉で書き、直下に40〜60字の1文結論を置く\n"
+             "3. 実際の質問のうち主題に含まれるものは FAQ に足してよい。フロントマターの faq と本文の「よくある質問」の\n"
+             "   両方に同じ文で入れ、答えはこの記事にある事実だけで40〜60字\n"
+             "4. 新しい数字・出典のURLは足さない。タイトル・keyword・既存の見出しと本文は変えない。足すだけにする"),
     "compete": ("この記事の狙う語「{kw}」で、AIの回答の出典に競合のページが選ばれ、この記事は選ばれていません。\n"
                 "競合の公開ページと比べて、この記事に足りないものは次のとおりです\n"
                 "（競合の見出しは「どんな問いに答えているか」の手がかりです。見出しも文も写さないこと）:\n{diffs}\n"
@@ -809,6 +909,10 @@ def false_alarms():
                          "## 始め方\n本文\n## 順位が上がらないときは？\n本文\n",
                          "工務店のMEO対策｜始め方と5つのコツ", "工務店のMEO対策｜上がらない時の5つのコツ",
                          {"terms": ["上がらない"]})),
+        ("上位の観点の節を1つ足すだけ（serp）",
+         not serp_guard("---\ntitle: AI導入補助金の対象ツール\n---\n## 対象の経費\n本文\n",
+                        "---\ntitle: AI導入補助金の対象ツール\n---\n## 対象の経費\n本文\n## 対象外になりやすいソフトは？\n本文\n",
+                        "AI導入補助金の対象ツール", "AI導入補助金の対象ツール", ["対象にならないツールの見分け方"])),
     ]
     return [name for name, ok in cases if not ok]
 
@@ -1011,7 +1115,14 @@ def title_locked(slug, today=None, log=None):
     return max(hits) if hits else ""
 
 
-TAG = ""      # --tag。集中モード（focus-mode.yml）の直しを対照群と分けて測るための印。既定は付けない
+TAG = ""      # --tag。集中モード（focus-mode.yml）・浮いた枠（spare-slot）の直しを対照群と分けて測るための印。既定は付けない
+SPARE_TAG = "spare-slot"
+
+
+def keep_original(kind):
+    """直す前の原稿を残す直しか（28日後に効かなければ rewrite_rollback が原稿ごと戻す）。
+    本文を足す直し（compete・early・serp）と、浮いた枠の直しは全部残す（浮いた枠は毎日1本で、効かない直しを積み残さない）"""
+    return kind in ("compete", "early", "serp") or TAG == SPARE_TAG
 
 
 def note(slug, kind, ok, why):
@@ -1104,7 +1215,9 @@ def build_prompt(item):
         allowed = "\n".join(f"- {c}" for c in gap.get("facts") or [])
         what = what.format(kw=gap.get("kw", ""), diffs="\n".join(lines),
                            facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
-    if kind in ("stuck", "compete"):
+    if kind == "serp":
+        what = what.format(pos=item.get("pos", ""), kw=item.get("kw") or meta(slug)[1])
+    if kind in ("stuck", "compete", "serp"):
         # 狙う語の上位ページの見出しの並び・共起語・実際の質問（kw_plan がラッコで取り data/kw_serp に残す。
         # お客様の社の分は private の置き場から CI のキャッシュで戻る）。format の後に足す（見出しに波括弧があっても崩さない）。
         # 数字は足させない（検算はそのまま）
@@ -1282,6 +1395,13 @@ def run_one(item, write, edited=None):
         ng = compete_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], item["gap"])
     if not ng and kind == "early":
         ng = early_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], item)
+    if not ng and kind == "serp":
+        ng = serp_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], serp_heads(slug))
+    if not ng and kind == "stuck":
+        # stuck の指示にも上位ページの見出しが入る（kw_serp）。写していれば通さない
+        cp = copied_heads(before[2], p.read_text(encoding="utf-8-sig"), serp_heads(slug))
+        if cp:
+            ng = "上位ページの見出しをそのまま写しています: " + " / ".join(cp[:2])
     if not ng and meta(slug)[0] != before[0]:
         lk = title_locked(slug)
         if lk:
@@ -1293,7 +1413,7 @@ def run_one(item, write, edited=None):
         p.write_bytes(raw)
         sh([sys.executable, "scripts/build.py"], timeout=1800)
         return False, ng
-    if kind in ("compete", "early"):
+    if keep_original(kind):
         LAST[slug].update(keep_before(slug, raw, p.read_bytes()))
     if kind == "early":
         LAST[slug].update({"query": item["query"], "pos_before": item["pos"], "imp_before": item["imp"]})
@@ -1396,12 +1516,15 @@ def main():
                     help="この分数を超えたら、次の記事に着手しない（0=無制限）")
     ap.add_argument("--selftest", action="store_true",
                     help="検算が効くかを本番の記事で確かめる（claudeは呼ばない）")
-    ap.add_argument("--kind", default="", help="種別を絞る（fresh は鮮度更新だけを回す）")
+    ap.add_argument("--kind", default="",
+                    help="種別を絞る（fresh は鮮度更新だけを回す。spare は浮いた枠の順: serp → stuck → compete）")
     ap.add_argument("--skip-recent", type=int, default=0,
-                    help="直近この日数に auto_rewrite が手を付けた記事を外す（0=外さない。集中モードが使う）")
-    ap.add_argument("--tag", default="", help="台帳に残す印（集中モードの直しを対照群と分けるため）")
+                    help="直近この日数に auto_rewrite が手を付けた記事を外す（0=外さない。集中モード・浮いた枠が使う）")
+    ap.add_argument("--tag", default="", help="台帳に残す印（集中モード・浮いた枠の直しを対照群と分けるため）")
     ap.add_argument("--sites", default="",
                     help="この社の記事だけを直す（空白かカンマ区切り。空=全社。集中モードが focus_report --sites を渡す）")
+    ap.add_argument("--main-only", action="store_true",
+                    help="その社の主力の語（kw_plan.main_rule）の記事だけを直す（浮いた枠が使う）")
     a = ap.parse_args()
     global TAG
     TAG = a.tag
@@ -1424,9 +1547,15 @@ def main():
         items = compete_items(max(a.limit, 2))
     elif a.kind == "early":
         items = early_items(max(a.limit, 2))
+    elif a.kind == "spare":
+        items = spare_items()
+    elif a.kind == "serp":
+        items = serp_items()
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     items = only_sites(items, a.sites)
+    if a.main_only:
+        items = only_main(items)
     # 検索から外した記事（noindex）は書き直さない（本数の枠と下書きの時間を使わせない）
     import noindex
     items = noindex.drop(items)
@@ -1442,6 +1571,9 @@ def main():
           + (f"（1回に{a.limit}本まで）\n" if a.write else "\n"))
     if not items:
         print("  対象がありません")
+        if a.kind == "spare":
+            # 浮いた枠は新しい記事に戻さない（運用者の決定）。何もしなかったことを実行ログに残す
+            print("SPARE_SLOT=none（書き直す主力の記事がありません。新しい記事も書きません）")
         return 0
     if not a.write:
         for x in items[:12]:
@@ -1451,6 +1583,7 @@ def main():
         return 0
 
     ok = ng = 0
+    rewrote = []
     started = time.time()
     todo = items[:a.limit]
     drafts = [None] * len(todo)
@@ -1469,9 +1602,13 @@ def main():
         note(x["slug"], x["kind"], good, why)
         if good and why.startswith("直しました"):
             hub_rewrite_log(x, why)
+            rewrote.append(x["slug"])
         ok, ng = ok + good, ng + (not good)
     print(f"\n  直した {ok}件 / 戻した {ng}件 / {(time.time() - started) / 60:.0f}分")
     print("  台帳: automation/logs/auto_fix.jsonl")
+    if a.kind == "spare":
+        print("SPARE_SLOT=" + ("rewrote " + ",".join(rewrote) if rewrote else
+                              "reverted（検算で戻しました）" if ng else "unchanged（直す必要なしと判断）"))
     return 0
 
 
