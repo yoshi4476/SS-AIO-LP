@@ -386,23 +386,54 @@ def compete_items(limit=2, log=None):
     return rows[:limit]
 
 
+def page_positions(sid):
+    """{slug: (順位, 表示)}（ページ単位・28日）。page 次元の GSC（rank_up.fetch）を正とする。
+    query×page の data/ranks は語の少ないページが欠け、補助金では4〜20位の主力の記事が1本も載っていなかった
+    （2026-10-09: page 次元で 4〜6位・表示25〜69回の主力の記事が、data/ranks の4〜20位には0本）。
+    GSC が使えないときだけ data/ranks を足し合わせる"""
+    import sites as S
+    try:
+        import rank_up
+        return {d["slug"]: (d["pos"], d["imp"]) for d in rank_up.fetch(S.load(sid)["domain"]).values()}
+    except Exception as e:
+        print(f"  （{sid}: page 次元の順位を取れないため data/ranks で数えます: {str(e)[:50]}）")
+    try:
+        hist = json.loads((ROOT / "data" / "ranks" / f"{sid}.json").read_text(encoding="utf-8"))
+        rows = hist[sorted(hist)[-1]] if hist else []
+    except (OSError, ValueError):
+        rows = []
+    acc = collections.defaultdict(lambda: [0, 0.0])
+    for r in rows:
+        x = acc[str(r.get("url") or "").rstrip("/").rsplit("/", 1)[-1]]
+        x[0] += int(r.get("imp") or 0)
+        x[1] += float(r.get("pos") or 0) * int(r.get("imp") or 0)
+    return {s: (ps / imp, imp) for s, (imp, ps) in acc.items() if imp}
+
+
 def serp_items():
-    """4〜20位にいる自社記事（kw_plan.rewrite_targets と同じ並び）のうち、狙う語の上位ページの見出し
-    （kw_plan がラッコで取り data/kw_serp に残す。60日以内）があるもの"""
+    """狙う語の上位ページの見出し（kw_plan がラッコで取り data/kw_serp に残す。60日以内）がある記事のうち、
+    4〜20位にいるもの（ページ単位・28日・表示15回以上。kw_plan.REWRITE_BAND と同じ線）。表示×(21−順位) の大きい順"""
     import kw_plan as KP
     import kw_serp
     import sites as S
     out = []
     for sid in S.load_all():
-        for r in KP.rewrite_targets(sid, KP.site_articles(sid)):
-            rec = kw_serp.get(sid, r["kw"])
-            if not rec or not (rec.get("headline") or {}).get("pages"):
+        have = {}
+        for slug, kw in KP.site_articles(sid).items():
+            rec = kw_serp.get(sid, kw)
+            if rec and (rec.get("headline") or {}).get("pages"):
+                have[slug] = (kw, rec)
+        if not have:
+            continue                                   # 調べの無い社は GSC を呼ばない
+        pos = page_positions(sid)
+        for slug, (kw, rec) in have.items():
+            p, imp = pos.get(slug, (None, 0))
+            if p is None or imp < KP.REWRITE_MIN_IMP or not (KP.REWRITE_BAND[0] <= p <= KP.REWRITE_BAND[1]):
                 continue
-            m = re.search(r"(\d+(?:\.\d+)?)位", r.get("why", ""))
-            out.append({"kind": "serp", "slug": r["slug"], "site": sid, "kw": r["kw"],
-                        "pos": m.group(1) if m else "4〜20",
-                        "why": f"{r.get('why', '')}。狙う語の上位ページの見出し・共起語がある（{rec.get('at')} 時点）"})
-    return out
+            out.append({"kind": "serp", "slug": slug, "site": sid, "kw": kw, "pos": f"{p:.1f}",
+                        "score": imp * (21 - p),
+                        "why": f"{p:.1f}位・表示{imp}回。狙う語の上位ページの見出し・共起語がある（{rec.get('at')} 時点）"})
+    return sorted(out, key=lambda x: -x["score"])
 
 
 def spare_items():

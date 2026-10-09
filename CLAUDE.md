@@ -1216,7 +1216,7 @@ python scripts/auto_rewrite.py --write    # 直させて検算する（週次で
 
 **浮いた枠の書き直し（記事の枠・毎日）**: `daily_articles` で新しい記事を減らした社のうち `spare_slot: "rewrite_main"` の社は、
 浮いた枠（補助金は 09:07 の枠）で `auto_rewrite.py --write --kind spare --main-only --sites <id> --limit 1 --skip-recent 28 --tag spare-slot` を回す。
-主力の語（`kw_plan.main_rule`）の記事だけを、4〜20位で上位の見出しがある（`data/kw_serp`・種類 serp）→ 11〜30位（stuck）→
+主力の語（`kw_plan.main_rule`）の記事だけを、4〜20位（ページ単位の GSC）で上位の見出しがある（`data/kw_serp`・種類 serp）→ 11〜30位（stuck）→
 競合との差（compete）の順に1本。selftest・検算・台帳は週次と同じで、直す前の原稿を残し28日後に `rewrite_rollback` が判定する
 （`effect_ab` では「（浮き枠）」として週次と分けて数える）。配信は `publish_changed --since`。**候補が無い日は何もしない**
 （新しい記事にも戻さない。実行ログに `SPARE_SLOT=none`）。新しい workflow は作らず、記事の枠のジョブがそのまま動かす。

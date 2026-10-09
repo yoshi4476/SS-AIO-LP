@@ -235,20 +235,25 @@ def test_spare_candidates_order_and_empty_day():
     if not callable(getattr(AR, "spare_items", None)):
         check("auto_rewrite.spare_items がある", False, True)
         return
-    rows = [{"slug": "p", "kw": "AI導入補助金 対象", "why": "6.0位・表示40回の自社記事"},
-            {"slug": "q", "kw": "AI導入補助金 締切", "why": "12.0位・表示30回の自社記事"}]
-    serp = {"AI導入補助金 対象": {"kw": "AI導入補助金 対象", "at": date.today().isoformat(),
-                                  "headline": {"pages": [{"pos": 1, "ours": False, "heads": [["h2", "対象になるツール"]]}]}}}
+    arts = {"p": "AI導入補助金 対象", "q": "AI導入補助金 締切", "u": "AI導入補助金 費用", "v": "AI導入補助金 期間",
+            "w": "AI導入補助金 種類"}
+    head = {"at": date.today().isoformat(), "headline": {"pages": [{"pos": 1, "ours": False, "heads": [["h2", "対象になるツール"]]}]}}
+    serp = {kw: dict(head, kw=kw) for kw in arts.values() if kw != "AI導入補助金 締切"}     # q だけ調べが無い
+    # ページ単位の順位: p は 6位・表示40（入る）、v は 25位（帯の外）、w は表示8回（偶然と区別できない）、u は 4.0位・表示90（入る・先頭）
+    pages = {"p": (6.0, 40), "q": (12.0, 30), "u": (4.0, 90), "v": (25.0, 50), "w": (9.0, 8)}
     stuck = [{"kind": "stuck", "slug": "r", "site": "subsidy", "terms": ["締切"], "why": "15.0位"},
              {"kind": "stuck", "slug": "p", "site": "subsidy", "terms": ["対象"], "why": "18.0位"}]
     comp = [{"kind": "compete", "slug": "s", "site": "subsidy", "imp": 9, "gap": {}, "why": "競合"}]
-    with patched(KP, site_articles=lambda sid: {r["slug"]: r["kw"] for r in rows} if sid == "subsidy" else {},
-                 rewrite_targets=lambda sid, arts, extra=(): rows if sid == "subsidy" else []), \
+    with patched(KP, site_articles=lambda sid: arts if sid == "subsidy" else {}), \
             patched(kw_serp, get=lambda sid, kw, stale_days=60: serp.get(kw) if sid == "subsidy" else None), \
+            patched(AR, page_positions=lambda sid: pages), \
             patched(rank_rescue, items=lambda limit=0: stuck), patched(AR, compete_items=lambda limit=2, log=None: comp):
         got = [(x["kind"], x["slug"]) for x in AR.spare_items()]
-    check("浮いた枠の順: 4〜20位で上位の見出しがある記事 → 11〜30位 → 競合との差（同じ記事は1回）",
-          got, [("serp", "p"), ("stuck", "r"), ("compete", "s")])
+    check("浮いた枠の順: 4〜20位（ページ単位）で上位の見出しがある記事 → 11〜30位 → 競合との差（同じ記事は1回）",
+          got, [("serp", "u"), ("serp", "p"), ("stuck", "r"), ("compete", "s")])
+    src = __import__("inspect").getsource(AR.page_positions)
+    check("4〜20位はページ単位の GSC（rank_up.fetch・page 次元）で数える（query×page の data/ranks は語の少ないページが欠ける）",
+          "rank_up.fetch(" in src, True)
 
     calls = []
     with tempfile.TemporaryDirectory() as td:
