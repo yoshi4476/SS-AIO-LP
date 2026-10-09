@@ -39,12 +39,8 @@ def articles():
 
 def cat_to_site():
     """カテゴリ → サイト。記事の所属はカテゴリで決まる"""
-    out = {}
-    for f in (ROOT / "sites").glob("*.json"):
-        c = json.loads(f.read_text(encoding="utf-8"))
-        for k in (c.get("categories") or {}):
-            out[k] = f.stem
-    return out
+    import sites as S                    # お客様の社のカテゴリは非公開の置き場の設定
+    return {k: sid for sid, c in S.load_all().items() for k in (c.get("categories") or {})}
 
 
 def collect(site, conf, arts):
@@ -91,8 +87,7 @@ def main():
 
     conf = json.loads((ROOT / "sites" / "_all.json").read_text(encoding="utf-8")) \
         if (ROOT / "sites" / "_all.json").exists() else {
-            p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+            sid: c for sid, c in __import__("sites").load_all().items()}
     arts = articles()
     allrows = []
     for site, c in conf.items():

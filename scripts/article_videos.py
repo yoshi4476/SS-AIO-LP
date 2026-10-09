@@ -39,7 +39,14 @@ FINDINGS = ROOT / "automation" / "logs" / "findings.txt"
 
 
 def load():
-    return json.loads(LEDGER.read_text(encoding="utf-8")) if LEDGER.is_file() else {}
+    # お客様の社の記事の行は非公開のリポジトリ（client_private.load_videos。公開側に社名・slug を置かない）
+    import client_private as CP
+    return CP.load_videos(LEDGER)
+
+
+def save(ledger):
+    import client_private as CP
+    CP.save_videos(ledger, LEDGER)
 
 
 _CFG = {}
@@ -70,7 +77,7 @@ _REVIEWS = None
 
 def published(slug, score):
     """公開済みの記事か（score 90 以上で、監修の記録がある。daily_audit._is_published と同じ判定）。
-    監修待ち（HELD）の記事は公開されていないのに、動画の候補に入っていた（2026-10-08 CONFLUX）"""
+    監修待ち（HELD）の記事は公開されていないのに、動画の候補に入っていた（2026-10-08 お客様の社）"""
     global _REVIEWS
     import editorial_review as ER
     try:
@@ -237,7 +244,7 @@ def make_research(r, ledger, token, public):
         with VM.timed("research.upload"):
             rec["youtube"] = YT.upload(out, r["slug"], public=public, quiet=True)
     ledger[r["slug"]] = rec
-    LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+    save(ledger)
     print(f"   ○ {r['slug'][:40]:<40} {sec:.0f}秒 duo（調査）" + (f" → youtu.be/{rec['youtube']}" if token else ""))
     return True
 
@@ -422,14 +429,12 @@ def main():
                 print("   要対応: YouTube の1日のアップロード上限に達しました。翌日の回で続きを上げます")
                 a.shorts = 0   # 同じ回のショートも上がらない
                 break
-        LEDGER.parent.mkdir(parents=True, exist_ok=True)
-        LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+        save(ledger)
     made_s = shorts(ledger, a.shorts, token, a.public) if a.shorts else 0
     if SHORT_FAILS:
         ok = False
     # 作り直しの判定で控えた基準（nums）も残す（動画を作らなかった回でも）
-    LEDGER.parent.mkdir(parents=True, exist_ok=True)
-    LEDGER.write_text(json.dumps(ledger, ensure_ascii=False, indent=2), encoding="utf-8")
+    save(ledger)
     if rows and not token:
         note_token_missing()
     VM.note_time("videos.total", time.perf_counter() - t_start)

@@ -95,6 +95,9 @@ def process(text, rounds=4):
     return fm + body, total
 
 
+import private_store as PS  # noqa: E402  お客様の社の記事の slug は CI のログに出さない（PS.shown）
+
+
 def run(slug, write):
     p = ROOT / "articles" / f"{slug}.md"
     if not p.is_file():
@@ -106,7 +109,7 @@ def run(slug, write):
         return 0
     # 文字が1字でも増減したら触らない。分けるだけなので、地の文は変わらないはず
     if plain(before.partition("---\n")[2]) != plain(after.partition("---\n")[2]):
-        print(f"  × {slug}: 分ける前後で本文が変わりました。書き換えません")
+        print(f"  × {PS.shown(slug)}: 分ける前後で本文が変わりました。書き換えません")
         return 0
     def count_long(s):
         b = re.match(r"^---\s*\n.*?\n---\s*\n(.*)$", s, re.S)
@@ -114,7 +117,7 @@ def run(slug, write):
                    if len(plain(x)) > LIMIT)
 
     long_before, long_after = count_long(before), count_long(after)
-    print(f"  {slug[:40]:<40} 長い段落 {long_before} → {long_after}（{n}箇所で分割）")
+    print(f"  {PS.shown(slug)[:40]:<40} 長い段落 {long_before} → {long_after}（{n}箇所で分割）")
     if write:
         p.write_text(after, encoding="utf-8", newline="")
     return n

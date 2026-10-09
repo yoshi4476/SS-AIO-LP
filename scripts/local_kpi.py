@@ -18,9 +18,14 @@ CATS = {"aio": "AIO・LLMO", "seo": "SEO", "meo": "MEO", "ai-marketing": "AI集�
 
 
 def load_metas():
+    # お客様の社の記事は数えない（kpi_feedback.md は公開側に置くので、題・slug を書かない。2026-10-10 運用者の指示）
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import private_store
+    client = set(private_store.client_slugs())
     pub, blocked = [], []
     for p in sorted((ROOT / "articles").glob("*.md")):
-        if p.name.startswith("_"):
+        if p.name.startswith("_") or p.stem in client:
             continue
         text = p.read_text(encoding="utf-8-sig")
         m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", text, re.S)

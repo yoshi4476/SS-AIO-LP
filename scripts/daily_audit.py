@@ -122,7 +122,11 @@ def is_new_article(slug):
                            cwd=ROOT, capture_output=True)
     except OSError:
         return False
-    return r.returncode != 0
+    if r.returncode == 0:
+        return False
+    # お客様の社の記事は非公開のリポジトリで追跡している（公開側の git には無い）
+    import private_store
+    return not private_store.tracked(f"articles/{slug}.md")
 
 
 def stamp_makeup(slug):
@@ -227,7 +231,7 @@ def daily_quota(sid):
 def publish_hours(sid):
     """その社の記事の枠の時刻（JST の時）。pipeline-multi.yml の「対象サイトの判定」と同じ割り当てで求める
     （cron の並び＝枠の番号・site_order の並び・枠の番号 % 社数・その日の何本目 < 1日の本数）。
-    3社の時刻を手で書いていたため、社を足すと枠の時刻とずれ、書いていない社（CONFLUX）は時刻に関係なく
+    3社の時刻を手で書いていたため、社を足すと枠の時刻とずれ、書いていない社（お客様の社）は時刻に関係なく
     「不足」になり、夜の救済が先回りで1本書いて1日1本の決まりを超えるところだった（2026-10-07 の点検）。
     求められないときは None"""
     try:
@@ -236,10 +240,13 @@ def publish_hours(sid):
         order = site_order.order()
     except Exception:
         return None
-    if sid not in order or not crons:
+    # お客様の社は公開の id（sites/<公開の id>.json の名前）で並ぶ。社の id で聞かれても、公開の id で探す
+    import sites as _S
+    key = sid if sid in order else _S.public_id(sid)
+    if key not in order or not crons:
         return None
-    n, i = len(order), order.index(sid)
-    q = daily_quota(sid)
+    n, i = len(order), order.index(key)
+    q = daily_quota(_S.resolve(sid))
     return tuple(sorted((int(c.split()[1]) + 9) % 24 for slot, c in enumerate(crons)
                         if slot < n * 2 and slot % n == i and slot // n < q))
 
@@ -291,7 +298,7 @@ def check_volume(todo):
         # 公開の時刻より前に「不足」と言うと、救済が先回りして1日分を
         # まとめて書こうとする。時刻が来たぶんだけを不足として数える
         if n < due and past and want < DAILY_TARGET:
-            # 1日の本数を絞っている社（オーナーの指示で1日1本の CONFLUX・量産の兆候で落とした週）は、前日の分を
+            # 1日の本数を絞っている社（オーナーの指示で1日1本の お客様の社・量産の兆候で落とした週）は、前日の分を
             # 今日書き足さない。書き足すと暦の上で1日2本になり、絞った理由（指示・量産の見え方）に反する
             print(f"     {sid} は1日{want}本に絞っているため、前日の不足分は書き足しません")
         elif n < due and past:

@@ -35,12 +35,12 @@ def edited(days, until=None):
     until を渡すと、その日より前の更新だけを見る。今日の一括修正に
     埋もれて過去の施策が測れなくなるのを避けるため。
     """
-    r = subprocess.run(
-        ["git", "log", f"--since={days} days ago", "--name-only",
-         "--pretty=format:@%cI", "--", "articles/"],
-        cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    args = ["log", f"--since={days} days ago", "--name-only", "--pretty=format:@%cI", "--", "articles/"]
+    r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    # お客様の社の記事の手入れは非公開のリポジトリの記録にある
+    import private_store
     commits, cur = [], None
-    for line in r.stdout.splitlines():
+    for line in (r.stdout + "\n" + private_store.private_git(*args)).splitlines():
         if line.startswith("@"):
             cur = (line[1:11], [])
             commits.append(cur)

@@ -79,7 +79,23 @@ def _json(p):
 
 
 def _site(sid):
-    return _json(SITES / f"{sid}.json")
+    """その社の設定。お客様の社は公開の印（公開の id・本数だけ）に非公開の置き場の設定を重ねたもの（sites.load_all）。
+    社の id で聞かれても公開の id で聞かれても同じ設定を返す（非公開のデータが取れない回は公開の印だけ）"""
+    d = _json(SITES / f"{sid}.json")
+    if d and not d.get("client"):
+        return d
+    try:
+        import sites as S
+        full = S.load_all().get(S.resolve(sid))
+    except Exception:
+        full = None
+    return full or d
+
+
+def _manual():
+    """手動による対策の記録 {社: …}。お客様の社の行は非公開のリポジトリ（理由の文に社の事情が入る）"""
+    import client_private as CP
+    return CP.load_dict("data/pace_manual.json", pub=MANUAL)
 
 
 def setting(sid):
@@ -92,8 +108,8 @@ def setting(sid):
 
 def signal_quota(sid):
     """量産の兆候（週次の判定）と手動による対策から決まる本数。手動が最優先。記録が無い・古いときは既定の2本"""
-    if (_json(MANUAL).get(sid) or {}).get("quota") is not None:
-        return int(_json(MANUAL)[sid]["quota"])
+    if (_manual().get(sid) or {}).get("quota") is not None:
+        return int(_manual()[sid]["quota"])
     import client_private as CP
     st = CP.load_dict("data/pace_state.json", pub=STATE).get(sid) or {}
     if st.get("date", "") < (date.today() - timedelta(days=STATE_DAYS)).isoformat():
@@ -114,7 +130,7 @@ def slot(sid, rank):
     if rank < min(sig, mine):
         return "write", f"1日{min(sig, mine)}本のうち{rank + 1}本目"
     if rank >= sig:
-        why = "手動による対策" if (_json(MANUAL).get(sid) or {}).get("quota") is not None else "量産の兆候"
+        why = "手動による対策" if (_manual().get(sid) or {}).get("quota") is not None else "量産の兆候"
         return "skip", f"今週1日{sig}本（{why}。python scripts/pace.py で理由を確認）"
     if _site(sid).get("spare_slot") == SPARE_REWRITE:
         return "rewrite", f"新しい記事は1日{mine}本（運用者の設定）。浮いた枠で主力の記事を書き直す"
@@ -292,7 +308,7 @@ def main():
         print(f"SLOT={mode}\nSLOT_WHY={why}")
         return 0
     if a.manual:
-        m = _json(MANUAL)
+        m = _manual()
         sid = a.manual[0]
         if a.clear:
             m.pop(sid, None)
@@ -300,13 +316,15 @@ def main():
         else:
             m[sid] = {"quota": 0, "reason": " ".join(a.manual[1:]) or "手動による対策", "at": date.today().isoformat()}
             print(f"{sid}: 新しい記事を止めました（手動による対策）。解除は --manual {sid} --clear")
-        MANUAL.write_text(json.dumps(m, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        import client_private as CP
+        CP.save_dict("data/pace_manual.json", m, CP.site_key,
+                     dump=lambda o: json.dumps(o, ensure_ascii=False, indent=1) + "\n", pub=MANUAL)
         return 0
     import content_yield as CY
     import sites as S
     end = date.today() - timedelta(days=3)
     arts = [x for x in (CY._fm(p) for p in (ROOT / "articles").glob("*.md")) if x and x["score"] >= 90]
-    manual = _json(MANUAL)
+    manual = _manual()
     state, ran, low = {}, 0, 0
     print("■ 量産と見られている兆候（Google の大量生成の不正使用の定義にもとづく）と、1日の本数\n")
     for sid, cfg in S.load_all().items():

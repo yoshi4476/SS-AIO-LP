@@ -122,6 +122,9 @@ def plain(s):
     return re.sub(r"<[^>]+>|[*=`]|\s", "", s)
 
 
+import private_store as PS  # noqa: E402  お客様の社の記事の slug は CI のログに出さない（PS.shown）
+
+
 def run(write):
     blanks = joins = strongs = touched = 0
     for p in sorted((ROOT / "articles").glob("*.md")):
@@ -140,13 +143,13 @@ def run(write):
             continue
         # 地の文が1字でも変わったら触らない。空行の増減と結合しかしていないはず
         if plain(body) != plain(nb):
-            print(f"  × {p.stem}: 前後で本文が変わりました。書き換えません")
+            print(f"  × {PS.shown(p.stem)}: 前後で本文が変わりました。書き換えません")
             continue
         blanks += a + d
         joins += b
         strongs += c
         touched += 1
-        print(f"  {p.stem[:44]:<44} 空行{a + d:>3}  結合{b:>2}  強調{c:>2}")
+        print(f"  {PS.shown(p.stem)[:44]:<44} 空行{a + d:>3}  結合{b:>2}  強調{c:>2}")
         if write:
             io.open(p, "w", encoding="utf-8", newline="").write(fm + nb)
     return touched, blanks, joins, strongs

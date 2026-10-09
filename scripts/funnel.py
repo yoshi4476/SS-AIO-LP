@@ -52,7 +52,7 @@ CTA_CHANGES = {
 }
 # 問い合わせ方向かを決める行き先の語。cta_id の中で最後に出てくる語で決める
 # （ai_check_lp_fudosan は診断の結果から LP（相談）へ、lp_fudosan_scan は LP の上の診断）。
-# cta_id の形は社ごとに違う（AI集客ラボ・補助金は data-cta か「ページ_場所_行き先」、コーポレート・CONFLUX は
+# cta_id の形は社ごとに違う（AI集客ラボ・補助金は data-cta か「ページ_場所_行き先」、コーポレート・お客様の社は
 # 「ページの種類_位置_行き先」、補助金の記事はボタンの文字）。cta_kind（コーポレート）があれば、それだけで決める
 CONTACT_WORDS = ("contact", "consult", "soudan", "lp", "tel", "mail")
 TOOL_WORDS = ("scan", "check", "aicheck", "checklist", "quiz", "diag", "diagnosis", "audit", "tool", "tools",

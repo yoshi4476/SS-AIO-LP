@@ -79,7 +79,7 @@ def site_for_slug(slug):
 
 def credit_text(cfg):
     """図の右下の名義。お客様の社はその社の名前だけにする（data/clients/<id>/company.json）。
-    以前は「CONFLUX PARTNERS の記事（セブンセンシズ株式会社）」と運用会社の名前まで入っていた（2026-10-08）"""
+    以前は「お客様のサイト名（セブンセンシズ株式会社）」と運用会社の名前まで入っていた（2026-10-08）"""
     if not cfg:
         return "AI集客ラボ（セブンセンシズ株式会社）"
     if sites_mod.is_client(cfg["id"]):

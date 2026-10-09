@@ -470,8 +470,8 @@ def main():
     ap.add_argument("--until", default="", help="この日までで区切る（YYYY-MM-DD）")
     a = ap.parse_args()
 
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    import sites as S                    # お客様の社のドメインは非公開の置き場の設定
+    conf = S.load_all()
     until = date.fromisoformat(a.until) if a.until else None
     ws = weeks(a.weeks, until)
     sc = sc_client()

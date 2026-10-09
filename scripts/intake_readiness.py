@@ -74,8 +74,9 @@ def connections(cfg, root=ROOT):
         have["git"] = bool(publish._push_token())
     except Exception:
         have["git"] = bool(os.environ.get("SITE_PUSH_TOKEN"))
-    yt = _json(root / "data" / "youtube_connected.json") or {}
-    have["youtube"] = (root / f"youtube-token-{sid}.json").is_file() or sid in yt.get("sites", [])
+    import client_private as CP           # お客様の社の id は非公開のリポジトリに書く
+    yt = CP.load_connected(root / "data" / "youtube_connected.json")
+    have["youtube"] = (root / f"youtube-token-{sid}.json").is_file() or sid in yt
     raw = os.environ.get("SOCIAL_TOKENS_JSON") or ""
     if not raw and (root / "social-tokens.json").is_file():
         raw = (root / "social-tokens.json").read_text(encoding="utf-8-sig")
@@ -385,6 +386,9 @@ def _is_client(site_id, root=ROOT):
 
 
 def clients(root=ROOT):
+    if root == ROOT:                     # お客様の社は非公開の置き場の社の id（公開側の印の名前ではない）
+        import sites as S
+        return sorted(s for s in S.load_all() if S.is_client(s))
     return sorted(p.stem for p in (root / "sites").glob("*.json") if _is_client(p.stem, root))
 
 

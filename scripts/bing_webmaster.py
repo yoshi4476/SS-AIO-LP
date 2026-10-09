@@ -418,17 +418,14 @@ def sitemap_entries(domain):
 
 
 def load_backfill():
-    try:
-        b = json.loads(BACKFILL.read_text(encoding="utf-8")) if BACKFILL.is_file() else {}
-    except (OSError, ValueError):
-        b = {}
-    b.setdefault("sent", {})
-    return b
+    # お客様の社の URL・社の id の行は非公開のリポジトリ（client_private。公開側にドメインを置かない）
+    import client_private as CP
+    return CP.load_backfill(BACKFILL)
 
 
 def save_backfill(b):
-    BACKFILL.parent.mkdir(exist_ok=True)
-    BACKFILL.write_text(json.dumps(b, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
+    import client_private as CP
+    CP.save_backfill(b, BACKFILL)
 
 
 def backfill_site(sid, domain, entries, key, state, ledger, today, dry=False):

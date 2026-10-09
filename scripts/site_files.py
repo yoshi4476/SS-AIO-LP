@@ -65,7 +65,7 @@ def generated(dest: Path, stem):
         if any(rx.match(f) for f in files):
             return True
         # Next.js の App Router の経路（app/llms.txt/route.ts）。見落として public/llms.txt を置き、
-        # 先方の動的な llms.txt と同じ URL を取り合うところだった（CONFLUX・2026-10-08）
+        # 先方の動的な llms.txt と同じ URL を取り合うところだった（お客様の社・2026-10-08）
         if route_dir.match(Path(top).name) and any(route.match(f) for f in files):
             return True
     return False

@@ -2313,6 +2313,7 @@ def main():
     QUALITY_GATE = 90
     paths, all_metas, blocked, blocked_metas = [], [], [], []
     unparsable = set()             # フロントマターが読めなかった記事。生成済みHTMLは消さない
+    client_skip = 0                # お客様の社の記事（slug・社は CI のログに出さず、本数だけ出す。2026-10-10）
     for p in sorted(ARTICLES.glob("*.md")):
         if p.name.startswith("_"):
             continue
@@ -2321,7 +2322,10 @@ def main():
         import sites as sites_mod
         owner = article_site(p)
         if owner and owner != sites_mod.primary():
-            print(f"SKIP(他サイト): {p.stem} → {owner} へ配信済み")
+            if sites_mod.is_client(owner):
+                client_skip += 1
+            else:
+                print(f"SKIP(他サイト): {p.stem} → {owner} へ配信済み")
             drop_stale_html(p.stem)
             continue
         # 1記事の不正フロントマターで全ビルドを止めない（不正記事はBLOCKED扱いで続行）
@@ -2363,6 +2367,8 @@ def main():
                 f"狙う語がタイトルに無い（{meta.get('keyword')}）")
         paths.append(p)
         all_metas.append(meta)
+    if client_skip:
+        print(f"SKIP(他サイト): お客様の社の記事 {client_skip}本（配信済み。slug はログに出しません）")
     for b in blocked:
         print(f"BLOCKED(公開不可): {b} → 修正・再審査後に score を更新してください")
     # 検索から外した記事（noindex: true。担当領域の外と運用者が決めたもの）。ページは描いて URL を残すが、

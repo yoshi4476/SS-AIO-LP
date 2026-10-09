@@ -15,10 +15,11 @@ LEDGER = ROOT / "data" / "videos.json"
 
 
 def info(slug):
-    if not LEDGER.is_file():
-        return None
     try:
-        rec = json.loads(LEDGER.read_text(encoding="utf-8")).get(slug)
+        import sys
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import client_private as CP       # お客様の社の記事の行は非公開のリポジトリ
+        rec = CP.load_videos(LEDGER).get(slug)
     except Exception:
         return None
     return rec if rec and rec.get("youtube") else None

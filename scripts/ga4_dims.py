@@ -13,7 +13,7 @@ form_abandon がどの項目で起きたか、記事の入力欄がどの記事�
 登録は足すだけで、既存の定義は変えない。登録した日より前の出来事には値が付かない（GA4 の仕様）。
 
 **拡張計測の「フォームの操作」**: GA4 が自動で送る form_start・form_submit は、自前の計測（site.js・
-コーポレートの ContactForm・補助金のフォーム・CONFLUX の Measure.tsx）と同じ名前で、入力開始と送信が2重に出る
+コーポレートの ContactForm・補助金のフォーム・お客様の社 の Measure.tsx）と同じ名前で、入力開始と送信が2重に出る
 （AI集客ラボ /contact/ の 10/7: form_start 2・form_submit 2 で、問い合わせは1件）。止めるのは、自前の計測が
 実際に出ている（種類つきの form_start と、離脱・種類つきの送信・問い合わせのどれか）と GA4 で確かめた社だけ。
 確かめられない社は変えずに知らせる（止めると入力開始が0になり、数えられなくなる）。止めた日と変える前の値は
@@ -33,7 +33,7 @@ API_ALPHA = "https://analyticsadmin.googleapis.com/v1alpha"      # 拡張計測�
 SETTINGS = ROOT / "data" / "ga4_settings.json"
 # (パラメータ名, 表示名)。lead_route は funnel.py の送信の内訳に要る。cta_kind はコーポレートの入口の種類
 # （contact / doc / tool / diagnosis。月次レポートの「うち問い合わせ方向」をこれで数える）。
-# 表示名に記号（全角の括弧など）は使えない（400「alphanumeric, underscore, or space」。CONFLUX で page_path が落ちた）
+# 表示名に記号（全角の括弧など）は使えない（400「alphanumeric, underscore, or space」。お客様の社 で page_path が落ちた）
 DIMS = [
     ("last_field", "最後に触った項目"),
     ("form_type", "フォームの種類"),

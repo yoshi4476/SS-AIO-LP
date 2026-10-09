@@ -94,7 +94,9 @@ def problems(f, existing_ids):
     out += rate_problems(f)
 
     sites = f.get("sites") or []
-    known = {p.stem for p in (ROOT / "sites").glob("*.json")}
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S                    # お客様の社は非公開の置き場の社の id
+    known = {p.stem for p in (ROOT / "sites").glob("*.json")} | set(S.load_all())
     for s in sites:
         if s not in known:
             out.append(f"sites の「{s}」は存在しません（候補: {', '.join(sorted(known))}）")

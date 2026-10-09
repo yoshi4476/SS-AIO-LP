@@ -74,10 +74,10 @@ def check_articles(day, bad):
 
 
 def check_video(day, bad):
-    p = ROOT / "data" / "videos.json"
-    if not p.is_file():
+    import client_private as CP           # お客様の社の記事の行は非公開のリポジトリ
+    vids = CP.load_videos()
+    if not vids:
         return
-    vids = json.loads(p.read_text(encoding="utf-8"))
     # 通常の動画は YouTube で検索されるテーマだけ作るので、ショートだけの日がある（yt_demand）
     n = sum(1 for v in vids.values() if isinstance(v, dict)
             for d in (v.get("date"), (v.get("short") or {}).get("date")) if d == day.isoformat())

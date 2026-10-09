@@ -11,7 +11,7 @@
   noindex_reason: 担当領域の外（銀行の通帳の記帳。経理の外注を考える読者ではない）
   noindex_date: 2026-10-08
 
-効き方（AI集客ラボ build.py・コーポレート nextjs-json・補助金 external-html・CONFLUX external-md で同じ）:
+効き方（AI集客ラボ build.py・コーポレート nextjs-json・補助金 external-html・お客様の社 external-md で同じ）:
   - head に <meta name="robots" content="noindex,follow">。nextjs-json は記事の JSON の noindex を先方の
     記事ページが generateMetadata で robots にする（nextjs_app が blog.ts と記事ページに足す）。
     external-md はフロントマターの robots と noindex（先方の雛形が head に出す）

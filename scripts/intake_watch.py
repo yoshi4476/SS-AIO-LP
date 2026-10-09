@@ -132,6 +132,7 @@ def one(src, write, k=None):
     if not (PS.base() / ".git").is_dir():
         return False, "%s: 非公開のリポジトリ（private/）がありません。python scripts/private_store.py --fetch の後にやり直してください" % name
     ind = next((k for k, (lab, _) in C.INDUSTRY.items() if lab in src.name), "")
+    C.assign_id(cfg)                     # 社名から推測できない公開の id（シートの id は使わない）
     C.apply(got, cfg, ind)
     if not C.save_private(cfg.get("id")):
         print("   ! 非公開のリポジトリへ push できませんでした（private/ で git push してください）")

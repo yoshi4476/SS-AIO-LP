@@ -86,7 +86,9 @@ def check(cfg):
     if cfg.get("type") not in ("self-static", "wordpress", "ftp", "zip") and not cfg.get("repo"):
         ng.append("repo が空です（外部サイトは配信先リポジトリが要ります）")
 
-    ids = {p.stem for p in SITES.glob("*.json")}
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import sites as S                    # お客様の社の id・カテゴリ・ドメインは非公開の置き場の設定
+    ids = {p.stem for p in SITES.glob("*.json")} | set(S.load_all())
     if cfg.get("id") in ids:
         ng.append(f"id「{cfg['id']}」は既にあります")
     # 上限は intake_watch と同じ数で見る。ここを通すと記事の枠が足りず全社の本数が減る
@@ -96,13 +98,12 @@ def check(cfg):
         ng.append(f"サイトが既に{intake_watch.site_count()}件あります。この仕組みは"
                   f"{intake_watch.MAX_SITES}社までです（別リポジトリに分けてください）")
     # 既存サイトとカテゴリ名がぶつかると、記事がどちらのサイトのものか決まらない
-    for p in SITES.glob("*.json"):
-        other = json.loads(p.read_text(encoding="utf-8-sig"))
+    for other in S.load_all().values():
         dup = set(cfg.get("categories", {})) & set(other.get("categories", {}))
         if dup:
-            ng.append(f"カテゴリ {sorted(dup)} が {p.stem} と重複しています")
+            ng.append(f"カテゴリ {sorted(dup)} が {other.get('public_id') or other.get('id')} と重複しています")
         if cfg.get("domain") == other.get("domain"):
-            ng.append(f"ドメインが {p.stem} と同じです")
+            ng.append(f"ドメインが {other.get('public_id') or other.get('id')} と同じです")
 
     cats = cfg.get("categories", {})
     if cfg.get("main_category") and cfg["main_category"] not in cats:

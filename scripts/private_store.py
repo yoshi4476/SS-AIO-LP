@@ -30,7 +30,10 @@
   python scripts/private_store.py --is-client <id>      # お客様の社か（yes/no。CI でログに出す量を決める）
   python scripts/private_store.py --fetch               # CI: private/ へ取得する（鍵は環境変数）
   python scripts/private_store.py --push "<理由>"        # private/ の変更を commit・push する
-  python scripts/private_store.py --migrate <id>        # 古い場所の材料と sites/<id>.json の戦略の部分を private/ へ移す
+  python scripts/private_store.py --migrate <id>        # 古い場所の材料と sites/<id>.json の設定を private/ へ移す
+  python scripts/private_store.py --resolve <公開の id>  # 公開の id → 社の id（記事の枠のジョブの間の受け渡し）
+  python scripts/private_store.py --overlay             # お客様の社の記事・画像・台本を作業場所へ重ね、commit の見張りを入れる
+  python scripts/private_store.py --pre-commit          # commit の直前（hook）: お客様の社のファイルを公開側から外して残す
 """
 import base64
 import json
@@ -115,22 +118,35 @@ def write_text(sid, name, text, root=None):
 
 
 def site_private(sid, root=None):
-    """サイト設定の戦略の部分（sites/<id>.json から外した項目）。無ければ空"""
+    """お客様の社のサイト設定（名前・ドメイン・配信先・カテゴリ・戦略の部分の全部と、公開の id）。無ければ空"""
     d = read_json(sid, "site_private.json", {}, root=root)
     return d if isinstance(d, dict) else {}
 
 
+def new_public_id(sites_dir=None):
+    """社名から推測できない公開の id（c と16進8桁）。お客様の社の id にも使う（2026-10-10 運用者の指示）"""
+    import secrets
+    d = Path(sites_dir) if sites_dir else _sites().SITES_DIR
+    while True:
+        pid = "c" + secrets.token_hex(4)
+        if not (d / f"{pid}.json").exists() and not client_dir(pid).exists():
+            return pid
+
+
 def write_site(cfg, sites_dir, root=None):
-    """お客様の社のサイト設定を書く。公開してよい項目（sites.PUBLIC_KEYS）だけを sites/<id>.json へ、
-    残り（戦略の部分）を非公開の置き場の clients/<id>/site_private.json へ。書いたファイルを返す"""
-    S = _sites()
-    pub, priv = S.split_public(cfg)
-    pub["client"] = True
-    priv.pop("kw_plan", None)         # キーワード計画は clients/<id>/kw.md（場所は private_store が決める）
-    sp = Path(sites_dir) / f"{cfg['id']}.json"
+    """お客様の社のサイト設定を書く。公開側の sites/<公開の id>.json には社が特定できない印（公開の id・client・
+    1日の本数）だけ、設定の全部（名前・ドメイン・配信先・カテゴリ・戦略の部分）は非公開の置き場の
+    clients/<社の id>/site_private.json へ。書いたファイルを返す"""
+    cfg = {k: v for k, v in cfg.items() if k not in ("_path", "kw_plan", "client")}
+    cur = site_private(cfg["id"], root=root)
+    pid = cfg.get("public_id") or cur.get("public_id") or cfg["id"]
+    stub = {"id": pid, "client": True}
+    if cfg.get("daily_articles") is not None:
+        stub["daily_articles"] = cfg["daily_articles"]
+    sp = Path(sites_dir) / f"{pid}.json"
     sp.parent.mkdir(parents=True, exist_ok=True)
-    sp.write_text(json.dumps(pub, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    return [sp, write_json(cfg["id"], "site_private.json", priv, root=root)]
+    sp.write_text(json.dumps(stub, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    return [sp, write_json(cfg["id"], "site_private.json", dict(cfg, public_id=pid), root=root)]
 
 
 def known_clients():
@@ -151,10 +167,12 @@ def is_client(sid):
 
 
 def require(sid, what="記事"):
-    """お客様の社で非公開のデータが読めなければ False（理由を出す）。自社の社と、読める社は True"""
-    if not is_client(sid) or available(sid):
+    """お客様の社で非公開のデータが読めなければ False（理由を出す）。自社の社と、読める社は True。
+    sid は社の id でも公開の id でもよい。知らせる文には公開の id だけを出す（社名を CI のログに出さない）"""
+    rid = _sites().resolve(sid) if sid else sid
+    if not is_client(rid) or available(rid):
         return True
-    print(f"要対応: {sid} の{what}を止めました。非公開のデータ（{REPO} の clients/{sid}/）が読めません"
+    print(f"要対応: お客様の社 {_sites().public_id(rid) if rid else sid} の{what}を止めました。非公開のデータ（{REPO}）が読めません"
           "（CI は鍵 PRIVATE_DATA_TOKEN／SITE_PUSH_TOKEN にこのリポジトリの読み書きの権限が要ります。"
           "手元は python scripts/private_store.py --fetch で private/ に取得）", flush=True)
     print("PRIVATE_OK=no", flush=True)
@@ -244,6 +262,7 @@ def fetch():
         r = _git("pull", "-q", "--rebase") if not dirty else None
         print("PRIVATE_DATA=ok" + ("" if r is not None and r.returncode == 0 else "（最新にせず、手元の写しのまま）"),
               flush=True)
+        _after_fetch()
         return _set_output(True)
     tok = _token()
     if not tok and os.environ.get("GITHUB_ACTIONS"):
@@ -267,7 +286,15 @@ def fetch():
         _git("config", "--local", "user.name", "AIO Pipeline Bot")
         _git("config", "--local", "user.email", "noreply@7senses.co.jp")
     print("PRIVATE_DATA=ok", flush=True)
+    _after_fetch()
     return _set_output(True)
+
+
+def _after_fetch():
+    """取得の後: お客様の社の記事・画像・台本を作業場所へ重ねて置き、commit の見張り（hook）を入れる"""
+    n = overlay_in()
+    install_hook()
+    print(f"PRIVATE_OVERLAY={n}", flush=True)
 
 
 def push(message, tries=3):
@@ -275,6 +302,7 @@ def push(message, tries=3):
     if not (base() / ".git").is_dir():
         print("PRIVATE_PUSH=none（private/ がありません）", flush=True)
         return False
+    overlay_out(unstage=False)         # 作業場所で書いた・直したお客様の社の記事・画像・台本も残す
     _git("add", "-A")
     if _git("diff", "--cached", "--quiet").returncode == 0:
         print("PRIVATE_PUSH=nochange", flush=True)
@@ -290,19 +318,267 @@ def push(message, tries=3):
     return False
 
 
+# ── お客様の社の記事と付属物（公開側の作業場所に重ねて置き、公開側の git には入れない） ─────────────
+# 記事の原稿（公開前・90点未満で止めたものも）・画像・動画の台本は、公開側に置かない（2026-10-10 運用者の指示）。
+# 工程は公開側の articles/ などを読むので、非公開の置き場の同じ場所（private/articles/… など）から作業場所へ重ねて
+# 置き（overlay_in）、.git/info/exclude で公開側の git から外す。書いた・直した分は commit の前
+# （.git/hooks/pre-commit → --pre-commit）とジョブの終わり（private-data の save → --push）に非公開の置き場へ戻す
+OVERLAY_ROOTS = ("articles", "site/images", "data/duo_scripts", "data/duo_shorts")
+SLUG_PATHS = ("site/images/{}", "data/duo_scripts/{}.json", "data/duo_shorts/{}.json")
+EXCLUDE_HEAD = "# >>> private_store（お客様の社のファイル。公開側の git に入れない。手で書き換えない）"
+EXCLUDE_TAIL = "# <<< private_store"
+HOOK = """#!/bin/sh
+# private_store: お客様の社のファイル（記事・画像・動画の台本）を公開側の commit に入れない（2026-10-10）
+[ -f scripts/private_store.py ] || exit 0
+for py in python3 python; do
+  if "$py" -c "import sys" >/dev/null 2>&1; then exec "$py" scripts/private_store.py --pre-commit; fi
+done
+exit 0
+"""
+
+
+def _public_git(*args):
+    return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True, encoding="utf-8",
+                          errors="replace")
+
+
+def _git_path(rel):
+    r = _public_git("rev-parse", "--git-path", rel)
+    if r.returncode or not r.stdout.strip():
+        return None
+    p = Path(r.stdout.strip())
+    return p if p.is_absolute() else ROOT / p
+
+
+def _exclude_entries():
+    p = _git_path("info/exclude")
+    t = p.read_text(encoding="utf-8", errors="ignore") if p and p.is_file() else ""
+    if EXCLUDE_HEAD not in t:
+        return []
+    block = t.split(EXCLUDE_HEAD, 1)[1].split(EXCLUDE_TAIL, 1)[0]
+    return [ln.strip().lstrip("/") for ln in block.splitlines() if ln.strip() and not ln.startswith("#")]
+
+
+def _write_exclude(rels):
+    p = _git_path("info/exclude")
+    if not p:
+        return
+    t = p.read_text(encoding="utf-8", errors="ignore") if p.is_file() else ""
+    if EXCLUDE_HEAD in t:
+        pre, rest = t.split(EXCLUDE_HEAD, 1)
+        post = rest.split(EXCLUDE_TAIL, 1)[1] if EXCLUDE_TAIL in rest else ""
+    else:
+        pre, post = (t.rstrip("\n") + "\n" if t.strip() else ""), "\n"
+    block = EXCLUDE_HEAD + "\n" + "".join(f"/{r}\n" for r in sorted(set(rels))) + EXCLUDE_TAIL
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(pre + block + post, encoding="utf-8", newline="\n")
+
+
+def _category(p):
+    import re
+    try:
+        m = re.search(r"^category:\s*[\"']?([\w-]+)", Path(p).read_text(encoding="utf-8-sig")[:3000], re.M)
+    except OSError:
+        return None
+    return m.group(1) if m else None
+
+
+def client_categories():
+    """お客様の社のカテゴリ {カテゴリ: 社の id}（非公開の置き場の設定から。取れない回は空）"""
+    S = _sites()
+    return {c: sid for sid, cfg in S.load_all().items() if S.is_client(sid) for c in (cfg.get("categories") or {})}
+
+
+def client_slugs():
+    """お客様の社の記事 {slug: 社の id}（公開側の作業場所と非公開の置き場の articles/ から）"""
+    cats = client_categories()
+    out = {}
+    for d in (ROOT / "articles", base() / "articles"):
+        for p in (d.rglob("*.md") if cats and d.is_dir() else ()):
+            sid = cats.get(_category(p))
+            if sid:
+                out[p.stem] = sid
+    return out
+
+
+def client_files():
+    """公開側の作業場所にある、お客様の社のファイル（記事・画像・動画の台本）の相対パス"""
+    cats = client_categories()
+    if not cats:
+        return []
+    out = [p.relative_to(ROOT).as_posix() for p in (ROOT / "articles").rglob("*.md")
+           if cats.get(_category(p))]
+    for slug in client_slugs():
+        for t in SLUG_PATHS:
+            q = ROOT / t.format(slug)
+            if q.is_file():
+                out.append(q.relative_to(ROOT).as_posix())
+            elif q.is_dir():
+                out += [x.relative_to(ROOT).as_posix() for x in q.rglob("*") if x.is_file()]
+    return sorted(set(out))
+
+
+def overlay_in():
+    """非公開の置き場のお客様の社のファイルを、公開側の作業場所へ重ねて置き、公開側の git から外す。
+    手元に同じファイルがあれば手元を残す（書きかけを上書きしない）。置いた数を返す"""
+    import shutil
+    b = base()
+    if not b.is_dir():
+        return 0
+    rels = []
+    for top in OVERLAY_ROOTS:
+        d = b / top
+        for p in (d.rglob("*") if d.is_dir() else ()):
+            if p.is_file():
+                rel = p.relative_to(b).as_posix()
+                dst = ROOT / rel
+                if not dst.exists():
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(p, dst)
+                rels.append(rel)
+    _write_exclude(rels + [r for r in _exclude_entries() if (ROOT / r).exists()])
+    if (b / ".git").is_dir():
+        sha = _git("rev-parse", "HEAD").stdout.strip()
+        if sha:
+            (b / ".git" / "ss_base").write_text(sha, encoding="utf-8")
+    return len(rels)
+
+
+def overlay_out(unstage=True):
+    """公開側の作業場所のお客様の社のファイルを非公開の置き場へ戻し、公開側の git から外す（追跡されていれば
+    git rm --cached）。重ねて置いた後に消えた・移ったファイルは非公開の置き場からも消す。戻したファイルを返す"""
+    import shutil
+    b = base()
+    if not (b / ".git").is_dir():
+        return []
+    files = client_files()
+    for rel in files:
+        src, dst = ROOT / rel, b / rel
+        if not dst.is_file() or dst.read_bytes() != src.read_bytes():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+    prev = _exclude_entries()
+    for rel in prev:
+        if not (ROOT / rel).exists() and (b / rel).is_file() and rel.split("/")[0] in ("articles", "site", "data"):
+            (b / rel).unlink()
+    _write_exclude(sorted(set(files) | {r for r in prev if (ROOT / r).exists()}))
+    if unstage and files:
+        for i in range(0, len(files), 200):
+            part = files[i:i + 200]
+            tracked = [x for x in _public_git("ls-files", "--", *part).stdout.splitlines() if x]
+            if tracked:
+                _public_git("rm", "--cached", "-q", "--", *tracked)
+    return files
+
+
+def install_hook():
+    """公開側の .git/hooks/pre-commit に、お客様の社のファイルを commit に入れない見張りを置く"""
+    p = _git_path("hooks/pre-commit")
+    if not p:
+        return False
+    if p.is_file() and "private_store" not in p.read_text(encoding="utf-8", errors="ignore"):
+        print("  ! pre-commit の hook が別にあるため入れません（scripts/private_store.py --pre-commit を足してください）")
+        return False
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(HOOK, encoding="utf-8", newline="\n")
+    try:
+        os.chmod(p, 0o755)
+    except OSError:
+        pass
+    return True
+
+
+def pre_commit():
+    """公開側の commit の直前（hook）。お客様の社のファイルを非公開の置き場へ戻して commit から外し、残っていれば止める"""
+    if not (base() / ".git").is_dir():
+        return 0
+    files = overlay_out(unstage=True)
+    staged = set(_public_git("diff", "--cached", "--name-only").stdout.splitlines())
+    left = sorted(staged & set(files))
+    if left:
+        print(f"お客様の社のファイル {len(left)}件が公開側の commit に入ろうとしています。止めます", file=sys.stderr)
+        return 1
+    if files:
+        push("公開側の commit の前に、お客様の社の記事・画像・台本を残す")
+    return 0
+
+
+_CLIENT_SLUGS = None
+
+
+def client_slug(slug):
+    """お客様の社の記事か（1回の実行の中では覚えておく。記事の頭を全部読むため）"""
+    global _CLIENT_SLUGS
+    if _CLIENT_SLUGS is None:
+        try:
+            _CLIENT_SLUGS = set(client_slugs())
+        except Exception:
+            _CLIENT_SLUGS = set()
+    return str(slug) in _CLIENT_SLUGS
+
+
+def shown(slug):
+    """CI のログに出す記事の名前。お客様の社の記事は slug を出さない（CI のログは public。件数で数える）"""
+    return "（お客様の記事）" if client_slug(slug) else slug
+
+
+def private_git(*args):
+    """非公開の置き場で同じ git を動かした出力（記事の記録を公開側と合わせて読む。無ければ空）"""
+    if not (base() / ".git").is_dir():
+        return ""
+    return _git(*args).stdout or ""
+
+
+def tracked(rel):
+    """公開側か非公開の置き場のどちらかの git で追跡されているか"""
+    if _public_git("ls-files", "--error-unmatch", "--", rel).returncode == 0:
+        return True
+    return bool((base() / ".git").is_dir() and _git("ls-files", "--error-unmatch", "--", rel).returncode == 0)
+
+
+def _base_sha():
+    try:
+        return (base() / ".git" / "ss_base").read_text(encoding="utf-8").strip()
+    except OSError:
+        return ""
+
+
+def client_changes(added_only=False):
+    """この回（重ねて置いた後）に書いた・直したお客様の社のファイルの相対パス。added_only なら新しく足したものだけ"""
+    sha = _base_sha()
+    out = set()
+    if sha:
+        flt = ["--diff-filter=A"] if added_only else []
+        out |= {x for x in private_git("diff", "--name-only", *flt, sha, "HEAD").splitlines() if x}
+    for rel in client_files():
+        dst = base() / rel
+        if added_only:
+            known = (_git("cat-file", "-e", f"{sha}:{rel}").returncode == 0) if sha else dst.is_file()
+            if not known:
+                out.add(rel)
+        elif not dst.is_file() or dst.read_bytes() != (ROOT / rel).read_bytes():
+            out.add(rel)
+    return sorted(out)
+
+
 # ── 移行（古い場所 → private/） ────────────────────────────────
 
 def migrate(sid):
-    """古い場所の材料と、sites/<id>.json の戦略の部分を private/ へ移す。公開側の sites/<id>.json は許可した項目だけにする。
-    公開側のファイルの git rm --cached は呼び出し側（運用者）が行う。移したファイルの一覧を返す"""
+    """古い場所の材料と、sites/<社の id>.json の設定を private/ へ移す。公開側には社が特定できない印
+    （sites/<公開の id>.json）だけを置き、古い sites/<社の id>.json は消す（git rm は呼び出し側）。移したファイルの一覧を返す"""
     S = _sites()
     moved = []
     for name in ("company.json", "brief.json", "facts.json", "private.json", "kw.md"):
         old = _legacy(sid, name)
         if old.is_file() and not (client_dir(sid) / name).is_file():
             moved.append(write_text(sid, name, old.read_text(encoding="utf-8")))
-    raw = json.loads((S.SITES_DIR / f"{sid}.json").read_text(encoding="utf-8-sig"))
-    moved += write_site({**site_private(sid), **raw}, S.SITES_DIR)[1:]
+    old = S.SITES_DIR / f"{sid}.json"
+    raw = json.loads(old.read_text(encoding="utf-8-sig")) if old.is_file() else {}
+    full = {**site_private(sid), **{k: v for k, v in raw.items() if k != "client"}, "id": sid}
+    full["public_id"] = full.get("public_id") if full.get("public_id") not in (None, sid) else new_public_id()
+    moved += write_site(full, S.SITES_DIR)
+    if old.is_file() and full["public_id"] != sid:
+        old.unlink()
     return moved
 
 
@@ -311,7 +587,7 @@ def status():
     S = _sites()
     for sid in [s for s in S.load_all() if S.is_client(s)]:
         have = [n for n in CLIENT_FILES if client_path(sid, n).is_file()]
-        print(f"  {sid}: 材料 {len(have)}/{len(CLIENT_FILES)} 件（{', '.join(have) or 'なし'}）")
+        print(f"  {S.public_id(sid)}: 材料 {len(have)}/{len(CLIENT_FILES)} 件（{', '.join(have) or 'なし'}）")
     sales = base() / "sales"
     print(f"  料金と営業の台本: {len([p for p in sales.rglob('*') if p.is_file()]) if sales.is_dir() else 0} 件")
     rep = base() / "reports"
@@ -326,8 +602,22 @@ def main(argv=None):
         i = a.index("--push")
         msg = a[i + 1] if i + 1 < len(a) else "管制塔から更新"
         return 0 if push(msg) else 1
+    if "--pre-commit" in a:
+        return pre_commit()
+    if "--overlay" in a:              # 手元: 取得し直さずに重ねて置くだけ・hook を入れるだけ
+        _after_fetch()
+        return 0
     if "--is-client" in a:
         print("yes" if is_client(a[a.index("--is-client") + 1]) else "no")
+        return 0
+    if "--shown" in a:                # ワークフローがログに出す記事の名前（お客様の記事は slug を出さない）
+        print(shown(a[a.index("--shown") + 1]))
+        return 0
+    if "--resolve" in a:              # 公開の id → 社の id（記事の枠が select から受け取った id を戻す）
+        print(_sites().resolve(a[a.index("--resolve") + 1]))
+        return 0
+    if "--public-id" in a:
+        print(_sites().public_id(a[a.index("--public-id") + 1]))
         return 0
     if "--check-site" in a:
         sid = a[a.index("--check-site") + 1]
@@ -339,7 +629,7 @@ def main(argv=None):
         return 0
     if "--migrate" in a:
         for p in migrate(a[a.index("--migrate") + 1]):
-            print(f"  移した: {p.relative_to(base()).as_posix()}")
+            print(f"  書いた: {p.name}（{'非公開' if base() in p.parents else '公開側の印'}）")
         return 0
     if "--status" in a:
         status()

@@ -14,12 +14,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITES_DIR = ROOT / "sites"
 
-# お客様の社の sites/<id>.json（public）に置いてよい項目。社の id・ドメイン・納品方式と、配信の置き場・カテゴリ（記事の
-# 持ち主を決める）・1日の本数（枠の割り当て）・IndexNow の鍵（先方のサイトの直下で公開されるもの）だけ。
-# 狙う業種・禁止語・配分・優先・読者・売り物・監修・計測の ID などの戦略の部分は、非公開のリポジトリの
-# clients/<id>/site_private.json に置き、load_all が重ねて読む（private_store。門 gates_history_h76 が守る）
-PUBLIC_KEYS = ("id", "name", "domain", "type", "client", "repo", "branch", "url_prefix", "trailing_slash",
-               "content_dir", "images_dir", "pages_dir", "categories", "daily_articles", "indexnow_key")
+# お客様の社（client: true）の sites/<公開の id>.json に置くのは、社が特定できない3項目だけ（2026-10-10 運用者の指示
+# 「会社名・住所…が公開されないように」）。公開の id は社名から推測できない文字列（private_store.new_public_id）。
+# 社名・ドメイン・配信先・カテゴリ・戦略の部分は全部、非公開のリポジトリの clients/<社の id>/site_private.json に置き、
+# load_all がそこから読む（public_id で公開の id と結ぶ）。公開の印は枠の割り当て（site_order）を、非公開のデータが
+# 取れない回も同じにするために残す（門 gates_history_h76・h77 が守る）
+PUBLIC_KEYS = ("id", "client", "daily_articles")
 
 
 def split_public(cfg):
@@ -36,17 +36,51 @@ def _raw(site_id):
         return {}
 
 
-def load_all():
+def _private_clients():
+    """非公開の置き場にあるお客様の社の設定 {公開の id: 設定}"""
+    import private_store
     out = {}
+    for sid in private_store.known_clients():
+        cfg = private_store.site_private(sid)
+        if cfg.get("domain"):
+            cfg = dict(cfg, id=cfg.get("id") or sid)
+            out[cfg.get("public_id") or cfg["id"]] = cfg
+    return out
+
+
+def load_all():
+    """全社の設定 {社の id: 設定}。お客様の社は非公開の置き場の設定（社の id で引く）。非公開のデータが取れない回は、
+    お客様の社は入らない（公開の印だけでは名前もドメインも無く、工程が動かせない。記事の枠は private_store.require で止まる）"""
+    out = {}
+    priv = None
     for p in sorted(SITES_DIR.glob("*.json")):
         cfg = json.loads(p.read_text(encoding="utf-8-sig"))
-        if cfg.get("client"):
-            # お客様の社は、非公開の置き場の戦略の部分を重ねる（公開側の項目が優先。取れなければ公開側の項目だけ）
-            import private_store
-            cfg = {**private_store.site_private(cfg["id"]), **cfg}
+        if cfg.get("client") and set(cfg) <= set(PUBLIC_KEYS):
+            priv = _private_clients() if priv is None else priv
+            full = priv.get(cfg["id"])
+            if not full:
+                continue
+            stub = cfg
+            cfg = dict(full, client=True, public_id=stub["id"])
+            if "daily_articles" in stub:
+                cfg["daily_articles"] = stub["daily_articles"]
         cfg["_path"] = p.as_posix()
         out[cfg["id"]] = cfg
     return out
+
+
+def resolve(site_id):
+    """公開の id（sites/<id>.json のお客様の印の名前）を社の id にする。分からなければそのまま返す"""
+    if site_id and _raw(site_id).get("client"):
+        for sid, cfg in load_all().items():
+            if cfg.get("public_id") == site_id:
+                return sid
+    return site_id
+
+
+def public_id(site_id):
+    """社の id の公開の名前（コミットの文・ジョブの間の受け渡し・ログに使う）。自社はそのまま"""
+    return (load_all().get(site_id) or {}).get("public_id") or site_id
 
 
 def primary():
@@ -73,7 +107,12 @@ def is_client(site_id):
     """受託のクライアントか。sites/<id>.json の "client": true（公開側に残す印）か、data/clients/<id>/ がある社。
     材料を非公開のリポジトリへ移した後は data/clients/<id>/ が CI に無いので、印で決める（無いと自社と判定され、
     お客様の順位・語が public に書かれる）"""
-    return bool(site_id) and (bool(_raw(site_id).get("client")) or (ROOT / "data" / "clients" / site_id).is_dir())
+    if not site_id:
+        return False
+    if _raw(site_id).get("client") or (ROOT / "data" / "clients" / site_id).is_dir():
+        return True
+    import private_store
+    return private_store.client_path(site_id, "site_private.json").is_file()
 
 
 def group_of(site_id):
@@ -126,7 +165,7 @@ def operator_leaks(text, cfg=None):
     """本文・題名に残った運用会社の名前と、自社サイトのカテゴリへの内部リンク（お客様のドメインでは404）。
 
     cfg の operator_ok に書いた語（運用者がその社にだけ許した当社の表記）は、外してから見る。
-    CONFLUX は「ラクシフトAIは、セブンセンシズ株式会社が提供しています」と書いてよい（2026-10-08 運用者の決定）。
+    お客様の社は「ラクシフトAIは、セブンセンシズ株式会社が提供しています」と書いてよい（2026-10-08 運用者の決定）。
     許すのは書いた語そのものだけで、代表者名・社名の略・AI集客ラボ・当社のドメインは止める"""
     import re
     text = text or ""
@@ -145,7 +184,13 @@ def operator_leaks(text, cfg=None):
 def load(site_id):
     all_ = load_all()
     if site_id not in all_:
-        raise SystemExit(f"サイト設定が見つかりません: {site_id}（候補: {', '.join(all_)}）")
+        site_id = resolve(site_id)          # 公開の id で呼ばれたとき（記事の枠のジョブの間の受け渡し）
+    if site_id not in all_:
+        if _raw(site_id).get("client"):
+            # お客様の社の印はあるが、非公開の設定が読めない（鍵の権限が無い CI など）。工程を止めて要対応で知らせる
+            import private_store
+            private_store.require_or_exit(site_id, "工程")
+        raise SystemExit(f"サイト設定が見つかりません: {site_id}（候補: {', '.join(public_id(s) for s in all_)}）")
     return all_[site_id]
 
 
@@ -187,8 +232,10 @@ def find_category_owner(slug):
 def summary():
     lines = []
     for cid, c in load_all().items():
-        theme = "（お客様）" if is_client(cid) else c.get("theme", "")     # お客様のテーマは CI のログに出さない
-        lines.append(f"{cid:10s} {c['domain']:22s} {c['type']:14s} {theme}")
+        if is_client(cid):              # お客様の社は名前もドメインもテーマも CI のログに出さない（公開の id だけ）
+            lines.append(f"{c.get('public_id') or cid:10s} {'（お客様）':22s} {c.get('type', ''):14s}")
+            continue
+        lines.append(f"{cid:10s} {c['domain']:22s} {c['type']:14s} {c.get('theme', '')}")
     return "\n".join(lines)
 
 

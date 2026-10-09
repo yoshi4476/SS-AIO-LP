@@ -7,7 +7,7 @@
 使う所（変換の最後に1回だけ呼ぶ）:
   - AI集客ラボ: build.py の記事の変換（add_to_html）
   - コーポレート（nextjs-json）・補助金（external-html）: publish.py の各社の変換（add_to_html）
-  - CONFLUX（external-md。先方の build-journal.mjs が marked で HTML にする）: publish.py（add_to_markdown）。
+  - お客様の社（external-md。先方の build-journal.mjs が marked で HTML にする）: publish.py（add_to_markdown）。
     グラフは前後に空行を置いた1行の HTML の塊にする（CommonMark は空行まで HTML の塊として素通しする）
 
 描く表（全部を満たすときだけ。誤ったグラフより、描かない方がよい）:
@@ -84,7 +84,7 @@ GAP_LB, GAP_BV = 8, 6           # ラベル→棒、棒の端→値
 LEG_H = 22
 RADIUS = 4
 NS = "{http://www.w3.org/2000/svg}"
-# 2本目を本文の文字色にしてよい、主色と文字色（ink）の輝度比の下限。AI集客ラボ 3.0・CONFLUX 3.7 は文字色、
+# 2本目を本文の文字色にしてよい、主色と文字色（ink）の輝度比の下限。AI集客ラボ 3.0・お客様の社 3.7 は文字色、
 # コーポレート 1.8・補助金 1.7 は主色の淡い色にする
 S2_INK_MIN = 2.5
 
@@ -356,7 +356,7 @@ def colors_for(cfg=None):
 # SVG を作る
 # ============================================================
 _ESC = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
-        # Markdown の後処理（CONFLUX の ** と == の読み替え・表の | ）に記号として拾われないように
+        # Markdown の後処理（お客様の社 の ** と == の読み替え・表の | ）に記号として拾われないように
         "*": "&#42;", "_": "&#95;", "=": "&#61;", "|": "&#124;", "`": "&#96;", "[": "&#91;", "]": "&#93;", "~": "&#126;"}
 
 
@@ -477,7 +477,7 @@ def svg(spec, colors):
         out.append(f'<line x1="{_f(x0)}" y1="{_f(a)}" x2="{_f(x0)}" y2="{_f(b)}" '
                    f'stroke="currentColor" stroke-opacity="0.4" stroke-width="1"/>')
     h = bottom + PAD
-    # 字体は本文から受け継ぐ（表と同じ字で描く。CONFLUX の欧文は BIZ UDP ゴシック、AI集客ラボは游ゴシック Medium など）。
+    # 字体は本文から受け継ぐ（表と同じ字で描く。お客様の社 の欧文は BIZ UDP ゴシック、AI集客ラボは游ゴシック Medium など）。
     # 字間・太さ・斜体は受け継がない（本文の字間 0.04em などが乗ると、見積もった幅より広がって値が枠からはみ出す）
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {_f(h)}" width="100%" role="img" '
             f'aria-label="{esc(summary(spec))}" letter-spacing="0" word-spacing="0" font-weight="400" font-style="normal" '

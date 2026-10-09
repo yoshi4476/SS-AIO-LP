@@ -359,7 +359,7 @@ def behavior_counts(by_day, ids_by_day=None, leads=None):
 
     ボタン押下は cta_click だけ。以前は cta で始まる出来事を全部足しており、同じ押下で同時に送る
     cta_〈ボタンID〉も数えて2倍に出ていた（AI集客ラボ・補助金）。問い合わせ方向は cta_kind・cta_id で決める
-    （CONFLUX は cta_click の1種類で、行き先は cta_id にだけ入る）。送信完了は問い合わせの数え方
+    （お客様の社は cta_click の1種類で、行き先は cta_id にだけ入る）。送信完了は問い合わせの数え方
     （form_submit は GA4 の拡張計測の分が重なり、問い合わせ1回が2件になっていた）"""
     import funnel as FN
 

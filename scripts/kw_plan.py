@@ -1281,7 +1281,7 @@ def estimate_parts(S):
     """課金の見積もり（目的ごとのクレジット）。実際より小さく出ると上限が効かないので、実際以上に出す（安全側）。
     単価は公式の資料のまま（rakko.price）。控えに無い問い合わせ ＋ --deep の LSI/PAA（1起点22.5）
     ＋ 一括調査（LOOKUP_MAX 語を BULK 語ずつ・1回最低15）＋ 一括調査の登録のやり直し1回ぶん
-    （_fill_part は requestId が返らないと登録し直す）。2026-10-08 の CONFLUX は実際 121回・195 → 見積もり 210。
+    （_fill_part は requestId が返らないと登録し直す）。2026-10-08 の お客様の社は実際 121回・195 → 見積もり 210。
     run() が S["need"]（この回の目的ごとの見積もり: plan_need）を入れたときはそれを使う"""
     if S.get("need") is not None:
         return {p: round(float(v), 2) for p, v in S["need"].items() if v}

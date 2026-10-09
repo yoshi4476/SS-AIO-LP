@@ -176,7 +176,9 @@ def latest_slug(site):
     # 既存記事を「新記事」として確かめにいく。_conflicted/ など下の階層は公開しない記事
     r = subprocess.run(["git", "show", "--name-only", "--diff-filter=A", "--pretty=", "HEAD"],
                        capture_output=True, text=True, cwd=root)
-    for line in r.stdout.splitlines():
+    # お客様の社の記事は公開側の git に無い（非公開のリポジトリ）。この回に足した分を合わせる
+    import private_store
+    for line in r.stdout.splitlines() + private_store.client_changes(added_only=True):
         line = line.strip()
         if not (line.startswith("articles/") and line.endswith(".md")
                 and line.count("/") == 1):

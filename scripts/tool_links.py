@@ -100,8 +100,8 @@ def phrase(key, slug):
 
 def vary(write=False):
     """既に入っている同じ一文を、その記事の言い回しに置き換える（リンク先と文言の事実は変えない）"""
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    import sites as S                    # お客様の社のカテゴリは非公開の置き場の設定
+    conf = S.load_all()
     cat_site = {k: s for s, c in conf.items() for k in (c.get("categories") or {})}
     n = 0
     for f in sorted(glob.glob(str(ROOT / "articles" / "*.md"))):
@@ -172,8 +172,8 @@ def relink(write=False):
 
 
 def main(write=False):
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    import sites as S                    # お客様の社のカテゴリは非公開の置き場の設定
+    conf = S.load_all()
     cat_site = {k: s for s, c in conf.items() for k in (c.get("categories") or {})}
     done = {}
     for f in sorted(glob.glob(str(ROOT / "articles" / "*.md"))):

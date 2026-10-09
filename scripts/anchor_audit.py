@@ -104,6 +104,10 @@ def natural_anchor(kw, title):
     return None
 
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import private_store as PS  # noqa: E402  お客様の社の記事の slug・題は CI のログに出さない
+
+
 def main():
     arts = load()
     nokw = [s for s, a in arts.items() if not a["kw"]]
@@ -122,7 +126,7 @@ def main():
     print(f"   1本だけ                    {len(few):>3}本")
     print(f"   2本以上（十分）             {len(ok):>3}本")
     if nokw:
-        print(f"   keyword 未設定             {len(nokw):>3}本  {' '.join(nokw[:5])}")
+        print(f"   keyword 未設定             {len(nokw):>3}本  {' '.join(PS.shown(s) for s in nokw[:5])}")
 
     if "--fix" not in sys.argv:
         print("\n   直す候補を見るには --fix を付けてください")
@@ -148,7 +152,10 @@ def main():
         m = pat.search(t)
         if not m:
             continue
-        print(f"   {src[:28]:<30} 「{old[:26]}」→「{new[:26]}」")
+        if PS.client_slug(src) or PS.client_slug(slug):
+            print("   （お客様の記事のアンカー）")   # 題・slug を CI のログに出さない
+        else:
+            print(f"   {src[:28]:<30} 「{old[:26]}」→「{new[:26]}」")
         if write:
             # URLは元のまま残す。path だけで書き直すと、他サイトへの絶対URLが自サイトの相対パスになり404になる
             f.write_text(t[:m.start()] + f"[{new}]" + m.group(0)[len(old) + 2:] + t[m.end():],
@@ -163,7 +170,7 @@ def main():
     rest = [(s, a) for s, a, _ in zero if not natural_anchor(a["kw"], a["title"])]
     if rest:
         print(f"\n■ 手で書く必要があるもの: {len(rest)}本")
-        for s, a in rest:
+        for s, a in [(s, a) for s, a in rest if not PS.client_slug(s)]:
             srcs = ", ".join(x[0] for x in a["in"][:3]) or "（被リンクなし）"
             print(f"   {s[:30]:<32}狙う語「{a['kw'][:22]}」")
             print(f"   {'':<32}リンク元: {srcs}")

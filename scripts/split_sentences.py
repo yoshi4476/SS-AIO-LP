@@ -193,6 +193,9 @@ def verify(before, after, edits):
     return ""
 
 
+import private_store as PS  # noqa: E402  お客様の社の記事の slug と本文は CI のログに出さない
+
+
 def run(write, limit=0, only=""):
     touched = total = 0
     shown = 0
@@ -207,11 +210,11 @@ def run(write, limit=0, only=""):
             continue
         ng = verify(t, new, edits)
         if ng:
-            print(f"  × {p.stem}: {ng} — 書き換えません")
+            print(f"  × {PS.shown(p.stem)}: {ng} — 書き換えません")
             continue
         touched += 1
         total += n
-        if not limit or shown < limit:
+        if (not limit or shown < limit) and not PS.client_slug(p.stem):     # お客様の記事は本文の抜粋も出さない
             shown += 1
             print(f"  {p.stem[:44]:<44} {n}箇所")
             sm = difflib.SequenceMatcher(None, t, new, autojunk=False)

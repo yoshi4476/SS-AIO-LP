@@ -228,7 +228,7 @@ def run(slug):
 
     # お客様の「使ってはいけない表現」（ヒアリングシート → sites/<id>.json の rules.ng_words）。
     # 配信の門（publish.py）だけで止めていたため、採点も承認も通った記事が配信で静かに止まり、
-    # 未配信のまま残った（2026-10-09 CONFLUX「必ず」）。書く段で見つけて直させる
+    # 未配信のまま残った（2026-10-09 お客様の社「必ず」）。書く段で見つけて直させる
     try:
         sid = sites_mod.find_category_owner(str(meta.get("category") or ""))
         ng = ((sites_mod.load_all().get(sid) or {}).get("rules") or {}).get("ng_words") or []

@@ -57,7 +57,7 @@ def sitemap_urls(domain=None):
 
 def key_for(domain, key):
     """そのドメインで公開している鍵。先方が自分の鍵を既に置いている社は sites/<id>.json の indexnow_key。
-    CONFLUX は先方の鍵（b1d698…）が直下で返るのに、共通の鍵で確かめて毎回「鍵ファイルが出ていません」と
+    お客様の社は先方の鍵が直下で返るのに、共通の鍵で確かめて毎回「鍵ファイルが出ていません」と
     出していた（2026-10-08）。IndexNow は host ごとに別の鍵でよい"""
     sys.path.insert(0, str(ROOT / "scripts"))
     import sites as S

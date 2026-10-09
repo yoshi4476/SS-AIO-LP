@@ -113,11 +113,10 @@ def recently_edited(days=2):
     その間に本文だけ直した記事は、タイトルが同じなので取りこぼされる。
     直近の編集分だけを配信し直せば、1周で指紋が揃って以降は正確に判定できる。
     """
-    r = subprocess.run(
-        ["git", "log", f"--since={days} days ago", "--name-only", "--pretty=",
-         "--", "articles/"],
-        cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore")
-    return {Path(l).stem for l in r.stdout.split() if l.endswith(".md")}
+    args = ["log", f"--since={days} days ago", "--name-only", "--pretty=", "--", "articles/"]
+    r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    import private_store                 # お客様の社の記事の手入れは非公開のリポジトリの記録にある
+    return {Path(l).stem for l in (r.stdout + "\n" + private_store.private_git(*args)).split() if l.endswith(".md")}
 
 
 def _flat(s):
@@ -192,9 +191,17 @@ def main():
     ap.add_argument("--limit", type=int, default=40, help="1回に配信する上限")
     a = ap.parse_args()
 
-    conf = {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in (ROOT / "sites").glob("*.json")}
+    # お客様の社のカテゴリ・ドメインは非公開の置き場の設定（sites.load_all が重ねる。公開側の印には無い）
+    import sites as S
+    conf = S.load_all()
     cat_site = {k: s for s, c in conf.items() for k in (c.get("categories") or {})}
+    import private_store as PS
+    # 配信できた記事（社 slug）。ワークフローが公開の後の手順に使う。お客様の記事の slug を CI のログに出さないため、
+    # ログの「○ slug」の行を拾わずに、このファイルを読む（2026-10-10）
+    done_file = ROOT / "automation" / "logs" / "published_now.txt"
+    if a.publish:
+        done_file.parent.mkdir(parents=True, exist_ok=True)
+        done_file.write_text("", encoding="utf-8")
 
     mine = {}
     for f in sorted(glob.glob(str(ROOT / "articles" / "*.md"))):
@@ -276,7 +283,7 @@ def main():
               f" / 未配信 {len(missing)}本 / 内容が古い {len(stale)}本"
               f" / 監修待ち {len(held)}本（未配信に数えない）")
         for s in gap[:8]:
-            print(f"     {s}（{why.get(s, '未配信')}）")
+            print(f"     {PS.shown(s)}（{why.get(s, '未配信')}）")
         if len(gap) > 8:
             print(f"     …ほか {len(gap) - 8}本")
 
@@ -287,16 +294,21 @@ def main():
                      "--site", site, "--slug", s, "--push"],
                     capture_output=True, text=True, encoding="utf-8", errors="replace")
                 mark = "○" if r.returncode == 0 else "×"
-                print(f"     [{i}] {mark} {s}", flush=True)
+                print(f"     [{i}] {mark} {PS.shown(s)}", flush=True)
+                if r.returncode == 0:
+                    with done_file.open("a", encoding="utf-8") as fh:
+                        fh.write(f"{site} {s}\n")
                 if r.returncode:
                     # 止めた理由を出す。× だけでは、配信の門（禁止語など）で止まったまま誰も気づかない
-                    # （2026-10-09 CONFLUX の記事が「必ず」で止まり、承認の後も未配信だった）
+                    # （2026-10-09 お客様の社 の記事が「必ず」で止まり、承認の後も未配信だった）
                     out = [ln.strip() for ln in ((r.stdout or "") + "\n" + (r.stderr or "")).splitlines() if ln.strip()]
                     why = next((ln for ln in reversed(out) if re.search(r"BLOCKED|HELD|Error|エラー|失敗", ln)),
                                out[-1] if out else "理由が出力されていません")
-                    print(f"         理由: {why[:200]}", flush=True)
+                    quiet = S.is_client(site)
+                    print(f"         理由: {why.replace(s, PS.shown(s))[:200] if quiet else why[:200]}", flush=True)
                     if "BLOCKED" in why:
-                        print(f"要対応: {c.get('name', site)} の {s} は配信の門で止まっています（{why[:120]}）")
+                        print(f"要対応: {c.get('public_id') or c.get('name', site) if quiet else c.get('name', site)} の "
+                              f"{PS.shown(s)} は配信の門で止まっています（{(why.replace(s, PS.shown(s)) if quiet else why)[:120]}）")
 
     print(f"\nPUBLISH_GAP={total_gap}")
     if total_gap and not a.publish:

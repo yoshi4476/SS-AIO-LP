@@ -48,7 +48,7 @@ def site_config(site_id):
 
     担当領域（owns）をそのまま採用条件に使い、同じ組（sites.group_of）の他サイトのownsを除外条件に使う。
     これにより「補充した時点で領域外のKWが混ざらない」状態を作る。
-    組で分けるのは kw_fit と同じ理由: お客様（CONFLUX）の owns の「外注・見積もり・保守・ai 導入」が自社3サイトの
+    組で分けるのは kw_fit と同じ理由: お客様の owns の「外注・見積もり・保守・ai 導入」が自社3サイトの
     除外語に入り、「経理 外注」「seo 外注」「ai 導入 補助金」を落としていた（2026-10-08）。
     お客様の側の担当の外は sites/<id>.json の kw_off・kw_needs に書く（kw_fit が見る）
     """
@@ -67,7 +67,7 @@ def site_config(site_id):
         "id": site_id,
         "cfg": cfg,
         # お客様の社のキーワード計画は非公開の置き場（private/clients/<id>/kw.md）。公開側の docs/ に積むと
-        # 週次の git add -A でお客様の語が public に載る（docs/kw-conflux.md に「自動補充」が積まれていた）
+        # 週次の git add -A でお客様の語が public に載る（docs/kw-<お客様>.md に「自動補充」が積まれていた）
         "plan": (__import__("private_store").client_path(site_id, "kw.md", write=True) if sites_mod.is_client(site_id)
                  else ROOT / cfg.get("kw_plan", "docs/industry-pillar-plan.md")),
         "gsc": f"https://{cfg['domain']}/",

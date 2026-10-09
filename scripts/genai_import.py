@@ -52,7 +52,8 @@ HOW = """  取り込み方（月1回・3サイトぶん。所要5分）
 
 
 def site_ids():
-    return [p.stem for p in sorted(SITES.glob("*.json")) if p.stem != "sample"]
+    import sites as S                    # お客様の社は非公開の置き場の社の id
+    return [s for s in S.load_all() if s != "sample"]
 
 
 def load():

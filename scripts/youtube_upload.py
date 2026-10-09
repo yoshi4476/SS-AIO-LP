@@ -89,9 +89,8 @@ CONNECTED = ROOT / "data" / "youtube_connected.json"
 def expected_clients(root=ROOT):
     """Secret に鍵があるはずの社: 前に登録した社と、sites/*.json に YouTube チャンネルを書いたクライアント"""
     ids = set()
-    man = root / "data" / "youtube_connected.json"
-    if man.is_file():
-        ids |= set(json.loads(man.read_text(encoding="utf-8")).get("sites", []))
+    import client_private as CP           # お客様の社の id は非公開のリポジトリに書く
+    ids |= set(CP.load_connected(root / "data" / "youtube_connected.json"))
     import sites as S
     for sid, cfg in (S.load_all().items() if root == ROOT else ()):
         if S.is_client(sid) and (cfg.get("channels") or {}).get("youtube"):
@@ -114,8 +113,8 @@ def tokens_bundle(root=ROOT):
 
 
 def save_connected(allk):
-    CONNECTED.parent.mkdir(parents=True, exist_ok=True)
-    CONNECTED.write_text(json.dumps({"sites": sorted(allk)}, ensure_ascii=False, indent=1), encoding="utf-8")
+    import client_private as CP           # お客様の社の id は非公開のリポジトリに書く（社の id が社名のことがある）
+    CP.save_connected(allk, CONNECTED)
 
 
 def auth(site=None):
@@ -234,8 +233,8 @@ def full_description(slug, short=False, chapters=None, lead_long=False):
         import duo_video as DV
         br = DV.brand(DV.article(slug))
         head = [f"詳しくは「{br['search']}」で検索してください。"]
-        lp = ROOT / "data" / "videos.json"
-        long_id = (json.loads(lp.read_text(encoding="utf-8")).get(slug) or {}).get("youtube") if lp.is_file() else None
+        import client_private as CP       # お客様の社の記事の行は非公開のリポジトリ
+        long_id = (CP.load_videos().get(slug) or {}).get("youtube")
         if long_id and lead_long:
             # ショートは見られて通常の動画は見られていなかった（2026-10-05）。続きをいちばん上に置く。
             # 関連動画の欄・コメントの固定は API に項目が無く設定できない
@@ -484,7 +483,8 @@ def update_thumbnails():
     if not c:
         raise SystemExit("youtube-token.json がありません")
     yt = gbuild("youtube", "v3", credentials=c)
-    vids = json.loads((ROOT / "data" / "videos.json").read_text(encoding="utf-8"))
+    import client_private as CP
+    vids = CP.load_videos()
     n = 0
     for slug, v in vids.items():
         if isinstance(v, dict) and v.get("youtube"):          # 横型の本編（ショートは v["short"] に別で持つ）
@@ -509,8 +509,8 @@ def audit():
         tok = r.get("nextPageToken")
         if not tok:
             break
-    lp = ROOT / "data" / "videos.json"
-    led = json.loads(lp.read_text(encoding="utf-8")) if lp.is_file() else {}
+    import client_private as CP
+    led = CP.load_videos()
     known = {x for v in led.values() if isinstance(v, dict) for x in (v.get("youtube"), (v.get("short") or {}).get("youtube"))}
     pub, bad = [], []
     for i in range(0, len(ids), 50):

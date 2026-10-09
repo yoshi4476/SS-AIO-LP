@@ -70,6 +70,10 @@ def changed_by_git(site_id, since):
                        capture_output=True, text=True, encoding="utf-8",
                        errors="replace", cwd=ROOT)
     touched = {Path(l).stem for l in r.stdout.splitlines() if l.endswith(".md")}
+    # お客様の社の記事は公開側の git に無い（非公開のリポジトリ）。この回に書いた・直した分を合わせる
+    import private_store
+    touched |= {Path(x).stem for x in private_store.client_changes()
+                if x.startswith("articles/") and x.endswith(".md") and x.count("/") == 1}
     return [s for s in site_articles(site_id) if s in touched]
 
 

@@ -127,12 +127,15 @@ def site_words(sid, corpus=None):
     corpus = own_corpus() if corpus is None else corpus
     cfg = S.load_all().get(sid) or {}
     comp = PS.read_json(sid, "company.json", {}) or {}
-    # 公開してよい語: 社の id・ドメイン・社名・サイト名・カテゴリ（公開側の sites/<id>.json）と、運用会社（当社）の名前
-    public = {str(x).lower().replace("www.", "") for x in
-              (sid, cfg.get("domain"), cfg.get("name"), comp.get("name"), comp.get("name_en"),
-               *(cfg.get("categories") or {}).keys(), *(cfg.get("categories") or {}).values(),
+    # 伏せない語: カテゴリ（一般の語）・運用会社（当社）の名前・公開の id（ジョブの間で渡す。伏せると渡せない）
+    pid = cfg.get("public_id") or ""
+    public = {str(x).lower() for x in
+              (pid, *(cfg.get("categories") or {}).keys(), *(cfg.get("categories") or {}).values(),
                *S.OPERATOR_MARKS, "セブンセンシズ株式会社") if x}
-    cand = []
+    # 社が特定できる語（社の id・社名・ドメイン・配信先のリポジトリ・記事の題と slug）は英数1語でも伏せる
+    # （2026-10-10 運用者の指示「会社名・住所…が公開されないように」。CI のログに記事の題・slug を出さない）
+    ident = identity_words(sid, cfg, comp)
+    cand = list(ident)
     cand += list(_leaves({k: v for k, v in comp.items() if k not in SKIP_COMPANY}))
     cand += list(_leaves((PS.read_json(sid, "facts.json", {}) or {}).get("facts") or []))
     cand += list(_leaves(PS.read_json(sid, "brief.json", {}) or {}))
@@ -152,8 +155,38 @@ def site_words(sid, corpus=None):
     out = []
     for w in cand:
         w = str(w).strip()
-        if w and w not in out and usable(w, corpus, public):
+        if w and w not in out and ((w in ident and w.lower() not in public) or usable(w, corpus, public)):
             out.append(w)
+    return out
+
+
+def identity_words(sid, cfg, comp):
+    """社が特定できる語: 社の id（公開の id と違うとき）・社名・サイト名・ドメイン・配信先のリポジトリと、記事の題・slug"""
+    import private_store as PS
+    import re
+    pid = cfg.get("public_id") or ""
+    raw = [sid if sid != pid else "", cfg.get("name"), comp.get("name"), comp.get("name_en"), cfg.get("domain"),
+           cfg.get("repo"), str(cfg.get("repo") or "").split("/")[-1]]
+    dom = str(cfg.get("domain") or "")
+    if dom:
+        raw += [dom.split(".")[0], "https://" + dom]
+    for slug, owner in PS.client_slugs().items():
+        if owner != sid:
+            continue
+        raw.append(slug)
+        for d in (ROOT / "articles", PS.base() / "articles"):
+            p = d / f"{slug}.md"
+            if p.is_file():
+                m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", p.read_text(encoding="utf-8-sig")[:3000], re.M)
+                if m:
+                    raw.append(m.group(1))
+                break
+    out = []
+    for w in raw:
+        w = str(w or "").strip()
+        for v in (w, w.upper(), w.capitalize()) if w.isascii() else (w,):
+            if len(v) >= 4 and v not in out:
+                out.append(v)
     return out
 
 
@@ -189,8 +222,9 @@ def main(argv=None):
         for ws in got.values():
             for w in ws:
                 print(f"::add-mask::{w}")
-    for sid, ws in got.items():
-        print(f"  {sid}: 伏せる語 {len(ws)}語")
+    import sites as S
+    for sid, ws in got.items():                # 社の id は伏せる語（社名のことがある）。ログには公開の id
+        print(f"  {S.public_id(sid)}: 伏せる語 {len(ws)}語")
     print(f"CI_MASK={n}")
     return 0
 

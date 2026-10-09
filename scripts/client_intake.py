@@ -63,8 +63,9 @@ FIELDS = [
     ("#media", "2. サイトと納品方式",
      "どこに、どの形で記事を出すか。「サイトの形式」で選んだ方式の欄（2-1〜2-4）だけご記入ください"
      "（ほかの方式の欄は空欄で構いません）。パスワード類はこのシートに書かないでください。", "", False),
-    ("id", "サイトID", "英小文字とハイフンのみ。ファイル名に使います（分からなければ当社で決めます）",
-     "example-media", True),
+    ("id", "サイトID", "空欄で構いません。当社が社名から推測できない id（c で始まる英数字）を付けます"
+     "（公開しているプログラムの置き場に社名が出ないようにするため）",
+     "", False),
     ("name", "メディア名", "記事一覧やレポートに出る名前", "○○の集客ラボ", True),
     ("domain", "公開ドメイン", "https:// は不要。新しく作る場合は使いたいドメイン", "media.example.co.jp", True),
     ("type", "サイトの形式",
@@ -1377,16 +1378,20 @@ def review(got, cfg):
             warn.append(f"主力カテゴリの配分が{main}%です。"
                         "40〜50%を下回ると、表示は増えても相談につながりにくくなります")
 
-    # 既存サイトとの衝突。記事がどちらのものか決まらなくなる（id・ドメイン・カテゴリは公開側の項目だけで見られる）
-    for p in SITES.glob("*.json"):
-        other = json.loads(p.read_text(encoding="utf-8-sig"))
-        if other.get("id") == cfg.get("id"):
+    # 既存サイトとの衝突。記事がどちらのものか決まらなくなる。お客様の社のドメイン・カテゴリは非公開の置き場にある
+    # （公開側の印には無い）ので、公開側のファイルと sites.load_all の両方で見る
+    import sites as S
+    others = {p.stem: json.loads(p.read_text(encoding="utf-8-sig")) for p in SITES.glob("*.json")}
+    if SITES == S.SITES_DIR:
+        others.update({sid: c for sid, c in S.load_all().items()})
+    for name, other in others.items():
+        if cfg.get("id") and other.get("id") == cfg.get("id"):
             ng.append(f"サイトID「{cfg['id']}」は既にあります")
         if other.get("domain") and other["domain"] == cfg.get("domain"):
-            ng.append(f"ドメインが {p.stem} と同じです")
+            ng.append(f"ドメインが {other.get('public_id') or name} と同じです")
         dup = set(cats) & set(other.get("categories", {}))
         if dup:
-            ng.append(f"カテゴリ {sorted(dup)} が {p.stem} と重複しています")
+            ng.append(f"カテゴリ {sorted(dup)} が {other.get('public_id') or name} と重複しています")
 
     seeds = cfg.get("kw_seeds", {})
     n = len(seeds.get("industries", [])) * len(seeds.get("intents", []))
@@ -1502,6 +1507,15 @@ def apply(got, cfg, industry=""):
     return made
 
 
+def assign_id(cfg):
+    """新しく受けるお客様の id を、社名から推測できない公開の id にする（シートに書かれた id は使わない。
+    公開しているプログラムの置き場の sites/<id>.json の名前・コミットの文に社名を出さないため。2026-10-10 運用者の指示）"""
+    import private_store as PS
+    pid = PS.new_public_id(SITES)
+    cfg["id"] = cfg["public_id"] = pid
+    return pid
+
+
 def save_private(site_id):
     """登録した内容を非公開のリポジトリへ commit・push する（公開側の commit とは別）。届かなければ False"""
     import private_store as PS
@@ -1563,8 +1577,10 @@ def main():
     # ファイル名から業種を拾う。シート名を変えられても動くよう、中身でも見る
     ind2 = ind or next((k for k, (lab, _) in INDUSTRY.items()
                         if lab in src.name), "")
+    assign_id(cfg)
     made = apply(got, cfg, ind2)
-    print("\n  作成したファイル（公開側は sites/ の1つだけ。ほかは非公開のリポジトリ）")
+    print(f"\n  公開の id: {cfg['id']}（社名から推測できない id。公開側の sites/ にはこの名前の印だけを置きます）")
+    print("\n  作成したファイル（公開側は sites/ の印の1つだけ。ほかは非公開のリポジトリ）")
     for p in made:
         print(f"    {p.relative_to(ROOT).as_posix()}")
     if not save_private(cfg["id"]):

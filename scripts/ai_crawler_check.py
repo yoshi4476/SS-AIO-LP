@@ -134,14 +134,9 @@ HOW_TO_FIX = """  直し方（Cloudflare のダッシュボードで行う。rob
 
 
 def sites():
-    out = []
-    for p in sorted(SITES.glob("*.json")):
-        if p.stem == "sample":
-            continue
-        d = json.loads(p.read_text(encoding="utf-8"))
-        if d.get("domain"):
-            out.append((p.stem, d["domain"]))
-    return out
+    # お客様の社のドメインは非公開の置き場の設定（sites.load_all が重ねる。公開側の印には無い）
+    import sites as S
+    return [(sid, d["domain"]) for sid, d in S.load_all().items() if sid != "sample" and d.get("domain")]
 
 
 def probe(domain, ua, path="/"):

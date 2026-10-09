@@ -81,7 +81,10 @@ def main():
     # 先に例を見せる（何が起きるか分からないまま走らせない）
     pat = re.compile(r"\[([^\]\n]{%d,})\]\(/" % (MAX + 1))
     seen = set()
+    import private_store as PS           # お客様の記事のアンカー（題であることが多い）は CI のログに出さない
     for p in sorted((ROOT / "articles").glob("*.md")):
+        if PS.client_slug(p.stem):
+            continue
         for m in pat.finditer(p.read_text(encoding="utf-8", errors="replace")):
             a0 = m.group(1)
             s = shorten(a0)

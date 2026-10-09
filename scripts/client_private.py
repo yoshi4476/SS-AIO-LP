@@ -62,9 +62,19 @@ def is_private(sid):
     return bool(sid) and S.is_client(sid)
 
 
+# 非公開のリポジトリ（private_store。CI のキャッシュではなく git に残る）に置くお客様の社の行。どれも記事・動画・
+# 監修の記録で、社名・記事の slug が入る（公開側に置かない。2026-10-10 運用者の指示）。キャッシュは7日で消えるので、
+# 消えると困る記録はこちら
+REPO_BACKED = ("data/editorial_reviews.jsonl", "data/videos.json", "data/youtube_connected.json",
+               "data/bing_backfill.json", "data/pace_manual.json")
+
+
 def private_path(sid, rel):
     # 自社の社は data/clients/_own/private/<id>/。data/clients/<id>/ を作るとその社が「お客様」と判定され
     # （sites.is_client）、置き場の場所を変えると CI のキャッシュの版が変わってお客様の持ち越しが1回分戻らない
+    if is_private(sid) and rel in REPO_BACKED:
+        import private_store
+        return private_store.client_dir(sid) / rel
     if is_private(sid):
         return ROOT / "data" / "clients" / sid / "private" / rel
     return ROOT / "data" / "clients" / OWN / "private" / sid / rel
@@ -114,7 +124,7 @@ def _dump(o):
 
 def _write(p, text):
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(text, encoding="utf-8")
+    p.write_text(text, encoding="utf-8", newline="\n")
 
 
 def url_owner():
@@ -140,10 +150,22 @@ def owner_of_slug(slug):
     return S.find_category_owner(m.group(1).strip()) if m else None
 
 
+def _is_public_file(rel, pub):
+    """pub が public の本物の rel か（門が一時の場所へ差し替えたときは分けない・合わせない）"""
+    if not pub:
+        return True
+    try:
+        return Path(pub).resolve() == (ROOT / rel).resolve()
+    except OSError:
+        return False
+
+
 def load_dict(rel, pub=None):
     """public の rel（{キー: 値}）に、お客様ごとの置き場の rel を重ねたもの。
     pub は public 側の実際の場所（呼び出し側のモジュールの定数。門が一時の場所へ差し替える）"""
     d = dict(_read(Path(pub) if pub else ROOT / rel, {}))
+    if rel in REPO_BACKED and not _is_public_file(rel, pub):
+        return d
     for sid in clients():
         d.update(_read(private_path(sid, rel), {}))
     return d
@@ -151,6 +173,9 @@ def load_dict(rel, pub=None):
 
 def save_dict(rel, d, owner, dump=_dump, pub=None):
     """owner(キー, 値) がお客様の社なら置き場へ、それ以外は public の rel へ書き分ける"""
+    if rel in REPO_BACKED and not _is_public_file(rel, pub):
+        _write(Path(pub), dump(d))
+        return
     own, priv = {}, {}
     for k, v in d.items():
         sid = owner(k, v)
@@ -184,10 +209,85 @@ def site_key(key, _value=None):
     return key
 
 
+# ── 記事の動画の台帳・YouTube の接続・Bing の送り切り（お客様の社の行は非公開のリポジトリ） ──────────
+VIDEOS = "data/videos.json"
+CONNECTED = "data/youtube_connected.json"
+BACKFILL = "data/bing_backfill.json"
+
+
+def _video_owner(slug, rec=None):
+    return (rec.get("site") if isinstance(rec, dict) and rec.get("site") else None) or owner_of_slug(slug)
+
+
+def load_videos(pub=None):
+    """動画の台帳 {slug: 記録}。お客様の社の記事の行は非公開のリポジトリから合わせる"""
+    return load_dict(VIDEOS, pub=pub)
+
+
+def save_videos(d, pub=None, indent=2):
+    save_dict(VIDEOS, d, _video_owner, dump=lambda o: json.dumps(o, ensure_ascii=False, indent=indent), pub=pub)
+
+
+def load_connected(pub=None):
+    """YouTube の鍵を Secret に入れた社の一覧。お客様の社は非公開のリポジトリにだけ書く（社の id が社名のことがある）"""
+    out = list((_read(Path(pub) if pub else ROOT / CONNECTED, {}) or {}).get("sites") or [])
+    if _is_public_file(CONNECTED, pub):
+        for sid in clients():
+            out += (_read(private_path(sid, CONNECTED), {}) or {}).get("sites") or []
+    return sorted(set(out))
+
+
+def save_connected(ids, pub=None):
+    ids = sorted(set(ids))
+    p = Path(pub) if pub else ROOT / CONNECTED
+    if not _is_public_file(CONNECTED, pub):
+        _write(p, json.dumps({"sites": ids}, ensure_ascii=False, indent=1))
+        return
+    _write(p, json.dumps({"sites": [s for s in ids if not is_private(s)]}, ensure_ascii=False, indent=1))
+    for sid in [s for s in ids if is_private(s)]:
+        _write(private_path(sid, CONNECTED), json.dumps({"sites": [sid]}, ensure_ascii=False, indent=1))
+
+
+def load_backfill(pub=None):
+    """Bing の送り切りの記録 {"connect": {社: 日}, "sent": {URL: 日}}。お客様の社の分は非公開のリポジトリから合わせる"""
+    b = dict(_read(Path(pub) if pub else ROOT / BACKFILL, {}) or {})
+    b.setdefault("sent", {})
+    if _is_public_file(BACKFILL, pub):
+        for sid in clients():
+            part = _read(private_path(sid, BACKFILL), {}) or {}
+            for k in ("connect", "sent"):
+                if part.get(k):
+                    b.setdefault(k, {}).update(part[k])
+    return b
+
+
+def save_backfill(b, pub=None):
+    dump = lambda o: json.dumps(o, ensure_ascii=False, indent=0, sort_keys=True)  # noqa: E731
+    p = Path(pub) if pub else ROOT / BACKFILL
+    if not _is_public_file(BACKFILL, pub):
+        _write(p, dump(b))
+        return
+    owner = url_owner()
+    own, priv = {}, {}
+    for k, sub in b.items():
+        if not isinstance(sub, dict):
+            own[k] = sub
+            continue
+        for key, v in sub.items():
+            sid = key if k == "connect" else owner(key)
+            (priv.setdefault(sid, {}) if is_private(sid) else own).setdefault(k, {})[key] = v
+    own.setdefault("sent", {})
+    _write(p, dump(own))
+    for sid in clients():
+        q = private_path(sid, BACKFILL)
+        if sid in priv or q.is_file():
+            _write(q, dump(priv.get(sid, {})))
+
+
 # ── 1行ずつ積む記録（介入の台帳・学び・統合の記録） ─────────────────────
 # 介入の台帳の備考には直した記事の順位・表示が、学びの詳細と統合の記録には検索語・表示の数が入る。
 # お客様の記事・社の行は置き場へ書き、読むときに合わせる（2026-10-08 の点検で、どれも public に載りうる形だった）
-SPLIT_JSONL = ("automation/logs/auto_fix.jsonl", "data/lessons.jsonl", "data/merges.jsonl")
+SPLIT_JSONL = ("automation/logs/auto_fix.jsonl", "data/lessons.jsonl", "data/merges.jsonl", "data/editorial_reviews.jsonl")
 
 
 def _split_rel(p):

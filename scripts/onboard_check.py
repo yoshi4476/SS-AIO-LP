@@ -304,11 +304,8 @@ def delivered_paths(cfg):
 
 
 def videos(cfg):
-    p = ROOT / "data" / "videos.json"
-    try:
-        d = json.loads(p.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return {}
+    import client_private as CP           # お客様の社の記事の行は非公開のリポジトリ
+    d = CP.load_videos()
     return {k: v["youtube"] for k, v in d.items() if isinstance(v, dict) and v.get("site") == cfg["id"] and v.get("youtube")}
 
 

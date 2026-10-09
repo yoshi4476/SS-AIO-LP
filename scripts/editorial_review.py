@@ -27,15 +27,17 @@ JST = timezone(timedelta(hours=9))
 
 
 def load():
+    # お客様の社の記事の行は非公開のリポジトリ（client_private の分け書き。公開側に社名・slug を置かない）
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import client_private as CP
     out = {}
-    if LEDGER.is_file():
-        for ln in LEDGER.read_text(encoding="utf-8-sig").splitlines():
-            try:
-                r = json.loads(ln)
-            except ValueError:
-                continue
-            if r.get("slug"):
-                out[r["slug"]] = r
+    for ln in CP.read_lines(LEDGER):
+        try:
+            r = json.loads(ln.lstrip("\ufeff"))
+        except ValueError:
+            continue
+        if r.get("slug"):
+            out[r["slug"]] = r
     return out
 
 
@@ -94,17 +96,16 @@ def record(slugs, by=REVIEWER, note=""):
     new = [s for s in slugs if s not in have]
     if not new:
         return 0
-    LEDGER.parent.mkdir(parents=True, exist_ok=True)
-    with LEDGER.open("a", encoding="utf-8", newline="\n") as f:
-        for s in new:
-            f.write(json.dumps({"slug": s, "by": by, "at": now, **({"note": note} if note else {})},
-                               ensure_ascii=False) + "\n")
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import client_private as CP
+    for s in new:
+        CP.append_jsonl(LEDGER, {"slug": s, "by": by, "at": now, **({"note": note} if note else {})})
     return len(new)
 
 
 def reviewer_for(slug):
     """その記事の監修者。お客様のサイトの記事なら、サイト設定の review_by（その社のサイトが出す監修の表示と同じ並び。
-    CONFLUX は「YW（CONFLUX PARTNERS）・セブンセンシズ株式会社」）、無ければ company.json の監修者"""
+    お客様の社は両方の名前）、無ければ company.json の監修者"""
     try:
         sys.path.insert(0, str(ROOT / "scripts"))
         import sites

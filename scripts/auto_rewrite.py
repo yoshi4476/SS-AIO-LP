@@ -671,7 +671,10 @@ def split_items(limit=4):
     def retitled(slug):
         # 28日以内に題を変えた記事は、効きが出るまで待つ（直した直後に逆側を直すと、どちらが効いたか分からない）
         r = sh(["git", "log", "--since=28.days", "-p", "--format=", "--", f"articles/{slug}.md"], timeout=60)
-        return bool(re.search(r"^[-+]title:", r.stdout or "", re.M))
+        import private_store             # お客様の社の記事の記録は非公開のリポジトリ
+        hist = (r.stdout or "") + private_store.private_git("log", "--since=28.days", "-p", "--format=", "--",
+                                                            f"articles/{slug}.md")
+        return bool(re.search(r"^[-+]title:", hist, re.M))
 
     out, seen = [], set()
     for p in AM.candidates():

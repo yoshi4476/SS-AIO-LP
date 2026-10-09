@@ -37,7 +37,7 @@ def cta_html(site_id):
     c = cfg.get("cta") or {}
     label = c.get("label") or "無料で相談する"
     # /lp/ は AI集客ラボにしか無い。ほかの社の記事に入ると相談のボタンが 404 になる（2026-10-08: 2本）。
-    # 配信先の見た目（CONFLUX の .cta-inline など）への読み替えは配信の時に publish.py が行う
+    # 配信先の見た目（お客様の社 の .cta-inline など）への読み替えは配信の時に publish.py が行う
     href = c.get("url") or ("/lp/" if cfg.get("type") == "self-static" else f"https://{cfg.get('domain', '')}/")
     lead = (cfg.get("cta_desc") or c.get("note")
             or "ここまでの内容を自社に当てはめると何から着手すべきかを、無料で確認できます。")
@@ -86,6 +86,9 @@ def check(before, after, added=1):
     return ""
 
 
+import private_store as PS  # noqa: E402  お客様の社の記事の slug は CI のログに出さない
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
@@ -129,10 +132,10 @@ def main():
                   + nb[pos:].lstrip(NL))
         ng = check(body, nb, len(ps))
         if ng:
-            print(f"   見送り {p.stem[:34]:<36}{ng}")
+            print(f"   見送り {PS.shown(p.stem)[:34]:<36}{ng}")
             skip += 1
             continue
-        print(f"   {p.stem[:34]:<36}いま{have}箇所 → {len(ps)}箇所を追加")
+        print(f"   {PS.shown(p.stem)[:34]:<36}いま{have}箇所 → {len(ps)}箇所を追加")
         if a.write:
             p.write_text(f"---{NL}{fm}{NL}---{NL}{nb}", encoding="utf-8", newline="")
             _note(p.stem, sid)

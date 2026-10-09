@@ -587,9 +587,9 @@ def _md_insert_entries(body, cfg):
 
 
 # ============================================================
-# 先方の変換が読む Markdown の方言（sites/<id>.json の md_dialect。いまは CONFLUX の journal）
+# 先方の変換が読む Markdown の方言（sites/<id>.json の md_dialect。いまは お客様の社 の journal）
 # ============================================================
-# CONFLUX は届いた Markdown を先方の scripts/build-journal.mjs（fromPipeline）で読み替え、marked で HTML にする。
+# お客様の社は届いた Markdown を先方の scripts/build-journal.mjs（fromPipeline）で読み替え、marked で HTML にする。
 # 当社の原稿のまま置くと、次のことが起きる（2026-10-08 の点検で再現）:
 #   - score があり author の無い記事を「自動化の記事」と見なさず、日付の欄が無いまま読んで組み立てごと落ちる（RangeError）
 #   - marked（CommonMark）は「**…。**本文」の ** を閉じと見なさず、記号のまま出す（1本で7組）
@@ -2310,7 +2310,7 @@ def main():
         if not private_store.require(cfg["id"], "配信"):
             raise SystemExit(f"BLOCKED(非公開のデータなし): {args.slug} は {cfg['id']} の非公開のデータが読めないため配信しません")
         # お客様の記事に運用会社の名前・実績・自社サイトへのリンクを出さない（監修者はお客様ご本人）。
-        # その社の operator_ok に書いた語だけは通す（CONFLUX の「セブンセンシズ株式会社」。2026-10-08 運用者の決定）
+        # その社の operator_ok に書いた語だけは通す（お客様の社 の「セブンセンシズ株式会社」。2026-10-08 運用者の決定）
         leak = sites_mod.operator_leaks(f"{meta.get('title', '')}\n{meta.get('description', '')}\n"
                                         f"{json.dumps(meta.get('faq') or [], ensure_ascii=False)}\n{body}", cfg)
         # ヒアリングシートの「使ってはいけない表現」（医療広告・景表法など）。シートで聞いて設定に
