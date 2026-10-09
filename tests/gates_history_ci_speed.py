@@ -94,8 +94,18 @@ def test_deploy_skips_only_identical_output():
     dep = _step(job, "Cloudflare Pagesへデプロイ")["run"]
     check("作り直しは毎回する（省くのは送り出しだけ）",
           ("python scripts/build.py" in build, _step(job, "原稿から作り直す").get("if")), (True, None))
-    check("日本語フォントを入れ終えてから作り直す", build.find("wait $apt") < build.find("python scripts/build.py"), True)
-    check("先に取った wrangler は工程の中で待ち終える（次の工程と同じ取り置きを同時に書かない）", "wait $wr" in build, True)
+    pre = _step(job, "時間のかかる準備を先に始める")["run"]
+    names = [s.get("name", s.get("uses", "")) for s in job["steps"]]
+    check("フォントと wrangler は非公開のデータの取得の直後に裏で始め、終わりの印を残す",
+          (names.index("時間のかかる準備を先に始める（日本語フォント・wrangler）") == 2,
+           "fonts-noto-cjk" in pre and "echo $? > /tmp/apt.rc" in pre and "echo $? > /tmp/wrangler.rc" in pre,
+           pre.count("< /dev/null > /dev/null 2>&1 &")), (True, True, 2))
+    check("日本語フォントを入れ終えてから作り直す",
+          0 <= build.find("[ -f /tmp/apt.rc ] && break") < build.find("python scripts/build.py"), True)
+    check("依存は今までどおり pip install で確かめる（控えが無い回も入る・失敗しても止めない）",
+          "python -m pip install --quiet -r requirements.txt || true" in build, True)
+    check("先に取った wrangler を取り終えてから使う（同じ取り置きを同時に書かない）",
+          0 <= dep.find("[ -f /tmp/wrangler.rc ] && break") < dep.find("npx --yes wrangler@4.121.0 pages project create"), True)
     i_gate, i_same = dep.find("seo_audit.py --gate"), dep.find("deploy_marker.py --same")
     i_write, i_deploy = dep.find("deploy_marker.py --write"), dep.find("pages deploy site")
     check("公開前の門は比べる前に通す", 0 <= i_gate < i_same, True)
@@ -112,6 +122,60 @@ def test_deploy_skips_only_identical_output():
     own = _step(pm, "Cloudflare Pagesへデプロイ（自前ビルドのサイトのみ）")["run"]
     check("記事の枠の送り出しも同じ版の指紋を置く（後の deploy.yml が同じ中身なら省ける）",
           0 <= own.find("deploy_marker.py --write --salt wrangler@4.121.0") < own.find("pages deploy site"), True)
+
+
+def test_python_env_cache_is_keyed_and_safe():
+    print("\n■ Python の依存の控え: 版・中身・週で切り、入れられた回だけ控える（呼び出し側の pip install は残す）")
+    a = yaml.safe_load((ROOT / ".github" / "actions" / "py-env" / "action.yml").read_text(encoding="utf-8"))
+    steps = a["runs"]["steps"]
+    rest = next(s for s in steps if s.get("id") == "restore")
+    key = rest["with"]["key"]
+    check("控えの鍵に requirements.txt の中身・Python の版・OS の版・週が入る",
+          all(x in key for x in ("hashFiles('requirements.txt')", "steps.py.outputs.python-version",
+                                  "steps.key.outputs.os", "steps.key.outputs.week")), True)
+    keyrun = next(s for s in steps if s.get("id") == "key")["run"]
+    check("週は ISO 週（毎週作り直す）・OS はランナーの版", ("date -u +%G-W%V" in keyrun, "ImageOS" in keyrun and "ImageVersion" in keyrun),
+          (True, True))
+    save = [s for s in steps if str(s.get("uses", "")).startswith("actions/cache/save")]
+    check("控えるのは入れられた回だけ・同じ鍵で控える",
+          (len(save), "steps.build.outputs.ok == 'yes'" in str(save[0].get("if")), save[0]["with"]["key"] == key),
+          (1, True, True))
+    check("控えの保存に失敗しても止めない", save[0].get("continue-on-error"), True)
+    check("venv を PATH の先頭に置く（python・pip の呼び方を変えない）", "$HOME/.venv-ci/bin" in steps[-1]["run"], True)
+    users = {"deploy.yml": ("deploy", "python -m pip install --quiet -r requirements.txt || true"),
+             "pipeline-multi.yml": ("write", "pip install -q -r requirements.txt yt-dlp")}
+    for wf, (jn, line) in users.items():
+        job = _y(wf)["jobs"][jn]
+        uses = [s.get("uses") for s in job["steps"]]
+        runs = "\n".join(str(s.get("run", "")) for s in job["steps"])
+        check(f"{wf}: 控えを使い、呼び出し側の pip install はそのまま", ("./.github/actions/py-env" in uses, line in runs,
+                                                                   "actions/setup-python@v5" in uses), (True, True, False))
+
+
+def test_followup_asks_each_ai_at_once_in_order():
+    print("\n■ 公開30日後のAI引用: AIごとに同時に聞く（1つのAIへは1問ずつ・結果の並びと判定は同じ）")
+    import time
+    import ai_followup as AF
+
+    def slow(sec, urls=None, boom=False):
+        def f(q):
+            time.sleep(sec)
+            if boom:
+                raise RuntimeError("down")
+            return urls
+        return f
+    eng = {"ChatGPT": slow(0.6, ["https://ex.example/a"]), "Gemini": slow(0.6, None),
+           "Perplexity": slow(0.6, boom=True), "Claude": slow(0.6, ["https://mine.example/p/"])}
+    t0 = time.time()
+    r = AF.measure({"keyword": "x"}, "mine.example", eng)
+    el = time.time() - t0
+    check("4つのAIを同時に聞く（順に待つと2.4秒）", el < 1.5, True)
+    check("結果の並びは AI の順のまま", list(r["engines"]), ["ChatGPT", "Gemini", "Perplexity", "Claude"])
+    check("聞けなかった・落ちたは今までどおり記録", (r["engines"]["Gemini"], r["engines"]["Perplexity"]["error"]),
+          ({"error": "聞けませんでした"}, "down"))
+    check("自社が出典なら引用あり", (r["cited"], r["engines"]["Claude"]["cited"]), (True, True))
+    check("全部のAIが聞けなければ記録しない（次の週に聞き直す）",
+          AF.measure({"keyword": "x"}, "mine.example", {"Gemini": slow(0, None)}), None)
 
 
 def test_pages_do_not_depend_on_file_order():

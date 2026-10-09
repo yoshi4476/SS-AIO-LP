@@ -34,10 +34,17 @@ jobs:
         with:
           token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
+      # 互いに関係ない準備を先に裏で始める（終わりは使う工程が印のファイルで待つ）。2026-10-03〜09 の147回で、
+      # 順に入れて作り直しまで平均37秒・wrangler の取得が送り出しの工程の頭で平均14秒かかっていた。
+      # 調査ページの「貼れる図」は日本語フォントで描く。無いと図だけ外れて公開される（2026-10-05 に全ページで欠けていた）。
+      # wrangler は送り出しの工程で同じ版を使うので、ここでは取っておくだけ（取れなくても送り出しの工程が取り直す）
+      - name: 時間のかかる準備を先に始める（日本語フォント・wrangler）
+        run: |
+          ( (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1; echo $? > /tmp/apt.rc ) < /dev/null > /dev/null 2>&1 &
+          ( npx --yes wrangler@4.121.0 --version > /tmp/wrangler-prefetch.log 2>&1; echo $? > /tmp/wrangler.rc ) < /dev/null > /dev/null 2>&1 &
+
+      # Python と依存（requirements.txt）を週ごとの控えから戻す。戻せた回は下の pip install が確かめるだけになる
+      - uses: ./.github/actions/py-env
 
       # 公開の直前に原稿から作り直す。コミットされた生成ページが古い・衝突の解き方を誤った、
       # という状態でも、公開されるのは原稿と雛形から作ったものになる（2026-10-03 に衝突の解消が1日3回要った）。
@@ -45,19 +52,16 @@ jobs:
       # 作り直しに失敗したら、コミット済みのページをそのまま公開する（公開を止めない）
       - name: 原稿から作り直す
         run: |
-          # 互いに関係ない準備は同時に進める（2026-10-03〜09 の147回で、順に入れて作り直しまで平均37秒・
-          # wrangler の取得が送り出しの工程の頭で平均14秒）。どれも失敗しても止めないのは前と同じ。
-          # wrangler は送り出しの工程で同じ版を使うので、ここでは取っておくだけ（取れなくても送り出しの工程が取り直す）
-          # 調査ページの「貼れる図」は日本語フォントで描く。無いと図だけ外れて公開される（2026-10-05 に全ページで欠けていた）
-          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /dev/null 2>&1 & apt=$!
-          npx --yes wrangler@4.121.0 --version > /tmp/wrangler-prefetch.log 2>&1 & wr=$!
+          # どれも失敗しても止めないのは前と同じ
           python -m pip install --quiet -r requirements.txt || true
-          wait $apt || true
+          # 日本語フォントを入れ終えてから作り直す（最初の工程で裏で始めたもの。最長5分待つ）
+          for i in $(seq 1 300); do [ -f /tmp/apt.rc ] && break; sleep 1; done
+          [ "$(cat /tmp/apt.rc 2>/dev/null)" = "0" ] || echo "::warning::日本語フォントを入れられませんでした（図だけ外れることがあります）"
+          echo "準備の待ち: 工程の頭から ${SECONDS}秒"
           python scripts/build.py > /tmp/build.log 2>&1 && echo "作り直しました" \
             || { tail -20 /tmp/build.log; git checkout -- site; echo "::warning::作り直しに失敗したため、コミット済みのページを公開します"; }
           tail -3 /tmp/build.log
-          # 取り終えるのを待つ（同じ取り置きを次の工程と同時に書き換えない）
-          wait $wr || echo "wrangler を先に取れませんでした（送り出しの工程で取り直します）"
+          echo "作り直し: 工程の頭から ${SECONDS}秒"
 
       - name: Cloudflare Pagesへデプロイ（初回はプロジェクトを自動作成）
         env:
@@ -81,6 +85,8 @@ jobs:
               exit 0
             fi
           fi
+          # 最初の工程で裏で取り始めた wrangler を取り終えるまで待つ（同じ取り置きを同時に書き換えない。最長2分）
+          for i in $(seq 1 120); do [ -f /tmp/wrangler.rc ] && break; sleep 1; done
           python3 scripts/deploy_marker.py --write --salt wrangler@4.121.0
           npx --yes wrangler@4.121.0 pages project create ss-aio-lp --production-branch=master 2>/dev/null || echo "プロジェクトは作成済み"
           # AI紹介チェック（functions/api/ai-check.js）が使う鍵。Gemini の検索つき回答は有料（無料枠では使えない）なので、

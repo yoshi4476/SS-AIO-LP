@@ -1,0 +1,62 @@
+name: Python と依存の控え
+description: >-
+  setup-python のあと、requirements.txt の依存を入れた venv を CI のキャッシュから戻す。戻せた回は pip install が
+  「入っている」を確かめるだけになる（2026-10-03〜09: 配信147回・記事の枠39回で毎回約15秒かけて入れ直していた）。
+  控えは requirements.txt の中身・Python の版・ランナーの OS の版・週（ISO 週）で切る。どれかが変われば作り直すので、
+  依存の版は長くても1週間で新しくなる。控えが無い回はここで入れて控え、入れられなければ控えない
+  （呼び出し側の pip install が今までどおり入れ直し、失敗の扱いも呼び出し側のまま）。
+  戻した後は venv の python・pip が PATH の先頭に来る（python・python3・pip の呼び方は変えなくてよい）。
+
+inputs:
+  python-version:
+    description: Python の版
+    default: "3.12"
+
+outputs:
+  hit:
+    description: 控えから戻せたか（true / 空）
+    value: ${{ steps.restore.outputs.cache-hit }}
+
+runs:
+  using: composite
+  steps:
+    - id: py
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - id: key
+      shell: bash
+      run: |
+        echo "os=${ImageOS:-unknown}-${ImageVersion%%.*}" >> "$GITHUB_OUTPUT"
+        echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+
+    - id: restore
+      uses: actions/cache/restore@v4
+      with:
+        path: ~/.venv-ci
+        key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt') }}-${{ steps.key.outputs.week }}
+
+    - id: build
+      if: steps.restore.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        rm -rf ~/.venv-ci
+        python -m venv ~/.venv-ci
+        if ~/.venv-ci/bin/python -m pip install --quiet -r requirements.txt; then
+          echo "ok=yes" >> "$GITHUB_OUTPUT"
+        else
+          echo "::warning::依存を控えに入れられませんでした（この回は控えずに進みます）"
+        fi
+
+    - if: steps.restore.outputs.cache-hit != 'true' && steps.build.outputs.ok == 'yes'
+      uses: actions/cache/save@v4
+      continue-on-error: true
+      with:
+        path: ~/.venv-ci
+        key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt') }}-${{ steps.key.outputs.week }}
+
+    - shell: bash
+      run: |
+        echo "$HOME/.venv-ci/bin" >> "$GITHUB_PATH"
+        echo "VIRTUAL_ENV=$HOME/.venv-ci" >> "$GITHUB_ENV"

@@ -290,11 +290,10 @@ jobs:
           fi
           echo "対象サイト: ${{ needs.select.outputs.id }}（${{ needs.select.outputs.mode == 'rewrite' && '浮いた枠: 主力の記事の書き直し' || '新しい記事' }}）"
 
-      - uses: actions/setup-python@v5
+      # Python と依存（requirements.txt）を週ごとの控えから戻す。戻せた回は下の pip install が確かめるだけになる
+      # （yt-dlp は控えに入れず、今までどおり毎回その時の版を入れる）
+      - uses: ./.github/actions/py-env
         if: steps.site.outputs.skip != 'yes'
-        with:
-          python-version: "3.12"
-          cache: pip
 
       - name: 依存インストール
         if: steps.site.outputs.skip != 'yes'
